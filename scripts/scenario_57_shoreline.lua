@@ -7327,7 +7327,7 @@ function handleDockedState()
 				ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_(_("Back")), commsStation)
 		end)
 	end
 	if ctd.public_relations then
@@ -7335,12 +7335,12 @@ function handleDockedState()
 			setCommsMessage(_("station-comms", "What would you like to know?"))
 			addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 				setCommsMessage(ctd.general_information)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_(_("Back")), commsStation)
 			end)
 			if ctd.history ~= nil then
 				addCommsReply(_("stationStory-comms", "Station history"), function()
 					setCommsMessage(ctd.history)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_(_("Back")), commsStation)
 				end)
 			end
 			if comms_source:isFriendly(comms_target) then
@@ -7348,7 +7348,7 @@ function handleDockedState()
 					if random(1,100) < (100 - (30 * (difficulty - .5))) then
 						addCommsReply(_("gossip-comms", "Gossip"), function()
 							setCommsMessage(ctd.gossip)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
@@ -7392,7 +7392,7 @@ function handleDockedState()
 					if comms_source.cargo < 1 then
 						goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient cargo space for purchase")
 					elseif goodData["cost"] > math.floor(comms_source:getReputationPoints()) then
-						goodTransactionMessage = goodTransactionMessage .. "\nInsufficient reputation for purchase"
+						goodTransactionMessage = goodTransactionMessage .. _("needRep-comms", "\nInsufficient reputation for purchase")
 					elseif goodData["quantity"] < 1 then
 						goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 					else
@@ -7408,11 +7408,11 @@ function handleDockedState()
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\npurchased")
 						else
-							goodTransactionMessage = goodTransactionMessage .. "\nInsufficient reputation for purchase"
+							goodTransactionMessage = goodTransactionMessage .. _("needRep-comms", "\nInsufficient reputation for purchase")
 						end
 					end
 					setCommsMessage(goodTransactionMessage)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if ctd.buy ~= nil then
@@ -7425,7 +7425,7 @@ function handleDockedState()
 							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nOne sold")
 							comms_source.cargo = comms_source.cargo + 1
 							setCommsMessage(goodTransactionMessage)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
@@ -7452,7 +7452,7 @@ function handleDockedState()
 							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
@@ -7475,7 +7475,7 @@ function handleDockedState()
 							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
@@ -7498,11 +7498,11 @@ function handleDockedState()
 							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		if comms_source.cargo < 1 then
 			addCommsReply(_("trade-comms", "Jettison cargo"), function()
@@ -7513,16 +7513,16 @@ function handleDockedState()
 							comms_source.goods[good] = comms_source.goods[good] - 1
 							comms_source.cargo = comms_source.cargo + 1
 							setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 		addCommsReply(_("explainGoods-comms", "No tutorial covered goods or cargo. Explain"), function()
 			setCommsMessage(_("explainGoods-comms", "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"))
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if sensorBase ~= nil and comms_target == sensorBase then
@@ -7657,7 +7657,7 @@ function handleWeaponRestock(weapon)
         else
             setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     else
 		if comms_source:getReputationPoints() > points_per_item * item_amount then
 			if comms_source:takeReputationPoints(points_per_item * item_amount) then
@@ -7668,7 +7668,7 @@ function handleWeaponRestock(weapon)
 					setCommsMessage(_("ammo-comms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
 				end
 			else
-				setCommsMessage("Not enough reputation.")
+				setCommsMessage(_("needRep-comms", "Not enough reputation."))
 				return
 			end
 		else
@@ -7683,17 +7683,17 @@ function handleWeaponRestock(weapon)
 							setCommsMessage(_("ammo-comms", "We generously resupplied you with one weapon charge.\nPut it to good use."))
 						end
 					else
-						setCommsMessage("Not enough reputation.")
+						setCommsMessage(_("needRep-comms", "Not enough reputation."))
 						return
 					end
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			else
-				setCommsMessage("Not enough reputation.")
+				setCommsMessage(_("needRep-comms", "Not enough reputation."))
 				return				
 			end
 		end
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     end
 end
 function getWeaponCost(weapon)
@@ -7733,11 +7733,11 @@ function handleUndockedState()
 					setCommsMessage(_("helpfullWarning-comms", "No enemies within 30U"))
 					comms_source:addReputationPoints(1.0)
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			else
 				setCommsMessage(_("helpfullWarning-comms", "Not really"))
 				comms_source:addReputationPoints(1.0)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end
 		end)
 		addCommsReply(_("ammo-comms", "What ordnance do you have available for restock?"), function()
@@ -7772,7 +7772,7 @@ function handleUndockedState()
 				ordnanceListMsg = string.format(_("ammo-comms", "We have the following types of ordnance available for restock:%s"), ordnanceListMsg)
 			end
 			setCommsMessage(ordnanceListMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		local goodsAvailable = false
 		if ctd.goods ~= nil then
@@ -7790,7 +7790,7 @@ function handleUndockedState()
 					goodsAvailableMsg = goodsAvailableMsg .. string.format(_("trade-comms", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
 				end
 				setCommsMessage(goodsAvailableMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 		addCommsReply(_("trade-comms", "Where can I find particular goods?"), function()
@@ -7840,7 +7840,7 @@ function handleUndockedState()
 					local goodName = good
 					local goodCost = ctd.goodsKnowledge[good]["cost"]
 					setCommsMessage(string.format(_("trade-comms", "Station %s in sector %s has %s for %i reputation"),stationName,sectorName,goodName,goodCost))
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if goodsKnowledgeCount > 0 then
@@ -7849,7 +7849,7 @@ function handleUndockedState()
 				gkMsg = gkMsg .. _("trade-comms", " Beyond that, I have no knowledge of specific stations")
 			end
 			setCommsMessage(gkMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end)
 	if comms_source:isFriendly(comms_target) then
@@ -7859,7 +7859,7 @@ function handleUndockedState()
 				ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if diagnostic then
@@ -7895,7 +7895,7 @@ function handleUndockedState()
 				end
 			end
 			setCommsMessage(dMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
@@ -7915,13 +7915,13 @@ function handleUndockedState()
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
                             setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
@@ -7946,13 +7946,13 @@ function handleUndockedState()
 							ship:setCallSign(generateCallSign())
                             setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"), ship:getCallSign(), n));
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
 end
@@ -8002,7 +8002,7 @@ function upgradeSensors()
 				local oMsg = string.format(_("upgrade-comms", "Our upgraded sensors found an enemy base in sector %s"),stettorTarget:getSectorName())
 				comms_source.stettor = "provided"
 				setCommsMessage(oMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end
@@ -8254,9 +8254,9 @@ function neutralFriendlyFreighterComms()
 								end)
 							end
 						end
-						addCommsReply("Back", altShipComms)
+						addCommsReply(_("Back"), altShipComms)
 					end)
-					addCommsReply("Back", altShipComms)
+					addCommsReply(_("Back"), altShipComms)
 				end)
 			end
 		end
@@ -8340,7 +8340,7 @@ function neutralFriendlyFreighterComms()
 								end)
 							end
 						end
-						addCommsReply("Back", altShipComms)
+						addCommsReply(_("Back"), altShipComms)
 					end)
 				end
 			end
@@ -8368,7 +8368,7 @@ function friendlyFreighterComms()
 				local c_msg = chat.resp[math.random(1,#chat.resp)]
 				setCommsMessage(c_msg)
 				table.remove(comms_source.interaction[comms_target].chat_list,chat_index)
-				addCommsReply("Back", function()
+				addCommsReply(_("Back"), function()
 --					setCommsMessage(c_msg)
 					setCommsMessage("")
 					friendlyFreighterComms()
@@ -8401,7 +8401,7 @@ function friendlyFreighterComms()
 			-- Offer destination information
 			addCommsReply(_("trade-comms", "Where are you headed?"), function()
 				setCommsMessage(comms_target.target:getCallSign())
-				addCommsReply("Back", altShipComms)
+				addCommsReply(_("Back"), altShipComms)
 			end)
 			-- Offer to trade goods if goods or equipment freighter
 			if comms_source == nil then print("comms_source 2 is nil") end
@@ -8427,7 +8427,7 @@ function friendlyFreighterComms()
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									setCommsMessage(_("trade-comms", "Traded"))
-									addCommsReply("Back", altShipComms)
+									addCommsReply(_("Back"), altShipComms)
 								end)
 							end
 						end
@@ -8442,11 +8442,11 @@ function friendlyFreighterComms()
 										comms_source.goods[good] = comms_source.goods[good] - 1
 										comms_source.cargo = comms_source.cargo + 1
 										setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
-										addCommsReply("Back", altShipComms)
+										addCommsReply(_("Back"), altShipComms)
 									end)
 								end
 							end
-							addCommsReply("Back", altShipComms)
+							addCommsReply(_("Back"), altShipComms)
 						end)
 					end
 					-- Offer to sell goods
@@ -8465,7 +8465,7 @@ function friendlyFreighterComms()
 									comms_target.comms_data.goods[good].quantity = comms_target.comms_data.goods[good].quantity - 1
 									setCommsMessage(_("trade-comms", "Purchased"))
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							end)
 						end	--freighter has good and there's room on the player's ship
@@ -8478,11 +8478,11 @@ function friendlyFreighterComms()
 			local destRep = math.floor(random(1,5))
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %i reputation)"),destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
-					setCommsMessage("Insufficient reputation")
+					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
-				addCommsReply("Back", altShipComms)
+				addCommsReply(_("Back"), altShipComms)
 			end)
 			-- Offer to sell goods if goods or equipment freighter
 			if comms_source == nil then print("comms_source 3 is nil") end
@@ -8499,11 +8499,11 @@ function friendlyFreighterComms()
 									comms_source.goods[good] = comms_source.goods[good] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
-									addCommsReply("Back", altShipComms)
+									addCommsReply(_("Back"), altShipComms)
 								end)
 							end
 						end
-						addCommsReply("Back", altShipComms)
+						addCommsReply(_("Back"), altShipComms)
 					end)
 				end
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
@@ -8522,7 +8522,7 @@ function friendlyFreighterComms()
 									good_data["quantity"] = good_data["quantity"] - 1
 									setCommsMessage(_("trade-comms", "Purchased"))
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							end)
 						end
@@ -8544,7 +8544,7 @@ function friendlyFreighterComms()
 									comms_target.comms_data.goods[good].quantity = comms_target.comms_data.goods[good].quantity - 1
 									setCommsMessage(_("trade-comms", "Purchased"))
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							end)
 						end	--freighter has some of the good and there's room on the player's ship
@@ -8568,11 +8568,11 @@ function friendlyFreighterComms()
 									comms_source.goods[good] = comms_source.goods[good] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
-									addCommsReply("Back", altShipComms)
+									addCommsReply(_("Back"), altShipComms)
 								end)
 							end
 						end
-						addCommsReply("Back", altShipComms)
+						addCommsReply(_("Back"), altShipComms)
 					end)
 				end
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
@@ -8591,7 +8591,7 @@ function friendlyFreighterComms()
 									comms_target.comms_data.goods[good].quantity = comms_target.comms_data.goods[good].quantity - 1
 									setCommsMessage(_("trade-comms", "Purchased"))
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							end)
 						end
@@ -8610,7 +8610,7 @@ function altFriendlyShipComms()
 		addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 			if comms_source:getWaypointCount() == 0 then
 				setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
-				addCommsReply("Back", altShipComms)
+				addCommsReply(_("Back"), altShipComms)
 			else
 				setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 				for n=1,comms_source:getWaypointCount() do
@@ -8625,7 +8625,7 @@ function altFriendlyShipComms()
 							comms_target:orderDefendLocation(comms_source:getWaypoint(n))
 						end
 						setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
-						addCommsReply("Back", altShipComms)
+						addCommsReply(_("Back"), altShipComms)
 					end)
 				end
 			end
@@ -8642,7 +8642,7 @@ function altFriendlyShipComms()
 				else
 					comms_target:orderDefendTarget(comms_source)
 				end
-				addCommsReply("Back", altShipComms)
+				addCommsReply(_("Back"), altShipComms)
 			end)
 		end
 		addCommsReply(_("shipAssist-comms", "Report status"), function()
@@ -8665,7 +8665,7 @@ function altFriendlyShipComms()
 				end
 			end
 			setCommsMessage(msg);
-			addCommsReply("Back", altShipComms)
+			addCommsReply(_("Back"), altShipComms)
 		end)
 		for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 			if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
@@ -8680,12 +8680,12 @@ function altFriendlyShipComms()
 					else
 						comms_target:orderDock(obj)
 					end
-					addCommsReply("Back", altShipComms)
+					addCommsReply(_("Back"), altShipComms)
 				end)
 			end
 		end
 	end
-	addCommsReply("Back", altShipComms)
+	addCommsReply(_("Back"), altShipComms)
 	return true
 end
 function friendlyComms(comms_data)
@@ -8718,7 +8718,7 @@ function friendlyComms(comms_data)
 			-- Offer destination information
 			addCommsReply(_("trade-comms", "Where are you headed?"), function()
 				setCommsMessage(comms_target.target:getCallSign())
-				addCommsReply("Back", altShipComms)
+				addCommsReply(_("Back"), altShipComms)
 			end)
 			-- Offer to trade goods if goods or equipment freighter
 			if comms_source == nil then print("comms_source 2 is nil") end
@@ -8744,7 +8744,7 @@ function friendlyComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									setCommsMessage(_("trade-comms", "Traded"))
-									addCommsReply("Back", altShipComms)
+									addCommsReply(_("Back"), altShipComms)
 								end)
 							end
 						end
@@ -8759,11 +8759,11 @@ function friendlyComms(comms_data)
 										comms_source.goods[good] = comms_source.goods[good] - 1
 										comms_source.cargo = comms_source.cargo + 1
 										setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
-										addCommsReply("Back", altShipComms)
+										addCommsReply(_("Back"), altShipComms)
 									end)
 								end
 							end
-							addCommsReply("Back", altShipComms)
+							addCommsReply(_("Back"), altShipComms)
 						end)
 					end
 					-- Offer to sell goods
@@ -8782,7 +8782,7 @@ function friendlyComms(comms_data)
 									comms_data.goods[good].quantity = comms_data.goods[good].quantity - 1
 									setCommsMessage("Purchased")
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							end)
 						end	--freighter has good and there's room on the player's ship
@@ -8795,11 +8795,11 @@ function friendlyComms(comms_data)
 			local destRep = random(1,5)
 			addCommsReply(string.format("Where are you headed? (cost: %f reputation)",destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
-					setCommsMessage("Insufficient reputation")
+					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
-				addCommsReply("Back", altShipComms)
+				addCommsReply(_("Back"), altShipComms)
 			end)
 			-- Offer to sell goods if goods or equipment freighter
 			if comms_source == nil then print("comms_source 3 is nil") end
@@ -8816,11 +8816,11 @@ function friendlyComms(comms_data)
 									comms_source.goods[good] = comms_source.goods[good] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									setCommsMessage(string.format("One %s jettisoned",good))
-									addCommsReply("Back", altShipComms)
+									addCommsReply(_("Back"), altShipComms)
 								end)
 							end
 						end
-						addCommsReply("Back", altShipComms)
+						addCommsReply(_("Back"), altShipComms)
 					end)
 				end
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
@@ -8839,7 +8839,7 @@ function friendlyComms(comms_data)
 									good_data["quantity"] = good_data["quantity"] - 1
 									setCommsMessage("Purchased")
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							end)
 						end
@@ -8861,7 +8861,7 @@ function friendlyComms(comms_data)
 									comms_data.goods[good].quantity = comms_data.goods[good].quantity - 1
 									setCommsMessage("Purchased")
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							end)
 						end	--freighter has some of the good and there's room on the player's ship
@@ -8885,11 +8885,11 @@ function friendlyComms(comms_data)
 									comms_source.goods[good] = comms_source.goods[good] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									setCommsMessage(string.format("One %s jettisoned",good))
-									addCommsReply("Back", altShipComms)
+									addCommsReply(_("Back"), altShipComms)
 								end)
 							end
 						end
-						addCommsReply("Back", altShipComms)
+						addCommsReply(_("Back"), altShipComms)
 					end)
 				end
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
@@ -8908,7 +8908,7 @@ function friendlyComms(comms_data)
 									comms_data.goods[good].quantity = comms_data.goods[good].quantity - 1
 									setCommsMessage("Purchased")
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							end)
 						end
@@ -8978,9 +8978,9 @@ function friendlyComms(comms_data)
 									end)
 								end
 							end
-							addCommsReply("Back", altShipComms)
+							addCommsReply(_("Back"), altShipComms)
 						end)
-						addCommsReply("Back", altShipComms)
+						addCommsReply(_("Back"), altShipComms)
 					end)
 				end
 			end
@@ -9064,7 +9064,7 @@ function friendlyComms(comms_data)
 									end)
 								end
 							end
-							addCommsReply("Back", altShipComms)
+							addCommsReply(_("Back"), altShipComms)
 						end)
 					end
 				end
@@ -9074,7 +9074,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 			if comms_source:getWaypointCount() == 0 then
 				setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
-				addCommsReply("Back", altShipComms)
+				addCommsReply(_("Back"), altShipComms)
 			else
 				setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 				for n=1,comms_source:getWaypointCount() do
@@ -9089,7 +9089,7 @@ function friendlyComms(comms_data)
 							comms_target:orderDefendLocation(comms_source:getWaypoint(n))
 						end
 						setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
-						addCommsReply("Back", altShipComms)
+						addCommsReply(_("Back"), altShipComms)
 					end)
 				end
 			end
@@ -9106,7 +9106,7 @@ function friendlyComms(comms_data)
 				else
 					comms_target:orderDefendTarget(comms_source)
 				end
-				addCommsReply("Back", altShipComms)
+				addCommsReply(_("Back"), altShipComms)
 			end)
 		end
 		addCommsReply(_("shipAssist-comms", "Report status"), function()
@@ -9129,7 +9129,7 @@ function friendlyComms(comms_data)
 				end
 			end
 			setCommsMessage(msg);
-			addCommsReply("Back", altShipComms)
+			addCommsReply(_("Back"), altShipComms)
 		end)
 		for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 			if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
@@ -9144,7 +9144,7 @@ function friendlyComms(comms_data)
 					else
 						comms_target:orderDock(obj)
 					end
-					addCommsReply("Back", altShipComms)
+					addCommsReply(_("Back"), altShipComms)
 				end)
 			end
 		end
@@ -9215,7 +9215,7 @@ function neutralComms(comms_data)
 			-- Offer destination information
 			addCommsReply("Where are you headed?", function()
 				setCommsMessage(comms_target.target:getCallSign())
-				addCommsReply("Back", altShipComms)
+				addCommsReply(_("Back"), altShipComms)
 			end)
 			-- Offer to trade goods if goods or equipment freighter
 			if comms_source == nil then print("comms_source 2 is nil") end
@@ -9241,7 +9241,7 @@ function neutralComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									setCommsMessage("Traded")
-									addCommsReply("Back", altShipComms)
+									addCommsReply(_("Back"), altShipComms)
 								end)
 							end
 						end
@@ -9256,11 +9256,11 @@ function neutralComms(comms_data)
 										comms_source.goods[good] = comms_source.goods[good] - 1
 										comms_source.cargo = comms_source.cargo + 1
 										setCommsMessage(string.format("One %s jettisoned",good))
-										addCommsReply("Back", altShipComms)
+										addCommsReply(_("Back"), altShipComms)
 									end)
 								end
 							end
-							addCommsReply("Back", altShipComms)
+							addCommsReply(_("Back"), altShipComms)
 						end)
 					end
 					-- Offer to sell goods
@@ -9279,7 +9279,7 @@ function neutralComms(comms_data)
 									comms_data.goods[good].quantity = comms_data.goods[good].quantity - 1
 									setCommsMessage("Purchased")
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							end)
 						end	--freighter has good and there's room on the player's ship
@@ -9292,11 +9292,11 @@ function neutralComms(comms_data)
 			local destRep = random(1,5)
 			addCommsReply(string.format("Where are you headed? (cost: %f reputation)",destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
-					setCommsMessage("Insufficient reputation")
+					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
-				addCommsReply("Back", altShipComms)
+				addCommsReply(_("Back"), altShipComms)
 			end)
 			-- Offer to sell goods if goods or equipment freighter
 			if comms_source == nil then print("comms_source 3 is nil") end
@@ -9313,11 +9313,11 @@ function neutralComms(comms_data)
 									comms_source.goods[good] = comms_source.goods[good] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									setCommsMessage(string.format("One %s jettisoned",good))
-									addCommsReply("Back", altShipComms)
+									addCommsReply(_("Back"), altShipComms)
 								end)
 							end
 						end
-						addCommsReply("Back", altShipComms)
+						addCommsReply(_("Back"), altShipComms)
 					end)
 				end
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
@@ -9336,7 +9336,7 @@ function neutralComms(comms_data)
 									good_data["quantity"] = good_data["quantity"] - 1
 									setCommsMessage("Purchased")
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							end)
 						end
@@ -9358,7 +9358,7 @@ function neutralComms(comms_data)
 									comms_data.goods[good].quantity = comms_data.goods[good].quantity - 1
 									setCommsMessage("Purchased")
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							end)
 						end	--freighter has some of the good and there's room on the player's ship
@@ -9382,11 +9382,11 @@ function neutralComms(comms_data)
 									comms_source.goods[good] = comms_source.goods[good] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									setCommsMessage(string.format("One %s jettisoned",good))
-									addCommsReply("Back", altShipComms)
+									addCommsReply(_("Back"), altShipComms)
 								end)
 							end
 						end
-						addCommsReply("Back", altShipComms)
+						addCommsReply(_("Back"), altShipComms)
 					end)
 				end
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
@@ -9405,7 +9405,7 @@ function neutralComms(comms_data)
 									comms_data.goods[good].quantity = comms_data.goods[good].quantity - 1
 									setCommsMessage("Purchased")
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							end)
 						end
