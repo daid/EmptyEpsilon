@@ -7312,7 +7312,7 @@ function handleDockedState()
 				setCommsMessage(_("ammo-comms", "What type of ordnance?"))
 				for _, missile_type in ipairs(missile_types) do
 					if comms_source:getWeaponStorageMax(missile_type) > 0 then
-						addCommsReply(string.format(_("ammo-comms", "%s (%d rep each)"), missile_type, getWeaponCost(missile_type), function()
+						addCommsReply(string.format(_("ammo-comms", "%s (%d rep each)"), missile_type, getWeaponCost(missile_type)), function()
 							handleWeaponRestock(missile_type)
 						end)
 					end
