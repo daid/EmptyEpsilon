@@ -7730,7 +7730,7 @@ function handleUndockedState()
 					end
 					comms_source:addReputationPoints(2.0)					
 				else
-					setCommsMessage(_("helpfullWarning-comms", "No enemies within 30U")
+					setCommsMessage(_("helpfullWarning-comms", "No enemies within 30U"))
 					comms_source:addReputationPoints(1.0)
 				end
 				addCommsReply("Back", commsStation)
@@ -7740,7 +7740,7 @@ function handleUndockedState()
 				addCommsReply("Back", commsStation)
 			end
 		end)
-		addCommsReply(_("ammo-comms", "What ordnance do you have available for restock?"), function()
+		addCommsReply(_("ammo-comms", "What ordnance do you have available for restock?")), function()
 			local ctd = comms_target.comms_data
 			local missileTypeAvailableCount = 0
 			local ordnanceListMsg = ""
