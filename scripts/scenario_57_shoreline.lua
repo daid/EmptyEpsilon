@@ -7740,7 +7740,7 @@ function handleUndockedState()
 				addCommsReply("Back", commsStation)
 			end
 		end)
-		addCommsReply(_("ammo-comms", "What ordnance do you have available for restock?")), function()
+		addCommsReply(_("ammo-comms", "What ordnance do you have available for restock?"), function()
 			local ctd = comms_target.comms_data
 			local missileTypeAvailableCount = 0
 			local ordnanceListMsg = ""
@@ -7767,9 +7767,9 @@ function handleUndockedState()
 			if missileTypeAvailableCount == 0 then
 				ordnanceListMsg = _("ammo-comms", "We have no ordnance available for restock")
 			elseif missileTypeAvailableCount == 1 then
-				ordnanceListMsg = string.format(_("ammo-comms", "We have the following type of ordnance available for restock:%s"), ordnanceListMsg
+				ordnanceListMsg = string.format(_("ammo-comms", "We have the following type of ordnance available for restock:%s"), ordnanceListMsg)
 			else
-				ordnanceListMsg = string.format(_("ammo-comms", "We have the following types of ordnance available for restock:%s"), ordnanceListMsg
+				ordnanceListMsg = string.format(_("ammo-comms", "We have the following types of ordnance available for restock:%s"), ordnanceListMsg)
 			end
 			setCommsMessage(ordnanceListMsg)
 			addCommsReply("Back", commsStation)
@@ -8026,7 +8026,7 @@ function researchBlackHole()
 				local bhsMsg = _("blackHole-comms", "With the materials you supplied, we installed special sensors on your ship. ")
 				bhsMsg = bhsMsg .. _("blackHole-comms", "We need you to get close to the black hole and run sensor sweeps. ")
 				bhsMsg = bhsMsg .. _("blackHole-comms", "Your science console will have the controls when your ship is in range.")
-				bhsMsg = bhsMsg .. string.format(_("blackHole-comms", "\nThe mobile black hole was last seen in sector %s"), grawp:getSectorName()
+				bhsMsg = bhsMsg .. string.format(_("blackHole-comms", "\nThe mobile black hole was last seen in sector %s"), grawp:getSectorName())
 				setCommsMessage(bhsMsg)
 				comms_source.horizonComponents = "provided"
 			end)
