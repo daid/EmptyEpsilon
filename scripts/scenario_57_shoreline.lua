@@ -8216,8 +8216,8 @@ function neutralFriendlyFreighterComms()
 									else
 										undercutTarget = stationTic
 									end
-									comms_source:addToShipLog("enemy base identified in sector " .. undercutTarget:getSectorName(),"Magenta")
-									setCommsMessage("I found an enemy base in sector " .. undercutTarget:getSectorName())
+									comms_source:addToShipLog(string.format(_("-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
+									setCommsMessage(string.format(_("-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
 									undercutLocation = "free"
 								end)
 							end
@@ -8232,8 +8232,8 @@ function neutralFriendlyFreighterComms()
 									else
 										undercutTarget = stationTic
 									end
-									comms_source:addToShipLog("enemy base identified in sector " .. undercutTarget:getSectorName(),"Magenta")
-									setCommsMessage("I found an enemy base in sector " .. undercutTarget:getSectorName())
+									comms_source:addToShipLog(string.format(_("-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
+									setCommsMessage(string.format(_("-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
 									undercutLocation = "free"
 								end)
 							end
@@ -8248,8 +8248,8 @@ function neutralFriendlyFreighterComms()
 									else
 										undercutTarget = stationTic
 									end
-									comms_source:addToShipLog("enemy base identified in sector " .. undercutTarget:getSectorName(),"Magenta")
-									setCommsMessage("I found an enemy base in sector " .. undercutTarget:getSectorName())
+									comms_source:addToShipLog(string.format(_("-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
+									setCommsMessage(string.format(_("-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
 									undercutLocation = "free"
 								end)
 							end
@@ -8940,8 +8940,8 @@ function friendlyComms(comms_data)
 										else
 											undercutTarget = stationTic
 										end
-										comms_source:addToShipLog("enemy base identified in sector " .. undercutTarget:getSectorName(),"Magenta")
-										setCommsMessage("I found an enemy base in sector " .. undercutTarget:getSectorName())
+										comms_source:addToShipLog(string.format(_("-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
+										setCommsMessage(string.format(_("-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
 										undercutLocation = "free"
 									end)
 								end
@@ -8956,8 +8956,8 @@ function friendlyComms(comms_data)
 										else
 											undercutTarget = stationTic
 										end
-										comms_source:addToShipLog("enemy base identified in sector " .. undercutTarget:getSectorName(),"Magenta")
-										setCommsMessage("I found an enemy base in sector " .. undercutTarget:getSectorName())
+										comms_source:addToShipLog(string.format(_("-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
+										setCommsMessage(string.format(_("-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
 										undercutLocation = "free"
 									end)
 								end
@@ -8972,8 +8972,8 @@ function friendlyComms(comms_data)
 										else
 											undercutTarget = stationTic
 										end
-										comms_source:addToShipLog("enemy base identified in sector " .. undercutTarget:getSectorName(),"Magenta")
-										setCommsMessage("I found an enemy base in sector " .. undercutTarget:getSectorName())
+										comms_source:addToShipLog(string.format(_("-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
+										setCommsMessage(string.format(_("-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
 										undercutLocation = "free"
 									end)
 								end
