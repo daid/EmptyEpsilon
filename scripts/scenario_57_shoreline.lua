@@ -9154,27 +9154,27 @@ end
 function enemyComms(comms_data)
 	if comms_data.friendlyness > 50 then
 		local faction = comms_target:getFaction()
-		local taunt_option = "We will see to your destruction!"
-		local taunt_success_reply = "Your bloodline will end here!"
-		local taunt_failed_reply = "Your feeble threats are meaningless."
+		local taunt_option = _("shipEnemy-comms", "We will see to your destruction!")
+		local taunt_success_reply = _("shipEnemy-comms", "Your bloodline will end here!")
+		local taunt_failed_reply = _("shipEnemy-comms", "Your feeble threats are meaningless.")
 		if faction == "Kraylor" then
-			setCommsMessage("Ktzzzsss.\nYou will DIEEee weaklingsss!");
+			setCommsMessage(_("shipEnemy-comms", "Ktzzzsss.\nYou will DIEEee weaklingsss!"));
 		elseif faction == "Arlenians" then
-			setCommsMessage("We wish you no harm, but will harm you if we must.\nEnd of transmission.");
+			setCommsMessage(_("shipEnemy-comms", "We wish you no harm, but will harm you if we must.\nEnd of transmission."));
 		elseif faction == "Exuari" then
-			setCommsMessage("Stay out of our way, or your death will amuse us extremely!");
+			setCommsMessage(_("shipEnemy-comms", "Stay out of our way, or your death will amuse us extremely!"));
 		elseif faction == "Ghosts" then
-			setCommsMessage("One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted.");
-			taunt_option = "EXECUTE: SELFDESTRUCT"
-			taunt_success_reply = "Rogue command received. Targeting source."
-			taunt_failed_reply = "External command ignored."
+			setCommsMessage(_("shipEnemy-comms", "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."));
+			taunt_option = _("shipEnemy-comms", "EXECUTE: SELFDESTRUCT")
+			taunt_success_reply = _("shipEnemy-comms", "Rogue command received. Targeting source.")
+			taunt_failed_reply = _("shipEnemy-comms", "External command ignored.")
 		elseif faction == "Ktlitans" then
-			setCommsMessage("The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition.");
-			taunt_option = "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-			taunt_success_reply = "We do not need permission to pluck apart such an insignificant threat."
-			taunt_failed_reply = "The hive has greater priorities than exterminating pests."
+			setCommsMessage(_("shipEnemy-comms", "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."));
+			taunt_option = _("shipEnemy-comms", "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>")
+			taunt_success_reply = _("shipEnemy-comms", "We do not need permission to pluck apart such an insignificant threat.")
+			taunt_failed_reply = _("shipEnemy-comms", "The hive has greater priorities than exterminating pests.")
 		else
-			setCommsMessage("Mind your own business!");
+			setCommsMessage(_("shipEnemy-comms", "Mind your own business!"));
 		end
 		comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
 		addCommsReply(taunt_option, function()
@@ -9208,7 +9208,7 @@ function neutralComms(comms_data)
 					goodCount = goodCount + goodData.quantity
 				end	--freighter goods list loop
 				if goodCount == 0 then
-					cargoMsg = cargoMsg .. "nothing"
+					cargoMsg = cargoMsg .. _("trade-comms", "nothing")
 				end
 				setCommsMessage(cargoMsg)
 			end)
@@ -9287,7 +9287,7 @@ function neutralComms(comms_data)
 				end	--different freighter types
 			end	--ship under 5 units away
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage("What do you want?")
+			setCommsMessage(_("trade-comms", "What do you want?"))
 			-- Offer to sell destination information
 			local destRep = random(1,5)
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
@@ -9403,7 +9403,7 @@ function neutralComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_data.goods[good].quantity = comms_data.goods[good].quantity - 1
-									setCommsMessage("Purchased")
+									setCommsMessage(_("trade-comms", "Purchased"))
 								else
 									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
@@ -9416,9 +9416,9 @@ function neutralComms(comms_data)
 		neutralFriendlyFreighterComms()
 	else
 		if comms_data.friendlyness > 50 then
-			setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.");
+			setCommsMessage(_("ship-comms", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
 		else
-			setCommsMessage("We have nothing for you.\nGood day.");
+			setCommsMessage(_("ship-comms", "We have nothing for you.\nGood day."));
 		end
 	end
 	return true
@@ -9794,7 +9794,7 @@ function waveNear(enemyWaveList)
 								end
 							end
 						end
-						local lMsg = "[" .. closestStation:getCallSign() .. ", Sector " .. closestStation:getSectorName() .. "] There are enemies nearby"
+						local lMsg = string.format(_("-comms", "[%s, Sector %s] There are enemies nearby"), closestStation:getCallSign(), closestStation:getSectorName())
 						closestPlayer:addToShipLog(lMsg, "Red")
 						closestStation.warn_count = closestStation.warn_count + 1
 						return
@@ -9837,28 +9837,28 @@ function showGameEndStatistics()
 		destroyedStations = totalStations - survivedStations
 		destroyedFriendlyStations = friendlyStations - survivedFriendlyStations
 		destroyedNeutralStations = neutralStations - survivedNeutralStations
-		gMsg = string.format("Stations: %i\t survived: %i\t destroyed: %i",totalStations,survivedStations,destroyedStations)
-		gMsg = gMsg .. string.format("\nFriendly Stations: %i\t survived: %i\t destroyed: %i",friendlyStations,survivedFriendlyStations,destroyedFriendlyStations)
-		gMsg = gMsg .. string.format("\nNeutral Stations: %i\t survived: %i\t destroyed: %i",neutralStations,survivedNeutralStations,destroyedNeutralStations)
-		gMsg = gMsg .. string.format("\n\n\n\nRequired missions completed: %i",requiredMissionCount)
+		gMsg = string.format(_("msgMainscreen", "Stations: %i\t survived: %i\t destroyed: %i"),totalStations,survivedStations,destroyedStations)
+		gMsg = gMsg .. string.format(_("msgMainscreen", "\nFriendly Stations: %i\t survived: %i\t destroyed: %i"),friendlyStations,survivedFriendlyStations,destroyedFriendlyStations)
+		gMsg = gMsg .. string.format(_("msgMainscreen", "\nNeutral Stations: %i\t survived: %i\t destroyed: %i"),neutralStations,survivedNeutralStations,destroyedNeutralStations)
+		gMsg = gMsg .. string.format(_("msgMainscreen", "\n\n\n\nRequired missions completed: %i"),requiredMissionCount)
 		if not stationVaiken:isValid() then
-			gMsg = gMsg .. "\nHuman Navy headquarters station Vaiken destroyed"
+			gMsg = gMsg .. _("msgMainscreen", "\nHuman Navy headquarters station Vaiken destroyed")
 		end
 		local rankVal = survivedFriendlyStations/friendlyStations*.7 + survivedNeutralStations/neutralStations*.3
 		if rankVal < .7 then
-			rank = "Ensign"
+			rank = _("msgMainscreen", "Ensign")
 		elseif rankVal < .8 then
-			rank = "Lieutenant"
+			rank = _("msgMainscreen", "Lieutenant")
 		elseif rankVal < .9 then
-			rank = "Commander"
+			rank = _("msgMainscreen", "Commander")
 		elseif rankVal < .95 then
-			rank = "Captain"
+			rank = _("msgMainscreen", "Captain")
 		else
-			rank = "Admiral"
+			rank = _("msgMainscreen", "Admiral")
 		end
-		gMsg = gMsg .. "\nEarned rank: " .. rank
+		gMsg = gMsg .. string.format(_("msgMainscreen", "\nEarned rank:  %s"), rank)
 	else
-		gMsg = "Not enough data from ship to gather statistics"
+		gMsg = _("msgMainscreen", "Not enough data from ship to gather statistics")
 	end
 	globalMessage(gMsg)
 	if game_end_statistics_diagnostic then print("end of game end statistics function") end		
@@ -9969,8 +9969,8 @@ function undercutStation(delta)
 							hideTransport = farthestTransport
 						end
 						p9.undercut = hideTransport
-						local fMsg = "[" .. hideBase:getCallSign() .. "] We haven't seen Charles Undercut in a while. He took a job as a maintenance technician aboard " .. hideTransport:getCallSign()
-						fMsg = fMsg .. ".\nLast we heard, that ship was working in the " .. hideTransport:getSectorName() .. " sector. He was desperate for a job."
+						local fMsg = string.format(_("-shipLog", "[%s] We haven't seen Charles Undercut in a while. He took a job as a maintenance technician aboard %s"), hideBase:getCallSign(), hideTransport:getCallSign())
+						fMsg = fMsg .. string.format(_("-shipLog", ".\nLast we heard, that ship was working in the %s sector. He was desperate for a job."), hideTransport:getSectorName())
 						p9:addToShipLog(fMsg,"Magenta")
 						plotR = undercutTransport
 						undercutLocation = "transport"
@@ -10465,12 +10465,12 @@ function horizonScienceMessage(delta)
 				end
 				if elapsedScanTime > elapsedScanTimeHalf then
 					if phScan.halfScanMessage ~= "sent" then
-						phScan:addToShipLog("[Scan technician] Black hole scan 50 percent complete","Blue")
+						phScan:addToShipLog(_("-shipLog", "[Scan technician] Black hole scan 50 percent complete"),"Blue")
 						phScan.halfScanMessage = "sent"
 					end
 				end
 				if elapsedScanTime > elapsedScanTimeGoal then
-					phScan:addToShipLog("[Scan technician] Black hole scan complete","Blue")
+					phScan:addToShipLog(_("-shipLog", "[Scan technician] Black hole scan complete"),"Blue")
 					if horizonScienceScanButton == "scan button" then
 						phScan:removeCustom(horizonScienceScanButton)
 						horizonScienceScanButton = nil
@@ -10509,7 +10509,7 @@ function horizonScienceMessage(delta)
 					plotR = nil
 					removeGMFunction("Req Horizon")
 				end
-				grawp_status = string.format("Grawp in range: %i",math.ceil(elapsedScanTimeGoal - elapsedScanTime))
+				grawp_status = string.format(_("Grawp in range: %i"),math.ceil(elapsedScanTimeGoal - elapsedScanTime))
 			end
 		else
 			if phScan:hasPlayerAtPosition("Science") then
@@ -10524,7 +10524,7 @@ function horizonScienceMessage(delta)
 			end
 		end
 	else
-		grawp_status = "Grawp out of range"
+		grawp_status = _("Grawp out of range")
 		if scanGrawpButton then
 			if horizonScienceScanButton == "scan button" then
 				phScan:removeCustom(horizonScienceScanButton)
@@ -10601,10 +10601,10 @@ function chooseBeamRangeParts()
 	end
 end
 function beamRangeMessage(delta)
-	optionalOrders = string.format("\nOptional: Gather and bring goods to station Marconi: %s, %s, %s",br1part,br2part,br3part)
-	local obrMsg = string.format("[Station Marconi] Please bring us some components and materials for a project we are working on: %s, %s, %s",br1part,br2part,br3part)
+	optionalOrders = string.format(_("orders-comms", "\nOptional: Gather and bring goods to station Marconi: %s, %s, %s"),br1part,br2part,br3part)
+	local obrMsg = string.format(_("orders-shipLog", "[Station Marconi] Please bring us some components and materials for a project we are working on: %s, %s, %s"),br1part,br2part,br3part)
 	if difficulty <= 1 then
-		obrMsg = obrMsg .. ". The project relates to improving the range of beam weapons"
+		obrMsg = obrMsg .. _("orders-shipLog", ". The project relates to improving the range of beam weapons")
 	end
 	for p18idx=1,8 do
 		local p18 = getPlayerShip(p18idx)
@@ -10677,10 +10677,10 @@ function chooseBeamDamageParts()
 	end
 end
 function beamDamageMessage(delta)
-	optionalOrders = string.format("\nOptional: Gather and bring goods to station Nefatha: %s, %s, %s",bd1part,bd2part,bd3part)
-	local obdMsg = string.format("[Station Nefatha] Please bring us some components and materials for a weapons project we are working on: %s, %s, %s",bd1part,bd2part,bd3part)
+	optionalOrders = string.format(_("orders-comms", "\nOptional: Gather and bring goods to station Nefatha: %s, %s, %s"),bd1part,bd2part,bd3part)
+	local obdMsg = string.format(_("orders-shipLog", "[Station Nefatha] Please bring us some components and materials for a weapons project we are working on: %s, %s, %s"),bd1part,bd2part,bd3part)
 	if difficulty <= 1 then
-		obdMsg = obdMsg .. ". The project relates to increasing the amount of damage that a beam weapon inflicts on the target"
+		obdMsg = obdMsg .. _("orders-shipLog", ". The project relates to increasing the amount of damage that a beam weapon inflicts on the target")
 	end
 	for p20idx=1,8 do
 		local p20 = getPlayerShip(p20idx)
@@ -10782,10 +10782,10 @@ function chooseSpinBaseParts()
 	end
 end
 function spinMessage(delta)
-	optionalOrders = string.format("\nOptional: Bring %s, %s and %s to station %s in sector %s",sp1part,sp2part,sp3part,spinBase:getCallSign(),spinBase:getSectorName())
-	local spMsg = string.format("[Station %s, sector %s] Please bring us some goods to help us with a project: %s, %s, %s",spinBase:getCallSign(),spinBase:getSectorName(),sp1part,sp2part,sp3part)
+	optionalOrders = string.format(_("orders-comms", "\nOptional: Bring %s, %s and %s to station %s in sector %s"),sp1part,sp2part,sp3part,spinBase:getCallSign(),spinBase:getSectorName())
+	local spMsg = string.format(_("orders-shipLog", "[Station %s, sector %s] Please bring us some goods to help us with a project: %s, %s, %s"),spinBase:getCallSign(),spinBase:getSectorName(),sp1part,sp2part,sp3part)
 	if difficulty <= 1 then
-		spMsg = spMsg .. ". The project relates to improved ship maneuverability"
+		spMsg = spMsg .. _("orders-shipLog", ". The project relates to improved ship maneuverability")
 	end
 	for p28idx=1,8 do
 		local p28 = getPlayerShip(p28idx)
@@ -10861,8 +10861,8 @@ function impulseSpeedParts()
 	morrisonBaseSector = morrisonBase:getSectorName()
 end
 function impulseSpeedMessage(delta)
-	optionalOrders = string.format("\nOptional: Get Nikhil Morrison from station %s in sector %s",morrisonBaseName,morrisonBaseSector)
-	local oisMsg = string.format("[Station %s] Research scientist Nikhil Morrison is close to a breakthrough on his project, but needs some assistance. Dock with us if you wish to help.",morrisonBaseName)
+	optionalOrders = string.format(_("orders-comms", "\nOptional: Get Nikhil Morrison from station %s in sector %s"),morrisonBaseName,morrisonBaseSector)
+	local oisMsg = string.format(_("orders-shipLog", "[Station %s] Research scientist Nikhil Morrison is close to a breakthrough on his project, but needs some assistance. Dock with us if you wish to help."),morrisonBaseName)
 	for p22idx=1,8 do
 		local p22 = getPlayerShip(p22idx)
 		if p22 ~= nil and p22:isValid() then
@@ -10879,12 +10879,12 @@ function impulseSpeedPartMessage(delta)
 				if p23:isDocked(morrisonBase) then
 					if p23.morrison ~= "aboard" then
 						p23.morrison = "aboard"
-						p23:addToShipLog("Nikhil Morrison is aboard","Magenta")
-						p23:addToShipLog(string.format("He requests that you get %s and %s type goods and take him to station Cyrus",is1part,is2part),"Magenta")
+						p23:addToShipLog(_("orders-shipLog", "Nikhil Morrison is aboard"),"Magenta")
+						p23:addToShipLog(string.format(_("orders-shipLog", "He requests that you get %s and %s type goods and take him to station Cyrus"),is1part,is2part),"Magenta")
 						if difficulty <= 1 then
-							p23:addToShipLog("He says his project relates to increasing ship impulse speeds","Magenta")
+							p23:addToShipLog(_("orders-shipLog", "He says his project relates to increasing ship impulse speeds"),"Magenta")
 						end
-						optionalOrders = string.format("\nOptional: Get %s and %s and transport Nikhil Morrison to station Cyrus",is1part,is2part)
+						optionalOrders = string.format(_("orders-comms", "\nOptional: Get %s and %s and transport Nikhil Morrison to station Cyrus"),is1part,is2part)
 						plotO = impulseSpeedUpgrade
 					end
 				end
@@ -10929,10 +10929,10 @@ end
 --      Optional plot choice: Get quantum biometric artifact
 function quantumArtMessage(delta)
 	if stationOrgana:isValid() then
-		optionalOrders = string.format("\nOptional: Retrieve artifact with quantum biometric characteristics and bring to station Organa in sector %s",stationOrgana:getSectorName())
-		local qaMsg = string.format("[Station Organa, sector %s] Research scientist Phillip Solo of the royal research academy finished the theoretical research portion of his dissertation. He needs an artifact with quantum biometric characteristics to apply his research. Please retrieve an artifact with quantum biometric characteristics and bring it to Organa station",stationOrgana:getSectorName())
+		optionalOrders = string.format(_("orders-comms", "\nOptional: Retrieve artifact with quantum biometric characteristics and bring to station Organa in sector %s"),stationOrgana:getSectorName())
+		local qaMsg = string.format(_("orders-shipLog", "[Station Organa, sector %s] Research scientist Phillip Solo of the royal research academy finished the theoretical research portion of his dissertation. He needs an artifact with quantum biometric characteristics to apply his research. Please retrieve an artifact with quantum biometric characteristics and bring it to Organa station"),stationOrgana:getSectorName())
 		if difficulty <= 1 then
-			qaMsg = qaMsg .. string.format(". Possible items to examine have been located in %s, %s and %s",art1:getSectorName(),art2:getSectorName(),art3:getSectorName())
+			qaMsg = qaMsg .. string.format(_("orders-shipLog", ". Possible items to examine have been located in %s, %s and %s"),art1:getSectorName(),art2:getSectorName(),art3:getSectorName())
 		end
 		for p40idx=1,8 do
 			local p40 = getPlayerShip(p40idx)
@@ -10983,9 +10983,9 @@ function quantumRetrieveArt(delta)
 		end
 		if quantumArtHintDelay < 0 then
 			if quantumArtHint == nil  and closestPlayer ~= nil then
-				closestPlayer:addToShipLog(string.format("[Station Organa] We just received a report that an artifact with quantum biometric characteristics may have been observed in sector %s",artQ:getSectorName()),"Magenta")
+				closestPlayer:addToShipLog(string.format(_("-shipLog", "[Station Organa] We just received a report that an artifact with quantum biometric characteristics may have been observed in sector %s"),artQ:getSectorName()),"Magenta")
 				if difficulty <= 1 then
-					closestPlayer:addToShipLog("Solo's research may have application for ship shield systems","Magenta")
+					closestPlayer:addToShipLog(_("-shipLog", "Solo's research may have application for ship shield systems"),"Magenta")
 				end
 				quantumArtHint = "delivered"
 			end
@@ -11010,11 +11010,11 @@ function quantumDeliverArt(delta)
 			local p44 = getPlayerShip(p44idx)
 			if p44.artQ then
 				if p44.artQaboardMessage == nil then
-					p44:addToShipLog("Artifact is aboard","Magenta")
+					p44:addToShipLog(_("-shipLog", "Artifact is aboard"),"Magenta")
 					p44.artQaboardMessage = "sent"
 				end
 				if p44:isDocked(stationOrgana) then
-					p44:addToShipLog("[Phillip Organa] Thanks for the artifact. I completed my research. Next time you dock with Vaiken, you can improve your shield effectiveness.","Magenta")
+					p44:addToShipLog(_("-shipLog", "[Phillip Organa] Thanks for the artifact. I completed my research. Next time you dock with Vaiken, you can improve your shield effectiveness."),"Magenta")
 					shieldUpgradeAvailable = true
 					p44:addReputationPoints(50-(difficulty*5))
 					quantumArtPlot = "done"
@@ -11037,7 +11037,7 @@ function vaikenStatus(delta)
 		local shield_max_total = 0
 		local shield_level = 0
 		local shield_max = 0
-		local shield_report = "Shields:"
+		local shield_report = _("Shields:")
 		local critical_shield = ""
 		repeat
 			shield_level = stationVaiken:getShieldLevel(shield_index)
@@ -11047,9 +11047,9 @@ function vaikenStatus(delta)
 			end
 			shield_level_total = shield_level_total + shield_level
 			shield_max_total = shield_max_total + shield_max
-			shield_report = shield_report .. string.format(" %i:%i/%i",shield_index,math.floor(shield_level),math.floor(shield_max))
+			shield_report = shield_report .. string.format(_(" %i:%i/%i"),shield_index,math.floor(shield_level),math.floor(shield_max))
 			if shield_level/shield_max < .2 then
-				critical_shield = critical_shield .. string.format("Shield %i is critical ",shield_index)
+				critical_shield = critical_shield .. string.format(_("Shield %i is critical "),shield_index)
 			end
 			shield_index = shield_index + 1
 		until(shield_index >= stationVaiken:getShieldCount())
@@ -11063,13 +11063,13 @@ function vaikenStatus(delta)
 					for pidx=1,8 do
 						local p = getPlayerShip(pidx)
 						if p ~= nil and p:isValid() then
-							p:addToShipLog("[Vaiken] Station shields have been damaged. " .. shield_report,"Magenta")
+							p:addToShipLog(_("-shipLog", "[Vaiken] Station shields have been damaged. ") .. shield_report,"Magenta")
 							if critical_shield ~= "" then
 								p:addToShipLog("[Vaiken] " .. critical_shield,"Red")
 								if hull_damage < .4 then
-									p:addToShipLog(string.format("[Vaiken] Hull damage: %i out of %i",math.floor(hull_level),math.floor(hull_max)),"Red")
+									p:addToShipLog(string.format(_("-shipLog", "[Vaiken] Hull damage: %i out of %i"),math.floor(hull_level),math.floor(hull_max)),"Red")
 								elseif hull_damage < .8 then
-									p:addToShipLog(string.format("[Vaiken] Hull damage: %i out of %i",math.floor(hull_level),math.floor(hull_max)),"Magenta")
+									p:addToShipLog(string.format(_("-shipLog", "[Vaiken] Hull damage: %i out of %i"),math.floor(hull_level),math.floor(hull_max)),"Magenta")
 								end
 							end
 						end
@@ -11086,7 +11086,7 @@ function vaikenStatus(delta)
 					for pidx=1,8 do
 						local p = getPlayerShip(pidx)
 						if p ~= nil and p:isValid() then
-							p:addToShipLog("[Vaiken] Station has been damaged","Magenta")
+							p:addToShipLog(_("-shipLog", "[Vaiken] Station has been damaged"),"Magenta")
 						end
 					end
 					vaiken_damage_timer_interval = 120
@@ -11169,9 +11169,9 @@ function update(delta)
 		local game_minutes = math.floor(gameTimeLimit / 60)
 		local game_seconds = math.floor(gameTimeLimit % 60)
 		if game_minutes <= 0 then
-			game_time_status = string.format("%s %i",game_time_status,game_seconds)
+			game_time_status = string.format(_("%s %i"),game_time_status,game_seconds)
 		else
-			game_time_status = string.format("%s %i:%.2i",game_time_status,game_minutes,game_seconds)
+			game_time_status = string.format(_("%s %i:%.2i"),game_time_status,game_minutes,game_seconds)
 		end
 		for pidx=1,8 do
 			local p = getPlayerShip(pidx)
@@ -11190,7 +11190,7 @@ function update(delta)
 		clueMessageDelay = clueMessageDelay - delta
 		if clueMessageDelay < 0 then
 			if clueMessage ~= "delivered" then
-				local clMsg = "Intelligence has analyzed all the enemy activity in this area and has determined that there must be three enemy bases. Find these bases and destroy them."
+				local clMsg = _("orders-shipLog", "Intelligence has analyzed all the enemy activity in this area and has determined that there must be three enemy bases. Find these bases and destroy them.")
 				local enemyBaseCount = 0
 				if stationEmpok:isValid() then
 					enemyBaseCount = enemyBaseCount + 1
@@ -11202,9 +11202,9 @@ function update(delta)
 					enemyBaseCount = enemyBaseCount + 1
 				end
 				if enemyBaseCount == 1 then
-					clMsg = clMsg .. " You have already destroyed two of them."
+					clMsg = clMsg .. _("orders-shipLog", " You have already destroyed two of them.")
 				elseif enemyBaseCount == 2 then
-					clMsg = clMsg .. " You have already destroyed one of them."
+					clMsg = clMsg .. _("orders-shipLog", " You have already destroyed one of them.")
 				end
 				primaryOrders = _("orders-comms", "Defend bases in the area (human navy and independent) from enemy attack and destroy three enemy bases.")
 				for p43idx=1,8 do
