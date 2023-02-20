@@ -3156,7 +3156,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:6407
 msgctxt "station-comms"
 msgid "I need information"
-msgstr "j'aurai besoin d'informations."
+msgstr "j'aurai besoin d'informations"
 
 #: scripts/scenario_55_defenderHunter.lua:6408
 msgctxt "station-comms"
@@ -3407,7 +3407,7 @@ msgstr "Monsieur, comment pouvons-nous vous assister ?"
 #: scripts/scenario_55_defenderHunter.lua:6770
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr "Défendez un marqueur."
+msgstr "Défendez un marqueur"
 
 #: scripts/scenario_55_defenderHunter.lua:6772
 msgctxt "shipAssist-comms"
@@ -3425,7 +3425,7 @@ msgstr "Quel marqueur devons-nous défendre ?"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
-msgstr "Défendez le marqueur %d."
+msgstr "Défendez le marqueur %d"
 
 #: scripts/scenario_55_defenderHunter.lua:6779
 #, lua-format
