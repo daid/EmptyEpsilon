@@ -441,6 +441,10 @@ public:
 
     float getBeamWeaponCycleTime(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getCycleTime(); }
     float getBeamWeaponDamage(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDamage(); }
+    EDamageType getBeamWeaponDamageType(int index) { if (index < 0 || index >= max_beam_weapons) return DT_Energy; return beam_weapons[index].getDamageType(); }
+
+    string getBeamWeaponTexture(int index) { if (index < 0 || index >= max_beam_weapons) return ""; return beam_weapons[index].getBeamTexture(); }
+
     float getBeamWeaponEnergyPerFire(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getEnergyPerFire(); }
     float getBeamWeaponHeatPerFire(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getHeatPerFire(); }
 
@@ -505,13 +509,15 @@ public:
     // Return a string that can be appended to an object create function in the lua scripting.
     // This function is used in getScriptExport calls to adjust for tweaks done in the GM screen.
     string getScriptExportModificationsOnTemplate();
-    
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
 
 string getMissileWeaponName(EMissileWeapons missile);
 string getLocaleMissileWeaponName(EMissileWeapons missile);
+string getDamageTypeName(EDamageType type);
+
+REGISTER_MULTIPLAYER_ENUM(EDamageType);
 REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
 REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);

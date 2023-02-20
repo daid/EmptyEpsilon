@@ -165,6 +165,7 @@ public:
      * Convenience function to set the texture of a beam by index.
      */
     void setBeamTexture(int index, string texture);
+
     void setBeamWeaponEnergyPerFire(int index, float energy) { if (index < 0 || index >= max_beam_weapons) return; return beams[index].setEnergyPerFire(energy); }
     void setBeamWeaponHeatPerFire(int index, float heat) { if (index < 0 || index >= max_beam_weapons) return; return beams[index].setHeatPerFire(heat); }
 
