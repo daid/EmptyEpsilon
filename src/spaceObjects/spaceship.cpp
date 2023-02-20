@@ -34,18 +34,6 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// [DEPRECATED]
     /// Use SpaceShip:isFullyScannedBy() or SpaceShip:isFullyScannedByFaction().
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScanned);
-    /// Returns whether this SpaceShip has been identified by the given ship as either hostile or friendly.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedBy);
-    /// Returns whether this SpaceShip has been fully scanned by the given ship.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedBy);
-    /// Returns whether this SpaceShip has been identified by the given faction as either hostile or friendly.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedByFaction);
-    /// Returns whether this SpaceShip has been fully scanned by the given faction.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedByFaction);
-    /// Returns whether this SpaceShip is docked with a station or another ship.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
-    /// Returns the object with which this SpaceShip is docked.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockedWith);
     /// Returns whether this SpaceShip has been identified by the given SpaceObject as either hostile or friendly.
     /// Example: ship:isFriendOrFoeIdentifiedBy(enemy)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedBy);
