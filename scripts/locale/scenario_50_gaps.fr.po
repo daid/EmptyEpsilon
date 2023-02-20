@@ -1514,7 +1514,7 @@ msgid ""
 "   %i Minutes remain in game"
 msgstr ""
 "\n"
-"   %i minutes restantes"
+"   %i minutes restantes dans le jeu."
 
 #: scripts/scenario_50_gaps.lua:2370 scripts/scenario_50_gaps.lua:2994
 msgctxt "minefield-comms"

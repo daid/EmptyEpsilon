@@ -2037,7 +2037,7 @@ msgstr "Votre téléportation a été boostée à %ik."
 #: scripts/scenario_55_defenderHunter.lua:6944
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr "Réputation insuffisante"
+msgstr "Réputation insuffisante."
 
 #: scripts/scenario_55_defenderHunter.lua:5486
 msgctxt "stationServices-comms"
@@ -2114,7 +2114,7 @@ msgid ""
 "   %i Minutes remain in game"
 msgstr ""
 "\n"
-"   %i minutes restantes "
+"   %i minutes restantes dans le jeu."
 
 #: scripts/scenario_55_defenderHunter.lua:5572
 #: scripts/scenario_55_defenderHunter.lua:5605
@@ -2287,7 +2287,7 @@ msgid ""
 "Insufficient reputation for purchase"
 msgstr ""
 "\n"
-"Réputation insuffisante pour acheter"
+"Réputation insuffisante pour acheter."
 
 #: scripts/scenario_55_defenderHunter.lua:5766
 #: scripts/scenario_55_defenderHunter.lua:5812
@@ -3637,7 +3637,7 @@ msgstr "%s acheté auprès de %s"
 #: scripts/scenario_55_defenderHunter.lua:7022
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr "Réputation insuffisante pour acheter"
+msgstr "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_55_defenderHunter.lua:6939
 msgctxt "trade-comms"
@@ -4447,7 +4447,7 @@ msgstr "Liq. de ref. manuel"
 #: scripts/scenario_55_defenderHunter.lua:10413
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
-msgstr "Collecter Liq. de ref."
+msgstr "Collecte du liq. de ref."
 
 #: scripts/scenario_55_defenderHunter.lua:10430
 #, lua-format
@@ -4507,7 +4507,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:10514
 msgctxt "msgMainscreen"
 msgid "Ensign"
-msgstr "Grade"
+msgstr "Officier"
 
 #: scripts/scenario_55_defenderHunter.lua:10503
 #: scripts/scenario_55_defenderHunter.lua:10516

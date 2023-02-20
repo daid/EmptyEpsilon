@@ -1365,7 +1365,7 @@ msgstr "Votre téléportation a été boostée à %ik."
 #: scripts/scenario_74_omicron.lua:6376 scripts/scenario_74_omicron.lua:6399
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr "Réputation insuffisante"
+msgstr "Réputation insuffisante."
 
 #: scripts/scenario_74_omicron.lua:3722
 msgctxt "stationServices-comms"
@@ -1562,7 +1562,7 @@ msgid ""
 "Insufficient reputation for purchase"
 msgstr ""
 "\n"
-"Réputation insuffisante pour acheter"
+"Réputation insuffisante pour acheter."
 
 #: scripts/scenario_74_omicron.lua:3878 scripts/scenario_74_omicron.lua:3922
 #: scripts/scenario_74_omicron.lua:3951 scripts/scenario_74_omicron.lua:3980
@@ -3174,7 +3174,7 @@ msgstr "Nous partons pour défendre le marqueur %d."
 #: scripts/scenario_74_omicron.lua:5106 scripts/scenario_74_omicron.lua:6016
 msgctxt "shipAssist-comms"
 msgid "Assist me"
-msgstr "Aidez-nous"
+msgstr "Aidez-nous !"
 
 #: scripts/scenario_74_omicron.lua:5107 scripts/scenario_74_omicron.lua:6017
 msgctxt "shipAssist-comms"
@@ -3262,7 +3262,7 @@ msgstr "%s acheté auprès de %s"
 #: scripts/scenario_74_omicron.lua:5962
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr "Réputation insuffisante pour acheter"
+msgstr "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_74_omicron.lua:5289 scripts/scenario_74_omicron.lua:5810
 msgctxt "trade-comms"

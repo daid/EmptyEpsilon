@@ -2265,7 +2265,7 @@ msgstr "Je pense que %s a déménagé."
 #: scripts/scenario_49_allies.lua:3985 scripts/scenario_49_allies.lua:4477
 msgctxt "orders-comms"
 msgid "What are my current orders?"
-msgstr "Ordres en cours"
+msgstr "Quels sont nos ordres en cours ?"
 
 #: scripts/scenario_49_allies.lua:3990 scripts/scenario_49_allies.lua:4482
 #, lua-format
@@ -2275,7 +2275,7 @@ msgid ""
 "   %i Minutes remain in game"
 msgstr ""
 "\n"
-"   %i minutes restantes "
+"   %i minutes restantes dans le jeu."
 
 #: scripts/scenario_49_allies.lua:4001 scripts/scenario_49_allies.lua:4017
 #, lua-format
