@@ -342,6 +342,7 @@ public:
     P<SpaceObject> getDockedWith() { if (docking_state == DS_Docked) return docking_target; return NULL; }
     bool canStartDocking() { return current_warp <= 0.0f && (!has_jump_drive || jump_delay <= 0.0f); }
     EDockingState getDockingState() { return docking_state; }
+    virtual DockStyle getDockedStyle() override { return docked_style; }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }

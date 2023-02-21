@@ -673,7 +673,7 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         if (obj != *my_spaceship && rect.overlaps(object_rect))
         {
             obj->drawOnRadar(renderer, object_position_on_screen, scale, view_rotation, long_range);
-            if (show_callsigns && obj->getCallSign() != "")
+            if (show_callsigns && obj->getCallSign() != "" && obj->getDockedStyle() != DockStyle::Internal)
                 renderer.drawText(sp::Rect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), sp::Alignment::Center, 15, bold_font);
         }
     };
