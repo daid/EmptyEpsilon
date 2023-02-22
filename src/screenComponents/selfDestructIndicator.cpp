@@ -29,7 +29,7 @@ void GuiSelfDestructIndicator::onDraw(sp::RenderTarget& target)
             for(int n=0; n<PlayerSpaceship::max_self_destruct_codes; n++)
                 if (!my_spaceship->self_destruct_code_confirmed[n])
                     todo++;
-            label->setText(tr("Waiting for autorization input: {codes} left").format({{"codes", string(todo)}}));
+            label->setText(tr("Waiting for authorization input: {codes} left").format({{"codes", string(todo)}}));
         }else{
             if (my_spaceship->self_destruct_countdown <= 3.0f)
             {
