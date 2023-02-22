@@ -5,6 +5,7 @@
 #include "explosionEffect.h"
 #include "pathPlanner.h"
 #include "components/collision.h"
+#include "components/radarblock.h"
 
 #include "math/triangulate.h"
 #include "math/centerOfMass.h"
@@ -50,6 +51,10 @@ Zone::Zone()
     registerMemberReplication(&triangles);
     registerMemberReplication(&color);
     registerMemberReplication(&label);
+
+    if (entity) {
+        entity.getOrAddComponent<NeverRadarBlocked>();
+    }
 }
 
 void Zone::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)

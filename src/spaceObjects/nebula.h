@@ -12,7 +12,6 @@ public:
 };
 class Nebula : public SpaceObject
 {
-    static PVector<Nebula> nebula_list;
     static const int cloud_count = 32;
 
     int radar_visual;
@@ -26,13 +25,7 @@ public:
     virtual void draw3DTransparent() override;
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
-    virtual bool canHideInNebula() override { return false; }
     virtual ERadarLayer getRadarLayer() const override { return ERadarLayer::BackgroundObjects; }
-
-    static bool inNebula(glm::vec2 position);
-    static bool blockedByNebula(glm::vec2 start, glm::vec2 end, float radar_short_range);
-    static glm::vec2 getFirstBlockedPosition(glm::vec2 start, glm::vec2 end);
-    static PVector<Nebula> getNebulas();
 
     virtual string getExportLine() override { return "Nebula():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 

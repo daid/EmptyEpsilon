@@ -30,7 +30,6 @@ public:
 
     float health = 1.0f; //1.0-0.0, where 0.0 is fully broken.
     float health_max = 1.0f; //1.0-0.0, where 0.0 is fully broken.
-    bool auto_repair;
     float power_level = 1.0f; //0.0-3.0, default 1.0
     float power_request = 1.0f;
     float heat_level = 0.0f; //0.0-1.0, system will damage at 1.0
@@ -42,7 +41,7 @@ public:
     float coolant_change_rate_per_second = default_coolant_rate_per_second;
     float heat_add_rate_per_second = default_add_heat_rate_per_second;
     float power_change_rate_per_second = default_power_rate_per_second;
-    float auto_repair_per_second = 0.0f; //  = 0.005f; for CPU ships
+    float auto_repair_per_second = 0.0f; // TODO = 0.005f; for CPU ships
 
     float getSystemEffectiveness();
     void addHeat(float amount);

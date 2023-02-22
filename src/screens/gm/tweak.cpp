@@ -297,7 +297,7 @@ GuiJammerTweak::GuiJammerTweak(GuiContainer* owner)
 
 void GuiJammerTweak::open(P<SpaceObject> target)
 {
-    P<WarpJammer> jammer = target;
+    P<WarpJammerObject> jammer = target;
     this->target = jammer;
 }
 
@@ -1101,7 +1101,7 @@ void GuiShipTweakPlayer2::onDraw(sp::RenderTarget& renderer)
     can_self_destruct->setValue(target->getCanSelfDestruct());
     can_launch_probe->setValue(target->getCanLaunchProbe());
     //auto_coolant_enabled->setValue(target->auto_coolant_enabled);
-    auto_repair_enabled->setValue(target->auto_repair_enabled);
+    //auto_repair_enabled->setValue(target->auto_repair_enabled);
     
     energy_warp_per_second->setText(tr("player_tweak", "Warp (E/s): {energy_per_second}").format({ {"energy_per_second", string(target->getEnergyWarpPerSecond())} }));
     energy_shield_per_second->setText(tr("player_tweak", "Shields (E/s): {energy_per_second}").format({ {"energy_per_second", string(target->getEnergyShieldUsePerSecond())} }));

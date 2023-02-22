@@ -15,7 +15,6 @@ public:
     virtual void draw3DTransparent() override;
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
-    virtual bool canHideInNebula()  override { return false; }
     virtual ERadarLayer getRadarLayer() const override { return ERadarLayer::BackgroundObjects; }
 
     virtual void collide(SpaceObject* target, float force) override;

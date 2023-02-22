@@ -40,6 +40,10 @@ public:
     sp::ecs::Entity target;
     glm::vec2 docked_offset;
 
+    bool auto_reload_missiles = false; //TODO: Set to true on CpuShips
+    float auto_reload_missile_delay = 0.0f;
+    static constexpr float auto_reload_missile_time = 10.0f;
+
     DockingStyle canDockOn(DockingBay& bay) {
         if (bay.external_dock_classes.find(dock_class) != bay.external_dock_classes.end()) return DockingStyle::External;
         if (bay.external_dock_classes.find(dock_subclass) != bay.external_dock_classes.end()) return DockingStyle::External;

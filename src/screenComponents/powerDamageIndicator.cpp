@@ -1,7 +1,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
-#include "spaceObjects/warpJammer.h"
+#include "systems/warpsystem.h"
 #include "components/reactor.h"
 #include "components/shipsystem.h"
 #include "main.h"
@@ -41,7 +41,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     {
         color = colorConfig.overlay_damaged;
         display_text = tr("systems", "DAMAGED");
-    }else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpJammer::isWarpJammed(my_spaceship))
+    }else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpSystem::isWarpJammed(my_spaceship))
     {
         color = colorConfig.overlay_jammed;
         display_text = tr("systems", "JAMMED");
@@ -121,7 +121,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     {
         drawIcon(renderer, "gui/icons/status_damaged", colorConfig.overlay_damaged);
     }
-    if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpJammer::isWarpJammed(my_spaceship))
+    if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpSystem::isWarpJammed(my_spaceship))
     {
         drawIcon(renderer, "gui/icons/status_jammed", colorConfig.overlay_jammed);
     }

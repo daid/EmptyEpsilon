@@ -8,7 +8,9 @@
 #include "components/shields.h"
 #include "components/missiletubes.h"
 #include "components/target.h"
+#include "components/radarblock.h"
 #include "systems/missilesystem.h"
+#include "systems/radarblock.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/nebula.h"
@@ -370,15 +372,14 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
     auto scan_center = transform->getPosition();
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-    PVector<Nebula> nebulas = Nebula::getNebulas();
-    foreach(Nebula, n, nebulas)
+    for(auto [entity, radarblock, transform] : sp::ecs::Query<RadarBlock, sp::Transform>())
     {
-        auto diff = n->getPosition() - scan_center;
+        auto diff = transform.getPosition() - scan_center;
         float diff_len = glm::length(diff);
 
-        if (diff_len < n->radius + distance)
+        if (diff_len < radarblock.range + distance)
         {
-            if (diff_len < n->radius)
+            if (diff_len < radarblock.range)
             {
                 // Inside a nebula - everything is blocked out.
                 renderer.fillRect(rect, glm::u8vec4(0, 0, 0, 255));
@@ -386,19 +387,21 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
                 // Leave the loop here: there's no point adding more blocked areas.
                 break;
             }else{
-                float r = n->radius * scale;
-                renderer.fillCircle(worldToScreen(n->getPosition()), r, glm::u8vec4(0, 0, 0, 255));
+                float r = radarblock.range * scale;
+                renderer.fillCircle(worldToScreen(transform.getPosition()), r, glm::u8vec4(0, 0, 0, 255));
 
-                float diff_angle = vec2ToAngle(diff);
-                float angle = glm::degrees(acosf(n->radius / diff_len));
+                if (radarblock.behind) {
+                    float diff_angle = vec2ToAngle(diff);
+                    float angle = glm::degrees(acosf(radarblock.range / diff_len));
 
-                auto pos_a = n->getPosition() - vec2FromAngle(diff_angle + angle) * n->radius;
-                auto pos_b = n->getPosition() - vec2FromAngle(diff_angle - angle) * n->radius;
-                auto pos_c = scan_center + glm::normalize(pos_a - scan_center) * distance * 3.0f;
-                auto pos_d = scan_center + glm::normalize(pos_b - scan_center) * distance * 3.0f;
-                auto pos_e = scan_center + diff / diff_len * distance * 3.0f;
+                    auto pos_a = transform.getPosition() - vec2FromAngle(diff_angle + angle) * radarblock.range;
+                    auto pos_b = transform.getPosition() - vec2FromAngle(diff_angle - angle) * radarblock.range;
+                    auto pos_c = scan_center + glm::normalize(pos_a - scan_center) * distance * 3.0f;
+                    auto pos_d = scan_center + glm::normalize(pos_b - scan_center) * distance * 3.0f;
+                    auto pos_e = scan_center + diff / diff_len * distance * 3.0f;
 
-                renderer.drawTriangleStrip({worldToScreen(pos_a), worldToScreen(pos_b), worldToScreen(pos_c), worldToScreen(pos_d), worldToScreen(pos_e)}, glm::u8vec4(0, 0, 0, 255));
+                    renderer.drawTriangleStrip({worldToScreen(pos_a), worldToScreen(pos_b), worldToScreen(pos_c), worldToScreen(pos_d), worldToScreen(pos_e)}, glm::u8vec4(0, 0, 0, 255));
+                }
             }
         }
     }
@@ -612,7 +615,7 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         foreach(SpaceObject, obj, space_object_list)
         {
             // If the object can't hide in a nebula, it's considered visible.
-            if (!obj->canHideInNebula())
+            if (obj->entity.hasComponent<NeverRadarBlocked>())
             {
                 visible_objects.emplace(*obj);
             }
@@ -667,7 +670,7 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
             auto short_range = lrr ? lrr->short_range : 5000.0f;
             foreach(SpaceObject, obj, space_object_list)
             {
-                if (obj->canHideInNebula() && my_spaceship && Nebula::blockedByNebula(transform->getPosition(), obj->getPosition(), short_range))
+                if (RadarBlockSystem::isRadarBlockedFrom(transform->getPosition(), obj->entity, short_range))
                     continue;
                 visible_objects.emplace(*obj);
             }
@@ -684,9 +687,9 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
             return true;
         if (lhsLayer > rhsLayer)
             return false;
-        if (lhs->canHideInNebula() && !rhs->canHideInNebula())
+        if (!lhs->entity.template hasComponent<NeverRadarBlocked>() && rhs->entity.template hasComponent<NeverRadarBlocked>())
             return true;
-        if (!lhs->canHideInNebula() && rhs->canHideInNebula())
+        if (lhs->entity.template hasComponent<NeverRadarBlocked>() && !rhs->entity.template hasComponent<NeverRadarBlocked>())
             return false;
         return lhs->getMultiplayerId() < rhs->getMultiplayerId();
     });

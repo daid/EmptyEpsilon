@@ -224,7 +224,6 @@ set(MAIN_SOURCES
     src/modelInfo.cpp
     src/packResourceProvider.cpp
     src/scienceDatabase.cpp
-    src/commsScriptInterface.cpp
     src/modelData.cpp
     src/gameGlobalInfo.cpp
     src/GMActions.cpp
@@ -387,6 +386,10 @@ set(MAIN_SOURCES
     src/components/internalrooms.cpp
     src/components/probe.h
     src/components/hacking.h
+    src/components/ai.h
+    src/components/radarblock.h
+    src/systems/ai.h
+    src/systems/ai.cpp
     src/systems/docking.h
     src/systems/docking.cpp
     src/systems/shipsystemssystem.h
@@ -419,6 +422,8 @@ set(MAIN_SOURCES
     src/systems/basicmovement.cpp
     src/systems/comms.h
     src/systems/comms.cpp
+    src/systems/radarblock.h
+    src/systems/radarblock.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
@@ -440,7 +445,6 @@ set(MAIN_SOURCES
     src/ai/fighterAI.h
     src/ai/missileVolleyAI.h
     src/beamTemplate.h
-    src/commsScriptInterface.h
     src/epsilonServer.h
     src/factionInfo.h
     src/featureDefs.h

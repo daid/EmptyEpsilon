@@ -10,6 +10,7 @@
 #include "multiplayer_server.h"
 #include "multiplayer_client.h"
 #include "components/collision.h"
+#include "components/radarblock.h"
 
 #include <glm/vec4.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -202,6 +203,10 @@ Planet::Planet()
     registerMemberReplication(&orbit_target_id);
     registerMemberReplication(&orbit_time);
     registerMemberReplication(&orbit_distance);
+
+    if (entity) {
+        entity.getOrAddComponent<NeverRadarBlocked>();
+    }
 }
 
 void Planet::setPlanetAtmosphereColor(float r, float g, float b)

@@ -27,6 +27,7 @@
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
+#include "systems/ai.h"
 #include "systems/docking.h"
 #include "systems/impulse.h"
 #include "systems/warpsystem.h"
@@ -146,6 +147,7 @@ int main(int argc, char** argv)
 #endif
     LOG(Info, "Starting...");
     new Engine();
+    engine->registerSystem<AISystem>();
     engine->registerSystem<DockingSystem>();
     engine->registerSystem<ImpulseSystem>();
     engine->registerSystem<ManeuveringSystem>();

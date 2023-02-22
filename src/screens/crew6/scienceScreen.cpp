@@ -11,6 +11,8 @@
 #include "components/shields.h"
 #include "components/collision.h"
 
+#include "systems/radarblock.h"
+
 #include "screenComponents/radarView.h"
 #include "screenComponents/rawScannerDataRadarOverlay.h"
 #include "screenComponents/scanTargetButton.h"
@@ -257,8 +259,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             targets.clear();
     }else{
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
-        auto target_transform = targets.get().getComponent<sp::Transform>();
-        if (!my_transform || !target_transform || Nebula::blockedByNebula(my_transform->getPosition(), target_transform->getPosition(), lrr->short_range))
+        if (!my_transform || RadarBlockSystem::isRadarBlockedFrom(my_transform->getPosition(), targets.get(), lrr->short_range))
             targets.clear();
     }
 
@@ -521,7 +522,7 @@ void ScienceScreen::onUpdate()
                 // If this object is my ship or not visible due to a Nebula,
                 // skip it.
                 if (obj->entity == my_spaceship ||
-                    Nebula::blockedByNebula(my_position, obj->getPosition(), lrr ? lrr->short_range : 5000.0f))
+                    RadarBlockSystem::isRadarBlockedFrom(my_position, obj->entity, lrr ? lrr->short_range : 5000.0f))
                     continue;
 
                 // If this is a scannable object and the currently selected
@@ -540,7 +541,7 @@ void ScienceScreen::onUpdate()
             {
                 if (obj->entity == targets.get() ||
                     obj->entity == my_spaceship ||
-                    Nebula::blockedByNebula(my_position, obj->getPosition(), lrr ? lrr->short_range : 5000.0f))
+                    RadarBlockSystem::isRadarBlockedFrom(my_position, obj->entity, lrr ? lrr->short_range : 5000.0f))
                     continue;
 
                 if (glm::length(obj->getPosition() - my_position) < science_radar->getDistance() &&

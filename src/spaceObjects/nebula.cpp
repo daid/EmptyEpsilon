@@ -6,6 +6,7 @@
 #include "random.h"
 #include "textureManager.h"
 #include "components/collision.h"
+#include "components/radarblock.h"
 
 #include "scriptInterface.h"
 
@@ -31,8 +32,6 @@ REGISTER_SCRIPT_SUBCLASS(Nebula, SpaceObject)
 {
 }
 
-PVector<Nebula> Nebula::nebula_list;
-
 REGISTER_MULTIPLAYER_CLASS(Nebula, "Nebula")
 Nebula::Nebula()
 : SpaceObject(5000, "Nebula")
@@ -53,7 +52,10 @@ Nebula::Nebula()
         clouds[n].offset = vec2FromAngle(float(n * 360 / cloud_count)) * random(dist_min, dist_max);
     }
 
-    nebula_list.push_back(this);
+    if (entity) {
+        entity.getOrAddComponent<RadarBlock>();
+        entity.getOrAddComponent<NeverRadarBlocked>();
+    }
 }
 
 void Nebula::draw3DTransparent()
@@ -108,75 +110,6 @@ void Nebula::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float s
 void Nebula::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     renderer.drawCircleOutline(position, radius * scale, 2.0, glm::u8vec4(255, 255, 255, 64));
-}
-
-bool Nebula::inNebula(glm::vec2 position)
-{
-    foreach(Nebula, n, nebula_list)
-    {
-        if (glm::length2(n->getPosition() - position) < n->radius * n->radius)
-            return true;
-    }
-    return false;
-}
-
-bool Nebula::blockedByNebula(glm::vec2 start, glm::vec2 end, float radar_short_range)
-{
-    auto startEndDiff = end - start;
-    float startEndLength = glm::length(startEndDiff);
-    if (startEndLength < radar_short_range)
-        return false;
-
-    foreach(Nebula, n, nebula_list)
-    {
-        //Calculate point q, which is a point on the line start-end that is closest to n->getPosition
-        float f = glm::dot(startEndDiff, n->getPosition() - start) / startEndLength;
-        if (f < 0.0f)
-            f = 0.0f;
-        if (f > startEndLength)
-            f = startEndLength;
-        auto q = start + startEndDiff / startEndLength * f;
-        if (glm::length2(q - n->getPosition()) < n->radius*n->radius)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-glm::vec2 Nebula::getFirstBlockedPosition(glm::vec2 start, glm::vec2 end)
-{
-    auto startEndDiff = end - start;
-    float startEndLength = glm::length(startEndDiff);
-    P<Nebula> first_nebula;
-    float first_nebula_f = startEndLength;
-    glm::vec2 first_nebula_q{};
-    foreach(Nebula, n, nebula_list)
-    {
-        float f = glm::dot(startEndDiff, n->getPosition() - start) / startEndLength;
-        if (f < 0.0f)
-            f = 0;
-        glm::vec2 q = start + startEndDiff / startEndLength * f;
-        if (glm::length2(q - n->getPosition()) < n->radius * n->radius)
-        {
-            if (!first_nebula || f < first_nebula_f)
-            {
-                first_nebula = n;
-                first_nebula_f = f;
-                first_nebula_q = q;
-            }
-        }
-    }
-    if (!first_nebula)
-        return end;
-
-    float d = glm::length(first_nebula_q - first_nebula->getPosition());
-    return first_nebula_q + glm::normalize(start - end) * sqrtf(first_nebula->radius * first_nebula->radius - d * d);
-}
-
-PVector<Nebula> Nebula::getNebulas()
-{
-    return nebula_list;
 }
 
 glm::mat4 Nebula::getModelMatrix() const

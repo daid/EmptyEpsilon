@@ -5,17 +5,18 @@
 
 class FighterAI : public ShipAI
 {
-    enum
+    enum class State
     {
-        dive,
-        evade,
-        recharge
-    } attack_state;
+        Dive,
+        Evade,
+        Recharge
+    };
+    State attack_state;
     float timeout;
     float evade_direction;
     float aggression;
 public:
-    FighterAI(CpuShip* owner);
+    FighterAI(sp::ecs::Entity owner);
 
     /**!
      * Are we allowed to switch to a different AI right now?
@@ -25,7 +26,7 @@ public:
 
     virtual void run(float delta) override;
     virtual void runOrders() override;
-    virtual void runAttack(P<SpaceObject> target) override;
+    virtual void runAttack(sp::ecs::Entity target) override;
 };
 
 
