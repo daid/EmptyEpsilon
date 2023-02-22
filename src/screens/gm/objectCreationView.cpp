@@ -123,7 +123,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         setCreateScript("PlayerSpaceship():setFactionId(" + string(faction_selector->getSelectionIndex()) + ")",":setTemplate(\"" + value + "\")");
     });
     player_ship_listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(300, 460);
-    for (const auto template_name : player_template_names)
+    for (const auto& template_name : player_template_names)
     {
         auto shipTemplate=ShipTemplate::getTemplate(template_name);
         if (shipTemplate)
