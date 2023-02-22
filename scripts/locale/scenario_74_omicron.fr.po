@@ -3267,7 +3267,7 @@ msgstr "Réputation insuffisante pour acheter."
 #: scripts/scenario_74_omicron.lua:5289 scripts/scenario_74_omicron.lua:5810
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
-msgstr "Auriez-vous de la cargaison à vendre ?"
+msgstr "Auriez-vous des marchandises à vendre ?"
 
 #: scripts/scenario_74_omicron.lua:5291 scripts/scenario_74_omicron.lua:5812
 msgctxt "trade-comms"

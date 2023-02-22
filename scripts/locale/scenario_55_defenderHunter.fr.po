@@ -3648,7 +3648,7 @@ msgstr "Que voulez-vous ?"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous? (coût : %f réputation)"
+msgstr "Où allez-vous ? (coût : %f réputation)"
 
 #: scripts/scenario_55_defenderHunter.lua:6960
 #: scripts/scenario_55_defenderHunter.lua:6986

@@ -2382,14 +2382,14 @@ msgid ""
 "\n"
 "Check back later, someone else may have better knowledge"
 msgstr ""
-" A part ça, je n'ai pas connaissance de stations spécifiques.\n"
+"A part ça, je n'ai pas connaissance de stations spécifiques.\n"
 "\n"
 "Revenez plus tard, quelqu'un d'autre en saura peut-être plus que moi."
 
 #: scripts/scenario_50_gaps.lua:2965
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr " A part ça, je n'ai pas connaissance de stations spécifiques."
+msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 
 #: scripts/scenario_50_gaps.lua:2967
 msgctxt "trade-comms"
@@ -2789,7 +2789,7 @@ msgstr "Que voulez-vous ?"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous? (coût : %f réputation)"
+msgstr "Où allez-vous ? (coût : %f réputation)"
 
 #: scripts/scenario_50_gaps.lua:3507
 msgctxt "trade-comms"
