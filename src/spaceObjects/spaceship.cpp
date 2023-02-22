@@ -63,7 +63,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Returns whether this SpaceShip is docked with the given SpaceObject.
     /// Example: ship:isDocked(base) -- returns true if `ship` is fully docked with `base`
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
-    /// Returns the SoaceObject with which this SpaceShip is docked.
+    /// Returns the SpaceObject with which this SpaceShip is docked.
     /// Example: base = ship:getDockedWith()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockedWith);
     /// Returns the EDockingState value of this SpaceShip.
@@ -955,14 +955,28 @@ void SpaceShip::update(float delta)
     {
         if (docking_state == DS_Docking)
         {
-            if (!docking_target)
+            P<SpaceObject> this_object = this;
+
+            // Exit the docking state if the target either no longer exists;
+            // has moved out of docking range, hardcoded here as 1U; or if the
+            // docking target has itself docked with this ship; or if the
+            // docking target is itself trying to dock with another ship.
+            // It's still possible for this ship to try to dock with a dockable
+            // ship that's docked with a ship docked to this ship. :(
+            if (!docking_target
+                || glm::length(getPosition() - docking_target->getPosition()) > 1000 + docking_target->getRadius()
+                || docking_target->getDockedWith() == this_object)
+            {
+                impulse_request = 0.0f;
                 docking_state = DS_NotDocking;
-            else
+            } else {
                 target_rotation = vec2ToAngle(getPosition() - docking_target->getPosition());
-            if (fabs(angleDifference(target_rotation, getRotation())) < 10.0f)
-                impulse_request = -1.f;
-            else
-                impulse_request = 0.f;
+
+                if (fabs(angleDifference(target_rotation, getRotation())) < 10.0f)
+                    impulse_request = -1.f;
+                else
+                    impulse_request = 0.0f;
+            }
         }
         if (docking_state == DS_Docked)
         {
@@ -975,8 +989,10 @@ void SpaceShip::update(float delta)
                 target_rotation = vec2ToAngle(getPosition() - docking_target->getPosition());
 
                 P<ShipTemplateBasedObject> docked_with_template_based = docking_target;
-                if (docked_with_template_based && docked_with_template_based->repair_docked)  //Check if what we are docked to allows hull repairs, and if so, do it.
+                if (docked_with_template_based && docked_with_template_based->repair_docked)
                 {
+                    // Check if what we are docked to allows hull repairs, and
+                    // if so, do it.
                     if (hull_strength < hull_max)
                     {
                         hull_strength += delta;

@@ -337,7 +337,7 @@ public:
     P<SpaceObject> getTarget();
 
     bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
-    P<SpaceObject> getDockedWith() { if (docking_state == DS_Docked) return docking_target; return NULL; }
+    virtual P<SpaceObject> getDockedWith() override { if (docking_state == DS_Docked) return docking_target; return NULL; }
     bool canStartDocking() { return current_warp <= 0.0f && (!has_jump_drive || jump_delay <= 0.0f); }
     EDockingState getDockingState() { return docking_state; }
     virtual DockStyle getDockedStyle() override { return docked_style; }
