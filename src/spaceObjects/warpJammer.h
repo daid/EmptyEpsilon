@@ -3,17 +3,14 @@
 
 #include "spaceObject.h"
 
-class WarpJammer : public SpaceObject
+class WarpJammerObject : public SpaceObject
 {
-    static PVector<WarpJammer> jammer_list;
-
-    float range;
 public:
-    WarpJammer();
-    ~WarpJammer();
+    WarpJammerObject();
+    ~WarpJammerObject();
 
-    void setRange(float range) { this->range = range; }
-    float getRange() { return range; }
+    void setRange(float range) { } //TODO
+    float getRange() { return 7000.0; } //TODO
 
     void setHull(float hull) { } //TODO
     float getHull() { return 1.0; } //TODO
@@ -21,9 +18,6 @@ public:
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
     virtual bool canBeTargetedBy(sp::ecs::Entity other)  override { return true; }
-
-    static bool isWarpJammed(sp::ecs::Entity);
-    static glm::vec2 getFirstNoneJammedPosition(glm::vec2 start, glm::vec2 end);
 
     void onTakingDamage(ScriptSimpleCallback callback);
     void onDestruction(ScriptSimpleCallback callback);

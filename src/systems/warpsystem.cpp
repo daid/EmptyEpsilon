@@ -15,7 +15,7 @@ void WarpSystem::update(float delta)
     {
         if (warp.request > 0 || warp.current > 0)
         {
-            if (WarpJammer::isWarpJammed(entity))
+            if (isWarpJammed(entity))
                 warp.request = 0;
         }
         if (warp.request > 0 || warp.current > 0)
@@ -61,4 +61,48 @@ void WarpSystem::update(float delta)
             current_velocity = glm::vec2{0, 0};
         physics.setVelocity(current_velocity + forward * (warp.current * warp.speed_per_level * warp.getSystemEffectiveness()));
     }
+}
+
+bool WarpSystem::isWarpJammed(sp::ecs::Entity entity)
+{
+    if (auto transform = entity.getComponent<sp::Transform>()) {
+        auto position = transform->getPosition();
+        for(auto [entity, jammer, jt] : sp::ecs::Query<WarpJammer, sp::Transform>())
+        {
+            if (glm::length2(jt.getPosition() - position) < jammer.range * jammer.range)
+                return true;
+        }
+    }
+    return false;
+}
+
+glm::vec2 WarpSystem::getFirstNoneJammedPosition(glm::vec2 start, glm::vec2 end)
+{
+    auto startEndDiff = end - start;
+    float startEndLength = glm::length(startEndDiff);
+    sp::ecs::Entity first_jammer;
+    float first_jammer_f = startEndLength;
+    glm::vec2 first_jammer_q{0, 0};
+    for(auto [entity, jammer, jt] : sp::ecs::Query<WarpJammer, sp::Transform>())
+    {
+        float f_inf = glm::dot(startEndDiff, jt.getPosition() - start) / startEndLength;
+	    float f_limited = std::min(std::max(0.0f, f_inf), startEndLength);
+        glm::vec2 q_limited = start + startEndDiff / startEndLength * f_limited;
+        if (glm::length2(q_limited - jt.getPosition()) < jammer.range*jammer.range)
+        {
+            if (!first_jammer || f_limited < first_jammer_f)
+            {
+                first_jammer = entity;
+                first_jammer_f = f_limited;
+                first_jammer_q = start + startEndDiff / startEndLength * f_inf;
+            }
+        }
+    }
+    if (!first_jammer)
+        return end;
+
+    auto jt = first_jammer.getComponent<sp::Transform>();
+    auto jammer = first_jammer.getComponent<WarpJammer>();
+    float d = glm::length(first_jammer_q - jt->getPosition());
+    return first_jammer_q + glm::normalize(start - end) * std::sqrt(jammer->range * jammer->range - d * d);
 }

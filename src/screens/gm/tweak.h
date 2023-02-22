@@ -78,7 +78,7 @@ public:
 class GuiJammerTweak : public GuiTweakPage
 {
 private:
-    P<WarpJammer> target;
+    P<WarpJammerObject> target;
 
     GuiSlider* jammer_range_slider;
 public:

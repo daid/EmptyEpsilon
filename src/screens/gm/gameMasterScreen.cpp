@@ -119,7 +119,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
             {
                 station_tweak_dialog->open(obj);
             }
-            else if (P<WarpJammer>(obj))
+            else if (P<WarpJammerObject>(obj))
             {
                 jammer_tweak_dialog->open(obj);
             }

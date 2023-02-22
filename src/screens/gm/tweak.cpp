@@ -297,7 +297,7 @@ GuiJammerTweak::GuiJammerTweak(GuiContainer* owner)
 
 void GuiJammerTweak::open(P<SpaceObject> target)
 {
-    P<WarpJammer> jammer = target;
+    P<WarpJammerObject> jammer = target;
     this->target = jammer;
 }
 

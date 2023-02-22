@@ -19,3 +19,8 @@ public:
     int8_t request = 0; // [input] Level of warp requested, from 0 to max_level
     float current = 0.0f; // [output] Current active warp amount, from 0.0 to 4.0
 };
+
+class WarpJammer {
+public:
+    float range = 7000.0;
+};
