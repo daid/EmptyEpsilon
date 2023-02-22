@@ -114,7 +114,6 @@ public:
     virtual void setCallSign(string new_callsign) { entity.getOrAddComponent<CallSign>().callsign = new_callsign; }
     virtual string getCallSign() { auto cs = entity.getComponent<CallSign>(); if (cs) return cs->callsign; return ""; }
     virtual bool hasShield() { return false; }
-    virtual bool canHideInNebula() { return true; }
     virtual bool canBeTargetedBy(sp::ecs::Entity other);
     virtual bool canBeSelectedBy(sp::ecs::Entity other);
     virtual bool canBeScannedBy(sp::ecs::Entity other);

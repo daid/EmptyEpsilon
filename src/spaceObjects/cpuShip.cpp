@@ -107,148 +107,145 @@ REGISTER_MULTIPLAYER_CLASS(CpuShip, "CpuShip");
 CpuShip::CpuShip()
 : SpaceShip("CpuShip")
 {
-    orders = AI_Idle;
-
     setRotation(random(0, 360));
 
-    missile_resupply = 0.0;
-
-    new_ai_name = "default";
-    ai = nullptr;
-
-    if (entity)
+    if (entity) {
         setFaction("Kraylor");
+        entity.getOrAddComponent<AIController>().new_name = "default";
+    }
 }
 
 CpuShip::~CpuShip()
 {
-    if (ai)
-        delete ai;
-}
-
-void CpuShip::update(float delta)
-{
-    SpaceShip::update(delta);
-
-    if (!game_server)
-        return;
-
-    if (new_ai_name.length() && (!ai || ai->canSwitchAI()))
-    {
-        shipAIFactoryFunc_t f = ShipAIFactory::getAIFactory(new_ai_name);
-        delete ai;
-        ai = f(this);
-        new_ai_name = "";
-    }
-    if (ai)
-        ai->run(delta);
 }
 
 void CpuShip::applyTemplateValues()
 {
     SpaceShip::applyTemplateValues();
 
-    new_ai_name = ship_template->default_ai_name;
+    if (auto ai = entity.getComponent<AIController>())
+        ai->new_name = ship_template->default_ai_name;
 }
 
 void CpuShip::setAI(string new_ai)
 {
-    new_ai_name = new_ai;
+    if (auto ai = entity.getComponent<AIController>())
+        ai->new_name = new_ai;
 }
 
 void CpuShip::orderIdle()
 {
-    orders = AI_Idle;
-    order_target = NULL;
-    order_target_location = glm::vec2(0, 0);
+    if (auto ai = entity.getComponent<AIController>()) {
+        ai->orders = AIOrder::Idle;
+        ai->order_target = {};
+        ai->order_target_location = glm::vec2(0, 0);
+    }
 }
 
 void CpuShip::orderRoaming()
 {
     auto thrusters = entity.getComponent<ManeuveringThrusters>();
     if (thrusters) thrusters->stop();
-    orders = AI_Roaming;
-    order_target = NULL;
-    order_target_location = glm::vec2(0, 0);
-    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Searching for targets."));
+    if (auto ai = entity.getComponent<AIController>()) {
+        ai->orders = AIOrder::Roaming;
+        ai->order_target = {};
+        ai->order_target_location = glm::vec2(0, 0);
+        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Searching for targets."));
+    }
 }
 
 void CpuShip::orderRoamingAt(glm::vec2 position)
 {
     auto thrusters = entity.getComponent<ManeuveringThrusters>();
     if (thrusters) thrusters->stop();
-    orders = AI_Roaming;
-    order_target = NULL;
-    order_target_location = position;
-    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Searching for hostiles around {x},{y}.").format({{"x", string(position.x)}, {"y", string(position.y)}}));
+    if (auto ai = entity.getComponent<AIController>()) {
+        ai->orders = AIOrder::Roaming;
+        ai->order_target = {};
+        ai->order_target_location = position;
+        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Searching for hostiles around {x},{y}.").format({{"x", string(position.x)}, {"y", string(position.y)}}));
+    }
 }
 
 void CpuShip::orderRetreat(P<SpaceObject> object)
 {
-    orders = AI_Retreat;
-    if (!object)
-    {
-        order_target = NULL;
-        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Searching for supplies."));
-    }else{
-        order_target = object;
-        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Docking to {callsign}.").format({{"callsign", object->getCallSign()}}));
+    if (auto ai = entity.getComponent<AIController>()) {
+        ai->orders = AIOrder::Retreat;
+        if (!object)
+        {
+            ai->order_target = {};
+            this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Searching for supplies."));
+        }else{
+            ai->order_target = object->entity;
+            this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Docking to {callsign}.").format({{"callsign", object->getCallSign()}}));
+        }
+        ai->order_target_location = glm::vec2(0, 0);
     }
-    order_target_location = glm::vec2(0, 0);
 }
 
 void CpuShip::orderStandGround()
 {
     auto thrusters = entity.getComponent<ManeuveringThrusters>();
     if (thrusters) thrusters->stop();
-    orders = AI_StandGround;
-    order_target = NULL;
-    order_target_location = glm::vec2(0, 0);
-    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Standing ground for now."));
+    if (auto ai = entity.getComponent<AIController>()) {
+        ai->orders = AIOrder::StandGround;
+        ai->order_target = {};
+        ai->order_target_location = glm::vec2(0, 0);
+        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Standing ground for now."));
+    }
 }
 
 void CpuShip::orderDefendLocation(glm::vec2 position)
 {
-    orders = AI_DefendLocation;
-    order_target = NULL;
-    order_target_location = position;
-    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Defending {x},{y}.").format({{"x", string(position.x)}, {"y", string(position.y)}}));
+    if (auto ai = entity.getComponent<AIController>()) {
+        ai->orders = AIOrder::DefendLocation;
+        ai->order_target = {};
+        ai->order_target_location = position;
+        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Defending {x},{y}.").format({{"x", string(position.x)}, {"y", string(position.y)}}));
+    }
 }
 
 void CpuShip::orderDefendTarget(P<SpaceObject> object)
 {
     if (!object)
         return;
-    orders = AI_DefendTarget;
-    order_target = object;
-    order_target_location = glm::vec2(0, 0);
-    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Defending {callsign}.").format({{"callsign", object->getCallSign()}}));
+    if (auto ai = entity.getComponent<AIController>()) {
+        ai->orders = AIOrder::DefendTarget;
+        ai->order_target = object->entity;
+        ai->order_target_location = glm::vec2(0, 0);
+        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Defending {callsign}.").format({{"callsign", object->getCallSign()}}));
+    }
 }
 
 void CpuShip::orderFlyFormation(P<SpaceObject> object, glm::vec2 offset)
 {
     if (!object)
         return;
-    orders = AI_FlyFormation;
-    order_target = object;
-    order_target_location = offset;
-    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Following {callsign}.").format({{"callsign", object->getCallSign()}}));
+    if (auto ai = entity.getComponent<AIController>()) {
+        ai->orders = AIOrder::FlyFormation;
+        ai->order_target = object->entity;
+        ai->order_target_location = offset;
+        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Following {callsign}.").format({{"callsign", object->getCallSign()}}));
+    }
 }
 
 void CpuShip::orderFlyTowards(glm::vec2 target)
 {
-    orders = AI_FlyTowards;
-    order_target = NULL;
-    order_target_location = target;
-    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Moving to {x},{y}.").format({{"x", string(target.x)}, {"y", string(target.y)}}));
+    if (auto ai = entity.getComponent<AIController>()) {
+        ai->orders = AIOrder::FlyTowards;
+        ai->order_target = {};
+        ai->order_target_location = target;
+        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Moving to {x},{y}.").format({{"x", string(target.x)}, {"y", string(target.y)}}));
+    }
 }
 
 void CpuShip::orderFlyTowardsBlind(glm::vec2 target)
 {
-    orders = AI_FlyTowardsBlind;
-    order_target = NULL;
-    order_target_location = target;
-    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Moving to {x},{y}.").format({{"x", string(target.x)}, {"y", string(target.y)}}));
+    if (auto ai = entity.getComponent<AIController>()) {
+        ai->orders = AIOrder::FlyTowardsBlind;
+        ai->order_target = {};
+        ai->order_target_location = target;
+        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Moving to {x},{y}.").format({{"x", string(target.x)}, {"y", string(target.y)}}));
+    }
 }
 
 void CpuShip::orderAttack(P<SpaceObject> object)
@@ -260,10 +257,12 @@ void CpuShip::orderAttack(P<SpaceObject> object)
     // Otherwise we just chase the target without firing on it.
     if (this->isEnemy(object))
     {
-        orders = AI_Attack;
-        order_target = object;
-        order_target_location = glm::vec2(0, 0);
-        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Moving to attack {callsign}!").format({{"callsign", object->getCallSign()}}));
+        if (auto ai = entity.getComponent<AIController>()) {
+            ai->orders = AIOrder::Attack;
+            ai->order_target = {};
+            ai->order_target_location = glm::vec2(0, 0);
+            this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Moving to attack {callsign}!").format({{"callsign", object->getCallSign()}}));
+        }
     } else {
         LOG(WARNING) << "Tried to give " + this->getCallSign() + " an order to attack a non-hostile target";
         return;
@@ -274,23 +273,25 @@ void CpuShip::orderDock(P<SpaceObject> object)
 {
     if (!object)
         return;
-    orders = AI_Dock;
-    order_target = object;
-    order_target_location = glm::vec2(0, 0);
-    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Docking to {callsign}.").format({{"callsign", object->getCallSign()}}));
+    if (auto ai = entity.getComponent<AIController>()) {
+        ai->orders = AIOrder::Dock;
+        ai->order_target = {};
+        ai->order_target_location = glm::vec2(0, 0);
+        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Docking to {callsign}.").format({{"callsign", object->getCallSign()}}));
+    }
 }
 
 void CpuShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     SpaceShip::drawOnGMRadar(renderer, position, scale, rotation, long_range);
-    if (game_server && ai)
-        ai->drawOnGMRadar(renderer, position, scale);
+    //if (game_server && ai)
+    //TODO    ai->drawOnGMRadar(renderer, position, scale);
 }
 
 std::unordered_map<string, string> CpuShip::getGMInfo()
 {
     std::unordered_map<string, string> ret = SpaceShip::getGMInfo();
-    ret[trMark("gm_info", "Orders")] = getLocaleAIOrderString(orders);
+    //ret[trMark("gm_info", "Orders")] = getLocaleAIOrderString(orders);
     return ret;
 }
 
@@ -307,63 +308,64 @@ string CpuShip::getExportLine()
     {
         ret += ":setLongRangeRadarRange(" + string(getLongRangeRadarRange(), 0) + ")";
     }
-
+/*
     switch(orders)
     {
-    case AI_Idle: break;
-    case AI_Roaming: ret += ":orderRoaming()"; break;
-    case AI_Retreat: ret += ":orderRetreat(?)"; break;
-    case AI_StandGround: ret += ":orderStandGround()"; break;
-    case AI_DefendLocation: ret += ":orderDefendLocation(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
-    case AI_DefendTarget: ret += ":orderDefendTarget(?)"; break;
-    case AI_FlyFormation: ret += ":orderFlyFormation(?, " + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
-    case AI_FlyTowards: ret += ":orderFlyTowards(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
-    case AI_FlyTowardsBlind: ret += ":orderFlyTowardsBlind(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
-    case AI_Attack: ret += ":orderAttack(?)"; break;
-    case AI_Dock: ret += ":orderDock(?)"; break;
+    case AIOrder::Idle: break;
+    case AIOrder::Roaming: ret += ":orderRoaming()"; break;
+    case AIOrder::Retreat: ret += ":orderRetreat(?)"; break;
+    case AIOrder::StandGround: ret += ":orderStandGround()"; break;
+    case AIOrder::DefendLocation: ret += ":orderDefendLocation(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
+    case AIOrder::DefendTarget: ret += ":orderDefendTarget(?)"; break;
+    case AIOrder::FlyFormation: ret += ":orderFlyFormation(?, " + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
+    case AIOrder::FlyTowards: ret += ":orderFlyTowards(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
+    case AIOrder::FlyTowardsBlind: ret += ":orderFlyTowardsBlind(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
+    case AIOrder::Attack: ret += ":orderAttack(?)"; break;
+    case AIOrder::Dock: ret += ":orderDock(?)"; break;
     }
+    */
     return ret + getScriptExportModificationsOnTemplate();
 }
 
-string getAIOrderString(EAIOrder order)
+string getAIOrderString(AIOrder order)
 {
     switch(order)
     {
-    case AI_Idle: return "Idle";
-    case AI_Roaming: return "Roaming";
-    case AI_Retreat: return "Retreat";
-    case AI_StandGround: return "Stand Ground";
-    case AI_DefendLocation: return "Defend Location";
-    case AI_DefendTarget: return "Defend Target";
-    case AI_FlyFormation: return "Fly in formation";
-    case AI_FlyTowards: return "Fly towards";
-    case AI_FlyTowardsBlind: return "Fly towards (ignore all)";
-    case AI_Attack: return "Attack";
-    case AI_Dock: return "Dock";
+    case AIOrder::Idle: return "Idle";
+    case AIOrder::Roaming: return "Roaming";
+    case AIOrder::Retreat: return "Retreat";
+    case AIOrder::StandGround: return "Stand Ground";
+    case AIOrder::DefendLocation: return "Defend Location";
+    case AIOrder::DefendTarget: return "Defend Target";
+    case AIOrder::FlyFormation: return "Fly in formation";
+    case AIOrder::FlyTowards: return "Fly towards";
+    case AIOrder::FlyTowardsBlind: return "Fly towards (ignore all)";
+    case AIOrder::Attack: return "Attack";
+    case AIOrder::Dock: return "Dock";
     }
     return "Unknown";
 }
 
-string getLocaleAIOrderString(EAIOrder order)
+string getLocaleAIOrderString(AIOrder order)
 {
     switch(order)
     {
-    case AI_Idle: return tr("orderscpu", "Idle");
-    case AI_Roaming: return tr("orderscpu", "Roaming");
-    case AI_Retreat: return tr("orderscpu", "Retreat");
-    case AI_StandGround: return tr("orderscpu", "Stand Ground");
-    case AI_DefendLocation: return tr("orderscpu", "Defend Location");
-    case AI_DefendTarget: return tr("orderscpu", "Defend Target");
-    case AI_FlyFormation: return tr("orderscpu", "Fly in formation");
-    case AI_FlyTowards: return tr("orderscpu", "Fly towards");
-    case AI_FlyTowardsBlind: return tr("orderscpu", "Fly towards (ignore all)");
-    case AI_Attack: return tr("orderscpu", "Attack");
-    case AI_Dock: return tr("orderscpu", "Dock");
+    case AIOrder::Idle: return tr("orderscpu", "Idle");
+    case AIOrder::Roaming: return tr("orderscpu", "Roaming");
+    case AIOrder::Retreat: return tr("orderscpu", "Retreat");
+    case AIOrder::StandGround: return tr("orderscpu", "Stand Ground");
+    case AIOrder::DefendLocation: return tr("orderscpu", "Defend Location");
+    case AIOrder::DefendTarget: return tr("orderscpu", "Defend Target");
+    case AIOrder::FlyFormation: return tr("orderscpu", "Fly in formation");
+    case AIOrder::FlyTowards: return tr("orderscpu", "Fly towards");
+    case AIOrder::FlyTowardsBlind: return tr("orderscpu", "Fly towards (ignore all)");
+    case AIOrder::Attack: return tr("orderscpu", "Attack");
+    case AIOrder::Dock: return tr("orderscpu", "Dock");
     }
     return "Unknown";
 }
 
-template<> int convert<EAIOrder>::returnType(lua_State* L, EAIOrder o)
+template<> int convert<AIOrder>::returnType(lua_State* L, AIOrder o)
 {
     lua_pushstring(L, getAIOrderString(o).c_str());
     return 1;

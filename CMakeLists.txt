@@ -386,6 +386,10 @@ set(MAIN_SOURCES
     src/components/internalrooms.cpp
     src/components/probe.h
     src/components/hacking.h
+    src/components/ai.h
+    src/components/radarblock.h
+    src/systems/ai.h
+    src/systems/ai.cpp
     src/systems/docking.h
     src/systems/docking.cpp
     src/systems/shipsystemssystem.h
@@ -418,6 +422,8 @@ set(MAIN_SOURCES
     src/systems/basicmovement.cpp
     src/systems/comms.h
     src/systems/comms.cpp
+    src/systems/radarblock.h
+    src/systems/radarblock.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

@@ -24,9 +24,7 @@ void DockingSystem::update(float delta)
 {
     if (!game_server) return;
 
-    for(auto [entity, docking_port, transform, obj] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Transform>, SpaceObject*>()) {
-        SpaceShip* ship = dynamic_cast<SpaceShip*>(obj);
-        PlayerSpaceship* player = dynamic_cast<PlayerSpaceship*>(obj);
+    for(auto [entity, docking_port, transform] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Transform>>()) {
         sp::Transform* target_transform;
         switch(docking_port.state) {
         case DockingPort::State::NotDocking:
@@ -111,30 +109,27 @@ void DockingSystem::update(float delta)
                 }
 
                 //recharge missiles of CPU ships docked to station. Can be disabled
-                if (!player && bay && (bay->flags & DockingBay::RestockMissiles)) {
-                    auto cpu = dynamic_cast<CpuShip*>(ship);
-                    if (cpu) {
-                        auto tubes = entity.getComponent<MissileTubes>();
-                        if (tubes) {
-                            bool needs_missile = false;
-                            for(int n=0; n<MW_Count; n++)
+                if (docking_port.auto_reload_missiles && bay && (bay->flags & DockingBay::RestockMissiles)) {
+                    auto tubes = entity.getComponent<MissileTubes>();
+                    if (tubes) {
+                        bool needs_missile = false;
+                        for(int n=0; n<MW_Count; n++)
+                        {
+                            if  (tubes->storage[n] < tubes->storage_max[n])
                             {
-                                if  (tubes->storage[n] < tubes->storage_max[n])
+                                if (docking_port.auto_reload_missile_delay <= 0.0f)
                                 {
-                                    if (cpu->missile_resupply >= cpu->missile_resupply_time)
-                                    {
-                                        tubes->storage[n] += 1;
-                                        cpu->missile_resupply = 0.0;
-                                        break;
-                                    }
-                                    else
-                                        needs_missile = true;
+                                    tubes->storage[n] += 1;
+                                    docking_port.auto_reload_missile_delay = docking_port.auto_reload_missile_time;
+                                    break;
                                 }
+                                else
+                                    needs_missile = true;
                             }
-
-                            if (needs_missile)
-                                cpu->missile_resupply += delta;
                         }
+
+                        if (needs_missile)
+                            docking_port.auto_reload_missile_delay -= delta;
                     }
                 }
             }

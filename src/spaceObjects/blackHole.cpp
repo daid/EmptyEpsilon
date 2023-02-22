@@ -5,6 +5,7 @@
 #include "pathPlanner.h"
 #include "main.h"
 #include "textureManager.h"
+#include "components/radarblock.h"
 
 #include "scriptInterface.h"
 #include "glObjects.h"
@@ -34,6 +35,10 @@ BlackHole::BlackHole()
     update_delta = 0.0;
     PathPlannerManager::getInstance()->addAvoidObject(this, 7000);
     setRadarSignatureInfo(0.9, 0, 0);
+
+    if (entity) {
+        entity.getOrAddComponent<NeverRadarBlocked>();
+    }
 }
 
 void BlackHole::update(float delta)

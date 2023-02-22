@@ -18,13 +18,13 @@ protected:
     /**!
      * Artificial delay between missile fires. The AI missile fire is 'faked' with this value.
      */
-    float missile_fire_delay;
-    bool has_missiles;
-    bool has_beams;
-    float beam_weapon_range;
-    float short_range;
-    float long_range;
-    float relay_range;
+    float missile_fire_delay = 0;
+    bool has_missiles = false;
+    bool has_beams = false;
+    float beam_weapon_range = 1000;
+    float short_range = 5000;
+    float long_range = 30000;
+    float relay_range = 60000;
 
     enum class EWeaponDirection
     {
@@ -41,9 +41,9 @@ protected:
 
     PathPlanner pathPlanner;
 public:
-    CpuShip* owner;
+    sp::ecs::Entity owner;
 
-    ShipAI(CpuShip* owner);
+    ShipAI(sp::ecs::Entity owner);
     virtual ~ShipAI() = default;
 
     /**!
@@ -63,12 +63,12 @@ protected:
     virtual void updateWeaponState(float delta);
     virtual void updateTarget();
     virtual void runOrders();
-    virtual void runAttack(P<SpaceObject> target);
+    virtual void runAttack(sp::ecs::Entity target);
     virtual void flyTowards(glm::vec2 target, float keep_distance = 100.0);
-    virtual void flyFormation(P<SpaceObject> target, glm::vec2 offset);
+    virtual void flyFormation(sp::ecs::Entity target, glm::vec2 offset);
 
-    P<SpaceObject> findBestTarget(glm::vec2 position, float radius);
-    float targetScore(P<SpaceObject> target);
+    sp::ecs::Entity findBestTarget(glm::vec2 position, float radius);
+    float targetScore(sp::ecs::Entity target);
 
     /**!
      * Check if new target is better than old target.
@@ -76,13 +76,13 @@ protected:
      * \param current_target
      * \return bool True if the new target is 'better'
      */
-    bool betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_target);
+    bool betterTarget(sp::ecs::Entity new_target, sp::ecs::Entity current_target);
 
     /**!
      * Used for missiles, as they require some intelligence to fire.
      */
-    float calculateFiringSolution(P<SpaceObject> target, const MissileTubes::MountPoint& tube);
-    P<SpaceObject> findBestMissileRestockTarget(glm::vec2 position, float radius);
+    float calculateFiringSolution(sp::ecs::Entity target, const MissileTubes::MountPoint& tube);
+    sp::ecs::Entity findBestMissileRestockTarget(glm::vec2 position, float radius);
 
     static float getMissileWeaponStrength(EMissileWeapons type)
     {
