@@ -1289,10 +1289,15 @@ void SpaceShip::initializeJump(float distance)
 
 void SpaceShip::requestDock(P<SpaceObject> target)
 {
-    if (!target || docking_state != DS_NotDocking || target->canBeDockedBy(this) == DockStyle::None)
+    if (!target
+        || target == this
+        || docking_state != DS_NotDocking
+        || target->canBeDockedBy(this) == DockStyle::None)
         return;
+
     if (glm::length(getPosition() - target->getPosition()) > 1000 + target->getRadius())
         return;
+
     if (!canStartDocking())
         return;
 
