@@ -4396,7 +4396,7 @@ function friendlyComms(comms_data)
 				end
 			end
 			if goodCount > 0 then
-				addCommsReply("Jettison cargo", function()
+				addCommsReply(_("trade-comms", "Jettison cargo"), function()
 					setCommsMessage(string.format(_("trade-comms", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 					for good, good_quantity in pairs(comms_source.goods) do
 						if good_quantity > 0 then

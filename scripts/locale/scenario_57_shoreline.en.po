@@ -13,3 +13,3317 @@ msgid ""
 "\n"
 "Version 2"
 msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:230
+#, lua-format
+msgctxt "buttonGM"
+msgid "Version %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:231
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Scenario version %s\n"
+" LUA version %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:235
+msgctxt "buttonGM"
+msgid "+Required Missions"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:236
+msgctxt "buttonGM"
+msgid "+Optional Missions"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:240
+msgctxt "buttonGM"
+msgid "-From Required Miss"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:243
+msgctxt "buttonGM"
+msgid "Req Undercut"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:246
+msgctxt "buttonGM"
+msgid "Req Stettor"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:249
+msgctxt "buttonGM"
+msgid "Req Horizon"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:252
+msgctxt "buttonGM"
+msgid "Req Sporisky"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:257
+msgctxt "buttonGM"
+msgid "-From Optional Miss"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:260
+msgctxt "buttonGM"
+msgid "Opt Beam Range"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:263
+msgctxt "buttonGM"
+msgid "Opt Impulse"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:266
+msgctxt "buttonGM"
+msgid "Opt Spin"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:269
+msgctxt "buttonGM"
+msgid "Opt Shield"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:272
+msgctxt "buttonGM"
+msgid "Opt Beam Damage"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:372
+msgctxt "orders-comms"
+msgid ""
+"Defend bases in the area (human navy and independent) from enemy attack."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:910 scripts/scenario_57_shoreline.lua:3758
+#: scripts/scenario_57_shoreline.lua:3799
+msgctxt "scienceDescription-station"
+msgid "Ship building and maintenance facility"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:922
+msgctxt "stationGeneralInfo-comms"
+msgid "Human Navy headquarters. Loss of this station would be devastating"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:929 scripts/scenario_57_shoreline.lua:3836
+msgctxt "scienceDescription-station"
+msgid "Warp engine components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:941 scripts/scenario_57_shoreline.lua:3837
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We specialize in the esoteric components necessary to make warp drives "
+"function properly"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:942 scripts/scenario_57_shoreline.lua:3838
+msgctxt "stationStory-comms"
+msgid ""
+"Zefram Cochrane constructed the first warp drive in human history. We named "
+"our station after him because of the specialized warp systems work we do"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:960 scripts/scenario_57_shoreline.lua:2541
+msgctxt "scienceDescription-station"
+msgid "Energy Beam Components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:971 scripts/scenario_57_shoreline.lua:2542
+msgctxt "stationGeneralInfo-comms"
+msgid "We manufacture energy beam components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:972 scripts/scenario_57_shoreline.lua:2543
+msgctxt "stationStory-comms"
+msgid ""
+"Station named after Guglielmo Marconi an Italian inventor from early 20th "
+"century Earth who, along with Nicolo Tesla, claimed to have invented a death "
+"ray or particle beam weapon"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:990 scripts/scenario_57_shoreline.lua:2691
+#: scripts/scenario_57_shoreline.lua:3355
+msgctxt "scienceDescription-station"
+msgid "Trading station"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1001
+#: scripts/scenario_57_shoreline.lua:3356
+msgctxt "stationGeneralInfo-comms"
+msgid "Come to Muddvile for all your trade and commerce needs and desires"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1002
+#: scripts/scenario_57_shoreline.lua:3357
+msgctxt "stationStory-comms"
+msgid ""
+"Upon retirement, Harry Mudd started this commercial venture using his "
+"leftover inventory and extensive connections obtained while he traveled the "
+"stars as a salesman"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1015
+#: scripts/scenario_57_shoreline.lua:3874
+msgctxt "scienceDescription-station"
+msgid "Optical Components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1027
+#: scripts/scenario_57_shoreline.lua:3875
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make and supply optic components for various station and ship systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1028
+#: scripts/scenario_57_shoreline.lua:3876
+msgctxt "stationStory-comms"
+msgid ""
+"This station continues the businesses from Earth based on the merging of "
+"several companies including Leica from Switzerland, the lens manufacturer "
+"and the Japanese advanced low carbon (ALCA) electronic and optic research "
+"and development company"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1046
+#: scripts/scenario_57_shoreline.lua:1856
+#: scripts/scenario_57_shoreline.lua:1913
+#: scripts/scenario_57_shoreline.lua:1970
+#: scripts/scenario_57_shoreline.lua:2027
+#: scripts/scenario_57_shoreline.lua:4331
+#: scripts/scenario_57_shoreline.lua:4411
+#: scripts/scenario_57_shoreline.lua:4448
+#: scripts/scenario_57_shoreline.lua:4487
+msgctxt "scienceDescription-station"
+msgid "Mining station"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1070
+#: scripts/scenario_57_shoreline.lua:4626
+msgctxt "scienceDescription-station"
+msgid "Mining and trade"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1108
+#: scripts/scenario_57_shoreline.lua:4663
+msgctxt "scienceDescription-station"
+msgid "Mining and gambling"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1147
+#: scripts/scenario_57_shoreline.lua:1702
+#: scripts/scenario_57_shoreline.lua:1821
+#: scripts/scenario_57_shoreline.lua:4700
+#: scripts/scenario_57_shoreline.lua:4774
+#: scripts/scenario_57_shoreline.lua:4912
+#: scripts/scenario_57_shoreline.lua:5088
+msgctxt "scienceDescription-station"
+msgid "Resupply"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1163
+#: scripts/scenario_57_shoreline.lua:4223
+msgctxt "scienceDescription-station"
+msgid "Shielded Circuitry Fabrication"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1174
+#: scripts/scenario_57_shoreline.lua:4224
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We specialize in circuitry shielded from external hacking suitable for ship "
+"systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1175
+#: scripts/scenario_57_shoreline.lua:4225
+msgctxt "stationStory-comms"
+msgid ""
+"We started as an expansion from the lunar based chip manufacturer of Earth "
+"legacy Intel electronic chips"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1189
+#: scripts/scenario_57_shoreline.lua:2994
+msgctxt "scienceDescription-station"
+msgid "Shield and Armor Research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1201
+#: scripts/scenario_57_shoreline.lua:2995
+msgctxt "stationGeneralInfo-comms"
+msgid "The finest shield and armor manufacturer in the quadrant"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1202
+#: scripts/scenario_57_shoreline.lua:2996
+msgctxt "stationStory-comms"
+msgid ""
+"We named this station for the pioneering spirit of the 22nd century "
+"Starfleet explorer, Captain Jonathan Archer"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1219
+#: scripts/scenario_57_shoreline.lua:3956
+msgctxt "scienceDescription-station"
+msgid "Repulsor and Tractor Beam Components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1232
+#: scripts/scenario_57_shoreline.lua:3957
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We can meet all your pushing and pulling needs with specialized equipment "
+"custom made"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1233
+#: scripts/scenario_57_shoreline.lua:3958
+msgctxt "stationStory-comms"
+msgid ""
+"The station name comes from a short story by the 20th century author "
+"Clifford D. Simak as well as from the 19th century developer John Deere who "
+"inspired a company that makes the Earth bound equivalents of our products"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1252
+#: scripts/scenario_57_shoreline.lua:3103
+msgctxt "scienceDescription-station"
+msgid "Advanced Material components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1263
+#: scripts/scenario_57_shoreline.lua:3104
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We fabricate several different kinds of materials critical to various space "
+"industries like ship building, station construction and mineral extraction"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1264
+#: scripts/scenario_57_shoreline.lua:3105
+msgctxt "stationStory-comms"
+msgid ""
+"We named our station after Dr. Cavor, the physicist that invented a barrier "
+"material for gravity waves - Cavorite"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1293
+#: scripts/scenario_57_shoreline.lua:3210
+#: scripts/scenario_57_shoreline.lua:3433
+msgctxt "scienceDescription-station"
+msgid "Transporter components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1322
+#: scripts/scenario_57_shoreline.lua:2395
+#: scripts/scenario_57_shoreline.lua:4260
+msgctxt "scienceDescription-station"
+msgid "Sensor components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1333
+#: scripts/scenario_57_shoreline.lua:4261
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and construct components for the most powerful and accurate "
+"sensors used aboard ships along with the software to make them easy to use"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1334
+#: scripts/scenario_57_shoreline.lua:4262
+msgctxt "stationStory-comms"
+msgid ""
+"The Veloquan company has its roots in the manufacturing of LIDAR sensors in "
+"the early 21st century on Earth in the United States for autonomous ground-"
+"based vehicles. They expanded research and manufacturing operations to "
+"include various sensors for space vehicles. Veloquan was the result of "
+"numerous mergers and acquisitions of several companies including Velodyne "
+"and Quanergy"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1352
+#: scripts/scenario_57_shoreline.lua:3030
+msgctxt "scienceDescription-station"
+msgid "Communication components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1364
+#: scripts/scenario_57_shoreline.lua:3031
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide a range of communication equipment and software for use aboard "
+"ships"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1365
+#: scripts/scenario_57_shoreline.lua:3032
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Reginald Barclay who established the first "
+"transgalactic com link through the creative application of a quantum "
+"singularity. Station personnel often refer to the station as the Broccoli "
+"station"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1382
+#: scripts/scenario_57_shoreline.lua:2805
+#: scripts/scenario_57_shoreline.lua:3993
+msgctxt "scienceDescription-station"
+msgid "Autodoc components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1393
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We build and repair and provide components and upgrades for automated "
+"facilities designed for ships where a doctor cannot be a crew member "
+"(commonly called autodocs)"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1394
+#: scripts/scenario_57_shoreline.lua:2807
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Dr. Lipkin who pioneered some of the research and "
+"application around robot assisted surgery in the area of partial nephrectomy "
+"for renal tumors in the early 21st century on Earth"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1409
+#: scripts/scenario_57_shoreline.lua:3507
+#: scripts/scenario_57_shoreline.lua:3544
+msgctxt "scienceDescription-station"
+msgid "Load lifters and components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1420
+#: scripts/scenario_57_shoreline.lua:3545
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide load lifters and components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1421
+#: scripts/scenario_57_shoreline.lua:3546
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Ellen Ripley who made creative and effective use "
+"of one of our load lifters when defending her ship"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1439
+#: scripts/scenario_57_shoreline.lua:3177
+#: scripts/scenario_57_shoreline.lua:3396
+#: scripts/scenario_57_shoreline.lua:3618
+msgctxt "scienceDescription-station"
+msgid "Android components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1450
+#: scripts/scenario_57_shoreline.lua:3178
+msgctxt "stationGeneralInfo-comms"
+msgid "Supplier of android components, programming and service"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1451
+#: scripts/scenario_57_shoreline.lua:3179
+msgctxt "stationStory-comms"
+msgid ""
+"Named for Richard Deckard who inspired many of the sophisticated safety "
+"security algorithms now required for all androids"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1467
+#: scripts/scenario_57_shoreline.lua:3655
+msgctxt "scienceDescription-station"
+msgid "Automated weapons systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1479
+#: scripts/scenario_57_shoreline.lua:3656
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and create automated weapons systems to improve ship combat "
+"capability"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1495
+#: scripts/scenario_57_shoreline.lua:2958
+msgctxt "scienceDescription-station"
+msgid "Battery and software engineering"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1507
+#: scripts/scenario_57_shoreline.lua:2959
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide high quality high capacity batteries and specialized software for "
+"all shipboard systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1508
+#: scripts/scenario_57_shoreline.lua:2960
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after a fictional software engineer in a late 20th "
+"century movie depicting humanity unknowingly conquered by aliens and kept "
+"docile by software generated illusion"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1521
+#: scripts/scenario_57_shoreline.lua:4034
+msgctxt "scienceDescription-station"
+msgid "Nanotechnology research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1533
+#: scripts/scenario_57_shoreline.lua:4035
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide nanites and software for a variety of ship-board systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1534
+#: scripts/scenario_57_shoreline.lua:4036
+msgctxt "stationStory-comms"
+msgid ""
+"This station's name recognizes one of the first scientific researchers into "
+"nanotechnology, physicist Richard Feynman"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1550
+#: scripts/scenario_57_shoreline.lua:4075
+msgctxt "scienceDescription-station"
+msgid "Medical Research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1563
+#: scripts/scenario_57_shoreline.lua:4076
+msgctxt "stationGeneralInfo-comms"
+msgid "We research exotic diseases and other human medical conditions"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1564
+#: scripts/scenario_57_shoreline.lua:4077
+msgctxt "stationStory-comms"
+msgid ""
+"We continue the medical work started by William Worrall Mayo in the late "
+"19th century on Earth"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1571
+#: scripts/scenario_57_shoreline.lua:4557
+msgctxt "scienceDescription-station"
+msgid "Commerce and recreation"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1587
+#: scripts/scenario_57_shoreline.lua:4986
+msgctxt "scienceDescription-station"
+msgid "Biotech research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1611
+msgctxt "scienceDescription-station"
+msgid "Trading post"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1633
+#: scripts/scenario_57_shoreline.lua:3688
+msgctxt "scienceDescription-station"
+msgid "Logistics coordination"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1644
+#: scripts/scenario_57_shoreline.lua:3689
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We support the stations and ships in the area with planning and "
+"communication services"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1645
+#: scripts/scenario_57_shoreline.lua:3690
+msgctxt "stationStory-comms"
+msgid ""
+"We recognize the influence of Starfleet Captain James Tiberius Kirk in the "
+"23rd century in our station name"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1652
+#: scripts/scenario_57_shoreline.lua:4843
+msgctxt "scienceDescription-station"
+msgid "Stress Psychology Research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1676
+#: scripts/scenario_57_shoreline.lua:2842
+msgctxt "scienceDescription-station"
+msgid "Zero gravity sports and entertainment"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1719
+#: scripts/scenario_57_shoreline.lua:3322
+msgctxt "scienceDescription-station"
+msgid "Casino and Gambling"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1743
+#: scripts/scenario_57_shoreline.lua:3284
+msgctxt "scienceDescription-station"
+msgid "Xenopsychology training"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1754
+#: scripts/scenario_57_shoreline.lua:3285
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide classes and simulation to help train diverse species in how to "
+"relate to each other"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1755
+#: scripts/scenario_57_shoreline.lua:3286
+msgctxt "stationStory-comms"
+msgid ""
+"A continuation of the research initially conducted by Dr. Gennady Komov in "
+"the early 22nd century on Venus, supported by the application of these "
+"principles"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1773
+#: scripts/scenario_57_shoreline.lua:4945
+msgctxt "scienceDescription-station"
+msgid "Research Lab and Observatory"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1797
+#: scripts/scenario_57_shoreline.lua:4806
+msgctxt "scienceDescription-station"
+msgid "Textiles and fashion"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1837
+#: scripts/scenario_57_shoreline.lua:3470
+msgctxt "scienceDescription-station"
+msgid "Diplomatic training"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1848
+#: scripts/scenario_57_shoreline.lua:3471
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"The premeire academy for leadership and diplomacy training in the region"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:1849
+#: scripts/scenario_57_shoreline.lua:3472
+msgctxt "stationStory-comms"
+msgid ""
+"Established by the royal family so critical during the political upheaval era"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2109
+#: scripts/scenario_57_shoreline.lua:5019
+#: scripts/scenario_57_shoreline.lua:5051
+msgctxt "scienceDescription-station"
+msgid "Observatory"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2125
+#: scripts/scenario_57_shoreline.lua:2615
+#: scripts/scenario_57_shoreline.lua:3140
+msgctxt "scienceDescription-station"
+msgid "Impulse engine components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2136
+#: scripts/scenario_57_shoreline.lua:3141
+msgctxt "stationGeneralInfo-comms"
+msgid "We supply high quality impulse engines and parts for use aboard ships"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2137
+#: scripts/scenario_57_shoreline.lua:3142
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after the fictional engineer, Cyrus Smith created by "
+"19th century author Jules Verne"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2155
+#: scripts/scenario_57_shoreline.lua:3066
+msgctxt "scienceDescription-station"
+msgid "Robotic research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2167
+#: scripts/scenario_57_shoreline.lua:3067
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and provide robotic systems and components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2168
+#: scripts/scenario_57_shoreline.lua:3068
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after Dr. Susan Calvin who pioneered robotic "
+"behavioral research and programming"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2239
+msgctxt "scienceDescription-station"
+msgid "Training and Coordination"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2240
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We train naval cadets in routine and specialized functions aboard space "
+"vessels and coordinate naval activity throughout the sector"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2241
+msgctxt "stationStory-comms"
+msgid ""
+"The original station builders were fans of the late 20th century scientist "
+"and author Isaac Asimov. The station was initially named Foundation, but was "
+"later changed simply to Asimov. It started off as a stellar observatory, "
+"then became a supply stop and as it has grown has become an educational and "
+"coordination hub for the region"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2279
+msgctxt "scienceDescription-station"
+msgid "Warp and Impulse engine manufacturing"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2280
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We manufacture warp, impulse and jump engines for the human navy fleet as "
+"well as other independent clients on a contract basis"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2281
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the late 19th century astronaut as well as the "
+"fictionlized stations that followed. The station initially constructed "
+"entire space worthy vessels. In time, it transitioned into specializeing in "
+"propulsion systems."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2315
+msgctxt "scienceDescription-station"
+msgid "Warp drive components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2316
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide warp drive engines and components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2317
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after Chris Van Den Broeck who did some initial "
+"research into the possibility of warp drive in the late 20th century on Earth"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2355
+msgctxt "scienceDescription-station"
+msgid "Shielded circuitry fabrication"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2356
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make a large variety of circuits for numerous ship systems shielded from "
+"sensor detection and external control interference"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2357
+msgctxt "stationStory-comms"
+msgid ""
+"Our station is named after the law which quantifies the amount of force with "
+"which stationary electrically charged particals repel or attact each other - "
+"a fundamental principle in the design of our circuits"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2396
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture sensor components and systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2397
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Tony Heyes the inventor of some of the earliest "
+"electromagnetic sensors in the mid 20th century on Earth in the United "
+"Kingdom to assist blind human mobility"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2432
+msgctxt "scienceDescription-station"
+msgid "Nanite supplier"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2433
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide nanites for various organic and non-organic systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2434
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after the nanotechnologist Hossam Haick from the early "
+"21st century on Earth in Israel"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2472
+msgctxt "scienceDescription-station"
+msgid "Energy beam components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2473
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture energy beam components and systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2474
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Theodore Maiman who researched and built the "
+"first laser in the mid 20th century on Earth"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2504
+#: scripts/scenario_57_shoreline.lua:4520
+msgctxt "scienceDescription-station"
+msgid "Gambling and resupply"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2505
+msgctxt "stationGeneralInfo-comms"
+msgid "The oldest station in the quadrant"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2578
+msgctxt "scienceDescription-station"
+msgid "Exobiology research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2579
+msgctxt "stationGeneralInfo-comms"
+msgid "We study recently discovered life forms not native to Earth"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2580
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after one of the early exobiologists from mid 20th "
+"century Earth, Dr. Stanley Miller"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2616
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture impulse engine components and systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2617
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Roger Shawyer who built the first prototype "
+"impulse engine in the early 21st century"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2654
+msgctxt "scienceDescription-station"
+msgid "Energy and particle beam components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2655
+msgctxt "stationGeneralInfo-comms"
+msgid "We fabricate general and specialized components for ship beam systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2656
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after Archimedes who, according to legend, used a "
+"series of adjustable focal length mirrors to focus sunlight on a Roman naval "
+"fleet invading Syracuse, setting fire to it"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2692
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"Only the largest market and trading location in twenty sectors. You can find "
+"your heart's desire here"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2693
+msgctxt "stationStory-comms"
+msgid ""
+"Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. "
+"Designed and built with trade and commerce in mind"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2731
+#: scripts/scenario_57_shoreline.lua:4371
+msgctxt "scienceDescription-station"
+msgid "Mining"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2732
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We mine nearby asteroids for precious minerals and process them for sale"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2733
+msgctxt "stationStory-comms"
+msgid ""
+"This station's name is inspired by a large gold mine on Earth in Indonesia. "
+"The station builders hoped to have a similar amount of minerals found "
+"amongst these asteroids"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2768
+msgctxt "scienceDescription-station"
+msgid "Observatory and stellar mapping"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2769
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We study the cosmos and map stellar phenomena. We also track moving "
+"asteroids. Look out! Just kidding"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2770
+msgctxt "stationStory-comms"
+msgid ""
+"Station named in honor of Charles Hayden whose philanthropy continued "
+"astrophysical research and education on Earth in the early 20th century"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2843
+msgctxt "stationGeneralInfo-comms"
+msgid "Come take in a game or two or perhaps see a show"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2844
+msgctxt "stationStory-comms"
+msgid ""
+"Named after Madison Square Gardens from 21st century Earth, this station was "
+"designed to serve similar purposes in space - a venue for sports and "
+"entertainment"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2879
+msgctxt "scienceDescription-station"
+msgid "Shield components and research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2880
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and fabricate components for ship shield systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2881
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after the national research institution Rutherford "
+"Appleton Laboratory in the United Kingdom which conducted some preliminary "
+"research into the feasability of generating an energy shield in the late "
+"20th century"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2916
+msgctxt "scienceDescription-station"
+msgid "Shield and armor components and research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2917
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and make general and specialized components for ship shield and "
+"ship armor systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:2918
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after one of the earliest researchers in shield "
+"technology, Alexander Toohie back when it was considered impractical to "
+"construct shields due to the physics involved."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3211
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide transporters used aboard ships as well as the components for "
+"repair and maintenance"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3212
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the early 22nd century inventor of the "
+"transporter, Dr. Emory Erickson. This station is proud to have received the "
+"endorsement of Admiral Leonard McCoy"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3247
+msgctxt "scienceDescription-station"
+msgid "Commerce and gambling"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3248
+msgctxt "stationGeneralInfo-comms"
+msgid "Come play some games and shop. House take does not exceed 4 percent"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3397
+msgctxt "stationGeneralInfo-comms"
+msgid "Androids, their parts, maintenance and recylcling"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3398
+msgctxt "stationStory-comms"
+msgid ""
+"We named the station after the ground breaking android model produced by the "
+"Tyrell corporation"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3434
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and fabricate high quality transporters and transporter "
+"components for use aboard ships"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3435
+msgctxt "stationStory-comms"
+msgid ""
+"Miles O'Brien started this business after his experience as a transporter "
+"chief"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3508
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide load lifters and components for various ship systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3509
+msgctxt "stationStory-comms"
+msgid ""
+"Owens started off in the moisture vaporator business on Tattooine then "
+"branched out into load lifters based on acquisition of proprietary software "
+"and protocols. The station name recognizes the tragic loss of our founder to "
+"Imperial violence"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3581
+msgctxt "scienceDescription-station"
+msgid "Routine maintenance and entertainment"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3582
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"Stop by for repairs. Take in one of our juggling shows featuring the four-"
+"armed Skandars"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3583
+msgctxt "stationStory-comms"
+msgid ""
+"The nomadic Skandars have set up at this station to practice their "
+"entertainment and maintenance skills as well as build a community where "
+"Skandars can relax"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3619
+msgctxt "stationGeneralInfo-comms"
+msgid "We create androids and android components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3620
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Dr. Noonian Soong, the famous android researcher "
+"and builder"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3657
+msgctxt "stationStory-comms"
+msgid ""
+"Lost the history memory bank. Recovery efforts only brought back the phrase, "
+"'I'll be back'"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3725
+msgctxt "scienceDescription-station"
+msgid "Advanced material components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3726
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We create multiple types of advanced material components. Our most popular "
+"products are our filaments"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3727
+msgctxt "stationStory-comms"
+msgid ""
+"We learned several of our critical industrial processes from the Tokra race, "
+"so we honor our fortune by naming the station after them"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3759
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We work on all aspects of naval ship building and maintenance. Many of the "
+"naval models are researched, designed and built right here on this station. "
+"Our design goals seek to make the space faring experience as simple as "
+"possible given the tremendous capabilities of the modern naval vessel"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3919
+msgctxt "scienceDescription-station"
+msgid "Medical research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3920
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and treat exotic medical conditions"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3921
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the United States national medical research "
+"center based in Bethesda, Maryland on earth which was established in the mid "
+"20th century"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3994
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide components for automated medical machinery"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:3995
+msgctxt "stationStory-comms"
+msgid ""
+"The station is the evolution of the company that started automated "
+"pharmaceutical dispensing in the early 21st century on Earth in Finland"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4112
+msgctxt "scienceDescription-station"
+msgid "Optical components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4113
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We fabricate optical lenses and related equipment as well as fiber optic "
+"cabling and components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4114
+msgctxt "stationStory-comms"
+msgid ""
+"This station grew out of the Olympus company based on earth in the early "
+"21st century. It merged with Infinera, then bought several software "
+"comapnies before branching out into space based industry"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4149
+msgctxt "scienceDescription-station"
+msgid "Optic components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4150
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide optic components for various ship systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4151
+msgctxt "stationStory-comms"
+msgid ""
+"This station is an outgrowth of the Panduit corporation started in the mid "
+"20th century on Earth in the United States"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4190
+msgctxt "scienceDescription-station"
+msgid "Repulsor and tractor beam components"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4191
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make ship systems designed to push or pull other objects around in space"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4192
+msgctxt "stationStory-comms"
+msgid ""
+"Our station is named Shree after one of many tugboat manufacturers in the "
+"early 21st century on Earth in India. Tugboats serve a similar purpose for "
+"ocean-going vessels on earth as tractor and repulsor beams serve for space-"
+"going vessels today"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4292
+msgctxt "scienceDescription-station"
+msgid "Biotechnology research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4293
+msgctxt "stationGeneralInfo-comms"
+msgid "Merging the organic and inorganic through research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4294
+msgctxt "stationStory-comms"
+msgid ""
+"Continued from the Tandon school of engineering started on Earth in the "
+"early 21st century"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4372
+msgctxt "stationGeneralInfo-comms"
+msgid "We mine nearby asteroids for precious minerals"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4521
+msgctxt "stationGeneralInfo-comms"
+msgid "Relax and meet some interesting players"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4589
+msgctxt "scienceDescription-station"
+msgid "Xenopsychology research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4875
+msgctxt "scienceDescription-station"
+msgid "Low gravity research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:4913
+msgctxt "stationGeneralInfo-comms"
+msgid "Get your energy here! Grab a drink before you go!"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6696
+#: scripts/scenario_57_shoreline.lua:6697
+#: scripts/scenario_57_shoreline.lua:6698
+#: scripts/scenario_57_shoreline.lua:6703
+#: scripts/scenario_57_shoreline.lua:6704
+#: scripts/scenario_57_shoreline.lua:6705
+#: scripts/scenario_57_shoreline.lua:6710
+#: scripts/scenario_57_shoreline.lua:6711
+#: scripts/scenario_57_shoreline.lua:6712
+#: scripts/scenario_57_shoreline.lua:6717
+#: scripts/scenario_57_shoreline.lua:6718
+#: scripts/scenario_57_shoreline.lua:6719
+#: scripts/scenario_57_shoreline.lua:6724
+#: scripts/scenario_57_shoreline.lua:6725
+#: scripts/scenario_57_shoreline.lua:6726
+#: scripts/scenario_57_shoreline.lua:6731
+#: scripts/scenario_57_shoreline.lua:6732
+#: scripts/scenario_57_shoreline.lua:6733
+msgctxt "scienceDescription-artifact"
+msgid "Unusual object"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6696
+#: scripts/scenario_57_shoreline.lua:6703
+#: scripts/scenario_57_shoreline.lua:6710
+#: scripts/scenario_57_shoreline.lua:6717
+#: scripts/scenario_57_shoreline.lua:6724
+#: scripts/scenario_57_shoreline.lua:6731
+msgctxt "scienceDescription-artifact"
+msgid "Artifact with quantum biometric characteristics"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6697
+#: scripts/scenario_57_shoreline.lua:6704
+#: scripts/scenario_57_shoreline.lua:6711
+#: scripts/scenario_57_shoreline.lua:6718
+#: scripts/scenario_57_shoreline.lua:6725
+#: scripts/scenario_57_shoreline.lua:6732
+msgctxt "scienceDescription-artifact"
+msgid "Artifact with embedded chroniton particles"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6698
+#: scripts/scenario_57_shoreline.lua:6705
+#: scripts/scenario_57_shoreline.lua:6712
+#: scripts/scenario_57_shoreline.lua:6719
+#: scripts/scenario_57_shoreline.lua:6726
+#: scripts/scenario_57_shoreline.lua:6733
+msgctxt "scienceDescription-artifact"
+msgid "Artifact bridging two parallel universes"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6790
+msgctxt "scienceDescription-planet"
+msgid "Lush planet with only mild seasonal variations"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6819
+msgctxt "inventory-buttonRelay"
+msgid "Inventory"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6826
+msgctxt "inventory-buttonOperations"
+msgid "Inventory"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6835
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "%s Current cargo:"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6840
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "     %s: %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6846
+msgctxt "inventory-shipLog"
+msgid "     Empty\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6848
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "Available space: %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6929
+msgctxt "coolant-buttonEngineer"
+msgid "Get Coolant"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6934
+msgctxt "coolant-buttonEngineer+"
+msgid "Get Coolant"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6978
+msgctxt "coolant-tabEngineer"
+msgid "Gathering Coolant"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6981
+#, lua-format
+msgctxt "coolant-tabEngineer"
+msgid "Deploying Collectors %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:6984
+#, lua-format
+msgctxt "coolant-tabEngineer"
+msgid "Configuring Collectors %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7279
+msgctxt "station-comms"
+msgid "We are under attack! No time for chatting!"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7293
+msgctxt "station-comms"
+msgid ""
+"Good day, officer!\n"
+"What can we do for you today?\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7295
+msgctxt "station-comms"
+msgid "Welcome to our lovely station.\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7298
+msgctxt "station-comms"
+msgid ""
+"Forgive us if we seem a little distracted. We are carefully monitoring the "
+"enemies nearby."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7311
+msgctxt "ammo-comms"
+msgid "I need ordnance restocked"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7312
+msgctxt "ammo-comms"
+msgid "What type of ordnance?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7315
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s (%d rep each)"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7324
+#: scripts/scenario_57_shoreline.lua:7856
+msgctxt "orders-comms"
+msgid "What are my current orders?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7327
+#: scripts/scenario_57_shoreline.lua:7859
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"   %i Minutes remain in game"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7330
+#: scripts/scenario_57_shoreline.lua:7338
+#: scripts/scenario_57_shoreline.lua:7343
+#: scripts/scenario_57_shoreline.lua:7351
+#: scripts/scenario_57_shoreline.lua:7415
+#: scripts/scenario_57_shoreline.lua:7428
+#: scripts/scenario_57_shoreline.lua:7455
+#: scripts/scenario_57_shoreline.lua:7478
+#: scripts/scenario_57_shoreline.lua:7501
+#: scripts/scenario_57_shoreline.lua:7505
+#: scripts/scenario_57_shoreline.lua:7516
+#: scripts/scenario_57_shoreline.lua:7520
+#: scripts/scenario_57_shoreline.lua:7525
+#: scripts/scenario_57_shoreline.lua:7660
+#: scripts/scenario_57_shoreline.lua:7689
+#: scripts/scenario_57_shoreline.lua:7696
+#: scripts/scenario_57_shoreline.lua:7736
+#: scripts/scenario_57_shoreline.lua:7740
+#: scripts/scenario_57_shoreline.lua:7775
+#: scripts/scenario_57_shoreline.lua:7793
+#: scripts/scenario_57_shoreline.lua:7843
+#: scripts/scenario_57_shoreline.lua:7852
+#: scripts/scenario_57_shoreline.lua:7862
+#: scripts/scenario_57_shoreline.lua:7898
+#: scripts/scenario_57_shoreline.lua:7920
+#: scripts/scenario_57_shoreline.lua:7924
+#: scripts/scenario_57_shoreline.lua:7951
+#: scripts/scenario_57_shoreline.lua:7955
+#: scripts/scenario_57_shoreline.lua:8005
+#: scripts/scenario_57_shoreline.lua:8257
+#: scripts/scenario_57_shoreline.lua:8259
+#: scripts/scenario_57_shoreline.lua:8343
+#: scripts/scenario_57_shoreline.lua:8371
+#: scripts/scenario_57_shoreline.lua:8404
+#: scripts/scenario_57_shoreline.lua:8430
+#: scripts/scenario_57_shoreline.lua:8445
+#: scripts/scenario_57_shoreline.lua:8449
+#: scripts/scenario_57_shoreline.lua:8485
+#: scripts/scenario_57_shoreline.lua:8502
+#: scripts/scenario_57_shoreline.lua:8506
+#: scripts/scenario_57_shoreline.lua:8571
+#: scripts/scenario_57_shoreline.lua:8575
+#: scripts/scenario_57_shoreline.lua:8613
+#: scripts/scenario_57_shoreline.lua:8628
+#: scripts/scenario_57_shoreline.lua:8645
+#: scripts/scenario_57_shoreline.lua:8668
+#: scripts/scenario_57_shoreline.lua:8683
+#: scripts/scenario_57_shoreline.lua:8688
+#: scripts/scenario_57_shoreline.lua:8721
+#: scripts/scenario_57_shoreline.lua:8747
+#: scripts/scenario_57_shoreline.lua:8762
+#: scripts/scenario_57_shoreline.lua:8766
+#: scripts/scenario_57_shoreline.lua:8802
+#: scripts/scenario_57_shoreline.lua:8819
+#: scripts/scenario_57_shoreline.lua:8823
+#: scripts/scenario_57_shoreline.lua:8888
+#: scripts/scenario_57_shoreline.lua:8892
+#: scripts/scenario_57_shoreline.lua:8981
+#: scripts/scenario_57_shoreline.lua:8983
+#: scripts/scenario_57_shoreline.lua:9067
+#: scripts/scenario_57_shoreline.lua:9077
+#: scripts/scenario_57_shoreline.lua:9092
+#: scripts/scenario_57_shoreline.lua:9109
+#: scripts/scenario_57_shoreline.lua:9132
+#: scripts/scenario_57_shoreline.lua:9147
+#: scripts/scenario_57_shoreline.lua:9218
+#: scripts/scenario_57_shoreline.lua:9244
+#: scripts/scenario_57_shoreline.lua:9259
+#: scripts/scenario_57_shoreline.lua:9263
+#: scripts/scenario_57_shoreline.lua:9299
+#: scripts/scenario_57_shoreline.lua:9316
+#: scripts/scenario_57_shoreline.lua:9320
+#: scripts/scenario_57_shoreline.lua:9385
+#: scripts/scenario_57_shoreline.lua:9389
+msgid "Back"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7334
+msgctxt "station-comms"
+msgid "Tell me more about your station"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7335
+msgctxt "station-comms"
+msgid "What would you like to know?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7336
+msgctxt "stationGeneralInfo-comms"
+msgid "General information"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7341
+msgctxt "stationStory-comms"
+msgid "Station history"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7349
+msgctxt "gossip-comms"
+msgid "Gossip"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7365
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available for sale: quantity, cost in reputation\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7367
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i, %i\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7370
+msgctxt "trade-comms"
+msgid "Goods or components station will buy: price in reputation\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7372
+#: scripts/scenario_57_shoreline.lua:7381
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7375
+#, lua-format
+msgctxt "trade-comms"
+msgid "Current cargo aboard %s:\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7385
+msgctxt "trade-comms"
+msgid "     Empty\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7387
+#, lua-format
+msgctxt "trade-comms"
+msgid "Available Space: %i, Available Reputation: %i\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7390
+#: scripts/scenario_57_shoreline.lua:8455
+#: scripts/scenario_57_shoreline.lua:8512
+#: scripts/scenario_57_shoreline.lua:8534
+#: scripts/scenario_57_shoreline.lua:8581
+#: scripts/scenario_57_shoreline.lua:8772
+#: scripts/scenario_57_shoreline.lua:8829
+#: scripts/scenario_57_shoreline.lua:8851
+#: scripts/scenario_57_shoreline.lua:8898
+#: scripts/scenario_57_shoreline.lua:9269
+#: scripts/scenario_57_shoreline.lua:9326
+#: scripts/scenario_57_shoreline.lua:9348
+#: scripts/scenario_57_shoreline.lua:9395
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7391
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i, Rep: %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7393
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient cargo space for purchase"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7395
+#: scripts/scenario_57_shoreline.lua:7411
+msgctxt "needRep-comms"
+msgid ""
+"\n"
+"Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7397
+#: scripts/scenario_57_shoreline.lua:7441
+#: scripts/scenario_57_shoreline.lua:7464
+#: scripts/scenario_57_shoreline.lua:7487
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient station inventory"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7409
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"purchased"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7421
+#, lua-format
+msgctxt "trade-comms"
+msgid "Sell one %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7422
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Reputation price: %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7425
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"One sold"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7438
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade food for %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7439
+#: scripts/scenario_57_shoreline.lua:7462
+#: scripts/scenario_57_shoreline.lua:7485
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Quantity: %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7452
+#: scripts/scenario_57_shoreline.lua:7475
+#: scripts/scenario_57_shoreline.lua:7498
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Traded"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7461
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade medicine for %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7484
+#: scripts/scenario_57_shoreline.lua:8422
+#: scripts/scenario_57_shoreline.lua:8739
+#: scripts/scenario_57_shoreline.lua:9236
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7508
+#: scripts/scenario_57_shoreline.lua:8437
+#: scripts/scenario_57_shoreline.lua:8494
+#: scripts/scenario_57_shoreline.lua:8563
+#: scripts/scenario_57_shoreline.lua:8754
+#: scripts/scenario_57_shoreline.lua:8811
+#: scripts/scenario_57_shoreline.lua:8880
+#: scripts/scenario_57_shoreline.lua:9251
+#: scripts/scenario_57_shoreline.lua:9308
+#: scripts/scenario_57_shoreline.lua:9377
+msgctxt "trade-comms"
+msgid "Jettison cargo"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7509
+#: scripts/scenario_57_shoreline.lua:8438
+#: scripts/scenario_57_shoreline.lua:8495
+#: scripts/scenario_57_shoreline.lua:8564
+#: scripts/scenario_57_shoreline.lua:8755
+#: scripts/scenario_57_shoreline.lua:8812
+#: scripts/scenario_57_shoreline.lua:8881
+#: scripts/scenario_57_shoreline.lua:9252
+#: scripts/scenario_57_shoreline.lua:9309
+#: scripts/scenario_57_shoreline.lua:9378
+msgctxt "trade-comms"
+msgid "What would you like to jettison?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7515
+#: scripts/scenario_57_shoreline.lua:8444
+#: scripts/scenario_57_shoreline.lua:8501
+#: scripts/scenario_57_shoreline.lua:8570
+#: scripts/scenario_57_shoreline.lua:8761
+#: scripts/scenario_57_shoreline.lua:8818
+#: scripts/scenario_57_shoreline.lua:8887
+#: scripts/scenario_57_shoreline.lua:9258
+#: scripts/scenario_57_shoreline.lua:9315
+#: scripts/scenario_57_shoreline.lua:9384
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s jettisoned"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7523
+msgctxt "explainGoods-comms"
+msgid "No tutorial covered goods or cargo. Explain"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7524
+msgctxt "explainGoods-comms"
+msgid ""
+"Different types of cargo or goods may be obtained from stations, freighters "
+"or other sources. They go by one word descriptions such as dilithium, optic, "
+"warp, etc. Certain mission goals may require a particular type or types of "
+"cargo. Each player ship differs in cargo carrying capacity. Goods may be "
+"obtained by spending reputation points or by trading other types of cargo "
+"(typically food, medicine or luxury)"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7548
+msgctxt "upgrade-comms"
+msgid "Apply Marconi station beam range upgrade"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7550
+#: scripts/scenario_57_shoreline.lua:7574
+#: scripts/scenario_57_shoreline.lua:7585
+#: scripts/scenario_57_shoreline.lua:7596
+#: scripts/scenario_57_shoreline.lua:7609
+msgctxt "upgrade-comms"
+msgid "You already have the upgrade"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7564
+msgctxt "upgrade-comms"
+msgid "Your beam range has been improved by 25 percent"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7566
+#: scripts/scenario_57_shoreline.lua:7625
+msgctxt "upgrade-comms"
+msgid "Your ship type does not support a beam weapon upgrade."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7572
+msgctxt "upgrade-comms"
+msgid "Apply Nikhil Morrison impulse engine upgrade"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7578
+msgctxt "upgrade-comms"
+msgid "Your impulse engine speed has been improved by 25 percent"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7583
+msgctxt "upgrade-comms"
+msgid "Apply maneuver upgrade"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7589
+msgctxt "upgrade-comms"
+msgid "Your spin speed has been doubled"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7594
+msgctxt "upgrade-comms"
+msgid "Apply Phillip Organa shield upgrade"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7602
+msgctxt "upgrade-comms"
+msgid "Your shield capacity has been increased by 25 percent"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7607
+msgctxt "upgrade-comms"
+msgid "Apply Nefatha beam damage upgrade"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7623
+msgctxt "upgrade-comms"
+msgid "Your beam weapons damage has improved by 25 percent"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7643
+msgctxt "ammo-comms"
+msgid "You need to stay docked for that action."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7647
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7648
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7649
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7656
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7658
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7666
+#: scripts/scenario_57_shoreline.lua:7681
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7668
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7671
+#: scripts/scenario_57_shoreline.lua:7686
+#: scripts/scenario_57_shoreline.lua:7692
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7676
+msgctxt "ammo-comms"
+msgid "You can't afford as much as I'd like to give you"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7677
+msgctxt "ammo-comms"
+msgid "Get just one"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7683
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with one weapon charge.\n"
+"Put it to good use."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7706
+msgctxt "station-comms"
+msgid ""
+"Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7708
+msgctxt "station-comms"
+msgid ""
+"Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7711
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Be aware that if enemies in the area get much closer, we will be too busy to "
+"conduct business with you."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7714
+msgctxt "station-comms"
+msgid "I need information"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7716
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7717
+msgctxt "helpfullWarning-comms"
+msgid "See any enemies in your area?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7727
+#, lua-format
+msgctxt "helpfullWarning-comms"
+msgid "Yes, we see %i enemies within 30U"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7729
+msgctxt "helpfullWarning-comms"
+msgid "Yes, we see one enemy within 30U"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7733
+msgctxt "helpfullWarning-comms"
+msgid "No enemies within 30U"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7738
+msgctxt "helpfullWarning-comms"
+msgid "Not really"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7743
+msgctxt "ammo-comms"
+msgid "What ordnance do you have available for restock?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7749
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Nuke"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7753
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   EMP"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7757
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Homing"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7761
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Mine"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7765
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   HVLI"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7768
+msgctxt "ammo-comms"
+msgid "We have no ordnance available for restock"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7770
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following type of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7772
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following types of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7786
+msgctxt "trade-comms"
+msgid "What goods do you have available for sale or trade?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7788
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available: quantity, cost in reputation"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7790
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"   %14s: %2i, %3i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7796
+msgctxt "trade-comms"
+msgid "Where can I find particular goods?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7798
+msgctxt "trade-comms"
+msgid ""
+"Friendly stations often have food or medicine or both. Neutral stations may "
+"trade their goods for food, medicine or luxury."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7842
+#, lua-format
+msgctxt "trade-comms"
+msgid "Station %s in sector %s has %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7847
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"\n"
+"What goods are you interested in?\n"
+"I've heard about these:"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7849
+msgctxt "trade-comms"
+msgid " Beyond that, I have no knowledge of specific stations"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7902
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop? (%d rep)"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7904
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request backup."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7906
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7908
+#: scripts/scenario_57_shoreline.lua:7934
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "WP %d"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7916
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship toward WP %d"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7918
+#: scripts/scenario_57_shoreline.lua:7949
+msgctxt "needRep-comms"
+msgid "Not enough reputation!"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7928
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send reinforcements! (%d rep)"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7930
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request reinforcements."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7932
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the reinforcements?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7947
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to assist at WP %d"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:7988
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Provide %s, %s and %s for sensor upgrade"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8002
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Our upgraded sensors found an enemy base in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8022
+#, lua-format
+msgctxt "research-comms"
+msgid "Provide %s and %s for black hole research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8026
+msgctxt "research-comms"
+msgid ""
+"With the materials you supplied, we installed special sensors on your ship. "
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8027
+msgctxt "research-comms"
+msgid "We need you to get close to the black hole and run sensor sweeps. "
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8028
+msgctxt "research-comms"
+msgid "Your science console will have the controls when your ship is in range."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8029
+#, lua-format
+msgctxt "research-comms"
+msgid ""
+"\n"
+"The mobile black hole was last seen in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8056
+#, lua-format
+msgctxt "research-comms"
+msgid "Provide %s, %s and %s for beam damage research"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8061
+msgctxt "research-comms"
+msgid ""
+"Thanks. We completed our beam damage research. We transmitted our results to "
+"Vaiken. The next time you dock at Vaiken, you can upgrade your beam weapon "
+"damage."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8087
+#, lua-format
+msgctxt "research-comms"
+msgid "Provide %s, %s and %s for beam research project"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8092
+msgctxt "research-comms"
+msgid ""
+"With the goods you provided, we completed our advanced beam weapons "
+"prototype. We transmitted our research results to Vaiken. The next time you "
+"dock at Vaiken, you can have the range of your beam weapons upgraded."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8110
+#, lua-format
+msgctxt "research-comms"
+msgid "Provide %s and %s for impulse engine research project"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8114
+msgctxt "research-comms"
+msgid ""
+"[Nikhil Morrison] With the goods you provided, I completed the impulse "
+"engine research. I transmitted the research results to Vaiken. The next time "
+"you dock at Vaiken, you can have the speed of your impulse engines improved."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8136
+#, lua-format
+msgctxt "research-comms"
+msgid "Provide %s, %s and %s for maneuver research project"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8141
+msgctxt "research-comms"
+msgid ""
+"[Maneuver technician] With the goods you provided, we completed the maneuver "
+"research and transmitted the research results to Vaiken. The next time you "
+"dock at Vaiken, you can have your ship's maneuver speed improved."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8178
+#: scripts/scenario_57_shoreline.lua:8695
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8180
+#: scripts/scenario_57_shoreline.lua:8693
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8182
+msgctxt "shipAssist-comms"
+msgid "Hello?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8184
+msgctxt "shipAssist-comms"
+msgid "Greetings"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8203
+#: scripts/scenario_57_shoreline.lua:8927
+msgctxt "trade-comms"
+msgid "I need to talk to Charles Undercut"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8204
+#: scripts/scenario_57_shoreline.lua:8928
+msgctxt "trade-comms"
+msgid "[Charles Undercut] Haven't you destroyed my life enough?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8205
+#: scripts/scenario_57_shoreline.lua:8929
+msgctxt "trade-comms"
+msgid "We need the information you obtained about enemies in this region"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8206
+#: scripts/scenario_57_shoreline.lua:8930
+msgctxt "trade-comms"
+msgid ""
+"That will cost you something more than just pretty words. Got any luxury, "
+"gold or platinum goods?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8209
+#: scripts/scenario_57_shoreline.lua:8933
+msgctxt "trade-comms"
+msgid "Trade luxury for information"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8219
+#: scripts/scenario_57_shoreline.lua:8235
+#: scripts/scenario_57_shoreline.lua:8251
+#: scripts/scenario_57_shoreline.lua:8943
+#: scripts/scenario_57_shoreline.lua:8959
+#: scripts/scenario_57_shoreline.lua:8975
+#, lua-format
+msgctxt "trade-shipLog"
+msgid "enemy base identified in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8220
+#: scripts/scenario_57_shoreline.lua:8236
+#: scripts/scenario_57_shoreline.lua:8252
+#: scripts/scenario_57_shoreline.lua:8944
+#: scripts/scenario_57_shoreline.lua:8960
+#: scripts/scenario_57_shoreline.lua:8976
+#, lua-format
+msgctxt "trade-comms"
+msgid "I found an enemy base in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8225
+#: scripts/scenario_57_shoreline.lua:8949
+msgctxt "trade-comms"
+msgid "Trade gold for information"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8241
+#: scripts/scenario_57_shoreline.lua:8965
+msgctxt "trade-comms"
+msgid "Trade platinum for information"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8272
+#: scripts/scenario_57_shoreline.lua:8996
+msgctxt "trade-comms"
+msgid "We need you to hand over Annette Sporisky"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8273
+#: scripts/scenario_57_shoreline.lua:8997
+msgctxt "trade-comms"
+msgid ""
+"Why should we? Despite what you may have heard, she is not related to this "
+"freighter's owner. "
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8274
+#: scripts/scenario_57_shoreline.lua:8998
+msgctxt "trade-comms"
+msgid ""
+"However, she's obviously valuable. I'll hand her over for something I can "
+"trade, "
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8275
+#: scripts/scenario_57_shoreline.lua:8999
+msgctxt "trade-comms"
+msgid "one of the following types of goods: "
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8306
+#: scripts/scenario_57_shoreline.lua:9030
+msgctxt "trade-comms"
+msgid " or "
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8310
+#: scripts/scenario_57_shoreline.lua:8321
+#: scripts/scenario_57_shoreline.lua:8332
+#: scripts/scenario_57_shoreline.lua:9034
+#: scripts/scenario_57_shoreline.lua:9045
+#: scripts/scenario_57_shoreline.lua:9056
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade %s for Annette Sporisky"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8314
+#: scripts/scenario_57_shoreline.lua:8325
+#: scripts/scenario_57_shoreline.lua:8336
+#: scripts/scenario_57_shoreline.lua:9038
+#: scripts/scenario_57_shoreline.lua:9049
+#: scripts/scenario_57_shoreline.lua:9060
+msgctxt "trade-comms"
+msgid "Annette Sporisky aboard"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8315
+#: scripts/scenario_57_shoreline.lua:8326
+#: scripts/scenario_57_shoreline.lua:8337
+#: scripts/scenario_57_shoreline.lua:8429
+#: scripts/scenario_57_shoreline.lua:8746
+#: scripts/scenario_57_shoreline.lua:9039
+#: scripts/scenario_57_shoreline.lua:9050
+#: scripts/scenario_57_shoreline.lua:9061
+#: scripts/scenario_57_shoreline.lua:9243
+msgctxt "trade-comms"
+msgid "Traded"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8359
+msgctxt "trade-comms"
+msgid "How's your family?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8359
+msgctxt "trade-comms"
+msgid "Pretty good."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8359
+msgctxt "trade-comms"
+msgid "All healthy."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8359
+msgctxt "trade-comms"
+msgid "I love 'em, but they bug me."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8360
+msgctxt "trade-comms"
+msgid "How's business?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8360
+msgctxt "trade-comms"
+msgid "Not bad."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8360
+msgctxt "trade-comms"
+msgid "I'm making a fortune out here."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8360
+msgctxt "trade-comms"
+msgid "Could be better."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8360
+msgctxt "trade-comms"
+msgid "The pirates make it hard."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8361
+msgctxt "trade-comms"
+msgid "Made any interesting contacts?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8361
+msgctxt "trade-comms"
+msgid "Made a couple."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8361
+msgctxt "trade-comms"
+msgid "Not this week."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8361
+msgctxt "trade-comms"
+msgid "Met the friendliest alien the other day. Purchased all my cargo."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8362
+msgctxt "trade-comms"
+msgid "What have you been up to?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8362
+msgctxt "trade-comms"
+msgid "Oh, the usual."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8362
+msgctxt "trade-comms"
+msgid "About 2 meters."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8362
+msgctxt "trade-comms"
+msgid "Not much."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8362
+msgctxt "trade-comms"
+msgid "Trying to stay alive, mostly."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8383
+#: scripts/scenario_57_shoreline.lua:8700
+#: scripts/scenario_57_shoreline.lua:9197
+msgctxt "trade-comms"
+msgid "Do you have cargo you might sell?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8385
+#: scripts/scenario_57_shoreline.lua:8702
+#: scripts/scenario_57_shoreline.lua:9199
+msgctxt "trade-comms"
+msgid "We've got "
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8389
+#: scripts/scenario_57_shoreline.lua:8706
+#: scripts/scenario_57_shoreline.lua:9203
+msgctxt "trade-comms"
+msgid ", "
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8397
+#: scripts/scenario_57_shoreline.lua:8714
+#: scripts/scenario_57_shoreline.lua:9211
+msgctxt "trade-comms"
+msgid "nothing"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8402
+#: scripts/scenario_57_shoreline.lua:8719
+#: scripts/scenario_57_shoreline.lua:9216
+msgctxt "trade-comms"
+msgid "Where are you headed?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8466
+#: scripts/scenario_57_shoreline.lua:8523
+#: scripts/scenario_57_shoreline.lua:8545
+#: scripts/scenario_57_shoreline.lua:8592
+#: scripts/scenario_57_shoreline.lua:8783
+#: scripts/scenario_57_shoreline.lua:8840
+#: scripts/scenario_57_shoreline.lua:8862
+#: scripts/scenario_57_shoreline.lua:8909
+#: scripts/scenario_57_shoreline.lua:9280
+#: scripts/scenario_57_shoreline.lua:9337
+#: scripts/scenario_57_shoreline.lua:9359
+#: scripts/scenario_57_shoreline.lua:9406
+msgctxt "trade-comms"
+msgid "Purchased"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8468
+#: scripts/scenario_57_shoreline.lua:8525
+#: scripts/scenario_57_shoreline.lua:8547
+#: scripts/scenario_57_shoreline.lua:8594
+#: scripts/scenario_57_shoreline.lua:8785
+#: scripts/scenario_57_shoreline.lua:8842
+#: scripts/scenario_57_shoreline.lua:8864
+#: scripts/scenario_57_shoreline.lua:8911
+#: scripts/scenario_57_shoreline.lua:9282
+#: scripts/scenario_57_shoreline.lua:9339
+#: scripts/scenario_57_shoreline.lua:9361
+#: scripts/scenario_57_shoreline.lua:9408
+msgctxt "needRep-comms"
+msgid "Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8476
+#: scripts/scenario_57_shoreline.lua:8793
+#: scripts/scenario_57_shoreline.lua:9290
+msgctxt "trade-comms"
+msgid "What do you want?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8479
+#, lua-format
+msgctxt "trade-comms"
+msgid "Where are you headed? (cost: %i reputation)"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8481
+#: scripts/scenario_57_shoreline.lua:8798
+#: scripts/scenario_57_shoreline.lua:9295
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8555
+#: scripts/scenario_57_shoreline.lua:8872
+#: scripts/scenario_57_shoreline.lua:9369
+msgctxt "trade-comms"
+msgid "Why are you bothering me?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8610
+#: scripts/scenario_57_shoreline.lua:9074
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8612
+#: scripts/scenario_57_shoreline.lua:9076
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8615
+#: scripts/scenario_57_shoreline.lua:9079
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8617
+#: scripts/scenario_57_shoreline.lua:9081
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %d"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8627
+#: scripts/scenario_57_shoreline.lua:9091
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %d."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8634
+#: scripts/scenario_57_shoreline.lua:9098
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8635
+#: scripts/scenario_57_shoreline.lua:9099
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8648
+#: scripts/scenario_57_shoreline.lua:9112
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8649
+#: scripts/scenario_57_shoreline.lua:9113
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8652
+#: scripts/scenario_57_shoreline.lua:9116
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8654
+#: scripts/scenario_57_shoreline.lua:9118
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8655
+#: scripts/scenario_57_shoreline.lua:9119
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Rear Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8658
+#: scripts/scenario_57_shoreline.lua:9122
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8664
+#: scripts/scenario_57_shoreline.lua:9128
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s Missiles: %d/%d\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8672
+#: scripts/scenario_57_shoreline.lua:9136
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8673
+#: scripts/scenario_57_shoreline.lua:9137
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8699
+#: scripts/scenario_57_shoreline.lua:9196
+msgctxt "trade-comms"
+msgid "Yes?"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:8796
+#: scripts/scenario_57_shoreline.lua:9293
+#, lua-format
+msgctxt "trade-comms"
+msgid "Where are you headed? (cost: %f reputation)"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9157
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9158
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9159
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9161
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9163
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9165
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9167
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9168
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9169
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9170
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9172
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9173
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9174
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9175
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9177
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9419
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9421
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9797
+#, lua-format
+msgctxt "-comms"
+msgid "[%s, Sector %s] There are enemies nearby"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9840
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Stations: %i\t survived: %i\t destroyed: %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9841
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"\n"
+"Friendly Stations: %i\t survived: %i\t destroyed: %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9842
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"\n"
+"Neutral Stations: %i\t survived: %i\t destroyed: %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9843
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"\n"
+"\n"
+"\n"
+"\n"
+"Required missions completed: %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9845
+msgctxt "msgMainscreen"
+msgid ""
+"\n"
+"Human Navy headquarters station Vaiken destroyed"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9849
+msgctxt "msgMainscreen"
+msgid "Ensign"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9851
+msgctxt "msgMainscreen"
+msgid "Lieutenant"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9853
+msgctxt "msgMainscreen"
+msgid "Commander"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9855
+msgctxt "msgMainscreen"
+msgid "Captain"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9857
+msgctxt "msgMainscreen"
+msgid "Admiral"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9859
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"\n"
+"Earned rank:  %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9861
+msgctxt "msgMainscreen"
+msgid "Not enough data from ship to gather statistics"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9922
+msgctxt "orders-shipLog"
+msgid ""
+"[Vaiken] As a naval operative, Charles Undercut discovered information about "
+"enemies in this region. Unfortunately, he was fired for his poor performance "
+"as a maintenance technician by his commanding officer before he could file a "
+"report. We need his information."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9924
+#, lua-format
+msgctxt "orders-shipLog"
+msgid ""
+"%s His last known location was station %s. Go find him and get that "
+"information"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9926
+#, lua-format
+msgctxt "orders-shipLog"
+msgid ""
+"%s His last known location was station %s in sector %s. Go find him and get "
+"that information"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9935
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Find Charles Undercut last reported at station %s who has information on "
+"enemy activity"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9937
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Find Charles Undercut last reported at station %s in sector %s who has "
+"information on enemy activity"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9972
+#, lua-format
+msgctxt "-shipLog"
+msgid ""
+"[%s] We haven't seen Charles Undercut in a while. He took a job as a "
+"maintenance technician aboard %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:9973
+#, lua-format
+msgctxt "-shipLog"
+msgid ""
+".\n"
+"Last we heard, that ship was working in the %s sector. He was desperate for "
+"a job."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10071
+#, lua-format
+msgctxt "-shipLog"
+msgid ""
+"[%s] we need help. Our maintenance technician says you might be interested. "
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10072
+#, lua-format
+msgctxt "-shipLog"
+msgid "We are in sector %s. Hurry."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10079
+#: scripts/scenario_57_shoreline.lua:10187
+#: scripts/scenario_57_shoreline.lua:10332
+#: scripts/scenario_57_shoreline.lua:10343
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Destroy enemy base in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10158
+msgctxt "orders-shipLog"
+msgid ""
+"[Vaiken] Jing Stettor's research on advanced sensor technology produced a "
+"breakthrough. To facilitate rapid deployment, we need you to gather the "
+"following:\n"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10163
+#, lua-format
+msgctxt "orders-shipLog"
+msgid "and take these items to station %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10164
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Gather the following:\n"
+"%s\n"
+"%s\n"
+"%s\n"
+"and take to station %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10166
+#, lua-format
+msgctxt "orders-shipLog"
+msgid "and take these items to station %s in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10167
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Gather the following:\n"
+"%s\n"
+"%s\n"
+"%s\n"
+"and take to station %s in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10236
+#, lua-format
+msgctxt "orders-shipLog"
+msgid "[Vaiken] Intelligence observed a spy for the enemy at station %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10238
+#, lua-format
+msgctxt "orders-shipLog"
+msgid "%s in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10240
+#, lua-format
+msgctxt "orders-shipLog"
+msgid "%s. Go find out what you can about this spy."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10242
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Investigate spy reported at station %s in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10244
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Investigate spy reported at station %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10288
+#, lua-format
+msgctxt "orders-shipLog"
+msgid ""
+"[%s] The girl you're looking for is Annette Sporisky. She boarded a "
+"freighter owned by her family: %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10289
+#, lua-format
+msgctxt "orders-shipLog"
+msgid ""
+".\n"
+"Last we heard, that ship was working in the %s sector."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10295
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Get the spy Annette Sporisky from transport %s and bring her to Vaiken "
+"station for questioning"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10329
+msgctxt "orders-shipLog"
+msgid "Annette Sporisky transferred to Vaiken station"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10331
+#: scripts/scenario_57_shoreline.lua:10342
+#, lua-format
+msgctxt "orders-shipLog"
+msgid "Spy identified enemy base in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10345
+msgctxt "orders-shipLog"
+msgid "The enemy base identified has already been destroyed"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10394
+#, lua-format
+msgctxt "orders-shipLog"
+msgid ""
+"[Emory] After years or research, we are near a breakthrough on our mobile "
+"black hole research. We need some assistance for the next phase. Please "
+"bring us some %s and %s type goods."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10395
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Bring %s and %s to station Emory"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10420
+msgctxt "orders-comms"
+msgid "Gather sensor data from black hole by close approach"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10441
+msgctxt "msgScience"
+msgid ""
+"When the ship gets close enough, a button to initiate black hole scan will "
+"become available. Click it to start scanning the black hole. The ship must "
+"remain within scanning distance for a full 30 seconds to complete the scan."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10445
+msgctxt "msgOperations"
+msgid ""
+"When the ship gets close enough, a button to initiate black hole scan will "
+"become available. Click it to start scanning the black hole. The ship must "
+"remain within scanning distance for a full 30 seconds to complete the scan."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10468
+msgctxt "-shipLog"
+msgid "[Scan technician] Black hole scan 50 percent complete"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10473
+msgctxt "-shipLog"
+msgid "[Scan technician] Black hole scan complete"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10504
+#, lua-format
+msgctxt "orders-shipLog"
+msgid ""
+"[Emory] With the scan data provided by %s, we can complete our research on "
+"mobile black holes. Thank you. Your assistance is greatly appreciated."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10512
+#, lua-format
+msgid "Grawp in range: %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10517
+msgctxt "blackHole-buttonScience"
+msgid "Scan black hole"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10522
+msgctxt "blackHole-buttonOperations"
+msgid "Scan black hole"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10527
+msgid "Grawp out of range"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10537
+msgctxt "blackHole-shipLog"
+msgid "[Scan technician] Black hole scan aborted before completion"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10565
+msgctxt "blackHole-shipLog"
+msgid "[Scan technician] Black hole scan started"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10604
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Optional: Gather and bring goods to station Marconi: %s, %s, %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10605
+#, lua-format
+msgctxt "orders-shipLog"
+msgid ""
+"[Station Marconi] Please bring us some components and materials for a "
+"project we are working on: %s, %s, %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10607
+msgctxt "orders-shipLog"
+msgid ". The project relates to improving the range of beam weapons"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10680
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Optional: Gather and bring goods to station Nefatha: %s, %s, %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10681
+#, lua-format
+msgctxt "orders-shipLog"
+msgid ""
+"[Station Nefatha] Please bring us some components and materials for a "
+"weapons project we are working on: %s, %s, %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10683
+msgctxt "orders-shipLog"
+msgid ""
+". The project relates to increasing the amount of damage that a beam weapon "
+"inflicts on the target"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10785
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Optional: Bring %s, %s and %s to station %s in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10786
+#, lua-format
+msgctxt "orders-shipLog"
+msgid ""
+"[Station %s, sector %s] Please bring us some goods to help us with a "
+"project: %s, %s, %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10788
+msgctxt "orders-shipLog"
+msgid ". The project relates to improved ship maneuverability"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10864
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Optional: Get Nikhil Morrison from station %s in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10865
+#, lua-format
+msgctxt "orders-shipLog"
+msgid ""
+"[Station %s] Research scientist Nikhil Morrison is close to a breakthrough "
+"on his project, but needs some assistance. Dock with us if you wish to help."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10882
+msgctxt "orders-shipLog"
+msgid "Nikhil Morrison is aboard"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10883
+#, lua-format
+msgctxt "orders-shipLog"
+msgid ""
+"He requests that you get %s and %s type goods and take him to station Cyrus"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10885
+msgctxt "orders-shipLog"
+msgid "He says his project relates to increasing ship impulse speeds"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10887
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Optional: Get %s and %s and transport Nikhil Morrison to station Cyrus"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10932
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Optional: Retrieve artifact with quantum biometric characteristics and bring "
+"to station Organa in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10933
+#, lua-format
+msgctxt "orders-shipLog"
+msgid ""
+"[Station Organa, sector %s] Research scientist Phillip Solo of the royal "
+"research academy finished the theoretical research portion of his "
+"dissertation. He needs an artifact with quantum biometric characteristics to "
+"apply his research. Please retrieve an artifact with quantum biometric "
+"characteristics and bring it to Organa station"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10935
+#, lua-format
+msgctxt "orders-shipLog"
+msgid ". Possible items to examine have been located in %s, %s and %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10986
+#, lua-format
+msgctxt "-shipLog"
+msgid ""
+"[Station Organa] We just received a report that an artifact with quantum "
+"biometric characteristics may have been observed in sector %s"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:10988
+msgctxt "-shipLog"
+msgid "Solo's research may have application for ship shield systems"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11013
+msgctxt "-shipLog"
+msgid "Artifact is aboard"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11017
+msgctxt "-shipLog"
+msgid ""
+"[Phillip Organa] Thanks for the artifact. I completed my research. Next time "
+"you dock with Vaiken, you can improve your shield effectiveness."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11040
+msgid "Shields:"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11050
+#, lua-format
+msgid " %i:%i/%i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11052
+#, lua-format
+msgid "Shield %i is critical "
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11066
+msgctxt "-shipLog"
+msgid "[Vaiken] Station shields have been damaged. "
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11070
+#: scripts/scenario_57_shoreline.lua:11072
+#, lua-format
+msgctxt "-shipLog"
+msgid "[Vaiken] Hull damage: %i out of %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11089
+msgctxt "-shipLog"
+msgid "[Vaiken] Station has been damaged"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11172
+#, lua-format
+msgid "%s %i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11174
+#, lua-format
+msgid "%s %i:%.2i"
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11193
+msgctxt "orders-shipLog"
+msgid ""
+"Intelligence has analyzed all the enemy activity in this area and has "
+"determined that there must be three enemy bases. Find these bases and "
+"destroy them."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11205
+msgctxt "orders-shipLog"
+msgid " You have already destroyed two of them."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11207
+msgctxt "orders-shipLog"
+msgid " You have already destroyed one of them."
+msgstr ""
+
+#: scripts/scenario_57_shoreline.lua:11209
+msgctxt "orders-comms"
+msgid ""
+"Defend bases in the area (human navy and independent) from enemy attack and "
+"destroy three enemy bases."
+msgstr ""

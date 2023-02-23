@@ -2265,7 +2265,7 @@ msgstr "Je pense que %s a déménagé."
 #: scripts/scenario_49_allies.lua:3985 scripts/scenario_49_allies.lua:4477
 msgctxt "orders-comms"
 msgid "What are my current orders?"
-msgstr "Ordres en cours"
+msgstr "Quels sont nos ordres en cours ?"
 
 #: scripts/scenario_49_allies.lua:3990 scripts/scenario_49_allies.lua:4482
 #, lua-format
@@ -2275,7 +2275,7 @@ msgid ""
 "   %i Minutes remain in game"
 msgstr ""
 "\n"
-"   %i minutes restantes "
+"   %i minutes restantes dans le jeu."
 
 #: scripts/scenario_49_allies.lua:4001 scripts/scenario_49_allies.lua:4017
 #, lua-format
@@ -3148,14 +3148,14 @@ msgid ""
 "\n"
 "Check back later, someone else may have better knowledge"
 msgstr ""
-" A part ça, je n'ai pas connaissance de stations spécifiques.\n"
+"A part ça, je n'ai pas connaissance de stations spécifiques.\n"
 "\n"
 "Revenez plus tard, quelqu'un d'autre en saura peut-être plus que moi."
 
 #: scripts/scenario_49_allies.lua:4553
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr " A part ça, je n'ai pas connaissance de stations spécifiques."
+msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 
 #: scripts/scenario_49_allies.lua:4555
 msgctxt "trade-comms"
@@ -3314,7 +3314,7 @@ msgstr "Monsieur, comment pouvons-nous vous assister ?"
 #: scripts/scenario_49_allies.lua:4794
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr "Défendez un marqueur."
+msgstr "Défendez un marqueur"
 
 #: scripts/scenario_49_allies.lua:4796
 msgctxt "shipAssist-comms"
@@ -3332,7 +3332,7 @@ msgstr "Quel marqueur devons-nous défendre ?"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend waypoint %i"
-msgstr "Défendez le marqueur %i."
+msgstr "Défendez le marqueur %i"
 
 #: scripts/scenario_49_allies.lua:4803
 #, lua-format
@@ -3622,7 +3622,7 @@ msgstr "Que voulez-vous ?"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %.1f reputation)"
-msgstr "Où allez-vous? (coût : %.1f réputation)"
+msgstr "Où allez-vous ? (coût : %.1f réputation)"
 
 #: scripts/scenario_49_allies.lua:5194
 msgctxt "trade-comms"

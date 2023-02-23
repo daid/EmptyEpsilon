@@ -1977,7 +1977,7 @@ msgstr "D'accord, bonne chance."
 #: scripts/scenario_53_escape.lua:3771 scripts/scenario_53_escape.lua:4199
 msgctxt "station-comms"
 msgid "Tell me more about your station"
-msgstr "Dites m'en plus à propos de votre station."
+msgstr "Dites m'en plus à propos de votre station"
 
 #: scripts/scenario_53_escape.lua:3772 scripts/scenario_53_escape.lua:4200
 msgctxt "station-comms"
@@ -2158,8 +2158,8 @@ msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr "Échanger Produits de luxe (luxury) contre %s"
 
-#: scripts/scenario_53_escape.lua:3948 scripts/scenario_53_escape.lua:4595
-#: scripts/scenario_53_escape.lua:4677
+#: scripts/scenario_53_escape.lua:3948 scripts/scenario_53_escape.lua:4399
+#: scripts/scenario_53_escape.lua:4595 scripts/scenario_53_escape.lua:4677
 msgctxt "trade-comms"
 msgid "Jettison cargo"
 msgstr "Larguer la cargaison"
@@ -2311,7 +2311,7 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:4089
 msgctxt "station-comms"
 msgid "I need information"
-msgstr "j'aurai besoin d'informations."
+msgstr "j'aurai besoin d'informations"
 
 #: scripts/scenario_53_escape.lua:4090
 msgctxt "station-comms"
@@ -2547,7 +2547,7 @@ msgstr "Monsieur, comment pouvons-nous vous assister ?"
 #: scripts/scenario_53_escape.lua:4373 scripts/scenario_53_escape.lua:4560
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
-msgstr "Avez-vous des marchandises que vous pourriez vendre ?"
+msgstr "Auriez-vous des marchandises à vendre ?"
 
 #: scripts/scenario_53_escape.lua:4375 scripts/scenario_53_escape.lua:4562
 msgctxt "trade-comms"
@@ -2562,12 +2562,12 @@ msgstr ", "
 #: scripts/scenario_53_escape.lua:4387 scripts/scenario_53_escape.lua:4574
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr "Rien"
+msgstr "Rien du tout."
 
 #: scripts/scenario_53_escape.lua:4426 scripts/scenario_53_escape.lua:4622
 msgctxt "trade-comms"
 msgid "Traded"
-msgstr "Négociés"
+msgstr "Échangé"
 
 #: scripts/scenario_53_escape.lua:4448 scripts/scenario_53_escape.lua:4644
 #: scripts/scenario_53_escape.lua:4711 scripts/scenario_53_escape.lua:4743
@@ -2812,7 +2812,7 @@ msgstr "Que voulez-vous ?"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous? (coût : %f réputation)"
+msgstr "Où allez-vous ? (coût : %f réputation)"
 
 #: scripts/scenario_53_escape.lua:4662
 msgctxt "needRep-comms"

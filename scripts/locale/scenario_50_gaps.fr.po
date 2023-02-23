@@ -1514,7 +1514,7 @@ msgid ""
 "   %i Minutes remain in game"
 msgstr ""
 "\n"
-"   %i minutes restantes"
+"   %i minutes restantes dans le jeu."
 
 #: scripts/scenario_50_gaps.lua:2370 scripts/scenario_50_gaps.lua:2994
 msgctxt "minefield-comms"
@@ -2249,7 +2249,7 @@ msgstr ""
 #: scripts/scenario_50_gaps.lua:2872
 msgctxt "station-comms"
 msgid "I need information"
-msgstr "j'aurai besoin d'informations."
+msgstr "j'aurai besoin d'informations"
 
 #: scripts/scenario_50_gaps.lua:2873
 msgctxt "station-comms"
@@ -2382,14 +2382,14 @@ msgid ""
 "\n"
 "Check back later, someone else may have better knowledge"
 msgstr ""
-" A part ça, je n'ai pas connaissance de stations spécifiques.\n"
+"A part ça, je n'ai pas connaissance de stations spécifiques.\n"
 "\n"
 "Revenez plus tard, quelqu'un d'autre en saura peut-être plus que moi."
 
 #: scripts/scenario_50_gaps.lua:2965
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr " A part ça, je n'ai pas connaissance de stations spécifiques."
+msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 
 #: scripts/scenario_50_gaps.lua:2967
 msgctxt "trade-comms"
@@ -2529,7 +2529,7 @@ msgstr "Monsieur, comment pouvons-nous vous assister ?"
 #: scripts/scenario_50_gaps.lua:3271
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr "Défendez un marqueur."
+msgstr "Défendez un marqueur"
 
 #: scripts/scenario_50_gaps.lua:3273
 msgctxt "shipAssist-comms"
@@ -2547,7 +2547,7 @@ msgstr "Quel marqueur devons-nous défendre ?"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
-msgstr "Défendez le marqueur %d."
+msgstr "Défendez le marqueur %d"
 
 #: scripts/scenario_50_gaps.lua:3280
 #, lua-format
@@ -2789,7 +2789,7 @@ msgstr "Que voulez-vous ?"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous? (coût : %f réputation)"
+msgstr "Où allez-vous ? (coût : %f réputation)"
 
 #: scripts/scenario_50_gaps.lua:3507
 msgctxt "trade-comms"
