@@ -33,21 +33,11 @@ extern PVector<SpaceObject> space_object_list;
 
 class SpaceObject : public MultiplayerObject
 {
-    struct
-    {
-        string not_scanned;
-        string friend_of_foe_identified;
-        string simple_scan;
-        string full_scan;
-    } object_description;
-
 public:
     sp::ecs::Entity entity; //NOTE: On clients be careful, the Entity+components might be destroyed before the SpaceObject! Always check if this exists before using it.
 
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
     virtual ~SpaceObject();
-
-    bool hasWeight() { return has_weight; }
 
     void setRadarSignatureInfo(float grav, float elec, float bio) {
         if (entity) entity.addComponent<RawRadarSignatureInfo>(grav, elec, bio);
@@ -57,40 +47,16 @@ public:
     float getRadarSignatureBiological() { auto radar_signature = entity.getComponent<RawRadarSignatureInfo>(); if (!radar_signature) return 0.0; return radar_signature->biological; }
     virtual ERadarLayer getRadarLayer() const { return ERadarLayer::Default; }
 
-    string getDescription(ScanState::State state)
-    {
-        switch(state)
-        {
-        case ScanState::State::NotScanned: return object_description.not_scanned;
-        case ScanState::State::FriendOrFoeIdentified: return object_description.friend_of_foe_identified;
-        case ScanState::State::SimpleScan: return object_description.simple_scan;
-        case ScanState::State::FullScan: return object_description.full_scan;
-        }
-        return object_description.full_scan;
-    }
+    string getDescription(ScanState::State state) { return ""; } //TODO
 
-    void setDescriptionForScanState(ScanState::State state, string description)
-    {
-        switch(state)
-        {
-        case ScanState::State::NotScanned: object_description.not_scanned = description; break;
-        case ScanState::State::FriendOrFoeIdentified: object_description.friend_of_foe_identified = description; break;
-        case ScanState::State::SimpleScan: object_description.simple_scan = description; break;
-        case ScanState::State::FullScan: object_description.full_scan = description; break;
-        }
-    }
+    void setDescriptionForScanState(ScanState::State state, string description) {} //TODO
+
     void setDescription(string description)
     {
         setDescriptions(description, description);
     }
 
-    void setDescriptions(string unscanned_description, string scanned_description)
-    {
-        object_description.not_scanned = unscanned_description;
-        object_description.friend_of_foe_identified = unscanned_description;
-        object_description.simple_scan = scanned_description;
-        object_description.full_scan = scanned_description;
-    }
+    void setDescriptions(string unscanned_description, string scanned_description) {} //TODO
 
     string getDescriptionFor(sp::ecs::Entity other)
     {
@@ -171,7 +137,6 @@ public:
 protected:
     virtual glm::mat4 getModelMatrix() const;
     ModelInfo model_info;
-    bool has_weight = true;
 };
 
 template<> void convert<DamageType>::param(lua_State* L, int& idx, DamageType& dt);

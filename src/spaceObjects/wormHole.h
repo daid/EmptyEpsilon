@@ -25,7 +25,6 @@ public:
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual void update(float delta) override;
-    virtual void collide(SpaceObject* target, float force) override;
     virtual ERadarLayer getRadarLayer() const override { return ERadarLayer::BackgroundObjects; }
 
     void setTargetPosition(glm::vec2 v);   /* Where to jump to */

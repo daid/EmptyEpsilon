@@ -4,6 +4,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/scanProbe.h"
 #include "scriptInterface.h"
+#include "ecs/query.h"
 #include "components/collision.h"
 #include "components/probe.h"
 #include "components/hacking.h"
@@ -212,34 +213,20 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
         bool near_friendly = false;
 
         // For each SpaceObject on the map...
-        foreach(SpaceObject, obj, space_object_list)
-        {
-            // Consider the object only if it is:
-            // - Any ShipTemplateBasedObject (ship or station)
-            // - A SpaceObject belonging to a friendly faction
-            // - The player's ship
-            // - A scan probe owned by the player's ship
-            // This check is duplicated from GuiRadarView::drawObjects.
-            P<ShipTemplateBasedObject> stb_obj = obj;
-
-            if (!stb_obj || (Faction::getRelation(my_spaceship, obj->entity) != FactionRelation::Friendly && obj->entity != my_spaceship))
+        if (auto target_transform = target.getComponent<sp::Transform>()) {
+            for(auto [entity, ssrr, transform] : sp::ecs::Query<ShareShortRangeRadar, sp::Transform>())
             {
-                P<ScanProbe> sp = obj;
-
-                if (!sp || sp->owner != my_spaceship)
-                {
+                if (Faction::getRelation(my_spaceship, entity) != FactionRelation::Friendly)
                     continue;
-                }
-            }
 
-            // Set the targetable radius to getShortRangeRadarRange() if the
-            // object's a ShipTemplateBasedObject. Otherwise, default to 5U.
-            float r = stb_obj ? stb_obj->getShortRangeRadarRange() : 5000.0f;
+                // Set the targetable radius to getShortRangeRadarRange() if the
+                // object's a ShipTemplateBasedObject. Otherwise, default to 5U.
+                float r = entity.getComponent<LongRangeRadar>() ? entity.getComponent<LongRangeRadar>()->short_range : 5000.0f;
 
-            // If the target is within the short-range radar range/5U of the
-            // object, consider it near a friendly object.
-            if (auto target_transform = target.getComponent<sp::Transform>()) {
-                if (glm::length2(obj->getPosition() - target_transform->getPosition()) < r * r)
+                // If the target is within the short-range radar range/5U of the
+                // object, consider it near a friendly object.
+                
+                if (glm::length2(transform.getPosition() - target_transform->getPosition()) < r * r)
                 {
                     near_friendly = true;
                     break;
@@ -278,12 +265,17 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
             info_faction->setValue(faction.locale_name);
         }
 
-        if (probe && my_spaceship && probe->owner == my_spaceship && probe->canBeTargetedBy(my_spaceship))
+        if (auto arl = entity.getComponent<AllowRadarLink>())
         {
-            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-            if (lrr)
-                link_to_science_button->setValue(lrr->linked_probe == probe->entity);
-            link_to_science_button->enable();
+            if (arl->owner == my_spaceship) {
+                auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+                if (lrr)
+                    link_to_science_button->setValue(lrr->radar_view_linked_entity == entity);
+                link_to_science_button->enable();
+            } else {
+                link_to_science_button->setValue(false);
+                link_to_science_button->disable();
+            }
         }
         else
         {

@@ -7,6 +7,7 @@
 #include "spaceship.h"
 #include "scriptInterface.h"
 #include "textureManager.h"
+#include "components/gravity.h"
 
 #include "glObjects.h"
 #include "shaderRegistry.h"
@@ -66,6 +67,12 @@ WormHole::WormHole()
         clouds[n].texture = irandom(1, 3);
         clouds[n].offset = glm::vec2(0, 0);
     }
+
+    if (entity) {
+        auto g = entity.getOrAddComponent<Gravity>();
+        g.damage = true;
+        g.range = DEFAULT_COLLISION_RADIUS;
+    }
 }
 
 void WormHole::draw3DTransparent()
@@ -124,45 +131,6 @@ void WormHole::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, flo
 void WormHole::update(float delta)
 {
     update_delta = delta;
-}
-
-void WormHole::collide(SpaceObject* target, float collision_force)
-{
-    if (update_delta == 0.0f)
-        return;
-
-    P<SpaceObject> obj = target;
-    if (!obj) return;
-    if (!obj->hasWeight()) { return; } // the object is not affected by gravitation
-
-    auto diff = getPosition() - target->getPosition();
-    float distance = glm::length(diff);
-    float force = (5000.0f * 5000.0f * FORCE_MULTIPLIER) / (distance * distance);
-
-    P<SpaceShip> spaceship = obj;
-
-    // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
-    if (spaceship)
-        spaceship->wormhole_alpha = ((distance / 5000.0f) * ALPHA_MULTIPLIER);
-
-    if (force > FORCE_MAX)
-    {
-        force = FORCE_MAX;
-        if (isServer())
-            target->setPosition( (target_position +
-                                  glm::vec2(random(-TARGET_SPREAD, TARGET_SPREAD), random(-TARGET_SPREAD, TARGET_SPREAD))));
-        if (on_teleportation.isSet())
-        {
-            on_teleportation.call<void>(P<WormHole>(this), obj);
-        }
-        if (spaceship)
-        {
-            spaceship->wormhole_alpha = 0.0;
-        }
-    }
-
-    // TODO: Escaping is impossible. Change setPosition to something Newtonianish.
-    target->setPosition(target->getPosition() + diff / distance * update_delta * force);
 }
 
 void WormHole::setTargetPosition(glm::vec2 v)

@@ -16,8 +16,6 @@ private:
     // Whether the probe has arrived to the target_position.
     bool has_arrived;
 public:
-    sp::ecs::Entity owner;
-
     ScriptSimpleCallback on_arrival;
     ScriptSimpleCallback on_expiration;
 

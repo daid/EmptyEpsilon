@@ -1168,10 +1168,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
 
             // TODO: Check if this probe is ours
             if (auto lrr = entity.getComponent<LongRangeRadar>()) {
-                auto old = lrr->linked_probe;
+                auto old = lrr->radar_view_linked_entity;
                 if (lrr->on_probe_link.isSet() && target)
                     lrr->on_probe_link.call<void>(entity, target);
-                lrr->linked_probe = target;
+                lrr->radar_view_linked_entity = target;
                 if (lrr->on_probe_unlink.isSet() && old)
                     lrr->on_probe_unlink.call<void>(entity, old);
             }

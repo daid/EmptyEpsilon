@@ -66,7 +66,6 @@ ScanProbe::ScanProbe()
     // Probe has not arrived yet.
     has_arrived = false;
 
-    registerMemberReplication(&owner, 0.5);
     registerMemberReplication(&probe_speed, 0.1);
     registerMemberReplication(&target_position, 0.1);
     registerMemberReplication(&lifetime, 60.0);
@@ -99,6 +98,7 @@ ScanProbe::ScanProbe()
     if (entity) {
         auto hull = entity.addComponent<Hull>();
         hull.max = hull.current = 1;
+        entity.getOrAddComponent<ShareShortRangeRadar>();
     }
 }
 
@@ -220,7 +220,7 @@ void ScanProbe::setOwner(sp::ecs::Entity owner)
     auto f = owner.getComponent<Faction>();
     if (f)
         entity.getOrAddComponent<Faction>().entity = f->entity;
-    this->owner = owner;
+    entity.getOrAddComponent<AllowRadarLink>().owner = owner;
 }
 
 void ScanProbe::onArrival(ScriptSimpleCallback callback)

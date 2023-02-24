@@ -17,8 +17,6 @@ public:
 
     virtual ERadarLayer getRadarLayer() const override { return ERadarLayer::BackgroundObjects; }
 
-    virtual void collide(SpaceObject* target, float force) override;
-
     virtual string getExportLine() override { return "BlackHole():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
 

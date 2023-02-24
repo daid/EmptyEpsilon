@@ -29,6 +29,15 @@ public:
     void setStateFor(sp::ecs::Entity entity, State state);
 };
 
+class ScienceDescription
+{
+public:
+    string not_scanned;
+    string friend_of_foe_identified;
+    string simple_scan;
+    string full_scan;
+};
+
 class ScienceScanner
 {
 public:

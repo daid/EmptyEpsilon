@@ -289,22 +289,17 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sp::RenderTarget& renderer)
     {
         float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-        foreach(SpaceObject, obj, space_object_list)
+        for(auto [entity, ssrr, transform] : sp::ecs::Query<ShareShortRangeRadar, sp::Transform>())
         {
-            P<ShipTemplateBasedObject> stb_obj = obj;
-
-            if (stb_obj && (Faction::getRelation(my_spaceship, obj->entity) == FactionRelation::Friendly || obj->entity == my_spaceship))
+            if (Faction::getRelation(my_spaceship, entity) != FactionRelation::Friendly)
+                continue;
+            if (auto lrr = entity.getComponent<LongRangeRadar>())
             {
-                auto r = stb_obj->getShortRangeRadarRange() * scale;
-                renderer.fillCircle(worldToScreen(obj->getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
-            }
-
-            P<ScanProbe> sp = obj;
-
-            if (sp && sp->owner == my_spaceship)
-            {
+                auto r = lrr->short_range * scale;
+                renderer.fillCircle(worldToScreen(transform.getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
+            } else {
                 auto r = 5000.f * scale;
-                renderer.fillCircle(worldToScreen(obj->getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
+                renderer.fillCircle(worldToScreen(transform.getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
             }
         }
     }
@@ -626,21 +621,14 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
             // - The player's ship
             // - A scan probe owned by the player's ship
             // This check is duplicated in RelayScreen::onDraw.
-            P<ShipTemplateBasedObject> stb_obj = obj;
-
-            if (!stb_obj || (Faction::getRelation(my_spaceship, obj->entity) != FactionRelation::Friendly && obj->entity != my_spaceship))
-            {
-                P<ScanProbe> sp = obj;
-
-                if (!sp || sp->owner != my_spaceship)
-                {
-                    continue;
-                }
-            }
+            if (!obj->entity.hasComponent<ShareShortRangeRadar>())
+                continue;
+            if (Faction::getRelation(my_spaceship, obj->entity) != FactionRelation::Friendly)
+                continue;
 
             // Set the radius to reveal as getShortRangeRadarRange() if the
             // object's a ShipTemplateBasedObject. Otherwise, default to 5U.
-            float r = stb_obj ? stb_obj->getShortRangeRadarRange() : 5000.0f;
+            float r = obj->entity.getComponent<LongRangeRadar>() ? obj->entity.getComponent<LongRangeRadar>()->short_range : 5000.0f;
 
             // Query for objects within short-range radar/5U of this object.
             auto position = obj->getPosition();

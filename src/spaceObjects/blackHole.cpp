@@ -6,6 +6,7 @@
 #include "main.h"
 #include "textureManager.h"
 #include "components/radarblock.h"
+#include "components/gravity.h"
 
 #include "scriptInterface.h"
 #include "glObjects.h"
@@ -38,6 +39,7 @@ BlackHole::BlackHole()
 
     if (entity) {
         entity.getOrAddComponent<NeverRadarBlocked>();
+        entity.getOrAddComponent<Gravity>().damage = true;
     }
 }
 
@@ -78,38 +80,4 @@ void BlackHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
     float size = 5000.0f * scale * 2;
     renderer.drawSprite("radar/blackHole.png", position, size, glm::u8vec4(64, 64, 255, 255));
     renderer.drawSprite("radar/blackHole.png", position, size, glm::u8vec4(0, 0, 0, 255));
-}
-
-void BlackHole::collide(SpaceObject* target, float collision_force)
-{
-    if (update_delta == 0.0f)
-        return;
-
-    P<SpaceObject> obj = target;
-    if (!obj) return;
-    if (!obj->hasWeight()) { return; } // the object is not affected by gravitation
-
-    auto diff = getPosition() - target->getPosition();
-    float distance = glm::length(diff);
-    float force = (5000.0f * 5000.0f * 50.0f) / (distance * distance);
-    DamageInfo info({}, DamageType::Kinetic, getPosition());
-    if (force > 10000.0f)
-    {
-        force = 10000.0f;
-        if (isServer())
-        {
-            obj->takeDamage(100000.0, info); //try to destroy the object by inflicting a huge amount of damage
-            if (target)
-            {
-                target->destroy();
-                return;
-            }
-        }
-    }
-    if (force > 100.0f && isServer())
-    {
-        obj->takeDamage(force * update_delta / 10.0f, info);
-    }
-    if (!obj) {return;}
-    obj->setPosition(obj->getPosition() + diff / distance * update_delta * force);
 }

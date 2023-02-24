@@ -459,10 +459,6 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
 : ShipTemplateBasedObject(50, multiplayerClassName, multiplayer_significant_range)
 {
-    wormhole_alpha = 0.f;
-
-    registerMemberReplication(&wormhole_alpha, 0.5f);
-
     // Ships can have dynamic signatures. Initialize a default baseline value
     // from which clients derive the dynamic signature on update.
     setRadarSignatureInfo(0.05f, 0.2f, 0.2f);
@@ -564,7 +560,7 @@ void SpaceShip::draw3DTransparent()
 {
     if (!ship_template) return;
     ShipTemplateBasedObject::draw3DTransparent();
-
+/*  TODO
     auto jump = entity.getComponent<JumpDrive>();
     if ((jump && jump->delay > 0.0f) ||
         (wormhole_alpha > 0.0f))
@@ -575,6 +571,7 @@ void SpaceShip::draw3DTransparent()
         float alpha = 1.0f - (delay / 10.0f);
         model_info.renderOverlay(getModelMatrix(), textureManager.getTexture("texture/electric_sphere_texture.png"), alpha);
     }
+    */
 }
 
 void SpaceShip::updateDynamicRadarSignature()

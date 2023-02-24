@@ -30,7 +30,6 @@ REGISTER_MULTIPLAYER_CLASS(ElectricExplosionEffect, "ElectricExplosionEffect");
 ElectricExplosionEffect::ElectricExplosionEffect()
 : SpaceObject(1000.0, "ElectricExplosionEffect")
 {
-    has_weight = false;
     on_radar = false;
     size = 1.f;
 

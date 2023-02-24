@@ -24,8 +24,6 @@ class SpaceShip : public ShipTemplateBasedObject
 public:
     constexpr static int max_frequency = 20;
 
-    float wormhole_alpha;    //Used for displaying the Warp-postprocessor
-
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
     virtual ~SpaceShip();
 

@@ -249,10 +249,6 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
 
     space_object_list.push_back(this);
 
-    registerMemberReplication(&object_description.not_scanned);
-    registerMemberReplication(&object_description.friend_of_foe_identified);
-    registerMemberReplication(&object_description.simple_scan);
-    registerMemberReplication(&object_description.full_scan);
     registerMemberReplication(&entity);
 }
 

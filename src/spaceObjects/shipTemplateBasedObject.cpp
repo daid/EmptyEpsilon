@@ -317,6 +317,8 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
             if (!ship_template->getSubClass().empty())
                 entity.getOrAddComponent<DockingPort>().dock_subclass = ship_template->getSubClass();
         }
+
+        entity.getOrAddComponent<ShareShortRangeRadar>();
     }
 
     ship_template->setCollisionData(this);

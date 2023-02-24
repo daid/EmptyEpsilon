@@ -186,9 +186,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     // Probe view button
     probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("button", "Probe View"), [this](bool value){
         auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-        if (value && lrr && lrr->linked_probe)
+        if (value && lrr && lrr->radar_view_linked_entity)
         {
-            auto transform = lrr->linked_probe.getComponent<sp::Transform>();
+            auto transform = lrr->radar_view_linked_entity.getComponent<sp::Transform>();
             if (transform) {
                 science_radar->hide();
                 probe_radar->show();
@@ -251,9 +251,9 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(lrr->long_range / view_distance, 1)}}));
     }
 
-    if (probe_view_button->getValue() && lrr->linked_probe)
+    if (probe_view_button->getValue() && lrr->radar_view_linked_entity)
     {
-        auto probe_transform = lrr->linked_probe.getComponent<sp::Transform>();
+        auto probe_transform = lrr->radar_view_linked_entity.getComponent<sp::Transform>();
         auto target_transform = targets.get().getComponent<sp::Transform>();
         if (!probe_transform || !target_transform || glm::length2(probe_transform->getPosition() - target_transform->getPosition()) > 5000.0f * 5000.0f)
             targets.clear();
@@ -282,10 +282,10 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     for(int n = 0; n < ShipSystem::COUNT; n++)
         info_system[n]->setValue("-")->hide();
 
-    if (lrr->linked_probe)
+    if (lrr->radar_view_linked_entity)
     {
         probe_view_button->enable();
-        auto probe_transform = lrr->linked_probe.getComponent<sp::Transform>();
+        auto probe_transform = lrr->radar_view_linked_entity.getComponent<sp::Transform>();
         if (probe_transform)
             probe_radar->setViewPosition(probe_transform->getPosition());
     }
