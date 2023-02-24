@@ -39,7 +39,7 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     if (tweak_type == TW_Asteroid)
     {
         pages.push_back(new GuiAsteroidTweak(this));
-        list->addEntry(tr("tab","Asteroid"), "");
+        list->addEntry(tr("tab", "Asteroid"), "");
     }
 
     if (tweak_type == TW_Jammer)
@@ -50,6 +50,8 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
 
     if (tweak_type == TW_Ship || tweak_type == TW_Player || tweak_type == TW_Station)
     {
+        pages.push_back(new GuiTweakShipTemplateBasedObject(this));
+        list->addEntry(tr("tab", "Template-based"), "");
         pages.push_back(new GuiShipTweakShields(this));
         list->addEntry(tr("tab", "Shields"), "");
     }
@@ -113,7 +115,7 @@ void GuiObjectTweak::onDraw(sp::RenderTarget& renderer)
         hide();
 }
 
-GuiTweakShip::GuiTweakShip(GuiContainer* owner)
+GuiTweakShipTemplateBasedObject::GuiTweakShipTemplateBasedObject(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
     GuiElement* left_col = new GuiElement(this, "LEFT_LAYOUT");
@@ -124,6 +126,7 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
 
     // Left column
     // Set type name. Does not change ship type.
+    // Set type name. Does not change ship type.
     (new GuiLabel(left_col, "", tr("Type name:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
 
     type_name = new GuiTextEntry(left_col, "", "");
@@ -132,6 +135,98 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
         target->setTypeName(text);
     });
 
+    // Shares energy with docked bool
+    (new GuiLabel(left_col, "", tr("Docked ship services:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    shares_energy_with_docked_toggle = new GuiToggleButton(left_col, "", tr("Shares energy"), [this](bool value) {
+        target->setSharesEnergyWithDocked(value);
+    });
+    shares_energy_with_docked_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Repairs docked ships bool
+    repairs_docked_toggle = new GuiToggleButton(left_col, "", tr("Repairs ships"), [this](bool value) {
+        target->setRepairDocked(value);
+    });
+    repairs_docked_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Restocks player scan probes bool
+    restocks_scan_probes_toggle = new GuiToggleButton(left_col, "", tr("Restocks scan probes"), [this](bool value) {
+        target->setRestocksScanProbes(value);
+    });
+    restocks_scan_probes_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Restocks cpuship weapons bool
+    restocks_cpuship_weapons_toggle = new GuiToggleButton(left_col, "", tr("Restocks cpuship missiles"), [this](bool value) {
+        target->setRestocksMissilesDocked(value);
+    });
+    restocks_cpuship_weapons_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Right column
+    // Hull max and state sliders
+    (new GuiLabel(right_col, "", tr("Hull max:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    hull_max_slider = new GuiSlider(right_col, "", 0.0, 1000, 0.0, [this](float value) {
+        target->hull_max = round(value);
+        target->hull_strength = std::min(target->hull_strength, target->hull_max);
+    });
+    hull_max_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", tr("Hull current:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    hull_slider = new GuiSlider(right_col, "", 0.0, 1000, 0.0, [this](float value) {
+        target->hull_strength = std::min(roundf(value), target->hull_max);
+    });
+    hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Can be destroyed bool
+    can_be_destroyed_toggle = new GuiToggleButton(right_col, "", tr("Could be destroyed"), [this](bool value) {
+        target->setCanBeDestroyed(value);
+    });
+    can_be_destroyed_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Radar ranges
+    (new GuiLabel(right_col, "", tr("Short-range radar range:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    short_range_radar_slider = new GuiSlider(right_col, "", 100.0, 20000.0, 0.0, [this](float value) {
+        target->setShortRangeRadarRange(value);
+    });
+    short_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", tr("Long-range radar range:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    long_range_radar_slider = new GuiSlider(right_col, "", 100.0, 100000.0, 0.0, [this](float value) {
+        target->setLongRangeRadarRange(value);
+    });
+    long_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+}
+
+void GuiTweakShipTemplateBasedObject::onDraw(sp::RenderTarget& renderer)
+{
+    type_name->setText(target->getTypeName());
+    shares_energy_with_docked_toggle->setValue(target->getSharesEnergyWithDocked());
+    repairs_docked_toggle->setValue(target->getRepairDocked());
+    restocks_scan_probes_toggle->setValue(target->getRestocksScanProbes());
+    restocks_cpuship_weapons_toggle->setValue(target->getRestocksMissilesDocked());
+    hull_slider->setValue(target->hull_strength);
+    hull_max_slider->setValue(target->hull_max);
+    can_be_destroyed_toggle->setValue(target->getCanBeDestroyed());
+    short_range_radar_slider->setValue(target->getShortRangeRadarRange());
+    long_range_radar_slider->setValue(target->getLongRangeRadarRange());
+}
+
+void GuiTweakShipTemplateBasedObject::open(P<SpaceObject> target)
+{
+    P<ShipTemplateBasedObject> object = target;
+    this->target = object;
+
+    hull_max_slider->clearSnapValues()->addSnapValue(object->ship_template->hull, 5.0f);
+}
+
+GuiTweakShip::GuiTweakShip(GuiContainer* owner)
+: GuiTweakPage(owner)
+{
+    GuiElement* left_col = new GuiElement(this, "LEFT_LAYOUT");
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+
+    GuiElement* right_col = new GuiElement(this, "RIGHT_LAYOUT");
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+
+    // Left column
     (new GuiLabel(left_col, "", tr("Impulse speed:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     impulse_speed_slider = new GuiSlider(left_col, "", 0.0, 250, 0.0, [this](float value) {
         target->impulse_max_speed = value;
@@ -150,13 +245,13 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
     });
     turn_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-    (new GuiLabel(left_col, "", tr("Jump Min Distance:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(left_col, "", tr("Jump min. distance:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     jump_min_distance_slider= new GuiSlider(left_col, "", 0.0, 100000, 0.0, [this](float value) {
         target->setJumpDriveRange(value,target->jump_drive_max_distance);
     });
     jump_min_distance_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-    (new GuiLabel(left_col, "", tr("Jump Max Distance:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(left_col, "", tr("Jump max distance:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     jump_max_distance_slider= new GuiSlider(left_col, "", 0.0, 100000, 0.0, [this](float value) {
         target->setJumpDriveRange(target->jump_drive_min_distance,value);
     });
@@ -167,27 +262,6 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
         target->setJumpDriveCharge(value);
     });
     jump_charge_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
-
-    // Right column
-    // Hull max and state sliders
-    (new GuiLabel(right_col, "", tr("Hull max:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
-    hull_max_slider = new GuiSlider(right_col, "", 0.0, 500, 0.0, [this](float value) {
-        target->hull_max = round(value);
-        target->hull_strength = std::min(target->hull_strength, target->hull_max);
-    });
-    hull_max_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
-
-    (new GuiLabel(right_col, "", tr("Hull current:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
-    hull_slider = new GuiSlider(right_col, "", 0.0, 500, 0.0, [this](float value) {
-        target->hull_strength = std::min(roundf(value), target->hull_max);
-    });
-    hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
-
-    // Can be destroyed bool
-    can_be_destroyed_toggle = new GuiToggleButton(right_col, "", tr("Could be destroyed"), [this](bool value) {
-        target->setCanBeDestroyed(value);
-    });
-    can_be_destroyed_toggle->setSize(GuiElement::GuiSizeMax, 40);
 
     // Warp and jump drive toggles
     (new GuiLabel(right_col, "", tr("tweak_ship", "Special drives:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
@@ -200,37 +274,18 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
         target->setJumpDrive(value);
     });
     jump_toggle->setSize(GuiElement::GuiSizeMax, 40);
-
-    // Radar ranges
-    (new GuiLabel(right_col, "", tr("Short-range radar range:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
-    short_range_radar_slider = new GuiSlider(right_col, "", 100.0, 20000.0, 0.0, [this](float value) {
-        target->setShortRangeRadarRange(value);
-    });
-    short_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
-
-    (new GuiLabel(right_col, "", tr("Long-range radar range:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
-    long_range_radar_slider = new GuiSlider(right_col, "", 100.0, 100000.0, 0.0, [this](float value) {
-        target->setLongRangeRadarRange(value);
-    });
-    long_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 }
 
 void GuiTweakShip::onDraw(sp::RenderTarget& renderer)
 {
-    hull_slider->setValue(target->hull_strength);
     jump_charge_slider->setValue(target->getJumpDriveCharge());
     jump_min_distance_slider->setValue(target->jump_drive_min_distance);
     jump_max_distance_slider->setValue(target->jump_drive_max_distance);
-    type_name->setText(target->getTypeName());
     warp_toggle->setValue(target->has_warp_drive);
     jump_toggle->setValue(target->hasJumpDrive());
     impulse_speed_slider->setValue(target->impulse_max_speed);
     impulse_reverse_speed_slider->setValue(target->impulse_max_reverse_speed);
     turn_speed_slider->setValue(target->turn_speed);
-    hull_max_slider->setValue(target->hull_max);
-    can_be_destroyed_toggle->setValue(target->getCanBeDestroyed());
-    short_range_radar_slider->setValue(target->getShortRangeRadarRange());
-    long_range_radar_slider->setValue(target->getLongRangeRadarRange());
 }
 
 void GuiTweakShip::open(P<SpaceObject> target)
@@ -240,9 +295,7 @@ void GuiTweakShip::open(P<SpaceObject> target)
 
     impulse_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->impulse_speed, 5.0f);
     impulse_reverse_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->impulse_reverse_speed, 5.0f);
-    turn_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->turn_speed, 1.0f);
-    hull_max_slider->clearSnapValues()->addSnapValue(ship->ship_template->hull, 5.0f);
-}
+    turn_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->turn_speed, 1.0f);}
 
 GuiShipTweakMissileWeapons::GuiShipTweakMissileWeapons(GuiContainer* owner)
 : GuiTweakPage(owner)
