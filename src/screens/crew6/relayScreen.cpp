@@ -289,6 +289,7 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
     {
         // Toggle ship capabilities.
         launch_probe_button->setVisible(my_spaceship->getCanLaunchProbe());
+        launch_probe_button->setEnable(my_spaceship->scan_probe_stock > 0);
         link_to_science_button->setVisible(my_spaceship->getCanLaunchProbe());
         hack_target_button->setVisible(my_spaceship->getCanHack());
 
