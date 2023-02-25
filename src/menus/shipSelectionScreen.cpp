@@ -404,7 +404,7 @@ void ShipSelectionScreen::update(float delta)
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
         if (ship)
         {
-            string ship_name = ship->getFaction() + " " + ship->getTypeName() + " " + ship->getCallSign();
+            string ship_name = ship->getLocaleFaction() + " " + ship->getTypeName() + " " + ship->getCallSign();
 
             int index = player_ship_list->indexByValue(string(n));
             // If a player ship isn't in already in the list, add it.
