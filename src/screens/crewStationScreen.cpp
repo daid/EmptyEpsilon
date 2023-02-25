@@ -170,10 +170,16 @@ void CrewStationScreen::update(float delta)
 
     if (keys.escape.getDown())
     {
-        destroy();
-        soundManager->stopMusic();
-        impulse_sound->stop();
-        returnToShipSelection(getRenderLayer());
+        if (PreferencesManager::get("autoconnect").toInt())
+        {
+            LOG(INFO) << "You hit escape and want out! but you'll be back, you will see, all your base will belong to me.";
+        }
+        else {
+            destroy();
+            soundManager->stopMusic();
+            impulse_sound->stop();
+            returnToShipSelection(getRenderLayer());
+        }
     }
     if (keys.help.getDown())
     {
