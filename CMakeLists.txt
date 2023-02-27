@@ -388,6 +388,7 @@ set(MAIN_SOURCES
     src/components/hacking.h
     src/components/ai.h
     src/components/radarblock.h
+    src/components/gravity.h
     src/systems/ai.h
     src/systems/ai.cpp
     src/systems/docking.h
@@ -420,6 +421,8 @@ set(MAIN_SOURCES
     src/systems/pickup.cpp
     src/systems/basicmovement.h
     src/systems/basicmovement.cpp
+    src/systems/gravity.h
+    src/systems/gravity.cpp
     src/systems/comms.h
     src/systems/comms.cpp
     src/systems/radarblock.h
