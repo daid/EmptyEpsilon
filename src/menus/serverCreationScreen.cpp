@@ -26,58 +26,76 @@ ServerSetupScreen::ServerSetupScreen()
     GuiElement* main_panel = new GuiElement(this, "");
     main_panel->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(750, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
-    // Left column contents.
-    // General section.
-    (new GuiLabel(main_panel, "GENERAL_LABEL", tr("Server configuration"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-
-    // Server name row.
-    GuiElement* row = new GuiElement(main_panel, "");
-    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
-    (new GuiLabel(row, "NAME_LABEL", tr("Server name: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
-    server_name = new GuiTextEntry(row, "SERVER_NAME", "server");
-    server_name->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    // Server password row.
-    row = new GuiElement(main_panel, "");
-    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
-    (new GuiLabel(row, "PASSWORD_LABEL", tr("Server password: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
-    server_password = new GuiTextEntry(row, "SERVER_PASSWORD", "");
-    server_password->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    // GM control code row.
-    row = new GuiElement(main_panel, "");
-    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
-    (new GuiLabel(row, "GM_CONTROL_CODE_LABEL", tr("GM control code: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
-    gm_password = new GuiTextEntry(row, "GM_CONTROL_CODE", "");
-    gm_password->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    // LAN/Internet row.
-    row = new GuiElement(main_panel, "");
-    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
-    (new GuiLabel(row, "LAN_INTERNET_LABEL", tr("List on master server: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
-    server_visibility = new GuiSelector(row, "LAN_INTERNET_SELECT", [](int index, string value) { });
-    server_visibility->setOptions({tr("No"), tr("Yes")})->setSelectionIndex(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    row = new GuiElement(main_panel, "");
-    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
-    (new GuiLabel(row, "SERVER_PORT", tr("Server port: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
-    server_port = new GuiTextEntry(row, "SERVER_PORT", string(defaultServerPort));
-    server_port->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    (new GuiLabel(main_panel, "GENERAL_LABEL", tr("Server info"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-    // Server IP row.
-    row = new GuiElement(main_panel, "");
-    row->setSize(GuiElement::GuiSizeMax, 350)->setAttribute("layout", "horizontal");
-    (new GuiLabel(row, "IP_LABEL", tr("Server IP: "), 30))->setAlignment(sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
-    auto ips = new GuiListbox(row, "IP", [](int index, string value){});
-    ips->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    ips->setTextSize(20);
-    for(auto addr_str : sp::io::network::Address::getLocalAddress().getHumanReadable())
+    
+    string reverse_proxy_value;
+    if((reverse_proxy_value = PreferencesManager::get("serverproxy")) != "")
     {
-        if (addr_str == "::1" || addr_str == "127.0.0.1") continue;
-        ips->addEntry(addr_str, addr_str);
+        (new GuiLabel(main_panel, "GENERAL_LABEL", tr("Server info"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiLabel(main_panel, "SERVERPROXY_LABEL", tr("Server was launched to connect to reverse proxy:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+        string ips;
+        string sep="";
+        for(auto proxy_ip : reverse_proxy_value.split(":"))
+        {
+             ips = ips + sep + "[" + proxy_ip+ "]";
+             sep = ",";   
+        }
+        (new GuiLabel(main_panel, "SERVERPROXY_IPS", ips, 30))->setSize(GuiElement::GuiSizeMax, 50);
     }
+    else
+    {
+    
+        // Left column contents.
+        // General section.
+        (new GuiLabel(main_panel, "GENERAL_LABEL", tr("Server configuration"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    
+        // Server name row.
+        GuiElement* row = new GuiElement(main_panel, "");
+        row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "NAME_LABEL", tr("Server name: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+        server_name = new GuiTextEntry(row, "SERVER_NAME", "server");
+        server_name->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+        // Server password row.
+        row = new GuiElement(main_panel, "");
+        row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "PASSWORD_LABEL", tr("Server password: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+        server_password = new GuiTextEntry(row, "SERVER_PASSWORD", "");
+        server_password->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        // GM control code row.
+        row = new GuiElement(main_panel, "");
+        row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "GM_CONTROL_CODE_LABEL", tr("GM control code: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+        gm_password = new GuiTextEntry(row, "GM_CONTROL_CODE", "");
+        gm_password->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        // LAN/Internet row.
+        row = new GuiElement(main_panel, "");
+        row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "LAN_INTERNET_LABEL", tr("List on master server: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+        server_visibility = new GuiSelector(row, "LAN_INTERNET_SELECT", [](int index, string value) { });
+        server_visibility->setOptions({tr("No"), tr("Yes")})->setSelectionIndex(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        row = new GuiElement(main_panel, "");
+        row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "SERVER_PORT", tr("Server port: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+        server_port = new GuiTextEntry(row, "SERVER_PORT", string(defaultServerPort));
+        server_port->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        (new GuiLabel(main_panel, "GENERAL_LABEL", tr("Server info"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+        // Server IP row.
+        row = new GuiElement(main_panel, "");
+        row->setSize(GuiElement::GuiSizeMax, 350)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "IP_LABEL", tr("Server IP: "), 30))->setAlignment(sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
+        auto ips = new GuiListbox(row, "IP", [](int index, string value){});
+        ips->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        ips->setTextSize(20);
+        for(auto addr_str : sp::io::network::Address::getLocalAddress().getHumanReadable())
+        {
+            if (addr_str == "::1" || addr_str == "127.0.0.1") continue;
+            ips->addEntry(addr_str, addr_str);
+        }
+    }
     //======== Bottom buttons
     // Close server button.
     (new GuiButton(this, "CLOSE_SERVER", tr("Close"), [this]() {
