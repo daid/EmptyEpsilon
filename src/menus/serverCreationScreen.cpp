@@ -43,7 +43,6 @@ ServerSetupScreen::ServerSetupScreen()
     }
     else
     {
-    
         // Left column contents.
         // General section.
         (new GuiLabel(main_panel, "GENERAL_LABEL", tr("Server configuration"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
