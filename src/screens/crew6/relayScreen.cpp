@@ -297,8 +297,10 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
     if (my_spaceship)
     {
         // Toggle ship capabilities.
-        launch_probe_button->setVisible(my_spaceship.hasComponent<ScanProbeLauncher>());
-        link_to_science_button->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && my_spaceship.hasComponent<ScanProbeLauncher>());
+        auto spl = my_spaceship.getComponent<ScanProbeLauncher>();
+        launch_probe_button->setVisible(spl);
+        launch_probe_button->setEnable(spl ? spl->stock > 0 : false);
+        link_to_science_button->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && spl);
         hack_target_button->setVisible(my_spaceship.hasComponent<HackingDevice>());
 
         info_reputation->setValue(string(Faction::getInfo(my_spaceship).reputation_points, 0));

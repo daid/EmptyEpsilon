@@ -35,7 +35,7 @@ void GuiSelfDestructIndicator::onDraw(sp::RenderTarget& target)
         for(int n=0; n<SelfDestruct::max_codes; n++)
             if (!self_destruct->confirmed[n])
                 todo++;
-        label->setText(tr("Waiting for autorization input: {codes} left").format({{"codes", string(todo)}}));
+        label->setText(tr("Waiting for authorization input: {codes} left").format({{"codes", string(todo)}}));
     }else{
         if (self_destruct->countdown <= 3.0f)
         {

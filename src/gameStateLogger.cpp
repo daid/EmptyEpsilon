@@ -1,8 +1,11 @@
 #include <memory>
 #include <time.h>
 
-//We need a really fast float to string conversion. dtoa from milo does this very well.
-#include "dtoa/dtoa_milo.h"
+// SeriousProton provides nlohmann/json.
+// nlohmann::detail::to_chars implements a Grisu2 double-to-char method for
+// fast float-to-string conversions designed for JSON output, with a
+// std::to_chars-like implementation.
+#include "nlohmann/json.hpp"
 
 #include "gameStateLogger.h"
 #include "gameGlobalInfo.h"
@@ -94,8 +97,21 @@ private:
         while(*c)
             *ptr++ = *c++;
     }
+    // TODO: Replace int/float writers with std::to_chars, when/if Apple Clang
+    // ever reliably supports both.
     void writeValue(int i) { ptr += sprintf(ptr, "%d", i); }
-    void writeValue(float _f) { dtoa_milo(_f, ptr); ptr += strlen(ptr); }
+    void writeValue(float _f) {
+        char buf[24] = {}; // arbitrary
+
+        // nlohmann::detail::to_chars returns end-of-chars. Unlike
+        // std::to_chars, we have to explicitly reserve the terminator.
+        const auto last = nlohmann::detail::to_chars(buf, buf + 23, _f);
+        *last = '\0';
+
+        char* b = buf;
+        while(*b)
+            *ptr++ = *b++;
+    }
     void writeValue(const char* value)
     { /*ptr += sprintf(ptr, "\"%s\"", value);*/
         *ptr++ = '"';

@@ -1729,21 +1729,21 @@ msgstr "Pourriez-vous fournir des HVLI ? ("
 
 #: scripts/scenario_55_defenderHunter.lua:5388
 #: scripts/scenario_55_defenderHunter.lua:6460
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Docking services status"
 msgstr "État des services d'accueil"
 
 #: scripts/scenario_55_defenderHunter.lua:5389
 #: scripts/scenario_55_defenderHunter.lua:6462
 #, lua-format
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Station %s docking services status:"
 msgstr "État des services d'accueil de la station %s :\n"
 
 #: scripts/scenario_55_defenderHunter.lua:5391
 #: scripts/scenario_55_defenderHunter.lua:6464
 #, lua-format
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "Replenish scan probes."
@@ -1753,7 +1753,7 @@ msgstr ""
 
 #: scripts/scenario_55_defenderHunter.lua:5395
 #: scripts/scenario_55_defenderHunter.lua:6468
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
 msgstr ""
 "Impossible de réapprovisionner les sondes en raison d'une défaillance de "
@@ -1761,13 +1761,13 @@ msgstr ""
 
 #: scripts/scenario_55_defenderHunter.lua:5396
 #: scripts/scenario_55_defenderHunter.lua:6469
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Parts shortage prevents scan probe replenishment."
 msgstr "Le manque de pièces empêche le réapprovisionnement des sondes."
 
 #: scripts/scenario_55_defenderHunter.lua:5397
 #: scripts/scenario_55_defenderHunter.lua:6470
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
 "reasons."
@@ -1782,7 +1782,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:6487
 #: scripts/scenario_55_defenderHunter.lua:6500
 #, lua-format
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "%s"
@@ -1793,7 +1793,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:5404
 #: scripts/scenario_55_defenderHunter.lua:6477
 #, lua-format
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "Ship hull repair."
@@ -1803,14 +1803,14 @@ msgstr ""
 
 #: scripts/scenario_55_defenderHunter.lua:5408
 #: scripts/scenario_55_defenderHunter.lua:6481
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
 "Nous n'avons plus les matériaux et fournitures nécessaires pour réparer la "
 "coque."
 
 #: scripts/scenario_55_defenderHunter.lua:5409
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
 "L'automatisation de réparation de la coque n'est pas disponible pendant la "
@@ -1818,7 +1818,7 @@ msgstr ""
 
 #: scripts/scenario_55_defenderHunter.lua:5410
 #: scripts/scenario_55_defenderHunter.lua:6483
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
 "Tous les techniciens de réparation de coque mis en quarantaine dans leur "
@@ -1827,7 +1827,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:5417
 #: scripts/scenario_55_defenderHunter.lua:6490
 #, lua-format
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "Recharge ship energy stores."
@@ -1837,7 +1837,7 @@ msgstr ""
 
 #: scripts/scenario_55_defenderHunter.lua:5421
 #: scripts/scenario_55_defenderHunter.lua:6494
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
@@ -1847,14 +1847,14 @@ msgstr ""
 
 #: scripts/scenario_55_defenderHunter.lua:5422
 #: scripts/scenario_55_defenderHunter.lua:6495
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
 "Un couplage électrique défectueux rend la recharge des navires trop risquée."
 
 #: scripts/scenario_55_defenderHunter.lua:5423
 #: scripts/scenario_55_defenderHunter.lua:6496
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
 "can't recharge ships right now."
@@ -1865,7 +1865,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:5430
 #: scripts/scenario_55_defenderHunter.lua:6503
 #, lua-format
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May overcharge jump drive"
@@ -1876,7 +1876,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:5433
 #: scripts/scenario_55_defenderHunter.lua:6506
 #, lua-format
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair probe launch system"
@@ -1887,7 +1887,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:5436
 #: scripts/scenario_55_defenderHunter.lua:6509
 #, lua-format
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair hacking system"
@@ -1898,7 +1898,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:5439
 #: scripts/scenario_55_defenderHunter.lua:6512
 #, lua-format
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair scanners"
@@ -1909,7 +1909,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:5442
 #: scripts/scenario_55_defenderHunter.lua:6515
 #, lua-format
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair combat maneuver"
@@ -1920,7 +1920,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:5445
 #: scripts/scenario_55_defenderHunter.lua:6518
 #, lua-format
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair self destruct system"
@@ -2014,13 +2014,13 @@ msgid "Back"
 msgstr "Précédent"
 
 #: scripts/scenario_55_defenderHunter.lua:5457
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Overcharge Jump Drive (10 Rep)"
 msgstr "Booster la téléportation (10 rép)."
 
 #: scripts/scenario_55_defenderHunter.lua:5460
 #, lua-format
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
 msgstr "Votre téléportation a été boostée à %ik."
 
@@ -2037,65 +2037,65 @@ msgstr "Votre téléportation a été boostée à %ik."
 #: scripts/scenario_55_defenderHunter.lua:6944
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr "Réputation insuffisante"
+msgstr "Réputation insuffisante."
 
 #: scripts/scenario_55_defenderHunter.lua:5486
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Repair ship system"
 msgstr "Réparer les systèmes du vaisseau."
 
 #: scripts/scenario_55_defenderHunter.lua:5487
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "What system would you like repaired?"
 msgstr "Quel système souhaitez-vous réparer ?"
 
 #: scripts/scenario_55_defenderHunter.lua:5490
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Repair probe launch system (5 Rep)"
 msgstr "Réparer le système de lancement de sonde (5 rép)."
 
 #: scripts/scenario_55_defenderHunter.lua:5493
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Your probe launch system has been repaired"
 msgstr "Votre système de lancement de sonde a été réparé."
 
 #: scripts/scenario_55_defenderHunter.lua:5503
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Repair hacking system (5 Rep)"
 msgstr "Réparer le système de piratage (5 rép)."
 
 #: scripts/scenario_55_defenderHunter.lua:5506
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Your hack system has been repaired"
 msgstr "Votre système de piratage a été réparé."
 
 #: scripts/scenario_55_defenderHunter.lua:5516
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Repair scanners (5 Rep)"
 msgstr "Réparer les scanners (5 rép)."
 
 #: scripts/scenario_55_defenderHunter.lua:5519
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Your scanners have been repaired"
 msgstr "Vos scanners ont été réparés."
 
 #: scripts/scenario_55_defenderHunter.lua:5529
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Repair combat maneuver (5 Rep)"
 msgstr "Réparer la manœuvre de combat (5 rép)."
 
 #: scripts/scenario_55_defenderHunter.lua:5532
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Your combat maneuver has been repaired"
 msgstr "Votre manœuvre de combat a été réparée."
 
 #: scripts/scenario_55_defenderHunter.lua:5542
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Repair self destruct system (5 Rep)"
 msgstr "Réparer le système d'autodestruction (5 rép)."
 
 #: scripts/scenario_55_defenderHunter.lua:5545
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Your self destruct system has been repaired"
 msgstr "Votre système d'autodestruction a été réparé."
 
@@ -2114,7 +2114,7 @@ msgid ""
 "   %i Minutes remain in game"
 msgstr ""
 "\n"
-"   %i minutes restantes "
+"   %i minutes restantes dans le jeu."
 
 #: scripts/scenario_55_defenderHunter.lua:5572
 #: scripts/scenario_55_defenderHunter.lua:5605
@@ -2287,7 +2287,7 @@ msgid ""
 "Insufficient reputation for purchase"
 msgstr ""
 "\n"
-"Réputation insuffisante pour acheter"
+"Réputation insuffisante pour acheter."
 
 #: scripts/scenario_55_defenderHunter.lua:5766
 #: scripts/scenario_55_defenderHunter.lua:5812
@@ -3156,7 +3156,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:6407
 msgctxt "station-comms"
 msgid "I need information"
-msgstr "j'aurai besoin d'informations."
+msgstr "j'aurai besoin d'informations"
 
 #: scripts/scenario_55_defenderHunter.lua:6408
 msgctxt "station-comms"
@@ -3256,7 +3256,7 @@ msgstr ""
 "   %14s: %2i, %3i"
 
 #: scripts/scenario_55_defenderHunter.lua:6482
-msgctxt "dockingServicesStatus-comms"
+msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable whie it is undergoing maintenance."
 msgstr ""
 "Automatisation de réparation de coque indisponible, elle est en cours de "
@@ -3407,7 +3407,7 @@ msgstr "Monsieur, comment pouvons-nous vous assister ?"
 #: scripts/scenario_55_defenderHunter.lua:6770
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr "Défendez un marqueur."
+msgstr "Défendez un marqueur"
 
 #: scripts/scenario_55_defenderHunter.lua:6772
 msgctxt "shipAssist-comms"
@@ -3425,7 +3425,7 @@ msgstr "Quel marqueur devons-nous défendre ?"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
-msgstr "Défendez le marqueur %d."
+msgstr "Défendez le marqueur %d"
 
 #: scripts/scenario_55_defenderHunter.lua:6779
 #, lua-format
@@ -3637,7 +3637,7 @@ msgstr "%s acheté auprès de %s"
 #: scripts/scenario_55_defenderHunter.lua:7022
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr "Réputation insuffisante pour acheter"
+msgstr "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_55_defenderHunter.lua:6939
 msgctxt "trade-comms"
@@ -3648,7 +3648,7 @@ msgstr "Que voulez-vous ?"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous? (coût : %f réputation)"
+msgstr "Où allez-vous ? (coût : %f réputation)"
 
 #: scripts/scenario_55_defenderHunter.lua:6960
 #: scripts/scenario_55_defenderHunter.lua:6986
@@ -4445,19 +4445,19 @@ msgid "Manual cool"
 msgstr "Liq. de ref. manuel"
 
 #: scripts/scenario_55_defenderHunter.lua:10413
-msgctxt "tabEngineer"
+msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
-msgstr "Collecter Liq. de ref."
+msgstr "Collecte du liq. de ref."
 
 #: scripts/scenario_55_defenderHunter.lua:10430
 #, lua-format
-msgctxt "tabEngineer"
+msgctxt "coolant-tabEngineer"
 msgid "Deploying Collectors %i"
 msgstr "Déploiement des collecteurs %i"
 
 #: scripts/scenario_55_defenderHunter.lua:10433
 #, lua-format
-msgctxt "tabEngineer"
+msgctxt "coolant-tabEngineer"
 msgid "Configuring Collectors %i"
 msgstr "Configuration des collecteurs %i"
 
@@ -4507,7 +4507,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:10514
 msgctxt "msgMainscreen"
 msgid "Ensign"
-msgstr "Grade"
+msgstr "Officier"
 
 #: scripts/scenario_55_defenderHunter.lua:10503
 #: scripts/scenario_55_defenderHunter.lua:10516
@@ -4570,11 +4570,15 @@ msgid "%s %s:%i%% H:%i%%"
 msgstr "%s %s :%i%% H :%i%%"
 
 #: scripts/scenario_55_defenderHunter.lua:10621
-msgctxt "buttonEngineer"
+msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
 msgstr "Obtenir liq. de ref."
 
 #: scripts/scenario_55_defenderHunter.lua:10629
-msgctxt "buttonEngineer+"
+msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
 msgstr "Obtenir liq. de ref."
+
+#~ msgctxt "buttonEngineer+"
+#~ msgid "Get Coolant"
+#~ msgstr "Obtenir liq. de ref."

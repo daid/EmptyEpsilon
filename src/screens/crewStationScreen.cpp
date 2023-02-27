@@ -172,10 +172,14 @@ void CrewStationScreen::update(float delta)
 
     if (keys.escape.getDown())
     {
-        destroy();
-        soundManager->stopMusic();
-        impulse_sound->stop();
-        returnToShipSelection(getRenderLayer());
+        //If we're using autoconnect do nothing on escape, otherwise go back to the ship selection. 
+        if (!(PreferencesManager::get("autoconnect").toInt()))
+        {
+            destroy();
+            soundManager->stopMusic();
+            impulse_sound->stop();
+            returnToShipSelection(getRenderLayer());
+        }
     }
     if (keys.help.getDown())
     {
