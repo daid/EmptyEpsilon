@@ -189,7 +189,6 @@ float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
 
 string getMissileWeaponName(EMissileWeapons missile);
 string getLocaleMissileWeaponName(EMissileWeapons missile);
-REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
 
 string frequencyToString(int frequency);
 

@@ -194,7 +194,6 @@ public:
 };
 string getSystemName(ShipSystem::Type system);
 string getLocaleSystemName(ShipSystem::Type system);
-REGISTER_MULTIPLAYER_ENUM(ShipSystem::Type);
 
 /* Define script conversion function for the ShipTemplate::TemplateType enum. */
 template<> void convert<ShipTemplate::TemplateType>::param(lua_State* L, int& idx, ShipTemplate::TemplateType& tt);

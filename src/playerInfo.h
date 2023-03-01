@@ -67,7 +67,6 @@ public:
     static bool hasPlayerAtPosition(sp::ecs::Entity entity, ECrewPosition position);
 };
 
-REGISTER_MULTIPLAYER_ENUM(ECrewPosition);
 string getCrewPositionName(ECrewPosition position);
 string getCrewPositionIcon(ECrewPosition position);
 

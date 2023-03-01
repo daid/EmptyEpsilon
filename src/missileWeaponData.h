@@ -22,7 +22,6 @@ enum EMissileSizes
     MS_Medium = 1,
     MS_Large = 2,
 };
-REGISTER_MULTIPLAYER_ENUM(EMissileSizes);
 string getMissileSizeString(EMissileSizes size);
 
 /* Define script conversion function for the EMissileWeapons enum. */
