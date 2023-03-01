@@ -69,7 +69,7 @@ ServerSetupScreen::ServerSetupScreen()
     string reverse_proxy_value;
     if((reverse_proxy_value = PreferencesManager::get("serverproxy")) != "")
     {   
-        GuiPanel* panel = new GuiPanel(main_panel, "TUTORIAL_DESCRIPTION_BOX");
+        GuiPanel* panel = new GuiPanel(main_panel, "SERVERPROXY_MESSAGE_BOX");
         panel->setSize(GuiElement::GuiSizeMax, 80);
         //Serverproxy (reverse proxy) is directly configured in options or command line   
         (new GuiLabel(panel, "SERVERPROXY_LABEL", tr("Server was configured to connect to reverse proxy:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
