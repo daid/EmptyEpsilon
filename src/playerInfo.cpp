@@ -24,11 +24,15 @@
 #include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
 
-static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
-static const int16_t CMD_UPDATE_SHIP_ID = 0x0002;
-static const int16_t CMD_UPDATE_MAIN_SCREEN = 0x0003;
-static const int16_t CMD_UPDATE_MAIN_SCREEN_CONTROL = 0x0004;
-static const int16_t CMD_UPDATE_NAME = 0x0005;
+#include "components/internalrooms.h"
+
+static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0001;
+static const uint16_t CMD_UPDATE_SHIP_ID = 0x0002;
+static const uint16_t CMD_UPDATE_MAIN_SCREEN = 0x0003;
+static const uint16_t CMD_UPDATE_MAIN_SCREEN_CONTROL = 0x0004;
+static const uint16_t CMD_UPDATE_NAME = 0x0005;
+
+static const uint16_t CMD_CREW_SET_TARGET = 0x0100;
 
 P<PlayerInfo> my_player_info;
 sp::ecs::Entity my_spaceship;
@@ -128,10 +132,17 @@ void PlayerInfo::commandSetName(const string& name)
     this->name = name;
 }
 
+void PlayerInfo::commandCrewSetTargetPosition(sp::ecs::Entity crew, glm::ivec2 position)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_CREW_SET_TARGET << crew << position;
+    sendClientCommand(packet);
+}
+
 void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet)
 {
     if (client_id != this->client_id) return;
-    int16_t command;
+    uint16_t command;
     uint32_t monitor_index;
     bool active;
     packet >> command;
@@ -167,6 +178,12 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_UPDATE_NAME:
         packet >> name;
         break;
+
+    case CMD_CREW_SET_TARGET:{
+            auto [crew, position] = packet.read<sp::ecs::Entity, glm::ivec2>();
+            if (auto ic = crew.getComponent<InternalCrew>())
+                ic->target_position = position;
+        }break;
     }
 }
 

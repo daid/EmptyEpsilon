@@ -57,6 +57,9 @@ public:
     void commandSetMainScreen(int monitor_index, bool enabled);
     void commandSetMainScreenControl(int monitor_index, bool control);
     void commandSetName(const string& name);
+
+    void commandCrewSetTargetPosition(sp::ecs::Entity crew, glm::ivec2 target);
+
     virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
 
     void spawnUI(int monitor_index, RenderLayer* render_layer);

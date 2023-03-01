@@ -1,7 +1,7 @@
 #include "playerInfo.h"
-#include "repairCrew.h"
 #include "shipInternalView.h"
 #include "components/internalrooms.h"
+#include "ecs/query.h"
 
 
 GuiShipInternalView::GuiShipInternalView(GuiContainer* owner, string id, float room_size)
@@ -27,7 +27,7 @@ GuiShipInternalView* GuiShipInternalView::setShip(sp::ecs::Entity ship)
 
     room_container = new GuiShipRoomContainer(this, id + "_ROOM_CONTAINER", room_size, [this](glm::ivec2 position) {
         if (selected_crew_member)
-            selected_crew_member->commandSetTargetPosition(position);
+            my_player_info->commandCrewSetTargetPosition(selected_crew_member, position);
     });
     room_container->setPosition(0, 0, sp::Alignment::Center);
     auto room_min = ir->roomMin();
@@ -70,26 +70,28 @@ void GuiShipInternalView::onDraw(sp::RenderTarget& target)
         room_container = nullptr;
         crew_list.clear();
     }else{
-        PVector<RepairCrew> crew = getRepairCrewFor(viewing_ship);
-        if (crew.size() != crew_list.size())
-        {
-            for(GuiShipCrew* c : crew_list)
-                c->destroy();
-            crew_list.clear();
-
-            for(P<RepairCrew> rc : crew)
-            {
-                int id = rc->getMultiplayerId();
-                crew_list.push_back(new GuiShipCrew(room_container, std::to_string(id) + "_CREW", rc, [this](P<RepairCrew> crew_member){
-                    if (selected_crew_member)
-                        selected_crew_member->selected = false;
+        for(auto [entity, ic] : sp::ecs::Query<InternalCrew>()) {
+            if (ic.ship != viewing_ship) continue;
+            bool found = false;
+            for(auto gsc : crew_list) {
+                if (gsc->crew == entity) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                crew_list.push_back(new GuiShipCrew(room_container, "CREW", entity, selected_crew_member, [this](sp::ecs::Entity crew_member){
                     selected_crew_member = crew_member;
-                    if (selected_crew_member)
-                        selected_crew_member->selected = true;
                 }));
-                crew_list.back()->setSize(room_size, room_size);
             }
         }
+        crew_list.erase(std::remove_if(crew_list.begin(), crew_list.end(), [](GuiShipCrew* cr) {
+            if (!cr->crew) {
+                cr->destroy();
+                return true;
+            }
+            return false;
+        }), crew_list.end());
     }
 }
 
@@ -99,48 +101,31 @@ void GuiShipInternalView::onUpdate()
     {
         if (keys.engineering_next_repair_crew.getDown())
         {
-            PVector<RepairCrew> crew = getRepairCrewFor(viewing_ship);
-            P<RepairCrew> crew_member;
             bool found = false;
-            foreach(RepairCrew, rc, crew)
-            {
-                if (selected_crew_member == rc)
-                {
+            sp::ecs::Entity first;
+            for(auto [entity, ic] : sp::ecs::Query<InternalCrew>()) {
+                if (ic.ship != viewing_ship) continue;
+                if (!first) first = entity;
+                if (entity == selected_crew_member) {
                     found = true;
-                }
-                else if (found)
-                {
-                    crew_member = rc;
+                } else if (found) {
+                    selected_crew_member = entity;
                     break;
                 }
             }
-            if (!crew_member)
-            {
-                foreach(RepairCrew, rc, crew)
-                {
-                    crew_member = rc;
-                    break;
-                }
-            }
-            if (crew_member)
-            {
-                if (selected_crew_member)
-                    selected_crew_member->selected = false;
-                selected_crew_member = crew_member;
-                if (selected_crew_member)
-                    selected_crew_member->selected = true;
-            }
+            if (!found)
+                selected_crew_member = first;
         }
-        if (selected_crew_member)
+        if (auto ic = selected_crew_member.getComponent<InternalCrew>())
         {
             if (keys.engineering_repair_crew_up.getDown())
-                selected_crew_member->commandSetTargetPosition(glm::ivec2(selected_crew_member->position + glm::vec2(0.5, 0.5)) + glm::ivec2(0, -1));
+                my_player_info->commandCrewSetTargetPosition(selected_crew_member, glm::ivec2(ic->position + glm::vec2(0.5, 0.5)) + glm::ivec2(0, -1));
             if (keys.engineering_repair_crew_down.getDown())
-                selected_crew_member->commandSetTargetPosition(glm::ivec2(selected_crew_member->position + glm::vec2(0.5, 0.5)) + glm::ivec2(0, 1));
+                my_player_info->commandCrewSetTargetPosition(selected_crew_member, glm::ivec2(ic->position + glm::vec2(0.5, 0.5)) + glm::ivec2(0, 1));
             if (keys.engineering_repair_crew_left.getDown())
-                selected_crew_member->commandSetTargetPosition(glm::ivec2(selected_crew_member->position + glm::vec2(0.5, 0.5)) + glm::ivec2(-1, 0));
+                my_player_info->commandCrewSetTargetPosition(selected_crew_member, glm::ivec2(ic->position + glm::vec2(0.5, 0.5)) + glm::ivec2(-1, 0));
             if (keys.engineering_repair_crew_right.getDown())
-                selected_crew_member->commandSetTargetPosition(glm::ivec2(selected_crew_member->position + glm::vec2(0.5, 0.5)) + glm::ivec2(1, 0));
+                my_player_info->commandCrewSetTargetPosition(selected_crew_member, glm::ivec2(ic->position + glm::vec2(0.5, 0.5)) + glm::ivec2(1, 0));
         }
     }
 }
@@ -262,34 +247,33 @@ void GuiShipDoor::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
         func();
 }
 
-GuiShipCrew::GuiShipCrew(GuiContainer* owner, string id, P<RepairCrew> crew, func_t func)
-: GuiElement(owner, id), crew(crew), func(func)
+GuiShipCrew::GuiShipCrew(GuiContainer* owner, string id, sp::ecs::Entity crew, sp::ecs::Entity& selected_crew_member, func_t func)
+: GuiElement(owner, id), crew(crew), selected_crew_member(selected_crew_member), func(func)
 {
 }
 
 void GuiShipCrew::onDraw(sp::RenderTarget& renderer)
 {
-    if (!crew)
-        return;
-    setPosition(crew->position * getSize().x, sp::Alignment::TopLeft);
+    auto ic = crew.getComponent<InternalCrew>();
+    if (!ic) return;
+
+    setPosition(ic->position * getSize().x, sp::Alignment::TopLeft);
 
     float rotation = 0;
     string tex = "topdownCrew0.png";
-    if (crew->action == RC_Move)
-        tex = "topdownCrew" + string(int(crew->action_delay * 12) % 6) + ".png";
-    switch(crew->direction)
+    if (ic->action == InternalCrew::Action::Move)
+        tex = "topdownCrew" + string(int(ic->action_delay * 12) % 6) + ".png";
+    switch(ic->direction)
     {
-    case RC_Left: rotation = 180; break;
-    case RC_Right: rotation = 0; break;
-    case RC_None:
-    case RC_Up: rotation = -90; break;
-    case RC_Down: rotation = 90; break;
+    case InternalCrew::Direction::Left: rotation = 180; break;
+    case InternalCrew::Direction::Right: rotation = 0; break;
+    case InternalCrew::Direction::None:
+    case InternalCrew::Direction::Up: rotation = -90; break;
+    case InternalCrew::Direction::Down: rotation = 90; break;
     }
     renderer.drawRotatedSprite(tex, getCenterPoint(), getSize().x, rotation);
-    if (crew->selected)
-    {
+    if (selected_crew_member == crew)
         renderer.drawSprite("redicule.png", getCenterPoint(), getSize().x);
-    }
 }
 
 bool GuiShipCrew::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)

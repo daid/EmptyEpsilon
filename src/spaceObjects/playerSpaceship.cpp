@@ -1,6 +1,5 @@
 #include "playerSpaceship.h"
 #include "gui/colorConfig.h"
-#include "repairCrew.h"
 #include "explosionEffect.h"
 #include "gameGlobalInfo.h"
 #include "main.h"
@@ -26,6 +25,7 @@
 #include "components/maneuveringthrusters.h"
 #include "components/selfdestruct.h"
 #include "components/hacking.h"
+#include "components/internalrooms.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
 #include "systems/missilesystem.h"
@@ -607,7 +607,11 @@ void PlayerSpaceship::playSoundOnMainScreen(string sound_name)
 int PlayerSpaceship::getRepairCrewCount()
 {
     // Count and return the number of repair crews on this ship.
-    return getRepairCrewFor(entity).size();
+    int count = 0;
+    for(auto [entity, ic, irc] : sp::ecs::Query<InternalCrew, InternalRepairCrew>())
+        if (ic.ship == entity)
+            count++;
+    return count;
 }
 
 void PlayerSpaceship::setRepairCrewCount(int amount)
@@ -621,26 +625,27 @@ void PlayerSpaceship::setRepairCrewCount(int amount)
     amount = std::max(0, amount);
 
     // Get the number of repair crews for this ship.
-    PVector<RepairCrew> crew = getRepairCrewFor(entity);
-
-    // Remove excess crews by shifting them out of the array.
-    while(int(crew.size()) > amount)
-    {
-        crew[0]->destroy();
-        crew.update();
+    int count = 0;
+    for(auto [entity, ic, irc] : sp::ecs::Query<InternalCrew, InternalRepairCrew>()) {
+        if (ic.ship != entity) continue;
+        count++;
+        if (count >= amount)
+            entity.destroy();
     }
 
-    if (ship_template->rooms.size() == 0 && amount != 0)
+    auto ir = entity.getComponent<InternalRooms>();
+    if (!ir || ir->rooms.empty())
     {
         LOG(WARNING) << "Not adding repair crew to ship \"" << getCallSign() << "\", because it has no rooms. Fix this by adding rooms to the ship template \"" << template_name << "\".";
         return;
     }
 
     // Add crews until we reach the provided amount.
-    for(int create_amount = amount - crew.size(); create_amount > 0; create_amount--)
+    for(int create_amount = amount - count; create_amount > 0; create_amount--)
     {
-        P<RepairCrew> rc = new RepairCrew();
-        rc->ship = entity;
+        auto new_crew = sp::ecs::Entity::create();
+        new_crew.addComponent<InternalCrew>().ship = entity;
+        new_crew.addComponent<InternalRepairCrew>();
     }
 }
 

@@ -236,7 +236,6 @@ set(MAIN_SOURCES
     src/factionInfo.cpp
     src/mesh.cpp
     src/scenarioInfo.cpp
-    src/repairCrew.cpp
     src/GMScriptCallback.cpp
     src/GMMessage.cpp
     src/tutorialGame.cpp
@@ -427,6 +426,8 @@ set(MAIN_SOURCES
     src/systems/comms.cpp
     src/systems/radarblock.h
     src/systems/radarblock.cpp
+    src/systems/internalcrew.h
+    src/systems/internalcrew.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
@@ -489,7 +490,6 @@ set(MAIN_SOURCES
     src/pathPlanner.h
     src/playerInfo.h
     src/preferenceManager.h
-    src/repairCrew.h
     src/scenarioInfo.h
     src/scienceDatabase.h
     src/screenComponents/aimLock.h

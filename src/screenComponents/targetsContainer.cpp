@@ -3,6 +3,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "systems/collision.h"
 #include "components/hull.h"
+#include "components/collision.h"
 
 
 TargetsContainer::TargetsContainer()
@@ -60,27 +61,28 @@ sp::ecs::Entity TargetsContainer::get()
 
 void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESelectionType selection_type)
 {
-    P<SpaceObject> target;
+    sp::ecs::Entity target;
+    glm::vec2 target_position;
     for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(max_range, max_range), position + glm::vec2(max_range, max_range)))
     {
-        auto ptr = entity.getComponent<SpaceObject*>();
-        if (!ptr || !*ptr) continue;
-        P<SpaceObject> spaceObject = *ptr;
-        if (spaceObject && entity != my_spaceship)
+        auto transform = entity.getComponent<sp::Transform>();
+        if (!transform) continue;
+        if (entity == my_spaceship) continue;
+
+        switch(selection_type)
         {
-            switch(selection_type)
-            {
-            case Selectable:
-                if (!entity.hasComponent<Hull>() && !entity.getComponent<ScanState>())
-                    continue;
-                break;
-            case Targetable:
-                if (!entity.hasComponent<Hull>())
-                    continue;
-                break;
-            }
-            if (!target || glm::length2(position - spaceObject->getPosition()) < glm::length2(position - target->getPosition()))
-                target = spaceObject;
+        case Selectable:
+            if (!entity.hasComponent<Hull>() && !entity.getComponent<ScanState>())
+                continue;
+            break;
+        case Targetable:
+            if (!entity.hasComponent<Hull>())
+                continue;
+            break;
+        }
+        if (!target || glm::length2(position - transform->getPosition()) < glm::length2(position - target_position)) {
+            target = entity;
+            target_position = transform->getPosition();
         }
     }
 
@@ -92,7 +94,7 @@ void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESele
             {
                 if (glm::length2(lrr->waypoints[n] - position) < max_range*max_range)
                 {
-                    if (!target || glm::length2(position - lrr->waypoints[n]) < glm::length2(position - target->getPosition()))
+                    if (!target || glm::length2(position - lrr->waypoints[n]) < glm::length2(position - target_position))
                     {
                         clear();
                         waypoint_selection_index = n;
@@ -103,7 +105,7 @@ void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESele
             }
         }
     }
-    set(target->entity);
+    set(target);
 }
 
 int TargetsContainer::getWaypointIndex()

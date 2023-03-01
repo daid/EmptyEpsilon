@@ -14,7 +14,7 @@ private:
     sp::ecs::Entity viewing_ship;
     float room_size;
     GuiShipRoomContainer* room_container;
-    P<RepairCrew> selected_crew_member;
+    sp::ecs::Entity selected_crew_member;
     std::vector<GuiShipCrew*> crew_list;
 public:
     GuiShipInternalView(GuiContainer* owner, string id, float room_size);
@@ -81,13 +81,14 @@ public:
 class GuiShipCrew : public GuiElement
 {
 public:
-    typedef std::function<void(P<RepairCrew> crew_member)> func_t;
+    typedef std::function<void(sp::ecs::Entity crew_member)> func_t;
 
+    sp::ecs::Entity crew;
 private:
-    P<RepairCrew> crew;
+    sp::ecs::Entity& selected_crew_member;
     func_t func;
 public:
-    GuiShipCrew(GuiContainer* owner, string id, P<RepairCrew> crew, func_t func);
+    GuiShipCrew(GuiContainer* owner, string id, sp::ecs::Entity crew, sp::ecs::Entity& selected_crew_member, func_t func);
 
     virtual void onDraw(sp::RenderTarget& target) override;
 

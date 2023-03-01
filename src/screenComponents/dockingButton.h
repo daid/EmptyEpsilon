@@ -3,7 +3,6 @@
 
 #include "gui/gui2_button.h"
 
-class SpaceObject;
 class GuiDockingButton : public GuiButton
 {
 public:

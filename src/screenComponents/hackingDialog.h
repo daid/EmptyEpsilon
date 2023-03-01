@@ -11,7 +11,6 @@ class GuiListbox;
 class GuiButton;
 class GuiToggleButton;
 class GuiProgressbar;
-class SpaceObject;
 class MiniGame;
 
 class GuiHackingDialog : public GuiOverlay
