@@ -891,7 +891,11 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
             }
         }
 
-        if (trace.flags & RadarTrace::Rotate)
+        if ((trace.flags & RadarTrace::BlendAdd) && (trace.flags & RadarTrace::Rotate))
+            renderer.drawRotatedSpriteBlendAdd(icon, object_position_on_screen, size, transform.getRotation() - view_rotation);
+        else if (trace.flags & RadarTrace::BlendAdd)
+            renderer.drawRotatedSpriteBlendAdd(icon, object_position_on_screen, size, 0);
+        else if (trace.flags & RadarTrace::Rotate)
             renderer.drawRotatedSprite(icon, object_position_on_screen, size, transform.getRotation() - view_rotation, color);
         else
             renderer.drawSprite(icon, object_position_on_screen, size, color);

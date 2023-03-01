@@ -11,6 +11,7 @@ public:
     static constexpr uint32_t Rotate = 1 << 0;
     static constexpr uint32_t ColorByFaction = 1 << 1;
     static constexpr uint32_t ArrowIfNotScanned = 1 << 2;
+    static constexpr uint32_t BlendAdd = 1 << 3;
 
     string icon;
     float min_size = 8.0;   //Size in screen "pixels"

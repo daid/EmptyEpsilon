@@ -23,7 +23,6 @@ public:
     Nebula();
 
     virtual void draw3DTransparent() override;
-    virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual ERadarLayer getRadarLayer() const override { return ERadarLayer::BackgroundObjects; }
 

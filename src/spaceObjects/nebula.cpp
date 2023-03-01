@@ -38,10 +38,7 @@ Nebula::Nebula()
 {
     entity.removeComponent<sp::Physics>(); //TODO: Never add this in the first place.
     setRotation(random(0, 360));
-    radar_visual = irandom(1, 3);
     setRadarSignatureInfo(0.0, 0.8, -1.0);
-
-    registerMemberReplication(&radar_visual);
 
     for(int n=0; n<cloud_count; n++)
     {
@@ -55,6 +52,13 @@ Nebula::Nebula()
     if (entity) {
         entity.getOrAddComponent<RadarBlock>();
         entity.getOrAddComponent<NeverRadarBlocked>();
+
+        auto trace = entity.getOrAddComponent<RadarTrace>();
+        trace.radius = 5000.0f * 3.0f;
+        trace.min_size = 0.0f;
+        trace.max_size = std::numeric_limits<float>::max();
+        trace.icon = "Nebula" + string(irandom(1, 3)) + ".png";
+        trace.flags = RadarTrace::BlendAdd | RadarTrace::Rotate;
     }
 }
 
@@ -100,11 +104,6 @@ void Nebula::draw3DTransparent()
         std::initializer_list<uint16_t> indices = { 0, 3, 2, 0, 2, 1 };
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
     }
-}
-
-void Nebula::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
-{
-    renderer.drawRotatedSpriteBlendAdd("Nebula" + string(radar_visual) + ".png", position, radius * scale * 3.0f, getRotation()-rotation);
 }
 
 void Nebula::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
