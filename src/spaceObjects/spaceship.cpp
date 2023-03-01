@@ -1744,13 +1744,6 @@ void SpaceShip::addBroadcast(int threshold, string message)
     }
 }
 
-std::unordered_map<string, string> SpaceShip::getGMInfo()
-{
-    std::unordered_map<string, string> ret;
-    ret = ShipTemplateBasedObject::getGMInfo();
-    return ret;
-}
-
 string SpaceShip::getScriptExportModificationsOnTemplate()
 {
     // Exports attributes common to ships as Lua script function calls.
