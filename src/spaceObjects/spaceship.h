@@ -82,8 +82,6 @@ public:
 
     P<SpaceObject> getTarget();
 
-    virtual std::unordered_map<string, string> getGMInfo() override;
-
     bool isDocked(P<SpaceObject> target);
     P<SpaceObject> getDockedWith();
     DockingPort::State getDockingState();

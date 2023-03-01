@@ -899,13 +899,6 @@ void SpaceShip::addBroadcast(FactionRelation threshold, string message)
     }
 }
 
-std::unordered_map<string, string> SpaceShip::getGMInfo()
-{
-    std::unordered_map<string, string> ret;
-    ret = ShipTemplateBasedObject::getGMInfo();
-    return ret;
-}
-
 bool SpaceShip::isDocked(P<SpaceObject> target)
 {
     if (!entity) return false; 
@@ -956,7 +949,6 @@ void SpaceShip::setImpulseMaxSpeed(float forward_speed, std::optional<float> rev
 {
     //TODO
 }
-
 
 string SpaceShip::getScriptExportModificationsOnTemplate()
 {
