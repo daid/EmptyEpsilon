@@ -568,7 +568,7 @@ void GameStateLogger::writeMissileEntry(JSONGenerator& json, P<MissileWeapon> mi
     // A missile's owner might not exist when we log data. Skip the owner_id if so.
     if (missile->owner)
     {
-        json.write("owner_id", missile->owner->getMultiplayerId());
+        //json.write("owner_id", missile->owner->getMultiplayerId());
     }
 
     // Don't bother writing a target ID if it's unguided or targetless.

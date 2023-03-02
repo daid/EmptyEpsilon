@@ -119,7 +119,7 @@ void Mine::eject()
 
 void Mine::explode()
 {
-    DamageInfo info(owner ? owner->entity : sp::ecs::Entity{}, DamageType::Kinetic, getPosition());
+    DamageInfo info(owner, DamageType::Kinetic, getPosition());
     DamageSystem::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, info, blastRange / 2.0f);
 
     P<ExplosionEffect> e = new ExplosionEffect();
@@ -145,7 +145,7 @@ void Mine::onDestruction(ScriptSimpleCallback callback)
     this->on_destruction = callback;
 }
 
-P<SpaceObject> Mine::getOwner()
+sp::ecs::Entity Mine::getOwner()
 {
     if (game_server)
     {
@@ -153,7 +153,7 @@ P<SpaceObject> Mine::getOwner()
     }
 
     LOG(ERROR) << "Mine::getOwner(): owner not replicated to clients.";
-    return nullptr;
+    return {};
 }
 
 std::unordered_map<string, string> Mine::getGMInfo()
@@ -162,7 +162,7 @@ std::unordered_map<string, string> Mine::getGMInfo()
 
     if (owner)
     {
-        ret[trMark("gm_info", "Owner")] = owner->getCallSign();
+        //ret[trMark("gm_info", "Owner")] = owner->getCallSign();
     }
 
     ret[trMark("gm_info", "Faction")] = getLocaleFaction();

@@ -118,67 +118,60 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
     auto source_transform = source.getComponent<sp::Transform>();
     if (!source_transform) return;
     auto fireLocation = source_transform->getPosition() + rotateVec2(glm::vec2(tube.position), source_transform->getRotation());
+    
+    P<MissileWeapon> missile;
     switch(tube.type_loaded)
     {
     case MW_Homing:
         {
-            P<HomingMissile> missile = new HomingMissile();
-            missile->owner = *source.getComponent<SpaceObject*>();
-            missile->setFactionId(missile->owner->getFactionId());
+            missile = new HomingMissile();
             missile->target = target;
-            missile->setPosition(fireLocation);
-            missile->setRotation(source_transform->getRotation() + tube.direction);
             missile->target_angle = target_angle;
-            missile->category_modifier = MissileWeaponData::convertSizeToCategoryModifier(tube.size);
         }
         break;
     case MW_Nuke:
         {
-            P<Nuke> missile = new Nuke();
-            missile->owner = *source.getComponent<SpaceObject*>();
-            missile->setFactionId(missile->owner->getFactionId());
+            missile = new Nuke();
             missile->target = target;
-            missile->setPosition(fireLocation);
-            missile->setRotation(source_transform->getRotation() + tube.direction);
             missile->target_angle = target_angle;
-            missile->category_modifier = MissileWeaponData::convertSizeToCategoryModifier(tube.size);
         }
         break;
     case MW_Mine:
         {
-            P<Mine> missile = new Mine();
-            missile->owner = *source.getComponent<SpaceObject*>();
-            missile->setFactionId(missile->owner->getFactionId());
-            missile->setPosition(fireLocation);
-            missile->setRotation(source_transform->getRotation() + tube.direction);
-            missile->eject();
+            P<Mine> mine = new Mine();
+            mine->owner = source;
+            if (auto f = source.getComponent<Faction>())
+                mine->entity.addComponent<Faction>().entity = f->entity;
+            mine->setPosition(fireLocation);
+            mine->setRotation(source_transform->getRotation() + tube.direction);
+            mine->eject();
+            return;
         }
         break;
     case MW_HVLI:
         {
-            P<HVLI> missile = new HVLI();
-            missile->owner = *source.getComponent<SpaceObject*>();
-            missile->setFactionId(missile->owner->getFactionId());
-            missile->setPosition(fireLocation);
-            missile->setRotation(source_transform->getRotation() + tube.direction);
+            missile = new HVLI();
             missile->target_angle = source_transform->getRotation() + tube.direction;
-            missile->category_modifier = MissileWeaponData::convertSizeToCategoryModifier(tube.size);
         }
         break;
     case MW_EMP:
         {
-            P<EMPMissile> missile = new EMPMissile();
-            missile->owner = *source.getComponent<SpaceObject*>();
-            missile->setFactionId(missile->owner->getFactionId());
+            missile = new EMPMissile();
             missile->target = target;
-            missile->setPosition(fireLocation);
-            missile->setRotation(source_transform->getRotation() + tube.direction);
             missile->target_angle = target_angle;
-            missile->category_modifier = MissileWeaponData::convertSizeToCategoryModifier(tube.size);
         }
         break;
     default:
         break;
+    }
+
+    if (missile) {
+        missile->owner = source;
+        if (auto f = source.getComponent<Faction>())
+            missile->entity.addComponent<Faction>().entity = f->entity;
+        missile->setPosition(fireLocation);
+        missile->setRotation(source_transform->getRotation() + tube.direction);
+        missile->category_modifier = MissileWeaponData::convertSizeToCategoryModifier(tube.size);
     }
 }
 

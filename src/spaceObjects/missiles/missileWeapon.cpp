@@ -104,16 +104,13 @@ void MissileWeapon::update(float delta)
 void MissileWeapon::collide(SpaceObject* target, float force)
 {
     if (!game_server)
-    {
         return;
-    }
-    P<SpaceObject> object = target;
-    if (!object || object == owner || !object->canBeTargetedBy(owner->entity))
-    {
+    if (target->entity == owner)
         return;
-    }
+    if (!target->entity.hasComponent<Hull>())
+        return;
 
-    hitObject(object);
+    hitObject(target);
     destroy();
 }
 
@@ -123,14 +120,12 @@ void MissileWeapon::updateMovement()
     {
         if (data.homing_range > 0)
         {
-            P<SpaceObject> target = getTarget();
-
-            if (target)
+            if (auto tt = target.getComponent<sp::Transform>())
             {
                 float r = data.homing_range + 10.0f;
-                if (glm::length2(target->getPosition() - getPosition()) < r*r)
+                if (glm::length2(tt->getPosition() - getPosition()) < r*r)
                 {
-                    target_angle = vec2ToAngle(target->getPosition() - getPosition());
+                    target_angle = vec2ToAngle(tt->getPosition() - getPosition());
                 }
             }
         }
@@ -151,7 +146,7 @@ void MissileWeapon::updateMovement()
     }
 }
 
-P<SpaceObject> MissileWeapon::getOwner()
+sp::ecs::Entity MissileWeapon::getOwner()
 {
     // Owner is assigned by the weapon tube upon firing.
     if (game_server)
@@ -160,23 +155,19 @@ P<SpaceObject> MissileWeapon::getOwner()
     }
 
     LOG(ERROR) << "MissileWeapon::getOwner(): owner not replicated to clients.";
-    return nullptr;
+    return {};
 }
 
-P<SpaceObject> MissileWeapon::getTarget()
+sp::ecs::Entity MissileWeapon::getTarget()
 {
-    auto obj = this->target.getComponent<SpaceObject*>();
-    if (obj) return *obj;
-    return nullptr;
+    return target;
 }
 
-void MissileWeapon::setTarget(P<SpaceObject> target)
+void MissileWeapon::setTarget(sp::ecs::Entity target)
 {
     if (!target)
-    {
         return;
-    }
-    this->target = target->entity;
+    this->target = target;
 }
 
 float MissileWeapon::getLifetime()
@@ -205,7 +196,7 @@ std::unordered_map<string, string> MissileWeapon::getGMInfo()
 
     if (owner)
     {
-        ret[trMark("gm_info", "Owner")] = owner->getCallSign();
+        //ret[trMark("gm_info", "Owner")] = owner->getCallSign();
     }
 
     /*P<SpaceObject> target = game_server->getObjectById(target_id);

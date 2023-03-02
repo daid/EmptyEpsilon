@@ -24,7 +24,7 @@ HVLI::HVLI()
 
 void HVLI::hitObject(P<SpaceObject> object)
 {
-    DamageInfo info(owner ? owner->entity : sp::ecs::Entity(), DamageType::Kinetic, getPosition());
+    DamageInfo info(owner, DamageType::Kinetic, getPosition());
     float alive_for = MissileWeaponData::getDataFor(MW_HVLI).lifetime - lifetime;
     if (alive_for > 2.0f)
         object->takeDamage(category_modifier * 10, info);

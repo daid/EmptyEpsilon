@@ -14,7 +14,7 @@ protected:
     bool launch_sound_played;
 
 public:
-    P<SpaceObject> owner; //Only valid on server.
+    sp::ecs::Entity owner; //Only valid on server.
     sp::ecs::Entity target;
     float target_angle;
     // Damage modifier for this missile which indicates it's size. (eg; Missiles by fighters have a low modifier), missiles from
@@ -33,9 +33,9 @@ public:
     //Called when the missile's lifetime is up. Missile is destroyed afterwards.
     virtual void lifeEnded() {}
     
-    P<SpaceObject> getOwner();
-    P<SpaceObject> getTarget();
-    void setTarget(P<SpaceObject> target);
+    sp::ecs::Entity getOwner();
+    sp::ecs::Entity getTarget();
+    void setTarget(sp::ecs::Entity target);
     float getLifetime();
     void setLifetime(float lifetime);
     EMissileSizes getMissileSize();
