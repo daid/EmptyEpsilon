@@ -350,31 +350,78 @@ msgid "Last Session ({last})"
 msgstr ""
 
 #: src/menus/mainMenus.cpp:72
+msgctxt "Credits"
 msgid "Version: {version}"
 msgstr ""
 
 #: src/menus/mainMenus.cpp:74
+msgctxt "mainMenu"
 msgid "Your name:"
 msgstr ""
 
 #: src/menus/mainMenus.cpp:79 src/menus/serverCreationScreen.cpp:89
+msgctxt "mainMenu"
 msgid "Start server"
 msgstr ""
 
 #: src/menus/mainMenus.cpp:84
+msgctxt "mainMenu"
 msgid "Start client"
 msgstr ""
 
 #: src/menus/mainMenus.cpp:89
+msgctxt "mainMenu"
 msgid "Options"
 msgstr ""
 
 #: src/menus/mainMenus.cpp:94
+msgctxt "mainMenu"
 msgid "Quit"
 msgstr ""
 
 #: src/menus/mainMenus.cpp:98
+msgctxt "mainMenu"
 msgid "Tutorials"
+msgstr ""
+
+#: src/menus/mainMenus.cpp:104
+msgctxt "Credits"
+msgid "Credits"
+msgstr ""
+
+#: src/menus/mainMenus.cpp:105
+msgctxt "Credits"
+msgid "Programming:"
+msgstr ""
+
+#: src/menus/mainMenus.cpp:112
+msgctxt "Credits"
+msgid "Graphics:"
+msgstr ""
+
+#: src/menus/mainMenus.cpp:115
+msgctxt "Credits"
+msgid "Localization:"
+msgstr ""
+
+#: src/menus/mainMenus.cpp:119
+msgctxt "Credits"
+msgid "Music:"
+msgstr ""
+
+#: src/menus/mainMenus.cpp:126
+msgctxt "Credits"
+msgid "Models:"
+msgstr ""
+
+#: src/menus/mainMenus.cpp:130
+msgctxt "Credits"
+msgid "Crew sprites:"
+msgstr ""
+
+#: src/menus/mainMenus.cpp:133
+msgctxt "Credits"
+msgid "Special thanks:"
 msgstr ""
 
 #: src/menus/serverCreationScreen.cpp:31
