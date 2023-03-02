@@ -5,12 +5,12 @@
 #include "components/collision.h"
 #include "components/hull.h"
 #include "components/shields.h"
+#include "components/avoidobject.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
 #include "factionInfo.h"
 #include "mesh.h"
 #include "main.h"
-#include "pathPlanner.h"
 
 #include "scriptInterface.h"
 
@@ -44,8 +44,9 @@ SpaceStation::SpaceStation()
 void SpaceStation::applyTemplateValues()
 {
     auto physics = entity.getComponent<sp::Physics>();
-    if (physics)
-        PathPlannerManager::getInstance()->addAvoidObject(this, physics->getSize().x * 1.5f);
+    if (physics) {
+        entity.getOrAddComponent<AvoidObject>().range = physics->getSize().x * 1.5f;
+    }
 }
 
 string SpaceStation::getExportLine()

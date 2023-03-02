@@ -3,7 +3,6 @@
 
 #include "nebula.h"
 #include "spaceObject.h"
-#include "pathPlanner.h"
 
 class Planet : public SpaceObject, public Updatable
 {

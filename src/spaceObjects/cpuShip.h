@@ -1,7 +1,6 @@
 #ifndef CPU_SHIP_H
 #define CPU_SHIP_H
 
-#include "pathPlanner.h"
 #include "spaceship.h"
 #include "components/ai.h"
 

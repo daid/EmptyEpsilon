@@ -2,7 +2,8 @@
 #define AI_H
 
 #include "nonCopyable.h"
-#include "pathPlanner.h"
+#include "graphics/renderTarget.h"
+#include "systems/pathfinding.h"
 #include "components/missiletubes.h"
 
 ///Forward declaration

@@ -26,7 +26,7 @@
 REGISTER_SHIP_AI(ShipAI, "default");
 
 ShipAI::ShipAI(sp::ecs::Entity owner)
-: pathPlanner(300.0f/*TODO*/), owner(owner)
+: owner(owner)
 {
     missile_fire_delay = 0.0;
 
@@ -623,7 +623,9 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
 {
     auto ot = owner.getComponent<sp::Transform>();
     if (!ot) return;
-    pathPlanner.plan(ot->getPosition(), target);
+    auto my_radius = 300.0f;
+    if (auto physics = owner.getComponent<sp::Physics>()) my_radius = physics->getSize().x;
+    pathPlanner.plan(my_radius, ot->getPosition(), target);
 
     if (pathPlanner.route.size() > 0)
     {
@@ -693,7 +695,9 @@ void ShipAI::flyFormation(sp::ecs::Entity target, glm::vec2 offset)
     auto tt = target.getComponent<sp::Transform>();
     if (!tt) return;
     auto target_position = tt->getPosition() + rotateVec2(ai->order_target_location, tt->getRotation());
-    pathPlanner.plan(ot->getPosition(), target_position);
+    auto my_radius = 300.0f;
+    if (auto physics = owner.getComponent<sp::Physics>()) my_radius = physics->getSize().x;
+    pathPlanner.plan(my_radius, ot->getPosition(), target_position);
 
     auto impulse = owner.getComponent<ImpulseEngine>();
     if (!impulse) return;

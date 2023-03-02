@@ -217,7 +217,6 @@ set(MAIN_SOURCES
     src/main.cpp
     src/threatLevelEstimate.cpp
     src/preferenceManager.cpp
-    src/pathPlanner.cpp
     src/epsilonServer.cpp
     src/particleEffect.cpp
     src/httpScriptAccess.cpp
@@ -388,6 +387,7 @@ set(MAIN_SOURCES
     src/components/ai.h
     src/components/radarblock.h
     src/components/gravity.h
+    src/components/avoidobject.h
     src/systems/ai.h
     src/systems/ai.cpp
     src/systems/docking.h
@@ -428,6 +428,8 @@ set(MAIN_SOURCES
     src/systems/radarblock.cpp
     src/systems/internalcrew.h
     src/systems/internalcrew.cpp
+    src/systems/pathfinding.h
+    src/systems/pathfinding.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
@@ -487,7 +489,6 @@ set(MAIN_SOURCES
     src/modelInfo.h
     src/packResourceProvider.h
     src/particleEffect.h
-    src/pathPlanner.h
     src/playerInfo.h
     src/preferenceManager.h
     src/scenarioInfo.h

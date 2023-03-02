@@ -3,11 +3,11 @@
 #include "playerInfo.h"
 #include "particleEffect.h"
 #include "explosionEffect.h"
-#include "pathPlanner.h"
 #include "random.h"
 #include "multiplayer_server.h"
 #include "components/collision.h"
 #include "components/radar.h"
+#include "components/avoidobject.h"
 
 #include "scriptInterface.h"
 
@@ -46,12 +46,12 @@ Mine::Mine()
     particleTimeout = 0.0;
     setRadarSignatureInfo(0.0, 0.05, 0.0);
 
-    PathPlannerManager::getInstance()->addAvoidObject(this, blastRange * 1.2f);
     if (entity) {
         auto& trace = entity.getOrAddComponent<RadarTrace>();
         trace.icon = "radar/blip.png";
         trace.min_size = 10;
         trace.max_size = 10;
+        entity.getOrAddComponent<AvoidObject>().range = blastRange * 1.2f;
     }
 }
 

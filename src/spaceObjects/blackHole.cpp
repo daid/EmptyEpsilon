@@ -2,11 +2,11 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "blackHole.h"
-#include "pathPlanner.h"
 #include "main.h"
 #include "textureManager.h"
 #include "components/radarblock.h"
 #include "components/gravity.h"
+#include "components/avoidobject.h"
 
 #include "scriptInterface.h"
 #include "glObjects.h"
@@ -34,12 +34,12 @@ BlackHole::BlackHole()
 : SpaceObject(5000, "BlackHole")
 {
     update_delta = 0.0;
-    PathPlannerManager::getInstance()->addAvoidObject(this, 7000);
     setRadarSignatureInfo(0.9, 0, 0);
 
     if (entity) {
         entity.getOrAddComponent<NeverRadarBlocked>();
         entity.getOrAddComponent<Gravity>().damage = true;
+        entity.getOrAddComponent<AvoidObject>().range = 7000.0f;
     }
 }
 

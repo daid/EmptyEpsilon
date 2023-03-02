@@ -3,14 +3,12 @@
 
 #include "nebula.h"
 #include "spaceObject.h"
-#include "pathPlanner.h"
 
 class WormHole : public SpaceObject, public Updatable
 {
 private:
     glm::vec2 target_position = glm::vec2(0.0f, 0.0f);
     float update_delta = 0.0f;
-    P<PathPlannerManager>  pathPlanner;
 
     int radar_visual;
     static const int cloud_count = 5;

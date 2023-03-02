@@ -8,6 +8,7 @@
 #include "scriptInterface.h"
 #include "textureManager.h"
 #include "components/gravity.h"
+#include "components/avoidobject.h"
 
 #include "glObjects.h"
 #include "shaderRegistry.h"
@@ -51,9 +52,6 @@ REGISTER_MULTIPLAYER_CLASS(WormHole, "WormHole");
 WormHole::WormHole()
 : SpaceObject(DEFAULT_COLLISION_RADIUS, "WormHole")
 {
-    pathPlanner = PathPlannerManager::getInstance();
-    pathPlanner->addAvoidObject(this, (DEFAULT_COLLISION_RADIUS * AVOIDANCE_MULTIPLIER) );
-
     setRadarSignatureInfo(0.9, 0.0, 0.0);
 
     // Choose a texture to show on radar
@@ -72,6 +70,8 @@ WormHole::WormHole()
         auto g = entity.getOrAddComponent<Gravity>();
         g.damage = true;
         g.range = DEFAULT_COLLISION_RADIUS;
+
+        entity.getOrAddComponent<AvoidObject>().range = DEFAULT_COLLISION_RADIUS * AVOIDANCE_MULTIPLIER;
     }
 }
 

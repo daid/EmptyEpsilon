@@ -4,11 +4,11 @@
 #include "components/collision.h"
 #include "components/rendering.h"
 #include "components/spin.h"
+#include "components/avoidobject.h"
 #include "asteroid.h"
 #include "explosionEffect.h"
 #include "main.h"
 #include "random.h"
-#include "pathPlanner.h"
 
 #include "scriptInterface.h"
 #include "glObjects.h"
@@ -41,8 +41,6 @@ Asteroid::Asteroid()
     setRotation(random(0, 360));
     setRadarSignatureInfo(0.05f, 0, 0);
 
-    PathPlannerManager::getInstance()->addAvoidObject(this, 300);
-
     if (entity) {
         auto z = random(-50, 50);
         auto size = random(110, 130);
@@ -67,6 +65,8 @@ Asteroid::Asteroid()
 
         auto& spin = entity.getOrAddComponent<Spin>();
         spin.rate = random(0.1f, 0.8f);
+
+        entity.getOrAddComponent<AvoidObject>().range = 300.0f;
     }
 }
 

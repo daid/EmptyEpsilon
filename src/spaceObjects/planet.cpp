@@ -1,7 +1,6 @@
 #include <graphics/opengl.h>
 #include "planet.h"
 #include "main.h"
-#include "pathPlanner.h"
 
 #include "scriptInterface.h"
 #include "glObjects.h"
@@ -11,6 +10,7 @@
 #include "multiplayer_client.h"
 #include "components/collision.h"
 #include "components/radarblock.h"
+#include "components/avoidobject.h"
 
 #include <glm/vec4.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -275,8 +275,9 @@ void Planet::update(float delta)
     if (collision_size == -2.0f)
     {
         updateCollisionSize();
-        if (collision_size > 0.0f)
-            PathPlannerManager::getInstance()->addAvoidObject(this, collision_size);
+        if (collision_size > 0.0f) {
+            entity.getOrAddComponent<AvoidObject>().range = collision_size;
+        }
     }
 
     if (orbit_distance > 0.0f)
