@@ -92,7 +92,7 @@ void MissileSystem::startUnload(sp::ecs::Entity source, MissileTubes::MountPoint
 
 void MissileSystem::fire(sp::ecs::Entity source, MissileTubes::MountPoint& tube, float target_angle, sp::ecs::Entity target)
 {
-    //TODO: parent->didAnOffensiveAction();
+    Faction::didAnOffensiveAction(source);
 
     auto docking_port = source.getComponent<DockingPort>();
     if (docking_port && docking_port->state != DockingPort::State::NotDocking) return;

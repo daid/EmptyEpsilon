@@ -744,19 +744,6 @@ void SpaceShip::hackFinished(P<SpaceObject> source, ShipSystem::Type target)
         sys->hacked_level = std::min(1.0f, sys->hacked_level + 0.5f);
 }
 
-void SpaceShip::didAnOffensiveAction()
-{
-    //We did an offensive action towards our target.
-    // Check for each faction. If this faction knows if the target is an enemy or a friendly, it now knows if this object is an enemy or a friendly.
-    for(auto [faction_entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
-        if (getScannedStateForFaction(faction_entity) == ScanState::State::NotScanned)
-        {
-            if (getTarget() && getTarget()->getScannedStateForFaction(faction_entity) != ScanState::State::NotScanned)
-                setScannedStateForFaction(faction_entity, ScanState::State::FriendOrFoeIdentified);
-        }
-    }
-}
-
 bool SpaceShip::hasSystem(ShipSystem::Type system)
 {
     return ShipSystem::get(entity, system) != nullptr;

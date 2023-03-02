@@ -23,6 +23,8 @@ public:
     static sp::ecs::Entity find(const string& name);
     static FactionInfo& getInfo(sp::ecs::Entity entity);
     static FactionRelation getRelation(sp::ecs::Entity a, sp::ecs::Entity b);
+
+    static void didAnOffensiveAction(sp::ecs::Entity entity);
 };
 
 class FactionInfo

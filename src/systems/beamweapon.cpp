@@ -16,9 +16,8 @@ void BeamWeaponSystem::update(float delta)
     if (!game_server) return;
     if (delta <= 0.0f) return;
 
-    for(auto [entity, beamsys, target, transform, reactor, docking_port, obj] : sp::ecs::Query<BeamWeaponSys, Target, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>, SpaceObject*>()) {
+    for(auto [entity, beamsys, target, transform, reactor, docking_port] : sp::ecs::Query<BeamWeaponSys, Target, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>>()) {
         if (!target.entity) continue;
-        P<SpaceShip> ship = P<SpaceObject>(obj);
         auto warp = entity.getComponent<WarpDrive>();
 
         for(auto& mount : beamsys.mounts) {
@@ -83,8 +82,7 @@ void BeamWeaponSystem::update(float delta)
 
                             //When we fire a beam, and we hit an enemy, check if we are not scanned yet, if we are not, and we hit something that we know is an enemy or friendly,
                             //  we now know if this ship is an enemy or friend.
-                            if (ship)
-                                ship->didAnOffensiveAction();
+                            Faction::didAnOffensiveAction(entity);
 
                             mount.cooldown = mount.cycle_time; // Reset time of weapon
 

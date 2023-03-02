@@ -34,6 +34,29 @@ FactionRelation Faction::getRelation(sp::ecs::Entity a, sp::ecs::Entity b)
     return fia.getRelation({});
 }
 
+// TODO: Info about multiple components belongs in systems, not in component code.
+#include "components/target.h"
+#include "components/scanning.h"
+
+void Faction::didAnOffensiveAction(sp::ecs::Entity entity)
+{
+    //We did an offensive action towards our target.
+    // Check for each faction. If this faction knows if the target is an enemy or a friendly, it now knows if this object is an enemy or a friendly.
+    auto scanstate = entity.getComponent<ScanState>();
+    if (!scanstate) return;
+    auto target = entity.getComponent<Target>();
+    if (!target || !target->entity) return;
+    auto target_scan_state = target->entity.getComponent<ScanState>();
+
+    for(auto [faction_entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
+        if (scanstate->getStateFor(entity) == ScanState::State::NotScanned)
+        {
+            if (!target_scan_state || target_scan_state->getStateFor(entity) != ScanState::State::NotScanned)
+                scanstate->setStateFor(entity, ScanState::State::FriendOrFoeIdentified);
+        }
+    }
+}
+
 FactionRelation FactionInfo::getRelation(sp::ecs::Entity faction_entity)
 {
     for(auto it : relations)

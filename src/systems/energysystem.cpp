@@ -3,6 +3,7 @@
 #include "components/coolant.h"
 #include "components/reactor.h"
 #include "components/hull.h"
+#include "components/collision.h"
 #include "spaceObjects/spaceObject.h"
 #include "spaceObjects/explosionEffect.h"
 #include "multiplayer_server.h"
@@ -44,18 +45,22 @@ void EnergySystem::update(float delta)
         {
             auto hull = entity.getComponent<Hull>();
             if (hull && hull->allow_destruction) {
-                auto obj_ptr = entity.getComponent<SpaceObject*>();
-                if (obj_ptr) {
-                    auto obj = *obj_ptr;
+                auto transform = entity.getComponent<sp::Transform>();
+                if (transform) {
                     auto e = new ExplosionEffect();
                     e->setSize(1000.0f);
-                    e->setPosition(obj->getPosition());
+                    e->setPosition(transform->getPosition());
                     e->setRadarSignatureInfo(0.0, 0.4, 0.4);
 
-                    DamageInfo info(entity, DamageType::Kinetic, obj->getPosition());
-                    DamageSystem::damageArea(obj->getPosition(), 500, 30, 60, info, 0.0);
+                    DamageInfo info(entity, DamageType::Kinetic, transform->getPosition());
+                    DamageSystem::damageArea(transform->getPosition(), 500, 30, 60, info, 0.0);
+                }
 
-                    obj->destroy();
+                auto obj_ptr = entity.getComponent<SpaceObject*>();
+                if (obj_ptr) {
+                    (*obj_ptr)->destroy();
+                } else {
+                    entity.destroy();
                 }
             }
         }
