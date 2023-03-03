@@ -754,10 +754,7 @@ sp::ecs::Entity ShipAI::findBestTarget(glm::vec2 position, float radius)
     auto owner_position = ot->getPosition();
     for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(radius, radius), position + glm::vec2(radius, radius)))
     {
-        auto ptr = entity.getComponent<SpaceObject*>();
-        if (!ptr || !*ptr) continue;
-        P<SpaceObject> space_object = *ptr;
-        if (!space_object || !space_object->canBeTargetedBy(owner) || Faction::getRelation(owner, entity) != FactionRelation::Enemy || entity == target)
+        if (!entity.hasComponent<Hull>() || Faction::getRelation(owner, entity) != FactionRelation::Enemy || entity == target)
             continue;
         if (RadarBlockSystem::isRadarBlockedFrom(owner_position, entity, short_range))
             continue;
@@ -858,17 +855,16 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
     // Verify if missle can be fired safely
     for(auto entity : sp::CollisionSystem::queryArea(ot->getPosition() - glm::vec2(search_distance, search_distance), ot->getPosition() + glm::vec2(search_distance, search_distance)))
     {
-        auto ptr = entity.getComponent<SpaceObject*>();
-        if (!ptr || !*ptr) continue;
-        P<SpaceObject> obj = *ptr;
         if (Faction::getRelation(owner, entity) != FactionRelation::Enemy && entity.hasComponent<Hull>() && (entity.hasComponent<ImpulseEngine>() || entity.hasComponent<DockingBay>()))
         {
-            // Ship in research triangle
-            const auto owner_to_obj = obj->getPosition() - ot->getPosition();
-            const float heading_to_obj = vec2ToAngle(owner_to_obj);
-            const float angle_from_heading_to_target = std::abs(angleDifference(heading_to_obj, target_angle));
-            if(angle_from_heading_to_target < search_angle){
-              return std::numeric_limits<float>::infinity();
+            if (auto t = entity.getComponent<sp::Transform>()) {
+                // Ship in research triangle
+                const auto owner_to_obj = t->getPosition() - ot->getPosition();
+                const float heading_to_obj = vec2ToAngle(owner_to_obj);
+                const float angle_from_heading_to_target = std::abs(angleDifference(heading_to_obj, target_angle));
+                if (angle_from_heading_to_target < search_angle) {
+                    return std::numeric_limits<float>::infinity();
+                }
             }
         }
     }
