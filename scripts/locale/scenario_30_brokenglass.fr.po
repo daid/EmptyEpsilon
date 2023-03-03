@@ -366,8 +366,10 @@ msgid "Defend the Wormhole Station"
 msgstr "Défendre la station Wormhole."
 
 #: scripts/scenario_30_brokenglass.lua:1231
+#, fuzzy
 msgctxt "wormhole-comms"
 msgid ""
+"\n"
 "Hello Captain. Have you noticed our cool wormhole?\n"
 "\n"
 "We're studying the energy radiating from the wormhole, and the similarities "
@@ -2239,12 +2241,10 @@ msgstr "INCOMPLET !"
 #~ msgid "Contact regional headquarters"
 #~ msgstr "Contacter le Quartier Général régional."
 
-#, lua-format
 #~ msgctxt "buttonGM"
 #~ msgid "Version %s"
 #~ msgstr "Version %s"
 
-#, lua-format
 #~ msgctxt "buttonGM"
 #~ msgid ""
 #~ "Scenario version %s\n"
@@ -2277,7 +2277,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Mission Stations"
 #~ msgstr "Stations de la mission"
 
-#, lua-format
 #~ msgctxt "buttonGM"
 #~ msgid ""
 #~ "This is spoiler information. Consider carefully before you reveal this to "
@@ -2339,7 +2338,6 @@ msgstr "INCOMPLET !"
 #~ msgid "-From Destroy Time"
 #~ msgstr "- Précedent"
 
-#, lua-format
 #~ msgctxt "buttonGM"
 #~ msgid "%i minutes"
 #~ msgstr "%i minutes"
@@ -2372,17 +2370,14 @@ msgstr "INCOMPLET !"
 #~ msgid "-Main"
 #~ msgstr "- Précedent"
 
-#, lua-format
 #~ msgctxt "stationReport-buttonGM"
 #~ msgid "%s %s"
 #~ msgstr "%s %s"
 
-#, lua-format
 #~ msgctxt "stationReport-buttonGM"
 #~ msgid "%s %s  %s  %s  Friendliness:%s"
 #~ msgstr "%s %s  %s  %s  Bienveillance :%s"
 
-#, lua-format
 #~ msgctxt "stationReport-buttonGM"
 #~ msgid ""
 #~ "%s\n"
@@ -2392,7 +2387,6 @@ msgstr "INCOMPLET !"
 #~ "Répartition d'énergie : %s, coque réparée : %s, sondes "
 #~ "réapprovisionnées : %s"
 
-#, lua-format
 #~ msgctxt "stationReport-buttonGM"
 #~ msgid ""
 #~ "%s\n"
@@ -2403,7 +2397,6 @@ msgstr "INCOMPLET !"
 #~ "Sondes réparées : %s, piratage réparé : %s, scanner réparé : %s, manœuvre "
 #~ "réparée : %s, autodestruction réparée :%s, tubes lents réparés : %s"
 
-#, lua-format
 #~ msgctxt "stationReport-buttonGM"
 #~ msgid ""
 #~ "%s\n"
@@ -2412,7 +2405,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "Homing : %s %s, Nuke : %s %s, Mine : %s %s, EMP : %s %s, HVLI : %s %s"
 
-#, lua-format
 #~ msgctxt "stationReport-buttonGM"
 #~ msgid ""
 #~ "%s\n"
@@ -2421,7 +2413,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "Services et leurs coûts :"
 
-#, lua-format
 #~ msgctxt "stationReport-buttonGM"
 #~ msgid ""
 #~ "%s\n"
@@ -2430,7 +2421,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "      Boost téléportation : 10"
 
-#, lua-format
 #~ msgctxt "stationReport-buttonGM"
 #~ msgid ""
 #~ "%s\n"
@@ -2439,7 +2429,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "Marchandises :"
 
-#, lua-format
 #~ msgctxt "stationReport-buttonGM"
 #~ msgid ""
 #~ "%s\n"
@@ -2448,7 +2437,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "    Vendre :"
 
-#, lua-format
 #~ msgctxt "stationReport-buttonGM"
 #~ msgid ""
 #~ "%s\n"
@@ -2457,7 +2445,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "        %s : Coût : %s Quantité : %s"
 
-#, lua-format
 #~ msgctxt "stationReport-buttonGM"
 #~ msgid ""
 #~ "%s\n"
@@ -2466,7 +2453,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "    Échanger :"
 
-#, lua-format
 #~ msgctxt "stationReport-buttonGM"
 #~ msgid ""
 #~ "%s\n"
@@ -2479,29 +2465,24 @@ msgstr "INCOMPLET !"
 #~ msgid "No applicable stations. Reports useless. No action taken"
 #~ msgstr "Aucune station applicable. Rapports inutiles. Pas d'action prise."
 
-#, lua-format
 #~ msgctxt "orders-comms"
 #~ msgid "Protect freighter %s until they dock at %s"
 #~ msgstr "Escorter le cargo %s jusqu'à ce qu'il s'amarre à %s."
 
-#, lua-format
 #~ msgctxt "scienceDescription-buoy"
 #~ msgid "Sensor Record: %s station %s in %s"
 #~ msgstr "Enregistrement du capteur : station %s %s en secteur %s "
 
-#, lua-format
 #~ msgctxt "scienceDescription-buoy"
 #~ msgid "%s, %s station %s in %s"
 #~ msgstr "%s, %s station %s en secteur %s "
 
-#, lua-format
 #~ msgctxt "scienceDescription-buoy"
 #~ msgid "Sensor Record: %s %s %s in %s carrying %s"
 #~ msgstr ""
 #~ "Enregistrement du capteur : vaisseau %s %s %s en secteur %s transportant "
 #~ "%s "
 
-#, lua-format
 #~ msgctxt "scienceDescription-buoy"
 #~ msgid "%s; %s %s %s in %s carrying %s"
 #~ msgstr "%s; %s %s %s en secteur %s transportant %s "
@@ -2580,7 +2561,6 @@ msgstr "INCOMPLET !"
 #~ msgstr ""
 #~ "L'artefact non scanné que nous venons de récupérer a grillé nos scanners."
 
-#, lua-format
 #~ msgctxt "scienceDescription-artifact"
 #~ msgid ""
 #~ "Source of emanations interfering with long range sensors. Range:%.1fu "
@@ -2593,7 +2573,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Source of unusual emanations"
 #~ msgstr "Source d'émanations inhabituelles"
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid ""
 #~ "With the %s just acquired, you improve your impulse engine top speed by "
@@ -2602,7 +2581,6 @@ msgstr "INCOMPLET !"
 #~ "Avec les %s que vous venez d'acquérir, vous améliorez la vitesse de "
 #~ "pointe de vos moteurs à impulsion de 13 %%."
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid ""
 #~ "With the %s just acquired, you improve your shield charge capacity top "
@@ -2611,7 +2589,6 @@ msgstr "INCOMPLET !"
 #~ "Avec les %s que vous venez d'acquérir, vous augmentez la vitesse de "
 #~ "rechargement de vos boucliers de 11 %%."
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid ""
 #~ "With the %s just acquired, you improve your weapon tube load time by 33%%"
@@ -2635,7 +2612,6 @@ msgstr "INCOMPLET !"
 #~ msgid "rear shield"
 #~ msgstr "boucliers arrière"
 
-#, lua-format
 #~ msgctxt "msgScience"
 #~ msgid ""
 #~ "Sensors just picked up an energy field. The ship must have triggered it. "
@@ -2648,12 +2624,10 @@ msgstr "INCOMPLET !"
 #~ "d'autres de nos systèmes. Il faut être prudent. Nos ordinateurs de bord "
 #~ "l'ont affiché sur les écrans Science et Communications."
 
-#, lua-format
 #~ msgctxt "tabWeapons"
 #~ msgid "%s tubes: %s"
 #~ msgstr "%s tubes : %s"
 
-#, lua-format
 #~ msgctxt "tabWeapons"
 #~ msgid "%s tube: %s"
 #~ msgstr "%s tube : %s"
@@ -2663,7 +2637,6 @@ msgstr "INCOMPLET !"
 #~ msgstr ""
 #~ "Nous sommes en train de nous faire attaquer ! Pas le temps de discuter !"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid ""
 #~ "Greetings %s!\n"
@@ -2698,7 +2671,6 @@ msgstr "INCOMPLET !"
 #~ "Veuillez nous excuser si nous semblons un peu distraits. Nous surveillons "
 #~ "attentivement les ennemis à proximité."
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -2717,7 +2689,6 @@ msgstr "INCOMPLET !"
 #~ msgid "We also upgraded your impulse engines."
 #~ msgstr "Nous avons également amélioré vos moteurs à impulsion."
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "The technicians are standing by to transport you back to %s."
 #~ msgstr "Les techniciens sont là pour vous ramener sur %s."
@@ -2750,7 +2721,6 @@ msgstr "INCOMPLET !"
 #~ "Nous avons également multiplié par 3 la portée maximale de votre "
 #~ "téléportation."
 
-#, lua-format
 #~ msgctxt "mission2ndBis-comms"
 #~ msgid ""
 #~ "We have transmitted all of our current research on the Omicron plague "
@@ -2772,7 +2742,6 @@ msgstr "INCOMPLET !"
 #~ "Fargalli. %s\n"
 #~ "Bon retour !"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "Take return transit from %s to %s"
 #~ msgstr "Prendre le transport de retour de %s à %s"
@@ -2806,7 +2775,6 @@ msgstr "INCOMPLET !"
 #~ msgid "I need ordnance restocked"
 #~ msgstr "Nous avons besoin de nous réapprovisionner en munitions"
 
-#, lua-format
 #~ msgctxt "ammo-comms"
 #~ msgid ""
 #~ "What type of ordnance?\n"
@@ -2825,7 +2793,6 @@ msgstr "INCOMPLET !"
 #~ msgid "We really need some nukes ("
 #~ msgstr "Nous avons vraiment besoin d'armes nucléaires. (nuke) ("
 
-#, lua-format
 #~ msgctxt "ammo-comms"
 #~ msgid "%s%d rep each)"
 #~ msgstr "%s%d rép chacun)"
@@ -2867,12 +2834,10 @@ msgstr "INCOMPLET !"
 #~ msgid "Docking services status"
 #~ msgstr "État des services d'accueil"
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid "Station %s docking services status:"
 #~ msgstr "État des services d'accueil de la station %s :"
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -2899,7 +2864,6 @@ msgstr "INCOMPLET !"
 #~ "Les gestionnaires de la station ont réduit le réapprovisionnement des "
 #~ "sondes pour des raisons de réduction des coûts."
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -2927,7 +2891,6 @@ msgstr "INCOMPLET !"
 #~ "Tous les techniciens de réparation de coque sont en quarantaine dans leur "
 #~ "quartiers pour cause de maladie."
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -2959,7 +2922,6 @@ msgstr "INCOMPLET !"
 #~ "de puissance, nous ne pouvons donc pas recharger les vaisseaux pour le "
 #~ "moment."
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -2968,7 +2930,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "Peut booster la téléportation."
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -2977,7 +2938,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "Peut réparer le système de lancement de sonde."
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -2986,7 +2946,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "Peut réparer le système de piratage."
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -2995,7 +2954,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "Peut réparer les scanners."
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -3004,7 +2962,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "Peut réparer la manœuvre de combat."
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -3017,7 +2974,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Overcharge Jump Drive (10 Rep)"
 #~ msgstr "Booster la téléportation (10 rép)"
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid "Your jump drive has been overcharged to %ik"
 #~ msgstr "Votre téléportation a été boostée à %ik."
@@ -3030,7 +2986,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Repair ship system"
 #~ msgstr "Réparer les systèmes du vaisseau"
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid ""
 #~ "What system would you like repaired?\n"
@@ -3041,7 +2996,6 @@ msgstr "INCOMPLET !"
 #~ "\n"
 #~ "Réputation : %i"
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid "Repair probe launch system (%s Rep)"
 #~ msgstr "Réparer le système de lancement de sonde (%s rép)"
@@ -3050,7 +3004,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Your probe launch system has been repaired"
 #~ msgstr "Votre système de lancement de sonde a été réparé."
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid "Repair hacking system (%s Rep)"
 #~ msgstr "Réparer le système de piratage (%s rép)"
@@ -3059,7 +3012,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Your hack system has been repaired"
 #~ msgstr "Votre système de piratage a été réparé."
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid "Repair scanning system (%s Rep)"
 #~ msgstr "Réparer les scanners (%s rép)"
@@ -3068,7 +3020,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Your scanners have been repaired"
 #~ msgstr "Vos scanners ont été réparés."
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid "Repair combat maneuver (%s Rep)"
 #~ msgstr "Réparer la manœuvre de combat (%s rép)"
@@ -3077,7 +3028,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Your combat maneuver has been repaired"
 #~ msgstr "Votre manœuvre de combat a été réparée."
 
-#, lua-format
 #~ msgctxt "dockingServicesStatus-comms"
 #~ msgid "Repair self destruct system (%s Rep)"
 #~ msgstr "Réparer le système d'autodestruction (%s rép)"
@@ -3110,7 +3060,6 @@ msgstr "INCOMPLET !"
 #~ msgid "What are my current orders?"
 #~ msgstr "Quels sont nos ordres en cours ?"
 
-#, lua-format
 #~ msgctxt "orders-comms"
 #~ msgid ""
 #~ "\n"
@@ -3123,7 +3072,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Buy, sell, trade"
 #~ msgstr "Acheter, vendre, échanger"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid ""
 #~ "Station %s:\n"
@@ -3133,7 +3081,6 @@ msgstr "INCOMPLET !"
 #~ "Marchandises ou composants disponibles à la vente : quantité, coût en "
 #~ "réputation :\n"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "     %s: %i, %i\n"
 #~ msgstr "     %s: %i, %i\n"
@@ -3144,12 +3091,10 @@ msgstr "INCOMPLET !"
 #~ "Marchandises ou composants que la station achètera : (prix en "
 #~ "réputation)\n"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "     %s: %i\n"
 #~ msgstr "     %s : %i\n"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Current cargo aboard %s:\n"
 #~ msgstr "Cargaison actuelle à bord de %s :\n"
@@ -3158,17 +3103,14 @@ msgstr "INCOMPLET !"
 #~ msgid "     Empty\n"
 #~ msgstr "     Vide\n"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Available Space: %i, Available Reputation: %i\n"
 #~ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Buy one %s for %i reputation"
 #~ msgstr "Achetez 1 %s pour %i rép"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Type: %s, Quantity: %i, Rep: %i"
 #~ msgstr "Type : %s, Quantité : %i, Rép : %i"
@@ -3205,12 +3147,10 @@ msgstr "INCOMPLET !"
 #~ "\n"
 #~ "Acheté"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Sell one %s for %i reputation"
 #~ msgstr "Vendre 1 %s pour %i rép"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Type: %s,  Reputation price: %i"
 #~ msgstr "Type : %s, Coût en rép : %i"
@@ -3223,12 +3163,10 @@ msgstr "INCOMPLET !"
 #~ "\n"
 #~ "1 vendu"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Trade food for %s"
 #~ msgstr "Échanger de la Nourriture (food) contre %s"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Type: %s,  Quantity: %i"
 #~ msgstr "Type : %s, Quantité : %i"
@@ -3241,12 +3179,10 @@ msgstr "INCOMPLET !"
 #~ "\n"
 #~ "Échangé"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Trade medicine for %s"
 #~ msgstr "Échanger des Médicaments (medicine) contre %s"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Trade luxury for %s"
 #~ msgstr "Échanger des produits de luxe (luxury) contre %s"
@@ -3255,7 +3191,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Jettison cargo"
 #~ msgstr "Larguer la cargaison"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid ""
 #~ "Available space: %i\n"
@@ -3264,7 +3199,6 @@ msgstr "INCOMPLET !"
 #~ "Espace disponible : %i\n"
 #~ "Que voudriez-vous larguer ?"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "One %s jettisoned"
 #~ msgstr "Un %s largué"
@@ -3301,7 +3235,6 @@ msgstr "INCOMPLET !"
 #~ msgstr ""
 #~ "Nous avons une nouvelle recrue à vous proposer au poste de réparateur."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Recruit repair crew member for %i reputation"
 #~ msgstr "Recruter un membre de l'équipe de réparation pour %i réputation."
@@ -3331,42 +3264,34 @@ msgstr "INCOMPLET !"
 #~ "One repair crew should be getting here from their medical checkout in "
 #~ msgstr "Une réparatrice devrait revenir de sa visite médicale dans"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "%s %i seconds"
 #~ msgstr "%s %i secondes."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "%s a second"
 #~ msgstr "%s une seconde."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Several arrived on station earlier. %s %i seconds"
 #~ msgstr "Plusieurs sont arrivés à la station plus tôt. %s %i secondes."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "%i seconds"
 #~ msgstr "%i secondes."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "%i second"
 #~ msgstr "%i seconde."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "%i minutes and %s"
 #~ msgstr "%i minutes et %s."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "%i minute and %s"
 #~ msgstr "%i minute et %s."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid ""
 #~ "There are some repair crew recruits in route for %s. Travel time "
@@ -3383,7 +3308,6 @@ msgstr "INCOMPLET !"
 #~ msgid "We've got some coolant available for you"
 #~ msgstr "Nous avons du liquide de refroidissement disponible pour vous."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Purchase coolant for %i reputation"
 #~ msgstr "Acheter du liquide de refroidissement pour %i de réputation"
@@ -3392,7 +3316,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Additional coolant purchased"
 #~ msgstr "Liquide de refroidissement supplémentaire acheté"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid ""
 #~ "The coolant preparation facility is having difficulty packaging the "
@@ -3413,7 +3336,6 @@ msgstr "INCOMPLET !"
 #~ "le conditionner pour le transport. Ils disent qu'ils devraient y arriver "
 #~ "dans environ 1 seconde."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid ""
 #~ "Our coolant production facility just made some, but it's not quite ready "
@@ -3424,7 +3346,6 @@ msgstr "INCOMPLET !"
 #~ "fabriquer, mais il n'est pas tout à fait prêt à être transporté. A "
 #~ "l'usine on nous dit que cela devrait prendre environ %i secondes."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid ""
 #~ "Our coolant production facility is making more right now. Coolant "
@@ -3518,12 +3439,10 @@ msgstr "INCOMPLET !"
 #~ msgid "Which one would you like to connect to?"
 #~ msgstr "A quel brouilleur souhaitez-vous vous connecter ?"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid "(%i reputation)"
 #~ msgstr "(%i réputation)"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid "%s Automated warp jammer access menu"
 #~ msgstr "Menu d'accès au brouilleur de téléportation et vitesse lumière %s."
@@ -3552,7 +3471,6 @@ msgstr "INCOMPLET !"
 #~ "Why do I have to pay reputation to log in to some of these warp jammers?"
 #~ msgstr "L'accès à certains brouilleurs est payant : explications"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid ""
 #~ "It's complicated. It depends on the relationships between the warp jammer "
@@ -3576,7 +3494,6 @@ msgstr "INCOMPLET !"
 #~ "\n"
 #~ "Le brouilleur est :"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -3585,7 +3502,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "   Ami avec nous (%s) et avec vous (%s) : gratuit"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -3594,7 +3510,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "   Ami avec nous (%s) et neutre avec vous (%s) : 5 rép"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -3603,7 +3518,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "   Ami avec nous (%s) et ennemi avec vous (%s) : 10 rép"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -3612,7 +3526,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "   Neutre avec nous (%s) et ami avec vous (%s) : 10 rép"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -3621,7 +3534,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "   Ennemi avec nous (%s) et ami avec vous (%s) : 15 rép"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -3630,7 +3542,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "   Neutre avec nous (%s) et avec vous (%s) : 20 rép"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -3639,7 +3550,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "   Ennemi avec nous (%s) et neutre avec vous (%s) : 20 rép"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -3648,7 +3558,6 @@ msgstr "INCOMPLET !"
 #~ "%s\n"
 #~ "   Neutre avec nous (%s) et ennemi avec vous (%s) : 25 rép"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid ""
 #~ "%s\n"
@@ -3669,7 +3578,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Where am I?"
 #~ msgstr "Où sommes-nous ?"
 
-#, lua-format
 #~ msgctxt "station-comms"
 #~ msgid ""
 #~ "Based on triangulation and signal strength, our communications software "
@@ -3728,13 +3636,11 @@ msgstr "INCOMPLET !"
 #~ msgstr ""
 #~ "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
 
-#, lua-format
 #~ msgctxt "ammo-comms"
 #~ msgid "We have the following type of ordnance available for restock:%s"
 #~ msgstr ""
 #~ "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
 
-#, lua-format
 #~ msgctxt "ammo-comms"
 #~ msgid "We have the following types of ordnance available for restock:%s"
 #~ msgstr ""
@@ -3747,7 +3653,6 @@ msgstr "INCOMPLET !"
 #~ "Automatisation de réparation de coque indisponible, elle est en cours de "
 #~ "maintenance."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid ""
 #~ "Station %s:\n"
@@ -3770,7 +3675,6 @@ msgstr "INCOMPLET !"
 #~ "leurs marchandises contre de la nourriture, des médicaments ou du luxe "
 #~ "(luxury)."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Station %s in sector %s has %s for %i reputation"
 #~ msgstr "La station %s dans le secteur %s possède du %s pour %i rép."
@@ -3807,32 +3711,26 @@ msgstr "INCOMPLET !"
 #~ msgid "Gossip"
 #~ msgstr "Rumeurs"
 
-#, lua-format
 #~ msgctxt "stationGeneralInfo-comms"
 #~ msgid "Tell me about %s"
 #~ msgstr "Parlez-moi de %s."
 
-#, lua-format
 #~ msgctxt "stationGeneralInfo-comms"
 #~ msgid "Never heard of %s"
 #~ msgstr "Jamais entendu parler de %s."
 
-#, lua-format
 #~ msgctxt "stationGeneralInfo-comms"
 #~ msgid "%s died last week. The funeral was yesterday"
 #~ msgstr "%s est décédé la semaine dernière. L'enterrement a eu lieu hier."
 
-#, lua-format
 #~ msgctxt "stationGeneralInfo-comms"
 #~ msgid "%s? Who's %s? There's nobody here named %s"
 #~ msgstr "%s ? Qui est %s ? Il n'y a personne ici qui s'appelle %s."
 
-#, lua-format
 #~ msgctxt "stationGeneralInfo-comms"
 #~ msgid "We don't talk about %s. They are gone and good riddance"
 #~ msgstr "Pas envie de parler de %s. Ils sont partis et bon débarras."
 
-#, lua-format
 #~ msgctxt "stationGeneralInfo-comms"
 #~ msgid "I think %s moved away"
 #~ msgstr "Je pense que %s a déménagé."
@@ -3853,7 +3751,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Shield "
 #~ msgstr "Boucliers "
 
-#, lua-format
 #~ msgctxt "stationAssist-comms"
 #~ msgid "Can you send a supply drop? (%d rep)"
 #~ msgstr ""
@@ -3869,7 +3766,6 @@ msgstr "INCOMPLET !"
 #~ msgid "To which waypoint should we deliver your supplies?"
 #~ msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
 
-#, lua-format
 #~ msgctxt "stationAssist-comms"
 #~ msgid "We have dispatched a supply ship toward WP %d"
 #~ msgstr ""
@@ -3880,7 +3776,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Not enough reputation!"
 #~ msgstr "Pas assez de réputation !"
 
-#, lua-format
 #~ msgctxt "stationAssist-comms"
 #~ msgid "Please send reinforcements! (%d rep)"
 #~ msgstr "Merci de nous envoyer des renforts ! (%d rép)"
@@ -3894,7 +3789,6 @@ msgstr "INCOMPLET !"
 #~ msgid "To which waypoint should we dispatch the reinforcements?"
 #~ msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
 
-#, lua-format
 #~ msgctxt "stationAssist-comms"
 #~ msgid "We have dispatched %s to assist at WP %d"
 #~ msgstr ""
@@ -3905,7 +3799,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Please send a service jonque for repairs"
 #~ msgstr "Merci de nous envoyer une jonque de service pour les réparations."
 
-#, lua-format
 #~ msgctxt "stationAssist-comms"
 #~ msgid ""
 #~ "Would you like the service jonque to come to you directly or would you "
@@ -3916,7 +3809,6 @@ msgstr "INCOMPLET !"
 #~ "préférez-vous fixer un rendez-vous via un marqueur ? Dans tous les cas, "
 #~ "vous aurez besoin de %1f de réputation."
 
-#, lua-format
 #~ msgctxt "stationAssist-comms"
 #~ msgid "We have dispatched %s to come to you to help with repairs"
 #~ msgstr ""
@@ -3934,17 +3826,14 @@ msgstr "INCOMPLET !"
 #~ "Note : si vous souhaitez utiliser un marqueur, vous devrez revenir au "
 #~ "menu précédent, en définir un puis revenir sur cette page."
 
-#, lua-format
 #~ msgctxt "stationAssist-comms"
 #~ msgid "Rendez-vous at waypoint %i"
 #~ msgstr "Rendez-vous au marqueur %i."
 
-#, lua-format
 #~ msgctxt "stationAssist-comms"
 #~ msgid "We have dispatched %s to rendez-vous at waypoint %i"
 #~ msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au marqueur %i."
 
-#, lua-format
 #~ msgctxt "mission4th-comms"
 #~ msgid ""
 #~ "To: %s\n"
@@ -4063,7 +3952,6 @@ msgstr "INCOMPLET !"
 #~ msgstr ""
 #~ "Cette signature peut-elle nous permettre de localiser l'usine Éxuarie ?"
 
-#, lua-format
 #~ msgctxt "mission4th-comms"
 #~ msgid ""
 #~ "Yes, but if you're unsure, you are authorized to destroy every Exuari "
@@ -4081,7 +3969,6 @@ msgstr "INCOMPLET !"
 #~ "dans les prochaines %i minutes.\n"
 #~ "Bonne chasse !"
 
-#, lua-format
 #~ msgctxt "mission2nd-comms"
 #~ msgid ""
 #~ "To %s\n"
@@ -4107,7 +3994,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Why are you telling me this?"
 #~ msgstr "Pourquoi nous dites-vous cela ?"
 
-#, lua-format
 #~ msgctxt "mission2nd-comms"
 #~ msgid ""
 #~ "We've received word that Independent station %s is conducting ongoing "
@@ -4118,12 +4004,10 @@ msgstr "INCOMPLET !"
 #~ "recherches sur cette maladie et pourrait avoir plus d'informations à ce "
 #~ "sujet, peut-être même un remède."
 
-#, lua-format
 #~ msgctxt "mission2nd-comms"
 #~ msgid "Then you should get that treatment from %s to save Fargalli"
 #~ msgstr "Vous pourriez récupérer ce traitement sur %s pour sauver Fargalli"
 
-#, lua-format
 #~ msgctxt "mission2nd-comms"
 #~ msgid ""
 #~ "We can't contact %s directly since they are not on our communications "
@@ -4136,7 +4020,6 @@ msgstr "INCOMPLET !"
 #~ msgid "A courier could get it"
 #~ msgstr "Un coursier pourrait y aller ?"
 
-#, lua-format
 #~ msgctxt "mission2nd-comms"
 #~ msgid ""
 #~ "We tried sending couriers. All of our couriers were shot down. We are "
@@ -4152,7 +4035,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Now I understand"
 #~ msgstr "Je comprends mieux"
 
-#, lua-format
 #~ msgctxt "mission2nd-comms"
 #~ msgid ""
 #~ "There is some urgency. Based on the previous cases, Fargalli has about %i "
@@ -4162,14 +4044,12 @@ msgstr "INCOMPLET !"
 #~ "Si on se base sur les 2 cas précédents, il reste à l'officier Fargalli "
 #~ "environ %i minutes à vivre."
 
-#, lua-format
 #~ msgctxt "mission2nd-comms"
 #~ msgid "%s is in sector %s. Good luck"
 #~ msgstr ""
 #~ "%s se trouve dans le secteur %s.\n"
 #~ "Bonne chance à vous."
 
-#, lua-format
 #~ msgctxt "mission2nd-comms"
 #~ msgid ""
 #~ "%s is on an approximate bearing of %i from %s. Distance is greater than "
@@ -4178,7 +4058,6 @@ msgstr "INCOMPLET !"
 #~ "%s est située sur un cap approximatif de %i depuis %s. La distance est "
 #~ "supérieure à %.1f unités."
 
-#, lua-format
 #~ msgctxt "mission2nd-comms"
 #~ msgid ""
 #~ "%s is on a precise bearing of %.1f from %s. Distance is greater than %.1f "
@@ -4187,7 +4066,6 @@ msgstr "INCOMPLET !"
 #~ "%s est sur un cap précis de %.1f depuis la station %s. La distance est "
 #~ "supérieure à %.1f unités."
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid ""
 #~ "To: %s\n"
@@ -4200,7 +4078,6 @@ msgstr "INCOMPLET !"
 #~ "\n"
 #~ "Bonjour %s,"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "Hello, %s"
 #~ msgstr "Bonjour %s,"
@@ -4266,14 +4143,12 @@ msgstr "INCOMPLET !"
 #~ msgid "25% faster impulse speed"
 #~ msgstr "Vos moteurs à impulsion 25 % plus rapide"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "You got it. We're in sector %s"
 #~ msgstr ""
 #~ "Marché conclu.\n"
 #~ "Nous vous attendons dans le secteur %s."
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "Rapid transit back to %s"
 #~ msgstr "Retourner rapidement à %s"
@@ -4290,7 +4165,6 @@ msgstr "INCOMPLET !"
 #~ msgid "We just need to know where you are located"
 #~ msgstr "Nous avons juste besoin de savoir où vous vous trouvez"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid ""
 #~ "We added paypoint %i to your system which identifies our station. We may "
@@ -4302,7 +4176,6 @@ msgstr "INCOMPLET !"
 #~ "mesure de fournir ce que vous nous demandez si nous ne sommes pas trop "
 #~ "occupés à combattre les Éxuaris."
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid ""
 #~ "We are in sector %s. We may or may not be able to provide what you "
@@ -4327,7 +4200,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Could you provide us with your location?"
 #~ msgstr "Pourriez-vous nous indiquer votre emplacement ?"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "You mean %s did not tell you where to find us?"
 #~ msgstr "Vous voulez dire que %s ne vous a pas dit où nous trouver ?"
@@ -4336,7 +4208,6 @@ msgstr "INCOMPLET !"
 #~ msgid "They did, but we prefer greater precision"
 #~ msgstr "Ils l'ont fait, mais pas précisément"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid ""
 #~ "We added waypoint %i to your system for our station. Your timely arrival "
@@ -4346,12 +4217,10 @@ msgstr "INCOMPLET !"
 #~ "emplacement. Votre arrivée dans les plus brefs délais serait grandement "
 #~ "appréciée."
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "%s provided a bearing, but we prefer greater precision"
 #~ msgstr "%s nous a fourni un cap, nous aimerions une position plus précise"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid ""
 #~ "We are in sector %s. Your timely arrival would be greatly appreciated."
@@ -4373,7 +4242,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Let me guess, you want our help with the Exuari?"
 #~ msgstr "Laissez-moi deviner, vous souhaitez notre aide avec les Éxuaris ?"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "Got it in one. We're in sector %s. Please don't dawdle"
 #~ msgstr ""
@@ -4396,7 +4264,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Sure"
 #~ msgstr "Bien sûr"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "Great. We're in sector %s"
 #~ msgstr "Génial. Nous sommes dans le secteur %s."
@@ -4413,7 +4280,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Identify your sector and we'll help"
 #~ msgstr "Indiquez-nous votre secteur et nous vous aiderons"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "Fair enough. We're in sector %s"
 #~ msgstr "Tout de suite. Nous sommes dans le secteur %s."
@@ -4434,7 +4300,6 @@ msgstr "INCOMPLET !"
 #~ msgid "They never do. Would you like our help?"
 #~ msgstr "Ils n'en font jamais. Souhaitez-vous notre aide ?"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "Yes, please. We're in sector %s"
 #~ msgstr "Oui s'il vous plaît. Nous nous trouvons dans le secteur %s."
@@ -4443,7 +4308,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Where exactly is 'your way?'"
 #~ msgstr "Et où se situe exactement 'vers vous' ?"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "Our station is located in sector %s. We hope to see you soon."
 #~ msgstr ""
@@ -4454,7 +4318,6 @@ msgstr "INCOMPLET !"
 #~ msgid "We'd like to help, but we're having a hard time finding you"
 #~ msgstr "Nous aimerions vous aider, mais nous avons du mal à vous trouver"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "We're in sector %s. Please hurry, the Exuari look dangerous."
 #~ msgstr ""
@@ -4475,7 +4338,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Where are you located?"
 #~ msgstr "Où êtes-vous situés ?"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "We are in sector %s. Please hurry, the Exuari are approaching."
 #~ msgstr ""
@@ -4494,7 +4356,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Why is that?"
 #~ msgstr "Pourquoi donc ?"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid ""
 #~ "We are in need of some assistance with Exuari that are approaching our "
@@ -4516,7 +4377,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Why the rush?"
 #~ msgstr "Pourquoi cette précipitation ?"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid ""
 #~ "The Exuari! They're getting closer! Please come to us in sector %s as "
@@ -4525,7 +4385,6 @@ msgstr "INCOMPLET !"
 #~ "Les Éxuaris ! Ils se rapprochent dangereusement ! S'il vous plaît, venez "
 #~ "nous aider dans le secteur %s dès que possible."
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid ""
 #~ "The Exuari! They're getting closer! I'm adding waypoint %i into your "
@@ -4535,12 +4394,10 @@ msgstr "INCOMPLET !"
 #~ "sur votre radar pour vous indiquer l'emplacement de notre station. Venez "
 #~ "dès que possible, je vous en supplie."
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "In what sector is %s located?"
 #~ msgstr "Dans quel secteur se situe %s ?"
 
-#, lua-format
 #~ msgctxt "mission3th-comms"
 #~ msgid "%s is located in sector %s."
 #~ msgstr "%s se situe dans le secteur %s."
@@ -4567,12 +4424,10 @@ msgstr "INCOMPLET !"
 #~ msgid "Which waypoint should we defend?"
 #~ msgstr "Quel marqueur devons-nous défendre ?"
 
-#, lua-format
 #~ msgctxt "shipAssist-comms"
 #~ msgid "Defend WP %d"
 #~ msgstr "Défendez le marqueur %d"
 
-#, lua-format
 #~ msgctxt "shipAssist-comms"
 #~ msgid "We are heading to assist at WP %d."
 #~ msgstr "Nous partons pour défendre le marqueur %d."
@@ -4613,22 +4468,18 @@ msgstr "INCOMPLET !"
 #~ msgid " Missiles: "
 #~ msgstr " Missiles : "
 
-#, lua-format
 #~ msgctxt "shipAssist-comms"
 #~ msgid "Dock at %s"
 #~ msgstr "Amarrez-vous à %s"
 
-#, lua-format
 #~ msgctxt "shipAssist-comms"
 #~ msgid "Docking at %s."
 #~ msgstr "En cours d'amarrage à %s."
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Traded luxury for %s"
 #~ msgstr "Échanger Produits de luxe (luxury) contre %s"
 
-#, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Purchased %s from %s"
 #~ msgstr "%s acheté auprès de %s"
@@ -4803,7 +4654,6 @@ msgstr "INCOMPLET !"
 #~ msgid "No"
 #~ msgstr "Non"
 
-#, lua-format
 #~ msgctxt "tabRelay"
 #~ msgid "Disruption %i"
 #~ msgstr "Perturbation %i"
@@ -4852,12 +4702,10 @@ msgstr "INCOMPLET !"
 #~ msgid "Which waypoint should we defend?"
 #~ msgstr "Quel marqueur devons-nous défendre ?"
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "Defend WP %i"
 #~ msgstr "Défendez le marqueur %i."
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "We are heading to assist at WP %i."
 #~ msgstr "Nous partons pour défendre le marqueur %i."
@@ -4894,12 +4742,10 @@ msgstr "INCOMPLET !"
 #~ msgid "Shield "
 #~ msgstr "Bouclier "
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "Dock at %s"
 #~ msgstr "Amarrez-vous à %s"
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "Docking at %s."
 #~ msgstr "En cours d'amarrage à %s."
@@ -4966,7 +4812,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Your self destruct system has been repaired"
 #~ msgstr "Votre système d'autodestruction a été réparé."
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "Full hull repair (%i reputation)"
 #~ msgstr "Réparation complète de la coque (%i rép)"
@@ -4975,7 +4820,6 @@ msgstr "INCOMPLET !"
 #~ msgid "All fixed up and ready to go"
 #~ msgstr "Tout est réparé et prêt à fonctionner."
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "Add %i%% to hull (%i reputation)"
 #~ msgstr "Ajouter %i%% à la coque (%i rép)"
@@ -4992,12 +4836,10 @@ msgstr "INCOMPLET !"
 #~ msgid "What kind of ordnance?"
 #~ msgstr "Quel genre de munitions ?"
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "Restocked your %s type ordnance"
 #~ msgstr "Vos munitions de type %s sont réapprovisionnées."
 
-#, lua-format
 #~ msgctxt "needRep-comms"
 #~ msgid ""
 #~ "You don't have enough reputation to fully replenish your %s type "
@@ -5007,7 +4849,6 @@ msgstr "INCOMPLET !"
 #~ "complètement en munitions de type %s. Vous avez besoin de %i et vous "
 #~ "n'avez que %i. Comment voulez-vous procéder?"
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "Get one (%i reputation)"
 #~ msgstr "En acheter un (%i rép)"
@@ -5018,17 +4859,14 @@ msgstr "INCOMPLET !"
 #~ "Vous devez rester à proximité si vous voulez que je vous réapprovisionne "
 #~ "en munitions."
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "Get %i (%i reputation)"
 #~ msgstr "Acheter %i (%i rép)"
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "%i %ss provided"
 #~ msgstr "%i %ss fourni"
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid ""
 #~ "I don't have enough %s type ordnance to fully restock you. How would you "
@@ -5041,12 +4879,10 @@ msgstr "INCOMPLET !"
 #~ msgid "We'll take all you've got"
 #~ msgstr "Nous prendrons tout ce qu'il vous reste"
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "One %s provided"
 #~ msgstr "Un %s fourni."
 
-#, lua-format
 #~ msgctxt "needRep-comms"
 #~ msgid ""
 #~ "You don't have enough reputation to get all of our %s type ordnance. You "
@@ -5070,7 +4906,6 @@ msgstr "INCOMPLET !"
 #~ "Vous devez rester à proximité si vous voulez que je réapprovisionne vos "
 #~ "sondes."
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "Quick charge the main batteries (%i reputation)"
 #~ msgstr "Charge rapide des batteries principales (%i rép)"
@@ -5167,7 +5002,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Inventory"
 #~ msgstr "Inventaire"
 
-#, lua-format
 #~ msgctxt "inventory-shipLog"
 #~ msgid "%s Current cargo:"
 #~ msgstr "%s Cargaison actuelle :"
@@ -5176,7 +5010,6 @@ msgstr "INCOMPLET !"
 #~ msgid "     Empty"
 #~ msgstr "     Vide"
 
-#, lua-format
 #~ msgctxt "inventory-shipLog"
 #~ msgid "Available space: %i"
 #~ msgstr "Espace disponible : %i"
@@ -5509,7 +5342,6 @@ msgstr "INCOMPLET !"
 #~ "rechange et de l'équipement ainsi que du personnel de réparation là où il "
 #~ "est nécessaire de réparer les stations et vaisseaux."
 
-#, lua-format
 #~ msgctxt "mission1st-comms"
 #~ msgid ""
 #~ "To: %s\n"
@@ -5536,7 +5368,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Regional headquarters blew up"
 #~ msgstr "Le quartier général régional a explosé"
 
-#, lua-format
 #~ msgctxt "incCall"
 #~ msgid ""
 #~ "To: %s\n"
@@ -5566,7 +5397,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Send Repair Crew"
 #~ msgstr "Envoyer un réparateur"
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid ""
 #~ "We cannot transport a repair crew member from %s while the shields are up."
@@ -5574,7 +5404,6 @@ msgstr "INCOMPLET !"
 #~ "Nous ne pouvons pas téléporter un membre de l'équipe de réparation depuis "
 #~ "%s tant que les boucliers sont activés."
 
-#, lua-format
 #~ msgctxt "msgEngineer+"
 #~ msgid ""
 #~ "We cannot transport a repair crew member from %s while the shields are up."
@@ -5582,31 +5411,26 @@ msgstr "INCOMPLET !"
 #~ "Nous ne pouvons pas téléporter un membre de l'équipe de réparation depuis "
 #~ "%s tant que les boucliers sont activés."
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid "%s is moving too fast to transport a repair crew member from %s."
 #~ msgstr ""
 #~ "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
 #~ "l'équipe de réparation depuis %s."
 
-#, lua-format
 #~ msgctxt "msgEngineer+"
 #~ msgid "%s is moving too fast to transport a repair crew member from %s."
 #~ msgstr ""
 #~ "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
 #~ "l'équipe de réparation depuis %s."
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid "Repair crew member retrieved from %s"
 #~ msgstr "Membre de l'équipe de réparation rapatrié depuis %s."
 
-#, lua-format
 #~ msgctxt "msgEngineer+"
 #~ msgid "Repair crew member retrieved from %s"
 #~ msgstr "Membre de l'équipe de réparation téléporté depuis %s."
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid ""
 #~ "%s is too far from %s to transport a repair crew member. Functional "
@@ -5616,7 +5440,6 @@ msgstr "INCOMPLET !"
 #~ "de l'équipe de réparation. Le téléporteur n'est fonctionnel qu'à 3 unités "
 #~ "de distance ou moins."
 
-#, lua-format
 #~ msgctxt "msgEngineer+"
 #~ msgid ""
 #~ "%s is too far from %s to transport a repair crew member. Functional "
@@ -5630,22 +5453,18 @@ msgstr "INCOMPLET !"
 #~ msgid "Estimated time remaining on repairs: "
 #~ msgstr "Estimation du temps restant pour les réparations :"
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid "%s %i seconds"
 #~ msgstr "%s %i secondes"
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid "%s %i minutes and %i seconds"
 #~ msgstr "%s %i minutes et %i secondes"
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid "%s %i minute and %i seconds"
 #~ msgstr "%s %i minute et %i secondes"
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid ""
 #~ "[Repair Crewmember on %s]\n"
@@ -5656,7 +5475,6 @@ msgstr "INCOMPLET !"
 #~ "Nous n'avons pas encore terminé les réparations du moteur sur %s.\n"
 #~ "%s."
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid ""
 #~ "We cannot transport a repair crew member to %s while the shields are up."
@@ -5664,7 +5482,6 @@ msgstr "INCOMPLET !"
 #~ "Nous ne pouvons pas téléporter un membre de l'équipe de réparation sur %s "
 #~ "tant que nos boucliers sont activés."
 
-#, lua-format
 #~ msgctxt "msgEngineer+"
 #~ msgid ""
 #~ "We cannot transport a repair crew member to %s while the shields are up."
@@ -5672,21 +5489,18 @@ msgstr "INCOMPLET !"
 #~ "Nous ne pouvons pas téléporter un membre de l'équipe de réparation sur %s "
 #~ "tant que les boucliers sont activés."
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid "%s is moving too fast to transport a repair crew member to %s."
 #~ msgstr ""
 #~ "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
 #~ "l'équipe de réparation sur %s. Les moteurs doivent être à l'arrêt."
 
-#, lua-format
 #~ msgctxt "msgEngineer+"
 #~ msgid "%s is moving too fast to transport a repair crew member to %s."
 #~ msgstr ""
 #~ "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
 #~ "l'équipe de réparation sur %s."
 
-#, lua-format
 #~ msgctxt "shipLog"
 #~ msgid ""
 #~ "%s has transported one of her repair crew to %s. They report that the "
@@ -5703,7 +5517,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Get Repair Crew"
 #~ msgstr "Obtenir un réparateur"
 
-#, lua-format
 #~ msgctxt "msgEngineer"
 #~ msgid ""
 #~ "We don't have any repair crew to send over to %s. We might get one from %s"
@@ -5711,7 +5524,6 @@ msgstr "INCOMPLET !"
 #~ "Nous n'avons aucun réparateur à envoyer sur %s. Nous pourrions en "
 #~ "récupérer un à %s."
 
-#, lua-format
 #~ msgctxt "msgEngineer+"
 #~ msgid ""
 #~ "We don't have any repair crew to send over to %s. We might get one from %s"
@@ -5731,7 +5543,6 @@ msgstr "INCOMPLET !"
 #~ msgid "disembarking passengers"
 #~ msgstr "débarquer les passagers"
 
-#, lua-format
 #~ msgctxt "mission1st-comms"
 #~ msgid ""
 #~ "To: %s\n"
@@ -5749,13 +5560,11 @@ msgstr "INCOMPLET !"
 #~ "Le cargo %s a pu accoster en toute sécurité et est en train de %s. Merci "
 #~ "pour votre aide."
 
-#, lua-format
 #~ msgctxt "orders-comms"
 #~ msgid "Protect station %s and other friendly stations and ships"
 #~ msgstr ""
 #~ "Protéger la station %s ainsi que les autres stations et vaisseaux amis."
 
-#, lua-format
 #~ msgctxt "orders-comms"
 #~ msgid ""
 #~ "Gather medical details and possible treatment from %s in roughly "
@@ -5787,7 +5596,6 @@ msgstr "INCOMPLET !"
 #~ "La station médicale a été détruite. La peste Omicron va désormais se "
 #~ "répandre et anéantir l'humanité"
 
-#, lua-format
 #~ msgctxt "orders-comms"
 #~ msgid ""
 #~ "Destroy Exuari Omicron plague research station in roughly direction %i"
@@ -5805,7 +5613,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Omicron Broadcast"
 #~ msgstr "Diffusion peste Omicron"
 
-#, lua-format
 #~ msgctxt "shipLog"
 #~ msgid ""
 #~ "[%s] Our analysis of your routine ship telemetry indicates that you "
@@ -5825,7 +5632,6 @@ msgstr "INCOMPLET !"
 #~ msgid "Duration"
 #~ msgstr "Durée"
 
-#, lua-format
 #~ msgctxt "msgMainscreen"
 #~ msgid ""
 #~ "%s.\n"
@@ -5834,7 +5640,6 @@ msgstr "INCOMPLET !"
 #~ "%s.\n"
 #~ "Score : %i. %s"
 
-#, lua-format
 #~ msgctxt "msgMainscreen"
 #~ msgid "%s. Score: %i. %s"
 #~ msgstr "%s. Score : %i. %s"

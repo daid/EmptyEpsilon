@@ -3164,6 +3164,10 @@ msgid "|> UTPLNT441"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:6768
+msgid "Operations"
+msgstr ""
+
+#: scripts/scenario_54_PatrolDuty.lua:6768
 msgctxt "audioUPlanitiaDefend-buttonOperations"
 msgid "|> UTPLNT441"
 msgstr ""

@@ -12,257 +12,277 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
 
-#: src/scienceDatabase.cpp:303
+#: src/scienceDatabase.cpp:397
 msgctxt "database direction"
 msgid "Front"
 msgstr "Přední"
 
-#: src/scienceDatabase.cpp:305
+#: src/scienceDatabase.cpp:399
 msgctxt "database direction"
 msgid "Right"
 msgstr "Pravá"
 
-#: src/scienceDatabase.cpp:307
+#: src/scienceDatabase.cpp:401
 msgctxt "database direction"
 msgid "Left"
 msgstr "Levá"
 
-#: src/scienceDatabase.cpp:309
+#: src/scienceDatabase.cpp:403
 msgctxt "database direction"
 msgid "Rear"
 msgstr "Zadní"
 
-#: src/scienceDatabase.cpp:330
+#: src/scienceDatabase.cpp:426
 msgctxt "database"
 msgid "Factions"
 msgstr "Frakce"
 
-#: src/scienceDatabase.cpp:342 src/scienceDatabase.cpp:345
+#: src/scienceDatabase.cpp:439 src/scienceDatabase.cpp:442
 msgctxt "stance"
 msgid "Neutral"
 msgstr "Neutrální"
 
-#: src/scienceDatabase.cpp:346
+#: src/scienceDatabase.cpp:443
 msgctxt "stance"
 msgid "Enemy"
 msgstr "Nepřátelské"
 
-#: src/scienceDatabase.cpp:347
+#: src/scienceDatabase.cpp:444
 msgctxt "stance"
 msgid "Friendly"
 msgstr "Pratelské"
 
-#: src/scienceDatabase.cpp:355
+#: src/scienceDatabase.cpp:453
 msgctxt "database"
 msgid "Ships"
 msgstr "Lodě"
 
-#: src/scienceDatabase.cpp:394
+#: src/scienceDatabase.cpp:454
+msgid ""
+"Spaceships are vessels capable of withstanding the dangers of travel through "
+"deep space. They can fill many functions and vary broadly in size, from "
+"small tugs to massive dreadnoughts."
+msgstr ""
+
+#: src/scienceDatabase.cpp:500
 msgctxt "database"
 msgid "Class"
 msgstr "Třída"
 
-#: src/scienceDatabase.cpp:395
+#: src/scienceDatabase.cpp:501
 msgctxt "database"
 msgid "Sub-class"
 msgstr "Podtřída"
 
-#: src/scienceDatabase.cpp:396
+#: src/scienceDatabase.cpp:502
 msgctxt "database"
 msgid "Size"
 msgstr "Velikost"
 
-#: src/scienceDatabase.cpp:406
+#: src/scienceDatabase.cpp:513 src/scienceDatabase.cpp:615
 msgctxt "database"
 msgid "Shield"
 msgstr "Štíty"
 
-#: src/scienceDatabase.cpp:408
+#: src/scienceDatabase.cpp:516 src/scienceDatabase.cpp:618
 msgid "Hull"
 msgstr "Trup"
 
-#: src/scienceDatabase.cpp:412
+#: src/scienceDatabase.cpp:520
 msgctxt "database"
 msgid "Move speed"
 msgstr "Rychlost pohybu"
 
-#: src/scienceDatabase.cpp:413
+#: src/scienceDatabase.cpp:521
 msgctxt "database"
 msgid "Reverse move speed"
 msgstr "Rychlost pohybu vzad"
 
-#: src/scienceDatabase.cpp:416
+#: src/scienceDatabase.cpp:524
 msgctxt "database"
 msgid "Turn speed"
 msgstr "Rychlost otáčení"
 
-#: src/scienceDatabase.cpp:420
+#: src/scienceDatabase.cpp:528
 msgctxt "database"
 msgid "Warp speed"
 msgstr "Warp rychlost"
 
-#: src/scienceDatabase.cpp:424
+#: src/scienceDatabase.cpp:532
 msgctxt "database"
 msgid "Jump range"
 msgstr "Dosah skoku"
 
-#: src/scienceDatabase.cpp:431
+#: src/scienceDatabase.cpp:540
 msgid "{direction} beam weapon"
 msgstr "{direction} paprsková zbraň"
 
-#: src/scienceDatabase.cpp:432
+#: src/scienceDatabase.cpp:541
 msgctxt "database"
 msgid "{damage} Dmg / {interval} sec"
 msgstr "{damage} Poškození / {interval} sec"
 
-#: src/scienceDatabase.cpp:441
+#: src/scienceDatabase.cpp:551
 msgctxt "database"
 msgid "{direction} tube"
 msgstr "{direction} torpédomet"
 
-#: src/scienceDatabase.cpp:444
+#: src/scienceDatabase.cpp:554
 msgctxt "database"
 msgid "{direction} small tube"
 msgstr "{direction} malý torpédomet"
 
-#: src/scienceDatabase.cpp:448
+#: src/scienceDatabase.cpp:558
 msgctxt "database"
 msgid "{direction} large tube"
 msgstr "{direction} velký torpédomet"
 
-#: src/scienceDatabase.cpp:452
+#: src/scienceDatabase.cpp:562
 msgctxt "database"
 msgid "{loadtime} sec"
 msgstr "{loadtime} sec"
 
-#: src/scienceDatabase.cpp:459
+#: src/scienceDatabase.cpp:570
 msgid "Storage {weapon}"
 msgstr "{weapon} střely"
 
-#: src/playerInfo.cpp:251
+#: src/scienceDatabase.cpp:580
+#, fuzzy
+msgctxt "database"
+msgid "Stations"
+msgstr "Frakce"
+
+#: src/scienceDatabase.cpp:581
+msgid ""
+"Space stations are permanent, immobile structures ranging in scale from "
+"small outposts to city-sized communities. Many provide restocking and repair "
+"services to neutral and friendly ships."
+msgstr ""
+
+#: src/playerInfo.cpp:253
 msgctxt "station"
 msgid "Helms"
 msgstr "Navigace"
 
-#: src/playerInfo.cpp:252
+#: src/playerInfo.cpp:254
 msgctxt "station"
 msgid "Weapons"
 msgstr "Zbraně"
 
-#: src/playerInfo.cpp:253
+#: src/playerInfo.cpp:255
 msgctxt "station"
 msgid "Engineering"
 msgstr "Strojovna"
 
-#: src/playerInfo.cpp:254
+#: src/playerInfo.cpp:256
 msgctxt "station"
 msgid "Science"
 msgstr "Vědecké st."
 
-#: src/playerInfo.cpp:255
+#: src/playerInfo.cpp:257
 msgctxt "station"
 msgid "Relay"
 msgstr "Komunikace+"
 
-#: src/playerInfo.cpp:256
+#: src/playerInfo.cpp:258
 msgctxt "station"
 msgid "Tactical"
 msgstr "Taktické st."
 
-#: src/playerInfo.cpp:257
+#: src/playerInfo.cpp:259
 msgctxt "station"
 msgid "Engineering+"
 msgstr "Strojovna+"
 
-#: src/playerInfo.cpp:258
+#: src/playerInfo.cpp:260
 msgctxt "station"
 msgid "Operations"
 msgstr "Operační"
 
-#: src/playerInfo.cpp:259
+#: src/playerInfo.cpp:261
 msgctxt "station"
 msgid "Single Pilot"
 msgstr "Jeden pilot"
 
-#: src/playerInfo.cpp:260
+#: src/playerInfo.cpp:262
 msgctxt "station"
 msgid "Damage Control"
 msgstr "Kontrola škod"
 
-#: src/playerInfo.cpp:261
+#: src/playerInfo.cpp:263
 msgctxt "station"
 msgid "Power Management"
 msgstr "Správa napájení"
 
-#: src/playerInfo.cpp:262
+#: src/playerInfo.cpp:264
 msgctxt "station"
 msgid "Database"
 msgstr "Databáze"
 
-#: src/playerInfo.cpp:263
+#: src/playerInfo.cpp:265
 msgctxt "station"
 msgid "Strategic Map"
 msgstr "Strategická mapa"
 
-#: src/playerInfo.cpp:264
+#: src/playerInfo.cpp:266
 msgctxt "station"
 msgid "Comms"
 msgstr "Komunikace"
 
-#: src/playerInfo.cpp:265
+#: src/playerInfo.cpp:267
 msgctxt "station"
 msgid "Ship's Log"
 msgstr "Lodní deník"
 
-#: src/shipTemplate.cpp:137
+#: src/shipTemplate.cpp:317
 msgid "No class"
 msgstr "Žádná třída"
 
-#: src/shipTemplate.cpp:138
+#: src/shipTemplate.cpp:318
 msgid "No sub-class"
 msgstr "Žádná podtřída"
 
-#: src/shipTemplate.cpp:396
+#: src/shipTemplate.cpp:576
 msgctxt "system"
 msgid "Reactor"
 msgstr "Reaktor"
 
-#: src/shipTemplate.cpp:397
+#: src/shipTemplate.cpp:577
 msgctxt "system"
 msgid "Beam Weapons"
 msgstr "Paprskové zbraně"
 
-#: src/shipTemplate.cpp:398
+#: src/shipTemplate.cpp:578
 msgctxt "system"
 msgid "Missile System"
 msgstr "Torpédomety"
 
-#: src/shipTemplate.cpp:399
+#: src/shipTemplate.cpp:579
 msgctxt "system"
 msgid "Maneuvering"
 msgstr "Manévrování"
 
-#: src/shipTemplate.cpp:400
+#: src/shipTemplate.cpp:580
 msgctxt "system"
 msgid "Impulse Engines"
 msgstr "Impulzní pohon"
 
-#: src/shipTemplate.cpp:401
+#: src/shipTemplate.cpp:581
 msgctxt "system"
 msgid "Warp Drive"
 msgstr "Warpový pohon"
 
-#: src/shipTemplate.cpp:402
+#: src/shipTemplate.cpp:582
 msgctxt "system"
 msgid "Jump Drive"
 msgstr "Skokový pohon"
 
-#: src/shipTemplate.cpp:403
+#: src/shipTemplate.cpp:583
 msgctxt "system"
 msgid "Front Shield Generator"
 msgstr "Přední generátor štítů"
 
-#: src/shipTemplate.cpp:404
+#: src/shipTemplate.cpp:584
 msgctxt "system"
 msgid "Rear Shield Generator"
 msgstr "Zadní generátor štítů"
@@ -284,8 +304,8 @@ msgctxt "connectserver"
 msgid "Connecting..."
 msgstr "Připojuji se..."
 
-#: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:44
-#: src/menus/shipSelectionScreen.cpp:501 src/screens/gm/gameMasterScreen.cpp:93
+#: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:56
+#: src/menus/shipSelectionScreen.cpp:524 src/screens/gm/gameMasterScreen.cpp:93
 #: src/screens/gm/objectCreationView.cpp:136
 #: src/screens/gm/globalMessageEntryView.cpp:19
 #: src/screenComponents/selfDestructButton.cpp:25
@@ -295,7 +315,7 @@ msgctxt "button"
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: src/menus/joinServerMenu.cpp:65
+#: src/menus/joinServerMenu.cpp:66
 msgid "Please enter the server password:"
 msgstr "Prosím zadejte heslo serveru:"
 
@@ -364,32 +384,90 @@ msgid "Last Session ({last})"
 msgstr "Předchozí sezeni ({last})"
 
 #: src/menus/mainMenus.cpp:72
+#, fuzzy
+msgctxt "Credits"
 msgid "Version: {version}"
 msgstr "Verze: {version}"
 
 #: src/menus/mainMenus.cpp:74
+#, fuzzy
+msgctxt "mainMenu"
 msgid "Your name:"
 msgstr "Vaše jméno:"
 
-#: src/menus/mainMenus.cpp:79 src/menus/serverCreationScreen.cpp:89
+#: src/menus/mainMenus.cpp:79
+#, fuzzy
+msgctxt "mainMenu"
 msgid "Start server"
 msgstr "Spustit server"
 
 #: src/menus/mainMenus.cpp:84
+#, fuzzy
+msgctxt "mainMenu"
 msgid "Start client"
 msgstr "Spustit klienta"
 
 #: src/menus/mainMenus.cpp:89
+#, fuzzy
+msgctxt "mainMenu"
 msgid "Options"
 msgstr "Nastavení"
 
 #: src/menus/mainMenus.cpp:94
+#, fuzzy
+msgctxt "mainMenu"
 msgid "Quit"
 msgstr "Ukončit"
 
 #: src/menus/mainMenus.cpp:98
+#, fuzzy
+msgctxt "mainMenu"
 msgid "Tutorials"
 msgstr "Výuka"
+
+#: src/menus/mainMenus.cpp:104
+msgctxt "Credits"
+msgid "Credits"
+msgstr ""
+
+#: src/menus/mainMenus.cpp:105
+#, fuzzy
+msgctxt "Credits"
+msgid "Programming:"
+msgstr "Toulat se"
+
+#: src/menus/mainMenus.cpp:112
+#, fuzzy
+msgctxt "Credits"
+msgid "Graphics:"
+msgstr "Nastavení zobrazení"
+
+#: src/menus/mainMenus.cpp:115
+#, fuzzy
+msgctxt "Credits"
+msgid "Localization:"
+msgstr "Varianta: "
+
+#: src/menus/mainMenus.cpp:119
+msgctxt "Credits"
+msgid "Music:"
+msgstr ""
+
+#: src/menus/mainMenus.cpp:126
+msgctxt "Credits"
+msgid "Models:"
+msgstr ""
+
+#: src/menus/mainMenus.cpp:130
+msgctxt "Credits"
+msgid "Crew sprites:"
+msgstr ""
+
+#: src/menus/mainMenus.cpp:133
+#, fuzzy
+msgctxt "Credits"
+msgid "Special thanks:"
+msgstr "Zvláštní pohony:"
 
 #: src/menus/serverCreationScreen.cpp:31
 msgid "Server configuration"
@@ -436,10 +514,14 @@ msgid "Server IP: "
 msgstr "IP adresy serveru: "
 
 #: src/menus/serverCreationScreen.cpp:83 src/menus/serverCreationScreen.cpp:118
-#: src/menus/serverCreationScreen.cpp:197 src/menus/shipSelectionScreen.cpp:231
+#: src/menus/serverCreationScreen.cpp:197 src/menus/shipSelectionScreen.cpp:252
 #, fuzzy
 msgid "Close"
 msgstr "Zavřít"
+
+#: src/menus/serverCreationScreen.cpp:89
+msgid "Start server"
+msgstr "Spustit server"
 
 #: src/menus/serverCreationScreen.cpp:125
 msgid "Continue"
@@ -572,15 +654,19 @@ msgstr "Hlasitost impulz. motoru: {volume}%"
 msgid "Preview Soundtracks"
 msgstr "Náhled zvukového podkladu"
 
-#: src/menus/shipSelectionScreen.cpp:40 src/menus/shipSelectionScreen.cpp:272
+#: src/menus/shipSelectionScreen.cpp:40 src/menus/shipSelectionScreen.cpp:294
 msgid "Enter this ship's control code:"
 msgstr "Zadejte ovládací kód lodi:"
 
-#: src/menus/shipSelectionScreen.cpp:53
+#: src/menus/shipSelectionScreen.cpp:65
 msgid "Ok"
 msgstr "Ok"
 
-#: src/menus/shipSelectionScreen.cpp:59
+#: src/menus/shipSelectionScreen.cpp:72
+msgid "OK"
+msgstr "OK"
+
+#: src/menus/shipSelectionScreen.cpp:104
 msgid ""
 "Control code accepted.\n"
 "Granting access."
@@ -588,161 +674,157 @@ msgstr ""
 "Ovládací kód přijat.\n"
 "Uděluji přístup."
 
-#: src/menus/shipSelectionScreen.cpp:68
+#: src/menus/shipSelectionScreen.cpp:113
 #, fuzzy
 msgid "Incorrect control code. Re-enter code:"
 msgstr "Nesprávný kód. Zadejte znovu kód pána hry:"
 
-#: src/menus/shipSelectionScreen.cpp:75
-msgid "OK"
-msgstr "OK"
-
-#: src/menus/shipSelectionScreen.cpp:132
+#: src/menus/shipSelectionScreen.cpp:151
 msgid "Game master"
 msgstr "Pán hry"
 
-#: src/menus/shipSelectionScreen.cpp:136 src/menus/shipSelectionScreen.cpp:162
+#: src/menus/shipSelectionScreen.cpp:156 src/menus/shipSelectionScreen.cpp:183
 msgid "Enter the GM control code:"
 msgstr "Zadejte kód pána hry:"
 
-#: src/menus/shipSelectionScreen.cpp:158
+#: src/menus/shipSelectionScreen.cpp:178
 msgid "Spectate (view all)"
 msgstr "Pozorovat (zobrazit vše)"
 
-#: src/menus/shipSelectionScreen.cpp:183
+#: src/menus/shipSelectionScreen.cpp:204
 #, fuzzy
 msgid "Cinematic"
 msgstr "Filmový pohled"
 
-#: src/menus/shipSelectionScreen.cpp:199
+#: src/menus/shipSelectionScreen.cpp:220
 msgid "Scan complexity: "
 msgstr "Složitost skenu: "
 
-#: src/menus/shipSelectionScreen.cpp:202
+#: src/menus/shipSelectionScreen.cpp:223
 msgctxt "scanning"
 msgid "None (delay)"
 msgstr "Žádná (zpoždení)"
 
-#: src/menus/shipSelectionScreen.cpp:202
+#: src/menus/shipSelectionScreen.cpp:223
 msgctxt "scanning"
 msgid "Simple"
 msgstr "Jednoduchá"
 
-#: src/menus/shipSelectionScreen.cpp:202
+#: src/menus/shipSelectionScreen.cpp:223
 msgctxt "scanning"
 msgid "Normal"
 msgstr "Normální"
 
-#: src/menus/shipSelectionScreen.cpp:202
+#: src/menus/shipSelectionScreen.cpp:223
 msgctxt "scanning"
 msgid "Advanced"
 msgstr "Pokročilá"
 
-#: src/menus/shipSelectionScreen.cpp:207
+#: src/menus/shipSelectionScreen.cpp:228
 msgid "Hacking difficulty: "
 msgstr "Obtížnost hackování: "
 
-#: src/menus/shipSelectionScreen.cpp:210
+#: src/menus/shipSelectionScreen.cpp:231
 msgctxt "hacking"
 msgid "Simple"
 msgstr "Jednoduchá"
 
-#: src/menus/shipSelectionScreen.cpp:210
+#: src/menus/shipSelectionScreen.cpp:231
 msgctxt "hacking"
 msgid "Normal"
 msgstr "Normální"
 
-#: src/menus/shipSelectionScreen.cpp:210
+#: src/menus/shipSelectionScreen.cpp:231
 msgctxt "hacking"
 msgid "Difficult"
 msgstr "Obtížná"
 
-#: src/menus/shipSelectionScreen.cpp:210
+#: src/menus/shipSelectionScreen.cpp:231
 msgctxt "hacking"
 msgid "Fiendish"
 msgstr "Ďábelská"
 
-#: src/menus/shipSelectionScreen.cpp:215
+#: src/menus/shipSelectionScreen.cpp:236
 msgid "Hacking type: "
 msgstr "Typ hackovani: "
 
-#: src/menus/shipSelectionScreen.cpp:218
+#: src/menus/shipSelectionScreen.cpp:239
 msgctxt "hacking"
 msgid "Mine"
 msgstr "Miny"
 
-#: src/menus/shipSelectionScreen.cpp:218
+#: src/menus/shipSelectionScreen.cpp:239
 msgctxt "hacking"
 msgid "Lights"
 msgstr "Světla"
 
-#: src/menus/shipSelectionScreen.cpp:218
+#: src/menus/shipSelectionScreen.cpp:239
 msgctxt "hacking"
 msgid "All"
 msgstr "Vše"
 
-#: src/menus/shipSelectionScreen.cpp:223
+#: src/menus/shipSelectionScreen.cpp:244
 msgid "Beam/shield frequencies"
 msgstr "Frekvence paprsků/štítů"
 
-#: src/menus/shipSelectionScreen.cpp:227
+#: src/menus/shipSelectionScreen.cpp:248
 msgid "Per-system damage"
 msgstr "Poškození systémů"
 
-#: src/menus/shipSelectionScreen.cpp:238
+#: src/menus/shipSelectionScreen.cpp:259
 msgid "Extra settings"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:253
+#: src/menus/shipSelectionScreen.cpp:274
 msgid "Select ship"
 msgstr "Vyberte loď"
 
-#: src/menus/shipSelectionScreen.cpp:254
+#: src/menus/shipSelectionScreen.cpp:275
 msgid "Waiting for server to spawn a ship"
 msgstr "Čekám až server přidá loď"
 
-#: src/menus/shipSelectionScreen.cpp:317
+#: src/menus/shipSelectionScreen.cpp:340
 msgid "Spawn player ship"
 msgstr "Přidat hráčskou loď"
 
-#: src/menus/shipSelectionScreen.cpp:338
+#: src/menus/shipSelectionScreen.cpp:361
 msgid "Scenario selection"
 msgstr "Výběr scénáře"
 
-#: src/menus/shipSelectionScreen.cpp:345
+#: src/menus/shipSelectionScreen.cpp:368
 msgid "Disconnect"
 msgstr "Odpojit"
 
-#: src/menus/shipSelectionScreen.cpp:434
+#: src/menus/shipSelectionScreen.cpp:457
 msgid "6/5 player crew"
 msgstr "posádka: 6/5 hráčů"
 
-#: src/menus/shipSelectionScreen.cpp:437
+#: src/menus/shipSelectionScreen.cpp:460
 msgid "Main screen"
 msgstr "Hlavní obrazovka"
 
-#: src/menus/shipSelectionScreen.cpp:459
+#: src/menus/shipSelectionScreen.cpp:482
 #, fuzzy
 msgid "4/3/1 player crew"
 msgstr "posádka: 4/3 hráči"
 
-#: src/menus/shipSelectionScreen.cpp:467
+#: src/menus/shipSelectionScreen.cpp:490
 msgid "Alternative options"
 msgstr "Alternativní možnosti"
 
-#: src/menus/shipSelectionScreen.cpp:474
+#: src/menus/shipSelectionScreen.cpp:497
 msgid "Main screen controls"
 msgstr "Ovládání hlavní obrazovky"
 
-#: src/menus/shipSelectionScreen.cpp:482
+#: src/menus/shipSelectionScreen.cpp:505
 msgid "Ship window"
 msgstr "Okno z lodi"
 
-#: src/menus/shipSelectionScreen.cpp:495
+#: src/menus/shipSelectionScreen.cpp:518
 msgid "Top-down 3D view"
 msgstr "3D pohled shora"
 
-#: src/menus/shipSelectionScreen.cpp:505
+#: src/menus/shipSelectionScreen.cpp:528
 #, fuzzy
 msgctxt "button"
 msgid "Ready"
@@ -1049,7 +1131,7 @@ msgstr "Zahájit hackování"
 msgid "Link to Science"
 msgstr "Propojit s vědeckou st."
 
-#: src/screens/crew6/relayScreen.cpp:144 src/screens/crew6/relayScreen.cpp:297
+#: src/screens/crew6/relayScreen.cpp:144 src/screens/crew6/relayScreen.cpp:301
 msgid "Launch Probe"
 msgstr "Vyslat sondu"
 
@@ -1579,96 +1661,101 @@ msgid "position"
 msgstr "pozice"
 
 #: src/screens/gm/tweak.cpp:973
+#, fuzzy
+msgid "Repair Crews:"
+msgstr "Další tým opravářů"
+
+#: src/screens/gm/tweak.cpp:979
 msgid "Coolant:"
 msgstr "Chlazení:"
 
-#: src/screens/gm/tweak.cpp:980
+#: src/screens/gm/tweak.cpp:985
 msgid "Max Scan Probes:"
 msgstr "Maximum sond:"
 
-#: src/screens/gm/tweak.cpp:986
+#: src/screens/gm/tweak.cpp:991
 msgid "Scan Probes:"
 msgstr "Sond:"
 
-#: src/screens/gm/tweak.cpp:1036
+#: src/screens/gm/tweak.cpp:1041
 msgctxt "button"
 msgid "Can scan"
 msgstr "Může skenovat"
 
-#: src/screens/gm/tweak.cpp:1042
+#: src/screens/gm/tweak.cpp:1047
 msgctxt "button"
 msgid "Can hack"
 msgstr "Může hackovat"
 
-#: src/screens/gm/tweak.cpp:1048
+#: src/screens/gm/tweak.cpp:1053
 msgctxt "button"
 msgid "Can dock"
 msgstr "Může kotvit"
 
-#: src/screens/gm/tweak.cpp:1054
+#: src/screens/gm/tweak.cpp:1059
 msgctxt "button"
 msgid "Can combat maneuver"
 msgstr "Může dělat úhybné manévry"
 
-#: src/screens/gm/tweak.cpp:1060
+#: src/screens/gm/tweak.cpp:1065
 msgctxt "button"
 msgid "Can self destruct"
 msgstr "Může spustit sebedestrukci"
 
-#: src/screens/gm/tweak.cpp:1066
+#: src/screens/gm/tweak.cpp:1071
 msgctxt "button"
 msgid "Can launch probes"
 msgstr "Může vyslat sondu"
 
-#: src/screens/gm/tweak.cpp:1071
+#: src/screens/gm/tweak.cpp:1076
 msgctxt "button"
 msgid "Auto coolant"
 msgstr "Automatické chlazení"
 
-#: src/screens/gm/tweak.cpp:1076
+#: src/screens/gm/tweak.cpp:1081
 msgctxt "button"
 msgid "Auto repair"
 msgstr "Automatické opravy"
 
-#: src/screens/gm/tweak.cpp:1096
+#: src/screens/gm/tweak.cpp:1102
 msgctxt "player_tweak"
 msgid "Warp (E/s): {energy_per_second}"
 msgstr "Warp (E/s): {energy_per_second}"
 
-#: src/screens/gm/tweak.cpp:1097
+#: src/screens/gm/tweak.cpp:1103
 msgctxt "player_tweak"
 msgid "Shields (E/s): {energy_per_second}"
 msgstr "Štíty (E/s): {energy_per_second}"
 
-#: src/screens/gm/tweak.cpp:1122
+#: src/screens/gm/tweak.cpp:1128
 msgid "Callsign:"
 msgstr "Volací znak:"
 
-#: src/screens/gm/tweak.cpp:1133
+#: src/screens/gm/tweak.cpp:1139
 msgid "Unscanned description:"
 msgstr "Popis - neoskenovaný:"
 
-#: src/screens/gm/tweak.cpp:1140
+#: src/screens/gm/tweak.cpp:1146
 msgid "Friend or Foe Description:"
 msgstr "Popis - přítel/nepřítel:"
 
-#: src/screens/gm/tweak.cpp:1147
+#: src/screens/gm/tweak.cpp:1153
 msgid "Simple Scan Description:"
 msgstr "Popis - jednoduchý sken:"
 
-#: src/screens/gm/tweak.cpp:1154
+#: src/screens/gm/tweak.cpp:1160
 msgid "Full Scan Description:"
 msgstr "Popis - úplný sken:"
 
-#: src/screens/gm/tweak.cpp:1164
+#: src/screens/gm/tweak.cpp:1170
 msgid "Heading:"
 msgstr "Směr:"
 
-#: src/screens/gm/tweak.cpp:1170
+#: src/screens/gm/tweak.cpp:1176
 msgid "Scanning Complexity:"
 msgstr "Složitost skenu:"
 
-#: src/screens/gm/tweak.cpp:1176
+#: src/screens/gm/tweak.cpp:1182
 msgid "Scanning Depth:"
 msgstr "Hloubka skenu:"
 
@@ -1677,7 +1764,7 @@ msgctxt "missile"
 msgid "Lock"
 msgstr "Zaměření"
 
-#: src/screenComponents/alertLevelButton.cpp:13
+#: src/screenComponents/alertLevelButton.cpp:10
 msgid "Alert level"
 msgstr "Stupeň poplachu"
 
@@ -1725,7 +1812,8 @@ msgid "SELF DESTRUCT ACTIVATED"
 msgstr "SEBEDESTRUKCE AKTIVNÍ"
 
 #: src/screenComponents/selfDestructIndicator.cpp:32
-msgid "Waiting for autorization input: {codes} left"
+#, fuzzy
+msgid "Waiting for authorization input: {codes} left"
 msgstr "Čekám na zadání kódu: zbývá zadat {codes} kód(y)"
 
 #: src/screenComponents/selfDestructIndicator.cpp:36
@@ -2051,282 +2139,282 @@ msgstr "Hackování ÚSPEŠNÝ!"
 msgid "Hacking FAILURE!"
 msgstr "Hackování SELHAL!"
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:194
-#: src/spaceObjects/mine.cpp:148
+#: src/spaceObjects/missiles/missileWeapon.cpp:205
+#: src/spaceObjects/mine.cpp:157
 msgctxt "gm_info"
 msgid "Owner"
 msgstr "Majitel"
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:201
+#: src/spaceObjects/missiles/missileWeapon.cpp:212
 msgctxt "gm_info"
 msgid "Target"
 msgstr "Cíl"
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:204
-#: src/spaceObjects/mine.cpp:151
+#: src/spaceObjects/missiles/missileWeapon.cpp:215
+#: src/spaceObjects/mine.cpp:160
 msgctxt "gm_info"
 msgid "Faction"
 msgstr "Frakce"
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:205
+#: src/spaceObjects/missiles/missileWeapon.cpp:216
 msgctxt "gm_info"
 msgid "Lifetime"
 msgstr ""
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:206
+#: src/spaceObjects/missiles/missileWeapon.cpp:217
 msgctxt "gm_info"
 msgid "Size"
 msgstr "Velikost"
 
-#: src/spaceObjects/spaceship.cpp:1624
+#: src/spaceObjects/spaceship.cpp:1901
 msgctxt "missile"
 msgid "Homing"
 msgstr "Naváděné"
 
-#: src/spaceObjects/spaceship.cpp:1626
+#: src/spaceObjects/spaceship.cpp:1903
 msgctxt "missile"
 msgid "Nuke"
 msgstr "Jaderné"
 
-#: src/spaceObjects/spaceship.cpp:1628
+#: src/spaceObjects/spaceship.cpp:1905
 msgctxt "missile"
 msgid "Mine"
 msgstr "Miny"
 
-#: src/spaceObjects/spaceship.cpp:1630
+#: src/spaceObjects/spaceship.cpp:1907
 msgctxt "missile"
 msgid "EMP"
 msgstr "EMP"
 
-#: src/spaceObjects/spaceship.cpp:1632
+#: src/spaceObjects/spaceship.cpp:1909
 msgctxt "missile"
 msgid "HVLI"
 msgstr "HVLI"
 
-#: src/spaceObjects/cpuShip.cpp:199
+#: src/spaceObjects/cpuShip.cpp:206
 msgctxt "cpulog"
 msgid "Searching for targets."
 msgstr "Hledá cíle."
 
-#: src/spaceObjects/cpuShip.cpp:208
+#: src/spaceObjects/cpuShip.cpp:215
 msgctxt "cpulog"
 msgid "Searching for hostiles around {x},{y}."
 msgstr "Hledá nepřátele kolem {x},{y}."
 
-#: src/spaceObjects/cpuShip.cpp:217
+#: src/spaceObjects/cpuShip.cpp:224
 msgctxt "cpulog"
 msgid "Searching for supplies."
 msgstr "Hledá zásoby."
 
-#: src/spaceObjects/cpuShip.cpp:220 src/spaceObjects/cpuShip.cpp:295
+#: src/spaceObjects/cpuShip.cpp:227 src/spaceObjects/cpuShip.cpp:311
 msgctxt "cpulog"
 msgid "Docking to {callsign}."
 msgstr "Kotví k {callsign}."
 
-#: src/spaceObjects/cpuShip.cpp:231
+#: src/spaceObjects/cpuShip.cpp:238
 msgctxt "cpulog"
 msgid "Standing ground for now."
 msgstr "Prozatím zůstává na místě."
 
-#: src/spaceObjects/cpuShip.cpp:239
+#: src/spaceObjects/cpuShip.cpp:246
 msgctxt "cpulog"
 msgid "Defending {x},{y}."
 msgstr "Brání {x},{y}."
 
-#: src/spaceObjects/cpuShip.cpp:249
+#: src/spaceObjects/cpuShip.cpp:256
 msgctxt "cpulog"
 msgid "Defending {callsign}."
 msgstr "Brání {callsign}."
 
-#: src/spaceObjects/cpuShip.cpp:259
+#: src/spaceObjects/cpuShip.cpp:266
 msgctxt "cpulog"
 msgid "Following {callsign}."
 msgstr "Sleduje {callsign}."
 
-#: src/spaceObjects/cpuShip.cpp:267 src/spaceObjects/cpuShip.cpp:275
+#: src/spaceObjects/cpuShip.cpp:274 src/spaceObjects/cpuShip.cpp:282
 msgctxt "cpulog"
 msgid "Moving to {x},{y}."
 msgstr "Letí na {x},{y}."
 
-#: src/spaceObjects/cpuShip.cpp:285
+#: src/spaceObjects/cpuShip.cpp:297
 msgctxt "cpulog"
 msgid "Moving to attack {callsign}!"
 msgstr "Leti k útoku na {callsign}!"
 
-#: src/spaceObjects/cpuShip.cpp:310
+#: src/spaceObjects/cpuShip.cpp:326
 msgctxt "gm_info"
 msgid "Orders"
 msgstr "Rozkazy"
 
-#: src/spaceObjects/cpuShip.cpp:368
+#: src/spaceObjects/cpuShip.cpp:384
 msgctxt "orderscpu"
 msgid "Idle"
 msgstr "Nedělat nic"
 
-#: src/spaceObjects/cpuShip.cpp:369
+#: src/spaceObjects/cpuShip.cpp:385
 msgctxt "orderscpu"
 msgid "Roaming"
 msgstr "Toulat se"
 
-#: src/spaceObjects/cpuShip.cpp:370
+#: src/spaceObjects/cpuShip.cpp:386
 msgctxt "orderscpu"
 msgid "Retreat"
 msgstr "Ustoupit"
 
-#: src/spaceObjects/cpuShip.cpp:371
+#: src/spaceObjects/cpuShip.cpp:387
 msgctxt "orderscpu"
 msgid "Stand Ground"
 msgstr "Zůstat na místě"
 
-#: src/spaceObjects/cpuShip.cpp:372
+#: src/spaceObjects/cpuShip.cpp:388
 msgctxt "orderscpu"
 msgid "Defend Location"
 msgstr "Bránit lokaci"
 
-#: src/spaceObjects/cpuShip.cpp:373
+#: src/spaceObjects/cpuShip.cpp:389
 msgctxt "orderscpu"
 msgid "Defend Target"
 msgstr "Bránit cíl"
 
-#: src/spaceObjects/cpuShip.cpp:374
+#: src/spaceObjects/cpuShip.cpp:390
 msgctxt "orderscpu"
 msgid "Fly in formation"
 msgstr "Letět ve formaci"
 
-#: src/spaceObjects/cpuShip.cpp:375
+#: src/spaceObjects/cpuShip.cpp:391
 msgctxt "orderscpu"
 msgid "Fly towards"
 msgstr "Letět k"
 
-#: src/spaceObjects/cpuShip.cpp:376
+#: src/spaceObjects/cpuShip.cpp:392
 msgctxt "orderscpu"
 msgid "Fly towards (ignore all)"
 msgstr "Letět k (ignorovat vše)"
 
-#: src/spaceObjects/cpuShip.cpp:377
+#: src/spaceObjects/cpuShip.cpp:393
 msgctxt "orderscpu"
 msgid "Attack"
 msgstr "Útok"
 
-#: src/spaceObjects/cpuShip.cpp:378
+#: src/spaceObjects/cpuShip.cpp:394
 msgctxt "orderscpu"
 msgid "Dock"
 msgstr "Zadokovat"
 
-#: src/spaceObjects/playerSpaceship.cpp:309
+#: src/spaceObjects/playerSpaceship.cpp:514
 msgctxt "alert"
 msgid "RED ALERT"
 msgstr "ČERVENÝ POPLACH"
 
-#: src/spaceObjects/playerSpaceship.cpp:310
+#: src/spaceObjects/playerSpaceship.cpp:515
 msgctxt "alert"
 msgid "YELLOW ALERT"
 msgstr "ŽLUTÝ POPLACH"
 
-#: src/spaceObjects/playerSpaceship.cpp:311
+#: src/spaceObjects/playerSpaceship.cpp:516
 msgctxt "alert"
 msgid "Normal"
 msgstr "Normální"
 
-#: src/spaceObjects/playerSpaceship.cpp:432
+#: src/spaceObjects/playerSpaceship.cpp:637
 msgctxt "shiplog"
 msgid "Start of log"
 msgstr "Začátek deníku"
 
-#: src/spaceObjects/playerSpaceship.cpp:1099
+#: src/spaceObjects/playerSpaceship.cpp:1304
 msgctxt "shiplog"
 msgid "Hailed by {name}"
 msgstr "Volá nás {name}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1153
+#: src/spaceObjects/playerSpaceship.cpp:1358
 msgctxt "shiplog"
 msgid "Communication channel closed by other side"
 msgstr "Komunikace uzavřena protistranou"
 
-#: src/spaceObjects/playerSpaceship.cpp:1163
+#: src/spaceObjects/playerSpaceship.cpp:1368
 msgctxt "shiplog"
 msgid "Hailing from {callsign} stopped"
 msgstr "Voláni od {callsign} přestalo"
 
-#: src/spaceObjects/playerSpaceship.cpp:1167
+#: src/spaceObjects/playerSpaceship.cpp:1372
 msgctxt "shiplog"
 msgid "Communication channel closed"
 msgstr "Komunikačni kanál uzavřen"
 
-#: src/spaceObjects/playerSpaceship.cpp:1338
-#: src/spaceObjects/playerSpaceship.cpp:1415
+#: src/spaceObjects/playerSpaceship.cpp:1543
+#: src/spaceObjects/playerSpaceship.cpp:1620
 msgctxt "chatdialog"
 msgid "Opened comms with {name}"
 msgstr "Zahájena komunikace s: {name}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1339
+#: src/spaceObjects/playerSpaceship.cpp:1544
 msgctxt "shiplog"
 msgid "Hailing: {name}"
 msgstr "Voláme: {name}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1362
-#: src/spaceObjects/playerSpaceship.cpp:1363
+#: src/spaceObjects/playerSpaceship.cpp:1567
+#: src/spaceObjects/playerSpaceship.cpp:1568
 msgctxt "chatdialog"
 msgid "Opened comms to {callsign}"
 msgstr "Zahájena komunikace s {callsign}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1364
-#: src/spaceObjects/playerSpaceship.cpp:1365
+#: src/spaceObjects/playerSpaceship.cpp:1569
+#: src/spaceObjects/playerSpaceship.cpp:1570
 msgctxt "shiplog"
 msgid "Opened communication channel to {callsign}"
 msgstr "Otevřen komunikační kanál s {callsign}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1367
+#: src/spaceObjects/playerSpaceship.cpp:1572
 msgctxt "shiplog"
 msgid "Refused communications from {callsign}"
 msgstr "Komunikace od {callsign} odmítnuta"
 
-#: src/spaceObjects/playerSpaceship.cpp:1368
+#: src/spaceObjects/playerSpaceship.cpp:1573
 msgctxt "shiplog"
 msgid "Refused communications to {callsign}"
 msgstr "Komunikace s {callsign} odmítnuta"
 
-#: src/spaceObjects/playerSpaceship.cpp:1377
+#: src/spaceObjects/playerSpaceship.cpp:1582
 msgctxt "shiplog"
 msgid "Hail suddenly went dead."
 msgstr "Volani náhle ustalo."
 
-#: src/spaceObjects/playerSpaceship.cpp:1380
+#: src/spaceObjects/playerSpaceship.cpp:1585
 msgctxt "shiplog"
 msgid "Accepted hail from {callsign}"
 msgstr "Přijata komunikace od {callsign}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1400
+#: src/spaceObjects/playerSpaceship.cpp:1605
 msgctxt "shiplog"
 msgid "Refused hail from {callsign}"
 msgstr "Odmítnuta komunikace od {callsign}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1414
+#: src/spaceObjects/playerSpaceship.cpp:1619
 msgctxt "shiplog"
 msgid "Opened communication channel to {name}"
 msgstr "Otevřen komunikační kanál s {name}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1417
+#: src/spaceObjects/playerSpaceship.cpp:1622
 msgctxt "shiplog"
 msgid "Refused hail from {name}"
 msgstr "Odmítnuta komunikace od {name}"
 
-#: src/spaceObjects/shipTemplateBasedObject.cpp:262
+#: src/spaceObjects/shipTemplateBasedObject.cpp:337
 msgctxt "gm_info"
 msgid "CallSign"
 msgstr "Volací znak"
 
-#: src/spaceObjects/shipTemplateBasedObject.cpp:263
+#: src/spaceObjects/shipTemplateBasedObject.cpp:338
 msgctxt "gm_info"
 msgid "Type"
 msgstr "Typ"
 
-#: src/spaceObjects/shipTemplateBasedObject.cpp:264
+#: src/spaceObjects/shipTemplateBasedObject.cpp:339
 msgctxt "gm_info"
 msgid "Hull"
 msgstr "Trup"
 
-#: src/spaceObjects/shipTemplateBasedObject.cpp:269
+#: src/spaceObjects/shipTemplateBasedObject.cpp:344
 msgctxt "gm_info"
 msgid "Shield"
 msgstr "Štíty"
@@ -3125,19 +3213,19 @@ msgstr "Komunikace+"
 
 #: src/gui/hotkeyConfig.cpp:403
 #, fuzzy
-msgctxt "hotkey_Engineering"
+msgctxt "hotkey_Relay"
 msgid "Alert level: Normal"
 msgstr "Stupeň poplachu"
 
 #: src/gui/hotkeyConfig.cpp:404
 #, fuzzy
-msgctxt "hotkey_Engineering"
+msgctxt "hotkey_Relay"
 msgid "Alert level: Yellow"
 msgstr "Stupeň poplachu"
 
 #: src/gui/hotkeyConfig.cpp:405
 #, fuzzy
-msgctxt "hotkey_Engineering"
+msgctxt "hotkey_Relay"
 msgid "Alert level: Red"
 msgstr "Stupeň poplachu"
 
@@ -3795,9 +3883,6 @@ msgstr ""
 
 #~ msgid "Game rules"
 #~ msgstr "Pravidla hry"
-
-#~ msgid "Variation: "
-#~ msgstr "Varianta: "
 
 #~ msgid "Close server"
 #~ msgstr "Vypnout server"

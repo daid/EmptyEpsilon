@@ -246,6 +246,7 @@ msgid "Back to main menu"
 msgstr ""
 
 #: scripts/scenario_81_pvp.lua:341
+msgctxt "incCall"
 msgid ""
 "Well done, Crusader!\n"
 "\n"
@@ -253,6 +254,7 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_81_pvp.lua:353
+msgctxt "incCall"
 msgid ""
 "Good job, Captain!\n"
 "\n"
