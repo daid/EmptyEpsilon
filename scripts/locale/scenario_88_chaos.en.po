@@ -14,7 +14,7 @@ msgid ""
 "Get the player ship access codes from the GM screen after you generate the "
 "terrain\n"
 "\n"
-"Version 2"
+"Version 2.1"
 msgstr ""
 
 # Scenario setting

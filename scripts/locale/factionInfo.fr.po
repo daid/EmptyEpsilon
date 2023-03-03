@@ -12,10 +12,12 @@ msgstr ""
 "X-Generator: Poedit 2.4.3\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: scripts/factionInfo.lua:1
+
+#: scripts/factionInfo.lua:4
 msgid "Independent"
 msgstr "Indépendant"
-#: scripts/factionInfo.lua:3
+
+#: scripts/factionInfo.lua:6
 msgid ""
 "Despite appearing as a faction, independents are distinguished primarily by "
 "having no strong affiliation with any faction at all. Most traders consider "
@@ -27,10 +29,12 @@ msgstr ""
 "plupart des marchands se considèrent comme indépendants, bien que certaines "
 "voix aient commencées à s'élever pour parler de la création d'une faction "
 "marchande."
-#: scripts/factionInfo.lua:5
+
+#: scripts/factionInfo.lua:8
 msgid "Human Navy"
 msgstr "Marine Humaine"
-#: scripts/factionInfo.lua:7
+
+#: scripts/factionInfo.lua:10
 msgid ""
 "The remnants of the human navy.\n"
 "\n"
@@ -58,10 +62,12 @@ msgstr ""
 "vaisseaux militaires sont autorisés a évoluer dans l'espace lointain. Cela "
 "n'a cependant pas empêché certains civils de voyager, en s'engageant sur des "
 "vaisseaux de commerce extraterrestres ou des raiders pirates."
-#: scripts/factionInfo.lua:13
+
+#: scripts/factionInfo.lua:16
 msgid "Kraylor"
 msgstr "Kraylor"
-#: scripts/factionInfo.lua:16
+
+#: scripts/factionInfo.lua:19
 msgid ""
 "The reptilian Kraylor are a race of warriors with a strong religious dogma.\n"
 "\n"
@@ -88,10 +94,12 @@ msgstr ""
 "faibles incapables de résister plus de quelques minutes dans l'espace. En "
 "raison de leur force de caractère et de leur fierté démesurée, les vaisseaux "
 "de Kraylors n'embarquent aucune capsule de sauvetage."
-#: scripts/factionInfo.lua:22
+
+#: scripts/factionInfo.lua:25
 msgid "Arlenians"
 msgstr "Arléniens"
-#: scripts/factionInfo.lua:25
+
+#: scripts/factionInfo.lua:28
 msgid ""
 "Arlenians are energy-based life forms who long ago transcended physical "
 "reality through superior technology. Arlenians' energy forms also give them "
@@ -134,10 +142,12 @@ msgstr ""
 "simplement de ce point de l'espace-temps et réapparaît dans un autre. "
 "Néanmoins, les Kraylors se consacrent à leur destruction, car ils "
 "considèrent les êtres basés sur l'énergie comme physiquement impuissants."
-#: scripts/factionInfo.lua:33
+
+#: scripts/factionInfo.lua:36
 msgid "Exuari"
 msgstr "Éxuari"
-#: scripts/factionInfo.lua:39
+
+#: scripts/factionInfo.lua:42
 msgid ""
 "Exuari are race of predatory amphibians with long noses. They once had an "
 "empire that stretched halfway across the galaxy, but their territory is now "
@@ -159,10 +169,12 @@ msgstr ""
 "En entrant au contact d'autres races, les Éxuaris ont découvert que "
 "massacrer des extraterrestres est plus amusant que de tuer les leurs, et à "
 "ce titre, ils attaquent à vue tous les non-Éxuaris."
-#: scripts/factionInfo.lua:43
+
+#: scripts/factionInfo.lua:46
 msgid "Ghosts"
 msgstr "Fantômes"
-#: scripts/factionInfo.lua:45
+
+#: scripts/factionInfo.lua:48
 msgid ""
 "The Ghosts, an abbreviation of \"ghosts in the machine\", are the result of "
 "complex artificial intelligence experiments. While no known race has "
@@ -220,10 +232,12 @@ msgstr ""
 "\n"
 "La premiere victoire majeure des Fantômes survint lors de la quatrième et "
 "dernière rébellion sur le monde industriel de Topra III."
-#: scripts/factionInfo.lua:52
+
+#: scripts/factionInfo.lua:55
 msgid "Ktlitans"
 msgstr "Ktlitiens"
-#: scripts/factionInfo.lua:54
+
+#: scripts/factionInfo.lua:57
 msgid ""
 "The Ktlitans are intelligent eight-legged creatures that resemble Earth's "
 "arachnids. However, unlike most terrestrial arachnids, the Ktlitans do not "
@@ -281,10 +295,12 @@ msgstr ""
 "possèdent aucun boucliers, ce qui rend les EMP totalement inutiles contre "
 "eux. Par ailleurs, les Ktlitiens n'hésitent pas à recourir à des tactiques "
 "suicidaires pour assurer la survie de leur reine."
-#: scripts/factionInfo.lua:65
+
+#: scripts/factionInfo.lua:68
 msgid "TSN"
 msgstr "FST"
-#: scripts/factionInfo.lua:72
+
+#: scripts/factionInfo.lua:75
 msgid ""
 "The Terran Stellar Navy, or TSN, consists of naval forces based near Terra. "
 "Its members are primarily human.\n"
@@ -310,10 +326,12 @@ msgstr ""
 "\n"
 "La FST et la MSU sont ennemies en raison de la position neutre de la MSU vis-"
 "à-vis des Kraylors."
-#: scripts/factionInfo.lua:78
+
+#: scripts/factionInfo.lua:81
 msgid "USN"
 msgstr "MSU"
-#: scripts/factionInfo.lua:85
+
+#: scripts/factionInfo.lua:88
 msgid ""
 "The United Stellar Navy, or USN, is a naval force near the boundary of human "
 "and Kraylor space consisting of mostly humans. The USN is friendly with the "
@@ -330,10 +348,12 @@ msgstr ""
 "Bien que la MSU soit principalement composée d'humains, d'autres races en "
 "font également partie, notamment certains Kraylors qui ont été acceptés en "
 "son sein. Source de l'opposition entre MSU et FST."
-#: scripts/factionInfo.lua:89
+
+#: scripts/factionInfo.lua:92
 msgid "CUF"
 msgstr "FCU"
-#: scripts/factionInfo.lua:95
+
+#: scripts/factionInfo.lua:98
 msgid ""
 "The Celestial Unified Fleet, or CUF, is the farthest-ranging primarily human "
 "fleet as well as the least xenophobic. The CUF's goals center on exploration "

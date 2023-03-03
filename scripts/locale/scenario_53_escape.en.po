@@ -1795,8 +1795,8 @@ msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3948 scripts/scenario_53_escape.lua:4595
-#: scripts/scenario_53_escape.lua:4677
+#: scripts/scenario_53_escape.lua:3948 scripts/scenario_53_escape.lua:4399
+#: scripts/scenario_53_escape.lua:4595 scripts/scenario_53_escape.lua:4677
 msgctxt "trade-comms"
 msgid "Jettison cargo"
 msgstr ""

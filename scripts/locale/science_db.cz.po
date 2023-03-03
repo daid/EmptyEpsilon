@@ -11,33 +11,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
-#: scripts/science_db.lua:5
+
+#: scripts/science_db.lua:8
 msgid "Natural"
 msgstr ""
-#: scripts/science_db.lua:6
-msgid "Asteroid"
-msgstr ""
-#: scripts/science_db.lua:7
-msgid ""
-"Asteroids are minor planets, usually smaller than a few kilometers. Larger "
-"variants are sometimes refered to as planetoids."
-msgstr ""
-#: scripts/science_db.lua:8
-msgid "Nebula"
-msgstr ""
+
 #: scripts/science_db.lua:9
 msgid ""
-"Nebulae are the birthing places of new stars. These gas fields, usually "
-"created by the death of an old star, slowly form new stars due to the "
-"gravitational pull of its gas molecules. Because of the ever-changing nature "
-"of gas nebulae, most radar and scanning technologies are unable to penetrate "
-"them. Science officers are therefore advised to rely on probes and visual "
-"observations."
+"This database covers naturally occurring phenomena that spaceborne crews "
+"might encounter.\n"
+"\n"
+"While ship captains are encouraged to avoid unnecessary interactions with "
+"these phenomena, knowing their properties can offer an advantage in "
+"conflicts near them."
 msgstr ""
-#: scripts/science_db.lua:11
+
+#: scripts/science_db.lua:13
+msgid "Asteroid"
+msgstr ""
+
+#: scripts/science_db.lua:14
+msgid ""
+"An asteroid is a minor planet, usually smaller than a few kilometers. Larger "
+"variants are sometimes refered to as planetoids."
+msgstr ""
+
+#: scripts/science_db.lua:16
 msgid "Black hole"
 msgstr ""
-#: scripts/science_db.lua:12
+
+#: scripts/science_db.lua:17
 msgid ""
 "A black hole is a point of supercondensed mass with a gravitational pull so "
 "powerful that not even light can escape it. It has no locally detectable "
@@ -51,10 +54,41 @@ msgid ""
 "ship's impulse engines. An object that crosses a black hole is drawn toward "
 "its center and quickly ripped apart by the gravitational forces."
 msgstr ""
-#: scripts/science_db.lua:16
+
+#: scripts/science_db.lua:21
+msgid "Nebula"
+msgstr ""
+
+#: scripts/science_db.lua:22
+msgid ""
+"Nebulae are the birthing places of new stars. These gas fields, usually "
+"created by the death of an old star, slowly form new stars due to the "
+"gravitational pull of its gas molecules.\n"
+"\n"
+"Because of the ever-changing nature of gas nebulae, most radar and scanning "
+"technologies are unable to penetrate them. Science officers are therefore "
+"advised to rely on probes and visual observations."
+msgstr ""
+
+#: scripts/science_db.lua:26
+msgid "Planet"
+msgstr ""
+
+#: scripts/science_db.lua:27
+msgid ""
+"A planetary-mass object is large, dense, near-spherical astronomical body "
+"comprised of various forms of matter. Most planets are either terrestrial, "
+"like Earth, or giants, like the gas giant Jupiter or ice giant Neptune.\n"
+"\n"
+"Planets often have gaseous atmospheres, and some are orbited by one or more "
+"large planetoids typically called moons."
+msgstr ""
+
+#: scripts/science_db.lua:31
 msgid "Wormhole"
 msgstr ""
-#: scripts/science_db.lua:17
+
+#: scripts/science_db.lua:32
 msgid ""
 "A wormhole, also known as an Einstein-Rosen bridge, is a phenomena that "
 "connects two points of spacetime. Jump drives operate in a similar fashion, "
@@ -69,13 +103,233 @@ msgid ""
 "activity, which an astute science officer can detect even through "
 "disruptions such as nebulae."
 msgstr ""
-#: scripts/science_db.lua:21
+
+#: scripts/science_db.lua:37
+msgid "Technologies"
+msgstr ""
+
+#: scripts/science_db.lua:38
+msgid ""
+"This database covers ship systems and technologically created phenomena that "
+"spacefaring crews might encounter in densely populated regions of space.\n"
+"\n"
+"This reference is intended only as a primer. Refer to your ship's technical "
+"manuals and training materials for details on maintaining and operating your "
+"craft."
+msgstr ""
+
+#: scripts/science_db.lua:42
+msgid "Beam/shield frequencies"
+msgstr ""
+
+#: scripts/science_db.lua:43
+msgid "Unit"
+msgstr ""
+
+#: scripts/science_db.lua:43
+msgid "Terahertz"
+msgstr ""
+
+#: scripts/science_db.lua:44
+msgid ""
+"Ships with shield and beam systems can often configure their terahertz-"
+"frequency radiation. By manipulating these frequencies, savvy ship crews can "
+"maximize their beam weapon efficiency while reducing their enemies'.\n"
+"\n"
+"A beam frequency that's resonant with a target's shield frequency can do "
+"considerably more damage, and beam frequencies can be quickly modulated. "
+"Shield frequencies require time to recalibrate.\n"
+"\n"
+"If your Science officer fully scans a target, your ship's computer presents "
+"them with a detailed analysis of beam and shield frequencies and suggests "
+"optimal values for each."
+msgstr ""
+
+#: scripts/science_db.lua:50
+msgid "Hacking measure"
+msgstr ""
+
+#: scripts/science_db.lua:51 scripts/science_db.lua:72
+#: scripts/science_db.lua:85 scripts/science_db.lua:93
+msgid "Interaction"
+msgstr ""
+
+#: scripts/science_db.lua:51
+msgid "Long-range transmission"
+msgstr ""
+
+#: scripts/science_db.lua:52
+msgid ""
+"Thanks to our covert operations teams, we've acquired enough information "
+"about our enemies' computer systems to repurpose our long-range "
+"communications systems into intrusion and exploitation tools.\n"
+"\n"
+"While we've managed to create algorithmic attack vectors that you can deploy "
+"at range to target and degrade specific ship systems, these exploits still "
+"require active human intervention to fully function.\n"
+"\n"
+"To facilitate successful operations in the field, our software engineers "
+"have abstracted the required inputs into common puzzles that even a Relay "
+"crew member can successfully complete."
+msgstr ""
+
+#: scripts/science_db.lua:58
+msgid "Radar signature"
+msgstr ""
+
+#: scripts/science_db.lua:59
+msgid "Signature"
+msgstr ""
+
+#: scripts/science_db.lua:59
+msgid "Related color bands"
+msgstr ""
+
+#: scripts/science_db.lua:60
+msgid "Biological"
+msgstr ""
+
+#: scripts/science_db.lua:60
+msgid "Red, green"
+msgstr ""
+
+#: scripts/science_db.lua:61
+msgid "Electrical"
+msgstr ""
+
+#: scripts/science_db.lua:61
+msgid "Red, blue"
+msgstr ""
+
+#: scripts/science_db.lua:62
+msgid "Gravitational"
+msgstr ""
+
+#: scripts/science_db.lua:62
+msgid "Green, blue"
+msgstr ""
+
+#: scripts/science_db.lua:63
+msgid ""
+"The outer ring of long-range Science radar screens contain three colored "
+"bands that represent raw sensor inputs monitored on that heading. Ships and "
+"space phenomena emit energies or exhibit characteristics that your sensor "
+"suite translates into icons on your radar, but these raw rings can provide "
+"more information to a well-trained eye.\n"
+"\n"
+"For tactical purposes, heat generated by ship systems is registered in raw "
+"thermal sensor data in a similar manner as biological (red, green) sources. "
+"If a ship's systems are under- or over-powered, its electrical (red, blue) "
+"readings change accordingly.\n"
+"\n"
+"A ship warping or preparing to jump exponentially increases its "
+"gravitational (green, blue) output. After completing a jump a ship performs "
+"a massive power transfer that raw sensor data reads as an electrical spike."
+msgstr ""
+
+#: scripts/science_db.lua:69
+msgid "Scan probe"
+msgstr ""
+
+#: scripts/science_db.lua:70
+#, fuzzy
+msgid "Radar range"
+msgstr "Dosah"
+
+#: scripts/science_db.lua:71
+msgid "Typical lifetime"
+msgstr ""
+
+#: scripts/science_db.lua:71
+msgid "10 minutes"
+msgstr ""
+
+#: scripts/science_db.lua:72
+msgid "Systems link"
+msgstr ""
+
+#: scripts/science_db.lua:75
+msgid ""
+"Whether your mission involves scientific investigation, deep-space "
+"exploration, or military operations, remember to take advantage of any scan "
+"probes distributed for your ship.\n"
+"\n"
+"Your Relay officer can launch a probe to any coordinates in their sector "
+"map, which fires its payload at high velocity directly toward the target "
+"coordinates. Upon arrival, Relay can then link the probe to the Science "
+"officer, who can switch their long-range radar to the probe's short-range "
+"radar.\n"
+"\n"
+"This allows the Science officer to scan objects well outside of your ship's "
+"long-range radar range, including regions obfuscated by phenomena like "
+"nebulae that occlude your sensors.\n"
+"\n"
+"Scan probes have a limited energy supply and expire within minutes, and your "
+"ship carries a limited number of them that only some stations can or will "
+"replenish."
+msgstr ""
+
+#: scripts/science_db.lua:83
+msgid "Supply drop"
+msgstr ""
+
+#: scripts/science_db.lua:84
+msgid "Contents"
+msgstr ""
+
+#: scripts/science_db.lua:84
+msgid "Weapons, energy"
+msgstr ""
+
+#: scripts/science_db.lua:85
+msgid "Close-range retrieval"
+msgstr ""
+
+#: scripts/science_db.lua:88
+msgid ""
+"To expedite resupply actions, our engineers have standardized containers for "
+"weapons and energy that can be automatically and quickly integrated into "
+"your ship's systems.\n"
+"\n"
+"Commonly known as a supply drop, your ship needs only to enter near-contact "
+"range with one of these containers to automatically engage your ship's "
+"acquisition and integration systems. Supply drops are cryptographically "
+"keyed to respond only to ships of the same faction, so theft isn't possible."
+msgstr ""
+
+#: scripts/science_db.lua:92
+msgid "Warp jammer"
+msgstr ""
+
+#: scripts/science_db.lua:93
+msgid "Short-range encounter"
+msgstr ""
+
+#: scripts/science_db.lua:96
+msgid ""
+"Warp and jump technologies rely on technological manipulation of "
+"gravitational forces to achieve long-range travel. However, these "
+"manipulative forces can be nullified or interdicted by devices that generate "
+"electromagnetically simulated gravitational wells. Such devices are "
+"colloquially known as warp jammers, even though they can also prevent "
+"jumps.\n"
+"\n"
+"A warping ship that enters a jammer's radius is interdicted and slowed to "
+"impulse speeds. A jumping ship is unable to engage its jump drive while "
+"within a jammer's radius.\n"
+"\n"
+"Ship captains who value the option of retreat are advised to either give "
+"warp jammers a wide berth or prioritize their destruction."
+msgstr ""
+
+#: scripts/science_db.lua:103
 msgid "Weapons"
 msgstr ""
-#: scripts/science_db.lua:22
+
+#: scripts/science_db.lua:104
 msgid ""
-"This database only covers the basic versions of the missiles used throughout "
-"the galaxy.\n"
+"This database covers only the basic versions of missile weapons used "
+"throughout the galaxy.\n"
 "\n"
 "It has been reported that some battleships started using larger variations "
 "of those missiles. Small fighters and even frigates should not have too much "
@@ -88,38 +342,47 @@ msgid ""
 "damage of their basic counterparts, but what good is a missile if it does "
 "not hit its target."
 msgstr ""
-#: scripts/science_db.lua:28
+
+#: scripts/science_db.lua:110
 msgid "Homing missile"
 msgstr ""
-#: scripts/science_db.lua:29 scripts/science_db.lua:34
-#: scripts/science_db.lua:53 scripts/science_db.lua:60
+
+#: scripts/science_db.lua:111 scripts/science_db.lua:116
+#: scripts/science_db.lua:135 scripts/science_db.lua:142
 msgid "Range"
 msgstr "Dosah"
-#: scripts/science_db.lua:30 scripts/science_db.lua:61
+
+#: scripts/science_db.lua:112 scripts/science_db.lua:143
 msgid "Damage"
 msgstr "Poškození"
-#: scripts/science_db.lua:31
+
+#: scripts/science_db.lua:113
 msgid ""
 "This target-seeking missile is the workhorse of many space combat arsenals. "
 "It's compact enough to be fitted on frigates, and packs enough punch to be "
 "used on larger ships, though usually in more than a single missile tube."
 msgstr ""
-#: scripts/science_db.lua:33
+
+#: scripts/science_db.lua:115
 msgid "Nuke"
 msgstr ""
-#: scripts/science_db.lua:35 scripts/science_db.lua:45
-#: scripts/science_db.lua:54
+
+#: scripts/science_db.lua:117 scripts/science_db.lua:127
+#: scripts/science_db.lua:136
 msgid "Blast radius"
 msgstr "Poloměr výbuchu"
-#: scripts/science_db.lua:36 scripts/science_db.lua:46
-#: scripts/science_db.lua:55
+
+#: scripts/science_db.lua:118 scripts/science_db.lua:128
+#: scripts/science_db.lua:137
 msgid "Damage at center"
 msgstr "Poškození v epicentru"
-#: scripts/science_db.lua:37 scripts/science_db.lua:47
-#: scripts/science_db.lua:56
+
+#: scripts/science_db.lua:119 scripts/science_db.lua:129
+#: scripts/science_db.lua:138
 msgid "Damage at edge"
 msgstr "Poškozeni na okraji"
-#: scripts/science_db.lua:38
+
+#: scripts/science_db.lua:120
 msgid ""
 "A nuclear missile is similar to a homing missile in that it can seek a "
 "target, but it moves and turns more slowly and explodes a greatly increased "
@@ -132,16 +395,20 @@ msgid ""
 "often used in the thick of battle, there's no way of knowing if hull plating "
 "or shields can provide enough protection."
 msgstr ""
-#: scripts/science_db.lua:42
+
+#: scripts/science_db.lua:124
 msgid "Mine"
 msgstr ""
-#: scripts/science_db.lua:43
+
+#: scripts/science_db.lua:125
 msgid "Drop distance"
 msgstr "Vypouštěcí vzdálenost"
-#: scripts/science_db.lua:44
+
+#: scripts/science_db.lua:126
 msgid "Trigger distance"
 msgstr "Aktivační vzdálenost"
-#: scripts/science_db.lua:48
+
+#: scripts/science_db.lua:130
 msgid ""
 "Mines are often placed in defensive perimeters around stations. There are "
 "also old minefields scattered around the galaxy from older wars.\n"
@@ -149,10 +416,12 @@ msgid ""
 "Some fearless captains use mines as offensive weapons, but their delayed "
 "detonation and blast radius make this use risky at best."
 msgstr ""
-#: scripts/science_db.lua:52
+
+#: scripts/science_db.lua:134
 msgid "EMP"
 msgstr ""
-#: scripts/science_db.lua:57
+
+#: scripts/science_db.lua:139
 msgid ""
 "The electromagnetic pulse missile (EMP) reproduces the disruptive effects of "
 "a nuclear explosion, but without the destructive properties. This causes it "
@@ -162,13 +431,16 @@ msgid ""
 "them to knock out targets' shields before closing to disable them with "
 "focused beam fire."
 msgstr ""
-#: scripts/science_db.lua:59
+
+#: scripts/science_db.lua:141
 msgid "HVLI"
 msgstr ""
-#: scripts/science_db.lua:62
+
+#: scripts/science_db.lua:144
 msgid "Burst"
 msgstr "Dávka"
-#: scripts/science_db.lua:63
+
+#: scripts/science_db.lua:145
 msgid ""
 "A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high "
 "velocity. This weapon is usually found in simpler ships since it does not "
@@ -179,32 +451,3 @@ msgid ""
 "chance to hit but requires precision aiming to be effective. It reaches its "
 "full damage potential at a range of 2u."
 msgstr ""
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-# Pozemske Hvezdne Namornictvo
-# Spojene Hvezdne Namornictvo
-# Nebeska Sopojena Flotila

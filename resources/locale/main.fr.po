@@ -1114,7 +1114,7 @@ msgstr "Démarrer piratage"
 msgid "Link to Science"
 msgstr "Lier a Science"
 
-#: src/screens/crew6/relayScreen.cpp:144 src/screens/crew6/relayScreen.cpp:300
+#: src/screens/crew6/relayScreen.cpp:144 src/screens/crew6/relayScreen.cpp:301
 msgid "Launch Probe"
 msgstr "Largage sonde"
 
@@ -1792,7 +1792,8 @@ msgid "SELF DESTRUCT ACTIVATED"
 msgstr "AUTO DESTRUCTION ACTIVÉE"
 
 #: src/screenComponents/selfDestructIndicator.cpp:32
-msgid "Waiting for autorization input: {codes} left"
+#, fuzzy
+msgid "Waiting for authorization input: {codes} left"
 msgstr "Validation des codes en cours : {codes} restant"
 
 #: src/screenComponents/selfDestructIndicator.cpp:36
@@ -2141,27 +2142,27 @@ msgctxt "gm_info"
 msgid "Size"
 msgstr "Taille"
 
-#: src/spaceObjects/spaceship.cpp:1903
+#: src/spaceObjects/spaceship.cpp:1901
 msgctxt "missile"
 msgid "Homing"
 msgstr "Homing"
 
-#: src/spaceObjects/spaceship.cpp:1905
+#: src/spaceObjects/spaceship.cpp:1903
 msgctxt "missile"
 msgid "Nuke"
 msgstr "Nuke"
 
-#: src/spaceObjects/spaceship.cpp:1907
+#: src/spaceObjects/spaceship.cpp:1905
 msgctxt "missile"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/spaceObjects/spaceship.cpp:1909
+#: src/spaceObjects/spaceship.cpp:1907
 msgctxt "missile"
 msgid "EMP"
 msgstr "EMP"
 
-#: src/spaceObjects/spaceship.cpp:1911
+#: src/spaceObjects/spaceship.cpp:1909
 msgctxt "missile"
 msgid "HVLI"
 msgstr "HVLI"

@@ -11,3 +11,367 @@ msgid ""
 "\n"
 "Version 5"
 msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Enemies"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures strength and/or number of enemies in this scenario"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Fewer or weaker enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal number or strength of enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "More or stronger enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Extreme"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Much stronger, many more enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Quixotic"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Insanely strong and/or inordinately large numbers of enemies"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Murphy"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures the perversity of the universe according to Murphy's law"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are more in your favor"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are normal"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are more against you"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Quixotic"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "No need for paranoia, the universe *is* out to get you"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Ending"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"Sets the conditions for ending the war: absolute strength % when friendly "
+"and Kraylor give up, relative strength % difference when friendly and "
+"Kraylor give up"
+msgstr ""
+
+msgctxt "Ending"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Ending"
+msgid "Cutoffs 10% easier than normal"
+msgstr ""
+
+msgctxt "Ending"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Ending"
+msgid ""
+"Kraylor surrender if < 70% of their original strength, friendly surrender if "
+"< 50% of their original strength, either will surrender if < 20% relative "
+"strength difference"
+msgstr ""
+
+msgctxt "Ending"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Ending"
+msgid "Cutoffs 10% harder than normal"
+msgstr ""
+
+msgctxt "Ending"
+msgid "Quixotic"
+msgstr ""
+
+msgctxt "Ending"
+msgid "Cutoffs 20% harder than normal"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Timed"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"Sets whether or not the scenario has a time limit. Default is no time limit"
+msgstr ""
+
+msgctxt "Timed"
+msgid "None"
+msgstr ""
+
+msgctxt "Timed"
+msgid "No time limit"
+msgstr ""
+
+msgctxt "Timed"
+msgid "15"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 15 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "20"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 20 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "25"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 25 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "30"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 30 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "35"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 35 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "40"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 40 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "45"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 45 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "50"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 50 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "55"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 55 minutes"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Reputation"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"Starting reputation per player ship. The more initial reputation, the easier "
+"the scenario. Default: Hero = 400 reputation"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Unknown"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Nobody knows you. Zero reputation"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Nice"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "200 reputation - you've helped a few people"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Hero"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "400 reputation - you've helped important people or lots of people"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Major Hero\""
+msgstr ""
+
+msgctxt "Reputation"
+msgid ""
+"700 reputation - you're well known by nearly everyone as a force for good"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Super Hero\""
+msgstr ""
+
+msgctxt "Reputation"
+msgid "1000 reputation - everyone knows you and relies on you for help"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Unique Ship"
+msgstr ""
+
+msgctxt "setting"
+msgid "Choose player ship outside of standard player ship list"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "None"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "None: just use standard player ship list on spawn screen"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Spinstar"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on Atlantis, has spinal beam: narrow, long range, rapid firing, 5 "
+"second duration, 30 second recharge, fewer tubes, weaker shields and hull, "
+"warp, faster maneuver"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Narsil"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on Atlantis, slower impulse, faster maneuver, warp, weaker hull and "
+"shields, add forward HVLI tube and side beam turrets"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Blazon"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on Striker, faster impulse and maneuver, stronger shields, narrower "
+"beams, add beam, add missiles"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Headhunter"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on Piranha, shorter jump, stronger hull and shields, add beam, one "
+"fewer mining tube, fewer mines and nukes, more EMPs"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Simian"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on missile cruiser, 20k jump, add beam, weaker hull, fewer tubes and "
+"missiles"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Spyder"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Based on Atlantis, slower impulse, extra tube, angled tubes"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Sting"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on Hathcock, faster impulse, warp, add mining tube, no nukes or EMPs"
+msgstr ""
