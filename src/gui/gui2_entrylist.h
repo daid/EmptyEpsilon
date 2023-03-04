@@ -16,6 +16,7 @@ private:
     public:
         string name;
         string value;
+        string icon_name = "";
         GuiEntry(string name, string value) : name(name), value(value) {}
     };
 
@@ -31,6 +32,7 @@ public:
 
     void setEntryName(int index, string name);
     void setEntryValue(int index, string value);
+    void setEntryIcon(int index, string icon_name);
     void setEntry(int index, string name, string value);
 
     int addEntry(string name, string value);
@@ -39,6 +41,7 @@ public:
     int entryCount() const;
     string getEntryName(int index) const;
     string getEntryValue(int index) const;
+    string getEntryIcon(int index) const;
 
     int getSelectionIndex() const;
     GuiEntryList* setSelectionIndex(int index);
