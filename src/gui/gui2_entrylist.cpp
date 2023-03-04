@@ -54,6 +54,14 @@ void GuiEntryList::setEntryIcon(int index, string icon_name)
     entriesChanged();
 }
 
+void GuiEntryList::setEntryIsHeading(int index, bool is_heading)
+{
+    if (index < 0 || index >= (int)entries.size())
+        return;
+    entries[index].is_heading = is_heading;
+    entriesChanged();
+}
+
 void GuiEntryList::setEntry(int index, string name, string value)
 {
     if (index < 0 || index >= (int)entries.size())
@@ -114,6 +122,13 @@ string GuiEntryList::getEntryIcon(int index) const
     if (index < 0 || index >= int(entries.size()))
         return "";
     return entries[index].icon_name;
+}
+
+bool GuiEntryList::getEntryIsHeading(int index) const
+{
+    if (index < 0 || index >= int(entries.size()))
+        return "";
+    return entries[index].is_heading;
 }
 
 int GuiEntryList::getSelectionIndex() const

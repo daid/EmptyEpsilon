@@ -126,8 +126,11 @@ void GuiListbox::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     int offset = (position.y - rect.position.y + scroll->getValue()) / button_height;
     if (offset >= 0 && offset < int(entries.size())) {
-        soundManager->playSound("sfx/button.wav");
-        setSelectionIndex(offset);
-        callback();
+        if (!getEntryIsHeading(offset))
+        {
+            setSelectionIndex(offset);
+            soundManager->playSound("sfx/button.wav");
+            callback();
+        }
     }
 }
