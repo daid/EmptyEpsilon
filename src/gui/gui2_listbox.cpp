@@ -40,8 +40,10 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
 {
     hover = false;
     const auto& back = back_style->get(getState());
+    const auto& back_hover = back_style->get(State::Hover);
     const auto& front = front_style->get(getState());
     const auto& back_selected = back_selected_style->get(getState());
+    const auto& back_selected_hover = back_selected_style->get(State::Hover);
     const auto& front_selected = front_selected_style->get(getState());
 
     scroll->setValueSize(rect.size.y);
@@ -58,9 +60,14 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
     int index = 0;
     for(auto& e : entries) {
         if (button_rect.position.y + button_rect.size.y >= rect.position.y && button_rect.position.y <= rect.position.y + rect.size.y) {
-            auto* b = &back;
+            auto* b = button_rect.contains(hover_coordinates) ? &back_hover : &back;
             auto* f = &front;
-            if (index == selection_index) { b = &back_selected; f = &front_selected; }
+            if (index == selection_index)
+            {
+                b = button_rect.contains(hover_coordinates) ? &back_selected_hover : &back_selected;
+                f = &front_selected;
+            }
+
             renderer.drawStretchedHVClipped(button_rect, rect, button_height*0.5f, b->texture, b->color);
             auto prepared = f->font->prepare(e.name, 32, text_size, button_rect.size, sp::Alignment::Center, sp::Font::FlagClip);
             for(auto& c : prepared.data)
