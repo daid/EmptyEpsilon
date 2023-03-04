@@ -68,7 +68,7 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
     int index = 0;
 
     for(auto& e : entries) {
-        // Draw the button only if it will visible within the container.
+        // Draw the button only if it'll be visible within the container.
         if (button_rect.position.y + button_rect.size.y >= rect.position.y
             && button_rect.position.y <= rect.position.y + rect.size.y)
         {
@@ -102,6 +102,7 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
             }
 
             // Prepare the foreground text style.
+            renderer.drawStretchedHVClipped(button_rect, rect, button_height*0.5f, b->texture, b->color);
             auto prepared = f->font->prepare(e.name, 32, text_size, button_rect.size, sp::Alignment::Center, sp::Font::FlagClip);
             for(auto& c : prepared.data)
                 c.position.y -= rect.position.y - button_rect.position.y;
