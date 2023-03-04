@@ -100,19 +100,78 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
 
     template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Ship);
     std::sort(template_names.begin(), template_names.end());
+
+    std::vector<std::pair<string,std::pair<string,string>>> templates_classes;
+
+    for (auto name : template_names)
+    {
+        templates_classes.push_back({
+            name,
+            {
+                ShipTemplate::getTemplate(name)->getClass(),
+                ShipTemplate::getTemplate(name)->getSubClass()
+            }
+        });
+    }
+
+    std::sort(
+        templates_classes.begin(),
+        templates_classes.end(),
+        [](std::pair<string,std::pair<string,string>> a, std::pair<string,std::pair<string,string>> b)
+        {
+            // Sort first by class...
+            return a.second.first < b.second.first;
+        }
+    );
+
+    std::sort(
+        templates_classes.begin(),
+        templates_classes.end(),
+        []
+        (
+            const std::pair<string,std::pair<string,string>> &a,
+            const std::pair<string,std::pair<string,string>> &b
+        )
+        {
+            // ...then by subclass...
+            if (a.second.first == b.second.first)
+            {
+                if (a.second.second != b.second.second)
+                    return a.second.second < b.second.second;
+                else
+                    return a.first < b.first;
+            }
+
+            return a.second.first < b.second.first;
+        }
+    );
+
     cpu_ship_listbox = new GuiListbox(box, "CREATE_SHIPS", [this](int index, string value)
     {
         setCreateScript("CpuShip():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\"):orderRoaming()");
     });
     cpu_ship_listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(300, 460);
-    for(string template_name : template_names)
+    string ship_class, ship_subclass = "";
+    for (std::pair<string,std::pair<string,string>> template_class : templates_classes)
     {
-        auto shipTemplate=ShipTemplate::getTemplate(template_name);
-        if (shipTemplate)
+        // Add a dummy entry if this is a new subclass
+        if (ship_class != template_class.second.first)
         {
-            if (!shipTemplate->visible)
+            ship_class = template_class.second.first;
+            cpu_ship_listbox->addEntry("# " + ship_class, template_class.first);
+        }
+        if (ship_subclass != template_class.second.second)
+        {
+            ship_subclass = template_class.second.second;
+            cpu_ship_listbox->addEntry("## " + ship_subclass, template_class.first);
+        }
+
+        auto ship_template = ShipTemplate::getTemplate(template_class.first);
+        if (ship_template)
+        {
+            if (!ship_template->visible)
                 continue;
-            cpu_ship_listbox->addEntry(ShipTemplate::getTemplate(template_name)->getLocaleName(), template_name);
+            cpu_ship_listbox->addEntry(ShipTemplate::getTemplate(template_class.first)->getLocaleName(), template_class.first);
         }
     }
 
