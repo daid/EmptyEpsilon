@@ -101,8 +101,10 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
                 );
             }
 
+            // Draw the entry background, either as a heading or button.
+            renderer.drawStretchedHVClipped(button_rect, rect, button_height * 0.5f, e.is_heading ? "" : b->texture, b->color);
+
             // Prepare the foreground text style.
-            renderer.drawStretchedHVClipped(button_rect, rect, button_height*0.5f, b->texture, b->color);
             auto prepared = f->font->prepare(e.name, 32, text_size, button_rect.size, sp::Alignment::Center, sp::Font::FlagClip);
             for(auto& c : prepared.data)
                 c.position.y -= rect.position.y - button_rect.position.y;
