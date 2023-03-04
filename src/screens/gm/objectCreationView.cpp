@@ -158,12 +158,14 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         if (ship_class != template_class.second.first)
         {
             ship_class = template_class.second.first;
-            cpu_ship_listbox->addEntry("# " + ship_class, template_class.first);
+            int new_class = cpu_ship_listbox->addEntry(ship_class, template_class.first);
+            cpu_ship_listbox->setEntryIsHeading(new_class, true);
         }
         if (ship_subclass != template_class.second.second)
         {
             ship_subclass = template_class.second.second;
-            cpu_ship_listbox->addEntry("## " + ship_subclass, template_class.first);
+            int new_class = cpu_ship_listbox->addEntry(ship_subclass, template_class.first);
+            cpu_ship_listbox->setEntryIsHeading(new_class, true);
         }
 
         auto ship_template = ShipTemplate::getTemplate(template_class.first);
