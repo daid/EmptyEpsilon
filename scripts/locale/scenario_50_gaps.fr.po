@@ -2371,9 +2371,9 @@ msgid ""
 "Friendly stations generally have food or medicine or both. Neutral stations "
 "often trade their goods for food, medicine or luxury."
 msgstr ""
-"Les stations amicales ont souvent de la nourriture ou des médicaments ou les "
-"deux. Les stations neutres peuvent échanger leurs marchandises contre de la "
-"nourriture, des médicaments ou du luxe."
+"Les stations amicales ont souvent de la nourriture (food) ou des médicaments "
+"(medicine) ou les deux. Les stations neutres peuvent échanger leurs "
+"marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
 
 #: scripts/scenario_50_gaps.lua:2959
 msgctxt "trade-comms"
