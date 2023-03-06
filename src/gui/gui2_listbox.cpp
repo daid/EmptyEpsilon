@@ -46,27 +46,65 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
 
     scroll->setValueSize(rect.size.y);
     scroll->setRange(0, entries.size() * button_height);
+
+    // Determine whether to show the scrollbar based on the total height of all
+    // items in the list.
     if ((int)entries.size() <= rect.size.y / button_height)
         scroll->hide();
     else
         scroll->show();
     
+    // Draw the button. If the scrollbar is visible, make room.
     sp::Rect button_rect{rect.position, {rect.size.x, button_height}};
+
     if (scroll->isVisible())
         button_rect.size.x -= scroll->getRect().size.x;
+
     button_rect.position.y -= scroll->getValue();
+
+    // For each entry, draw a button.
     int index = 0;
+
     for(auto& e : entries) {
-        if (button_rect.position.y + button_rect.size.y >= rect.position.y && button_rect.position.y <= rect.position.y + rect.size.y) {
+        // Draw the button only if it will visible within the container.
+        if (button_rect.position.y + button_rect.size.y >= rect.position.y
+            && button_rect.position.y <= rect.position.y + rect.size.y)
+        {
             auto* b = &back;
             auto* f = &front;
+
+            // If this is the selected button, change the back and foreground.
             if (index == selection_index) { b = &back_selected; f = &front_selected; }
-            renderer.drawStretchedHVClipped(button_rect, rect, button_height*0.5f, b->texture, b->color);
+
+            // Draw the background texture.
+            renderer.drawStretchedHVClipped(button_rect, rect, button_height * 0.5f, b->texture, b->color);
+
+            // Draw the icon, if one's defined.
+            // 60% button height and aligned left.
+            if (e.icon_name != "")
+            {
+                renderer.drawSpriteClipped(
+                    e.icon_name,               // icon
+                    glm::vec2(                 // center position
+                        button_rect.position.x + button_rect.size.y * 0.8f,
+                        button_rect.position.y + button_rect.size.y * 0.5f
+                    ),
+                    button_rect.size.y * 0.6f, // size
+                    rect,                      // clipping rectangle
+                    f->color                   // color
+                );
+            }
+
+            // Prepare the foreground text style.
             auto prepared = f->font->prepare(e.name, 32, text_size, button_rect.size, sp::Alignment::Center, sp::Font::FlagClip);
             for(auto& c : prepared.data)
                 c.position.y -= rect.position.y - button_rect.position.y;
+
+            // Draw the text.
             renderer.drawText(rect, prepared, text_size, f->color, sp::Font::FlagClip);
         }
+
+        // Prepare to draw the next button below this one.
         button_rect.position.y += button_height;
         index += 1;
     }
