@@ -117,18 +117,18 @@ string GuiEntryList::getEntryValue(int index) const
     return entries[index].value;
 }
 
-string GuiEntryList::getEntryIcon(int index) const
-{
-    if (index < 0 || index >= int(entries.size()))
-        return "";
-    return entries[index].icon_name;
-}
-
 bool GuiEntryList::getEntryIsHeading(int index) const
 {
     if (index < 0 || index >= int(entries.size()))
         return "";
     return entries[index].is_heading;
+}
+
+string GuiEntryList::getEntryIcon(int index) const
+{
+    if (index < 0 || index >= int(entries.size()))
+        return "";
+    return entries[index].icon_name;
 }
 
 int GuiEntryList::getSelectionIndex() const
