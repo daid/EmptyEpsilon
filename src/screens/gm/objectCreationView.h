@@ -10,6 +10,12 @@ class GuiContainer;
 class GuiObjectCreationView : public GuiOverlay
 {
 private:
+    struct ShipEntry {
+        string template_name;
+        string class_name;
+        string subclass_name;
+    };
+    std::vector<ShipEntry> ship_template_entries;
     GuiSelector* faction_selector;
     GuiSelector* player_cpu_selector;
 public:
