@@ -97,20 +97,6 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
                     f->color                   // color
                 );
             }
-            else if (e.is_heading)
-            {
-                renderer.drawSpriteClipped(
-                    "gui/widget/IndicatorArrow.png", // icon
-                    glm::vec2(                 // center position
-                        button_rect.position.x + button_rect.size.y * 0.8f,
-                        button_rect.position.y + button_rect.size.y * 0.5f
-                    ),
-                    button_rect.size.y * 0.6f, // size
-                    rect,                      // clipping rectangle
-                    f->color,                  // color
-                    180.0f                     // rotation
-                );
-            }
 
             // Draw the entry background, either as a heading or button.
             renderer.drawStretchedHVClipped(button_rect, rect, button_height * 0.5f, e.is_heading ? "" : b->texture, b->color);
@@ -124,6 +110,7 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
                 sp::Alignment::Center,
                 sp::Font::FlagClip
             );
+
             for (auto& c : prepared.data)
                 c.position.y -= rect.position.y - button_rect.position.y;
 
@@ -151,10 +138,6 @@ void GuiListbox::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
             setSelectionIndex(offset);
             soundManager->playSound("sfx/button.wav");
             callback();
-        }
-        else
-        {
-            // Hide/show section
         }
     }
 }
