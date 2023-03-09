@@ -128,6 +128,12 @@
                 color: #120A00
             }
         }
+        [listbox.heading.back] {
+            image: gui/widget/LabelBackground.png
+        }
+        [listbox.heading.front] {
+            font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+        }
     }
     
     # Stronger font used at a few locations without UI widgets.

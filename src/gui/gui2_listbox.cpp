@@ -14,6 +14,8 @@ GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
     front_style = theme->getStyle("listbox.front");
     back_selected_style = theme->getStyle("listbox.selected.back");
     front_selected_style = theme->getStyle("listbox.selected.front");
+    back_heading_style = theme->getStyle("listbox.heading.back");
+    front_heading_style = theme->getStyle("listbox.heading.front");
 }
 
 GuiListbox* GuiListbox::setTextSize(float size)
@@ -40,11 +42,11 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
 {
     hover = false;
     const auto& back = back_style->get(getState());
-    const auto& back_hover = back_style->get(State::Hover);
     const auto& front = front_style->get(getState());
     const auto& back_selected = back_selected_style->get(getState());
-    const auto& back_selected_hover = back_selected_style->get(State::Hover);
     const auto& front_selected = front_selected_style->get(getState());
+    const auto& back_heading = back_heading_style->get(getState());
+    const auto& front_heading = front_heading_style->get(getState());
 
     scroll->setValueSize(rect.size.y);
     scroll->setRange(0, entries.size() * button_height);
@@ -72,15 +74,10 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
         if (button_rect.position.y + button_rect.size.y >= rect.position.y
             && button_rect.position.y <= rect.position.y + rect.size.y)
         {
-            auto* b = button_rect.contains(hover_coordinates) ? &back_hover : &back;
-            auto* f = &front;
-
-            // If this is the selected button, change the back and foreground.
-            if (index == selection_index)
-            {
-                b = button_rect.contains(hover_coordinates) ? &back_selected_hover : &back_selected;
-                f = &front_selected;
-            }
+            // Define the background and foreground styles based on entry type
+            // and hover/selected state.
+            auto* b = e.is_heading ? &back_heading : button_rect.contains(hover_coordinates) ? &back_hover : index == selection_index ? &back_selected : &back;
+            auto* f = e.is_heading ? &front_heading : index == selection_index ? &front_selected : &front;
 
             // Draw the background texture.
             renderer.drawStretchedHVClipped(button_rect, rect, button_height * 0.5f, b->texture, b->color);
@@ -100,13 +97,34 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
                     f->color                   // color
                 );
             }
+            else if (e.is_heading)
+            {
+                renderer.drawSpriteClipped(
+                    "gui/widget/IndicatorArrow.png", // icon
+                    glm::vec2(                 // center position
+                        button_rect.position.x + button_rect.size.y * 0.8f,
+                        button_rect.position.y + button_rect.size.y * 0.5f
+                    ),
+                    button_rect.size.y * 0.6f, // size
+                    rect,                      // clipping rectangle
+                    f->color,                  // color
+                    180.0f                     // rotation
+                );
+            }
 
             // Draw the entry background, either as a heading or button.
             renderer.drawStretchedHVClipped(button_rect, rect, button_height * 0.5f, e.is_heading ? "" : b->texture, b->color);
 
             // Prepare the foreground text style.
-            auto prepared = f->font->prepare(e.name, 32, text_size, button_rect.size, sp::Alignment::Center, sp::Font::FlagClip);
-            for(auto& c : prepared.data)
+            auto prepared = f->font->prepare(
+                e.is_heading ? e.name.upper() : e.name,
+                32,
+                text_size,
+                button_rect.size,
+                sp::Alignment::Center,
+                sp::Font::FlagClip
+            );
+            for (auto& c : prepared.data)
                 c.position.y -= rect.position.y - button_rect.position.y;
 
             // Draw the text.
@@ -133,6 +151,10 @@ void GuiListbox::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
             setSelectionIndex(offset);
             soundManager->playSound("sfx/button.wav");
             callback();
+        }
+        else
+        {
+            // Hide/show section
         }
     }
 }

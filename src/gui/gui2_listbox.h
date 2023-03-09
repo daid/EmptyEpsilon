@@ -19,6 +19,8 @@ protected:
     const GuiThemeStyle* front_style;
     const GuiThemeStyle* back_selected_style;
     const GuiThemeStyle* front_selected_style;
+    const GuiThemeStyle* back_heading_style;
+    const GuiThemeStyle* front_heading_style;
 public:
     GuiListbox(GuiContainer* owner, string id, func_t func);
 
