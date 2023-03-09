@@ -2156,7 +2156,7 @@ msgstr "Échanger des Médicaments (medicine) contre %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
-msgstr "Échanger Produits de luxe (luxury) contre %s"
+msgstr "Échanger des produits de luxe (luxury) contre %s"
 
 #: scripts/scenario_53_escape.lua:3948 scripts/scenario_53_escape.lua:4399
 #: scripts/scenario_53_escape.lua:4595 scripts/scenario_53_escape.lua:4677
@@ -2421,15 +2421,15 @@ msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
 msgstr ""
-"Les stations amicales ont souvent de la nourriture ou des médicaments ou les "
-"deux. Les stations neutres peuvent échanger leurs marchandises contre de la "
-"nourriture, des médicaments ou du luxe."
+"Les stations amicales ont souvent de la nourriture (food) ou des médicaments "
+"(medicine) ou les deux. Les stations neutres peuvent échanger leurs "
+"marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
 
 #: scripts/scenario_53_escape.lua:4186
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
-msgstr "La station %s dans le secteur %s possède %s pour %i rép."
+msgstr "La station %s dans le secteur %s possède du %s pour %i rép."
 
 #: scripts/scenario_53_escape.lua:4191
 msgctxt "trade-comms"
