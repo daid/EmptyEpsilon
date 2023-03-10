@@ -548,12 +548,12 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     (new GuiLabel(right_col, "", tr("beam", "Turret rotation rate:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     // 25 is an arbitrary limit to add granularity; values greater than 25
     // result in practicaly instantaneous turret rotation anyway.
-    turret_rotation_rate_slider = new GuiSlider(right_col, "", 0.0, 250.0, 0.0, [this](float value) {
+    turret_rotation_rate_slider = new GuiSlider(right_col, "", 0.0f, 250.0f, 0.0f, [this](float value) {
         // Divide a large value for granularity.
         if (value > 0)
             target->beam_weapons[beam_index].setTurretRotationRate(value / 10.0f);
         else
-            target->beam_weapons[beam_index].setTurretRotationRate(0.0);
+            target->beam_weapons[beam_index].setTurretRotationRate(0.0f);
     });
     turret_rotation_rate_slider->setSize(GuiElement::GuiSizeMax, 30);
     // Override overlay label.
@@ -561,19 +561,19 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     turret_rotation_rate_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     (new GuiLabel(right_col, "", tr("beam", "Range:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
-    range_slider = new GuiSlider(right_col, "", 0.0, 5000.0, 0.0, [this](float value) {
+    range_slider = new GuiSlider(right_col, "", 0.0f, 5000.0f, 0.0f, [this](float value) {
         target->beam_weapons[beam_index].setRange(roundf(value / 100) * 100);
     });
     range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", tr("beam", "Cycle time:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
-    cycle_time_slider = new GuiSlider(right_col, "", 0.1, 20.0, 0.0, [this](float value) {
+    cycle_time_slider = new GuiSlider(right_col, "", 0.1f, 20.0f, 0.0f, [this](float value) {
         target->beam_weapons[beam_index].setCycleTime(value);
     });
     cycle_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", tr("beam", "Damage:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
-    damage_slider = new GuiSlider(right_col, "", 0.1, 50.0, 0.0, [this](float value) {
+    damage_slider = new GuiSlider(right_col, "", 0.1f, 50.0f, 0.0f, [this](float value) {
         target->beam_weapons[beam_index].setDamage(value);
     });
     damage_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
@@ -618,9 +618,9 @@ GuiShipTweakSystems::GuiShipTweakSystems(GuiContainer* owner)
             target->systems[n].health = std::min(value,target->systems[n].health_max);
         });
         system_damage[n]->setSize(GuiElement::GuiSizeMax, 30);
-        system_damage[n]->addSnapValue(-1.0, 0.01);
-        system_damage[n]->addSnapValue( 0.0, 0.01);
-        system_damage[n]->addSnapValue( 1.0, 0.01);
+        system_damage[n]->addSnapValue(-1.0f, 0.01f);
+        system_damage[n]->addSnapValue( 0.0f, 0.01f);
+        system_damage[n]->addSnapValue( 1.0f, 0.01f);
 
         (new GuiLabel(center_col, "", tr("{system} health max").format({{"system", getLocaleSystemName(system)}}), 20))->setSize(GuiElement::GuiSizeMax, 30);
         system_health_max[n] = new GuiSlider(center_col, "", -1.0, 1.0, 1.0, [this, n](float value) {
@@ -628,17 +628,17 @@ GuiShipTweakSystems::GuiShipTweakSystems(GuiContainer* owner)
             target->systems[n].health = std::min(value,target->systems[n].health);
         });
         system_health_max[n]->setSize(GuiElement::GuiSizeMax, 30);
-        system_health_max[n]->addSnapValue(-1.0, 0.01);
-        system_health_max[n]->addSnapValue( 0.0, 0.01);
-        system_health_max[n]->addSnapValue( 1.0, 0.01);
+        system_health_max[n]->addSnapValue(-1.0f, 0.01f);
+        system_health_max[n]->addSnapValue( 0.0f, 0.01f);
+        system_health_max[n]->addSnapValue( 1.0f, 0.01f);
 
         (new GuiLabel(right_col, "", tr("{system} heat").format({{"system", getLocaleSystemName(system)}}), 20))->setSize(GuiElement::GuiSizeMax, 30);
         system_heat[n] = new GuiSlider(right_col, "", 0.0, 1.0, 0.0, [this, n](float value) {
             target->systems[n].heat_level = value;
         });
         system_heat[n]->setSize(GuiElement::GuiSizeMax, 30);
-        system_heat[n]->addSnapValue( 0.0, 0.01);
-        system_heat[n]->addSnapValue( 1.0, 0.01);
+        system_heat[n]->addSnapValue( 0.0f, 0.01f);
+        system_heat[n]->addSnapValue( 1.0f, 0.01f);
     }
 }
 
@@ -1168,7 +1168,7 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
 
     // Set object's heading.
     (new GuiLabel(right_col, "", tr("Heading:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
-    heading_slider = new GuiSlider(right_col, "", 0.0, 359.9, 0.0, [this](float value) {
+    heading_slider = new GuiSlider(right_col, "", 0.0f, 359.9f, 0.0f, [this](float value) {
         target->setHeading(value);
     });
     heading_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);

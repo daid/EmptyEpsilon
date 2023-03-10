@@ -61,17 +61,17 @@ ScanProbe::ScanProbe()
   probe_speed(1000.0f)
 {
     // Probe persists for 10 minutes.
-    lifetime = 60 * 10;
+    lifetime = 60.0f * 10.0f;
     // Probe has not arrived yet.
     has_arrived = false;
 
-    registerMemberReplication(&owner_id, 0.5);
-    registerMemberReplication(&probe_speed, 0.1);
-    registerMemberReplication(&target_position, 0.1);
-    registerMemberReplication(&lifetime, 60.0);
+    registerMemberReplication(&owner_id, 0.5f);
+    registerMemberReplication(&probe_speed, 0.1f);
+    registerMemberReplication(&target_position, 0.1f);
+    registerMemberReplication(&lifetime, 60.0f);
 
     // Give the probe a small electrical radar signature.
-    setRadarSignatureInfo(0.0, 0.2, 0.0);
+    setRadarSignatureInfo(0.0f, 0.2f, 0.0f);
 
     // Randomly select a probe model.
     switch(irandom(1, 3))

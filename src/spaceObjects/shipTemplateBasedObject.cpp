@@ -406,7 +406,7 @@ void ShipTemplateBasedObject::takeHullDamage(float damage_amount, DamageInfo& in
     hull_strength -= damage_amount;
     if (hull_strength <= 0.0f && !can_be_destroyed)
     {
-        hull_strength = 1;
+        hull_strength = 1.0f;
     }
     if (hull_strength <= 0.0f)
     {
@@ -431,7 +431,7 @@ float ShipTemplateBasedObject::getShieldDamageFactor(DamageInfo& info, int shiel
 
 float ShipTemplateBasedObject::getShieldRechargeRate(int shield_index)
 {
-    return 0.3;
+    return 0.3f;
 }
 
 void ShipTemplateBasedObject::setTemplate(string template_name)

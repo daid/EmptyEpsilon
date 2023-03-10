@@ -37,9 +37,9 @@ Mine::Mine()
     setCollisionRadius(trigger_range);
     triggered = false;
     triggerTimeout = triggerDelay;
-    ejectTimeout = 0.0;
-    particleTimeout = 0.0;
-    setRadarSignatureInfo(0.0, 0.05, 0.0);
+    ejectTimeout = 0.0f;
+    particleTimeout = 0.0f;
+    setRadarSignatureInfo(0.0f, 0.05f, 0.0f);
 
     PathPlannerManager::getInstance()->addAvoidObject(this, blastRange * 1.2f);
 }
@@ -58,7 +58,7 @@ void Mine::draw3DTransparent()
 
 void Mine::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    renderer.drawSprite("radar/blip.png", position, 0.3 * 32);
+    renderer.drawSprite("radar/blip.png", position, 0.3f * 32.0f);
 }
 
 void Mine::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
@@ -74,7 +74,7 @@ void Mine::update(float delta)
     }else{
         glm::vec3 pos = glm::vec3(getPosition().x, getPosition().y, 0);
         ParticleEngine::spawn(pos, pos + glm::vec3(random(-100, 100), random(-100, 100), random(-100, 100)), glm::vec3(1, 1, 1), glm::vec3(0, 0, 1), 30, 0, 10.0);
-        particleTimeout = 0.4;
+        particleTimeout = 0.4f;
     }
 
     if (ejectTimeout > 0.0f)
@@ -118,7 +118,7 @@ void Mine::explode()
     e->setSize(blastRange);
     e->setPosition(getPosition());
     e->setOnRadar(true);
-    e->setRadarSignatureInfo(0.0, 0.0, 0.2);
+    e->setRadarSignatureInfo(0.0f, 0.0f, 0.2f);
 
     if (on_destruction.isSet())
     {

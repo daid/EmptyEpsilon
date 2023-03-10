@@ -64,9 +64,9 @@ BeamEffect::BeamEffect()
 : SpaceObject(1000, "BeamEffect")
 {
     has_weight = false;
-    setRadarSignatureInfo(0.0, 0.3, 0.0);
-    setCollisionRadius(1.0);
-    lifetime = 1.0;
+    setRadarSignatureInfo(0.0f, 0.3f, 0.0f);
+    setCollisionRadius(1.0f);
+    lifetime = 1.0f;
     sourceId = -1;
     target_id = -1;
     beam_texture = "texture/beam_orange.png";
@@ -74,12 +74,12 @@ BeamEffect::BeamEffect()
     beam_fire_sound_power = 1;
     beam_sound_played = false;
     fire_ring = true;
-    registerMemberReplication(&lifetime, 0.1);
+    registerMemberReplication(&lifetime, 0.1f);
     registerMemberReplication(&sourceId);
     registerMemberReplication(&target_id);
     registerMemberReplication(&sourceOffset);
     registerMemberReplication(&targetOffset);
-    registerMemberReplication(&targetLocation, 1.0);
+    registerMemberReplication(&targetLocation, 1.0f);
     registerMemberReplication(&hitNormal);
     registerMemberReplication(&beam_texture);
     registerMemberReplication(&beam_fire_sound);
@@ -179,16 +179,16 @@ void BeamEffect::update(float delta)
     if (target)
         targetLocation = target->getPosition() + glm::vec2(targetOffset.x, targetOffset.y);
 
-    if (source && delta > 0 && !beam_sound_played)
+    if (source && delta > 0.0f && !beam_sound_played)
     {
         float volume = 50.0f + (beam_fire_sound_power * 75.0f);
         float pitch = (1.0f / beam_fire_sound_power) + random(-0.1f, 0.1f);
-        soundManager->playSound(beam_fire_sound, source->getPosition(), 400.0, 0.6, pitch, volume);
+        soundManager->playSound(beam_fire_sound, source->getPosition(), 400.0f, 0.6f, pitch, volume);
         beam_sound_played = true;
     }
 
     lifetime -= delta;
-    if (lifetime < 0)
+    if (lifetime < 0.0f)
         destroy();
 }
 

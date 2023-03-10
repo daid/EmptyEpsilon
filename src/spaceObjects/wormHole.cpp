@@ -53,7 +53,7 @@ WormHole::WormHole()
     pathPlanner = PathPlannerManager::getInstance();
     pathPlanner->addAvoidObject(this, (DEFAULT_COLLISION_RADIUS * AVOIDANCE_MULTIPLIER) );
 
-    setRadarSignatureInfo(0.9, 0.0, 0.0);
+    setRadarSignatureInfo(0.9f, 0.0f, 0.0f);
 
     // Choose a texture to show on radar
     radar_visual = irandom(1, 3);

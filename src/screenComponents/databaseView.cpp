@@ -175,7 +175,7 @@ void DatabaseViewComponent::display()
     {
         for(unsigned int n=0; n<selected_entry->keyValuePairs.size(); n++)
         {
-            (new GuiKeyValueDisplay(keyvalue_container, "", 0.37, selected_entry->keyValuePairs[n].key, selected_entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
+            (new GuiKeyValueDisplay(keyvalue_container, "", 0.37f, selected_entry->keyValuePairs[n].key, selected_entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
         }
     } else {
         keyvalue_container->destroy();

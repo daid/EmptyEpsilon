@@ -66,13 +66,13 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 160)->setAttribute("layout", "vertical");
 
     // Ship statistics in the top left corner.
-    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45f, tr("Energy"), "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setSize(240, 40);
-    heading_display = new GuiKeyValueDisplay(stats, "HEADING_DISPLAY", 0.45, tr("Heading"), "");
+    heading_display = new GuiKeyValueDisplay(stats, "HEADING_DISPLAY", 0.45f, tr("Heading"), "");
     heading_display->setIcon("gui/icons/heading")->setTextSize(20)->setSize(240, 40);
-    velocity_display = new GuiKeyValueDisplay(stats, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
+    velocity_display = new GuiKeyValueDisplay(stats, "VELOCITY_DISPLAY", 0.45f, tr("Speed"), "");
     velocity_display->setIcon("gui/icons/speed")->setTextSize(20)->setSize(240, 40);
-    shields_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45, tr("Shields"), "");
+    shields_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45f, tr("Shields"), "");
     shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setSize(240, 40);
 
     // Weapon tube loading controls in the bottom left corner.

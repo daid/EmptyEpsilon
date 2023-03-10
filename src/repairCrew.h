@@ -20,8 +20,8 @@ enum ERepairCrewDirection
 
 class RepairCrew : public MultiplayerObject, public Updatable
 {
-    static constexpr float move_speed = 2.0;
-    static constexpr float repair_per_second = 0.007;
+    static constexpr float move_speed = 2.0f;
+    static constexpr float repair_per_second = 0.007f;
 public:
     glm::vec2 position{0,0};
     glm::ivec2 target_position{0,0};

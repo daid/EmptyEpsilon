@@ -43,7 +43,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&hacking_difficulty);
     registerMemberReplication(&hacking_games);
     registerMemberReplication(&global_message);
-    registerMemberReplication(&global_message_timeout, 1.0);
+    registerMemberReplication(&global_message_timeout, 1.0f);
     registerMemberReplication(&banner_string);
     registerMemberReplication(&victory_faction);
     registerMemberReplication(&use_beam_shield_frequencies);
@@ -51,11 +51,11 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&gm_control_code);
-    registerMemberReplication(&elapsed_time, 0.1);
+    registerMemberReplication(&elapsed_time, 0.1f);
 
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);
-    registerMemberReplication(&reputation_points, 1.0);
+    registerMemberReplication(&reputation_points, 1.0f);
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined

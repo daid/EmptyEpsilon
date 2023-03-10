@@ -17,7 +17,7 @@ EMPMissile::EMPMissile()
 : MissileWeapon("EMPMissile", MissileWeaponData::getDataFor(MW_EMP))
 {
     avoid_area_added = false;
-    setRadarSignatureInfo(0.0, 0.5, 0.1);
+    setRadarSignatureInfo(0.0f, 0.5f, 0.1f);
 }
 
 void EMPMissile::explode()
@@ -29,7 +29,7 @@ void EMPMissile::explode()
     e->setSize(category_modifier * blast_range);
     e->setPosition(getPosition());
     e->setOnRadar(true);
-    e->setRadarSignatureInfo(0.0, 1.0, 0.0);
+    e->setRadarSignatureInfo(0.0f, 1.0f, 0.0f);
 }
 
 

@@ -62,11 +62,11 @@ void FighterAI::runAttack(P<SpaceObject> target)
             }
         }
 
-        flyTowards(target->getPosition(), 500.0);
+        flyTowards(target->getPosition(), 500.0f);
 
-        if (distance < 500 + target->getRadius())
+        if (distance < 500.0f + target->getRadius())
         {
-            aggression += random(0, 0.05);
+            aggression += random(0.0f, 0.05f);
 
             attack_state = evade;
             timeout = 30.0f - std::min(aggression, 1.0f) * 20.0f;
@@ -81,7 +81,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
         if (owner->shield_level[0] < owner->shield_max[0] * (1.0f - aggression))
         {
             attack_state = recharge;
-            aggression += random(0.1, 0.25);
+            aggression += random(0.1f, 0.25f);
             timeout = 60.0f - std::min(aggression, 1.0f) * 20.0f;
         }
         break;

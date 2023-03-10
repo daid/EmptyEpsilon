@@ -25,7 +25,7 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
                     f = frequencyVsFrequencyDamageFactor(frequency, n);
                 else
                     f = frequencyVsFrequencyDamageFactor(n, frequency);
-                f = Tween<float>::linear(f, 0.5, 1.5, 0.1, 1.0);
+                f = Tween<float>::linear(f, 0.5f, 1.5f, 0.1f, 1.0f);
                 float h = (rect.size.y - 50) * f;
                 sp::Rect bar_rect(x, rect.position.y + rect.size.y - 10 - h, w * 0.8f, h);
                 if (more_damage_is_positive)
