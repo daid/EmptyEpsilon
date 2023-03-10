@@ -124,6 +124,7 @@ void GuiCanvas::runUpdates(GuiContainer* parent)
             delete element;
         }else{
             element->hover = element->rect.contains(mouse_position);
+            element->hover_coordinates = mouse_position;
 
             element->onUpdate();
             if (element->isVisible())

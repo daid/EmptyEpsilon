@@ -22,6 +22,7 @@ protected:
     bool visible;
     bool enabled;
     bool hover;
+    glm::vec2 hover_coordinates;
     bool focus;
     string id;
 public:
