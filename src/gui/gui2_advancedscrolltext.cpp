@@ -1,10 +1,12 @@
 #include "gui2_advancedscrolltext.h"
 
 GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
-: GuiElement(owner, id), text_size(30)
+: GuiElement(owner, id), text_size(30.0F)
 {
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
     scrollbar->setPosition(0, 0, sp::Alignment::TopRight)->setSize(50, GuiElement::GuiSizeMax);
+    // Calculate scrolling a one-line entry by scrollbar arrow buttons.
+    scrollbar->setClickChange(sp::RenderTarget::getDefaultFont()->prepare("1", 32, text_size, rect.size, sp::Alignment::TopLeft).getUsedAreaSize().y);
 }
 
 GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string text, glm::u8vec4 color, unsigned int seq)
@@ -20,6 +22,13 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string tex
 unsigned int GuiAdvancedScrollText::getEntryCount() const
 {
     return entries.size();
+}
+
+GuiAdvancedScrollText* GuiAdvancedScrollText::setTextSize(float text_size)
+{
+    this->text_size = std::max(1.0F, text_size);
+    scrollbar->setClickChange(sp::RenderTarget::getDefaultFont()->prepare("1", 32, text_size, rect.size, sp::Alignment::TopLeft).getUsedAreaSize().y);
+    return this;
 }
 
 string GuiAdvancedScrollText::getEntryText(int index) const
@@ -91,5 +100,6 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }
+
     scrollbar->setVisible(rect.size.y > 100);
 }
