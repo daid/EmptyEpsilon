@@ -20,6 +20,11 @@ protected:
     bool drag_scrollbar;
     float drag_select_offset;
 
+    int range;
+    float arrow_size;
+    float move_height;
+    float bar_size;
+
     const GuiThemeStyle* back_style;
     const GuiThemeStyle* front_style;
 public:
