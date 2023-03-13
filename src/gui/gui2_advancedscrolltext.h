@@ -33,7 +33,7 @@ public:
     GuiAdvancedScrollText* removeEntry(int index);
     GuiAdvancedScrollText* clearEntries();
 
-    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onDraw(sp::RenderTarget& renderer) override;
 };
 
 #endif//GUI2_ADVANCEDSCROLLTEXT_H

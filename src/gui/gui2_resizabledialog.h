@@ -12,7 +12,7 @@ class GuiResizableDialog : public GuiPanel
 public:
     GuiResizableDialog(GuiContainer* owner, string id, string title);
 
-    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onDraw(sp::RenderTarget& renderer) override;
 
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;

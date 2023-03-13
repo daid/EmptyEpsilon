@@ -20,7 +20,7 @@ protected:
 public:
     GuiProgressbar(GuiContainer* owner, string id, float min_value, float max_value, float start_value);
 
-    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onDraw(sp::RenderTarget& renderer) override;
 
     GuiProgressbar* setValue(float value);
     GuiProgressbar* setRange(float min_value, float max_value);
