@@ -43,7 +43,7 @@ public:
     virtual ~GuiElement();
 
     virtual void onUpdate() {}
-    virtual void onDraw(sp::RenderTarget& window) {}
+    virtual void onDraw(sp::RenderTarget& renderer) {}
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id);
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id);

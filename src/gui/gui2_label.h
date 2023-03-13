@@ -20,7 +20,7 @@ protected:
 public:
     GuiLabel(GuiContainer* owner, string id, string text, float text_size);
 
-    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onDraw(sp::RenderTarget& renderer) override;
 
     GuiLabel* setText(string text);
     string getText() const;
@@ -39,7 +39,7 @@ protected:
 public:
     GuiAutoSizeLabel(GuiContainer* owner, string id, string text, glm::vec2 min_size, glm::vec2 max_size, float min_text_size, float max_text_size);
 
-    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual void onUpdate() override;
 };
 

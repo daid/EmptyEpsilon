@@ -12,7 +12,7 @@ private:
 public:
     GuiImage(GuiContainer* owner, string id, string texture_name);
 
-    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onDraw(sp::RenderTarget& renderer) override;
 
     GuiImage* setColor(glm::u8vec4 color) { this->color = color; return this; }
     GuiImage* setAngle(float angle) { this->angle = angle; return this; }
