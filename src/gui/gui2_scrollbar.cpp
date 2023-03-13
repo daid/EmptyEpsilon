@@ -24,13 +24,16 @@ void GuiScrollbar::onDraw(sp::RenderTarget& renderer)
 
     renderer.drawStretched(rect, back.texture, back.color);
 
+    // Update the bar's range, size, and draggable bar size.
     range = max_value - min_value;
     arrow_size = rect.size.x / 2.0f;
     move_height = rect.size.y - arrow_size * 2;
-    bar_size = move_height * value_size / range;
-    if (bar_size > move_height)
-        bar_size = move_height;
-    renderer.drawStretched(sp::Rect(rect.position.x, rect.position.y + arrow_size + move_height * getValue() / range, rect.size.x, bar_size), front.texture, front.color);
+    // Clamp the size of the draggable bar to no less than 20px.
+    bar_size = std::clamp(move_height * value_size / range, 20.0F, move_height);
+    // Set the bottom of the draggable bar no lower than the top of the bottom arrow.
+    const float bar_y = std::min(rect.position.y + arrow_size + move_height * getValue() / range, rect.position.y + rect.size.y - arrow_size - bar_size);
+
+    renderer.drawStretched(sp::Rect(rect.position.x, bar_y, rect.size.x, bar_size), front.texture, front.color);
 }
 
 bool GuiScrollbar::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
@@ -106,6 +109,7 @@ int GuiScrollbar::getValue() const
         value = max_value - value_size;
     if (value < min_value)
         value = min_value;
+
     return value;
 }
 
