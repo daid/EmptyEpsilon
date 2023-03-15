@@ -65,6 +65,24 @@ ServerSetupScreen::ServerSetupScreen()
     server_port->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     (new GuiLabel(main_panel, "GENERAL_LABEL", tr("Server info"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+
+    string reverse_proxy_value;
+    if((reverse_proxy_value = PreferencesManager::get("serverproxy")) != "")
+    {   
+        GuiPanel* panel = new GuiPanel(main_panel, "SERVERPROXY_MESSAGE_BOX");
+        panel->setSize(GuiElement::GuiSizeMax, 80);
+        //Serverproxy (reverse proxy) is directly configured in options or command line   
+        (new GuiLabel(panel, "SERVERPROXY_LABEL", tr("Server was configured to connect to reverse proxy:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+        string ips;
+        string sep="";
+        for(auto proxy_ip : reverse_proxy_value.split(":"))
+        {
+            ips = ips + sep + "[" + proxy_ip+ "]";
+            sep = ",";   
+        }
+        (new GuiLabel(panel, "SERVERPROXY_IPS", ips, 30))->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0,30);
+    }
+
     // Server IP row.
     row = new GuiElement(main_panel, "");
     row->setSize(GuiElement::GuiSizeMax, 350)->setAttribute("layout", "horizontal");
