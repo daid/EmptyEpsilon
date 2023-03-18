@@ -1,7 +1,7 @@
 #include "gui2_advancedscrolltext.h"
 
 GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
-: GuiElement(owner, id), text_size(30)
+: GuiElement(owner, id), text_size(30.0f), max_prefix_width(0.0f)
 {
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
     scrollbar->setPosition(0, 0, sp::Alignment::TopRight)->setSize(50, GuiElement::GuiSizeMax);
@@ -9,10 +9,13 @@ GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
 
 GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string text, glm::u8vec4 color)
 {
-    entries.emplace_back();
-    entries.back().prefix = prefix;
-    entries.back().text = text;
-    entries.back().color = color;
+    Entry& entry = entries.emplace_back();
+    entry.prefix = prefix;
+    entry.text = text;
+    entry.color = color;
+    // For each entry, fix the maximum prefix width, so we know how much space we have for the text.
+    entry.prefix_width = sp::RenderTarget::getDefaultFont()->prepare(prefix, 32, text_size, {0, 0}, sp::Alignment::TopLeft, 0).getUsedAreaSize().x;
+    max_prefix_width = std::max(max_prefix_width, entry.prefix_width);
     return this;
 }
 
@@ -44,14 +47,6 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::clearEntries()
 
 void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
 {
-    //For all the entries, fix the maximum prefix width, so we know how much space we have for the text.
-    float max_prefix_width = 0.0f;
-    for(Entry& e : entries)
-    {
-        auto prepared = sp::RenderTarget::getDefaultFont()->prepare(e.prefix, 32, text_size, {0, 0}, sp::Alignment::TopLeft, 0);
-        max_prefix_width = std::max(max_prefix_width, prepared.getUsedAreaSize().x);
-    }
-
     //Draw the visible entries
     float draw_offset = -scrollbar->getValue();
     for(Entry& e : entries)
