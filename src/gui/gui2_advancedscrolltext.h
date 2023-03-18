@@ -11,8 +11,9 @@ protected:
     {
     public:
         string prefix;
-        float prefix_width;
+        sp::Font::PreparedFontString prepared_prefix;
         string text;
+        sp::Font::PreparedFontString prepared_text;
         glm::u8vec4 color;
     };
 
