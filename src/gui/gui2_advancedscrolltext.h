@@ -20,6 +20,7 @@ protected:
     std::vector<Entry> entries;
     GuiScrollbar* scrollbar;
     float text_size;
+    float rect_width;
     float max_prefix_width;
     bool auto_scroll_down;
 public:
