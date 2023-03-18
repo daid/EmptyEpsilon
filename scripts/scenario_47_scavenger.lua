@@ -616,157 +616,157 @@ function curvaceousAsteroids1(fsx, fsy, player_to_station_distance)
 		table.remove(asteroid_list,selected_asteroid_index)
 		local unscanned_description = ""
 		if random(0,100) < 65 then
-			unscanned_description = "Structure: solid"
+			unscanned_description = _("scienceDescription-asteroid", "Structure: solid")
 		elseif random(0,100) < 70 then
-			unscanned_description = "Structure: rubble"
+			unscanned_description = _("scienceDescription-asteroid", "Structure: rubble")
 		else
-			unscanned_description = "Structure: binary"
+			unscanned_description = _("scienceDescription-asteroid", "Structure: binary")
 		end
 		local scanned_description = ""
 		selected_asteroid.composition = 0
 		if i == 1 then
 			selected_asteroid.osmium = math.random(1,20)/10
-			scanned_description = string.format("%sosmium:%.1f%% ",scanned_description,selected_asteroid.osmium)
+			scanned_description = string.format(_("scienceDescription-asteroid", "%sosmium:%.1f%% "),scanned_description,selected_asteroid.osmium)
 			selected_asteroid.iridium = math.random(1,70)/10
-			scanned_description = string.format("%siridium:%.1f%% ",scanned_description,selected_asteroid.iridium)
+			scanned_description = string.format(_("scienceDescription-asteroid", "%siridium:%.1f%% "),scanned_description,selected_asteroid.iridium)
 			selected_asteroid.olivine = math.random(1,150)/10
-			scanned_description = string.format("%solivine:%.1f%% ",scanned_description,selected_asteroid.olivine)
+			scanned_description = string.format(_("scienceDescription-asteroid", "%solivine:%.1f%% "),scanned_description,selected_asteroid.olivine)
 			selected_asteroid.nickel = math.random(1,190)/10
-			scanned_description = string.format("%snickel:%.1f%% ",scanned_description,selected_asteroid.nickel)
-			scanned_description = string.format("%s, %srock:remainder",unscanned_description, scanned_description)
+			scanned_description = string.format(_("scienceDescription-asteroid", "%snickel:%.1f%% "),scanned_description,selected_asteroid.nickel)
+			scanned_description = string.format(_("scienceDescription-asteroid", "%s, %srock:remainder"),unscanned_description, scanned_description)
 			target_asteroid = selected_asteroid
 			target_asteroid_x, target_asteroid_y = target_asteroid:getPosition()
-			print(string.format("Target Asteroid: Sector:%s X:%i Y:%i Osmium:%.1f, Iridium:%.1f, Olivine:%.1f, Nickel:%.1f",target_asteroid:getSectorName(),math.floor(target_asteroid_x),math.floor(target_asteroid_y),target_asteroid.osmium,target_asteroid.iridium,target_asteroid.olivine,target_asteroid.nickel))
+			print(string.format(_("-asteroid", "Target Asteroid: Sector:%s X:%i Y:%i Osmium:%.1f, Iridium:%.1f, Olivine:%.1f, Nickel:%.1f"),target_asteroid:getSectorName(),math.floor(target_asteroid_x),math.floor(target_asteroid_y),target_asteroid.osmium,target_asteroid.iridium,target_asteroid.olivine,target_asteroid.nickel))
 		else
 			if random(0,100) < 2 and selected_asteroid.composition < 100 then
 				selected_asteroid.osmium = math.random(1,20)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.osmium
-				scanned_description = string.format("%sosmium:%.1f%% ",scanned_description,selected_asteroid.osmium)
+				scanned_description = string.format(_("scienceDescription-asteroid", "%sosmium:%.1f%% "),scanned_description,selected_asteroid.osmium)
 			end
 			if random(0,100) < 3 and selected_asteroid.composition < 100 then
 				selected_asteroid.ruthenium = math.random(1,30)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.ruthenium
-				scanned_description = string.format("%sruthenium:%.1f%% ",scanned_description,selected_asteroid.ruthenium)
+				scanned_description = string.format(_("scienceDescription-asteroid", "%sruthenium:%.1f%% "),scanned_description,selected_asteroid.ruthenium)
 			end
 			if random(0,100) < 4 and selected_asteroid.composition < 100 then
 				selected_asteroid.rhodium = math.random(1,40)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.rhodium
-				scanned_description = string.format("%srhodium:%.1f%% ",scanned_description,selected_asteroid.rhodium)
+				scanned_description = string.format(_("scienceDescription-asteroid", "%srhodium:%.1f%% "),scanned_description,selected_asteroid.rhodium)
 			end
 			if random(0,100) < 5 and selected_asteroid.composition < 100 then
 				selected_asteroid.magnesium = math.random(1,50)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.magnesium
-				scanned_description = string.format("%smagnesium:%.1f%% ",scanned_description,selected_asteroid.magnesium)
+				scanned_description = string.format(_("scienceDescription-asteroid", "%smagnesium:%.1f%% "),scanned_description,selected_asteroid.magnesium)
 			end
 			if random(0,100) < 6 and selected_asteroid.composition < 100 then
 				selected_asteroid.platinum = math.random(1,60)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.platinum
-				scanned_description = string.format("%splatinum:%.1f%% ",scanned_description,selected_asteroid.platinum)
+				scanned_description = string.format(_("scienceDescription-asteroid", "%splatinum:%.1f%% "),scanned_description,selected_asteroid.platinum)
 			end
 			if random(0,100) < 7 and selected_asteroid.composition < 100 then
 				selected_asteroid.iridium = math.random(1,70)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.iridium
-				scanned_description = string.format("%siridium:%.1f%% ",scanned_description,selected_asteroid.iridium)
+				scanned_description = string.format(_("scienceDescription-asteroid", "%siridium:%.1f%% "),scanned_description,selected_asteroid.iridium)
 			end
 			if random(0,100) < 8 and selected_asteroid.composition < 100 then
 				selected_asteroid.gold = math.random(1,80)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.gold
-				scanned_description = string.format("%sgold:%.1f%% ",scanned_description,selected_asteroid.gold)
+				scanned_description = string.format(_("scienceDescription-asteroid", "%sgold:%.1f%% "),scanned_description,selected_asteroid.gold)
 			end
 			if random(0,100) < 9 and selected_asteroid.composition < 100 then
 				selected_asteroid.palladium = math.random(1,90)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.palladium
-				scanned_description = string.format("%spalladium:%.1f%% ",scanned_description,selected_asteroid.palladium)
+				scanned_description = string.format(_("scienceDescription-asteroid", "%spalladium:%.1f%% "),scanned_description,selected_asteroid.palladium)
 			end
 			if random(0,100) < 10 and selected_asteroid.composition < 100 then
 				selected_asteroid.oxygen = math.random(1,100)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.oxygen
-				scanned_description = string.format("%soxygen:%.1f%% ",scanned_description,selected_asteroid.oxygen)
+				scanned_description = string.format(_("scienceDescription-asteroid", "%soxygen:%.1f%% "),scanned_description,selected_asteroid.oxygen)
 			end
 			if random(0,100) < 11 and selected_asteroid.composition < 100 then
 				selected_asteroid.silicon = math.random(1,110)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.silicon
-				scanned_description = string.format("%ssilicon:%.1f%% ",scanned_description,selected_asteroid.silicon)
+				scanned_description = string.format(_("scienceDescription-asteroid", "%ssilicon:%.1f%% "),scanned_description,selected_asteroid.silicon)
 			end
 			if random(0,100) < 12 and selected_asteroid.composition < 100 then
 				selected_asteroid.hydrogen = math.random(1,120)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.hydrogen
-				scanned_description = string.format("%shydrogen:%.1f%% ",scanned_description,selected_asteroid.hydrogen)
+				scanned_description = string.format(_("scienceDescription-asteroid", "%shydrogen:%.1f%% "),scanned_description,selected_asteroid.hydrogen)
 			end
 			if random(0,100) < 13 and selected_asteroid.composition < 100 then
 				selected_asteroid.nitrogen = math.random(1,130)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.nitrogen
-				scanned_description = string.format("%snitrogen:%.1f%% ",scanned_description,selected_asteroid.nitrogen)
+				scanned_description = string.format(_("scienceDescription-asteroid", "%snitrogen:%.1f%% "),scanned_description,selected_asteroid.nitrogen)
 			end
 			if random(0,100) < 14 and selected_asteroid.composition < 100 then
 				selected_asteroid.pyroxene = math.random(1,140)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.pyroxene
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format("%spyroxene:remainder",scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%spyroxene:remainder"),scanned_description)				
 				else
-					scanned_description = string.format("%spyroxene:%.1f%% ",scanned_description,selected_asteroid.pyroxene)
+					scanned_description = string.format(_("scienceDescription-asteroid", "%spyroxene:%.1f%% "),scanned_description,selected_asteroid.pyroxene)
 				end
 			end
 			if random(0,100) < 15 and selected_asteroid.composition < 100 then
 				selected_asteroid.olivine = math.random(1,150)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.olivine
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format("%solivine:remainder",scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%solivine:remainder"),scanned_description)				
 				else
-					scanned_description = string.format("%solivine:%.1f%% ",scanned_description,selected_asteroid.olivine)
+					scanned_description = string.format(_("scienceDescription-asteroid", "%solivine:%.1f%% "),scanned_description,selected_asteroid.olivine)
 				end
 			end
 			if random(0,100) < 16 and selected_asteroid.composition < 100 then
 				selected_asteroid.cobalt = math.random(1,160)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.cobalt
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format("%scobalt:remainder",scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%scobalt:remainder"),scanned_description)				
 				else
-					scanned_description = string.format("%scobalt:%.1f%% ",scanned_description,selected_asteroid.cobalt)
+					scanned_description = string.format(_("scienceDescription-asteroid", "%scobalt:%.1f%% "),scanned_description,selected_asteroid.cobalt)
 				end
 			end
 			if random(0,100) < 17 and selected_asteroid.composition < 100 then
 				selected_asteroid.dilithium = math.random(1,170)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.dilithium
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format("%sdilithium:remainder",scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%sdilithium:remainder"),scanned_description)				
 				else
-					scanned_description = string.format("%sdilithium:%.1f%% ",scanned_description,selected_asteroid.dilithium)
+					scanned_description = string.format(_("scienceDescription-asteroid", "%sdilithium:%.1f%% "),scanned_description,selected_asteroid.dilithium)
 				end
 			end
 			if random(0,100) < 18 and selected_asteroid.composition < 100 then
 				selected_asteroid.calcium = math.random(1,180)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.calcium
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format("%scalcium:remainder",scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%scalcium:remainder"),scanned_description)				
 				else
-					scanned_description = string.format("%scalcium:%.1f%% ",scanned_description,selected_asteroid.calcium)
+					scanned_description = string.format(_("scienceDescription-asteroid", "%scalcium:%.1f%% "),scanned_description,selected_asteroid.calcium)
 				end
 			end
 			if random(0,100) < 19 and selected_asteroid.composition < 100 then
 				selected_asteroid.nickel = math.random(1,190)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.nickel
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format("%snickel:remainder",scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%snickel:remainder"),scanned_description)				
 				else
-					scanned_description = string.format("%snickel:%.1f%% ",scanned_description,selected_asteroid.nickel)
+					scanned_description = string.format(_("scienceDescription-asteroid", "%snickel:%.1f%% "),scanned_description,selected_asteroid.nickel)
 				end
 			end
 			if random(0,100) < 20 and selected_asteroid.composition < 100 then
 				selected_asteroid.iron = math.random(1,200)/10
 				selected_asteroid.composition = selected_asteroid.composition + selected_asteroid.iron
 				if selected_asteroid.composition >= 100 then
-					scanned_description = string.format("%siron:remainder",scanned_description)				
+					scanned_description = string.format(_("scienceDescription-asteroid", "%siron:remainder"),scanned_description)				
 				else
-					scanned_description = string.format("%siron:%.1f%% ",scanned_description,selected_asteroid.iron)
+					scanned_description = string.format(_("scienceDescription-asteroid", "%siron:%.1f%% "),scanned_description,selected_asteroid.iron)
 				end
 			end
 			if selected_asteroid.composition > 0 then
 				if selected_asteroid.composition < 100 then
-					scanned_description = string.format("%s, %srock:remainder",unscanned_description, scanned_description)
+					scanned_description = string.format(_("scienceDescription-asteroid", "%s, %srock:remainder"),unscanned_description, scanned_description)
 				end
 			else
-				scanned_description = string.format("%s, just rock",unscanned_description, scanned_description)			
+				scanned_description = string.format(_("scienceDescription-asteroid", "%s, just rock"),unscanned_description, scanned_description)			
 			end
 		end
 		selected_asteroid:setDescriptions(unscanned_description,scanned_description)
@@ -964,91 +964,91 @@ function setConstants()
 	table.insert(cargoInventoryList,cargoInventory8)
 	station_pool = {
 		["Science"] = {
-			["Asimov"] =	{goods = {"repulsor"}, description = "Training and Coordination", general = "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector", history = "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region"},
-			["Armstrong"] =	{goods = {"warp", "impulse"}, description = "Warp and Impulse engine manufacturing", general = "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis", history = "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems."},
-			["Broeck"] =	{goods = {"warp"}, description = "Warp drive components", general = "We provide warp drive engines and components", history = "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth"},
-			["Coulomb"] =	{goods = {"circuit"}, description = "Shielded circuitry fabrication", general = "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference", history = "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits"},
-			["Heyes"] =		{goods = {"sensor"}, description = "Sensor components", general = "We research and manufacture sensor components and systems", history = "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility"},
-			["Hossam"] =	{goods = {"nanites"}, description = "Nanite supplier", general = "We provide nanites for various organic and non-organic systems", history = "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel"},
-			["Maiman"] =	{goods = {"beam"}, description = "Energy beam components", general = "We research and manufacture energy beam components and systems", history = "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th century on Earth"},
-			["Marconi"] =	{goods = {"beam"}, description = "Energy Beam Components", general = "We manufacture energy beam components", history = "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon"},
-			["Miller"] =	{goods = {"optic"}, description = "Exobiology research", general = "We study recently discovered life forms not native to Earth", history = "This station was named after one of the early exobiologists from mid 20th century Earth, Dr. Stanley Miller"},
-			["Shawyer"] =	{goods = {"impulse"}, description = "Impulse engine components", general = "We research and manufacture impulse engine components and systems", history = "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century"},
+			["Asimov"] =	{goods = {"repulsor"}, description = _("scienceDescription-station", "Training and Coordination"), general = "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector", history = "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region"},
+			["Armstrong"] =	{goods = {"warp", "impulse"}, description = _("scienceDescription-station", "Warp and Impulse engine manufacturing"), general = "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis", history = "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems."},
+			["Broeck"] =	{goods = {"warp"}, description = _("scienceDescription-station", "Warp drive components"), general = "We provide warp drive engines and components", history = "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth"},
+			["Coulomb"] =	{goods = {"circuit"}, description = _("scienceDescription-station", "Shielded circuitry fabrication"), general = "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference", history = "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits"},
+			["Heyes"] =		{goods = {"sensor"}, description = _("scienceDescription-station", "Sensor components"), general = "We research and manufacture sensor components and systems", history = "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility"},
+			["Hossam"] =	{goods = {"nanites"}, description = _("scienceDescription-station", "Nanite supplier"), general = "We provide nanites for various organic and non-organic systems", history = "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel"},
+			["Maiman"] =	{goods = {"beam"}, description = _("scienceDescription-station", "Energy beam components"), general = "We research and manufacture energy beam components and systems", history = "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th century on Earth"},
+			["Marconi"] =	{goods = {"beam"}, description = _("scienceDescription-station", "Energy Beam Components"), general = "We manufacture energy beam components", history = "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon"},
+			["Miller"] =	{goods = {"optic"}, description = _("scienceDescription-station", "Exobiology research"), general = "We study recently discovered life forms not native to Earth", history = "This station was named after one of the early exobiologists from mid 20th century Earth, Dr. Stanley Miller"},
+			["Shawyer"] =	{goods = {"impulse"}, description = _("scienceDescription-station", "Impulse engine components"), general = "We research and manufacture impulse engine components and systems", history = "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century"},
 		},
 		["History"] = {
-			["Archimedes"] = {goods = {"beam"}, description = "Energy and particle beam components", general = "We fabricate general and specialized components for ship beam systems", history = "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it"},
-			["Chatuchak"] =	{goods = {"luxury"}, description = "Trading station", general = "Only the largest market and trading location in twenty sectors. You can find your heart's desire here", history = "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind"},
-			["Grasberg"] =	{goods = {"luxury"}, description = "Mining", general ="We mine nearby asteroids for precious minerals and process them for sale", history = "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids"},
-			["Hayden"] =	{goods = {"nanites"}, description = "Observatory and stellar mapping", general = "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding", history = "Station named in honor of Charles Hayden whose philanthropy continued astrophysical research and education on Earth in the early 20th century"},
-			["Lipkin"] =	{goods = {"autodoc"}, description = "Autodoc components", general = "", history = "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth"},
-			["Madison"] =	{goods = {"luxury"}, description = "Zero gravity sports and entertainment", general = "Come take in a game or two or perhaps see a show", history = "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment"},
-			["Rutherford"] = {goods = {"shield"}, description = "Shield components and research", general = "We research and fabricate components for ship shield systems", history = "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century"},
-			["Toohie"] =	{goods = {"shield"}, description = "Shield and armor components and research", general = "We research and make general and specialized components for ship shield and ship armor systems", history = "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved."},
+			["Archimedes"] = {goods = {"beam"}, description = _("scienceDescription-station", "Energy and particle beam components"), general = "We fabricate general and specialized components for ship beam systems", history = "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it"},
+			["Chatuchak"] =	{goods = {"luxury"}, description = _("scienceDescription-station", "Trading station"), general = "Only the largest market and trading location in twenty sectors. You can find your heart's desire here", history = "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind"},
+			["Grasberg"] =	{goods = {"luxury"}, description = _("scienceDescription-station", "Mining"), general ="We mine nearby asteroids for precious minerals and process them for sale", history = "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids"},
+			["Hayden"] =	{goods = {"nanites"}, description = _("scienceDescription-station", "Observatory and stellar mapping"), general = "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding", history = "Station named in honor of Charles Hayden whose philanthropy continued astrophysical research and education on Earth in the early 20th century"},
+			["Lipkin"] =	{goods = {"autodoc"}, description = _("scienceDescription-station", "Autodoc components"), general = "", history = "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth"},
+			["Madison"] =	{goods = {"luxury"}, description = _("scienceDescription-station", "Zero gravity sports and entertainment"), general = "Come take in a game or two or perhaps see a show", history = "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment"},
+			["Rutherford"] = {goods = {"shield"}, description = _("scienceDescription-station", "Shield components and research"), general = "We research and fabricate components for ship shield systems", history = "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century"},
+			["Toohie"] =	{goods = {"shield"}, description = _("scienceDescription-station", "Shield and armor components and research"), general = "We research and make general and specialized components for ship shield and ship armor systems", history = "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved."},
 		},
 		["Pop Sci Fi"] = {
-			["Anderson"] =	{goods = {"software", "battery"}, description = "Battery and software engineering", general = "We provide high quality high capacity batteries and specialized software for all shipboard systems", history = "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion"},
-			["Archer"] =	{goods = {"shield"}, description = "Shield and Armor Research", general = "The finest shield and armor manufacturer in the quadrant", history = "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"},
-			["Barclay"] =	{goods = {"communication"}, description = "Communication components", general = "We provide a range of communication equipment and software for use aboard ships", history = "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station"},
-			["Calvin"] =	{goods = {"robotic"}, description = "Robotic research", general = "We research and provide robotic systems and components", history = "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming"},
-			["Cavor"] =		{goods = {"filament"}, description = "Advanced Material components", general = "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction", history = "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite"},
-			["Cyrus"] =		{goods = {"impulse"}, description = "Impulse engine components", general = "We supply high quality impulse engines and parts for use aboard ships", history = "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne"},
-			["Deckard"] =	{goods = {"android"}, description = "Android components", general = "Supplier of android components, programming and service", history = "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids"},
-			["Erickson"] =	{goods = {"transporter"}, description = "Transporter components", general = "We provide transporters used aboard ships as well as the components for repair and maintenance", history = "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy"},
-			["Komov"] =		{goods = {"filament"}, description = "Xenopsychology training", general = "We provide classes and simulation to help train diverse species in how to relate to each other", history = "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles"},
-			["Muddville"] = {goods = {"luxury"}, description = "Trading station", general = "Come to Muddvile for all your trade and commerce needs and desires", history = "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman"},
-			["Nexus-6"] =	{goods = {"android"}, description = "Android components", general = "Androids, their parts, maintenance and recylcling", history = "We named the station after the ground breaking android model produced by the Tyrell corporation"},
-			["O'Brien"] =	{goods = {"transporter"}, description = "Transporter components", general = "We research and fabricate high quality transporters and transporter components for use aboard ships", history = "Miles O'Brien started this business after his experience as a transporter chief"},
-			["Organa"] =	{goods = {"luxury"}, description = "Diplomatic training", general = "The premeire academy for leadership and diplomacy training in the region", history = "Established by the royal family so critical during the political upheaval era"},
-			["Owen"] =		{goods = {"lifter"}, description = "Load lifters and components", general = "We provide load lifters and components for various ship systems", history = "Owens started off in the moisture vaporator business on Tattooine then branched out into load lifters based on acquisition of proprietary software and protocols. The station name recognizes the tragic loss of our founder to Imperial violence"},
-			["Ripley"] =	{goods = {"lifter"}, description = "Load lifters and components", general = "We provide load lifters and components", history = "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship"},
-			["Soong"] =		{goods = {"android"}, description = "Android components", general = "We create androids and android components", history = "The station is named after Dr. Noonian Soong, the famous android researcher and builder"},
-			["Tiberius"] =	{goods = {"food"}, description = "Logistics coordination", general = "We support the stations and ships in the area with planning and communication services", history = "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name"},
-			["Tokra"] =		{goods = {"filament"}, description = "Advanced material components", general = "", history = "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them"},
-			["Utopia Planitia"] = {goods = {"warp"}, description = "Ship building and maintenance facility", general = "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel", history = ""},
-			["Zefram"] =	{goods = {"warp"}, description = "Warp engine components", general = "We specialize in the esoteric components necessary to make warp drives function properly", history = "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do"},
-			["Jabba"] =		{goods = {"luxury"}, description = "Commerce and gambling", general = "Come play some games and shop. House take does not exceed 4 percent", history = ""},
-			["Lando"] =		{goods = {"shield"}, description = "Casino and Gambling", general = "", history = ""},
-			["Skandar"] =	{goods = {"luxury"}, description = "Routine maintenance and entertainment", general = "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars", history = "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax"},
-			["Starnet"] =	{goods = {"software"}, description = "Automated weapons systems", general = "We research and create automated weapons systems to improve ship combat capability", history = "Lost the history memory bank. Recovery efforts only brought back the phrase, 'I'll be back'"},
-			["Vaiken"] =	{goods = {"food","impulse"}, description = "Ship building and maintenance facility", general = "", history = ""},
+			["Anderson"] =	{goods = {"software", "battery"}, description = _("scienceDescription-station", "Battery and software engineering"), general = "We provide high quality high capacity batteries and specialized software for all shipboard systems", history = "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion"},
+			["Archer"] =	{goods = {"shield"}, description = _("scienceDescription-station", "Shield and Armor Research"), general = "The finest shield and armor manufacturer in the quadrant", history = "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"},
+			["Barclay"] =	{goods = {"communication"}, description = _("scienceDescription-station", "Communication components"), general = "We provide a range of communication equipment and software for use aboard ships", history = "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station"},
+			["Calvin"] =	{goods = {"robotic"}, description = _("scienceDescription-station", "Robotic research"), general = "We research and provide robotic systems and components", history = "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming"},
+			["Cavor"] =		{goods = {"filament"}, description = _("scienceDescription-station", "Advanced Material components"), general = "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction", history = "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite"},
+			["Cyrus"] =		{goods = {"impulse"}, description = _("scienceDescription-station", "Impulse engine components"), general = "We supply high quality impulse engines and parts for use aboard ships", history = "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne"},
+			["Deckard"] =	{goods = {"android"}, description = _("scienceDescription-station", "Android components"), general = "Supplier of android components, programming and service", history = "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids"},
+			["Erickson"] =	{goods = {"transporter"}, description = _("scienceDescription-station", "Transporter components"), general = "We provide transporters used aboard ships as well as the components for repair and maintenance", history = "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy"},
+			["Komov"] =		{goods = {"filament"}, description = _("scienceDescription-station", "Xenopsychology training"), general = "We provide classes and simulation to help train diverse species in how to relate to each other", history = "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles"},
+			["Muddville"] = {goods = {"luxury"}, description = _("scienceDescription-station", "Trading station"), general = "Come to Muddvile for all your trade and commerce needs and desires", history = "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman"},
+			["Nexus-6"] =	{goods = {"android"}, description = _("scienceDescription-station", "Android components"), general = "Androids, their parts, maintenance and recylcling", history = "We named the station after the ground breaking android model produced by the Tyrell corporation"},
+			["O'Brien"] =	{goods = {"transporter"}, description = _("scienceDescription-station", "Transporter components"), general = "We research and fabricate high quality transporters and transporter components for use aboard ships", history = "Miles O'Brien started this business after his experience as a transporter chief"},
+			["Organa"] =	{goods = {"luxury"}, description = _("scienceDescription-station", "Diplomatic training"), general = "The premeire academy for leadership and diplomacy training in the region", history = "Established by the royal family so critical during the political upheaval era"},
+			["Owen"] =		{goods = {"lifter"}, description = _("scienceDescription-station", "Load lifters and components"), general = "We provide load lifters and components for various ship systems", history = "Owens started off in the moisture vaporator business on Tattooine then branched out into load lifters based on acquisition of proprietary software and protocols. The station name recognizes the tragic loss of our founder to Imperial violence"},
+			["Ripley"] =	{goods = {"lifter"}, description = _("scienceDescription-station", "Load lifters and components"), general = "We provide load lifters and components", history = "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship"},
+			["Soong"] =		{goods = {"android"}, description = _("scienceDescription-station", "Android components"), general = "We create androids and android components", history = "The station is named after Dr. Noonian Soong, the famous android researcher and builder"},
+			["Tiberius"] =	{goods = {"food"}, description = _("scienceDescription-station", "Logistics coordination"), general = "We support the stations and ships in the area with planning and communication services", history = "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name"},
+			["Tokra"] =		{goods = {"filament"}, description = _("scienceDescription-station", "Advanced material components"), general = "", history = "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them"},
+			["Utopia Planitia"] = {goods = {"warp"}, description = _("scienceDescription-station", "Ship building and maintenance facility"), general = "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel", history = ""},
+			["Zefram"] =	{goods = {"warp"}, description = _("scienceDescription-station", "Warp engine components"), general = "We specialize in the esoteric components necessary to make warp drives function properly", history = "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do"},
+			["Jabba"] =		{goods = {"luxury"}, description = _("scienceDescription-station", "Commerce and gambling"), general = "Come play some games and shop. House take does not exceed 4 percent", history = ""},
+			["Lando"] =		{goods = {"shield"}, description = _("scienceDescription-station", "Casino and Gambling"), general = "", history = ""},
+			["Skandar"] =	{goods = {"luxury"}, description = _("scienceDescription-station", "Routine maintenance and entertainment"), general = "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars", history = "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax"},
+			["Starnet"] =	{goods = {"software"}, description = _("scienceDescription-station", "Automated weapons systems"), general = "We research and create automated weapons systems to improve ship combat capability", history = "Lost the history memory bank. Recovery efforts only brought back the phrase, 'I'll be back'"},
+			["Vaiken"] =	{goods = {"food","impulse"}, description = _("scienceDescription-station", "Ship building and maintenance facility"), general = "", history = ""},
 		},
 		["Spec Sci Fi"] = {
-			["Alcaleica"] =	{goods = {"optic"}, description = "Optical Components", general = "We make and supply optic components for various station and ship systems", history = "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon (ALCA) electronic and optic research and development company"},
-			["Bethesda"] =	{goods = {"autodoc", "medicine"}, description = "Medical research", general = "We research and treat exotic medical conditions", history = "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century"},
-			["Deer"] =		{goods = {"tractor","repulsor"}, description = "Repulsor and Tractor Beam Components", general = "We can meet all your pushing and pulling needs with specialized equipment custom made", history = "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products"},
-			["Evondos"] =	{goods = {"autodoc"}, description = "Autodoc components", general = "We provide components for automated medical machinery", history = "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland"},
-			["Feynman"] =	{goods = {"nanites","software"}, description = "Nanotechnology research", general = "We provide nanites and software for a variety of ship-board systems", history = "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman"},
-			["Mayo"] =		{goods = {"autodoc","medicine","food"}, description = "Medical Research", general = "We research exotic diseases and other human medical conditions", history = "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth"},
-			["Olympus"] =	{goods = {"optic"}, description = "Optical components", general = "We fabricate optical lenses and related equipment as well as fiber optic cabling and components", history = "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry"},
-			["Panduit"] =	{goods = {"optic"}, description = "Optic components", general = "We provide optic components for various ship systems", history = "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States"},
-			["Shree"] =		{goods = {"tractor"}, description = "Repulsor and tractor beam components", general = "We make ship systems designed to push or pull other objects around in space", history = "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today"},
-			["Vactel"] =	{goods = {"circuit"}, description = "Shielded Circuitry Fabrication", general = "We specialize in circuitry shielded from external hacking suitable for ship systems", history = "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips"},
-			["Veloquan"] =	{goods = {"sensor"}, description = "Sensor components", general = "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use", history = "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy"},
-			["Tandon"] =	{goods = {"medicine","autodoc"}, description = "Biotechnology research", general = "Merging the organic and inorganic through research", history = "Continued from the Tandon school of engineering started on Earth in the early 21st century"},
+			["Alcaleica"] =	{goods = {"optic"}, description = _("scienceDescription-station", "Optical Components"), general = "We make and supply optic components for various station and ship systems", history = "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon (ALCA) electronic and optic research and development company"},
+			["Bethesda"] =	{goods = {"autodoc", "medicine"}, description = _("scienceDescription-station", "Medical research"), general = "We research and treat exotic medical conditions", history = "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century"},
+			["Deer"] =		{goods = {"tractor","repulsor"}, description = _("scienceDescription-station", "Repulsor and Tractor Beam Components"), general = "We can meet all your pushing and pulling needs with specialized equipment custom made", history = "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products"},
+			["Evondos"] =	{goods = {"autodoc"}, description = _("scienceDescription-station", "Autodoc components"), general = "We provide components for automated medical machinery", history = "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland"},
+			["Feynman"] =	{goods = {"nanites","software"}, description = _("scienceDescription-station", "Nanotechnology research"), general = "We provide nanites and software for a variety of ship-board systems", history = "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman"},
+			["Mayo"] =		{goods = {"autodoc","medicine","food"}, description = _("scienceDescription-station", "Medical Research"), general = "We research exotic diseases and other human medical conditions", history = "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth"},
+			["Olympus"] =	{goods = {"optic"}, description = _("scienceDescription-station", "Optical components"), general = "We fabricate optical lenses and related equipment as well as fiber optic cabling and components", history = "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry"},
+			["Panduit"] =	{goods = {"optic"}, description = _("scienceDescription-station", "Optic components"), general = "We provide optic components for various ship systems", history = "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States"},
+			["Shree"] =		{goods = {"tractor"}, description = _("scienceDescription-station", "Repulsor and tractor beam components"), general = "We make ship systems designed to push or pull other objects around in space", history = "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today"},
+			["Vactel"] =	{goods = {"circuit"}, description = _("scienceDescription-station", "Shielded Circuitry Fabrication"), general = "We specialize in circuitry shielded from external hacking suitable for ship systems", history = "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips"},
+			["Veloquan"] =	{goods = {"sensor"}, description = _("scienceDescription-station", "Sensor components"), general = "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use", history = "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy"},
+			["Tandon"] =	{goods = {"medicine","autodoc"}, description = _("scienceDescription-station", "Biotechnology research"), general = "Merging the organic and inorganic through research", history = "Continued from the Tandon school of engineering started on Earth in the early 21st century"},
 		},
 		["Generic"] = {
-			["California"] = {goods = {"gold", "dilithium"}, description = "Mining station", general = "", history = ""},
-			["Impala"] = 	{goods = {"luxury"}, description = "Mining", general = "We mine nearby asteroids for precious minerals", history = ""},
-			["Krak"] =		{goods = {"nickel","platinum"}, description = "Mining station", general = "", history = ""},
-			["Krik"] =		{goods = {"nickel","cobalt"}, description = "Mining station", general = "", history = ""},
-			["Kruk"] =		{goods = {"nickel","tritanium"}, description = "Mining station", general = "", history = ""},
-			["Outpost-15"] = {goods = {"luxury"}, description = "Mining and trade", general = "", history = ""},
-			["Outpost-21"] = {goods = {"luxury"}, description = "Mining and gambling", general = "", history = ""},
-			["Science-7"] = {goods = {"food"}, description = "Observatory", general = "", history = ""},
-			["Maverick"] =	{goods = {"luxury"}, description = "Gambling and resupply", general = "Relax and meet some interesting players", history = ""},
-			["Nefatha"] =	{goods = {"luxury"}, description = "Commerce and recreation", general = "", history = ""},
-			["Okun"] =		{goods = {"medicine"}, description = "Xenopsychology research", general = "", history = ""},
-			["Outpost-7"] = {goods = {"luxury"}, description = "Resupply", general = "", history = ""},
+			["California"] = {goods = {"gold", "dilithium"}, description = _("scienceDescription-station", "Mining station"), general = "", history = ""},
+			["Impala"] = 	{goods = {"luxury"}, description = _("scienceDescription-station", "Mining"), general = "We mine nearby asteroids for precious minerals", history = ""},
+			["Krak"] =		{goods = {"nickel","platinum"}, description = _("scienceDescription-station", "Mining station"), general = "", history = ""},
+			["Krik"] =		{goods = {"nickel","cobalt"}, description = _("scienceDescription-station", "Mining station"), general = "", history = ""},
+			["Kruk"] =		{goods = {"nickel","tritanium"}, description = _("scienceDescription-station", "Mining station"), general = "", history = ""},
+			["Outpost-15"] = {goods = {"luxury"}, description = _("scienceDescription-station", "Mining and trade"), general = "", history = ""},
+			["Outpost-21"] = {goods = {"luxury"}, description = _("scienceDescription-station", "Mining and gambling"), general = "", history = ""},
+			["Science-7"] = {goods = {"food"}, description = _("scienceDescription-station", "Observatory"), general = "", history = ""},
+			["Maverick"] =	{goods = {"luxury"}, description = _("scienceDescription-station", "Gambling and resupply"), general = "Relax and meet some interesting players", history = ""},
+			["Nefatha"] =	{goods = {"luxury"}, description = _("scienceDescription-station", "Commerce and recreation"), general = "", history = ""},
+			["Okun"] =		{goods = {"medicine"}, description = _("scienceDescription-station", "Xenopsychology research"), general = "", history = ""},
+			["Outpost-7"] = {goods = {"luxury"}, description = _("scienceDescription-station", "Resupply"), general = "", history = ""},
 			["Outpost-8"] = {goods = {"food"}, description = "", general = "", history = ""},
-			["Outpost-33"] = {goods = {"luxury"}, description = "Resupply", general = "", history = ""},
-			["Prada"] =		{goods = {"luxury"}, description = "Textiles and fashion", general = "", history = ""},
-			["Research-11"] = {goods = {"medicine"}, description = "Stress Psychology Research", general = "", history = ""},
-			["Research-19"] = {goods = {"sensor"}, description = "Low gravity research", general = "", history = ""},
-			["Rubis"] =		{goods = {"luxury"}, description = "Resupply", general = "Get your energy here! Grab a drink before you go!", history = ""},
-			["Science-2"] = {goods = {"circuit"}, description = "Research Lab and Observatory", general = "", history = ""},
-			["Science-4"] = {goods = {"medicine","autodoc"}, description = "Biotech research", general = "", history = ""},
-			["Spot"] =		{goods = {"food"}, description = "Observatory", general = "", history = ""},
-			["Valero"] =	{goods = {"luxury"}, description = "Resupply", general = "", history = ""},
+			["Outpost-33"] = {goods = {"luxury"}, description = _("scienceDescription-station", "Resupply"), general = "", history = ""},
+			["Prada"] =		{goods = {"luxury"}, description = _("scienceDescription-station", "Textiles and fashion"), general = "", history = ""},
+			["Research-11"] = {goods = {"medicine"}, description = _("scienceDescription-station", "Stress Psychology Research"), general = "", history = ""},
+			["Research-19"] = {goods = {"sensor"}, description = _("scienceDescription-station", "Low gravity research"), general = "", history = ""},
+			["Rubis"] =		{goods = {"luxury"}, description = _("scienceDescription-station", "Resupply"), general = "Get your energy here! Grab a drink before you go!", history = ""},
+			["Science-2"] = {goods = {"circuit"}, description = _("scienceDescription-station", "Research Lab and Observatory"), general = "", history = ""},
+			["Science-4"] = {goods = {"medicine","autodoc"}, description = _("scienceDescription-station", "Biotech research"), general = "", history = ""},
+			["Spot"] =		{goods = {"food"}, description = _("scienceDescription-station", "Observatory"), general = "", history = ""},
+			["Valero"] =	{goods = {"luxury"}, description = _("scienceDescription-station", "Resupply"), general = "", history = ""},
 		},
 		["Sinister"] = {
 			["Aramanth"] =	{goods = {}, description = "", general = "", history = ""},
