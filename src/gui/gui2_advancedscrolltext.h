@@ -31,8 +31,8 @@ public:
     GuiAdvancedScrollText* setTextSize(float text_size) { this->text_size = text_size; return this; }
 
     unsigned int getEntryCount() const;
-    string getEntryText(int index) const;
-    GuiAdvancedScrollText* removeEntry(int index);
+    string getEntryText(unsigned int index) const;
+    GuiAdvancedScrollText* removeEntry(unsigned int index);
     GuiAdvancedScrollText* clearEntries();
 
     virtual void onDraw(sp::RenderTarget& renderer) override;

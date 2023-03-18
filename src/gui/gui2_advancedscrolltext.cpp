@@ -24,16 +24,16 @@ unsigned int GuiAdvancedScrollText::getEntryCount() const
     return entries.size();
 }
 
-string GuiAdvancedScrollText::getEntryText(int index) const
+string GuiAdvancedScrollText::getEntryText(unsigned int index) const
 {
-    if (index < 0 || index >= int(getEntryCount()))
+    if (index >= getEntryCount())
         return "";
     return entries[index].text;
 }
 
-GuiAdvancedScrollText* GuiAdvancedScrollText::removeEntry(int index)
+GuiAdvancedScrollText* GuiAdvancedScrollText::removeEntry(unsigned int index)
 {
-    if (index < 0 || index > int(getEntryCount()))
+    if (index > getEntryCount())
         return this;
     entries.erase(entries.begin() + index);
     return this;
@@ -68,12 +68,12 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
     }
 
     //Calculate how many lines we have to display in total.
-    int line_count = draw_offset + scrollbar->getValue();
+    const int line_count = draw_offset + scrollbar->getValue();
 
     //Check if we need to update the scroll bar.
     if (scrollbar->getMax() != line_count)
     {
-        int diff = line_count - scrollbar->getMax();
+        const int diff = line_count - scrollbar->getMax();
         scrollbar->setRange(0, line_count);
         scrollbar->setValueSize(rect.size.y);
         if (auto_scroll_down)
