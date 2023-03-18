@@ -11,11 +11,12 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string tex
 {
     Entry& entry = entries.emplace_back();
     entry.prefix = prefix;
+    entry.prepared_prefix = sp::RenderTarget::getDefaultFont()->prepare(prefix, 32, text_size, rect.size, sp::Alignment::TopLeft);
+    max_prefix_width = std::max(max_prefix_width, entry.prepared_prefix.getUsedAreaSize().x);
     entry.text = text;
+    entry.prepared_text = sp::RenderTarget::getDefaultFont()->prepare(text, 32, text_size, {rect.size.x - max_prefix_width - 50.0f, rect.size.y}, sp::Alignment::TopLeft, sp::Font::FlagLineWrap | sp::Font::FlagClip);
     entry.color = color;
     // For each entry, fix the maximum prefix width, so we know how much space we have for the text.
-    entry.prefix_width = sp::RenderTarget::getDefaultFont()->prepare(prefix, 32, text_size, {0, 0}, sp::Alignment::TopLeft, 0).getUsedAreaSize().x;
-    max_prefix_width = std::max(max_prefix_width, entry.prefix_width);
     return this;
 }
 
@@ -48,22 +49,29 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::clearEntries()
 void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
 {
     //Draw the visible entries
-    float draw_offset = -scrollbar->getValue();
+    float draw_offset = -scrollbar->getValue() + text_size + 12.0f;
+
     for(Entry& e : entries)
     {
-        auto prepared_prefix = sp::RenderTarget::getDefaultFont()->prepare(e.prefix, 32, text_size, rect.size, sp::Alignment::TopLeft);
-        auto prepared_text = sp::RenderTarget::getDefaultFont()->prepare(e.text, 32, text_size, {rect.size.x - max_prefix_width - 50, rect.size.y}, sp::Alignment::TopLeft, sp::Font::FlagLineWrap | sp::Font::FlagClip);
-        auto height = prepared_text.getUsedAreaSize().y;
+        const float height = e.prepared_text.getUsedAreaSize().y;
+
         if (draw_offset + height > 0
             && draw_offset < rect.size.y)
         {
-            for(auto& g : prepared_prefix.data)
-                g.position.y += draw_offset;
-            for(auto& g : prepared_text.data)
-                g.position.y += draw_offset;
-            renderer.drawText(rect, prepared_prefix, text_size, {255, 255, 255, 255}, sp::Font::FlagClip);
-            renderer.drawText(sp::Rect(rect.position.x + max_prefix_width, rect.position.y, rect.size.x - 50 - max_prefix_width, rect.size.y), prepared_text, text_size, e.color, sp::Font::FlagClip);
+            const float y_start = e.prepared_prefix.data[0].position.y;
+
+            for(auto& g : e.prepared_prefix.data)
+            {
+                g.position.y = draw_offset;
+            }
+            for(auto& g : e.prepared_text.data)
+            {
+                g.position.y = (g.position.y - y_start) + draw_offset;
+            }
+            renderer.drawText(rect, e.prepared_prefix, text_size, {255, 255, 255, 255}, sp::Font::FlagClip);
+            renderer.drawText(sp::Rect(rect.position.x + max_prefix_width, rect.position.y, rect.size.x - 50 - max_prefix_width, rect.size.y), e.prepared_text, text_size, e.color, sp::Font::FlagClip);
         }
+
         draw_offset += height;
     }
 
