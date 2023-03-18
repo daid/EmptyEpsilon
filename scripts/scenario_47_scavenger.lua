@@ -175,19 +175,19 @@ function init()
 	--place artifact near asteroids
 	local avx, avy = vectorFromAngle(random(0,360),350-(difficulty*100))
 	beam_damage_artifact = Artifact():setPosition(arx+avx,ary+avy):setModel("artifact4"):setScanningParameters(difficulty*2,difficulty*2):setRadarSignatureInfo(random(0,1),random(0,1),random(0,1))
-	beam_damage_artifact:setDescriptions("Object of unknown origin","Object of unknown origin, advanced technology detected"):allowPickup(true):onPickUp(beamDamageArtifactPickup)
+	beam_damage_artifact:setDescriptions(_("scienceDescription-artifact", "Object of unknown origin"),_("scienceDescription-artifact", "Object of unknown origin, advanced technology detected")):allowPickup(true):onPickUp(beamDamageArtifactPickup)
 	avx, avy = vectorFromAngle(random(0,360),350-(difficulty*100))
 	burn_out_artifact = Artifact():setPosition(brx+avx,bry+avy):setModel("artifact4"):setScanningParameters(difficulty*2,difficulty*2):setRadarSignatureInfo(random(0,1),random(0,1),random(0,1))
-	burn_out_artifact:setDescriptions("Object of unknown origin","Object of unknown origin, advanced technology detected"):allowPickup(true):onPickUp(burnOutArtifactPickup)
+	burn_out_artifact:setDescriptions(_("scienceDescription-artifact", "Object of unknown origin"),_("scienceDescription-artifact", "Object of unknown origin, advanced technology detected")):allowPickup(true):onPickUp(burnOutArtifactPickup)
 	if difficulty >= 1 then
 		avx, avy = vectorFromAngle(random(0,360),350-(difficulty*100))
 		burn_out_artifact_2 = Artifact():setPosition(crx+avx,cry+avy):setModel("artifact4"):setScanningParameters(difficulty*2,difficulty*2):setRadarSignatureInfo(random(0,1),random(0,1),random(0,1))
-		burn_out_artifact_2:setDescriptions("Object of unknown origin","Object of unknown origin, advanced technology detected"):allowPickup(true):onPickUp(burnOutArtifactPickup)
+		burn_out_artifact_2:setDescriptions(_("scienceDescription-artifact", "Object of unknown origin"),_("scienceDescription-artifact", "Object of unknown origin, advanced technology detected")):allowPickup(true):onPickUp(burnOutArtifactPickup)
 	end
 	if difficulty > 1 then
 		avx, avy = vectorFromAngle(random(0,360),350-(difficulty*100))
 		burn_out_artifact_3 = Artifact():setPosition(drx+avx,dry+avy):setModel("artifact4"):setScanningParameters(difficulty*2,difficulty*2):setRadarSignatureInfo(random(0,1),random(0,1),random(0,1))
-		burn_out_artifact_3:setDescriptions("Object of unknown origin","Object of unknown origin, advanced technology detected"):allowPickup(true):onPickUp(burnOutArtifactPickup)
+		burn_out_artifact_3:setDescriptions(_("scienceDescription-artifact", "Object of unknown origin"),_("scienceDescription-artifact", "Object of unknown origin, advanced technology detected")):allowPickup(true):onPickUp(burnOutArtifactPickup)
 	end
 --	print("init: place second and third stations")
 	--place second and third stations
@@ -257,49 +257,49 @@ function setInitialContractDetails()
 	first_station.comms_data.contract = {}
 	first_station.comms_data.contract["one_to_two"] = {
 		type = "start",
-		prompt = string.format("Deliver three %s to %s. Upon delivery, they will increase your hull strength",independent_station[2].comms_data.characterGood,independent_station[2]:getCallSign()), 
-		short_prompt = string.format("Three %s to %s",independent_station[2].comms_data.characterGood,independent_station[2]:getCallSign()),
+		prompt = string.format(_("Deliver three %s to %s. Upon delivery, they will increase your hull strength"),independent_station[2].comms_data.characterGood,independent_station[2]:getCallSign()), 
+		short_prompt = string.format(_("Three %s to %s"),independent_station[2].comms_data.characterGood,independent_station[2]:getCallSign()),
 		accepted = false,
 		func = start1to2delivery,
 	}
 	independent_station[2].comms_data.contract = {}
 	independent_station[2].comms_data.contract["one_to_two"] = {
 		type = "fulfill",
-		prompt = string.format("Fulfill %s 3 %s %s contract",first_station:getCallSign(),independent_station[2].comms_data.characterGood,independent_station[2]:getCallSign()),
-		short_prompt = string.format("Three %s from %s",independent_station[2].comms_data.characterGood,first_station:getCallSign()),
+		prompt = string.format(_("Fulfill %s 3 %s %s contract"),first_station:getCallSign(),independent_station[2].comms_data.characterGood,independent_station[2]:getCallSign()),
+		short_prompt = string.format(_("Three %s from %s"),independent_station[2].comms_data.characterGood,first_station:getCallSign()),
 		fulfilled = false,
 		func = complete1to2delivery,
 	}
 	--contract details: second to third station
 	independent_station[2].comms_data.contract["two_to_three"] = {
 		type = "start",
-		prompt = string.format("Deliver two %s to %s. Upon delivery, they will increase your shield strength",independent_station[3].comms_data.characterGood,independent_station[3]:getCallSign()),
-		short_prompt = string.format("Two %s to %s",independent_station[3].comms_data.characterGood,independent_station[3]:getCallSign()),
+		prompt = string.format(_("Deliver two %s to %s. Upon delivery, they will increase your shield strength"),independent_station[3].comms_data.characterGood,independent_station[3]:getCallSign()),
+		short_prompt = string.format(_("Two %s to %s"),independent_station[3].comms_data.characterGood,independent_station[3]:getCallSign()),
 		accepted = false,
 		func = start2to3delivery,
 	}
 	independent_station[3].comms_data.contract = {}
 	independent_station[3].comms_data.contract["two_to_three"] = {
 		type = "fulfill",
-		prompt = string.format("Fulfill %s 2 %s %s contract",independent_station[2]:getCallSign(),independent_station[3].comms_data.characterGood,independent_station[3]:getCallSign()),
-		short_prompt = string.format("Two %s from %s",independent_station[3].comms_data.characterGood,independent_station[2]:getCallSign()),
+		prompt = string.format(_("Fulfill %s 2 %s %s contract"),independent_station[2]:getCallSign(),independent_station[3].comms_data.characterGood,independent_station[3]:getCallSign()),
+		short_prompt = string.format(_("Two %s from %s"),independent_station[3].comms_data.characterGood,independent_station[2]:getCallSign()),
 		fulfilled = false,
 		func = complete2to3delivery,
 	}
 end
 function initialGMButtons()
 	clearGMFunctions()
-	addGMFunction("+Missions",missionSelection)
-	addGMFunction("Show delta sum",function()
-		local gm_message = "Accumulated delta:\n" .. accumulated_delta
+	addGMFunction(_("buttonGM", "+Missions"),missionSelection)
+	addGMFunction(_("buttonGM", "Show delta sum"),function()
+		local gm_message = string.format(_("msgGM", "Accumulated delta:\n%f"), accumulated_delta)
 		local seconds = math.floor(accumulated_delta % 60)
 		if accumulated_delta > 60 then
 			local minutes = math.floor(accumulated_delta / 60)
 			if minutes > 60 then
 				local hours = math.floor(minutes / 60)
-				gm_message = gm_message .. string.format("\n%i:%.2i:%.2i",hours,minutes,seconds)
+				gm_message = gm_message .. string.format(_("msgGM", "\n%i:%.2i:%.2i"),hours,minutes,seconds)
 			else
-				gm_message = gm_message .. string.format("\n%i:%.2i",minutes,seconds)
+				gm_message = gm_message .. string.format(_("msgGM", "\n%i:%.2i"),minutes,seconds)
 			end
 		end
 		addGMMessage(gm_message)
@@ -307,9 +307,9 @@ function initialGMButtons()
 end
 function missionSelection()
 	clearGMFunctions()
-	addGMFunction("-Main from missions",initialGMButtons)
+	addGMFunction(_("buttonGM", "-Main from missions"),initialGMButtons)
 	if plot1 ~= nil and plot1 ~= kraylorDiversionarySabotage then
-		addGMFunction("Skip Harassment",function()
+		addGMFunction(_("buttonGM", "Skip Harassment"),function()
 			player = getPlayerShip(-1)
 			impulseUpgrade(player)
 			missileTubeUpgrade(player)
@@ -326,12 +326,12 @@ function missionSelection()
 			plot1_defensive_fleet_spawned = nil
 			exuari_harassment_upgrade = true
 			plot2 = contractTarget
-			addGMMessage("Harassment skipped")
+			addGMMessage(_("msgGM", "Harassment skipped"))
 			missionSelection()
 		end)
 	end
 	if plot2 == contractTarget then
-		addGMFunction("Skip Local Contracts",function()
+		addGMFunction(_("buttonGM", "Skip Local Contracts"),function()
 			player = getPlayerShip(-1)
 			--add forward beam
 			local beam_index = 0
@@ -351,14 +351,14 @@ function missionSelection()
 			else
 				player:setShieldsMax(player:getShieldMax(0)*1.25,player:getShieldMax(1)*1.25)
 			end
-			player:addToShipLog(string.format("A rare long range contract has been posted at station %s",first_station:getCallSign()),"Magenta")
+			player:addToShipLog(string.format(_("shipLog", "A rare long range contract has been posted at station %s"),first_station:getCallSign()),"Magenta")
 			transition_contract_message = true
 			plot2 = nil
-			addGMMessage("Local contracts skipped")
+			addGMMessage(_("msgGM", "Local contracts skipped"))
 			missionSelection()
 		end)
 	end
-	addGMFunction("Mark asteroids",function()
+	addGMFunction(_("buttonGM", "Mark asteroids"),function()
 		for _,asteroid in pairs(research_asteroids) do
 			if asteroid.osmium ~= nil and asteroid.iridium ~= nil then
 				local ax, ay = asteroid:getPosition()
@@ -5638,19 +5638,19 @@ function createTransitionSystem()
 		local la_2_x, la_2_y = createRandomAlongArc(Asteroid,1,fsx,fsy,60000,direct_angle-30,direct_angle+30,1800)
 		asteroid_list = add_to_list(temp_list,asteroid_list)
 		local avx, avy = vectorFromAngle(random(0,360),350-(difficulty*100))
-		Artifact():setModel("artifact4"):setScanningParameters(difficulty*2,difficulty*2):setRadarSignatureInfo(random(0,1),random(0,1),random(0,1)):setDescriptions("Object of unknown origin","Object of unknown origin, advanced technology detected"):allowPickup(true):onPickUp(maneuverArtifactPickup):setPosition(lax+avx,lay+avy)
-		Artifact():setModel("artifact4"):setScanningParameters(difficulty*2,difficulty*2):setRadarSignatureInfo(random(0,1),random(0,1),random(0,1)):setDescriptions("Object of unknown origin","Object of unknown origin, advanced technology detected"):allowPickup(true):onPickUp(burnOutArtifactPickup):setPosition(la_2_x+avx,la_2_y+avy)
+		Artifact():setModel("artifact4"):setScanningParameters(difficulty*2,difficulty*2):setRadarSignatureInfo(random(0,1),random(0,1),random(0,1)):setDescriptions(_("scienceDescription-artifact", "Object of unknown origin"),_("scienceDescription-artifact", "Object of unknown origin, advanced technology detected")):allowPickup(true):onPickUp(maneuverArtifactPickup):setPosition(lax+avx,lay+avy)
+		Artifact():setModel("artifact4"):setScanningParameters(difficulty*2,difficulty*2):setRadarSignatureInfo(random(0,1),random(0,1),random(0,1)):setDescriptions(_("scienceDescription-artifact", "Object of unknown origin"),_("scienceDescription-artifact", "Object of unknown origin, advanced technology detected")):allowPickup(true):onPickUp(burnOutArtifactPickup):setPosition(la_2_x+avx,la_2_y+avy)
 		if difficulty >= 1 then
 			repeat
 				crx, cry = asteroid_list[math.random(1,#asteroid_list)]:getPosition()
 			until(crx ~= lax and cry ~= lay and crx ~= la_2_x and cry ~= la_2_y)
-			Artifact():setModel("artifact4"):setScanningParameters(difficulty*2,difficulty*2):setRadarSignatureInfo(random(0,1),random(0,1),random(0,1)):setDescriptions("Object of unknown origin","Object of unknown origin, advanced technology detected"):allowPickup(true):onPickUp(burnOutArtifactPickup):setPosition(crx+avx,cry+avy)
+			Artifact():setModel("artifact4"):setScanningParameters(difficulty*2,difficulty*2):setRadarSignatureInfo(random(0,1),random(0,1),random(0,1)):setDescriptions(_("scienceDescription-artifact", "Object of unknown origin"),_("scienceDescription-artifact", "Object of unknown origin, advanced technology detected")):allowPickup(true):onPickUp(burnOutArtifactPickup):setPosition(crx+avx,cry+avy)
 		end
 		if difficulty > 1 then
 			repeat
 				drx, dry = asteroid_list[math.random(1,#asteroid_list)]:getPosition()
 			until(drx ~= lax and dry ~= lay and drx ~= la_2_x and dry ~= la_2_y and drx ~= crx and dry ~= cry)
-			Artifact():setModel("artifact4"):setScanningParameters(difficulty*2,difficulty*2):setRadarSignatureInfo(random(0,1),random(0,1),random(0,1)):setDescriptions("Object of unknown origin","Object of unknown origin, advanced technology detected"):allowPickup(true):onPickUp(burnOutArtifactPickup):setPosition(drx+avx,dry+avy)
+			Artifact():setModel("artifact4"):setScanningParameters(difficulty*2,difficulty*2):setRadarSignatureInfo(random(0,1),random(0,1),random(0,1)):setDescriptions(_("scienceDescription-artifact", "Object of unknown origin"),_("scienceDescription-artifact", "Object of unknown origin, advanced technology detected")):allowPickup(true):onPickUp(burnOutArtifactPickup):setPosition(drx+avx,dry+avy)
 		end
 		local etx, ety = vectorFromAngle(direct_angle,57000)
 		etx = etx + fsx
@@ -5886,7 +5886,7 @@ function contactJennyMcguireAfterAsteroidIdentified()
 									setCommsMessage("Cloaking mechanism deactivated, please retrieve my data store")
 									local px, py = player:getPosition()
 									player.jenny_data_revealed = true
-									Artifact():setDescriptions("Stasis container","Stasis container with a high density data store inside"):setScanningParameters(1,2):allowPickup(true):setPosition((px+target_asteroid_x)/2,(py+target_asteroid_y)/2):setModel("SensorBuoyMKI"):onPickUp(function(self,grabber)
+									Artifact():setDescriptions(_("scienceDescription-artifact", "Stasis container"),_("scienceDescription-artifact", "Stasis container with a high density data store inside")):setScanningParameters(1,2):allowPickup(true):setPosition((px+target_asteroid_x)/2,(py+target_asteroid_y)/2):setModel("SensorBuoyMKI"):onPickUp(function(self,grabber)
 										grabber:addToShipLog(string.format("[Jenny McGuire] Thank you for picking up my research for me, %s. Next time you dock with %s you can get the upgrade I promised",grabber:getCallSign(),first_station:getCallSign()),"Magenta")
 										first_station.asteroid_upgrade = true
 									end)
