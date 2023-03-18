@@ -54,7 +54,8 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
         auto prepared_prefix = sp::RenderTarget::getDefaultFont()->prepare(e.prefix, 32, text_size, rect.size, sp::Alignment::TopLeft);
         auto prepared_text = sp::RenderTarget::getDefaultFont()->prepare(e.text, 32, text_size, {rect.size.x - max_prefix_width - 50, rect.size.y}, sp::Alignment::TopLeft, sp::Font::FlagLineWrap | sp::Font::FlagClip);
         auto height = prepared_text.getUsedAreaSize().y;
-        if (draw_offset + height > 0)
+        if (draw_offset + height > 0
+            && draw_offset < rect.size.y)
         {
             for(auto& g : prepared_prefix.data)
                 g.position.y += draw_offset;
