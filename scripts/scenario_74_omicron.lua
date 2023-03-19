@@ -4626,8 +4626,8 @@ if #accessible_warp_jammers > 0 then
 		if (comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "") or
 			(comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "") or
 			(comms_source:isFriendly(comms_target) and comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" and has_gossip) then
-			addCommsReply(_("stationGeneralInfo-comms","Tell me more about your station"), function()
-				setCommsMessage(_("stationGeneralInfo-comms","What would you like to know?"))
+			addCommsReply(_("station-comms", "Tell me more about your station"), function()
+				setCommsMessage(_("station-comms", "What would you like to know?"))
 				if comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "" then
 					addCommsReply(_("stationGeneralInfo-comms","General information"), function()
 						setCommsMessage(comms_target.comms_data.general)
@@ -4635,7 +4635,7 @@ if #accessible_warp_jammers > 0 then
 					end)
 				end
 				if comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "" then
-					addCommsReply(_("stationGeneralInfo-comms","Station history"), function()
+					addCommsReply(_("stationStory-comms", "Station history"), function()
 						setCommsMessage(comms_target.comms_data.history)
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -4643,7 +4643,7 @@ if #accessible_warp_jammers > 0 then
 				if comms_source:isFriendly(comms_target) then
 					if comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" then
 						if random(1,100) < 50 then
-							addCommsReply(_("stationGeneralInfo-comms","Gossip"), function()
+							addCommsReply(_("gossip-comms", "Gossip"), function()
 								setCommsMessage(comms_target.comms_data.gossip)
 								addCommsReply(_("Back"), commsStation)
 							end)
