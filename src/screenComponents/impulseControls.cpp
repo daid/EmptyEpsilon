@@ -25,7 +25,7 @@ void GuiImpulseControls::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        label->setValue(string(int(my_spaceship->current_impulse * 100)) + "%");
+        label->setValue(string(static_cast<int>(std::round(my_spaceship->current_impulse * 100.0f))) + "%");
         slider->setValue(my_spaceship->impulse_request);
     }
 }
