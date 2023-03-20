@@ -25,7 +25,7 @@ void GuiImpulseControls::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        label->setValue(string(int(my_spaceship->current_impulse * 100)) + "%");
+        label->setValue(string(static_cast<int>(std::round(my_spaceship->current_impulse * 100.0f))) + "%");
         slider->setValue(my_spaceship->impulse_request);
     }
 }
@@ -34,16 +34,24 @@ void GuiImpulseControls::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
+        const float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
         if (change != 0.0f)
-            my_spaceship->commandImpulse(std::min(1.0f, slider->getValue() + change * 0.1f));
+            my_spaceship->commandImpulse(std::clamp(-1.0f, 1.0f, slider->getValue() + change * 0.01f));
+        if (keys.helms_increase_impulse_1.getDown())
+            my_spaceship->commandImpulse(std::min(1.0f, slider->getValue() + 0.01f));
+        if (keys.helms_decrease_impulse_1.getDown())
+            my_spaceship->commandImpulse(std::max(-1.0f, slider->getValue() - 0.01f));
+        if (keys.helms_increase_impulse_10.getDown())
+            my_spaceship->commandImpulse(std::min(1.0f, slider->getValue() + 0.1f));
+        if (keys.helms_decrease_impulse_10.getDown())
+            my_spaceship->commandImpulse(std::max(-1.0f, slider->getValue() - 0.1f));
         if (keys.helms_zero_impulse.getDown())
             my_spaceship->commandImpulse(0.0f);
         if (keys.helms_max_impulse.getDown())
             my_spaceship->commandImpulse(1.0f);
         if (keys.helms_min_impulse.getDown())
             my_spaceship->commandImpulse(-1.0f);
-        
+
         float set_value = keys.helms_set_impulse.getValue();
         if (set_value != my_spaceship->impulse_request && (set_value != 0.0f || set_active))
         {
