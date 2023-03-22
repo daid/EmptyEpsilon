@@ -259,22 +259,19 @@ void FactionInfo::reset()
 }
 
 /* Define script conversion function for the EFactionVsFactionState enum. */
-template<> void convert<EFactionVsFactionState>::param(lua_State* L, int& idx, EFactionVsFactionState& efvfs)
+template<> void convert<EFactionVsFactionState>::param(lua_State* L, int& idx, EFactionVsFactionState& state)
 {
     string str = string(luaL_checkstring(L, idx++)).lower();
-    if (str == "friendly")
-        efvfs = FVF_Friendly;
-    else if (str == "neutral")
-        efvfs = FVF_Neutral;
-    else if (str == "enemy" || str == "hostile")
-        efvfs = FVF_Enemy;
-    else
-        efvfs = FVF_Neutral;
+
+    if (str == "friendly") { state = FVF_Friendly; }
+    else if (str == "neutral") { state = FVF_Neutral; }
+    else if (str == "enemy" || str == "hostile") { state = FVF_Enemy; }
+    else { state = FVF_Neutral; }
 }
 
-template<> int convert<EFactionVsFactionState>::returnType(lua_State* L, EFactionVsFactionState efvfs)
+template<> int convert<EFactionVsFactionState>::returnType(lua_State* L, EFactionVsFactionState state)
 {
-    switch(efvfs)
+    switch (state)
     {
     case FVF_Friendly:
         lua_pushstring(L, "friendly");
