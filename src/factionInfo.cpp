@@ -101,7 +101,7 @@ REGISTER_SCRIPT_FUNCTION(getFactions)
 static int getFactionInfo(lua_State* L)
 {
     auto name = luaL_checkstring(L, 1);
-    for(unsigned int n = 0; n < MAX_FACTIONS; n++)
+    for (size_t n = 0; n < MAX_FACTIONS; n++)
         if (factionInfo[n] && factionInfo[n]->getName() == name)
             return convert<P<FactionInfo>>::returnType(L, factionInfo[n]);
     return 0;
@@ -125,7 +125,7 @@ FactionInfo::FactionInfo()
     registerMemberReplication(&friend_mask);
 
     if (game_server) {
-        for(size_t n=0; n<MAX_FACTIONS; n++)
+        for (size_t n = 0; n < MAX_FACTIONS; n++)
         {
             if (!factionInfo[n]) {
                 factionInfo[n] = this;
@@ -265,6 +265,7 @@ EFactionVsFactionState FactionInfo::getState(uint8_t idx0, uint8_t idx1)
 
 unsigned int FactionInfo::findFactionId(string name)
 {
+    // Returning n, so using unsigned int.
     for(unsigned int n = 0; n < MAX_FACTIONS; n++)
         if (factionInfo[n] && factionInfo[n]->name == name)
             return n;
@@ -274,7 +275,7 @@ unsigned int FactionInfo::findFactionId(string name)
 
 void FactionInfo::reset()
 {
-    for(unsigned int n = 0; n < MAX_FACTIONS; n++)
+    for (size_t n = 0; n < MAX_FACTIONS; n++)
         if (factionInfo[n])
             factionInfo[n]->destroy();
 }
