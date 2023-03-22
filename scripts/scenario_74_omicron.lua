@@ -916,7 +916,7 @@ end
 function mainGMButtons()
 	clearGMFunctions()
 	addGMFunction(string.format(_("buttonGM","Version %s"),scenario_version),function()
-		local version_message = string.format(_("buttonGM","Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
+		local version_message = string.format(_("msgGM","Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
@@ -925,7 +925,7 @@ end
 function mainGMButtonsDuringPause()
 	clearGMFunctions()
 	addGMFunction(string.format(_("buttonGM","Version %s"),scenario_version),function()
-		local version_message = string.format(_("buttonGM","Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
+		local version_message = string.format(_("msgGM","Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
@@ -939,13 +939,13 @@ end
 function mainGMButtonsAfterPause()
 	clearGMFunctions()
 	addGMFunction(string.format(_("buttonGM","Version %s"),scenario_version),function()
-		local version_message = string.format(_("buttonGM","Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
+		local version_message = string.format(_("msgGM","Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
 	addGMFunction(_("buttonGM","+Station Reports"),stationReports)
 	addGMFunction(_("buttonGM","Mission Stations"),function()
-		addGMMessage(string.format(_("buttonGM","This is spoiler information. Consider carefully before you reveal this to the rest of the players. If you feel you have to reveal this information, I suggest you select the player ship using the widget to the right of the 'Global message' button, then click the 'Hail ship' button, identify yourself as a character in game like the regional headquarters stellar cartography technician, then type the information as if you were that character helping them out on their mission.\n\nMedical research station: %s in sector %s\nPlague station %s in %s"),station_medical_research:getCallSign(),station_medical_research:getSectorName(),station_plague:getCallSign(),station_plague:getSectorName()))
+		addGMMessage(string.format(_("msgGM","This is spoiler information. Consider carefully before you reveal this to the rest of the players. If you feel you have to reveal this information, I suggest you select the player ship using the widget to the right of the 'Global message' button, then click the 'Hail ship' button, identify yourself as a character in game like the regional headquarters stellar cartography technician, then type the information as if you were that character helping them out on their mission.\n\nMedical research station: %s in sector %s\nPlague station %s in %s"),station_medical_research:getCallSign(),station_medical_research:getSectorName(),station_plague:getCallSign(),station_plague:getSectorName()))
 	end)
 	addGMFunction(_("buttonGM","+Test Non-DB Ships"),testNonDBShips)
 end
@@ -1117,11 +1117,11 @@ function stationReports()
 			end
 		end
 		if applicable_station_count == 0 then
-			addGMMessage(_("stationReport-buttonGM","No applicable stations. Reports useless. No action taken"))
+			addGMMessage(_("stationReport-msgGM","No applicable stations. Reports useless. No action taken"))
 			mainGMButtons()
 		end
 	else
-		addGMMessage(_("stationReport-buttonGM","No applicable stations. Reports useless. No action taken"))
+		addGMMessage(_("stationReport-msgGM","No applicable stations. Reports useless. No action taken"))
 		mainGMButtons()
 	end
 end
@@ -1196,7 +1196,7 @@ function updatePlayerSoftTemplate(p)
 			end
 			p.score_settings_source = tempTypeName
 		else
-			addGMMessage(string.format("Player ship %s's template type (%s) could not be found in table PlayerShipStats",p:getCallSign(),tempTypeName))
+			addGMMessage(string.format(_("msgGM", "Player ship %s's template type (%s) could not be found in table PlayerShipStats"),p:getCallSign(),tempTypeName))
 		end
 	end
 	p.impulse_upgrade = 0
@@ -4626,8 +4626,8 @@ if #accessible_warp_jammers > 0 then
 		if (comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "") or
 			(comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "") or
 			(comms_source:isFriendly(comms_target) and comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" and has_gossip) then
-			addCommsReply(_("stationGeneralInfo-comms","Tell me more about your station"), function()
-				setCommsMessage(_("stationGeneralInfo-comms","What would you like to know?"))
+			addCommsReply(_("station-comms", "Tell me more about your station"), function()
+				setCommsMessage(_("station-comms", "What would you like to know?"))
 				if comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "" then
 					addCommsReply(_("stationGeneralInfo-comms","General information"), function()
 						setCommsMessage(comms_target.comms_data.general)
@@ -4635,7 +4635,7 @@ if #accessible_warp_jammers > 0 then
 					end)
 				end
 				if comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "" then
-					addCommsReply(_("stationGeneralInfo-comms","Station history"), function()
+					addCommsReply(_("stationStory-comms", "Station history"), function()
 						setCommsMessage(comms_target.comms_data.history)
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -4643,7 +4643,7 @@ if #accessible_warp_jammers > 0 then
 				if comms_source:isFriendly(comms_target) then
 					if comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" then
 						if random(1,100) < 50 then
-							addCommsReply(_("stationGeneralInfo-comms","Gossip"), function()
+							addCommsReply(_("gossip-comms", "Gossip"), function()
 								setCommsMessage(comms_target.comms_data.gossip)
 								addCommsReply(_("Back"), commsStation)
 							end)
@@ -6587,7 +6587,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, tem
 		template_pool = getTemplatePool(enemyStrength)
 	end
 	if #template_pool < 1 then
-		addGMMessage("Empty Template pool: fix excludes or other criteria")
+		addGMMessage(_("msgGM", "Empty Template pool: fix excludes or other criteria"))
 		return enemyList
 	end
 	while enemyStrength > 0 do
