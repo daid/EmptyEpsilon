@@ -16,7 +16,7 @@
 /// If friendly, this faction acts as neutral but also shares short-range radar with PlayerSpaceships in Relay, and can grant reputation points to PlayerSpaceships of the same faction.
 ///
 /// Many scenario and comms scripts also give friendly factions benefits at a reputation cost that netural factions do not.
-/// Factions are loaded from resources/factionInfo.lua upon launching a scenario, and accessed by using the getFactionInfo() global function.
+/// Factions are loaded from resources/factionInfo.lua upon launching a scenario, and accessed by using the getFactions() or getFactionInfoByName() global functions.
 ///
 /// Example:
 /// faction = FactionInfo():setName("USN"):setLocaleName(_("USN")) -- sets the internal and translatable faction names
@@ -54,7 +54,7 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getRelationshipWith);
     /// Sets this faction's relationship with the given faction to the given state.
     /// Example:
-    /// other_faction = getFactionInfo("Exuari")
+    /// other_faction = getFactionInfoByName("Exuari")
     /// faction:setRelationship(other_faction,"enemy") -- sets a hostile relationship with Exuari
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setRelationshipWith);
     /// Sets the given faction to be hostile to SpaceObjects of this faction.
@@ -92,19 +92,23 @@ static int getFactionInfos(lua_State* L)
 /// Example: getFactionInfos()[2] -- returns the second-indexed faction
 REGISTER_SCRIPT_FUNCTION(getFactionInfos);
 
-static int getFactionInfo(lua_State* L)
+static int getFactionInfoByName(lua_State* L)
 {
     const auto* name = luaL_checkstring(L, 1);
-    for (size_t n = 0; n < MAX_FACTIONS; n++)
-        if (factionInfo[n] && factionInfo[n]->getName() == name)
-            return convert<P<FactionInfo>>::returnType(L, factionInfo[n]);
+
+    for (size_t idx = 0; idx < MAX_FACTIONS; idx++)
+    {
+        if (factionInfo[idx] && factionInfo[idx]->getName() == name)
+            return convert<P<FactionInfo>>::returnType(L, factionInfo[idx]);
+    }
+
     return 0;
 }
-/// P<FactionInfo> getFactionInfo(string faction_name)
-/// Returns a reference to the FactionInfo object with the given name.
+/// P<FactionInfo> getFactionInfoByName(string faction_name)
+/// Returns a reference to the first FactionInfo object found with the given name.
 /// Use this to modify faction details and relationships with FactionInfo functions.
-/// Example: faction = getFactionInfo("Human Navy") -- faction = the Human Navy FactionInfo object
-REGISTER_SCRIPT_FUNCTION(getFactionInfo);
+/// Example: faction = getFactionInfoByName("Human Navy") -- faction = the Human Navy FactionInfo object
+REGISTER_SCRIPT_FUNCTION(getFactionInfoByName);
 
 REGISTER_MULTIPLAYER_CLASS(FactionInfo, "FactionInfo");
 FactionInfo::FactionInfo()
