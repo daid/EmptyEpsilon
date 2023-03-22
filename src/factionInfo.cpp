@@ -92,7 +92,7 @@ static int getFactions(lua_State* L)
 /// PVector<FactionInfo> getFactions()
 /// Returns a 1-indexed table of all factions.
 /// Example: getFactions()[2] -- returns the second-indexed faction
-REGISTER_SCRIPT_FUNCTION(getFactions)
+REGISTER_SCRIPT_FUNCTION(getFactions);
 
 static int getFactionInfo(lua_State* L)
 {
