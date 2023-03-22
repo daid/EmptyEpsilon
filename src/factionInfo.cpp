@@ -257,9 +257,7 @@ EFactionVsFactionState FactionInfo::getState(P<FactionInfo> other)
 
 EFactionVsFactionState FactionInfo::getState(uint8_t idx0, uint8_t idx1)
 {
-    if (idx0 >= MAX_FACTIONS) return FVF_Neutral;
-    if (idx1 >= MAX_FACTIONS) return FVF_Neutral;
-    if (!factionInfo[idx0] || !factionInfo[idx1]) return FVF_Neutral;
+    if (idx0 >= MAX_FACTIONS || idx1 >= MAX_FACTIONS || !factionInfo[idx0] || !factionInfo[idx1]) { return FVF_Neutral };
     return factionInfo[idx0]->getState(factionInfo[idx1]);
 }
 
