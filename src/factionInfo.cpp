@@ -147,6 +147,14 @@ void FactionInfo::update(float delta)
     else { LOG(ERROR) << "Faction " << name << "has index " << index << " outside of limit " << MAX_FACTIONS << "."; }
 }
 
+void FactionInfo::setName(string name)
+{
+    this->name = name;
+
+    // Also set the locale name if it's unset.
+    if (locale_name == "") { setLocaleName(name); }
+}
+
 void FactionInfo::setNeutral(P<FactionInfo> other)
 {
     if (!other)
