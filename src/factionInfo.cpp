@@ -122,16 +122,19 @@ FactionInfo::FactionInfo()
     registerMemberReplication(&enemy_mask);
     registerMemberReplication(&friend_mask);
 
-    if (game_server) {
-        for (size_t n = 0; n < MAX_FACTIONS; n++)
+    if (game_server)
+    {
+        for (size_t idx = 0; idx < MAX_FACTIONS; idx++)
         {
-            if (!factionInfo[n]) {
-                factionInfo[n] = this;
-                index = n;
+            if (!factionInfo[idx])
+            {
+                factionInfo[idx] = this;
+                index = idx;
                 setFriendly(this);
                 return;
             }
         }
+
         LOG(ERROR) << "Failed to add a faction beyond the limit of " << MAX_FACTIONS << " factions.";
         destroy();
     }
@@ -265,21 +268,23 @@ EFactionVsFactionState FactionInfo::getRelationshipBetween(P<FactionInfo> factio
 unsigned int FactionInfo::findFactionId(string name)
 {
     // Returning n, so using unsigned int.
-    for (unsigned int n = 0; n < MAX_FACTIONS; n++)
-        if (factionInfo[n] && factionInfo[n]->name == name)
-            return n;
+    for (unsigned int idx = 0; idx < MAX_FACTIONS; idx++)
+    {
+        if (factionInfo[idx] && factionInfo[idx]->name == name)
+            return idx;
+    }
+
     LOG(ERROR) << "Failed to find faction named " << name;
     return 0;
 }
 
 void FactionInfo::reset()
 {
-    for (size_t n = 0; n < MAX_FACTIONS; n++)
-        if (factionInfo[n])
-            factionInfo[n]->destroy();
+    for (size_t idx = 0; idx < MAX_FACTIONS; idx++)
+        if (factionInfo[idx]) { factionInfo[idx]->destroy(); }
 }
 
-/* Define script conversion function for the EFactionVsFactionState enum. */
+// Define script conversion function for the EFactionVsFactionState enum.
 template<> void convert<EFactionVsFactionState>::param(lua_State* L, int& idx, EFactionVsFactionState& state)
 {
     string str = string(luaL_checkstring(L, idx++)).lower();
