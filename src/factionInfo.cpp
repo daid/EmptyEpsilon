@@ -267,12 +267,9 @@ EFactionVsFactionState FactionInfo::getRelationshipBetween(P<FactionInfo> factio
 
 unsigned int FactionInfo::findFactionId(string name)
 {
-    // Returning n, so using unsigned int.
+    // Returning n, so using unsigned int instead of size_t.
     for (unsigned int idx = 0; idx < MAX_FACTIONS; idx++)
-    {
-        if (factionInfo[idx] && factionInfo[idx]->name == name)
-            return idx;
-    }
+        if (factionInfo[idx] && factionInfo[idx]->name == name) { return idx; }
 
     LOG(ERROR) << "Failed to find faction named " << name;
     return 0;
