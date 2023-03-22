@@ -77,22 +77,20 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
 
 std::array<P<FactionInfo>, MAX_FACTIONS> factionInfo;
 
-static int getFactions(lua_State* L)
+static int getFactionInfos(lua_State* L)
 {
     PVector<FactionInfo> factions;
     factions.reserve(MAX_FACTIONS);
-    for (size_t i = 0; i < MAX_FACTIONS; ++i)
-    {
-        auto faction = factionInfo[i];
-        if (faction) { factions.emplace_back(std::move(faction)); }
-    }
+
+    for (size_t idx = 0; idx < MAX_FACTIONS; ++idx)
+        if (factionInfo[idx]) { factions.emplace_back(std::move(factionInfo[idx])); }
 
     return convert<PVector<FactionInfo>>::returnType(L, factions);
 }
-/// PVector<FactionInfo> getFactions()
-/// Returns a 1-indexed table of all factions.
-/// Example: getFactions()[2] -- returns the second-indexed faction
-REGISTER_SCRIPT_FUNCTION(getFactions);
+/// PVector<FactionInfo> getFactionInfos()
+/// Returns a 1-indexed table of all FactionInfo objects.
+/// Example: getFactionInfos()[2] -- returns the second-indexed faction
+REGISTER_SCRIPT_FUNCTION(getFactionInfos);
 
 static int getFactionInfo(lua_State* L)
 {
