@@ -130,7 +130,7 @@ FactionInfo::FactionInfo()
                 return;
             }
         }
-        LOG(ERROR) << "Tried to add a faction beyond the limit of " << MAX_FACTIONS << " factions.";
+        LOG(ERROR) << "Failed to add a faction beyond the limit of " << MAX_FACTIONS << " factions.";
         destroy();
     }
 }
@@ -141,15 +141,15 @@ FactionInfo::~FactionInfo()
 
 void FactionInfo::update(float delta)
 {
-    if (index != 255)
-        factionInfo[index] = this;
+    if (index < MAX_FACTIONS) { factionInfo[index] = this; }
+    else { LOG(ERROR) << "Faction " << name << "has index " << index << " outside of limit " << MAX_FACTIONS << "."; }
 }
 
 void FactionInfo::setNeutral(P<FactionInfo> other)
 {
     if (!other)
     {
-        LOG(WARNING) << "Tried to set an undefined faction to be an enemy of " << name;
+        LOG(WARNING) << "Failed to set an undefined faction to be neutral with " << name;
         return;
     }
 
@@ -163,7 +163,7 @@ void FactionInfo::setEnemy(P<FactionInfo> other)
 {
     if (!other)
     {
-        LOG(WARNING) << "Tried to set an undefined faction to be an enemy of " << name;
+        LOG(WARNING) << "Failed to set an undefined faction to be an enemy of " << name;
         return;
     }
 
@@ -177,7 +177,7 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
 {
     if (!other)
     {
-        LOG(WARNING) << "Tried to set an undefined faction to be friendly with " << name;
+        LOG(WARNING) << "Failed to set an undefined faction to be friendly with " << name;
         return;
     }
 
@@ -204,22 +204,10 @@ void FactionInfo::setRelationshipWith(P<FactionInfo> other, EFactionVsFactionSta
         return;
     }
 
-    if (state == FVF_Enemy)
-    {
-        setEnemy(other);
-    }
-    else if (state == FVF_Friendly)
-    {
-        setFriendly(other);
-    }
-    else if (state == FVF_Neutral)
-    {
-        setNeutral(other);
-    }
-    else
-    {
-        LOG(WARNING) << "Tried to set an incorrect faction relationship state";
-    }
+    if (state == FVF_Enemy) { setEnemy(other); }
+    else if (state == FVF_Friendly) { setFriendly(other); }
+    else if (state == FVF_Neutral) { setNeutral(other); }
+    else { LOG(ERROR) << "Given faction relationship state is invalid."; }
 }
 
 EFactionVsFactionState FactionInfo::getRelationshipWith(P<FactionInfo> other)
@@ -256,10 +244,10 @@ EFactionVsFactionState FactionInfo::getState(uint8_t idx0, uint8_t idx1)
 unsigned int FactionInfo::findFactionId(string name)
 {
     // Returning n, so using unsigned int.
-    for(unsigned int n = 0; n < MAX_FACTIONS; n++)
+    for (unsigned int n = 0; n < MAX_FACTIONS; n++)
         if (factionInfo[n] && factionInfo[n]->name == name)
             return n;
-    LOG(ERROR) << "Failed to find faction: " << name;
+    LOG(ERROR) << "Failed to find faction named " << name;
     return 0;
 }
 
