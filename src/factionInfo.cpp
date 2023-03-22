@@ -3,7 +3,7 @@
 #include "multiplayer_server.h"
 
 /// A FactionInfo object contains presentation details and faction relationships for member SpaceObjects.
-/// EmptyEpsilon has a hardcoded limit of 32 factions.
+/// EmptyEpsilon has a hardcoded limit of 32 factions (MAX_FACTIONS in factionInfo.h).
 ///
 /// SpaceObjects belong to a faction that determines which objects are friendly, neutral, or hostile toward them.
 /// For example, these relationships determine whether a SpaceObject can be targeted by weapons, docked with, or receive comms from another SpaceObject.
@@ -101,7 +101,7 @@ REGISTER_SCRIPT_FUNCTION(getFactions)
 static int getFactionInfo(lua_State* L)
 {
     auto name = luaL_checkstring(L, 1);
-    for(unsigned int n = 0; n < factionInfo.size(); n++)
+    for(unsigned int n = 0; n < MAX_FACTIONS; n++)
         if (factionInfo[n] && factionInfo[n]->getName() == name)
             return convert<P<FactionInfo>>::returnType(L, factionInfo[n]);
     return 0;
@@ -125,7 +125,7 @@ FactionInfo::FactionInfo()
     registerMemberReplication(&friend_mask);
 
     if (game_server) {
-        for(size_t n=0; n<factionInfo.size(); n++)
+        for(size_t n=0; n<MAX_FACTIONS; n++)
         {
             if (!factionInfo[n]) {
                 factionInfo[n] = this;
@@ -134,7 +134,7 @@ FactionInfo::FactionInfo()
                 return;
             }
         }
-        LOG(ERROR) << "There is a limit of 32 factions.";
+        LOG(ERROR) << "Tried to add a faction beyond the limit of " << MAX_FACTIONS << " factions.";
         destroy();
     }
 }
@@ -257,15 +257,15 @@ EFactionVsFactionState FactionInfo::getState(P<FactionInfo> other)
 
 EFactionVsFactionState FactionInfo::getState(uint8_t idx0, uint8_t idx1)
 {
-    if (idx0 >= factionInfo.size()) return FVF_Neutral;
-    if (idx1 >= factionInfo.size()) return FVF_Neutral;
+    if (idx0 >= MAX_FACTIONS) return FVF_Neutral;
+    if (idx1 >= MAX_FACTIONS) return FVF_Neutral;
     if (!factionInfo[idx0] || !factionInfo[idx1]) return FVF_Neutral;
     return factionInfo[idx0]->getState(factionInfo[idx1]);
 }
 
 unsigned int FactionInfo::findFactionId(string name)
 {
-    for(unsigned int n = 0; n < factionInfo.size(); n++)
+    for(unsigned int n = 0; n < MAX_FACTIONS; n++)
         if (factionInfo[n] && factionInfo[n]->name == name)
             return n;
     LOG(ERROR) << "Failed to find faction: " << name;
@@ -274,7 +274,7 @@ unsigned int FactionInfo::findFactionId(string name)
 
 void FactionInfo::reset()
 {
-    for(unsigned int n = 0; n < factionInfo.size(); n++)
+    for(unsigned int n = 0; n < MAX_FACTIONS; n++)
         if (factionInfo[n])
             factionInfo[n]->destroy();
 }

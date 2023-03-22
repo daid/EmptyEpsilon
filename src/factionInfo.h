@@ -9,7 +9,7 @@
 
 
 class FactionInfo;
-const uint8_t MAX_FACTIONS = 32;
+const size_t MAX_FACTIONS = 32;
 extern std::array<P<FactionInfo>, MAX_FACTIONS> factionInfo;
 
 enum EFactionVsFactionState
