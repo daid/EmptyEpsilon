@@ -125,9 +125,9 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
             EFactionVsFactionState fvf_state = FVF_Neutral;
             if (my_spaceship)
             {
-                fvf_state = FactionInfo::getState(gameGlobalInfo->getVictoryFactionId(), my_spaceship->getFactionId());
+                fvf_state = FactionInfo::getRelationshipBetween(gameGlobalInfo->getVictoryFactionId(), my_spaceship->getFactionId());
             }
-            switch(fvf_state)
+            switch (fvf_state)
             {
             case FVF_Enemy:
                 victory_label->setText(tr("Defeat!"));

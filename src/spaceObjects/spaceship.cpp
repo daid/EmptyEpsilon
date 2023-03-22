@@ -1716,24 +1716,25 @@ void SpaceShip::addBroadcast(int threshold, string message)
 
     for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
     {
-        bool addtolog = 0;
+        bool addtolog = false;
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+
         if (ship)
         {
             if (this->isFriendly(ship))
             {
                 color = glm::u8vec4(154, 255, 154, 255); //ally = light green
-                addtolog = 1;
+                addtolog = true;
             }
-            else if ((FactionInfo::getState(this->getFactionId(), ship->getFactionId()) == FVF_Neutral) && ((threshold >= FVF_Neutral)))
+            else if (FactionInfo::getRelationshipBetween(this->getFactionId(), ship->getFactionId()) == FVF_Neutral && threshold >= FVF_Neutral)
             {
                 color = glm::u8vec4(128,128,128, 255); //neutral = grey
-                addtolog = 1;
+                addtolog = true;
             }
-            else if ((this->isEnemy(ship)) && (threshold == FVF_Enemy))
+            else if (this->isEnemy(ship) && threshold == FVF_Enemy)
             {
                 color = glm::u8vec4(255,102,102, 255); //enemy = light red
-                addtolog = 1;
+                addtolog = true;
             }
 
             if (addtolog)

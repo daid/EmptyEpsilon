@@ -199,25 +199,11 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
 
 void FactionInfo::resetAllRelationships()
 {
-    for (size_t n = 0; n < MAX_FACTIONS; n++)
+    for (size_t idx = 0; idx < MAX_FACTIONS; idx++)
     {
-        if (factionInfo[n] && factionInfo[n] != this)
-            this->setNeutral(factionInfo[n]);
+        if (factionInfo[idx] && factionInfo[idx] != this)
+            this->setNeutral(factionInfo[idx]);
     }
-}
-
-void FactionInfo::setRelationshipWith(P<FactionInfo> other, EFactionVsFactionState state)
-{
-    if (!other)
-    {
-        LOG(WARNING) << "Given setRelationshipWith faction is invalid.";
-        return;
-    }
-
-    if (state == FVF_Enemy) { setEnemy(other); }
-    else if (state == FVF_Friendly) { setFriendly(other); }
-    else if (state == FVF_Neutral) { setNeutral(other); }
-    else { LOG(ERROR) << "Given faction relationship state is invalid."; }
 }
 
 EFactionVsFactionState FactionInfo::getRelationshipWith(P<FactionInfo> other)
@@ -234,21 +220,46 @@ EFactionVsFactionState FactionInfo::getRelationshipWith(P<FactionInfo> other)
     return FVF_Neutral;
 }
 
-EFactionVsFactionState FactionInfo::getState(uint8_t idx0, uint8_t idx1)
+void FactionInfo::setRelationshipWith(P<FactionInfo> other, EFactionVsFactionState state)
+{
+    if (!other)
+    {
+        LOG(WARNING) << "Given setRelationshipWith faction is invalid.";
+        return;
+    }
+
+    if (state == FVF_Enemy) { setEnemy(other); }
+    else if (state == FVF_Friendly) { setFriendly(other); }
+    else if (state == FVF_Neutral) { setNeutral(other); }
+    else { LOG(ERROR) << "Given faction relationship state is invalid."; }
+}
+
+EFactionVsFactionState FactionInfo::getRelationshipBetween(uint8_t idx0, uint8_t idx1)
 {
     if (idx0 >= MAX_FACTIONS || idx1 >= MAX_FACTIONS)
     {
-        LOG(ERROR) << "Given getState index is outside the limit of " << MAX_FACTIONS << " factions. Returning Neutral.";
+        LOG(ERROR) << "Given getRelationshipBetween index is outside the limit of " << MAX_FACTIONS << " factions. Returning Neutral.";
         return FVF_Neutral;
     }
 
     if (!factionInfo[idx0] || !factionInfo[idx1])
     {
-        LOG(ERROR) << "No faction at the given getState index. Returning Neutral.";
+        LOG(ERROR) << "No faction at the given getRelationshipBetween index. Returning Neutral.";
         return FVF_Neutral;
     }
 
     return factionInfo[idx0]->getRelationshipWith(factionInfo[idx1]);
+}
+
+EFactionVsFactionState FactionInfo::getRelationshipBetween(P<FactionInfo> faction0, P<FactionInfo> faction1)
+{
+    if (!faction0 || !faction1)
+    {
+        LOG(ERROR) << "Given faction is invalid. Returning Neutral.";
+        return FVF_Neutral;
+    }
+
+    return faction0->getRelationshipWith(faction1);
 }
 
 unsigned int FactionInfo::findFactionId(string name)

@@ -413,21 +413,17 @@ void SpaceObject::setScanningParameters(int complexity, int depth)
 bool SpaceObject::isEnemy(P<SpaceObject> obj)
 {
     if (obj)
-    {
-        return FactionInfo::getState(faction_id, obj->faction_id) == FVF_Enemy;
-    } else {
-        return false;
-    }
+        return FactionInfo::getRelationshipBetween(faction_id, obj->faction_id) == FVF_Enemy;
+
+    return false;
 }
 
 bool SpaceObject::isFriendly(P<SpaceObject> obj)
 {
     if (obj)
-    {
-        return FactionInfo::getState(faction_id, obj->faction_id) == FVF_Friendly;
-    } else {
-        return false;
-    }
+        return FactionInfo::getRelationshipBetween(faction_id, obj->faction_id) == FVF_Friendly;
+
+    return false;
 }
 
 void SpaceObject::damageArea(glm::vec2 position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range)
