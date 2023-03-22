@@ -81,14 +81,10 @@ static int getFactions(lua_State* L)
 {
     PVector<FactionInfo> factions;
     factions.reserve(MAX_FACTIONS);
-    for (auto i = 0; i < MAX_FACTIONS; ++i)
+    for (size_t i = 0; i < MAX_FACTIONS; ++i)
     {
         auto faction = factionInfo[i];
-
-        if (faction)
-        {
-            factions.emplace_back(std::move(faction));
-        }
+        if (faction) { factions.emplace_back(std::move(faction)); }
     }
 
     return convert<PVector<FactionInfo>>::returnType(L, factions);
@@ -100,7 +96,7 @@ REGISTER_SCRIPT_FUNCTION(getFactions)
 
 static int getFactionInfo(lua_State* L)
 {
-    auto name = luaL_checkstring(L, 1);
+    const auto* name = luaL_checkstring(L, 1);
     for (size_t n = 0; n < MAX_FACTIONS; n++)
         if (factionInfo[n] && factionInfo[n]->getName() == name)
             return convert<P<FactionInfo>>::returnType(L, factionInfo[n]);
@@ -193,25 +189,10 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
 
 void FactionInfo::resetAllRelationships()
 {
-    // Reset this faction's masks.
-    enemy_mask = 0;
-    friend_mask = 0;
-
-    // Reset each other faction's relationship with this faction.
-    for (auto faction : factionInfo)
+    for (size_t n = 0; n < MAX_FACTIONS; n++)
     {
-        if (faction)
-        {
-            if (faction != this)
-            {
-                faction->friend_mask &=~(1U << index);
-                faction->enemy_mask &=~(1 << index);
-            }
-        }
-        else
-        {
-            break;
-        }
+        if (factionInfo[n] && factionInfo[n] != this)
+            this->setNeutral(factionInfo[n]);
     }
 }
 
