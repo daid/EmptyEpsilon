@@ -51,12 +51,12 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setDescription);
     /// Returns this faction's relationship with the given faction.
     /// Example: faction:getRelationship() -- returns "enemy" if hostile
-    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getRelationship);
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getRelationshipWith);
     /// Sets this faction's relationship with the given faction to the given state.
     /// Example:
     /// other_faction = getFactionInfo("Exuari")
     /// faction:setRelationship(other_faction,"enemy") -- sets a hostile relationship with Exuari
-    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setRelationship);
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setRelationshipWith);
     /// Sets the given faction to be hostile to SpaceObjects of this faction.
     /// For example, Spaceships of this faction can target and fire at SpaceShips of the given faction, and vice versa.
     /// Warning: A faction can be designated as hostile to itself, but the behavior is not well-defined.
@@ -215,11 +215,11 @@ void FactionInfo::resetAllRelationships()
     }
 }
 
-void FactionInfo::setRelationship(P<FactionInfo> other, EFactionVsFactionState state)
+void FactionInfo::setRelationshipWith(P<FactionInfo> other, EFactionVsFactionState state)
 {
     if (!other)
     {
-        LOG(WARNING) << "Tried to change faction relationship state with an undefined faction";
+        LOG(WARNING) << "Given setRelationshipWith faction is invalid.";
         return;
     }
 
@@ -241,24 +241,35 @@ void FactionInfo::setRelationship(P<FactionInfo> other, EFactionVsFactionState s
     }
 }
 
-// Avoid Lua engine errors from trying to register overloaded getState()
-EFactionVsFactionState FactionInfo::getRelationship(P<FactionInfo> other)
+EFactionVsFactionState FactionInfo::getRelationshipWith(P<FactionInfo> other)
 {
-    return this->getState(other);
-}
+    if (!other)
+    {
+        LOG(ERROR) << "Given getRelationshipWith faction is invalid. Returning Neutral.";
+        return FVF_Neutral;
+    }
 
-EFactionVsFactionState FactionInfo::getState(P<FactionInfo> other)
-{
-    if (!other) return FVF_Neutral;
-    if (enemy_mask & (1 << other->index)) return FVF_Enemy;
-    if (friend_mask & (1 << other->index)) return FVF_Friendly;
+    if (enemy_mask & (1U << other->index)) { return FVF_Enemy; }
+    if (friend_mask & (1U << other->index)) { return FVF_Friendly; }
+
     return FVF_Neutral;
 }
 
 EFactionVsFactionState FactionInfo::getState(uint8_t idx0, uint8_t idx1)
 {
-    if (idx0 >= MAX_FACTIONS || idx1 >= MAX_FACTIONS || !factionInfo[idx0] || !factionInfo[idx1]) { return FVF_Neutral };
-    return factionInfo[idx0]->getState(factionInfo[idx1]);
+    if (idx0 >= MAX_FACTIONS || idx1 >= MAX_FACTIONS)
+    {
+        LOG(ERROR) << "Given getState index is outside the limit of " << MAX_FACTIONS << " factions. Returning Neutral.";
+        return FVF_Neutral;
+    }
+
+    if (!factionInfo[idx0] || !factionInfo[idx1])
+    {
+        LOG(ERROR) << "No faction at the given getState index. Returning Neutral.";
+        return FVF_Neutral;
+    }
+
+    return factionInfo[idx0]->getRelationshipWith(factionInfo[idx1]);
 }
 
 unsigned int FactionInfo::findFactionId(string name)
