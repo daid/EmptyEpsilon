@@ -88,7 +88,6 @@ public:
      */
     EFactionVsFactionState getRelationshipWith(P<FactionInfo> other);
     static EFactionVsFactionState getRelationshipBetween(uint8_t idx0, uint8_t idx1);
-    static EFactionVsFactionState getRelationshipBetween(P<FactionInfo> faction0, P<FactionInfo> faction1);
     static unsigned int findFactionId(string name);
 
     static void reset(); //Destroy all FactionInfo objects

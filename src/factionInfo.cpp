@@ -147,7 +147,7 @@ FactionInfo::~FactionInfo()
 void FactionInfo::update(float delta)
 {
     if (index < MAX_FACTIONS) { factionInfo[index] = this; }
-    else { LOG(ERROR) << "Faction " << name << "has index " << index << " outside of limit " << MAX_FACTIONS << "."; }
+    else { LOG(ERROR) << "Faction " << name << "has index " << index << " outside of limit " << MAX_FACTIONS; }
 }
 
 void FactionInfo::setName(string name)
@@ -252,17 +252,6 @@ EFactionVsFactionState FactionInfo::getRelationshipBetween(uint8_t idx0, uint8_t
     }
 
     return factionInfo[idx0]->getRelationshipWith(factionInfo[idx1]);
-}
-
-EFactionVsFactionState FactionInfo::getRelationshipBetween(P<FactionInfo> faction0, P<FactionInfo> faction1)
-{
-    if (!faction0 || !faction1)
-    {
-        LOG(ERROR) << "Given faction is invalid. Returning Neutral.";
-        return FVF_Neutral;
-    }
-
-    return faction0->getRelationshipWith(faction1);
 }
 
 unsigned int FactionInfo::findFactionId(string name)
