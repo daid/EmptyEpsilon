@@ -5655,7 +5655,7 @@ function createTransitionSystem()
 		local etx, ety = vectorFromAngle(direct_angle,57000)
 		etx = etx + fsx
 		ety = ety + fsy
-		drop_bait = SupplyDrop():setFaction("Exuari"):setPosition(etx,ety):setDescriptions("Supply Drop","Supply Drop containing energy, missiles and various ship system repair parts"):setScanningParameters(math.ceil(difficulty + .2),math.random(1,3))
+		drop_bait = SupplyDrop():setFaction("Exuari"):setPosition(etx,ety):setDescriptions(_("scienceDescription-supply", "Supply Drop"),_("scienceDescription-supply", "Supply Drop containing energy, missiles and various ship system repair parts")):setScanningParameters(math.ceil(difficulty + .2),math.random(1,3))
 		plot4 = highwaymen
 		highway_timer = 30
 		local nebula_list = {}
@@ -7377,11 +7377,11 @@ function healthCheck(delta)
 					p:setRepairCrewCount(1)
 					if p:hasPlayerAtPosition("Engineering") then
 						local repairCrewRecovery = "repairCrewRecovery"
-						p:addCustomMessage("Engineering",repairCrewRecovery,"Medical team has revived one of your repair crew")
+						p:addCustomMessage("Engineering",repairCrewRecovery,_("msgEngineer", "Medical team has revived one of your repair crew"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						local repairCrewRecoveryPlus = "repairCrewRecoveryPlus"
-						p:addCustomMessage("Engineering+",repairCrewRecoveryPlus,"Medical team has revived one of your repair crew")
+						p:addCustomMessage("Engineering+",repairCrewRecoveryPlus,_("msgEngineer+", "Medical team has revived one of your repair crew"))
 					end
 					resetPreviousSystemHealth(p)
 				end
@@ -7399,10 +7399,10 @@ function healthCheck(delta)
 						local noticable_reclaimed_coolant = math.floor(reclaimed_coolant)
 						if noticable_reclaimed_coolant > 0 then
 							if p:hasPlayerAtPosition("Engineering") then
-								p:addCustomMessage("Engineering","coolant_recovery","Automated systems have recovered some coolant")
+								p:addCustomMessage("Engineering","coolant_recovery",_("msgEngineer", "Automated systems have recovered some coolant"))
 							end
 							if p:hasPlayerAtPosition("Engineering+") then
-								p:addCustomMessage("Engineering+","coolant_recovery_plus","Automated systems have recovered some coolant")
+								p:addCustomMessage("Engineering+","coolant_recovery_plus",_("msgEngineer+", "Automated systems have recovered some coolant"))
 							end
 						end
 						resetPreviousSystemHealth(p)
@@ -7441,11 +7441,11 @@ function crewFate(p, fatalityChance)
 			p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 			if p:hasPlayerAtPosition("Engineering") then
 				local repairCrewFatality = "repairCrewFatality"
-				p:addCustomMessage("Engineering",repairCrewFatality,"One of your repair crew has perished")
+				p:addCustomMessage("Engineering",repairCrewFatality,_("msgEngineer", "One of your repair crew has perished"))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
+				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("msgEngineer+", "One of your repair crew has perished"))
 			end
 		else
 			local consequence = 0
@@ -7476,11 +7476,11 @@ function crewFate(p, fatalityChance)
 				p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 				if p:hasPlayerAtPosition("Engineering") then
 					local repairCrewFatality = "repairCrewFatality"
-					p:addCustomMessage("Engineering",repairCrewFatality,"One of your repair crew has perished")
+					p:addCustomMessage("Engineering",repairCrewFatality,_("msgEngineer", "One of your repair crew has perished"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-					p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
+					p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("msgEngineer+", "One of your repair crew has perished"))
 				end
 			elseif consequence == 2 then
 				local current_coolant = p:getMaxCoolant()
@@ -7497,53 +7497,53 @@ function crewFate(p, fatalityChance)
 				p.reclaimable_coolant = math.min(20,p.reclaimable_coolant + lost_coolant*random(.8,1))
 				if p:hasPlayerAtPosition("Engineering") then
 					local coolantLoss = "coolantLoss"
-					p:addCustomMessage("Engineering",coolantLoss,"Damage has caused a loss of coolant")
+					p:addCustomMessage("Engineering",coolantLoss,_("msgEngineer", "Damage has caused a loss of coolant"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					local coolantLossPlus = "coolantLossPlus"
-					p:addCustomMessage("Engineering+",coolantLossPlus,"Damage has caused a loss of coolant")
+					p:addCustomMessage("Engineering+",coolantLossPlus,_("msgEngineer+", "Damage has caused a loss of coolant"))
 				end
 			else
 				local named_consequence = consequence_list[consequence-2]
 				if named_consequence == "probe" then
 					p:setCanLaunchProbe(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","probe_launch_damage_message","The probe launch system has been damaged")
+						p:addCustomMessage("Engineering","probe_launch_damage_message",_("msgEngineer", "The probe launch system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","probe_launch_damage_message_plus","The probe launch system has been damaged")
+						p:addCustomMessage("Engineering+","probe_launch_damage_message_plus",_("msgEngineer+", "The probe launch system has been damaged"))
 					end
 				elseif named_consequence == "hack" then
 					p:setCanHack(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","hack_damage_message","The hacking system has been damaged")
+						p:addCustomMessage("Engineering","hack_damage_message",_("msgEngineer", "The hacking system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","hack_damage_message_plus","The hacking system has been damaged")
+						p:addCustomMessage("Engineering+","hack_damage_message_plus",_("msgEngineer+", "The hacking system has been damaged"))
 					end
 				elseif named_consequence == "scan" then
 					p:setCanScan(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","scan_damage_message","The scanners have been damaged")
+						p:addCustomMessage("Engineering","scan_damage_message",_("msgEngineer", "The scanners have been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","scan_damage_message_plus","The scanners have been damaged")
+						p:addCustomMessage("Engineering+","scan_damage_message_plus",_("msgEngineer+", "The scanners have been damaged"))
 					end
 				elseif named_consequence == "combat_maneuver" then
 					p:setCanCombatManeuver(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","combat_maneuver_damage_message","Combat maneuver has been damaged")
+						p:addCustomMessage("Engineering","combat_maneuver_damage_message",_("msgEngineer", "Combat maneuver has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","combat_maneuver_damage_message_plus","Combat maneuver has been damaged")
+						p:addCustomMessage("Engineering+","combat_maneuver_damage_message_plus",_("msgEngineer+", "Combat maneuver has been damaged"))
 					end
 				elseif named_consequence == "self_destruct" then
 					p:setCanSelfDestruct(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","self_destruct_damage_message","Self destruct system has been damaged")
+						p:addCustomMessage("Engineering","self_destruct_damage_message",_("msgEngineer", "Self destruct system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","self_destruct_damage_message_plus","Self destruct system has been damaged")
+						p:addCustomMessage("Engineering+","self_destruct_damage_message_plus",_("msgEngineer+", "Self destruct system has been damaged"))
 					end
 				end
 			end	--coolant loss branch
@@ -8551,11 +8551,11 @@ function highwaymenPounce(delta)
 		if drop_bait:isScannedBy(player) then
 			if player:hasPlayerAtPosition("Science") then
 				player.highwaymen_warning_message = "highwaymen_warning_message"
-				player:addCustomMessage("Science",player.highwaymen_warning_message,"Energy surge from supply drop")
+				player:addCustomMessage("Science",player.highwaymen_warning_message,_("msgScience", "Energy surge from supply drop"))
 			end
 			if player:hasPlayerAtPosition("Operations") then
 				player.highwaymen_warning_message_ops = "highwaymen_warning_message_ops"
-				player:addCustomMessage("Operations",player.highwaymen_warning_message_ops,"Energy surge from supply drop")
+				player:addCustomMessage("Operations",player.highwaymen_warning_message_ops,_("msgOperations", "Energy surge from supply drop"))
 			end
 		else
 			local etx, ety = drop_bait:getPosition()
@@ -8564,11 +8564,11 @@ function highwaymenPounce(delta)
 			plot5 = removeZone
 			if player:hasPlayerAtPosition("Science") then
 				player.highwaymen_warning_message = "highwaymen_warning_message"
-				player:addCustomMessage("Science",player.highwaymen_warning_message,"Energy surge from area highlighted in yellow")
+				player:addCustomMessage("Science",player.highwaymen_warning_message,_("msgScience", "Energy surge from area highlighted in yellow"))
 			end
 			if player:hasPlayerAtPosition("Operations") then
 				player.highwaymen_warning_message_ops = "highwaymen_warning_message_ops"
-				player:addCustomMessage("Operations",player.highwaymen_warning_message_ops,"Energy surge from area highlighted in yellow")
+				player:addCustomMessage("Operations",player.highwaymen_warning_message_ops,_("msgOperations", "Energy surge from area highlighted in yellow"))
 			end
 		end
 	end
@@ -8603,7 +8603,7 @@ function highwaymenAftermath(delta)
 	if enemy_count < 1 then
 		highway_timer = highway_timer - delta
 		if highway_timer < 0 then
-			highwaymen_jammer:setRange(5000):setDescriptions("Jump and Warp Jammer","Jump and Warp Jammer with external dynamic range control and sensor decoy mechanism"):setScanningParameters(1,2)
+			highwaymen_jammer:setRange(5000):setDescriptions(_("scienceDescription-jammer", "Jump and Warp Jammer"),_("scienceDescription-jammer", "Jump and Warp Jammer with external dynamic range control and sensor decoy mechanism")):setScanningParameters(1,2)
 			plot4 = highwaymenReset
 			highway_timer = delta + 200
 			local etx, ety = highwaymen_jammer:getPosition()
@@ -8690,14 +8690,14 @@ function update(delta)
 			if player:hasPlayerAtPosition("Relay") then
 				if player.inventoryButton == nil then
 					player.tbi = "inventory" .. player:getCallSign()
-					player:addCustomButton("Relay",player.tbi,"Inventory",function () playerShipCargoInventory(player) end)
+					player:addCustomButton("Relay",player.tbi,_("inventory-buttonRelay", "Inventory"),function () playerShipCargoInventory(player) end)
 					player.inventoryButton = true
 				end
 			end
 			if player:hasPlayerAtPosition("Operations") then
 				if player.inventoryButton == nil then
 					player.tbi_op = "inventoryOp" .. player:getCallSign()
-					player:addCustomButton("Operations",player.tbi_op,"Inventory", function () playerShipCargoInventory(player) end)
+					player:addCustomButton("Operations",player.tbi_op,_("inventory-buttonOperations", "Inventory"), function () playerShipCargoInventory(player) end)
 					player.inventoryButton = true
 				end
 			end
