@@ -260,8 +260,9 @@ unsigned int FactionInfo::findFactionId(string name)
     for (unsigned int idx = 0; idx < MAX_FACTIONS; idx++)
         if (factionInfo[idx] && factionInfo[idx]->name == name) { return idx; }
 
-    LOG(ERROR) << "Failed to find faction named " << name;
-    return 0;
+    // Return the invalid default faction ID on failure.
+    LOG(ERROR) << "Failed to find faction named " << name << ", returning 255.";
+    return 255;
 }
 
 void FactionInfo::reset()
