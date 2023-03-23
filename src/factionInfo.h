@@ -26,6 +26,8 @@ public:
     virtual ~FactionInfo();
 
     virtual void update(float delta) override;
+
+    uint8_t getFactionId() { return this->index; }
     /*!
      * \brief Set name of faction.
      * \param Name Name of the faction

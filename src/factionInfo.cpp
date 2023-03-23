@@ -25,6 +25,10 @@
 /// faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
 REGISTER_SCRIPT_CLASS(FactionInfo)
 {
+    /// Returns this faction's internal ID, which is assigned upon creation.
+    /// Valid values are 0 to 31, as limited by MAX_FACTIONS in factionInfo.h.
+    /// Example: faction:getFactionId()
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getFactionId);
     /// Returns this faction's internal string name.
     /// Example: faction:getName()
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getName);
@@ -134,7 +138,6 @@ FactionInfo::FactionInfo()
                 return;
             }
         }
-
         LOG(ERROR) << "Failed to add a faction beyond the limit of " << MAX_FACTIONS << " factions.";
         destroy();
     }
