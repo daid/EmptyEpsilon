@@ -351,7 +351,7 @@ function missionSelection()
 			else
 				player:setShieldsMax(player:getShieldMax(0)*1.25,player:getShieldMax(1)*1.25)
 			end
-			player:addToShipLog(string.format(_("shipLog", "A rare long range contract has been posted at station %s"),first_station:getCallSign()),"Magenta")
+			player:addToShipLog(string.format(_("contract-shipLog", "A rare long range contract has been posted at station %s"),first_station:getCallSign()),"Magenta")
 			transition_contract_message = true
 			plot2 = nil
 			addGMMessage(_("msgGM", "Local contracts skipped"))
@@ -1101,7 +1101,7 @@ function burnOutArtifactPickup(self, picker)
 			picker:setSystemHealth("maneuver",-1)			
 		end
 	end
-	picker:addToShipLog("The artifact we picked up has damaged our ship","Magenta")
+	picker:addToShipLog(_("artifact-shipLog", "The artifact we picked up has damaged our ship"),"Magenta")
 end
 function beamDamageArtifactPickup(self, picker)
 	local damage_factor = 0
@@ -1143,7 +1143,7 @@ function beamDamageArtifactPickup(self, picker)
 		picker:setBeamWeaponEnergyPerFire(beam_index,picker:getBeamWeaponEnergyPerFire(beam_index)*increased_heat_and_energy)
 		beam_index = beam_index + 1
 	until(picker:getBeamWeaponRange(beam_index) < 1)
-	picker:addToShipLog("The technology gleaned from the artifact has allowed our technicians to increase the damage inflicted by our beam weapons","Magenta")
+	picker:addToShipLog(_("artifact-shipLog", "The technology gleaned from the artifact has allowed our technicians to increase the damage inflicted by our beam weapons"),"Magenta")
 end
 function maneuverArtifactPickup(self, picker)
 	local maneuver_factor = 1
@@ -1153,15 +1153,15 @@ function maneuverArtifactPickup(self, picker)
 		maneuver_factor = 1.2 + (2 - difficulty)/2
 	end
 	picker:setRotationMaxSpeed(picker:getRotationMaxSpeed()*maneuver_factor)
-	picker:addToShipLog(string.format("The technology gleaned from the artifact has allowed our technicians to increase our maneuver speed by %.1f%%",(maneuver_factor - 1)*100),"Magenta")
+	picker:addToShipLog(string.format(_("artifact-shipLog", "The technology gleaned from the artifact has allowed our technicians to increase our maneuver speed by %.1f%%"),(maneuver_factor - 1)*100),"Magenta")
 end
 function setOptionalAddBeamMission(beam_station)
 	if efficient_battery_diagnostic then print("top of setOptionalAddBeamMission") end
 	if beam_station == nil then
 		return
 	end
-	beam_station.comms_data.character = "Bob Fairchilde"
-	beam_station.comms_data.characterDescription = "His penchant for miniaturization and tinkering allows him to add a beam weapon to any ship"
+	beam_station.comms_data.character = _("Bob Fairchilde")
+	beam_station.comms_data.characterDescription = _("His penchant for miniaturization and tinkering allows him to add a beam weapon to any ship")
 	beam_station.comms_data.characterFunction = "addForwardBeam"
 	if efficient_battery_diagnostic then print(string.format("first station: %s",first_station:getCallSign())) end
 	local mineral_good = stationMineralGood(first_station)
@@ -1174,8 +1174,8 @@ function setOptionalEfficientBatteriesMisison(battery_station)
 	if battery_station == nil then
 		return
 	end
-	battery_station.comms_data.character = "Norma Tarigan"
-	battery_station.comms_data.characterDescription = "She knows how to increase your maximum energy capacity by improving battery efficiency"
+	battery_station.comms_data.character = _("Norma Tarigan")
+	battery_station.comms_data.characterDescription = _("She knows how to increase your maximum energy capacity by improving battery efficiency")
 	battery_station.comms_data.characterFunction = "efficientBatteries"
 	if efficient_battery_diagnostic then print(string.format("independent station 2: %s",independent_station[2]:getCallSign())) end
 	local component_good = stationComponentGood(independent_station[2],"battery")
@@ -5214,13 +5214,13 @@ function handleDockedState()
 	end
 	if comms_target == transition_station then
 		if plot1 == nil then
-			addCommsReply("Check long distance contract",function()
+			addCommsReply(_("contract-comms", "Check long distance contract"),function()
 				createHumanNavySystem()
-				setCommsMessage(string.format("Contract Details:\nTravel to %s system to deliver cargo to supply station %s. Distance to system: %i units. Upon delivery, %s technicians will upgrade your battery efficiency and beam cycle time.",planet_star:getCallSign(),supply_depot_station:getCallSign(),math.floor(distance(comms_target,planet_star)/1000),supply_depot_station:getCallSign()))
+				setCommsMessage(string.format(_("contract-comms", "Contract Details:\nTravel to %s system to deliver cargo to supply station %s. Distance to system: %i units. Upon delivery, %s technicians will upgrade your battery efficiency and beam cycle time."),planet_star:getCallSign(),supply_depot_station:getCallSign(),math.floor(distance(comms_target,planet_star)/1000),supply_depot_station:getCallSign()))
 				addCommsReply("Accept",function()
 					local p = getPlayerShip(-1)
 					addMineTube(p)
-					local acceptance_message = string.format("The Human Navy requires all armed ships be equipped with the ability to drop mines. We have modified %s with a rear facing mining tube. Due to ship size constraints, we were only able to provide you with two mines.",comms_source:getCallSign())
+					local acceptance_message = string.format(_("contract-comms", "The Human Navy requires all armed ships be equipped with the ability to drop mines. We have modified %s with a rear facing mining tube. Due to ship size constraints, we were only able to provide you with two mines."),comms_source:getCallSign())
 					--remove/add cargo here
 					if comms_source.cargo < 4 then
 						local remove_list = ""
@@ -5228,13 +5228,13 @@ function handleDockedState()
 							if good_quantity > 0 then
 								comms_source.goods[good] = 0
 								if remove_list == "" then
-									remove_list = remove_list .. "\n\nYour current cargo (" .. good
+									remove_list = remove_list .. _("contract-comms", "\n\nYour current cargo (") .. good
 								else
-									remove_list = remove_list .. ", " .. good
+									remove_list = remove_list .. _("contract-comms", ", ") .. good
 								end
 							end
 						end
-						remove_list = remove_list .. ") has been removed to make room for your contract cargo and to help defray the cost of upgrading your ship to Human Navy standards."
+						remove_list = remove_list .. _("contract-comms", ") has been removed to make room for your contract cargo and to help defray the cost of upgrading your ship to Human Navy standards.")
 						acceptance_message = acceptance_message .. remove_list
 					end
 					if comms_source.goods == nil then
@@ -5245,7 +5245,7 @@ function handleDockedState()
 					comms_source.goods["dilithium"] = 1
 					comms_source.goods["tritanium"] = 1
 					comms_source.cargo = 0
-					acceptance_message = acceptance_message .. string.format("\n\nCritical cargo has been loaded aboard your ship, %s. Take the cargo to the %s system centered in sector %s. Find %s, the second planet out from star %s. Dock at station %s in orbit around %s's moon, %s to deliver the cargo. They will have crew standing by to immediately offload the cargo",p:getCallSign(),planet_star:getCallSign(),planet_star:getSectorName(),planet_secondus:getCallSign(),planet_star:getCallSign(),supply_depot_station:getCallSign(),planet_secondus:getCallSign(),planet_secondus_moon:getCallSign())
+					acceptance_message = acceptance_message .. string.format(_("contract-comms", "\n\nCritical cargo has been loaded aboard your ship, %s. Take the cargo to the %s system centered in sector %s. Find %s, the second planet out from star %s. Dock at station %s in orbit around %s's moon, %s to deliver the cargo. They will have crew standing by to immediately offload the cargo"),p:getCallSign(),planet_star:getCallSign(),planet_star:getSectorName(),planet_secondus:getCallSign(),planet_star:getCallSign(),supply_depot_station:getCallSign(),planet_secondus:getCallSign(),planet_secondus_moon:getCallSign())
 					setCommsMessage(acceptance_message)
 					plot1 = longDistanceCargo
 					addCommsReply(_("Back"),commsStation)
@@ -5258,24 +5258,24 @@ function handleDockedState()
 		if plot1_fleets_destroyed ~= nil then
 			if plot1_fleets_destroyed > 0 then
 				if not comms_source.impulse_upgrade then
-					addCommsReply("Upgrade impulse engines", function()
+					addCommsReply(_("ridExuari-comms", "Upgrade impulse engines"), function()
 						impulseUpgrade(comms_source)
-						setCommsMessage("Thanks for taking care of those Exuari. We've upgraded the topspeed of your impulse engines")
+						setCommsMessage(_("ridExuari-comms", "Thanks for taking care of those Exuari. We've upgraded the topspeed of your impulse engines"))
 						addCommsReply(_("Back"),commsStation)
 					end)
 				end
 				if plot1_fleets_destroyed > 1 and not comms_source.missile_upgrade then
-					addCommsReply("Add missile tubes", function()
+					addCommsReply(_("ridExuari-comms", "Add missile tubes"), function()
 						missileTubeUpgrade(comms_source)
-						setCommsMessage("Thanks for continuing to shoot down those Exuari. We've added some missile tubes to help you destroy the Exuari station")
-						plot1_message = string.format("%s has asked for help against Exuari forces and has provided your ship with missile weapons to help you destroy %s",first_station:getCallSign(),exuari_harassing_station:getCallSign())
+						setCommsMessage(_("ridExuari-comms", "Thanks for continuing to shoot down those Exuari. We've added some missile tubes to help you destroy the Exuari station"))
+						plot1_message = string.format(_("ridExuari-comms", "%s has asked for help against Exuari forces and has provided your ship with missile weapons to help you destroy %s"),first_station:getCallSign(),exuari_harassing_station:getCallSign())
 						addCommsReply(_("Back"),commsStation)
 					end)
 				end
 				if plot1_fleets_destroyed > 2 and not comms_source.beam_damage_upgrade then
-					addCommsReply("Upgrade beam damage", function()
+					addCommsReply(_("ridExuari-comms", "Upgrade beam damage"), function()
 						doubleBeamDamageUpgrade(comms_source)
-						setCommsMessage("Looks like you're having a hard time with those Exuari. We've increased the damage your beam weapons deal out")
+						setCommsMessage(_("ridExuari-comms", "Looks like you're having a hard time with those Exuari. We've increased the damage your beam weapons deal out"))
 						addCommsReply(_("Back"),commsStation)
 					end)
 				end
@@ -5865,55 +5865,55 @@ end
 function contactJennyMcguireAfterAsteroidIdentified()
 	if target_asteroid ~= nil then
 		if player.asteroid_upgrade == nil then
-			addCommsReply("Contact Jenny McGuire",function()
+			addCommsReply(_("asteroid-comms", "Contact Jenny McGuire"),function()
 				if player.jenny_data_revealed == nil then
 					local jenny_prompt = ""
 					if player.jenny_aboard then
-						jenny_prompt = string.format("Communication routed to guest quarters aboard %s\n\n",player:getCallSign())
+						jenny_prompt = string.format(_("asteroid-comms", "Communication routed to guest quarters aboard %s\n\n"),player:getCallSign())
 					end
-					setCommsMessage(string.format("%sYes? What can I do for you?",jenny_prompt))
-					addCommsReply("What were those asteroid compositional percentages?",function()
-						setCommsMessage(string.format("Osmium: %.1f\nIridium: %.1f\nOlivine: %.1f\nNickel: %.1f",target_asteroid.osmium,target_asteroid.iridium,target_asteroid.olivine,target_asteroid.nickel))
+					setCommsMessage(string.format(_("asteroid-comms", "%sYes? What can I do for you?"),jenny_prompt))
+					addCommsReply(_("asteroid-comms", "What were those asteroid compositional percentages?"),function()
+						setCommsMessage(string.format(_("asteroid-comms", "Osmium: %.1f\nIridium: %.1f\nOlivine: %.1f\nNickel: %.1f"),target_asteroid.osmium,target_asteroid.iridium,target_asteroid.olivine,target_asteroid.nickel))
 						addCommsReply(_("Back"),commsStation)
 					end)
 					if target_asteroid ~= nil and target_asteroid:isValid() then
 						if distance(player,target_asteroid) < 1500 then
-							addCommsReply("Asteroid under 1.5 units away",function()
+							addCommsReply(_("asteroid-comms", "Asteroid under 1.5 units away"),function()
 								local vx, vy = player:getVelocity()
 								if vx ~= 0 or vy ~= 0 then
-									setCommsMessage(string.format("%s must come to a complete stop before I can deactivate the cloaking mechanism",player:getCallSign()))
+									setCommsMessage(string.format(_("asteroid-comms", "%s must come to a complete stop before I can deactivate the cloaking mechanism"),player:getCallSign()))
 								else
-									setCommsMessage("Cloaking mechanism deactivated, please retrieve my data store")
+									setCommsMessage(_("asteroid-comms", "Cloaking mechanism deactivated, please retrieve my data store"))
 									local px, py = player:getPosition()
 									player.jenny_data_revealed = true
 									Artifact():setDescriptions(_("scienceDescription-artifact", "Stasis container"),_("scienceDescription-artifact", "Stasis container with a high density data store inside")):setScanningParameters(1,2):allowPickup(true):setPosition((px+target_asteroid_x)/2,(py+target_asteroid_y)/2):setModel("SensorBuoyMKI"):onPickUp(function(self,grabber)
-										grabber:addToShipLog(string.format("[Jenny McGuire] Thank you for picking up my research for me, %s. Next time you dock with %s you can get the upgrade I promised",grabber:getCallSign(),first_station:getCallSign()),"Magenta")
+										grabber:addToShipLog(string.format(_("asteroid-shipLog", "[Jenny McGuire] Thank you for picking up my research for me, %s. Next time you dock with %s you can get the upgrade I promised"),grabber:getCallSign(),first_station:getCallSign()),"Magenta")
 										first_station.asteroid_upgrade = true
 									end)
 								end
 								addCommsReply(_("Back"),commsStation)
 							end)
 						else
-							addCommsReply("What is the asteroid approach procedure?",function()
+							addCommsReply(_("asteroid-comms", "What is the asteroid approach procedure?"),function()
 								if player.jenny_aboard then
-									setCommsMessage("Get within 1.5 units of the asteroid and contact me. I will deactivate the cloaking mechanism on my research data store so that you can then pick it up")
+									setCommsMessage(_("asteroid-comms", "Get within 1.5 units of the asteroid and contact me. I will deactivate the cloaking mechanism on my research data store so that you can then pick it up"))
 								else
-									setCommsMessage(string.format("First, you have to pick me up from %s",first_station:getCallSign()))
+									setCommsMessage(string.format(_("asteroid-comms", "First, you have to pick me up from %s"),first_station:getCallSign()))
 								end
 								addCommsReply(_("Back"),commsStation)
 							end)
 						end
 					else
-						addCommsReply("The asteroid may have been destroyed",function()
-							setCommsMessage("So it seems. Looks like I'll have to find another asteroid. Thanks for your help.")
+						addCommsReply(_("asteroid-comms", "The asteroid may have been destroyed"),function()
+							setCommsMessage(_("asteroid-comms", "So it seems. Looks like I'll have to find another asteroid. Thanks for your help."))
 							addCommsReply(_("Back"),commsStation)
 						end)
 					end
 				else
 					if first_station.asteroid_upgrade then
-						setCommsMessage(string.format("Thanks for getting my research for me. Dock with %s to get the upgrade",first_station:getCallSign()))
+						setCommsMessage(string.format(_("asteroid-comms", "Thanks for getting my research for me. Dock with %s to get the upgrade"),first_station:getCallSign()))
 					else
-						setCommsMessage("Please retrieve my data store")
+						setCommsMessage(_("asteroid-comms", "Please retrieve my data store"))
 					end
 				end
 				addCommsReply(_("Back"),commsStation)
@@ -7588,29 +7588,29 @@ function exuariHarassment(delta)
 	player = getPlayerShip(-1)
 	if plot1_message == nil then
 		if exuari_harass_diagnostic then print("message not sent yet") end
-		local help_message = string.format("[%s in %s] Hostile Exuari approach. Help us, please. We cannot defend ourselves. Your ship is the only thing that stands between us and destruction.",first_station:getCallSign(),first_station:getSectorName())
+		local help_message = string.format(_("ridExuari-", "[%s in %s] Hostile Exuari approach. Help us, please. We cannot defend ourselves. Your ship is the only thing that stands between us and destruction."),first_station:getCallSign(),first_station:getSectorName())
 		if difficulty < 1 then
-			help_message = string.format("%s\n\nWe think there is an Exuari base hiding in a nebula in sector %s",help_message,concealing_nebula:getSectorName())
+			help_message = string.format(_("ridExuari-", "%s\n\nWe think there is an Exuari base hiding in a nebula in sector %s"),help_message,concealing_nebula:getSectorName())
 		end
 		player.harass_message_sent = first_station:sendCommsMessageNoLog(player,help_message)
 		if player.harass_message_sent then
-			plot1_message = string.format("%s has asked for help against the Exuari",first_station:getCallSign())
+			plot1_message = string.format(_("ridExuari-", "%s has asked for help against the Exuari"),first_station:getCallSign())
 			plot1_type = "optional"
 			plot1_danger = .5
 			plot1_fleets_destroyed = 0
 			plot1_fleets_spawned = 0
-			plot1_defeat_message = string.format("Station %s destroyed",first_station:getCallSign())
+			plot1_defeat_message = string.format(_("ridExuari-msgMainscreen", "Station %s destroyed"),first_station:getCallSign())
 		end
 	end
 	if player.captain_log < 1 then
 		if getScenarioTime() > 90 and player.harass_message_sent then
-			player:addToShipLog(string.format("[Captain's Log] We have started our initial shakedown cruise of %s, a %s class ship. The crew are glad to be moving up from the class three freighter we used to run. After several years of doing cargo delivery runs and personnel transfers, it's nice to be on a ship with more self reliance. We've got beam weapons! Our previous ship was defenseless. Unfortunately, our impulse engines are not as fast as our previous ship, but we might be able to fix that. That's the kind of compromise you make when you purchase surplus military hardware. I suspect that we got such a good deal on the ship because the previous owner, the governer of station %s, has an ulterior motive. After all, we are the best qualified to run this ship in the sector and we have not seen any other friendly armed ships around here.",player:getCallSign(),player:getTypeName(),first_station:getCallSign()),"Green")
+			player:addToShipLog(string.format(_("-shipLog", "[Captain's Log] We have started our initial shakedown cruise of %s, a %s class ship. The crew are glad to be moving up from the class three freighter we used to run. After several years of doing cargo delivery runs and personnel transfers, it's nice to be on a ship with more self reliance. We've got beam weapons! Our previous ship was defenseless. Unfortunately, our impulse engines are not as fast as our previous ship, but we might be able to fix that. That's the kind of compromise you make when you purchase surplus military hardware. I suspect that we got such a good deal on the ship because the previous owner, the governer of station %s, has an ulterior motive. After all, we are the best qualified to run this ship in the sector and we have not seen any other friendly armed ships around here."),player:getCallSign(),player:getTypeName(),first_station:getCallSign()),"Green")
 			player.captain_log = 1
 		end
 	end
 	if player.help_with_exuari_base_message == nil then
 		if getScenarioTime() > 600 and exuari_harassing_station ~= nil and exuari_harassing_station:isValid() then
-			player:addToShipLog(string.format("[Station %s] Based on our observation of the Exuari base %s in %s, we think it will continue to launch harassing spacecraft in our direction. We know it's a large target for a small fighter, but we believe you can destroy it, %s. We would be very grateful if you would do just that. Our defenses are very limited.",first_station:getCallSign(),exuari_harassing_station:getCallSign(),exuari_harassing_station:getSectorName(),player:getCallSign()),"Magenta")
+			player:addToShipLog(string.format(_("-shipLog", "[Station %s] Based on our observation of the Exuari base %s in %s, we think it will continue to launch harassing spacecraft in our direction. We know it's a large target for a small fighter, but we believe you can destroy it, %s. We would be very grateful if you would do just that. Our defenses are very limited."),first_station:getCallSign(),exuari_harassing_station:getCallSign(),exuari_harassing_station:getSectorName(),player:getCallSign()),"Magenta")
 			player.help_with_exuari_base_message = "sent"
 		end
 	end
@@ -7943,9 +7943,9 @@ function exuariHarassment(delta)
 					end
 				end
 				if #plot1_last_defense_fleet > 1 then
-					player:addToShipLog(string.format("%s just launched these ships: %s",exuari_harassing_station:getCallSign(),ship_call_signs),"Red")
+					player:addToShipLog(string.format(_("-shipLog", "%s just launched these ships: %s"),exuari_harassing_station:getCallSign(),ship_call_signs),"Red")
 				else
-					player:addToShipLog(string.format("%s just launched %s",exuari_harassing_station:getCallSign(),ship_call_signs),"Red")
+					player:addToShipLog(string.format(_("-shipLog", "%s just launched %s"),exuari_harassing_station:getCallSign(),ship_call_signs),"Red")
 				end
 				plot1_last_defense = true
 			end
@@ -8010,7 +8010,7 @@ function longDistanceCargo(delta)
 			end
 			if missing_good then
 				if p.missing_good_message == nil then
-					p:addToShipLog(string.format("[%s] Your delivery contract calls for food, medicine, dilithium and tritanium. Return when you have all four of these and we'll consider your contract fulfilled",comms_target:getCallSign()),"Magenta")
+					p:addToShipLog(string.format(_("-shipLog", "[%s] Your delivery contract calls for food, medicine, dilithium and tritanium. Return when you have all four of these and we'll consider your contract fulfilled"),comms_target:getCallSign()),"Magenta")
 					p.missing_good_message = "sent"
 				end
 			else
@@ -8032,7 +8032,7 @@ function longDistanceCargo(delta)
 						p:setBeamWeapon(bi,tempArc,tempDir,tempRng,tempCyc*(2/3),tempDmg)
 						bi = bi + 1
 					until(comms_source:getBeamWeaponRange(bi) < 1)
-					p:addToShipLog(string.format("[%s] Thanks for the cargo, %s. We'll make good use of it. We've added 100 units to your battery capacity and reduced your beam cycle time by 1/3. Enjoy your visit to the %s system",supply_depot_station:getCallSign(),p:getCallSign(),planet_star:getCallSign()),"Magenta")
+					p:addToShipLog(string.format(_("-shipLog", "[%s] Thanks for the cargo, %s. We'll make good use of it. We've added 100 units to your battery capacity and reduced your beam cycle time by 1/3. Enjoy your visit to the %s system"),supply_depot_station:getCallSign(),p:getCallSign(),planet_star:getCallSign()),"Magenta")
 					p.long_distance_upgrade = true
 					plot1 = kraylorDiversionarySabotage
 					plot8 = opportunisticPirates
@@ -8074,7 +8074,7 @@ function longDistanceCargo(delta)
 			end
 		end
 	else
-		globalMessage("The supply depot station has been destroyed")
+		globalMessage(_("msgMainscreen", "The supply depot station has been destroyed"))
 		victory("Exuari")
 	end
 end
@@ -8149,8 +8149,8 @@ function kraylorDiversionarySabotage(delta)
 			kraylor_sabotage_diversion_timer = delta + kraylor_sabotage_diversion_interval
 			if player.diversion_orders == nil then
 				player.diversion_orders = "sent"
-				player:addToShipLog("[Human Navy Regional Headquarters] All Human Navy vessels are hereby ordered to assist in the repelling of inbound Kraylor ships. We are not sure of their intent, but we are sure it is not good. Destroy them before they can destroy us","Red")
-				player:addToShipLog(string.format("This includes you, %s",player:getCallSign()),"Magenta")
+				player:addToShipLog(_("-shipLog", "[Human Navy Regional Headquarters] All Human Navy vessels are hereby ordered to assist in the repelling of inbound Kraylor ships. We are not sure of their intent, but we are sure it is not good. Destroy them before they can destroy us"),"Red")
+				player:addToShipLog(string.format(_("-shipLog", "This includes you, %s"),player:getCallSign()),"Magenta")
 				primaryOrders = "Repel Kraylor"
 			end
 			local enemy_count = 0
@@ -8262,7 +8262,7 @@ function kraylorDiversionarySabotage(delta)
 						end
 					end
 					if kraylor_diversion_danger > 10 and enemy_close_to_supply > 0 and plot6 == nil then
-						globalMessage("You successfully handled the Kraylor threat")
+						globalMessage(_("msgMainscreen", "You successfully handled the Kraylor threat"))
 						victory("Human Navy")
 					end
 				end
@@ -8308,7 +8308,7 @@ function kraylorPlanetBuster(delta)
 							local moon_name = planet_secondus_moon:getCallSign()
 							planet_secondus_moon:destroy()
 							ExplosionEffect():setPosition(explosion_x,explosion_y):setSize(secondus_moon_radius*2)
-							player:addToShipLog(string.format("Looks like the Kraylor have developed some kind of planet busting weapon. They just destroyed %s with it. Keep them away from %s!",moon_name,planet_secondus:getCallSign()),"Magenta")
+							player:addToShipLog(string.format(_("-shipLog", "Looks like the Kraylor have developed some kind of planet busting weapon. They just destroyed %s with it. Keep them away from %s!"),moon_name,planet_secondus:getCallSign()),"Magenta")
 						end
 					else
 						if distance(enemy,planet_secondus) < 1500 + planet_secondus_radius then
@@ -8338,7 +8338,7 @@ function kraylorPlanetBuster(delta)
 				world_end_timer = 4
 			end
 			if kraylor_planetary_danger > 10 and enemy_close_to_planet_count > 1 then
-				globalMessage(string.format("You've saved planet %s",planet_secondus:getCallSign()))
+				globalMessage(string.format(_("msgMainscreen", "You've saved planet %s"),planet_secondus:getCallSign()))
 				victory("Human Navy")
 			end
 		end
@@ -8347,12 +8347,12 @@ end
 function worldEnd(delta)
 	world_end_timer = world_end_timer - delta
 	if world_end_timer < 0 then
-		globalMessage(string.format("Planet %s was destroyed",planet_name))
+		globalMessage(string.format(_("msgMainscreen", "Planet %s was destroyed"),planet_name))
 		victory("Kraylor")
 	end
 end
 function transitionStationDestroyed(self,instigator)
-	globalMessage(string.format("station %s destroyed",self:getCallSign()))
+	globalMessage(string.format(_("msgMainscreen", "station %s destroyed"),self:getCallSign()))
 	victory("Exuari")
 end
 ---------------------------------
@@ -8428,7 +8428,7 @@ function contractTarget(delta)
 				end
 			end
 		else
-			globalMessage("Your contract destination station was destroyed")
+			globalMessage(_("msgMainscreen", "Your contract destination station was destroyed"))
 			victory("Exuari")
 		end
 	end
@@ -8438,9 +8438,9 @@ function contractTarget(delta)
 			if transition_contract_delay < 0 then
 				if first_station ~= nil and first_station:isValid() then
 					local p = getPlayerShip(-1)
-					p:addToShipLog(string.format("A rare long range contract has been posted at station %s",first_station:getCallSign()),"Magenta")
+					p:addToShipLog(string.format(_("-shipLog", "A rare long range contract has been posted at station %s"),first_station:getCallSign()),"Magenta")
 				else
-					globalMessage("Mourning over the loss of the station has halted all business\nThe mission is over")
+					globalMessage(_("msgMainscreen", "Mourning over the loss of the station has halted all business\nThe mission is over"))
 					victory("Exuari")
 				end
 				transition_contract_message = true
@@ -8449,7 +8449,7 @@ function contractTarget(delta)
 				if player.captain_log < 2 then
 					if transition_contract_delay < transition_contract_delay_max*.8 then
 						if independent_station[1]:isValid() and independent_station[2]:isValid() and independent_station[3]:isValid() then
-							player:addToShipLog(string.format("[Captain's Log] Why can't the Exuari just leave us alone? I don't understand what it is about them that makes them want to prey on everyone.\nThe upgrades for %s are very nice. They certainly came in handy. With the confidence of stations %s, %s and %s, I feel we will succeed as the space entrepeneurs we want to be.",player:getCallSign(),first_station:getCallSign(),independent_station[2]:getCallSign(),independent_station[3]:getCallSign()),"Green")
+							player:addToShipLog(string.format(_("-shipLog", "[Captain's Log] Why can't the Exuari just leave us alone? I don't understand what it is about them that makes them want to prey on everyone.\nThe upgrades for %s are very nice. They certainly came in handy. With the confidence of stations %s, %s and %s, I feel we will succeed as the space entrepeneurs we want to be."),player:getCallSign(),first_station:getCallSign(),independent_station[2]:getCallSign(),independent_station[3]:getCallSign()),"Green")
 						end
 						player.captain_log = 2
 					end
@@ -8481,9 +8481,9 @@ function contractTarget(delta)
 				if not contract_remains then
 					if first_station ~= nil and first_station:isValid() then
 						local p = getPlayerShip(-1)
-						p:addToShipLog(string.format("A rare long range contract has been posted at station %s",first_station:getCallSign()),"Magenta")
+						p:addToShipLog(string.format(_("-shipLog", "A rare long range contract has been posted at station %s"),first_station:getCallSign()),"Magenta")
 					else
-						globalMessage("Mourning over the loss of the station has halted all business\nThe mission is over")
+						globalMessage(_("msgMainscreen", "Mourning over the loss of the station has halted all business\nThe mission is over"))
 						victory("Exuari")
 					end
 					transition_contract_message = true
@@ -8498,7 +8498,7 @@ function jennyAsteroid(delta)
 		if player.asteroid_identified then
 			if player:isDocked(first_station) then
 				player.jenny_aboard = true
-				player:addToShipLog(string.format("Jenny McGuire is now aboard. She's a bit paranoid and has sealed the door to her quarters. You'll have to contact %s to talk to her",first_station:getCallSign()),"Magenta")
+				player:addToShipLog(string.format(_("-shipLog", "Jenny McGuire is now aboard. She's a bit paranoid and has sealed the door to her quarters. You'll have to contact %s to talk to her"),first_station:getCallSign()),"Magenta")
 			end
 		end
 	end
@@ -8660,7 +8660,7 @@ function update(delta)
 			else
 				if player.supply_sabotage_message == nil then
 					player.supply_sabotage_message = "sent"
-					player:addToShipLog(string.format("Kraylor have sabotaged station %s. It can no longer maintain orbit around %s. Fortunately, it looks to be in no danger from %s or %s, but the Kraylor pose a more significant threat",supply_depot_station:getCallSign(),planet_secondus_moon:getCallSign(),planet_secondus:getCallSign(),planet_secondus_moon:getCallSign()),"Magenta")
+					player:addToShipLog(string.format(_("-shipLog", "Kraylor have sabotaged station %s. It can no longer maintain orbit around %s. Fortunately, it looks to be in no danger from %s or %s, but the Kraylor pose a more significant threat"),supply_depot_station:getCallSign(),planet_secondus_moon:getCallSign(),planet_secondus:getCallSign(),planet_secondus_moon:getCallSign()),"Magenta")
 				end
 			end
 		end
