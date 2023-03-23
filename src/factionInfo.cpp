@@ -61,20 +61,21 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     /// other_faction = getFactionInfoByName("Exuari")
     /// faction:setRelationship(other_faction,"enemy") -- sets a hostile relationship with Exuari
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setRelationshipWith);
-    /// Sets the given faction to be hostile to SpaceObjects of this faction.
+    /// Sets this faction to be hostile to SpaceObjects of the given faction.
     /// For example, Spaceships of this faction can target and fire at SpaceShips of the given faction, and vice versa.
     /// Warning: A faction can be designated as hostile to itself, but the behavior is not well-defined.
     /// Example: faction:setEnemy("Exuari") -- sets the Exuari to be hostile toward this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setEnemy);
-    /// Sets the given faction to be friendly to SpaceObjects of this faction.
+    /// Sets this faction to be friendly to SpaceObjects of the given faction.
     /// For example, PlayerSpaceships of this faction can gain reputation with it.
     /// Example: faction:setFriendly("Human Navy") -- sets the Human Navy to be friendly toward this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setFriendly);
-    /// Sets the given faction to be neutral toward SpaceObjects of this faction.
+    /// Sets this faction to be neutral toward SpaceObjects of the given faction.
     /// This resets any existing faction relationship between this faction and the given faction.
     /// Example: faction:setNeutral("Human Navy") -- sets the Human Navy to be neutral toward this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setNeutral);
-    /// Resets all relationships that this faction has with other factions to neutrality.
+    /// Removes all relationships involving this faction, which resets them to neutrality.
+    /// This is equivalent to running faction:setNeutral(...) while looping through every other faction as the argument.
     /// Example: faction:resetAllRelationships() -- removes all existing faction relationships
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, resetAllRelationships);
 }
