@@ -24,9 +24,15 @@
 /// faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
 REGISTER_SCRIPT_CLASS(FactionInfo)
 {
+    /// Returns this faction's internal string name, used to reference this faction regardless of EmptyEpsilon's language setting.
+    /// Example: faction:getName() -- returns "USN"
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getName);
     /// Sets this faction's internal string name, used to reference this faction regardless of EmptyEpsilon's language setting.
     /// Example: faction:setName("USN")
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setName);
+    /// Returns this faction's name as presented in the user interface.
+    /// Example: faction:getLocaleName() -- returns the translated string for "USN"
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getLocaleName);
     /// Sets this faction's name as presented in the user interface.
     /// Wrap the string in the _() function to make it available for translation.
     /// Example: faction:setLocaleName(_("USN"))
@@ -35,6 +41,9 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     /// Defaults to white (255,255,255).
     /// Example: faction:setGMColor(255,0,0) -- sets the color to red
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setGMColor);
+    /// Returns this faction's longform description as shown in its Factions ScienceDatabase child entry.
+    /// Example: faction:getDescription() -- returns the translated string description for this faction
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getDescription);
     /// Sets this faction's longform description as shown in its Factions ScienceDatabase child entry.
     /// Wrap the string in the _() function to make it available for translation.
     /// Example: faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
