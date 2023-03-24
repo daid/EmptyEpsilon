@@ -39,6 +39,10 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     /// Wrap the string in the _() function to make it available for translation.
     /// Example: faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setDescription);
+    /// Returns this faction's relationship with the given faction.
+    /// Valid values are "friendly", "neutral", and "enemy".
+    /// Example: faction:getRelationshipWith(exuari) -- returns "enemy"
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getRelationshipWith);
     /// Sets the given faction to appear as hostile to SpaceObjects of this faction.
     /// For example, Spaceships of this faction can target and fire at SpaceShips of the given faction.
     /// Defaults to no hostile factions.
