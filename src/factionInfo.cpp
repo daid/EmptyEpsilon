@@ -24,6 +24,10 @@
 /// faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
 REGISTER_SCRIPT_CLASS(FactionInfo)
 {
+    /// Returns this faction's numeric ID.
+    /// Valid values are 0-31, the faction's zero-indexed value.
+    /// Example: faction:getFactionId() -- returns 11
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getFactionId);
     /// Sets this faction's internal string name, used to reference this faction regardless of EmptyEpsilon's language setting.
     /// Example: faction:setName("USN")
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setName);
