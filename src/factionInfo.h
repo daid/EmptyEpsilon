@@ -68,9 +68,8 @@ public:
      */
     void setFriendly(P<FactionInfo> other);
 
-    EFactionVsFactionState getState(P<FactionInfo> other);
-
-    static EFactionVsFactionState getState(uint8_t idx0, uint8_t idx1);
+    EFactionVsFactionState getRelationshipWith(P<FactionInfo> other);
+    static EFactionVsFactionState getRelationshipBetween(uint8_t idx0, uint8_t idx1);
     static unsigned int findFactionId(string name);
 
     static void reset(); //Destroy all FactionInfo objects

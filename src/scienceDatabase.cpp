@@ -437,7 +437,7 @@ void fillDefaultDatabaseData()
                 continue;
 
             string stance = tr("stance", "Neutral");
-            switch(FactionInfo::getState(n, m))
+            switch(FactionInfo::getRelationshipBetween(n, m))
             {
                 case FVF_Neutral: stance = tr("stance", "Neutral"); break;
                 case FVF_Enemy: stance = tr("stance", "Enemy"); break;

@@ -138,7 +138,7 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
     other->enemy_mask &=~(1 << index);
 }
 
-EFactionVsFactionState FactionInfo::getState(P<FactionInfo> other)
+EFactionVsFactionState FactionInfo::getRelationshipWith(P<FactionInfo> other)
 {
     if (!other) return FVF_Neutral;
     if (enemy_mask & (1 << other->index)) return FVF_Enemy;
@@ -146,12 +146,12 @@ EFactionVsFactionState FactionInfo::getState(P<FactionInfo> other)
     return FVF_Neutral;
 }
 
-EFactionVsFactionState FactionInfo::getState(uint8_t idx0, uint8_t idx1)
+EFactionVsFactionState FactionInfo::getRelationshipBetween(uint8_t idx0, uint8_t idx1)
 {
     if (idx0 >= factionInfo.size()) return FVF_Neutral;
     if (idx1 >= factionInfo.size()) return FVF_Neutral;
     if (!factionInfo[idx0] || !factionInfo[idx1]) return FVF_Neutral;
-    return factionInfo[idx0]->getState(factionInfo[idx1]);
+    return factionInfo[idx0]->getRelationshipWith(factionInfo[idx1]);
 }
 
 unsigned int FactionInfo::findFactionId(string name)
