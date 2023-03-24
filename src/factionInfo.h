@@ -69,6 +69,8 @@ public:
     void setFriendly(P<FactionInfo> other);
 
     EFactionVsFactionState getRelationshipWith(P<FactionInfo> other);
+    void setRelationshipWith(P<FactionInfo> other, EFactionVsFactionState state);
+
     static EFactionVsFactionState getRelationshipBetween(uint8_t idx0, uint8_t idx1);
     static unsigned int findFactionId(string name);
 

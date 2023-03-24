@@ -43,6 +43,11 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     /// Valid values are "friendly", "neutral", and "enemy".
     /// Example: faction:getRelationshipWith(exuari) -- returns "enemy"
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getRelationshipWith);
+    /// Sets this faction's relationship with the given faction to the given state.
+    /// Example:
+    /// exuari = getFactionInfoByName("Exuari")
+    /// faction:setRelationshipWith(exuari,"enemy") -- sets a hostile relationship with Exuari
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setRelationshipWith);
     /// Sets the given faction to appear as hostile to SpaceObjects of this faction.
     /// For example, Spaceships of this faction can target and fire at SpaceShips of the given faction.
     /// Defaults to no hostile factions.
@@ -148,6 +153,20 @@ EFactionVsFactionState FactionInfo::getRelationshipWith(P<FactionInfo> other)
     if (enemy_mask & (1 << other->index)) return FVF_Enemy;
     if (friend_mask & (1 << other->index)) return FVF_Friendly;
     return FVF_Neutral;
+}
+
+void FactionInfo::setRelationshipWith(P<FactionInfo> other, EFactionVsFactionState state)
+{
+    if (!other)
+    {
+        LOG(WARNING) << "Given setRelationshipWith faction is invalid.";
+        return;
+    }
+
+    if (state == FVF_Enemy) { setEnemy(other); }
+    else if (state == FVF_Friendly) { setFriendly(other); }
+    // else if (state == FVF_Neutral) { setNeutral(other); }
+    else { LOG(ERROR) << "Given faction relationship state is invalid."; }
 }
 
 EFactionVsFactionState FactionInfo::getRelationshipBetween(uint8_t idx0, uint8_t idx1)
