@@ -169,3 +169,31 @@ void FactionInfo::reset()
         if (factionInfo[n])
             factionInfo[n]->destroy();
 }
+
+template<> void convert<EFactionVsFactionState>::param(lua_State* L, int& idx, EFactionVsFactionState& state)
+{
+    string str = string(luaL_checkstring(L, idx++)).lower();
+
+    if (str == "friendly") { state = FVF_Friendly; }
+    else if (str == "neutral") { state = FVF_Neutral; }
+    else if (str == "enemy") { state = FVF_Enemy; }
+    else { state = FVF_Neutral; }
+}
+
+template<> int convert<EFactionVsFactionState>::returnType(lua_State* L, EFactionVsFactionState state)
+{
+    switch (state)
+    {
+    case FVF_Friendly:
+        lua_pushstring(L, "friendly");
+        return 1;
+    case FVF_Neutral:
+        lua_pushstring(L, "neutral");
+        return 1;
+    case FVF_Enemy:
+        lua_pushstring(L, "enemy");
+        return 1;
+    default:
+        return 0;
+    }
+}

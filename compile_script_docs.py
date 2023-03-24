@@ -189,7 +189,7 @@ def translate_type(c_type, name):
     if res is not None:
         return VariadicType(translate_type(res.group(1).strip(), name))
 
-    if c_type in ('EAlertLevel', 'ECrewPosition', 'EMissileSizes', 'EMissileWeapons', 'EScannedState', 'ESystem', 'EMainScreenSetting', 'EMainScreenOverlay', 'EDockingState', 'ScriptSimpleCallback'):
+    if c_type in ('EAlertLevel', 'ECrewPosition', 'EFactionVsFactionState', 'EMissileSizes', 'EMissileWeapons', 'EScannedState', 'ESystem', 'EMainScreenSetting', 'EMainScreenOverlay', 'EDockingState', 'ScriptSimpleCallback'):
         return EnumType(c_type)
 
     if c_type in ('int', 'float', 'double', 'int32_t', 'int8_t', 'uint32_t', 'uint8_t'):
@@ -508,6 +508,7 @@ rel="stylesheet"
         stream.write('<li><a name="enum_EAlertLevel">EAlertLevel<a/>: sets "normal", "yellow", "red" (<code>playerSpaceship.hpp</code>), returns "Normal", "YELLOW ALERT", "RED ALERT" (<code>playerSpaceship.cpp</code>)</li>\n')
         stream.write('<li><a name="enum_ECrewPosition">ECrewPosition</a>: "Helms", "Weapons", "Engineering", "Science", "Relay", "Tactical", "Engineering+", "Operations", "Single", "DamageControl", "PowerManagement", "Database", "AltRelay", "CommsOnly", "ShipLog" (<code>playerInfo.cpp</code>)</li>\n')
         stream.write('<li><a name="enum_EDockingState">EDockingState</a>: 0 (not docking), 1 (docking), 2 (docked) (<code>spaceship.h</code>)</li>\n')
+        stream.write('<li><a name="enum_EFactionVsFactionState">EFactionVsFactionState</a>: "friendly", "neutral", "enemy" (<code>factionInfo.cpp</code>)</li>\n')
         stream.write('<li><a name="enum_EMainScreenOverlay">EMainScreenOverlay</a>: "hidecomms", "showcomms" (<code>spaceship.hpp</code>)</li>\n')
         stream.write('<li><a name="enum_EMainScreenSetting">EMainScreenSetting</a>: "front", "back", "left", "right", "target", "tactical", "longrange" (<code>spaceship.hpp</code>)</li>\n')
         stream.write('<li><a name="enum_EMissileSizes">EMissileSizes</a>: "small", "medium", "large" (<code>missileWeaponData.hpp</code>)</li>\n')
