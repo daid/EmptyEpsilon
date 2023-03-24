@@ -68,6 +68,21 @@ static int getFactionInfo(lua_State* L)
 /// Example: faction = getFactionInfo("Human Navy") -- faction = the Human Navy FactionInfo object
 REGISTER_SCRIPT_FUNCTION(getFactionInfo);
 
+static int getAllFactionInfos(lua_State* L)
+{
+    PVector<FactionInfo> factions;
+    factions.reserve(32);
+
+    for (size_t idx = 0; idx < 32; ++idx)
+        if (factionInfo[idx]) { factions.emplace_back(std::move(factionInfo[idx])); }
+
+    return convert<PVector<FactionInfo>>::returnType(L, factions);
+}
+/// PVector<FactionInfo> getAllFactionInfos()
+/// Returns a 1-indexed table of all FactionInfo objects. Note that faction IDs are 0-indexed, unlike this table.
+/// Example: getAllFactionInfos()[2] -- returns the second-indexed faction
+REGISTER_SCRIPT_FUNCTION(getAllFactionInfos);
+
 REGISTER_MULTIPLAYER_CLASS(FactionInfo, "FactionInfo");
 FactionInfo::FactionInfo()
 : MultiplayerObject("FactionInfo")
