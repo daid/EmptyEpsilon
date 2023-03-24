@@ -50,6 +50,9 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     /// Defaults to no friendly factions.
     /// Example: faction:setFriendly("Human Navy") -- sets the Human Navy to appear as friendly to this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setFriendly);
+    /// Sets the given faction to appear as neutral to SpaceObjects of this faction.
+    /// Example: faction:setNeutral("Human Navy") -- sets the Human Navy to appear as neutral to this faction
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setFriendly);
 }
 
 std::array<P<FactionInfo>, 32> factionInfo;
@@ -134,6 +137,20 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
 
     friend_mask |= (1U << other->index);
     other->friend_mask |= (1U << index);
+    enemy_mask &=~(1 << other->index);
+    other->enemy_mask &=~(1 << index);
+}
+
+void FactionInfo::setNeutral(P<FactionInfo> other)
+{
+    if (!other)
+    {
+        LOG(WARNING) << "Tried to set an undefined faction to be neutral with " << name;
+        return;
+    }
+
+    friend_mask &=~(1 << other->index);
+    other->friend_mask &=~(1 << index);
     enemy_mask &=~(1 << other->index);
     other->enemy_mask &=~(1 << index);
 }
