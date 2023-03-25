@@ -238,6 +238,7 @@ void Planet::setPlanetRadius(float size)
     this->planet_size = size;
     this->cloud_size = size * 1.05f;
     this->atmosphere_size = size * 1.2f;
+    updateCollisionSize();
 }
 
 void Planet::setPlanetCloudRadius(float size)
