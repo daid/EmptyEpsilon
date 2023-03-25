@@ -845,9 +845,7 @@ If you need supplies, please dock with us first.]]))
                     else
                         setCommsMessage(_("stationAssist-comms", "Where do we need to drop off your supplies?"))
                         for n = 1, comms_source:getWaypointCount() do
-                            addCommsReply(
-                                "WP" .. n,
-                                function()
+                            addCommsReply(string.format(_("stationAssist-comms", "WP %d"),n), function()
                                     if comms_source:takeReputationPoints(100) then
                                         local position_x, position_y = comms_target:getPosition()
                                         local target_x, target_y = comms_source:getWaypoint(n)
@@ -875,9 +873,7 @@ If you need supplies, please dock with us first.]]))
                     else
                         setCommsMessage(_("stationAssist-comms", "Where does the backup need to go?"))
                         for n = 1, comms_source:getWaypointCount() do
-                            addCommsReply(
-                                "WP" .. n,
-                                function()
+                            addCommsReply(string.format(_("stationAssist-comms", "WP %d"),n), function()
                                     if comms_source:takeReputationPoints(150) then
                                         ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
                                         setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d."), ship:getCallSign(), n))
