@@ -249,6 +249,7 @@ void Planet::setPlanetCloudRadius(float size)
 void Planet::setDistanceFromMovementPlane(float distance_from_movement_plane)
 {
     this->distance_from_movement_plane = distance_from_movement_plane;
+    updateCollisionSize();
 }
 
 void Planet::setAxialRotationTime(float time)
