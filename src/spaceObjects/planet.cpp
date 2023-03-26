@@ -201,6 +201,7 @@ Planet::Planet()
     registerMemberReplication(&orbit_target_id);
     registerMemberReplication(&orbit_time);
     registerMemberReplication(&orbit_distance);
+    registerMemberReplication(&collision_size);
 }
 
 void Planet::setPlanetAtmosphereColor(float r, float g, float b)
@@ -425,14 +426,18 @@ void Planet::collide(Collisionable* target, float collision_force)
 
 void Planet::updateCollisionSize()
 {
-    setRadius(planet_size);
-    if (std::abs(distance_from_movement_plane) >= planet_size)
+    // collision_size is replicated, so update it only on the server.
+    if (game_server)
     {
-        collision_size = -1.0;
-    }else{
-        collision_size = sqrt((planet_size * planet_size) - (distance_from_movement_plane * distance_from_movement_plane)) * 1.1f;
-        setCollisionRadius(collision_size);
-        setCollisionPhysics(true, true);
+        setRadius(planet_size);
+        if (std::abs(distance_from_movement_plane) >= planet_size)
+        {
+            collision_size = -1.0f;
+        }else{
+            collision_size = sqrt((planet_size * planet_size) - (distance_from_movement_plane * distance_from_movement_plane)) * 1.1f;
+            setCollisionRadius(collision_size);
+            setCollisionPhysics(true, true);
+        }
     }
 }
 
