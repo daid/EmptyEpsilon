@@ -4364,9 +4364,9 @@ function commsShip()
 end
 function friendlyComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage(_("shipAssist-comms", "What do you want?"));
+		setCommsMessage(_("trade-comms", "What do you want?"));
 	else
-		setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"));
+		setCommsMessage(_("trade-comms", "Sir, how can we assist?"));
 	end
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then

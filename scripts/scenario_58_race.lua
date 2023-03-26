@@ -2481,27 +2481,27 @@ function enemyComms(comms_data)
 	if comms_target.owner == nil then
 		if comms_data.friendlyness > 50 then
 			faction = comms_target:getFaction()
-			taunt_option = "We will see to your destruction!"
-			taunt_success_reply = "Your bloodline will end here!"
-			taunt_failed_reply = "Your feeble threats are meaningless."
+			taunt_option = _("shipEnemy-comms", "We will see to your destruction!")
+			taunt_success_reply = _("shipEnemy-comms", "Your bloodline will end here!")
+			taunt_failed_reply = _("shipEnemy-comms", "Your feeble threats are meaningless.")
 			if faction == "Kraylor" then
-				setCommsMessage("Ktzzzsss.\nYou will DIEEee weaklingsss!");
+				setCommsMessage(_("shipEnemy-comms", "Ktzzzsss.\nYou will DIEEee weaklingsss!"));
 			elseif faction == "Arlenians" then
-				setCommsMessage("We wish you no harm, but will harm you if we must.\nEnd of transmission.");
+				setCommsMessage(_("shipEnemy-comms", "We wish you no harm, but will harm you if we must.\nEnd of transmission."));
 			elseif faction == "Exuari" then
-				setCommsMessage("Stay out of our way, or your death will amuse us extremely!");
+				setCommsMessage(_("shipEnemy-comms", "Stay out of our way, or your death will amuse us extremely!"));
 			elseif faction == "Ghosts" then
-				setCommsMessage("One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted.");
-				taunt_option = "EXECUTE: SELFDESTRUCT"
-				taunt_success_reply = "Rogue command received. Targeting source."
-				taunt_failed_reply = "External command ignored."
+				setCommsMessage(_("shipEnemy-comms", "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."));
+				taunt_option = _("shipEnemy-comms", "EXECUTE: SELFDESTRUCT")
+				taunt_success_reply = _("shipEnemy-comms", "Rogue command received. Targeting source.")
+				taunt_failed_reply = _("shipEnemy-comms", "External command ignored.")
 			elseif faction == "Ktlitans" then
-				setCommsMessage("The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition.");
-				taunt_option = "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-				taunt_success_reply = "We do not need permission to pluck apart such an insignificant threat."
-				taunt_failed_reply = "The hive has greater priorities than exterminating pests."
+				setCommsMessage(_("shipEnemy-comms", "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."));
+				taunt_option = _("shipEnemy-comms", "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>")
+				taunt_success_reply = _("shipEnemy-comms", "We do not need permission to pluck apart such an insignificant threat.")
+				taunt_failed_reply = _("shipEnemy-comms", "The hive has greater priorities than exterminating pests.")
 			else
-				setCommsMessage("Mind your own business!");
+				setCommsMessage(_("shipEnemy-comms", "Mind your own business!"));
 			end
 			comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
 			addCommsReply(taunt_option, function()
@@ -2592,7 +2592,7 @@ function neutralComms(comms_data)
 				end
 			end
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage("What do you want?")
+			setCommsMessage(_("trade-comms", "What do you want?"))
 			-- Offer to sell destination information
 			destRep = random(1,5)
 			addCommsReply(string.format("Where are you headed? (cost: %f reputation)",destRep), function()
@@ -2692,9 +2692,9 @@ function neutralComms(comms_data)
 		end
 	else
 		if comms_data.friendlyness > 50 then
-			setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.");
+			setCommsMessage(_("ship-comms", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
 		else
-			setCommsMessage("We have nothing for you.\nGood day.");
+			setCommsMessage(_("ship-comms", "We have nothing for you.\nGood day."));
 		end
 	end
 	return true

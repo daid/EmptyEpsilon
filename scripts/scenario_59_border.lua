@@ -12423,27 +12423,27 @@ end
 function enemyDefendComms(comms_data)
     if comms_data.friendlyness > 50 then
         local faction = comms_target:getFaction()
-        local taunt_option = "We will see to your destruction!"
-        local taunt_success_reply = "Your bloodline will end here!"
-        local taunt_failed_reply = "Your feeble threats are meaningless."
+        local taunt_option = _("shipEnemy-comms", "We will see to your destruction!")
+        local taunt_success_reply = _("shipEnemy-comms", "Your bloodline will end here!")
+        local taunt_failed_reply = _("shipEnemy-comms", "Your feeble threats are meaningless.")
         if faction == "Kraylor" then
-            setCommsMessage("Ktzzzsss.\nYou will DIEEee weaklingsss!");
+            setCommsMessage(_("shipEnemy-comms", "Ktzzzsss.\nYou will DIEEee weaklingsss!"));
         elseif faction == "Arlenians" then
-            setCommsMessage("We wish you no harm, but will harm you if we must.\nEnd of transmission.");
+            setCommsMessage(_("shipEnemy-comms", "We wish you no harm, but will harm you if we must.\nEnd of transmission."));
         elseif faction == "Exuari" then
-            setCommsMessage("Stay out of our way, or your death will amuse us extremely!");
+            setCommsMessage(_("shipEnemy-comms", "Stay out of our way, or your death will amuse us extremely!"));
         elseif faction == "Ghosts" then
-            setCommsMessage("One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted.");
-            taunt_option = "EXECUTE: SELFDESTRUCT"
-            taunt_success_reply = "Rogue command received. Targeting source."
-            taunt_failed_reply = "External command ignored."
+            setCommsMessage(_("shipEnemy-comms", "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."));
+            taunt_option = _("shipEnemy-comms", "EXECUTE: SELFDESTRUCT")
+            taunt_success_reply = _("shipEnemy-comms", "Rogue command received. Targeting source.")
+            taunt_failed_reply = _("shipEnemy-comms", "External command ignored.")
         elseif faction == "Ktlitans" then
-            setCommsMessage("The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition.");
-            taunt_option = "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-            taunt_success_reply = "We do not need permission to pluck apart such an insignificant threat."
-            taunt_failed_reply = "The hive has greater priorities than exterminating pests."
+            setCommsMessage(_("shipEnemy-comms", "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."));
+            taunt_option = _("shipEnemy-comms", "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>")
+            taunt_success_reply = _("shipEnemy-comms", "We do not need permission to pluck apart such an insignificant threat.")
+            taunt_failed_reply = _("shipEnemy-comms", "The hive has greater priorities than exterminating pests.")
         else
-            setCommsMessage("Mind your own business!");
+            setCommsMessage(_("shipEnemy-comms", "Mind your own business!"));
         end
         comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
         addCommsReply(taunt_option, function()
@@ -12460,9 +12460,9 @@ function enemyDefendComms(comms_data)
 end
 function neutralDefendComms(comms_data)
     if comms_data.friendlyness > 50 then
-        setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.");
+        setCommsMessage(_("ship-comms", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
     else
-        setCommsMessage("We have nothing for you.\nGood day.");
+        setCommsMessage(_("ship-comms", "We have nothing for you.\nGood day."));
     end
     return true
 end
@@ -12891,62 +12891,62 @@ function enemyComms(comms_data)
 	local amenable = false
 	if comms_data.friendlyness >= 33 then	--final: 33
 		--taunt logic
-		local taunt_option = "We will see to your destruction!"
-		local taunt_success_reply = "Your bloodline will end here!"
-		local taunt_failed_reply = "Your feeble threats are meaningless."
+		local taunt_option = _("shipEnemy-comms", "We will see to your destruction!")
+		local taunt_success_reply = _("shipEnemy-comms", "Your bloodline will end here!")
+		local taunt_failed_reply = _("shipEnemy-comms", "Your feeble threats are meaningless.")
 		local taunt_threshold = 30		--base chance of being taunted
 		local immolation_threshold = 5	--base chance that taunting will enrage to the point of revenge immolation
 		if faction == "Kraylor" then
 			taunt_threshold = 35
 			immolation_threshold = 6
-			setCommsMessage("Ktzzzsss.\nYou will DIEEee weaklingsss!");
+			setCommsMessage(_("shipEnemy-comms", "Ktzzzsss.\nYou will DIEEee weaklingsss!"));
 			local kraylorTauntChoice = math.random(1,3)
 			if kraylorTauntChoice == 1 then
-				taunt_option = "We will destroy you"
-				taunt_success_reply = "We think not. It is you who will experience destruction!"
+				taunt_option = _("shipEnemy-comms", "We will destroy you")
+				taunt_success_reply = _("shipEnemy-comms", "We think not. It is you who will experience destruction!")
 			elseif kraylorTauntChoice == 2 then
-				taunt_option = "You have no honor"
-				taunt_success_reply = "Your insult has brought our wrath upon you. Prepare to die."
-				taunt_failed_reply = "Your comments about honor have no meaning to us"
+				taunt_option = _("shipEnemy-comms", "You have no honor")
+				taunt_success_reply = _("shipEnemy-comms", "Your insult has brought our wrath upon you. Prepare to die.")
+				taunt_failed_reply = _("shipEnemy-comms", "Your comments about honor have no meaning to us")
 			else
-				taunt_option = "We pity your pathetic race"
-				taunt_success_reply = "Pathetic? You will regret your disparagement!"
-				taunt_failed_reply = "We don't care what you think of us"
+				taunt_option = _("shipEnemy-comms", "We pity your pathetic race")
+				taunt_success_reply = _("shipEnemy-comms", "Pathetic? You will regret your disparagement!")
+				taunt_failed_reply = _("shipEnemy-comms", "We don't care what you think of us")
 			end
 		elseif faction == "Arlenians" then
 			taunt_threshold = 25
 			immolation_threshold = 4
-			setCommsMessage("We wish you no harm, but will harm you if we must.\nEnd of transmission.");
+			setCommsMessage(_("shipEnemy-comms", "We wish you no harm, but will harm you if we must.\nEnd of transmission."));
 		elseif faction == "Exuari" then
 			taunt_threshold = 40
 			immolation_threshold = 7
-			setCommsMessage("Stay out of our way, or your death will amuse us extremely!");
+			setCommsMessage(_("shipEnemy-comms", "Stay out of our way, or your death will amuse us extremely!"));
 		elseif faction == "Ghosts" then
 			taunt_threshold = 20
 			immolation_threshold = 3
-			setCommsMessage("One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted.");
-			taunt_option = "EXECUTE: SELFDESTRUCT"
-			taunt_success_reply = "Rogue command received. Targeting source."
-			taunt_failed_reply = "External command ignored."
+			setCommsMessage(_("shipEnemy-comms", "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."));
+			taunt_option = _("shipEnemy-comms", "EXECUTE: SELFDESTRUCT")
+			taunt_success_reply = _("shipEnemy-comms", "Rogue command received. Targeting source.")
+			taunt_failed_reply = _("shipEnemy-comms", "External command ignored.")
 		elseif faction == "Ktlitans" then
-			setCommsMessage("The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition.");
-			taunt_option = "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-			taunt_success_reply = "We do not need permission to pluck apart such an insignificant threat."
-			taunt_failed_reply = "The hive has greater priorities than exterminating pests."
+			setCommsMessage(_("shipEnemy-comms", "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."));
+			taunt_option = _("shipEnemy-comms", "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>")
+			taunt_success_reply = _("shipEnemy-comms", "We do not need permission to pluck apart such an insignificant threat.")
+			taunt_failed_reply = _("shipEnemy-comms", "The hive has greater priorities than exterminating pests.")
 		elseif faction == "TSN" then
 			taunt_threshold = 15
 			immolation_threshold = 2
-			setCommsMessage("State your business")
+			setCommsMessage(_("shipEnemy-comms", "State your business"))
 		elseif faction == "USN" then
 			taunt_threshold = 15
 			immolation_threshold = 2
-			setCommsMessage("What do you want? (not that we care)")
+			setCommsMessage(_("shipEnemy-comms", "What do you want? (not that we care)"))
 		elseif faction == "CUF" then
 			taunt_threshold = 15
 			immolation_threshold = 2
-			setCommsMessage("Don't waste our time")
+			setCommsMessage(_("shipEnemy-comms", "Don't waste our time"))
 		else
-			setCommsMessage("Mind your own business!");
+			setCommsMessage(_("shipEnemy-comms", "Mind your own business!"));
 		end
 		comms_data.friendlyness = comms_data.friendlyness - random(0, 10)	--reduce friendlyness after each interaction
 		addCommsReply(taunt_option, function()
@@ -13547,9 +13547,9 @@ function neutralComms(comms_data)
 		end	--close enough to sell
 	else	--not a freighter
 		if comms_data.friendlyness > 50 then
-			setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.");
+			setCommsMessage(_("ship-comms", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
 		else
-			setCommsMessage("We have nothing for you.\nGood day.");
+			setCommsMessage(_("ship-comms", "We have nothing for you.\nGood day."));
 		end
 	end	--end non-freighter communications else branch
 	return true
