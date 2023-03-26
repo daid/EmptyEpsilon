@@ -42,10 +42,11 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
 {
     hover = false;
     const auto& back = back_style->get(getState());
-    const auto& front = front_style->get(getState());
+    const auto& back_hover = back_style->get(State::Hover);
     const auto& back_selected = back_selected_style->get(getState());
-    const auto& front_selected = front_selected_style->get(getState());
     const auto& back_heading = back_heading_style->get(getState());
+    const auto& front = front_style->get(getState());
+    const auto& front_selected = front_selected_style->get(getState());
     const auto& front_heading = front_heading_style->get(getState());
 
     scroll->setValueSize(rect.size.y);
@@ -76,8 +77,18 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
         {
             // Define the background and foreground styles based on entry type
             // and hover/selected state.
-            auto* b = e.is_heading ? &back_heading : button_rect.contains(hover_coordinates) ? &back_hover : index == selection_index ? &back_selected : &back;
-            auto* f = e.is_heading ? &front_heading : index == selection_index ? &front_selected : &front;
+            auto* b = e.is_heading
+                      ? &back_heading
+                      : button_rect.contains(hover_coordinates)
+                          ? &back_hover
+                          : index == selection_index
+                              ? &back_selected
+                              : &back;
+            auto* f = e.is_heading
+                      ? &front_heading
+                      : index == selection_index
+                          ? &front_selected
+                          : &front;
 
             // Draw the background texture.
             renderer.drawStretchedHVClipped(button_rect, rect, button_height * 0.5f, b->texture, b->color);
