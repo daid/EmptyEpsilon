@@ -7360,7 +7360,7 @@ function handleDockedState()
 		goodCount = goodCount + 1
 	end
 	if goodCount > 0 then
-		addCommsReply("Buy, sell, trade", function()
+		addCommsReply(_("trade-comms", "Buy, sell, trade"), function()
 			local ctd = comms_target.comms_data
 			local goodsReport = string.format(_("trade-comms", "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"),comms_target:getCallSign())
 			for good, goodData in pairs(ctd.goods) do
