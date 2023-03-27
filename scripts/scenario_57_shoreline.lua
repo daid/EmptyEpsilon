@@ -7327,7 +7327,7 @@ function handleDockedState()
 				ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
-			addCommsReply(_(_("Back")), commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if ctd.public_relations then
@@ -7335,12 +7335,12 @@ function handleDockedState()
 			setCommsMessage(_("station-comms", "What would you like to know?"))
 			addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 				setCommsMessage(ctd.general_information)
-				addCommsReply(_(_("Back")), commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 			if ctd.history ~= nil then
 				addCommsReply(_("stationStory-comms", "Station history"), function()
 					setCommsMessage(ctd.history)
-					addCommsReply(_(_("Back")), commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if comms_source:isFriendly(comms_target) then

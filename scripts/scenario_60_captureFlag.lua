@@ -6504,7 +6504,7 @@ function handleResupplyStationWeaponRestock(weapon)
         else
             setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
         end
-        addCommsReply("Back", resupplyStation)
+        addCommsReply(_("Back"), resupplyStation)
     else
         if not comms_source:takeReputationPoints(points_per_item * item_amount) then
             setCommsMessage("Not enough reputation.")
@@ -6516,7 +6516,7 @@ function handleResupplyStationWeaponRestock(weapon)
         else
             setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
         end
-        addCommsReply("Back", resupplyStation)
+        addCommsReply(_("Back"), resupplyStation)
     end
 end
 function commsStation()
@@ -6719,12 +6719,12 @@ function handleDockedState()
 			setCommsMessage("What would you like to know?")
 			addCommsReply("General information", function()
 				setCommsMessage(comms_target.generalInformation)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 			if comms_target.stationHistory ~= nil then
 				addCommsReply("Station history", function()
 					setCommsMessage(comms_target.stationHistory)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if comms_source:isFriendly(comms_target) then
@@ -6732,7 +6732,7 @@ function handleDockedState()
 					if random(1,100) < 50 then
 						addCommsReply("Gossip", function()
 							setCommsMessage(comms_target.gossip)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
@@ -6793,7 +6793,7 @@ function handleDockedState()
 						end
 					end
 					setCommsMessage(oMsg)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 				gi = gi + 1
 			until(gi > #goods[comms_target])
@@ -6823,7 +6823,7 @@ function handleDockedState()
 								oMsg = oMsg .. _("trade-comms", "\nTraded")
 							end
 							setCommsMessage(oMsg)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -6855,7 +6855,7 @@ function handleDockedState()
 								oMsg = oMsg .. _("trade-comms", "\nTraded")
 							end
 							setCommsMessage(oMsg)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -6887,13 +6887,13 @@ function handleDockedState()
 								oMsg = oMsg .. _("trade-comms", "\nTraded")
 							end
 							setCommsMessage(oMsg)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
 				end
 			end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		gi = 1
 		cargoHoldEmpty = true
@@ -6917,12 +6917,12 @@ function handleDockedState()
 							decrementPlayerGoods(goodsType)
 							comms_source.cargo = comms_source.cargo + 1
 							setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),goodsType))
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 					gi = gi + 1
 				until(gi > #goods[comms_source])
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end
@@ -6955,7 +6955,7 @@ function handleWeaponRestock(weapon)
         else
             setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
         end
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     else
         if not comms_source:takeReputationPoints(points_per_item * item_amount) then
             setCommsMessage("Not enough reputation.")
@@ -6967,7 +6967,7 @@ function handleWeaponRestock(weapon)
         else
             setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
         end
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     end
 end
 function getWeaponCost(weapon)
@@ -7041,7 +7041,7 @@ function handleUndockedState()
 				oMsg = "We have the following types of ordnance available for restock:" .. oMsg
 			end
 			setCommsMessage(oMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		goodsQuantityAvailable = 0
 		gi = 1
@@ -7063,7 +7063,7 @@ function handleUndockedState()
 					gi = gi + 1
 				until(gi > #goods[comms_target])
 				setCommsMessage(oMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 		addCommsReply("See any enemies in your area?", function()
@@ -7085,11 +7085,11 @@ function handleUndockedState()
 					setCommsMessage("No enemies within 30U")
 					comms_source:addReputationPoints(1.0)
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			else
 				setCommsMessage("Not really")
 				comms_source:addReputationPoints(1.0)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end
 		end)
 		addCommsReply("Where can I find particular goods?", function()
@@ -7097,7 +7097,7 @@ function handleUndockedState()
 			if comms_target.goodsKnowledge == nil then
 				gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations.\n\nCheck back later, someone else may have better knowledge"
 				setCommsMessage(gkMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 				fillStationBrains()
 			else
 				if #comms_target.goodsKnowledge == 0 then
@@ -7107,18 +7107,18 @@ function handleUndockedState()
 					for gk=1,#comms_target.goodsKnowledge do
 						addCommsReply(comms_target.goodsKnowledgeType[gk],function()
 							setCommsMessage(string.format("Station %s in sector %s has %s%s",comms_target.goodsKnowledge[gk],comms_target.goodsKnowledgeSector[gk],comms_target.goodsKnowledgeType[gk],comms_target.goodsKnowledgeTrade[gk]))
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
 				setCommsMessage(gkMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end
 		end)
 		if comms_target.publicRelations then
 			addCommsReply("General station information", function()
 				setCommsMessage(comms_target.generalInformation)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end)
@@ -7135,7 +7135,7 @@ function handleUndockedState()
 			end
 			oMsg = oMsg .. "\n" .. wfv
 			setCommsMessage(oMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
@@ -7157,11 +7157,11 @@ function handleUndockedState()
                         else
                             setCommsMessage("Not enough reputation!");
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
@@ -7178,11 +7178,11 @@ function handleUndockedState()
                         else
                             setCommsMessage("Not enough reputation!");
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
 end
@@ -7772,14 +7772,14 @@ function friendlyComms(comms_data)
 	addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 		if comms_source:getWaypointCount() == 0 then
 			setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
-			addCommsReply("Back", commsShip)
+			addCommsReply(_("Back"), commsShip)
 		else
 			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 			for n=1,comms_source:getWaypointCount() do
 				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
 					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				end)
 			end
 		end
@@ -7788,7 +7788,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("shipAssist-comms", "Assist me"), function()
 			setCommsMessage(_("shipAssist-comms", "Heading toward you to assist."));
 			comms_target:orderDefendTarget(comms_source)
-			addCommsReply("Back", commsShip)
+			addCommsReply(_("Back"), commsShip)
 		end)
 	end
 	addCommsReply(_("shipAssist-comms", "Report status"), function()
@@ -7813,14 +7813,14 @@ function friendlyComms(comms_data)
 		end
 
 		setCommsMessage(msg);
-		addCommsReply("Back", commsShip)
+		addCommsReply(_("Back"), commsShip)
 	end)
 	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 		end
 	end
@@ -7832,19 +7832,19 @@ function friendlyComms(comms_data)
 			addCommsReply(_("shipAssist-comms", "Go attack enemies"), function()
 				comms_target:orderRoaming()
 				setCommsMessage(_("shipAssist-comms", "Going roaming and attacking"))
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 			addCommsReply(_("shipAssist-comms", "Go to waypoint. Attack enemies en route"), function()
 				if comms_source:getWaypointCount() == 0 then
 					setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				else
 					setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 					for n=1,comms_source:getWaypointCount() do
 						addCommsReply("Go to WP" .. n, function()
 							comms_target:orderFlyTowards(comms_source:getWaypoint(n))
 							setCommsMessage("Going to WP" .. n ..", watching for enemies en route");
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 					end
 				end
@@ -7852,14 +7852,14 @@ function friendlyComms(comms_data)
 			addCommsReply(_("shipAssist-comms", "Go to waypoint. Ignore enemies"), function()
 				if comms_source:getWaypointCount() == 0 then
 					setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				else
 					setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 					for n=1,comms_source:getWaypointCount() do
 						addCommsReply("Go to WP" .. n, function()
 							comms_target:orderFlyTowardsBlind(comms_source:getWaypoint(n))
 							setCommsMessage("Going to WP" .. n ..", ignoring enemies");
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 					end
 				end
@@ -7867,7 +7867,7 @@ function friendlyComms(comms_data)
 			addCommsReply("Stop and defend your current position", function()
 				comms_target:orderStandGround()
 				setCommsMessage("Stopping and defending")
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 			addCommsReply("Stop. Do nothing", function()
 				comms_target:orderIdle()
@@ -7903,7 +7903,7 @@ function friendlyComms(comms_data)
 				else
 					setCommsMessage("Stopping. Doing nothing")
 				end
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 			addCommsReply(string.format("Direct %s",squadName), function()
 				local squadName = comms_target.squadName
@@ -7916,13 +7916,13 @@ function friendlyComms(comms_data)
 						end
 					end
 					setCommsMessage(string.format("%s heading toward you to assist",squadName))
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				end)
 				addCommsReply("Defend a waypoint", function()
 					local squadName = comms_target.squadName
 					if comms_source:getWaypointCount() == 0 then
 						setCommsMessage("No waypoints set. Please set a waypoint first.");
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					else
 						setCommsMessage("Which waypoint should we defend?");
 						for n=1,comms_source:getWaypointCount() do
@@ -7933,7 +7933,7 @@ function friendlyComms(comms_data)
 									end
 								end
 								setCommsMessage("We are heading to assist at WP" .. n ..".");
-								addCommsReply("Back", commsShip)
+								addCommsReply(_("Back"), commsShip)
 							end)
 						end
 					end
@@ -7942,7 +7942,7 @@ function friendlyComms(comms_data)
 					local squadName = comms_target.squadName
 					if comms_source:getWaypointCount() == 0 then
 						setCommsMessage("No waypoints set. Please set a waypoint first.");
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					else
 						setCommsMessage("Which waypoint?");
 						for n=1,comms_source:getWaypointCount() do
@@ -7953,7 +7953,7 @@ function friendlyComms(comms_data)
 									end
 								end
 								setCommsMessage("Going to WP" .. n ..", watching for enemies en route");
-								addCommsReply("Back", commsShip)
+								addCommsReply(_("Back"), commsShip)
 							end)
 						end
 					end
@@ -7962,7 +7962,7 @@ function friendlyComms(comms_data)
 					local squadName = comms_target.squadName
 					if comms_source:getWaypointCount() == 0 then
 						setCommsMessage("No waypoints set. Please set a waypoint first.");
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					else
 						setCommsMessage("Which waypoint?");
 						for n=1,comms_source:getWaypointCount() do
@@ -7973,7 +7973,7 @@ function friendlyComms(comms_data)
 									end
 								end
 								setCommsMessage("Going to WP" .. n ..", ignore enemies");
-								addCommsReply("Back", commsShip)
+								addCommsReply(_("Back"), commsShip)
 							end)
 						end
 					end
@@ -7986,7 +7986,7 @@ function friendlyComms(comms_data)
 						end
 					end
 					setCommsMessage(string.format("%s roaming and attacking",squadName))
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				end)
 				addCommsReply("Stop and defend your current positions", function()
 					local squadName = comms_target.squadName
@@ -7996,7 +7996,7 @@ function friendlyComms(comms_data)
 						end
 					end
 					setCommsMessage(string.format("%s standing ground",squadName))
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				end)
 				addCommsReply("Stop. Do Nothing", function()
 					local squadName = comms_target.squadName
@@ -8006,7 +8006,7 @@ function friendlyComms(comms_data)
 						end
 					end
 					setCommsMessage(string.format("%s standing down",squadName))
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				end)
 				addCommsReply("Other drones in squad form up on me", function()
 					local squadName = comms_target.squadName
@@ -8027,7 +8027,7 @@ function friendlyComms(comms_data)
 						end
 					end
 					setCommsMessage(string.format("%s is forming up on me",squadName))
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				end)
 			end)
 		end

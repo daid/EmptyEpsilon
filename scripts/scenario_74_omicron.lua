@@ -3906,7 +3906,7 @@ function handleDockedState()
 							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nOne sold")
 							comms_source.cargo = comms_source.cargo + 1
 							setCommsMessage(goodTransactionMessage)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
@@ -5158,7 +5158,7 @@ function friendlyComms(comms_data)
 								comms_source.goods[good] = comms_source.goods[good] - 1
 								comms_source.cargo = comms_source.cargo + 1
 								setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
-								addCommsReply("Back", commsShip)
+								addCommsReply(_("Back"), commsShip)
 							end)
 						end
 					end
@@ -5292,7 +5292,7 @@ function friendlyComms(comms_data)
 				for good, goodData in pairs(comms_data.goods) do
 					if goodData.quantity > 0 then
 						if goodCount > 0 then
-							cargoMsg = cargoMsg .. ", " .. good
+							cargoMsg = cargoMsg .. _("trade-comms",", ") .. good
 						else
 							cargoMsg = cargoMsg .. good
 						end
@@ -5813,7 +5813,7 @@ function neutralComms(comms_data)
 			for good, goodData in pairs(comms_data.goods) do
 				if goodData.quantity > 0 then
 					if goodCount > 0 then
-						cargoMsg = cargoMsg .. ", " .. good
+						cargoMsg = cargoMsg .. _("trade-comms",", ") .. good
 					else
 						cargoMsg = cargoMsg .. good
 					end

@@ -1616,7 +1616,7 @@ function handleDockedState()
 				end
 			end
 			setCommsMessage(ordMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	addCommsReply("Do you upgrade spaceships?", function()
@@ -1670,7 +1670,7 @@ function handleDockedState()
 					end
 				end
 				setCommsMessage(brochure_stations)
-				addCommsReply("Back",commsStation)
+				addCommsReply(_("Back"),commsStation)
 			end)
 			addCommsReply("Examine goods list", function()
 				local brochure_goods = ""
@@ -1694,9 +1694,9 @@ function handleDockedState()
 					end
 				end
 				setCommsMessage(brochure_goods)
-				addCommsReply("Back",commsStation)
+				addCommsReply(_("Back"),commsStation)
 			end)
-			addCommsReply("Back",commsStation)
+			addCommsReply(_("Back"),commsStation)
 		end)
 		addCommsReply("Talk to apprentice cartographer", function()
 			setCommsMessage("Hi, would you like for me to locate a station or some goods for you?")
@@ -1720,7 +1720,7 @@ function handleDockedState()
 									until(gi > #goods[obj])
 								end
 								setCommsMessage(station_details)
-								addCommsReply("Back",commsStation)
+								addCommsReply(_("Back"),commsStation)
 							end)
 						end
 					end
@@ -1728,7 +1728,7 @@ function handleDockedState()
 				if stations_known == 0 then
 					setCommsMessage("I have learned of no stations yet")
 				end
-				addCommsReply("Back",commsStation)
+				addCommsReply(_("Back"),commsStation)
 			end)
 			addCommsReply("Locate goods", function()
 				setCommsMessage("These are the goods I know about")
@@ -1763,18 +1763,18 @@ function handleDockedState()
 							until(gi > #goods[obj])
 						end
 						setCommsMessage(station_details)
-						addCommsReply("Back",commsStation)
+						addCommsReply(_("Back"),commsStation)
 					end)
 					button_count = button_count + 1
 					if button_count >= 20 then
 						break
 					end
 				end
-				addCommsReply("Back",commsStation)
+				addCommsReply(_("Back"),commsStation)
 			end)
-			addCommsReply("Back",commsStation)
+			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply("Back",commsStation)
+		addCommsReply(_("Back"),commsStation)
 	end)	
 	if goods[comms_target] ~= nil then
 		addCommsReply(_("trade-comms", "Buy, sell, trade"), function()
@@ -1830,7 +1830,7 @@ function handleDockedState()
 						end
 					end
 					setCommsMessage(oMsg)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 				gi = gi + 1
 			until(gi > #goods[comms_target])
@@ -1860,7 +1860,7 @@ function handleDockedState()
 								oMsg = oMsg .. _("trade-comms", "\nTraded")
 							end
 							setCommsMessage(oMsg)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -1892,7 +1892,7 @@ function handleDockedState()
 								oMsg = oMsg .. _("trade-comms", "\nTraded")
 							end
 							setCommsMessage(oMsg)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -1924,13 +1924,13 @@ function handleDockedState()
 								oMsg = oMsg .. _("trade-comms", "\nTraded")
 							end
 							setCommsMessage(oMsg)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
 				end
 			end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if comms_target == stationZefram then
@@ -2227,7 +2227,7 @@ function handleWeaponRestock(weapon)
         else
             setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
         end
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     else
         if not comms_source:takeReputationPoints(points_per_item * item_amount) then
             setCommsMessage("Not enough reputation.")
@@ -2239,7 +2239,7 @@ function handleWeaponRestock(weapon)
         else
             setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
         end
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     end
 end
 function getWeaponCost(weapon)
@@ -2291,7 +2291,7 @@ function handleUndockedState()
 				end
 			end
 			setCommsMessage(ordMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if diagnostic then
@@ -2315,26 +2315,26 @@ function handleUndockedState()
 						end
 					end
 					setCommsMessage(dMsg)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			addCommsReply("Show patience time limit", function()
 				dMsg = string.format("\nPatience time limit: %i",patienceTimeLimit)
 				setCommsMessage(dMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 			if raceStartDelay <= 0 then
 				addCommsReply("Show unfinished racers", function()
 					dMsg = string.format("Unfinished racers: %i",unfinishedRacers)
 					setCommsMessage(dMsg)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if gMsg ~= nil then
 				dMsg = dMsg .. "\n\nFinal built message so far:\n\n" .. gMsg
 			end
 			setCommsMessage(dMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
@@ -2356,11 +2356,11 @@ function handleUndockedState()
                         else
                             setCommsMessage("Not enough reputation!");
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
@@ -2377,11 +2377,11 @@ function handleUndockedState()
                         else
                             setCommsMessage("Not enough reputation!");
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
 end
@@ -2425,14 +2425,14 @@ function friendlyComms(comms_data)
 	addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 		if comms_source:getWaypointCount() == 0 then
 			setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
-			addCommsReply("Back", commsShip)
+			addCommsReply(_("Back"), commsShip)
 		else
 			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 			for n=1,comms_source:getWaypointCount() do
 				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
 					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				end)
 			end
 		end
@@ -2441,7 +2441,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("shipAssist-comms", "Assist me"), function()
 			setCommsMessage(_("shipAssist-comms", "Heading toward you to assist."));
 			comms_target:orderDefendTarget(comms_source)
-			addCommsReply("Back", commsShip)
+			addCommsReply(_("Back"), commsShip)
 		end)
 	end
 	addCommsReply(_("shipAssist-comms", "Report status"), function()
@@ -2464,14 +2464,14 @@ function friendlyComms(comms_data)
 			end
 		end
 		setCommsMessage(msg);
-		addCommsReply("Back", commsShip)
+		addCommsReply(_("Back"), commsShip)
 	end)
 	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 		end
 	end
@@ -2516,7 +2516,7 @@ function enemyComms(comms_data)
 		end
 	else
 		setCommsMessage("I belong to " .. comms_target.owner)
-		addCommsReply("Back", commsShip)
+		addCommsReply(_("Back"), commsShip)
 	end
 	return false
 end
@@ -2528,7 +2528,7 @@ function neutralComms(comms_data)
 			-- Offer destination information
 			addCommsReply(_("trade-comms", "Where are you headed?"), function()
 				setCommsMessage(comms_target.target:getCallSign())
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 			-- Offer to trade goods if goods or equipment freighter
 			if distance(comms_source,comms_target) < 5000 then
@@ -2555,14 +2555,14 @@ function neutralComms(comms_data)
 									decrementPlayerGoods("luxury")
 									setCommsMessage(_("trade-comms", "Traded"))
 								end
-								addCommsReply("Back", commsShip)
+								addCommsReply(_("Back"), commsShip)
 							end)
 							gi = gi + 1
 						until(gi > #goods[comms_target])
 					else
 						setCommsMessage(_("trade-comms", "Insufficient luxury to trade"))
 					end
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				else
 					-- Offer to sell goods
 					gi = 1
@@ -2585,7 +2585,7 @@ function neutralComms(comms_data)
 									setCommsMessage(_("trade-comms", "Purchased"))
 								end
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -2601,7 +2601,7 @@ function neutralComms(comms_data)
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 			-- Offer to sell goods if goods or equipment freighter
 			if distance(comms_source,comms_target) < 5000 then
@@ -2626,7 +2626,7 @@ function neutralComms(comms_data)
 									setCommsMessage(_("trade-comms", "Purchased"))
 								end
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -2652,7 +2652,7 @@ function neutralComms(comms_data)
 									setCommsMessage(_("trade-comms", "Purchased"))
 								end
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -2683,7 +2683,7 @@ function neutralComms(comms_data)
 									setCommsMessage(_("trade-comms", "Purchased"))
 								end
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
