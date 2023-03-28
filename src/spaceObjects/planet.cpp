@@ -143,6 +143,7 @@ REGISTER_SCRIPT_SUBCLASS(Planet, SpaceObject)
     /// - its atmosphere radius to 1.2x this value
     /// - its collision size to a function of this value and the planet's z-position
     /// Defaults to 5000 (5U).
+    /// Changing a planet's radius after its initial network replication does _not_ update its collision size on clients, resulting in inconsistent behavior. See issue #1957.
     /// Example: planet:setPlanetRadius(2000)
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetRadius);
     /// Sets this Planet's collision radius.
@@ -158,6 +159,7 @@ REGISTER_SCRIPT_SUBCLASS(Planet, SpaceObject)
     /// Sets the z-position of this Planet, the distance by which it's offset above (positive) or below (negative) the movement plane.
     /// This value also modifies the Planet's collision radius.
     /// Defaults to 0.
+    /// Changing a planet's z-position after its initial network replication does _not_ update its collision size on clients, resulting in inconsistent behavior. See issue #1957.
     /// Example: planet:setDistanceFromMovementPlane(-500) -- sets the planet 0.5U below the movement plane
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setDistanceFromMovementPlane);
     /// Sets this Planet's axial rotation time, in degrees per tick.
