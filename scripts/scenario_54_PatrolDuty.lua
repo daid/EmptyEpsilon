@@ -5815,7 +5815,7 @@ function neutralComms(comms_data)
 			for good, goodData in pairs(comms_data.goods) do
 				if goodData.quantity > 0 then
 					if goodCount > 0 then
-						cargoMsg = cargoMsg .. ", " .. good
+						cargoMsg = cargoMsg .. _("trade-comms", ", ") .. good
 					else
 						cargoMsg = cargoMsg .. good
 					end
@@ -5904,7 +5904,7 @@ function neutralComms(comms_data)
 				end	--freighter goods loop
 			end
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage("What do you want?")
+			setCommsMessage(_("trade-comms", "What do you want?"))
 			-- Offer to sell destination information
 			destRep = random(1,5)
 			addCommsReply(string.format("Where are you headed? (cost: %f reputation)",destRep), function()
@@ -5924,7 +5924,7 @@ function neutralComms(comms_data)
 					end
 				end
 				if goodCount > 0 then
-					addCommsReply("Jettison cargo", function()
+					addCommsReply(_("trade-comms", "Jettison cargo"), function()
 						setCommsMessage(string.format(_("trade-comms", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 						for good, good_quantity in pairs(comms_source.goods) do
 							if good_quantity > 0 then

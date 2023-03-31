@@ -4589,14 +4589,14 @@ function handleUndockedState()
 				end
 			end)	--end station info comms reply branch
 		end	--end public relations if branch
-		addCommsReply(_("station-comms", "Report status"), function()
-			msg = string.format(_("station-comms", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
+		addCommsReply(_("stationAssist-comms", "Report status"), function()
+			msg = string.format(_("stationAssist-comms", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
 			local shields = comms_target:getShieldCount()
 			if shields == 1 then
-				msg = msg .. string.format(_("station-comms", "Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
+				msg = msg .. string.format(_("stationAssist-comms", "Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
 			else
 				for n=0,shields-1 do
-					msg = msg .. string.format(_("station-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
+					msg = msg .. string.format(_("stationAssist-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 				end
 			end			
 			setCommsMessage(msg);
@@ -4610,7 +4610,7 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"))
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %i"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %d"),n), function()
 						if player:takeReputationPoints(getServiceCost("supplydrop")) then
 							local position_x, position_y = comms_target:getPosition()
 							local target_x, target_y = player:getWaypoint(n)
@@ -4618,7 +4618,7 @@ function handleUndockedState()
 							script:setVariable("position_x", position_x):setVariable("position_y", position_y)
 							script:setVariable("target_x", target_x):setVariable("target_y", target_y)
 							script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward waypoint %i"),n))
+							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward waypoint %d"),n))
 						else
 							setCommsMessage(_("needRep-comms", "Not enough reputation!"))
 						end
@@ -4636,12 +4636,12 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"))
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %i"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %d"),n), function()
 						if player:takeReputationPoints(getServiceCost("reinforcements")) then
 							ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
 							ship:setCommsScript(""):setCommsFunction(commsShip):onDestruction(humanVesselDestroyed)
 							table.insert(friendlyHelperFleet,ship)
-							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at waypoint %i"),ship:getCallSign(),n))
+							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at waypoint %d"),ship:getCallSign(),n))
 						else
 							setCommsMessage(_("needRep-comms", "Not enough reputation!"))
 						end
@@ -4657,12 +4657,12 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"))
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %i"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %d"),n), function()
 						if player:takeReputationPoints(getServiceCost("phobosReinforcements")) then
 							ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Phobos T3"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
 							ship:setCommsScript(""):setCommsFunction(commsShip):onDestruction(humanVesselDestroyed)
 							table.insert(friendlyHelperFleet,ship)
-							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at waypoint %i"),ship:getCallSign(),n))
+							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at waypoint %d"),ship:getCallSign(),n))
 						else
 							setCommsMessage(_("needRep-comms", "Not enough reputation!"))
 						end
@@ -4678,12 +4678,12 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"))
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %i"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %d"),n), function()
 						if player:takeReputationPoints(getServiceCost("stalkerReinforcements")) then
 							ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Stalker Q7"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
 							ship:setCommsScript(""):setCommsFunction(commsShip):onDestruction(humanVesselDestroyed)
 							table.insert(friendlyHelperFleet,ship)
-							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at waypoint %i"),ship:getCallSign(),n))
+							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at waypoint %d"),ship:getCallSign(),n))
 						else
 							setCommsMessage(_("needRep-comms", "Not enough reputation!"))
 						end
@@ -4798,9 +4798,9 @@ function friendlyComms(comms_data)
 		else
 			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"))
 			for n=1,player:getWaypointCount() do
-				addCommsReply(string.format(_("shipAssist-comms", "Defend waypoint %i"),n), function()
+				addCommsReply(string.format(_("shipAssist-comms", "Defend waypoint %d"),n), function()
 					comms_target:orderDefendLocation(player:getWaypoint(n))
-					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at waypoint %i."),n))
+					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at waypoint %d."),n))
 					addCommsReply(_("Back"), commsShip)
 				end)
 			end
