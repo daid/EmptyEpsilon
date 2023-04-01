@@ -12625,23 +12625,23 @@ function friendlyComms(comms_data)
 				setCommsMessage(msg)
 				addCommsReply(_("Back"), commsShip)
 			end)
-			addCommsReply("Assist me", function()
+			addCommsReply(_("shipAssist-comms", "Assist me"), function()
 				for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 					if fleetShip ~= nil and fleetShip:isValid() then
 						fleetShip:orderDefendTarget(comms_source)
 					end
 				end
-				setCommsMessage(string.format("%s heading toward you to assist",comms_target.fleet))
+				setCommsMessage(string.format(_("shipAssist-comms", "%s heading toward you to assist"),comms_target.fleet))
 				addCommsReply(_("Back"), commsShip)
 			end)
-			addCommsReply("Defend a waypoint", function()
+			addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 				if comms_source:getWaypointCount() == 0 then
-					setCommsMessage("No waypoints set. Please set a waypoint first.");
+					setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 					addCommsReply(_("Back"), commsShip)
 				else
-					setCommsMessage("Which waypoint should we defend?");
+					setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 					for n=1,comms_source:getWaypointCount() do
-						addCommsReply("Defend WP" .. n, function()
+						addCommsReply(string.format(_("shipAssist-comms", "Defend waypoint %d"), n), function()
 							if treaty then
 								local tempAsteroid = VisualAsteroid():setPosition(comms_source:getWaypoint(n))
 								local waypointInBorderZone = false
@@ -12652,9 +12652,9 @@ function friendlyComms(comms_data)
 									end
 								end
 								if waypointInBorderZone then
-									setCommsMessage("We cannot break the treaty by defending WP" .. n .. " in the neutral border zone")
+									setCommsMessage(string.format(_("shipAssist-comms", "We cannot break the treaty by defending WP %d in the neutral border zone"), n))
 								elseif outerZone:isInside(tempAsteroid) then
-									setCommsMessage("We cannot break the treaty by defending WP" .. n .. " across the neutral border zones")							
+									setCommsMessage(string.format(_("shipAssist-comms", "We cannot break the treaty by defending WP %d across the neutral border zones"), n))							
 								else
 									for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 										if fleetShip ~= nil and fleetShip:isValid() then
@@ -12730,7 +12730,7 @@ function friendlyComms(comms_data)
 							if shipCommsDiagnostic then print("in freighter goods loop") end
 							if goodData.quantity > 0 and good ~= "luxury" then
 								if shipCommsDiagnostic then print("has something other than luxury") end
-								addCommsReply(string.format("Trade luxury for %s",good), function()
+								addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
 									goodData.quantity = goodData.quantity - 1
 									if comms_source.goods == nil then
 										comms_source.goods = {}
@@ -12740,7 +12740,7 @@ function friendlyComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_source.goods.luxury = comms_source.goods.luxury - 1
-									setCommsMessage(string.format("Traded your luxury for %s from %s",good,comms_target:getCallSign()))
+									setCommsMessage(string.format(_("trade-comms", "Traded your luxury for %s from %s"),good,comms_target:getCallSign()))
 									addCommsReply(_("Back"), commsShip)
 								end)
 							end
@@ -12753,7 +12753,7 @@ function friendlyComms(comms_data)
 						if shipCommsDiagnostic then print("in freighter goods loop") end
 						if goodData.quantity > 0 then
 							if shipCommsDiagnostic then print("found something to sell") end
-							addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost)), function()
+							addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost)), function()
 								if comms_source:takeReputationPoints(goodData.cost) then
 									goodData.quantity = goodData.quantity - 1
 									if comms_source.goods == nil then
@@ -12764,7 +12764,7 @@ function friendlyComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_source.cargo = comms_source.cargo - 1
-									setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+									setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
 									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
@@ -12783,7 +12783,7 @@ function friendlyComms(comms_data)
 							if shipCommsDiagnostic then print("in freighter cargo loop") end
 							if goodData.quantity > 0 then
 								if shipCommsDiagnostic then print("Found something to sell") end
-								addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost)), function()
 									if comms_source:takeReputationPoints(goodData.cost) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -12794,7 +12794,7 @@ function friendlyComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
 										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
@@ -12808,7 +12808,7 @@ function friendlyComms(comms_data)
 							if shipCommsDiagnostic then print("in freighter cargo loop") end
 							if goodData.quantity > 0 then
 								if shipCommsDiagnostic then print("found something to sell") end
-								addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*2)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
 									if comms_source:takeReputationPoints(goodData.cost*2) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -12819,7 +12819,7 @@ function friendlyComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
 										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
@@ -12839,7 +12839,7 @@ function friendlyComms(comms_data)
 							if shipCommsDiagnostic then print("in freighter cargo loop") end
 							if goodData.quantity > 0 then
 								if shipCommsDiagnostic then print("found something to sell") end
-								addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*2)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
 									if comms_source:takeReputationPoints(goodData.cost*2) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -12850,7 +12850,7 @@ function friendlyComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
 										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end

@@ -8261,7 +8261,7 @@ function shipStatusReport(return_function)
 	end)
 end
 function shipIdle(return_function)
-	addCommsReply("Stop. Do nothing.", function()
+	addCommsReply(_("shipAssist-comms", "Stop. Do nothing."), function()
 		comms_target:orderIdle()
 		local idle_comment = {
 			"routine system maintenance",
@@ -8277,31 +8277,31 @@ function shipIdle(return_function)
 			"continuing the count of visible stars from this region",
 			"internal systems diagnostics",
 		}
-		setCommsMessage(string.format("Stopping. Doing nothing except %s",idle_comment[math.random(1,#idle_comment)]))
+		setCommsMessage(string.format(_("shipAssist-comms", "Stopping. Doing nothing except %s"),idle_comment[math.random(1,#idle_comment)]))
 		addCommsReply(_("Back"), return_function)
 	end)
 end
 function shipRoaming(return_function)
-	addCommsReply("Attack all enemies. Start with the nearest.", function()
+	addCommsReply(_("shipAssist-comms", "Attack all enemies. Start with the nearest."), function()
 		comms_target:orderRoaming()
-		setCommsMessage("Searching and destroying")
+		setCommsMessage(_("shipAssist-comms", "Searching and destroying"))
 		addCommsReply(_("Back"), return_function)
 	end)
 end
 function shipStandGround(return_function)
-	addCommsReply("Stop and defend your current location", function()
+	addCommsReply(_("shipAssist-comms", "Stop and defend your current location"), function()
 		comms_target:orderStandGround()
-		setCommsMessage("Stopping. Shooting any enemy that approaches")
+		setCommsMessage(_("shipAssist-comms", "Stopping. Shooting any enemy that approaches"))
 		addCommsReply(_("Back"), return_function)
 	end)
 end
 function shipDefendWaypoint(return_function)
-	addCommsReply("Defend a waypoint", function()
+	addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 		if comms_source:getWaypointCount() == 0 then
-			setCommsMessage("No waypoints set. Please set a waypoint first.");
+			setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 			addCommsReply(_("Back"), return_function)
 		else
-			setCommsMessage("Which waypoint should we defend?");
+			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 			for n=1,comms_source:getWaypointCount() do
 				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
@@ -8313,16 +8313,16 @@ function shipDefendWaypoint(return_function)
 	end)
 end
 function shipFlyBlind(return_function)
-	addCommsReply("Go to waypoint, ignore enemies", function()
+	addCommsReply(_("shipAssist-comms", "Go to waypoint, ignore enemies"), function()
 		if comms_source:getWaypointCount() == 0 then
-			setCommsMessage("No waypoints set. Please set a waypoint first.");
+			setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 			addCommsReply(_("Back"), return_function)
 		else
-			setCommsMessage("Which waypoint should we approach?");
+			setCommsMessage(_("shipAssist-comms", "Which waypoint should we approach?"));
 			for n=1,comms_source:getWaypointCount() do
 				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
 					comms_target:orderFlyTowardsBlind(comms_source:getWaypoint(n))
-					setCommsMessage("We are heading to WP" .. n ..", ignoring enemies.");
+					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to WP%d ignoring enemies."), n));
 					addCommsReply(_("Back"), return_function)
 				end)
 			end
@@ -8331,8 +8331,8 @@ function shipFlyBlind(return_function)
 end
 function shipAssistPlayer(comms_data,return_function)
 	if comms_data.friendlyness > 0.2 then
-		addCommsReply("Assist me", function()
-			setCommsMessage("Heading toward you to assist.");
+		addCommsReply(_("shipAssist-comms", "Assist me"), function()
+			setCommsMessage(_("shipAssist-comms", "Heading toward you to assist."));
 			comms_target:orderDefendTarget(comms_source)
 			addCommsReply(_("Back"), return_function)
 		end)
@@ -8366,8 +8366,8 @@ function shipDockNearby(return_function)
 end
 function fleetCommunication(return_function)
 	if comms_target.fleetIndex ~= nil then
-		addCommsReply(string.format("Direct fleet %i",comms_target.fleetIndex), function()
-			local fleet_state = string.format("Fleet %i consists of:\n",comms_target.fleetIndex)
+		addCommsReply(string.format(_("shipAssist-comms", "Direct fleet %i"),comms_target.fleetIndex), function()
+			local fleet_state = string.format(_("shipAssist-comms", "Fleet %i consists of:\n"),comms_target.fleetIndex)
 			for _, ship in ipairs(npc_fleet[comms_target:getFaction()]) do
 				if ship ~= nil and ship:isValid() then
 					if ship.fleetIndex == comms_target.fleetIndex then
@@ -8375,9 +8375,9 @@ function fleetCommunication(return_function)
 					end
 				end
 			end
-			setCommsMessage(string.format("%s\n\nWhat command should be given to fleet %i?",fleet_state,comms_target.fleetIndex))
-			addCommsReply("Report hull and shield status", function()
-				msg = string.format("Fleet %i status:",comms_target.fleetIndex)
+			setCommsMessage(string.format(_("shipAssist-comms", "%s\n\nWhat command should be given to fleet %i?"),fleet_state,comms_target.fleetIndex))
+			addCommsReply(_("shipAssist-comms", "Report hull and shield status"), function()
+				msg = string.format(_("shipAssist-comms", "Fleet %i status:"),comms_target.fleetIndex)
 				for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 					if fleetShip.fleetIndex == comms_target.fleetIndex then
 						if fleetShip ~= nil and fleetShip:isValid() then
@@ -8402,8 +8402,8 @@ function fleetCommunication(return_function)
 				setCommsMessage(msg)
 				addCommsReply(_("Back"), return_function)
 			end)
-			addCommsReply("Report missile status", function()
-				msg = string.format("Fleet %i missile status:",comms_target.fleetIndex)
+			addCommsReply(_("shipAssist-comms", "Report missile status"), function()
+				msg = string.format(_("shipAssist-comms", "Fleet %i missile status:"),comms_target.fleetIndex)
 				for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 					if fleetShip.fleetIndex == comms_target.fleetIndex then
 						if fleetShip ~= nil and fleetShip:isValid() then
@@ -8424,7 +8424,7 @@ function fleetCommunication(return_function)
 				setCommsMessage(msg)
 				addCommsReply(_("Back"), return_function)
 			end)
-			addCommsReply("Assist me", function()
+			addCommsReply(_("shipAssist-comms", "Assist me"), function()
 				for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 					if fleetShip.fleetIndex == comms_target.fleetIndex then
 						if fleetShip ~= nil and fleetShip:isValid() then
@@ -8432,15 +8432,15 @@ function fleetCommunication(return_function)
 						end
 					end
 				end
-				setCommsMessage(string.format("Fleet %s heading toward you to assist",comms_target.fleetIndex))
+				setCommsMessage(string.format(_("shipAssist-comms", "Fleet %s heading toward you to assist"),comms_target.fleetIndex))
 				addCommsReply(_("Back"), return_function)
 			end)
-			addCommsReply("Defend a waypoint", function()
+			addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 				if comms_source:getWaypointCount() == 0 then
-					setCommsMessage("No waypoints set. Please set a waypoint first.");
+					setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 					addCommsReply(_("Back"), return_function)
 				else
-					setCommsMessage("Which waypoint should we defend?");
+					setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 					for n=1,comms_source:getWaypointCount() do
 						addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
 							for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
@@ -8456,14 +8456,14 @@ function fleetCommunication(return_function)
 					end
 				end
 			end)
-			addCommsReply("Go to waypoint. Attack enemies en route", function()
+			addCommsReply(_("shipAssist-comms", "Go to waypoint. Attack enemies en route"), function()
 				if comms_source:getWaypointCount() == 0 then
-					setCommsMessage("No waypoints set. Please set a waypoint first.");
+					setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 					addCommsReply(_("Back"), return_function)
 				else
-					setCommsMessage("Which waypoint?");
+					setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 					for n=1,comms_source:getWaypointCount() do
-						addCommsReply("Go to WP" .. n, function()
+						addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),n), function()
 							for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 								if fleetShip.fleetIndex == comms_target.fleetIndex then
 									if fleetShip ~= nil and fleetShip:isValid() then
@@ -8471,20 +8471,20 @@ function fleetCommunication(return_function)
 									end
 								end
 							end
-							setCommsMessage("Going to WP" .. n ..", watching for enemies en route");
+							setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, watching for enemies en route"), n));
 							addCommsReply(_("Back"), return_function)
 						end)
 					end
 				end
 			end)
-			addCommsReply("Go to waypoint. Ignore enemies", function()
+			addCommsReply(_("shipAssist-comms", "Go to waypoint. Ignore enemies"), function()
 				if comms_source:getWaypointCount() == 0 then
-					setCommsMessage("No waypoints set. Please set a waypoint first.");
+					setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 					addCommsReply(_("Back"), return_function)
 				else
-					setCommsMessage("Which waypoint?");
+					setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 					for n=1,comms_source:getWaypointCount() do
-						addCommsReply("Go to WP" .. n, function()
+						addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),n), function()
 							for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 								if fleetShip.fleetIndex == comms_target.fleetIndex then
 									if fleetShip ~= nil and fleetShip:isValid() then
@@ -8492,13 +8492,13 @@ function fleetCommunication(return_function)
 									end
 								end
 							end
-							setCommsMessage("Going to WP" .. n ..", ignoring enemies");
+							setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, ignoring enemies"), n));
 							addCommsReply(_("Back"), return_function)
 						end)
 					end
 				end
 			end)
-			addCommsReply("Go offensive, attack all enemy targets", function()
+			addCommsReply(_("shipAssist-comms", "Go offensive, attack all enemy targets"), function()
 				for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 					if fleetShip.fleetIndex == comms_target.fleetIndex then
 						if fleetShip ~= nil and fleetShip:isValid() then
@@ -8506,25 +8506,25 @@ function fleetCommunication(return_function)
 						end
 					end
 				end
-				setCommsMessage(string.format("Fleet %s is on an offensive rampage",comms_target.fleetIndex))
+				setCommsMessage(string.format(_("shipAssist-comms", "Fleet %s is on an offensive rampage"),comms_target.fleetIndex))
 				addCommsReply(_("Back"), return_function)
 			end)
-			addCommsReply("Stop and defend your current position", function()
+			addCommsReply(_("shipAssist-comms", "Stop and defend your current position"), function()
 				for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 					if fleetShip.fleetIndex == comms_target.fleetIndex then
 						fleetShip:orderStandGround()
 					end
 				end
-				setCommsMessage("Stopping and defending")
+				setCommsMessage(_("shipAssist-comms", "Stopping and defending"))
 				addCommsReply(_("Back"), return_function)
 			end)
-			addCommsReply("Stop and do nothing", function()
+			addCommsReply(_("shipAssist-comms", "Stop and do nothing"), function()
 				for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 					if fleetShip.fleetIndex == comms_target.fleetIndex then
 						fleetShip:orderIdle()
 					end
 				end
-				setCommsMessage("Stopping and doing nothing")
+				setCommsMessage(_("shipAssist-comms", "Stopping and doing nothing"))
 				addCommsReply(_("Back"), return_function)
 			end)
 		end)

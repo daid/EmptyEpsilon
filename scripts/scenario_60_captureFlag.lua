@@ -7841,9 +7841,9 @@ function friendlyComms(comms_data)
 				else
 					setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 					for n=1,comms_source:getWaypointCount() do
-						addCommsReply("Go to WP" .. n, function()
+						addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),n), function()
 							comms_target:orderFlyTowards(comms_source:getWaypoint(n))
-							setCommsMessage("Going to WP" .. n ..", watching for enemies en route");
+							setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, watching for enemies en route"), n));
 							addCommsReply(_("Back"), commsShip)
 						end)
 					end
@@ -7856,95 +7856,95 @@ function friendlyComms(comms_data)
 				else
 					setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 					for n=1,comms_source:getWaypointCount() do
-						addCommsReply("Go to WP" .. n, function()
+						addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),n), function()
 							comms_target:orderFlyTowardsBlind(comms_source:getWaypoint(n))
-							setCommsMessage("Going to WP" .. n ..", ignoring enemies");
+							setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, ignoring enemies"), n));
 							addCommsReply(_("Back"), commsShip)
 						end)
 					end
 				end
 			end)
-			addCommsReply("Stop and defend your current position", function()
+			addCommsReply(_("shipAssist-comms", "Stop and defend your current position"), function()
 				comms_target:orderStandGround()
-				setCommsMessage("Stopping and defending")
+				setCommsMessage(_("shipAssist-comms", "Stopping and defending"))
 				addCommsReply(_("Back"), commsShip)
 			end)
-			addCommsReply("Stop. Do nothing", function()
+			addCommsReply(_("shipAssist-comms", "Stop. Do nothing"), function()
 				comms_target:orderIdle()
 				local nothing_message_choice = math.random(1,15)
 				if nothing_message_choice == 1 then
-					setCommsMessage("Stopping. Doing nothing except routine system maintenance")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except routine system maintenance"))
 				elseif nothing_message_choice == 2 then
-					setCommsMessage("Stopping. Doing nothing except idle drone gossip")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except idle drone gossip"))
 				elseif nothing_message_choice == 3 then
-					setCommsMessage("Stopping. Doing nothing except exterior paint touch-up")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except exterior paint touch-up"))
 				elseif nothing_message_choice == 4 then
-					setCommsMessage("Stopping. Doing nothing except cyber exercise for continued fitness")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except cyber exercise for continued fitness"))
 				elseif nothing_message_choice == 5 then
-					setCommsMessage("Stopping. Doing nothing except algorithmic meditation therapy")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except algorithmic meditation therapy"))
 				elseif nothing_message_choice == 6 then
-					setCommsMessage("Stopping. Doing nothing except internal simulated flight routines")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except internal simulated flight routines"))
 				elseif nothing_message_choice == 7 then
-					setCommsMessage("Stopping. Doing nothing except digital dreamscape construction")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except digital dreamscape construction"))
 				elseif nothing_message_choice == 8 then
-					setCommsMessage("Stopping. Doing nothing except catching up on reading the latest drone drama novel")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except catching up on reading the latest drone drama novel"))
 				elseif nothing_message_choice == 9 then
-					setCommsMessage("Stopping. Doing nothing except writing up results of bifurcated drone personality research")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except writing up results of bifurcated drone personality research"))
 				elseif nothing_message_choice == 10 then
-					setCommsMessage("Stopping. Doing nothing except categorizing nearby miniscule space particles")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except categorizing nearby miniscule space particles"))
 				elseif nothing_message_choice == 11 then
-					setCommsMessage("Stopping. Doing nothing except continuing the count of visible stars from this region")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except continuing the count of visible stars from this region"))
 				elseif nothing_message_choice == 12 then
-					setCommsMessage("Stopping. Doing nothing except internal systems diagnostics")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except internal systems diagnostics"))
 				elseif nothing_message_choice == 13 then
-					setCommsMessage("Stopping. Doing nothing except composing amorous communications to my favorite drone")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except composing amorous communications to my favorite drone"))
 				elseif nothing_message_choice == 14 then
-					setCommsMessage("Stopping. Doing nothing except repairing experimental vocalization circuits")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing except repairing experimental vocalization circuits"))
 				else
-					setCommsMessage("Stopping. Doing nothing")
+					setCommsMessage(_("shipAssist-comms", "Stopping. Doing nothing"))
 				end
 				addCommsReply(_("Back"), commsShip)
 			end)
-			addCommsReply(string.format("Direct %s",squadName), function()
+			addCommsReply(string.format(_("shipAssist-comms", "Direct %s"),squadName), function()
 				local squadName = comms_target.squadName
-				setCommsMessage(string.format("What command should I give to %s?",squadName))
-				addCommsReply("Assist me", function()
+				setCommsMessage(string.format(_("shipAssist-comms", "What command should I give to %s?"),squadName))
+				addCommsReply(_("shipAssist-comms", "Assist me"), function()
 					local squadName = comms_target.squadName
 					for _, drone in pairs(comms_source.droneSquads[squadName]) do
 						if drone ~= nil and drone:isValid() then
 							drone:orderDefendTarget(comms_source)
 						end
 					end
-					setCommsMessage(string.format("%s heading toward you to assist",squadName))
+					setCommsMessage(string.format(_("shipAssist-comms", "%s heading toward you to assist"),squadName))
 					addCommsReply(_("Back"), commsShip)
 				end)
-				addCommsReply("Defend a waypoint", function()
+				addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 					local squadName = comms_target.squadName
 					if comms_source:getWaypointCount() == 0 then
-						setCommsMessage("No waypoints set. Please set a waypoint first.");
+						setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 						addCommsReply(_("Back"), commsShip)
 					else
-						setCommsMessage("Which waypoint should we defend?");
+						setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 						for n=1,comms_source:getWaypointCount() do
-							addCommsReply("Defend WP" .. n, function()
+							addCommsReply(string.format(_("shipAssist-comms", "Defend WP%d"),n), function()
 								for _, drone in pairs(comms_source.droneSquads[squadName]) do
 									if drone ~= nil and drone:isValid() then
 										drone:orderDefendLocation(comms_source:getWaypoint(n))
 									end
 								end
-								setCommsMessage("We are heading to assist at WP" .. n ..".");
+								setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP%d."),n));
 								addCommsReply(_("Back"), commsShip)
 							end)
 						end
 					end
 				end)
-				addCommsReply("Go to waypoint. Attack enemies en route", function()
+				addCommsReply(_("shipAssist-comms", "Go to waypoint. Attack enemies en route"), function()
 					local squadName = comms_target.squadName
 					if comms_source:getWaypointCount() == 0 then
-						setCommsMessage("No waypoints set. Please set a waypoint first.");
+						setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 						addCommsReply(_("Back"), commsShip)
 					else
-						setCommsMessage("Which waypoint?");
+						setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 						for n=1,comms_source:getWaypointCount() do
 							addCommsReply("Go to WP" .. n, function()
 								for _, drone in pairs(comms_source.droneSquads[squadName]) do
@@ -7952,63 +7952,63 @@ function friendlyComms(comms_data)
 										drone:orderFlyTowards(comms_source:getWaypoint(n))
 									end
 								end
-								setCommsMessage("Going to WP" .. n ..", watching for enemies en route");
+								setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, watching for enemies en route"), n));
 								addCommsReply(_("Back"), commsShip)
 							end)
 						end
 					end
 				end)
-				addCommsReply("Go to waypoint. Ignore enemies", function()
+				addCommsReply(_("shipAssist-comms", "Go to waypoint. Ignore enemies"), function()
 					local squadName = comms_target.squadName
 					if comms_source:getWaypointCount() == 0 then
-						setCommsMessage("No waypoints set. Please set a waypoint first.");
+						setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 						addCommsReply(_("Back"), commsShip)
 					else
-						setCommsMessage("Which waypoint?");
+						setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 						for n=1,comms_source:getWaypointCount() do
-							addCommsReply("Go to WP" .. n, function()
+							addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),n), function()
 								for _, drone in pairs(comms_source.droneSquads[squadName]) do
 									if drone ~= nil and drone:isValid() then
 										drone:orderFlyTowardsBlind(comms_source:getWaypoint(n))
 									end
 								end
-								setCommsMessage("Going to WP" .. n ..", ignore enemies");
+								setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, ignoring enemies"), n));
 								addCommsReply(_("Back"), commsShip)
 							end)
 						end
 					end
 				end)
-				addCommsReply("Go and swarm enemies", function()
+				addCommsReply(_("shipAssist-comms", "Go and swarm enemies"), function()
 					local squadName = comms_target.squadName
 					for _, drone in pairs(comms_source.droneSquads[squadName]) do
 						if drone ~= nil and drone:isValid() then
 							drone:orderRoaming()
 						end
 					end
-					setCommsMessage(string.format("%s roaming and attacking",squadName))
+					setCommsMessage(string.format(_("shipAssist-comms", "%s roaming and attacking"),squadName))
 					addCommsReply(_("Back"), commsShip)
 				end)
-				addCommsReply("Stop and defend your current positions", function()
+				addCommsReply(_("shipAssist-comms", "Stop and defend your current positions"), function()
 					local squadName = comms_target.squadName
 					for _, drone in pairs(comms_source.droneSquads[squadName]) do
 						if drone ~= nil and drone:isValid() then
 							drone:orderStandGround()
 						end
 					end
-					setCommsMessage(string.format("%s standing ground",squadName))
+					setCommsMessage(string.format(_("shipAssist-comms", "%s standing ground"),squadName))
 					addCommsReply(_("Back"), commsShip)
 				end)
-				addCommsReply("Stop. Do Nothing", function()
+				addCommsReply(_("shipAssist-comms", "Stop. Do Nothing"), function()
 					local squadName = comms_target.squadName
 					for _, drone in pairs(comms_source.droneSquads[squadName]) do
 						if drone ~= nil and drone:isValid() then
 							drone:orderIdle()
 						end
 					end
-					setCommsMessage(string.format("%s standing down",squadName))
+					setCommsMessage(string.format(_("shipAssist-comms", "%s standing down"),squadName))
 					addCommsReply(_("Back"), commsShip)
 				end)
-				addCommsReply("Other drones in squad form up on me", function()
+				addCommsReply(_("shipAssist-comms", "Other drones in squad form up on me"), function()
 					local squadName = comms_target.squadName
 					local formCount = 0
 					local leadName = comms_target:getCallSign()
@@ -8026,7 +8026,7 @@ function friendlyComms(comms_data)
 							formIndex = formIndex + 1
 						end
 					end
-					setCommsMessage(string.format("%s is forming up on me",squadName))
+					setCommsMessage(string.format(_("shipAssist-comms", "%s is forming up on me"),squadName))
 					addCommsReply(_("Back"), commsShip)
 				end)
 			end)

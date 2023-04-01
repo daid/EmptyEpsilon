@@ -6520,9 +6520,9 @@ function friendlyComms(comms_data)
 		end
 	end
 	if comms_target.fleet ~= nil then
-		addCommsReply(string.format("Direct %s",comms_target.fleet), function()
-			setCommsMessage(string.format("What command should be given to %s?",comms_target.fleet))
-			addCommsReply("Report hull and shield status", function()
+		addCommsReply(string.format(_("shipAssist-comms", "Direct %s"),comms_target.fleet), function()
+			setCommsMessage(string.format(_("shipAssist-comms", "What command should be given to %s?"),comms_target.fleet))
+			addCommsReply(_("shipAssist-comms", "Report hull and shield status"), function()
 				msg = "Fleet status:"
 				for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 					if fleetShip ~= nil and fleetShip:isValid() then
@@ -6613,7 +6613,7 @@ function friendlyComms(comms_data)
 							if shipCommsDiagnostic then print("in freighter goods loop") end
 							if goodData.quantity > 0 and good ~= "luxury" then
 								if shipCommsDiagnostic then print("has something other than luxury") end
-								addCommsReply(string.format("Trade luxury for %s",good), function()
+								addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
 									goodData.quantity = goodData.quantity - 1
 									if comms_source.goods == nil then
 										comms_source.goods = {}
@@ -6623,7 +6623,7 @@ function friendlyComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_source.goods.luxury = comms_source.goods.luxury - 1
-									setCommsMessage(string.format("Traded your luxury for %s from %s",good,comms_target:getCallSign()))
+									setCommsMessage(string.format(_("trade-comms", "Traded your luxury for %s from %s"),good,comms_target:getCallSign()))
 									addCommsReply(_("Back"), commsShip)
 								end)
 							end
@@ -6636,7 +6636,7 @@ function friendlyComms(comms_data)
 						if shipCommsDiagnostic then print("in freighter goods loop") end
 						if goodData.quantity > 0 then
 							if shipCommsDiagnostic then print("found something to sell") end
-							addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost)), function()
+							addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost)), function()
 								if comms_source:takeReputationPoints(goodData.cost) then
 									goodData.quantity = goodData.quantity - 1
 									if comms_source.goods == nil then
@@ -6647,7 +6647,7 @@ function friendlyComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_source.cargo = comms_source.cargo - 1
-									setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+									setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
 									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
@@ -6666,7 +6666,7 @@ function friendlyComms(comms_data)
 							if shipCommsDiagnostic then print("in freighter cargo loop") end
 							if goodData.quantity > 0 then
 								if shipCommsDiagnostic then print("Found something to sell") end
-								addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost)), function()
 									if comms_source:takeReputationPoints(goodData.cost) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -6677,7 +6677,7 @@ function friendlyComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
 										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
@@ -6691,7 +6691,7 @@ function friendlyComms(comms_data)
 							if shipCommsDiagnostic then print("in freighter cargo loop") end
 							if goodData.quantity > 0 then
 								if shipCommsDiagnostic then print("found something to sell") end
-								addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*2)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
 									if comms_source:takeReputationPoints(goodData.cost*2) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -6702,7 +6702,7 @@ function friendlyComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
 										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
@@ -6722,7 +6722,7 @@ function friendlyComms(comms_data)
 							if shipCommsDiagnostic then print("in freighter cargo loop") end
 							if goodData.quantity > 0 then
 								if shipCommsDiagnostic then print("found something to sell") end
-								addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*2)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
 									if comms_source:takeReputationPoints(goodData.cost*2) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -6733,7 +6733,7 @@ function friendlyComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
 										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
@@ -6745,7 +6745,7 @@ function friendlyComms(comms_data)
 				end	--player has room to get goods
 			end	--various friendliness choices
 		else	--not close enough to sell
-			addCommsReply("Do you have cargo you might sell?", function()
+			addCommsReply(_("trade-comms", "Do you have cargo you might sell?"), function()
 				local goodCount = 0
 				local cargoMsg = "We've got "
 				for good, goodData in pairs(comms_data.goods) do
@@ -6893,7 +6893,7 @@ function neutralComms(comms_data)
 					if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*2)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
 									if comms_source:takeReputationPoints(goodData.cost*2) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -6904,7 +6904,7 @@ function neutralComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
 										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
@@ -6915,7 +6915,7 @@ function neutralComms(comms_data)
 					else
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*3)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*3)), function()
 									if comms_source:takeReputationPoints(goodData.cost*3) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -6926,7 +6926,7 @@ function neutralComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
 										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
@@ -6939,7 +6939,7 @@ function neutralComms(comms_data)
 					if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*3)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*3)), function()
 									if comms_source:takeReputationPoints(goodData.cost*3) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -6950,7 +6950,7 @@ function neutralComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
 										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
