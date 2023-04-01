@@ -1816,12 +1816,12 @@ function handleDockedState()
 					if comms_source.cargo < 1 then
 						oMsg = oMsg .. _("trade-comms", "\nInsufficient cargo space for purchase")
 					elseif goodsRep > playerRep then
-						oMsg = oMsg .. "\nInsufficient reputation for purchase"
+						oMsg = oMsg .. _("needRep-comms", "\nInsufficient reputation for purchase")
 					elseif goodsQuantity < 1 then
 						oMsg = oMsg .. _("trade-comms", "\nInsufficient station inventory")
 					else
 						if not comms_source:takeReputationPoints(goodsRep) then
-							oMsg = oMsg .. "\nInsufficient reputation for purchase"
+							oMsg = oMsg .. _("needRep-comms", "\nInsufficient reputation for purchase")
 						else
 							comms_source.cargo = comms_source.cargo - 1
 							decrementStationGoods(goodsType)
@@ -2230,7 +2230,7 @@ function handleWeaponRestock(weapon)
         addCommsReply(_("Back"), commsStation)
     else
         if not comms_source:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage("Not enough reputation.")
+            setCommsMessage(_("needRep-comms", "Not enough reputation."))
             return
         end
         comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
@@ -2354,7 +2354,7 @@ function handleUndockedState()
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
                             setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -2375,7 +2375,7 @@ function handleUndockedState()
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
                             setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"),ship:getCallSign(),n))
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -2577,7 +2577,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("trade-comms", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
@@ -2597,7 +2597,7 @@ function neutralComms(comms_data)
 			destRep = random(1,5)
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
-					setCommsMessage("Insufficient reputation")
+					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
@@ -2618,7 +2618,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("trade-comms", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
@@ -2644,7 +2644,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("trade-comms", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
@@ -2675,7 +2675,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("trade-comms", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
