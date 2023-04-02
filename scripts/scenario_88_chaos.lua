@@ -6195,7 +6195,7 @@ function commsStation()
         return false
     end
 --	if comms_target:areEnemiesInRange(5000) then
---	    setCommsMessage("We are under attack! No time for chatting!");
+--	    setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"));
 --		return true
 --	end
     if not comms_source:isDocked(comms_target) then
@@ -6295,12 +6295,12 @@ function commsDefensePlatform()
 end
 function handleDockedState()
     if comms_source:isFriendly(comms_target) then
-		oMsg = "Good day, officer!\nWhat can we do for you today?"
+		oMsg = _("station-comms", "Good day, officer!\nWhat can we do for you today?")
     else
-		oMsg = "Welcome to our lovely station."
+		oMsg = _("station-comms", "Welcome to our lovely station.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "\nForgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
+		oMsg = oMsg .. _("station-comms", "\nForgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
 	end
 	setCommsMessage(oMsg)
 	restockOrdnance(commsStation)

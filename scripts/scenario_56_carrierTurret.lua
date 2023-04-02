@@ -2859,7 +2859,7 @@ function commsStation()
         return false
     end
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage("We are under attack! No time for chatting!");
+        setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"));
         return true
     end
     if not player:isDocked(comms_target) then
@@ -2872,12 +2872,12 @@ end
 
 function handleDockedState()
     if player:isFriendly(comms_target) then
-		oMsg = "Good day, officer!\nWhat can we do for you today?\n"
+		oMsg = _("station-comms", "Good day, officer!\nWhat can we do for you today?\n")
     else
-		oMsg = "Welcome to our lovely station.\n"
+		oMsg = _("station-comms", "Welcome to our lovely station.\n")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
+		oMsg = oMsg .. _("station-comms", "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
 	end
 	setCommsMessage(oMsg)
 	missilePresence = 0
@@ -2904,7 +2904,7 @@ function handleDockedState()
 				ordMsg = ordMsg .. string.format("\n   %i Minutes remain in game",math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		if random(1,5) <= (3 - difficulty) then
 			if player:getRepairCrewCount() < player.maxRepairCrew then
@@ -2982,9 +2982,9 @@ function handleDockedState()
 							plot2reminder = "Get spin upgrade from friendly station for impulse"
 						end)
 					end
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end
@@ -3036,7 +3036,7 @@ function handleDockedState()
 					setCommsMessage("[Boris Eggleston]\nHello, what can I do for you?")
 					addCommsReply("Can you really add another weapons tube to our ship?", function()
 						setCommsMessage(string.format("Definitely. But I'll need %s before I can do it",tubePart))
-						addCommsReply("Back",commsStation)
+						addCommsReply(_("Back"),commsStation)
 					end)
 				end)
 			end
@@ -3087,7 +3087,7 @@ function handleDockedState()
 					setCommsMessage(string.format("[Frederico Booker]\nGreetings, %s. What brings you to %s to talk to me?",player:getCallSign(),beamDamageStation:getCallSign()))
 					addCommsReply("Can you upgrade our beam weapons systems?", function()
 						setCommsMessage(string.format("[Frederico Booker]\nOh, you've heard about my research and the practical results? I can certainly upgrade the damage dealt by your beam weapons systems, but you'll need to provide me with %s and %s before I can complete the job",beamPart1,beamPart2))
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end)
 			end
@@ -3101,20 +3101,20 @@ function handleDockedState()
 					setCommsMessage(string.format("That's old news. Wouldn't you rather know about %s's leadership woes or the latest readings on unique stellar phenomenae in the area?",friendlyClueStation:getCallSign()))
 					addCommsReply("No, I just want to know about the enemy base", function()
 						setCommsMessage(string.format("Well, that's easy. The name of the base is %s. Enjoy your stay on %s!",targetEnemyStation:getCallSign(),friendlyClueStation:getCallSign()))
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 					addCommsReply(string.format("What is %s struggling with?",friendlyClueStation:getCallSign()), function()
 						setCommsMessage(string.format("There are so many requests for transfers, %s may be understaffed by next week",friendlyClueStation:getCallSign()))
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 					addCommsReply("What kind of unique stellar phenomenae?", function()
 						setCommsMessage(string.format("While we were in %s spying on %s, we picked up readings in a nebula hinting at the formation of a new star",targetEnemyStation:getSectorName(),targetEnemyStation:getCallSign()))
 						primaryOrders = string.format("Destroy enemy station %s in %s",targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName())
 						betweenPlot2fleet()
 					end)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end
@@ -3138,7 +3138,7 @@ function handleDockedState()
 					player:setRotationMaxSpeed(player:getRotationMaxSpeed()*1.5)
 					setCommsMessage("Maneuverability upgraded by 50%")
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end
@@ -3147,12 +3147,12 @@ function handleDockedState()
 			setCommsMessage("What would you like to know?")
 			addCommsReply("General information", function()
 				setCommsMessage(comms_target.generalInformation)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 			if comms_target.stationHistory ~= nil then
 				addCommsReply("Station history", function()
 					setCommsMessage(comms_target.stationHistory)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if player:isFriendly(comms_target) then
@@ -3160,7 +3160,7 @@ function handleDockedState()
 					if random(1,100) < 50 then
 						addCommsReply("Gossip", function()
 							setCommsMessage(comms_target.gossip)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
@@ -3221,7 +3221,7 @@ function handleDockedState()
 						end
 					end
 					setCommsMessage(oMsg)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 				gi = gi + 1
 			until(gi > #goods[comms_target])
@@ -3251,7 +3251,7 @@ function handleDockedState()
 								oMsg = oMsg .. _("trade-comms", "\nTraded")
 							end
 							setCommsMessage(oMsg)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -3283,7 +3283,7 @@ function handleDockedState()
 								oMsg = oMsg .. _("trade-comms", "\nTraded")
 							end
 							setCommsMessage(oMsg)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -3315,13 +3315,13 @@ function handleDockedState()
 								oMsg = oMsg .. _("trade-comms", "\nTraded")
 							end
 							setCommsMessage(oMsg)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
 				end
 			end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		gi = 1
 		cargoHoldEmpty = true
@@ -3345,12 +3345,12 @@ function handleDockedState()
 							decrementPlayerGoods(goodsType)
 							player.cargo = player.cargo + 1
 							setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),goodsType))
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 					gi = gi + 1
 				until(gi > #goods[player])
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
@@ -3375,7 +3375,7 @@ function handleDockedState()
 									p.cargo = p.cargo - 1
 									setCommsMessage(string.format("One %s transferred to %s",goodsType,p:getCallSign()))
 									p:addToShipLog(string.format("One %s transferred from %s",goodsType,player:getCallSign()),"#228b22")
-									addCommsReply("Back", commsStation)
+									addCommsReply(_("Back"), commsStation)
 								end)
 							end
 							gi = gi + 1
@@ -3442,7 +3442,7 @@ function handleWeaponRestock(weapon)
         else
             setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
         end
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     else
         if not player:takeReputationPoints(points_per_item * item_amount) then
             setCommsMessage(_("needRep-comms", "Not enough reputation."))
@@ -3454,7 +3454,7 @@ function handleWeaponRestock(weapon)
         else
             setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
         end
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     end
 end
 
@@ -3495,7 +3495,7 @@ function handleUndockedState()
 					gi = gi + 1
 				until(gi > #goods[comms_target])
 				setCommsMessage(oMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 		addCommsReply("See any enemies in your area?", function()
@@ -3517,11 +3517,11 @@ function handleUndockedState()
 					setCommsMessage("No enemies within 30U")
 					player:addReputationPoints(1.0)
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			else
 				setCommsMessage("Not really")
 				player:addReputationPoints(1.0)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end
 		end)
 		addCommsReply("Where can I find particular goods?", function()
@@ -3529,7 +3529,7 @@ function handleUndockedState()
 			if comms_target.goodsKnowledge == nil then
 				gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations.\n\nCheck back later, someone else may have better knowledge"
 				setCommsMessage(gkMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 				fillStationBrains()
 			else
 				if #comms_target.goodsKnowledge == 0 then
@@ -3539,18 +3539,18 @@ function handleUndockedState()
 					for gk=1,#comms_target.goodsKnowledge do
 						addCommsReply(comms_target.goodsKnowledgeType[gk],function()
 							setCommsMessage(string.format("Station %s in sector %s has %s%s",comms_target.goodsKnowledge[gk],comms_target.goodsKnowledgeSector[gk],comms_target.goodsKnowledgeType[gk],comms_target.goodsKnowledgeTrade[gk]))
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
 				setCommsMessage(gkMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end
 		end)
 		if comms_target.publicRelations then
 			addCommsReply("General station information", function()
 				setCommsMessage(comms_target.generalInformation)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end)
@@ -3562,7 +3562,7 @@ function handleUndockedState()
 				ordMsg = ordMsg .. string.format("\n   %i Minutes remain in game",math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		if spinUpgradeAvailable and player:isFriendly(comms_target) and distance(player,comms_target) < 1000 then
 			gi = 1
@@ -3584,7 +3584,7 @@ function handleUndockedState()
 						player:setRotationMaxSpeed(player:getRotationMaxSpeed()*1.5)
 						setCommsMessage("Maneuverability upgraded by 50%")
 					end
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 		end
@@ -3656,7 +3656,7 @@ function handleUndockedState()
 					setCommsMessage("[Boris Eggleston]\nHello, what can I do for you?")
 					addCommsReply("Can you really add another weapons tube to our ship?", function()
 						setCommsMessage(string.format("Definitely. But I'll need %s before I can do it",tubePart))
-						addCommsReply("Back",commsStation)
+						addCommsReply(_("Back"),commsStation)
 					end)
 				end)
 			end
@@ -3707,7 +3707,7 @@ function handleUndockedState()
 					setCommsMessage(string.format("[Frederico Booker]\nGreetings, %s. What brings you to %s to talk to me?",player:getCallSign(),beamDamageStation:getCallSign()))
 					addCommsReply("Can you upgrade our beam weapons systems?", function()
 						setCommsMessage(string.format("[Frederico Booker]\nOh, you've heard about my research and the practical results? I can certainly upgrade the damage dealt by your beam weapons systems, but you'll need to provide me with %s and %s before I can complete the job",beamPart1,beamPart2))
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end)
 			end
@@ -3758,7 +3758,7 @@ function handleUndockedState()
 			end
 			oMsg = oMsg .. "\nwfv: " .. wfv
 			setCommsMessage(oMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
@@ -3780,11 +3780,11 @@ function handleUndockedState()
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
@@ -3801,11 +3801,11 @@ function handleUndockedState()
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
 	gi = 1
@@ -3830,12 +3830,12 @@ function handleUndockedState()
 						decrementPlayerGoods(goodsType)
 						player.cargo = player.cargo + 1
 						setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),goodsType))
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				gi = gi + 1
 			until(gi > #goods[player])
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
@@ -3860,7 +3860,7 @@ function handleUndockedState()
 								p.cargo = p.cargo - 1
 								setCommsMessage(string.format("One %s transferred to %s",goodsType,p:getCallSign()))
 								p:addToShipLog(string.format("One %s transferred from %s",goodsType,player:getCallSign()),"#228b22")
-								addCommsReply("Back", commsStation)
+								addCommsReply(_("Back"), commsStation)
 							end)
 						end
 						gi = gi + 1
@@ -3977,14 +3977,14 @@ function friendlyComms(comms_data)
 		addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 			if player:getWaypointCount() == 0 then
 				setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			else
 				setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 				for n=1,player:getWaypointCount() do
 					addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
 						comms_target:orderDefendLocation(player:getWaypoint(n))
 						setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					end)
 				end
 			end
@@ -3993,7 +3993,7 @@ function friendlyComms(comms_data)
 			addCommsReply(_("shipAssist-comms", "Assist me"), function()
 				setCommsMessage(_("shipAssist-comms", "Heading toward you to assist."));
 				comms_target:orderDefendTarget(player)
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 		end
 		addCommsReply(_("shipAssist-comms", "Report status"), function()
@@ -4018,14 +4018,14 @@ function friendlyComms(comms_data)
 			end
 			
 			setCommsMessage(msg);
-			addCommsReply("Back", commsShip)
+			addCommsReply(_("Back"), commsShip)
 		end)
 		for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 			if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 				addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 					setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 					comms_target:orderDock(obj)
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				end)
 			end
 		end
@@ -4037,16 +4037,16 @@ function friendlyComms(comms_data)
 			hasWeapons = true
 		end
 		if hasWeapons then
-			addCommsReply("Attack nearby enemy target", function()
+			addCommsReply(_("shipAssist-comms", "Attack nearby enemy target"), function()
 				localTargetCount = 0
 				enemyTargetList = {}
 				etlCount = 0
 				for _, obj in ipairs(comms_target:getObjectsInRange(15000)) do
 					if comms_target:isEnemy(obj) then
 						addCommsReply(obj:getCallSign(), function()
-							setCommsMessage("Attacking " .. obj:getCallSign())
+							setCommsMessage(_("shipAssist-comms", "Attacking ") .. obj:getCallSign())
 							comms_target:orderAttack(obj)
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 						localTargetCount = localTargetCount + 1
 						if localTargetCount > 9 then
@@ -4055,11 +4055,11 @@ function friendlyComms(comms_data)
 					end
 				end
 				if localTargetCount == 0 then
-					setCommsMessage("No enemy targets nearby")
+					setCommsMessage(_("shipAssist-comms", "No enemy targets nearby"))
 				else
-					setCommsMessage("Which enemy target?")
+					setCommsMessage(_("shipAssist-comms", "Which enemy target?"))
 				end
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 		end
 	end
@@ -4111,7 +4111,7 @@ function freighterComms(comms_data)
 		-- Offer destination information
 		addCommsReply(_("trade-comms", "Where are you headed?"), function()
 			setCommsMessage(comms_target.target:getCallSign())
-			addCommsReply("Back", commsShip)
+			addCommsReply(_("Back"), commsShip)
 		end)
 		-- Offer to trade goods if goods or equipment freighter
 		if distance(player,comms_target) < 5000 then
@@ -4138,14 +4138,14 @@ function freighterComms(comms_data)
 								decrementPlayerGoods("luxury")
 								setCommsMessage(_("trade-comms", "Traded"))
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
 				else
 					setCommsMessage(_("trade-comms", "Insufficient luxury to trade"))
 				end
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			else
 				-- Offer to sell goods
 				gi = 1
@@ -4168,7 +4168,7 @@ function freighterComms(comms_data)
 								setCommsMessage(_("trade-comms", "Purchased"))
 							end
 						end
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					end)
 					gi = gi + 1
 				until(gi > #goods[comms_target])
@@ -4192,7 +4192,7 @@ function freighterComms(comms_data)
 							gi = gi + 1
 						until(gi > #goods[comms_target])
 						setCommsMessage(gMsg)
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					end)
 				end
 			end
@@ -4207,7 +4207,7 @@ function freighterComms(comms_data)
 			else
 				setCommsMessage(comms_target.target:getCallSign())
 			end
-			addCommsReply("Back", commsShip)
+			addCommsReply(_("Back"), commsShip)
 		end)
 		-- Offer to sell goods if goods or equipment freighter
 		if distance(player,comms_target) < 5000 then
@@ -4232,7 +4232,7 @@ function freighterComms(comms_data)
 								setCommsMessage(_("trade-comms", "Purchased"))
 							end
 						end
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					end)
 					gi = gi + 1
 				until(gi > #goods[comms_target])
@@ -4258,7 +4258,7 @@ function freighterComms(comms_data)
 								setCommsMessage(_("trade-comms", "Purchased"))
 							end
 						end
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					end)
 					gi = gi + 1
 				until(gi > #goods[comms_target])
@@ -4282,7 +4282,7 @@ function freighterComms(comms_data)
 							gi = gi + 1
 						until(gi > #goods[comms_target])
 						setCommsMessage(gMsg)
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					end)
 				end
 			end
@@ -4312,7 +4312,7 @@ function freighterComms(comms_data)
 								setCommsMessage(_("trade-comms", "Purchased"))
 							end
 						end
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					end)
 					gi = gi + 1
 				until(gi > #goods[comms_target])
@@ -4336,7 +4336,7 @@ function freighterComms(comms_data)
 							gi = gi + 1
 						until(gi > #goods[comms_target])
 						setCommsMessage(gMsg)
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					end)
 				end
 			end

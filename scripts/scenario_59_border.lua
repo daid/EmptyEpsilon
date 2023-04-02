@@ -10122,7 +10122,7 @@ function commsStation()
         return false
     end
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage("We are under attack! No time for chatting!");
+        setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"));
         return true
     end
     if not comms_source:isDocked(comms_target) then
@@ -10136,17 +10136,17 @@ function handleDockedState()
 	local ctd = comms_target.comms_data
     if comms_source:isFriendly(comms_target) then
     	if ctd.friendlyness > 66 then
-    		oMsg = string.format("Greetings %s!\nHow may we help you today?",comms_source:getCallSign())
+    		oMsg = string.format(_("station-comms", "Greetings %s!\nHow may we help you today?"),comms_source:getCallSign())
     	elseif ctd.friendlyness > 33 then
-			oMsg = "Good day, officer!\nWhat can we do for you today?"
+			oMsg = _("station-comms", "Good day, officer!\nWhat can we do for you today?")
 		else
-			oMsg = "Hello, may I help you?"
+			oMsg = _("station-comms", "Hello, may I help you?")
 		end
     else
-		oMsg = "Welcome to our lovely station."
+		oMsg = _("station-comms", "Welcome to our lovely station.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "\nForgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
+		oMsg = oMsg .. _("station-comms", "\nForgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
 	end
 	oMsg = string.format("%s\n\nReputation: %i",oMsg,math.floor(comms_source:getReputationPoints()))
 	setCommsMessage(oMsg)
@@ -12678,13 +12678,13 @@ function friendlyComms(comms_data)
 				end
 			end)
 			if not treaty and limitedWarTimer <= 0 then
-				addCommsReply("Go offensive, attack all enemy targets", function()
+				addCommsReply(_("shipAssist-comms", "Go offensive, attack all enemy targets"), function()
 					for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 						if fleetShip ~= nil and fleetShip:isValid() then
 							fleetShip:orderRoaming()
 						end
 					end
-					setCommsMessage(string.format("%s is on an offensive rampage",comms_target.fleet))
+					setCommsMessage(string.format(_("shipAssist-comms", "%s is on an offensive rampage"),comms_target.fleet))
 					addCommsReply(_("Back"), commsShip)
 				end)
 			end

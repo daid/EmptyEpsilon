@@ -5320,7 +5320,7 @@ function commsStation()
         return false
     end
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage("We are under attack! No time for chatting!");
+        setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"));
         return true
     end
     if not comms_source:isDocked(comms_target) then
@@ -5336,17 +5336,17 @@ function handleDockedState()
 	if stationCommsDiagnostic then print(string.format("handleDockedState derived name: %s",playerCallSign)) end
     if comms_source:isFriendly(comms_target) then
     	if ctd.friendlyness > 66 then
-    		oMsg = string.format("Greetings %s!\nHow may we help you today?",comms_source:getCallSign())
+    		oMsg = string.format_("station-comms", ("Greetings %s!\nHow may we help you today?"),comms_source:getCallSign())
     	elseif ctd.friendlyness > 33 then
-			oMsg = "Good day, officer!\nWhat can we do for you today?"
+			oMsg = _("station-comms", "Good day, officer!\nWhat can we do for you today?")
 		else
-			oMsg = "Hello, may I help you?"
+			oMsg = _("station-comms", "Hello, may I help you?")
 		end
     else
-		oMsg = "Welcome to our lovely station."
+		oMsg = _("station-comms", "Welcome to our lovely station.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
+		oMsg = oMsg .. _("station-comms", "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
 	end
 	setCommsMessage(oMsg)
 	local missilePresence = 0

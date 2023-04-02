@@ -6569,9 +6569,9 @@ function commsStation()
 end
 function handleDockedState()
     if comms_source:isFriendly(comms_target) then
-		oMsg = "Good day, officer!\nWhat can we do for you today?\n"
+		oMsg = _("station-comms", "Good day, officer!\nWhat can we do for you today?\n")
     else
-		oMsg = "Welcome to our lovely station.\n"
+		oMsg = _("station-comms", "Welcome to our lovely station.\n")
     end
 	setCommsMessage(oMsg)
 	missilePresence = 0
