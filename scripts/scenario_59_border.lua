@@ -10571,16 +10571,16 @@ function handleDockedState()
 	if (comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "") or
 		(comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "") or
 		(comms_source:isFriendly(comms_target) and comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" and has_gossip) then
-		addCommsReply("Tell me more about your station", function()
-			setCommsMessage("What would you like to know?")
+		addCommsReply(_("station-comms", "Tell me more about your station"), function()
+			setCommsMessage(_("station-comms", "What would you like to know?"))
 			if comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "" then
-				addCommsReply("General information", function()
+				addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 					setCommsMessage(ctd.general)
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if ctd.history ~= nil and ctd.history ~= "" then
-				addCommsReply("Station history", function()
+				addCommsReply(_("stationStory-comms", "Station history"), function()
 					setCommsMessage(ctd.history)
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -10588,7 +10588,7 @@ function handleDockedState()
 			if comms_source:isFriendly(comms_target) then
 				if ctd.gossip ~= nil and ctd.gossip ~= "" then
 					if random(1,100) < (100 - (30 * (difficulty - .5))) then
-						addCommsReply("Gossip", function()
+						addCommsReply(_("gossip-comms", "Gossip"), function()
 							setCommsMessage(ctd.gossip)
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -10599,28 +10599,28 @@ function handleDockedState()
 		end)	--end station info comms reply branch
 	end
 	if enemyEverDetected then
-		addCommsReply("Why the yellow neutral border zones?", function()
-			setCommsMessage("Each neutral border zone is equipped with sensors and an auto-transmitter. If the sensors detect enemy forces in the zone, the auto-transmitter sends encoded zone identifying details through subspace. Human navy ships are equipped to recognize this data and color code the appropriate zone on the science and relay consoles.")
+		addCommsReply(_("station-comms", "Why the yellow neutral border zones?"), function()
+			setCommsMessage(_("station-comms", "Each neutral border zone is equipped with sensors and an auto-transmitter. If the sensors detect enemy forces in the zone, the auto-transmitter sends encoded zone identifying details through subspace. Human navy ships are equipped to recognize this data and color code the appropriate zone on the science and relay consoles."))
 			addCommsReply(_("Back"),commsStation)
 		end)
 	end
 	if ctd.character ~= nil then
-		addCommsReply(string.format("Tell me about %s",ctd.character), function()
+		addCommsReply(string.format(_("characterInfo-comms", "Tell me about %s"),ctd.character), function()
 			if ctd.characterDescription ~= nil then
 				setCommsMessage(ctd.characterDescription)
 			else
 				if ctd.characterDeadEnd == nil then
 					local deadEndChoice = math.random(1,5)
 					if deadEndChoice == 1 then
-						ctd.characterDeadEnd = "Never heard of " .. ctd.character
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "Never heard of %s"), ctd.character)
 					elseif deadEndChoice == 2 then
-						ctd.characterDeadEnd = ctd.character .. " died last week. The funeral was yesterday"
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s died last week. The funeral was yesterday"), ctd.character)
 					elseif deadEndChoice == 3 then
-						ctd.characterDeadEnd = string.format("%s? Who's %s? There's nobody here named %s",ctd.character,ctd.character,ctd.character)
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s? Who's %s? There's nobody here named %s"),ctd.character,ctd.character,ctd.character)
 					elseif deadEndChoice == 4 then
-						ctd.characterDeadEnd = string.format("We don't talk about %s. They are gone and good riddance",ctd.character)
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "We don't talk about %s. They are gone and good riddance"),ctd.character)
 					else
-						ctd.characterDeadEnd = string.format("I think %s moved away",ctd.character)
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "I think %s moved away"),ctd.character)
 					end
 				end
 				setCommsMessage(ctd.characterDeadEnd)
@@ -11809,16 +11809,16 @@ function handleUndockedState()
 		if (comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "") or
 			(comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "") or
 			(comms_source:isFriendly(comms_target) and comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" and has_gossip) then
-			addCommsReply("Tell me more about your station", function()
-				setCommsMessage("What would you like to know?")
+			addCommsReply(_("station-comms", "Tell me more about your station"), function()
+				setCommsMessage(_("station-comms", "What would you like to know?"))
 				if comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "" then
-					addCommsReply("General information", function()
+					addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 						setCommsMessage(ctd.general)
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if ctd.history ~= nil and ctd.history ~= "" then
-					addCommsReply("Station history", function()
+					addCommsReply(_("stationStory-comms", "Station history"), function()
 						setCommsMessage(ctd.history)
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -11826,7 +11826,7 @@ function handleUndockedState()
 				if comms_source:isFriendly(comms_target) then
 					if ctd.gossip ~= nil and ctd.gossip ~= "" then
 						if random(1,100) < 50 then
-							addCommsReply("Gossip", function()
+							addCommsReply(_("gossip-comms", "Gossip"), function()
 								setCommsMessage(ctd.gossip)
 								addCommsReply(_("Back"), commsStation)
 							end)
@@ -11837,22 +11837,22 @@ function handleUndockedState()
 		end	--end public relations if branch
 		if ctd.character ~= nil then
 			if random(1,100) < (70 - (20 * difficulty)) then
-				addCommsReply(string.format("Tell me about %s",ctd.character), function()
+				addCommsReply(string.format(_("characterInfo-comms", "Tell me about %s"),ctd.character), function()
 					if ctd.characterDescription ~= nil then
 						setCommsMessage(ctd.characterDescription)
 					else
 						if ctd.characterDeadEnd == nil then
 							local deadEndChoice = math.random(1,5)
 							if deadEndChoice == 1 then
-								ctd.characterDeadEnd = "Never heard of " .. ctd.character
+								ctd.characterDeadEnd = string.format(_("characterInfo-comms", "Never heard of %s"), ctd.character)
 							elseif deadEndChoice == 2 then
-								ctd.characterDeadEnd = ctd.character .. " died last week. The funeral was yesterday"
+								ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s died last week. The funeral was yesterday"), ctd.character)
 							elseif deadEndChoice == 3 then
-								ctd.characterDeadEnd = string.format("%s? Who's %s? There's nobody here named %s",ctd.character,ctd.character,ctd.character)
+								ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s? Who's %s? There's nobody here named %s"),ctd.character,ctd.character,ctd.character)
 							elseif deadEndChoice == 4 then
-								ctd.characterDeadEnd = string.format("We don't talk about %s. They are gone and good riddance",ctd.character)
+								ctd.characterDeadEnd = string.format(_("characterInfo-comms", "We don't talk about %s. They are gone and good riddance"),ctd.character)
 							else
-								ctd.characterDeadEnd = string.format("I think %s moved away",ctd.character)
+								ctd.characterDeadEnd = string.format(_("characterInfo-comms", "I think %s moved away"),ctd.character)
 							end
 						end
 						setCommsMessage(ctd.characterDeadEnd)
@@ -11861,8 +11861,8 @@ function handleUndockedState()
 			end
 		end
 		if enemyEverDetected then
-			addCommsReply("Why the yellow neutral border zones?", function()
-				setCommsMessage("Each neutral border zone is equipped with sensors and an auto-transmitter. If the sensors detect enemy forces in the zone, the auto-transmitter sends encoded zone identifying details through subspace. Human navy ships are equipped to recognize this data and color code the appropriate zone on the science and relay consoles.")
+			addCommsReply(_("station-comms", "Why the yellow neutral border zones?"), function()
+				setCommsMessage(_("station-comms", "Each neutral border zone is equipped with sensors and an auto-transmitter. If the sensors detect enemy forces in the zone, the auto-transmitter sends encoded zone identifying details through subspace. Human navy ships are equipped to recognize this data and color code the appropriate zone on the science and relay consoles."))
 			end)
 		end
 		addCommsReply(_("stationAssist-comms", "Report status"), function()

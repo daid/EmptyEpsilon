@@ -13402,16 +13402,16 @@ function handleUndockedState()
 		if (comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "") or
 			(comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "") or
 			(comms_source:isFriendly(comms_target) and comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" and has_gossip) then
-			addCommsReply(_("stationGeneralInfo-comms","Tell me more about your station"), function()
-				setCommsMessage(_("stationGeneralInfo-comms","What would you like to know?"))
+			addCommsReply(_("station-comms", "Tell me more about your station"), function()
+				setCommsMessage(_("station-comms", "What would you like to know?"))
 				if comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "" then
-					addCommsReply(_("stationGeneralInfo-comms","General information"), function()
+					addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 						setCommsMessage(comms_target.comms_data.general)
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "" then
-					addCommsReply(_("stationGeneralInfo-comms","Station history"), function()
+					addCommsReply(_("stationStory-comms", "Station history"), function()
 						setCommsMessage(comms_target.comms_data.history)
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -13419,7 +13419,7 @@ function handleUndockedState()
 				if comms_source:isFriendly(comms_target) then
 					if comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" then
 						if has_gossip then
-							addCommsReply(_("stationGeneralInfo-comms","Gossip"), function()
+							addCommsReply(_("gossip-comms", "Gossip"), function()
 								setCommsMessage(comms_target.comms_data.gossip)
 								addCommsReply(_("Back"), commsStation)
 							end)
@@ -13430,22 +13430,22 @@ function handleUndockedState()
 		end	--end public relations if branch
 		if comms_target.comms_data.character ~= nil then
 			if random(1,100) < (70 - (20 * difficulty)) then
-				addCommsReply(string.format(_("stationGeneralInfo-comms","Tell me about %s"),comms_target.comms_data.character), function()
+				addCommsReply(string.format(_("characterInfo-comms",  "Tell me about %s"),comms_target.comms_data.character), function()
 					if comms_target.comms_data.characterDescription ~= nil then
 						setCommsMessage(comms_target.comms_data.characterDescription)
 					else
 						if comms_target.comms_data.characterDeadEnd == nil then
 							local deadEndChoice = math.random(1,5)
 							if deadEndChoice == 1 then
-								comms_target.comms_data.characterDeadEnd = string.format(_("stationGeneralInfo-comms","Never heard of %s"),comms_target.comms_data.character)
+								comms_target.comms_data.characterDeadEnd = string.format(_("characterInfo-comms", "Never heard of %s"),comms_target.comms_data.character)
 							elseif deadEndChoice == 2 then
-								comms_target.comms_data.characterDeadEnd = string.format(_("stationGeneralInfo-comms","%s died last week. The funeral was yesterday"),comms_target.comms_data.character)
+								comms_target.comms_data.characterDeadEnd = string.format(_("characterInfo-comms", "%s died last week. The funeral was yesterday"),comms_target.comms_data.character)
 							elseif deadEndChoice == 3 then
-								comms_target.comms_data.characterDeadEnd = string.format(_("stationGeneralInfo-comms","%s? Who's %s? There's nobody here named %s"),comms_target.comms_data.character,comms_target.comms_data.character,comms_target.comms_data.character)
+								comms_target.comms_data.characterDeadEnd = string.format(_("characterInfo-comms", "%s? Who's %s? There's nobody here named %s"),comms_target.comms_data.character,comms_target.comms_data.character,comms_target.comms_data.character)
 							elseif deadEndChoice == 4 then
-								comms_target.comms_data.characterDeadEnd = string.format(_("stationGeneralInfo-comms","We don't talk about %s. They are gone and good riddance"),comms_target.comms_data.character)
+								comms_target.comms_data.characterDeadEnd = string.format(_("characterInfo-comms", "We don't talk about %s. They are gone and good riddance"),comms_target.comms_data.character)
 							else
-								comms_target.comms_data.characterDeadEnd = string.format(_("stationGeneralInfo-comms","I think %s moved away"),comms_target.comms_data.character)
+								comms_target.comms_data.characterDeadEnd = string.format(_("characterInfo-comms", "I think %s moved away"),comms_target.comms_data.character)
 							end
 						end
 						setCommsMessage(comms_target.comms_data.characterDeadEnd)

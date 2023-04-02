@@ -6794,16 +6794,16 @@ function dockingServicesStatus(return_function)
 end
 function stationFlavorInformation(return_function)
 	if (comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "") or (comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "") then
-		addCommsReply("Tell me more about your station", function()
-			setCommsMessage("What would you like to know?")
+		addCommsReply(_("station-comms", "Tell me more about your station"), function()
+			setCommsMessage(_("station-comms", "What would you like to know?"))
 			if comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "" then
-				addCommsReply("General information", function()
+				addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 					setCommsMessage(comms_target.comms_data.general)
 					addCommsReply(_("Back"), return_function)
 				end)
 			end
 			if comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "" then
-				addCommsReply("Station history", function()
+				addCommsReply(_("stationStory-comms", "Station history"), function()
 					setCommsMessage(comms_target.comms_data.history)
 					addCommsReply(_("Back"), return_function)
 				end)

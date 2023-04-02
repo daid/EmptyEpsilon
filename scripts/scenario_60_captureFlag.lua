@@ -6715,14 +6715,14 @@ function handleDockedState()
 		end
 	end
 	if comms_target.publicRelations then
-		addCommsReply("Tell me more about your station", function()
-			setCommsMessage("What would you like to know?")
-			addCommsReply("General information", function()
+		addCommsReply(_("station-comms", "Tell me more about your station"), function()
+			setCommsMessage(_("station-comms", "What would you like to know?"))
+			addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 				setCommsMessage(comms_target.generalInformation)
 				addCommsReply(_("Back"), commsStation)
 			end)
 			if comms_target.stationHistory ~= nil then
-				addCommsReply("Station history", function()
+				addCommsReply(_("stationStory-comms", "Station history"), function()
 					setCommsMessage(comms_target.stationHistory)
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -6730,7 +6730,7 @@ function handleDockedState()
 			if comms_source:isFriendly(comms_target) then
 				if comms_target.gossip ~= nil then
 					if random(1,100) < 50 then
-						addCommsReply("Gossip", function()
+						addCommsReply(_("gossip-comms", "Gossip"), function()
 							setCommsMessage(comms_target.gossip)
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -7116,7 +7116,7 @@ function handleUndockedState()
 			end
 		end)
 		if comms_target.publicRelations then
-			addCommsReply("General station information", function()
+			addCommsReply(_("stationGeneralInfo-comms", "General station information"), function()
 				setCommsMessage(comms_target.generalInformation)
 				addCommsReply(_("Back"), commsStation)
 			end)

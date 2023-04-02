@@ -6140,14 +6140,14 @@ function handleDockedState()
 	end
 	if stationCommsDiagnostic then print(ctd.public_relations) end
 	if ctd.public_relations then
-		addCommsReply("Tell me more about your station", function()
-			setCommsMessage("What would you like to know?")
-			addCommsReply("General information", function()
+		addCommsReply(_("station-comms", "Tell me more about your station"), function()
+			setCommsMessage(_("station-comms", "What would you like to know?"))
+			addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 				setCommsMessage(ctd.general_information)
 				addCommsReply(_("Back"), commsStation)
 			end)
 			if ctd.history ~= nil then
-				addCommsReply("Station history", function()
+				addCommsReply(_("stationStory-comms", "Station history"), function()
 					setCommsMessage(ctd.history)
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -6155,7 +6155,7 @@ function handleDockedState()
 			if comms_source:isFriendly(comms_target) then
 				if ctd.gossip ~= nil then
 					if random(1,100) < (100 - (30 * (difficulty - .5))) then
-						addCommsReply("Gossip", function()
+						addCommsReply(_("gossip-comms", "Gossip"), function()
 							setCommsMessage(ctd.gossip)
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -6166,22 +6166,22 @@ function handleDockedState()
 	end	--end public relations if branch
 	if stationCommsDiagnostic then print(ctd.character) end
 	if ctd.character ~= nil then
-		addCommsReply(string.format("Tell me about %s",ctd.character), function()
+		addCommsReply(string.format(_("characterInfo-comms", "Tell me about %s"),ctd.character), function()
 			if ctd.characterDescription ~= nil then
 				setCommsMessage(ctd.characterDescription)
 			else
 				if ctd.characterDeadEnd == nil then
 					local deadEndChoice = math.random(1,5)
 					if deadEndChoice == 1 then
-						ctd.characterDeadEnd = "Never heard of " .. ctd.character
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "Never heard of %s"), ctd.character)
 					elseif deadEndChoice == 2 then
-						ctd.characterDeadEnd = ctd.character .. " died last week. The funeral was yesterday"
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s died last week. The funeral was yesterday"), ctd.character)
 					elseif deadEndChoice == 3 then
-						ctd.characterDeadEnd = string.format("%s? Who's %s? There's nobody here named %s",ctd.character,ctd.character,ctd.character)
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s? Who's %s? There's nobody here named %s"),ctd.character,ctd.character,ctd.character)
 					elseif deadEndChoice == 4 then
-						ctd.characterDeadEnd = string.format("We don't talk about %s. They are gone and good riddance",ctd.character)
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "We don't talk about %s. They are gone and good riddance"),ctd.character)
 					else
-						ctd.characterDeadEnd = string.format("I think %s moved away",ctd.character)
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "I think %s moved away"),ctd.character)
 					end
 				end
 				setCommsMessage(ctd.characterDeadEnd)
@@ -7066,22 +7066,22 @@ function handleUndockedState()
 		local ctd = comms_target.comms_data
 		if stationCommsDiagnostic then print(ctd.character) end
 		if ctd.character ~= nil then
-			addCommsReply(string.format("Tell me about %s",ctd.character), function()
+			addCommsReply(string.format(_("characterInfo-comms", "Tell me about %s"),ctd.character), function()
 				if ctd.characterDescription ~= nil then
 					setCommsMessage(ctd.characterDescription)
 				else
 					if ctd.characterDeadEnd == nil then
 						local deadEndChoice = math.random(1,5)
 						if deadEndChoice == 1 then
-							ctd.characterDeadEnd = "Never heard of " .. ctd.character
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "Never heard of %s"), ctd.character)
 						elseif deadEndChoice == 2 then
-							ctd.characterDeadEnd = ctd.character .. " died last week. The funeral was yesterday"
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s died last week. The funeral was yesterday"), ctd.character)
 						elseif deadEndChoice == 3 then
-							ctd.characterDeadEnd = string.format("%s? Who's %s? There's nobody here named %s",ctd.character,ctd.character,ctd.character)
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s? Who's %s? There's nobody here named %s"),ctd.character,ctd.character,ctd.character)
 						elseif deadEndChoice == 4 then
-							ctd.characterDeadEnd = string.format("We don't talk about %s. They are gone and good riddance",ctd.character)
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "We don't talk about %s. They are gone and good riddance"),ctd.character)
 						else
-							ctd.characterDeadEnd = string.format("I think %s moved away",ctd.character)
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "I think %s moved away"),ctd.character)
 						end
 					end
 					setCommsMessage(ctd.characterDeadEnd)
@@ -7210,22 +7210,22 @@ function handleUndockedState()
 			addCommsReply(_("Back"), commsStation)
 		end)
 		if ctd.public_relations then
-			addCommsReply("Tell me more about your station", function()
+			addCommsReply(_("station-comms", "Tell me more about your station"), function()
 				local ctd = comms_target.comms_data
-				setCommsMessage("What would you like to know?")
-				addCommsReply("General information", function()
+				setCommsMessage(_("station-comms", "What would you like to know?"))
+				addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 					setCommsMessage(ctd.general_information)
 					addCommsReply(_("Back"), commsStation)
 				end)
 				if ctd.history ~= nil then
-					addCommsReply("Station history", function()
+					addCommsReply(_("stationStory-comms", "Station history"), function()
 						setCommsMessage(ctd.history)
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if ctd.gossip ~= nil then
 					if random(1,100) < 80 then
-						addCommsReply("Gossip", function()
+						addCommsReply(_("gossip-comms", "Gossip"), function()
 							setCommsMessage(ctd.gossip)
 							addCommsReply(_("Back"), commsStation)
 						end)

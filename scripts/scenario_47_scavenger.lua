@@ -5028,22 +5028,22 @@ function handleDockedState()
 		end	--end public relations if branch
 		if stationCommsDiagnostic then print(ctd.character) end
 		if ctd.character ~= nil then
-			addCommsReply(string.format(_("stationGeneralInfo-comms", "Tell me about %s"),ctd.character), function()
+			addCommsReply(string.format(_("characterInfo-comms", "Tell me about %s"),ctd.character), function()
 				if ctd.characterDescription ~= nil then
 					setCommsMessage(ctd.characterDescription)
 				else
 					if ctd.characterDeadEnd == nil then
 						local deadEndChoice = math.random(1,5)
 						if deadEndChoice == 1 then
-							ctd.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "Never heard of %s"), ctd.character)
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "Never heard of %s"), ctd.character)
 						elseif deadEndChoice == 2 then
-							ctd.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "%s died last week. The funeral was yesterday"), ctd.character)
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s died last week. The funeral was yesterday"), ctd.character)
 						elseif deadEndChoice == 3 then
-							ctd.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "%s? Who's %s? There's nobody here named %s"),ctd.character,ctd.character,ctd.character)
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s? Who's %s? There's nobody here named %s"),ctd.character,ctd.character,ctd.character)
 						elseif deadEndChoice == 4 then
-							ctd.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "We don't talk about %s. They are gone and good riddance"),ctd.character)
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "We don't talk about %s. They are gone and good riddance"),ctd.character)
 						else
-							ctd.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "I think %s moved away"),ctd.character)
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "I think %s moved away"),ctd.character)
 						end
 					end
 					setCommsMessage(ctd.characterDeadEnd)
@@ -6028,22 +6028,22 @@ function handleUndockedState()
 		local ctd = comms_target.comms_data
 		if stationCommsDiagnostic then print(ctd.character) end
 		if ctd.character ~= nil then
-			addCommsReply(string.format(_("stationGeneralInfo-comms", "Tell me about %s"),ctd.character), function()
+			addCommsReply(string.format(_("characterInfo-comms", "Tell me about %s"),ctd.character), function()
 				if ctd.characterDescription ~= nil then
 					setCommsMessage(ctd.characterDescription)
 				else
 					if ctd.characterDeadEnd == nil then
 						local deadEndChoice = math.random(1,5)
 						if deadEndChoice == 1 then
-							ctd.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "Never heard of %s"), ctd.character)
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "Never heard of %s"), ctd.character)
 						elseif deadEndChoice == 2 then
-							ctd.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "%s died last week. The funeral was yesterday"), ctd.character)
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s died last week. The funeral was yesterday"), ctd.character)
 						elseif deadEndChoice == 3 then
-							ctd.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "%s? Who's %s? There's nobody here named %s"),ctd.character,ctd.character,ctd.character)
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s? Who's %s? There's nobody here named %s"),ctd.character,ctd.character,ctd.character)
 						elseif deadEndChoice == 4 then
-							ctd.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "We don't talk about %s. They are gone and good riddance"),ctd.character)
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "We don't talk about %s. They are gone and good riddance"),ctd.character)
 						else
-							ctd.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "I think %s moved away"),ctd.character)
+							ctd.characterDeadEnd = string.format(_("characterInfo-comms", "I think %s moved away"),ctd.character)
 						end
 					end
 					setCommsMessage(ctd.characterDeadEnd)
