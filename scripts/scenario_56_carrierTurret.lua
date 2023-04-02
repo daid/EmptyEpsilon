@@ -3465,16 +3465,16 @@ end
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if player:isFriendly(comms_target) then
-        oMsg = "Good day, officer.\nIf you need supplies, please dock with us first."
+        oMsg = _("station-comms", "Good day, officer.\nIf you need supplies, please dock with us first.")
     else
-        oMsg = "Greetings.\nIf you want to do business, please dock with us first."
+        oMsg = _("station-comms", "Greetings.\nIf you want to do business, please dock with us first.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
+		oMsg = oMsg .. _("station-comms", "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you.")
 	end
 	setCommsMessage(oMsg)
- 	addCommsReply("I need information", function()
-		setCommsMessage("What kind of information do you need?")
+ 	addCommsReply(_("station-comms", "I need information"), function()
+		setCommsMessage(_("station-comms", "What kind of information do you need?"))
 		goodsQuantityAvailable = 0
 		gi = 1
 		repeat
@@ -3498,7 +3498,7 @@ function handleUndockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply("See any enemies in your area?", function()
+		addCommsReply(_("helpfullWarning-comms", "See any enemies in your area?"), function()
 			if player:isFriendly(comms_target) then
 				enemiesInRange = 0
 				for _, obj in ipairs(comms_target:getObjectsInRange(30000)) do
@@ -3508,18 +3508,18 @@ function handleUndockedState()
 				end
 				if enemiesInRange > 0 then
 					if enemiesInRange > 1 then
-						setCommsMessage(string.format("Yes, we see %i enemies within 30U",enemiesInRange))
+						setCommsMessage(string.format(_("helpfullWarning-comms", "Yes, we see %i enemies within 30U"),enemiesInRange))
 					else
-						setCommsMessage("Yes, we see one enemy within 30U")						
+						setCommsMessage(_("helpfullWarning-comms", "Yes, we see one enemy within 30U"))						
 					end
 					player:addReputationPoints(2.0)					
 				else
-					setCommsMessage("No enemies within 30U")
+					setCommsMessage(_("helpfullWarning-comms", "No enemies within 30U"))
 					player:addReputationPoints(1.0)
 				end
 				addCommsReply(_("Back"), commsStation)
 			else
-				setCommsMessage("Not really")
+				setCommsMessage(_("helpfullWarning-comms", "Not really"))
 				player:addReputationPoints(1.0)
 				addCommsReply(_("Back"), commsStation)
 			end

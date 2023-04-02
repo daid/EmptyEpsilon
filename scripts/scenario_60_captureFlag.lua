@@ -6976,9 +6976,9 @@ end
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if comms_source:isFriendly(comms_target) then
-        oMsg = "Good day, officer.\nIf you need supplies, please dock with us first."
+        oMsg = _("station-comms", "Good day, officer.\nIf you need supplies, please dock with us first.")
     else
-        oMsg = "Greetings.\nIf you want to do business, please dock with us first."
+        oMsg = _("station-comms", "Greetings.\nIf you want to do business, please dock with us first.")
     end
 	if comms_target.nukeAvail == nil then
 		if math.random(1,10) <= (4 - difficulty) then
@@ -7008,37 +7008,37 @@ function handleUndockedState()
 		end
 	end
 	setCommsMessage(oMsg)
- 	addCommsReply("I need information", function()
-		setCommsMessage("What kind of information do you need?")
-		addCommsReply("What ordnance do you have available for restock?", function()
+ 	addCommsReply(_("station-comms", "I need information"), function()
+		setCommsMessage(_("station-comms", "What kind of information do you need?"))
+		addCommsReply(_("ammo-comms", "What ordnance do you have available for restock?"), function()
 			missileTypeAvailableCount = 0
 			oMsg = ""
 			if comms_target.nukeAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. "\n   Nuke"
+				oMsg = oMsg .. _("ammo-comms", "\n   Nuke")
 			end
 			if comms_target.empAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. "\n   EMP"
+				oMsg = oMsg .. _("ammo-comms", "\n   EMP")
 			end
 			if comms_target.homeAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. "\n   Homing"
+				oMsg = oMsg .. _("ammo-comms", "\n   Homing")
 			end
 			if comms_target.mineAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. "\n   Mine"
+				oMsg = oMsg .. _("ammo-comms", "\n   Mine")
 			end
 			if comms_target.hvliAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. "\n   HVLI"
+				oMsg = oMsg .. _("ammo-comms", "\n   HVLI")
 			end
 			if missileTypeAvailableCount == 0 then
-				oMsg = "We have no ordnance available for restock"
+				oMsg = _("ammo-comms", "We have no ordnance available for restock")
 			elseif missileTypeAvailableCount == 1 then
-				oMsg = "We have the following type of ordnance available for restock:" .. oMsg
+				oMsg = string.format(_("ammo-comms", "We have the following type of ordnance available for restock:%s"), oMsg)
 			else
-				oMsg = "We have the following types of ordnance available for restock:" .. oMsg
+				oMsg = string.format(_("ammo-comms", "We have the following types of ordnance available for restock:%s"), oMsg)
 			end
 			setCommsMessage(oMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -7066,7 +7066,7 @@ function handleUndockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply("See any enemies in your area?", function()
+		addCommsReply(_("helpfullWarning-comms", "See any enemies in your area?"), function()
 			if comms_source:isFriendly(comms_target) then
 				enemiesInRange = 0
 				for _, obj in ipairs(comms_target:getObjectsInRange(30000)) do
@@ -7076,18 +7076,18 @@ function handleUndockedState()
 				end
 				if enemiesInRange > 0 then
 					if enemiesInRange > 1 then
-						setCommsMessage(string.format("Yes, we see %i enemies within 30U",enemiesInRange))
+						setCommsMessage(string.format(_("helpfullWarning-comms", "Yes, we see %i enemies within 30U"),enemiesInRange))
 					else
-						setCommsMessage("Yes, we see one enemy within 30U")						
+						setCommsMessage(_("helpfullWarning-comms", "Yes, we see one enemy within 30U"))						
 					end
 					comms_source:addReputationPoints(2.0)					
 				else
-					setCommsMessage("No enemies within 30U")
+					setCommsMessage(_("helpfullWarning-comms", "No enemies within 30U"))
 					comms_source:addReputationPoints(1.0)
 				end
 				addCommsReply(_("Back"), commsStation)
 			else
-				setCommsMessage("Not really")
+				setCommsMessage(_("helpfullWarning-comms", "Not really"))
 				comms_source:addReputationPoints(1.0)
 				addCommsReply(_("Back"), commsStation)
 			end

@@ -12114,7 +12114,7 @@ function handleDockedState()
 					}
 					comms_target.probe_fail_reason = reason_list[math.random(1,#reason_list)]
 				end
-				service_status = string.format("%s\n%s",service_status,comms_target.probe_fail_reason)
+				service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.probe_fail_reason)
 			end
 			if comms_target:getRepairDocked() then
 				service_status = string.format(_("stationServices-comms", "%s\nShip hull repair."),service_status)
@@ -12127,7 +12127,7 @@ function handleDockedState()
 					}
 					comms_target.repair_fail_reason = reason_list[math.random(1,#reason_list)]
 				end
-				service_status = string.format("%s\n%s",service_status,comms_target.repair_fail_reason)
+				service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.repair_fail_reason)
 			end
 			if comms_target:getSharesEnergyWithDocked() then
 				service_status = string.format(_("stationServices-comms", "%s\nRecharge ship energy stores."),service_status)
@@ -12140,7 +12140,7 @@ function handleDockedState()
 					}
 					comms_target.energy_fail_reason = reason_list[math.random(1,#reason_list)]
 				end
-				service_status = string.format("%s\n%s",service_status,comms_target.energy_fail_reason)
+				service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.energy_fail_reason)
 			end
 			if comms_target.comms_data.jump_overcharge then
 				service_status = string.format(_("stationServices-comms", "%s\nMay overcharge jump drive"),service_status)
@@ -13223,7 +13223,7 @@ function handleUndockedState()
 							}
 							comms_target.probe_fail_reason = reason_list[math.random(1,#reason_list)]
 						end
-						service_status = string.format("%s\n%s",service_status,comms_target.probe_fail_reason)
+						service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.probe_fail_reason)
 					end
 					if comms_target:getRepairDocked() then
 						service_status = string.format(_("stationServices-comms", "%s\nShip hull repair."),service_status)
@@ -13236,7 +13236,7 @@ function handleUndockedState()
 							}
 							comms_target.repair_fail_reason = reason_list[math.random(1,#reason_list)]
 						end
-						service_status = string.format("%s\n%s",service_status,comms_target.repair_fail_reason)
+						service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.repair_fail_reason)
 					end
 					if comms_target:getSharesEnergyWithDocked() then
 						service_status = string.format(_("stationServices-comms", "%s\nRecharge ship energy stores."),service_status)
@@ -13249,7 +13249,7 @@ function handleUndockedState()
 							}
 							comms_target.energy_fail_reason = reason_list[math.random(1,#reason_list)]
 						end
-						service_status = string.format("%s\n%s",service_status,comms_target.energy_fail_reason)
+						service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.energy_fail_reason)
 					end
 					setCommsMessage(service_status)
 					addCommsReply(_("Back"), commsStation)
@@ -13288,7 +13288,7 @@ function handleUndockedState()
 								local p_upgrade_level = comms_source.upgrade_path[u_type]
 								if u_max > p_upgrade_level then
 									upgrade_count = upgrade_count + 1
-									out = string.format("%s\n        %s: %s (%s)",out,u_type,upgrade_path[p_ship_type][u_type][p_upgrade_level + 1].desc,math.ceil(base_upgrade_cost+((p_upgrade_level+1)*upgrade_price)))
+									out = string.format(_("upgrade-comms", "%s\n        %s: %s (%s)"),out,u_type,upgrade_path[p_ship_type][u_type][p_upgrade_level + 1].desc,math.ceil(base_upgrade_cost+((p_upgrade_level+1)*upgrade_price)))
 								end
 							end
 							if upgrade_count > 0 then

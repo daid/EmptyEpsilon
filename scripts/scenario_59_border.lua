@@ -10233,114 +10233,114 @@ function handleDockedState()
 			end)	--end player requests secondary ordnance comms reply branch
 		end	--end secondary ordnance available from station if branch
 	end	--end missles used on player ship if branch
-	addCommsReply("Docking services status", function()
-		local service_status = string.format("Station %s docking services status:",comms_target:getCallSign())
+	addCommsReply(_("stationServices-comms", "Docking services status"), function()
+		local service_status = string.format(_("stationServices-comms", "Station %s docking services status:"),comms_target:getCallSign())
 		if comms_target:getRestocksScanProbes() then
-			service_status = string.format("%s\nReplenish scan probes.",service_status)
+			service_status = string.format(_("stationServices-comms", "%s\nReplenish scan probes."),service_status)
 		else
 			if comms_target.probe_fail_reason == nil then
 				local reason_list = {
-					"Cannot replenish scan probes due to fabrication unit failure.",
-					"Parts shortage prevents scan probe replenishment.",
-					"Station management has curtailed scan probe replenishment for cost cutting reasons.",
+					_("stationServices-comms", "Cannot replenish scan probes due to fabrication unit failure."),
+					_("stationServices-comms", "Parts shortage prevents scan probe replenishment."),
+					_("stationServices-comms", "Station management has curtailed scan probe replenishment for cost cutting reasons."),
 				}
 				comms_target.probe_fail_reason = reason_list[math.random(1,#reason_list)]
 			end
-			service_status = string.format("%s\n%s",service_status,comms_target.probe_fail_reason)
+			service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.probe_fail_reason)
 		end
 		if comms_target:getRepairDocked() then
-			service_status = string.format("%s\nShip hull repair.",service_status)
+			service_status = string.format(_("stationServices-comms", "%s\nShip hull repair."),service_status)
 		else
 			if comms_target.repair_fail_reason == nil then
 				reason_list = {
-					"We're out of the necessary materials and supplies for hull repair.",
-					"Hull repair automation unavailable while it is undergoing maintenance.",
-					"All hull repair technicians quarantined to quarters due to illness.",
+					_("stationServices-comms", "We're out of the necessary materials and supplies for hull repair."),
+					_("stationServices-comms", "Hull repair automation unavailable while it is undergoing maintenance."),
+					_("stationServices-comms", "All hull repair technicians quarantined to quarters due to illness."),
 				}
 				comms_target.repair_fail_reason = reason_list[math.random(1,#reason_list)]
 			end
-			service_status = string.format("%s\n%s",service_status,comms_target.repair_fail_reason)
+			service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.repair_fail_reason)
 		end
 		if comms_target:getSharesEnergyWithDocked() then
-			service_status = string.format("%s\nRecharge ship energy stores.",service_status)
+			service_status = string.format(_("stationServices-comms", "%s\nRecharge ship energy stores."),service_status)
 		else
 			if comms_target.energy_fail_reason == nil then
 				reason_list = {
-					"A recent reactor failure has put us on auxiliary power, so we cannot recharge ships.",
-					"A damaged power coupling makes it too dangerous to recharge ships.",
-					"An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now.",
+					_("stationServices-comms", "A recent reactor failure has put us on auxiliary power, so we cannot recharge ships."),
+					_("stationServices-comms", "A damaged power coupling makes it too dangerous to recharge ships."),
+					_("stationServices-comms", "An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now."),
 				}
 				comms_target.energy_fail_reason = reason_list[math.random(1,#reason_list)]
 			end
-			service_status = string.format("%s\n%s",service_status,comms_target.energy_fail_reason)
+			service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.energy_fail_reason)
 		end
 		if comms_target.comms_data.jump_overcharge then
-			service_status = string.format("%s\nMay overcharge jump drive",service_status)
+			service_status = string.format(_("stationServices-comms", "%s\nMay overcharge jump drive"),service_status)
 		end
-		service_status = string.format("%s\nMay repair the following primary systems:",service_status)		
+		service_status = string.format(_("stationServices-comms", "%s\nMay repair the following primary systems:"),service_status)		
 		local line_item_count = 0
 		for _, system in ipairs(system_list) do
 			if comms_target.comms_data.system_repair[system] then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
 				service_status = service_status .. system .. "  "
 				line_item_count = line_item_count + 1
 			end
 		end
-		service_status = string.format("%s\nMay repair the coolant pump on the following primary systems:",service_status)
+		service_status = string.format(_("stationServices-comms", "%s\nMay repair the coolant pump on the following primary systems:"),service_status)
 		line_item_count = 0
 		for _, system in ipairs(system_list) do
 			if comms_target.comms_data.coolant_pump_repair[system] then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
 				service_status = service_status .. system .. "  "
 				line_item_count = line_item_count + 1
 			end
 		end
-		service_status = string.format("%s\nMay repair the following secondary systems:",service_status)
+		service_status = string.format(_("stationServices-comms", "%s\nMay repair the following secondary systems:"),service_status)
 		line_item_count = 0	
 		if comms_target.comms_data.probe_launch_repair then
 			if line_item_count == 0 or line_item_count >= 3 then
-				service_status = service_status .. "\n    "
+				service_status = service_status .. _("stationServices-comms", "\n    ")
 				line_item_count = 0
 			end
-			service_status = string.format("%sprobe launch system   ",service_status)
+			service_status = string.format(_("stationServices-comms", "%sprobe launch system   "),service_status)
 			line_item_count = line_item_count + 1
 		end
 		if comms_target.comms_data.hack_repair then
 			if line_item_count == 0 or line_item_count >= 3 then
-				service_status = service_status .. "\n    "
+				service_status = service_status .. _("stationServices-comms", "\n    ")
 				line_item_count = 0
 			end
-			service_status = string.format("%shacking system   ",service_status)
+			service_status = string.format(_("stationServices-comms", "%shacking system   "),service_status)
 			line_item_count = line_item_count + 1
 		end
 		if comms_target.comms_data.scan_repair then
 			if line_item_count == 0 or line_item_count >= 3 then
-				service_status = service_status .. "\n    "
+				service_status = service_status .. _("stationServices-comms", "\n    ")
 				line_item_count = 0
 			end
-			service_status = string.format("%sscanners   ",service_status)
+			service_status = string.format(_("stationServices-comms", "%sscanners   "),service_status)
 			line_item_count = line_item_count + 1
 		end
 		if comms_target.comms_data.combat_maneuver_repair then
 			if line_item_count == 0 or line_item_count >= 3 then
-				service_status = service_status .. "\n    "
+				service_status = service_status .. _("stationServices-comms", "\n    ")
 				line_item_count = 0
 			end
-			service_status = string.format("%scombat maneuver   ",service_status)
+			service_status = string.format(_("stationServices-comms", "%scombat maneuver   "),service_status)
 			line_item_count = line_item_count + 1
 		end
 		if comms_target.comms_data.self_destruct_repair then
 			if line_item_count == 0 or line_item_count >= 3 then
-				service_status = service_status .. "\n    "
+				service_status = service_status .. _("stationServices-comms", "\n    ")
 				line_item_count = 0
 			end
-			service_status = string.format("%sself destruct system   ",service_status)
+			service_status = string.format(_("stationServices-comms", "%sself destruct system   "),service_status)
 		end
 		setCommsMessage(service_status)
 		addCommsReply(_("Back"), commsStation)
@@ -10352,10 +10352,10 @@ function handleDockedState()
 				max_charge = 50000
 			end
 			if comms_source:getJumpDriveCharge() >= max_charge then
-				addCommsReply("Overcharge Jump Drive (10 Rep)",function()
+				addCommsReply(_("stationServices-comms", "Overcharge Jump Drive (10 Rep)"),function()
 					if comms_source:takeReputationPoints(10) then
 						comms_source:setJumpDriveCharge(comms_source:getJumpDriveCharge() + max_charge)
-						setCommsMessage(string.format("Your jump drive has been overcharged to %ik",math.floor(comms_source:getJumpDriveCharge()/1000)))
+						setCommsMessage(string.format(_("stationServices-comms", "Your jump drive has been overcharged to %ik"),math.floor(comms_source:getJumpDriveCharge()/1000)))
 					else
 						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
@@ -10390,8 +10390,8 @@ function handleDockedState()
 		end
 	end
 	if offer_repair then
-		addCommsReply("Repair ship system",function()
-			setCommsMessage(string.format("What system would you like repaired?\n\nReputation: %i",math.floor(comms_source:getReputationPoints())))
+		addCommsReply(_("stationServices-comms", "Repair ship system"),function()
+			setCommsMessage(string.format(_("stationServices-comms", "What system would you like repaired?\n\nReputation: %i"),math.floor(comms_source:getReputationPoints())))
 			local system_list = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
 			for _, system in ipairs(system_list) do
 				if repair_system_diagnostic then
@@ -10405,11 +10405,11 @@ function handleDockedState()
 						if repair_system_diagnostic then
 							print(comms_source:getCallSign(),"needs repairs on:",system,"current health max:",comms_source:getSystemHealthMax(system))
 						end
-						addCommsReply(string.format("Repair %s (current max is %i%%) (5 Rep)",system,math.floor(comms_source:getSystemHealthMax(system)*100)),function()
+						addCommsReply(string.format(_("stationServices-comms", "Repair %s (current max is %i%%) (5 Rep)"),system,math.floor(comms_source:getSystemHealthMax(system)*100)),function()
 							if comms_source:takeReputationPoints(5) then
 								comms_source:setSystemHealthMax(system,1)
 								comms_source:setSystemHealth(system,1)
-								setCommsMessage(string.format("%s has been repaired",system))
+								setCommsMessage(string.format(_("stationServices-comms", "%s has been repaired"),system))
 							else
 								setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 							end
@@ -10425,10 +10425,10 @@ function handleDockedState()
 						if repair_system_diagnostic then
 							print(comms_source:getCallSign(),"needs the coolant pump repaired for:",system)
 						end
-						addCommsReply(string.format("Repair %s coolant pump (5 Rep)",system),function()
+						addCommsReply(string.format(_("stationServices-comms", "Repair %s coolant pump (5 Rep)"),system),function()
 							if comms_source:takeReputationPoints(5) then
 								comms_source:setSystemCoolantRate(system,comms_source.normal_coolant_rate[system])
-								setCommsMessage(string.format("%s coolant pump has been repaired",system))
+								setCommsMessage(string.format(_("stationServices-comms", "%s coolant pump has been repaired"),system))
 							else
 								setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 							end
@@ -10445,10 +10445,10 @@ function handleDockedState()
 					if repair_system_diagnostic then
 						print(comms_source:getCallSign(),"needs probe launch system repaired")
 					end
-					addCommsReply("Repair probe launch system (5 Rep)",function()
+					addCommsReply(_("stationServices-comms", "Repair probe launch system (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanLaunchProbe(true)
-							setCommsMessage("Your probe launch system has been repaired")
+							setCommsMessage(_("stationServices-comms", "Your probe launch system has been repaired"))
 						else
 							setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 						end
@@ -10464,10 +10464,10 @@ function handleDockedState()
 					if repair_system_diagnostic then
 						print(comms_source:getCallSign(),"needs hacking repaired")
 					end
-					addCommsReply("Repair hacking system (5 Rep)",function()
+					addCommsReply(_("stationServices-comms", "Repair hacking system (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanHack(true)
-							setCommsMessage("Your hack system has been repaired")
+							setCommsMessage(_("stationServices-comms", "Your hack system has been repaired"))
 						else
 							setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 						end
@@ -10483,10 +10483,10 @@ function handleDockedState()
 					if repair_system_diagnostic then
 						print(comms_source:getCallSign(),"needs scanners repaired")
 					end
-					addCommsReply("Repair scanners (5 Rep)",function()
+					addCommsReply(_("stationServices-comms", "Repair scanners (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanScan(true)
-							setCommsMessage("Your scanners have been repaired")
+							setCommsMessage(_("stationServices-comms", "Your scanners have been repaired"))
 						else
 							setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 						end
@@ -10502,10 +10502,10 @@ function handleDockedState()
 					if repair_system_diagnostic then
 						print(comms_source:getCallSign(),"needs combat maneuver repaired")
 					end
-					addCommsReply("Repair combat maneuver (5 Rep)",function()
+					addCommsReply(_("stationServices-comms", "Repair combat maneuver (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanCombatManeuver(true)
-							setCommsMessage("Your combat maneuver has been repaired")
+							setCommsMessage(_("stationServices-comms", "Your combat maneuver has been repaired"))
 						else
 							setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 						end
@@ -10521,10 +10521,10 @@ function handleDockedState()
 					if repair_system_diagnostic then
 						print(comms_source:getCallSign(),"needs self destruct system repaired")
 					end
-					addCommsReply("Repair self destruct system (5 Rep)",function()
+					addCommsReply(_("stationServices-comms", "Repair self destruct system (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanSelfDestruct(true)
-							setCommsMessage("Your self destruct system has been repaired")
+							setCommsMessage(_("stationServices-comms", "Your self destruct system has been repaired"))
 						else
 							setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 						end
@@ -11465,12 +11465,12 @@ function handleUndockedState()
     --Handle communications when we are not docked with the station.
     local ctd = comms_target.comms_data
     if comms_source:isFriendly(comms_target) then
-        oMsg = "Good day, officer.\nIf you need supplies, please dock with us first."
+        oMsg = _("station-comms", "Good day, officer.\nIf you need supplies, please dock with us first.")
     else
-        oMsg = "Greetings.\nIf you want to do business, please dock with us first."
+        oMsg = _("station-comms", "Greetings.\nIf you want to do business, please dock with us first.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
+		oMsg = oMsg .. _("station-comms", "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you.")
 	end
 	setCommsMessage(oMsg)
 	--[[	Disabling until I find the bug
@@ -11566,8 +11566,8 @@ function handleUndockedState()
 		end)
 	end	
 	--]]
- 	addCommsReply("I need information", function()
-		setCommsMessage("What kind of information do you need?")
+ 	addCommsReply(_("station-comms", "I need information"), function()
+		setCommsMessage(_("station-comms", "What kind of information do you need?"))
 		addCommsReply("What are my current orders?", function()
 			setOptionalOrders()
 			setSecondaryOrders()
@@ -11578,149 +11578,149 @@ function handleUndockedState()
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply("What ordnance do you have available for restock?", function()
+		addCommsReply(_("ammo-comms", "What ordnance do you have available for restock?"), function()
 			local ctd = comms_target.comms_data
 			local missileTypeAvailableCount = 0
 			local ordnanceListMsg = ""
 			if ctd.weapon_available.Nuke then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Nuke"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   Nuke")
 			end
 			if ctd.weapon_available.EMP then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   EMP"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   EMP")
 			end
 			if ctd.weapon_available.Homing then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Homing"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   Homing")
 			end
 			if ctd.weapon_available.Mine then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Mine"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   Mine")
 			end
 			if ctd.weapon_available.HVLI then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   HVLI"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   HVLI")
 			end
 			if missileTypeAvailableCount == 0 then
-				ordnanceListMsg = "We have no ordnance available for restock"
+				ordnanceListMsg = _("ammo-comms", "We have no ordnance available for restock")
 			elseif missileTypeAvailableCount == 1 then
-				ordnanceListMsg = "We have the following type of ordnance available for restock:" .. ordnanceListMsg
+				ordnanceListMsg = string.format(_("ammo-comms", "We have the following type of ordnance available for restock:%s"), ordnanceListMsg)
 			else
-				ordnanceListMsg = "We have the following types of ordnance available for restock:" .. ordnanceListMsg
+				ordnanceListMsg = string.format(_("ammo-comms", "We have the following types of ordnance available for restock:%s"), ordnanceListMsg)
 			end
 			setCommsMessage(ordnanceListMsg)
 			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply("Docking services status", function()
+		addCommsReply(_("stationServices-comms", "Docking services status"), function()
 	 		local ctd = comms_target.comms_data
-			local service_status = string.format("Station %s docking services status:",comms_target:getCallSign())
+			local service_status = string.format(_("stationServices-comms", "Station %s docking services status:"),comms_target:getCallSign())
 			if comms_target:getRestocksScanProbes() then
-				service_status = string.format("%s\nReplenish scan probes.",service_status)
+				service_status = string.format(_("stationServices-comms", "%s\nReplenish scan probes."),service_status)
 			else
 				if comms_target.probe_fail_reason == nil then
 					local reason_list = {
-						"Cannot replenish scan probes due to fabrication unit failure.",
-						"Parts shortage prevents scan probe replenishment.",
-						"Station management has curtailed scan probe replenishment for cost cutting reasons.",
+						_("stationServices-comms", "Cannot replenish scan probes due to fabrication unit failure."),
+						_("stationServices-comms", "Parts shortage prevents scan probe replenishment."),
+						_("stationServices-comms", "Station management has curtailed scan probe replenishment for cost cutting reasons."),
 					}
 					comms_target.probe_fail_reason = reason_list[math.random(1,#reason_list)]
 				end
-				service_status = string.format("%s\n%s",service_status,comms_target.probe_fail_reason)
+				service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.probe_fail_reason)
 			end
 			if comms_target:getRepairDocked() then
-				service_status = string.format("%s\nShip hull repair.",service_status)
+				service_status = string.format(_("stationServices-comms", "%s\nShip hull repair."),service_status)
 			else
 				if comms_target.repair_fail_reason == nil then
 					reason_list = {
-						"We're out of the necessary materials and supplies for hull repair.",
-						"Hull repair automation unavailable whie it is undergoing maintenance.",
-						"All hull repair technicians quarantined to quarters due to illness.",
+						_("stationServices-comms", "We're out of the necessary materials and supplies for hull repair."),
+						_("stationServices-comms", "Hull repair automation unavailable whie it is undergoing maintenance."),
+						_("stationServices-comms", "All hull repair technicians quarantined to quarters due to illness."),
 					}
 					comms_target.repair_fail_reason = reason_list[math.random(1,#reason_list)]
 				end
-				service_status = string.format("%s\n%s",service_status,comms_target.repair_fail_reason)
+				service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.repair_fail_reason)
 			end
 			if comms_target:getSharesEnergyWithDocked() then
-				service_status = string.format("%s\nRecharge ship energy stores.",service_status)
+				service_status = string.format(_("stationServices-comms", "%s\nRecharge ship energy stores."),service_status)
 			else
 				if comms_target.energy_fail_reason == nil then
 					reason_list = {
-						"A recent reactor failure has put us on auxiliary power, so we cannot recharge ships.",
-						"A damaged power coupling makes it too dangerous to recharge ships.",
-						"An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now.",
+						_("stationServices-comms", "A recent reactor failure has put us on auxiliary power, so we cannot recharge ships."),
+						_("stationServices-comms", "A damaged power coupling makes it too dangerous to recharge ships."),
+						_("stationServices-comms", "An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now."),
 					}
 					comms_target.energy_fail_reason = reason_list[math.random(1,#reason_list)]
 				end
-				service_status = string.format("%s\n%s",service_status,comms_target.energy_fail_reason)
+				service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.energy_fail_reason)
 			end
 			if comms_target.comms_data.jump_overcharge then
-				service_status = string.format("%s\nMay overcharge jump drive",service_status)
+				service_status = string.format(_("stationServices-comms", "%s\nMay overcharge jump drive"),service_status)
 			end
-			service_status = string.format("%s\nMay repair the following primary systems:",service_status)		
+			service_status = string.format(_("stationServices-comms", "%s\nMay repair the following primary systems:"),service_status)		
 			local line_item_count = 0
 			for _, system in ipairs(system_list) do
 				if comms_target.comms_data.system_repair[system] then
 					if line_item_count == 0 or line_item_count >= 3 then
-						service_status = service_status .. "\n    "
+						service_status = service_status .. _("stationServices-comms", "\n    ")
 						line_item_count = 0
 					end
 					service_status = service_status .. system .. "  "
 					line_item_count = line_item_count + 1
 				end
 			end
-			service_status = string.format("%s\nMay repair the cooling pump for the following primary systems:",service_status)
+			service_status = string.format(_("stationServices-comms", "%s\nMay repair the cooling pump for the following primary systems:"),service_status)
 			line_item_count = 0
 			for _, system in ipairs(system_list) do
 				if comms_target.comms_data.coolant_pump_repair[system] then
 					if line_item_count == 0 or line_item_count >= 3 then
-						service_status = service_status .. "\n    "
+						service_status = service_status .. _("stationServices-comms", "\n    ")
 						line_item_count = 0
 					end
 					service_status = service_status .. system .. "  "
 					line_item_count = line_item_count + 1
 				end
 			end
-			service_status = string.format("%s\nMay repair the following secondary systems:",service_status)
+			service_status = string.format(_("stationServices-comms", "%s\nMay repair the following secondary systems:"),service_status)
 			line_item_count = 0	
 			if comms_target.comms_data.probe_launch_repair then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
-				service_status = string.format("%sprobe launch system   ",service_status)
+				service_status = string.format(_("stationServices-comms", "%sprobe launch system   "),service_status)
 				line_item_count = line_item_count + 1
 			end
 			if comms_target.comms_data.hack_repair then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
-				service_status = string.format("%shacking system   ",service_status)
+				service_status = string.format(_("stationServices-comms", "%shacking system   "),service_status)
 				line_item_count = line_item_count + 1
 			end
 			if comms_target.comms_data.scan_repair then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
-				service_status = string.format("%sscanners   ",service_status)
+				service_status = string.format(_("stationServices-comms", "%sscanners   "),service_status)
 				line_item_count = line_item_count + 1
 			end
 			if comms_target.comms_data.combat_maneuver_repair then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
-				service_status = string.format("%scombat maneuver   ",service_status)
+				service_status = string.format(_("stationServices-comms", "%scombat maneuver   "),service_status)
 				line_item_count = line_item_count + 1
 			end
 			if comms_target.comms_data.self_destruct_repair then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
-				service_status = string.format("%sself destruct system   ",service_status)
+				service_status = string.format(_("stationServices-comms", "%sself destruct system   "),service_status)
 			end
 			setCommsMessage(service_status)
 			addCommsReply(_("Back"), commsStation)

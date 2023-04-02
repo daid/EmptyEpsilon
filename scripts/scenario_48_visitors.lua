@@ -7045,12 +7045,12 @@ function handleUndockedState()
     local player = comms_source
     local ctd = comms_target.comms_data
     if comms_source:isFriendly(comms_target) then
-        oMsg = "Good day, officer.\nIf you need supplies, please dock with us first."
+        oMsg = _("station-comms", "Good day, officer.\nIf you need supplies, please dock with us first.")
     else
-        oMsg = "Greetings.\nIf you want to do business, please dock with us first."
+        oMsg = _("station-comms", "Greetings.\nIf you want to do business, please dock with us first.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
+		oMsg = oMsg .. _("station-comms", "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you.")
 	end
 	setCommsMessage(oMsg)
 	if comms_target == belt1Stations[5] and plot1 == checkOrbitingArtifactEvents and not astronomerBoardedShip then
@@ -7060,8 +7060,8 @@ function handleUndockedState()
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
- 	addCommsReply("I need information", function()
-		setCommsMessage("What kind of information do you need?")
+ 	addCommsReply(_("station-comms", "I need information"), function()
+		setCommsMessage(_("station-comms", "What kind of information do you need?"))
 		if stationCommsDiagnostic then print("requesting information") end
 		local ctd = comms_target.comms_data
 		if stationCommsDiagnostic then print(ctd.character) end
@@ -7102,36 +7102,36 @@ function handleUndockedState()
 			end)
 			showCurrentStats()
 		end
-		addCommsReply("What ordnance do you have available for restock?", function()
+		addCommsReply(_("ammo-comms", "What ordnance do you have available for restock?"), function()
 			local ctd = comms_target.comms_data
 			local missileTypeAvailableCount = 0
 			local ordnanceListMsg = ""
 			if ctd.weapon_available.Nuke then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Nuke"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   Nuke")
 			end
 			if ctd.weapon_available.EMP then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   EMP"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   EMP")
 			end
 			if ctd.weapon_available.Homing then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Homing"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   Homing")
 			end
 			if ctd.weapon_available.Mine then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Mine"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   Mine")
 			end
 			if ctd.weapon_available.HVLI then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   HVLI"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   HVLI")
 			end
 			if missileTypeAvailableCount == 0 then
-				ordnanceListMsg = "We have no ordnance available for restock"
+				ordnanceListMsg = _("ammo-comms", "We have no ordnance available for restock")
 			elseif missileTypeAvailableCount == 1 then
-				ordnanceListMsg = "We have the following type of ordnance available for restock:" .. ordnanceListMsg
+				ordnanceListMsg = string.format(_("ammo-comms", "We have the following type of ordnance available for restock:%s"), ordnanceListMsg)
 			else
-				ordnanceListMsg = "We have the following types of ordnance available for restock:" .. ordnanceListMsg
+				ordnanceListMsg = string.format(_("ammo-comms", "We have the following types of ordnance available for restock:%s"), ordnanceListMsg)
 			end
 			setCommsMessage(ordnanceListMsg)
 			addCommsReply(_("Back"), commsStation)
