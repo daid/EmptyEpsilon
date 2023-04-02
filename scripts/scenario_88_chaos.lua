@@ -7393,16 +7393,16 @@ function restockOrdnance(return_function)
 			(comms_target.comms_data.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing")	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Homing	> 0) or 
 			(comms_target.comms_data.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine")	> 0)   	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Mine	> 0) or 
 			(comms_target.comms_data.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI")	> 0)	and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.HVLI	> 0) then
-			addCommsReply("I need ordnance restocked", function()
-				setCommsMessage("What type of ordnance?")
+			addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
+				setCommsMessage(_("ammo-comms", "What type of ordnance?"))
 				if comms_source:getWeaponStorageMax("Nuke") > 0 and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Nuke > 0) then
 					if comms_target.comms_data.weapon_available.Nuke then
-						local ask = {"Can you supply us with some nukes?","We really need some nukes."}
+						local ask = {_("ammo-comms", "Can you supply us with some nukes?"),_("ammo-comms", "We really need some nukes.")}
 						local avail = ""
 						if not comms_target.comms_data.weapon_inventory.Unlimited then
-							avail = string.format(", %i avail",math.floor(comms_target.comms_data.weapon_inventory.Nuke))
+							avail = string.format(_("ammo-comms", ", %i avail"),math.floor(comms_target.comms_data.weapon_inventory.Nuke))
 						end
-						local nuke_prompt = string.format("%s (%i rep each%s)",ask[math.random(1,#ask)],getWeaponCost("Nuke"),avail)
+						local nuke_prompt = string.format(_("ammo-comms", "%s (%i rep each%s)"),ask[math.random(1,#ask)],getWeaponCost("Nuke"),avail)
 						addCommsReply(nuke_prompt, function()
 							handleWeaponRestock("Nuke",return_function)
 						end)
@@ -7410,12 +7410,12 @@ function restockOrdnance(return_function)
 				end	--end player can accept nuke if branch
 				if comms_source:getWeaponStorageMax("EMP") > 0 and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.EMP > 0) then
 					if comms_target.comms_data.weapon_available.EMP then
-						local ask = {"Please re-stock our EMP missiles.","Got any EMPs?"}
+						local ask = {_("ammo-comms", "Please re-stock our EMP missiles."),_("ammo-comms", "Got any EMPs?")}
 						local avail = ""
 						if not comms_target.comms_data.weapon_inventory.Unlimited then
-							avail = string.format(", %i avail",math.floor(comms_target.comms_data.weapon_inventory.EMP))
+							avail = string.format(_("ammo-comms", ", %i avail"),math.floor(comms_target.comms_data.weapon_inventory.EMP))
 						end
-						local emp_prompt = string.format("%s (%i rep each%s)",ask[math.random(1,#ask)],getWeaponCost("EMP"),avail)
+						local emp_prompt = string.format(_("ammo-comms", "%s (%i rep each%s)"),ask[math.random(1,#ask)],getWeaponCost("EMP"),avail)
 						addCommsReply(emp_prompt, function()
 							handleWeaponRestock("EMP",return_function)
 						end)
@@ -7423,12 +7423,12 @@ function restockOrdnance(return_function)
 				end	--end player can accept EMP if branch
 				if comms_source:getWeaponStorageMax("Homing") > 0 and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Homing > 0) then
 					if comms_target.comms_data.weapon_available.Homing then
-						local ask = {"Do you have spare homing missiles for us?","Do you have extra homing missiles?"}
+						local ask = {_("ammo-comms", "Do you have spare homing missiles for us?"),_("ammo-comms", "Do you have extra homing missiles?")}
 						local avail = ""
 						if not comms_target.comms_data.weapon_inventory.Unlimited then
-							avail = string.format(", %i avail",math.floor(comms_target.comms_data.weapon_inventory.Homing))
+							avail = string.format(_("ammo-comms", ", %i avail"),math.floor(comms_target.comms_data.weapon_inventory.Homing))
 						end
-						local homing_prompt = string.format("%s (%i rep each%s)",ask[math.random(1,#ask)],getWeaponCost("Homing"),avail)
+						local homing_prompt = string.format(_("ammo-comms", "%s (%i rep each%s)"),ask[math.random(1,#ask)],getWeaponCost("Homing"),avail)
 						addCommsReply(homing_prompt, function()
 							handleWeaponRestock("Homing",return_function)
 						end)
@@ -7436,12 +7436,12 @@ function restockOrdnance(return_function)
 				end	--end player can accept homing if branch
 				if comms_source:getWeaponStorageMax("Mine") > 0 and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.Mine > 0) then
 					if comms_target.comms_data.weapon_available.Mine then
-						local ask = {"We could use some mines.","How about mines?"}
+						local ask = {_("ammo-comms", "We could use some mines."),_("ammo-comms", "How about mines?")}
 						local avail = ""
 						if not comms_target.comms_data.weapon_inventory.Unlimited then
-							avail = string.format(", %i avail",math.floor(comms_target.comms_data.weapon_inventory.Mine))
+							avail = string.format(_("ammo-comms", ", %i avail"),math.floor(comms_target.comms_data.weapon_inventory.Mine))
 						end
-						local mine_prompt = string.format("%s (%i rep each%s)",ask[math.random(1,#ask)],getWeaponCost("Mine"),avail)
+						local mine_prompt = string.format(_("ammo-comms", "%s (%i rep each%s)"),ask[math.random(1,#ask)],getWeaponCost("Mine"),avail)
 						addCommsReply(mine_prompt, function()
 							handleWeaponRestock("Mine",return_function)
 						end)
@@ -7449,12 +7449,12 @@ function restockOrdnance(return_function)
 				end	--end player can accept mine if branch
 				if comms_source:getWeaponStorageMax("HVLI") > 0 and (comms_target.comms_data.weapon_inventory.Unlimited or comms_target.comms_data.weapon_inventory.HVLI > 0) then
 					if comms_target.comms_data.weapon_available.HVLI then
-						local ask = {"What about HVLI?","Could you provide HVLI?"}
+						local ask = {_("ammo-comms", "What about HVLI?"),_("ammo-comms", "Could you provide HVLI?")}
 						local avail = ""
 						if not comms_target.comms_data.weapon_inventory.Unlimited then
-							avail = string.format(", %i avail",math.floor(comms_target.comms_data.weapon_inventory.HVLI))
+							avail = string.format(_("ammo-comms", ", %i avail"),math.floor(comms_target.comms_data.weapon_inventory.HVLI))
 						end
-						local hvli_prompt = string.format("%s (%i rep each%s)",ask[math.random(1,#ask)],getWeaponCost("HVLI"),avail)
+						local hvli_prompt = string.format(_("ammo-comms", "%s (%i rep each%s)"),ask[math.random(1,#ask)],getWeaponCost("HVLI"),avail)
 						addCommsReply(hvli_prompt, function()
 							handleWeaponRestock("HVLI",return_function)
 						end)
@@ -7606,22 +7606,22 @@ function repairSubsystems(return_function)
 end
 function handleWeaponRestock(weapon, return_function)
     if not comms_source:isDocked(comms_target) then 
-		setCommsMessage("You need to stay docked for that action.")
+		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_target.comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage("We do not deal in weapons of mass destruction.")
-        elseif weapon == "EMP" then setCommsMessage("We do not deal in weapons of mass disruption.")
-        else setCommsMessage("We do not deal in those weapons.") end
+        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage("All nukes are charged and primed for destruction.");
+            setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
+            setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
         addCommsReply(_("Back"), return_function)
     else
@@ -7631,12 +7631,12 @@ function handleWeaponRestock(weapon, return_function)
 				comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
 				if not comms_target.comms_data.weapon_inventory.Unlimited then
 					comms_target.comms_data.weapon_inventory[weapon] = comms_target.comms_data.weapon_inventory[weapon] - item_amount
-					inventory_status = string.format("\nStation inventory of %s type weapons reduced to %i",weapon,math.floor(comms_target.comms_data.weapon_inventory[weapon]))
+					inventory_status = string.format(_("ammo-comms", "\nStation inventory of %s type weapons reduced to %i"),weapon,math.floor(comms_target.comms_data.weapon_inventory[weapon]))
 				end
 				if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
-					setCommsMessage("You are fully loaded and ready to explode things." .. inventory_status)
+					setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things.") .. inventory_status)
 				else
-					setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use." .. inventory_status)
+					setCommsMessage(_("ammo-comms", "We generously resupplied you with some weapon charges.\nPut them to good use.") .. inventory_status)
 				end
 			else
 				setCommsMessage(_("needRep-comms", "Not enough reputation."))
@@ -7644,18 +7644,18 @@ function handleWeaponRestock(weapon, return_function)
 			end
 		else
 			if comms_source:getReputationPoints() > points_per_item then
-				setCommsMessage("Either you can't afford as much as I'd like to give you, or I don't have enough to fully restock you.")
-				addCommsReply("Get just one", function()
+				setCommsMessage(_("ammo-comms", "Either you can't afford as much as I'd like to give you, or I don't have enough to fully restock you."))
+				addCommsReply(_("ammo-comms", "Get just one"), function()
 					if comms_source:takeReputationPoints(points_per_item) then
 						comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + 1)
 						if not comms_target.comms_data.weapon_inventory.Unlimited then
 							comms_target.comms_data.weapon_inventory[weapon] = comms_target.comms_data.weapon_inventory[weapon] - 1
-							inventory_status = string.format("\nStation inventory of %s type weapons reduced to %i",weapon,math.floor(comms_target.comms_data.weapon_inventory[weapon]))
+							inventory_status = string.format(_("ammo-comms", "\nStation inventory of %s type weapons reduced to %i"),weapon,math.floor(comms_target.comms_data.weapon_inventory[weapon]))
 						end
 						if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
-							setCommsMessage("You are fully loaded and ready to explode things." .. inventory_status)
+							setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things.") .. inventory_status)
 						else
-							setCommsMessage("We generously resupplied you with one weapon charge.\nPut it to good use." .. inventory_status)
+							setCommsMessage(_("ammo-comms", "We generously resupplied you with one weapon charge.\nPut it to good use.") .. inventory_status)
 						end
 					else
 						setCommsMessage(_("needRep-comms", "Not enough reputation."))

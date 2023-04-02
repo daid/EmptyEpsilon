@@ -2790,7 +2790,7 @@ end
 
 function handleWeaponRestock(weapon)
     if not player:isDocked(comms_target) then 
-		setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
+		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
@@ -3437,7 +3437,7 @@ function neutralComms(comms_data)
 				end
 			end
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage(_("trade-comms", "What do you want?"))
+			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			destRep = random(1,5)
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()

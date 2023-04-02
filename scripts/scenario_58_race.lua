@@ -1594,11 +1594,11 @@ function handleDockedState()
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		addCommsReply("I need ordnance restocked", function()
-			setCommsMessage("What type of ordnance?")
+		addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
+			setCommsMessage(_("ammo-comms", "What type of ordnance?"))
 			for _, missile_type in ipairs(missile_types) do
 				if comms_source:getWeaponStorageMax(missile_type) > 0 then
-					addCommsReply(missile_type .. " (" .. getWeaponCost(missile_type) .. "rep each)", function()
+					addCommsReply(string.format(_("ammo-comms", "%s (%d rep each)"), missile_type, getWeaponCost(missile_type)), function()
 						handleWeaponRestock(missile_type)
 					end)
 				end
@@ -2210,22 +2210,22 @@ function isAllowedTo(state)
 end
 function handleWeaponRestock(weapon)
     if not comms_source:isDocked(comms_target) then 
-		setCommsMessage("You need to stay docked for that action.")
+		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage("We do not deal in weapons of mass destruction.")
-        elseif weapon == "EMP" then setCommsMessage("We do not deal in weapons of mass disruption.")
-        else setCommsMessage("We do not deal in those weapons.") end
+        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage("All nukes are charged and primed for destruction.");
+            setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
+            setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
         addCommsReply(_("Back"), commsStation)
     else
@@ -2235,9 +2235,9 @@ function handleWeaponRestock(weapon)
         end
         comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
         if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
-            setCommsMessage("You are fully loaded and ready to explode things.")
+            setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things."))
         else
-            setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
+            setCommsMessage(_("ammo-comms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
         end
         addCommsReply(_("Back"), commsStation)
     end
@@ -2592,7 +2592,7 @@ function neutralComms(comms_data)
 				end
 			end
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage(_("trade-comms", "What do you want?"))
+			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			destRep = random(1,5)
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()

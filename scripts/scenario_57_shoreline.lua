@@ -7640,7 +7640,7 @@ function isAllowedTo(state)
 end
 function handleWeaponRestock(weapon)
     if not comms_source:isDocked(comms_target) then 
-		setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
+		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
@@ -8175,13 +8175,13 @@ function altShipComms()
 	end
 	setPlayers()
 	if comms_source:isFriendly(comms_target) then
-		local c_msg = _("trade-comms", "Sir, how can we assist?")
+		local c_msg = _("shipAssist-comms", "Sir, how can we assist?")
 		if comms_target.comms_data.friendlyness < 20 then
-			c_msg = _("trade-comms", "What do you want?")
+			c_msg = _("shipAssist-comms", "What do you want?")
 		elseif comms_target.comms_data.friendlyness < 40 then
-			c_msg = _("trade-comms", "Hello?")
+			c_msg = _("shipAssist-comms", "Hello?")
 		elseif comms_target.comms_data.friendlyness < 60 then
-			c_msg = _("trade-comms", "Greetings")
+			c_msg = _("shipAssist-comms", "Greetings")
 		end
 		setCommsMessage(c_msg)
 		return altFriendlyShipComms()
@@ -8473,7 +8473,7 @@ function friendlyFreighterComms()
 				end	--different freighter types
 			end	--ship under 5 units away
 		elseif comms_target.comms_data.friendlyness > 33 then
-			setCommsMessage(_("trade-comms", "What do you want?"))
+			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			local destRep = math.floor(random(1,5))
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %i reputation)"),destRep), function()
@@ -8690,9 +8690,9 @@ function altFriendlyShipComms()
 end
 function friendlyComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage(_("trade-comms", "What do you want?"));
+		setCommsMessage(_("shipAssist-comms", "What do you want?"));
 	else
-		setCommsMessage(_("trade-comms", "Sir, how can we assist?"));
+		setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"));
 	end
 	if shipType:find("Freighter") ~= nil then
 		if comms_data.friendlyness > 66 then
@@ -8790,7 +8790,7 @@ function friendlyComms(comms_data)
 				end	--different freighter types
 			end	--ship under 5 units away
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage(_("trade-comms", "What do you want?"))
+			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			local destRep = random(1,5)
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
@@ -9287,7 +9287,7 @@ function neutralComms(comms_data)
 				end	--different freighter types
 			end	--ship under 5 units away
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage(_("trade-comms", "What do you want?"))
+			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			local destRep = random(1,5)
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()

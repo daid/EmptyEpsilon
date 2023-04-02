@@ -11537,7 +11537,7 @@ function handleDockedState()
     if comms_target:areEnemiesInRange(20000) then
 		oMsg = oMsg .. _("station-comms","\nForgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
 	end
-	oMsg = string.format(_("station-comms","%s\n\nReputation: %i"),oMsg,math.floor(comms_source:getReputationPoints()))
+	oMsg = string.format(_("station-comms", "%s\n\nReputation: %i"),oMsg,math.floor(comms_source:getReputationPoints()))
 	setCommsMessage(oMsg)
 	local mission_character = nil
 	local mission_type = nil
@@ -11995,9 +11995,9 @@ function handleDockedState()
 						local p_upgrade_level = comms_source.upgrade_path[u_type]
 						if u_max > p_upgrade_level then
 							upgrade_count = upgrade_count + 1
-							addCommsReply(string.format("%s: %s (%s)",u_type,upgrade_path[p_ship_type][u_type][p_upgrade_level + 1].desc,math.ceil(base_upgrade_cost+((p_upgrade_level+1)*upgrade_price))),function()
+							addCommsReply(string.format(_("upgrade-comms","%s: %s (%s)"),u_type,upgrade_path[p_ship_type][u_type][p_upgrade_level + 1].desc,math.ceil(base_upgrade_cost+((p_upgrade_level+1)*upgrade_price))),function()
 								if not comms_source:isDocked(comms_target) then 
-									setCommsMessage(_("upgrade-comms", "You need to stay docked for that action."))
+									setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 									return
 								end
 								if comms_source:takeReputationPoints(math.ceil(base_upgrade_cost+((p_upgrade_level+1)*upgrade_price))) then
@@ -12172,7 +12172,7 @@ function handleDockedState()
 				if comms_source:getJumpDriveCharge() >= max_charge then
 					addCommsReply(_("stationServices-comms", "Overcharge Jump Drive (10 Rep)"),function()
 						if not comms_source:isDocked(comms_target) then 
-							setCommsMessage(_("stationServices-comms", "You need to stay docked for that action."))
+							setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 							return
 						end
 						if comms_source:takeReputationPoints(10) then
@@ -12209,7 +12209,7 @@ function handleDockedState()
 					if not comms_source:getCanLaunchProbe() then
 						addCommsReply(string.format(_("stationServices-comms","Repair probe launch system (%s Rep)"),comms_target.comms_data.service_cost.probe_launch_repair),function()
 							if not comms_source:isDocked(comms_target) then 
-								setCommsMessage(_("stationServices-comms", "You need to stay docked for that action."))
+								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
 							end
 							if comms_source:takeReputationPoints(comms_target.comms_data.service_cost.probe_launch_repair) then
@@ -12226,7 +12226,7 @@ function handleDockedState()
 					if not comms_source:getCanHack() then
 						addCommsReply(string.format(_("stationServices-comms","Repair hacking system (%s Rep)"),comms_target.comms_data.service_cost.hack_repair),function()
 							if not comms_source:isDocked(comms_target) then 
-								setCommsMessage(_("stationServices-comms", "You need to stay docked for that action."))
+								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
 							end
 							if comms_source:takeReputationPoints(comms_target.comms_data.service_cost.hack_repair) then
@@ -12243,7 +12243,7 @@ function handleDockedState()
 					if not comms_source:getCanScan() then
 						addCommsReply(string.format(_("stationServices-comms","Repair scanning system (%s Rep)"),comms_target.comms_data.service_cost.scan_repair),function()
 							if not comms_source:isDocked(comms_target) then 
-								setCommsMessage(_("stationServices-comms", "You need to stay docked for that action."))
+								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
 							end
 							if comms_source:takeReputationPoints(comms_target.comms_data.service_cost.scan_repair) then
@@ -12261,7 +12261,7 @@ function handleDockedState()
 						if comms_source.combat_maneuver_capable then
 							addCommsReply(string.format(_("stationServices-comms","Repair combat maneuver (%s Rep)"),comms_target.comms_data.service_cost.combat_maneuver_repair),function()
 								if not comms_source:isDocked(comms_target) then 
-									setCommsMessage(_("stationServices-comms", "You need to stay docked for that action."))
+									setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 									return
 								end
 								if comms_source:takeReputationPoints(comms_target.comms_data.service_cost.combat_maneuver_repair) then
@@ -12279,7 +12279,7 @@ function handleDockedState()
 					if not comms_source:getCanSelfDestruct() then
 						addCommsReply(string.format(_("stationServices-comms","Repair self destruct system (%s Rep)"),comms_target.comms_data.service_cost.self_destruct_repair),function()
 							if not comms_source:isDocked(comms_target) then 
-								setCommsMessage(_("stationServices-comms", "You need to stay docked for that action."))
+								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
 							end
 							if comms_source:takeReputationPoints(comms_target.comms_data.service_cost.self_destruct_repair) then
@@ -12432,7 +12432,7 @@ function handleDockedState()
 				for good, goodData in pairs(comms_target.comms_data.goods) do
 					addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,goodData["cost"]), function()
 						if not comms_source:isDocked(comms_target) then 
-							setCommsMessage(_("trade-comms", "You need to stay docked for that action."))
+							setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 							return
 						end
 						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s, Quantity: %i, Rep: %i"),good,goodData["quantity"],goodData["cost"])
@@ -12467,7 +12467,7 @@ function handleDockedState()
 						if comms_source.goods[good] ~= nil and comms_source.goods[good] > 0 then
 							addCommsReply(string.format(_("trade-comms", "Sell one %s for %i reputation"),good,price), function()
 								if not comms_source:isDocked(comms_target) then 
-									setCommsMessage(_("trade-comms", "You need to stay docked for that action."))
+									setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 									return
 								end
 								local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Reputation price: %i"),good,price)
@@ -12488,7 +12488,7 @@ function handleDockedState()
 								for good, goodData in pairs(comms_target.comms_data.goods) do
 									addCommsReply(string.format(_("trade-comms", "Trade food for %s"),good), function()
 										if not comms_source:isDocked(comms_target) then 
-											setCommsMessage(_("trade-comms", "You need to stay docked for that action."))
+											setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 											return
 										end
 										local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
@@ -12521,7 +12521,7 @@ function handleDockedState()
 								for good, goodData in pairs(comms_target.comms_data.goods) do
 									addCommsReply(string.format(_("trade-comms", "Trade medicine for %s"),good), function()
 										if not comms_source:isDocked(comms_target) then 
-											setCommsMessage(_("trade-comms", "You need to stay docked for that action."))
+											setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 											return
 										end
 										local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
@@ -12554,7 +12554,7 @@ function handleDockedState()
 								for good, goodData in pairs(comms_target.comms_data.goods) do
 									addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
 										if not comms_source:isDocked(comms_target) then 
-											setCommsMessage(_("trade-comms", "You need to stay docked for that action."))
+											setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 											return
 										end
 										local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
@@ -12635,7 +12635,7 @@ function getRepairCrewFromStation(relationship)
 					setCommsMessage(_("trade-comms","We have a repair crew candidate for you to consider"))
 					addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hire_cost), function()
 						if not comms_source:isDocked(comms_target) then 
-							setCommsMessage(_("trade-comms", "You need to stay docked for that action."))
+							setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 							return
 						end
 						if not comms_source:takeReputationPoints(hire_cost) then
@@ -12730,7 +12730,7 @@ function getCoolantFromStation(relationship)
 						setCommsMessage(_("trade-comms","We've got some coolant available for you"))
 						addCommsReply(string.format(_("trade-comms", "Purchase coolant for %i reputation"),coolantCost), function()
 							if not comms_source:isDocked(comms_target) then 
-								setCommsMessage(_("trade", "You need to stay docked for that action."))
+								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
 							end
 							if not comms_source:takeReputationPoints(coolantCost) then
@@ -12931,7 +12931,7 @@ function isAllowedTo(state)
 end
 function handleWeaponRestock(weapon)
     if not comms_source:isDocked(comms_target) then 
-		setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
+		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then

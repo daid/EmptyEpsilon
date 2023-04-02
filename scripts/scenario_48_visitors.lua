@@ -5360,22 +5360,22 @@ function handleDockedState()
 			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
 			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
 			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
-			addCommsReply("I need ordnance restocked", function()
+			addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
 				local ctd = comms_target.comms_data
 				if stationCommsDiagnostic then print("in restock function") end
-				setCommsMessage("What type of ordnance?")
+				setCommsMessage(_("ammo-comms", "What type of ordnance?"))
 				if stationCommsDiagnostic then print(string.format("player nuke weapon storage max: %.1f",comms_source:getWeaponStorageMax("Nuke"))) end
 				if comms_source:getWeaponStorageMax("Nuke") > 0 then
 					if stationCommsDiagnostic then print("player can fire nukes") end
 					if ctd.weapon_available.Nuke then
 						if stationCommsDiagnostic then print("station has nukes available") end
 						if math.random(1,10) <= 5 then
-							nukePrompt = "Can you supply us with some nukes? ("
+							nukePrompt = _("ammo-comms", "Can you supply us with some nukes? (")
 						else
-							nukePrompt = "We really need some nukes ("
+							nukePrompt = _("ammo-comms", "We really need some nukes (")
 						end
 						if stationCommsDiagnostic then print("nuke prompt: " .. nukePrompt) end
-						addCommsReply(nukePrompt .. getWeaponCost("Nuke") .. " rep each)", function()
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
 							if stationCommsDiagnostic then print("going to handle weapon restock function") end
 							handleWeaponRestock("Nuke")
 						end)
@@ -5384,11 +5384,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("EMP") > 0 then
 					if ctd.weapon_available.EMP then
 						if math.random(1,10) <= 5 then
-							empPrompt = "Please re-stock our EMP missiles. ("
+							empPrompt = _("ammo-comms", "Please re-stock our EMP missiles. (")
 						else
-							empPrompt = "Got any EMPs? ("
+							empPrompt = _("ammo-comms", "Got any EMPs? (")
 						end
-						addCommsReply(empPrompt .. getWeaponCost("EMP") .. " rep each)", function()
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), empPrompt, getWeaponCost("EMP")), function()
 							handleWeaponRestock("EMP")
 						end)
 					end	--end station has EMP available if branch
@@ -5396,11 +5396,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("Homing") > 0 then
 					if ctd.weapon_available.Homing then
 						if math.random(1,10) <= 5 then
-							homePrompt = "Do you have spare homing missiles for us? ("
+							homePrompt = _("ammo-comms", "Do you have spare homing missiles for us? (")
 						else
-							homePrompt = "Do you have extra homing missiles? ("
+							homePrompt = _("ammo-comms", "Do you have extra homing missiles? (")
 						end
-						addCommsReply(homePrompt .. getWeaponCost("Homing") .. " rep each)", function()
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), homePrompt, getWeaponCost("Homing")), function()
 							handleWeaponRestock("Homing")
 						end)
 					end	--end station has homing for player if branch
@@ -5408,11 +5408,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("Mine") > 0 then
 					if ctd.weapon_available.Mine then
 						if math.random(1,10) <= 5 then
-							minePrompt = "We could use some mines. ("
+							minePrompt = _("ammo-comms", "We could use some mines. (")
 						else
-							minePrompt = "How about mines? ("
+							minePrompt = _("ammo-comms", "How about mines? (")
 						end
-						addCommsReply(minePrompt .. getWeaponCost("Mine") .. " rep each)", function()
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), minePrompt, getWeaponCost("Mine")), function()
 							handleWeaponRestock("Mine")
 						end)
 					end	--end station has mine for player if branch
@@ -5420,11 +5420,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("HVLI") > 0 then
 					if ctd.weapon_available.HVLI then
 						if math.random(1,10) <= 5 then
-							hvliPrompt = "What about HVLI? ("
+							hvliPrompt = _("ammo-comms", "What about HVLI? (")
 						else
-							hvliPrompt = "Could you provide HVLI? ("
+							hvliPrompt = _("ammo-comms", "Could you provide HVLI? (")
 						end
-						addCommsReply(hvliPrompt .. getWeaponCost("HVLI") .. " rep each)", function()
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), hvliPrompt, getWeaponCost("HVLI")), function()
 							handleWeaponRestock("HVLI")
 						end)
 					end	--end station has HVLI for player if branch
@@ -6981,22 +6981,22 @@ function isAllowedTo(state)
 end
 function handleWeaponRestock(weapon)
     if not comms_source:isDocked(comms_target) then 
-		setCommsMessage("You need to stay docked for that action.")
+		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage("We do not deal in weapons of mass destruction.")
-        elseif weapon == "EMP" then setCommsMessage("We do not deal in weapons of mass disruption.")
-        else setCommsMessage("We do not deal in those weapons.") end
+        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage("All nukes are charged and primed for destruction.");
+            setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
+            setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
         addCommsReply(_("Back"), commsStation)
     else
@@ -7004,9 +7004,9 @@ function handleWeaponRestock(weapon)
 			if comms_source:takeReputationPoints(points_per_item * item_amount) then
 				comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
 				if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
-					setCommsMessage("You are fully loaded and ready to explode things.")
+					setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things."))
 				else
-					setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
+					setCommsMessage(_("ammo-comms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
 				end
 			else
 				setCommsMessage(_("needRep-comms", "Not enough reputation."))
@@ -7014,14 +7014,14 @@ function handleWeaponRestock(weapon)
 			end
 		else
 			if comms_source:getReputationPoints() > points_per_item then
-				setCommsMessage("You can't afford as much as I'd like to give you")
-				addCommsReply("Get just one", function()
+				setCommsMessage(_("ammo-comms", "You can't afford as much as I'd like to give you"))
+				addCommsReply(_("ammo-comms", "Get just one"), function()
 					if comms_source:takeReputationPoints(points_per_item) then
 						comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + 1)
 						if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
-							setCommsMessage("You are fully loaded and ready to explode things.")
+							setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things."))
 						else
-							setCommsMessage("We generously resupplied you with one weapon charge.\nPut it to good use.")
+							setCommsMessage(_("ammo-comms", "We generously resupplied you with one weapon charge.\nPut it to good use."))
 						end
 					else
 						setCommsMessage(_("needRep-comms", "Not enough reputation."))

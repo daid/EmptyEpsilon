@@ -3977,7 +3977,7 @@ function isAllowedTo(state)
 end
 function handleWeaponRestock(weapon)
     if not player:isDocked(comms_target) then 
-		setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
+		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
@@ -4036,9 +4036,9 @@ function handleWeaponRestock(weapon)
         end
         player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
         if player:getWeaponStorage(weapon) == player:getWeaponStorageMax(weapon) then
-            setCommsMessage("You are fully loaded and ready to explode things.")
+            setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things."))
         else
-            setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
+            setCommsMessage(_("ammo-comms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
         end
 --]]
         addCommsReply(_("Back"), commsStation)
@@ -4364,9 +4364,9 @@ function commsShip()
 end
 function friendlyComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage(_("trade-comms", "What do you want?"));
+		setCommsMessage(_("shipAssist-comms", "What do you want?"));
 	else
-		setCommsMessage(_("trade-comms", "Sir, how can we assist?"));
+		setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"));
 	end
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
@@ -4654,7 +4654,7 @@ function neutralComms(comms_data)
 				end	--freighter goods loop
 			end
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage(_("trade-comms", "What do you want?"))
+			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			destRep = random(1,5)
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()

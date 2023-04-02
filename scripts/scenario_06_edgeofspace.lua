@@ -899,7 +899,7 @@ What can we do for you today?]]))
             _("ammo-comms", "Do you have spare homing missiles for us? (2rep each)"),
             function()
                 if not comms_source:isDocked(comms_target) then
-                    setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
+                    setCommsMessage(_("station-comms", "You need to stay docked for that action."))
                     return
                 end
                 if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Homing") - comms_source:getWeaponStorage("Homing"))) then
@@ -920,7 +920,7 @@ What can we do for you today?]]))
             _("ammo-comms", "Please re-stock our mines. (2rep each)"),
             function()
                 if not comms_source:isDocked(comms_target) then
-                    setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
+                    setCommsMessage(_("station-comms", "You need to stay docked for that action."))
                     return
                 end
                 if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Mine") - comms_source:getWeaponStorage("Mine"))) then
@@ -941,7 +941,7 @@ What can we do for you today?]]))
             _("ammo-comms", "Can you supply us with some nukes? (15rep each)"),
             function()
                 if not comms_source:isDocked(comms_target) then
-                    setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
+                    setCommsMessage(_("station-comms", "You need to stay docked for that action."))
                     return
                 end
                 if not comms_source:takeReputationPoints(15 * (comms_source:getWeaponStorageMax("Nuke") - comms_source:getWeaponStorage("Nuke"))) then
@@ -962,7 +962,7 @@ What can we do for you today?]]))
             _("ammo-comms", "Please re-stock our EMP missiles. (10rep each)"),
             function()
                 if not comms_source:isDocked(comms_target) then
-                    setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
+                    setCommsMessage(_("station-comms", "You need to stay docked for that action."))
                     return
                 end
                 if not comms_source:takeReputationPoints(10 * (comms_source:getWeaponStorageMax("EMP") - comms_source:getWeaponStorage("EMP"))) then
@@ -995,7 +995,7 @@ If you want to do business, please dock with us first.]]))
             _("ammo-comms", "Do you have spare homing missiles for us? (5rep each)"),
             function()
                 if not comms_source:isDocked(comms_target) then
-                    setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
+                    setCommsMessage(_("station-comms", "You need to stay docked for that action."))
                     return
                 end
                 if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") / 2 then
@@ -1018,7 +1018,7 @@ Put them to good use.]]))
             _("ammo-comms", "Please re-stock our mines. (5rep each)"),
             function()
                 if not comms_source:isDocked(comms_target) then
-                    setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
+                    setCommsMessage(_("station-comms", "You need to stay docked for that action."))
                     return
                 end
                 if comms_source:getWeaponStorage("Mine") >= comms_source:getWeaponStorageMax("Mine") then

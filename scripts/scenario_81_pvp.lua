@@ -226,7 +226,7 @@ function addCommsReplySupply(args)
         string.format(args.request .. " " .. _("ammo-comms", "(%d rep each)"), price),
         function()
             if not comms_source:isDocked(comms_target) then
-                setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
+                setCommsMessage(_("station-comms", "You need to stay docked for that action."))
                 return
             end
             if not comms_source:takeReputationPoints(price * (comms_source:getWeaponStorageMax(missile_type) - comms_source:getWeaponStorage(missile_type))) then
