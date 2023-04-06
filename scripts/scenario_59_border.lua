@@ -4132,7 +4132,7 @@ function insertPlanet1()
 	local bwx = (gRegion[sri][1] - (gbHigh/2))*gSize
 	local bwy = (gRegion[sri][2] - (gbHigh/2))*gSize
 	planetBespin = Planet():setPosition(bwx,bwy):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Bespin")
-	planetBespin:setPlanetSurfaceTexture("planets/gas-1.png"):setAxialRotationTime(300):setDescription("Mining and Gambling")
+	planetBespin:setPlanetSurfaceTexture("planets/gas-1.png"):setAxialRotationTime(300):setDescription(_("scienceDescription-planet", "Mining and Gambling"))
 	gp = gp + 1
 	local rn = math.random(1,#adjList)
 	gx = adjList[rn][1]
@@ -4162,7 +4162,7 @@ function insertPlanet2()
 	planetHel = Planet():setPosition(msx,msy):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Helicon")
 	planetHel:setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png")
 	planetHel:setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,1.0)
-	planetHel:setAxialRotationTime(400.0):setDescription("M class planet")
+	planetHel:setAxialRotationTime(400.0):setDescription(_("scienceDescription-planet", "M class planet"))
 	gp = gp + 1
 	local rn = math.random(1,#adjList)
 	gx = adjList[rn][1]
@@ -8753,7 +8753,7 @@ function setFleets()
 	end
 	table.insert(enemyFleetList,enemyFleet1)
 	table.insert(enemyDefensiveFleetList,enemyFleet1)
-	intelGatherArtifacts[1]:setDescriptions("Scan to gather intelligence",string.format("Enemy fleet detected in sector %s",enemyFleet1base:getSectorName()))
+	intelGatherArtifacts[1]:setDescriptions(_("scienceDescription-artifact", "Scan to gather intelligence"),string.format(_("scienceDescription-artifact", "Enemy fleet detected in sector %s"),enemyFleet1base:getSectorName()))
 	intelGatherArtifacts[1].startSector = enemyFleet1base:getSectorName()
 	enemyResource = enemyResource - enemyFleet1Power
 	if enemyResource > 120 then
@@ -8774,7 +8774,7 @@ function setFleets()
 	end
 	table.insert(enemyFleetList,enemyFleet2)
 	table.insert(enemyDefensiveFleetList,enemyFleet2)
-	intelGatherArtifacts[2]:setDescriptions("Scan to gather intelligence",string.format("Enemy fleet detected in sector %s",enemyFleet2base:getSectorName()))
+	intelGatherArtifacts[2]:setDescriptions(_("scienceDescription-artifact", "Scan to gather intelligence"),string.format(_("scienceDescription-artifact", "Enemy fleet detected in sector %s"),enemyFleet2base:getSectorName()))
 	intelGatherArtifacts[2].startSector = enemyFleet2base:getSectorName()
 	enemyResource = enemyResource - enemyFleet2Power
 	if enemyResource > 120 then
@@ -8795,7 +8795,7 @@ function setFleets()
 	end
 	table.insert(enemyFleetList,enemyFleet3)
 	table.insert(enemyDefensiveFleetList,enemyFleet3)
-	intelGatherArtifacts[3]:setDescriptions("Scan to gather intelligence",string.format("Enemy fleet detected in sector %s",enemyFleet3base:getSectorName()))
+	intelGatherArtifacts[3]:setDescriptions(_("scienceDescription-artifact", "Scan to gather intelligence"),string.format(_("scienceDescription-artifact", "Enemy fleet detected in sector %s"),enemyFleet3base:getSectorName()))
 	intelGatherArtifacts[3].startSector = enemyFleet3base:getSectorName()
 	enemyResource = enemyResource - enemyFleet3Power
 	repeat
@@ -8811,7 +8811,7 @@ function setFleets()
 	end
 	table.insert(enemyFleetList,enemyFleet4)
 	table.insert(enemyDefensiveFleetList,enemyFleet4)
-	intelGatherArtifacts[4]:setDescriptions("Scan to gather intelligence",string.format("Enemy fleet detected in sector %s",enemyFleet4base:getSectorName()))
+	intelGatherArtifacts[4]:setDescriptions(_("scienceDescription-artifact", "Scan to gather intelligence"),string.format(_("scienceDescription-artifact", "Enemy fleet detected in sector %s"),enemyFleet4base:getSectorName()))
 	intelGatherArtifacts[4].startSector = enemyFleet4base:getSectorName()
 	enemyResource = enemyResource - enemyFleet4Power
 	repeat
@@ -8827,7 +8827,7 @@ function setFleets()
 	end
 	table.insert(enemyFleetList,enemyFleet5)
 	table.insert(enemyDefensiveFleetList,enemyFleet5)
-	intelGatherArtifacts[5]:setDescriptions("Scan to gather intelligence",string.format("Enemy fleet detected in sector %s",enemyFleet5base:getSectorName()))
+	intelGatherArtifacts[5]:setDescriptions(_("scienceDescription-artifact", "Scan to gather intelligence"),string.format(_("scienceDescription-artifact", "Enemy fleet detected in sector %s"),enemyFleet5base:getSectorName()))
 	intelGatherArtifacts[5].startSector = enemyFleet5base:getSectorName()
 	
 	--friendly defensive fleets
@@ -17100,7 +17100,7 @@ function vengence(delta)
 					vengenceFleet = candidate
 				end
 			until(vengenceFleet ~= nil)
-			intelGatherArtifacts[edfi]:setDescriptions("Scan to gather intelligence",string.format("Enemy fleet in sector %s is on the move",intelGatherArtifacts[edfi].startSector))
+			intelGatherArtifacts[edfi]:setDescriptions(_("scienceDescription-artifact", "Scan to gather intelligence"),string.format(_("scienceDescription-artifact", "Enemy fleet in sector %s is on the move"),intelGatherArtifacts[edfi].startSector))
 			for _, enemy in ipairs(vengenceFleet) do
 				if enemy ~= nil and enemy:isValid() then
 					enemy:orderRoaming()

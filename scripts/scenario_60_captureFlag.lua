@@ -476,7 +476,7 @@ function init()
 	human_flags = {}
 	kraylor_flags = {}
 	-- 'stationZebra' is placed at position 0,0 and is present for all environment setups
-		stationZebra = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation):setPosition(0,0):setCallSign("Zebra"):setDescription("Referee")
+		stationZebra = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation):setPosition(0,0):setCallSign("Zebra"):setDescription(_("scienceDescription-station", "Referee"))
 		table.insert(stationList,stationZebra)
 	-- the following tables are used for enemy marauding ships; the tables help plot arrival points for the marauding ships
 		-- square grid deployment
@@ -797,8 +797,8 @@ function plotTeamDemarcationLine()
 		buoy_beam_timer = buoy_beam_interval
 		buoy_beam_count = 0
 		for i=1,80 do
-			table.insert(boundary_items,Artifact():allowPickup(false):setPosition(0,i*2500):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(100):setCallSign("Marker Buoy"):setDescriptions("Territory boundary marker","A buoy placed on the line marking the boundary between Human and Kraylor territory"):setScanningParameters(1,1):setRadarSignatureInfo(.5,1,0))
-			table.insert(boundary_items,Artifact():allowPickup(false):setPosition(0,i*-2500):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(100):setCallSign("Marker Buoy"):setDescriptions("Territory boundary marker","A buoy placed on the line marking the boundary between Human and Kraylor territory"):setScanningParameters(1,1):setRadarSignatureInfo(0,.5,1))
+			table.insert(boundary_items,Artifact():allowPickup(false):setPosition(0,i*2500):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(100):setCallSign("Marker Buoy"):setDescriptions(_("scienceDescription-artifact", "Territory boundary marker"),_("scienceDescription-artifact", "A buoy placed on the line marking the boundary between Human and Kraylor territory")):setScanningParameters(1,1):setRadarSignatureInfo(.5,1,0))
+			table.insert(boundary_items,Artifact():allowPickup(false):setPosition(0,i*-2500):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(100):setCallSign("Marker Buoy"):setDescriptions(_("scienceDescription-artifact", "Territory boundary marker"),_("scienceDescription-artifact", "A buoy placed on the line marking the boundary between Human and Kraylor territory")):setScanningParameters(1,1):setRadarSignatureInfo(0,.5,1))
 		end
 	end
 end
@@ -868,7 +868,7 @@ function createBoundaryMarker(position_x, position_y)
 			:setPlanetSurfaceTexture("planets/star-1.png")
 			:setPlanetAtmosphereColor(1.0,1.0,1.0)
 	elseif boundary_marker == "buoys" then
-		temp_marker = Artifact():allowPickup(false):setPosition(position_x,position_y):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(50):setDescriptions("Flag hiding territory boundary marker","A temporary buoy placed on the edge of the territory where a flag or decoy may be hidden"):setScanningParameters(1,1):setRadarSignatureInfo(.3,.5,0)
+		temp_marker = Artifact():allowPickup(false):setPosition(position_x,position_y):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(50):setDescriptions(_("scienceDescription-artifact", "Flag hiding territory boundary marker"), _("scienceDescription-artifact", "A temporary buoy placed on the edge of the territory where a flag or decoy may be hidden")):setScanningParameters(1,1):setRadarSignatureInfo(.3,.5,0)
 	end
 	return temp_marker
 end
@@ -2120,7 +2120,7 @@ function setPlayer(pobj,playerIndex)
 			if my_faction == "Kraylor" then
 				p1Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
 				table.insert(human_flags,p1Flag)
-				p1Flag:setDescriptions("Flag","Human Navy Flag"):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+				p1Flag:setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Human Navy Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 				if difficulty < 2 then
 					p1Flag:setScannedByFaction("Kraylor",true)
 					if difficulty < 1 then
@@ -2136,7 +2136,7 @@ function setPlayer(pobj,playerIndex)
 			elseif my_faction == "Human Navy" then
 				p2Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
 				table.insert(kraylor_flags,p2Flag)
-				p2Flag:setDescriptions("Flag","Kraylor Flag"):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+				p2Flag:setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Kraylor Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 				if difficulty < 2 then
 					p2Flag:setScannedByFaction("Human Navy",true)
 					if difficulty < 1 then
@@ -8593,7 +8593,7 @@ function transitionFromPreparationToHunt()
 		if p1Flagy > boundary/2 then
 			p1Flagy = boundary/2
 		end
-		p1Flag = Artifact():setPosition(p1Flagx,p1Flagy):setModel("artifact5"):allowPickup(false):setDescriptions("Flag","Human Navy Flag"):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+		p1Flag = Artifact():setPosition(p1Flagx,p1Flagy):setModel("artifact5"):allowPickup(false):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Human Navy Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 		table.insert(human_flags,p1Flag)
 		if difficulty < 1 then
 			p1Flag:setScannedByFaction("Kraylor")
@@ -8629,7 +8629,7 @@ function transitionFromPreparationToHunt()
 		if p2Flagy > boundary/2 then
 			p2Flagy = boundary/2
 		end
-		p2Flag = Artifact():setPosition(p2Flagx,p2Flagy):setModel("artifact5"):allowPickup(false):setDescriptions("Flag","Kraylor Flag"):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+		p2Flag = Artifact():setPosition(p2Flagx,p2Flagy):setModel("artifact5"):allowPickup(false):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Kraylor Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 		table.insert(kraylor_flags,p2Flag)
 		if difficulty < 1 then
 			p2Flag:setScannedByFaction("Human Navy")
@@ -8656,7 +8656,7 @@ function transitionFromPreparationToHunt()
 	if decoyH1 == nil then
 		if decoyH1x ~= nil then
 			if decoyH1x > -1*boundary and decoyH1y > -1*boundary/2 and decoyH1y < boundary/2 then
-				decoyH1 = Artifact():setPosition(decoyH1x,decoyH1y):setModel("artifact5"):setDescriptions("Flag","Human Navy Decoy Flag"):allowPickup(false)
+				decoyH1 = Artifact():setPosition(decoyH1x,decoyH1y):setModel("artifact5"):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Human Navy Decoy Flag")):allowPickup(false)
 				table.insert(human_flags,decoyH1)
 				if difficulty > 1 then
 					decoyH1:setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
@@ -8669,7 +8669,7 @@ function transitionFromPreparationToHunt()
 	if decoyK1 == nil then
 		if decoyK1x ~= nil then
 			if decoyK1x < boundary and decoyK1y > -1*boundary/2 and decoyK1y < boundary/2 then
-				decoyK1 = Artifact():setPosition(decoyK1x,decoyK1y):setModel("artifact5"):setDescriptions("Flag","Kraylor Decoy Flag"):allowPickup(false)
+				decoyK1 = Artifact():setPosition(decoyK1x,decoyK1y):setModel("artifact5"):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Kraylor Decoy Flag")):allowPickup(false)
 				table.insert(kraylor_flags,decoyK1)
 				if difficulty > 1 then
 					decoyK1:setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
@@ -8682,7 +8682,7 @@ function transitionFromPreparationToHunt()
 	if decoyH2 == nil then
 		if decoyH2x ~= nil then
 			if decoyH2x > -1*boundary and decoyH2y > -1*boundary/2 and decoyH2y < boundary/2 then
-				decoyH2 = Artifact():setPosition(decoyH2x,decoyH2y):setModel("artifact5"):setDescriptions("Flag","Human Navy Decoy Flag"):allowPickup(false)
+				decoyH2 = Artifact():setPosition(decoyH2x,decoyH2y):setModel("artifact5"):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Human Navy Decoy Flag")):allowPickup(false)
 				table.insert(human_flags,decoyH2)
 				if difficulty > 1 then
 					decoyH2:setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
@@ -8695,7 +8695,7 @@ function transitionFromPreparationToHunt()
 	if decoyK2 == nil then
 		if decoyK2x ~= nil then
 			if decoyK2x < boundary and decoyK2y > -1*boundary/2 and decoyK2y < boundary/2 then
-				decoyK2 = Artifact():setPosition(decoyK2x,decoyK2y):setModel("artifact5"):setDescriptions("Flag","Kraylor Decoy Flag"):allowPickup(false)
+				decoyK2 = Artifact():setPosition(decoyK2x,decoyK2y):setModel("artifact5"):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Kraylor Decoy Flag")):allowPickup(false)
 				table.insert(kraylor_flags,decoyK2)
 				if difficulty > 1 then
 					decoyK2:setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
@@ -8708,7 +8708,7 @@ function transitionFromPreparationToHunt()
 	if decoyH3 == nil then
 		if decoyH3x ~= nil then
 			if decoyH3x > -1*boundary and decoyH3y > -1*boundary/2 and decoyH3y < boundary/2 then
-				decoyH3 = Artifact():setPosition(decoyH3x,decoyH3y):setModel("artifact5"):setDescriptions("Flag","Human Navy Decoy Flag"):allowPickup(false)
+				decoyH3 = Artifact():setPosition(decoyH3x,decoyH3y):setModel("artifact5"):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Human Navy Decoy Flag")):allowPickup(false)
 				table.insert(human_flags,decoyH3)
 				if difficulty > 1 then
 					decoyH3:setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
@@ -8721,7 +8721,7 @@ function transitionFromPreparationToHunt()
 	if decoyK3 == nil then
 		if decoyK3x ~= nil then
 			if decoyK3x < boundary and decoyK3y > -1*boundary/2 and decoyK3y < boundary/2 then
-				decoyK3 = Artifact():setPosition(decoyK3x,decoyK3y):setModel("artifact5"):setDescriptions("Flag","Kraylor Decoy Flag"):allowPickup(false)
+				decoyK3 = Artifact():setPosition(decoyK3x,decoyK3y):setModel("artifact5"):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Kraylor Decoy Flag")):allowPickup(false)
 				table.insert(kraylor_flags,decoyK3)
 				if difficulty > 1 then
 					decoyK3:setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
@@ -8858,7 +8858,7 @@ function manageHuntPhaseMechanics()
 										end
 										p1Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
 										table.insert(human_flags,p1Flag)
-										p1Flag:setDescriptions("Flag","Human Navy Flag"):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+										p1Flag:setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Human Navy Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 										if difficulty < 2 then
 											p1Flag:setScannedByFaction("Kraylor",true)
 											for cpidx=1,32 do
@@ -8982,7 +8982,7 @@ function manageHuntPhaseMechanics()
 										end
 										p2Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
 										table.insert(kraylor_flags,p2Flag)
-										p2Flag:setDescriptions("Flag","Kraylor Flag"):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+										p2Flag:setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Kraylor Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 										if difficulty < 2 then
 											p2Flag:setScannedByFaction("Human Navy",true)
 											for cpidx=1,32 do
