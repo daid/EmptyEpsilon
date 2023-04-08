@@ -690,18 +690,18 @@ function setStations()
 	neutralStations = 0
 	--Timer
 	stationTimer = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationTimer:setPosition(-5000,-5000):setDescription("Race Timing Facility"):setCallSign("Timer")
+	stationTimer:setPosition(-5000,-5000):setDescription(_("scienceDescription-station", "Race Timing Facility")):setCallSign("Timer")
 	table.insert(stationList,stationTimer)
 	friendlyStations = friendlyStations + 1
 	--Vaiken
 	stationVaiken = SpaceStation():setTemplate("Huge Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationVaiken:setPosition(random(-10000,5000),random(5000,9000)):setCallSign("Vaiken"):setDescription("Ship building and maintenance facility")
+	stationVaiken:setPosition(random(-10000,5000),random(5000,9000)):setCallSign("Vaiken"):setDescription(_("scienceDescription-station", "Ship building and maintenance facility"))
 	table.insert(stationList,stationVaiken)
 	friendlyStations = friendlyStations + 1
 	goods[stationVaiken] = {{"food",10,1},{"medicine",5,5}}
 	--Zefram
 	stationZefram = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationZefram:setPosition(random(5000,8000),random(-8000,9000)):setCallSign("Zefram"):setDescription("Warp Engine Components")
+	stationZefram:setPosition(random(5000,8000),random(-8000,9000)):setCallSign("Zefram"):setDescription(_("scienceDescription-station", "Warp Engine Components"))
 	table.insert(stationList,stationZefram)
 	friendlyStations = friendlyStations + 1
 	goods[stationZefram] = {{"warp",5,140},{"food",5,1}}
@@ -709,7 +709,7 @@ function setStations()
 	marconiAngle = random(0,360)
 	xMarconi, yMarconi = vectorFromAngle(marconiAngle,random(12500,15000))
 	stationMarconi = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationMarconi:setPosition(xMarconi,yMarconi):setCallSign("Marconi"):setDescription("Energy Beam Components")
+	stationMarconi:setPosition(xMarconi,yMarconi):setCallSign("Marconi"):setDescription(_("scienceDescription-station", "Energy Beam Components"))
 	table.insert(stationList,stationMarconi)
 	neutralStations = neutralStations + 1
 	goods[stationMarconi] = {{"beam",5,80}}
@@ -717,7 +717,7 @@ function setStations()
 	muddAngle = marconiAngle + random(60,180)
 	xMudd, yMudd = vectorFromAngle(muddAngle,random(12500,15000))
 	stationMudd = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationMudd:setPosition(xMudd,yMudd):setCallSign("Muddville"):setDescription("Trading station")
+	stationMudd:setPosition(xMudd,yMudd):setCallSign("Muddville"):setDescription(_("scienceDescription-station", "Trading station"))
 	table.insert(stationList,stationMudd)
 	neutralStations = neutralStations + 1
 	goods[stationMudd] = {{"luxury",10,60}}
@@ -725,25 +725,25 @@ function setStations()
 	alcaleicaAngle = muddAngle + random(60,120)
 	xAlcaleica, yAlcaleica = vectorFromAngle(alcaleicaAngle,random(12500,15000))
 	stationAlcaleica = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationAlcaleica:setPosition(xAlcaleica,yAlcaleica):setCallSign("Alcaleica"):setDescription("Optical Components")
+	stationAlcaleica:setPosition(xAlcaleica,yAlcaleica):setCallSign("Alcaleica"):setDescription(_("scienceDescription-station", "Optical Components"))
 	table.insert(stationList,stationAlcaleica)
 	neutralStations = neutralStations + 1
 	goods[stationAlcaleica] = {{"optic",5,66}}
 	--California
 	stationCalifornia = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationCalifornia:setPosition(random(-90000,-70000),random(-15000,25000)):setCallSign("California"):setDescription("Mining station")
+	stationCalifornia:setPosition(random(-90000,-70000),random(-15000,25000)):setCallSign("California"):setDescription(_("scienceDescription-station", "Mining station"))
 	table.insert(stationList,stationCalifornia)
 	friendlyStations = friendlyStations + 1
 	goods[stationCalifornia] = {{"food",2,1},{"gold",5,25},{"dilithium",2,25}}
 	--Outpost-15
 	stationOutpost15 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost15:setPosition(random(35000,50000),random(52000,79000)):setCallSign("Outpost-15"):setDescription("Mining and trade")
+	stationOutpost15:setPosition(random(35000,50000),random(52000,79000)):setCallSign("Outpost-15"):setDescription(_("scienceDescription-station", "Mining and trade"))
 	table.insert(stationList,stationOutpost15)
 	neutralStations = neutralStations + 1
 	placeRandomAroundPoint(Asteroid,25,1,15000,60000,75000)
 	--Outpost-21
 	stationOutpost21 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost21:setPosition(random(50000,75000),random(52000,61250)):setCallSign("Outpost-21"):setDescription("Mining and gambling")
+	stationOutpost21:setPosition(random(50000,75000),random(52000,61250)):setCallSign("Outpost-21"):setDescription(_("scienceDescription-station", "Mining and gambling"))
 	table.insert(stationList,stationOutpost21)
 	neutralStations = neutralStations + 1
 	if random(1,100) < 50 then
@@ -755,7 +755,7 @@ function setStations()
 	end
 	--Valero
 	stationValero = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationValero:setPosition(random(-88000,-65000),random(36250,40000)):setCallSign("Valero"):setDescription("Resupply")
+	stationValero:setPosition(random(-88000,-65000),random(36250,40000)):setCallSign("Valero"):setDescription(_("scienceDescription-station", "Resupply"))
 	table.insert(stationList,stationValero)
 	neutralStations = neutralStations + 1
 	goods[stationValero] = {{"luxury",5,77}}
@@ -763,7 +763,7 @@ function setStations()
 	vactelAngle = random(0,360)
 	xVactel, yVactel = vectorFromAngle(vactelAngle,random(50000,61250))
 	stationVactel = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationVactel:setPosition(xVactel,yVactel):setCallSign("Vactel"):setDescription("Shielded Circuitry Fabrication")
+	stationVactel:setPosition(xVactel,yVactel):setCallSign("Vactel"):setDescription(_("scienceDescription-station", "Shielded Circuitry Fabrication"))
 	table.insert(stationList,stationVactel)
 	neutralStations = neutralStations + 1
 	goods[stationVactel] = {{"circuit",5,50}}
@@ -771,7 +771,7 @@ function setStations()
 	archerAngle = vactelAngle + random(60,120)
 	xArcher, yArcher = vectorFromAngle(archerAngle,random(50000,61250))
 	stationArcher = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationArcher:setPosition(xArcher,yArcher):setCallSign("Archer"):setDescription("Shield and Armor Research")
+	stationArcher:setPosition(xArcher,yArcher):setCallSign("Archer"):setDescription(_("scienceDescription-station", "Shield and Armor Research"))
 	table.insert(stationList,stationArcher)
 	neutralStations = neutralStations + 1
 	goods[stationArcher] = {{"shield",5,90}}
@@ -779,7 +779,7 @@ function setStations()
 	deerAngle = archerAngle + random(60,120)
 	xDeer, yDeer = vectorFromAngle(deerAngle,random(50000,61250))
 	stationDeer = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationDeer:setPosition(xDeer,yDeer):setCallSign("Deer"):setDescription("Repulsor and Tractor Beam Components")
+	stationDeer:setPosition(xDeer,yDeer):setCallSign("Deer"):setDescription(_("scienceDescription-station", "Repulsor and Tractor Beam Components"))
 	table.insert(stationList,stationDeer)
 	neutralStations = neutralStations + 1
 	goods[stationDeer] = {{"tractor",5,90},{"repulsor",5,95}}
@@ -787,145 +787,145 @@ function setStations()
 	cavorAngle = deerAngle + random(60,90)
 	xCavor, yCavor = vectorFromAngle(cavorAngle,random(50000,61250))
 	stationCavor = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationCavor:setPosition(xCavor,yCavor):setCallSign("Cavor"):setDescription("Advanced Material components")
+	stationCavor:setPosition(xCavor,yCavor):setCallSign("Cavor"):setDescription(_("scienceDescription-station", "Advanced Material components"))
 	table.insert(stationList,stationCavor)
 	neutralStations = neutralStations + 1
 	goods[stationCavor] = {{"filament",5,42}}
 	--Emory
 	stationEmory = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationEmory:setPosition(random(72000,85000),random(-50000,-26000)):setCallSign("Emory"):setDescription("Transporter Components")
+	stationEmory:setPosition(random(72000,85000),random(-50000,-26000)):setCallSign("Emory"):setDescription(_("scienceDescription-station", "Transporter Components"))
 	table.insert(stationList,stationEmory)
 	friendlyStations = friendlyStations + 1
 	goods[stationEmory] = {{"transporter",5,63},{"food",2,1}}
 	--Veloquan
 	stationVeloquan = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationVeloquan:setPosition(random(-25000,15000),random(27000,40000)):setCallSign("Veloquan"):setDescription("Sensor components")
+	stationVeloquan:setPosition(random(-25000,15000),random(27000,40000)):setCallSign("Veloquan"):setDescription(_("scienceDescription-station", "Sensor components"))
 	table.insert(stationList,stationVeloquan)
 	neutralStations = neutralStations + 1
 	goods[stationVeloquan] = {{"sensor",5,68}}
 	--Barclay
 	stationBarclay = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationBarclay:setPosition(random(-20000,0),random(-45000,-25000)):setCallSign("Barclay"):setDescription("Communications components")
+	stationBarclay:setPosition(random(-20000,0),random(-45000,-25000)):setCallSign("Barclay"):setDescription(_("scienceDescription-station", "Communications components"))
 	table.insert(stationList,stationBarclay)
 	neutralStations = neutralStations + 1
 	goods[stationBarclay] = {{"communication",5,58}}
 	--Lipkin
 	stationLipkin = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationLipkin:setPosition(random(20000,45000),random(-25000,-15000)):setCallSign("Lipkin"):setDescription("Autodoc components")
+	stationLipkin:setPosition(random(20000,45000),random(-25000,-15000)):setCallSign("Lipkin"):setDescription(_("scienceDescription-station", "Autodoc components"))
 	table.insert(stationList,stationLipkin)
 	neutralStations = neutralStations + 1
 	goods[stationLipkin] = {{"autodoc",5,76}}
 	--Ripley
 	stationRipley = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationRipley:setPosition(random(-75000,-30000),random(55000,62150)):setCallSign("Ripley"):setDescription("Load Lifters and components")
+	stationRipley:setPosition(random(-75000,-30000),random(55000,62150)):setCallSign("Ripley"):setDescription(_("scienceDescription-station", "Load Lifters and components"))
 	table.insert(stationList,stationRipley)
 	neutralStations = neutralStations + 1
 	goods[stationRipley] = {{"lifter",5,61}}
 	--Deckard
 	stationDeckard = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationDeckard:setPosition(random(-45000,-25000),random(-25000,-14000)):setCallSign("Deckard"):setDescription("Android components")
+	stationDeckard:setPosition(random(-45000,-25000),random(-25000,-14000)):setCallSign("Deckard"):setDescription(_("scienceDescription-station", "Android components"))
 	table.insert(stationList,stationDeckard)
 	neutralStations = neutralStations + 1
 	goods[stationDeckard] = {{"android",5,73}}
 	--Conner
 	stationConnor = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationConnor:setPosition(random(-10000,15000),random(15000,27000)):setCallSign("Connor"):setDescription("Weapons Automation components")
+	stationConnor:setPosition(random(-10000,15000),random(15000,27000)):setCallSign("Connor"):setDescription(_("scienceDescription-station", "Weapons Automation components"))
 	table.insert(stationList,stationConnor)
 	neutralStations = neutralStations + 1
 	--Anderson
 	stationAnderson = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationAnderson:setPosition(random(15000,20000),random(-25000,48000)):setCallSign("Anderson"):setDescription("Battery and Software Engineering")
+	stationAnderson:setPosition(random(15000,20000),random(-25000,48000)):setCallSign("Anderson"):setDescription(_("scienceDescription-station", "Battery and Software Engineering"))
 	table.insert(stationList,stationAnderson)
 	neutralStations = neutralStations + 1
 	goods[stationAnderson] = {{"battery",5,65},{"software",5,115}}
 	--Feynman
 	stationFeynman = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationFeynman:setPosition(random(-90000,-55000),random(25000,36250)):setCallSign("Feynman"):setDescription("Nanotechnology Research")
+	stationFeynman:setPosition(random(-90000,-55000),random(25000,36250)):setCallSign("Feynman"):setDescription(_("scienceDescription-station", "Nanotechnology Research"))
 	table.insert(stationList,stationFeynman)
 	friendlyStations = friendlyStations + 1
 	goods[stationFeynman] = {{"nanites",5,79},{"software",5,115},{"food",2,1}}
 	--Mayo
 	stationMayo = SpaceStation():setTemplate("Large Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationMayo:setPosition(random(-45000,-30000),random(-14000,12500)):setCallSign("Mayo"):setDescription("Medical Research")
+	stationMayo:setPosition(random(-45000,-30000),random(-14000,12500)):setCallSign("Mayo"):setDescription(_("scienceDescription-station", "Medical Research"))
 	table.insert(stationList,stationMayo)
 	friendlyStations = friendlyStations + 1
 	goods[stationMayo] = {{"food",5,1},{"medicine",5,5}}
 	--Nefatha
 	stationNefatha = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationNefatha:setPosition(random(-10000,12500),random(-96000,-80000)):setCallSign("Nefatha"):setDescription("Commerce and recreation")
+	stationNefatha:setPosition(random(-10000,12500),random(-96000,-80000)):setCallSign("Nefatha"):setDescription(_("scienceDescription-station", "Commerce and recreation"))
 	table.insert(stationList,stationNefatha)
 	neutralStations = neutralStations + 1
 	goods[stationNefatha] = {{"luxury",5,70}}
 	--Science-4
 	stationScience4 = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationScience4:setPosition(random(-60000,-40000),random(47000,55000)):setCallSign("Science-4"):setDescription("Biotech research")
+	stationScience4:setPosition(random(-60000,-40000),random(47000,55000)):setCallSign("Science-4"):setDescription(_("scienceDescription-station", "Biotech research"))
 	table.insert(stationList,stationScience4)
 	neutralStations = neutralStations + 1
 	--Speculation-4
 	stationSpeculation4 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationSpeculation4:setPosition(random(-26000,-15000),random(-10000,27000)):setCallSign("Speculation-4"):setDescription("Trading post")
+	stationSpeculation4:setPosition(random(-26000,-15000),random(-10000,27000)):setCallSign("Speculation-4"):setDescription(_("scienceDescription-station", "Trading post"))
 	table.insert(stationList,stationSpeculation4)
 	neutralStations = neutralStations + 1
 	goods[stationSpeculation4] = {{"luxury",5,65}}
 	--Tiberius
 	stationTiberius = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationTiberius:setPosition(random(-30000,-26000),random(-14000,35000)):setCallSign("Tiberius"):setDescription("Logistics coordination")
+	stationTiberius:setPosition(random(-30000,-26000),random(-14000,35000)):setCallSign("Tiberius"):setDescription(_("scienceDescription-station", "Logistics coordination"))
 	table.insert(stationList,stationTiberius)
 	friendlyStations = friendlyStations + 1
 	goods[stationTiberius] = {{"food",5,1}}
 	--Research-1
 	stationResearch11 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationResearch11:setPosition(random(-75000,-55000),random(-50000,-25000)):setCallSign("Research-11"):setDescription("Low Gravity Research")
+	stationResearch11:setPosition(random(-75000,-55000),random(-50000,-25000)):setCallSign("Research-11"):setDescription(_("scienceDescription-station", "Low Gravity Research"))
 	table.insert(stationList,stationResearch11)
 	neutralStations = neutralStations + 1
 	--Freena
 	stationFreena = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationFreena:setPosition(random(0,15000),irandom(-37500,-15000)):setCallSign("Freena"):setDescription("Zero gravity sports")
+	stationFreena:setPosition(random(0,15000),irandom(-37500,-15000)):setCallSign("Freena"):setDescription(_("scienceDescription-station", "Zero gravity sports"))
 	table.insert(stationList,stationFreena)
 	neutralStations = neutralStations + 1
 	--Outpost-33
 	stationOutpost33 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost33:setPosition(random(15000,65000),random(-65000,-25000)):setCallSign("Outpost-33"):setDescription("Resupply")
+	stationOutpost33:setPosition(random(15000,65000),random(-65000,-25000)):setCallSign("Outpost-33"):setDescription(_("scienceDescription-station", "Resupply"))
 	table.insert(stationList,stationOutpost33)
 	neutralStations = neutralStations + 1
 	goods[stationOutpost33] = {{"luxury",5,75}}
 	--Lando
 	stationLando = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationLando:setPosition(random(-60000,-30000),random(612500,70000)):setCallSign("Lando"):setDescription("Casino and Gambling")
+	stationLando:setPosition(random(-60000,-30000),random(612500,70000)):setCallSign("Lando"):setDescription(_("scienceDescription-station", "Casino and Gambling"))
 	table.insert(stationList,stationLando)
 	neutralStations = neutralStations + 1
 	--Komov
 	stationKomov = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationKomov:setPosition(random(-55000,-30000),random(70000,80000)):setCallSign("Komov"):setDescription("Xenopsychology research")
+	stationKomov:setPosition(random(-55000,-30000),random(70000,80000)):setCallSign("Komov"):setDescription(_("scienceDescription-station", "Xenopsychology research"))
 	table.insert(stationList,stationKomov)
 	neutralStations = neutralStations + 1
 	--Science-2
 	stationScience2 = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationScience2:setPosition(random(20000,35000),random(55000,70000)):setCallSign("Science-2"):setDescription("Research Lab and Observatory")
+	stationScience2:setPosition(random(20000,35000),random(55000,70000)):setCallSign("Science-2"):setDescription(_("scienceDescription-station", "Research Lab and Observatory"))
 	table.insert(stationList,stationScience2)
 	neutralStations = neutralStations + 1
 	--Prefect
 	stationPrefect = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationPrefect:setPosition(random(-65000,-60000),random(36250,55000)):setCallSign("Prefect"):setDescription("Textile and Fashion Creation")
+	stationPrefect:setPosition(random(-65000,-60000),random(36250,55000)):setCallSign("Prefect"):setDescription(_("scienceDescription-station", "Textile and Fashion Creation"))
 	table.insert(stationList,stationPrefect)
 	neutralStations = neutralStations + 1
 	goods[stationPrefect] = {{"luxury",5,45}}
 	--Outpost-7
 	stationOutpost7 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost7:setPosition(random(35000,45000),random(-15000,25000)):setCallSign("Outpost-7"):setDescription("Resupply")
+	stationOutpost7:setPosition(random(35000,45000),random(-15000,25000)):setCallSign("Outpost-7"):setDescription(_("scienceDescription-station", "Resupply"))
 	table.insert(stationList,stationOutpost7)
 	neutralStations = neutralStations + 1
 	goods[stationOutpost7] = {{"luxury",5,80}}
 	--Organa
 	stationOrgana = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationOrgana:setPosition(irandom(55000,62000),random(20000,45000)):setCallSign("Organa"):setDescription("Diplomatic training")
+	stationOrgana:setPosition(irandom(55000,62000),random(20000,45000)):setCallSign("Organa"):setDescription(_("scienceDescription-station", "Diplomatic training"))
 	table.insert(stationList,stationOrgana)
 	neutralStations = neutralStations + 1
 	--Grap
 	stationGrap = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	xGrap = random(-20000,0)
 	yGrap = random(-25000,-20000)
-	stationGrap:setPosition(xGrap,yGrap):setCallSign("Grap"):setDescription("Mining station")
+	stationGrap:setPosition(xGrap,yGrap):setCallSign("Grap"):setDescription(_("scienceDescription-station", "Mining station"))
 	posAxisGrap = random(0,360)
 	posGrap = random(10000,60000)
 	negGrap = random(10000,60000)
@@ -943,7 +943,7 @@ function setStations()
 	stationGrup = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	xGrup = random(-20000,-10000)
 	yGrup = random(15000,30000)
-	stationGrup:setPosition(xGrup,yGrup):setCallSign("Grup"):setDescription("Mining station")
+	stationGrup:setPosition(xGrup,yGrup):setCallSign("Grup"):setDescription(_("scienceDescription-station", "Mining station"))
 	axisGrup = random(0,360)
 	longGrup = random(30000,60000)
 	shortGrup = random(10000,30000)
@@ -976,19 +976,19 @@ function setStations()
 	neutralStations = neutralStations + 1
 	--Science-7
 	stationScience7 = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationScience7:setPosition(random(-25000,-20000),random(-40000,-10000)):setCallSign("Science-7"):setDescription("Observatory")
+	stationScience7:setPosition(random(-25000,-20000),random(-40000,-10000)):setCallSign("Science-7"):setDescription(_("scienceDescription-station", "Observatory"))
 	table.insert(stationList,stationScience7)
 	friendlyStations = friendlyStations + 1
 	goods[stationScience7] = {{"food",2,1}}
 	--Carradine
 	stationCarradine = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationCarradine:setPosition(random(20000,35000),random(-15000,40000)):setCallSign("Carradine"):setDescription("Impulse Engine Components")
+	stationCarradine:setPosition(random(20000,35000),random(-15000,40000)):setCallSign("Carradine"):setDescription(_("scienceDescription-station", "Impulse Engine Components"))
 	table.insert(stationList,stationCarradine)
 	neutralStations = neutralStations + 1
 	goods[stationCarradine] = {{"impulse",5,100}}
 	--Calvin
 	stationCalvin = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationCalvin:setPosition(random(40000,86250),random(45000,51000)):setCallSign("Calvin"):setDescription("Robotic components")
+	stationCalvin:setPosition(random(40000,86250),random(45000,51000)):setCallSign("Calvin"):setDescription(_("scienceDescription-station", "Robotic components"))
 	table.insert(stationList,stationCalvin)
 	neutralStations = neutralStations + 1
 	totalStations = neutralStations + friendlyStations
@@ -1003,44 +1003,44 @@ function setStations()
 	art3:setPosition(random(50000,75000),random(625000,80000))
 	artChoice = math.random(6)
 	if artChoice == 1 then
-		art1:setDescriptions("Unusual object","Artifact with quantum biometric characteristics")
-		art2:setDescriptions("Unusual object","Artifact with embedded chroniton particles")
-		art3:setDescriptions("Unusual object","Artifact bridging two parallel universes")
+		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
+		art2:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with embedded chroniton particles"))
+		art3:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact bridging two parallel universes"))
 		art1.quantum = true
 		art2.chroniton = true
 		art3.parallel = true
 	elseif artChoice == 2 then
-		art1:setDescriptions("Unusual object","Artifact with quantum biometric characteristics")
-		art3:setDescriptions("Unusual object","Artifact with embedded chroniton particles")
-		art2:setDescriptions("Unusual object","Artifact bridging two parallel universes")
+		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
+		art3:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with embedded chroniton particles"))
+		art2:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact bridging two parallel universes"))
 		art1.quantum = true
 		art3.chroniton = true
 		art2.parallel = true
 	elseif artChoice == 3 then
-		art2:setDescriptions("Unusual object","Artifact with quantum biometric characteristics")
-		art1:setDescriptions("Unusual object","Artifact with embedded chroniton particles")
-		art3:setDescriptions("Unusual object","Artifact bridging two parallel universes")
+		art2:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
+		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with embedded chroniton particles"))
+		art3:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact bridging two parallel universes"))
 		art2.quantum = true
 		art1.chroniton = true
 		art3.parallel = true
 	elseif artChoice == 4 then
-		art2:setDescriptions("Unusual object","Artifact with quantum biometric characteristics")
-		art3:setDescriptions("Unusual object","Artifact with embedded chroniton particles")
-		art1:setDescriptions("Unusual object","Artifact bridging two parallel universes")
+		art2:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
+		art3:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with embedded chroniton particles"))
+		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact bridging two parallel universes"))
 		art2.quantum = true
 		art3.chroniton = true
 		art1.parallel = true
 	elseif artChoice == 5 then
-		art3:setDescriptions("Unusual object","Artifact with quantum biometric characteristics")
-		art1:setDescriptions("Unusual object","Artifact with embedded chroniton particles")
-		art2:setDescriptions("Unusual object","Artifact bridging two parallel universes")
+		art3:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
+		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with embedded chroniton particles"))
+		art2:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact bridging two parallel universes"))
 		art3.quantum = true
 		art1.chroniton = true
 		art2.parallel = true
 	else
-		art3:setDescriptions("Unusual object","Artifact with quantum biometric characteristics")
-		art2:setDescriptions("Unusual object","Artifact with embedded chroniton particles")
-		art1:setDescriptions("Unusual object","Artifact bridging two parallel universes")
+		art3:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
+		art2:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with embedded chroniton particles"))
+		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact bridging two parallel universes"))
 		art3.quantum = true
 		art2.chroniton = true
 		art1.parallel = true
@@ -1069,7 +1069,7 @@ function setStations()
 	alderaan= Planet():setPosition(random(-27000,32000),random(65500,87500)):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Alderaan")
 	alderaan:setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png")
 	alderaan:setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,1.0)
-	alderaan:setAxialRotationTime(400.0):setDescription("Lush planet with only mild seasonal variations")
+	alderaan:setAxialRotationTime(400.0):setDescription(_("scienceDescription-planet", "Lush planet with only mild seasonal variations"))
 	grawp = BlackHole():setPosition(random(67000,90000),random(-21000,40000))
 	grawp.angle = random(0,360)
 	grawp.travel = random(1,5)
