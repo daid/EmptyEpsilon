@@ -553,6 +553,8 @@ rel="stylesheet"
         stream.write("</ul></li></ul></li>")
         stream.write("<p>If the configured language is not English, EmptyEpsilon then also searches for an equivalent file in <code>locale/</code> subdirectories of the above paths whose filename uses the language code indicated as a first extension to the filename, and <code>.po</code> (GNU gettext portable object) as the second extension.</p>")
         stream.write("<p>For example, when loading <code>scripts/scenario_00_basic.lua</code> with <code>language=fr</code>, EmptyEpsilon searches for <code>scripts/locale/scenario_00_basic.fr.po</code> and, if found, loads and applies the string translations inside that file.</p>")
+        stream.write("<p>For audio files, EmptyEpsilon searches for files in the same path with the language code as the first extension.</p>")
+        stream.write("<p>For example, when loading <code>audio/ambassador.ogg</code> with <code>language=fr</code>, EmptyEpsilon searches resource paths for <code>audio/ambassador.fr.ogg</code> and, if found, loads that audio file instead.</p>")
         stream.write("</div>\n")
 
         stream.write('<div class="section">')
