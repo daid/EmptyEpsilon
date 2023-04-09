@@ -10676,7 +10676,7 @@ function update(delta)
 		return
 	end
 	if GMSpawnEnemyGroup == nil then
-		GMSpawnEnemyGroup = "Spawn Enemies"
+		GMSpawnEnemyGroup = _("buttonGM", "Spawn Enemies")
 		addGMFunction(GMSpawnEnemyGroup,GMSpawnsEnemies)
 	end
 	if difficultySpecificSetup == nil then

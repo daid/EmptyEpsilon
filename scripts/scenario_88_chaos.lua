@@ -1554,20 +1554,20 @@ end
 function mainGMButtonsDuringPause()
 	clearGMFunctions()
 	local button_label = ""
-	addGMFunction(string.format("Version %s",scenario_version),function()
-		local version_message = string.format("Scenario version %s\n LUA version %s",scenario_version,_VERSION)
+	addGMFunction(string.format(_("buttonGM", "Version %s"),scenario_version),function()
+		local version_message = string.format(_("msgGM", "Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
 	if not terrain_generated then
-		addGMFunction("+Player Config",setPlayerConfig)
-		button_label = "+NPC Ships: 0"
+		addGMFunction(_("buttonGM", "+Player Config"),setPlayerConfig)
+		button_label = _("buttonGM", "+NPC Ships: 0")
 		if npc_ships then
-			button_label = string.format("+NPC Ships: %i-%i",npc_lower,npc_upper)
+			button_label = string.format(_("buttonGM", "+NPC Ships: %i-%i"),npc_lower,npc_upper)
 		end
 		addGMFunction(button_label,setNPCShips)
-		addGMFunction("+Terrain",setTerrainParameters)
-		addGMFunction(string.format("Respawn: %s",respawn_type),function()
+		addGMFunction(_("buttonGM", "+Terrain"),setTerrainParameters)
+		addGMFunction(string.format(_("buttonGM", "Respawn: %s"),respawn_type),function()
 			if respawn_type == "lindworm" then
 				respawn_type = "self"
 			elseif respawn_type == "self" then
@@ -1576,232 +1576,232 @@ function mainGMButtonsDuringPause()
 			mainGMButtons()
 		end)
 	else
-		addGMFunction("Show control codes",showControlCodes)
-		addGMFunction("Show Human codes",showHumanCodes)
-		addGMFunction("Show Kraylor codes",showKraylorCodes)
+		addGMFunction(_("buttonGM", "Show control codes"),showControlCodes)
+		addGMFunction(_("buttonGM", "Show Human codes"),showHumanCodes)
+		addGMFunction(_("buttonGM", "Show Kraylor codes"),showKraylorCodes)
 		if exuari_angle ~= nil then
-			addGMFunction("Show Exuari codes",showExuariCodes)
+			addGMFunction(_("buttonGM", "Show Exuari codes"),showExuariCodes)
 		end
 		if ktlitan_angle ~= nil then
-			addGMFunction("Show Ktlitan codes",showKtlitanCodes)
+			addGMFunction(_("buttonGM", "Show Ktlitan codes"),showKtlitanCodes)
 		end
 	end
-	addGMFunction(string.format("+Stn Sensors %iU",station_sensor_range/1000),setStationSensorRange)
-	addGMFunction(string.format("+Game Time %i",game_time_limit/60),setGameTimeLimit)
-	button_label = "No"
+	addGMFunction(string.format(_("buttonGM", "+Stn Sensors %iU"),station_sensor_range/1000),setStationSensorRange)
+	addGMFunction(string.format(_("buttonGM", "+Game Time %i"),game_time_limit/60),setGameTimeLimit)
+	button_label = _("buttonGM", "No")
 	if advanced_intel then
-		button_label = "Yes"
+		button_label = _("buttonGM", "Yes")
 	end
-	addGMFunction(string.format("+Advance Intel %s",button_label),setAdvanceIntel)
-	addGMFunction("Explain",function()
+	addGMFunction(string.format(_("buttonGM", "+Advance Intel %s"),button_label),setAdvanceIntel)
+	addGMFunction(_("buttonGM", "Explain"),function()
 		if terrain_generated then
-			addGMMessage("The version button just provides scenario version information on the text of the button plus the Lua version when you click it. Explanations for Stn sensors, Game time and Advance intel may be obtained by clicking those buttons.\n\nThe various control codes buttons show the control codes for the various player ships: all or by team faction.")
+			addGMMessage(_("msgGM", "The version button just provides scenario version information on the text of the button plus the Lua version when you click it. Explanations for Stn sensors, Game time and Advance intel may be obtained by clicking those buttons.\n\nThe various control codes buttons show the control codes for the various player ships: all or by team faction."))
 		else
-			addGMMessage("The version button just provides scenario version information on the text of the button plus the Lua version when you click it. Explanations for NPC Ships, Terrain, Stn sensors, Game time and Advance intel may be obtained by clicking those buttons.\n\nThe Respawn button determines how a player ship is respawned if it is destroyed. The Lindworm option means the players come back in a Lindworm. The Self option means the players come back as the same type of ship they started in.")
+			addGMMessage(_("msgGM", "The version button just provides scenario version information on the text of the button plus the Lua version when you click it. Explanations for NPC Ships, Terrain, Stn sensors, Game time and Advance intel may be obtained by clicking those buttons.\n\nThe Respawn button determines how a player ship is respawned if it is destroyed. The Lindworm option means the players come back in a Lindworm. The Self option means the players come back as the same type of ship they started in."))
 		end
 	end)
 end
 function setPlayerConfig()
 	clearGMFunctions()
-	addGMFunction("-Main from P. Config",mainGMButtons)
+	addGMFunction(_("buttonGM", "-Main from P. Config"),mainGMButtons)
 	if not terrain_generated then
-		addGMFunction(string.format("+Player Teams: %i",player_team_count),setPlayerTeamCount)
-		addGMFunction(string.format("+Player Ships: %i (%i)",ships_per_team,ships_per_team*player_team_count),setPlayerShipCount)
-		addGMFunction(string.format("+P.Ship Types: %s",player_ship_types),setPlayerShipTypes)
+		addGMFunction(string.format(_("buttonGM", "+Player Teams: %i"),player_team_count),setPlayerTeamCount)
+		addGMFunction(string.format(_("buttonGM", "+Player Ships: %i (%i)"),ships_per_team,ships_per_team*player_team_count),setPlayerShipCount)
+		addGMFunction(string.format(_("buttonGM", "+P.Ship Types: %s"),player_ship_types),setPlayerShipTypes)
 		if predefined_player_ships ~= nil then
-			addGMFunction("Random PShip Names",function()
-				addGMMessage("Player ship names will be selected at random")
+			addGMFunction(_("buttonGM", "Random PShip Names"),function()
+				addGMMessage(_("msgGM", "Player ship names will be selected at random"))
 				predefined_player_ships = nil
 				setPlayerConfig()
 			end)
-			addGMFunction("Explain",function()
-				addGMMessage("Player teams is the number of player teams. Player ships and player ship types are explained after you click those buttons.\n\nThe button 'Random PShip Names' switches from a fixed list of player ship names to selecting player ship names at random from a pool of player ship names. There is no going back to the fixed player ship names once you click this button unless you restart the server.")
+			addGMFunction(_("buttonGM", "Explain"),function()
+				addGMMessage(_("msgGM", "Player teams is the number of player teams. Player ships and player ship types are explained after you click those buttons.\n\nThe button 'Random PShip Names' switches from a fixed list of player ship names to selecting player ship names at random from a pool of player ship names. There is no going back to the fixed player ship names once you click this button unless you restart the server."))
 			end)
 		end
 	end
 end
 function mainGMButtonsAfterPause()
 	clearGMFunctions()
-	addGMFunction(string.format("Version %s",scenario_version),function()
-		local version_message = string.format("Scenario version %s\n LUA version %s",scenario_version,_VERSION)
+	addGMFunction(string.format(_("buttonGM", "Version %s"),scenario_version),function()
+		local version_message = string.format(_("msgGM", "Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
-	addGMFunction("Show control codes",showControlCodes)
-	addGMFunction("Show Human codes",showHumanCodes)
-	addGMFunction("Show Kraylor codes",showKraylorCodes)
+	addGMFunction(_("buttonGM", "Show control codes"),showControlCodes)
+	addGMFunction(_("buttonGM", "Show Human codes"),showHumanCodes)
+	addGMFunction(_("buttonGM", "Show Kraylor codes"),showKraylorCodes)
 	if exuari_angle ~= nil then
-		addGMFunction("Show Exuari codes",showExuariCodes)
+		addGMFunction(_("buttonGM", "Show Exuari codes"),showExuariCodes)
 	end
 	if ktlitan_angle ~= nil then
-		addGMFunction("Show Ktlitan codes",showKtlitanCodes)
+		addGMFunction(_("buttonGM", "Show Ktlitan codes"),showKtlitanCodes)
 	end
-	addGMFunction("Statistics Summary",function()
+	addGMFunction(_("buttonGM", "Statistics Summary"),function()
 		local stat_list = gatherStats()
-		local out = "Current Scores:"
-		out = out .. string.format("\n   Human Navy: %.2f (%.1f%%)",stat_list.human.weighted_score,stat_list.human.weighted_score/original_score["Human Navy"]*100)
-		out = out .. string.format("\n   Kraylor: %.2f (%.1f%%)",stat_list.kraylor.weighted_score,stat_list.kraylor.weighted_score/original_score["Kraylor"]*100)
+		local out = _("buttonGM", "Current Scores:")
+		out = out .. string.format(_("msgGM", "\n   Human Navy: %.2f (%.1f%%)"),stat_list.human.weighted_score,stat_list.human.weighted_score/original_score["Human Navy"]*100)
+		out = out .. string.format(_("msgGM", "\n   Kraylor: %.2f (%.1f%%)"),stat_list.kraylor.weighted_score,stat_list.kraylor.weighted_score/original_score["Kraylor"]*100)
 		if exuari_angle ~= nil then
-			out = out .. string.format("\n   Exuari: %.2f (%.1f%%)",stat_list.exuari.weighted_score,stat_list.exuari.weighted_score/original_score["Exuari"]*100)
+			out = out .. string.format(_("msgGM", "\n   Exuari: %.2f (%.1f%%)"),stat_list.exuari.weighted_score,stat_list.exuari.weighted_score/original_score["Exuari"]*100)
 		end
 		if ktlitan_angle ~= nil then
-			out = out .. string.format("\n   Ktlitans: %.2f (%.1f%%)",stat_list.ktlitan.weighted_score,stat_list.ktlitan.weighted_score/original_score["Ktlitans"]*100)
+			out = out .. string.format(_("msgGM", "\n   Ktlitans: %.2f (%.1f%%)"),stat_list.ktlitan.weighted_score,stat_list.ktlitan.weighted_score/original_score["Ktlitans"]*100)
 		end
-		local out = out .. "\nOriginal scores:"
-		out = out .. string.format("\n   Human Navy: %.2f",original_score["Human Navy"])
-		out = out .. string.format("\n   Kraylor: %.2f",original_score["Kraylor"])
+		local out = out .. _("msgGM", "\nOriginal scores:")
+		out = out .. string.format(_("msgGM", "\n   Human Navy: %.2f"),original_score["Human Navy"])
+		out = out .. string.format(_("msgGM", "\n   Kraylor: %.2f"),original_score["Kraylor"])
 		if exuari_angle ~= nil then
-			out = out .. string.format("\n   Exuari: %.2f",original_score["Exuari"])
+			out = out .. string.format(_("msgGM", "\n   Exuari: %.2f"),original_score["Exuari"])
 		end
 		if ktlitan_angle ~= nil then
-			out = out .. string.format("\n   Ktlitans: %.2f",original_score["Ktlitans"])
+			out = out .. string.format(_("msgGM", "\n   Ktlitans: %.2f"),original_score["Ktlitans"])
 		end
 		addGMMessage(out)
 	end)
-	addGMFunction("Statistics Details",function()
+	addGMFunction(_("buttonGM", "Statistics Details"),function()
 		local stat_list = gatherStats()
-		out = "Human Navy:\n    Stations: (score value, type, name)"
+		out = _("msgGM", "Human Navy:\n    Stations: (score value, type, name)")
 		print("Human Navy:")
 		print("    Stations: (score value, type, name)")
 		for name, details in pairs(stat_list.human.station) do
-			out = out .. string.format("\n        %i %s %s",details.score_value,details.template_type,name)
+			out = out .. string.format(_("msgGM", "\n        %i %s %s"),details.score_value,details.template_type,name)
 			print(" ",details.score_value,details.template_type,name)
 		end
 		local weighted_stations = stat_list.human.station_score_total * stat_list.weight.station
-		out = out .. string.format("\n            Station Total:%i Weight:%.1f Weighted total:%.2f",stat_list.human.station_score_total,stat_list.weight.station,weighted_stations)
+		out = out .. string.format(_("msgGM", "\n            Station Total:%i Weight:%.1f Weighted total:%.2f"),stat_list.human.station_score_total,stat_list.weight.station,weighted_stations)
 		print("    Station Total:",stat_list.human.station_score_total,"Weight:",stat_list.weight.station,"Weighted Total:",weighted_stations)
-		out = out .. "\n    Player Ships: (score value, type, name)"
+		out = out .. _("msgGM", "\n    Player Ships: (score value, type, name)")
 		print("    Player Ships: (score value, type, name)")
 		for name, details in pairs(stat_list.human.ship) do
-			out = out .. string.format("\n        %i %s %s",details.score_value,details.template_type,name)
+			out = out .. string.format(_("msgGM", "\n        %i %s %s"),details.score_value,details.template_type,name)
 			print(" ",details.score_value,details.template_type,name)
 		end
 		local weighted_players = stat_list.human.ship_score_total * stat_list.weight.ship
-		out = out .. string.format("\n            Player Ship Total:%i Weight:%.1f Weighted total:%.2f",stat_list.human.ship_score_total,stat_list.weight.ship,weighted_players)
+		out = out .. string.format(_("msgGM", "\n            Player Ship Total:%i Weight:%.1f Weighted total:%.2f"),stat_list.human.ship_score_total,stat_list.weight.ship,weighted_players)
 		print("    Player Ship Total:",stat_list.human.ship_score_total,"Weight:",stat_list.weight.ship,"Weighted Total:",weighted_players)
-		out = out .. "\n    NPC Assets: score value, type, name (location)"
+		out = out .. _("msgGM", "\n    NPC Assets: score value, type, name (location)")
 		print("    NPC Assets: score value, type, name (location)")
 		for name, details in pairs(stat_list.human.npc) do
 			if details.template_type ~= nil then
-				out = out .. string.format("\n        %i %s %s",details.score_value,details.template_type,name)
+				out = out .. string.format(_("msgGM", "\n        %i %s %s"),details.score_value,details.template_type,name)
 				print(" ",details.score_value,details.template_type,name)
 			elseif details.topic ~= nil then
-				out = out .. string.format("\n        %i %s %s (%s)",details.score_value,details.topic,name,details.location_name)
+				out = out .. string.format(_("msgGM", "\n        %i %s %s (%s)"),details.score_value,details.topic,name,details.location_name)
 				print(" ",details.score_value,details.topic,name,"(" .. details.location_name .. ")")
 			end
 		end
 		local weighted_npcs = stat_list.human.npc_score_total * stat_list.weight.npc
-		out = out .. string.format("\n            NPC Asset Total:%i Weight:%.1f Weighted total:%.2f",stat_list.human.npc_score_total,stat_list.weight.npc,weighted_npcs)
+		out = out .. string.format(_("msgGM", "\n            NPC Asset Total:%i Weight:%.1f Weighted total:%.2f"),stat_list.human.npc_score_total,stat_list.weight.npc,weighted_npcs)
 		print("    NPC Asset Total:",stat_list.human.npc_score_total,"Weight:",stat_list.weight.npc,"Weighted Total:",weighted_npcs)
-		out = out .. string.format("\n----Human weighted total:%.1f Original:%.1f Change:%.2f%%",stat_list.human.weighted_score,original_score["Human Navy"],stat_list.human.weighted_score/original_score["Human Navy"]*100)
+		out = out .. string.format(_("msgGM", "\n----Human weighted total:%.1f Original:%.1f Change:%.2f%%"),stat_list.human.weighted_score,original_score["Human Navy"],stat_list.human.weighted_score/original_score["Human Navy"]*100)
 		print("----Human weighted total:",stat_list.human.weighted_score,"Original:",original_score["Human Navy"],"Change:",stat_list.human.weighted_score/original_score["Human Navy"]*100 .. "%")
-		out = out .. "\nKraylor:\n    Stations: (score value, type, name)"
+		out = out .. _("msgGM", "\nKraylor:\n    Stations: (score value, type, name)")
 		print("Kraylor:")
 		print("    Stations: (score value, type, name)")
 		for name, details in pairs(stat_list.kraylor.station) do
-			out = out .. string.format("\n        %i %s %s",details.score_value,details.template_type,name)
+			out = out .. string.format(_("msgGM", "\n        %i %s %s"),details.score_value,details.template_type,name)
 			print(" ",details.score_value,details.template_type,name)
 		end
 		local weighted_stations = stat_list.kraylor.station_score_total * stat_list.weight.station
-		out = out .. string.format("\n            Station Total:%i Weight:%.1f Weighted total:%.2f",stat_list.kraylor.station_score_total,stat_list.weight.station,weighted_stations)
+		out = out .. string.format(_("msgGM", "\n            Station Total:%i Weight:%.1f Weighted total:%.2f"),stat_list.kraylor.station_score_total,stat_list.weight.station,weighted_stations)
 		print("    Station Total:",stat_list.kraylor.station_score_total,"Weight:",stat_list.weight.station,"Weighted Total:",weighted_stations)
-		out = out .. "\n    Player Ships: (score value, type, name)"
+		out = out .. _("msgGM", "\n    Player Ships: (score value, type, name)")
 		print("    Player Ships: (score value, type, name)")
 		for name, details in pairs(stat_list.kraylor.ship) do
-			out = out .. string.format("\n        %i %s %s",details.score_value,details.template_type,name)
+			out = out .. string.format(_("msgGM", "\n        %i %s %s"),details.score_value,details.template_type,name)
 			print(" ",details.score_value,details.template_type,name)
 		end
 		local weighted_players = stat_list.kraylor.ship_score_total * stat_list.weight.ship
-		out = out .. string.format("\n            Player Ship Total:%i Weight:%.1f Weighted total:%.2f",stat_list.kraylor.ship_score_total,stat_list.weight.ship,weighted_players)
+		out = out .. string.format(_("msgGM", "\n            Player Ship Total:%i Weight:%.1f Weighted total:%.2f"),stat_list.kraylor.ship_score_total,stat_list.weight.ship,weighted_players)
 		print("    Player Ship Total:",stat_list.kraylor.ship_score_total,"Weight:",stat_list.weight.ship,"Weighted Total:",weighted_players)
-		out = out .. "\n    NPC Assets: score value, type, name (location)"
+		out = out .. _("msgGM", "\n    NPC Assets: score value, type, name (location)")
 		print("    NPC Assets: score value, type, name (location)")
 		for name, details in pairs(stat_list.kraylor.npc) do
 			if details.template_type ~= nil then
-				out = out .. string.format("\n        %i %s %s",details.score_value,details.template_type,name)
+				out = out .. string.format(_("msgGM", "\n        %i %s %s"),details.score_value,details.template_type,name)
 				print(" ",details.score_value,details.template_type,name)
 			elseif details.topic ~= nil then
-				out = out .. string.format("\n        %i %s %s (%s)",details.score_value,details.topic,name,details.location_name)
+				out = out .. string.format(_("msgGM", "\n        %i %s %s (%s)"),details.score_value,details.topic,name,details.location_name)
 				print(" ",details.score_value,details.topic,name,"(" .. details.location_name .. ")")
 			end
 		end
 		local weighted_npcs = stat_list.kraylor.npc_score_total * stat_list.weight.npc
-		out = out .. string.format("\n            NPC Asset Total:%i Weight:%.1f Weighted total:%.2f",stat_list.kraylor.npc_score_total,stat_list.weight.npc,weighted_npcs)
+		out = out .. string.format(_("msgGM", "\n            NPC Asset Total:%i Weight:%.1f Weighted total:%.2f"),stat_list.kraylor.npc_score_total,stat_list.weight.npc,weighted_npcs)
 		print("    NPC Asset Total:",stat_list.kraylor.npc_score_total,"Weight:",stat_list.weight.npc,"Weighted Total:",weighted_npcs)
-		out = out .. string.format("\n----Kraylor weighted total:%.1f Original:%.1f Change:%.2f%%",stat_list.kraylor.weighted_score,original_score["Kraylor"],stat_list.kraylor.weighted_score/original_score["Kraylor"]*100)
+		out = out .. string.format(_("msgGM", "\n----Kraylor weighted total:%.1f Original:%.1f Change:%.2f%%"),stat_list.kraylor.weighted_score,original_score["Kraylor"],stat_list.kraylor.weighted_score/original_score["Kraylor"]*100)
 		print("----Kraylor weighted total:",stat_list.kraylor.weighted_score,"Original:",original_score["Kraylor"],"Change:",stat_list.kraylor.weighted_score/original_score["Kraylor"]*100 .. "%")
 		if exuari_angle ~= nil then
-			out = out .. "\nExuari:\n    Stations: (score value, type, name)"
+			out = out .. _("msgGM", "\nExuari:\n    Stations: (score value, type, name)")
 			print("Exuari:")
 			print("    Stations: (score value, type, name)")
 			for name, details in pairs(stat_list.exuari.station) do
-				out = out .. string.format("\n        %i %s %s",details.score_value,details.template_type,name)
+				out = out .. string.format(_("msgGM", "\n        %i %s %s"),details.score_value,details.template_type,name)
 				print(" ",details.score_value,details.template_type,name)
 			end
 			local weighted_stations = stat_list.exuari.station_score_total * stat_list.weight.station
-			out = out .. string.format("\n            Station Total:%i Weight:%.1f Weighted total:%.2f",stat_list.exuari.station_score_total,stat_list.weight.station,weighted_stations)
+			out = out .. string.format(_("msgGM", "\n            Station Total:%i Weight:%.1f Weighted total:%.2f"),stat_list.exuari.station_score_total,stat_list.weight.station,weighted_stations)
 			print("    Station Total:",stat_list.exuari.station_score_total,"Weight:",stat_list.weight.station,"Weighted Total:",weighted_stations)
-			out = out .. "\n    Player Ships: (score value, type, name)"
+			out = out .. _("msgGM", "\n    Player Ships: (score value, type, name)")
 			print("    Player Ships: (score value, type, name)")
 			for name, details in pairs(stat_list.exuari.ship) do
-				out = out .. string.format("\n        %i %s %s",details.score_value,details.template_type,name)
+				out = out .. string.format(_("msgGM", "\n        %i %s %s"),details.score_value,details.template_type,name)
 				print(" ",details.score_value,details.template_type,name)
 			end
 			local weighted_players = stat_list.exuari.ship_score_total * stat_list.weight.ship
-			out = out .. string.format("\n            Player Ship Total:%i Weight:%.1f Weighted total:%.2f",stat_list.exuari.ship_score_total,stat_list.weight.ship,weighted_players)
+			out = out .. string.format(_("msgGM", "\n            Player Ship Total:%i Weight:%.1f Weighted total:%.2f"),stat_list.exuari.ship_score_total,stat_list.weight.ship,weighted_players)
 			print("    Player Ship Total:",stat_list.exuari.ship_score_total,"Weight:",stat_list.weight.ship,"Weighted Total:",weighted_players)
-			out = out .. "\n    NPC Assets: score value, type, name (location)"
+			out = out .. _("msgGM", "\n    NPC Assets: score value, type, name (location)")
 			print("    NPC Assets: score value, type, name (location)")
 			for name, details in pairs(stat_list.exuari.npc) do
 				if details.template_type ~= nil then
-					out = out .. string.format("\n        %i %s %s",details.score_value,details.template_type,name)
+					out = out .. string.format(_("msgGM", "\n        %i %s %s"),details.score_value,details.template_type,name)
 					print(" ",details.score_value,details.template_type,name)
 				elseif details.topic ~= nil then
-					out = out .. string.format("\n        %i %s %s (%s)",details.score_value,details.topic,name,details.location_name)
+					out = out .. string.format(_("msgGM", "\n        %i %s %s (%s)"),details.score_value,details.topic,name,details.location_name)
 					print(" ",details.score_value,details.topic,name,"(" .. details.location_name .. ")")
 				end
 			end
 			local weighted_npcs = stat_list.exuari.npc_score_total * stat_list.weight.npc
-			out = out .. string.format("\n            NPC Asset Total:%i Weight:%.1f Weighted total:%.2f",stat_list.exuari.npc_score_total,stat_list.weight.npc,weighted_npcs)
+			out = out .. string.format(_("msgGM", "\n            NPC Asset Total:%i Weight:%.1f Weighted total:%.2f"),stat_list.exuari.npc_score_total,stat_list.weight.npc,weighted_npcs)
 			print("    NPC Asset Total:",stat_list.exuari.npc_score_total,"Weight:",stat_list.weight.npc,"Weighted Total:",weighted_npcs)
-			out = out .. string.format("\n----Exuari weighted total:%.1f Original:%.1f Change:%.2f%%",stat_list.exuari.weighted_score,original_score["Exuari"],stat_list.exuari.weighted_score/original_score["Exuari"]*100)
+			out = out .. string.format(_("msgGM", "\n----Exuari weighted total:%.1f Original:%.1f Change:%.2f%%"),stat_list.exuari.weighted_score,original_score["Exuari"],stat_list.exuari.weighted_score/original_score["Exuari"]*100)
 			print("----Exuari weighted total:",stat_list.exuari.weighted_score,"Original:",original_score["Exuari"],"Change:",stat_list.exuari.weighted_score/original_score["Exuari"]*100 .. "%")
 		end
 		if ktlitan_angle ~= nil then
-			out = out .. "\nKtlitan:\n    Stations: (score value, type, name)"
+			out = out .. _("msgGM", "\nKtlitan:\n    Stations: (score value, type, name)")
 			print("Ktlitan:")
 			print("    Stations: (score value, type, name)")
 			for name, details in pairs(stat_list.ktlitan.station) do
-				out = out .. string.format("\n        %i %s %s",details.score_value,details.template_type,name)
+				out = out .. string.format(_("msgGM", "\n        %i %s %s"),details.score_value,details.template_type,name)
 				print(" ",details.score_value,details.template_type,name)
 			end
 			local weighted_stations = stat_list.ktlitan.station_score_total * stat_list.weight.station
-			out = out .. string.format("\n            Station Total:%i Weight:%.1f Weighted total:%.2f",stat_list.ktlitan.station_score_total,stat_list.weight.station,weighted_stations)
+			out = out .. string.format(_("msgGM", "\n            Station Total:%i Weight:%.1f Weighted total:%.2f"),stat_list.ktlitan.station_score_total,stat_list.weight.station,weighted_stations)
 			print("    Station Total:",stat_list.ktlitan.station_score_total,"Weight:",stat_list.weight.station,"Weighted Total:",weighted_stations)
-			out = out .. "\n    Player Ships: (score value, type, name)"
+			out = out .. _("msgGM", "\n    Player Ships: (score value, type, name)")
 			print("    Player Ships: (score value, type, name)")
 			for name, details in pairs(stat_list.ktlitan.ship) do
-				out = out .. string.format("\n        %i %s %s",details.score_value,details.template_type,name)
+				out = out .. string.format(_("msgGM", "\n        %i %s %s"),details.score_value,details.template_type,name)
 				print(" ",details.score_value,details.template_type,name)
 			end
 			local weighted_players = stat_list.ktlitan.ship_score_total * stat_list.weight.ship
-			out = out .. string.format("\n            Player Ship Total:%i Weight:%.1f Weighted total:%.2f",stat_list.ktlitan.ship_score_total,stat_list.weight.ship,weighted_players)
+			out = out .. string.format(_("msgGM", "\n            Player Ship Total:%i Weight:%.1f Weighted total:%.2f"),stat_list.ktlitan.ship_score_total,stat_list.weight.ship,weighted_players)
 			print("    Player Ship Total:",stat_list.ktlitan.ship_score_total,"Weight:",stat_list.weight.ship,"Weighted Total:",weighted_players)
-			out = out .. "\n    NPC Assets: score value, type, name (location)"
+			out = out .. _("msgGM", "\n    NPC Assets: score value, type, name (location)")
 			print("    NPC Assets: score value, type, name (location)")
 			for name, details in pairs(stat_list.ktlitan.npc) do
 				if details.template_type ~= nil then
-					out = out .. string.format("\n        %i %s %s",details.score_value,details.template_type,name)
+					out = out .. string.format(_("msgGM", "\n        %i %s %s"),details.score_value,details.template_type,name)
 					print(" ",details.score_value,details.template_type,name)
 				elseif details.topic ~= nil then
-					out = out .. string.format("\n        %i %s %s (%s)",details.score_value,details.topic,name,details.location_name)
+					out = out .. string.format(_("msgGM", "\n        %i %s %s (%s)"),details.score_value,details.topic,name,details.location_name)
 					print(" ",details.score_value,details.topic,name,"(" .. details.location_name .. ")")
 				end
 			end
 			local weighted_npcs = stat_list.ktlitan.npc_score_total * stat_list.weight.npc
-			out = out .. string.format("\n            NPC Asset Total:%i Weight:%.1f Weighted total:%.2f",stat_list.ktlitan.npc_score_total,stat_list.weight.npc,weighted_npcs)
+			out = out .. string.format(_("msgGM", "\n            NPC Asset Total:%i Weight:%.1f Weighted total:%.2f"),stat_list.ktlitan.npc_score_total,stat_list.weight.npc,weighted_npcs)
 			print("    NPC Asset Total:",stat_list.ktlitan.npc_score_total,"Weight:",stat_list.weight.npc,"Weighted Total:",weighted_npcs)
-			out = out .. string.format("\n----Ktlitan weighted total:%.1f Original:%.1f Change:%.2f%%",stat_list.ktlitan.weighted_score,original_score["Ktlitans"],stat_list.ktlitan.weighted_score/original_score["Ktlitans"]*100)
+			out = out .. string.format(_("msgGM", "\n----Ktlitan weighted total:%.1f Original:%.1f Change:%.2f%%"),stat_list.ktlitan.weighted_score,original_score["Ktlitans"],stat_list.ktlitan.weighted_score/original_score["Ktlitans"]*100)
 			print("----Ktlitan weighted total:",stat_list.ktlitan.weighted_score,"Original:",original_score["Ktlitans"],"Change:",stat_list.ktlitan.weighted_score/original_score["Ktlitans"]*100 .. "%")
 		end
 		addGMMessage(out)
@@ -1810,40 +1810,40 @@ end
 --	Player related GM configuration functions
 function setPlayerTeamCount()
 	clearGMFunctions()
-	addGMFunction("-Main from Teams",mainGMButtons)
-	local button_label = "2"
+	addGMFunction(_("buttonGM", "-Main from Teams"),mainGMButtons)
+	local button_label = _("buttonGM", "2")
 	if player_team_count == 2 then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		player_team_count = 2
 		setPlayerConfig()
 	end)
-	local button_label = "3"
+	local button_label = _("buttonGM", "3")
 	if player_team_count == 3 then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		player_team_count = 3
 		if ships_per_team > max_ships_per_team[player_team_count] then
 			ships_per_team = max_ships_per_team[player_team_count]
 			if player_ship_types == "spawned" then
-				addGMMessage("Switching player ship type to default")
+				addGMMessage(_("msgGM", "Switching player ship type to default"))
 				player_ship_types = "default"
 			end
 		end
 		setPlayerConfig()
 	end)
-	local button_label = "4"
+	local button_label = _("buttonGM", "4")
 	if player_team_count == 4 then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		player_team_count = 4
 		if ships_per_team > max_ships_per_team[player_team_count] then
 			ships_per_team = max_ships_per_team[player_team_count]
 			if player_ship_types == "spawned" then
-				addGMMessage("Switching player ship type to default")
+				addGMMessage(_("msgGM", "Switching player ship type to default"))
 				player_ship_types = "default"
 			end
 		end
@@ -1852,39 +1852,39 @@ function setPlayerTeamCount()
 end
 function setPlayerShipCount()
 	clearGMFunctions()
-	addGMFunction("-Main from Ships",mainGMButtons)
-	addGMFunction("-Player Config",setPlayerConfig)
+	addGMFunction(_("buttonGM", "-Main from Ships"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Player Config"),setPlayerConfig)
 	if ships_per_team < max_ships_per_team[player_team_count] then
-		addGMFunction(string.format("%i ships add -> %i",ships_per_team,ships_per_team + 1),function()
+		addGMFunction(string.format(_("buttonGM", "%i ships add -> %i"),ships_per_team,ships_per_team + 1),function()
 			ships_per_team = ships_per_team + 1
 			if player_ship_types == "spawned" then
-				addGMMessage("Switching player ship type to default")
+				addGMMessage(_("msgGM", "Switching player ship type to default"))
 				player_ship_types = "default"
 			end
 			setPlayerShipCount()
 		end)
 	end
 	if ships_per_team > 1 then
-		addGMFunction(string.format("%i ships del -> %i",ships_per_team,ships_per_team - 1),function()
+		addGMFunction(string.format(_("buttonGM", "%i ships del -> %i"),ships_per_team,ships_per_team - 1),function()
 			ships_per_team = ships_per_team - 1
 			if player_ship_types == "spawned" then
-				addGMMessage("Switching player ship type to default")
+				addGMMessage(_("msgGM", "Switching player ship type to default"))
 				player_ship_types = "default"
 			end
 			setPlayerShipCount()
 		end)
 	end
-	addGMFunction("Explain",function()
-		addGMMessage("This is where you set the number of player ships per team. The number of non-player ships is set under NPC Ships.")
+	addGMFunction(_("buttonGM", "Explain"),function()
+		addGMMessage(_("msgGM", "This is where you set the number of player ships per team. The number of non-player ships is set under NPC Ships."))
 	end)
 end
 function setPlayerShipTypes()
 	clearGMFunctions()
-	addGMFunction("-Main from Ship Types",mainGMButtons)
-	addGMFunction("-Player Config",setPlayerConfig)
+	addGMFunction(_("buttonGM", "-Main from Ship Types"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Player Config"),setPlayerConfig)
 	local button_label = "default"
 	if player_ship_types == button_label then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		player_ship_types = "default"
@@ -1894,7 +1894,7 @@ function setPlayerShipTypes()
 			player_plural = "player"
 			type_plural = "type"
 		end
-		local out = string.format("Default ship %s for a team of %i %s:",type_plural,ships_per_team,player_plural)
+		local out = string.format(_("msgGM", "Default ship %s for a team of %i %s:"),type_plural,ships_per_team,player_plural)
 		for i=1,ships_per_team do
 			out = out .. "\n   " .. i .. ") " .. default_player_ship_sets[ships_per_team][i]
 		end
@@ -1903,11 +1903,11 @@ function setPlayerShipTypes()
 	end)
 	button_label = "spawned"
 	if player_ship_types == button_label then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		player_ship_types = "spawned"
-		local out = "Spawned ship type(s):"
+		local out = _("msgGM", "Spawned ship type(s):")
 		local player_count = 0
 		for pidx=1,32 do
 			local p = getPlayerShip(pidx)
@@ -1918,18 +1918,18 @@ function setPlayerShipTypes()
 		end
 		if player_count < ships_per_team then
 			if player_count == 0 then
-				out = string.format("%i player ships spawned. %i are required.\n\nUsing default ship set.\n\n%s",player_count,ships_per_team,out)
+				out = string.format(_("msgGM", "%i player ships spawned. %i are required.\n\nUsing default ship set.\n\n%s"),player_count,ships_per_team,out)
 			elseif player_count == 1 then
-				out = string.format("Only %i player ship spawned. %i are required.\n\nUsing default ship set.\n\n%s",player_count,ships_per_team,out)
+				out = string.format(_("msgGM", "Only %i player ship spawned. %i are required.\n\nUsing default ship set.\n\n%s"),player_count,ships_per_team,out)
 			else
-				out = string.format("Only %i player ships spawned. %i are required.\n\nUsing default ship set.\n\n%s",player_count,ships_per_team,out)
+				out = string.format(_("msgGM", "Only %i player ships spawned. %i are required.\n\nUsing default ship set.\n\n%s"),player_count,ships_per_team,out)
 			end
 			player_ship_types = "default"
 		elseif player_count > ships_per_team then
 			if ships_per_team == 1 then
-				out = string.format("%i player ships spawned. Only %i is required.\n\nUsing default ship set.\n\n%s",player_count,ships_per_team,out)
+				out = string.format(_("msgGM", "%i player ships spawned. Only %i is required.\n\nUsing default ship set.\n\n%s"),player_count,ships_per_team,out)
 			else
-				out = string.format("%i player ships spawned. Only %i are required.\n\nUsing default ship set.\n\n%s",player_count,ships_per_team,out)
+				out = string.format(_("msgGM", "%i player ships spawned. Only %i are required.\n\nUsing default ship set.\n\n%s"),player_count,ships_per_team,out)
 			end
 			player_ship_types = "default"
 		end
@@ -1938,31 +1938,31 @@ function setPlayerShipTypes()
 	end)
 	button_label = "custom"
 	if player_ship_types == button_label then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(string.format("+%s",button_label),setCustomPlayerShipSet)
-	addGMFunction("Explain",function()
-		addGMMessage("This is where you determine the kinds of whips the players will use.\n\nDefault: There is a default set of ships depending on the number of players and the number of teams.\n\nSpawned: Whatever is spawned from the first screen for one team will be replicated for the other team or teams. If the number of ships spawned does not match the team size selected, the default player ship set will be used.\n\nCustom: There are several sets of defaults under custom: Warp (ships equipped with warp drive), Jump (ships equipped with jump drive), Light (ships that are not as heavily armed or armored) and Heavy (ships that are more heavily armed or armored). There is also custom button where you can select the ship or ships you want from a list. To set up the list, use the +Customize Custom button.")
+	addGMFunction(_("buttonGM", "Explain"),function()
+		addGMMessage(_("msgGM", "This is where you determine the kinds of whips the players will use.\n\nDefault: There is a default set of ships depending on the number of players and the number of teams.\n\nSpawned: Whatever is spawned from the first screen for one team will be replicated for the other team or teams. If the number of ships spawned does not match the team size selected, the default player ship set will be used.\n\nCustom: There are several sets of defaults under custom: Warp (ships equipped with warp drive), Jump (ships equipped with jump drive), Light (ships that are not as heavily armed or armored) and Heavy (ships that are more heavily armed or armored). There is also custom button where you can select the ship or ships you want from a list. To set up the list, use the +Customize Custom button."))
 	end)
 end
 function setCustomPlayerShipSet()
 	clearGMFunctions()
-	addGMFunction("-Main from Custom",mainGMButtons)
-	addGMFunction("-Ship Types",setPlayerShipTypes)
-	addGMFunction("+Customize Custom",setCustomSet)
+	addGMFunction(_("buttonGM", "-Main from Custom"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Ship Types"),setPlayerShipTypes)
+	addGMFunction(_("buttonGM", "+Customize Custom"),setCustomSet)
 	for ship_set_type,list in pairs(custom_player_ship_sets) do
 		local button_label = ship_set_type
 		if ship_set_type == custom_player_ship_type then
-			button_label = button_label .. "*"
+			button_label = button_label .. _("buttonGM", "*")
 		end
 		addGMFunction(button_label,function()
 			player_ship_types = "custom"
 			custom_player_ship_type = ship_set_type
 			local out = ""
 			if ships_per_team == 1 then
-				out = string.format("Ship type set %s for %i player:",custom_player_ship_type,ships_per_team)
+				out = string.format(_("msgGM", "Ship type set %s for %i player:"),custom_player_ship_type,ships_per_team)
 			else
-				out = string.format("Ship type set %s for %i players:",custom_player_ship_type,ships_per_team)
+				out = string.format(_("msgGM", "Ship type set %s for %i players:"),custom_player_ship_type,ships_per_team)
 			end
 			for index, ship_type in ipairs(custom_player_ship_sets[custom_player_ship_type][ships_per_team]) do
 --				print("index:",index,"ship type:",ship_type)
@@ -1975,9 +1975,9 @@ function setCustomPlayerShipSet()
 end
 function setCustomSet()
 	clearGMFunctions()
-	addGMFunction("-Main from Custom",mainGMButtons)
-	addGMFunction("-Ship Types",setPlayerShipTypes)
-	addGMFunction("-Custom Set",setCustomPlayerShipSet)
+	addGMFunction(_("buttonGM", "-Main from Custom"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Ship Types"),setPlayerShipTypes)
+	addGMFunction(_("buttonGM", "-Custom Set"),setCustomPlayerShipSet)
 	if template_out == nil then
 		template_out = custom_player_ship_sets["Custom"][ships_per_team][1]
 	else
@@ -1997,8 +1997,8 @@ function setCustomSet()
 			break
 		end
 	end
-	addGMFunction(string.format("+Out %s",template_out),setTemplateOut)
-	addGMFunction(string.format("+In %s",template_in),setTemplateIn)
+	addGMFunction(string.format(_("buttonGM", "+Out %s"),template_out),setTemplateOut)
+	addGMFunction(string.format(_("buttonGM", "+In %s"),template_in),setTemplateIn)
 	addGMFunction("Swap",function()
 		for i=1,#custom_player_ship_sets["Custom"][ships_per_team] do
 			if custom_player_ship_sets["Custom"][ships_per_team][i] == template_out then
@@ -2010,8 +2010,8 @@ function setCustomSet()
 		end
 		setCustomSet()
 	end)
-	addGMFunction("Explain",function()
-		addGMMessage("The +Out button shows the current list of player ships. The ship named on the button or the one with the asterisk if you click the +Out button is the ship in the list that you can swap with another.\n\nThe +In button shows the list of ships that you might want to put in the custom list of ships. The ship on the button ot the one with the asterisk if you click the +In button is the ship you can place in the custom list.\n\nThe Swap button swaps the ships on the +In and +Out buttons removing the ship on the +Out button from the custom list to be used in the game and putting the ship on the +In button in the custom list of ships to be used.\n\nNotice that some of the ships that can be swapped in to the custom list are not stock Empty Epsilon ships, but are specialized versions of stock Empty Epsilon ships.")
+	addGMFunction(_("buttonGM", "Explain"),function()
+		addGMMessage(_("msgGM", "The +Out button shows the current list of player ships. The ship named on the button or the one with the asterisk if you click the +Out button is the ship in the list that you can swap with another.\n\nThe +In button shows the list of ships that you might want to put in the custom list of ships. The ship on the button ot the one with the asterisk if you click the +In button is the ship you can place in the custom list.\n\nThe Swap button swaps the ships on the +In and +Out buttons removing the ship on the +Out button from the custom list to be used in the game and putting the ship on the +In button in the custom list of ships to be used.\n\nNotice that some of the ships that can be swapped in to the custom list are not stock Empty Epsilon ships, but are specialized versions of stock Empty Epsilon ships."))
 	end)
 end
 function setTemplateOut()
@@ -2020,7 +2020,7 @@ function setTemplateOut()
 	for i=1,#custom_player_ship_sets["Custom"][ships_per_team] do
 		local button_label = custom_player_ship_sets["Custom"][ships_per_team][i]
 		if template_out == custom_player_ship_sets["Custom"][ships_per_team][i] then
-			button_label = button_label .. "*"
+			button_label = button_label .. _("buttonGM", "*")
 		end
 		addGMFunction(button_label,function()
 			template_out = custom_player_ship_sets["Custom"][ships_per_team][i]
@@ -2038,7 +2038,7 @@ function setTemplateIn()
 	for _, name in ipairs(sorted_templates) do
 		local button_label = name
 		if template_in == name then
-			button_label = button_label .. "*"
+			button_label = button_label .. _("buttonGM", "*")
 		end
 		addGMFunction(button_label,function()
 			template_in = name
@@ -2048,103 +2048,103 @@ function setTemplateIn()
 end
 function setAdvanceIntel()
 	clearGMFunctions()
-	addGMFunction("-Main",mainGMButtons)
-	local button_label = "Advance Intel Yes"
+	addGMFunction(_("buttonGM", "-Main"),mainGMButtons)
+	local button_label = _("buttonGM", "Advance Intel Yes")
 	if advanced_intel then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		advanced_intel = true
 		setAdvanceIntel()
 	end)
-	button_label = "Advance Intel No"
+	button_label = _("buttonGM", "Advance Intel No")
 	if not advanced_intel then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		advanced_intel = false
 		setAdvanceIntel()
 	end)
-	addGMFunction("Explain",function()
-		addGMMessage("This setting determines whether or not the players will receive a message at the start of the game indicating the location of their opponent's home base. Useful if players feel that they spend too much time at the start looking for their opponents.")
+	addGMFunction(_("buttonGM", "Explain"),function()
+		addGMMessage(_("msgGM", "This setting determines whether or not the players will receive a message at the start of the game indicating the location of their opponent's home base. Useful if players feel that they spend too much time at the start looking for their opponents."))
 	end)
 end
 --	Terrain related GM configuration functions
 function setTerrainParameters()
 	clearGMFunctions()
-	addGMFunction("-Main from Terrain",mainGMButtons)
-	addGMFunction(string.format("+Missiles: %s",missile_availability),setMissileAvailability)
-	addGMFunction("+Primary Station",setPrimaryStationParameters)
-	addGMFunction("Generate",function()
+	addGMFunction(_("buttonGM", "-Main from Terrain"),mainGMButtons)
+	addGMFunction(string.format(_("buttonGM", "+Missiles: %s"),missile_availability),setMissileAvailability)
+	addGMFunction(_("buttonGM", "+Primary Station"),setPrimaryStationParameters)
+	addGMFunction(_("buttonGM", "Generate"),function()
 		generateTerrain()
 		mainGMButtons()
 	end)
-	addGMFunction("Explain",function()
-		addGMMessage("Explanations for missiles and primary station available by clicking those buttons.\n\nClicking the generate button will generate the terrain based on the number of player teams selected, the number of ships on a team and the terrain parameters selected.\n\nAfter you generate the terrain, you cannot change the player ships, or the terrain unless you restart the server. You will be able to get the player ship access control codes after you generate the terrain.")
+	addGMFunction(_("buttonGM", "Explain"),function()
+		addGMMessage(_("msgGM", "Explanations for missiles and primary station available by clicking those buttons.\n\nClicking the generate button will generate the terrain based on the number of player teams selected, the number of ships on a team and the terrain parameters selected.\n\nAfter you generate the terrain, you cannot change the player ships, or the terrain unless you restart the server. You will be able to get the player ship access control codes after you generate the terrain."))
 	end)
 end
 function setStationSensorRange()
 	clearGMFunctions()
-	local button_label = "Zero"
+	local button_label = _("buttonGM", "Zero")
 	if station_sensor_range == 0 then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		station_sensor_range = 0
 		mainGMButtons()
 	end)
-	button_label = "5U"
+	button_label = _("buttonGM", "5U")
 	if station_sensor_range == 5000 then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		station_sensor_range = 5000
 		mainGMButtons()
 	end)
-	button_label = "10U"
+	button_label = _("buttonGM", "10U")
 	if station_sensor_range == 10000 then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		station_sensor_range = 10000
 		mainGMButtons()
 	end)
-	button_label = "20U"
+	button_label = _("buttonGM", "20U")
 	if station_sensor_range == 20000 then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		station_sensor_range = 20000
 		mainGMButtons()
 	end)
-	button_label = "30U"
+	button_label = _("buttonGM", "30U")
 	if station_sensor_range == 30000 then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		station_sensor_range = 30000
 		mainGMButtons()
 	end)
-	addGMFunction("Explain",function()
-		addGMMessage("This is where you set the station enemy detection range. Stations that detect enemies will send a warning message to friendly player ships.")
+	addGMFunction(_("buttonGM", "Explain"),function()
+		addGMMessage(_("msgGM", "This is where you set the station enemy detection range. Stations that detect enemies will send a warning message to friendly player ships."))
 	end)
 end
 function setPrimaryStationParameters()
 	clearGMFunctions()
-	addGMFunction("-Main from Prm Stn",mainGMButtons)
-	addGMFunction("-Terrain",setTerrainParameters)
+	addGMFunction(_("buttonGM", "-Main from Prm Stn"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Terrain"),setTerrainParameters)
 	if defense_platform_count_options[defense_platform_count_index].count == "random" then
-		addGMFunction("+Platforms: Random",setDefensePlatformCount)
+		addGMFunction(_("buttonGM", "+Platforms: Random"),setDefensePlatformCount)
 	else
-		addGMFunction(string.format("+Platforms: %i",defense_platform_count_options[defense_platform_count_index].count),setDefensePlatformCount)
+		addGMFunction(string.format(_("buttonGM", "+Platforms: %i"),defense_platform_count_options[defense_platform_count_index].count),setDefensePlatformCount)
 	end
 	if primary_station_size_index == 1 then
-		addGMFunction("Random Size ->",function()
+		addGMFunction(_("buttonGM", "Random Size ->"),function()
 			primary_station_size_index = primary_station_size_index + 1
 			setPrimaryStationParameters()
 		end)
 	else
-		addGMFunction(string.format("%s ->",primary_station_size_options[primary_station_size_index]),function()
+		addGMFunction(string.format(_("buttonGM", "%s ->"),primary_station_size_options[primary_station_size_index]),function()
 			primary_station_size_index = primary_station_size_index + 1
 			if primary_station_size_index > #primary_station_size_options then
 				primary_station_size_index = 1
@@ -2152,7 +2152,7 @@ function setPrimaryStationParameters()
 			setPrimaryStationParameters()
 		end)
 	end
-	addGMFunction(string.format("Jammer: %s ->",primary_jammers),function()
+	addGMFunction(string.format(_("buttonGM", "Jammer: %s ->"),primary_jammers),function()
 		if primary_jammers == "random" then
 			primary_jammers = "on"
 		elseif primary_jammers == "on" then
@@ -2162,23 +2162,23 @@ function setPrimaryStationParameters()
 		end
 		setPrimaryStationParameters()
 	end)
-	addGMFunction("Explain",function()
-		addGMMessage("An explanation for platforms can be obtained by clicking the platforms button.\nJust under the platforms, you can choose the primary station size from the options of random, small, medium, large and huge. The label on the button indicates the current selection.\nThe Jammer button determines the presence of warp jammers around the primary station from the options of random, on or off. The label on the button indicates the current selection.")
+	addGMFunction(_("buttonGM", "Explain"),function()
+		addGMMessage(_("msgGM", "An explanation for platforms can be obtained by clicking the platforms button.\nJust under the platforms, you can choose the primary station size from the options of random, small, medium, large and huge. The label on the button indicates the current selection.\nThe Jammer button determines the presence of warp jammers around the primary station from the options of random, on or off. The label on the button indicates the current selection."))
 	end)
 end
 function setDefensePlatformCount()
 	clearGMFunctions()
-	addGMFunction("-Main from Platforms",mainGMButtons)
-	addGMFunction("-Terrain",setTerrainParameters)
-	addGMFunction("-Primary Station",setPrimaryStationParameters)
+	addGMFunction(_("buttonGM", "-Main from Platforms"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Terrain"),setTerrainParameters)
+	addGMFunction(_("buttonGM", "-Primary Station"),setPrimaryStationParameters)
 	if defense_platform_count_index < #defense_platform_count_options then
 		if defense_platform_count_options[defense_platform_count_index + 1].count == "random" then
-			addGMFunction(string.format("%i Platforms + -> Rnd",defense_platform_count_options[defense_platform_count_index].count),function()
+			addGMFunction(string.format(_("buttonGM", "%i Platforms + -> Rnd"),defense_platform_count_options[defense_platform_count_index].count),function()
 				defense_platform_count_index = defense_platform_count_index + 1
 				setDefensePlatformCount()
 			end)
 		else
-			addGMFunction(string.format("%i Platforms + -> %i",defense_platform_count_options[defense_platform_count_index].count,defense_platform_count_options[defense_platform_count_index + 1].count),function()
+			addGMFunction(string.format(_("buttonGM", "%i Platforms + -> %i"),defense_platform_count_options[defense_platform_count_index].count,defense_platform_count_options[defense_platform_count_index + 1].count),function()
 				defense_platform_count_index = defense_platform_count_index + 1
 				setDefensePlatformCount()
 			end)
@@ -2186,19 +2186,19 @@ function setDefensePlatformCount()
 	end
 	if defense_platform_count_index > 1 then
 		if defense_platform_count_options[defense_platform_count_index].count == "random" then
-			addGMFunction(string.format("Rnd Platforms - -> %i",defense_platform_count_options[defense_platform_count_index - 1].count),function()
+			addGMFunction(string.format(_("buttonGM", "Rnd Platforms - -> %i"),defense_platform_count_options[defense_platform_count_index - 1].count),function()
 				defense_platform_count_index = defense_platform_count_index - 1
 				setDefensePlatformCount()
 			end)
 		else
-			addGMFunction(string.format("%i Platforms - -> %i",defense_platform_count_options[defense_platform_count_index].count,defense_platform_count_options[defense_platform_count_index - 1].count),function()
+			addGMFunction(string.format(_("buttonGM", "%i Platforms - -> %i"),defense_platform_count_options[defense_platform_count_index].count,defense_platform_count_options[defense_platform_count_index - 1].count),function()
 				defense_platform_count_index = defense_platform_count_index - 1
 				setDefensePlatformCount()
 			end)
 		end
 	end
-	addGMFunction("Explain",function()
-		addGMMessage("This is where you determine the number of defense platforms surrounding the players' primary base. The left portion of the text on the button(s) indicates the current selection. The right portion of the text on the button(s) indicates the value after clicking the button.")
+	addGMFunction(_("buttonGM", "Explain"),function()
+		addGMMessage(_("msgGM", "This is where you determine the number of defense platforms surrounding the players' primary base. The left portion of the text on the button(s) indicates the current selection. The right portion of the text on the button(s) indicates the value after clicking the button."))
 	end)
 end
 --	Display player control codes
@@ -2255,39 +2255,39 @@ function showControlCodes(faction_filter)
 		elseif code_list[name].faction == "Exuari" then
 			faction = " (Exuari)"
 		end
-		output = output .. string.format("%s: %s %s\n",name,code_list[name].code,faction)
+		output = output .. string.format(_("msgGM", "%s: %s %s\n"),name,code_list[name].code,faction)
 	end
 	addGMMessage(output)
 end
 --	General configuration functions
 function setGameTimeLimit()
 	clearGMFunctions()
-	addGMFunction("-Main from Time",mainGMButtons)
+	addGMFunction(_("buttonGM", "-Main from Time"),mainGMButtons)
 	if game_time_limit < 6000 then
-		addGMFunction(string.format("%i Add 5 -> %i",game_time_limit/60,game_time_limit/60 + 5),function()
+		addGMFunction(string.format(_("buttonGM", "%i Add 5 -> %i"),game_time_limit/60,game_time_limit/60 + 5),function()
 			game_time_limit = game_time_limit + 300
 			max_game_time = game_time_limit
 			setGameTimeLimit()
 		end)
 	end
 	if game_time_limit > 300 then
-		addGMFunction(string.format("%i Del 5 -> %i",game_time_limit/60,game_time_limit/60 - 5),function()
+		addGMFunction(string.format(_("buttonGM", "%i Del 5 -> %i"),game_time_limit/60,game_time_limit/60 - 5),function()
 			game_time_limit = game_time_limit - 300
 			max_game_time = game_time_limit
 			setGameTimeLimit()
 		end)
 	end
-	addGMFunction("Explain",function()
-		addGMMessage("This is where you set the time limit for the game. The game ends at the end of the time limit and the faction with the highest score wins.")
+	addGMFunction(_("buttonGM", "Explain"),function()
+		addGMMessage(_("msgGM", "This is where you set the time limit for the game. The game ends at the end of the time limit and the faction with the highest score wins."))
 	end)
 end
 function setMissileAvailability()
 	clearGMFunctions()
-	addGMFunction("-Main from Missiles",mainGMButtons)
-	addGMFunction("-Terrain",setTerrainParameters)
+	addGMFunction(_("buttonGM", "-Main from Missiles"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Terrain"),setTerrainParameters)
 	local button_label = "unlimited"
 	if missile_availability == "unlimited" then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		missile_availability = "unlimited"
@@ -2295,7 +2295,7 @@ function setMissileAvailability()
 	end)
 	button_label = "outer limited"
 	if missile_availability == "outer limited" then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		missile_availability = "outer limited"
@@ -2303,22 +2303,22 @@ function setMissileAvailability()
 	end)
 	button_label = "limited"
 	if missile_availability == "limited" then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		missile_availability = "limited"
 		setMissileAvailability()
 	end)
-	addGMFunction("Explain",function()
-		addGMMessage("This is where you set the missile restock availability for the stations.\nThe 'unlimited' option is typical of most scenarios: you pay reputation to get missiles at stations that offer them.\nThe 'limited' option indicates that stations have a limited supply of missiles available for restock.\nThe 'outer limited' option indicates that all stations except the player's primary station have a limited supply of missiles.\nFor all the options that limit missile availability, the actual stockpiles of missiles is determined randomly for each game.")
+	addGMFunction(_("buttonGM", "Explain"),function()
+		addGMMessage(_("msgGM", "This is where you set the missile restock availability for the stations.\nThe 'unlimited' option is typical of most scenarios: you pay reputation to get missiles at stations that offer them.\nThe 'limited' option indicates that stations have a limited supply of missiles available for restock.\nThe 'outer limited' option indicates that all stations except the player's primary station have a limited supply of missiles.\nFor all the options that limit missile availability, the actual stockpiles of missiles is determined randomly for each game."))
 	end)
 end
 function setNPCShips()
 	clearGMFunctions()
-	addGMFunction("-From NPC Strength",mainGMButtons)
-	local button_label = "NPC Ships: No"
+	addGMFunction(_("buttonGM", "-From NPC Strength"),mainGMButtons)
+	local button_label = _("buttonGM", "NPC Ships: No")
 	if npc_ships then
-		button_label = string.format("NPC Ships: %i-%i",npc_lower,npc_upper)
+		button_label = string.format(_("buttonGM", "NPC Ships: %i-%i"),npc_lower,npc_upper)
 	end
 	addGMFunction(button_label,function()
 		if npc_ships then
@@ -2330,32 +2330,32 @@ function setNPCShips()
 	end)
 	if npc_ships then
 		if npc_lower < npc_upper - 5 then
-			addGMFunction(string.format("%i From Add -> %i",npc_lower,npc_lower + 5),function()
+			addGMFunction(string.format(_("buttonGM", "%i From Add -> %i"),npc_lower,npc_lower + 5),function()
 				npc_lower = npc_lower + 5
 				setNPCShips()
 			end)
 		end
 		if npc_lower > 10 then
-			addGMFunction(string.format("%i From Del -> %i",npc_lower,npc_lower - 5),function()
+			addGMFunction(string.format(_("buttonGM", "%i From Del -> %i"),npc_lower,npc_lower - 5),function()
 				npc_lower = npc_lower - 5
 				setNPCShips()
 			end)
 		end
 		if npc_upper < 200 then
-			addGMFunction(string.format("%i To Add -> %i",npc_upper,npc_upper + 5),function()
+			addGMFunction(string.format(_("buttonGM", "%i To Add -> %i"),npc_upper,npc_upper + 5),function()
 				npc_upper = npc_upper + 5
 				setNPCShips()
 			end)
 		end
 		if npc_upper > npc_lower + 5 then
-			addGMFunction(string.format("%i To Del -> %i",npc_upper,npc_upper - 5),function()
+			addGMFunction(string.format(_("buttonGM", "%i To Del -> %i"),npc_upper,npc_upper - 5),function()
 				npc_upper = npc_upper - 5
 				setNPCShips()
 			end)
 		end
 	end
-	addGMFunction("Explain",function()
-		addGMMessage("This is where you configure Non Player Character or NPC ships. Each team will be given NPC ships as configured here. If there should be no NPC ships, be sure the results show 'No'\n\nThe numbers being configured represent a range of relative strength values. For example, the Atlantis has a relative strength of 50. You may set the lower (From) and upper (To) values of this range. The scenario will add ships selected at random that have a total strength within the specified range. Each team will receive identcal NPC ships. These ships will start near the players' primary base and can be directed by the players via Relay or Operations.")
+	addGMFunction(_("buttonGM", "Explain"),function()
+		addGMMessage(_("msgGM", "This is where you configure Non Player Character or NPC ships. Each team will be given NPC ships as configured here. If there should be no NPC ships, be sure the results show 'No'\n\nThe numbers being configured represent a range of relative strength values. For example, the Atlantis has a relative strength of 50. You may set the lower (From) and upper (To) values of this range. The scenario will add ships selected at random that have a total strength within the specified range. Each team will receive identcal NPC ships. These ships will start near the players' primary base and can be directed by the players via Relay or Operations."))
 	end)
 end
 -------------------------------------
@@ -2779,20 +2779,20 @@ function generateTerrain()
 		local out = ""
 		if player_count < ships_per_team then
 			if player_count == 0 then
-				out = string.format("No player ships spawned. %i are required.\n\nUsing default ship set.",ships_per_team)
+				out = string.format(_("msgGM", "No player ships spawned. %i are required.\n\nUsing default ship set."),ships_per_team)
 			elseif player_count == 1 then
-				out = string.format("Only one player ship spawned. %i are required.\n\nUsing default ship set.",ships_per_team)
+				out = string.format(_("msgGM", "Only one player ship spawned. %i are required.\n\nUsing default ship set."),ships_per_team)
 			else
-				out = string.format("Only %i player ships spawned. %i are required.\n\nUsing default ship set.",player_count,ships_per_team)
+				out = string.format(_("msgGM", "Only %i player ships spawned. %i are required.\n\nUsing default ship set."),player_count,ships_per_team)
 			end
 			player_ship_types = "default"
 			addGMMessage(out)
 			placeDefaultPlayerShips()
 		elseif player_count > ships_per_team then
 			if ships_per_team == 1 then
-				out = string.format("%i player ships spawned. Only %i is required.\n\nUsing default ship set.",player_count,ships_per_team)
+				out = string.format(_("msgGM", "%i player ships spawned. Only %i is required.\n\nUsing default ship set."),player_count,ships_per_team)
 			else
-				out = string.format("%i player ships spawned. Only %i are required.\n\nUsing default ship set.",player_count,ships_per_team)
+				out = string.format(_("msgGM", "%i player ships spawned. Only %i are required.\n\nUsing default ship set."),player_count,ships_per_team)
 			end
 			player_ship_types = "default"
 			addGMMessage(out)
@@ -2811,7 +2811,7 @@ function generateTerrain()
 				player_restart[p:getCallSign()] = {self = p, template = p:getTypeName(), control_code = p.control_code, faction = p:getFaction(), respawn_x = respawn_x, respawn_y = respawn_y}
 				angle = (angle + 360/ships_per_team) % 360
 			else
-				addGMMessage("One of the player ships spawned is not valid, switching to default ship set")
+				addGMMessage(_("msgGM", "One of the player ships spawned is not valid, switching to default ship set"))
 				player_ship_types = "default"
 				break
 			end
@@ -3588,7 +3588,7 @@ function spawnRandomArmed(x, y, enemyStrength, fleetIndex, shape, angle)
 	local enemyList = {}
 	local template_pool = getTemplatePool(enemyStrength)
 	if #template_pool < 1 then
-		addGMMessage("Empty Template pool: fix excludes or other criteria")
+		addGMMessage(_("msgGM", "Empty Template pool: fix excludes or other criteria"))
 		return enemyList
 	end
 	local fleet_prefix = generateCallSignPrefix()
@@ -5885,7 +5885,7 @@ function replicatePlayers(faction)
 				temp_player_restart[p:getCallSign()] = {self = p, template = p:getTypeName(), control_code = p.control_code, faction = p:getFaction(), respawn_x = respawn_x, respawn_y = respawn_y}
 				angle = (angle + 360/ships_per_team) % 360
 			else
-				addGMMessage("Player creation failed")
+				addGMMessage(_("msgGM", "Player creation failed"))
 			end
 		end
 	end

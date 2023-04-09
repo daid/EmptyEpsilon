@@ -539,7 +539,7 @@ end
 function mainGMButtonsDuringPause()
 	clearGMFunctions()
 	addGMFunction(string.format(_("buttonGM", "Version %s"),scenario_version),function()
-		local version_message = string.format("Scenario version %s\n LUA version %s",scenario_version,_VERSION)
+		local version_message = string.format(_("msgGM", "Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
@@ -632,52 +632,52 @@ function mainGMButtonsDuringPause()
 		mainGMButtons()
 	end)
 	addGMFunction(_("buttonGM", "Player Prefs"),function()
-		local out_message = "Remaining player preferences:"
+		local out_message = _("msgGM", "Remaining player preferences:")
 		print(out_message)
 		for i=1,#preset_players do
 			local item = preset_players[i]
-			local out = string.format("XO:%s",item.xo)
+			local out = string.format(_("msgGM", "XO:%s"),item.xo)
 			print(out)
-			out_message = out_message .. "\n" .. out
+			out_message = out_message .. _("msgGM", "\n") .. out
 			if item.faction ~= nil then
-				out = string.format("    Faction:%s",item.faction)
+				out = string.format(_("msgGM", "    Faction:%s"),item.faction)
 				print(out)
-				out_message = out_message .. "\n" .. out
+				out_message = out_message .. _("msgGM", "\n") .. out
 			end
 			if item.ship_name ~= nil then
-				out = string.format("    Ship name:%s",item.ship_name)
+				out = string.format(_("msgGM", "    Ship name:%s"),item.ship_name)
 				print(out)
-				out_message = out_message .. "\n" .. out
+				out_message = out_message .. _("msgGM", "\n") .. out
 			end
 			if item.ship_pref_1 ~= nil then
-				out = string.format("    Ship preference 1:%s",item.ship_pref_1)
+				out = string.format(_("msgGM", "    Ship preference 1:%s"),item.ship_pref_1)
 				print(out)
-				out_message = out_message .. "\n" .. out
+				out_message = out_message .. _("msgGM", "\n") .. out
 			end
 			if item.ship_pref_2 ~= nil then
-				out = string.format("    Ship preference 2:%s",item.ship_pref_2)
+				out = string.format(_("msgGM", "    Ship preference 2:%s"),item.ship_pref_2)
 				print(out)
-				out_message = out_message .. "\n" .. out
+				out_message = out_message .. _("msgGM", "\n") .. out
 			end
 			if item.ship_pref_3 ~= nil then
-				out = string.format("    Ship preference 3:%s",item.ship_pref_3)
+				out = string.format(_("msgGM", "    Ship preference 3:%s"),item.ship_pref_3)
 				print(out)
-				out_message = out_message .. "\n" .. out
+				out_message = out_message .. _("msgGM", "\n") .. out
 			end
 			if item.ship_pref_4 ~= nil then
-				out = string.format("    Ship preference 4:%s",item.ship_pref_4)
+				out = string.format(_("msgGM", "    Ship preference 4:%s"),item.ship_pref_4)
 				print(out)
-				out_message = out_message .. "\n" .. out
+				out_message = out_message .. _("msgGM", "\n") .. out
 			end
 			if item.ship_pref_5 ~= nil then
-				out = string.format("    Ship preference 5:%s",item.ship_pref_5)
+				out = string.format(_("msgGM", "    Ship preference 5:%s"),item.ship_pref_5)
 				print(out)
-				out_message = out_message .. "\n" .. out
+				out_message = out_message .. _("msgGM", "\n") .. out
 			end
 			if item.ship_pref_6 ~= nil then
-				out = string.format("    Ship preference 6:%s",item.ship_pref_6)
+				out = string.format(_("msgGM", "    Ship preference 6:%s"),item.ship_pref_6)
 				print(out)
-				out_message = out_message .. "\n" .. out
+				out_message = out_message .. _("msgGM", "\n") .. out
 			end
 		end
 		addGMMessage(out_message)
@@ -715,7 +715,7 @@ function setTerrain()
 	for name, terrain in pairs(terrain_choices) do
 		local button_name = name
 		if button_name == terrain_type_name then
-			button_name = button_name .. "*"
+			button_name = button_name .. _("buttonGM", "*")
 		end
 		addGMFunction(button_name,function()
 			if terrain_objects ~= nil and #terrain_objects > 0 then
@@ -887,7 +887,7 @@ function playerConfig()
 		if wingSquadronNames then
 			local p = getPlayerShip(-1)
 			if p ~= nil then
-				addGMMessage("Cannot disable wing names now that player ships have been spawned.\nClose the server and restart if you *really* don't want the wing names")
+				addGMMessage(_("msgGM", "Cannot disable wing names now that player ships have been spawned.\nClose the server and restart if you *really* don't want the wing names"))
 			else
 				wingSquadronNames = false
 			end
@@ -905,7 +905,7 @@ function playerConfig()
 	--[[
 	local p = getPlayerShip(-1)
 	if p == nil then
-		addGMFunction(string.format("+Probes %i",revisedPlayerShipProbeCount),setPlayerProbes)
+		addGMFunction(string.format(_("buttonGM", "+Probes %i"),revisedPlayerShipProbeCount),setPlayerProbes)
 	end
 	--]]
 end
@@ -1237,7 +1237,7 @@ end
 function mainGMButtonsAfterPause()
 	clearGMFunctions()
 	addGMFunction(string.format(_("buttonGM", "Version %s"),scenario_version),function()
-		local version_message = string.format("Scenario version %s\n LUA version %s",scenario_version,_VERSION)
+		local version_message = string.format(_("msgGM", "Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
@@ -1321,7 +1321,7 @@ function showControlCodes(faction_filter)
 		elseif code_list[name].faction == "Ktlitans" then
 			faction = " (Ktlitan)"
 		end
-		output = output .. string.format("%s: %s %s\n",name,code_list[name].code,faction)
+		output = output .. string.format(_("msgGM", "%s: %s %s\n"),name,code_list[name].code,faction)
 	end
 	addGMMessage(output)
 end
@@ -1351,7 +1351,7 @@ function spawnBugger()
 		bugger_player_names = {}
 	end
 	bugger_player_names[bugger:getCallSign()] = bugger
-	addGMMessage(string.format("New Bugger ship: %s\nControl code: %s",bugger:getCallSign(),bugger.control_code))
+	addGMMessage(string.format(_("msgGM", "New Bugger ship: %s\nControl code: %s"),bugger:getCallSign(),bugger.control_code))
 	print("Control Code for bugger " .. bugger:getCallSign(), bugger.control_code)
 end
 function gatherStats()
@@ -1585,22 +1585,22 @@ function currentStats()
 		print("Active buggers:  " .. stats.bugger.active_ship_count)
 	end
 	print("-----------------END STATS-----------------")
-	local gm_out = "Human:"
-	gm_out = gm_out .. "\n   Number of active ships: " .. stats.human.active_ship_count
-	gm_out = gm_out .. "\n   Number of destroyed ships: " .. stats.human.destroyed_ship_count
+	local gm_out = _("msgGM", "Human:")
+	gm_out = gm_out .. _("msgGM", "\n   Number of active ships: ") .. stats.human.active_ship_count
+	gm_out = gm_out .. _("msgGM", "\n   Number of destroyed ships: ") .. stats.human.destroyed_ship_count
 	if dronesAreAllowed then
-		gm_out = gm_out .. "\n   Total number of active drones: " .. stats.human.active_drone_count
-		gm_out = gm_out .. "\n   Total number of destroyed drones: " .. stats.human.destroyed_drone_count
+		gm_out = gm_out .. _("msgGM", "\n   Total number of active drones: ") .. stats.human.active_drone_count
+		gm_out = gm_out .. _("msgGM", "\n   Total number of destroyed drones: ") .. stats.human.destroyed_drone_count
 	end
-	gm_out = gm_out .. "\nKraylor:"
-	gm_out = gm_out .. "\n   Number of active ships: " .. stats.kraylor.active_ship_count
-	gm_out = gm_out .. "\n   Number of destroyed ships: " .. stats.kraylor.destroyed_ship_count
+	gm_out = gm_out .. _("msgGM", "\nKraylor:")
+	gm_out = gm_out .. _("msgGM", "\n   Number of active ships: ") .. stats.kraylor.active_ship_count
+	gm_out = gm_out .. _("msgGM", "\n   Number of destroyed ships: ") .. stats.kraylor.destroyed_ship_count
 	if dronesAreAllowed then
-		gm_out = gm_out .. "\n   Total number of active drones: " .. stats.kraylor.active_drone_count
-		gm_out = gm_out .. "\n   Total number of destroyed drones: " .. stats.kraylor.destroyed_drone_count
+		gm_out = gm_out .. _("msgGM", "\n   Total number of active drones: ") .. stats.kraylor.active_drone_count
+		gm_out = gm_out .. _("msgGM", "\n   Total number of destroyed drones: ") .. stats.kraylor.destroyed_drone_count
 	end
 	if stats.bugger.active_ship_count > 0 then
-		gm_out = gm_out .. "\nActive buggers: " .. stats.bugger.active_ship_count
+		gm_out = gm_out .. _("msgGM", "\nActive buggers: ") .. stats.bugger.active_ship_count
 	end
 	addGMMessage(gm_out)
 end

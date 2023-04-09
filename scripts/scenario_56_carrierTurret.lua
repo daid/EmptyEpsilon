@@ -90,10 +90,10 @@ function init()
 					{"circuit",0},
 					{"battery",0}	}
 	diagnostic = false
-	GMDiagnosticOn = "Turn On Diagnostic"
+	GMDiagnosticOn = _("buttonGM", "Turn On Diagnostic")
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
 	interWave = 280				
-	GMDelayNormalToSlow = "Delay normal to slow"
+	GMDelayNormalToSlow = _("buttonGM", "Delay normal to slow")
 	addGMFunction(GMDelayNormalToSlow,delayNormalToSlow)
 	goods = {}
 	stationList = {}
@@ -274,9 +274,9 @@ function init()
 	table.insert(plot2choices,upgradeShipSpin)
 	table.insert(plot2choices,locateTargetEnemyBase)
 	table.insert(plot2choices,rescueDyingScientist)
-	GMStartPlot2upgradeShipSpin = "P2 upgrade spin"
-	GMStartPlot2locateTargetEnemyBase = "P2 locate enemy base"
-	GMStartPlot2rescueDyingScientist = "P2 rescue scientist"
+	GMStartPlot2upgradeShipSpin = _("buttonGM", "P2 upgrade spin")
+	GMStartPlot2locateTargetEnemyBase = _("buttonGM", "P2 locate enemy base")
+	GMStartPlot2rescueDyingScientist = _("buttonGM", "P2 rescue scientist")
 	addGMFunction(GMStartPlot2upgradeShipSpin,gmPlot2upgradeShipSpin)
 	addGMFunction(GMStartPlot2locateTargetEnemyBase,gmPlot2locateEnemyBase)
 	addGMFunction(GMStartPlot2rescueDyingScientist,gmPlot2rescueDyingScientist)
@@ -284,9 +284,9 @@ function init()
 	table.insert(plot3choices,upgradeBeamDamage)
 	table.insert(plot3choices,tractorDisabledShip)
 	table.insert(plot3choices,addTubeToShip)
-	GMStartPlot3upgradeBeamDamage = "P3 upgrade beam dmg"
-	GMStartPlot3tractorDisabledShip = "P3 tractor ship"
-	GMStartPlot3addTubeToShip = "P3 add tube"
+	GMStartPlot3upgradeBeamDamage = _("buttonGM", "P3 upgrade beam dmg")
+	GMStartPlot3tractorDisabledShip = _("buttonGM", "P3 tractor ship")
+	GMStartPlot3addTubeToShip = _("buttonGM", "P3 add tube")
 	addGMFunction(GMStartPlot3upgradeBeamDamage,gmPlot3upgradeBeamDamage)
 	addGMFunction(GMStartPlot3tractorDisabledShip,gmPlot3tractorDisabledShip)
 	addGMFunction(GMStartPlot3addTubeToShip,gmPlot3addTubeToShip)
@@ -343,13 +343,13 @@ end
 function turnOnDiagnostic()
 	diagnostic = true
 	removeGMFunction(GMDiagnosticOn)
-	GMDiagnosticOff = "Turn Off Diagnostic"
+	GMDiagnosticOff = _("buttonGM", "Turn Off Diagnostic")
 	addGMFunction(GMDiagnosticOff,turnOffDiagnostic)
 end
 function turnOffDiagnostic()
 	diagnostic = false
 	removeGMFunction(GMDiagnosticOff)
-	GMDiagnosticOn = "Turn On Diagnostic"
+	GMDiagnosticOn = _("buttonGM", "Turn On Diagnostic")
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
 end
 ------- In game GM buttons to change the delay between waves -------
@@ -361,19 +361,19 @@ end
 function delayNormalToSlow()
 	interWave = 600
 	removeGMFunction(GMDelayNormalToSlow)
-	GMDelaySlowToFast = "Delay slow to fast"
+	GMDelaySlowToFast = _("buttonGM", "Delay slow to fast")
 	addGMFunction(GMDelaySlowToFast,delaySlowToFast)
 end
 function delaySlowToFast()
 	interwave = 20
 	removeGMFunction(GMDelaySlowToFast)
-	GMDelayFastToNormal = "Delay fast to normal"
+	GMDelayFastToNormal = _("buttonGM", "Delay fast to normal")
 	addGMFunction(GMDelayFastToNormal,delayFastToNormal)
 end
 function delayFastToNormal()
 	interwave = 280
 	removeGMFunction(GMDelayFastToNormal)
-	GMDelayNormalToSlow = "Delay normal to slow"
+	GMDelayNormalToSlow = _("buttonGM", "Delay normal to slow")
 	addGMFunction(GMDelayNormalToSlow,delayNormalToSlow)
 end
 --translate variations into a numeric difficulty value
@@ -5978,7 +5978,7 @@ function update(delta)
 		return
 	end
 	if GMSpawnEnemyGroup == nil then
-		GMSpawnEnemyGroup = "Spawn Enemies"
+		GMSpawnEnemyGroup = _("buttonGM", "Spawn Enemies")
 		addGMFunction(GMSpawnEnemyGroup,GMSpawnsEnemies)
 	end
 	if plotH ~= nil then

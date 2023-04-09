@@ -507,68 +507,68 @@ function showControlCodes(faction_filter)
 	for _, name in ipairs(sorted_names) do
 		local faction = ""
 		if code_list[name].faction == "Kraylor" then
-			faction = " (Kraylor)"
+			faction = _("msgGM", " (Kraylor)")
 		elseif code_list[name].faction == "Ktlitans" then
-			faction = " (Ktlitan)"
+			faction = _("msgGM", " (Ktlitan)")
 		end
-		output = output .. string.format("%s: %s %s\n",name,code_list[name].code,faction)
+		output = output .. string.format(_("msgGM", "%s: %s %s\n"),name,code_list[name].code,faction)
 	end
 	addGMMessage(output)
 end
 --	GM buttons while paused
 function mainGMButtonsDuringPause()
 	clearGMFunctions()
-	addGMFunction(string.format("Version %s",scenario_version),function()
-		local version_message = string.format("Scenario version %s\n LUA version %s",scenario_version,_VERSION)
+	addGMFunction(string.format(_("buttonGM", "Version %s"),scenario_version),function()
+		local version_message = string.format(_("msgGM", "Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
-	addGMFunction("Show control codes",showControlCodes)
-	addGMFunction(string.format("+Start Delay: %i",raceStartDelay/60),setStartDelay)
-	addGMFunction(string.format("+Patience: %i",patienceTimeLimit/60),setPatienceTimeLimit)
+	addGMFunction(_("buttonGM", "Show control codes"),showControlCodes)
+	addGMFunction(string.format(_("buttonGM", "+Start Delay: %i"),raceStartDelay/60),setStartDelay)
+	addGMFunction(string.format(_("buttonGM", "+Patience: %i"),patienceTimeLimit/60),setPatienceTimeLimit)
 	if predefined_player_ships ~= nil then
-		addGMFunction("Random PShip Names",function()
-			addGMMessage("Player ship names will be selected at random.\nControl codes will be randomly generated")
+		addGMFunction(_("buttonGM", "Random PShip Names"),function()
+			addGMMessage(_("msgGM", "Player ship names will be selected at random.\nControl codes will be randomly generated"))
 			predefined_player_ships = nil
 			mainGMButtons()
 		end)
 	end
-	local button_label = "+Shoot Back: "
+	local button_label = _("buttonGM", "+Shoot Back: ")
 	if shootBack then
-		button_label = string.format("%s%s",button_label,"Yes")
+		button_label = string.format("%s%s",button_label,_("buttonGM", "Yes"))
 	else
-		button_label = string.format("%s%s",button_label,"No")
+		button_label = string.format("%s%s",button_label,_("buttonGM", "No"))
 	end
 	addGMFunction(button_label,setShootBack)
-	button_label = "+Chase: "
+	button_label = _("buttonGM", "+Chase: ")
 	if chasers then
-		button_label = string.format("%s%s",button_label,"Yes")
+		button_label = string.format("%s%s",button_label,_("buttonGM", "Yes"))
 	else
-		button_label = string.format("%s%s",button_label,"No")
+		button_label = string.format("%s%s",button_label,_("buttonGM", "No"))
 	end
 	addGMFunction(button_label,setChasers)
-	button_label = "+Hazards: "
+	button_label = _("buttonGM", "+Hazards: ")
 	if hazards then
-		button_label = string.format("%s%s",button_label,"Yes")
+		button_label = string.format("%s%s",button_label,_("buttonGM", "Yes"))
 	else
-		button_label = string.format("%s%s",button_label,"No")
+		button_label = string.format("%s%s",button_label,_("buttonGM", "No"))
 	end
 	addGMFunction(button_label,setHazards)
 end
 function setShootBack()
 	clearGMFunctions()
-	addGMFunction("-From Shoot Back",mainGMButtons)
-	local button_label = "Shoot Back Yes"
+	addGMFunction(_("buttonGM", "-From Shoot Back"),mainGMButtons)
+	local button_label = _("buttonGM", "Shoot Back Yes")
 	if shootBack then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		shootBack = true
 		setShootBack()
 	end)
-	button_label = "Shoot Back No"
+	button_label = _("buttonGM", "Shoot Back No")
 	if not shootBack then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		shootBack = false
@@ -577,18 +577,18 @@ function setShootBack()
 end
 function setChasers()
 	clearGMFunctions()
-	addGMFunction("-From Chase",mainGMButtons)
-	local button_label = "Chase Yes"
+	addGMFunction(_("buttonGM", "-From Chase"),mainGMButtons)
+	local button_label = _("buttonGM", "Chase Yes")
 	if chasers then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		chasers = true
 		setChasers()
 	end)
-	button_label = "Chase No"
+	button_label = _("buttonGM", "Chase No")
 	if not chasers then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		chasers = false
@@ -597,18 +597,18 @@ function setChasers()
 end
 function setHazards()
 	clearGMFunctions()
-	addGMFunction("-From Hazards",mainGMButtons)
-	local button_label = "Hazards Yes"
+	addGMFunction(_("buttonGM", "-From Hazards"),mainGMButtons)
+	local button_label = _("buttonGM", "Hazards Yes")
 	if hazards then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		hazards = true
 		setHazards()
 	end)
-	button_label = "Hazards No"
+	button_label = _("buttonGM", "Hazards No")
 	if not hazards then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		hazards = false
@@ -617,16 +617,16 @@ function setHazards()
 end
 function setPatienceTimeLimit()
 	clearGMFunctions()
-	addGMFunction("-Main",mainGMButtons)
+	addGMFunction(_("buttonGM", "-Main"),mainGMButtons)
 	if patienceTimeLimit < 3000 then
-		addGMFunction(string.format("%i Patience + -> %i",patienceTimeLimit/60,(patienceTimeLimit + 300)/60),function()
+		addGMFunction(string.format(_("buttonGM", "%i Patience + -> %i"),patienceTimeLimit/60,(patienceTimeLimit + 300)/60),function()
 			patienceTimeLimit = patienceTimeLimit + 300
 			original_patience_time_limit = patienceTimeLimit
 			setPatienceTimeLimit()
 		end)
 	end
 	if patienceTimeLimit > 600 then
-		addGMFunction(string.format("%i Patience - -> %i",patienceTimeLimit/60,(patienceTimeLimit - 300)/60),function()
+		addGMFunction(string.format(_("buttonGM", "%i Patience - -> %i"),patienceTimeLimit/60,(patienceTimeLimit - 300)/60),function()
 			patienceTimeLimit = patienceTimeLimit - 300
 			original_patience_time_limit = patienceTimeLimit
 			setPatienceTimeLimit()
@@ -635,15 +635,15 @@ function setPatienceTimeLimit()
 end
 function setStartDelay()
 	clearGMFunctions()
-	addGMFunction("-Main",mainGMButtons)
+	addGMFunction(_("buttonGM", "-Main"),mainGMButtons)
 	if raceStartDelay < 1200 then
-		addGMFunction(string.format("%i Delay + -> %i",raceStartDelay/60,(raceStartDelay + 60)/60),function()
+		addGMFunction(string.format(_("buttonGM", "%i Delay + -> %i"),raceStartDelay/60,(raceStartDelay + 60)/60),function()
 			raceStartDelay = raceStartDelay + 60
 			setStartDelay()
 		end)
 	end
 	if raceStartDelay > 60 then
-		addGMFunction(string.format("%i Delay - -> %i",raceStartDelay/60,(raceStartDelay - 60)/60),function()
+		addGMFunction(string.format(_("buttonGM", "%i Delay - -> %i"),raceStartDelay/60,(raceStartDelay - 60)/60),function()
 			raceStartDelay = raceStartDelay - 60
 			setStartDelay()
 		end)
@@ -652,31 +652,31 @@ end
 --	GM buttons after pause
 function mainGMButtonsAfterPause()
 	clearGMFunctions()
-	addGMFunction(string.format("Version %s",scenario_version),function()
-		local version_message = string.format("Scenario version %s\n LUA version %s",scenario_version,_VERSION)
+	addGMFunction(string.format(_("buttonGM", "Version %s"),scenario_version),function()
+		local version_message = string.format(_("msgGM", "Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
-	addGMFunction("Show control codes",showControlCodes)
-	addGMFunction("Show statistics",function()
+	addGMFunction(_("buttonGM", "Show control codes"),showControlCodes)
+	addGMFunction(_("buttonGM", "Show statistics"),function()
 		local stats = gatherStats()
-		local out = "Current Statistics:\nShip: state, laps, waypoint goal, drone pts"
+		local out = _("msgGM", "Current Statistics:\nShip: state, laps, waypoint goal, drone pts")
 		for name, details in pairs(stats.ship) do
 			out = out .. "\n" .. name .. ": " 
 			if details.is_alive then 
-				out = out .. "alive, "
+				out = out .. _("msgGM", "alive, ")
 			else
-				out = out .. "dead, "
+				out = out .. _("msgGM", "dead, ")
 			end
 			if details.participant ~= nil then
-				out = out .. details.participant .. ", "
+				out = out .. details.participant .. _("msgGM", ", ")
 			end
 --			if details.participant == "participant" then
 --				out = out .. "participant, "
 --			else
 --				out = out .. "forfeit, "
 --			end
-			out = string.format("%s%i, %i, %i",out,details.lap_count,details.waypoint_goal,details.drone_points)
+			out = string.format(_("msgGM", "%s%i, %i, %i"),out,details.lap_count,details.waypoint_goal,details.drone_points)
 		end
 		addGMMessage(out)
 	end)
