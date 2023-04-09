@@ -114,10 +114,10 @@ REGISTER_SCRIPT_CLASS(ScienceDatabase)
     /// Example: entry:getLongDescription()
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getLongDescription);
     /// Sets this ScienceDatabase entry's image file to the given filename.
-    /// Valid values are filenames to PNG files relative to a resource directory.
+    /// Valid values are filenames to image files relative to a resource path.
     /// You can also reference images from resource packs.
     /// An empty string removes any set image.
-    /// Example: entry:setImage("retriever.png") -- sets the entry's image relative to a resource directory
+    /// Example: entry:setImage("retriever.png") -- sets the entry's image relative to a resource path
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setImage);
     /// Returns this ScienceDatabase entry's image filename.
     /// Returns an empty string if no image is set.

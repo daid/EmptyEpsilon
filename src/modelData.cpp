@@ -15,7 +15,7 @@
 /// A ScienceDatabase entry can also have ModelData associated with and displayed in it.
 ///
 /// This defines a 3D mesh file, an albedo map ("texture"), a specular/normal map, and an illumination map.
-/// These files might be located in resource directories, or loaded from resource packs.
+/// These files might be located in resource paths, or loaded from resource packs.
 ///
 /// ModelData also defines the model's position offset and scale relative to its mesh coordinates.
 /// If the model is for a SpaceShip with weapons or thrusters, this also defines the origin positions of its weapon effects, and particle emitters for thruster and engine effects.
@@ -39,34 +39,34 @@ REGISTER_SCRIPT_CLASS(ModelData)
     /// For example, this lists "battleship_destroyer_2_upgraded/battleship_destroyer_2_upgraded.model", which is a valid mesh path.
     /// Examples:
     /// setMesh("space_station_1/space_station_1.model") -- loads this model from a resource pack
-    /// setMesh("mesh/sphere.obj") -- loads this model relative to a resource directory
+    /// setMesh("mesh/sphere.obj") -- loads this model relative to a resource path
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setMesh);
     /// Sets this ModelData's albedo map, or base flat-light color texture.
     /// Required; if omitted, this ModelData generates an error.
-    /// Valid values include PNG- or JPG-format images relative to a resource directory.
+    /// Valid values include PNG- or JPG-format images relative to a resource path.
     /// You can also reference textures from resource packs.
     /// To view resource pack paths, extract strings from the pack, such as by running "strings packs/Angryfly.pack | egrep -i (png|jpg)" on *nix.
     /// Examples:
     /// model:setTexture("space_station_1/space_station_1_color.jpg") -- loads this texture from a resource pack
-    /// model:setTexture("mesh/ship/Ender Battlecruiser.png") -- loads this texture relative to a resource directory
+    /// model:setTexture("mesh/ship/Ender Battlecruiser.png") -- loads this texture relative to a resource path
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setTexture);
     /// Sets this ModelData's specular map, or shininess texture. Some models use this to load a normal map.
     /// Optional; if omitted, no specular map is applied.
-    /// Valid values include PNG- or JPG-format images relative to a resource directory.
+    /// Valid values include PNG- or JPG-format images relative to a resource path.
     /// You can also reference textures from resource packs.
     /// To view resource pack paths, extract strings from the pack, such as by running "strings packs/Angryfly.pack | egrep -i (png|jpg)" on *nix.
     /// Examples:
     /// model:setSpecular("space_station_1/space_station_1_specular.jpg") -- loads this texture from a resource pack
-    /// model:setSpecular("mesh/various/debris-blog-specular.jpg") -- loads this texture relative to a resource directory
+    /// model:setSpecular("mesh/various/debris-blog-specular.jpg") -- loads this texture relative to a resource path
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setSpecular);
     /// Sets this ModelData's illumination map, or glow texture, which defines which parts of the texture appear to be luminescent.
     /// Optional; if omitted, no illumination map is applied.
-    /// Valid values include PNG- or JPG-format images relative to a resource directory.
+    /// Valid values include PNG- or JPG-format images relative to a resource path.
     /// You can also reference textures from resource packs.
     /// To view resource pack paths, extract strings from the pack, such as by running "strings packs/Angryfly.pack | egrep -i (png|jpg)" on *nix.
     /// Examples:
     /// model:setIllumination("space_station_1/space_station_1_illumination.jpg") -- loads this texture from a resource pack
-    /// model:setIllumination("mesh/ship/Ender Battlecruiser_illumination.png") -- loads this texture relative to a resource directory
+    /// model:setIllumination("mesh/ship/Ender Battlecruiser_illumination.png") -- loads this texture relative to a resource path
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setIllumination);
     /// Sets this ModelData's mesh offset, relative to its position in its mesh data.
     /// If a 3D mesh's central origin point is not at 0,0,0, use this to compensate.

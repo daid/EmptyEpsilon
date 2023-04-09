@@ -252,7 +252,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Valid values are filenames of images relative to the radar/ subdirectory of a resource path.
     /// You can also reference radar traces from resource packs if they're located in a radar/ subpath inside the pack.
     /// Radar trace images should be white with a transparent background.
-    /// Example: template:setRadarTrace("cruiser.png") -- sets the ship's radar trace image relative to a resource directory
+    /// Example: template:setRadarTrace("cruiser.png") -- sets the ship's radar trace image relative to a resource path
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
     /// Sets the long-range radar range of SpaceShips created from this ShipTemplate.
     /// PlayerSpaceships use this range on the science and operations screens' radar.
