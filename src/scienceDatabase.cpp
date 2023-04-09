@@ -15,7 +15,7 @@
 /// Each child ScienceDatabase entry is displayed only when its parent entry is selected.
 ///
 /// By default, EmptyEpsilon creates parentless entries for Factions, "Natural" (terrain), Ships, and Weapons.
-/// Their child entries are populated by EmptyEpsilon upon launching a scenario, either with hardcoded details, entries loaded from scripts/science_db.lua, or the contents of script-defined objects such as ShipTemplates and FactionInfo.
+/// Their child entries are populated by EmptyEpsilon upon launching a scenario, either with hardcoded details, entries loaded from science_db.lua, or the contents of script-defined objects such as ShipTemplates and FactionInfo.
 /// Entries for ShipTemplates are also linked to from Science radar info of scanned ships of that template.
 ///
 /// Each ScienceDatabase entry has a unique identifier regardless of its displayed order, and multiple entries can have the same name.
@@ -114,16 +114,17 @@ REGISTER_SCRIPT_CLASS(ScienceDatabase)
     /// Example: entry:getLongDescription()
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getLongDescription);
     /// Sets this ScienceDatabase entry's image file to the given filename.
-    /// Valid values are filenames to PNG files relative to the resources/ directory.
+    /// Valid values are filenames to PNG files relative to a resource directory.
+    /// You can also reference images from resource packs.
     /// An empty string removes any set image.
-    /// Example: entry:setImage("retriever.png") -- sets the entry's image to the file "resources/retriever.png"
+    /// Example: entry:setImage("retriever.png") -- sets the entry's image relative to a resource directory
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setImage);
     /// Returns this ScienceDatabase entry's image filename.
     /// Returns an empty string if no image is set.
     /// Example: entry:getImage()
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getImage);
     /// Sets the 3D appearance, by ModelData name, used for this ScienceDatabase entry.
-    /// ModelData objects define a 3D mesh, textures, adjustments, and collision box, and are loaded from scripts/model_data.lua when EmptyEpsilon is launched.
+    /// ModelData objects define a 3D mesh, textures, adjustments, and collision box, and are loaded from model_data.lua when EmptyEpsilon is launched.
     /// Example: entry:setModelDataName("AtlasHeavyFighterYellow") -- uses the ModelData named "AtlasHeavyFighterYellow"
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setModelDataName);
 }

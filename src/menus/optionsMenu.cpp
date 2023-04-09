@@ -276,7 +276,7 @@ void OptionsMenu::setupAudioOptions()
     // Music preview jukebox.
 
     // Draw list of available music. Grabs every ogg file in the
-    // resources/music folder and lists them by filename.
+    // music subdirectory of a resource path and lists them by filename.
     std::vector<string> ambient_music_filenames = findResources("music/ambient/*.ogg");
     std::sort(ambient_music_filenames.begin(), ambient_music_filenames.end());
     std::vector<string> combat_music_filenames = findResources("music/combat/*.ogg");

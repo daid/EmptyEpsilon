@@ -12,7 +12,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
 {
     /// Sets this ShipTemplate that defines this STBO's traits, and then applies them to this STBO.
     /// ShipTemplates define the STBO's class, weapons, hull and shield strength, 3D appearance, and more.
-    /// See the ShipTemplate class for details, and files in scripts/shiptemplates/ for the default templates.
+    /// See the ShipTemplate class for details, and files in the scripts/shiptemplates/ for the default templates.
     /// WARNING: Using a string that is not a valid ShipTemplate name crashes the game!
     /// ShipTemplate string names are case-sensitive.
     /// Examples:
@@ -92,14 +92,16 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     /// stbo:setShieldsMax(50,40,30,20)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShieldsMax);
     /// Sets this STBO's trace image.
-    /// Valid values are filenames of PNG images relative to the resources/radar directory.
+    /// Valid values are filenames of image files relative to the radar/ subdirectory of a resource path.
+    /// You can also reference radar traces from resource packs if they're located in a radar/ subpath inside the pack.
     /// Radar trace images should be white with a transparent background.
-    /// Example: stbo:setRadarTrace("arrow.png") -- sets the radar trace to resources/radar/arrow.png
+    /// Example: stbo:setRadarTrace("arrow.png") -- sets the STBO's radar trace image relative to a resource path
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRadarTrace);
     /// Sets this STBO's impulse engine sound effect.
-    /// Valid values are filenames of WAV files relative to the resources/ directory.
+    /// Valid values are filenames of sound files relative to a resource path.
+    /// You can also reference sound files from resource packs.
     /// Use a looping sound file that tolerates being pitched up and down as the ship's impulse speed changes.
-    /// Example: stbo:setImpulseSoundFile("sfx/engine_fighter.wav") -- sets the impulse sound to resources/sfx/engine_fighter.wav
+    /// Example: stbo:setImpulseSoundFile("sfx/engine_fighter.wav") -- sets the impulse sound relative to a resource path
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setImpulseSoundFile);
     /// Defines whether this STBO's shields are activated.
     /// Always returns true except for PlayerSpaceships, because only players can deactivate shields.

@@ -15,7 +15,7 @@
 REGISTER_SCRIPT_SUBCLASS(Artifact, SpaceObject)
 {
     /// Sets the 3D model used for this artifact, by its ModelData name.
-    /// ModelData is defined in scripts/model_data.lua.
+    /// ModelData is defined in model_data.lua.
     /// Defaults to a ModelData whose name starts with "artifact" and ends with a random number between 1 and 8.
     /// Example: artifact:setModel("artifact6")
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, setModel);
@@ -47,7 +47,9 @@ REGISTER_SCRIPT_SUBCLASS(Artifact, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, setSpin);
     /// Sets the radar trace image for this artifact.
     /// Optional. Defaults to "blip.png".
-    /// Valid values are filenames to PNG files relative to resources/radar/.
+    /// Valid values are filenames to images relative to the radar/ subdirectory of a resource path.
+    /// You can also reference radar traces from resource packs if they're located in a radar/ subpath inside the pack.
+    /// Radar trace images should be white with a transparent background.
     /// Example: artifact:setRadarTraceIcon("arrow.png") -- displays an arrow instead of a blip for this artifact
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, setRadarTraceIcon);
     /// Scales the radar trace for this artifact.

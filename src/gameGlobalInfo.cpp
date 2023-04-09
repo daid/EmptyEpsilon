@@ -533,8 +533,8 @@ static int setScenario(lua_State* L)
 }
 /// void setScenario(string script_name, std::optional<string> variation_name)
 /// Launches the given scenario, even if another scenario is running.
-/// Paths are relative to the scripts/ directory.
-/// Example: setScenario("scenario_03_waves.lua") -- launches the scenario at scripts/scenario_03_waves.lua
+/// Files must be located relative to a resource path.
+/// Example: setScenario("scenario_03_waves.lua") -- launches the scenario with this filename relative to a resource path
 REGISTER_SCRIPT_FUNCTION(setScenario);
 
 static int shutdownGame(lua_State* L)
@@ -587,7 +587,6 @@ static int playSoundFile(lua_State* L)
 }
 /// void playSoundFile(string filename)
 /// Plays the given audio file on the server.
-/// Paths are relative to the resources/ directory.
 /// Works with any file format supported by SDL, including .wav, .ogg, .flac.
 /// The sound is played only on the server, and not on any clients.
 /// Example: playSoundFile("sfx/laser.wav")

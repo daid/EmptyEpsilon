@@ -15,7 +15,7 @@
 /// If friendly, this faction acts as neutral but also shares short-range radar with PlayerSpaceships in Relay, and can grant reputation points to PlayerSpaceships of the same faction.
 ///
 /// Many scenario and comms scripts also give friendly factions benefits at a reputation cost that netural factions do not.
-/// Factions are loaded from resources/factionInfo.lua upon launching a scenario, and accessed by using the getFactionInfo() global function.
+/// Factions are loaded from factionInfo.lua upon launching a scenario, and accessed by using the getFactionInfo() global function.
 ///
 /// Example:
 /// faction = FactionInfo():setName("USN"):setLocaleName(_("USN")) -- sets the internal and translatable faction names

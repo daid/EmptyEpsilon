@@ -11,7 +11,7 @@
 /// ShipTemplateBasedObjects belong to either the SpaceStation or SpaceShip subclasses. SpaceShips in turn belong to the CpuShip or PlayerSpaceship classes.
 /// ShipTemplates appear in ship and space station creation lists, such as the ship selection screen on scenarios that allow player ship creation, or the GM console's object creation tool.
 /// They also appear as default entries in the science database.
-/// EmptyEpsilon loads scripts/shipTemplates.lua at launch, which requires files containing ShipTemplates located in scripts/shiptemplates/.
+/// EmptyEpsilon loads shipTemplates.lua at launch, which requires files containing ShipTemplates located in the shiptemplates/ subdirectory of a resource path.
 /// New ShipTemplates can't be defined while a scenario is running.
 /// Use Lua variables to apply several ShipTemplate functions to the same template.
 /// Example:
@@ -65,7 +65,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Example: template:setAI("fighter") -- default to the "fighter" combat AI state
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDefaultAI);
     /// Sets the 3D appearance, by ModelData name, of ShipTemplateBasedObjects created from this ShipTemplate.
-    /// ModelData objects define a 3D mesh, textures, adjustments, and collision box, and are loaded from scripts/model_data.lua when EmptyEpsilon is launched.
+    /// ModelData objects define a 3D mesh, textures, adjustments, and collision box, and are loaded from model_data.lua when EmptyEpsilon is launched.
     /// Example: template:setModel("AtlasHeavyFighterYellow") -- uses the ModelData named "AtlasHeavyFighterYellow"
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setModel);
     /// As ShipTemplate:setExternalDockClasses().
@@ -248,10 +248,11 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Example: template:addDoor(2,1,true) -- places a horizontal door with its left-most point at 2,1
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
     /// Sets the default radar trace image for ShipTemplateBasedObjects created from this ShipTemplate.
-    /// Valid values are filenames of PNG images relative to the resources/radar/ directory.
+    /// Optional. Defaults to "arrow.png". Setting ShipTemplate:setType("station") sets this to "blip.png".
+    /// Valid values are filenames of images relative to the radar/ subdirectory of a resource path.
+    /// You can also reference radar traces from resource packs if they're located in a radar/ subpath inside the pack.
     /// Radar trace images should be white with a transparent background.
-    /// Defaults to arrow.png. ShipTemplate:setType("station") sets this to blip.png.
-    /// Example: template:setRadarTrace("cruiser.png")
+    /// Example: template:setRadarTrace("cruiser.png") -- sets the ship's radar trace image relative to a resource directory
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
     /// Sets the long-range radar range of SpaceShips created from this ShipTemplate.
     /// PlayerSpaceships use this range on the science and operations screens' radar.

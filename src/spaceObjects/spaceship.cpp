@@ -407,10 +407,11 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Example: ship:setTubeLoadTime(0,12) -- sets the loading time for tube 0 to 12 seconds
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setTubeLoadTime);
     /// Sets the radar trace image for this SpaceShip.
-    /// Valid values are filenames to PNG images relative to the resources/radar/ directory.
+    /// Valid values are filenames of image files relative to the radar/ subdirectory of a resource path.
+    /// You can also reference radar traces from resource packs if they're located in a radar/ subpath inside the pack.
     /// Radar trace images should be white with a transparent background.
-    /// Only scanned SpaceShips use a specific radar trace image. Unscanned SpaceShips always display as an arrow.
-    /// Example: ship:setRadarTrace("blip.png") -- displays a dot for this ship on radar when scanned
+    /// Only scanned SpaceShips use a specific radar trace image. Unscanned SpaceShips always display as the default "arrow.png".
+    /// Example: ship:setRadarTrace("blip.png") -- sets the ship's radar trace image relative to a resource path
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
     /// Returns the dynamic gravitational radar signature value emitted by this SpaceShip.
     /// Ship functions can dynamically modify this SpaceShip's radar signature values.
