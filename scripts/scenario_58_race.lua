@@ -1606,13 +1606,13 @@ function handleDockedState()
 		end)
 	end
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply("What are my current orders?", function()
+		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			ordMsg = primaryOrders
 			if raceStartDelay > 0 then
-				ordMsg = ordMsg .. string.format("\n%i Seconds remain until start of race",raceStartDelay)
+				ordMsg = ordMsg .. string.format(_("orders-comms", "\n%i Seconds remain until start of race"),raceStartDelay)
 			else
 				if comms_source.goal ~= nil then
-					ordMsg = ordMsg .. string.format("\nImmediate goal: race waypoint %i",comms_source.goal)
+					ordMsg = ordMsg .. string.format(_("orders-comms", "\nImmediate goal: race waypoint %i"),comms_source.goal)
 				end
 			end
 			setCommsMessage(ordMsg)
@@ -2281,13 +2281,13 @@ function handleUndockedState()
 		end)
 	end)
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply("What are my current orders?", function()
+		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			ordMsg = primaryOrders
 			if raceStartDelay > 0 then
-				ordMsg = ordMsg .. string.format("\n%i Seconds remain until start of race",raceStartDelay)
+				ordMsg = ordMsg .. string.format(_("orders-comms", "\n%i Seconds remain until start of race"),raceStartDelay)
 			else
 				if comms_source.goal ~= nil then
-					ordMsg = ordMsg .. string.format("\nImmediate goal: race waypoint %i",comms_source.goal)
+					ordMsg = ordMsg .. string.format(_("orders-comms", "\nImmediate goal: race waypoint %i"),comms_source.goal)
 				end
 			end
 			setCommsMessage(ordMsg)

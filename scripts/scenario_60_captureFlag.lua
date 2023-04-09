@@ -538,14 +538,14 @@ function setGMButtons()
 end
 function mainGMButtonsDuringPause()
 	clearGMFunctions()
-	addGMFunction(string.format("Version %s",scenario_version),function()
+	addGMFunction(string.format(_("buttonGM", "Version %s"),scenario_version),function()
 		local version_message = string.format("Scenario version %s\n LUA version %s",scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
-	local button_label = "Turn on Diagnostic"
+	local button_label = _("buttonGM", "Turn on Diagnostic")
 	if diagnostic then
-		button_label = "Turn off Diagnostic"
+		button_label = _("buttonGM", "Turn off Diagnostic")
 	end
 	addGMFunction(button_label,function()
 		if diagnostic then
@@ -555,11 +555,11 @@ function mainGMButtonsDuringPause()
 		end
 		mainGMButtons()
 	end)
-	addGMFunction(string.format("+Terrain: %s",terrain_type_name),setTerrain)
-	addGMFunction("+Player Config",playerConfig)
-	button_label = "Enable Auto-Enemies"
+	addGMFunction(string.format(_("buttonGM", "+Terrain: %s"),terrain_type_name),setTerrain)
+	addGMFunction(_("buttonGM", "+Player Config"),playerConfig)
+	button_label = _("buttonGM", "Enable Auto-Enemies")
 	if autoEnemies then
-		button_label = "Disable Auto-Enemies"
+		button_label = _("buttonGM", "Disable Auto-Enemies")
 	end
 	addGMFunction(button_label,function()
 		if autoEnemies then
@@ -570,11 +570,11 @@ function mainGMButtonsDuringPause()
 		mainGMButtons()
 	end)
 	if autoEnemies then
-		addGMFunction(string.format("+Times G%i H%i E%i",gameTimeLimit/60,hideFlagTime/60,interWave/60),setGameTimeLimit)
+		addGMFunction(string.format(_("buttonGM", "+Times G%i H%i E%i"),gameTimeLimit/60,hideFlagTime/60,interWave/60),setGameTimeLimit)
 	else
-		addGMFunction(string.format("+Times G%i H%i",gameTimeLimit/60,hideFlagTime/60),setGameTimeLimit)
+		addGMFunction(string.format(_("buttonGM", "+Times G%i H%i"),gameTimeLimit/60,hideFlagTime/60),setGameTimeLimit)
 	end
-	addGMFunction(string.format("Level: %s ->Next",difficulty_text),function()
+	addGMFunction(string.format(_("buttonGM", "Level: %s ->Next"),difficulty_text),function()
 		if difficulty_text == "normal" then
 			difficulty_text = "hard"
 			difficulty = 2
@@ -594,9 +594,9 @@ function mainGMButtonsDuringPause()
 		mainGMButtons()
 	end)
 	if difficulty > 1 then
-		button_label = "Show Pick Up Off"
+		button_label = _("buttonGM", "Show Pick Up Off")
 		if hard_flag_reveal then
-			button_label = "Show Pick Up On"
+			button_label = _("buttonGM", "Show Pick Up On")
 		end
 		addGMFunction(button_label,function()
 			if hard_flag_reveal then
@@ -607,9 +607,9 @@ function mainGMButtonsDuringPause()
 			mainGMButtons()
 		end)
 	end
-	button_label = "Destroy = end off"
+	button_label = _("buttonGM", "Destroy = end off")
 	if side_destroyed_ends_game then
-		button_label = "Destroy = end on"
+		button_label = _("buttonGM", "Destroy = end on")
 	end
 	addGMFunction(button_label,function()
 		if side_destroyed_ends_game then
@@ -619,7 +619,7 @@ function mainGMButtonsDuringPause()
 		end
 		mainGMButtons()
 	end)
-	addGMFunction(string.format("Marker: %s ->Next",boundary_marker),function()
+	addGMFunction(string.format(_("buttonGM", "Marker: %s ->Next"),boundary_marker),function()
 		if boundary_marker == "stars" then
 			boundary_marker = "buoys"
 		elseif boundary_marker == "buoys" then
@@ -631,7 +631,7 @@ function mainGMButtonsDuringPause()
 		plotFlagPlacementBoundaries()
 		mainGMButtons()
 	end)
-	addGMFunction("Player Prefs",function()
+	addGMFunction(_("buttonGM", "Player Prefs"),function()
 		local out_message = "Remaining player preferences:"
 		print(out_message)
 		for i=1,#preset_players do
@@ -685,8 +685,8 @@ function mainGMButtonsDuringPause()
 end
 function setTerrain()
 	clearGMFunctions()
-	addGMFunction("-from Terrain",mainGMButtons)
-	addGMFunction(string.format("Size: %s -> Next",terrain_size),function()
+	addGMFunction(_("buttonGM", "-from Terrain"),mainGMButtons)
+	addGMFunction(string.format(_("buttonGM", "Size: %s -> Next"),terrain_size),function()
 		if terrain_size == "medium" then
 			terrain_size = "large"
 			boundary = 200000
@@ -875,13 +875,13 @@ end
 
 function playerConfig()
 	clearGMFunctions()
-	addGMFunction("-from Player Config",mainGMButtons)
-	addGMFunction("Show control codes",showControlCodes)
-	addGMFunction("Show Kraylor codes",showKraylorCodes)
-	addGMFunction("Show Human codes",showHumanCodes)
-	local button_label = "Wing Names Off"
+	addGMFunction(_("buttonGM", "-from Player Config"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Show control codes"),showControlCodes)
+	addGMFunction(_("buttonGM", "Show Kraylor codes"),showKraylorCodes)
+	addGMFunction(_("buttonGM", "Show Human codes"),showHumanCodes)
+	local button_label = _("buttonGM", "Wing Names Off")
 	if wingSquadronNames then
-		button_label = "Wing Names On"
+		button_label = _("buttonGM", "Wing Names On")
 	end
 	addGMFunction(button_label,function()
 		if wingSquadronNames then
@@ -896,10 +896,10 @@ function playerConfig()
 		end
 		playerConfig()
 	end)
-	addGMFunction(string.format("+Tags %.2f, %.1fU",tagDamage,tag_distance/1000),setTagValues)
-	button_label = "+Drones Off"
+	addGMFunction(string.format(_("buttonGM", "+Tags %.2f, %.1fU"),tagDamage,tag_distance/1000),setTagValues)
+	button_label = _("buttonGM", "+Drones Off")
 	if dronesAreAllowed then
-		button_label = "+Drones On"
+		button_label = _("buttonGM", "+Drones On")
 	end
 	addGMFunction(button_label,configureDrones)
 	--[[
@@ -911,45 +911,45 @@ function playerConfig()
 end
 function setGameTimeLimit()
 	clearGMFunctions()
-	addGMFunction("-Main from times",mainGMButtons)
-	addGMFunction(string.format("Game %i Add 5 -> %i",gameTimeLimit/60,gameTimeLimit/60 + 5),function()
+	addGMFunction(_("buttonGM", "-Main from times"),mainGMButtons)
+	addGMFunction(string.format(_("buttonGM", "Game %i Add 5 -> %i"),gameTimeLimit/60,gameTimeLimit/60 + 5),function()
 		gameTimeLimit = gameTimeLimit + 300
 		maxGameTime = gameTimeLimit
 		setGameTimeLimit()
 	end)
 	if gameTimeLimit > (hideFlagTime + 300) then
-		addGMFunction(string.format("Game %i Del 5 -> %i",gameTimeLimit/60,gameTimeLimit/60 - 5),function()
+		addGMFunction(string.format(_("buttonGM", "Game %i Del 5 -> %i"),gameTimeLimit/60,gameTimeLimit/60 - 5),function()
 			gameTimeLimit = gameTimeLimit - 300
 			maxGameTime = gameTimeLimit
 			setGameTimeLimit()
 		end)
 	end
 	if hideFlagTime < (gameTimeLimit - 300) then
-		addGMFunction(string.format("Hide Flag %i Add 5 -> %i",hideFlagTime/60,hideFlagTime/60 + 5),function()
+		addGMFunction(string.format(_("buttonGM", "Hide Flag %i Add 5 -> %i"),hideFlagTime/60,hideFlagTime/60 + 5),function()
 			hideFlagTime = hideFlagTime + 300
 			setGameTimeLimit()
 		end)
 	end
 	if hideFlagTime > 300 then
-		addGMFunction(string.format("Hide Flag %i Del 5 -> %i",hideFlagTime/60,hideFlagTime/60 - 5),function()
+		addGMFunction(string.format(_("buttonGM", "Hide Flag %i Del 5 -> %i"),hideFlagTime/60,hideFlagTime/60 - 5),function()
 			hideFlagTime = hideFlagTime - 300
 			setGameTimeLimit()
 		end)
 	elseif hideFlagTime > 60 then
-		addGMFunction(string.format("Hide Flag %i Del 4 -> %i",hideFlagTime/60,hideFlagTime/60 - 4),function()
+		addGMFunction(string.format(_("buttonGM", "Hide Flag %i Del 4 -> %i"),hideFlagTime/60,hideFlagTime/60 - 4),function()
 			hideFlagTime = hideFlagTime - 240
 			setGameTimeLimit()
 		end)
 	end
 	if autoEnemies then
 		if interWave < 1200 then
-			addGMFunction(string.format("Enemy %i Add 1 -> %i",interWave/60,(interWave + 60)/60),function()
+			addGMFunction(string.format(_("buttonGM", "Enemy %i Add 1 -> %i"),interWave/60,(interWave + 60)/60),function()
 				interWave = interWave + 60
 				setGameTimeLimit()
 			end)
 		end
 		if interWave > 120 then
-			addGMFunction(string.format("Enemy %i Del 1 -> %i",interWave/60,(interWave - 60)/60),function()
+			addGMFunction(string.format(_("buttonGM", "Enemy %i Del 1 -> %i"),interWave/60,(interWave - 60)/60),function()
 				interWave = interWave - 60
 				setGameTimeLimit()
 			end)
@@ -958,17 +958,17 @@ function setGameTimeLimit()
 end
 function setTagValues()
 	clearGMFunctions()
-	addGMFunction("-Main from Tag",mainGMButtons)
-	addGMFunction("-Player Config",playerConfig)
-	addGMFunction(string.format("+Tag distance %.1fU",tag_distance/1000),setTagDistance)
-	addGMFunction(string.format("+Tag damage %.2f",tagDamage),setTagDamage)
+	addGMFunction(_("buttonGM", "-Main from Tag"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Player Config"),playerConfig)
+	addGMFunction(string.format(_("buttonGM", "+Tag distance %.1fU"),tag_distance/1000),setTagDistance)
+	addGMFunction(string.format(_("buttonGM", "+Tag damage %.2f"),tagDamage),setTagDamage)
 end
 function configureDrones()
 	clearGMFunctions()
-	addGMFunction("-From Drones",playerConfig)
-	local button_label = "Drones Off"
+	addGMFunction(_("buttonGM", "-From Drones"),playerConfig)
+	local button_label = _("buttonGM", "Drones Off")
 	if dronesAreAllowed then
-		button_label = "Drones On"
+		button_label = _("buttonGM", "Drones On")
 	end
 	addGMFunction(button_label,function()
 		if dronesAreAllowed then
@@ -979,8 +979,8 @@ function configureDrones()
 		configureDrones()
 	end)
 	if dronesAreAllowed then
-		addGMFunction(string.format("+Capacity %i",uniform_drone_carrying_capacity),setDroneCarryingCapacity)
-		addGMFunction(string.format("Name %s",drone_name_type),function()
+		addGMFunction(string.format(_("buttonGM", "+Capacity %i"),uniform_drone_carrying_capacity),setDroneCarryingCapacity)
+		addGMFunction(string.format(_("buttonGM", "Name %s"),drone_name_type),function()
 			if drone_name_type == "squad-num of size" then
 				drone_name_type = "default"
 			elseif drone_name_type == "default" then
@@ -992,11 +992,11 @@ function configureDrones()
 			end
 			configureDrones() 
 		end)
-		addGMFunction(string.format("+Flag I%i M%i",drone_flag_check_interval,drone_message_reset_count),setDroneFlagValues)
-		addGMFunction(string.format("+Distance F%.1fU S%.1fU",drone_formation_spacing/1000,drone_scan_range_for_flags/1000),setDroneDistances)
-		button_label = "Template Mod Off"
+		addGMFunction(string.format(_("buttonGM", "+Flag I%i M%i"),drone_flag_check_interval,drone_message_reset_count),setDroneFlagValues)
+		addGMFunction(string.format(_("buttonGM", "+Distance F%.1fU S%.1fU"),drone_formation_spacing/1000,drone_scan_range_for_flags/1000),setDroneDistances)
+		button_label = _("buttonGM", "Template Mod Off")
 		if drone_modified_from_template then
-			button_label = "Template Mod On"
+			button_label = _("buttonGM", "Template Mod On")
 		end
 		addGMFunction(button_label,function()
 			if drone_modified_from_template then
@@ -1007,18 +1007,18 @@ function configureDrones()
 			configureDrones() 
 		end)
 		if drone_modified_from_template then
-			addGMFunction(string.format("+Hull %i",drone_hull_strength),setDroneHull)
-			addGMFunction(string.format("+Impulse %i",drone_impulse_speed),setDroneImpulseSpeed)
-			addGMFunction(string.format("+Beam R%.1fU D%.1f C%.1f",drone_beam_range/1000,drone_beam_damage,drone_beam_cycle_time),setDroneBeam)
+			addGMFunction(string.format(_("buttonGM", "+Hull %i"),drone_hull_strength),setDroneHull)
+			addGMFunction(string.format(_("buttonGM", "+Impulse %i"),drone_impulse_speed),setDroneImpulseSpeed)
+			addGMFunction(string.format(_("buttonGM", "+Beam R%.1fU D%.1f C%.1f"),drone_beam_range/1000,drone_beam_damage,drone_beam_cycle_time),setDroneBeam)
 		end
 	end
 end
 function setPlayerProbes()
 	clearGMFunctions()
-	addGMFunction("-Main from Probes",mainGMButtons)
-	addGMFunction("-Player Config",playerConfig)
+	addGMFunction(_("buttonGM", "-Main from Probes"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Player Config"),playerConfig)
 	if revisedPlayerShipProbeCount < 50 then
-		addGMFunction(string.format("Probes %i Add 1 -> %i",revisedPlayerShipProbeCount,revisedPlayerShipProbeCount + 1),function()
+		addGMFunction(string.format(_("buttonGM", "Probes %i Add 1 -> %i"),revisedPlayerShipProbeCount,revisedPlayerShipProbeCount + 1),function()
 			local p = getPlayerShip(-1)
 			if p == nil then
 				revisedPlayerShipProbeCount = revisedPlayerShipProbeCount + 1
@@ -1029,7 +1029,7 @@ function setPlayerProbes()
 		end)
 	end
 	if revisedPlayerShipProbeCount > 1 then
-		addGMFunction(string.format("Probes %i Del 1 -> %i",revisedPlayerShipProbeCount,revisedPlayerShipProbeCount - 1),function()
+		addGMFunction(string.format(_("buttonGM", "Probes %i Del 1 -> %i"),revisedPlayerShipProbeCount,revisedPlayerShipProbeCount - 1),function()
 			local p = getPlayerShip(-1)
 			if p == nil then
 				revisedPlayerShipProbeCount = revisedPlayerShipProbeCount - 1
@@ -1042,17 +1042,17 @@ function setPlayerProbes()
 end
 function setTagDistance()
 	clearGMFunctions()
-	addGMFunction("-Main from Tag",mainGMButtons)
-	addGMFunction("-Player Config",playerConfig)
-	addGMFunction("-From Tag Distance",setTagValues)
+	addGMFunction(_("buttonGM", "-Main from Tag"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Player Config"),playerConfig)
+	addGMFunction(_("buttonGM", "-From Tag Distance"),setTagValues)
 	if tag_distance < 5000 then
-		addGMFunction(string.format("%.1fU Add .1 -> %.1fU",tag_distance/1000,(tag_distance + 100)/1000),function()
+		addGMFunction(string.format(_("buttonGM", "%.1fU Add .1 -> %.1fU"),tag_distance/1000,(tag_distance + 100)/1000),function()
 			tag_distance = tag_distance + 100
 			setTagDistance()
 		end)
 	end
 	if tag_distance > 500 then
-		addGMFunction(string.format("%.1fU Del .1 -> %.1fU",tag_distance/1000,(tag_distance - 100)/1000),function()
+		addGMFunction(string.format(_("buttonGM", "%.1fU Del .1 -> %.1fU"),tag_distance/1000,(tag_distance - 100)/1000),function()
 			tag_distance = tag_distance - 100
 			setTagDistance()
 		end)
@@ -1060,17 +1060,17 @@ function setTagDistance()
 end
 function setTagDamage()
 	clearGMFunctions()
-	addGMFunction("-Main from Tag",mainGMButtons)
-	addGMFunction("-Player Config",playerConfig)
-	addGMFunction("-From Tag Dmg",setTagValues)
+	addGMFunction(_("buttonGM", "-Main from Tag"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Player Config"),playerConfig)
+	addGMFunction(_("buttonGM", "-From Tag Dmg"),setTagValues)
 	if tagDamage < 2 then
-		addGMFunction(string.format("%.2f Add .25 -> %.2f",tagDamage,tagDamage + .25),function()
+		addGMFunction(string.format(_("buttonGM", "%.2f Add .25 -> %.2f"),tagDamage,tagDamage + .25),function()
 			tagDamage = tagDamage + .25
 			setTagDamage()
 		end)
 	end
 	if tagDamage > .25 then
-		addGMFunction(string.format("%.2f Del .25 -> %.2f",tagDamage,tagDamage - .25),function()
+		addGMFunction(string.format(_("buttonGM", "%.2f Del .25 -> %.2f"),tagDamage,tagDamage - .25),function()
 			tagDamage = tagDamage - .25
 			setTagDamage()
 		end)
@@ -1079,17 +1079,17 @@ end
 --	Drone related GM button functions
 function setDroneCarryingCapacity()
 	clearGMFunctions()
-	addGMFunction("-Main",mainGMButtons)
-	addGMFunction("-Player Config",playerConfig)
-	addGMFunction("-From Capacity",configureDrones)
+	addGMFunction(_("buttonGM", "-Main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Player Config"),playerConfig)
+	addGMFunction(_("buttonGM", "-From Capacity"),configureDrones)
 	if uniform_drone_carrying_capacity < 100 then
-		addGMFunction(string.format("%i Add 10 -> %i",uniform_drone_carrying_capacity,uniform_drone_carrying_capacity + 10),function()
+		addGMFunction(string.format(_("buttonGM", "%i Add 10 -> %i"),uniform_drone_carrying_capacity,uniform_drone_carrying_capacity + 10),function()
 			uniform_drone_carrying_capacity = uniform_drone_carrying_capacity + 10
 			setDroneCarryingCapacity()
 		end)
 	end
 	if uniform_drone_carrying_capacity > 10 then
-		addGMFunction(string.format("%i Del 10 -> %i",uniform_drone_carrying_capacity,uniform_drone_carrying_capacity - 10),function()
+		addGMFunction(string.format(_("buttonGM", "%i Del 10 -> %i"),uniform_drone_carrying_capacity,uniform_drone_carrying_capacity - 10),function()
 			uniform_drone_carrying_capacity = uniform_drone_carrying_capacity - 10
 			setDroneCarryingCapacity()
 		end)
@@ -1097,29 +1097,29 @@ function setDroneCarryingCapacity()
 end
 function setDroneFlagValues()
 	clearGMFunctions()
-	addGMFunction("-Main",mainGMButtons)
-	addGMFunction("-Player Config",playerConfig)
-	addGMFunction("-From Drone Flag",configureDrones)
+	addGMFunction(_("buttonGM", "-Main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Player Config"),playerConfig)
+	addGMFunction(_("buttonGM", "-From Drone Flag"),configureDrones)
 	if drone_flag_check_interval < 20 then
-		addGMFunction(string.format("Interval %i Add 1 -> %i",drone_flag_check_interval,drone_flag_check_interval + 1),function()
+		addGMFunction(string.format(_("buttonGM", "Interval %i Add 1 -> %i"),drone_flag_check_interval,drone_flag_check_interval + 1),function()
 			drone_flag_check_interval = drone_flag_check_interval + 1
 			setDroneFlagValues()
 		end)
 	end
 	if drone_flag_check_interval > 1 then
-		addGMFunction(string.format("Interval %i Del 1 -> %i",drone_flag_check_interval,drone_flag_check_interval - 1),function()
+		addGMFunction(string.format(_("buttonGM", "Interval %i Del 1 -> %i"),drone_flag_check_interval,drone_flag_check_interval - 1),function()
 			drone_flag_check_interval = drone_flag_check_interval - 1
 			setDroneFlagValues()
 		end)
 	end
 	if drone_message_reset_count < 20 then
-		addGMFunction(string.format("Msg Reset %i Add 1 -> %i",drone_message_reset_count,drone_message_reset_count + 1),function()
+		addGMFunction(string.format(_("buttonGM", "Msg Reset %i Add 1 -> %i"),drone_message_reset_count,drone_message_reset_count + 1),function()
 			drone_message_reset_count = drone_message_reset_count + 1
 			setDroneFlagValues()
 		end)
 	end
 	if drone_message_reset_count > 2 then
-		addGMFunction(string.format("Msg Reset %i Del 1 -> %i",drone_message_reset_count,drone_message_reset_count - 1),function()
+		addGMFunction(string.format(_("buttonGM", "Msg Reset %i Del 1 -> %i"),drone_message_reset_count,drone_message_reset_count - 1),function()
 			drone_message_reset_count = drone_message_reset_count - 1
 			setDroneFlagValues()
 		end)
@@ -1127,29 +1127,29 @@ function setDroneFlagValues()
 end
 function setDroneDistances()
 	clearGMFunctions()
-	addGMFunction("-Main",mainGMButtons)
-	addGMFunction("-Player Config",playerConfig)
-	addGMFunction("-From Drone Distance",configureDrones)
+	addGMFunction(_("buttonGM", "-Main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Player Config"),playerConfig)
+	addGMFunction(_("buttonGM", "-From Drone Distance"),configureDrones)
 	if drone_formation_spacing < 9000 then
-		addGMFunction(string.format("Form %.1fU Add .1 -> %.1fU",drone_formation_spacing/1000,(drone_formation_spacing + 100)/1000),function()
+		addGMFunction(string.format(_("buttonGM", "Form %.1fU Add .1 -> %.1fU"),drone_formation_spacing/1000,(drone_formation_spacing + 100)/1000),function()
 			drone_formation_spacing = drone_formation_spacing + 100
 			setDroneDistances()
 		end)
 	end
 	if drone_formation_spacing > 1000 then
-		addGMFunction(string.format("Form %.1fU Del .1 -> %.1fU",drone_formation_spacing/1000,(drone_formation_spacing - 100)/1000),function()
+		addGMFunction(string.format(_("buttonGM", "Form %.1fU Del .1 -> %.1fU"),drone_formation_spacing/1000,(drone_formation_spacing - 100)/1000),function()
 			drone_formation_spacing = drone_formation_spacing - 100
 			setDroneDistances()
 		end)
 	end
 	if drone_scan_range_for_flags < 9000 then
-		addGMFunction(string.format("Scan %.1fU Add .1 -> %.1fU",drone_scan_range_for_flags/1000,(drone_scan_range_for_flags + 100)/1000),function()
+		addGMFunction(string.format(_("buttonGM", "Scan %.1fU Add .1 -> %.1fU"),drone_scan_range_for_flags/1000,(drone_scan_range_for_flags + 100)/1000),function()
 			drone_scan_range_for_flags = drone_scan_range_for_flags + 100
 			setDroneDistances()
 		end)
 	end
 	if drone_scan_range_for_flags > 3000 then
-		addGMFunction(string.format("Scan %.1fU Del .1 -> %.1fU",drone_scan_range_for_flags/1000,(drone_scan_range_for_flags - 100)/1000),function()
+		addGMFunction(string.format(_("buttonGM", "Scan %.1fU Del .1 -> %.1fU"),drone_scan_range_for_flags/1000,(drone_scan_range_for_flags - 100)/1000),function()
 			drone_scan_range_for_flags = drone_scan_range_for_flags - 100
 			setDroneDistances()
 		end)
@@ -1157,17 +1157,17 @@ function setDroneDistances()
 end
 function setDroneHull()
 	clearGMFunctions()
-	addGMFunction("-Main",mainGMButtons)
-	addGMFunction("-Player Config",playerConfig)
-	addGMFunction("-From Drone Hull",configureDrones)
+	addGMFunction(_("buttonGM", "-Main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Player Config"),playerConfig)
+	addGMFunction(_("buttonGM", "-From Drone Hull"),configureDrones)
 	if drone_hull_strength < 200 then
-		addGMFunction(string.format("%i Add 10 -> %i",drone_hull_strength,drone_hull_strength + 10),function()
+		addGMFunction(string.format(_("buttonGM", "%i Add 10 -> %i"),drone_hull_strength,drone_hull_strength + 10),function()
 			drone_hull_strength = drone_hull_strength + 10
 			setDroneHull()
 		end)
 	end
 	if drone_hull_strength > 10 then
-		addGMFunction(string.format("%i Del 10 -> %i",drone_hull_strength,drone_hull_strength - 10),function()
+		addGMFunction(string.format(_("buttonGM", "%i Del 10 -> %i"),drone_hull_strength,drone_hull_strength - 10),function()
 			drone_hull_strength = drone_hull_strength - 10
 			setDroneHull()
 		end)
@@ -1175,17 +1175,17 @@ function setDroneHull()
 end
 function setDroneImpulseSpeed()
 	clearGMFunctions()
-	addGMFunction("-Main",mainGMButtons)
-	addGMFunction("-Player Config",playerConfig)
-	addGMFunction("-From Drone Impulse",configureDrones)
+	addGMFunction(_("buttonGM", "-Main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Player Config"),playerConfig)
+	addGMFunction(_("buttonGM", "-From Drone Impulse"),configureDrones)
 	if drone_impulse_speed < 150 then
-		addGMFunction(string.format("%i Add 5 -> %i",drone_impulse_speed,drone_impulse_speed + 5),function()
+		addGMFunction(string.format(_("buttonGM", "%i Add 5 -> %i"),drone_impulse_speed,drone_impulse_speed + 5),function()
 			drone_impulse_speed = drone_impulse_speed + 5
 			setDroneImpulseSpeed()
 		end)
 	end
 	if drone_impulse_speed > 50 then
-		addGMFunction(string.format("%i Del 5 -> %i",drone_impulse_speed,drone_impulse_speed - 5),function()
+		addGMFunction(string.format(_("buttonGM", "%i Del 5 -> %i"),drone_impulse_speed,drone_impulse_speed - 5),function()
 			drone_impulse_speed = drone_impulse_speed - 5
 			setDroneImpulseSpeed()
 		end)
@@ -1193,41 +1193,41 @@ function setDroneImpulseSpeed()
 end
 function setDroneBeam()
 	clearGMFunctions()
-	addGMFunction("-Main",mainGMButtons)
-	addGMFunction("-Player Config",playerConfig)
-	addGMFunction("-From Drone Beam",configureDrones)
+	addGMFunction(_("buttonGM", "-Main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Player Config"),playerConfig)
+	addGMFunction(_("buttonGM", "-From Drone Beam"),configureDrones)
 	if drone_beam_range < 2000 then
-		addGMFunction(string.format("Rng %.1fU Add .1 -> %.1fU",drone_beam_range/1000,(drone_beam_range + 100)/1000),function()
+		addGMFunction(string.format(_("buttonGM", "Rng %.1fU Add .1 -> %.1fU"),drone_beam_range/1000,(drone_beam_range + 100)/1000),function()
 			drone_beam_range = drone_beam_range + 100
 			setDroneBeam()
 		end)
 	end
 	if drone_beam_range > 300 then
-		addGMFunction(string.format("Rng %.1fU Del .1 -> %.1fU",drone_beam_range/1000,(drone_beam_range - 100)/1000),function()
+		addGMFunction(string.format(_("buttonGM", "Rng %.1fU Del .1 -> %.1fU"),drone_beam_range/1000,(drone_beam_range - 100)/1000),function()
 			drone_beam_range = drone_beam_range - 100
 			setDroneBeam()
 		end)
 	end
 	if drone_beam_damage < 20 then
-		addGMFunction(string.format("Dmg %.1f Add .5 -> %.1f",drone_beam_damage,drone_beam_damage + .5),function()
+		addGMFunction(string.format(_("buttonGM", "Dmg %.1f Add .5 -> %.1f"),drone_beam_damage,drone_beam_damage + .5),function()
 			drone_beam_damage = drone_beam_damage + .5
 			setDroneBeam()
 		end)
 	end
 	if drone_beam_damage > 1 then
-		addGMFunction(string.format("Dmg %.1f Del .5 -> %.1f",drone_beam_damage,drone_beam_damage - .5),function()
+		addGMFunction(string.format(_("buttonGM", "Dmg %.1f Del .5 -> %.1f"),drone_beam_damage,drone_beam_damage - .5),function()
 			drone_beam_damage = drone_beam_damage - .5
 			setDroneBeam()
 		end)
 	end
 	if drone_beam_cycle_time < 20 then
-		addGMFunction(string.format("Cycle %.1f Add .5 -> %.1f",drone_beam_cycle_time,drone_beam_cycle_time + .5),function()
+		addGMFunction(string.format(_("buttonGM", "Cycle %.1f Add .5 -> %.1f"),drone_beam_cycle_time,drone_beam_cycle_time + .5),function()
 			drone_beam_cycle_time = drone_beam_cycle_time + .5
 			setDroneBeam()
 		end)
 	end
 	if drone_beam_cycle_time > 1 then
-		addGMFunction(string.format("Cycle %.1f Del .5 -> %.1f",drone_beam_cycle_time,drone_beam_cycle_time - .5),function()
+		addGMFunction(string.format(_("buttonGM", "Cycle %.1f Del .5 -> %.1f"),drone_beam_cycle_time,drone_beam_cycle_time - .5),function()
 			drone_beam_cycle_time = drone_beam_cycle_time - .5
 			setDroneBeam()
 		end)
@@ -1236,18 +1236,18 @@ end
 
 function mainGMButtonsAfterPause()
 	clearGMFunctions()
-	addGMFunction(string.format("Version %s",scenario_version),function()
+	addGMFunction(string.format(_("buttonGM", "Version %s"),scenario_version),function()
 		local version_message = string.format("Scenario version %s\n LUA version %s",scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
-	addGMFunction("Show control codes",showControlCodes)
-	addGMFunction("Show Kraylor codes",showKraylorCodes)
-	addGMFunction("Show Ktlitan codes",showKtlitanCodes)
-	addGMFunction("Show Human codes",showHumanCodes)
-	local button_label = "Enable Auto-Enemies"
+	addGMFunction(_("buttonGM", "Show control codes"),showControlCodes)
+	addGMFunction(_("buttonGM", "Show Kraylor codes"),showKraylorCodes)
+	addGMFunction(_("buttonGM", "Show Ktlitan codes"),showKtlitanCodes)
+	addGMFunction(_("buttonGM", "Show Human codes"),showHumanCodes)
+	local button_label = _("buttonGM", "Enable Auto-Enemies")
 	if autoEnemies then
-		button_label = "Disable Auto-Enemies"
+		button_label = _("buttonGM", "Disable Auto-Enemies")
 	end
 	addGMFunction(button_label,function()
 		if autoEnemies then
@@ -1257,9 +1257,9 @@ function mainGMButtonsAfterPause()
 		end
 		mainGMButtons()
 	end)
-	button_label = "Turn on Diagnostic"
+	button_label = _("buttonGM", "Turn on Diagnostic")
 	if diagnostic then
-		button_label = "Turn off Diagnostic"
+		button_label = _("buttonGM", "Turn off Diagnostic")
 	end
 	addGMFunction(button_label,function()
 		if diagnostic then
@@ -1269,12 +1269,12 @@ function mainGMButtonsAfterPause()
 		end
 		mainGMButtons()
 	end)
-	addGMFunction("Current Stats", currentStats)
+	addGMFunction(_("buttonGM", "Current Stats"), currentStats)
 	if dronesAreAllowed then 
-		addGMFunction("Detailed Drone Report", detailedDroneReport)
+		addGMFunction(_("buttonGM", "Detailed Drone Report"), detailedDroneReport)
 	end
 	if gameTimeLimit < (maxGameTime - hideFlagTime) then
-		addGMFunction("Intelligent Bugger",intelligentBugger)
+		addGMFunction(_("buttonGM", "Intelligent Bugger"),intelligentBugger)
 	end
 end
 function showKraylorCodes()
@@ -3524,7 +3524,7 @@ function justPassingBy()
 	orbital_movement = false
 	blackhole_movement = false
 
-	addGMFunction("Orbit Toggle", 
+	addGMFunction(_("buttonGM", "Orbit Toggle"), 
 		function()
 			if orbital_movement then
 				orbital_movement = false
@@ -3534,7 +3534,7 @@ function justPassingBy()
 		end
 	)
 
-	addGMFunction("Move Toggle", 
+	addGMFunction(_("buttonGM", "Move Toggle"), 
 		function()
 			if blackhole_movement then
 				blackhole_movement = false

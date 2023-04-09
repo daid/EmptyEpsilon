@@ -27,7 +27,7 @@ function init()
     moon1:setOrbit(planet1, 20.0)
 
     addGMFunction(
-        "Random asteroid field",
+        _("buttonGM", "Random asteroid field"),
         function()
             cleanup()
             for n = 1, 1000 do
@@ -37,7 +37,7 @@ function init()
         end
     )
     addGMFunction(
-        "Random nebula field",
+        _("buttonGM", "Random nebula field"),
         function()
             cleanup()
             for n = 1, 50 do
@@ -46,7 +46,7 @@ function init()
         end
     )
     addGMFunction(
-        "Delete unselected",
+        _("buttonGM", "Delete unselected"),
         function()
             local gm_selection = getGMSelection()
             for _, obj in ipairs(getAllObjects()) do

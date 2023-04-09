@@ -4653,17 +4653,17 @@ end
 ---------------------------
 function debugButtons()
 	clearGMFunctions()
-	addGMFunction("-From Debug",mainGMButtons)
-	addGMFunction("Object Counts",function()
+	addGMFunction(_("buttonGM", "-From Debug"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Object Counts"),function()
 		addGMMessage(starryUtil.debug.getNumberOfObjectsString())
 	end)
-	addGMFunction("always popup debug",function()
+	addGMFunction(_("buttonGM", "always popup debug"),function()
 		popupGMDebug = "always"
 	end)
-	addGMFunction("once popup debug",function()
+	addGMFunction(_("buttonGM", "once popup debug"),function()
 		popupGMDebug = "once"
 	end)
-	addGMFunction("never popup debug",function()
+	addGMFunction(_("buttonGM", "never popup debug"),function()
 		popupGMDebug = "never"
 	end)
 end
@@ -4680,12 +4680,12 @@ function mainGMButtons()
 			highestPlayerIndex = pidx
 		end
 	end
-	addGMFunction(string.format("+Player ships %i/%i",playerShipCount,highestPlayerIndex),playerShip)
-	addGMFunction("+Set Time Limit",setGameTimeLimit)
-	addGMFunction("+Show Player Info",setShowPlayerInfo)
-	addGMFunction("+debug",debugButtons)
+	addGMFunction(string.format(_("buttonGM", "+Player ships %i/%i"),playerShipCount,highestPlayerIndex),playerShip)
+	addGMFunction(_("buttonGM", "+Set Time Limit"),setGameTimeLimit)
+	addGMFunction(_("buttonGM", "+Show Player Info"),setShowPlayerInfo)
+	addGMFunction(_("buttonGM", "+debug"),debugButtons)
 	if predefined_player_ships ~= nil then
-		addGMFunction("Fixed->Random Names",function()
+		addGMFunction(_("buttonGM", "Fixed->Random Names"),function()
 			if #predefined_player_ships > 0 then
 				stored_fixed_names = {}
 				for i=1,#predefined_player_ships do
@@ -4698,7 +4698,7 @@ function mainGMButtons()
 			mainGMButtons()
 		end)
 	else
-		addGMFunction("Random->Fixed Names",function()
+		addGMFunction(_("buttonGM", "Random->Fixed Names"),function()
 			if stored_fixed_names ~= nil and #stored_fixed_names > 0 then
 				predefined_player_ships = {}
 				for i=1,#stored_fixed_names do
@@ -4718,34 +4718,34 @@ function mainGMButtons()
 end
 function setShowPlayerInfo()
 	clearGMFunctions()
-	addGMFunction("-From Player Info",mainGMButtons)
-	local button_label = "Show Info"
+	addGMFunction(_("buttonGM", "-From Player Info"),mainGMButtons)
+	local button_label = _("buttonGM", "Show Info")
 	if show_player_info then
-		button_label = string.format("%s*",button_label)
+		button_label = string.format(_("buttonGM", "%s*"),button_label)
 	end
 	addGMFunction(button_label,function()
 		show_player_info = true
 		setShowPlayerInfo()
 	end)
-	button_label = "Omit Info"
+	button_label = _("buttonGM", "Omit Info")
 	if not show_player_info then
-		button_label = string.format("%s*",button_label)
+		button_label = string.format(_("buttonGM", "%s*"),button_label)
 	end
 	addGMFunction(button_label,function()
 		show_player_info = false
 		setShowPlayerInfo()
 	end)
-	button_label = "Only Name"
+	button_label = _("buttonGM", "Only Name")
 	if show_only_player_name then
-		button_label = string.format("%s*",button_label)
+		button_label = string.format(_("buttonGM", "%s*"),button_label)
 	end
 	addGMFunction(button_label,function()
 		show_only_player_name = true
 		setShowPlayerInfo()
 	end)
-	button_label = "More than Name"
+	button_label = _("buttonGM", "More than Name")
 	if not show_only_player_name then
-		button_label = string.format("%s*",button_label)
+		button_label = string.format(_("buttonGM", "%s*"),button_label)
 	end
 	addGMFunction(button_label,function()
 		show_only_player_name = false
@@ -4760,9 +4760,9 @@ function setShowPlayerInfo()
 					p.show_name_helm = true
 				end
 				if p.show_name_helm then
-					button_label = string.format("%s Helm*",player_name)
+					button_label = string.format(_("buttonGM", "%s Helm*"),player_name)
 				else
-					button_label = string.format("%s Helm",player_name)
+					button_label = string.format(_("buttonGM", "%s Helm"),player_name)
 				end
 				addGMFunction(button_label,function()
 					if p.show_name_helm then
@@ -4773,9 +4773,9 @@ function setShowPlayerInfo()
 					setShowPlayerInfo()
 				end)
 				if p.show_name_weapons then
-					button_label = string.format("%s Weapons*",player_name)
+					button_label = string.format(_("buttonGM", "%s Weapons*"),player_name)
 				else
-					button_label = string.format("%s Weapons",player_name)
+					button_label = string.format(_("buttonGM", "%s Weapons"),player_name)
 				end
 				addGMFunction(button_label,function()
 					if p.show_name_weapons then
@@ -4786,9 +4786,9 @@ function setShowPlayerInfo()
 					setShowPlayerInfo()
 				end)
 				if p.show_name_engineer then
-					button_label = string.format("%s Engineer*",player_name)
+					button_label = string.format(_("buttonGM", "%s Engineer*"),player_name)
 				else
-					button_label = string.format("%s Engineer",player_name)
+					button_label = string.format(_("buttonGM", "%s Engineer"),player_name)
 				end
 				addGMFunction(button_label,function()
 					if p.show_name_engineer then
@@ -4977,47 +4977,47 @@ function showPlayerInfoOnConsole(delta, p)
 end
 function playerShip()
 	clearGMFunctions()
-	addGMFunction("-From Player ships",mainGMButtons)
-	addGMFunction("+Describe stock",describeStockPlayerShips)
-	addGMFunction("+Describe special",describeSpecialPlayerShips)
+	addGMFunction(_("buttonGM", "-From Player ships"),mainGMButtons)
+	addGMFunction(_("buttonGM", "+Describe stock"),describeStockPlayerShips)
+	addGMFunction(_("buttonGM", "+Describe special"),describeSpecialPlayerShips)
 	if playerNarsil == nil then
-		addGMFunction("Narsil",function()
+		addGMFunction(_("buttonGM", "Narsil"),function()
 			createPlayerShipNarsil()
 			playerShip()
 		end)
 	end
 	if playerHeadhunter == nil then
-		addGMFunction("Headhunter",function()
+		addGMFunction(_("buttonGM", "Headhunter"),function()
 			createPlayerShipHeadhunter()
 			playerShip()
 		end)
 	end
 	if playerBlazon == nil then
-		addGMFunction("Blazon",function()
+		addGMFunction(_("buttonGM", "Blazon"),function()
 			createPlayerShipBlazon()
 			playerShip()
 		end)
 	end
 	if playerSting == nil then
-		addGMFunction("Sting",function()
+		addGMFunction(_("buttonGM", "Sting"),function()
 			createPlayerShipSting()
 			playerShip()
 		end)
 	end
 	if playerSpyder == nil then
-		addGMFunction("Spyder",function()
+		addGMFunction(_("buttonGM", "Spyder"),function()
 			createPlayerShipSpyder()
 			playerShip()
 		end)
 	end
 	if playerSpinstar == nil then
-		addGMFunction("Spinstar",function()
+		addGMFunction(_("buttonGM", "Spinstar"),function()
 			createPlayerShipSpinstar()
 			playerShip()
 		end)
 	end
 	if playerSimian == nil then
-		addGMFunction("Simian",function()
+		addGMFunction(_("buttonGM", "Simian"),function()
 			createPlayerShipSimian()
 			playerShip()
 		end)
@@ -5025,8 +5025,8 @@ function playerShip()
 end
 function describeSpecialPlayerShips()
 	clearGMFunctions()
-	addGMFunction("-Back",playerShip)
-	addGMFunction("Simian",function()
+	addGMFunction(_("buttonGM", "-Back"),playerShip)
+	addGMFunction(_("buttonGM", "Simian"),function()
 		addGMMessage("Destroyer III(Simian):   Hull:100   Shield:110,70   Size:200   Repair Crew:3   Cargo:7   R.Strength:25\nDefault advanced engine:Jump (2U - 20U)   Speeds: Impulse:60   Spin:8   Accelerate:15   C.Maneuver: Boost:450 Strafe:150\nBeam:1 Turreted Speed:0.2\n   Arc:270   Direction:0   Range:0.8   Cycle:5   Damage:6\nTubes:5   Load Speed:8   Front:2   Side:2   Back:1\n   Direction:  0   Type:Exclude Mine\n   Direction:  0   Type:Exclude Mine\n   Direction:-90   Type:Homing Only\n   Direction: 90   Type:Homing Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      10 Homing\n      04 Nuke\n      06 Mine\n      05 EMP\n      10 HVLI\nBased on player missile cruiser: short jump drive (no warp), weaker hull, added one turreted beam, fewer tubes on side, fewer homing, nuke, EMP, mine and added HVLI")
 	end)	
 	--[[	ships not present yet
@@ -5046,67 +5046,67 @@ function describeSpecialPlayerShips()
 end
 function describeStockPlayerShips()
 	clearGMFunctions()
-	addGMFunction("-Back",playerShip)
-	addGMFunction("Atlantis",function()
+	addGMFunction(_("buttonGM", "-Back"),playerShip)
+	addGMFunction(_("buttonGM", "Atlantis"),function()
 		addGMMessage("Atlantis: Corvette, Destroyer   Hull:250   Shield:200,200   Size:400   Repair Crew:3   Cargo:6   R.Strength:52\nDefault advanced engine:Jump   Speeds: Impulse:90   Spin:10   Accelerate:20   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:100   Direction:-20   Range:1.5   Cycle:6   Damage:8\n   Arc:100   Direction: 20   Range:1.5   Cycle:6   Damage:8\nTubes:5   Load Speed:10   Side:4   Back:1\n   Direction:-90   Type:Exclude Mine\n   Direction:-90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      04 Nuke\n      08 Mine\n      06 EMP\n      20 HVLI\nA refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering systems and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.")
 	end)
-	addGMFunction("Benedict",function()
+	addGMFunction(_("buttonGM", "Benedict"),function()
 		addGMMessage("Benedict: Corvette, Freighter/Carrier   Hull:200   Shield:70,70   Size:400   Repair Crew:3   Cargo Space:9   R.Strength:10\nShip classes that may dock with Benedict:Starfighter, Frigate, Corvette\nDefault advanced engine:Jump (5U - 90U)   Speeds: Impulse:60   Spin:6   Accelerate:8   C.Maneuver: Boost:400 Strafe:250\nBeams:2 Turreted Speed:6\n   Arc:90   Direction:  0   Range:1.5   Cycle:6   Damage:4\n   Arc:90   Direction:180   Range:1.5   Cycle:6   Damage:4\nBenedict is an improved version of the Jump Carrier")
 	end)
-	addGMFunction("Crucible",function()
+	addGMFunction(_("buttonGM", "Crucible"),function()
 		addGMMessage("Crucible: Corvette, Popper   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo Space:5   R.Strength:45\nDefault advanced engine:Warp (750)   Speeds: Impulse:80   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:70   Direction:-30   Range:1   Cycle:6   Damage:5\n   Arc:70   Direction: 30   Range:1   Cycle:6   Damage:5\nTubes:6   Load Speed:8   Front:3   Side:2   Back:1\n   Direction:   0   Type:HVLI Only - Small\n   Direction:   0   Type:HVLI Only\n   Direction:   0   Type:HVLI Only - Large\n   Direction:-90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      08 Homing\n      04 Nuke\n      06 Mine\n      06 EMP\n      24 HVLI\nA number of missile tubes range around this ship. Beams were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis")
 	end)
-	addGMFunction("Ender",function()
+	addGMFunction(_("buttonGM", "Ender"),function()
 		addGMMessage("Ender: Dreadnaught, Battlecruiser   Hull:100   Shield:1200,1200   Size:2000   Repair Crew:8   Cargo Space:20   R.Strength:100\nShip classes that may dock with Benedict:Starfighter, Frigate, Corvette   Energy:1200\nDefault advanced engine:Jump   Speeds: Impulse:30   Spin:2   Accelerate:6   C.Maneuver: Boost:800 Strafe:500\nBeams:12 6 left, 6 right turreted Speed:6\n   Arc:120   Direction:-90   Range:2.5   Cycle:6.1   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:6.0   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:5.8   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:6.3   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:5.9   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:6.4   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:5.7   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:5.6   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:6.6   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:5.5   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:6.5   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:6.2   Damage:4\nTubes:2   Load Speed:8   Front:1   Back:1\n   Direction:   0   Type:Homing Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      6 Homing\n      6 Mine")
 	end)
-	addGMFunction("Flavia P.Falcon",function()
+	addGMFunction(_("buttonGM", "Flavia P.Falcon"),function()
 		addGMMessage("Flavia P.Falcon: Frigate, Light Transport   Hull:100   Shield:70,70   Size:200   Repair Crew:8   Cargo Space:15   R.Strength:13\nDefault advanced engine:Warp (500)   Speeds: Impulse:60   Spin:10   Accelerate:10   C.Maneuver: Boost:250 Strafe:150\nBeams:2 rear facing\n   Arc:40   Direction:170   Range:1.2   Cycle:6   Damage:6\n   Arc:40   Direction:190   Range:1.2   Cycle:6   Damage:6\nTubes:1   Load Speed:20   Back:1\n   Direction:180   Type:Any\n   Ordnance stock and type:\n      3 Homing\n      1 Nuke\n      1 Mine\n      5 HVLI\nThe Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp drive.")
 	end)
-	addGMFunction("Hathcock",function()
+	addGMFunction(_("buttonGM", "Hathcock"),function()
 		addGMMessage("Hathcock: Frigate, Cruiser: Sniper   Hull:120   Shield:70,70   Size:200   Repair Crew:2   Cargo Space:6   R.Strength:30\nDefault advanced engine:Jump   Speeds: Impulse:50   Spin:15   Accelerate:8   C.Maneuver: Boost:200 Strafe:150\nBeams:4 front facing\n   Arc:04   Direction:0   Range:1.4   Cycle:6   Damage:4\n   Arc:20   Direction:0   Range:1.2   Cycle:6   Damage:4\n   Arc:60   Direction:0   Range:1.0   Cycle:6   Damage:4\n   Arc:90   Direction:0   Range:0.8   Cycle:6   Damage:4\nTubes:2   Load Speed:15   Side:2\n   Direction:-90   Type:Any\n   Direction: 90   Type:Any\n   Ordnance stock and type:\n      4 Homing\n      1 Nuke\n      2 EMP\n      8 HVLI\nLong range narrow beam and some point defense beams, broadside missiles. Agile for a frigate")
 	end)
-	addGMFunction("Kiriya",function()
+	addGMFunction(_("buttonGM", "Kiriya"),function()
 		addGMMessage("Kiriya: Corvette, Freighter/Carrier   Hull:200   Shield:70,70   Size:400   Repair Crew:3   Cargo Space:9   R.Strength:10\nShip classes that may dock with Benedict:Starfighter, Frigate, Corvette\nDefault advanced engine:Warp (750)   Speeds: Impulse:60   Spin:6   Accelerate:8   C.Maneuver: Boost:400 Strafe:250\nBeams:2 Turreted Speed:6\n   Arc:90   Direction:  0   Range:1.5   Cycle:6   Damage:4\n   Arc:90   Direction:180   Range:1.5   Cycle:6   Damage:4\nKiriya is an improved warp drive version of the Jump Carrier")
 	end)
-	addGMFunction("MP52 Hornet",function()
+	addGMFunction(_("buttonGM", "MP52 Hornet"),function()
 		addGMMessage("MP52 Hornet: Starfighter, Interceptor   Hull:70   Shield:60   Size:100   Repair Crew:1   Cargo:3   R.Strength:7\nDefault advanced engine:None   Speeds: Impulse:125   Spin:32   Accelerate:40   C.Maneuver: Boost:600   Energy:400\nBeams:2\n   Arc:30   Direction: 5   Range:.9   Cycle:4   Damage:2.5\n   Arc:30   Direction:-5   Range:.9   Cycle:4   Damage:2.5\nThe MP52 Hornet is a significantly upgraded version of MU52 Hornet, with nearly twice the hull strength, nearly three times the shielding, better acceleration, impulse boosters, and a second laser cannon.")
 	end)
-	addGMFunction("Maverick",function()
+	addGMFunction(_("buttonGM", "Maverick"),function()
 		addGMMessage("Maverick: Corvette, Gunner   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo:5   R.Strength:45\nDefault advanced engine:Warp (800)   Speeds: Impulse:80   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:6   3 forward, 2 side, 1 back (turreted speed .5)\n   Arc:10   Direction:  0   Range:2.0   Cycle:6   Damage:6\n   Arc: 90   Direction:-20   Range:1.5   Cycle:6   Damage:8\n   Arc: 90   Direction: 20   Range:1.5   Cycle:6   Damage:8\n   Arc: 40   Direction:-70   Range:1.0   Cycle:4   Damage:6\n   Arc: 40   Direction: 70   Range:1.0   Cycle:4   Damage:6\n   Arc:180   Direction:180   Range:0.8   Cycle:6   Damage:4   (turreted speed: .5)\nTubes:3   Load Speed:8   Side:2   Back:1\n   Direction:-90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      06 Homing\n      02 Nuke\n      02 Mine\n      04 EMP\n      10 HVLI\nA number of beams bristle from various points on this gunner. Missiles were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis")
 	end)
-	addGMFunction("Nautilus",function()
+	addGMFunction(_("buttonGM", "Nautilus"),function()
 		addGMMessage("Nautilus: Frigate, Mine Layer   Hull:100   Shield:60,60   Size:200   Repair Crew:4   Cargo:7   R.Strength:12\nDefault advanced engine:Jump   Speeds: Impulse:100   Spin:10   Accelerate:15   C.Maneuver: Boost:250 Strafe:150\nBeams:2 Turreted Speed:6\n   Arc:90   Direction: 35   Range:1   Cycle:6   Damage:6\n   Arc:90   Direction:-35   Range:1   Cycle:6   Damage:6\nTubes:3   Load Speed:10   Back:3\n   Direction:180   Type:Mine Only\n   Direction:180   Type:Mine Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Mine\nSmall mine laying vessel with minimal armament, shields and hull")
 	end)
-	addGMFunction("Phobos MP3",function()
+	addGMFunction(_("buttonGM", "Phobos MP3"),function()
 		addGMMessage("Phobos MP3: Frigate, Cruiser   Hull:200   Shield:100,100   Size:200   Repair Crew:3   Cargo:10   R.Strength:19\nDefault advanced engine:None   Speeds: Impulse:80   Spin:10   Accelerate:20   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:90   Direction:-15   Range:1.2   Cycle:8   Damage:6\n   Arc:90   Direction: 15   Range:1.2   Cycle:8   Damage:6\nTubes:3   Load Speed:10   Front:2   Back:1\n   Direction: -1   Type:Exclude Mine\n   Direction:  1   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      10 Homing\n      02 Nuke\n      04 Mine\n      03 EMP\n      20 HVLI\nPlayer variant of the Phobos M3, not as strong as the atlantis, but has front firing tubes, making it an easier to use ship in some scenarios.")
 	end)
-	addGMFunction("Piranha",function()
+	addGMFunction(_("buttonGM", "Piranha"),function()
 		addGMMessage("Piranha: Frigate, Cruiser: Light Artillery   Hull:120   Shield:70,70   Size:200   Repair Crew:2   Cargo:8   R.Strength:16\nDefault advanced engine:None   Speeds: Impulse:60   Spin:10   Accelerate:8   C.Maneuver: Boost:200 Strafe:150\nTubes:8   Load Speed:8   Side:6   Back:2\n   Direction:-90   Type:HVLI and Homing Only\n   Direction:-90   Type:Any\n   Direction:-90   Type:HVLI and Homing Only\n   Direction: 90   Type:HVLI and Homing Only\n   Direction: 90   Type:Any\n   Direction: 90   Type:HVLI and Homing Only\n   Direction:170   Type:Mine Only\n   Direction:190   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      06 Nuke\n      08 Mine\n      20 HVLI\nThis combat-specialized Piranha F12 adds mine-laying tubes, combat maneuvering systems, and a jump drive.")
 	end)	
-	addGMFunction("Player Cruiser",function()
+	addGMFunction(_("buttonGM", "Player Cruiser"),function()
 		addGMMessage("Player Cruiser:   Hull:200   Shield:80,80   Size:400   Repair Crew:3   Cargo:6   R.Strength:40\nDefault advanced engine:Jump   Speeds: Impulse:90   Spin:10   Accelerate:20   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:90   Direction:-15   Range:1   Cycle:6   Damage:10\n   Arc:90   Direction: 15   Range:1   Cycle:6   Damage:10\nTubes:3   Load Speed:8   Front:2   Back:1\n   Direction: -5   Type:Exclude Mine\n   Direction:  5   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      04 Nuke\n      08 Mine\n      06 EMP")
 	end)
-	addGMFunction("Player Fighter",function()
+	addGMFunction(_("buttonGM", "Player Fighter"),function()
 		addGMMessage("Player Fighter:   Hull:60   Shield:40   Size:100   Repair Crew:3   Cargo:3   R.Strength:7\nDefault advanced engine:None   Speeds: Impulse:110   Spin:20   Accelerate:40   C.Maneuver: Boost:600   Energy:400\nBeams:2\n   Arc:40   Direction:-10   Range:1   Cycle:6   Damage:8\n   Arc:40   Direction: 10   Range:1   Cycle:6   Damage:8\nTube:1   Load Speed:10   Front:1\n   Direction:0   Type:HVLI Only\n   Ordnance stock and type:\n      4 HVLI")
 	end)
-	addGMFunction("Player Missile Cr.",function()
+	addGMFunction(_("buttonGM", "Player Missile Cr."),function()
 		addGMMessage("Player Missile Cr.:   Hull:200   Shield:110,70   Size:200   Repair Crew:3   Cargo:8   R.Strength:45\nDefault advanced engine:Warp (800)   Speeds: Impulse:60   Spin:8   Accelerate:15   C.Maneuver: Boost:450 Strafe:150\nTubes:7   Load Speed:8   Front:2   Side:4   Back:1\n   Direction:  0   Type:Exclude Mine\n   Direction:  0   Type:Exclude Mine\n   Direction: 90   Type:Homing Only\n   Direction: 90   Type:Homing Only\n   Direction:-90   Type:Homing Only\n   Direction:-90   Type:Homing Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      30 Homing\n      08 Nuke\n      12 Mine\n      10 EMP")
 	end)	
-	addGMFunction("Repulse",function()
+	addGMFunction(_("buttonGM", "Repulse"),function()
 		addGMMessage("Repulse: Frigate, Armored Transport   Hull:120   Shield:80,80   Size:200   Repair Crew:8   Cargo:12   R.Strength:14\nDefault advanced engine:Jump   Speeds: Impulse:55   Spin:9   Accelerate:10   C.Maneuver: Boost:250 Strafe:150\nBeams:2 Turreted Speed:5\n   Arc:200   Direction: 90   Range:1.2   Cycle:6   Damage:5\n   Arc:200   Direction:-90   Range:1.2   Cycle:6   Damage:5\nTubes:2   Load Speed:20   Front:1   Back:1\n   Direction:  0   Type:Any\n   Direction:180   Type:Any\n   Ordnance stock and type:\n      4 Homing\n      6 HVLI\nJump/Turret version of Flavia Falcon")
 	end)
-	addGMFunction("Striker",function()
+	addGMFunction(_("buttonGM", "Striker"),function()
 		addGMMessage("Striker: Starfighter, Patrol   Hull:120   Shield:50,30   Size:200   Repair Crew:2   Cargo:4   R.Strength:8\nDefault advanced engine:None   Speeds: Impulse:45   Spin:15   Accelerate:30   C.Maneuver: Boost:250 Strafe:150   Energy:500\nBeams:2 Turreted Speed:6\n   Arc:100   Direction:-15   Range:1   Cycle:6   Damage:6\n   Arc:100   Direction: 15   Range:1   Cycle:6   Damage:6\nThe Striker is the predecessor to the advanced striker, slow but agile, but does not do an extreme amount of damage, and lacks in shields")
 	end)
-	addGMFunction("ZX-Lindworm",function()
+	addGMFunction(_("buttonGM", "ZX-Lindworm"),function()
 		addGMMessage("ZX-Lindworm: Starfighter, Bomber   Hull:75   Shield:40   Size:100   Repair Crew:1   Cargo:3   R.Strength:8\nDefault advanced engine:None   Speeds: Impulse:70   Spin:15   Accelerate:25   C.Maneuver: Boost:250 Strafe:150   Energy:400\nBeam:1 Turreted Speed:4\n   Arc:270   Direction:180   Range:0.7   Cycle:6   Damage:2\nTubes:3   Load Speed:10   Front:3 (small)\n   Direction: 0   Type:Any - small\n   Direction: 1   Type:HVLI Only - small\n   Direction:-1   Type:HVLI Only - small\n   Ordnance stock and type:\n      03 Homing\n      12 HVLI")
 	end)
 end
 function setGameTimeLimit()
 	clearGMFunctions()
-	addGMFunction("-From time limit",mainGMButtons)
+	addGMFunction(_("buttonGM", "-From time limit"),mainGMButtons)
 	for gt=15,55,5 do
-		addGMFunction(string.format("%i minutes",gt),function()
+		addGMFunction(string.format(_("buttonGM", "%i minutes"),gt),function()
 			defaultGameTimeLimitInMinutes = gt
 			gameTimeLimit = defaultGameTimeLimitInMinutes*60
 			plot2 = timedGame
@@ -10662,12 +10662,12 @@ function handleDockedState()
 		end)
 	end
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply("What are my current orders?", function()
+		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			setOptionalOrders()
 			setSecondaryOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
-				ordMsg = ordMsg .. string.format("\n   %i Minutes remain in game",math.floor(gameTimeLimit/60))
+				ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -11568,12 +11568,12 @@ function handleUndockedState()
 	--]]
  	addCommsReply(_("station-comms", "I need information"), function()
 		setCommsMessage(_("station-comms", "What kind of information do you need?"))
-		addCommsReply("What are my current orders?", function()
+		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			setOptionalOrders()
 			setSecondaryOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
-				ordMsg = ordMsg .. string.format("\n   %i Minutes remain in game",math.floor(gameTimeLimit/60))
+				ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)

@@ -76,25 +76,25 @@ end
 ---------------------------
 function mainGMButtons()
 	clearGMFunctions()
-	addGMFunction("Player ships",playerShipGMButtons)
-	addGMFunction("Adjust speed",adjustSpeedGMButtons)
-	addGMFunction("End Mission",endMissionGMButtons)
+	addGMFunction(_("buttonGM", "Player ships"),playerShipGMButtons)
+	addGMFunction(_("buttonGM", "Adjust speed"),adjustSpeedGMButtons)
+	addGMFunction(_("buttonGM", "End Mission"),endMissionGMButtons)
 end
 -- GM player ship functions
 function playerShipGMButtons()
 	clearGMFunctions()
-	addGMFunction("Back to main",mainGMButtons)
+	addGMFunction(_("buttonGM", "Back to main"),mainGMButtons)
 	if playerNarsil == nil then
-		addGMFunction("Narsil",createPlayerShipNarsil)
+		addGMFunction(_("buttonGM", "Narsil"),createPlayerShipNarsil)
 	end
 	if playerHeadhunter == nil then
-		addGMFunction("Headhunter",createPlayerShipHeadhunter)
+		addGMFunction(_("buttonGM", "Headhunter"),createPlayerShipHeadhunter)
 	end
 	if playerBlazon == nil then
-		addGMFunction("Blazon",createPlayerShipBlazon)
+		addGMFunction(_("buttonGM", "Blazon"),createPlayerShipBlazon)
 	end
 	if playerSting == nil then
-		addGMFunction("Sting",createPlayerShipSting)
+		addGMFunction(_("buttonGM", "Sting"),createPlayerShipSting)
 	end
 end
 function createPlayerShipNarsil()
@@ -214,33 +214,33 @@ function createPlayerShipSting()
 	playerSting:setWeaponTubeDirection(2,180)
 	playerSting:setWeaponTubeExclusiveFor(2,"Mine")
 	playerSting:addReputationPoints(50)
-	removeGMFunction("Sting")
+	removeGMFunction(_("buttonGM", "Sting"))
 end
 -- GM adjust speed functions
 function adjustSpeedGMButtons()
 	clearGMFunctions()
-	addGMFunction("Back to main",mainGMButtons)
-	addGMFunction("Primus",adjustPrimusSpeed)
-	addGMFunction("Primus Moon",adjustPrimusMoonSpeed)
-	addGMFunction("Secondus",adjustSecondusSpeed)
-	addGMFunction("Secondus Station",adjustSecondusStationSpeed)
-	addGMFunction("Sol Belt 1",adjustSolBelt1Speed)
-	addGMFunction("Sol Belt 2",adjustSolBelt2Speed)
-	addGMFunction("Tertius",adjustTertiusSpeed)
-	addGMFunction("Tertius Moon Belt",adjustTertiusMoonBeltSpeed)
-	addGMFunction("Tertius Belt 2",adjustTertiusBelt2Speed)
+	addGMFunction(_("buttonGM", "Back to main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Primus"),adjustPrimusSpeed)
+	addGMFunction(_("buttonGM", "Primus Moon"),adjustPrimusMoonSpeed)
+	addGMFunction(_("buttonGM", "Secondus"),adjustSecondusSpeed)
+	addGMFunction(_("buttonGM", "Secondus Station"),adjustSecondusStationSpeed)
+	addGMFunction(_("buttonGM", "Sol Belt 1"),adjustSolBelt1Speed)
+	addGMFunction(_("buttonGM", "Sol Belt 2"),adjustSolBelt2Speed)
+	addGMFunction(_("buttonGM", "Tertius"),adjustTertiusSpeed)
+	addGMFunction(_("buttonGM", "Tertius Moon Belt"),adjustTertiusMoonBeltSpeed)
+	addGMFunction(_("buttonGM", "Tertius Belt 2"),adjustTertiusBelt2Speed)
 end
 function adjustPrimusSpeed()
 	clearGMFunctions()
-	addGMFunction("Back to main",mainGMButtons)
-	addGMFunction("Back from Primus",adjustSpeedGMButtons)
-	addGMFunction("Slower",function()
+	addGMFunction(_("buttonGM", "Back to main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Back from Primus"),adjustSpeedGMButtons)
+	addGMFunction(_("buttonGM", "Slower"),function()
 		print(string.format("current Primus speed: %.1f",planetPrimus.orbit_speed))
 		planetPrimus.orbit_speed = planetPrimus.orbit_speed * 1.1
 		planetPrimus:setOrbit(planetSol,planetPrimus.orbit_speed)
 		print(string.format("new slower Primus speed: %.1f",planetPrimus.orbit_speed))
 	end)
-	addGMFunction("Faster",function()
+	addGMFunction(_("buttonGM", "Faster"),function()
 		print(string.format("current Primus speed: %.1f",planetPrimus.orbit_speed))
 		planetPrimus.orbit_speed = planetPrimus.orbit_speed * .9
 		planetPrimus:setOrbit(planetSol,planetPrimus.orbit_speed)
@@ -249,15 +249,15 @@ function adjustPrimusSpeed()
 end
 function adjustPrimusMoonSpeed()
 	clearGMFunctions()
-	addGMFunction("Back to main",mainGMButtons)
-	addGMFunction("Back from Primus Moon",adjustSpeedGMButtons)
-	addGMFunction("Slower",function()
+	addGMFunction(_("buttonGM", "Back to main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Back from Primus Moon"),adjustSpeedGMButtons)
+	addGMFunction(_("buttonGM", "Slower"),function()
 		print(string.format("current Primus moon speed: %.1f",planetPrimusMoonOrbitTime))
 		planetPrimusMoonOrbitTime = planetPrimusMoonOrbitTime * 1.1
 		planetPrimusMoon:setOrbit(planetPrimus,planetPrimusMoonOrbitTime)
 		print(string.format("new slower Primus moon speed: %.1f",planetPrimusMoonOrbitTime))
 	end)
-	addGMFunction("Faster",function()
+	addGMFunction(_("buttonGM", "Faster"),function()
 		print(string.format("current Primus moon speed: %.1f",planetPrimusMoonOrbitTime))
 		planetPrimusMoonOrbitTime = planetPrimusMoonOrbitTime * .9
 		planetPrimusMoon:setOrbit(planetPrimus,planetPrimusMoonOrbitTime)
@@ -266,15 +266,15 @@ function adjustPrimusMoonSpeed()
 end
 function adjustSecondusSpeed()
 	clearGMFunctions()
-	addGMFunction("Back to main",mainGMButtons)
-	addGMFunction("Back from Secondus",adjustSpeedGMButtons)
-	addGMFunction("Slower",function()
+	addGMFunction(_("buttonGM", "Back to main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Back from Secondus"),adjustSpeedGMButtons)
+	addGMFunction(_("buttonGM", "Slower"),function()
 		print(string.format("current Secondus speed: %.1f",planetSecondus.orbit_speed))
 		planetSecondus.orbit_speed = planetSecondus.orbit_speed * 1.1
 		planetSecondus:setOrbit(planetSol,planetSecondus.orbit_speed)
 		print(string.format("new slower Secondus speed: %.1f",planetSecondus.orbit_speed))
 	end)
-	addGMFunction("Faster",function()
+	addGMFunction(_("buttonGM", "Faster"),function()
 		print(string.format("current Secondus speed: %.1f",planetSecondus.orbit_speed))
 		planetSecondus.orbit_speed = planetSecondus.orbit_speed * .9
 		planetSecondus:setOrbit(planetSol,planetSecondus.orbit_speed)
@@ -283,14 +283,14 @@ function adjustSecondusSpeed()
 end
 function adjustSecondusStationSpeed()
 	clearGMFunctions()
-	addGMFunction("Back to main",mainGMButtons)
-	addGMFunction("Back from Secondus Stn",adjustSpeedGMButtons)
-	addGMFunction("Slower",function()
+	addGMFunction(_("buttonGM", "Back to main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Back from Secondus Stn"),adjustSpeedGMButtons)
+	addGMFunction(_("buttonGM", "Slower"),function()
 		print(string.format("current Secondus station speed: %.3f",secondusStationOrbitIncrement))
 		secondusStationOrbitIncrement = secondusStationOrbitIncrement * .9
 		print(string.format("new slower Secondus station speed: %.3f",secondusStationOrbitIncrement))
 	end)
-	addGMFunction("Faster",function()
+	addGMFunction(_("buttonGM", "Faster"),function()
 		print(string.format("current Secondus station speed: %.3f",secondusStationOrbitIncrement))
 		secondusStationOrbitIncrement = secondusStationOrbitIncrement * 1.1
 		print(string.format("new faster Secondus station speed: %.3f",secondusStationOrbitIncrement))
@@ -298,9 +298,9 @@ function adjustSecondusStationSpeed()
 end
 function adjustSolBelt1Speed()
 	clearGMFunctions()
-	addGMFunction("Back to main",mainGMButtons)
-	addGMFunction("Back from Sol Belt 1",adjustSpeedGMButtons)
-	addGMFunction("Slower",function()
+	addGMFunction(_("buttonGM", "Back to main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Back from Sol Belt 1"),adjustSpeedGMButtons)
+	addGMFunction(_("buttonGM", "Slower"),function()
 		print(string.format("current Sol Belt 1 speed: %.3f",belt1OrbitalSpeed))
 		belt1OrbitalSpeed = belt1OrbitalSpeed * .9
 		for i=1,#beltAsteroidList do
@@ -311,7 +311,7 @@ function adjustSolBelt1Speed()
 		end
 		print(string.format("new slower Sol Belt 1 speed: %.3f",belt1OrbitalSpeed))
 	end)
-	addGMFunction("Faster",function()
+	addGMFunction(_("buttonGM", "Faster"),function()
 		print(string.format("current Sol Belt 1 speed: %.3f",belt1OrbitalSpeed))
 		belt1OrbitalSpeed = belt1OrbitalSpeed * 1.1
 		for i=1,#beltAsteroidList do
@@ -325,9 +325,9 @@ function adjustSolBelt1Speed()
 end
 function adjustSolBelt2Speed()
 	clearGMFunctions()
-	addGMFunction("Back to main",mainGMButtons)
-	addGMFunction("Back from Sol Belt 2",adjustSpeedGMButtons)
-	addGMFunction("Slower",function()
+	addGMFunction(_("buttonGM", "Back to main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Back from Sol Belt 2"),adjustSpeedGMButtons)
+	addGMFunction(_("buttonGM", "Slower"),function()
 		print(string.format("current Sol Belt 2 speed: %.3f",belt2OrbitalSpeed))
 		belt2OrbitalSpeed = belt2OrbitalSpeed * .9
 		for i=1,#beltAsteroidList do
@@ -338,7 +338,7 @@ function adjustSolBelt2Speed()
 		end
 		print(string.format("new slower Sol Belt 2 speed: %.3f",belt2OrbitalSpeed))
 	end)
-	addGMFunction("Faster",function()
+	addGMFunction(_("buttonGM", "Faster"),function()
 		print(string.format("current Sol Belt 2 speed: %.3f",belt2OrbitalSpeed))
 		belt2OrbitalSpeed = belt2OrbitalSpeed * 1.1
 		for i=1,#beltAsteroidList do
@@ -352,15 +352,15 @@ function adjustSolBelt2Speed()
 end
 function adjustTertiusSpeed()
 	clearGMFunctions()
-	addGMFunction("Back to main",mainGMButtons)
-	addGMFunction("Back from Tertius",adjustSpeedGMButtons)
-	addGMFunction("Slower",function()
+	addGMFunction(_("buttonGM", "Back to main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Back from Tertius"),adjustSpeedGMButtons)
+	addGMFunction(_("buttonGM", "Slower"),function()
 		print(string.format("current Tertius speed: %.1f",planetTertius.orbit_speed))
 		planetTertius.orbit_speed = planetTertius.orbit_speed * 1.1
 		planetTertius:setOrbit(planetSol,planetTertius.orbit_speed)
 		print(string.format("new slower Tertius speed: %.1f",planetTertius.orbit_speed))
 	end)
-	addGMFunction("Faster",function()
+	addGMFunction(_("buttonGM", "Faster"),function()
 		print(string.format("current Tertius speed: %.1f",planetTertius.orbit_speed))
 		planetTertius.orbit_speed = planetTertius.orbit_speed * .9
 		planetTertius:setOrbit(planetSol,planetTertius.orbit_speed)
@@ -369,9 +369,9 @@ function adjustTertiusSpeed()
 end
 function adjustTertiusMoonBeltSpeed()
 	clearGMFunctions()
-	addGMFunction("Back to main",mainGMButtons)
-	addGMFunction("Back from Tertius Moon",adjustSpeedGMButtons)
-	addGMFunction("Slower",function()
+	addGMFunction(_("buttonGM", "Back to main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Back from Tertius Moon"),adjustSpeedGMButtons)
+	addGMFunction(_("buttonGM", "Slower"),function()
 		print(string.format("current Tertius Moon Belt speed: %.3f",tertiusOrbitalBodyIncrement))
 		tertiusOrbitalBodyIncrement = tertiusOrbitalBodyIncrement * .9
 		for i=1,#tertiusAsteroids do
@@ -382,7 +382,7 @@ function adjustTertiusMoonBeltSpeed()
 		end
 		print(string.format("new slower Tertius Moon Belt speed: %.3f",tertiusOrbitalBodyIncrement))
 	end)
-	addGMFunction("Faster",function()
+	addGMFunction(_("buttonGM", "Faster"),function()
 		print(string.format("current Tertius Moon Belt speed: %.3f",tertiusOrbitalBodyIncrement))
 		tertiusOrbitalBodyIncrement = tertiusOrbitalBodyIncrement * 1.1
 		for i=1,#tertiusAsteroids do
@@ -396,9 +396,9 @@ function adjustTertiusMoonBeltSpeed()
 end
 function adjustTertiusBelt2Speed()
 	clearGMFunctions()
-	addGMFunction("Back to main",mainGMButtons)
-	addGMFunction("Back from Tertius Belt 2",adjustSpeedGMButtons)
-	addGMFunction("Slower",function()
+	addGMFunction(_("buttonGM", "Back to main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Back from Tertius Belt 2"),adjustSpeedGMButtons)
+	addGMFunction(_("buttonGM", "Slower"),function()
 		print(string.format("current Tertius Belt 2 speed: %.3f",tertiusAsteroidBeltIncrement))
 		tertiusAsteroidBeltIncrement = tertiusAsteroidBeltIncrement * .9
 		for i=1,#tertiusAsteroids do
@@ -415,7 +415,7 @@ function adjustTertiusBelt2Speed()
 		end
 		print(string.format("new slower Tertius Belt 2 speed: %.3f",tertiusAsteroidBeltIncrement))
 	end)
-	addGMFunction("Faster",function()
+	addGMFunction(_("buttonGM", "Faster"),function()
 		print(string.format("current Tertius Belt 2 speed: %.3f",tertiusAsteroidBeltIncrement))
 		tertiusAsteroidBeltIncrement = tertiusAsteroidBeltIncrement * 1.1
 		for i=1,#tertiusAsteroids do
@@ -436,12 +436,12 @@ end
 -- GM end mission functions
 function endMissionGMButtons()
 	clearGMFunctions()
-	addGMFunction("Back to main",mainGMButtons)
-	addGMFunction("Human victory",function()
+	addGMFunction(_("buttonGM", "Back to main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Human victory"),function()
 		showEndStats()
 		victory("Human Navy")
 	end)
-	addGMFunction("Exuari victory",function()
+	addGMFunction(_("buttonGM", "Exuari victory"),function()
 		showEndStats()
 		victory("Exuari")
 	end)
@@ -6338,12 +6338,12 @@ function handleDockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply("What are my current orders?", function()
+		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			setOptionalOrders()
 			setSecondaryOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
-				ordMsg = ordMsg .. string.format("\n   %i Minutes remain in game",math.floor(gameTimeLimit/60))
+				ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -7090,12 +7090,12 @@ function handleUndockedState()
 			end)
 		end
 	    if comms_source:isFriendly(comms_target) then
-			addCommsReply("What are my current orders?", function()
+			addCommsReply(_("orders-comms", "What are my current orders?"), function()
 				setOptionalOrders()
 				setSecondaryOrders()
 				ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 				if playWithTimeLimit then
-					ordMsg = ordMsg .. string.format("\n   %i Minutes remain in game",math.floor(gameTimeLimit/60))
+					ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 				end
 				setCommsMessage(ordMsg)
 				addCommsReply(_("Back"), commsStation)
