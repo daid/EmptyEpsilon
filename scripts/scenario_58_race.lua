@@ -1640,21 +1640,21 @@ function handleDockedState()
 			setCommsMessage("We don't upgrade spaceships")
 		end
 	end)
-	addCommsReply("Visit cartography office", function()
+	addCommsReply(_("cartographyOffice-comms", "Visit cartography office"), function()
 		if comms_target.cartographer_description == nil then
 			local clerk_choice = math.random(1,3)
 			if clerk_choice == 1 then
-				comms_target.cartographer_description = "The clerk behind the desk looks up briefly at you then goes back to filing her nails."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk looks up briefly at you then goes back to filing her nails.")
 			elseif clerk_choice == 2 then
-				comms_target.cartographer_description = "The clerk behind the desk examines you then returns to grooming her tentacles."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk examines you then returns to grooming her tentacles.")
 			else
-				comms_target.cartographer_description = "The clerk behind the desk glances at you then returns to preening her feathers."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk glances at you then returns to preening her feathers.")
 			end
 		end
-		setCommsMessage(string.format("%s\n\nYou can examine the brochure on the coffee table or talk to the cartographer",comms_target.cartographer_description))
-		addCommsReply("Examine brochure",function()
-			setCommsMessage("The brochure has a list of nearby stations and has a list of goods nearby")
-			addCommsReply("Examine station list", function()
+		setCommsMessage(string.format(_("cartographyOffice-comms", "%s\n\nYou can examine the brochure on the coffee table or talk to the cartographer"),comms_target.cartographer_description))
+		addCommsReply(_("cartographyOffice-comms", "Examine brochure"),function()
+			setCommsMessage(_("cartographyOffice-comms", "The brochure has a list of nearby stations and has a list of goods nearby"))
+			addCommsReply(_("cartographyOffice-comms", "Examine station list"), function()
 				local brochure_stations = ""
 				local sx, sy = comms_target:getPosition()
 				local nearby_objects = getObjectsInRadius(sx,sy,30000)
@@ -1662,9 +1662,9 @@ function handleDockedState()
 					if obj.typeName == "SpaceStation" then
 						if not obj:isEnemy(comms_target) then
 							if brochure_stations == "" then
-								brochure_stations = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+								brochure_stations = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 							else
-								brochure_stations = string.format("%s\n%s %s %s",brochure_stations,obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+								brochure_stations = string.format(_("cartographyOffice-comms", "%s\n%s %s %s"),brochure_stations,obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 							end
 						end
 					end
@@ -1672,7 +1672,7 @@ function handleDockedState()
 				setCommsMessage(brochure_stations)
 				addCommsReply(_("Back"),commsStation)
 			end)
-			addCommsReply("Examine goods list", function()
+			addCommsReply(_("cartographyOffice-comms", "Examine goods list"), function()
 				local brochure_goods = ""
 				local sx, sy = comms_target:getPosition()
 				local nearby_objects = getObjectsInRadius(sx,sy,30000)
@@ -1683,9 +1683,9 @@ function handleDockedState()
 								local gi = 1
 								repeat
 									if brochure_goods == "" then
-										brochure_goods = string.format("Good, quantity, cost, station:\n%s, %i, %i, %s",goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3],obj:getCallSign())
+										brochure_goods = string.format(_("cartographyOffice-comms", "Good, quantity, cost, station:\n%s, %i, %i, %s"),goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3],obj:getCallSign())
 									else
-										brochure_goods = string.format("%s\n%s, %i, %i, %s",brochure_goods,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3],obj:getCallSign())
+										brochure_goods = string.format(_("cartographyOffice-comms", "%s\n%s, %i, %i, %s"),brochure_goods,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3],obj:getCallSign())
 									end
 									gi = gi + 1
 								until(gi > #goods[obj])
@@ -1698,10 +1698,10 @@ function handleDockedState()
 			end)
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply("Talk to apprentice cartographer", function()
-			setCommsMessage("Hi, would you like for me to locate a station or some goods for you?")
-			addCommsReply("Locate station", function()
-				setCommsMessage("These are stations I have learned")
+		addCommsReply(_("cartographyOffice-comms", "Talk to apprentice cartographer"), function()
+			setCommsMessage(_("cartographyOffice-comms", "Hi, would you like for me to locate a station or some goods for you?"))
+			addCommsReply(_("cartographyOffice-comms", "Locate station"), function()
+				setCommsMessage(_("cartographyOffice-comms", "These are stations I have learned"))
 				local sx, sy = comms_target:getPosition()
 				local nearby_objects = getObjectsInRadius(sx,sy,50000)
 				local stations_known = 0
@@ -1710,12 +1710,12 @@ function handleDockedState()
 						if not obj:isEnemy(comms_target) then
 							stations_known = stations_known + 1
 							addCommsReply(obj:getCallSign(),function()
-								local station_details = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+								local station_details = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 								if goods[obj] ~= nil then
-									station_details = string.format("%s\nGood, quantity, cost",station_details)
+									station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 									local gi = 1
 									repeat
-										station_details = string.format("%s\n   %s, %i, %i",station_details,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3])
+										station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3])
 										gi = gi + 1
 									until(gi > #goods[obj])
 								end
@@ -1726,12 +1726,12 @@ function handleDockedState()
 					end
 				end
 				if stations_known == 0 then
-					setCommsMessage("I have learned of no stations yet")
+					setCommsMessage(_("cartographyOffice-comms", "I have learned of no stations yet"))
 				end
 				addCommsReply(_("Back"),commsStation)
 			end)
-			addCommsReply("Locate goods", function()
-				setCommsMessage("These are the goods I know about")
+			addCommsReply(_("cartographyOffice-comms", "Locate goods"), function()
+				setCommsMessage(_("cartographyOffice-comms", "These are the goods I know about"))
 				local sx, sy = comms_target:getPosition()
 				local nearby_objects = getObjectsInRadius(sx,sy,50000)
 				local button_count = 0
@@ -1740,7 +1740,7 @@ function handleDockedState()
 					if obj.typeName == "SpaceStation" then
 						if not obj:isEnemy(comms_target) then
 							if goods[obj] ~= nil then
-								station_details = string.format("%s\nGood, quantity, cost",station_details)
+								station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 								local gi = 1
 								repeat
 									by_goods[goods[obj][gi][1]] = obj
@@ -1752,13 +1752,13 @@ function handleDockedState()
 				end
 				for good, obj in pairs(by_goods) do
 					addCommsReply(good, function()
-						local station_details = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+						local station_details = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 						if goods[obj] ~= nil then					
 --						if obj.comms_data.goods ~= nil then
-							station_details = string.format("%s\nGood, quantity, cost",station_details)
+							station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 							local gi = 1
 							repeat
-								station_details = string.format("%s\n   %s, %i, %i",station_details,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3])
+								station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3])
 								gi = gi + 1
 							until(gi > #goods[obj])
 						end

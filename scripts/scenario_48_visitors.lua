@@ -2088,124 +2088,124 @@ function setOptionalMissions()
 	--	faster beams
 	local required_good = chooseUpgradeGood("beam",playerSpawnBandStations[1])
 	playerSpawnBandStations[1].comms_data.character = "Horace Grayson"
-	playerSpawnBandStations[1].comms_data.characterDescription = "He dabbles in ship system innovations. He's been working on improving beam weapons by reducing the amount of time between firing. I hear he's already installed some improvements on ships that have docked here previously"
+	playerSpawnBandStations[1].comms_data.characterDescription = _("characterInfo-comms", "He dabbles in ship system innovations. He's been working on improving beam weapons by reducing the amount of time between firing. I hear he's already installed some improvements on ships that have docked here previously")
 	playerSpawnBandStations[1].comms_data.characterFunction = "shrinkBeamCycle"
 	playerSpawnBandStations[1].comms_data.characterGood = required_good
 	local clue_station = clueStations[math.random(1,#clueStations)]
 	repeat
 		clue_station = clueStations[math.random(1,#clueStations)]
 	until(clue_station.comms_data.gossip == nil)
-	clue_station.comms_data.gossip = string.format("I heard there's a guy named %s that can fix ship beam systems up so that they shoot faster. He lives out on %s in %s. He won't charge you much, but it won't be free.",playerSpawnBandStations[1].comms_data.character,playerSpawnBandStations[1]:getCallSign(),playerSpawnBandStations[1]:getSectorName())
+	clue_station.comms_data.gossip = string.format(_("gossip-comms", "I heard there's a guy named %s that can fix ship beam systems up so that they shoot faster. He lives out on %s in %s. He won't charge you much, but it won't be free."),playerSpawnBandStations[1].comms_data.character,playerSpawnBandStations[1]:getCallSign(),playerSpawnBandStations[1]:getSectorName())
 	--	spin faster
 	required_good = chooseUpgradeGood("circuit",playerSpawnBandStations[2])
 	playerSpawnBandStations[2].comms_data.character = "Emily Patel"
-	playerSpawnBandStations[2].comms_data.characterDescription = "She tinkers with ship systems like engines and thrusters. She's consulted with the military on tuning spin time by increasing thruster power. She's got prototypes that are awaiting formal military approval before installation"
+	playerSpawnBandStations[2].comms_data.characterDescription = _("characterInfo-comms", "She tinkers with ship systems like engines and thrusters. She's consulted with the military on tuning spin time by increasing thruster power. She's got prototypes that are awaiting formal military approval before installation")
 	playerSpawnBandStations[2].comms_data.characterFunction = "increaseSpin"
 	playerSpawnBandStations[2].comms_data.characterGood = required_good
 	clue_station = clueStations[math.random(1,#clueStations)]
 	repeat
 		clue_station = clueStations[math.random(1,#clueStations)]
 	until(clue_station.comms_data.gossip == nil)
-	clue_station.comms_data.gossip = string.format("My friend, %s recently quit her job as a ship maintenance technician to set up this side gig. She's been improving ship systems and she's pretty good at it. She set up shop on %s in %s. I hear she's even lining up a contract with the navy for her improvements.",playerSpawnBandStations[2].comms_data.character,playerSpawnBandStations[2]:getCallSign(),playerSpawnBandStations[2]:getSectorName())
+	clue_station.comms_data.gossip = string.format(_("gossip-comms", "My friend, %s recently quit her job as a ship maintenance technician to set up this side gig. She's been improving ship systems and she's pretty good at it. She set up shop on %s in %s. I hear she's even lining up a contract with the navy for her improvements."),playerSpawnBandStations[2].comms_data.character,playerSpawnBandStations[2]:getCallSign(),playerSpawnBandStations[2]:getSectorName())
 	--	extra missile tube
 	required_good = chooseUpgradeGood("nanites",playerSpawnBandStations[3])
 	playerSpawnBandStations[3].comms_data.character = "Fred McLassiter"
-	playerSpawnBandStations[3].comms_data.characterDescription = "He specializes in miniaturization of weapons systems. He's come up with a way to add a missile tube and some missiles to any ship regardless of size or configuration"
+	playerSpawnBandStations[3].comms_data.characterDescription = _("characterInfo-comms", "He specializes in miniaturization of weapons systems. He's come up with a way to add a missile tube and some missiles to any ship regardless of size or configuration")
 	playerSpawnBandStations[3].comms_data.characterFunction = "addAuxTube"
 	playerSpawnBandStations[3].comms_data.characterGood = required_good
 	clue_station = clueStations[math.random(1,#clueStations)]
 	repeat
 		clue_station = clueStations[math.random(1,#clueStations)]
 	until(clue_station.comms_data.gossip == nil)
-	clue_station.comms_data.gossip = string.format("There's this guy, %s out on %s in %s that can add a missile tube to your ship. He even added one to my cousin's souped up freighter. You should see the new paint job: amusingly phallic",playerSpawnBandStations[3].comms_data.character,playerSpawnBandStations[3]:getCallSign(),playerSpawnBandStations[3]:getSectorName())
+	clue_station.comms_data.gossip = string.format(_("gossip-comms", "There's this guy, %s out on %s in %s that can add a missile tube to your ship. He even added one to my cousin's souped up freighter. You should see the new paint job: amusingly phallic"),playerSpawnBandStations[3].comms_data.character,playerSpawnBandStations[3]:getCallSign(),playerSpawnBandStations[3]:getSectorName())
 	--	cooler beam weapon firing
 	required_good = chooseUpgradeGood("software",playerSpawnBandStations[4])
 	playerSpawnBandStations[4].comms_data.character = "Dorothy Ly"
-	playerSpawnBandStations[4].comms_data.characterDescription = "She developed this technique for cooling beam systems so that they can be fired more often without burning out"
+	playerSpawnBandStations[4].comms_data.characterDescription = _("characterInfo-comms", "She developed this technique for cooling beam systems so that they can be fired more often without burning out")
 	playerSpawnBandStations[4].comms_data.characterFunction = "coolBeam"
 	playerSpawnBandStations[4].comms_data.characterGood = required_good
 	clue_station = clueStations[math.random(1,#clueStations)]
 	repeat
 		clue_station = clueStations[math.random(1,#clueStations)]
 	until(clue_station.comms_data.gossip == nil)
-	clue_station.comms_data.gossip = string.format("There's this girl on %s in %s. She is hot. Her name is %s. When I say she is hot, I mean she has a way of keeping your beam weapons from excessive heat.",playerSpawnBandStations[4]:getCallSign(),playerSpawnBandStations[4]:getSectorName(),playerSpawnBandStations[4].comms_data.character)
+	clue_station.comms_data.gossip = string.format(_("gossip-comms", "There's this girl on %s in %s. She is hot. Her name is %s. When I say she is hot, I mean she has a way of keeping your beam weapons from excessive heat."),playerSpawnBandStations[4]:getCallSign(),playerSpawnBandStations[4]:getSectorName(),playerSpawnBandStations[4].comms_data.character)
 	--	longer beam range
 	required_good = chooseUpgradeGood("optic",playerSpawnBandStations[5])
 	playerSpawnBandStations[5].comms_data.character = "Gerald Cook"
-	playerSpawnBandStations[5].comms_data.characterDescription = "He knows how to modify beam systems to extend their range"
+	playerSpawnBandStations[5].comms_data.characterDescription = _("characterInfo-comms", "He knows how to modify beam systems to extend their range")
 	playerSpawnBandStations[5].comms_data.characterFunction = "longerBeam"
 	playerSpawnBandStations[5].comms_data.characterGood = required_good
 	clue_station = clueStations[math.random(1,#clueStations)]
 	repeat
 		clue_station = clueStations[math.random(1,#clueStations)]
 	until(clue_station.comms_data.gossip == nil)
-	clue_station.comms_data.gossip = string.format("Do you know about %s? He can extend the range of your beam weapons. He's on %s in %s",playerSpawnBandStations[5].comms_data.character,playerSpawnBandStations[5]:getCallSign(),playerSpawnBandStations[5]:getSectorName())
+	clue_station.comms_data.gossip = string.format(_("gossip-comms", "Do you know about %s? He can extend the range of your beam weapons. He's on %s in %s"),playerSpawnBandStations[5].comms_data.character,playerSpawnBandStations[5]:getCallSign(),playerSpawnBandStations[5]:getSectorName())
 	--	increased beam damage
 	required_good = chooseUpgradeGood("filament",playerSpawnBandStations[6])
 	playerSpawnBandStations[6].comms_data.character = "Sally Jenkins"
-	playerSpawnBandStations[6].comms_data.characterDescription = "She can make your beams hit harder"
+	playerSpawnBandStations[6].comms_data.characterDescription = _("characterInfo-comms", "She can make your beams hit harder")
 	playerSpawnBandStations[6].comms_data.characterFunction = "damageBeam"
 	playerSpawnBandStations[6].comms_data.characterGood = required_good
 	clue_station = clueStations[math.random(1,#clueStations)]
 	repeat
 		clue_station = clueStations[math.random(1,#clueStations)]
 	until(clue_station.comms_data.gossip == nil)
-	clue_station.comms_data.gossip = string.format("You should visit %s in %s. There's a specialist in beam technology that can increase the damage done by your beams. Her name is %s",playerSpawnBandStations[6]:getCallSign(),playerSpawnBandStations[6]:getSectorName(),playerSpawnBandStations[6].comms_data.character)
+	clue_station.comms_data.gossip = string.format(_("gossip-comms", "You should visit %s in %s. There's a specialist in beam technology that can increase the damage done by your beams. Her name is %s"),playerSpawnBandStations[6]:getCallSign(),playerSpawnBandStations[6]:getSectorName(),playerSpawnBandStations[6].comms_data.character)
 	--	increased maximum missile storage capacity
 	required_good = chooseUpgradeGood("transporter",playerSpawnBandStations[7])
 	playerSpawnBandStations[7].comms_data.character = "Anh Dung Ly"
-	playerSpawnBandStations[7].comms_data.characterDescription = "He can fit more missiles aboard your ship"
+	playerSpawnBandStations[7].comms_data.characterDescription = _("characterInfo-comms", "He can fit more missiles aboard your ship")
 	playerSpawnBandStations[7].comms_data.characterFunction = "moreMissiles"
 	playerSpawnBandStations[7].comms_data.characterGood = required_good
 	clue_station = clueStations[math.random(1,#clueStations)]
 	repeat
 		clue_station = clueStations[math.random(1,#clueStations)]
 	until(clue_station.comms_data.gossip == nil)
-	clue_station.comms_data.gossip = string.format("Want to store more missiles on your ship? Talk to %s on station %s in %s. He can retrain your missile loaders and missile storage automation such that you will be able to store more missiles",playerSpawnBandStations[7].comms_data.character,playerSpawnBandStations[7]:getCallSign(),playerSpawnBandStations[7]:getSectorName())
+	clue_station.comms_data.gossip = string.format(_("gossip-comms", "Want to store more missiles on your ship? Talk to %s on station %s in %s. He can retrain your missile loaders and missile storage automation such that you will be able to store more missiles"),playerSpawnBandStations[7].comms_data.character,playerSpawnBandStations[7]:getCallSign(),playerSpawnBandStations[7]:getSectorName())
 	--	faster impulse
 	required_good = chooseUpgradeGood("impulse",playerSpawnBandStations[8])
 	playerSpawnBandStations[8].comms_data.character = "Doralla Ognats"
-	playerSpawnBandStations[8].comms_data.characterDescription = "She can soup up your impulse engines"
+	playerSpawnBandStations[8].comms_data.characterDescription = _("characterInfo-comms", "She can soup up your impulse engines")
 	playerSpawnBandStations[8].comms_data.characterFunction = "fasterImpulse"
 	playerSpawnBandStations[8].comms_data.characterGood = required_good
 	clue_station = clueStations[math.random(1,#clueStations)]
 	repeat
 		clue_station = clueStations[math.random(1,#clueStations)]
 	until(clue_station.comms_data.gossip == nil)
-	clue_station.comms_data.gossip = string.format("%s, an engineer/mechanic who knows propulsion systems backwards and forwards has a bay at the shipyard on %s in %s. She can give your impulse engines a significant boost to their top speed",playerSpawnBandStations[8].comms_data.character,playerSpawnBandStations[8]:getCallSign(),playerSpawnBandStations[8]:getSectorName())
+	clue_station.comms_data.gossip = string.format(_("gossip-comms", "%s, an engineer/mechanic who knows propulsion systems backwards and forwards has a bay at the shipyard on %s in %s. She can give your impulse engines a significant boost to their top speed"),playerSpawnBandStations[8].comms_data.character,playerSpawnBandStations[8]:getCallSign(),playerSpawnBandStations[8]:getSectorName())
 	--	stronger hull
 	required_good = chooseUpgradeGood("repulsor",tertiusStation)
 	tertiusStation.comms_data.character = "Maduka Lawal"
-	tertiusStation.comms_data.characterDescription = "He can strengthen your hull"
+	tertiusStation.comms_data.characterDescription = _("characterInfo-comms", "He can strengthen your hull")
 	tertiusStation.comms_data.characterFunction = "strongerHull"
 	tertiusStation.comms_data.characterGood = required_good
 	clue_station = clueStations[math.random(1,#clueStations)]
 	repeat
 		clue_station = clueStations[math.random(1,#clueStations)]
 	until(clue_station.comms_data.gossip == nil and clue_station ~= tertiusStation)
-	clue_station.comms_data.gossip = string.format("I know of a materials specialist on %s in %s named %s. He can strengthen the hull on your ship",tertiusStation:getCallSign(),tertiusStation:getSectorName(),tertiusStation.comms_data.character)
+	clue_station.comms_data.gossip = string.format(_("gossip-comms", "I know of a materials specialist on %s in %s named %s. He can strengthen the hull on your ship"),tertiusStation:getCallSign(),tertiusStation:getSectorName(),tertiusStation.comms_data.character)
 	--	efficient batteries
 	required_good = chooseUpgradeGood("battery",tertiusMoon1Station)
 	tertiusMoon1Station.comms_data.character = "Susil Tarigan"
-	tertiusMoon1Station.comms_data.characterDescription = "She knows how to increase your maximum energy capacity by improving battery efficiency"
+	tertiusMoon1Station.comms_data.characterDescription = _("characterInfo-comms", "She knows how to increase your maximum energy capacity by improving battery efficiency")
 	tertiusMoon1Station.comms_data.characterFunction = "efficientBatteries"
 	tertiusMoon1Station.comms_data.characterGood = required_good
 	clue_station = clueStations[math.random(1,#clueStations)]
 	repeat
 		clue_station = clueStations[math.random(1,#clueStations)]
 	until(clue_station.comms_data.gossip == nil and clue_station ~= tertiusMoon1Station)
-	clue_station.comms_data.gossip = string.format("Have you heard about %s? She's on %s in %s and she can give your ship greater energy capacity by improving your battery efficiency",tertiusMoon1Station.comms_data.character,tertiusMoon1Station:getCallSign(),tertiusMoon1Station:getSectorName())
+	clue_station.comms_data.gossip = string.format(_("gossip-comms", "Have you heard about %s? She's on %s in %s and she can give your ship greater energy capacity by improving your battery efficiency"),tertiusMoon1Station.comms_data.character,tertiusMoon1Station:getCallSign(),tertiusMoon1Station:getSectorName())
 	--	stronger shields
 	required_good = chooseUpgradeGood("shield",tertiusAsteroidStations[1])
 	tertiusAsteroidStations[1].comms_data.character = "Paulo Silva"
-	tertiusAsteroidStations[1].comms_data.characterDescription = "He can strengthen your shields"
+	tertiusAsteroidStations[1].comms_data.characterDescription = _("characterInfo-comms", "He can strengthen your shields")
 	tertiusAsteroidStations[1].comms_data.characterFunction = "strongerShields"
 	tertiusAsteroidStations[1].comms_data.characterGood = required_good
 	clue_station = clueStations[math.random(1,#clueStations)]
 	repeat
 		clue_station = clueStations[math.random(1,#clueStations)]
 	until(clue_station.comms_data.gossip == nil and clue_station ~= tertiusAsteroidStations[1])
-	clue_station.comms_data.gossip = string.format("If you stop at %s in %s, you should talk to %s. He can strengthen your shields. Trust me, it's always good to have stronger shields",tertiusAsteroidStations[1]:getCallSign(),tertiusAsteroidStations[1]:getSectorName(),tertiusAsteroidStations[1].comms_data.character)
+	clue_station.comms_data.gossip = string.format(_("gossip-comms", "If you stop at %s in %s, you should talk to %s. He can strengthen your shields. Trust me, it's always good to have stronger shields"),tertiusAsteroidStations[1]:getCallSign(),tertiusAsteroidStations[1]:getSectorName(),tertiusAsteroidStations[1].comms_data.character)
 end
 function chooseUpgradeGood(ideal_good,upgrade_station)
 	local required_good = ideal_good
@@ -6417,26 +6417,26 @@ function handleDockedState()
 			end
 		end
 	end	--end friendly/neutral 
-	addCommsReply("Visit cartography office", function()
+	addCommsReply(_("cartographyOffice-comms", "Visit cartography office"), function()
 		if comms_target.cartographer_description == nil then
 			local clerk_choice = math.random(1,3)
 			if clerk_choice == 1 then
-				comms_target.cartographer_description = "The clerk behind the desk looks up briefly at you then goes back to filing her nails."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk looks up briefly at you then goes back to filing her nails.")
 			elseif clerk_choice == 2 then
-				comms_target.cartographer_description = "The clerk behind the desk examines you then returns to grooming her tentacles."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk examines you then returns to grooming her tentacles.")
 			else
-				comms_target.cartographer_description = "The clerk behind the desk glances at you then returns to preening her feathers."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk glances at you then returns to preening her feathers.")
 			end
 		end
-		setCommsMessage(string.format("%s\n\nYou can examine the brochure on the coffee table, talk to the apprentice cartographer or talk to the master cartographer",comms_target.cartographer_description))
-		addCommsReply("What's the difference between the apprentice and the master?", function()
-			setCommsMessage("The clerk responds in a bored voice, 'The apprentice knows the local area and is learning the broader area. The master knows the local and the broader area but can't be bothered with the local area'")
+		setCommsMessage(string.format(_("cartographyOffice-comms", "%s\n\nYou can examine the brochure on the coffee table, talk to the apprentice cartographer or talk to the master cartographer"),comms_target.cartographer_description))
+		addCommsReply(_("cartographyOffice-comms", "What's the difference between the apprentice and the master?"), function()
+			setCommsMessage(_("cartographyOffice-comms", "The clerk responds in a bored voice, 'The apprentice knows the local area and is learning the broader area. The master knows the local and the broader area but can't be bothered with the local area'"))
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply(string.format("Examine brochure (%i rep)",getCartographerCost()),function()
+		addCommsReply(string.format(_("cartographyOffice-comms", "Examine brochure (%i rep)"),getCartographerCost()),function()
 			if comms_source:takeReputationPoints(1) then
-				setCommsMessage("The brochure has a list of nearby stations and has a list of goods nearby")
-				addCommsReply(string.format("Examine station list (%i rep)",getCartographerCost()), function()
+				setCommsMessage(_("cartographyOffice-comms", "The brochure has a list of nearby stations and has a list of goods nearby"))
+				addCommsReply(string.format(_("cartographyOffice-comms", "Examine station list (%i rep)"),getCartographerCost()), function()
 					if comms_source:takeReputationPoints(1) then
 						local brochure_stations = ""
 						local sx, sy = comms_target:getPosition()
@@ -6445,12 +6445,12 @@ function handleDockedState()
 							if obj.typeName == "SpaceStation" then
 								if not obj:isEnemy(comms_target) then
 									if brochure_stations == "" then
-										brochure_stations = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+										brochure_stations = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 									else
-										brochure_stations = string.format("%s\n%s %s %s",brochure_stations,obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+										brochure_stations = string.format(_("cartographyOffice-comms", "%s\n%s %s %s"),brochure_stations,obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 									end
 									if obj.comms_data.orbit ~= nil then
-										brochure_stations = string.format("%s %s",brochure_stations,obj.comms_data.orbit)
+										brochure_stations = string.format(_("cartographyOffice-comms", "%s %s"),brochure_stations,obj.comms_data.orbit)
 									end
 								end
 							end
@@ -6461,7 +6461,7 @@ function handleDockedState()
 					end
 					addCommsReply(_("Back"),commsStation)
 				end)
-				addCommsReply(string.format("Examine goods list (%i rep)",getCartographerCost()), function()
+				addCommsReply(string.format(_("cartographyOffice-comms", "Examine goods list (%i rep)"),getCartographerCost()), function()
 					if comms_source:takeReputationPoints(1) then
 						local brochure_goods = ""
 						local sx, sy = comms_target:getPosition()
@@ -6472,9 +6472,9 @@ function handleDockedState()
 									if obj.comms_data.goods ~= nil then
 										for good, good_data in pairs(obj.comms_data.goods) do
 											if brochure_goods == "" then
-												brochure_goods = string.format("Good, quantity, cost, station:\n%s, %i, %i, %s",good,good_data["quantity"],good_data["cost"],obj:getCallSign())
+												brochure_goods = string.format(_("cartographyOffice-comms", "Good, quantity, cost, station:\n%s, %i, %i, %s"),good,good_data["quantity"],good_data["cost"],obj:getCallSign())
 											else
-												brochure_goods = string.format("%s\n%s, %i, %i, %s",brochure_goods,good,good_data["quantity"],good_data["cost"],obj:getCallSign())
+												brochure_goods = string.format(_("cartographyOffice-comms", "%s\n%s, %i, %i, %s"),brochure_goods,good,good_data["quantity"],good_data["cost"],obj:getCallSign())
 											end
 										end
 									end
@@ -6492,11 +6492,11 @@ function handleDockedState()
 			end
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply(string.format("Talk to apprentice cartographer (%i rep)",getCartographerCost("apprentice")), function()
+		addCommsReply(string.format(_("cartographyOffice-comms", "Talk to apprentice cartographer (%i rep)"),getCartographerCost("apprentice")), function()
 			if comms_source:takeReputationPoints(1) then
-				setCommsMessage("Hi, would you like for me to locate a station or some goods for you?")
-				addCommsReply("Locate station", function()
-					setCommsMessage("These are stations I have learned")
+				setCommsMessage(_("cartographyOffice-comms", "Hi, would you like for me to locate a station or some goods for you?"))
+				addCommsReply(_("cartographyOffice-comms", "Locate station"), function()
+					setCommsMessage(_("cartographyOffice-comms", "These are stations I have learned"))
 					local sx, sy = comms_target:getPosition()
 					local nearby_objects = getObjectsInRadius(sx,sy,50000)
 					local stations_known = 0
@@ -6505,24 +6505,24 @@ function handleDockedState()
 							if not obj:isEnemy(comms_target) then
 								stations_known = stations_known + 1
 								addCommsReply(obj:getCallSign(),function()
-									local station_details = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+									local station_details = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 									if obj.comms_data.orbit ~= nil then
-										station_details = string.format("%s %s",station_details,obj.comms_data.orbit)
+										station_details = string.format(_("cartographyOffice-comms", "%s %s"),station_details,obj.comms_data.orbit)
 									end
 									if obj.comms_data.goods ~= nil then
-										station_details = string.format("%s\nGood, quantity, cost",station_details)
+										station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 										for good, good_data in pairs(obj.comms_data.goods) do
-											station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+											station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 										end
 									end
 									if obj.comms_data.general_information ~= nil then
-										station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general_information)
+										station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general_information)
 									end
 									if obj.comms_data.history ~= nil then
-										station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+										station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 									end
 									if obj.comms_data.gossip ~= nil then
-										station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+										station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 									end
 									setCommsMessage(station_details)
 									addCommsReply(_("Back"),commsStation)
@@ -6531,12 +6531,12 @@ function handleDockedState()
 						end
 					end
 					if stations_known == 0 then
-						setCommsMessage("I have learned of no stations yet")
+						setCommsMessage(_("cartographyOffice-comms", "I have learned of no stations yet"))
 					end
 					addCommsReply(_("Back"),commsStation)
 				end)
-				addCommsReply("Locate goods", function()
-					setCommsMessage("These are the goods I know about")
+				addCommsReply(_("cartographyOffice-comms", "Locate goods"), function()
+					setCommsMessage(_("cartographyOffice-comms", "These are the goods I know about"))
 					local sx, sy = comms_target:getPosition()
 					local nearby_objects = getObjectsInRadius(sx,sy,50000)
 					local button_count = 0
@@ -6554,24 +6554,24 @@ function handleDockedState()
 					end
 					for good, obj in pairs(by_goods) do
 						addCommsReply(good, function()
-							local station_details = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+							local station_details = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 							if obj.comms_data.orbit ~= nil then
-								station_details = string.format("%s %s",station_details,obj.comms_data.orbit)
+								station_details = string.format(_("cartographyOffice-comms", "%s %s"),station_details,obj.comms_data.orbit)
 							end
 							if obj.comms_data.goods ~= nil then
-								station_details = string.format("%s\nGood, quantity, cost",station_details)
+								station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 								for good, good_data in pairs(obj.comms_data.goods) do
-									station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+									station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 								end
 							end
 							if obj.comms_data.general_information ~= nil then
-								station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general_information)
+								station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general_information)
 							end
 							if obj.comms_data.history ~= nil then
-								station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+								station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 							end
 							if obj.comms_data.gossip ~= nil then
-								station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+								station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 							end
 							setCommsMessage(station_details)
 							addCommsReply(_("Back"),commsStation)
@@ -6588,10 +6588,10 @@ function handleDockedState()
 			end
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply(string.format("Talk to master cartographer (%i rep)",getCartographerCost("master")), function()
+		addCommsReply(string.format(_("cartographyOffice-comms", "Talk to master cartographer (%i rep)"),getCartographerCost("master")), function()
 			if comms_source:getWaypointCount() >= 9 then
-				setCommsMessage("The clerk clears her throat:\n\nMy indicators show you have zero available waypoints. To get the most from the master cartographer, you should delete one or more so that he can update your systems appropriately.\n\nI just want you to get the maximum benefit for the time you spend with him")
-				addCommsReply("Continue to Master Cartographer", masterCartographer)
+				setCommsMessage(_("cartographyOffice-comms", "The clerk clears her throat:\n\nMy indicators show you have zero available waypoints. To get the most from the master cartographer, you should delete one or more so that he can update your systems appropriately.\n\nI just want you to get the maximum benefit for the time you spend with him"))
+				addCommsReply(_("cartographyOffice-comms", "Continue to Master Cartographer"), masterCartographer)
 			else
 				masterCartographer()
 			end
@@ -6753,9 +6753,9 @@ function handleDockedState()
 end
 function masterCartographer()
 	if comms_source:takeReputationPoints(getCartographerCost("master")) then
-		setCommsMessage("Greetings,\nMay I help you find a station or goods?")
-		addCommsReply("Find station",function()
-			setCommsMessage("What station?")
+		setCommsMessage(_("cartographyOffice-comms", "Greetings,\nMay I help you find a station or goods?"))
+		addCommsReply(_("cartographyOffice-comms", "Find station"),function()
+			setCommsMessage(_("cartographyOffice-comms", "What station?"))
 			local nearby_objects = getAllObjects()
 			local stations_known = 0
 			for _, obj in ipairs(nearby_objects) do
@@ -6765,30 +6765,30 @@ function masterCartographer()
 						if station_distance > 50000 then
 							stations_known = stations_known + 1
 							addCommsReply(obj:getCallSign(),function()
-								local station_details = string.format("%s %s %s Distance:%.1fU",obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
+								local station_details = string.format(_("cartographyOffice-comms", "%s %s %s Distance:%.1fU"),obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
 								if obj.comms_data.orbit ~= nil then
-									station_details = string.format("%s %s",station_details,obj.comms_data.orbit)
+									station_details = string.format(_("cartographyOffice-comms", "%s %s"),station_details,obj.comms_data.orbit)
 								end
 								if obj.comms_data.goods ~= nil then
-									station_details = string.format("%s\nGood, quantity, cost",station_details)
+									station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 									for good, good_data in pairs(obj.comms_data.goods) do
-										station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+										station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 									end
 								end
 								if obj.comms_data.general_information ~= nil then
-									station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general_information)
+									station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general_information)
 								end
 								if obj.comms_data.history ~= nil then
-									station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+									station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 								end
 								if obj.comms_data.gossip ~= nil then
-									station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+									station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 								end
 								local dsx, dsy = obj:getPosition()
 								comms_source:commandAddWaypoint(dsx,dsy)
-								station_details = string.format("%s\nAdded waypoint %i to your navigation system for %s",station_details,comms_source:getWaypointCount(),obj:getCallSign())
+								station_details = string.format(_("cartographyOffice-comms", "%s\nAdded waypoint %i to your navigation system for %s"),station_details,comms_source:getWaypointCount(),obj:getCallSign())
 								if obj.comms_data.orbit ~= nil then
-									station_details = string.format("%s\nNote: this waypoint will be out of date shortly since %s is in motion",station_details,obj:getCallSign())
+									station_details = string.format(_("cartographyOffice-comms", "%s\nNote: this waypoint will be out of date shortly since %s is in motion"),station_details,obj:getCallSign())
 								end
 								setCommsMessage(station_details)
 								addCommsReply(_("Back"),commsStation)
@@ -6798,12 +6798,12 @@ function masterCartographer()
 				end
 			end
 			if stations_known == 0 then
-				setCommsMessage("Try the apprentice, I'm tired")
+				setCommsMessage(_("cartographyOffice-comms", "Try the apprentice, I'm tired"))
 			end
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply("Find Goods", function()
-			setCommsMessage("What goods are you looking for?")
+		addCommsReply(_("cartographyOffice-comms", "Find Goods"), function()
+			setCommsMessage(_("cartographyOffice-comms", "What goods are you looking for?"))
 			local nearby_objects = getAllObjects()
 			local by_goods = {}
 			for _, obj in ipairs(nearby_objects) do
@@ -6823,30 +6823,30 @@ function masterCartographer()
 			for good, obj in pairs(by_goods) do
 				addCommsReply(good, function()
 					local station_distance = distance(comms_target,obj)
-					local station_details = string.format("%s %s %s Distance:%.1fU",obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
+					local station_details = string.format(_("cartographyOffice-comms", "%s %s %s Distance:%.1fU"),obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
 					if obj.comms_data.orbit ~= nil then
-						station_details = string.format("%s %s",station_details,obj.comms_data.orbit)
+						station_details = string.format(_("cartographyOffice-comms", "%s %s"),station_details,obj.comms_data.orbit)
 					end
 					if obj.comms_data.goods ~= nil then
-						station_details = string.format("%s\nGood, quantity, cost",station_details)
+						station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 						for good, good_data in pairs(obj.comms_data.goods) do
-							station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+							station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 						end
 					end
 					if obj.comms_data.general_information ~= nil then
-						station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general_information)
+						station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general_information)
 					end
 					if obj.comms_data.history ~= nil then
-						station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+						station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 					end
 					if obj.comms_data.gossip ~= nil then
-						station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+						station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 					end
 					local dsx, dsy = obj:getPosition()
 					comms_source:commandAddWaypoint(dsx,dsy)
-					station_details = string.format("%s\nAdded waypoint %i to your navigation system for %s",station_details,comms_source:getWaypointCount(),obj:getCallSign())
+					station_details = string.format(_("cartographyOffice-comms", "%s\nAdded waypoint %i to your navigation system for %s"),station_details,comms_source:getWaypointCount(),obj:getCallSign())
 					if obj.comms_data.orbit ~= nil then
-						station_details = string.format("%s\nNote: this waypoint will be out of date shortly since %s is in motion",station_details,obj:getCallSign())
+						station_details = string.format(_("cartographyOffice-comms", "%s\nNote: this waypoint will be out of date shortly since %s is in motion"),station_details,obj:getCallSign())
 					end
 					setCommsMessage(station_details)
 					addCommsReply(_("Back"),commsStation)

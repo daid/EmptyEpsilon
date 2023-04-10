@@ -1160,8 +1160,8 @@ function setOptionalAddBeamMission(beam_station)
 	if beam_station == nil then
 		return
 	end
-	beam_station.comms_data.character = _("Bob Fairchilde")
-	beam_station.comms_data.characterDescription = _("His penchant for miniaturization and tinkering allows him to add a beam weapon to any ship")
+	beam_station.comms_data.character = "Bob Fairchilde"
+	beam_station.comms_data.characterDescription = _("characterInfo-comms", "His penchant for miniaturization and tinkering allows him to add a beam weapon to any ship")
 	beam_station.comms_data.characterFunction = "addForwardBeam"
 	if efficient_battery_diagnostic then print(string.format("first station: %s",first_station:getCallSign())) end
 	local mineral_good = stationMineralGood(first_station)
@@ -1174,8 +1174,8 @@ function setOptionalEfficientBatteriesMisison(battery_station)
 	if battery_station == nil then
 		return
 	end
-	battery_station.comms_data.character = _("Norma Tarigan")
-	battery_station.comms_data.characterDescription = _("She knows how to increase your maximum energy capacity by improving battery efficiency")
+	battery_station.comms_data.character = "Norma Tarigan"
+	battery_station.comms_data.characterDescription = _("characterInfo-comms", "She knows how to increase your maximum energy capacity by improving battery efficiency")
 	battery_station.comms_data.characterFunction = "efficientBatteries"
 	if efficient_battery_diagnostic then print(string.format("independent station 2: %s",independent_station[2]:getCallSign())) end
 	local component_good = stationComponentGood(independent_station[2],"battery")
