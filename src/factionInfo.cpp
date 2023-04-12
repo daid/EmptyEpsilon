@@ -39,6 +39,15 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     /// Wrap the string in the _() function to make it available for translation.
     /// Example: faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setDescription);
+    /// Returns this faction's relationship with the given faction.
+    /// Valid values are "friendly", "neutral", and "enemy".
+    /// Example: faction:getRelationshipWith(exuari) -- returns "enemy"
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getRelationshipWith);
+    /// Sets this faction's relationship with the given faction to the given state.
+    /// Example:
+    /// exuari = getFactionInfoByName("Exuari")
+    /// faction:setRelationshipWith(exuari,"enemy") -- sets a hostile relationship with Exuari
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setRelationshipWith);
     /// Sets the given faction to appear as hostile to SpaceObjects of this faction.
     /// For example, Spaceships of this faction can target and fire at SpaceShips of the given faction.
     /// Defaults to no hostile factions.
@@ -138,7 +147,7 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
     other->enemy_mask &=~(1 << index);
 }
 
-EFactionVsFactionState FactionInfo::getState(P<FactionInfo> other)
+EFactionVsFactionState FactionInfo::getRelationshipWith(P<FactionInfo> other)
 {
     if (!other) return FVF_Neutral;
     if (enemy_mask & (1 << other->index)) return FVF_Enemy;
@@ -146,12 +155,26 @@ EFactionVsFactionState FactionInfo::getState(P<FactionInfo> other)
     return FVF_Neutral;
 }
 
-EFactionVsFactionState FactionInfo::getState(uint8_t idx0, uint8_t idx1)
+void FactionInfo::setRelationshipWith(P<FactionInfo> other, EFactionVsFactionState state)
+{
+    if (!other)
+    {
+        LOG(WARNING) << "Given setRelationshipWith faction is invalid.";
+        return;
+    }
+
+    if (state == FVF_Enemy) { setEnemy(other); }
+    else if (state == FVF_Friendly) { setFriendly(other); }
+    // else if (state == FVF_Neutral) { setNeutral(other); }
+    else { LOG(ERROR) << "Given faction relationship state is invalid."; }
+}
+
+EFactionVsFactionState FactionInfo::getRelationshipBetween(uint8_t idx0, uint8_t idx1)
 {
     if (idx0 >= factionInfo.size()) return FVF_Neutral;
     if (idx1 >= factionInfo.size()) return FVF_Neutral;
     if (!factionInfo[idx0] || !factionInfo[idx1]) return FVF_Neutral;
-    return factionInfo[idx0]->getState(factionInfo[idx1]);
+    return factionInfo[idx0]->getRelationshipWith(factionInfo[idx1]);
 }
 
 unsigned int FactionInfo::findFactionId(string name)
@@ -168,4 +191,32 @@ void FactionInfo::reset()
     for(unsigned int n = 0; n < factionInfo.size(); n++)
         if (factionInfo[n])
             factionInfo[n]->destroy();
+}
+
+template<> void convert<EFactionVsFactionState>::param(lua_State* L, int& idx, EFactionVsFactionState& state)
+{
+    string str = string(luaL_checkstring(L, idx++)).lower();
+
+    if (str == "friendly") { state = FVF_Friendly; }
+    else if (str == "neutral") { state = FVF_Neutral; }
+    else if (str == "enemy") { state = FVF_Enemy; }
+    else { state = FVF_Neutral; }
+}
+
+template<> int convert<EFactionVsFactionState>::returnType(lua_State* L, EFactionVsFactionState state)
+{
+    switch (state)
+    {
+    case FVF_Friendly:
+        lua_pushstring(L, "friendly");
+        return 1;
+    case FVF_Neutral:
+        lua_pushstring(L, "neutral");
+        return 1;
+    case FVF_Enemy:
+        lua_pushstring(L, "enemy");
+        return 1;
+    default:
+        return 0;
+    }
 }
