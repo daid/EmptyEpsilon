@@ -165,9 +165,15 @@ void WarpJammer::onDestruction(ScriptSimpleCallback callback)
 
 string WarpJammer::getExportLine()
 {
-    string ret = "WarpJammer():setFaction(\"" + getFaction() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+    string ret = "WarpJammer():setFaction(\"" + getFaction() + "\")";
+    ret += ":setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+
     if (getRange() != 7000.0f) {
-	    ret += ":setRange("+string(getRange())+")";
+        ret += ":setRange("+string(getRange())+")";
     }
+    if (getHull() != 50.0f) {
+        ret += ":setHull(" + string(getHull()) + ")";
+    }
+
     return ret;
 }
