@@ -47,10 +47,10 @@ Asteroid::Asteroid()
 
         auto model_number = irandom(1, 10);
         auto& mrc = entity.getOrAddComponent<MeshRenderComponent>();
-        mrc.mesh = "Astroid_" + string(model_number) + ".model";
+        mrc.mesh.name = "Astroid_" + string(model_number) + ".model";
         mrc.mesh_offset = {0, 0, z};
-        mrc.texture = "Astroid_" + string(model_number) + "_d.png";
-        mrc.specular_texture = "Astroid_" + string(model_number) + "_s.png";
+        mrc.texture.name = "Astroid_" + string(model_number) + "_d.png";
+        mrc.specular_texture.name = "Astroid_" + string(model_number) + "_s.png";
         mrc.scale = size;
 
         auto physics = entity.getComponent<sp::Physics>();
@@ -141,10 +141,10 @@ VisualAsteroid::VisualAsteroid()
 
         auto model_number = irandom(1, 10);
         auto& mrc = entity.getOrAddComponent<MeshRenderComponent>();
-        mrc.mesh = "Astroid_" + string(model_number) + ".model";
+        mrc.mesh.name = "Astroid_" + string(model_number) + ".model";
         mrc.mesh_offset = {0, 0, z};
-        mrc.texture = "Astroid_" + string(model_number) + "_d.png";
-        mrc.specular_texture = "Astroid_" + string(model_number) + "_s.png";
+        mrc.texture.name = "Astroid_" + string(model_number) + "_d.png";
+        mrc.specular_texture.name = "Astroid_" + string(model_number) + "_s.png";
         mrc.scale = size;
 
         auto& trace = entity.getOrAddComponent<RadarTrace>();

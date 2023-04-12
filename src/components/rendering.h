@@ -6,14 +6,24 @@
 #include "mesh.h"
 #include "shaderRegistry.h"
 
+struct MeshRef
+{
+    string name;
+    Mesh* ptr = nullptr;
+};
+struct TextureRef
+{
+    string name;
+    sp::Texture* ptr = nullptr;
+};
 
 class MeshRenderComponent
 {
 public:
-    string mesh;
-    string texture;
-    string specular_texture;
-    string illumination_texture;
+    MeshRef mesh;
+    TextureRef texture;
+    TextureRef specular_texture;
+    TextureRef illumination_texture;
     glm::vec3 mesh_offset{};
     float scale;
 };

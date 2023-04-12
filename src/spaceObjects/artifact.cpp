@@ -83,11 +83,11 @@ void Artifact::setModel(string model_name)
     if (!entity) return;
     auto model = ModelData::getModel(model_name);
     auto& mrc = entity.getOrAddComponent<MeshRenderComponent>();
-    mrc.mesh = model->mesh_name;
+    mrc.mesh.name = model->mesh_name;
     mrc.mesh_offset = model->mesh_offset;
-    mrc.texture = model->texture_name;
-    mrc.specular_texture = model->specular_texture_name;
-    mrc.illumination_texture = model->illumination_texture_name;
+    mrc.texture.name = model->texture_name;
+    mrc.specular_texture.name = model->specular_texture_name;
+    mrc.illumination_texture.name = model->illumination_texture_name;
     mrc.scale = model->scale;
 }
 
