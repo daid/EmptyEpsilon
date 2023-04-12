@@ -555,15 +555,15 @@ string getSystemName(ShipSystem::Type system)
 {
     switch(system)
     {
-    case ShipSystem::Type::Reactor: return "Reactor";
-    case ShipSystem::Type::BeamWeapons: return "Beam Weapons";
-    case ShipSystem::Type::MissileSystem: return "Missile System";
-    case ShipSystem::Type::Maneuver: return "Maneuvering";
-    case ShipSystem::Type::Impulse: return "Impulse Engines";
-    case ShipSystem::Type::Warp: return "Warp Drive";
-    case ShipSystem::Type::JumpDrive: return "Jump Drive";
-    case ShipSystem::Type::FrontShield: return "Front Shield Generator";
-    case ShipSystem::Type::RearShield: return "Rear Shield Generator";
+    case ShipSystem::Type::Reactor: return "reactor";
+    case ShipSystem::Type::BeamWeapons: return "beamweapons";
+    case ShipSystem::Type::MissileSystem: return "missilesystem";
+    case ShipSystem::Type::Maneuver: return "maneuvering";
+    case ShipSystem::Type::Impulse: return "impulse";
+    case ShipSystem::Type::Warp: return "warpdrive";
+    case ShipSystem::Type::JumpDrive: return "jumpdrive";
+    case ShipSystem::Type::FrontShield: return "frontshield";
+    case ShipSystem::Type::RearShield: return "rearshield";
     default:
         return "UNKNOWN";
     }

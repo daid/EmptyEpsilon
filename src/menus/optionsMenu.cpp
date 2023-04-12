@@ -127,6 +127,7 @@ OptionsMenu::OptionsMenu()
         i18n::reset();
         i18n::load("locale/main." + value + ".po");
         PreferencesManager::set("language", value);
+        keys.init(); // Reinit keyboard shortcut labels
     }))->setOptions(languages)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
     
     // Bottom GUI.

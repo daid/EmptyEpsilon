@@ -49,10 +49,11 @@ void Faction::didAnOffensiveAction(sp::ecs::Entity entity)
     auto target_scan_state = target->entity.getComponent<ScanState>();
 
     for(auto [faction_entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
-        if (scanstate->getStateFor(entity) == ScanState::State::NotScanned)
-        {
-            if (!target_scan_state || target_scan_state->getStateFor(entity) != ScanState::State::NotScanned)
-                scanstate->setStateFor(entity, ScanState::State::FriendOrFoeIdentified);
+        if (!target_scan_state || target_scan_state->getStateForFaction(faction_entity) != ScanState::State::NotScanned) {
+            // This faction knows if the target is friendly or enemy, so check if we need to set it to FFI
+            if (scanstate->getStateForFaction(faction_entity) == ScanState::State::NotScanned) {
+                scanstate->setStateForFaction(faction_entity, ScanState::State::FriendOrFoeIdentified);
+            }
         }
     }
 }

@@ -49,12 +49,6 @@ public:
      */
     virtual bool canBeTargetedBy(sp::ecs::Entity other) override { return true; }
 
-    /*!
-     * didAnOffensiveAction is called whenever this ship does something offesive towards an other object
-     * this can identify the ship as friend or foe.
-     */
-    void didAnOffensiveAction();
-
     virtual void collide(SpaceObject* other, float force) override;
 
     /// Function to use energy. Only player ships currently model energy use.

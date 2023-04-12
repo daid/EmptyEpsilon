@@ -81,6 +81,7 @@ private:
     P<WarpJammerObject> target;
 
     GuiSlider* jammer_range_slider;
+    GuiSlider* hull_slider;
 public:
     GuiJammerTweak(GuiContainer* owner);
 
@@ -167,6 +168,9 @@ private:
     GuiSlider* turret_rotation_rate_slider;
     GuiLabel* turret_rotation_rate_overlay_label;
     GuiSlider* cycle_time_slider;
+    GuiSlider* energy_per_fire_slider;
+    GuiSlider* heat_per_fire_slider;
+    GuiLabel* heat_per_fire_overlay_label;
     GuiSlider* damage_slider;
 public:
     GuiShipTweakBeamweapons(GuiContainer* owner);

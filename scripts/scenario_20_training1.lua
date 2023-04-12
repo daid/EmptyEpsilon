@@ -20,6 +20,37 @@ function createExuariWeakInterceptor()
 	return CpuShip():setFaction("Exuari"):setTemplate("Dagger"):setBeamWeapon(0, 0, 0, 0, 0.1, 0.1)
 end
 
+function copyShipDBEntry(base_ship_template,new_ship)
+  ship_db = queryScienceDatabase("Ships")
+
+  -- Search each Ships class's entry for the base ship
+  for k,entry in ipairs(ship_db:getEntries())
+  do
+    base_ship_entry = entry:getEntryByName(base_ship_template)
+    if base_ship_entry ~= nil
+    then
+      break;
+    end
+  end
+
+  -- Create a new Exuari DB entry for the new ship
+  exuari_ship_db = ship_db:getEntryByName("Exuari")
+  new_ship_entry = exuari_ship_db:addEntry(new_ship:getTypeName())
+
+  -- Copy base ship data to the new entry
+  for k,v in pairs(base_ship_entry:getKeyValues())
+  do
+    new_ship_entry:setKeyValue(k,v)
+  end
+
+  new_ship_entry:setImage(base_ship_entry:getImage())
+  new_ship_entry:setLongDescription(base_ship_entry:getLongDescription())
+  -- Impossible without a getModelName() function
+  -- new_ship_entry:setModelName(base_ship_entry:getModelName())
+
+  return new_ship_entry
+end
+
 function createExuariWeakBomber()
 	return CpuShip():setFaction("Exuari"):setTemplate("Gunner"):setWeaponTubeCount(0):setWeaponStorageMax("HVLI", 0):setWeaponStorage("HVLI", 0):setBeamWeapon(0, 0, 0, 0, 0.1, 0.1)
 end
@@ -36,14 +67,34 @@ function createExuariTransport()
 	return CpuShip():setFaction("Exuari"):setTemplate("Personnel Freighter 1"):setTypeName("Exuari transport")
 end
 
+-- Create a dummy ship to populate the ScienceDatabase entry, then destroy it
+init_transport = createExuariTransport()
+init_transport_entry = copyShipDBEntry("Personnel Freighter 1", init_transport)
+-- init_transport_entry:setLongDescription("The Exuari transport transports Exuari")
+init_transport_entry:setModelDataName("transport_1_1") -- manually entered from finding Personnel Freighter in shiptemplates
+init_transport:destroy()
+
 function createExuariFreighter()
 	return CpuShip():setFaction("Exuari"):setTemplate("Goods Freighter 5"):setTypeName("Exuari freighter")
 end
+
+-- Create a dummy ship to populate the ScienceDatabase entry, then destroy it
+init_transport = createExuariFreighter()
+init_transport_entry = copyShipDBEntry("Goods Freighter 5", init_transport)
+-- init_transport_entry:setLongDescription("The Exuari transport transports Exuari")
+init_transport_entry:setModelDataName("transport_2_5") -- manually entered from finding Goods Freighter in shiptemplates
+init_transport:destroy()
 
 function createExuariShuttle()
 	return CpuShip():setFaction("Exuari"):setTemplate("Racer"):setTypeName("Exuari shuttle"):setWarpDrive(false):setBeamWeapon(0, 0, 355, 0, 0.1, 0.1):setBeamWeapon(1, 0, 355, 0, 0.1, 0.1)
 end
 
+-- Create a dummy ship to populate the ScienceDatabase entry, then destroy it
+init_transport = createExuariShuttle()
+init_transport_entry = copyShipDBEntry("Racer", init_transport)
+-- init_transport_entry:setLongDescription("The Exuari transport transports Exuari")
+init_transport_entry:setModelDataName("small_frigate_1") -- manually entered from finding Racer in shiptemplates
+init_transport:destroy()
 
 -- init
 function init()

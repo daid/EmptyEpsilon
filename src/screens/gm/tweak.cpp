@@ -293,6 +293,12 @@ GuiJammerTweak::GuiJammerTweak(GuiContainer* owner)
         target->setRange(round(value/100)*100);
     });
     jammer_range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", tr("Hull current:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    hull_slider = new GuiSlider(right_col, "", 0.0, 500, 0.0, [this](float value) {
+        target->setHull(roundf(value));
+    });
+    hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 }
 
 void GuiJammerTweak::open(P<SpaceObject> target)
@@ -304,6 +310,7 @@ void GuiJammerTweak::open(P<SpaceObject> target)
 void GuiJammerTweak::onDraw(sp::RenderTarget& renderer)
 {
     jammer_range_slider->setValue(target->getRange());
+    hull_slider->setValue(target->getHull());
 }
 
 GuiAsteroidTweak::GuiAsteroidTweak(GuiContainer* owner)
@@ -409,7 +416,7 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
     });
     size_selector->addEntry(tr("tube", "Small"),MS_Small);
     size_selector->addEntry(tr("tube", "Medium"),MS_Medium);
-    size_selector->addEntry(tr("tube", "large"),MS_Large);
+    size_selector->addEntry(tr("tube", "Large"),MS_Large);
     size_selector->setSelectionIndex(MS_Medium);
     size_selector->setSize(GuiElement::GuiSizeMax, 40);
 
@@ -557,7 +564,7 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
         /*TODO if (value > 0)
             target->beam_weapons[beam_index].setTurretRotationRate(value / 10.0f);
         else
-            target->beam_weapons[beam_index].setTurretRotationRate(0.0);*/
+            target->beam_weapons[beam_index].setTurretRotationRate(0.0f);*/
     });
     turret_rotation_rate_slider->setSize(GuiElement::GuiSizeMax, 30);
     // Override overlay label.
@@ -575,6 +582,25 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
         //TODO target->beam_weapons[beam_index].setCycleTime(value);
     });
     cycle_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
+
+    (new GuiLabel(right_col, "", tr("beam", "Energy used per fire:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+    energy_per_fire_slider = new GuiSlider(right_col, "", 0.0, 20.0, 0.0, [this](float value) {
+        //TODO target->beam_weapons[beam_index].setEnergyPerFire(value);
+    });
+    energy_per_fire_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
+
+    (new GuiLabel(right_col, "", tr("beam", "Heat generated per fire:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+    heat_per_fire_slider = new GuiSlider(right_col, "", 0.0, 250.0, 0.0, [this](float value) {
+        // Divide a large value for granularity.
+        //TODO if (value > 0)
+        //TODO     target->beam_weapons[beam_index].setHeatPerFire(value / 100.0f);
+        //TODO else
+        //TODO     target->beam_weapons[beam_index].setHeatPerFire(0.0f);
+    });
+    heat_per_fire_slider->setSize(GuiElement::GuiSizeMax, 30);
+    // Override overlay label.
+    heat_per_fire_overlay_label = new GuiLabel(heat_per_fire_slider, "", "", 30);
+    heat_per_fire_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     (new GuiLabel(right_col, "", tr("beam", "Damage:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     damage_slider = new GuiSlider(right_col, "", 0.1, 50.0, 0.0, [this](float value) {
@@ -595,6 +621,9 @@ void GuiShipTweakBeamweapons::onDraw(sp::RenderTarget& renderer)
     //TODO turret_rotation_rate_slider->setValue(target->beam_weapons[beam_index].getTurretRotationRate() * 10.0f);
     //TODO turret_rotation_rate_overlay_label->setText(string(target->beam_weapons[beam_index].getTurretRotationRate()));
     //TODO cycle_time_slider->setValue(target->beam_weapons[beam_index].getCycleTime());
+    //TODO energy_per_fire_slider->setValue(target->beam_weapons[beam_index].getEnergyPerFire());
+    //TODO heat_per_fire_slider->setValue(target->beam_weapons[beam_index].getHeatPerFire() * 100.0f);
+    //TODO heat_per_fire_overlay_label->setText(string(target->beam_weapons[beam_index].getHeatPerFire()));
     //TODO damage_slider->setValue(target->beam_weapons[beam_index].getDamage());
 }
 

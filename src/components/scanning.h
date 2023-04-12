@@ -27,6 +27,8 @@ public:
 
     State getStateFor(sp::ecs::Entity entity);
     void setStateFor(sp::ecs::Entity entity, State state);
+    State getStateForFaction(sp::ecs::Entity entity);
+    void setStateForFaction(sp::ecs::Entity entity, State state);
 };
 
 class ScienceDescription
