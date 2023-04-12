@@ -10,7 +10,7 @@ Official releases for Windows, Linux (as a .deb package), and Android (beta qual
 
 -   Windows releases are distributed as self-contained ZIP archives that don't need installation. You can expand the ZIP archive and launch EmptyEpsilon directly from the expanded folder.
 -   The .deb package requires freetype and SDL2 packages to be installed on your Linux distribution.
--   The Android APK is built for the `armeabi-v7a` ABI and should launch on most Android phones and tablets with ARM processors. It won't install on Intel x86 or x86_64 devices running Android.
+-   The Android APK is built for the `armeabi-v7a` ABI and should launch on most Android phones and tablets with ARM processors. (For ARM v8, see [the wiki](https://github.com/daid/EmptyEpsilon/wiki/Build%5CAndroid#build-for-64-bit-arm-v8).) The official ARM APK won't install on Intel x86 or x86_64 devices running Android, but is compatible with [Android Emulator system images that support ARM ABIs](https://android-developers.googleblog.com/2020/03/run-arm-apps-on-android-emulator.html). To build a 32- or 64-bit x86 APK, see [the wiki](https://github.com/daid/EmptyEpsilon/wiki/Build%5CAndroid#build-for-x86).
 
 ### Configuration files
 

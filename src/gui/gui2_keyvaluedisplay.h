@@ -10,7 +10,7 @@ class GuiKeyValueDisplay : public GuiElement
 public:
     GuiKeyValueDisplay(GuiContainer* owner, const string& id, float div_distance, const string& key, const string& value);
 
-    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onDraw(sp::RenderTarget& renderer) override;
 
     GuiKeyValueDisplay* setKey(const string& key);
     GuiKeyValueDisplay* setValue(const string& value);

@@ -7327,7 +7327,7 @@ function handleDockedState()
 				ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
-			addCommsReply(_(_("Back")), commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if ctd.public_relations then
@@ -7335,12 +7335,12 @@ function handleDockedState()
 			setCommsMessage(_("station-comms", "What would you like to know?"))
 			addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 				setCommsMessage(ctd.general_information)
-				addCommsReply(_(_("Back")), commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 			if ctd.history ~= nil then
 				addCommsReply(_("stationStory-comms", "Station history"), function()
 					setCommsMessage(ctd.history)
-					addCommsReply(_(_("Back")), commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if comms_source:isFriendly(comms_target) then
@@ -7360,7 +7360,7 @@ function handleDockedState()
 		goodCount = goodCount + 1
 	end
 	if goodCount > 0 then
-		addCommsReply("Buy, sell, trade", function()
+		addCommsReply(_("trade-comms", "Buy, sell, trade"), function()
 			local ctd = comms_target.comms_data
 			local goodsReport = string.format(_("trade-comms", "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"),comms_target:getCallSign())
 			for good, goodData in pairs(ctd.goods) do
@@ -8175,13 +8175,13 @@ function altShipComms()
 	end
 	setPlayers()
 	if comms_source:isFriendly(comms_target) then
-		local c_msg = _("shipAssist-comms", "Sir, how can we assist?")
+		local c_msg = _("trade-comms", "Sir, how can we assist?")
 		if comms_target.comms_data.friendlyness < 20 then
-			c_msg = _("shipAssist-comms", "What do you want?")
+			c_msg = _("trade-comms", "What do you want?")
 		elseif comms_target.comms_data.friendlyness < 40 then
-			c_msg = _("shipAssist-comms", "Hello?")
+			c_msg = _("trade-comms", "Hello?")
 		elseif comms_target.comms_data.friendlyness < 60 then
-			c_msg = _("shipAssist-comms", "Greetings")
+			c_msg = _("trade-comms", "Greetings")
 		end
 		setCommsMessage(c_msg)
 		return altFriendlyShipComms()
@@ -8690,9 +8690,9 @@ function altFriendlyShipComms()
 end
 function friendlyComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage(_("shipAssist-comms", "What do you want?"));
+		setCommsMessage(_("trade-comms", "What do you want?"));
 	else
-		setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"));
+		setCommsMessage(_("trade-comms", "Sir, how can we assist?"));
 	end
 	if shipType:find("Freighter") ~= nil then
 		if comms_data.friendlyness > 66 then

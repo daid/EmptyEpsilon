@@ -119,4 +119,5 @@ void GameMasterChatDialog::onClose()
         CommsSystem::close(player);
     }
     hide();
+    minimize(false);
 }

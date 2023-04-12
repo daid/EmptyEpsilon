@@ -16,7 +16,7 @@ protected:
 public:
     GuiToggleButton(GuiContainer* owner, string id, string text, func_t func);
 
-    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onDraw(sp::RenderTarget& renderer) override;
 
     bool getValue() const;
     GuiToggleButton* setValue(bool value);

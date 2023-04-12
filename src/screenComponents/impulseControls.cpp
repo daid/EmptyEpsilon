@@ -28,7 +28,7 @@ void GuiImpulseControls::onDraw(sp::RenderTarget& target)
     {
         auto engine = my_spaceship.getComponent<ImpulseEngine>();
         if (engine) {
-            label->setValue(string(int(engine->actual * 100)) + "%");
+            label->setValue(string(int(std::round(engine->actual * 100.0f))) + "%");
             slider->setValue(engine->request);
         }
     }
@@ -42,7 +42,15 @@ void GuiImpulseControls::onUpdate()
         if (engine) {
             float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
             if (change != 0.0f)
-                PlayerSpaceship::commandImpulse(std::min(1.0f, slider->getValue() + change * 0.1f));
+                PlayerSpaceship::commandImpulse(std::min(1.0f, slider->getValue() + change * 0.01f));
+            if (keys.helms_increase_impulse_1.getDown())
+                PlayerSpaceship::commandImpulse(std::min(1.0f, slider->getValue() + 0.01f));
+            if (keys.helms_decrease_impulse_1.getDown())
+                PlayerSpaceship::commandImpulse(std::max(-1.0f, slider->getValue() - 0.01f));
+            if (keys.helms_increase_impulse_10.getDown())
+                PlayerSpaceship::commandImpulse(std::min(1.0f, slider->getValue() + 0.1f));
+            if (keys.helms_decrease_impulse_10.getDown())
+                PlayerSpaceship::commandImpulse(std::max(-1.0f, slider->getValue() - 0.1f));
             if (keys.helms_zero_impulse.getDown())
                 PlayerSpaceship::commandImpulse(0.0f);
             if (keys.helms_max_impulse.getDown())

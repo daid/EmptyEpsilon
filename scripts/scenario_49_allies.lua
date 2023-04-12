@@ -3958,22 +3958,22 @@ function handleDockedState()
 		end
 	end
 	if comms_target.character ~= nil then
-		addCommsReply(string.format(_("characterInfo-comms", "Tell me about %s"),comms_target.character), function()
+		addCommsReply(string.format(_("stationGeneralInfo-comms", "Tell me about %s"),comms_target.character), function()
 			if comms_target.characterDescription ~= nil then
 				setCommsMessage(comms_target.characterDescription)
 			else
 				if comms_target.characterDeadEnd == nil then
 					local deadEndChoice = math.random(1,5)
 					if deadEndChoice == 1 then
-						comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "Never heard of %s"),comms_target.character)
+						comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "Never heard of %s"),comms_target.character)
 					elseif deadEndChoice == 2 then
-						comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "%s died last week. The funeral was yesterday"),comms_target.character)
+						comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "%s died last week. The funeral was yesterday"),comms_target.character)
 					elseif deadEndChoice == 3 then
-						comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "%s? Who's %s? There's nobody here named %s"),comms_target.character,comms_target.character,comms_target.character)
+						comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "%s? Who's %s? There's nobody here named %s"),comms_target.character,comms_target.character,comms_target.character)
 					elseif deadEndChoice == 4 then
-						comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "We don't talk about %s. They are gone and good riddance"),comms_target.character)
+						comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "We don't talk about %s. They are gone and good riddance"),comms_target.character)
 					else
-						comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "I think %s moved away"),comms_target.character)
+						comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "I think %s moved away"),comms_target.character)
 					end
 				end
 				setCommsMessage(comms_target.characterDeadEnd)
@@ -4450,22 +4450,22 @@ function handleUndockedState()
 			end)
 		end
 		if comms_target.character ~= nil then
-			addCommsReply(string.format(_("characterInfo-comms", "Tell me about %s"),comms_target.character), function()
+			addCommsReply(string.format(_("stationGeneralInfo-comms", "Tell me about %s"),comms_target.character), function()
 				if comms_target.characterDescription ~= nil then
 					setCommsMessage(comms_target.characterDescription)
 				else
 					if comms_target.characterDeadEnd == nil then
 						local deadEndChoice = math.random(1,5)
 						if deadEndChoice == 1 then
-							comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "Never heard of %s"),comms_target.character)
+							comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "Never heard of %s"),comms_target.character)
 						elseif deadEndChoice == 2 then
-							comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "%s died last week. The funeral was yesterday"),comms_target.character)
+							comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "%s died last week. The funeral was yesterday"),comms_target.character)
 						elseif deadEndChoice == 3 then
-							comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "%s? Who's %s? There's nobody here named %s"),comms_target.character,comms_target.character,comms_target.character)
+							comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "%s? Who's %s? There's nobody here named %s"),comms_target.character,comms_target.character,comms_target.character)
 						elseif deadEndChoice == 4 then
-							comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "We don't talk about %s. They are gone and good riddance"),comms_target.character)
+							comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "We don't talk about %s. They are gone and good riddance"),comms_target.character)
 						else
-							comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "I think %s moved away"),comms_target.character)
+							comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "I think %s moved away"),comms_target.character)
 						end
 					end
 					setCommsMessage(comms_target.characterDeadEnd)
@@ -4589,14 +4589,14 @@ function handleUndockedState()
 				end
 			end)	--end station info comms reply branch
 		end	--end public relations if branch
-		addCommsReply(_("station-comms", "Report status"), function()
-			msg = string.format(_("station-comms", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
+		addCommsReply(_("stationAssist-comms", "Report status"), function()
+			msg = string.format(_("stationAssist-comms", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
 			local shields = comms_target:getShieldCount()
 			if shields == 1 then
-				msg = msg .. string.format(_("station-comms", "Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
+				msg = msg .. string.format(_("stationAssist-comms", "Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
 			else
 				for n=0,shields-1 do
-					msg = msg .. string.format(_("station-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
+					msg = msg .. string.format(_("stationAssist-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 				end
 			end			
 			setCommsMessage(msg);
@@ -4610,7 +4610,7 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"))
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %i"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %d"),n), function()
 						if player:takeReputationPoints(getServiceCost("supplydrop")) then
 							local position_x, position_y = comms_target:getPosition()
 							local target_x, target_y = player:getWaypoint(n)
@@ -4618,7 +4618,7 @@ function handleUndockedState()
 							script:setVariable("position_x", position_x):setVariable("position_y", position_y)
 							script:setVariable("target_x", target_x):setVariable("target_y", target_y)
 							script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward waypoint %i"),n))
+							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward waypoint %d"),n))
 						else
 							setCommsMessage(_("needRep-comms", "Not enough reputation!"))
 						end
@@ -4636,12 +4636,12 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"))
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %i"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %d"),n), function()
 						if player:takeReputationPoints(getServiceCost("reinforcements")) then
 							ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
 							ship:setCommsScript(""):setCommsFunction(commsShip):onDestruction(humanVesselDestroyed)
 							table.insert(friendlyHelperFleet,ship)
-							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at waypoint %i"),ship:getCallSign(),n))
+							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at waypoint %d"),ship:getCallSign(),n))
 						else
 							setCommsMessage(_("needRep-comms", "Not enough reputation!"))
 						end
@@ -4657,12 +4657,12 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"))
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %i"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %d"),n), function()
 						if player:takeReputationPoints(getServiceCost("phobosReinforcements")) then
 							ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Phobos T3"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
 							ship:setCommsScript(""):setCommsFunction(commsShip):onDestruction(humanVesselDestroyed)
 							table.insert(friendlyHelperFleet,ship)
-							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at waypoint %i"),ship:getCallSign(),n))
+							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at waypoint %d"),ship:getCallSign(),n))
 						else
 							setCommsMessage(_("needRep-comms", "Not enough reputation!"))
 						end
@@ -4678,12 +4678,12 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"))
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %i"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "Waypoint %d"),n), function()
 						if player:takeReputationPoints(getServiceCost("stalkerReinforcements")) then
 							ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Stalker Q7"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
 							ship:setCommsScript(""):setCommsFunction(commsShip):onDestruction(humanVesselDestroyed)
 							table.insert(friendlyHelperFleet,ship)
-							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at waypoint %i"),ship:getCallSign(),n))
+							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at waypoint %d"),ship:getCallSign(),n))
 						else
 							setCommsMessage(_("needRep-comms", "Not enough reputation!"))
 						end
@@ -4798,9 +4798,9 @@ function friendlyComms(comms_data)
 		else
 			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"))
 			for n=1,player:getWaypointCount() do
-				addCommsReply(string.format(_("shipAssist-comms", "Defend waypoint %i"),n), function()
+				addCommsReply(string.format(_("shipAssist-comms", "Defend waypoint %d"),n), function()
 					comms_target:orderDefendLocation(player:getWaypoint(n))
-					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at waypoint %i."),n))
+					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at waypoint %d."),n))
 					addCommsReply(_("Back"), commsShip)
 				end)
 			end

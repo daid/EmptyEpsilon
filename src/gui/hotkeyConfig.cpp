@@ -102,7 +102,11 @@ Keys::Keys() :
 
     //helms
     helms_increase_impulse("HELMS_IMPULSE_INCREASE", "Up"),
+    helms_increase_impulse_1("HELMS_IMPULSE_INCREASE_1"),
+    helms_increase_impulse_10("HELMS_IMPULSE_INCREASE_10"),
     helms_decrease_impulse("HELMS_IMPULSE_DECREASE", "Down"),
+    helms_decrease_impulse_1("HELMS_IMPULSE_DECREASE_1"),
+    helms_decrease_impulse_10("HELMS_IMPULSE_DECREASE_10"),
     helms_set_impulse("HELMS_SET_IMPULSE", {"joy:0:axis:1", "gamecontroller:0:axis:lefty"}),
     helms_zero_impulse("HELMS_IMPULSE_ZERO", "Space"),
     helms_max_impulse("HELMS_IMPULSE_MAX"),
@@ -304,7 +308,11 @@ void Keys::init()
 
     //helms
     helms_increase_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse"));
+    helms_increase_impulse_1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse 1%"));
+    helms_increase_impulse_10.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse 10%"));
     helms_decrease_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease impulse"));
+    helms_decrease_impulse_1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease impulse 1%"));
+    helms_decrease_impulse_10.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease impulse 10%"));
     helms_set_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Set impulse (joystick)"));
     helms_zero_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Zero impulse"));
     helms_max_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Max impulse"));
