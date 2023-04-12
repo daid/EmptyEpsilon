@@ -69,7 +69,9 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
     keyboard_help = new GuiHelpOverlay(main_panel, tr("hotkey_F1", "Keyboard Shortcuts"));
 
     for (auto binding : sp::io::Keybinding::listAllByCategory("General"))
-        keyboard_general += tr("hotkey_F1", "{label}:\t{button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
+    {
+        keyboard_general += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
+    }
 
 #ifndef __ANDROID__
     if (PreferencesManager::get("music_enabled") == "1")
@@ -101,6 +103,68 @@ GuiContainer* CrewStationScreen::getTabContainer()
     return main_panel;
 }
 
+string CrewStationScreen::populateShortcutsList(ECrewPosition position)
+{
+    string ret = "";
+
+    // Add shortcuts for this position.
+    for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(position)))
+    {
+        ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+    }
+
+    // Check special positions that include multiple core positions' functions.
+    if (position == tacticalOfficer)
+    {
+        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(helmsOfficer)))
+        {
+            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+        }
+
+        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(weaponsOfficer)))
+        {
+            if (binding->getLabel() != "Toggle shields")
+            {
+                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            }
+        }
+    }
+    else if (position == engineeringAdvanced)
+    {
+        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(engineering)))
+        {
+            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+        }
+
+        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(weaponsOfficer)))
+        {
+            if (binding->getLabel() == "Toggle shields")
+            {
+                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            }
+        }
+    }
+    else if (position == singlePilot)
+    {
+        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(helmsOfficer)))
+        {
+            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+        }
+
+        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(weaponsOfficer)))
+        {
+            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+        }
+    }
+
+    //    -- not yet used --
+    //    else if (station == "Operations")
+    //        return ret;
+    //    ----
+
+    return ret;
+}
+
 void CrewStationScreen::addStationTab(GuiElement* element, ECrewPosition position, string name, string icon)
 {
     CrewTabInfo info;
@@ -125,10 +189,7 @@ void CrewStationScreen::addStationTab(GuiElement* element, ECrewPosition positio
         select_station_button->setIcon(icon);
 
         string keyboard_category = "";
-
-        for (auto binding : sp::io::Keybinding::listAllByCategory(info.button->getText()))
-            keyboard_category += binding->getLabel() + ":\t" + binding->getHumanReadableKeyName(0) + "\n";
-
+        keyboard_category = populateShortcutsList(position);
         keyboard_help->setText(keyboard_general + keyboard_category);
     }else{
         element->hide();
@@ -279,10 +340,7 @@ void CrewStationScreen::showTab(GuiElement* element)
             select_station_button->setIcon(info.button->getIcon());
 
             string keyboard_category = "";
-
-            for (auto binding : sp::io::Keybinding::listAllByCategory(info.button->getText()))
-                keyboard_category += binding->getLabel() + ":\t" + binding->getHumanReadableKeyName(0) + "\n";
-
+            keyboard_category = populateShortcutsList(info.position);
             keyboard_help->setText(keyboard_general + keyboard_category);
         } else {
             info.element->hide();
@@ -300,50 +358,6 @@ GuiElement* CrewStationScreen::findTab(string name)
     }
 
     return nullptr;
-}
-
-string CrewStationScreen::listHotkeysLimited(string station)
-{
-    string ret = "";
-    keyboard_general = "";
-    
-    for (auto binding : sp::io::Keybinding::listAllByCategory("General"))
-        if (binding->getLabel() == "Switch to next crew station" || binding->getLabel() =="Switch to previous crew station" || binding->getLabel() == "Switch crew station")
-            keyboard_general += binding->getLabel() + ":\t" + binding->getHumanReadableKeyName(0) + "\n";
-
-    if (station == "Tactical")
-    {
-        for (auto binding : sp::io::Keybinding::listAllByCategory("Helms"))
-            ret += binding->getLabel() + ":\t" + binding->getHumanReadableKeyName(0) + "\n";
-        for (auto binding : sp::io::Keybinding::listAllByCategory("Weapons"))
-        {
-            if (binding->getLabel() != "Toggle shields")
-                ret += binding->getLabel() + ":\t" + binding->getHumanReadableKeyName(0) + "\n";
-        }
-    } else if (station == "Engineering+") {
-        for (auto binding : sp::io::Keybinding::listAllByCategory("Engineering"))
-            ret += binding->getLabel() + ":\t" + binding->getHumanReadableKeyName(0) + "\n";
-        for (auto binding : sp::io::Keybinding::listAllByCategory("Weapons"))
-        {
-            if (binding->getLabel() == "Toggle shields")
-                ret += binding->getLabel() + ":\t" + binding->getHumanReadableKeyName(0) + "\n";
-        }
-    }
-
-    //    -- not yet used --
-    //    else if (station == "Operations")
-    //        return ret;
-    //    ----
-
-    else if (station == "Single Pilot")
-    {
-        for (auto binding : sp::io::Keybinding::listAllByCategory("Helms"))
-            ret += binding->getLabel() + ":\t" + binding->getHumanReadableKeyName(0) + "\n";
-        for (auto binding : sp::io::Keybinding::listAllByCategory("Weapons"))
-            ret += binding->getLabel() + ":\t" + binding->getHumanReadableKeyName(0) + "\n";
-    }
-
-    return ret;
 }
 
 void CrewStationScreen::tileViewport()
