@@ -2848,20 +2848,20 @@ function calculateTimeRank()
 				p6.raceTime = raceTimer
 			end
 			if p6.raceTime < 600 then
-				p6.timeRank = "Admiral"
+				p6.timeRank = _("msgMainscreen", "Admiral")
 			elseif p6.raceTime < 720 then
-				p6.timeRank = "Captain"
+				p6.timeRank = _("msgMainscreen", "Captain")
 			elseif p6.raceTime < 900 then
-				p6.timeRank = "Commander"
+				p6.timeRank = _("msgMainscreen", "Commander")
 			elseif p6.raceTime < 1200 then
-				p6.timeRank = "Lieutenant"
+				p6.timeRank = _("msgMainscreen", "Lieutenant")
 			elseif p6.raceTime < 1500 then
-				p6.timeRank = "Ensign"
+				p6.timeRank = _("msgMainscreen", "Ensign")
 			else
 				if p6.raceTime == nil then
-					p6.timeRank = "Undefined"
+					p6.timeRank = _("msgMainscreen", "Undefined")
 				else
-					p6.timeRank = "Cadet"
+					p6.timeRank = _("msgMainscreen", "Cadet")
 				end
 			end
 		end
@@ -2869,30 +2869,30 @@ function calculateTimeRank()
 end
 function soloComplete()
 	print("in solo complete function")
-	gMsg = string.format("Race completed in %.2f seconds. Time rank: %s",playerList[1].raceTime,playerList[1].timeRank)
+	gMsg = string.format(_("msgMainscreen", "Race completed in %.2f seconds. Time rank: %s"),playerList[1].raceTime,playerList[1].timeRank)
 	eliminatedDrones = countEliminatedDrones(playerList[1])
-	gMsg = gMsg .. string.format("\nTarget drones eliminated: %i",eliminatedDrones)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "\nTarget drones eliminated: %i"),eliminatedDrones)
 end
 function soloExpire()
 	print("in solo expire function")
-	gMsg = "Race administrators got tired of waiting. Race stopped after 2000 seconds. Time Rank: Cadet"
+	gMsg = _("msgMainscreen", "Race administrators got tired of waiting. Race stopped after 2000 seconds. Time Rank: Cadet")
 	eliminatedDrones = countEliminatedDrones(playerList[1])
-	gMsg = gMsg .. string.format("\nTarget drones eliminated: %i",eliminatedDrones)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "\nTarget drones eliminated: %i"),eliminatedDrones)
 end
 function competeComplete()
 	print("in compete complete function")
-	gMsg = "Race Results"
+	gMsg = _("msgMainscreen", "Race Results")
 	competeResults()
 end
 function competeExpire()
 	print("in compete expire function")
-	gMsg = string.format("Race administrators got tired of waiting. Race stopped after %.2f seconds.",raceTimer)
+	gMsg = string.format(_("msgMainscreen", "Race administrators got tired of waiting. Race stopped after %.2f seconds."),raceTimer)
 	competeResults()
 end
 function competeResults()
 	print("in compete results function")
 	local stat_list, sorted_stat_list = gatherStats(true)
-	gMsg = gMsg .. "\nOrdered by score. Place, ship name, score, time in seconds, place points, drone points"
+	gMsg = gMsg .. _("msgMainscreen", "\nOrdered by score. Place, ship name, score, time in seconds, place points, drone points")
 	print("Final Statistics:")
 	print("Rank","Score","Place","Drones","Time","Name")
 	for index, item in ipairs(sorted_stat_list) do
@@ -2901,9 +2901,9 @@ function competeResults()
 			time = item.time
 		end
 		print(index,item.score,item.rank_points,item.drone_points,time,item.name)
-		gMsg = gMsg .. string.format("\n%i, %s, %i, %.2f, %i, %i",index,item.name,item.score,time,item.rank_points,item.drone_points)
+		gMsg = gMsg .. string.format(_("msgMainscreen", "\n%i, %s, %i, %.2f, %i, %i"),index,item.name,item.score,time,item.rank_points,item.drone_points)
 		if index == 1 then
-			gMsg = gMsg .. "\n\n\n"
+			gMsg = gMsg .. _("msgMainscreen", "\n\n\n")
 		end
 	end
 --	previous method (deprecated)
@@ -2947,9 +2947,9 @@ function fastestPlayer(reward)
 	end
 	if pi ~= nil then
 		playerList[pi].timePoints = reward
-		gMsg = gMsg .. string.format("\n%s time: %.2f seconds. Time rank: %s. Placement points: %i",playerList[pi]:getCallSign(),playerList[pi].raceTime,playerList[pi].timeRank,playerList[pi].timePoints)
+		gMsg = gMsg .. string.format(_("msgMainscreen", "\n%s time: %.2f seconds. Time rank: %s. Placement points: %i"),playerList[pi]:getCallSign(),playerList[pi].raceTime,playerList[pi].timeRank,playerList[pi].timePoints)
 	else
-		gMsg = gMsg .. "\nResults indeterminate"
+		gMsg = gMsg .. _("msgMainscreen", "\nResults indeterminate")
 	end
 	return
 end
@@ -2993,7 +2993,7 @@ function countEliminatedDronesByName(name)
 end
 function unorderedFinalTally()
 	for pl=1,#playerList do
-		gMsg = gMsg .. string.format("%s Drones shot: %i, Total score: %i. ",playerList[pl]:getCallSign(),playerList[pl].dronePoints,playerList[pl].score)
+		gMsg = gMsg .. string.format(_("msgMainscreen", "%s Drones shot: %i, Total score: %i. "),playerList[pl]:getCallSign(),playerList[pl].dronePoints,playerList[pl].score)
 	end
 end
 function finalTally()
@@ -3006,7 +3006,7 @@ function finalTally()
 				bestScore = playerList[pl].score
 			end
 		end
-		gMsg = gMsg .. string.format("%s Drones shot: %i, Total score: %i. ",bestPlayer:getCallSign(),bestPlayer.dronePoints,bestPlayer.score)
+		gMsg = gMsg .. string.format(_("msgMainscreen", "%s Drones shot: %i, Total score: %i. "),bestPlayer:getCallSign(),bestPlayer.dronePoints,bestPlayer.score)
 		table.remove(playerList,bestPlayer)
 	end
 end

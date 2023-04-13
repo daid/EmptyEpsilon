@@ -5457,7 +5457,7 @@ function handleDockedState()
 		end
 	end	--end friendly/neutral 
 	if goodCount > 0 then
-		addCommsReply("Buy, sell, trade", function()
+		addCommsReply(_("trade-comms", "Buy, sell, trade"), function()
 			local ctd = comms_target.comms_data
 			local goodsReport = string.format(_("trade-comms", "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"),comms_target:getCallSign())
 			for good, goodData in pairs(ctd.goods) do
@@ -5585,11 +5585,11 @@ function handleDockedState()
 			if ctd.buy ~= nil then
 				for good, price in pairs(ctd.buy) do
 					if comms_source.goods[good] ~= nil and comms_source.goods[good] > 0 then
-						addCommsReply(string.format("Sell one %s for %i reputation",good,price), function()
-							local goodTransactionMessage = string.format("Type: %s,  Reputation price: %i",good,price)
+						addCommsReply(string.format(_("trade-comms", "Sell one %s for %i reputation"),good,price), function()
+							local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Reputation price: %i"),good,price)
 							comms_source.goods[good] = comms_source.goods[good] - 1
 							comms_source:addReputationPoints(price)
-							goodTransactionMessage = goodTransactionMessage .. "\nOne sold"
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nOne sold")
 							comms_source.cargo = comms_source.cargo + 1
 							setCommsMessage(goodTransactionMessage)
 							addCommsReply(_("Back"), commsStation)
@@ -6169,11 +6169,11 @@ function handleUndockedState()
 			end
 		end
 		if goodsAvailable then
-			addCommsReply("What goods do you have available for sale or trade?", function()
+			addCommsReply(_("trade-comms", "What goods do you have available for sale or trade?"), function()
 				local ctd = comms_target.comms_data
-				local goodsAvailableMsg = string.format("Station %s:\nGoods or components available: quantity, cost in reputation",comms_target:getCallSign())
+				local goodsAvailableMsg = string.format(_("trade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
 				for good, goodData in pairs(ctd.goods) do
-					goodsAvailableMsg = goodsAvailableMsg .. string.format("\n   %14s: %2i, %3i",good,goodData["quantity"],goodData["cost"])
+					goodsAvailableMsg = goodsAvailableMsg .. string.format(_("trade-comms", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
 				end
 				setCommsMessage(goodsAvailableMsg)
 				addCommsReply(_("Back"), commsStation)
@@ -6751,7 +6751,7 @@ function friendlyComms(comms_data)
 				for good, goodData in pairs(comms_data.goods) do
 					if goodData.quantity > 0 then
 						if goodCount > 0 then
-							cargoMsg = cargoMsg .. ", " .. good
+							cargoMsg = cargoMsg .. _("trade-comms", ", ") .. good
 						else
 							cargoMsg = cargoMsg .. good
 						end
@@ -6759,7 +6759,7 @@ function friendlyComms(comms_data)
 					goodCount = goodCount + goodData.quantity
 				end
 				if goodCount == 0 then
-					cargoMsg = cargoMsg .. "nothing"
+					cargoMsg = cargoMsg .. _("trade-comms", "nothing")
 				end
 				setCommsMessage(cargoMsg)
 				addCommsReply(_("Back"), commsShip)
@@ -7650,7 +7650,7 @@ function exuariHarassment(delta)
 				plot1_fleet_spawned = nil
 				plot1_defensive_fleet_spawned = nil
 				player:addReputationPoints(100)
-				first_station:sendCommsMessage(player,"Thanks for taking care of that Exuari base and all the Exuari ships it deployed. Dock with us for a token of our appreciation")
+				first_station:sendCommsMessage(player,_("-comms", "Thanks for taking care of that Exuari base and all the Exuari ships it deployed. Dock with us for a token of our appreciation"))
 				exuari_harassment_upgrade = true
 				plot2 = contractTarget
 			end

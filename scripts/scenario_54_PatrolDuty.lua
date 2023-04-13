@@ -5907,7 +5907,7 @@ function neutralComms(comms_data)
 			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			destRep = random(1,5)
-			addCommsReply(string.format("Where are you headed? (cost: %f reputation)",destRep), function()
+			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
 					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else

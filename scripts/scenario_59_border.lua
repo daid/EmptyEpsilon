@@ -11734,11 +11734,11 @@ function handleUndockedState()
 			end
 		end
 		if goodsAvailable then
-			addCommsReply("What goods do you have available for sale or trade?", function()
+			addCommsReply(_("trade-comms", "What goods do you have available for sale or trade?"), function()
 				local ctd = comms_target.comms_data
-				local goodsAvailableMsg = string.format("Station %s:\nGoods or components available: quantity, cost in reputation",comms_target:getCallSign())
+				local goodsAvailableMsg = string.format(_("trade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
 				for good, goodData in pairs(ctd.goods) do
-					goodsAvailableMsg = goodsAvailableMsg .. string.format("\n   %14s: %2i, %3i",good,goodData["quantity"],goodData["cost"])
+					goodsAvailableMsg = goodsAvailableMsg .. string.format(_("trade-comms", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
 				end
 				setCommsMessage(goodsAvailableMsg)
 				addCommsReply(_("Back"), commsStation)
@@ -11750,9 +11750,9 @@ function handleUndockedState()
 				addCommsReply(_("Back"),commsStation)
 			end)
 		end
-		addCommsReply("Where can I find particular goods?", function()
+		addCommsReply(_("trade-comms", "Where can I find particular goods?"), function()
 			local ctd = comms_target.comms_data
-			gkMsg = "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury."
+			gkMsg = _("trade-comms", "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury.")
 			if ctd.goodsKnowledge == nil then
 				ctd.goodsKnowledge = {}
 				local knowledgeCount = 0
@@ -11793,14 +11793,14 @@ function handleUndockedState()
 					local sectorName = ctd.goodsKnowledge[good]["sector"]
 					local goodName = good
 					local goodCost = ctd.goodsKnowledge[good]["cost"]
-					setCommsMessage(string.format("Station %s in sector %s has %s for %i reputation",stationName,sectorName,goodName,goodCost))
+					setCommsMessage(string.format(_("trade-comms", "Station %s in sector %s has %s for %i reputation"),stationName,sectorName,goodName,goodCost))
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if goodsKnowledgeCount > 0 then
-				gkMsg = gkMsg .. "\n\nWhat goods are you interested in?\nI've heard about these:"
+				gkMsg = gkMsg .. _("trade-comms", "\n\nWhat goods are you interested in?\nI've heard about these:")
 			else
-				gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations"
+				gkMsg = gkMsg .. _("trade-comms", " Beyond that, I have no knowledge of specific stations")
 			end
 			setCommsMessage(gkMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -12120,7 +12120,7 @@ function preOrderOrdnance()
 				else
 					hireCost = math.random(45,90)
 				end
-				addCommsReply(string.format("Recruit repair crew member for %i reputation",hireCost), function()
+				addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hireCost), function()
 					if not comms_source:takeReputationPoints(hireCost) then
 						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					else
@@ -18903,16 +18903,16 @@ function endStatistics()
 	if endStatDiagnostic then print("got statuses")	end
 	local gMsg = ""
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
-	gMsg = gMsg .. string.format("Friendly stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n",stat_list.human.station.count,stat_list.human.station.original_count,stat_list.human.station.count/stat_list.human.station.original_count*100,stat_list.human.station.value,stat_list.human.station.original_value,stat_list.human.station.percentage)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Friendly stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n"),stat_list.human.station.count,stat_list.human.station.original_count,stat_list.human.station.count/stat_list.human.station.original_count*100,stat_list.human.station.value,stat_list.human.station.original_value,stat_list.human.station.percentage)
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
-	gMsg = gMsg .. string.format("Enemy stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n",stat_list.kraylor.station.count,stat_list.kraylor.station.original_count,stat_list.kraylor.station.count/stat_list.kraylor.station.original_count*100,stat_list.kraylor.station.value,stat_list.kraylor.station.original_value,stat_list.kraylor.station.percentage)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Enemy stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n"),stat_list.kraylor.station.count,stat_list.kraylor.station.original_count,stat_list.kraylor.station.count/stat_list.kraylor.station.original_count*100,stat_list.kraylor.station.value,stat_list.kraylor.station.original_value,stat_list.kraylor.station.percentage)
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
-	gMsg = gMsg .. string.format("Neutral stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n\n\n\n",stat_list.independent.station.count,stat_list.independent.station.original_count,stat_list.independent.station.count/stat_list.independent.station.original_count*100,stat_list.independent.station.value,stat_list.independent.station.original_value,stat_list.independent.station.percentage)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Neutral stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n\n\n\n"),stat_list.independent.station.count,stat_list.independent.station.original_count,stat_list.independent.station.count/stat_list.independent.station.original_count*100,stat_list.independent.station.value,stat_list.independent.station.original_value,stat_list.independent.station.percentage)
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 	--ship information
-	gMsg = gMsg .. string.format("Friendly ships: strength: %i out of %i (%.1f%%)\n",stat_list.human.ship.value,stat_list.human.ship.original_value,stat_list.human.ship.percentage)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Friendly ships: strength: %i out of %i (%.1f%%)\n"),stat_list.human.ship.value,stat_list.human.ship.original_value,stat_list.human.ship.percentage)
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
-	gMsg = gMsg .. string.format("Enemy ships: strength: %i out of %i (%.1f%%)\n",stat_list.kraylor.ship.value,stat_list.kraylor.ship.original_value,stat_list.kraylor.ship.percentage)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Enemy ships: strength: %i out of %i (%.1f%%)\n"),stat_list.kraylor.ship.value,stat_list.kraylor.ship.original_value,stat_list.kraylor.ship.percentage)
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 	if endStatDiagnostic then print("set raw stats") end
 	local friendlyStationComponent = stat_list.human.station.value/stat_list.human.station.original_value
@@ -18920,54 +18920,54 @@ function endStatistics()
 	local neutralStationComponent = stat_list.independent.station.value/stat_list.independent.station.original_value
 	local friendlyShipComponent = stat_list.human.ship.value/stat_list.human.ship.original_value
 	local enemyShipComponent = 1-stat_list.kraylor.ship.value/stat_list.kraylor.ship.original_value
-	gMsg = gMsg .. string.format("Friendly evaluation strength: %.1f%%\n",stat_list.human.evaluation)
-	gMsg = gMsg .. string.format("   Weights: friendly station: %.2f, neutral station: %.2f, friendly ship: %.2f\n", stat_list.human.weight.station, stat_list.human.weight.neutral, stat_list.human.weight.ship)
-	gMsg = gMsg .. string.format("Enemy evaluation strength: %.1f%%\n",stat_list.kraylor.evaluation)
-	gMsg = gMsg .. string.format("   Weights: enemy station: %.2f, enemy ship: %.2f\n", stat_list.kraylor.weight.station, stat_list.kraylor.weight.ship)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Friendly evaluation strength: %.1f%%\n"),stat_list.human.evaluation)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "   Weights: friendly station: %.2f, neutral station: %.2f, friendly ship: %.2f\n"), stat_list.human.weight.station, stat_list.human.weight.neutral, stat_list.human.weight.ship)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Enemy evaluation strength: %.1f%%\n"),stat_list.kraylor.evaluation)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "   Weights: enemy station: %.2f, enemy ship: %.2f\n"), stat_list.kraylor.weight.station, stat_list.kraylor.weight.ship)
 	local rankVal = friendlyStationComponent*.4 + friendlyShipComponent*.2 + enemyStationComponent*.2 + enemyShipComponent*.1 + neutralStationComponent*.1 
 	if endStatDiagnostic then print("calculated ranking stats") end
 	if endStatDiagnostic then print("rank value: " .. rankVal) end
 	if missionCompleteReason ~= nil then
-		gMsg = gMsg .. "Mission ended because " .. missionCompleteReason .. "\n"
+		gMsg = gMsg .. _("msgMainscreen", "Mission ended because ") .. missionCompleteReason .. "\n"
 		if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 	end
 	if endStatDiagnostic then print("built reason for end") end
 	if missionVictory then
 		if endStatDiagnostic then print("mission victory true") end
 		if rankVal < .7 then
-			rank = "Ensign"
+			rank = _("msgMainscreen", "Ensign")
 		elseif rankVal < .8 then
-			rank = "Lieutenant"
+			rank = _("msgMainscreen", "Lieutenant")
 		elseif rankVal < .9 then
-			rank = "Commander"
+			rank = _("msgMainscreen", "Commander")
 		elseif rankVal < .95 then
-			rank = "Captain"
+			rank = _("msgMainscreen", "Captain")
 		else
-			rank = "Admiral"
+			rank = _("msgMainscreen", "Admiral")
 		end
-		gMsg = gMsg .. "Earned rank: " .. rank
+		gMsg = gMsg .. _("msgMainscreen", "Earned rank: ") .. rank
 		if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 	else
 		if endStatDiagnostic then print("mission victory false") end
 		if rankVal < .6 then
-			rank = "Ensign"
+			rank = _("msgMainscreen", "Ensign")
 		elseif rankVal < .7 then
-			rank = "Lieutenant"
+			rank = _("msgMainscreen", "Lieutenant")
 		elseif rankVal < .8 then
-			rank = "Commander"
+			rank = _("msgMainscreen", "Commander")
 		elseif rankVal < .9 then
-			rank = "Captain"
+			rank = _("msgMainscreen", "Captain")
 		else
-			rank = "Admiral"
+			rank = _("msgMainscreen", "Admiral")
 		end
-		if missionCompleteReason == "Player violated treaty terms by crossing neutral border zone" then
-			gMsg = gMsg .. "Rank after court martial and imprisonment: " .. rank
+		if missionCompleteReason == _("msgMainscreen", "Player violated treaty terms by crossing neutral border zone") then
+			gMsg = gMsg .. _("msgMainscreen", "Rank after court martial and imprisonment: ") .. rank
 			if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
-		elseif missionCompleteReason == "Player committed war crimes by destroying civilians aboard Kraylor station" then
-			gMsg = gMsg .. "Rank after being stripped of ship responsibilities: " .. rank
+		elseif missionCompleteReason == _("msgMainscreen", "Player committed war crimes by destroying civilians aboard Kraylor station") then
+			gMsg = gMsg .. _("msgMainscreen", "Rank after being stripped of ship responsibilities: ") .. rank
 			if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 		else
-			gMsg = gMsg .. "Rank after military reductions due to ignominious defeat: " .. rank
+			gMsg = gMsg .. _("msgMainscreen", "Rank after military reductions due to ignominious defeat: ") .. rank
 			if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 		end
 	end

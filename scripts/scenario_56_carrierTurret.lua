@@ -3484,14 +3484,14 @@ function handleUndockedState()
 			gi = gi + 1
 		until(gi > #goods[comms_target])
 		if goodsQuantityAvailable > 0 then
-			addCommsReply("What goods do you have available for sale or trade?", function()
-				oMsg = string.format("Station %s:\nGoods or components available: quantity, cost in reputation\n",comms_target:getCallSign())
+			addCommsReply(_("trade-comms", "What goods do you have available for sale or trade?"), function()
+				oMsg = string.format(_("trade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation\n"),comms_target:getCallSign())
 				gi = 1		-- initialize goods index
 				repeat
 					goodsType = goods[comms_target][gi][1]
 					goodsQuantity = goods[comms_target][gi][2]
 					goodsRep = goods[comms_target][gi][3]
-					oMsg = oMsg .. string.format("   %14s: %2i, %3i\n",goodsType,goodsQuantity,goodsRep)
+					oMsg = oMsg .. string.format(_("trade-comms", "   %14s: %2i, %3i\n"),goodsType,goodsQuantity,goodsRep)
 					gi = gi + 1
 				until(gi > #goods[comms_target])
 				setCommsMessage(oMsg)
@@ -3524,21 +3524,21 @@ function handleUndockedState()
 				addCommsReply(_("Back"), commsStation)
 			end
 		end)
-		addCommsReply("Where can I find particular goods?", function()
-			gkMsg = "Friendly stations generally have food or medicine or both. Neutral stations often trade their goods for food, medicine or luxury."
+		addCommsReply(_("trade-comms", "Where can I find particular goods?"), function()
+			gkMsg = _("trade-comms", "Friendly stations generally have food or medicine or both. Neutral stations often trade their goods for food, medicine or luxury.")
 			if comms_target.goodsKnowledge == nil then
-				gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations.\n\nCheck back later, someone else may have better knowledge"
+				gkMsg = gkMsg .. _("trade-comms", " Beyond that, I have no knowledge of specific stations.\n\nCheck back later, someone else may have better knowledge")
 				setCommsMessage(gkMsg)
 				addCommsReply(_("Back"), commsStation)
 				fillStationBrains()
 			else
 				if #comms_target.goodsKnowledge == 0 then
-					gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations"
+					gkMsg = gkMsg .. _("trade-comms", " Beyond that, I have no knowledge of specific stations")
 				else
-					gkMsg = gkMsg .. "\n\nWhat goods are you interested in?\nI've heard about these:"
+					gkMsg = gkMsg .. _("trade-comms", "\n\nWhat goods are you interested in?\nI've heard about these:")
 					for gk=1,#comms_target.goodsKnowledge do
 						addCommsReply(comms_target.goodsKnowledgeType[gk],function()
-							setCommsMessage(string.format("Station %s in sector %s has %s%s",comms_target.goodsKnowledge[gk],comms_target.goodsKnowledgeSector[gk],comms_target.goodsKnowledgeType[gk],comms_target.goodsKnowledgeTrade[gk]))
+							setCommsMessage(string.format(_("trade-comms", "Station %s in sector %s has %s%s"),comms_target.goodsKnowledge[gk],comms_target.goodsKnowledgeSector[gk],comms_target.goodsKnowledgeType[gk],comms_target.goodsKnowledgeTrade[gk]))
 							addCommsReply(_("Back"), commsStation)
 						end)
 					end
@@ -5913,41 +5913,41 @@ function endStatistics()
 		end
 	end
 	destroyedEnemyStations = startingEnemyStations - enemyStationsSurvived
-	gMsg = string.format("Stations: %i\t survived: %i\t destroyed: %i",(startingFriendlyStations + startingNeutralStations),survivedStations,destroyedStations)
-	gMsg = gMsg .. string.format("\nFriendly Stations: %i\t survived: %i\t destroyed: %i",startingFriendlyStations,survivedFriendlyStations,destroyedFriendlyStations)
-	gMsg = gMsg .. string.format("\nNeutral Stations: %i\t survived: %i\t destroyed: %i",startingNeutralStations,survivedNeutralStations,destroyedNeutralStations)
-	gMsg = gMsg .. string.format("\n\n\n\nEnemy Stations: %i\t survived: %i\t destroyed: %i",startingEnemyStations,enemyStationsSurvived,enemyStationsSurvived)
---	gMsg = gMsg .. string.format("\n\n\n\nRequired missions completed: %i",requiredMissionCount)
+	gMsg = string.format(_("msgMainscreen", "Stations: %i\t survived: %i\t destroyed: %i"),(startingFriendlyStations + startingNeutralStations),survivedStations,destroyedStations)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "\nFriendly Stations: %i\t survived: %i\t destroyed: %i"),startingFriendlyStations,survivedFriendlyStations,destroyedFriendlyStations)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "\nNeutral Stations: %i\t survived: %i\t destroyed: %i"),startingNeutralStations,survivedNeutralStations,destroyedNeutralStations)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "\n\n\n\nEnemy Stations: %i\t survived: %i\t destroyed: %i"),startingEnemyStations,enemyStationsSurvived,enemyStationsSurvived)
+--	gMsg = gMsg .. string.format(_("msgMainscreen", "\n\n\n\nRequired missions completed: %i"),requiredMissionCount)
 	rankVal = survivedFriendlyStations/startingFriendlyStations*.6 + survivedNeutralStations/startingNeutralStations*.2 + (1-enemyStationsSurvived/startingEnemyStations)*.2
 	if missionVictory then
 		if rankVal < .7 then
-			rank = "Ensign"
+			rank = _("msgMainscreen", "Ensign")
 		elseif rankVal < .8 then
-			rank = "Lieutenant"
+			rank = _("msgMainscreen", "Lieutenant")
 		elseif rankVal < .9 then
-			rank = "Commander"
+			rank = _("msgMainscreen", "Commander")
 		elseif rankVal < .95 then
-			rank = "Captain"
+			rank = _("msgMainscreen", "Captain")
 		else
-			rank = "Admiral"
+			rank = _("msgMainscreen", "Admiral")
 		end
-		gMsg = gMsg .. "\nEarned rank: " .. rank
+		gMsg = gMsg .. _("msgMainscreen", "\nEarned rank: ") .. rank
 	else
 		if rankVal < .6 then
-			rank = "Ensign"
+			rank = _("msgMainscreen", "Ensign")
 		elseif rankVal < .7 then
-			rank = "Lieutenant"
+			rank = _("msgMainscreen", "Lieutenant")
 		elseif rankVal < .8 then
-			rank = "Commander"
+			rank = _("msgMainscreen", "Commander")
 		elseif rankVal < .9 then
-			rank = "Captain"
+			rank = _("msgMainscreen", "Captain")
 		else
-			rank = "Admiral"
+			rank = _("msgMainscreen", "Admiral")
 		end
 		if string.find(getScenarioVariation(),"Hunter") then
-			gMsg = gMsg .. "\nPost Target Enemy Base Survival Rank: ".. rank
+			gMsg = gMsg .. _("msgMainscreen", "\nPost Target Enemy Base Survival Rank: ").. rank
 		else
-			gMsg = gMsg .. "\nPost Home Base Destruction Rank: " .. rank
+			gMsg = gMsg .. _("msgMainscreen", "\nPost Home Base Destruction Rank: ") .. rank
 		end
 		-- Yes, the ranking is more forgiving when defeated for these reasons:
 		-- 1) With so many deaths on the station, leadership roles have opened up

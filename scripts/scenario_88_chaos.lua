@@ -7077,10 +7077,10 @@ function goodsAvailabilityOnStation(return_function)
 		end
 	end
 	if goodsAvailable then
-		addCommsReply("What goods do you have available for sale or trade?", function()
-			local goodsAvailableMsg = string.format("Station %s:\nGoods or components available: quantity, cost in reputation",comms_target:getCallSign())
+		addCommsReply(_("trade-comms", "What goods do you have available for sale or trade?"), function()
+			local goodsAvailableMsg = string.format(_("trade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
 			for good, goodData in pairs(comms_target.comms_data.goods) do
-				goodsAvailableMsg = goodsAvailableMsg .. string.format("\n   %14s: %2i, %3i",good,goodData["quantity"],goodData["cost"])
+				goodsAvailableMsg = goodsAvailableMsg .. string.format(_("trade-comms", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
 			end
 			setCommsMessage(goodsAvailableMsg)
 			addCommsReply(_("Back"), return_function)
@@ -7310,7 +7310,7 @@ function preOrderOrdnance(return_function)
 				else
 					hireCost = math.random(45,90)
 				end
-				addCommsReply(string.format("Recruit repair crew member for %i reputation",hireCost), function()
+				addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hireCost), function()
 					if not comms_source:takeReputationPoints(hireCost) then
 						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					else
@@ -7789,7 +7789,7 @@ function buySellTrade(return_function)
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							comms_source.goods["medicine"] = comms_source.goods["medicine"] - 1
-							goodTransactionMessage = goodTransactionMessage .. "\nTraded"
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
 						addCommsReply(_("Back"), return_function)
@@ -8922,9 +8922,9 @@ function pickWinner(reason)
 	table.sort(sorted_faction,function(a,b)
 		return a.score > b.score
 	end)
-	local out = string.format("%s wins with a score of %.1f!\n",sorted_faction[1].name,sorted_faction[1].score)
+	local out = string.format(_("msgMainscreen", "%s wins with a score of %.1f!\n"),sorted_faction[1].name,sorted_faction[1].score)
 	for i=2,#sorted_faction do
-		out = out .. string.format("%s:%.1f ",sorted_faction[i].name,sorted_faction[i].score)
+		out = out .. string.format(_("msgMainscreen", "%s:%.1f "),sorted_faction[i].name,sorted_faction[i].score)
 	end
 	out = out .. "\n" .. reason
 	print(out)

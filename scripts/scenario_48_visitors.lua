@@ -5220,20 +5220,20 @@ function cargoInventory(delta)
 	end
 end
 function cargoInventoryGivenShip(p)
-	p:addToShipLog(string.format("%s Current cargo:",p:getCallSign()),"Yellow")
+	p:addToShipLog(string.format(_("inventory-shipLog", "%s Current cargo:"),p:getCallSign()),"Yellow")
 	local cargoHoldEmpty = true
 	if p.goods ~= nil then
 		for good, quantity in pairs(p.goods) do
 			if quantity ~= nil and quantity > 0 then
-				p:addToShipLog(string.format("     %s: %i",good,math.floor(quantity)),"Yellow")
+				p:addToShipLog(string.format(_("inventory-shipLog", "     %s: %i"),good,math.floor(quantity)),"Yellow")
 				cargoHoldEmpty = false
 			end
 		end
 	end
 	if cargoHoldEmpty then
-		p:addToShipLog("     Empty\n","Yellow")
+		p:addToShipLog(_("inventory-shipLog", "     Empty\n"),"Yellow")
 	end
-	p:addToShipLog(string.format("Available space: %i",p.cargo),"Yellow")
+	p:addToShipLog(string.format(_("inventory-shipLog", "Available space: %i"),p.cargo),"Yellow")
 end
 function cargoInventory1()
 	local p = getPlayerShip(1)
@@ -7145,19 +7145,19 @@ function handleUndockedState()
 			end
 		end
 		if goodsAvailable then
-			addCommsReply("What goods do you have available for sale or trade?", function()
+			addCommsReply(_("trade-comms", "What goods do you have available for sale or trade?"), function()
 				local ctd = comms_target.comms_data
-				local goodsAvailableMsg = string.format("Station %s:\nGoods or components available: quantity, cost in reputation",comms_target:getCallSign())
+				local goodsAvailableMsg = string.format(_("trade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
 				for good, goodData in pairs(ctd.goods) do
-					goodsAvailableMsg = goodsAvailableMsg .. string.format("\n   %14s: %2i, %3i",good,goodData["quantity"],goodData["cost"])
+					goodsAvailableMsg = goodsAvailableMsg .. string.format(_("trade-comms", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
 				end
 				setCommsMessage(goodsAvailableMsg)
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply("Where can I find particular goods?", function()
+		addCommsReply(_("trade-comms", "Where can I find particular goods?"), function()
 			local ctd = comms_target.comms_data
-			gkMsg = "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury."
+			gkMsg = _("trade-comms", "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury.")
 			if ctd.goodsKnowledge == nil then
 				ctd.goodsKnowledge = {}
 				local knowledgeCount = 0
@@ -7197,14 +7197,14 @@ function handleUndockedState()
 					local sectorName = ctd.goodsKnowledge[good]["sector"]
 					local goodName = good
 					local goodCost = ctd.goodsKnowledge[good]["cost"]
-					setCommsMessage(string.format("Station %s in sector %s has %s for %i reputation",stationName,sectorName,goodName,goodCost))
+					setCommsMessage(string.format(_("trade-comms", "Station %s in sector %s has %s for %i reputation"),stationName,sectorName,goodName,goodCost))
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if goodsKnowledgeCount > 0 then
-				gkMsg = gkMsg .. "\n\nWhat goods are you interested in?\nI've heard about these:"
+				gkMsg = gkMsg .. _("trade-comms", "\n\nWhat goods are you interested in?\nI've heard about these:")
 			else
-				gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations"
+				gkMsg = gkMsg .. _("trade-comms", " Beyond that, I have no knowledge of specific stations")
 			end
 			setCommsMessage(gkMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -10480,64 +10480,64 @@ function plotRun(delta)
 end
 -- End of plot related functions
 function showEndStats(reason)
-	local stat_message = "Human stations destroyed: "
+	local stat_message = _("msgMainscreen", "Human stations destroyed: ")
 	if #humanStationDestroyedNameList ~= nil and #humanStationDestroyedNameList > 0 then
 		stat_message = stat_message .. #humanStationDestroyedNameList
 		local station_strength = 0
 		for i=1,#humanStationDestroyedNameList do
 			station_strength = station_strength + humanStationDestroyedValue[i]
 		end
-		stat_message = stat_message .. string.format(" (total strength: %i)",station_strength)
+		stat_message = stat_message .. string.format(_("msgMainscreen", " (total strength: %i)"),station_strength)
 	else
-		stat_message = stat_message .. "none"
+		stat_message = stat_message .. _("msgMainscreen", "none")
 	end
-	stat_message = stat_message .. "\nNeutral stations destroyed: "
+	stat_message = stat_message .. _("msgMainscreen", "\nNeutral stations destroyed: ")
 	if #neutralStationDestroyedNameList ~= nil and #neutralStationDestroyedNameList > 0 then
 		stat_message = stat_message .. #neutralStationDestroyedNameList
 		station_strength = 0
 		for i=1,#neutralStationDestroyedNameList do
 			station_strength = station_strength + neutralStationDestroyedValue[i]
 		end
-		stat_message = stat_message .. string.format(" (total strength: %i)",station_strength)
+		stat_message = stat_message .. string.format(_("msgMainscreen", " (total strength: %i)"),station_strength)
 	else
-		stat_message = stat_message .. "none"
+		stat_message = stat_message .. _("msgMainscreen", "none")
 	end
-	stat_message = stat_message .. "\nKraylor vessels destroyed: "
+	stat_message = stat_message .. _("msgMainscreen", "\nKraylor vessels destroyed: ")
 	if #kraylorVesselDestroyedNameList ~= nil and #kraylorVesselDestroyedNameList > 0 then
 		stat_message = stat_message .. #kraylorVesselDestroyedNameList
 		station_strength = 0
 		for i=1,#kraylorVesselDestroyedNameList do
 			station_strength = station_strength + kraylorVesselDestroyedValue[i]
 		end
-		stat_message = stat_message .. string.format(" (total strength: %i)",station_strength)
+		stat_message = stat_message .. string.format(_("msgMainscreen", " (total strength: %i)"),station_strength)
 	else
-		stat_message = stat_message .. "none"
+		stat_message = stat_message .. _("msgMainscreen", "none")
 	end
-	stat_message = stat_message .. "\n\n\n\nExuari vessels destroyed: "
+	stat_message = stat_message .. _("msgMainscreen", "\n\n\n\nExuari vessels destroyed: ")
 	if #exuariVesselDestroyedNameList ~= nil and #exuariVesselDestroyedNameList > 0 then
 		stat_message = stat_message .. #exuariVesselDestroyedNameList
 		station_strength = 0
 		for i=1,#exuariVesselDestroyedNameList do
 			station_strength = station_strength + exuariVesselDestroyedValue[i]
 		end
-		stat_message = stat_message .. string.format(" (total strength: %i)",station_strength)
+		stat_message = stat_message .. string.format(_("msgMainscreen", " (total strength: %i)"),station_strength)
 	else
-		stat_message = stat_message .. "none"
+		stat_message = stat_message .. _("msgMainscreen", "none")
 	end
-	stat_message = stat_message .. "\nArlenian vessels destroyed: "
+	stat_message = stat_message .. _("msgMainscreen", "\nArlenian vessels destroyed: ")
 	if #arlenianVesselDestroyedNameList ~= nil and #arlenianVesselDestroyedNameList > 0 then
 		stat_message = stat_message .. #arlenianVesselDestroyedNameList
 		station_strength = 0
 		for i=1,#arlenianVesselDestroyedNameList do
 			station_strength = station_strength + arlenianVesselDestroyedValue[i]
 		end
-		stat_message = stat_message .. string.format(" (total strength: %i)",station_strength)
+		stat_message = stat_message .. string.format(_("msgMainscreen", " (total strength: %i)"),station_strength)
 	else
-		stat_message = stat_message .. "none"
+		stat_message = stat_message .. _("msgMainscreen", "none")
 	end
-	stat_message = stat_message .. string.format("\nMissions completed: %i",mission_complete_count)
+	stat_message = stat_message .. string.format(_("msgMainscreen", "\nMissions completed: %i"),mission_complete_count)
 	if reason ~= nil then
-		stat_message = stat_message .. "\n" .. reason
+		stat_message = stat_message .. _("msgMainscreen", "\n") .. reason
 	end
 	globalMessage(stat_message)
 end

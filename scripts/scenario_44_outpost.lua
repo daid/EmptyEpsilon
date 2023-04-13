@@ -13336,7 +13336,7 @@ function handleUndockedState()
 				addCommsReply(_("trade-comms", "What goods do you have available for sale or trade?"), function()
 					local goodsAvailableMsg = string.format(_("trade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
 					for good, goodData in pairs(comms_target.comms_data.goods) do
-						goodsAvailableMsg = goodsAvailableMsg .. string.format("\n   %14s: %2i, %3i",good,goodData["quantity"],goodData["cost"])
+						goodsAvailableMsg = goodsAvailableMsg .. string.format(_("trade-comms", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
 					end
 					setCommsMessage(goodsAvailableMsg)
 					addCommsReply(_("Back"), commsStation)

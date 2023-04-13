@@ -7052,14 +7052,14 @@ function handleUndockedState()
 			gi = gi + 1
 		until(gi > #goods[comms_target])
 		if goodsQuantityAvailable > 0 then
-			addCommsReply("What goods do you have available for sale or trade?", function()
-				oMsg = string.format("Station %s:\nGoods or components available: quantity, cost in reputation\n",comms_target:getCallSign())
+			addCommsReply(_("trade-comms", "What goods do you have available for sale or trade?"), function()
+				oMsg = string.format(_("trade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation\n"),comms_target:getCallSign())
 				gi = 1		-- initialize goods index
 				repeat
 					goodsType = goods[comms_target][gi][1]
 					goodsQuantity = goods[comms_target][gi][2]
 					goodsRep = goods[comms_target][gi][3]
-					oMsg = oMsg .. string.format("   %14s: %2i, %3i\n",goodsType,goodsQuantity,goodsRep)
+					oMsg = oMsg .. string.format(_("trade-comms", "   %14s: %2i, %3i\n"),goodsType,goodsQuantity,goodsRep)
 					gi = gi + 1
 				until(gi > #goods[comms_target])
 				setCommsMessage(oMsg)
@@ -7092,21 +7092,21 @@ function handleUndockedState()
 				addCommsReply(_("Back"), commsStation)
 			end
 		end)
-		addCommsReply("Where can I find particular goods?", function()
-			gkMsg = "Friendly stations generally have food or medicine or both. Neutral stations often trade their goods for food, medicine or luxury."
+		addCommsReply(_("trade-comms", "Where can I find particular goods?"), function()
+			gkMsg = _("trade-comms", "Friendly stations generally have food or medicine or both. Neutral stations often trade their goods for food, medicine or luxury.")
 			if comms_target.goodsKnowledge == nil then
-				gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations.\n\nCheck back later, someone else may have better knowledge"
+				gkMsg = gkMsg .. _("trade-comms", " Beyond that, I have no knowledge of specific stations.\n\nCheck back later, someone else may have better knowledge")
 				setCommsMessage(gkMsg)
 				addCommsReply(_("Back"), commsStation)
 				fillStationBrains()
 			else
 				if #comms_target.goodsKnowledge == 0 then
-					gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations"
+					gkMsg = gkMsg .. _("trade-comms", " Beyond that, I have no knowledge of specific stations")
 				else
-					gkMsg = gkMsg .. "\n\nWhat goods are you interested in?\nI've heard about these:"
+					gkMsg = gkMsg .. _("trade-comms", "\n\nWhat goods are you interested in?\nI've heard about these:")
 					for gk=1,#comms_target.goodsKnowledge do
 						addCommsReply(comms_target.goodsKnowledgeType[gk],function()
-							setCommsMessage(string.format("Station %s in sector %s has %s%s",comms_target.goodsKnowledge[gk],comms_target.goodsKnowledgeSector[gk],comms_target.goodsKnowledgeType[gk],comms_target.goodsKnowledgeTrade[gk]))
+							setCommsMessage(string.format(_("trade-comms", "Station %s in sector %s has %s%s"),comms_target.goodsKnowledge[gk],comms_target.goodsKnowledgeSector[gk],comms_target.goodsKnowledgeType[gk],comms_target.goodsKnowledgeTrade[gk]))
 							addCommsReply(_("Back"), commsStation)
 						end)
 					end
