@@ -22,7 +22,7 @@ enum ETweakType
     TW_Object,  // TODO: Space object
     TW_Jammer,  // WarpJammer
     TW_Ship,    // Ships
-    TW_Station, // TODO: Space stations
+    TW_Station, // Space stations
     TW_Player,  // Player ships
     TW_Asteroid // Asteroid
 };
@@ -48,25 +48,46 @@ private:
     std::vector<GuiTweakPage*> pages;
 };
 
+class GuiTweakShipTemplateBasedObject : public GuiTweakPage
+{
+private:
+    P<ShipTemplateBasedObject> target;
+
+    GuiTextEntry* type_name;
+    GuiToggleButton* shares_energy_with_docked_toggle;
+    GuiToggleButton* repairs_docked_toggle;
+    GuiToggleButton* restocks_scan_probes_toggle;
+    GuiToggleButton* restocks_cpuship_weapons_toggle;
+    GuiSlider* hull_max_slider;
+    GuiSlider* hull_slider;
+    GuiToggleButton* can_be_destroyed_toggle;
+    GuiSlider* short_range_radar_slider;
+    GuiSlider* long_range_radar_slider;
+public:
+    GuiTweakShipTemplateBasedObject(GuiContainer* owner);
+
+    virtual void onDraw(sp::RenderTarget& target) override;
+
+    virtual void open(P<SpaceObject> target) override;
+};
+
 class GuiTweakShip : public GuiTweakPage
 {
 private:
     P<SpaceShip> target;
 
-    GuiTextEntry* type_name;
-    GuiToggleButton* warp_toggle;
-    GuiToggleButton* jump_toggle;
     GuiSlider* impulse_speed_slider;
+    GuiSlider* impulse_acceleration_slider;
     GuiSlider* impulse_reverse_speed_slider;
+    GuiSlider* impulse_reverse_acceleration_slider;
     GuiSlider* turn_speed_slider;
-    GuiSlider* hull_max_slider;
-    GuiSlider* hull_slider;
-    GuiSlider* jump_charge_slider;
+    GuiToggleButton* docking_state_toggle;
+    GuiToggleButton* warp_toggle;
+    GuiSlider* warp_speed_slider;
+    GuiToggleButton* jump_toggle;
     GuiSlider* jump_min_distance_slider;
     GuiSlider* jump_max_distance_slider;
-    GuiToggleButton* can_be_destroyed_toggle;
-    GuiSlider* short_range_radar_slider;
-    GuiSlider* long_range_radar_slider;
+    GuiSlider* jump_charge_slider;
 public:
     GuiTweakShip(GuiContainer* owner);
 
