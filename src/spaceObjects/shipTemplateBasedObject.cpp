@@ -6,6 +6,7 @@
 #include "components/impulse.h"
 #include "components/hull.h"
 #include "components/shields.h"
+#include "components/rendering.h"
 
 #include "tween.h"
 #include "i18n.h"
@@ -210,9 +211,9 @@ void ShipTemplateBasedObject::draw3DTransparent()
         {
             if (shields->count > 1)
             {
-                model_info.renderShield(model_matrix, (shields->entry[n].level / shields->entry[n].max) * shields->entry[n].hit_effect, angle);
+                //TODO: model_info.renderShield(model_matrix, (shields->entry[n].level / shields->entry[n].max) * shields->entry[n].hit_effect, angle);
             }else{
-                model_info.renderShield(model_matrix, (shields->entry[n].level / shields->entry[n].max) * shields->entry[n].hit_effect);
+                //TODO: model_info.renderShield(model_matrix, (shields->entry[n].level / shields->entry[n].max) * shields->entry[n].hit_effect);
             }
         }
         angle += arc;
@@ -238,7 +239,7 @@ void ShipTemplateBasedObject::update(float delta)
 
         // If it does exist, set up its collider and model.
         ship_template->setCollisionData(this);
-        model_info.setData(ship_template->model_data);
+        //model_info.setData(ship_template->model_data);
     }
 }
 
@@ -319,10 +320,28 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
         }
 
         entity.getOrAddComponent<ShareShortRangeRadar>();
+
+        auto& mrc = entity.getOrAddComponent<MeshRenderComponent>();
+        mrc.mesh.name = ship_template->model_data->mesh_name;
+        mrc.texture.name = ship_template->model_data->texture_name;
+        mrc.specular_texture.name = ship_template->model_data->specular_texture_name;
+        mrc.illumination_texture.name = ship_template->model_data->illumination_texture_name;
+        mrc.scale = ship_template->model_data->scale;
+        mrc.mesh_offset.x = ship_template->model_data->mesh_offset.x;
+        mrc.mesh_offset.y = ship_template->model_data->mesh_offset.y;
+        mrc.mesh_offset.z = ship_template->model_data->mesh_offset.z;
+
+        auto& ee = entity.getOrAddComponent<EngineEmitter>();
+        for(const auto& mde : ship_template->model_data->engine_emitters) {
+            EngineEmitter::Emitter e;
+            e.position = mde.position;
+            e.color = mde.color;
+            e.scale = mde.scale;
+            ee.emitters.push_back(e);
+        }
     }
 
     ship_template->setCollisionData(this);
-    model_info.setData(ship_template->model_data);
 
     //Call the virtual applyTemplateValues function so subclasses can get extra values from the ship templates.
     applyTemplateValues();

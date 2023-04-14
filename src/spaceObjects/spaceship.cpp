@@ -553,7 +553,7 @@ void SpaceShip::applyTemplateValues()
     }
 
     ship_template->setCollisionData(this);
-    model_info.setData(ship_template->model_data);
+    //model_info.setData(ship_template->model_data);
 }
 
 void SpaceShip::draw3DTransparent()
@@ -643,6 +643,7 @@ void SpaceShip::update(float delta)
 {
     ShipTemplateBasedObject::update(delta);
 
+    /*TODO
     model_info.engine_scale = 0.0f;
     auto thrusters = entity.getComponent<ManeuveringThrusters>();
     if (thrusters) model_info.engine_scale = std::abs(getAngularVelocity() / thrusters->speed);
@@ -656,6 +657,7 @@ void SpaceShip::update(float delta)
         model_info.warp_scale = (10.0f - jump->delay) / 10.0f;
     else
         model_info.warp_scale = 0.f;
+    */
     
     updateDynamicRadarSignature();
 }

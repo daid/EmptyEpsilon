@@ -136,7 +136,6 @@ public:
     glm::mat4 getModelTransform() const { return getModelMatrix(); }
 protected:
     virtual glm::mat4 getModelMatrix() const;
-    ModelInfo model_info;
 };
 
 template<> void convert<DamageType>::param(lua_State* L, int& idx, DamageType& dt);

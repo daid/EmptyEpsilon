@@ -4,6 +4,7 @@
 #include "main.h"
 #include "random.h"
 #include "components/hull.h"
+#include "components/rendering.h"
 
 #include "scriptInterface.h"
 
@@ -73,25 +74,6 @@ ScanProbe::ScanProbe()
     // Give the probe a small electrical radar signature.
     setRadarSignatureInfo(0.0, 0.2, 0.0);
 
-    // Randomly select a probe model.
-    switch(irandom(1, 3))
-    {
-        case 1:
-        {
-            model_info.setData("SensorBuoyMKI");
-            break;
-        }
-        case 2:
-        {
-            model_info.setData("SensorBuoyMKII");
-            break;
-        }
-        default:
-        {
-            model_info.setData("SensorBuoyMKIII");
-        }
-    }
-
     // Assign a generic callsign.
     setCallSign(string(getMultiplayerId()) + "P");
 
@@ -99,6 +81,24 @@ ScanProbe::ScanProbe()
         auto hull = entity.addComponent<Hull>();
         hull.max = hull.current = 1;
         entity.getOrAddComponent<ShareShortRangeRadar>();
+
+        P<ModelData> model_data;
+        // Randomly select a probe model.
+        switch(irandom(1, 3))
+        {
+            case 1: model_data = ModelData::getModel("SensorBuoyMKI"); break;
+            case 2: model_data = ModelData::getModel("SensorBuoyMKII"); break;
+            default: model_data = ModelData::getModel("SensorBuoyMKIII"); break;
+        }
+        auto& mrc = entity.getOrAddComponent<MeshRenderComponent>();
+        mrc.mesh.name = model_data->mesh_name;
+        mrc.texture.name = model_data->texture_name;
+        mrc.specular_texture.name = model_data->specular_texture_name;
+        mrc.illumination_texture.name = model_data->illumination_texture_name;
+        mrc.scale = model_data->scale;
+        mrc.mesh_offset.x = model_data->mesh_offset.x;
+        mrc.mesh_offset.y = model_data->mesh_offset.y;
+        mrc.mesh_offset.z = model_data->mesh_offset.z;
     }
 }
 

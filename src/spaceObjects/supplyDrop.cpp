@@ -4,6 +4,7 @@
 #include "playerSpaceship.h"
 #include "components/reactor.h"
 #include "components/missiletubes.h"
+#include "components/rendering.h"
 #include "main.h"
 
 #include "scriptInterface.h"
@@ -39,7 +40,18 @@ SupplyDrop::SupplyDrop()
     energy = 0.0;
     setRadarSignatureInfo(0.0, 0.1, 0.1);
 
-    model_info.setData("ammo_box");
+    if (entity) {
+        auto& mrc = entity.getOrAddComponent<MeshRenderComponent>();
+        auto model_data = ModelData::getModel("ammo_box");
+        mrc.mesh.name = model_data->mesh_name;
+        mrc.texture.name = model_data->texture_name;
+        mrc.specular_texture.name = model_data->specular_texture_name;
+        mrc.illumination_texture.name = model_data->illumination_texture_name;
+        mrc.scale = model_data->scale;
+        mrc.mesh_offset.x = model_data->mesh_offset.x;
+        mrc.mesh_offset.y = model_data->mesh_offset.y;
+        mrc.mesh_offset.z = model_data->mesh_offset.z;
+    }
 }
 
 void SupplyDrop::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)

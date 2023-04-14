@@ -147,12 +147,6 @@ VisualAsteroid::VisualAsteroid()
         mrc.specular_texture.name = "Astroid_" + string(model_number) + "_s.png";
         mrc.scale = size;
 
-        auto& trace = entity.getOrAddComponent<RadarTrace>();
-        trace.icon = "radar/blip.png";
-        trace.radius = size;
-        trace.color = glm::u8vec4(255, 200, 100, 255);
-        trace.flags = 0;
-
         auto& spin = entity.getOrAddComponent<Spin>();
         spin.rate = random(0.1f, 0.8f);
 

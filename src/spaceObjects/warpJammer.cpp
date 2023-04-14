@@ -3,6 +3,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "components/collision.h"
 #include "components/warpdrive.h"
+#include "components/rendering.h"
 #include "explosionEffect.h"
 #include "components/hull.h"
 #include "main.h"
@@ -49,12 +50,21 @@ WarpJammerObject::WarpJammerObject()
 {
     setRadarSignatureInfo(0.05, 0.5, 0.0);
 
-    model_info.setData("shield_generator");
-
     if (entity) {
-        auto hull = entity.addComponent<Hull>();
+        auto& hull = entity.addComponent<Hull>();
         hull.max = hull.current = 50.0;
         entity.addComponent<WarpJammer>().range = 7000.0;
+
+        auto& mrc = entity.getOrAddComponent<MeshRenderComponent>();
+        auto model_data = ModelData::getModel("shield_generator");
+        mrc.mesh.name = model_data->mesh_name;
+        mrc.texture.name = model_data->texture_name;
+        mrc.specular_texture.name = model_data->specular_texture_name;
+        mrc.illumination_texture.name = model_data->illumination_texture_name;
+        mrc.scale = model_data->scale;
+        mrc.mesh_offset.x = model_data->mesh_offset.x;
+        mrc.mesh_offset.y = model_data->mesh_offset.y;
+        mrc.mesh_offset.z = model_data->mesh_offset.z;
     }
 }
 
