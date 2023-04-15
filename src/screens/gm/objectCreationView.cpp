@@ -100,19 +100,84 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
 
     template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Ship);
     std::sort(template_names.begin(), template_names.end());
+
+    // Sort first by template name...
+    for (auto name : template_names)
+    {
+        ship_template_entries.push_back({
+            name,
+            ShipTemplate::getTemplate(name)->getClass(),
+            ShipTemplate::getTemplate(name)->getSubClass()
+        });
+    }
+
+    // ...then by class...
+    std::sort(
+        ship_template_entries.begin(),
+        ship_template_entries.end(),
+        []
+        (
+            ShipEntry a,
+            ShipEntry b
+        )
+        {
+            return a.class_name < b.class_name;
+        }
+    );
+
+    // ...then by subclass...
+    std::sort(
+        ship_template_entries.begin(),
+        ship_template_entries.end(),
+        []
+        (
+            const ShipEntry &a,
+            const ShipEntry &b
+        )
+        {
+            if (a.class_name == b.class_name)
+            {
+                if (a.subclass_name != b.subclass_name)
+                    return a.subclass_name < b.subclass_name;
+                else
+                    return a.template_name < b.template_name;
+            }
+
+            return a.class_name < b.class_name;
+        }
+    );
+
     cpu_ship_listbox = new GuiListbox(box, "CREATE_SHIPS", [this](int index, string value)
     {
         setCreateScript("CpuShip():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\"):orderRoaming()");
     });
     cpu_ship_listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(300, 460);
-    for(string template_name : template_names)
+    string ship_class, ship_subclass = "";
+    for (ShipEntry template_class : ship_template_entries)
     {
-        auto shipTemplate=ShipTemplate::getTemplate(template_name);
-        if (shipTemplate)
+        // Add a heading if this is a new class or subclass.
+        if (ship_class != template_class.class_name)
         {
-            if (!shipTemplate->visible)
+            ship_class = template_class.class_name;
+            int new_class = cpu_ship_listbox->addEntry(ship_class, template_class.template_name);
+            cpu_ship_listbox->setEntryIsHeading(new_class, true);
+        }
+        if (ship_subclass != template_class.subclass_name)
+        {
+            ship_subclass = template_class.subclass_name;
+            int new_class = cpu_ship_listbox->addEntry(ship_subclass, template_class.template_name);
+            cpu_ship_listbox->setEntryIsHeading(new_class, true);
+        }
+
+        auto ship_template = ShipTemplate::getTemplate(template_class.template_name);
+        if (ship_template)
+        {
+            if (!ship_template->visible)
                 continue;
-            cpu_ship_listbox->addEntry(ShipTemplate::getTemplate(template_name)->getLocaleName(), template_name);
+            cpu_ship_listbox->addEntry(
+                ShipTemplate::getTemplate(template_class.template_name)->getLocaleName(),
+                template_class.template_name
+            );
         }
     }
 

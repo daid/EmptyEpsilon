@@ -14,6 +14,7 @@ private:
     class GuiEntry
     {
     public:
+        bool is_heading = false;
         string name;
         string value;
         string icon_name = "";
@@ -33,6 +34,7 @@ public:
     void setEntryName(int index, string name);
     void setEntryValue(int index, string value);
     void setEntryIcon(int index, string icon_name);
+    void setEntryIsHeading(int index, bool is_heading);
     void setEntry(int index, string name, string value);
 
     int addEntry(string name, string value);
@@ -42,6 +44,7 @@ public:
     string getEntryName(int index) const;
     string getEntryValue(int index) const;
     string getEntryIcon(int index) const;
+    bool getEntryIsHeading(int index) const;
 
     int getSelectionIndex() const;
     GuiEntryList* setSelectionIndex(int index);
