@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "scenarioInfo.h"
 #include "scienceDatabase.h"
 #include "multiplayer_client.h"
 #include "soundManager.h"
@@ -177,7 +178,42 @@ void GameGlobalInfo::reset()
     }
 }
 
-void GameGlobalInfo::startScenario(string filename)
+void GameGlobalInfo::setScenarioSettings(const string filename, std::unordered_map<string, string> new_settings)
+{
+    // Use the parsed scenario metadata.
+    ScenarioInfo info(filename);
+
+    // Set the scenario name.
+    gameGlobalInfo->scenario = info.name;
+    LOG(INFO) << "Configuring settings for scenario " << gameGlobalInfo->scenario;
+
+    // Set each scenario setting to either a matching passed new value, or the
+    // default if there's no match (or no new value).
+    for(auto& setting : info.settings)
+    {
+        // Initialize with defaults.
+        gameGlobalInfo->scenario_settings[setting.key] = setting.default_option;
+
+        // If new settings were passed ...
+        if (!new_settings.empty())
+        {
+            // ... confirm that this setting key exists in the new settings.
+            if (new_settings.find(setting.key) != new_settings.end())
+            {
+                if (new_settings[setting.key] != "")
+                {
+                    // If so, override the default with the new value.
+                    gameGlobalInfo->scenario_settings[setting.key] = new_settings[setting.key];
+                }
+            }
+        }
+
+        // Log scenario setting confirmation.
+        LOG(INFO) << setting.key << " scenario setting set to " << gameGlobalInfo->scenario_settings[setting.key];
+    }
+}
+
+void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, string> new_settings)
 {
     reset();
 
@@ -203,6 +239,10 @@ void GameGlobalInfo::startScenario(string filename)
     int max_cycles = PreferencesManager::get("script_cycle_limit", "0").toInt();
     if (max_cycles > 0)
         script->setMaxRunCycles(max_cycles);
+
+    // Initialize scenario settings.
+    setScenarioSettings(filename, new_settings);
+
     script->run(filename);
     engine->registerObject("scenario", script);
 
@@ -457,7 +497,6 @@ static int getScenarioVariation(lua_State* L)
         lua_pushstring(L, "None");
     return 1;
 }
-
 // this returns the "variation" scenario setting for backwards compatibility
 /// string getScenarioVariation()
 /// [DEPRECATED]
@@ -500,8 +539,7 @@ public:
 
     virtual void update(float delta) override
     {
-        gameGlobalInfo->scenario_settings = settings;
-        gameGlobalInfo->startScenario(script_name);
+        gameGlobalInfo->startScenario(script_name, settings);
         destroy();
     }
 private:
@@ -513,11 +551,30 @@ static int setScenario(lua_State* L)
 {
     string script_name = luaL_checkstring(L, 1);
     string variation = luaL_optstring(L, 2, "");
-    //This could be called from a currently active scenario script.
+
+    // Script filename must not be an empty string.
+    if (script_name == "")
+    {
+        LOG(ERROR) << "setScenario() requires a non-empty value.";
+        return 1;
+    }
+
+    if (variation != "")
+    {
+        LOG(WARNING) << "LUA: DEPRECATED setScenario() called with scenario variation. Passing the value as the \"variation\" scenario setting instead.";
+        // Start the scenario, passing the "variation" scenario setting.
+        new ScenarioChanger(script_name, {{"variation", variation}});
+    }
+    else
+    {
+        // Start the scenario with defaults.
+        new ScenarioChanger(script_name, {{}});
+    }
+
+    // This could be called from a currently active scenario script.
     // Calling GameGlobalInfo::startScenario is unsafe at this point,
     // as this will destroy the lua state that this function is running in.
-    //So use the ScenarioChanger object which will do the change in the update loop. Which is safe.
-    new ScenarioChanger(script_name, {{"variation", variation}});
+    // So use the ScenarioChanger object which will do the change in the update loop. Which is safe.
     return 0;
 }
 /// void setScenario(string script_name, std::optional<string> variation_name)

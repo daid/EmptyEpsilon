@@ -52,6 +52,10 @@ REGISTER_SCRIPT_CLASS_NAMED(FactionInfoLegacy, "FactionInfo")
     /// Defaults to no friendly factions.
     /// Example: faction:setFriendly("Human Navy") -- sets the Human Navy to appear as friendly to this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfoLegacy, setFriendly);
+    /// Sets the given faction to appear as neutral to SpaceObjects of this faction.
+    /// This removes any existing faction relationships between the two factions.
+    /// Example: faction:setNeutral(human_navy) -- sets the Human Navy to appear as neutral to this faction
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfoLegacy, setNeutral);
 }
 
 static int getFactionInfo(lua_State* L)
@@ -120,6 +124,19 @@ void FactionInfoLegacy::setFriendly(P<FactionInfoLegacy> other)
     auto& their = other->entity.getOrAddComponent<FactionInfo>();
     mine.setRelation(other->entity, FactionRelation::Friendly);
     their.setRelation(entity, FactionRelation::Friendly);
+}
+
+void FactionInfoLegacy::setNeutral(P<FactionInfoLegacy> other)
+{
+    auto& mine = entity.getOrAddComponent<FactionInfo>();
+    if (!other)
+    {
+        LOG(WARNING) << "Tried to set an undefined faction to be neutral with " << mine.name;
+        return;
+    }
+    auto& their = other->entity.getOrAddComponent<FactionInfo>();
+    mine.setRelation(other->entity, FactionRelation::Neutral);
+    their.setRelation(entity, FactionRelation::Neutral);
 }
 
 void FactionInfoLegacy::reset()

@@ -427,7 +427,14 @@ int main(int argc, char** argv)
         returnToMainMenu(defaultRenderLayer);
     else
     {
+        // server_scenario creates a server running the specified scenario
+        // using its defined default settings, and launches directly into
+        // the ship selection screen instead of the main menu.
+
+        // Create the server.
         new EpsilonServer(defaultServerPort);
+
+        // Load the scenario and open the ship selection screen.
         gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"));
         new ShipSelectionScreen();
     }

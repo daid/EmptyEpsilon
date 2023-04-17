@@ -57,6 +57,7 @@ public:
 
 private:
     GuiButton* start_button;
+    std::unordered_map<string,string> scenario_settings;
     std::unordered_map<string, GuiScrollText*> description_per_setting;
 };
 

@@ -61,6 +61,7 @@ public:
      * \param faction info object.
      */
     void setFriendly(P<FactionInfoLegacy> other);
+    void setNeutral(P<FactionInfoLegacy> other);
 
     static void reset(); //Destroy all FactionInfo objects
 };
