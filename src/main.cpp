@@ -41,6 +41,7 @@
 #include "systems/energysystem.h"
 #include "systems/selfdestruct.h"
 #include "systems/basicmovement.h"
+#include "systems/gravity.h"
 #include "systems/internalcrew.h"
 #include "systems/pathfinding.h"
 #include "packResourceProvider.h"
@@ -161,6 +162,7 @@ int main(int argc, char** argv)
     engine->registerSystem<ShipSystemsSystem>();
     engine->registerSystem<SelfDestructSystem>();
     engine->registerSystem<BasicMovementSystem>();
+    engine->registerSystem<GravitySystem>();
     engine->registerSystem<InternalCrewSystem>();
     engine->registerSystem<PathFindingSystem>();
     string configuration_path = ".";
