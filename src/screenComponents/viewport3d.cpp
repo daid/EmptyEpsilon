@@ -17,6 +17,7 @@
 #include "components/target.h"
 #include "components/hull.h"
 #include "components/rendering.h"
+#include "components/impulse.h"
 
 #include <glm/glm.hpp>
 #include <glm/ext/matrix_transform.hpp>
@@ -346,6 +347,26 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         render_lists[render_list_index].push_back({entity, depth, false, renderEntityMesh});
     }
 
+    // Emit engine particles.
+    for(auto [entity, ee, transform, impulse] : sp::ecs::Query<EngineEmitter, sp::Transform, ImpulseEngine>()) {
+        if (impulse.actual != 0.0f) {
+            float engine_scale = std::abs(impulse.actual);
+            if (engine->getElapsedTime() - ee.last_engine_particle_time > 0.1f)
+            {
+                for(auto ed : ee.emitters)
+                {
+                    glm::vec3 offset = ed.position;
+                    glm::vec2 pos2d = transform.getPosition() + rotateVec2(glm::vec2(offset.x, offset.y), transform.getRotation());
+                    glm::vec3 color = ed.color;
+                    glm::vec3 pos3d = glm::vec3(pos2d.x, pos2d.y, offset.z);
+                    float scale = ed.scale * engine_scale;
+                    ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
+                }
+                ee.last_engine_particle_time = engine->getElapsedTime();
+            }
+        }
+    }
+
     // Update view matrix in shaders.
     ShaderRegistry::updateProjectionView({}, view_matrix);
 
@@ -517,6 +538,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     {
         for(auto [entity, callsign, transform] : sp::ecs::Query<CallSign, sp::Transform>())
         {
+            if (entity == my_spaceship)
+                continue;
             float radius = 300.0f;
             if (auto physics = entity.getComponent<sp::Physics>())
                 radius = physics->getSize().x;

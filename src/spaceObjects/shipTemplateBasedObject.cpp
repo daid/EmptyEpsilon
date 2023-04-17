@@ -334,9 +334,9 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
         auto& ee = entity.getOrAddComponent<EngineEmitter>();
         for(const auto& mde : ship_template->model_data->engine_emitters) {
             EngineEmitter::Emitter e;
-            e.position = mde.position;
+            e.position = mde.position * ship_template->model_data->scale;
             e.color = mde.color;
-            e.scale = mde.scale;
+            e.scale = mde.scale * ship_template->model_data->scale;
             ee.emitters.push_back(e);
         }
     }

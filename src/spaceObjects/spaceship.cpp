@@ -644,14 +644,6 @@ void SpaceShip::update(float delta)
     ShipTemplateBasedObject::update(delta);
 
     /*TODO
-    model_info.engine_scale = 0.0f;
-    auto thrusters = entity.getComponent<ManeuveringThrusters>();
-    if (thrusters) model_info.engine_scale = std::abs(getAngularVelocity() / thrusters->speed);
-    auto impulse = entity.getComponent<ImpulseEngine>();
-    if (impulse)
-        model_info.engine_scale = std::max(model_info.engine_scale, std::abs(impulse->actual));
-    model_info.engine_scale = std::min(1.0f, model_info.engine_scale);
-
     auto jump = entity.getComponent<JumpDrive>();
     if (jump && jump->delay > 0.0f)
         model_info.warp_scale = (10.0f - jump->delay) / 10.0f;
