@@ -573,6 +573,7 @@ target_link_libraries(${PROJECT_NAME}
         "$<$<BOOL:${ANDROID}>:log;android>"
         "$<$<BOOL:${WITH_DISCORD}>:discord_h>"
         "$<$<PLATFORM_ID:Darwin>:-framework Foundation>"
+		stdc++
 )
 if(WIN32)
     if (CMAKE_BUILD_TYPE STREQUAL "Debug")
