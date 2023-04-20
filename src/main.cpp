@@ -44,6 +44,7 @@
 #include "systems/gravity.h"
 #include "systems/internalcrew.h"
 #include "systems/pathfinding.h"
+#include "systems/rendering.h"
 #include "packResourceProvider.h"
 #include "main.h"
 #include "epsilonServer.h"
@@ -165,6 +166,7 @@ int main(int argc, char** argv)
     engine->registerSystem<GravitySystem>();
     engine->registerSystem<InternalCrewSystem>();
     engine->registerSystem<PathFindingSystem>();
+    engine->registerSystem<MeshRenderSystem>();
     string configuration_path = ".";
     if (getenv("HOME"))
         configuration_path = string(getenv("HOME")) + "/.emptyepsilon";

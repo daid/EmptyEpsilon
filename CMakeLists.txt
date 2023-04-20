@@ -388,6 +388,7 @@ set(MAIN_SOURCES
     src/components/radarblock.h
     src/components/gravity.h
     src/components/avoidobject.h
+    src/components/sfx.h
     src/systems/ai.h
     src/systems/ai.cpp
     src/systems/docking.h
@@ -430,6 +431,8 @@ set(MAIN_SOURCES
     src/systems/internalcrew.cpp
     src/systems/pathfinding.h
     src/systems/pathfinding.cpp
+    src/systems/rendering.h
+    src/systems/rendering.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

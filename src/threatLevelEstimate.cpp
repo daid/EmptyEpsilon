@@ -1,10 +1,10 @@
 #include "gameGlobalInfo.h"
 #include "threatLevelEstimate.h"
-#include "spaceObjects/beamEffect.h"
 #include "spaceObjects/missiles/missileWeapon.h"
 #include "components/hull.h"
 #include "components/collision.h"
 #include "components/shields.h"
+#include "components/beamweapon.h"
 #include "systems/collision.h"
 
 
@@ -77,7 +77,7 @@ float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
             {
                 if (P<MissileWeapon>(obj))
                     threat += 5000.0f;
-                if (P<BeamEffect>(obj))
+                if (entity.hasComponent<BeamEffect>())
                     threat += 5000.0f;
                 continue;
             }

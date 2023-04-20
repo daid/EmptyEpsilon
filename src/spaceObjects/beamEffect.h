@@ -4,7 +4,7 @@
 #include "spaceObject.h"
 #include "glObjects.h"
 
-class BeamEffect : public SpaceObject, public Updatable
+class BeamEffectLegacy : public SpaceObject, public Updatable
 {
     float lifetime;
     sp::ecs::Entity source;
@@ -18,8 +18,8 @@ public:
     string beam_texture;
     string beam_fire_sound;
     float beam_fire_sound_power;
-    BeamEffect();
-    virtual ~BeamEffect();
+    BeamEffectLegacy();
+    virtual ~BeamEffectLegacy();
 
     virtual void draw3DTransparent() override;
     virtual void update(float delta) override;

@@ -40,3 +40,18 @@ public:
 
     MountPoint mounts[max_beam_weapons];
 };
+
+class BeamEffect
+{
+public:
+    float lifetime = 1.0f;
+    sp::ecs::Entity source;
+    sp::ecs::Entity target;
+    glm::vec3 source_offset{};
+    glm::vec3 target_offset{};
+    glm::vec2 target_location{};
+    glm::vec3 hit_normal{};
+
+    bool fire_ring;
+    string beam_texture;
+};

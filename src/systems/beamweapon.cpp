@@ -6,10 +6,24 @@
 #include "components/reactor.h"
 #include "components/warpdrive.h"
 #include "components/target.h"
-#include "spaceObjects/spaceObject.h"
-#include "spaceObjects/spaceship.h"
-#include "spaceObjects/beamEffect.h"
+#include "components/faction.h"
+#include "components/sfx.h"
 #include "ecs/query.h"
+#include "main.h"
+#include "textureManager.h"
+#include "glObjects.h"
+#include "shaderRegistry.h"
+#include "tween.h"
+
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <graphics/opengl.h>
+
+
+BeamWeaponSystem::BeamWeaponSystem()
+{
+    RenderSystem::add3DHandler<BeamEffect>(this, true);
+}
 
 void BeamWeaponSystem::update(float delta)
 {
@@ -89,12 +103,19 @@ void BeamWeaponSystem::update(float delta)
                             auto hit_location = target_transform->getPosition();
                             if (auto physics = target.entity.getComponent<sp::Physics>())
                                 hit_location -= glm::normalize(target_transform->getPosition() - transform.getPosition()) * physics->getSize().x;
-                            P<BeamEffect> effect = new BeamEffect();
-                            effect->setSource(entity, mount.position);
-                            effect->setTarget(target.entity, hit_location);
-                            effect->beam_texture = mount.texture;
-                            effect->beam_fire_sound = "sfx/laser_fire.wav";
-                            effect->beam_fire_sound_power = mount.damage / 6.0f;
+
+                            auto e = sp::ecs::Entity::create();
+                            e.addComponent<sp::Transform>(transform);
+                            auto be = e.addComponent<BeamEffect>();
+                            be.source = entity;
+                            be.target = target.entity;
+                            be.source_offset = mount.position;
+                            be.target_location = hit_location;
+                            //TODO: be.target_offset
+                            be.beam_texture = mount.texture;
+                            auto sfx = e.addComponent<Sfx>();
+                            sfx.sound = "sfx/laser_fire.wav";
+                            sfx.power = mount.damage / 6.0f;
 
                             DamageInfo info(entity, mount.damage_type, hit_location);
                             info.frequency = beamsys.frequency;
@@ -114,5 +135,104 @@ void BeamWeaponSystem::update(float delta)
                 }
             }
         }
+    }
+
+    for(auto [entity, be, transform] : sp::ecs::Query<BeamEffect, sp::Transform>()) {
+        if (be.source) {
+            if (auto st = be.source.getComponent<sp::Transform>())
+                transform.setPosition(st->getPosition() + rotateVec2(glm::vec2(be.source_offset.x, be.source_offset.y), st->getRotation()));
+        }
+        if (be.target) {
+            if (auto tt = be.target.getComponent<sp::Transform>())
+                be.target_location = tt->getPosition() + glm::vec2(be.target_offset.x, be.target_offset.y);
+        }
+
+        be.lifetime -= delta;
+        if (be.lifetime < 0)
+            entity.destroy();
+    }
+}
+
+void BeamWeaponSystem::render3D(sp::ecs::Entity e)
+{
+    auto be = e.getComponent<BeamEffect>();
+    auto transform = e.getComponent<sp::Transform>();
+    if (!be || !transform) return;
+
+    glm::vec3 startPoint(transform->getPosition().x, transform->getPosition().y, be->source_offset.z);
+    glm::vec3 endPoint(be->target_location.x, be->target_location.y, be->target_offset.z);
+    glm::vec3 eyeNormal = glm::normalize(glm::cross(camera_position - startPoint, endPoint - startPoint));
+
+    textureManager.getTexture(be->beam_texture)->bind();
+
+    ShaderRegistry::ScopedShader beamShader(ShaderRegistry::Shaders::Basic);
+
+    auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ transform->getPosition().x, transform->getPosition().y, 0.f });
+    model_matrix = glm::rotate(model_matrix, glm::radians(transform->getRotation()), glm::vec3{ 0.f, 0.f, 1.f });
+
+    glUniform4f(beamShader.get().uniform(ShaderRegistry::Uniforms::Color), be->lifetime, be->lifetime, be->lifetime, 1.f);
+    glUniformMatrix4fv(beamShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, false, glm::value_ptr(model_matrix));
+    
+    gl::ScopedVertexAttribArray positions(beamShader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(beamShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+
+    struct VertexAndTexCoords
+    {
+        glm::vec3 vertex;
+        glm::vec2 texcoords;
+    };
+
+    std::array<VertexAndTexCoords, 4> quad;
+    // Beam
+    {
+        glm::vec3 v0 = startPoint + eyeNormal * 4.0f;
+        glm::vec3 v1 = endPoint + eyeNormal * 4.0f;
+        glm::vec3 v2 = endPoint - eyeNormal * 4.0f;
+        glm::vec3 v3 = startPoint - eyeNormal * 4.0f;
+        quad[0].vertex = v0;
+        quad[0].texcoords = { 0.f, 0.f };
+        quad[1].vertex = v1;
+        quad[1].texcoords = { 0.f, 1.f };
+        quad[2].vertex = v2;
+        quad[2].texcoords = { 1.f, 1.f };
+        quad[3].vertex = v3;
+        quad[3].texcoords = { 1.f, 0.f };
+
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+        // Draw the beam
+        std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
+
+    }
+
+    // Fire ring
+    if (be->fire_ring)
+    {
+        glm::vec3 side = glm::cross(be->hit_normal, glm::vec3(0, 0, 1));
+        glm::vec3 up = glm::cross(side, be->hit_normal);
+
+        glm::vec3 v0(be->target_location.x, be->target_location.y, be->target_offset.z);
+
+        float ring_size = Tween<float>::easeOutCubic(be->lifetime, 1.0, 0.0, 10.0f, 80.0f);
+        auto v1 = v0 + side * ring_size + up * ring_size;
+        auto v2 = v0 - side * ring_size + up * ring_size;
+        auto v3 = v0 - side * ring_size - up * ring_size;
+        auto v4 = v0 + side * ring_size - up * ring_size;
+
+        quad[0].vertex = v1;
+        quad[0].texcoords = { 0.f, 0.f };
+        quad[1].vertex = v2;
+        quad[1].texcoords = { 1.f, 0.f };
+        quad[2].vertex = v3;
+        quad[2].texcoords = { 1.f, 1.f };
+        quad[3].vertex = v4;
+        quad[3].texcoords = { 0.f, 1.f };
+
+        textureManager.getTexture("texture/fire_ring.png")->bind();
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+        std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
     }
 }
