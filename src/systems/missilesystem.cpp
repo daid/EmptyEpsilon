@@ -11,6 +11,7 @@
 #include "multiplayer_server.h"
 #include "spaceObjects/mine.h"
 #include "spaceObjects/explosionEffect.h"
+#include "spaceObjects/electricExplosionEffect.h"
 #include "particleEffect.h"
 
 
@@ -123,11 +124,19 @@ void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
         DamageSystem::applyDamage(b, mc->damage_at_center, info);
     }
 
-    P<ExplosionEffect> e = new ExplosionEffect();
-    e->setSize(mc->blast_range);
-    e->setPosition(transform->getPosition());
-    e->setOnRadar(true);
-    e->setExplosionSound("sfx/nuke_explosion.wav");
+    if (mc->damage_type == DamageType::EMP) {
+        P<ElectricExplosionEffect> e = new ElectricExplosionEffect();
+        e->setSize(mc->blast_range);
+        e->setPosition(transform->getPosition());
+        e->setOnRadar(true);
+    } else {
+        P<ExplosionEffect> e = new ExplosionEffect();
+        e->setSize(mc->blast_range);
+        e->setPosition(transform->getPosition());
+        e->setOnRadar(true);
+        if (!mc->explosion_sfx.empty())
+            e->setExplosionSound(mc->explosion_sfx);
+    }
     a.destroy();
 }
 
@@ -209,6 +218,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.damage_at_center = 160.0f * category_modifier;
             mc.damage_at_edge = 30.0f * category_modifier;
             mc.blast_range = 1000.0f * category_modifier;
+            mc.explosion_sfx = "sfx/nuke_explosion.wav";
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.7f, 0.1f);
         }
         break;
