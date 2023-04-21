@@ -5204,14 +5204,14 @@ function cargoInventory(delta)
 				if p:hasPlayerAtPosition("Relay") then
 					if p.inventoryButton == nil then
 						local tbi = "inventory" .. p:getCallSign()
-						p:addCustomButton("Relay",tbi,"Inventory",cargoInventoryList[pidx])
+						p:addCustomButton("Relay",tbi,_("inventory-buttonRelay", "Inventory"),cargoInventoryList[pidx])
 						p.inventoryButton = true
 					end
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					if p.inventoryButton == nil then
 						local tbi = "inventoryOp" .. p:getCallSign()
-						p:addCustomButton("Operations",tbi,"Inventory",cargoInventoryList[pidx])
+						p:addCustomButton("Operations",tbi,_("inventory-buttonOperations", "Inventory"),cargoInventoryList[pidx])
 						p.inventoryButton = true
 					end
 				end
@@ -8177,11 +8177,11 @@ function healthCheck(delta)
 						p:setRepairCrewCount(1)
 						if p:hasPlayerAtPosition("Engineering") then
 							local repairCrewRecovery = "repairCrewRecovery"
-							p:addCustomMessage("Engineering",repairCrewRecovery,"Medical team has revived one of your repair crew")
+							p:addCustomMessage("Engineering",repairCrewRecovery,_("msgEngineer", "Medical team has revived one of your repair crew"))
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							local repairCrewRecoveryPlus = "repairCrewRecoveryPlus"
-							p:addCustomMessage("Engineering+",repairCrewRecoveryPlus,"Medical team has revived one of your repair crew")
+							p:addCustomMessage("Engineering+",repairCrewRecoveryPlus,_("msgEngineer+", "Medical team has revived one of your repair crew"))
 						end
 						resetPreviousSystemHealth(p)
 					end
@@ -8219,22 +8219,22 @@ function crewFate(p, fatalityChance)
 			p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 			if p:hasPlayerAtPosition("Engineering") then
 				local repairCrewFatality = "repairCrewFatality"
-				p:addCustomMessage("Engineering",repairCrewFatality,"One of your repair crew has perished")
+				p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
+				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 			end
 		else
 			if random(1,100) < 50 then
 				p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 				if p:hasPlayerAtPosition("Engineering") then
 					local repairCrewFatality = "repairCrewFatality"
-					p:addCustomMessage("Engineering",repairCrewFatality,"One of your repair crew has perished")
+					p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-					p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
+					p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 				end
 			else
 				local current_coolant = p:getMaxCoolant()
@@ -8245,11 +8245,11 @@ function crewFate(p, fatalityChance)
 				end
 				if p:hasPlayerAtPosition("Engineering") then
 					local coolantLoss = "coolantLoss"
-					p:addCustomMessage("Engineering",coolantLoss,"Damage has caused a loss of coolant")
+					p:addCustomMessage("Engineering",coolantLoss,_("coolant-msgEngineer", "Damage has caused a loss of coolant"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					local coolantLossPlus = "coolantLossPlus"
-					p:addCustomMessage("Engineering+",coolantLossPlus,"Damage has caused a loss of coolant")
+					p:addCustomMessage("Engineering+",coolantLossPlus,_("coolant-msgEngineer+", "Damage has caused a loss of coolant"))
 				end
 			end
 		end
@@ -8279,12 +8279,12 @@ function coolantNebulae(delta)
 				else
 					if p:hasPlayerAtPosition("Engineering") then
 						p.get_coolant_button = "get_coolant_button"
-						p:addCustomButton("Engineering",p.get_coolant_button,"Get Coolant",get_coolant_function[pidx])
+						p:addCustomButton("Engineering",p.get_coolant_button,_("coolant-buttonEngineer", "Get Coolant"),get_coolant_function[pidx])
 						p.get_coolant = true
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.get_coolant_button_plus = "get_coolant_button_plus"
-						p:addCustomButton("Engineering+",p.get_coolant_button_plus,"Get Coolant",get_coolant_function[pidx])
+						p:addCustomButton("Engineering+",p.get_coolant_button_plus,_("coolant-buttonEngineer+", "Get Coolant"),get_coolant_function[pidx])
 						p.get_coolant = true
 					end
 				end
@@ -8328,13 +8328,13 @@ function updateCoolantGivenPlayer(p, delta)
 		end
 		p.deploy_coolant_timer = p.deploy_coolant_timer - delta
 		if p.deploy_coolant_timer < 0 then
-			gather_coolant_status = "Gathering Coolant"
+			gather_coolant_status = _("coolant-tabEngineer", "Gathering Coolant")
 			p:setMaxCoolant(p:getMaxCoolant() + coolant_gain)
 		else
-			gather_coolant_status = string.format("Deploying Collectors %i",math.ceil(p.deploy_coolant_timer - delta))
+			gather_coolant_status = string.format(_("coolant-tabEngineer", "Deploying Collectors %i"),math.ceil(p.deploy_coolant_timer - delta))
 		end
 	else
-		gather_coolant_status = string.format("Configuring Collectors %i",math.ceil(p.configure_coolant_timer - delta))
+		gather_coolant_status = string.format(_("coolant-tabEngineer", "Configuring Collectors %i"),math.ceil(p.configure_coolant_timer - delta))
 	end
 	if p:hasPlayerAtPosition("Engineering") then
 		p.gather_coolant = "gather_coolant"
@@ -9156,7 +9156,7 @@ function checkOrbitingArtifactEvents(delta)
 					if not artifact_sensor_data_timer_button and not artifactSensorDataGathered then
 						artifact_sensor_data_timer_button = true
 						sensor_data_timer_button = "sensor_data_timer_button"
-						p:addCustomButton("Relay",sensor_data_timer_button,"Polly Scan Time",function()
+						p:addCustomButton("Relay",sensor_data_timer_button,_("-buttonRelay", "Polly Scan Time"),function()
 							for pidx=1,8 do
 								p = getPlayerShip(pidx)
 								if p.astronomer then
@@ -9922,7 +9922,7 @@ function checkVirusEvents(delta)
 			if p.virus_cure then
 				if p.virus_cure_button == "empty" then
 					p.virus_cure_button = "virus_cure_button" .. p:getCallSign()
-					p:addCustomButton("Relay",p.virus_cure_button,"Virus status",virus_status_functions[pidx])
+					p:addCustomButton("Relay",p.virus_cure_button,_("-buttonRelay", "Virus status"),virus_status_functions[pidx])
 				end
 				for i=1,#belt1Stations do
 					local current_belt1_station = belt1Stations[i]

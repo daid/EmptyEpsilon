@@ -3601,9 +3601,9 @@ function handleUndockedState()
 					playerCarrier:addCustomMessage("Engineering+",tractorIntegrationMsgPlus,string.format("The tractor equipment has been transported aboard %s. You need to make the final connections for full installation",playerCarrier:getCallSign()))
 				end
 				tractorIntegrationButton = "tractorIntegrationButton"
-				playerCarrier:addCustomButton("Engineering",tractorIntegrationButton,"Connect Tractor",connectTractor)
+				playerCarrier:addCustomButton("Engineering",tractorIntegrationButton,_("-buttonEngineer", "Connect Tractor"),connectTractor)
 				tractorIntegrationButtonPlus = "tractorIntegrationButtonPlus"
-				playerCarrier:addCustomButton("Engineering+",tractorIntegrationButtonPlus,"Connect Tractor",connectTractor)
+				playerCarrier:addCustomButton("Engineering+",tractorIntegrationButtonPlus,_("-buttonEngineer+", "Connect Tractor"),connectTractor)
 				setCommsMessage("Tractor equipment transferred to engine room")
 			end)
 		end
@@ -4404,9 +4404,9 @@ function cargoTransfer(delta)
 	if playerCarrier.cargo > 0 and playerBlade:isDocked(playerCarrier) and playerBlade.cargo < playerBlade.maxCargo then
 		if bladeTransferButton == nil then
 			bladeTransferButton = "bladeTransferButton"
-			playerBlade:addCustomButton("Relay", bladeTransferButton, "Transfer Cargo", bladeCargoTransfer)
+			playerBlade:addCustomButton("Relay", bladeTransferButton, _("-buttonRelay", "Transfer Cargo"), bladeCargoTransfer)
 			bladeTransferButtonOp = "bladeTransferButtonOp"
-			playerBlade:addCustomButton("Operations", bladeTransferButtonOp, "Transfer Cargo", bladeCargoTransfer)
+			playerBlade:addCustomButton("Operations", bladeTransferButtonOp, _("-buttonOperations", "Transfer Cargo"), bladeCargoTransfer)
 		end
 	else
 		if bladeTransferButton ~= nil then
@@ -4419,9 +4419,9 @@ function cargoTransfer(delta)
 	if playerCarrier.cargo > 0 and playerPoint:isDocked(playerCarrier) and playerPoint.cargo < playerPoint.maxCargo then
 		if pointTransferButton == nil then
 			pointTransferButton = "pointTransferButton"
-			playerPoint:addCustomButton("Relay", pointTransferButton, "Transfer Cargo", pointCargoTransfer)
+			playerPoint:addCustomButton("Relay", pointTransferButton, _("-buttonRelay", "Transfer Cargo"), pointCargoTransfer)
 			pointTransferButtonOp = "pointTransferButtonOp"
-			playerPoint:addCustomButton("Operations", pointTransferButtonOp, "Transfer Cargo", pointCargoTransfer)
+			playerPoint:addCustomButton("Operations", pointTransferButtonOp, _("-buttonOperations", "Transfer Cargo"), pointCargoTransfer)
 		end
 	else
 		if pointTransferButton ~= nil then
@@ -4986,9 +4986,9 @@ function installAutoHullRepair()
 		playerWithAutoHullRepair:addCustomMessage("Engineering+",hullUseMsgPlus,string.format("Hull repair prototype installed. Limited to %i uses",repairHullUses))
 	end
 	repairHullButton = string.format("repairHullButton%i",repairHullUses)
-	playerWithAutoHullRepair:addCustomButton("Engineering",repairHullButton,string.format("Repair Hull (%i)",repairHullUses),repairHull)
+	playerWithAutoHullRepair:addCustomButton("Engineering",repairHullButton,string.format(_("-buttonEngineer", "Repair Hull (%i)"),repairHullUses),repairHull)
 	repairHullButtonPlus = string.format("repairHullButtonPlus%i",repairHullUses)
-	playerWithAutoHullRepair:addCustomButton("Engineering+",repairHullButtonPlus,string.format("Repair Hull (%i)",repairHullUses),repairHull)
+	playerWithAutoHullRepair:addCustomButton("Engineering+",repairHullButtonPlus,string.format(_("-buttonEngineer+", "Repair Hull (%i)"),repairHullUses),repairHull)
 end
 function repairHull()
 	if playerWithAutoHullRepair:getHull() < playerWithAutoHullRepair:getHullMax() then
@@ -5000,9 +5000,9 @@ function repairHull()
 		repairHullButtonPlus = nil
 		if repairHullUses > 0 then
 			repairHullButton = string.format("repairHullButton%i",repairHullUses)
-			playerWithAutoHullRepair:addCustomButton("Engineering",repairHullButton,string.format("Repair Hull (%i)",repairHullUses),repairHull)
+			playerWithAutoHullRepair:addCustomButton("Engineering",repairHullButton,string.format(_("-buttonEngineer", "Repair Hull (%i)"),repairHullUses),repairHull)
 			repairHullButtonPlus = string.format("repairHullButtonPlus%i",repairHullUses)
-			playerWithAutoHullRepair:addCustomButton("Engineering+",repairHullButtonPlus,string.format("Repair Hull (%i)",repairHullUses),repairHull)
+			playerWithAutoHullRepair:addCustomButton("Engineering+",repairHullButtonPlus,string.format(_("-buttonEngineer+", "Repair Hull (%i)"),repairHullUses),repairHull)
 		end
 	end
 end
@@ -5349,9 +5349,9 @@ end
 function enableTractorOn()
 	if tractorOnButton == nil then
 		tractorOnButton = "tractorOnButton"
-		playerCarrier:addCustomButton("Weapons",tractorOnButton,"Tractor On",simulateTractorOn)
+		playerCarrier:addCustomButton("Weapons",tractorOnButton,_("-buttonWeapons", "Tractor On"),simulateTractorOn)
 		tractorOnButtonTac = "tractorOnButtonTac"
-		playerCarrier:addCustomButton("Tactical",tractorOnButtonTac,"Tractor On",simulateTractorOn)
+		playerCarrier:addCustomButton("Tactical",tractorOnButtonTac,_("-buttonTactical", "Tractor On"),simulateTractorOn)
 	end
 end
 function disableTractorOn()
@@ -5370,9 +5370,9 @@ end
 function enableTractorOff()
 	if tractorOffButton == nil then
 		tractorOffButton = "tractorOffButton"
-		playerCarrier:addCustomButton("Weapons",tractorOffButton,"Tractor Off",simulateTractorOff)
+		playerCarrier:addCustomButton("Weapons",tractorOffButton,_("-buttonWeapons", "Tractor Off"),simulateTractorOff)
 		tractorOffButtonTac = "tractorOffButtonTac"
-		playerCarrier:addCustomButton("Tactical",tractorOffButtonTac,"Tractor Off",simulateTractorOff)
+		playerCarrier:addCustomButton("Tactical",tractorOffButtonTac,_("-buttonTactical", "Tractor Off"),simulateTractorOff)
 	end
 end
 function disableTractorOff()
@@ -5441,9 +5441,9 @@ end
 function doNotPush(delta)
 	alienHack = false
 	doNotPushButton = "doNotPushButton"
-	playerCarrier:addCustomButton("Weapons",doNotPushButton,"Do Not Push",pushed)
+	playerCarrier:addCustomButton("Weapons",doNotPushButton,_("-buttonWeapons", "Do Not Push"),pushed)
 	doNotPushButtonTac = "doNotPushButtonTac"
-	playerCarrier:addCustomButton("Tactical",doNotPushButtonTac,"Do Not Push",pushed)
+	playerCarrier:addCustomButton("Tactical",doNotPushButtonTac,_("-buttonTactical", "Do Not Push"),pushed)
 	if playerCarrier:hasPlayerAtPosition("Science") then
 		alienHackMsg = "alienHackMsg"
 		playerCarrier:addCustomMessage("Science",alienHackMsg,"Internal security sensors indicate ship systems hacked by unknown source. For a moment I thought I heard evil laughter")
@@ -5874,11 +5874,11 @@ function crewFate(p, fatalityChance)
 		p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 		if p:hasPlayerAtPosition("Engineering") then
 			repairCrewFatality = "repairCrewFatality"
-			p:addCustomMessage("Engineering",repairCrewFatality,"One of your repair crew has perished")
+			p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 		end
 		if p:hasPlayerAtPosition("Engineering+") then
 			repairCrewFatalityPlus = "repairCrewFatalityPlus"
-			p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
+			p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 		end
 	end
 end

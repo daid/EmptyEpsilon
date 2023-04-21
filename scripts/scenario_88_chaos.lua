@@ -8699,18 +8699,18 @@ function neutralDefendComms(comms_data)
 end
 
 function playerShipCargoInventory(p)
-	p:addToShipLog(string.format("%s Current cargo:",p:getCallSign()),"Yellow")
+	p:addToShipLog(string.format(_("inventory-shipLog", "%s Current cargo:"),p:getCallSign()),"Yellow")
 	local goodCount = 0
 	if p.goods ~= nil then
 		for good, goodQuantity in pairs(p.goods) do
 			goodCount = goodCount + 1
-			p:addToShipLog(string.format("     %s: %i",good,goodQuantity),"Yellow")
+			p:addToShipLog(string.format(_("inventory-shipLog", "     %s: %i"),good,goodQuantity),"Yellow")
 		end
 	end
 	if goodCount < 1 then
-		p:addToShipLog("     Empty","Yellow")
+		p:addToShipLog(_("inventory-shipLog", "     Empty"),"Yellow")
 	end
-	p:addToShipLog(string.format("Available space: %i",p.cargo),"Yellow")
+	p:addToShipLog(string.format(_("inventory-shipLog", "Available space: %i"),p.cargo),"Yellow")
 end
 function resetPreviousSystemHealth(p)
 	string.format("")	--may need global context
@@ -9219,14 +9219,14 @@ function update(delta)
 					if p:hasPlayerAtPosition("Relay") then
 						if p.inventoryButton == nil then
 							local tbi = "inventory" .. player_name
-							p:addCustomButton("Relay",tbi,"Inventory",function () playerShipCargoInventory(p) end)
+							p:addCustomButton("Relay",tbi,_("inventory-buttonRelay", "Inventory"),function () playerShipCargoInventory(p) end)
 							p.inventoryButton = true
 						end
 					end
 					if p:hasPlayerAtPosition("Operations") then
 						if p.inventoryButton == nil then
 							local tbi = "inventoryOp" .. player_name
-							p:addCustomButton("Operations",tbi,"Inventory", function () playerShipCargoInventory(p) end)
+							p:addCustomButton("Operations",tbi,_("inventory-buttonOperations", "Inventory"), function () playerShipCargoInventory(p) end)
 							p.inventoryButton = true
 						end
 					end
@@ -9297,11 +9297,11 @@ function update(delta)
 								p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 								if p:hasPlayerAtPosition("Engineering") then
 									local repairCrewFatality = "repairCrewFatality"
-									p:addCustomMessage("Engineering",repairCrewFatality,"One of your repair crew has perished")
+									p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 								end
 								if p:hasPlayerAtPosition("Engineering+") then
 									local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-									p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
+									p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 								end
 							else
 								local consequence = 0
@@ -9336,11 +9336,11 @@ function update(delta)
 									p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 									if p:hasPlayerAtPosition("Engineering") then
 										local repairCrewFatality = "repairCrewFatality"
-										p:addCustomMessage("Engineering",repairCrewFatality,"One of your repair crew has perished")
+										p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 									end
 									if p:hasPlayerAtPosition("Engineering+") then
 										local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-										p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
+										p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 									end
 								elseif consequence == 2 then
 									local current_coolant = p:getMaxCoolant()
@@ -9512,7 +9512,7 @@ function update(delta)
 			else	--add damage report button
 				if p:hasPlayerAtPosition("Engineering") then
 					p.damage_report = "damage_report"
-					p:addCustomButton("Engineering",p.damage_report,"Damage Report",function()
+					p:addCustomButton("Engineering",p.damage_report,_("-buttonEngineer", "Damage Report"),function()
 						local dmg_msg = "In addition to the primary systems constantly monitored in engineering, the following secondary systems have also been damaged requiring docking repair facilities:"
 						if not p:getCanLaunchProbe() then
 							dmg_msg = dmg_msg .. "\nProbe launch system"
@@ -9548,7 +9548,7 @@ function update(delta)
 				end	--engineering damage report button
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.damage_report_plus = "damage_report_plus"
-					p:addCustomButton("Engineering",p.damage_report_plus,"Damage Report",function()
+					p:addCustomButton("Engineering",p.damage_report_plus,_("-buttonEngineer", "Damage Report"),function()
 						local dmg_msg = "In addition to the primary systems constantly monitored in engineering, the following secondary systems have also been damaged requiring docking repair facilities:"
 						if not p:getCanLaunchProbe() then
 							dmg_msg = dmg_msg .. "\nProbe launch system"

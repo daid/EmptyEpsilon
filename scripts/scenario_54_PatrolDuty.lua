@@ -6765,7 +6765,7 @@ function afterPatrol(delta)
 					defendUtopiaMsgButton = "defendUtopiaMsgButton"
 					closestUtopiaPlayer:addCustomButton("Relay",defendUtopiaMsgButton,_("audioUPlanitiaDefend-buttonRelay", "|> UTPLNT441"),playDefendUtopiaMsg)
 					defendUtopiaMsgButtonOps = "defendUtopiaMsgButtonOps"
-					closestUtopiaPlayer:addCustomButton(_("Operations"),defendUtopiaMsgButtonOps,_("audioUPlanitiaDefend-buttonOperations", "|> UTPLNT441"),playDefendUtopiaMsg)
+					closestUtopiaPlayer:addCustomButton("Operations",defendUtopiaMsgButtonOps,_("audioUPlanitiaDefend-buttonOperations", "|> UTPLNT441"),playDefendUtopiaMsg)
 				end
 			end
 			stationUtopiaPlanitia:sendCommsMessage(closestUtopiaPlayer, _("audioUPlanitiaDefend-incCall", "Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia"))

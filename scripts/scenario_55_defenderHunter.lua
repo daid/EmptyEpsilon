@@ -8541,11 +8541,11 @@ function repairBounty(delta)
 			p:addToShipLog(_("HMSBounty-shipLog", "[HMS Bounty] Please ask your engineer to transport a spare repair technician to help with repairs"),"#ff4500")
 			if p:hasPlayerAtPosition("Engineering") then
 				transportRepairTechnicianButton = "transportRepairTechnicianButton"
-				p:addCustomButton("Engineering",transportRepairTechnicianButton,_("buttonEngineer", "Transport technician"),transportRepairTechnician)
+				p:addCustomButton("Engineering",transportRepairTechnicianButton,_("crewTransfer-buttonEngineer", "Transport technician"),transportRepairTechnician)
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				transportRepairTechnicianButtonPlus = "transportRepairTechnicianButtonPlus"
-				p:addCustomButton("Engineering+",transportRepairTechnicianButtonPlus,_("buttonEngineer+", "Transport technician"),transportRepairTechnician)
+				p:addCustomButton("Engineering+",transportRepairTechnicianButtonPlus,_("crewTransfer-buttonEngineer+", "Transport technician"),transportRepairTechnician)
 			end
 			p.transportButton = true
 			plot4 = nil
@@ -10252,11 +10252,11 @@ function crewFate(p, fatalityChance)
 			p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 			if p:hasPlayerAtPosition("Engineering") then
 				local repairCrewFatality = "repairCrewFatality"
-				p:addCustomMessage("Engineering",repairCrewFatality,_("msgEngineer", "One of your repair crew has perished"))
+				p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("msgEngineer+", "One of your repair crew has perished"))
+				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 			end
 		elseif consequence == 2 then
 			local current_coolant = p:getMaxCoolant()
@@ -10358,14 +10358,14 @@ function autoCoolant(delta)
 				if p:hasPlayerAtPosition("Engineering") then
 					if p.autoCoolButton == nil then
 						tbi = "enableAutoCool" .. p:getCallSign()
-						p:addCustomButton("Engineering",tbi,_("buttonEngineer", "Auto cool"),function()
+						p:addCustomButton("Engineering",tbi,_("coolant-buttonEngineer", "Auto cool"),function()
 							string.format("")
 							p:setAutoCoolant(true)
 							p:commandSetAutoRepair(true)
 							p.autoCoolant = true
 						end)
 						tbi = "disableAutoCool" .. p:getCallSign()
-						p:addCustomButton("Engineering",tbi,_("buttonEngineer", "Manual cool"),function()
+						p:addCustomButton("Engineering",tbi,_("coolant-buttonEngineer", "Manual cool"),function()
 							string.format("")
 							p:setAutoCoolant(false)
 							p:commandSetAutoRepair(false)
@@ -10377,14 +10377,14 @@ function autoCoolant(delta)
 				if p:hasPlayerAtPosition("Engineering+") then
 					if p.autoCoolButton == nil then
 						tbi = "enableAutoCoolPlus" .. p:getCallSign()
-						p:addCustomButton("Engineering+",tbi,_("buttonEngineer+", "Auto cool"),function()
+						p:addCustomButton("Engineering+",tbi,_("coolant-buttonEngineer+", "Auto cool"),function()
 							string.format("")
 							p:setAutoCoolant(true)
 							p:commandSetAutoRepair(true)
 							p.autoCoolant = true
 						end)
 						tbi = "disableAutoCoolPlus" .. p:getCallSign()
-						p:addCustomButton("Engineering+",tbi,_("buttonEngineer+", "Manual cool"),function()
+						p:addCustomButton("Engineering+",tbi,_("coolant-buttonEngineer+", "Manual cool"),function()
 							string.format("")
 							p:setAutoCoolant(false)
 							p:commandSetAutoRepair(false)

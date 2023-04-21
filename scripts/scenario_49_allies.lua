@@ -6545,11 +6545,11 @@ function crewFate(p, fatalityChance)
 		p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 		if p:hasPlayerAtPosition("Engineering") then
 			local repairCrewFatality = "repairCrewFatality"
-			p:addCustomMessage("Engineering",repairCrewFatality,_("msgEngineer", "One of your repair crew has perished"))
+			p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 		end
 		if p:hasPlayerAtPosition("Engineering+") then
 			local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-			p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("msgEngineer+", "One of your repair crew has perished"))
+			p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 		end
 	end
 end--set up players with name, goods, cargo space, reputation and either a warp drive or a jump drive if applicable

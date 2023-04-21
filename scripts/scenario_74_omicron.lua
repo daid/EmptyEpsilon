@@ -6866,11 +6866,11 @@ function crewFate(p, fatalityChance)
 			p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 			if p:hasPlayerAtPosition("Engineering") then
 				local repairCrewFatality = "repairCrewFatality"
-				p:addCustomMessage("Engineering",repairCrewFatality,_("msgEngineer","One of your repair crew has perished"))
+				p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer","One of your repair crew has perished"))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("msgEngineer+","One of your repair crew has perished"))
+				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+","One of your repair crew has perished"))
 			end
 		else
 			local consequence = 0
@@ -6901,11 +6901,11 @@ function crewFate(p, fatalityChance)
 				p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 				if p:hasPlayerAtPosition("Engineering") then
 					local repairCrewFatality = "repairCrewFatality"
-					p:addCustomMessage("Engineering",repairCrewFatality,_("msgEngineer","One of your repair crew has perished"))
+					p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer","One of your repair crew has perished"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-					p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("msgEngineer+","One of your repair crew has perished"))
+					p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+","One of your repair crew has perished"))
 				end
 			elseif consequence == 2 then
 				local current_coolant = p:getMaxCoolant()
@@ -6993,14 +6993,14 @@ function cargoInventory(delta)
 				if p:hasPlayerAtPosition("Relay") then
 					if p.inventoryButton == nil then
 						local tbi = "inventory" .. p:getCallSign()
-						p:addCustomButton("Relay",tbi,_("tabRelay","Inventory"),function() playerShipCargoInventory(p) end,2)
+						p:addCustomButton("Relay",tbi,_("inventory-buttonRelay", "Inventory"),function() playerShipCargoInventory(p) end,2)
 						p.inventoryButton = true
 					end
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					if p.inventoryButton == nil then
 						local tbi = "inventoryOp" .. p:getCallSign()
-						p:addCustomButton("Operations",tbi,_("tabRelay","Inventory"),function() playerShipCargoInventory(p) end,2)
+						p:addCustomButton("Operations",tbi,_("inventory-buttonOperations", "Inventory"),function() playerShipCargoInventory(p) end,2)
 						p.inventoryButton = true
 					end
 				end
@@ -9496,12 +9496,12 @@ function checkFreighter()
 							for pidx, p in ipairs(getActivePlayerShips()) do
 								critical_transport:sendCommsMessage(p,string.format(_("incCall","To: %s\nFrom: %s\n\n%s,\n\nOur engines just conked out and the only person we have that can fix them is too sick to work on them. Can you send over one of you repair crew to help us, please?"),p:getCallSign(),critical_transport:getCallSign(),p:getCallSign()))
 								p.send_repair_crew_to_freighter_eng = "send_repair_crew_to_freighter_eng"
-								p:addCustomButton("Engineering",p.send_repair_crew_to_freighter_eng,_("buttonEngineer","Send Repair Crew"),function()
+								p:addCustomButton("Engineering",p.send_repair_crew_to_freighter_eng,_("crewTransfer-buttonEngineer", "Send Repair Crew"),function()
 									string.format("")
 									sendRepairCrewToFreighter(p)
 								end)
 								p.send_repair_crew_to_freighter_plus = "send_repair_crew_to_freighter_plus"
-								p:addCustomButton("Engineering+",p.send_repair_crew_to_freighter_plus,_("buttonEngineer+","Send Repair Crew"),function()
+								p:addCustomButton("Engineering+",p.send_repair_crew_to_freighter_plus,_("crewTransfer-buttonEngineer+", "Send Repair Crew"),function()
 									string.format("")
 									sendRepairCrewToFreighter(p)
 								end)
@@ -9615,29 +9615,29 @@ function sendRepairCrewToFreighter(p)
 							p2:removeCustom(p2.send_repair_crew_to_freighter_eng)
 							p2:removeCustom(p2.send_repair_crew_to_freighter_plus)
 							p2.get_repair_crew_from_freighter_eng = "get_repair_crew_from_freighter_eng"
-							p2:addCustomButton("Engineering",p2.get_repair_crew_from_freighter_eng,_("buttonEngineer","Get Repair Crew"),function()
+							p2:addCustomButton("Engineering",p2.get_repair_crew_from_freighter_eng,_("crewTransfer-buttonEngineer", "Get Repair Crew"),function()
 								string.format("")
 								getRepairCrewFromFreighter(p2)
 							end)
 							p2.get_repair_crew_from_freighter_plus = "get_repair_crew_from_freighter_plus"
-							p2:addCustomButton("Engineering+",p2.get_repair_crew_from_freighter_plus,_("buttonEngineer+","Get Repair Crew"),function()
+							p2:addCustomButton("Engineering+",p2.get_repair_crew_from_freighter_plus,_("crewTransfer-buttonEngineer+", "Get Repair Crew"),function()
 								string.format("")
 								getRepairCrewFromFreighter(p2)
 							end)
 						end
 					else
 						p.not_enough_repair_crew_eng = "not_enough_repair_crew_eng"
-						p:addCustomMessage("Engineering",p.not_enough_repair_crew_eng,string.format(_("msgEngineer","We don't have any repair crew to send over to %s. We might get one from %s"),critical_transport:getCallSign(),station_regional_hq:getCallSign()))
+						p:addCustomMessage("Engineering",p.not_enough_repair_crew_eng,string.format(_("crewTransfer-msgEngineer", "We don't have any repair crew to send over to %s. We might get one from %s"),critical_transport:getCallSign(),station_regional_hq:getCallSign()))
 						p.not_enough_repair_crew_plus = "not_enough_repair_crew_plus"
-						p:addCustomMessage("Engineering+",p.not_enough_repair_crew_plus,string.format(_("msgEngineer+","We don't have any repair crew to send over to %s. We might get one from %s"),critical_transport:getCallSign(),station_regional_hq:getCallSign()))
+						p:addCustomMessage("Engineering+",p.not_enough_repair_crew_plus,string.format(_("crewTransfer-msgEngineer+","We don't have any repair crew to send over to %s. We might get one from %s"),critical_transport:getCallSign(),station_regional_hq:getCallSign()))
 					end
 				end
 			end
 		else
 			p.too_far_from_transport_eng = "too_far_from_transport_eng"
-			p:addCustomMessage("Engineering",p.too_far_from_transport_eng,string.format(_("msgEngineer","%s is too far from %s to transport a repair crew member. Functional transport may occur at or under 3 units"),p:getCallSign(),critical_transport:getCallSign()))
+			p:addCustomMessage("Engineering",p.too_far_from_transport_eng,string.format(_("crewTransfer-msgEngineer","%s is too far from %s to transport a repair crew member. Functional transport may occur at or under 3 units"),p:getCallSign(),critical_transport:getCallSign()))
 			p.too_far_from_transport_plus = "too_far_from_transport_plus"
-			p:addCustomMessage("Engineering+",p.too_far_from_transport_plus,string.format(_("msgEngineer+","%s is too far from %s to transport a repair crew member. Functional transport may occur at or under 3 units"),p:getCallSign(),critical_transport:getCallSign()))
+			p:addCustomMessage("Engineering+",p.too_far_from_transport_plus,string.format(_("crewTransfer-msgEngineer+","%s is too far from %s to transport a repair crew member. Functional transport may occur at or under 3 units"),p:getCallSign(),critical_transport:getCallSign()))
 		end
 	end
 end

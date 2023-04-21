@@ -3859,11 +3859,11 @@ function crewFate(p, fatalityChance)
 		p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 		if p:hasPlayerAtPosition("Engineering") then
 			repairCrewFatality = "repairCrewFatality"
-			p:addCustomMessage("Engineering",repairCrewFatality,_("msgEngineer", "One of your repair crew has perished"))
+			p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 		end
 		if p:hasPlayerAtPosition("Engineering+") then
 			repairCrewFatalityPlus = "repairCrewFatalityPlus"
-			p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("msgEngineer+", "One of your repair crew has perished"))
+			p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 		end
 	end
 end

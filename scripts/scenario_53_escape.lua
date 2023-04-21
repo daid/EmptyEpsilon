@@ -4883,11 +4883,11 @@ function hugRepulse(delta)
 	if distance(playerFighter,junkRepulse) < 500 then
 		if playerFighter:hasPlayerAtPosition("Engineering") then
 			repulseTransferButton = "repulseTransferButton"
-			playerFighter:addCustomButton("Engineering",repulseTransferButton,_("transfer-buttonEngineer", "Transfer to Repulse"),repulseTransfer)
+			playerFighter:addCustomButton("Engineering",repulseTransferButton,_("crewTransfer-buttonEngineer", "Transfer to Repulse"),repulseTransfer)
 		end
 		if playerFighter:hasPlayerAtPosition("Engineering+") then
 			repulseTransferButtonEPlus = "repulseTransferButtonEPlus"
-			playerFighter:addCustomButton("Engineering+",repulseTransferButtonEPlus,_("transfer-buttonEngineer+", "Transfer to Repulse"),repulseTransfer)
+			playerFighter:addCustomButton("Engineering+",repulseTransferButtonEPlus,_("crewTransfer-buttonEngineer+", "Transfer to Repulse"),repulseTransfer)
 		end
 		if repulseTransferButtonEPlus ~= nil or repulseTransferButton ~= nil then
 			plot1 = nil
@@ -4963,13 +4963,13 @@ function augmentRepairCrew(delta)
 			if playerRepulse:hasPlayerAtPosition("Weapons") then
 				if retrieveRepairCrewButton == nil then
 					retrieveRepairCrewButton = "retrieveRepairCrewButton"
-					playerRepulse:addCustomButton("Weapons",retrieveRepairCrewButton,_("crewImport-buttonWeapons", "Return Transport"),returnRepairCrew)
+					playerRepulse:addCustomButton("Weapons",retrieveRepairCrewButton,_("crewTransfer-buttonWeapons", "Return Transport"),returnRepairCrew)
 				end
 			end
 			if playerRepulse:hasPlayerAtPosition("Tactical") then
 				if retrieveRepairCrewButtonTac == nil then
 					retrieveRepairCrewButtonTac = "retrieveRepairCrewButtonTac"
-					playerRepulse:addCustomButton("Tactical",retrieveRepairCrewButtonTac,_("crewImport-buttonTactical", "Return Transport"),returnRepairCrew)
+					playerRepulse:addCustomButton("Tactical",retrieveRepairCrewButtonTac,_("crewTransfer-buttonTactical", "Return Transport"),returnRepairCrew)
 				end
 			end
 			plot1 = beamDamageReport

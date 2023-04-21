@@ -2030,43 +2030,43 @@ function setPlayer(pobj,playerIndex)
 		if pobj.droneButton == nil then
 			pobj.droneButton = true
 			pobj.dronePool = uniform_drone_carrying_capacity
-			pobj:addCustomButton("Weapons",string.format("%sdeploy5weapons",pName),"5 Drones",function()
+			pobj:addCustomButton("Weapons",string.format("%sdeploy5weapons",pName),_("-buttonWeapons", "5 Drones"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.deploy_drone(playerIndex,5)
 			end)
-			pobj:addCustomButton("Tactical",string.format("%sdeploy5tactical",pName),"5 Drones",function()
+			pobj:addCustomButton("Tactical",string.format("%sdeploy5tactical",pName),_("-buttonTactical", "5 Drones"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.deploy_drone(playerIndex,5)
 			end)
-			pobj:addCustomButton("Weapons",string.format("%sdeploy10weapons",pName),"10 Drones",function()
+			pobj:addCustomButton("Weapons",string.format("%sdeploy10weapons",pName),_("-buttonWeapons", "10 Drones"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.deploy_drone(playerIndex,10)
 			end)
-			pobj:addCustomButton("Tactical",string.format("%sdeploy10tactical",pName),"10 Drones",function()
+			pobj:addCustomButton("Tactical",string.format("%sdeploy10tactical",pName),_("-buttonTactical", "10 Drones"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.deploy_drone(playerIndex,10)
 			end)
-			pobj:addCustomButton("Weapons",string.format("%scountWeapons",pName),"Count Drones",function()
+			pobj:addCustomButton("Weapons",string.format("%scountWeapons",pName),_("-buttonWeapons", "Count Drones"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.count_drones(playerIndex)
 			end)
-			pobj:addCustomButton("Tactical",string.format("%scountTactical",pName),"Count Drones",function()
+			pobj:addCustomButton("Tactical",string.format("%scountTactical",pName),_("-buttonTactical", "Count Drones"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.count_drones(playerIndex)
 			end)
-			pobj:addCustomButton("Engineering",string.format("%shullEngineering",pName),"Drone Hulls",function()
+			pobj:addCustomButton("Engineering",string.format("%shullEngineering",pName),_("-buttonEngineer", "Drone Hulls"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.drone_hull_status(playerIndex)
 			end)
-			pobj:addCustomButton("Engineering+",string.format("%shullEngineeringPlus",pName),"Drone Hulls",function()
+			pobj:addCustomButton("Engineering+",string.format("%shullEngineeringPlus",pName),_("-buttonEngineer+", "Drone Hulls"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.drone_hull_status(playerIndex)
 			end)
-			pobj:addCustomButton("Helms",string.format("%slocationHelm",pName),"Drone Locations",function()
+			pobj:addCustomButton("Helms",string.format("%slocationHelm",pName),_("-buttonHelms", "Drone Locations"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.drone_locations(playerIndex)
 			end)
-			pobj:addCustomButton("Tactical",string.format("%slocationTactical",pName),"Drone Locations",function()
+			pobj:addCustomButton("Tactical",string.format("%slocationTactical",pName),_("-buttonTactical", "Drone Locations"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.drone_locations(playerIndex)
 			end)
@@ -2303,11 +2303,11 @@ function crewFate(p, fatalityChance)
 		p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 		if p:hasPlayerAtPosition("Engineering") then
 			repairCrewFatality = "repairCrewFatality"
-			p:addCustomMessage("Engineering",repairCrewFatality,"One of your repair crew has perished")
+			p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 		end
 		if p:hasPlayerAtPosition("Engineering+") then
 			repairCrewFatalityPlus = "repairCrewFatalityPlus"
-			p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
+			p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 		end
 	end
 end
@@ -7256,9 +7256,9 @@ end
 function setP1FlagButton()
 	if p1FlagButton == nil and not p1FlagDrop then
 		p1FlagButton = "p1FlagButton"
-		p1:addCustomButton("Weapons", p1FlagButton, "Drop flag", p1DropFlag)
+		p1:addCustomButton("Weapons", p1FlagButton, _("-buttonWeapons", "Drop flag"), p1DropFlag)
 		p1FlagButtonT = "p1FlagButtonT"
-		p1:addCustomButton("Tactical", p1FlagButtonT, "Drop flag", p1DropFlag)
+		p1:addCustomButton("Tactical", p1FlagButtonT, _("-buttonTactical", "Drop flag"), p1DropFlag)
 	end
 end
 function removeP1FlagButton()
@@ -7272,9 +7272,9 @@ end
 function setP2FlagButton()
 	if p2FlagButton == nil and not p2FlagDrop then
 		p2FlagButton = "p2FlagButton"
-		p2:addCustomButton("Weapons", p2FlagButton, "Drop flag", p2DropFlag)
+		p2:addCustomButton("Weapons", p2FlagButton, _("-buttonWeapons", "Drop flag"), p2DropFlag)
 		p2FlagButtonT = "p2FlagButtonT"
-		p2:addCustomButton("Tactical", p2FlagButtonT, "Drop flag", p2DropFlag)
+		p2:addCustomButton("Tactical", p2FlagButtonT, _("-buttonTactical", "Drop flag"), p2DropFlag)
 	end
 end
 function removeP2FlagButton()
@@ -7467,10 +7467,10 @@ function setDecoyButton(p,player_index,decoy_number)
 	local player_name = p:getCallSign()
 	local decoy_button_label = string.format("%s%iDecoyButtonWeapons",player_name,decoy_number)
 	if p.decoy_button[decoy_button_label] == nil and p.decoy_drop[decoy_number] == nil then
-		p:addCustomButton("Weapons",decoy_button_label,string.format("Drop Decoy %i",decoy_number),drop_decoy_functions[player_index][decoy_number])
+		p:addCustomButton("Weapons",decoy_button_label,string.format(_("-buttonWeapons", "Drop Decoy %i"),decoy_number),drop_decoy_functions[player_index][decoy_number])
 		p.decoy_button[decoy_button_label] = player_name
 		decoy_button_label = string.format("%s%iDecoyButtonTactical",p:getCallSign(),decoy_number)
-		p:addCustomButton("Tactical",decoy_button_label,string.format("Drop Decoy %i",decoy_number),drop_decoy_functions[player_index][decoy_number])
+		p:addCustomButton("Tactical",decoy_button_label,string.format(_("-buttonTactical", "Drop Decoy %i"),decoy_number),drop_decoy_functions[player_index][decoy_number])
 		p.decoy_button[decoy_button_label] = player_name
 	end
 end

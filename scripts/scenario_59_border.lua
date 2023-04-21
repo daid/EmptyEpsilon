@@ -2009,7 +2009,7 @@ function wmCombatBoostButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_cm_boost_button == nil then
 				p.activate_cm_boost_button = "activate_cm_boost_button"
-				p:addCustomButton("Helms",p.activate_cm_boost_button,"C.M. Boost",function()
+				p:addCustomButton("Helms",p.activate_cm_boost_button,_("-buttonHelms", "C.M. Boost"),function()
 					string.format("")	--global context for serious proton
 					if p.cm_boost_count > 0 then
 						p.cm_boost_active = true
@@ -2032,7 +2032,7 @@ function wmCombatBoostButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_cm_boost_button_tac == nil then
 				p.activate_cm_boost_button_tac = "activate_cm_boost_button_tac"
-				p:addCustomButton("Tactical",p.activate_cm_boost_button_tac,"C.M. Boost",function()
+				p:addCustomButton("Tactical",p.activate_cm_boost_button_tac,_("-buttonTactical", "C.M. Boost"),function()
 					string.format("")	--global context for serious proton
 					if p.cm_boost_count > 0 then
 						p.cm_boost_active = true
@@ -2058,7 +2058,7 @@ function wmCombatStrafeButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_cm_strafe_button == nil then
 				p.activate_cm_strafe_button = "activate_cm_strafe_button"
-				p:addCustomButton("Helms",p.activate_cm_strafe_button,"C.M. Strafe",function()
+				p:addCustomButton("Helms",p.activate_cm_strafe_button,_("-buttonHelms", "C.M. Strafe"),function()
 					string.format("")	--global context for serious proton
 					if p.cm_strafe_count > 0 then
 						p.cm_strafe_active = true
@@ -2081,7 +2081,7 @@ function wmCombatStrafeButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_cm_strafe_button_tac == nil then
 				p.activate_cm_strafe_button_tac = "activate_cm_strafe_button_tac"
-				p:addCustomButton("Tactical",p.activate_cm_strafe_button_tac,"C.M. Strafe",function()
+				p:addCustomButton("Tactical",p.activate_cm_strafe_button_tac,_("-buttonTactical", "C.M. Strafe"),function()
 					string.format("")	--global context for serious proton
 					if p.cm_strafe_count > 0 then
 						p.cm_strafe_active = true
@@ -2107,7 +2107,7 @@ function wmBeamDamageButton(p,console)
 		if p:hasPlayerAtPosition("Weapons") then
 			if p.activate_beam_damage_button == nil then
 				p.activate_beam_damage_button = "activate_beam_damage_button"
-				p:addCustomButton("Weapons",p.activate_beam_damage_button,"Beam Damage",function()
+				p:addCustomButton("Weapons",p.activate_beam_damage_button,_("-buttonWeapons", "Beam Damage"),function()
 					string.format("")	--global context for serious proton
 					if p.beam_damage_count > 0 then
 						p.beam_damage_active = true
@@ -2134,7 +2134,7 @@ function wmBeamDamageButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_beam_damage_button_tac == nil then
 				p.activate_beam_damage_button_tac = "activate_beam_damage_button_tac"
-				p:addCustomButton("Tactical",p.activate_beam_damage_button_tac,"Beam Damage",function()
+				p:addCustomButton("Tactical",p.activate_beam_damage_button_tac,_("-buttonTactical", "Beam Damage"),function()
 					string.format("")	--global context for serious proton
 					if p.beam_damage_count > 0 then
 						p.beam_damage_active = true
@@ -2164,7 +2164,7 @@ function wmBeamCycleButton(p,console)
 		if p:hasPlayerAtPosition("Weapons") then
 			if p.activate_beam_cycle_button == nil then
 				p.activate_beam_cycle_button = "activate_beam_cycle_button"
-				p:addCustomButton("Weapons",p.activate_beam_cycle_button,"Beam Cycle",function()
+				p:addCustomButton("Weapons",p.activate_beam_cycle_button,_("-buttonWeapons", "Beam Cycle"),function()
 					string.format("")	--global context for serious proton
 					if p.beam_cycle_count > 0 then
 						p.beam_cycle_active = true
@@ -2191,7 +2191,7 @@ function wmBeamCycleButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_beam_cycle_button_tac == nil then
 				p.activate_beam_cycle_button_tac = "activate_beam_cycle_button_tac"
-				p:addCustomButton("Tactical",p.activate_beam_cycle_button_tac,"Beam Cycle",function()
+				p:addCustomButton("Tactical",p.activate_beam_cycle_button_tac,_("-buttonTactical", "Beam Cycle"),function()
 					string.format("")	--global context for serious proton
 					if p.beam_cycle_count > 0 then
 						p.beam_cycle_active = true
@@ -2221,7 +2221,7 @@ function wmImpulseButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_impulse_button == nil then
 				p.activate_impulse_button = "activate_impulse_button"
-				p:addCustomButton("Helms",p.activate_impulse_button,"Impulse Speed",function()
+				p:addCustomButton("Helms",p.activate_impulse_button,_("-buttonHelms", "Impulse Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.impulse_count > 0 then
 						p.impulse_active = true
@@ -2244,7 +2244,7 @@ function wmImpulseButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_impulse_button_tac == nil then
 				p.activate_impulse_button_tac = "activate_impulse_button_tac"
-				p:addCustomButton("Tactical",p.activate_impulse_button_tac,"Impulse Speed",function()
+				p:addCustomButton("Tactical",p.activate_impulse_button_tac,_("-buttonTactical", "Impulse Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.impulse_count > 0 then
 						p.impulse_active = true
@@ -2270,7 +2270,7 @@ function wmWarpButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_warp_button == nil then
 				p.activate_warp_button = "activate_warp_button"
-				p:addCustomButton("Helms",p.activate_warp_button,"Warp Speed",function()
+				p:addCustomButton("Helms",p.activate_warp_button,_("-buttonHelms", "Warp Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.warp_count > 0 then
 						p.warp_active = true
@@ -2293,7 +2293,7 @@ function wmWarpButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_warp_button_tac == nil then
 				p.activate_warp_button_tac = "activate_warp_button_tac"
-				p:addCustomButton("Tactical",p.activate_warp_button_tac,"Warp Speed",function()
+				p:addCustomButton("Tactical",p.activate_warp_button_tac,_("-buttonTactical", "Warp Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.warp_count > 0 then
 						p.warp_active = true
@@ -2319,7 +2319,7 @@ function wmJumpButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_jump_button == nil then
 				p.activate_jump_button = "activate_jump_button"
-				p:addCustomButton("Helms",p.activate_jump_button,"Jump Range",function()
+				p:addCustomButton("Helms",p.activate_jump_button,_("-buttonHelms", "Jump Range"),function()
 					string.format("")	--global context for serious proton
 					if p.jump_count > 0 then
 						p.jump_active = true
@@ -2347,7 +2347,7 @@ function wmJumpButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_jump_button_tac == nil then
 				p.activate_jump_button_tac = "activate_jump_button_tac"
-				p:addCustomButton("Tactical",p.activate_jump_button_tac,"Jump Range",function()
+				p:addCustomButton("Tactical",p.activate_jump_button_tac,_("-buttonTactical", "Jump Range"),function()
 					string.format("")	--global context for serious proton
 					if p.jump_count > 0 then
 						p.jump_active = true
@@ -2378,7 +2378,7 @@ function wmShieldButton(p,console)
 		if p:hasPlayerAtPosition("Weapons") then
 			if p.activate_shield_button == nil then
 				p.activate_shield_button = "activate_shield_button"
-				p:addCustomButton("Weapons",p.activate_shield_button,"Shield Capacity",function()
+				p:addCustomButton("Weapons",p.activate_shield_button,_("-buttonWeapons", "Shield Capacity"),function()
 					string.format("")	--global context for serious proton
 					if p.shield_count > 0 then
 						p.shield_active = true
@@ -2405,7 +2405,7 @@ function wmShieldButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_shield_button_tac == nil then
 				p.activate_shield_button_tac = "activate_shield_button_tac"
-				p:addCustomButton("Tactical",p.activate_shield_button_tac,"Shield Capacity",function()
+				p:addCustomButton("Tactical",p.activate_shield_button_tac,_("-buttonTactical", "Shield Capacity"),function()
 					string.format("")	--global context for serious proton
 					if p.shield_count > 0 then
 						p.shield_active = true
@@ -2435,7 +2435,7 @@ function wmManeuverButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_maneuver_button == nil then
 				p.activate_maneuver_button = "activate_maneuver_button"
-				p:addCustomButton("Helms",p.activate_maneuver_button,"Spin Speed",function()
+				p:addCustomButton("Helms",p.activate_maneuver_button,_("-buttonHelms", "Spin Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.maneuver_count > 0 then
 						p.maneuver_active = true
@@ -2458,7 +2458,7 @@ function wmManeuverButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_maneuver_button_tac == nil then
 				p.activate_maneuver_button_tac = "activate_maneuver_button_tac"
-				p:addCustomButton("Tactical",p.activate_maneuver_button_tac,"Spin Speed",function()
+				p:addCustomButton("Tactical",p.activate_maneuver_button_tac,_("-buttonTactical", "Spin Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.maneuver_count > 0 then
 						p.maneuver_active = true
@@ -2484,7 +2484,7 @@ function wmBatteryButton(p,console)
 		if p:hasPlayerAtPosition("Engineering") then
 			if p.activate_battery_button == nil then
 				p.activate_battery_button = "activate_battery_button"
-				p:addCustomButton("Engineering",p.activate_battery_button,"Battery Capacity",function()
+				p:addCustomButton("Engineering",p.activate_battery_button,_("-buttonEngineer", "Battery Capacity"),function()
 					string.format("")	--global context for serious proton
 					if p.battery_count > 0 then
 						p.battery_active = true
@@ -2507,7 +2507,7 @@ function wmBatteryButton(p,console)
 		if p:hasPlayerAtPosition("Engineering+") then
 			if p.activate_battery_button_plus == nil then
 				p.activate_battery_button_plus = "activate_battery_button_plus"
-				p:addCustomButton("Engineering+",p.activate_battery_button_plus,"Battery Capacity",function()
+				p:addCustomButton("Engineering+",p.activate_battery_button_plus,_("-buttonEngineer+", "Battery Capacity"),function()
 					string.format("")	--global context for serious proton
 					if p.battery_count > 0 then
 						p.battery_active = true
@@ -2545,7 +2545,7 @@ function resetCoolantPumpButtons(p)
 			if p.normal_coolant_rate[system] < p:getSystemCoolantRate(system) then
 				if p:hasPlayerAtPosition("Engineering") then
 					p.coolant_pump_fix_buttons[system] = string.format("coolant_pump_fix_buttons%s",system)
-					p:addCustomButton("Engineering",p.coolant_pump_fix_buttons[system],string.format("%s C. Pump",system),function()
+					p:addCustomButton("Engineering",p.coolant_pump_fix_buttons[system],string.format(_("coolant-buttonEngineer", "%s C. Pump"),system),function()
 						string.format("")	--global context for serious proton
 						if p.coolant_pump_part_count > 0 then
 							p:setSystemCoolantRate(system,p.normal_coolant_rate[system])
@@ -2558,7 +2558,7 @@ function resetCoolantPumpButtons(p)
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.coolant_pump_fix_buttons_plus[system] = string.format("coolant_pump_fix_buttons_plus%s",system)
-					p:addCustomButton("Engineering+",p.coolant_pump_fix_buttons_plus[system],string.format("%s C. Pump",system),function()
+					p:addCustomButton("Engineering+",p.coolant_pump_fix_buttons_plus[system],string.format(_("coolant-buttonEngineer+", "%s C. Pump"),system),function()
 						string.format("")	--global context for serious proton
 						if p.coolant_pump_part_count > 0 then
 							p:setSystemCoolantRate(system,p.normal_coolant_rate[system])
@@ -2578,7 +2578,7 @@ function wmCoolantPump(p,console,system)
 		if p:hasPlayerAtPosition("Engineering") then
 			if p.coolant_pump_fix_buttons[system] == nil then
 				p.coolant_pump_fix_buttons[system] = string.format("coolant_pump_fix_buttons%s",system)
-				p:addCustomButton("Engineering",p.coolant_pump_fix_buttons[system],string.format("%s C. Pump",system),function()
+				p:addCustomButton("Engineering",p.coolant_pump_fix_buttons[system],string.format(_("coolant-buttonEngineer", "%s C. Pump"),system),function()
 					string.format("")	--global context for serious proton
 					if p.coolant_pump_part_count > 0 then
 						p:setSystemCoolantRate(system,p.normal_coolant_rate[system])
@@ -2594,7 +2594,7 @@ function wmCoolantPump(p,console,system)
 		if p:hasPlayerAtPosition("Engineering+") then
 			if p.coolant_pump_fix_buttons_plus[system] == nil then
 				p.coolant_pump_fix_buttons_plus[system] = string.format("coolant_pump_fix_buttons_plus%s",system)
-				p:addCustomButton("Engineering+",p.coolant_pump_fix_buttons_plus[system],string.format("%s C. Pump",system),function()
+				p:addCustomButton("Engineering+",p.coolant_pump_fix_buttons_plus[system],string.format(_("coolant-buttonEngineer+", "%s C. Pump"),system),function()
 					string.format("")	--global context for serious proton
 					if p.coolant_pump_part_count > 0 then
 						p:setSystemCoolantRate(system,p.normal_coolant_rate[system])
@@ -5406,13 +5406,13 @@ function spinalShip(delta)
 				if playerSpinStar.spine_button == nil then	--add fire button to weapons and/or tactical consoles
 					if playerSpinStar:hasPlayerAtPosition("Weapons") then
 						playerSpinStar.spine_button = "spine_button"
-						playerSpinStar:addCustomButton("Weapons",playerSpinStar.spine_button,"Spinal Beam", spinalAddBeamNow)
+						playerSpinStar:addCustomButton("Weapons",playerSpinStar.spine_button,_("-buttonWeapons", "Spinal Beam"), spinalAddBeamNow)
 					end
 				end
 				if playerSpinStar.spine_button_tactical == nil then
 					if playerSpinStar:hasPlayerAtPosition("Tactical") then
 						playerSpinStar.spine_button_tactical = "spine_button_tactical"
-						playerSpinStar:addCustomButton("Tactical",playerSpinStar.spine_button_tactical,"Spinal Beam", spinalAddBeamNow)
+						playerSpinStar:addCustomButton("Tactical",playerSpinStar.spine_button_tactical,_("-buttonTactical", "Spinal Beam"), spinalAddBeamNow)
 					end
 				end
 			else	--weapon is not charged
@@ -14340,11 +14340,11 @@ function crewFate(p, fatalityChance)
 			p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 			if p:hasPlayerAtPosition("Engineering") then
 				local repairCrewFatality = "repairCrewFatality"
-				p:addCustomMessage("Engineering",repairCrewFatality,"One of your repair crew has perished")
+				p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
+				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 			end
 		else
 			local damaged_system = p.system_choice_list[math.random(1,#p.system_choice_list)]
@@ -14383,11 +14383,11 @@ function crewFate(p, fatalityChance)
 				p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 				if p:hasPlayerAtPosition("Engineering") then
 					local repairCrewFatality = "repairCrewFatality"
-					p:addCustomMessage("Engineering",repairCrewFatality,"One of your repair crew has perished")
+					p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-					p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
+					p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 				end
 			elseif consequence == 2 then
 				local current_coolant = p:getMaxCoolant()
@@ -14481,32 +14481,32 @@ function cargoInventory(p)
 		if p:hasPlayerAtPosition("Relay") then
 			if p.inventoryButton == nil then
 				local tbi = "inventory" .. p:getCallSign()
-				p:addCustomButton("Relay",tbi,"Inventory",function() playerShipCargoInventory(p) end)
+				p:addCustomButton("Relay",tbi,_("inventory-buttonRelay", "Inventory"),function() playerShipCargoInventory(p) end)
 				p.inventoryButton = true
 			end
 		end
 		if p:hasPlayerAtPosition("Operations") then
 			if p.inventoryButton == nil then
 				local tbi = "inventoryOp" .. p:getCallSign()
-				p:addCustomButton("Operations",tbi,"Inventory",function() playerShipCargoInventory(p) end)
+				p:addCustomButton("Operations",tbi,_("inventory-buttonOperations", "Inventory"),function() playerShipCargoInventory(p) end)
 				p.inventoryButton = true
 			end
 		end
 	end
 end
 function playerShipCargoInventory(p)
-	p:addToShipLog(string.format("%s Current cargo:",p:getCallSign()),"Yellow")
+	p:addToShipLog(string.format(_("inventory-shipLog", "%s Current cargo:"),p:getCallSign()),"Yellow")
 	local goodCount = 0
 	if p.goods ~= nil then
 		for good, goodQuantity in pairs(p.goods) do
 			goodCount = goodCount + 1
-			p:addToShipLog(string.format("     %s: %i",good,goodQuantity),"Yellow")
+			p:addToShipLog(string.format(_("inventory-shipLog", "     %s: %i"),good,goodQuantity),"Yellow")
 		end
 	end
 	if goodCount < 1 then
-		p:addToShipLog("     Empty","Yellow")
+		p:addToShipLog(_("inventory-shipLog", "     Empty"),"Yellow")
 	end
-	p:addToShipLog(string.format("Available space: %i",p.cargo),"Yellow")
+	p:addToShipLog(string.format(_("inventory-shipLog", "Available space: %i"),p.cargo),"Yellow")
 end
 --      Enable and disable auto-cooling on a ship functions
 function autoCoolant(p)
@@ -14514,14 +14514,14 @@ function autoCoolant(p)
 		if p:hasPlayerAtPosition("Engineering") then
 			if p.autoCoolButton == nil then
 				local tbi = "enableAutoCool" .. p:getCallSign()
-				p:addCustomButton("Engineering",tbi,"Auto cool",function() 
+				p:addCustomButton("Engineering",tbi,_("coolant-buttonEngineer", "Auto cool"),function() 
 					string.format("")	--global context for serious proton
 					p:commandSetAutoRepair(true)
 					p:setAutoCoolant(true)
 					p.autoCoolant = true
 				end)
 				tbi = "disableAutoCool" .. p:getCallSign()
-				p:addCustomButton("Engineering",tbi,"Manual cool",function()
+				p:addCustomButton("Engineering",tbi,_("coolant-buttonEngineer", "Manual cool"),function()
 					string.format("")	--global context for serious proton
 					p:commandSetAutoRepair(false)
 					p:setAutoCoolant(false)
@@ -14533,14 +14533,14 @@ function autoCoolant(p)
 		if p:hasPlayerAtPosition("Engineering+") then
 			if p.autoCoolButton == nil then
 				tbi = "enableAutoCoolPlus" .. p:getCallSign()
-				p:addCustomButton("Engineering+",tbi,"Auto cool",function()
+				p:addCustomButton("Engineering+",tbi,_("coolant-buttonEngineer+", "Auto cool"),function()
 					string.format("")	--global context for serious proton
 					p:commandSetAutoRepair(true)
 					p:setAutoCoolant(true)
 					p.autoCoolant = true
 				end)
 				tbi = "disableAutoCoolPlus" .. p:getCallSign()
-				p:addCustomButton("Engineering+",tbi,"Manual cool",function()
+				p:addCustomButton("Engineering+",tbi,_("coolant-buttonEngineer+", "Manual cool"),function()
 					string.format("")	--global context for serious proton
 					p:commandSetAutoRepair(false)
 					p:setAutoCoolant(false)
@@ -14587,12 +14587,12 @@ function coolantNebulae(delta, p)
 		else
 			if p:hasPlayerAtPosition("Engineering") then
 				p.get_coolant_button = "get_coolant_button"
-				p:addCustomButton("Engineering",p.get_coolant_button,"Get Coolant",function() getCoolantGivenPlayer(p) end)
+				p:addCustomButton("Engineering",p.get_coolant_button,_("coolant-buttonEngineer", "Get Coolant"),function() getCoolantGivenPlayer(p) end)
 				p.get_coolant = true
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.get_coolant_button_plus = "get_coolant_button_plus"
-				p:addCustomButton("Engineering+",p.get_coolant_button_plus,"Get Coolant",function() getCoolantGivenPlayer(p) end)
+				p:addCustomButton("Engineering+",p.get_coolant_button_plus,_("coolant-buttonEngineer+", "Get Coolant"),function() getCoolantGivenPlayer(p) end)
 				p.get_coolant = true
 			end
 		end
@@ -14634,7 +14634,7 @@ function updateCoolantGivenPlayer(p, delta)
 		end
 		p.deploy_coolant_timer = p.deploy_coolant_timer - delta
 		if p.deploy_coolant_timer < 0 then
-			gather_coolant_status = "Gathering Coolant"
+			gather_coolant_status = _("coolant-tabEngineer", "Gathering Coolant")
 			p:setMaxCoolant(p:getMaxCoolant() + coolant_gain)
 			if p:getMaxCoolant() > 50 and random(1,100) <= 13 then
 				local engine_choice = math.random(1,3)
@@ -14651,10 +14651,10 @@ function updateCoolantGivenPlayer(p, delta)
 				end
 			end
 		else
-			gather_coolant_status = string.format("Deploying Collectors %i",math.ceil(p.deploy_coolant_timer - delta))
+			gather_coolant_status = string.format(_("coolant-tabEngineer", "Deploying Collectors %i"),math.ceil(p.deploy_coolant_timer - delta))
 		end
 	else
-		gather_coolant_status = string.format("Configuring Collectors %i",math.ceil(p.configure_coolant_timer - delta))
+		gather_coolant_status = string.format(_("coolant-tabEngineer", "Configuring Collectors %i"),math.ceil(p.configure_coolant_timer - delta))
 	end
 	if p:hasPlayerAtPosition("Engineering") then
 		p.gather_coolant = "gather_coolant"
@@ -18140,7 +18140,7 @@ function checkForMining(delta, p)
 						if p.trigger_mine_beam_button == nil then
 							if p:hasPlayerAtPosition("Weapons") then
 								p.trigger_mine_beam_button = "trigger_mine_beam_button"
-								p:addCustomButton("Weapons",p.trigger_mine_beam_button,"Start Mining",function()
+								p:addCustomButton("Weapons",p.trigger_mine_beam_button,_("mining-buttonWeapons", "Start Mining"),function()
 									p.mining_in_progress = true
 									p.mining_timer = delta + 5
 									p:removeCustom(p.trigger_mine_beam_button)
@@ -18235,7 +18235,7 @@ function addMiningButtons(p,mining_objects)
 	if p.mining_lock_button == nil then
 		if p:hasPlayerAtPosition("Science") then
 			p.mining_lock_button = "mining_lock_button"
-			p:addCustomButton("Science",p.mining_lock_button,"Lock for Mining",function()
+			p:addCustomButton("Science",p.mining_lock_button,_("mining-buttonScience", "Lock for Mining"),function()
 				local cpx, cpy = p:getPosition()
 				local tpx, tpy = p.mining_target:getPosition()
 				if distance_diagnostic then print("distance_diagnostic 24",cpx,cpy,tpx,tpy) end
@@ -18256,7 +18256,7 @@ function addMiningButtons(p,mining_objects)
 	if p.mining_target_button == nil then
 		if p:hasPlayerAtPosition("Science") then
 			p.mining_target_button = "mining_target_button"
-			p:addCustomButton("Science",p.mining_target_button,"Target Asteroid",function()
+			p:addCustomButton("Science",p.mining_target_button,_("mining-buttonScience", "Target Asteroid"),function()
 				string.format("")	--necessary to have global reference for Serious Proton engine
 				tpx, tpy = p.mining_target:getPosition()
 				if distance_diagnostic then print("distance_diagnostic 25",cpx, cpy, tpx, tpy) end
@@ -18298,7 +18298,7 @@ function addMiningButtons(p,mining_objects)
 		if p.mining_next_target_button == nil then
 			if p:hasPlayerAtPosition("Science") then
 				p.mining_next_target_button = "mining_next_target_button"
-				p:addCustomButton("Science",p.mining_next_target_button,"Other mining target",function()
+				p:addCustomButton("Science",p.mining_next_target_button,_("mining-buttonScience", "Other mining target"),function()
 					local nearby_objects = p:getObjectsInRange(1000)
 					local mining_objects = {}
 					if nearby_objects ~= nil and #nearby_objects > 1 then
