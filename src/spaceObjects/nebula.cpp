@@ -53,7 +53,7 @@ Nebula::Nebula()
         entity.getOrAddComponent<RadarBlock>();
         entity.getOrAddComponent<NeverRadarBlocked>();
 
-        auto trace = entity.getOrAddComponent<RadarTrace>();
+        auto& trace = entity.getOrAddComponent<RadarTrace>();
         trace.radius = 5000.0f * 3.0f;
         trace.min_size = 0.0f;
         trace.max_size = std::numeric_limits<float>::max();

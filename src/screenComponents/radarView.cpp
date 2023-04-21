@@ -856,6 +856,9 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         auto object_position_on_screen = worldToScreen(transform.getPosition());
         //TODO: Only draw things that are in range of this radar view.
 
+        if (long_range && !(trace.flags & RadarTrace::LongRange))
+            continue;
+
         auto size = trace.radius * scale * 2.0f;
         size = std::clamp(size, trace.min_size, trace.max_size);
 

@@ -2,9 +2,22 @@
 
 #include "components/collision.h"
 #include "components/missiletubes.h"
+#include "components/missile.h"
+#include "components/hull.h"
+#include "components/radar.h"
+#include "components/docking.h"
+#include "components/warpdrive.h"
 #include "ecs/query.h"
 #include "multiplayer_server.h"
+#include "spaceObjects/mine.h"
+#include "spaceObjects/explosionEffect.h"
+#include "particleEffect.h"
 
+
+MissileSystem::MissileSystem()
+{
+    sp::CollisionSystem::addHandler(this);
+}
 
 void MissileSystem::update(float delta)
 {
@@ -51,18 +64,72 @@ void MissileSystem::update(float delta)
             }
         }
     }
+
+    for(auto [entity, flight, transform, physics] : sp::ecs::Query<MissileFlight, sp::Transform, sp::Physics>()) {
+        physics.setVelocity(vec2FromAngle(transform.getRotation()) * flight.speed);
+    }
+
+    for(auto [entity, homing, transform, physics] : sp::ecs::Query<MissileHoming, sp::Transform, sp::Physics>()) {
+        if (auto tt = homing.target.getComponent<sp::Transform>()) {
+            float r = homing.range + 10.0f;
+            if (glm::length2(tt->getPosition() - transform.getPosition()) < r*r)
+                homing.target_angle = vec2ToAngle(tt->getPosition() - transform.getPosition());
+        }
+        float angle_diff = angleDifference(transform.getRotation(), homing.target_angle);
+
+        if (angle_diff > 1.0f)
+            physics.setAngularVelocity(homing.turn_rate);
+        else if (angle_diff < -1.0f)
+            physics.setAngularVelocity(homing.turn_rate * -1.0f);
+        else
+            physics.setAngularVelocity(angle_diff * homing.turn_rate);
+    }
+
+    // TODO: Not really part of missile
+    for(auto [entity, emitter, transform] : sp::ecs::Query<ConstantParticleEmitter, sp::Transform>()) {
+        emitter.delay -= delta;
+        if (emitter.delay <= 0.0f) {
+            emitter.delay = emitter.interval;
+            ParticleEngine::spawn(glm::vec3(transform.getPosition().x, transform.getPosition().y, 0), glm::vec3(transform.getPosition().x, transform.getPosition().y, 0), emitter.start_color, emitter.end_color, emitter.start_size, emitter.end_size, emitter.life_time);
+        }
+    }
+
+    // TODO: Not really part of missile
+    for(auto [entity, lifetime] : sp::ecs::Query<LifeTime>()) {
+        lifetime.lifetime -= delta;
+        if (lifetime.lifetime <= 0.0f) {
+            //TODO: Nukes/EMPs should explode.
+            entity.destroy();
+        }
+    }
 }
 
-#include "spaceObjects/missiles/EMPMissile.h"
-#include "spaceObjects/missiles/homingMissile.h"
-#include "spaceObjects/mine.h"
-#include "spaceObjects/missiles/nuke.h"
-#include "spaceObjects/missiles/hvli.h"
-#include "spaceObjects/spaceship.h"
-#include "multiplayer_server.h"
-#include "components/warpdrive.h"
-#include <SDL_assert.h>
+void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
+{
+    if (!game_server) return;
+    auto mc = a.getComponent<MissileCollision>();
+    if (!mc) return;
+    if (mc->owner == b) return;
+    auto hull = b.getComponent<Hull>();
+    if (!hull) return;
+    if (!(hull->damaged_by_flags & (1 << int(mc->damage_type)))) return;
+    auto transform = a.getComponent<sp::Transform>();
+    if (!transform) return;
 
+    DamageInfo info(mc->owner, mc->damage_type, transform->getPosition());
+    if (mc->blast_range > 100.0f) {
+        DamageSystem::damageArea(transform->getPosition(), mc->blast_range, mc->damage_at_edge, mc->damage_at_center, info, 10.0f);
+    } else {
+        DamageSystem::applyDamage(b, mc->damage_at_center, info);
+    }
+
+    P<ExplosionEffect> e = new ExplosionEffect();
+    e->setSize(mc->blast_range);
+    e->setPosition(transform->getPosition());
+    e->setOnRadar(true);
+    e->setExplosionSound("sfx/nuke_explosion.wav");
+    a.destroy();
+}
 
 void MissileSystem::startLoad(sp::ecs::Entity source, MissileTubes::MountPoint& tube, EMissileWeapons type)
 {
@@ -118,22 +185,31 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
     auto source_transform = source.getComponent<sp::Transform>();
     if (!source_transform) return;
     auto fireLocation = source_transform->getPosition() + rotateVec2(glm::vec2(tube.position), source_transform->getRotation());
-    
-    P<MissileWeapon> missile;
+    auto category_modifier = MissileWeaponData::convertSizeToCategoryModifier(tube.size);
+
+    sp::ecs::Entity missile;
     switch(tube.type_loaded)
     {
     case MW_Homing:
         {
-            missile = new HomingMissile();
-            missile->target = target;
-            missile->target_angle = target_angle;
+            missile = sp::ecs::Entity::create();
+            auto& mc = missile.addComponent<MissileCollision>();
+            mc.owner = source;
+            mc.damage_at_center = 35 * category_modifier;
+            mc.damage_at_edge = 5 * category_modifier;
+            mc.blast_range = 30 * category_modifier;
+            missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.1f, 0.2f);
         }
         break;
     case MW_Nuke:
         {
-            missile = new Nuke();
-            missile->target = target;
-            missile->target_angle = target_angle;
+            missile = sp::ecs::Entity::create();
+            auto& mc = missile.addComponent<MissileCollision>();
+            mc.owner = source;
+            mc.damage_at_center = 160.0f * category_modifier;
+            mc.damage_at_edge = 30.0f * category_modifier;
+            mc.blast_range = 1000.0f * category_modifier;
+            missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.7f, 0.1f);
         }
         break;
     case MW_Mine:
@@ -150,15 +226,25 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         break;
     case MW_HVLI:
         {
-            missile = new HVLI();
-            missile->target_angle = source_transform->getRotation() + tube.direction;
+            missile = sp::ecs::Entity::create();
+            auto& mc = missile.addComponent<MissileCollision>();
+            mc.owner = source;
+            mc.damage_at_center = 10.0f * category_modifier;
+            mc.damage_at_edge = 10.0f * category_modifier;
+            mc.blast_range = 20.0f * category_modifier;
+            missile.addComponent<RawRadarSignatureInfo>(0.1f, 0.0f, 0.0f);
         }
         break;
     case MW_EMP:
         {
-            missile = new EMPMissile();
-            missile->target = target;
-            missile->target_angle = target_angle;
+            missile = sp::ecs::Entity::create();
+            auto& mc = missile.addComponent<MissileCollision>();
+            mc.owner = source;
+            mc.damage_at_center = 160.0f * category_modifier;
+            mc.damage_at_edge = 30.0f * category_modifier;
+            mc.blast_range = 1000.0f * category_modifier;
+            mc.damage_type = DamageType::EMP;
+            missile.addComponent<RawRadarSignatureInfo>(0.0f, 1.0f, 0.0f);
         }
         break;
     default:
@@ -166,12 +252,39 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
     }
 
     if (missile) {
-        missile->owner = source;
+        auto& physics = missile.addComponent<sp::Physics>();
+        physics.setRectangle(sp::Physics::Type::Sensor, {10, 30});
+
+        auto& mwd = MissileWeaponData::getDataFor(tube.type_loaded);
+        auto& mf = missile.addComponent<MissileFlight>();
+        mf.speed = mwd.speed / category_modifier;
+        if (mwd.homing_range > 0.0f) {
+            auto& mh = missile.addComponent<MissileHoming>();
+            mh.range = mwd.homing_range;
+            mh.target = target;
+            mh.target_angle = target_angle;
+            mh.turn_rate = mwd.turnrate / category_modifier;
+        }
+
         if (auto f = source.getComponent<Faction>())
-            missile->entity.addComponent<Faction>().entity = f->entity;
-        missile->setPosition(fireLocation);
-        missile->setRotation(source_transform->getRotation() + tube.direction);
-        missile->category_modifier = MissileWeaponData::convertSizeToCategoryModifier(tube.size);
+            missile.addComponent<Faction>().entity = f->entity;
+        auto& t = missile.addComponent<sp::Transform>();
+        t.setPosition(fireLocation);
+        t.setRotation(source_transform->getRotation() + tube.direction);
+        missile.addComponent<ConstantParticleEmitter>();
+
+        missile.addComponent<LifeTime>().lifetime = mwd.lifetime / category_modifier;
+
+        auto& hull = missile.addComponent<Hull>();
+        hull.max = hull.current = 1;
+        hull.damaged_by_flags = (1 << int(DamageType::EMP)) | (1 << int(DamageType::Energy));
+
+        auto& trace = missile.addComponent<RadarTrace>();
+        trace.icon = "radar/arrow.png";
+        trace.radius = 32.0f;
+        trace.max_size = trace.min_size = 32 * (0.25f + 0.25f * category_modifier);
+        trace.flags = RadarTrace::Rotate;
+        trace.color = mwd.color;
     }
 }
 

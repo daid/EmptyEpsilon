@@ -67,8 +67,8 @@ WormHole::WormHole()
     }
 
     if (entity) {
-        auto g = entity.getOrAddComponent<Gravity>();
-        g.damage = true;
+        auto& g = entity.getOrAddComponent<Gravity>();
+        g.damage = false;
         g.range = DEFAULT_COLLISION_RADIUS;
 
         entity.getOrAddComponent<AvoidObject>().range = DEFAULT_COLLISION_RADIUS * AVOIDANCE_MULTIPLIER;

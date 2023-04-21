@@ -389,6 +389,7 @@ set(MAIN_SOURCES
     src/components/gravity.h
     src/components/avoidobject.h
     src/components/sfx.h
+    src/components/missile.h
     src/systems/ai.h
     src/systems/ai.cpp
     src/systems/docking.h

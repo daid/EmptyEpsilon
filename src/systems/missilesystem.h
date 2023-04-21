@@ -2,12 +2,16 @@
 
 #include "ecs/system.h"
 #include "components/missiletubes.h"
+#include "systems/collision.h"
 
 
-class MissileSystem : public sp::ecs::System
+class MissileSystem : public sp::ecs::System, public sp::CollisionHandler
 {
 public:
+    MissileSystem();
+
     void update(float delta) override;
+    void collision(sp::ecs::Entity a, sp::ecs::Entity b, float force) override;
 
     static void startLoad(sp::ecs::Entity source, MissileTubes::MountPoint& tube, EMissileWeapons type);
     static void startUnload(sp::ecs::Entity source, MissileTubes::MountPoint& tube);

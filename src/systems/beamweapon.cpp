@@ -106,14 +106,14 @@ void BeamWeaponSystem::update(float delta)
 
                             auto e = sp::ecs::Entity::create();
                             e.addComponent<sp::Transform>(transform);
-                            auto be = e.addComponent<BeamEffect>();
+                            auto& be = e.addComponent<BeamEffect>();
                             be.source = entity;
                             be.target = target.entity;
                             be.source_offset = mount.position;
                             be.target_location = hit_location;
                             //TODO: be.target_offset
                             be.beam_texture = mount.texture;
-                            auto sfx = e.addComponent<Sfx>();
+                            auto& sfx = e.addComponent<Sfx>();
                             sfx.sound = "sfx/laser_fire.wav";
                             sfx.power = mount.damage / 6.0f;
 

@@ -61,7 +61,7 @@ Asteroid::Asteroid()
         trace.icon = "radar/blip.png";
         trace.radius = size;
         trace.color = glm::u8vec4(255, 200, 100, 255);
-        trace.flags = 0;
+        trace.flags = RadarTrace::LongRange;
 
         auto& spin = entity.getOrAddComponent<Spin>();
         spin.rate = random(0.1f, 0.8f);

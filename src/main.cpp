@@ -158,6 +158,7 @@ int main(int argc, char** argv)
     engine->registerSystem<WarpSystem>();
     engine->registerSystem<JumpSystem>();
     engine->registerSystem<BeamWeaponSystem>();
+    engine->registerSystem<MissileSystem>();
     engine->registerSystem<ShieldSystem>();
     engine->registerSystem<CoolantSystem>();
     engine->registerSystem<ShipSystemsSystem>();
