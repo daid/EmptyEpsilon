@@ -1,16 +1,4 @@
-#include "missileWeapon.h"
-#include "particleEffect.h"
-#include "spaceObjects/explosionEffect.h"
-#include "random.h"
-#include "multiplayer_server.h"
-#include "multiplayer_client.h"
-#include "soundManager.h"
-#include "components/collision.h"
-#include "components/hull.h"
-
-#include "i18n.h"
-
-
+/*
 /// A MissileWeapon is a self-propelled weapon that can be fired from a WeaponTube at either a target SpaceObject or on a trajectory.
 /// MissileWeapons that can explode detonate with a blast radius at either the end of its lifetime or upon collision with another collisionable SpaceObject.
 /// MissileWeapon-class objects can't be created directly. Use these functions with subclasses derived from MissileWeapon, such as HomingMissile, HVLI, etc.
@@ -204,7 +192,7 @@ std::unordered_map<string, string> MissileWeapon::getGMInfo()
     if (target)
     {
         ret[trMark("gm_info", "Target")] = target->getCallSign();
-    }*/
+    }
 
     ret[trMark("gm_info", "Faction")] = getLocaleFaction();
     ret[trMark("gm_info", "Lifetime")] = lifetime;
@@ -212,3 +200,4 @@ std::unordered_map<string, string> MissileWeapon::getGMInfo()
 
     return ret;
 }
+*/

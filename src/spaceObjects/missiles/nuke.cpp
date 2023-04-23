@@ -1,8 +1,4 @@
-#include "nuke.h"
-#include "particleEffect.h"
-#include "spaceObjects/explosionEffect.h"
-#include "components/avoidobject.h"
-
+/*
 /// A HomingMissile is a MissileWeapon that pursues a target and, upon explosion, deals a base of 30-160 kinetic damage to all SpaceObjects within its 1U base blast radius.
 /// It inherits functions and behaviors from its parent MissileWeapon class.
 /// Missiles can be fired by SpaceShips or created by scripts, and their damage and blast radius can be modified by missile size.
@@ -55,3 +51,4 @@ void Nuke::update(float delta)
         avoid_area_added = true;
     }
 }
+*/

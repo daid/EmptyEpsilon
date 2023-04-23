@@ -581,11 +581,6 @@ set(MAIN_SOURCES
     src/spaceObjects/electricExplosionEffect.h
     src/spaceObjects/explosionEffect.h
     src/spaceObjects/mine.h
-    src/spaceObjects/missiles/EMPMissile.h
-    src/spaceObjects/missiles/homingMissile.h
-    src/spaceObjects/missiles/hvli.h
-    src/spaceObjects/missiles/missileWeapon.h
-    src/spaceObjects/missiles/nuke.h
     src/spaceObjects/nebula.h
     src/spaceObjects/planet.h
     src/spaceObjects/playerSpaceship.h

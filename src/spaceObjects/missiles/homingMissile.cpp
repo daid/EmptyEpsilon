@@ -1,7 +1,4 @@
-#include "homingMissile.h"
-#include "particleEffect.h"
-#include "spaceObjects/explosionEffect.h"
-
+/*
 /// A HomingMissile is a nimble MissileWeapon that pursues a target and, upon explosion, deals a base of 35 kinetic damage to its target.
 /// It inherits functions and behaviors from its parent MissileWeapon class.
 /// Missiles can be fired by SpaceShips or created by scripts, and their damage and blast radius can be modified by missile size.
@@ -28,3 +25,4 @@ void HomingMissile::hitObject(P<SpaceObject> object)
     e->setOnRadar(true);
     e->setRadarSignatureInfo(0.0, 0.0, 0.5);
 }
+*/

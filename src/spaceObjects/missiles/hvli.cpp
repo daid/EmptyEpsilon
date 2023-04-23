@@ -1,8 +1,4 @@
-#include "hvli.h"
-#include "particleEffect.h"
-#include "spaceObjects/explosionEffect.h"
-#include "components/collision.h"
-
+/*
 /// An HVLI is a high-velocity lead impactor, a fancy name for an unguided bullet MissileWeapon that deals kinetic damage upon impact.
 /// Damage is reduced if the HVLI has been alive for less than 2 seconds.
 /// It inherits functions and behaviors from its parent MissileWeapon class.
@@ -36,3 +32,4 @@ void HVLI::hitObject(P<SpaceObject> object)
     e->setOnRadar(true);
     setRadarSignatureInfo(0.0, 0.0, 0.1);
 }
+*/

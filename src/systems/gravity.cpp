@@ -17,6 +17,7 @@ void GravitySystem::update(float delta)
 
     for(auto [source, grav, source_transform] : sp::ecs::Query<Gravity, sp::Transform>()) {
         for(auto target : sp::CollisionSystem::queryArea(source_transform.getPosition() - glm::vec2(grav.range, grav.range), source_transform.getPosition() + glm::vec2(grav.range, grav.range))) {
+            if (target == source) continue;
             auto tt = target.getComponent<sp::Transform>();
             auto diff = source_transform.getPosition() - tt->getPosition();
             float dist2 = glm::length2(diff);

@@ -220,6 +220,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.blast_range = 1000.0f * category_modifier;
             mc.explosion_sfx = "sfx/nuke_explosion.wav";
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.7f, 0.1f);
+            //TODO: Add avoid area after X time
         }
         break;
     case MW_Mine:

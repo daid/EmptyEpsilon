@@ -6,7 +6,6 @@
 class SpaceObject;
 class SpaceShip;
 class SpaceStation;
-class MissileWeapon;
 class Planet;
 class JSONGenerator;
 /*
@@ -41,7 +40,6 @@ private:
     void writeObjectEntry(JSONGenerator& json, P<SpaceObject> obj);
     void writeShipEntry(JSONGenerator& json, P<SpaceShip> obj);
     void writeStationEntry(JSONGenerator& json, P<SpaceStation> obj);
-    void writeMissileEntry(JSONGenerator& json, P<MissileWeapon> missile);
     void writePlanetEntry(JSONGenerator& json, P<Planet> obj);
 };
 
