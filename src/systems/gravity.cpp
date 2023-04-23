@@ -20,7 +20,7 @@ void GravitySystem::update(float delta)
             if (target == source) continue;
             auto tt = target.getComponent<sp::Transform>();
             auto diff = source_transform.getPosition() - tt->getPosition();
-            float dist2 = glm::length2(diff);
+            float dist2 = std::max(1.0f, glm::length2(diff));
             if (dist2 > grav.range*grav.range)
                 continue;
             float force = (grav.range * grav.range * grav.force) / dist2;
