@@ -6382,15 +6382,15 @@ function commonServiceOptions()
 			end)
 		end
 		local offer_power = false
-		if comms_source:getEnergyLevel() < comms_source:getEnergyLevelMax()/2 then
+		if comms_source:getEnergy() < comms_source:getMaxEnergy()/2 then
 			offer_power = true
 		end
 		if offer_power then
-			local power_charge = math.floor((comms_source:getEnergyLevelMax() - comms_source:getEnergyLevel())/3)
+			local power_charge = math.floor((comms_source:getMaxEnergy() - comms_source:getEnergy())/3)
 			addCommsReply(string.format(_("shipServices-comms", "Quick charge the main batteries (%i reputation)"),power_charge),function()
 				if distance(comms_source,comms_target) < 5000 then
 					if comms_source:takeReputationPoints(power_charge) then
-						comms_source:setEnergyLevel(comms_source:getEnergyLevelMax())
+						comms_source:setEnergy(comms_source:getMaxEnergy())
 						comms_source:commandSetSystemPowerRequest("reactor",1)
 						comms_source:setSystemPower("reactor",1)
 						comms_source:setSystemHeat("reactor",2)

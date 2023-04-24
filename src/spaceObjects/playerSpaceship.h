@@ -198,10 +198,11 @@ public:
     void switchCommsToGM();
     void closeComms();
 
-    void setEnergyLevel(float amount) { energy_level = std::max(0.0f, std::min(max_energy_level, amount)); }
-    void setEnergyLevelMax(float amount) { max_energy_level = std::max(0.0f, amount); energy_level = std::min(energy_level, max_energy_level); }
-    float getEnergyLevel() { return energy_level; }
-    float getEnergyLevelMax() { return max_energy_level; }
+    // Deprecated energy getters/setters; see SpaceShip
+    void setEnergyLevel(float amount) { LOG(Warning, "PlayerSpaceship: Deprecated setEnergyLevel() called. Use setEnergy() instead."); setEnergy(amount); }
+    void setEnergyLevelMax(float amount) { LOG(Warning, "PlayerSpaceship: Deprecated setEnergyLevelMax() called. Use setMaxEnergy() instead."); setMaxEnergy(amount); }
+    float getEnergyLevel() { LOG(Warning, "PlayerSpaceship: Deprecated getEnergyLevel() called. Use getEnergy() instead."); return getEnergy(); }
+    float getEnergyLevelMax() { LOG(Warning, "PlayerSpaceship: Deprecated getEnergyLevelMax() called. Use getMaxEnergy() instead."); return getMaxEnergy(); }
 
     void setCanScan(bool enabled) { can_scan = enabled; }
     bool getCanScan() { return can_scan; }

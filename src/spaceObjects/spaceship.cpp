@@ -116,17 +116,16 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getMaxEnergy);
     /// Sets this SpaceShip's energy capacity.
     /// CpuShips don't consume energy. Setting this value has no effect on their behavior or functionality.
-    /// For PlayerSpaceships, see PlayerSpaceship:setEnergyLevelMax().
+    /// Valid values are any greater than or equal to 0.
     /// Example: ship:setMaxEnergy(800)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setMaxEnergy);
     /// Returns this SpaceShip's energy level.
     /// Example: ship:getEnergy()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getEnergy);
     /// Sets this SpaceShip's energy level.
-    /// Valid values are any greater than 0 and less than the energy capacity (getMaxEnergy()).
-    /// Invalid values are ignored.
+    /// Valid values are from 0 to the ship's energy capacity (getMaxEnergy()).
+    /// Invalid values are capped to this range.
     /// CpuShips don't consume energy. Setting this value has no effect on their behavior or functionality.
-    /// For PlayerSpaceships, see PlayerSpaceship:setEnergyLevel().
     /// Example: ship:setEnergy(1000) -- sets the ship's energy to 1000 if its capacity is 1000 or more
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setEnergy);
     /// Returns whether this SpaceShip has the given system.
