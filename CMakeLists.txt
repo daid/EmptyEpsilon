@@ -448,6 +448,7 @@ set(MAIN_SOURCES
     src/hardware/devices/uDMXDevice.cpp
     src/hardware/devices/virtualOutputDevice.cpp
     src/hardware/devices/philipsHueDevice.cpp
+    src/script/components.cpp
 
     src/ai/aiFactory.h
     src/ai/ai.h
@@ -595,6 +596,7 @@ set(MAIN_SOURCES
     src/spaceObjects/zone.h
     src/threatLevelEstimate.h
     src/tutorialGame.h
+    src/script/components.h
 )
 
 if (WITH_DISCORD)

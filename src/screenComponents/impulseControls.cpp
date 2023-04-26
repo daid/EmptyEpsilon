@@ -12,7 +12,7 @@ GuiImpulseControls::GuiImpulseControls(GuiContainer* owner, string id)
 {
     slider = new GuiSlider(this, id + "_SLIDER", 1.0, -1.0, 0.0, [](float value) {
         if (my_spaceship)
-            PlayerSpaceship::commandImpulse(value);
+            my_player_info->commandImpulse(value);
     });
     slider->addSnapValue(0.0, 0.1)->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(50, GuiElement::GuiSizeMax);
 
@@ -42,26 +42,26 @@ void GuiImpulseControls::onUpdate()
         if (engine) {
             float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
             if (change != 0.0f)
-                PlayerSpaceship::commandImpulse(std::min(1.0f, slider->getValue() + change * 0.01f));
+                my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + change * 0.01f));
             if (keys.helms_increase_impulse_1.getDown())
-                PlayerSpaceship::commandImpulse(std::min(1.0f, slider->getValue() + 0.01f));
+                my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.01f));
             if (keys.helms_decrease_impulse_1.getDown())
-                PlayerSpaceship::commandImpulse(std::max(-1.0f, slider->getValue() - 0.01f));
+                my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.01f));
             if (keys.helms_increase_impulse_10.getDown())
-                PlayerSpaceship::commandImpulse(std::min(1.0f, slider->getValue() + 0.1f));
+                my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.1f));
             if (keys.helms_decrease_impulse_10.getDown())
-                PlayerSpaceship::commandImpulse(std::max(-1.0f, slider->getValue() - 0.1f));
+                my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.1f));
             if (keys.helms_zero_impulse.getDown())
-                PlayerSpaceship::commandImpulse(0.0f);
+                my_player_info->commandImpulse(0.0f);
             if (keys.helms_max_impulse.getDown())
-                PlayerSpaceship::commandImpulse(1.0f);
+                my_player_info->commandImpulse(1.0f);
             if (keys.helms_min_impulse.getDown())
-                PlayerSpaceship::commandImpulse(-1.0f);
+                my_player_info->commandImpulse(-1.0f);
             
             float set_value = keys.helms_set_impulse.getValue();
             if (set_value != engine->request && (set_value != 0.0f || set_active))
             {
-                PlayerSpaceship::commandImpulse(set_value);
+                my_player_info->commandImpulse(set_value);
                 set_active = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
             }
         }

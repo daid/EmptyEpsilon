@@ -10,10 +10,9 @@
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_scrolltext.h"
 
-GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, GuiRadarView* radar, int index)
-: GuiResizableDialog(owner, "", "")
+GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, GuiRadarView* radar, sp::ecs::Entity player)
+: GuiResizableDialog(owner, "", ""), player(player)
 {
-    this->player_index = index;
     this->radar = radar;
 
     text_entry = new GuiTextEntry(contents, "", "");
@@ -21,11 +20,11 @@ GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, GuiRadarView* ra
     text_entry->enterCallback([this](string text){
         if (this->player)
         {
-            auto transmitter = player.getComponent<CommsTransmitter>();
+            auto transmitter = this->player.getComponent<CommsTransmitter>();
             if (transmitter && transmitter->state == CommsTransmitter::State::ChannelOpenGM)
-                CommsSystem::addCommsIncommingMessage(player, text_entry->getText());
+                CommsSystem::addCommsIncommingMessage(this->player, text_entry->getText());
             else
-                CommsSystem::hailByGM(player, text_entry->getText());
+                CommsSystem::hailByGM(this->player, text_entry->getText());
         }
         text_entry->setText("");
     });
@@ -42,8 +41,6 @@ GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, GuiRadarView* ra
 void GameMasterChatDialog::onDraw(sp::RenderTarget& renderer)
 {
     GuiResizableDialog::onDraw(renderer);
-    if (!player)
-        player = gameGlobalInfo->getPlayerShip(player_index);
 
     auto transmitter = player.getComponent<CommsTransmitter>();
     if (!player)

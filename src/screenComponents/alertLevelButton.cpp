@@ -20,7 +20,7 @@ GuiAlertLevelSelect::GuiAlertLevelSelect(GuiContainer* owner, string id)
         GuiButton* alert_button = new GuiButton(this, "", alertLevelToLocaleString(AlertLevel(level)), [this, level, alert_level_button]()
         {
             if (my_spaceship)
-                PlayerSpaceship::commandSetAlertLevel(AlertLevel(level));
+                my_player_info->commandSetAlertLevel(AlertLevel(level));
             for(GuiButton* button : alert_level_buttons)
                 button->setVisible(false);
             alert_level_button->setValue(false);
@@ -36,10 +36,10 @@ void GuiAlertLevelSelect::onUpdate()
     if (my_spaceship && isVisible())
     {
         if (keys.relay_alert_level_none.getDown())
-            PlayerSpaceship::commandSetAlertLevel(AlertLevel::Normal);
+            my_player_info->commandSetAlertLevel(AlertLevel::Normal);
         if (keys.relay_alert_level_yellow.getDown())
-            PlayerSpaceship::commandSetAlertLevel(AlertLevel::YellowAlert);
+            my_player_info->commandSetAlertLevel(AlertLevel::YellowAlert);
         if (keys.relay_alert_level_red.getDown())
-            PlayerSpaceship::commandSetAlertLevel(AlertLevel::RedAlert);
+            my_player_info->commandSetAlertLevel(AlertLevel::RedAlert);
     }
 }

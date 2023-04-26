@@ -60,7 +60,7 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
             {
                 if (f.crew_position == current_position && f.type == CustomShipFunctions::Function::Type::Message)
                 {
-                    PlayerSpaceship::commandCustomFunction(f.name);
+                    my_player_info->commandCustomFunction(f.name);
                     break;
                 }
             }

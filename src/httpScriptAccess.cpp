@@ -14,6 +14,7 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
         {
             return "{\"ERROR\": \"No game\"}";
         }
+        /* TODO
         P<ScriptObject> script = new ScriptObject();
         script->setMaxRunCycles(100000);
         string output;
@@ -21,6 +22,8 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
             output = "{\"ERROR\": \"Script error: " + script->getError().replace("\"", "'") + "\"}";
         script->destroy();
         return output;
+        */
+        return "TODO";
     });
     server.addURLHandler("/get.lua", [](const sp::io::http::Server::Request& request) -> string
     {
@@ -45,6 +48,7 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
             return "{\"ERROR\": \"No game\"}";
         }
 
+        /*TODO
         string luaCode;
         string objectId = "getPlayerShip(-1)";
         if (my_spaceship) {
@@ -91,6 +95,8 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
         }
         script->destroy();
         return output;
+        */
+        return "TODO";
     });
     server.addURLHandler("/set.lua", [](const sp::io::http::Server::Request& request) -> string
     {
@@ -115,7 +121,7 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
         {
             return "{\"ERROR\": \"No game\"}";
         }
-
+        /*TODO
         string luaCode;
         string objectId = "getPlayerShip(-1)";
         if (my_spaceship) {
@@ -154,5 +160,7 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
             output = "{}";
         script->destroy();
         return output;
+        */
+        return "TODO";
     });
 }

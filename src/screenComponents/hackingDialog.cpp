@@ -97,7 +97,7 @@ void GuiHackingDialog::onDraw(sp::RenderTarget& renderer)
         {
             if (my_spaceship && last_game_success)
             {
-                PlayerSpaceship::commandHackingFinished(target, target_system);
+                my_player_info->commandHackingFinished(target, target_system);
             }
             getNewGame();
         }else{

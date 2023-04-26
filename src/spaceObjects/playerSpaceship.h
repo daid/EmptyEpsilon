@@ -15,7 +15,6 @@ class PlayerSpaceship : public SpaceShip
 public:
     // Overheat subsystem damage rate
     constexpr static float damage_per_second_on_overheat = 0.08f;
-    constexpr static float max_scanning_delay = 6.0;
 
     constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
 private:
@@ -84,51 +83,6 @@ public:
     string getBeamSystemTargetName();
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
-    static void commandTargetRotation(float target);
-    static void commandTurnSpeed(float turnSpeed);
-    static void commandImpulse(float target);
-    static void commandWarp(int8_t target);
-    static void commandJump(float distance);
-    static void commandSetTarget(sp::ecs::Entity target);
-    static void commandSetScienceLink(sp::ecs::Entity probe);
-    static void commandClearScienceLink();
-    static void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
-    static void commandUnloadTube(int8_t tubeNumber);
-    static void commandFireTube(int8_t tubeNumber, float missile_target_angle);
-    static void commandFireTubeAtTarget(int8_t tubeNumber, sp::ecs::Entity target);
-    static void commandSetShields(bool enabled);
-    static void commandMainScreenSetting(MainScreenSetting mainScreen);
-    static void commandMainScreenOverlay(MainScreenOverlay mainScreen);
-    static void commandScan(sp::ecs::Entity object);
-    static void commandSetSystemPowerRequest(ShipSystem::Type system, float power_level);
-    static void commandSetSystemCoolantRequest(ShipSystem::Type system, float coolant_level);
-    static void commandDock(sp::ecs::Entity station);
-    static void commandUndock();
-    static void commandAbortDock();
-    static void commandOpenTextComm(sp::ecs::Entity obj);
-    static void commandCloseTextComm();
-    static void commandAnswerCommHail(bool awnser);
-    static void commandSendComm(uint8_t index);
-    static void commandSendCommPlayer(string message);
-    static void commandSetAutoRepair(bool enabled);
-    static void commandSetBeamFrequency(int32_t frequency);
-    static void commandSetBeamSystemTarget(ShipSystem::Type system);
-    static void commandSetShieldFrequency(int32_t frequency);
-    static void commandAddWaypoint(glm::vec2 position);
-    static void commandRemoveWaypoint(int32_t index);
-    static void commandMoveWaypoint(int32_t index, glm::vec2 position);
-    static void commandActivateSelfDestruct();
-    static void commandCancelSelfDestruct();
-    static void commandConfirmDestructCode(int8_t index, uint32_t code);
-    static void commandCombatManeuverBoost(float amount);
-    static void commandCombatManeuverStrafe(float strafe);
-    static void commandLaunchProbe(glm::vec2 target_position);
-    static void commandScanDone();
-    static void commandScanCancel();
-    static void commandSetAlertLevel(AlertLevel level);
-    static void commandHackingFinished(sp::ecs::Entity target, ShipSystem::Type target_system);
-    static void commandCustomFunction(string name);
-
     virtual void onReceiveServerCommand(sp::io::DataBuffer& packet) override;
 
     // Template function

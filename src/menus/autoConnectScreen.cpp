@@ -6,6 +6,7 @@
 #include "playerInfo.h"
 #include "multiplayer_client.h"
 #include "multiplayer_server_scanner.h"
+#include "ecs/query.h"
 
 #include "gui/gui2_label.h"
 
@@ -105,11 +106,11 @@ void AutoConnectScreen::update(float delta)
                         status_label->setText("Waiting for ship...");
                     if (!my_spaceship)
                     {
-                        for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+                        for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
                         {
-                            if (isValidShip(n))
+                            if (isValidShip(entity))
                             {
-                                connectToShip(n);
+                                connectToShip(entity);
                                 break;
                             }
                         }
@@ -129,10 +130,8 @@ void AutoConnectScreen::update(float delta)
     }
 }
 
-bool AutoConnectScreen::isValidShip(int index)
+bool AutoConnectScreen::isValidShip(sp::ecs::Entity ship)
 {
-    auto ship = gameGlobalInfo->getPlayerShip(index);
-
     if (!ship)
         return false;
 
@@ -177,10 +176,8 @@ bool AutoConnectScreen::isValidShip(int index)
     return true;
 }
 
-void AutoConnectScreen::connectToShip(int index)
+void AutoConnectScreen::connectToShip(sp::ecs::Entity ship)
 {
-    auto ship = gameGlobalInfo->getPlayerShip(index);
-
     if (crew_position != max_crew_positions)    //If we are not the main screen, setup the right crew position.
     {
         my_player_info->commandSetCrewPosition(0, crew_position, true);

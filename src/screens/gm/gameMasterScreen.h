@@ -73,6 +73,8 @@ private:
 
     GuiButton* create_button;
     GuiButton* cancel_action_button;
+
+    GameMasterChatDialog* getChatDialog(sp::ecs::Entity entity);
 public:
 
     GameMasterScreen(RenderLayer* render_layer);

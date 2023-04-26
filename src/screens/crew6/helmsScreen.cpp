@@ -52,7 +52,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
                 float angle = vec2ToAngle(position - transform->getPosition());
                 auto draw_position = rect.center() + (position - transform->getPosition()) / radar->getDistance() * std::min(r.size.x, r.size.y) * 0.5f;
                 heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
-                PlayerSpaceship::commandTargetRotation(angle);
+                my_player_info->commandTargetRotation(angle);
             }
         },
         [radar, this](glm::vec2 position) {
@@ -62,12 +62,12 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
                 float angle = vec2ToAngle(position - transform->getPosition());
                 auto draw_position = rect.center() + (position - transform->getPosition()) / radar->getDistance() * std::min(r.size.x, r.size.y) * 0.5f;
                 heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
-                PlayerSpaceship::commandTargetRotation(angle);
+                my_player_info->commandTargetRotation(angle);
             }
         },
         [this](glm::vec2 position) {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                PlayerSpaceship::commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
+                my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
             heading_hint->hide();
         }
     );
@@ -125,7 +125,7 @@ void HelmsScreen::onUpdate()
         {
             auto transform = my_spaceship.getComponent<sp::Transform>();
             if (transform)
-                PlayerSpaceship::commandTargetRotation(transform->getRotation() + angle);
+                my_player_info->commandTargetRotation(transform->getRotation() + angle);
         }
     }
 }

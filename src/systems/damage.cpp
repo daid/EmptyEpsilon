@@ -41,7 +41,7 @@ void DamageSystem::damageArea(glm::vec2 position, float blast_range, float min_d
 void DamageSystem::applyDamage(sp::ecs::Entity entity, float amount, const DamageInfo& info)
 {
     auto shields = entity.getComponent<Shields>();
-    if (shields && shields->active) {
+    if (shields && shields->active && !shields->entries.empty()) {
         auto transform = entity.getComponent<sp::Transform>();
         float angle = 0;
         if (transform) {
@@ -49,10 +49,10 @@ void DamageSystem::applyDamage(sp::ecs::Entity entity, float amount, const Damag
             if (angle < 0)
                 angle += 360.0f;
         }
-        float arc = 360.0f / float(shields->count);
+        float arc = 360.0f / float(shields->entries.size());
         int shield_index = int((angle + arc / 2.0f) / arc);
-        shield_index %= shields->count;
-        auto& shield = shields->entry[shield_index];
+        shield_index %= shields->entries.size();
+        auto& shield = shields->entries[shield_index];
 
         float frequency_damage_factor = 1.f;
         if (info.type == DamageType::Energy && gameGlobalInfo->use_beam_shield_frequencies)
@@ -184,12 +184,10 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
             points += hull->max * 0.1f;
 
         auto shields = entity.getComponent<Shields>();
-        if (shields) {
-            for(int n=0; n<shields->count; n++)
-            {
-                points += shields->entry[n].max * 0.1f;
-            }
-            points /= shields->count;
+        if (shields && !shields->entries.empty()) {
+            for(auto& shield : shields->entries)
+                points += shield.max * 0.1f;
+            points /= shields->entries.size();
         }
         
         if (Faction::getRelation(info.instigator, entity) == FactionRelation::Enemy)

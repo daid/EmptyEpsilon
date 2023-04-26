@@ -54,17 +54,17 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get())
-                PlayerSpaceship::commandSetTarget(targets.get());
+                my_player_info->commandSetTarget(targets.get());
             else if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                PlayerSpaceship::commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
+                my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
         },
         [this](glm::vec2 position) {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                PlayerSpaceship::commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
+                my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
         },
         [this](glm::vec2 position) {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                PlayerSpaceship::commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
+                my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
         }
     );
     radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
@@ -137,10 +137,10 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
         jump_controls->setVisible(my_spaceship.hasComponent<JumpDrive>());
 
         auto shields = my_spaceship.getComponent<Shields>();
-        if (shields) {
-            string shields_value = string(shields->entry[0].percentage()) + "%";
-            if (shields->count > 1)
-                shields_value += " " + string(shields->entry[1].percentage()) + "%";
+        if (shields && shields->entries.size() > 0) {
+            string shields_value = string(shields->entries[0].percentage()) + "%";
+            if (shields->entries.size() > 1)
+                shields_value += " " + string(shields->entries[1].percentage()) + "%";
             shields_display->setValue(shields_value);
             shields_display->show();
         } else {
@@ -161,20 +161,20 @@ void TacticalScreen::onUpdate()
         if (angle != 0.0f)
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                PlayerSpaceship::commandTargetRotation(transform->getRotation() + angle);
+                my_player_info->commandTargetRotation(transform->getRotation() + angle);
         }
 
         if (keys.weapons_enemy_next_target.getDown())
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
             targets.setNext(lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable);
-            PlayerSpaceship::commandSetTarget(targets.get());
+            my_player_info->commandSetTarget(targets.get());
         }
         if (keys.weapons_next_target.getDown())
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
             targets.setNext(lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable, FactionRelation::Enemy);
-            PlayerSpaceship::commandSetTarget(targets.get());
+            my_player_info->commandSetTarget(targets.get());
         }
 
         auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();

@@ -44,5 +44,6 @@ class ScienceScanner
 {
 public:
     float delay = 0.0f; // When a delay based scan is done, this will count down.
+    float max_scanning_delay = 6.0f;
     sp::ecs::Entity target;
 };

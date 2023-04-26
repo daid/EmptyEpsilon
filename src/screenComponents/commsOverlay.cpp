@@ -26,7 +26,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     opening_cancel = new GuiButton(opening_box, "COMMS_OPENING_CANCEL", tr("button", "Cancel"), []()
     {
         if (my_spaceship)
-            PlayerSpaceship::commandCloseTextComm();
+            my_player_info->commandCloseTextComm();
     });
     opening_cancel->setSize(200, 40)->setPosition(-50, -10, sp::Alignment::BottomRight);
 
@@ -39,13 +39,13 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     // Buttons to answer or ignore hails.
     hailed_answer = new GuiButton(hailed_box, "COMMS_BEING_HAILED_ANSWER", tr("Answer"), []() {
         if (my_spaceship)
-            PlayerSpaceship::commandAnswerCommHail(true);
+            my_player_info->commandAnswerCommHail(true);
     });
     hailed_answer->setSize(300, 50)->setPosition(20, -20, sp::Alignment::BottomLeft);
 
     hailed_ignore = new GuiButton(hailed_box, "COMMS_BEING_HAILED_IGNORE", tr("Ignore"), []() {
         if (my_spaceship)
-            PlayerSpaceship::commandAnswerCommHail(false);
+            my_player_info->commandAnswerCommHail(false);
     });
     hailed_ignore->setSize(300, 50)->setPosition(-20, -20, sp::Alignment::BottomRight);
 
@@ -57,7 +57,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     // Button to acknowledge unresponsive hails.
     (new GuiButton(no_response_box, "COMMS_NO_REPLY_OK", "Ok", []() {
         if (my_spaceship)
-            PlayerSpaceship::commandCloseTextComm();
+            my_player_info->commandCloseTextComm();
     }))->setSize(100, 50)->setPosition(-20, -10, sp::Alignment::BottomRight);
 
     // Panel for broken communications.
@@ -68,7 +68,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     // Button to acknowledge broken communications.
     (new GuiButton(broken_box, "COMMS_BROKEN_OK", "Ok", []() {
         if (my_spaceship)
-            PlayerSpaceship::commandCloseTextComm();
+            my_player_info->commandCloseTextComm();
     }))->setSize(100, 50)->setPosition(-20, -10, sp::Alignment::BottomRight);
 
     // Panel for communications closed by the other object.
@@ -79,7 +79,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     // Button to acknowledge closed communications.
     (new GuiButton(closed_box, "COMMS_CLOSED_OK", "Ok", []() {
         if (my_spaceship)
-            PlayerSpaceship::commandCloseTextComm();
+            my_player_info->commandCloseTextComm();
     }))->setSize(100, 50)->setPosition(-20, -10, sp::Alignment::BottomRight);
 
     // Panel for chat communications with GMs and other player ships.
@@ -91,7 +91,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     chat_comms_message_entry->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(640, 50);
     chat_comms_message_entry->enterCallback([this](string text){
         if (my_spaceship)
-            PlayerSpaceship::commandSendCommPlayer(chat_comms_message_entry->getText());
+            my_player_info->commandSendCommPlayer(chat_comms_message_entry->getText());
         chat_comms_message_entry->setText("");
     });
 
@@ -102,7 +102,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     // Button to send a message.
     chat_comms_send_button = new GuiButton(chat_comms_box, "SEND_BUTTON", tr("button", "Send"), [this]() {
         if (my_spaceship)
-            PlayerSpaceship::commandSendCommPlayer(chat_comms_message_entry->getText());
+            my_player_info->commandSendCommPlayer(chat_comms_message_entry->getText());
         chat_comms_message_entry->setText("");
     });
     chat_comms_send_button->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(120, 50);
@@ -110,7 +110,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     // Button to close chat comms.
     chat_comms_close_button = new GuiButton(chat_comms_box, "CLOSE_BUTTON", tr("button", "Close"), []() {
         if (my_spaceship)
-            PlayerSpaceship::commandCloseTextComm();
+            my_player_info->commandCloseTextComm();
     });
     chat_comms_close_button->setTextSize(20)->setPosition(-10, 0, sp::Alignment::TopRight)->setSize(70, 30);
 
@@ -133,7 +133,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     // List possible responses to a scripted communication.
     script_comms_options = new GuiListbox(script_comms_box, "COMMS_SCRIPT_LIST", [this](int index, string value) {
         script_comms_options->setOptions({});
-        PlayerSpaceship::commandSendComm(index);
+        my_player_info->commandSendComm(index);
     });
     script_comms_options->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(700, 400);
 
@@ -141,7 +141,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     script_comms_close = new GuiButton(script_comms_box, "CLOSE_BUTTON", tr("button", "Close"), [this]() {
         script_comms_options->setOptions({});
         if (my_spaceship)
-            PlayerSpaceship::commandCloseTextComm();
+            my_player_info->commandCloseTextComm();
     });
     script_comms_close->setTextSize(20)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(150, 50);
 }

@@ -108,7 +108,7 @@ void MissileSystem::update(float delta)
 void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
 {
     if (!game_server) return;
-    auto mc = a.getComponent<MissileCollision>();
+    auto mc = a.getComponent<ExplodeOnTouch>();
     if (!mc) return;
     if (mc->owner == b) return;
     auto hull = b.getComponent<Hull>();
@@ -202,7 +202,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
     case MW_Homing:
         {
             missile = sp::ecs::Entity::create();
-            auto& mc = missile.addComponent<MissileCollision>();
+            auto& mc = missile.addComponent<ExplodeOnTouch>();
             mc.owner = source;
             mc.damage_at_center = 35 * category_modifier;
             mc.damage_at_edge = 5 * category_modifier;
@@ -213,7 +213,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
     case MW_Nuke:
         {
             missile = sp::ecs::Entity::create();
-            auto& mc = missile.addComponent<MissileCollision>();
+            auto& mc = missile.addComponent<ExplodeOnTouch>();
             mc.owner = source;
             mc.damage_at_center = 160.0f * category_modifier;
             mc.damage_at_edge = 30.0f * category_modifier;
@@ -238,7 +238,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
     case MW_HVLI:
         {
             missile = sp::ecs::Entity::create();
-            auto& mc = missile.addComponent<MissileCollision>();
+            auto& mc = missile.addComponent<ExplodeOnTouch>();
             mc.owner = source;
             mc.damage_at_center = 10.0f * category_modifier;
             mc.damage_at_edge = 10.0f * category_modifier;
@@ -249,7 +249,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
     case MW_EMP:
         {
             missile = sp::ecs::Entity::create();
-            auto& mc = missile.addComponent<MissileCollision>();
+            auto& mc = missile.addComponent<ExplodeOnTouch>();
             mc.owner = source;
             mc.damage_at_center = 160.0f * category_modifier;
             mc.damage_at_edge = 30.0f * category_modifier;

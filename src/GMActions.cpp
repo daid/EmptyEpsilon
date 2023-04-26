@@ -29,9 +29,11 @@ void GameMasterActions::onReceiveClientCommand(int32_t client_id, sp::io::DataBu
             packet >> code;
             if (code.length() > 0)
             {
+                /*TODO
                 P<ScriptObject> so = new ScriptObject();
                 so->runCode(code);
                 so->destroy();
+                */
             }
         }
         break;

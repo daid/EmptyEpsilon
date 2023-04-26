@@ -11,12 +11,12 @@ class GuiRadarView;
 class GameMasterChatDialog : public GuiResizableDialog
 {
 public:
-    GameMasterChatDialog(GuiContainer* owner, GuiRadarView* radar, int index);
+    GameMasterChatDialog(GuiContainer* owner, GuiRadarView* radar, sp::ecs::Entity player);
 
     virtual void onDraw(sp::RenderTarget& target) override;
-private:
-    int player_index;
+
     sp::ecs::Entity player;
+private:
     GuiRadarView* radar;
 
     bool notification;

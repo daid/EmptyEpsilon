@@ -5,88 +5,99 @@
 --- Scenario
 -- @script scenario_10_empty
 
-function init()
-    --SpaceStation():setPosition(1000, 1000):setTemplate('Small Station'):setFaction("Human Navy"):setRotation(random(0, 360))
-    --SpaceStation():setPosition(-1000, 1000):setTemplate('Medium Station'):setFaction("Human Navy"):setRotation(random(0, 360))
-    --SpaceStation():setPosition(1000, -1000):setTemplate('Large Station'):setFaction("Human Navy"):setRotation(random(0, 360))
-    --SpaceStation():setPosition(-1000, -1000):setTemplate('Huge Station'):setFaction("Human Navy"):setRotation(random(0, 360))
-    --player1 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setRotation(200)
-    --player2 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setRotation(0)
-    --Nebula():setPosition(-5000, 0)
-    Artifact():setPosition(1000, 9000):setModel("small_frigate_1"):setDescription("An old space derelict.")
-    Artifact():setPosition(9000, 2000):setModel("small_frigate_1"):setDescription("A wrecked ship."):setRadarTraceColor(255, 0, 0)
-    Artifact():setPosition(3000, 4000):setModel("small_frigate_1"):setDescription("Tons of rotting plasteel.")
-    --addGMFunction("move 1 to 2", function() player1:transferPlayersToShip(player2) end)
-    --addGMFunction("move 2 to 1", function() player2:transferPlayersToShip(player1) end)
-    --CpuShip():setTemplate("Adder MK5"):setPosition(0, 0):setRotation(0):setFaction("Human Navy")
-    --CpuShip():setTemplate("Piranha F12"):setPosition(2000, 0):setRotation(-90):setFaction("Kraylor")
-    --[[
-    local planet1 = Planet():setPosition(5000, 5000):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png"):setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2, 0.2, 1.0)
-    local moon1 = Planet():setPosition(5000, 0):setPlanetRadius(1000):setDistanceFromMovementPlane(-2000):setPlanetSurfaceTexture("planets/moon-1.png"):setAxialRotationTime(20.0)
-    local sun1 = Planet():setPosition(5000, 15000):setPlanetRadius(1000):setDistanceFromMovementPlane(-2000):setPlanetAtmosphereTexture("planets/star-1.png"):setPlanetAtmosphereColor(1.0, 1.0, 1.0)
-    planet1:setOrbit(sun1, 40)
-    moon1:setOrbit(planet1, 20.0)
+function Asteroid()
+    local e = createEntity()
+    e.transform = {rotation=random(0, 360)}
+    e.radar_signature = {gravity=0.05}
+    local z = random(-50, 50)
+    local size = random(110, 130)
 
-    addGMFunction(
-        "Random asteroid field",
-        function()
-            cleanup()
-            for n = 1, 1000 do
-                Asteroid():setPosition(random(-50000, 50000), random(-50000, 50000)):setSize(random(100, 500))
-                VisualAsteroid():setPosition(random(-50000, 50000), random(-50000, 50000)):setSize(random(100, 500))
-            end
-        end
-    )
-    addGMFunction(
-        "Random nebula field",
-        function()
-            cleanup()
-            for n = 1, 50 do
-                Nebula():setPosition(random(-50000, 50000), random(-50000, 50000))
-            end
-        end
-    )
-    addGMFunction(
-        "Delete unselected",
-        function()
-            local gm_selection = getGMSelection()
-            for _, obj in ipairs(getAllObjects()) do
-                local found = false
-                for _, obj2 in ipairs(gm_selection) do
-                    if obj == obj2 then
-                        found = true
-                    end
-                end
-                if not found then
-                    obj:destroy()
-                end
-            end
-        end
-    )
-    --]]
+    local model_number = irandom(1, 10)
+    e.mesh_render = {
+        mesh="Astroid_" .. model_number .. ".model",
+        mesh_offset={0, 0, z},
+        texture="Astroid_" .. model_number .. "_d.png",
+        specular_texture="Astroid_" .. model_number .. "_s.png",
+        scale=size,
+    }
+    e.physics = {type="Sensor", size=size}
+    e.radar_trace = {
+        icon="radar/blip.png",
+        radius=size,
+        color={255, 200, 100, 255},
+        --TODO: flags="LongRange",
+    }
+    e.spin={rate=random(0.1, 0.8)}
+    e.avoid_object={range=size*2}
+    e.explode_on_touch={damage_at_center=35, damage_at_edge=35,blast_range=size}
+    return e
 end
 
-function cleanup()
-    -- Clean up the current play field. Find all objects and destroy everything that is not a player.
-    -- If it is a player, position him in the center of the scenario.
-    for _, obj in ipairs(getAllObjects()) do
-        if obj.typeName == "PlayerSpaceship" then
-            obj:setPosition(random(-100, 100), random(-100, 100))
-        else
-            obj:destroy()
-        end
-    end
+function PlayerSpaceship()
+    local e = createEntity()
+    local size = 300
+    e.transform = {rotation=random(0, 360)}
+    e.callsign = {callsign="Player"}
+    e.typename = {type_name="Atlantis"}
+    --ShipTemplateBasedObject
+    e.long_range_radar = {}
+    e.hull = {}
+    e.shields = {{level=100,max=100}, {level=50,max=50}}
+    e.radar_trace = {
+        icon="radar/dread.png",
+        radius=size*0.8,
+        max_size=1024,
+        --TODO: flags="Rotate | LongRange | ColorByFaction",
+    }
+    --e.docking_bay = {}
+    e.docking_port = {}
+    e.share_short_range_radar = {}
+    e.mesh_render = {
+        mesh="small_fighter_1.model",
+        mesh_offset={0, 0, 0},
+        texture="small_fighter_1_color.jpg",
+        specular_texture="small_fighter_1_specular.jpg",
+        illumination_texture="small_fighter_1_illumination.jpg",
+        scale=3.0,
+    }
+    e.engine_emitter = {}
+    e.physics = {type="dynamic", size=size}
+    
+    --SpaceShip
+    --e.radar_trace.flags = e.radar_trace.flags | ArrowIfNotScanned
+    e.shields.frequency = irandom(0, 20);
+    e.beam_weapons = {}
+    e.reactor = {}
+    e.impulse_engine = {}
+    e.maneuvering_thrusters = {}
+    e.combat_maneuvering_thrusters = {}
+    e.warp_drive = {}
+    e.jump_drive = {}
+    e.missile_tubes = {}
+    
+    --PlayerSpaceShip
+    --TODO: Set scan state for each faction
+    --TODO: Faction
+    --TODO: Repair crew + InternalRooms
+    e.coolant = {}
+    e.self_destruct = {}
+    e.science_scanner = {}
+    e.scan_probe_launcher = {}
+    e.hacking_device = {}
+    e.player_control = {}
+    
+    return e
+end
+
+
+function init()
+    local a = Asteroid()
+    a.transform = {position={500, 1000}}
+    
+    local p = PlayerSpaceship()
+    p.transform = {position={5000, 5000}}
 end
 
 function update(delta)
     -- No victory condition
 end
-
--- Set callback function
-onNewPlayerShip(
-    function(ship)
-        -- Decide what you do with new ships:
-        print(ship, ship.typeName, ship:getTypeName(), ship:getCallSign())
-        -- ship:destroy()
-    end
-)

@@ -10,7 +10,7 @@ ScriptErrorRenderer::ScriptErrorRenderer(RenderLayer* renderLayer)
 
 void ScriptErrorRenderer::render(sp::RenderTarget& renderer)
 {
-    P<ScriptObject> script = engine->getObject("scenario");
+    P<ScriptObjectLegacy> script = engine->getObject("scenario");
     if (!script)
     {
         destroy();

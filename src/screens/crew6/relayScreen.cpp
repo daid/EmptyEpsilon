@@ -59,7 +59,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             if (mode == TargetSelection)
                 radar->setViewPosition(radar->getViewPosition() - (position - mouse_down_position));
             if (mode == MoveWaypoint && my_spaceship)
-                PlayerSpaceship::commandMoveWaypoint(drag_waypoint_index, position);
+                my_player_info->commandMoveWaypoint(drag_waypoint_index, position);
         },
         [this](glm::vec2 position) { //up
             switch(mode)
@@ -69,7 +69,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
                 break;
             case WaypointPlacement:
                 if (my_spaceship)
-                    PlayerSpaceship::commandAddWaypoint(position);
+                    my_player_info->commandAddWaypoint(position);
                 mode = TargetSelection;
                 option_buttons->show();
                 break;
@@ -79,7 +79,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
                 break;
             case LaunchProbe:
                 if (my_spaceship)
-                    PlayerSpaceship::commandLaunchProbe(position);
+                    my_player_info->commandLaunchProbe(position);
                 mode = TargetSelection;
                 option_buttons->show();
                 break;
@@ -131,11 +131,11 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", tr("Link to Science"), [this](bool value){
         if (value)
         {
-            PlayerSpaceship::commandSetScienceLink(targets.get());
+            my_player_info->commandSetScienceLink(targets.get());
         }
         else
         {
-            PlayerSpaceship::commandClearScienceLink();
+            my_player_info->commandClearScienceLink();
         }
     });
     link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && my_spaceship.hasComponent<ScanProbeLauncher>());
@@ -149,7 +149,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this]() {
         if (my_spaceship && targets.getWaypointIndex() >= 0)
         {
-            PlayerSpaceship::commandRemoveWaypoint(targets.getWaypointIndex());
+            my_player_info->commandRemoveWaypoint(targets.getWaypointIndex());
         }
     });
     delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50);

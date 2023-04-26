@@ -18,7 +18,7 @@ GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id)
         if (my_spaceship) {
             auto shields = my_spaceship.getComponent<Shields>();
             if (shields)
-                PlayerSpaceship::commandSetShields(!shields->active);
+                my_player_info->commandSetShields(!shields->active);
         }
     });
     button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -66,11 +66,11 @@ void GuiShieldsEnableButton::onUpdate()
         if (keys.weapons_toggle_shields.getDown()) {
             auto shields = my_spaceship.getComponent<Shields>();
             if (shields)
-                PlayerSpaceship::commandSetShields(!shields->active);
+                my_player_info->commandSetShields(!shields->active);
         }
         if (keys.weapons_enable_shields.getDown())
-            PlayerSpaceship::commandSetShields(true);
+            my_player_info->commandSetShields(true);
         if (keys.weapons_disable_shields.getDown())
-            PlayerSpaceship::commandSetShields(false);
+            my_player_info->commandSetShields(false);
     }
 }

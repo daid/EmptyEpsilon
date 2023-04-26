@@ -4,9 +4,9 @@
 
 ShipSystem& Shields::getSystemForIndex(int index)
 {
-    if (count < 2)
+    if (entries.size() < 2)
         return front_system;
-    float angle = index * 360.0f / count;
+    float angle = index * 360.0f / entries.size();
     if (std::abs(angleDifference(angle, 0.0f)) < 90)
         return front_system;
     return rear_system;

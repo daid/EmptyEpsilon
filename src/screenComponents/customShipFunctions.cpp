@@ -91,7 +91,7 @@ void GuiCustomShipFunctions::createEntries()
                 e.element = new GuiButton(this, "", f.caption, [name]()
                 {
                     if (my_spaceship)
-                        PlayerSpaceship::commandCustomFunction(name);
+                        my_player_info->commandCustomFunction(name);
                 });
                 e.element->setSize(GuiElement::GuiSizeMax, 50);
             }

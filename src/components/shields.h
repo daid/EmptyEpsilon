@@ -6,8 +6,6 @@
 
 class Shields {
 public:
-    static constexpr size_t max_count = 8;
-
     bool active = true;
 
     // Time in seconds it takes to recalibrate shields
@@ -17,15 +15,14 @@ public:
 
     float energy_use_per_second = 1.5f;
 
-    int count = 0;
     struct Shield {
-        float level = 0.0f;
-        float max = 0.0f;
+        float level = 1.0f;
+        float max = 1.0f;
         float hit_effect = 0.0f;
 
-        int percentage() { return int(100.0f * level / max); }
+        int percentage() { if (max <= 0.0f) return 0; return int(100.0f * level / max); }
     };
-    Shield entry[max_count];
+    std::vector<Shield> entries;
     ShipSystem front_system;
     ShipSystem rear_system;
 

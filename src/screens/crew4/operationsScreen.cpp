@@ -47,7 +47,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
         [this](glm::vec2 position) { // Drag
             // If we're dragging a waypoint, move it.
             if (mode == MoveWaypoint && my_spaceship)
-                PlayerSpaceship::commandMoveWaypoint(drag_waypoint_index, position);
+                my_player_info->commandMoveWaypoint(drag_waypoint_index, position);
         },
         [this](glm::vec2 position) { // Up
             switch(mode)
@@ -57,7 +57,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
                 break;
             case WaypointPlacement:
                 if (my_spaceship)
-                    PlayerSpaceship::commandAddWaypoint(position);
+                    my_player_info->commandAddWaypoint(position);
                 mode = TargetSelection;
                 break;
             case MoveWaypoint:
@@ -80,7 +80,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     delete_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this]() {
         if (my_spaceship && science->targets.getWaypointIndex() >= 0)
         {
-            PlayerSpaceship::commandRemoveWaypoint(science->targets.getWaypointIndex());
+            my_player_info->commandRemoveWaypoint(science->targets.getWaypointIndex());
         }
     });
     delete_waypoint_button->setPosition(-270, -120, sp::Alignment::BottomRight)->setSize(200, 50);

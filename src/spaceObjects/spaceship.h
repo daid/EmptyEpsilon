@@ -65,7 +65,7 @@ public:
     bool isFriendOrFoeIdentifiedByFaction(sp::ecs::Entity faction_entity);
     bool isFullyScannedByFaction(sp::ecs::Entity faction_entity);
 
-    virtual void hackFinished(P<SpaceObject> source, ShipSystem::Type target) override;
+    virtual void hackFinished(sp::ecs::Entity source, ShipSystem::Type target) override;
 
     /*!
      * Check if ship has certain system

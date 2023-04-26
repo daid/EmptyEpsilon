@@ -27,7 +27,7 @@ void ShipSystemsSystem::update(float delta)
         updateSystem(system, delta);
     for(auto [entity, system] : sp::ecs::Query<Shields>()) {
         updateSystem(system.front_system, delta);
-        if (system.count > 1)
+        if (system.entries.size() > 1)
             updateSystem(system.rear_system, delta);
     }
 }

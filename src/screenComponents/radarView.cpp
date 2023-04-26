@@ -913,26 +913,25 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
             bool show_levels = (!my_spaceship || !scanstate || scanstate->getStateFor(my_spaceship) == ScanState::State::FullScan);
             float sprite_scale = scale * trace.radius * 1.5f / 32;
 
-            if (shields.count == 1)
+            if (shields.entries.size() == 1)
             {
                 glm::u8vec4 color = glm::u8vec4(255, 255, 255, 64);
                 if (show_levels)
                 {
-                    float level = shields.entry[0].level / shields.entry[0].max;
+                    float level = shields.entries[0].level / shields.entries[0].max;
                     color = Tween<glm::u8vec4>::linear(level, 1.0f, 0.0f, glm::u8vec4(128, 128, 255, 128), glm::u8vec4(255, 0, 0, 64));
                 }
-                if (shields.entry[0].hit_effect > 0.0f)
+                if (shields.entries[0].hit_effect > 0.0f)
                 {
-                    color = Tween<glm::u8vec4>::linear(shields.entry[0].hit_effect, 0.0f, 1.0f, color, glm::u8vec4(255, 0, 0, 128));
+                    color = Tween<glm::u8vec4>::linear(shields.entries[0].hit_effect, 0.0f, 1.0f, color, glm::u8vec4(255, 0, 0, 128));
                 }
                 renderer.drawSprite("shield_circle.png", object_position_on_screen, sprite_scale * 0.25f * 1.5f * 256.0f, color);
-            }else if (shields.count > 1) {
+            }else if (shields.entries.size() > 1) {
                 float direction = transform.getRotation() - view_rotation;
-                float arc = 360.0f / float(shields.count);
+                float arc = 360.0f / float(shields.entries.size());
 
-                for(int n=0; n<shields.count; n++)
+                for(auto& shield : shields.entries)
                 {
-                    auto& shield = shields.entry[n];
                     glm::u8vec4 color = glm::u8vec4(255, 255, 255, 64);
                     if (show_levels)
                     {

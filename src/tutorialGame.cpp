@@ -60,11 +60,11 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
     i18n::load("locale/science_db." + PreferencesManager::get("language", "en") + ".po");
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
 
-    P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
+    P<ScriptObjectLegacy> factionInfoScript = new ScriptObjectLegacy("factionInfo.lua");
     if (factionInfoScript->getError() != "") exit(1);
     factionInfoScript->destroy();
 
-    script = new ScriptObject();
+    script = new ScriptObjectLegacy();
     script->registerObject(this, "tutorial");
     script->run(filename);
 }
@@ -235,7 +235,7 @@ void TutorialGame::finish()
         script->destroy();
         hideAllScreens();
 
-        script = new ScriptObject();
+        script = new ScriptObjectLegacy();
         script->registerObject(this, "tutorial");
         script->run("tutorial.lua");
     }else{

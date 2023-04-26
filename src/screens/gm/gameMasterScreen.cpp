@@ -70,7 +70,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     global_message_button->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(250, 50);
 
     player_ship_selector = new GuiSelector(this, "PLAYER_SHIP_SELECTOR", [this](int index, string value) {
-        auto ship = gameGlobalInfo->getPlayerShip(value.toInt());
+        auto ship = sp::ecs::Entity::fromString(value);
         if (ship)
             target = ship;
         if (auto transform = target.getComponent<sp::Transform>())
@@ -141,9 +141,9 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         {
             if (obj.hasComponent<CommsTransmitter>())
             {
-                int idx = gameGlobalInfo->findPlayerShip(obj);
+                auto cd = getChatDialog(obj);
                 if (auto transform = obj.getComponent<sp::Transform>())
-                    chat_dialog_per_ship[idx]->show()->setPosition(main_radar->worldToScreen(transform->getPosition()))->setSize(300, 300);
+                    cd->show()->setPosition(main_radar->worldToScreen(transform->getPosition()))->setSize(300, 300);
             }
         }
     });
@@ -207,11 +207,6 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
 
     chat_layer = new GuiElement(this, "");
     chat_layer->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
-    {
-        chat_dialog_per_ship.push_back(new GameMasterChatDialog(chat_layer, main_radar, n));
-        chat_dialog_per_ship[n]->hide();
-    }
 
     player_tweak_dialog = new GuiObjectTweak(this, TW_Player);
     player_tweak_dialog->hide();
@@ -299,37 +294,35 @@ void GameMasterScreen::update(float delta)
     bool has_player_ship = false;
 
     // Add and remove entries from the player ship list.
-    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
     {
-        auto ship = gameGlobalInfo->getPlayerShip(n);
-        if (ship)
+        string ship_name;
+        if (auto tn = entity.getComponent<TypeName>())
+            ship_name += " " + tn->type_name;
+        if (auto cs = entity.getComponent<CallSign>())
+            ship_name += " " + cs->callsign;
+        if (player_ship_selector->indexByValue(entity.toString()) == -1)
         {
-            string ship_name;
-            if (auto tn = ship.getComponent<TypeName>())
-                ship_name += " " + tn->type_name;
-            if (auto cs = ship.getComponent<CallSign>())
-                ship_name += " " + cs->callsign;
-            if (player_ship_selector->indexByValue(string(n)) == -1)
-            {
-                player_ship_selector->addEntry(ship_name, string(n));
-            } else {
-                player_ship_selector->setEntryName(player_ship_selector->indexByValue(string(n)), ship_name);
-            }
-
-            auto transmitter = ship.getComponent<CommsTransmitter>();
-            if (transmitter && (transmitter->state == CommsTransmitter::State::BeingHailedByGM || transmitter->state == CommsTransmitter::State::ChannelOpenGM))
-            {
-                if (!chat_dialog_per_ship[n]->isVisible())
-                {
-                    auto transform = ship.getComponent<sp::Transform>();
-                    if (transform)
-                        chat_dialog_per_ship[n]->show()->setPosition(main_radar->worldToScreen(transform->getPosition()))->setSize(300, 300);
-                }
-            }
-        }else{
-            if (player_ship_selector->indexByValue(string(n)) != -1)
-                player_ship_selector->removeEntry(player_ship_selector->indexByValue(string(n)));
+            player_ship_selector->addEntry(ship_name, entity.toString());
+        } else {
+            player_ship_selector->setEntryName(player_ship_selector->indexByValue(entity.toString()), ship_name);
         }
+
+        auto transmitter = entity.getComponent<CommsTransmitter>();
+        if (transmitter && (transmitter->state == CommsTransmitter::State::BeingHailedByGM || transmitter->state == CommsTransmitter::State::ChannelOpenGM))
+        {
+            auto cd = getChatDialog(entity);
+            if (!cd->isVisible())
+            {
+                auto transform = entity.getComponent<sp::Transform>();
+                if (transform)
+                    cd->show()->setPosition(main_radar->worldToScreen(transform->getPosition()))->setSize(300, 300);
+            }
+        }
+    }
+    for(int n=0; n<player_ship_selector->entryCount(); n++) {
+        if (!sp::ecs::Entity::fromString(player_ship_selector->getEntryValue(n)))
+            player_ship_selector->removeEntry(n);
     }
 
     // Record object type.
@@ -622,6 +615,17 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
 std::vector<sp::ecs::Entity> GameMasterScreen::getSelection()
 {
     return targets.getTargets();
+}
+
+GameMasterChatDialog* GameMasterScreen::getChatDialog(sp::ecs::Entity entity)
+{
+    //TODO: clean up old dialogs that are no longer valid.
+    for(auto d : chat_dialog_per_ship)
+        if (d->player == entity)
+            return d;
+    auto dialog = new GameMasterChatDialog(chat_layer, main_radar, entity);
+    chat_dialog_per_ship.push_back(dialog);
+    return dialog;
 }
 
 string GameMasterScreen::getScriptExport(bool selected_only)

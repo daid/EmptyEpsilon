@@ -51,7 +51,7 @@ private:
     float cycle_time;
 
 public:
-    explicit CinematicViewScreen(RenderLayer* render_layer, int playerShip = 0);
+    explicit CinematicViewScreen(RenderLayer* render_layer);
 
     virtual void update(float delta) override;
 };

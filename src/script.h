@@ -6,7 +6,7 @@
 /*!
 * Script object which gets registered with the global game info, so it can get destroyed when the game is destroyed.
 */
-class Script : public ScriptObject
+class Script : public ScriptObjectLegacy
 {
 public:
     Script();

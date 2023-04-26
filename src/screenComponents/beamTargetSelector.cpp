@@ -6,7 +6,7 @@
 #include "components/beamweapon.h"
 
 GuiBeamTargetSelector::GuiBeamTargetSelector(GuiContainer* owner, string id)
-: GuiSelector(owner, id, [](int index, string value) { if (my_spaceship) PlayerSpaceship::commandSetBeamSystemTarget(ShipSystem::Type(index + int(ShipSystem::Type::None))); })
+: GuiSelector(owner, id, [](int index, string value) { if (my_spaceship) my_player_info->commandSetBeamSystemTarget(ShipSystem::Type(index + int(ShipSystem::Type::None))); })
 {
     addEntry(tr("target","Hull"), "-1");
     for(int n=0; n<ShipSystem::COUNT; n++)

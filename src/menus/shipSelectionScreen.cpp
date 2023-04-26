@@ -5,6 +5,7 @@
 #include "soundManager.h"
 #include "random.h"
 #include "multiplayer_client.h"
+#include "ecs/query.h"
 
 #include "serverCreationScreen.h"
 #include "epsilonServer.h"
@@ -277,14 +278,13 @@ ShipSelectionScreen::ShipSelectionScreen()
 
     // Player ship list
     player_ship_list = new GuiListbox(left_container, "PLAYER_SHIP_LIST", [this](int index, string value) {
-        auto ship = gameGlobalInfo->getPlayerShip(value.toInt());
+        auto ship = sp::ecs::Entity::fromString(value);
 
         // If the selected item is a ship ...
-        if (ship)
+        if (auto pc = ship.getComponent<PlayerControl>())
         {
-            auto pc = ship.getComponent<PlayerControl>();
             // ... and it has a control code, ask the player for it.
-            if (pc && pc->control_code.length() > 0)
+            if (pc->control_code.length() > 0)
             {
                 LOG(INFO) << "Player selected " << (ship.getComponent<CallSign>() ? ship.getComponent<CallSign>()->callsign : string("[NO CALLSIGN]")) << ", which has a control code.";
                 // Hide the ship selection UI temporarily to deter sneaky ship thieves.
@@ -399,38 +399,31 @@ void ShipSelectionScreen::update(float delta)
     }
 
     // Update the player ship list with all player ships.
-    for(int n = 0; n < GameGlobalInfo::max_player_ships; n++)
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
     {
-        auto ship = gameGlobalInfo->getPlayerShip(n);
-        if (ship)
+        string ship_name = Faction::getInfo(entity).locale_name;
+        if (auto tn = entity.getComponent<TypeName>())
+            ship_name += " " + tn->type_name;
+        if (auto cs = entity.getComponent<CallSign>())
+            ship_name += " " + cs->callsign;
+
+        int index = player_ship_list->indexByValue(entity.toString());
+        // If a player ship isn't in already in the list, add it.
+        if (index == -1)
         {
-            string ship_name = Faction::getInfo(ship).locale_name;
-            if (auto tn = ship.getComponent<TypeName>())
-                ship_name += " " + tn->type_name;
-            if (auto cs = ship.getComponent<CallSign>())
-                ship_name += " " + cs->callsign;
-
-            int index = player_ship_list->indexByValue(string(n));
-            // If a player ship isn't in already in the list, add it.
-            if (index == -1)
-            {
-                index = player_ship_list->addEntry(ship_name, string(n));
-                if (my_spaceship == ship)
-                    player_ship_list->setSelectionIndex(index);
-            }
-
-            // If the ship is crewed, count how many positions are filled.
-            int ship_position_count = 0;
-            for (int n = 0; n < max_crew_positions; n++)
-            {
-                if (PlayerInfo::hasPlayerAtPosition(ship, ECrewPosition(n)))
-                    ship_position_count += 1;
-            }
-            player_ship_list->setEntryName(index, ship_name + " (" + string(ship_position_count) + ")");
-        }else{
-            if (player_ship_list->indexByValue(string(n)) != -1)
-                player_ship_list->removeEntry(player_ship_list->indexByValue(string(n)));
+            index = player_ship_list->addEntry(ship_name, entity.toString());
+            if (my_spaceship == entity)
+                player_ship_list->setSelectionIndex(index);
         }
+
+        // If the ship is crewed, count how many positions are filled.
+        int ship_position_count = 0;
+        for (int n = 0; n < max_crew_positions; n++)
+        {
+            if (PlayerInfo::hasPlayerAtPosition(entity, ECrewPosition(n)))
+                ship_position_count += 1;
+        }
+        player_ship_list->setEntryName(index, ship_name + " (" + string(ship_position_count) + ")");
     }
 
     // If there aren't any player ships, show a label stating so.

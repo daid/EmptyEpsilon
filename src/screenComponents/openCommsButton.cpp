@@ -9,7 +9,7 @@
 GuiOpenCommsButton::GuiOpenCommsButton(GuiContainer* owner, string id, string name, TargetsContainer* targets)
 : GuiButton(owner, id, name, [this]() {
     if (my_spaceship && this->targets->get())
-        PlayerSpaceship::commandOpenTextComm(this->targets->get());
+        my_player_info->commandOpenTextComm(this->targets->get());
 }), targets(targets)
 {
 }

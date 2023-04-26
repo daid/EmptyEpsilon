@@ -258,11 +258,11 @@ void CommsSystem::selectScriptReply(sp::ecs::Entity player, int index)
     {
         if (auto log = player.getComponent<ShipLog>())
             log->add(transmitter->script_replies[index].message, colorConfig.log_send);
-        ScriptSimpleCallback callback = transmitter->script_replies[index].callback;
-        if (!transmitter->script_object)
+        auto callback = transmitter->script_replies[index].callback;
+        if (!transmitter->script_environment)
         {
-            callback.getScriptObject()->registerObject(player, "comms_source");
-            callback.getScriptObject()->registerObject(transmitter->target, "comms_target");
+            //TODO: callback.getScriptObject()->registerObject(player, "comms_source");
+            //TODO: callback.getScriptObject()->registerObject(transmitter->target, "comms_target");
         }
         transmitter->script_replies.clear();
         transmitter->incomming_message = "?";
@@ -338,23 +338,23 @@ bool CommsSystem::openChannel(sp::ecs::Entity player, sp::ecs::Entity target)
     transmitter->script_replies.clear();
     transmitter->target = target;
 
-    if (transmitter->script_object)
-        transmitter->script_object->destroy();
-    transmitter->script_object = nullptr;
+    transmitter->script_environment = nullptr;
     transmitter->incomming_message = "???";
 
     if (script_name != "")
     {
-        transmitter->script_object = new ScriptObject();
+        transmitter->script_environment = std::make_unique<sp::script::Environment>();
+        //TODO: Register all default global functions and shizzle.
+
         // consider "player" deprecated, but keep it for a long time
-        transmitter->script_object->registerObject(player, "player");
-        transmitter->script_object->registerObject(player, "comms_source");
-        transmitter->script_object->registerObject(target, "comms_target");
-        transmitter->script_object->run(script_name);
-    }else if (receiver->callback.isSet())
+        transmitter->script_environment->setGlobal("player", player);
+        transmitter->script_environment->setGlobal("comms_source", player);
+        transmitter->script_environment->setGlobal("comms_target", target);
+        transmitter->script_environment->runFile<void>(script_name);
+    }else if (receiver->callback)
     {
-        receiver->callback.getScriptObject()->registerObject(player, "comms_source");
-        receiver->callback.getScriptObject()->registerObject(target, "comms_target");
+        //TODO: receiver->callback.getScriptObject()->registerObject(player, "comms_source");
+        //TODO: receiver->callback.getScriptObject()->registerObject(target, "comms_target");
         receiver->callback.call<void>(player, target);
     }
     script_active_entity = {};
@@ -379,7 +379,7 @@ static int addCommsReply(lua_State* L)
     ScriptSimpleCallback callback;
     int idx = 2;
     convert<ScriptSimpleCallback>::param(L, idx, callback);
-    transmitter->script_replies.push_back({message, callback});
+    //TODO: transmitter->script_replies.push_back({message, callback});
     return 0;
 }
 

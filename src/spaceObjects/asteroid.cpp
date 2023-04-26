@@ -55,7 +55,7 @@ Asteroid::Asteroid()
 
         auto physics = entity.getComponent<sp::Physics>();
         if (physics)
-            physics->setCircle(sp::Physics::Type::Static, size);
+            physics->setCircle(sp::Physics::Type::Sensor, size);
 
         auto& trace = entity.getOrAddComponent<RadarTrace>();
         trace.icon = "radar/blip.png";

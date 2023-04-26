@@ -19,8 +19,8 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
     slider = new GuiSnapSlider2D(this, id + "_STRAFE", glm::vec2(-1.0, 1.0), glm::vec2(1.0, 0.0), glm::vec2(0.0, 0.0), [](glm::vec2 value) {
         if (my_spaceship)
         {
-            PlayerSpaceship::commandCombatManeuverBoost(value.y);
-            PlayerSpaceship::commandCombatManeuverStrafe(value.x);
+            my_player_info->commandCombatManeuverBoost(value.y);
+            my_player_info->commandCombatManeuverStrafe(value.x);
         }
     });
     slider->setPosition(0, -50, sp::Alignment::BottomCenter)->setSize(GuiElement::GuiSizeMax, 165);
@@ -64,11 +64,11 @@ void GuiCombatManeuver::onDraw(sp::RenderTarget& target)
 void GuiCombatManeuver::setBoostValue(float value)
 {
     slider->setValue(glm::vec2(slider->getValue().x, value));
-    PlayerSpaceship::commandCombatManeuverBoost(value);
+    my_player_info->commandCombatManeuverBoost(value);
 }
 
 void GuiCombatManeuver::setStrafeValue(float value)
 {
     slider->setValue(glm::vec2(value, slider->getValue().y));
-    PlayerSpaceship::commandCombatManeuverStrafe(value);
+    my_player_info->commandCombatManeuverStrafe(value);
 }

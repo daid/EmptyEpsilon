@@ -199,17 +199,17 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
 void ShipTemplateBasedObject::draw3DTransparent()
 {
     auto shields = entity.getComponent<Shields>();
-    if (!shields)
+    if (!shields || shields->entries.empty())
         return;
 
     float angle = 0.0;
-    float arc = 360.0f / shields->count;
+    float arc = 360.0f / shields->entries.size();
     const auto model_matrix = getModelMatrix();
-    for(int n = 0; n<shields->count; n++)
+    for(auto& shield : shields->entries)
     {
-        if (shields->entry[n].hit_effect > 0)
+        if (shield.hit_effect > 0)
         {
-            if (shields->count > 1)
+            if (shields->entries.size() > 1)
             {
                 //TODO: model_info.renderShield(model_matrix, (shields->entry[n].level / shields->entry[n].max) * shields->entry[n].hit_effect, angle);
             }else{
@@ -288,9 +288,9 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
 
         if (ship_template->shield_count) {
             auto& shields = entity.getOrAddComponent<Shields>();
-            shields.count = ship_template->shield_count;
-            for(int n=0; n<shields.count; n++)
-                shields.entry[n].max = shields.entry[n].level = ship_template->shield_level[n];
+            shields.entries.resize(ship_template->shield_count);
+            for(unsigned int n=0; n<shields.entries.size(); n++)
+                shields.entries[n].max = shields.entries[n].level = ship_template->shield_level[n];
         }
 
         auto& trace = entity.getOrAddComponent<RadarTrace>();

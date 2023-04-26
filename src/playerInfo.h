@@ -3,6 +3,10 @@
 
 #include "multiplayer.h"
 #include "scriptInterface.h"
+#include "components/player.h"
+#include "systems/shipsystemssystem.h"
+#include "missileWeaponData.h"
+
 
 enum ECrewPosition
 {
@@ -51,6 +55,51 @@ public:
     void reset();
 
     bool isOnlyMainScreen(int monitor_index);
+
+    void commandTargetRotation(float target);
+    void commandTurnSpeed(float turnSpeed);
+    void commandImpulse(float target);
+    void commandWarp(int8_t target);
+    void commandJump(float distance);
+    void commandSetTarget(sp::ecs::Entity target);
+    void commandSetScienceLink(sp::ecs::Entity probe);
+    void commandClearScienceLink();
+    void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
+    void commandUnloadTube(int8_t tubeNumber);
+    void commandFireTube(int8_t tubeNumber, float missile_target_angle);
+    void commandFireTubeAtTarget(int8_t tubeNumber, sp::ecs::Entity target);
+    void commandSetShields(bool enabled);
+    void commandMainScreenSetting(MainScreenSetting mainScreen);
+    void commandMainScreenOverlay(MainScreenOverlay mainScreen);
+    void commandScan(sp::ecs::Entity object);
+    void commandSetSystemPowerRequest(ShipSystem::Type system, float power_level);
+    void commandSetSystemCoolantRequest(ShipSystem::Type system, float coolant_level);
+    void commandDock(sp::ecs::Entity station);
+    void commandUndock();
+    void commandAbortDock();
+    void commandOpenTextComm(sp::ecs::Entity obj);
+    void commandCloseTextComm();
+    void commandAnswerCommHail(bool awnser);
+    void commandSendComm(uint8_t index);
+    void commandSendCommPlayer(string message);
+    void commandSetAutoRepair(bool enabled);
+    void commandSetBeamFrequency(int32_t frequency);
+    void commandSetBeamSystemTarget(ShipSystem::Type system);
+    void commandSetShieldFrequency(int32_t frequency);
+    void commandAddWaypoint(glm::vec2 position);
+    void commandRemoveWaypoint(int32_t index);
+    void commandMoveWaypoint(int32_t index, glm::vec2 position);
+    void commandActivateSelfDestruct();
+    void commandCancelSelfDestruct();
+    void commandConfirmDestructCode(int8_t index, uint32_t code);
+    void commandCombatManeuverBoost(float amount);
+    void commandCombatManeuverStrafe(float strafe);
+    void commandLaunchProbe(glm::vec2 target_position);
+    void commandScanDone();
+    void commandScanCancel();
+    void commandSetAlertLevel(AlertLevel level);
+    void commandHackingFinished(sp::ecs::Entity target, ShipSystem::Type target_system);
+    void commandCustomFunction(string name);
 
     void commandSetCrewPosition(int monitor_index, ECrewPosition position, bool active);
     void commandSetShip(sp::ecs::Entity entity);

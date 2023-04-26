@@ -54,6 +54,7 @@
 #include "tutorialGame.h"
 #include "windowManager.h"
 #include "ecs/multiplayer.h"
+#include "script/components.h"
 
 #include "graphics/opengl.h"
 
@@ -168,6 +169,7 @@ int main(int argc, char** argv)
     engine->registerSystem<InternalCrewSystem>();
     engine->registerSystem<PathFindingSystem>();
     engine->registerSystem<MeshRenderSystem>();
+    initComponentScriptBindings();
     string configuration_path = ".";
     if (getenv("HOME"))
         configuration_path = string(getenv("HOME")) + "/.emptyepsilon";
@@ -376,11 +378,11 @@ int main(int argc, char** argv)
     sp::RenderTarget::setDefaultFont(main_font);
 
     {
-        P<ScriptObject> modelDataScript = new ScriptObject("model_data.lua");
+        P<ScriptObjectLegacy> modelDataScript = new ScriptObjectLegacy("model_data.lua");
         if (modelDataScript->getError() != "") exit(1);
         modelDataScript->destroy();
 
-        P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
+        P<ScriptObjectLegacy> shipTemplatesScript = new ScriptObjectLegacy("shipTemplates.lua");
         if (shipTemplatesScript->getError() != "") exit(1);
         shipTemplatesScript->destroy();
 

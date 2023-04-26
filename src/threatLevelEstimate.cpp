@@ -1,5 +1,6 @@
 #include "gameGlobalInfo.h"
 #include "threatLevelEstimate.h"
+#include "ecs/query.h"
 #include "components/hull.h"
 #include "components/collision.h"
 #include "components/shields.h"
@@ -22,10 +23,8 @@ void ThreatLevelEstimate::update(float delta)
         return;
 
     float max_threat = 0.0f;
-    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
-    {
-        max_threat = std::max(max_threat, getThreatFor(gameGlobalInfo->getPlayerShip(n)));
-    }
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+        max_threat = std::max(max_threat, getThreatFor(entity));
     float f = delta / threat_drop_off_time;
     smoothed_threat_level = ((1.0f - f) * smoothed_threat_level) + (max_threat * f);
 
@@ -58,8 +57,8 @@ float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
     if (shields) {
         if (shields->active)
             threat += 200;
-        for(int n=0; n<shields->count; n++)
-            threat += shields->entry[n].max - shields->entry[n].level;
+        for(auto& shield : shields->entries)
+            threat += shield.max - shield.level;
     }
 
     float radius = 7000.0;
@@ -75,7 +74,7 @@ float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
             P<SpaceShip> other_ship = obj;
             if (!other_ship || Faction::getRelation(ship, entity) == FactionRelation::Enemy)
             {
-                if (entity.hasComponent<MissileCollision>())
+                if (entity.hasComponent<MissileFlight>() && entity.hasComponent<ExplodeOnTouch>())
                     threat += 5000.0f;
                 if (entity.hasComponent<BeamEffect>())
                     threat += 5000.0f;
@@ -89,9 +88,9 @@ float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
                 score += hull->max;
             auto shields = entity.getComponent<Shields>();
             if (shields) {
-                for(int n=0; n<shields->count; n++) {
-                    score += shields->entry[n].max * 2.0f / float(shields->count);
-                    if (shields->entry[n].hit_effect > 0.0f)
+                for(auto& shield : shields->entries) {
+                    score += shield.max * 2.0f / float(shields->entries.size());
+                    if (shield.hit_effect > 0.0f)
                         is_being_attacked = true;
                 }
             }

@@ -496,7 +496,7 @@ void ScienceScreen::onUpdate()
             auto scanstate = obj.getComponent<ScanState>();
             if (scanstate && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
             {
-                PlayerSpaceship::commandScan(obj);
+                my_player_info->commandScan(obj);
                 return;
             }
         }

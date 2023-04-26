@@ -302,7 +302,7 @@ bool SpaceObject::canBeScannedBy(sp::ecs::Entity other)
     return false;
 }
 
-void SpaceObject::hackFinished(P<SpaceObject> source, ShipSystem::Type target)
+void SpaceObject::hackFinished(sp::ecs::Entity source, ShipSystem::Type target)
 {
 }
 

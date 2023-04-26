@@ -111,7 +111,7 @@ ShipSystem* ShipSystem::get(sp::ecs::Entity entity, Type type)
     case Type::RearShield:
         {
             auto shields = entity.getComponent<Shields>();
-            if (shields && shields->count > 1)
+            if (shields && shields->entries.size() > 1)
                 return &shields->rear_system;
             return nullptr;
         }

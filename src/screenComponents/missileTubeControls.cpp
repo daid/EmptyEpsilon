@@ -34,12 +34,12 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
             {
                 if (load_type != MW_None)
                 {
-                    PlayerSpaceship::commandLoadTube(n, load_type);
+                    my_player_info->commandLoadTube(n, load_type);
                 }
             }
             else
             {
-                PlayerSpaceship::commandUnloadTube(n);
+                my_player_info->commandUnloadTube(n);
             }
         });
         row.load_button->setSize(130, 50);
@@ -58,7 +58,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
                         target_angle = (transform ? transform->getRotation() : 0.0f) + tubes->mounts[n].direction;
                     }
                 }
-                PlayerSpaceship::commandFireTube(n, target_angle);
+                my_player_info->commandFireTube(n, target_angle);
             }
         });
         row.fire_button->setSize(200, 50);
@@ -192,9 +192,9 @@ void GuiMissileTubeControls::onUpdate()
     for(int n=0; n<tubes->count; n++)
     {
         if (keys.weapons_load_tube[n].getDown())
-            PlayerSpaceship::commandLoadTube(n, load_type);
+            my_player_info->commandLoadTube(n, load_type);
         if (keys.weapons_unload_tube[n].getDown())
-            PlayerSpaceship::commandUnloadTube(n);
+            my_player_info->commandUnloadTube(n);
         if (keys.weapons_fire_tube[n].getDown())
         {
             float target_angle = missile_target_angle;
@@ -207,7 +207,7 @@ void GuiMissileTubeControls::onUpdate()
                     target_angle = (transform ? transform->getRotation() : 0.0f) + tubes->mounts[n].direction;
                 }
             }
-            PlayerSpaceship::commandFireTube(n, target_angle);
+            my_player_info->commandFireTube(n, target_angle);
         }
     }
 }

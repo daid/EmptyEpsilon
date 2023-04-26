@@ -9,6 +9,7 @@
 #include "config.h"
 #include "components/collision.h"
 #include "systems/collision.h"
+#include "ecs/query.h"
 #include <SDL_assert.h>
 
 P<GameGlobalInfo> gameGlobalInfo;
@@ -21,11 +22,6 @@ GameGlobalInfo::GameGlobalInfo()
 
     callsign_counter = 0;
     gameGlobalInfo = this;
-
-    for(int n=0; n<max_player_ships; n++)
-    {
-        registerMemberReplication(&playerShip[n]);
-    }
 
     global_message_timeout = 0.0;
     scanning_complexity = SC_Normal;
@@ -58,41 +54,6 @@ GameGlobalInfo::GameGlobalInfo()
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
 GameGlobalInfo::~GameGlobalInfo()
 {
-}
-
-sp::ecs::Entity GameGlobalInfo::getPlayerShip(int index)
-{
-    SDL_assert(index >= 0 && index < max_player_ships);
-    return playerShip[index];
-}
-
-void GameGlobalInfo::setPlayerShip(int index, sp::ecs::Entity ship)
-{
-    SDL_assert(index >= 0 && index < max_player_ships);
-    SDL_assert(game_server);
-
-    playerShip[index] = ship;
-}
-
-int GameGlobalInfo::findPlayerShip(sp::ecs::Entity ship)
-{
-    for(int n=0; n<max_player_ships; n++)
-        if (getPlayerShip(n) == ship)
-            return n;
-    return -1;
-}
-
-int GameGlobalInfo::insertPlayerShip(sp::ecs::Entity ship)
-{
-    for(int n=0; n<max_player_ships; n++)
-    {
-        if (!getPlayerShip(n))
-        {
-            setPlayerShip(n, ship);
-            return n;
-        }
-    }
-    return -1;
 }
 
 void GameGlobalInfo::update(float delta)
@@ -155,10 +116,10 @@ void GameGlobalInfo::reset()
     flushDatabaseData();
     FactionInfoLegacy::reset();
 
+    //TODO: Destroy all entities.
     foreach(SpaceObject, o, space_object_list)
         o->destroy();
-    if (engine->getObject("scenario"))
-        engine->getObject("scenario")->destroy();
+    main_script = nullptr;
 
     foreach(Script, s, script_list)
         s->destroy();
@@ -213,6 +174,11 @@ void GameGlobalInfo::setScenarioSettings(const string filename, std::unordered_m
     }
 }
 
+static sp::ecs::Entity luaCreateEntity()
+{
+    return sp::ecs::Entity::create();
+}
+
 void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, string> new_settings)
 {
     reset();
@@ -225,26 +191,30 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     i18n::load("locale/science_db." + PreferencesManager::get("language", "en") + ".po");
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
 
-    P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
-    if (factionInfoScript->getError() != "") exit(1);
-    factionInfoScript->destroy();
+    main_script = std::make_unique<sp::script::Environment>();
+    //TODO: Load factions
+    //TODO: Load core functions
+    main_script->setGlobal("createEntity", &luaCreateEntity);
+    main_script->setGlobal("random", &random);
+    main_script->setGlobal("irandom", &irandom);
+    //TODO: Load ship templates
+    //TODO: Load science database
 
-    fillDefaultDatabaseData();
-
-    P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
-    if (scienceInfoScript->getError() != "") exit(1);
-    scienceInfoScript->destroy();
-
-    P<ScriptObject> script = new ScriptObject();
-    int max_cycles = PreferencesManager::get("script_cycle_limit", "0").toInt();
-    if (max_cycles > 0)
-        script->setMaxRunCycles(max_cycles);
+    //TODO: int max_cycles = PreferencesManager::get("script_cycle_limit", "0").toInt();
+    //TODO: if (max_cycles > 0)
+    //TODO:     script->setMaxRunCycles(max_cycles);
 
     // Initialize scenario settings.
     setScenarioSettings(filename, new_settings);
 
-    script->run(filename);
-    engine->registerObject("scenario", script);
+    auto res = main_script->runFile<void>(filename);
+    if (res.isErr()) {
+        LOG(Error, "Main script error: " + res.error());
+    } else {
+        res = main_script->call<void>("init");
+        if (res.isErr())
+            LOG(Error, "Main script error: " + res.error());
+    }
 
     if (PreferencesManager::get("game_logs", "1").toInt())
     {
@@ -408,22 +378,15 @@ REGISTER_SCRIPT_FUNCTION(getScenarioTime);
 static int getPlayerShip(lua_State* L)
 {
     int index = luaL_checkinteger(L, 1);
-    if (index == -1)
-    {
-        for(index = 0; index<GameGlobalInfo::max_player_ships; index++)
-        {
-            auto ship = gameGlobalInfo->getPlayerShip(index);
-            if (ship)
-                return convert<sp::ecs::Entity>::returnType(L, ship);
-        }
+    if (index == -1) {
+        for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+            return convert<sp::ecs::Entity>::returnType(L, entity);
         return 0;
     }
-    if (index < 1 || index > GameGlobalInfo::max_player_ships)
-        return 0;
-    auto ship = gameGlobalInfo->getPlayerShip(index - 1);
-    if (!ship)
-        return 0;
-    return convert<sp::ecs::Entity>::returnType(L, ship);
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+        if (--index == 0)
+            return convert<sp::ecs::Entity>::returnType(L, entity);
+    return 0;
 }
 /// P<PlayerSpaceship> getPlayerShip(int index)
 /// Returns the PlayerSpaceship with the given index.
@@ -436,14 +399,8 @@ REGISTER_SCRIPT_FUNCTION(getPlayerShip);
 static int getActivePlayerShips(lua_State* L)
 {
     std::vector<sp::ecs::Entity> ships;
-    ships.reserve(GameGlobalInfo::max_player_ships);
-    for (auto index = 0; index < GameGlobalInfo::max_player_ships; ++index)
-    {
-        auto ship = gameGlobalInfo->getPlayerShip(index);
-        
-        if (ship)
-            ships.emplace_back(ship);
-    }
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+        ships.emplace_back(entity);
 
     return convert<std::vector<sp::ecs::Entity>>::returnType(L, ships);
 }

@@ -18,7 +18,7 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
 
         // Send a warp request command to our ship.
         if (my_spaceship)
-            PlayerSpaceship::commandWarp(warp_level);
+            my_player_info->commandWarp(warp_level);
 
         // Set the slider value to the warp level.
         slider->setValue(warp_level);
@@ -70,40 +70,40 @@ void GuiWarpControls::onUpdate()
             return;
         if (keys.helms_warp0.getDown())
         {
-            PlayerSpaceship::commandWarp(0);
+            my_player_info->commandWarp(0);
             slider->setValue(0);
         }
         if (keys.helms_warp1.getDown())
         {
-            PlayerSpaceship::commandWarp(1);
+            my_player_info->commandWarp(1);
             slider->setValue(1);
         }
         if (keys.helms_warp2.getDown())
         {
-            PlayerSpaceship::commandWarp(2);
+            my_player_info->commandWarp(2);
             slider->setValue(2);
         }
         if (keys.helms_warp3.getDown())
         {
-            PlayerSpaceship::commandWarp(3);
+            my_player_info->commandWarp(3);
             slider->setValue(3);
         }
         if (keys.helms_warp4.getDown())
         {
-            PlayerSpaceship::commandWarp(4);
+            my_player_info->commandWarp(4);
             slider->setValue(4);
         }
         if (keys.helms_increase_warp.getDown())
         {
             if (warp->request < 4) {
-                PlayerSpaceship::commandWarp(warp->request+1);
+                my_player_info->commandWarp(warp->request+1);
                 slider->setValue(warp->request+1);
             }
         }
         else if (keys.helms_decrease_warp.getDown())
         {
             if (warp->request > 0) {
-                PlayerSpaceship::commandWarp(warp->request-1);
+                my_player_info->commandWarp(warp->request-1);
                 slider->setValue(warp->request-1);
             }
         }

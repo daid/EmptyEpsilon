@@ -86,12 +86,12 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
         info.heat_icon->setColor(colorConfig.overlay_overheating)->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
         info.power_bar = new GuiProgressSlider(info.row, id + "_POWER", 0.0f, 3.0f, 0.0f, [this,n](float value){
             if (my_spaceship)
-                PlayerSpaceship::commandSetSystemPowerRequest(ShipSystem::Type(n), value);
+                my_player_info->commandSetSystemPowerRequest(ShipSystem::Type(n), value);
         });
         info.power_bar->setColor(glm::u8vec4(192, 192, 32, 128))->setSize(column_width, GuiElement::GuiSizeMax);
         info.coolant_bar = new GuiProgressSlider(info.row, id + "_COOLANT", 0.0f, 10.0f, 0.0f, [this,n](float value){
             if (my_spaceship)
-                PlayerSpaceship::commandSetSystemCoolantRequest(ShipSystem::Type(n), value);
+                my_player_info->commandSetSystemCoolantRequest(ShipSystem::Type(n), value);
         });
         info.coolant_bar->setColor(glm::u8vec4(32, 128, 128, 128))->setSize(column_width, GuiElement::GuiSizeMax);
         if (!gameGlobalInfo->use_system_damage)
@@ -127,7 +127,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
             for(int n=0; n<ShipSystem::COUNT; n++) {
                 auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n));
                 if (sys)
-                    PlayerSpaceship::commandSetSystemCoolantRequest(ShipSystem::Type(n), sys->coolant_request * new_max_total / total_requested);
+                    my_player_info->commandSetSystemCoolantRequest(ShipSystem::Type(n), sys->coolant_request * new_max_total / total_requested);
             }
         } else { // Put coolant into systems
             int system_count = 0;
@@ -138,7 +138,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
             for(int n=0; n<ShipSystem::COUNT; n++) {
                 auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n));
                 if (sys)
-                    PlayerSpaceship::commandSetSystemCoolantRequest(ShipSystem::Type(n), std::min(sys->coolant_request + add, 10.0f));
+                    my_player_info->commandSetSystemCoolantRequest(ShipSystem::Type(n), std::min(sys->coolant_request + add, 10.0f));
             }
         }
     });
@@ -166,7 +166,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
 
     power_slider = new GuiSlider(box, "POWER_SLIDER", 3.0, 0.0, 1.0, [this](float value) {
         if (my_spaceship && selected_system != ShipSystem::Type::None)
-            PlayerSpaceship::commandSetSystemPowerRequest(selected_system, value);
+            my_player_info->commandSetSystemPowerRequest(selected_system, value);
     });
     power_slider->setPosition(50, 20, sp::Alignment::TopLeft)->setSize(60, 360);
     for(float snap_point = 0.0f; snap_point <= 3.0f; snap_point += 0.5f)
@@ -174,7 +174,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     power_slider->disable();
     coolant_slider = new GuiSlider(box, "COOLANT_SLIDER", 10.0, 0.0, 0.0, [this](float value) {
         if (my_spaceship && selected_system != ShipSystem::Type::None)
-            PlayerSpaceship::commandSetSystemCoolantRequest(selected_system, value);
+            my_player_info->commandSetSystemCoolantRequest(selected_system, value);
     });
     coolant_slider->setPosition(140, 20, sp::Alignment::TopLeft)->setSize(60, 360);
     for(float snap_point = 0.0f; snap_point <= 10.0f; snap_point += 2.5f)
@@ -229,16 +229,16 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                 hull_display->setColor(glm::u8vec4{255,255,255,255});
         }
         auto shields = my_spaceship.getComponent<Shields>();
-        if (shields)
+        if (shields && shields->entries.size() > 0)
         {
-            front_shield_display->setValue(string(shields->entry[0].percentage()) + "%");
+            front_shield_display->setValue(string(shields->entries[0].percentage()) + "%");
             front_shield_display->show();
         } else {
             front_shield_display->hide();
         }
-        if (shields->count > 1)
+        if (shields && shields->entries.size() > 1)
         {
-            rear_shield_display->setValue(string(shields->entry[1].percentage()) + "%");
+            rear_shield_display->setValue(string(shields->entries[1].percentage()) + "%");
             rear_shield_display->show();
         } else {
             rear_shield_display->hide();
@@ -397,7 +397,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                         {
                             DamageInfo di;
                             di.type = DamageType::Kinetic;
-                            float damage_negate = 1.0f - shields->getDamageFactor(shields->count - 1);
+                            float damage_negate = 1.0f - shields->getDamageFactor(shields->entries.size() - 1);
                             if (damage_negate < 0.0f)
                                 addSystemEffect(tr("Extra damage"), toNearbyIntString(-damage_negate * 100) + "%");
                             else
@@ -436,42 +436,42 @@ void EngineeringScreen::onUpdate()
             if (keys.engineering_set_power_000.getDown())
             {
                 power_slider->setValue(0.0f);
-                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_030.getDown())
             {
                 power_slider->setValue(0.3f);
-                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_050.getDown())
             {
                 power_slider->setValue(0.5f);
-                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_100.getDown())
             {
                 power_slider->setValue(1.0f);
-                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_150.getDown())
             {
                 power_slider->setValue(1.5f);
-                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_200.getDown())
             {
                 power_slider->setValue(2.0f);
-                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_250.getDown())
             {
                 power_slider->setValue(2.5f);
-                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_300.getDown())
             {
                 power_slider->setValue(3.0f);
-                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
 
             auto power_adjust = (keys.engineering_increase_power.getValue() - keys.engineering_decrease_power.getValue()) * 0.1f;
@@ -480,7 +480,7 @@ void EngineeringScreen::onUpdate()
                 auto sys = ShipSystem::get(my_spaceship, selected_system);
                 if (sys) {
                     power_slider->setValue(sys->power_request + power_adjust);
-                    PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                    my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
                 }
             }
             auto coolant_adjust = (keys.engineering_increase_coolant.getValue() - keys.engineering_decrease_coolant.getValue()) * 0.5f;
@@ -489,7 +489,7 @@ void EngineeringScreen::onUpdate()
                 auto sys = ShipSystem::get(my_spaceship, selected_system);
                 if (sys) {
                     coolant_slider->setValue(sys->coolant_request + coolant_adjust);
-                    PlayerSpaceship::commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+                    my_player_info->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
                 }
             }
         }

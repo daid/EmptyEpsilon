@@ -61,10 +61,10 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
         bool low_shields = false;
         auto shields = my_spaceship.getComponent<Shields>();
         if (shields) {
-            for(int n=0; n<shields->count; n++)
+            for(auto& shield : shields->entries)
             {
-                shield_hit = std::max(shield_hit, shields->entry[n].hit_effect);
-                if (shields->entry[n].level < shields->entry[n].max / 10.0f)
+                shield_hit = std::max(shield_hit, shield.hit_effect);
+                if (shield.level < shield.max / 10.0f)
                     low_shields = true;
             }
         }

@@ -1,12 +1,13 @@
 #pragma once
 
-#include "scriptInterface.h"
+#include "script/environment.h"
+#include "script/callback.h"
 
 class CommsReceiver
 {
 public:
     string script; // "comms_ship.lua" / "comms_station.lua"
-    ScriptSimpleCallback callback;
+    sp::script::Callback callback;
 };
 
 class CommsTransmitter
@@ -28,7 +29,7 @@ public:
     struct ScriptReply
     {
         string message;
-        ScriptSimpleCallback callback;
+        sp::script::Callback callback;
     };
 
     State state = State::Inactive;
@@ -40,5 +41,5 @@ public:
     
     //CommsScriptInterface
     bool has_message = false;
-    P<ScriptObject> script_object;
+    std::unique_ptr<sp::script::Environment> script_environment;
 };

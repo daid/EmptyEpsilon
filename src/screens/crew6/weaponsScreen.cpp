@@ -43,9 +43,9 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get())
-                PlayerSpaceship::commandSetTarget(targets.get());
+                my_player_info->commandSetTarget(targets.get());
             else if (my_spaceship)
-                PlayerSpaceship::commandSetTarget({});
+                my_player_info->commandSetTarget({});
         }, nullptr, nullptr
     );
     radar->setAutoRotating(PreferencesManager::get("weapons_radar_lock","0")=="1");
@@ -108,14 +108,14 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
         if (reactor)
             energy_display->setValue(string(int(reactor->energy)));
         auto shields = my_spaceship.getComponent<Shields>();
-        if (shields) {
-            front_shield_display->setValue(string(shields->entry[0].percentage()) + "%");
+        if (shields && shields->entries.size() > 0) {
+            front_shield_display->setValue(string(shields->entries[0].percentage()) + "%");
             front_shield_display->show();
         } else {
             front_shield_display->hide();
         }
-        if (shields && shields->count > 1) {
-            rear_shield_display->setValue(string(shields->entry[1].percentage()) + "%");
+        if (shields && shields->entries.size() > 1) {
+            rear_shield_display->setValue(string(shields->entries[1].percentage()) + "%");
             rear_shield_display->show();
         } else {
             rear_shield_display->hide();
@@ -138,13 +138,13 @@ void WeaponsScreen::onUpdate()
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
             targets.setNext(lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable, FactionRelation::Enemy);
-            PlayerSpaceship::commandSetTarget(targets.get());
+            my_player_info->commandSetTarget(targets.get());
         }
         if (keys.weapons_next_target.getDown())
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
             targets.setNext(lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable);
-            PlayerSpaceship::commandSetTarget(targets.get());
+            my_player_info->commandSetTarget(targets.get());
         }
         auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();
         if (aim_adjust != 0.0f)

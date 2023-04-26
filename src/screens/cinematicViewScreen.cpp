@@ -4,15 +4,17 @@
 #include "epsilonServer.h"
 #include "main.h"
 #include "multiplayer_client.h"
+#include "ecs/query.h"
 #include "components/collision.h"
 #include "components/target.h"
+#include "components/player.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
-CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer, int32_t playerShip /* = 0 */)
+CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
 : GuiCanvas(render_layer)
 {
     // Create a full-screen viewport.
@@ -28,12 +30,14 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer, int32_t play
     camera_pitch = 45.0f;
 
     // Lock onto player ship to start.
-    if (gameGlobalInfo->getPlayerShip(playerShip))
-        target = gameGlobalInfo->getPlayerShip(playerShip);
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>()) {
+        target = entity;
+        break;
+    }
 
     // Let the screen operator select a player ship to lock the camera onto.
     camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
-        auto ship = gameGlobalInfo->getPlayerShip(value.toInt());
+        auto ship = sp::ecs::Entity::fromString(value);
         if (ship)
             target = ship;
     });
@@ -95,7 +99,7 @@ void CinematicViewScreen::update(float delta)
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
         if (camera_lock_selector->getSelectionIndex() < 0)
             camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
-        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+        target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
     }
 
     if (keys.cinematic.next_player_ship.getDown())
@@ -103,7 +107,7 @@ void CinematicViewScreen::update(float delta)
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
         if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
             camera_lock_selector->setSelectionIndex(0);
-        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+        target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
     }
     // TODO: X resets the camera to a default relative position and heading.
     if (keys.escape.getDown())
@@ -179,23 +183,20 @@ void CinematicViewScreen::update(float delta)
 
     // Add and remove entries from the player ship list.
     // TODO: Allow any ship or station to be the camera target.
-    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
     {
-        auto ship = gameGlobalInfo->getPlayerShip(n);
-        if (ship)
-        {
-            if (camera_lock_selector->indexByValue(string(n)) == -1) {
-                string label;
-                if (auto tn = ship.getComponent<TypeName>())
-                    label = tn->type_name;
-                if (auto cs = ship.getComponent<CallSign>())
-                    label += " " + cs->callsign;
-                camera_lock_selector->addEntry(label, string(n));
-            }
-        }else{
-            if (camera_lock_selector->indexByValue(string(n)) != -1)
-                camera_lock_selector->removeEntry(camera_lock_selector->indexByValue(string(n)));
+        if (camera_lock_selector->indexByValue(entity.toString()) == -1) {
+            string label;
+            if (auto tn = entity.getComponent<TypeName>())
+                label = tn->type_name;
+            if (auto cs = entity.getComponent<CallSign>())
+                label += " " + cs->callsign;
+            camera_lock_selector->addEntry(label, entity.toString());
         }
+    }
+    for(int n=0; n<camera_lock_selector->entryCount(); n++) {
+        if (!sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(n)))
+            camera_lock_selector->removeEntry(n);
     }
 
     // If cycle is enabled switch target every 30 sec.
@@ -208,7 +209,7 @@ void CinematicViewScreen::update(float delta)
             camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
             if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
                 camera_lock_selector->setSelectionIndex(0);
-            target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+            target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
         }
     }
 

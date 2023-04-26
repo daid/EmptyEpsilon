@@ -1223,7 +1223,7 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     auto_coolant_enabled->setSize(GuiElement::GuiSizeMax, 40);
 
     auto_repair_enabled = new GuiToggleButton(right_col, "", tr("button", "Auto repair"), [this](bool value) {
-        target->commandSetAutoRepair(value);
+        //target->commandSetAutoRepair(value);
     });
     auto_repair_enabled->setSize(GuiElement::GuiSizeMax, 40);
 }

@@ -93,7 +93,7 @@ void FighterAI::runAttack(sp::ecs::Entity target)
             else
                 evade_direction = target_dir + random(25, 40);
         }
-        if (shields && shields->entry[0].level < shields->entry[0].max * (1.0f - aggression))
+        if (shields && !shields->entries.empty() && shields->entries[0].level < shields->entries[0].max * (1.0f - aggression))
         {
             attack_state = State::Recharge;
             aggression += random(0.1, 0.25);
@@ -115,7 +115,7 @@ void FighterAI::runAttack(sp::ecs::Entity target)
         }
         break;
     case State::Recharge:
-        if ((shields && shields->entry[0].level < shields->entry[0].max * 0.9f) || timeout <= 0.0f)
+        if ((shields && !shields->entries.empty() && shields->entries[0].level < shields->entries[0].max * 0.9f) || timeout <= 0.0f)
         {
             attack_state = State::Dive;
         }else{

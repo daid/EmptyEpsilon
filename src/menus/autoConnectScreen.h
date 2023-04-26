@@ -24,8 +24,8 @@ public:
     virtual void update(float delta) override;
 
 private:
-    bool isValidShip(int index);
-    void connectToShip(int index);
+    bool isValidShip(sp::ecs::Entity ship);
+    void connectToShip(sp::ecs::Entity ship);
 };
 
 #endif//AUTO_CONNECT_SCREEN_H

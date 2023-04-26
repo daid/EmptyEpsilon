@@ -21,9 +21,9 @@ void ShieldSystem::update(float delta)
             if (!reactor->useEnergy(delta * shields.energy_use_per_second))
                 shields.active = false;
         }
-        for(int n=0; n<shields.count; n++)
+        int n = 0;
+        for(auto& shield : shields.entries)
         {
-            auto& shield = shields.entry[n];
             if (shield.level < shield.max)
             {
                 float rate = 0.3f;
@@ -41,6 +41,7 @@ void ShieldSystem::update(float delta)
             }
             if (shield.hit_effect > 0)
                 shield.hit_effect -= delta;
+            n++;
         }
 
     }

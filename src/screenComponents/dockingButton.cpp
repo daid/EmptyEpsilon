@@ -23,13 +23,13 @@ void GuiDockingButton::click()
     switch(port->state)
     {
     case DockingPort::State::NotDocking:
-        PlayerSpaceship::commandDock(findDockingTarget());
+        my_player_info->commandDock(findDockingTarget());
         break;
     case DockingPort::State::Docking:
-        PlayerSpaceship::commandAbortDock();
+        my_player_info->commandAbortDock();
         break;
     case DockingPort::State::Docked:
-        PlayerSpaceship::commandUndock();
+        my_player_info->commandUndock();
         break;
     }
 }
@@ -47,22 +47,22 @@ void GuiDockingButton::onUpdate()
             switch(port->state)
             {
             case DockingPort::State::NotDocking:
-                PlayerSpaceship::commandDock(findDockingTarget());
+                my_player_info->commandDock(findDockingTarget());
                 break;
             case DockingPort::State::Docking:
-                PlayerSpaceship::commandAbortDock();
+                my_player_info->commandAbortDock();
                 break;
             case DockingPort::State::Docked:
-                PlayerSpaceship::commandUndock();
+                my_player_info->commandUndock();
                 break;
             }
         }
         else if (keys.helms_dock_request.getDown())
-            PlayerSpaceship::commandDock(findDockingTarget());
+            my_player_info->commandDock(findDockingTarget());
         else if (keys.helms_dock_abort.getDown())
-            PlayerSpaceship::commandAbortDock();
+            my_player_info->commandAbortDock();
         else if (keys.helms_undock.getDown())
-            PlayerSpaceship::commandUndock();
+            my_player_info->commandUndock();
     }
 }
 

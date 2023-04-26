@@ -20,7 +20,7 @@ GuiSelfDestructButton::GuiSelfDestructButton(GuiContainer* owner, string id)
     confirm_button = new GuiButton(this, id + "_CONFIRM", tr("selfdestruct", "Confirm!"), [this](){
         confirm_button->hide();
         if (my_spaceship)
-            PlayerSpaceship::commandActivateSelfDestruct();
+            my_player_info->commandActivateSelfDestruct();
     });
     confirm_button->setIcon("gui/icons/self-destruct")->hide()->setPosition(0, 50, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 50);
     cancel_button = new GuiButton(this, id + "_CANCEL", tr("button", "Cancel"), [this](){
@@ -28,7 +28,7 @@ GuiSelfDestructButton::GuiSelfDestructButton(GuiContainer* owner, string id)
         confirm_button->hide();
         cancel_button->hide();
         if (my_spaceship)
-            PlayerSpaceship::commandCancelSelfDestruct();
+            my_player_info->commandCancelSelfDestruct();
     });
     cancel_button->setIcon("gui/icons/self-destruct")->hide()->setSize(GuiElement::GuiSizeMax, 50);
 }
@@ -48,14 +48,14 @@ void GuiSelfDestructButton::onUpdate()
         if (keys.engineering_self_destruct_confirm.getDown() && confirm_button->isVisible())
         {
             confirm_button->hide();
-            PlayerSpaceship::commandActivateSelfDestruct();
+            my_player_info->commandActivateSelfDestruct();
         }
         if (keys.engineering_self_destruct_cancel.getDown() && cancel_button->isVisible())
         {
             activate_button->show();
             confirm_button->hide();
             cancel_button->hide();
-            PlayerSpaceship::commandCancelSelfDestruct();
+            my_player_info->commandCancelSelfDestruct();
         }
     }
 }

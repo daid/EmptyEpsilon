@@ -36,20 +36,6 @@ enum EHackingGames
 
 class GameGlobalInfo : public MultiplayerObject, public Updatable
 {
-    P<GameStateLogger> state_logger;
-public:
-    /*!
-     * \brief Maximum number of player ships.
-     */
-    static const int max_player_ships = 32;
-private:
-    sp::ecs::Entity victory_faction;
-    sp::ecs::Entity playerShip[max_player_ships];
-    int callsign_counter;
-    /*!
-     * \brief List of known scripts
-     */
-    PVector<Script> script_list;
 public:
     string global_message;
     float global_message_timeout;
@@ -84,11 +70,6 @@ public:
     GameGlobalInfo();
     virtual ~GameGlobalInfo();
 
-    sp::ecs::Entity getPlayerShip(int index);
-    void setPlayerShip(int index, sp::ecs::Entity ship);
-
-    int findPlayerShip(sp::ecs::Entity ship);
-    int insertPlayerShip(sp::ecs::Entity ship);
     /*!
      * \brief Set a faction to victorious.
      * \param string Name of the faction that won.
@@ -111,6 +92,17 @@ public:
     string getMissionTime();
 
     string getNextShipCallsign();
+
+private:
+    P<GameStateLogger> state_logger;
+    sp::ecs::Entity victory_faction;
+    int callsign_counter;
+
+    std::unique_ptr<sp::script::Environment> main_script;
+    /*!
+     * \brief List of known scripts
+     */
+    PVector<Script> script_list;
 };
 
 string getSectorName(glm::vec2 position);

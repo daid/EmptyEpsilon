@@ -35,7 +35,7 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     }
     cancel_button = new GuiButton(box, id + "_CANCEL", tr("button", "Cancel"), []() {
         if (my_spaceship)
-            PlayerSpaceship::commandScanCancel();
+            my_player_info->commandScanCancel();
     });
     cancel_button->setPosition(0, -20, sp::Alignment::BottomCenter)->setSize(300, 50);
 
@@ -63,7 +63,7 @@ void GuiScanningDialog::onDraw(sp::RenderTarget& target)
             scan_depth += 1;
             if (scan_depth >= scanstate->depth)
             {
-                PlayerSpaceship::commandScanDone();
+                my_player_info->commandScanDone();
                 lock_start_time = engine->getElapsedTime() - 1.0f;
             }else{
                 setupParameters();

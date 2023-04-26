@@ -13,10 +13,10 @@ GuiScanTargetButton::GuiScanTargetButton(GuiContainer* owner, string id, Targets
 {
     button = new GuiButton(this, id + "_BUTTON", "Scan", [this]() {
         if (my_spaceship && this->targets && this->targets->get())
-            PlayerSpaceship::commandScan(this->targets->get());
+            my_player_info->commandScan(this->targets->get());
     });
     button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    progress = new GuiProgressbar(this, id + "_PROGRESS", 0, PlayerSpaceship::max_scanning_delay, 0.0);
+    progress = new GuiProgressbar(this, id + "_PROGRESS", 0, 6.0f, 0.0);
     progress->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
@@ -34,6 +34,7 @@ void GuiScanTargetButton::onDraw(sp::RenderTarget& target)
     if (ss->delay > 0.0f)
     {
         progress->show();
+        progress->setRange(0, ss->max_scanning_delay);
         progress->setValue(ss->delay);
         button->hide();
     }

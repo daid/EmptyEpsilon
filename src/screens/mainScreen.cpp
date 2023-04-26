@@ -160,19 +160,19 @@ void ScreenMainScreen::update(float delta)
     if (my_spaceship)
     {
         if (keys.mainscreen_forward.getDown())
-            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Front);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Front);
         if (keys.mainscreen_left.getDown())
-            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Left);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Left);
         if (keys.mainscreen_right.getDown())
-            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Right);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Right);
         if (keys.mainscreen_back.getDown())
-            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Back);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Back);
         if (keys.mainscreen_target.getDown())
-            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Target);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Target);
         if (keys.mainscreen_tactical_radar.getDown())
-            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Tactical);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Tactical);
         if (keys.mainscreen_long_range_radar.getDown())
-            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::LongRange);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::LongRange);
         if (keys.mainscreen_first_person.getDown())
             viewport->first_person = !viewport->first_person;
     }
@@ -233,21 +233,21 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
     case sp::io::Pointer::Button::Touch:
         switch(pc->main_screen_setting)
         {
-        case MainScreenSetting::Front: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Left); break;
-        case MainScreenSetting::Left: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Back); break;
-        case MainScreenSetting::Back: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Right); break;
-        case MainScreenSetting::Right: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Front); break;
-        default: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Front); break;
+        case MainScreenSetting::Front: my_player_info->commandMainScreenSetting(MainScreenSetting::Left); break;
+        case MainScreenSetting::Left: my_player_info->commandMainScreenSetting(MainScreenSetting::Back); break;
+        case MainScreenSetting::Back: my_player_info->commandMainScreenSetting(MainScreenSetting::Right); break;
+        case MainScreenSetting::Right: my_player_info->commandMainScreenSetting(MainScreenSetting::Front); break;
+        default: my_player_info->commandMainScreenSetting(MainScreenSetting::Front); break;
         }
         break;
     case sp::io::Pointer::Button::Right:
         switch(pc->main_screen_setting)
         {
-        case MainScreenSetting::Front: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Right); break;
-        case MainScreenSetting::Right: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Back); break;
-        case MainScreenSetting::Back: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Left); break;
-        case MainScreenSetting::Left: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Front); break;
-        default: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Front); break;
+        case MainScreenSetting::Front: my_player_info->commandMainScreenSetting(MainScreenSetting::Right); break;
+        case MainScreenSetting::Right: my_player_info->commandMainScreenSetting(MainScreenSetting::Back); break;
+        case MainScreenSetting::Back: my_player_info->commandMainScreenSetting(MainScreenSetting::Left); break;
+        case MainScreenSetting::Left: my_player_info->commandMainScreenSetting(MainScreenSetting::Front); break;
+        default: my_player_info->commandMainScreenSetting(MainScreenSetting::Front); break;
         }
         break;
     case sp::io::Pointer::Button::Middle:
@@ -255,17 +255,17 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
         {
         default:
             if (gameGlobalInfo->allow_main_screen_tactical_radar)
-                PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Tactical);
+                my_player_info->commandMainScreenSetting(MainScreenSetting::Tactical);
             else if (gameGlobalInfo->allow_main_screen_long_range_radar)
-                PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::LongRange);
+                my_player_info->commandMainScreenSetting(MainScreenSetting::LongRange);
             break;
         case MainScreenSetting::Tactical:
             if (gameGlobalInfo->allow_main_screen_long_range_radar)
-                PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::LongRange);
+                my_player_info->commandMainScreenSetting(MainScreenSetting::LongRange);
             break;
         case MainScreenSetting::LongRange:
             if (gameGlobalInfo->allow_main_screen_tactical_radar)
-                PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Tactical);
+                my_player_info->commandMainScreenSetting(MainScreenSetting::Tactical);
             break;
         }
         break;

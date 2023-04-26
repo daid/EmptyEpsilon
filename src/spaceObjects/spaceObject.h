@@ -95,7 +95,7 @@ public:
     bool isScannedByFaction(string faction);
     void setScanned(bool scanned);
     void setScannedByFaction(string faction_name, bool scanned);
-    virtual void hackFinished(P<SpaceObject> source, ShipSystem::Type target);
+    virtual void hackFinished(sp::ecs::Entity source, ShipSystem::Type target);
     void takeDamage(float damage_amount, DamageInfo info) { DamageSystem::applyDamage(entity, damage_amount, info); }
     virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }
     virtual string getExportLine() { return ""; }

@@ -731,7 +731,7 @@ bool SpaceShip::isFullyScannedByFaction(sp::ecs::Entity faction_entity)
     return getScannedStateForFaction(faction_entity) >= ScanState::State::FullScan;
 }
 
-void SpaceShip::hackFinished(P<SpaceObject> source, ShipSystem::Type target)
+void SpaceShip::hackFinished(sp::ecs::Entity source, ShipSystem::Type target)
 {
     auto sys = ShipSystem::get(entity, target);
     if (sys)
@@ -848,34 +848,28 @@ void SpaceShip::addBroadcast(FactionRelation threshold, string message)
 
     glm::u8vec4 color = glm::u8vec4(255, 204, 51, 255); //default : yellow, should never be seen
 
-    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+    for(auto [ship, logs] : sp::ecs::Query<ShipLog>())
     {
-        bool addtolog = 0;
-        auto ship = gameGlobalInfo->getPlayerShip(n);
-        if (ship)
+        bool addtolog = false;
+        if (Faction::getRelation(entity, ship) == FactionRelation::Friendly)
         {
-            if (Faction::getRelation(entity, ship) == FactionRelation::Friendly)
-            {
-                color = glm::u8vec4(154, 255, 154, 255); //ally = light green
-                addtolog = 1;
-            }
-            else if (Faction::getRelation(entity, ship) == FactionRelation::Neutral && int(threshold) >= int(FactionRelation::Neutral))
-            {
-                color = glm::u8vec4(128,128,128, 255); //neutral = grey
-                addtolog = 1;
-            }
-            else if (Faction::getRelation(entity, ship) == FactionRelation::Enemy && threshold == FactionRelation::Enemy)
-            {
-                color = glm::u8vec4(255,102,102, 255); //enemy = light red
-                addtolog = 1;
-            }
+            color = glm::u8vec4(154, 255, 154, 255); //ally = light green
+            addtolog = true;
+        }
+        else if (Faction::getRelation(entity, ship) == FactionRelation::Neutral && int(threshold) >= int(FactionRelation::Neutral))
+        {
+            color = glm::u8vec4(128,128,128, 255); //neutral = grey
+            addtolog = true;
+        }
+        else if (Faction::getRelation(entity, ship) == FactionRelation::Enemy && threshold == FactionRelation::Enemy)
+        {
+            color = glm::u8vec4(255,102,102, 255); //enemy = light red
+            addtolog = true;
+        }
 
-            if (addtolog)
-            {
-                auto logs = entity.getComponent<ShipLog>();
-                if (logs)
-                    logs->entries.push_back({gameGlobalInfo->getMissionTime() + string(": "), message, color});
-            }
+        if (addtolog)
+        {
+            logs.entries.push_back({gameGlobalInfo->getMissionTime() + string(": "), message, color});
         }
     }
 }

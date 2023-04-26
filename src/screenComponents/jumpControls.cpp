@@ -24,7 +24,7 @@ GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id)
     label->setTextSize(30)->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(40, GuiElement::GuiSizeMax);
 
     button = new GuiButton(this, id + "_BUTTON", tr("jumpcontrol", "Jump"), [this]() {
-        PlayerSpaceship::commandJump(slider->getValue());
+        my_player_info->commandJump(slider->getValue());
     });
     button->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
 
@@ -75,6 +75,6 @@ void GuiJumpControls::onUpdate()
         auto adjust = keys.helms_increase_jump_distance.getValue() - keys.helms_decrease_jump_distance.getValue();
         slider->setValue(slider->getValue() + 1000.0f * adjust);
         if (keys.helms_execute_jump.getDown())
-            PlayerSpaceship::commandJump(slider->getValue());
+            my_player_info->commandJump(slider->getValue());
     }
 }

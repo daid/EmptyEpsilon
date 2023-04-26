@@ -20,7 +20,8 @@ public:
     float target_angle;
 };
 
-class MissileCollision
+//TODO: Not really part of missile.h, also part of asteroids
+class ExplodeOnTouch
 {
 public:
     float damage_at_center;

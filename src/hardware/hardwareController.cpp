@@ -5,6 +5,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/warpJammer.h"
+#include "ecs/query.h"
 
 #include "devices/dmx512SerialDevice.h"
 #include "devices/enttecDMXProDevice.h"
@@ -345,8 +346,12 @@ HardwareMappingEffect* HardwareController::createEffect(std::unordered_map<strin
 bool HardwareController::getVariableValue(string variable_name, float& value)
 {
     auto ship = my_spaceship;
-    if (!ship && gameGlobalInfo)
-        ship = gameGlobalInfo->getPlayerShip(0);
+    if (!ship) {
+        for(auto [entity, pc] : sp::ecs::Query<PlayerControl>()) {
+            ship = entity;
+            break;
+        }
+    }
 
     if (variable_name == "Always")
     {

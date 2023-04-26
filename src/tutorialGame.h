@@ -18,7 +18,7 @@ class TutorialGame : public Updatable, public GuiCanvas
     GuiRadarView* long_range_radar;
     GuiElement* station_screen[8];
 
-    P<ScriptObject> script;
+    P<ScriptObjectLegacy> script;
     GuiPanel* frame;
     GuiScrollText* text;
     GuiButton* next_button;
