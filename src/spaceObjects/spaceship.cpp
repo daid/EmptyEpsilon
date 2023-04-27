@@ -483,10 +483,11 @@ SpaceShip::~SpaceShip()
 
 void SpaceShip::applyTemplateValues()
 {
-    for(int n=0; n<max_beam_weapons; n++)
+    for(int n=0; n<16; n++)
     {
         if (ship_template->beams[n].getRange() > 0.0f) {
             auto& beamweaponsystem = entity.getOrAddComponent<BeamWeaponSys>();
+            beamweaponsystem.mounts.resize(n);
             auto& mount = beamweaponsystem.mounts[n];
             mount.position = ship_template->model_data->getBeamPosition(n);
             mount.arc = ship_template->beams[n].getArc();
@@ -539,7 +540,7 @@ void SpaceShip::applyTemplateValues()
     }
     if (ship_template->weapon_tube_count) {
         auto& tubes = entity.getOrAddComponent<MissileTubes>();
-        tubes.count = ship_template->weapon_tube_count;
+        tubes.mounts.resize(ship_template->weapon_tube_count);
         for(int n=0; n<ship_template->weapon_tube_count; n++)
         {
             auto& tube = tubes.mounts[n];

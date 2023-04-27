@@ -483,8 +483,8 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
     missile_tube_amount_selector = new GuiSelector(left_col, "", [this](int index, string value) {
         //target->weapon_tube_count = index;
     });
-    for(int n=0; n<max_weapon_tubes; n++)
-        missile_tube_amount_selector->addEntry(string(n), "");
+    //for(int n=0; n<max_weapon_tubes; n++)
+    //    missile_tube_amount_selector->addEntry(string(n), "");
     missile_tube_amount_selector->setSize(GuiElement::GuiSizeMax, 40);
 
     // Right column
@@ -504,8 +504,8 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
         tube_index = index;
     });
     index_selector->setSize(GuiElement::GuiSizeMax, 40);
-    for(int n=0; n<max_weapon_tubes; n++)
-        index_selector->addEntry(tr("Tube: {id_tube}").format({{"id_tube", string(n + 1)}}), "");
+    //for(int n=0; n<max_weapon_tubes; n++)
+    //    index_selector->addEntry(tr("Tube: {id_tube}").format({{"id_tube", string(n + 1)}}), "");
     index_selector->setSelectionIndex(0);
 
     (new GuiLabel(right_col, "", tr("tube", "Direction:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
@@ -571,7 +571,7 @@ GuiShipTweakShields::GuiShipTweakShields(GuiContainer* owner)
 
     auto right_col = new GuiElement(this, "RIGHT_LAYOUT");
     right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-
+/*
     for(int n=0; n<max_shield_count; n++)
     {
         (new GuiLabel(left_col, "", tr("Shield {id_shield} max:").format({{"id_shield", string(n + 1)}}), 20))->setSize(GuiElement::GuiSizeMax, 30);
@@ -590,11 +590,12 @@ GuiShipTweakShields::GuiShipTweakShields(GuiContainer* owner)
         });
         shield_slider[n]->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
     }
+*/
 }
 
 void GuiShipTweakShields::onDraw(sp::RenderTarget& renderer)
 {
-    for(int n=0; n<max_shield_count; n++)
+    //for(int n=0; n<max_shield_count; n++)
     {
         //shield_slider[n]->setValue(target->shield_level[n]);
         //shield_max_slider[n]->setValue(target->shield_max[n]);
@@ -618,10 +619,10 @@ void GuiShipTweakShields::open(P<SpaceObject> target)
     P<ShipTemplateBasedObject> ship = target;
     this->target = ship;
 
-    for(int n = 0; n < max_shield_count; n++)
-    {
-        shield_max_slider[n]->clearSnapValues()->addSnapValue(ship->ship_template->shield_level[n], 5.0f);
-    }
+    //for(int n = 0; n < max_shield_count; n++)
+    //{
+    //    shield_max_slider[n]->clearSnapValues()->addSnapValue(ship->ship_template->shield_level[n], 5.0f);
+    //}
 }
 
 GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
@@ -639,8 +640,8 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
         beam_index = index;
     });
     index_selector->setSize(GuiElement::GuiSizeMax, 40);
-    for(int n=0; n<max_beam_weapons; n++)
-        index_selector->addEntry(tr("Beam: {id_beam}").format({{"id_beam", string(n + 1)}}), "");
+    //for(int n=0; n<max_beam_weapons; n++)
+    //    index_selector->addEntry(tr("Beam: {id_beam}").format({{"id_beam", string(n + 1)}}), "");
     index_selector->setSelectionIndex(0);
 
     (new GuiLabel(right_col, "", tr("beam", "Arc:"), 20))->setSize(GuiElement::GuiSizeMax, 30);

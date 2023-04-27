@@ -38,9 +38,9 @@
 #define BIND_MEMBER_NAMED(T, MEMBER, NAME) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
         [](lua_State* L, const T& t) { \
-            return sp::script::Convert<decltype(t.MEMBER)>::toLua(L, t.MEMBER); \
+            return sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t.MEMBER)>>>::toLua(L, t.MEMBER); \
         }, [](lua_State* L, T& t) { \
-            t.MEMBER = sp::script::Convert<decltype(t.MEMBER)>::fromLua(L, -1); \
+            t.MEMBER = sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t.MEMBER)>>>::fromLua(L, -1); \
         } \
     };
 #define BIND_MEMBER_GS(T, NAME, GET, SET) \
@@ -62,6 +62,22 @@
             t.A[n].MEMBER = sp::script::Convert<decltype(t.A[n].MEMBER)>::fromLua(L, -1); \
         } \
     };
+#define BIND_SHIP_SYSTEM(T) \
+    BIND_MEMBER(T, health); \
+    BIND_MEMBER(T, health_max); \
+    BIND_MEMBER(T, power_level); \
+    BIND_MEMBER(T, power_request); \
+    BIND_MEMBER(T, heat_level); \
+    BIND_MEMBER(T, coolant_level); \
+    BIND_MEMBER(T, coolant_request); \
+    BIND_MEMBER(T, can_be_hacked); \
+    BIND_MEMBER(T, hacked_level); \
+    BIND_MEMBER(T, power_factor); \
+    BIND_MEMBER(T, coolant_change_rate_per_second); \
+    BIND_MEMBER(T, heat_add_rate_per_second); \
+    BIND_MEMBER(T, power_change_rate_per_second); \
+    BIND_MEMBER(T, auto_repair_per_second);
+
 
 namespace sp::script {
 template<> struct Convert<glm::vec2> {
@@ -285,6 +301,35 @@ void initComponentScriptBindings()
     BIND_MEMBER(Hull, damaged_by_flags);
 
     sp::script::ComponentHandler<Shields>::name("shields");
+    BIND_MEMBER_NAMED(Shields, front_system.health, "front_health");
+    BIND_MEMBER_NAMED(Shields, front_system.health_max, "front_health_max");
+    BIND_MEMBER_NAMED(Shields, front_system.power_level, "front_power_level");
+    BIND_MEMBER_NAMED(Shields, front_system.power_request, "front_power_request");
+    BIND_MEMBER_NAMED(Shields, front_system.heat_level, "front_heat_level");
+    BIND_MEMBER_NAMED(Shields, front_system.coolant_level, "front_coolant_level");
+    BIND_MEMBER_NAMED(Shields, front_system.coolant_request, "front_coolant_request");
+    BIND_MEMBER_NAMED(Shields, front_system.can_be_hacked, "front_can_be_hacked");
+    BIND_MEMBER_NAMED(Shields, front_system.hacked_level, "front_hacked_level");
+    BIND_MEMBER_NAMED(Shields, front_system.power_factor, "front_power_factor");
+    BIND_MEMBER_NAMED(Shields, front_system.coolant_change_rate_per_second, "front_coolant_change_rate_per_second");
+    BIND_MEMBER_NAMED(Shields, front_system.heat_add_rate_per_second, "front_heat_add_rate_per_second");
+    BIND_MEMBER_NAMED(Shields, front_system.power_change_rate_per_second, "front_power_change_rate_per_second");
+    BIND_MEMBER_NAMED(Shields, front_system.auto_repair_per_second, "front_auto_repair_per_second");
+    BIND_MEMBER_NAMED(Shields, rear_system.health, "rear_health");
+    BIND_MEMBER_NAMED(Shields, rear_system.health_max, "rear_health_max");
+    BIND_MEMBER_NAMED(Shields, rear_system.power_level, "rear_power_level");
+    BIND_MEMBER_NAMED(Shields, rear_system.power_request, "rear_power_request");
+    BIND_MEMBER_NAMED(Shields, rear_system.heat_level, "rear_heat_level");
+    BIND_MEMBER_NAMED(Shields, rear_system.coolant_level, "rear_coolant_level");
+    BIND_MEMBER_NAMED(Shields, rear_system.coolant_request, "rear_coolant_request");
+    BIND_MEMBER_NAMED(Shields, rear_system.can_be_hacked, "rear_can_be_hacked");
+    BIND_MEMBER_NAMED(Shields, rear_system.hacked_level, "rear_hacked_level");
+    BIND_MEMBER_NAMED(Shields, rear_system.power_factor, "rear_power_factor");
+    BIND_MEMBER_NAMED(Shields, rear_system.coolant_change_rate_per_second, "rear_coolant_change_rate_per_second");
+    BIND_MEMBER_NAMED(Shields, rear_system.heat_add_rate_per_second, "rear_heat_add_rate_per_second");
+    BIND_MEMBER_NAMED(Shields, rear_system.power_change_rate_per_second, "rear_power_change_rate_per_second");
+    BIND_MEMBER_NAMED(Shields, rear_system.auto_repair_per_second, "rear_auto_repair_per_second");
+
     BIND_MEMBER(Shields, active);
     BIND_MEMBER(Shields, calibration_time);
     BIND_MEMBER(Shields, calibration_delay);
@@ -295,20 +340,80 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(Shields, entries, max);
 
     sp::script::ComponentHandler<DockingPort>::name("docking_port");
+    BIND_MEMBER(DockingPort, dock_class);
+    BIND_MEMBER(DockingPort, dock_subclass);
+    //TODO: BIND_MEMBER(DockingPort, state);
+    BIND_MEMBER(DockingPort, target);
+    BIND_MEMBER(DockingPort, auto_reload_missiles);
+
     sp::script::ComponentHandler<DockingBay>::name("docking_bay");
+    BIND_MEMBER(DockingBay, flags);
+
     sp::script::ComponentHandler<BeamWeaponSys>::name("beam_weapons");
+    BIND_SHIP_SYSTEM(BeamWeaponSys);
+    BIND_MEMBER(BeamWeaponSys, frequency);
+    //TODO: BIND_MEMBER(BeamWeaponSys, system_target);
+    BIND_ARRAY(BeamWeaponSys, mounts);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, direction);
+
     sp::script::ComponentHandler<Reactor>::name("reactor");
+    BIND_SHIP_SYSTEM(Reactor);
+    BIND_MEMBER(Reactor, max_energy);
+    BIND_MEMBER(Reactor, energy);
+
     sp::script::ComponentHandler<ImpulseEngine>::name("impulse_engine");
+    BIND_SHIP_SYSTEM(ImpulseEngine);
     sp::script::ComponentHandler<ManeuveringThrusters>::name("maneuvering_thrusters");
+    BIND_SHIP_SYSTEM(ManeuveringThrusters);
     sp::script::ComponentHandler<CombatManeuveringThrusters>::name("combat_maneuvering_thrusters");
     sp::script::ComponentHandler<WarpDrive>::name("warp_drive");
+    BIND_SHIP_SYSTEM(WarpDrive);
     sp::script::ComponentHandler<JumpDrive>::name("jump_drive");
+    BIND_SHIP_SYSTEM(JumpDrive);
     sp::script::ComponentHandler<MissileTubes>::name("missile_tubes");
+    BIND_SHIP_SYSTEM(MissileTubes);
+    BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_Homing)], "storage_homing");
+    BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_Homing)], "max_homing");
+    BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_Nuke)], "storage_nuke");
+    BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_Nuke)], "max_nuke");
+    BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_Mine)], "storage_mine");
+    BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_Mine)], "max_mine");
+    BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_EMP)], "storage_emp");
+    BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_EMP)], "max_emp");
+    BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_HVLI)], "storage_hvli");
+    BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_HVLI)], "max_hvli");
+    BIND_ARRAY(MissileTubes, mounts);
+    BIND_ARRAY_MEMBER(MissileTubes, mounts, position);
+    BIND_ARRAY_MEMBER(MissileTubes, mounts, load_time);
+    BIND_ARRAY_MEMBER(MissileTubes, mounts, type_allowed_mask);
+    BIND_ARRAY_MEMBER(MissileTubes, mounts, direction);
+    //TODO: BIND_ARRAY_MEMBER(MissileTubes, mounts, size);
+    //TODO: BIND_ARRAY_MEMBER(MissileTubes, mounts, type_loaded);
+    //TODO: BIND_ARRAY_MEMBER(MissileTubes, mounts, state);
+    BIND_ARRAY_MEMBER(MissileTubes, mounts, delay);
 
     sp::script::ComponentHandler<Coolant>::name("coolant");
+    BIND_MEMBER(Coolant, max);
+    BIND_MEMBER(Coolant, max_coolant_per_system);
+    BIND_MEMBER(Coolant, auto_levels);
+
     sp::script::ComponentHandler<SelfDestruct>::name("self_destruct");
+    BIND_MEMBER(SelfDestruct, active);
+    BIND_MEMBER(SelfDestruct, countdown);
+    BIND_MEMBER(SelfDestruct, damage);
+    BIND_MEMBER(SelfDestruct, size);
     sp::script::ComponentHandler<ScienceScanner>::name("science_scanner");
+    BIND_MEMBER(ScienceScanner, delay);
+    BIND_MEMBER(ScienceScanner, max_scanning_delay);
+    BIND_MEMBER(ScienceScanner, target);
     sp::script::ComponentHandler<ScanProbeLauncher>::name("scan_probe_launcher");
+    BIND_MEMBER(ScanProbeLauncher, max);
+    BIND_MEMBER(ScanProbeLauncher, stock);
+    BIND_MEMBER(ScanProbeLauncher, recharge);
+    BIND_MEMBER(ScanProbeLauncher, charge_time);
     sp::script::ComponentHandler<HackingDevice>::name("hacking_device");
     sp::script::ComponentHandler<PlayerControl>::name("player_control");
+    //TODO: BIND_MEMBER(PlayerControl, alert_level);
+    BIND_MEMBER(PlayerControl, control_code);
 }

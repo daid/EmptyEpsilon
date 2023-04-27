@@ -165,8 +165,8 @@ class GuiShipTweakShields : public GuiTweakPage
 private:
     P<ShipTemplateBasedObject> target;
 
-    GuiSlider* shield_max_slider[max_shield_count];
-    GuiSlider* shield_slider[max_shield_count];
+    //GuiSlider* shield_max_slider[max_shield_count];
+    //GuiSlider* shield_slider[max_shield_count];
 public:
     GuiShipTweakShields(GuiContainer* owner);
 

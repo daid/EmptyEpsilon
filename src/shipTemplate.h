@@ -14,9 +14,6 @@
 #include "beamTemplate.h"
 #include "missileWeaponData.h"
 
-constexpr static int max_weapon_tubes = 16;
-constexpr static int max_shield_count = 8;
-
 
 /* Define script conversion function for the ESystem enum. */
 template<> void convert<ShipSystem::Type>::param(lua_State* L, int& idx, ShipSystem::Type& es);
@@ -96,12 +93,12 @@ public:
     float energy_storage_amount;
     int repair_crew_count;
     string default_ai_name;
-    BeamTemplate beams[max_beam_weapons];
+    BeamTemplate beams[16];
     int weapon_tube_count;
-    TubeTemplate weapon_tube[max_weapon_tubes];
+    TubeTemplate weapon_tube[16];
     float hull;
     int shield_count;
-    float shield_level[max_shield_count];
+    float shield_level[8];
     float impulse_speed, impulse_reverse_speed, turn_speed, warp_speed;
     float impulse_acceleration, impulse_reverse_acceleration;
     float combat_maneuver_boost_speed;
@@ -153,8 +150,8 @@ public:
      * Convenience function to set the texture of a beam by index.
      */
     void setBeamTexture(int index, string texture);
-    void setBeamWeaponEnergyPerFire(int index, float energy) { if (index < 0 || index >= max_beam_weapons) return; return beams[index].setEnergyPerFire(energy); }
-    void setBeamWeaponHeatPerFire(int index, float heat) { if (index < 0 || index >= max_beam_weapons) return; return beams[index].setHeatPerFire(heat); }
+    void setBeamWeaponEnergyPerFire(int index, float energy) { if (index < 0 || index >= 16) return; return beams[index].setEnergyPerFire(energy); }
+    void setBeamWeaponHeatPerFire(int index, float heat) { if (index < 0 || index >= 16) return; return beams[index].setHeatPerFire(heat); }
 
     void setTubes(int amount, float load_time);
     void setTubeLoadTime(int index, float load_time);

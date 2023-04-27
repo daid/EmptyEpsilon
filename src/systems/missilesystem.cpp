@@ -24,9 +24,8 @@ void MissileSystem::update(float delta)
 {
     for(auto [entity, tubes] : sp::ecs::Query<MissileTubes>())
     {
-        for(int n=0; n<tubes.count; n++)
+        for(auto& tube : tubes.mounts)
         {
-            auto& tube = tubes.mounts[n];
             if (tube.delay > 0.0f)
             {
                 tube.delay -= delta * tubes.getSystemEffectiveness();

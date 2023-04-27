@@ -7,8 +7,6 @@
 #include "glm/gtc/type_precision.hpp"
 
 
-constexpr static int max_beam_weapons = 16;
-
 class BeamWeaponSys : public ShipSystem {
 public:
     class MountPoint {
@@ -38,7 +36,7 @@ public:
     int frequency = 0;
     ShipSystem::Type system_target = ShipSystem::Type::None;
 
-    MountPoint mounts[max_beam_weapons];
+    std::vector<MountPoint> mounts;
 };
 
 class BeamEffect

@@ -66,14 +66,17 @@ function PlayerSpaceship()
     --SpaceShip
     --e.radar_trace.flags = e.radar_trace.flags | ArrowIfNotScanned
     e.shields.frequency = irandom(0, 20);
-    e.beam_weapons = {}
+    e.beam_weapons = {{arc=30, direction=0},{arc=30, direction=-90},{arc=30, direction=90}}
     e.reactor = {}
     e.impulse_engine = {}
     e.maneuvering_thrusters = {}
     e.combat_maneuvering_thrusters = {}
     e.warp_drive = {}
     e.jump_drive = {}
-    e.missile_tubes = {}
+    e.missile_tubes = {
+        {direction=15},{direction=-15},{direction=25},{direction=-25},
+        
+    }
     
     --PlayerSpaceShip
     --TODO: Set scan state for each faction

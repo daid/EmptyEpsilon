@@ -323,7 +323,7 @@ ShipTemplate::ShipTemplate()
     energy_storage_amount = 1000;
     repair_crew_count = 3;
     weapon_tube_count = 0;
-    for(int n=0; n<max_weapon_tubes; n++)
+    for(int n=0; n<16; n++)
     {
         weapon_tube[n].load_time = 8.0;
         weapon_tube[n].type_allowed_mask = (1 << MW_Count) - 1;
@@ -332,7 +332,7 @@ ShipTemplate::ShipTemplate()
     }
     hull = 70;
     shield_count = 0;
-    for(int n=0; n<max_shield_count; n++)
+    for(int n=0; n<8; n++)
         shield_level[n] = 0.0;
     impulse_speed = 500.0;
     impulse_reverse_speed = 500.0;
@@ -358,7 +358,7 @@ ShipTemplate::ShipTemplate()
 void ShipTemplate::setBeamTexture(int index, string texture)
 
 {
-    if (index >= 0 && index < max_beam_weapons)
+    if (index >= 0 && index < 16)
     {
         beams[index].setBeamTexture(texture);
     }
@@ -366,49 +366,49 @@ void ShipTemplate::setBeamTexture(int index, string texture)
 
 void ShipTemplate::setTubes(int amount, float load_time)
 {
-    weapon_tube_count = std::min(max_weapon_tubes, amount);
-    for(int n=0; n<max_weapon_tubes; n++)
+    weapon_tube_count = std::min(16, amount);
+    for(int n=0; n<16; n++)
         weapon_tube[n].load_time = load_time;
 }
 
 void ShipTemplate::setTubeLoadTime(int index, float load_time)
 {
-    if (index < 0 || index >= max_weapon_tubes)
+    if (index < 0 || index >= 16)
         return;
     weapon_tube[index].load_time = load_time;
 }
 
 void ShipTemplate::weaponTubeAllowMissle(int index, EMissileWeapons type)
 {
-    if (index < 0 || index >= max_weapon_tubes)
+    if (index < 0 || index >= 16)
         return;
     weapon_tube[index].type_allowed_mask |= (1 << type);
 }
 
 void ShipTemplate::weaponTubeDisallowMissle(int index, EMissileWeapons type)
 {
-    if (index < 0 || index >= max_weapon_tubes)
+    if (index < 0 || index >= 16)
         return;
     weapon_tube[index].type_allowed_mask &=~(1 << type);
 }
 
 void ShipTemplate::setWeaponTubeExclusiveFor(int index, EMissileWeapons type)
 {
-    if (index < 0 || index >= max_weapon_tubes)
+    if (index < 0 || index >= 16)
         return;
     weapon_tube[index].type_allowed_mask = (1 << type);
 }
 
 void ShipTemplate::setTubeDirection(int index, float direction)
 {
-    if (index < 0 || index >= max_weapon_tubes)
+    if (index < 0 || index >= 16)
         return;
     weapon_tube[index].direction = direction;
 }
 
 void ShipTemplate::setTubeSize(int index, EMissileSizes size)
 {
-    if (index < 0 || index >= max_weapon_tubes)
+    if (index < 0 || index >= 16)
         return;
     weapon_tube[index].size = size;
 }
@@ -457,7 +457,7 @@ void ShipTemplate::setBeam(int index, float arc, float direction, float range, f
 
 void ShipTemplate::setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
 {
-    if (index < 0 || index > max_beam_weapons)
+    if (index < 0 || index > 16)
         return;
     beams[index].setDirection(direction);
     beams[index].setArc(arc);
@@ -468,7 +468,7 @@ void ShipTemplate::setBeamWeapon(int index, float arc, float direction, float ra
 
 void ShipTemplate::setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate)
 {
-    if (index < 0 || index > max_beam_weapons)
+    if (index < 0 || index > 16)
         return;
     beams[index].setTurretArc(arc);
     beams[index].setTurretDirection(direction);
@@ -516,7 +516,7 @@ void ShipTemplate::setCollisionData(P<SpaceObject> object)
 
 void ShipTemplate::setShields(const std::vector<float>& values)
 {
-    shield_count = std::min(max_shield_count, int(values.size()));
+    shield_count = std::min(8, int(values.size()));
     for(int n=0; n<shield_count; n++)
     {
         shield_level[n] = values[n];
@@ -739,14 +739,14 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->can_launch_probe = can_launch_probe;
 
     result->default_ai_name = default_ai_name;
-    for(int n=0; n<max_beam_weapons; n++)
+    for(int n=0; n<16; n++)
         result->beams[n] = beams[n];
     result->weapon_tube_count = weapon_tube_count;
-    for(int n=0; n<max_weapon_tubes; n++)
+    for(int n=0; n<16; n++)
         result->weapon_tube[n] = weapon_tube[n];
     result->hull = hull;
     result->shield_count = shield_count;
-    for(int n=0; n<max_shield_count; n++)
+    for(int n=0; n<8; n++)
         result->shield_level[n] = shield_level[n];
     result->impulse_speed = impulse_speed;
     result->impulse_reverse_speed = impulse_reverse_speed;

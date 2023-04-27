@@ -153,9 +153,8 @@ float EvasionAI::evasionDangerScore(sp::ecs::Entity ship, float scan_radius)
 
     auto tubes = ship.getComponent<MissileTubes>();
     if (tubes) {
-        for(int n=0; n<tubes->count; n++)
+        for(auto& tube : tubes->mounts)
         {
-            auto& tube = tubes->mounts[n];
             if (tube.state != MissileTubes::MountPoint::State::Empty)
                 enemy_missile_strength += getMissileWeaponStrength(tube.type_loaded);
         }

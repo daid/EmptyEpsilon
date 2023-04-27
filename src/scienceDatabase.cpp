@@ -527,7 +527,7 @@ void fillDefaultDatabaseData()
             entry->addKeyValue(tr("database", "Jump range"), string(ship_template->jump_drive_min_distance / 1000, 0) + " - " + string(ship_template->jump_drive_max_distance / 1000, 0) + " u");
         }
 
-        for(int n=0; n<max_beam_weapons; n++)
+        for(int n=0; n<16; n++)
         {
             if (ship_template->beams[n].getRange() > 0)
             {

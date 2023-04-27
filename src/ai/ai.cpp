@@ -133,9 +133,8 @@ void ShipAI::updateWeaponState(float delta)
     //If we have weapon tubes, load them with torpedoes
     auto tubes = owner.getComponent<MissileTubes>();
     if (tubes) {
-        for(int n=0; n<tubes->count; n++)
+        for(auto& tube : tubes->mounts)
         {
-            auto& tube = tubes->mounts[n];
             if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_EMP] > 0 && tube.canLoad(MW_EMP))
                 MissileSystem::startLoad(owner, tube, MW_EMP);
             else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_Nuke] > 0 && tube.canLoad(MW_Nuke))
@@ -201,9 +200,8 @@ void ShipAI::updateWeaponState(float delta)
     if (has_missiles && tubes)
     {
         float best_missile_strength = 0.0;
-        for(int n=0; n<tubes->count; n++)
+        for(auto& tube : tubes->mounts)
         {
-            auto& tube = tubes->mounts[n];
             if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded) {
                 int index = getDirectionIndex(tube.direction, 90);
                 if (index == best_tube_index) {
@@ -417,7 +415,7 @@ void ShipAI::runOrders()
                 }
             }else{
                 auto tubes = owner.getComponent<MissileTubes>();
-                if (tubes && tubes->count > 0)
+                if (tubes && tubes->mounts.size() > 0)
                 {
                     // Find a station which can re-stock our weapons.
                     auto new_target = findBestMissileRestockTarget(ot->getPosition(), long_range);
@@ -579,15 +577,15 @@ void ShipAI::runAttack(sp::ecs::Entity target)
     if (distance < 4500 && has_missiles)
     {
         auto tubes = owner.getComponent<MissileTubes>();
-        for(int n=0; tubes && n<tubes->count; n++)
+        for(auto& tube : tubes->mounts)
         {
-            if (tubes->mounts[n].state == MissileTubes::MountPoint::State::Loaded && missile_fire_delay <= 0.0f)
+            if (tube.state == MissileTubes::MountPoint::State::Loaded && missile_fire_delay <= 0.0f)
             {
-                float target_angle = calculateFiringSolution(target, tubes->mounts[n]);
+                float target_angle = calculateFiringSolution(target, tube);
                 if (target_angle != std::numeric_limits<float>::infinity())
                 {
-                    MissileSystem::fire(owner, tubes->mounts[n], target_angle, target);
-                    missile_fire_delay = tubes->mounts[n].load_time / tubes->count / 2.0f;
+                    MissileSystem::fire(owner, tube, target_angle, target);
+                    missile_fire_delay = tube.load_time / tubes->mounts.size() / 2.0f;
                 }
             }
         }

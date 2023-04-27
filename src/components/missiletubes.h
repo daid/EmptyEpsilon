@@ -44,6 +44,5 @@ public:
     int storage[MW_Count] = {0};
     int storage_max[MW_Count] = {0};
 
-    int8_t count = 0;
-    MountPoint mounts[max_beam_weapons];
+    std::vector<MountPoint> mounts;
 };

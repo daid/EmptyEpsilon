@@ -330,8 +330,8 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                     // If the ship has a turret, also note that the rotation rate
                     // is affected.
                     if (auto beamweapons = my_spaceship.getComponent<BeamWeaponSys>()) {
-                        for(int n = 0; n < max_beam_weapons; n++) {
-                            if (beamweapons->mounts[n].turret_arc > 0) {
+                        for(auto& mount : beamweapons->mounts) {
+                            if (mount.turret_arc > 0) {
                                 addSystemEffect("Turret rotation rate", toNearbyIntString(effectiveness * 100) + "%");
                                 break;
                             }

@@ -68,9 +68,8 @@ void MissileVolleyAI::runAttack(sp::ecs::Entity target)
     if (distance < 4500)
     {
         bool all_possible_loaded = true;
-        for(int n=0; n<tubes->count; n++)
+        for(auto& tube : tubes->mounts)
         {
-            auto& tube = tubes->mounts[n];
             //Base AI class already loads the tubes with available missiles.
             //If a tube is not loaded, but is currently being load with a new missile, then we still have missiles to load before we want to fire.
             if (tube.state == MissileTubes::MountPoint::State::Loading)
@@ -83,27 +82,27 @@ void MissileVolleyAI::runAttack(sp::ecs::Entity target)
         if (all_possible_loaded)
         {
             int can_fire_count = 0;
-            for(int n=0; n<tubes->count; n++)
+            for(auto& tube : tubes->mounts)
             {
-                float target_angle = calculateFiringSolution(target, tubes->mounts[n]);
+                float target_angle = calculateFiringSolution(target, tube);
                 if (target_angle != std::numeric_limits<float>::infinity())
                 {
                     can_fire_count++;
                 }
             }
 
-            for(int n=0; n<tubes->count; n++)
+            for(auto& tube : tubes->mounts)
             {
-                float target_angle = calculateFiringSolution(target, tubes->mounts[n]);
+                float target_angle = calculateFiringSolution(target, tube);
                 if (target_angle != std::numeric_limits<float>::infinity())
                 {
                     can_fire_count--;
                     if (can_fire_count == 0)
-                        MissileSystem::fire(owner, tubes->mounts[n], target_angle, target);
+                        MissileSystem::fire(owner, tube, target_angle, target);
                     else if ((can_fire_count % 2) == 0)
-                        MissileSystem::fire(owner, tubes->mounts[n], target_angle + 20.0f * (can_fire_count / 2), target);
+                        MissileSystem::fire(owner, tube, target_angle + 20.0f * (can_fire_count / 2), target);
                     else
-                        MissileSystem::fire(owner, tubes->mounts[n], target_angle - 20.0f * ((can_fire_count + 1) / 2), target);
+                        MissileSystem::fire(owner, tube, target_angle - 20.0f * ((can_fire_count + 1) / 2), target);
                 }
             }
         }

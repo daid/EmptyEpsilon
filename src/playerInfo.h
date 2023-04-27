@@ -64,10 +64,10 @@ public:
     void commandSetTarget(sp::ecs::Entity target);
     void commandSetScienceLink(sp::ecs::Entity probe);
     void commandClearScienceLink();
-    void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
-    void commandUnloadTube(int8_t tubeNumber);
-    void commandFireTube(int8_t tubeNumber, float missile_target_angle);
-    void commandFireTubeAtTarget(int8_t tubeNumber, sp::ecs::Entity target);
+    void commandLoadTube(uint32_t tubeNumber, EMissileWeapons missileType);
+    void commandUnloadTube(uint32_t tubeNumber);
+    void commandFireTube(uint32_t tubeNumber, float missile_target_angle);
+    void commandFireTubeAtTarget(uint32_t tubeNumber, sp::ecs::Entity target);
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(MainScreenSetting mainScreen);
     void commandMainScreenOverlay(MainScreenOverlay mainScreen);

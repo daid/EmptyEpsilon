@@ -62,16 +62,15 @@ void FighterAI::runAttack(sp::ecs::Entity target)
         if (distance < 2500 + (target_physics ? target_physics->getSize().x : 0.0f) && has_missiles)
         {
             auto tubes = owner.getComponent<MissileTubes>();
-            for(int n=0; n<tubes->count; n++)
+            for(auto& tube : tubes->mounts)
             {
-                auto& tube = tubes->mounts[n];
                 if (tube.state == MissileTubes::MountPoint::State::Loaded && missile_fire_delay <= 0.0f)
                 {
                     float target_angle = calculateFiringSolution(target, tube);
                     if (target_angle != std::numeric_limits<float>::infinity())
                     {
                         MissileSystem::fire(owner, tube, target_angle, target);
-                        missile_fire_delay = tube.load_time / tubes->count / 2.0f;
+                        missile_fire_delay = tube.load_time / tubes->mounts.size() / 2.0f;
                     }
                 }
             }

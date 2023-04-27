@@ -194,33 +194,33 @@ void PlayerInfo::commandSetTarget(sp::ecs::Entity target)
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType)
+void PlayerInfo::commandLoadTube(uint32_t tubeNumber, EMissileWeapons missileType)
 {
     sp::io::DataBuffer packet;
     packet << CMD_LOAD_TUBE << tubeNumber << missileType;
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandUnloadTube(int8_t tubeNumber)
+void PlayerInfo::commandUnloadTube(uint32_t tubeNumber)
 {
     sp::io::DataBuffer packet;
     packet << CMD_UNLOAD_TUBE << tubeNumber;
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandFireTube(int8_t tubeNumber, float missile_target_angle)
+void PlayerInfo::commandFireTube(uint32_t tubeNumber, float missile_target_angle)
 {
     sp::io::DataBuffer packet;
     packet << CMD_FIRE_TUBE << tubeNumber << missile_target_angle;
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandFireTubeAtTarget(int8_t tubeNumber, sp::ecs::Entity target)
+void PlayerInfo::commandFireTubeAtTarget(uint32_t tubeNumber, sp::ecs::Entity target)
 {
     float targetAngle = 0.0;
     auto missiletubes = my_spaceship.getComponent<MissileTubes>();
 
-    if (!target || !missiletubes || tubeNumber < 0 || tubeNumber >= missiletubes->count)
+    if (!target || !missiletubes || tubeNumber < 0 || tubeNumber >= missiletubes->mounts.size())
         return;
 
     targetAngle = MissileSystem::calculateFiringSolution(my_spaceship, missiletubes->mounts[tubeNumber], target);
@@ -613,33 +613,33 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         break;
     case CMD_LOAD_TUBE:
         {
-            int8_t tube_nr;
+            uint32_t tube_nr;
             EMissileWeapons type;
             packet >> tube_nr >> type;
 
             auto missiletubes = my_spaceship.getComponent<MissileTubes>();
-            if (missiletubes && tube_nr >= 0 && tube_nr < missiletubes->count)
+            if (missiletubes && tube_nr >= 0 && tube_nr < missiletubes->mounts.size())
                 MissileSystem::startLoad(my_spaceship, missiletubes->mounts[tube_nr], type);
         }
         break;
     case CMD_UNLOAD_TUBE:
         {
-            int8_t tube_nr;
+            uint32_t tube_nr;
             packet >> tube_nr;
 
             auto missiletubes = my_spaceship.getComponent<MissileTubes>();
-            if (missiletubes && tube_nr >= 0 && tube_nr < missiletubes->count)
+            if (missiletubes && tube_nr >= 0 && tube_nr < missiletubes->mounts.size())
                 MissileSystem::startUnload(my_spaceship, missiletubes->mounts[tube_nr]);
         }
         break;
     case CMD_FIRE_TUBE:
         {
-            int8_t tube_nr;
+            uint32_t tube_nr;
             float missile_target_angle;
             packet >> tube_nr >> missile_target_angle;
 
             auto missiletubes = my_spaceship.getComponent<MissileTubes>();
-            if (missiletubes && tube_nr >= 0 && tube_nr < missiletubes->count) {
+            if (missiletubes && tube_nr >= 0 && tube_nr < missiletubes->mounts.size()) {
                 sp::ecs::Entity target;
                 if (auto t = my_spaceship.getComponent<Target>())
                     target = t->entity;

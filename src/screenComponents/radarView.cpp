@@ -469,11 +469,10 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
     if (transform && missile_tube_controls) {
         auto tubes = my_spaceship.getComponent<MissileTubes>();
         if (tubes) {
-            for(int n=0; n<tubes->count; n++)
+            for(auto& mount : tubes->mounts)
             {
-                if (tubes->mounts[n].state != MissileTubes::MountPoint::State::Loaded)
+                if (mount.state != MissileTubes::MountPoint::State::Loaded)
                     continue;
-                auto& mount = tubes->mounts[n];
                 auto fire_position = transform->getPosition() + rotateVec2(glm::vec2(mount.position), transform->getRotation());
 
                 const MissileWeaponData& data = MissileWeaponData::getDataFor(mount.type_loaded);
@@ -570,9 +569,8 @@ void GuiRadarView::drawMissileTubes(sp::RenderTarget& renderer)
     if (!tubes) return;
     auto transform = my_spaceship.getComponent<sp::Transform>();
     if (!transform) return;
-    for(int n=0; n<tubes->count; n++)
+    for(auto& mount : tubes->mounts)
     {
-        auto& mount = tubes->mounts[n];
         auto fire_position = transform->getPosition() + rotateVec2(glm::vec2(mount.position), transform->getRotation());
         auto fire_draw_position = worldToScreen(fire_position);
 
