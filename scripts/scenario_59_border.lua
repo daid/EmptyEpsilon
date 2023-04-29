@@ -886,30 +886,30 @@ function wreckModHealthBeam(x,y)
 				p:setSystemHealthMax("beamweapons",math.min(1, max_health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_max_beam_health_message = "artifact_improved_max_beam_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_max_beam_health_message,string.format("The %s retrieved has improved the beam system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_max_beam_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the beam system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_max_beam_health_message_plus = "artifact_improved_max_beam_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_max_beam_health_message_plus,string.format("The %s retrieved has improved the beam system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_max_beam_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the beam system maximum health"),full_desc))
 				end
 			elseif health < 1 then
 				p:setSystemHealth("beamweapons",math.min(1, health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_beam_health_message = "artifact_improved_beam_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_beam_health_message,string.format("The %s retrieved has improved the beam system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_beam_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the beam system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_beam_health_message_plus = "artifact_improved_beam_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_beam_health_message_plus,string.format("The %s retrieved has improved the beam system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_beam_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the beam system health"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_beam_health_message = "artifact_beam_health_message"
-					p:addCustomMessage("Engineering",p.artifact_beam_health_message,string.format("The %s retrieved has had no impact on an already healthy beam system",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_beam_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy beam system"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_beam_health_message_plus = "artifact_beam_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_beam_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy beam system",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_beam_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy beam system"),full_desc))
 				end
 			end
 		else
@@ -917,21 +917,21 @@ function wreckModHealthBeam(x,y)
 				p:setSystemHealth("beamweapons",math.max(-1, health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_beam_health_message = "artifact_damaged_beam_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_beam_health_message,string.format("The %s retrieved has damaged the beam system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_beam_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the beam system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_beam_health_message_plus = "artifact_damaged_beam_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_beam_health_message_plus,string.format("The %s retrieved has damaged the beam system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_beam_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the beam system health"),full_desc))
 				end
 			else
 				p:setSystemHealthMax("beamweapons",math.max(-1, max_health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_max_beam_health_message = "artifact_damaged_max_beam_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_max_beam_health_message,string.format("The %s retrieved has damaged the beam system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_max_beam_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the beam system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_max_beam_health_message_plus = "artifact_damaged_max_beam_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_max_beam_health_message_plus,string.format("The %s retrieved has damaged the beam system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_max_beam_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the beam system maximum health"),full_desc))
 				end
 			end
 		end
@@ -955,30 +955,30 @@ function wreckModHealthMissile(x,y)
 				p:setSystemHealthMax("missilesystem",math.min(1, max_health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_max_missile_health_message = "artifact_improved_max_missile_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_max_missile_health_message,string.format("The %s retrieved has improved the missile system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_max_missile_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the missile system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_max_missile_health_message_plus = "artifact_improved_max_missile_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_max_missile_health_message_plus,string.format("The %s retrieved has improved the missile system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_max_missile_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the missile system maximum health"),full_desc))
 				end
 			elseif health < 1 then
 				p:setSystemHealth("missilesystem",math.min(1, health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_missile_health_message = "artifact_improved_missile_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_missile_health_message,string.format("The %s retrieved has improved the missile system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_missile_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the missile system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_missile_health_message_plus = "artifact_improved_missile_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_missile_health_message_plus,string.format("The %s retrieved has improved the missile system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_missile_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the missile system health"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_missile_health_message = "artifact_missile_health_message"
-					p:addCustomMessage("Engineering",p.artifact_missile_health_message,string.format("The %s retrieved has had no impact on an already healthy missile system",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_missile_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy missile system"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_missile_health_message_plus = "artifact_missile_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_missile_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy missile system",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_missile_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy missile system"),full_desc))
 				end
 			end
 		else
@@ -986,21 +986,21 @@ function wreckModHealthMissile(x,y)
 				p:setSystemHealth("missilesystem",math.max(-1, health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_missile_health_message = "artifact_damaged_missile_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_missile_health_message,string.format("The %s retrieved has damaged the missile system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_missile_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the missile system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_missile_health_message_plus = "artifact_damaged_missile_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_missile_health_message_plus,string.format("The %s retrieved has damaged the missile system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_missile_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the missile system health"),full_desc))
 				end
 			else
 				p:setSystemHealthMax("missilesystem",math.max(-1, max_health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_max_missile_health_message = "artifact_damaged_max_missile_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_max_missile_health_message,string.format("The %s retrieved has damaged the missile system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_max_missile_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the missile system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_max_missile_health_message_plus = "artifact_damaged_max_missile_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_max_missile_health_message_plus,string.format("The %s retrieved has damaged the missile system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_max_missile_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the missile system maximum health"),full_desc))
 				end
 			end
 		end
@@ -1024,30 +1024,30 @@ function wreckModHealthImpulse(x,y)
 				p:setSystemHealthMax("impulse",math.min(1, max_health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_max_impulse_health_message = "artifact_improved_max_impulse_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_max_impulse_health_message,string.format("The %s retrieved has improved the impulse system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_max_impulse_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the impulse system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_max_impulse_health_message_plus = "artifact_improved_max_impulse_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_max_impulse_health_message_plus,string.format("The %s retrieved has improved the impulse system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_max_impulse_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the impulse system maximum health"),full_desc))
 				end
 			elseif health < 1 then
 				p:setSystemHealth("impulse",math.min(1, health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_impulse_health_message = "artifact_improved_impulse_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_impulse_health_message,string.format("The %s retrieved has improved the impulse system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_impulse_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the impulse system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_impulse_health_message_plus = "artifact_improved_impulse_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_impulse_health_message_plus,string.format("The %s retrieved has improved the impulse system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_impulse_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the impulse system health"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_impulse_health_message = "artifact_impulse_health_message"
-					p:addCustomMessage("Engineering",p.artifact_impulse_health_message,string.format("The %s retrieved has had no impact on an already healthy impulse system",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_impulse_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy impulse system"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_impulse_health_message_plus = "artifact_impulse_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_impulse_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy impulse system",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_impulse_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy impulse system"),full_desc))
 				end
 			end
 		else
@@ -1055,21 +1055,21 @@ function wreckModHealthImpulse(x,y)
 				p:setSystemHealth("impulse",math.max(-1, health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_impulse_health_message = "artifact_damaged_impulse_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_impulse_health_message,string.format("The %s retrieved has damaged the impulse system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_impulse_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the impulse system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_impulse_health_message_plus = "artifact_damaged_impulse_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_impulse_health_message_plus,string.format("The %s retrieved has damaged the impulse system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_impulse_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the impulse system health"),full_desc))
 				end
 			else
 				p:setSystemHealthMax("impulse",math.max(-1, max_health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_max_impulse_health_message = "artifact_damaged_max_impulse_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_max_impulse_health_message,string.format("The %s retrieved has damaged the impulse system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_max_impulse_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the impulse system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_max_impulse_health_message_plus = "artifact_damaged_max_impulse_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_max_impulse_health_message_plus,string.format("The %s retrieved has damaged the impulse system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_max_impulse_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the impulse system maximum health"),full_desc))
 				end
 			end
 		end
@@ -1094,30 +1094,30 @@ function wreckModHealthWarp(x,y)
 					p:setSystemHealthMax("warp",math.min(1, max_health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_max_warp_health_message = "artifact_improved_max_warp_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_max_warp_health_message,string.format("The %s retrieved has improved the warp system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_max_warp_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the warp system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_max_warp_health_message_plus = "artifact_improved_max_warp_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_max_warp_health_message_plus,string.format("The %s retrieved has improved the warp system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_max_warp_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the warp system maximum health"),full_desc))
 					end
 				elseif health < 1 then
 					p:setSystemHealth("warp",math.min(1, health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_warp_health_message = "artifact_improved_warp_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_warp_health_message,string.format("The %s retrieved has improved the warp system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_warp_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the warp system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_warp_health_message_plus = "artifact_improved_warp_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_warp_health_message_plus,string.format("The %s retrieved has improved the warp system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_warp_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the warp system health"),full_desc))
 					end
 				else
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_warp_health_message = "artifact_warp_health_message"
-						p:addCustomMessage("Engineering",p.artifact_warp_health_message,string.format("The %s retrieved has had no impact on an already healthy warp system",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_warp_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy warp system"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_warp_health_message_plus = "artifact_warp_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_warp_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy warp system",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_warp_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy warp system"),full_desc))
 					end
 				end
 			else
@@ -1125,32 +1125,32 @@ function wreckModHealthWarp(x,y)
 					p:setSystemHealth("warp",math.max(-1, health - .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_damaged_warp_health_message = "artifact_damaged_warp_health_message"
-						p:addCustomMessage("Engineering",p.artifact_damaged_warp_health_message,string.format("The %s retrieved has damaged the warp system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_damaged_warp_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the warp system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_damaged_warp_health_message_plus = "artifact_damaged_warp_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_damaged_warp_health_message_plus,string.format("The %s retrieved has damaged the warp system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_damaged_warp_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the warp system health"),full_desc))
 					end
 				else
 					p:setSystemHealthMax("warp",math.max(-1, max_health - .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_damaged_max_warp_health_message = "artifact_damaged_max_warp_health_message"
-						p:addCustomMessage("Engineering",p.artifact_damaged_max_warp_health_message,string.format("The %s retrieved has damaged the warp system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_damaged_max_warp_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the warp system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_damaged_max_warp_health_message_plus = "artifact_damaged_max_warp_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_damaged_max_warp_health_message_plus,string.format("The %s retrieved has damaged the warp system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_damaged_max_warp_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the warp system maximum health"),full_desc))
 					end
 				end
 			end
 --		else
 --			if p:hasPlayerAtPosition("Engineering") then
 --				p.artifact_warp_health_message = "artifact_warp_health_message"
---				p:addCustomMessage("Engineering",p.artifact_warp_health_message,string.format("The %s retrieved has had no impact on a non-existent warp system",full_desc))
+--				p:addCustomMessage("Engineering",p.artifact_warp_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on a non-existent warp system"),full_desc))
 --			end
 --			if p:hasPlayerAtPosition("Engineering+") then
 --				p.artifact_warp_health_message_plus = "artifact_warp_health_message_plus"
---				p:addCustomMessage("Engineering+",p.artifact_warp_health_message_plus,string.format("The %s retrieved has had no impact on a non-existent warp system",full_desc))
+--				p:addCustomMessage("Engineering+",p.artifact_warp_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on a non-existent warp system"),full_desc))
 --			end
 		end
 	end)
@@ -1174,30 +1174,30 @@ function wreckModHealthJump(x,y)
 					p:setSystemHealthMax("jumpdrive",math.min(1, max_health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_max_jump_health_message = "artifact_improved_max_jump_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_max_jump_health_message,string.format("The %s retrieved has improved the jump system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_max_jump_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the jump system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_max_jump_health_message_plus = "artifact_improved_max_jump_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_max_jump_health_message_plus,string.format("The %s retrieved has improved the jump system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_max_jump_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the jump system maximum health"),full_desc))
 					end
 				elseif health < 1 then
 					p:setSystemHealth("jumpdrive",math.min(1, health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_jump_health_message = "artifact_improved_jump_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_jump_health_message,string.format("The %s retrieved has improved the jump system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_jump_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the jump system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_jump_health_message_plus = "artifact_improved_jump_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_jump_health_message_plus,string.format("The %s retrieved has improved the jump system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_jump_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the jump system health"),full_desc))
 					end
 				else
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_jump_health_message = "artifact_jump_health_message"
-						p:addCustomMessage("Engineering",p.artifact_jump_health_message,string.format("The %s retrieved has had no impact on an already healthy jump system",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_jump_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy jump system"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_jump_health_message_plus = "artifact_jump_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_jump_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy jump system",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_jump_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy jump system"),full_desc))
 					end
 				end
 			else
@@ -1205,32 +1205,32 @@ function wreckModHealthJump(x,y)
 					p:setSystemHealth("jumpdrive",math.max(-1, health - .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_damaged_jump_health_message = "artifact_damaged_jump_health_message"
-						p:addCustomMessage("Engineering",p.artifact_damaged_jump_health_message,string.format("The %s retrieved has damaged the jump system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_damaged_jump_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the jump system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_damaged_jump_health_message_plus = "artifact_damaged_jump_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_damaged_jump_health_message_plus,string.format("The %s retrieved has damaged the jump system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_damaged_jump_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the jump system health"),full_desc))
 					end
 				else
 					p:setSystemHealthMax("jumpdrive",math.max(-1, max_health - .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_damaged_max_jump_health_message = "artifact_damaged_max_jump_health_message"
-						p:addCustomMessage("Engineering",p.artifact_damaged_max_jump_health_message,string.format("The %s retrieved has damaged the jump system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_damaged_max_jump_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the jump system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_damaged_max_jump_health_message_plus = "artifact_damaged_max_jump_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_damaged_max_jump_health_message_plus,string.format("The %s retrieved has damaged the jump system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_damaged_max_jump_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the jump system maximum health"),full_desc))
 					end
 				end
 			end
 --		else
 --			if p:hasPlayerAtPosition("Engineering") then
 --				p.artifact_jump_health_message = "artifact_jump_health_message"
---				p:addCustomMessage("Engineering",p.artifact_jump_health_message,string.format("The %s retrieved has had no impact on a non-existent jump system",full_desc))
+--				p:addCustomMessage("Engineering",p.artifact_jump_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on a non-existent jump system"),full_desc))
 --			end
 --			if p:hasPlayerAtPosition("Engineering+") then
 --				p.artifact_jump_health_message_plus = "artifact_jump_health_message_plus"
---				p:addCustomMessage("Engineering+",p.artifact_jump_health_message_plus,string.format("The %s retrieved has had no impact on a non-existent jump system",full_desc))
+--				p:addCustomMessage("Engineering+",p.artifact_jump_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on a non-existent jump system"),full_desc))
 --			end
 		end
 	end)
@@ -1256,50 +1256,50 @@ function wreckModHealthShield(x,y)
 					p:setSystemHealthMax("frontshield",math.min(1, max_health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_max_front_shield_health_message = "artifact_improved_max_front_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_max_front_shield_health_message,string.format("The %s retrieved has improved the front shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_max_front_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the front shield system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_max_front_shield_health_message_plus = "artifact_improved_max_front_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_max_front_shield_health_message_plus,string.format("The %s retrieved has improved the front shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_max_front_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the front shield system maximum health"),full_desc))
 					end
 				elseif max_health_rear < 1 then
 					p:setSystemHealthMax("rearshield",math.min(1, max_health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_max_rear_shield_health_message = "artifact_improved_max_rear_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_max_rear_shield_health_message,string.format("The %s retrieved has improved the rear shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_max_rear_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the rear shield system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_max_rear_shield_health_message_plus = "artifact_improved_max_rear_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_max_rear_shield_health_message_plus,string.format("The %s retrieved has improved the rear shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_max_rear_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the rear shield system maximum health"),full_desc))
 					end
 				elseif health_front < 1 then
 					p:setSystemHealth("frontshield",math.min(1, health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_front_shield_health_message = "artifact_improved_front_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_front_shield_health_message,string.format("The %s retrieved has improved the front shield system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_front_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the front shield system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_front_shield_health_message_plus = "artifact_improved_front_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_front_shield_health_message_plus,string.format("The %s retrieved has improved the front shield system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_front_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the front shield system health"),full_desc))
 					end
 				elseif health_rear < 1 then
 					p:setSystemHealth("rearshield",math.min(1, health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_rear_shield_health_message = "artifact_improved_rear_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_rear_shield_health_message,string.format("The %s retrieved has improved the rear shield system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_rear_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the rear shield system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_rear_shield_health_message_plus = "artifact_improved_rear_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_rear_shield_health_message_plus,string.format("The %s retrieved has improved the rear shield system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_rear_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the rear shield system health"),full_desc))
 					end
 				else
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_shield_health_message = "artifact_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_shield_health_message,string.format("The %s retrieved has had no impact on an already healthy shield system",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy shield system"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_shield_health_message_plus = "artifact_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_shield_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy shield system",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy shield system"),full_desc))
 					end
 				end
 			else
@@ -1308,21 +1308,21 @@ function wreckModHealthShield(x,y)
 						p:setSystemHealth("frontshield",math.max(-1, health - .05))
 						if p:hasPlayerAtPosition("Engineering") then
 							p.artifact_damaged_front_shield_health_message = "artifact_damaged_front_shield_health_message"
-							p:addCustomMessage("Engineering",p.artifact_damaged_front_shield_health_message,string.format("The %s retrieved has damaged the front shield system health",full_desc))
+							p:addCustomMessage("Engineering",p.artifact_damaged_front_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the front shield system health"),full_desc))
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							p.artifact_damaged_front_shield_health_message_plus = "artifact_damaged_front_shield_health_message_plus"
-							p:addCustomMessage("Engineering+",p.artifact_damaged_front_shield_health_message_plus,string.format("The %s retrieved has damaged the front shield system health",full_desc))
+							p:addCustomMessage("Engineering+",p.artifact_damaged_front_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the front shield system health"),full_desc))
 						end
 					else
 						p:setSystemHealth("rearshield",math.max(-1, health - .05))
 						if p:hasPlayerAtPosition("Engineering") then
 							p.artifact_damaged_rear_shield_health_message = "artifact_damaged_rear_shield_health_message"
-							p:addCustomMessage("Engineering",p.artifact_damaged_rear_shield_health_message,string.format("The %s retrieved has damaged the rear shield system health",full_desc))
+							p:addCustomMessage("Engineering",p.artifact_damaged_rear_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the rear shield system health"),full_desc))
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							p.artifact_damaged_rear_shield_health_message_plus = "artifact_damaged_rear_shield_health_message_plus"
-							p:addCustomMessage("Engineering+",p.artifact_damaged_rear_shield_health_message_plus,string.format("The %s retrieved has damaged the rear shield system health",full_desc))
+							p:addCustomMessage("Engineering+",p.artifact_damaged_rear_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the rear shield system health"),full_desc))
 						end
 					end
 				else
@@ -1330,21 +1330,21 @@ function wreckModHealthShield(x,y)
 						p:setSystemHealthMax("frontshield",math.max(-1, max_health - .05))
 						if p:hasPlayerAtPosition("Engineering") then
 							p.artifact_damaged_max_front_shield_health_message = "artifact_damaged_max_front_shield_health_message"
-							p:addCustomMessage("Engineering",p.artifact_damaged_max_front_shield_health_message,string.format("The %s retrieved has damaged the front shield system maximum health",full_desc))
+							p:addCustomMessage("Engineering",p.artifact_damaged_max_front_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the front shield system maximum health"),full_desc))
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							p.artifact_damaged_max_front_shield_health_message_plus = "artifact_damaged_max_front_shield_health_message_plus"
-							p:addCustomMessage("Engineering+",p.artifact_damaged_max_front_shield_health_message_plus,string.format("The %s retrieved has damaged the front shield system maximum health",full_desc))
+							p:addCustomMessage("Engineering+",p.artifact_damaged_max_front_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the front shield system maximum health"),full_desc))
 						end
 					else
 						p:setSystemHealthMax("rearshield",math.max(-1, max_health - .05))
 						if p:hasPlayerAtPosition("Engineering") then
 							p.artifact_damaged_max_rear_shield_health_message = "artifact_damaged_max_rear_shield_health_message"
-							p:addCustomMessage("Engineering",p.artifact_damaged_max_rear_shield_health_message,string.format("The %s retrieved has damaged the rear shield system maximum health",full_desc))
+							p:addCustomMessage("Engineering",p.artifact_damaged_max_rear_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the rear shield system maximum health"),full_desc))
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							p.artifact_damaged_max_rear_shield_health_message_plus = "artifact_damaged_max_rear_shield_health_message_plus"
-							p:addCustomMessage("Engineering+",p.artifact_damaged_max_rear_shield_health_message_plus,string.format("The %s retrieved has damaged the rear shield system maximum health",full_desc))
+							p:addCustomMessage("Engineering+",p.artifact_damaged_max_rear_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the rear shield system maximum health"),full_desc))
 						end
 					end
 				end
@@ -1357,30 +1357,30 @@ function wreckModHealthShield(x,y)
 					p:setSystemHealthMax("frontshield",math.min(1, max_health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_max_shield_health_message = "artifact_improved_max_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_max_shield_health_message,string.format("The %s retrieved has improved the shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_max_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the shield system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_max_shield_health_message_plus = "artifact_improved_max_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_max_shield_health_message_plus,string.format("The %s retrieved has improved the shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_max_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the shield system maximum health"),full_desc))
 					end
 				elseif health < 1 then
 					p:setSystemHealth("frontshield",math.min(1, health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_shield_health_message = "artifact_improved_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_shield_health_message,string.format("The %s retrieved has improved the shield system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the shield system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_shield_health_message_plus = "artifact_improved_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_shield_health_message_plus,string.format("The %s retrieved has improved the shield system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the shield system health"),full_desc))
 					end
 				else
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_shield_health_message = "artifact_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_shield_health_message,string.format("The %s retrieved has had no impact on an already healthy shield system",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy shield system"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_shield_health_message_plus = "artifact_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_shield_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy shield system",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy shield system"),full_desc))
 					end
 				end
 			else
@@ -1388,21 +1388,21 @@ function wreckModHealthShield(x,y)
 					p:setSystemHealth("frontshield",math.max(-1, health - .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_damaged_shield_health_message = "artifact_damaged_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_damaged_shield_health_message,string.format("The %s retrieved has damaged the shield system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_damaged_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the shield system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_damaged_shield_health_message_plus = "artifact_damaged_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_damaged_shield_health_message_plus,string.format("The %s retrieved has damaged the shield system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_damaged_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the shield system health"),full_desc))
 					end
 				else
 					p:setSystemHealthMax("frontshield",math.max(-1, max_health - .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_damaged_max_shield_health_message = "artifact_damaged_max_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_damaged_max_shield_health_message,string.format("The %s retrieved has damaged the shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_damaged_max_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the shield system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_damaged_max_shield_health_message_plus = "artifact_damaged_max_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_damaged_max_shield_health_message_plus,string.format("The %s retrieved has damaged the shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_damaged_max_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the shield system maximum health"),full_desc))
 					end
 				end
 			end
@@ -1427,30 +1427,30 @@ function wreckModHealthSpin(x,y)
 				p:setSystemHealthMax("maneuver",math.min(1, max_health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_max_maneuver_health_message = "artifact_improved_max_maneuver_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_max_maneuver_health_message,string.format("The %s retrieved has improved the maneuver system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_max_maneuver_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the maneuver system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_max_maneuver_health_message_plus = "artifact_improved_max_maneuver_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_max_maneuver_health_message_plus,string.format("The %s retrieved has improved the maneuver system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_max_maneuver_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the maneuver system maximum health"),full_desc))
 				end
 			elseif health < 1 then
 				p:setSystemHealth("maneuver",math.min(1, health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_maneuver_health_message = "artifact_improved_maneuver_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_maneuver_health_message,string.format("The %s retrieved has improved the maneuver system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_maneuver_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the maneuver system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_maneuver_health_message_plus = "artifact_improved_maneuver_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_maneuver_health_message_plus,string.format("The %s retrieved has improved the maneuver system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_maneuver_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the maneuver system health"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_maneuver_health_message = "artifact_maneuver_health_message"
-					p:addCustomMessage("Engineering",p.artifact_maneuver_health_message,string.format("The %s retrieved has had no impact on an already healthy maneuver system",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_maneuver_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy maneuver system"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_maneuver_health_message_plus = "artifact_maneuver_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_maneuver_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy maneuver system",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_maneuver_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy maneuver system"),full_desc))
 				end
 			end
 		else
@@ -1458,21 +1458,21 @@ function wreckModHealthSpin(x,y)
 				p:setSystemHealth("maneuver",math.max(-1, health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_maneuver_health_message = "artifact_damaged_maneuver_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_maneuver_health_message,string.format("The %s retrieved has damaged the maneuver system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_maneuver_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the maneuver system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_maneuver_health_message_plus = "artifact_damaged_maneuver_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_maneuver_health_message_plus,string.format("The %s retrieved has damaged the maneuver system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_maneuver_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the maneuver system health"),full_desc))
 				end
 			else
 				p:setSystemHealthMax("maneuver",math.max(-1, max_health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_max_maneuver_health_message = "artifact_damaged_max_maneuver_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_max_maneuver_health_message,string.format("The %s retrieved has damaged the maneuver system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_max_maneuver_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the maneuver system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_max_maneuver_health_message_plus = "artifact_damaged_max_maneuver_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_max_maneuver_health_message_plus,string.format("The %s retrieved has damaged the maneuver system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_max_maneuver_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the maneuver system maximum health"),full_desc))
 				end
 			end
 		end
@@ -1496,30 +1496,30 @@ function wreckModHealthReactor(x,y)
 				p:setSystemHealthMax("reactor",math.min(1, max_health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_max_reactor_health_message = "artifact_improved_max_reactor_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_max_reactor_health_message,string.format("The %s retrieved has improved the reactor system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_max_reactor_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the reactor system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_max_reactor_health_message_plus = "artifact_improved_max_reactor_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_max_reactor_health_message_plus,string.format("The %s retrieved has improved the reactor system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_max_reactor_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the reactor system maximum health"),full_desc))
 				end
 			elseif health < 1 then
 				p:setSystemHealth("reactor",math.min(1, health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_reactor_health_message = "artifact_improved_reactor_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_reactor_health_message,string.format("The %s retrieved has improved the reactor system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_reactor_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the reactor system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_reactor_health_message_plus = "artifact_improved_reactor_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_reactor_health_message_plus,string.format("The %s retrieved has improved the reactor system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_reactor_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the reactor system health"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_reactor_health_message = "artifact_reactor_health_message"
-					p:addCustomMessage("Engineering",p.artifact_reactor_health_message,string.format("The %s retrieved has had no impact on an already healthy reactor system",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_reactor_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy reactor system"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_reactor_health_message_plus = "artifact_reactor_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_reactor_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy reactor system",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_reactor_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy reactor system"),full_desc))
 				end
 			end
 		else
@@ -1527,21 +1527,21 @@ function wreckModHealthReactor(x,y)
 				p:setSystemHealth("reactor",math.max(-1, health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_reactor_health_message = "artifact_damaged_reactor_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_reactor_health_message,string.format("The %s retrieved has damaged the reactor system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_reactor_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the reactor system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_reactor_health_message_plus = "artifact_damaged_reactor_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_reactor_health_message_plus,string.format("The %s retrieved has damaged the reactor system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_reactor_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the reactor system health"),full_desc))
 				end
 			else
 				p:setSystemHealthMax("reactor",math.max(-1, max_health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_max_reactor_health_message = "artifact_damaged_max_reactor_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_max_reactor_health_message,string.format("The %s retrieved has damaged the reactor system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_max_reactor_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the reactor system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_max_reactor_health_message_plus = "artifact_damaged_max_reactor_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_max_reactor_health_message_plus,string.format("The %s retrieved has damaged the reactor system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_max_reactor_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the reactor system maximum health"),full_desc))
 				end
 			end
 		end
@@ -1564,20 +1564,20 @@ function wreckModBoolScan(x,y)
 				p:setCanScan(true)
 				if p:hasPlayerAtPosition("Science") then
 					p.artifact_enabled_scan_message = "artifact_enabled_scan_message"
-					p:addCustomMessage("Science",p.artifact_enabled_scan_message,string.format("The %s retrieved has enabled the scanners",full_desc))
+					p:addCustomMessage("Science",p.artifact_enabled_scan_message,string.format(_("artifactEffect-msgScience", "The %s retrieved has enabled the scanners"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_enabled_scan_message_ops = "artifact_enabled_scan_message_ops"
-					p:addCustomMessage("Operations",p.artifact_enabled_scan_message_ops,string.format("The %s retrieved has enabled the scanners",full_desc))
+					p:addCustomMessage("Operations",p.artifact_enabled_scan_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has enabled the scanners"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Science") then
 					p.artifact_scan_message = "artifact_scan_message"
-					p:addCustomMessage("Science",p.artifact_scan_message,string.format("The %s retrieved does not effect the scanners",full_desc))
+					p:addCustomMessage("Science",p.artifact_scan_message,string.format(_("artifactEffect-msgScience", "The %s retrieved does not effect the scanners"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_scan_message_ops = "artifact_scan_message_ops"
-					p:addCustomMessage("Operations",p.artifact_scan_message_ops,string.format("The %s retrieved does not effect the scanners",full_desc))
+					p:addCustomMessage("Operations",p.artifact_scan_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect the scanners"),full_desc))
 				end
 			end
 		else
@@ -1585,20 +1585,20 @@ function wreckModBoolScan(x,y)
 				p:setCanScan(false)
 				if p:hasPlayerAtPosition("Science") then
 					p.artifact_disabled_scan_message = "artifact_disabled_scan_message"
-					p:addCustomMessage("Science",p.artifact_disabled_scan_message,string.format("The %s retrieved has disabled the scanners",full_desc))
+					p:addCustomMessage("Science",p.artifact_disabled_scan_message,string.format(_("artifactEffect-msgScience", "The %s retrieved has disabled the scanners"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_disabled_scan_message_ops = "artifact_disabled_scan_message_ops"
-					p:addCustomMessage("Operations",p.artifact_disabled_scan_message_ops,string.format("The %s retrieved has disabled the scanners",full_desc))
+					p:addCustomMessage("Operations",p.artifact_disabled_scan_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has disabled the scanners"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Science") then
 					p.artifact_scan_message = "artifact_scan_message"
-					p:addCustomMessage("Science",p.artifact_scan_message,string.format("The %s retrieved does not effect the scanners",full_desc))
+					p:addCustomMessage("Science",p.artifact_scan_message,string.format(_("artifactEffect-msgScience", "The %s retrieved does not effect the scanners"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_scan_message_ops = "artifact_scan_message_ops"
-					p:addCustomMessage("Operations",p.artifact_scan_message_ops,string.format("The %s retrieved does not effect the scanners",full_desc))
+					p:addCustomMessage("Operations",p.artifact_scan_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect the scanners"),full_desc))
 				end
 			end
 		end
@@ -1621,20 +1621,20 @@ function wreckModBoolCombat(x,y)
 				p:setCanCombatManeuver(true)
 				if p:hasPlayerAtPosition("Helms") then
 					p.artifact_enabled_cm_message = "artifact_enabled_cm_message"
-					p:addCustomMessage("Helms",p.artifact_enabled_cm_message,string.format("The %s retrieved has enabled combat maneuver",full_desc))
+					p:addCustomMessage("Helms",p.artifact_enabled_cm_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved has enabled combat maneuver"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.artifact_enabled_cm_message_tac = "artifact_enabled_cm_message_tac"
-					p:addCustomMessage("Tactical",p.artifact_enabled_cm_message_tac,string.format("The %s retrieved has enabled combat maneuver",full_desc))
+					p:addCustomMessage("Tactical",p.artifact_enabled_cm_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has enabled combat maneuver"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Helms") then
 					p.artifact_cm_message = "artifact_cm_message"
-					p:addCustomMessage("Helms",p.artifact_cm_message,string.format("The %s retrieved does not effect combat maneuver",full_desc))
+					p:addCustomMessage("Helms",p.artifact_cm_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved does not effect combat maneuver"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.artifact_cm_message_tac = "artifact_cm_message_tac"
-					p:addCustomMessage("Tactical",p.artifact_cm_message_tac,string.format("The %s retrieved does not effect combat maneuver",full_desc))
+					p:addCustomMessage("Tactical",p.artifact_cm_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved does not effect combat maneuver"),full_desc))
 				end
 			end
 		else
@@ -1642,20 +1642,20 @@ function wreckModBoolCombat(x,y)
 				p:setCanCombatManeuver(false)
 				if p:hasPlayerAtPosition("Helms") then
 					p.artifact_disabled_cm_message = "artifact_disabled_cm_message"
-					p:addCustomMessage("Helms",p.artifact_disabled_cm_message,string.format("The %s retrieved has disabled combat maneuver",full_desc))
+					p:addCustomMessage("Helms",p.artifact_disabled_cm_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved has disabled combat maneuver"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.artifact_disabled_cm_message_tac = "artifact_disabled_cm_message_tac"
-					p:addCustomMessage("Tactical",p.artifact_disabled_cm_message_tac,string.format("The %s retrieved has disabled combat maneuver",full_desc))
+					p:addCustomMessage("Tactical",p.artifact_disabled_cm_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has disabled combat maneuver"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Helms") then
 					p.artifact_cm_message = "artifact_cm_message"
-					p:addCustomMessage("Helms",p.artifact_cm_message,string.format("The %s retrieved does not effect combat maneuver",full_desc))
+					p:addCustomMessage("Helms",p.artifact_cm_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved does not effect combat maneuver"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.artifact_cm_message_tac = "artifact_cm_message_tac"
-					p:addCustomMessage("Tactical",p.artifact_cm_message_tac,string.format("The %s retrieved does not effect combat maneuver",full_desc))
+					p:addCustomMessage("Tactical",p.artifact_cm_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved does not effect combat maneuver"),full_desc))
 				end
 			end
 		end
@@ -1678,20 +1678,20 @@ function wreckModBoolProbe(x,y)
 				p:setCanLaunchProbe(true)
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_enabled_probe_message = "artifact_enabled_probe_message"
-					p:addCustomMessage("Relay",p.artifact_enabled_probe_message,string.format("The %s retrieved has enabled probe launch",full_desc))
+					p:addCustomMessage("Relay",p.artifact_enabled_probe_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved has enabled probe launch"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_enabled_probe_message_ops = "artifact_enabled_probe_message_ops"
-					p:addCustomMessage("Operations",p.artifact_enabled_probe_message_ops,string.format("The %s retrieved has enabled probe launch",full_desc))
+					p:addCustomMessage("Operations",p.artifact_enabled_probe_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has enabled probe launch"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_probe_message = "artifact_probe_message"
-					p:addCustomMessage("Relay",p.artifact_probe_message,string.format("The %s retrieved does not effect probe launch",full_desc))
+					p:addCustomMessage("Relay",p.artifact_probe_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved does not effect probe launch"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_probe_message_ops = "artifact_probe_message_ops"
-					p:addCustomMessage("Operations",p.artifact_probe_message_ops,string.format("The %s retrieved does not effect probe launch",full_desc))
+					p:addCustomMessage("Operations",p.artifact_probe_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect probe launch"),full_desc))
 				end
 			end
 		else
@@ -1699,20 +1699,20 @@ function wreckModBoolProbe(x,y)
 				p:setCanLaunchProbe(false)
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_disabled_probe_message = "artifact_disabled_probe_message"
-					p:addCustomMessage("Relay",p.artifact_disabled_probe_message,string.format("The %s retrieved has disabled probe launch",full_desc))
+					p:addCustomMessage("Relay",p.artifact_disabled_probe_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved has disabled probe launch"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_disabled_probe_message_ops = "artifact_disabled_probe_message_ops"
-					p:addCustomMessage("Operations",p.artifact_disabled_probe_message_ops,string.format("The %s retrieved has disabled probe launch",full_desc))
+					p:addCustomMessage("Operations",p.artifact_disabled_probe_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has disabled probe launch"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_probe_message = "artifact_probe_message"
-					p:addCustomMessage("Relay",p.artifact_probe_message,string.format("The %s retrieved does not effect probe launch",full_desc))
+					p:addCustomMessage("Relay",p.artifact_probe_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved does not effect probe launch"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_probe_message_ops = "artifact_probe_message_ops"
-					p:addCustomMessage("Operations",p.artifact_probe_message_ops,string.format("The %s retrieved does not effect probe launch",full_desc))
+					p:addCustomMessage("Operations",p.artifact_probe_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect probe launch"),full_desc))
 				end
 			end
 		end
@@ -1735,20 +1735,20 @@ function wreckModBoolHack(x,y)
 				p:setCanHack(true)
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_enabled_hack_message = "artifact_enabled_hack_message"
-					p:addCustomMessage("Relay",p.artifact_enabled_hack_message,string.format("The %s retrieved has enabled hacking",full_desc))
+					p:addCustomMessage("Relay",p.artifact_enabled_hack_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved has enabled hacking"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_enabled_hack_message_ops = "artifact_enabled_hack_message_ops"
-					p:addCustomMessage("Operations",p.artifact_enabled_hack_message_ops,string.format("The %s retrieved has enabled hacking",full_desc))
+					p:addCustomMessage("Operations",p.artifact_enabled_hack_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has enabled hacking"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_hack_message = "artifact_hack_message"
-					p:addCustomMessage("Relay",p.artifact_hack_message,string.format("The %s retrieved does not effect hacking",full_desc))
+					p:addCustomMessage("Relay",p.artifact_hack_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved does not effect hacking"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_hack_message_ops = "artifact_hack_message_ops"
-					p:addCustomMessage("Operations",p.artifact_hack_message_ops,string.format("The %s retrieved does not effect hacking",full_desc))
+					p:addCustomMessage("Operations",p.artifact_hack_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect hacking"),full_desc))
 				end
 			end
 		else
@@ -1756,20 +1756,20 @@ function wreckModBoolHack(x,y)
 				p:setCanHack(false)
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_disabled_hack_message = "artifact_disabled_hack_message"
-					p:addCustomMessage("Relay",p.artifact_disabled_hack_message,string.format("The %s retrieved has disabled hacking",full_desc))
+					p:addCustomMessage("Relay",p.artifact_disabled_hack_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved has disabled hacking"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_disabled_hack_message_ops = "artifact_disabled_hack_message_ops"
-					p:addCustomMessage("Operations",p.artifact_disabled_hack_message_ops,string.format("The %s retrieved has disabled hacking",full_desc))
+					p:addCustomMessage("Operations",p.artifact_disabled_hack_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has disabled hacking"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_hack_message = "artifact_hack_message"
-					p:addCustomMessage("Relay",p.artifact_hack_message,string.format("The %s retrieved does not effect hacking",full_desc))
+					p:addCustomMessage("Relay",p.artifact_hack_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved does not effect hacking"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_hack_message_ops = "artifact_hack_message_ops"
-					p:addCustomMessage("Operations",p.artifact_hack_message_ops,string.format("The %s retrieved does not effect hacking",full_desc))
+					p:addCustomMessage("Operations",p.artifact_hack_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect hacking"),full_desc))
 				end
 			end
 		end
@@ -1791,21 +1791,21 @@ function wreckModChangeScan(x,y)
 			p:setLongRangeRadarRange(current_range*1.1)
 			if p:hasPlayerAtPosition("Science") then
 				p.artifact_increase_sensor_range_message = "artifact_increase_sensor_range_message"
-				p:addCustomMessage("Science",p.artifact_increase_sensor_range_message,string.format("The %s retrieved has increased our sensor range",full_desc))
+				p:addCustomMessage("Science",p.artifact_increase_sensor_range_message,string.format(_("artifactEffect-msgScience", "The %s retrieved has increased our sensor range"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Operations") then
 				p.artifact_increase_sensor_range_message_ops = "artifact_increase_sensor_range_message_ops"
-				p:addCustomMessage("Operations",p.artifact_increase_sensor_range_message_ops,string.format("The %s retrieved has increased our sensor range",full_desc))
+				p:addCustomMessage("Operations",p.artifact_increase_sensor_range_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has increased our sensor range"),full_desc))
 			end
 		else
 			p:setLongRangeRadarRange(current_range*.9)
 			if p:hasPlayerAtPosition("Science") then
 				p.artifact_decrease_sensor_range_message = "artifact_decrease_sensor_range_message"
-				p:addCustomMessage("Science",p.artifact_decrease_sensor_range_message,string.format("The %s retrieved has decreased our sensor range",full_desc))
+				p:addCustomMessage("Science",p.artifact_decrease_sensor_range_message,string.format(_("artifactEffect-msgScience", "The %s retrieved has decreased our sensor range"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Operations") then
 				p.artifact_decrease_sensor_range_message_ops = "artifact_decrease_sensor_range_message_ops"
-				p:addCustomMessage("Operations",p.artifact_decrease_sensor_range_message_ops,string.format("The %s retrieved has decreased our sensor range",full_desc))
+				p:addCustomMessage("Operations",p.artifact_decrease_sensor_range_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has decreased our sensor range"),full_desc))
 			end
 		end
 	end)
@@ -1826,21 +1826,21 @@ function wreckModChangeCoolant(x,y)
 			p:setMaxCoolant(current_coolant*1.1)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_increase_coolant_message = "artifact_increase_coolant_message"
-				p:addCustomMessage("Engineering",p.artifact_increase_coolant_message,string.format("The %s retrieved has increased our coolant",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_increase_coolant_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has increased our coolant"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_increase_coolant_message_plus = "artifact_increase_coolant_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_increase_coolant_message_plus,string.format("The %s retrieved has increased our coolant",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_increase_coolant_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has increased our coolant"),full_desc))
 			end
 		else
 			p:setMaxCoolant(current_coolant*.9)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_decrease_coolant_message = "artifact_decrease_coolant_message"
-				p:addCustomMessage("Engineering",p.artifact_decrease_coolant_message,string.format("The %s retrieved has decreased our coolant: incompatible, corrosive reaction",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_decrease_coolant_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has decreased our coolant: incompatible, corrosive reaction"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_decrease_coolant_message_plus = "artifact_decrease_coolant_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_decrease_coolant_message_plus,string.format("The %s retrieved has decreased our coolant: incompatible, corrosive reaction",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_decrease_coolant_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has decreased our coolant: incompatible, corrosive reaction"),full_desc))
 			end
 		end
 	end)
@@ -1861,31 +1861,31 @@ function wreckModChangeRepair(x,y)
 			p:setRepairCrewCount(current_repair_crew_count + 1)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_increase_repair_crew_message = "artifact_increase_repair_crew_message"
-				p:addCustomMessage("Engineering",p.artifact_increase_repair_crew_message,string.format("The %s retrieved has increased the number of repair crew",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_increase_repair_crew_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has increased the number of repair crew"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_increase_repair_crew_message_plus = "artifact_increase_repair_crew_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_increase_repair_crew_message_plus,string.format("The %s retrieved has increased the number of repair crew",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_increase_repair_crew_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has increased the number of repair crew"),full_desc))
 			end
 		else
 			if current_repair_crew_count > 0 then
 				p:setRepairCrewCount(current_repair_crew_count - 1)
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_decrease_repair_crew_message = "artifact_decrease_repair_crew_message"
-					p:addCustomMessage("Engineering",p.artifact_decrease_repair_crew_message,string.format("The %s retrieved has decreased the number of repair crew: assassination malware",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_decrease_repair_crew_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has decreased the number of repair crew: assassination malware"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_decrease_repair_crew_message_plus = "artifact_decrease_repair_crew_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_decrease_repair_crew_message_plus,string.format("The %s retrieved has decreased the number of repair crew: assassination malware",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_decrease_repair_crew_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has decreased the number of repair crew: assassination malware"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_repair_crew_message = "artifact_repair_crew_message"
-					p:addCustomMessage("Engineering",p.artifact_repair_crew_message,string.format("The %s retrieved has had no effect on the number of repair crew: malfunction",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_repair_crew_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no effect on the number of repair crew: malfunction"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_repair_crew_message_plus = "artifact_repair_crew_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_repair_crew_message_plus,string.format("The %s retrieved has had no effect on the number of repair crew: malfunction",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_repair_crew_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no effect on the number of repair crew: malfunction"),full_desc))
 				end
 			end
 		end
@@ -1907,21 +1907,21 @@ function wreckModChangeHull(x,y)
 			p:setHull(current_hull*1.1)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_increase_hull_message = "artifact_increase_hull_message"
-				p:addCustomMessage("Engineering",p.artifact_increase_hull_message,string.format("The %s retrieved has repaired some hull damage",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_increase_hull_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has repaired some hull damage"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_increase_hull_message_plus = "artifact_increase_hull_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_increase_hull_message_plus,string.format("The %s retrieved has repaired some hull damage",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_increase_hull_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has repaired some hull damage"),full_desc))
 			end
 		else
 			p:setHull(current_hull*.9)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_decrease_hull_message = "artifact_decrease_hull_message"
-				p:addCustomMessage("Engineering",p.artifact_decrease_hull_message,string.format("The %s retrieved has damaged the hull: poor integration",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_decrease_hull_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the hull: poor integration"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_decrease_hull_message_plus = "artifact_decrease_hull_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_decrease_hull_message_plus,string.format("The %s retrieved has damaged the hull: poor integration",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_decrease_hull_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the hull: poor integration"),full_desc))
 			end
 		end
 	end)
@@ -1945,11 +1945,11 @@ function wreckModChangeShield(x,y)
 			end
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_increase_shield_message = "artifact_increase_shield_message"
-				p:addCustomMessage("Engineering",p.artifact_increase_shield_message,string.format("The %s retrieved has added charge to the shields",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_increase_shield_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has added charge to the shields"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_increase_shield_message_plus = "artifact_increase_shield_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_increase_shield_message_plus,string.format("The %s retrieved has added charge to the shields",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_increase_shield_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has added charge to the shields"),full_desc))
 			end
 		else
 			if p:getShieldCount() > 1 then
@@ -1959,11 +1959,11 @@ function wreckModChangeShield(x,y)
 			end
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_decrease_shield_message = "artifact_decrease_shield_message"
-				p:addCustomMessage("Engineering",p.artifact_decrease_shield_message,string.format("The %s retrieved has reduced shield charge: corroded couplings",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_decrease_shield_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has reduced shield charge: corroded couplings"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_decrease_shield_message_plus = "artifact_decrease_shield_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_decrease_shield_message_plus,string.format("The %s retrieved has reduced shield charge: corroded couplings",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_decrease_shield_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has reduced shield charge: corroded couplings"),full_desc))
 			end
 		end
 	end)
@@ -1984,21 +1984,21 @@ function wreckModChangePower(x,y)
 			p:setEnergy(current_energy + p:getMaxEnergy()*.1)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_increase_energy_message = "artifact_increase_energy_message"
-				p:addCustomMessage("Engineering",p.artifact_increase_energy_message,string.format("The %s retrieved has added energy to our reserves",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_increase_energy_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has added energy to our reserves"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_increase_energy_message_plus = "artifact_increase_energy_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_increase_energy_message_plus,string.format("The %s retrieved has added energy to our reserves",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_increase_energy_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has added energy to our reserves"),full_desc))
 			end
 		else
 			p:setEnergy(current_energy - p:getMaxEnergy()*.1)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_decrease_energy_message = "artifact_decrease_energy_message"
-				p:addCustomMessage("Engineering",p.artifact_decrease_energy_message,string.format("The %s retrieved has drained some energy: incompatibility",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_decrease_energy_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has drained some energy: incompatibility"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_decrease_energy_message_plus = "artifact_decrease_energy_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_decrease_energy_message_plus,string.format("The %s retrieved has drained some energy: incompatibility",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_decrease_energy_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has drained some energy: incompatibility"),full_desc))
 			end
 		end
 	end)
@@ -2009,7 +2009,7 @@ function wmCombatBoostButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_cm_boost_button == nil then
 				p.activate_cm_boost_button = "activate_cm_boost_button"
-				p:addCustomButton("Helms",p.activate_cm_boost_button,_("-buttonHelms", "C.M. Boost"),function()
+				p:addCustomButton("Helms",p.activate_cm_boost_button,_("upgrade-buttonHelms", "C.M. Boost"),function()
 					string.format("")	--global context for serious proton
 					if p.cm_boost_count > 0 then
 						p.cm_boost_active = true
@@ -2017,7 +2017,7 @@ function wmCombatBoostButton(p,console)
 						p.cm_boost_timer = 300
 						p.cm_boost_count = p.cm_boost_count - 1
 						p.cm_boost_activated_message = "cm_boost_activated_message"
-						p:addCustomMessage("Helms",p.cm_boost_activated_message,"Combat maneuver boost (forward direction) ability increased")
+						p:addCustomMessage("Helms",p.cm_boost_activated_message,_("upgrade-msgHelms", "Combat maneuver boost (forward direction) ability increased"))
 					end
 					p:removeCustom(p.activate_cm_boost_button)
 					p.activate_cm_boost_button = nil
@@ -2032,7 +2032,7 @@ function wmCombatBoostButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_cm_boost_button_tac == nil then
 				p.activate_cm_boost_button_tac = "activate_cm_boost_button_tac"
-				p:addCustomButton("Tactical",p.activate_cm_boost_button_tac,_("-buttonTactical", "C.M. Boost"),function()
+				p:addCustomButton("Tactical",p.activate_cm_boost_button_tac,_("upgrade-buttonTactical", "C.M. Boost"),function()
 					string.format("")	--global context for serious proton
 					if p.cm_boost_count > 0 then
 						p.cm_boost_active = true
@@ -2040,7 +2040,7 @@ function wmCombatBoostButton(p,console)
 						p.cm_boost_timer = 300
 						p.cm_boost_count = p.cm_boost_count - 1
 						p.cm_boost_activated_message_tac = "cm_boost_activated_message_tac"
-						p:addCustomMessage("Tactical",p.cm_boost_activated_message_tac,"Combat maneuver boost (forward direction) ability increased")
+						p:addCustomMessage("Tactical",p.cm_boost_activated_message_tac,_("upgrade-msgTactical", "Combat maneuver boost (forward direction) ability increased"))
 					end
 					p:removeCustom(p.activate_cm_boost_button_tac)
 					p.activate_cm_boost_button_tac = nil
@@ -2058,7 +2058,7 @@ function wmCombatStrafeButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_cm_strafe_button == nil then
 				p.activate_cm_strafe_button = "activate_cm_strafe_button"
-				p:addCustomButton("Helms",p.activate_cm_strafe_button,_("-buttonHelms", "C.M. Strafe"),function()
+				p:addCustomButton("Helms",p.activate_cm_strafe_button,_("upgrade-buttonHelms", "C.M. Strafe"),function()
 					string.format("")	--global context for serious proton
 					if p.cm_strafe_count > 0 then
 						p.cm_strafe_active = true
@@ -2066,7 +2066,7 @@ function wmCombatStrafeButton(p,console)
 						p.cm_strafe_timer = 300
 						p.cm_strafe_count = p.cm_strafe_count - 1
 						p.cm_strafe_activated_message = "cm_strafe_activated_message"
-						p:addCustomMessage("Helms",p.cm_strafe_activated_message,"Combat maneuver strafe (sideways direction) ability increased")
+						p:addCustomMessage("Helms",p.cm_strafe_activated_message,_("upgrade-msgHelms", "Combat maneuver strafe (sideways direction) ability increased"))
 					end
 					p:removeCustom(p.activate_cm_strafe_button)
 					p.activate_cm_strafe_button = nil
@@ -2081,7 +2081,7 @@ function wmCombatStrafeButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_cm_strafe_button_tac == nil then
 				p.activate_cm_strafe_button_tac = "activate_cm_strafe_button_tac"
-				p:addCustomButton("Tactical",p.activate_cm_strafe_button_tac,_("-buttonTactical", "C.M. Strafe"),function()
+				p:addCustomButton("Tactical",p.activate_cm_strafe_button_tac,_("upgrade-buttonTactical", "C.M. Strafe"),function()
 					string.format("")	--global context for serious proton
 					if p.cm_strafe_count > 0 then
 						p.cm_strafe_active = true
@@ -2089,7 +2089,7 @@ function wmCombatStrafeButton(p,console)
 						p.cm_strafe_timer = 300
 						p.cm_strafe_count = p.cm_strafe_count - 1
 						p.cm_strafe_activated_message_tac = "cm_strafe_activated_message_tac"
-						p:addCustomMessage("Tactical",p.cm_strafe_activated_message_tac,"Combat maneuver strafe (sideways direction) ability increased")
+						p:addCustomMessage("Tactical",p.cm_strafe_activated_message_tac,_("upgrade-msgTactical", "Combat maneuver strafe (sideways direction) ability increased"))
 					end
 					p:removeCustom(p.activate_cm_strafe_button_tac)
 					p.activate_cm_strafe_button_tac = nil
@@ -2107,7 +2107,7 @@ function wmBeamDamageButton(p,console)
 		if p:hasPlayerAtPosition("Weapons") then
 			if p.activate_beam_damage_button == nil then
 				p.activate_beam_damage_button = "activate_beam_damage_button"
-				p:addCustomButton("Weapons",p.activate_beam_damage_button,_("-buttonWeapons", "Beam Damage"),function()
+				p:addCustomButton("Weapons",p.activate_beam_damage_button,_("upgrade-buttonWeapons", "Beam Damage"),function()
 					string.format("")	--global context for serious proton
 					if p.beam_damage_count > 0 then
 						p.beam_damage_active = true
@@ -2119,7 +2119,7 @@ function wmBeamDamageButton(p,console)
 						p.beam_damage_timer = 300
 						p.beam_damage_count = p.beam_damage_count - 1
 						p.beam_damage_activated_message = "beam_damage_activated_message"
-						p:addCustomMessage("Weapons",p.beam_damage_activated_message,"Damage applied by beam weapons increased")
+						p:addCustomMessage("Weapons",p.beam_damage_activated_message,_("upgrade-msgWeapons", "Damage applied by beam weapons increased"))
 					end
 					p:removeCustom(p.activate_beam_damage_button)
 					p.activate_beam_damage_button = nil
@@ -2134,7 +2134,7 @@ function wmBeamDamageButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_beam_damage_button_tac == nil then
 				p.activate_beam_damage_button_tac = "activate_beam_damage_button_tac"
-				p:addCustomButton("Tactical",p.activate_beam_damage_button_tac,_("-buttonTactical", "Beam Damage"),function()
+				p:addCustomButton("Tactical",p.activate_beam_damage_button_tac,_("upgrade-buttonTactical", "Beam Damage"),function()
 					string.format("")	--global context for serious proton
 					if p.beam_damage_count > 0 then
 						p.beam_damage_active = true
@@ -2146,7 +2146,7 @@ function wmBeamDamageButton(p,console)
 						p.beam_damage_timer = 300
 						p.beam_damage_count = p.beam_damage_count - 1
 						p.beam_damage_activated_message_tac = "beam_damage_activated_message_tac"
-						p:addCustomMessage("Tactical",p.beam_damage_activated_message_tac,"Damage applied by beam weapons increased")
+						p:addCustomMessage("Tactical",p.beam_damage_activated_message_tac,_("upgrade-msgTactical", "Damage applied by beam weapons increased"))
 					end
 					p:removeCustom(p.activate_beam_damage_button_tac)
 					p.activate_beam_damage_button_tac = nil
@@ -2164,7 +2164,7 @@ function wmBeamCycleButton(p,console)
 		if p:hasPlayerAtPosition("Weapons") then
 			if p.activate_beam_cycle_button == nil then
 				p.activate_beam_cycle_button = "activate_beam_cycle_button"
-				p:addCustomButton("Weapons",p.activate_beam_cycle_button,_("-buttonWeapons", "Beam Cycle"),function()
+				p:addCustomButton("Weapons",p.activate_beam_cycle_button,_("upgrade-buttonWeapons", "Beam Cycle"),function()
 					string.format("")	--global context for serious proton
 					if p.beam_cycle_count > 0 then
 						p.beam_cycle_active = true
@@ -2176,7 +2176,7 @@ function wmBeamCycleButton(p,console)
 						p.beam_cycle_timer = 300
 						p.beam_cycle_count = p.beam_cycle_count - 1
 						p.beam_cycle_activated_message = "beam_cycle_activated_message"
-						p:addCustomMessage("Weapons",p.beam_cycle_activated_message,"The time it takes to cycle the beams between firing has been reduced")
+						p:addCustomMessage("Weapons",p.beam_cycle_activated_message,_("upgrade-msgWeapons", "The time it takes to cycle the beams between firing has been reduced"))
 					end
 					p:removeCustom(p.activate_beam_cycle_button)
 					p.activate_beam_cycle_button = nil
@@ -2191,7 +2191,7 @@ function wmBeamCycleButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_beam_cycle_button_tac == nil then
 				p.activate_beam_cycle_button_tac = "activate_beam_cycle_button_tac"
-				p:addCustomButton("Tactical",p.activate_beam_cycle_button_tac,_("-buttonTactical", "Beam Cycle"),function()
+				p:addCustomButton("Tactical",p.activate_beam_cycle_button_tac,_("upgrade-buttonTactical", "Beam Cycle"),function()
 					string.format("")	--global context for serious proton
 					if p.beam_cycle_count > 0 then
 						p.beam_cycle_active = true
@@ -2203,7 +2203,7 @@ function wmBeamCycleButton(p,console)
 						p.beam_cycle_timer = 300
 						p.beam_cycle_count = p.beam_cycle_count - 1
 						p.beam_cycle_activated_message_tac = "beam_cycle_activated_message_tac"
-						p:addCustomMessage("Tactical",p.beam_cycle_activated_message_tac,"The time it takes to cycle the beams between firing has been reduced")
+						p:addCustomMessage("Tactical",p.beam_cycle_activated_message_tac,_("upgrade-msgTactical", "The time it takes to cycle the beams between firing has been reduced"))
 					end
 					p:removeCustom(p.activate_beam_cycle_button_tac)
 					p.activate_beam_cycle_button_tac = nil
@@ -2221,7 +2221,7 @@ function wmImpulseButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_impulse_button == nil then
 				p.activate_impulse_button = "activate_impulse_button"
-				p:addCustomButton("Helms",p.activate_impulse_button,_("-buttonHelms", "Impulse Speed"),function()
+				p:addCustomButton("Helms",p.activate_impulse_button,_("upgrade-buttonHelms", "Impulse Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.impulse_count > 0 then
 						p.impulse_active = true
@@ -2229,7 +2229,7 @@ function wmImpulseButton(p,console)
 						p.impulse_timer = 300
 						p.impulse_count = p.impulse_count - 1
 						p.impulse_activated_message = "impulse_activated_message"
-						p:addCustomMessage("Helms",p.impulse_activated_message,"The maximum impulse speed has been increased")
+						p:addCustomMessage("Helms",p.impulse_activated_message,_("upgrade-msgHelms", "The maximum impulse speed has been increased"))
 					end
 					p:removeCustom(p.activate_impulse_button)
 					p.activate_impulse_button = nil
@@ -2244,7 +2244,7 @@ function wmImpulseButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_impulse_button_tac == nil then
 				p.activate_impulse_button_tac = "activate_impulse_button_tac"
-				p:addCustomButton("Tactical",p.activate_impulse_button_tac,_("-buttonTactical", "Impulse Speed"),function()
+				p:addCustomButton("Tactical",p.activate_impulse_button_tac,_("upgrade-buttonTactical", "Impulse Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.impulse_count > 0 then
 						p.impulse_active = true
@@ -2252,7 +2252,7 @@ function wmImpulseButton(p,console)
 						p.impulse_timer = 300
 						p.impulse_count = p.impulse_count - 1
 						p.impulse_activated_message_tac = "impulse_activated_message_tac"
-						p:addCustomMessage("Tactical",p.impulse_activated_message_tac,"The maximum impulse speed has been increased")
+						p:addCustomMessage("Tactical",p.impulse_activated_message_tac,_("upgrade-msgTactical", "The maximum impulse speed has been increased"))
 					end
 					p:removeCustom(p.activate_impulse_button_tac)
 					p.activate_impulse_button_tac = nil
@@ -2270,7 +2270,7 @@ function wmWarpButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_warp_button == nil then
 				p.activate_warp_button = "activate_warp_button"
-				p:addCustomButton("Helms",p.activate_warp_button,_("-buttonHelms", "Warp Speed"),function()
+				p:addCustomButton("Helms",p.activate_warp_button,_("upgrade-buttonHelms", "Warp Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.warp_count > 0 then
 						p.warp_active = true
@@ -2278,7 +2278,7 @@ function wmWarpButton(p,console)
 						p.warp_timer = 300
 						p.warp_count = p.warp_count - 1
 						p.warp_activated_message = "warp_activated_message"
-						p:addCustomMessage("Helms",p.warp_activated_message,"The maximum warp speed has been increased")
+						p:addCustomMessage("Helms",p.warp_activated_message,_("upgrade-msgHelms", "The maximum warp speed has been increased"))
 					end
 					p:removeCustom(p.activate_warp_button)
 					p.activate_warp_button = nil
@@ -2293,7 +2293,7 @@ function wmWarpButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_warp_button_tac == nil then
 				p.activate_warp_button_tac = "activate_warp_button_tac"
-				p:addCustomButton("Tactical",p.activate_warp_button_tac,_("-buttonTactical", "Warp Speed"),function()
+				p:addCustomButton("Tactical",p.activate_warp_button_tac,_("upgrade-buttonTactical", "Warp Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.warp_count > 0 then
 						p.warp_active = true
@@ -2301,7 +2301,7 @@ function wmWarpButton(p,console)
 						p.warp_timer = 300
 						p.warp_count = p.warp_count - 1
 						p.warp_activated_message_tac = "warp_activated_message_tac"
-						p:addCustomMessage("Tactical",p.warp_activated_message_tac,"The maximum warp speed has been increased")
+						p:addCustomMessage("Tactical",p.warp_activated_message_tac,_("upgrade-msgTactical", "The maximum warp speed has been increased"))
 					end
 					p:removeCustom(p.activate_warp_button_tac)
 					p.activate_warp_button_tac = nil
@@ -2319,7 +2319,7 @@ function wmJumpButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_jump_button == nil then
 				p.activate_jump_button = "activate_jump_button"
-				p:addCustomButton("Helms",p.activate_jump_button,_("-buttonHelms", "Jump Range"),function()
+				p:addCustomButton("Helms",p.activate_jump_button,_("upgrade-buttonHelms", "Jump Range"),function()
 					string.format("")	--global context for serious proton
 					if p.jump_count > 0 then
 						p.jump_active = true
@@ -2332,7 +2332,7 @@ function wmJumpButton(p,console)
 						p.jump_timer = 300
 						p.jump_count = p.jump_count - 1
 						p.jump_activated_message = "jump_activated_message"
-						p:addCustomMessage("Helms",p.jump_activated_message,"The maximum jump range has been increased")
+						p:addCustomMessage("Helms",p.jump_activated_message,_("upgrade-msgHelms", "The maximum jump range has been increased"))
 					end
 					p:removeCustom(p.activate_jump_button)
 					p.activate_jump_button = nil
@@ -2347,7 +2347,7 @@ function wmJumpButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_jump_button_tac == nil then
 				p.activate_jump_button_tac = "activate_jump_button_tac"
-				p:addCustomButton("Tactical",p.activate_jump_button_tac,_("-buttonTactical", "Jump Range"),function()
+				p:addCustomButton("Tactical",p.activate_jump_button_tac,_("upgrade-buttonTactical", "Jump Range"),function()
 					string.format("")	--global context for serious proton
 					if p.jump_count > 0 then
 						p.jump_active = true
@@ -2360,7 +2360,7 @@ function wmJumpButton(p,console)
 						p.jump_timer = 300
 						p.jump_count = p.jump_count - 1
 						p.jump_activated_message_tac = "jump_activated_message_tac"
-						p:addCustomMessage("Tactical",p.jump_activated_message_tac,"The maximum jump range has been increased")
+						p:addCustomMessage("Tactical",p.jump_activated_message_tac,_("upgrade-msgTactical", "The maximum jump range has been increased"))
 					end
 					p:removeCustom(p.activate_jump_button_tac)
 					p.activate_jump_button_tac = nil
@@ -2378,7 +2378,7 @@ function wmShieldButton(p,console)
 		if p:hasPlayerAtPosition("Weapons") then
 			if p.activate_shield_button == nil then
 				p.activate_shield_button = "activate_shield_button"
-				p:addCustomButton("Weapons",p.activate_shield_button,_("-buttonWeapons", "Shield Capacity"),function()
+				p:addCustomButton("Weapons",p.activate_shield_button,_("upgrade-buttonWeapons", "Shield Capacity"),function()
 					string.format("")	--global context for serious proton
 					if p.shield_count > 0 then
 						p.shield_active = true
@@ -2390,7 +2390,7 @@ function wmShieldButton(p,console)
 						p.shield_timer = 300
 						p.shield_count = p.shield_count - 1
 						p.shield_activated_message = "shield_activated_message"
-						p:addCustomMessage("Weapons",p.shield_activated_message,"The maximum shield strength has been increased")
+						p:addCustomMessage("Weapons",p.shield_activated_message,_("upgrade-msgWeapons", "The maximum shield strength has been increased"))
 					end
 					p:removeCustom(p.activate_shield_button)
 					p.activate_shield_button = nil
@@ -2405,7 +2405,7 @@ function wmShieldButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_shield_button_tac == nil then
 				p.activate_shield_button_tac = "activate_shield_button_tac"
-				p:addCustomButton("Tactical",p.activate_shield_button_tac,_("-buttonTactical", "Shield Capacity"),function()
+				p:addCustomButton("Tactical",p.activate_shield_button_tac,_("upgrade-buttonTactical", "Shield Capacity"),function()
 					string.format("")	--global context for serious proton
 					if p.shield_count > 0 then
 						p.shield_active = true
@@ -2417,7 +2417,7 @@ function wmShieldButton(p,console)
 						p.shield_timer = 300
 						p.shield_count = p.shield_count - 1
 						p.shield_activated_message_tac = "shield_activated_message_tac"
-						p:addCustomMessage("Tactical",p.shield_activated_message_tac,"The maximum shield strength has been increased")
+						p:addCustomMessage("Tactical",p.shield_activated_message_tac,_("upgrade-msgTactical", "The maximum shield strength has been increased"))
 					end
 					p:removeCustom(p.activate_shield_button_tac)
 					p.activate_shield_button_tac = nil
@@ -2435,7 +2435,7 @@ function wmManeuverButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_maneuver_button == nil then
 				p.activate_maneuver_button = "activate_maneuver_button"
-				p:addCustomButton("Helms",p.activate_maneuver_button,_("-buttonHelms", "Spin Speed"),function()
+				p:addCustomButton("Helms",p.activate_maneuver_button,_("upgrade-buttonHelms", "Spin Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.maneuver_count > 0 then
 						p.maneuver_active = true
@@ -2443,7 +2443,7 @@ function wmManeuverButton(p,console)
 						p.maneuver_timer = 300
 						p.maneuver_count = p.maneuver_count - 1
 						p.maneuver_activated_message = "maneuver_activated_message"
-						p:addCustomMessage("Helms",p.maneuver_activated_message,"The maximum spin speed has been increased")
+						p:addCustomMessage("Helms",p.maneuver_activated_message,_("upgrade-msgHelms", "The maximum spin speed has been increased"))
 					end
 					p:removeCustom(p.activate_maneuver_button)
 					p.activate_maneuver_button = nil
@@ -2458,7 +2458,7 @@ function wmManeuverButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_maneuver_button_tac == nil then
 				p.activate_maneuver_button_tac = "activate_maneuver_button_tac"
-				p:addCustomButton("Tactical",p.activate_maneuver_button_tac,_("-buttonTactical", "Spin Speed"),function()
+				p:addCustomButton("Tactical",p.activate_maneuver_button_tac,_("upgrade-buttonTactical", "Spin Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.maneuver_count > 0 then
 						p.maneuver_active = true
@@ -2466,7 +2466,7 @@ function wmManeuverButton(p,console)
 						p.maneuver_timer = 300
 						p.maneuver_count = p.maneuver_count - 1
 						p.maneuver_activated_message_tac = "maneuver_activated_message_tac"
-						p:addCustomMessage("Tactical",p.maneuver_activated_message_tac,"The maximum spin speed has been increased")
+						p:addCustomMessage("Tactical",p.maneuver_activated_message_tac,_("upgrade-msgTactical", "The maximum spin speed has been increased"))
 					end
 					p:removeCustom(p.activate_maneuver_button_tac)
 					p.activate_maneuver_button_tac = nil
@@ -2484,7 +2484,7 @@ function wmBatteryButton(p,console)
 		if p:hasPlayerAtPosition("Engineering") then
 			if p.activate_battery_button == nil then
 				p.activate_battery_button = "activate_battery_button"
-				p:addCustomButton("Engineering",p.activate_battery_button,_("-buttonEngineer", "Battery Capacity"),function()
+				p:addCustomButton("Engineering",p.activate_battery_button,_("upgrade-buttonEngineer", "Battery Capacity"),function()
 					string.format("")	--global context for serious proton
 					if p.battery_count > 0 then
 						p.battery_active = true
@@ -2492,7 +2492,7 @@ function wmBatteryButton(p,console)
 						p.battery_timer = 300
 						p.battery_count = p.battery_count - 1
 						p.battery_activated_message = "battery_activated_message"
-						p:addCustomMessage("Engineering",p.battery_activated_message,"The maximum battery capacity has been increased")
+						p:addCustomMessage("Engineering",p.battery_activated_message,_("upgrade-msgEngineer", "The maximum battery capacity has been increased"))
 					end
 					p:removeCustom(p.activate_battery_button)
 					p.activate_battery_button = nil
@@ -2507,7 +2507,7 @@ function wmBatteryButton(p,console)
 		if p:hasPlayerAtPosition("Engineering+") then
 			if p.activate_battery_button_plus == nil then
 				p.activate_battery_button_plus = "activate_battery_button_plus"
-				p:addCustomButton("Engineering+",p.activate_battery_button_plus,_("-buttonEngineer+", "Battery Capacity"),function()
+				p:addCustomButton("Engineering+",p.activate_battery_button_plus,_("upgrade-buttonEngineer+", "Battery Capacity"),function()
 					string.format("")	--global context for serious proton
 					if p.battery_count > 0 then
 						p.battery_active = true
@@ -2515,7 +2515,7 @@ function wmBatteryButton(p,console)
 						p.battery_timer = 300
 						p.battery_count = p.battery_count - 1
 						p.battery_activated_message_plus = "battery_activated_message_plus"
-						p:addCustomMessage("Engineering+",p.battery_activated_message_plus,"The maximum battery capacity has been increased")
+						p:addCustomMessage("Engineering+",p.battery_activated_message_plus,_("upgrade-msgEngineer+", "The maximum battery capacity has been increased"))
 					end
 					p:removeCustom(p.activate_battery_button_plus)
 					p.activate_battery_button_plus = nil
@@ -2551,7 +2551,7 @@ function resetCoolantPumpButtons(p)
 							p:setSystemCoolantRate(system,p.normal_coolant_rate[system])
 							p.coolant_pump_part_count = p.coolant_pump_part_count - 1
 							p.coolant_pump_fixed_message = "coolant_pump_fixed_message"
-							p:addCustomMessage("Engineering",p.coolant_pump_fixed_message,string.format("The %s coolant pump has been repaired",system))
+							p:addCustomMessage("Engineering",p.coolant_pump_fixed_message,string.format(_("coolant-msgEngineer", "The %s coolant pump has been repaired"),system))
 						end
 						resetCoolantPumpButtons(p)
 					end)
@@ -2564,7 +2564,7 @@ function resetCoolantPumpButtons(p)
 							p:setSystemCoolantRate(system,p.normal_coolant_rate[system])
 							p.coolant_pump_part_count = p.coolant_pump_part_count - 1
 							p.coolant_pump_fixed_message_plus = "coolant_pump_fixed_message_plus"
-							p:addCustomMessage("Engineering+",p.coolant_pump_fixed_message_plus,string.format("The %s coolant pump has been repaired",system))
+							p:addCustomMessage("Engineering+",p.coolant_pump_fixed_message_plus,string.format(_("coolant-msgEngineer+", "The %s coolant pump has been repaired"),system))
 						end
 						resetCoolantPumpButtons(p)
 					end)
@@ -2584,7 +2584,7 @@ function wmCoolantPump(p,console,system)
 						p:setSystemCoolantRate(system,p.normal_coolant_rate[system])
 						p.coolant_pump_part_count = p.coolant_pump_part_count - 1
 						p.coolant_pump_fixed_message = "coolant_pump_fixed_message"
-						p:addCustomMessage("Engineering",p.coolant_pump_fixed_message,string.format("The %s coolant pump has been repaired",system))
+						p:addCustomMessage("Engineering",p.coolant_pump_fixed_message,string.format(_("coolant-msgEngineer", "The %s coolant pump has been repaired"),system))
 					end
 					resetCoolantPumpButtons(p)
 				end)
@@ -2600,7 +2600,7 @@ function wmCoolantPump(p,console,system)
 						p:setSystemCoolantRate(system,p.normal_coolant_rate[system])
 						p.coolant_pump_part_count = p.coolant_pump_part_count - 1
 						p.coolant_pump_fixed_message_plus = "coolant_pump_fixed_message_plus"
-						p:addCustomMessage("Engineering+",p.coolant_pump_fixed_message_plus,string.format("The %s coolant pump has been repaired",system))
+						p:addCustomMessage("Engineering+",p.coolant_pump_fixed_message_plus,string.format(_("coolant-msgEngineer+", "The %s coolant pump has been repaired"),system))
 					end
 					resetCoolantPumpButtons(p)
 				end)
@@ -2647,32 +2647,32 @@ function wreckModCombatBoost(x,y)
 					end
 					if p:hasPlayerAtPosition("Helms") then
 						p.lost_cm_boost_message = "lost_cm_boost_message"
-						p:addCustomMessage("Helms",p.lost_cm_boost_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Helms",p.lost_cm_boost_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_cm_boost_message_tac = "lost_cm_boost_message_tac"
-						p:addCustomMessage("Tactical",p.lost_cm_boost_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_cm_boost_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					p:setCombatManeuver(playerShipStats[p:getTypeName()].cm_boost - 100,playerShipStats[p:getTypeName()].cm_strafe)
 					if p:hasPlayerAtPosition("Helms") then
 						p.reduced_cm_boost_message = "reduced_cm_boost_message"
-						p:addCustomMessage("Helms",p.reduced_cm_boost_message,string.format("The %s retrieved reduced the combat maneuver boost (forward direction) ability",full_desc))
+						p:addCustomMessage("Helms",p.reduced_cm_boost_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved reduced the combat maneuver boost (forward direction) ability"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_cm_boost_message_tac = "reduced_cm_boost_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_cm_boost_message_tac,string.format("The %s retrieved reduced the combat maneuver boost (forward direction) ability",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_cm_boost_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved reduced the combat maneuver boost (forward direction) ability"),full_desc))
 					end
 				end
 			end
 		else	--cannot determine current combat maneuver values since player template type not in player ship stats table
 			if p:hasPlayerAtPosition("Helms") then
 				p.cm_boost_message = "cm_boost_message"
-				p:addCustomMessage("Helms",p.cm_boost_message,string.format("The %s retrieved has had no effect on combat maneuver",full_desc))
+				p:addCustomMessage("Helms",p.cm_boost_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved has had no effect on combat maneuver"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.cm_boost_message_tac = "cm_boost_message_tac"
-				p:addCustomMessage("Tactical",p.cm_boost_message_tac,string.format("The %s retrieved has had no effect on combat maneuver",full_desc))
+				p:addCustomMessage("Tactical",p.cm_boost_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has had no effect on combat maneuver"),full_desc))
 			end
 		end
 	end)
@@ -2717,32 +2717,32 @@ function wreckModCombatStrafe(x,y)
 					end
 					if p:hasPlayerAtPosition("Helms") then
 						p.lost_cm_strafe_message = "lost_cm_strafe_message"
-						p:addCustomMessage("Helms",p.lost_cm_strafe_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Helms",p.lost_cm_strafe_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_cm_strafe_message_tac = "lost_cm_strafe_message_tac"
-						p:addCustomMessage("Tactical",p.lost_cm_strafe_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_cm_strafe_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					p:setCombatManeuver(playerShipStats[p:getTypeName()].cm_boost,playerShipStats[p:getTypeName()].cm_strafe - 100)
 					if p:hasPlayerAtPosition("Helms") then
 						p.reduced_cm_strafe_message = "reduced_cm_strafe_message"
-						p:addCustomMessage("Helms",p.reduced_cm_strafe_message,string.format("The %s retrieved reduced the combat maneuver strafe (sideways direction) ability",full_desc))
+						p:addCustomMessage("Helms",p.reduced_cm_strafe_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved reduced the combat maneuver strafe (sideways direction) ability"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_cm_strafe_message_tac = "reduced_cm_strafe_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_cm_strafe_message_tac,string.format("The %s retrieved reduced the combat maneuver strafe (sideways direction) ability",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_cm_strafe_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved reduced the combat maneuver strafe (sideways direction) ability"),full_desc))
 					end
 				end
 			end
 		else	--cannot determine current combat maneuver values since player template type not in player ship stats table
 			if p:hasPlayerAtPosition("Helms") then
 				p.cm_strafe_message = "cm_strafe_message"
-				p:addCustomMessage("Helms",p.cm_strafe_message,string.format("The %s retrieved has had no effect on combat maneuver",full_desc))
+				p:addCustomMessage("Helms",p.cm_strafe_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved has had no effect on combat maneuver"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.cm_strafe_message_tac = "cm_strafe_message_tac"
-				p:addCustomMessage("Tactical",p.cm_strafe_message_tac,string.format("The %s retrieved has had no effect on combat maneuver",full_desc))
+				p:addCustomMessage("Tactical",p.cm_strafe_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has had no effect on combat maneuver"),full_desc))
 			end
 		end
 	end)
@@ -2764,20 +2764,20 @@ function wreckModProbeStock(x,y)
 				p:setScanProbeCount(p:getMaxScanProbeCount())
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_restocked_probes_message = "artifact_restocked_probes_message"
-					p:addCustomMessage("Relay",p.artifact_restocked_probes_message,string.format("The %s retrieved has restocked your probes",full_desc))
+					p:addCustomMessage("Relay",p.artifact_restocked_probes_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved has restocked your probes"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_restocked_probes_message_ops = "artifact_restocked_probes_message_ops"
-					p:addCustomMessage("Operations",p.artifact_restocked_probes_message_ops,string.format("The %s retrieved has restocked your probes",full_desc))
+					p:addCustomMessage("Operations",p.artifact_restocked_probes_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has restocked your probes"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_probes_message = "artifact_probes_message"
-					p:addCustomMessage("Relay",p.artifact_probes_message,string.format("The %s retrieved does not effect probe stock",full_desc))
+					p:addCustomMessage("Relay",p.artifact_probes_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved does not effect probe stock"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_probes_message_ops = "artifact_probes_message_ops"
-					p:addCustomMessage("Operations",p.artifact_probes_message_ops,string.format("The %s retrieved does not effect probe stock",full_desc))
+					p:addCustomMessage("Operations",p.artifact_probes_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect probe stock"),full_desc))
 				end
 			end
 		else
@@ -2785,20 +2785,20 @@ function wreckModProbeStock(x,y)
 				p:setScanProbeCount(math.floor(current_stock/2))
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_depleted_probes_message = "artifact_depleted_probes_message"
-					p:addCustomMessage("Relay",p.artifact_depleted_probes_message,string.format("The %s retrieved has depleted probe stock",full_desc))
+					p:addCustomMessage("Relay",p.artifact_depleted_probes_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved has depleted probe stock"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_depleted_probes_message_ops = "artifact_depleted_probes_message_ops"
-					p:addCustomMessage("Operations",p.artifact_depleted_probes_message_ops,string.format("The %s retrieved has depleted probe stock",full_desc))
+					p:addCustomMessage("Operations",p.artifact_depleted_probes_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has depleted probe stock"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_probes_message = "artifact_probes_message"
-					p:addCustomMessage("Relay",p.artifact_probes_message,string.format("The %s retrieved does not effect probe stock",full_desc))
+					p:addCustomMessage("Relay",p.artifact_probes_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved does not effect probe stock"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_probes_message_ops = "artifact_probes_message_ops"
-					p:addCustomMessage("Operations",p.artifact_probes_message_ops,string.format("The %s retrieved does not effect probe stock",full_desc))
+					p:addCustomMessage("Operations",p.artifact_probes_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect probe stock"),full_desc))
 				end
 			end
 		end
@@ -2843,11 +2843,11 @@ function wreckModBeamDamage(x,y)
 					end
 					if p:hasPlayerAtPosition("Weapons") then
 						p.lost_beam_damage_message = "lost_beam_damage_message"
-						p:addCustomMessage("Weapons",p.lost_beam_damage_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Weapons",p.lost_beam_damage_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_beam_damage_message_tac = "lost_beam_damage_message_tac"
-						p:addCustomMessage("Tactical",p.lost_beam_damage_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_beam_damage_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					local bi = 0
@@ -2857,22 +2857,22 @@ function wreckModBeamDamage(x,y)
 					until(p:getBeamWeaponRange(bi) < 1)
 					if p:hasPlayerAtPosition("Weapons") then
 						p.reduced_beam_damage_message = "reduced_beam_damage_message"
-						p:addCustomMessage("Weapons",p.reduced_beam_damage_message,string.format("The %s retrieved reduced beam damage",full_desc))
+						p:addCustomMessage("Weapons",p.reduced_beam_damage_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved reduced beam damage"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_beam_damage_message_tac = "reduced_beam_damage_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_beam_damage_message_tac,string.format("The %s retrieved reduced beam damage",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_beam_damage_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved reduced beam damage"),full_desc))
 					end
 				end
 			end
 		else
 			if p:hasPlayerAtPosition("Weapons") then
 				p.beam_message = "beam_message"
-				p:addCustomMessage("Weapons",p.beam_message,string.format("The %s retrieved has had no effect on your non-existent beam weapon system",full_desc))
+				p:addCustomMessage("Weapons",p.beam_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved has had no effect on your non-existent beam weapon system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.beam_message_tac = "beam_message_tac"
-				p:addCustomMessage("Tactical",p.beam_message_tac,string.format("The %s retrieved has had no effect on your non-existent beam weapon system",full_desc))
+				p:addCustomMessage("Tactical",p.beam_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has had no effect on your non-existent beam weapon system"),full_desc))
 			end
 		end
 	end)
@@ -2916,11 +2916,11 @@ function wreckModBeamCycle(x,y)
 					end
 					if p:hasPlayerAtPosition("Weapons") then
 						p.lost_beam_cycle_message = "lost_beam_cycle_message"
-						p:addCustomMessage("Weapons",p.lost_beam_cycle_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Weapons",p.lost_beam_cycle_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_beam_cycle_message_tac = "lost_beam_cycle_message_tac"
-						p:addCustomMessage("Tactical",p.lost_beam_cycle_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_beam_cycle_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					local bi = 0
@@ -2930,22 +2930,22 @@ function wreckModBeamCycle(x,y)
 					until(p:getBeamWeaponRange(bi) < 1)
 					if p:hasPlayerAtPosition("Weapons") then
 						p.reduced_beam_cycle_message = "reduced_beam_cycle_message"
-						p:addCustomMessage("Weapons",p.reduced_beam_cycle_message,string.format("The %s retrieved slowed beam cycle time",full_desc))
+						p:addCustomMessage("Weapons",p.reduced_beam_cycle_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved slowed beam cycle time"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_beam_cycle_message_tac = "reduced_beam_cycle_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_beam_cycle_message_tac,string.format("The %s retrieved slowed beam cycle time",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_beam_cycle_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved slowed beam cycle time"),full_desc))
 					end
 				end
 			end
 		else
 			if p:hasPlayerAtPosition("Weapons") then
 				p.beam_message = "beam_message"
-				p:addCustomMessage("Weapons",p.beam_message,string.format("The %s retrieved has had no effect on your non-existent beam weapon system",full_desc))
+				p:addCustomMessage("Weapons",p.beam_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved has had no effect on your non-existent beam weapon system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.beam_message_tac = "beam_message_tac"
-				p:addCustomMessage("Tactical",p.beam_message_tac,string.format("The %s retrieved has had no effect on your non-existent beam weapon system",full_desc))
+				p:addCustomMessage("Tactical",p.beam_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has had no effect on your non-existent beam weapon system"),full_desc))
 			end
 		end
 	end)
@@ -2979,20 +2979,20 @@ function wreckModMissileStock(x,y)
 					p:setWeaponStorage(shortage_type,p:getWeaponStorageMax(shortage_type))
 					if p:hasPlayerAtPosition("Weapons") then
 						p.artifact_restocked_missiles_message = "artifact_restocked_missiles_message"
-						p:addCustomMessage("Weapons",p.artifact_restocked_missiles_message,string.format("The %s retrieved has restocked your %ss",full_desc,shortage_type))
+						p:addCustomMessage("Weapons",p.artifact_restocked_missiles_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved has restocked your %ss"),full_desc,shortage_type))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.artifact_restocked_missiles_message_tac = "artifact_restocked_missiles_message_tac"
-						p:addCustomMessage("Tactical",p.artifact_restocked_missiles_message_tac,string.format("The %s retrieved has restocked your %ss",full_desc,shortage_type))
+						p:addCustomMessage("Tactical",p.artifact_restocked_missiles_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has restocked your %ss"),full_desc,shortage_type))
 					end
 				else
 					if p:hasPlayerAtPosition("Weapons") then
 						p.artifact_missiles_message = "artifact_missiles_message"
-						p:addCustomMessage("Weapons",p.artifact_missiles_message,string.format("The %s retrieved does not effect missile stocks",full_desc))
+						p:addCustomMessage("Weapons",p.artifact_missiles_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved does not effect missile stocks"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.artifact_missiles_message_tac = "artifact_missiles_message_tac"
-						p:addCustomMessage("Tactical",p.artifact_missiles_message_tac,string.format("The %s retrieved does not effect missile stocks",full_desc))
+						p:addCustomMessage("Tactical",p.artifact_missiles_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved does not effect missile stocks"),full_desc))
 					end
 				end
 			else
@@ -3009,42 +3009,42 @@ function wreckModMissileStock(x,y)
 						p:setWeaponStorage(plentiful_type,math.floor(p:getWeaponStorage(plentiful_type)/2))
 						if p:hasPlayerAtPosition("Weapons") then
 							p.artifact_depleted_missiles_message = "artifact_depleted_missiles_message"
-							p:addCustomMessage("Weapons",p.artifact_depleted_missiles_message,string.format("The %s retrieved has depleted your stock of %ss",full_desc,plentiful_type))
+							p:addCustomMessage("Weapons",p.artifact_depleted_missiles_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved has depleted your stock of %ss"),full_desc,plentiful_type))
 						end
 						if p:hasPlayerAtPosition("Tactical") then
 							p.artifact_depleted_missiles_message_tac = "artifact_depleted_missiles_message_tac"
-							p:addCustomMessage("Tactical",p.artifact_depleted_missiles_message_tac,string.format("The %s retrieved has depleted your stock of %ss",full_desc,plentiful_type))
+							p:addCustomMessage("Tactical",p.artifact_depleted_missiles_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has depleted your stock of %ss"),full_desc,plentiful_type))
 						end
 					else
 						if p:hasPlayerAtPosition("Weapons") then
 							p.artifact_missiles_message = "artifact_missiles_message"
-							p:addCustomMessage("Weapons",p.artifact_missiles_message,string.format("The %s retrieved does not effect missile stocks",full_desc))
+							p:addCustomMessage("Weapons",p.artifact_missiles_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved does not effect missile stocks"),full_desc))
 						end
 						if p:hasPlayerAtPosition("Tactical") then
 							p.artifact_missiles_message_tac = "artifact_missiles_message_tac"
-							p:addCustomMessage("Tactical",p.artifact_missiles_message_tac,string.format("The %s retrieved does not effect missile stocks",full_desc))
+							p:addCustomMessage("Tactical",p.artifact_missiles_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved does not effect missile stocks"),full_desc))
 						end
 					end
 				else
 					p:setWeaponStorage(plentiful_type,math.floor(p:getWeaponStorage(plentiful_type)/2))
 					if p:hasPlayerAtPosition("Weapons") then
 						p.artifact_depleted_missiles_message = "artifact_depleted_missiles_message"
-						p:addCustomMessage("Weapons",p.artifact_depleted_missiles_message,string.format("The %s retrieved has depleted your stock of %ss",full_desc,plentiful_type))
+						p:addCustomMessage("Weapons",p.artifact_depleted_missiles_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved has depleted your stock of %ss"),full_desc,plentiful_type))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.artifact_depleted_missiles_message_tac = "artifact_depleted_missiles_message_tac"
-						p:addCustomMessage("Tactical",p.artifact_depleted_missiles_message_tac,string.format("The %s retrieved has depleted your stock of %ss",full_desc,plentiful_type))
+						p:addCustomMessage("Tactical",p.artifact_depleted_missiles_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has depleted your stock of %ss"),full_desc,plentiful_type))
 					end
 				end
 			end
 		else
 			if p:hasPlayerAtPosition("Weapons") then
 				p.artifact_missiles_message = "artifact_missiles_message"
-				p:addCustomMessage("Weapons",p.artifact_missiles_message,string.format("The %s retrieved does not effect your non-existent missile system",full_desc))
+				p:addCustomMessage("Weapons",p.artifact_missiles_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved does not effect your non-existent missile system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.artifact_missiles_message_tac = "artifact_missiles_message_tac"
-				p:addCustomMessage("Tactical",p.artifact_missiles_message_tac,string.format("The %s retrieved does not effect your non-existent missile system",full_desc))
+				p:addCustomMessage("Tactical",p.artifact_missiles_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved does not effect your non-existent missile system"),full_desc))
 			end
 		end
 	end)
@@ -3087,21 +3087,21 @@ function wreckModImpulseSpeed(x,y)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.lost_impulse_message = "lost_impulse_message"
-					p:addCustomMessage("Helms",p.lost_impulse_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+					p:addCustomMessage("Helms",p.lost_impulse_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.lost_impulse_message_tac = "lost_impulse_message_tac"
-					p:addCustomMessage("Tactical",p.lost_impulse_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+					p:addCustomMessage("Tactical",p.lost_impulse_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 				end
 			else
 				p:setImpulseMaxSpeed(p:getImpulseMaxSpeed()*.9)
 				if p:hasPlayerAtPosition("Helms") then
 					p.reduced_impulse_message = "reduced_impulse_message"
-					p:addCustomMessage("Helms",p.reduced_impulse_message,string.format("The %s retrieved slowed maximum impulse speed",full_desc))
+					p:addCustomMessage("Helms",p.reduced_impulse_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved slowed maximum impulse speed"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.reduced_impulse_message_tac = "reduced_impulse_message_tac"
-					p:addCustomMessage("Tactical",p.reduced_impulse_message_tac,string.format("The %s retrieved slowed maximum impulse speed",full_desc))
+					p:addCustomMessage("Tactical",p.reduced_impulse_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved slowed maximum impulse speed"),full_desc))
 				end
 			end
 		end
@@ -3146,32 +3146,32 @@ function wreckModWarpSpeed(x,y)
 					end
 					if p:hasPlayerAtPosition("Helms") then
 						p.lost_warp_message = "lost_warp_message"
-						p:addCustomMessage("Helms",p.lost_warp_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Helms",p.lost_warp_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_warp_message_tac = "lost_warp_message_tac"
-						p:addCustomMessage("Tactical",p.lost_warp_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_warp_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					p:setWarpSpeed(p:getWarpSpeed()*.9)
 					if p:hasPlayerAtPosition("Helms") then
 						p.reduced_warp_message = "reduced_warp_message"
-						p:addCustomMessage("Helms",p.reduced_warp_message,string.format("The %s retrieved slowed maximum warp speed",full_desc))
+						p:addCustomMessage("Helms",p.reduced_warp_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved slowed maximum warp speed"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_warp_message_tac = "reduced_warp_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_warp_message_tac,string.format("The %s retrieved slowed maximum warp speed",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_warp_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved slowed maximum warp speed"),full_desc))
 					end
 				end
 			end
 		else
 			if p:hasPlayerAtPosition("Helms") then
 				p.warp_message = "warp_message"
-				p:addCustomMessage("Helms",p.warp_message,string.format("The %s retrieved had no effect on your non-existent warp system",full_desc))
+				p:addCustomMessage("Helms",p.warp_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved had no effect on your non-existent warp system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.warp_message_tac = "warp_message_tac"
-				p:addCustomMessage("Tactical",p.warp_message_tac,string.format("The %s retrieved had no effect on your non-existent warp system",full_desc))
+				p:addCustomMessage("Tactical",p.warp_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved had no effect on your non-existent warp system"),full_desc))
 			end
 		end
 	end)
@@ -3215,11 +3215,11 @@ function wreckModJumpRange(x,y)
 					end
 					if p:hasPlayerAtPosition("Helms") then
 						p.lost_jump_message = "lost_jump_message"
-						p:addCustomMessage("Helms",p.lost_jump_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Helms",p.lost_jump_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_jump_message_tac = "lost_jump_message_tac"
-						p:addCustomMessage("Tactical",p.lost_jump_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_jump_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					if p.max_jump_range == nil then
@@ -3230,22 +3230,22 @@ function wreckModJumpRange(x,y)
 					p.max_jump_range = p.max_jump_range*.9
 					if p:hasPlayerAtPosition("Helms") then
 						p.reduced_jump_message = "reduced_jump_message"
-						p:addCustomMessage("Helms",p.reduced_jump_message,string.format("The %s retrieved reduced maximum jump range",full_desc))
+						p:addCustomMessage("Helms",p.reduced_jump_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved reduced maximum jump range"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_jump_message_tac = "reduced_jump_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_jump_message_tac,string.format("The %s retrieved reduced maximum jump range",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_jump_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved reduced maximum jump range"),full_desc))
 					end
 				end
 			end
 		else
 			if p:hasPlayerAtPosition("Helms") then
 				p.jump_message = "jump_message"
-				p:addCustomMessage("Helms",p.jump_message,string.format("The %s retrieved had no effect on your non-existent jump system",full_desc))
+				p:addCustomMessage("Helms",p.jump_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved had no effect on your non-existent jump system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.jump_message_tac = "jump_message_tac"
-				p:addCustomMessage("Tactical",p.jump_message_tac,string.format("The %s retrieved had no effect on your non-existent jump system",full_desc))
+				p:addCustomMessage("Tactical",p.jump_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved had no effect on your non-existent jump system"),full_desc))
 			end
 		end
 	end)
@@ -3289,11 +3289,11 @@ function wreckModShieldMax(x,y)
 					end
 					if p:hasPlayerAtPosition("Weapons") then
 						p.lost_shield_message = "lost_shield_message"
-						p:addCustomMessage("Weapons",p.lost_shield_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Weapons",p.lost_shield_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_shield_message_tac = "lost_shield_message_tac"
-						p:addCustomMessage("Tactical",p.lost_shield_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_shield_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					if p:getShieldCount() > 1 then
@@ -3303,22 +3303,22 @@ function wreckModShieldMax(x,y)
 					end
 					if p:hasPlayerAtPosition("Weapons") then
 						p.reduced_shield_message = "reduced_shield_message"
-						p:addCustomMessage("Weapons",p.reduced_shield_message,string.format("The %s retrieved reduced maximum shield strength",full_desc))
+						p:addCustomMessage("Weapons",p.reduced_shield_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved reduced maximum shield strength"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_shield_message_tac = "reduced_shield_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_shield_message_tac,string.format("The %s retrieved reduced maximum shield strength",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_shield_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved reduced maximum shield strength"),full_desc))
 					end
 				end
 			end
 		else
 			if p:hasPlayerAtPosition("Weapons") then
 				p.shield_message = "shield_message"
-				p:addCustomMessage("Weapons",p.shield_message,string.format("The %s retrieved had no effect on your non-existent shield system",full_desc))
+				p:addCustomMessage("Weapons",p.shield_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved had no effect on your non-existent shield system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.shield_message_tac = "shield_message_tac"
-				p:addCustomMessage("Tactical",p.shield_message_tac,string.format("The %s retrieved had no effect on your non-existent shield system",full_desc))
+				p:addCustomMessage("Tactical",p.shield_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved had no effect on your non-existent shield system"),full_desc))
 			end
 		end
 	end)
@@ -3361,21 +3361,21 @@ function wreckModSpinSpeed(x,y)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.lost_maneuver_message = "lost_maneuver_message"
-					p:addCustomMessage("Helms",p.lost_maneuver_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+					p:addCustomMessage("Helms",p.lost_maneuver_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.lost_maneuver_message_tac = "lost_maneuver_message_tac"
-					p:addCustomMessage("Tactical",p.lost_maneuver_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+					p:addCustomMessage("Tactical",p.lost_maneuver_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 				end
 			else
 				p:setRotationMaxSpeed(p:getRotationMaxSpeed()*.9)
 				if p:hasPlayerAtPosition("Helms") then
 					p.reduced_maneuver_message = "reduced_maneuver_message"
-					p:addCustomMessage("Helms",p.reduced_maneuver_message,string.format("The %s retrieved reduced maximum spin speed",full_desc))
+					p:addCustomMessage("Helms",p.reduced_maneuver_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved reduced maximum spin speed"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.reduced_maneuver_message_tac = "reduced_maneuver_message_tac"
-					p:addCustomMessage("Tactical",p.reduced_maneuver_message_tac,string.format("The %s retrieved reduced maximum spin speed",full_desc))
+					p:addCustomMessage("Tactical",p.reduced_maneuver_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved reduced maximum spin speed"),full_desc))
 				end
 			end
 		end
@@ -3419,21 +3419,21 @@ function wreckModBatteryMax(x,y)
 				end
 				if p:hasPlayerAtPosition("Engineering") then
 					p.lost_battery_message = "lost_battery_message"
-					p:addCustomMessage("Engineering",p.lost_battery_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+					p:addCustomMessage("Engineering",p.lost_battery_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.lost_battery_message_plus = "lost_battery_message_plus"
-					p:addCustomMessage("Engineering+",p.lost_battery_message_plus,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+					p:addCustomMessage("Engineering+",p.lost_battery_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 				end
 			else
 				p:setMaxEnergy(p:getMaxEnergy()*.9)
 				if p:hasPlayerAtPosition("Engineering") then
 					p.reduced_battery_message = "reduced_battery_message"
-					p:addCustomMessage("Engineering",p.reduced_battery_message,string.format("The %s retrieved reduced maximum battery capacity",full_desc))
+					p:addCustomMessage("Engineering",p.reduced_battery_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved reduced maximum battery capacity"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.reduced_battery_message_plus = "reduced_battery_message_plus"
-					p:addCustomMessage("Engineering+",p.reduced_battery_message_plus,string.format("The %s retrieved reduced maximum battery capacity",full_desc))
+					p:addCustomMessage("Engineering+",p.reduced_battery_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved reduced maximum battery capacity"),full_desc))
 				end
 			end
 		end
@@ -3462,20 +3462,20 @@ function wreckCargo(x,y)
 				p.goods[wreck_good] = p.goods[wreck_good] + 1
 				if p:hasPlayerAtPosition("Relay") then
 					p.good_added = "good_added"
-					p:addCustomMessage("Relay",p.good_added,string.format("One %s added to ship inventory",wreck_good))
+					p:addCustomMessage("Relay",p.good_added,string.format(_("inventory-msgRelay", "One %s added to ship inventory"),wreck_good))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.good_added_ops = "good_added_ops"
-					p:addCustomMessage("Operations",p.good_added_ops,string.format("One %s added to ship inventory",wreck_good))
+					p:addCustomMessage("Operations",p.good_added_ops,string.format(_("inventory-msgOperations", "One %s added to ship inventory"),wreck_good))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.no_cargo_space = "no_cargo_space"
-					p:addCustomMessage("Relay",p.no_cargo_space,"No cargo space available. Cargo wasted")
+					p:addCustomMessage("Relay",p.no_cargo_space,_("inventory-msgRelay", "No cargo space available. Cargo wasted"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.no_cargo_space_ops = "no_cargo_space_ops"
-					p:addCustomMessage("Operations",p.no_cargo_space_ops,"No cargo space available. Cargo wasted")
+					p:addCustomMessage("Operations",p.no_cargo_space_ops,_("inventory-msgOperations", "No cargo space available. Cargo wasted"))
 				end
 			end
 		else
@@ -3483,11 +3483,11 @@ function wreckCargo(x,y)
 			p:setHull(p:getHull()-random(1,3))
 			if p:hasPlayerAtPosition("Relay") then
 				p.cargo_sabotage = "cargo_sabotage"
-				p:addCustomMessage("Relay",p.cargo_sabotage,"Booby trapped cargo container. Fortunately automated safety protocols transported the cargo container off the ship before too much damage was taken")
+				p:addCustomMessage("Relay",p.cargo_sabotage,_("sabotage-msgRelay", "Booby trapped cargo container. Fortunately automated safety protocols transported the cargo container off the ship before too much damage was taken"))
 			end
 			if p:hasPlayerAtPosition("Operations") then
 				p.cargo_sabotage_ops = "cargo_sabotage_ops"
-				p:addCustomMessage("Operations",p.cargo_sabotage_ops,"Booby trapped cargo container. Fortunately automated safety protocols transported the cargo container off the ship before too much damage was taken")
+				p:addCustomMessage("Operations",p.cargo_sabotage_ops,_("sabotage-msgOperations", "Booby trapped cargo container. Fortunately automated safety protocols transported the cargo container off the ship before too much damage was taken"))
 			end
 		end
 	end)
@@ -3510,11 +3510,11 @@ function wreckModCoolantPump(x,y)
 			p.coolant_pump_part_count = p.coolant_pump_part_count + 1
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_provided_coolant_pump_parts_message = "artifact_provided_coolant_pump_parts_message"
-				p:addCustomMessage("Engineering",p.artifact_provided_coolant_pump_parts_message,string.format("The %s retrieved provided spare coolant pump parts that may be used to repair a damaged coolant pump",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_provided_coolant_pump_parts_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved provided spare coolant pump parts that may be used to repair a damaged coolant pump"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_provided_coolant_pump_parts_message_plus = "artifact_provided_coolant_pump_parts_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_provided_coolant_pump_parts_message_plus,string.format("The %s retrieved provided spare coolant pump parts that may be used to repair a damaged coolant pump",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_provided_coolant_pump_parts_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved provided spare coolant pump parts that may be used to repair a damaged coolant pump"),full_desc))
 			end
 			local system_types = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
 			if p.coolant_pump_fix_buttons == nil then
@@ -3532,11 +3532,11 @@ function wreckModCoolantPump(x,y)
 		else
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_incompatible_message = "artifact_incompatible_message"
-				p:addCustomMessage("Engineering",p.artifact_incompatible_message,string.format("The %s retrieved contains no compatible or salvageable parts for your coolant pump system",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_incompatible_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved contains no compatible or salvageable parts for your coolant pump system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_incompatible_message_plus = "artifact_incompatible_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_incompatible_message_plus,string.format("The %s retrieved contains no compatible or salvageable parts for your coolant pump system",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_incompatible_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved contains no compatible or salvageable parts for your coolant pump system"),full_desc))
 			end
 		end
 	end)
@@ -14261,11 +14261,11 @@ function healthCheck(delta, p)
 				p:setRepairCrewCount(1)
 				if p:hasPlayerAtPosition("Engineering") then
 					local repairCrewRecovery = "repairCrewRecovery"
-					p:addCustomMessage("Engineering",repairCrewRecovery,"Medical team has revived one of your repair crew")
+					p:addCustomMessage("Engineering",repairCrewRecovery,_("repairCrew-msgEngineer", "Medical team has revived one of your repair crew"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					local repairCrewRecoveryPlus = "repairCrewRecoveryPlus"
-					p:addCustomMessage("Engineering+",repairCrewRecoveryPlus,"Medical team has revived one of your repair crew")
+					p:addCustomMessage("Engineering+",repairCrewRecoveryPlus,_("repairCrew-msgEngineer+", "Medical team has revived one of your repair crew"))
 				end
 				resetPreviousSystemHealth(p)
 			end
@@ -14283,10 +14283,10 @@ function healthCheck(delta, p)
 					local noticable_reclaimed_coolant = math.floor(reclaimed_coolant)
 					if noticable_reclaimed_coolant > 0 then
 						if p:hasPlayerAtPosition("Engineering") then
-							p:addCustomMessage("Engineering","coolant_recovery","Automated systems have recovered some coolant")
+							p:addCustomMessage("Engineering","coolant_recovery",_("coolant-msgEngineer", "Automated systems have recovered some coolant"))
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
-							p:addCustomMessage("Engineering+","coolant_recovery_plus","Automated systems have recovered some coolant")
+							p:addCustomMessage("Engineering+","coolant_recovery_plus",_("coolant-msgEngineer+", "Automated systems have recovered some coolant"))
 						end
 					end
 					resetPreviousSystemHealth(p)
@@ -14404,62 +14404,62 @@ function crewFate(p, fatalityChance)
 				p.reclaimable_coolant = math.min(20,p.reclaimable_coolant + lost_coolant*random(.8,1))
 				if p:hasPlayerAtPosition("Engineering") then
 					local coolantLoss = "coolantLoss"
-					p:addCustomMessage("Engineering",coolantLoss,"Damage has caused a loss of coolant")
+					p:addCustomMessage("Engineering",coolantLoss,_("damage-msgEngineer", "Damage has caused a loss of coolant"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					local coolantLossPlus = "coolantLossPlus"
-					p:addCustomMessage("Engineering+",coolantLossPlus,"Damage has caused a loss of coolant")
+					p:addCustomMessage("Engineering+",coolantLossPlus,_("damage-msgEngineer+", "Damage has caused a loss of coolant"))
 				end
 			else
 				local named_consequence = consequence_list[consequence-2]
 				if named_consequence == "probe" then
 					p:setCanLaunchProbe(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","probe_launch_damage_message","The probe launch system has been damaged")
+						p:addCustomMessage("Engineering","probe_launch_damage_message",_("damage-msgEngineer", "The probe launch system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","probe_launch_damage_message_plus","The probe launch system has been damaged")
+						p:addCustomMessage("Engineering+","probe_launch_damage_message_plus",_("damage-msgEngineer+", "The probe launch system has been damaged"))
 					end
 				elseif named_consequence == "hack" then
 					p:setCanHack(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","hack_damage_message","The hacking system has been damaged")
+						p:addCustomMessage("Engineering","hack_damage_message",_("damage-msgEngineer", "The hacking system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","hack_damage_message_plus","The hacking system has been damaged")
+						p:addCustomMessage("Engineering+","hack_damage_message_plus",_("damage-msgEngineer+", "The hacking system has been damaged"))
 					end
 				elseif named_consequence == "scan" then
 					p:setCanScan(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","scan_damage_message","The scanners have been damaged")
+						p:addCustomMessage("Engineering","scan_damage_message",_("damage-msgEngineer", "The scanners have been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","scan_damage_message_plus","The scanners have been damaged")
+						p:addCustomMessage("Engineering+","scan_damage_message_plus",_("damage-msgEngineer+", "The scanners have been damaged"))
 					end
 				elseif named_consequence == "combat_maneuver" then
 					p:setCanCombatManeuver(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","combat_maneuver_damage_message","Combat maneuver has been damaged")
+						p:addCustomMessage("Engineering","combat_maneuver_damage_message",_("damage-msgEngineer", "Combat maneuver has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","combat_maneuver_damage_message_plus","Combat maneuver has been damaged")
+						p:addCustomMessage("Engineering+","combat_maneuver_damage_message_plus",_("damage-msgEngineer+", "Combat maneuver has been damaged"))
 					end
 				elseif named_consequence == "self_destruct" then
 					p:setCanSelfDestruct(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","self_destruct_damage_message","Self destruct system has been damaged")
+						p:addCustomMessage("Engineering","self_destruct_damage_message",_("damage-msgEngineer", "Self destruct system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","self_destruct_damage_message_plus","Self destruct system has been damaged")
+						p:addCustomMessage("Engineering+","self_destruct_damage_message_plus",_("damage-msgEngineer+", "Self destruct system has been damaged"))
 					end
 				elseif named_consequence == "reactor_coolant_pump" then
 					p:setSystemCoolantRate("reactor",p:getSystemCoolantRate("reactor")/2)
 					resetCoolantPumpButtons(p)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","reactor_coolant_pump_damage_message","Reactor coolant pump has been damaged")
+						p:addCustomMessage("Engineering","reactor_coolant_pump_damage_message",_("damage-msgEngineer", "Reactor coolant pump has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","reactor_coolant_pump_damage_message_plus","Reactor coolant pump has been damaged")
+						p:addCustomMessage("Engineering+","reactor_coolant_pump_damage_message_plus",_("damage-msgEngineer+", "Reactor coolant pump has been damaged"))
 					end
 				end
 			end	--coolant loss branch
@@ -18116,12 +18116,12 @@ function checkForMining(delta, p)
 								p.cargo = p.cargo - 1
 								if p:hasPlayerAtPosition("Science") then
 									local mined_mineral_message = "mined_mineral_message"
-									p:addCustomMessage("Science",mined_mineral_message,string.format("Mining obtained %s which has been stored in the cargo hold",good))
+									p:addCustomMessage("Science",mined_mineral_message,string.format(_("mining-msgScience", "Mining obtained %s which has been stored in the cargo hold"),good))
 								end
 							else	--no minerals in asteroid
 								if p:hasPlayerAtPosition("Science") then
 									local mined_mineral_message = "mined_mineral_message"
-									p:addCustomMessage("Science",mined_mineral_message,"mining failed to extract any minerals")
+									p:addCustomMessage("Science",mined_mineral_message,_("mining-msgScience", "mining failed to extract any minerals"))
 								end										
 							end
 						else	--still mining, update timer display, energy and heat
@@ -18243,10 +18243,10 @@ function addMiningButtons(p,mining_objects)
 				if asteroid_distance < 1000 then
 					p.mining_target_lock = true
 					local mining_locked_message = "mining_locked_message"
-					p:addCustomMessage("Science",mining_locked_message,"Mining target locked\nWeapons may trigger the mining beam")
+					p:addCustomMessage("Science",mining_locked_message,_("mining-msgScience", "Mining target locked\nWeapons may trigger the mining beam"))
 				else
 					local mining_lock_fail_message = "mining_lock_fail_message"
-					p:addCustomMessage("Engineering",mining_lock_fail_message,string.format("Mining target lock failed\nAsteroid distance is %.4fU\nMaximum range for mining is 1U",asteroid_distance/1000))
+					p:addCustomMessage("Engineering",mining_lock_fail_message,string.format(_("mining-msgEngineer", "Mining target lock failed\nAsteroid distance is %.4fU\nMaximum range for mining is 1U"),asteroid_distance/1000))
 					p.mining_target = nil
 				end
 				removeMiningButtons(p)
@@ -18290,7 +18290,7 @@ function addMiningButtons(p,mining_objects)
 					minerals = "none"
 				end
 				local target_description = "target_description"
-				p:addCustomMessage("Science",target_description,string.format("Distance: %.1fU\nBearing: %.1f\nMineral traces detected: %s",target_distance,angle,minerals))
+				p:addCustomMessage("Science",target_description,string.format(_("mining-msgScience", "Distance: %.1fU\nBearing: %.1f\nMineral traces detected: %s"),target_distance,angle,minerals))
 			end)
 		end
 	end

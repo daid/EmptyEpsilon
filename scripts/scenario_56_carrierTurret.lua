@@ -3594,11 +3594,11 @@ function handleUndockedState()
 			addCommsReply("Install tractor equipment", function()
 				if playerCarrier:hasPlayerAtPosition("Engineering") then
 					tractorIntegrationMsg = "tractorIntegrationMsg"
-					playerCarrier:addCustomMessage("Engineering",tractorIntegrationMsg,string.format("The tractor equipment has been transported aboard %s. You need to make the final connections for full installation",playerCarrier:getCallSign()))
+					playerCarrier:addCustomMessage("Engineering",tractorIntegrationMsg,string.format(_("-msgEngineer", "The tractor equipment has been transported aboard %s. You need to make the final connections for full installation"),playerCarrier:getCallSign()))
 				end
 				if playerCarrier:hasPlayerAtPosition("Engineering+") then
 					tractorIntegrationMsgPlus = "tractorIntegrationMsgPlus"
-					playerCarrier:addCustomMessage("Engineering+",tractorIntegrationMsgPlus,string.format("The tractor equipment has been transported aboard %s. You need to make the final connections for full installation",playerCarrier:getCallSign()))
+					playerCarrier:addCustomMessage("Engineering+",tractorIntegrationMsgPlus,string.format(_("-msgEngineer+", "The tractor equipment has been transported aboard %s. You need to make the final connections for full installation"),playerCarrier:getCallSign()))
 				end
 				tractorIntegrationButton = "tractorIntegrationButton"
 				playerCarrier:addCustomButton("Engineering",tractorIntegrationButton,_("-buttonEngineer", "Connect Tractor"),connectTractor)
@@ -4461,21 +4461,21 @@ function bladeCargoTransfer()
 		until(gi > #goods[playerBlade])
 		if playerBlade:hasPlayerAtPosition("Relay") then
 			bladeCargoTransferredMsg = "bladeCargoTransferredMsg"
-			playerBlade:addCustomMessage("Relay",bladeCargoTransferredMsg,string.format("One of each type of cargo aboard %s transferred to %s",playerBlade:getCallSign(),playerCarrier:getCallSign()))
+			playerBlade:addCustomMessage("Relay",bladeCargoTransferredMsg,string.format(_("-msgRelay", "One of each type of cargo aboard %s transferred to %s"),playerBlade:getCallSign(),playerCarrier:getCallSign()))
 		end
 		if playerBlade:hasPlayerAtPosition("Operations") then
 			bladeCargoTransferredMsgOp = "bladeCargoTransferredMsgOp"
-			playerBlade:addCustomMessage("Operations",bladeCargoTransferredMsgOp,string.format("One of each type of cargo aboard %s transferred to %s",playerBlade:getCallSign(),playerCarrier:getCallSign()))
+			playerBlade:addCustomMessage("Operations",bladeCargoTransferredMsgOp,string.format(_("-msgOperations", "One of each type of cargo aboard %s transferred to %s"),playerBlade:getCallSign(),playerCarrier:getCallSign()))
 		end
 		playerCarrier:addToShipLog(string.format("Cargo transferred from %s",playerBlade:getCallSign()),"Magenta")
 	else
 		if playerBlade:hasPlayerAtPosition("Relay") then
 			insufficientCarrierCargoSpaceMsg = "insufficientCarrierCargoSpaceMsg"
-			playerBlade:addCustomMessage("Relay",insufficientCarrierCargoSpaceMsg,string.format("Insufficient space on %s to accept your cargo transfer",playerCarrier:getCallSign()))
+			playerBlade:addCustomMessage("Relay",insufficientCarrierCargoSpaceMsg,string.format(_("-msgRelay", "Insufficient space on %s to accept your cargo transfer"),playerCarrier:getCallSign()))
 		end
 		if playerBlade:hasPlayerAtPosition("Operations") then
 			insufficientCarrierCargoSpaceMsgOp = "insufficientCarrierCargoSpaceMsgOp"
-			playerBlade:addCustomMessage("Operations",insufficientCarrierCargoSpaceMsgOp,string.format("Insufficient space on %s to accept your cargo transfer",playerCarrier:getCallSign()))
+			playerBlade:addCustomMessage("Operations",insufficientCarrierCargoSpaceMsgOp,string.format(_("-msgOperations", "Insufficient space on %s to accept your cargo transfer"),playerCarrier:getCallSign()))
 		end
 	end
 end
@@ -4508,21 +4508,21 @@ function pointCargoTransfer()
 		until(gi > #goods[playerPoint])
 		if playerPoint:hasPlayerAtPosition("Relay") then
 			pointCargoTransferredMsg = "pointCargoTransferredMsg"
-			playerPoint:addCustomMessage("Relay",pointCargoTransferredMsg,string.format("One of each type of cargo aboard %s transferred to %s",playerPoint:getCallSign(),playerCarrier:getCallSign()))
+			playerPoint:addCustomMessage("Relay",pointCargoTransferredMsg,string.format(_("-msgRelay", "One of each type of cargo aboard %s transferred to %s"),playerPoint:getCallSign(),playerCarrier:getCallSign()))
 		end
 		if playerPoint:hasPlayerAtPosition("Operations") then
 			pointCargoTransferredMsgOp = "pointCargoTransferredMsgOp"
-			playerPoint:addCustomMessage("Operations",pointCargoTransferredMsgOp,string.format("One of each type of cargo aboard %s transferred to %s",playerPoint:getCallSign(),playerCarrier:getCallSign()))
+			playerPoint:addCustomMessage("Operations",pointCargoTransferredMsgOp,string.format(_("-msgOperations", "One of each type of cargo aboard %s transferred to %s"),playerPoint:getCallSign(),playerCarrier:getCallSign()))
 		end
 		playerCarrier:addToShipLog(string.format("Cargo transferred from %s",playerPoint:getCallSign()),"Magenta")
 	else
 		if playerPoint:hasPlayerAtPosition("Relay") then
 			insufficientCarrierCargoSpaceMsgPoint = "insufficientCarrierCargoSpaceMsgPoint"
-			playerPoint:addCustomMessage("Relay",insufficientCarrierCargoSpaceMsgPoint,string.format("Insufficient space on %s to accept your cargo transfer",playerCarrier:getCallSign()))
+			playerPoint:addCustomMessage("Relay",insufficientCarrierCargoSpaceMsgPoint,string.format(_("-msgRelay", "Insufficient space on %s to accept your cargo transfer"),playerCarrier:getCallSign()))
 		end
 		if playerPoint:hasPlayerAtPosition("Operations") then
 			insufficientCarrierCargoSpaceMsgPointOp = "insufficientCarrierCargoSpaceMsgPointOp"
-			playerPoint:addCustomMessage("Operations",insufficientCarrierCargoSpaceMsgPointOp,string.format("Insufficient space on %s to accept your cargo transfer",playerCarrier:getCallSign()))
+			playerPoint:addCustomMessage("Operations",insufficientCarrierCargoSpaceMsgPointOp,string.format(_("-msgOperations", "Insufficient space on %s to accept your cargo transfer"),playerCarrier:getCallSign()))
 		end
 	end
 end
@@ -4979,11 +4979,11 @@ function installAutoHullRepair()
 	repairHullUses = 5
 	if playerWithAutoHullRepair:hasPlayerAtPosition("Engineering") then
 		hullUseMsg = "hullUseMsg"
-		playerWithAutoHullRepair:addCustomMessage("Engineering",hullUseMsg,string.format("Hull repair prototype installed. Limited to %i uses",repairHullUses))
+		playerWithAutoHullRepair:addCustomMessage("Engineering",hullUseMsg,string.format(_("-msgEngineer", "Hull repair prototype installed. Limited to %i uses"),repairHullUses))
 	end
 	if playerWithAutoHullRepair:hasPlayerAtPosition("Engineering+") then
 		hullUseMsgPlus = "hullUseMsgPlus"
-		playerWithAutoHullRepair:addCustomMessage("Engineering+",hullUseMsgPlus,string.format("Hull repair prototype installed. Limited to %i uses",repairHullUses))
+		playerWithAutoHullRepair:addCustomMessage("Engineering+",hullUseMsgPlus,string.format(_("-msgEngineer+", "Hull repair prototype installed. Limited to %i uses"),repairHullUses))
 	end
 	repairHullButton = string.format("repairHullButton%i",repairHullUses)
 	playerWithAutoHullRepair:addCustomButton("Engineering",repairHullButton,string.format(_("-buttonEngineer", "Repair Hull (%i)"),repairHullUses),repairHull)
@@ -5274,10 +5274,10 @@ function awaitingTractor(delta)
 					if tractorPlayerDockMsg == nil then
 						tractorPlayerDockMsg = "tractorPlayerDockMsg"
 						if playerCarrier:hasPlayerAtPosition("Weapons") then
-							playerCarrier:addCustomMessage("Weapons",tractorPlayerDockMsg,string.format("%s has been tractored to %s and is now docked",tractorShip:getCallSign(),playerCarrier:getCallSign()))
+							playerCarrier:addCustomMessage("Weapons",tractorPlayerDockMsg,string.format(_("-msgWeapons", "%s has been tractored to %s and is now docked"),tractorShip:getCallSign(),playerCarrier:getCallSign()))
 						end
 						if playerCarrier:hasPlayerAtPosition("Tactical") then
-							playerCarrier:addCustomMessage("Tactical",tractorPlayerDockMsg,string.format("%s has been tractored to %s and is now docked",tractorShip:getCallSign(),playerCarrier:getCallSign()))
+							playerCarrier:addCustomMessage("Tactical",tractorPlayerDockMsg,string.format(_("-msgTactical", "%s has been tractored to %s and is now docked"),tractorShip:getCallSign(),playerCarrier:getCallSign()))
 						end
 					end
 				else
@@ -5394,19 +5394,19 @@ function connectTractor()
 	playerCarrier:removeCustom(tractorIntegrationButtonPlus)
 	if playerCarrier:hasPlayerAtPosition("Engineering") then
 		tractorConfirmationMsg = "tractorConfirmationMsg"
-		playerCarrier:addCustomMessage("Engineering",tractorConfirmationMsg,"The tractor equipment has been fully integrated with ship systems. It is ready for the weapons officer to activate at the appropriate time")
+		playerCarrier:addCustomMessage("Engineering",tractorConfirmationMsg,_("-msgEngineer", "The tractor equipment has been fully integrated with ship systems. It is ready for the weapons officer to activate at the appropriate time"))
 	end
 	if playerCarrier:hasPlayerAtPosition("Engineering+") then
 		tractorConfirmationMsgPlus = "tractorConfirmationMsgPlus"
-		playerCarrier:addCustomMessage("Engineering",tractorConfirmationMsgPlus,"The tractor equipment has been fully integrated with ship systems. It is ready for the weapons officer to activate at the appropriate time")
+		playerCarrier:addCustomMessage("Engineering+",tractorConfirmationMsgPlus,_("-msgEngineer+", "The tractor equipment has been fully integrated with ship systems. It is ready for the weapons officer to activate at the appropriate time"))
 	end
 	if playerCarrier:hasPlayerAtPosition("Weapons") then
 		wTractorConfirmationMsg = "wTractorConfirmationMsg"
-		playerCarrier:addCustomMessage("Weapons",wTractorConfirmationMsg,string.format("Tractor equipment installed.\nWhen %s is in range of the disabled ship, %s, You can engage the tractor system via the (Tractor On) button. This system works with %s's on board systems to draw and maneuver %s to %s until it is docked",playerCarrier:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),playerCarrier:getCallSign()))
+		playerCarrier:addCustomMessage("Weapons",wTractorConfirmationMsg,string.format(_("-msgWeapons", "Tractor equipment installed.\nWhen %s is in range of the disabled ship, %s, You can engage the tractor system via the (Tractor On) button. This system works with %s's on board systems to draw and maneuver %s to %s until it is docked"),playerCarrier:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),playerCarrier:getCallSign()))
 	end
 	if playerCarrier:hasPlayerAtPosition("Tactical") then
 		tTractorConfirmationMsg = "tTractorConfirmationMsg"
-		playerCarrier:addCustomMessage("Tactical",tTractorConfirmationMsg,string.format("Tractor equipment installed.\nWhen %s is in range of the disabled ship, %s, You can engage the tractor system via the (Tractor On) button. This system works with %s's on board systems to draw and maneuver %s to %s until it is docked",playerCarrier:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),playerCarrier:getCallSign()))
+		playerCarrier:addCustomMessage("Tactical",tTractorConfirmationMsg,string.format(_("-msgTactical", "Tractor equipment installed.\nWhen %s is in range of the disabled ship, %s, You can engage the tractor system via the (Tractor On) button. This system works with %s's on board systems to draw and maneuver %s to %s until it is docked"),playerCarrier:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),playerCarrier:getCallSign()))
 	end
 	tractorInstalled = true
 end
@@ -5446,11 +5446,11 @@ function doNotPush(delta)
 	playerCarrier:addCustomButton("Tactical",doNotPushButtonTac,_("-buttonTactical", "Do Not Push"),pushed)
 	if playerCarrier:hasPlayerAtPosition("Science") then
 		alienHackMsg = "alienHackMsg"
-		playerCarrier:addCustomMessage("Science",alienHackMsg,"Internal security sensors indicate ship systems hacked by unknown source. For a moment I thought I heard evil laughter")
+		playerCarrier:addCustomMessage("Science",alienHackMsg,_("-msgScience", "Internal security sensors indicate ship systems hacked by unknown source. For a moment I thought I heard evil laughter"))
 	end
 	if playerCarrier:hasPlayerAtPosition("Operations") then
 		alienHackMsgOp = "alienHackMsgOp"
-		playerCarrier:addCustomMessage("Operations",alienHackMsgOp,"Internal security sensors indicate ship systems hacked by unknown source. For a moment I thought I heard evil laughter")
+		playerCarrier:addCustomMessage("Operations",alienHackMsgOp,_("-msgOperations", "Internal security sensors indicate ship systems hacked by unknown source. For a moment I thought I heard evil laughter"))
 	end
 	plot4 = nil
 end

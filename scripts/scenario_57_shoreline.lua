@@ -10438,11 +10438,11 @@ function horizonScienceMessage(delta)
 		if phScan.horizonConsoleMessage ~= "sent" then
 			horizonConsoleMessage = "grawp scan instructions"
 			if phScan:hasPlayerAtPosition("Science") then
-				phScan:addCustomMessage("Science",horizonConsoleMessage,_("msgScience", "When the ship gets close enough, a button to initiate black hole scan will become available. Click it to start scanning the black hole. The ship must remain within scanning distance for a full 30 seconds to complete the scan."))
+				phScan:addCustomMessage("Science",horizonConsoleMessage,_("research-msgScience", "When the ship gets close enough, a button to initiate black hole scan will become available. Click it to start scanning the black hole. The ship must remain within scanning distance for a full 30 seconds to complete the scan."))
 				phScan.horizonConsoleMessage = "sent"
 			end
 			if phScan:hasPlayerAtPosition("Operations") then
-				phScan:addCustomMessage("Operations",horizonConsoleMessage,_("msgOperations", "When the ship gets close enough, a button to initiate black hole scan will become available. Click it to start scanning the black hole. The ship must remain within scanning distance for a full 30 seconds to complete the scan."))
+				phScan:addCustomMessage("Operations",horizonConsoleMessage,_("research-msgOperations", "When the ship gets close enough, a button to initiate black hole scan will become available. Click it to start scanning the black hole. The ship must remain within scanning distance for a full 30 seconds to complete the scan."))
 				phScan.horizonConsoleMessage = "sent"
 			end
 		end
@@ -10453,7 +10453,7 @@ function horizonScienceMessage(delta)
 	local x1, y1 = phScan:getPosition()
 	local x2, y2 = grawp:getPosition()
 	if distance(x1,y1,x2,y2) < horizonScanRange then
-		grawp_status = "Grawp in range"
+		grawp_status = _("research-", "Grawp in range")
 		if scanGrawpButton then
 			if scanGrawp then
 				if elapsedScanTime == 0 then
@@ -10465,12 +10465,12 @@ function horizonScienceMessage(delta)
 				end
 				if elapsedScanTime > elapsedScanTimeHalf then
 					if phScan.halfScanMessage ~= "sent" then
-						phScan:addToShipLog(_("-shipLog", "[Scan technician] Black hole scan 50 percent complete"),"Blue")
+						phScan:addToShipLog(_("research-shipLog", "[Scan technician] Black hole scan 50 percent complete"),"Blue")
 						phScan.halfScanMessage = "sent"
 					end
 				end
 				if elapsedScanTime > elapsedScanTimeGoal then
-					phScan:addToShipLog(_("-shipLog", "[Scan technician] Black hole scan complete"),"Blue")
+					phScan:addToShipLog(_("research-shipLog", "[Scan technician] Black hole scan complete"),"Blue")
 					if horizonScienceScanButton == "scan button" then
 						phScan:removeCustom(horizonScienceScanButton)
 						horizonScienceScanButton = nil
@@ -10509,22 +10509,22 @@ function horizonScienceMessage(delta)
 					plotR = nil
 					removeGMFunction("Req Horizon")
 				end
-				grawp_status = string.format(_("Grawp in range: %i"),math.ceil(elapsedScanTimeGoal - elapsedScanTime))
+				grawp_status = string.format(_("research-", "Grawp in range: %i"),math.ceil(elapsedScanTimeGoal - elapsedScanTime))
 			end
 		else
 			if phScan:hasPlayerAtPosition("Science") then
 				horizonScienceScanButton = "scan button"
-				phScan:addCustomButton("Science",horizonScienceScanButton,_("blackHole-buttonScience", "Scan black hole"),scanBlackHole)
+				phScan:addCustomButton("Science",horizonScienceScanButton,_("research-buttonScience", "Scan black hole"),scanBlackHole)
 				scanGrawpButton = true
 			end
 			if phScan:hasPlayerAtPosition("Operations") then
 				horizonScienceScanButtonOperations = "scan button operations"
-				phScan:addCustomButton("Operations",horizonScienceScanButtonOperations,_("blackHole-buttonOperations", "Scan black hole"),scanBlackHole)
+				phScan:addCustomButton("Operations",horizonScienceScanButtonOperations,_("research-buttonOperations", "Scan black hole"),scanBlackHole)
 				scanGrawpButton = true
 			end
 		end
 	else
-		grawp_status = _("Grawp out of range")
+		grawp_status = _("research-", "Grawp out of range")
 		if scanGrawpButton then
 			if horizonScienceScanButton == "scan button" then
 				phScan:removeCustom(horizonScienceScanButton)
@@ -10534,7 +10534,7 @@ function horizonScienceMessage(delta)
 				phScan:removeCustom(horizonScienceScanButtonOperations)
 				horizonScienceScanButtonOperations = nil
 			end
-			phScan:addToShipLog(_("blackHole-shipLog", "[Scan technician] Black hole scan aborted before completion"),"Blue")
+			phScan:addToShipLog(_("research-shipLog", "[Scan technician] Black hole scan aborted before completion"),"Blue")
 			phScan.halfScanMessage = "reset"
 			elapsedScanTime = 0
 			scanGrawp = false
@@ -10562,7 +10562,7 @@ function horizonScienceMessage(delta)
 end
 function scanBlackHole()
 	scanGrawp = true
-	phScan:addToShipLog(_("blackHole-shipLog", "[Scan technician] Black hole scan started"),"Blue")
+	phScan:addToShipLog(_("research-shipLog", "[Scan technician] Black hole scan started"),"Blue")
 end
 -----------------------------
 -- 	Optional plot choices  --

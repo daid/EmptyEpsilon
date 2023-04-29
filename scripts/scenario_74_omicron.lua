@@ -6801,11 +6801,11 @@ function healthCheck(delta)
 						p:setRepairCrewCount(1)
 						if p:hasPlayerAtPosition("Engineering") then
 							local repairCrewRecovery = "repairCrewRecovery"
-							p:addCustomMessage("Engineering",repairCrewRecovery,_("msgEngineer","Medical team has revived one of your repair crew"))
+							p:addCustomMessage("Engineering",repairCrewRecovery,_("repairCrew-msgEngineer", "Medical team has revived one of your repair crew"))
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							local repairCrewRecoveryPlus = "repairCrewRecoveryPlus"
-							p:addCustomMessage("Engineering+",repairCrewRecoveryPlus,_("msgEngineer+","Medical team has revived one of your repair crew"))
+							p:addCustomMessage("Engineering+",repairCrewRecoveryPlus,_("repairCrew-msgEngineer+", "Medical team has revived one of your repair crew"))
 						end
 						resetPreviousSystemHealth(p)
 					end
@@ -6823,10 +6823,10 @@ function healthCheck(delta)
 							local noticable_reclaimed_coolant = math.floor(reclaimed_coolant)
 							if noticable_reclaimed_coolant > 0 then
 								if p:hasPlayerAtPosition("Engineering") then
-									p:addCustomMessage("Engineering","coolant_recovery",_("msgEngineer","Automated systems have recovered some coolant"))
+									p:addCustomMessage("Engineering","coolant_recovery",_("coolant-msgEngineer","Automated systems have recovered some coolant"))
 								end
 								if p:hasPlayerAtPosition("Engineering+") then
-									p:addCustomMessage("Engineering+","coolant_recovery_plus",_("msgEngineer+","Automated systems have recovered some coolant"))
+									p:addCustomMessage("Engineering+","coolant_recovery_plus",_("coolant-msgEngineer+","Automated systems have recovered some coolant"))
 								end
 							end
 							resetPreviousSystemHealth(p)
@@ -6901,11 +6901,11 @@ function crewFate(p, fatalityChance)
 				p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 				if p:hasPlayerAtPosition("Engineering") then
 					local repairCrewFatality = "repairCrewFatality"
-					p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer","One of your repair crew has perished"))
+					p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-					p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+","One of your repair crew has perished"))
+					p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 				end
 			elseif consequence == 2 then
 				local current_coolant = p:getMaxCoolant()
@@ -6922,53 +6922,53 @@ function crewFate(p, fatalityChance)
 				p.reclaimable_coolant = math.min(20,p.reclaimable_coolant + lost_coolant*random(.8,1))
 				if p:hasPlayerAtPosition("Engineering") then
 					local coolantLoss = "coolantLoss"
-					p:addCustomMessage("Engineering",coolantLoss,_("msgEngineer","Damage has caused a loss of coolant"))
+					p:addCustomMessage("Engineering",coolantLoss,_("coolant-msgEngineer", "Damage has caused a loss of coolant"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					local coolantLossPlus = "coolantLossPlus"
-					p:addCustomMessage("Engineering+",coolantLossPlus,_("msgEngineer+","Damage has caused a loss of coolant"))
+					p:addCustomMessage("Engineering+",coolantLossPlus,_("coolant-msgEngineer+", "Damage has caused a loss of coolant"))
 				end
 			else
 				local named_consequence = consequence_list[consequence-2]
 				if named_consequence == "probe" then
 					p:setCanLaunchProbe(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","probe_launch_damage_message",_("msgEngineer","The probe launch system has been damaged"))
+						p:addCustomMessage("Engineering","probe_launch_damage_message",_("damage-msgEngineer", "The probe launch system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","probe_launch_damage_message_plus",_("msgEngineer+","The probe launch system has been damaged"))
+						p:addCustomMessage("Engineering+","probe_launch_damage_message_plus",_("damage-msgEngineer+", "The probe launch system has been damaged"))
 					end
 				elseif named_consequence == "hack" then
 					p:setCanHack(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","hack_damage_message",_("msgEngineer","The hacking system has been damaged"))
+						p:addCustomMessage("Engineering","hack_damage_message",_("damage-msgEngineer", "The hacking system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","hack_damage_message_plus",_("msgEngineer+","The hacking system has been damaged"))
+						p:addCustomMessage("Engineering+","hack_damage_message_plus",_("damage-msgEngineer+", "The hacking system has been damaged"))
 					end
 				elseif named_consequence == "scan" then
 					p:setCanScan(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","scan_damage_message",_("msgEngineer","The scanners have been damaged"))
+						p:addCustomMessage("Engineering","scan_damage_message",_("damage-msgEngineer", "The scanners have been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","scan_damage_message_plus",_("msgEngineer+","The scanners have been damaged"))
+						p:addCustomMessage("Engineering+","scan_damage_message_plus",_("damage-msgEngineer+", "The scanners have been damaged"))
 					end
 				elseif named_consequence == "combat_maneuver" then
 					p:setCanCombatManeuver(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","combat_maneuver_damage_message",_("msgEngineer","Combat maneuver has been damaged"))
+						p:addCustomMessage("Engineering","combat_maneuver_damage_message",_("damage-msgEngineer", "Combat maneuver has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","combat_maneuver_damage_message_plus",_("msgEngineer+","Combat maneuver has been damaged"))
+						p:addCustomMessage("Engineering+","combat_maneuver_damage_message_plus",_("damage-msgEngineer+", "Combat maneuver has been damaged"))
 					end
 				elseif named_consequence == "self_destruct" then
 					p:setCanSelfDestruct(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","self_destruct_damage_message",_("msgEngineer","Self destruct system has been damaged"))
+						p:addCustomMessage("Engineering","self_destruct_damage_message",_("damage-msgEngineer", "Self destruct system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","self_destruct_damage_message_plus",_("msgEngineer+","Self destruct system has been damaged"))
+						p:addCustomMessage("Engineering+","self_destruct_damage_message_plus",_("damage-msgEngineer+", "Self destruct system has been damaged"))
 					end
 				end
 			end	--coolant loss branch

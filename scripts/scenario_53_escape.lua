@@ -5729,7 +5729,7 @@ function scragHealth(delta)
 		if playerFighter.reactor_max_message == nil then
 			if playerFighter:hasPlayerAtPosition("Engineering") then
 				playerFighter.reactor_max_message = "reactor_max_message"
-				playerFighter:addCustomMessage("Engineering",playerFighter.reactor_max_message,_("msgEngineer", "Reached maximum repair on reactor"))
+				playerFighter:addCustomMessage("Engineering",playerFighter.reactor_max_message,_("repair-msgEngineer", "Reached maximum repair on reactor"))
 			end
 		end
 	end
@@ -5738,7 +5738,7 @@ function scragHealth(delta)
 		if playerFighter.beamweapons_max_message == nil then
 			if playerFighter:hasPlayerAtPosition("Engineering") then
 				playerFighter.beamweapons_max_message = "beamweapons_max_message"
-				playerFighter:addCustomMessage("Engineering",playerFighter.beamweapons_max_message,_("msgEngineer", "Reached maximum repair on beam weapons"))
+				playerFighter:addCustomMessage("Engineering",playerFighter.beamweapons_max_message,_("repair-msgEngineer", "Reached maximum repair on beam weapons"))
 			end
 		end
 	end
@@ -5747,7 +5747,7 @@ function scragHealth(delta)
 		if playerFighter.maneuver_max_message == nil then
 			if playerFighter:hasPlayerAtPosition("Engineering") then
 				playerFighter.maneuver_max_message = "maneuver_max_message"
-				playerFighter:addCustomMessage("Engineering",playerFighter.maneuver_max_message,_("msgEngineer", "Reached maximum repair on maneuver"))
+				playerFighter:addCustomMessage("Engineering",playerFighter.maneuver_max_message,_("repair-msgEngineer", "Reached maximum repair on maneuver"))
 			end
 		end
 	end
@@ -5756,7 +5756,7 @@ function scragHealth(delta)
 		if playerFighter.impulse_max_message == nil then
 			if playerFighter:hasPlayerAtPosition("Engineering") then
 				playerFighter.impulse_max_message = "impulse_max_message"
-				playerFighter:addCustomMessage("Engineering",playerFighter.impulse_max_message,_("msgEngineer", "Reached maximum repair on impulse engines"))
+				playerFighter:addCustomMessage("Engineering",playerFighter.impulse_max_message,_("repair-msgEngineer", "Reached maximum repair on impulse engines"))
 			end
 		end
 	end
@@ -5765,7 +5765,7 @@ function scragHealth(delta)
 		if playerFighter.frontshield_max_message == nil then
 			if playerFighter:hasPlayerAtPosition("Engineering") then
 				playerFighter.frontshield_max_message = "frontshield_max_message"
-				playerFighter:addCustomMessage("Engineering",playerFighter.frontshield_max_message,_("msgEngineer", "Reached maximum repair on shields"))
+				playerFighter:addCustomMessage("Engineering",playerFighter.frontshield_max_message,_("repair-msgEngineer", "Reached maximum repair on shields"))
 			end
 		end
 	end
@@ -5778,7 +5778,7 @@ function plunderHealth(delta)
 			if playerRepulse.reactor_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.reactor_max_message = "reactor_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.reactor_max_message,_("msgEngineer", "Reached maximum repair on reactor"))
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.reactor_max_message,_("repair-msgEngineer", "Reached maximum repair on reactor"))
 				end
 			end
 		end
@@ -5787,7 +5787,7 @@ function plunderHealth(delta)
 			if playerRepulse.beamweapons_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.beamweapons_max_message = "beamweapons_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.beamweapons_max_message,_("msgEngineer", "Reached maximum repair on beam weapons"))
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.beamweapons_max_message,_("repair-msgEngineer", "Reached maximum repair on beam weapons"))
 				end
 			end
 		end
@@ -5796,7 +5796,7 @@ function plunderHealth(delta)
 			if playerRepulse.maneuver_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.maneuver_max_message = "maneuver_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.maneuver_max_message,_("msgEngineer", "Reached maximum repair on maneuver"))
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.maneuver_max_message,_("repair-msgEngineer", "Reached maximum repair on maneuver"))
 				end
 			end
 		end
@@ -5805,7 +5805,7 @@ function plunderHealth(delta)
 			if playerRepulse.missilesystem_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.missilesystem_max_message = "missilesystem_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.missilesystem_max_message,_("msgEngineer", "Reached maximum repair on missile weapons"))
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.missilesystem_max_message,_("repair-msgEngineer", "Reached maximum repair on missile weapons"))
 				end
 			end
 		end
@@ -5814,7 +5814,7 @@ function plunderHealth(delta)
 			if playerRepulse.impulse_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.impulse_max_message = "impulse_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.impulse_max_message,_("msgEngineer", "Reached maximum repair on impulse engines"))
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.impulse_max_message,_("repair-msgEngineer", "Reached maximum repair on impulse engines"))
 				end
 			end
 		end
@@ -5823,7 +5823,7 @@ function plunderHealth(delta)
 			if playerRepulse.warp_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.warp_max_message = "warp_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.warp_max_message,_("msgEngineer", "Reached maximum repair on warp drive"))
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.warp_max_message,_("repair-msgEngineer", "Reached maximum repair on warp drive"))
 				end
 			end
 		end
@@ -5832,7 +5832,7 @@ function plunderHealth(delta)
 			if playerRepulse.jumpdrive_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.jumpdrive_max_message = "jumpdrive_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.jumpdrive_max_message,_("msgEngineer", "Reached maximum repair on jump drive"))
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.jumpdrive_max_message,_("repair-msgEngineer", "Reached maximum repair on jump drive"))
 				end
 			end
 		end
@@ -5841,7 +5841,7 @@ function plunderHealth(delta)
 			if playerRepulse.frontshield_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.frontshield_max_message = "frontshield_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.frontshield_max_message,_("msgEngineer", "Reached maximum repair on front shield"))
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.frontshield_max_message,_("repair-msgEngineer", "Reached maximum repair on front shield"))
 				end
 			end
 		end
@@ -5850,7 +5850,7 @@ function plunderHealth(delta)
 			if playerRepulse.rearshield_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.rearshield_max_message = "rearshield_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.rearshield_max_message,_("msgEngineer", "Reached maximum repair on rear shield"))
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.rearshield_max_message,_("repair-msgEngineer", "Reached maximum repair on rear shield"))
 				end
 			end
 		end

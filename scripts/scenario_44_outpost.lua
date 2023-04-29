@@ -11322,9 +11322,9 @@ function sensorJammerPickupProcess(self,retriever)
 	if not self:isScannedBy(retriever) then
 		retriever:setCanScan(false)
 		retriever.scanner_dead = "scanner_dead"
-		retriever:addCustomMessage("Science",retriever.scanner_dead,_("msgScience","The unscanned artifact we just picked up has fried our scanners"))
+		retriever:addCustomMessage("Science",retriever.scanner_dead,_("damage-msgScience","The unscanned artifact we just picked up has fried our scanners"))
 		retriever.scanner_dead_ops = "scanner_dead_ops"
-		retriever:addCustomMessage("Operations",retriever.scanner_dead_ops,_("msgOperations","The unscanned artifact we just picked up has fried our scanners"))
+		retriever:addCustomMessage("Operations",retriever.scanner_dead_ops,_("damage-msgOperations","The unscanned artifact we just picked up has fried our scanners"))
 	end
 	may_explain_sensor_jammer = true
 end
@@ -19186,42 +19186,42 @@ function crewFate(p, fatalityChance)
 				if named_consequence == "probe" then
 					p:setCanLaunchProbe(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","probe_launch_damage_message",_("msgEngineer","The probe launch system has been damaged"))
+						p:addCustomMessage("Engineering","probe_launch_damage_message",_("damage-msgEngineer","The probe launch system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","probe_launch_damage_message_plus",_("msgEngineer+","The probe launch system has been damaged"))
+						p:addCustomMessage("Engineering+","probe_launch_damage_message_plus",_("damage-msgEngineer+","The probe launch system has been damaged"))
 					end
 				elseif named_consequence == "hack" then
 					p:setCanHack(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","hack_damage_message",_("msgEngineer","The hacking system has been damaged"))
+						p:addCustomMessage("Engineering","hack_damage_message",_("damage-msgEngineer","The hacking system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","hack_damage_message_plus",_("msgEngineer+","The hacking system has been damaged"))
+						p:addCustomMessage("Engineering+","hack_damage_message_plus",_("damage-msgEngineer+","The hacking system has been damaged"))
 					end
 				elseif named_consequence == "scan" then
 					p:setCanScan(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","scan_damage_message",_("msgEngineer","The scanners have been damaged"))
+						p:addCustomMessage("Engineering","scan_damage_message",_("damage-msgEngineer","The scanners have been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","scan_damage_message_plus",_("msgEngineer+","The scanners have been damaged"))
+						p:addCustomMessage("Engineering+","scan_damage_message_plus",_("damage-msgEngineer+","The scanners have been damaged"))
 					end
 				elseif named_consequence == "combat_maneuver" then
 					p:setCanCombatManeuver(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","combat_maneuver_damage_message",_("msgEngineer","Combat maneuver has been damaged"))
+						p:addCustomMessage("Engineering","combat_maneuver_damage_message",_("damage-msgEngineer","Combat maneuver has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","combat_maneuver_damage_message_plus",_("msgEngineer+","Combat maneuver has been damaged"))
+						p:addCustomMessage("Engineering+","combat_maneuver_damage_message_plus",_("damage-msgEngineer+","Combat maneuver has been damaged"))
 					end
 				elseif named_consequence == "self_destruct" then
 					p:setCanSelfDestruct(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","self_destruct_damage_message",_("msgEngineer","Self destruct system has been damaged"))
+						p:addCustomMessage("Engineering","self_destruct_damage_message",_("damage-msgEngineer","Self destruct system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","self_destruct_damage_message_plus",_("msgEngineer+","Self destruct system has been damaged"))
+						p:addCustomMessage("Engineering+","self_destruct_damage_message_plus",_("damage-msgEngineer+","Self destruct system has been damaged"))
 					end
 				end
 			end	--coolant loss branch
