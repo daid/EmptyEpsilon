@@ -1882,9 +1882,9 @@ function setPlayer(pobj,playerIndex)
 				local vx, vy = vectorFromAngle(360/droneNumber*i,800)
 				local drone = CpuShip():setPosition(px+vx,py+vy):setFaction(p:getFaction()):setTemplate("Ktlitan Drone"):setScanned(true):setCommsScript(""):setCommsFunction(commsShip):setHeading(360/droneNumber*i+90)
 				if drone_name_type == "squad-num/size" then
-					drone:setCallSign(string.format("%s-#%i/%i",squadName,i,droneNumber))
+					drone:setCallSign(string.format(_("callsign-drone", "%s-#%i/%i"),squadName,i,droneNumber))
 				elseif drone_name_type == "squad-num of size" then
-					drone:setCallSign(string.format("%s-%i of %i",squadName,i,droneNumber))
+					drone:setCallSign(string.format(_("callsign-drone", "%s-%i of %i"),squadName,i,droneNumber))
 				elseif drone_name_type == "short" then
 					--string.char(math.random(65,90)) --random letter A-Z
 					local squad_letter_id = string.char(all_squad_count%26+64)
@@ -1894,7 +1894,7 @@ function setPlayer(pobj,playerIndex)
 							squad_letter_id = squad_letter_id .. string.char(math.floor(all_squad_count/676)+64)
 						end
 					end
-					drone:setCallSign(string.format("%s%i/%i",squad_letter_id,i,droneNumber))
+					drone:setCallSign(string.format(_("callsign-drone", "%s%i/%i"),squad_letter_id,i,droneNumber))
 				end
 				if drone_modified_from_template then
 					drone:setHullMax(drone_hull_strength):setHull(drone_hull_strength):setImpulseMaxSpeed(drone_impulse_speed)
@@ -7657,9 +7657,9 @@ function deployDronesForPlayer(p,playerIndex,droneNumber)
 		local vx, vy = vectorFromAngle(360/droneNumber*i,800)
 		local drone = CpuShip():setPosition(px+vx,py+vy):setFaction(p:getFaction()):setTemplate("Ktlitan Drone"):setScanned(true):setCommsScript(""):setCommsFunction(commsShip):setHeading(360/droneNumber*i+90)
 		if drone_name_type == "squad-num/size" then
-			drone:setCallSign(string.format("%s-#%i/%i",squadName,i,droneNumber))
+			drone:setCallSign(string.format(_("callsign-drone", "%s-#%i/%i"),squadName,i,droneNumber))
 		elseif drone_name_type == "squad-num of size" then
-			drone:setCallSign(string.format("%s-%i of %i",squadName,i,droneNumber))
+			drone:setCallSign(string.format(_("callsign-drone", "%s-%i of %i"),squadName,i,droneNumber))
 		elseif drone_name_type == "short" then
 			--string.char(math.random(65,90)) --random letter A-Z
 			local squad_letter_id = string.char(all_squad_count%26+64)
@@ -7669,7 +7669,7 @@ function deployDronesForPlayer(p,playerIndex,droneNumber)
 					squad_letter_id = squad_letter_id .. string.char(math.floor(all_squad_count/676)+64)
 				end
 			end
-			drone:setCallSign(string.format("%s%i/%i",squad_letter_id,i,droneNumber))
+			drone:setCallSign(string.format(_("callsign-drone", "%s%i/%i"),squad_letter_id,i,droneNumber))
 		end
 		if drone_modified_from_template then
 			drone:setHullMax(drone_hull_strength):setHull(drone_hull_strength):setImpulseMaxSpeed(drone_impulse_speed)
@@ -8340,7 +8340,7 @@ function placeFlagsPhase()
 	if stationZebra ~= nil and stationZebra:isValid() then
 		minutes = math.floor((gameTimeLimit - (maxGameTime - hideFlagTime))/60)
 		seconds = (gameTimeLimit - (maxGameTime - hideFlagTime)) % 60
-		stationZebra:setCallSign(string.format("Hide flag %i:%.1f",minutes,seconds))
+		stationZebra:setCallSign(string.format(_("callsign-station", "Hide flag %i:%.1f"),minutes,seconds))
 	end
 	if p1 ~= nil and p1:isValid() then
 		local p1x, p1y = p1:getPosition()
@@ -8560,7 +8560,7 @@ function transitionFromPreparationToHunt()
 	-- this function checks to see if the teams have placed their flags, and if not, then either drops the flags where the ships are if they are within bounds, or if the ship is out of flag bounds, then the flag is placed in the nearest "in bounds" location
 	-- buttons are also cleaned up off the consoles for placing flags
 	timeDivision = "transition"
-	stationZebra:setCallSign("Transition")
+	stationZebra:setCallSign(_("callsign-station", "Transition"))
 	removeP1FlagButton()
 	removeP2FlagButton()
 	if p1Flag == nil then
@@ -8766,7 +8766,7 @@ function manageHuntPhaseMechanics()
 	kraylorShipsRemaining = 0
 	minutes = math.floor(gameTimeLimit/60)
 	seconds = gameTimeLimit % 60
-	stationZebra:setCallSign(string.format("Hunt flag %i:%.1f",minutes,seconds))
+	stationZebra:setCallSign(string.format(_("callsign-station", "Hunt flag %i:%.1f"),minutes,seconds))
 	for pidx=1,32 do
 		p = getPlayerShip(pidx)
 		if p ~= nil then
