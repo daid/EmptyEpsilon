@@ -1912,30 +1912,30 @@ function setPlayer(pobj,playerIndex)
 			p.droneSquads[squadName] = droneList
 			if p:hasPlayerAtPosition("Weapons") then
 				if droneNumber > 1 then
-					p:addCustomMessage("Weapons","drone_launch_confirm_message_weapons",string.format("%i drones launched",droneNumber))
+					p:addCustomMessage("Weapons","drone_launch_confirm_message_weapons",string.format(_("drones-msgWeapons", "%i drones launched"),droneNumber))
 				else
-					p:addCustomMessage("Weapons","drone_launch_confirm_message_weapons",string.format("%i drone launched",droneNumber))
+					p:addCustomMessage("Weapons","drone_launch_confirm_message_weapons",string.format(_("drones-msgWeapons", "%i drone launched"),droneNumber))
 				end
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				if droneNumber > 1 then
-					p:addCustomMessage("Tactical","drone_launch_confirm_message_tactical",string.format("%i drones launched",droneNumber))
+					p:addCustomMessage("Tactical","drone_launch_confirm_message_tactical",string.format(_("drones-msgTactical", "%i drones launched"),droneNumber))
 				else
-					p:addCustomMessage("Tactical","drone_launch_confirm_message_tactical",string.format("%i drone launched",droneNumber))
+					p:addCustomMessage("Tactical","drone_launch_confirm_message_tactical",string.format(_("drones-msgTactical", "%i drone launched"),droneNumber))
 				end
 			end
 			if droneNumber > 1 then
-				p:addToShipLog(string.format("Deployed %i drones as squadron %s",droneNumber,squadName),"White")
+				p:addToShipLog(string.format(_("drones-shipLog", "Deployed %i drones as squadron %s"),droneNumber,squadName),"White")
 			else
-				p:addToShipLog(string.format("Deployed %i drone as squadron %s",droneNumber,squadName),"White")
+				p:addToShipLog(string.format(_("drones-shipLog", "Deployed %i drone as squadron %s"),droneNumber,squadName),"White")
 			end
 		end
 		pobj.count_drones = function(pidx)
 			local p = getPlayerShip(pidx)
 			local msgLabel = string.format("weaponsDroneCount%s",p:getCallSign())
-			p:addCustomMessage("Weapons",msgLabel,string.format("You have %i drones to deploy",p.dronePool))
+			p:addCustomMessage("Weapons",msgLabel,string.format(_("drones-msgWeapons", "You have %i drones to deploy"),p.dronePool))
 			msgLabel = string.format("tacticalDroneCount%s",p:getCallSign())
-			p:addCustomMessage("Tactical",msgLabel,string.format("You have %i drones to deploy",p.dronePool))
+			p:addCustomMessage("Tactical",msgLabel,string.format(_("drones-msgTactical", "You have %i drones to deploy"),p.dronePool))
 		end
 		pobj.drone_hull_status = function(pidx)
 			local player_ship = getPlayerShip(pidx)
@@ -3695,11 +3695,11 @@ function downTheRabbitHole()
 					if teleportee_type == "PlayerSpaceship" then
 						if teleportee:hasPlayerAtPosition("Helms") then
 							teleportee.worm_hole_target_message = "worm_hole_target_message"
-							teleportee:addCustomMessage("Helms",teleportee.worm_hole_target_message,"Worm hole teleportation destination will change after the flag hiding time expires")
+							teleportee:addCustomMessage("Helms",teleportee.worm_hole_target_message,_("wormhole-msgHelms", "Worm hole teleportation destination will change after the flag hiding time expires"))
 						end
 						if teleportee:hasPlayerAtPosition("Tactical") then
 							teleportee.worm_hole_target_message_tac = "worm_hole_target_message_tac"
-							teleportee:addCustomMessage("Tactical",teleportee.worm_hole_target_message_tac,"Worm hole teleportation destination will change after the flag hiding time expires")
+							teleportee:addCustomMessage("Tactical",teleportee.worm_hole_target_message_tac,_("wormhole-msgTactical", "Worm hole teleportation destination will change after the flag hiding time expires"))
 						end
 					end
 				end
@@ -7213,22 +7213,22 @@ function fillStationBrains()
 					tradeString = ""
 					stationTrades = false
 					if tradeMedicine[stationList[sti]] ~= nil then
-						tradeString = " and will trade it for medicine"
+						tradeString = _("trade-comms", " and will trade it for medicine")
 						stationTrades = true
 					end
 					if tradeFood[stationList[sti]] ~= nil then
 						if stationTrades then
-							tradeString = tradeString .. " or food"
+							tradeString = tradeString .. _("trade-comms", " or food")
 						else
-							tradeString = tradeString .. " and will trade it for food"
+							tradeString = tradeString .. _("trade-comms", " and will trade it for food")
 							stationTrades = true
 						end
 					end
 					if tradeLuxury[stationList[sti]] ~= nil then
 						if stationTrades then
-							tradeString = tradeString .. " or luxury"
+							tradeString = tradeString .. _("trade-comms", " or luxury")
 						else
-							tradeString = tradeString .. " and will trade it for luxury"
+							tradeString = tradeString .. _("trade-comms", " and will trade it for luxury")
 						end
 					end
 					table.insert(comms_target.goodsKnowledgeTrade,tradeString)
@@ -7292,11 +7292,11 @@ function p1DropFlag()
 	removeP1FlagButton()
 	if p1:hasPlayerAtPosition("Weapons") then
 		p1FlagDroppedMsg = "p1FlagDroppedMsg"
-		p1:addCustomMessage("Weapons",p1FlagDroppedMsg,"Flag position recorded. Flag will be placed here when preparation period complete")
+		p1:addCustomMessage("Weapons",p1FlagDroppedMsg,_("flag-msgWeapons", "Flag position recorded. Flag will be placed here when preparation period complete"))
 	end
 	if p1:hasPlayerAtPosition("Tactical") then
 		p1FlagDroppedMsgT = "p1FlagDroppedMsgT"
-		p1:addCustomMessage("Tactical",p1FlagDroppedMsgT,"Flag position recorded. Flag will be placed here when preparation period complete")
+		p1:addCustomMessage("Tactical",p1FlagDroppedMsgT,_("flag-msgTactical", "Flag position recorded. Flag will be placed here when preparation period complete"))
 	end
 end
 function p2DropFlag()
@@ -7305,11 +7305,11 @@ function p2DropFlag()
 	removeP2FlagButton()
 	if p2:hasPlayerAtPosition("Weapons") then
 		p2FlagDroppedMsg = "p2FlagDroppedMsg"
-		p2:addCustomMessage("Weapons",p2FlagDroppedMsg,"Flag position recorded. Flag will be placed here when preparation period complete")
+		p2:addCustomMessage("Weapons",p2FlagDroppedMsg,_("flag-msgWeapons", "Flag position recorded. Flag will be placed here when preparation period complete"))
 	end
 	if p2:hasPlayerAtPosition("Tactical") then
 		p2FlagDroppedMsgT = "p2FlagDroppedMsgT"
-		p2:addCustomMessage("Tactical",p2FlagDroppedMsgT,"Flag position recorded. Flag will be placed here when preparation period complete")
+		p2:addCustomMessage("Tactical",p2FlagDroppedMsgT,_("flag-msgTactical", "Flag position recorded. Flag will be placed here when preparation period complete"))
 	end
 end
 
@@ -7441,11 +7441,11 @@ function dropDecoy(p,decoy_number)
 	removeDecoyButton(p)
 	local decoy_dropped_message = string.format("%s%iDecoyDroppedMessageWeapons",p:getCallSign(),decoy_number)
 	if p:hasPlayerAtPosition("Weapons") then
-		p:addCustomMessage("Weapons",decoy_dropped_message,"Decoy position recorded. Decoy will be placed here when preparation period complete")
+		p:addCustomMessage("Weapons",decoy_dropped_message,_("decoy-msgWeapons", "Decoy position recorded. Decoy will be placed here when preparation period complete"))
 	end
 	if p:hasPlayerAtPosition("Tactical") then
 		decoy_dropped_message = string.format("%s%iDecoyDroppedMessageTactical",p:getCallSign(),decoy_number)
-		p:addCustomMessage("Tactical",decoy_dropped_message,"Decoy position recorded. Decoy will be placed here when preparation period complete")
+		p:addCustomMessage("Tactical",decoy_dropped_message,_("decoy-msgTactical", "Decoy position recorded. Decoy will be placed here when preparation period complete"))
 	end
 	return decoy_x, decoy_y
 end
@@ -7467,10 +7467,10 @@ function setDecoyButton(p,player_index,decoy_number)
 	local player_name = p:getCallSign()
 	local decoy_button_label = string.format("%s%iDecoyButtonWeapons",player_name,decoy_number)
 	if p.decoy_button[decoy_button_label] == nil and p.decoy_drop[decoy_number] == nil then
-		p:addCustomButton("Weapons",decoy_button_label,string.format(_("-buttonWeapons", "Drop Decoy %i"),decoy_number),drop_decoy_functions[player_index][decoy_number])
+		p:addCustomButton("Weapons",decoy_button_label,string.format(_("decoy-buttonWeapons", "Drop Decoy %i"),decoy_number),drop_decoy_functions[player_index][decoy_number])
 		p.decoy_button[decoy_button_label] = player_name
 		decoy_button_label = string.format("%s%iDecoyButtonTactical",p:getCallSign(),decoy_number)
-		p:addCustomButton("Tactical",decoy_button_label,string.format(_("-buttonTactical", "Drop Decoy %i"),decoy_number),drop_decoy_functions[player_index][decoy_number])
+		p:addCustomButton("Tactical",decoy_button_label,string.format(_("decoy-buttonTactical", "Drop Decoy %i"),decoy_number),drop_decoy_functions[player_index][decoy_number])
 		p.decoy_button[decoy_button_label] = player_name
 	end
 end
@@ -7589,14 +7589,14 @@ end
 function notEnoughDronesMessage(p,count)
 	local pName = p:getCallSign()
 	local msgLabel = string.format("%sweaponsfewerthan%idrones",pName,count)
-	p:addCustomMessage("Weapons",msgLabel,string.format("You do not have %i drones to deploy",count))
+	p:addCustomMessage("Weapons",msgLabel,string.format(_("drones-msgWeapons", "You do not have %i drones to deploy"),count))
 	msgLabel = string.format("%stacticalfewerthan%idrones",pName,count)
-	p:addCustomMessage("Tactical",msgLabel,string.format("You do not have %i drones to deploy",count))
+	p:addCustomMessage("Tactical",msgLabel,string.format(_("drones-msgTactical", "You do not have %i drones to deploy"),count))
 end
 --drone count label
 function establishDroneAvailableCount(p)
 	local player_name = p:getCallSign()
-	local count_info = string.format("Drones Available: %i",p.dronePool)
+	local count_info = string.format(_("drones-tabWeapons&Tactical", "Drones Available: %i"),p.dronePool)
 	local button_name = player_name .. "countWeapons"
 	p:addCustomInfo("Weapons",button_name,count_info)
 	p.drone_pool_info_weapons = button_name
@@ -7626,7 +7626,7 @@ function updateDroneAvailableCount(p)
 		removeDroneAvailableCount(p,"Tactical")
 	end
 	local player_name = p:getCallSign()
-	local count_info = string.format("Drones Available: %i",p.dronePool)
+	local count_info = string.format(_("drones-tabWeapons&Tactical", "Drones Available: %i"),p.dronePool)
 	local button_name = player_name .. "countWeapons"
 	if p:hasPlayerAtPosition("Weapons") then
 		p:addCustomInfo("Weapons",button_name,count_info)
@@ -7687,16 +7687,16 @@ function deployDronesForPlayer(p,playerIndex,droneNumber)
 	p.droneSquads[squadName] = droneList
 	if p:hasPlayerAtPosition("Weapons") then
 		if droneNumber > 1 then
-			p:addCustomMessage("Weapons","drone_launch_confirm_message_weapons",string.format("%i drones launched",droneNumber))
+			p:addCustomMessage("Weapons","drone_launch_confirm_message_weapons",string.format(_("drones-msgWeapons", "%i drones launched"),droneNumber))
 		else
-			p:addCustomMessage("Weapons","drone_launch_confirm_message_weapons",string.format("%i drone launched",droneNumber))
+			p:addCustomMessage("Weapons","drone_launch_confirm_message_weapons",string.format(_("drones-msgWeapons", "%i drone launched"),droneNumber))
 		end
 	end
 	if p:hasPlayerAtPosition("Tactical") then
 		if droneNumber > 1 then
-			p:addCustomMessage("Tactical","drone_launch_confirm_message_tactical",string.format("%i drones launched",droneNumber))
+			p:addCustomMessage("Tactical","drone_launch_confirm_message_tactical",string.format(_("drones-msgTactical", "%i drones launched"),droneNumber))
 		else
-			p:addCustomMessage("Tactical","drone_launch_confirm_message_tactical",string.format("%i drone launched",droneNumber))
+			p:addCustomMessage("Tactical","drone_launch_confirm_message_tactical",string.format(_("drones-msgTactical", "%i drone launched"),droneNumber))
 		end
 	end
 	if droneNumber > 1 then
@@ -7722,15 +7722,15 @@ function droneDestructionManagement(destroyed_drone, attacker_ship)
 		local engineer_notice = interjection[math.random(1,#interjection)]
 		local engineer_notice_message_choice = math.random(1,5)
 		if engineer_notice_message_choice == 1 then
-			engineer_notice = string.format("%s! Telemetry from %s in squad % stopped abruptly indicating destruction. Probable instigator: %s",engineer_notice,drone_name,squad_name,attacker_name)
+			engineer_notice = string.format(_("drones-msgEngineer&Engineer+", "%s! Telemetry from %s in squad % stopped abruptly indicating destruction. Probable instigator: %s"),engineer_notice,drone_name,squad_name,attacker_name)
 		elseif engineer_notice_message_choice == 2 then
-			engineer_notice = string.format("*%s* Another drone bites the dust: %s in squad %s destroyed by %s",engineer_notice,drone_name,squad_name,attacker_name)
+			engineer_notice = string.format(_("drones-msgEngineer&Engineer+", "*%s* Another drone bites the dust: %s in squad %s destroyed by %s"),engineer_notice,drone_name,squad_name,attacker_name)
 		elseif engineer_notice_message_choice == 3 then
-			engineer_notice = string.format("--%s-- Drone %s in squad %s just disappeared. %s was nearby",engineer_notice,drone_name,squad_name,attacker_name)
+			engineer_notice = string.format(_("drones-msgEngineer&Engineer+", "--%s-- Drone %s in squad %s just disappeared. %s was nearby"),engineer_notice,drone_name,squad_name,attacker_name)
 		elseif engineer_notice_message_choice == 4 then
-			engineer_notice = string.format("%s! %s just took out Drone %s in squad %s",engineer_notice,attacker_name,drone_name,squad_name)
+			engineer_notice = string.format(_("drones-msgEngineer&Engineer+", "%s! %s just took out Drone %s in squad %s"),engineer_notice,attacker_name,drone_name,squad_name)
 		else
-			engineer_notice = string.format("%s! Drone %s in squad %s was destroyed by %s",engineer_notice,drone_name,squad_name,attacker_name)
+			engineer_notice = string.format(_("drones-msgEngineer&Engineer+", "%s! Drone %s in squad %s was destroyed by %s"),engineer_notice,drone_name,squad_name,attacker_name)
 		end
 		if destroyed_drone.deployer:hasPlayerAtPosition("Engineering") then
 			destroyed_drone.deployer:addCustomMessage("Engineering",engineer_notice,engineer_notice)
@@ -8785,11 +8785,11 @@ function manageHuntPhaseMechanics()
 							if p.flag then
 								if p:hasPlayerAtPosition("Helms") then
 									p.flag_badge = "flag_badge"
-									p:addCustomInfo("Helms",p.flag_badge,"Human Flag Aboard")
+									p:addCustomInfo("Helms",p.flag_badge,_("-tabHelms", "Human Flag Aboard"))
 								end
 								if p:hasPlayerAtPosition("Tactical") then
 									p.flag_badge_tac = "flag_badge_tac"
-									p:addCustomInfo("Tactical",p.flag_badge_tac,"Human Flag Aboard")
+									p:addCustomInfo("Tactical",p.flag_badge_tac,_("-tabTactical", "Human Flag Aboard"))
 								end
 							end
 							p1Flag:destroy()
@@ -8909,11 +8909,11 @@ function manageHuntPhaseMechanics()
 							if p.flag then
 								if p:hasPlayerAtPosition("Helms") then
 									p.flag_badge = "flag_badge"
-									p:addCustomInfo("Helms",p.flag_badge,"Kraylor Flag Aboard")
+									p:addCustomInfo("Helms",p.flag_badge,_("-tabHelms", "Kraylor Flag Aboard"))
 								end
 								if p:hasPlayerAtPosition("Tactical") then
 									p.flag_badge_tac = "flag_badge_tac"
-									p:addCustomInfo("Tactical",p.flag_badge_tac,"Kraylor Flag Aboard")
+									p:addCustomInfo("Tactical",p.flag_badge_tac,_("-tabTactical", "Kraylor Flag Aboard"))
 								end
 							end
 							p2Flag:destroy()
@@ -9074,11 +9074,11 @@ function droneDetectFlagCheck(delta)
 										if p ~= nil and p:isValid() then
 											local drone_message_label = string.format("scienceDroneNote%s%s",obj:getCallSign(),p:getCallSign())
 											if p:hasPlayerAtPosition("Science") then
-												p:addCustomMessage("Science",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
+												p:addCustomMessage("Science",drone_message_label,string.format(_("drones-msgScience", "Drone %s in sector %s reports possible flag in sector %s"),obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
 											end
 											if p:hasPlayerAtPosition("Operations") then
 												drone_message_label = string.format("operationsDroneNote%s%s",obj:getCallSign(),p:getCallSign())
-												p:addCustomMessage("Operations",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
+												p:addCustomMessage("Operations",drone_message_label,string.format(_("drones-msgOperations", "Drone %s in sector %s reports possible flag in sector %s"),obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
 											end
 											obj.drone_message = "sent"
 											obj.drone_message_stamp = delta
@@ -9091,11 +9091,11 @@ function droneDetectFlagCheck(delta)
 											if obj.deployer ~= nil and obj.deployer == p then
 												local drone_message_label = string.format("scienceDroneNote%s%s",obj:getCallSign(),p:getCallSign())
 												if p:hasPlayerAtPosition("Science") then
-													p:addCustomMessage("Science",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
+													p:addCustomMessage("Science",drone_message_label,string.format(_("drones-msgScience", "Drone %s in sector %s reports possible flag in sector %s"),obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
 												end
 												if p:hasPlayerAtPosition("Operations") then
 													drone_message_label = string.format("operationsDroneNote%s%s",obj:getCallSign(),p:getCallSign())
-													p:addCustomMessage("Operations",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
+													p:addCustomMessage("Operations",drone_message_label,string.format(_("drones-msgOperations", "Drone %s in sector %s reports possible flag in sector %s"),obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
 												end
 												obj.drone_message = "sent"
 												obj.drone_message_stamp = delta
@@ -9109,11 +9109,11 @@ function droneDetectFlagCheck(delta)
 											if p:getFaction() == "Kraylor" and obj:getFaction() == "Kraylor" then
 												local drone_message_label = string.format("scienceDroneNote%s%s",obj:getCallSign(),p:getCallSign())
 												if p:hasPlayerAtPosition("Science") then
-													p:addCustomMessage("Science",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
+													p:addCustomMessage("Science",drone_message_label,string.format(_("drones-msgScience", "Drone %s in sector %s reports possible flag in sector %s"),obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
 												end
 												if p:hasPlayerAtPosition("Operations") then
 													drone_message_label = string.format("operationsDroneNote%s%s",obj:getCallSign(),p:getCallSign())
-													p:addCustomMessage("Operations",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
+													p:addCustomMessage("Operations",drone_message_label,string.format(_("drones-msgOperations", "Drone %s in sector %s reports possible flag in sector %s"),obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
 												end
 												obj.drone_message = "sent"
 												obj.drone_message_stamp = delta
@@ -9150,11 +9150,11 @@ function droneDetectFlagCheck(delta)
 										if p ~= nil and p:isValid() then
 											local drone_message_label = string.format("scienceDroneNote%s%s",obj:getCallSign(),p:getCallSign())
 											if p:hasPlayerAtPosition("Science") then
-												p:addCustomMessage("Science",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
+												p:addCustomMessage("Science",drone_message_label,string.format(_("drones-msgScience", "Drone %s in sector %s reports possible flag in sector %s"),obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
 											end
 											if p:hasPlayerAtPosition("Operations") then
 												drone_message_label = string.format("operationsDroneNote%s%s",obj:getCallSign(),p:getCallSign())
-												p:addCustomMessage("Operations",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
+												p:addCustomMessage("Operations",drone_message_label,string.format(_("drones-msgOperations", "Drone %s in sector %s reports possible flag in sector %s"),obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
 											end
 											obj.drone_message = "sent"
 											obj.drone_message_stamp = delta
@@ -9167,11 +9167,11 @@ function droneDetectFlagCheck(delta)
 											if obj.deployer ~= nil and obj.deployer == p then
 												local drone_message_label = string.format("scienceDroneNote%s%s",obj:getCallSign(),p:getCallSign())
 												if p:hasPlayerAtPosition("Science") then
-													p:addCustomMessage("Science",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
+													p:addCustomMessage("Science",drone_message_label,string.format(_("drones-msgScience", "Drone %s in sector %s reports possible flag in sector %s"),obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
 												end
 												if p:hasPlayerAtPosition("Operations") then
 													drone_message_label = string.format("operationsDroneNote%s%s",obj:getCallSign(),p:getCallSign())
-													p:addCustomMessage("Operations",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
+													p:addCustomMessage("Operations",drone_message_label,string.format(_("drones-msgOperations", "Drone %s in sector %s reports possible flag in sector %s"),obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
 												end
 												obj.drone_message = "sent"
 												obj.drone_message_stamp = delta
@@ -9185,11 +9185,11 @@ function droneDetectFlagCheck(delta)
 											if p:getFaction() == "Human Navy" and obj:getFaction() == "Human Navy" then
 												local drone_message_label = string.format("scienceDroneNote%s%s",obj:getCallSign(),p:getCallSign())
 												if p:hasPlayerAtPosition("Science") then
-													p:addCustomMessage("Science",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
+													p:addCustomMessage("Science",drone_message_label,string.format(_("drones-msgScience", "Drone %s in sector %s reports possible flag in sector %s"),obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
 												end
 												if p:hasPlayerAtPosition("Operations") then
 													drone_message_label = string.format("operationsDroneNote%s%s",obj:getCallSign(),p:getCallSign())
-													p:addCustomMessage("Operations",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
+													p:addCustomMessage("Operations",drone_message_label,string.format(_("drones-msgOperations", "Drone %s in sector %s reports possible flag in sector %s"),obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
 												end
 												obj.drone_message = "sent"
 												obj.drone_message_stamp = delta
@@ -9275,7 +9275,7 @@ function update(delta)
 	for pidx=1,32 do
 		local p5 = getPlayerShip(pidx)
 		if p5 ~= nil and p5:isValid() then
-			local name_tag_text = string.format("%s in %s",p5:getCallSign(),p5:getSectorName())
+			local name_tag_text = string.format(_("-tabHelms&Tactical&Singlepilot", "%s in %s"),p5:getCallSign(),p5:getSectorName())
 			if p5:hasPlayerAtPosition("Helms") then
 				p5.name_tag_helm = "name_tag_helm"
 				p5:addCustomInfo("Helms",p5.name_tag_helm,name_tag_text)

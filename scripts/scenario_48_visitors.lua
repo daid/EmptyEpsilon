@@ -7366,22 +7366,22 @@ function fillStationBrains()
 					tradeString = ""
 					stationTrades = false
 					if tradeMedicine[humanStationList[sti]] ~= nil then
-						tradeString = " and will trade it for medicine"
+						tradeString = _("trade-comms", " and will trade it for medicine")
 						stationTrades = true
 					end
 					if tradeFood[humanStationList[sti]] ~= nil then
 						if stationTrades then
-							tradeString = tradeString .. " or food"
+							tradeString = tradeString .. _("trade-comms", " or food")
 						else
-							tradeString = tradeString .. " and will trade it for food"
+							tradeString = tradeString .. _("trade-comms", " and will trade it for food")
 							stationTrades = true
 						end
 					end
 					if tradeLuxury[humanStationList[sti]] ~= nil then
 						if stationTrades then
-							tradeString = tradeString .. " or luxury"
+							tradeString = tradeString .. _("trade-comms", " or luxury")
 						else
-							tradeString = tradeString .. " and will trade it for luxury"
+							tradeString = tradeString .. _("trade-comms", " and will trade it for luxury")
 						end
 					end
 					table.insert(comms_target.goodsKnowledgeTrade,tradeString)
@@ -9194,11 +9194,11 @@ function checkOrbitingArtifactEvents(delta)
 						end
 						if not batchMsg then
 							batchMsg = true
-							p:addToShipLog(string.format("[Polly Hobbs] %.1f seconds remain to be scanned",artifactSensorReadingTimer),"Magenta")
+							p:addToShipLog(string.format(_("-shipLog", "[Polly Hobbs] %.1f seconds remain to be scanned"),artifactSensorReadingTimer),"Magenta")
 						end
 						if pollyDiagnostic then print("Out of range.  Timer: " .. artifactSensorReadingTimer) end
 					end
-					sensor_status = string.format("%s: %i",sensor_status,math.ceil(artifactSensorReadingTimer))
+					sensor_status = string.format(_("-tabHelms&Tactical", "%s: %i"),sensor_status,math.ceil(artifactSensorReadingTimer))
 					if p:hasPlayerAtPosition("Helms") then
 						p.sensor_status = "sensor_status"
 						p:addCustomInfo("Helms",p.sensor_status,sensor_status)
@@ -9967,11 +9967,11 @@ function checkVirusEvents(delta)
 			end
 			local virus_minutes = math.floor(virus_timer / 60)
 			local virus_seconds = math.floor(virus_timer % 60)
-			local virus_status = "Virus Fatality"
+			local virus_status = _("-tabScience&Operations", "Virus Fatality")
 			if virus_minutes <= 0 then
-				virus_status = string.format("%s: %i",virus_status,virus_seconds)
+				virus_status = string.format(_("-tabScience&Operations", "%s: %i"),virus_status,virus_seconds)
 			else
-				virus_status = string.format("%s: %i:%.2i",virus_status,virus_minutes,virus_seconds)
+				virus_status = string.format(_("-tabScience&Operations", "%s: %i:%.2i"),virus_status,virus_minutes,virus_seconds)
 			end
 			for pidx=1,8 do
 				local p = getPlayerShip(pidx)

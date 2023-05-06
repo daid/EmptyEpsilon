@@ -8409,9 +8409,9 @@ function relayStatus(delta)
 				limit_seconds = math.floor(gameTimeLimit%60)
 				limit_status = "Game Timer"
 				if limit_minutes <= 0 then
-					limit_status = string.format(_("limit Status", "%s %i"),limit_status,limit_seconds)
+					limit_status = string.format(_("-tabRelay&Operations", "%s %i"),limit_status,limit_seconds)
 				else
-					limit_status = string.format(_("limit Status", "%s %i:%.2i"),limit_status,limit_minutes,limit_seconds)
+					limit_status = string.format(_("-tabRelay&Operations", "%s %i:%.2i"),limit_status,limit_minutes,limit_seconds)
 				end
 				if p:hasPlayerAtPosition("Relay") then
 					p.limit_status = "limit_status"
@@ -8433,25 +8433,25 @@ function relayStatus(delta)
 					end
 				else
 					leg_average = (p.patrolLegAsimov + p.patrolLegUtopiaPlanitia + p.patrolLegArmstrong)/3
-					mission_status = string.format(_("%i%% Complete"),math.floor(leg_average/patrolGoal*100))
+					mission_status = string.format(_("-tabRelay&Operations", "%i%% Complete"),math.floor(leg_average/patrolGoal*100))
 					if p.patrolLegArmstrong ~= p.patrolLegAsimov or p.patrolLegUtopiaPlanitia ~= p.patrolLegArmstrong then
 						if p.patrolLegArmstrong == p.patrolLegAsimov then
 							if p.patrolLegArmstrong > p.patrolLegUtopiaPlanitia then
-								mission_status = string.format(_("%s -Utopia Planitia"),mission_status)
+								mission_status = string.format(_("-tabRelay&Operations", "%s -Utopia Planitia"),mission_status)
 							else
-								mission_status = string.format(_("%s +Utopia Planitia"),mission_status)
+								mission_status = string.format(_("-tabRelay&Operations", "%s +Utopia Planitia"),mission_status)
 							end
 						elseif p.patrolLegArmstrong == p.patrolLegUtopiaPlanitia then
 							if p.patrolLegArmstrong > p.patrolLegAsimov then
-								mission_status = string.format(_("%s -Asimov"),mission_status)
+								mission_status = string.format(_("-tabRelay&Operations", "%s -Asimov"),mission_status)
 							else
-								mission_status = string.format(_("%s +Asimov"),mission_status)
+								mission_status = string.format(_("-tabRelay&Operations", "%s +Asimov"),mission_status)
 							end
 						else
 							if p.patrolLegAsimov > p.patrolLegArmstrong then
-								mission_status = string.format(_("%s -Armstrong"),mission_status)
+								mission_status = string.format(_("-tabRelay&Operations", "%s -Armstrong"),mission_status)
 							else
-								mission_status = string.format("%s +Armstrong",mission_status)
+								mission_status = string.format("-tabRelay&Operations", "%s +Armstrong",mission_status)
 							end
 						end
 					end
@@ -8468,7 +8468,7 @@ function relayStatus(delta)
 						if stationAsimov.telemetry then
 							shield_percentage =  stationAsimov:getShieldLevel(0) / stationAsimov:getShieldMax(0)
 							if shield_percentage < 1 then
-								local asimov_health = string.format(_("Asimov S:%i%% H:%i%%"),math.floor(shield_percentage*100),math.floor(stationAsimov:getHull()/stationAsimov:getHullMax()*100))
+								local asimov_health = string.format(_("-tabRelay&Operations", "Asimov S:%i%% H:%i%%"),math.floor(shield_percentage*100),math.floor(stationAsimov:getHull()/stationAsimov:getHullMax()*100))
 								if p:hasPlayerAtPosition("Relay") then
 									p.asimov_status = "asimov_status"
 									p:addCustomInfo("Relay",p.asimov_status,asimov_health)
@@ -8506,7 +8506,7 @@ function relayStatus(delta)
 								shield_index = shield_index + 1
 							until shield_index >= 3
 							if weakened_shield then
-								local up_health = string.format(_("U.P. WS:%i%% H:%i%%"),math.floor(weakest_shield/1000*100),math.floor(stationUtopiaPlanitia:getHull()/stationUtopiaPlanitia:getHullMax()*100))
+								local up_health = string.format(_("-tabRelay&Operations", "U.P. WS:%i%% H:%i%%"),math.floor(weakest_shield/1000*100),math.floor(stationUtopiaPlanitia:getHull()/stationUtopiaPlanitia:getHullMax()*100))
 								if p:hasPlayerAtPosition("Relay") then
 									p.up_status = "up_status"
 									p:addCustomInfo("Relay",p.up_status,up_health)
@@ -8544,7 +8544,7 @@ function relayStatus(delta)
 								shield_index = shield_index + 1
 							until shield_index >= 4
 							if weakened_shield then
-								local armstrong_health = string.format(_("U.P. WS:%i%% H:%i%%"),math.floor(weakest_shield/1000*100),math.floor(stationArmstrong:getHull()/stationArmstrong:getHullMax()*100))
+								local armstrong_health = string.format(_("-tabRelay&Operations", "U.P. WS:%i%% H:%i%%"),math.floor(weakest_shield/1000*100),math.floor(stationArmstrong:getHull()/stationArmstrong:getHullMax()*100))
 								if p:hasPlayerAtPosition("Relay") then
 									p.armstrong_status = "armstrong_status"
 									p:addCustomInfo("Relay",p.armstrong_status,armstrong_health)

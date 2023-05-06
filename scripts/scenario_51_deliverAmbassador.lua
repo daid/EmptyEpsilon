@@ -354,9 +354,9 @@ function revolutionOccurs(delta)
 		local mob_minutes = math.floor(breakoutTimer / 60)
 		local mob_seconds = math.floor(breakoutTimer % 60)
 		if mob_minutes <= 0 then
-			mob_label = string.format("%s %i",mob_label,mob_seconds)
+			mob_label = string.format(_("audio-tabRelay&Operations", "%s %i"),mob_label,mob_seconds)
 		else
-			mob_label = string.format("%s %i:%.2i",mob_label,mob_minutes,mob_seconds)
+			mob_label = string.format(_("audio-tabRelay&Operations", "%s %i:%.2i"),mob_label,mob_minutes,mob_seconds)
 		end
 		if player:hasPlayerAtPosition("Relay") then
 			player.mob_timer = "mob_timer"

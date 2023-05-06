@@ -2606,7 +2606,7 @@ function generateTerrain()
 		local dp_list = {}
 		for i=1,defense_platform_count do
 			vx, vy = vectorFromAngleNorth(angle,defense_platform_distance)
-			dp = CpuShip():setTemplate("Defense platform"):setFaction("Human Navy"):setPosition(psx + vx,psy + vy):setScannedByFaction("Human Navy",true):setCallSign(string.format("HDP%i",i)):setDescription(string.format("%s defense platform %i",station_primary_human:getCallSign(),i)):orderRoaming()
+			dp = CpuShip():setTemplate("Defense platform"):setFaction("Human Navy"):setPosition(psx + vx,psy + vy):setScannedByFaction("Human Navy",true):setCallSign(string.format("HDP%i",i)):setDescription(string.format(_("scienceDescription-ship", "%s defense platform %i"),station_primary_human:getCallSign(),i)):orderRoaming()
 			dp.score_value = 50
 			table.insert(npc_fleet["Human Navy"],dp)
 			dp:setCommsScript(""):setCommsFunction(commsDefensePlatform)
@@ -2665,7 +2665,7 @@ function generateTerrain()
 		psx, psy = station_primary_kraylor:getPosition()
 		for i=1,defense_platform_count do
 			vx, vy = vectorFromAngleNorth(angle,defense_platform_distance)
-			dp = CpuShip():setTemplate("Defense platform"):setFaction("Kraylor"):setPosition(psx + vx,psy + vy):setScannedByFaction("Kraylor",true):setCallSign(string.format("KDP%i",i)):setDescription(string.format("%s defense platform %i",station_primary_kraylor:getCallSign(),i)):orderRoaming()
+			dp = CpuShip():setTemplate("Defense platform"):setFaction("Kraylor"):setPosition(psx + vx,psy + vy):setScannedByFaction("Kraylor",true):setCallSign(string.format("KDP%i",i)):setDescription(string.format(_("scienceDescription-ship", "%s defense platform %i"),station_primary_kraylor:getCallSign(),i)):orderRoaming()
 			dp.score_value = 50
 			table.insert(npc_fleet["Kraylor"],dp)
 			dp:setCommsScript(""):setCommsFunction(commsDefensePlatform)
@@ -2686,7 +2686,7 @@ function generateTerrain()
 			psx, psy = station_primary_exuari:getPosition()
 			for i=1,defense_platform_count do
 				vx, vy = vectorFromAngleNorth(angle,defense_platform_distance)
-				dp = CpuShip():setTemplate("Defense platform"):setFaction("Exuari"):setPosition(psx + vx,psy + vy):setScannedByFaction("Exuari",true):setCallSign(string.format("EDP%i",i)):setDescription(string.format("%s defense platform %i",station_primary_exuari:getCallSign(),i)):orderRoaming()
+				dp = CpuShip():setTemplate("Defense platform"):setFaction("Exuari"):setPosition(psx + vx,psy + vy):setScannedByFaction("Exuari",true):setCallSign(string.format("EDP%i",i)):setDescription(string.format(_("scienceDescription-ship"), "%s defense platform %i",station_primary_exuari:getCallSign(),i)):orderRoaming()
 				dp.score_value = 50
 				table.insert(npc_fleet["Exuari"],dp)
 				dp:setCommsScript(""):setCommsFunction(commsDefensePlatform)
@@ -2708,7 +2708,7 @@ function generateTerrain()
 			psx, psy = station_primary_ktlitan:getPosition()
 			for i=1,defense_platform_count do
 				vx, vy = vectorFromAngleNorth(angle,defense_platform_distance)
-				dp = CpuShip():setTemplate("Defense platform"):setFaction("Ktlitans"):setPosition(psx + vx,psy + vy):setScannedByFaction("Ktlitans",true):setCallSign(string.format("BDP%i",i)):setDescription(string.format("%s defense platform %i",station_primary_ktlitan:getCallSign(),i)):orderRoaming()
+				dp = CpuShip():setTemplate("Defense platform"):setFaction("Ktlitans"):setPosition(psx + vx,psy + vy):setScannedByFaction("Ktlitans",true):setCallSign(string.format("BDP%i",i)):setDescription(string.format(_("scienceDescription-ship", "%s defense platform %i"),station_primary_ktlitan:getCallSign(),i)):orderRoaming()
 				dp.score_value = 50
 				table.insert(npc_fleet["Ktlitans"],dp)
 				dp:setCommsScript(""):setCommsFunction(commsDefensePlatform)
@@ -9006,17 +9006,17 @@ function update(delta)
 			pickWinner(string.format("End cause: score difference exceeded %i%%",thresh*100))
 		end
 	end
-	local score_banner = string.format("H:%i K:%i",math.floor(stat_list.human.weighted_score),math.floor(stat_list.kraylor.weighted_score))
+	local score_banner = string.format(_("-tabRelay&Operations", "H:%i K:%i"),math.floor(stat_list.human.weighted_score),math.floor(stat_list.kraylor.weighted_score))
 	if exuari_angle ~= nil then
-		score_banner = string.format("%s E:%i",score_banner,math.floor(stat_list.exuari.weighted_score))
+		score_banner = string.format(_("-tabRelay&Operations", "%s E:%i"),score_banner,math.floor(stat_list.exuari.weighted_score))
 	end
 	if ktlitan_angle ~= nil then
-		score_banner = string.format("%s B:%i",score_banner,math.floor(stat_list.ktlitan.weighted_score))
+		score_banner = string.format(_("-tabRelay&Operations", "%s B:%i"),score_banner,math.floor(stat_list.ktlitan.weighted_score))
 	end
 	if game_time_limit > 60 then
-		score_banner = string.format("%s %i:%.2i",score_banner,stat_list.times.game.minutes_left,stat_list.times.game.seconds_left)
+		score_banner = string.format(_("-tabRelay&Operations", "%s %i:%.2i"),score_banner,stat_list.times.game.minutes_left,stat_list.times.game.seconds_left)
 	else
-		score_banner = string.format("%s %i",score_banner,stat_list.times.game.seconds_left)
+		score_banner = string.format(_("-tabRelay&Operations", "%s %i"),score_banner,stat_list.times.game.seconds_left)
 	end
 	if scientist_asset_message == nil then
 		scientist_asset_message = "sent"
@@ -9181,7 +9181,7 @@ function update(delta)
 					p:addToShipLog(warning_message["Ktlitans"],"Red")
 				end
 			end
-			local name_tag_text = string.format("%s in %s",player_name,p:getSectorName())
+			local name_tag_text = string.format(_("-tabRelay&Ops&Helms&Tactical", "%s in %s"),player_name,p:getSectorName())
 			if p:hasPlayerAtPosition("Relay") then
 				p.name_tag = "name_tag"
 				p:addCustomInfo("Relay",p.name_tag,name_tag_text)
@@ -9421,10 +9421,10 @@ function update(delta)
 											tube_index = tube_index + 1
 										until(tube_index >= tube_count)
 										if p:hasPlayerAtPosition("Engineering") then
-											p:addCustomMessage("Engineering","tube_slow_down_message","Tube damage has caused tube load time to increase")
+											p:addCustomMessage("Engineering","tube_slow_down_message",_("damage-msgEngineer", "Tube damage has caused tube load time to increase"))
 										end
 										if p:hasPlayerAtPosition("Engineering+") then
-											p:addCustomMessage("Engineering+","tube_slow_down_message_plus","Tube damage has caused tube load time to increase")
+											p:addCustomMessage("Engineering+","tube_slow_down_message_plus",_("damage-msgEngineer+", "Tube damage has caused tube load time to increase"))
 										end
 									end
 								end	--coolant loss branch
@@ -9535,7 +9535,7 @@ function update(delta)
 								local tube_index = 0
 								repeat
 									if p.normal_tube_load_time[tube_index] ~= p:getTubeLoadTime(tube_index) then
-										dmg_msg = dmg_msg .. "\nWeapon tube load time degraded"
+										dmg_msg = dmg_msg .. _("damage-msgEngineer", "\nWeapon tube load time degraded")
 										break
 									end
 									tube_index = tube_index + 1
@@ -9548,7 +9548,7 @@ function update(delta)
 				end	--engineering damage report button
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.damage_report_plus = "damage_report_plus"
-					p:addCustomButton("Engineering",p.damage_report_plus,_("-buttonEngineer", "Damage Report"),function()
+					p:addCustomButton("Engineering",p.damage_report_plus,_("damage-buttonEngineer", "Damage Report"),function()
 						local dmg_msg = "In addition to the primary systems constantly monitored in engineering, the following secondary systems have also been damaged requiring docking repair facilities:"
 						if not p:getCanLaunchProbe() then
 							dmg_msg = dmg_msg .. "\nProbe launch system"
@@ -9571,7 +9571,7 @@ function update(delta)
 								local tube_index = 0
 								repeat
 									if p.normal_tube_load_time[tube_index] ~= p:getTubeLoadTime(tube_index) then
-										dmg_msg = dmg_msg .. "\nWeapon tube load time degraded"
+										dmg_msg = dmg_msg .. _("damage-msgEngineer+", "\nWeapon tube load time degraded")
 										break
 									end
 									tube_index = tube_index + 1

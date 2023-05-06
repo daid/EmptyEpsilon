@@ -3442,7 +3442,7 @@ function wreckModBatteryMax(x,y)
 end
 function wreckCargo(x,y)
 	local wreck_good = commonGoods[math.random(1,#commonGoods)]
-	local wma = Artifact():setPosition(x,y):setDescriptions(wreck_mod_type[31].desc,string.format("Cargo (type: %s)",wreck_good))
+	local wma = Artifact():setPosition(x,y):setDescriptions(wreck_mod_type[31].desc,string.format(_("scienceDescription-artifact", "Cargo (type: %s)"),wreck_good))
 	wreckModCommonArtifact(wma)
 	wma:onPickup(function(self,p)
 		string.format("")	--serious proton needs global context
@@ -5383,7 +5383,7 @@ function spinalShip(delta)
 				playerSpinStar.spine_charge = false
 				playerSpinStar.spinal_countdown = nil
 			else	--show firing time limit on weapons or tactical consoles
-				spine_status_info = string.format("%s: %i",spine_status_info,math.ceil(playerSpinStar.spinal_countdown))
+				spine_status_info = string.format(_("-tabWeapons&Tactical", "%s: %i"),spine_status_info,math.ceil(playerSpinStar.spinal_countdown))
 				if playerSpinStar:hasPlayerAtPosition("Weapons") then
 					playerSpinStar.spine_status_info = "spine_status_info"
 					playerSpinStar:addCustomInfo("Weapons",playerSpinStar.spine_status_info,spine_status_info)
@@ -5424,7 +5424,7 @@ function spinalShip(delta)
 					playerSpinStar.spine_charge = true
 					playerSpinStar.charge_countdown = nil
 				else	--show charge time on weapons or tactical consoles
-					spine_status_info = string.format("%s Charging: %i",spine_status_info,math.ceil(playerSpinStar.charge_countdown))
+					spine_status_info = string.format(_("-tabWeapons", "%s Charging: %i"),spine_status_info,math.ceil(playerSpinStar.charge_countdown))
 					if playerSpinStar:hasPlayerAtPosition("Weapons") then
 						playerSpinStar.spine_status_info = "spine_status_info"
 						playerSpinStar:addCustomInfo("Weapons",playerSpinStar.spine_status_info,spine_status_info)
@@ -13350,7 +13350,7 @@ function checkContinuum(delta)
 						resetContinuum(p)
 					end
 				else
-					local timer_display = string.format("Disruption %i",math.floor(p.continuum_timer))
+					local timer_display = string.format(_("-tabRelay&Operations", "Disruption %i"),math.floor(p.continuum_timer))
 					if p:hasPlayerAtPosition("Relay") then
 						p.continuum_timer_display = "continuum_timer_display"
 						p:addCustomInfo("Relay",p.continuum_timer_display,timer_display)
@@ -14078,21 +14078,21 @@ function expediteDockCheck(delta, p)
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.expedite_dock_timer_info = "expedite_dock_timer_info"
-					p:addCustomInfo("Relay",p.expedite_dock_timer_info,"Fast Dock Expired")						
+					p:addCustomInfo("Relay",p.expedite_dock_timer_info,_("-tabRelay", "Fast Dock Expired"))						
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.expedite_dock_timer_info_ops = "expedite_dock_timer_info_ops"
-					p:addCustomInfo("Relay",p.expedite_dock_timer_info_ops,"Fast Dock Expired")						
+					p:addCustomInfo("Operations",p.expedite_dock_timer_info_ops,_("-tabOperations", "Fast Dock Expired"))						
 				end
 			end
 		else	--timer not expired
-			local expedite_dock_timer_status = "Fast Dock"
+			local expedite_dock_timer_status = _("-tabRelay&Operations", "Fast Dock")
 			local expedite_dock_timer_minutes = math.floor(p.expedite_dock_timer / 60)
 			local expedite_dock_timer_seconds = math.floor(p.expedite_dock_timer % 60)
 			if expedite_dock_timer_minutes <= 0 then
-				expedite_dock_timer_status = string.format("%s %i",expedite_dock_timer_status,expedite_dock_timer_seconds)
+				expedite_dock_timer_status = string.format(_("-tabRelay&Operations", "%s %i"),expedite_dock_timer_status,expedite_dock_timer_seconds)
 			else
-				expedite_dock_timer_status = string.format("%s %i:%.2i",expedite_dock_timer_status,expedite_dock_timer_minutes,expedite_dock_timer_seconds)
+				expedite_dock_timer_status = string.format(_("-tabRelay&Operations", "%s %i:%.2i"),expedite_dock_timer_status,expedite_dock_timer_minutes,expedite_dock_timer_seconds)
 			end
 			if p:hasPlayerAtPosition("Relay") then
 				p.expedite_dock_timer_info = "expedite_dock_timer_info"
@@ -14296,7 +14296,7 @@ function healthCheck(delta, p)
 		healthCheckTimer = delta + healthCheckTimerInterval
 		local stat_list = gatherStats()
 		resetBanner(stat_list.human.evaluation,stat_list.kraylor.evaluation)
-		local eval_status = string.format("F:%.1f%% E:%.1f%% D:%.1f%%",stat_list.human.evaluation,stat_list.kraylor.evaluation,stat_list.human.evaluation-stat_list.kraylor.evaluation)
+		local eval_status = string.format(_("-tabRelay&Operations", "F:%.1f%% E:%.1f%% D:%.1f%%"),stat_list.human.evaluation,stat_list.kraylor.evaluation,stat_list.human.evaluation-stat_list.kraylor.evaluation)
 		for pidx=1,32 do
 			local p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
@@ -14651,10 +14651,10 @@ function updateCoolantGivenPlayer(p, delta)
 				end
 			end
 		else
-			gather_coolant_status = string.format(_("coolant-tabEngineer", "Deploying Collectors %i"),math.ceil(p.deploy_coolant_timer - delta))
+			gather_coolant_status = string.format(_("coolant-tabEngineer&Engineer+", "Deploying Collectors %i"),math.ceil(p.deploy_coolant_timer - delta))
 		end
 	else
-		gather_coolant_status = string.format(_("coolant-tabEngineer", "Configuring Collectors %i"),math.ceil(p.configure_coolant_timer - delta))
+		gather_coolant_status = string.format(_("coolant-tabEngineer&Engineer+", "Configuring Collectors %i"),math.ceil(p.configure_coolant_timer - delta))
 	end
 	if p:hasPlayerAtPosition("Engineering") then
 		p.gather_coolant = "gather_coolant"
@@ -14662,7 +14662,7 @@ function updateCoolantGivenPlayer(p, delta)
 	end
 	if p:hasPlayerAtPosition("Engineering+") then
 		p.gather_coolant_plus = "gather_coolant_plus"
-		p:addCustomInfo("Engineering",p.gather_coolant_plus,gather_coolant_status)
+		p:addCustomInfo("Engineering+",p.gather_coolant_plus,gather_coolant_status)
 	end
 end
 function getCoolantGivenPlayer(p)
@@ -18133,7 +18133,7 @@ function checkForMining(delta, p)
 							end
 							if p:hasPlayerAtPosition("Weapons") then
 								p.mining_timer_info = "mining_timer_info"
-								p:addCustomInfo("Weapons",p.mining_timer_info,string.format("Mining %i",mining_seconds))
+								p:addCustomInfo("Weapons",p.mining_timer_info,string.format(_("mining-tabWeapons", "Mining %i"),mining_seconds))
 							end
 						end
 					else	--mining not in progress
@@ -19040,13 +19040,13 @@ function updateInner(delta)
 			local timer_seconds = 0
 			if p.cm_boost_timer ~= nil then
 				p.cm_boost_timer = p.cm_boost_timer - delta
-				timer_status = "C.M. Boost"
+				timer_status = _("-tabHelms&Tactical", "C.M. Boost")
 				timer_minutes = math.floor(p.cm_boost_timer / 60)
 				timer_seconds = math.floor(p.cm_boost_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.cm_boost_timer_info = "cm_boost_timer_info"
@@ -19084,13 +19084,13 @@ function updateInner(delta)
 			end
 			if p.cm_strafe_timer ~= nil then
 				p.cm_strafe_timer = p.cm_strafe_timer - delta
-				timer_status = "C.M. Boost"
+				timer_status = _("-tabHelms&Tactical", "C.M. Boost")
 				timer_minutes = math.floor(p.cm_strafe_timer / 60)
 				timer_seconds = math.floor(p.cm_strafe_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.cm_strafe_timer_info = "cm_strafe_timer_info"
@@ -19128,13 +19128,13 @@ function updateInner(delta)
 			end
 			if p.beam_damage_timer ~= nil then
 				p.beam_damage_timer = p.beam_damage_timer - delta
-				timer_status = "Beam Damage"
+				timer_status = _("-tabWeapons&Tactical", "Beam Damage")
 				timer_minutes = math.floor(p.beam_damage_timer / 60)
 				timer_seconds = math.floor(p.beam_damage_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabWeapons&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabWeapons&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Weapons") then
 					p.beam_damage_timer_info = "beam_damage_timer_info"
@@ -19176,13 +19176,13 @@ function updateInner(delta)
 			end
 			if p.beam_cycle_timer ~= nil then
 				p.beam_cycle_timer = p.beam_cycle_timer - delta
-				timer_status = "Beam Cycle"
+				timer_status = _("-tabWeapons&Tactical", "Beam Cycle")
 				timer_minutes = math.floor(p.beam_cycle_timer / 60)
 				timer_seconds = math.floor(p.beam_cycle_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabWeapons&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabWeapons&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Weapons") then
 					p.beam_cycle_timer_info = "beam_cycle_timer_info"
@@ -19224,13 +19224,13 @@ function updateInner(delta)
 			end
 			if p.impulse_timer ~= nil then
 				p.impulse_timer = p.impulse_timer - delta
-				timer_status = "Impulse Speed"
+				timer_status = _("-tabHelms&Tactical", "Impulse Speed")
 				timer_minutes = math.floor(p.impulse_timer / 60)
 				timer_seconds = math.floor(p.impulse_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.impulse_timer_info = "impulse_timer_info"
@@ -19268,13 +19268,13 @@ function updateInner(delta)
 			end
 			if p.warp_timer ~= nil then
 				p.warp_timer = p.warp_timer - delta
-				timer_status = "Warp Speed"
+				timer_status = _("-tabHelms&Tactical", "Warp Speed")
 				timer_minutes = math.floor(p.warp_timer / 60)
 				timer_seconds = math.floor(p.warp_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.warp_timer_info = "warp_timer_info"
@@ -19312,13 +19312,13 @@ function updateInner(delta)
 			end
 			if p.jump_timer ~= nil then
 				p.jump_timer = p.jump_timer - delta
-				timer_status = "Jump Range"
+				timer_status = _("-tabHelms&Tactical", "Jump Range")
 				timer_minutes = math.floor(p.jump_timer / 60)
 				timer_seconds = math.floor(p.jump_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.jump_timer_info = "jump_timer_info"
@@ -19357,13 +19357,13 @@ function updateInner(delta)
 			end
 			if p.shield_timer ~= nil then
 				p.shield_timer = p.shield_timer - delta
-				timer_status = "Shield Capacity"
+				timer_status = _("-tabWeapons&Tactical", "Shield Capacity")
 				timer_minutes = math.floor(p.shield_timer / 60)
 				timer_seconds = math.floor(p.shield_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabWeapons&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabWeapons&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Weapons") then
 					p.shield_timer_info = "shield_timer_info"
@@ -19406,13 +19406,13 @@ function updateInner(delta)
 			end	
 			if p.maneuver_timer ~= nil then
 				p.maneuver_timer = p.maneuver_timer - delta
-				timer_status = "Spin Speed"
+				timer_status = _("-tabHelms&Tactical", "Spin Speed")
 				timer_minutes = math.floor(p.maneuver_timer / 60)
 				timer_seconds = math.floor(p.maneuver_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.maneuver_timer_info = "maneuver_timer_info"
@@ -19450,13 +19450,13 @@ function updateInner(delta)
 			end
 			if p.battery_timer ~= nil then
 				p.battery_timer = p.battery_timer - delta
-				timer_status = "Battery Capacity"
+				timer_status = _("-tabEngineer&Engineer+", "Battery Capacity")
 				timer_minutes = math.floor(p.battery_timer / 60)
 				timer_seconds = math.floor(p.battery_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabEngineer&Engineer+", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabEngineer&Engineer+", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Engineering") then
 					p.battery_timer_info = "battery_timer_info"

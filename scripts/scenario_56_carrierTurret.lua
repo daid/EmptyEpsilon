@@ -3899,22 +3899,22 @@ function fillStationBrains()
 					tradeString = ""
 					stationTrades = false
 					if tradeMedicine[stationList[sti]] ~= nil then
-						tradeString = " and will trade it for medicine"
+						tradeString = _("trade-comms", " and will trade it for medicine")
 						stationTrades = true
 					end
 					if tradeFood[stationList[sti]] ~= nil then
 						if stationTrades then
-							tradeString = tradeString .. " or food"
+							tradeString = tradeString .. _("trade-comms", " or food")
 						else
-							tradeString = tradeString .. " and will trade it for food"
+							tradeString = tradeString .. _("trade-comms", " and will trade it for food")
 							stationTrades = true
 						end
 					end
 					if tradeLuxury[stationList[sti]] ~= nil then
 						if stationTrades then
-							tradeString = tradeString .. " or luxury"
+							tradeString = tradeString .. _("trade-comms", " or luxury")
 						else
-							tradeString = tradeString .. " and will trade it for luxury"
+							tradeString = tradeString .. _("trade-comms", " and will trade it for luxury")
 						end
 					end
 					table.insert(comms_target.goodsKnowledgeTrade,tradeString)

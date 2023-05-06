@@ -6056,9 +6056,9 @@ function checkDoomsdayEvents(delta)
 		local doomsday_seconds = math.floor(doomsdayTimer % 60)
 		doomsday_status = _("doomsday-tabEngineer&Engineer+", "Doomsday Device:")
 		if doomsday_minutes <= 0 then
-			doomsday_status = string.format("%s %i",doomsday_status,doomsday_seconds)
+			doomsday_status = string.format(_("doomsday-tabEngineer&Engineer+", "%s %i"),doomsday_status,doomsday_seconds)
 		else
-			doomsday_status = string.format("%s %i:%.2i",doomsday_status,doomsday_minutes,doomsday_seconds)
+			doomsday_status = string.format(_("doomsday-tabEngineer&Engineer+", "%s %i:%.2i"),doomsday_status,doomsday_minutes,doomsday_seconds)
 		end
 	end
 	for pidx=1,8 do
@@ -6301,9 +6301,9 @@ function checkSickArlenianAdmiralEvents(delta)
 	local death_seconds = math.floor(admiralTimeToLive % 60)
 	local admiral_status = _("doctor-tabScience&Operations", "Koshenz Death:")
 	if death_minutes <= 0 then
-		admiral_status = string.format("%s %i",admiral_status,death_seconds)
+		admiral_status = string.format(_("doctor-tabScience&Operations", "%s %i"),admiral_status,death_seconds)
 	else
-		admiral_status = string.format("%s %i:%.2i",admiral_status,death_minutes,death_seconds)
+		admiral_status = string.format(_("doctor-tabScience&Operations", "%s %i:%.2i"),admiral_status,death_minutes,death_seconds)
 	end
 	for pidx=1,8 do
 		local p = getPlayerShip(pidx)

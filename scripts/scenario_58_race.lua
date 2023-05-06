@@ -3445,7 +3445,7 @@ function update(delta)
 							end
 						end
 					end
-					local name_tag_text = string.format("%s in %s",p5:getCallSign(),p5:getSectorName())
+					local name_tag_text = string.format(_("-tabHelms&Tactical&Singlepilot", "%s in %s"),p5:getCallSign(),p5:getSectorName())
 					if p5:hasPlayerAtPosition("Helms") then
 						p5.name_tag_helm = "name_tag_helm"
 						p5:addCustomInfo("Helms",p5.name_tag_helm,name_tag_text)
@@ -3466,7 +3466,7 @@ function update(delta)
 							else
 								lapString = "laps"
 							end
-							p5:addToShipLog(string.format("Waypoint 2 met. Go to waypoint 3. Leg took %f seconds. You have completed %i %s.",p5.legtimer,p5.laps,lapString),"Magenta")
+							p5:addToShipLog(string.format(_("-shipLog", "Waypoint 2 met. Go to waypoint 3. Leg took %f seconds. You have completed %i %s."),p5.legtimer,p5.laps,lapString),"Magenta")
 							p5.legtimer = 0
 						end
 					elseif p5.goal == 3 then
@@ -3477,7 +3477,7 @@ function update(delta)
 							else
 								lapString = "laps"
 							end
-							p5:addToShipLog(string.format("Waypoint 3 met. Go to waypoint 4. Leg took %f seconds. You have completed %i %s.",p5.legtimer,p5.laps,lapString),"Magenta")
+							p5:addToShipLog(string.format(_("-shipLog", "Waypoint 3 met. Go to waypoint 4. Leg took %f seconds. You have completed %i %s."),p5.legtimer,p5.laps,lapString),"Magenta")
 							p5.legtimer = 0
 						end
 					elseif p5.goal == 4 then
@@ -3488,7 +3488,7 @@ function update(delta)
 							else
 								lapString = "laps"
 							end
-							p5:addToShipLog(string.format("Waypoint 4 met. Go to waypoint 1. Leg took %f seconds. You have completed %i %s.",p5.legtimer,p5.laps,lapString),"Magenta")
+							p5:addToShipLog(string.format(_("-shipLog", "Waypoint 4 met. Go to waypoint 1. Leg took %f seconds. You have completed %i %s."),p5.legtimer,p5.laps,lapString),"Magenta")
 							p5.legtimer = 0
 						end
 					elseif p5.goal == 1 then
@@ -3496,7 +3496,7 @@ function update(delta)
 							p5.laps = p5.laps + 1
 							if p5.laps >= 3 then
 								p5.raceTime = raceTimer
-								p5:addToShipLog(string.format("Completed race. Race time in seconds: %f",p5.raceTime),"Magenta")
+								p5:addToShipLog(string.format(_("-shipLog", "Completed race. Race time in seconds: %f"),p5.raceTime),"Magenta")
 							else
 								p5.goal = 2
 								if p5.laps == 1 then
@@ -3504,7 +3504,7 @@ function update(delta)
 								else
 									lapString = "laps"
 								end
-								p5:addToShipLog(string.format("Waypoint 1 met. Go to waypoint 2. Leg took %f seconds. You have completed %i %s. Lap took %f seconds.",p5.legtimer,p5.laps,lapString,p5.laptimer),"Magenta")
+								p5:addToShipLog(string.format(_("-shipLog", "Waypoint 1 met. Go to waypoint 2. Leg took %f seconds. You have completed %i %s. Lap took %f seconds."),p5.legtimer,p5.laps,lapString,p5.laptimer),"Magenta")
 								p5.laptimer = 0
 								p5.legtimer = 0
 							end

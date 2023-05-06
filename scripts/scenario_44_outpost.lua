@@ -14891,7 +14891,7 @@ function checkContinuum(delta)
 						resetContinuum(p)
 					end
 				else
-					local timer_display = string.format(_("tabRelay","Disruption %i"),math.floor(p.continuum_timer))
+					local timer_display = string.format(_("-tabRelay&Operations", "Disruption %i"),math.floor(p.continuum_timer))
 					if p:hasPlayerAtPosition("Relay") then
 						p.continuum_timer_display = "continuum_timer_display"
 						p:addCustomInfo("Relay",p.continuum_timer_display,timer_display,1)
@@ -18909,9 +18909,9 @@ function updatePlayerProximityScan(p)
 end
 function updatePlayerTubeSizeBanner(p)
 	if p.tube_size ~= nil then
-		local tube_size_banner = string.format(_("tabWeapons","%s tubes: %s"),p:getCallSign(),p.tube_size)
+		local tube_size_banner = string.format(_("-tabWeapons&Tactical", "%s tubes: %s"),p:getCallSign(),p.tube_size)
 		if #p.tube_size == 1 then
-			tube_size_banner = string.format(_("tabWeapons","%s tube: %s"),p:getCallSign(),p.tube_size)
+			tube_size_banner = string.format(_("-tabWeapons&Tactical", "%s tube: %s"),p:getCallSign(),p.tube_size)
 		end
 		p.tube_sizes_wea = "tube_sizes_wea"
 		p:addCustomInfo("Weapons",p.tube_sizes_wea,tube_size_banner,1)

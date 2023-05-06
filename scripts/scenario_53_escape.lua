@@ -4799,9 +4799,9 @@ function checkForSuffocationOnFighter(delta)
 		local suffocation_label_minutes = math.floor(suffocation_timer / 60)
 		local suffocation_label_seconds = math.floor(suffocation_timer % 60)
 		if suffocation_label_minutes <= 0 then
-			suffocation_label = string.format("%s %i",suffocation_label,suffocation_label_seconds)
+			suffocation_label = string.format(_("airTimer-tabScience&Eng&Eng+&Ops", "%s %i"),suffocation_label,suffocation_label_seconds)
 		else
-			suffocation_label = string.format("%s %i:%.2i",suffocation_label,suffocation_label_minutes,suffocation_label_seconds)
+			suffocation_label = string.format(_("airTimer-tabScience&Eng&Eng+&Ops", "%s %i:%.2i"),suffocation_label,suffocation_label_minutes,suffocation_label_seconds)
 		end
 		if playerFighter:hasPlayerAtPosition("Engineering") then
 			if playerFighter.suffocation_message == nil then

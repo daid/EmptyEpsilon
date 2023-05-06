@@ -10554,7 +10554,7 @@ function update(delta)
 			if shield_count > 1 then
 				shield_label = "WS"
 			end
-			home_station_health = string.format(_("homeStationHealth-tabRelay&Ops", "%s %s:%i%% H:%i%%"),homeStation:getCallSign(),shield_label,math.floor(lowest_shield/shield_max*100),math.floor(homeStation:getHull()/homeStation:getHullMax()*100))
+			home_station_health = string.format(_("homeStationHealth-tabRelay&Operations", "%s %s:%i%% H:%i%%"),homeStation:getCallSign(),shield_label,math.floor(lowest_shield/shield_max*100),math.floor(homeStation:getHull()/homeStation:getHullMax()*100))
 		else
 			home_station_health = nil
 		end

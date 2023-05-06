@@ -10524,7 +10524,7 @@ function horizonScienceMessage(delta)
 			end
 		end
 	else
-		grawp_status = _("research-", "Grawp out of range")
+		grawp_status = _("research-tabHelms&Tact&Science&Ops", "Grawp out of range")
 		if scanGrawpButton then
 			if horizonScienceScanButton == "scan button" then
 				phScan:removeCustom(horizonScienceScanButton)
@@ -11169,9 +11169,9 @@ function update(delta)
 		local game_minutes = math.floor(gameTimeLimit / 60)
 		local game_seconds = math.floor(gameTimeLimit % 60)
 		if game_minutes <= 0 then
-			game_time_status = string.format(_("%s %i"),game_time_status,game_seconds)
+			game_time_status = string.format(_("-tabRelay&Operations", "%s %i"),game_time_status,game_seconds)
 		else
-			game_time_status = string.format(_("%s %i:%.2i"),game_time_status,game_minutes,game_seconds)
+			game_time_status = string.format(_("-tabRelay&Operations", "%s %i:%.2i"),game_time_status,game_minutes,game_seconds)
 		end
 		for pidx=1,8 do
 			local p = getPlayerShip(pidx)
