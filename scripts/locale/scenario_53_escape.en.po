@@ -1834,7 +1834,7 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:3980
-msgctxt "ammo-comms"
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr ""
 
@@ -2120,7 +2120,7 @@ msgctxt "trade-comms"
 msgid " and will trade it for luxury"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4367
+#: scripts/scenario_53_escape.lua:4367 scripts/scenario_53_escape.lua:4657
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
@@ -2362,11 +2362,6 @@ msgctxt "trade-comms"
 msgid "Where are you headed?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4657
-msgctxt "trade-comms"
-msgid "What do you want?"
-msgstr ""
-
 #: scripts/scenario_53_escape.lua:4660
 #, lua-format
 msgctxt "trade-comms"
@@ -2400,6 +2395,18 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:4798
 msgctxt "airTimer-tabScience&Eng&Eng+&Ops"
 msgid "Suffocation"
+msgstr ""
+
+#: scripts/scenario_53_escape.lua:4802
+#, lua-format
+msgctxt "airTimer-tabScience&Eng&Eng+&Ops"
+msgid "%s %i"
+msgstr ""
+
+#: scripts/scenario_53_escape.lua:4804
+#, lua-format
+msgctxt "airTimer-tabScience&Eng&Eng+&Ops"
+msgid "%s %i:%.2i"
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:4809
@@ -2448,12 +2455,12 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:4886
-msgctxt "transfer-buttonEngineer"
+msgctxt "crewTransfer-buttonEngineer"
 msgid "Transfer to Repulse"
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:4890
-msgctxt "transfer-buttonEngineer+"
+msgctxt "crewTransfer-buttonEngineer+"
 msgid "Transfer to Repulse"
 msgstr ""
 
@@ -2474,12 +2481,12 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:4966
-msgctxt "crewImport-buttonWeapons"
+msgctxt "crewTransfer-buttonWeapons"
 msgid "Return Transport"
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:4972
-msgctxt "crewImport-buttonTactical"
+msgctxt "crewTransfer-buttonTactical"
 msgid "Return Transport"
 msgstr ""
 
@@ -2724,51 +2731,51 @@ msgid "Boris Junk Yard"
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:5732 scripts/scenario_53_escape.lua:5781
-msgctxt "msgEngineer"
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on reactor"
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:5741 scripts/scenario_53_escape.lua:5790
-msgctxt "msgEngineer"
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on beam weapons"
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:5750 scripts/scenario_53_escape.lua:5799
-msgctxt "msgEngineer"
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on maneuver"
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:5759 scripts/scenario_53_escape.lua:5817
-msgctxt "msgEngineer"
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on impulse engines"
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:5768
-msgctxt "msgEngineer"
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on shields"
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:5808
-msgctxt "msgEngineer"
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on missile weapons"
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:5826
-msgctxt "msgEngineer"
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on warp drive"
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:5835
-msgctxt "msgEngineer"
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on jump drive"
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:5844
-msgctxt "msgEngineer"
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on front shield"
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:5853
-msgctxt "msgEngineer"
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on rear shield"
 msgstr ""

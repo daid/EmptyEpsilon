@@ -2310,7 +2310,7 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_49_allies.lua:4316
-msgctxt "ammo-comms"
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr ""
 
@@ -2572,25 +2572,25 @@ msgid "Station %s in sector %s has %s%s"
 msgstr ""
 
 #: scripts/scenario_49_allies.lua:4592
-msgctxt "station-comms"
+msgctxt "stationAssist-comms"
 msgid "Report status"
 msgstr ""
 
 #: scripts/scenario_49_allies.lua:4593
 #, lua-format
-msgctxt "station-comms"
+msgctxt "stationAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr ""
 
 #: scripts/scenario_49_allies.lua:4596
 #, lua-format
-msgctxt "station-comms"
+msgctxt "stationAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr ""
 
 #: scripts/scenario_49_allies.lua:4599
 #, lua-format
-msgctxt "station-comms"
+msgctxt "stationAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr ""
 
@@ -2614,13 +2614,13 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:4660 scripts/scenario_49_allies.lua:4681
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "Waypoint %i"
+msgid "Waypoint %d"
 msgstr ""
 
 #: scripts/scenario_49_allies.lua:4621
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "We have dispatched a supply ship toward waypoint %i"
+msgid "We have dispatched a supply ship toward waypoint %d"
 msgstr ""
 
 #: scripts/scenario_49_allies.lua:4623 scripts/scenario_49_allies.lua:4646
@@ -2651,7 +2651,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:4686
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "We have dispatched %s to assist at waypoint %i"
+msgid "We have dispatched %s to assist at waypoint %d"
 msgstr ""
 
 #: scripts/scenario_49_allies.lua:4654
@@ -2691,7 +2691,7 @@ msgctxt "trade-comms"
 msgid " and will trade it for luxury"
 msgstr ""
 
-#: scripts/scenario_49_allies.lua:4790
+#: scripts/scenario_49_allies.lua:4790 scripts/scenario_49_allies.lua:5128
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
@@ -2719,13 +2719,13 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:4801
 #, lua-format
 msgctxt "shipAssist-comms"
-msgid "Defend waypoint %i"
+msgid "Defend waypoint %d"
 msgstr ""
 
 #: scripts/scenario_49_allies.lua:4803
 #, lua-format
 msgctxt "shipAssist-comms"
-msgid "We are heading to assist at waypoint %i."
+msgid "We are heading to assist at waypoint %d."
 msgstr ""
 
 #: scripts/scenario_49_allies.lua:4810
@@ -2976,11 +2976,6 @@ msgctxt "trade-comms"
 msgid "Insufficient luxury to trade"
 msgstr ""
 
-#: scripts/scenario_49_allies.lua:5128
-msgctxt "trade-comms"
-msgid "What do you want?"
-msgstr ""
-
 #: scripts/scenario_49_allies.lua:5131
 #, lua-format
 msgctxt "trade-comms"
@@ -3159,6 +3154,18 @@ msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "Doomsday Device Built"
 msgstr ""
 
+#: scripts/scenario_49_allies.lua:6059
+#, lua-format
+msgctxt "doomsday-tabEngineer&Engineer+"
+msgid "%s %i"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6061
+#, lua-format
+msgctxt "doomsday-tabEngineer&Engineer+"
+msgid "%s %i:%.2i"
+msgstr ""
+
 #: scripts/scenario_49_allies.lua:6089
 msgctxt "doomsday-msgMainscreen"
 msgid "All human stations destroyed"
@@ -3233,6 +3240,18 @@ msgctxt "doctor-tabScience&Operations"
 msgid "Koshenz Death:"
 msgstr ""
 
+#: scripts/scenario_49_allies.lua:6304
+#, lua-format
+msgctxt "doctor-tabScience&Operations"
+msgid "%s %i"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6306
+#, lua-format
+msgctxt "doctor-tabScience&Operations"
+msgid "%s %i:%.2i"
+msgstr ""
+
 #: scripts/scenario_49_allies.lua:6331
 msgctxt "BespinGoal-shipLog"
 msgid ""
@@ -3276,12 +3295,12 @@ msgid "Mining station Cloud City destroyed"
 msgstr ""
 
 #: scripts/scenario_49_allies.lua:6548
-msgctxt "msgEngineer"
+msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr ""
 
 #: scripts/scenario_49_allies.lua:6552
-msgctxt "msgEngineer+"
+msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr ""
 

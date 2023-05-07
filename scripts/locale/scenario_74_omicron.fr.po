@@ -377,8 +377,8 @@ msgstr "Version %s"
 
 #: scripts/scenario_74_omicron.lua:919 scripts/scenario_74_omicron.lua:928
 #: scripts/scenario_74_omicron.lua:942
-#, lua-format
-msgctxt "buttonGM"
+#, fuzzy, lua-format
+msgctxt "msgGM"
 msgid ""
 "Scenario version %s\n"
 " LUA version %s"
@@ -423,8 +423,8 @@ msgid "Mission Stations"
 msgstr "Stations de la mission"
 
 #: scripts/scenario_74_omicron.lua:948
-#, lua-format
-msgctxt "buttonGM"
+#, fuzzy, lua-format
+msgctxt "msgGM"
 msgid ""
 "This is spoiler information. Consider carefully before you reveal this to "
 "the rest of the players. If you feel you have to reveal this information, I "
@@ -484,6 +484,12 @@ msgctxt "buttonGM"
 msgid "Quixotic"
 msgstr "Chimérique"
 
+#: scripts/scenario_74_omicron.lua:963 scripts/scenario_74_omicron.lua:982
+#, fuzzy, lua-format
+msgctxt "buttonGM"
+msgid "%s %.1f"
+msgstr "%s %s"
+
 #: scripts/scenario_74_omicron.lua:975
 msgctxt "buttonGM"
 msgid "-From Difficulty"
@@ -535,26 +541,32 @@ msgctxt "buttonGM"
 msgid "Super Hero"
 msgstr "Justicier de l'espace"
 
+#: scripts/scenario_74_omicron.lua:1033
+#, fuzzy, lua-format
+msgctxt "buttonGM"
+msgid "%s %i"
+msgstr "%s %s"
+
 #: scripts/scenario_74_omicron.lua:1045 scripts/scenario_74_omicron.lua:1130
 msgctxt "buttonGM"
 msgid "-Main"
 msgstr "- Précedent"
 
 #: scripts/scenario_74_omicron.lua:1053
-#, lua-format
-msgctxt "stationReport-buttonGM"
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
 msgid "%s %s"
 msgstr "%s %s"
 
 #: scripts/scenario_74_omicron.lua:1054
-#, lua-format
-msgctxt "stationReport-buttonGM"
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
 msgid "%s %s  %s  %s  Friendliness:%s"
 msgstr "%s %s  %s  %s  Bienveillance :%s"
 
 #: scripts/scenario_74_omicron.lua:1055
-#, lua-format
-msgctxt "stationReport-buttonGM"
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "Shares Energy: %s,  Repairs Hull: %s,  Restocks Scan Probes: %s"
@@ -563,8 +575,8 @@ msgstr ""
 "Répartition d'énergie : %s, coque réparée : %s, sondes réapprovisionnées : %s"
 
 #: scripts/scenario_74_omicron.lua:1056
-#, lua-format
-msgctxt "stationReport-buttonGM"
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "Fix Probes: %s,  Fix Hack: %s,  Fix Scan: %s,  Fix Combat Maneuver: %s,  Fix "
@@ -575,8 +587,8 @@ msgstr ""
 "réparée : %s, autodestruction réparée :%s, tubes lents réparés : %s"
 
 #: scripts/scenario_74_omicron.lua:1082
-#, lua-format
-msgctxt "stationReport-buttonGM"
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "Homing: %s %s,   Nuke: %s %s,   Mine: %s %s,   EMP: %s %s,   HVLI: %s %s"
@@ -585,8 +597,8 @@ msgstr ""
 "Homing : %s %s, Nuke : %s %s, Mine : %s %s, EMP : %s %s, HVLI : %s %s"
 
 #: scripts/scenario_74_omicron.lua:1084
-#, lua-format
-msgctxt "stationReport-buttonGM"
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "Services and their costs:"
@@ -594,9 +606,17 @@ msgstr ""
 "%s\n"
 "Services et leurs coûts :"
 
+#: scripts/scenario_74_omicron.lua:1086
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"      %s: %s"
+msgstr "     %s : %i\n"
+
 #: scripts/scenario_74_omicron.lua:1089
-#, lua-format
-msgctxt "stationReport-buttonGM"
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "      jump overcharge: 10"
@@ -605,8 +625,8 @@ msgstr ""
 "      Boost téléportation : 10"
 
 #: scripts/scenario_74_omicron.lua:1092
-#, lua-format
-msgctxt "stationReport-buttonGM"
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "Goods:"
@@ -615,8 +635,8 @@ msgstr ""
 "Marchandises :"
 
 #: scripts/scenario_74_omicron.lua:1094
-#, lua-format
-msgctxt "stationReport-buttonGM"
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "    Sell:"
@@ -625,8 +645,8 @@ msgstr ""
 "    Vendre :"
 
 #: scripts/scenario_74_omicron.lua:1096
-#, lua-format
-msgctxt "stationReport-buttonGM"
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "        %s: Cost:%s   Quantity:%s"
@@ -635,8 +655,8 @@ msgstr ""
 "        %s : Coût : %s Quantité : %s"
 
 #: scripts/scenario_74_omicron.lua:1100
-#, lua-format
-msgctxt "stationReport-buttonGM"
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "    Trade:"
@@ -644,9 +664,17 @@ msgstr ""
 "%s\n"
 "    Échanger :"
 
+#: scripts/scenario_74_omicron.lua:1102 scripts/scenario_74_omicron.lua:1108
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"        %s: %s"
+msgstr "     %s : %i\n"
+
 #: scripts/scenario_74_omicron.lua:1106
-#, lua-format
-msgctxt "stationReport-buttonGM"
+#, fuzzy, lua-format
+msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "    Buy:"
@@ -655,9 +683,18 @@ msgstr ""
 "    Acheter :"
 
 #: scripts/scenario_74_omicron.lua:1120 scripts/scenario_74_omicron.lua:1124
-msgctxt "stationReport-buttonGM"
+#, fuzzy
+msgctxt "stationReport-msgGM"
 msgid "No applicable stations. Reports useless. No action taken"
 msgstr "Aucune station applicable. Rapports inutiles. Pas d'action prise."
+
+#: scripts/scenario_74_omicron.lua:1199
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Player ship %s's template type (%s) could not be found in table "
+"PlayerShipStats"
+msgstr ""
 
 #: scripts/scenario_74_omicron.lua:1805
 #, lua-format
@@ -769,13 +806,15 @@ msgid "Tip: make lemons an integral part of your diet"
 msgstr "Astuce : faites du citron une partie intégrante de votre alimentation"
 
 #: scripts/scenario_74_omicron.lua:3022
-msgctxt "msgScience"
+#, fuzzy
+msgctxt "artifact-msgScience"
 msgid "The unscanned artifact we just picked up has fried our scanners"
 msgstr ""
 "L'artefact non scanné que nous venons de récupérer a grillé nos scanners."
 
 #: scripts/scenario_74_omicron.lua:3024
-msgctxt "msgOperations"
+#, fuzzy
+msgctxt "artifact-msgOperations"
 msgid "The unscanned artifact we just picked up has fried our scanners"
 msgstr ""
 "L'artefact non scanné que nous venons de récupérer a grillé nos scanners."
@@ -796,8 +835,8 @@ msgid "Source of unusual emanations"
 msgstr "Source d'émanations inhabituelles"
 
 #: scripts/scenario_74_omicron.lua:3094
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "upgrade-msgEngineer"
 msgid ""
 "With the %s just acquired, you improve your impulse engine top speed by 13%%"
 msgstr ""
@@ -805,8 +844,8 @@ msgstr ""
 "de vos moteurs à impulsion de 13 %%."
 
 #: scripts/scenario_74_omicron.lua:3110
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "upgrade-msgEngineer"
 msgid ""
 "With the %s just acquired, you improve your shield charge capacity top speed "
 "by 11%%"
@@ -815,8 +854,8 @@ msgstr ""
 "rechargement de vos boucliers de 11 %%."
 
 #: scripts/scenario_74_omicron.lua:3127
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "upgrade-msgEngineer"
 msgid ""
 "With the %s just acquired, you improve your weapon tube load time by 33%%"
 msgstr ""
@@ -844,8 +883,8 @@ msgid "rear shield"
 msgstr "boucliers arrière"
 
 #: scripts/scenario_74_omicron.lua:3174
-#, lua-format
-msgctxt "msgScience"
+#, fuzzy, lua-format
+msgctxt "energyField-msgScience&Operations"
 msgid ""
 "Sensors just picked up an energy field. The ship must have triggered it. It "
 "seems to impact our %s and possibly other ship systems. The ship computers "
@@ -858,14 +897,14 @@ msgstr ""
 "sur les écrans Science et Communications."
 
 #: scripts/scenario_74_omicron.lua:3230
-#, lua-format
-msgctxt "tabWeapons"
+#, fuzzy, lua-format
+msgctxt "-tabWeapons&Tactical"
 msgid "%s tubes: %s"
 msgstr "%s tubes : %s"
 
 #: scripts/scenario_74_omicron.lua:3232
-#, lua-format
-msgctxt "tabWeapons"
+#, fuzzy, lua-format
+msgctxt "-tabWeapons&Tactical"
 msgid "%s tube: %s"
 msgstr "%s tube : %s"
 
@@ -1017,27 +1056,28 @@ msgstr "Merci pour votre aide."
 #: scripts/scenario_74_omicron.lua:3801 scripts/scenario_74_omicron.lua:3807
 #: scripts/scenario_74_omicron.lua:3815 scripts/scenario_74_omicron.lua:3820
 #: scripts/scenario_74_omicron.lua:3832 scripts/scenario_74_omicron.lua:3896
-#: scripts/scenario_74_omicron.lua:3936 scripts/scenario_74_omicron.lua:3965
-#: scripts/scenario_74_omicron.lua:3994 scripts/scenario_74_omicron.lua:4001
-#: scripts/scenario_74_omicron.lua:4018 scripts/scenario_74_omicron.lua:4022
-#: scripts/scenario_74_omicron.lua:4027 scripts/scenario_74_omicron.lua:4064
-#: scripts/scenario_74_omicron.lua:4118 scripts/scenario_74_omicron.lua:4155
-#: scripts/scenario_74_omicron.lua:4197 scripts/scenario_74_omicron.lua:4235
-#: scripts/scenario_74_omicron.lua:4270 scripts/scenario_74_omicron.lua:4393
-#: scripts/scenario_74_omicron.lua:4399 scripts/scenario_74_omicron.lua:4405
-#: scripts/scenario_74_omicron.lua:4427 scripts/scenario_74_omicron.lua:4429
-#: scripts/scenario_74_omicron.lua:4432 scripts/scenario_74_omicron.lua:4445
-#: scripts/scenario_74_omicron.lua:4454 scripts/scenario_74_omicron.lua:4488
-#: scripts/scenario_74_omicron.lua:4550 scripts/scenario_74_omicron.lua:4567
-#: scripts/scenario_74_omicron.lua:4614 scripts/scenario_74_omicron.lua:4623
-#: scripts/scenario_74_omicron.lua:4634 scripts/scenario_74_omicron.lua:4640
-#: scripts/scenario_74_omicron.lua:4648 scripts/scenario_74_omicron.lua:4677
-#: scripts/scenario_74_omicron.lua:4692 scripts/scenario_74_omicron.lua:4714
-#: scripts/scenario_74_omicron.lua:4718 scripts/scenario_74_omicron.lua:4737
-#: scripts/scenario_74_omicron.lua:4741 scripts/scenario_74_omicron.lua:4836
-#: scripts/scenario_74_omicron.lua:4841 scripts/scenario_74_omicron.lua:5099
-#: scripts/scenario_74_omicron.lua:5103 scripts/scenario_74_omicron.lua:5109
-#: scripts/scenario_74_omicron.lua:5132 scripts/scenario_74_omicron.lua:5139
+#: scripts/scenario_74_omicron.lua:3909 scripts/scenario_74_omicron.lua:3936
+#: scripts/scenario_74_omicron.lua:3965 scripts/scenario_74_omicron.lua:3994
+#: scripts/scenario_74_omicron.lua:4001 scripts/scenario_74_omicron.lua:4018
+#: scripts/scenario_74_omicron.lua:4022 scripts/scenario_74_omicron.lua:4027
+#: scripts/scenario_74_omicron.lua:4064 scripts/scenario_74_omicron.lua:4118
+#: scripts/scenario_74_omicron.lua:4155 scripts/scenario_74_omicron.lua:4197
+#: scripts/scenario_74_omicron.lua:4235 scripts/scenario_74_omicron.lua:4270
+#: scripts/scenario_74_omicron.lua:4393 scripts/scenario_74_omicron.lua:4399
+#: scripts/scenario_74_omicron.lua:4405 scripts/scenario_74_omicron.lua:4427
+#: scripts/scenario_74_omicron.lua:4429 scripts/scenario_74_omicron.lua:4432
+#: scripts/scenario_74_omicron.lua:4445 scripts/scenario_74_omicron.lua:4454
+#: scripts/scenario_74_omicron.lua:4488 scripts/scenario_74_omicron.lua:4550
+#: scripts/scenario_74_omicron.lua:4567 scripts/scenario_74_omicron.lua:4614
+#: scripts/scenario_74_omicron.lua:4623 scripts/scenario_74_omicron.lua:4634
+#: scripts/scenario_74_omicron.lua:4640 scripts/scenario_74_omicron.lua:4648
+#: scripts/scenario_74_omicron.lua:4677 scripts/scenario_74_omicron.lua:4692
+#: scripts/scenario_74_omicron.lua:4714 scripts/scenario_74_omicron.lua:4718
+#: scripts/scenario_74_omicron.lua:4737 scripts/scenario_74_omicron.lua:4741
+#: scripts/scenario_74_omicron.lua:4836 scripts/scenario_74_omicron.lua:4841
+#: scripts/scenario_74_omicron.lua:5099 scripts/scenario_74_omicron.lua:5103
+#: scripts/scenario_74_omicron.lua:5109 scripts/scenario_74_omicron.lua:5132
+#: scripts/scenario_74_omicron.lua:5139 scripts/scenario_74_omicron.lua:5161
 #: scripts/scenario_74_omicron.lua:5165 scripts/scenario_74_omicron.lua:5184
 #: scripts/scenario_74_omicron.lua:5208 scripts/scenario_74_omicron.lua:5233
 #: scripts/scenario_74_omicron.lua:5255 scripts/scenario_74_omicron.lua:5281
@@ -1045,18 +1085,18 @@ msgstr "Merci pour votre aide."
 #: scripts/scenario_74_omicron.lua:5849 scripts/scenario_74_omicron.lua:5872
 #: scripts/scenario_74_omicron.lua:5894 scripts/scenario_74_omicron.lua:5918
 #: scripts/scenario_74_omicron.lua:5940 scripts/scenario_74_omicron.lua:5964
-#: scripts/scenario_74_omicron.lua:6009 scripts/scenario_74_omicron.lua:6019
-#: scripts/scenario_74_omicron.lua:6036 scripts/scenario_74_omicron.lua:6043
-#: scripts/scenario_74_omicron.lua:6071 scripts/scenario_74_omicron.lua:6104
-#: scripts/scenario_74_omicron.lua:6115 scripts/scenario_74_omicron.lua:6126
-#: scripts/scenario_74_omicron.lua:6137 scripts/scenario_74_omicron.lua:6148
-#: scripts/scenario_74_omicron.lua:6151 scripts/scenario_74_omicron.lua:6177
-#: scripts/scenario_74_omicron.lua:6190 scripts/scenario_74_omicron.lua:6203
-#: scripts/scenario_74_omicron.lua:6261 scripts/scenario_74_omicron.lua:6282
-#: scripts/scenario_74_omicron.lua:6314 scripts/scenario_74_omicron.lua:6335
-#: scripts/scenario_74_omicron.lua:6352 scripts/scenario_74_omicron.lua:6358
-#: scripts/scenario_74_omicron.lua:6362 scripts/scenario_74_omicron.lua:6381
-#: scripts/scenario_74_omicron.lua:6404
+#: scripts/scenario_74_omicron.lua:6009 scripts/scenario_74_omicron.lua:6013
+#: scripts/scenario_74_omicron.lua:6019 scripts/scenario_74_omicron.lua:6036
+#: scripts/scenario_74_omicron.lua:6043 scripts/scenario_74_omicron.lua:6071
+#: scripts/scenario_74_omicron.lua:6104 scripts/scenario_74_omicron.lua:6115
+#: scripts/scenario_74_omicron.lua:6126 scripts/scenario_74_omicron.lua:6137
+#: scripts/scenario_74_omicron.lua:6148 scripts/scenario_74_omicron.lua:6151
+#: scripts/scenario_74_omicron.lua:6177 scripts/scenario_74_omicron.lua:6190
+#: scripts/scenario_74_omicron.lua:6203 scripts/scenario_74_omicron.lua:6261
+#: scripts/scenario_74_omicron.lua:6282 scripts/scenario_74_omicron.lua:6314
+#: scripts/scenario_74_omicron.lua:6335 scripts/scenario_74_omicron.lua:6352
+#: scripts/scenario_74_omicron.lua:6358 scripts/scenario_74_omicron.lua:6362
+#: scripts/scenario_74_omicron.lua:6381 scripts/scenario_74_omicron.lua:6404
 msgid "Back"
 msgstr "Précédent"
 
@@ -1439,12 +1479,12 @@ msgctxt "stationServices-comms"
 msgid "Your self destruct system has been repaired"
 msgstr "Votre système d'autodestruction a été réparé."
 
-#: scripts/scenario_74_omicron.lua:3796
+#: scripts/scenario_74_omicron.lua:3796 scripts/scenario_74_omicron.lua:4629
 msgctxt "station-comms"
 msgid "Tell me more about your station"
 msgstr "Dites m'en plus à propos de votre station"
 
-#: scripts/scenario_74_omicron.lua:3797
+#: scripts/scenario_74_omicron.lua:3797 scripts/scenario_74_omicron.lua:4630
 msgctxt "station-comms"
 msgid "What would you like to know?"
 msgstr "Qu'aimeriez-vous savoir ?"
@@ -1454,12 +1494,12 @@ msgctxt "stationGeneralInfo-comms"
 msgid "General information"
 msgstr "Informations générales"
 
-#: scripts/scenario_74_omicron.lua:3805
+#: scripts/scenario_74_omicron.lua:3805 scripts/scenario_74_omicron.lua:4638
 msgctxt "stationStory-comms"
 msgid "Station history"
 msgstr "L'histoire de la station"
 
-#: scripts/scenario_74_omicron.lua:3813
+#: scripts/scenario_74_omicron.lua:3813 scripts/scenario_74_omicron.lua:4646
 msgctxt "gossip-comms"
 msgid "Gossip"
 msgstr "Rumeurs"
@@ -1848,7 +1888,8 @@ msgstr ""
 "ce moment. Le temps de fabrication est de %s."
 
 #: scripts/scenario_74_omicron.lua:4218
-msgctxt "ammo-comms"
+#, fuzzy
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
 
@@ -2222,6 +2263,14 @@ msgstr ""
 "Station %s :\n"
 "Marchandises ou composants disponibles : (quantité, coût en réputation)"
 
+#: scripts/scenario_74_omicron.lua:4564
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"   %14s: %2i, %3i"
+msgstr "     %s: %i, %i\n"
+
 #: scripts/scenario_74_omicron.lua:4570
 msgctxt "trade-comms"
 msgid "Where can I find particular goods?"
@@ -2261,81 +2310,65 @@ msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
 msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 
-#: scripts/scenario_74_omicron.lua:4629
-msgctxt "stationGeneralInfo-comms"
-msgid "Tell me more about your station"
-msgstr "Dites m'en plus à propos de votre station"
-
-#: scripts/scenario_74_omicron.lua:4630
-msgctxt "stationGeneralInfo-comms"
-msgid "What would you like to know?"
-msgstr "Qu'aimeriez-vous savoir ?"
-
-#: scripts/scenario_74_omicron.lua:4638
-msgctxt "stationGeneralInfo-comms"
-msgid "Station history"
-msgstr "L'histoire de la station"
-
-#: scripts/scenario_74_omicron.lua:4646
-msgctxt "stationGeneralInfo-comms"
-msgid "Gossip"
-msgstr "Rumeurs"
-
 #: scripts/scenario_74_omicron.lua:4657
-#, lua-format
-msgctxt "stationGeneralInfo-comms"
+#, fuzzy, lua-format
+msgctxt "characterInfo-comms"
 msgid "Tell me about %s"
 msgstr "Parlez-moi de %s."
 
 #: scripts/scenario_74_omicron.lua:4664
-#, lua-format
-msgctxt "stationGeneralInfo-comms"
+#, fuzzy, lua-format
+msgctxt "characterInfo-comms"
 msgid "Never heard of %s"
 msgstr "Jamais entendu parler de %s."
 
 #: scripts/scenario_74_omicron.lua:4666
-#, lua-format
-msgctxt "stationGeneralInfo-comms"
+#, fuzzy, lua-format
+msgctxt "characterInfo-comms"
 msgid "%s died last week. The funeral was yesterday"
 msgstr "%s est décédé la semaine dernière. L'enterrement a eu lieu hier."
 
 #: scripts/scenario_74_omicron.lua:4668
-#, lua-format
-msgctxt "stationGeneralInfo-comms"
+#, fuzzy, lua-format
+msgctxt "characterInfo-comms"
 msgid "%s? Who's %s? There's nobody here named %s"
 msgstr "%s ? Qui est %s ? Il n'y a personne ici qui s'appelle %s."
 
 #: scripts/scenario_74_omicron.lua:4670
-#, lua-format
-msgctxt "stationGeneralInfo-comms"
+#, fuzzy, lua-format
+msgctxt "characterInfo-comms"
 msgid "We don't talk about %s. They are gone and good riddance"
 msgstr "Pas envie de parler de %s. Ils sont partis et bon débarras."
 
 #: scripts/scenario_74_omicron.lua:4672
-#, lua-format
-msgctxt "stationGeneralInfo-comms"
+#, fuzzy, lua-format
+msgctxt "characterInfo-comms"
 msgid "I think %s moved away"
 msgstr "Je pense que %s a déménagé."
 
 #: scripts/scenario_74_omicron.lua:4681
-msgctxt "situationReport-comms"
+#, fuzzy
+msgctxt "stationAssist-comms"
 msgid "Report status"
 msgstr "Au rapport"
 
 #: scripts/scenario_74_omicron.lua:4682
-msgctxt "situationReport-comms"
-msgid "Hull: "
-msgstr "Coque : "
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr "Coque : %d%%\n"
 
 #: scripts/scenario_74_omicron.lua:4685
-msgctxt "situationReport-comms"
-msgid "Shield: "
-msgstr "Boucliers : "
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr "Boucliers : %d%%\n"
 
 #: scripts/scenario_74_omicron.lua:4688
-msgctxt "situationReport-comms"
-msgid "Shield "
-msgstr "Boucliers "
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr "Bouclier %s : %d%%\n"
 
 #: scripts/scenario_74_omicron.lua:4696
 #, lua-format
@@ -2353,6 +2386,12 @@ msgstr ""
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
+
+#: scripts/scenario_74_omicron.lua:4702 scripts/scenario_74_omicron.lua:4728
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "WP %d"
+msgstr ""
 
 #: scripts/scenario_74_omicron.lua:4710
 #, lua-format
@@ -2430,15 +2469,15 @@ msgstr ""
 "précédent, en définir un puis revenir sur cette page."
 
 #: scripts/scenario_74_omicron.lua:4794
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationAssist-comms"
-msgid "Rendez-vous at waypoint %i"
+msgid "Rendez-vous at waypoint %d"
 msgstr "Rendez-vous au marqueur %i."
 
 #: scripts/scenario_74_omicron.lua:4832
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationAssist-comms"
-msgid "We have dispatched %s to rendez-vous at waypoint %i"
+msgid "We have dispatched %s to rendez-vous at waypoint %d"
 msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au marqueur %i."
 
 #: scripts/scenario_74_omicron.lua:4858
@@ -3274,6 +3313,11 @@ msgctxt "trade-comms"
 msgid "We've got "
 msgstr "Nous avons "
 
+#: scripts/scenario_74_omicron.lua:5295 scripts/scenario_74_omicron.lua:5816
+msgctxt "trade-comms"
+msgid ", "
+msgstr ""
+
 #: scripts/scenario_74_omicron.lua:5303 scripts/scenario_74_omicron.lua:5824
 msgctxt "trade-comms"
 msgid "nothing"
@@ -3468,8 +3512,8 @@ msgid "No"
 msgstr "Non"
 
 #: scripts/scenario_74_omicron.lua:5777
-#, lua-format
-msgctxt "tabRelay"
+#, fuzzy, lua-format
+msgctxt "-tabRelay&Operations"
 msgid "Disruption %i"
 msgstr "Perturbation %i"
 
@@ -3756,98 +3800,128 @@ msgstr ""
 "Il n'y a rien sur votre vaisseau que nous puissions vous aider à réparer. "
 "Désolé."
 
+#: scripts/scenario_74_omicron.lua:6590
+msgctxt "msgGM"
+msgid "Empty Template pool: fix excludes or other criteria"
+msgstr ""
+
 #: scripts/scenario_74_omicron.lua:6804
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
 msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
 
 #: scripts/scenario_74_omicron.lua:6808
-msgctxt "msgEngineer+"
+#, fuzzy
+msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
 msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
 
 #: scripts/scenario_74_omicron.lua:6826
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "coolant-msgEngineer"
 msgid "Automated systems have recovered some coolant"
 msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
 
 #: scripts/scenario_74_omicron.lua:6829
-msgctxt "msgEngineer+"
+#, fuzzy
+msgctxt "coolant-msgEngineer+"
 msgid "Automated systems have recovered some coolant"
 msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
 
 #: scripts/scenario_74_omicron.lua:6869 scripts/scenario_74_omicron.lua:6904
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_74_omicron.lua:6873 scripts/scenario_74_omicron.lua:6908
-msgctxt "msgEngineer+"
+#, fuzzy
+msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_74_omicron.lua:6925
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "coolant-msgEngineer"
 msgid "Damage has caused a loss of coolant"
 msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
 
 #: scripts/scenario_74_omicron.lua:6929
-msgctxt "msgEngineer+"
+#, fuzzy
+msgctxt "coolant-msgEngineer+"
 msgid "Damage has caused a loss of coolant"
 msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
 
 #: scripts/scenario_74_omicron.lua:6936
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "damage-msgEngineer"
 msgid "The probe launch system has been damaged"
 msgstr "Le système de lancement des sondes a été endommagé."
 
 #: scripts/scenario_74_omicron.lua:6939
-msgctxt "msgEngineer+"
+#, fuzzy
+msgctxt "damage-msgEngineer+"
 msgid "The probe launch system has been damaged"
 msgstr "Le système de lancement des sondes a été endommagé."
 
 #: scripts/scenario_74_omicron.lua:6944
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "damage-msgEngineer"
 msgid "The hacking system has been damaged"
 msgstr "Le système de piratage a été endommagé."
 
 #: scripts/scenario_74_omicron.lua:6947
-msgctxt "msgEngineer+"
+#, fuzzy
+msgctxt "damage-msgEngineer+"
 msgid "The hacking system has been damaged"
 msgstr "Le système de piratage a été endommagé."
 
 #: scripts/scenario_74_omicron.lua:6952
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "damage-msgEngineer"
 msgid "The scanners have been damaged"
 msgstr "Les scanners ont été endommagés."
 
 #: scripts/scenario_74_omicron.lua:6955
-msgctxt "msgEngineer+"
+#, fuzzy
+msgctxt "damage-msgEngineer+"
 msgid "The scanners have been damaged"
 msgstr "Les scanners ont été endommagés."
 
 #: scripts/scenario_74_omicron.lua:6960
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "damage-msgEngineer"
 msgid "Combat maneuver has been damaged"
 msgstr "La manœuvre de combat a été endommagée."
 
 #: scripts/scenario_74_omicron.lua:6963
-msgctxt "msgEngineer+"
+#, fuzzy
+msgctxt "damage-msgEngineer+"
 msgid "Combat maneuver has been damaged"
 msgstr "La manœuvre de combat a été endommagée."
 
 #: scripts/scenario_74_omicron.lua:6968
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "damage-msgEngineer"
 msgid "Self destruct system has been damaged"
 msgstr "Le système d'autodestruction a été endommagé."
 
 #: scripts/scenario_74_omicron.lua:6971
-msgctxt "msgEngineer+"
+#, fuzzy
+msgctxt "damage-msgEngineer+"
 msgid "Self destruct system has been damaged"
 msgstr "Le système d'autodestruction a été endommagé."
 
-#: scripts/scenario_74_omicron.lua:6996 scripts/scenario_74_omicron.lua:7003
-msgctxt "tabRelay"
+#: scripts/scenario_74_omicron.lua:6996
+#, fuzzy
+msgctxt "inventory-buttonRelay"
+msgid "Inventory"
+msgstr "Inventaire"
+
+#: scripts/scenario_74_omicron.lua:7003
+#, fuzzy
+msgctxt "inventory-buttonOperations"
 msgid "Inventory"
 msgstr "Inventaire"
 
@@ -4298,12 +4372,14 @@ msgstr ""
 "plaît ?"
 
 #: scripts/scenario_74_omicron.lua:9499
-msgctxt "buttonEngineer"
+#, fuzzy
+msgctxt "crewTransfer-buttonEngineer"
 msgid "Send Repair Crew"
 msgstr "Envoyer un réparateur"
 
 #: scripts/scenario_74_omicron.lua:9504
-msgctxt "buttonEngineer+"
+#, fuzzy
+msgctxt "crewTransfer-buttonEngineer+"
 msgid "Send Repair Crew"
 msgstr "Envoyer un réparateur"
 
@@ -4314,8 +4390,8 @@ msgid "The engines on %s have been repaired"
 msgstr "Les moteurs de %s ont été réparés."
 
 #: scripts/scenario_74_omicron.lua:9541
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer"
 msgid ""
 "We cannot transport a repair crew member from %s while the shields are up."
 msgstr ""
@@ -4323,8 +4399,8 @@ msgstr ""
 "tant que les boucliers sont activés."
 
 #: scripts/scenario_74_omicron.lua:9543
-#, lua-format
-msgctxt "msgEngineer+"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer+"
 msgid ""
 "We cannot transport a repair crew member from %s while the shields are up."
 msgstr ""
@@ -4332,36 +4408,36 @@ msgstr ""
 "tant que les boucliers sont activés."
 
 #: scripts/scenario_74_omicron.lua:9549
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer"
 msgid "%s is moving too fast to transport a repair crew member from %s."
 msgstr ""
 "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
 "l'équipe de réparation depuis %s."
 
 #: scripts/scenario_74_omicron.lua:9551
-#, lua-format
-msgctxt "msgEngineer+"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer+"
 msgid "%s is moving too fast to transport a repair crew member from %s."
 msgstr ""
 "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
 "l'équipe de réparation depuis %s."
 
 #: scripts/scenario_74_omicron.lua:9555
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer"
 msgid "Repair crew member retrieved from %s"
 msgstr "Membre de l'équipe de réparation rapatrié depuis %s."
 
 #: scripts/scenario_74_omicron.lua:9557
-#, lua-format
-msgctxt "msgEngineer+"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer+"
 msgid "Repair crew member retrieved from %s"
-msgstr "Membre de l'équipe de réparation téléporté depuis %s."
+msgstr "Membre de l'équipe de réparation rapatrié depuis %s."
 
 #: scripts/scenario_74_omicron.lua:9566 scripts/scenario_74_omicron.lua:9638
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer"
 msgid ""
 "%s is too far from %s to transport a repair crew member. Functional "
 "transport may occur at or under 3 units"
@@ -4371,8 +4447,8 @@ msgstr ""
 "distance ou moins."
 
 #: scripts/scenario_74_omicron.lua:9568 scripts/scenario_74_omicron.lua:9640
-#, lua-format
-msgctxt "msgEngineer+"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer+"
 msgid ""
 "%s is too far from %s to transport a repair crew member. Functional "
 "transport may occur at or under 3 units"
@@ -4382,31 +4458,32 @@ msgstr ""
 "distance ou moins."
 
 #: scripts/scenario_74_omicron.lua:9575
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repairs-msgEngineer"
 msgid "Estimated time remaining on repairs: "
 msgstr "Estimation du temps restant pour les réparations :"
 
 #: scripts/scenario_74_omicron.lua:9577
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "repairs-msgEngineer"
 msgid "%s %i seconds"
-msgstr "%s %i secondes"
+msgstr "%s %i secondes."
 
 #: scripts/scenario_74_omicron.lua:9580
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "repairs-msgEngineer"
 msgid "%s %i minutes and %i seconds"
 msgstr "%s %i minutes et %i secondes"
 
 #: scripts/scenario_74_omicron.lua:9582
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "repairs-msgEngineer"
 msgid "%s %i minute and %i seconds"
 msgstr "%s %i minute et %i secondes"
 
 #: scripts/scenario_74_omicron.lua:9586 scripts/scenario_74_omicron.lua:9588
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "repairs-msgEngineer"
 msgid ""
 "[Repair Crewmember on %s]\n"
 "We're not done with engine repairs on %s yet.\n"
@@ -4417,8 +4494,8 @@ msgstr ""
 "%s."
 
 #: scripts/scenario_74_omicron.lua:9597
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer"
 msgid ""
 "We cannot transport a repair crew member to %s while the shields are up."
 msgstr ""
@@ -4426,33 +4503,33 @@ msgstr ""
 "tant que nos boucliers sont activés."
 
 #: scripts/scenario_74_omicron.lua:9599
-#, lua-format
-msgctxt "msgEngineer+"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer+"
 msgid ""
 "We cannot transport a repair crew member to %s while the shields are up."
 msgstr ""
 "Nous ne pouvons pas téléporter un membre de l'équipe de réparation sur %s "
-"tant que les boucliers sont activés."
+"tant que nos boucliers sont activés."
 
 #: scripts/scenario_74_omicron.lua:9605
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer"
 msgid "%s is moving too fast to transport a repair crew member to %s."
 msgstr ""
 "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
 "l'équipe de réparation sur %s. Les moteurs doivent être à l'arrêt."
 
 #: scripts/scenario_74_omicron.lua:9607
-#, lua-format
-msgctxt "msgEngineer+"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer+"
 msgid "%s is moving too fast to transport a repair crew member to %s."
 msgstr ""
 "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
-"l'équipe de réparation sur %s."
+"l'équipe de réparation sur %s. Les moteurs doivent être à l'arrêt."
 
 #: scripts/scenario_74_omicron.lua:9614
-#, lua-format
-msgctxt "shipLog"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-shipLog"
 msgid ""
 "%s has transported one of her repair crew to %s. They report that the "
 "engines should be fixed in a minute or two."
@@ -4461,18 +4538,20 @@ msgstr ""
 "signalent que les moteurs devraient être réparés d'ici une minute ou deux."
 
 #: scripts/scenario_74_omicron.lua:9618
-msgctxt "buttonEngineer"
+#, fuzzy
+msgctxt "crewTransfer-buttonEngineer"
 msgid "Get Repair Crew"
 msgstr "Obtenir un réparateur"
 
 #: scripts/scenario_74_omicron.lua:9623
-msgctxt "buttonEngineer+"
+#, fuzzy
+msgctxt "crewTransfer-buttonEngineer+"
 msgid "Get Repair Crew"
 msgstr "Obtenir un réparateur"
 
 #: scripts/scenario_74_omicron.lua:9630
-#, lua-format
-msgctxt "msgEngineer"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer"
 msgid ""
 "We don't have any repair crew to send over to %s. We might get one from %s"
 msgstr ""
@@ -4480,8 +4559,8 @@ msgstr ""
 "un à %s."
 
 #: scripts/scenario_74_omicron.lua:9632
-#, lua-format
-msgctxt "msgEngineer+"
+#, fuzzy, lua-format
+msgctxt "crewTransfer-msgEngineer+"
 msgid ""
 "We don't have any repair crew to send over to %s. We might get one from %s"
 msgstr ""
@@ -4547,9 +4626,22 @@ msgstr ""
 "anéantir la race humaine"
 
 #: scripts/scenario_74_omicron.lua:9704
-msgctxt "tabRelay&Operations"
+#, fuzzy
+msgctxt "-tabRelay&Operations"
 msgid "Ensign Death"
 msgstr "Mort de l'officier"
+
+#: scripts/scenario_74_omicron.lua:9706 scripts/scenario_74_omicron.lua:9889
+#, fuzzy, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "%s %i"
+msgstr "%s %s"
+
+#: scripts/scenario_74_omicron.lua:9708 scripts/scenario_74_omicron.lua:9891
+#, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "%s %i:%.2i"
+msgstr ""
 
 #: scripts/scenario_74_omicron.lua:9718 scripts/scenario_74_omicron.lua:9736
 msgctxt "msgMainscreen"
@@ -4580,7 +4672,8 @@ msgstr ""
 "va disparaitre"
 
 #: scripts/scenario_74_omicron.lua:9887
-msgctxt "tabRelay&Operations"
+#, fuzzy
+msgctxt "-tabRelay&Operations"
 msgid "Omicron Broadcast"
 msgstr "Diffusion peste Omicron"
 
@@ -4622,6 +4715,139 @@ msgstr ""
 msgctxt "msgMainscreen"
 msgid "%s. Score: %i. %s"
 msgstr "%s. Score : %i. %s"
+
+#: scripts/scenario_74_omicron.lua:10119
+msgctxt "msgGM"
+msgid "script error - \n"
+msgstr ""
+
+#~ msgctxt "msgOperations"
+#~ msgid "The unscanned artifact we just picked up has fried our scanners"
+#~ msgstr ""
+#~ "L'artefact non scanné que nous venons de récupérer a grillé nos scanners."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Tell me more about your station"
+#~ msgstr "Dites m'en plus à propos de votre station"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "What would you like to know?"
+#~ msgstr "Qu'aimeriez-vous savoir ?"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Station history"
+#~ msgstr "L'histoire de la station"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Gossip"
+#~ msgstr "Rumeurs"
+
+#~ msgctxt "situationReport-comms"
+#~ msgid "Hull: "
+#~ msgstr "Coque : "
+
+#~ msgctxt "situationReport-comms"
+#~ msgid "Shield: "
+#~ msgstr "Boucliers : "
+
+#~ msgctxt "situationReport-comms"
+#~ msgid "Shield "
+#~ msgstr "Boucliers "
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "Medical team has revived one of your repair crew"
+#~ msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "Automated systems have recovered some coolant"
+#~ msgstr ""
+#~ "Les systèmes automatisés ont récupéré du liquide de refroidissement."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "One of your repair crew has perished"
+#~ msgstr "Un de vos réparateurs a péri."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "Damage has caused a loss of coolant"
+#~ msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "The probe launch system has been damaged"
+#~ msgstr "Le système de lancement des sondes a été endommagé."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "The hacking system has been damaged"
+#~ msgstr "Le système de piratage a été endommagé."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "The scanners have been damaged"
+#~ msgstr "Les scanners ont été endommagés."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "Combat maneuver has been damaged"
+#~ msgstr "La manœuvre de combat a été endommagée."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "Self destruct system has been damaged"
+#~ msgstr "Le système d'autodestruction a été endommagé."
+
+#~ msgctxt "buttonEngineer+"
+#~ msgid "Send Repair Crew"
+#~ msgstr "Envoyer un réparateur"
+
+#~ msgctxt "msgEngineer+"
+#~ msgid ""
+#~ "We cannot transport a repair crew member from %s while the shields are up."
+#~ msgstr ""
+#~ "Nous ne pouvons pas téléporter un membre de l'équipe de réparation depuis "
+#~ "%s tant que les boucliers sont activés."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "%s is moving too fast to transport a repair crew member from %s."
+#~ msgstr ""
+#~ "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
+#~ "l'équipe de réparation depuis %s."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "Repair crew member retrieved from %s"
+#~ msgstr "Membre de l'équipe de réparation téléporté depuis %s."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid ""
+#~ "%s is too far from %s to transport a repair crew member. Functional "
+#~ "transport may occur at or under 3 units"
+#~ msgstr ""
+#~ "Notre vaisseau %s est trop loin de %s pour pouvoir téléporter un membre "
+#~ "de l'équipe de réparation. Le téléporteur n'est fonctionnel qu'à 3 unités "
+#~ "de distance ou moins."
+
+#~ msgctxt "msgEngineer"
+#~ msgid "%s %i seconds"
+#~ msgstr "%s %i secondes"
+
+#~ msgctxt "msgEngineer+"
+#~ msgid ""
+#~ "We cannot transport a repair crew member to %s while the shields are up."
+#~ msgstr ""
+#~ "Nous ne pouvons pas téléporter un membre de l'équipe de réparation sur %s "
+#~ "tant que les boucliers sont activés."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "%s is moving too fast to transport a repair crew member to %s."
+#~ msgstr ""
+#~ "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
+#~ "l'équipe de réparation sur %s."
+
+#~ msgctxt "buttonEngineer+"
+#~ msgid "Get Repair Crew"
+#~ msgstr "Obtenir un réparateur"
+
+#~ msgctxt "msgEngineer+"
+#~ msgid ""
+#~ "We don't have any repair crew to send over to %s. We might get one from %s"
+#~ msgstr ""
+#~ "Nous n'avons aucun réparateur à envoyer sur %s. Nous pourrions en "
+#~ "récupérer un à %s."
 
 #~ msgctxt "shipAssist-comms"
 #~ msgid "Shield "
@@ -4681,12 +4907,10 @@ msgstr "%s. Score : %i. %s"
 #~ msgid "Shield "
 #~ msgstr "Bouclier "
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "Dock at %s"
 #~ msgstr "Amarrez-vous à %s"
 
-#, lua-format
 #~ msgctxt "ship-comms"
 #~ msgid "Docking at %s."
 #~ msgstr "En cours d'amarrage à %s."

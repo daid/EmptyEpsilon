@@ -43,7 +43,7 @@ msgstr ""
 "\n"
 "Dies ist eine kurze Mission für eine unerfahrene Crew."
 
-#: scripts/scenario_20_training1.lua:79
+#: scripts/scenario_20_training1.lua:130
 msgctxt "goal-incCall"
 msgid ""
 "This is Commander Saberhagen.\n"
@@ -70,17 +70,17 @@ msgstr ""
 "Hier ist Ihre Chance, ein paar hilflose Gegner zu verprügeln.\n"
 "Commander Saberhagen Ende."
 
-#: scripts/scenario_20_training1.lua:97
+#: scripts/scenario_20_training1.lua:148
 msgctxt "msgMainscreen-bonusTarget"
 msgid "escaped."
 msgstr "geflohen."
 
-#: scripts/scenario_20_training1.lua:99
+#: scripts/scenario_20_training1.lua:150
 msgctxt "msgMainscreen-bonusTarget"
 msgid "destroyed."
 msgstr "zerstört."
 
-#: scripts/scenario_20_training1.lua:101
+#: scripts/scenario_20_training1.lua:152
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -98,8 +98,8 @@ msgstr ""
 "Benötigte Zeit: %d\n"
 "Bonusziel: %s\n"
 "\n"
-"Wenn Ihr euch bereit für den Kampf fühlen, spielen Sie das Szenario 'Kampf"
-"und Verteidigung'.\n"
+"Wenn Ihr euch bereit für den Kampf fühlen, spielen Sie das Szenario "
+"'Kampfund Verteidigung'.\n"
 "\n"
 "Wenn Ihr mehr Übung braucht, spielt dieses Training erneut\n"
 "mit Besatzungsmitgliedern an anderen Stationen."

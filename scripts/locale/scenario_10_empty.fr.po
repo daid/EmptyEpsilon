@@ -13,9 +13,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
 # Scenario name
 msgid "Empty space"
 msgstr "Espace vide"
+
 # Scenario description
 msgid ""
 "Empty scenario, no enemies, no friendlies. Can be used by a GM player to "
@@ -31,3 +33,18 @@ msgstr ""
 "La touche F5 peut être utilisée pour copier la mise en page actuelle dans le "
 "presse-papiers pour une utilisation dans des scripts de scénario au format "
 "lua."
+
+#: scripts/scenario_10_empty.lua:30
+msgctxt "buttonGM"
+msgid "Random asteroid field"
+msgstr ""
+
+#: scripts/scenario_10_empty.lua:40
+msgctxt "buttonGM"
+msgid "Random nebula field"
+msgstr ""
+
+#: scripts/scenario_10_empty.lua:49
+msgctxt "buttonGM"
+msgid "Delete unselected"
+msgstr ""

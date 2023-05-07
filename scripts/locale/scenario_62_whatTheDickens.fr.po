@@ -330,7 +330,8 @@ msgstr ""
 "riches de la communauté de la région de Londres."
 
 #: scripts/scenario_62_whatTheDickens.lua:449
-msgctxt "ammo-comms"
+#, fuzzy
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarrés à la station pour cette action."
 

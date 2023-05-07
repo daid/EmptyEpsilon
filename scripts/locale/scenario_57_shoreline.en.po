@@ -1501,6 +1501,11 @@ msgctxt "gossip-comms"
 msgid "Gossip"
 msgstr ""
 
+#: scripts/scenario_57_shoreline.lua:7363
+msgctxt "trade-comms"
+msgid "Buy, sell, trade"
+msgstr ""
+
 #: scripts/scenario_57_shoreline.lua:7365
 #, lua-format
 msgctxt "trade-comms"
@@ -1782,7 +1787,7 @@ msgid "Your beam weapons damage has improved by 25 percent"
 msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:7643
-msgctxt "ammo-comms"
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr ""
 
@@ -2178,7 +2183,10 @@ msgid "Sir, how can we assist?"
 msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:8180
+#: scripts/scenario_57_shoreline.lua:8476
 #: scripts/scenario_57_shoreline.lua:8693
+#: scripts/scenario_57_shoreline.lua:8793
+#: scripts/scenario_57_shoreline.lua:9290
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
@@ -2482,13 +2490,6 @@ msgstr ""
 #: scripts/scenario_57_shoreline.lua:9408
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr ""
-
-#: scripts/scenario_57_shoreline.lua:8476
-#: scripts/scenario_57_shoreline.lua:8793
-#: scripts/scenario_57_shoreline.lua:9290
-msgctxt "trade-comms"
-msgid "What do you want?"
 msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:8479
@@ -3043,7 +3044,7 @@ msgid "Gather sensor data from black hole by close approach"
 msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:10441
-msgctxt "msgScience"
+msgctxt "research-msgScience"
 msgid ""
 "When the ship gets close enough, a button to initiate black hole scan will "
 "become available. Click it to start scanning the black hole. The ship must "
@@ -3051,20 +3052,25 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:10445
-msgctxt "msgOperations"
+msgctxt "research-msgOperations"
 msgid ""
 "When the ship gets close enough, a button to initiate black hole scan will "
 "become available. Click it to start scanning the black hole. The ship must "
 "remain within scanning distance for a full 30 seconds to complete the scan."
 msgstr ""
 
+#: scripts/scenario_57_shoreline.lua:10456
+msgctxt "research-"
+msgid "Grawp in range"
+msgstr ""
+
 #: scripts/scenario_57_shoreline.lua:10468
-msgctxt "-shipLog"
+msgctxt "research-shipLog"
 msgid "[Scan technician] Black hole scan 50 percent complete"
 msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:10473
-msgctxt "-shipLog"
+msgctxt "research-shipLog"
 msgid "[Scan technician] Black hole scan complete"
 msgstr ""
 
@@ -3078,30 +3084,32 @@ msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:10512
 #, lua-format
+msgctxt "research-"
 msgid "Grawp in range: %i"
 msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:10517
-msgctxt "blackHole-buttonScience"
+msgctxt "research-buttonScience"
 msgid "Scan black hole"
 msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:10522
-msgctxt "blackHole-buttonOperations"
+msgctxt "research-buttonOperations"
 msgid "Scan black hole"
 msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:10527
+msgctxt "research-tabHelms&Tact&Science&Ops"
 msgid "Grawp out of range"
 msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:10537
-msgctxt "blackHole-shipLog"
+msgctxt "research-shipLog"
 msgid "[Scan technician] Black hole scan aborted before completion"
 msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:10565
-msgctxt "blackHole-shipLog"
+msgctxt "research-shipLog"
 msgid "[Scan technician] Black hole scan started"
 msgstr ""
 
@@ -3295,11 +3303,13 @@ msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:11172
 #, lua-format
+msgctxt "-tabRelay&Operations"
 msgid "%s %i"
 msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:11174
 #, lua-format
+msgctxt "-tabRelay&Operations"
 msgid "%s %i:%.2i"
 msgstr ""
 

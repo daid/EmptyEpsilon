@@ -1989,6 +1989,7 @@ msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:4916
 #: scripts/scenario_54_PatrolDuty.lua:5847
+#: scripts/scenario_54_PatrolDuty.lua:5927
 msgctxt "trade-comms"
 msgid "Jettison cargo"
 msgstr ""
@@ -2224,7 +2225,7 @@ msgid "What goods are you looking for?"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:5335
-msgctxt "ammo-comms"
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr ""
 
@@ -2459,6 +2460,7 @@ msgid "We have dispatched %s to assist at WP %d"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:5709
+#: scripts/scenario_54_PatrolDuty.lua:5907
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
@@ -2662,6 +2664,11 @@ msgctxt "trade-comms"
 msgid "We've got "
 msgstr ""
 
+#: scripts/scenario_54_PatrolDuty.lua:5818
+msgctxt "trade-comms"
+msgid ", "
+msgstr ""
+
 #: scripts/scenario_54_PatrolDuty.lua:5826
 msgctxt "trade-comms"
 msgid "nothing"
@@ -2690,6 +2697,12 @@ msgstr ""
 #: scripts/scenario_54_PatrolDuty.lua:5990
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_54_PatrolDuty.lua:5910
+#, lua-format
+msgctxt "trade-comms"
+msgid "Where are you headed? (cost: %f reputation)"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:5970
@@ -2793,10 +2806,6 @@ msgstr ""
 #: scripts/scenario_54_PatrolDuty.lua:6766
 msgctxt "audioUPlanitiaDefend-buttonRelay"
 msgid "|> UTPLNT441"
-msgstr ""
-
-#: scripts/scenario_54_PatrolDuty.lua:6768
-msgid "Operations"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:6768
@@ -3353,12 +3362,12 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:8349
-msgctxt "medical-msgEngineer"
+msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:8353
-msgctxt "medical-msgEngineer+"
+msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
@@ -3374,53 +3383,61 @@ msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:8412
 #, lua-format
-msgctxt "limit Status"
+msgctxt "-tabRelay&Operations"
 msgid "%s %i"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:8414
 #, lua-format
-msgctxt "limit Status"
+msgctxt "-tabRelay&Operations"
 msgid "%s %i:%.2i"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:8436
 #, lua-format
+msgctxt "-tabRelay&Operations"
 msgid "%i%% Complete"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:8440
 #, lua-format
+msgctxt "-tabRelay&Operations"
 msgid "%s -Utopia Planitia"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:8442
 #, lua-format
+msgctxt "-tabRelay&Operations"
 msgid "%s +Utopia Planitia"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:8446
 #, lua-format
+msgctxt "-tabRelay&Operations"
 msgid "%s -Asimov"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:8448
 #, lua-format
+msgctxt "-tabRelay&Operations"
 msgid "%s +Asimov"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:8452
 #, lua-format
+msgctxt "-tabRelay&Operations"
 msgid "%s -Armstrong"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:8471
 #, lua-format
+msgctxt "-tabRelay&Operations"
 msgid "Asimov S:%i%% H:%i%%"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:8509
 #: scripts/scenario_54_PatrolDuty.lua:8547
 #, lua-format
+msgctxt "-tabRelay&Operations"
 msgid "U.P. WS:%i%% H:%i%%"
 msgstr ""

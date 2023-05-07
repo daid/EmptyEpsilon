@@ -2209,7 +2209,8 @@ msgstr ""
 "de luxe)."
 
 #: scripts/scenario_53_escape.lua:3980
-msgctxt "ammo-comms"
+#, fuzzy
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
 
@@ -2534,7 +2535,7 @@ msgctxt "trade-comms"
 msgid " and will trade it for luxury"
 msgstr " et va l'échanger contre des Produits de luxe (luxury)"
 
-#: scripts/scenario_53_escape.lua:4367
+#: scripts/scenario_53_escape.lua:4367 scripts/scenario_53_escape.lua:4657
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr "Que voulez-vous ?"
@@ -2803,11 +2804,6 @@ msgctxt "trade-comms"
 msgid "Where are you headed?"
 msgstr "Où allez-vous ?"
 
-#: scripts/scenario_53_escape.lua:4657
-msgctxt "trade-comms"
-msgid "What do you want?"
-msgstr "Que voulez-vous ?"
-
 #: scripts/scenario_53_escape.lua:4660
 #, lua-format
 msgctxt "trade-comms"
@@ -2848,6 +2844,18 @@ msgstr ""
 msgctxt "airTimer-tabScience&Eng&Eng+&Ops"
 msgid "Suffocation"
 msgstr "Suffocation"
+
+#: scripts/scenario_53_escape.lua:4802
+#, lua-format
+msgctxt "airTimer-tabScience&Eng&Eng+&Ops"
+msgid "%s %i"
+msgstr ""
+
+#: scripts/scenario_53_escape.lua:4804
+#, lua-format
+msgctxt "airTimer-tabScience&Eng&Eng+&Ops"
+msgid "%s %i:%.2i"
+msgstr ""
 
 #: scripts/scenario_53_escape.lua:4809
 msgctxt "air-msgEngineer"
@@ -2905,12 +2913,14 @@ msgstr ""
 "quantité d'énergie restant dans les transporteurs."
 
 #: scripts/scenario_53_escape.lua:4886
-msgctxt "transfer-buttonEngineer"
+#, fuzzy
+msgctxt "crewTransfer-buttonEngineer"
 msgid "Transfer to Repulse"
 msgstr "Activer transfert"
 
 #: scripts/scenario_53_escape.lua:4890
-msgctxt "transfer-buttonEngineer+"
+#, fuzzy
+msgctxt "crewTransfer-buttonEngineer+"
 msgid "Transfer to Repulse"
 msgstr "Activer transfert"
 
@@ -2939,12 +2949,14 @@ msgstr ""
 "d'armement pour nous téléporter sur le vaisseau."
 
 #: scripts/scenario_53_escape.lua:4966
-msgctxt "crewImport-buttonWeapons"
+#, fuzzy
+msgctxt "crewTransfer-buttonWeapons"
 msgid "Return Transport"
 msgstr "Activer transfert"
 
 #: scripts/scenario_53_escape.lua:4972
-msgctxt "crewImport-buttonTactical"
+#, fuzzy
+msgctxt "crewTransfer-buttonTactical"
 msgid "Return Transport"
 msgstr "Activer transfert"
 
@@ -3238,51 +3250,73 @@ msgid "Boris Junk Yard"
 msgstr "Casse Boris"
 
 #: scripts/scenario_53_escape.lua:5732 scripts/scenario_53_escape.lua:5781
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on reactor"
 msgstr "Réacteur complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5741 scripts/scenario_53_escape.lua:5790
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on beam weapons"
 msgstr "Faisceaux laser complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5750 scripts/scenario_53_escape.lua:5799
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on maneuver"
 msgstr "Système de manœuvre complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5759 scripts/scenario_53_escape.lua:5817
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on impulse engines"
 msgstr "Moteurs à impulsion complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5768
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on shields"
 msgstr "Boucliers complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5808
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on missile weapons"
 msgstr "Système de missiles complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5826
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on warp drive"
 msgstr "Vitesse lumière complètement opérationnelle"
 
 #: scripts/scenario_53_escape.lua:5835
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on jump drive"
 msgstr "Téléportation complètement opérationnelle"
 
 #: scripts/scenario_53_escape.lua:5844
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on front shield"
 msgstr "Boucliers avant complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5853
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repair-msgEngineer"
 msgid "Reached maximum repair on rear shield"
 msgstr "Boucliers arrière complètement opérationnel"
+
+#~ msgctxt "trade-comms"
+#~ msgid "What do you want?"
+#~ msgstr "Que voulez-vous ?"
+
+#~ msgctxt "transfer-buttonEngineer+"
+#~ msgid "Transfer to Repulse"
+#~ msgstr "Activer transfert"
+
+#~ msgctxt "crewImport-buttonTactical"
+#~ msgid "Return Transport"
+#~ msgstr "Activer transfert"

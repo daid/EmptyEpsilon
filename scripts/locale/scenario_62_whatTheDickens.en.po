@@ -262,7 +262,7 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:449
-msgctxt "ammo-comms"
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr ""
 

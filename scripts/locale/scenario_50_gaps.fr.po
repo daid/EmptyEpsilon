@@ -2167,7 +2167,8 @@ msgstr ""
 "     %s en %s pourrait avoir %s."
 
 #: scripts/scenario_50_gaps.lua:2793
-msgctxt "ammo-comms"
+#, fuzzy
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
 
@@ -2516,7 +2517,7 @@ msgctxt "trade-comms"
 msgid " and will trade it for luxury"
 msgstr " et va l'échanger contre des Produits de luxe (luxury)"
 
-#: scripts/scenario_50_gaps.lua:3267
+#: scripts/scenario_50_gaps.lua:3267 scripts/scenario_50_gaps.lua:3440
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr "Que voulez-vous ?"
@@ -2780,11 +2781,6 @@ msgctxt "trade-comms"
 msgid "Purchased"
 msgstr "Acheté"
 
-#: scripts/scenario_50_gaps.lua:3440
-msgctxt "trade-comms"
-msgid "What do you want?"
-msgstr "Que voulez-vous ?"
-
 #: scripts/scenario_50_gaps.lua:3443
 #, lua-format
 msgctxt "trade-comms"
@@ -2817,12 +2813,14 @@ msgstr ""
 "Bonne journée."
 
 #: scripts/scenario_50_gaps.lua:3862
-msgctxt "msgEngineer"
+#, fuzzy
+msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_50_gaps.lua:3866
-msgctxt "msgEngineer+"
+#, fuzzy
+msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
 
@@ -2902,3 +2900,11 @@ msgstr ""
 msgctxt "orders-comms"
 msgid "Protect %s. Destroy enemy bases straight out from gaps"
 msgstr "Protéger %s. Détruire les bases ennemies en sortant par les brèches."
+
+#~ msgctxt "trade-comms"
+#~ msgid "What do you want?"
+#~ msgstr "Que voulez-vous ?"
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "One of your repair crew has perished"
+#~ msgstr "Un de vos réparateurs a péri."

@@ -243,6 +243,18 @@ msgctxt "audio-tabRelay&Operations"
 msgid "Mob Action"
 msgstr "Temps restant :"
 
+#: scripts/scenario_51_deliverAmbassador.lua:357
+#, lua-format
+msgctxt "audio-tabRelay&Operations"
+msgid "%s %i"
+msgstr ""
+
+#: scripts/scenario_51_deliverAmbassador.lua:359
+#, lua-format
+msgctxt "audio-tabRelay&Operations"
+msgid "%s %i:%.2i"
+msgstr ""
+
 #: scripts/scenario_51_deliverAmbassador.lua:437
 msgctxt "audio-incCall"
 msgid ""
@@ -810,7 +822,8 @@ msgstr ""
 "sur Goltin 7. "
 
 #: scripts/scenario_51_deliverAmbassador.lua:1077
-msgctxt "ammo-comms"
+#, fuzzy
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarrés à la station pour cette action."
 
@@ -935,9 +948,9 @@ msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
 
 #: scripts/scenario_51_deliverAmbassador.lua:1151
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationAssist-comms"
-msgid "We have dispatched %s to assist at WP %d "
+msgid "We have dispatched %s to assist at WP %d"
 msgstr "Nous venons d'expédier %s pour vous aider au marqueur %d "
 
 #: scripts/scenario_51_deliverAmbassador.lua:1174

@@ -1790,7 +1790,7 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_50_gaps.lua:2793
-msgctxt "ammo-comms"
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr ""
 
@@ -2101,7 +2101,7 @@ msgctxt "trade-comms"
 msgid " and will trade it for luxury"
 msgstr ""
 
-#: scripts/scenario_50_gaps.lua:3267
+#: scripts/scenario_50_gaps.lua:3267 scripts/scenario_50_gaps.lua:3440
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
@@ -2338,11 +2338,6 @@ msgctxt "trade-comms"
 msgid "Purchased"
 msgstr ""
 
-#: scripts/scenario_50_gaps.lua:3440
-msgctxt "trade-comms"
-msgid "What do you want?"
-msgstr ""
-
 #: scripts/scenario_50_gaps.lua:3443
 #, lua-format
 msgctxt "trade-comms"
@@ -2369,12 +2364,12 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_50_gaps.lua:3862
-msgctxt "msgEngineer"
+msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr ""
 
 #: scripts/scenario_50_gaps.lua:3866
-msgctxt "msgEngineer+"
+msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr ""
 

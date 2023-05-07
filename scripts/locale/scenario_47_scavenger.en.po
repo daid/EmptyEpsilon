@@ -8,3 +8,3448 @@ msgid ""
 "\n"
 "Version 0"
 msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:178 scripts/scenario_47_scavenger.lua:181
+#: scripts/scenario_47_scavenger.lua:185 scripts/scenario_47_scavenger.lua:190
+#: scripts/scenario_47_scavenger.lua:5641
+#: scripts/scenario_47_scavenger.lua:5642
+#: scripts/scenario_47_scavenger.lua:5647
+#: scripts/scenario_47_scavenger.lua:5653
+msgctxt "scienceDescription-artifact"
+msgid "Object of unknown origin"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:178 scripts/scenario_47_scavenger.lua:181
+#: scripts/scenario_47_scavenger.lua:185 scripts/scenario_47_scavenger.lua:190
+#: scripts/scenario_47_scavenger.lua:5641
+#: scripts/scenario_47_scavenger.lua:5642
+#: scripts/scenario_47_scavenger.lua:5647
+#: scripts/scenario_47_scavenger.lua:5653
+msgctxt "scienceDescription-artifact"
+msgid "Object of unknown origin, advanced technology detected"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:260
+#, lua-format
+msgid ""
+"Deliver three %s to %s. Upon delivery, they will increase your hull strength"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:261
+#, lua-format
+msgid "Three %s to %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:268
+#, lua-format
+msgid "Fulfill %s 3 %s %s contract"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:269
+#, lua-format
+msgid "Three %s from %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:276
+#, lua-format
+msgid ""
+"Deliver two %s to %s. Upon delivery, they will increase your shield strength"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:277
+#, lua-format
+msgid "Two %s to %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:284
+#, lua-format
+msgid "Fulfill %s 2 %s %s contract"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:285
+#, lua-format
+msgid "Two %s from %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:292
+msgctxt "buttonGM"
+msgid "+Missions"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:293
+msgctxt "buttonGM"
+msgid "Show delta sum"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:294
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Accumulated delta:\n"
+"%f"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:300
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"\n"
+"%i:%.2i:%.2i"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:302
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"\n"
+"%i:%.2i"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:310
+msgctxt "buttonGM"
+msgid "-Main from missions"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:312
+msgctxt "buttonGM"
+msgid "Skip Harassment"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:329
+msgctxt "msgGM"
+msgid "Harassment skipped"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:334
+msgctxt "buttonGM"
+msgid "Skip Local Contracts"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:354
+#, lua-format
+msgctxt "contract-shipLog"
+msgid "A rare long range contract has been posted at station %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:357
+msgctxt "msgGM"
+msgid "Local contracts skipped"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:361
+msgctxt "buttonGM"
+msgid "Mark asteroids"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:396 scripts/scenario_47_scavenger.lua:417
+#: scripts/scenario_47_scavenger.lua:441 scripts/scenario_47_scavenger.lua:465
+#: scripts/scenario_47_scavenger.lua:4996
+#: scripts/scenario_47_scavenger.lua:5007
+#: scripts/scenario_47_scavenger.lua:5013
+#: scripts/scenario_47_scavenger.lua:5021
+#: scripts/scenario_47_scavenger.lua:5026
+#: scripts/scenario_47_scavenger.lua:5087
+#: scripts/scenario_47_scavenger.lua:5099
+#: scripts/scenario_47_scavenger.lua:5105
+#: scripts/scenario_47_scavenger.lua:5123
+#: scripts/scenario_47_scavenger.lua:5156
+#: scripts/scenario_47_scavenger.lua:5169
+#: scripts/scenario_47_scavenger.lua:5182
+#: scripts/scenario_47_scavenger.lua:5195
+#: scripts/scenario_47_scavenger.lua:5208
+#: scripts/scenario_47_scavenger.lua:5212
+#: scripts/scenario_47_scavenger.lua:5251
+#: scripts/scenario_47_scavenger.lua:5253
+#: scripts/scenario_47_scavenger.lua:5264
+#: scripts/scenario_47_scavenger.lua:5272
+#: scripts/scenario_47_scavenger.lua:5279
+#: scripts/scenario_47_scavenger.lua:5288
+#: scripts/scenario_47_scavenger.lua:5305
+#: scripts/scenario_47_scavenger.lua:5307
+#: scripts/scenario_47_scavenger.lua:5309
+#: scripts/scenario_47_scavenger.lua:5336
+#: scripts/scenario_47_scavenger.lua:5347
+#: scripts/scenario_47_scavenger.lua:5354
+#: scripts/scenario_47_scavenger.lua:5379
+#: scripts/scenario_47_scavenger.lua:5381
+#: scripts/scenario_47_scavenger.lua:5419
+#: scripts/scenario_47_scavenger.lua:5438
+#: scripts/scenario_47_scavenger.lua:5455
+#: scripts/scenario_47_scavenger.lua:5512
+#: scripts/scenario_47_scavenger.lua:5534
+#: scripts/scenario_47_scavenger.lua:5557
+#: scripts/scenario_47_scavenger.lua:5580
+#: scripts/scenario_47_scavenger.lua:5601
+#: scripts/scenario_47_scavenger.lua:5824
+#: scripts/scenario_47_scavenger.lua:5827
+#: scripts/scenario_47_scavenger.lua:5830
+#: scripts/scenario_47_scavenger.lua:5833
+#: scripts/scenario_47_scavenger.lua:5836
+#: scripts/scenario_47_scavenger.lua:5839
+#: scripts/scenario_47_scavenger.lua:5842
+#: scripts/scenario_47_scavenger.lua:5845
+#: scripts/scenario_47_scavenger.lua:5848
+#: scripts/scenario_47_scavenger.lua:5851
+#: scripts/scenario_47_scavenger.lua:5854
+#: scripts/scenario_47_scavenger.lua:5857
+#: scripts/scenario_47_scavenger.lua:5860
+#: scripts/scenario_47_scavenger.lua:5862
+#: scripts/scenario_47_scavenger.lua:5877
+#: scripts/scenario_47_scavenger.lua:5894
+#: scripts/scenario_47_scavenger.lua:5903
+#: scripts/scenario_47_scavenger.lua:5909
+#: scripts/scenario_47_scavenger.lua:5919
+#: scripts/scenario_47_scavenger.lua:5961
+#: scripts/scenario_47_scavenger.lua:5996
+#: scripts/scenario_47_scavenger.lua:6051
+#: scripts/scenario_47_scavenger.lua:6063
+#: scripts/scenario_47_scavenger.lua:6098
+#: scripts/scenario_47_scavenger.lua:6161
+#: scripts/scenario_47_scavenger.lua:6179
+#: scripts/scenario_47_scavenger.lua:6225
+#: scripts/scenario_47_scavenger.lua:6234
+#: scripts/scenario_47_scavenger.lua:6246
+#: scripts/scenario_47_scavenger.lua:6252
+#: scripts/scenario_47_scavenger.lua:6259
+#: scripts/scenario_47_scavenger.lua:6276
+#: scripts/scenario_47_scavenger.lua:6298
+#: scripts/scenario_47_scavenger.lua:6302
+#: scripts/scenario_47_scavenger.lua:6320
+#: scripts/scenario_47_scavenger.lua:6324
+#: scripts/scenario_47_scavenger.lua:6340
+#: scripts/scenario_47_scavenger.lua:6344
+#: scripts/scenario_47_scavenger.lua:6360
+#: scripts/scenario_47_scavenger.lua:6364
+#: scripts/scenario_47_scavenger.lua:6471
+#: scripts/scenario_47_scavenger.lua:6478
+#: scripts/scenario_47_scavenger.lua:6487
+#: scripts/scenario_47_scavenger.lua:6511
+#: scripts/scenario_47_scavenger.lua:6518
+#: scripts/scenario_47_scavenger.lua:6547
+#: scripts/scenario_47_scavenger.lua:6567
+#: scripts/scenario_47_scavenger.lua:6576
+#: scripts/scenario_47_scavenger.lua:6581
+#: scripts/scenario_47_scavenger.lua:6592
+#: scripts/scenario_47_scavenger.lua:6627
+#: scripts/scenario_47_scavenger.lua:6654
+#: scripts/scenario_47_scavenger.lua:6684
+#: scripts/scenario_47_scavenger.lua:6709
+#: scripts/scenario_47_scavenger.lua:6740
+#: scripts/scenario_47_scavenger.lua:6765
+#: scripts/scenario_47_scavenger.lua:6865
+#: scripts/scenario_47_scavenger.lua:6887
+#: scripts/scenario_47_scavenger.lua:6911
+#: scripts/scenario_47_scavenger.lua:6933
+#: scripts/scenario_47_scavenger.lua:6957
+#: scripts/scenario_47_scavenger.lua:7236
+#: scripts/scenario_47_scavenger.lua:7263
+msgid "Back"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:619
+msgctxt "scienceDescription-asteroid"
+msgid "Structure: solid"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:621
+msgctxt "scienceDescription-asteroid"
+msgid "Structure: rubble"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:623
+msgctxt "scienceDescription-asteroid"
+msgid "Structure: binary"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:629 scripts/scenario_47_scavenger.lua:644
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%sosmium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:631 scripts/scenario_47_scavenger.lua:669
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%siridium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:633 scripts/scenario_47_scavenger.lua:716
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%solivine:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:635 scripts/scenario_47_scavenger.lua:752
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%snickel:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:636 scripts/scenario_47_scavenger.lua:766
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%s, %srock:remainder"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:649
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%sruthenium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:654
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%srhodium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:659
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%smagnesium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:664
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%splatinum:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:674
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%sgold:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:679
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%spalladium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:684
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%soxygen:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:689
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%ssilicon:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:694
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%shydrogen:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:699
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%snitrogen:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:705
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%spyroxene:remainder"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:707
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%spyroxene:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:714
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%solivine:remainder"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:723
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%scobalt:remainder"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:725
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%scobalt:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:732
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%sdilithium:remainder"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:734
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%sdilithium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:741
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%scalcium:remainder"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:743
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%scalcium:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:750
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%snickel:remainder"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:759
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%siron:remainder"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:761
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%siron:%.1f%% "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:769
+#, lua-format
+msgctxt "scienceDescription-asteroid"
+msgid "%s, just rock"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:967 scripts/scenario_47_scavenger.lua:1369
+msgctxt "scienceDescription-station"
+msgid "Training and Coordination"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:967 scripts/scenario_47_scavenger.lua:1370
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We train naval cadets in routine and specialized functions aboard space "
+"vessels and coordinate naval activity throughout the sector"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:967
+msgctxt "stationStory-comms"
+msgid ""
+"The original station builders were fans of the late 20th century scientist "
+"and author Isaac Asimov. The station was initially named Foundation, but was "
+"later changed simply to Asimov. It started off as a stellar observatory, "
+"then became a supply stop and as it has grown has become an educational and "
+"coordination hub for the region"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:968 scripts/scenario_47_scavenger.lua:1409
+msgctxt "scienceDescription-station"
+msgid "Warp and Impulse engine manufacturing"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:968 scripts/scenario_47_scavenger.lua:1410
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We manufacture warp, impulse and jump engines for the human navy fleet as "
+"well as other independent clients on a contract basis"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:968
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the late 19th century astronaut as well as the "
+"fictionlized stations that followed. The station initially constructed "
+"entire space worthy vessels. In time, it transitioned into specializeing in "
+"propulsion systems."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:969 scripts/scenario_47_scavenger.lua:1445
+msgctxt "scienceDescription-station"
+msgid "Warp drive components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:969 scripts/scenario_47_scavenger.lua:1446
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide warp drive engines and components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:969
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after Chris Van Den Broeck who did some initial "
+"research into the possibility of warp drive in the late 20th century on Earth"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:970 scripts/scenario_47_scavenger.lua:1485
+msgctxt "scienceDescription-station"
+msgid "Shielded circuitry fabrication"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:970 scripts/scenario_47_scavenger.lua:1486
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make a large variety of circuits for numerous ship systems shielded from "
+"sensor detection and external control interference"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:970
+msgctxt "stationStory-comms"
+msgid ""
+"Our station is named after the law which quantifies the amount of force with "
+"which stationary electrically charged particals repel or attact each other - "
+"a fundamental principle in the design of our circuits"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:971 scripts/scenario_47_scavenger.lua:1026
+#: scripts/scenario_47_scavenger.lua:1525
+#: scripts/scenario_47_scavenger.lua:3390
+msgctxt "scienceDescription-station"
+msgid "Sensor components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:971 scripts/scenario_47_scavenger.lua:1526
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture sensor components and systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:971
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Tony Heyes the inventor of some of the earliest "
+"electromagnetic sensors in the mid 20th century on Earth in the United "
+"Kingdom to assist blind human mobility"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:972 scripts/scenario_47_scavenger.lua:1562
+msgctxt "scienceDescription-station"
+msgid "Nanite supplier"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:972 scripts/scenario_47_scavenger.lua:1563
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide nanites for various organic and non-organic systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:972
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after the nanotechnologist Hossam Haick from the early "
+"21st century on Earth in Israel"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:973 scripts/scenario_47_scavenger.lua:1602
+msgctxt "scienceDescription-station"
+msgid "Energy beam components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:973 scripts/scenario_47_scavenger.lua:1603
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture energy beam components and systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:973
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Theodore Maiman who researched and built the "
+"first laser in the mid 20th century on Earth"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:974 scripts/scenario_47_scavenger.lua:1671
+msgctxt "scienceDescription-station"
+msgid "Energy Beam Components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:974 scripts/scenario_47_scavenger.lua:1672
+msgctxt "stationGeneralInfo-comms"
+msgid "We manufacture energy beam components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:974
+msgctxt "stationStory-comms"
+msgid ""
+"Station named after Guglielmo Marconi an Italian inventor from early 20th "
+"century Earth who, along with Nicolo Tesla, claimed to have invented a death "
+"ray or particle beam weapon"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:975 scripts/scenario_47_scavenger.lua:1708
+msgctxt "scienceDescription-station"
+msgid "Exobiology research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:975 scripts/scenario_47_scavenger.lua:1709
+msgctxt "stationGeneralInfo-comms"
+msgid "We study recently discovered life forms not native to Earth"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:975
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after one of the early exobiologists from mid 20th "
+"century Earth, Dr. Stanley Miller"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:976 scripts/scenario_47_scavenger.lua:994
+#: scripts/scenario_47_scavenger.lua:1745
+#: scripts/scenario_47_scavenger.lua:2270
+msgctxt "scienceDescription-station"
+msgid "Impulse engine components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:976 scripts/scenario_47_scavenger.lua:1746
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture impulse engine components and systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:976
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Roger Shawyer who built the first prototype "
+"impulse engine in the early 21st century"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:979 scripts/scenario_47_scavenger.lua:1784
+msgctxt "scienceDescription-station"
+msgid "Energy and particle beam components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:979 scripts/scenario_47_scavenger.lua:1785
+msgctxt "stationGeneralInfo-comms"
+msgid "We fabricate general and specialized components for ship beam systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:979
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after Archimedes who, according to legend, used a "
+"series of adjustable focal length mirrors to focus sunlight on a Roman naval "
+"fleet invading Syracuse, setting fire to it"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:980 scripts/scenario_47_scavenger.lua:998
+#: scripts/scenario_47_scavenger.lua:1821
+#: scripts/scenario_47_scavenger.lua:2485
+msgctxt "scienceDescription-station"
+msgid "Trading station"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:980 scripts/scenario_47_scavenger.lua:1822
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"Only the largest market and trading location in twenty sectors. You can find "
+"your heart's desire here"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:980
+msgctxt "stationStory-comms"
+msgid ""
+"Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. "
+"Designed and built with trade and commerce in mind"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:981 scripts/scenario_47_scavenger.lua:1031
+#: scripts/scenario_47_scavenger.lua:1861
+#: scripts/scenario_47_scavenger.lua:3501
+msgctxt "scienceDescription-station"
+msgid "Mining"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:981 scripts/scenario_47_scavenger.lua:1862
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We mine nearby asteroids for precious minerals and process them for sale"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:981
+msgctxt "stationStory-comms"
+msgid ""
+"This station's name is inspired by a large gold mine on Earth in Indonesia. "
+"The station builders hoped to have a similar amount of minerals found "
+"amongst these asteroids"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:982 scripts/scenario_47_scavenger.lua:1898
+msgctxt "scienceDescription-station"
+msgid "Observatory and stellar mapping"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:982 scripts/scenario_47_scavenger.lua:1899
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We study the cosmos and map stellar phenomena. We also track moving "
+"asteroids. Look out! Just kidding"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:982
+msgctxt "stationStory-comms"
+msgid ""
+"Station named in honor of Charles Hayden whose philanthropy continued "
+"astrophysical research and education on Earth in the early 20th century"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:983 scripts/scenario_47_scavenger.lua:1019
+#: scripts/scenario_47_scavenger.lua:1935
+#: scripts/scenario_47_scavenger.lua:3123
+msgctxt "scienceDescription-station"
+msgid "Autodoc components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:983
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Dr. Lipkin who pioneered some of the research and "
+"application around robot assisted surgery in the area of partial nephrectomy "
+"for renal tumors in the early 21st century on Earth"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:984 scripts/scenario_47_scavenger.lua:1972
+msgctxt "scienceDescription-station"
+msgid "Zero gravity sports and entertainment"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:984 scripts/scenario_47_scavenger.lua:1973
+msgctxt "stationGeneralInfo-comms"
+msgid "Come take in a game or two or perhaps see a show"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:984
+msgctxt "stationStory-comms"
+msgid ""
+"Named after Madison Square Gardens from 21st century Earth, this station was "
+"designed to serve similar purposes in space - a venue for sports and "
+"entertainment"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:985 scripts/scenario_47_scavenger.lua:2009
+msgctxt "scienceDescription-station"
+msgid "Shield components and research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:985 scripts/scenario_47_scavenger.lua:2010
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and fabricate components for ship shield systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:985
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after the national research institution Rutherford "
+"Appleton Laboratory in the United Kingdom which conducted some preliminary "
+"research into the feasability of generating an energy shield in the late "
+"20th century"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:986 scripts/scenario_47_scavenger.lua:2046
+msgctxt "scienceDescription-station"
+msgid "Shield and armor components and research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:986 scripts/scenario_47_scavenger.lua:2047
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and make general and specialized components for ship shield and "
+"ship armor systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:986
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after one of the earliest researchers in shield "
+"technology, Alexander Toohie back when it was considered impractical to "
+"construct shields due to the physics involved."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:989 scripts/scenario_47_scavenger.lua:2088
+msgctxt "scienceDescription-station"
+msgid "Battery and software engineering"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:989 scripts/scenario_47_scavenger.lua:2089
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide high quality high capacity batteries and specialized software for "
+"all shipboard systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:989
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after a fictional software engineer in a late 20th "
+"century movie depicting humanity unknowingly conquered by aliens and kept "
+"docile by software generated illusion"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:990 scripts/scenario_47_scavenger.lua:2124
+msgctxt "scienceDescription-station"
+msgid "Shield and Armor Research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:990 scripts/scenario_47_scavenger.lua:2125
+msgctxt "stationGeneralInfo-comms"
+msgid "The finest shield and armor manufacturer in the quadrant"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:990
+msgctxt "stationStory-comms"
+msgid ""
+"We named this station for the pioneering spirit of the 22nd century "
+"Starfleet explorer, Captain Jonathan Archer"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:991 scripts/scenario_47_scavenger.lua:2160
+msgctxt "scienceDescription-station"
+msgid "Communication components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:991 scripts/scenario_47_scavenger.lua:2161
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide a range of communication equipment and software for use aboard "
+"ships"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:991
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Reginald Barclay who established the first "
+"transgalactic com link through the creative application of a quantum "
+"singularity. Station personnel often refer to the station as the Broccoli "
+"station"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:992 scripts/scenario_47_scavenger.lua:2196
+msgctxt "scienceDescription-station"
+msgid "Robotic research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:992 scripts/scenario_47_scavenger.lua:2197
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and provide robotic systems and components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:992
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after Dr. Susan Calvin who pioneered robotic "
+"behavioral research and programming"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:993 scripts/scenario_47_scavenger.lua:2233
+msgctxt "scienceDescription-station"
+msgid "Advanced Material components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:993 scripts/scenario_47_scavenger.lua:2234
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We fabricate several different kinds of materials critical to various space "
+"industries like ship building, station construction and mineral extraction"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:993
+msgctxt "stationStory-comms"
+msgid ""
+"We named our station after Dr. Cavor, the physicist that invented a barrier "
+"material for gravity waves - Cavorite"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:994 scripts/scenario_47_scavenger.lua:2271
+msgctxt "stationGeneralInfo-comms"
+msgid "We supply high quality impulse engines and parts for use aboard ships"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:994
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after the fictional engineer, Cyrus Smith created by "
+"19th century author Jules Verne"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:995 scripts/scenario_47_scavenger.lua:999
+#: scripts/scenario_47_scavenger.lua:1004
+#: scripts/scenario_47_scavenger.lua:2307
+#: scripts/scenario_47_scavenger.lua:2526
+#: scripts/scenario_47_scavenger.lua:2748
+msgctxt "scienceDescription-station"
+msgid "Android components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:995 scripts/scenario_47_scavenger.lua:2308
+msgctxt "stationGeneralInfo-comms"
+msgid "Supplier of android components, programming and service"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:995
+msgctxt "stationStory-comms"
+msgid ""
+"Named for Richard Deckard who inspired many of the sophisticated safety "
+"security algorithms now required for all androids"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:996 scripts/scenario_47_scavenger.lua:1000
+#: scripts/scenario_47_scavenger.lua:2340
+#: scripts/scenario_47_scavenger.lua:2563
+msgctxt "scienceDescription-station"
+msgid "Transporter components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:996 scripts/scenario_47_scavenger.lua:2341
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide transporters used aboard ships as well as the components for "
+"repair and maintenance"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:996
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the early 22nd century inventor of the "
+"transporter, Dr. Emory Erickson. This station is proud to have received the "
+"endorsement of Admiral Leonard McCoy"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:997 scripts/scenario_47_scavenger.lua:2414
+msgctxt "scienceDescription-station"
+msgid "Xenopsychology training"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:997 scripts/scenario_47_scavenger.lua:2415
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide classes and simulation to help train diverse species in how to "
+"relate to each other"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:997
+msgctxt "stationStory-comms"
+msgid ""
+"A continuation of the research initially conducted by Dr. Gennady Komov in "
+"the early 22nd century on Venus, supported by the application of these "
+"principles"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:998 scripts/scenario_47_scavenger.lua:2486
+msgctxt "stationGeneralInfo-comms"
+msgid "Come to Muddvile for all your trade and commerce needs and desires"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:998
+msgctxt "stationStory-comms"
+msgid ""
+"Upon retirement, Harry Mudd started this commercial venture using his "
+"leftover inventory and extensive connections obtained while he traveled the "
+"stars as a salesman"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:999 scripts/scenario_47_scavenger.lua:2527
+msgctxt "stationGeneralInfo-comms"
+msgid "Androids, their parts, maintenance and recylcling"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:999
+msgctxt "stationStory-comms"
+msgid ""
+"We named the station after the ground breaking android model produced by the "
+"Tyrell corporation"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1000
+#: scripts/scenario_47_scavenger.lua:2564
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and fabricate high quality transporters and transporter "
+"components for use aboard ships"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1000
+msgctxt "stationStory-comms"
+msgid ""
+"Miles O'Brien started this business after his experience as a transporter "
+"chief"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1001
+#: scripts/scenario_47_scavenger.lua:2600
+msgctxt "scienceDescription-station"
+msgid "Diplomatic training"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1001
+#: scripts/scenario_47_scavenger.lua:2601
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"The premeire academy for leadership and diplomacy training in the region"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1001
+msgctxt "stationStory-comms"
+msgid ""
+"Established by the royal family so critical during the political upheaval era"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1002
+#: scripts/scenario_47_scavenger.lua:1003
+#: scripts/scenario_47_scavenger.lua:2637
+#: scripts/scenario_47_scavenger.lua:2674
+msgctxt "scienceDescription-station"
+msgid "Load lifters and components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1002
+#: scripts/scenario_47_scavenger.lua:2638
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide load lifters and components for various ship systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1002
+msgctxt "stationStory-comms"
+msgid ""
+"Owens started off in the moisture vaporator business on Tattooine then "
+"branched out into load lifters based on acquisition of proprietary software "
+"and protocols. The station name recognizes the tragic loss of our founder to "
+"Imperial violence"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1003
+#: scripts/scenario_47_scavenger.lua:2675
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide load lifters and components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1003
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Ellen Ripley who made creative and effective use "
+"of one of our load lifters when defending her ship"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1004
+#: scripts/scenario_47_scavenger.lua:2749
+msgctxt "stationGeneralInfo-comms"
+msgid "We create androids and android components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1004
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Dr. Noonian Soong, the famous android researcher "
+"and builder"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1005
+#: scripts/scenario_47_scavenger.lua:2818
+msgctxt "scienceDescription-station"
+msgid "Logistics coordination"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1005
+#: scripts/scenario_47_scavenger.lua:2819
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We support the stations and ships in the area with planning and "
+"communication services"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1005
+msgctxt "stationStory-comms"
+msgid ""
+"We recognize the influence of Starfleet Captain James Tiberius Kirk in the "
+"23rd century in our station name"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1006
+#: scripts/scenario_47_scavenger.lua:2855
+msgctxt "scienceDescription-station"
+msgid "Advanced material components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1006
+msgctxt "stationStory-comms"
+msgid ""
+"We learned several of our critical industrial processes from the Tokra race, "
+"so we honor our fortune by naming the station after them"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1007
+#: scripts/scenario_47_scavenger.lua:1013
+#: scripts/scenario_47_scavenger.lua:2888
+#: scripts/scenario_47_scavenger.lua:2929
+msgctxt "scienceDescription-station"
+msgid "Ship building and maintenance facility"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1007
+#: scripts/scenario_47_scavenger.lua:2889
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We work on all aspects of naval ship building and maintenance. Many of the "
+"naval models are researched, designed and built right here on this station. "
+"Our design goals seek to make the space faring experience as simple as "
+"possible given the tremendous capabilities of the modern naval vessel"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1008
+#: scripts/scenario_47_scavenger.lua:2966
+msgctxt "scienceDescription-station"
+msgid "Warp engine components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1008
+#: scripts/scenario_47_scavenger.lua:2967
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We specialize in the esoteric components necessary to make warp drives "
+"function properly"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1008
+msgctxt "stationStory-comms"
+msgid ""
+"Zefram Cochrane constructed the first warp drive in human history. We named "
+"our station after him because of the specialized warp systems work we do"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1009
+#: scripts/scenario_47_scavenger.lua:2377
+msgctxt "scienceDescription-station"
+msgid "Commerce and gambling"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1009
+#: scripts/scenario_47_scavenger.lua:2378
+msgctxt "stationGeneralInfo-comms"
+msgid "Come play some games and shop. House take does not exceed 4 percent"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1010
+#: scripts/scenario_47_scavenger.lua:2452
+msgctxt "scienceDescription-station"
+msgid "Casino and Gambling"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1011
+#: scripts/scenario_47_scavenger.lua:2711
+msgctxt "scienceDescription-station"
+msgid "Routine maintenance and entertainment"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1011
+#: scripts/scenario_47_scavenger.lua:2712
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"Stop by for repairs. Take in one of our juggling shows featuring the four-"
+"armed Skandars"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1011
+msgctxt "stationStory-comms"
+msgid ""
+"The nomadic Skandars have set up at this station to practice their "
+"entertainment and maintenance skills as well as build a community where "
+"Skandars can relax"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1012
+#: scripts/scenario_47_scavenger.lua:2785
+msgctxt "scienceDescription-station"
+msgid "Automated weapons systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1012
+#: scripts/scenario_47_scavenger.lua:2786
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and create automated weapons systems to improve ship combat "
+"capability"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1012
+msgctxt "stationStory-comms"
+msgid ""
+"Lost the history memory bank. Recovery efforts only brought back the phrase, "
+"'I'll be back'"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1016
+#: scripts/scenario_47_scavenger.lua:3004
+msgctxt "scienceDescription-station"
+msgid "Optical Components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1016
+#: scripts/scenario_47_scavenger.lua:3005
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make and supply optic components for various station and ship systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1016
+msgctxt "stationStory-comms"
+msgid ""
+"This station continues the businesses from Earth based on the merging of "
+"several companies including Leica from Switzerland, the lens manufacturer "
+"and the Japanese advanced low carbon (ALCA) electronic and optic research "
+"and development company"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1017
+#: scripts/scenario_47_scavenger.lua:3049
+msgctxt "scienceDescription-station"
+msgid "Medical research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1017
+#: scripts/scenario_47_scavenger.lua:3050
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and treat exotic medical conditions"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1017
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the United States national medical research "
+"center based in Bethesda, Maryland on earth which was established in the mid "
+"20th century"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1018
+#: scripts/scenario_47_scavenger.lua:3086
+msgctxt "scienceDescription-station"
+msgid "Repulsor and Tractor Beam Components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1018
+#: scripts/scenario_47_scavenger.lua:3087
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We can meet all your pushing and pulling needs with specialized equipment "
+"custom made"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1018
+msgctxt "stationStory-comms"
+msgid ""
+"The station name comes from a short story by the 20th century author "
+"Clifford D. Simak as well as from the 19th century developer John Deere who "
+"inspired a company that makes the Earth bound equivalents of our products"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1019
+#: scripts/scenario_47_scavenger.lua:3124
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide components for automated medical machinery"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1019
+msgctxt "stationStory-comms"
+msgid ""
+"The station is the evolution of the company that started automated "
+"pharmaceutical dispensing in the early 21st century on Earth in Finland"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1020
+#: scripts/scenario_47_scavenger.lua:3164
+msgctxt "scienceDescription-station"
+msgid "Nanotechnology research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1020
+#: scripts/scenario_47_scavenger.lua:3165
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide nanites and software for a variety of ship-board systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1020
+msgctxt "stationStory-comms"
+msgid ""
+"This station's name recognizes one of the first scientific researchers into "
+"nanotechnology, physicist Richard Feynman"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1021
+#: scripts/scenario_47_scavenger.lua:3205
+msgctxt "scienceDescription-station"
+msgid "Medical Research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1021
+#: scripts/scenario_47_scavenger.lua:3206
+msgctxt "stationGeneralInfo-comms"
+msgid "We research exotic diseases and other human medical conditions"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1021
+msgctxt "stationStory-comms"
+msgid ""
+"We continue the medical work started by William Worrall Mayo in the late "
+"19th century on Earth"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1022
+#: scripts/scenario_47_scavenger.lua:3242
+msgctxt "scienceDescription-station"
+msgid "Optical components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1022
+#: scripts/scenario_47_scavenger.lua:3243
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We fabricate optical lenses and related equipment as well as fiber optic "
+"cabling and components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1022
+msgctxt "stationStory-comms"
+msgid ""
+"This station grew out of the Olympus company based on earth in the early "
+"21st century. It merged with Infinera, then bought several software "
+"comapnies before branching out into space based industry"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1023
+#: scripts/scenario_47_scavenger.lua:3279
+msgctxt "scienceDescription-station"
+msgid "Optic components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1023
+#: scripts/scenario_47_scavenger.lua:3280
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide optic components for various ship systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1023
+msgctxt "stationStory-comms"
+msgid ""
+"This station is an outgrowth of the Panduit corporation started in the mid "
+"20th century on Earth in the United States"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1024
+#: scripts/scenario_47_scavenger.lua:3320
+msgctxt "scienceDescription-station"
+msgid "Repulsor and tractor beam components"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1024
+#: scripts/scenario_47_scavenger.lua:3321
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make ship systems designed to push or pull other objects around in space"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1024
+msgctxt "stationStory-comms"
+msgid ""
+"Our station is named Shree after one of many tugboat manufacturers in the "
+"early 21st century on Earth in India. Tugboats serve a similar purpose for "
+"ocean-going vessels on earth as tractor and repulsor beams serve for space-"
+"going vessels today"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1025
+#: scripts/scenario_47_scavenger.lua:3353
+msgctxt "scienceDescription-station"
+msgid "Shielded Circuitry Fabrication"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1025
+#: scripts/scenario_47_scavenger.lua:3354
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We specialize in circuitry shielded from external hacking suitable for ship "
+"systems"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1025
+msgctxt "stationStory-comms"
+msgid ""
+"We started as an expansion from the lunar based chip manufacturer of Earth "
+"legacy Intel electronic chips"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1026
+#: scripts/scenario_47_scavenger.lua:3391
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and construct components for the most powerful and accurate "
+"sensors used aboard ships along with the software to make them easy to use"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1026
+msgctxt "stationStory-comms"
+msgid ""
+"The Veloquan company has its roots in the manufacturing of LIDAR sensors in "
+"the early 21st century on Earth in the United States for autonomous ground-"
+"based vehicles. They expanded research and manufacturing operations to "
+"include various sensors for space vehicles. Veloquan was the result of "
+"numerous mergers and acquisitions of several companies including Velodyne "
+"and Quanergy"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1027
+#: scripts/scenario_47_scavenger.lua:3422
+msgctxt "scienceDescription-station"
+msgid "Biotechnology research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1027
+#: scripts/scenario_47_scavenger.lua:3423
+msgctxt "stationGeneralInfo-comms"
+msgid "Merging the organic and inorganic through research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1027
+msgctxt "stationStory-comms"
+msgid ""
+"Continued from the Tandon school of engineering started on Earth in the "
+"early 21st century"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1030
+#: scripts/scenario_47_scavenger.lua:1032
+#: scripts/scenario_47_scavenger.lua:1033
+#: scripts/scenario_47_scavenger.lua:1034
+#: scripts/scenario_47_scavenger.lua:3461
+#: scripts/scenario_47_scavenger.lua:3541
+#: scripts/scenario_47_scavenger.lua:3578
+#: scripts/scenario_47_scavenger.lua:3617
+msgctxt "scienceDescription-station"
+msgid "Mining station"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1031
+#: scripts/scenario_47_scavenger.lua:3502
+msgctxt "stationGeneralInfo-comms"
+msgid "We mine nearby asteroids for precious minerals"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1035
+#: scripts/scenario_47_scavenger.lua:3756
+msgctxt "scienceDescription-station"
+msgid "Mining and trade"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1036
+#: scripts/scenario_47_scavenger.lua:3793
+msgctxt "scienceDescription-station"
+msgid "Mining and gambling"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1037
+#: scripts/scenario_47_scavenger.lua:1050
+#: scripts/scenario_47_scavenger.lua:4149
+#: scripts/scenario_47_scavenger.lua:4181
+msgctxt "scienceDescription-station"
+msgid "Observatory"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1038
+#: scripts/scenario_47_scavenger.lua:1634
+#: scripts/scenario_47_scavenger.lua:3650
+msgctxt "scienceDescription-station"
+msgid "Gambling and resupply"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1038
+#: scripts/scenario_47_scavenger.lua:3651
+msgctxt "stationGeneralInfo-comms"
+msgid "Relax and meet some interesting players"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1039
+#: scripts/scenario_47_scavenger.lua:3687
+msgctxt "scienceDescription-station"
+msgid "Commerce and recreation"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1040
+#: scripts/scenario_47_scavenger.lua:3719
+msgctxt "scienceDescription-station"
+msgid "Xenopsychology research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1041
+#: scripts/scenario_47_scavenger.lua:1043
+#: scripts/scenario_47_scavenger.lua:1047
+#: scripts/scenario_47_scavenger.lua:1051
+#: scripts/scenario_47_scavenger.lua:3830
+#: scripts/scenario_47_scavenger.lua:3904
+#: scripts/scenario_47_scavenger.lua:4042
+#: scripts/scenario_47_scavenger.lua:4218
+msgctxt "scienceDescription-station"
+msgid "Resupply"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1044
+#: scripts/scenario_47_scavenger.lua:3936
+msgctxt "scienceDescription-station"
+msgid "Textiles and fashion"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1045
+#: scripts/scenario_47_scavenger.lua:3973
+msgctxt "scienceDescription-station"
+msgid "Stress Psychology Research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1046
+#: scripts/scenario_47_scavenger.lua:4005
+msgctxt "scienceDescription-station"
+msgid "Low gravity research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1047
+#: scripts/scenario_47_scavenger.lua:4043
+msgctxt "stationGeneralInfo-comms"
+msgid "Get your energy here! Grab a drink before you go!"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1048
+#: scripts/scenario_47_scavenger.lua:4075
+msgctxt "scienceDescription-station"
+msgid "Research Lab and Observatory"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1049
+#: scripts/scenario_47_scavenger.lua:4116
+msgctxt "scienceDescription-station"
+msgid "Biotech research"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1070
+#: scripts/scenario_47_scavenger.lua:4621
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "%s Current cargo:"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1075
+#: scripts/scenario_47_scavenger.lua:4626
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "     %s: %i"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1079
+msgctxt "inventory-shipLog"
+msgid "     Empty"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1081
+#: scripts/scenario_47_scavenger.lua:4634
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "Available space: %i"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1104
+msgctxt "artifact-shipLog"
+msgid "The artifact we picked up has damaged our ship"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1146
+msgctxt "artifact-shipLog"
+msgid ""
+"The technology gleaned from the artifact has allowed our technicians to "
+"increase the damage inflicted by our beam weapons"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1156
+#, lua-format
+msgctxt "artifact-shipLog"
+msgid ""
+"The technology gleaned from the artifact has allowed our technicians to "
+"increase our maneuver speed by %.1f%%"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1164
+msgctxt "characterInfo-comms"
+msgid ""
+"His penchant for miniaturization and tinkering allows him to add a beam "
+"weapon to any ship"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1178
+msgctxt "characterInfo-comms"
+msgid ""
+"She knows how to increase your maximum energy capacity by improving battery "
+"efficiency"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:1635
+msgctxt "stationGeneralInfo-comms"
+msgid "The oldest station in the quadrant"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:2856
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We create multiple types of advanced material components. Our most popular "
+"products are our filaments"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4605
+#: scripts/scenario_47_scavenger.lua:8693
+msgctxt "inventory-buttonRelay"
+msgid "Inventory"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4612
+#: scripts/scenario_47_scavenger.lua:8700
+msgctxt "inventory-buttonOperations"
+msgid "Inventory"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4632
+msgctxt "inventory-shipLog"
+msgid "     Empty\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4812
+msgctxt "station-comms"
+msgid "We are under attack! No time for chatting!"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4834
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Greetings %s!\n"
+"How may we help you today?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4836
+msgctxt "station-comms"
+msgid ""
+"Good day, officer!\n"
+"What can we do for you today?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4838
+msgctxt "station-comms"
+msgid "Hello, may I help you?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4841
+msgctxt "station-comms"
+msgid "Welcome to our lovely station."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4844
+msgctxt "station-comms"
+msgid ""
+"Forgive us if we seem a little distracted. We are carefully monitoring the "
+"enemies nearby."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4862
+msgctxt "ammo-comms"
+msgid "I need ordnance restocked"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4865
+msgctxt "ammo-comms"
+msgid "What type of ordnance?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4872
+msgctxt "ammo-comms"
+msgid "Can you supply us with some nukes? ("
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4874
+msgctxt "ammo-comms"
+msgid "We really need some nukes ("
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4877
+#: scripts/scenario_47_scavenger.lua:4890
+#: scripts/scenario_47_scavenger.lua:4902
+#: scripts/scenario_47_scavenger.lua:4914
+#: scripts/scenario_47_scavenger.lua:4926
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s%d rep each)"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4886
+msgctxt "ammo-comms"
+msgid "Please re-stock our EMP missiles. ("
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4888
+msgctxt "ammo-comms"
+msgid "Got any EMPs? ("
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4898
+msgctxt "ammo-comms"
+msgid "Do you have spare homing missiles for us? ("
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4900
+msgctxt "ammo-comms"
+msgid "Do you have extra homing missiles? ("
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4910
+msgctxt "ammo-comms"
+msgid "We could use some mines. ("
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4912
+msgctxt "ammo-comms"
+msgid "How about mines? ("
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4922
+msgctxt "ammo-comms"
+msgid "What about HVLI? ("
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4924
+msgctxt "ammo-comms"
+msgid "Could you provide HVLI? ("
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4934
+#: scripts/scenario_47_scavenger.lua:6025
+msgctxt "station-comms"
+msgid "I need information"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4935
+msgctxt "station-comms"
+msgid "What kind of information are you looking for?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4936
+#: scripts/scenario_47_scavenger.lua:6100
+msgctxt "stationServices-comms"
+msgid "Docking services status"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4937
+#: scripts/scenario_47_scavenger.lua:6102
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Station %s docking services status:"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4939
+#: scripts/scenario_47_scavenger.lua:6104
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Replenish scan probes."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4943
+#: scripts/scenario_47_scavenger.lua:6108
+msgctxt "stationServices-comms"
+msgid "Cannot replenish scan probes due to fabrication unit failure."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4944
+#: scripts/scenario_47_scavenger.lua:6109
+msgctxt "stationServices-comms"
+msgid "Parts shortage prevents scan probe replenishment."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4945
+#: scripts/scenario_47_scavenger.lua:6110
+msgctxt "stationServices-comms"
+msgid ""
+"Station management has curtailed scan probe replenishment for cost cutting "
+"reasons."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4949
+#: scripts/scenario_47_scavenger.lua:4962
+#: scripts/scenario_47_scavenger.lua:4975
+#: scripts/scenario_47_scavenger.lua:6114
+#: scripts/scenario_47_scavenger.lua:6127
+#: scripts/scenario_47_scavenger.lua:6140
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4952
+#: scripts/scenario_47_scavenger.lua:6117
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Ship hull repair."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4956
+#: scripts/scenario_47_scavenger.lua:6121
+msgctxt "stationServices-comms"
+msgid "We're out of the necessary materials and supplies for hull repair."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4957
+msgctxt "stationServices-comms"
+msgid "Hull repair automation unavailable while it is undergoing maintenance."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4958
+#: scripts/scenario_47_scavenger.lua:6123
+msgctxt "stationServices-comms"
+msgid "All hull repair technicians quarantined to quarters due to illness."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4965
+#: scripts/scenario_47_scavenger.lua:6130
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Recharge ship energy stores."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4969
+#: scripts/scenario_47_scavenger.lua:6134
+msgctxt "stationServices-comms"
+msgid ""
+"A recent reactor failure has put us on auxiliary power, so we cannot "
+"recharge ships."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4970
+#: scripts/scenario_47_scavenger.lua:6135
+msgctxt "stationServices-comms"
+msgid "A damaged power coupling makes it too dangerous to recharge ships."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4971
+#: scripts/scenario_47_scavenger.lua:6136
+msgctxt "stationServices-comms"
+msgid ""
+"An asteroid strike damaged our solar cells and we are short on power, so we "
+"can't recharge ships right now."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4978
+#: scripts/scenario_47_scavenger.lua:6143
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May overcharge jump drive"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4981
+#: scripts/scenario_47_scavenger.lua:6146
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair probe launch system"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4984
+#: scripts/scenario_47_scavenger.lua:6149
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair hacking system"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4987
+#: scripts/scenario_47_scavenger.lua:6152
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair scanners"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4990
+#: scripts/scenario_47_scavenger.lua:6155
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair combat maneuver"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:4993
+#: scripts/scenario_47_scavenger.lua:6158
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair self destruct system"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5002
+#: scripts/scenario_47_scavenger.lua:6240
+msgctxt "station-comms"
+msgid "Tell me more about your station"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5003
+#: scripts/scenario_47_scavenger.lua:6242
+msgctxt "station-comms"
+msgid "What would you like to know?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5005
+#: scripts/scenario_47_scavenger.lua:6244
+msgctxt "stationGeneralInfo-comms"
+msgid "General information"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5011
+#: scripts/scenario_47_scavenger.lua:6250
+msgctxt "stationStory-comms"
+msgid "Station history"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5019
+#: scripts/scenario_47_scavenger.lua:6257
+msgctxt "gossip-comms"
+msgid "Gossip"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5031
+#: scripts/scenario_47_scavenger.lua:6031
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "Tell me about %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5038
+#: scripts/scenario_47_scavenger.lua:6038
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "Never heard of %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5040
+#: scripts/scenario_47_scavenger.lua:6040
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s died last week. The funeral was yesterday"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5042
+#: scripts/scenario_47_scavenger.lua:6042
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s? Who's %s? There's nobody here named %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5044
+#: scripts/scenario_47_scavenger.lua:6044
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "We don't talk about %s. They are gone and good riddance"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5046
+#: scripts/scenario_47_scavenger.lua:6046
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "I think %s moved away"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5091
+#: scripts/scenario_47_scavenger.lua:6055
+msgctxt "orders-comms"
+msgid "What are my current orders?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5096
+#: scripts/scenario_47_scavenger.lua:6060
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"   %i Minutes remain in game"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5103
+msgctxt "explainGoods-comms"
+msgid "No tutorial covered goods or cargo. Explain"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5104
+msgctxt "explainGoods-comms"
+msgid ""
+"Different types of cargo or goods may be obtained from stations, freighters "
+"or other sources. They go by one word descriptions such as dilithium, optic, "
+"warp, etc. Certain mission goals may require a particular type or types of "
+"cargo. Each player ship differs in cargo carrying capacity. Goods may be "
+"obtained by spending reputation points or by trading other types of cargo "
+"(typically food, medicine or luxury)"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5116
+msgctxt "stationServices-comms"
+msgid "Overcharge Jump Drive (10 Rep)"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5119
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Your jump drive has been overcharged to %ik"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5121
+#: scripts/scenario_47_scavenger.lua:5154
+#: scripts/scenario_47_scavenger.lua:5167
+#: scripts/scenario_47_scavenger.lua:5180
+#: scripts/scenario_47_scavenger.lua:5193
+#: scripts/scenario_47_scavenger.lua:5206
+#: scripts/scenario_47_scavenger.lua:5433
+#: scripts/scenario_47_scavenger.lua:5450
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5145
+msgctxt "stationServices-comms"
+msgid "Repair ship system"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5146
+msgctxt "stationServices-comms"
+msgid "What system would you like repaired?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5149
+msgctxt "stationServices-comms"
+msgid "Repair probe launch system (5 Rep)"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5152
+msgctxt "stationServices-comms"
+msgid "Your probe launch system has been repaired"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5162
+msgctxt "stationServices-comms"
+msgid "Repair hacking system (5 Rep)"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5165
+msgctxt "stationServices-comms"
+msgid "Your hack system has been repaired"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5175
+msgctxt "stationServices-comms"
+msgid "Repair scanners (5 Rep)"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5178
+msgctxt "stationServices-comms"
+msgid "Your scanners have been repaired"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5188
+msgctxt "stationServices-comms"
+msgid "Repair combat maneuver (5 Rep)"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5191
+msgctxt "stationServices-comms"
+msgid "Your combat maneuver has been repaired"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5201
+msgctxt "stationServices-comms"
+msgid "Repair self destruct system (5 Rep)"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5204
+msgctxt "stationServices-comms"
+msgid "Your self destruct system has been repaired"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5217
+msgctxt "contract-comms"
+msgid "Check long distance contract"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5219
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"Contract Details:\n"
+"Travel to %s system to deliver cargo to supply station %s. Distance to "
+"system: %i units. Upon delivery, %s technicians will upgrade your battery "
+"efficiency and beam cycle time."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5223
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"The Human Navy requires all armed ships be equipped with the ability to drop "
+"mines. We have modified %s with a rear facing mining tube. Due to ship size "
+"constraints, we were only able to provide you with two mines."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5231
+msgctxt "contract-comms"
+msgid ""
+"\n"
+"\n"
+"Your current cargo ("
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5233
+msgctxt "contract-comms"
+msgid ", "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5237
+msgctxt "contract-comms"
+msgid ""
+") has been removed to make room for your contract cargo and to help defray "
+"the cost of upgrading your ship to Human Navy standards."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5248
+#, lua-format
+msgctxt "contract-comms"
+msgid ""
+"\n"
+"\n"
+"Critical cargo has been loaded aboard your ship, %s. Take the cargo to the "
+"%s system centered in sector %s. Find %s, the second planet out from star "
+"%s. Dock at station %s in orbit around %s's moon, %s to deliver the cargo. "
+"They will have crew standing by to immediately offload the cargo"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5261
+msgctxt "ridExuari-comms"
+msgid "Upgrade impulse engines"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5263
+msgctxt "ridExuari-comms"
+msgid ""
+"Thanks for taking care of those Exuari. We've upgraded the topspeed of your "
+"impulse engines"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5268
+msgctxt "ridExuari-comms"
+msgid "Add missile tubes"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5270
+msgctxt "ridExuari-comms"
+msgid ""
+"Thanks for continuing to shoot down those Exuari. We've added some missile "
+"tubes to help you destroy the Exuari station"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5271
+#, lua-format
+msgctxt "ridExuari-comms"
+msgid ""
+"%s has asked for help against Exuari forces and has provided your ship with "
+"missile weapons to help you destroy %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5276
+msgctxt "ridExuari-comms"
+msgid "Upgrade beam damage"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5278
+msgctxt "ridExuari-comms"
+msgid ""
+"Looks like you're having a hard time with those Exuari. We've increased the "
+"damage your beam weapons deal out"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5431
+#: scripts/scenario_47_scavenger.lua:5448
+#, lua-format
+msgctxt "trade-comms"
+msgid "Recruit repair crew member for %i reputation"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5436
+#: scripts/scenario_47_scavenger.lua:5453
+msgctxt "trade-comms"
+msgid "Repair crew member hired"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5460
+msgctxt "trade-comms"
+msgid "Buy, sell, trade"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5462
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available for sale: quantity, cost in reputation\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5464
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i, %i\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5467
+msgctxt "trade-comms"
+msgid "Goods or components station will buy: price in reputation\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5469
+#: scripts/scenario_47_scavenger.lua:5478
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5472
+#, lua-format
+msgctxt "trade-comms"
+msgid "Current cargo aboard %s:\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5482
+msgctxt "trade-comms"
+msgid "     Empty\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5484
+#, lua-format
+msgctxt "trade-comms"
+msgid "Available Space: %i, Available Reputation: %i\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5487
+#: scripts/scenario_47_scavenger.lua:6639
+#: scripts/scenario_47_scavenger.lua:6669
+#: scripts/scenario_47_scavenger.lua:6694
+#: scripts/scenario_47_scavenger.lua:6725
+#: scripts/scenario_47_scavenger.lua:6850
+#: scripts/scenario_47_scavenger.lua:6872
+#: scripts/scenario_47_scavenger.lua:6896
+#: scripts/scenario_47_scavenger.lua:6918
+#: scripts/scenario_47_scavenger.lua:6942
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5488
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i, Rep: %i"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5490
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient cargo space for purchase"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5492
+#: scripts/scenario_47_scavenger.lua:5508
+msgctxt "needRep-comms"
+msgid ""
+"\n"
+"Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5494
+#: scripts/scenario_47_scavenger.lua:5520
+#: scripts/scenario_47_scavenger.lua:5543
+#: scripts/scenario_47_scavenger.lua:5566
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient station inventory"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5506
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"purchased"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5517
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade food for %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5518
+#: scripts/scenario_47_scavenger.lua:5541
+#: scripts/scenario_47_scavenger.lua:5564
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Quantity: %i"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5531
+#: scripts/scenario_47_scavenger.lua:5554
+#: scripts/scenario_47_scavenger.lua:5577
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Traded"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5540
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade medicine for %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5563
+#: scripts/scenario_47_scavenger.lua:6616
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5658
+msgctxt "scienceDescription-supply"
+msgid "Supply Drop"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5658
+msgctxt "scienceDescription-supply"
+msgid ""
+"Supply Drop containing energy, missiles and various ship system repair parts"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5868
+msgctxt "asteroid-comms"
+msgid "Contact Jenny McGuire"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5872
+#, lua-format
+msgctxt "asteroid-comms"
+msgid ""
+"Communication routed to guest quarters aboard %s\n"
+"\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5874
+#, lua-format
+msgctxt "asteroid-comms"
+msgid "%sYes? What can I do for you?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5875
+msgctxt "asteroid-comms"
+msgid "What were those asteroid compositional percentages?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5876
+#, lua-format
+msgctxt "asteroid-comms"
+msgid ""
+"Osmium: %.1f\n"
+"Iridium: %.1f\n"
+"Olivine: %.1f\n"
+"Nickel: %.1f"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5881
+msgctxt "asteroid-comms"
+msgid "Asteroid under 1.5 units away"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5884
+#, lua-format
+msgctxt "asteroid-comms"
+msgid ""
+"%s must come to a complete stop before I can deactivate the cloaking "
+"mechanism"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5886
+msgctxt "asteroid-comms"
+msgid "Cloaking mechanism deactivated, please retrieve my data store"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5889
+msgctxt "scienceDescription-artifact"
+msgid "Stasis container"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5889
+msgctxt "scienceDescription-artifact"
+msgid "Stasis container with a high density data store inside"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5890
+#, lua-format
+msgctxt "asteroid-shipLog"
+msgid ""
+"[Jenny McGuire] Thank you for picking up my research for me, %s. Next time "
+"you dock with %s you can get the upgrade I promised"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5897
+msgctxt "asteroid-comms"
+msgid "What is the asteroid approach procedure?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5899
+msgctxt "asteroid-comms"
+msgid ""
+"Get within 1.5 units of the asteroid and contact me. I will deactivate the "
+"cloaking mechanism on my research data store so that you can then pick it up"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5901
+#, lua-format
+msgctxt "asteroid-comms"
+msgid "First, you have to pick me up from %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5907
+msgctxt "asteroid-comms"
+msgid "The asteroid may have been destroyed"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5908
+msgctxt "asteroid-comms"
+msgid ""
+"So it seems. Looks like I'll have to find another asteroid. Thanks for your "
+"help."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5914
+#, lua-format
+msgctxt "asteroid-comms"
+msgid "Thanks for getting my research for me. Dock with %s to get the upgrade"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5916
+msgctxt "asteroid-comms"
+msgid "Please retrieve my data store"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5944
+msgctxt "station-comms"
+msgid "You need to stay docked for that action."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5948
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5949
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5950
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5957
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5959
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5967
+#: scripts/scenario_47_scavenger.lua:5982
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5969
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5972
+#: scripts/scenario_47_scavenger.lua:5987
+#: scripts/scenario_47_scavenger.lua:5992
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5977
+msgctxt "ammo-comms"
+msgid "You can't afford as much as I'd like to give you"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5978
+msgctxt "ammo-comms"
+msgid "Get just one"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:5984
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with one weapon charge.\n"
+"Put it to good use."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6008
+msgctxt "station-comms"
+msgid ""
+"Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6010
+msgctxt "station-comms"
+msgid ""
+"Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6013
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Be aware that if enemies in the area get much closer, we will be too busy to "
+"conduct business with you."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6026
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6066
+msgctxt "ammo-comms"
+msgid "What ordnance do you have available for restock?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6072
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Nuke"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6076
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   EMP"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6080
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Homing"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6084
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Mine"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6088
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   HVLI"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6091
+msgctxt "ammo-comms"
+msgid "We have no ordnance available for restock"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6093
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following type of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6095
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following types of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6122
+msgctxt "stationServices-comms"
+msgid "Hull repair automation unavailable whie it is undergoing maintenance."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6172
+msgctxt "trade-comms"
+msgid "What goods do you have available for sale or trade?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6174
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available: quantity, cost in reputation"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6176
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"   %14s: %2i, %3i"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6182
+msgctxt "trade-comms"
+msgid "Where can I find particular goods?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6184
+msgctxt "trade-comms"
+msgid ""
+"Friendly stations often have food or medicine or both. Neutral stations may "
+"trade their goods for food, medicine or luxury."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6224
+#, lua-format
+msgctxt "trade-comms"
+msgid "Station %s in sector %s has %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6229
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"\n"
+"What goods are you interested in?\n"
+"I've heard about these:"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6231
+msgctxt "trade-comms"
+msgid " Beyond that, I have no knowledge of specific stations"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6265
+msgctxt "stationAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6266
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6269
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6272
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6280
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop? (%d rep)"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6282
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request backup."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6284
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6286
+#: scripts/scenario_47_scavenger.lua:6312
+#: scripts/scenario_47_scavenger.lua:6332
+#: scripts/scenario_47_scavenger.lua:6352
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "WP %d"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6294
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship toward WP %d"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6296
+#: scripts/scenario_47_scavenger.lua:6318
+#: scripts/scenario_47_scavenger.lua:6338
+#: scripts/scenario_47_scavenger.lua:6358
+msgctxt "needRep-comms"
+msgid "Not enough reputation!"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6306
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send Adder MK5 reinforcements! (%d rep)"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6308
+#: scripts/scenario_47_scavenger.lua:6328
+#: scripts/scenario_47_scavenger.lua:6348
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request reinforcements."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6310
+#: scripts/scenario_47_scavenger.lua:6330
+#: scripts/scenario_47_scavenger.lua:6350
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the reinforcements?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6316
+#: scripts/scenario_47_scavenger.lua:6336
+#: scripts/scenario_47_scavenger.lua:6356
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to assist at waypoint %d"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6326
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send Phobos T3 reinforcements! (%d rep)"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6346
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send Stalker Q7 reinforcements! (%d rep)"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6394
+msgctxt "trade-comms"
+msgid " and will trade it for medicine"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6399
+msgctxt "trade-comms"
+msgid " or food"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6401
+msgctxt "trade-comms"
+msgid " and will trade it for food"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6407
+msgctxt "trade-comms"
+msgid " or luxury"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6409
+msgctxt "trade-comms"
+msgid " and will trade it for luxury"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6464
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6466
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6468
+#: scripts/scenario_47_scavenger.lua:6578
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6470
+#: scripts/scenario_47_scavenger.lua:6580
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6473
+#: scripts/scenario_47_scavenger.lua:6583
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6475
+#: scripts/scenario_47_scavenger.lua:6585
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %d"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6477
+#: scripts/scenario_47_scavenger.lua:6591
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %d."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6484
+#: scripts/scenario_47_scavenger.lua:6569
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6485
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6490
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6491
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6494
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6496
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6497
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Rear Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6500
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6507
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s Missiles: %d/%d\n"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6515
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6516
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6523
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Direct %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6524
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "What command should be given to %s?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6525
+msgctxt "shipAssist-comms"
+msgid "Report hull and shield status"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6549
+msgctxt "shipAssist-comms"
+msgid "Report missile status"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6550
+msgctxt "shipAssist-comms"
+msgid "Fleet missile status:"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6575
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s heading toward you to assist"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6626
+#, lua-format
+msgctxt "trade-comms"
+msgid "Traded your luxury for %s from %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6650
+#: scripts/scenario_47_scavenger.lua:6680
+#: scripts/scenario_47_scavenger.lua:6705
+#: scripts/scenario_47_scavenger.lua:6736
+#: scripts/scenario_47_scavenger.lua:6861
+#: scripts/scenario_47_scavenger.lua:6883
+#: scripts/scenario_47_scavenger.lua:6907
+#: scripts/scenario_47_scavenger.lua:6929
+#: scripts/scenario_47_scavenger.lua:6953
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchased %s from %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6652
+#: scripts/scenario_47_scavenger.lua:6682
+#: scripts/scenario_47_scavenger.lua:6707
+#: scripts/scenario_47_scavenger.lua:6738
+#: scripts/scenario_47_scavenger.lua:6863
+#: scripts/scenario_47_scavenger.lua:6885
+#: scripts/scenario_47_scavenger.lua:6909
+#: scripts/scenario_47_scavenger.lua:6931
+#: scripts/scenario_47_scavenger.lua:6955
+msgctxt "needRep-comms"
+msgid "Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6748
+#: scripts/scenario_47_scavenger.lua:6826
+msgctxt "trade-comms"
+msgid "Do you have cargo you might sell?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6754
+#: scripts/scenario_47_scavenger.lua:6832
+msgctxt "trade-comms"
+msgid ", "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6762
+#: scripts/scenario_47_scavenger.lua:6840
+msgctxt "trade-comms"
+msgid "nothing"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6774
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6775
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6776
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6778
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6781
+msgctxt "shipEnemy-comms"
+msgid "We will destroy you"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6782
+msgctxt "shipEnemy-comms"
+msgid "We think not. It is you who will experience destruction!"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6784
+msgctxt "shipEnemy-comms"
+msgid "You have no honor"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6785
+msgctxt "shipEnemy-comms"
+msgid "Your insult has brought our wrath upon you. Prepare to die."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6786
+msgctxt "shipEnemy-comms"
+msgid "Your comments about honor have no meaning to us"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6788
+msgctxt "shipEnemy-comms"
+msgid "We pity your pathetic race"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6789
+msgctxt "shipEnemy-comms"
+msgid "Pathetic? You will regret your disparagement!"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6790
+msgctxt "shipEnemy-comms"
+msgid "We don't care what you think of us"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6793
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6795
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6797
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6798
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6799
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6800
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6802
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6803
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6804
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6805
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6807
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6825
+msgctxt "trade-comms"
+msgid "Yes?"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6828
+msgctxt "trade-comms"
+msgid "We've got "
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6967
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:6969
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7380
+msgctxt "repairCrew-msgEngineer"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7384
+msgctxt "repairCrew-msgEngineer+"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7402
+msgctxt "coolant-msgEngineer"
+msgid "Automated systems have recovered some coolant"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7405
+msgctxt "coolant-msgEngineer+"
+msgid "Automated systems have recovered some coolant"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7444
+#: scripts/scenario_47_scavenger.lua:7479
+msgctxt "repairCrew-msgEngineer"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7448
+#: scripts/scenario_47_scavenger.lua:7483
+msgctxt "repairCrew-msgEngineer+"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7500
+msgctxt "coolant-msgEngineer"
+msgid "Damage has caused a loss of coolant"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7504
+msgctxt "coolant-msgEngineer+"
+msgid "Damage has caused a loss of coolant"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7511
+msgctxt "damage-msgEngineer"
+msgid "The probe launch system has been damaged"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7514
+msgctxt "damage-msgEngineer+"
+msgid "The probe launch system has been damaged"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7519
+msgctxt "damage-msgEngineer"
+msgid "The hacking system has been damaged"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7522
+msgctxt "damage-msgEngineer+"
+msgid "The hacking system has been damaged"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7527
+msgctxt "damage-msgEngineer"
+msgid "The scanners have been damaged"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7530
+msgctxt "damage-msgEngineer+"
+msgid "The scanners have been damaged"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7535
+msgctxt "damage-msgEngineer"
+msgid "Combat maneuver has been damaged"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7538
+msgctxt "damage-msgEngineer+"
+msgid "Combat maneuver has been damaged"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7543
+msgctxt "damage-msgEngineer"
+msgid "Self destruct system has been damaged"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7546
+msgctxt "damage-msgEngineer+"
+msgid "Self destruct system has been damaged"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7591
+#, lua-format
+msgctxt "ridExuari-"
+msgid ""
+"[%s in %s] Hostile Exuari approach. Help us, please. We cannot defend "
+"ourselves. Your ship is the only thing that stands between us and "
+"destruction."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7593
+#, lua-format
+msgctxt "ridExuari-"
+msgid ""
+"%s\n"
+"\n"
+"We think there is an Exuari base hiding in a nebula in sector %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7597
+#, lua-format
+msgctxt "ridExuari-"
+msgid "%s has asked for help against the Exuari"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7602
+#, lua-format
+msgctxt "ridExuari-msgMainscreen"
+msgid "Station %s destroyed"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7607
+#, lua-format
+msgctxt "-shipLog"
+msgid ""
+"[Captain's Log] We have started our initial shakedown cruise of %s, a %s "
+"class ship. The crew are glad to be moving up from the class three freighter "
+"we used to run. After several years of doing cargo delivery runs and "
+"personnel transfers, it's nice to be on a ship with more self reliance. "
+"We've got beam weapons! Our previous ship was defenseless. Unfortunately, "
+"our impulse engines are not as fast as our previous ship, but we might be "
+"able to fix that. That's the kind of compromise you make when you purchase "
+"surplus military hardware. I suspect that we got such a good deal on the "
+"ship because the previous owner, the governer of station %s, has an ulterior "
+"motive. After all, we are the best qualified to run this ship in the sector "
+"and we have not seen any other friendly armed ships around here."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7613
+#, lua-format
+msgctxt "-shipLog"
+msgid ""
+"[Station %s] Based on our observation of the Exuari base %s in %s, we think "
+"it will continue to launch harassing spacecraft in our direction. We know "
+"it's a large target for a small fighter, but we believe you can destroy it, "
+"%s. We would be very grateful if you would do just that. Our defenses are "
+"very limited."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7653
+msgctxt "-comms"
+msgid ""
+"Thanks for taking care of that Exuari base and all the Exuari ships it "
+"deployed. Dock with us for a token of our appreciation"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7946
+#, lua-format
+msgctxt "-shipLog"
+msgid "%s just launched these ships: %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:7948
+#, lua-format
+msgctxt "-shipLog"
+msgid "%s just launched %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8013
+#, lua-format
+msgctxt "-shipLog"
+msgid ""
+"[%s] Your delivery contract calls for food, medicine, dilithium and "
+"tritanium. Return when you have all four of these and we'll consider your "
+"contract fulfilled"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8035
+#, lua-format
+msgctxt "-shipLog"
+msgid ""
+"[%s] Thanks for the cargo, %s. We'll make good use of it. We've added 100 "
+"units to your battery capacity and reduced your beam cycle time by 1/3. "
+"Enjoy your visit to the %s system"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8077
+msgctxt "msgMainscreen"
+msgid "The supply depot station has been destroyed"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8152
+msgctxt "-shipLog"
+msgid ""
+"[Human Navy Regional Headquarters] All Human Navy vessels are hereby ordered "
+"to assist in the repelling of inbound Kraylor ships. We are not sure of "
+"their intent, but we are sure it is not good. Destroy them before they can "
+"destroy us"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8153
+#, lua-format
+msgctxt "-shipLog"
+msgid "This includes you, %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8265
+msgctxt "msgMainscreen"
+msgid "You successfully handled the Kraylor threat"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8311
+#, lua-format
+msgctxt "-shipLog"
+msgid ""
+"Looks like the Kraylor have developed some kind of planet busting weapon. "
+"They just destroyed %s with it. Keep them away from %s!"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8341
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "You've saved planet %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8350
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Planet %s was destroyed"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8355
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "station %s destroyed"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8431
+msgctxt "msgMainscreen"
+msgid "Your contract destination station was destroyed"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8441
+#: scripts/scenario_47_scavenger.lua:8484
+#, lua-format
+msgctxt "-shipLog"
+msgid "A rare long range contract has been posted at station %s"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8443
+#: scripts/scenario_47_scavenger.lua:8486
+msgctxt "msgMainscreen"
+msgid ""
+"Mourning over the loss of the station has halted all business\n"
+"The mission is over"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8452
+#, lua-format
+msgctxt "-shipLog"
+msgid ""
+"[Captain's Log] Why can't the Exuari just leave us alone? I don't understand "
+"what it is about them that makes them want to prey on everyone.\n"
+"The upgrades for %s are very nice. They certainly came in handy. With the "
+"confidence of stations %s, %s and %s, I feel we will succeed as the space "
+"entrepeneurs we want to be."
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8501
+#, lua-format
+msgctxt "-shipLog"
+msgid ""
+"Jenny McGuire is now aboard. She's a bit paranoid and has sealed the door to "
+"her quarters. You'll have to contact %s to talk to her"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8554
+msgctxt "energy-msgScience"
+msgid "Energy surge from supply drop"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8558
+msgctxt "energy-msgOperations"
+msgid "Energy surge from supply drop"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8567
+msgctxt "energy-msgScience"
+msgid "Energy surge from area highlighted in yellow"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8571
+msgctxt "energy-msgOperations"
+msgid "Energy surge from area highlighted in yellow"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8606
+msgctxt "scienceDescription-jammer"
+msgid "Jump and Warp Jammer"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8606
+msgctxt "scienceDescription-jammer"
+msgid ""
+"Jump and Warp Jammer with external dynamic range control and sensor decoy "
+"mechanism"
+msgstr ""
+
+#: scripts/scenario_47_scavenger.lua:8663
+#, lua-format
+msgctxt "-shipLog"
+msgid ""
+"Kraylor have sabotaged station %s. It can no longer maintain orbit around "
+"%s. Fortunately, it looks to be in no danger from %s or %s, but the Kraylor "
+"pose a more significant threat"
+msgstr ""
