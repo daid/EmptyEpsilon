@@ -9,8 +9,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -2112,7 +2112,6 @@ msgid "Your beam weapons damage has improved by 25 percent"
 msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:7643
-#, fuzzy
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
@@ -3676,17 +3675,17 @@ msgstr ""
 
 #: scripts/scenario_57_shoreline.lua:11040
 msgid "Shields:"
-msgstr ""
+msgstr "Boucliers :"
 
 #: scripts/scenario_57_shoreline.lua:11050
 #, lua-format
 msgid " %i:%i/%i"
-msgstr ""
+msgstr " %i : %i/%i"
 
 #: scripts/scenario_57_shoreline.lua:11052
 #, lua-format
 msgid "Shield %i is critical "
-msgstr ""
+msgstr "Bouclier %i critique "
 
 #: scripts/scenario_57_shoreline.lua:11066
 msgctxt "-shipLog"
@@ -3709,13 +3708,13 @@ msgstr ""
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i"
-msgstr ""
+msgstr "%s %i"
 
 #: scripts/scenario_57_shoreline.lua:11174
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i:%.2i"
-msgstr ""
+msgstr "%s %i : %.2i"
 
 #: scripts/scenario_57_shoreline.lua:11193
 msgctxt "orders-shipLog"

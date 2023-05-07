@@ -9,8 +9,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -2530,7 +2530,6 @@ msgid "What goods are you looking for?"
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:5335
-#, fuzzy
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
@@ -3030,7 +3029,7 @@ msgstr "Nous avons "
 #: scripts/scenario_54_PatrolDuty.lua:5818
 msgctxt "trade-comms"
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: scripts/scenario_54_PatrolDuty.lua:5826
 msgctxt "trade-comms"
@@ -3063,10 +3062,10 @@ msgid "Insufficient reputation for purchase"
 msgstr "Réputation insuffisante pour acheter"
 
 #: scripts/scenario_54_PatrolDuty.lua:5910
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous ?"
+msgstr "Où allez-vous ? (coût : %f réputation)"
 
 #: scripts/scenario_54_PatrolDuty.lua:5970
 msgctxt "trade-comms"
@@ -3731,13 +3730,11 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:8349
-#, fuzzy
 msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
 msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
 
 #: scripts/scenario_54_PatrolDuty.lua:8353
-#, fuzzy
 msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
 msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
