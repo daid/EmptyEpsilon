@@ -13,11 +13,11 @@ function init()
     --player1 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setRotation(200)
     --player2 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setRotation(0)
     --Nebula():setPosition(-5000, 0)
-    --Artifact():setPosition(1000, 9000):setModel("small_frigate_1"):setDescription("An old space derelict.")
-    --Artifact():setPosition(9000, 2000):setModel("small_frigate_1"):setDescription("A wrecked ship.")
-    --Artifact():setPosition(3000, 4000):setModel("small_frigate_1"):setDescription("Tons of rotting plasteel.")
-    --addGMFunction("move 1 to 2", function() player1:transferPlayersToShip(player2) end)
-    --addGMFunction("move 2 to 1", function() player2:transferPlayersToShip(player1) end)
+    --Artifact():setPosition(1000, 9000):setModel("small_frigate_1"):setDescription(_("scienceDescription-artifact", "An old space derelict."))
+    --Artifact():setPosition(9000, 2000):setModel("small_frigate_1"):setDescription(_("scienceDescription-artifact", "A wrecked ship."))
+    --Artifact():setPosition(3000, 4000):setModel("small_frigate_1"):setDescription(_("scienceDescription-artifact", "Tons of rotting plasteel."))
+    --addGMFunction(_("buttonGM", "move 1 to 2"), function() player1:transferPlayersToShip(player2) end)
+    --addGMFunction(_("buttonGM", "move 2 to 1"), function() player2:transferPlayersToShip(player1) end)
     --CpuShip():setTemplate("Adder MK5"):setPosition(0, 0):setRotation(0):setFaction("Human Navy")
     --CpuShip():setTemplate("Piranha F12"):setPosition(2000, 0):setRotation(-90):setFaction("Kraylor")
     local planet1 = Planet():setPosition(5000, 5000):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png"):setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2, 0.2, 1.0)
@@ -27,7 +27,7 @@ function init()
     moon1:setOrbit(planet1, 20.0)
 
     addGMFunction(
-        "Random asteroid field",
+        _("buttonGM", "Random asteroid field"),
         function()
             cleanup()
             for n = 1, 1000 do
@@ -37,7 +37,7 @@ function init()
         end
     )
     addGMFunction(
-        "Random nebula field",
+        _("buttonGM", "Random nebula field"),
         function()
             cleanup()
             for n = 1, 50 do
@@ -46,7 +46,7 @@ function init()
         end
     )
     addGMFunction(
-        "Delete unselected",
+        _("buttonGM", "Delete unselected"),
         function()
             local gm_selection = getGMSelection()
             for _, obj in ipairs(getAllObjects()) do

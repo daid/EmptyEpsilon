@@ -507,68 +507,68 @@ function showControlCodes(faction_filter)
 	for _, name in ipairs(sorted_names) do
 		local faction = ""
 		if code_list[name].faction == "Kraylor" then
-			faction = " (Kraylor)"
+			faction = _("msgGM", " (Kraylor)")
 		elseif code_list[name].faction == "Ktlitans" then
-			faction = " (Ktlitan)"
+			faction = _("msgGM", " (Ktlitan)")
 		end
-		output = output .. string.format("%s: %s %s\n",name,code_list[name].code,faction)
+		output = output .. string.format(_("msgGM", "%s: %s %s\n"),name,code_list[name].code,faction)
 	end
 	addGMMessage(output)
 end
 --	GM buttons while paused
 function mainGMButtonsDuringPause()
 	clearGMFunctions()
-	addGMFunction(string.format("Version %s",scenario_version),function()
-		local version_message = string.format("Scenario version %s\n LUA version %s",scenario_version,_VERSION)
+	addGMFunction(string.format(_("buttonGM", "Version %s"),scenario_version),function()
+		local version_message = string.format(_("msgGM", "Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
-	addGMFunction("Show control codes",showControlCodes)
-	addGMFunction(string.format("+Start Delay: %i",raceStartDelay/60),setStartDelay)
-	addGMFunction(string.format("+Patience: %i",patienceTimeLimit/60),setPatienceTimeLimit)
+	addGMFunction(_("buttonGM", "Show control codes"),showControlCodes)
+	addGMFunction(string.format(_("buttonGM", "+Start Delay: %i"),raceStartDelay/60),setStartDelay)
+	addGMFunction(string.format(_("buttonGM", "+Patience: %i"),patienceTimeLimit/60),setPatienceTimeLimit)
 	if predefined_player_ships ~= nil then
-		addGMFunction("Random PShip Names",function()
-			addGMMessage("Player ship names will be selected at random.\nControl codes will be randomly generated")
+		addGMFunction(_("buttonGM", "Random PShip Names"),function()
+			addGMMessage(_("msgGM", "Player ship names will be selected at random.\nControl codes will be randomly generated"))
 			predefined_player_ships = nil
 			mainGMButtons()
 		end)
 	end
-	local button_label = "+Shoot Back: "
+	local button_label = _("buttonGM", "+Shoot Back: ")
 	if shootBack then
-		button_label = string.format("%s%s",button_label,"Yes")
+		button_label = string.format("%s%s",button_label,_("buttonGM", "Yes"))
 	else
-		button_label = string.format("%s%s",button_label,"No")
+		button_label = string.format("%s%s",button_label,_("buttonGM", "No"))
 	end
 	addGMFunction(button_label,setShootBack)
-	button_label = "+Chase: "
+	button_label = _("buttonGM", "+Chase: ")
 	if chasers then
-		button_label = string.format("%s%s",button_label,"Yes")
+		button_label = string.format("%s%s",button_label,_("buttonGM", "Yes"))
 	else
-		button_label = string.format("%s%s",button_label,"No")
+		button_label = string.format("%s%s",button_label,_("buttonGM", "No"))
 	end
 	addGMFunction(button_label,setChasers)
-	button_label = "+Hazards: "
+	button_label = _("buttonGM", "+Hazards: ")
 	if hazards then
-		button_label = string.format("%s%s",button_label,"Yes")
+		button_label = string.format("%s%s",button_label,_("buttonGM", "Yes"))
 	else
-		button_label = string.format("%s%s",button_label,"No")
+		button_label = string.format("%s%s",button_label,_("buttonGM", "No"))
 	end
 	addGMFunction(button_label,setHazards)
 end
 function setShootBack()
 	clearGMFunctions()
-	addGMFunction("-From Shoot Back",mainGMButtons)
-	local button_label = "Shoot Back Yes"
+	addGMFunction(_("buttonGM", "-From Shoot Back"),mainGMButtons)
+	local button_label = _("buttonGM", "Shoot Back Yes")
 	if shootBack then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		shootBack = true
 		setShootBack()
 	end)
-	button_label = "Shoot Back No"
+	button_label = _("buttonGM", "Shoot Back No")
 	if not shootBack then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		shootBack = false
@@ -577,18 +577,18 @@ function setShootBack()
 end
 function setChasers()
 	clearGMFunctions()
-	addGMFunction("-From Chase",mainGMButtons)
-	local button_label = "Chase Yes"
+	addGMFunction(_("buttonGM", "-From Chase"),mainGMButtons)
+	local button_label = _("buttonGM", "Chase Yes")
 	if chasers then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		chasers = true
 		setChasers()
 	end)
-	button_label = "Chase No"
+	button_label = _("buttonGM", "Chase No")
 	if not chasers then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		chasers = false
@@ -597,18 +597,18 @@ function setChasers()
 end
 function setHazards()
 	clearGMFunctions()
-	addGMFunction("-From Hazards",mainGMButtons)
-	local button_label = "Hazards Yes"
+	addGMFunction(_("buttonGM", "-From Hazards"),mainGMButtons)
+	local button_label = _("buttonGM", "Hazards Yes")
 	if hazards then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		hazards = true
 		setHazards()
 	end)
-	button_label = "Hazards No"
+	button_label = _("buttonGM", "Hazards No")
 	if not hazards then
-		button_label = button_label .. "*"
+		button_label = button_label .. _("buttonGM", "*")
 	end
 	addGMFunction(button_label,function()
 		hazards = false
@@ -617,16 +617,16 @@ function setHazards()
 end
 function setPatienceTimeLimit()
 	clearGMFunctions()
-	addGMFunction("-Main",mainGMButtons)
+	addGMFunction(_("buttonGM", "-Main"),mainGMButtons)
 	if patienceTimeLimit < 3000 then
-		addGMFunction(string.format("%i Patience + -> %i",patienceTimeLimit/60,(patienceTimeLimit + 300)/60),function()
+		addGMFunction(string.format(_("buttonGM", "%i Patience + -> %i"),patienceTimeLimit/60,(patienceTimeLimit + 300)/60),function()
 			patienceTimeLimit = patienceTimeLimit + 300
 			original_patience_time_limit = patienceTimeLimit
 			setPatienceTimeLimit()
 		end)
 	end
 	if patienceTimeLimit > 600 then
-		addGMFunction(string.format("%i Patience - -> %i",patienceTimeLimit/60,(patienceTimeLimit - 300)/60),function()
+		addGMFunction(string.format(_("buttonGM", "%i Patience - -> %i"),patienceTimeLimit/60,(patienceTimeLimit - 300)/60),function()
 			patienceTimeLimit = patienceTimeLimit - 300
 			original_patience_time_limit = patienceTimeLimit
 			setPatienceTimeLimit()
@@ -635,15 +635,15 @@ function setPatienceTimeLimit()
 end
 function setStartDelay()
 	clearGMFunctions()
-	addGMFunction("-Main",mainGMButtons)
+	addGMFunction(_("buttonGM", "-Main"),mainGMButtons)
 	if raceStartDelay < 1200 then
-		addGMFunction(string.format("%i Delay + -> %i",raceStartDelay/60,(raceStartDelay + 60)/60),function()
+		addGMFunction(string.format(_("buttonGM", "%i Delay + -> %i"),raceStartDelay/60,(raceStartDelay + 60)/60),function()
 			raceStartDelay = raceStartDelay + 60
 			setStartDelay()
 		end)
 	end
 	if raceStartDelay > 60 then
-		addGMFunction(string.format("%i Delay - -> %i",raceStartDelay/60,(raceStartDelay - 60)/60),function()
+		addGMFunction(string.format(_("buttonGM", "%i Delay - -> %i"),raceStartDelay/60,(raceStartDelay - 60)/60),function()
 			raceStartDelay = raceStartDelay - 60
 			setStartDelay()
 		end)
@@ -652,31 +652,31 @@ end
 --	GM buttons after pause
 function mainGMButtonsAfterPause()
 	clearGMFunctions()
-	addGMFunction(string.format("Version %s",scenario_version),function()
-		local version_message = string.format("Scenario version %s\n LUA version %s",scenario_version,_VERSION)
+	addGMFunction(string.format(_("buttonGM", "Version %s"),scenario_version),function()
+		local version_message = string.format(_("msgGM", "Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
-	addGMFunction("Show control codes",showControlCodes)
-	addGMFunction("Show statistics",function()
+	addGMFunction(_("buttonGM", "Show control codes"),showControlCodes)
+	addGMFunction(_("buttonGM", "Show statistics"),function()
 		local stats = gatherStats()
-		local out = "Current Statistics:\nShip: state, laps, waypoint goal, drone pts"
+		local out = _("msgGM", "Current Statistics:\nShip: state, laps, waypoint goal, drone pts")
 		for name, details in pairs(stats.ship) do
 			out = out .. "\n" .. name .. ": " 
 			if details.is_alive then 
-				out = out .. "alive, "
+				out = out .. _("msgGM", "alive, ")
 			else
-				out = out .. "dead, "
+				out = out .. _("msgGM", "dead, ")
 			end
 			if details.participant ~= nil then
-				out = out .. details.participant .. ", "
+				out = out .. details.participant .. _("msgGM", ", ")
 			end
 --			if details.participant == "participant" then
 --				out = out .. "participant, "
 --			else
 --				out = out .. "forfeit, "
 --			end
-			out = string.format("%s%i, %i, %i",out,details.lap_count,details.waypoint_goal,details.drone_points)
+			out = string.format(_("msgGM", "%s%i, %i, %i"),out,details.lap_count,details.waypoint_goal,details.drone_points)
 		end
 		addGMMessage(out)
 	end)
@@ -690,18 +690,18 @@ function setStations()
 	neutralStations = 0
 	--Timer
 	stationTimer = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationTimer:setPosition(-5000,-5000):setDescription("Race Timing Facility"):setCallSign("Timer")
+	stationTimer:setPosition(-5000,-5000):setDescription(_("scienceDescription-station", "Race Timing Facility")):setCallSign("Timer")
 	table.insert(stationList,stationTimer)
 	friendlyStations = friendlyStations + 1
 	--Vaiken
 	stationVaiken = SpaceStation():setTemplate("Huge Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationVaiken:setPosition(random(-10000,5000),random(5000,9000)):setCallSign("Vaiken"):setDescription("Ship building and maintenance facility")
+	stationVaiken:setPosition(random(-10000,5000),random(5000,9000)):setCallSign("Vaiken"):setDescription(_("scienceDescription-station", "Ship building and maintenance facility"))
 	table.insert(stationList,stationVaiken)
 	friendlyStations = friendlyStations + 1
 	goods[stationVaiken] = {{"food",10,1},{"medicine",5,5}}
 	--Zefram
 	stationZefram = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationZefram:setPosition(random(5000,8000),random(-8000,9000)):setCallSign("Zefram"):setDescription("Warp Engine Components")
+	stationZefram:setPosition(random(5000,8000),random(-8000,9000)):setCallSign("Zefram"):setDescription(_("scienceDescription-station", "Warp Engine Components"))
 	table.insert(stationList,stationZefram)
 	friendlyStations = friendlyStations + 1
 	goods[stationZefram] = {{"warp",5,140},{"food",5,1}}
@@ -709,7 +709,7 @@ function setStations()
 	marconiAngle = random(0,360)
 	xMarconi, yMarconi = vectorFromAngle(marconiAngle,random(12500,15000))
 	stationMarconi = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationMarconi:setPosition(xMarconi,yMarconi):setCallSign("Marconi"):setDescription("Energy Beam Components")
+	stationMarconi:setPosition(xMarconi,yMarconi):setCallSign("Marconi"):setDescription(_("scienceDescription-station", "Energy Beam Components"))
 	table.insert(stationList,stationMarconi)
 	neutralStations = neutralStations + 1
 	goods[stationMarconi] = {{"beam",5,80}}
@@ -717,7 +717,7 @@ function setStations()
 	muddAngle = marconiAngle + random(60,180)
 	xMudd, yMudd = vectorFromAngle(muddAngle,random(12500,15000))
 	stationMudd = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationMudd:setPosition(xMudd,yMudd):setCallSign("Muddville"):setDescription("Trading station")
+	stationMudd:setPosition(xMudd,yMudd):setCallSign("Muddville"):setDescription(_("scienceDescription-station", "Trading station"))
 	table.insert(stationList,stationMudd)
 	neutralStations = neutralStations + 1
 	goods[stationMudd] = {{"luxury",10,60}}
@@ -725,25 +725,25 @@ function setStations()
 	alcaleicaAngle = muddAngle + random(60,120)
 	xAlcaleica, yAlcaleica = vectorFromAngle(alcaleicaAngle,random(12500,15000))
 	stationAlcaleica = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationAlcaleica:setPosition(xAlcaleica,yAlcaleica):setCallSign("Alcaleica"):setDescription("Optical Components")
+	stationAlcaleica:setPosition(xAlcaleica,yAlcaleica):setCallSign("Alcaleica"):setDescription(_("scienceDescription-station", "Optical Components"))
 	table.insert(stationList,stationAlcaleica)
 	neutralStations = neutralStations + 1
 	goods[stationAlcaleica] = {{"optic",5,66}}
 	--California
 	stationCalifornia = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationCalifornia:setPosition(random(-90000,-70000),random(-15000,25000)):setCallSign("California"):setDescription("Mining station")
+	stationCalifornia:setPosition(random(-90000,-70000),random(-15000,25000)):setCallSign("California"):setDescription(_("scienceDescription-station", "Mining station"))
 	table.insert(stationList,stationCalifornia)
 	friendlyStations = friendlyStations + 1
 	goods[stationCalifornia] = {{"food",2,1},{"gold",5,25},{"dilithium",2,25}}
 	--Outpost-15
 	stationOutpost15 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost15:setPosition(random(35000,50000),random(52000,79000)):setCallSign("Outpost-15"):setDescription("Mining and trade")
+	stationOutpost15:setPosition(random(35000,50000),random(52000,79000)):setCallSign("Outpost-15"):setDescription(_("scienceDescription-station", "Mining and trade"))
 	table.insert(stationList,stationOutpost15)
 	neutralStations = neutralStations + 1
 	placeRandomAroundPoint(Asteroid,25,1,15000,60000,75000)
 	--Outpost-21
 	stationOutpost21 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost21:setPosition(random(50000,75000),random(52000,61250)):setCallSign("Outpost-21"):setDescription("Mining and gambling")
+	stationOutpost21:setPosition(random(50000,75000),random(52000,61250)):setCallSign("Outpost-21"):setDescription(_("scienceDescription-station", "Mining and gambling"))
 	table.insert(stationList,stationOutpost21)
 	neutralStations = neutralStations + 1
 	if random(1,100) < 50 then
@@ -755,7 +755,7 @@ function setStations()
 	end
 	--Valero
 	stationValero = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationValero:setPosition(random(-88000,-65000),random(36250,40000)):setCallSign("Valero"):setDescription("Resupply")
+	stationValero:setPosition(random(-88000,-65000),random(36250,40000)):setCallSign("Valero"):setDescription(_("scienceDescription-station", "Resupply"))
 	table.insert(stationList,stationValero)
 	neutralStations = neutralStations + 1
 	goods[stationValero] = {{"luxury",5,77}}
@@ -763,7 +763,7 @@ function setStations()
 	vactelAngle = random(0,360)
 	xVactel, yVactel = vectorFromAngle(vactelAngle,random(50000,61250))
 	stationVactel = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationVactel:setPosition(xVactel,yVactel):setCallSign("Vactel"):setDescription("Shielded Circuitry Fabrication")
+	stationVactel:setPosition(xVactel,yVactel):setCallSign("Vactel"):setDescription(_("scienceDescription-station", "Shielded Circuitry Fabrication"))
 	table.insert(stationList,stationVactel)
 	neutralStations = neutralStations + 1
 	goods[stationVactel] = {{"circuit",5,50}}
@@ -771,7 +771,7 @@ function setStations()
 	archerAngle = vactelAngle + random(60,120)
 	xArcher, yArcher = vectorFromAngle(archerAngle,random(50000,61250))
 	stationArcher = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationArcher:setPosition(xArcher,yArcher):setCallSign("Archer"):setDescription("Shield and Armor Research")
+	stationArcher:setPosition(xArcher,yArcher):setCallSign("Archer"):setDescription(_("scienceDescription-station", "Shield and Armor Research"))
 	table.insert(stationList,stationArcher)
 	neutralStations = neutralStations + 1
 	goods[stationArcher] = {{"shield",5,90}}
@@ -779,7 +779,7 @@ function setStations()
 	deerAngle = archerAngle + random(60,120)
 	xDeer, yDeer = vectorFromAngle(deerAngle,random(50000,61250))
 	stationDeer = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationDeer:setPosition(xDeer,yDeer):setCallSign("Deer"):setDescription("Repulsor and Tractor Beam Components")
+	stationDeer:setPosition(xDeer,yDeer):setCallSign("Deer"):setDescription(_("scienceDescription-station", "Repulsor and Tractor Beam Components"))
 	table.insert(stationList,stationDeer)
 	neutralStations = neutralStations + 1
 	goods[stationDeer] = {{"tractor",5,90},{"repulsor",5,95}}
@@ -787,145 +787,145 @@ function setStations()
 	cavorAngle = deerAngle + random(60,90)
 	xCavor, yCavor = vectorFromAngle(cavorAngle,random(50000,61250))
 	stationCavor = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationCavor:setPosition(xCavor,yCavor):setCallSign("Cavor"):setDescription("Advanced Material components")
+	stationCavor:setPosition(xCavor,yCavor):setCallSign("Cavor"):setDescription(_("scienceDescription-station", "Advanced Material components"))
 	table.insert(stationList,stationCavor)
 	neutralStations = neutralStations + 1
 	goods[stationCavor] = {{"filament",5,42}}
 	--Emory
 	stationEmory = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationEmory:setPosition(random(72000,85000),random(-50000,-26000)):setCallSign("Emory"):setDescription("Transporter Components")
+	stationEmory:setPosition(random(72000,85000),random(-50000,-26000)):setCallSign("Emory"):setDescription(_("scienceDescription-station", "Transporter Components"))
 	table.insert(stationList,stationEmory)
 	friendlyStations = friendlyStations + 1
 	goods[stationEmory] = {{"transporter",5,63},{"food",2,1}}
 	--Veloquan
 	stationVeloquan = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationVeloquan:setPosition(random(-25000,15000),random(27000,40000)):setCallSign("Veloquan"):setDescription("Sensor components")
+	stationVeloquan:setPosition(random(-25000,15000),random(27000,40000)):setCallSign("Veloquan"):setDescription(_("scienceDescription-station", "Sensor components"))
 	table.insert(stationList,stationVeloquan)
 	neutralStations = neutralStations + 1
 	goods[stationVeloquan] = {{"sensor",5,68}}
 	--Barclay
 	stationBarclay = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationBarclay:setPosition(random(-20000,0),random(-45000,-25000)):setCallSign("Barclay"):setDescription("Communications components")
+	stationBarclay:setPosition(random(-20000,0),random(-45000,-25000)):setCallSign("Barclay"):setDescription(_("scienceDescription-station", "Communications components"))
 	table.insert(stationList,stationBarclay)
 	neutralStations = neutralStations + 1
 	goods[stationBarclay] = {{"communication",5,58}}
 	--Lipkin
 	stationLipkin = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationLipkin:setPosition(random(20000,45000),random(-25000,-15000)):setCallSign("Lipkin"):setDescription("Autodoc components")
+	stationLipkin:setPosition(random(20000,45000),random(-25000,-15000)):setCallSign("Lipkin"):setDescription(_("scienceDescription-station", "Autodoc components"))
 	table.insert(stationList,stationLipkin)
 	neutralStations = neutralStations + 1
 	goods[stationLipkin] = {{"autodoc",5,76}}
 	--Ripley
 	stationRipley = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationRipley:setPosition(random(-75000,-30000),random(55000,62150)):setCallSign("Ripley"):setDescription("Load Lifters and components")
+	stationRipley:setPosition(random(-75000,-30000),random(55000,62150)):setCallSign("Ripley"):setDescription(_("scienceDescription-station", "Load Lifters and components"))
 	table.insert(stationList,stationRipley)
 	neutralStations = neutralStations + 1
 	goods[stationRipley] = {{"lifter",5,61}}
 	--Deckard
 	stationDeckard = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationDeckard:setPosition(random(-45000,-25000),random(-25000,-14000)):setCallSign("Deckard"):setDescription("Android components")
+	stationDeckard:setPosition(random(-45000,-25000),random(-25000,-14000)):setCallSign("Deckard"):setDescription(_("scienceDescription-station", "Android components"))
 	table.insert(stationList,stationDeckard)
 	neutralStations = neutralStations + 1
 	goods[stationDeckard] = {{"android",5,73}}
 	--Conner
 	stationConnor = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationConnor:setPosition(random(-10000,15000),random(15000,27000)):setCallSign("Connor"):setDescription("Weapons Automation components")
+	stationConnor:setPosition(random(-10000,15000),random(15000,27000)):setCallSign("Connor"):setDescription(_("scienceDescription-station", "Weapons Automation components"))
 	table.insert(stationList,stationConnor)
 	neutralStations = neutralStations + 1
 	--Anderson
 	stationAnderson = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationAnderson:setPosition(random(15000,20000),random(-25000,48000)):setCallSign("Anderson"):setDescription("Battery and Software Engineering")
+	stationAnderson:setPosition(random(15000,20000),random(-25000,48000)):setCallSign("Anderson"):setDescription(_("scienceDescription-station", "Battery and Software Engineering"))
 	table.insert(stationList,stationAnderson)
 	neutralStations = neutralStations + 1
 	goods[stationAnderson] = {{"battery",5,65},{"software",5,115}}
 	--Feynman
 	stationFeynman = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationFeynman:setPosition(random(-90000,-55000),random(25000,36250)):setCallSign("Feynman"):setDescription("Nanotechnology Research")
+	stationFeynman:setPosition(random(-90000,-55000),random(25000,36250)):setCallSign("Feynman"):setDescription(_("scienceDescription-station", "Nanotechnology Research"))
 	table.insert(stationList,stationFeynman)
 	friendlyStations = friendlyStations + 1
 	goods[stationFeynman] = {{"nanites",5,79},{"software",5,115},{"food",2,1}}
 	--Mayo
 	stationMayo = SpaceStation():setTemplate("Large Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationMayo:setPosition(random(-45000,-30000),random(-14000,12500)):setCallSign("Mayo"):setDescription("Medical Research")
+	stationMayo:setPosition(random(-45000,-30000),random(-14000,12500)):setCallSign("Mayo"):setDescription(_("scienceDescription-station", "Medical Research"))
 	table.insert(stationList,stationMayo)
 	friendlyStations = friendlyStations + 1
 	goods[stationMayo] = {{"food",5,1},{"medicine",5,5}}
 	--Nefatha
 	stationNefatha = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationNefatha:setPosition(random(-10000,12500),random(-96000,-80000)):setCallSign("Nefatha"):setDescription("Commerce and recreation")
+	stationNefatha:setPosition(random(-10000,12500),random(-96000,-80000)):setCallSign("Nefatha"):setDescription(_("scienceDescription-station", "Commerce and recreation"))
 	table.insert(stationList,stationNefatha)
 	neutralStations = neutralStations + 1
 	goods[stationNefatha] = {{"luxury",5,70}}
 	--Science-4
 	stationScience4 = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationScience4:setPosition(random(-60000,-40000),random(47000,55000)):setCallSign("Science-4"):setDescription("Biotech research")
+	stationScience4:setPosition(random(-60000,-40000),random(47000,55000)):setCallSign("Science-4"):setDescription(_("scienceDescription-station", "Biotech research"))
 	table.insert(stationList,stationScience4)
 	neutralStations = neutralStations + 1
 	--Speculation-4
 	stationSpeculation4 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationSpeculation4:setPosition(random(-26000,-15000),random(-10000,27000)):setCallSign("Speculation-4"):setDescription("Trading post")
+	stationSpeculation4:setPosition(random(-26000,-15000),random(-10000,27000)):setCallSign("Speculation-4"):setDescription(_("scienceDescription-station", "Trading post"))
 	table.insert(stationList,stationSpeculation4)
 	neutralStations = neutralStations + 1
 	goods[stationSpeculation4] = {{"luxury",5,65}}
 	--Tiberius
 	stationTiberius = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationTiberius:setPosition(random(-30000,-26000),random(-14000,35000)):setCallSign("Tiberius"):setDescription("Logistics coordination")
+	stationTiberius:setPosition(random(-30000,-26000),random(-14000,35000)):setCallSign("Tiberius"):setDescription(_("scienceDescription-station", "Logistics coordination"))
 	table.insert(stationList,stationTiberius)
 	friendlyStations = friendlyStations + 1
 	goods[stationTiberius] = {{"food",5,1}}
 	--Research-1
 	stationResearch11 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationResearch11:setPosition(random(-75000,-55000),random(-50000,-25000)):setCallSign("Research-11"):setDescription("Low Gravity Research")
+	stationResearch11:setPosition(random(-75000,-55000),random(-50000,-25000)):setCallSign("Research-11"):setDescription(_("scienceDescription-station", "Low Gravity Research"))
 	table.insert(stationList,stationResearch11)
 	neutralStations = neutralStations + 1
 	--Freena
 	stationFreena = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationFreena:setPosition(random(0,15000),irandom(-37500,-15000)):setCallSign("Freena"):setDescription("Zero gravity sports")
+	stationFreena:setPosition(random(0,15000),irandom(-37500,-15000)):setCallSign("Freena"):setDescription(_("scienceDescription-station", "Zero gravity sports"))
 	table.insert(stationList,stationFreena)
 	neutralStations = neutralStations + 1
 	--Outpost-33
 	stationOutpost33 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost33:setPosition(random(15000,65000),random(-65000,-25000)):setCallSign("Outpost-33"):setDescription("Resupply")
+	stationOutpost33:setPosition(random(15000,65000),random(-65000,-25000)):setCallSign("Outpost-33"):setDescription(_("scienceDescription-station", "Resupply"))
 	table.insert(stationList,stationOutpost33)
 	neutralStations = neutralStations + 1
 	goods[stationOutpost33] = {{"luxury",5,75}}
 	--Lando
 	stationLando = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationLando:setPosition(random(-60000,-30000),random(612500,70000)):setCallSign("Lando"):setDescription("Casino and Gambling")
+	stationLando:setPosition(random(-60000,-30000),random(612500,70000)):setCallSign("Lando"):setDescription(_("scienceDescription-station", "Casino and Gambling"))
 	table.insert(stationList,stationLando)
 	neutralStations = neutralStations + 1
 	--Komov
 	stationKomov = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationKomov:setPosition(random(-55000,-30000),random(70000,80000)):setCallSign("Komov"):setDescription("Xenopsychology research")
+	stationKomov:setPosition(random(-55000,-30000),random(70000,80000)):setCallSign("Komov"):setDescription(_("scienceDescription-station", "Xenopsychology research"))
 	table.insert(stationList,stationKomov)
 	neutralStations = neutralStations + 1
 	--Science-2
 	stationScience2 = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationScience2:setPosition(random(20000,35000),random(55000,70000)):setCallSign("Science-2"):setDescription("Research Lab and Observatory")
+	stationScience2:setPosition(random(20000,35000),random(55000,70000)):setCallSign("Science-2"):setDescription(_("scienceDescription-station", "Research Lab and Observatory"))
 	table.insert(stationList,stationScience2)
 	neutralStations = neutralStations + 1
 	--Prefect
 	stationPrefect = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationPrefect:setPosition(random(-65000,-60000),random(36250,55000)):setCallSign("Prefect"):setDescription("Textile and Fashion Creation")
+	stationPrefect:setPosition(random(-65000,-60000),random(36250,55000)):setCallSign("Prefect"):setDescription(_("scienceDescription-station", "Textile and Fashion Creation"))
 	table.insert(stationList,stationPrefect)
 	neutralStations = neutralStations + 1
 	goods[stationPrefect] = {{"luxury",5,45}}
 	--Outpost-7
 	stationOutpost7 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost7:setPosition(random(35000,45000),random(-15000,25000)):setCallSign("Outpost-7"):setDescription("Resupply")
+	stationOutpost7:setPosition(random(35000,45000),random(-15000,25000)):setCallSign("Outpost-7"):setDescription(_("scienceDescription-station", "Resupply"))
 	table.insert(stationList,stationOutpost7)
 	neutralStations = neutralStations + 1
 	goods[stationOutpost7] = {{"luxury",5,80}}
 	--Organa
 	stationOrgana = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationOrgana:setPosition(irandom(55000,62000),random(20000,45000)):setCallSign("Organa"):setDescription("Diplomatic training")
+	stationOrgana:setPosition(irandom(55000,62000),random(20000,45000)):setCallSign("Organa"):setDescription(_("scienceDescription-station", "Diplomatic training"))
 	table.insert(stationList,stationOrgana)
 	neutralStations = neutralStations + 1
 	--Grap
 	stationGrap = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	xGrap = random(-20000,0)
 	yGrap = random(-25000,-20000)
-	stationGrap:setPosition(xGrap,yGrap):setCallSign("Grap"):setDescription("Mining station")
+	stationGrap:setPosition(xGrap,yGrap):setCallSign("Grap"):setDescription(_("scienceDescription-station", "Mining station"))
 	posAxisGrap = random(0,360)
 	posGrap = random(10000,60000)
 	negGrap = random(10000,60000)
@@ -943,7 +943,7 @@ function setStations()
 	stationGrup = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	xGrup = random(-20000,-10000)
 	yGrup = random(15000,30000)
-	stationGrup:setPosition(xGrup,yGrup):setCallSign("Grup"):setDescription("Mining station")
+	stationGrup:setPosition(xGrup,yGrup):setCallSign("Grup"):setDescription(_("scienceDescription-station", "Mining station"))
 	axisGrup = random(0,360)
 	longGrup = random(30000,60000)
 	shortGrup = random(10000,30000)
@@ -976,19 +976,19 @@ function setStations()
 	neutralStations = neutralStations + 1
 	--Science-7
 	stationScience7 = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationScience7:setPosition(random(-25000,-20000),random(-40000,-10000)):setCallSign("Science-7"):setDescription("Observatory")
+	stationScience7:setPosition(random(-25000,-20000),random(-40000,-10000)):setCallSign("Science-7"):setDescription(_("scienceDescription-station", "Observatory"))
 	table.insert(stationList,stationScience7)
 	friendlyStations = friendlyStations + 1
 	goods[stationScience7] = {{"food",2,1}}
 	--Carradine
 	stationCarradine = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationCarradine:setPosition(random(20000,35000),random(-15000,40000)):setCallSign("Carradine"):setDescription("Impulse Engine Components")
+	stationCarradine:setPosition(random(20000,35000),random(-15000,40000)):setCallSign("Carradine"):setDescription(_("scienceDescription-station", "Impulse Engine Components"))
 	table.insert(stationList,stationCarradine)
 	neutralStations = neutralStations + 1
 	goods[stationCarradine] = {{"impulse",5,100}}
 	--Calvin
 	stationCalvin = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationCalvin:setPosition(random(40000,86250),random(45000,51000)):setCallSign("Calvin"):setDescription("Robotic components")
+	stationCalvin:setPosition(random(40000,86250),random(45000,51000)):setCallSign("Calvin"):setDescription(_("scienceDescription-station", "Robotic components"))
 	table.insert(stationList,stationCalvin)
 	neutralStations = neutralStations + 1
 	totalStations = neutralStations + friendlyStations
@@ -1003,44 +1003,44 @@ function setStations()
 	art3:setPosition(random(50000,75000),random(625000,80000))
 	artChoice = math.random(6)
 	if artChoice == 1 then
-		art1:setDescriptions("Unusual object","Artifact with quantum biometric characteristics")
-		art2:setDescriptions("Unusual object","Artifact with embedded chroniton particles")
-		art3:setDescriptions("Unusual object","Artifact bridging two parallel universes")
+		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
+		art2:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with embedded chroniton particles"))
+		art3:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact bridging two parallel universes"))
 		art1.quantum = true
 		art2.chroniton = true
 		art3.parallel = true
 	elseif artChoice == 2 then
-		art1:setDescriptions("Unusual object","Artifact with quantum biometric characteristics")
-		art3:setDescriptions("Unusual object","Artifact with embedded chroniton particles")
-		art2:setDescriptions("Unusual object","Artifact bridging two parallel universes")
+		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
+		art3:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with embedded chroniton particles"))
+		art2:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact bridging two parallel universes"))
 		art1.quantum = true
 		art3.chroniton = true
 		art2.parallel = true
 	elseif artChoice == 3 then
-		art2:setDescriptions("Unusual object","Artifact with quantum biometric characteristics")
-		art1:setDescriptions("Unusual object","Artifact with embedded chroniton particles")
-		art3:setDescriptions("Unusual object","Artifact bridging two parallel universes")
+		art2:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
+		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with embedded chroniton particles"))
+		art3:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact bridging two parallel universes"))
 		art2.quantum = true
 		art1.chroniton = true
 		art3.parallel = true
 	elseif artChoice == 4 then
-		art2:setDescriptions("Unusual object","Artifact with quantum biometric characteristics")
-		art3:setDescriptions("Unusual object","Artifact with embedded chroniton particles")
-		art1:setDescriptions("Unusual object","Artifact bridging two parallel universes")
+		art2:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
+		art3:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with embedded chroniton particles"))
+		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact bridging two parallel universes"))
 		art2.quantum = true
 		art3.chroniton = true
 		art1.parallel = true
 	elseif artChoice == 5 then
-		art3:setDescriptions("Unusual object","Artifact with quantum biometric characteristics")
-		art1:setDescriptions("Unusual object","Artifact with embedded chroniton particles")
-		art2:setDescriptions("Unusual object","Artifact bridging two parallel universes")
+		art3:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
+		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with embedded chroniton particles"))
+		art2:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact bridging two parallel universes"))
 		art3.quantum = true
 		art1.chroniton = true
 		art2.parallel = true
 	else
-		art3:setDescriptions("Unusual object","Artifact with quantum biometric characteristics")
-		art2:setDescriptions("Unusual object","Artifact with embedded chroniton particles")
-		art1:setDescriptions("Unusual object","Artifact bridging two parallel universes")
+		art3:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
+		art2:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with embedded chroniton particles"))
+		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact bridging two parallel universes"))
 		art3.quantum = true
 		art2.chroniton = true
 		art1.parallel = true
@@ -1069,7 +1069,7 @@ function setStations()
 	alderaan= Planet():setPosition(random(-27000,32000),random(65500,87500)):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Alderaan")
 	alderaan:setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png")
 	alderaan:setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,1.0)
-	alderaan:setAxialRotationTime(400.0):setDescription("Lush planet with only mild seasonal variations")
+	alderaan:setAxialRotationTime(400.0):setDescription(_("scienceDescription-planet", "Lush planet with only mild seasonal variations"))
 	grawp = BlackHole():setPosition(random(67000,90000),random(-21000,40000))
 	grawp.angle = random(0,360)
 	grawp.travel = random(1,5)
@@ -1568,7 +1568,7 @@ function commsStation()
         return false
     end
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage("We are under attack! No time for chatting!");
+        setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"));
         return true
     end
     if not comms_source:isDocked(comms_target) then
@@ -1580,12 +1580,12 @@ function commsStation()
 end
 function handleDockedState()
     if comms_source:isFriendly(comms_target) then
-		oMsg = "Good day, officer!\nWhat can we do for you today?\n"
+		oMsg = _("station-comms", "Good day, officer!\nWhat can we do for you today?\n")
     else
-		oMsg = "Welcome to our lovely station.\n"
+		oMsg = _("station-comms", "Welcome to our lovely station.\n")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
+		oMsg = oMsg .. _("station-comms", "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
 	end
 	setCommsMessage(oMsg)
 	missilePresence = 0
@@ -1594,11 +1594,11 @@ function handleDockedState()
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		addCommsReply("I need ordnance restocked", function()
-			setCommsMessage("What type of ordnance?")
+		addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
+			setCommsMessage(_("ammo-comms", "What type of ordnance?"))
 			for _, missile_type in ipairs(missile_types) do
 				if comms_source:getWeaponStorageMax(missile_type) > 0 then
-					addCommsReply(missile_type .. " (" .. getWeaponCost(missile_type) .. "rep each)", function()
+					addCommsReply(string.format(_("ammo-comms", "%s (%d rep each)"), missile_type, getWeaponCost(missile_type)), function()
 						handleWeaponRestock(missile_type)
 					end)
 				end
@@ -1606,13 +1606,13 @@ function handleDockedState()
 		end)
 	end
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply("What are my current orders?", function()
+		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			ordMsg = primaryOrders
 			if raceStartDelay > 0 then
-				ordMsg = ordMsg .. string.format("\n%i Seconds remain until start of race",raceStartDelay)
+				ordMsg = ordMsg .. string.format(_("orders-comms", "\n%i Seconds remain until start of race"),raceStartDelay)
 			else
 				if comms_source.goal ~= nil then
-					ordMsg = ordMsg .. string.format("\nImmediate goal: race waypoint %i",comms_source.goal)
+					ordMsg = ordMsg .. string.format(_("orders-comms", "\nImmediate goal: race waypoint %i"),comms_source.goal)
 				end
 			end
 			setCommsMessage(ordMsg)
@@ -1640,21 +1640,21 @@ function handleDockedState()
 			setCommsMessage("We don't upgrade spaceships")
 		end
 	end)
-	addCommsReply("Visit cartography office", function()
+	addCommsReply(_("cartographyOffice-comms", "Visit cartography office"), function()
 		if comms_target.cartographer_description == nil then
 			local clerk_choice = math.random(1,3)
 			if clerk_choice == 1 then
-				comms_target.cartographer_description = "The clerk behind the desk looks up briefly at you then goes back to filing her nails."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk looks up briefly at you then goes back to filing her nails.")
 			elseif clerk_choice == 2 then
-				comms_target.cartographer_description = "The clerk behind the desk examines you then returns to grooming her tentacles."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk examines you then returns to grooming her tentacles.")
 			else
-				comms_target.cartographer_description = "The clerk behind the desk glances at you then returns to preening her feathers."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk glances at you then returns to preening her feathers.")
 			end
 		end
-		setCommsMessage(string.format("%s\n\nYou can examine the brochure on the coffee table or talk to the cartographer",comms_target.cartographer_description))
-		addCommsReply("Examine brochure",function()
-			setCommsMessage("The brochure has a list of nearby stations and has a list of goods nearby")
-			addCommsReply("Examine station list", function()
+		setCommsMessage(string.format(_("cartographyOffice-comms", "%s\n\nYou can examine the brochure on the coffee table or talk to the cartographer"),comms_target.cartographer_description))
+		addCommsReply(_("cartographyOffice-comms", "Examine brochure"),function()
+			setCommsMessage(_("cartographyOffice-comms", "The brochure has a list of nearby stations and has a list of goods nearby"))
+			addCommsReply(_("cartographyOffice-comms", "Examine station list"), function()
 				local brochure_stations = ""
 				local sx, sy = comms_target:getPosition()
 				local nearby_objects = getObjectsInRadius(sx,sy,30000)
@@ -1662,9 +1662,9 @@ function handleDockedState()
 					if obj.typeName == "SpaceStation" then
 						if not obj:isEnemy(comms_target) then
 							if brochure_stations == "" then
-								brochure_stations = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+								brochure_stations = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 							else
-								brochure_stations = string.format("%s\n%s %s %s",brochure_stations,obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+								brochure_stations = string.format(_("cartographyOffice-comms", "%s\n%s %s %s"),brochure_stations,obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 							end
 						end
 					end
@@ -1672,7 +1672,7 @@ function handleDockedState()
 				setCommsMessage(brochure_stations)
 				addCommsReply(_("Back"),commsStation)
 			end)
-			addCommsReply("Examine goods list", function()
+			addCommsReply(_("cartographyOffice-comms", "Examine goods list"), function()
 				local brochure_goods = ""
 				local sx, sy = comms_target:getPosition()
 				local nearby_objects = getObjectsInRadius(sx,sy,30000)
@@ -1683,9 +1683,9 @@ function handleDockedState()
 								local gi = 1
 								repeat
 									if brochure_goods == "" then
-										brochure_goods = string.format("Good, quantity, cost, station:\n%s, %i, %i, %s",goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3],obj:getCallSign())
+										brochure_goods = string.format(_("cartographyOffice-comms", "Good, quantity, cost, station:\n%s, %i, %i, %s"),goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3],obj:getCallSign())
 									else
-										brochure_goods = string.format("%s\n%s, %i, %i, %s",brochure_goods,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3],obj:getCallSign())
+										brochure_goods = string.format(_("cartographyOffice-comms", "%s\n%s, %i, %i, %s"),brochure_goods,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3],obj:getCallSign())
 									end
 									gi = gi + 1
 								until(gi > #goods[obj])
@@ -1698,10 +1698,10 @@ function handleDockedState()
 			end)
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply("Talk to apprentice cartographer", function()
-			setCommsMessage("Hi, would you like for me to locate a station or some goods for you?")
-			addCommsReply("Locate station", function()
-				setCommsMessage("These are stations I have learned")
+		addCommsReply(_("cartographyOffice-comms", "Talk to apprentice cartographer"), function()
+			setCommsMessage(_("cartographyOffice-comms", "Hi, would you like for me to locate a station or some goods for you?"))
+			addCommsReply(_("cartographyOffice-comms", "Locate station"), function()
+				setCommsMessage(_("cartographyOffice-comms", "These are stations I have learned"))
 				local sx, sy = comms_target:getPosition()
 				local nearby_objects = getObjectsInRadius(sx,sy,50000)
 				local stations_known = 0
@@ -1710,12 +1710,12 @@ function handleDockedState()
 						if not obj:isEnemy(comms_target) then
 							stations_known = stations_known + 1
 							addCommsReply(obj:getCallSign(),function()
-								local station_details = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+								local station_details = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 								if goods[obj] ~= nil then
-									station_details = string.format("%s\nGood, quantity, cost",station_details)
+									station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 									local gi = 1
 									repeat
-										station_details = string.format("%s\n   %s, %i, %i",station_details,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3])
+										station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3])
 										gi = gi + 1
 									until(gi > #goods[obj])
 								end
@@ -1726,12 +1726,12 @@ function handleDockedState()
 					end
 				end
 				if stations_known == 0 then
-					setCommsMessage("I have learned of no stations yet")
+					setCommsMessage(_("cartographyOffice-comms", "I have learned of no stations yet"))
 				end
 				addCommsReply(_("Back"),commsStation)
 			end)
-			addCommsReply("Locate goods", function()
-				setCommsMessage("These are the goods I know about")
+			addCommsReply(_("cartographyOffice-comms", "Locate goods"), function()
+				setCommsMessage(_("cartographyOffice-comms", "These are the goods I know about"))
 				local sx, sy = comms_target:getPosition()
 				local nearby_objects = getObjectsInRadius(sx,sy,50000)
 				local button_count = 0
@@ -1740,7 +1740,7 @@ function handleDockedState()
 					if obj.typeName == "SpaceStation" then
 						if not obj:isEnemy(comms_target) then
 							if goods[obj] ~= nil then
-								station_details = string.format("%s\nGood, quantity, cost",station_details)
+								station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 								local gi = 1
 								repeat
 									by_goods[goods[obj][gi][1]] = obj
@@ -1752,13 +1752,13 @@ function handleDockedState()
 				end
 				for good, obj in pairs(by_goods) do
 					addCommsReply(good, function()
-						local station_details = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+						local station_details = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 						if goods[obj] ~= nil then					
 --						if obj.comms_data.goods ~= nil then
-							station_details = string.format("%s\nGood, quantity, cost",station_details)
+							station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 							local gi = 1
 							repeat
-								station_details = string.format("%s\n   %s, %i, %i",station_details,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3])
+								station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3])
 								gi = gi + 1
 							until(gi > #goods[obj])
 						end
@@ -1816,12 +1816,12 @@ function handleDockedState()
 					if comms_source.cargo < 1 then
 						oMsg = oMsg .. _("trade-comms", "\nInsufficient cargo space for purchase")
 					elseif goodsRep > playerRep then
-						oMsg = oMsg .. "\nInsufficient reputation for purchase"
+						oMsg = oMsg .. _("needRep-comms", "\nInsufficient reputation for purchase")
 					elseif goodsQuantity < 1 then
 						oMsg = oMsg .. _("trade-comms", "\nInsufficient station inventory")
 					else
 						if not comms_source:takeReputationPoints(goodsRep) then
-							oMsg = oMsg .. "\nInsufficient reputation for purchase"
+							oMsg = oMsg .. _("needRep-comms", "\nInsufficient reputation for purchase")
 						else
 							comms_source.cargo = comms_source.cargo - 1
 							decrementStationGoods(goodsType)
@@ -2210,34 +2210,34 @@ function isAllowedTo(state)
 end
 function handleWeaponRestock(weapon)
     if not comms_source:isDocked(comms_target) then 
-		setCommsMessage("You need to stay docked for that action.")
+		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage("We do not deal in weapons of mass destruction.")
-        elseif weapon == "EMP" then setCommsMessage("We do not deal in weapons of mass disruption.")
-        else setCommsMessage("We do not deal in those weapons.") end
+        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage("All nukes are charged and primed for destruction.");
+            setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
+            setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
         addCommsReply(_("Back"), commsStation)
     else
         if not comms_source:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage("Not enough reputation.")
+            setCommsMessage(_("needRep-comms", "Not enough reputation."))
             return
         end
         comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
         if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
-            setCommsMessage("You are fully loaded and ready to explode things.")
+            setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things."))
         else
-            setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
+            setCommsMessage(_("ammo-comms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
         end
         addCommsReply(_("Back"), commsStation)
     end
@@ -2248,16 +2248,16 @@ end
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if comms_source:isFriendly(comms_target) then
-        oMsg = "Good day, officer.\nIf you need supplies, please dock with us first."
+        oMsg = _("station-comms", "Good day, officer.\nIf you need supplies, please dock with us first.")
     else
-        oMsg = "Greetings.\nIf you want to do business, please dock with us first."
+        oMsg = _("station-comms", "Greetings.\nIf you want to do business, please dock with us first.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
+		oMsg = oMsg .. _("station-comms", "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you.")
 	end
 	setCommsMessage(oMsg)
- 	addCommsReply("I need information", function()
-		setCommsMessage("What kind of information do you need?")
+ 	addCommsReply(_("station-comms", "I need information"), function()
+		setCommsMessage(_("station-comms", "What kind of information do you need?"))
 		addCommsReply("Do you upgrade spaceships?", function()
 			if comms_target == stationZefram then
 				setCommsMessage("We can upgrade your jump drive maximum range for nanites or robotic goods")
@@ -2281,13 +2281,13 @@ function handleUndockedState()
 		end)
 	end)
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply("What are my current orders?", function()
+		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			ordMsg = primaryOrders
 			if raceStartDelay > 0 then
-				ordMsg = ordMsg .. string.format("\n%i Seconds remain until start of race",raceStartDelay)
+				ordMsg = ordMsg .. string.format(_("orders-comms", "\n%i Seconds remain until start of race"),raceStartDelay)
 			else
 				if comms_source.goal ~= nil then
-					ordMsg = ordMsg .. string.format("\nImmediate goal: race waypoint %i",comms_source.goal)
+					ordMsg = ordMsg .. string.format(_("orders-comms", "\nImmediate goal: race waypoint %i"),comms_source.goal)
 				end
 			end
 			setCommsMessage(ordMsg)
@@ -2354,7 +2354,7 @@ function handleUndockedState()
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
                             setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -2375,7 +2375,7 @@ function handleUndockedState()
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
                             setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"),ship:getCallSign(),n))
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -2577,7 +2577,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("trade-comms", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
@@ -2592,12 +2592,12 @@ function neutralComms(comms_data)
 				end
 			end
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage(_("trade-comms", "What do you want?"))
+			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			destRep = random(1,5)
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
-					setCommsMessage("Insufficient reputation")
+					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
@@ -2618,7 +2618,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("trade-comms", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
@@ -2644,7 +2644,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("trade-comms", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
@@ -2675,7 +2675,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("trade-comms", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
@@ -2848,20 +2848,20 @@ function calculateTimeRank()
 				p6.raceTime = raceTimer
 			end
 			if p6.raceTime < 600 then
-				p6.timeRank = "Admiral"
+				p6.timeRank = _("msgMainscreen", "Admiral")
 			elseif p6.raceTime < 720 then
-				p6.timeRank = "Captain"
+				p6.timeRank = _("msgMainscreen", "Captain")
 			elseif p6.raceTime < 900 then
-				p6.timeRank = "Commander"
+				p6.timeRank = _("msgMainscreen", "Commander")
 			elseif p6.raceTime < 1200 then
-				p6.timeRank = "Lieutenant"
+				p6.timeRank = _("msgMainscreen", "Lieutenant")
 			elseif p6.raceTime < 1500 then
-				p6.timeRank = "Ensign"
+				p6.timeRank = _("msgMainscreen", "Ensign")
 			else
 				if p6.raceTime == nil then
-					p6.timeRank = "Undefined"
+					p6.timeRank = _("msgMainscreen", "Undefined")
 				else
-					p6.timeRank = "Cadet"
+					p6.timeRank = _("msgMainscreen", "Cadet")
 				end
 			end
 		end
@@ -2869,30 +2869,30 @@ function calculateTimeRank()
 end
 function soloComplete()
 	print("in solo complete function")
-	gMsg = string.format("Race completed in %.2f seconds. Time rank: %s",playerList[1].raceTime,playerList[1].timeRank)
+	gMsg = string.format(_("msgMainscreen", "Race completed in %.2f seconds. Time rank: %s"),playerList[1].raceTime,playerList[1].timeRank)
 	eliminatedDrones = countEliminatedDrones(playerList[1])
-	gMsg = gMsg .. string.format("\nTarget drones eliminated: %i",eliminatedDrones)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "\nTarget drones eliminated: %i"),eliminatedDrones)
 end
 function soloExpire()
 	print("in solo expire function")
-	gMsg = "Race administrators got tired of waiting. Race stopped after 2000 seconds. Time Rank: Cadet"
+	gMsg = _("msgMainscreen", "Race administrators got tired of waiting. Race stopped after 2000 seconds. Time Rank: Cadet")
 	eliminatedDrones = countEliminatedDrones(playerList[1])
-	gMsg = gMsg .. string.format("\nTarget drones eliminated: %i",eliminatedDrones)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "\nTarget drones eliminated: %i"),eliminatedDrones)
 end
 function competeComplete()
 	print("in compete complete function")
-	gMsg = "Race Results"
+	gMsg = _("msgMainscreen", "Race Results")
 	competeResults()
 end
 function competeExpire()
 	print("in compete expire function")
-	gMsg = string.format("Race administrators got tired of waiting. Race stopped after %.2f seconds.",raceTimer)
+	gMsg = string.format(_("msgMainscreen", "Race administrators got tired of waiting. Race stopped after %.2f seconds."),raceTimer)
 	competeResults()
 end
 function competeResults()
 	print("in compete results function")
 	local stat_list, sorted_stat_list = gatherStats(true)
-	gMsg = gMsg .. "\nOrdered by score. Place, ship name, score, time in seconds, place points, drone points"
+	gMsg = gMsg .. _("msgMainscreen", "\nOrdered by score. Place, ship name, score, time in seconds, place points, drone points")
 	print("Final Statistics:")
 	print("Rank","Score","Place","Drones","Time","Name")
 	for index, item in ipairs(sorted_stat_list) do
@@ -2901,9 +2901,9 @@ function competeResults()
 			time = item.time
 		end
 		print(index,item.score,item.rank_points,item.drone_points,time,item.name)
-		gMsg = gMsg .. string.format("\n%i, %s, %i, %.2f, %i, %i",index,item.name,item.score,time,item.rank_points,item.drone_points)
+		gMsg = gMsg .. string.format(_("msgMainscreen", "\n%i, %s, %i, %.2f, %i, %i"),index,item.name,item.score,time,item.rank_points,item.drone_points)
 		if index == 1 then
-			gMsg = gMsg .. "\n\n\n"
+			gMsg = gMsg .. _("msgMainscreen", "\n\n\n")
 		end
 	end
 --	previous method (deprecated)
@@ -2947,9 +2947,9 @@ function fastestPlayer(reward)
 	end
 	if pi ~= nil then
 		playerList[pi].timePoints = reward
-		gMsg = gMsg .. string.format("\n%s time: %.2f seconds. Time rank: %s. Placement points: %i",playerList[pi]:getCallSign(),playerList[pi].raceTime,playerList[pi].timeRank,playerList[pi].timePoints)
+		gMsg = gMsg .. string.format(_("msgMainscreen", "\n%s time: %.2f seconds. Time rank: %s. Placement points: %i"),playerList[pi]:getCallSign(),playerList[pi].raceTime,playerList[pi].timeRank,playerList[pi].timePoints)
 	else
-		gMsg = gMsg .. "\nResults indeterminate"
+		gMsg = gMsg .. _("msgMainscreen", "\nResults indeterminate")
 	end
 	return
 end
@@ -2993,7 +2993,7 @@ function countEliminatedDronesByName(name)
 end
 function unorderedFinalTally()
 	for pl=1,#playerList do
-		gMsg = gMsg .. string.format("%s Drones shot: %i, Total score: %i. ",playerList[pl]:getCallSign(),playerList[pl].dronePoints,playerList[pl].score)
+		gMsg = gMsg .. string.format(_("msgMainscreen", "%s Drones shot: %i, Total score: %i. "),playerList[pl]:getCallSign(),playerList[pl].dronePoints,playerList[pl].score)
 	end
 end
 function finalTally()
@@ -3006,7 +3006,7 @@ function finalTally()
 				bestScore = playerList[pl].score
 			end
 		end
-		gMsg = gMsg .. string.format("%s Drones shot: %i, Total score: %i. ",bestPlayer:getCallSign(),bestPlayer.dronePoints,bestPlayer.score)
+		gMsg = gMsg .. string.format(_("msgMainscreen", "%s Drones shot: %i, Total score: %i. "),bestPlayer:getCallSign(),bestPlayer.dronePoints,bestPlayer.score)
 		table.remove(playerList,bestPlayer)
 	end
 end
@@ -3445,7 +3445,7 @@ function update(delta)
 							end
 						end
 					end
-					local name_tag_text = string.format("%s in %s",p5:getCallSign(),p5:getSectorName())
+					local name_tag_text = string.format(_("-tabHelms&Tactical&Singlepilot", "%s in %s"),p5:getCallSign(),p5:getSectorName())
 					if p5:hasPlayerAtPosition("Helms") then
 						p5.name_tag_helm = "name_tag_helm"
 						p5:addCustomInfo("Helms",p5.name_tag_helm,name_tag_text)
@@ -3466,7 +3466,7 @@ function update(delta)
 							else
 								lapString = "laps"
 							end
-							p5:addToShipLog(string.format("Waypoint 2 met. Go to waypoint 3. Leg took %f seconds. You have completed %i %s.",p5.legtimer,p5.laps,lapString),"Magenta")
+							p5:addToShipLog(string.format(_("-shipLog", "Waypoint 2 met. Go to waypoint 3. Leg took %f seconds. You have completed %i %s."),p5.legtimer,p5.laps,lapString),"Magenta")
 							p5.legtimer = 0
 						end
 					elseif p5.goal == 3 then
@@ -3477,7 +3477,7 @@ function update(delta)
 							else
 								lapString = "laps"
 							end
-							p5:addToShipLog(string.format("Waypoint 3 met. Go to waypoint 4. Leg took %f seconds. You have completed %i %s.",p5.legtimer,p5.laps,lapString),"Magenta")
+							p5:addToShipLog(string.format(_("-shipLog", "Waypoint 3 met. Go to waypoint 4. Leg took %f seconds. You have completed %i %s."),p5.legtimer,p5.laps,lapString),"Magenta")
 							p5.legtimer = 0
 						end
 					elseif p5.goal == 4 then
@@ -3488,7 +3488,7 @@ function update(delta)
 							else
 								lapString = "laps"
 							end
-							p5:addToShipLog(string.format("Waypoint 4 met. Go to waypoint 1. Leg took %f seconds. You have completed %i %s.",p5.legtimer,p5.laps,lapString),"Magenta")
+							p5:addToShipLog(string.format(_("-shipLog", "Waypoint 4 met. Go to waypoint 1. Leg took %f seconds. You have completed %i %s."),p5.legtimer,p5.laps,lapString),"Magenta")
 							p5.legtimer = 0
 						end
 					elseif p5.goal == 1 then
@@ -3496,7 +3496,7 @@ function update(delta)
 							p5.laps = p5.laps + 1
 							if p5.laps >= 3 then
 								p5.raceTime = raceTimer
-								p5:addToShipLog(string.format("Completed race. Race time in seconds: %f",p5.raceTime),"Magenta")
+								p5:addToShipLog(string.format(_("-shipLog", "Completed race. Race time in seconds: %f"),p5.raceTime),"Magenta")
 							else
 								p5.goal = 2
 								if p5.laps == 1 then
@@ -3504,7 +3504,7 @@ function update(delta)
 								else
 									lapString = "laps"
 								end
-								p5:addToShipLog(string.format("Waypoint 1 met. Go to waypoint 2. Leg took %f seconds. You have completed %i %s. Lap took %f seconds.",p5.legtimer,p5.laps,lapString,p5.laptimer),"Magenta")
+								p5:addToShipLog(string.format(_("-shipLog", "Waypoint 1 met. Go to waypoint 2. Leg took %f seconds. You have completed %i %s. Lap took %f seconds."),p5.legtimer,p5.laps,lapString,p5.laptimer),"Magenta")
 								p5.laptimer = 0
 								p5.legtimer = 0
 							end

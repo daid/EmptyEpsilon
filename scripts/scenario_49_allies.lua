@@ -3958,22 +3958,22 @@ function handleDockedState()
 		end
 	end
 	if comms_target.character ~= nil then
-		addCommsReply(string.format(_("stationGeneralInfo-comms", "Tell me about %s"),comms_target.character), function()
+		addCommsReply(string.format(_("characterInfo-comms", "Tell me about %s"),comms_target.character), function()
 			if comms_target.characterDescription ~= nil then
 				setCommsMessage(comms_target.characterDescription)
 			else
 				if comms_target.characterDeadEnd == nil then
 					local deadEndChoice = math.random(1,5)
 					if deadEndChoice == 1 then
-						comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "Never heard of %s"),comms_target.character)
+						comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "Never heard of %s"),comms_target.character)
 					elseif deadEndChoice == 2 then
-						comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "%s died last week. The funeral was yesterday"),comms_target.character)
+						comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "%s died last week. The funeral was yesterday"),comms_target.character)
 					elseif deadEndChoice == 3 then
-						comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "%s? Who's %s? There's nobody here named %s"),comms_target.character,comms_target.character,comms_target.character)
+						comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "%s? Who's %s? There's nobody here named %s"),comms_target.character,comms_target.character,comms_target.character)
 					elseif deadEndChoice == 4 then
-						comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "We don't talk about %s. They are gone and good riddance"),comms_target.character)
+						comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "We don't talk about %s. They are gone and good riddance"),comms_target.character)
 					else
-						comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "I think %s moved away"),comms_target.character)
+						comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "I think %s moved away"),comms_target.character)
 					end
 				end
 				setCommsMessage(comms_target.characterDeadEnd)
@@ -4313,7 +4313,7 @@ function isAllowedTo(state)
 end
 function handleWeaponRestock(weapon)
     if not player:isDocked(comms_target) then 
-		setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
+		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
@@ -4450,22 +4450,22 @@ function handleUndockedState()
 			end)
 		end
 		if comms_target.character ~= nil then
-			addCommsReply(string.format(_("stationGeneralInfo-comms", "Tell me about %s"),comms_target.character), function()
+			addCommsReply(string.format(_("characterInfo-comms", "Tell me about %s"),comms_target.character), function()
 				if comms_target.characterDescription ~= nil then
 					setCommsMessage(comms_target.characterDescription)
 				else
 					if comms_target.characterDeadEnd == nil then
 						local deadEndChoice = math.random(1,5)
 						if deadEndChoice == 1 then
-							comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "Never heard of %s"),comms_target.character)
+							comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "Never heard of %s"),comms_target.character)
 						elseif deadEndChoice == 2 then
-							comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "%s died last week. The funeral was yesterday"),comms_target.character)
+							comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "%s died last week. The funeral was yesterday"),comms_target.character)
 						elseif deadEndChoice == 3 then
-							comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "%s? Who's %s? There's nobody here named %s"),comms_target.character,comms_target.character,comms_target.character)
+							comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "%s? Who's %s? There's nobody here named %s"),comms_target.character,comms_target.character,comms_target.character)
 						elseif deadEndChoice == 4 then
-							comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "We don't talk about %s. They are gone and good riddance"),comms_target.character)
+							comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "We don't talk about %s. They are gone and good riddance"),comms_target.character)
 						else
-							comms_target.characterDeadEnd = string.format(_("stationGeneralInfo-comms", "I think %s moved away"),comms_target.character)
+							comms_target.characterDeadEnd = string.format(_("characterInfo-comms", "I think %s moved away"),comms_target.character)
 						end
 					end
 					setCommsMessage(comms_target.characterDeadEnd)
@@ -5125,7 +5125,7 @@ function neutralComms(comms_data)
 				end	--end sell goods if branch
 			end	--end nearby freighter if branch
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage(_("trade-comms", "What do you want?"))
+			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			local destRep = random(1,5)
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %.1f reputation)"),destRep), function()
@@ -6056,9 +6056,9 @@ function checkDoomsdayEvents(delta)
 		local doomsday_seconds = math.floor(doomsdayTimer % 60)
 		doomsday_status = _("doomsday-tabEngineer&Engineer+", "Doomsday Device:")
 		if doomsday_minutes <= 0 then
-			doomsday_status = string.format("%s %i",doomsday_status,doomsday_seconds)
+			doomsday_status = string.format(_("doomsday-tabEngineer&Engineer+", "%s %i"),doomsday_status,doomsday_seconds)
 		else
-			doomsday_status = string.format("%s %i:%.2i",doomsday_status,doomsday_minutes,doomsday_seconds)
+			doomsday_status = string.format(_("doomsday-tabEngineer&Engineer+", "%s %i:%.2i"),doomsday_status,doomsday_minutes,doomsday_seconds)
 		end
 	end
 	for pidx=1,8 do
@@ -6301,9 +6301,9 @@ function checkSickArlenianAdmiralEvents(delta)
 	local death_seconds = math.floor(admiralTimeToLive % 60)
 	local admiral_status = _("doctor-tabScience&Operations", "Koshenz Death:")
 	if death_minutes <= 0 then
-		admiral_status = string.format("%s %i",admiral_status,death_seconds)
+		admiral_status = string.format(_("doctor-tabScience&Operations", "%s %i"),admiral_status,death_seconds)
 	else
-		admiral_status = string.format("%s %i:%.2i",admiral_status,death_minutes,death_seconds)
+		admiral_status = string.format(_("doctor-tabScience&Operations", "%s %i:%.2i"),admiral_status,death_minutes,death_seconds)
 	end
 	for pidx=1,8 do
 		local p = getPlayerShip(pidx)
@@ -6545,11 +6545,11 @@ function crewFate(p, fatalityChance)
 		p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 		if p:hasPlayerAtPosition("Engineering") then
 			local repairCrewFatality = "repairCrewFatality"
-			p:addCustomMessage("Engineering",repairCrewFatality,_("msgEngineer", "One of your repair crew has perished"))
+			p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 		end
 		if p:hasPlayerAtPosition("Engineering+") then
 			local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-			p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("msgEngineer+", "One of your repair crew has perished"))
+			p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 		end
 	end
 end--set up players with name, goods, cargo space, reputation and either a warp drive or a jump drive if applicable
