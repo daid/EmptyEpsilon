@@ -7640,7 +7640,7 @@ function isAllowedTo(state)
 end
 function handleWeaponRestock(weapon)
     if not comms_source:isDocked(comms_target) then 
-		setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
+		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
@@ -8175,13 +8175,13 @@ function altShipComms()
 	end
 	setPlayers()
 	if comms_source:isFriendly(comms_target) then
-		local c_msg = _("trade-comms", "Sir, how can we assist?")
+		local c_msg = _("shipAssist-comms", "Sir, how can we assist?")
 		if comms_target.comms_data.friendlyness < 20 then
-			c_msg = _("trade-comms", "What do you want?")
+			c_msg = _("shipAssist-comms", "What do you want?")
 		elseif comms_target.comms_data.friendlyness < 40 then
-			c_msg = _("trade-comms", "Hello?")
+			c_msg = _("shipAssist-comms", "Hello?")
 		elseif comms_target.comms_data.friendlyness < 60 then
-			c_msg = _("trade-comms", "Greetings")
+			c_msg = _("shipAssist-comms", "Greetings")
 		end
 		setCommsMessage(c_msg)
 		return altFriendlyShipComms()
@@ -8473,7 +8473,7 @@ function friendlyFreighterComms()
 				end	--different freighter types
 			end	--ship under 5 units away
 		elseif comms_target.comms_data.friendlyness > 33 then
-			setCommsMessage(_("trade-comms", "What do you want?"))
+			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			local destRep = math.floor(random(1,5))
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %i reputation)"),destRep), function()
@@ -8690,9 +8690,9 @@ function altFriendlyShipComms()
 end
 function friendlyComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage(_("trade-comms", "What do you want?"));
+		setCommsMessage(_("shipAssist-comms", "What do you want?"));
 	else
-		setCommsMessage(_("trade-comms", "Sir, how can we assist?"));
+		setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"));
 	end
 	if shipType:find("Freighter") ~= nil then
 		if comms_data.friendlyness > 66 then
@@ -8790,7 +8790,7 @@ function friendlyComms(comms_data)
 				end	--different freighter types
 			end	--ship under 5 units away
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage(_("trade-comms", "What do you want?"))
+			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			local destRep = random(1,5)
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
@@ -9287,7 +9287,7 @@ function neutralComms(comms_data)
 				end	--different freighter types
 			end	--ship under 5 units away
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage(_("trade-comms", "What do you want?"))
+			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			local destRep = random(1,5)
 			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
@@ -10438,11 +10438,11 @@ function horizonScienceMessage(delta)
 		if phScan.horizonConsoleMessage ~= "sent" then
 			horizonConsoleMessage = "grawp scan instructions"
 			if phScan:hasPlayerAtPosition("Science") then
-				phScan:addCustomMessage("Science",horizonConsoleMessage,_("msgScience", "When the ship gets close enough, a button to initiate black hole scan will become available. Click it to start scanning the black hole. The ship must remain within scanning distance for a full 30 seconds to complete the scan."))
+				phScan:addCustomMessage("Science",horizonConsoleMessage,_("research-msgScience", "When the ship gets close enough, a button to initiate black hole scan will become available. Click it to start scanning the black hole. The ship must remain within scanning distance for a full 30 seconds to complete the scan."))
 				phScan.horizonConsoleMessage = "sent"
 			end
 			if phScan:hasPlayerAtPosition("Operations") then
-				phScan:addCustomMessage("Operations",horizonConsoleMessage,_("msgOperations", "When the ship gets close enough, a button to initiate black hole scan will become available. Click it to start scanning the black hole. The ship must remain within scanning distance for a full 30 seconds to complete the scan."))
+				phScan:addCustomMessage("Operations",horizonConsoleMessage,_("research-msgOperations", "When the ship gets close enough, a button to initiate black hole scan will become available. Click it to start scanning the black hole. The ship must remain within scanning distance for a full 30 seconds to complete the scan."))
 				phScan.horizonConsoleMessage = "sent"
 			end
 		end
@@ -10453,7 +10453,7 @@ function horizonScienceMessage(delta)
 	local x1, y1 = phScan:getPosition()
 	local x2, y2 = grawp:getPosition()
 	if distance(x1,y1,x2,y2) < horizonScanRange then
-		grawp_status = "Grawp in range"
+		grawp_status = _("research-", "Grawp in range")
 		if scanGrawpButton then
 			if scanGrawp then
 				if elapsedScanTime == 0 then
@@ -10465,12 +10465,12 @@ function horizonScienceMessage(delta)
 				end
 				if elapsedScanTime > elapsedScanTimeHalf then
 					if phScan.halfScanMessage ~= "sent" then
-						phScan:addToShipLog(_("-shipLog", "[Scan technician] Black hole scan 50 percent complete"),"Blue")
+						phScan:addToShipLog(_("research-shipLog", "[Scan technician] Black hole scan 50 percent complete"),"Blue")
 						phScan.halfScanMessage = "sent"
 					end
 				end
 				if elapsedScanTime > elapsedScanTimeGoal then
-					phScan:addToShipLog(_("-shipLog", "[Scan technician] Black hole scan complete"),"Blue")
+					phScan:addToShipLog(_("research-shipLog", "[Scan technician] Black hole scan complete"),"Blue")
 					if horizonScienceScanButton == "scan button" then
 						phScan:removeCustom(horizonScienceScanButton)
 						horizonScienceScanButton = nil
@@ -10509,22 +10509,22 @@ function horizonScienceMessage(delta)
 					plotR = nil
 					removeGMFunction("Req Horizon")
 				end
-				grawp_status = string.format(_("Grawp in range: %i"),math.ceil(elapsedScanTimeGoal - elapsedScanTime))
+				grawp_status = string.format(_("research-", "Grawp in range: %i"),math.ceil(elapsedScanTimeGoal - elapsedScanTime))
 			end
 		else
 			if phScan:hasPlayerAtPosition("Science") then
 				horizonScienceScanButton = "scan button"
-				phScan:addCustomButton("Science",horizonScienceScanButton,_("blackHole-buttonScience", "Scan black hole"),scanBlackHole)
+				phScan:addCustomButton("Science",horizonScienceScanButton,_("research-buttonScience", "Scan black hole"),scanBlackHole)
 				scanGrawpButton = true
 			end
 			if phScan:hasPlayerAtPosition("Operations") then
 				horizonScienceScanButtonOperations = "scan button operations"
-				phScan:addCustomButton("Operations",horizonScienceScanButtonOperations,_("blackHole-buttonOperations", "Scan black hole"),scanBlackHole)
+				phScan:addCustomButton("Operations",horizonScienceScanButtonOperations,_("research-buttonOperations", "Scan black hole"),scanBlackHole)
 				scanGrawpButton = true
 			end
 		end
 	else
-		grawp_status = _("Grawp out of range")
+		grawp_status = _("research-tabHelms&Tact&Science&Ops", "Grawp out of range")
 		if scanGrawpButton then
 			if horizonScienceScanButton == "scan button" then
 				phScan:removeCustom(horizonScienceScanButton)
@@ -10534,7 +10534,7 @@ function horizonScienceMessage(delta)
 				phScan:removeCustom(horizonScienceScanButtonOperations)
 				horizonScienceScanButtonOperations = nil
 			end
-			phScan:addToShipLog(_("blackHole-shipLog", "[Scan technician] Black hole scan aborted before completion"),"Blue")
+			phScan:addToShipLog(_("research-shipLog", "[Scan technician] Black hole scan aborted before completion"),"Blue")
 			phScan.halfScanMessage = "reset"
 			elapsedScanTime = 0
 			scanGrawp = false
@@ -10562,7 +10562,7 @@ function horizonScienceMessage(delta)
 end
 function scanBlackHole()
 	scanGrawp = true
-	phScan:addToShipLog(_("blackHole-shipLog", "[Scan technician] Black hole scan started"),"Blue")
+	phScan:addToShipLog(_("research-shipLog", "[Scan technician] Black hole scan started"),"Blue")
 end
 -----------------------------
 -- 	Optional plot choices  --
@@ -11169,9 +11169,9 @@ function update(delta)
 		local game_minutes = math.floor(gameTimeLimit / 60)
 		local game_seconds = math.floor(gameTimeLimit % 60)
 		if game_minutes <= 0 then
-			game_time_status = string.format(_("%s %i"),game_time_status,game_seconds)
+			game_time_status = string.format(_("-tabRelay&Operations", "%s %i"),game_time_status,game_seconds)
 		else
-			game_time_status = string.format(_("%s %i:%.2i"),game_time_status,game_minutes,game_seconds)
+			game_time_status = string.format(_("-tabRelay&Operations", "%s %i:%.2i"),game_time_status,game_minutes,game_seconds)
 		end
 		for pidx=1,8 do
 			local p = getPlayerShip(pidx)

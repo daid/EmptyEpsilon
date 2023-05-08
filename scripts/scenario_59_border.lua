@@ -886,30 +886,30 @@ function wreckModHealthBeam(x,y)
 				p:setSystemHealthMax("beamweapons",math.min(1, max_health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_max_beam_health_message = "artifact_improved_max_beam_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_max_beam_health_message,string.format("The %s retrieved has improved the beam system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_max_beam_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the beam system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_max_beam_health_message_plus = "artifact_improved_max_beam_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_max_beam_health_message_plus,string.format("The %s retrieved has improved the beam system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_max_beam_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the beam system maximum health"),full_desc))
 				end
 			elseif health < 1 then
 				p:setSystemHealth("beamweapons",math.min(1, health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_beam_health_message = "artifact_improved_beam_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_beam_health_message,string.format("The %s retrieved has improved the beam system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_beam_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the beam system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_beam_health_message_plus = "artifact_improved_beam_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_beam_health_message_plus,string.format("The %s retrieved has improved the beam system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_beam_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the beam system health"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_beam_health_message = "artifact_beam_health_message"
-					p:addCustomMessage("Engineering",p.artifact_beam_health_message,string.format("The %s retrieved has had no impact on an already healthy beam system",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_beam_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy beam system"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_beam_health_message_plus = "artifact_beam_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_beam_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy beam system",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_beam_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy beam system"),full_desc))
 				end
 			end
 		else
@@ -917,21 +917,21 @@ function wreckModHealthBeam(x,y)
 				p:setSystemHealth("beamweapons",math.max(-1, health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_beam_health_message = "artifact_damaged_beam_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_beam_health_message,string.format("The %s retrieved has damaged the beam system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_beam_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the beam system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_beam_health_message_plus = "artifact_damaged_beam_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_beam_health_message_plus,string.format("The %s retrieved has damaged the beam system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_beam_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the beam system health"),full_desc))
 				end
 			else
 				p:setSystemHealthMax("beamweapons",math.max(-1, max_health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_max_beam_health_message = "artifact_damaged_max_beam_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_max_beam_health_message,string.format("The %s retrieved has damaged the beam system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_max_beam_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the beam system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_max_beam_health_message_plus = "artifact_damaged_max_beam_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_max_beam_health_message_plus,string.format("The %s retrieved has damaged the beam system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_max_beam_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the beam system maximum health"),full_desc))
 				end
 			end
 		end
@@ -955,30 +955,30 @@ function wreckModHealthMissile(x,y)
 				p:setSystemHealthMax("missilesystem",math.min(1, max_health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_max_missile_health_message = "artifact_improved_max_missile_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_max_missile_health_message,string.format("The %s retrieved has improved the missile system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_max_missile_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the missile system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_max_missile_health_message_plus = "artifact_improved_max_missile_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_max_missile_health_message_plus,string.format("The %s retrieved has improved the missile system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_max_missile_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the missile system maximum health"),full_desc))
 				end
 			elseif health < 1 then
 				p:setSystemHealth("missilesystem",math.min(1, health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_missile_health_message = "artifact_improved_missile_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_missile_health_message,string.format("The %s retrieved has improved the missile system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_missile_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the missile system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_missile_health_message_plus = "artifact_improved_missile_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_missile_health_message_plus,string.format("The %s retrieved has improved the missile system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_missile_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the missile system health"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_missile_health_message = "artifact_missile_health_message"
-					p:addCustomMessage("Engineering",p.artifact_missile_health_message,string.format("The %s retrieved has had no impact on an already healthy missile system",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_missile_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy missile system"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_missile_health_message_plus = "artifact_missile_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_missile_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy missile system",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_missile_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy missile system"),full_desc))
 				end
 			end
 		else
@@ -986,21 +986,21 @@ function wreckModHealthMissile(x,y)
 				p:setSystemHealth("missilesystem",math.max(-1, health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_missile_health_message = "artifact_damaged_missile_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_missile_health_message,string.format("The %s retrieved has damaged the missile system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_missile_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the missile system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_missile_health_message_plus = "artifact_damaged_missile_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_missile_health_message_plus,string.format("The %s retrieved has damaged the missile system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_missile_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the missile system health"),full_desc))
 				end
 			else
 				p:setSystemHealthMax("missilesystem",math.max(-1, max_health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_max_missile_health_message = "artifact_damaged_max_missile_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_max_missile_health_message,string.format("The %s retrieved has damaged the missile system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_max_missile_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the missile system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_max_missile_health_message_plus = "artifact_damaged_max_missile_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_max_missile_health_message_plus,string.format("The %s retrieved has damaged the missile system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_max_missile_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the missile system maximum health"),full_desc))
 				end
 			end
 		end
@@ -1024,30 +1024,30 @@ function wreckModHealthImpulse(x,y)
 				p:setSystemHealthMax("impulse",math.min(1, max_health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_max_impulse_health_message = "artifact_improved_max_impulse_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_max_impulse_health_message,string.format("The %s retrieved has improved the impulse system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_max_impulse_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the impulse system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_max_impulse_health_message_plus = "artifact_improved_max_impulse_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_max_impulse_health_message_plus,string.format("The %s retrieved has improved the impulse system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_max_impulse_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the impulse system maximum health"),full_desc))
 				end
 			elseif health < 1 then
 				p:setSystemHealth("impulse",math.min(1, health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_impulse_health_message = "artifact_improved_impulse_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_impulse_health_message,string.format("The %s retrieved has improved the impulse system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_impulse_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the impulse system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_impulse_health_message_plus = "artifact_improved_impulse_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_impulse_health_message_plus,string.format("The %s retrieved has improved the impulse system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_impulse_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the impulse system health"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_impulse_health_message = "artifact_impulse_health_message"
-					p:addCustomMessage("Engineering",p.artifact_impulse_health_message,string.format("The %s retrieved has had no impact on an already healthy impulse system",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_impulse_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy impulse system"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_impulse_health_message_plus = "artifact_impulse_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_impulse_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy impulse system",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_impulse_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy impulse system"),full_desc))
 				end
 			end
 		else
@@ -1055,21 +1055,21 @@ function wreckModHealthImpulse(x,y)
 				p:setSystemHealth("impulse",math.max(-1, health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_impulse_health_message = "artifact_damaged_impulse_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_impulse_health_message,string.format("The %s retrieved has damaged the impulse system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_impulse_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the impulse system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_impulse_health_message_plus = "artifact_damaged_impulse_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_impulse_health_message_plus,string.format("The %s retrieved has damaged the impulse system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_impulse_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the impulse system health"),full_desc))
 				end
 			else
 				p:setSystemHealthMax("impulse",math.max(-1, max_health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_max_impulse_health_message = "artifact_damaged_max_impulse_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_max_impulse_health_message,string.format("The %s retrieved has damaged the impulse system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_max_impulse_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the impulse system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_max_impulse_health_message_plus = "artifact_damaged_max_impulse_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_max_impulse_health_message_plus,string.format("The %s retrieved has damaged the impulse system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_max_impulse_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the impulse system maximum health"),full_desc))
 				end
 			end
 		end
@@ -1094,30 +1094,30 @@ function wreckModHealthWarp(x,y)
 					p:setSystemHealthMax("warp",math.min(1, max_health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_max_warp_health_message = "artifact_improved_max_warp_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_max_warp_health_message,string.format("The %s retrieved has improved the warp system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_max_warp_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the warp system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_max_warp_health_message_plus = "artifact_improved_max_warp_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_max_warp_health_message_plus,string.format("The %s retrieved has improved the warp system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_max_warp_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the warp system maximum health"),full_desc))
 					end
 				elseif health < 1 then
 					p:setSystemHealth("warp",math.min(1, health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_warp_health_message = "artifact_improved_warp_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_warp_health_message,string.format("The %s retrieved has improved the warp system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_warp_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the warp system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_warp_health_message_plus = "artifact_improved_warp_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_warp_health_message_plus,string.format("The %s retrieved has improved the warp system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_warp_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the warp system health"),full_desc))
 					end
 				else
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_warp_health_message = "artifact_warp_health_message"
-						p:addCustomMessage("Engineering",p.artifact_warp_health_message,string.format("The %s retrieved has had no impact on an already healthy warp system",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_warp_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy warp system"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_warp_health_message_plus = "artifact_warp_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_warp_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy warp system",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_warp_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy warp system"),full_desc))
 					end
 				end
 			else
@@ -1125,32 +1125,32 @@ function wreckModHealthWarp(x,y)
 					p:setSystemHealth("warp",math.max(-1, health - .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_damaged_warp_health_message = "artifact_damaged_warp_health_message"
-						p:addCustomMessage("Engineering",p.artifact_damaged_warp_health_message,string.format("The %s retrieved has damaged the warp system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_damaged_warp_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the warp system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_damaged_warp_health_message_plus = "artifact_damaged_warp_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_damaged_warp_health_message_plus,string.format("The %s retrieved has damaged the warp system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_damaged_warp_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the warp system health"),full_desc))
 					end
 				else
 					p:setSystemHealthMax("warp",math.max(-1, max_health - .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_damaged_max_warp_health_message = "artifact_damaged_max_warp_health_message"
-						p:addCustomMessage("Engineering",p.artifact_damaged_max_warp_health_message,string.format("The %s retrieved has damaged the warp system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_damaged_max_warp_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the warp system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_damaged_max_warp_health_message_plus = "artifact_damaged_max_warp_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_damaged_max_warp_health_message_plus,string.format("The %s retrieved has damaged the warp system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_damaged_max_warp_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the warp system maximum health"),full_desc))
 					end
 				end
 			end
 --		else
 --			if p:hasPlayerAtPosition("Engineering") then
 --				p.artifact_warp_health_message = "artifact_warp_health_message"
---				p:addCustomMessage("Engineering",p.artifact_warp_health_message,string.format("The %s retrieved has had no impact on a non-existent warp system",full_desc))
+--				p:addCustomMessage("Engineering",p.artifact_warp_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on a non-existent warp system"),full_desc))
 --			end
 --			if p:hasPlayerAtPosition("Engineering+") then
 --				p.artifact_warp_health_message_plus = "artifact_warp_health_message_plus"
---				p:addCustomMessage("Engineering+",p.artifact_warp_health_message_plus,string.format("The %s retrieved has had no impact on a non-existent warp system",full_desc))
+--				p:addCustomMessage("Engineering+",p.artifact_warp_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on a non-existent warp system"),full_desc))
 --			end
 		end
 	end)
@@ -1174,30 +1174,30 @@ function wreckModHealthJump(x,y)
 					p:setSystemHealthMax("jumpdrive",math.min(1, max_health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_max_jump_health_message = "artifact_improved_max_jump_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_max_jump_health_message,string.format("The %s retrieved has improved the jump system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_max_jump_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the jump system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_max_jump_health_message_plus = "artifact_improved_max_jump_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_max_jump_health_message_plus,string.format("The %s retrieved has improved the jump system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_max_jump_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the jump system maximum health"),full_desc))
 					end
 				elseif health < 1 then
 					p:setSystemHealth("jumpdrive",math.min(1, health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_jump_health_message = "artifact_improved_jump_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_jump_health_message,string.format("The %s retrieved has improved the jump system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_jump_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the jump system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_jump_health_message_plus = "artifact_improved_jump_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_jump_health_message_plus,string.format("The %s retrieved has improved the jump system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_jump_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the jump system health"),full_desc))
 					end
 				else
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_jump_health_message = "artifact_jump_health_message"
-						p:addCustomMessage("Engineering",p.artifact_jump_health_message,string.format("The %s retrieved has had no impact on an already healthy jump system",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_jump_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy jump system"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_jump_health_message_plus = "artifact_jump_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_jump_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy jump system",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_jump_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy jump system"),full_desc))
 					end
 				end
 			else
@@ -1205,32 +1205,32 @@ function wreckModHealthJump(x,y)
 					p:setSystemHealth("jumpdrive",math.max(-1, health - .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_damaged_jump_health_message = "artifact_damaged_jump_health_message"
-						p:addCustomMessage("Engineering",p.artifact_damaged_jump_health_message,string.format("The %s retrieved has damaged the jump system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_damaged_jump_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the jump system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_damaged_jump_health_message_plus = "artifact_damaged_jump_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_damaged_jump_health_message_plus,string.format("The %s retrieved has damaged the jump system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_damaged_jump_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the jump system health"),full_desc))
 					end
 				else
 					p:setSystemHealthMax("jumpdrive",math.max(-1, max_health - .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_damaged_max_jump_health_message = "artifact_damaged_max_jump_health_message"
-						p:addCustomMessage("Engineering",p.artifact_damaged_max_jump_health_message,string.format("The %s retrieved has damaged the jump system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_damaged_max_jump_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the jump system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_damaged_max_jump_health_message_plus = "artifact_damaged_max_jump_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_damaged_max_jump_health_message_plus,string.format("The %s retrieved has damaged the jump system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_damaged_max_jump_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the jump system maximum health"),full_desc))
 					end
 				end
 			end
 --		else
 --			if p:hasPlayerAtPosition("Engineering") then
 --				p.artifact_jump_health_message = "artifact_jump_health_message"
---				p:addCustomMessage("Engineering",p.artifact_jump_health_message,string.format("The %s retrieved has had no impact on a non-existent jump system",full_desc))
+--				p:addCustomMessage("Engineering",p.artifact_jump_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on a non-existent jump system"),full_desc))
 --			end
 --			if p:hasPlayerAtPosition("Engineering+") then
 --				p.artifact_jump_health_message_plus = "artifact_jump_health_message_plus"
---				p:addCustomMessage("Engineering+",p.artifact_jump_health_message_plus,string.format("The %s retrieved has had no impact on a non-existent jump system",full_desc))
+--				p:addCustomMessage("Engineering+",p.artifact_jump_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on a non-existent jump system"),full_desc))
 --			end
 		end
 	end)
@@ -1256,50 +1256,50 @@ function wreckModHealthShield(x,y)
 					p:setSystemHealthMax("frontshield",math.min(1, max_health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_max_front_shield_health_message = "artifact_improved_max_front_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_max_front_shield_health_message,string.format("The %s retrieved has improved the front shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_max_front_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the front shield system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_max_front_shield_health_message_plus = "artifact_improved_max_front_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_max_front_shield_health_message_plus,string.format("The %s retrieved has improved the front shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_max_front_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the front shield system maximum health"),full_desc))
 					end
 				elseif max_health_rear < 1 then
 					p:setSystemHealthMax("rearshield",math.min(1, max_health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_max_rear_shield_health_message = "artifact_improved_max_rear_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_max_rear_shield_health_message,string.format("The %s retrieved has improved the rear shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_max_rear_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the rear shield system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_max_rear_shield_health_message_plus = "artifact_improved_max_rear_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_max_rear_shield_health_message_plus,string.format("The %s retrieved has improved the rear shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_max_rear_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the rear shield system maximum health"),full_desc))
 					end
 				elseif health_front < 1 then
 					p:setSystemHealth("frontshield",math.min(1, health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_front_shield_health_message = "artifact_improved_front_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_front_shield_health_message,string.format("The %s retrieved has improved the front shield system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_front_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the front shield system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_front_shield_health_message_plus = "artifact_improved_front_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_front_shield_health_message_plus,string.format("The %s retrieved has improved the front shield system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_front_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the front shield system health"),full_desc))
 					end
 				elseif health_rear < 1 then
 					p:setSystemHealth("rearshield",math.min(1, health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_rear_shield_health_message = "artifact_improved_rear_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_rear_shield_health_message,string.format("The %s retrieved has improved the rear shield system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_rear_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the rear shield system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_rear_shield_health_message_plus = "artifact_improved_rear_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_rear_shield_health_message_plus,string.format("The %s retrieved has improved the rear shield system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_rear_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the rear shield system health"),full_desc))
 					end
 				else
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_shield_health_message = "artifact_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_shield_health_message,string.format("The %s retrieved has had no impact on an already healthy shield system",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy shield system"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_shield_health_message_plus = "artifact_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_shield_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy shield system",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy shield system"),full_desc))
 					end
 				end
 			else
@@ -1308,21 +1308,21 @@ function wreckModHealthShield(x,y)
 						p:setSystemHealth("frontshield",math.max(-1, health - .05))
 						if p:hasPlayerAtPosition("Engineering") then
 							p.artifact_damaged_front_shield_health_message = "artifact_damaged_front_shield_health_message"
-							p:addCustomMessage("Engineering",p.artifact_damaged_front_shield_health_message,string.format("The %s retrieved has damaged the front shield system health",full_desc))
+							p:addCustomMessage("Engineering",p.artifact_damaged_front_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the front shield system health"),full_desc))
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							p.artifact_damaged_front_shield_health_message_plus = "artifact_damaged_front_shield_health_message_plus"
-							p:addCustomMessage("Engineering+",p.artifact_damaged_front_shield_health_message_plus,string.format("The %s retrieved has damaged the front shield system health",full_desc))
+							p:addCustomMessage("Engineering+",p.artifact_damaged_front_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the front shield system health"),full_desc))
 						end
 					else
 						p:setSystemHealth("rearshield",math.max(-1, health - .05))
 						if p:hasPlayerAtPosition("Engineering") then
 							p.artifact_damaged_rear_shield_health_message = "artifact_damaged_rear_shield_health_message"
-							p:addCustomMessage("Engineering",p.artifact_damaged_rear_shield_health_message,string.format("The %s retrieved has damaged the rear shield system health",full_desc))
+							p:addCustomMessage("Engineering",p.artifact_damaged_rear_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the rear shield system health"),full_desc))
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							p.artifact_damaged_rear_shield_health_message_plus = "artifact_damaged_rear_shield_health_message_plus"
-							p:addCustomMessage("Engineering+",p.artifact_damaged_rear_shield_health_message_plus,string.format("The %s retrieved has damaged the rear shield system health",full_desc))
+							p:addCustomMessage("Engineering+",p.artifact_damaged_rear_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the rear shield system health"),full_desc))
 						end
 					end
 				else
@@ -1330,21 +1330,21 @@ function wreckModHealthShield(x,y)
 						p:setSystemHealthMax("frontshield",math.max(-1, max_health - .05))
 						if p:hasPlayerAtPosition("Engineering") then
 							p.artifact_damaged_max_front_shield_health_message = "artifact_damaged_max_front_shield_health_message"
-							p:addCustomMessage("Engineering",p.artifact_damaged_max_front_shield_health_message,string.format("The %s retrieved has damaged the front shield system maximum health",full_desc))
+							p:addCustomMessage("Engineering",p.artifact_damaged_max_front_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the front shield system maximum health"),full_desc))
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							p.artifact_damaged_max_front_shield_health_message_plus = "artifact_damaged_max_front_shield_health_message_plus"
-							p:addCustomMessage("Engineering+",p.artifact_damaged_max_front_shield_health_message_plus,string.format("The %s retrieved has damaged the front shield system maximum health",full_desc))
+							p:addCustomMessage("Engineering+",p.artifact_damaged_max_front_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the front shield system maximum health"),full_desc))
 						end
 					else
 						p:setSystemHealthMax("rearshield",math.max(-1, max_health - .05))
 						if p:hasPlayerAtPosition("Engineering") then
 							p.artifact_damaged_max_rear_shield_health_message = "artifact_damaged_max_rear_shield_health_message"
-							p:addCustomMessage("Engineering",p.artifact_damaged_max_rear_shield_health_message,string.format("The %s retrieved has damaged the rear shield system maximum health",full_desc))
+							p:addCustomMessage("Engineering",p.artifact_damaged_max_rear_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the rear shield system maximum health"),full_desc))
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							p.artifact_damaged_max_rear_shield_health_message_plus = "artifact_damaged_max_rear_shield_health_message_plus"
-							p:addCustomMessage("Engineering+",p.artifact_damaged_max_rear_shield_health_message_plus,string.format("The %s retrieved has damaged the rear shield system maximum health",full_desc))
+							p:addCustomMessage("Engineering+",p.artifact_damaged_max_rear_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the rear shield system maximum health"),full_desc))
 						end
 					end
 				end
@@ -1357,30 +1357,30 @@ function wreckModHealthShield(x,y)
 					p:setSystemHealthMax("frontshield",math.min(1, max_health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_max_shield_health_message = "artifact_improved_max_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_max_shield_health_message,string.format("The %s retrieved has improved the shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_max_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the shield system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_max_shield_health_message_plus = "artifact_improved_max_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_max_shield_health_message_plus,string.format("The %s retrieved has improved the shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_max_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the shield system maximum health"),full_desc))
 					end
 				elseif health < 1 then
 					p:setSystemHealth("frontshield",math.min(1, health + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_shield_health_message = "artifact_improved_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_improved_shield_health_message,string.format("The %s retrieved has improved the shield system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_improved_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the shield system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_improved_shield_health_message_plus = "artifact_improved_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_improved_shield_health_message_plus,string.format("The %s retrieved has improved the shield system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_improved_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the shield system health"),full_desc))
 					end
 				else
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_shield_health_message = "artifact_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_shield_health_message,string.format("The %s retrieved has had no impact on an already healthy shield system",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy shield system"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_shield_health_message_plus = "artifact_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_shield_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy shield system",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy shield system"),full_desc))
 					end
 				end
 			else
@@ -1388,21 +1388,21 @@ function wreckModHealthShield(x,y)
 					p:setSystemHealth("frontshield",math.max(-1, health - .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_damaged_shield_health_message = "artifact_damaged_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_damaged_shield_health_message,string.format("The %s retrieved has damaged the shield system health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_damaged_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the shield system health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_damaged_shield_health_message_plus = "artifact_damaged_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_damaged_shield_health_message_plus,string.format("The %s retrieved has damaged the shield system health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_damaged_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the shield system health"),full_desc))
 					end
 				else
 					p:setSystemHealthMax("frontshield",math.max(-1, max_health - .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_damaged_max_shield_health_message = "artifact_damaged_max_shield_health_message"
-						p:addCustomMessage("Engineering",p.artifact_damaged_max_shield_health_message,string.format("The %s retrieved has damaged the shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering",p.artifact_damaged_max_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the shield system maximum health"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
 						p.artifact_damaged_max_shield_health_message_plus = "artifact_damaged_max_shield_health_message_plus"
-						p:addCustomMessage("Engineering+",p.artifact_damaged_max_shield_health_message_plus,string.format("The %s retrieved has damaged the shield system maximum health",full_desc))
+						p:addCustomMessage("Engineering+",p.artifact_damaged_max_shield_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the shield system maximum health"),full_desc))
 					end
 				end
 			end
@@ -1427,30 +1427,30 @@ function wreckModHealthSpin(x,y)
 				p:setSystemHealthMax("maneuver",math.min(1, max_health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_max_maneuver_health_message = "artifact_improved_max_maneuver_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_max_maneuver_health_message,string.format("The %s retrieved has improved the maneuver system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_max_maneuver_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the maneuver system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_max_maneuver_health_message_plus = "artifact_improved_max_maneuver_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_max_maneuver_health_message_plus,string.format("The %s retrieved has improved the maneuver system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_max_maneuver_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the maneuver system maximum health"),full_desc))
 				end
 			elseif health < 1 then
 				p:setSystemHealth("maneuver",math.min(1, health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_maneuver_health_message = "artifact_improved_maneuver_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_maneuver_health_message,string.format("The %s retrieved has improved the maneuver system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_maneuver_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the maneuver system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_maneuver_health_message_plus = "artifact_improved_maneuver_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_maneuver_health_message_plus,string.format("The %s retrieved has improved the maneuver system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_maneuver_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the maneuver system health"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_maneuver_health_message = "artifact_maneuver_health_message"
-					p:addCustomMessage("Engineering",p.artifact_maneuver_health_message,string.format("The %s retrieved has had no impact on an already healthy maneuver system",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_maneuver_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy maneuver system"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_maneuver_health_message_plus = "artifact_maneuver_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_maneuver_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy maneuver system",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_maneuver_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy maneuver system"),full_desc))
 				end
 			end
 		else
@@ -1458,21 +1458,21 @@ function wreckModHealthSpin(x,y)
 				p:setSystemHealth("maneuver",math.max(-1, health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_maneuver_health_message = "artifact_damaged_maneuver_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_maneuver_health_message,string.format("The %s retrieved has damaged the maneuver system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_maneuver_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the maneuver system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_maneuver_health_message_plus = "artifact_damaged_maneuver_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_maneuver_health_message_plus,string.format("The %s retrieved has damaged the maneuver system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_maneuver_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the maneuver system health"),full_desc))
 				end
 			else
 				p:setSystemHealthMax("maneuver",math.max(-1, max_health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_max_maneuver_health_message = "artifact_damaged_max_maneuver_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_max_maneuver_health_message,string.format("The %s retrieved has damaged the maneuver system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_max_maneuver_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the maneuver system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_max_maneuver_health_message_plus = "artifact_damaged_max_maneuver_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_max_maneuver_health_message_plus,string.format("The %s retrieved has damaged the maneuver system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_max_maneuver_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the maneuver system maximum health"),full_desc))
 				end
 			end
 		end
@@ -1496,30 +1496,30 @@ function wreckModHealthReactor(x,y)
 				p:setSystemHealthMax("reactor",math.min(1, max_health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_max_reactor_health_message = "artifact_improved_max_reactor_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_max_reactor_health_message,string.format("The %s retrieved has improved the reactor system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_max_reactor_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the reactor system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_max_reactor_health_message_plus = "artifact_improved_max_reactor_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_max_reactor_health_message_plus,string.format("The %s retrieved has improved the reactor system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_max_reactor_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the reactor system maximum health"),full_desc))
 				end
 			elseif health < 1 then
 				p:setSystemHealth("reactor",math.min(1, health + .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_improved_reactor_health_message = "artifact_improved_reactor_health_message"
-					p:addCustomMessage("Engineering",p.artifact_improved_reactor_health_message,string.format("The %s retrieved has improved the reactor system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_improved_reactor_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the reactor system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_improved_reactor_health_message_plus = "artifact_improved_reactor_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_improved_reactor_health_message_plus,string.format("The %s retrieved has improved the reactor system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_improved_reactor_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has improved the reactor system health"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_reactor_health_message = "artifact_reactor_health_message"
-					p:addCustomMessage("Engineering",p.artifact_reactor_health_message,string.format("The %s retrieved has had no impact on an already healthy reactor system",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_reactor_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no impact on an already healthy reactor system"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_reactor_health_message_plus = "artifact_reactor_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_reactor_health_message_plus,string.format("The %s retrieved has had no impact on an already healthy reactor system",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_reactor_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no impact on an already healthy reactor system"),full_desc))
 				end
 			end
 		else
@@ -1527,21 +1527,21 @@ function wreckModHealthReactor(x,y)
 				p:setSystemHealth("reactor",math.max(-1, health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_reactor_health_message = "artifact_damaged_reactor_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_reactor_health_message,string.format("The %s retrieved has damaged the reactor system health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_reactor_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the reactor system health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_reactor_health_message_plus = "artifact_damaged_reactor_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_reactor_health_message_plus,string.format("The %s retrieved has damaged the reactor system health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_reactor_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the reactor system health"),full_desc))
 				end
 			else
 				p:setSystemHealthMax("reactor",math.max(-1, max_health - .05))
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_damaged_max_reactor_health_message = "artifact_damaged_max_reactor_health_message"
-					p:addCustomMessage("Engineering",p.artifact_damaged_max_reactor_health_message,string.format("The %s retrieved has damaged the reactor system maximum health",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_damaged_max_reactor_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the reactor system maximum health"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_damaged_max_reactor_health_message_plus = "artifact_damaged_max_reactor_health_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_damaged_max_reactor_health_message_plus,string.format("The %s retrieved has damaged the reactor system maximum health",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_damaged_max_reactor_health_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the reactor system maximum health"),full_desc))
 				end
 			end
 		end
@@ -1564,20 +1564,20 @@ function wreckModBoolScan(x,y)
 				p:setCanScan(true)
 				if p:hasPlayerAtPosition("Science") then
 					p.artifact_enabled_scan_message = "artifact_enabled_scan_message"
-					p:addCustomMessage("Science",p.artifact_enabled_scan_message,string.format("The %s retrieved has enabled the scanners",full_desc))
+					p:addCustomMessage("Science",p.artifact_enabled_scan_message,string.format(_("artifactEffect-msgScience", "The %s retrieved has enabled the scanners"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_enabled_scan_message_ops = "artifact_enabled_scan_message_ops"
-					p:addCustomMessage("Operations",p.artifact_enabled_scan_message_ops,string.format("The %s retrieved has enabled the scanners",full_desc))
+					p:addCustomMessage("Operations",p.artifact_enabled_scan_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has enabled the scanners"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Science") then
 					p.artifact_scan_message = "artifact_scan_message"
-					p:addCustomMessage("Science",p.artifact_scan_message,string.format("The %s retrieved does not effect the scanners",full_desc))
+					p:addCustomMessage("Science",p.artifact_scan_message,string.format(_("artifactEffect-msgScience", "The %s retrieved does not effect the scanners"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_scan_message_ops = "artifact_scan_message_ops"
-					p:addCustomMessage("Operations",p.artifact_scan_message_ops,string.format("The %s retrieved does not effect the scanners",full_desc))
+					p:addCustomMessage("Operations",p.artifact_scan_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect the scanners"),full_desc))
 				end
 			end
 		else
@@ -1585,20 +1585,20 @@ function wreckModBoolScan(x,y)
 				p:setCanScan(false)
 				if p:hasPlayerAtPosition("Science") then
 					p.artifact_disabled_scan_message = "artifact_disabled_scan_message"
-					p:addCustomMessage("Science",p.artifact_disabled_scan_message,string.format("The %s retrieved has disabled the scanners",full_desc))
+					p:addCustomMessage("Science",p.artifact_disabled_scan_message,string.format(_("artifactEffect-msgScience", "The %s retrieved has disabled the scanners"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_disabled_scan_message_ops = "artifact_disabled_scan_message_ops"
-					p:addCustomMessage("Operations",p.artifact_disabled_scan_message_ops,string.format("The %s retrieved has disabled the scanners",full_desc))
+					p:addCustomMessage("Operations",p.artifact_disabled_scan_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has disabled the scanners"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Science") then
 					p.artifact_scan_message = "artifact_scan_message"
-					p:addCustomMessage("Science",p.artifact_scan_message,string.format("The %s retrieved does not effect the scanners",full_desc))
+					p:addCustomMessage("Science",p.artifact_scan_message,string.format(_("artifactEffect-msgScience", "The %s retrieved does not effect the scanners"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_scan_message_ops = "artifact_scan_message_ops"
-					p:addCustomMessage("Operations",p.artifact_scan_message_ops,string.format("The %s retrieved does not effect the scanners",full_desc))
+					p:addCustomMessage("Operations",p.artifact_scan_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect the scanners"),full_desc))
 				end
 			end
 		end
@@ -1621,20 +1621,20 @@ function wreckModBoolCombat(x,y)
 				p:setCanCombatManeuver(true)
 				if p:hasPlayerAtPosition("Helms") then
 					p.artifact_enabled_cm_message = "artifact_enabled_cm_message"
-					p:addCustomMessage("Helms",p.artifact_enabled_cm_message,string.format("The %s retrieved has enabled combat maneuver",full_desc))
+					p:addCustomMessage("Helms",p.artifact_enabled_cm_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved has enabled combat maneuver"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.artifact_enabled_cm_message_tac = "artifact_enabled_cm_message_tac"
-					p:addCustomMessage("Tactical",p.artifact_enabled_cm_message_tac,string.format("The %s retrieved has enabled combat maneuver",full_desc))
+					p:addCustomMessage("Tactical",p.artifact_enabled_cm_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has enabled combat maneuver"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Helms") then
 					p.artifact_cm_message = "artifact_cm_message"
-					p:addCustomMessage("Helms",p.artifact_cm_message,string.format("The %s retrieved does not effect combat maneuver",full_desc))
+					p:addCustomMessage("Helms",p.artifact_cm_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved does not effect combat maneuver"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.artifact_cm_message_tac = "artifact_cm_message_tac"
-					p:addCustomMessage("Tactical",p.artifact_cm_message_tac,string.format("The %s retrieved does not effect combat maneuver",full_desc))
+					p:addCustomMessage("Tactical",p.artifact_cm_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved does not effect combat maneuver"),full_desc))
 				end
 			end
 		else
@@ -1642,20 +1642,20 @@ function wreckModBoolCombat(x,y)
 				p:setCanCombatManeuver(false)
 				if p:hasPlayerAtPosition("Helms") then
 					p.artifact_disabled_cm_message = "artifact_disabled_cm_message"
-					p:addCustomMessage("Helms",p.artifact_disabled_cm_message,string.format("The %s retrieved has disabled combat maneuver",full_desc))
+					p:addCustomMessage("Helms",p.artifact_disabled_cm_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved has disabled combat maneuver"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.artifact_disabled_cm_message_tac = "artifact_disabled_cm_message_tac"
-					p:addCustomMessage("Tactical",p.artifact_disabled_cm_message_tac,string.format("The %s retrieved has disabled combat maneuver",full_desc))
+					p:addCustomMessage("Tactical",p.artifact_disabled_cm_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has disabled combat maneuver"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Helms") then
 					p.artifact_cm_message = "artifact_cm_message"
-					p:addCustomMessage("Helms",p.artifact_cm_message,string.format("The %s retrieved does not effect combat maneuver",full_desc))
+					p:addCustomMessage("Helms",p.artifact_cm_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved does not effect combat maneuver"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.artifact_cm_message_tac = "artifact_cm_message_tac"
-					p:addCustomMessage("Tactical",p.artifact_cm_message_tac,string.format("The %s retrieved does not effect combat maneuver",full_desc))
+					p:addCustomMessage("Tactical",p.artifact_cm_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved does not effect combat maneuver"),full_desc))
 				end
 			end
 		end
@@ -1678,20 +1678,20 @@ function wreckModBoolProbe(x,y)
 				p:setCanLaunchProbe(true)
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_enabled_probe_message = "artifact_enabled_probe_message"
-					p:addCustomMessage("Relay",p.artifact_enabled_probe_message,string.format("The %s retrieved has enabled probe launch",full_desc))
+					p:addCustomMessage("Relay",p.artifact_enabled_probe_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved has enabled probe launch"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_enabled_probe_message_ops = "artifact_enabled_probe_message_ops"
-					p:addCustomMessage("Operations",p.artifact_enabled_probe_message_ops,string.format("The %s retrieved has enabled probe launch",full_desc))
+					p:addCustomMessage("Operations",p.artifact_enabled_probe_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has enabled probe launch"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_probe_message = "artifact_probe_message"
-					p:addCustomMessage("Relay",p.artifact_probe_message,string.format("The %s retrieved does not effect probe launch",full_desc))
+					p:addCustomMessage("Relay",p.artifact_probe_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved does not effect probe launch"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_probe_message_ops = "artifact_probe_message_ops"
-					p:addCustomMessage("Operations",p.artifact_probe_message_ops,string.format("The %s retrieved does not effect probe launch",full_desc))
+					p:addCustomMessage("Operations",p.artifact_probe_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect probe launch"),full_desc))
 				end
 			end
 		else
@@ -1699,20 +1699,20 @@ function wreckModBoolProbe(x,y)
 				p:setCanLaunchProbe(false)
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_disabled_probe_message = "artifact_disabled_probe_message"
-					p:addCustomMessage("Relay",p.artifact_disabled_probe_message,string.format("The %s retrieved has disabled probe launch",full_desc))
+					p:addCustomMessage("Relay",p.artifact_disabled_probe_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved has disabled probe launch"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_disabled_probe_message_ops = "artifact_disabled_probe_message_ops"
-					p:addCustomMessage("Operations",p.artifact_disabled_probe_message_ops,string.format("The %s retrieved has disabled probe launch",full_desc))
+					p:addCustomMessage("Operations",p.artifact_disabled_probe_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has disabled probe launch"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_probe_message = "artifact_probe_message"
-					p:addCustomMessage("Relay",p.artifact_probe_message,string.format("The %s retrieved does not effect probe launch",full_desc))
+					p:addCustomMessage("Relay",p.artifact_probe_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved does not effect probe launch"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_probe_message_ops = "artifact_probe_message_ops"
-					p:addCustomMessage("Operations",p.artifact_probe_message_ops,string.format("The %s retrieved does not effect probe launch",full_desc))
+					p:addCustomMessage("Operations",p.artifact_probe_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect probe launch"),full_desc))
 				end
 			end
 		end
@@ -1735,20 +1735,20 @@ function wreckModBoolHack(x,y)
 				p:setCanHack(true)
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_enabled_hack_message = "artifact_enabled_hack_message"
-					p:addCustomMessage("Relay",p.artifact_enabled_hack_message,string.format("The %s retrieved has enabled hacking",full_desc))
+					p:addCustomMessage("Relay",p.artifact_enabled_hack_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved has enabled hacking"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_enabled_hack_message_ops = "artifact_enabled_hack_message_ops"
-					p:addCustomMessage("Operations",p.artifact_enabled_hack_message_ops,string.format("The %s retrieved has enabled hacking",full_desc))
+					p:addCustomMessage("Operations",p.artifact_enabled_hack_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has enabled hacking"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_hack_message = "artifact_hack_message"
-					p:addCustomMessage("Relay",p.artifact_hack_message,string.format("The %s retrieved does not effect hacking",full_desc))
+					p:addCustomMessage("Relay",p.artifact_hack_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved does not effect hacking"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_hack_message_ops = "artifact_hack_message_ops"
-					p:addCustomMessage("Operations",p.artifact_hack_message_ops,string.format("The %s retrieved does not effect hacking",full_desc))
+					p:addCustomMessage("Operations",p.artifact_hack_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect hacking"),full_desc))
 				end
 			end
 		else
@@ -1756,20 +1756,20 @@ function wreckModBoolHack(x,y)
 				p:setCanHack(false)
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_disabled_hack_message = "artifact_disabled_hack_message"
-					p:addCustomMessage("Relay",p.artifact_disabled_hack_message,string.format("The %s retrieved has disabled hacking",full_desc))
+					p:addCustomMessage("Relay",p.artifact_disabled_hack_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved has disabled hacking"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_disabled_hack_message_ops = "artifact_disabled_hack_message_ops"
-					p:addCustomMessage("Operations",p.artifact_disabled_hack_message_ops,string.format("The %s retrieved has disabled hacking",full_desc))
+					p:addCustomMessage("Operations",p.artifact_disabled_hack_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has disabled hacking"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_hack_message = "artifact_hack_message"
-					p:addCustomMessage("Relay",p.artifact_hack_message,string.format("The %s retrieved does not effect hacking",full_desc))
+					p:addCustomMessage("Relay",p.artifact_hack_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved does not effect hacking"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_hack_message_ops = "artifact_hack_message_ops"
-					p:addCustomMessage("Operations",p.artifact_hack_message_ops,string.format("The %s retrieved does not effect hacking",full_desc))
+					p:addCustomMessage("Operations",p.artifact_hack_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect hacking"),full_desc))
 				end
 			end
 		end
@@ -1791,21 +1791,21 @@ function wreckModChangeScan(x,y)
 			p:setLongRangeRadarRange(current_range*1.1)
 			if p:hasPlayerAtPosition("Science") then
 				p.artifact_increase_sensor_range_message = "artifact_increase_sensor_range_message"
-				p:addCustomMessage("Science",p.artifact_increase_sensor_range_message,string.format("The %s retrieved has increased our sensor range",full_desc))
+				p:addCustomMessage("Science",p.artifact_increase_sensor_range_message,string.format(_("artifactEffect-msgScience", "The %s retrieved has increased our sensor range"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Operations") then
 				p.artifact_increase_sensor_range_message_ops = "artifact_increase_sensor_range_message_ops"
-				p:addCustomMessage("Operations",p.artifact_increase_sensor_range_message_ops,string.format("The %s retrieved has increased our sensor range",full_desc))
+				p:addCustomMessage("Operations",p.artifact_increase_sensor_range_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has increased our sensor range"),full_desc))
 			end
 		else
 			p:setLongRangeRadarRange(current_range*.9)
 			if p:hasPlayerAtPosition("Science") then
 				p.artifact_decrease_sensor_range_message = "artifact_decrease_sensor_range_message"
-				p:addCustomMessage("Science",p.artifact_decrease_sensor_range_message,string.format("The %s retrieved has decreased our sensor range",full_desc))
+				p:addCustomMessage("Science",p.artifact_decrease_sensor_range_message,string.format(_("artifactEffect-msgScience", "The %s retrieved has decreased our sensor range"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Operations") then
 				p.artifact_decrease_sensor_range_message_ops = "artifact_decrease_sensor_range_message_ops"
-				p:addCustomMessage("Operations",p.artifact_decrease_sensor_range_message_ops,string.format("The %s retrieved has decreased our sensor range",full_desc))
+				p:addCustomMessage("Operations",p.artifact_decrease_sensor_range_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has decreased our sensor range"),full_desc))
 			end
 		end
 	end)
@@ -1826,21 +1826,21 @@ function wreckModChangeCoolant(x,y)
 			p:setMaxCoolant(current_coolant*1.1)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_increase_coolant_message = "artifact_increase_coolant_message"
-				p:addCustomMessage("Engineering",p.artifact_increase_coolant_message,string.format("The %s retrieved has increased our coolant",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_increase_coolant_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has increased our coolant"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_increase_coolant_message_plus = "artifact_increase_coolant_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_increase_coolant_message_plus,string.format("The %s retrieved has increased our coolant",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_increase_coolant_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has increased our coolant"),full_desc))
 			end
 		else
 			p:setMaxCoolant(current_coolant*.9)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_decrease_coolant_message = "artifact_decrease_coolant_message"
-				p:addCustomMessage("Engineering",p.artifact_decrease_coolant_message,string.format("The %s retrieved has decreased our coolant: incompatible, corrosive reaction",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_decrease_coolant_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has decreased our coolant: incompatible, corrosive reaction"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_decrease_coolant_message_plus = "artifact_decrease_coolant_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_decrease_coolant_message_plus,string.format("The %s retrieved has decreased our coolant: incompatible, corrosive reaction",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_decrease_coolant_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has decreased our coolant: incompatible, corrosive reaction"),full_desc))
 			end
 		end
 	end)
@@ -1861,31 +1861,31 @@ function wreckModChangeRepair(x,y)
 			p:setRepairCrewCount(current_repair_crew_count + 1)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_increase_repair_crew_message = "artifact_increase_repair_crew_message"
-				p:addCustomMessage("Engineering",p.artifact_increase_repair_crew_message,string.format("The %s retrieved has increased the number of repair crew",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_increase_repair_crew_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has increased the number of repair crew"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_increase_repair_crew_message_plus = "artifact_increase_repair_crew_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_increase_repair_crew_message_plus,string.format("The %s retrieved has increased the number of repair crew",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_increase_repair_crew_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has increased the number of repair crew"),full_desc))
 			end
 		else
 			if current_repair_crew_count > 0 then
 				p:setRepairCrewCount(current_repair_crew_count - 1)
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_decrease_repair_crew_message = "artifact_decrease_repair_crew_message"
-					p:addCustomMessage("Engineering",p.artifact_decrease_repair_crew_message,string.format("The %s retrieved has decreased the number of repair crew: assassination malware",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_decrease_repair_crew_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has decreased the number of repair crew: assassination malware"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_decrease_repair_crew_message_plus = "artifact_decrease_repair_crew_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_decrease_repair_crew_message_plus,string.format("The %s retrieved has decreased the number of repair crew: assassination malware",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_decrease_repair_crew_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has decreased the number of repair crew: assassination malware"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Engineering") then
 					p.artifact_repair_crew_message = "artifact_repair_crew_message"
-					p:addCustomMessage("Engineering",p.artifact_repair_crew_message,string.format("The %s retrieved has had no effect on the number of repair crew: malfunction",full_desc))
+					p:addCustomMessage("Engineering",p.artifact_repair_crew_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has had no effect on the number of repair crew: malfunction"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.artifact_repair_crew_message_plus = "artifact_repair_crew_message_plus"
-					p:addCustomMessage("Engineering+",p.artifact_repair_crew_message_plus,string.format("The %s retrieved has had no effect on the number of repair crew: malfunction",full_desc))
+					p:addCustomMessage("Engineering+",p.artifact_repair_crew_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has had no effect on the number of repair crew: malfunction"),full_desc))
 				end
 			end
 		end
@@ -1907,21 +1907,21 @@ function wreckModChangeHull(x,y)
 			p:setHull(current_hull*1.1)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_increase_hull_message = "artifact_increase_hull_message"
-				p:addCustomMessage("Engineering",p.artifact_increase_hull_message,string.format("The %s retrieved has repaired some hull damage",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_increase_hull_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has repaired some hull damage"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_increase_hull_message_plus = "artifact_increase_hull_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_increase_hull_message_plus,string.format("The %s retrieved has repaired some hull damage",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_increase_hull_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has repaired some hull damage"),full_desc))
 			end
 		else
 			p:setHull(current_hull*.9)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_decrease_hull_message = "artifact_decrease_hull_message"
-				p:addCustomMessage("Engineering",p.artifact_decrease_hull_message,string.format("The %s retrieved has damaged the hull: poor integration",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_decrease_hull_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the hull: poor integration"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_decrease_hull_message_plus = "artifact_decrease_hull_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_decrease_hull_message_plus,string.format("The %s retrieved has damaged the hull: poor integration",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_decrease_hull_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has damaged the hull: poor integration"),full_desc))
 			end
 		end
 	end)
@@ -1945,11 +1945,11 @@ function wreckModChangeShield(x,y)
 			end
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_increase_shield_message = "artifact_increase_shield_message"
-				p:addCustomMessage("Engineering",p.artifact_increase_shield_message,string.format("The %s retrieved has added charge to the shields",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_increase_shield_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has added charge to the shields"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_increase_shield_message_plus = "artifact_increase_shield_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_increase_shield_message_plus,string.format("The %s retrieved has added charge to the shields",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_increase_shield_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has added charge to the shields"),full_desc))
 			end
 		else
 			if p:getShieldCount() > 1 then
@@ -1959,11 +1959,11 @@ function wreckModChangeShield(x,y)
 			end
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_decrease_shield_message = "artifact_decrease_shield_message"
-				p:addCustomMessage("Engineering",p.artifact_decrease_shield_message,string.format("The %s retrieved has reduced shield charge: corroded couplings",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_decrease_shield_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has reduced shield charge: corroded couplings"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_decrease_shield_message_plus = "artifact_decrease_shield_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_decrease_shield_message_plus,string.format("The %s retrieved has reduced shield charge: corroded couplings",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_decrease_shield_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has reduced shield charge: corroded couplings"),full_desc))
 			end
 		end
 	end)
@@ -1984,21 +1984,21 @@ function wreckModChangePower(x,y)
 			p:setEnergy(current_energy + p:getMaxEnergy()*.1)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_increase_energy_message = "artifact_increase_energy_message"
-				p:addCustomMessage("Engineering",p.artifact_increase_energy_message,string.format("The %s retrieved has added energy to our reserves",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_increase_energy_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has added energy to our reserves"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_increase_energy_message_plus = "artifact_increase_energy_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_increase_energy_message_plus,string.format("The %s retrieved has added energy to our reserves",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_increase_energy_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has added energy to our reserves"),full_desc))
 			end
 		else
 			p:setEnergy(current_energy - p:getMaxEnergy()*.1)
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_decrease_energy_message = "artifact_decrease_energy_message"
-				p:addCustomMessage("Engineering",p.artifact_decrease_energy_message,string.format("The %s retrieved has drained some energy: incompatibility",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_decrease_energy_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has drained some energy: incompatibility"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_decrease_energy_message_plus = "artifact_decrease_energy_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_decrease_energy_message_plus,string.format("The %s retrieved has drained some energy: incompatibility",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_decrease_energy_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved has drained some energy: incompatibility"),full_desc))
 			end
 		end
 	end)
@@ -2009,7 +2009,7 @@ function wmCombatBoostButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_cm_boost_button == nil then
 				p.activate_cm_boost_button = "activate_cm_boost_button"
-				p:addCustomButton("Helms",p.activate_cm_boost_button,"C.M. Boost",function()
+				p:addCustomButton("Helms",p.activate_cm_boost_button,_("upgrade-buttonHelms", "C.M. Boost"),function()
 					string.format("")	--global context for serious proton
 					if p.cm_boost_count > 0 then
 						p.cm_boost_active = true
@@ -2017,7 +2017,7 @@ function wmCombatBoostButton(p,console)
 						p.cm_boost_timer = 300
 						p.cm_boost_count = p.cm_boost_count - 1
 						p.cm_boost_activated_message = "cm_boost_activated_message"
-						p:addCustomMessage("Helms",p.cm_boost_activated_message,"Combat maneuver boost (forward direction) ability increased")
+						p:addCustomMessage("Helms",p.cm_boost_activated_message,_("upgrade-msgHelms", "Combat maneuver boost (forward direction) ability increased"))
 					end
 					p:removeCustom(p.activate_cm_boost_button)
 					p.activate_cm_boost_button = nil
@@ -2032,7 +2032,7 @@ function wmCombatBoostButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_cm_boost_button_tac == nil then
 				p.activate_cm_boost_button_tac = "activate_cm_boost_button_tac"
-				p:addCustomButton("Tactical",p.activate_cm_boost_button_tac,"C.M. Boost",function()
+				p:addCustomButton("Tactical",p.activate_cm_boost_button_tac,_("upgrade-buttonTactical", "C.M. Boost"),function()
 					string.format("")	--global context for serious proton
 					if p.cm_boost_count > 0 then
 						p.cm_boost_active = true
@@ -2040,7 +2040,7 @@ function wmCombatBoostButton(p,console)
 						p.cm_boost_timer = 300
 						p.cm_boost_count = p.cm_boost_count - 1
 						p.cm_boost_activated_message_tac = "cm_boost_activated_message_tac"
-						p:addCustomMessage("Tactical",p.cm_boost_activated_message_tac,"Combat maneuver boost (forward direction) ability increased")
+						p:addCustomMessage("Tactical",p.cm_boost_activated_message_tac,_("upgrade-msgTactical", "Combat maneuver boost (forward direction) ability increased"))
 					end
 					p:removeCustom(p.activate_cm_boost_button_tac)
 					p.activate_cm_boost_button_tac = nil
@@ -2058,7 +2058,7 @@ function wmCombatStrafeButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_cm_strafe_button == nil then
 				p.activate_cm_strafe_button = "activate_cm_strafe_button"
-				p:addCustomButton("Helms",p.activate_cm_strafe_button,"C.M. Strafe",function()
+				p:addCustomButton("Helms",p.activate_cm_strafe_button,_("upgrade-buttonHelms", "C.M. Strafe"),function()
 					string.format("")	--global context for serious proton
 					if p.cm_strafe_count > 0 then
 						p.cm_strafe_active = true
@@ -2066,7 +2066,7 @@ function wmCombatStrafeButton(p,console)
 						p.cm_strafe_timer = 300
 						p.cm_strafe_count = p.cm_strafe_count - 1
 						p.cm_strafe_activated_message = "cm_strafe_activated_message"
-						p:addCustomMessage("Helms",p.cm_strafe_activated_message,"Combat maneuver strafe (sideways direction) ability increased")
+						p:addCustomMessage("Helms",p.cm_strafe_activated_message,_("upgrade-msgHelms", "Combat maneuver strafe (sideways direction) ability increased"))
 					end
 					p:removeCustom(p.activate_cm_strafe_button)
 					p.activate_cm_strafe_button = nil
@@ -2081,7 +2081,7 @@ function wmCombatStrafeButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_cm_strafe_button_tac == nil then
 				p.activate_cm_strafe_button_tac = "activate_cm_strafe_button_tac"
-				p:addCustomButton("Tactical",p.activate_cm_strafe_button_tac,"C.M. Strafe",function()
+				p:addCustomButton("Tactical",p.activate_cm_strafe_button_tac,_("upgrade-buttonTactical", "C.M. Strafe"),function()
 					string.format("")	--global context for serious proton
 					if p.cm_strafe_count > 0 then
 						p.cm_strafe_active = true
@@ -2089,7 +2089,7 @@ function wmCombatStrafeButton(p,console)
 						p.cm_strafe_timer = 300
 						p.cm_strafe_count = p.cm_strafe_count - 1
 						p.cm_strafe_activated_message_tac = "cm_strafe_activated_message_tac"
-						p:addCustomMessage("Tactical",p.cm_strafe_activated_message_tac,"Combat maneuver strafe (sideways direction) ability increased")
+						p:addCustomMessage("Tactical",p.cm_strafe_activated_message_tac,_("upgrade-msgTactical", "Combat maneuver strafe (sideways direction) ability increased"))
 					end
 					p:removeCustom(p.activate_cm_strafe_button_tac)
 					p.activate_cm_strafe_button_tac = nil
@@ -2107,7 +2107,7 @@ function wmBeamDamageButton(p,console)
 		if p:hasPlayerAtPosition("Weapons") then
 			if p.activate_beam_damage_button == nil then
 				p.activate_beam_damage_button = "activate_beam_damage_button"
-				p:addCustomButton("Weapons",p.activate_beam_damage_button,"Beam Damage",function()
+				p:addCustomButton("Weapons",p.activate_beam_damage_button,_("upgrade-buttonWeapons", "Beam Damage"),function()
 					string.format("")	--global context for serious proton
 					if p.beam_damage_count > 0 then
 						p.beam_damage_active = true
@@ -2119,7 +2119,7 @@ function wmBeamDamageButton(p,console)
 						p.beam_damage_timer = 300
 						p.beam_damage_count = p.beam_damage_count - 1
 						p.beam_damage_activated_message = "beam_damage_activated_message"
-						p:addCustomMessage("Weapons",p.beam_damage_activated_message,"Damage applied by beam weapons increased")
+						p:addCustomMessage("Weapons",p.beam_damage_activated_message,_("upgrade-msgWeapons", "Damage applied by beam weapons increased"))
 					end
 					p:removeCustom(p.activate_beam_damage_button)
 					p.activate_beam_damage_button = nil
@@ -2134,7 +2134,7 @@ function wmBeamDamageButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_beam_damage_button_tac == nil then
 				p.activate_beam_damage_button_tac = "activate_beam_damage_button_tac"
-				p:addCustomButton("Tactical",p.activate_beam_damage_button_tac,"Beam Damage",function()
+				p:addCustomButton("Tactical",p.activate_beam_damage_button_tac,_("upgrade-buttonTactical", "Beam Damage"),function()
 					string.format("")	--global context for serious proton
 					if p.beam_damage_count > 0 then
 						p.beam_damage_active = true
@@ -2146,7 +2146,7 @@ function wmBeamDamageButton(p,console)
 						p.beam_damage_timer = 300
 						p.beam_damage_count = p.beam_damage_count - 1
 						p.beam_damage_activated_message_tac = "beam_damage_activated_message_tac"
-						p:addCustomMessage("Tactical",p.beam_damage_activated_message_tac,"Damage applied by beam weapons increased")
+						p:addCustomMessage("Tactical",p.beam_damage_activated_message_tac,_("upgrade-msgTactical", "Damage applied by beam weapons increased"))
 					end
 					p:removeCustom(p.activate_beam_damage_button_tac)
 					p.activate_beam_damage_button_tac = nil
@@ -2164,7 +2164,7 @@ function wmBeamCycleButton(p,console)
 		if p:hasPlayerAtPosition("Weapons") then
 			if p.activate_beam_cycle_button == nil then
 				p.activate_beam_cycle_button = "activate_beam_cycle_button"
-				p:addCustomButton("Weapons",p.activate_beam_cycle_button,"Beam Cycle",function()
+				p:addCustomButton("Weapons",p.activate_beam_cycle_button,_("upgrade-buttonWeapons", "Beam Cycle"),function()
 					string.format("")	--global context for serious proton
 					if p.beam_cycle_count > 0 then
 						p.beam_cycle_active = true
@@ -2176,7 +2176,7 @@ function wmBeamCycleButton(p,console)
 						p.beam_cycle_timer = 300
 						p.beam_cycle_count = p.beam_cycle_count - 1
 						p.beam_cycle_activated_message = "beam_cycle_activated_message"
-						p:addCustomMessage("Weapons",p.beam_cycle_activated_message,"The time it takes to cycle the beams between firing has been reduced")
+						p:addCustomMessage("Weapons",p.beam_cycle_activated_message,_("upgrade-msgWeapons", "The time it takes to cycle the beams between firing has been reduced"))
 					end
 					p:removeCustom(p.activate_beam_cycle_button)
 					p.activate_beam_cycle_button = nil
@@ -2191,7 +2191,7 @@ function wmBeamCycleButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_beam_cycle_button_tac == nil then
 				p.activate_beam_cycle_button_tac = "activate_beam_cycle_button_tac"
-				p:addCustomButton("Tactical",p.activate_beam_cycle_button_tac,"Beam Cycle",function()
+				p:addCustomButton("Tactical",p.activate_beam_cycle_button_tac,_("upgrade-buttonTactical", "Beam Cycle"),function()
 					string.format("")	--global context for serious proton
 					if p.beam_cycle_count > 0 then
 						p.beam_cycle_active = true
@@ -2203,7 +2203,7 @@ function wmBeamCycleButton(p,console)
 						p.beam_cycle_timer = 300
 						p.beam_cycle_count = p.beam_cycle_count - 1
 						p.beam_cycle_activated_message_tac = "beam_cycle_activated_message_tac"
-						p:addCustomMessage("Tactical",p.beam_cycle_activated_message_tac,"The time it takes to cycle the beams between firing has been reduced")
+						p:addCustomMessage("Tactical",p.beam_cycle_activated_message_tac,_("upgrade-msgTactical", "The time it takes to cycle the beams between firing has been reduced"))
 					end
 					p:removeCustom(p.activate_beam_cycle_button_tac)
 					p.activate_beam_cycle_button_tac = nil
@@ -2221,7 +2221,7 @@ function wmImpulseButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_impulse_button == nil then
 				p.activate_impulse_button = "activate_impulse_button"
-				p:addCustomButton("Helms",p.activate_impulse_button,"Impulse Speed",function()
+				p:addCustomButton("Helms",p.activate_impulse_button,_("upgrade-buttonHelms", "Impulse Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.impulse_count > 0 then
 						p.impulse_active = true
@@ -2229,7 +2229,7 @@ function wmImpulseButton(p,console)
 						p.impulse_timer = 300
 						p.impulse_count = p.impulse_count - 1
 						p.impulse_activated_message = "impulse_activated_message"
-						p:addCustomMessage("Helms",p.impulse_activated_message,"The maximum impulse speed has been increased")
+						p:addCustomMessage("Helms",p.impulse_activated_message,_("upgrade-msgHelms", "The maximum impulse speed has been increased"))
 					end
 					p:removeCustom(p.activate_impulse_button)
 					p.activate_impulse_button = nil
@@ -2244,7 +2244,7 @@ function wmImpulseButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_impulse_button_tac == nil then
 				p.activate_impulse_button_tac = "activate_impulse_button_tac"
-				p:addCustomButton("Tactical",p.activate_impulse_button_tac,"Impulse Speed",function()
+				p:addCustomButton("Tactical",p.activate_impulse_button_tac,_("upgrade-buttonTactical", "Impulse Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.impulse_count > 0 then
 						p.impulse_active = true
@@ -2252,7 +2252,7 @@ function wmImpulseButton(p,console)
 						p.impulse_timer = 300
 						p.impulse_count = p.impulse_count - 1
 						p.impulse_activated_message_tac = "impulse_activated_message_tac"
-						p:addCustomMessage("Tactical",p.impulse_activated_message_tac,"The maximum impulse speed has been increased")
+						p:addCustomMessage("Tactical",p.impulse_activated_message_tac,_("upgrade-msgTactical", "The maximum impulse speed has been increased"))
 					end
 					p:removeCustom(p.activate_impulse_button_tac)
 					p.activate_impulse_button_tac = nil
@@ -2270,7 +2270,7 @@ function wmWarpButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_warp_button == nil then
 				p.activate_warp_button = "activate_warp_button"
-				p:addCustomButton("Helms",p.activate_warp_button,"Warp Speed",function()
+				p:addCustomButton("Helms",p.activate_warp_button,_("upgrade-buttonHelms", "Warp Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.warp_count > 0 then
 						p.warp_active = true
@@ -2278,7 +2278,7 @@ function wmWarpButton(p,console)
 						p.warp_timer = 300
 						p.warp_count = p.warp_count - 1
 						p.warp_activated_message = "warp_activated_message"
-						p:addCustomMessage("Helms",p.warp_activated_message,"The maximum warp speed has been increased")
+						p:addCustomMessage("Helms",p.warp_activated_message,_("upgrade-msgHelms", "The maximum warp speed has been increased"))
 					end
 					p:removeCustom(p.activate_warp_button)
 					p.activate_warp_button = nil
@@ -2293,7 +2293,7 @@ function wmWarpButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_warp_button_tac == nil then
 				p.activate_warp_button_tac = "activate_warp_button_tac"
-				p:addCustomButton("Tactical",p.activate_warp_button_tac,"Warp Speed",function()
+				p:addCustomButton("Tactical",p.activate_warp_button_tac,_("upgrade-buttonTactical", "Warp Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.warp_count > 0 then
 						p.warp_active = true
@@ -2301,7 +2301,7 @@ function wmWarpButton(p,console)
 						p.warp_timer = 300
 						p.warp_count = p.warp_count - 1
 						p.warp_activated_message_tac = "warp_activated_message_tac"
-						p:addCustomMessage("Tactical",p.warp_activated_message_tac,"The maximum warp speed has been increased")
+						p:addCustomMessage("Tactical",p.warp_activated_message_tac,_("upgrade-msgTactical", "The maximum warp speed has been increased"))
 					end
 					p:removeCustom(p.activate_warp_button_tac)
 					p.activate_warp_button_tac = nil
@@ -2319,7 +2319,7 @@ function wmJumpButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_jump_button == nil then
 				p.activate_jump_button = "activate_jump_button"
-				p:addCustomButton("Helms",p.activate_jump_button,"Jump Range",function()
+				p:addCustomButton("Helms",p.activate_jump_button,_("upgrade-buttonHelms", "Jump Range"),function()
 					string.format("")	--global context for serious proton
 					if p.jump_count > 0 then
 						p.jump_active = true
@@ -2332,7 +2332,7 @@ function wmJumpButton(p,console)
 						p.jump_timer = 300
 						p.jump_count = p.jump_count - 1
 						p.jump_activated_message = "jump_activated_message"
-						p:addCustomMessage("Helms",p.jump_activated_message,"The maximum jump range has been increased")
+						p:addCustomMessage("Helms",p.jump_activated_message,_("upgrade-msgHelms", "The maximum jump range has been increased"))
 					end
 					p:removeCustom(p.activate_jump_button)
 					p.activate_jump_button = nil
@@ -2347,7 +2347,7 @@ function wmJumpButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_jump_button_tac == nil then
 				p.activate_jump_button_tac = "activate_jump_button_tac"
-				p:addCustomButton("Tactical",p.activate_jump_button_tac,"Jump Range",function()
+				p:addCustomButton("Tactical",p.activate_jump_button_tac,_("upgrade-buttonTactical", "Jump Range"),function()
 					string.format("")	--global context for serious proton
 					if p.jump_count > 0 then
 						p.jump_active = true
@@ -2360,7 +2360,7 @@ function wmJumpButton(p,console)
 						p.jump_timer = 300
 						p.jump_count = p.jump_count - 1
 						p.jump_activated_message_tac = "jump_activated_message_tac"
-						p:addCustomMessage("Tactical",p.jump_activated_message_tac,"The maximum jump range has been increased")
+						p:addCustomMessage("Tactical",p.jump_activated_message_tac,_("upgrade-msgTactical", "The maximum jump range has been increased"))
 					end
 					p:removeCustom(p.activate_jump_button_tac)
 					p.activate_jump_button_tac = nil
@@ -2378,7 +2378,7 @@ function wmShieldButton(p,console)
 		if p:hasPlayerAtPosition("Weapons") then
 			if p.activate_shield_button == nil then
 				p.activate_shield_button = "activate_shield_button"
-				p:addCustomButton("Weapons",p.activate_shield_button,"Shield Capacity",function()
+				p:addCustomButton("Weapons",p.activate_shield_button,_("upgrade-buttonWeapons", "Shield Capacity"),function()
 					string.format("")	--global context for serious proton
 					if p.shield_count > 0 then
 						p.shield_active = true
@@ -2390,7 +2390,7 @@ function wmShieldButton(p,console)
 						p.shield_timer = 300
 						p.shield_count = p.shield_count - 1
 						p.shield_activated_message = "shield_activated_message"
-						p:addCustomMessage("Weapons",p.shield_activated_message,"The maximum shield strength has been increased")
+						p:addCustomMessage("Weapons",p.shield_activated_message,_("upgrade-msgWeapons", "The maximum shield strength has been increased"))
 					end
 					p:removeCustom(p.activate_shield_button)
 					p.activate_shield_button = nil
@@ -2405,7 +2405,7 @@ function wmShieldButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_shield_button_tac == nil then
 				p.activate_shield_button_tac = "activate_shield_button_tac"
-				p:addCustomButton("Tactical",p.activate_shield_button_tac,"Shield Capacity",function()
+				p:addCustomButton("Tactical",p.activate_shield_button_tac,_("upgrade-buttonTactical", "Shield Capacity"),function()
 					string.format("")	--global context for serious proton
 					if p.shield_count > 0 then
 						p.shield_active = true
@@ -2417,7 +2417,7 @@ function wmShieldButton(p,console)
 						p.shield_timer = 300
 						p.shield_count = p.shield_count - 1
 						p.shield_activated_message_tac = "shield_activated_message_tac"
-						p:addCustomMessage("Tactical",p.shield_activated_message_tac,"The maximum shield strength has been increased")
+						p:addCustomMessage("Tactical",p.shield_activated_message_tac,_("upgrade-msgTactical", "The maximum shield strength has been increased"))
 					end
 					p:removeCustom(p.activate_shield_button_tac)
 					p.activate_shield_button_tac = nil
@@ -2435,7 +2435,7 @@ function wmManeuverButton(p,console)
 		if p:hasPlayerAtPosition("Helms") then
 			if p.activate_maneuver_button == nil then
 				p.activate_maneuver_button = "activate_maneuver_button"
-				p:addCustomButton("Helms",p.activate_maneuver_button,"Spin Speed",function()
+				p:addCustomButton("Helms",p.activate_maneuver_button,_("upgrade-buttonHelms", "Spin Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.maneuver_count > 0 then
 						p.maneuver_active = true
@@ -2443,7 +2443,7 @@ function wmManeuverButton(p,console)
 						p.maneuver_timer = 300
 						p.maneuver_count = p.maneuver_count - 1
 						p.maneuver_activated_message = "maneuver_activated_message"
-						p:addCustomMessage("Helms",p.maneuver_activated_message,"The maximum spin speed has been increased")
+						p:addCustomMessage("Helms",p.maneuver_activated_message,_("upgrade-msgHelms", "The maximum spin speed has been increased"))
 					end
 					p:removeCustom(p.activate_maneuver_button)
 					p.activate_maneuver_button = nil
@@ -2458,7 +2458,7 @@ function wmManeuverButton(p,console)
 		if p:hasPlayerAtPosition("Tactical") then
 			if p.activate_maneuver_button_tac == nil then
 				p.activate_maneuver_button_tac = "activate_maneuver_button_tac"
-				p:addCustomButton("Tactical",p.activate_maneuver_button_tac,"Spin Speed",function()
+				p:addCustomButton("Tactical",p.activate_maneuver_button_tac,_("upgrade-buttonTactical", "Spin Speed"),function()
 					string.format("")	--global context for serious proton
 					if p.maneuver_count > 0 then
 						p.maneuver_active = true
@@ -2466,7 +2466,7 @@ function wmManeuverButton(p,console)
 						p.maneuver_timer = 300
 						p.maneuver_count = p.maneuver_count - 1
 						p.maneuver_activated_message_tac = "maneuver_activated_message_tac"
-						p:addCustomMessage("Tactical",p.maneuver_activated_message_tac,"The maximum spin speed has been increased")
+						p:addCustomMessage("Tactical",p.maneuver_activated_message_tac,_("upgrade-msgTactical", "The maximum spin speed has been increased"))
 					end
 					p:removeCustom(p.activate_maneuver_button_tac)
 					p.activate_maneuver_button_tac = nil
@@ -2484,7 +2484,7 @@ function wmBatteryButton(p,console)
 		if p:hasPlayerAtPosition("Engineering") then
 			if p.activate_battery_button == nil then
 				p.activate_battery_button = "activate_battery_button"
-				p:addCustomButton("Engineering",p.activate_battery_button,"Battery Capacity",function()
+				p:addCustomButton("Engineering",p.activate_battery_button,_("upgrade-buttonEngineer", "Battery Capacity"),function()
 					string.format("")	--global context for serious proton
 					if p.battery_count > 0 then
 						p.battery_active = true
@@ -2492,7 +2492,7 @@ function wmBatteryButton(p,console)
 						p.battery_timer = 300
 						p.battery_count = p.battery_count - 1
 						p.battery_activated_message = "battery_activated_message"
-						p:addCustomMessage("Engineering",p.battery_activated_message,"The maximum battery capacity has been increased")
+						p:addCustomMessage("Engineering",p.battery_activated_message,_("upgrade-msgEngineer", "The maximum battery capacity has been increased"))
 					end
 					p:removeCustom(p.activate_battery_button)
 					p.activate_battery_button = nil
@@ -2507,7 +2507,7 @@ function wmBatteryButton(p,console)
 		if p:hasPlayerAtPosition("Engineering+") then
 			if p.activate_battery_button_plus == nil then
 				p.activate_battery_button_plus = "activate_battery_button_plus"
-				p:addCustomButton("Engineering+",p.activate_battery_button_plus,"Battery Capacity",function()
+				p:addCustomButton("Engineering+",p.activate_battery_button_plus,_("upgrade-buttonEngineer+", "Battery Capacity"),function()
 					string.format("")	--global context for serious proton
 					if p.battery_count > 0 then
 						p.battery_active = true
@@ -2515,7 +2515,7 @@ function wmBatteryButton(p,console)
 						p.battery_timer = 300
 						p.battery_count = p.battery_count - 1
 						p.battery_activated_message_plus = "battery_activated_message_plus"
-						p:addCustomMessage("Engineering+",p.battery_activated_message_plus,"The maximum battery capacity has been increased")
+						p:addCustomMessage("Engineering+",p.battery_activated_message_plus,_("upgrade-msgEngineer+", "The maximum battery capacity has been increased"))
 					end
 					p:removeCustom(p.activate_battery_button_plus)
 					p.activate_battery_button_plus = nil
@@ -2545,26 +2545,26 @@ function resetCoolantPumpButtons(p)
 			if p.normal_coolant_rate[system] < p:getSystemCoolantRate(system) then
 				if p:hasPlayerAtPosition("Engineering") then
 					p.coolant_pump_fix_buttons[system] = string.format("coolant_pump_fix_buttons%s",system)
-					p:addCustomButton("Engineering",p.coolant_pump_fix_buttons[system],string.format("%s C. Pump",system),function()
+					p:addCustomButton("Engineering",p.coolant_pump_fix_buttons[system],string.format(_("coolant-buttonEngineer", "%s C. Pump"),system),function()
 						string.format("")	--global context for serious proton
 						if p.coolant_pump_part_count > 0 then
 							p:setSystemCoolantRate(system,p.normal_coolant_rate[system])
 							p.coolant_pump_part_count = p.coolant_pump_part_count - 1
 							p.coolant_pump_fixed_message = "coolant_pump_fixed_message"
-							p:addCustomMessage("Engineering",p.coolant_pump_fixed_message,string.format("The %s coolant pump has been repaired",system))
+							p:addCustomMessage("Engineering",p.coolant_pump_fixed_message,string.format(_("coolant-msgEngineer", "The %s coolant pump has been repaired"),system))
 						end
 						resetCoolantPumpButtons(p)
 					end)
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.coolant_pump_fix_buttons_plus[system] = string.format("coolant_pump_fix_buttons_plus%s",system)
-					p:addCustomButton("Engineering+",p.coolant_pump_fix_buttons_plus[system],string.format("%s C. Pump",system),function()
+					p:addCustomButton("Engineering+",p.coolant_pump_fix_buttons_plus[system],string.format(_("coolant-buttonEngineer+", "%s C. Pump"),system),function()
 						string.format("")	--global context for serious proton
 						if p.coolant_pump_part_count > 0 then
 							p:setSystemCoolantRate(system,p.normal_coolant_rate[system])
 							p.coolant_pump_part_count = p.coolant_pump_part_count - 1
 							p.coolant_pump_fixed_message_plus = "coolant_pump_fixed_message_plus"
-							p:addCustomMessage("Engineering+",p.coolant_pump_fixed_message_plus,string.format("The %s coolant pump has been repaired",system))
+							p:addCustomMessage("Engineering+",p.coolant_pump_fixed_message_plus,string.format(_("coolant-msgEngineer+", "The %s coolant pump has been repaired"),system))
 						end
 						resetCoolantPumpButtons(p)
 					end)
@@ -2578,13 +2578,13 @@ function wmCoolantPump(p,console,system)
 		if p:hasPlayerAtPosition("Engineering") then
 			if p.coolant_pump_fix_buttons[system] == nil then
 				p.coolant_pump_fix_buttons[system] = string.format("coolant_pump_fix_buttons%s",system)
-				p:addCustomButton("Engineering",p.coolant_pump_fix_buttons[system],string.format("%s C. Pump",system),function()
+				p:addCustomButton("Engineering",p.coolant_pump_fix_buttons[system],string.format(_("coolant-buttonEngineer", "%s C. Pump"),system),function()
 					string.format("")	--global context for serious proton
 					if p.coolant_pump_part_count > 0 then
 						p:setSystemCoolantRate(system,p.normal_coolant_rate[system])
 						p.coolant_pump_part_count = p.coolant_pump_part_count - 1
 						p.coolant_pump_fixed_message = "coolant_pump_fixed_message"
-						p:addCustomMessage("Engineering",p.coolant_pump_fixed_message,string.format("The %s coolant pump has been repaired",system))
+						p:addCustomMessage("Engineering",p.coolant_pump_fixed_message,string.format(_("coolant-msgEngineer", "The %s coolant pump has been repaired"),system))
 					end
 					resetCoolantPumpButtons(p)
 				end)
@@ -2594,13 +2594,13 @@ function wmCoolantPump(p,console,system)
 		if p:hasPlayerAtPosition("Engineering+") then
 			if p.coolant_pump_fix_buttons_plus[system] == nil then
 				p.coolant_pump_fix_buttons_plus[system] = string.format("coolant_pump_fix_buttons_plus%s",system)
-				p:addCustomButton("Engineering+",p.coolant_pump_fix_buttons_plus[system],string.format("%s C. Pump",system),function()
+				p:addCustomButton("Engineering+",p.coolant_pump_fix_buttons_plus[system],string.format(_("coolant-buttonEngineer+", "%s C. Pump"),system),function()
 					string.format("")	--global context for serious proton
 					if p.coolant_pump_part_count > 0 then
 						p:setSystemCoolantRate(system,p.normal_coolant_rate[system])
 						p.coolant_pump_part_count = p.coolant_pump_part_count - 1
 						p.coolant_pump_fixed_message_plus = "coolant_pump_fixed_message_plus"
-						p:addCustomMessage("Engineering+",p.coolant_pump_fixed_message_plus,string.format("The %s coolant pump has been repaired",system))
+						p:addCustomMessage("Engineering+",p.coolant_pump_fixed_message_plus,string.format(_("coolant-msgEngineer+", "The %s coolant pump has been repaired"),system))
 					end
 					resetCoolantPumpButtons(p)
 				end)
@@ -2647,32 +2647,32 @@ function wreckModCombatBoost(x,y)
 					end
 					if p:hasPlayerAtPosition("Helms") then
 						p.lost_cm_boost_message = "lost_cm_boost_message"
-						p:addCustomMessage("Helms",p.lost_cm_boost_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Helms",p.lost_cm_boost_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_cm_boost_message_tac = "lost_cm_boost_message_tac"
-						p:addCustomMessage("Tactical",p.lost_cm_boost_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_cm_boost_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					p:setCombatManeuver(playerShipStats[p:getTypeName()].cm_boost - 100,playerShipStats[p:getTypeName()].cm_strafe)
 					if p:hasPlayerAtPosition("Helms") then
 						p.reduced_cm_boost_message = "reduced_cm_boost_message"
-						p:addCustomMessage("Helms",p.reduced_cm_boost_message,string.format("The %s retrieved reduced the combat maneuver boost (forward direction) ability",full_desc))
+						p:addCustomMessage("Helms",p.reduced_cm_boost_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved reduced the combat maneuver boost (forward direction) ability"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_cm_boost_message_tac = "reduced_cm_boost_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_cm_boost_message_tac,string.format("The %s retrieved reduced the combat maneuver boost (forward direction) ability",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_cm_boost_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved reduced the combat maneuver boost (forward direction) ability"),full_desc))
 					end
 				end
 			end
 		else	--cannot determine current combat maneuver values since player template type not in player ship stats table
 			if p:hasPlayerAtPosition("Helms") then
 				p.cm_boost_message = "cm_boost_message"
-				p:addCustomMessage("Helms",p.cm_boost_message,string.format("The %s retrieved has had no effect on combat maneuver",full_desc))
+				p:addCustomMessage("Helms",p.cm_boost_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved has had no effect on combat maneuver"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.cm_boost_message_tac = "cm_boost_message_tac"
-				p:addCustomMessage("Tactical",p.cm_boost_message_tac,string.format("The %s retrieved has had no effect on combat maneuver",full_desc))
+				p:addCustomMessage("Tactical",p.cm_boost_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has had no effect on combat maneuver"),full_desc))
 			end
 		end
 	end)
@@ -2717,32 +2717,32 @@ function wreckModCombatStrafe(x,y)
 					end
 					if p:hasPlayerAtPosition("Helms") then
 						p.lost_cm_strafe_message = "lost_cm_strafe_message"
-						p:addCustomMessage("Helms",p.lost_cm_strafe_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Helms",p.lost_cm_strafe_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_cm_strafe_message_tac = "lost_cm_strafe_message_tac"
-						p:addCustomMessage("Tactical",p.lost_cm_strafe_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_cm_strafe_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					p:setCombatManeuver(playerShipStats[p:getTypeName()].cm_boost,playerShipStats[p:getTypeName()].cm_strafe - 100)
 					if p:hasPlayerAtPosition("Helms") then
 						p.reduced_cm_strafe_message = "reduced_cm_strafe_message"
-						p:addCustomMessage("Helms",p.reduced_cm_strafe_message,string.format("The %s retrieved reduced the combat maneuver strafe (sideways direction) ability",full_desc))
+						p:addCustomMessage("Helms",p.reduced_cm_strafe_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved reduced the combat maneuver strafe (sideways direction) ability"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_cm_strafe_message_tac = "reduced_cm_strafe_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_cm_strafe_message_tac,string.format("The %s retrieved reduced the combat maneuver strafe (sideways direction) ability",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_cm_strafe_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved reduced the combat maneuver strafe (sideways direction) ability"),full_desc))
 					end
 				end
 			end
 		else	--cannot determine current combat maneuver values since player template type not in player ship stats table
 			if p:hasPlayerAtPosition("Helms") then
 				p.cm_strafe_message = "cm_strafe_message"
-				p:addCustomMessage("Helms",p.cm_strafe_message,string.format("The %s retrieved has had no effect on combat maneuver",full_desc))
+				p:addCustomMessage("Helms",p.cm_strafe_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved has had no effect on combat maneuver"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.cm_strafe_message_tac = "cm_strafe_message_tac"
-				p:addCustomMessage("Tactical",p.cm_strafe_message_tac,string.format("The %s retrieved has had no effect on combat maneuver",full_desc))
+				p:addCustomMessage("Tactical",p.cm_strafe_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has had no effect on combat maneuver"),full_desc))
 			end
 		end
 	end)
@@ -2764,20 +2764,20 @@ function wreckModProbeStock(x,y)
 				p:setScanProbeCount(p:getMaxScanProbeCount())
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_restocked_probes_message = "artifact_restocked_probes_message"
-					p:addCustomMessage("Relay",p.artifact_restocked_probes_message,string.format("The %s retrieved has restocked your probes",full_desc))
+					p:addCustomMessage("Relay",p.artifact_restocked_probes_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved has restocked your probes"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_restocked_probes_message_ops = "artifact_restocked_probes_message_ops"
-					p:addCustomMessage("Operations",p.artifact_restocked_probes_message_ops,string.format("The %s retrieved has restocked your probes",full_desc))
+					p:addCustomMessage("Operations",p.artifact_restocked_probes_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has restocked your probes"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_probes_message = "artifact_probes_message"
-					p:addCustomMessage("Relay",p.artifact_probes_message,string.format("The %s retrieved does not effect probe stock",full_desc))
+					p:addCustomMessage("Relay",p.artifact_probes_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved does not effect probe stock"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_probes_message_ops = "artifact_probes_message_ops"
-					p:addCustomMessage("Operations",p.artifact_probes_message_ops,string.format("The %s retrieved does not effect probe stock",full_desc))
+					p:addCustomMessage("Operations",p.artifact_probes_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect probe stock"),full_desc))
 				end
 			end
 		else
@@ -2785,20 +2785,20 @@ function wreckModProbeStock(x,y)
 				p:setScanProbeCount(math.floor(current_stock/2))
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_depleted_probes_message = "artifact_depleted_probes_message"
-					p:addCustomMessage("Relay",p.artifact_depleted_probes_message,string.format("The %s retrieved has depleted probe stock",full_desc))
+					p:addCustomMessage("Relay",p.artifact_depleted_probes_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved has depleted probe stock"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_depleted_probes_message_ops = "artifact_depleted_probes_message_ops"
-					p:addCustomMessage("Operations",p.artifact_depleted_probes_message_ops,string.format("The %s retrieved has depleted probe stock",full_desc))
+					p:addCustomMessage("Operations",p.artifact_depleted_probes_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved has depleted probe stock"),full_desc))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.artifact_probes_message = "artifact_probes_message"
-					p:addCustomMessage("Relay",p.artifact_probes_message,string.format("The %s retrieved does not effect probe stock",full_desc))
+					p:addCustomMessage("Relay",p.artifact_probes_message,string.format(_("artifactEffect-msgRelay", "The %s retrieved does not effect probe stock"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.artifact_probes_message_ops = "artifact_probes_message_ops"
-					p:addCustomMessage("Operations",p.artifact_probes_message_ops,string.format("The %s retrieved does not effect probe stock",full_desc))
+					p:addCustomMessage("Operations",p.artifact_probes_message_ops,string.format(_("artifactEffect-msgOperations", "The %s retrieved does not effect probe stock"),full_desc))
 				end
 			end
 		end
@@ -2843,11 +2843,11 @@ function wreckModBeamDamage(x,y)
 					end
 					if p:hasPlayerAtPosition("Weapons") then
 						p.lost_beam_damage_message = "lost_beam_damage_message"
-						p:addCustomMessage("Weapons",p.lost_beam_damage_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Weapons",p.lost_beam_damage_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_beam_damage_message_tac = "lost_beam_damage_message_tac"
-						p:addCustomMessage("Tactical",p.lost_beam_damage_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_beam_damage_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					local bi = 0
@@ -2857,22 +2857,22 @@ function wreckModBeamDamage(x,y)
 					until(p:getBeamWeaponRange(bi) < 1)
 					if p:hasPlayerAtPosition("Weapons") then
 						p.reduced_beam_damage_message = "reduced_beam_damage_message"
-						p:addCustomMessage("Weapons",p.reduced_beam_damage_message,string.format("The %s retrieved reduced beam damage",full_desc))
+						p:addCustomMessage("Weapons",p.reduced_beam_damage_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved reduced beam damage"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_beam_damage_message_tac = "reduced_beam_damage_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_beam_damage_message_tac,string.format("The %s retrieved reduced beam damage",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_beam_damage_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved reduced beam damage"),full_desc))
 					end
 				end
 			end
 		else
 			if p:hasPlayerAtPosition("Weapons") then
 				p.beam_message = "beam_message"
-				p:addCustomMessage("Weapons",p.beam_message,string.format("The %s retrieved has had no effect on your non-existent beam weapon system",full_desc))
+				p:addCustomMessage("Weapons",p.beam_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved has had no effect on your non-existent beam weapon system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.beam_message_tac = "beam_message_tac"
-				p:addCustomMessage("Tactical",p.beam_message_tac,string.format("The %s retrieved has had no effect on your non-existent beam weapon system",full_desc))
+				p:addCustomMessage("Tactical",p.beam_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has had no effect on your non-existent beam weapon system"),full_desc))
 			end
 		end
 	end)
@@ -2916,11 +2916,11 @@ function wreckModBeamCycle(x,y)
 					end
 					if p:hasPlayerAtPosition("Weapons") then
 						p.lost_beam_cycle_message = "lost_beam_cycle_message"
-						p:addCustomMessage("Weapons",p.lost_beam_cycle_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Weapons",p.lost_beam_cycle_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_beam_cycle_message_tac = "lost_beam_cycle_message_tac"
-						p:addCustomMessage("Tactical",p.lost_beam_cycle_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_beam_cycle_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					local bi = 0
@@ -2930,22 +2930,22 @@ function wreckModBeamCycle(x,y)
 					until(p:getBeamWeaponRange(bi) < 1)
 					if p:hasPlayerAtPosition("Weapons") then
 						p.reduced_beam_cycle_message = "reduced_beam_cycle_message"
-						p:addCustomMessage("Weapons",p.reduced_beam_cycle_message,string.format("The %s retrieved slowed beam cycle time",full_desc))
+						p:addCustomMessage("Weapons",p.reduced_beam_cycle_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved slowed beam cycle time"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_beam_cycle_message_tac = "reduced_beam_cycle_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_beam_cycle_message_tac,string.format("The %s retrieved slowed beam cycle time",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_beam_cycle_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved slowed beam cycle time"),full_desc))
 					end
 				end
 			end
 		else
 			if p:hasPlayerAtPosition("Weapons") then
 				p.beam_message = "beam_message"
-				p:addCustomMessage("Weapons",p.beam_message,string.format("The %s retrieved has had no effect on your non-existent beam weapon system",full_desc))
+				p:addCustomMessage("Weapons",p.beam_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved has had no effect on your non-existent beam weapon system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.beam_message_tac = "beam_message_tac"
-				p:addCustomMessage("Tactical",p.beam_message_tac,string.format("The %s retrieved has had no effect on your non-existent beam weapon system",full_desc))
+				p:addCustomMessage("Tactical",p.beam_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has had no effect on your non-existent beam weapon system"),full_desc))
 			end
 		end
 	end)
@@ -2979,20 +2979,20 @@ function wreckModMissileStock(x,y)
 					p:setWeaponStorage(shortage_type,p:getWeaponStorageMax(shortage_type))
 					if p:hasPlayerAtPosition("Weapons") then
 						p.artifact_restocked_missiles_message = "artifact_restocked_missiles_message"
-						p:addCustomMessage("Weapons",p.artifact_restocked_missiles_message,string.format("The %s retrieved has restocked your %ss",full_desc,shortage_type))
+						p:addCustomMessage("Weapons",p.artifact_restocked_missiles_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved has restocked your %ss"),full_desc,shortage_type))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.artifact_restocked_missiles_message_tac = "artifact_restocked_missiles_message_tac"
-						p:addCustomMessage("Tactical",p.artifact_restocked_missiles_message_tac,string.format("The %s retrieved has restocked your %ss",full_desc,shortage_type))
+						p:addCustomMessage("Tactical",p.artifact_restocked_missiles_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has restocked your %ss"),full_desc,shortage_type))
 					end
 				else
 					if p:hasPlayerAtPosition("Weapons") then
 						p.artifact_missiles_message = "artifact_missiles_message"
-						p:addCustomMessage("Weapons",p.artifact_missiles_message,string.format("The %s retrieved does not effect missile stocks",full_desc))
+						p:addCustomMessage("Weapons",p.artifact_missiles_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved does not effect missile stocks"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.artifact_missiles_message_tac = "artifact_missiles_message_tac"
-						p:addCustomMessage("Tactical",p.artifact_missiles_message_tac,string.format("The %s retrieved does not effect missile stocks",full_desc))
+						p:addCustomMessage("Tactical",p.artifact_missiles_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved does not effect missile stocks"),full_desc))
 					end
 				end
 			else
@@ -3009,42 +3009,42 @@ function wreckModMissileStock(x,y)
 						p:setWeaponStorage(plentiful_type,math.floor(p:getWeaponStorage(plentiful_type)/2))
 						if p:hasPlayerAtPosition("Weapons") then
 							p.artifact_depleted_missiles_message = "artifact_depleted_missiles_message"
-							p:addCustomMessage("Weapons",p.artifact_depleted_missiles_message,string.format("The %s retrieved has depleted your stock of %ss",full_desc,plentiful_type))
+							p:addCustomMessage("Weapons",p.artifact_depleted_missiles_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved has depleted your stock of %ss"),full_desc,plentiful_type))
 						end
 						if p:hasPlayerAtPosition("Tactical") then
 							p.artifact_depleted_missiles_message_tac = "artifact_depleted_missiles_message_tac"
-							p:addCustomMessage("Tactical",p.artifact_depleted_missiles_message_tac,string.format("The %s retrieved has depleted your stock of %ss",full_desc,plentiful_type))
+							p:addCustomMessage("Tactical",p.artifact_depleted_missiles_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has depleted your stock of %ss"),full_desc,plentiful_type))
 						end
 					else
 						if p:hasPlayerAtPosition("Weapons") then
 							p.artifact_missiles_message = "artifact_missiles_message"
-							p:addCustomMessage("Weapons",p.artifact_missiles_message,string.format("The %s retrieved does not effect missile stocks",full_desc))
+							p:addCustomMessage("Weapons",p.artifact_missiles_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved does not effect missile stocks"),full_desc))
 						end
 						if p:hasPlayerAtPosition("Tactical") then
 							p.artifact_missiles_message_tac = "artifact_missiles_message_tac"
-							p:addCustomMessage("Tactical",p.artifact_missiles_message_tac,string.format("The %s retrieved does not effect missile stocks",full_desc))
+							p:addCustomMessage("Tactical",p.artifact_missiles_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved does not effect missile stocks"),full_desc))
 						end
 					end
 				else
 					p:setWeaponStorage(plentiful_type,math.floor(p:getWeaponStorage(plentiful_type)/2))
 					if p:hasPlayerAtPosition("Weapons") then
 						p.artifact_depleted_missiles_message = "artifact_depleted_missiles_message"
-						p:addCustomMessage("Weapons",p.artifact_depleted_missiles_message,string.format("The %s retrieved has depleted your stock of %ss",full_desc,plentiful_type))
+						p:addCustomMessage("Weapons",p.artifact_depleted_missiles_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved has depleted your stock of %ss"),full_desc,plentiful_type))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.artifact_depleted_missiles_message_tac = "artifact_depleted_missiles_message_tac"
-						p:addCustomMessage("Tactical",p.artifact_depleted_missiles_message_tac,string.format("The %s retrieved has depleted your stock of %ss",full_desc,plentiful_type))
+						p:addCustomMessage("Tactical",p.artifact_depleted_missiles_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved has depleted your stock of %ss"),full_desc,plentiful_type))
 					end
 				end
 			end
 		else
 			if p:hasPlayerAtPosition("Weapons") then
 				p.artifact_missiles_message = "artifact_missiles_message"
-				p:addCustomMessage("Weapons",p.artifact_missiles_message,string.format("The %s retrieved does not effect your non-existent missile system",full_desc))
+				p:addCustomMessage("Weapons",p.artifact_missiles_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved does not effect your non-existent missile system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.artifact_missiles_message_tac = "artifact_missiles_message_tac"
-				p:addCustomMessage("Tactical",p.artifact_missiles_message_tac,string.format("The %s retrieved does not effect your non-existent missile system",full_desc))
+				p:addCustomMessage("Tactical",p.artifact_missiles_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved does not effect your non-existent missile system"),full_desc))
 			end
 		end
 	end)
@@ -3087,21 +3087,21 @@ function wreckModImpulseSpeed(x,y)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.lost_impulse_message = "lost_impulse_message"
-					p:addCustomMessage("Helms",p.lost_impulse_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+					p:addCustomMessage("Helms",p.lost_impulse_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.lost_impulse_message_tac = "lost_impulse_message_tac"
-					p:addCustomMessage("Tactical",p.lost_impulse_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+					p:addCustomMessage("Tactical",p.lost_impulse_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 				end
 			else
 				p:setImpulseMaxSpeed(p:getImpulseMaxSpeed()*.9)
 				if p:hasPlayerAtPosition("Helms") then
 					p.reduced_impulse_message = "reduced_impulse_message"
-					p:addCustomMessage("Helms",p.reduced_impulse_message,string.format("The %s retrieved slowed maximum impulse speed",full_desc))
+					p:addCustomMessage("Helms",p.reduced_impulse_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved slowed maximum impulse speed"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.reduced_impulse_message_tac = "reduced_impulse_message_tac"
-					p:addCustomMessage("Tactical",p.reduced_impulse_message_tac,string.format("The %s retrieved slowed maximum impulse speed",full_desc))
+					p:addCustomMessage("Tactical",p.reduced_impulse_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved slowed maximum impulse speed"),full_desc))
 				end
 			end
 		end
@@ -3146,32 +3146,32 @@ function wreckModWarpSpeed(x,y)
 					end
 					if p:hasPlayerAtPosition("Helms") then
 						p.lost_warp_message = "lost_warp_message"
-						p:addCustomMessage("Helms",p.lost_warp_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Helms",p.lost_warp_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_warp_message_tac = "lost_warp_message_tac"
-						p:addCustomMessage("Tactical",p.lost_warp_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_warp_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					p:setWarpSpeed(p:getWarpSpeed()*.9)
 					if p:hasPlayerAtPosition("Helms") then
 						p.reduced_warp_message = "reduced_warp_message"
-						p:addCustomMessage("Helms",p.reduced_warp_message,string.format("The %s retrieved slowed maximum warp speed",full_desc))
+						p:addCustomMessage("Helms",p.reduced_warp_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved slowed maximum warp speed"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_warp_message_tac = "reduced_warp_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_warp_message_tac,string.format("The %s retrieved slowed maximum warp speed",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_warp_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved slowed maximum warp speed"),full_desc))
 					end
 				end
 			end
 		else
 			if p:hasPlayerAtPosition("Helms") then
 				p.warp_message = "warp_message"
-				p:addCustomMessage("Helms",p.warp_message,string.format("The %s retrieved had no effect on your non-existent warp system",full_desc))
+				p:addCustomMessage("Helms",p.warp_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved had no effect on your non-existent warp system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.warp_message_tac = "warp_message_tac"
-				p:addCustomMessage("Tactical",p.warp_message_tac,string.format("The %s retrieved had no effect on your non-existent warp system",full_desc))
+				p:addCustomMessage("Tactical",p.warp_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved had no effect on your non-existent warp system"),full_desc))
 			end
 		end
 	end)
@@ -3215,11 +3215,11 @@ function wreckModJumpRange(x,y)
 					end
 					if p:hasPlayerAtPosition("Helms") then
 						p.lost_jump_message = "lost_jump_message"
-						p:addCustomMessage("Helms",p.lost_jump_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Helms",p.lost_jump_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_jump_message_tac = "lost_jump_message_tac"
-						p:addCustomMessage("Tactical",p.lost_jump_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_jump_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					if p.max_jump_range == nil then
@@ -3230,22 +3230,22 @@ function wreckModJumpRange(x,y)
 					p.max_jump_range = p.max_jump_range*.9
 					if p:hasPlayerAtPosition("Helms") then
 						p.reduced_jump_message = "reduced_jump_message"
-						p:addCustomMessage("Helms",p.reduced_jump_message,string.format("The %s retrieved reduced maximum jump range",full_desc))
+						p:addCustomMessage("Helms",p.reduced_jump_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved reduced maximum jump range"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_jump_message_tac = "reduced_jump_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_jump_message_tac,string.format("The %s retrieved reduced maximum jump range",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_jump_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved reduced maximum jump range"),full_desc))
 					end
 				end
 			end
 		else
 			if p:hasPlayerAtPosition("Helms") then
 				p.jump_message = "jump_message"
-				p:addCustomMessage("Helms",p.jump_message,string.format("The %s retrieved had no effect on your non-existent jump system",full_desc))
+				p:addCustomMessage("Helms",p.jump_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved had no effect on your non-existent jump system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.jump_message_tac = "jump_message_tac"
-				p:addCustomMessage("Tactical",p.jump_message_tac,string.format("The %s retrieved had no effect on your non-existent jump system",full_desc))
+				p:addCustomMessage("Tactical",p.jump_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved had no effect on your non-existent jump system"),full_desc))
 			end
 		end
 	end)
@@ -3289,11 +3289,11 @@ function wreckModShieldMax(x,y)
 					end
 					if p:hasPlayerAtPosition("Weapons") then
 						p.lost_shield_message = "lost_shield_message"
-						p:addCustomMessage("Weapons",p.lost_shield_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Weapons",p.lost_shield_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.lost_shield_message_tac = "lost_shield_message_tac"
-						p:addCustomMessage("Tactical",p.lost_shield_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+						p:addCustomMessage("Tactical",p.lost_shield_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 					end
 				else
 					if p:getShieldCount() > 1 then
@@ -3303,22 +3303,22 @@ function wreckModShieldMax(x,y)
 					end
 					if p:hasPlayerAtPosition("Weapons") then
 						p.reduced_shield_message = "reduced_shield_message"
-						p:addCustomMessage("Weapons",p.reduced_shield_message,string.format("The %s retrieved reduced maximum shield strength",full_desc))
+						p:addCustomMessage("Weapons",p.reduced_shield_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved reduced maximum shield strength"),full_desc))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						p.reduced_shield_message_tac = "reduced_shield_message_tac"
-						p:addCustomMessage("Tactical",p.reduced_shield_message_tac,string.format("The %s retrieved reduced maximum shield strength",full_desc))
+						p:addCustomMessage("Tactical",p.reduced_shield_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved reduced maximum shield strength"),full_desc))
 					end
 				end
 			end
 		else
 			if p:hasPlayerAtPosition("Weapons") then
 				p.shield_message = "shield_message"
-				p:addCustomMessage("Weapons",p.shield_message,string.format("The %s retrieved had no effect on your non-existent shield system",full_desc))
+				p:addCustomMessage("Weapons",p.shield_message,string.format(_("artifactEffect-msgWeapons", "The %s retrieved had no effect on your non-existent shield system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Tactical") then
 				p.shield_message_tac = "shield_message_tac"
-				p:addCustomMessage("Tactical",p.shield_message_tac,string.format("The %s retrieved had no effect on your non-existent shield system",full_desc))
+				p:addCustomMessage("Tactical",p.shield_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved had no effect on your non-existent shield system"),full_desc))
 			end
 		end
 	end)
@@ -3361,21 +3361,21 @@ function wreckModSpinSpeed(x,y)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.lost_maneuver_message = "lost_maneuver_message"
-					p:addCustomMessage("Helms",p.lost_maneuver_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+					p:addCustomMessage("Helms",p.lost_maneuver_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.lost_maneuver_message_tac = "lost_maneuver_message_tac"
-					p:addCustomMessage("Tactical",p.lost_maneuver_message_tac,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+					p:addCustomMessage("Tactical",p.lost_maneuver_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 				end
 			else
 				p:setRotationMaxSpeed(p:getRotationMaxSpeed()*.9)
 				if p:hasPlayerAtPosition("Helms") then
 					p.reduced_maneuver_message = "reduced_maneuver_message"
-					p:addCustomMessage("Helms",p.reduced_maneuver_message,string.format("The %s retrieved reduced maximum spin speed",full_desc))
+					p:addCustomMessage("Helms",p.reduced_maneuver_message,string.format(_("artifactEffect-msgHelms", "The %s retrieved reduced maximum spin speed"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
 					p.reduced_maneuver_message_tac = "reduced_maneuver_message_tac"
-					p:addCustomMessage("Tactical",p.reduced_maneuver_message_tac,string.format("The %s retrieved reduced maximum spin speed",full_desc))
+					p:addCustomMessage("Tactical",p.reduced_maneuver_message_tac,string.format(_("artifactEffect-msgTactical", "The %s retrieved reduced maximum spin speed"),full_desc))
 				end
 			end
 		end
@@ -3419,21 +3419,21 @@ function wreckModBatteryMax(x,y)
 				end
 				if p:hasPlayerAtPosition("Engineering") then
 					p.lost_battery_message = "lost_battery_message"
-					p:addCustomMessage("Engineering",p.lost_battery_message,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+					p:addCustomMessage("Engineering",p.lost_battery_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.lost_battery_message_plus = "lost_battery_message_plus"
-					p:addCustomMessage("Engineering+",p.lost_battery_message_plus,string.format("The %s retrieved disabled a %s previously retrieved",full_desc,full_desc))
+					p:addCustomMessage("Engineering+",p.lost_battery_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved disabled a %s previously retrieved"),full_desc,full_desc))
 				end
 			else
 				p:setMaxEnergy(p:getMaxEnergy()*.9)
 				if p:hasPlayerAtPosition("Engineering") then
 					p.reduced_battery_message = "reduced_battery_message"
-					p:addCustomMessage("Engineering",p.reduced_battery_message,string.format("The %s retrieved reduced maximum battery capacity",full_desc))
+					p:addCustomMessage("Engineering",p.reduced_battery_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved reduced maximum battery capacity"),full_desc))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					p.reduced_battery_message_plus = "reduced_battery_message_plus"
-					p:addCustomMessage("Engineering+",p.reduced_battery_message_plus,string.format("The %s retrieved reduced maximum battery capacity",full_desc))
+					p:addCustomMessage("Engineering+",p.reduced_battery_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved reduced maximum battery capacity"),full_desc))
 				end
 			end
 		end
@@ -3442,7 +3442,7 @@ function wreckModBatteryMax(x,y)
 end
 function wreckCargo(x,y)
 	local wreck_good = commonGoods[math.random(1,#commonGoods)]
-	local wma = Artifact():setPosition(x,y):setDescriptions(wreck_mod_type[31].desc,string.format("Cargo (type: %s)",wreck_good))
+	local wma = Artifact():setPosition(x,y):setDescriptions(wreck_mod_type[31].desc,string.format(_("scienceDescription-artifact", "Cargo (type: %s)"),wreck_good))
 	wreckModCommonArtifact(wma)
 	wma:onPickup(function(self,p)
 		string.format("")	--serious proton needs global context
@@ -3462,20 +3462,20 @@ function wreckCargo(x,y)
 				p.goods[wreck_good] = p.goods[wreck_good] + 1
 				if p:hasPlayerAtPosition("Relay") then
 					p.good_added = "good_added"
-					p:addCustomMessage("Relay",p.good_added,string.format("One %s added to ship inventory",wreck_good))
+					p:addCustomMessage("Relay",p.good_added,string.format(_("inventory-msgRelay", "One %s added to ship inventory"),wreck_good))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.good_added_ops = "good_added_ops"
-					p:addCustomMessage("Operations",p.good_added_ops,string.format("One %s added to ship inventory",wreck_good))
+					p:addCustomMessage("Operations",p.good_added_ops,string.format(_("inventory-msgOperations", "One %s added to ship inventory"),wreck_good))
 				end
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.no_cargo_space = "no_cargo_space"
-					p:addCustomMessage("Relay",p.no_cargo_space,"No cargo space available. Cargo wasted")
+					p:addCustomMessage("Relay",p.no_cargo_space,_("inventory-msgRelay", "No cargo space available. Cargo wasted"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.no_cargo_space_ops = "no_cargo_space_ops"
-					p:addCustomMessage("Operations",p.no_cargo_space_ops,"No cargo space available. Cargo wasted")
+					p:addCustomMessage("Operations",p.no_cargo_space_ops,_("inventory-msgOperations", "No cargo space available. Cargo wasted"))
 				end
 			end
 		else
@@ -3483,11 +3483,11 @@ function wreckCargo(x,y)
 			p:setHull(p:getHull()-random(1,3))
 			if p:hasPlayerAtPosition("Relay") then
 				p.cargo_sabotage = "cargo_sabotage"
-				p:addCustomMessage("Relay",p.cargo_sabotage,"Booby trapped cargo container. Fortunately automated safety protocols transported the cargo container off the ship before too much damage was taken")
+				p:addCustomMessage("Relay",p.cargo_sabotage,_("sabotage-msgRelay", "Booby trapped cargo container. Fortunately automated safety protocols transported the cargo container off the ship before too much damage was taken"))
 			end
 			if p:hasPlayerAtPosition("Operations") then
 				p.cargo_sabotage_ops = "cargo_sabotage_ops"
-				p:addCustomMessage("Operations",p.cargo_sabotage_ops,"Booby trapped cargo container. Fortunately automated safety protocols transported the cargo container off the ship before too much damage was taken")
+				p:addCustomMessage("Operations",p.cargo_sabotage_ops,_("sabotage-msgOperations", "Booby trapped cargo container. Fortunately automated safety protocols transported the cargo container off the ship before too much damage was taken"))
 			end
 		end
 	end)
@@ -3510,11 +3510,11 @@ function wreckModCoolantPump(x,y)
 			p.coolant_pump_part_count = p.coolant_pump_part_count + 1
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_provided_coolant_pump_parts_message = "artifact_provided_coolant_pump_parts_message"
-				p:addCustomMessage("Engineering",p.artifact_provided_coolant_pump_parts_message,string.format("The %s retrieved provided spare coolant pump parts that may be used to repair a damaged coolant pump",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_provided_coolant_pump_parts_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved provided spare coolant pump parts that may be used to repair a damaged coolant pump"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_provided_coolant_pump_parts_message_plus = "artifact_provided_coolant_pump_parts_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_provided_coolant_pump_parts_message_plus,string.format("The %s retrieved provided spare coolant pump parts that may be used to repair a damaged coolant pump",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_provided_coolant_pump_parts_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved provided spare coolant pump parts that may be used to repair a damaged coolant pump"),full_desc))
 			end
 			local system_types = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
 			if p.coolant_pump_fix_buttons == nil then
@@ -3532,11 +3532,11 @@ function wreckModCoolantPump(x,y)
 		else
 			if p:hasPlayerAtPosition("Engineering") then
 				p.artifact_incompatible_message = "artifact_incompatible_message"
-				p:addCustomMessage("Engineering",p.artifact_incompatible_message,string.format("The %s retrieved contains no compatible or salvageable parts for your coolant pump system",full_desc))
+				p:addCustomMessage("Engineering",p.artifact_incompatible_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved contains no compatible or salvageable parts for your coolant pump system"),full_desc))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.artifact_incompatible_message_plus = "artifact_incompatible_message_plus"
-				p:addCustomMessage("Engineering+",p.artifact_incompatible_message_plus,string.format("The %s retrieved contains no compatible or salvageable parts for your coolant pump system",full_desc))
+				p:addCustomMessage("Engineering+",p.artifact_incompatible_message_plus,string.format(_("artifactEffect-msgEngineer+", "The %s retrieved contains no compatible or salvageable parts for your coolant pump system"),full_desc))
 			end
 		end
 	end)
@@ -4132,7 +4132,7 @@ function insertPlanet1()
 	local bwx = (gRegion[sri][1] - (gbHigh/2))*gSize
 	local bwy = (gRegion[sri][2] - (gbHigh/2))*gSize
 	planetBespin = Planet():setPosition(bwx,bwy):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Bespin")
-	planetBespin:setPlanetSurfaceTexture("planets/gas-1.png"):setAxialRotationTime(300):setDescription("Mining and Gambling")
+	planetBespin:setPlanetSurfaceTexture("planets/gas-1.png"):setAxialRotationTime(300):setDescription(_("scienceDescription-planet", "Mining and Gambling"))
 	gp = gp + 1
 	local rn = math.random(1,#adjList)
 	gx = adjList[rn][1]
@@ -4162,7 +4162,7 @@ function insertPlanet2()
 	planetHel = Planet():setPosition(msx,msy):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Helicon")
 	planetHel:setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png")
 	planetHel:setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,1.0)
-	planetHel:setAxialRotationTime(400.0):setDescription("M class planet")
+	planetHel:setAxialRotationTime(400.0):setDescription(_("scienceDescription-planet", "M class planet"))
 	gp = gp + 1
 	local rn = math.random(1,#adjList)
 	gx = adjList[rn][1]
@@ -4653,17 +4653,17 @@ end
 ---------------------------
 function debugButtons()
 	clearGMFunctions()
-	addGMFunction("-From Debug",mainGMButtons)
-	addGMFunction("Object Counts",function()
+	addGMFunction(_("buttonGM", "-From Debug"),mainGMButtons)
+	addGMFunction(_("buttonGM", "Object Counts"),function()
 		addGMMessage(starryUtil.debug.getNumberOfObjectsString())
 	end)
-	addGMFunction("always popup debug",function()
+	addGMFunction(_("buttonGM", "always popup debug"),function()
 		popupGMDebug = "always"
 	end)
-	addGMFunction("once popup debug",function()
+	addGMFunction(_("buttonGM", "once popup debug"),function()
 		popupGMDebug = "once"
 	end)
-	addGMFunction("never popup debug",function()
+	addGMFunction(_("buttonGM", "never popup debug"),function()
 		popupGMDebug = "never"
 	end)
 end
@@ -4680,12 +4680,12 @@ function mainGMButtons()
 			highestPlayerIndex = pidx
 		end
 	end
-	addGMFunction(string.format("+Player ships %i/%i",playerShipCount,highestPlayerIndex),playerShip)
-	addGMFunction("+Set Time Limit",setGameTimeLimit)
-	addGMFunction("+Show Player Info",setShowPlayerInfo)
-	addGMFunction("+debug",debugButtons)
+	addGMFunction(string.format(_("buttonGM", "+Player ships %i/%i"),playerShipCount,highestPlayerIndex),playerShip)
+	addGMFunction(_("buttonGM", "+Set Time Limit"),setGameTimeLimit)
+	addGMFunction(_("buttonGM", "+Show Player Info"),setShowPlayerInfo)
+	addGMFunction(_("buttonGM", "+debug"),debugButtons)
 	if predefined_player_ships ~= nil then
-		addGMFunction("Fixed->Random Names",function()
+		addGMFunction(_("buttonGM", "Fixed->Random Names"),function()
 			if #predefined_player_ships > 0 then
 				stored_fixed_names = {}
 				for i=1,#predefined_player_ships do
@@ -4698,14 +4698,14 @@ function mainGMButtons()
 			mainGMButtons()
 		end)
 	else
-		addGMFunction("Random->Fixed Names",function()
+		addGMFunction(_("buttonGM", "Random->Fixed Names"),function()
 			if stored_fixed_names ~= nil and #stored_fixed_names > 0 then
 				predefined_player_ships = {}
 				for i=1,#stored_fixed_names do
 					table.insert(predefined_player_ships,stored_fixed_names[i])
 				end
 			else
-				addGMMessage("No fixed names available. Either there never were any defined or they have all been used")
+				addGMMessage(_("msgGM", "No fixed names available. Either there never were any defined or they have all been used"))
 				predefined_player_ships = nil
 			end
 			stored_fixed_names = nil
@@ -4718,34 +4718,34 @@ function mainGMButtons()
 end
 function setShowPlayerInfo()
 	clearGMFunctions()
-	addGMFunction("-From Player Info",mainGMButtons)
-	local button_label = "Show Info"
+	addGMFunction(_("buttonGM", "-From Player Info"),mainGMButtons)
+	local button_label = _("buttonGM", "Show Info")
 	if show_player_info then
-		button_label = string.format("%s*",button_label)
+		button_label = string.format(_("buttonGM", "%s*"),button_label)
 	end
 	addGMFunction(button_label,function()
 		show_player_info = true
 		setShowPlayerInfo()
 	end)
-	button_label = "Omit Info"
+	button_label = _("buttonGM", "Omit Info")
 	if not show_player_info then
-		button_label = string.format("%s*",button_label)
+		button_label = string.format(_("buttonGM", "%s*"),button_label)
 	end
 	addGMFunction(button_label,function()
 		show_player_info = false
 		setShowPlayerInfo()
 	end)
-	button_label = "Only Name"
+	button_label = _("buttonGM", "Only Name")
 	if show_only_player_name then
-		button_label = string.format("%s*",button_label)
+		button_label = string.format(_("buttonGM", "%s*"),button_label)
 	end
 	addGMFunction(button_label,function()
 		show_only_player_name = true
 		setShowPlayerInfo()
 	end)
-	button_label = "More than Name"
+	button_label = _("buttonGM", "More than Name")
 	if not show_only_player_name then
-		button_label = string.format("%s*",button_label)
+		button_label = string.format(_("buttonGM", "%s*"),button_label)
 	end
 	addGMFunction(button_label,function()
 		show_only_player_name = false
@@ -4760,9 +4760,9 @@ function setShowPlayerInfo()
 					p.show_name_helm = true
 				end
 				if p.show_name_helm then
-					button_label = string.format("%s Helm*",player_name)
+					button_label = string.format(_("buttonGM", "%s Helm*"),player_name)
 				else
-					button_label = string.format("%s Helm",player_name)
+					button_label = string.format(_("buttonGM", "%s Helm"),player_name)
 				end
 				addGMFunction(button_label,function()
 					if p.show_name_helm then
@@ -4773,9 +4773,9 @@ function setShowPlayerInfo()
 					setShowPlayerInfo()
 				end)
 				if p.show_name_weapons then
-					button_label = string.format("%s Weapons*",player_name)
+					button_label = string.format(_("buttonGM", "%s Weapons*"),player_name)
 				else
-					button_label = string.format("%s Weapons",player_name)
+					button_label = string.format(_("buttonGM", "%s Weapons"),player_name)
 				end
 				addGMFunction(button_label,function()
 					if p.show_name_weapons then
@@ -4786,9 +4786,9 @@ function setShowPlayerInfo()
 					setShowPlayerInfo()
 				end)
 				if p.show_name_engineer then
-					button_label = string.format("%s Engineer*",player_name)
+					button_label = string.format(_("buttonGM", "%s Engineer*"),player_name)
 				else
-					button_label = string.format("%s Engineer",player_name)
+					button_label = string.format(_("buttonGM", "%s Engineer"),player_name)
 				end
 				addGMFunction(button_label,function()
 					if p.show_name_engineer then
@@ -4977,47 +4977,47 @@ function showPlayerInfoOnConsole(delta, p)
 end
 function playerShip()
 	clearGMFunctions()
-	addGMFunction("-From Player ships",mainGMButtons)
-	addGMFunction("+Describe stock",describeStockPlayerShips)
-	addGMFunction("+Describe special",describeSpecialPlayerShips)
+	addGMFunction(_("buttonGM", "-From Player ships"),mainGMButtons)
+	addGMFunction(_("buttonGM", "+Describe stock"),describeStockPlayerShips)
+	addGMFunction(_("buttonGM", "+Describe special"),describeSpecialPlayerShips)
 	if playerNarsil == nil then
-		addGMFunction("Narsil",function()
+		addGMFunction(_("buttonGM", "Narsil"),function()
 			createPlayerShipNarsil()
 			playerShip()
 		end)
 	end
 	if playerHeadhunter == nil then
-		addGMFunction("Headhunter",function()
+		addGMFunction(_("buttonGM", "Headhunter"),function()
 			createPlayerShipHeadhunter()
 			playerShip()
 		end)
 	end
 	if playerBlazon == nil then
-		addGMFunction("Blazon",function()
+		addGMFunction(_("buttonGM", "Blazon"),function()
 			createPlayerShipBlazon()
 			playerShip()
 		end)
 	end
 	if playerSting == nil then
-		addGMFunction("Sting",function()
+		addGMFunction(_("buttonGM", "Sting"),function()
 			createPlayerShipSting()
 			playerShip()
 		end)
 	end
 	if playerSpyder == nil then
-		addGMFunction("Spyder",function()
+		addGMFunction(_("buttonGM", "Spyder"),function()
 			createPlayerShipSpyder()
 			playerShip()
 		end)
 	end
 	if playerSpinstar == nil then
-		addGMFunction("Spinstar",function()
+		addGMFunction(_("buttonGM", "Spinstar"),function()
 			createPlayerShipSpinstar()
 			playerShip()
 		end)
 	end
 	if playerSimian == nil then
-		addGMFunction("Simian",function()
+		addGMFunction(_("buttonGM", "Simian"),function()
 			createPlayerShipSimian()
 			playerShip()
 		end)
@@ -5025,93 +5025,93 @@ function playerShip()
 end
 function describeSpecialPlayerShips()
 	clearGMFunctions()
-	addGMFunction("-Back",playerShip)
-	addGMFunction("Simian",function()
-		addGMMessage("Destroyer III(Simian):   Hull:100   Shield:110,70   Size:200   Repair Crew:3   Cargo:7   R.Strength:25\nDefault advanced engine:Jump (2U - 20U)   Speeds: Impulse:60   Spin:8   Accelerate:15   C.Maneuver: Boost:450 Strafe:150\nBeam:1 Turreted Speed:0.2\n   Arc:270   Direction:0   Range:0.8   Cycle:5   Damage:6\nTubes:5   Load Speed:8   Front:2   Side:2   Back:1\n   Direction:  0   Type:Exclude Mine\n   Direction:  0   Type:Exclude Mine\n   Direction:-90   Type:Homing Only\n   Direction: 90   Type:Homing Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      10 Homing\n      04 Nuke\n      06 Mine\n      05 EMP\n      10 HVLI\nBased on player missile cruiser: short jump drive (no warp), weaker hull, added one turreted beam, fewer tubes on side, fewer homing, nuke, EMP, mine and added HVLI")
+	addGMFunction(_("buttonGM", "-Back"),playerShip)
+	addGMFunction(_("buttonGM", "Simian"),function()
+		addGMMessage(_("msgGM", "Destroyer III(Simian):   Hull:100   Shield:110,70   Size:200   Repair Crew:3   Cargo:7   R.Strength:25\nDefault advanced engine:Jump (2U - 20U)   Speeds: Impulse:60   Spin:8   Accelerate:15   C.Maneuver: Boost:450 Strafe:150\nBeam:1 Turreted Speed:0.2\n   Arc:270   Direction:0   Range:0.8   Cycle:5   Damage:6\nTubes:5   Load Speed:8   Front:2   Side:2   Back:1\n   Direction:  0   Type:Exclude Mine\n   Direction:  0   Type:Exclude Mine\n   Direction:-90   Type:Homing Only\n   Direction: 90   Type:Homing Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      10 Homing\n      04 Nuke\n      06 Mine\n      05 EMP\n      10 HVLI\nBased on player missile cruiser: short jump drive (no warp), weaker hull, added one turreted beam, fewer tubes on side, fewer homing, nuke, EMP, mine and added HVLI"))
 	end)	
 	--[[	ships not present yet
-	addGMFunction("Cobra",function()
-		addGMMessage("Striker LX(Cobra): Starfighter, Patrol   Hull:120   Shield:100,100   Size:200   Repair Crew:2   Cargo:4   R.Strength:15\nDefault advanced engine:Jump (2U - 20U)   Speeds: Impulse:65   Spin:15   Accelerate:30   C.Maneuver: Boost:250 Strafe:150   Energy:800\nBeams:2 Turreted Speed:0.1\n   Arc:100   Direction:-15   Range:1   Cycle:6   Damage:6\n   Arc:100   Direction: 15   Range:1   Cycle:6   Damage:6\nTubes:2 Rear:2\n   Direction:180   Type:Any\n   Direction:180   Type:Any\n   Ordnance stock and type:\n      4 Homing\n      2 Nuke\n      3 Mine\n      3 EMP\n      6 HVLI\nBased on Striker: stronger shields, more energy, jump drive (vs none), faster impulse, slower turret, two rear tubes (vs none)")
+	addGMFunction(_("buttonGM"), "Cobra",function()
+		addGMMessage(_("msgGM", "Striker LX(Cobra): Starfighter, Patrol   Hull:120   Shield:100,100   Size:200   Repair Crew:2   Cargo:4   R.Strength:15\nDefault advanced engine:Jump (2U - 20U)   Speeds: Impulse:65   Spin:15   Accelerate:30   C.Maneuver: Boost:250 Strafe:150   Energy:800\nBeams:2 Turreted Speed:0.1\n   Arc:100   Direction:-15   Range:1   Cycle:6   Damage:6\n   Arc:100   Direction: 15   Range:1   Cycle:6   Damage:6\nTubes:2 Rear:2\n   Direction:180   Type:Any\n   Direction:180   Type:Any\n   Ordnance stock and type:\n      4 Homing\n      2 Nuke\n      3 Mine\n      3 EMP\n      6 HVLI\nBased on Striker: stronger shields, more energy, jump drive (vs none), faster impulse, slower turret, two rear tubes (vs none)"))
 	end)
-	addGMFunction("Holmes",function()
-		addGMMessage("Holmes: Corvette, Popper   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo Space:6   R.Strength:35\nDefault advanced engine:Warp (750)   Speeds: Impulse:70   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:4 Broadside\n   Arc:60   Direction:-85   Range:1   Cycle:6   Damage:5\n   Arc:60   Direction:-95   Range:1   Cycle:6   Damage:5\n   Arc:60   Direction: 85   Range:1   Cycle:6   Damage:5\n   Arc:60   Direction: 95   Range:1   Cycle:6   Damage:5\nTubes:4   Load Speed:8   Front:3   Back:1\n   Direction:   0   Type:Homing Only - Small\n   Direction:   0   Type:Homing Only\n   Direction:   0   Type:Homing Only - Large\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      06 Mine\nBased on Crucible: Slower impulse, broadside beams, no side tubes, front tubes homing only")
+	addGMFunction(_("buttonGM"), "Holmes",function()
+		addGMMessage(_("msgGM", "Holmes: Corvette, Popper   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo Space:6   R.Strength:35\nDefault advanced engine:Warp (750)   Speeds: Impulse:70   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:4 Broadside\n   Arc:60   Direction:-85   Range:1   Cycle:6   Damage:5\n   Arc:60   Direction:-95   Range:1   Cycle:6   Damage:5\n   Arc:60   Direction: 85   Range:1   Cycle:6   Damage:5\n   Arc:60   Direction: 95   Range:1   Cycle:6   Damage:5\nTubes:4   Load Speed:8   Front:3   Back:1\n   Direction:   0   Type:Homing Only - Small\n   Direction:   0   Type:Homing Only\n   Direction:   0   Type:Homing Only - Large\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      06 Mine\nBased on Crucible: Slower impulse, broadside beams, no side tubes, front tubes homing only"))
 	end)
-	addGMFunction("Rattler",function()
-		addGMMessage("MX-Lindworm (Rattler): Starfighter, Bomber   Hull:75   Shield:40   Size:100   Repair Crew:2   Cargo:3   R.Strength:10\nDefault advanced engine:Jump (3U - 20U)   Speeds: Impulse:85   Spin:15   Accelerate:25   C.Maneuver: Boost:250 Strafe:150   Energy:400\nBeam:1 Turreted Speed:1\n   Arc:270   Direction:180   Range:0.7   Cycle:6   Damage:2\nTubes:3   Load Speed:10   Front:3 (small)\n   Direction: 0   Type:Any - small\n   Direction: 1   Type:HVLI Only - small\n   Direction:-1   Type:HVLI Only - small\n   Ordnance stock and type:\n      03 Homing\n      12 HVLI\nBased on ZX-Lindworm: More repair crew, faster impulse, jump drive, slower turret")
+	addGMFunction(_("buttonGM"), "Rattler",function()
+		addGMMessage(_("msgGM", "MX-Lindworm (Rattler): Starfighter, Bomber   Hull:75   Shield:40   Size:100   Repair Crew:2   Cargo:3   R.Strength:10\nDefault advanced engine:Jump (3U - 20U)   Speeds: Impulse:85   Spin:15   Accelerate:25   C.Maneuver: Boost:250 Strafe:150   Energy:400\nBeam:1 Turreted Speed:1\n   Arc:270   Direction:180   Range:0.7   Cycle:6   Damage:2\nTubes:3   Load Speed:10   Front:3 (small)\n   Direction: 0   Type:Any - small\n   Direction: 1   Type:HVLI Only - small\n   Direction:-1   Type:HVLI Only - small\n   Ordnance stock and type:\n      03 Homing\n      12 HVLI\nBased on ZX-Lindworm: More repair crew, faster impulse, jump drive, slower turret"))
 	end)
-	addGMFunction("Rogue",function()
-		addGMMessage("Maverick XP(Rogue): Corvette, Gunner   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo:5   R.Strength:23\nDefault advanced engine:Jump (2U - 20U)   Speeds: Impulse:65   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:1 Turreted Speed:0.1   5X heat   5X energy\n   Arc:270   Direction:  0   Range:1.8   Cycle:18   Damage:18\nTubes:3   Load Speed:8   Side:2   Back:1\n   Direction:-90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      06 Homing\n      02 Nuke\n      02 Mine\n      04 EMP\n      10 HVLI\nBased on Maverick: slower impulse, jump (no warp), one heavy slow turreted beam (not 6 beams)")
+	addGMFunction(_("buttonGM"), "Rogue",function()
+		addGMMessage(_("msgGM", "Maverick XP(Rogue): Corvette, Gunner   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo:5   R.Strength:23\nDefault advanced engine:Jump (2U - 20U)   Speeds: Impulse:65   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:1 Turreted Speed:0.1   5X heat   5X energy\n   Arc:270   Direction:  0   Range:1.8   Cycle:18   Damage:18\nTubes:3   Load Speed:8   Side:2   Back:1\n   Direction:-90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      06 Homing\n      02 Nuke\n      02 Mine\n      04 EMP\n      10 HVLI\nBased on Maverick: slower impulse, jump (no warp), one heavy slow turreted beam (not 6 beams)"))
 	end)
 	--]]	
 end
 function describeStockPlayerShips()
 	clearGMFunctions()
-	addGMFunction("-Back",playerShip)
-	addGMFunction("Atlantis",function()
-		addGMMessage("Atlantis: Corvette, Destroyer   Hull:250   Shield:200,200   Size:400   Repair Crew:3   Cargo:6   R.Strength:52\nDefault advanced engine:Jump   Speeds: Impulse:90   Spin:10   Accelerate:20   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:100   Direction:-20   Range:1.5   Cycle:6   Damage:8\n   Arc:100   Direction: 20   Range:1.5   Cycle:6   Damage:8\nTubes:5   Load Speed:10   Side:4   Back:1\n   Direction:-90   Type:Exclude Mine\n   Direction:-90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      04 Nuke\n      08 Mine\n      06 EMP\n      20 HVLI\nA refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering systems and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.")
+	addGMFunction(_("buttonGM", "-Back"),playerShip)
+	addGMFunction(_("buttonGM", "Atlantis"),function()
+		addGMMessage(_("msgGM", "Atlantis: Corvette, Destroyer   Hull:250   Shield:200,200   Size:400   Repair Crew:3   Cargo:6   R.Strength:52\nDefault advanced engine:Jump   Speeds: Impulse:90   Spin:10   Accelerate:20   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:100   Direction:-20   Range:1.5   Cycle:6   Damage:8\n   Arc:100   Direction: 20   Range:1.5   Cycle:6   Damage:8\nTubes:5   Load Speed:10   Side:4   Back:1\n   Direction:-90   Type:Exclude Mine\n   Direction:-90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      04 Nuke\n      08 Mine\n      06 EMP\n      20 HVLI\nA refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering systems and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake."))
 	end)
-	addGMFunction("Benedict",function()
-		addGMMessage("Benedict: Corvette, Freighter/Carrier   Hull:200   Shield:70,70   Size:400   Repair Crew:3   Cargo Space:9   R.Strength:10\nShip classes that may dock with Benedict:Starfighter, Frigate, Corvette\nDefault advanced engine:Jump (5U - 90U)   Speeds: Impulse:60   Spin:6   Accelerate:8   C.Maneuver: Boost:400 Strafe:250\nBeams:2 Turreted Speed:6\n   Arc:90   Direction:  0   Range:1.5   Cycle:6   Damage:4\n   Arc:90   Direction:180   Range:1.5   Cycle:6   Damage:4\nBenedict is an improved version of the Jump Carrier")
+	addGMFunction(_("buttonGM", "Benedict"),function()
+		addGMMessage(_("msgGM", "Benedict: Corvette, Freighter/Carrier   Hull:200   Shield:70,70   Size:400   Repair Crew:3   Cargo Space:9   R.Strength:10\nShip classes that may dock with Benedict:Starfighter, Frigate, Corvette\nDefault advanced engine:Jump (5U - 90U)   Speeds: Impulse:60   Spin:6   Accelerate:8   C.Maneuver: Boost:400 Strafe:250\nBeams:2 Turreted Speed:6\n   Arc:90   Direction:  0   Range:1.5   Cycle:6   Damage:4\n   Arc:90   Direction:180   Range:1.5   Cycle:6   Damage:4\nBenedict is an improved version of the Jump Carrier"))
 	end)
-	addGMFunction("Crucible",function()
-		addGMMessage("Crucible: Corvette, Popper   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo Space:5   R.Strength:45\nDefault advanced engine:Warp (750)   Speeds: Impulse:80   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:70   Direction:-30   Range:1   Cycle:6   Damage:5\n   Arc:70   Direction: 30   Range:1   Cycle:6   Damage:5\nTubes:6   Load Speed:8   Front:3   Side:2   Back:1\n   Direction:   0   Type:HVLI Only - Small\n   Direction:   0   Type:HVLI Only\n   Direction:   0   Type:HVLI Only - Large\n   Direction:-90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      08 Homing\n      04 Nuke\n      06 Mine\n      06 EMP\n      24 HVLI\nA number of missile tubes range around this ship. Beams were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis")
+	addGMFunction(_("buttonGM", "Crucible"),function()
+		addGMMessage(_("msgGM", "Crucible: Corvette, Popper   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo Space:5   R.Strength:45\nDefault advanced engine:Warp (750)   Speeds: Impulse:80   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:70   Direction:-30   Range:1   Cycle:6   Damage:5\n   Arc:70   Direction: 30   Range:1   Cycle:6   Damage:5\nTubes:6   Load Speed:8   Front:3   Side:2   Back:1\n   Direction:   0   Type:HVLI Only - Small\n   Direction:   0   Type:HVLI Only\n   Direction:   0   Type:HVLI Only - Large\n   Direction:-90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      08 Homing\n      04 Nuke\n      06 Mine\n      06 EMP\n      24 HVLI\nA number of missile tubes range around this ship. Beams were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis"))
 	end)
-	addGMFunction("Ender",function()
-		addGMMessage("Ender: Dreadnaught, Battlecruiser   Hull:100   Shield:1200,1200   Size:2000   Repair Crew:8   Cargo Space:20   R.Strength:100\nShip classes that may dock with Benedict:Starfighter, Frigate, Corvette   Energy:1200\nDefault advanced engine:Jump   Speeds: Impulse:30   Spin:2   Accelerate:6   C.Maneuver: Boost:800 Strafe:500\nBeams:12 6 left, 6 right turreted Speed:6\n   Arc:120   Direction:-90   Range:2.5   Cycle:6.1   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:6.0   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:5.8   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:6.3   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:5.9   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:6.4   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:5.7   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:5.6   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:6.6   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:5.5   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:6.5   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:6.2   Damage:4\nTubes:2   Load Speed:8   Front:1   Back:1\n   Direction:   0   Type:Homing Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      6 Homing\n      6 Mine")
+	addGMFunction(_("buttonGM", "Ender"),function()
+		addGMMessage(_("msgGM", "Ender: Dreadnaught, Battlecruiser   Hull:100   Shield:1200,1200   Size:2000   Repair Crew:8   Cargo Space:20   R.Strength:100\nShip classes that may dock with Benedict:Starfighter, Frigate, Corvette   Energy:1200\nDefault advanced engine:Jump   Speeds: Impulse:30   Spin:2   Accelerate:6   C.Maneuver: Boost:800 Strafe:500\nBeams:12 6 left, 6 right turreted Speed:6\n   Arc:120   Direction:-90   Range:2.5   Cycle:6.1   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:6.0   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:5.8   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:6.3   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:5.9   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:6.4   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:5.7   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:5.6   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:6.6   Damage:4\n   Arc:120   Direction:-90   Range:2.5   Cycle:5.5   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:6.5   Damage:4\n   Arc:120   Direction: 90   Range:2.5   Cycle:6.2   Damage:4\nTubes:2   Load Speed:8   Front:1   Back:1\n   Direction:   0   Type:Homing Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      6 Homing\n      6 Mine"))
 	end)
-	addGMFunction("Flavia P.Falcon",function()
-		addGMMessage("Flavia P.Falcon: Frigate, Light Transport   Hull:100   Shield:70,70   Size:200   Repair Crew:8   Cargo Space:15   R.Strength:13\nDefault advanced engine:Warp (500)   Speeds: Impulse:60   Spin:10   Accelerate:10   C.Maneuver: Boost:250 Strafe:150\nBeams:2 rear facing\n   Arc:40   Direction:170   Range:1.2   Cycle:6   Damage:6\n   Arc:40   Direction:190   Range:1.2   Cycle:6   Damage:6\nTubes:1   Load Speed:20   Back:1\n   Direction:180   Type:Any\n   Ordnance stock and type:\n      3 Homing\n      1 Nuke\n      1 Mine\n      5 HVLI\nThe Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp drive.")
+	addGMFunction(_("buttonGM", "Flavia P.Falcon"),function()
+		addGMMessage(_("msgGM", "Flavia P.Falcon: Frigate, Light Transport   Hull:100   Shield:70,70   Size:200   Repair Crew:8   Cargo Space:15   R.Strength:13\nDefault advanced engine:Warp (500)   Speeds: Impulse:60   Spin:10   Accelerate:10   C.Maneuver: Boost:250 Strafe:150\nBeams:2 rear facing\n   Arc:40   Direction:170   Range:1.2   Cycle:6   Damage:6\n   Arc:40   Direction:190   Range:1.2   Cycle:6   Damage:6\nTubes:1   Load Speed:20   Back:1\n   Direction:180   Type:Any\n   Ordnance stock and type:\n      3 Homing\n      1 Nuke\n      1 Mine\n      5 HVLI\nThe Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp drive."))
 	end)
-	addGMFunction("Hathcock",function()
-		addGMMessage("Hathcock: Frigate, Cruiser: Sniper   Hull:120   Shield:70,70   Size:200   Repair Crew:2   Cargo Space:6   R.Strength:30\nDefault advanced engine:Jump   Speeds: Impulse:50   Spin:15   Accelerate:8   C.Maneuver: Boost:200 Strafe:150\nBeams:4 front facing\n   Arc:04   Direction:0   Range:1.4   Cycle:6   Damage:4\n   Arc:20   Direction:0   Range:1.2   Cycle:6   Damage:4\n   Arc:60   Direction:0   Range:1.0   Cycle:6   Damage:4\n   Arc:90   Direction:0   Range:0.8   Cycle:6   Damage:4\nTubes:2   Load Speed:15   Side:2\n   Direction:-90   Type:Any\n   Direction: 90   Type:Any\n   Ordnance stock and type:\n      4 Homing\n      1 Nuke\n      2 EMP\n      8 HVLI\nLong range narrow beam and some point defense beams, broadside missiles. Agile for a frigate")
+	addGMFunction(_("buttonGM", "Hathcock"),function()
+		addGMMessage(_("msgGM", "Hathcock: Frigate, Cruiser: Sniper   Hull:120   Shield:70,70   Size:200   Repair Crew:2   Cargo Space:6   R.Strength:30\nDefault advanced engine:Jump   Speeds: Impulse:50   Spin:15   Accelerate:8   C.Maneuver: Boost:200 Strafe:150\nBeams:4 front facing\n   Arc:04   Direction:0   Range:1.4   Cycle:6   Damage:4\n   Arc:20   Direction:0   Range:1.2   Cycle:6   Damage:4\n   Arc:60   Direction:0   Range:1.0   Cycle:6   Damage:4\n   Arc:90   Direction:0   Range:0.8   Cycle:6   Damage:4\nTubes:2   Load Speed:15   Side:2\n   Direction:-90   Type:Any\n   Direction: 90   Type:Any\n   Ordnance stock and type:\n      4 Homing\n      1 Nuke\n      2 EMP\n      8 HVLI\nLong range narrow beam and some point defense beams, broadside missiles. Agile for a frigate"))
 	end)
-	addGMFunction("Kiriya",function()
-		addGMMessage("Kiriya: Corvette, Freighter/Carrier   Hull:200   Shield:70,70   Size:400   Repair Crew:3   Cargo Space:9   R.Strength:10\nShip classes that may dock with Benedict:Starfighter, Frigate, Corvette\nDefault advanced engine:Warp (750)   Speeds: Impulse:60   Spin:6   Accelerate:8   C.Maneuver: Boost:400 Strafe:250\nBeams:2 Turreted Speed:6\n   Arc:90   Direction:  0   Range:1.5   Cycle:6   Damage:4\n   Arc:90   Direction:180   Range:1.5   Cycle:6   Damage:4\nKiriya is an improved warp drive version of the Jump Carrier")
+	addGMFunction(_("buttonGM", "Kiriya"),function()
+		addGMMessage(_("msgGM", "Kiriya: Corvette, Freighter/Carrier   Hull:200   Shield:70,70   Size:400   Repair Crew:3   Cargo Space:9   R.Strength:10\nShip classes that may dock with Benedict:Starfighter, Frigate, Corvette\nDefault advanced engine:Warp (750)   Speeds: Impulse:60   Spin:6   Accelerate:8   C.Maneuver: Boost:400 Strafe:250\nBeams:2 Turreted Speed:6\n   Arc:90   Direction:  0   Range:1.5   Cycle:6   Damage:4\n   Arc:90   Direction:180   Range:1.5   Cycle:6   Damage:4\nKiriya is an improved warp drive version of the Jump Carrier"))
 	end)
-	addGMFunction("MP52 Hornet",function()
-		addGMMessage("MP52 Hornet: Starfighter, Interceptor   Hull:70   Shield:60   Size:100   Repair Crew:1   Cargo:3   R.Strength:7\nDefault advanced engine:None   Speeds: Impulse:125   Spin:32   Accelerate:40   C.Maneuver: Boost:600   Energy:400\nBeams:2\n   Arc:30   Direction: 5   Range:.9   Cycle:4   Damage:2.5\n   Arc:30   Direction:-5   Range:.9   Cycle:4   Damage:2.5\nThe MP52 Hornet is a significantly upgraded version of MU52 Hornet, with nearly twice the hull strength, nearly three times the shielding, better acceleration, impulse boosters, and a second laser cannon.")
+	addGMFunction(_("buttonGM", "MP52 Hornet"),function()
+		addGMMessage(_("msgGM", "MP52 Hornet: Starfighter, Interceptor   Hull:70   Shield:60   Size:100   Repair Crew:1   Cargo:3   R.Strength:7\nDefault advanced engine:None   Speeds: Impulse:125   Spin:32   Accelerate:40   C.Maneuver: Boost:600   Energy:400\nBeams:2\n   Arc:30   Direction: 5   Range:.9   Cycle:4   Damage:2.5\n   Arc:30   Direction:-5   Range:.9   Cycle:4   Damage:2.5\nThe MP52 Hornet is a significantly upgraded version of MU52 Hornet, with nearly twice the hull strength, nearly three times the shielding, better acceleration, impulse boosters, and a second laser cannon."))
 	end)
-	addGMFunction("Maverick",function()
-		addGMMessage("Maverick: Corvette, Gunner   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo:5   R.Strength:45\nDefault advanced engine:Warp (800)   Speeds: Impulse:80   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:6   3 forward, 2 side, 1 back (turreted speed .5)\n   Arc:10   Direction:  0   Range:2.0   Cycle:6   Damage:6\n   Arc: 90   Direction:-20   Range:1.5   Cycle:6   Damage:8\n   Arc: 90   Direction: 20   Range:1.5   Cycle:6   Damage:8\n   Arc: 40   Direction:-70   Range:1.0   Cycle:4   Damage:6\n   Arc: 40   Direction: 70   Range:1.0   Cycle:4   Damage:6\n   Arc:180   Direction:180   Range:0.8   Cycle:6   Damage:4   (turreted speed: .5)\nTubes:3   Load Speed:8   Side:2   Back:1\n   Direction:-90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      06 Homing\n      02 Nuke\n      02 Mine\n      04 EMP\n      10 HVLI\nA number of beams bristle from various points on this gunner. Missiles were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis")
+	addGMFunction(_("buttonGM", "Maverick"),function()
+		addGMMessage(_("msgGM", "Maverick: Corvette, Gunner   Hull:160   Shield:160,160   Size:200   Repair Crew:4   Cargo:5   R.Strength:45\nDefault advanced engine:Warp (800)   Speeds: Impulse:80   Spin:15   Accelerate:40   C.Maneuver: Boost:400 Strafe:250\nBeams:6   3 forward, 2 side, 1 back (turreted speed .5)\n   Arc:10   Direction:  0   Range:2.0   Cycle:6   Damage:6\n   Arc: 90   Direction:-20   Range:1.5   Cycle:6   Damage:8\n   Arc: 90   Direction: 20   Range:1.5   Cycle:6   Damage:8\n   Arc: 40   Direction:-70   Range:1.0   Cycle:4   Damage:6\n   Arc: 40   Direction: 70   Range:1.0   Cycle:4   Damage:6\n   Arc:180   Direction:180   Range:0.8   Cycle:6   Damage:4   (turreted speed: .5)\nTubes:3   Load Speed:8   Side:2   Back:1\n   Direction:-90   Type:Exclude Mine\n   Direction: 90   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      06 Homing\n      02 Nuke\n      02 Mine\n      04 EMP\n      10 HVLI\nA number of beams bristle from various points on this gunner. Missiles were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis"))
 	end)
-	addGMFunction("Nautilus",function()
-		addGMMessage("Nautilus: Frigate, Mine Layer   Hull:100   Shield:60,60   Size:200   Repair Crew:4   Cargo:7   R.Strength:12\nDefault advanced engine:Jump   Speeds: Impulse:100   Spin:10   Accelerate:15   C.Maneuver: Boost:250 Strafe:150\nBeams:2 Turreted Speed:6\n   Arc:90   Direction: 35   Range:1   Cycle:6   Damage:6\n   Arc:90   Direction:-35   Range:1   Cycle:6   Damage:6\nTubes:3   Load Speed:10   Back:3\n   Direction:180   Type:Mine Only\n   Direction:180   Type:Mine Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Mine\nSmall mine laying vessel with minimal armament, shields and hull")
+	addGMFunction(_("buttonGM", "Nautilus"),function()
+		addGMMessage(_("msgGM", "Nautilus: Frigate, Mine Layer   Hull:100   Shield:60,60   Size:200   Repair Crew:4   Cargo:7   R.Strength:12\nDefault advanced engine:Jump   Speeds: Impulse:100   Spin:10   Accelerate:15   C.Maneuver: Boost:250 Strafe:150\nBeams:2 Turreted Speed:6\n   Arc:90   Direction: 35   Range:1   Cycle:6   Damage:6\n   Arc:90   Direction:-35   Range:1   Cycle:6   Damage:6\nTubes:3   Load Speed:10   Back:3\n   Direction:180   Type:Mine Only\n   Direction:180   Type:Mine Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Mine\nSmall mine laying vessel with minimal armament, shields and hull"))
 	end)
-	addGMFunction("Phobos MP3",function()
-		addGMMessage("Phobos MP3: Frigate, Cruiser   Hull:200   Shield:100,100   Size:200   Repair Crew:3   Cargo:10   R.Strength:19\nDefault advanced engine:None   Speeds: Impulse:80   Spin:10   Accelerate:20   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:90   Direction:-15   Range:1.2   Cycle:8   Damage:6\n   Arc:90   Direction: 15   Range:1.2   Cycle:8   Damage:6\nTubes:3   Load Speed:10   Front:2   Back:1\n   Direction: -1   Type:Exclude Mine\n   Direction:  1   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      10 Homing\n      02 Nuke\n      04 Mine\n      03 EMP\n      20 HVLI\nPlayer variant of the Phobos M3, not as strong as the atlantis, but has front firing tubes, making it an easier to use ship in some scenarios.")
+	addGMFunction(_("buttonGM", "Phobos MP3"),function()
+		addGMMessage(_("msgGM", "Phobos MP3: Frigate, Cruiser   Hull:200   Shield:100,100   Size:200   Repair Crew:3   Cargo:10   R.Strength:19\nDefault advanced engine:None   Speeds: Impulse:80   Spin:10   Accelerate:20   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:90   Direction:-15   Range:1.2   Cycle:8   Damage:6\n   Arc:90   Direction: 15   Range:1.2   Cycle:8   Damage:6\nTubes:3   Load Speed:10   Front:2   Back:1\n   Direction: -1   Type:Exclude Mine\n   Direction:  1   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      10 Homing\n      02 Nuke\n      04 Mine\n      03 EMP\n      20 HVLI\nPlayer variant of the Phobos M3, not as strong as the atlantis, but has front firing tubes, making it an easier to use ship in some scenarios."))
 	end)
-	addGMFunction("Piranha",function()
-		addGMMessage("Piranha: Frigate, Cruiser: Light Artillery   Hull:120   Shield:70,70   Size:200   Repair Crew:2   Cargo:8   R.Strength:16\nDefault advanced engine:None   Speeds: Impulse:60   Spin:10   Accelerate:8   C.Maneuver: Boost:200 Strafe:150\nTubes:8   Load Speed:8   Side:6   Back:2\n   Direction:-90   Type:HVLI and Homing Only\n   Direction:-90   Type:Any\n   Direction:-90   Type:HVLI and Homing Only\n   Direction: 90   Type:HVLI and Homing Only\n   Direction: 90   Type:Any\n   Direction: 90   Type:HVLI and Homing Only\n   Direction:170   Type:Mine Only\n   Direction:190   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      06 Nuke\n      08 Mine\n      20 HVLI\nThis combat-specialized Piranha F12 adds mine-laying tubes, combat maneuvering systems, and a jump drive.")
+	addGMFunction(_("buttonGM", "Piranha"),function()
+		addGMMessage(_("msgGM", "Piranha: Frigate, Cruiser: Light Artillery   Hull:120   Shield:70,70   Size:200   Repair Crew:2   Cargo:8   R.Strength:16\nDefault advanced engine:None   Speeds: Impulse:60   Spin:10   Accelerate:8   C.Maneuver: Boost:200 Strafe:150\nTubes:8   Load Speed:8   Side:6   Back:2\n   Direction:-90   Type:HVLI and Homing Only\n   Direction:-90   Type:Any\n   Direction:-90   Type:HVLI and Homing Only\n   Direction: 90   Type:HVLI and Homing Only\n   Direction: 90   Type:Any\n   Direction: 90   Type:HVLI and Homing Only\n   Direction:170   Type:Mine Only\n   Direction:190   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      06 Nuke\n      08 Mine\n      20 HVLI\nThis combat-specialized Piranha F12 adds mine-laying tubes, combat maneuvering systems, and a jump drive."))
 	end)	
-	addGMFunction("Player Cruiser",function()
-		addGMMessage("Player Cruiser:   Hull:200   Shield:80,80   Size:400   Repair Crew:3   Cargo:6   R.Strength:40\nDefault advanced engine:Jump   Speeds: Impulse:90   Spin:10   Accelerate:20   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:90   Direction:-15   Range:1   Cycle:6   Damage:10\n   Arc:90   Direction: 15   Range:1   Cycle:6   Damage:10\nTubes:3   Load Speed:8   Front:2   Back:1\n   Direction: -5   Type:Exclude Mine\n   Direction:  5   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      04 Nuke\n      08 Mine\n      06 EMP")
+	addGMFunction(_("buttonGM", "Player Cruiser"),function()
+		addGMMessage(_("msgGM", "Player Cruiser:   Hull:200   Shield:80,80   Size:400   Repair Crew:3   Cargo:6   R.Strength:40\nDefault advanced engine:Jump   Speeds: Impulse:90   Spin:10   Accelerate:20   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:90   Direction:-15   Range:1   Cycle:6   Damage:10\n   Arc:90   Direction: 15   Range:1   Cycle:6   Damage:10\nTubes:3   Load Speed:8   Front:2   Back:1\n   Direction: -5   Type:Exclude Mine\n   Direction:  5   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      04 Nuke\n      08 Mine\n      06 EMP"))
 	end)
-	addGMFunction("Player Fighter",function()
-		addGMMessage("Player Fighter:   Hull:60   Shield:40   Size:100   Repair Crew:3   Cargo:3   R.Strength:7\nDefault advanced engine:None   Speeds: Impulse:110   Spin:20   Accelerate:40   C.Maneuver: Boost:600   Energy:400\nBeams:2\n   Arc:40   Direction:-10   Range:1   Cycle:6   Damage:8\n   Arc:40   Direction: 10   Range:1   Cycle:6   Damage:8\nTube:1   Load Speed:10   Front:1\n   Direction:0   Type:HVLI Only\n   Ordnance stock and type:\n      4 HVLI")
+	addGMFunction(_("buttonGM", "Player Fighter"),function()
+		addGMMessage(_("msgGM", "Player Fighter:   Hull:60   Shield:40   Size:100   Repair Crew:3   Cargo:3   R.Strength:7\nDefault advanced engine:None   Speeds: Impulse:110   Spin:20   Accelerate:40   C.Maneuver: Boost:600   Energy:400\nBeams:2\n   Arc:40   Direction:-10   Range:1   Cycle:6   Damage:8\n   Arc:40   Direction: 10   Range:1   Cycle:6   Damage:8\nTube:1   Load Speed:10   Front:1\n   Direction:0   Type:HVLI Only\n   Ordnance stock and type:\n      4 HVLI"))
 	end)
-	addGMFunction("Player Missile Cr.",function()
-		addGMMessage("Player Missile Cr.:   Hull:200   Shield:110,70   Size:200   Repair Crew:3   Cargo:8   R.Strength:45\nDefault advanced engine:Warp (800)   Speeds: Impulse:60   Spin:8   Accelerate:15   C.Maneuver: Boost:450 Strafe:150\nTubes:7   Load Speed:8   Front:2   Side:4   Back:1\n   Direction:  0   Type:Exclude Mine\n   Direction:  0   Type:Exclude Mine\n   Direction: 90   Type:Homing Only\n   Direction: 90   Type:Homing Only\n   Direction:-90   Type:Homing Only\n   Direction:-90   Type:Homing Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      30 Homing\n      08 Nuke\n      12 Mine\n      10 EMP")
+	addGMFunction(_("buttonGM", "Player Missile Cr."),function()
+		addGMMessage(_("msgGM", "Player Missile Cr.:   Hull:200   Shield:110,70   Size:200   Repair Crew:3   Cargo:8   R.Strength:45\nDefault advanced engine:Warp (800)   Speeds: Impulse:60   Spin:8   Accelerate:15   C.Maneuver: Boost:450 Strafe:150\nTubes:7   Load Speed:8   Front:2   Side:4   Back:1\n   Direction:  0   Type:Exclude Mine\n   Direction:  0   Type:Exclude Mine\n   Direction: 90   Type:Homing Only\n   Direction: 90   Type:Homing Only\n   Direction:-90   Type:Homing Only\n   Direction:-90   Type:Homing Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      30 Homing\n      08 Nuke\n      12 Mine\n      10 EMP"))
 	end)	
-	addGMFunction("Repulse",function()
-		addGMMessage("Repulse: Frigate, Armored Transport   Hull:120   Shield:80,80   Size:200   Repair Crew:8   Cargo:12   R.Strength:14\nDefault advanced engine:Jump   Speeds: Impulse:55   Spin:9   Accelerate:10   C.Maneuver: Boost:250 Strafe:150\nBeams:2 Turreted Speed:5\n   Arc:200   Direction: 90   Range:1.2   Cycle:6   Damage:5\n   Arc:200   Direction:-90   Range:1.2   Cycle:6   Damage:5\nTubes:2   Load Speed:20   Front:1   Back:1\n   Direction:  0   Type:Any\n   Direction:180   Type:Any\n   Ordnance stock and type:\n      4 Homing\n      6 HVLI\nJump/Turret version of Flavia Falcon")
+	addGMFunction(_("buttonGM", "Repulse"),function()
+		addGMMessage(_("msgGM", "Repulse: Frigate, Armored Transport   Hull:120   Shield:80,80   Size:200   Repair Crew:8   Cargo:12   R.Strength:14\nDefault advanced engine:Jump   Speeds: Impulse:55   Spin:9   Accelerate:10   C.Maneuver: Boost:250 Strafe:150\nBeams:2 Turreted Speed:5\n   Arc:200   Direction: 90   Range:1.2   Cycle:6   Damage:5\n   Arc:200   Direction:-90   Range:1.2   Cycle:6   Damage:5\nTubes:2   Load Speed:20   Front:1   Back:1\n   Direction:  0   Type:Any\n   Direction:180   Type:Any\n   Ordnance stock and type:\n      4 Homing\n      6 HVLI\nJump/Turret version of Flavia Falcon"))
 	end)
-	addGMFunction("Striker",function()
-		addGMMessage("Striker: Starfighter, Patrol   Hull:120   Shield:50,30   Size:200   Repair Crew:2   Cargo:4   R.Strength:8\nDefault advanced engine:None   Speeds: Impulse:45   Spin:15   Accelerate:30   C.Maneuver: Boost:250 Strafe:150   Energy:500\nBeams:2 Turreted Speed:6\n   Arc:100   Direction:-15   Range:1   Cycle:6   Damage:6\n   Arc:100   Direction: 15   Range:1   Cycle:6   Damage:6\nThe Striker is the predecessor to the advanced striker, slow but agile, but does not do an extreme amount of damage, and lacks in shields")
+	addGMFunction(_("buttonGM", "Striker"),function()
+		addGMMessage(_("msgGM", "Striker: Starfighter, Patrol   Hull:120   Shield:50,30   Size:200   Repair Crew:2   Cargo:4   R.Strength:8\nDefault advanced engine:None   Speeds: Impulse:45   Spin:15   Accelerate:30   C.Maneuver: Boost:250 Strafe:150   Energy:500\nBeams:2 Turreted Speed:6\n   Arc:100   Direction:-15   Range:1   Cycle:6   Damage:6\n   Arc:100   Direction: 15   Range:1   Cycle:6   Damage:6\nThe Striker is the predecessor to the advanced striker, slow but agile, but does not do an extreme amount of damage, and lacks in shields"))
 	end)
-	addGMFunction("ZX-Lindworm",function()
-		addGMMessage("ZX-Lindworm: Starfighter, Bomber   Hull:75   Shield:40   Size:100   Repair Crew:1   Cargo:3   R.Strength:8\nDefault advanced engine:None   Speeds: Impulse:70   Spin:15   Accelerate:25   C.Maneuver: Boost:250 Strafe:150   Energy:400\nBeam:1 Turreted Speed:4\n   Arc:270   Direction:180   Range:0.7   Cycle:6   Damage:2\nTubes:3   Load Speed:10   Front:3 (small)\n   Direction: 0   Type:Any - small\n   Direction: 1   Type:HVLI Only - small\n   Direction:-1   Type:HVLI Only - small\n   Ordnance stock and type:\n      03 Homing\n      12 HVLI")
+	addGMFunction(_("buttonGM", "ZX-Lindworm"),function()
+		addGMMessage(_("msgGM", "ZX-Lindworm: Starfighter, Bomber   Hull:75   Shield:40   Size:100   Repair Crew:1   Cargo:3   R.Strength:8\nDefault advanced engine:None   Speeds: Impulse:70   Spin:15   Accelerate:25   C.Maneuver: Boost:250 Strafe:150   Energy:400\nBeam:1 Turreted Speed:4\n   Arc:270   Direction:180   Range:0.7   Cycle:6   Damage:2\nTubes:3   Load Speed:10   Front:3 (small)\n   Direction: 0   Type:Any - small\n   Direction: 1   Type:HVLI Only - small\n   Direction:-1   Type:HVLI Only - small\n   Ordnance stock and type:\n      03 Homing\n      12 HVLI"))
 	end)
 end
 function setGameTimeLimit()
 	clearGMFunctions()
-	addGMFunction("-From time limit",mainGMButtons)
+	addGMFunction(_("buttonGM", "-From time limit"),mainGMButtons)
 	for gt=15,55,5 do
-		addGMFunction(string.format("%i minutes",gt),function()
+		addGMFunction(string.format(_("buttonGM", "%i minutes"),gt),function()
 			defaultGameTimeLimitInMinutes = gt
 			gameTimeLimit = defaultGameTimeLimitInMinutes*60
 			plot2 = timedGame
 			playWithTimeLimit = true
-			addGMMessage(string.format("Game time limit set to %i minutes",defaultGameTimeLimitInMinutes))
+			addGMMessage(string.format(_("msgGM", "Game time limit set to %i minutes"),defaultGameTimeLimitInMinutes))
 		end)
 	end
 end
@@ -5126,7 +5126,7 @@ function dynamicGameMasterButtons(delta)
 		else
 			if treatyStressTimer ~= nil and treatyStressTimer > 0 then
 				if GMLimitedWar == nil then
-					GMLimitedWar = "Limited War"
+					GMLimitedWar = _("buttonGM", "Limited War")
 					addGMFunction(GMLimitedWar,limitedWarByGM)
 				end
 			end
@@ -5142,7 +5142,7 @@ function dynamicGameMasterButtons(delta)
 		GMLimitedWar = nil
 		if limitedWarTimer ~= nil and limitedWarTimer > 0 then
 			if GMFullWar == nil then
-				GMFullWar = "Full War"
+				GMFullWar = _("buttonGM", "Full War")
 				addGMFunction(GMFullWar,fullWarByGM)
 			end
 		end
@@ -5383,7 +5383,7 @@ function spinalShip(delta)
 				playerSpinStar.spine_charge = false
 				playerSpinStar.spinal_countdown = nil
 			else	--show firing time limit on weapons or tactical consoles
-				spine_status_info = string.format("%s: %i",spine_status_info,math.ceil(playerSpinStar.spinal_countdown))
+				spine_status_info = string.format(_("-tabWeapons&Tactical", "%s: %i"),spine_status_info,math.ceil(playerSpinStar.spinal_countdown))
 				if playerSpinStar:hasPlayerAtPosition("Weapons") then
 					playerSpinStar.spine_status_info = "spine_status_info"
 					playerSpinStar:addCustomInfo("Weapons",playerSpinStar.spine_status_info,spine_status_info)
@@ -5406,13 +5406,13 @@ function spinalShip(delta)
 				if playerSpinStar.spine_button == nil then	--add fire button to weapons and/or tactical consoles
 					if playerSpinStar:hasPlayerAtPosition("Weapons") then
 						playerSpinStar.spine_button = "spine_button"
-						playerSpinStar:addCustomButton("Weapons",playerSpinStar.spine_button,"Spinal Beam", spinalAddBeamNow)
+						playerSpinStar:addCustomButton("Weapons",playerSpinStar.spine_button,_("-buttonWeapons", "Spinal Beam"), spinalAddBeamNow)
 					end
 				end
 				if playerSpinStar.spine_button_tactical == nil then
 					if playerSpinStar:hasPlayerAtPosition("Tactical") then
 						playerSpinStar.spine_button_tactical = "spine_button_tactical"
-						playerSpinStar:addCustomButton("Tactical",playerSpinStar.spine_button_tactical,"Spinal Beam", spinalAddBeamNow)
+						playerSpinStar:addCustomButton("Tactical",playerSpinStar.spine_button_tactical,_("-buttonTactical", "Spinal Beam"), spinalAddBeamNow)
 					end
 				end
 			else	--weapon is not charged
@@ -5424,7 +5424,7 @@ function spinalShip(delta)
 					playerSpinStar.spine_charge = true
 					playerSpinStar.charge_countdown = nil
 				else	--show charge time on weapons or tactical consoles
-					spine_status_info = string.format("%s Charging: %i",spine_status_info,math.ceil(playerSpinStar.charge_countdown))
+					spine_status_info = string.format(_("-tabWeapons", "%s Charging: %i"),spine_status_info,math.ceil(playerSpinStar.charge_countdown))
 					if playerSpinStar:hasPlayerAtPosition("Weapons") then
 						playerSpinStar.spine_status_info = "spine_status_info"
 						playerSpinStar:addCustomInfo("Weapons",playerSpinStar.spine_status_info,spine_status_info)
@@ -5517,9 +5517,9 @@ function populateStationPool()
 		        	medicine =		false, 
 		        	luxury =		false,
 		        },
-				description = "Training and Coordination", 
-				general = "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector", 
-				history = "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region",
+				description = _("scienceDescription-station", "Training and Coordination"), 
+				general = _("stationGeneralInfo-comms", "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector"), 
+				history = _("stationStory-comms", "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region"),
 			},
 			["Armstrong"] =	{
 		        weapon_available = {
@@ -5557,9 +5557,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Warp and Impulse engine manufacturing", 
-				general = "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis", 
-				history = "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems.",
+				description = _("scienceDescription-station", "Warp and Impulse engine manufacturing"), 
+				general = _("stationGeneralInfo-comms", "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis"), 
+				history = _("stationStory-comms", "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems."),
 			},
 			["Broeck"] = {
 		        weapon_available = {
@@ -5593,9 +5593,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Warp drive components", 
-				general = "We provide warp drive engines and components", 
-				history = "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth",
+				description = _("scienceDescription-station", "Warp drive components"), 
+				general = _("stationGeneralInfo-comms", "We provide warp drive engines and components"), 
+				history = _("stationStory-comms", "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth"),
 			},
 			["Coulomb"] = {
 		        weapon_available = 	{
@@ -5633,9 +5633,9 @@ function populateStationPool()
 				buy =	{
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Shielded circuitry fabrication", 
-				general = "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference", 
-				history = "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits",
+				description = _("scienceDescription-station", "Shielded circuitry fabrication"), 
+				general = _("stationGeneralInfo-comms", "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference"), 
+				history = _("stationStory-comms", "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits"),
 			},
 			["Heyes"] = {
 		        weapon_available = {
@@ -5673,9 +5673,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Sensor components", 
-				general = "We research and manufacture sensor components and systems", 
-				history = "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility",
+				description = _("scienceDescription-station", "Sensor components"), 
+				general = _("stationGeneralInfo-comms", "We research and manufacture sensor components and systems"), 
+				history = _("stationStory-comms", "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility"),
 			},
 			["Hossam"] = {
 		        weapon_available = {
@@ -5710,9 +5710,9 @@ function populateStationPool()
 					medicine = random(1,100) < 44, 
 					luxury = random(1,100) < 63,
 				},
-				description = "Nanite supplier", 
-				general = "We provide nanites for various organic and non-organic systems", 
-				history = "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel",
+				description = _("scienceDescription-station", "Nanite supplier"), 
+				general = _("stationGeneralInfo-comms", "We provide nanites for various organic and non-organic systems"), 
+				history = _("stationStory-comms", "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel"),
 			},
 			["Maiman"] = {
 		        weapon_available = {
@@ -5750,9 +5750,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Energy beam components", 
-				general = "We research and manufacture energy beam components and systems", 
-				history = "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th century on Earth",
+				description = _("scienceDescription-station", "Energy beam components"), 
+				general = _("stationGeneralInfo-comms", "We research and manufacture energy beam components and systems"), 
+				history = _("stationStory-comms", "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th century on Earth"),
 			},
 			["Malthus"] = {
 		        weapon_available = {
@@ -5782,8 +5782,8 @@ function populateStationPool()
     				medicine = false, 
     				luxury = false,
     			},
-    			description = "Gambling and resupply",
-		        general = "The oldest station in the quadrant",
+    			description = _("scienceDescription-station", "Gambling and resupply"),
+		        general = _("stationGeneralInfo-comms", "The oldest station in the quadrant"),
 		        history = "",
 			},
 			["Marconi"] = {
@@ -5819,9 +5819,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Energy Beam Components", 
-				general = "We manufacture energy beam components", 
-				history = "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon",
+				description = _("scienceDescription-station", "Energy Beam Components"), 
+				general = _("stationGeneralInfo-comms", "We manufacture energy beam components"), 
+				history = _("stationStory-comms", "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon"),
 			},
 			["Miller"] = {
 		        weapon_available = {
@@ -5856,9 +5856,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Exobiology research", 
-				general = "We study recently discovered life forms not native to Earth", 
-				history = "This station was named after one of the early exobiologists from mid 20th century Earth, Dr. Stanley Miller",
+				description = _("scienceDescription-station", "Exobiology research"), 
+				general = _("stationGeneralInfo-comms", "We study recently discovered life forms not native to Earth"), 
+				history = _("stationStory-comms", "This station was named after one of the early exobiologists from mid 20th century Earth, Dr. Stanley Miller"),
 			},
 			["Shawyer"] = {
 		        weapon_available = {
@@ -5893,9 +5893,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Impulse engine components", 
-				general = "We research and manufacture impulse engine components and systems", 
-				history = "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century",
+				description = _("scienceDescription-station", "Impulse engine components"), 
+				general = _("stationGeneralInfo-comms", "We research and manufacture impulse engine components and systems"), 
+				history = _("stationStory-comms", "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century"),
 			},
 		},
 		["History"] = {
@@ -5932,9 +5932,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Energy and particle beam components", 
-				general = "We fabricate general and specialized components for ship beam systems", 
-				history = "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it",
+				description = _("scienceDescription-station", "Energy and particle beam components"), 
+				general = _("stationGeneralInfo-comms", "We fabricate general and specialized components for ship beam systems"), 
+				history = _("stationStory-comms", "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it"),
 			},
 			["Chatuchak"] =	{
 		        weapon_available = {
@@ -5969,9 +5969,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Trading station", 
-				general = "Only the largest market and trading location in twenty sectors. You can find your heart's desire here", 
-				history = "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind",
+				description = _("scienceDescription-station", "Trading station"), 
+				general = _("stationGeneralInfo-comms", "Only the largest market and trading location in twenty sectors. You can find your heart's desire here"), 
+				history = _("stationStory-comms", "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind"),
 			},
 			["Grasberg"] = {
 		        weapon_available = {
@@ -6009,9 +6009,9 @@ function populateStationPool()
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = "Mining", 
-				general ="We mine nearby asteroids for precious minerals and process them for sale", 
-				history = "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids",
+				description = _("scienceDescription-station", "Mining"), 
+				general = _("stationGeneralInfo-comms", "We mine nearby asteroids for precious minerals and process them for sale"), 
+				history = _("stationStory-comms", "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids"),
 			},
 			["Hayden"] = {
 		        weapon_available = {
@@ -6046,9 +6046,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Observatory and stellar mapping", 
-				general = "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding", 
-				history = "Station named in honor of Charles Hayden whose philanthropy continued astrophysical research and education on Earth in the early 20th century",
+				description = _("scienceDescription-station", "Observatory and stellar mapping"), 
+				general = _("stationGeneralInfo-comms", "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding"), 
+				history = _("stationStory-comms", "Station named in honor of Charles Hayden whose philanthropy continued astrophysical research and education on Earth in the early 20th century"),
 			},
 			["Lipkin"] = {
 		        weapon_available = {
@@ -6083,9 +6083,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Autodoc components", 
+				description = _("scienceDescription-station", "Autodoc components"), 
 				general = "", 
-				history = "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth",
+				history = _("stationStory-comms", "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth"),
 			},
 			["Madison"] = {
 		        weapon_available = {
@@ -6120,9 +6120,9 @@ function populateStationPool()
 					medicine = true, 
 					luxury = false,
 				},
-				description = "Zero gravity sports and entertainment", 
-				general = "Come take in a game or two or perhaps see a show", 
-				history = "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment",
+				description = _("scienceDescription-station", "Zero gravity sports and entertainment"), 
+				general = _("stationGeneralInfo-comms", "Come take in a game or two or perhaps see a show"), 
+				history = _("stationStory-comms", "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment"),
 			},
 			["Rutherford"] = {
 		        weapon_available = {
@@ -6157,9 +6157,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = random(1,100) < 43,
 				},
-				description = "Shield components and research", 
-				general = "We research and fabricate components for ship shield systems", 
-				history = "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century",
+				description = _("scienceDescription-station", "Shield components and research"), 
+				general = _("stationGeneralInfo-comms", "We research and fabricate components for ship shield systems"), 
+				history = _("stationStory-comms", "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century"),
 			},
 			["Toohie"] = {
 		        weapon_available = {
@@ -6194,9 +6194,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Shield and armor components and research", 
-				general = "We research and make general and specialized components for ship shield and ship armor systems", 
-				history = "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved."},
+				description = _("scienceDescription-station", "Shield and armor components and research"), 
+				general = _("stationGeneralInfo-comms", "We research and make general and specialized components for ship shield and ship armor systems"), 
+				history = _("stationStory-comms", "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved.")},
 		},
 		["Pop Sci Fi"] = {
 			["Anderson"] = {
@@ -6236,9 +6236,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Battery and software engineering", 
-				general = "We provide high quality high capacity batteries and specialized software for all shipboard systems", 
-				history = "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion",
+				description = _("scienceDescription-station", "Battery and software engineering"), 
+				general = _("stationGeneralInfo-comms", "We provide high quality high capacity batteries and specialized software for all shipboard systems"), 
+				history = _("stationStory-comms", "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion"),
 			},
 			["Archer"] = {
 		        weapon_available = {
@@ -6272,9 +6272,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Shield and Armor Research", 
-				general = "The finest shield and armor manufacturer in the quadrant", 
-				history = "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer",
+				description = _("scienceDescription-station", "Shield and Armor Research"), 
+				general = _("stationGeneralInfo-comms", "The finest shield and armor manufacturer in the quadrant"), 
+				history = _("stationStory-comms", "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"),
 			},
 			["Barclay"] = {
 		        weapon_available = {
@@ -6308,9 +6308,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Communication components", 
-				general = "We provide a range of communication equipment and software for use aboard ships", 
-				history = "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station",
+				description = _("scienceDescription-station", "Communication components"), 
+				general = _("stationGeneralInfo-comms", "We provide a range of communication equipment and software for use aboard ships"), 
+				history = _("stationStory-comms", "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station"),
 			},
 			["Calvin"] = {
 		        weapon_available = {
@@ -6344,9 +6344,9 @@ function populateStationPool()
 				buy =	{
 					[randomComponent("robotic")] = math.random(40,200)
 				},
-				description = "Robotic research", 
-				general = "We research and provide robotic systems and components", 
-				history = "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming",
+				description = _("scienceDescription-station", "Robotic research"), 
+				general = _("stationGeneralInfo-comms", "We research and provide robotic systems and components"), 
+				history = _("stationStory-comms", "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming"),
 			},
 			["Cavor"] = {
 		        weapon_available = {
@@ -6381,9 +6381,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Advanced Material components", 
-				general = "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction", 
-				history = "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite",
+				description = _("scienceDescription-station", "Advanced Material components"), 
+				general = _("stationGeneralInfo-comms", "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction"), 
+				history = _("stationStory-comms", "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite"),
 			},
 			["Cyrus"] = {
 		        weapon_available = {
@@ -6418,9 +6418,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = random(1,100) < 78,
 				},
-				description = "Impulse engine components", 
-				general = "We supply high quality impulse engines and parts for use aboard ships", 
-				history = "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne",
+				description = _("scienceDescription-station", "Impulse engine components"), 
+				general = _("stationGeneralInfo-comms", "We supply high quality impulse engines and parts for use aboard ships"), 
+				history = _("stationStory-comms", "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne"),
 			},
 			["Deckard"] = {
 		        weapon_available = {
@@ -6455,9 +6455,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Android components", 
-				general = "Supplier of android components, programming and service", 
-				history = "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids",
+				description = _("scienceDescription-station", "Android components"), 
+				general = _("stationGeneralInfo-comms", "Supplier of android components, programming and service"), 
+				history = _("stationStory-comms", "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids"),
 			},
 			["Erickson"] = {
 		        weapon_available = {
@@ -6488,9 +6488,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Transporter components", 
-				general = "We provide transporters used aboard ships as well as the components for repair and maintenance", 
-				history = "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy",
+				description = _("scienceDescription-station", "Transporter components"), 
+				general = _("stationGeneralInfo-comms", "We provide transporters used aboard ships as well as the components for repair and maintenance"), 
+				history = _("stationStory-comms", "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy"),
 			},
 			["Jabba"] = {
 		        weapon_available = {
@@ -6525,8 +6525,8 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Commerce and gambling", 
-				general = "Come play some games and shop. House take does not exceed 4 percent", 
+				description = _("scienceDescription-station", "Commerce and gambling"), 
+				general = _("stationGeneralInfo-comms", "Come play some games and shop. House take does not exceed 4 percent"), 
 				history = "",
 			},			
 			["Komov"] = {
@@ -6562,9 +6562,9 @@ function populateStationPool()
  					medicine = false, 
  					luxury = false,
  				},
-				description = "Xenopsychology training", 
-				general = "We provide classes and simulation to help train diverse species in how to relate to each other", 
-				history = "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles",
+				description = _("scienceDescription-station", "Xenopsychology training"), 
+				general = _("stationGeneralInfo-comms", "We provide classes and simulation to help train diverse species in how to relate to each other"), 
+				history = _("stationStory-comms", "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles"),
 			},
 			["Lando"] = {
 		        weapon_available = {
@@ -6600,7 +6600,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Casino and Gambling", 
+				description = _("scienceDescription-station", "Casino and Gambling"), 
 				general = "", 
 				history = "",
 			},			
@@ -6633,9 +6633,9 @@ function populateStationPool()
 					medicine = true, 
 					luxury = false,
 				},
-				description = "Trading station", 
-				general = "Come to Muddvile for all your trade and commerce needs and desires", 
-				history = "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman",
+				description = _("scienceDescription-station", "Trading station"), 
+				general = _("stationGeneralInfo-comms", "Come to Muddvile for all your trade and commerce needs and desires"), 
+				history = _("stationStory-comms", "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman"),
 			},
 			["Nexus-6"] = {
 		        weapon_available = {
@@ -6674,9 +6674,9 @@ function populateStationPool()
 					[randomMineral()] = math.random(40,200),
 					[randomComponent("android")] = math.random(40,200),
 				},
-				description = "Android components", 
-				general = "Androids, their parts, maintenance and recylcling", 
-				history = "We named the station after the ground breaking android model produced by the Tyrell corporation",
+				description = _("scienceDescription-station", "Android components"), 
+				general = _("stationGeneralInfo-comms", "Androids, their parts, maintenance and recylcling"), 
+				history = _("stationStory-comms", "We named the station after the ground breaking android model produced by the Tyrell corporation"),
 			},
 			["O'Brien"] = {
 		        weapon_available = {
@@ -6711,9 +6711,9 @@ function populateStationPool()
 					medicine = true, 
 					luxury = random(1,100) < 43,
 				},
-				description = "Transporter components", 
-				general = "We research and fabricate high quality transporters and transporter components for use aboard ships", 
-				history = "Miles O'Brien started this business after his experience as a transporter chief",
+				description = _("scienceDescription-station", "Transporter components"), 
+				general = _("stationGeneralInfo-comms", "We research and fabricate high quality transporters and transporter components for use aboard ships"), 
+				history = _("stationStory-comms", "Miles O'Brien started this business after his experience as a transporter chief"),
 			},
 			["Organa"] = {
 		        weapon_available = {
@@ -6748,9 +6748,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Diplomatic training", 
-				general = "The premeire academy for leadership and diplomacy training in the region", 
-				history = "Established by the royal family so critical during the political upheaval era",
+				description = _("scienceDescription-station", "Diplomatic training"), 
+				general = _("stationGeneralInfo-comms", "The premeire academy for leadership and diplomacy training in the region"), 
+				history = _("stationStory-comms", "Established by the royal family so critical during the political upheaval era"),
 			},
 			["Owen"] = {
 		        weapon_available = {
@@ -6785,9 +6785,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Load lifters and components", 
-				general = "We provide load lifters and components for various ship systems", 
-				history = "Owens started off in the moisture vaporator business on Tattooine then branched out into load lifters based on acquisition of proprietary software and protocols. The station name recognizes the tragic loss of our founder to Imperial violence",
+				description = _("scienceDescription-station", "Load lifters and components"), 
+				general = _("stationGeneralInfo-comms", "We provide load lifters and components for various ship systems"), 
+				history = _("stationStory-comms", "Owens started off in the moisture vaporator business on Tattooine then branched out into load lifters based on acquisition of proprietary software and protocols. The station name recognizes the tragic loss of our founder to Imperial violence"),
 			},
 			["Ripley"] = {
 		        weapon_available = {
@@ -6822,9 +6822,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = random(1,100) < 47,
 				},
-				description = "Load lifters and components", 
-				general = "We provide load lifters and components", 
-				history = "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship",
+				description = _("scienceDescription-station", "Load lifters and components"), 
+				general = _("stationGeneralInfo-comms", "We provide load lifters and components"), 
+				history = _("stationStory-comms", "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship"),
 			},
 			["Skandar"] = {
 		        weapon_available = {
@@ -6859,9 +6859,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Routine maintenance and entertainment", 
-				general = "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars", 
-				history = "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax",
+				description = _("scienceDescription-station", "Routine maintenance and entertainment"), 
+				general = _("stationGeneralInfo-comms", "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars"), 
+				history = _("stationStory-comms", "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax"),
 			},			
 			["Soong"] = {
 		        weapon_available = {
@@ -6896,9 +6896,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Android components", 
-				general = "We create androids and android components", 
-				history = "The station is named after Dr. Noonian Soong, the famous android researcher and builder",
+				description = _("scienceDescription-station", "Android components"), 
+				general = _("stationGeneralInfo-comms", "We create androids and android components"), 
+				history = _("stationStory-comms", "The station is named after Dr. Noonian Soong, the famous android researcher and builder"),
 			},
 			["Starnet"] = {
 		        weapon_available = {
@@ -6933,9 +6933,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Automated weapons systems", 
-				general = "We research and create automated weapons systems to improve ship combat capability", 
-				history = "Lost the history memory bank. Recovery efforts only brought back the phrase, 'I'll be back'",
+				description = _("scienceDescription-station", "Automated weapons systems"), 
+				general = _("stationGeneralInfo-comms", "We research and create automated weapons systems to improve ship combat capability"), 
+				history = _("stationStory-comms", "Lost the history memory bank. Recovery efforts only brought back the phrase, 'I'll be back'"),
 			},			
 			["Tiberius"] = {
 		        weapon_available = {
@@ -6966,9 +6966,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Logistics coordination", 
-				general = "We support the stations and ships in the area with planning and communication services", 
-				history = "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name",
+				description = _("scienceDescription-station", "Logistics coordination"), 
+				general = _("stationGeneralInfo-comms", "We support the stations and ships in the area with planning and communication services"), 
+				history = _("stationStory-comms", "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name"),
 			},
 			["Tokra"] = {
 		        weapon_available = {
@@ -7003,9 +7003,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Advanced material components", 
-				general = "We create multiple types of advanced material components. Our most popular products are our filaments", 
-				history = "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them",
+				description = _("scienceDescription-station", "Advanced material components"), 
+				general = _("stationGeneralInfo-comms", "We create multiple types of advanced material components. Our most popular products are our filaments"), 
+				history = _("stationStory-comms", "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them"),
 			},
 			["Utopia Planitia"] = {
 		        weapon_available = 	{
@@ -7036,8 +7036,8 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = false 
 		        },
-				description = "Ship building and maintenance facility", 
-				general = "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel", 
+				description = _("scienceDescription-station", "Ship building and maintenance facility"), 
+				general = _("stationGeneralInfo-comms", "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel"), 
 				history = ""
 			},
 			["Vaiken"] = {
@@ -7077,7 +7077,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Ship building and maintenance facility", 
+				description = _("scienceDescription-station", "Ship building and maintenance facility"), 
 				general = "", 
 				history = "",
 			},			
@@ -7114,9 +7114,9 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = true,
 		        },
-				description = "Warp engine components", 
-				general = "We specialize in the esoteric components necessary to make warp drives function properly", 
-				history = "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do",
+				description = _("scienceDescription-station", "Warp engine components"), 
+				general = _("stationGeneralInfo-comms", "We specialize in the esoteric components necessary to make warp drives function properly"), 
+				history = _("stationStory-comms", "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do"),
 			},
 		},
 		["Spec Sci Fi"] = {
@@ -7152,9 +7152,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Optical Components", 
-				general = "We make and supply optic components for various station and ship systems", 
-				history = "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon (ALCA) electronic and optic research and development company",
+				description = _("scienceDescription-station", "Optical Components"), 
+				general = _("stationGeneralInfo-comms", "We make and supply optic components for various station and ship systems"), 
+				history = _("stationStory-comms", "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon (ALCA) electronic and optic research and development company"),
 			},
 			["Bethesda"] = {
 		        weapon_available = {
@@ -7197,9 +7197,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Medical research", 
-				general = "We research and treat exotic medical conditions", 
-				history = "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century",
+				description = _("scienceDescription-station", "Medical research"), 
+				general = _("stationGeneralInfo-comms", "We research and treat exotic medical conditions"), 
+				history = _("stationStory-comms", "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century"),
 			},
 			["Deer"] = {
 		        weapon_available = {
@@ -7234,9 +7234,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Repulsor and Tractor Beam Components", 
-				general = "We can meet all your pushing and pulling needs with specialized equipment custom made", 
-				history = "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products",
+				description = _("scienceDescription-station", "Repulsor and Tractor Beam Components"), 
+				general = _("stationGeneralInfo-comms", "We can meet all your pushing and pulling needs with specialized equipment custom made"), 
+				history = _("stationStory-comms", "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products"),
 			},
 			["Evondos"] = {
 		        weapon_available = {
@@ -7271,9 +7271,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = random(1,100) < 41,
 				},
-				description = "Autodoc components", 
-				general = "We provide components for automated medical machinery", 
-				history = "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland",
+				description = _("scienceDescription-station", "Autodoc components"), 
+				general = _("stationGeneralInfo-comms", "We provide components for automated medical machinery"), 
+				history = _("stationStory-comms", "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland"),
 			},
 			["Feynman"] = {
 		        weapon_available = 	{
@@ -7312,9 +7312,9 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = true,
 		        },
-				description = "Nanotechnology research", 
-				general = "We provide nanites and software for a variety of ship-board systems", 
-				history = "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman",
+				description = _("scienceDescription-station", "Nanotechnology research"), 
+				general = _("stationGeneralInfo-comms", "We provide nanites and software for a variety of ship-board systems"), 
+				history = _("stationStory-comms", "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman"),
 			},
 			["Mayo"] = {
 		        weapon_available = {
@@ -7353,9 +7353,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Medical Research", 
-				general = "We research exotic diseases and other human medical conditions", 
-				history = "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth",
+				description = _("scienceDescription-station", "Medical Research"), 
+				general = _("stationGeneralInfo-comms", "We research exotic diseases and other human medical conditions"), 
+				history = _("stationStory-comms", "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth"),
 			},
 			["Olympus"] = {
 		        weapon_available = {
@@ -7390,9 +7390,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Optical components", 
-				general = "We fabricate optical lenses and related equipment as well as fiber optic cabling and components", 
-				history = "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry",
+				description = _("scienceDescription-station", "Optical components"), 
+				general = _("stationGeneralInfo-comms", "We fabricate optical lenses and related equipment as well as fiber optic cabling and components"), 
+				history = _("stationStory-comms", "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry"),
 			},
 			["Panduit"] = {
 		        weapon_available = {
@@ -7427,9 +7427,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Optic components", 
-				general = "We provide optic components for various ship systems", 
-				history = "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States",
+				description = _("scienceDescription-station", "Optic components"), 
+				general = _("stationGeneralInfo-comms", "We provide optic components for various ship systems"), 
+				history = _("stationStory-comms", "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States"),
 			},
 			["Shree"] = {
 		        weapon_available = {
@@ -7468,9 +7468,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Repulsor and tractor beam components", 
-				general = "We make ship systems designed to push or pull other objects around in space", 
-				history = "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today",
+				description = _("scienceDescription-station", "Repulsor and tractor beam components"), 
+				general = _("stationGeneralInfo-comms", "We make ship systems designed to push or pull other objects around in space"), 
+				history = _("stationStory-comms", "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today"),
 			},
 			["Vactel"] = {
 		        weapon_available = {
@@ -7501,9 +7501,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Shielded Circuitry Fabrication", 
-				general = "We specialize in circuitry shielded from external hacking suitable for ship systems", 
-				history = "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips",
+				description = _("scienceDescription-station", "Shielded Circuitry Fabrication"), 
+				general = _("stationGeneralInfo-comms", "We specialize in circuitry shielded from external hacking suitable for ship systems"), 
+				history = _("stationStory-comms", "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips"),
 			},
 			["Veloquan"] = {
 		        weapon_available = {
@@ -7538,9 +7538,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Sensor components", 
-				general = "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use", 
-				history = "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy",
+				description = _("scienceDescription-station", "Sensor components"), 
+				general = _("stationGeneralInfo-comms", "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use"), 
+				history = _("stationStory-comms", "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy"),
 			},
 			["Tandon"] = {
 		        weapon_available = {
@@ -7570,9 +7570,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Biotechnology research",
-				general = "Merging the organic and inorganic through research", 
-				history = "Continued from the Tandon school of engineering started on Earth in the early 21st century",
+				description = _("scienceDescription-station", "Biotechnology research"),
+				general = _("stationGeneralInfo-comms", "Merging the organic and inorganic through research"), 
+				history = _("stationStory-comms", "Continued from the Tandon school of engineering started on Earth in the early 21st century"),
 			},
 		},
 		["Generic"] = {
@@ -7609,7 +7609,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Mining station", 
+				description = _("scienceDescription-station", "Mining station"), 
 				general = "", 
 				history = "",
 			},
@@ -7649,8 +7649,8 @@ function populateStationPool()
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = "Mining", 
-				general = "We mine nearby asteroids for precious minerals", 
+				description = _("scienceDescription-station", "Mining"), 
+				general = _("stationGeneralInfo-comms", "We mine nearby asteroids for precious minerals"), 
 				history = "",
 			},
 			["Krak"] = {
@@ -7689,7 +7689,7 @@ function populateStationPool()
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = "Mining station", 
+				description = _("scienceDescription-station", "Mining station"), 
 				general = "", 
 				history = "",
 			},
@@ -7726,7 +7726,7 @@ function populateStationPool()
 					medicine = true, 
 					luxury = random(1,100) < 50,
 				},
-				description = "Mining station", 
+				description = _("scienceDescription-station", "Mining station"), 
 				general = "", 
 				history = "",
 			},
@@ -7765,7 +7765,7 @@ function populateStationPool()
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = "Mining station", 
+				description = _("scienceDescription-station", "Mining station"), 
 				general = "", 
 				history = "",
 			},
@@ -7798,8 +7798,8 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Gambling and resupply", 
-				general = "Relax and meet some interesting players", 
+				description = _("scienceDescription-station", "Gambling and resupply"), 
+				general = _("stationGeneralInfo-comms", "Relax and meet some interesting players"), 
 				history = "",
 			},
 			["Nefatha"] = {
@@ -7835,7 +7835,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Commerce and recreation", 
+				description = _("scienceDescription-station", "Commerce and recreation"), 
 				general = "", 
 				history = "",
 			},
@@ -7867,7 +7867,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Xenopsychology research", 
+				description = _("scienceDescription-station", "Xenopsychology research"), 
 				general = "", 
 				history = "",
 			},
@@ -7904,7 +7904,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Mining and trade", 
+				description = _("scienceDescription-station", "Mining and trade"), 
 				general = "", 
 				history = "",
 			},
@@ -7941,7 +7941,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Mining and gambling", 
+				description = _("scienceDescription-station", "Mining and gambling"), 
 				general = "", 
 				history = "",
 			},
@@ -7978,7 +7978,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Resupply", 
+				description = _("scienceDescription-station", "Resupply"), 
 				general = "", 
 				history = "",
 			},
@@ -8052,7 +8052,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Resupply", 
+				description = _("scienceDescription-station", "Resupply"), 
 				general = "", 
 				history = "",
 			},
@@ -8084,7 +8084,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Textiles and fashion", 
+				description = _("scienceDescription-station", "Textiles and fashion"), 
 				general = "", 
 				history = "",
 			},
@@ -8121,7 +8121,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Stress Psychology Research", 
+				description = _("scienceDescription-station", "Stress Psychology Research"), 
 				general = "", 
 				history = "",
 			},
@@ -8153,7 +8153,7 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = false,
 		        },
-				description = "Low gravity research", 
+				description = _("scienceDescription-station", "Low gravity research"), 
 				general = "", 
 				history = "",
 			},
@@ -8190,8 +8190,8 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Resupply", 
-				general = "Get your energy here! Grab a drink before you go!", 
+				description = _("scienceDescription-station", "Resupply"), 
+				general = _("stationGeneralInfo-comms", "Get your energy here! Grab a drink before you go!"), 
 				history = "",
 			},
 			["Science-2"] = {
@@ -8223,7 +8223,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Research Lab and Observatory", 
+				description = _("scienceDescription-station", "Research Lab and Observatory"), 
 				general = "", 
 				history = "",
 			},
@@ -8264,7 +8264,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Biotech research", 
+				description = _("scienceDescription-station", "Biotech research"), 
 				general = "", 
 				history = "",
 			},
@@ -8297,7 +8297,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Observatory", 
+				description = _("scienceDescription-station", "Observatory"), 
 				general = "", 
 				history = "",
 			},
@@ -8329,7 +8329,7 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = false,
 		        },
-				description = "Observatory", 
+				description = _("scienceDescription-station", "Observatory"), 
 				general = "", 
 				history = "",
 			},
@@ -8366,7 +8366,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Resupply", 
+				description = _("scienceDescription-station", "Resupply"), 
 				general = "", 
 				history = "",
 			},
@@ -8753,7 +8753,7 @@ function setFleets()
 	end
 	table.insert(enemyFleetList,enemyFleet1)
 	table.insert(enemyDefensiveFleetList,enemyFleet1)
-	intelGatherArtifacts[1]:setDescriptions("Scan to gather intelligence",string.format("Enemy fleet detected in sector %s",enemyFleet1base:getSectorName()))
+	intelGatherArtifacts[1]:setDescriptions(_("scienceDescription-artifact", "Scan to gather intelligence"),string.format(_("scienceDescription-artifact", "Enemy fleet detected in sector %s"),enemyFleet1base:getSectorName()))
 	intelGatherArtifacts[1].startSector = enemyFleet1base:getSectorName()
 	enemyResource = enemyResource - enemyFleet1Power
 	if enemyResource > 120 then
@@ -8774,7 +8774,7 @@ function setFleets()
 	end
 	table.insert(enemyFleetList,enemyFleet2)
 	table.insert(enemyDefensiveFleetList,enemyFleet2)
-	intelGatherArtifacts[2]:setDescriptions("Scan to gather intelligence",string.format("Enemy fleet detected in sector %s",enemyFleet2base:getSectorName()))
+	intelGatherArtifacts[2]:setDescriptions(_("scienceDescription-artifact", "Scan to gather intelligence"),string.format(_("scienceDescription-artifact", "Enemy fleet detected in sector %s"),enemyFleet2base:getSectorName()))
 	intelGatherArtifacts[2].startSector = enemyFleet2base:getSectorName()
 	enemyResource = enemyResource - enemyFleet2Power
 	if enemyResource > 120 then
@@ -8795,7 +8795,7 @@ function setFleets()
 	end
 	table.insert(enemyFleetList,enemyFleet3)
 	table.insert(enemyDefensiveFleetList,enemyFleet3)
-	intelGatherArtifacts[3]:setDescriptions("Scan to gather intelligence",string.format("Enemy fleet detected in sector %s",enemyFleet3base:getSectorName()))
+	intelGatherArtifacts[3]:setDescriptions(_("scienceDescription-artifact", "Scan to gather intelligence"),string.format(_("scienceDescription-artifact", "Enemy fleet detected in sector %s"),enemyFleet3base:getSectorName()))
 	intelGatherArtifacts[3].startSector = enemyFleet3base:getSectorName()
 	enemyResource = enemyResource - enemyFleet3Power
 	repeat
@@ -8811,7 +8811,7 @@ function setFleets()
 	end
 	table.insert(enemyFleetList,enemyFleet4)
 	table.insert(enemyDefensiveFleetList,enemyFleet4)
-	intelGatherArtifacts[4]:setDescriptions("Scan to gather intelligence",string.format("Enemy fleet detected in sector %s",enemyFleet4base:getSectorName()))
+	intelGatherArtifacts[4]:setDescriptions(_("scienceDescription-artifact", "Scan to gather intelligence"),string.format(_("scienceDescription-artifact", "Enemy fleet detected in sector %s"),enemyFleet4base:getSectorName()))
 	intelGatherArtifacts[4].startSector = enemyFleet4base:getSectorName()
 	enemyResource = enemyResource - enemyFleet4Power
 	repeat
@@ -8827,7 +8827,7 @@ function setFleets()
 	end
 	table.insert(enemyFleetList,enemyFleet5)
 	table.insert(enemyDefensiveFleetList,enemyFleet5)
-	intelGatherArtifacts[5]:setDescriptions("Scan to gather intelligence",string.format("Enemy fleet detected in sector %s",enemyFleet5base:getSectorName()))
+	intelGatherArtifacts[5]:setDescriptions(_("scienceDescription-artifact", "Scan to gather intelligence"),string.format(_("scienceDescription-artifact", "Enemy fleet detected in sector %s"),enemyFleet5base:getSectorName()))
 	intelGatherArtifacts[5].startSector = enemyFleet5base:getSectorName()
 	
 	--friendly defensive fleets
@@ -8951,7 +8951,7 @@ function spawnEnemyFleet(xOrigin, yOrigin, power, danger, enemyFaction, fleetNam
 	template_pool_size = 10
 	local template_pool = getTemplatePool(enemyStrength)
 	if #template_pool < 1 then
-		addGMMessage("Empty Template pool: fix excludes or other criteria")
+		addGMMessage(_("msgGM", "Empty Template pool: fix excludes or other criteria"))
 		return enemyList
 	end
 	template_pool_size = 5
@@ -9104,7 +9104,7 @@ function setOptionalMissions()
 	if beamTimeBase ~= nil then
 		beamTimeGood, beamTimeGoodBase = chooseUpgradeGoodBase(beamTimeBase)
 		beamTimeBase.comms_data.character = "Horace Grayson"
-		beamTimeBase.comms_data.characterDescription = "He dabbles in ship system innovations. He's been working on improving beam weapons by reducing the amount of time between firing. I hear he's already installed some improvements on ships that have docked here previously"
+		beamTimeBase.comms_data.characterDescription = _("characterInfo-comms", "He dabbles in ship system innovations. He's been working on improving beam weapons by reducing the amount of time between firing. I hear he's already installed some improvements on ships that have docked here previously")
 		beamTimeBase.comms_data.characterFunction = "shrinkBeamCycle"
 		if beamTimeGood == nil then
 			beamTimeBase.comms_data.characterGood = vapor_goods[math.random(1,#vapor_goods)]			
@@ -9120,7 +9120,7 @@ function setOptionalMissions()
 				missionAttemptCount = missionAttemptCount + 1
 			until(clueStation ~= nil or missionAttemptCount > repeatExitBoundary)
 			if clueStation ~= nil then
-				clueStation.comms_data.gossip = string.format("I heard there's a guy named %s that can fix ship beam systems up so that they shoot faster. He lives out on %s in %s. He won't charge you much, but it won't be free.",beamTimeBase.comms_data.character,beamTimeBase:getCallSign(),beamTimeBase:getSectorName())
+				clueStation.comms_data.gossip = string.format(_("gossip-comms", "I heard there's a guy named %s that can fix ship beam systems up so that they shoot faster. He lives out on %s in %s. He won't charge you much, but it won't be free."),beamTimeBase.comms_data.character,beamTimeBase:getCallSign(),beamTimeBase:getSectorName())
 			end
 		end
 	end
@@ -9146,7 +9146,7 @@ function setOptionalMissions()
 	if spinBase ~= nil then
 		spinGood, spinGoodBase = chooseUpgradeGoodBase(spinBase)
 		spinBase.comms_data.character = "Emily Patel"
-		spinBase.comms_data.characterDescription = "She tinkers with ship systems like engines and thrusters. She's consulted with the military on tuning spin time by increasing thruster power. She's got prototypes that are awaiting formal military approval before installation"
+		spinBase.comms_data.characterDescription = _("characterInfo-comms", "She tinkers with ship systems like engines and thrusters. She's consulted with the military on tuning spin time by increasing thruster power. She's got prototypes that are awaiting formal military approval before installation")
 		spinBase.comms_data.characterFunction = "increaseSpin"
 		if spinGood == nil then
 			spinBase.comms_data.characterGood = vapor_goods[math.random(1,#vapor_goods)]			
@@ -9162,7 +9162,7 @@ function setOptionalMissions()
 				missionAttemptCount = missionAttemptCount + 1
 			until(clueStation ~= nil or missionAttemptCount > repeatExitBoundary)
 			if clueStation ~= nil then
-				clueStation.comms_data.gossip = string.format("My friend, %s recently quit her job as a ship maintenance technician to set up this side gig. She's been improving ship systems and she's pretty good at it. She set up shop on %s in %s. I hear she's even lining up a contract with the navy for her improvements.",spinBase.comms_data.character,spinBase:getCallSign(),spinBase:getSectorName())
+				clueStation.comms_data.gossip = string.format(_("gossip-comms", "My friend, %s recently quit her job as a ship maintenance technician to set up this side gig. She's been improving ship systems and she's pretty good at it. She set up shop on %s in %s. I hear she's even lining up a contract with the navy for her improvements."),spinBase.comms_data.character,spinBase:getCallSign(),spinBase:getSectorName())
 			end
 		end
 	end
@@ -9188,7 +9188,7 @@ function setOptionalMissions()
 	if auxTubeBase ~= nil then
 		auxTubeGood, auxTubeGoodBase = chooseUpgradeGoodBase(auxTubeBase)
 		auxTubeBase.comms_data.character = "Fred McLassiter"
-		auxTubeBase.comms_data.characterDescription = "He specializes in miniaturization of weapons systems. He's come up with a way to add a missile tube and some missiles to any ship regardless of size or configuration"
+		auxTubeBase.comms_data.characterDescription = _("characterInfo-comms", "He specializes in miniaturization of weapons systems. He's come up with a way to add a missile tube and some missiles to any ship regardless of size or configuration")
 		auxTubeBase.comms_data.characterFunction = "addAuxTube"
 		if auxTubeGood == nil then
 			auxTubeBase.comms_data.characterGood = vapor_goods[math.random(1,#vapor_goods)]			
@@ -9204,7 +9204,7 @@ function setOptionalMissions()
 				missionAttemptCount = missionAttemptCount + 1
 			until(clueStation ~= nil or missionAttemptCount > repeatExitBoundary)
 			if clueStation ~= nil then
-				clueStation.comms_data.gossip = string.format("There's this guy, %s out on %s in %s that can add a missile tube to your ship. He even added one to my cousin's souped up freighter. You should see the new paint job: amusingly phallic",auxTubeBase.comms_data.character,auxTubeBase:getCallSign(),auxTubeBase:getSectorName())
+				clueStation.comms_data.gossip = string.format(_("gossip-comms", "There's this guy, %s out on %s in %s that can add a missile tube to your ship. He even added one to my cousin's souped up freighter. You should see the new paint job: amusingly phallic"),auxTubeBase.comms_data.character,auxTubeBase:getCallSign(),auxTubeBase:getSectorName())
 			end
 		end
 	end
@@ -9230,7 +9230,7 @@ function setOptionalMissions()
 	if coolBeamBase ~= nil then
 		coolBeamGood, coolBeamGoodBase = chooseUpgradeGoodBase(coolBeamBase)
 		coolBeamBase.comms_data.character = "Dorothy Ly"
-		coolBeamBase.comms_data.characterDescription = "She developed this technique for cooling beam systems so that they can be fired more often without burning out"
+		coolBeamBase.comms_data.characterDescription = _("characterInfo-comms", "She developed this technique for cooling beam systems so that they can be fired more often without burning out")
 		coolBeamBase.comms_data.characterFunction = "coolBeam"
 		if coolBeamGood == nil then
 			coolBeamBase.comms_data.characterGood = vapor_goods[math.random(1,#vapor_goods)]			
@@ -9246,7 +9246,7 @@ function setOptionalMissions()
 				missionAttemptCount = missionAttemptCount + 1
 			until(clueStation ~= nil or missionAttemptCount > repeatExitBoundary)
 			if clueStation ~= nil then
-				clueStation.comms_data.gossip = string.format("There's this girl on %s in %s. She is hot. Her name is %s. When I say she is hot, I mean she has a way of keeping your beam weapons from excessive heat.",coolBeamBase:getCallSign(),coolBeamBase:getSectorName(),coolBeamBase.comms_data.character)
+				clueStation.comms_data.gossip = string.format(_("gossip-comms", "There's this girl on %s in %s. She is hot. Her name is %s. When I say she is hot, I mean she has a way of keeping your beam weapons from excessive heat."),coolBeamBase:getCallSign(),coolBeamBase:getSectorName(),coolBeamBase.comms_data.character)
 			end
 		end
 	end
@@ -9272,7 +9272,7 @@ function setOptionalMissions()
 	if longerBeamBase ~= nil then
 		longerBeamGood, longerBeamGoodBase = chooseUpgradeGoodBase(longerBeamBase)
 		longerBeamBase.comms_data.character = "Gerald Cook"
-		longerBeamBase.comms_data.characterDescription = "He knows how to modify beam systems to extend their range"
+		longerBeamBase.comms_data.characterDescription = _("characterInfo-comms", "He knows how to modify beam systems to extend their range")
 		longerBeamBase.comms_data.characterFunction = "longerBeam"
 		if longerBeamGood == nil then
 			longerBeamBase.comms_data.characterGood = vapor_goods[math.random(1,#vapor_goods)]			
@@ -9288,7 +9288,7 @@ function setOptionalMissions()
 				missionAttemptCount = missionAttemptCount + 1
 			until(clueStation ~= nil or missionAttemptCount > repeatExitBoundary)
 			if clueStation ~= nil then
-				clueStation.comms_data.gossip = string.format("Do you know about %s? He can extend the range of your beam weapons. He's on %s in %s",longerBeamBase.comms_data.character,longerBeamBase:getCallSign(),longerBeamBase:getSectorName())
+				clueStation.comms_data.gossip = string.format(_("gossip-comms", "Do you know about %s? He can extend the range of your beam weapons. He's on %s in %s"),longerBeamBase.comms_data.character,longerBeamBase:getCallSign(),longerBeamBase:getSectorName())
 			end
 		end
 	end
@@ -9314,7 +9314,7 @@ function setOptionalMissions()
 	if damageBeamBase ~= nil then
 		damageBeamGood, damageBeamGoodBase = chooseUpgradeGoodBase(damageBeamBase)
 		damageBeamBase.comms_data.character = "Sally Jenkins"
-		damageBeamBase.comms_data.characterDescription = "She can make your beams hit harder"
+		damageBeamBase.comms_data.characterDescription = _("characterInfo-comms", "She can make your beams hit harder")
 		damageBeamBase.comms_data.characterFunction = "damageBeam"
 		if damageBeamGood == nil then
 			damageBeamBase.comms_data.characterGood = vapor_goods[math.random(1,#vapor_goods)]			
@@ -9330,7 +9330,7 @@ function setOptionalMissions()
 				missionAttemptCount = missionAttemptCount + 1
 			until(clueStation ~= nil or missionAttemptCount > repeatExitBoundary)
 			if clueStation ~= nil then
-				clueStation.comms_data.gossip = string.format("You should visit %s in %s. There's a specialist in beam technology that can increase the damage done by your beams. Her name is %s",damageBeamBase:getCallSign(),damageBeamBase:getSectorName(),damageBeamBase.comms_data.character)
+				clueStation.comms_data.gossip = string.format(_("gossip-comms", "You should visit %s in %s. There's a specialist in beam technology that can increase the damage done by your beams. Her name is %s"),damageBeamBase:getCallSign(),damageBeamBase:getSectorName(),damageBeamBase.comms_data.character)
 			end
 		end
 	end
@@ -9356,7 +9356,7 @@ function setOptionalMissions()
 	if moreMissilesBase ~= nil then
 		moreMissilesGood, moreMissilesGoodBase = chooseUpgradeGoodBase(moreMissilesBase)
 		moreMissilesBase.comms_data.character = "Anh Dung Ly"
-		moreMissilesBase.comms_data.characterDescription = "He can fit more missiles aboard your ship"
+		moreMissilesBase.comms_data.characterDescription = _("characterInfo-comms", "He can fit more missiles aboard your ship")
 		moreMissilesBase.comms_data.characterFunction = "moreMissiles"
 		if moreMissilesGood == nil then
 			moreMissilesBase.comms_data.characterGood = vapor_goods[math.random(1,#vapor_goods)]			
@@ -9372,7 +9372,7 @@ function setOptionalMissions()
 				missionAttemptCount = missionAttemptCount + 1
 			until(clueStation ~= nil or missionAttemptCount > repeatExitBoundary)
 			if clueStation ~= nil then
-				clueStation.comms_data.gossip = string.format("Want to store more missiles on your ship? Talk to %s on station %s in %s. He can retrain your missile loaders and missile storage automation such that you will be able to store more missiles",moreMissilesBase.comms_data.character,moreMissilesBase:getCallSign(),moreMissilesBase:getSectorName())
+				clueStation.comms_data.gossip = string.format(_("gossip-comms", "Want to store more missiles on your ship? Talk to %s on station %s in %s. He can retrain your missile loaders and missile storage automation such that you will be able to store more missiles"),moreMissilesBase.comms_data.character,moreMissilesBase:getCallSign(),moreMissilesBase:getSectorName())
 			end
 		end
 	end
@@ -9398,7 +9398,7 @@ function setOptionalMissions()
 	if fasterImpulseBase ~= nil then
 		fasterImpulseGood, fasterImpulseGoodBase = chooseUpgradeGoodBase(fasterImpulseBase)
 		fasterImpulseBase.comms_data.character = "Doralla Ognats"
-		fasterImpulseBase.comms_data.characterDescription = "She can soup up your impulse engines"
+		fasterImpulseBase.comms_data.characterDescription = _("characterInfo-comms", "She can soup up your impulse engines")
 		fasterImpulseBase.comms_data.characterFunction = "fasterImpulse"
 		if fasterImpulseGood == nil then
 			fasterImpulseBase.comms_data.characterGood = vapor_goods[math.random(1,#vapor_goods)]			
@@ -9414,7 +9414,7 @@ function setOptionalMissions()
 				missionAttemptCount = missionAttemptCount + 1
 			until(clueStation ~= nil or missionAttemptCount > repeatExitBoundary)
 			if clueStation ~= nil then
-				clueStation.comms_data.gossip = string.format("%s, an engineer/mechanic who knows propulsion systems backwards and forwards has a bay at the shipyard on %s in %s. She can give your impulse engines a significant boost to their top speed",fasterImpulseBase.comms_data.character,fasterImpulseBase:getCallSign(),fasterImpulseBase:getSectorName())
+				clueStation.comms_data.gossip = string.format(_("gossip-comms", "%s, an engineer/mechanic who knows propulsion systems backwards and forwards has a bay at the shipyard on %s in %s. She can give your impulse engines a significant boost to their top speed"),fasterImpulseBase.comms_data.character,fasterImpulseBase:getCallSign(),fasterImpulseBase:getSectorName())
 			end
 		end
 	end
@@ -9440,7 +9440,7 @@ function setOptionalMissions()
 	if strongerHullBase ~= nil then
 		strongerHullGood, strongerHullGoodBase = chooseUpgradeGoodBase(strongerHullBase)
 		strongerHullBase.comms_data.character = "Maduka Lawal"
-		strongerHullBase.comms_data.characterDescription = "He can strengthen your hull"
+		strongerHullBase.comms_data.characterDescription = _("characterInfo-comms", "He can strengthen your hull")
 		strongerHullBase.comms_data.characterFunction = "strongerHull"
 		if strongerHullGood ~= nil then
 			strongerHullBase.comms_data.characterGood = vapor_goods[math.random(1,#vapor_goods)]			
@@ -9456,7 +9456,7 @@ function setOptionalMissions()
 				missionAttemptCount = missionAttemptCount + 1
 			until(clueStation ~= nil or missionAttemptCount > repeatExitBoundary)
 			if clueStation ~= nil then
-				clueStation.comms_data.gossip = string.format("I know of a materials specialist on %s in %s named %s. He can strengthen the hull on your ship",strongerHullBase:getCallSign(),strongerHullBase:getSectorName(),strongerHullBase.comms_data.character)
+				clueStation.comms_data.gossip = string.format(_("gossip-comms", "I know of a materials specialist on %s in %s named %s. He can strengthen the hull on your ship"),strongerHullBase:getCallSign(),strongerHullBase:getSectorName(),strongerHullBase.comms_data.character)
 			end
 		end
 	end
@@ -9482,7 +9482,7 @@ function setOptionalMissions()
 	if efficientBatteriesBase ~= nil then
 		efficientBatteriesGood, efficientBatteriesGoodBase = chooseUpgradeGoodBase(efficientBatteriesBase)
 		efficientBatteriesBase.comms_data.character = "Susil Tarigan"
-		efficientBatteriesBase.comms_data.characterDescription = "She knows how to increase your maximum energy capacity by improving battery efficiency"
+		efficientBatteriesBase.comms_data.characterDescription = _("characterInfo-comms", "She knows how to increase your maximum energy capacity by improving battery efficiency")
 		efficientBatteriesBase.comms_data.characterFunction = "efficientBatteries"
 		if efficientBatteriesGood == nil then
 			efficientBatteriesBase.comms_data.characterGood = vapor_goods[math.random(1,#vapor_goods)]			
@@ -9498,7 +9498,7 @@ function setOptionalMissions()
 				missionAttemptCount = missionAttemptCount + 1
 			until(clueStation ~= nil or missionAttemptCount > repeatExitBoundary)
 			if clueStation ~= nil then
-				clueStation.comms_data.gossip = string.format("Have you heard about %s? She's on %s in %s and she can give your ship greater energy capacity by improving your battery efficiency",efficientBatteriesBase.comms_data.character,efficientBatteriesBase:getCallSign(),efficientBatteriesBase:getSectorName())
+				clueStation.comms_data.gossip = string.format(_("gossip-comms", "Have you heard about %s? She's on %s in %s and she can give your ship greater energy capacity by improving your battery efficiency"),efficientBatteriesBase.comms_data.character,efficientBatteriesBase:getCallSign(),efficientBatteriesBase:getSectorName())
 			end
 		end
 	end
@@ -9524,7 +9524,7 @@ function setOptionalMissions()
 	if strongerShieldsBase ~= nil then
 		strongerShieldsGood, strongerShieldsGoodBase = chooseUpgradeGoodBase(strongerShieldsBase)
 		strongerShieldsBase.comms_data.character = "Paulo Silva"
-		strongerShieldsBase.comms_data.characterDescription = "He can strengthen your shields"
+		strongerShieldsBase.comms_data.characterDescription = _("characterInfo-comms", "He can strengthen your shields")
 		strongerShieldsBase.comms_data.characterFunction = "strongerShields"
 		if strongerShieldsGood == nil then
 			strongerShieldsBase.comms_data.characterGood = vapor_goods[math.random(1,#vapor_goods)]			
@@ -9540,7 +9540,7 @@ function setOptionalMissions()
 				missionAttemptCount = missionAttemptCount + 1
 			until(clueStation ~= nil or missionAttemptCount > repeatExitBoundary)
 			if clueStation ~= nil then
-				clueStation.comms_data.gossip = string.format("If you stop at %s in %s, you should talk to %s. He can strengthen your shields. Trust me, it's always good to have stronger shields",strongerShieldsBase:getCallSign(),strongerShieldsBase:getSectorName(),strongerShieldsBase.comms_data.character)
+				clueStation.comms_data.gossip = string.format(_("gossip-comms", "If you stop at %s in %s, you should talk to %s. He can strengthen your shields. Trust me, it's always good to have stronger shields"),strongerShieldsBase:getCallSign(),strongerShieldsBase:getSectorName(),strongerShieldsBase.comms_data.character)
 			end
 		end
 	end
@@ -10122,7 +10122,7 @@ function commsStation()
         return false
     end
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage("We are under attack! No time for chatting!");
+        setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"));
         return true
     end
     if not comms_source:isDocked(comms_target) then
@@ -10136,19 +10136,19 @@ function handleDockedState()
 	local ctd = comms_target.comms_data
     if comms_source:isFriendly(comms_target) then
     	if ctd.friendlyness > 66 then
-    		oMsg = string.format("Greetings %s!\nHow may we help you today?",comms_source:getCallSign())
+    		oMsg = string.format(_("station-comms", "Greetings %s!\nHow may we help you today?"),comms_source:getCallSign())
     	elseif ctd.friendlyness > 33 then
-			oMsg = "Good day, officer!\nWhat can we do for you today?"
+			oMsg = _("station-comms", "Good day, officer!\nWhat can we do for you today?")
 		else
-			oMsg = "Hello, may I help you?"
+			oMsg = _("station-comms", "Hello, may I help you?")
 		end
     else
-		oMsg = "Welcome to our lovely station."
+		oMsg = _("station-comms", "Welcome to our lovely station.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "\nForgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
+		oMsg = oMsg .. _("station-comms", "\nForgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
 	end
-	oMsg = string.format("%s\n\nReputation: %i",oMsg,math.floor(comms_source:getReputationPoints()))
+	oMsg = string.format(_("station-comms", "%s\n\nReputation: %i"),oMsg,math.floor(comms_source:getReputationPoints()))
 	setCommsMessage(oMsg)
 	local missilePresence = 0
 	local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
@@ -10161,22 +10161,22 @@ function handleDockedState()
 			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
 			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
 			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
-			addCommsReply("I need ordnance restocked", function()
+			addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
 				local ctd = comms_target.comms_data
 				if stationCommsDiagnostic then print("in restock function") end
-				setCommsMessage(string.format("What type of ordnance?\n\nReputation: %i",math.floor(comms_source:getReputationPoints())))
+				setCommsMessage(string.format(_("ammo-comms", "What type of ordnance?\n\nReputation: %i"),math.floor(comms_source:getReputationPoints())))
 				if stationCommsDiagnostic then print(string.format("player nuke weapon storage max: %.1f",comms_source:getWeaponStorageMax("Nuke"))) end
 				if comms_source:getWeaponStorageMax("Nuke") > 0 then
 					if stationCommsDiagnostic then print("player can fire nukes") end
 					if ctd.weapon_available.Nuke then
 						if stationCommsDiagnostic then print("station has nukes available") end
 						if math.random(1,10) <= 5 then
-							nukePrompt = "Can you supply us with some nukes? ("
+							nukePrompt = _("ammo-comms", "Can you supply us with some nukes? (")
 						else
-							nukePrompt = "We really need some nukes ("
+							nukePrompt = _("ammo-comms", "We really need some nukes (")
 						end
 						if stationCommsDiagnostic then print("nuke prompt: " .. nukePrompt) end
-						addCommsReply(nukePrompt .. getWeaponCost("Nuke") .. " rep each)", function()
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
 							if stationCommsDiagnostic then print("going to handle weapon restock function") end
 							handleWeaponRestock("Nuke")
 						end)
@@ -10185,11 +10185,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("EMP") > 0 then
 					if ctd.weapon_available.EMP then
 						if math.random(1,10) <= 5 then
-							empPrompt = "Please re-stock our EMP missiles. ("
+							empPrompt = _("ammo-comms", "Please re-stock our EMP missiles. (")
 						else
-							empPrompt = "Got any EMPs? ("
+							empPrompt = _("ammo-comms", "Got any EMPs? (")
 						end
-						addCommsReply(empPrompt .. getWeaponCost("EMP") .. " rep each)", function()
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), empPrompt, getWeaponCost("EMP")), function()
 							handleWeaponRestock("EMP")
 						end)
 					end	--end station has EMP available if branch
@@ -10197,11 +10197,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("Homing") > 0 then
 					if ctd.weapon_available.Homing then
 						if math.random(1,10) <= 5 then
-							homePrompt = "Do you have spare homing missiles for us? ("
+							homePrompt = _("ammo-comms", "Do you have spare homing missiles for us? (")
 						else
-							homePrompt = "Do you have extra homing missiles? ("
+							homePrompt = _("ammo-comms", "Do you have extra homing missiles? (")
 						end
-						addCommsReply(homePrompt .. getWeaponCost("Homing") .. " rep each)", function()
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), homePrompt, getWeaponCost("Homing")), function()
 							handleWeaponRestock("Homing")
 						end)
 					end	--end station has homing for player if branch
@@ -10209,11 +10209,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("Mine") > 0 then
 					if ctd.weapon_available.Mine then
 						if math.random(1,10) <= 5 then
-							minePrompt = "We could use some mines. ("
+							minePrompt = _("ammo-comms", "We could use some mines. (")
 						else
-							minePrompt = "How about mines? ("
+							minePrompt = _("ammo-comms", "How about mines? (")
 						end
-						addCommsReply(minePrompt .. getWeaponCost("Mine") .. " rep each)", function()
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), minePrompt, getWeaponCost("Mine")), function()
 							handleWeaponRestock("Mine")
 						end)
 					end	--end station has mine for player if branch
@@ -10221,11 +10221,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("HVLI") > 0 then
 					if ctd.weapon_available.HVLI then
 						if math.random(1,10) <= 5 then
-							hvliPrompt = "What about HVLI? ("
+							hvliPrompt = _("ammo-comms", "What about HVLI? (")
 						else
-							hvliPrompt = "Could you provide HVLI? ("
+							hvliPrompt = _("ammo-comms", "Could you provide HVLI? (")
 						end
-						addCommsReply(hvliPrompt .. getWeaponCost("HVLI") .. " rep each)", function()
+						addCommsReply(string.format(_("ammo-comms", "%s%d rep each)"), hvliPrompt, getWeaponCost("HVLI")), function()
 							handleWeaponRestock("HVLI")
 						end)
 					end	--end station has HVLI for player if branch
@@ -10233,114 +10233,114 @@ function handleDockedState()
 			end)	--end player requests secondary ordnance comms reply branch
 		end	--end secondary ordnance available from station if branch
 	end	--end missles used on player ship if branch
-	addCommsReply("Docking services status", function()
-		local service_status = string.format("Station %s docking services status:",comms_target:getCallSign())
+	addCommsReply(_("stationServices-comms", "Docking services status"), function()
+		local service_status = string.format(_("stationServices-comms", "Station %s docking services status:"),comms_target:getCallSign())
 		if comms_target:getRestocksScanProbes() then
-			service_status = string.format("%s\nReplenish scan probes.",service_status)
+			service_status = string.format(_("stationServices-comms", "%s\nReplenish scan probes."),service_status)
 		else
 			if comms_target.probe_fail_reason == nil then
 				local reason_list = {
-					"Cannot replenish scan probes due to fabrication unit failure.",
-					"Parts shortage prevents scan probe replenishment.",
-					"Station management has curtailed scan probe replenishment for cost cutting reasons.",
+					_("stationServices-comms", "Cannot replenish scan probes due to fabrication unit failure."),
+					_("stationServices-comms", "Parts shortage prevents scan probe replenishment."),
+					_("stationServices-comms", "Station management has curtailed scan probe replenishment for cost cutting reasons."),
 				}
 				comms_target.probe_fail_reason = reason_list[math.random(1,#reason_list)]
 			end
-			service_status = string.format("%s\n%s",service_status,comms_target.probe_fail_reason)
+			service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.probe_fail_reason)
 		end
 		if comms_target:getRepairDocked() then
-			service_status = string.format("%s\nShip hull repair.",service_status)
+			service_status = string.format(_("stationServices-comms", "%s\nShip hull repair."),service_status)
 		else
 			if comms_target.repair_fail_reason == nil then
 				reason_list = {
-					"We're out of the necessary materials and supplies for hull repair.",
-					"Hull repair automation unavailable while it is undergoing maintenance.",
-					"All hull repair technicians quarantined to quarters due to illness.",
+					_("stationServices-comms", "We're out of the necessary materials and supplies for hull repair."),
+					_("stationServices-comms", "Hull repair automation unavailable while it is undergoing maintenance."),
+					_("stationServices-comms", "All hull repair technicians quarantined to quarters due to illness."),
 				}
 				comms_target.repair_fail_reason = reason_list[math.random(1,#reason_list)]
 			end
-			service_status = string.format("%s\n%s",service_status,comms_target.repair_fail_reason)
+			service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.repair_fail_reason)
 		end
 		if comms_target:getSharesEnergyWithDocked() then
-			service_status = string.format("%s\nRecharge ship energy stores.",service_status)
+			service_status = string.format(_("stationServices-comms", "%s\nRecharge ship energy stores."),service_status)
 		else
 			if comms_target.energy_fail_reason == nil then
 				reason_list = {
-					"A recent reactor failure has put us on auxiliary power, so we cannot recharge ships.",
-					"A damaged power coupling makes it too dangerous to recharge ships.",
-					"An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now.",
+					_("stationServices-comms", "A recent reactor failure has put us on auxiliary power, so we cannot recharge ships."),
+					_("stationServices-comms", "A damaged power coupling makes it too dangerous to recharge ships."),
+					_("stationServices-comms", "An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now."),
 				}
 				comms_target.energy_fail_reason = reason_list[math.random(1,#reason_list)]
 			end
-			service_status = string.format("%s\n%s",service_status,comms_target.energy_fail_reason)
+			service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.energy_fail_reason)
 		end
 		if comms_target.comms_data.jump_overcharge then
-			service_status = string.format("%s\nMay overcharge jump drive",service_status)
+			service_status = string.format(_("stationServices-comms", "%s\nMay overcharge jump drive"),service_status)
 		end
-		service_status = string.format("%s\nMay repair the following primary systems:",service_status)		
+		service_status = string.format(_("stationServices-comms", "%s\nMay repair the following primary systems:"),service_status)		
 		local line_item_count = 0
 		for _, system in ipairs(system_list) do
 			if comms_target.comms_data.system_repair[system] then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
 				service_status = service_status .. system .. "  "
 				line_item_count = line_item_count + 1
 			end
 		end
-		service_status = string.format("%s\nMay repair the coolant pump on the following primary systems:",service_status)
+		service_status = string.format(_("stationServices-comms", "%s\nMay repair the coolant pump on the following primary systems:"),service_status)
 		line_item_count = 0
 		for _, system in ipairs(system_list) do
 			if comms_target.comms_data.coolant_pump_repair[system] then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
 				service_status = service_status .. system .. "  "
 				line_item_count = line_item_count + 1
 			end
 		end
-		service_status = string.format("%s\nMay repair the following secondary systems:",service_status)
+		service_status = string.format(_("stationServices-comms", "%s\nMay repair the following secondary systems:"),service_status)
 		line_item_count = 0	
 		if comms_target.comms_data.probe_launch_repair then
 			if line_item_count == 0 or line_item_count >= 3 then
-				service_status = service_status .. "\n    "
+				service_status = service_status .. _("stationServices-comms", "\n    ")
 				line_item_count = 0
 			end
-			service_status = string.format("%sprobe launch system   ",service_status)
+			service_status = string.format(_("stationServices-comms", "%sprobe launch system   "),service_status)
 			line_item_count = line_item_count + 1
 		end
 		if comms_target.comms_data.hack_repair then
 			if line_item_count == 0 or line_item_count >= 3 then
-				service_status = service_status .. "\n    "
+				service_status = service_status .. _("stationServices-comms", "\n    ")
 				line_item_count = 0
 			end
-			service_status = string.format("%shacking system   ",service_status)
+			service_status = string.format(_("stationServices-comms", "%shacking system   "),service_status)
 			line_item_count = line_item_count + 1
 		end
 		if comms_target.comms_data.scan_repair then
 			if line_item_count == 0 or line_item_count >= 3 then
-				service_status = service_status .. "\n    "
+				service_status = service_status .. _("stationServices-comms", "\n    ")
 				line_item_count = 0
 			end
-			service_status = string.format("%sscanners   ",service_status)
+			service_status = string.format(_("stationServices-comms", "%sscanners   "),service_status)
 			line_item_count = line_item_count + 1
 		end
 		if comms_target.comms_data.combat_maneuver_repair then
 			if line_item_count == 0 or line_item_count >= 3 then
-				service_status = service_status .. "\n    "
+				service_status = service_status .. _("stationServices-comms", "\n    ")
 				line_item_count = 0
 			end
-			service_status = string.format("%scombat maneuver   ",service_status)
+			service_status = string.format(_("stationServices-comms", "%scombat maneuver   "),service_status)
 			line_item_count = line_item_count + 1
 		end
 		if comms_target.comms_data.self_destruct_repair then
 			if line_item_count == 0 or line_item_count >= 3 then
-				service_status = service_status .. "\n    "
+				service_status = service_status .. _("stationServices-comms", "\n    ")
 				line_item_count = 0
 			end
-			service_status = string.format("%sself destruct system   ",service_status)
+			service_status = string.format(_("stationServices-comms", "%sself destruct system   "),service_status)
 		end
 		setCommsMessage(service_status)
 		addCommsReply(_("Back"), commsStation)
@@ -10352,12 +10352,12 @@ function handleDockedState()
 				max_charge = 50000
 			end
 			if comms_source:getJumpDriveCharge() >= max_charge then
-				addCommsReply("Overcharge Jump Drive (10 Rep)",function()
+				addCommsReply(_("stationServices-comms", "Overcharge Jump Drive (10 Rep)"),function()
 					if comms_source:takeReputationPoints(10) then
 						comms_source:setJumpDriveCharge(comms_source:getJumpDriveCharge() + max_charge)
-						setCommsMessage(string.format("Your jump drive has been overcharged to %ik",math.floor(comms_source:getJumpDriveCharge()/1000)))
+						setCommsMessage(string.format(_("stationServices-comms", "Your jump drive has been overcharged to %ik"),math.floor(comms_source:getJumpDriveCharge()/1000)))
 					else
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -10390,8 +10390,8 @@ function handleDockedState()
 		end
 	end
 	if offer_repair then
-		addCommsReply("Repair ship system",function()
-			setCommsMessage(string.format("What system would you like repaired?\n\nReputation: %i",math.floor(comms_source:getReputationPoints())))
+		addCommsReply(_("stationServices-comms", "Repair ship system"),function()
+			setCommsMessage(string.format(_("stationServices-comms", "What system would you like repaired?\n\nReputation: %i"),math.floor(comms_source:getReputationPoints())))
 			local system_list = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
 			for _, system in ipairs(system_list) do
 				if repair_system_diagnostic then
@@ -10405,13 +10405,13 @@ function handleDockedState()
 						if repair_system_diagnostic then
 							print(comms_source:getCallSign(),"needs repairs on:",system,"current health max:",comms_source:getSystemHealthMax(system))
 						end
-						addCommsReply(string.format("Repair %s (current max is %i%%) (5 Rep)",system,math.floor(comms_source:getSystemHealthMax(system)*100)),function()
+						addCommsReply(string.format(_("stationServices-comms", "Repair %s (current max is %i%%) (5 Rep)"),system,math.floor(comms_source:getSystemHealthMax(system)*100)),function()
 							if comms_source:takeReputationPoints(5) then
 								comms_source:setSystemHealthMax(system,1)
 								comms_source:setSystemHealth(system,1)
-								setCommsMessage(string.format("%s has been repaired",system))
+								setCommsMessage(string.format(_("stationServices-comms", "%s has been repaired"),system))
 							else
-								setCommsMessage("Insufficient reputation")
+								setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 							end
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -10425,12 +10425,12 @@ function handleDockedState()
 						if repair_system_diagnostic then
 							print(comms_source:getCallSign(),"needs the coolant pump repaired for:",system)
 						end
-						addCommsReply(string.format("Repair %s coolant pump (5 Rep)",system),function()
+						addCommsReply(string.format(_("stationServices-comms", "Repair %s coolant pump (5 Rep)"),system),function()
 							if comms_source:takeReputationPoints(5) then
 								comms_source:setSystemCoolantRate(system,comms_source.normal_coolant_rate[system])
-								setCommsMessage(string.format("%s coolant pump has been repaired",system))
+								setCommsMessage(string.format(_("stationServices-comms", "%s coolant pump has been repaired"),system))
 							else
-								setCommsMessage("Insufficient reputation")
+								setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 							end
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -10445,12 +10445,12 @@ function handleDockedState()
 					if repair_system_diagnostic then
 						print(comms_source:getCallSign(),"needs probe launch system repaired")
 					end
-					addCommsReply("Repair probe launch system (5 Rep)",function()
+					addCommsReply(_("stationServices-comms", "Repair probe launch system (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanLaunchProbe(true)
-							setCommsMessage("Your probe launch system has been repaired")
+							setCommsMessage(_("stationServices-comms", "Your probe launch system has been repaired"))
 						else
-							setCommsMessage("Insufficient reputation")
+							setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -10464,12 +10464,12 @@ function handleDockedState()
 					if repair_system_diagnostic then
 						print(comms_source:getCallSign(),"needs hacking repaired")
 					end
-					addCommsReply("Repair hacking system (5 Rep)",function()
+					addCommsReply(_("stationServices-comms", "Repair hacking system (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanHack(true)
-							setCommsMessage("Your hack system has been repaired")
+							setCommsMessage(_("stationServices-comms", "Your hack system has been repaired"))
 						else
-							setCommsMessage("Insufficient reputation")
+							setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -10483,12 +10483,12 @@ function handleDockedState()
 					if repair_system_diagnostic then
 						print(comms_source:getCallSign(),"needs scanners repaired")
 					end
-					addCommsReply("Repair scanners (5 Rep)",function()
+					addCommsReply(_("stationServices-comms", "Repair scanners (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanScan(true)
-							setCommsMessage("Your scanners have been repaired")
+							setCommsMessage(_("stationServices-comms", "Your scanners have been repaired"))
 						else
-							setCommsMessage("Insufficient reputation")
+							setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -10502,12 +10502,12 @@ function handleDockedState()
 					if repair_system_diagnostic then
 						print(comms_source:getCallSign(),"needs combat maneuver repaired")
 					end
-					addCommsReply("Repair combat maneuver (5 Rep)",function()
+					addCommsReply(_("stationServices-comms", "Repair combat maneuver (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanCombatManeuver(true)
-							setCommsMessage("Your combat maneuver has been repaired")
+							setCommsMessage(_("stationServices-comms", "Your combat maneuver has been repaired"))
 						else
-							setCommsMessage("Insufficient reputation")
+							setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -10521,12 +10521,12 @@ function handleDockedState()
 					if repair_system_diagnostic then
 						print(comms_source:getCallSign(),"needs self destruct system repaired")
 					end
-					addCommsReply("Repair self destruct system (5 Rep)",function()
+					addCommsReply(_("stationServices-comms", "Repair self destruct system (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanSelfDestruct(true)
-							setCommsMessage("Your self destruct system has been repaired")
+							setCommsMessage(_("stationServices-comms", "Your self destruct system has been repaired"))
 						else
-							setCommsMessage("Insufficient reputation")
+							setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -10561,7 +10561,7 @@ function handleDockedState()
     				out = out .. "\nactivated"
     				setCommsMessage(out)
     			else
-    				setCommsMessage("Insufficient reputation")
+    				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
     			end
 				addCommsReply(_("Back"), commsStation)
     		end)
@@ -10571,16 +10571,16 @@ function handleDockedState()
 	if (comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "") or
 		(comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "") or
 		(comms_source:isFriendly(comms_target) and comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" and has_gossip) then
-		addCommsReply("Tell me more about your station", function()
-			setCommsMessage("What would you like to know?")
+		addCommsReply(_("station-comms", "Tell me more about your station"), function()
+			setCommsMessage(_("station-comms", "What would you like to know?"))
 			if comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "" then
-				addCommsReply("General information", function()
+				addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 					setCommsMessage(ctd.general)
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if ctd.history ~= nil and ctd.history ~= "" then
-				addCommsReply("Station history", function()
+				addCommsReply(_("stationStory-comms", "Station history"), function()
 					setCommsMessage(ctd.history)
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -10588,7 +10588,7 @@ function handleDockedState()
 			if comms_source:isFriendly(comms_target) then
 				if ctd.gossip ~= nil and ctd.gossip ~= "" then
 					if random(1,100) < (100 - (30 * (difficulty - .5))) then
-						addCommsReply("Gossip", function()
+						addCommsReply(_("gossip-comms", "Gossip"), function()
 							setCommsMessage(ctd.gossip)
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -10599,28 +10599,28 @@ function handleDockedState()
 		end)	--end station info comms reply branch
 	end
 	if enemyEverDetected then
-		addCommsReply("Why the yellow neutral border zones?", function()
-			setCommsMessage("Each neutral border zone is equipped with sensors and an auto-transmitter. If the sensors detect enemy forces in the zone, the auto-transmitter sends encoded zone identifying details through subspace. Human navy ships are equipped to recognize this data and color code the appropriate zone on the science and relay consoles.")
+		addCommsReply(_("station-comms", "Why the yellow neutral border zones?"), function()
+			setCommsMessage(_("station-comms", "Each neutral border zone is equipped with sensors and an auto-transmitter. If the sensors detect enemy forces in the zone, the auto-transmitter sends encoded zone identifying details through subspace. Human navy ships are equipped to recognize this data and color code the appropriate zone on the science and relay consoles."))
 			addCommsReply(_("Back"),commsStation)
 		end)
 	end
 	if ctd.character ~= nil then
-		addCommsReply(string.format("Tell me about %s",ctd.character), function()
+		addCommsReply(string.format(_("characterInfo-comms", "Tell me about %s"),ctd.character), function()
 			if ctd.characterDescription ~= nil then
 				setCommsMessage(ctd.characterDescription)
 			else
 				if ctd.characterDeadEnd == nil then
 					local deadEndChoice = math.random(1,5)
 					if deadEndChoice == 1 then
-						ctd.characterDeadEnd = "Never heard of " .. ctd.character
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "Never heard of %s"), ctd.character)
 					elseif deadEndChoice == 2 then
-						ctd.characterDeadEnd = ctd.character .. " died last week. The funeral was yesterday"
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s died last week. The funeral was yesterday"), ctd.character)
 					elseif deadEndChoice == 3 then
-						ctd.characterDeadEnd = string.format("%s? Who's %s? There's nobody here named %s",ctd.character,ctd.character,ctd.character)
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s? Who's %s? There's nobody here named %s"),ctd.character,ctd.character,ctd.character)
 					elseif deadEndChoice == 4 then
-						ctd.characterDeadEnd = string.format("We don't talk about %s. They are gone and good riddance",ctd.character)
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "We don't talk about %s. They are gone and good riddance"),ctd.character)
 					else
-						ctd.characterDeadEnd = string.format("I think %s moved away",ctd.character)
+						ctd.characterDeadEnd = string.format(_("characterInfo-comms", "I think %s moved away"),ctd.character)
 					end
 				end
 				setCommsMessage(ctd.characterDeadEnd)
@@ -10662,12 +10662,12 @@ function handleDockedState()
 		end)
 	end
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply("What are my current orders?", function()
+		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			setOptionalOrders()
 			setSecondaryOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
-				ordMsg = ordMsg .. string.format("\n   %i Minutes remain in game",math.floor(gameTimeLimit/60))
+				ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -10679,7 +10679,7 @@ function handleDockedState()
 			end
 			addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hireCost), function()
 				if not comms_source:takeReputationPoints(hireCost) then
-					setCommsMessage("Insufficient reputation")
+					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
 					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
 					setCommsMessage(_("trade-comms", "Repair crew member hired"))
@@ -10695,7 +10695,7 @@ function handleDockedState()
 				end
 				addCommsReply(string.format(_("trade-comms", "Purchase coolant for %i reputation"),coolantCost), function()
 					if not comms_source:takeReputationPoints(coolantCost) then
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					else
 						comms_source:setMaxCoolant(comms_source:getMaxCoolant() + 2)
 						setCommsMessage(_("trade-comms", "Additional coolant purchased"))
@@ -10712,7 +10712,7 @@ function handleDockedState()
 			end
 			addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hireCost), function()
 				if not comms_source:takeReputationPoints(hireCost) then
-					setCommsMessage("Insufficient reputation")
+					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
 					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
 					setCommsMessage(_("trade-comms", "Repair crew member hired"))
@@ -10728,7 +10728,7 @@ function handleDockedState()
 				end
 				addCommsReply(string.format(_("trade-comms", "Purchase coolant for %i reputation"),coolantCost), function()
 					if not comms_source:takeReputationPoints(coolantCost) then
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					else
 						comms_source:setMaxCoolant(comms_source:getMaxCoolant() + 2)
 						setCommsMessage(_("trade-comms", "Additional coolant purchased"))
@@ -10738,26 +10738,26 @@ function handleDockedState()
 			end
 		end
 	end
-	addCommsReply("Visit cartography office", function()
+	addCommsReply(_("cartographyOffice-comms", "Visit cartography office"), function()
 		if comms_target.cartographer_description == nil then
 			local clerk_choice = math.random(1,3)
 			if clerk_choice == 1 then
-				comms_target.cartographer_description = "The clerk behind the desk looks up briefly at you then goes back to filing her nails."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk looks up briefly at you then goes back to filing her nails.")
 			elseif clerk_choice == 2 then
-				comms_target.cartographer_description = "The clerk behind the desk examines you then returns to grooming her tentacles."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk examines you then returns to grooming her tentacles.")
 			else
-				comms_target.cartographer_description = "The clerk behind the desk glances at you then returns to preening her feathers."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk glances at you then returns to preening her feathers.")
 			end
 		end
-		setCommsMessage(string.format("%s\n\nYou can examine the brochure on the coffee table, talk to the apprentice cartographer or talk to the master cartographer.\n\nReputation: %i",comms_target.cartographer_description,math.floor(comms_source:getReputationPoints())))
-		addCommsReply("What's the difference between the apprentice and the master?", function()
-			setCommsMessage("The clerk responds in a bored voice, 'The apprentice knows the local area and is learning the broader area. The master knows the local and the broader area but can't be bothered with the local area'")
+		setCommsMessage(string.format(_("cartographyOffice-comms", "%s\n\nYou can examine the brochure on the coffee table, talk to the apprentice cartographer or talk to the master cartographer.\n\nReputation: %i"),comms_target.cartographer_description,math.floor(comms_source:getReputationPoints())))
+		addCommsReply(_("cartographyOffice-comms", "What's the difference between the apprentice and the master?"), function()
+			setCommsMessage(_("cartographyOffice-comms", "The clerk responds in a bored voice, 'The apprentice knows the local area and is learning the broader area. The master knows the local and the broader area but can't be bothered with the local area'"))
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply(string.format("Examine brochure (%i rep)",getCartographerCost()),function()
+		addCommsReply(string.format(_("cartographyOffice-comms", "Examine brochure (%i rep)"),getCartographerCost()),function()
 			if comms_source:takeReputationPoints(getCartographerCost()) then
-				setCommsMessage(string.format("The brochure has a list of nearby stations and has a list of goods nearby.\n\nReputation: %i",math.floor(comms_source:getReputationPoints())))
-				addCommsReply(string.format("Examine station list (%i rep)",getCartographerCost()), function()
+				setCommsMessage(string.format(_("cartographyOffice-comms", "The brochure has a list of nearby stations and has a list of goods nearby.\n\nReputation: %i"),math.floor(comms_source:getReputationPoints())))
+				addCommsReply(string.format(_("cartographyOffice-comms", "Examine station list (%i rep)"),getCartographerCost()), function()
 					if comms_source:takeReputationPoints(getCartographerCost()) then
 						local brochure_stations = ""
 						local sx, sy = comms_target:getPosition()
@@ -10766,20 +10766,20 @@ function handleDockedState()
 							if obj.typeName == "SpaceStation" then
 								if not obj:isEnemy(comms_target) then
 									if brochure_stations == "" then
-										brochure_stations = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+										brochure_stations = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 									else
-										brochure_stations = string.format("%s\n%s %s %s",brochure_stations,obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+										brochure_stations = string.format(_("cartographyOffice-comms", "%s\n%s %s %s"),brochure_stations,obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 									end
 								end
 							end
 						end
 						setCommsMessage(brochure_stations)
 					else
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
 					addCommsReply(_("Back"),commsStation)
 				end)
-				addCommsReply(string.format("Examine goods list (%i rep)",getCartographerCost()), function()
+				addCommsReply(string.format(_("cartographyOffice-comms", "Examine goods list (%i rep)"),getCartographerCost()), function()
 					if comms_source:takeReputationPoints(getCartographerCost()) then
 						local brochure_goods = ""
 						local sx, sy = comms_target:getPosition()
@@ -10790,9 +10790,9 @@ function handleDockedState()
 									if obj.comms_data.goods ~= nil then
 										for good, good_data in pairs(obj.comms_data.goods) do
 											if brochure_goods == "" then
-												brochure_goods = string.format("Good, quantity, cost, station:\n%s, %i, %i, %s",good,good_data["quantity"],good_data["cost"],obj:getCallSign())
+												brochure_goods = string.format(_("cartographyOffice-comms", "Good, quantity, cost, station:\n%s, %i, %i, %s"),good,good_data["quantity"],good_data["cost"],obj:getCallSign())
 											else
-												brochure_goods = string.format("%s\n%s, %i, %i, %s",brochure_goods,good,good_data["quantity"],good_data["cost"],obj:getCallSign())
+												brochure_goods = string.format(_("cartographyOffice-comms", "%s\n%s, %i, %i, %s"),brochure_goods,good,good_data["quantity"],good_data["cost"],obj:getCallSign())
 											end
 										end
 									end
@@ -10801,7 +10801,7 @@ function handleDockedState()
 						end
 						setCommsMessage(brochure_goods)
 					else
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
 					addCommsReply(_("Back"),commsStation)
 				end)
@@ -10825,30 +10825,30 @@ function handleDockedState()
 					ctd.character_brochure = upgrade_stations
 				end
 				if #ctd.character_brochure > 0 then
-					addCommsReply(string.format("Examine upgrades list (%i rep)",getCartographerCost()), function()
+					addCommsReply(string.format(_("cartographyOffice-comms", "Examine upgrades list (%i rep)"),getCartographerCost()), function()
 						if comms_source:takeReputationPoints(getCartographerCost()) then
 							local brochure_upgrades = ""
 							for i=1,#ctd.character_brochure do
 								local upgrade_station = ctd.character_brochure[i]
 								if brochure_upgrades == "" then
-									brochure_upgrades = string.format("%s: %s: %s",upgrade_station:getCallSign(),upgrade_station.comms_data.character,upgrade_station.comms_data.characterDescription)
+									brochure_upgrades = string.format(_("cartographyOffice-comms", "%s: %s: %s"),upgrade_station:getCallSign(),upgrade_station.comms_data.character,upgrade_station.comms_data.characterDescription)
 								else
-									brochure_upgrades = string.format("%s\n%s: %s: %s",brochure_upgrades,upgrade_station:getCallSign(),upgrade_station.comms_data.character,upgrade_station.comms_data.characterDescription)
+									brochure_upgrades = string.format(_("cartographyOffice-comms", "%s\n%s: %s: %s"),brochure_upgrades,upgrade_station:getCallSign(),upgrade_station.comms_data.character,upgrade_station.comms_data.characterDescription)
 								end
 							end
 							setCommsMessage(brochure_upgrades)
 						else
-							setCommsMessage("Insufficient reputation")
+							setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"),commsStation)
 					end)
 				end
 			else
-				setCommsMessage("Insufficient reputation")
+				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 			end
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply(string.format("Talk to apprentice cartographer (%i rep)",getCartographerCost("apprentice")), function()
+		addCommsReply(string.format(_("cartographyOffice-comms", "Talk to apprentice cartographer (%i rep)"),getCartographerCost("apprentice")), function()
 			if comms_source:takeReputationPoints(1) then
 				if ctd.character_apprentice == nil then
 					local upgrade_stations = {}
@@ -10866,12 +10866,12 @@ function handleDockedState()
 					ctd.character_apprentice = upgrade_stations
 				end
 				if #ctd.character_apprentice > 0 then
-					setCommsMessage("Hi, would you like for me to locate a station, some goods or some upgrades for you?")
+					setCommsMessage(_("cartographyOffice-comms", "Hi, would you like for me to locate a station, some goods or some upgrades for you?"))
 				else
-					setCommsMessage("Hi, would you like for me to locate a station or some goods for you?")
+					setCommsMessage(_("cartographyOffice-comms", "Hi, would you like for me to locate a station or some goods for you?"))
 				end
-				addCommsReply("Locate station", function()
-					setCommsMessage("These are stations I have learned")
+				addCommsReply(_("cartographyOffice-comms", "Locate station"), function()
+					setCommsMessage(_("cartographyOffice-comms", "These are stations I have learned"))
 					local sx, sy = comms_target:getPosition()
 					local nearby_objects = getObjectsInRadius(sx,sy,50000)
 					local stations_known = 0
@@ -10880,24 +10880,24 @@ function handleDockedState()
 							if not obj:isEnemy(comms_target) then
 								stations_known = stations_known + 1
 								addCommsReply(obj:getCallSign(),function()
-									local station_details = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+									local station_details = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 									if obj.comms_data.goods ~= nil then
-										station_details = string.format("%s\nGood, quantity, cost",station_details)
+										station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 										for good, good_data in pairs(obj.comms_data.goods) do
-											station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+											station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 										end
 									end
 									if obj.comms_data.general ~= nil then
-										station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general)
+										station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general)
 									end
 									if obj.comms_data.history ~= nil then
-										station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+										station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 									end
 									if obj.comms_data.gossip ~= nil then
-										station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+										station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 									end
 									if obj.comms_data.characterDescription ~= nil then
-										station_details = string.format("%s\n%s:\n   %s",station_details,obj.comms_data.character,obj.comms_data.characterDescription)
+										station_details = string.format(_("cartographyOffice-comms", "%s\n%s:\n   %s"),station_details,obj.comms_data.character,obj.comms_data.characterDescription)
 									end
 									setCommsMessage(station_details)
 									addCommsReply(_("Back"),commsStation)
@@ -10906,12 +10906,12 @@ function handleDockedState()
 						end
 					end
 					if stations_known == 0 then
-						setCommsMessage("I have learned of no stations yet")
+						setCommsMessage(_("cartographyOffice-comms", "I have learned of no stations yet"))
 					end
 					addCommsReply(_("Back"),commsStation)
 				end)
-				addCommsReply("Locate goods", function()
-					setCommsMessage("These are the goods I know about")
+				addCommsReply(_("cartographyOffice-comms", "Locate goods"), function()
+					setCommsMessage(_("cartographyOffice-comms", "These are the goods I know about"))
 					local sx, sy = comms_target:getPosition()
 					local nearby_objects = getObjectsInRadius(sx,sy,50000)
 					local button_count = 0
@@ -10929,24 +10929,24 @@ function handleDockedState()
 					end
 					for good, obj in pairs(by_goods) do
 						addCommsReply(good, function()
-							local station_details = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+							local station_details = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 							if obj.comms_data.goods ~= nil then
-								station_details = string.format("%s\nGood, quantity, cost",station_details)
+								station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 								for good, good_data in pairs(obj.comms_data.goods) do
-									station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+									station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 								end
 							end
 							if obj.comms_data.general ~= nil then
-								station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general)
+								station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general)
 							end
 							if obj.comms_data.history ~= nil then
-								station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+								station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 							end
 							if obj.comms_data.gossip ~= nil then
-								station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+								station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 							end
 							if obj.comms_data.characterDescription ~= nil then
-								station_details = string.format("%s\n%s:\n   %s",station_details,obj.comms_data.character,obj.comms_data.characterDescription)
+								station_details = string.format(_("cartographyOffice-comms", "%s\n%s:\n   %s"),station_details,obj.comms_data.character,obj.comms_data.characterDescription)
 							end
 							setCommsMessage(station_details)
 							addCommsReply(_("Back"),commsStation)
@@ -10959,8 +10959,8 @@ function handleDockedState()
 					addCommsReply(_("Back"),commsStation)
 				end)
 				if #ctd.character_apprentice > 0 then
-					addCommsReply("Locate upgrade station", function()
-						setCommsMessage("These are stations I have learned that have upgrades")
+					addCommsReply(_("cartographyOffice-comms", "Locate upgrade station"), function()
+						setCommsMessage(_("cartographyOffice-comms", "These are stations I have learned that have upgrades"))
 						local sx, sy = comms_target:getPosition()
 						local nearby_objects = getObjectsInRadius(sx,sy,50000)
 						local stations_known = 0
@@ -10970,24 +10970,24 @@ function handleDockedState()
 									if obj.comms_data.characterDescription ~= nil then
 										stations_known = stations_known + 1
 										addCommsReply(obj:getCallSign(), function()
-											local station_details = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+											local station_details = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 											if obj.comms_data.goods ~= nil then
-												station_details = string.format("%s\nGood, quantity, cost",station_details)
+												station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 												for good, good_data in pairs(obj.comms_data.goods) do
-													station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+													station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 												end
 											end
 											if obj.comms_data.general ~= nil then
-												station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general)
+												station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general)
 											end
 											if obj.comms_data.history ~= nil then
-												station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+												station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 											end
 											if obj.comms_data.gossip ~= nil then
-												station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+												station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 											end
 											if obj.comms_data.characterDescription ~= nil then
-												station_details = string.format("%s\n%s:\n   %s",station_details,obj.comms_data.character,obj.comms_data.characterDescription)
+												station_details = string.format(_("cartographyOffice-comms", "%s\n%s:\n   %s"),station_details,obj.comms_data.character,obj.comms_data.characterDescription)
 											end
 											setCommsMessage(station_details)
 											addCommsReply(_("Back"),commsStation)
@@ -10997,19 +10997,19 @@ function handleDockedState()
 							end
 						end
 						if stations_known == 0 then
-							setCommsMessage("I have learned of no upgrade stations yet")
+							setCommsMessage(_("cartographyOffice-comms", "I have learned of no upgrade stations yet"))
 						end
 					end)
 				end
 			else
-				setCommsMessage("Insufficient reputation")
+				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 			end
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply(string.format("Talk to master cartographer (%i rep)",getCartographerCost("master")), function()
+		addCommsReply(string.format(_("cartographyOffice-comms", "Talk to master cartographer (%i rep)"),getCartographerCost("master")), function()
 			if comms_source:getWaypointCount() >= 9 then
-				setCommsMessage("The clerk clears her throat:\n\nMy indicators show you have zero available waypoints. To get the most from the master cartographer, you should delete one or more so that he can update your systems appropriately.\n\nI just want you to get the maximum benefit for the time you spend with him")
-				addCommsReply("Continue to Master Cartographer", masterCartographer)
+				setCommsMessage(_("cartographyOffice-comms", "The clerk clears her throat:\n\nMy indicators show you have zero available waypoints. To get the most from the master cartographer, you should delete one or more so that he can update your systems appropriately.\n\nI just want you to get the maximum benefit for the time you spend with him"))
+				addCommsReply(_("cartographyOffice-comms", "Continue to Master Cartographer"), masterCartographer)
 			else
 				masterCartographer()
 			end
@@ -11060,7 +11060,7 @@ function handleDockedState()
 					if comms_source.cargo < 1 then
 						goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient cargo space for purchase")
 					elseif goodData["cost"] > math.floor(comms_source:getReputationPoints()) then
-						goodTransactionMessage = goodTransactionMessage .. "\nInsufficient reputation for purchase"
+						goodTransactionMessage = goodTransactionMessage .. _("needRep-comms", "\nInsufficient reputation for purchase")
 					elseif goodData["quantity"] < 1 then
 						goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 					else
@@ -11076,7 +11076,7 @@ function handleDockedState()
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\npurchased")
 						else
-							goodTransactionMessage = goodTransactionMessage .. "\nInsufficient reputation for purchase"
+							goodTransactionMessage = goodTransactionMessage .. _("needRep-comms", "\nInsufficient reputation for purchase")
 						end
 					end
 					setCommsMessage(goodTransactionMessage)
@@ -11238,12 +11238,12 @@ function masterCartographer()
 			ctd.character_master = upgrade_stations
 		end
 		if #ctd.character_master > 0 then
-			setCommsMessage("Greetings,\nMay I help you find a station, goods or an upgrade?")
+			setCommsMessage(_("cartographyOffice-comms", "Greetings,\nMay I help you find a station, goods or an upgrade?"))
 		else
-			setCommsMessage("Greetings,\nMay I help you find a station or goods?")
+			setCommsMessage(_("cartographyOffice-comms", "Greetings,\nMay I help you find a station or goods?"))
 		end
-		addCommsReply("Find station",function()
-			setCommsMessage("What station?")
+		addCommsReply(_("cartographyOffice-comms", "Find station"),function()
+			setCommsMessage(_("cartographyOffice-comms", "What station?"))
 			local nearby_objects = getAllObjects()
 			local stations_known = 0
 			local station_distance = 0
@@ -11255,28 +11255,28 @@ function masterCartographer()
 						if station_distance > 50000 then
 							stations_known = stations_known + 1
 							addCommsReply(obj:getCallSign(),function()
-								local station_details = string.format("%s %s %s Distance:%.1fU",obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
+								local station_details = string.format(_("cartographyOffice-comms", "%s %s %s Distance:%.1fU"),obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
 								if obj.comms_data.goods ~= nil then
-									station_details = string.format("%s\nGood, quantity, cost",station_details)
+									station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 									for good, good_data in pairs(obj.comms_data.goods) do
-										station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+										station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 									end
 								end
 								if obj.comms_data.general ~= nil then
-									station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general)
+									station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general)
 								end
 								if obj.comms_data.history ~= nil then
-									station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+									station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 								end
 								if obj.comms_data.gossip ~= nil then
-									station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+									station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 								end
 								if obj.comms_data.characterDescription ~= nil then
-									station_details = string.format("%s\n%s:\n   %s",station_details,obj.comms_data.character,obj.comms_data.characterDescription)
+									station_details = string.format(_("cartographyOffice-comms", "%s\n%s:\n   %s"),station_details,obj.comms_data.character,obj.comms_data.characterDescription)
 								end
 								local dsx, dsy = obj:getPosition()
 								comms_source:commandAddWaypoint(dsx,dsy)								
-								station_details = string.format("%s\nAdded waypoint %i to your navigation system for %s",station_details,comms_source:getWaypointCount(),obj:getCallSign())
+								station_details = string.format(_("cartographyOffice-comms", "%s\nAdded waypoint %i to your navigation system for %s"),station_details,comms_source:getWaypointCount(),obj:getCallSign())
 								setCommsMessage(station_details)
 								addCommsReply(_("Back"),commsStation)
 							end)
@@ -11285,12 +11285,12 @@ function masterCartographer()
 				end
 			end
 			if stations_known == 0 then
-				setCommsMessage("Try the apprentice, I'm tired")
+				setCommsMessage(_("cartographyOffice-comms", "Try the apprentice, I'm tired"))
 			end
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply("Find Goods", function()
-			setCommsMessage("What goods are you looking for?")
+		addCommsReply(_("cartographyOffice-comms", "Find Goods"), function()
+			setCommsMessage(_("cartographyOffice-comms", "What goods are you looking for?"))
 			local nearby_objects = getAllObjects()
 			local by_goods = {}
 			for _, obj in ipairs(nearby_objects) do
@@ -11312,28 +11312,28 @@ function masterCartographer()
 				addCommsReply(good, function()
 					if distance_diagnostic then print("distance_diagnostic 5",comms_target,obj) end
 					local station_distance = distance(comms_target,obj)
-					local station_details = string.format("%s %s %s Distance:%.1fU",obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
+					local station_details = string.format(_("cartographyOffice-comms", "%s %s %s Distance:%.1fU"),obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
 					if obj.comms_data.goods ~= nil then
-						station_details = string.format("%s\nGood, quantity, cost",station_details)
+						station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 						for good, good_data in pairs(obj.comms_data.goods) do
-							station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+							station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 						end
 					end
 					if obj.comms_data.general ~= nil then
-						station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general)
+						station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general)
 					end
 					if obj.comms_data.history ~= nil then
-						station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+						station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 					end
 					if obj.comms_data.gossip ~= nil then
-						station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+						station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 					end
 					if obj.comms_data.characterDescription ~= nil then
-						station_details = string.format("%s\n%s:\n   %s",station_details,obj.comms_data.character,obj.comms_data.characterDescription)
+						station_details = string.format(_("cartographyOffice-comms", "%s\n%s:\n   %s"),station_details,obj.comms_data.character,obj.comms_data.characterDescription)
 					end
 					local dsx, dsy = obj:getPosition()
 					comms_source:commandAddWaypoint(dsx,dsy)
-					station_details = string.format("%s\nAdded waypoint %i to your navigation system for %s",station_details,comms_source:getWaypointCount(),obj:getCallSign())
+					station_details = string.format(_("cartographyOffice-comms", "%s\nAdded waypoint %i to your navigation system for %s"),station_details,comms_source:getWaypointCount(),obj:getCallSign())
 					setCommsMessage(station_details)
 					addCommsReply(_("Back"),commsStation)
 				end)
@@ -11341,35 +11341,35 @@ function masterCartographer()
 			addCommsReply(_("Back"),commsStation)
 		end)
 		if #ctd.character_master > 0 then
-			addCommsReply("Find Upgrade Station", function()
-				setCommsMessage("What station?")
+			addCommsReply(_("cartographyOffice-comms", "Find Upgrade Station"), function()
+				setCommsMessage(_("cartographyOffice-comms", "What station?"))
 				for i=1,#ctd.character_master do
 					local obj = ctd.character_master[i]
 					if distance_diagnostic then print("distance_diagnostic 6",comms_target,obj) end
 					station_distance = distance(comms_target,obj)
 					addCommsReply(obj:getCallSign(), function()
-						local station_details = string.format("%s %s %s Distance:%.1fU",obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
+						local station_details = string.format(_("cartographyOffice-comms", "%s %s %s Distance:%.1fU"),obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
 						if obj.comms_data.goods ~= nil then
-							station_details = string.format("%s\nGood, quantity, cost",station_details)
+							station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 							for good, good_data in pairs(obj.comms_data.goods) do
-								station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+								station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 							end
 						end
 						if obj.comms_data.general ~= nil then
-							station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general)
+							station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general)
 						end
 						if obj.comms_data.history ~= nil then
-							station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+							station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 						end
 						if obj.comms_data.gossip ~= nil then
-							station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+							station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 						end
 						if obj.comms_data.characterDescription ~= nil then
-							station_details = string.format("%s\n%s:\n   %s",station_details,obj.comms_data.character,obj.comms_data.characterDescription)
+							station_details = string.format(_("cartographyOffice-comms", "%s\n%s:\n   %s"),station_details,obj.comms_data.character,obj.comms_data.characterDescription)
 						end
 						local dsx, dsy = obj:getPosition()
 						comms_source:commandAddWaypoint(dsx,dsy)
-						station_details = string.format("%s\nAdded waypoint %i to your navigation system for %s",station_details,comms_source:getWaypointCount(),obj:getCallSign())
+						station_details = string.format(_("cartographyOffice-comms", "%s\nAdded waypoint %i to your navigation system for %s"),station_details,comms_source:getWaypointCount(),obj:getCallSign())
 						setCommsMessage(station_details)
 						addCommsReply(_("Back"),commsStation)
 					end)
@@ -11377,7 +11377,7 @@ function masterCartographer()
 			end)
 		end
 	else
-		setCommsMessage("Insufficient Reputation")
+		setCommsMessage(_("needRep-comms", "Insufficient Reputation"))
 	end
 end
 function getCartographerCost(service)
@@ -11403,22 +11403,22 @@ function isAllowedTo(state)
 end
 function handleWeaponRestock(weapon)
     if not comms_source:isDocked(comms_target) then 
-		setCommsMessage("You need to stay docked for that action.")
+		setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage("We do not deal in weapons of mass destruction.")
-        elseif weapon == "EMP" then setCommsMessage("We do not deal in weapons of mass disruption.")
-        else setCommsMessage("We do not deal in those weapons.") end
+        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage("All nukes are charged and primed for destruction.");
+            setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
+            setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
         addCommsReply(_("Back"), commsStation)
     else
@@ -11426,32 +11426,32 @@ function handleWeaponRestock(weapon)
 			if comms_source:takeReputationPoints(points_per_item * item_amount) then
 				comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
 				if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
-					setCommsMessage("You are fully loaded and ready to explode things.")
+					setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things."))
 				else
-					setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
+					setCommsMessage(_("ammo-comms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
 				end
 			else
-				setCommsMessage("Not enough reputation.")
+				setCommsMessage(_("needRep-comms", "Not enough reputation."))
 				return
 			end
 		else
 			if comms_source:getReputationPoints() > points_per_item then
-				setCommsMessage("You can't afford as much as I'd like to give you")
-				addCommsReply("Get just one", function()
+				setCommsMessage(_("ammo-comms", "You can't afford as much as I'd like to give you"))
+				addCommsReply(_("ammo-comms", "Get just one"), function()
 					if comms_source:takeReputationPoints(points_per_item) then
 						comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + 1)
 						if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
-							setCommsMessage("You are fully loaded and ready to explode things.")
+							setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things."))
 						else
-							setCommsMessage("We generously resupplied you with one weapon charge.\nPut it to good use.")
+							setCommsMessage(_("ammo-comms", "We generously resupplied you with one weapon charge.\nPut it to good use."))
 						end
 					else
-						setCommsMessage("Not enough reputation.")
+						setCommsMessage(_("needRep-comms", "Not enough reputation."))
 					end
 					return
 				end)
 			else
-				setCommsMessage("Not enough reputation.")
+				setCommsMessage(_("needRep-comms", "Not enough reputation."))
 				return				
 			end
 		end
@@ -11465,12 +11465,12 @@ function handleUndockedState()
     --Handle communications when we are not docked with the station.
     local ctd = comms_target.comms_data
     if comms_source:isFriendly(comms_target) then
-        oMsg = "Good day, officer.\nIf you need supplies, please dock with us first."
+        oMsg = _("station-comms", "Good day, officer.\nIf you need supplies, please dock with us first.")
     else
-        oMsg = "Greetings.\nIf you want to do business, please dock with us first."
+        oMsg = _("station-comms", "Greetings.\nIf you want to do business, please dock with us first.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
+		oMsg = oMsg .. _("station-comms", "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you.")
 	end
 	setCommsMessage(oMsg)
 	--[[	Disabling until I find the bug
@@ -11535,7 +11535,7 @@ function handleUndockedState()
 						comms_source.expedite_dock_timer_max = 60
 						preOrderOrdnance()
 					else
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -11546,7 +11546,7 @@ function handleUndockedState()
 						comms_source.expedite_dock_timer_max = 120
 						preOrderOrdnance()
 					else
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -11557,7 +11557,7 @@ function handleUndockedState()
 						comms_source.expedite_dock_timer_max = 180
 						preOrderOrdnance()
 					else
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -11566,161 +11566,161 @@ function handleUndockedState()
 		end)
 	end	
 	--]]
- 	addCommsReply("I need information", function()
-		setCommsMessage("What kind of information do you need?")
-		addCommsReply("What are my current orders?", function()
+ 	addCommsReply(_("station-comms", "I need information"), function()
+		setCommsMessage(_("station-comms", "What kind of information do you need?"))
+		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			setOptionalOrders()
 			setSecondaryOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
-				ordMsg = ordMsg .. string.format("\n   %i Minutes remain in game",math.floor(gameTimeLimit/60))
+				ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply("What ordnance do you have available for restock?", function()
+		addCommsReply(_("ammo-comms", "What ordnance do you have available for restock?"), function()
 			local ctd = comms_target.comms_data
 			local missileTypeAvailableCount = 0
 			local ordnanceListMsg = ""
 			if ctd.weapon_available.Nuke then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Nuke"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   Nuke")
 			end
 			if ctd.weapon_available.EMP then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   EMP"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   EMP")
 			end
 			if ctd.weapon_available.Homing then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Homing"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   Homing")
 			end
 			if ctd.weapon_available.Mine then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Mine"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   Mine")
 			end
 			if ctd.weapon_available.HVLI then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   HVLI"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   HVLI")
 			end
 			if missileTypeAvailableCount == 0 then
-				ordnanceListMsg = "We have no ordnance available for restock"
+				ordnanceListMsg = _("ammo-comms", "We have no ordnance available for restock")
 			elseif missileTypeAvailableCount == 1 then
-				ordnanceListMsg = "We have the following type of ordnance available for restock:" .. ordnanceListMsg
+				ordnanceListMsg = string.format(_("ammo-comms", "We have the following type of ordnance available for restock:%s"), ordnanceListMsg)
 			else
-				ordnanceListMsg = "We have the following types of ordnance available for restock:" .. ordnanceListMsg
+				ordnanceListMsg = string.format(_("ammo-comms", "We have the following types of ordnance available for restock:%s"), ordnanceListMsg)
 			end
 			setCommsMessage(ordnanceListMsg)
 			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply("Docking services status", function()
+		addCommsReply(_("stationServices-comms", "Docking services status"), function()
 	 		local ctd = comms_target.comms_data
-			local service_status = string.format("Station %s docking services status:",comms_target:getCallSign())
+			local service_status = string.format(_("stationServices-comms", "Station %s docking services status:"),comms_target:getCallSign())
 			if comms_target:getRestocksScanProbes() then
-				service_status = string.format("%s\nReplenish scan probes.",service_status)
+				service_status = string.format(_("stationServices-comms", "%s\nReplenish scan probes."),service_status)
 			else
 				if comms_target.probe_fail_reason == nil then
 					local reason_list = {
-						"Cannot replenish scan probes due to fabrication unit failure.",
-						"Parts shortage prevents scan probe replenishment.",
-						"Station management has curtailed scan probe replenishment for cost cutting reasons.",
+						_("stationServices-comms", "Cannot replenish scan probes due to fabrication unit failure."),
+						_("stationServices-comms", "Parts shortage prevents scan probe replenishment."),
+						_("stationServices-comms", "Station management has curtailed scan probe replenishment for cost cutting reasons."),
 					}
 					comms_target.probe_fail_reason = reason_list[math.random(1,#reason_list)]
 				end
-				service_status = string.format("%s\n%s",service_status,comms_target.probe_fail_reason)
+				service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.probe_fail_reason)
 			end
 			if comms_target:getRepairDocked() then
-				service_status = string.format("%s\nShip hull repair.",service_status)
+				service_status = string.format(_("stationServices-comms", "%s\nShip hull repair."),service_status)
 			else
 				if comms_target.repair_fail_reason == nil then
 					reason_list = {
-						"We're out of the necessary materials and supplies for hull repair.",
-						"Hull repair automation unavailable whie it is undergoing maintenance.",
-						"All hull repair technicians quarantined to quarters due to illness.",
+						_("stationServices-comms", "We're out of the necessary materials and supplies for hull repair."),
+						_("stationServices-comms", "Hull repair automation unavailable whie it is undergoing maintenance."),
+						_("stationServices-comms", "All hull repair technicians quarantined to quarters due to illness."),
 					}
 					comms_target.repair_fail_reason = reason_list[math.random(1,#reason_list)]
 				end
-				service_status = string.format("%s\n%s",service_status,comms_target.repair_fail_reason)
+				service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.repair_fail_reason)
 			end
 			if comms_target:getSharesEnergyWithDocked() then
-				service_status = string.format("%s\nRecharge ship energy stores.",service_status)
+				service_status = string.format(_("stationServices-comms", "%s\nRecharge ship energy stores."),service_status)
 			else
 				if comms_target.energy_fail_reason == nil then
 					reason_list = {
-						"A recent reactor failure has put us on auxiliary power, so we cannot recharge ships.",
-						"A damaged power coupling makes it too dangerous to recharge ships.",
-						"An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now.",
+						_("stationServices-comms", "A recent reactor failure has put us on auxiliary power, so we cannot recharge ships."),
+						_("stationServices-comms", "A damaged power coupling makes it too dangerous to recharge ships."),
+						_("stationServices-comms", "An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now."),
 					}
 					comms_target.energy_fail_reason = reason_list[math.random(1,#reason_list)]
 				end
-				service_status = string.format("%s\n%s",service_status,comms_target.energy_fail_reason)
+				service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.energy_fail_reason)
 			end
 			if comms_target.comms_data.jump_overcharge then
-				service_status = string.format("%s\nMay overcharge jump drive",service_status)
+				service_status = string.format(_("stationServices-comms", "%s\nMay overcharge jump drive"),service_status)
 			end
-			service_status = string.format("%s\nMay repair the following primary systems:",service_status)		
+			service_status = string.format(_("stationServices-comms", "%s\nMay repair the following primary systems:"),service_status)		
 			local line_item_count = 0
 			for _, system in ipairs(system_list) do
 				if comms_target.comms_data.system_repair[system] then
 					if line_item_count == 0 or line_item_count >= 3 then
-						service_status = service_status .. "\n    "
+						service_status = service_status .. _("stationServices-comms", "\n    ")
 						line_item_count = 0
 					end
 					service_status = service_status .. system .. "  "
 					line_item_count = line_item_count + 1
 				end
 			end
-			service_status = string.format("%s\nMay repair the cooling pump for the following primary systems:",service_status)
+			service_status = string.format(_("stationServices-comms", "%s\nMay repair the cooling pump for the following primary systems:"),service_status)
 			line_item_count = 0
 			for _, system in ipairs(system_list) do
 				if comms_target.comms_data.coolant_pump_repair[system] then
 					if line_item_count == 0 or line_item_count >= 3 then
-						service_status = service_status .. "\n    "
+						service_status = service_status .. _("stationServices-comms", "\n    ")
 						line_item_count = 0
 					end
 					service_status = service_status .. system .. "  "
 					line_item_count = line_item_count + 1
 				end
 			end
-			service_status = string.format("%s\nMay repair the following secondary systems:",service_status)
+			service_status = string.format(_("stationServices-comms", "%s\nMay repair the following secondary systems:"),service_status)
 			line_item_count = 0	
 			if comms_target.comms_data.probe_launch_repair then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
-				service_status = string.format("%sprobe launch system   ",service_status)
+				service_status = string.format(_("stationServices-comms", "%sprobe launch system   "),service_status)
 				line_item_count = line_item_count + 1
 			end
 			if comms_target.comms_data.hack_repair then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
-				service_status = string.format("%shacking system   ",service_status)
+				service_status = string.format(_("stationServices-comms", "%shacking system   "),service_status)
 				line_item_count = line_item_count + 1
 			end
 			if comms_target.comms_data.scan_repair then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
-				service_status = string.format("%sscanners   ",service_status)
+				service_status = string.format(_("stationServices-comms", "%sscanners   "),service_status)
 				line_item_count = line_item_count + 1
 			end
 			if comms_target.comms_data.combat_maneuver_repair then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
-				service_status = string.format("%scombat maneuver   ",service_status)
+				service_status = string.format(_("stationServices-comms", "%scombat maneuver   "),service_status)
 				line_item_count = line_item_count + 1
 			end
 			if comms_target.comms_data.self_destruct_repair then
 				if line_item_count == 0 or line_item_count >= 3 then
-					service_status = service_status .. "\n    "
+					service_status = service_status .. _("stationServices-comms", "\n    ")
 					line_item_count = 0
 				end
-				service_status = string.format("%sself destruct system   ",service_status)
+				service_status = string.format(_("stationServices-comms", "%sself destruct system   "),service_status)
 			end
 			setCommsMessage(service_status)
 			addCommsReply(_("Back"), commsStation)
@@ -11734,11 +11734,11 @@ function handleUndockedState()
 			end
 		end
 		if goodsAvailable then
-			addCommsReply("What goods do you have available for sale or trade?", function()
+			addCommsReply(_("trade-comms", "What goods do you have available for sale or trade?"), function()
 				local ctd = comms_target.comms_data
-				local goodsAvailableMsg = string.format("Station %s:\nGoods or components available: quantity, cost in reputation",comms_target:getCallSign())
+				local goodsAvailableMsg = string.format(_("trade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
 				for good, goodData in pairs(ctd.goods) do
-					goodsAvailableMsg = goodsAvailableMsg .. string.format("\n   %14s: %2i, %3i",good,goodData["quantity"],goodData["cost"])
+					goodsAvailableMsg = goodsAvailableMsg .. string.format(_("trade-comms", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
 				end
 				setCommsMessage(goodsAvailableMsg)
 				addCommsReply(_("Back"), commsStation)
@@ -11750,9 +11750,9 @@ function handleUndockedState()
 				addCommsReply(_("Back"),commsStation)
 			end)
 		end
-		addCommsReply("Where can I find particular goods?", function()
+		addCommsReply(_("trade-comms", "Where can I find particular goods?"), function()
 			local ctd = comms_target.comms_data
-			gkMsg = "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury."
+			gkMsg = _("trade-comms", "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury.")
 			if ctd.goodsKnowledge == nil then
 				ctd.goodsKnowledge = {}
 				local knowledgeCount = 0
@@ -11793,14 +11793,14 @@ function handleUndockedState()
 					local sectorName = ctd.goodsKnowledge[good]["sector"]
 					local goodName = good
 					local goodCost = ctd.goodsKnowledge[good]["cost"]
-					setCommsMessage(string.format("Station %s in sector %s has %s for %i reputation",stationName,sectorName,goodName,goodCost))
+					setCommsMessage(string.format(_("trade-comms", "Station %s in sector %s has %s for %i reputation"),stationName,sectorName,goodName,goodCost))
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if goodsKnowledgeCount > 0 then
-				gkMsg = gkMsg .. "\n\nWhat goods are you interested in?\nI've heard about these:"
+				gkMsg = gkMsg .. _("trade-comms", "\n\nWhat goods are you interested in?\nI've heard about these:")
 			else
-				gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations"
+				gkMsg = gkMsg .. _("trade-comms", " Beyond that, I have no knowledge of specific stations")
 			end
 			setCommsMessage(gkMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -11809,16 +11809,16 @@ function handleUndockedState()
 		if (comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "") or
 			(comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "") or
 			(comms_source:isFriendly(comms_target) and comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" and has_gossip) then
-			addCommsReply("Tell me more about your station", function()
-				setCommsMessage("What would you like to know?")
+			addCommsReply(_("station-comms", "Tell me more about your station"), function()
+				setCommsMessage(_("station-comms", "What would you like to know?"))
 				if comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "" then
-					addCommsReply("General information", function()
+					addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 						setCommsMessage(ctd.general)
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if ctd.history ~= nil and ctd.history ~= "" then
-					addCommsReply("Station history", function()
+					addCommsReply(_("stationStory-comms", "Station history"), function()
 						setCommsMessage(ctd.history)
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -11826,7 +11826,7 @@ function handleUndockedState()
 				if comms_source:isFriendly(comms_target) then
 					if ctd.gossip ~= nil and ctd.gossip ~= "" then
 						if random(1,100) < 50 then
-							addCommsReply("Gossip", function()
+							addCommsReply(_("gossip-comms", "Gossip"), function()
 								setCommsMessage(ctd.gossip)
 								addCommsReply(_("Back"), commsStation)
 							end)
@@ -11837,22 +11837,22 @@ function handleUndockedState()
 		end	--end public relations if branch
 		if ctd.character ~= nil then
 			if random(1,100) < (70 - (20 * difficulty)) then
-				addCommsReply(string.format("Tell me about %s",ctd.character), function()
+				addCommsReply(string.format(_("characterInfo-comms", "Tell me about %s"),ctd.character), function()
 					if ctd.characterDescription ~= nil then
 						setCommsMessage(ctd.characterDescription)
 					else
 						if ctd.characterDeadEnd == nil then
 							local deadEndChoice = math.random(1,5)
 							if deadEndChoice == 1 then
-								ctd.characterDeadEnd = "Never heard of " .. ctd.character
+								ctd.characterDeadEnd = string.format(_("characterInfo-comms", "Never heard of %s"), ctd.character)
 							elseif deadEndChoice == 2 then
-								ctd.characterDeadEnd = ctd.character .. " died last week. The funeral was yesterday"
+								ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s died last week. The funeral was yesterday"), ctd.character)
 							elseif deadEndChoice == 3 then
-								ctd.characterDeadEnd = string.format("%s? Who's %s? There's nobody here named %s",ctd.character,ctd.character,ctd.character)
+								ctd.characterDeadEnd = string.format(_("characterInfo-comms", "%s? Who's %s? There's nobody here named %s"),ctd.character,ctd.character,ctd.character)
 							elseif deadEndChoice == 4 then
-								ctd.characterDeadEnd = string.format("We don't talk about %s. They are gone and good riddance",ctd.character)
+								ctd.characterDeadEnd = string.format(_("characterInfo-comms", "We don't talk about %s. They are gone and good riddance"),ctd.character)
 							else
-								ctd.characterDeadEnd = string.format("I think %s moved away",ctd.character)
+								ctd.characterDeadEnd = string.format(_("characterInfo-comms", "I think %s moved away"),ctd.character)
 							end
 						end
 						setCommsMessage(ctd.characterDeadEnd)
@@ -11861,8 +11861,8 @@ function handleUndockedState()
 			end
 		end
 		if enemyEverDetected then
-			addCommsReply("Why the yellow neutral border zones?", function()
-				setCommsMessage("Each neutral border zone is equipped with sensors and an auto-transmitter. If the sensors detect enemy forces in the zone, the auto-transmitter sends encoded zone identifying details through subspace. Human navy ships are equipped to recognize this data and color code the appropriate zone on the science and relay consoles.")
+			addCommsReply(_("station-comms", "Why the yellow neutral border zones?"), function()
+				setCommsMessage(_("station-comms", "Each neutral border zone is equipped with sensors and an auto-transmitter. If the sensors detect enemy forces in the zone, the auto-transmitter sends encoded zone identifying details through subspace. Human navy ships are equipped to recognize this data and color code the appropriate zone on the science and relay consoles."))
 			end)
 		end
 		addCommsReply(_("stationAssist-comms", "Report status"), function()
@@ -11896,7 +11896,7 @@ function handleUndockedState()
 							script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
 							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
 						else
-							setCommsMessage("Not enough reputation!");
+							setCommsMessage(_("needRep-comms", "Not enough reputation!"));
 						end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -11934,7 +11934,7 @@ function handleUndockedState()
 									table.insert(friendlyHelperFleet,ship)
 									setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"),ship:getCallSign(),n))
 								else
-									setCommsMessage("Not enough reputation!");
+									setCommsMessage(_("needRep-comms", "Not enough reputation!"));
 								end
 							end
 							tempAsteroid:destroy()
@@ -11946,7 +11946,7 @@ function handleUndockedState()
 								table.insert(friendlyHelperFleet,ship)
 								setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"),ship:getCallSign(),n))
 							else
-								setCommsMessage("Not enough reputation!");
+								setCommsMessage(_("needRep-comms", "Not enough reputation!"));
 							end
 						end
                         addCommsReply(_("Back"), commsStation)
@@ -11982,7 +11982,7 @@ function handleUndockedState()
     				out = out .. "\nactivated"
     				setCommsMessage(out)
     			else
-    				setCommsMessage("Insufficient reputation")
+    				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
     			end
 				addCommsReply(_("Back"), commsStation)
     		end)
@@ -12010,7 +12010,7 @@ function preOrderOrdnance()
 					setCommsMessage(string.format("%i HVLI preordered",hvli_count))
 				end
 			else
-				setCommsMessage("Insufficient reputation")
+				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 			end
 			preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
 			addCommsReply(_("Back"),preOrderOrdnance)
@@ -12034,7 +12034,7 @@ function preOrderOrdnance()
 					setCommsMessage(string.format("%i Homing preordered",homing_count))
 				end
 			else
-				setCommsMessage("Insufficient reputation")
+				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 			end
 			preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
 			addCommsReply(_("Back"),preOrderOrdnance)
@@ -12058,7 +12058,7 @@ function preOrderOrdnance()
 					setCommsMessage(string.format("%i Mine preordered",mine_count))
 				end
 			else
-				setCommsMessage("Insufficient reputation")
+				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 			end
 			preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
 			addCommsReply(_("Back"),preOrderOrdnance)
@@ -12082,7 +12082,7 @@ function preOrderOrdnance()
 					setCommsMessage(string.format("%i EMP preordered",emp_count))
 				end
 			else
-				setCommsMessage("Insufficient reputation")
+				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 			end
 			preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
 			addCommsReply(_("Back"),preOrderOrdnance)
@@ -12106,7 +12106,7 @@ function preOrderOrdnance()
 					setCommsMessage(string.format("%i Nuke preordered",nuke_count))
 				end
 			else
-				setCommsMessage("Insufficient reputation")
+				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 			end
 			preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
 			addCommsReply(_("Back"),preOrderOrdnance)
@@ -12120,9 +12120,9 @@ function preOrderOrdnance()
 				else
 					hireCost = math.random(45,90)
 				end
-				addCommsReply(string.format("Recruit repair crew member for %i reputation",hireCost), function()
+				addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hireCost), function()
 					if not comms_source:takeReputationPoints(hireCost) then
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					else
 						comms_source.preorder_repair_crew = 1
 						setCommsMessage("Repair crew hired on your behalf. They will board when you dock")
@@ -12146,7 +12146,7 @@ function preOrderOrdnance()
 							comms_source.preorder_coolant = 2
 							setCommsMessage("Coolant set aside for you. It will be loaded when you dock")
 						else
-							setCommsMessage("Insufficient reputation")
+							setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 						end
 						preorder_message = "Docking crew is standing by. Would you like to pre-order anything?"
 						addCommsReply(_("Back"),preOrderOrdnance)
@@ -12307,7 +12307,7 @@ function wartimeStatistics()
 							end
 						end
 					else
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
 				end)
 			else
@@ -12625,23 +12625,23 @@ function friendlyComms(comms_data)
 				setCommsMessage(msg)
 				addCommsReply(_("Back"), commsShip)
 			end)
-			addCommsReply("Assist me", function()
+			addCommsReply(_("shipAssist-comms", "Assist me"), function()
 				for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 					if fleetShip ~= nil and fleetShip:isValid() then
 						fleetShip:orderDefendTarget(comms_source)
 					end
 				end
-				setCommsMessage(string.format("%s heading toward you to assist",comms_target.fleet))
+				setCommsMessage(string.format(_("shipAssist-comms", "%s heading toward you to assist"),comms_target.fleet))
 				addCommsReply(_("Back"), commsShip)
 			end)
-			addCommsReply("Defend a waypoint", function()
+			addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 				if comms_source:getWaypointCount() == 0 then
-					setCommsMessage("No waypoints set. Please set a waypoint first.");
+					setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 					addCommsReply(_("Back"), commsShip)
 				else
-					setCommsMessage("Which waypoint should we defend?");
+					setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 					for n=1,comms_source:getWaypointCount() do
-						addCommsReply("Defend WP" .. n, function()
+						addCommsReply(string.format(_("shipAssist-comms", "Defend waypoint %d"), n), function()
 							if treaty then
 								local tempAsteroid = VisualAsteroid():setPosition(comms_source:getWaypoint(n))
 								local waypointInBorderZone = false
@@ -12652,9 +12652,9 @@ function friendlyComms(comms_data)
 									end
 								end
 								if waypointInBorderZone then
-									setCommsMessage("We cannot break the treaty by defending WP" .. n .. " in the neutral border zone")
+									setCommsMessage(string.format(_("shipAssist-comms", "We cannot break the treaty by defending WP %d in the neutral border zone"), n))
 								elseif outerZone:isInside(tempAsteroid) then
-									setCommsMessage("We cannot break the treaty by defending WP" .. n .. " across the neutral border zones")							
+									setCommsMessage(string.format(_("shipAssist-comms", "We cannot break the treaty by defending WP %d across the neutral border zones"), n))							
 								else
 									for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 										if fleetShip ~= nil and fleetShip:isValid() then
@@ -12678,13 +12678,13 @@ function friendlyComms(comms_data)
 				end
 			end)
 			if not treaty and limitedWarTimer <= 0 then
-				addCommsReply("Go offensive, attack all enemy targets", function()
+				addCommsReply(_("shipAssist-comms", "Go offensive, attack all enemy targets"), function()
 					for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 						if fleetShip ~= nil and fleetShip:isValid() then
 							fleetShip:orderRoaming()
 						end
 					end
-					setCommsMessage(string.format("%s is on an offensive rampage",comms_target.fleet))
+					setCommsMessage(string.format(_("shipAssist-comms", "%s is on an offensive rampage"),comms_target.fleet))
 					addCommsReply(_("Back"), commsShip)
 				end)
 			end
@@ -12730,7 +12730,7 @@ function friendlyComms(comms_data)
 							if shipCommsDiagnostic then print("in freighter goods loop") end
 							if goodData.quantity > 0 and good ~= "luxury" then
 								if shipCommsDiagnostic then print("has something other than luxury") end
-								addCommsReply(string.format("Trade luxury for %s",good), function()
+								addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
 									goodData.quantity = goodData.quantity - 1
 									if comms_source.goods == nil then
 										comms_source.goods = {}
@@ -12740,7 +12740,7 @@ function friendlyComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_source.goods.luxury = comms_source.goods.luxury - 1
-									setCommsMessage(string.format("Traded your luxury for %s from %s",good,comms_target:getCallSign()))
+									setCommsMessage(string.format(_("trade-comms", "Traded your luxury for %s from %s"),good,comms_target:getCallSign()))
 									addCommsReply(_("Back"), commsShip)
 								end)
 							end
@@ -12753,7 +12753,7 @@ function friendlyComms(comms_data)
 						if shipCommsDiagnostic then print("in freighter goods loop") end
 						if goodData.quantity > 0 then
 							if shipCommsDiagnostic then print("found something to sell") end
-							addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost)), function()
+							addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost)), function()
 								if comms_source:takeReputationPoints(goodData.cost) then
 									goodData.quantity = goodData.quantity - 1
 									if comms_source.goods == nil then
@@ -12764,9 +12764,9 @@ function friendlyComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_source.cargo = comms_source.cargo - 1
-									setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+									setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 								addCommsReply(_("Back"), commsShip)
 							end)
@@ -12783,7 +12783,7 @@ function friendlyComms(comms_data)
 							if shipCommsDiagnostic then print("in freighter cargo loop") end
 							if goodData.quantity > 0 then
 								if shipCommsDiagnostic then print("Found something to sell") end
-								addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost)), function()
 									if comms_source:takeReputationPoints(goodData.cost) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -12794,9 +12794,9 @@ function friendlyComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
-										setCommsMessage("Insufficient reputation for purchase")
+										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
 									addCommsReply(_("Back"), commsShip)
 								end)
@@ -12808,7 +12808,7 @@ function friendlyComms(comms_data)
 							if shipCommsDiagnostic then print("in freighter cargo loop") end
 							if goodData.quantity > 0 then
 								if shipCommsDiagnostic then print("found something to sell") end
-								addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*2)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
 									if comms_source:takeReputationPoints(goodData.cost*2) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -12819,9 +12819,9 @@ function friendlyComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
-										setCommsMessage("Insufficient reputation for purchase")
+										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
 									addCommsReply(_("Back"), commsShip)
 								end)
@@ -12839,7 +12839,7 @@ function friendlyComms(comms_data)
 							if shipCommsDiagnostic then print("in freighter cargo loop") end
 							if goodData.quantity > 0 then
 								if shipCommsDiagnostic then print("found something to sell") end
-								addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*2)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
 									if comms_source:takeReputationPoints(goodData.cost*2) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -12850,9 +12850,9 @@ function friendlyComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
-										setCommsMessage("Insufficient reputation for purchase")
+										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
 									addCommsReply(_("Back"), commsShip)
 								end)
@@ -13350,7 +13350,7 @@ function checkContinuum(delta)
 						resetContinuum(p)
 					end
 				else
-					local timer_display = string.format("Disruption %i",math.floor(p.continuum_timer))
+					local timer_display = string.format(_("-tabRelay&Operations", "Disruption %i"),math.floor(p.continuum_timer))
 					if p:hasPlayerAtPosition("Relay") then
 						p.continuum_timer_display = "continuum_timer_display"
 						p:addCustomInfo("Relay",p.continuum_timer_display,timer_display)
@@ -13443,7 +13443,7 @@ function neutralComms(comms_data)
 										comms_source.cargo = comms_source.cargo - 1
 										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
-										setCommsMessage("Insufficient reputation for purchase")
+										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
 									addCommsReply(_("Back"), commsShip)
 								end)
@@ -13465,7 +13465,7 @@ function neutralComms(comms_data)
 										comms_source.cargo = comms_source.cargo - 1
 										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
-										setCommsMessage("Insufficient reputation for purchase")
+										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
 									addCommsReply(_("Back"), commsShip)
 								end)
@@ -13489,7 +13489,7 @@ function neutralComms(comms_data)
 										comms_source.cargo = comms_source.cargo - 1
 										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
-										setCommsMessage("Insufficient reputation for purchase")
+										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
 									addCommsReply(_("Back"), commsShip)
 								end)
@@ -13511,7 +13511,7 @@ function neutralComms(comms_data)
 										comms_source.cargo = comms_source.cargo - 1
 										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
-										setCommsMessage("Insufficient reputation for purchase")
+										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
 									addCommsReply(_("Back"), commsShip)
 								end)
@@ -13535,7 +13535,7 @@ function neutralComms(comms_data)
 										comms_source.cargo = comms_source.cargo - 1
 										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
-										setCommsMessage("Insufficient reputation for purchase")
+										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
 									addCommsReply(_("Back"), commsShip)
 								end)
@@ -13735,7 +13735,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, sha
 	template_pool_size = 10
 	local template_pool = getTemplatePool(enemyStrength)
 	if #template_pool < 1 then
-		addGMMessage("Empty Template pool: fix excludes or other criteria")
+		addGMMessage(_("msgGM", "Empty Template pool: fix excludes or other criteria"))
 		return enemyList
 	end
 	local prefix = generateCallSignPrefix(1)
@@ -14078,21 +14078,21 @@ function expediteDockCheck(delta, p)
 			else
 				if p:hasPlayerAtPosition("Relay") then
 					p.expedite_dock_timer_info = "expedite_dock_timer_info"
-					p:addCustomInfo("Relay",p.expedite_dock_timer_info,"Fast Dock Expired")						
+					p:addCustomInfo("Relay",p.expedite_dock_timer_info,_("-tabRelay", "Fast Dock Expired"))						
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					p.expedite_dock_timer_info_ops = "expedite_dock_timer_info_ops"
-					p:addCustomInfo("Relay",p.expedite_dock_timer_info_ops,"Fast Dock Expired")						
+					p:addCustomInfo("Operations",p.expedite_dock_timer_info_ops,_("-tabOperations", "Fast Dock Expired"))						
 				end
 			end
 		else	--timer not expired
-			local expedite_dock_timer_status = "Fast Dock"
+			local expedite_dock_timer_status = _("-tabRelay&Operations", "Fast Dock")
 			local expedite_dock_timer_minutes = math.floor(p.expedite_dock_timer / 60)
 			local expedite_dock_timer_seconds = math.floor(p.expedite_dock_timer % 60)
 			if expedite_dock_timer_minutes <= 0 then
-				expedite_dock_timer_status = string.format("%s %i",expedite_dock_timer_status,expedite_dock_timer_seconds)
+				expedite_dock_timer_status = string.format(_("-tabRelay&Operations", "%s %i"),expedite_dock_timer_status,expedite_dock_timer_seconds)
 			else
-				expedite_dock_timer_status = string.format("%s %i:%.2i",expedite_dock_timer_status,expedite_dock_timer_minutes,expedite_dock_timer_seconds)
+				expedite_dock_timer_status = string.format(_("-tabRelay&Operations", "%s %i:%.2i"),expedite_dock_timer_status,expedite_dock_timer_minutes,expedite_dock_timer_seconds)
 			end
 			if p:hasPlayerAtPosition("Relay") then
 				p.expedite_dock_timer_info = "expedite_dock_timer_info"
@@ -14261,11 +14261,11 @@ function healthCheck(delta, p)
 				p:setRepairCrewCount(1)
 				if p:hasPlayerAtPosition("Engineering") then
 					local repairCrewRecovery = "repairCrewRecovery"
-					p:addCustomMessage("Engineering",repairCrewRecovery,"Medical team has revived one of your repair crew")
+					p:addCustomMessage("Engineering",repairCrewRecovery,_("repairCrew-msgEngineer", "Medical team has revived one of your repair crew"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					local repairCrewRecoveryPlus = "repairCrewRecoveryPlus"
-					p:addCustomMessage("Engineering+",repairCrewRecoveryPlus,"Medical team has revived one of your repair crew")
+					p:addCustomMessage("Engineering+",repairCrewRecoveryPlus,_("repairCrew-msgEngineer+", "Medical team has revived one of your repair crew"))
 				end
 				resetPreviousSystemHealth(p)
 			end
@@ -14283,10 +14283,10 @@ function healthCheck(delta, p)
 					local noticable_reclaimed_coolant = math.floor(reclaimed_coolant)
 					if noticable_reclaimed_coolant > 0 then
 						if p:hasPlayerAtPosition("Engineering") then
-							p:addCustomMessage("Engineering","coolant_recovery","Automated systems have recovered some coolant")
+							p:addCustomMessage("Engineering","coolant_recovery",_("coolant-msgEngineer", "Automated systems have recovered some coolant"))
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
-							p:addCustomMessage("Engineering+","coolant_recovery_plus","Automated systems have recovered some coolant")
+							p:addCustomMessage("Engineering+","coolant_recovery_plus",_("coolant-msgEngineer+", "Automated systems have recovered some coolant"))
 						end
 					end
 					resetPreviousSystemHealth(p)
@@ -14296,7 +14296,7 @@ function healthCheck(delta, p)
 		healthCheckTimer = delta + healthCheckTimerInterval
 		local stat_list = gatherStats()
 		resetBanner(stat_list.human.evaluation,stat_list.kraylor.evaluation)
-		local eval_status = string.format("F:%.1f%% E:%.1f%% D:%.1f%%",stat_list.human.evaluation,stat_list.kraylor.evaluation,stat_list.human.evaluation-stat_list.kraylor.evaluation)
+		local eval_status = string.format(_("-tabRelay&Operations", "F:%.1f%% E:%.1f%% D:%.1f%%"),stat_list.human.evaluation,stat_list.kraylor.evaluation,stat_list.human.evaluation-stat_list.kraylor.evaluation)
 		for pidx=1,32 do
 			local p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
@@ -14340,11 +14340,11 @@ function crewFate(p, fatalityChance)
 			p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 			if p:hasPlayerAtPosition("Engineering") then
 				local repairCrewFatality = "repairCrewFatality"
-				p:addCustomMessage("Engineering",repairCrewFatality,"One of your repair crew has perished")
+				p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
+				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 			end
 		else
 			local damaged_system = p.system_choice_list[math.random(1,#p.system_choice_list)]
@@ -14383,11 +14383,11 @@ function crewFate(p, fatalityChance)
 				p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 				if p:hasPlayerAtPosition("Engineering") then
 					local repairCrewFatality = "repairCrewFatality"
-					p:addCustomMessage("Engineering",repairCrewFatality,"One of your repair crew has perished")
+					p:addCustomMessage("Engineering",repairCrewFatality,_("repairCrew-msgEngineer", "One of your repair crew has perished"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-					p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
+					p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("repairCrew-msgEngineer+", "One of your repair crew has perished"))
 				end
 			elseif consequence == 2 then
 				local current_coolant = p:getMaxCoolant()
@@ -14404,62 +14404,62 @@ function crewFate(p, fatalityChance)
 				p.reclaimable_coolant = math.min(20,p.reclaimable_coolant + lost_coolant*random(.8,1))
 				if p:hasPlayerAtPosition("Engineering") then
 					local coolantLoss = "coolantLoss"
-					p:addCustomMessage("Engineering",coolantLoss,"Damage has caused a loss of coolant")
+					p:addCustomMessage("Engineering",coolantLoss,_("damage-msgEngineer", "Damage has caused a loss of coolant"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					local coolantLossPlus = "coolantLossPlus"
-					p:addCustomMessage("Engineering+",coolantLossPlus,"Damage has caused a loss of coolant")
+					p:addCustomMessage("Engineering+",coolantLossPlus,_("damage-msgEngineer+", "Damage has caused a loss of coolant"))
 				end
 			else
 				local named_consequence = consequence_list[consequence-2]
 				if named_consequence == "probe" then
 					p:setCanLaunchProbe(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","probe_launch_damage_message","The probe launch system has been damaged")
+						p:addCustomMessage("Engineering","probe_launch_damage_message",_("damage-msgEngineer", "The probe launch system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","probe_launch_damage_message_plus","The probe launch system has been damaged")
+						p:addCustomMessage("Engineering+","probe_launch_damage_message_plus",_("damage-msgEngineer+", "The probe launch system has been damaged"))
 					end
 				elseif named_consequence == "hack" then
 					p:setCanHack(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","hack_damage_message","The hacking system has been damaged")
+						p:addCustomMessage("Engineering","hack_damage_message",_("damage-msgEngineer", "The hacking system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","hack_damage_message_plus","The hacking system has been damaged")
+						p:addCustomMessage("Engineering+","hack_damage_message_plus",_("damage-msgEngineer+", "The hacking system has been damaged"))
 					end
 				elseif named_consequence == "scan" then
 					p:setCanScan(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","scan_damage_message","The scanners have been damaged")
+						p:addCustomMessage("Engineering","scan_damage_message",_("damage-msgEngineer", "The scanners have been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","scan_damage_message_plus","The scanners have been damaged")
+						p:addCustomMessage("Engineering+","scan_damage_message_plus",_("damage-msgEngineer+", "The scanners have been damaged"))
 					end
 				elseif named_consequence == "combat_maneuver" then
 					p:setCanCombatManeuver(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","combat_maneuver_damage_message","Combat maneuver has been damaged")
+						p:addCustomMessage("Engineering","combat_maneuver_damage_message",_("damage-msgEngineer", "Combat maneuver has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","combat_maneuver_damage_message_plus","Combat maneuver has been damaged")
+						p:addCustomMessage("Engineering+","combat_maneuver_damage_message_plus",_("damage-msgEngineer+", "Combat maneuver has been damaged"))
 					end
 				elseif named_consequence == "self_destruct" then
 					p:setCanSelfDestruct(false)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","self_destruct_damage_message","Self destruct system has been damaged")
+						p:addCustomMessage("Engineering","self_destruct_damage_message",_("damage-msgEngineer", "Self destruct system has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","self_destruct_damage_message_plus","Self destruct system has been damaged")
+						p:addCustomMessage("Engineering+","self_destruct_damage_message_plus",_("damage-msgEngineer+", "Self destruct system has been damaged"))
 					end
 				elseif named_consequence == "reactor_coolant_pump" then
 					p:setSystemCoolantRate("reactor",p:getSystemCoolantRate("reactor")/2)
 					resetCoolantPumpButtons(p)
 					if p:hasPlayerAtPosition("Engineering") then
-						p:addCustomMessage("Engineering","reactor_coolant_pump_damage_message","Reactor coolant pump has been damaged")
+						p:addCustomMessage("Engineering","reactor_coolant_pump_damage_message",_("damage-msgEngineer", "Reactor coolant pump has been damaged"))
 					end
 					if p:hasPlayerAtPosition("Engineering+") then
-						p:addCustomMessage("Engineering+","reactor_coolant_pump_damage_message_plus","Reactor coolant pump has been damaged")
+						p:addCustomMessage("Engineering+","reactor_coolant_pump_damage_message_plus",_("damage-msgEngineer+", "Reactor coolant pump has been damaged"))
 					end
 				end
 			end	--coolant loss branch
@@ -14481,32 +14481,32 @@ function cargoInventory(p)
 		if p:hasPlayerAtPosition("Relay") then
 			if p.inventoryButton == nil then
 				local tbi = "inventory" .. p:getCallSign()
-				p:addCustomButton("Relay",tbi,"Inventory",function() playerShipCargoInventory(p) end)
+				p:addCustomButton("Relay",tbi,_("inventory-buttonRelay", "Inventory"),function() playerShipCargoInventory(p) end)
 				p.inventoryButton = true
 			end
 		end
 		if p:hasPlayerAtPosition("Operations") then
 			if p.inventoryButton == nil then
 				local tbi = "inventoryOp" .. p:getCallSign()
-				p:addCustomButton("Operations",tbi,"Inventory",function() playerShipCargoInventory(p) end)
+				p:addCustomButton("Operations",tbi,_("inventory-buttonOperations", "Inventory"),function() playerShipCargoInventory(p) end)
 				p.inventoryButton = true
 			end
 		end
 	end
 end
 function playerShipCargoInventory(p)
-	p:addToShipLog(string.format("%s Current cargo:",p:getCallSign()),"Yellow")
+	p:addToShipLog(string.format(_("inventory-shipLog", "%s Current cargo:"),p:getCallSign()),"Yellow")
 	local goodCount = 0
 	if p.goods ~= nil then
 		for good, goodQuantity in pairs(p.goods) do
 			goodCount = goodCount + 1
-			p:addToShipLog(string.format("     %s: %i",good,goodQuantity),"Yellow")
+			p:addToShipLog(string.format(_("inventory-shipLog", "     %s: %i"),good,goodQuantity),"Yellow")
 		end
 	end
 	if goodCount < 1 then
-		p:addToShipLog("     Empty","Yellow")
+		p:addToShipLog(_("inventory-shipLog", "     Empty"),"Yellow")
 	end
-	p:addToShipLog(string.format("Available space: %i",p.cargo),"Yellow")
+	p:addToShipLog(string.format(_("inventory-shipLog", "Available space: %i"),p.cargo),"Yellow")
 end
 --      Enable and disable auto-cooling on a ship functions
 function autoCoolant(p)
@@ -14514,14 +14514,14 @@ function autoCoolant(p)
 		if p:hasPlayerAtPosition("Engineering") then
 			if p.autoCoolButton == nil then
 				local tbi = "enableAutoCool" .. p:getCallSign()
-				p:addCustomButton("Engineering",tbi,"Auto cool",function() 
+				p:addCustomButton("Engineering",tbi,_("coolant-buttonEngineer", "Auto cool"),function() 
 					string.format("")	--global context for serious proton
 					p:commandSetAutoRepair(true)
 					p:setAutoCoolant(true)
 					p.autoCoolant = true
 				end)
 				tbi = "disableAutoCool" .. p:getCallSign()
-				p:addCustomButton("Engineering",tbi,"Manual cool",function()
+				p:addCustomButton("Engineering",tbi,_("coolant-buttonEngineer", "Manual cool"),function()
 					string.format("")	--global context for serious proton
 					p:commandSetAutoRepair(false)
 					p:setAutoCoolant(false)
@@ -14533,14 +14533,14 @@ function autoCoolant(p)
 		if p:hasPlayerAtPosition("Engineering+") then
 			if p.autoCoolButton == nil then
 				tbi = "enableAutoCoolPlus" .. p:getCallSign()
-				p:addCustomButton("Engineering+",tbi,"Auto cool",function()
+				p:addCustomButton("Engineering+",tbi,_("coolant-buttonEngineer+", "Auto cool"),function()
 					string.format("")	--global context for serious proton
 					p:commandSetAutoRepair(true)
 					p:setAutoCoolant(true)
 					p.autoCoolant = true
 				end)
 				tbi = "disableAutoCoolPlus" .. p:getCallSign()
-				p:addCustomButton("Engineering+",tbi,"Manual cool",function()
+				p:addCustomButton("Engineering+",tbi,_("coolant-buttonEngineer+", "Manual cool"),function()
 					string.format("")	--global context for serious proton
 					p:commandSetAutoRepair(false)
 					p:setAutoCoolant(false)
@@ -14587,12 +14587,12 @@ function coolantNebulae(delta, p)
 		else
 			if p:hasPlayerAtPosition("Engineering") then
 				p.get_coolant_button = "get_coolant_button"
-				p:addCustomButton("Engineering",p.get_coolant_button,"Get Coolant",function() getCoolantGivenPlayer(p) end)
+				p:addCustomButton("Engineering",p.get_coolant_button,_("coolant-buttonEngineer", "Get Coolant"),function() getCoolantGivenPlayer(p) end)
 				p.get_coolant = true
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				p.get_coolant_button_plus = "get_coolant_button_plus"
-				p:addCustomButton("Engineering+",p.get_coolant_button_plus,"Get Coolant",function() getCoolantGivenPlayer(p) end)
+				p:addCustomButton("Engineering+",p.get_coolant_button_plus,_("coolant-buttonEngineer+", "Get Coolant"),function() getCoolantGivenPlayer(p) end)
 				p.get_coolant = true
 			end
 		end
@@ -14634,7 +14634,7 @@ function updateCoolantGivenPlayer(p, delta)
 		end
 		p.deploy_coolant_timer = p.deploy_coolant_timer - delta
 		if p.deploy_coolant_timer < 0 then
-			gather_coolant_status = "Gathering Coolant"
+			gather_coolant_status = _("coolant-tabEngineer", "Gathering Coolant")
 			p:setMaxCoolant(p:getMaxCoolant() + coolant_gain)
 			if p:getMaxCoolant() > 50 and random(1,100) <= 13 then
 				local engine_choice = math.random(1,3)
@@ -14651,10 +14651,10 @@ function updateCoolantGivenPlayer(p, delta)
 				end
 			end
 		else
-			gather_coolant_status = string.format("Deploying Collectors %i",math.ceil(p.deploy_coolant_timer - delta))
+			gather_coolant_status = string.format(_("coolant-tabEngineer&Engineer+", "Deploying Collectors %i"),math.ceil(p.deploy_coolant_timer - delta))
 		end
 	else
-		gather_coolant_status = string.format("Configuring Collectors %i",math.ceil(p.configure_coolant_timer - delta))
+		gather_coolant_status = string.format(_("coolant-tabEngineer&Engineer+", "Configuring Collectors %i"),math.ceil(p.configure_coolant_timer - delta))
 	end
 	if p:hasPlayerAtPosition("Engineering") then
 		p.gather_coolant = "gather_coolant"
@@ -14662,7 +14662,7 @@ function updateCoolantGivenPlayer(p, delta)
 	end
 	if p:hasPlayerAtPosition("Engineering+") then
 		p.gather_coolant_plus = "gather_coolant_plus"
-		p:addCustomInfo("Engineering",p.gather_coolant_plus,gather_coolant_status)
+		p:addCustomInfo("Engineering+",p.gather_coolant_plus,gather_coolant_status)
 	end
 end
 function getCoolantGivenPlayer(p)
@@ -17100,7 +17100,7 @@ function vengence(delta)
 					vengenceFleet = candidate
 				end
 			until(vengenceFleet ~= nil)
-			intelGatherArtifacts[edfi]:setDescriptions("Scan to gather intelligence",string.format("Enemy fleet in sector %s is on the move",intelGatherArtifacts[edfi].startSector))
+			intelGatherArtifacts[edfi]:setDescriptions(_("scienceDescription-artifact", "Scan to gather intelligence"),string.format(_("scienceDescription-artifact", "Enemy fleet in sector %s is on the move"),intelGatherArtifacts[edfi].startSector))
 			for _, enemy in ipairs(vengenceFleet) do
 				if enemy ~= nil and enemy:isValid() then
 					enemy:orderRoaming()
@@ -18116,12 +18116,12 @@ function checkForMining(delta, p)
 								p.cargo = p.cargo - 1
 								if p:hasPlayerAtPosition("Science") then
 									local mined_mineral_message = "mined_mineral_message"
-									p:addCustomMessage("Science",mined_mineral_message,string.format("Mining obtained %s which has been stored in the cargo hold",good))
+									p:addCustomMessage("Science",mined_mineral_message,string.format(_("mining-msgScience", "Mining obtained %s which has been stored in the cargo hold"),good))
 								end
 							else	--no minerals in asteroid
 								if p:hasPlayerAtPosition("Science") then
 									local mined_mineral_message = "mined_mineral_message"
-									p:addCustomMessage("Science",mined_mineral_message,"mining failed to extract any minerals")
+									p:addCustomMessage("Science",mined_mineral_message,_("mining-msgScience", "mining failed to extract any minerals"))
 								end										
 							end
 						else	--still mining, update timer display, energy and heat
@@ -18133,14 +18133,14 @@ function checkForMining(delta, p)
 							end
 							if p:hasPlayerAtPosition("Weapons") then
 								p.mining_timer_info = "mining_timer_info"
-								p:addCustomInfo("Weapons",p.mining_timer_info,string.format("Mining %i",mining_seconds))
+								p:addCustomInfo("Weapons",p.mining_timer_info,string.format(_("mining-tabWeapons", "Mining %i"),mining_seconds))
 							end
 						end
 					else	--mining not in progress
 						if p.trigger_mine_beam_button == nil then
 							if p:hasPlayerAtPosition("Weapons") then
 								p.trigger_mine_beam_button = "trigger_mine_beam_button"
-								p:addCustomButton("Weapons",p.trigger_mine_beam_button,"Start Mining",function()
+								p:addCustomButton("Weapons",p.trigger_mine_beam_button,_("mining-buttonWeapons", "Start Mining"),function()
 									p.mining_in_progress = true
 									p.mining_timer = delta + 5
 									p:removeCustom(p.trigger_mine_beam_button)
@@ -18235,7 +18235,7 @@ function addMiningButtons(p,mining_objects)
 	if p.mining_lock_button == nil then
 		if p:hasPlayerAtPosition("Science") then
 			p.mining_lock_button = "mining_lock_button"
-			p:addCustomButton("Science",p.mining_lock_button,"Lock for Mining",function()
+			p:addCustomButton("Science",p.mining_lock_button,_("mining-buttonScience", "Lock for Mining"),function()
 				local cpx, cpy = p:getPosition()
 				local tpx, tpy = p.mining_target:getPosition()
 				if distance_diagnostic then print("distance_diagnostic 24",cpx,cpy,tpx,tpy) end
@@ -18243,10 +18243,10 @@ function addMiningButtons(p,mining_objects)
 				if asteroid_distance < 1000 then
 					p.mining_target_lock = true
 					local mining_locked_message = "mining_locked_message"
-					p:addCustomMessage("Science",mining_locked_message,"Mining target locked\nWeapons may trigger the mining beam")
+					p:addCustomMessage("Science",mining_locked_message,_("mining-msgScience", "Mining target locked\nWeapons may trigger the mining beam"))
 				else
 					local mining_lock_fail_message = "mining_lock_fail_message"
-					p:addCustomMessage("Engineering",mining_lock_fail_message,string.format("Mining target lock failed\nAsteroid distance is %.4fU\nMaximum range for mining is 1U",asteroid_distance/1000))
+					p:addCustomMessage("Engineering",mining_lock_fail_message,string.format(_("mining-msgEngineer", "Mining target lock failed\nAsteroid distance is %.4fU\nMaximum range for mining is 1U"),asteroid_distance/1000))
 					p.mining_target = nil
 				end
 				removeMiningButtons(p)
@@ -18256,7 +18256,7 @@ function addMiningButtons(p,mining_objects)
 	if p.mining_target_button == nil then
 		if p:hasPlayerAtPosition("Science") then
 			p.mining_target_button = "mining_target_button"
-			p:addCustomButton("Science",p.mining_target_button,"Target Asteroid",function()
+			p:addCustomButton("Science",p.mining_target_button,_("mining-buttonScience", "Target Asteroid"),function()
 				string.format("")	--necessary to have global reference for Serious Proton engine
 				tpx, tpy = p.mining_target:getPosition()
 				if distance_diagnostic then print("distance_diagnostic 25",cpx, cpy, tpx, tpy) end
@@ -18290,7 +18290,7 @@ function addMiningButtons(p,mining_objects)
 					minerals = "none"
 				end
 				local target_description = "target_description"
-				p:addCustomMessage("Science",target_description,string.format("Distance: %.1fU\nBearing: %.1f\nMineral traces detected: %s",target_distance,angle,minerals))
+				p:addCustomMessage("Science",target_description,string.format(_("mining-msgScience", "Distance: %.1fU\nBearing: %.1f\nMineral traces detected: %s"),target_distance,angle,minerals))
 			end)
 		end
 	end
@@ -18298,7 +18298,7 @@ function addMiningButtons(p,mining_objects)
 		if p.mining_next_target_button == nil then
 			if p:hasPlayerAtPosition("Science") then
 				p.mining_next_target_button = "mining_next_target_button"
-				p:addCustomButton("Science",p.mining_next_target_button,"Other mining target",function()
+				p:addCustomButton("Science",p.mining_next_target_button,_("mining-buttonScience", "Other mining target"),function()
 					local nearby_objects = p:getObjectsInRange(1000)
 					local mining_objects = {}
 					if nearby_objects ~= nil and #nearby_objects > 1 then
@@ -18903,16 +18903,16 @@ function endStatistics()
 	if endStatDiagnostic then print("got statuses")	end
 	local gMsg = ""
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
-	gMsg = gMsg .. string.format("Friendly stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n",stat_list.human.station.count,stat_list.human.station.original_count,stat_list.human.station.count/stat_list.human.station.original_count*100,stat_list.human.station.value,stat_list.human.station.original_value,stat_list.human.station.percentage)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Friendly stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n"),stat_list.human.station.count,stat_list.human.station.original_count,stat_list.human.station.count/stat_list.human.station.original_count*100,stat_list.human.station.value,stat_list.human.station.original_value,stat_list.human.station.percentage)
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
-	gMsg = gMsg .. string.format("Enemy stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n",stat_list.kraylor.station.count,stat_list.kraylor.station.original_count,stat_list.kraylor.station.count/stat_list.kraylor.station.original_count*100,stat_list.kraylor.station.value,stat_list.kraylor.station.original_value,stat_list.kraylor.station.percentage)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Enemy stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n"),stat_list.kraylor.station.count,stat_list.kraylor.station.original_count,stat_list.kraylor.station.count/stat_list.kraylor.station.original_count*100,stat_list.kraylor.station.value,stat_list.kraylor.station.original_value,stat_list.kraylor.station.percentage)
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
-	gMsg = gMsg .. string.format("Neutral stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n\n\n\n",stat_list.independent.station.count,stat_list.independent.station.original_count,stat_list.independent.station.count/stat_list.independent.station.original_count*100,stat_list.independent.station.value,stat_list.independent.station.original_value,stat_list.independent.station.percentage)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Neutral stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n\n\n\n"),stat_list.independent.station.count,stat_list.independent.station.original_count,stat_list.independent.station.count/stat_list.independent.station.original_count*100,stat_list.independent.station.value,stat_list.independent.station.original_value,stat_list.independent.station.percentage)
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 	--ship information
-	gMsg = gMsg .. string.format("Friendly ships: strength: %i out of %i (%.1f%%)\n",stat_list.human.ship.value,stat_list.human.ship.original_value,stat_list.human.ship.percentage)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Friendly ships: strength: %i out of %i (%.1f%%)\n"),stat_list.human.ship.value,stat_list.human.ship.original_value,stat_list.human.ship.percentage)
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
-	gMsg = gMsg .. string.format("Enemy ships: strength: %i out of %i (%.1f%%)\n",stat_list.kraylor.ship.value,stat_list.kraylor.ship.original_value,stat_list.kraylor.ship.percentage)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Enemy ships: strength: %i out of %i (%.1f%%)\n"),stat_list.kraylor.ship.value,stat_list.kraylor.ship.original_value,stat_list.kraylor.ship.percentage)
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 	if endStatDiagnostic then print("set raw stats") end
 	local friendlyStationComponent = stat_list.human.station.value/stat_list.human.station.original_value
@@ -18920,54 +18920,54 @@ function endStatistics()
 	local neutralStationComponent = stat_list.independent.station.value/stat_list.independent.station.original_value
 	local friendlyShipComponent = stat_list.human.ship.value/stat_list.human.ship.original_value
 	local enemyShipComponent = 1-stat_list.kraylor.ship.value/stat_list.kraylor.ship.original_value
-	gMsg = gMsg .. string.format("Friendly evaluation strength: %.1f%%\n",stat_list.human.evaluation)
-	gMsg = gMsg .. string.format("   Weights: friendly station: %.2f, neutral station: %.2f, friendly ship: %.2f\n", stat_list.human.weight.station, stat_list.human.weight.neutral, stat_list.human.weight.ship)
-	gMsg = gMsg .. string.format("Enemy evaluation strength: %.1f%%\n",stat_list.kraylor.evaluation)
-	gMsg = gMsg .. string.format("   Weights: enemy station: %.2f, enemy ship: %.2f\n", stat_list.kraylor.weight.station, stat_list.kraylor.weight.ship)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Friendly evaluation strength: %.1f%%\n"),stat_list.human.evaluation)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "   Weights: friendly station: %.2f, neutral station: %.2f, friendly ship: %.2f\n"), stat_list.human.weight.station, stat_list.human.weight.neutral, stat_list.human.weight.ship)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Enemy evaluation strength: %.1f%%\n"),stat_list.kraylor.evaluation)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "   Weights: enemy station: %.2f, enemy ship: %.2f\n"), stat_list.kraylor.weight.station, stat_list.kraylor.weight.ship)
 	local rankVal = friendlyStationComponent*.4 + friendlyShipComponent*.2 + enemyStationComponent*.2 + enemyShipComponent*.1 + neutralStationComponent*.1 
 	if endStatDiagnostic then print("calculated ranking stats") end
 	if endStatDiagnostic then print("rank value: " .. rankVal) end
 	if missionCompleteReason ~= nil then
-		gMsg = gMsg .. "Mission ended because " .. missionCompleteReason .. "\n"
+		gMsg = gMsg .. _("msgMainscreen", "Mission ended because ") .. missionCompleteReason .. "\n"
 		if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 	end
 	if endStatDiagnostic then print("built reason for end") end
 	if missionVictory then
 		if endStatDiagnostic then print("mission victory true") end
 		if rankVal < .7 then
-			rank = "Ensign"
+			rank = _("msgMainscreen", "Ensign")
 		elseif rankVal < .8 then
-			rank = "Lieutenant"
+			rank = _("msgMainscreen", "Lieutenant")
 		elseif rankVal < .9 then
-			rank = "Commander"
+			rank = _("msgMainscreen", "Commander")
 		elseif rankVal < .95 then
-			rank = "Captain"
+			rank = _("msgMainscreen", "Captain")
 		else
-			rank = "Admiral"
+			rank = _("msgMainscreen", "Admiral")
 		end
-		gMsg = gMsg .. "Earned rank: " .. rank
+		gMsg = gMsg .. _("msgMainscreen", "Earned rank: ") .. rank
 		if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 	else
 		if endStatDiagnostic then print("mission victory false") end
 		if rankVal < .6 then
-			rank = "Ensign"
+			rank = _("msgMainscreen", "Ensign")
 		elseif rankVal < .7 then
-			rank = "Lieutenant"
+			rank = _("msgMainscreen", "Lieutenant")
 		elseif rankVal < .8 then
-			rank = "Commander"
+			rank = _("msgMainscreen", "Commander")
 		elseif rankVal < .9 then
-			rank = "Captain"
+			rank = _("msgMainscreen", "Captain")
 		else
-			rank = "Admiral"
+			rank = _("msgMainscreen", "Admiral")
 		end
-		if missionCompleteReason == "Player violated treaty terms by crossing neutral border zone" then
-			gMsg = gMsg .. "Rank after court martial and imprisonment: " .. rank
+		if missionCompleteReason == _("msgMainscreen", "Player violated treaty terms by crossing neutral border zone") then
+			gMsg = gMsg .. _("msgMainscreen", "Rank after court martial and imprisonment: ") .. rank
 			if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
-		elseif missionCompleteReason == "Player committed war crimes by destroying civilians aboard Kraylor station" then
-			gMsg = gMsg .. "Rank after being stripped of ship responsibilities: " .. rank
+		elseif missionCompleteReason == _("msgMainscreen", "Player committed war crimes by destroying civilians aboard Kraylor station") then
+			gMsg = gMsg .. _("msgMainscreen", "Rank after being stripped of ship responsibilities: ") .. rank
 			if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 		else
-			gMsg = gMsg .. "Rank after military reductions due to ignominious defeat: " .. rank
+			gMsg = gMsg .. _("msgMainscreen", "Rank after military reductions due to ignominious defeat: ") .. rank
 			if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 		end
 	end
@@ -19040,13 +19040,13 @@ function updateInner(delta)
 			local timer_seconds = 0
 			if p.cm_boost_timer ~= nil then
 				p.cm_boost_timer = p.cm_boost_timer - delta
-				timer_status = "C.M. Boost"
+				timer_status = _("-tabHelms&Tactical", "C.M. Boost")
 				timer_minutes = math.floor(p.cm_boost_timer / 60)
 				timer_seconds = math.floor(p.cm_boost_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.cm_boost_timer_info = "cm_boost_timer_info"
@@ -19084,13 +19084,13 @@ function updateInner(delta)
 			end
 			if p.cm_strafe_timer ~= nil then
 				p.cm_strafe_timer = p.cm_strafe_timer - delta
-				timer_status = "C.M. Boost"
+				timer_status = _("-tabHelms&Tactical", "C.M. Boost")
 				timer_minutes = math.floor(p.cm_strafe_timer / 60)
 				timer_seconds = math.floor(p.cm_strafe_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.cm_strafe_timer_info = "cm_strafe_timer_info"
@@ -19128,13 +19128,13 @@ function updateInner(delta)
 			end
 			if p.beam_damage_timer ~= nil then
 				p.beam_damage_timer = p.beam_damage_timer - delta
-				timer_status = "Beam Damage"
+				timer_status = _("-tabWeapons&Tactical", "Beam Damage")
 				timer_minutes = math.floor(p.beam_damage_timer / 60)
 				timer_seconds = math.floor(p.beam_damage_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabWeapons&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabWeapons&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Weapons") then
 					p.beam_damage_timer_info = "beam_damage_timer_info"
@@ -19176,13 +19176,13 @@ function updateInner(delta)
 			end
 			if p.beam_cycle_timer ~= nil then
 				p.beam_cycle_timer = p.beam_cycle_timer - delta
-				timer_status = "Beam Cycle"
+				timer_status = _("-tabWeapons&Tactical", "Beam Cycle")
 				timer_minutes = math.floor(p.beam_cycle_timer / 60)
 				timer_seconds = math.floor(p.beam_cycle_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabWeapons&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabWeapons&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Weapons") then
 					p.beam_cycle_timer_info = "beam_cycle_timer_info"
@@ -19224,13 +19224,13 @@ function updateInner(delta)
 			end
 			if p.impulse_timer ~= nil then
 				p.impulse_timer = p.impulse_timer - delta
-				timer_status = "Impulse Speed"
+				timer_status = _("-tabHelms&Tactical", "Impulse Speed")
 				timer_minutes = math.floor(p.impulse_timer / 60)
 				timer_seconds = math.floor(p.impulse_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.impulse_timer_info = "impulse_timer_info"
@@ -19268,13 +19268,13 @@ function updateInner(delta)
 			end
 			if p.warp_timer ~= nil then
 				p.warp_timer = p.warp_timer - delta
-				timer_status = "Warp Speed"
+				timer_status = _("-tabHelms&Tactical", "Warp Speed")
 				timer_minutes = math.floor(p.warp_timer / 60)
 				timer_seconds = math.floor(p.warp_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.warp_timer_info = "warp_timer_info"
@@ -19312,13 +19312,13 @@ function updateInner(delta)
 			end
 			if p.jump_timer ~= nil then
 				p.jump_timer = p.jump_timer - delta
-				timer_status = "Jump Range"
+				timer_status = _("-tabHelms&Tactical", "Jump Range")
 				timer_minutes = math.floor(p.jump_timer / 60)
 				timer_seconds = math.floor(p.jump_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.jump_timer_info = "jump_timer_info"
@@ -19357,13 +19357,13 @@ function updateInner(delta)
 			end
 			if p.shield_timer ~= nil then
 				p.shield_timer = p.shield_timer - delta
-				timer_status = "Shield Capacity"
+				timer_status = _("-tabWeapons&Tactical", "Shield Capacity")
 				timer_minutes = math.floor(p.shield_timer / 60)
 				timer_seconds = math.floor(p.shield_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabWeapons&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabWeapons&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Weapons") then
 					p.shield_timer_info = "shield_timer_info"
@@ -19406,13 +19406,13 @@ function updateInner(delta)
 			end	
 			if p.maneuver_timer ~= nil then
 				p.maneuver_timer = p.maneuver_timer - delta
-				timer_status = "Spin Speed"
+				timer_status = _("-tabHelms&Tactical", "Spin Speed")
 				timer_minutes = math.floor(p.maneuver_timer / 60)
 				timer_seconds = math.floor(p.maneuver_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabHelms&Tactical", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Helms") then
 					p.maneuver_timer_info = "maneuver_timer_info"
@@ -19450,13 +19450,13 @@ function updateInner(delta)
 			end
 			if p.battery_timer ~= nil then
 				p.battery_timer = p.battery_timer - delta
-				timer_status = "Battery Capacity"
+				timer_status = _("-tabEngineer&Engineer+", "Battery Capacity")
 				timer_minutes = math.floor(p.battery_timer / 60)
 				timer_seconds = math.floor(p.battery_timer % 60)
 				if timer_minutes <= 0 then
-					timer_status = string.format("%s %i",timer_status,timer_seconds)
+					timer_status = string.format(_("-tabEngineer&Engineer+", "%s %i"),timer_status,timer_seconds)
 				else
-					timer_status = string.format("%s %i:%.2i",timer_status,timer_minutes,timer_seconds)
+					timer_status = string.format(_("-tabEngineer&Engineer+", "%s %i:%.2i"),timer_status,timer_minutes,timer_seconds)
 				end
 				if p:hasPlayerAtPosition("Engineering") then
 					p.battery_timer_info = "battery_timer_info"

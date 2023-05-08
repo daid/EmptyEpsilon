@@ -11,214 +11,242 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
+
 #: scripts/comms_station.lua:73
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr "Jsme pod útokem! Není čas na pokec!"
+
 #: scripts/comms_station.lua:91
-#, lua-format
-msgctxt "commsStation"
+#, fuzzy, lua-format
+msgctxt "station-comms"
 msgid ""
 "Good day, officer! Welcome to %s.\n"
 "What can we do for you today?"
 msgstr ""
 "Dobrý den, důstojníku! Vítejte na stanici %s.\n"
 "Co pro vás můžeme dnes udělat?"
+
 #: scripts/comms_station.lua:93
-#, lua-format
-msgctxt "commsStation"
+#, fuzzy, lua-format
+msgctxt "station-comms"
 msgid "Welcome to our lovely station %s."
 msgstr "Vítejte na naší krásné stanici %s."
+
 #: scripts/comms_station.lua:98
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us?"
 msgstr "Máte navíc nějaké naváděné střely?"
+
 #: scripts/comms_station.lua:99
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "ammo-comms"
 msgid "Can you restock us with HVLI?"
 msgstr "Můžete nám doplnit zásoby HVLI?"
+
 #: scripts/comms_station.lua:100
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "ammo-comms"
 msgid "Please re-stock our mines."
 msgstr "Prosíme, doplňte naše miny."
+
 #: scripts/comms_station.lua:101
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes?"
 msgstr "Můžete nám poskytnout nějaké jaderné střely?"
+
 #: scripts/comms_station.lua:102
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles."
 msgstr "Prosím, doplňte naše EMP střely."
+
 #: scripts/comms_station.lua:108
-#, lua-format
-msgctxt "commsStation"
+#, fuzzy, lua-format
+msgctxt "ammo-comms"
 msgid "%s (%d rep each)"
 msgstr "%s (%d rep každá)"
+
 #: scripts/comms_station.lua:124
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Pro tuto akci musíte zůstat zadokovaní."
+
 #: scripts/comms_station.lua:131
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr "Neobchodujeme se zbraněmi hromadného ničení."
+
 #: scripts/comms_station.lua:133
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr "Neobchodujeme se zbraněmi hromadného rušení."
+
 #: scripts/comms_station.lua:135
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
 msgstr "S těmito zbraněmi neobchodujeme."
+
 #: scripts/comms_station.lua:146
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr "Všechny jaderné střely jsou nabité a připravené k ničení."
+
 #: scripts/comms_station.lua:148
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr "Omlouvám se, ale jste zásobeni nejvíce, jak můžu dovolit."
+
 #: scripts/comms_station.lua:151 scripts/comms_station.lua:165
 #: scripts/comms_station.lua:229 scripts/comms_station.lua:234
 #: scripts/comms_station.lua:263 scripts/comms_station.lua:289
 #: scripts/comms_station.lua:294
-msgctxt "button"
+#, fuzzy
 msgid "Back"
 msgstr "Zpět"
+
 #: scripts/comms_station.lua:154
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr "Nemáte dostatek reputace."
+
 #: scripts/comms_station.lua:160
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr "Jste plně naloženi a můžete vybuchovat věci."
+
 #: scripts/comms_station.lua:162
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
 msgstr ""
 "Velkoryse jsme vám doplnili zásoby zbraní.\n"
 "Využijte je dobře."
+
 #: scripts/comms_station.lua:176
-#, lua-format
-msgctxt "commsStation"
+#, fuzzy, lua-format
+msgctxt "station-comms"
 msgid ""
 "This is %s. Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr ""
 "Zde je %s. Dobrý den, důstojníku.\n"
 "Pokud potřebujete zásoby, nejprve u nás zakotvěte."
+
 #: scripts/comms_station.lua:178
-#, lua-format
-msgctxt "commsStation"
+#, fuzzy, lua-format
+msgctxt "station-comms"
 msgid ""
 "This is %s. Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr ""
 "Zde je %s. Zdravíme.\n"
 "Pokud s námi chcete obchodovat, nejprve u nás zakotvěte."
+
 #: scripts/comms_station.lua:185
-#, lua-format
-msgctxt "commsStation"
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr "Můžete nám poslat zásobovací modul? (%d rep)"
+
 #: scripts/comms_station.lua:194
-#, lua-format
-msgctxt "commsStation"
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
 msgstr "Prosím pošlete posily! (%d rep)"
+
 #: scripts/comms_station.lua:209
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr "Musíte mít umístěn bod, než můžete žádat pomoc."
+
 #: scripts/comms_station.lua:211
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr "Na jaký bod máme doručit zásoby?"
+
 #: scripts/comms_station.lua:224
-#, lua-format
-msgctxt "commsStation"
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward %s."
 msgstr "Vyslali jsme zásobovací loď na %s."
+
 #: scripts/comms_station.lua:226 scripts/comms_station.lua:286
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr "Nemáte dostatek reputace!"
+
 #: scripts/comms_station.lua:242
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "What kind of reinforcement ship would you like?"
 msgstr ""
+
 #: scripts/comms_station.lua:243
 #, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "Adder MK3 (%d rep)"
 msgstr ""
+
 #: scripts/comms_station.lua:247
 #, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "MU52 Hornet (%d rep)"
 msgstr ""
+
 #: scripts/comms_station.lua:251
 #, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "Standard Adder MK5 (%d rep)"
 msgstr ""
+
 #: scripts/comms_station.lua:255
 #, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "Adder MK8 (%d rep)"
 msgstr ""
+
 #: scripts/comms_station.lua:259
 #, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "Phobos T3 (%d rep)"
 msgstr ""
+
 #: scripts/comms_station.lua:267
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr "Musíte mít umístěn bod, než můžete žádat o posily."
+
 #: scripts/comms_station.lua:269
-msgctxt "commsStation"
+#, fuzzy
+msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "Na jaký bod máme vyslat posily?"
+
 #: scripts/comms_station.lua:284
-#, lua-format
-msgctxt "commsStation"
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at %s."
 msgstr "Vyslali jsme %s k pomoci na %s."
+
 #: scripts/comms_station.lua:355
-#, lua-format
-msgctxt "commsStation"
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
 msgid "WP %d"
 msgstr "Bod %d"
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-# Pozemske Hvezdne Namornictvo
-# Spojene Hvezdne Namornictvo
-# Nebeska Sopojena Flotila

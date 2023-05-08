@@ -11,78 +11,107 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
+
 #: scripts/comms_ship.lua:38
-msgctxt "commsShipAssist"
+#, fuzzy
+msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr "Was wünschen Sie?"
+
 #: scripts/comms_ship.lua:40
-msgctxt "commsShipAssist"
+#, fuzzy
+msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr "Wie können wir behilflich sein?"
+
 #: scripts/comms_ship.lua:43
-msgctxt "commsShipAssist"
+#, fuzzy
+msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr "Verteidige einen Wegpunkt"
+
 #: scripts/comms_ship.lua:46
-msgctxt "commsShipAssist"
+#, fuzzy
+msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr "Keine Wegpunkte gesetzt. Bitte setzen sie zunächst einen Wegpunkt."
+
 #: scripts/comms_ship.lua:47 scripts/comms_ship.lua:57
 #: scripts/comms_ship.lua:70 scripts/comms_ship.lua:78
 #: scripts/comms_ship.lua:88
-msgctxt "button"
+#, fuzzy
 msgid "Back"
 msgstr "Zurück"
+
 #: scripts/comms_ship.lua:49
-msgctxt "commsShipAssist"
+#, fuzzy
+msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr "Welchen Wegpunkt sollen wir verteidigen?"
+
 #: scripts/comms_ship.lua:52
-#, lua-format
-msgctxt "commsShipAssist"
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
 msgid "Defend %s"
 msgstr "Verteidige %s"
+
 #: scripts/comms_ship.lua:56
-#, lua-format
-msgctxt "commsShipAssist"
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
 msgid "We are heading to assist at %s."
 msgstr "Wir sind unterwegs, um bei %s zu unterstützen."
+
 #: scripts/comms_ship.lua:66
-msgctxt "commsShipAssist"
+#, fuzzy
+msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr "Helfen Sie uns"
+
 #: scripts/comms_ship.lua:68
-msgctxt "commsShipAssist"
+#, fuzzy
+msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr "Wir sind unterwegs, um Sie zu unterstützen."
+
 #: scripts/comms_ship.lua:75
-msgctxt "commsShipAssist"
+#, fuzzy
+msgctxt "shipAssist-comms"
 msgid "Report status"
 msgstr "Statusbericht"
+
 #: scripts/comms_ship.lua:84
-#, lua-format
-msgctxt "commsShipAssist"
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr "Docke bei %s an"
+
 #: scripts/comms_ship.lua:86
-#, lua-format
-msgctxt "commsShipAssist"
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr "Wir docken bei at an %s."
+
 #: scripts/comms_ship.lua:105
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
 msgstr "Wir sehen Ihrer Zerstörung entgegen!"
+
 #: scripts/comms_ship.lua:106
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
 msgstr "Ihre Blutlinie wird hier enden!"
+
 #: scripts/comms_ship.lua:107
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
 msgstr "Ihre kraftlose Drohungen sind Bedeutungslos."
+
 #: scripts/comms_ship.lua:109
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "\n"
@@ -91,8 +120,10 @@ msgstr ""
 "Ktzzzsss.\n"
 "\n"
 "Ihr werdet sterben, Schwächchchchlinge!!"
+
 #: scripts/comms_ship.lua:113
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "\n"
@@ -102,12 +133,16 @@ msgstr ""
 "müssen.\n"
 "\n"
 "Ende der Nachricht."
+
 #: scripts/comms_ship.lua:117
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr "Gehen Sie uns aus dem Weg, oder Ihr Tod wird uns extrem amüsieren!"
+
 #: scripts/comms_ship.lua:119
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid ""
 "One zero one.\n"
 "\n"
@@ -128,20 +163,28 @@ msgstr ""
 ":Kommen Sie und nicht in die Quere.:\n"
 "\n"
 "Verbindung beendet."
+
 #: scripts/comms_ship.lua:128
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr "FÜHRE AUS: SELFDESTRUCT"
+
 #: scripts/comms_ship.lua:129
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr "Schadhafter Befehl entdeckt. Erfasse Quelle."
+
 #: scripts/comms_ship.lua:130
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr "Externer Befehl ignoriert."
+
 #: scripts/comms_ship.lua:132
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
 "all.\n"
@@ -153,26 +196,36 @@ msgstr ""
 "\n"
 "Halten Sie ihre Position und machen Sie sich bereit, Ihre Körper als Nahrung "
 "zu spenden."
+
 #: scripts/comms_ship.lua:135
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid "<Transmits 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr "<Sendet 'The Itsy-Bitsy Spider' auf allen Wellenlängen>"
+
 #: scripts/comms_ship.lua:136
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr ""
 "Wir brauchen keine Erlaubnis um so eine unbedeutende Bedrohung zu "
 "zerpflücken."
+
 #: scripts/comms_ship.lua:137
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr "Der Schwarm hat höhere Prioritäten als Plagen auszurotten."
+
 #: scripts/comms_ship.lua:139
-msgctxt "commsShipEnemy"
+#, fuzzy
+msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
 msgstr "Kümmern Sie sich um Ihre eigenen Angelegenheiten!"
+
 #: scripts/comms_ship.lua:167
-msgctxt "commsShip"
+#, fuzzy
+msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "\n"
@@ -181,8 +234,10 @@ msgstr ""
 "Es tut mir leid, wir haben keine Zeit mit Ihnen zu plaudern.\n"
 "\n"
 "Wir sind auf einer wichtigen Mission."
+
 #: scripts/comms_ship.lua:171
-msgctxt "commsShip"
+#, fuzzy
+msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "\n"
@@ -191,41 +246,47 @@ msgstr ""
 "Wir können Ihnen nichts anbieten.\n"
 "\n"
 "Einen schönen Tag noch."
+
 #: scripts/comms_ship.lua:186
-#, lua-format
-msgctxt "commsShipAssist"
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr "Hülle: %d%%\n"
+
 #: scripts/comms_ship.lua:190
-#, lua-format
-msgctxt "commsShipAssist"
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr "Schild: %d%%\n"
+
 #: scripts/comms_ship.lua:192
-#, lua-format
-msgctxt "commsShipAssist"
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
 msgstr "Frontschild:  %d%%\n"
+
 #: scripts/comms_ship.lua:193
-#, lua-format
-msgctxt "commsShipAssist"
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
 msgstr ""
 "Heckschilde: %d%%\n"
 "\n"
+
 #: scripts/comms_ship.lua:196
-#, lua-format
-msgctxt "commsShipAssist"
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
 msgid "Shield %d: %d%%\n"
 msgstr "Schild %d: %d%%\n"
+
 #: scripts/comms_ship.lua:202
-#, lua-format
-msgctxt "commsShipAssist"
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr "%s Raketen: %d/%d\n"
+
 #: scripts/comms_ship.lua:214
-#, lua-format
-msgctxt "commsShipAssist"
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
 msgid "WP %d"
 msgstr "WP %d"
-#, fuzzy

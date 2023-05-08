@@ -1,91 +1,90 @@
 #: scripts/comms_ship.lua:38
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
 
 #: scripts/comms_ship.lua:40
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr ""
 
 #: scripts/comms_ship.lua:43
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr ""
 
 #: scripts/comms_ship.lua:46
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
 
 #: scripts/comms_ship.lua:47 scripts/comms_ship.lua:57
 #: scripts/comms_ship.lua:70 scripts/comms_ship.lua:78
 #: scripts/comms_ship.lua:88
-msgctxt "button"
 msgid "Back"
 msgstr ""
 
 #: scripts/comms_ship.lua:49
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr ""
 
 #: scripts/comms_ship.lua:52
 #, lua-format
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Defend %s"
 msgstr ""
 
 #: scripts/comms_ship.lua:56
 #, lua-format
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "We are heading to assist at %s."
 msgstr ""
 
 #: scripts/comms_ship.lua:66
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr ""
 
 #: scripts/comms_ship.lua:68
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr ""
 
 #: scripts/comms_ship.lua:75
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Report status"
 msgstr ""
 
 #: scripts/comms_ship.lua:84
 #, lua-format
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr ""
 
 #: scripts/comms_ship.lua:86
 #, lua-format
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr ""
 
 #: scripts/comms_ship.lua:105
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
 msgstr ""
 
 #: scripts/comms_ship.lua:106
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
 msgstr ""
 
 #: scripts/comms_ship.lua:107
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
 msgstr ""
 
 #: scripts/comms_ship.lua:109
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "\n"
@@ -93,7 +92,7 @@ msgid ""
 msgstr ""
 
 #: scripts/comms_ship.lua:113
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "\n"
@@ -101,12 +100,12 @@ msgid ""
 msgstr ""
 
 #: scripts/comms_ship.lua:117
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
 
 #: scripts/comms_ship.lua:119
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid ""
 "One zero one.\n"
 "\n"
@@ -120,22 +119,22 @@ msgid ""
 msgstr ""
 
 #: scripts/comms_ship.lua:128
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr ""
 
 #: scripts/comms_ship.lua:129
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr ""
 
 #: scripts/comms_ship.lua:130
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr ""
 
 #: scripts/comms_ship.lua:132
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
 "all.\n"
@@ -144,27 +143,27 @@ msgid ""
 msgstr ""
 
 #: scripts/comms_ship.lua:135
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid "<Transmits 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr ""
 
 #: scripts/comms_ship.lua:136
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr ""
 
 #: scripts/comms_ship.lua:137
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
 
 #: scripts/comms_ship.lua:139
-msgctxt "commsShipEnemy"
+msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
 msgstr ""
 
 #: scripts/comms_ship.lua:167
-msgctxt "commsShip"
+msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "\n"
@@ -172,7 +171,7 @@ msgid ""
 msgstr ""
 
 #: scripts/comms_ship.lua:171
-msgctxt "commsShip"
+msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "\n"
@@ -181,42 +180,42 @@ msgstr ""
 
 #: scripts/comms_ship.lua:186
 #, lua-format
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr ""
 
 #: scripts/comms_ship.lua:190
 #, lua-format
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr ""
 
 #: scripts/comms_ship.lua:192
 #, lua-format
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
 msgstr ""
 
 #: scripts/comms_ship.lua:193
 #, lua-format
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
 msgstr ""
 
 #: scripts/comms_ship.lua:196
 #, lua-format
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "Shield %d: %d%%\n"
 msgstr ""
 
 #: scripts/comms_ship.lua:202
 #, lua-format
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr ""
 
 #: scripts/comms_ship.lua:214
 #, lua-format
-msgctxt "commsShipAssist"
+msgctxt "shipAssist-comms"
 msgid "WP %d"
 msgstr ""

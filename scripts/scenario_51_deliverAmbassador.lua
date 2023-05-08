@@ -354,9 +354,9 @@ function revolutionOccurs(delta)
 		local mob_minutes = math.floor(breakoutTimer / 60)
 		local mob_seconds = math.floor(breakoutTimer % 60)
 		if mob_minutes <= 0 then
-			mob_label = string.format("%s %i",mob_label,mob_seconds)
+			mob_label = string.format(_("audio-tabRelay&Operations", "%s %i"),mob_label,mob_seconds)
 		else
-			mob_label = string.format("%s %i:%.2i",mob_label,mob_minutes,mob_seconds)
+			mob_label = string.format(_("audio-tabRelay&Operations", "%s %i:%.2i"),mob_label,mob_minutes,mob_seconds)
 		end
 		if player:hasPlayerAtPosition("Relay") then
 			player.mob_timer = "mob_timer"
@@ -1074,7 +1074,7 @@ function handleDockedState()
 end
 
 function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then setCommsMessage(_("ammo-comms", "You need to stay docked for that action.")); return end
+    if not player:isDocked(comms_target) then setCommsMessage(_("station-comms", "You need to stay docked for that action.")); return end
     if not isAllowedTo(comms_data.weapons[weapon]) then
         if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
         elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))

@@ -11,3 +11,2217 @@ msgid ""
 "Carrier and several player ships with turrets available for use by the "
 "players made available with this scenario script and the associated files."
 msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:93
+#: scripts/scenario_56_carrierTurret.lua:352
+msgctxt "buttonGM"
+msgid "Turn On Diagnostic"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:96
+#: scripts/scenario_56_carrierTurret.lua:376
+msgctxt "buttonGM"
+msgid "Delay normal to slow"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:277
+msgctxt "buttonGM"
+msgid "P2 upgrade spin"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:278
+msgctxt "buttonGM"
+msgid "P2 locate enemy base"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:279
+msgctxt "buttonGM"
+msgid "P2 rescue scientist"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:287
+msgctxt "buttonGM"
+msgid "P3 upgrade beam dmg"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:288
+msgctxt "buttonGM"
+msgid "P3 tractor ship"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:289
+msgctxt "buttonGM"
+msgid "P3 add tube"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:346
+msgctxt "buttonGM"
+msgid "Turn Off Diagnostic"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:364
+msgctxt "buttonGM"
+msgid "Delay slow to fast"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:370
+msgctxt "buttonGM"
+msgid "Delay fast to normal"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1097
+msgctxt "scienceDescription-station"
+msgid "Optical Components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1111
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make and supply optic components for various station and ship systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1112
+msgctxt "stationStory-comms"
+msgid ""
+"This station continues the businesses from Earth based on the merging of "
+"several companies including Leica from Switzerland, the lens manufacturer "
+"and the Japanese advanced low carbon electronic and optic company"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1119
+msgctxt "scienceDescription-station"
+msgid "Battery and software engineering"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1131
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide high quality high capacity batteries and specialized software for "
+"all shipboard systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1132
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after a fictional software engineer in a late 20th "
+"century movie depicting humanity unknowingly conquered by aliens and kept "
+"docile by software generated illusion"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1139
+msgctxt "scienceDescription-station"
+msgid "Shield and Armor Research"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1153
+msgctxt "stationGeneralInfo-comms"
+msgid "The finest shield and armor manufacturer in the quadrant"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1154
+msgctxt "stationStory-comms"
+msgid ""
+"We named this station for the pioneering spirit of the 22nd century "
+"Starfleet explorer, Captain Jonathan Archer"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1161
+msgctxt "scienceDescription-station"
+msgid "Energy and particle beam components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1175
+msgctxt "stationGeneralInfo-comms"
+msgid "We fabricate general and specialized components for ship beam systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1176
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after Archimedes who, according to legend, used a "
+"series of adjustable focal length mirrors to focus sunlight on a Roman naval "
+"fleet invading Syracuse, setting fire to it"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1183
+msgctxt "scienceDescription-station"
+msgid "Warp and Impulse engine manufacturing"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1195
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We manufacture warp, impulse and jump engines for the human navy fleet as "
+"well as other independent clients on a contract basis"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1196
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the late 19th century astronaut as well as the "
+"fictionlized stations that followed. The station initially constructed "
+"entire space worthy vessels. In time, it transitioned into specializeing in "
+"propulsion systems."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1203
+msgctxt "scienceDescription-station"
+msgid "Training and Coordination"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1214
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We train naval cadets in routine and specialized functions aboard space "
+"vessels and coordinate naval activity throughout the sector"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1215
+msgctxt "stationStory-comms"
+msgid ""
+"The original station builders were fans of the late 20th century scientist "
+"and author Isaac Asimov. The station was initially named Foundation, but was "
+"later changed simply to Asimov. It started off as a stellar observatory, "
+"then became a supply stop and as it has grown has become an educational and "
+"coordination hub for the region"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1222
+msgctxt "scienceDescription-station"
+msgid "Communication components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1235
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide a range of communication equipment and software for use aboard "
+"ships"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1236
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Reginald Barclay who established the first "
+"transgalactic com link through the creative application of a quantum "
+"singularity. Station personnel often refer to the station as the Broccoli "
+"station"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1243
+msgctxt "scienceDescription-station"
+msgid "Medical research"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1246
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and treat exotic medical conditions"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1247
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the United States national medical research "
+"center based in Bethesda, Maryland on earth which was established in the mid "
+"20th century"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1254
+msgctxt "scienceDescription-station"
+msgid "Warp drive components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1271
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide warp drive engines and components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1272
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after Chris Van Den Broeck who did some initial "
+"research into the possibility of warp drive in the late 20th century on Earth"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1279
+#: scripts/scenario_56_carrierTurret.lua:1701
+#: scripts/scenario_56_carrierTurret.lua:1742
+#: scripts/scenario_56_carrierTurret.lua:2409
+msgctxt "scienceDescription-station"
+msgid "Mining station"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1295
+msgctxt "scienceDescription-station"
+msgid "Robotic research"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1308
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and provide robotic systems and components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1309
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after Dr. Susan Calvin who pioneered robotic "
+"behavioral research and programming"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1316
+msgctxt "scienceDescription-station"
+msgid "Advanced Material components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1341
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We fabricate several different kinds of materials critical to various space "
+"industries like ship building, station construction and mineral extraction"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1342
+msgctxt "stationStory-comms"
+msgid ""
+"We named our station after Dr. Cavor, the physicist that invented a barrier "
+"material for gravity waves - Cavorite"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1349
+#: scripts/scenario_56_carrierTurret.lua:1899
+msgctxt "scienceDescription-station"
+msgid "Trading station"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1360
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"Only the largest market and trading location in twenty sectors. You can find "
+"your heart's desire here"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1361
+msgctxt "stationStory-comms"
+msgid ""
+"Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. "
+"Designed and built with trade and commerce in mind"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1368
+msgctxt "scienceDescription-station"
+msgid "Shielded circuitry fabrication"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1383
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make a large variety of circuits for numerous ship systems shielded from "
+"sensor detection and external control interference"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1384
+msgctxt "stationStory-comms"
+msgid ""
+"Our station is named after the law which quantifies the amount of force with "
+"which stationary electrically charged particals repel or attact each other - "
+"a fundamental principle in the design of our circuits"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1391
+#: scripts/scenario_56_carrierTurret.lua:2184
+msgctxt "scienceDescription-station"
+msgid "Impulse engine components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1406
+msgctxt "stationGeneralInfo-comms"
+msgid "We supply high quality impulse engines and parts for use aboard ships"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1407
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after the fictional engineer, Cyrus Smith created by "
+"19th century author Jules Verne"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1414
+#: scripts/scenario_56_carrierTurret.lua:1918
+#: scripts/scenario_56_carrierTurret.lua:2229
+msgctxt "scienceDescription-station"
+msgid "Android components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1427
+msgctxt "stationGeneralInfo-comms"
+msgid "Supplier of android components, programming and service"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1428
+msgctxt "stationStory-comms"
+msgid ""
+"Named for Richard Deckard who inspired many of the sophisticated safety "
+"security algorithms now required for all androids"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1435
+msgctxt "scienceDescription-station"
+msgid "Repulsor and Tractor Beam Components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1450
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We can meet all your pushing and pulling needs with specialized equipment "
+"custom made"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1451
+msgctxt "stationStory-comms"
+msgid ""
+"The station name comes from a short story by the 20th century author "
+"Clifford D. Simak as well as from the 19th century developer John Deere who "
+"inspired a company that makes the Earth bound equivalents of our products"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1458
+#: scripts/scenario_56_carrierTurret.lua:1939
+msgctxt "scienceDescription-station"
+msgid "Transporter components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1473
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide transporters used aboard ships as well as the components for "
+"repair and maintenance"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1474
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the early 22nd century inventor of the "
+"transporter, Dr. Emory Erickson. This station is proud to have received the "
+"endorsement of Admiral Leonard McCoy"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1481
+#: scripts/scenario_56_carrierTurret.lua:1783
+msgctxt "scienceDescription-station"
+msgid "Autodoc components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1495
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide components for automated medical machinery"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1496
+msgctxt "stationStory-comms"
+msgid ""
+"The station is the evolution of the company that started automated "
+"pharmaceutical dispensing in the early 21st century on Earth in Finland"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1503
+msgctxt "scienceDescription-station"
+msgid "Nanotechnology research"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1517
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide nanites and software for a variety of ship-board systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1518
+msgctxt "stationStory-comms"
+msgid ""
+"This station's name recognizes one of the first scientific researchers into "
+"nanotechnology, physicist Richard Feynman"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1526
+#: scripts/scenario_56_carrierTurret.lua:1633
+msgctxt "scienceDescription-station"
+msgid "Mining"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1528
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We mine nearby asteroids for precious minerals and process them for sale"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1529
+msgctxt "stationStory-comms"
+msgid ""
+"This station's name is inspired by a large gold mine on Earth in Indonesia. "
+"The station builders hoped to have a similar amount of minerals found "
+"amongst these asteroids"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1571
+msgctxt "scienceDescription-station"
+msgid "Observatory and stellar mapping"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1582
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We study the cosmos and map stellar phenomena. We also track moving "
+"asteroids. Look out! Just kidding"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1589
+#: scripts/scenario_56_carrierTurret.lua:2353
+msgctxt "scienceDescription-station"
+msgid "Sensor components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1601
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture sensor components and systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1602
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Tony Heyes the inventor of some of the earliest "
+"electromagnetic sensors in the mid 20th century on Earth in the United "
+"Kingdom to assist blind human mobility"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1609
+msgctxt "scienceDescription-station"
+msgid "Nanite supplier"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1624
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide nanites for various organic and non-organic systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1625
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after the nanotechnologist Hossam Haick from the early "
+"21st century on Earth in Israel"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1637
+msgctxt "stationGeneralInfo-comms"
+msgid "We mine nearby asteroids for precious minerals"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1679
+msgctxt "scienceDescription-station"
+msgid "Xenopsychology training"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1693
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide classes and simulation to help train diverse species in how to "
+"relate to each other"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1694
+msgctxt "stationStory-comms"
+msgid ""
+"A continuation of the research initially conducted by Dr. Gennady Komov in "
+"the early 22nd century on Venus, supported by the application of these "
+"principles"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1796
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We build and repair and provide components and upgrades for automated "
+"facilities designed for ships where a doctor cannot be a crew member "
+"(commonly called autodocs)"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1797
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Dr. Lipkin who pioneered some of the research and "
+"application around robot assisted surgery in the area of partial nephrectomy "
+"for renal tumors in the early 21st century on Earth"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1804
+msgctxt "scienceDescription-station"
+msgid "Zero gravity sports and entertainment"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1817
+msgctxt "stationGeneralInfo-comms"
+msgid "Come take in a game or two or perhaps see a show"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1818
+msgctxt "stationStory-comms"
+msgid ""
+"Named after Madison Square Gardens from 21st century Earth, this station was "
+"designed to serve similar purposes in space - a venue for sports and "
+"entertainment"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1825
+msgctxt "scienceDescription-station"
+msgid "Energy beam components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1838
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture energy beam components and systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1839
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Theodore Maiman who researched and built the "
+"first laser in the mid 20th centuryon Earth"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1846
+msgctxt "scienceDescription-station"
+msgid "Energy Beam Components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1861
+msgctxt "stationGeneralInfo-comms"
+msgid "We manufacture energy beam components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1862
+msgctxt "stationStory-comms"
+msgid ""
+"Station named after Guglielmo Marconi an Italian inventor from early 20th "
+"century Earth who, along with Nicolo Tesla, claimed to have invented a death "
+"ray or particle beam weapon"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1869
+msgctxt "scienceDescription-station"
+msgid "Medical Research"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1872
+msgctxt "stationGeneralInfo-comms"
+msgid "We research exotic diseases and other human medical conditions"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1873
+msgctxt "stationStory-comms"
+msgid ""
+"We continue the medical work started by William Worrall Mayo in the late "
+"19th century on Earth"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1880
+msgctxt "scienceDescription-station"
+msgid "Exobiology research"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1891
+msgctxt "stationGeneralInfo-comms"
+msgid "We study recently discovered life forms not native to Earth"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1892
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after one the early exobiologists from mid 20th "
+"century Earth, Dr. Stanley Miller"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1910
+msgctxt "stationGeneralInfo-comms"
+msgid "Come to Muddvile for all your trade and commerce needs and desires"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1911
+msgctxt "stationStory-comms"
+msgid ""
+"Upon retirement, Harry Mudd started this commercial venture using his "
+"leftover inventory and extensive connections obtained while he traveled the "
+"stars as a salesman"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1931
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and manufacture android components and systems. Our design our "
+"androids to maximize their likeness to humans"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1932
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the ground breaking model of android produced by "
+"the Tyrell corporation"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1955
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and fabricate high quality transporters and transporter "
+"components for use aboard ships"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1956
+msgctxt "stationStory-comms"
+msgid ""
+"Miles O'Brien started this business after his experience as a transporter "
+"chief"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1963
+msgctxt "scienceDescription-station"
+msgid "Optical components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1977
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We fabricate optical lenses and related equipment as well as fiber optic "
+"cabling and components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1978
+msgctxt "stationStory-comms"
+msgid ""
+"This station grew out of the Olympus company based on earth in the early "
+"21st century. It merged with Infinera, then bought several software "
+"comapnies before branching out into space based industry"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1985
+msgctxt "scienceDescription-station"
+msgid "Diplomatic training"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1988
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"The premeire academy for leadership and diplomacy training in the region"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1989
+msgctxt "stationStory-comms"
+msgid ""
+"Established by the royal family so critical during the political upheaval era"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:1996
+msgctxt "scienceDescription-station"
+msgid "Mining and trade"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2040
+msgctxt "scienceDescription-station"
+msgid "Mining and gambling"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2086
+#: scripts/scenario_56_carrierTurret.lua:2130
+msgctxt "scienceDescription-station"
+msgid "Load lifters and components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2099
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide load lifters and components for various ship systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2100
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Lars Owen. After his extensive eperience with "
+"tempermental machinery on Tatooine, he used his subject matter expertise to "
+"expand into building and manufacturing the equipment adding innovations "
+"based on his years of experience using load lifters and their relative "
+"cousins, moisture vaporators"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2107
+msgctxt "scienceDescription-station"
+msgid "Optic components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2122
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide optic components for various ship systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2123
+msgctxt "stationStory-comms"
+msgid ""
+"This station is an outgrowth of the Panduit corporation started in the mid "
+"20th century on Earth in the United States"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2145
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide load lifters and components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2146
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Ellen Ripley who made creative and effective use "
+"of one of our load lifters when defending her ship"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2153
+msgctxt "scienceDescription-station"
+msgid "Shield components and research"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2168
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and fabricate components for ship shield systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2169
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after the national research institution Rutherford "
+"Appleton Laboratory in the United Kingdom which conducted some preliminary "
+"research into the feasability of generating an energy shield in the late "
+"20th century"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2176
+#: scripts/scenario_56_carrierTurret.lua:2560
+msgctxt "scienceDescription-station"
+msgid "Observatory"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2198
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture impulse engine components and systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2199
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Roger Shawyer who built the first prototype "
+"impulse engine in the early 21st century"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2206
+msgctxt "scienceDescription-station"
+msgid "Repulsor and tractor beam components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2221
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make ship systems designed to push or pull other objects around in space"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2222
+msgctxt "stationStory-comms"
+msgid ""
+"Our station is named Shree after one of many tugboat manufacturers in the "
+"early 21st century on Earth in India. Tugboats serve a similar purpose for "
+"ocean-going vessels on earth as tractor and repulsor beams serve for space-"
+"going vessels today"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2242
+msgctxt "stationGeneralInfo-comms"
+msgid "We create androids and android components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2243
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Dr. Noonian Soong, the famous android researcher "
+"and builder"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2250
+msgctxt "scienceDescription-station"
+msgid "Logistics coordination"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2253
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We support the stations and ships in the area with planning and "
+"communication services"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2254
+msgctxt "stationStory-comms"
+msgid ""
+"We recognize the influence of Starfleet Captain James Tiberius Kirk in the "
+"23rd century in our station name"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2261
+msgctxt "scienceDescription-station"
+msgid "Advanced material components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2286
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We create multiple types of advanced material components. Our most popular "
+"products are our filaments"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2287
+msgctxt "stationStory-comms"
+msgid ""
+"We learned several of our critical industrial processes from the Tokra race, "
+"so we honor our fortune by naming the station after them"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2294
+msgctxt "scienceDescription-station"
+msgid "Shield and armor components and research"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2308
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and make general and specialized components for ship shield and "
+"ship armor systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2309
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after one of the earliest researchers in shield "
+"technology, Alexander Toohie back when it was considered impractical to "
+"construct shields due to the physics involved."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2316
+#: scripts/scenario_56_carrierTurret.lua:2583
+msgctxt "scienceDescription-station"
+msgid "Ship building and maintenance facility"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2327
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We work on all aspects of naval ship building and maintenance. Many of the "
+"naval models are researched, designed and built right here on this station. "
+"Our design goals seek to make the space faring experience as simple as "
+"possible given the tremendous capabilities of the modern naval vessel"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2334
+msgctxt "scienceDescription-station"
+msgid "Shielded Circuitry Fabrication"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2345
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We specialize in circuitry shielded from external hacking suitable for ship "
+"systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2346
+msgctxt "stationStory-comms"
+msgid ""
+"We started as an expansion from the lunar based chip manufacturer of Earth "
+"legacy Intel electronic chips"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2367
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and construct components for the most powerful and accurate "
+"sensors used aboard ships along with the software to make them easy to use"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2368
+msgctxt "stationStory-comms"
+msgid ""
+"The Veloquan company has its roots in the manufacturing of LIDAR sensors in "
+"the early 21st century on Earth in the United States for autonomous ground-"
+"based vehicles. They expanded research and manufacturing operations to "
+"include various sensors for space vehicles. Veloquan was the result of "
+"numerous mergers and acquisitions of several companies including Velodyne "
+"and Quanergy"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2375
+msgctxt "scienceDescription-station"
+msgid "Warp engine components"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2390
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We specialize in the esoteric components necessary to make warp drives "
+"function properly"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2391
+msgctxt "stationStory-comms"
+msgid ""
+"Zefram Cochrane constructed the first warp drive in human history. We named "
+"our station after him because of the specialized warp systems work we do"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2400
+msgctxt "scienceDescription-station"
+msgid "Commerce and gambling"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2402
+msgctxt "stationGeneralInfo-comms"
+msgid "Come play some games and shop. House take does not exceed 4 percent"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2450
+msgctxt "scienceDescription-station"
+msgid "Casino and Gambling"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2457
+msgctxt "scienceDescription-station"
+msgid "Gambling and resupply"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2459
+msgctxt "stationGeneralInfo-comms"
+msgid "Relax and meet some interesting players"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2466
+msgctxt "scienceDescription-station"
+msgid "Commerce and recreation"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2474
+msgctxt "scienceDescription-station"
+msgid "Xenopsychology research"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2481
+#: scripts/scenario_56_carrierTurret.lua:2496
+#: scripts/scenario_56_carrierTurret.lua:2525
+#: scripts/scenario_56_carrierTurret.lua:2591
+msgctxt "scienceDescription-station"
+msgid "Resupply"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2504
+msgctxt "scienceDescription-station"
+msgid "Textiles and fashion"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2511
+msgctxt "scienceDescription-station"
+msgid "Stress Psychology Research"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2518
+msgctxt "scienceDescription-station"
+msgid "Low gravity research"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2528
+msgctxt "stationGeneralInfo-comms"
+msgid "Get your energy here! Grab a drink before you go!"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2535
+msgctxt "scienceDescription-station"
+msgid "Research Lab and Observatory"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2542
+msgctxt "scienceDescription-station"
+msgid "Biotech research"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2549
+msgctxt "scienceDescription-station"
+msgid "Routine maintenance and entertainment"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2552
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"Stop by for repairs. Take in one of our juggling shows featuring the four-"
+"armed Skandars"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2553
+msgctxt "stationStory-comms"
+msgid ""
+"The nomadic Skandars have set up at this station to practice their "
+"entertainment and maintenance skills as well as build a community where "
+"Skandars can relax"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2567
+msgctxt "scienceDescription-station"
+msgid "Automated weapons systems"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2569
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and create automated weapons systems to improve ship combat "
+"capability"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2576
+msgctxt "scienceDescription-station"
+msgid "Biotechnology research"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2862
+msgctxt "station-comms"
+msgid "We are under attack! No time for chatting!"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2875
+msgctxt "station-comms"
+msgid ""
+"Good day, officer!\n"
+"What can we do for you today?\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2877
+msgctxt "station-comms"
+msgid "Welcome to our lovely station.\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2880
+msgctxt "station-comms"
+msgid ""
+"Forgive us if we seem a little distracted. We are carefully monitoring the "
+"enemies nearby."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2888
+msgctxt "ammo-comms"
+msgid "I need ordnance restocked"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2889
+msgctxt "ammo-comms"
+msgid "What type of ordnance?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2892
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s (%d rep each)"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2900
+#: scripts/scenario_56_carrierTurret.lua:3558
+msgctxt "orders-comms"
+msgid "What are my current orders?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2904
+#: scripts/scenario_56_carrierTurret.lua:3562
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"   %i Minutes remain in game"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2907
+#: scripts/scenario_56_carrierTurret.lua:2985
+#: scripts/scenario_56_carrierTurret.lua:2987
+#: scripts/scenario_56_carrierTurret.lua:3039
+#: scripts/scenario_56_carrierTurret.lua:3090
+#: scripts/scenario_56_carrierTurret.lua:3104
+#: scripts/scenario_56_carrierTurret.lua:3108
+#: scripts/scenario_56_carrierTurret.lua:3115
+#: scripts/scenario_56_carrierTurret.lua:3117
+#: scripts/scenario_56_carrierTurret.lua:3141
+#: scripts/scenario_56_carrierTurret.lua:3150
+#: scripts/scenario_56_carrierTurret.lua:3155
+#: scripts/scenario_56_carrierTurret.lua:3163
+#: scripts/scenario_56_carrierTurret.lua:3224
+#: scripts/scenario_56_carrierTurret.lua:3254
+#: scripts/scenario_56_carrierTurret.lua:3286
+#: scripts/scenario_56_carrierTurret.lua:3318
+#: scripts/scenario_56_carrierTurret.lua:3324
+#: scripts/scenario_56_carrierTurret.lua:3348
+#: scripts/scenario_56_carrierTurret.lua:3353
+#: scripts/scenario_56_carrierTurret.lua:3378
+#: scripts/scenario_56_carrierTurret.lua:3445
+#: scripts/scenario_56_carrierTurret.lua:3457
+#: scripts/scenario_56_carrierTurret.lua:3498
+#: scripts/scenario_56_carrierTurret.lua:3520
+#: scripts/scenario_56_carrierTurret.lua:3524
+#: scripts/scenario_56_carrierTurret.lua:3532
+#: scripts/scenario_56_carrierTurret.lua:3542
+#: scripts/scenario_56_carrierTurret.lua:3547
+#: scripts/scenario_56_carrierTurret.lua:3553
+#: scripts/scenario_56_carrierTurret.lua:3565
+#: scripts/scenario_56_carrierTurret.lua:3587
+#: scripts/scenario_56_carrierTurret.lua:3659
+#: scripts/scenario_56_carrierTurret.lua:3710
+#: scripts/scenario_56_carrierTurret.lua:3761
+#: scripts/scenario_56_carrierTurret.lua:3783
+#: scripts/scenario_56_carrierTurret.lua:3787
+#: scripts/scenario_56_carrierTurret.lua:3804
+#: scripts/scenario_56_carrierTurret.lua:3808
+#: scripts/scenario_56_carrierTurret.lua:3833
+#: scripts/scenario_56_carrierTurret.lua:3838
+#: scripts/scenario_56_carrierTurret.lua:3863
+#: scripts/scenario_56_carrierTurret.lua:3980
+#: scripts/scenario_56_carrierTurret.lua:3987
+#: scripts/scenario_56_carrierTurret.lua:3996
+#: scripts/scenario_56_carrierTurret.lua:4021
+#: scripts/scenario_56_carrierTurret.lua:4028
+#: scripts/scenario_56_carrierTurret.lua:4049
+#: scripts/scenario_56_carrierTurret.lua:4062
+#: scripts/scenario_56_carrierTurret.lua:4114
+#: scripts/scenario_56_carrierTurret.lua:4141
+#: scripts/scenario_56_carrierTurret.lua:4148
+#: scripts/scenario_56_carrierTurret.lua:4171
+#: scripts/scenario_56_carrierTurret.lua:4195
+#: scripts/scenario_56_carrierTurret.lua:4210
+#: scripts/scenario_56_carrierTurret.lua:4235
+#: scripts/scenario_56_carrierTurret.lua:4261
+#: scripts/scenario_56_carrierTurret.lua:4285
+#: scripts/scenario_56_carrierTurret.lua:4315
+#: scripts/scenario_56_carrierTurret.lua:4339
+msgid "Back"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2915
+#: scripts/scenario_56_carrierTurret.lua:2931
+#, lua-format
+msgctxt "trade-comms"
+msgid "Recruit repair crew member for %i reputation"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2917
+#: scripts/scenario_56_carrierTurret.lua:2933
+#: scripts/scenario_56_carrierTurret.lua:4206
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:2920
+#: scripts/scenario_56_carrierTurret.lua:2936
+msgctxt "trade-comms"
+msgid "Repair crew member hired"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3146
+msgctxt "station-comms"
+msgid "Tell me more about your station"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3147
+msgctxt "station-comms"
+msgid "What would you like to know?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3148
+msgctxt "stationGeneralInfo-comms"
+msgid "General information"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3153
+msgctxt "stationStory-comms"
+msgid "Station history"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3161
+msgctxt "gossip-comms"
+msgid "Gossip"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3171
+msgctxt "trade-comms"
+msgid "Buy, sell, trade"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3172
+#: scripts/scenario_56_carrierTurret.lua:3488
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available: quantity, cost in reputation\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3178
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i, %i\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3181
+msgctxt "trade-comms"
+msgid "Current Cargo:\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3188
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3194
+msgctxt "trade-comms"
+msgid "     Empty\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3197
+#, lua-format
+msgctxt "trade-comms"
+msgid "Available Space: %i, Available Reputation: %i\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3205
+#: scripts/scenario_56_carrierTurret.lua:4156
+#: scripts/scenario_56_carrierTurret.lua:4220
+#: scripts/scenario_56_carrierTurret.lua:4246
+#: scripts/scenario_56_carrierTurret.lua:4300
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3206
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i, Rep: %i"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3208
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient cargo space for purchase"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3210
+#: scripts/scenario_56_carrierTurret.lua:3215
+msgctxt "needRep-comms"
+msgid ""
+"\n"
+"Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3212
+#: scripts/scenario_56_carrierTurret.lua:3246
+#: scripts/scenario_56_carrierTurret.lua:3278
+#: scripts/scenario_56_carrierTurret.lua:3310
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient station inventory"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3220
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"purchased"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3243
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade food for %s"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3244
+#: scripts/scenario_56_carrierTurret.lua:3276
+#: scripts/scenario_56_carrierTurret.lua:3308
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Quantity: %i"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3251
+#: scripts/scenario_56_carrierTurret.lua:3283
+#: scripts/scenario_56_carrierTurret.lua:3315
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Traded"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3275
+#: scripts/scenario_56_carrierTurret.lua:4132
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3307
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade medicine for %s"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3337
+#: scripts/scenario_56_carrierTurret.lua:3822
+msgctxt "trade-comms"
+msgid "Jettison cargo"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3338
+#: scripts/scenario_56_carrierTurret.lua:3823
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Available space: %i\n"
+"What would you like to jettison?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3347
+#: scripts/scenario_56_carrierTurret.lua:3832
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s jettisoned"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3428
+msgctxt "station-comms"
+msgid "You need to stay docked for that action."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3432
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3433
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3434
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3441
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3443
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3448
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3453
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3455
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3468
+msgctxt "station-comms"
+msgid ""
+"Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3470
+msgctxt "station-comms"
+msgid ""
+"Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3473
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Be aware that if enemies in the area get much closer, we will be too busy to "
+"conduct business with you."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3476
+msgctxt "station-comms"
+msgid "I need information"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3477
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3487
+msgctxt "trade-comms"
+msgid "What goods do you have available for sale or trade?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3494
+#, lua-format
+msgctxt "trade-comms"
+msgid "   %14s: %2i, %3i\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3501
+msgctxt "helpfullWarning-comms"
+msgid "See any enemies in your area?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3511
+#, lua-format
+msgctxt "helpfullWarning-comms"
+msgid "Yes, we see %i enemies within 30U"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3513
+msgctxt "helpfullWarning-comms"
+msgid "Yes, we see one enemy within 30U"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3517
+msgctxt "helpfullWarning-comms"
+msgid "No enemies within 30U"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3522
+msgctxt "helpfullWarning-comms"
+msgid "Not really"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3527
+msgctxt "trade-comms"
+msgid "Where can I find particular goods?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3528
+msgctxt "trade-comms"
+msgid ""
+"Friendly stations generally have food or medicine or both. Neutral stations "
+"often trade their goods for food, medicine or luxury."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3530
+msgctxt "trade-comms"
+msgid ""
+" Beyond that, I have no knowledge of specific stations.\n"
+"\n"
+"Check back later, someone else may have better knowledge"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3536
+msgctxt "trade-comms"
+msgid " Beyond that, I have no knowledge of specific stations"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3538
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"\n"
+"What goods are you interested in?\n"
+"I've heard about these:"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3541
+#, lua-format
+msgctxt "trade-comms"
+msgid "Station %s in sector %s has %s%s"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3551
+msgctxt "stationGeneralInfo-comms"
+msgid "General station information"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3597
+#, lua-format
+msgctxt "-msgEngineer"
+msgid ""
+"The tractor equipment has been transported aboard %s. You need to make the "
+"final connections for full installation"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3601
+#, lua-format
+msgctxt "-msgEngineer+"
+msgid ""
+"The tractor equipment has been transported aboard %s. You need to make the "
+"final connections for full installation"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3604
+msgctxt "-buttonEngineer"
+msgid "Connect Tractor"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3606
+msgctxt "-buttonEngineer+"
+msgid "Connect Tractor"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3765
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop? (%d rep)"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3767
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request backup."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3769
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3771
+#: scripts/scenario_56_carrierTurret.lua:3797
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "WP %d"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3779
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship toward WP %d"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3781
+#: scripts/scenario_56_carrierTurret.lua:3802
+msgctxt "needRep-comms"
+msgid "Not enough reputation!"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3791
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send reinforcements! (%d rep)"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3793
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request reinforcements."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3795
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the reinforcements?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3800
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to assist at WP %d"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3902
+msgctxt "trade-comms"
+msgid " and will trade it for medicine"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3907
+msgctxt "trade-comms"
+msgid " or food"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3909
+msgctxt "trade-comms"
+msgid " and will trade it for food"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3915
+msgctxt "trade-comms"
+msgid " or luxury"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3917
+msgctxt "trade-comms"
+msgid " and will trade it for luxury"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3973
+#: scripts/scenario_56_carrierTurret.lua:4201
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3975
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3977
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3979
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3982
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3984
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %d"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3986
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %d."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3993
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3994
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:3999
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4000
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4003
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4005
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4006
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Rear Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4009
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4016
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s Missiles: %d/%d\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4025
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4026
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4040
+msgctxt "shipAssist-comms"
+msgid "Attack nearby enemy target"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4047
+msgctxt "shipAssist-comms"
+msgid "Attacking "
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4058
+msgctxt "shipAssist-comms"
+msgid "No enemy targets nearby"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4060
+msgctxt "shipAssist-comms"
+msgid "Which enemy target?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4072
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4073
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4074
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4076
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4078
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4080
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4082
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4083
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4084
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4085
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4087
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4088
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4089
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4090
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4092
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4110
+msgctxt "trade-comms"
+msgid "Yes?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4112
+msgctxt "trade-comms"
+msgid "Where are you headed?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4134
+msgctxt "trade-comms"
+msgid "Insufficient inventory on freighter for trade"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4139
+msgctxt "trade-comms"
+msgid "Traded"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4146
+msgctxt "trade-comms"
+msgid "Insufficient luxury to trade"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4158
+#: scripts/scenario_56_carrierTurret.lua:4222
+#: scripts/scenario_56_carrierTurret.lua:4248
+#: scripts/scenario_56_carrierTurret.lua:4302
+msgctxt "trade-comms"
+msgid "Insufficient cargo space for purchase"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4160
+#: scripts/scenario_56_carrierTurret.lua:4224
+#: scripts/scenario_56_carrierTurret.lua:4250
+#: scripts/scenario_56_carrierTurret.lua:4304
+msgctxt "trade-comms"
+msgid "Insufficient inventory on freighter"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4163
+#: scripts/scenario_56_carrierTurret.lua:4227
+#: scripts/scenario_56_carrierTurret.lua:4253
+#: scripts/scenario_56_carrierTurret.lua:4307
+msgctxt "needRep-comms"
+msgid "Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4168
+#: scripts/scenario_56_carrierTurret.lua:4232
+#: scripts/scenario_56_carrierTurret.lua:4258
+#: scripts/scenario_56_carrierTurret.lua:4312
+msgctxt "trade-comms"
+msgid "Purchased"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4185
+#: scripts/scenario_56_carrierTurret.lua:4275
+#: scripts/scenario_56_carrierTurret.lua:4329
+msgctxt "trade-comms"
+msgid "What kind of cargo are you carrying?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4190
+#: scripts/scenario_56_carrierTurret.lua:4280
+#: scripts/scenario_56_carrierTurret.lua:4334
+msgctxt "trade-comms"
+msgid "\n"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4204
+#, lua-format
+msgctxt "trade-comms"
+msgid "Where are you headed? (cost: %f reputation)"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4291
+msgctxt "trade-comms"
+msgid "Why are you bothering me?"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4353
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4355
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4407
+#: scripts/scenario_56_carrierTurret.lua:4422
+msgctxt "-buttonRelay"
+msgid "Transfer Cargo"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4409
+#: scripts/scenario_56_carrierTurret.lua:4424
+msgctxt "-buttonOperations"
+msgid "Transfer Cargo"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4464
+#: scripts/scenario_56_carrierTurret.lua:4511
+#, lua-format
+msgctxt "-msgRelay"
+msgid "One of each type of cargo aboard %s transferred to %s"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4468
+#: scripts/scenario_56_carrierTurret.lua:4515
+#, lua-format
+msgctxt "-msgOperations"
+msgid "One of each type of cargo aboard %s transferred to %s"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4474
+#: scripts/scenario_56_carrierTurret.lua:4521
+#, lua-format
+msgctxt "-msgRelay"
+msgid "Insufficient space on %s to accept your cargo transfer"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4478
+#: scripts/scenario_56_carrierTurret.lua:4525
+#, lua-format
+msgctxt "-msgOperations"
+msgid "Insufficient space on %s to accept your cargo transfer"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4861
+msgctxt "scienceDescription-artifact"
+msgid "Artificially manufactured object of unknown purpose"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4982
+#, lua-format
+msgctxt "-msgEngineer"
+msgid "Hull repair prototype installed. Limited to %i uses"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4986
+#, lua-format
+msgctxt "-msgEngineer+"
+msgid "Hull repair prototype installed. Limited to %i uses"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4989
+#: scripts/scenario_56_carrierTurret.lua:5003
+#, lua-format
+msgctxt "-buttonEngineer"
+msgid "Repair Hull (%i)"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:4991
+#: scripts/scenario_56_carrierTurret.lua:5005
+#, lua-format
+msgctxt "-buttonEngineer+"
+msgid "Repair Hull (%i)"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5277
+#, lua-format
+msgctxt "-msgWeapons"
+msgid "%s has been tractored to %s and is now docked"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5280
+#, lua-format
+msgctxt "-msgTactical"
+msgid "%s has been tractored to %s and is now docked"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5352
+msgctxt "-buttonWeapons"
+msgid "Tractor On"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5354
+msgctxt "-buttonTactical"
+msgid "Tractor On"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5373
+msgctxt "-buttonWeapons"
+msgid "Tractor Off"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5375
+msgctxt "-buttonTactical"
+msgid "Tractor Off"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5397
+msgctxt "-msgEngineer"
+msgid ""
+"The tractor equipment has been fully integrated with ship systems. It is "
+"ready for the weapons officer to activate at the appropriate time"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5401
+msgctxt "-msgEngineer+"
+msgid ""
+"The tractor equipment has been fully integrated with ship systems. It is "
+"ready for the weapons officer to activate at the appropriate time"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5405
+#, lua-format
+msgctxt "-msgWeapons"
+msgid ""
+"Tractor equipment installed.\n"
+"When %s is in range of the disabled ship, %s, You can engage the tractor "
+"system via the (Tractor On) button. This system works with %s's on board "
+"systems to draw and maneuver %s to %s until it is docked"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5409
+#, lua-format
+msgctxt "-msgTactical"
+msgid ""
+"Tractor equipment installed.\n"
+"When %s is in range of the disabled ship, %s, You can engage the tractor "
+"system via the (Tractor On) button. This system works with %s's on board "
+"systems to draw and maneuver %s to %s until it is docked"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5444
+msgctxt "-buttonWeapons"
+msgid "Do Not Push"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5446
+msgctxt "-buttonTactical"
+msgid "Do Not Push"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5449
+msgctxt "-msgScience"
+msgid ""
+"Internal security sensors indicate ship systems hacked by unknown source. "
+"For a moment I thought I heard evil laughter"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5453
+msgctxt "-msgOperations"
+msgid ""
+"Internal security sensors indicate ship systems hacked by unknown source. "
+"For a moment I thought I heard evil laughter"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5877
+msgctxt "repairCrew-msgEngineer"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5881
+msgctxt "repairCrew-msgEngineer+"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5916
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Stations: %i\t survived: %i\t destroyed: %i"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5917
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"\n"
+"Friendly Stations: %i\t survived: %i\t destroyed: %i"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5918
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"\n"
+"Neutral Stations: %i\t survived: %i\t destroyed: %i"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5919
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"\n"
+"\n"
+"\n"
+"\n"
+"Enemy Stations: %i\t survived: %i\t destroyed: %i"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5924
+#: scripts/scenario_56_carrierTurret.lua:5937
+msgctxt "msgMainscreen"
+msgid "Ensign"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5926
+#: scripts/scenario_56_carrierTurret.lua:5939
+msgctxt "msgMainscreen"
+msgid "Lieutenant"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5928
+#: scripts/scenario_56_carrierTurret.lua:5941
+msgctxt "msgMainscreen"
+msgid "Commander"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5930
+#: scripts/scenario_56_carrierTurret.lua:5943
+msgctxt "msgMainscreen"
+msgid "Captain"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5932
+#: scripts/scenario_56_carrierTurret.lua:5945
+msgctxt "msgMainscreen"
+msgid "Admiral"
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5934
+msgctxt "msgMainscreen"
+msgid ""
+"\n"
+"Earned rank: "
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5948
+msgctxt "msgMainscreen"
+msgid ""
+"\n"
+"Post Target Enemy Base Survival Rank: "
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5950
+msgctxt "msgMainscreen"
+msgid ""
+"\n"
+"Post Home Base Destruction Rank: "
+msgstr ""
+
+#: scripts/scenario_56_carrierTurret.lua:5981
+msgctxt "buttonGM"
+msgid "Spawn Enemies"
+msgstr ""

@@ -151,7 +151,7 @@ msgid "(%d rep each)"
 msgstr ""
 
 #: scripts/scenario_81_pvp.lua:229
-msgctxt "ammo-comms"
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr ""
 

@@ -178,6 +178,18 @@ msgctxt "audio-tabRelay&Operations"
 msgid "Mob Action"
 msgstr ""
 
+#: scripts/scenario_51_deliverAmbassador.lua:357
+#, lua-format
+msgctxt "audio-tabRelay&Operations"
+msgid "%s %i"
+msgstr ""
+
+#: scripts/scenario_51_deliverAmbassador.lua:359
+#, lua-format
+msgctxt "audio-tabRelay&Operations"
+msgid "%s %i:%.2i"
+msgstr ""
+
 #: scripts/scenario_51_deliverAmbassador.lua:437
 msgctxt "audio-incCall"
 msgid ""
@@ -672,7 +684,7 @@ msgid "Provide artifact research to ambassador Gremus on Goltin 7. "
 msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:1077
-msgctxt "ammo-comms"
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr ""
 
@@ -786,7 +798,7 @@ msgstr ""
 #: scripts/scenario_51_deliverAmbassador.lua:1151
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "We have dispatched %s to assist at WP %d "
+msgid "We have dispatched %s to assist at WP %d"
 msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:1174

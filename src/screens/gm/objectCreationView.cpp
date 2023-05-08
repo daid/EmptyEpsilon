@@ -107,12 +107,14 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     cpu_ship_listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(300, 460);
     for(string template_name : template_names)
     {
-        auto shipTemplate=ShipTemplate::getTemplate(template_name);
-        if (shipTemplate)
+        auto ship_template = ShipTemplate::getTemplate(template_name);
+        if (ship_template)
         {
-            if (!shipTemplate->visible)
+            if (!ship_template->visible)
                 continue;
-            cpu_ship_listbox->addEntry(ShipTemplate::getTemplate(template_name)->getLocaleName(), template_name);
+            auto new_index = cpu_ship_listbox->addEntry(ShipTemplate::getTemplate(template_name)->getLocaleName(), template_name);
+            if (ship_template->radar_trace != "")
+                cpu_ship_listbox->setEntryIcon(new_index, ship_template->radar_trace);
         }
     }
 
@@ -125,10 +127,14 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     player_ship_listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(300, 460);
     for (const auto& template_name : player_template_names)
     {
-        auto shipTemplate=ShipTemplate::getTemplate(template_name);
-        if (shipTemplate)
+        auto ship_template = ShipTemplate::getTemplate(template_name);
+        if (ship_template)
         {
-            player_ship_listbox->addEntry(ShipTemplate::getTemplate(template_name)->getLocaleName(), template_name);
+            if (!ship_template->visible)
+                continue;
+            auto new_index = player_ship_listbox->addEntry(ShipTemplate::getTemplate(template_name)->getLocaleName(), template_name);
+            if (ship_template->radar_trace != "")
+                player_ship_listbox->setEntryIcon(new_index, ship_template->radar_trace);
         }
     }
     player_ship_listbox->hide();

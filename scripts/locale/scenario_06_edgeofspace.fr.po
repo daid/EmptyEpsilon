@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-01-11 22:11+0100\n"
+"PO-Revision-Date: 2023-05-07 13:37+0200\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
-"X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -569,7 +569,7 @@ msgid "Can you send a supply drop? (100rep)"
 msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (100 rép)"
 
 #: scripts/scenario_06_edgeofspace.lua:844
-#: scripts/scenario_06_edgeofspace.lua:874
+#: scripts/scenario_06_edgeofspace.lua:872
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr "Vous devez définir un marqueur avant de faire une demande de renforts."
@@ -579,7 +579,14 @@ msgctxt "stationAssist-comms"
 msgid "Where do we need to drop off your supplies?"
 msgstr "Où devons-nous larguer la capsule de ravitaillement ?"
 
-#: scripts/scenario_06_edgeofspace.lua:858
+#: scripts/scenario_06_edgeofspace.lua:848
+#: scripts/scenario_06_edgeofspace.lua:876
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "WP %d"
+msgstr "Marqueur %d"
+
+#: scripts/scenario_06_edgeofspace.lua:856
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
@@ -587,49 +594,49 @@ msgstr ""
 "Nous venons de déployer un vaisseau qui vous déposera la capsule de "
 "ravitaillement au marqueur %d."
 
-#: scripts/scenario_06_edgeofspace.lua:860
-#: scripts/scenario_06_edgeofspace.lua:910
-#: scripts/scenario_06_edgeofspace.lua:931
-#: scripts/scenario_06_edgeofspace.lua:952
-#: scripts/scenario_06_edgeofspace.lua:973
-#: scripts/scenario_06_edgeofspace.lua:1010
-#: scripts/scenario_06_edgeofspace.lua:1033
+#: scripts/scenario_06_edgeofspace.lua:858
+#: scripts/scenario_06_edgeofspace.lua:906
+#: scripts/scenario_06_edgeofspace.lua:927
+#: scripts/scenario_06_edgeofspace.lua:948
+#: scripts/scenario_06_edgeofspace.lua:969
+#: scripts/scenario_06_edgeofspace.lua:1006
+#: scripts/scenario_06_edgeofspace.lua:1029
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr "Pas assez de réputation."
 
-#: scripts/scenario_06_edgeofspace.lua:862
-#: scripts/scenario_06_edgeofspace.lua:867
-#: scripts/scenario_06_edgeofspace.lua:887
-#: scripts/scenario_06_edgeofspace.lua:892
+#: scripts/scenario_06_edgeofspace.lua:860
+#: scripts/scenario_06_edgeofspace.lua:865
+#: scripts/scenario_06_edgeofspace.lua:883
+#: scripts/scenario_06_edgeofspace.lua:888
+#: scripts/scenario_06_edgeofspace.lua:911
 #: scripts/scenario_06_edgeofspace.lua:915
-#: scripts/scenario_06_edgeofspace.lua:919
+#: scripts/scenario_06_edgeofspace.lua:932
 #: scripts/scenario_06_edgeofspace.lua:936
-#: scripts/scenario_06_edgeofspace.lua:940
+#: scripts/scenario_06_edgeofspace.lua:953
 #: scripts/scenario_06_edgeofspace.lua:957
-#: scripts/scenario_06_edgeofspace.lua:961
+#: scripts/scenario_06_edgeofspace.lua:974
 #: scripts/scenario_06_edgeofspace.lua:978
-#: scripts/scenario_06_edgeofspace.lua:982
-#: scripts/scenario_06_edgeofspace.lua:1007
-#: scripts/scenario_06_edgeofspace.lua:1017
-#: scripts/scenario_06_edgeofspace.lua:1030
-#: scripts/scenario_06_edgeofspace.lua:1038
-#: scripts/scenario_06_edgeofspace.lua:1046
-#: scripts/scenario_06_edgeofspace.lua:1053
+#: scripts/scenario_06_edgeofspace.lua:1003
+#: scripts/scenario_06_edgeofspace.lua:1013
+#: scripts/scenario_06_edgeofspace.lua:1026
+#: scripts/scenario_06_edgeofspace.lua:1034
+#: scripts/scenario_06_edgeofspace.lua:1042
+#: scripts/scenario_06_edgeofspace.lua:1049
 msgid "Back"
 msgstr "Précédent"
 
-#: scripts/scenario_06_edgeofspace.lua:871
+#: scripts/scenario_06_edgeofspace.lua:869
 msgctxt "stationAssist-comms"
 msgid "Please send backup! (150rep)"
 msgstr "Merci de nous envoyer des renforts."
 
-#: scripts/scenario_06_edgeofspace.lua:876
+#: scripts/scenario_06_edgeofspace.lua:874
 msgctxt "stationAssist-comms"
 msgid "Where does the backup need to go?"
 msgstr "Où les renforts doivent-ils aller ?"
 
-#: scripts/scenario_06_edgeofspace.lua:883
+#: scripts/scenario_06_edgeofspace.lua:879
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at WP %d."
@@ -637,12 +644,12 @@ msgstr ""
 "Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
 "marqueur %d."
 
-#: scripts/scenario_06_edgeofspace.lua:885
+#: scripts/scenario_06_edgeofspace.lua:881
 msgctxt "needRep-comms"
 msgid "Not enough rep!"
 msgstr "Pas assez de réputation."
 
-#: scripts/scenario_06_edgeofspace.lua:899
+#: scripts/scenario_06_edgeofspace.lua:895
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
@@ -652,72 +659,72 @@ msgstr ""
 "Bonjour officier !\n"
 "Que pouvons-nous faire pour vous aujourd'hui ?"
 
-#: scripts/scenario_06_edgeofspace.lua:903
+#: scripts/scenario_06_edgeofspace.lua:899
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? (2rep each)"
 msgstr "Auriez-vous des homing missiles pour nous ? (2 rép chacun)"
 
-#: scripts/scenario_06_edgeofspace.lua:906
-#: scripts/scenario_06_edgeofspace.lua:927
-#: scripts/scenario_06_edgeofspace.lua:948
-#: scripts/scenario_06_edgeofspace.lua:969
-#: scripts/scenario_06_edgeofspace.lua:1002
-#: scripts/scenario_06_edgeofspace.lua:1025
-msgctxt "ammo-comms"
+#: scripts/scenario_06_edgeofspace.lua:902
+#: scripts/scenario_06_edgeofspace.lua:923
+#: scripts/scenario_06_edgeofspace.lua:944
+#: scripts/scenario_06_edgeofspace.lua:965
+#: scripts/scenario_06_edgeofspace.lua:998
+#: scripts/scenario_06_edgeofspace.lua:1021
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
 
-#: scripts/scenario_06_edgeofspace.lua:914
+#: scripts/scenario_06_edgeofspace.lua:910
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are fully stocked with homing missiles."
 msgstr "Désolé, officier, mais vous êtes déjà au max en homing missiles."
 
-#: scripts/scenario_06_edgeofspace.lua:918
+#: scripts/scenario_06_edgeofspace.lua:914
 msgctxt "ammo-comms"
 msgid "We have refilled your missile supply."
 msgstr "Nous avons réapprovisionné votre stock de missiles."
 
-#: scripts/scenario_06_edgeofspace.lua:924
+#: scripts/scenario_06_edgeofspace.lua:920
 msgctxt "ammo-comms"
 msgid "Please re-stock our mines. (2rep each)"
 msgstr "Merci de réapprovisionner notre stock de mines. (2 rép chacune)"
 
-#: scripts/scenario_06_edgeofspace.lua:935
+#: scripts/scenario_06_edgeofspace.lua:931
 msgctxt "ammo-comms"
 msgid "Captain, your ship is already fully stocked with mines."
 msgstr "Capitaine, votre vaisseau est déjà chargé au max de mines."
 
-#: scripts/scenario_06_edgeofspace.lua:939
+#: scripts/scenario_06_edgeofspace.lua:935
 msgctxt "ammo-comms"
 msgid "These mines are yours."
 msgstr "Ces mines sont à vous."
 
-#: scripts/scenario_06_edgeofspace.lua:945
+#: scripts/scenario_06_edgeofspace.lua:941
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? (15rep each)"
 msgstr "Avez-vous des missiles nucléaires nukes ? (15 rép chacun)"
 
-#: scripts/scenario_06_edgeofspace.lua:956
+#: scripts/scenario_06_edgeofspace.lua:952
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr "Officier, vos nukes sont en capacité maximale et prêtes à servir !"
 
-#: scripts/scenario_06_edgeofspace.lua:960
+#: scripts/scenario_06_edgeofspace.lua:956
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr "Vous êtes chargés au max et prêt à tout faire péter."
 
-#: scripts/scenario_06_edgeofspace.lua:966
+#: scripts/scenario_06_edgeofspace.lua:962
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. (10rep each)"
 msgstr "Veuillez réapprovisionner nos missiles EMP. (10 rép chacun)"
 
-#: scripts/scenario_06_edgeofspace.lua:977
+#: scripts/scenario_06_edgeofspace.lua:973
 msgctxt "ammo-comms"
 msgid "All storage for EMP missiles is filled, sir."
 msgstr "Votre espace de stockage de missiles EMP est rempli, monsieur."
 
-#: scripts/scenario_06_edgeofspace.lua:981
+#: scripts/scenario_06_edgeofspace.lua:977
 msgctxt "ammo-comms"
 msgid ""
 "Recalibrated the electronics and fitted you with all the EMP missiles you "
@@ -726,7 +733,7 @@ msgstr ""
 "L' électronique a été recalibré et vous êtes chargé au maximum en missiles "
 "EMP."
 
-#: scripts/scenario_06_edgeofspace.lua:990
+#: scripts/scenario_06_edgeofspace.lua:986
 msgctxt "station-comms"
 msgid ""
 "Greetings, sir.\n"
@@ -736,22 +743,22 @@ msgstr ""
 "Salutations, officier.\n"
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
-#: scripts/scenario_06_edgeofspace.lua:997
+#: scripts/scenario_06_edgeofspace.lua:993
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
 msgstr "Bienvenue dans notre charmante petite station."
 
-#: scripts/scenario_06_edgeofspace.lua:999
+#: scripts/scenario_06_edgeofspace.lua:995
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? (5rep each)"
 msgstr "Auriez-vous des homing missiles pour nous ? (5 rép chacun)"
 
-#: scripts/scenario_06_edgeofspace.lua:1006
+#: scripts/scenario_06_edgeofspace.lua:1002
 msgctxt "ammo-comms"
 msgid "You seem to have more than enough missiles."
 msgstr "Vous semblez avoir plus qu'il n'en faut de missiles."
 
-#: scripts/scenario_06_edgeofspace.lua:1014
+#: scripts/scenario_06_edgeofspace.lua:1010
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some free homing missiles.\n"
@@ -762,39 +769,39 @@ msgstr ""
 "\n"
 "Faites-en bon usage."
 
-#: scripts/scenario_06_edgeofspace.lua:1022
+#: scripts/scenario_06_edgeofspace.lua:1018
 msgctxt "ammo-comms"
 msgid "Please re-stock our mines. (5rep each)"
 msgstr "Merci de nous réapprovisionner en mines. (5 rép chacune)"
 
-#: scripts/scenario_06_edgeofspace.lua:1029
+#: scripts/scenario_06_edgeofspace.lua:1025
 msgctxt "ammo-comms"
 msgid "You are fully stocked with mines."
 msgstr "Vous êtes entièrement approvisionné en mines."
 
-#: scripts/scenario_06_edgeofspace.lua:1037
+#: scripts/scenario_06_edgeofspace.lua:1033
 msgctxt "ammo-comms"
 msgid "Here, have some mines. Mines are good defensive weapons."
 msgstr "Tenez, prenez des mines. Les mines sont de bonnes armes de défense."
 
-#: scripts/scenario_06_edgeofspace.lua:1043
+#: scripts/scenario_06_edgeofspace.lua:1039
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes?"
 msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ?"
 
-#: scripts/scenario_06_edgeofspace.lua:1045
+#: scripts/scenario_06_edgeofspace.lua:1041
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr ""
 "Nous ne fournissons pas ce type d'armes de destruction massive. \n"
 "Nous sommes pour la paix dans l'univers."
 
-#: scripts/scenario_06_edgeofspace.lua:1050
+#: scripts/scenario_06_edgeofspace.lua:1046
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles."
 msgstr "Avez-vous des missiles EMP ?"
 
-#: scripts/scenario_06_edgeofspace.lua:1052
+#: scripts/scenario_06_edgeofspace.lua:1048
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."

@@ -30,3 +30,3181 @@ msgid ""
 "longer than anticipated. Event was held 23Jan2021 with 14 player ships "
 "participating. Enjoy this scenario in your own multiple player ship event."
 msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:479
+msgctxt "scienceDescription-station"
+msgid "Referee"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:541
+#: scripts/scenario_60_captureFlag.lua:1239
+#, lua-format
+msgctxt "buttonGM"
+msgid "Version %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:542
+#: scripts/scenario_60_captureFlag.lua:1240
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Scenario version %s\n"
+" LUA version %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:546
+#: scripts/scenario_60_captureFlag.lua:1260
+msgctxt "buttonGM"
+msgid "Turn on Diagnostic"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:548
+#: scripts/scenario_60_captureFlag.lua:1262
+msgctxt "buttonGM"
+msgid "Turn off Diagnostic"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:558
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Terrain: %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:559
+msgctxt "buttonGM"
+msgid "+Player Config"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:560
+#: scripts/scenario_60_captureFlag.lua:1248
+msgctxt "buttonGM"
+msgid "Enable Auto-Enemies"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:562
+#: scripts/scenario_60_captureFlag.lua:1250
+msgctxt "buttonGM"
+msgid "Disable Auto-Enemies"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:573
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Times G%i H%i E%i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:575
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Times G%i H%i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:577
+#, lua-format
+msgctxt "buttonGM"
+msgid "Level: %s ->Next"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:597
+msgctxt "buttonGM"
+msgid "Show Pick Up Off"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:599
+msgctxt "buttonGM"
+msgid "Show Pick Up On"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:610
+msgctxt "buttonGM"
+msgid "Destroy = end off"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:612
+msgctxt "buttonGM"
+msgid "Destroy = end on"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:622
+#, lua-format
+msgctxt "buttonGM"
+msgid "Marker: %s ->Next"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:634
+msgctxt "buttonGM"
+msgid "Player Prefs"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:635
+msgctxt "msgGM"
+msgid "Remaining player preferences:"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:639
+#, lua-format
+msgctxt "msgGM"
+msgid "XO:%s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:641
+#: scripts/scenario_60_captureFlag.lua:645
+#: scripts/scenario_60_captureFlag.lua:650
+#: scripts/scenario_60_captureFlag.lua:655
+#: scripts/scenario_60_captureFlag.lua:660
+#: scripts/scenario_60_captureFlag.lua:665
+#: scripts/scenario_60_captureFlag.lua:670
+#: scripts/scenario_60_captureFlag.lua:675
+#: scripts/scenario_60_captureFlag.lua:680
+msgctxt "msgGM"
+msgid "\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:643
+#, lua-format
+msgctxt "msgGM"
+msgid "    Faction:%s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:648
+#, lua-format
+msgctxt "msgGM"
+msgid "    Ship name:%s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:653
+#, lua-format
+msgctxt "msgGM"
+msgid "    Ship preference 1:%s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:658
+#, lua-format
+msgctxt "msgGM"
+msgid "    Ship preference 2:%s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:663
+#, lua-format
+msgctxt "msgGM"
+msgid "    Ship preference 3:%s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:668
+#, lua-format
+msgctxt "msgGM"
+msgid "    Ship preference 4:%s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:673
+#, lua-format
+msgctxt "msgGM"
+msgid "    Ship preference 5:%s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:678
+#, lua-format
+msgctxt "msgGM"
+msgid "    Ship preference 6:%s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:688
+msgctxt "buttonGM"
+msgid "-from Terrain"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:689
+#, lua-format
+msgctxt "buttonGM"
+msgid "Size: %s -> Next"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:718
+msgctxt "buttonGM"
+msgid "*"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:800
+#: scripts/scenario_60_captureFlag.lua:801
+msgctxt "scienceDescription-artifact"
+msgid "Territory boundary marker"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:800
+#: scripts/scenario_60_captureFlag.lua:801
+msgctxt "scienceDescription-artifact"
+msgid ""
+"A buoy placed on the line marking the boundary between Human and Kraylor "
+"territory"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:871
+msgctxt "scienceDescription-artifact"
+msgid "Flag hiding territory boundary marker"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:871
+msgctxt "scienceDescription-artifact"
+msgid ""
+"A temporary buoy placed on the edge of the territory where a flag or decoy "
+"may be hidden"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:878
+msgctxt "buttonGM"
+msgid "-from Player Config"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:879
+#: scripts/scenario_60_captureFlag.lua:1244
+msgctxt "buttonGM"
+msgid "Show control codes"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:880
+#: scripts/scenario_60_captureFlag.lua:1245
+msgctxt "buttonGM"
+msgid "Show Kraylor codes"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:881
+#: scripts/scenario_60_captureFlag.lua:1247
+msgctxt "buttonGM"
+msgid "Show Human codes"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:882
+msgctxt "buttonGM"
+msgid "Wing Names Off"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:884
+msgctxt "buttonGM"
+msgid "Wing Names On"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:890
+msgctxt "msgGM"
+msgid ""
+"Cannot disable wing names now that player ships have been spawned.\n"
+"Close the server and restart if you *really* don't want the wing names"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:899
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Tags %.2f, %.1fU"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:900
+msgctxt "buttonGM"
+msgid "+Drones Off"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:902
+msgctxt "buttonGM"
+msgid "+Drones On"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:914
+msgctxt "buttonGM"
+msgid "-Main from times"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:915
+#, lua-format
+msgctxt "buttonGM"
+msgid "Game %i Add 5 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:921
+#, lua-format
+msgctxt "buttonGM"
+msgid "Game %i Del 5 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:928
+#, lua-format
+msgctxt "buttonGM"
+msgid "Hide Flag %i Add 5 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:934
+#, lua-format
+msgctxt "buttonGM"
+msgid "Hide Flag %i Del 5 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:939
+#, lua-format
+msgctxt "buttonGM"
+msgid "Hide Flag %i Del 4 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:946
+#, lua-format
+msgctxt "buttonGM"
+msgid "Enemy %i Add 1 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:952
+#, lua-format
+msgctxt "buttonGM"
+msgid "Enemy %i Del 1 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:961
+#: scripts/scenario_60_captureFlag.lua:1045
+#: scripts/scenario_60_captureFlag.lua:1063
+msgctxt "buttonGM"
+msgid "-Main from Tag"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:962
+#: scripts/scenario_60_captureFlag.lua:1019
+#: scripts/scenario_60_captureFlag.lua:1046
+#: scripts/scenario_60_captureFlag.lua:1064
+#: scripts/scenario_60_captureFlag.lua:1083
+#: scripts/scenario_60_captureFlag.lua:1101
+#: scripts/scenario_60_captureFlag.lua:1131
+#: scripts/scenario_60_captureFlag.lua:1161
+#: scripts/scenario_60_captureFlag.lua:1179
+#: scripts/scenario_60_captureFlag.lua:1197
+msgctxt "buttonGM"
+msgid "-Player Config"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:963
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Tag distance %.1fU"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:964
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Tag damage %.2f"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:968
+msgctxt "buttonGM"
+msgid "-From Drones"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:969
+msgctxt "buttonGM"
+msgid "Drones Off"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:971
+msgctxt "buttonGM"
+msgid "Drones On"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:982
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Capacity %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:983
+#, lua-format
+msgctxt "buttonGM"
+msgid "Name %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:995
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Flag I%i M%i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:996
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Distance F%.1fU S%.1fU"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:997
+msgctxt "buttonGM"
+msgid "Template Mod Off"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:999
+msgctxt "buttonGM"
+msgid "Template Mod On"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1010
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Hull %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1011
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Impulse %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1012
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Beam R%.1fU D%.1f C%.1f"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1018
+msgctxt "buttonGM"
+msgid "-Main from Probes"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1021
+#, lua-format
+msgctxt "buttonGM"
+msgid "Probes %i Add 1 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1032
+#, lua-format
+msgctxt "buttonGM"
+msgid "Probes %i Del 1 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1047
+msgctxt "buttonGM"
+msgid "-From Tag Distance"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1049
+#, lua-format
+msgctxt "buttonGM"
+msgid "%.1fU Add .1 -> %.1fU"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1055
+#, lua-format
+msgctxt "buttonGM"
+msgid "%.1fU Del .1 -> %.1fU"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1065
+msgctxt "buttonGM"
+msgid "-From Tag Dmg"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1067
+#, lua-format
+msgctxt "buttonGM"
+msgid "%.2f Add .25 -> %.2f"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1073
+#, lua-format
+msgctxt "buttonGM"
+msgid "%.2f Del .25 -> %.2f"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1082
+#: scripts/scenario_60_captureFlag.lua:1100
+#: scripts/scenario_60_captureFlag.lua:1130
+#: scripts/scenario_60_captureFlag.lua:1160
+#: scripts/scenario_60_captureFlag.lua:1178
+#: scripts/scenario_60_captureFlag.lua:1196
+msgctxt "buttonGM"
+msgid "-Main"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1084
+msgctxt "buttonGM"
+msgid "-From Capacity"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1086
+#: scripts/scenario_60_captureFlag.lua:1164
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i Add 10 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1092
+#: scripts/scenario_60_captureFlag.lua:1170
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i Del 10 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1102
+msgctxt "buttonGM"
+msgid "-From Drone Flag"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1104
+#, lua-format
+msgctxt "buttonGM"
+msgid "Interval %i Add 1 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1110
+#, lua-format
+msgctxt "buttonGM"
+msgid "Interval %i Del 1 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1116
+#, lua-format
+msgctxt "buttonGM"
+msgid "Msg Reset %i Add 1 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1122
+#, lua-format
+msgctxt "buttonGM"
+msgid "Msg Reset %i Del 1 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1132
+msgctxt "buttonGM"
+msgid "-From Drone Distance"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1134
+#, lua-format
+msgctxt "buttonGM"
+msgid "Form %.1fU Add .1 -> %.1fU"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1140
+#, lua-format
+msgctxt "buttonGM"
+msgid "Form %.1fU Del .1 -> %.1fU"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1146
+#, lua-format
+msgctxt "buttonGM"
+msgid "Scan %.1fU Add .1 -> %.1fU"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1152
+#, lua-format
+msgctxt "buttonGM"
+msgid "Scan %.1fU Del .1 -> %.1fU"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1162
+msgctxt "buttonGM"
+msgid "-From Drone Hull"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1180
+msgctxt "buttonGM"
+msgid "-From Drone Impulse"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1182
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i Add 5 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1188
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i Del 5 -> %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1198
+msgctxt "buttonGM"
+msgid "-From Drone Beam"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1200
+#, lua-format
+msgctxt "buttonGM"
+msgid "Rng %.1fU Add .1 -> %.1fU"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1206
+#, lua-format
+msgctxt "buttonGM"
+msgid "Rng %.1fU Del .1 -> %.1fU"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1212
+#, lua-format
+msgctxt "buttonGM"
+msgid "Dmg %.1f Add .5 -> %.1f"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1218
+#, lua-format
+msgctxt "buttonGM"
+msgid "Dmg %.1f Del .5 -> %.1f"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1224
+#, lua-format
+msgctxt "buttonGM"
+msgid "Cycle %.1f Add .5 -> %.1f"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1230
+#, lua-format
+msgctxt "buttonGM"
+msgid "Cycle %.1f Del .5 -> %.1f"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1246
+msgctxt "buttonGM"
+msgid "Show Ktlitan codes"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1272
+msgctxt "buttonGM"
+msgid "Current Stats"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1274
+msgctxt "buttonGM"
+msgid "Detailed Drone Report"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1277
+msgctxt "buttonGM"
+msgid "Intelligent Bugger"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1324
+#, lua-format
+msgctxt "msgGM"
+msgid "%s: %s %s\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1354
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"New Bugger ship: %s\n"
+"Control code: %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1588
+msgctxt "msgGM"
+msgid "Human:"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1589
+#: scripts/scenario_60_captureFlag.lua:1596
+msgctxt "msgGM"
+msgid ""
+"\n"
+"   Number of active ships: "
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1590
+#: scripts/scenario_60_captureFlag.lua:1597
+msgctxt "msgGM"
+msgid ""
+"\n"
+"   Number of destroyed ships: "
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1592
+#: scripts/scenario_60_captureFlag.lua:1599
+msgctxt "msgGM"
+msgid ""
+"\n"
+"   Total number of active drones: "
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1593
+#: scripts/scenario_60_captureFlag.lua:1600
+msgctxt "msgGM"
+msgid ""
+"\n"
+"   Total number of destroyed drones: "
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1595
+msgctxt "msgGM"
+msgid ""
+"\n"
+"Kraylor:"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1603
+msgctxt "msgGM"
+msgid ""
+"\n"
+"Active buggers: "
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1885
+#: scripts/scenario_60_captureFlag.lua:7660
+#, lua-format
+msgctxt "callsign-drone"
+msgid "%s-#%i/%i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1887
+#: scripts/scenario_60_captureFlag.lua:7662
+#, lua-format
+msgctxt "callsign-drone"
+msgid "%s-%i of %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1897
+#: scripts/scenario_60_captureFlag.lua:7672
+#, lua-format
+msgctxt "callsign-drone"
+msgid "%s%i/%i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1915
+#: scripts/scenario_60_captureFlag.lua:7690
+#, lua-format
+msgctxt "drones-msgWeapons"
+msgid "%i drones launched"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1917
+#: scripts/scenario_60_captureFlag.lua:7692
+#, lua-format
+msgctxt "drones-msgWeapons"
+msgid "%i drone launched"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1922
+#: scripts/scenario_60_captureFlag.lua:7697
+#, lua-format
+msgctxt "drones-msgTactical"
+msgid "%i drones launched"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1924
+#: scripts/scenario_60_captureFlag.lua:7699
+#, lua-format
+msgctxt "drones-msgTactical"
+msgid "%i drone launched"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1928
+#, lua-format
+msgctxt "drones-shipLog"
+msgid "Deployed %i drones as squadron %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1930
+#, lua-format
+msgctxt "drones-shipLog"
+msgid "Deployed %i drone as squadron %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1936
+#, lua-format
+msgctxt "drones-msgWeapons"
+msgid "You have %i drones to deploy"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:1938
+#, lua-format
+msgctxt "drones-msgTactical"
+msgid "You have %i drones to deploy"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2033
+msgctxt "-buttonWeapons"
+msgid "5 Drones"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2037
+msgctxt "-buttonTactical"
+msgid "5 Drones"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2041
+msgctxt "-buttonWeapons"
+msgid "10 Drones"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2045
+msgctxt "-buttonTactical"
+msgid "10 Drones"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2049
+msgctxt "-buttonWeapons"
+msgid "Count Drones"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2053
+msgctxt "-buttonTactical"
+msgid "Count Drones"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2057
+msgctxt "-buttonEngineer"
+msgid "Drone Hulls"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2061
+msgctxt "-buttonEngineer+"
+msgid "Drone Hulls"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2065
+msgctxt "-buttonHelms"
+msgid "Drone Locations"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2069
+msgctxt "-buttonTactical"
+msgid "Drone Locations"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2123
+#: scripts/scenario_60_captureFlag.lua:2139
+#: scripts/scenario_60_captureFlag.lua:8596
+#: scripts/scenario_60_captureFlag.lua:8632
+#: scripts/scenario_60_captureFlag.lua:8659
+#: scripts/scenario_60_captureFlag.lua:8672
+#: scripts/scenario_60_captureFlag.lua:8685
+#: scripts/scenario_60_captureFlag.lua:8698
+#: scripts/scenario_60_captureFlag.lua:8711
+#: scripts/scenario_60_captureFlag.lua:8724
+#: scripts/scenario_60_captureFlag.lua:8861
+#: scripts/scenario_60_captureFlag.lua:8985
+msgctxt "scienceDescription-artifact"
+msgid "Flag"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2123
+#: scripts/scenario_60_captureFlag.lua:8596
+#: scripts/scenario_60_captureFlag.lua:8861
+msgctxt "scienceDescription-artifact"
+msgid "Human Navy Flag"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2139
+#: scripts/scenario_60_captureFlag.lua:8632
+#: scripts/scenario_60_captureFlag.lua:8985
+msgctxt "scienceDescription-artifact"
+msgid "Kraylor Flag"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2287
+msgctxt "repairCrew-msgEngineer"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2291
+msgctxt "repairCrew-msgEngineer+"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2306
+msgctxt "repairCrew-msgEngineer"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:2310
+msgctxt "repairCrew-msgEngineer+"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:3527
+msgctxt "buttonGM"
+msgid "Orbit Toggle"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:3537
+msgctxt "buttonGM"
+msgid "Move Toggle"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:3698
+msgctxt "wormhole-msgHelms"
+msgid ""
+"Worm hole teleportation destination will change after the flag hiding time "
+"expires"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:3702
+msgctxt "wormhole-msgTactical"
+msgid ""
+"Worm hole teleportation destination will change after the flag hiding time "
+"expires"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:4943
+msgctxt "scienceDescription-station"
+msgid "Optical Components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:4957
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make and supply optic components for various station and ship systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:4958
+msgctxt "stationStory-comms"
+msgid ""
+"This station continues the businesses from Earth based on the merging of "
+"several companies including Leica from Switzerland, the lens manufacturer "
+"and the Japanese advanced low carbon electronic and optic company"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:4964
+msgctxt "scienceDescription-station"
+msgid "Battery and software engineering"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:4976
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide high quality high capacity batteries and specialized software for "
+"all shipboard systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:4977
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after a fictional software engineer in a late 20th "
+"century movie depicting humanity unknowingly conquered by aliens and kept "
+"docile by software generated illusion"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:4983
+msgctxt "scienceDescription-station"
+msgid "Shield and Armor Research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:4997
+msgctxt "stationGeneralInfo-comms"
+msgid "The finest shield and armor manufacturer in the quadrant"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:4998
+msgctxt "stationStory-comms"
+msgid ""
+"We named this station for the pioneering spirit of the 22nd century "
+"Starfleet explorer, Captain Jonathan Archer"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5004
+msgctxt "scienceDescription-station"
+msgid "Energy and particle beam components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5018
+msgctxt "stationGeneralInfo-comms"
+msgid "We fabricate general and specialized components for ship beam systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5019
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after Archimedes who, according to legend, used a "
+"series of adjustable focal length mirrors to focus sunlight on a Roman naval "
+"fleet invading Syracuse, setting fire to it"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5025
+msgctxt "scienceDescription-station"
+msgid "Warp and Impulse engine manufacturing"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5037
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We manufacture warp, impulse and jump engines for the human navy fleet as "
+"well as other independent clients on a contract basis"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5038
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the late 19th century astronaut as well as the "
+"fictionlized stations that followed. The station initially constructed "
+"entire space worthy vessels. In time, it transitioned into specializeing in "
+"propulsion systems."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5044
+msgctxt "scienceDescription-station"
+msgid "Training and Coordination"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5055
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We train naval cadets in routine and specialized functions aboard space "
+"vessels and coordinate naval activity throughout the sector"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5056
+msgctxt "stationStory-comms"
+msgid ""
+"The original station builders were fans of the late 20th century scientist "
+"and author Isaac Asimov. The station was initially named Foundation, but was "
+"later changed simply to Asimov. It started off as a stellar observatory, "
+"then became a supply stop and as it has grown has become an educational and "
+"coordination hub for the region"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5062
+msgctxt "scienceDescription-station"
+msgid "Communication components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5075
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide a range of communication equipment and software for use aboard "
+"ships"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5076
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Reginald Barclay who established the first "
+"transgalactic com link through the creative application of a quantum "
+"singularity. Station personnel often refer to the station as the Broccoli "
+"station"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5082
+msgctxt "scienceDescription-station"
+msgid "Medical research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5085
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and treat exotic medical conditions"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5086
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the United States national medical research "
+"center based in Bethesda, Maryland on earth which was established in the mid "
+"20th century"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5092
+msgctxt "scienceDescription-station"
+msgid "Warp drive components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5109
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide warp drive engines and components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5110
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after Chris Van Den Broeck who did some initial "
+"research into the possibility of warp drive in the late 20th century on Earth"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5116
+#: scripts/scenario_60_captureFlag.lua:5529
+#: scripts/scenario_60_captureFlag.lua:5576
+#: scripts/scenario_60_captureFlag.lua:6230
+msgctxt "scienceDescription-station"
+msgid "Mining station"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5131
+msgctxt "scienceDescription-station"
+msgid "Robotic research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5144
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and provide robotic systems and components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5145
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after Dr. Susan Calvin who pioneered robotic "
+"behavioral research and programming"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5151
+msgctxt "scienceDescription-station"
+msgid "Advanced Material components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5176
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We fabricate several different kinds of materials critical to various space "
+"industries like ship building, station construction and mineral extraction"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5177
+msgctxt "stationStory-comms"
+msgid ""
+"We named our station after Dr. Cavor, the physicist that invented a barrier "
+"material for gravity waves - Cavorite"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5183
+#: scripts/scenario_60_captureFlag.lua:5733
+msgctxt "scienceDescription-station"
+msgid "Trading station"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5194
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"Only the largest market and trading location in twenty sectors. You can find "
+"your heart's desire here"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5195
+msgctxt "stationStory-comms"
+msgid ""
+"Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. "
+"Designed and built with trade and commerce in mind"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5201
+msgctxt "scienceDescription-station"
+msgid "Shielded circuitry fabrication"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5216
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make a large variety of circuits for numerous ship systems shielded from "
+"sensor detection and external control interference"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5217
+msgctxt "stationStory-comms"
+msgid ""
+"Our station is named after the law which quantifies the amount of force with "
+"which stationary electrically charged particals repel or attact each other - "
+"a fundamental principle in the design of our circuits"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5223
+#: scripts/scenario_60_captureFlag.lua:6014
+msgctxt "scienceDescription-station"
+msgid "Impulse engine components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5238
+msgctxt "stationGeneralInfo-comms"
+msgid "We supply high quality impulse engines and parts for use aboard ships"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5239
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after the fictional engineer, Cyrus Smith created by "
+"19th century author Jules Verne"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5245
+#: scripts/scenario_60_captureFlag.lua:5751
+#: scripts/scenario_60_captureFlag.lua:6057
+msgctxt "scienceDescription-station"
+msgid "Android components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5258
+msgctxt "stationGeneralInfo-comms"
+msgid "Supplier of android components, programming and service"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5259
+msgctxt "stationStory-comms"
+msgid ""
+"Named for Richard Deckard who inspired many of the sophisticated safety "
+"security algorithms now required for all androids"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5265
+msgctxt "scienceDescription-station"
+msgid "Repulsor and Tractor Beam Components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5280
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We can meet all your pushing and pulling needs with specialized equipment "
+"custom made"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5281
+msgctxt "stationStory-comms"
+msgid ""
+"The station name comes from a short story by the 20th century author "
+"Clifford D. Simak as well as from the 19th century developer John Deere who "
+"inspired a company that makes the Earth bound equivalents of our products"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5287
+#: scripts/scenario_60_captureFlag.lua:5771
+msgctxt "scienceDescription-station"
+msgid "Transporter components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5302
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide transporters used aboard ships as well as the components for "
+"repair and maintenance"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5303
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the early 22nd century inventor of the "
+"transporter, Dr. Emory Erickson. This station is proud to have received the "
+"endorsement of Admiral Leonard McCoy"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5309
+#: scripts/scenario_60_captureFlag.lua:5623
+msgctxt "scienceDescription-station"
+msgid "Autodoc components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5323
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide components for automated medical machinery"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5324
+msgctxt "stationStory-comms"
+msgid ""
+"The station is the evolution of the company that started automated "
+"pharmaceutical dispensing in the early 21st century on Earth in Finland"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5330
+msgctxt "scienceDescription-station"
+msgid "Nanotechnology research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5344
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide nanites and software for a variety of ship-board systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5345
+msgctxt "stationStory-comms"
+msgid ""
+"This station's name recognizes one of the first scientific researchers into "
+"nanotechnology, physicist Richard Feynman"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5355
+#: scripts/scenario_60_captureFlag.lua:5462
+msgctxt "scienceDescription-station"
+msgid "Mining"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5358
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We mine nearby asteroids for precious minerals and process them for sale"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5359
+msgctxt "stationStory-comms"
+msgid ""
+"This station's name is inspired by a large gold mine on Earth in Indonesia. "
+"The station builders hoped to have a similar amount of minerals found "
+"amongst these asteroids"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5400
+msgctxt "scienceDescription-station"
+msgid "Observatory and stellar mapping"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5411
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We study the cosmos and map stellar phenomena. We also track moving "
+"asteroids. Look out! Just kidding"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5417
+#: scripts/scenario_60_captureFlag.lua:6175
+msgctxt "scienceDescription-station"
+msgid "Sensor components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5429
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture sensor components and systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5430
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Tony Heyes the inventor of some of the earliest "
+"electromagnetic sensors in the mid 20th century on Earth in the United "
+"Kingdom to assist blind human mobility"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5436
+msgctxt "scienceDescription-station"
+msgid "Nanite supplier"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5451
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide nanites for various organic and non-organic systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5452
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after the nanotechnologist Hossam Haick from the early "
+"21st century on Earth in Israel"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5467
+msgctxt "stationGeneralInfo-comms"
+msgid "We mine nearby asteroids for precious minerals"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5508
+msgctxt "scienceDescription-station"
+msgid "Xenopsychology training"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5522
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide classes and simulation to help train diverse species in how to "
+"relate to each other"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5523
+msgctxt "stationStory-comms"
+msgid ""
+"A continuation of the research initially conducted by Dr. Gennady Komov in "
+"the early 22nd century on Venus, supported by the application of these "
+"principles"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5636
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We build and repair and provide components and upgrades for automated "
+"facilities designed for ships where a doctor cannot be a crew member "
+"(commonly called autodocs)"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5637
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Dr. Lipkin who pioneered some of the research and "
+"application around robot assisted surgery in the area of partial nephrectomy "
+"for renal tumors in the early 21st century on Earth"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5643
+msgctxt "scienceDescription-station"
+msgid "Zero gravity sports and entertainment"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5656
+msgctxt "stationGeneralInfo-comms"
+msgid "Come take in a game or two or perhaps see a show"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5657
+msgctxt "stationStory-comms"
+msgid ""
+"Named after Madison Square Gardens from 21st century Earth, this station was "
+"designed to serve similar purposes in space - a venue for sports and "
+"entertainment"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5663
+msgctxt "scienceDescription-station"
+msgid "Energy beam components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5676
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture energy beam components and systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5677
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Theodore Maiman who researched and built the "
+"first laser in the mid 20th centuryon Earth"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5683
+msgctxt "scienceDescription-station"
+msgid "Energy Beam Components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5698
+msgctxt "stationGeneralInfo-comms"
+msgid "We manufacture energy beam components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5699
+msgctxt "stationStory-comms"
+msgid ""
+"Station named after Guglielmo Marconi an Italian inventor from early 20th "
+"century Earth who, along with Nicolo Tesla, claimed to have invented a death "
+"ray or particle beam weapon"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5705
+msgctxt "scienceDescription-station"
+msgid "Medical Research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5708
+msgctxt "stationGeneralInfo-comms"
+msgid "We research exotic diseases and other human medical conditions"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5709
+msgctxt "stationStory-comms"
+msgid ""
+"We continue the medical work started by William Worrall Mayo in the late "
+"19th century on Earth"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5715
+msgctxt "scienceDescription-station"
+msgid "Exobiology research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5726
+msgctxt "stationGeneralInfo-comms"
+msgid "We study recently discovered life forms not native to Earth"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5727
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after one the early exobiologists from mid 20th "
+"century Earth, Dr. Stanley Miller"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5744
+msgctxt "stationGeneralInfo-comms"
+msgid "Come to Muddvile for all your trade and commerce needs and desires"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5745
+msgctxt "stationStory-comms"
+msgid ""
+"Upon retirement, Harry Mudd started this commercial venture using his "
+"leftover inventory and extensive connections obtained while he traveled the "
+"stars as a salesman"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5764
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and manufacture android components and systems. Our design our "
+"androids to maximize their likeness to humans"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5765
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the ground breaking model of android produced by "
+"the Tyrell corporation"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5787
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and fabricate high quality transporters and transporter "
+"components for use aboard ships"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5788
+msgctxt "stationStory-comms"
+msgid ""
+"Miles O'Brien started this business after his experience as a transporter "
+"chief"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5794
+msgctxt "scienceDescription-station"
+msgid "Optical components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5808
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We fabricate optical lenses and related equipment as well as fiber optic "
+"cabling and components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5809
+msgctxt "stationStory-comms"
+msgid ""
+"This station grew out of the Olympus company based on earth in the early "
+"21st century. It merged with Infinera, then bought several software "
+"comapnies before branching out into space based industry"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5815
+msgctxt "scienceDescription-station"
+msgid "Diplomatic training"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5818
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"The premeire academy for leadership and diplomacy training in the region"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5819
+msgctxt "stationStory-comms"
+msgid ""
+"Established by the royal family so critical during the political upheaval era"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5825
+msgctxt "scienceDescription-station"
+msgid "Mining and trade"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5872
+msgctxt "scienceDescription-station"
+msgid "Mining and gambling"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5921
+#: scripts/scenario_60_captureFlag.lua:5963
+msgctxt "scienceDescription-station"
+msgid "Load lifters and components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5934
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide load lifters and components for various ship systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5935
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Lars Owen. After his extensive eperience with "
+"tempermental machinery on Tatooine, he used his subject matter expertise to "
+"expand into building and manufacturing the equipment adding innovations "
+"based on his years of experience using load lifters and their relative "
+"cousins, moisture vaporators"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5941
+msgctxt "scienceDescription-station"
+msgid "Optic components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5956
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide optic components for various ship systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5957
+msgctxt "stationStory-comms"
+msgid ""
+"This station is an outgrowth of the Panduit corporation started in the mid "
+"20th century on Earth in the United States"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5978
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide load lifters and components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5979
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Ellen Ripley who made creative and effective use "
+"of one of our load lifters when defending her ship"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:5985
+msgctxt "scienceDescription-station"
+msgid "Shield components and research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6000
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and fabricate components for ship shield systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6001
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after the national research institution Rutherford "
+"Appleton Laboratory in the United Kingdom which conducted some preliminary "
+"research into the feasability of generating an energy shield in the late "
+"20th century"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6007
+#: scripts/scenario_60_captureFlag.lua:6373
+msgctxt "scienceDescription-station"
+msgid "Observatory"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6028
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture impulse engine components and systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6029
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Roger Shawyer who built the first prototype "
+"impulse engine in the early 21st century"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6035
+msgctxt "scienceDescription-station"
+msgid "Repulsor and tractor beam components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6050
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make ship systems designed to push or pull other objects around in space"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6051
+msgctxt "stationStory-comms"
+msgid ""
+"Our station is named Shree after one of many tugboat manufacturers in the "
+"early 21st century on Earth in India. Tugboats serve a similar purpose for "
+"ocean-going vessels on earth as tractor and repulsor beams serve for space-"
+"going vessels today"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6070
+msgctxt "stationGeneralInfo-comms"
+msgid "We create androids and android components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6071
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Dr. Noonian Soong, the famous android researcher "
+"and builder"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6077
+msgctxt "scienceDescription-station"
+msgid "Logistics coordination"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6080
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We support the stations and ships in the area with planning and "
+"communication services"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6081
+msgctxt "stationStory-comms"
+msgid ""
+"We recognize the influence of Starfleet Captain James Tiberius Kirk in the "
+"23rd century in our station name"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6087
+msgctxt "scienceDescription-station"
+msgid "Advanced material components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6112
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We create multiple types of advanced material components. Our most popular "
+"products are our filaments"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6113
+msgctxt "stationStory-comms"
+msgid ""
+"We learned several of our critical industrial processes from the Tokra race, "
+"so we honor our fortune by naming the station after them"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6119
+msgctxt "scienceDescription-station"
+msgid "Shield and armor components and research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6133
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and make general and specialized components for ship shield and "
+"ship armor systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6134
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after one of the earliest researchers in shield "
+"technology, Alexander Toohie back when it was considered impractical to "
+"construct shields due to the physics involved."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6140
+#: scripts/scenario_60_captureFlag.lua:6393
+msgctxt "scienceDescription-station"
+msgid "Ship building and maintenance facility"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6151
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We work on all aspects of naval ship building and maintenance. Many of the "
+"naval models are researched, designed and built right here on this station. "
+"Our design goals seek to make the space faring experience as simple as "
+"possible given the tremendous capabilities of the modern naval vessel"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6157
+msgctxt "scienceDescription-station"
+msgid "Shielded Circuitry Fabrication"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6168
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We specialize in circuitry shielded from external hacking suitable for ship "
+"systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6169
+msgctxt "stationStory-comms"
+msgid ""
+"We started as an expansion from the lunar based chip manufacturer of Earth "
+"legacy Intel electronic chips"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6189
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and construct components for the most powerful and accurate "
+"sensors used aboard ships along with the software to make them easy to use"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6190
+msgctxt "stationStory-comms"
+msgid ""
+"The Veloquan company has its roots in the manufacturing of LIDAR sensors in "
+"the early 21st century on Earth in the United States for autonomous ground-"
+"based vehicles. They expanded research and manufacturing operations to "
+"include various sensors for space vehicles. Veloquan was the result of "
+"numerous mergers and acquisitions of several companies including Velodyne "
+"and Quanergy"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6196
+msgctxt "scienceDescription-station"
+msgid "Warp engine components"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6211
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We specialize in the esoteric components necessary to make warp drives "
+"function properly"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6212
+msgctxt "stationStory-comms"
+msgid ""
+"Zefram Cochrane constructed the first warp drive in human history. We named "
+"our station after him because of the specialized warp systems work we do"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6222
+msgctxt "scienceDescription-station"
+msgid "Commerce and gambling"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6224
+msgctxt "stationGeneralInfo-comms"
+msgid "Come play some games and shop. House take does not exceed 4 percent"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6277
+msgctxt "scienceDescription-station"
+msgid "Casino and Gambling"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6283
+msgctxt "scienceDescription-station"
+msgid "Gambling and resupply"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6285
+msgctxt "stationGeneralInfo-comms"
+msgid "Relax and meet some interesting players"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6291
+msgctxt "scienceDescription-station"
+msgid "Commerce and recreation"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6298
+msgctxt "scienceDescription-station"
+msgid "Xenopsychology research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6304
+#: scripts/scenario_60_captureFlag.lua:6317
+#: scripts/scenario_60_captureFlag.lua:6342
+#: scripts/scenario_60_captureFlag.lua:6400
+msgctxt "scienceDescription-station"
+msgid "Resupply"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6324
+msgctxt "scienceDescription-station"
+msgid "Textiles and fashion"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6330
+msgctxt "scienceDescription-station"
+msgid "Stress Psychology Research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6336
+msgctxt "scienceDescription-station"
+msgid "Low gravity research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6345
+msgctxt "stationGeneralInfo-comms"
+msgid "Get your energy here! Grab a drink before you go!"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6351
+msgctxt "scienceDescription-station"
+msgid "Research Lab and Observatory"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6357
+msgctxt "scienceDescription-station"
+msgid "Biotech research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6363
+msgctxt "scienceDescription-station"
+msgid "Routine maintenance and entertainment"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6366
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"Stop by for repairs. Take in one of our juggling shows featuring the four-"
+"armed Skandars"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6367
+msgctxt "stationStory-comms"
+msgid ""
+"The nomadic Skandars have set up at this station to practice their "
+"entertainment and maintenance skills as well as build a community where "
+"Skandars can relax"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6379
+msgctxt "scienceDescription-station"
+msgid "Automated weapons systems"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6381
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and create automated weapons systems to improve ship combat "
+"capability"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6387
+msgctxt "scienceDescription-station"
+msgid "Biotechnology research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6468
+#: scripts/scenario_60_captureFlag.lua:6476
+#: scripts/scenario_60_captureFlag.lua:6619
+#: scripts/scenario_60_captureFlag.lua:6631
+#: scripts/scenario_60_captureFlag.lua:6643
+#: scripts/scenario_60_captureFlag.lua:6662
+#: scripts/scenario_60_captureFlag.lua:6674
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s%d rep each)"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6484
+msgctxt "station-comms"
+msgid "Dock, please"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6490
+#: scripts/scenario_60_captureFlag.lua:6941
+msgctxt "station-comms"
+msgid "You need to stay docked for that action."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6494
+#: scripts/scenario_60_captureFlag.lua:6945
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6495
+#: scripts/scenario_60_captureFlag.lua:6946
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6496
+#: scripts/scenario_60_captureFlag.lua:6947
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6503
+#: scripts/scenario_60_captureFlag.lua:6954
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6505
+#: scripts/scenario_60_captureFlag.lua:6956
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6507
+#: scripts/scenario_60_captureFlag.lua:6519
+#: scripts/scenario_60_captureFlag.lua:6722
+#: scripts/scenario_60_captureFlag.lua:6727
+#: scripts/scenario_60_captureFlag.lua:6735
+#: scripts/scenario_60_captureFlag.lua:6796
+#: scripts/scenario_60_captureFlag.lua:6826
+#: scripts/scenario_60_captureFlag.lua:6858
+#: scripts/scenario_60_captureFlag.lua:6890
+#: scripts/scenario_60_captureFlag.lua:6896
+#: scripts/scenario_60_captureFlag.lua:6920
+#: scripts/scenario_60_captureFlag.lua:6925
+#: scripts/scenario_60_captureFlag.lua:6958
+#: scripts/scenario_60_captureFlag.lua:6970
+#: scripts/scenario_60_captureFlag.lua:7044
+#: scripts/scenario_60_captureFlag.lua:7066
+#: scripts/scenario_60_captureFlag.lua:7088
+#: scripts/scenario_60_captureFlag.lua:7092
+#: scripts/scenario_60_captureFlag.lua:7100
+#: scripts/scenario_60_captureFlag.lua:7110
+#: scripts/scenario_60_captureFlag.lua:7115
+#: scripts/scenario_60_captureFlag.lua:7121
+#: scripts/scenario_60_captureFlag.lua:7138
+#: scripts/scenario_60_captureFlag.lua:7160
+#: scripts/scenario_60_captureFlag.lua:7164
+#: scripts/scenario_60_captureFlag.lua:7181
+#: scripts/scenario_60_captureFlag.lua:7185
+#: scripts/scenario_60_captureFlag.lua:7775
+#: scripts/scenario_60_captureFlag.lua:7782
+#: scripts/scenario_60_captureFlag.lua:7791
+#: scripts/scenario_60_captureFlag.lua:7816
+#: scripts/scenario_60_captureFlag.lua:7823
+#: scripts/scenario_60_captureFlag.lua:7835
+#: scripts/scenario_60_captureFlag.lua:7840
+#: scripts/scenario_60_captureFlag.lua:7847
+#: scripts/scenario_60_captureFlag.lua:7855
+#: scripts/scenario_60_captureFlag.lua:7862
+#: scripts/scenario_60_captureFlag.lua:7870
+#: scripts/scenario_60_captureFlag.lua:7906
+#: scripts/scenario_60_captureFlag.lua:7919
+#: scripts/scenario_60_captureFlag.lua:7925
+#: scripts/scenario_60_captureFlag.lua:7936
+#: scripts/scenario_60_captureFlag.lua:7945
+#: scripts/scenario_60_captureFlag.lua:7956
+#: scripts/scenario_60_captureFlag.lua:7965
+#: scripts/scenario_60_captureFlag.lua:7976
+#: scripts/scenario_60_captureFlag.lua:7989
+#: scripts/scenario_60_captureFlag.lua:7999
+#: scripts/scenario_60_captureFlag.lua:8009
+#: scripts/scenario_60_captureFlag.lua:8030
+msgid "Back"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6510
+#: scripts/scenario_60_captureFlag.lua:6961
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6515
+#: scripts/scenario_60_captureFlag.lua:6966
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6517
+#: scripts/scenario_60_captureFlag.lua:6968
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6572
+msgctxt "station-comms"
+msgid ""
+"Good day, officer!\n"
+"What can we do for you today?\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6574
+msgctxt "station-comms"
+msgid "Welcome to our lovely station.\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6610
+msgctxt "ammo-comms"
+msgid "I need ordnance restocked"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6611
+msgctxt "ammo-comms"
+msgid "What type of ordnance?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6615
+msgctxt "ammo-comms"
+msgid "Can you supply us with some nukes? ("
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6617
+msgctxt "ammo-comms"
+msgid "We really need some nukes ("
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6627
+msgctxt "ammo-comms"
+msgid "Please re-stock our EMP missiles. ("
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6629
+msgctxt "ammo-comms"
+msgid "Got any EMPs? ("
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6639
+msgctxt "ammo-comms"
+msgid "Do you have spare homing missiles for us? ("
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6641
+msgctxt "ammo-comms"
+msgid "Do you have extra homing missiles? ("
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6652
+msgctxt "ammo-comms"
+msgid "We could use some mines. ("
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6654
+msgctxt "ammo-comms"
+msgid "How about mines? ("
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6656
+msgctxt "ammo-comms"
+msgid "More mines ("
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6658
+msgctxt "ammo-comms"
+msgid "All the mines we can take. ("
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6660
+msgctxt "ammo-comms"
+msgid "Mines! What else? ("
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6670
+msgctxt "ammo-comms"
+msgid "What about HVLI? ("
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6672
+msgctxt "ammo-comms"
+msgid "Could you provide HVLI? ("
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6689
+#: scripts/scenario_60_captureFlag.lua:6706
+#, lua-format
+msgctxt "trade-comms"
+msgid "Recruit repair crew member for %i reputation"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6691
+#: scripts/scenario_60_captureFlag.lua:6708
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6695
+#: scripts/scenario_60_captureFlag.lua:6712
+msgctxt "trade-comms"
+msgid "Repair crew member hired"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6718
+msgctxt "station-comms"
+msgid "Tell me more about your station"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6719
+msgctxt "station-comms"
+msgid "What would you like to know?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6720
+msgctxt "stationGeneralInfo-comms"
+msgid "General information"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6725
+msgctxt "stationStory-comms"
+msgid "Station history"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6733
+msgctxt "gossip-comms"
+msgid "Gossip"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6743
+msgctxt "trade-comms"
+msgid "Buy, sell, trade"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6744
+#: scripts/scenario_60_captureFlag.lua:7056
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available: quantity, cost in reputation\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6750
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i, %i\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6753
+msgctxt "trade-comms"
+msgid "Current Cargo:\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6760
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6766
+msgctxt "trade-comms"
+msgid "     Empty\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6769
+#, lua-format
+msgctxt "trade-comms"
+msgid "Available Space: %i, Available Reputation: %i\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6777
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6778
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i, Rep: %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6780
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient cargo space for purchase"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6782
+#: scripts/scenario_60_captureFlag.lua:6787
+msgctxt "needRep-comms"
+msgid ""
+"\n"
+"Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6784
+#: scripts/scenario_60_captureFlag.lua:6818
+#: scripts/scenario_60_captureFlag.lua:6850
+#: scripts/scenario_60_captureFlag.lua:6882
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient station inventory"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6792
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"purchased"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6815
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade food for %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6816
+#: scripts/scenario_60_captureFlag.lua:6848
+#: scripts/scenario_60_captureFlag.lua:6880
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Quantity: %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6823
+#: scripts/scenario_60_captureFlag.lua:6855
+#: scripts/scenario_60_captureFlag.lua:6887
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Traded"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6847
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6879
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade medicine for %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6909
+msgctxt "trade-comms"
+msgid "Jettison cargo"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6910
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Available space: %i\n"
+"What would you like to jettison?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6919
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s jettisoned"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6979
+msgctxt "station-comms"
+msgid ""
+"Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:6981
+msgctxt "station-comms"
+msgid ""
+"Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7011
+msgctxt "station-comms"
+msgid "I need information"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7012
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7013
+msgctxt "ammo-comms"
+msgid "What ordnance do you have available for restock?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7018
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Nuke"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7022
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   EMP"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7026
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Homing"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7030
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Mine"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7034
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   HVLI"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7037
+msgctxt "ammo-comms"
+msgid "We have no ordnance available for restock"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7039
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following type of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7041
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following types of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7055
+msgctxt "trade-comms"
+msgid "What goods do you have available for sale or trade?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7062
+#, lua-format
+msgctxt "trade-comms"
+msgid "   %14s: %2i, %3i\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7069
+msgctxt "helpfullWarning-comms"
+msgid "See any enemies in your area?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7079
+#, lua-format
+msgctxt "helpfullWarning-comms"
+msgid "Yes, we see %i enemies within 30U"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7081
+msgctxt "helpfullWarning-comms"
+msgid "Yes, we see one enemy within 30U"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7085
+msgctxt "helpfullWarning-comms"
+msgid "No enemies within 30U"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7090
+msgctxt "helpfullWarning-comms"
+msgid "Not really"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7095
+msgctxt "trade-comms"
+msgid "Where can I find particular goods?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7096
+msgctxt "trade-comms"
+msgid ""
+"Friendly stations generally have food or medicine or both. Neutral stations "
+"often trade their goods for food, medicine or luxury."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7098
+msgctxt "trade-comms"
+msgid ""
+" Beyond that, I have no knowledge of specific stations.\n"
+"\n"
+"Check back later, someone else may have better knowledge"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7104
+msgctxt "trade-comms"
+msgid " Beyond that, I have no knowledge of specific stations"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7106
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"\n"
+"What goods are you interested in?\n"
+"I've heard about these:"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7109
+#, lua-format
+msgctxt "trade-comms"
+msgid "Station %s in sector %s has %s%s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7119
+msgctxt "stationGeneralInfo-comms"
+msgid "General station information"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7142
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop? (%d rep)"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7144
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request backup."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7146
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7148
+#: scripts/scenario_60_captureFlag.lua:7174
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "WP %d"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7156
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship toward WP %d"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7158
+#: scripts/scenario_60_captureFlag.lua:7179
+msgctxt "needRep-comms"
+msgid "Not enough reputation!"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7168
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send reinforcements! (%d rep)"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7170
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request reinforcements."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7172
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the reinforcements?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7177
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to assist at WP %d"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7216
+msgctxt "trade-comms"
+msgid " and will trade it for medicine"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7221
+msgctxt "trade-comms"
+msgid " or food"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7223
+msgctxt "trade-comms"
+msgid " and will trade it for food"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7229
+msgctxt "trade-comms"
+msgid " or luxury"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7231
+msgctxt "trade-comms"
+msgid " and will trade it for luxury"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7259
+#: scripts/scenario_60_captureFlag.lua:7275
+msgctxt "-buttonWeapons"
+msgid "Drop flag"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7261
+#: scripts/scenario_60_captureFlag.lua:7277
+msgctxt "-buttonTactical"
+msgid "Drop flag"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7295
+#: scripts/scenario_60_captureFlag.lua:7308
+msgctxt "flag-msgWeapons"
+msgid ""
+"Flag position recorded. Flag will be placed here when preparation period "
+"complete"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7299
+#: scripts/scenario_60_captureFlag.lua:7312
+msgctxt "flag-msgTactical"
+msgid ""
+"Flag position recorded. Flag will be placed here when preparation period "
+"complete"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7444
+msgctxt "decoy-msgWeapons"
+msgid ""
+"Decoy position recorded. Decoy will be placed here when preparation period "
+"complete"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7448
+msgctxt "decoy-msgTactical"
+msgid ""
+"Decoy position recorded. Decoy will be placed here when preparation period "
+"complete"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7470
+#, lua-format
+msgctxt "decoy-buttonWeapons"
+msgid "Drop Decoy %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7473
+#, lua-format
+msgctxt "decoy-buttonTactical"
+msgid "Drop Decoy %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7592
+#, lua-format
+msgctxt "drones-msgWeapons"
+msgid "You do not have %i drones to deploy"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7594
+#, lua-format
+msgctxt "drones-msgTactical"
+msgid "You do not have %i drones to deploy"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7599
+#: scripts/scenario_60_captureFlag.lua:7629
+#, lua-format
+msgctxt "drones-tabWeapons&Tactical"
+msgid "Drones Available: %i"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7725
+msgctxt "drones-msgEngineer&Engineer+"
+msgid ""
+"%s! Telemetry from %s in squad % stopped abruptly indicating destruction. "
+"Probable instigator: %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7727
+#, lua-format
+msgctxt "drones-msgEngineer&Engineer+"
+msgid "*%s* Another drone bites the dust: %s in squad %s destroyed by %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7729
+#, lua-format
+msgctxt "drones-msgEngineer&Engineer+"
+msgid "--%s-- Drone %s in squad %s just disappeared. %s was nearby"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7731
+#, lua-format
+msgctxt "drones-msgEngineer&Engineer+"
+msgid "%s! %s just took out Drone %s in squad %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7733
+#, lua-format
+msgctxt "drones-msgEngineer&Engineer+"
+msgid "%s! Drone %s in squad %s was destroyed by %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7768
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7770
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7772
+#: scripts/scenario_60_captureFlag.lua:7921
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7774
+#: scripts/scenario_60_captureFlag.lua:7839
+#: scripts/scenario_60_captureFlag.lua:7854
+#: scripts/scenario_60_captureFlag.lua:7924
+#: scripts/scenario_60_captureFlag.lua:7944
+#: scripts/scenario_60_captureFlag.lua:7964
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7777
+#: scripts/scenario_60_captureFlag.lua:7927
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7779
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %d"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7781
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %d."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7788
+#: scripts/scenario_60_captureFlag.lua:7911
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7789
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7794
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7795
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7798
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7800
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7801
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Rear Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7804
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7811
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s Missiles: %d/%d\n"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7820
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7821
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7832
+msgctxt "shipAssist-comms"
+msgid "Go attack enemies"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7834
+msgctxt "shipAssist-comms"
+msgid "Going roaming and attacking"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7837
+#: scripts/scenario_60_captureFlag.lua:7941
+msgctxt "shipAssist-comms"
+msgid "Go to waypoint. Attack enemies en route"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7842
+#: scripts/scenario_60_captureFlag.lua:7857
+#: scripts/scenario_60_captureFlag.lua:7947
+#: scripts/scenario_60_captureFlag.lua:7967
+msgctxt "shipAssist-comms"
+msgid "Which waypoint?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7844
+#: scripts/scenario_60_captureFlag.lua:7859
+#: scripts/scenario_60_captureFlag.lua:7969
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Go to WP%d"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7846
+#: scripts/scenario_60_captureFlag.lua:7955
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Going to WP%d, watching for enemies en route"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7852
+#: scripts/scenario_60_captureFlag.lua:7961
+msgctxt "shipAssist-comms"
+msgid "Go to waypoint. Ignore enemies"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7861
+#: scripts/scenario_60_captureFlag.lua:7975
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Going to WP%d, ignoring enemies"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7867
+msgctxt "shipAssist-comms"
+msgid "Stop and defend your current position"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7869
+msgctxt "shipAssist-comms"
+msgid "Stopping and defending"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7872
+msgctxt "shipAssist-comms"
+msgid "Stop. Do nothing"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7876
+msgctxt "shipAssist-comms"
+msgid "Stopping. Doing nothing except routine system maintenance"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7878
+msgctxt "shipAssist-comms"
+msgid "Stopping. Doing nothing except idle drone gossip"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7880
+msgctxt "shipAssist-comms"
+msgid "Stopping. Doing nothing except exterior paint touch-up"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7882
+msgctxt "shipAssist-comms"
+msgid "Stopping. Doing nothing except cyber exercise for continued fitness"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7884
+msgctxt "shipAssist-comms"
+msgid "Stopping. Doing nothing except algorithmic meditation therapy"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7886
+msgctxt "shipAssist-comms"
+msgid "Stopping. Doing nothing except internal simulated flight routines"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7888
+msgctxt "shipAssist-comms"
+msgid "Stopping. Doing nothing except digital dreamscape construction"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7890
+msgctxt "shipAssist-comms"
+msgid ""
+"Stopping. Doing nothing except catching up on reading the latest drone drama "
+"novel"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7892
+msgctxt "shipAssist-comms"
+msgid ""
+"Stopping. Doing nothing except writing up results of bifurcated drone "
+"personality research"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7894
+msgctxt "shipAssist-comms"
+msgid ""
+"Stopping. Doing nothing except categorizing nearby miniscule space particles"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7896
+msgctxt "shipAssist-comms"
+msgid ""
+"Stopping. Doing nothing except continuing the count of visible stars from "
+"this region"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7898
+msgctxt "shipAssist-comms"
+msgid "Stopping. Doing nothing except internal systems diagnostics"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7900
+msgctxt "shipAssist-comms"
+msgid ""
+"Stopping. Doing nothing except composing amorous communications to my "
+"favorite drone"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7902
+msgctxt "shipAssist-comms"
+msgid ""
+"Stopping. Doing nothing except repairing experimental vocalization circuits"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7904
+msgctxt "shipAssist-comms"
+msgid "Stopping. Doing nothing"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7908
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Direct %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7910
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "What command should I give to %s?"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7918
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s heading toward you to assist"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7929
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP%d"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7935
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP%d."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7981
+msgctxt "shipAssist-comms"
+msgid "Go and swarm enemies"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7988
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s roaming and attacking"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7991
+msgctxt "shipAssist-comms"
+msgid "Stop and defend your current positions"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:7998
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s standing ground"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8001
+msgctxt "shipAssist-comms"
+msgid "Stop. Do Nothing"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8008
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s standing down"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8011
+msgctxt "shipAssist-comms"
+msgid "Other drones in squad form up on me"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8029
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s is forming up on me"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8041
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8042
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8043
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8045
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8047
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8049
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8051
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8052
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8053
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8054
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8056
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8057
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8058
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8059
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8061
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8078
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8080
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8343
+#, lua-format
+msgctxt "callsign-station"
+msgid "Hide flag %i:%.1f"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8563
+msgctxt "callsign-station"
+msgid "Transition"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8659
+#: scripts/scenario_60_captureFlag.lua:8685
+#: scripts/scenario_60_captureFlag.lua:8711
+msgctxt "scienceDescription-artifact"
+msgid "Human Navy Decoy Flag"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8672
+#: scripts/scenario_60_captureFlag.lua:8698
+#: scripts/scenario_60_captureFlag.lua:8724
+msgctxt "scienceDescription-artifact"
+msgid "Kraylor Decoy Flag"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8769
+#, lua-format
+msgctxt "callsign-station"
+msgid "Hunt flag %i:%.1f"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8788
+msgctxt "-tabHelms"
+msgid "Human Flag Aboard"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8792
+msgctxt "-tabTactical"
+msgid "Human Flag Aboard"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8912
+msgctxt "-tabHelms"
+msgid "Kraylor Flag Aboard"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:8916
+msgctxt "-tabTactical"
+msgid "Kraylor Flag Aboard"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:9077
+#: scripts/scenario_60_captureFlag.lua:9094
+#: scripts/scenario_60_captureFlag.lua:9112
+#: scripts/scenario_60_captureFlag.lua:9153
+#: scripts/scenario_60_captureFlag.lua:9170
+#: scripts/scenario_60_captureFlag.lua:9188
+#, lua-format
+msgctxt "drones-msgScience"
+msgid "Drone %s in sector %s reports possible flag in sector %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:9081
+#: scripts/scenario_60_captureFlag.lua:9098
+#: scripts/scenario_60_captureFlag.lua:9116
+#: scripts/scenario_60_captureFlag.lua:9157
+#: scripts/scenario_60_captureFlag.lua:9174
+#: scripts/scenario_60_captureFlag.lua:9192
+#, lua-format
+msgctxt "drones-msgOperations"
+msgid "Drone %s in sector %s reports possible flag in sector %s"
+msgstr ""
+
+#: scripts/scenario_60_captureFlag.lua:9278
+#, lua-format
+msgctxt "-tabHelms&Tactical&Singlepilot"
+msgid "%s in %s"
+msgstr ""

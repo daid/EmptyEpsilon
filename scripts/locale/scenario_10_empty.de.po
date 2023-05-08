@@ -22,7 +22,22 @@ msgid ""
 "setup a scenario in the GM screen. The F5 key can be used to copy the "
 "current layout to the clipboard for use in scenario scripts."
 msgstr ""
-"Leeres Szenario, weder feindliche noch verbündete Schiffe. Kann von "
-"einer Spielleitung verwendet werden, um ein Szenario auf dem SL-Schirm "
+"Leeres Szenario, weder feindliche noch verbündete Schiffe. Kann von einer "
+"Spielleitung verwendet werden, um ein Szenario auf dem SL-Schirm "
 "einzurichten. Mit der Taste F5 kann das aktuelle Layout in die "
 "Zwischenablage kopiert werden, um es in Szenarioskripts zu verwenden."
+
+#: scripts/scenario_10_empty.lua:30
+msgctxt "buttonGM"
+msgid "Random asteroid field"
+msgstr ""
+
+#: scripts/scenario_10_empty.lua:40
+msgctxt "buttonGM"
+msgid "Random nebula field"
+msgstr ""
+
+#: scripts/scenario_10_empty.lua:49
+msgctxt "buttonGM"
+msgid "Delete unselected"
+msgstr ""

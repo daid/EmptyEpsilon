@@ -10,463 +10,214 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.1\n"
+
 #: scripts/comms_station.lua:73
-msgctxt "commsStation"
+msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
+
 #: scripts/comms_station.lua:91
 #, lua-format
-msgctxt "commsStation"
+msgctxt "station-comms"
 msgid ""
 "Good day, officer! Welcome to %s.\n"
 "What can we do for you today?"
 msgstr ""
+
 #: scripts/comms_station.lua:93
 #, fuzzy, lua-format
-msgctxt "commsStation"
+msgctxt "station-comms"
 msgid "Welcome to our lovely station %s."
 msgstr "Seleziona la tua postazione"
+
 #: scripts/comms_station.lua:98
-msgctxt "commsStation"
+msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us?"
 msgstr ""
+
 #: scripts/comms_station.lua:99
-msgctxt "commsStation"
+msgctxt "ammo-comms"
 msgid "Can you restock us with HVLI?"
 msgstr ""
+
 #: scripts/comms_station.lua:100
-msgctxt "commsStation"
+msgctxt "ammo-comms"
 msgid "Please re-stock our mines."
 msgstr ""
+
 #: scripts/comms_station.lua:101
-msgctxt "commsStation"
+msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes?"
 msgstr ""
+
 #: scripts/comms_station.lua:102
-msgctxt "commsStation"
+msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles."
 msgstr ""
+
 #: scripts/comms_station.lua:108
 #, lua-format
-msgctxt "commsStation"
+msgctxt "ammo-comms"
 msgid "%s (%d rep each)"
 msgstr ""
+
 #: scripts/comms_station.lua:124
-msgctxt "commsStation"
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr ""
+
 #: scripts/comms_station.lua:131
-msgctxt "commsStation"
+msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr ""
+
 #: scripts/comms_station.lua:133
-msgctxt "commsStation"
+msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr ""
+
 #: scripts/comms_station.lua:135
-msgctxt "commsStation"
+msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
 msgstr ""
+
 #: scripts/comms_station.lua:146
-msgctxt "commsStation"
+msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr ""
+
 #: scripts/comms_station.lua:148
-msgctxt "commsStation"
+msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
+
 #: scripts/comms_station.lua:151 scripts/comms_station.lua:165
 #: scripts/comms_station.lua:229 scripts/comms_station.lua:234
 #: scripts/comms_station.lua:263 scripts/comms_station.lua:289
 #: scripts/comms_station.lua:294
 #, fuzzy
-msgctxt "button"
 msgid "Back"
 msgstr "Indietro"
+
 #: scripts/comms_station.lua:154
-msgctxt "commsStation"
+msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr ""
+
 #: scripts/comms_station.lua:160
-msgctxt "commsStation"
+msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr ""
+
 #: scripts/comms_station.lua:162
-msgctxt "commsStation"
+msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
 msgstr ""
+
 #: scripts/comms_station.lua:176
 #, lua-format
-msgctxt "commsStation"
+msgctxt "station-comms"
 msgid ""
 "This is %s. Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr ""
+
 #: scripts/comms_station.lua:178
 #, lua-format
-msgctxt "commsStation"
+msgctxt "station-comms"
 msgid ""
 "This is %s. Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr ""
+
 #: scripts/comms_station.lua:185
 #, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr ""
+
 #: scripts/comms_station.lua:194
 #, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
 msgstr ""
+
 #: scripts/comms_station.lua:209
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
+
 #: scripts/comms_station.lua:211
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr ""
+
 #: scripts/comms_station.lua:224
 #, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward %s."
 msgstr ""
+
 #: scripts/comms_station.lua:226 scripts/comms_station.lua:286
-msgctxt "commsStation"
+msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr ""
+
 #: scripts/comms_station.lua:242
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "What kind of reinforcement ship would you like?"
 msgstr ""
+
 #: scripts/comms_station.lua:243
 #, fuzzy, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "Adder MK3 (%d rep)"
 msgstr "Adder MK3"
+
 #: scripts/comms_station.lua:247
 #, fuzzy, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "MU52 Hornet (%d rep)"
 msgstr "MU52 Hornet"
+
 #: scripts/comms_station.lua:251
-#, lua-format
-msgctxt "commsStation"
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
 msgid "Standard Adder MK5 (%d rep)"
-msgstr ""
+msgstr "Adder MK3"
+
 #: scripts/comms_station.lua:255
 #, fuzzy, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "Adder MK8 (%d rep)"
 msgstr "Adder MK8"
+
 #: scripts/comms_station.lua:259
 #, fuzzy, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "Phobos T3 (%d rep)"
 msgstr "Phobos T3"
+
 #: scripts/comms_station.lua:267
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr ""
+
 #: scripts/comms_station.lua:269
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr ""
+
 #: scripts/comms_station.lua:284
 #, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at %s."
 msgstr ""
+
 #: scripts/comms_station.lua:355
 #, lua-format
-msgctxt "commsStation"
+msgctxt "stationAssist-comms"
 msgid "WP %d"
 msgstr ""
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-# destroyer->incrociatore come hanno fatto per star wars
-# letteralmente sarebbe cacciatorpediniere
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy

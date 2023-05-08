@@ -311,7 +311,8 @@ msgstr ""
 "Des London-Gebiets"
 
 #: scripts/scenario_62_whatTheDickens.lua:449
-msgctxt "ammo-comms"
+#, fuzzy
+msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Sie müssen für diese Aktion angedockt bleiben."
 
