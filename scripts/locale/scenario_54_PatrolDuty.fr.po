@@ -16,7 +16,7 @@ msgstr ""
 
 # Scenario name
 msgid "Delta quadrant patrol duty"
-msgstr ""
+msgstr "Patrouille dans le quadrant Delta"
 
 # Scenario description
 msgid ""
@@ -24,6 +24,29 @@ msgid ""
 "\n"
 "Version 8"
 msgstr ""
+"- Durée approx. : ***mn (variable)\n"
+"- Difficulté :  ***  (variable)\n"
+"- Vaisseaux joueurs : 1 à plusieurs\n"
+"\n"
+"TRADUCTION EN COURS 67%\n"
+"\n"
+"Mission : Patrouillez entre 3 stations dans le quadrant Delta pour vous "
+"protéger des ennemis.\n"
+"\n"
+"Contient du texte audio.\n"
+"\n"
+"Version 8 - Oct 2020\n"
+"\n"
+"- Titre original : Delta quadrant patrol duty\n"
+"- Auteur : Xansta (2018)\n"
+"https://discord.gg/GjqM9Y9yBe\n"
+"- Traduction FR : Muerte\n"
+"https://discord.gg/2NPKyMnGwp\n"
+"\n"
+"Sur le Discord USN : https://discord.gg/PntGG3a vous pouvez rejoindre la "
+"communauté anglophone et jouer des parties en ligne. Il y en a tous les "
+"samedis à 17h00 heure française. Tous les niveaux d'expérience sont les "
+"bienvenus."
 
 #: scripts/scenario_54_PatrolDuty.lua:161
 msgctxt "buttonGM"
@@ -1808,7 +1831,7 @@ msgstr "Réparateur embauché."
 #, lua-format
 msgctxt "trade-comms"
 msgid "Establish defensive telemetry link (%i rep)"
-msgstr ""
+msgstr "Établir un lien télémétrique de défense (%i rép)"
 
 #: scripts/scenario_54_PatrolDuty.lua:4480
 msgctxt "trade-comms"
@@ -1816,6 +1839,9 @@ msgid ""
 "Automated telemetry for shields and hull established.\n"
 "Damage summary should appear on Relay when damage taken"
 msgstr ""
+"Télémétrie automatisée pour les boucliers et la coque établie.\n"
+"Le résumé des dégâts doit apparaître sur la console des communications "
+"lorsqu'ils se produisent."
 
 #: scripts/scenario_54_PatrolDuty.lua:4510
 #: scripts/scenario_54_PatrolDuty.lua:5530
@@ -1894,7 +1920,7 @@ msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 #: scripts/scenario_54_PatrolDuty.lua:4590
 msgctxt "cartographyOffice-comms"
 msgid "Visit cartography office"
-msgstr ""
+msgstr "Visiter le bureau de cartographie"
 
 #: scripts/scenario_54_PatrolDuty.lua:4594
 msgctxt "cartographyOffice-comms"
@@ -1902,6 +1928,8 @@ msgid ""
 "The clerk behind the desk looks up briefly at you then goes back to filing "
 "her nails."
 msgstr ""
+"L'employée derrière le bureau vous regarde brièvement puis se remet à limer "
+"ses ongles."
 
 #: scripts/scenario_54_PatrolDuty.lua:4596
 msgctxt "cartographyOffice-comms"
@@ -1909,6 +1937,8 @@ msgid ""
 "The clerk behind the desk examines you then returns to grooming her "
 "tentacles."
 msgstr ""
+"L'employée derrière le bureau vous examine puis se remet à toiletter ses "
+"tentacules."
 
 #: scripts/scenario_54_PatrolDuty.lua:4598
 msgctxt "cartographyOffice-comms"
@@ -1916,6 +1946,8 @@ msgid ""
 "The clerk behind the desk glances at you then returns to preening her "
 "feathers."
 msgstr ""
+"L'employée derrière le bureau jette un rapide coup d'œil sur vous puis se "
+"remet à se lisser les plumes."
 
 #: scripts/scenario_54_PatrolDuty.lua:4601
 #, lua-format
@@ -1926,11 +1958,15 @@ msgid ""
 "You can examine the brochure on the coffee table, talk to the apprentice "
 "cartographer or talk to the master cartographer"
 msgstr ""
+"%s\n"
+"\n"
+"Vous pouvez examiner la brochure sur la table basse, parler à l'apprenti "
+"cartographe ou parler au maître cartographe."
 
 #: scripts/scenario_54_PatrolDuty.lua:4602
 msgctxt "cartographyOffice-comms"
 msgid "What's the difference between the apprentice and the master?"
-msgstr ""
+msgstr "Quelle est la différence entre l'apprenti et le maître ?"
 
 #: scripts/scenario_54_PatrolDuty.lua:4603
 msgctxt "cartographyOffice-comms"
@@ -1939,24 +1975,30 @@ msgid ""
 "and is learning the broader area. The master knows the local and the broader "
 "area but can't be bothered with the local area'"
 msgstr ""
+"L'employée vous répond d'une voix ennuyée : \"L'apprenti connaît la région "
+"proche et apprend encore la région plus éloignée. Le maître connaît la "
+"région proche et la plus éloignée mais ne peut pas être dérangé pour la "
+"région proche\"."
 
 #: scripts/scenario_54_PatrolDuty.lua:4606
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine brochure (%i rep)"
-msgstr ""
+msgstr "Examiner la brochure (%i rép)"
 
 #: scripts/scenario_54_PatrolDuty.lua:4608
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The brochure has a list of nearby stations and has a list of goods nearby"
 msgstr ""
+"La brochure contient une liste des stations à proximité et une liste des "
+"marchandises à proximité."
 
 #: scripts/scenario_54_PatrolDuty.lua:4609
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine station list (%i rep)"
-msgstr ""
+msgstr "Examiner la liste des stations (%i rep)"
 
 #: scripts/scenario_54_PatrolDuty.lua:4618
 #: scripts/scenario_54_PatrolDuty.lua:4675
@@ -1964,7 +2006,7 @@ msgstr ""
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "%s %s %s"
-msgstr ""
+msgstr "%s %s %s"
 
 #: scripts/scenario_54_PatrolDuty.lua:4620
 #, lua-format
@@ -1973,12 +2015,14 @@ msgid ""
 "%s\n"
 "%s %s %s"
 msgstr ""
+"%s\n"
+"%s %s %s"
 
 #: scripts/scenario_54_PatrolDuty.lua:4631
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine goods list (%i rep)"
-msgstr ""
+msgstr "Examiner la liste des marchandises (%i rép)"
 
 #: scripts/scenario_54_PatrolDuty.lua:4642
 #, lua-format
@@ -1987,6 +2031,8 @@ msgid ""
 "Good, quantity, cost, station:\n"
 "%s, %i, %i, %s"
 msgstr ""
+"Marchandise, quantité, coût, station :\n"
+"%s, %i, %i, %s"
 
 #: scripts/scenario_54_PatrolDuty.lua:4644
 #, lua-format
@@ -1995,27 +2041,31 @@ msgid ""
 "%s\n"
 "%s, %i, %i, %s"
 msgstr ""
+"%s\n"
+"%s, %i, %i, %s"
 
 #: scripts/scenario_54_PatrolDuty.lua:4662
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Talk to apprentice cartographer (%i rep)"
-msgstr ""
+msgstr "Parler à l'apprenti cartographe (%i rep)"
 
 #: scripts/scenario_54_PatrolDuty.lua:4664
 msgctxt "cartographyOffice-comms"
 msgid "Hi, would you like for me to locate a station or some goods for you?"
 msgstr ""
+"Bonjour, souhaitez-vous que je vous localise une station ou des "
+"marchandises ?"
 
 #: scripts/scenario_54_PatrolDuty.lua:4665
 msgctxt "cartographyOffice-comms"
 msgid "Locate station"
-msgstr ""
+msgstr "Localiser une station"
 
 #: scripts/scenario_54_PatrolDuty.lua:4666
 msgctxt "cartographyOffice-comms"
 msgid "These are stations I have learned"
-msgstr ""
+msgstr "Ce sont des stations que j'ai appris."
 
 #: scripts/scenario_54_PatrolDuty.lua:4677
 #: scripts/scenario_54_PatrolDuty.lua:4723
@@ -2027,6 +2077,8 @@ msgid ""
 "%s\n"
 "Good, quantity, cost"
 msgstr ""
+"%s\n"
+"Marchandise, quantité, coût"
 
 #: scripts/scenario_54_PatrolDuty.lua:4679
 #: scripts/scenario_54_PatrolDuty.lua:4725
@@ -2038,6 +2090,8 @@ msgid ""
 "%s\n"
 "   %s, %i, %i"
 msgstr ""
+"%s\n"
+"   %s, %i, %i"
 
 #: scripts/scenario_54_PatrolDuty.lua:4683
 #: scripts/scenario_54_PatrolDuty.lua:4729
@@ -2050,6 +2104,9 @@ msgid ""
 "General Information:\n"
 "   %s"
 msgstr ""
+"%s\n"
+"Informations générales :\n"
+"   %s"
 
 #: scripts/scenario_54_PatrolDuty.lua:4686
 #: scripts/scenario_54_PatrolDuty.lua:4732
@@ -2062,6 +2119,9 @@ msgid ""
 "History:\n"
 "   %s"
 msgstr ""
+"%s\n"
+"Histoire :\n"
+"   %s"
 
 #: scripts/scenario_54_PatrolDuty.lua:4689
 #: scripts/scenario_54_PatrolDuty.lua:4735
@@ -2074,27 +2134,30 @@ msgid ""
 "Gossip:\n"
 "   %s"
 msgstr ""
+"%s\n"
+"Rumeurs :\n"
+"   %s"
 
 #: scripts/scenario_54_PatrolDuty.lua:4698
 msgctxt "cartographyOffice-comms"
 msgid "I have learned of no stations yet"
-msgstr ""
+msgstr "Désolé, je n'ai pas encore appris de stations."
 
 #: scripts/scenario_54_PatrolDuty.lua:4702
 msgctxt "cartographyOffice-comms"
 msgid "Locate goods"
-msgstr ""
+msgstr "Localiser des marchandises"
 
 #: scripts/scenario_54_PatrolDuty.lua:4703
 msgctxt "cartographyOffice-comms"
 msgid "These are the goods I know about"
-msgstr ""
+msgstr "Ce sont des marchandises que je connais."
 
 #: scripts/scenario_54_PatrolDuty.lua:4752
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Talk to master cartographer (%i rep)"
-msgstr ""
+msgstr "Parler au maître cartographe (%i rép)"
 
 #: scripts/scenario_54_PatrolDuty.lua:4754
 msgctxt "cartographyOffice-comms"
@@ -2107,11 +2170,19 @@ msgid ""
 "\n"
 "I just want you to get the maximum benefit for the time you spend with him"
 msgstr ""
+"L'employée s'éclaircit la gorge :\n"
+"\n"
+"Ma console m'indique que vous n'avez aucun marqueur de disponible. Pour "
+"tirer le meilleur parti de votre échange avec le maître cartographe, vous "
+"devez supprimer un ou plusieurs marqueurs afin que le maître puisse mettre à "
+"jour votre système de manière appropriée.\n"
+"\n"
+"Je veux juste que vous profitiez au mieux du temps que vous passez avec lui."
 
 #: scripts/scenario_54_PatrolDuty.lua:4755
 msgctxt "cartographyOffice-comms"
 msgid "Continue to Master Cartographer"
-msgstr ""
+msgstr "Continuer avec le maître cartographe"
 
 #: scripts/scenario_54_PatrolDuty.lua:4768
 msgctxt "trade-comms"
@@ -3401,6 +3472,10 @@ msgid ""
 "think it applies to beam weapon improvement. Click the 'Send to weapons' "
 "button to suggest changes to weapons"
 msgstr ""
+"L'officier scientifique vous a transmis quelques réflexions sur les "
+"recherches de Joshua Kojak. Vous pensez que cela pourrait s''appliquer à "
+"l'amélioration des faisceaux laser. Cliquez sur le bouton \"Envoyer à "
+"l'armement\" pour suggérer des modifications à l'officier des armes."
 
 #: scripts/scenario_54_PatrolDuty.lua:7228
 msgctxt "suggestWeapons-msgEngineer+"
@@ -3409,16 +3484,20 @@ msgid ""
 "think it applies to beam weapon improvement. Click the 'Send to weapons' "
 "button to suggest changes to weapons"
 msgstr ""
+"L'officier scientifique vous a transmis quelques réflexions sur les "
+"recherches de Joshua Kojak. Vous pensez que cela pourrait s''appliquer à "
+"l'amélioration des faisceaux laser. Cliquez sur le bouton \"Envoyer à "
+"l'armement\" pour suggérer des modifications à l'officier des armes."
 
 #: scripts/scenario_54_PatrolDuty.lua:7230
 msgctxt "suggestWeapons-buttonEngineer"
 msgid "Send to weapons"
-msgstr ""
+msgstr "Envoyer à l'armement"
 
 #: scripts/scenario_54_PatrolDuty.lua:7232
 msgctxt "suggestWeapons-buttonEngineer+"
 msgid "Send to weapons"
-msgstr ""
+msgstr "Envoyer à l'armement"
 
 #: scripts/scenario_54_PatrolDuty.lua:7259
 msgctxt "instructions-msgWeapons"

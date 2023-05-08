@@ -4474,10 +4474,10 @@ function handleDockedState()
 			if random(1,10) <= (6 - difficulty) then
 				if comms_target == stationAsimov or comms_target == stationUtopiaPlanitia or comms_target == stationArmstrong then
 					if comms_target.telemetry == nil then
-						addCommsReply(string.format(_("trade-comms", "Establish defensive telemetry link (%i rep)"),10*difficulty),function()
+						addCommsReply(string.format(_("defTelemetry-comms", "Establish defensive telemetry link (%i rep)"),10*difficulty),function()
 							if comms_source:takeReputationPoints(10*difficulty) then
 								comms_target.telemetry = true
-								setCommsMessage(_("trade-comms", "Automated telemetry for shields and hull established.\nDamage summary should appear on Relay when damage taken"))
+								setCommsMessage(_("defTelemetry-comms", "Automated telemetry for shields and hull established.\nDamage summary should appear on Relay when damage taken"))
 							else
 								setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 							end
