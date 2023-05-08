@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -184,28 +184,24 @@ msgstr ""
 "rompre la paix inutilement.\n"
 
 #: scripts/scenario_30_brokenglass.lua:826
-#, fuzzy
 msgctxt "buttonGM"
 msgid "+Start Mission"
 msgstr "+Début de mission"
 
 #: scripts/scenario_30_brokenglass.lua:827
-#, fuzzy
 msgctxt "buttonGM"
 msgid "+Finish Mission"
 msgstr "+Fin de mission"
 
 #: scripts/scenario_30_brokenglass.lua:828
-#, fuzzy
 msgctxt "buttonGM"
 msgid "+Spawn Stuff"
-msgstr "+ Trucs de base"
+msgstr "+ Apparition ennemis"
 
 #: scripts/scenario_30_brokenglass.lua:832
-#, fuzzy
 msgctxt "buttonGM"
 msgid "-From Spawn Stuff"
-msgstr "<- Trucs de base"
+msgstr "<- Apparition ennemis"
 
 # Scenario setting
 #: scripts/scenario_30_brokenglass.lua:833
@@ -221,7 +217,7 @@ msgstr "Harcèlement"
 #: scripts/scenario_30_brokenglass.lua:838
 msgctxt "buttonGM"
 msgid "-From Finish Mission"
-msgstr "<-Terminer mission"
+msgstr "<-Fin de mission"
 
 #: scripts/scenario_30_brokenglass.lua:839
 #: scripts/scenario_30_brokenglass.lua:847
@@ -250,7 +246,7 @@ msgstr "Réparation"
 #: scripts/scenario_30_brokenglass.lua:846
 msgctxt "buttonGM"
 msgid "-From Start Mission"
-msgstr "<-Démarrer mission"
+msgstr "<-Début de mission"
 
 #: scripts/scenario_30_brokenglass.lua:848
 msgctxt "buttonGM"
@@ -366,10 +362,8 @@ msgid "Defend the Wormhole Station"
 msgstr "Défendre la station Wormhole."
 
 #: scripts/scenario_30_brokenglass.lua:1231
-#, fuzzy
 msgctxt "wormhole-comms"
 msgid ""
-"\n"
 "Hello Captain. Have you noticed our cool wormhole?\n"
 "\n"
 "We're studying the energy radiating from the wormhole, and the similarities "
@@ -689,13 +683,11 @@ msgid "Find a Graviton Lens"
 msgstr "Trouver une lentille Graviton."
 
 #: scripts/scenario_30_brokenglass.lua:1381
-#, fuzzy
 msgctxt "colony-comms"
 msgid "Some filler text and whatever. What are we even doing here?"
 msgstr "Du texte de remplissage et autre. Qu'est-ce qu'on fait ici ?"
 
 #: scripts/scenario_30_brokenglass.lua:1382
-#, fuzzy
 msgctxt "colony-comms"
 msgid "Dude, where even ARE we?"
 msgstr "Mec, OÙ SOMMES-NOUS ?"

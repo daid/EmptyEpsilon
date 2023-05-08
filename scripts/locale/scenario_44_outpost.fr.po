@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -1475,7 +1475,8 @@ msgstr "augmenter la vitesse maximale des moteurs avant de 10%"
 #: scripts/scenario_44_outpost.lua:2402 scripts/scenario_44_outpost.lua:2827
 msgctxt "upgrade-comms"
 msgid "increase max reverse impulse by 20% and reverse acceleration by 1/3"
-msgstr "booster les moteurs arrière de 20% et l'accélération arrière de 1/3"
+msgstr ""
+"booster les moteurs arrière de 20% et la vit. d'accélération arrière de 1/3"
 
 #: scripts/scenario_44_outpost.lua:2409 scripts/scenario_44_outpost.lua:2834
 #: scripts/scenario_44_outpost.lua:7388
@@ -1654,7 +1655,7 @@ msgstr "doubler la manœuvrabilité de la manœuvre de combat"
 #: scripts/scenario_44_outpost.lua:3194
 msgctxt "upgrade-comms"
 msgid "increase reverse impulse speed and acceleration"
-msgstr "augmenter la vitesse des moteurs vers l'avant et l'accélération"
+msgstr "augmenter la vit. max et vit. d'accélération arrière"
 
 #: scripts/scenario_44_outpost.lua:3201 scripts/scenario_44_outpost.lua:4359
 #: scripts/scenario_44_outpost.lua:4724 scripts/scenario_44_outpost.lua:5077
@@ -1776,7 +1777,7 @@ msgstr "augmenter la vitesse maximale des moteurs arrière de 20%"
 #: scripts/scenario_44_outpost.lua:3557
 msgctxt "upgrade-comms"
 msgid "increase reverse acceleration by 50%"
-msgstr "augmenter l'accélération arrière de 50%"
+msgstr "augmenter la vit. d'accélération des moteurs arrière de 50%"
 
 #: scripts/scenario_44_outpost.lua:3564 scripts/scenario_44_outpost.lua:6979
 #: scripts/scenario_44_outpost.lua:8394
@@ -1826,7 +1827,7 @@ msgstr "booster les moteurs avant de 10%"
 #: scripts/scenario_44_outpost.lua:3634
 msgctxt "upgrade-comms"
 msgid "increase reverse impulse speed by 10%"
-msgstr "booster les moteurs arrière de 10%"
+msgstr "booster la vitesse des moteurs arrière de 10%"
 
 #: scripts/scenario_44_outpost.lua:3749 scripts/scenario_44_outpost.lua:5271
 msgctxt "upgrade-comms"
@@ -1912,6 +1913,7 @@ msgid "increase tube load speeds, increase nuke and HVLI capacity"
 msgstr "augmenter la vitesse de chargement des tubes, la capacité nuke et HVLI"
 
 #: scripts/scenario_44_outpost.lua:3802
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase homing, EMP, mine and HVLI capacity"
 msgstr "augmenter le stockage des homing, EMP, mines et HVLI"
@@ -2068,6 +2070,7 @@ msgid "increase warp speed by ~8%"
 msgstr "augmenter la vitesse lumière d'environ 8%"
 
 #: scripts/scenario_44_outpost.lua:4447
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 20U jump drive"
 msgstr "ajouter un moteur de téléportation de 20U de distance"
@@ -2491,6 +2494,7 @@ msgid "add homing capability to second mining tube"
 msgstr "ajouter la capacité de tir de homing au 2ème tube de mines"
 
 #: scripts/scenario_44_outpost.lua:6052
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make first tube a large tube"
 msgstr "faire du 1er tube un tube large"
@@ -3239,7 +3243,7 @@ msgstr "Version %s"
 
 #: scripts/scenario_44_outpost.lua:9120 scripts/scenario_44_outpost.lua:9129
 #: scripts/scenario_44_outpost.lua:9141
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgGM"
 msgid ""
 "Scenario version %s\n"
@@ -3275,7 +3279,7 @@ msgid "Mission Stations"
 msgstr "Stations de la mission"
 
 #: scripts/scenario_44_outpost.lua:9147
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgGM"
 msgid ""
 "This is spoiler information. Consider carefully before you reveal this to "
@@ -3310,7 +3314,7 @@ msgstr "+Test vaisseaux non BD"
 #, lua-format
 msgctxt "buttonGM"
 msgid "Whammy %s"
-msgstr ""
+msgstr "Coup dur %s"
 
 #: scripts/scenario_44_outpost.lua:9159
 msgctxt "buttonGM"
@@ -3343,16 +3347,16 @@ msgid "Quixotic"
 msgstr "Chimérique"
 
 #: scripts/scenario_44_outpost.lua:9168 scripts/scenario_44_outpost.lua:9187
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "buttonGM"
 msgid "%s %.1f"
-msgstr "%s %s"
+msgstr "%s %.1f"
 
 #: scripts/scenario_44_outpost.lua:9170 scripts/scenario_44_outpost.lua:9189
 #: scripts/scenario_44_outpost.lua:9210
 msgctxt "buttonGM"
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: scripts/scenario_44_outpost.lua:9180
 msgctxt "buttonGM"
@@ -3390,10 +3394,10 @@ msgid "Super Hero"
 msgstr "Justicier de l'espace"
 
 #: scripts/scenario_44_outpost.lua:9208
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "buttonGM"
 msgid "%s %i"
-msgstr "%s %s"
+msgstr "%s %i"
 
 #: scripts/scenario_44_outpost.lua:9220 scripts/scenario_44_outpost.lua:9315
 msgctxt "buttonGM"
@@ -3401,19 +3405,19 @@ msgid "-Main"
 msgstr "- Précedent"
 
 #: scripts/scenario_44_outpost.lua:9228
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid "%s %s"
 msgstr "%s %s"
 
 #: scripts/scenario_44_outpost.lua:9229
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid "%s %s  %s  %s  Friendliness:%s"
 msgstr "%s %s  %s  %s  Bienveillance :%s"
 
 #: scripts/scenario_44_outpost.lua:9230
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
@@ -3423,7 +3427,7 @@ msgstr ""
 "Répartition d'énergie : %s, coque réparée : %s, sondes réapprovisionnées : %s"
 
 #: scripts/scenario_44_outpost.lua:9231
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
@@ -3435,7 +3439,7 @@ msgstr ""
 "réparée : %s, autodestruction réparée :%s, tubes lents réparés : %s"
 
 #: scripts/scenario_44_outpost.lua:9257
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
@@ -3445,7 +3449,7 @@ msgstr ""
 "Homing : %s %s, Nuke : %s %s, Mine : %s %s, EMP : %s %s, HVLI : %s %s"
 
 #: scripts/scenario_44_outpost.lua:9259
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
@@ -3455,15 +3459,17 @@ msgstr ""
 "Services et leurs coûts et disponibilité :"
 
 #: scripts/scenario_44_outpost.lua:9262
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "      %s: %s %s"
-msgstr "     %s: %i, %i\n"
+msgstr ""
+"%s\n"
+"      %s : %s %s"
 
 #: scripts/scenario_44_outpost.lua:9265
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
@@ -3473,7 +3479,7 @@ msgstr ""
 "      Boost téléportation : 10"
 
 #: scripts/scenario_44_outpost.lua:9268
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
@@ -3484,7 +3490,7 @@ msgstr ""
 "maximum :"
 
 #: scripts/scenario_44_outpost.lua:9270
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
@@ -3494,17 +3500,17 @@ msgstr ""
 "      Type de modèle de vaisseau : %s"
 
 #: scripts/scenario_44_outpost.lua:9272
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "            %s: %s"
 msgstr ""
 "%s\n"
-"        %s : Coût : %s Quantité : %s"
+"            %s : %s"
 
 #: scripts/scenario_44_outpost.lua:9277
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
@@ -3514,7 +3520,7 @@ msgstr ""
 "Marchandises :"
 
 #: scripts/scenario_44_outpost.lua:9279
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
@@ -3524,7 +3530,7 @@ msgstr ""
 "    Vendre :"
 
 #: scripts/scenario_44_outpost.lua:9281
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
@@ -3534,7 +3540,7 @@ msgstr ""
 "        %s : Coût : %s Quantité : %s"
 
 #: scripts/scenario_44_outpost.lua:9285
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
@@ -3544,15 +3550,17 @@ msgstr ""
 "    Échanger :"
 
 #: scripts/scenario_44_outpost.lua:9287 scripts/scenario_44_outpost.lua:9293
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
 "        %s: %s"
-msgstr "     %s : %i\n"
+msgstr ""
+"%s\n"
+"        %s: %s"
 
 #: scripts/scenario_44_outpost.lua:9291
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
 "%s\n"
@@ -3562,7 +3570,6 @@ msgstr ""
 "    Acheter :"
 
 #: scripts/scenario_44_outpost.lua:9305 scripts/scenario_44_outpost.lua:9309
-#, fuzzy
 msgctxt "stationReport-msgGM"
 msgid "No applicable stations. Reports useless. No action taken"
 msgstr "Aucune station applicable. Rapports inutiles. Pas d'action prise."
@@ -3574,6 +3581,8 @@ msgid ""
 "Player ship %s's template type (%s) could not be found in table "
 "PlayerShipStats"
 msgstr ""
+"Impossible de trouver le type de modèle du vaisseau joueur %s : %s dans la "
+"table PlayerShipStats."
 
 #: scripts/scenario_44_outpost.lua:9638
 #, lua-format
@@ -3841,14 +3850,12 @@ msgid "Tip: make lemons an integral part of your diet"
 msgstr "Astuce : faites du citron une partie intégrante de votre alimentation"
 
 #: scripts/scenario_44_outpost.lua:11325
-#, fuzzy
 msgctxt "damage-msgScience"
 msgid "The unscanned artifact we just picked up has fried our scanners"
 msgstr ""
 "L'artefact non scanné que nous venons de récupérer a grillé nos scanners."
 
 #: scripts/scenario_44_outpost.lua:11327
-#, fuzzy
 msgctxt "damage-msgOperations"
 msgid "The unscanned artifact we just picked up has fried our scanners"
 msgstr ""
@@ -3943,7 +3950,6 @@ msgstr "Débarquer %s sur %s"
 #: scripts/scenario_44_outpost.lua:12491 scripts/scenario_44_outpost.lua:12524
 #: scripts/scenario_44_outpost.lua:12557 scripts/scenario_44_outpost.lua:12638
 #: scripts/scenario_44_outpost.lua:12733 scripts/scenario_44_outpost.lua:12934
-#, fuzzy
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
@@ -4230,10 +4236,10 @@ msgid "Upgrade ship"
 msgstr "Améliorations du vaisseau"
 
 #: scripts/scenario_44_outpost.lua:11998
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "upgrade-comms"
 msgid "%s: %s (%s)"
-msgstr "Taille des tubes %s : %s"
+msgstr "%s : %s (%s)"
 
 #: scripts/scenario_44_outpost.lua:12005
 msgctxt "upgrade-comms"
@@ -4349,19 +4355,18 @@ msgid "Could you provide HVLI? ("
 msgstr "Pourriez-vous fournir des HVLI ? ("
 
 #: scripts/scenario_44_outpost.lua:12104 scripts/scenario_44_outpost.lua:13211
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Docking services status"
 msgstr "État des services d'accueil"
 
 #: scripts/scenario_44_outpost.lua:12105
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s docking services status:"
 msgstr "État des services d'accueil de la station %s :\n"
 
 #: scripts/scenario_44_outpost.lua:12107 scripts/scenario_44_outpost.lua:13216
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -4371,7 +4376,6 @@ msgstr ""
 "- Réapprovisionnement des sondes."
 
 #: scripts/scenario_44_outpost.lua:12111 scripts/scenario_44_outpost.lua:13220
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
 msgstr ""
@@ -4379,14 +4383,12 @@ msgstr ""
 "défaillance de l'unité de fabrication."
 
 #: scripts/scenario_44_outpost.lua:12112 scripts/scenario_44_outpost.lua:13221
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Parts shortage prevents scan probe replenishment."
 msgstr ""
 "- Sondes : le manque de pièces empêche le réapprovisionnement des sondes."
 
 #: scripts/scenario_44_outpost.lua:12113 scripts/scenario_44_outpost.lua:13222
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
@@ -4404,9 +4406,11 @@ msgid ""
 "%s\n"
 "%s"
 msgstr ""
+"%s\n"
+"%s"
 
 #: scripts/scenario_44_outpost.lua:12120 scripts/scenario_44_outpost.lua:13229
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -4416,7 +4420,6 @@ msgstr ""
 "- Réparation de la coque."
 
 #: scripts/scenario_44_outpost.lua:12124 scripts/scenario_44_outpost.lua:13233
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
@@ -4424,7 +4427,6 @@ msgstr ""
 "réparer la coque."
 
 #: scripts/scenario_44_outpost.lua:12125
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
@@ -4432,7 +4434,6 @@ msgstr ""
 "pendant la maintenance."
 
 #: scripts/scenario_44_outpost.lua:12126 scripts/scenario_44_outpost.lua:13235
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
@@ -4440,7 +4441,7 @@ msgstr ""
 "dans leur quartiers pour cause de maladie."
 
 #: scripts/scenario_44_outpost.lua:12133 scripts/scenario_44_outpost.lua:13242
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -4450,7 +4451,6 @@ msgstr ""
 "- Recharge des réserves d'énergie du vaisseau."
 
 #: scripts/scenario_44_outpost.lua:12137 scripts/scenario_44_outpost.lua:13246
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
@@ -4460,7 +4460,6 @@ msgstr ""
 "auxiliaire, nous ne pouvons donc pas recharger les vaisseaux."
 
 #: scripts/scenario_44_outpost.lua:12138 scripts/scenario_44_outpost.lua:13247
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
@@ -4468,7 +4467,6 @@ msgstr ""
 "trop risquée."
 
 #: scripts/scenario_44_outpost.lua:12139 scripts/scenario_44_outpost.lua:13248
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
@@ -4479,7 +4477,7 @@ msgstr ""
 "le moment."
 
 #: scripts/scenario_44_outpost.lua:12146 scripts/scenario_44_outpost.lua:13260
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -4489,7 +4487,7 @@ msgstr ""
 "- Peut booster la téléportation."
 
 #: scripts/scenario_44_outpost.lua:12149 scripts/scenario_44_outpost.lua:13263
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -4499,7 +4497,7 @@ msgstr ""
 "- Peut réparer le système de lancement de sonde."
 
 #: scripts/scenario_44_outpost.lua:12152 scripts/scenario_44_outpost.lua:13266
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -4509,7 +4507,7 @@ msgstr ""
 "- Peut réparer le système de piratage."
 
 #: scripts/scenario_44_outpost.lua:12155 scripts/scenario_44_outpost.lua:13269
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -4519,7 +4517,7 @@ msgstr ""
 "- Peut réparer les scanners."
 
 #: scripts/scenario_44_outpost.lua:12158 scripts/scenario_44_outpost.lua:13272
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -4529,7 +4527,7 @@ msgstr ""
 "- Peut réparer la manœuvre de combat."
 
 #: scripts/scenario_44_outpost.lua:12161 scripts/scenario_44_outpost.lua:13275
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -4539,25 +4537,23 @@ msgstr ""
 "- Peut réparer le système d'autodestruction."
 
 #: scripts/scenario_44_outpost.lua:12173
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Overcharge Jump Drive (10 Rep)"
 msgstr "Booster la téléportation (10 rép)"
 
 #: scripts/scenario_44_outpost.lua:12180
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
 msgstr "Votre téléportation a été boostée à %ik."
 
 #: scripts/scenario_44_outpost.lua:12206
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Repair ship system"
 msgstr "Réparer les systèmes du vaisseau"
 
 #: scripts/scenario_44_outpost.lua:12207
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "What system would you like repaired?\n"
@@ -4569,61 +4565,56 @@ msgstr ""
 "Réputation : %i"
 
 #: scripts/scenario_44_outpost.lua:12210
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair probe launch system (%s Rep)"
 msgstr "Réparer le système de lancement de sonde (%s rép)"
 
 #: scripts/scenario_44_outpost.lua:12217
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Your probe launch system has been repaired"
 msgstr "Votre système de lancement de sonde a été réparé."
 
 #: scripts/scenario_44_outpost.lua:12227
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair hacking system (%s Rep)"
 msgstr "Réparer le système de piratage (%s rép)"
 
 #: scripts/scenario_44_outpost.lua:12234
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Your hack system has been repaired"
 msgstr "Votre système de piratage a été réparé."
 
 #: scripts/scenario_44_outpost.lua:12244
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair scanning system (%s Rep)"
 msgstr "Réparer les scanners (%s rép)"
 
 #: scripts/scenario_44_outpost.lua:12251
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Your scanners have been repaired"
 msgstr "Vos scanners ont été réparés."
 
 #: scripts/scenario_44_outpost.lua:12262
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair combat maneuver (%s Rep)"
 msgstr "Réparer la manœuvre de combat (%s rép)"
 
 #: scripts/scenario_44_outpost.lua:12269
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Your combat maneuver has been repaired"
 msgstr "Votre manœuvre de combat a été réparée."
 
 #: scripts/scenario_44_outpost.lua:12280
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid "Repair self destruct system (%s Rep)"
 msgstr "Réparer le système d'autodestruction (%s rép)"
 
 #: scripts/scenario_44_outpost.lua:12287
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Your self destruct system has been repaired"
 msgstr "Votre système d'autodestruction a été réparé."
@@ -5744,7 +5735,6 @@ msgid "We have the following types of ordnance available for restock:%s"
 msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
 
 #: scripts/scenario_44_outpost.lua:13212
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid ""
 "Which docking service category do you want a status for?\n"
@@ -5769,19 +5759,17 @@ msgstr ""
 "capteurs."
 
 #: scripts/scenario_44_outpost.lua:13213
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Primary services"
 msgstr "Services principaux"
 
 #: scripts/scenario_44_outpost.lua:13214
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s primary docking services status:"
 msgstr "État des services d'accueil principaux de la station %s :\n"
 
 #: scripts/scenario_44_outpost.lua:13234
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable whie it is undergoing maintenance."
 msgstr ""
@@ -5789,31 +5777,28 @@ msgstr ""
 "maintenance."
 
 #: scripts/scenario_44_outpost.lua:13257
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Secondary systems repair"
 msgstr "Réparation des systèmes secondaires"
 
 #: scripts/scenario_44_outpost.lua:13258
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s docking repair services status:"
 msgstr "État des services de réparation de la station %s :\n"
 
 #: scripts/scenario_44_outpost.lua:13280
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Upgrade ship systems"
 msgstr "Amélioration des systèmes du vaisseau"
 
 #: scripts/scenario_44_outpost.lua:13281
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "upgrade-comms"
 msgid "Station %s docking upgrade services:"
 msgstr "Services d'accueil de mise à niveau de la station %s :"
 
 #: scripts/scenario_44_outpost.lua:13286
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "We can provide the following upgrades:\n"
@@ -5823,35 +5808,31 @@ msgstr ""
 "système : description (coût en réputation)\n"
 
 #: scripts/scenario_44_outpost.lua:13291
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "%s\n"
 "        %s: %s (%s)"
 msgstr ""
 "%s\n"
-"        %s : Coût : %s Quantité : %s"
+"        %s : %s (%s)"
 
 #: scripts/scenario_44_outpost.lua:13297
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "No more ship upgrades available for your ship"
 msgstr "Plus de mise à niveau disponible pour votre vaisseau."
 
 #: scripts/scenario_44_outpost.lua:13300
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "No ship upgrades available for your ship"
 msgstr "Aucune mise à niveau disponible pour votre vaisseau."
 
 #: scripts/scenario_44_outpost.lua:13303
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "No ship upgrades available"
 msgstr "Aucune mise à niveau disponible."
 
 #: scripts/scenario_44_outpost.lua:13305
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Explain ship upgrade categories"
 msgstr "Explications des différentes mises à niveau"
@@ -5896,12 +5877,14 @@ msgstr ""
 "Marchandises ou composants disponibles : (quantité, coût en réputation)"
 
 #: scripts/scenario_44_outpost.lua:13339
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "   %14s: %2i, %3i"
-msgstr "     %s: %i, %i\n"
+msgstr ""
+"\n"
+"   %14s : %2i, %3i"
 
 #: scripts/scenario_44_outpost.lua:13345
 msgctxt "trade-comms"
@@ -5943,64 +5926,63 @@ msgid " Beyond that, I have no knowledge of specific stations"
 msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 
 #: scripts/scenario_44_outpost.lua:13433
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "characterInfo-comms"
 msgid "Tell me about %s"
 msgstr "Parlez-moi de %s."
 
 #: scripts/scenario_44_outpost.lua:13440
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "characterInfo-comms"
 msgid "Never heard of %s"
 msgstr "Jamais entendu parler de %s."
 
 #: scripts/scenario_44_outpost.lua:13442
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s died last week. The funeral was yesterday"
 msgstr "%s est décédé la semaine dernière. L'enterrement a eu lieu hier."
 
 #: scripts/scenario_44_outpost.lua:13444
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s? Who's %s? There's nobody here named %s"
 msgstr "%s ? Qui est %s ? Il n'y a personne ici qui s'appelle %s."
 
 #: scripts/scenario_44_outpost.lua:13446
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "characterInfo-comms"
 msgid "We don't talk about %s. They are gone and good riddance"
 msgstr "Pas envie de parler de %s. Ils sont partis et bon débarras."
 
 #: scripts/scenario_44_outpost.lua:13448
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "characterInfo-comms"
 msgid "I think %s moved away"
 msgstr "Je pense que %s a déménagé."
 
 #: scripts/scenario_44_outpost.lua:13457
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "Report status"
 msgstr "Au rapport"
 
 #: scripts/scenario_44_outpost.lua:13458
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "Hull: %d%%\n"
-msgstr "Coque : "
+msgstr "Coque : %d%%\n"
 
 #: scripts/scenario_44_outpost.lua:13461
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "Shield: %d%%\n"
-msgstr "Boucliers : "
+msgstr "Boucliers : %d%%\n"
 
 #: scripts/scenario_44_outpost.lua:13464
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr "Boucliers : "
+msgstr "Boucliers %s : %d%%\n"
 
 #: scripts/scenario_44_outpost.lua:13472
 #, lua-format
@@ -6023,7 +6005,7 @@ msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
-msgstr ""
+msgstr "Marqueur %d"
 
 #: scripts/scenario_44_outpost.lua:13486
 #, lua-format
@@ -6101,32 +6083,29 @@ msgstr ""
 "précédent, en définir un puis revenir sur cette page."
 
 #: scripts/scenario_44_outpost.lua:13570
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "Rendezvous at waypoint %d"
-msgstr "Rendez-vous au marqueur %i."
+msgstr "Rendez-vous au marqueur %d."
 
 #: scripts/scenario_44_outpost.lua:13608
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to rendezvous at waypoint %d"
-msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au marqueur %i."
+msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au marqueur %d."
 
 #: scripts/scenario_44_outpost.lua:13740
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Which ship system upgrade category are you wondering about?"
 msgstr ""
 "Sur quelle catégorie de mises à niveau souhaitez-vous des explications ?"
 
 #: scripts/scenario_44_outpost.lua:13742
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "beam"
 msgstr "Les faisceaux laser"
 
 #: scripts/scenario_44_outpost.lua:13743
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "Beam upgrades refer to the beam weapons systems. They might include "
@@ -6147,19 +6126,16 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:13754 scripts/scenario_44_outpost.lua:13759
 #: scripts/scenario_44_outpost.lua:13764 scripts/scenario_44_outpost.lua:13769
 #: scripts/scenario_44_outpost.lua:13774
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Back to ship upgrade category explanation list"
 msgstr "Retour à la liste des explications"
 
 #: scripts/scenario_44_outpost.lua:13747
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "missiles"
 msgstr "Les missiles"
 
 #: scripts/scenario_44_outpost.lua:13748
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "Missile upgrades refer to aspects of the missile weapons systems. They might "
@@ -6175,13 +6151,11 @@ msgstr ""
 "- Ou une capacité de stockage de missiles supplémentaire."
 
 #: scripts/scenario_44_outpost.lua:13752
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "shield"
 msgstr "Les boucliers"
 
 #: scripts/scenario_44_outpost.lua:13753
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "Shield upgrades refer to the protective energy shields around your ship. "
@@ -6195,13 +6169,11 @@ msgstr ""
 "- Ou l'ajout d'un arc de bouclier."
 
 #: scripts/scenario_44_outpost.lua:13757
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "hull"
 msgstr "La coque"
 
 #: scripts/scenario_44_outpost.lua:13758
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "Hull upgrades refer to strengthening the ship hull to withstand more damage "
@@ -6212,13 +6184,11 @@ msgstr ""
 "blindage ou d'un renforcement structurel."
 
 #: scripts/scenario_44_outpost.lua:13762
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "impulse"
 msgstr "Les moteurs à impulsion"
 
 #: scripts/scenario_44_outpost.lua:13763
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "Impulse upgrades refer to changes related to the impulse engines. They might "
@@ -6235,34 +6205,30 @@ msgstr ""
 "latérale ou les deux)."
 
 #: scripts/scenario_44_outpost.lua:13767
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "ftl"
 msgstr "FTL"
 
 #: scripts/scenario_44_outpost.lua:13768
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "FTL (short for faster than light) upgrades refer to warp drive or jump drive "
 "enhancements. They might include the addition of an ftl drive, a change in "
 "the range of the jump drive or an increase in the top speed of the warp drive"
 msgstr ""
-"Les mises à niveau FTL : abréviation de \"plus rapide que la lumière"
-"\" (Faster Than Light), font référence aux améliorations des moteurs de "
-"téléportation et vitesse lumière. Ils peuvent inclure :\n"
+"Les mises à niveau FTL : abréviation de \"plus rapide que la "
+"lumière\" (Faster Than Light), font référence aux améliorations des moteurs "
+"de téléportation et vitesse lumière. Ils peuvent inclure :\n"
 "- L'ajout d'un moteur FTL.\n"
 "- La modification de la plage de saut de la téléportation.\n"
 "- Ou une augmentation de la vitesse maximale de la vitesse lumière."
 
 #: scripts/scenario_44_outpost.lua:13772
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "sensors"
 msgstr "Les capteurs"
 
 #: scripts/scenario_44_outpost.lua:13773
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "Sensor upgrades refer to the ship's ability to detect other objects. They "
@@ -6850,44 +6816,44 @@ msgstr "Au rapport"
 
 #: scripts/scenario_44_outpost.lua:14229 scripts/scenario_44_outpost.lua:15141
 #: scripts/scenario_44_outpost.lua:15176
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
-msgstr "Coque : "
+msgstr "Coque : %d%%\n"
 
 #: scripts/scenario_44_outpost.lua:14232 scripts/scenario_44_outpost.lua:15144
 #: scripts/scenario_44_outpost.lua:15179
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
-msgstr "Boucliers : "
+msgstr "Boucliers : %d%%\n"
 
 #: scripts/scenario_44_outpost.lua:14234 scripts/scenario_44_outpost.lua:15146
 #: scripts/scenario_44_outpost.lua:15181
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
-msgstr "Boucliers avant : "
+msgstr "Boucliers avant : %d%%\n"
 
 #: scripts/scenario_44_outpost.lua:14235 scripts/scenario_44_outpost.lua:15147
 #: scripts/scenario_44_outpost.lua:15182
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
-msgstr "Boucliers arrière : "
+msgstr "Boucliers arrière : %d%%\n"
 
 #: scripts/scenario_44_outpost.lua:14238 scripts/scenario_44_outpost.lua:15150
 #: scripts/scenario_44_outpost.lua:15185
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr "Boucliers : "
+msgstr "Boucliers %s : %d%%\n"
 
 #: scripts/scenario_44_outpost.lua:14244
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
-msgstr " Missiles : "
+msgstr "%s Missiles : %d/%d\n"
 
 #: scripts/scenario_44_outpost.lua:14252 scripts/scenario_44_outpost.lua:15158
 #, lua-format
@@ -6939,7 +6905,7 @@ msgstr "Nous avons "
 #: scripts/scenario_44_outpost.lua:14412 scripts/scenario_44_outpost.lua:14933
 msgctxt "trade-comms"
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: scripts/scenario_44_outpost.lua:14420 scripts/scenario_44_outpost.lua:14941
 msgctxt "trade-comms"
@@ -7135,7 +7101,7 @@ msgid "No"
 msgstr "Non"
 
 #: scripts/scenario_44_outpost.lua:14894
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "Disruption %i"
 msgstr "Perturbation %i"
@@ -7166,43 +7132,37 @@ msgstr ""
 "Bonne journée."
 
 #: scripts/scenario_44_outpost.lua:15126
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %i."
 msgstr "Nous partons pour défendre le marqueur %i."
 
 #: scripts/scenario_44_outpost.lua:15175
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "How are you doing?"
-msgstr "Comment allez-vous?"
+msgstr "Comment allez-vous ?"
 
 #: scripts/scenario_44_outpost.lua:15194
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Service options"
 msgstr "Options des services proposés :"
 
 #: scripts/scenario_44_outpost.lua:15212
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Repair ship system"
 msgstr "Réparer les systèmes du vaisseau"
 
 #: scripts/scenario_44_outpost.lua:15213
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "What system would you like repaired?"
 msgstr "Quel système souhaitez-vous réparer ?"
 
 #: scripts/scenario_44_outpost.lua:15215
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Repair probe launch system"
 msgstr "Réparer le système de lancement de sonde"
 
 #: scripts/scenario_44_outpost.lua:15218
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Your probe launch system has been repaired"
 msgstr "Votre système de lancement de sonde a été réparé."
@@ -7211,7 +7171,6 @@ msgstr "Votre système de lancement de sonde a été réparé."
 #: scripts/scenario_44_outpost.lua:15242 scripts/scenario_44_outpost.lua:15253
 #: scripts/scenario_44_outpost.lua:15264 scripts/scenario_44_outpost.lua:15293
 #: scripts/scenario_44_outpost.lua:15306 scripts/scenario_44_outpost.lua:15319
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "You need to stay close if you want me to fix your ship"
 msgstr ""
@@ -7219,97 +7178,85 @@ msgstr ""
 "vaisseau."
 
 #: scripts/scenario_44_outpost.lua:15226
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Repair hacking system"
 msgstr "Réparer le système de piratage"
 
 #: scripts/scenario_44_outpost.lua:15229
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Your hack system has been repaired"
 msgstr "Votre système de piratage a été réparé."
 
 #: scripts/scenario_44_outpost.lua:15237
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Repair scanning system"
 msgstr "Réparer les scanners"
 
 #: scripts/scenario_44_outpost.lua:15240
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Your scanners have been repaired"
 msgstr "Vos scanners ont été réparés."
 
 #: scripts/scenario_44_outpost.lua:15248
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Repair combat maneuver"
 msgstr "Réparer la manœuvre de combat"
 
 #: scripts/scenario_44_outpost.lua:15251
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Your combat maneuver has been repaired"
 msgstr "Votre manœuvre de combat a été réparée."
 
 #: scripts/scenario_44_outpost.lua:15259
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Repair self destruct system"
 msgstr "Réparer le système d'autodestruction"
 
 #: scripts/scenario_44_outpost.lua:15262
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Your self destruct system has been repaired"
 msgstr "Votre système d'autodestruction a été réparé."
 
 #: scripts/scenario_44_outpost.lua:15284
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipServices-comms"
 msgid "Full hull repair (%i reputation)"
 msgstr "Réparation complète de la coque (%i rép)"
 
 #: scripts/scenario_44_outpost.lua:15288
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "All fixed up and ready to go"
 msgstr "Tout est réparé et prêt à fonctionner."
 
 #: scripts/scenario_44_outpost.lua:15297 scripts/scenario_44_outpost.lua:15310
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipServices-comms"
 msgid "Add %i%% to hull (%i reputation)"
 msgstr "Ajouter %i%% à la coque (%i rép)"
 
 #: scripts/scenario_44_outpost.lua:15301 scripts/scenario_44_outpost.lua:15314
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Repairs completed as requested"
 msgstr "Réparations effectuées comme demandé."
 
 #: scripts/scenario_44_outpost.lua:15352
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Restock ordnance"
 msgstr "Réapprovisionner en munitions"
 
 #: scripts/scenario_44_outpost.lua:15356
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "What kind of ordnance?"
 msgstr "Quel genre de munitions ?"
 
 #: scripts/scenario_44_outpost.lua:15357
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%i reputation each)"
 msgstr "%s (%i rép chacun)"
 
 #: scripts/scenario_44_outpost.lua:15363
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ammo-comms"
 msgid "Restocked your %s type ordnance"
 msgstr "Vos munitions de type %s sont réapprovisionnées."
@@ -7327,14 +7274,14 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:15367 scripts/scenario_44_outpost.lua:15420
 #: scripts/scenario_44_outpost.lua:15458
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ammo-comms"
 msgid "Get one (%i reputation)"
 msgstr "En acheter un (%i rép)"
 
 #: scripts/scenario_44_outpost.lua:15372 scripts/scenario_44_outpost.lua:15415
 #: scripts/scenario_44_outpost.lua:15425 scripts/scenario_44_outpost.lua:15463
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ammo-comms"
 msgid "One %s provided"
 msgstr "Un %s fourni."
@@ -7342,7 +7289,6 @@ msgstr "Un %s fourni."
 #: scripts/scenario_44_outpost.lua:15377 scripts/scenario_44_outpost.lua:15398
 #: scripts/scenario_44_outpost.lua:15430 scripts/scenario_44_outpost.lua:15451
 #: scripts/scenario_44_outpost.lua:15468 scripts/scenario_44_outpost.lua:15474
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "You need to stay close if you want me to restock your ordnance"
 msgstr ""
@@ -7350,20 +7296,20 @@ msgstr ""
 "munitions."
 
 #: scripts/scenario_44_outpost.lua:15388 scripts/scenario_44_outpost.lua:15441
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ammo-comms"
 msgid "Get %i (%i reputation)"
 msgstr "Acheter %i (%i rép)"
 
 #: scripts/scenario_44_outpost.lua:15393 scripts/scenario_44_outpost.lua:15413
 #: scripts/scenario_44_outpost.lua:15446
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ammo-comms"
 msgid "%i %ss provided"
 msgstr "%i %ss fourni"
 
 #: scripts/scenario_44_outpost.lua:15408
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ammo-comms"
 msgid ""
 "I don't have enough %s type ordnance to fully restock you. How would you "
@@ -7373,7 +7319,6 @@ msgstr ""
 "entièrement. Que voulez-vous faire ?"
 
 #: scripts/scenario_44_outpost.lua:15409
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We'll take all you've got"
 msgstr "Nous prendrons tout ce qu'il vous reste"
@@ -7390,19 +7335,16 @@ msgstr ""
 "procéder?"
 
 #: scripts/scenario_44_outpost.lua:15488
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Restock scan probes (5 reputation)"
 msgstr "Réapprovisionner les sondes (5 rép)"
 
 #: scripts/scenario_44_outpost.lua:15492
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "I replenished your probes for you."
 msgstr "Nous avons rechargé votre stock de sondes."
 
 #: scripts/scenario_44_outpost.lua:15497
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "You need to stay close if you want me to restock your probes"
 msgstr ""
@@ -7410,19 +7352,17 @@ msgstr ""
 "sondes."
 
 #: scripts/scenario_44_outpost.lua:15508
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipServices-comms"
 msgid "Quick charge the main batteries (%i reputation)"
 msgstr "Charge rapide des batteries principales (%i rép)"
 
 #: scripts/scenario_44_outpost.lua:15515
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "Your batteries have been charged"
 msgstr "Vos batteries ont été chargées."
 
 #: scripts/scenario_44_outpost.lua:15520
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "You need to stay close if you want your batteries charged quickly"
 msgstr ""
@@ -7430,7 +7370,6 @@ msgstr ""
 "chargées rapidement."
 
 #: scripts/scenario_44_outpost.lua:15526
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "How can I help you get your ship in good running order?"
 msgstr ""
@@ -7438,7 +7377,6 @@ msgstr ""
 "marche ?"
 
 #: scripts/scenario_44_outpost.lua:15528
-#, fuzzy
 msgctxt "shipServices-comms"
 msgid "There's nothing on your ship that I can help you fix. Sorry."
 msgstr ""
@@ -7448,7 +7386,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:15709
 msgctxt "msgGM"
 msgid "Empty Template pool: fix excludes or other criteria"
-msgstr ""
+msgstr "Pool de modèles vide : corrigez les exclusions ou d'autres critères."
 
 #: scripts/scenario_44_outpost.lua:16810 scripts/scenario_44_outpost.lua:16851
 #: scripts/scenario_44_outpost.lua:16895 scripts/scenario_44_outpost.lua:16939
@@ -7579,8 +7517,8 @@ msgstr ""
 "Les modèles Farco sont des modifications évolutives du Phobos T3.\n"
 "\n"
 "Dans le cas du Farco 11, la vitesse de manœuvre est plus rapide, les "
-"faisceaux laser sont plus longs et plus rapides, il y a un faisceau \"sniper"
-"\" plus long et les boucliers sont plus solides."
+"faisceaux laser sont plus longs et plus rapides, il y a un faisceau "
+"\"sniper\" plus long et les boucliers sont plus solides."
 
 #: scripts/scenario_44_outpost.lua:16991
 msgctxt "scienceDB"
@@ -7598,9 +7536,9 @@ msgstr ""
 "Les modèles Farco sont des modifications évolutives du Phobos T3.\n"
 "\n"
 "Dans le cas du Farco 13, la vitesse de manœuvre est plus rapide, les "
-"faisceaux laser sont plus longs et plus rapides, il y a un faisceau \"sniper"
-"\" plus long, les tubes se chargent plus rapidement, il y a plus de missiles "
-"et les boucliers sont plus solides."
+"faisceaux laser sont plus longs et plus rapides, il y a un faisceau "
+"\"sniper\" plus long, les tubes se chargent plus rapidement, il y a plus de "
+"missiles et les boucliers sont plus solides."
 
 #: scripts/scenario_44_outpost.lua:17042
 msgctxt "scienceDB"
@@ -8636,7 +8574,7 @@ msgstr "Vit. de mouvement"
 #: scripts/scenario_44_outpost.lua:18331
 msgctxt "scienceDB"
 msgid "Reverse move speed"
-msgstr "Vit. inversion mvt"
+msgstr "Vit. arrière mvt"
 
 #: scripts/scenario_44_outpost.lua:18332
 msgctxt "scienceDB"
@@ -8696,13 +8634,13 @@ msgstr ""
 "Rang posthume : %s"
 
 #: scripts/scenario_44_outpost.lua:18912
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tubes: %s"
 msgstr "Taille des tubes %s : %s"
 
 #: scripts/scenario_44_outpost.lua:18914
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tube: %s"
 msgstr "Taille du tube %s : %s"
@@ -8713,121 +8651,101 @@ msgid "Encrypted Exuari communications traffic observed"
 msgstr "Communications Éxuaries cryptées observées."
 
 #: scripts/scenario_44_outpost.lua:19057
-#, fuzzy
 msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
 msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
 
 #: scripts/scenario_44_outpost.lua:19061
-#, fuzzy
 msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
 msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
 
 #: scripts/scenario_44_outpost.lua:19079
-#, fuzzy
 msgctxt "coolant-msgEngineer"
 msgid "Automated systems have recovered some coolant"
 msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
 
 #: scripts/scenario_44_outpost.lua:19082
-#, fuzzy
 msgctxt "coolant-msgEngineer+"
 msgid "Automated systems have recovered some coolant"
 msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
 
 #: scripts/scenario_44_outpost.lua:19122 scripts/scenario_44_outpost.lua:19157
-#, fuzzy
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_44_outpost.lua:19126 scripts/scenario_44_outpost.lua:19161
-#, fuzzy
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_44_outpost.lua:19178
-#, fuzzy
 msgctxt "coolant-msgEngineer"
 msgid "Damage has caused a loss of coolant"
 msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
 
 #: scripts/scenario_44_outpost.lua:19182
-#, fuzzy
 msgctxt "coolant-msgEngineer+"
 msgid "Damage has caused a loss of coolant"
 msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
 
 #: scripts/scenario_44_outpost.lua:19189
-#, fuzzy
 msgctxt "damage-msgEngineer"
 msgid "The probe launch system has been damaged"
 msgstr "Le système de lancement des sondes a été endommagé."
 
 #: scripts/scenario_44_outpost.lua:19192
-#, fuzzy
 msgctxt "damage-msgEngineer+"
 msgid "The probe launch system has been damaged"
 msgstr "Le système de lancement des sondes a été endommagé."
 
 #: scripts/scenario_44_outpost.lua:19197
-#, fuzzy
 msgctxt "damage-msgEngineer"
 msgid "The hacking system has been damaged"
 msgstr "Le système de piratage a été endommagé."
 
 #: scripts/scenario_44_outpost.lua:19200
-#, fuzzy
 msgctxt "damage-msgEngineer+"
 msgid "The hacking system has been damaged"
 msgstr "Le système de piratage a été endommagé."
 
 #: scripts/scenario_44_outpost.lua:19205
-#, fuzzy
 msgctxt "damage-msgEngineer"
 msgid "The scanners have been damaged"
 msgstr "Les scanners ont été endommagés."
 
 #: scripts/scenario_44_outpost.lua:19208
-#, fuzzy
 msgctxt "damage-msgEngineer+"
 msgid "The scanners have been damaged"
 msgstr "Les scanners ont été endommagés."
 
 #: scripts/scenario_44_outpost.lua:19213
-#, fuzzy
 msgctxt "damage-msgEngineer"
 msgid "Combat maneuver has been damaged"
 msgstr "La manœuvre de combat a été endommagée."
 
 #: scripts/scenario_44_outpost.lua:19216
-#, fuzzy
 msgctxt "damage-msgEngineer+"
 msgid "Combat maneuver has been damaged"
 msgstr "La manœuvre de combat a été endommagée."
 
 #: scripts/scenario_44_outpost.lua:19221
-#, fuzzy
 msgctxt "damage-msgEngineer"
 msgid "Self destruct system has been damaged"
 msgstr "Le système d'autodestruction a été endommagé."
 
 #: scripts/scenario_44_outpost.lua:19224
-#, fuzzy
 msgctxt "damage-msgEngineer+"
 msgid "Self destruct system has been damaged"
 msgstr "Le système d'autodestruction a été endommagé."
 
 #: scripts/scenario_44_outpost.lua:19249
-#, fuzzy
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
 msgstr "Inventaire"
 
 #: scripts/scenario_44_outpost.lua:19256
-#, fuzzy
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
 msgstr "Inventaire"
@@ -8924,7 +8842,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:19398
 msgctxt "stationReport-msgGM"
 msgid "script error - \n"
-msgstr ""
+msgstr "erreur de script -\n"
 
 #~ msgctxt "msgOperations"
 #~ msgid "The unscanned artifact we just picked up has fried our scanners"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -247,13 +247,13 @@ msgstr "Temps restant :"
 #, lua-format
 msgctxt "audio-tabRelay&Operations"
 msgid "%s %i"
-msgstr ""
+msgstr "%s %i"
 
 #: scripts/scenario_51_deliverAmbassador.lua:359
 #, lua-format
 msgctxt "audio-tabRelay&Operations"
 msgid "%s %i:%.2i"
-msgstr ""
+msgstr "%s %i : %.2i"
 
 #: scripts/scenario_51_deliverAmbassador.lua:437
 msgctxt "audio-incCall"
@@ -822,7 +822,6 @@ msgstr ""
 "sur Goltin 7. "
 
 #: scripts/scenario_51_deliverAmbassador.lua:1077
-#, fuzzy
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarrés à la station pour cette action."
@@ -948,10 +947,12 @@ msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
 
 #: scripts/scenario_51_deliverAmbassador.lua:1151
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at WP %d"
-msgstr "Nous venons d'expédier %s pour vous aider au marqueur %d "
+msgstr ""
+"Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
+"marqueur %d."
 
 #: scripts/scenario_51_deliverAmbassador.lua:1174
 msgctxt "path-comms"

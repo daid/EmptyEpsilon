@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-03-05 13:35+0100\n"
+"PO-Revision-Date: 2023-05-08 01:31+0200\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
-"X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: .\n"
 
 #: src/scienceDatabase.cpp:397
 msgctxt "database direction"
@@ -102,7 +102,7 @@ msgstr "Vit. de mouvement"
 #: src/scienceDatabase.cpp:521
 msgctxt "database"
 msgid "Reverse move speed"
-msgstr "Vit. inversion mvt"
+msgstr "Vit. arrière mvt"
 
 #: src/scienceDatabase.cpp:524
 msgctxt "database"
@@ -506,7 +506,7 @@ msgstr "Infos du serveur"
 
 #: src/menus/serverCreationScreen.cpp:75
 msgid "Server was configured to connect to reverse proxy:"
-msgstr ""
+msgstr "Le serveur a été configuré pour se connecter au proxy inverse :"
 
 #: src/menus/serverCreationScreen.cpp:89
 msgid "Server IP: "
@@ -851,10 +851,9 @@ msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
 #: src/screens/crewStationScreen.cpp:73
-#, fuzzy
 msgctxt "hotkey_F1"
 msgid "{label}: {button}\n"
-msgstr "{label} : \t {button}\n"
+msgstr "{label} : {button}\n"
 
 #: src/screens/mainScreen.cpp:55 src/gui/hotkeyConfig.cpp:300
 #: src/gui/hotkeyConfig.cpp:301 src/gui/hotkeyConfig.cpp:302
@@ -1344,7 +1343,7 @@ msgstr "Scan"
 #: src/screens/gm/tweak.cpp:36
 msgctxt "tab"
 msgid "Template-based"
-msgstr ""
+msgstr "Vaisseau / Station"
 
 #: src/screens/gm/tweak.cpp:42
 msgctxt "tab"
@@ -1422,25 +1421,23 @@ msgstr "Type :"
 
 #: src/screens/gm/tweak.cpp:143
 msgid "Docked ship services:"
-msgstr ""
+msgstr "État des services d'accueil :"
 
 #: src/screens/gm/tweak.cpp:144
-#, fuzzy
 msgid "Shares energy"
-msgstr "Énergie max :"
+msgstr "Partage l'énergie"
 
 #: src/screens/gm/tweak.cpp:150
-#, fuzzy
 msgid "Repairs ships"
-msgstr "Vaisseau joueur"
+msgstr "Répare les vaisseaux"
 
 #: src/screens/gm/tweak.cpp:156
 msgid "Restocks scan probes"
-msgstr ""
+msgstr "Réapprovisionne les sondes"
 
 #: src/screens/gm/tweak.cpp:162
 msgid "Restocks cpuship missiles"
-msgstr ""
+msgstr "Réap. missiles vaisseaux cpu"
 
 #: src/screens/gm/tweak.cpp:169
 msgid "Hull max:"
@@ -1463,38 +1460,32 @@ msgid "Long-range radar range:"
 msgstr "Rayon du radar longue portée :"
 
 #: src/screens/gm/tweak.cpp:234
-#, fuzzy
 msgid "Impulse max speed:"
-msgstr "Vitesse des moteurs :"
+msgstr "Vitesse max avant :"
 
 #: src/screens/gm/tweak.cpp:240
-#, fuzzy
 msgid "Impulse acceleration:"
-msgstr "Vitesse des moteurs :"
+msgstr "Vit. d'accélération avant :"
 
 #: src/screens/gm/tweak.cpp:246
-#, fuzzy
 msgid "Impulse max reverse speed:"
-msgstr "Vit. d'inversion moteurs :"
+msgstr "Vitesse max arrière :"
 
 #: src/screens/gm/tweak.cpp:252
-#, fuzzy
 msgid "Impulse reverse acceleration:"
-msgstr "Vit. d'inversion moteurs :"
+msgstr "Vit. d'accélération arrière :"
 
 #: src/screens/gm/tweak.cpp:258
 msgid "Turn speed:"
 msgstr "Vitesse de rotation :"
 
 #: src/screens/gm/tweak.cpp:264
-#, fuzzy
 msgid "Docking state:"
-msgstr "Type de piratage : "
+msgstr "État d'amarrage :"
 
 #: src/screens/gm/tweak.cpp:265 src/screens/gm/tweak.cpp:327
-#, fuzzy
 msgid "Not docked"
-msgstr "Annuler amarrage"
+msgstr "Non amarré"
 
 #: src/screens/gm/tweak.cpp:279
 msgctxt "tweak_ship"
@@ -1506,21 +1497,18 @@ msgid "Warp Drive"
 msgstr "Vitesse lumière"
 
 #: src/screens/gm/tweak.cpp:286
-#, fuzzy
 msgid "Warp speed:"
-msgstr "Vitesse lumière"
+msgstr "Vitesse lumière max :"
 
 #: src/screens/gm/tweak.cpp:292
 msgid "Jump Drive"
 msgstr "Téléportation"
 
 #: src/screens/gm/tweak.cpp:297
-#, fuzzy
 msgid "Jump min distance:"
 msgstr "Portée de saut min :"
 
 #: src/screens/gm/tweak.cpp:303
-#, fuzzy
 msgid "Jump max distance:"
 msgstr "Portée de saut max :"
 
@@ -1529,14 +1517,12 @@ msgid "Jump charge:"
 msgstr "Temps rechargement du saut :"
 
 #: src/screens/gm/tweak.cpp:331
-#, fuzzy
 msgid "Docking..."
-msgstr "Connexion en cours..."
+msgstr "En cours d'amarrage..."
 
 #: src/screens/gm/tweak.cpp:335
-#, fuzzy
 msgid "Docked"
-msgstr "À quai"
+msgstr "Amarré"
 
 #: src/screens/gm/tweak.cpp:368
 msgctxt "missiles"
@@ -1590,7 +1576,6 @@ msgid "Medium"
 msgstr "Moyen"
 
 #: src/screens/gm/tweak.cpp:528
-#, fuzzy
 msgctxt "tube"
 msgid "Large"
 msgstr "Large"
@@ -1615,17 +1600,17 @@ msgstr "Faisceau : {id_beam}"
 #: src/screens/gm/tweak.cpp:642
 msgctxt "beam"
 msgid "Arc:"
-msgstr "Amplitude de l'arc"
+msgstr "Amplitude de l'arc :"
 
 #: src/screens/gm/tweak.cpp:648
 msgctxt "beam"
 msgid "Direction:"
-msgstr "Orientation"
+msgstr "Orientation :"
 
 #: src/screens/gm/tweak.cpp:654
 msgctxt "beam"
 msgid "Turret arc:"
-msgstr "Tourelle : Amplitude de l'arc"
+msgstr "Tourelle : Amplitude de l'arc :"
 
 #: src/screens/gm/tweak.cpp:660
 msgctxt "beam"
@@ -1640,27 +1625,27 @@ msgstr "Tourelle : vitesse de rotation"
 #: src/screens/gm/tweak.cpp:681
 msgctxt "beam"
 msgid "Range:"
-msgstr "Portée"
+msgstr "Portée :"
 
 #: src/screens/gm/tweak.cpp:687
 msgctxt "beam"
 msgid "Cycle time:"
-msgstr "Intervalle entre 2 tirs"
+msgstr "Intervalle entre 2 tirs :"
 
 #: src/screens/gm/tweak.cpp:693
 msgctxt "beam"
 msgid "Energy used per fire:"
-msgstr ""
+msgstr "Énergie utilisée par tir :"
 
 #: src/screens/gm/tweak.cpp:699
 msgctxt "beam"
 msgid "Heat generated per fire:"
-msgstr ""
+msgstr "Chaleur générée par tir :"
 
 #: src/screens/gm/tweak.cpp:712
 msgctxt "beam"
 msgid "Damage:"
-msgstr "Dégâts"
+msgstr "Dégâts :"
 
 #: src/screens/gm/tweak.cpp:756
 msgid "{system} health"
@@ -2783,16 +2768,14 @@ msgid "Increase impulse"
 msgstr "Accélérer (moteurs principaux)"
 
 #: src/gui/hotkeyConfig.cpp:311
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Increase impulse 1%"
-msgstr "Accélérer (moteurs principaux)"
+msgstr "Accélérer (moteurs principaux) 1%"
 
 #: src/gui/hotkeyConfig.cpp:312
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Increase impulse 10%"
-msgstr "Accélérer (moteurs principaux)"
+msgstr "Accélérer (moteurs principaux) 10%"
 
 #: src/gui/hotkeyConfig.cpp:313
 msgctxt "hotkey_Helms"
@@ -2800,16 +2783,14 @@ msgid "Decrease impulse"
 msgstr "Décélérer (moteurs principaux)"
 
 #: src/gui/hotkeyConfig.cpp:314
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Decrease impulse 1%"
-msgstr "Décélérer (moteurs principaux)"
+msgstr "Décélérer (moteurs principaux) 1%"
 
 #: src/gui/hotkeyConfig.cpp:315
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Decrease impulse 10%"
-msgstr "Décélérer (moteurs principaux)"
+msgstr "Décélérer (moteurs principaux) 10%"
 
 #: src/gui/hotkeyConfig.cpp:316
 msgctxt "hotkey_Helms"
@@ -2824,12 +2805,12 @@ msgstr "Eteindre les moteurs"
 #: src/gui/hotkeyConfig.cpp:318
 msgctxt "hotkey_Helms"
 msgid "Max impulse"
-msgstr "Puissance des moteurs avant max"
+msgstr "Vitesse max des moteurs avant :"
 
 #: src/gui/hotkeyConfig.cpp:319
 msgctxt "hotkey_Helms"
 msgid "Max reverse impulse"
-msgstr "Puissance des moteurs arrière max"
+msgstr "Vitesse max des moteurs arrière :"
 
 #: src/gui/hotkeyConfig.cpp:320
 msgctxt "hotkey_Helms"
