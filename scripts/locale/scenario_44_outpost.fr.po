@@ -1475,7 +1475,8 @@ msgstr "augmenter la vitesse maximale des moteurs avant de 10%"
 #: scripts/scenario_44_outpost.lua:2402 scripts/scenario_44_outpost.lua:2827
 msgctxt "upgrade-comms"
 msgid "increase max reverse impulse by 20% and reverse acceleration by 1/3"
-msgstr "booster les moteurs arrière de 20% et l'accélération arrière de 1/3"
+msgstr ""
+"booster les moteurs arrière de 20% et la vit. d'accélération arrière de 1/3"
 
 #: scripts/scenario_44_outpost.lua:2409 scripts/scenario_44_outpost.lua:2834
 #: scripts/scenario_44_outpost.lua:7388
@@ -1654,7 +1655,7 @@ msgstr "doubler la manœuvrabilité de la manœuvre de combat"
 #: scripts/scenario_44_outpost.lua:3194
 msgctxt "upgrade-comms"
 msgid "increase reverse impulse speed and acceleration"
-msgstr "augmenter la vitesse des moteurs vers l'avant et l'accélération"
+msgstr "augmenter la vit. max et vit. d'accélération arrière"
 
 #: scripts/scenario_44_outpost.lua:3201 scripts/scenario_44_outpost.lua:4359
 #: scripts/scenario_44_outpost.lua:4724 scripts/scenario_44_outpost.lua:5077
@@ -1776,7 +1777,7 @@ msgstr "augmenter la vitesse maximale des moteurs arrière de 20%"
 #: scripts/scenario_44_outpost.lua:3557
 msgctxt "upgrade-comms"
 msgid "increase reverse acceleration by 50%"
-msgstr "augmenter l'accélération arrière de 50%"
+msgstr "augmenter la vit. d'accélération des moteurs arrière de 50%"
 
 #: scripts/scenario_44_outpost.lua:3564 scripts/scenario_44_outpost.lua:6979
 #: scripts/scenario_44_outpost.lua:8394
@@ -1826,7 +1827,7 @@ msgstr "booster les moteurs avant de 10%"
 #: scripts/scenario_44_outpost.lua:3634
 msgctxt "upgrade-comms"
 msgid "increase reverse impulse speed by 10%"
-msgstr "booster les moteurs arrière de 10%"
+msgstr "booster la vitesse des moteurs arrière de 10%"
 
 #: scripts/scenario_44_outpost.lua:3749 scripts/scenario_44_outpost.lua:5271
 msgctxt "upgrade-comms"
@@ -8573,7 +8574,7 @@ msgstr "Vit. de mouvement"
 #: scripts/scenario_44_outpost.lua:18331
 msgctxt "scienceDB"
 msgid "Reverse move speed"
-msgstr "Vit. inversion mvt"
+msgstr "Vit. arrière mvt"
 
 #: scripts/scenario_44_outpost.lua:18332
 msgctxt "scienceDB"
