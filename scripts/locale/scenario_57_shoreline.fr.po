@@ -1537,7 +1537,7 @@ msgstr "Obtenez votre énergie ici ! Prenez un verre avant de partir !"
 #: scripts/scenario_57_shoreline.lua:6733
 msgctxt "scienceDescription-artifact"
 msgid "Unusual object"
-msgstr ""
+msgstr "Objet insolite"
 
 #: scripts/scenario_57_shoreline.lua:6696
 #: scripts/scenario_57_shoreline.lua:6703
