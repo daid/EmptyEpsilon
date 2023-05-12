@@ -7196,13 +7196,13 @@ function minerScienceDiscovery(delta)
 			if closestBethesdaPlayer:isValid() and closestBethesdaPlayer.receivedMinerResearch then
 				sickMinerState = "sent to engineer"
 				scienceSendMessage = "scienceSendMessage"
-				closestBethesdaPlayer:addCustomMessage("Science",scienceSendMessage,_("minerDiscovery-msgScience", "While reading through Joshua Kojak's research, you discover a potential application to on-board ship systems. Click the 'Send to engineer' button to submit insight to engineering. You may find the button under the 'scanning' label"))
+				closestBethesdaPlayer:addCustomMessage("Science",scienceSendMessage,_("joshua-msgScience", "While reading through Joshua Kojak's research, you discover a potential application to on-board ship systems. Click the 'Send to engineer' button to submit insight to engineering. You may find the button under the 'scanning' label"))
 				operationsSendMessage = "operationsSendMessage"
-				closestBethesdaPlayer:addCustomMessage("Operations",operationsSendMessage,_("minerDiscovery-msgOperations", "While reading through Joshua Kojak's research, you discover a potential application to on-board ship systems. Click the 'Send to engineer' button to submit insight to engineering."))
+				closestBethesdaPlayer:addCustomMessage("Operations",operationsSendMessage,_("joshua-msgOperations", "While reading through Joshua Kojak's research, you discover a potential application to on-board ship systems. Click the 'Send to engineer' button to submit insight to engineering."))
 				scienceSendButton = "scienceSendButton"
-				closestBethesdaPlayer:addCustomButton("Science",scienceSendButton,_("minerDiscovery-buttonScience", "Send to engineer"),insightToEngineer)
+				closestBethesdaPlayer:addCustomButton("Science",scienceSendButton,_("joshua-buttonScience", "Send to engineer"),insightToEngineer)
 				operationsSendButton = "operationsSendButton"
-				closestBethesdaPlayer:addCustomButton("Operations",operationsSendButton,_("minerDiscovery-buttonOperations", "Send to engineer"),insightToEngineer)
+				closestBethesdaPlayer:addCustomButton("Operations",operationsSendButton,_("joshua-buttonOperations", "Send to engineer"),insightToEngineer)
 				engineerEvaluateMessageTimer = 30
 				plot2 = minerEngineerEvaluate
 			end
@@ -7223,13 +7223,13 @@ function minerEngineerEvaluate(delta)
 	if sickMinerState == "sent to weapons" then
 		if closestBethesdaPlayer:isValid() and closestBethesdaPlayer.receivedMinerResearch then
 			engineerSendMessage = "engineerSendMessage"
-			closestBethesdaPlayer:addCustomMessage("Engineering",engineerSendMessage,_("suggestWeapons-msgEngineer", "The science officer sent you some thoughts on Joshua Kojak's research. You think it applies to beam weapon improvement. Click the 'Send to weapons' button to suggest changes to weapons"))
+			closestBethesdaPlayer:addCustomMessage("Engineering",engineerSendMessage,_("joshua-msgEngineer", "The science officer sent you some thoughts on Joshua Kojak's research. You think it applies to beam weapon improvement. Click the 'Send to weapons' button to suggest changes to weapons"))
 			engineerPlusSendMessage = "engineerPlusSendMessage"
-			closestBethesdaPlayer:addCustomMessage("Engineering+",engineerPlusSendMessage,_("suggestWeapons-msgEngineer+", "The science officer sent you some thoughts on Joshua Kojak's research. You think it applies to beam weapon improvement. Click the 'Send to weapons' button to suggest changes to weapons"))
+			closestBethesdaPlayer:addCustomMessage("Engineering+",engineerPlusSendMessage,_("joshua-msgEngineer+", "The science officer sent you some thoughts on Joshua Kojak's research. You think it applies to beam weapon improvement. Click the 'Send to weapons' button to suggest changes to weapons"))
 			engineerSendToWeaponsButton = "engineerSendToWeaponsButton"
-			closestBethesdaPlayer:addCustomButton("Engineering",engineerSendToWeaponsButton,_("suggestWeapons-buttonEngineer", "Send to weapons"),insightToWeapons)
+			closestBethesdaPlayer:addCustomButton("Engineering",engineerSendToWeaponsButton,_("joshua-buttonEngineer", "Send to weapons"),insightToWeapons)
 			engineerPlusSendToWeaponsButton = "engineerPlusSendToWeaponsButton"
-			closestBethesdaPlayer:addCustomButton("Engineering+",engineerPlusSendToWeaponsButton,_("suggestWeapons-buttonEngineer+", "Send to weapons"),insightToWeapons)
+			closestBethesdaPlayer:addCustomButton("Engineering+",engineerPlusSendToWeaponsButton,_("joshua-buttonEngineer+", "Send to weapons"),insightToWeapons)
 			weaponsEvaluateMessageTimer = 30
 			plot2 = minerWeaponsApply
 		end
@@ -7256,13 +7256,13 @@ function minerWeaponsApply(delta)
 	if sickMinerState == "sent to base" then
 		if closestBethesdaPlayer:isValid() and closestBethesdaPlayer.receivedMinerResearch then
 			weaponsSendMessage = "weaponsSendMessage"
-			closestBethesdaPlayer:addCustomMessage("Weapons",weaponsSendMessage,_("instructions-msgWeapons", "The engineer sent you some thoughts on Joshua Kojak's research. You know how to apply it to the beam weapons, but lack the tools to do it immediately. Click the 'Send to Utopia Planitia' button to transmit upgrade instructions to Utopia Planitia station"))
+			closestBethesdaPlayer:addCustomMessage("Weapons",weaponsSendMessage,_("joshua-msgWeapons", "The engineer sent you some thoughts on Joshua Kojak's research. You know how to apply it to the beam weapons, but lack the tools to do it immediately. Click the 'Send to Utopia Planitia' button to transmit upgrade instructions to Utopia Planitia station"))
 			tacticalSendMessage = "tacticalSendMessage"
-			closestBethesdaPlayer:addCustomMessage("Tactical",tacticalSendMessage,_("instructions-msgTactical", "The engineer sent you some thoughts on Joshua Kojak's research. You know how to apply it to the beam weapons, but lack the tools to do it immediately. Click the 'Send to Utopia Planitia' button to transmit upgrade instructions to Utopia Planitia station"))
+			closestBethesdaPlayer:addCustomMessage("Tactical",tacticalSendMessage,_("joshua-msgTactical", "The engineer sent you some thoughts on Joshua Kojak's research. You know how to apply it to the beam weapons, but lack the tools to do it immediately. Click the 'Send to Utopia Planitia' button to transmit upgrade instructions to Utopia Planitia station"))
 			weaponsSendButton = "weaponsSendButton"
-			closestBethesdaPlayer:addCustomButton("Weapons",weaponsSendButton,_("instructions-buttonWeapons", "Send to Utopia Planitia"),insightToBase)
+			closestBethesdaPlayer:addCustomButton("Weapons",weaponsSendButton,_("joshua-buttonWeapons", "Send to Utopia Planitia"),insightToBase)
 			tacticalSendButton = "tacticalSendButton"
-			closestBethesdaPlayer:addCustomButton("Tactical",tacticalSendButton,_("instructions-buttonTactical", "Send to Utopia Planitia"),insightToBase)
+			closestBethesdaPlayer:addCustomButton("Tactical",tacticalSendButton,_("joshua-buttonTactical", "Send to Utopia Planitia"),insightToBase)
 			weaponsDecideMessageTimer = 30
 			plot2 = minerWeaponsDecide
 		end
@@ -7288,8 +7288,8 @@ function minerWeaponsDecide(delta)
 	end
 	if sickMinerState == "base processed" then
 		if closestBethesdaPlayer:isValid() and closestBethesdaPlayer.receivedMinerResearch then
-			stationUtopiaPlanitia:sendCommsMessage(closestBethesdaPlayer,_("UtopiaPlanitia3-incCall", "Thanks for the information. We can upgrade you next time you dock."))
-			closestBethesdaPlayer:addToShipLog(_("UtopiaPlanitia3-shipLog", "[Utopia Planitia] Thanks for the information. We can upgrade you next time you dock","Magenta"))
+			stationUtopiaPlanitia:sendCommsMessage(closestBethesdaPlayer,_("joshuaUP-incCall", "Thanks for the information. We can upgrade you next time you dock."))
+			closestBethesdaPlayer:addToShipLog(_("joshuaUP-shipLog", "[Utopia Planitia] Thanks for the information. We can upgrade you next time you dock","Magenta"))
 		end
 		plot2 = nil
 		minerUpgrade = true
@@ -7924,19 +7924,19 @@ function flakyTube(delta)
 			flakyTubeVictim:setWeaponTubeCount(newTubes)
 			flakyTubeVictim.flakyTubeCount = flakyTubeVictim.flakyTubeCount + 1
 			failedTubeMessage = "failedTubeMessage"
-			flakyTubeVictim:addCustomMessage("Weapons",failedTubeMessage,_("flakyTube-msgWeapons", "Automated systems removed our new weapons tube due to malfunction. Technicians investigating"))
+			flakyTubeVictim:addCustomMessage("Weapons",failedTubeMessage,_("tube-msgWeapons", "Automated systems removed our new weapons tube due to malfunction. Technicians investigating"))
 			failedTubeMessageTactical = "failedTubeMessageTactical"
-			flakyTubeVictim:addCustomMessage("Tactical",failedTubeMessageTactical,_("flakyTube-msgTactical", "Automated systems removed our new weapons tube due to malfunction. Technicians investigating"))
+			flakyTubeVictim:addCustomMessage("Tactical",failedTubeMessageTactical,_("tube-msgTactical", "Automated systems removed our new weapons tube due to malfunction. Technicians investigating"))
 		else
 			if fixedTubeButton == nil then
 				fixedTubeMessage = "fixedTubeMessage"
-				flakyTubeVictim:addCustomMessage("Weapons",fixedTubeMessage,_("fixedTube-msgWeapons", "Technicians fixed the new tube. Click 'Redeploy' button to enable"))
+				flakyTubeVictim:addCustomMessage("Weapons",fixedTubeMessage,_("tube-msgWeapons", "Technicians fixed the new tube. Click 'Redeploy' button to enable"))
 				fixedTubeMessageTactical = "fixedTubeMessageTactical"
-				flakyTubeVictim:addCustomMessage("Tactical",fixedTubeMessageTactical,_("fixedTube-msgTactical", "Technicians fixed the new tube. Click 'Redeploy' button to enable"))
+				flakyTubeVictim:addCustomMessage("Tactical",fixedTubeMessageTactical,_("tube-msgTactical", "Technicians fixed the new tube. Click 'Redeploy' button to enable"))
 				fixedTubeButton = "fixedTubeButton"
-				flakyTubeVictim:addCustomButton("Weapons",fixedTubeButton,_("fixedTube-buttonWeapons", "Redeploy"),redeployTube)
+				flakyTubeVictim:addCustomButton("Weapons",fixedTubeButton,_("tube-buttonWeapons", "Redeploy"),redeployTube)
 				fixedTubeButtonTactical = "fixedTubeButtonTactical"
-				flakyTubeVictim:addCustomButton("Tactical",fixedTubeButtonTactical,_("fixedTube-buttonTactical", "Redeploy"),redeployTube)
+				flakyTubeVictim:addCustomButton("Tactical",fixedTubeButtonTactical,_("tube-buttonTactical", "Redeploy"),redeployTube)
 			end
 		end
 		flakyTubeTimer = delta + random(150,450)
