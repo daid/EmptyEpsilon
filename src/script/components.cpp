@@ -364,13 +364,38 @@ void initComponentScriptBindings()
 
     sp::script::ComponentHandler<ImpulseEngine>::name("impulse_engine");
     BIND_SHIP_SYSTEM(ImpulseEngine);
+    BIND_MEMBER(ImpulseEngine, max_speed_forward);
+    BIND_MEMBER(ImpulseEngine, max_speed_reverse);
+    BIND_MEMBER(ImpulseEngine, acceleration_forward);
+    BIND_MEMBER(ImpulseEngine, acceleration_reverse);
+    BIND_MEMBER(ImpulseEngine, sound);
+    BIND_MEMBER(ImpulseEngine, request);
+    BIND_MEMBER(ImpulseEngine, actual);
     sp::script::ComponentHandler<ManeuveringThrusters>::name("maneuvering_thrusters");
     BIND_SHIP_SYSTEM(ManeuveringThrusters);
     sp::script::ComponentHandler<CombatManeuveringThrusters>::name("combat_maneuvering_thrusters");
+    BIND_MEMBER(CombatManeuveringThrusters, charge);
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.speed, "boost_speed");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.speed, "strafe_speed");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.request, "boost_request");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.request, "strafe_request");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.active, "boost_active");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.active, "strafe_active");
     sp::script::ComponentHandler<WarpDrive>::name("warp_drive");
     BIND_SHIP_SYSTEM(WarpDrive);
+    BIND_MEMBER(WarpDrive, max_level);
+    BIND_MEMBER(WarpDrive, speed_per_level);
+    BIND_MEMBER(WarpDrive, energy_warp_per_second);
+    BIND_MEMBER(WarpDrive, request);
+    BIND_MEMBER(WarpDrive, current);
     sp::script::ComponentHandler<JumpDrive>::name("jump_drive");
     BIND_SHIP_SYSTEM(JumpDrive);
+    BIND_MEMBER(JumpDrive, min_distance);
+    BIND_MEMBER(JumpDrive, max_distance);
+    BIND_MEMBER(JumpDrive, charge);
+    BIND_MEMBER(JumpDrive, distance);
+    BIND_MEMBER(JumpDrive, delay);
+    
     sp::script::ComponentHandler<MissileTubes>::name("missile_tubes");
     BIND_SHIP_SYSTEM(MissileTubes);
     BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_Homing)], "storage_homing");

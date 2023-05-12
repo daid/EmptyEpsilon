@@ -10,6 +10,7 @@
 #include "components/collision.h"
 #include "systems/collision.h"
 #include "ecs/query.h"
+#include "menus/luaConsole.h"
 #include <SDL_assert.h>
 
 P<GameGlobalInfo> gameGlobalInfo;
@@ -98,6 +99,14 @@ string GameGlobalInfo::getNextShipCallsign()
     return "SS" + string(callsign_counter);
 }
 
+void GameGlobalInfo::execScriptCode(const string& code)
+{
+    if (main_script) {
+        auto res = main_script->run<void>(code);
+        LuaConsole::checkResult(res);
+    }
+}
+
 void GameGlobalInfo::addScript(P<Script> script)
 {
     script_list.update();
@@ -174,11 +183,6 @@ void GameGlobalInfo::setScenarioSettings(const string filename, std::unordered_m
     }
 }
 
-static sp::ecs::Entity luaCreateEntity()
-{
-    return sp::ecs::Entity::create();
-}
-
 void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, string> new_settings)
 {
     reset();
@@ -192,13 +196,7 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
 
     main_script = std::make_unique<sp::script::Environment>();
-    //TODO: Load factions
-    //TODO: Load core functions
-    main_script->setGlobal("createEntity", &luaCreateEntity);
-    main_script->setGlobal("random", &random);
-    main_script->setGlobal("irandom", &irandom);
-    //TODO: Load ship templates
-    //TODO: Load science database
+    setupScriptEnvironment(*main_script.get());
 
     //TODO: int max_cycles = PreferencesManager::get("script_cycle_limit", "0").toInt();
     //TODO: if (max_cycles > 0)
@@ -208,12 +206,10 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     setScenarioSettings(filename, new_settings);
 
     auto res = main_script->runFile<void>(filename);
-    if (res.isErr()) {
-        LOG(Error, "Main script error: " + res.error());
-    } else {
+    LuaConsole::checkResult(res);
+    if (res.isOk()) {
         res = main_script->call<void>("init");
-        if (res.isErr())
-            LOG(Error, "Main script error: " + res.error());
+        LuaConsole::checkResult(res);
     }
 
     if (PreferencesManager::get("game_logs", "1").toInt())

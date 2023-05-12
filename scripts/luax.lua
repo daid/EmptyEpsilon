@@ -231,3 +231,18 @@ function table.shuffle(list)
         list[i], list[j] = list[j], list[i]
     end
 end
+
+-- Deepcopy a table, returns a copy of the table with all subtables also copied.
+function table.deepcopy(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in next, orig, nil do
+            copy[table.deepcopy(orig_key)] = table.deepcopy(orig_value)
+        end
+    else
+        copy = orig
+    end
+    return copy
+end

@@ -4,6 +4,11 @@
 
 --- Scenario
 -- @script scenario_10_empty
+require("luax.lua")
+require("api/all.lua")
+require("model_data.lua")
+require("shipTemplates.lua")
+
 
 function Asteroid()
     local e = createEntity()
@@ -97,8 +102,11 @@ function init()
     local a = Asteroid()
     a.transform = {position={500, 1000}}
     
-    local p = PlayerSpaceship()
+    p = PlayerSpaceship()
     p.transform = {position={5000, 5000}}
+
+    print("Print function from init.")
+    print("Player is at:", p.transform.position)
 end
 
 function update(delta)

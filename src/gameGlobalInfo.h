@@ -93,6 +93,7 @@ public:
 
     string getNextShipCallsign();
 
+    void execScriptCode(const string& code);
 private:
     P<GameStateLogger> state_logger;
     sp::ecs::Entity victory_faction;

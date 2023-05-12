@@ -8,6 +8,7 @@
 #include "stringImproved.h"
 #include "io/pointer.h"
 #include "graphics/alignment.h"
+#include "gui/layout/layout.h"
 
 namespace sp {
     class RenderTarget;
