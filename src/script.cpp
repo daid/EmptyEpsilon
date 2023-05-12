@@ -131,6 +131,12 @@ static int luaPrint(lua_State* L)
     return 0;
 }
 
+static int luaGetEntityFunctionTable(lua_State* L)
+{
+    lua_getfield(L, LUA_REGISTRYINDEX, "EFT");
+    return 1;
+}
+
 void setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
@@ -140,6 +146,7 @@ void setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
     env.setGlobal("_", &luaTranslate);
     env.setGlobal("createEntity", &luaCreateEntity);
+    env.setGlobal("getLuaEntityFunctionTable", &luaGetEntityFunctionTable);
     env.setGlobal("createClass", &luaCreateClass);
     //TODO: Load factions
     //TODO: Load ship templates
