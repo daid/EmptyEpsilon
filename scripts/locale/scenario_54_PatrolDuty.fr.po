@@ -28,7 +28,7 @@ msgstr ""
 "- Difficulté :  ***  (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"TRADUCTION EN COURS 81%\n"
+"TRADUCTION EN COURS 93%\n"
 "\n"
 "Mission : Patrouillez entre 3 stations dans le quadrant Delta pour vous "
 "protéger des ennemis.\n"
@@ -3264,6 +3264,17 @@ msgid ""
 "quadrant. Our enemies dearly wish to give us a black eye here and claim it "
 "for their own."
 msgstr ""
+"Votre mission consiste à patrouiller entre les trois principales stations "
+"navales humaines : Asimov, Utopia Planitia et Armstrong. Vous devrez à "
+"chaque fois vous amarrer à ces stations. Des systèmes automatisés extrairont "
+"vos itinéraires et suivront vos progrès.\n"
+"L'objectif principal de votre patrouille est de surveiller les vaisseaux "
+"ennemis et de les intercepter avant qu'ils n'attaquent et ne détruisent nos "
+"3 stations. Les ennemis pouvant attaquer les autres stations du secteur, "
+"votre objectif secondaire est de les protéger également.\n"
+"Répandez la bienveillance et la confiance dans ce quadrant en pleine "
+"croissance et à forte valeur. Nos ennemis revendiquent ardemment ce quadrant "
+"et nous mènent la vie dure."
 
 #: scripts/scenario_54_PatrolDuty.lua:6528
 #: scripts/scenario_54_PatrolDuty.lua:6696
@@ -3382,6 +3393,9 @@ msgid ""
 "Enemy base nearby located in secctor %s. Fleet assembled near Utopia "
 "Planitia to assist if needed. Destroy base."
 msgstr ""
+"Base ennemie à proximité située dans le secteur %s. Notre flotte s'est "
+"rassemblée près d'Utopia Planitia pour vous aider si nécessaire.\n"
+"Détruisez cette base."
 
 #: scripts/scenario_54_PatrolDuty.lua:6965
 #, lua-format
@@ -3800,6 +3814,10 @@ msgid ""
 "Planitia so that they can decrypt it and it may be applied to human navy "
 "ships"
 msgstr ""
+"[Commandant Lisbon] Merci d'avoir ramené Francis. Je vous confie mes "
+"recherches sur l'algorithme de refroidissement du système des faisceaux "
+"laser. Apportez-le à la station Utopia Planitia afin qu'ils puissent le "
+"décrypter et qu'il puisse être appliqué aux vaisseaux de la marine humaine."
 
 #: scripts/scenario_54_PatrolDuty.lua:7543
 #, lua-format
@@ -3808,6 +3826,8 @@ msgid ""
 "%s: Deliver Commander Lisbon's encrypted beam system cooling algorithm to "
 "station Utopia Planitia"
 msgstr ""
+"%s : Fournissez l'algorithme crypté du commandant Lisbon de refroidissement "
+"du système des faisceaux laser à la station Utopia Planitia."
 
 #: scripts/scenario_54_PatrolDuty.lua:7561
 msgctxt "-shipLog"
@@ -4009,50 +4029,50 @@ msgstr "%s %i :%.2i"
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%i%% Complete"
-msgstr ""
+msgstr "%i%% Complété"
 
 #: scripts/scenario_54_PatrolDuty.lua:8440
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s -Utopia Planitia"
-msgstr ""
+msgstr "%s -Utopia Planitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:8442
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s +Utopia Planitia"
-msgstr ""
+msgstr "%s +Utopia Planitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:8446
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s -Asimov"
-msgstr ""
+msgstr "%s -Asimov"
 
 #: scripts/scenario_54_PatrolDuty.lua:8448
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s +Asimov"
-msgstr ""
+msgstr "%s +Asimov"
 
 #: scripts/scenario_54_PatrolDuty.lua:8452
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s -Armstrong"
-msgstr ""
+msgstr "%s -Armstrong"
 
 #: scripts/scenario_54_PatrolDuty.lua:8471
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "Asimov S:%i%% H:%i%%"
-msgstr ""
+msgstr "Asimov S :%i%% H :%i%%"
 
 #: scripts/scenario_54_PatrolDuty.lua:8509
 #: scripts/scenario_54_PatrolDuty.lua:8547
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "U.P. WS:%i%% H:%i%%"
-msgstr ""
+msgstr "U.P. WS :%i%% H :%i%%"
 
 #~ msgctxt "medical-msgEngineer+"
 #~ msgid "Medical team has revived one of your repair crew"
