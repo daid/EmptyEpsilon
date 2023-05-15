@@ -4968,13 +4968,13 @@ function handleDockedState()
 									comms_source.goods[comms_source.kojakPart] = comms_source.goods[comms_source.kojakPart] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									comms_source.kojakUpgrade = true
-									setCommsMessage(string.format(_("upgrade-comms", "Thanks for the %s. Your beam weapons now have improved range, cycle time and damage."),comms_source.kojakPart))
+									setCommsMessage(string.format(_("upgradeAudio1-comms", "Thanks for the %s. Your beam weapons now have improved range, cycle time and damage."),comms_source.kojakPart))
 								else
-									setCommsMessage(string.format(_("upgrade-comms", "We find ourselves short of %s. Please bring us some of that kind of cargo and we can upgrade your beams"),comms_source.kojakPart))
+									setCommsMessage(string.format(_("upgradeAudio1", "We find ourselves short of %s. Please bring us some of that kind of cargo and we can upgrade your beams"),comms_source.kojakPart))
 								end
 							else
 								kojakBeamUpgrade()
-								setCommsMessage(_("upgrade-comms", "Your beam weapons now have improved range, cycle time and damage."))
+								setCommsMessage(_("upgradeAudio1-comms", "Your beam weapons now have improved range, cycle time and damage."))
 								comms_source.kojakUpgrade = true
 							end
 						end
@@ -5014,10 +5014,10 @@ function handleDockedState()
 									playSoundFile("audio/scenario/54/sa_54_UTImpulse.ogg")
 									impulseDone = "played"
 								end
-								setCommsMessage(string.format(_("upgrade-comms", "Thanks for the %s. Your impulse engines now have improved speed"),comms_source.nabbitPart))
+								setCommsMessage(string.format(_("upgradeAudio2-comms", "Thanks for the %s. Your impulse engines now have improved speed"),comms_source.nabbitPart))
 								comms_source.nabbitUpgrade = true
 							else
-								setCommsMessage(string.format(_("upgrade-comms", "We're short of %s. Please bring us some of that kind of cargo and we can upgrade your impulse engines"),comms_source.nabbitPart))
+								setCommsMessage(string.format(_("upgradeAudio2-comms", "We're short of %s. Please bring us some of that kind of cargo and we can upgrade your impulse engines"),comms_source.nabbitPart))
 							end
 						else
 							comms_source:setImpulseMaxSpeed(comms_source:getImpulseMaxSpeed()*1.2)
@@ -5025,7 +5025,7 @@ function handleDockedState()
 								playSoundFile("audio/scenario/54/sa_54_UTImpulse.ogg")
 								impulseDone = "played"
 							end
-							setCommsMessage(_("upgrade-comms", "Your impulse engines now have improved speed"))
+							setCommsMessage(_("upgradeAudio2-comms", "Your impulse engines now have improved speed"))
 							comms_source.nabbitUpgrade = true
 						end
 					end
@@ -5063,13 +5063,13 @@ function handleDockedState()
 									lisbonBeamUpgrade()
 									comms_source.goods[comms_source.lisbonPart] = comms_source.goods[comms_source.lisbonPart] - 1
 									comms_source.cargo = comms_source.cargo + 1
-									setCommsMessage(string.format(_("upgrade-comms", "Thanks for bringing us %s. Your beam weapons now generate less heat when firing"),comms_source.lisbonPart))
+									setCommsMessage(string.format(_("upgradeAudio3-comms", "Thanks for bringing us %s. Your beam weapons now generate less heat when firing"),comms_source.lisbonPart))
 								else
-									setCommsMessage(string.format(_("upgrade-comms", "The algorithm requires components we don't have right now. Please bring us some %s and we can apply the upgrade"),comms_source.lisbonPart))
+									setCommsMessage(string.format(_("upgradeAudio3-comms", "The algorithm requires components we don't have right now. Please bring us some %s and we can apply the upgrade"),comms_source.lisbonPart))
 								end
 							else
 								lisbonBeamUpgrade()
-								setCommsMessage(_("upgrade-comms", "Your beam weapons now generate less heat when firing."))
+								setCommsMessage(_("upgradeAudio3-comms", "Your beam weapons now generate less heat when firing."))
 							end
 						end
 					end
@@ -5104,13 +5104,13 @@ function handleDockedState()
 								comms_source.goods[comms_source.artifactUpgradePart] = comms_source.goods[comms_source.artifactUpgradePart] - 1
 								comms_source.cargo = comms_source.cargo + 1
 								artifactUpgrade()
-								setCommsMessage(string.format(_("upgrade-comms", "We needed that %s, thanks. Your maneuverability has been significantly improved"),comms_source.artifactUpgradePart))
+								setCommsMessage(string.format(_("upgradeAudio4-comms", "We needed that %s, thanks. Your maneuverability has been significantly improved"),comms_source.artifactUpgradePart))
 							else
-								setCommsMessage(string.format(_("upgrade-comms", "To upgrade, we need you to bring us some %s"),comms_source.artifactUpgradePart))
+								setCommsMessage(string.format(_("upgradeAudio4-comms", "To upgrade, we need you to bring us some %s"),comms_source.artifactUpgradePart))
 							end
 						else
 							artifactUpgrade()
-							setCommsMessage(_("upgrade-comms", "Your maneuverability has been significantly improved"))
+							setCommsMessage(_("upgradeAudio4-comms", "Your maneuverability has been significantly improved"))
 						end
 					end
 					addCommsReply(_("Back"), commsStation)

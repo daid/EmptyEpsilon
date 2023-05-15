@@ -2503,7 +2503,7 @@ msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:4971
 #, lua-format
-msgctxt "upgrade-comms"
+msgctxt "upgradeAudio1-comms"
 msgid ""
 "Thanks for the %s. Your beam weapons now have improved range, cycle time and "
 "damage."
@@ -2513,7 +2513,7 @@ msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:4973
 #, lua-format
-msgctxt "upgrade-comms"
+msgctxt "upgradeAudio1"
 msgid ""
 "We find ourselves short of %s. Please bring us some of that kind of cargo "
 "and we can upgrade your beams"
@@ -2522,7 +2522,7 @@ msgstr ""
 "ce type de marchandises et nous pourrons améliorer vos faisceaux."
 
 #: scripts/scenario_54_PatrolDuty.lua:4977
-msgctxt "upgrade-comms"
+msgctxt "upgradeAudio1-comms"
 msgid "Your beam weapons now have improved range, cycle time and damage."
 msgstr ""
 "Vos faisceaux laser ont désormais une portée, un temps de cycle et une "
@@ -2542,7 +2542,7 @@ msgstr "Vous avez déjà effectué cette mise à niveau."
 
 #: scripts/scenario_54_PatrolDuty.lua:5017
 #, lua-format
-msgctxt "upgrade-comms"
+msgctxt "upgradeAudio2-comms"
 msgid "Thanks for the %s. Your impulse engines now have improved speed"
 msgstr ""
 "Merci pour le %s. Vos moteurs à impulsion ont maintenant une vitesse "
@@ -2550,7 +2550,7 @@ msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:5020
 #, lua-format
-msgctxt "upgrade-comms"
+msgctxt "upgradeAudio2-comms"
 msgid ""
 "We're short of %s. Please bring us some of that kind of cargo and we can "
 "upgrade your impulse engines"
@@ -2559,7 +2559,7 @@ msgstr ""
 "marchandise et nous pourrons améliorer vos moteurs à impulsion."
 
 #: scripts/scenario_54_PatrolDuty.lua:5028
-msgctxt "upgrade-comms"
+msgctxt "upgradeAudio2-comms"
 msgid "Your impulse engines now have improved speed"
 msgstr "Vos moteurs à impulsion ont maintenant une vitesse améliorée."
 
@@ -2572,7 +2572,7 @@ msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:5066
 #, lua-format
-msgctxt "upgrade-comms"
+msgctxt "upgradeAudio3-comms"
 msgid ""
 "Thanks for bringing us %s. Your beam weapons now generate less heat when "
 "firing"
@@ -2582,7 +2582,7 @@ msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:5068
 #, lua-format
-msgctxt "upgrade-comms"
+msgctxt "upgradeAudio3-comms"
 msgid ""
 "The algorithm requires components we don't have right now. Please bring us "
 "some %s and we can apply the upgrade"
@@ -2592,7 +2592,7 @@ msgstr ""
 "niveau."
 
 #: scripts/scenario_54_PatrolDuty.lua:5072
-msgctxt "upgrade-comms"
+msgctxt "upgradeAudio3-comms"
 msgid "Your beam weapons now generate less heat when firing."
 msgstr "Vos faisceaux laser génèrent désormais moins de chaleur lors des tirs."
 
@@ -2603,7 +2603,7 @@ msgstr "Mettre à jour le système de manœuvre"
 
 #: scripts/scenario_54_PatrolDuty.lua:5107
 #, lua-format
-msgctxt "upgrade-comms"
+msgctxt "upgradeAudio4-comms"
 msgid ""
 "We needed that %s, thanks. Your maneuverability has been significantly "
 "improved"
@@ -2613,14 +2613,14 @@ msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:5109
 #, lua-format
-msgctxt "upgrade-comms"
+msgctxt "upgradeAudio4-comms"
 msgid "To upgrade, we need you to bring us some %s"
 msgstr ""
 "Pour pouvoir effectuer cette mise à niveau, nous avons besoin que vous nous "
 "rapportiez du %s."
 
 #: scripts/scenario_54_PatrolDuty.lua:5113
-msgctxt "upgrade-comms"
+msgctxt "upgradeAudio4-comms"
 msgid "Your maneuverability has been significantly improved"
 msgstr "Nous avons considérablement amélioré votre système de manœuvre."
 
