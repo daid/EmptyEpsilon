@@ -2727,7 +2727,7 @@ msgstr "Si cela vous intéresse, %s se trouve en %s."
 #: scripts/scenario_55_defenderHunter.lua:6060
 msgctxt "upgrade-comms"
 msgid "Upgrade maneuverability"
-msgstr "Mettre à jour le système de manoeuvre."
+msgstr "Mettre à jour le système de manoeuvre"
 
 #: scripts/scenario_55_defenderHunter.lua:6070
 msgctxt "upgrade-comms"

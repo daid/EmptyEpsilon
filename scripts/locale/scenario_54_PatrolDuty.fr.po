@@ -28,7 +28,7 @@ msgstr ""
 "- Difficulté :  ***  (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"TRADUCTION EN COURS 93%\n"
+"TRADUCTION EN COURS 100% (A CHECKER)\n"
 "\n"
 "Mission : Patrouillez entre 3 stations dans le quadrant Delta pour vous "
 "protéger des ennemis.\n"
@@ -61,7 +61,7 @@ msgstr "Int. 3 Balade McNabbit"
 #: scripts/scenario_54_PatrolDuty.lua:163
 msgctxt "buttonGM"
 msgid "St p4 Lisbon's stowaway"
-msgstr "Int4 Clandestin Lisbonne"
+msgstr "Int4 Clandestin Lisbon"
 
 #: scripts/scenario_54_PatrolDuty.lua:164
 msgctxt "buttonGM"
@@ -86,12 +86,12 @@ msgstr "Intrigue 9 Embuscade"
 #: scripts/scenario_54_PatrolDuty.lua:168
 msgctxt "buttonGM"
 msgid "Skip to defend U.P."
-msgstr "Passer pour défendre U.P."
+msgstr "Passer pour défendre UP"
 
 #: scripts/scenario_54_PatrolDuty.lua:169
 msgctxt "buttonGM"
 msgid "Skip to destroy S.C."
-msgstr "Passer pour détruire S.C."
+msgstr "Passer pour détruire SC"
 
 #: scripts/scenario_54_PatrolDuty.lua:325
 msgctxt "scienceDescription-station"
@@ -1375,9 +1375,9 @@ msgid ""
 "Patrol Asimov, Utopia Planitia and Armstrong stations. Defend if enemies "
 "attack. Dock with each station at the end of each patrol leg"
 msgstr ""
-"Patrouillez les stations Asimov, Utopia Planitia et Armstrong.\n"
-"Défendez-vous si les ennemis attaquent. Amarrez-vous à chaque station à la "
-"fin de chaque étape de patrouille."
+"Patrouiller autour des stations Asimov, Utopia Planitia et Armstrong.\n"
+"S'amarrer à chaque station à la fin de chaque étape de patrouille.\n"
+"Vous défendre si les ennemis attaquent."
 
 #: scripts/scenario_54_PatrolDuty.lua:3533
 msgctxt "scienceDescription-artifact"
@@ -1688,6 +1688,7 @@ msgid ""
 "   %i Minutes remain in game"
 msgstr ""
 "\n"
+"\n"
 "   %i minutes restantes dans le jeu."
 
 #: scripts/scenario_54_PatrolDuty.lua:4428
@@ -1698,7 +1699,8 @@ msgid ""
 "Patrol mission complete"
 msgstr ""
 "\n"
-"Mission de patrouille terminée."
+"\n"
+"    Mission de patrouille terminée."
 
 #: scripts/scenario_54_PatrolDuty.lua:4431
 #: scripts/scenario_54_PatrolDuty.lua:5566
@@ -1708,6 +1710,7 @@ msgid ""
 "\n"
 "   patrol is %.2f percent complete"
 msgstr ""
+"\n"
 "\n"
 "   Patrouille complétée à %.2f."
 
@@ -1719,6 +1722,7 @@ msgid ""
 "   Least patrolled station: Utopia Panitia"
 msgstr ""
 "\n"
+"\n"
 "   Station la moins patrouillée : Utopia Panitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:4437
@@ -1728,6 +1732,7 @@ msgid ""
 "\n"
 "   Most patrolled station: Utopia Planitia"
 msgstr ""
+"\n"
 "\n"
 "   Station la plus patrouillée : Utopia Panitia"
 
@@ -1739,6 +1744,7 @@ msgid ""
 "   Least patrolled station: Asimov"
 msgstr ""
 "\n"
+"\n"
 "   Station la moins patrouillée : Asimov"
 
 #: scripts/scenario_54_PatrolDuty.lua:4443
@@ -1749,7 +1755,8 @@ msgid ""
 "   Most patrolled station: Asimov"
 msgstr ""
 "\n"
-"   Station la plus patrouillée : Asimov"
+"\n"
+"    Station la plus patrouillée : Asimov"
 
 #: scripts/scenario_54_PatrolDuty.lua:4447
 #: scripts/scenario_54_PatrolDuty.lua:5583
@@ -1758,6 +1765,7 @@ msgid ""
 "\n"
 "   Least patrolled station: Armstrong"
 msgstr ""
+"\n"
 "\n"
 "   Station la moins patrouillée : Armstrong"
 
@@ -1768,6 +1776,7 @@ msgid ""
 "\n"
 "   Most patrolled station: Armstrong"
 msgstr ""
+"\n"
 "\n"
 "   Station la plus patrouillée : Armstrong"
 
@@ -1872,12 +1881,12 @@ msgstr "Réparateur embauché."
 
 #: scripts/scenario_54_PatrolDuty.lua:4477
 #, lua-format
-msgctxt "trade-comms"
+msgctxt "defTelemetry-comms"
 msgid "Establish defensive telemetry link (%i rep)"
 msgstr "Établir un lien télémétrique de défense (%i rép)"
 
 #: scripts/scenario_54_PatrolDuty.lua:4480
-msgctxt "trade-comms"
+msgctxt "defTelemetry-comms"
 msgid ""
 "Automated telemetry for shields and hull established.\n"
 "Damage summary should appear on Relay when damage taken"
@@ -1963,7 +1972,7 @@ msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 #: scripts/scenario_54_PatrolDuty.lua:4590
 msgctxt "cartographyOffice-comms"
 msgid "Visit cartography office"
-msgstr "Visiter le bureau de cartographie"
+msgstr "Consulter le bureau de cartographie"
 
 #: scripts/scenario_54_PatrolDuty.lua:4594
 msgctxt "cartographyOffice-comms"
@@ -1971,8 +1980,8 @@ msgid ""
 "The clerk behind the desk looks up briefly at you then goes back to filing "
 "her nails."
 msgstr ""
-"L'employée derrière le bureau vous regarde brièvement puis se remet à limer "
-"ses ongles."
+"[L'employée derrière son bureau vous regarde brièvement… puis se remet à se "
+"limer les ongles.]"
 
 #: scripts/scenario_54_PatrolDuty.lua:4596
 msgctxt "cartographyOffice-comms"
@@ -1980,8 +1989,8 @@ msgid ""
 "The clerk behind the desk examines you then returns to grooming her "
 "tentacles."
 msgstr ""
-"L'employée derrière le bureau vous examine puis se remet à toiletter ses "
-"tentacules."
+"[L'employée derrière son bureau vous examine d'un regard intrigué… puis se "
+"remet à toiletter ses tentacules.]"
 
 #: scripts/scenario_54_PatrolDuty.lua:4598
 msgctxt "cartographyOffice-comms"
@@ -1989,8 +1998,8 @@ msgid ""
 "The clerk behind the desk glances at you then returns to preening her "
 "feathers."
 msgstr ""
-"L'employée derrière le bureau jette un rapide coup d'œil sur vous puis se "
-"remet à se lisser les plumes."
+"[L'employée derrière son bureau jette un rapide coup d'œil sur vous puis se "
+"remet aussitôt à son passe-temps : se lisser les plumes.]"
 
 #: scripts/scenario_54_PatrolDuty.lua:4601
 #, lua-format
@@ -2003,8 +2012,8 @@ msgid ""
 msgstr ""
 "%s\n"
 "\n"
-"Vous pouvez examiner la brochure sur la table basse, parler à l'apprenti "
-"cartographe ou parler au maître cartographe."
+"Vous pouvez consulter la brochure sur la table basse, parler à l'apprenti "
+"cartographe ou bien encore parler au maître cartographe."
 
 #: scripts/scenario_54_PatrolDuty.lua:4602
 msgctxt "cartographyOffice-comms"
@@ -2018,10 +2027,13 @@ msgid ""
 "and is learning the broader area. The master knows the local and the broader "
 "area but can't be bothered with the local area'"
 msgstr ""
-"L'employée vous répond d'une voix ennuyée : \"L'apprenti connaît la région "
-"proche et apprend encore la région plus éloignée. Le maître connaît la "
-"région proche et la plus éloignée mais ne peut pas être dérangé pour la "
-"région proche\"."
+"L'employée vous répond d'une voix assomante :\n"
+"\n"
+"\"L'apprenti connaît bien la région proche mais apprend encore les régions "
+"les plus éloignées. Le maître, lui, connaît bien toutes les régions "
+"jusqu'aux plus éloignées. Cependant, vous ne pouvez pas déranger le maître "
+"comme ça juste pour des renseignements concernant la région proche.\n"
+"Dans ce cas adressez-vous à l'apprenti.\""
 
 #: scripts/scenario_54_PatrolDuty.lua:4606
 #, lua-format
@@ -2034,8 +2046,8 @@ msgctxt "cartographyOffice-comms"
 msgid ""
 "The brochure has a list of nearby stations and has a list of goods nearby"
 msgstr ""
-"La brochure contient une liste des stations à proximité et une liste des "
-"marchandises à proximité."
+"Cette brochure contient la liste des stations et marchandises se trouvant à "
+"proximité."
 
 #: scripts/scenario_54_PatrolDuty.lua:4609
 #, lua-format
@@ -2213,7 +2225,7 @@ msgid ""
 "\n"
 "I just want you to get the maximum benefit for the time you spend with him"
 msgstr ""
-"L'employée s'éclaircit la gorge :\n"
+"[L'employée s'éclaircit la gorge :]\n"
 "\n"
 "Ma console m'indique que vous n'avez aucun marqueur de disponible. Pour "
 "tirer le meilleur parti de votre échange avec le maître cartographe, vous "
@@ -2240,8 +2252,7 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles à la vente : quantité, coût en "
-"réputation :\n"
+"Marchandises ou composants à vendre : quantité, coût en rép. :\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:4772
 #, lua-format
@@ -2253,7 +2264,8 @@ msgstr "     %s: %i, %i\n"
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
 msgstr ""
-"Marchandises ou composants que la station achètera : (prix en réputation)\n"
+"\n"
+"Marchandises ou composants que la station achète : prix en rép.\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:4777
 #: scripts/scenario_54_PatrolDuty.lua:4786
@@ -2266,7 +2278,9 @@ msgstr "     %s : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
-msgstr "Cargaison actuelle à bord de %s :\n"
+msgstr ""
+"\n"
+"Cargaison actuelle à bord du %s :\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:4790
 msgctxt "trade-comms"
@@ -2277,7 +2291,9 @@ msgstr "     Vide\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Espace disponible : %i, Réputation disponible : %i\n"
+msgstr ""
+"\n"
+"Espace disponible : %i, Rép. disponible : %i\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:4795
 #: scripts/scenario_54_PatrolDuty.lua:5890
@@ -2453,14 +2469,26 @@ msgstr "Utopia Planitia"
 #: scripts/scenario_54_PatrolDuty.lua:4937
 msgctxt "upgrade-comms"
 msgid "Check maintenance bay for ship upgrade"
-msgstr "Vérifier la baie de maintenance pour la mise à niveau du vaisseau."
+msgstr "Accéder à la baie de maintenance pour la mise à niveau du vaisseau"
+
+#: scripts/scenario_54_PatrolDuty.lua:4938
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"Greetings %s,\n"
+"Welcome to the ship maintenance bay of %s. What can we do for you?"
+msgstr ""
+"Salutations %s,\n"
+"Bienvenue dans la baie de maintenance des vaisseaux de %s. Que pouvons-nous "
+"faire pour vous ?"
 
 #: scripts/scenario_54_PatrolDuty.lua:4940
 msgctxt "upgrade-comms"
 msgid "Upgrade beam weapons with Joshua Kojak's research"
-msgstr "Améliorer les faisceaux laser grâce aux recherches de Joshua Kojak."
+msgstr "Améliorer nos faisceaux laser grâce aux recherches de Joshua Kojak."
 
 #: scripts/scenario_54_PatrolDuty.lua:4942
+#: scripts/scenario_54_PatrolDuty.lua:5038
 msgctxt "upgrade-comms"
 msgid "You already have the upgrade."
 msgstr "Vous avez déjà effectué cette mise à niveau."
@@ -2503,9 +2531,7 @@ msgstr ""
 #: scripts/scenario_54_PatrolDuty.lua:4986
 msgctxt "upgrade-comms"
 msgid "Upgrade impulse engines with Dan McNabbit's tuning parameters"
-msgstr ""
-"Améliorer les moteurs à impulsion avec les paramètres de réglage de Dan "
-"McNabbit."
+msgstr "Améliorer nos moteurs avec les paramètres de réglage de Dan McNabbit"
 
 #: scripts/scenario_54_PatrolDuty.lua:4988
 #: scripts/scenario_54_PatrolDuty.lua:5082
@@ -2541,8 +2567,8 @@ msgstr "Vos moteurs à impulsion ont maintenant une vitesse améliorée."
 msgctxt "upgrade-comms"
 msgid "Apply Commander Lisbon's beam cooling algorithm"
 msgstr ""
-"Appliquer l'algorithme de refroidissement des faisceaux laser du commandant "
-"Lisbon."
+"Appliquer l'algorithme de refroidissement des faisceaux de la commandante "
+"Lisbon"
 
 #: scripts/scenario_54_PatrolDuty.lua:5066
 #, lua-format
@@ -2573,7 +2599,7 @@ msgstr "Vos faisceaux laser génèrent désormais moins de chaleur lors des tirs
 #: scripts/scenario_54_PatrolDuty.lua:5080
 msgctxt "upgrade-comms"
 msgid "Upgrade maneuverability"
-msgstr "Mettre à jour le système de manoeuvre."
+msgstr "Mettre à jour le système de manœuvre"
 
 #: scripts/scenario_54_PatrolDuty.lua:5107
 #, lua-format
@@ -2601,8 +2627,7 @@ msgstr "Nous avons considérablement amélioré votre système de manœuvre."
 #: scripts/scenario_54_PatrolDuty.lua:5120
 msgctxt "upgrade-comms"
 msgid "Add homing missile tube upgrade"
-msgstr ""
-"Effectuer la mise à niveau du tube de missile à tête chercheuse (homing)."
+msgstr "Ajouter un tube lance-missiles à tête chercheuse (homing)"
 
 #: scripts/scenario_54_PatrolDuty.lua:5169
 #, lua-format
@@ -2629,13 +2654,13 @@ msgid ""
 "Greetings,\n"
 "May I help you find a station or goods?"
 msgstr ""
-"Bien le bonjour,\n"
-"Puis-je vous aider à trouver une station ou des marchandises ?"
+"Bien le bonjour jeune officier,\n"
+"Puis-je vous aider à localiser une station ou des marchandises ?"
 
 #: scripts/scenario_54_PatrolDuty.lua:5190
 msgctxt "cartographyOffice-comms"
 msgid "Find station"
-msgstr "Trouver une station"
+msgstr "Localiser une station"
 
 #: scripts/scenario_54_PatrolDuty.lua:5191
 msgctxt "cartographyOffice-comms"
@@ -3245,7 +3270,7 @@ msgid ""
 "Welcome to the delta quadrant, %s. The independent stations in the area "
 "outnumber the human naval stations, but they all rely on us to protect them."
 msgstr ""
-"%s, bienvenue dans le quadrant Delta.\n"
+"Bienvenue dans le quadrant Delta, équipage du %s,\n"
 "Dans cette région, les stations indépendantes sont plus nombreuses que les "
 "stations de la marine humaine, mais elles comptent toutes sur nous pour les "
 "protéger."
@@ -3268,10 +3293,12 @@ msgstr ""
 "navales humaines : Asimov, Utopia Planitia et Armstrong. Vous devrez à "
 "chaque fois vous amarrer à ces stations. Des systèmes automatisés extrairont "
 "vos itinéraires et suivront vos progrès.\n"
+"\n"
 "L'objectif principal de votre patrouille est de surveiller les vaisseaux "
 "ennemis et de les intercepter avant qu'ils n'attaquent et ne détruisent nos "
 "3 stations. Les ennemis pouvant attaquer les autres stations du secteur, "
 "votre objectif secondaire est de les protéger également.\n"
+"\n"
 "Répandez la bienveillance et la confiance dans ce quadrant en pleine "
 "croissance et à forte valeur. Nos ennemis revendiquent ardemment ce quadrant "
 "et nous mènent la vie dure."
@@ -3313,85 +3340,109 @@ msgid ""
 "repair and replenish if desired. Oh yes, I almost forgot, you're still "
 "responsible for protecting stations Asimov, Armstrong and Utopia Planitia"
 msgstr ""
+"Vous avez terminé votre mission de patrouille, mais les vaisseaux ennemis "
+"infestent toujours la zone. Assurez-vous de la nettoyer de tout danger.\n"
+"Les lectures combinées des capteurs des stations de la zone indiquent qu'il "
+"reste encore %i vaisseaux ennemis.\n"
+"N'hésitez pas à vous amarrer aux stations pour réparer et vous "
+"réapprovisionner si nécessaire.\n"
+" Bonne chance !\n"
+"…Ah oui, j'ai failli oublier, vous êtes toujours en charge de la protection "
+"des stations Asimov, Armstrong et Utopia Planitia."
 
 #: scripts/scenario_54_PatrolDuty.lua:6756
-msgctxt "orders-shipLog"
+msgctxt "UPlanitia1Orders-shipLog"
 msgid "Stop patrol and Defend Utopia Planitia"
 msgstr "Arrêter de patrouiller et défendre Utopia Planitia."
 
 #: scripts/scenario_54_PatrolDuty.lua:6762
-msgctxt "audioUPlanitiaDefend-incCall"
+msgctxt "UPlanitia1Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed to log, stored for playback: "
 "UTPLNT441"
 msgstr ""
+"Message audio reçu. Provenance : Technicien radar - Station Utopia Planitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:6763
-msgctxt "audioUPlanitiaDefend-shipLog"
+msgctxt "UPlanitia1Audio-shipLog"
 msgid ""
 "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy "
 "ships approaching. Cease patrolling other stations and defend station Utopia "
 "Planitia"
 msgstr ""
+"[Technicien radar - Station Utopia Planitia] Nos capteurs à longue portée "
+"détectent un certain nombre de vaisseaux ennemis en approche.\n"
+"Arrêtez de patrouiller les autres stations et défendez la station Utopia "
+"Planitia."
 
 #: scripts/scenario_54_PatrolDuty.lua:6766
-msgctxt "audioUPlanitiaDefend-buttonRelay"
+msgctxt "UPlanitia1Audio-buttonRelay"
 msgid "|> UTPLNT441"
-msgstr ""
+msgstr "|> Station UPlanitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:6768
-msgctxt "audioUPlanitiaDefend-buttonOperations"
+msgctxt "UPlanitia1Audio-buttonOperations"
 msgid "|> UTPLNT441"
-msgstr ""
+msgstr "|> Station UPlanitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:6771
-msgctxt "audioUPlanitiaDefend-incCall"
+msgctxt "UPlanitia1Audio-incCall"
 msgid ""
 "Our long range sensors show a number of enemy ships approaching. Cease "
 "patrolling other stations and defend station Utopia Planitia"
 msgstr ""
+"Nos capteurs à longue portée détectent un certain nombre de vaisseaux "
+"ennemis en approche.\n"
+"Arrêtez de patrouiller les autres stations et défendez la station Utopia "
+"Planitia."
 
 #: scripts/scenario_54_PatrolDuty.lua:6772
-msgctxt "audioUPlanitiaDefendOrders-comms"
+msgctxt "UPlanitia1AudioOrders-comms"
 msgid "Defend Utopia Planitia"
-msgstr ""
+msgstr "Défendre Utopia Planitia."
 
 #: scripts/scenario_54_PatrolDuty.lua:6837
-msgctxt "audioUPlanitiaEnnemies-incCall"
+msgctxt "UPlanitia2Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed to log, stored for playback: "
 "UTPLNT477"
 msgstr ""
+"Message audio reçu. Provenance : Technicien radar - Station Utopia Planitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:6838
-msgctxt "audioUPlanitiaEnnemies-shipLog"
+msgctxt "UPlanitia2Audio-shipLog"
 msgid ""
 "[UTPLNT477](Utopia Planitia) You have taken care of the closest enemies. Our "
 "extreme range sensors show more, but they should not arrive for a couple of "
 "minutes"
 msgstr ""
+"[Technicien radar - Station Utopia Planitia] Vous vous êtes occupé des "
+"ennemis les plus proches. Nos capteurs à très longue portée en détectent "
+"plus. Ils devraient arriver d'ici quelques minutes."
 
 #: scripts/scenario_54_PatrolDuty.lua:6841
-msgctxt "audioUPlanitiaEnnemies-buttonRelay"
+msgctxt "UPlanitia2Audio-buttonRelay"
 msgid "|> UTPLNT477"
-msgstr ""
+msgstr "|> Station UPlanitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:6843
-msgctxt "audioUPlanitiaEnnemies-buttonOperations"
+msgctxt "UPlanitia2Audio-buttonOperations"
 msgid "|> UTPLNT477"
-msgstr ""
+msgstr "|> Station UPlanitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:6849
-msgctxt "audioUPlanitiaEnnemies-shipLog"
+msgctxt "UPlanitia2Audio-shipLog"
 msgid "Nearest ships cleared. More to come shortly"
 msgstr ""
+"Les vaisseaux les plus proches ont été éliminés. D'autres sont à venir sous "
+"peu."
 
 #: scripts/scenario_54_PatrolDuty.lua:6962
 #, lua-format
-msgctxt "-shipLog"
+msgctxt "strongHold-shipLog"
 msgid ""
-"Enemy base nearby located in secctor %s. Fleet assembled near Utopia "
-"Planitia to assist if needed. Destroy base."
+"Enemy base nearby located in sector %s. Fleet assembled near Utopia Planitia "
+"to assist if needed. Destroy base."
 msgstr ""
 "Base ennemie à proximité située dans le secteur %s. Notre flotte s'est "
 "rassemblée près d'Utopia Planitia pour vous aider si nécessaire.\n"
@@ -3399,53 +3450,54 @@ msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:6965
 #, lua-format
-msgctxt "orders-comms"
+msgctxt "strongHoldOrders-comms"
 msgid "Destroy enemy base in sector %s"
 msgstr "Détruire la base ennemie dans le secteur %s."
 
 #: scripts/scenario_54_PatrolDuty.lua:7030
-msgctxt "audioAsimov-incCall"
+msgctxt "Asimov1Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "ASMVSNSR003"
-msgstr ""
-"Message audio reçu. Provenance : Technicien de capteurs - Station Asimov"
+msgstr "Message audio reçu. Provenance : Technicien radar - Station Asimov"
 
 #: scripts/scenario_54_PatrolDuty.lua:7031
-msgctxt "audioAsimov-shipLog"
+msgctxt "Asimov1Audio-shipLog"
 msgid ""
 "[ASMVSNSR003](Asimov sensor technician) Our long range sensors show enemies "
 "approaching"
 msgstr ""
-"[Technicien de capteurs - Station Asimov] Nos capteurs à longue portée nous "
-"indiquent des ennemis en approche."
+"[Technicien radar - Station Asimov] Nos capteurs à longue portée détectent "
+"des ennemis en approche."
 
 #: scripts/scenario_54_PatrolDuty.lua:7034
-msgctxt "audioAsimov-buttonRelay"
+msgctxt "Asimov1Audio-buttonRelay"
 msgid "|> ASMVSNSR003"
 msgstr "|> Station Asimov"
 
 #: scripts/scenario_54_PatrolDuty.lua:7036
-msgctxt "audioAsimov-buttonOperations"
+msgctxt "Asimov1Audio-buttonOperations"
 msgid "|> ASMVSNSR003"
 msgstr "|> Station Asimov"
 
 #: scripts/scenario_54_PatrolDuty.lua:7083
 #, lua-format
-msgctxt "audioSickMiner1-"
-msgid "Pick up Joshua Kojack from %s in sector %s and take him to Bethesda"
+msgctxt "Kojak1AudioOrders-comms"
+msgid "Pick up Joshua Kojak from %s in sector %s and take him to Bethesda"
 msgstr ""
+"Récupérer Joshua Kojak sur la station minère %s en secteur %s et l'emmener "
+"sur Bethesda."
 
 #: scripts/scenario_54_PatrolDuty.lua:7087
-msgctxt "audioSickMiner1-incCall"
+msgctxt "Kojak1Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "MINSTN014"
-msgstr ""
+msgstr "Message audio reçu. Provenance : Infirmerie - Station minière"
 
 #: scripts/scenario_54_PatrolDuty.lua:7088
 #, lua-format
-msgctxt "audioSickMiner1-shipLog"
+msgctxt "Kojak1Audio-shipLog"
 msgid ""
 "[MINSTN014](%s in sector %s) Joshua Kojak has come down with something our "
 "autodoc can't handle. He's supposed to be helping us mine these asteroids, "
@@ -3453,46 +3505,50 @@ msgid ""
 "Bethesda station? I hear they've got some clever doctors there that might "
 "help."
 msgstr ""
+"[Infirmerie- Station minière] (%s en secteur %s) Joshua Kojak est diminué "
+"par un virus que notre autodoc ne peut pas soigner. Il est censé nous aider "
+"à extraire ces astéroïdes, mais il ne peut rien faire de bien tant qu'il est "
+"malade.\n"
+"Pourriez-vous le transporter sur Bethesda ? J'ai entendu dire qu'ils avaient "
+"des médecins de qualité là-bas qui pourraient le soigner."
 
 #: scripts/scenario_54_PatrolDuty.lua:7091
-msgctxt "audioSickMiner1-buttonRelay"
+msgctxt "Kojak1Audio-buttonRelay"
 msgid "|> MINSTN014"
-msgstr ""
+msgstr "|> Station minière"
 
 #: scripts/scenario_54_PatrolDuty.lua:7093
-msgctxt "audioSickMiner1-buttonOperations"
+msgctxt "Kojak1Audio-buttonOperations"
 msgid "|> MINSTN014"
-msgstr ""
+msgstr "|> Station minière"
 
 #: scripts/scenario_54_PatrolDuty.lua:7116
-#, fuzzy
-msgctxt "audioSickMiner2-incCall"
+msgctxt "Kojak2Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "MINSTN019"
-msgstr "Message audio reçu. Provenance : ... - Station minière"
+msgstr "Message audio reçu. Provenance : Infirmerie - Station minière"
 
 #: scripts/scenario_54_PatrolDuty.lua:7117
-#, fuzzy
-msgctxt "audioSickMiner2-shipLog"
+msgctxt "Kojak2Audio-shipLog"
 msgid ""
 "[MINSTN019]Thanks for getting Joshua aboard. Please take him to Bethesda"
 msgstr ""
-"[ ... - Station minière] Merci d'avoir accepté Joshua à votre bord. S'il "
-"vous plaît, emmenez-le sur Bethesda."
+"[Infirmerie - Station minière] Merci d'avoir pris Joshua à votre bord. S'il "
+"vous plaît, emmenez-le vite sur Bethesda."
 
 #: scripts/scenario_54_PatrolDuty.lua:7121
-msgctxt "audioSickMiner2-buttonRelay"
+msgctxt "Kojak2Audio-buttonRelay"
 msgid "|> MINSTN019"
 msgstr "|> Station minière"
 
 #: scripts/scenario_54_PatrolDuty.lua:7123
-msgctxt "audioSickMiner2-buttonOperations"
+msgctxt "Kojak2Audio-buttonOperations"
 msgid "|> MINSTN019"
 msgstr "|> Station minière"
 
 #: scripts/scenario_54_PatrolDuty.lua:7143
-msgctxt "audioBethesda1-incCall"
+msgctxt "Kojak3Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "BTHSDA002"
@@ -3501,52 +3557,57 @@ msgstr ""
 "Bethesda"
 
 #: scripts/scenario_54_PatrolDuty.lua:7144
-msgctxt "audioBethesda1-shipLog"
+msgctxt "Kojak3Audio-shipLog"
 msgid ""
 "[BTHSDA002] Joshua Kojak is being treated. He shows every sign of recovering"
 msgstr ""
-"[Officier des communications - Station Bethesda] Joshua Kojak est pris en "
-"charge et se fait actuellement soigner. Il montre tous les signes de "
-"rétablissement."
+"[Officier des communications - Station Bethesda] Joshua Kojak a été pris en "
+"charge par notre service médical et se fait actuellement soigner. Il montre "
+"déjà des premiers signes de rétablissement."
 
 #: scripts/scenario_54_PatrolDuty.lua:7147
-msgctxt "audioBethesda1-buttonRelay"
+msgctxt "Kojak3Audio-buttonRelay"
 msgid "|> BTHSDA002"
 msgstr "|> Station Bethesda"
 
 #: scripts/scenario_54_PatrolDuty.lua:7149
-msgctxt "audioBethesda1-buttonOperations"
+msgctxt "Kojak3Audio-buttonOperations"
 msgid "|> BTHSDA002"
 msgstr "|> Station Bethesda"
 
 #: scripts/scenario_54_PatrolDuty.lua:7174
-msgctxt "audioBethesda2-incCall"
+msgctxt "Kojak4Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "BTHSDA034"
-msgstr ""
+msgstr "Message audio reçu. Provenance : Joshua Kojak - Station Bethesda"
 
 #: scripts/scenario_54_PatrolDuty.lua:7175
-msgctxt "audioBethesda2-shipLog"
+msgctxt "Kojak4Audio-shipLog"
 msgid ""
 "[BTHSDA034](Joshua Kojak) Thanks for bringing me to Bethesda. I'm feeling "
 "much better. I'm transmitting my research on power systems and exotic "
 "metals. You may find it interesting. Mining leaves me lots of time for "
 "thinking"
 msgstr ""
+"[Joshua Kojak - Station Bethesda] Merci de m'avoir emmené sur Bethesda. Je "
+"me sens beaucoup mieux. Je vous transmets mes recherches sur les systèmes "
+"énergétiques et les métaux exotiques. Vous pourriez les trouver "
+"intéressantes. L'exploitation minière me laisse beaucoup de temps pour "
+"réfléchir."
 
 #: scripts/scenario_54_PatrolDuty.lua:7179
-msgctxt "audioBethesda2-buttonRelay"
+msgctxt "Kojak4Audio-buttonRelay"
 msgid "|> BTHSDA034"
-msgstr ""
+msgstr "|> Station Bethesda"
 
 #: scripts/scenario_54_PatrolDuty.lua:7181
-msgctxt "audioBethesda2-buttonOperations"
+msgctxt "Kojak4Audio-buttonOperations"
 msgid "|> BTHSDA034"
-msgstr ""
+msgstr "|> Station Bethesda"
 
 #: scripts/scenario_54_PatrolDuty.lua:7199
-msgctxt "minerDiscovery-msgScience"
+msgctxt "Kojak5-msgScience"
 msgid ""
 "While reading through Joshua Kojak's research, you discover a potential "
 "application to on-board ship systems. Click the 'Send to engineer' button to "
@@ -3560,7 +3621,7 @@ msgstr ""
 "Vous trouverez le bouton sous l'étiquette \"Scanner\"."
 
 #: scripts/scenario_54_PatrolDuty.lua:7201
-msgctxt "minerDiscovery-msgOperations"
+msgctxt "Kojak5-msgOperations"
 msgid ""
 "While reading through Joshua Kojak's research, you discover a potential "
 "application to on-board ship systems. Click the 'Send to engineer' button to "
@@ -3572,17 +3633,17 @@ msgstr ""
 "ces informations à l'ingénierie."
 
 #: scripts/scenario_54_PatrolDuty.lua:7203
-msgctxt "minerDiscovery-buttonScience"
+msgctxt "Kojak5-buttonScience"
 msgid "Send to engineer"
 msgstr "Envoyer à l'ingénieur"
 
 #: scripts/scenario_54_PatrolDuty.lua:7205
-msgctxt "minerDiscovery-buttonOperations"
+msgctxt "Kojak5-buttonOperations"
 msgid "Send to engineer"
 msgstr "Envoyer à l'ingénieur"
 
 #: scripts/scenario_54_PatrolDuty.lua:7226
-msgctxt "suggestWeapons-msgEngineer"
+msgctxt "Kojak6-msgEngineer"
 msgid ""
 "The science officer sent you some thoughts on Joshua Kojak's research. You "
 "think it applies to beam weapon improvement. Click the 'Send to weapons' "
@@ -3595,7 +3656,7 @@ msgstr ""
 "modifications à l'officier des armes."
 
 #: scripts/scenario_54_PatrolDuty.lua:7228
-msgctxt "suggestWeapons-msgEngineer+"
+msgctxt "Kojak6-msgEngineer+"
 msgid ""
 "The science officer sent you some thoughts on Joshua Kojak's research. You "
 "think it applies to beam weapon improvement. Click the 'Send to weapons' "
@@ -3608,62 +3669,62 @@ msgstr ""
 "modifications à l'officier des armes."
 
 #: scripts/scenario_54_PatrolDuty.lua:7230
-msgctxt "suggestWeapons-buttonEngineer"
+msgctxt "Kojak6-buttonEngineer"
 msgid "Send to weapons"
 msgstr "Envoyer à l'armement"
 
 #: scripts/scenario_54_PatrolDuty.lua:7232
-msgctxt "suggestWeapons-buttonEngineer+"
+msgctxt "Kojak6-buttonEngineer+"
 msgid "Send to weapons"
 msgstr "Envoyer à l'armement"
 
 #: scripts/scenario_54_PatrolDuty.lua:7259
-msgctxt "instructions-msgWeapons"
+msgctxt "Kojak7-msgWeapons"
 msgid ""
 "The engineer sent you some thoughts on Joshua Kojak's research. You know how "
 "to apply it to the beam weapons, but lack the tools to do it immediately. "
 "Click the 'Send to Utopia Planitia' button to transmit upgrade instructions "
 "to Utopia Planitia station"
 msgstr ""
-"L'ingénieur vous a envoyé quelques réflexions sur les recherches de Joshua "
-"Kojak. Vous savez comment l'appliquer aux faisceaux laser, mais il vous "
-"manque les outils pour le faire immédiatement.\n"
-"Cliquez sur le bouton \"Envoyer à Utopia Planitia\" pour transmettre les "
+"L'ingénieur de votre vaisseau vous a envoyé quelques réflexions sur les "
+"recherches de Joshua Kojak. Vous savez comment l'appliquer aux faisceaux "
+"laser, mais il vous manque les outils pour le faire immédiatement.\n"
+"Cliquez sur le bouton \"Envoyer à UPlanitia\" pour transmettre les "
 "instructions de mise à niveau des faisceaux à la station Utopia Planitia."
 
 #: scripts/scenario_54_PatrolDuty.lua:7261
-msgctxt "instructions-msgTactical"
+msgctxt "Kojak7-msgTactical"
 msgid ""
 "The engineer sent you some thoughts on Joshua Kojak's research. You know how "
 "to apply it to the beam weapons, but lack the tools to do it immediately. "
 "Click the 'Send to Utopia Planitia' button to transmit upgrade instructions "
 "to Utopia Planitia station"
 msgstr ""
-"L'ingénieur vous a envoyé quelques réflexions sur les recherches de Joshua "
-"Kojak. Vous savez comment l'appliquer aux faisceaux laser, mais il vous "
-"manque les outils pour le faire immédiatement.\n"
-"Cliquez sur le bouton \"Envoyer à Utopia Planitia\" pour transmettre les "
+"L'ingénieur de votre vaisseau vous a envoyé quelques réflexions sur les "
+"recherches de Joshua Kojak. Vous savez comment l'appliquer aux faisceaux "
+"laser, mais il vous manque les outils pour le faire immédiatement.\n"
+"Cliquez sur le bouton \"Envoyer à UPlanitia\" pour transmettre les "
 "instructions de mise à niveau des faisceaux à la station Utopia Planitia."
 
 #: scripts/scenario_54_PatrolDuty.lua:7263
-msgctxt "instructions-buttonWeapons"
+msgctxt "Kojak7-buttonWeapons"
 msgid "Send to Utopia Planitia"
-msgstr "Envoyer à Utopia Planitia"
+msgstr "Envoyer à UPlanitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:7265
-msgctxt "instructions-buttonTactical"
+msgctxt "Kojak7-buttonTactical"
 msgid "Send to Utopia Planitia"
-msgstr "Envoyer à Utopia Planitia"
+msgstr "Envoyer à UPlanitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:7291
-msgctxt "UtopiaPlanitia3-incCall"
+msgctxt "Koja8kUP-incCall"
 msgid "Thanks for the information. We can upgrade you next time you dock."
 msgstr ""
-"Nous avons bien reçu les informations. Nous pourrons vous faire la mise à "
+"Nous avons bien reçu les instructions. Nous pourrons vous faire la mise à "
 "niveau dès votre prochaine visite."
 
 #: scripts/scenario_54_PatrolDuty.lua:7292
-msgctxt "UtopiaPlanitia3-shipLog"
+msgctxt "Kojak8UP-shipLog"
 msgid ""
 "[Utopia Planitia] Thanks for the information. We can upgrade you next time "
 "you dock"
@@ -3672,36 +3733,35 @@ msgstr ""
 "faire la mise à niveau dès votre prochaine visite."
 
 #: scripts/scenario_54_PatrolDuty.lua:7333
-msgctxt "audioUPlanitiaIncursion-incCall"
+msgctxt "UPlanitia3Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "UTPLNT103"
 msgstr ""
-"Message audio reçu. Provenance : Technicien de capteurs - Station Utopia "
-"Planitia"
+"Message audio reçu. Provenance : Technicien radar - Station Utopia Planitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:7334
-msgctxt "audioUPlanitiaIncursion-shipLog"
+msgctxt "UPlanitia3Audio-shipLog"
 msgid ""
 "[UTPLNT103](Utopia Planitia sensor technician) Our long range sensors show "
 "enemies approaching"
 msgstr ""
-"[Technicien de capteurs - Station Utopia Planitia] Nos capteurs à longue "
-"portée nous indiquent des ennemis en approche."
+"[Technicien radar - Station Utopia Planitia] Nos capteurs à longue portée "
+"nous indiquent des ennemis en approche."
 
 #: scripts/scenario_54_PatrolDuty.lua:7338
-msgctxt "audioUPlanitiaIncursion-buttonRelay"
+msgctxt "UPlanitia3Audio-buttonRelay"
 msgid "|> UTPLNT103"
 msgstr "|> Station UPlanitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:7340
-msgctxt "audioUPlanitiaIncursion-buttonOperations"
+msgctxt "UPlanitia3Audio-buttonOperations"
 msgid "|> UTPLNT103"
 msgstr "|> Station UPlanitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:7378
 #, lua-format
-msgctxt "nabbit-shipLog"
+msgctxt "Nabbit1-shipLog"
 msgid "[%s in sector %s] Engineer Dan McNabbit requests a ride to Armstrong"
 msgstr ""
 "[%s en secteur %s] L'ingénieur Dan McNabbit demande à être transporté sur "
@@ -3709,44 +3769,46 @@ msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:7379
 #, lua-format
-msgctxt "nabbit-comms"
+msgctxt "Nabbit1Orders-comms"
 msgid "Pick up Dan McNabbit from %s in sector %s and take him to Armstrong"
 msgstr ""
-"Récupérez Dan McNabbit à %s dans le secteur %s et emmenez-le à Armstrong."
+"Récupérer Dan McNabbit à %s dans le secteur %s et l'emmener sur la station "
+"Armstrong."
 
 #: scripts/scenario_54_PatrolDuty.lua:7396
-msgctxt "nabbit-shipLog"
+msgctxt "Nabbit2-shipLog"
 msgid "Engineer Dan McNabbit aboard and ready to go to Armstrong"
 msgstr "Ingénieur Dan McNabbit à bord et prêt à partir pour Armstrong."
 
 #: scripts/scenario_54_PatrolDuty.lua:7419
-msgctxt "audioArmstrong-incCall"
+msgctxt "Nabbit3Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "ASTGDN038"
-msgstr "Communication interne : Dan McNabbit -Quartiers VIP"
+msgstr "Message audio reçu. Provenance : Dan McNabbit - Station Armstrong"
 
 #: scripts/scenario_54_PatrolDuty.lua:7420
-msgctxt "audioArmstrong-shipLog"
+msgctxt "Nabbit3Audio-shipLog"
 msgid ""
 "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse "
 "engines en route. I transmitted my engine tuning parameters to Utopia "
 "Planitia. Expect faster impulse speeds"
 msgstr ""
-"[Dan McNabbit - Quartiers VIP] Merci pour le trajet. J'ai réglé vos moteurs "
-"à impulsion durant le voyage. J'ai également transmis mes paramètres de "
+"[Dan McNabbit - Armstrong] Merci pour le trajet. J'ai réglé vos moteurs à "
+"impulsion durant le voyage. J'ai également transmis mes paramètres de "
 "réglage moteur à Utopia Planitia.\n"
-"Attendez-vous prochainement à de meilleures vitesses d'impulsion."
+"Attendez-vous prochainement à de meilleures vitesses d'impulsion.\n"
+"Bonne route !"
 
 #: scripts/scenario_54_PatrolDuty.lua:7430
-msgctxt "audioArmstrong-buttonRelay"
+msgctxt "Nabbit3Audio-buttonRelay"
 msgid "|> ASTGDN038"
-msgstr "|> Quartiers VIP"
+msgstr "|> Station Armstrong"
 
 #: scripts/scenario_54_PatrolDuty.lua:7432
-msgctxt "audioArmstrong-buttonOperations"
+msgctxt "Nabbit3Audio-buttonOperations"
 msgid "|> ASTGDN038"
-msgstr "|> Quartiers VIP"
+msgstr "|> Station Armstrong"
 
 #: scripts/scenario_54_PatrolDuty.lua:7459
 msgctxt "attackTimer-shipLog"
@@ -3757,88 +3819,108 @@ msgid ""
 "stations periodically to see if their normal sensors have picked up any "
 "enemy activity"
 msgstr ""
+"Les stations Asimov, Utopia Planitia et Armstrong nous informent que leurs "
+"capteurs longue portée ne détectent plus correctement au-delà de 30U de "
+"distance.\n"
+"Cela signifie sûrement que l'activité ennemie empêche les lectures précises "
+"des capteurs.\n"
+"Nous vous suggérons de vérifier régulièrement avec ces stations si leurs "
+"capteurs à courte portée détectent une activité ennemie."
 
 #: scripts/scenario_54_PatrolDuty.lua:7499
-msgctxt "audioBethesda3-incCall"
+msgctxt "Lisbon1Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
 "BTHSDA271"
-msgstr ""
+msgstr "Message audio reçu. Provenance : Officier - Station Bethesda"
 
 #: scripts/scenario_54_PatrolDuty.lua:7500
 #, lua-format
-msgctxt "audioBethesda3-shipLog"
+msgctxt "Lisbon1Audio-shipLog"
 msgid ""
 "[BTHSDA271] Commander Lisbon reports her child stowed away on a freighter. "
 "After extensive investigation, she believes Francis is aboard %s currently "
 "in sector %s\n"
 "She requests a rendezvous with the freighter to bring back her child"
 msgstr ""
+"[Officier - Station Bethesda] La commandante Lisbon nous a signalé que son "
+"enfant s'était embarqué clandestinement sur un cargo. Après enquête "
+"approfondie, elle pense que Francis se trouve à bord du %s, actuellement "
+"dans le secteur %s.\n"
+"Elle demande un point de rendez-vous avec le cargo pour récupérer son enfant."
 
 #: scripts/scenario_54_PatrolDuty.lua:7504
-msgctxt "audioBethesda3-buttonRelay"
+msgctxt "Lisbon1Audio-buttonRelay"
 msgid "|> BTHSDA271"
-msgstr ""
+msgstr "|> Station Bethesda"
 
 #: scripts/scenario_54_PatrolDuty.lua:7506
-msgctxt "audioBethesda3-buttonOperations"
+msgctxt "Lisbon1Audio-buttonOperations"
 msgid "|> BTHSDA271"
-msgstr ""
+msgstr "|> Station Bethesda"
 
 #: scripts/scenario_54_PatrolDuty.lua:7509
 #, lua-format
-msgctxt "audioBethesda3-comms"
+msgctxt "Lisbon1AudioOrders-comms"
 msgid ""
 "Retrieve Francis from freighter %s last reported in sector %s and return "
 "child to station Bethesda"
 msgstr ""
+"Récupérer Francis sur le cargo %s, signalé pour la dernière fois dans le "
+"secteur %s et ramener l'enfant à sa mère sur Bethesda."
 
 #: scripts/scenario_54_PatrolDuty.lua:7524
-msgctxt "francis-shipLog"
+msgctxt "Lisbon2-shipLog"
 msgid "The stowaway, Francis, is aboard. Commander Lisbon awaits at Bethesda"
 msgstr ""
-"Le passager clandestin, Francis, est à bord. Le commandant Lisbon vous "
-"attend sur Bethesda."
+"Le petit passager clandestin, Francis, est à bord. La commandante Lisbon "
+"vous attend sur Bethesda pour récupérer son fils."
 
 #: scripts/scenario_54_PatrolDuty.lua:7525
 #, lua-format
-msgctxt "francis-comms"
+msgctxt "Lisbon2Orders-comms"
 msgid "%s: Return Commander Lisbon's child to station Bethesda"
-msgstr "%s : Ramenez l'enfant du commandant Lisbon à la station Bethesda."
+msgstr ""
+"%s : Ramener l'enfant de la commandante Lisbon à sa mère sur la station "
+"Bethesda."
 
 #: scripts/scenario_54_PatrolDuty.lua:7541
-msgctxt "returnStowaway-shipLog"
+msgctxt "Lisbon3-shipLog"
 msgid ""
 "[Commander Lisbon] Thanks for bringing Francis back. I am entrusting you "
 "with my beam system cooling algorithm research. Take it to station Utopia "
 "Planitia so that they can decrypt it and it may be applied to human navy "
 "ships"
 msgstr ""
-"[Commandant Lisbon] Merci d'avoir ramené Francis. Je vous confie mes "
+"[Commandante Lisbon] Merci de m'avoir ramené mon Francis. Je vous confie mes "
 "recherches sur l'algorithme de refroidissement du système des faisceaux "
 "laser. Apportez-le à la station Utopia Planitia afin qu'ils puissent le "
 "décrypter et qu'il puisse être appliqué aux vaisseaux de la marine humaine."
 
 #: scripts/scenario_54_PatrolDuty.lua:7543
 #, lua-format
-msgctxt "returnStowaway-comms"
+msgctxt "Lisbon3Orders-comms"
 msgid ""
 "%s: Deliver Commander Lisbon's encrypted beam system cooling algorithm to "
 "station Utopia Planitia"
 msgstr ""
-"%s : Fournissez l'algorithme crypté du commandant Lisbon de refroidissement "
-"du système des faisceaux laser à la station Utopia Planitia."
+"%s : Livrer l'algorithme crypté de la commandante Lisbon sur le "
+"refroidissement du système des faisceaux laser à la station Utopia Planitia."
 
 #: scripts/scenario_54_PatrolDuty.lua:7561
-msgctxt "-shipLog"
+msgctxt "Lisbon4-shipLog"
 msgid ""
 "[Utopia Planitia] Received Commander Lisbon's beam cooling research. Upgrade "
 "available to human navy ships"
 msgstr ""
+"[Utopia Planitia] Nous avons bien reçu les recherches de la commandante "
+"Lisbon sur le système de refroidissement des faisceaux laser. La mise à "
+"niveau est maintenant opérationnelle et disponible pour tous les vaisseaux "
+"de la marine humaine."
 
 #: scripts/scenario_54_PatrolDuty.lua:7784
 #, lua-format
-msgctxt "Asimov-shipLog"
+msgctxt "Asimov2-shipLog"
 msgid "[Asimov] Our sensors show enemies approximately %.2f units away"
 msgstr ""
 "[Asimov] Nos capteurs nous indiquent des ennemis en approche à environ %.2f "
@@ -3846,16 +3928,16 @@ msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:7801
 #, lua-format
-msgctxt "Armstrong-shipLog"
+msgctxt "Armstrong1-shipLog"
 msgid ""
 "[Armstrong] Our long range sensors show enemies approximately %.2f units away"
 msgstr ""
-"[Armstrong] Nos capteurs à longue portée nous indiquent que les ennemis se "
+"[Armstrong] Nos capteurs à longue portée nous indiquent que des ennemis se "
 "trouvent à environ %.2f unités de distance."
 
 #: scripts/scenario_54_PatrolDuty.lua:7818
 #, lua-format
-msgctxt "UPlanitia-shipLog"
+msgctxt "UPlanitia4-shipLog"
 msgid ""
 "[Utopia Planitia] Our long range sensors show enemies approximately %.2f "
 "units away"
@@ -3865,7 +3947,7 @@ msgstr ""
 
 #: scripts/scenario_54_PatrolDuty.lua:7861
 #, lua-format
-msgctxt "Sheila-shipLog"
+msgctxt "Sheila1-shipLog"
 msgid ""
 "Sheila Long, A former naval officer recenly perished. Among her personal "
 "effects she left a data store for the academy on station Asimov. Her "
@@ -3873,28 +3955,28 @@ msgid ""
 "pick up the data store and transport it to station Asimov"
 msgstr ""
 "Sheila Long, une ancienne officier de marine a récemment péri. Parmi ses "
-"effets personnels, elle a laissé une banque de données pour l'académie basée "
-"sur la station Asimov. Ses effets personnels se trouvent sur la station %s "
-"en secteur %s.\n"
-"Veuillez vous y amarrer pour récupérer la banque de données et la "
-"transporter sur la station Asimov."
+"effets personnels se trouvait une banque de données pour l'académie basée "
+"sur la station Asimov.\n"
+"Ses effets personnels se trouvent sur la station %s en secteur %s. Veuillez "
+"vous y amarrer pour récupérer la banque de données et la transporter à la "
+"station Asimov."
 
 #: scripts/scenario_54_PatrolDuty.lua:7862
 #, lua-format
-msgctxt "Sheila-comms"
+msgctxt "Sheila1Orders-comms"
 msgid ""
 "Get Sheila Long's package from %s in sector %s and take to station Asimov"
 msgstr ""
-"Récupérez le colis de Sheila Long sur %s dans le secteur %s et emmenez-le à "
+"Récupérer le colis de Sheila Long sur %s dans le secteur %s et l'emmener à "
 "la station Asimov."
 
 #: scripts/scenario_54_PatrolDuty.lua:7878
-msgctxt "Sheila-shipLog"
+msgctxt "Sheila2-shipLog"
 msgid "Sheila Long's package for station Asimov is aboard"
 msgstr "Le colis de Sheila Long à livrer à la station Asimov est à bord."
 
 #: scripts/scenario_54_PatrolDuty.lua:7894
-msgctxt "Sheila-shipLog"
+msgctxt "Sheila3-shipLog"
 msgid ""
 "Sheila Long's package received. The archive curator discovered some research "
 "on weapons systems miniaturization in the data store. Utopia Planitia "
@@ -3906,77 +3988,82 @@ msgstr ""
 "Le conservateur des archives a découvert des recherches sur la "
 "miniaturisation des systèmes d'armes dans la banque de données.\n"
 "Utopia Planitia a déjà reçu l'information et leurs ingénieurs pensent "
-"pouvoir ajouter un tube d'armes de missile à tête chercheuse (Homing) "
+"pouvoir ajouter un tube lance-missile à tête chercheuse (Homing) "
 "supplémentaire à n'importe quel vaisseau de la flotte leur rendant visite."
 
 #: scripts/scenario_54_PatrolDuty.lua:7927
-msgctxt "flakyTube-msgWeapons"
+msgctxt "tube-msgWeapons"
 msgid ""
 "Automated systems removed our new weapons tube due to malfunction. "
 "Technicians investigating"
 msgstr ""
-"Les systèmes automatisés ont dû retirer notre nouveau tube de missile en "
+"Les systèmes automatisés ont dû retirer notre nouveau tube lance-missile en "
 "raison d'un dysfonctionnement. Les techniciens étudient actuellement le "
 "problème."
 
 #: scripts/scenario_54_PatrolDuty.lua:7929
-msgctxt "flakyTube-msgTactical"
+msgctxt "tube-msgTactical"
 msgid ""
 "Automated systems removed our new weapons tube due to malfunction. "
 "Technicians investigating"
 msgstr ""
-"Les systèmes automatisés ont dû retirer notre nouveau tube de missile en "
+"Les systèmes automatisés ont dû retirer notre nouveau tube lance-missile en "
 "raison d'un dysfonctionnement. Les techniciens étudient actuellement le "
 "problème."
 
 #: scripts/scenario_54_PatrolDuty.lua:7933
-msgctxt "fixedTube-msgWeapons"
+msgctxt "tube-msgWeapons"
 msgid "Technicians fixed the new tube. Click 'Redeploy' button to enable"
 msgstr ""
 "Les techniciens ont pu réparer le nouveau tube. Cliquez sur le bouton "
 "\"Redéployer\" pour l'activer."
 
 #: scripts/scenario_54_PatrolDuty.lua:7935
-msgctxt "fixedTube-msgTactical"
+msgctxt "tube-msgTactical"
 msgid "Technicians fixed the new tube. Click 'Redeploy' button to enable"
 msgstr ""
 "Les techniciens ont pu réparer le nouveau tube. Cliquez sur le bouton "
 "\"Redéployer\" pour l'activer."
 
 #: scripts/scenario_54_PatrolDuty.lua:7937
-msgctxt "fixedTube-buttonWeapons"
+msgctxt "tube-buttonWeapons"
 msgid "Redeploy"
 msgstr "Redéployer"
 
 #: scripts/scenario_54_PatrolDuty.lua:7939
-msgctxt "fixedTube-buttonTactical"
+msgctxt "tube-buttonTactical"
 msgid "Redeploy"
 msgstr "Redéployer"
 
 #: scripts/scenario_54_PatrolDuty.lua:8016
-msgctxt "audioUPlanitiaArtifact-shipLog"
+msgctxt "UPlanitia5Audio-shipLog"
 msgid ""
 "[UTPLNT116](Utopia Planitia) Scanned artifacts show promise for ship systems "
 "improvement. Recommend retrieval"
 msgstr ""
+"[Officier scientifique - Station Utopia Planitia] Les artefacts analysés "
+"sont prometteurs pour l'amélioration des systèmes de nos vaisseaux. Nous "
+"recommandons leur récupération."
 
 #: scripts/scenario_54_PatrolDuty.lua:8021
-msgctxt "audioUPlanitiaArtifact-incCall"
+msgctxt "UPlanitia5Audio-incCall"
 msgid "Audio message received, stored for playback: UTPLNT116"
 msgstr ""
+"Message audio reçu. Provenance : Officier scientifique -Station Utopia "
+"Planitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:8022
-msgctxt "audioUPlanitiaArtifact-buttonRelay"
+msgctxt "UPlanitia5Audio-buttonRelay"
 msgid "|> UTPLNT116"
-msgstr ""
+msgstr "|> Station UPlanitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:8024
-msgctxt "audioUPlanitiaArtifact-buttonOperations"
+msgctxt "UPlanitia5Audio-buttonOperations"
 msgid "|> UTPLNT116"
-msgstr ""
+msgstr "|> Station UPlanitia"
 
 #: scripts/scenario_54_PatrolDuty.lua:8048
-msgctxt "UPlanitia-shipLog"
+msgctxt "UPlanitia6-shipLog"
 msgid ""
 "[Utopia Planitia] Bring artifacts to Utopia Planitia and we can improve ship "
 "maneuverability"
@@ -3985,7 +4072,7 @@ msgstr ""
 "manœuvre de votre vaisseau."
 
 #: scripts/scenario_54_PatrolDuty.lua:8073
-msgctxt "UPlanitia-shipLog"
+msgctxt "UPlanitia7-shipLog"
 msgid ""
 "[Utopia Planitia] We received the artifacts. We can improve ship "
 "maneuverability next time you dock"
@@ -4013,6 +4100,12 @@ msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
 
+#: scripts/scenario_54_PatrolDuty.lua:8401
+#: scripts/scenario_54_PatrolDuty.lua:8410
+msgctxt "-tabRelay&Operations"
+msgid "Game Timer"
+msgstr "Minuteur du jeu :"
+
 #: scripts/scenario_54_PatrolDuty.lua:8412
 #, lua-format
 msgctxt "-tabRelay&Operations"
@@ -4023,7 +4116,7 @@ msgstr "%s %i"
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i:%.2i"
-msgstr "%s %i :%.2i"
+msgstr "%s %i:%.2i"
 
 #: scripts/scenario_54_PatrolDuty.lua:8436
 #, lua-format
@@ -4073,6 +4166,179 @@ msgstr "Asimov S :%i%% H :%i%%"
 msgctxt "-tabRelay&Operations"
 msgid "U.P. WS:%i%% H:%i%%"
 msgstr "U.P. WS :%i%% H :%i%%"
+
+#~ msgctxt "UPlanitiaAudio-buttonOperations"
+#~ msgid "|> UTPLNT441"
+#~ msgstr "|> Station UPlanitia"
+
+#~ msgctxt "UPlanitiaAudio-buttonOperations"
+#~ msgid "|> UTPLNT477"
+#~ msgstr "|> Station UPlanitia"
+
+#~ msgctxt "AsimovAudio-buttonOperations"
+#~ msgid "|> ASMVSNSR003"
+#~ msgstr "|> Station Asimov"
+
+#~ msgctxt "KojakAudio-buttonOperations"
+#~ msgid "|> MINSTN014"
+#~ msgstr "|> Station minière"
+
+#~ msgctxt "KojakAudio-buttonOperations"
+#~ msgid "|> MINSTN019"
+#~ msgstr "|> Station minière"
+
+#~ msgctxt "KojakAudio-buttonOperations"
+#~ msgid "|> BTHSDA002"
+#~ msgstr "|> Station Bethesda"
+
+#~ msgctxt "KojakAudio-buttonOperations"
+#~ msgid "|> BTHSDA034"
+#~ msgstr "|> Quartiers VIP"
+
+#~ msgctxt "Kojak-buttonOperations"
+#~ msgid "Send to engineer"
+#~ msgstr "Envoyer à l'ingénieur"
+
+#~ msgctxt "Kojak-msgEngineer+"
+#~ msgid ""
+#~ "The science officer sent you some thoughts on Joshua Kojak's research. "
+#~ "You think it applies to beam weapon improvement. Click the 'Send to "
+#~ "weapons' button to suggest changes to weapons"
+#~ msgstr ""
+#~ "L'officier scientifique vous a transmis quelques réflexions sur les "
+#~ "recherches de Joshua Kojak. Vous pensez que cela pourrait s'appliquer à "
+#~ "l'amélioration des faisceaux laser.\n"
+#~ "Cliquez sur le bouton \"Envoyer à l'armement\" pour suggérer des "
+#~ "modifications à l'officier des armes."
+
+#~ msgctxt "Kojak-buttonEngineer+"
+#~ msgid "Send to weapons"
+#~ msgstr "Envoyer à l'armement"
+
+#~ msgctxt "Kojak-msgTactical"
+#~ msgid ""
+#~ "The engineer sent you some thoughts on Joshua Kojak's research. You know "
+#~ "how to apply it to the beam weapons, but lack the tools to do it "
+#~ "immediately. Click the 'Send to Utopia Planitia' button to transmit "
+#~ "upgrade instructions to Utopia Planitia station"
+#~ msgstr ""
+#~ "L'ingénieur vous a envoyé quelques réflexions sur les recherches de "
+#~ "Joshua Kojak. Vous savez comment l'appliquer aux faisceaux laser, mais il "
+#~ "vous manque les outils pour le faire immédiatement.\n"
+#~ "Cliquez sur le bouton \"Envoyer à Utopia Planitia\" pour transmettre les "
+#~ "instructions de mise à niveau des faisceaux à la station Utopia Planitia."
+
+#~ msgctxt "Kojak-buttonTactical"
+#~ msgid "Send to Utopia Planitia"
+#~ msgstr "Envoyer à Utopia Planitia"
+
+#~ msgctxt "audioUPlanitiaIncursion-buttonOperations"
+#~ msgid "|> UTPLNT103"
+#~ msgstr "|> Station UPlanitia"
+
+#~ msgctxt "NabbitAudio-buttonOperations"
+#~ msgid "|> ASTGDN038"
+#~ msgstr "|> Quartiers VIP"
+
+#~ msgctxt "LisbonAudio-buttonOperations"
+#~ msgid "|> BTHSDA271"
+#~ msgstr "|> Station Bethesda"
+
+#~ msgctxt "audioUPlanitiaArtifact-buttonOperations"
+#~ msgid "|> UTPLNT116"
+#~ msgstr "|> Station UPlanitia"
+
+#~ msgctxt "audioUPlanitiaDefend-buttonOperations"
+#~ msgid "|> UTPLNT441"
+#~ msgstr "|> Station UPlanitia"
+
+#~ msgctxt "audioUPlanitiaEnnemies-buttonOperations"
+#~ msgid "|> UTPLNT477"
+#~ msgstr "|> Station UPlanitia"
+
+#~ msgctxt "audioAsimov-buttonOperations"
+#~ msgid "|> ASMVSNSR003"
+#~ msgstr "|> Station Asimov"
+
+#~ msgctxt "audioSickMiner1-buttonOperations"
+#~ msgid "|> MINSTN014"
+#~ msgstr "|> Station minière"
+
+#~ msgctxt "audioSickMiner2-buttonOperations"
+#~ msgid "|> MINSTN019"
+#~ msgstr "|> Station minière"
+
+#~ msgctxt "audioBethesda1-buttonOperations"
+#~ msgid "|> BTHSDA002"
+#~ msgstr "|> Station Bethesda"
+
+#~ msgctxt "audioBethesda2-buttonOperations"
+#~ msgid "|> BTHSDA034"
+#~ msgstr "|> Quartiers VIP"
+
+#~ msgctxt "minerDiscovery-buttonOperations"
+#~ msgid "Send to engineer"
+#~ msgstr "Envoyer à l'ingénieur"
+
+#~ msgctxt "suggestWeapons-msgEngineer+"
+#~ msgid ""
+#~ "The science officer sent you some thoughts on Joshua Kojak's research. "
+#~ "You think it applies to beam weapon improvement. Click the 'Send to "
+#~ "weapons' button to suggest changes to weapons"
+#~ msgstr ""
+#~ "L'officier scientifique vous a transmis quelques réflexions sur les "
+#~ "recherches de Joshua Kojak. Vous pensez que cela pourrait s'appliquer à "
+#~ "l'amélioration des faisceaux laser.\n"
+#~ "Cliquez sur le bouton \"Envoyer à l'armement\" pour suggérer des "
+#~ "modifications à l'officier des armes."
+
+#~ msgctxt "suggestWeapons-buttonEngineer+"
+#~ msgid "Send to weapons"
+#~ msgstr "Envoyer à l'armement"
+
+#~ msgctxt "instructions-msgTactical"
+#~ msgid ""
+#~ "The engineer sent you some thoughts on Joshua Kojak's research. You know "
+#~ "how to apply it to the beam weapons, but lack the tools to do it "
+#~ "immediately. Click the 'Send to Utopia Planitia' button to transmit "
+#~ "upgrade instructions to Utopia Planitia station"
+#~ msgstr ""
+#~ "L'ingénieur vous a envoyé quelques réflexions sur les recherches de "
+#~ "Joshua Kojak. Vous savez comment l'appliquer aux faisceaux laser, mais il "
+#~ "vous manque les outils pour le faire immédiatement.\n"
+#~ "Cliquez sur le bouton \"Envoyer à Utopia Planitia\" pour transmettre les "
+#~ "instructions de mise à niveau des faisceaux à la station Utopia Planitia."
+
+#~ msgctxt "instructions-buttonTactical"
+#~ msgid "Send to Utopia Planitia"
+#~ msgstr "Envoyer à Utopia Planitia"
+
+#~ msgctxt "audioArmstrong-buttonOperations"
+#~ msgid "|> ASTGDN038"
+#~ msgstr "|> Quartiers VIP"
+
+#~ msgctxt "audioBethesda3-buttonOperations"
+#~ msgid "|> BTHSDA271"
+#~ msgstr "|> Station Bethesda"
+
+#~ msgctxt "flakyTube-msgTactical"
+#~ msgid ""
+#~ "Automated systems removed our new weapons tube due to malfunction. "
+#~ "Technicians investigating"
+#~ msgstr ""
+#~ "Les systèmes automatisés ont dû retirer notre nouveau tube de missile en "
+#~ "raison d'un dysfonctionnement. Les techniciens étudient actuellement le "
+#~ "problème."
+
+#~ msgctxt "fixedTube-msgTactical"
+#~ msgid "Technicians fixed the new tube. Click 'Redeploy' button to enable"
+#~ msgstr ""
+#~ "Les techniciens ont pu réparer le nouveau tube. Cliquez sur le bouton "
+#~ "\"Redéployer\" pour l'activer."
+
+#~ msgctxt "fixedTube-buttonTactical"
+#~ msgid "Redeploy"
+#~ msgstr "Redéployer"
 
 #~ msgctxt "medical-msgEngineer+"
 #~ msgid "Medical team has revived one of your repair crew"
