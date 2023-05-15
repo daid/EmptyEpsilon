@@ -6850,8 +6850,8 @@ function defendUtopia(delta)
 					end
 				end
 				longWave = 3
-				waveDelayTimer = delta + 120
 			end
+			waveDelayTimer = delta + 120
 		end
 	end
 	if longWave == 3 then
