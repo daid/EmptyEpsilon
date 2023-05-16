@@ -3467,7 +3467,7 @@ function placeStation(x,y,name,faction,size)
 	end
 	local function Set(list)
 		local set = {}
-		for _, item in ipairs(list) do
+		for i, item in ipairs(list) do
 			set[item] = true
 		end
 		return set
@@ -4170,7 +4170,7 @@ function transportPlot(delta)
 		lastTransportCount = transportCount
 		if transportCount < #transportList then
 			tempTransportList = {}
-			for _, obj in ipairs(transportList) do
+			for i, obj in ipairs(transportList) do
 				if obj:isValid() then
 					table.insert(tempTransportList,obj)
 				end
@@ -4338,7 +4338,7 @@ function handleDockedState()
 	setCommsMessage(oMsg)
 	missilePresence = 0
 	local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
-	for _, missile_type in ipairs(missile_types) do
+	for i, missile_type in ipairs(missile_types) do
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
@@ -4611,7 +4611,7 @@ function handleDockedState()
 						local brochure_stations = ""
 						local sx, sy = comms_target:getPosition()
 						local nearby_objects = getObjectsInRadius(sx,sy,30000)
-						for _, obj in ipairs(nearby_objects) do
+						for i, obj in ipairs(nearby_objects) do
 							if obj.typeName == "SpaceStation" then
 								if not obj:isEnemy(comms_target) then
 									if brochure_stations == "" then
@@ -4633,7 +4633,7 @@ function handleDockedState()
 						local brochure_goods = ""
 						local sx, sy = comms_target:getPosition()
 						local nearby_objects = getObjectsInRadius(sx,sy,30000)
-						for _, obj in ipairs(nearby_objects) do
+						for i, obj in ipairs(nearby_objects) do
 							if obj.typeName == "SpaceStation" then
 								if not obj:isEnemy(comms_target) then
 									if obj.comms_data.goods ~= nil then
@@ -4667,7 +4667,7 @@ function handleDockedState()
 					local sx, sy = comms_target:getPosition()
 					local nearby_objects = getObjectsInRadius(sx,sy,50000)
 					local stations_known = 0
-					for _, obj in ipairs(nearby_objects) do
+					for i, obj in ipairs(nearby_objects) do
 						if obj.typeName == "SpaceStation" then
 							if not obj:isEnemy(comms_target) then
 								stations_known = stations_known + 1
@@ -4705,7 +4705,7 @@ function handleDockedState()
 					local nearby_objects = getObjectsInRadius(sx,sy,50000)
 					local button_count = 0
 					local by_goods = {}
-					for _, obj in ipairs(nearby_objects) do
+					for i, obj in ipairs(nearby_objects) do
 						if obj.typeName == "SpaceStation" then
 							if not obj:isEnemy(comms_target) then
 								if obj.comms_data.goods ~= nil then
@@ -5191,7 +5191,7 @@ function masterCartographer()
 			setCommsMessage(_("cartographyOffice-comms", "What station?"))
 			local nearby_objects = getAllObjects()
 			local stations_known = 0
-			for _, obj in ipairs(nearby_objects) do
+			for i, obj in ipairs(nearby_objects) do
 				if obj.typeName == "SpaceStation" then
 					if not obj:isEnemy(comms_target) then
 						local station_distance = distance(comms_target,obj)
@@ -5233,7 +5233,7 @@ function masterCartographer()
 			setCommsMessage(_("cartographyOffice-comms", "What goods are you looking for?"))
 			local nearby_objects = getAllObjects()
 			local by_goods = {}
-			for _, obj in ipairs(nearby_objects) do
+			for i, obj in ipairs(nearby_objects) do
 				if obj.typeName == "SpaceStation" then
 					if not obj:isEnemy(comms_target) then
 						local station_distance = distance(comms_target,obj)
@@ -5446,7 +5446,7 @@ function handleUndockedState()
 		addCommsReply(_("helpfullWarning-comms", "See any enemies in your area?"), function()
 			if comms_source:isFriendly(comms_target) then
 				enemiesInRange = 0
-				for _, obj in ipairs(comms_target:getObjectsInRange(30000)) do
+				for i, obj in ipairs(comms_target:getObjectsInRange(30000)) do
 					if obj:isEnemy(comms_source) then
 						enemiesInRange = enemiesInRange + 1
 					end
@@ -5756,7 +5756,7 @@ function friendlyComms(comms_data)
 		setCommsMessage(msg);
 		addCommsReply(_("Back"), commsShip)
 	end)
-	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
+	for i, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
@@ -6667,15 +6667,15 @@ function patrolAsimovUtopiaPlanitiaArmstrong(delta)
 		harassFleet = spawnEnemies(px+ox,py+oy,difficulty)
 		whatToDo = math.random(1,3)
 		if whatToDo == 1 then
-			for _, enemy in ipairs(harassFleet) do
+			for i, enemy in ipairs(harassFleet) do
 				enemy:orderAttack(p)
 			end
 		elseif whatToDo == 2 then
-			for _, enemy in ipairs(harassFleet) do
+			for i, enemy in ipairs(harassFleet) do
 				enemy:orderAttack(randomPatrolStation)
 			end
 		else
-			for _, enemy in ipairs(harassFleet) do
+			for i, enemy in ipairs(harassFleet) do
 				enemy:orderRoaming()
 			end
 		end
@@ -6708,31 +6708,31 @@ function afterPatrol(delta)
 		plot1 = defeated
 	end
 	nuisanceCount = 0
-	for _, enemy in ipairs(nuisanceList) do
+	for i, enemy in ipairs(nuisanceList) do
 		if enemy:isValid() then
 			nuisanceCount = nuisanceCount + 1
 		end
 	end
 	incursionCount = 0
-	for _, enemy in ipairs(incursionList) do
+	for i, enemy in ipairs(incursionList) do
 		if enemy:isValid() then
 			incursionCount = incursionCount + 1
 		end
 	end
 	attack1count = 0
-	for _, enemy in ipairs(attack1list) do
+	for i, enemy in ipairs(attack1list) do
 		if enemy:isValid() then
 			attack1count = attack1count + 1
 		end
 	end
 	attack2count = 0
-	for _, enemy in pairs(attack2list) do
+	for i, enemy in pairs(attack2list) do
 		if enemy:isValid() then
 			attack2count = attack2count + 1
 		end
 	end
 	attack3count = 0
-	for _, enemy in ipairs(attack3list) do
+	for i, enemy in ipairs(attack3list) do
 		if enemy:isValid() then
 			attack3count = attack3count + 1
 		end
@@ -6799,7 +6799,7 @@ function defendUtopia(delta)
 	if longWave == 0 then
 		if waveDelayTimer < 0 then
 			longWave1List = spawnEnemies(utopiaPlanitiax+irandom(30000,40000),utopiaPlanitiay+irandom(-5000,5000),.5,"Kraylor")
-			for _, enemy in ipairs(longWave1List) do
+			for i, enemy in ipairs(longWave1List) do
 				enemy:orderFlyTowards(utopiaPlanitiax, utopiaPlanitiay)
 			end
 			waveDelayTimer = delta + 120
@@ -6809,7 +6809,7 @@ function defendUtopia(delta)
 	if longWave == 1 then
 		if waveDelayTimer < 0 then
 			longWave2List = spawnEnemies(utopiaPlanitiax+irandom(-40000,-30000),utopiaPlanitiay+irandom(-5000,5000),.5,"Kraylor")
-			for _, enemy in ipairs(longWave2List) do
+			for i, enemy in ipairs(longWave2List) do
 				enemy:orderFlyTowards(utopiaPlanitiax, utopiaPlanitiay)
 			end
 			waveDelayTimer = delta + 120
@@ -6819,13 +6819,13 @@ function defendUtopia(delta)
 	if longWave == 2 then
 		if waveDelayTimer < 0 then
 			wave1count = 0
-			for _, enemy in ipairs(longWave1List) do
+			for i, enemy in ipairs(longWave1List) do
 				if enemy:isValid() then
 					wave1count = wave1count + 1
 				end
 			end
 			wave2count = 0
-			for _, enemy in ipairs(longWave2List) do
+			for i, enemy in ipairs(longWave2List) do
 				if enemy:isValid() then
 					wave2count = wave2count + 1
 				end
@@ -6857,7 +6857,7 @@ function defendUtopia(delta)
 	if longWave == 3 then
 		if waveDelayTimer < 0 then
 			longWave3List = spawnEnemies(utopiaPlanitiax+irandom(-10000,10000),utopiaPlanitiay+irandom(30000,40000),1,"Kraylor")
-			for _, enemy in ipairs(longWave3List) do
+			for i, enemy in ipairs(longWave3List) do
 				enemy:orderFlyTowards(utopiaPlanitiax, utopiaPlanitiay)
 			end
 			waveDelayTimer = delta + 120
@@ -6867,7 +6867,7 @@ function defendUtopia(delta)
 	if longWave == 4 then
 		if waveDelayTimer < 0 then
 			longWave4List = spawnEnemies(utopiaPlanitiax+irandom(-10000,10000),utopiaPlanitiay+irandom(30000,40000),2,"Kraylor")
-			for _, enemy in ipairs(longWave4List) do
+			for i, enemy in ipairs(longWave4List) do
 				enemy:orderFlyTowards(utopiaPlanitiax, utopiaPlanitiay)
 			end
 			waveDelayTimer = delta + 300
@@ -6877,7 +6877,7 @@ function defendUtopia(delta)
 	if longWave == 5 then
 		if waveDelayTimer < 0 then
 			longWave5List = spawnEnemies(utopiaPlanitiax+irandom(-10000,10000),utopiaPlanitiay+irandom(30000,40000),1,"Kraylor")
-			for _, enemy in ipairs(longWave5List) do
+			for i, enemy in ipairs(longWave5List) do
 				enemy:orderFlyTowards(utopiaPlanitiax, utopiaPlanitiay)
 			end
 			waveDelayTimer = delta + 120
@@ -6887,19 +6887,19 @@ function defendUtopia(delta)
 	if longWave == 6 then
 		if waveDelayTimer < 0 then
 			wave3count = 0
-			for _, enemy in ipairs(longWave3List) do
+			for i, enemy in ipairs(longWave3List) do
 				if enemy:isValid() then
 					wave3count = wave3count + 1
 				end
 			end
 			wave4count = 0
-			for _, enemy in ipairs(longWave4List) do
+			for i, enemy in ipairs(longWave4List) do
 				if enemy:isValid() then
 					wave4count = wave4count + 1
 				end
 			end
 			wave5count = 0
-			for _, enemy in ipairs(longWave5List) do
+			for i, enemy in ipairs(longWave5List) do
 				if enemy:isValid() then
 					wave5count = wave5count + 1
 				end
@@ -6950,20 +6950,20 @@ function destroyEnemyStronghold(delta)
 			wp27 = CpuShip():setFaction("Kraylor"):setposition(scarletx+x,scarlety+y):setTemplate("Defense platform"):setCallSign("WP-27")			
 		end
 		strongholdDefense = spawnEnemies(scarletx-5000,scarlety-5000,1,"Kraylor")
-		for _, enemy in ipairs(strongholdDefense) do
+		for i, enemy in ipairs(strongholdDefense) do
 			enemy:orderDefendTarget(stationScarletCitadel)
 		end
 		strongholdOffense = spawnEnemies(scarletx-8000,scarlety-8000,1,"Kraylor")
 		targetPlayer = closestPlayerTo(stationScarletCitadel)
 		if targetPlayer:isValid() then
-			for _, enemy in ipairs(strongholdOffense) do
+			for i, enemy in ipairs(strongholdOffense) do
 				enemy:orderAttack(targetPlayer)
 			end
 			targetPlayer:addToShipLog(string.format(_("strongHold-shipLog", "Enemy base nearby located in sector %s. Fleet assembled near Utopia Planitia to assist if needed. Destroy base."),stationScarletCitadel:getSectorName()),"Magenta")
 		end
 		posse = spawnEnemies(utopiaPlanitiaX,utopiaPlanitiaY+8000,2,"Human Navy")
 		primaryOrders = string.format(_("strongHoldOrders-comms", "Destroy enemy base in sector %s"),stationScarletCitadel:getSectorName())
-		for _, friend in ipairs(posse) do
+		for i, friend in ipairs(posse) do
 			friend:orderStandGround()
 			if #posseShipNames > 0 then
 				ni = math.random(1,#posseShipNames)
@@ -6980,13 +6980,13 @@ function destroyEnemyStronghold(delta)
 			if scarletDanger > 0 then
 				scarletTimer = delta + 300
 				strongholdDefense = spawnEnemies(scarletx-5000,scarlety-5000,scarletDanger,"Kraylor")
-				for _, enemy in ipairs(strongholdDefense) do
+				for i, enemy in ipairs(strongholdDefense) do
 					enemy:orderDefendTarget(stationScarletCitadel)
 				end
 				strongholdOffense = spawnEnemies(scarletx-8000,scarlety-8000,scarletDanger,"Kraylor")
 				targetPlayer = closestPlayerTo(stationScarletCitadel)
 				if targetPlayer:isValid() then
-					for _, enemy in ipairs(strongholdOffense) do
+					for i, enemy in ipairs(strongholdOffense) do
 						enemy:orderAttack(targetPlayer)
 					end
 				end
@@ -7016,7 +7016,7 @@ function nuisance(delta)
 		nuisanceSpawned = "done"
 		asimovx, asimovy = stationAsimov:getPosition()
 		nuisanceList = spawnEnemies(asimovx+irandom(20000,30000),asimovx+irandom(20000,30000),.4,"Kraylor")
-		for _, enemy in ipairs(nuisanceList) do
+		for i, enemy in ipairs(nuisanceList) do
 			enemy:orderFlyTowards(asimovx, asimovy)
 		end
 	end
@@ -7039,7 +7039,7 @@ function nuisance(delta)
 		end
 	end
 	enemy_count = 0
-	for _, enemy in ipairs(nuisanceList) do
+	for i, enemy in ipairs(nuisanceList) do
 		if enemy:isValid() then
 			enemy_count = enemy_count + 1
 		end
@@ -7342,7 +7342,7 @@ function incursion(delta)
 		end
 	end
 	enemy_count = 0
-	for _, enemy in ipairs(incursionList) do
+	for i, enemy in ipairs(incursionList) do
 		if enemy:isValid() then
 			enemy_count = enemy_count + 1
 		end
@@ -7445,7 +7445,7 @@ function attack1(delta)
 	if attack1spawned == "ready" then
 		attack1spawned = "done"
 		attack1list = spawnEnemies(armstrongx+irandom(-5000,5000),armstrongy+irandom(-45000,-40000),1.3,"Exuari")
-		for _, enemy in ipairs(attack1list) do
+		for i, enemy in ipairs(attack1list) do
 			enemy:orderFlyTowards(armstrongx, armstrongy)
 		end
 	end
@@ -7462,7 +7462,7 @@ function attack1(delta)
 		end
 	end
 	enemy_count = 0
-	for _, enemy in ipairs(attack1list) do
+	for i, enemy in ipairs(attack1list) do
 		if enemy:isValid() then
 			enemy_count = enemy_count + 1
 		end
@@ -7487,7 +7487,7 @@ function stowawayMessage()
 			closestLisbonPlayer = getPlayerShip(-1)
 		end
 		farthestTransport = transportList[1]
-		for _, t in ipairs(transportList) do
+		for i, t in ipairs(transportList) do
 			if t:isValid() then
 				if distance(stationBethesda, t) > distance(stationBethesda, farthestTransport) then
 					farthestTransport = t
@@ -7574,12 +7574,12 @@ function attack2(delta)
 	if attack2spawned == "ready" then
 		attack2list = spawnEnemies(asimovx+irandom(-45000,-40000),asimovy+irandom(-5000,5000),1.6,"Kraylor")
 		attack2spawned = "done"
-		for _, enemy in ipairs(attack2list) do
+		for i, enemy in ipairs(attack2list) do
 			enemy:orderFlyTowards(asimovx, asimovy)
 		end
 	end
 	enemy_count = 0
-	for _, enemy in ipairs(attack2list) do
+	for i, enemy in ipairs(attack2list) do
 		if enemy:isValid() then
 			enemy_count = enemy_count + 1
 		end
@@ -7599,7 +7599,7 @@ function jumpStart(delta)
 		x, y = cp:getPosition()
 		objList = getObjectsInRadius(x, y, 30000)
 		nebulaList = {}
-		for _, obj in ipairs(objList) do
+		for i, obj in ipairs(objList) do
 			if obj.typeName == "Nebula" then
 				table.insert(nebulaList,obj)
 			end
@@ -7626,11 +7626,11 @@ function jumpStart(delta)
 			ay = y + ay
 		end
 		jAsimov = spawnEnemies(ax, ay, .5)
-		for _, enemy in ipairs(jAsimov) do
+		for i, enemy in ipairs(jAsimov) do
 			enemy:orderFlyTowards(asimovx,asimovy)
 		end
 		jPlayer = spawnEnemies(ax, ay, .5)
-		for _, enemy in ipairs(jPlayer) do
+		for i, enemy in ipairs(jPlayer) do
 			enemy:orderAttack(cp)
 		end
 		plot11 = nil
@@ -7648,7 +7648,7 @@ function attack5(delta)
 	if attack5spawned == "ready" then
 		attack5list = spawnEnemies(neb2x,neb2y,1.8,"Kraylor")
 		attack5spawned = "done"
-		for _, enemy in ipairs(attack5list) do
+		for i, enemy in ipairs(attack5list) do
 			enemy:orderStandGround()
 			if difficulty > 1 then
 				enemy:setWarpDrive(true)
@@ -7667,7 +7667,7 @@ function ambush5(delta)
 		if p ~= nil then
 			pDist = distance(p,neb2)
 			if math.random() > pDist/30000 then
-				for _, enemy in ipairs(attack5list) do
+				for i, enemy in ipairs(attack5list) do
 					enemy:orderAttack(p)
 				end
 				plot10 = pursue5
@@ -7676,7 +7676,7 @@ function ambush5(delta)
 			end
 		end		
 		enemy_count = 0
-		for _, enemy in ipairs(attack5list) do
+		for i, enemy in ipairs(attack5list) do
 			if enemy:isValid() then
 				enemy_count = enemy_count + 1
 			end
@@ -7690,7 +7690,7 @@ end
 function pursue5()
 	plot10name = "pursue4"
 	enemy_count = 0
-	for _, enemy in ipairs(attack5list) do
+	for i, enemy in ipairs(attack5list) do
 		if enemy:isValid() then
 			enemy_count = enemy_count + 1
 		end
@@ -7710,7 +7710,7 @@ function attack4(delta)
 	if attack4spawned == "ready" then
 		attack4list = spawnEnemies(neb1x,neb1y,1.6,"Kraylor")
 		attack4spawned = "done"
-		for _, enemy in ipairs(attack4list) do
+		for i, enemy in ipairs(attack4list) do
 			enemy:orderStandGround()
 			if difficulty > 1 then
 				enemy:setWarpDrive(true)
@@ -7730,7 +7730,7 @@ function ambush4(delta)
 		if p ~= nil then
 			pDist = distance(p,neb1)
 			if math.random() > pDist/30000 then
-				for _, enemy in ipairs(attack4list) do
+				for i, enemy in ipairs(attack4list) do
 					enemy:orderAttack(p)
 				end
 				plot9 = pursue4
@@ -7739,7 +7739,7 @@ function ambush4(delta)
 			end
 		end		
 		enemy_count = 0
-		for _, enemy in ipairs(attack4list) do
+		for i, enemy in ipairs(attack4list) do
 			if enemy:isValid() then
 				enemy_count = enemy_count + 1
 			end
@@ -7753,7 +7753,7 @@ end
 function pursue4()
 	plot9name = "pursue4"
 	enemy_count = 0
-	for _, enemy in ipairs(attack4list) do
+	for i, enemy in ipairs(attack4list) do
 		if enemy:isValid() then
 			enemy_count = enemy_count + 1
 		end
@@ -7773,7 +7773,7 @@ function attack3(delta)
 		avx, avy = vectorFromAngle(random(0,360),asimovDistance)
 		attack3list = spawnEnemies(asimovx+avx,asimovy+avy,1,"Kraylor")
 		attack3spawned = "done"
-		for _, enemy in ipairs(attack3list) do
+		for i, enemy in ipairs(attack3list) do
 			enemy:orderFlyTowards(asimovx, asimovy)
 		end
 		if asimov8thWarning == nil then
@@ -7789,7 +7789,7 @@ function attack3(delta)
 			armstrongDistance = random(35000,45000)
 			arx, ary = vectorFromAngle(random(0,360),armstrongDistance)
 			temp3list = spawnEnemies(armstrongx+arx,armstrongy+ary,.667,"Ghosts")
-			for _, enemy in ipairs(temp3list) do
+			for i, enemy in ipairs(temp3list) do
 				enemy:orderFlyTowards(armstrongx,armstrongy)
 				table.insert(attack3list,enemy)
 			end
@@ -7807,7 +7807,7 @@ function attack3(delta)
 			utopiaDistance = random(50000,60000)
 			upx, upy = vectorFromAngle(random(0,360),utopiaDistance)
 			temp4list = spawnEnemies(utopiaPlanitiax+upx,utopiaPlanitiay+upy,.5,"Ktlitans")
-			for _, enemy in ipairs(temp4list) do
+			for i, enemy in ipairs(temp4list) do
 				table.insert(attack3list,enemy)
 			end
 			if utopia8thWarning == nil then
@@ -7822,7 +7822,7 @@ function attack3(delta)
 		end
 	end
 	enemy_count = 0
-	for _, enemy in ipairs(attack3list) do
+	for i, enemy in ipairs(attack3list) do
 		if enemy:isValid() then
 			enemy_count = enemy_count + 1
 		end
@@ -7974,7 +7974,7 @@ function duringAmbush(delta)
 	end
 	px, py = closestToAsimov:getPosition()
 	ambushList = spawnEnemies(px-irandom(1000,7000),py-irandom(1000,7000),1.5,"Exuari")
-	for _, enemy in ipairs(ambushList) do
+	for i, enemy in ipairs(ambushList) do
 		enemy:orderAttack(closestToAsimov)
 	end
 	plot7 = afterAmbush
