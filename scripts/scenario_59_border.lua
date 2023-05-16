@@ -12579,24 +12579,24 @@ function friendlyComms(comms_data)
 		end
 	end
 	if comms_target.fleet ~= nil and initialAssetsEvaluated then
-		addCommsReply(string.format("Direct %s",comms_target.fleet), function()
-			setCommsMessage(string.format("What command should be given to %s?",comms_target.fleet))
-			addCommsReply("Report hull and shield status", function()
-				msg = "Fleet status:"
+		addCommsReply(string.format(_("shipAssist-comms", "Direct %s"),comms_target.fleet), function()
+			setCommsMessage(string.format(_("shipAssist-comms", "What command should be given to %s?"),comms_target.fleet))
+			addCommsReply(_("shipAssist-comms", "Report hull and shield status"), function()
+				msg = _("shipAssist-comms", "Fleet status:")
 				for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 					if fleetShip ~= nil and fleetShip:isValid() then
-						msg = msg .. "\n  " .. fleetShip:getCallSign() .. ":"
-						msg = msg .. "\n    Hull: " .. math.floor(fleetShip:getHull() / fleetShip:getHullMax() * 100) .. "%"
+						msg = msg .. string.format(_("shipAssist-comms", "\n %s:"), fleetShip:getCallSign())
+						msg = msg .. string.format(_("shipAssist-comms", "\n    Hull: %d%%"), math.floor(fleetShip:getHull() / fleetShip:getHullMax() * 100))
 						local shields = fleetShip:getShieldCount()
 						if shields == 1 then
-							msg = msg .. "\n    Shield: " .. math.floor(fleetShip:getShieldLevel(0) / fleetShip:getShieldMax(0) * 100) .. "%"
+							msg = msg .. string.format(_("shipAssist-comms", "\n    Shield: %d%%"), math.floor(fleetShip:getShieldLevel(0) / fleetShip:getShieldMax(0) * 100))
 						else
-							msg = msg .. "\n    Shields: "
+							msg = msg .. _("shipAssist-comms", "\n    Shields: ")
 							if shields == 2 then
-								msg = msg .. "Front:" .. math.floor(fleetShip:getShieldLevel(0) / fleetShip:getShieldMax(0) * 100) .. "% Rear:" .. math.floor(fleetShip:getShieldLevel(1) / fleetShip:getShieldMax(1) * 100) .. "%"
+								msg = msg .. string.format(_("shipAssist-comms", "Front: %d%% Rear: %d%%"), math.floor(fleetShip:getShieldLevel(0) / fleetShip:getShieldMax(0) * 100), math.floor(fleetShip:getShieldLevel(1) / fleetShip:getShieldMax(1) * 100))
 							else
 								for n=0,shields-1 do
-									msg = msg .. " " .. n .. ":" .. math.floor(fleetShip:getShieldLevel(n) / fleetShip:getShieldMax(n) * 100) .. "%"
+									msg = msg .. string.format(_("shipAssist-comms", " %d:%d%%"), n, math.floor(fleetShip:getShieldLevel(n) / fleetShip:getShieldMax(n) * 100))
 								end
 							end
 						end
@@ -12609,16 +12609,16 @@ function friendlyComms(comms_data)
 				msg = "Fleet missile status:"
 				for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 					if fleetShip ~= nil and fleetShip:isValid() then
-						msg = msg .. "\n  " .. fleetShip:getCallSign() .. ":"
+						msg = msg .. string.format(_("shipAssist-comms", "\n %s:"), fleetShip:getCallSign())
 						local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 						missileMsg = ""
 						for _, missile_type in ipairs(missile_types) do
 							if fleetShip:getWeaponStorageMax(missile_type) > 0 then
-								missileMsg = missileMsg .. "\n      " .. missile_type .. ": " .. math.floor(fleetShip:getWeaponStorage(missile_type)) .. "/" .. math.floor(fleetShip:getWeaponStorageMax(missile_type))
+								missileMsg = missileMsg .. string.format(_("shipAssist-comms", "\n      %s: %d/%d"), missile_type, math.floor(fleetShip:getWeaponStorage(missile_type)), math.floor(fleetShip:getWeaponStorageMax(missile_type)))
 							end
 						end
 						if missileMsg ~= "" then
-							msg = msg .. "\n    Missiles: " .. missileMsg
+							msg = msg .. string.format(_("shipAssist-comms", "\n    Missiles: %s"), missileMsg)
 						end
 					end
 				end
