@@ -125,7 +125,7 @@ void GameGlobalInfo::reset()
     flushDatabaseData();
     FactionInfoLegacy::reset();
 
-    //TODO: Destroy all entities.
+    sp::ecs::Entity::destroyAllEntities();
     foreach(SpaceObject, o, space_object_list)
         o->destroy();
     main_script = nullptr;

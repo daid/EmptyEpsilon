@@ -61,16 +61,16 @@ void Faction::didAnOffensiveAction(sp::ecs::Entity entity)
 FactionRelation FactionInfo::getRelation(sp::ecs::Entity faction_entity)
 {
     for(auto it : relations)
-        if (it.first == faction_entity)
-            return it.second;
+        if (it.other_faction == faction_entity)
+            return it.relation;
     return FactionRelation::Neutral;
 }
 
 void FactionInfo::setRelation(sp::ecs::Entity faction_entity, FactionRelation relation)
 {
     for(auto& it : relations) {
-        if (it.first == faction_entity) {
-            it.second = relation;
+        if (it.other_faction == faction_entity) {
+            it.relation = relation;
             return;
         }
     }

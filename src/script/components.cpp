@@ -25,6 +25,7 @@
 #include "components/probe.h"
 #include "components/hacking.h"
 #include "components/player.h"
+#include "components/faction.h"
 
 
 #define BIND_MEMBER(T, MEMBER) \
@@ -207,6 +208,27 @@ template<> struct Convert<sp::Physics::Type> {
             return sp::Physics::Type::Static;
         luaL_error(L, "Unknown physics type: %s", str.c_str());
         return sp::Physics::Type::Sensor;
+    }
+};
+template<> struct Convert<FactionRelation> {
+    static int toLua(lua_State* L, FactionRelation value) {
+        switch(value) {
+        case FactionRelation::Friendly: lua_pushstring(L, "friendly"); break;
+        case FactionRelation::Neutral: lua_pushstring(L, "neutral"); break;
+        case FactionRelation::Enemy: lua_pushstring(L, "enemy"); break;
+        }
+        return 1;
+    }
+    static FactionRelation fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "friendly")
+            return FactionRelation::Friendly;
+        else if (str == "neutral")
+            return FactionRelation::Neutral;
+        else if (str == "enemy")
+            return FactionRelation::Enemy;
+        luaL_error(L, "Unknown relation type: %s", str.c_str());
+        return FactionRelation::Neutral;
     }
 };
 }
@@ -441,4 +463,17 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<PlayerControl>::name("player_control");
     //TODO: BIND_MEMBER(PlayerControl, alert_level);
     BIND_MEMBER(PlayerControl, control_code);
+
+    sp::script::ComponentHandler<Faction>::name("faction");
+    BIND_MEMBER(Faction, entity);
+
+    sp::script::ComponentHandler<FactionInfo>::name("faction_info");
+    BIND_MEMBER(FactionInfo, gm_color);
+    BIND_MEMBER(FactionInfo, name);
+    BIND_MEMBER(FactionInfo, locale_name);
+    BIND_MEMBER(FactionInfo, description);
+    BIND_MEMBER(FactionInfo, reputation_points);
+    BIND_ARRAY(FactionInfo, relations);
+    BIND_ARRAY_MEMBER(FactionInfo, relations, other_faction);
+    BIND_ARRAY_MEMBER(FactionInfo, relations, relation);
 }

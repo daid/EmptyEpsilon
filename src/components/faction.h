@@ -37,7 +37,11 @@ public:
 
     float reputation_points = 0.0f;
 
-    std::vector<std::pair<sp::ecs::Entity, FactionRelation>> relations;
+    struct Relation {
+        sp::ecs::Entity other_faction;
+        FactionRelation relation;
+    };
+    std::vector<Relation> relations;
 
     FactionRelation getRelation(sp::ecs::Entity faction_entity);
     void setRelation(sp::ecs::Entity faction_entity, FactionRelation relation);

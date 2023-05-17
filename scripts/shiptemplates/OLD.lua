@@ -3,7 +3,7 @@ These are older ship templates, going to be replaced soon.
 ----------------------------------------------------------]]
 
 --[[ Player ships --]]
-template = ShipTemplate():setName("Player Cruiser"):setLocaleName(_("playerShip", "Player Cruiser")):setModel("battleship_destroyer_5_upgraded"):setType("playership")
+local template = ShipTemplate():setName("Player Cruiser"):setLocaleName(_("playerShip", "Player Cruiser")):setModel("battleship_destroyer_5_upgraded"):setType("playership")
 template:hidden() -- The player cruiser is pretty much replaced by the Atlantis.
 template:setRadarTrace("cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
@@ -173,7 +173,7 @@ template:setDescription(_([[The tugboat is a reliable, but small and un-armed tr
     -- Bomber mine
 
 -- Mine ship --
-variation = template:copy("Nautilus"):setLocaleName(_("playerShip", "Nautilus")):setType("playership"):setClass(_("class", "Frigate"), _("subclass", "Mine Layer"))
+local variation = template:copy("Nautilus"):setLocaleName(_("playerShip", "Nautilus")):setType("playership"):setClass(_("class", "Frigate"), _("subclass", "Mine Layer"))
 variation:setDescription(_("Small mine laying vessel with minimal armament, shields and hull"))
 variation:setShields(60,60)
 variation:setHull(100)

@@ -11,7 +11,7 @@ They come in 3 different subclasses:
 
 --[[----------------------Destroyers----------------------]]
 
-template = ShipTemplate():setName("Atlantis X23"):setLocaleName(_("ship", "Atlantis X23")):setClass(_("class", "Corvette"), _("subclass", "Destroyer")):setModel("battleship_destroyer_1_upgraded")
+local template = ShipTemplate():setName("Atlantis X23"):setLocaleName(_("ship", "Atlantis X23")):setClass(_("class", "Corvette"), _("subclass", "Destroyer")):setModel("battleship_destroyer_1_upgraded")
 template:setDescription(_([[The Atlantis X23 is the smallest model of destroyer, and its combination of frigate-like size and corvette-like power makes it an excellent escort ship when defending larger ships against multiple smaller enemies. Because the Atlantis X23 is fitted with a jump drive, it can also serve as an intersystem patrol craft.]]))
 template:setRadarTrace("dread.png")
 template:setHull(100)
@@ -30,7 +30,7 @@ template:setTubeDirection(1, -90)
 template:setTubeDirection(2,  90)
 template:setTubeDirection(3,  90)
 
-variation = template:copy("Atlantis"):setLocaleName(_("playerShip", "Atlantis")):setType("playership")
+local variation = template:copy("Atlantis"):setLocaleName(_("playerShip", "Atlantis")):setType("playership")
 variation:setDescription(_([[A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering systems and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.]]))
 variation:setShields(200, 200)
 variation:setHull(250)

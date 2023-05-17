@@ -10,7 +10,7 @@ Starfighters come in 3 subclasses:
 * Gunship: Equipped with more weapons, but hands in maneuverability because of it.
 * Bomber: Slowest of all starfighters, but pack a large punch in a small package. Usually come without any lasers, but the larger bombers have been known to deliver nukes.
 ----------------------------------------------------------]]
-template = ShipTemplate():setName("MT52 Hornet"):setLocaleName(_("ship", "MT52 Hornet")):setClass(_("class", "Starfighter"), _("subclass", "Interceptor")):setModel("WespeScoutYellow")
+local template = ShipTemplate():setName("MT52 Hornet"):setLocaleName(_("ship", "MT52 Hornet")):setClass(_("class", "Starfighter"), _("subclass", "Interceptor")):setModel("WespeScoutYellow")
 template:setRadarTrace("fighter.png")
 template:setDescription(_([[The MT52 Hornet is a basic interceptor found in many corners of the galaxy. It's easy to find spare parts for MT52s, not only because they are produced in large numbers, but also because they suffer high losses in combat.]]))
 template:setHull(30)
@@ -20,7 +20,7 @@ template:setDefaultAI('fighter')
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 30, 0, 700.0, 4.0, 2)
 
-variation = template:copy("MU52 Hornet"):setLocaleName(_("ship", "MU52 Hornet"))
+local variation = template:copy("MU52 Hornet"):setLocaleName(_("ship", "MU52 Hornet"))
 variation:setModel("WespeScoutRed")
 variation:setDescription(_([[The MU52 Hornet is a new, upgraded version of the MT52. All of its systems are slightly improved over the MT52 model.]]))
 variation:setHull(35)
