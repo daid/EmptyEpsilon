@@ -4742,7 +4742,7 @@ function addShipToDatabase(base_db,modified_db,ship,description,tube_directions,
 				modified_db:setKeyValue("Jump range","5 - 50 u")
 			end
 		else
-			modified_db:setKeyValue("Jump range"),jump_range)
+			modified_db:setKeyValue(_("scienceDB", "Jump range"),jump_range)
 		end
 	end
 	if ship:hasWarpDrive() then
