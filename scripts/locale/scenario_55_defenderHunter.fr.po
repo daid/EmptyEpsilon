@@ -45,7 +45,7 @@ msgstr ""
 "traquer vos ennemis.\n"
 "\n"
 "Au départ, vous êtes chargé de défendre votre station d'attache. Au fil du "
-"temps, vous en découvrirez plus sur les ennemis qui vous harcèlent et "
+"temps, vous en apprendrez plus sur les ennemis qui vous harcèlent et "
 "recevrez l'ordre de trouver et d'éliminer les responsables.\n"
 "Différentes missions pourront vous être confiées en cours de route, mais "
 "l'ennemi continuera de vous harceler. A vous de jongler entre ces 2 "
@@ -65,12 +65,13 @@ msgstr ""
 "\n"
 "Contient du texte audio.\n"
 "\n"
-"Version 10 - janvier 2022\n"
+"Version 10 - Janv 2022\n"
 "\n"
 "- Titre original : Defender Hunter\n"
-"- Auteur : Xansta\n"
+"- Auteur : Xansta (2018)\n"
 "https://discord.gg/GjqM9Y9yBe\n"
 "- Traduction FR : Muerte\n"
+"- Voix FR : Christelle M., Muerte\n"
 "https://discord.gg/2NPKyMnGwp"
 
 # Scenario setting
@@ -2144,7 +2145,7 @@ msgstr "Liquide de refroidissement supplémentaire acheté"
 #, lua-format
 msgctxt "defTelemetry-comms"
 msgid "Establish defensive system telemetry (%i rep)"
-msgstr "Établir un système télémétrique de défense (%i rep)."
+msgstr "Établir la télémétrie du système de défense (%i rep)."
 
 #: scripts/scenario_55_defenderHunter.lua:5621
 #, lua-format
@@ -2153,9 +2154,9 @@ msgid ""
 "Defensive telemetry established with station %s.\n"
 "Damage should show on Relay when it occurs"
 msgstr ""
-"Système télémétrique de défense établie avec la station %s.\n"
-"Les dommages devraient apparaître sur la console relais lorsqu'ils se "
-"produisent."
+"Télémétrie du système de défense établie avec la station %s.\n"
+"Les dégâts devraient apparaître sur la console des communications lorsqu'ils "
+"se produisent."
 
 #: scripts/scenario_55_defenderHunter.lua:5641
 msgctxt "-comms"
@@ -2726,7 +2727,7 @@ msgstr "Si cela vous intéresse, %s se trouve en %s."
 #: scripts/scenario_55_defenderHunter.lua:6060
 msgctxt "upgrade-comms"
 msgid "Upgrade maneuverability"
-msgstr "Mettre à jour le système de manoeuvre."
+msgstr "Mettre à jour le système de manoeuvre"
 
 #: scripts/scenario_55_defenderHunter.lua:6070
 msgctxt "upgrade-comms"
