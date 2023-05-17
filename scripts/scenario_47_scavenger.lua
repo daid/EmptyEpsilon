@@ -106,7 +106,7 @@ function init()
 	--stationCommunication could be nil (default), commsStation (embedded function) or comms_station_enhanced (external script)
 	stationCommunication = "commsStation"
 	stationStaticAsteroids = true
-	primaryOrders = "No primary orders"
+	primaryOrders = _("orders-comms", "No primary orders")
 	plot1 = exuariHarassment
 	plot1_mission_count = 0
 	plotH = healthCheck				--Damage to ship can kill repair crew members
@@ -5091,7 +5091,7 @@ function handleDockedState()
 			addCommsReply(_("orders-comms", "What are my current orders?"), function()
 				setOptionalOrders()
 				setSecondaryOrders()
-				ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
+				ordMsg = primaryOrders .. _("orders-comms", "\n") .. secondaryOrders .. optionalOrders
 				if playWithTimeLimit then
 					ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 				end
@@ -6980,19 +6980,29 @@ function adderMk3(enemyFaction)
 	ship:setShieldsMax(15)	--weaker shield (vs 20)
 	ship:setShields(15)
 	ship:setRotationMaxSpeed(35)	--faster maneuver (vs 20)
-	if queryScienceDatabase("Ships","Starfighter","Adder MK3") == nil then
-		local starfighter_db = queryScienceDatabase("Ships","Starfighter")
-		starfighter_db:addEntry("Adder MK3")
-		addShipToDatabase(
-			queryScienceDatabase("Ships","Starfighter","Adder MK4"),	--base ship database entry
-			queryScienceDatabase("Ships","Starfighter","Adder MK3"),	--modified ship database entry
-			ship,			--ship just created, long description on the next line
-			_("scienceDB", "The Adder MK3 is one of the first of the Adder line to meet with some success. A large number of them were made before the manufacturer went through its first bankruptcy. There has been a recent surge of purchases of the Adder MK3 in the secondary market due to its low price and its similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 has weaker shields and hull, but a faster turn speed"),
-			{
-				{key = "Small tube 0", value = "20 sec"},	--torpedo tube direction and load speed
-			},
-			nil
-		)
+	local ships_key = _("scienceDB","Ships")
+	local fighter_key = _("scienceDB","Starfighter")
+	local adder_3_key = _("scienceDB","Adder MK3")
+	local adder_4_key = _("scienceDB","Adder MK4")
+	local adder_3_db = queryScienceDatabase(ships_key,fighter_key,adder_3_key)
+	if adder_3_db == nil then
+		local fighter_db = queryScienceDatabase(ships_key,fighter_key)
+		if fighter_db ~= nil then
+			fighter_db:addEntry(adder_3_key)
+			adder_3_db = queryScienceDatabase(ships_key,fighter_key,adder_3_key)
+			local tube_key = _("scienceDB","Small tube 0")
+			local load_val = _("scienceDB","20 sec")
+			addShipToDatabase(
+				queryScienceDatabase(ships_key,fighter_key,adder_4_key),	--base ship database entry
+				queryScienceDatabase(ships_key,fighter_key,adder_3_key),	--modified ship database entry
+				ship,			--ship just created, long description on the next line
+				_("scienceDB", "The Adder MK3 is one of the first of the Adder line to meet with some success. A large number of them were made before the manufacturer went through its first bankruptcy. There has been a recent surge of purchases of the Adder MK3 in the secondary market due to its low price and its similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 has weaker shields and hull, but a faster turn speed"),
+				{
+					{key = tube_key, value = load_val},	--torpedo tube direction and load speed
+				},
+				nil
+			)
+		end
 	end
 	return ship
 end
@@ -7075,16 +7085,16 @@ function addShipToDatabase(base_db,modified_db,ship,description,tube_directions,
 		local shield_string = ""
 		for i=1,shields do
 			if shield_string == "" then
-				shield_string = string.format("%i",math.floor(ship:getShieldMax(i-1)))
+				shield_string = string.format(_("%i"),math.floor(ship:getShieldMax(i-1)))
 			else
-				shield_string = string.format("%s/%i",shield_string,math.floor(ship:getShieldMax(i-1)))
+				shield_string = string.format(_("%s/%i"),shield_string,math.floor(ship:getShieldMax(i-1)))
 			end
 		end
 		modified_db:setKeyValue("Shield",shield_string)
 	end
-	modified_db:setKeyValue("Hull",string.format("%i",math.floor(ship:getHullMax())))
-	modified_db:setKeyValue("Move speed",string.format("%.1f u/min",ship:getImpulseMaxSpeed()*60/1000))
-	modified_db:setKeyValue("Turn speed",string.format("%.1f deg/sec",ship:getRotationMaxSpeed()))
+	modified_db:setKeyValue("Hull",string.format(_("scienceDB", "%i"),math.floor(ship:getHullMax())))
+	modified_db:setKeyValue("Move speed",string.format(_("scienceDB", "%.1f u/min"),ship:getImpulseMaxSpeed()*60/1000))
+	modified_db:setKeyValue("Turn speed",string.format(_("scienceDB", "%.1f deg/sec"),ship:getRotationMaxSpeed()))
 	if ship:hasJumpDrive() then
 		if jump_range == nil then
 			local base_jump_range = base_db:getKeyValue("Jump range")
@@ -7098,7 +7108,7 @@ function addShipToDatabase(base_db,modified_db,ship,description,tube_directions,
 		end
 	end
 	if ship:hasWarpDrive() then
-		modified_db:setKeyValue("Warp Speed",string.format("%.1f u/min",ship:getWarpSpeed()*60/1000))
+		modified_db:setKeyValue(_("scienceDB", "Warp Speed"),string.format(_("scienceDB", "%.1f u/min"),ship:getWarpSpeed()*60/1000))
 	end
 	local key = ""
 	if ship:getBeamWeaponRange(0) > 0 then
@@ -7108,11 +7118,11 @@ function addShipToDatabase(base_db,modified_db,ship,description,tube_directions,
 			if beam_direction > 315 and beam_direction < 360 then
 				beam_direction = beam_direction - 360
 			end
-			key = string.format("Beam weapon %i:%i",ship:getBeamWeaponDirection(bi),ship:getBeamWeaponArc(bi))
+			key = string.format(_("scienceDB", "Beam weapon %i:%i"),ship:getBeamWeaponDirection(bi),ship:getBeamWeaponArc(bi))
 			while(modified_db:getKeyValue(key) ~= "") do
 				key = " " .. key
 			end
-			modified_db:setKeyValue(key,string.format("%.1f Dmg / %.1f sec",ship:getBeamWeaponDamage(bi),ship:getBeamWeaponCycleTime(bi)))
+			modified_db:setKeyValue(key,string.format(_("scienceDB", "%.1f Dmg / %.1f sec"),ship:getBeamWeaponDamage(bi),ship:getBeamWeaponCycleTime(bi)))
 			bi = bi + 1
 		until(ship:getBeamWeaponRange(bi) < 1)
 	end
@@ -7127,7 +7137,7 @@ function addShipToDatabase(base_db,modified_db,ship,description,tube_directions,
 		for _, missile_type in ipairs(missile_types) do
 			local max_storage = ship:getWeaponStorageMax(missile_type)
 			if max_storage > 0 then
-				modified_db:setKeyValue(string.format("Storage %s",missile_type),string.format("%i",max_storage))
+				modified_db:setKeyValue(string.format(_("scienceDB", "Storage %s"),missile_type),string.format("%i",max_storage))
 			end
 		end
 	end
@@ -7214,7 +7224,7 @@ end
 --	Player ship improvements
 function addForwardBeam()
 	if comms_source.add_forward_beam == nil then
-		addCommsReply("Add beam weapon", function()
+		addCommsReply(_("upgrade-comms", "Add beam weapon"), function()
 			local ctd = comms_target.comms_data
 			local part_quantity = 0
 			if comms_source.goods ~= nil and comms_source.goods[ctd.characterGood] ~= nil and comms_source.goods[ctd.characterGood] > 0 then
@@ -7229,9 +7239,9 @@ function addForwardBeam()
 					beam_index = beam_index + 1
 				until(comms_source:getBeamWeaponRange(beam_index) < 1)
 				comms_source:setBeamWeapon(beam_index,20,0,1200,6,5)
-				setCommsMessage("A beam wepon has been added to your ship")
+				setCommsMessage(_("upgrade-comms", "A beam wepon has been added to your ship"))
 			else
-				setCommsMessage(string.format("%s cannot add a beam weapon to your ship unless you provide %s",ctd.character,ctd.characterGood))
+				setCommsMessage(string.format(_("upgrade-comms", "%s cannot add a beam weapon to your ship unless you provide %s"),ctd.character,ctd.characterGood))
 			end
 			addCommsReply(_("Back"), commsStation)
 		end)
@@ -7239,7 +7249,7 @@ function addForwardBeam()
 end
 function efficientBatteries()
 	if comms_source.efficientBatteriesUpgrade == nil then
-		addCommsReply("Increase battery efficiency", function()
+		addCommsReply(_("upgrade-comms", "Increase battery efficiency"), function()
 			local ctd = comms_target.comms_data
 			local partQuantity = 0
 			local partQuantity2 = 0
@@ -7256,9 +7266,9 @@ function efficientBatteries()
 				comms_source.cargo = comms_source.cargo + 2
 				comms_source:setMaxEnergy(comms_source:getMaxEnergy()*1.5)
 				comms_source:setEnergy(comms_source:getMaxEnergy())
-				setCommsMessage(string.format("%s: I appreciate the %s and %s. You have a 50%% greater energy capacity due to increased battery efficiency",ctd.character,ctd.characterGood,ctd.characterGood2))
+				setCommsMessage(string.format(_("upgrade-comms", "%s: I appreciate the %s and %s. You have a 50%% greater energy capacity due to increased battery efficiency"),ctd.character,ctd.characterGood,ctd.characterGood2))
 			else
-				setCommsMessage(string.format("%s: You need to bring me some %s and %s before I can increase your battery efficiency",ctd.character,ctd.characterGood,ctd.characterGood2))
+				setCommsMessage(string.format(_("upgrade-comms", "%s: You need to bring me some %s and %s before I can increase your battery efficiency"),ctd.character,ctd.characterGood,ctd.characterGood2))
 			end
 			addCommsReply(_("Back"), commsStation)
 		end)
@@ -7266,7 +7276,7 @@ function efficientBatteries()
 end
 function shrinkBeamCycle()
 	if comms_source.shrinkBeamCycleUpgrade == nil then
-		addCommsReply("Reduce beam cycle time", function()
+		addCommsReply(_("upgrade-comms", "Reduce beam cycle time"), function()
 			local ctd = comms_target.comms_data
 			if comms_source:getBeamWeaponRange(0) > 0 then
 				if	payForUpgrade() then
@@ -7288,9 +7298,9 @@ function shrinkBeamCycle()
 							comms_source:setBeamWeapon(bi,tempArc,tempDir,tempRng,tempCyc * .75,tempDmg)
 							bi = bi + 1
 						until(comms_source:getBeamWeaponRange(bi) < 1)
-						setCommsMessage("After accepting your gift, he reduced your Beam cycle time by 25%%")
+						setCommsMessage(_("upgrade-comms", "After accepting your gift, he reduced your Beam cycle time by 25%%"))
 					else
-						setCommsMessage(string.format("%s requires %s for the upgrade",ctd.character,ctd.characterGood))
+						setCommsMessage(string.format(_("upgrade-comms", "%s requires %s for the upgrade"),ctd.character,ctd.characterGood))
 					end
 				else
 					comms_source.shrinkBeamCycleUpgrade = "done"
@@ -7304,10 +7314,10 @@ function shrinkBeamCycle()
 						comms_source:setBeamWeapon(bi,tempArc,tempDir,tempRng,tempCyc * .75,tempDmg)
 						bi = bi + 1
 					until(comms_source:getBeamWeaponRange(bi) < 1)
-					setCommsMessage(string.format("%s reduced your Beam cycle time by 25%% at no cost in trade with the message, 'Go get those Kraylors.'",ctd.character))
+					setCommsMessage(string.format(_("upgrade-comms", "%s reduced your Beam cycle time by 25%% at no cost in trade with the message, 'Go get those Kraylors.'"),ctd.character))
 				end
 			else
-				setCommsMessage("Your ship type does not support a beam weapon upgrade.")				
+				setCommsMessage(_("upgrade-comms", "Your ship type does not support a beam weapon upgrade."))				
 			end
 		end)
 	end
@@ -7588,13 +7598,13 @@ function exuariHarassment(delta)
 	player = getPlayerShip(-1)
 	if plot1_message == nil then
 		if exuari_harass_diagnostic then print("message not sent yet") end
-		local help_message = string.format(_("ridExuari-", "[%s in %s] Hostile Exuari approach. Help us, please. We cannot defend ourselves. Your ship is the only thing that stands between us and destruction."),first_station:getCallSign(),first_station:getSectorName())
+		local help_message = string.format(_("ridExuari-incCall", "[%s in %s] Hostile Exuari approach. Help us, please. We cannot defend ourselves. Your ship is the only thing that stands between us and destruction."),first_station:getCallSign(),first_station:getSectorName())
 		if difficulty < 1 then
-			help_message = string.format(_("ridExuari-", "%s\n\nWe think there is an Exuari base hiding in a nebula in sector %s"),help_message,concealing_nebula:getSectorName())
+			help_message = string.format(_("ridExuari-incCall", "%s\n\nWe think there is an Exuari base hiding in a nebula in sector %s"),help_message,concealing_nebula:getSectorName())
 		end
 		player.harass_message_sent = first_station:sendCommsMessageNoLog(player,help_message)
 		if player.harass_message_sent then
-			plot1_message = string.format(_("ridExuari-", "%s has asked for help against the Exuari"),first_station:getCallSign())
+			plot1_message = string.format(_("ridExuari-incCall", "%s has asked for help against the Exuari"),first_station:getCallSign())
 			plot1_type = "optional"
 			plot1_danger = .5
 			plot1_fleets_destroyed = 0
@@ -7604,13 +7614,13 @@ function exuariHarassment(delta)
 	end
 	if player.captain_log < 1 then
 		if getScenarioTime() > 90 and player.harass_message_sent then
-			player:addToShipLog(string.format(_("-shipLog", "[Captain's Log] We have started our initial shakedown cruise of %s, a %s class ship. The crew are glad to be moving up from the class three freighter we used to run. After several years of doing cargo delivery runs and personnel transfers, it's nice to be on a ship with more self reliance. We've got beam weapons! Our previous ship was defenseless. Unfortunately, our impulse engines are not as fast as our previous ship, but we might be able to fix that. That's the kind of compromise you make when you purchase surplus military hardware. I suspect that we got such a good deal on the ship because the previous owner, the governer of station %s, has an ulterior motive. After all, we are the best qualified to run this ship in the sector and we have not seen any other friendly armed ships around here."),player:getCallSign(),player:getTypeName(),first_station:getCallSign()),"Green")
+			player:addToShipLog(string.format(_("ridExuari-shipLog", "[Captain's Log] We have started our initial shakedown cruise of %s, a %s class ship. The crew are glad to be moving up from the class three freighter we used to run. After several years of doing cargo delivery runs and personnel transfers, it's nice to be on a ship with more self reliance. We've got beam weapons! Our previous ship was defenseless. Unfortunately, our impulse engines are not as fast as our previous ship, but we might be able to fix that. That's the kind of compromise you make when you purchase surplus military hardware. I suspect that we got such a good deal on the ship because the previous owner, the governer of station %s, has an ulterior motive. After all, we are the best qualified to run this ship in the sector and we have not seen any other friendly armed ships around here."),player:getCallSign(),player:getTypeName(),first_station:getCallSign()),"Green")
 			player.captain_log = 1
 		end
 	end
 	if player.help_with_exuari_base_message == nil then
 		if getScenarioTime() > 600 and exuari_harassing_station ~= nil and exuari_harassing_station:isValid() then
-			player:addToShipLog(string.format(_("-shipLog", "[Station %s] Based on our observation of the Exuari base %s in %s, we think it will continue to launch harassing spacecraft in our direction. We know it's a large target for a small fighter, but we believe you can destroy it, %s. We would be very grateful if you would do just that. Our defenses are very limited."),first_station:getCallSign(),exuari_harassing_station:getCallSign(),exuari_harassing_station:getSectorName(),player:getCallSign()),"Magenta")
+			player:addToShipLog(string.format(_("ridExuari-shipLog", "[Station %s] Based on our observation of the Exuari base %s in %s, we think it will continue to launch harassing spacecraft in our direction. We know it's a large target for a small fighter, but we believe you can destroy it, %s. We would be very grateful if you would do just that. Our defenses are very limited."),first_station:getCallSign(),exuari_harassing_station:getCallSign(),exuari_harassing_station:getSectorName(),player:getCallSign()),"Magenta")
 			player.help_with_exuari_base_message = "sent"
 		end
 	end
@@ -7650,7 +7660,7 @@ function exuariHarassment(delta)
 				plot1_fleet_spawned = nil
 				plot1_defensive_fleet_spawned = nil
 				player:addReputationPoints(100)
-				first_station:sendCommsMessage(player,_("-comms", "Thanks for taking care of that Exuari base and all the Exuari ships it deployed. Dock with us for a token of our appreciation"))
+				first_station:sendCommsMessage(player,_("ridExuari-incCall", "Thanks for taking care of that Exuari base and all the Exuari ships it deployed. Dock with us for a token of our appreciation"))
 				exuari_harassment_upgrade = true
 				plot2 = contractTarget
 			end
@@ -8151,7 +8161,7 @@ function kraylorDiversionarySabotage(delta)
 				player.diversion_orders = "sent"
 				player:addToShipLog(_("-shipLog", "[Human Navy Regional Headquarters] All Human Navy vessels are hereby ordered to assist in the repelling of inbound Kraylor ships. We are not sure of their intent, but we are sure it is not good. Destroy them before they can destroy us"),"Red")
 				player:addToShipLog(string.format(_("-shipLog", "This includes you, %s"),player:getCallSign()),"Magenta")
-				primaryOrders = "Repel Kraylor"
+				primaryOrders = _("orders-comms", "Repel Kraylor")
 			end
 			local enemy_count = 0
 			local enemy_close_to_supply = 0
@@ -8438,7 +8448,7 @@ function contractTarget(delta)
 			if transition_contract_delay < 0 then
 				if first_station ~= nil and first_station:isValid() then
 					local p = getPlayerShip(-1)
-					p:addToShipLog(string.format(_("-shipLog", "A rare long range contract has been posted at station %s"),first_station:getCallSign()),"Magenta")
+					p:addToShipLog(string.format(_("contract-shipLog", "A rare long range contract has been posted at station %s"),first_station:getCallSign()),"Magenta")
 				else
 					globalMessage(_("msgMainscreen", "Mourning over the loss of the station has halted all business\nThe mission is over"))
 					victory("Exuari")
@@ -8481,7 +8491,7 @@ function contractTarget(delta)
 				if not contract_remains then
 					if first_station ~= nil and first_station:isValid() then
 						local p = getPlayerShip(-1)
-						p:addToShipLog(string.format(_("-shipLog", "A rare long range contract has been posted at station %s"),first_station:getCallSign()),"Magenta")
+						p:addToShipLog(string.format(_("contract-shipLog", "A rare long range contract has been posted at station %s"),first_station:getCallSign()),"Magenta")
 					else
 						globalMessage(_("msgMainscreen", "Mourning over the loss of the station has halted all business\nThe mission is over"))
 						victory("Exuari")
@@ -8498,7 +8508,7 @@ function jennyAsteroid(delta)
 		if player.asteroid_identified then
 			if player:isDocked(first_station) then
 				player.jenny_aboard = true
-				player:addToShipLog(string.format(_("-shipLog", "Jenny McGuire is now aboard. She's a bit paranoid and has sealed the door to her quarters. You'll have to contact %s to talk to her"),first_station:getCallSign()),"Magenta")
+				player:addToShipLog(string.format(_("Jenny-shipLog", "Jenny McGuire is now aboard. She's a bit paranoid and has sealed the door to her quarters. You'll have to contact %s to talk to her"),first_station:getCallSign()),"Magenta")
 			end
 		end
 	end

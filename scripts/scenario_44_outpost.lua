@@ -18352,8 +18352,8 @@ function addShipToDatabase(base_db,modified_db,ship,description,tube_directions,
 		end
 	end
 	if ship:hasWarpDrive() then
-		local ward_speed_key = _("scienceDB","Warp Speed")
-		modified_db:setKeyValue(ward_speed_key,string.format(_("scienceDB","%.1f u/min"),ship:getWarpSpeed()*60/1000))
+		local ward_speed_key = _("scienceDB", "Warp Speed")
+		modified_db:setKeyValue(ward_speed_key,string.format(_("scienceDB", "%.1f u/min"),ship:getWarpSpeed()*60/1000))
 	end
 	local key = ""
 	if ship:getBeamWeaponRange(0) > 0 then
@@ -18364,11 +18364,11 @@ function addShipToDatabase(base_db,modified_db,ship,description,tube_directions,
 			if beam_direction > 315 and beam_direction < 360 then
 				beam_direction = beam_direction - 360
 			end
-			key = string.format(_("scienceDB","Beam weapon %i:%i"),ship:getBeamWeaponDirection(bi),ship:getBeamWeaponArc(bi))
+			key = string.format(_("scienceDB", "Beam weapon %i:%i"),ship:getBeamWeaponDirection(bi),ship:getBeamWeaponArc(bi))
 			while(modified_db:getKeyValue(key) ~= "") do
 				key = " " .. key
 			end
-			modified_db:setKeyValue(key,string.format(_("scienceDB","%.1f Dmg / %.1f sec"),ship:getBeamWeaponDamage(bi),ship:getBeamWeaponCycleTime(bi)))
+			modified_db:setKeyValue(key,string.format(_("scienceDB", "%.1f Dmg / %.1f sec"),ship:getBeamWeaponDamage(bi),ship:getBeamWeaponCycleTime(bi)))
 			bi = bi + 1
 			count_repeat_loop = count_repeat_loop + 1
 		until(ship:getBeamWeaponRange(bi) < 1 or count_repeat_loop > max_repeat_loop)
@@ -18387,7 +18387,7 @@ function addShipToDatabase(base_db,modified_db,ship,description,tube_directions,
 		for index, missile_type in ipairs(missile_types) do
 			local max_storage = ship:getWeaponStorageMax(missile_type)
 			if max_storage > 0 then
-				modified_db:setKeyValue(string.format(_("scienceDB","Storage %s"),missile_type),string.format("%i",max_storage))
+				modified_db:setKeyValue(string.format(_("scienceDB", "Storage %s"),missile_type),string.format("%i",max_storage))
 			end
 		end
 	end

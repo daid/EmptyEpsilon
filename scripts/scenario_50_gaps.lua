@@ -3873,7 +3873,7 @@ function initialInstructions(delta)
 	initialOrderTimer = initialOrderTimer - delta
 	if initialOrderTimer < 0 then
 		player:addToShipLog(string.format(_("goal-shiplog", "Since %s is so isolated and so close to enemy territory, we need you to lay a minefield across each gap in the surrounding asteroids"),homeStation:getCallSign()),"Magenta")
-		primaryOrders = _("orders-comms", "Lay minefield across each gap in surrounding asteroids.")
+		primaryOrders = _("goal-comms", "Lay minefield across each gap in surrounding asteroids.")
 		plot1 = checkGaps
 		plot1name = "checkGaps"
 		waveTimer = interWave
@@ -3891,8 +3891,8 @@ function checkGaps(delta)
 			southClosed = checkSouthernGap()
 			if prevSouthClosed and southClosed then
 				southMet = true
-				player:addToShipLog(string.format(_("minefield-shiplog", "Congratulations, You've closed the gap at heading 180 from %s"),homeStation:getCallSign()),"Magenta")
-				primaryOrders = primaryOrders .. _(" South gap closed.")
+				player:addToShipLog(string.format(_("minefieldOrder-shiplog", "Congratulations, You've closed the gap at heading 180 from %s"),homeStation:getCallSign()),"Magenta")
+				primaryOrders = primaryOrders .. _("minefieldOrders-comms", " South gap closed.")
 				player:addReputationPoints(20-(difficulty*6))
 			end
 		end
@@ -3902,8 +3902,8 @@ function checkGaps(delta)
 			northClosed = checkNorthernGap()
 			if prevNorthClosed and northClosed then
 				northMet = true
-				player:addToShipLog(string.format(_("minefield-shiplog", "Congratulations, You've closed the gap at heading 0 from %s"),homeStation:getCallSign()),"Magenta")
-				primaryOrders = primaryOrders .. _(" North gap closed.")
+				player:addToShipLog(string.format(_("minefieldOrders-shiplog", "Congratulations, You've closed the gap at heading 0 from %s"),homeStation:getCallSign()),"Magenta")
+				primaryOrders = primaryOrders .. _("minefieldOrders-comms", " North gap closed.")
 				player:addReputationPoints(20-(difficulty*6))
 			end
 		end
@@ -3913,8 +3913,8 @@ function checkGaps(delta)
 			westClosed = checkWesternernGap()
 			if prevWestClosed and westClosed then
 				westMet = true
-				player:addToShipLog(string.format(_("minefield-shiplog", "Congratulations, You've closed the gap at heading 270 from %s"),homeStation:getCallSign()),"Magenta")
-				primaryOrders = primaryOrders .. _(" West gap closed.")
+				player:addToShipLog(string.format(_("minefieldOrders-shiplog", "Congratulations, You've closed the gap at heading 270 from %s"),homeStation:getCallSign()),"Magenta")
+				primaryOrders = primaryOrders .. _("minefieldOrders-comms", " West gap closed.")
 				player:addReputationPoints(20-(difficulty*6))
 			end
 		end
@@ -3924,8 +3924,8 @@ function checkGaps(delta)
 			eastClosed = checkEasternernGap()
 			if prevEastClosed and eastClosed then
 				eastMet = true
-				player:addToShipLog(string.format(_("minefield-shiplog", "Congratulations, You've closed the gap at heading 90 from %s"),homeStation:getCallSign()),"Magenta")
-				primaryOrders = primaryOrders .. _(" East gap closed.")
+				player:addToShipLog(string.format(_("minefieldOrders-shiplog", "Congratulations, You've closed the gap at heading 90 from %s"),homeStation:getCallSign()),"Magenta")
+				primaryOrders = primaryOrders .. _("minefieldOrders-comms", " East gap closed.")
 				player:addReputationPoints(20-(difficulty*6))
 			end
 		end
@@ -3935,8 +3935,8 @@ function checkGaps(delta)
 					p = getPlayerShip(pidx)
 					if p ~= nil and p:isValid() then
 						p:addReputationPoints(100)
-						p:addToShipLog(string.format(_("minefield-shiplog", "You've closed the gaps. Now for the Quixotic part: go destroy the enemy bases surrounding us while keeping %s alive. You'll find them straight out from the gaps"),homeStation:getCallSign()),"Magenta")
-						primaryOrders = string.format(_("orders-comms", "Protect %s. Destroy enemy bases straight out from gaps"),homeStation:getCallSign())
+						p:addToShipLog(string.format(_("minefieldOrders-shiplog", "You've closed the gaps. Now for the Quixotic part: go destroy the enemy bases surrounding us while keeping %s alive. You'll find them straight out from the gaps"),homeStation:getCallSign()),"Magenta")
+						primaryOrders = string.format(_("minefieldOrders-comms", "Protect %s. Destroy enemy bases straight out from gaps"),homeStation:getCallSign())
 					end
 				end
 				plot1name = "destroyEnemyBases"
