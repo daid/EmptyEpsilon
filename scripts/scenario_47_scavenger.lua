@@ -7953,9 +7953,9 @@ function exuariHarassment(delta)
 					end
 				end
 				if #plot1_last_defense_fleet > 1 then
-					player:addToShipLog(string.format(_("ridExuari-shipLog", "%s just launched these ships: %s"),exuari_harassing_station:getCallSign(),ship_call_signs),"Red")
+					player:addToShipLog(string.format(_("-shipLog", "%s just launched these ships: %s"),exuari_harassing_station:getCallSign(),ship_call_signs),"Red")
 				else
-					player:addToShipLog(string.format(_("ridExuari-shipLog", "%s just launched %s"),exuari_harassing_station:getCallSign(),ship_call_signs),"Red")
+					player:addToShipLog(string.format(_("-shipLog", "%s just launched %s"),exuari_harassing_station:getCallSign(),ship_call_signs),"Red")
 				end
 				plot1_last_defense = true
 			end
@@ -8020,7 +8020,7 @@ function longDistanceCargo(delta)
 			end
 			if missing_good then
 				if p.missing_good_message == nil then
-					p:addToShipLog(string.format(_("cargo-shipLog", "[%s] Your delivery contract calls for food, medicine, dilithium and tritanium. Return when you have all four of these and we'll consider your contract fulfilled"),comms_target:getCallSign()),"Magenta")
+					p:addToShipLog(string.format(_("-shipLog", "[%s] Your delivery contract calls for food, medicine, dilithium and tritanium. Return when you have all four of these and we'll consider your contract fulfilled"),comms_target:getCallSign()),"Magenta")
 					p.missing_good_message = "sent"
 				end
 			else
@@ -8042,7 +8042,7 @@ function longDistanceCargo(delta)
 						p:setBeamWeapon(bi,tempArc,tempDir,tempRng,tempCyc*(2/3),tempDmg)
 						bi = bi + 1
 					until(comms_source:getBeamWeaponRange(bi) < 1)
-					p:addToShipLog(string.format(_("cargo-shipLog", "[%s] Thanks for the cargo, %s. We'll make good use of it. We've added 100 units to your battery capacity and reduced your beam cycle time by 1/3. Enjoy your visit to the %s system"),supply_depot_station:getCallSign(),p:getCallSign(),planet_star:getCallSign()),"Magenta")
+					p:addToShipLog(string.format(_("-shipLog", "[%s] Thanks for the cargo, %s. We'll make good use of it. We've added 100 units to your battery capacity and reduced your beam cycle time by 1/3. Enjoy your visit to the %s system"),supply_depot_station:getCallSign(),p:getCallSign(),planet_star:getCallSign()),"Magenta")
 					p.long_distance_upgrade = true
 					plot1 = kraylorDiversionarySabotage
 					plot8 = opportunisticPirates
@@ -8159,9 +8159,9 @@ function kraylorDiversionarySabotage(delta)
 			kraylor_sabotage_diversion_timer = delta + kraylor_sabotage_diversion_interval
 			if player.diversion_orders == nil then
 				player.diversion_orders = "sent"
-				player:addToShipLog(_("Kraylor-shipLog", "[Human Navy Regional Headquarters] All Human Navy vessels are hereby ordered to assist in the repelling of inbound Kraylor ships. We are not sure of their intent, but we are sure it is not good. Destroy them before they can destroy us"),"Red")
-				player:addToShipLog(string.format(_("Kraylor-shipLog", "This includes you, %s"),player:getCallSign()),"Magenta")
-				primaryOrders = _("KraylorOrders-comms", "Repel Kraylor")
+				player:addToShipLog(_("-shipLog", "[Human Navy Regional Headquarters] All Human Navy vessels are hereby ordered to assist in the repelling of inbound Kraylor ships. We are not sure of their intent, but we are sure it is not good. Destroy them before they can destroy us"),"Red")
+				player:addToShipLog(string.format(_("-shipLog", "This includes you, %s"),player:getCallSign()),"Magenta")
+				primaryOrders = _("orders-comms", "Repel Kraylor")
 			end
 			local enemy_count = 0
 			local enemy_close_to_supply = 0
@@ -8318,7 +8318,7 @@ function kraylorPlanetBuster(delta)
 							local moon_name = planet_secondus_moon:getCallSign()
 							planet_secondus_moon:destroy()
 							ExplosionEffect():setPosition(explosion_x,explosion_y):setSize(secondus_moon_radius*2)
-							player:addToShipLog(string.format(_("Kraylor-shipLog", "Looks like the Kraylor have developed some kind of planet busting weapon. They just destroyed %s with it. Keep them away from %s!"),moon_name,planet_secondus:getCallSign()),"Magenta")
+							player:addToShipLog(string.format(_("-shipLog", "Looks like the Kraylor have developed some kind of planet busting weapon. They just destroyed %s with it. Keep them away from %s!"),moon_name,planet_secondus:getCallSign()),"Magenta")
 						end
 					else
 						if distance(enemy,planet_secondus) < 1500 + planet_secondus_radius then
@@ -8459,7 +8459,7 @@ function contractTarget(delta)
 				if player.captain_log < 2 then
 					if transition_contract_delay < transition_contract_delay_max*.8 then
 						if independent_station[1]:isValid() and independent_station[2]:isValid() and independent_station[3]:isValid() then
-							player:addToShipLog(string.format(_("contract-shipLog", "[Captain's Log] Why can't the Exuari just leave us alone? I don't understand what it is about them that makes them want to prey on everyone.\nThe upgrades for %s are very nice. They certainly came in handy. With the confidence of stations %s, %s and %s, I feel we will succeed as the space entrepeneurs we want to be."),player:getCallSign(),first_station:getCallSign(),independent_station[2]:getCallSign(),independent_station[3]:getCallSign()),"Green")
+							player:addToShipLog(string.format(_("-shipLog", "[Captain's Log] Why can't the Exuari just leave us alone? I don't understand what it is about them that makes them want to prey on everyone.\nThe upgrades for %s are very nice. They certainly came in handy. With the confidence of stations %s, %s and %s, I feel we will succeed as the space entrepeneurs we want to be."),player:getCallSign(),first_station:getCallSign(),independent_station[2]:getCallSign(),independent_station[3]:getCallSign()),"Green")
 						end
 						player.captain_log = 2
 					end
@@ -8670,7 +8670,7 @@ function update(delta)
 			else
 				if player.supply_sabotage_message == nil then
 					player.supply_sabotage_message = "sent"
-					player:addToShipLog(string.format(_("Kraylor-shipLog", "Kraylor have sabotaged station %s. It can no longer maintain orbit around %s. Fortunately, it looks to be in no danger from %s or %s, but the Kraylor pose a more significant threat"),supply_depot_station:getCallSign(),planet_secondus_moon:getCallSign(),planet_secondus:getCallSign(),planet_secondus_moon:getCallSign()),"Magenta")
+					player:addToShipLog(string.format(_("-shipLog", "Kraylor have sabotaged station %s. It can no longer maintain orbit around %s. Fortunately, it looks to be in no danger from %s or %s, but the Kraylor pose a more significant threat"),supply_depot_station:getCallSign(),planet_secondus_moon:getCallSign(),planet_secondus:getCallSign(),planet_secondus_moon:getCallSign()),"Magenta")
 				end
 			end
 		end
