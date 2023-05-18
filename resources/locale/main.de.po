@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: src/scienceDatabase.cpp:397
 msgctxt "database direction"
@@ -63,6 +63,10 @@ msgid ""
 "deep space. They can fill many functions and vary broadly in size, from "
 "small tugs to massive dreadnoughts."
 msgstr ""
+"Raumschiffe sind in der Lage, den Gefahren einer Reise durch die Tiefen des "
+"Weltraums standhalten zu können. Sie können viele Funktionen erfüllen und "
+"kommen in unterschiedlichsten Größen vor, von kleinen Jägern bis hin zu "
+"gewaltigen Dreadnoughts."
 
 #: src/scienceDatabase.cpp:500
 msgctxt "database"
@@ -147,10 +151,9 @@ msgid "Storage {weapon}"
 msgstr "Ladung {weapon}"
 
 #: src/scienceDatabase.cpp:580
-#, fuzzy
 msgctxt "database"
 msgid "Stations"
-msgstr "Fraktionen"
+msgstr "Stationen"
 
 #: src/scienceDatabase.cpp:581
 msgid ""
@@ -158,6 +161,10 @@ msgid ""
 "small outposts to city-sized communities. Many provide restocking and repair "
 "services to neutral and friendly ships."
 msgstr ""
+"Raumstationen sind permanente, unbewegliche Strukturen, die von kleinen "
+"Außenposten bis zu stadtgroßen Gemeinschaften reichen können. Viele bieten "
+"neutralen und befreundeten Schiffen Dienste wie Reparaturen und Versorgung "
+"an."
 
 #: src/playerInfo.cpp:253
 msgctxt "station"
@@ -384,43 +391,36 @@ msgid "Last Session ({last})"
 msgstr "Letzte Sitzung ({last})"
 
 #: src/menus/mainMenus.cpp:72
-#, fuzzy
 msgctxt "Credits"
 msgid "Version: {version}"
 msgstr "Version: {version}"
 
 #: src/menus/mainMenus.cpp:74
-#, fuzzy
 msgctxt "mainMenu"
 msgid "Your name:"
 msgstr "Dein Name:"
 
 #: src/menus/mainMenus.cpp:79
-#, fuzzy
 msgctxt "mainMenu"
 msgid "Start server"
 msgstr "Starte Server"
 
 #: src/menus/mainMenus.cpp:84
-#, fuzzy
 msgctxt "mainMenu"
 msgid "Start client"
 msgstr "Starte Client"
 
 #: src/menus/mainMenus.cpp:89
-#, fuzzy
 msgctxt "mainMenu"
 msgid "Options"
 msgstr "Optionen"
 
 #: src/menus/mainMenus.cpp:94
-#, fuzzy
 msgctxt "mainMenu"
 msgid "Quit"
 msgstr "Beenden"
 
 #: src/menus/mainMenus.cpp:98
-#, fuzzy
 msgctxt "mainMenu"
 msgid "Tutorials"
 msgstr "Tutorials"
@@ -428,46 +428,42 @@ msgstr "Tutorials"
 #: src/menus/mainMenus.cpp:104
 msgctxt "Credits"
 msgid "Credits"
-msgstr ""
+msgstr "Credits"
 
 #: src/menus/mainMenus.cpp:105
-#, fuzzy
 msgctxt "Credits"
 msgid "Programming:"
-msgstr "Patrouille"
+msgstr "Programmierung:"
 
 #: src/menus/mainMenus.cpp:112
-#, fuzzy
 msgctxt "Credits"
 msgid "Graphics:"
-msgstr "Grafikoptionen"
+msgstr "Grafik:"
 
 #: src/menus/mainMenus.cpp:115
-#, fuzzy
 msgctxt "Credits"
 msgid "Localization:"
-msgstr "Variante: "
+msgstr "Übersetzung: "
 
 #: src/menus/mainMenus.cpp:119
 msgctxt "Credits"
 msgid "Music:"
-msgstr ""
+msgstr "Musik:"
 
 #: src/menus/mainMenus.cpp:126
 msgctxt "Credits"
 msgid "Models:"
-msgstr ""
+msgstr "3d-Modelle:"
 
 #: src/menus/mainMenus.cpp:130
 msgctxt "Credits"
 msgid "Crew sprites:"
-msgstr ""
+msgstr "Crew-Sprites:"
 
 #: src/menus/mainMenus.cpp:133
-#, fuzzy
 msgctxt "Credits"
 msgid "Special thanks:"
-msgstr "Spezialantriebe:"
+msgstr "Besonderen Dank an:"
 
 #: src/menus/serverCreationScreen.cpp:31
 msgid "Server configuration"
@@ -508,6 +504,7 @@ msgstr "Serverinfo"
 #: src/menus/serverCreationScreen.cpp:75
 msgid "Server was configured to connect to reverse proxy:"
 msgstr ""
+"Der Server wurde für die Verbindung mit einem Reverse-Proxy konfiguriert:"
 
 #: src/menus/serverCreationScreen.cpp:89
 msgid "Server IP: "
@@ -834,10 +831,9 @@ msgid "Lock camera on ship's target"
 msgstr "Kamera folgt Ziel"
 
 #: src/screens/cinematicViewScreen.cpp:47
-#, fuzzy
 msgctxt "button"
 msgid "Cycle trough ships"
-msgstr "Nächstes Spielerschiff"
+msgstr "Nächstes Schiff"
 
 #: src/screens/crewStationScreen.cpp:54 src/screens/gm/gameMasterScreen.cpp:223
 #: src/screens/gm/tweak.cpp:99 src/screenComponents/commsOverlay.cpp:110
@@ -855,7 +851,7 @@ msgstr "Tastenkürzel"
 #: src/screens/crewStationScreen.cpp:73
 msgctxt "hotkey_F1"
 msgid "{label}: {button}\n"
-msgstr ""
+msgstr "{label}: {button}\n"
 
 #: src/screens/mainScreen.cpp:55 src/gui/hotkeyConfig.cpp:300
 #: src/gui/hotkeyConfig.cpp:301 src/gui/hotkeyConfig.cpp:302
@@ -869,7 +865,7 @@ msgstr "Hauptschirm"
 #: src/screens/mainScreen.cpp:56
 msgctxt "hotkey_F1"
 msgid "{label}:\t{button}\n"
-msgstr ""
+msgstr "{label}:\t{button}\n"
 
 #: src/screens/crew4/operationsScreen.cpp:67
 #: src/screens/crew6/relayScreen.cpp:101
@@ -1229,7 +1225,7 @@ msgstr "Position"
 
 #: src/screens/gm/gameMasterScreen.cpp:369
 msgid "gm_info"
-msgstr ""
+msgstr "gm_info"
 
 #: src/screens/gm/objectCreationView.cpp:36
 msgctxt "create"
@@ -1345,7 +1341,7 @@ msgstr "Allgemein"
 #: src/screens/gm/tweak.cpp:36
 msgctxt "tab"
 msgid "Template-based"
-msgstr ""
+msgstr "Templatebasiert"
 
 #: src/screens/gm/tweak.cpp:42
 msgctxt "tab"
@@ -1423,25 +1419,23 @@ msgstr "Typ-Name:"
 
 #: src/screens/gm/tweak.cpp:143
 msgid "Docked ship services:"
-msgstr ""
+msgstr "Dienste wenn angedockt:"
 
 #: src/screens/gm/tweak.cpp:144
-#, fuzzy
 msgid "Shares energy"
-msgstr "Max. Energie:"
+msgstr "Energie wird geteilt"
 
 #: src/screens/gm/tweak.cpp:150
-#, fuzzy
 msgid "Repairs ships"
-msgstr "Spielerschiff"
+msgstr "Repariert Schiffe"
 
 #: src/screens/gm/tweak.cpp:156
 msgid "Restocks scan probes"
-msgstr ""
+msgstr "Füllt Sonden wieder auf"
 
 #: src/screens/gm/tweak.cpp:162
 msgid "Restocks cpuship missiles"
-msgstr ""
+msgstr "Füllt Raketen f.KI-Schiffe auf"
 
 #: src/screens/gm/tweak.cpp:169
 msgid "Hull max:"
@@ -1464,38 +1458,32 @@ msgid "Long-range radar range:"
 msgstr "Langstreckeckenradar Reichw.:"
 
 #: src/screens/gm/tweak.cpp:234
-#, fuzzy
 msgid "Impulse max speed:"
-msgstr "Impuls-Geschwindigkeit:"
+msgstr "Max. Impulsgeschwindigkeit:"
 
 #: src/screens/gm/tweak.cpp:240
-#, fuzzy
 msgid "Impulse acceleration:"
-msgstr "Impuls-Geschwindigkeit:"
+msgstr "Impuls-Beschleuningung:"
 
 #: src/screens/gm/tweak.cpp:246
-#, fuzzy
 msgid "Impulse max reverse speed:"
-msgstr "Impuls rückwärts:"
+msgstr "Max. Impulsgeschw. rückwärts:"
 
 #: src/screens/gm/tweak.cpp:252
-#, fuzzy
 msgid "Impulse reverse acceleration:"
-msgstr "Impuls rückwärts:"
+msgstr "Impulsbeschleunigung rückwärts:"
 
 #: src/screens/gm/tweak.cpp:258
 msgid "Turn speed:"
 msgstr "Wendigkeit:"
 
 #: src/screens/gm/tweak.cpp:264
-#, fuzzy
 msgid "Docking state:"
-msgstr "Wir docken bei at an %s."
+msgstr "Andockstatuns:"
 
 #: src/screens/gm/tweak.cpp:265 src/screens/gm/tweak.cpp:327
-#, fuzzy
 msgid "Not docked"
-msgstr "Docking abbrechen"
+msgstr "Nicht angedockt"
 
 #: src/screens/gm/tweak.cpp:279
 msgctxt "tweak_ship"
@@ -1507,21 +1495,18 @@ msgid "Warp Drive"
 msgstr "Warpantrieb"
 
 #: src/screens/gm/tweak.cpp:286
-#, fuzzy
 msgid "Warp speed:"
-msgstr "Warpgeschwindigkeit"
+msgstr "Warpgeschwindigkeit:"
 
 #: src/screens/gm/tweak.cpp:292
 msgid "Jump Drive"
 msgstr "Sprungantrieb"
 
 #: src/screens/gm/tweak.cpp:297
-#, fuzzy
 msgid "Jump min distance:"
 msgstr "Minimale Sprungweite:"
 
 #: src/screens/gm/tweak.cpp:303
-#, fuzzy
 msgid "Jump max distance:"
 msgstr "Maximale Sprungweite:"
 
@@ -1530,14 +1515,12 @@ msgid "Jump charge:"
 msgstr "Sprung-Aufladung:"
 
 #: src/screens/gm/tweak.cpp:331
-#, fuzzy
 msgid "Docking..."
-msgstr "Verbinde..."
+msgstr "Docke an..."
 
 #: src/screens/gm/tweak.cpp:335
-#, fuzzy
 msgid "Docked"
-msgstr "Docke an"
+msgstr "Angedockt"
 
 #: src/screens/gm/tweak.cpp:368
 msgctxt "missiles"
@@ -1591,7 +1574,6 @@ msgid "Medium"
 msgstr "Mittel"
 
 #: src/screens/gm/tweak.cpp:528
-#, fuzzy
 msgctxt "tube"
 msgid "Large"
 msgstr "groß"
@@ -1651,12 +1633,12 @@ msgstr "Abklingzeit:"
 #: src/screens/gm/tweak.cpp:693
 msgctxt "beam"
 msgid "Energy used per fire:"
-msgstr ""
+msgstr "Energieverbrauch pro Schuss"
 
 #: src/screens/gm/tweak.cpp:699
 msgctxt "beam"
 msgid "Heat generated per fire:"
-msgstr ""
+msgstr "Erhitzung pro Schuss"
 
 #: src/screens/gm/tweak.cpp:712
 msgctxt "beam"
@@ -1732,9 +1714,8 @@ msgid "position"
 msgstr "Position"
 
 #: src/screens/gm/tweak.cpp:1113
-#, fuzzy
 msgid "Repair Crews:"
-msgstr "Reperaturcrew: nächstes"
+msgstr "Reperaturcrews:"
 
 #: src/screens/gm/tweak.cpp:1119
 msgid "Coolant:"
@@ -1882,7 +1863,6 @@ msgid "SELF DESTRUCT ACTIVATED"
 msgstr "SELBSTZERSTÖRUNG AKTIVIERT"
 
 #: src/screenComponents/selfDestructIndicator.cpp:32
-#, fuzzy
 msgid "Waiting for authorization input: {codes} left"
 msgstr "Warte auf Autorisierung: {codes} verbleibend"
 
@@ -1983,13 +1963,11 @@ msgid "Impulse"
 msgstr "Impuls"
 
 #: src/screenComponents/frequencyCurve.cpp:53
-#, fuzzy
 msgctxt "scienceFrequencyGraph"
 msgid "Damage with your beams"
 msgstr "Schaden mit Laser"
 
 #: src/screenComponents/frequencyCurve.cpp:55
-#, fuzzy
 msgctxt "scienceFrequencyGraph"
 msgid "Damage on your shields"
 msgstr "Schaden am Schild"
@@ -2009,7 +1987,7 @@ msgstr "Keine gegnerischen Schilde"
 #: src/screenComponents/frequencyCurve.cpp:66
 msgctxt "scienceFrequencyGraph"
 msgid "No data"
-msgstr ""
+msgstr "Keine Daten"
 
 #: src/screenComponents/powerDamageIndicator.cpp:34
 msgctxt "systems"
@@ -2525,10 +2503,9 @@ msgid "Camera lock"
 msgstr "Kamera sperren"
 
 #: src/gui/hotkeyConfig.cpp:34
-#, fuzzy
 msgctxt "hotkey_Cinematic"
 msgid "Camera cycle"
-msgstr "Kamera sperren"
+msgstr "Kamera wechseln"
 
 #: src/gui/hotkeyConfig.cpp:35
 msgctxt "hotkey_Cinematic"
@@ -2621,10 +2598,9 @@ msgid "Pan up"
 msgstr "Nach oben bewegen"
 
 #: src/gui/hotkeyConfig.cpp:68
-#, fuzzy
 msgctxt "hotkey_Topdown"
 msgid "Pan down"
-msgstr "Kann docken"
+msgstr "nach unten schwenken"
 
 #: src/gui/hotkeyConfig.cpp:69
 msgctxt "hotkey_Topdown"
@@ -2680,7 +2656,6 @@ msgid "Broadcast voice chat to ship"
 msgstr "Voicechat (schiffsweit)"
 
 #: src/gui/hotkeyConfig.cpp:288
-#, fuzzy
 msgctxt "hotkey_Basic"
 msgid "Fullscreen toggle"
 msgstr "Vollbild umschalten"
@@ -2793,16 +2768,14 @@ msgid "Increase impulse"
 msgstr "Impuls erhöhen"
 
 #: src/gui/hotkeyConfig.cpp:311
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Increase impulse 1%"
-msgstr "Impuls erhöhen"
+msgstr "Impuls um 1% erhöhen"
 
 #: src/gui/hotkeyConfig.cpp:312
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Increase impulse 10%"
-msgstr "Impuls erhöhen"
+msgstr "Impuls um 10% erhöhen"
 
 #: src/gui/hotkeyConfig.cpp:313
 msgctxt "hotkey_Helms"
@@ -2810,16 +2783,14 @@ msgid "Decrease impulse"
 msgstr "Impuls verringern"
 
 #: src/gui/hotkeyConfig.cpp:314
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Decrease impulse 1%"
-msgstr "Impuls verringern"
+msgstr "Impuls um 1% verringern"
 
 #: src/gui/hotkeyConfig.cpp:315
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Decrease impulse 10%"
-msgstr "Impuls verringern"
+msgstr "Impuls um 10% verringern"
 
 #: src/gui/hotkeyConfig.cpp:316
 msgctxt "hotkey_Helms"
@@ -3106,10 +3077,9 @@ msgid "Scanning parameter {number} decrease"
 msgstr "Scan-Parameter {number} verringern"
 
 #: src/gui/hotkeyConfig.cpp:377
-#, fuzzy
 msgctxt "hotkey_Science"
 msgid "Scanning parameter set {number}"
-msgstr "Scan-Parameter {number} erhöhen"
+msgstr "Scan-Parameter {number} setzen"
 
 #: src/gui/hotkeyConfig.cpp:381 src/gui/hotkeyConfig.cpp:382
 #: src/gui/hotkeyConfig.cpp:383 src/gui/hotkeyConfig.cpp:384
@@ -3277,28 +3247,24 @@ msgstr "Selbstzertstörung abbrechen"
 
 #: src/gui/hotkeyConfig.cpp:411 src/gui/hotkeyConfig.cpp:412
 #: src/gui/hotkeyConfig.cpp:413
-#, fuzzy
 msgctxt "hotkey_menu"
 msgid "Relay"
 msgstr "Kommunikation"
 
 #: src/gui/hotkeyConfig.cpp:411
-#, fuzzy
 msgctxt "hotkey_Relay"
 msgid "Alert level: Normal"
-msgstr "Alarmstufe"
+msgstr "Alarmstufe: Normal"
 
 #: src/gui/hotkeyConfig.cpp:412
-#, fuzzy
 msgctxt "hotkey_Relay"
 msgid "Alert level: Yellow"
-msgstr "Alarmstufe"
+msgstr "Alarmstufe: Gelb"
 
 #: src/gui/hotkeyConfig.cpp:413
-#, fuzzy
 msgctxt "hotkey_Relay"
 msgid "Alert level: Red"
-msgstr "Alarmstufe"
+msgstr "Alarmstufe: Rot"
 
 #: src/gui/hotkeyConfig.cpp:418 src/gui/hotkeyConfig.cpp:419
 msgctxt "hotkey_menu"
