@@ -9919,11 +9919,11 @@ function chooseUndercutBase()
 	hideStationSector = hideBase:getSectorName()
 end
 function undercutOrderMessage(delta)
-	local nMsg = _("orders-shipLog", "[Vaiken] As a naval operative, Charles Undercut discovered information about enemies in this region. Unfortunately, he was fired for his poor performance as a maintenance technician by his commanding officer before he could file a report. We need his information.")
+	local nMsg = _("UndercutOrders-shipLog", "[Vaiken] As a naval operative, Charles Undercut discovered information about enemies in this region. Unfortunately, he was fired for his poor performance as a maintenance technician by his commanding officer before he could file a report. We need his information.")
 	if difficulty > 1 then
-		nMsg = string.format(_("orders-shipLog", "%s His last known location was station %s. Go find him and get that information"),nMsg,hideBase:getCallSign())
+		nMsg = string.format(_("UndercutOrders-shipLog", "%s His last known location was station %s. Go find him and get that information"),nMsg,hideBase:getCallSign())
 	else
-		nMsg = string.format(_("orders-shipLog", "%s His last known location was station %s in sector %s. Go find him and get that information"),nMsg,hideBase:getCallSign(),hideBase:getSectorName())
+		nMsg = string.format(_("UndercutOrders-shipLog", "%s His last known location was station %s in sector %s. Go find him and get that information"),nMsg,hideBase:getCallSign(),hideBase:getSectorName())
 	end
 	for p11idx=1,8 do
 		local p11 = getPlayerShip(p11idx)
@@ -9932,9 +9932,9 @@ function undercutOrderMessage(delta)
 		end
 	end	
 	if difficulty > 1 then
-		secondaryOrders = string.format(_("orders-comms", "\nFind Charles Undercut last reported at station %s who has information on enemy activity"), hideStationName)
+		secondaryOrders = string.format(_("UndercutOrders-comms", "\nFind Charles Undercut last reported at station %s who has information on enemy activity"), hideStationName)
 	else
-		secondaryOrders = string.format(_("orders-comms", "\nFind Charles Undercut last reported at station %s in sector %s who has information on enemy activity"), hideStationName, hideStationSector)
+		secondaryOrders = string.format(_("UndercutOrders-comms", "\nFind Charles Undercut last reported at station %s in sector %s who has information on enemy activity"), hideStationName, hideStationSector)
 	end
 	plotR = undercutStation
 end
@@ -9969,8 +9969,8 @@ function undercutStation(delta)
 							hideTransport = farthestTransport
 						end
 						p9.undercut = hideTransport
-						local fMsg = string.format(_("-shipLog", "[%s] We haven't seen Charles Undercut in a while. He took a job as a maintenance technician aboard %s"), hideBase:getCallSign(), hideTransport:getCallSign())
-						fMsg = fMsg .. string.format(_("-shipLog", ".\nLast we heard, that ship was working in the %s sector. He was desperate for a job."), hideTransport:getSectorName())
+						local fMsg = string.format(_("Undercut-shipLog", "[%s] We haven't seen Charles Undercut in a while. He took a job as a maintenance technician aboard %s"), hideBase:getCallSign(), hideTransport:getCallSign())
+						fMsg = fMsg .. string.format(_("Undercut-shipLog", ".\nLast we heard, that ship was working in the %s sector. He was desperate for a job."), hideTransport:getSectorName())
 						p9:addToShipLog(fMsg,"Magenta")
 						plotR = undercutTransport
 						undercutLocation = "transport"
@@ -10068,15 +10068,15 @@ function undercutTransport(delta)
 							end
 						end
 					end
-					local hMsg = string.format(_("-shipLog", "[%s] we need help. Our maintenance technician says you might be interested. "), hideTransport:getCallSign())
-					hMsg = hMsg .. string.format(_("-shipLog", "We are in sector %s. Hurry."), hideTransport:getSectorName())
+					local hMsg = string.format(_("Undercut-shipLog", "[%s] we need help. Our maintenance technician says you might be interested. "), hideTransport:getCallSign())
+					hMsg = hMsg .. string.format(_("Undercut-shipLog", "We are in sector %s. Hurry."), hideTransport:getSectorName())
 					closestPlayer:addToShipLog(hMsg,"Magenta")
 				end
 				undercutHelp = delta + 30
 			end
 		end
 		if undercutLocation == "free" then
-			secondaryOrders = string.format(_("orders-comms", "\nDestroy enemy base in sector %s"), undercutTarget:getSectorName())
+			secondaryOrders = string.format(_("UndercutOrders-comms", "\nDestroy enemy base in sector %s"), undercutTarget:getSectorName())
 			plotR = undercutEnemyBase
 		end
 	else
@@ -10155,16 +10155,16 @@ function chooseSensorParts()
 	s3part = "sensor"
 end
 function stettorOrderMessage(delta)
-	local snsMsg = _("orders-shipLog", "[Vaiken] Jing Stettor's research on advanced sensor technology produced a breakthrough. To facilitate rapid deployment, we need you to gather the following:\n")
+	local snsMsg = _("StettorOrdes-shipLog", "[Vaiken] Jing Stettor's research on advanced sensor technology produced a breakthrough. To facilitate rapid deployment, we need you to gather the following:\n")
 	snsMsg = snsMsg .. s1part .. "\n"
 	snsMsg = snsMsg .. s2part .. "\n"
 	snsMsg = snsMsg .. s3part .. "\n"
 	if difficulty > 1 then
-		snsMsg = snsMsg .. string.format(_("orders-shipLog", "and take these items to station %s"), sensorBaseName) 
-		secondaryOrders = string.format(_("orders-comms", "\nGather the following:\n%s\n%s\n%s\nand take to station %s"),s1part,s2part,s3part,sensorBaseName)
+		snsMsg = snsMsg .. string.format(_("StettorOrders-shipLog", "and take these items to station %s"), sensorBaseName) 
+		secondaryOrders = string.format(_("StettorOrders-comms", "\nGather the following:\n%s\n%s\n%s\nand take to station %s"),s1part,s2part,s3part,sensorBaseName)
 	else
-		snsMsg = snsMsg .. string.format(_("orders-shipLog", "and take these items to station %s in sector %s"), sensorBaseName, sensorBaseSector)
-		secondaryOrders = string.format(_("orders-comms", "\nGather the following:\n%s\n%s\n%s\nand take to station %s in sector %s"),s1part,s2part,s3part,sensorBaseName,sensorBaseSector)
+		snsMsg = snsMsg .. string.format(_("StettorOrders-shipLog", "and take these items to station %s in sector %s"), sensorBaseName, sensorBaseSector)
+		secondaryOrders = string.format(_("StettorOrders-comms", "\nGather the following:\n%s\n%s\n%s\nand take to station %s in sector %s"),s1part,s2part,s3part,sensorBaseName,sensorBaseSector)
 	end
 	if sensorMessage == nil then
 		for p13idx=1,8 do
@@ -10184,7 +10184,7 @@ function stettorStation(delta)
 			if p14 ~= nil and p14:isValid() then
 				if p14:isDocked(sensorBase) then
 					if p14.stettor == "provided" then
-						secondaryOrders = string.format(_("orders-comms", "\nDestroy enemy base in sector %s"), stettorTarget:getSectorName())
+						secondaryOrders = string.format(_("StettorOrders-comms", "\nDestroy enemy base in sector %s"), stettorTarget:getSectorName())
 						plotR = stettorEnemyBase
 					end
 				end
@@ -10233,15 +10233,15 @@ function chooseTraitorBase()
 	traitorBaseSector = traitorBase:getSectorName()
 end
 function traitorOrderMessage(delta)
-	local tMsg = string.format(_("orders-shipLog", "[Vaiken] Intelligence observed a spy for the enemy at station %s"), traitorBaseName)
+	local tMsg = string.format(_("Spy-shipLog", "[Vaiken] Intelligence observed a spy for the enemy at station %s"), traitorBaseName)
 	if difficulty <= 1 then
-		tMsg = string.format(_("orders-shipLog", "%s in sector %s"), tMsg, traitorBaseSector)
+		tMsg = string.format(_("Spy-shipLog", "%s in sector %s"), tMsg, traitorBaseSector)
 	end
-	tMsg = string.format(_("orders-shipLog", "%s. Go find out what you can about this spy."), tMsg) 
+	tMsg = string.format(_("SpyOrders-shipLog", "%s. Go find out what you can about this spy."), tMsg) 
 	if difficulty <= 1 then
-		secondaryOrders = string.format(_("orders-comms", "\nInvestigate spy reported at station %s in sector %s"),traitorBaseName,traitorBaseSector)
+		secondaryOrders = string.format(_("SpyOrders-comms", "\nInvestigate spy reported at station %s in sector %s"),traitorBaseName,traitorBaseSector)
 	else
-		secondaryOrders = string.format(_("orders-comms", "\nInvestigate spy reported at station %s"),traitorBaseName)
+		secondaryOrders = string.format(_("SpyOrders-comms", "\nInvestigate spy reported at station %s"),traitorBaseName)
 	end
 	if traitorMessage == nil then
 		for p14idx=1,8 do
@@ -10285,14 +10285,14 @@ function traitorStation(delta)
 							runTransport = farthestTransport
 						end
 						p15.traitor = runTransport
-						local trMsg = string.format(_("orders-shipLog", "[%s] The girl you're looking for is Annette Sporisky. She boarded a freighter owned by her family: %s"), traitorBaseName, runTransport:getCallSign())
-						trMsg = trMsg .. string.format(_("orders-shipLog", ".\nLast we heard, that ship was working in the %s sector."), runTransport:getSectorName())
+						local trMsg = string.format(_("Spy-shipLog", "[%s] The girl you're looking for is Annette Sporisky. She boarded a freighter owned by her family: %s"), traitorBaseName, runTransport:getCallSign())
+						trMsg = trMsg .. string.format(_("Spy-shipLog", ".\nLast we heard, that ship was working in the %s sector."), runTransport:getSectorName())
 						p15:addToShipLog(trMsg,"Magenta")
 						plotR = sporiskyTransport
 						if difficulty > 1 then
 							runTransport:setImpulseMaxSpeed(runTransport:getImpulseMaxSpeed()*2)
 						end
-						secondaryOrders = string.format(_("orders-comms", "\nGet the spy Annette Sporisky from transport %s and bring her to Vaiken station for questioning"),runTransport:getCallSign())
+						secondaryOrders = string.format(_("SpyOrders-comms", "\nGet the spy Annette Sporisky from transport %s and bring her to Vaiken station for questioning"),runTransport:getCallSign())
 					end
 				end
 			end
@@ -10326,10 +10326,10 @@ function sporiskyQuestioned(delta)
 			if p17 ~= nil and p17:isValid() then
 				if p17:isDocked(stationVaiken) then
 					if p17.traitorBought then
-						p17:addToShipLog(_("orders-shipLog", "Annette Sporisky transferred to Vaiken station"),"Magenta")
+						p17:addToShipLog(_("Spy-shipLog", "Annette Sporisky transferred to Vaiken station"),"Magenta")
 						if sporiskyTarget:isValid() then
-							p17:addToShipLog(string.format(_("orders-shipLog", "Spy identified enemy base in sector %s"), sporiskyTarget:getSectorName()),"Magenta")
-							secondaryOrders = string.format(_("orders-comms", "\nDestroy enemy base in sector %s"),sporiskyTarget:getSectorName())
+							p17:addToShipLog(string.format(_("Spy-shipLog", "Spy identified enemy base in sector %s"), sporiskyTarget:getSectorName()),"Magenta")
+							secondaryOrders = string.format(_("SpyOrders-comms", "\nDestroy enemy base in sector %s"),sporiskyTarget:getSectorName())
 						else
 							if stationGanalda:isValid() then
 								sporiskyTarget = stationGanalda
@@ -10339,10 +10339,10 @@ function sporiskyQuestioned(delta)
 								sporiskyTarget = stationTic
 							end
 							if sporiskyTarget:isValid() then
-								p17:addToShipLog(string.format(_("orders-shipLog", "Spy identified enemy base in sector %s"), sporiskyTarget:getSectorName()),"Magenta") 
-								secondaryOrders = string.format(_("orders-comms", "\nDestroy enemy base in sector %s"),sporiskyTarget:getSectorName())
+								p17:addToShipLog(string.format(_("Spy-shipLog", "Spy identified enemy base in sector %s"), sporiskyTarget:getSectorName()),"Magenta") 
+								secondaryOrders = string.format(_("SpyOrders-comms", "\nDestroy enemy base in sector %s"),sporiskyTarget:getSectorName())
 							else
-								p17:addToShipLog(string.format(_("orders-shipLog", "The enemy base identified has already been destroyed")),"Magenta")
+								p17:addToShipLog(string.format(_("Spy-shipLog", "The enemy base identified has already been destroyed")),"Magenta")
 							end
 						end
 						plotR = sporiskyEnemyBase
@@ -10391,8 +10391,8 @@ function chooseHorizonParts()
 end
 function horizonOrderMessage(delta)
 	if stationEmory:isValid() then
-		local hMsg = string.format(_("orders-shipLog", "[Emory] After years or research, we are near a breakthrough on our mobile black hole research. We need some assistance for the next phase. Please bring us some %s and %s type goods."),hr1part,hr2part)
-		secondaryOrders = string.format(_("orders-comms", "\nBring %s and %s to station Emory"),hr1part,hr2part)
+		local hMsg = string.format(_("blackHoleOrders-shipLog", "[Emory] After years or research, we are near a breakthrough on our mobile black hole research. We need some assistance for the next phase. Please bring us some %s and %s type goods."),hr1part,hr2part)
+		secondaryOrders = string.format(_("blackHoleOrders-comms", "\nBring %s and %s to station Emory"),hr1part,hr2part)
 		if horizonMessage == nil then
 			for p25idx=1,8 do
 				local p25 = getPlayerShip(p25idx)
@@ -10417,7 +10417,7 @@ function horizonStationDeliver(delta)
 			if p26 ~= nil and p26:isValid() then
 				if p26:isDocked(stationEmory) then
 					if p26.horizonComponents == "provided" then
-						secondaryOrders = _("orders-comms", "Gather sensor data from black hole by close approach")
+						secondaryOrders = _("blackHoleOrders-comms", "Gather sensor data from black hole by close approach")
 						horizonScienceMessageStartTimer = 20
 						phScan = p26
 						elapsedScanTime = 0
@@ -10438,11 +10438,11 @@ function horizonScienceMessage(delta)
 		if phScan.horizonConsoleMessage ~= "sent" then
 			horizonConsoleMessage = "grawp scan instructions"
 			if phScan:hasPlayerAtPosition("Science") then
-				phScan:addCustomMessage("Science",horizonConsoleMessage,_("research-msgScience", "When the ship gets close enough, a button to initiate black hole scan will become available. Click it to start scanning the black hole. The ship must remain within scanning distance for a full 30 seconds to complete the scan."))
+				phScan:addCustomMessage("Science",horizonConsoleMessage,_("blackHole-msgScience", "When the ship gets close enough, a button to initiate black hole scan will become available. Click it to start scanning the black hole. The ship must remain within scanning distance for a full 30 seconds to complete the scan."))
 				phScan.horizonConsoleMessage = "sent"
 			end
 			if phScan:hasPlayerAtPosition("Operations") then
-				phScan:addCustomMessage("Operations",horizonConsoleMessage,_("research-msgOperations", "When the ship gets close enough, a button to initiate black hole scan will become available. Click it to start scanning the black hole. The ship must remain within scanning distance for a full 30 seconds to complete the scan."))
+				phScan:addCustomMessage("Operations",horizonConsoleMessage,_("blackHole-msgOperations", "When the ship gets close enough, a button to initiate black hole scan will become available. Click it to start scanning the black hole. The ship must remain within scanning distance for a full 30 seconds to complete the scan."))
 				phScan.horizonConsoleMessage = "sent"
 			end
 		end
@@ -10453,7 +10453,7 @@ function horizonScienceMessage(delta)
 	local x1, y1 = phScan:getPosition()
 	local x2, y2 = grawp:getPosition()
 	if distance(x1,y1,x2,y2) < horizonScanRange then
-		grawp_status = _("research-", "Grawp in range")
+		grawp_status = _("blackHole-tabHelms&Tact&Science&Ops", "Grawp in range")
 		if scanGrawpButton then
 			if scanGrawp then
 				if elapsedScanTime == 0 then
@@ -10465,12 +10465,12 @@ function horizonScienceMessage(delta)
 				end
 				if elapsedScanTime > elapsedScanTimeHalf then
 					if phScan.halfScanMessage ~= "sent" then
-						phScan:addToShipLog(_("research-shipLog", "[Scan technician] Black hole scan 50 percent complete"),"Blue")
+						phScan:addToShipLog(_("blackHole-shipLog", "[Scan technician] Black hole scan 50 percent complete"),"Blue")
 						phScan.halfScanMessage = "sent"
 					end
 				end
 				if elapsedScanTime > elapsedScanTimeGoal then
-					phScan:addToShipLog(_("research-shipLog", "[Scan technician] Black hole scan complete"),"Blue")
+					phScan:addToShipLog(_("blackHole-shipLog", "[Scan technician] Black hole scan complete"),"Blue")
 					if horizonScienceScanButton == "scan button" then
 						phScan:removeCustom(horizonScienceScanButton)
 						horizonScienceScanButton = nil
@@ -10501,7 +10501,7 @@ function horizonScienceMessage(delta)
 					for p33idx=1,8 do
 						local p33 = getPlayerShip(p33idx)
 						if p33 ~= nil and p33:isValid() and horizonRep == nil then
-							p33:addToShipLog(string.format(_("orders-shipLog", "[Emory] With the scan data provided by %s, we can complete our research on mobile black holes. Thank you. Your assistance is greatly appreciated."),phScan:getCallSign()),"Magenta")
+							p33:addToShipLog(string.format(_("blackHole-shipLog", "[Emory] With the scan data provided by %s, we can complete our research on mobile black holes. Thank you. Your assistance is greatly appreciated."),phScan:getCallSign()),"Magenta")
 							p33:addReputationPoints(70-(difficulty*5))
 							horizonRep = "awarded"
 						end
@@ -10509,22 +10509,22 @@ function horizonScienceMessage(delta)
 					plotR = nil
 					removeGMFunction("Req Horizon")
 				end
-				grawp_status = string.format(_("research-", "Grawp in range: %i"),math.ceil(elapsedScanTimeGoal - elapsedScanTime))
+				grawp_status = string.format(_("blackHole-tabHelms&Tact&Science&Ops", "Grawp in range: %i"),math.ceil(elapsedScanTimeGoal - elapsedScanTime))
 			end
 		else
 			if phScan:hasPlayerAtPosition("Science") then
 				horizonScienceScanButton = "scan button"
-				phScan:addCustomButton("Science",horizonScienceScanButton,_("research-buttonScience", "Scan black hole"),scanBlackHole)
+				phScan:addCustomButton("Science",horizonScienceScanButton,_("blackHole-buttonScience", "Scan black hole"),scanBlackHole)
 				scanGrawpButton = true
 			end
 			if phScan:hasPlayerAtPosition("Operations") then
 				horizonScienceScanButtonOperations = "scan button operations"
-				phScan:addCustomButton("Operations",horizonScienceScanButtonOperations,_("research-buttonOperations", "Scan black hole"),scanBlackHole)
+				phScan:addCustomButton("Operations",horizonScienceScanButtonOperations,_("blackHole-buttonOperations", "Scan black hole"),scanBlackHole)
 				scanGrawpButton = true
 			end
 		end
 	else
-		grawp_status = _("research-tabHelms&Tact&Science&Ops", "Grawp out of range")
+		grawp_status = _("blackHole-tabHelms&Tact&Science&Ops", "Grawp out of range")
 		if scanGrawpButton then
 			if horizonScienceScanButton == "scan button" then
 				phScan:removeCustom(horizonScienceScanButton)
@@ -10534,7 +10534,7 @@ function horizonScienceMessage(delta)
 				phScan:removeCustom(horizonScienceScanButtonOperations)
 				horizonScienceScanButtonOperations = nil
 			end
-			phScan:addToShipLog(_("research-shipLog", "[Scan technician] Black hole scan aborted before completion"),"Blue")
+			phScan:addToShipLog(_("blackHole-shipLog", "[Scan technician] Black hole scan aborted before completion"),"Blue")
 			phScan.halfScanMessage = "reset"
 			elapsedScanTime = 0
 			scanGrawp = false
@@ -10562,7 +10562,7 @@ function horizonScienceMessage(delta)
 end
 function scanBlackHole()
 	scanGrawp = true
-	phScan:addToShipLog(_("research-shipLog", "[Scan technician] Black hole scan started"),"Blue")
+	phScan:addToShipLog(_("blackHole-shipLog", "[Scan technician] Black hole scan started"),"Blue")
 end
 -----------------------------
 -- 	Optional plot choices  --
@@ -10601,10 +10601,10 @@ function chooseBeamRangeParts()
 	end
 end
 function beamRangeMessage(delta)
-	optionalOrders = string.format(_("orders-comms", "\nOptional: Gather and bring goods to station Marconi: %s, %s, %s"),br1part,br2part,br3part)
-	local obrMsg = string.format(_("orders-shipLog", "[Station Marconi] Please bring us some components and materials for a project we are working on: %s, %s, %s"),br1part,br2part,br3part)
+	optionalOrders = string.format(_("beamUpOrders-comms", "\nOptional: Gather and bring goods to station Marconi: %s, %s, %s"),br1part,br2part,br3part)
+	local obrMsg = string.format(_("beamUpOrders-shipLog", "[Station Marconi] Please bring us some components and materials for a project we are working on: %s, %s, %s"),br1part,br2part,br3part)
 	if difficulty <= 1 then
-		obrMsg = obrMsg .. _("orders-shipLog", ". The project relates to improving the range of beam weapons")
+		obrMsg = obrMsg .. _("beamUpOrders-shipLog", ". The project relates to improving the range of beam weapons")
 	end
 	for p18idx=1,8 do
 		local p18 = getPlayerShip(p18idx)
@@ -10677,10 +10677,10 @@ function chooseBeamDamageParts()
 	end
 end
 function beamDamageMessage(delta)
-	optionalOrders = string.format(_("orders-comms", "\nOptional: Gather and bring goods to station Nefatha: %s, %s, %s"),bd1part,bd2part,bd3part)
-	local obdMsg = string.format(_("orders-shipLog", "[Station Nefatha] Please bring us some components and materials for a weapons project we are working on: %s, %s, %s"),bd1part,bd2part,bd3part)
+	optionalOrders = string.format(_("beamUpOrders-comms", "\nOptional: Gather and bring goods to station Nefatha: %s, %s, %s"),bd1part,bd2part,bd3part)
+	local obdMsg = string.format(_("beamUpOrders-shipLog", "[Station Nefatha] Please bring us some components and materials for a weapons project we are working on: %s, %s, %s"),bd1part,bd2part,bd3part)
 	if difficulty <= 1 then
-		obdMsg = obdMsg .. _("orders-shipLog", ". The project relates to increasing the amount of damage that a beam weapon inflicts on the target")
+		obdMsg = obdMsg .. _("beamUpOrders-shipLog", ". The project relates to increasing the amount of damage that a beam weapon inflicts on the target")
 	end
 	for p20idx=1,8 do
 		local p20 = getPlayerShip(p20idx)
@@ -10782,10 +10782,10 @@ function chooseSpinBaseParts()
 	end
 end
 function spinMessage(delta)
-	optionalOrders = string.format(_("orders-comms", "\nOptional: Bring %s, %s and %s to station %s in sector %s"),sp1part,sp2part,sp3part,spinBase:getCallSign(),spinBase:getSectorName())
-	local spMsg = string.format(_("orders-shipLog", "[Station %s, sector %s] Please bring us some goods to help us with a project: %s, %s, %s"),spinBase:getCallSign(),spinBase:getSectorName(),sp1part,sp2part,sp3part)
+	optionalOrders = string.format(_("SpinUpOrders-comms", "\nOptional: Bring %s, %s and %s to station %s in sector %s"),sp1part,sp2part,sp3part,spinBase:getCallSign(),spinBase:getSectorName())
+	local spMsg = string.format(_("SpinUpOrders-shipLog", "[Station %s, sector %s] Please bring us some goods to help us with a project: %s, %s, %s"),spinBase:getCallSign(),spinBase:getSectorName(),sp1part,sp2part,sp3part)
 	if difficulty <= 1 then
-		spMsg = spMsg .. _("orders-shipLog", ". The project relates to improved ship maneuverability")
+		spMsg = spMsg .. _("SpinUpOrders-shipLog", ". The project relates to improved ship maneuverability")
 	end
 	for p28idx=1,8 do
 		local p28 = getPlayerShip(p28idx)
@@ -10861,8 +10861,8 @@ function impulseSpeedParts()
 	morrisonBaseSector = morrisonBase:getSectorName()
 end
 function impulseSpeedMessage(delta)
-	optionalOrders = string.format(_("orders-comms", "\nOptional: Get Nikhil Morrison from station %s in sector %s"),morrisonBaseName,morrisonBaseSector)
-	local oisMsg = string.format(_("orders-shipLog", "[Station %s] Research scientist Nikhil Morrison is close to a breakthrough on his project, but needs some assistance. Dock with us if you wish to help."),morrisonBaseName)
+	optionalOrders = string.format(_("NikhilOrders-comms", "\nOptional: Get Nikhil Morrison from station %s in sector %s"),morrisonBaseName,morrisonBaseSector)
+	local oisMsg = string.format(_("NikhilOrders-shipLog", "[Station %s] Research scientist Nikhil Morrison is close to a breakthrough on his project, but needs some assistance. Dock with us if you wish to help."),morrisonBaseName)
 	for p22idx=1,8 do
 		local p22 = getPlayerShip(p22idx)
 		if p22 ~= nil and p22:isValid() then
@@ -10879,12 +10879,12 @@ function impulseSpeedPartMessage(delta)
 				if p23:isDocked(morrisonBase) then
 					if p23.morrison ~= "aboard" then
 						p23.morrison = "aboard"
-						p23:addToShipLog(_("orders-shipLog", "Nikhil Morrison is aboard"),"Magenta")
-						p23:addToShipLog(string.format(_("orders-shipLog", "He requests that you get %s and %s type goods and take him to station Cyrus"),is1part,is2part),"Magenta")
+						p23:addToShipLog(_("Nikhil-shipLog", "Nikhil Morrison is aboard"),"Magenta")
+						p23:addToShipLog(string.format(_("Nikhil-shipLog", "He requests that you get %s and %s type goods and take him to station Cyrus"),is1part,is2part),"Magenta")
 						if difficulty <= 1 then
-							p23:addToShipLog(_("orders-shipLog", "He says his project relates to increasing ship impulse speeds"),"Magenta")
+							p23:addToShipLog(_("Nikhil-shipLog", "He says his project relates to increasing ship impulse speeds"),"Magenta")
 						end
-						optionalOrders = string.format(_("orders-comms", "\nOptional: Get %s and %s and transport Nikhil Morrison to station Cyrus"),is1part,is2part)
+						optionalOrders = string.format(_("NikhilOrders-comms", "\nOptional: Get %s and %s and transport Nikhil Morrison to station Cyrus"),is1part,is2part)
 						plotO = impulseSpeedUpgrade
 					end
 				end
@@ -10929,10 +10929,10 @@ end
 --      Optional plot choice: Get quantum biometric artifact
 function quantumArtMessage(delta)
 	if stationOrgana:isValid() then
-		optionalOrders = string.format(_("orders-comms", "\nOptional: Retrieve artifact with quantum biometric characteristics and bring to station Organa in sector %s"),stationOrgana:getSectorName())
-		local qaMsg = string.format(_("orders-shipLog", "[Station Organa, sector %s] Research scientist Phillip Solo of the royal research academy finished the theoretical research portion of his dissertation. He needs an artifact with quantum biometric characteristics to apply his research. Please retrieve an artifact with quantum biometric characteristics and bring it to Organa station"),stationOrgana:getSectorName())
+		optionalOrders = string.format(_("quantumArtOrders-comms", "\nOptional: Retrieve artifact with quantum biometric characteristics and bring to station Organa in sector %s"),stationOrgana:getSectorName())
+		local qaMsg = string.format(_("quantumArtOrders-shipLog", "[Station Organa, sector %s] Research scientist Phillip Solo of the royal research academy finished the theoretical research portion of his dissertation. He needs an artifact with quantum biometric characteristics to apply his research. Please retrieve an artifact with quantum biometric characteristics and bring it to Organa station"),stationOrgana:getSectorName())
 		if difficulty <= 1 then
-			qaMsg = qaMsg .. string.format(_("orders-shipLog", ". Possible items to examine have been located in %s, %s and %s"),art1:getSectorName(),art2:getSectorName(),art3:getSectorName())
+			qaMsg = qaMsg .. string.format(_("quantumArt-shipLog", ". Possible items to examine have been located in %s, %s and %s"),art1:getSectorName(),art2:getSectorName(),art3:getSectorName())
 		end
 		for p40idx=1,8 do
 			local p40 = getPlayerShip(p40idx)
@@ -10983,9 +10983,9 @@ function quantumRetrieveArt(delta)
 		end
 		if quantumArtHintDelay < 0 then
 			if quantumArtHint == nil  and closestPlayer ~= nil then
-				closestPlayer:addToShipLog(string.format(_("-shipLog", "[Station Organa] We just received a report that an artifact with quantum biometric characteristics may have been observed in sector %s"),artQ:getSectorName()),"Magenta")
+				closestPlayer:addToShipLog(string.format(_("quantumArt-shipLog", "[Station Organa] We just received a report that an artifact with quantum biometric characteristics may have been observed in sector %s"),artQ:getSectorName()),"Magenta")
 				if difficulty <= 1 then
-					closestPlayer:addToShipLog(_("-shipLog", "Solo's research may have application for ship shield systems"),"Magenta")
+					closestPlayer:addToShipLog(_("quantumArt-shipLog", "Solo's research may have application for ship shield systems"),"Magenta")
 				end
 				quantumArtHint = "delivered"
 			end
@@ -11010,11 +11010,11 @@ function quantumDeliverArt(delta)
 			local p44 = getPlayerShip(p44idx)
 			if p44.artQ then
 				if p44.artQaboardMessage == nil then
-					p44:addToShipLog(_("-shipLog", "Artifact is aboard"),"Magenta")
+					p44:addToShipLog(_("quantumArt-shipLog", "Artifact is aboard"),"Magenta")
 					p44.artQaboardMessage = "sent"
 				end
 				if p44:isDocked(stationOrgana) then
-					p44:addToShipLog(_("-shipLog", "[Phillip Organa] Thanks for the artifact. I completed my research. Next time you dock with Vaiken, you can improve your shield effectiveness."),"Magenta")
+					p44:addToShipLog(_("quantumArt-shipLog", "[Phillip Organa] Thanks for the artifact. I completed my research. Next time you dock with Vaiken, you can improve your shield effectiveness."),"Magenta")
 					shieldUpgradeAvailable = true
 					p44:addReputationPoints(50-(difficulty*5))
 					quantumArtPlot = "done"
@@ -11047,9 +11047,9 @@ function vaikenStatus(delta)
 			end
 			shield_level_total = shield_level_total + shield_level
 			shield_max_total = shield_max_total + shield_max
-			shield_report = shield_report .. string.format(_(" %i:%i/%i"),shield_index,math.floor(shield_level),math.floor(shield_max))
+			shield_report = shield_report .. string.format(_("Vaiken-shipLog", " %i:%i/%i"),shield_index,math.floor(shield_level),math.floor(shield_max))
 			if shield_level/shield_max < .2 then
-				critical_shield = critical_shield .. string.format(_("Shield %i is critical "),shield_index)
+				critical_shield = critical_shield .. string.format(_("Vaiken-shipLog", "Shield %i is critical "),shield_index)
 			end
 			shield_index = shield_index + 1
 		until(shield_index >= stationVaiken:getShieldCount())
@@ -11063,13 +11063,13 @@ function vaikenStatus(delta)
 					for pidx=1,8 do
 						local p = getPlayerShip(pidx)
 						if p ~= nil and p:isValid() then
-							p:addToShipLog(_("-shipLog", "[Vaiken] Station shields have been damaged. ") .. shield_report,"Magenta")
+							p:addToShipLog(_("Vaiken-shipLog", "[Vaiken] Station shields have been damaged. ") .. shield_report,"Magenta")
 							if critical_shield ~= "" then
-								p:addToShipLog("[Vaiken] " .. critical_shield,"Red")
+								p:addToShipLog(_("Vaiken-shipLog", "[Vaiken] ") .. critical_shield,"Red")
 								if hull_damage < .4 then
-									p:addToShipLog(string.format(_("-shipLog", "[Vaiken] Hull damage: %i out of %i"),math.floor(hull_level),math.floor(hull_max)),"Red")
+									p:addToShipLog(string.format(_("Vaiken-shipLog", "[Vaiken] Hull damage: %i out of %i"),math.floor(hull_level),math.floor(hull_max)),"Red")
 								elseif hull_damage < .8 then
-									p:addToShipLog(string.format(_("-shipLog", "[Vaiken] Hull damage: %i out of %i"),math.floor(hull_level),math.floor(hull_max)),"Magenta")
+									p:addToShipLog(string.format(_("Vaiken-shipLog", "[Vaiken] Hull damage: %i out of %i"),math.floor(hull_level),math.floor(hull_max)),"Magenta")
 								end
 							end
 						end
@@ -11086,7 +11086,7 @@ function vaikenStatus(delta)
 					for pidx=1,8 do
 						local p = getPlayerShip(pidx)
 						if p ~= nil and p:isValid() then
-							p:addToShipLog(_("-shipLog", "[Vaiken] Station has been damaged"),"Magenta")
+							p:addToShipLog(_("Vaiken-shipLog", "[Vaiken] Station has been damaged"),"Magenta")
 						end
 					end
 					vaiken_damage_timer_interval = 120
@@ -11165,7 +11165,7 @@ function update(delta)
 				removeGMFunction("Req Sporisky")
 			end
 		end
-		local game_time_status = "Game Timer"
+		local game_time_status = _("-tabRelay&Operations", "Game Timer")
 		local game_minutes = math.floor(gameTimeLimit / 60)
 		local game_seconds = math.floor(gameTimeLimit % 60)
 		if game_minutes <= 0 then
@@ -11190,7 +11190,7 @@ function update(delta)
 		clueMessageDelay = clueMessageDelay - delta
 		if clueMessageDelay < 0 then
 			if clueMessage ~= "delivered" then
-				local clMsg = _("orders-shipLog", "Intelligence has analyzed all the enemy activity in this area and has determined that there must be three enemy bases. Find these bases and destroy them.")
+				local clMsg = _("clueOrders-shipLog", "Intelligence has analyzed all the enemy activity in this area and has determined that there must be three enemy bases. Find these bases and destroy them.")
 				local enemyBaseCount = 0
 				if stationEmpok:isValid() then
 					enemyBaseCount = enemyBaseCount + 1
@@ -11202,11 +11202,11 @@ function update(delta)
 					enemyBaseCount = enemyBaseCount + 1
 				end
 				if enemyBaseCount == 1 then
-					clMsg = clMsg .. _("orders-shipLog", " You have already destroyed two of them.")
+					clMsg = clMsg .. _("clueOrders-shipLog", " You have already destroyed two of them.")
 				elseif enemyBaseCount == 2 then
-					clMsg = clMsg .. _("orders-shipLog", " You have already destroyed one of them.")
+					clMsg = clMsg .. _("clueOrders-shipLog", " You have already destroyed one of them.")
 				end
-				primaryOrders = _("orders-comms", "Defend bases in the area (human navy and independent) from enemy attack and destroy three enemy bases.")
+				primaryOrders = _("clueOrders-comms", "Defend bases in the area (human navy and independent) from enemy attack and destroy three enemy bases.")
 				for p43idx=1,8 do
 					local p43 = getPlayerShip(p43idx)
 					if p43 ~= nil and p43:isValid() then
