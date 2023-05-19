@@ -10,23 +10,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
+
 #: scripts/shiptemplates/OLD.lua:6
 msgctxt "playerShip"
 msgid "Player Cruiser"
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:63
 msgctxt "playerShip"
 msgid "Player Missile Cr."
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:118
 msgctxt "playerShip"
 msgid "Player Fighter"
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:159
 msgctxt "ship"
 msgid "Tug"
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:168
 msgid ""
 "The tugboat is a reliable, but small and un-armed transport ship. Due to "
@@ -37,28 +42,34 @@ msgstr ""
 "Transportschiff. Aufgrund seiner niedrigen Kosten wird das gerne genutzt um "
 "neue Captains einzuweisen - Ohne das Risiko, durch versehentliches "
 "Waffenfeuer eine Katastrophe anzurichten."
+
 #: scripts/shiptemplates/OLD.lua:176
 msgctxt "playerShip"
 msgid "Nautilus"
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:176 scripts/shiptemplates/OLD.lua:239
 #: scripts/shiptemplates/OLD.lua:264 scripts/shiptemplates/OLD.lua:275
-#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/OLD.lua:474
+#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/OLD.lua:475
 msgctxt "class"
 msgid "Frigate"
 msgstr "Fregatte"
+
 #: scripts/shiptemplates/OLD.lua:176
 msgctxt "subclass"
 msgid "Mine Layer"
 msgstr "Minenleger"
+
 #: scripts/shiptemplates/OLD.lua:177
 msgid "Small mine laying vessel with minimal armament, shields and hull"
 msgstr ""
 "Kleines Minen-legendes Schiff mit minimaler Bewaffnung, Schilden und Hülle"
+
 #: scripts/shiptemplates/OLD.lua:223
 msgctxt "ship"
 msgid "Fighter"
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:226
 msgid ""
 "Fighters are quick agile ships that do not do a lot of damage, but usually "
@@ -68,14 +79,17 @@ msgstr ""
 "Jäger sind schnelle und wendige Schiffe, die nicht viel Schaden verursachen, "
 "aber üblicherweise in großen Gruppen unterwegs sind. Sie sind leicht "
 "auszuschalten, sollten aber nicht unterschätzt werden."
+
 #: scripts/shiptemplates/OLD.lua:239
 msgctxt "ship"
 msgid "Karnack"
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:239
 msgctxt "subclass"
 msgid "Cruiser"
 msgstr "Kreuzer"
+
 #: scripts/shiptemplates/OLD.lua:241
 msgid ""
 "Fabricated by: Repulse shipyards. Due to it's versatility, this ship has "
@@ -93,10 +107,12 @@ msgstr ""
 "ausgeschlachtete Modelle. Dadurch wurde es schnell zu einem beliebten Modell "
 "für Schmuggler und andere Zivilen Gruppierungen. Die leichte Anpassbarkeit "
 "wurde auch dazu genutzt, es mit (illegalen) Waffen aufzurüsten."
+
 #: scripts/shiptemplates/OLD.lua:253
 msgctxt "ship"
 msgid "Karnack MK2"
 msgstr "Karnack MK2"
+
 #: scripts/shiptemplates/OLD.lua:254
 msgid ""
 "Fabricated by: Repulse shipyards. The successor to the widely successful "
@@ -112,14 +128,17 @@ msgstr ""
 "und spezielle Anpassungen durch die Schiffswerft. Letzteres wurde von vielen "
 "Fraktionen stark nachgefragt, nachdem sie bemerkten, dass die alte MK1 für "
 "weniger redliche Zwecke genutzt wurde."
+
 #: scripts/shiptemplates/OLD.lua:264
 msgctxt "ship"
 msgid "Missile Cruiser"
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:264
 msgctxt "subclass"
 msgid "Cruiser: Missile"
 msgstr "Kreuzer: Raketenkreuzer"
+
 #: scripts/shiptemplates/OLD.lua:266
 msgid ""
 "Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This "
@@ -129,14 +148,17 @@ msgstr ""
 "Polaris-Raketenkreuzer MK1 Hergestellt von Repulse shipyards. Dieser "
 "Raketenkreuzer ist eine Langstrecken-Raketenplattform. Er hält nicht allzu "
 "viel  Schaden aus, aber kann sehr viel Schaden anrichten."
+
 #: scripts/shiptemplates/OLD.lua:275
 msgctxt "ship"
 msgid "Gunship"
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:275
 msgctxt "subclass"
 msgid "Gunship"
 msgstr "Kanonenboot"
+
 #: scripts/shiptemplates/OLD.lua:277
 msgid ""
 "The gunship is a ship equipped with a homing missile tube to do initial "
@@ -147,10 +169,12 @@ msgstr ""
 "vorbereitend Schaden zu verursachen, und dann dann mit den beiden Lasern "
 "auszuschalten. Es wurde dazu entwickelt, um schnell Schiffe auszuschalten, "
 "die kleiner sind als es selbst."
+
 #: scripts/shiptemplates/OLD.lua:288
 msgctxt "ship"
 msgid "Adv. Gunship"
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:289
 msgid ""
 "The advanced gunship is a ship equipped with 2 homing missiles to do initial "
@@ -161,19 +185,23 @@ msgstr ""
 "ausgestattet, um vorbereitend Schaden zu verursachen, und dann dann mit den "
 "beiden Lasern auszuschalten. Es wurde dazu entwickelt, um schnell Schiffe "
 "auszuschalten, die kleiner sind als es selbst."
+
 #: scripts/shiptemplates/OLD.lua:293
 msgctxt "ship"
 msgid "Strikeship"
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:293 scripts/shiptemplates/OLD.lua:305
 #: scripts/shiptemplates/OLD.lua:387
 msgctxt "class"
 msgid "Starfighter"
 msgstr "Raumjäger"
+
 #: scripts/shiptemplates/OLD.lua:293
 msgctxt "subclass"
 msgid "Strike"
 msgstr "Angriffs-schiff"
+
 #: scripts/shiptemplates/OLD.lua:295
 msgid ""
 "The Strikeship is a warp-drive equipped fighter build for quick strikes, "
@@ -183,14 +211,17 @@ msgstr ""
 "Das Strikeship ist ein Raumjäger, der mit einem Warpantrieb ausgestattet ist "
 "und für schnelle Angriffe konzipiert ist. Es ist wendig, aber verursacht "
 "nicht all zu viel Schaden. Außerdem sind die Heckschilde sehr schwach."
+
 #: scripts/shiptemplates/OLD.lua:305
 msgctxt "ship"
 msgid "Adv. Striker"
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:305
 msgctxt "subclass"
 msgid "Patrol"
 msgstr "Patroulle"
+
 #: scripts/shiptemplates/OLD.lua:307
 msgid ""
 "The Advanced Striker is a jump-drive equipped fighter build for quick "
@@ -202,10 +233,12 @@ msgstr ""
 "ausgestatteter Jäger für schnelle Angriffe. Er ist langsam aber sehr wendig, "
 "er macht nicht viel Schaden, und hat nur schwache Schilde. Durch seinen "
 "Sprungantrieb kann er allerdings schnell ins Geschehen eingreifen."
+
 #: scripts/shiptemplates/OLD.lua:316
 msgctxt "playerShip"
 msgid "Striker"
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:317
 msgid ""
 "The Striker is the predecessor to the advanced striker, slow but agile, but "
@@ -213,18 +246,22 @@ msgid ""
 msgstr ""
 "Die Striker ist das Vorgängermodell der verbesserten Striker, langsam aber "
 "wendig, verursacht wenig Schaden, und verfügt nur über schwache Schilde."
+
 #: scripts/shiptemplates/OLD.lua:352
 msgctxt "ship"
 msgid "Dreadnought"
 msgstr "Dreadnought"
+
 #: scripts/shiptemplates/OLD.lua:352 scripts/shiptemplates/OLD.lua:367
 msgctxt "class"
 msgid "Dreadnought"
 msgstr "Schlachtschiff"
+
 #: scripts/shiptemplates/OLD.lua:352
 msgctxt "subclass"
 msgid "Assault"
 msgstr "Dreadnought"
+
 #: scripts/shiptemplates/OLD.lua:354
 msgid ""
 "The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a "
@@ -233,14 +270,17 @@ msgstr ""
 "Die Dreadnaught ist eine fliegende Festung. Sie ist langsam, kann sich nur "
 "langsam drehen, aber besitzt eine große Anzahl an Laserwaffen am Bug. Sie "
 "frontal anzugreifen grenzt an Selbstmord."
+
 #: scripts/shiptemplates/OLD.lua:367
 msgctxt "ship"
 msgid "Battlestation"
 msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:367
 msgctxt "subclass"
 msgid "Battlecruiser"
 msgstr "Schlachtkreuzer"
+
 #: scripts/shiptemplates/OLD.lua:369
 msgid ""
 "The battle station is a huge ship with many defensive features. It can be "
@@ -248,19 +288,31 @@ msgid ""
 msgstr ""
 "Die \"battle station\" ist ein großes Schiff mit vielen defensiven "
 "Merkmalen. Kleinere Schiffe können an sie andocken."
+
 #: scripts/shiptemplates/OLD.lua:387
 msgctxt "class"
 msgid "Corvette"
 msgstr "Korvette"
-#: scripts/shiptemplates/OLD.lua:390
-msgctxt "playerShip"
-msgid "Ender"
+
+#: scripts/shiptemplates/OLD.lua:391
+msgid ""
+"Player version of the battle station. Only half es much shield strength, but "
+"more speed and maneuverability, so it is surprisingly agile - for a capital "
+"ship, of course. Piloting this colossus still feels very different compared "
+"to other ships. It also has two additional missile tubes."
 msgstr ""
-#: scripts/shiptemplates/OLD.lua:459
+"Spielbare Variante der \"Battlestation\". Nur halb so starke Schilde, dafür "
+"aber schneller und wengier, so dass sie erstaunlich beweglich ist - für ein "
+"Großkampfschiff. Diesen Koloss zu steuern fühlt sich immer noch ganz anders "
+"an als bei anderen Schiffen. Außerdem verfügt die Ender über zwei "
+"zusätzliche Raketenschächte."
+
+#: scripts/shiptemplates/OLD.lua:460
 msgctxt "ship"
 msgid "Weapons platform"
 msgstr ""
-#: scripts/shiptemplates/OLD.lua:461
+
+#: scripts/shiptemplates/OLD.lua:462
 msgid ""
 "The weapons-platform is a stationary platform with beam-weapons. It's "
 "extremely slow to turn, but it's beam weapons do a huge amount of damage."
@@ -268,15 +320,18 @@ msgstr ""
 "Diese Waffenplattform ist eine stationäre Plattform mit Laserwaffen. Sie "
 "dreht sich nur extrem langsam, aber ihre Laserwaffen verursachen extrem viel "
 "Schaden."
-#: scripts/shiptemplates/OLD.lua:474
+
+#: scripts/shiptemplates/OLD.lua:475
 msgctxt "ship"
 msgid "Blockade Runner"
 msgstr ""
-#: scripts/shiptemplates/OLD.lua:474
+
+#: scripts/shiptemplates/OLD.lua:475
 msgctxt "subclass"
 msgid "High Punch"
 msgstr ""
-#: scripts/shiptemplates/OLD.lua:476
+
+#: scripts/shiptemplates/OLD.lua:477
 msgid ""
 "Blockade runner is a reasonably fast, high shield, slow on weapons ship "
 "designed to break through defense lines and deliver goods."
@@ -284,4 +339,3 @@ msgstr ""
 "Die Blockade Runner ist ein relativ schnelles Schiff mit starken Schilden "
 "und langsamen Waffen, das entwickelt wurde um durch Verteidigungslinien u "
 "brechen und Versorgungsgüter zu liefern."
-#, fuzzy
