@@ -387,7 +387,8 @@ template:setJumpDrive(true)
 template:setDockClasses(_("class", "Starfighter"), _("class", "Frigate"), _("class", "Corvette"))
 template:setSharesEnergyWithDocked(true)
 
-variation = template:copy("Ender"):setType("playership"):setLocaleName(_("playerShip", "Ender"))
+variation = template:copy("Ender")--:setType("playership"):setLocaleName(_("playerShip", "Ender"))
+template:setDescription(_("Player version of the battle station. Only half es much shield strength, but more speed and maneuverability, so it is surprisingly agile - for a capital ship, of course. Piloting this colossus still feels very different compared to other ships. It also has two additional missile tubes."))
 --                  Arc, Dir, Range, CycleTime, Dmg
 variation:setBeam(0, 10, -90, 2500.0, 6.1, 4)
 variation:setBeam(1, 10, -90, 2500.0, 6.0, 4)
