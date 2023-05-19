@@ -2834,7 +2834,7 @@ msgstr ""
 "station."
 
 #: scripts/scenario_50_gaps.lua:3876
-msgctxt "orders-comms"
+msgctxt "goal-comms"
 msgid "Lay minefield across each gap in surrounding asteroids."
 msgstr ""
 "Poser un champ de mines au travers de chaque brèche dans les astéroïdes "
@@ -2842,47 +2842,51 @@ msgstr ""
 
 #: scripts/scenario_50_gaps.lua:3894
 #, lua-format
-msgctxt "minefield-shiplog"
+msgctxt "minefieldOrder-shiplog"
 msgid "Congratulations, You've closed the gap at heading 180 from %s"
 msgstr "Félicitations, vous avez sécurisé la brèche au cap 180 de %s."
 
 #: scripts/scenario_50_gaps.lua:3895
+msgctxt "minefieldOrders-comms"
 msgid " South gap closed."
 msgstr "Brèche sud sécurisée."
 
 #: scripts/scenario_50_gaps.lua:3905
 #, lua-format
-msgctxt "minefield-shiplog"
+msgctxt "minefieldOrders-shiplog"
 msgid "Congratulations, You've closed the gap at heading 0 from %s"
 msgstr "Félicitations, vous avez sécurisé la brèche au cap 0 de %s."
 
 #: scripts/scenario_50_gaps.lua:3906
+msgctxt "minefieldOrders-comms"
 msgid " North gap closed."
 msgstr "Brèche nord sécurisée."
 
 #: scripts/scenario_50_gaps.lua:3916
 #, lua-format
-msgctxt "minefield-shiplog"
+msgctxt "minefieldOrders-shiplog"
 msgid "Congratulations, You've closed the gap at heading 270 from %s"
 msgstr "Félicitations, vous avez sécurisé la brèche au cap 270 de %s."
 
 #: scripts/scenario_50_gaps.lua:3917
+msgctxt "minefieldOrders-comms"
 msgid " West gap closed."
 msgstr "Brèche ouest sécurisée."
 
 #: scripts/scenario_50_gaps.lua:3927
 #, lua-format
-msgctxt "minefield-shiplog"
+msgctxt "minefieldOrders-shiplog"
 msgid "Congratulations, You've closed the gap at heading 90 from %s"
 msgstr "Félicitations, vous avez sécurisé la brèche au cap 90 de %s."
 
 #: scripts/scenario_50_gaps.lua:3928
+msgctxt "minefieldOrders-comms"
 msgid " East gap closed."
 msgstr "Brèche est sécurisée."
 
 #: scripts/scenario_50_gaps.lua:3938
 #, lua-format
-msgctxt "minefield-shiplog"
+msgctxt "minefieldOrders-shiplog"
 msgid ""
 "You've closed the gaps. Now for the Quixotic part: go destroy the enemy "
 "bases surrounding us while keeping %s alive. You'll find them straight out "
@@ -2894,7 +2898,7 @@ msgstr ""
 
 #: scripts/scenario_50_gaps.lua:3939
 #, lua-format
-msgctxt "orders-comms"
+msgctxt "minefieldOrders-comms"
 msgid "Protect %s. Destroy enemy bases straight out from gaps"
 msgstr "Protéger %s. Détruire les bases ennemies en sortant par les brèches."
 

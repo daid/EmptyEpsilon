@@ -1801,7 +1801,7 @@ msgstr "Rumeurs"
 #: scripts/scenario_57_shoreline.lua:7363
 msgctxt "trade-comms"
 msgid "Buy, sell, trade"
-msgstr ""
+msgstr "Acheter, vendre, échanger"
 
 #: scripts/scenario_57_shoreline.lua:7365
 #, lua-format
@@ -2046,7 +2046,7 @@ msgstr ""
 #: scripts/scenario_57_shoreline.lua:7548
 msgctxt "upgrade-comms"
 msgid "Apply Marconi station beam range upgrade"
-msgstr ""
+msgstr "Mettre à niveau la portée des faisceaux de la station Marconi"
 
 #: scripts/scenario_57_shoreline.lua:7550
 #: scripts/scenario_57_shoreline.lua:7574
@@ -2055,12 +2055,12 @@ msgstr ""
 #: scripts/scenario_57_shoreline.lua:7609
 msgctxt "upgrade-comms"
 msgid "You already have the upgrade"
-msgstr ""
+msgstr "Vous avez déjà effectué cette mise à niveau."
 
 #: scripts/scenario_57_shoreline.lua:7564
 msgctxt "upgrade-comms"
 msgid "Your beam range has been improved by 25 percent"
-msgstr ""
+msgstr "La portée de vos faisceaux a été améliorée de 25%."
 
 #: scripts/scenario_57_shoreline.lua:7566
 #: scripts/scenario_57_shoreline.lua:7625
@@ -2073,42 +2073,42 @@ msgstr ""
 #: scripts/scenario_57_shoreline.lua:7572
 msgctxt "upgrade-comms"
 msgid "Apply Nikhil Morrison impulse engine upgrade"
-msgstr ""
+msgstr "Appliquer la mise à niveau des moteurs de Nikhil Morrison."
 
 #: scripts/scenario_57_shoreline.lua:7578
 msgctxt "upgrade-comms"
 msgid "Your impulse engine speed has been improved by 25 percent"
-msgstr ""
+msgstr "La vitesse de vos moteurs à impulsion a été améliorée de 25 %."
 
 #: scripts/scenario_57_shoreline.lua:7583
 msgctxt "upgrade-comms"
 msgid "Apply maneuver upgrade"
-msgstr ""
+msgstr "Appliquer la mise à niveau de la manœuvre"
 
 #: scripts/scenario_57_shoreline.lua:7589
 msgctxt "upgrade-comms"
 msgid "Your spin speed has been doubled"
-msgstr ""
+msgstr "Votre vitesse de rotation a été doublée."
 
 #: scripts/scenario_57_shoreline.lua:7594
 msgctxt "upgrade-comms"
 msgid "Apply Phillip Organa shield upgrade"
-msgstr ""
+msgstr "Appliquer la mise à niveau des boucliers de Phillip Organa"
 
 #: scripts/scenario_57_shoreline.lua:7602
 msgctxt "upgrade-comms"
 msgid "Your shield capacity has been increased by 25 percent"
-msgstr ""
+msgstr "La capacité de votre bouclier a été augmentée de 25%."
 
 #: scripts/scenario_57_shoreline.lua:7607
 msgctxt "upgrade-comms"
 msgid "Apply Nefatha beam damage upgrade"
-msgstr ""
+msgstr "Appliquer la mise à niveau des dégâts des faisceaux de Nefatha"
 
 #: scripts/scenario_57_shoreline.lua:7623
 msgctxt "upgrade-comms"
 msgid "Your beam weapons damage has improved by 25 percent"
-msgstr ""
+msgstr "Les dégâts de vos faisceaux laser ont été améliorés de 25%."
 
 #: scripts/scenario_57_shoreline.lua:7643
 msgctxt "station-comms"
@@ -2445,35 +2445,42 @@ msgstr ""
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Provide %s, %s and %s for sensor upgrade"
-msgstr ""
+msgstr "Fournir %s, %s et %s pour la mise à niveau des capteurs."
 
 #: scripts/scenario_57_shoreline.lua:8002
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Our upgraded sensors found an enemy base in sector %s"
 msgstr ""
+"Nos capteurs optimisés ont détecté une base ennemie dans le secteur %s."
 
 #: scripts/scenario_57_shoreline.lua:8022
 #, lua-format
 msgctxt "research-comms"
 msgid "Provide %s and %s for black hole research"
-msgstr ""
+msgstr "Fournir %s et %s pour la recherche sur les trous noirs."
 
 #: scripts/scenario_57_shoreline.lua:8026
 msgctxt "research-comms"
 msgid ""
 "With the materials you supplied, we installed special sensors on your ship. "
 msgstr ""
+"Avec les matériaux que vous nous avez fournis, nous avons installé des "
+"capteurs spéciaux sur votre vaisseau."
 
 #: scripts/scenario_57_shoreline.lua:8027
 msgctxt "research-comms"
 msgid "We need you to get close to the black hole and run sensor sweeps. "
 msgstr ""
+"Nous avons besoin que vous vous rapprochiez du trou noir et que vous "
+"effectuiez des balayages de capteurs."
 
 #: scripts/scenario_57_shoreline.lua:8028
 msgctxt "research-comms"
 msgid "Your science console will have the controls when your ship is in range."
 msgstr ""
+"Votre poste scientifique aura les commandes lorsque votre vaisseau sera à "
+"portée."
 
 #: scripts/scenario_57_shoreline.lua:8029
 #, lua-format
@@ -2482,6 +2489,8 @@ msgid ""
 "\n"
 "The mobile black hole was last seen in sector %s"
 msgstr ""
+"\n"
+"Le trou noir mobile a été vu pour la dernière fois dans le secteur %s."
 
 #: scripts/scenario_57_shoreline.lua:8056
 #, lua-format
@@ -3689,19 +3698,19 @@ msgstr "Bouclier %i critique "
 #: scripts/scenario_57_shoreline.lua:11066
 msgctxt "-shipLog"
 msgid "[Vaiken] Station shields have been damaged. "
-msgstr ""
+msgstr "[Vaiken] Les boucliers de la station ont été endommagés. "
 
 #: scripts/scenario_57_shoreline.lua:11070
 #: scripts/scenario_57_shoreline.lua:11072
 #, lua-format
 msgctxt "-shipLog"
 msgid "[Vaiken] Hull damage: %i out of %i"
-msgstr ""
+msgstr "[Vaiken] Dégâts de coque : %i sur %i."
 
 #: scripts/scenario_57_shoreline.lua:11089
 msgctxt "-shipLog"
 msgid "[Vaiken] Station has been damaged"
-msgstr ""
+msgstr "[Vaiken] La station a été endommagée."
 
 #: scripts/scenario_57_shoreline.lua:11172
 #, lua-format
@@ -3722,16 +3731,19 @@ msgid ""
 "determined that there must be three enemy bases. Find these bases and "
 "destroy them."
 msgstr ""
+"Nos services de renseignement ont analysé toute l'activité ennemie dans "
+"cette zone et ont conclu qu'il doit y avoir 3 bases ennemies. Trouvez ces "
+"bases et détruisez-les."
 
 #: scripts/scenario_57_shoreline.lua:11205
 msgctxt "orders-shipLog"
 msgid " You have already destroyed two of them."
-msgstr ""
+msgstr " Vous en avez déjà détruit deux."
 
 #: scripts/scenario_57_shoreline.lua:11207
 msgctxt "orders-shipLog"
 msgid " You have already destroyed one of them."
-msgstr ""
+msgstr " Vous en avez déjà détruit un."
 
 #: scripts/scenario_57_shoreline.lua:11209
 msgctxt "orders-comms"
@@ -3739,6 +3751,8 @@ msgid ""
 "Defend bases in the area (human navy and independent) from enemy attack and "
 "destroy three enemy bases."
 msgstr ""
+"Défendre les bases de la zone (marine humaine et indépendante) contre les "
+"attaques ennemies et détruire 3 bases ennemies."
 
 #~ msgctxt "trade-comms"
 #~ msgid "What do you want?"

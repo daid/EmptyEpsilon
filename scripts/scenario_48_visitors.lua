@@ -2247,7 +2247,7 @@ function payForUpgrade()
 end
 function shrinkBeamCycle()
 	if comms_source.shrinkBeamCycleUpgrade == nil then
-		addCommsReply("Reduce beam cycle time", function()
+		addCommsReply(_("upgrade-comms", "Reduce beam cycle time"), function()
 			local ctd = comms_target.comms_data
 			if comms_source:getBeamWeaponRange(0) > 0 then
 				if	payForUpgrade() then
@@ -2269,9 +2269,9 @@ function shrinkBeamCycle()
 							comms_source:setBeamWeapon(bi,tempArc,tempDir,tempRng,tempCyc * .75,tempDmg)
 							bi = bi + 1
 						until(comms_source:getBeamWeaponRange(bi) < 1)
-						setCommsMessage("After accepting your gift, he reduced your Beam cycle time by 25%%")
+						setCommsMessage(_("upgrade-comms", "After accepting your gift, he reduced your Beam cycle time by 25%%"))
 					else
-						setCommsMessage(string.format("%s requires %s for the upgrade",ctd.character,ctd.characterGood))
+						setCommsMessage(string.format(_("upgrade-comms", "%s requires %s for the upgrade"),ctd.character,ctd.characterGood))
 					end
 				else
 					comms_source.shrinkBeamCycleUpgrade = "done"
@@ -2285,17 +2285,17 @@ function shrinkBeamCycle()
 						comms_source:setBeamWeapon(bi,tempArc,tempDir,tempRng,tempCyc * .75,tempDmg)
 						bi = bi + 1
 					until(comms_source:getBeamWeaponRange(bi) < 1)
-					setCommsMessage(string.format("%s reduced your Beam cycle time by 25%% at no cost in trade with the message, 'Go get those Exuari.'",ctd.character))
+					setCommsMessage(string.format(_("upgrade-comms", "%s reduced your Beam cycle time by 25%% at no cost in trade with the message, 'Go get those Exuari.'"),ctd.character))
 				end
 			else
-				setCommsMessage("Your ship type does not support a beam weapon upgrade.")				
+				setCommsMessage(_("upgrade-comms", "Your ship type does not support a beam weapon upgrade."))				
 			end
 		end)
 	end
 end
 function increaseSpin()
 	if comms_source.increaseSpinUpgrade == nil then
-		addCommsReply("Increase spin speed", function()
+		addCommsReply(_("upgrade-comms", "Increase spin speed"), function()
 			local ctd = comms_target.comms_data
 			if payForUpgrade() then
 				local partQuantity = 0
@@ -2307,21 +2307,21 @@ function increaseSpin()
 					comms_source.goods[ctd.characterGood] = comms_source.goods[ctd.characterGood] - 1
 					comms_source.cargo = comms_source.cargo + 1
 					comms_source:setRotationMaxSpeed(comms_source:getRotationMaxSpeed()*1.5)
-					setCommsMessage(string.format("Ship spin speed increased by 50%% after you gave %s to %s",ctd.characterGood,ctd.character))
+					setCommsMessage(string.format(_("upgrade-comms", "Ship spin speed increased by 50%% after you gave %s to %s"),ctd.characterGood,ctd.character))
 				else
-					setCommsMessage(string.format("%s requires %s for the spin upgrade",ctd.character,ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s requires %s for the spin upgrade"),ctd.character,ctd.characterGood))
 				end
 			else
 				comms_source.increaseSpinUpgrade = "done"
 				comms_source:setRotationMaxSpeed(player:getRotationMaxSpeed()*1.5)
-				setCommsMessage(string.format("%s: I increased the speed your ship spins by 50%%. Normally, I'd require %s, but seeing as you're going out to take on the Exuari, we worked it out",ctd.character,ctd.characterGood))
+				setCommsMessage(string.format(_("upgrade-comms", "%s: I increased the speed your ship spins by 50%%. Normally, I'd require %s, but seeing as you're going out to take on the Exuari, we worked it out"),ctd.character,ctd.characterGood))
 			end
 		end)
 	end
 end
 function addAuxTube()
 	if comms_source.auxTubeUpgrade == nil then
-		addCommsReply("Add missle tube", function()
+		addCommsReply(_("upgrade-comms", "Add missile tube"), function()
 			local ctd = comms_target.comms_data
 			if payForUpgrade() then
 				local luxQuantity = 0
@@ -2343,9 +2343,9 @@ function addAuxTube()
 					comms_source:setWeaponTubeExclusiveFor(originalTubes, "Homing")
 					comms_source:setWeaponStorageMax("Homing", comms_source:getWeaponStorageMax("Homing") + 2)
 					comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorage("Homing") + 2)
-					setCommsMessage(string.format("%s thanks you for the %s and the luxury and installs a homing missile tube for you",ctd.character,ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s thanks you for the %s and the luxury and installs a homing missile tube for you"),ctd.character,ctd.characterGood))
 				else
-					setCommsMessage(string.format("%s requires %s and luxury for the missile tube",ctd.character,ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s requires %s and luxury for the missile tube"),ctd.character,ctd.characterGood))
 				end
 			else
 				comms_source.auxTubeUpgrade = "done"
@@ -2355,14 +2355,14 @@ function addAuxTube()
 				comms_source:setWeaponTubeExclusiveFor(originalTubes, "Homing")
 				comms_source:setWeaponStorageMax("Homing", comms_source:getWeaponStorageMax("Homing") + 2)
 				comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorage("Homing") + 2)
-				setCommsMessage(string.format("%s installs a homing missile tube for you. The %s required was requisitioned from emergency contingency supplies",ctd.character,ctd.characterGood))
+				setCommsMessage(string.format(_("upgrade-comms", "%s installs a homing missile tube for you. The %s required was requisitioned from emergency contingency supplies"),ctd.character,ctd.characterGood))
 			end
 		end)
 	end
 end
 function coolBeam()
 	if comms_source.coolBeamUpgrade == nil then
-		addCommsReply("Reduce beam heat", function()
+		addCommsReply(_("upgrade-comms", "Reduce beam heat"), function()
 			local ctd = comms_target.comms_data
 			if comms_source:getBeamWeaponRange(0) > 0 then
 				if payForUpgrade() then
@@ -2379,9 +2379,9 @@ function coolBeam()
 							comms_source:setBeamWeaponHeatPerFire(bi,comms_source:getBeamWeaponHeatPerFire(bi) * 0.5)
 							bi = bi + 1
 						until(comms_source:getBeamWeaponRange(bi) < 1)
-						setCommsMessage("Beam heat generation reduced by 50%%")
+						setCommsMessage(_("upgrade-comms", "Beam heat generation reduced by 50%%"))
 					else
-						setCommsMessage(string.format("%s says she needs %s before she can cool your beams",ctd.character,ctd.characterGood))
+						setCommsMessage(string.format(_("upgrade-comms", "%s says she needs %s before she can cool your beams"),ctd.character,ctd.characterGood))
 					end
 				else
 					comms_source.coolBeamUpgrade = "done"
@@ -2390,17 +2390,17 @@ function coolBeam()
 						comms_source:setBeamWeaponHeatPerFire(bi,comms_source:getBeamWeaponHeatPerFire(bi) * 0.5)
 						bi = bi + 1
 					until(comms_source:getBeamWeaponRange(bi) < 1)
-					setCommsMessage(string.format("%s: Beam heat generation reduced by 50%%, no %s necessary. Go shoot some Exuari for me",ctd.character,ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s: Beam heat generation reduced by 50%%, no %s necessary. Go shoot some Exuari for me"),ctd.character,ctd.characterGood))
 				end
 			else
-				setCommsMessage("Your ship type does not support a beam weapon upgrade.")				
+				setCommsMessage(_("upgrade-comms", "Your ship type does not support a beam weapon upgrade."))				
 			end
 		end)
 	end
 end
 function longerBeam()
 	if comms_source.longerBeamUpgrade == nil then
-		addCommsReply("Extend beam range", function()
+		addCommsReply(_("upgrade-comms", "Extend beam range"), function()
 			if optionalMissionDiagnostic then print("extending beam range") end
 			local ctd = comms_target.comms_data
 			if comms_source:getBeamWeaponRange(0) > 0 then
@@ -2427,9 +2427,9 @@ function longerBeam()
 							comms_source:setBeamWeapon(bi,tempArc,tempDir,tempRng * 1.25,tempCyc,tempDmg)
 							bi = bi + 1
 						until(comms_source:getBeamWeaponRange(bi) < 1)
-						setCommsMessage(string.format("%s extended your beam range by 25%% and says thanks for the %s",ctd.character,ctd.characterGood))
+						setCommsMessage(string.format(_("upgrade-comms", "%s extended your beam range by 25%% and says thanks for the %s"),ctd.character,ctd.characterGood))
 					else
-						setCommsMessage(string.format("%s requires %s for the upgrade",ctd.character,ctd.characterGood))
+						setCommsMessage(string.format(_("upgrade-comms", "%s requires %s for the upgrade"),ctd.character,ctd.characterGood))
 					end
 				else
 					comms_source.longerBeamUpgrade = "done"
@@ -2444,17 +2444,17 @@ function longerBeam()
 						bi = bi + 1
 					until(comms_source:getBeamWeaponRange(bi) < 1)
 					if optionalMissionDiagnostic then print("beam range extended for free") end
-					setCommsMessage(string.format("%s increased your beam range by 25%% without the usual %s from your ship",ctd.character,ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s increased your beam range by 25%% without the usual %s from your ship"),ctd.character,ctd.characterGood))
 				end
 			else
-				setCommsMessage("Your ship type does not support a beam weapon upgrade.")				
+				setCommsMessage(_("upgrade-comms", "Your ship type does not support a beam weapon upgrade."))				
 			end
 		end)
 	end
 end
 function damageBeam()
 	if comms_source.damageBeamUpgrade == nil then
-		addCommsReply("Increase beam damage", function()
+		addCommsReply(_("upgrade-comms", "Increase beam damage"), function()
 			local ctd = comms_target.comms_data
 			if comms_source:getBeamWeaponRange(0) > 0 then
 				if payForUpgrade() then
@@ -2476,9 +2476,9 @@ function damageBeam()
 							comms_source:setBeamWeapon(bi,tempArc,tempDir,tempRng,tempCyc,tempDmg*1.2)
 							bi = bi + 1
 						until(comms_source:getBeamWeaponRange(bi) < 1)
-						setCommsMessage(string.format("%s increased your beam damage by 20%% and stores away the %s",ctd.character,ctd.characterGood))
+						setCommsMessage(string.format(_("upgrade-comms", "%s increased your beam damage by 20%% and stores away the %s"),ctd.character,ctd.characterGood))
 					else
-						setCommsMessage(string.format("%s requires %s for the upgrade",ctd.character,ctd.characterGood))
+						setCommsMessage(string.format(_("upgrade-comms", "%s requires %s for the upgrade"),ctd.character,ctd.characterGood))
 					end
 				else
 					comms_source.damageBeamUpgrade = "done"
@@ -2492,17 +2492,17 @@ function damageBeam()
 						comms_source:setBeamWeapon(bi,tempArc,tempDir,tempRng,tempCyc,tempDmg*1.2)
 						bi = bi + 1
 					until(comms_source:getBeamWeaponRange(bi) < 1)
-					setCommsMessage(string.format("%s increased your beam damage by 20%%, waiving the usual %s requirement",ctd.character,ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s increased your beam damage by 20%%, waiving the usual %s requirement"),ctd.character,ctd.characterGood))
 				end
 			else
-				setCommsMessage("Your ship type does not support a beam weapon upgrade.")				
+				setCommsMessage(_("upgrade-comms", "Your ship type does not support a beam weapon upgrade."))				
 			end
 		end)
 	end
 end
 function moreMissiles()
 	if comms_source.moreMissilesUpgrade == nil then
-		addCommsReply("Increase missile storage capacity", function()
+		addCommsReply(_("upgrade-comms", "Increase missile storage capacity"), function()
 			local ctd = comms_target.comms_data
 			if comms_source:getWeaponTubeCount() > 0 then
 				if payForUpgrade() then
@@ -2518,9 +2518,9 @@ function moreMissiles()
 						for _, missile_type in ipairs(missile_types) do
 							comms_source:setWeaponStorageMax(missile_type, math.ceil(comms_source:getWeaponStorageMax(missile_type)*1.25))
 						end
-						setCommsMessage(string.format("%s: You can now store at least 25%% more missiles. I appreciate the %s",ctd.character,ctd.characterGood))
+						setCommsMessage(string.format(_("upgrade-comms", "%s: You can now store at least 25%% more missiles. I appreciate the %s"),ctd.character,ctd.characterGood))
 					else
-						setCommsMessage(string.format("%s needs %s for the upgrade",ctd.character,ctd.characterGood))
+						setCommsMessage(string.format(_("upgrade-comms", "%s needs %s for the upgrade"),ctd.character,ctd.characterGood))
 					end
 				else
 					comms_source.moreMissilesUpgrade = "done"
@@ -2528,17 +2528,17 @@ function moreMissiles()
 					for _, missile_type in ipairs(missile_types) do
 						comms_source:setWeaponStorageMax(missile_type, math.ceil(comms_source:getWeaponStorageMax(missile_type)*1.25))
 					end
-					setCommsMessage(string.format("%s: You can now store at least 25%% more missiles. I found some spare %s on the station. Go launch those missiles at those perfidious Exuari",ctd.character,ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s: You can now store at least 25%% more missiles. I found some spare %s on the station. Go launch those missiles at those perfidious Exuari"),ctd.character,ctd.characterGood))
 				end
 			else
-				setCommsMessage("Your ship type does not support a missile storage capacity upgrade.")				
+				setCommsMessage(_("upgrade-comms", "Your ship type does not support a missile storage capacity upgrade."))				
 			end
 		end)
 	end
 end
 function fasterImpulse()
 	if comms_source.fasterImpulseUpgrade == nil then
-		addCommsReply("Speed up impulse engines", function()
+		addCommsReply(_("upgrade-comms", "Speed up impulse engines"), function()
 			local ctd = comms_target.comms_data
 			if payForUpgrade() then
 				local partQuantity = 0
@@ -2550,21 +2550,21 @@ function fasterImpulse()
 					comms_source.goods[ctd.characterGood] = comms_source.goods[ctd.characterGood] - 1
 					comms_source.cargo = comms_source.cargo + 1
 					comms_source:setImpulseMaxSpeed(comms_source:getImpulseMaxSpeed()*1.25)
-					setCommsMessage(string.format("%s: Your impulse engines now push you up to 25%% faster. Thanks for the %s",ctd.character,ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s: Your impulse engines now push you up to 25%% faster. Thanks for the %s"),ctd.character,ctd.characterGood))
 				else
-					setCommsMessage(string.format("You need to bring %s to %s for the upgrade",ctd.characterGood,ctd.character))
+					setCommsMessage(string.format(_("upgrade-comms", "You need to bring %s to %s for the upgrade"),ctd.characterGood,ctd.character))
 				end
 			else
 				comms_source.fasterImpulseUpgrade = "done"
 				comms_source:setImpulseMaxSpeed(comms_source:getImpulseMaxSpeed()*1.25)
-				setCommsMessage(string.format("%s: Your impulse engines now push you up to 25%% faster. I didn't need %s after all. Go run circles around those blinking Exuari",ctd.character,ctd.characterGood))
+				setCommsMessage(string.format(_("upgrade-comms", "%s: Your impulse engines now push you up to 25%% faster. I didn't need %s after all. Go run circles around those blinking Exuari"),ctd.character,ctd.characterGood))
 			end
 		end)
 	end
 end
 function strongerHull()
 	if comms_source.strongerHullUpgrade == nil then
-		addCommsReply("Strengthen hull", function()
+		addCommsReply(_("upgrade-comms", "Strengthen hull"), function()
 			local ctd = comms_target.comms_data
 			if payForUpgrade() then
 				local partQuantity = 0
@@ -2577,22 +2577,22 @@ function strongerHull()
 					comms_source.cargo = comms_source.cargo + 1
 					comms_source:setHullMax(comms_source:getHullMax()*1.5)
 					comms_source:setHull(comms_source:getHullMax())
-					setCommsMessage(string.format("%s: Thank you for the %s. Your hull is 50%% stronger",ctd.character,ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s: Thank you for the %s. Your hull is 50%% stronger"),ctd.character,ctd.characterGood))
 				else
-					setCommsMessage(string.format("%s: I need %s before I can increase your hull strength",ctd.character,ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s: I need %s before I can increase your hull strength"),ctd.character,ctd.characterGood))
 				end
 			else
 				comms_source.strongerHullUpgrade = "done"
 				comms_source:setHullMax(comms_source:getHullMax()*1.5)
 				comms_source:setHull(comms_source:getHullMax())
-				setCommsMessage(string.format("%s: I made your hull 50%% stronger. I scrounged some %s from around here since you are on the Exuari offense team",ctd.character,ctd.characterGood))
+				setCommsMessage(string.format(_("upgrade-comms", "%s: I made your hull 50%% stronger. I scrounged some %s from around here since you are on the Exuari offense team"),ctd.character,ctd.characterGood))
 			end
 		end)
 	end
 end
 function efficientBatteries()
 	if comms_source.efficientBatteriesUpgrade == nil then
-		addCommsReply("Increase battery efficiency", function()
+		addCommsReply(_("upgrade-comms", "Increase battery efficiency"), function()
 			local ctd = comms_target.comms_data
 			if payForUpgrade() then
 				local partQuantity = 0
@@ -2605,22 +2605,22 @@ function efficientBatteries()
 					comms_source.cargo = comms_source.cargo + 1
 					comms_source:setMaxEnergy(comms_source:getMaxEnergy()*1.25)
 					comms_source:setEnergy(comms_source:getMaxEnergy())
-					setCommsMessage(string.format("%s: I appreciate the %s. You have a 25%% greater energy capacity due to increased battery efficiency",ctd.character,ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s: I appreciate the %s. You have a 25%% greater energy capacity due to increased battery efficiency"),ctd.character,ctd.characterGood))
 				else
-					setCommsMessage(string.format("%s: You need to bring me some %s before I can increase your battery efficiency",ctd.character,ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s: You need to bring me some %s before I can increase your battery efficiency"),ctd.character,ctd.characterGood))
 				end
 			else
 				comms_source.efficientBatteriesUpgrade = "done"
 				comms_source:setMaxEnergy(comms_source:getMaxEnergy()*1.25)
 				comms_source:setEnergy(comms_source:getMaxEnergy())
-				setCommsMessage(string.format("%s increased your battery efficiency by 25%% without the need for %s due to the pressing military demands on your ship",ctd.character,ctd.characterGood))
+				setCommsMessage(string.format(_("upgrade-comms", "%s increased your battery efficiency by 25%% without the need for %s due to the pressing military demands on your ship"),ctd.character,ctd.characterGood))
 			end
 		end)
 	end
 end
 function strongerShields()
 	if comms_source.strongerShieldsUpgrade == nil then
-		addCommsReply("Strengthen shields", function()
+		addCommsReply(_("upgrade-comms", "Strengthen shields"), function()
 			local ctd = comms_target.comms_data
 			if payForUpgrade() then
 				local partQuantity = 0
@@ -2636,9 +2636,9 @@ function strongerShields()
 					else
 						comms_source:setShieldsMax(comms_source:getShieldMax(0)*1.2,comms_source:getShieldMax(1)*1.2)
 					end
-					setCommsMessage(string.format("%s: I've raised your shield maximum by 20%%, %s. Thanks for bringing the %s",ctd.character,comms_source:getCallSign(),ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s: I've raised your shield maximum by 20%%, %s. Thanks for bringing the %s"),ctd.character,comms_source:getCallSign(),ctd.characterGood))
 				else
-					setCommsMessage(string.format("%s: You need to provide %s before I can raise your shield strength",ctd.character,ctd.characterGood))
+					setCommsMessage(string.format(_("upgrade-comms", "%s: You need to provide %s before I can raise your shield strength"),ctd.character,ctd.characterGood))
 				end
 			else
 				comms_source.strongerShieldsUpgrade = "done"
@@ -2647,7 +2647,7 @@ function strongerShields()
 				else
 					comms_source:setShieldsMax(comms_source:getShieldMax(0)*1.2,comms_source:getShieldMax(1)*1.2)
 				end
-				setCommsMessage(string.format("%s: Congratulations, %s, your shields are 20%% stronger. Don't worry about the %s. Go kick those Exuari outta here",ctd.character,comms_source:getCallSign(),ctd.characterGood))
+				setCommsMessage(string.format(_("upgrade-comms", "%s: Congratulations, %s, your shields are 20%% stronger. Don't worry about the %s. Go kick those Exuari outta here"),ctd.character,comms_source:getCallSign(),ctd.characterGood))
 			end
 		end)
 	end
@@ -7500,18 +7500,18 @@ function friendlyComms(comms_data)
 				msg = _("shipAssist-comms", "Fleet status:")
 				for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 					if fleetShip ~= nil and fleetShip:isValid() then
-						msg = msg .. "\n  " .. fleetShip:getCallSign() .. ":"
-						msg = msg .. "\n    Hull: " .. math.floor(fleetShip:getHull() / fleetShip:getHullMax() * 100) .. "%"
+						msg = msg .. string.format(_("shipAssist-comms", "\n %s:"), fleetShip:getCallSign())
+						msg = msg .. string.format(_("shipAssist-comms", "\n    Hull: %d%%"), math.floor(fleetShip:getHull() / fleetShip:getHullMax() * 100))
 						local shields = fleetShip:getShieldCount()
 						if shields == 1 then
-							msg = msg .. "\n    Shield: " .. math.floor(fleetShip:getShieldLevel(0) / fleetShip:getShieldMax(0) * 100) .. "%"
+							msg = msg .. string.format(_("shipAssist-comms", "\n    Shield: %d%%"), math.floor(fleetShip:getShieldLevel(0) / fleetShip:getShieldMax(0) * 100))
 						else
-							msg = msg .. "\n    Shields: "
+							msg = msg .. _("shipAssist-comms", "\n    Shields: ")
 							if shields == 2 then
-								msg = msg .. "Front:" .. math.floor(fleetShip:getShieldLevel(0) / fleetShip:getShieldMax(0) * 100) .. "% Rear:" .. math.floor(fleetShip:getShieldLevel(1) / fleetShip:getShieldMax(1) * 100) .. "%"
+								msg = msg .. string.format(_("shipAssist-comms", "Front: %d%% Rear: %d%%"), math.floor(fleetShip:getShieldLevel(0) / fleetShip:getShieldMax(0) * 100), math.floor(fleetShip:getShieldLevel(1) / fleetShip:getShieldMax(1) * 100))
 							else
 								for n=0,shields-1 do
-									msg = msg .. " " .. n .. ":" .. math.floor(fleetShip:getShieldLevel(n) / fleetShip:getShieldMax(n) * 100) .. "%"
+									msg = msg .. string.format(_("shipAssist-comms", " %d:%d%%"), n, math.floor(fleetShip:getShieldLevel(n) / fleetShip:getShieldMax(n) * 100))
 								end
 							end
 						end
@@ -7524,16 +7524,16 @@ function friendlyComms(comms_data)
 				msg = _("shipAssist-comms", "Fleet missile status:")
 				for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 					if fleetShip ~= nil and fleetShip:isValid() then
-						msg = msg .. "\n  " .. fleetShip:getCallSign() .. ":"
+						msg = msg .. string.format(_("shipAssist-comms", "\n %s:"), fleetShip:getCallSign())
 						local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 						missileMsg = ""
 						for _, missile_type in ipairs(missile_types) do
 							if fleetShip:getWeaponStorageMax(missile_type) > 0 then
-								missileMsg = missileMsg .. "\n      " .. missile_type .. ": " .. math.floor(fleetShip:getWeaponStorage(missile_type)) .. "/" .. math.floor(fleetShip:getWeaponStorageMax(missile_type))
+								missileMsg = missileMsg .. string.format(_("shipAssist-comms", "\n      %s: %d/%d"), missile_type, math.floor(fleetShip:getWeaponStorage(missile_type)), math.floor(fleetShip:getWeaponStorageMax(missile_type)))
 							end
 						end
 						if missileMsg ~= "" then
-							msg = msg .. "\n    Missiles: " .. missileMsg
+							msg = msg .. string.format(_("shipAssist-comms", "\n    Missiles: %s"), missileMsg)
 						end
 					end
 				end
