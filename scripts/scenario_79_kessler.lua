@@ -348,6 +348,7 @@ end
 
 function triggerPhase2()
 	player1:setReputationPoints(reputation_threshold)
+	debris_interactions=interaction_threshold
 	removeGMFunction(GMPhase2)
 end
 
