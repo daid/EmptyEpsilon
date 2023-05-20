@@ -1,4 +1,5 @@
 #include "shipSelectionScreen.h"
+#include "shipTemplate.h"
 
 #include "featureDefs.h"
 #include "glObjects.h"
@@ -25,6 +26,7 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_togglebutton.h"
+
 #include "preferenceManager.h"
 
 class PasswordDialog : public GuiOverlay
@@ -142,7 +144,13 @@ ShipSelectionScreen::ShipSelectionScreen()
     right_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     auto right_panel = new GuiPanel(right_container, "DIRECT_OPTIONS_PANEL");
-    right_panel->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 560);
+    if (game_server) {
+    right_panel->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 325);
+	}
+	else
+	{
+	right_panel->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 560);
+	}
     auto right_content = new GuiElement(right_panel, "");
     right_content->setMargins(50)->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
@@ -267,6 +275,10 @@ ShipSelectionScreen::ShipSelectionScreen()
     if (game_server && gameGlobalInfo->allow_new_player_ships)
     {
         (new GuiPanel(left_container, "CREATE_SHIP_BOX"))->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 700);
+        auto right_panel_2 = new GuiPanel(right_container, "PLAYER_SHIP_INFO_BOX");
+        right_panel_2->setPosition(0, 400, sp::Alignment::TopCenter)->setSize(550, 350);
+        playership_info = new GuiScrollText(right_panel_2, "PLAYERSHIP_INFO", tr("Ship info..."));
+        playership_info->setPosition(0, 10, sp::Alignment::TopCenter)->setSize(520, 400);
     }
 
     // Player ship selection panel
@@ -320,11 +332,15 @@ ShipSelectionScreen::ShipSelectionScreen()
     // If this is the server, add buttons and a selector to create player ships.
     if (game_server && gameGlobalInfo->allow_new_player_ships)
     {
-        GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", nullptr);
+        GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", [this](int index, string value)
+        {
+			P<ShipTemplate> ship_template = ShipTemplate::getTemplate(value);
+			playership_info->setText(ship_template->getDescription());
+        });
+
         // List only ships with templates designated for player use.
         std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
         std::sort(template_names.begin(), template_names.end());
-
         for(string& template_name : template_names)
         {
             P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
@@ -334,6 +350,8 @@ ShipSelectionScreen::ShipSelectionScreen()
         }
         ship_template_selector->setSelectionIndex(0);
         ship_template_selector->setPosition(0, 630, sp::Alignment::TopCenter)->setSize(490, 50);
+        P<ShipTemplate> ship_template = ShipTemplate::getTemplate(ship_template_selector->getSelectionValue());
+        playership_info->setText(ship_template->getDescription());
 
         // Spawn a ship of the selected template near 0,0 and give it a random
         // heading.
@@ -428,6 +446,8 @@ void ShipSelectionScreen::update(float delta)
                 player_ship_list->removeEntry(player_ship_list->indexByValue(string(n)));
         }
     }
+
+
 
     // If there aren't any player ships, show a label stating so.
     if (player_ship_list->entryCount() > 0)

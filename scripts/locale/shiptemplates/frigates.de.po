@@ -10,11 +10,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
+
 #: scripts/shiptemplates/frigates.lua:14
 msgctxt "ship"
 msgid "Phobos T3"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:14 scripts/shiptemplates/frigates.lua:87
 #: scripts/shiptemplates/frigates.lua:116
 #: scripts/shiptemplates/frigates.lua:133
@@ -27,10 +29,12 @@ msgstr ""
 msgctxt "class"
 msgid "Frigate"
 msgstr "Fregatte"
+
 #: scripts/shiptemplates/frigates.lua:14
 msgctxt "subclass"
 msgid "Cruiser"
 msgstr "Kreuzer"
+
 #: scripts/shiptemplates/frigates.lua:16
 msgid ""
 "The Phobos T3, just like the Atlantis, is the workhorse of almost any navy. "
@@ -43,10 +47,12 @@ msgstr ""
 "den jeweiligen Zweck extrem einfach macht Die technischen Daten sind nicht "
 "sonderlich beeindruckend, aber durch ihren modularen Aufbau lässt sie sich "
 "leicht in großen Stückzahlen herstellen."
+
 #: scripts/shiptemplates/frigates.lua:28
 msgctxt "ship"
 msgid "Elara P2"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:29
 msgid ""
 "Inspired by the Phobos T3 design, the Elara P2 is nearly identical. With the "
@@ -56,10 +62,12 @@ msgstr ""
 "Inspiriert vom Design der Phobos T3, ist die Elara P2 nahezu identisch. "
 "Ausgestattet mit einen zusätzlichen Warpantrieb und stärkeren Frontschilden, "
 "ist die Elara P2 noch gefährlicher als die Phobos."
+
 #: scripts/shiptemplates/frigates.lua:33
 msgctxt "ship"
 msgid "Phobos M3"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:34
 msgid ""
 "The Phobos M3 is one of the most common variants of the Phobos T3. It adds a "
@@ -69,26 +77,31 @@ msgstr ""
 "Die Phobos M3 ist eine der gebräuchlichsten Varianten der Phobos T3. Im "
 "Vergleich dazu verfügt die M3 über einen zusätzlichen Minenschacht, die "
 "dadurch bedingte höhere Masse macht sie allerdings ein wenig langsamer."
+
 #: scripts/shiptemplates/frigates.lua:41
 msgctxt "playerShip"
 msgid "Phobos M3P"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:42
 msgid ""
 "Player variant of the Phobos M3, not as strong as the atlantis, but has "
 "front firing tubes, making it an easier to use ship in some scenarios."
 msgstr ""
-"Spielervariante der Phobos M3. Nicht so stark wie die Atlantis, allerdings "
-"mit nach vorne gerichteten Waffenschächten, wodurch das Schiff in manchen "
-"Szenarios einfacher handzuhaben ist."
+"Spielbare Variante der Phobos M3. Nicht so stark wie die Atlantis, "
+"allerdings mit nach vorne gerichteten Waffenschächten, wodurch das Schiff in "
+"manchen Szenarios einfacher handzuhaben ist."
+
 #: scripts/shiptemplates/frigates.lua:87
 msgctxt "ship"
 msgid "Nirvana R5"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:87
 msgctxt "subclass"
 msgid "Cruiser: Anti-fighter"
 msgstr "Kreuzer: Anti-Jäger"
+
 #: scripts/shiptemplates/frigates.lua:89
 msgid ""
 "The Nirvana R5 is an anti-fighter cruiser. It has several rapid-firing, low-"
@@ -96,10 +109,12 @@ msgid ""
 msgstr ""
 "Die Nirvana R5 ist ein Anti-Jäger-Kreuzer. Sie verfügt über mehrere leichte, "
 "schnell feuernde Nahbereichs-Verteidigungswaffen, um Jäger abzuwehren."
+
 #: scripts/shiptemplates/frigates.lua:98
 msgctxt "ship"
 msgid "Nirvana R5A"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:99
 msgid ""
 "An improved version of the Nirvana R5 with faster turning speed and firing "
@@ -107,10 +122,12 @@ msgid ""
 msgstr ""
 "Eine verbesserte Version der Nirvana R5A mit besserer Manövrierbarkeit und "
 "höherer Feuerrate."
+
 #: scripts/shiptemplates/frigates.lua:106
 msgctxt "ship"
 msgid "Nirvana R3"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:107
 msgid ""
 "One of the earliest mass produced Nirvana models, the Nirvana R3 is designed "
@@ -123,14 +140,17 @@ msgstr ""
 "mehrere schnelle und schwache Abwehrlaser. Verglichen mit der späteren, "
 "weiter verbreiteten Nirvana R5 haben die Laser eine kürzere Reichweite, "
 "außerdem sind Schilde und Impulsantrieb schwächer."
+
 #: scripts/shiptemplates/frigates.lua:116
 msgctxt "ship"
 msgid "Storm"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:116
 msgctxt "subclass"
 msgid "Cruiser: Heavy Artillery"
 msgstr "Kreuzer:Schwere Artillerie"
+
 #: scripts/shiptemplates/frigates.lua:118
 msgid ""
 "A heavy artillery cruiser, the Storm fires bunches of missiles from forward "
@@ -138,15 +158,18 @@ msgid ""
 msgstr ""
 "Als schwerer Artillerie-Kreuzer kann die Storm mehrere Raketen aus am Heck "
 "angebrachten Werfern abfeuern."
+
 #: scripts/shiptemplates/frigates.lua:133
 msgctxt "playerShip"
 msgid "Hathcock"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:133
 #: scripts/shiptemplates/frigates.lua:299
 msgctxt "subclass"
 msgid "Cruiser: Sniper"
 msgstr "Kreuzer: Sniper"
+
 #: scripts/shiptemplates/frigates.lua:135
 msgid ""
 "Long range narrow beam and some point defense beams, broadside missiles. "
@@ -154,14 +177,17 @@ msgid ""
 msgstr ""
 "Ein schmaler Langstreckenlaser und einige Abwehrlaser, sowie "
 "Breitseitenraketen. Sehr wendig für eine Fregatte."
+
 #: scripts/shiptemplates/frigates.lua:179
 msgctxt "ship"
 msgid "Piranha F12"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:179
 msgctxt "subclass"
 msgid "Cruiser: Light Artillery"
 msgstr "Kreuzer: Leichte Artillerie"
+
 #: scripts/shiptemplates/frigates.lua:181
 msgid ""
 "A light artillery cruiser, the Piranha F12 is the smallest ship to "
@@ -169,10 +195,12 @@ msgid ""
 msgstr ""
 "Als leichter Artilleriekreuzer ist die Piranha F12 das kleinste Schiff, das "
 "ausschließlich über Breitseitenwaffen verfügt."
+
 #: scripts/shiptemplates/frigates.lua:201
 msgctxt "ship"
 msgid "Piranha F12.M"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:202
 msgid ""
 "This modified Piranha F12 is in all respects the same vessel except for "
@@ -185,10 +213,12 @@ msgstr ""
 "zur normalen Konfiguration erlaubt, auch Nukes zu verwenden. Allerdings "
 "verringert sich durch diese Veränderung auch die Gesamtkapazität der "
 "Munition."
+
 #: scripts/shiptemplates/frigates.lua:207
 msgctxt "ship"
 msgid "Piranha F8"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:208
 msgid ""
 "The first version of the Piranha was not popular due to its meager firepower "
@@ -197,10 +227,12 @@ msgstr ""
 "Aufgrund der mageren Feuerkraft und der seltsamen Anordnung der "
 "Waffenschächte war diese erste Version der Piranha nicht gerade beliebt. Das "
 "Ergebnis war ein großer finanzieller Rückschlag."
+
 #: scripts/shiptemplates/frigates.lua:216
 msgctxt "playerShip"
 msgid "Piranha"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:217
 msgid ""
 "This combat-specialized Piranha F12 adds mine-laying tubes, combat "
@@ -208,14 +240,17 @@ msgid ""
 msgstr ""
 "Diese auf den Kampf spezialisierte Piranha besitzt zusätzliche "
 "Minenschächte, ein Ausweichmanöver-system und einen Sprungantrieb."
+
 #: scripts/shiptemplates/frigates.lua:272
 msgctxt "ship"
 msgid "Stalker Q7"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:272
 msgctxt "subclass"
 msgid "Cruiser: Strike ship"
 msgstr "Kreuzer: Angriffsschiff"
+
 #: scripts/shiptemplates/frigates.lua:274
 msgid ""
 "The Stalker is a strike ship designed to swoop into battle, deal damage "
@@ -225,10 +260,12 @@ msgstr ""
 "die Schlacht einzugreifen, schnell viel Schaden zu verursachen, und das "
 "Kampfgeschehen schnell wieder zu verlassen. Das Modell Q7 ist mit einem "
 "Warpantrieb ausgestattet."
+
 #: scripts/shiptemplates/frigates.lua:282
 msgctxt "ship"
 msgid "Stalker Q5"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:283
 msgid ""
 "The stalker Q5 predates the Stalker Q7. Like the Q7, the Q5 is designed to "
@@ -240,10 +277,12 @@ msgstr ""
 "Schaden zu verursachen, und das Kampfgeschehen schnell wieder zu verlassen. "
 "Verglichen mit der Q7 hat die Q5 schwächere Schilde und Hüllenstärke, aber "
 "eine höhere Wendigkeit."
+
 #: scripts/shiptemplates/frigates.lua:288
 msgctxt "ship"
 msgid "Stalker R7"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:289
 msgid ""
 "The Stalker is a strike ship designed to swoop into battle, deal damage "
@@ -253,10 +292,12 @@ msgstr ""
 "Schlacht einzugreifen, schnell viel Schaden zu verursachen, und das "
 "Kampfgeschehen schnell wieder zu verlassen. TDas Modell R7 ist mit einem "
 "Sprungantrieb ausgestattet."
+
 #: scripts/shiptemplates/frigates.lua:293
 msgctxt "ship"
 msgid "Stalker R5"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:294
 msgid ""
 "The stalker R5 predates the Stalker R7. Like the R7, the R5 is designed to "
@@ -268,10 +309,12 @@ msgstr ""
 "Schaden zu verursachen, und das Kampfgeschehen schnell wieder zu verlassen. "
 "Verglichen mit der R7 hat die R5 schwächere Schilde und Hüllenstärke, aber "
 "eine höhere Wendigkeit."
+
 #: scripts/shiptemplates/frigates.lua:299
 msgctxt "ship"
 msgid "Ranus U"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:301
 msgid ""
 "The Ranus U sniper is built to deal a large amounts of damage quickly and "
@@ -283,14 +326,17 @@ msgstr ""
 "zu verursachen und sich dann zurückzuziehen. Es ist die einzige Basis-"
 "Fregatte welche über Nuklearwaffen verfügt, obwohl es sich generell um die "
 "kleinste Fregatte handelt."
+
 #: scripts/shiptemplates/frigates.lua:312
 msgctxt "ship"
 msgid "Flavia"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:312
 msgctxt "subclass"
 msgid "Light transport"
 msgstr "Leichter Transporter"
+
 #: scripts/shiptemplates/frigates.lua:314
 msgid ""
 "Popular among traders and smugglers, the Flavia is a small cargo and "
@@ -301,10 +347,12 @@ msgstr ""
 "Händlern als auch Schmugglern beliebt. Bei kleinerer Ladung und kuerzeren "
 "Strecken ist es günstiger als ein ein Frachter und wird oft genutzt um "
 "hochwertige Ware diskret zu transportieren."
+
 #: scripts/shiptemplates/frigates.lua:319
 msgctxt "ship"
 msgid "Flavia Falcon"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:320
 msgid ""
 "The Flavia Falcon is a Flavia transport modified for faster flight, and adds "
@@ -313,10 +361,12 @@ msgstr ""
 "Die Flavia Falcon ist ein Flavia-Transporter welcher für höhere "
 "Geschwindigkeit optimiert wurde und besitzt zusätzlich zwei rueckwärtige "
 "Laser um den Rücken von Feinden frei zu halten."
+
 #: scripts/shiptemplates/frigates.lua:325
 msgctxt "playerShip"
 msgid "Flavia P.Falcon"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:326
 msgid ""
 "The Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp "
@@ -324,25 +374,31 @@ msgid ""
 msgstr ""
 "Die Flavia P.Falcon besitzt einen rueckwärtigen Raketenschacht welcher Nukes "
 "einsetzen kann, sowie einen Warpantrieb."
+
 #: scripts/shiptemplates/frigates.lua:369
 msgctxt "playerShip"
 msgid "Repulse"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:369
 msgctxt "subclass"
 msgid "Armored Transport"
-msgstr "Armored Transport"
+msgstr "Gepanzerter Transporter"
+
 #: scripts/shiptemplates/frigates.lua:371
 msgid "Jump/Turret version of Flavia Falcon"
 msgstr "Sprung/Geschützturm-Version der Flavia Falcon"
+
 #: scripts/shiptemplates/frigates.lua:414
 msgctxt "ship"
 msgid "Fiend G3"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:414
 msgctxt "subclass"
 msgid "Gunship"
 msgstr "Kanonenboot"
+
 #: scripts/shiptemplates/frigates.lua:416
 msgid ""
 "The Fiend G3 was the first model produced by Conversions R Us. They got a "
@@ -358,10 +414,12 @@ msgstr ""
 "über Zielsuchraketen und Laser um schwächere Schiffe auszuschalten. In "
 "Verbindung mit dem Sprungantrieb ist es im Vergleich zum normalen "
 "Kanonenboot das wesentlich gefährlichere Schiff."
+
 #: scripts/shiptemplates/frigates.lua:428
 msgctxt "ship"
 msgid "Fiend G4"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:429
 msgid ""
 "The Fiend G4 was among the first models produced by Conversions R Us. They "
@@ -377,10 +435,12 @@ msgstr ""
 "hat verfügt es über Zielsuchraketen und Laser um schwächere Schiffe "
 "auszuschalten. In Verbindung mit dem Warpantrieb ist es im Vergleich zum "
 "normalen Kanonenboot das wesentlich gefährlichere Schiff."
+
 #: scripts/shiptemplates/frigates.lua:433
 msgctxt "ship"
 msgid "Fiend G6"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:434
 msgid ""
 "With the success of the Fiend G3 and G4 models, Conversions R Us continued "
@@ -395,10 +455,12 @@ msgstr ""
 "Wie das verbesserte Kanonenboot verfügt dieses Modell über zwei Raketenrohre "
 "und Laser um schwächere Schiffe auszuschalten. Ihr Sprungantrieb macht sie "
 "jedoch nochmals um einiges gefährlicher."
+
 #: scripts/shiptemplates/frigates.lua:437
 msgctxt "ship"
 msgid "Fiend G5"
 msgstr ""
+
 #: scripts/shiptemplates/frigates.lua:438
 msgid ""
 "With the success of the Fiend G3 and G4 models, Conversions R Us continued "
@@ -413,4 +475,3 @@ msgstr ""
 "Wie das verbesserte Kanonenboot verfügt dieses Modell über zwei Raketenrohre "
 "und Laser um schwächere Schiffe auszuschalten. Ihr Sprungantrieb macht sie "
 "jedoch nochmals um einiges gefährlicher."
-#, fuzzy
