@@ -81,7 +81,7 @@ msgstr "+Missions requises"
 #: scripts/scenario_57_shoreline.lua:236
 msgctxt "buttonGM"
 msgid "+Optional Missions"
-msgstr "+ Missions facultatives"
+msgstr "+Missions facultatives"
 
 #: scripts/scenario_57_shoreline.lua:240
 msgctxt "buttonGM"
@@ -111,7 +111,7 @@ msgstr "Annette Sporisky"
 #: scripts/scenario_57_shoreline.lua:257
 msgctxt "buttonGM"
 msgid "-From Optional Miss"
-msgstr "- Missions facultatives"
+msgstr "-Missions facultatives"
 
 #: scripts/scenario_57_shoreline.lua:260
 msgctxt "buttonGM"
