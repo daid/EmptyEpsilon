@@ -10,10 +10,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
+
 #: scripts/shiptemplates/stations.lua:5
 msgid "Small Station"
-msgstr ""
+msgstr "Kleine Station"
+
 #: scripts/shiptemplates/stations.lua:6
 msgid ""
 "Stations of this size are often used as research outposts, listening "
@@ -30,9 +32,11 @@ msgstr ""
 "nutzen dies manchmal aus, indem sie kleine Stationen in Nebelns platzieren, "
 "die dann als Operationsbasen dienen.\n"
 "Sie haben nur schwache Schilde und sind sind anfällig für Schwarmangriffe."
+
 #: scripts/shiptemplates/stations.lua:11
 msgid "Medium Station"
-msgstr "Mittlere Station"
+msgstr "Mittelgroße Station"
+
 #: scripts/shiptemplates/stations.lua:12
 msgid ""
 "Large enough to accommodate small crews for extended periods of times, "
@@ -45,9 +49,11 @@ msgstr ""
 "Treibstoffstationen, Minenbasen und vorgeschobene Militärstützpunkte. Auch "
 "wenn ihre Schilde recht stark sind, hat sie gegen koordinierte Angriffe "
 "mehrerer Schiffe wenig entgegenzusetzen."
+
 #: scripts/shiptemplates/stations.lua:17
 msgid "Large Station"
-msgstr ""
+msgstr "Große Station"
+
 #: scripts/shiptemplates/stations.lua:18
 msgid ""
 "These spaceborne communities often represent permanent bases in a sector. "
@@ -56,15 +62,17 @@ msgid ""
 "penetrate a large station's shields, and its hull can withstand all but the "
 "most powerful weaponry."
 msgstr ""
-"Diese Weltraum-gemeinschaften stellen oft permanente Basen in einem Sektor "
-"dar. Bei Stationen dieser Größe kan es sich um vieles handeln: "
-"Millitärstützpunke, Handelszentren, Tiefenraum-Siedlungen, oder kleine "
+"Diese Weltraum-Gemeinschaften stellen oft permanente Basen in einem Sektor "
+"dar. Bei Stationen dieser Größe kann es sich um vieles handeln: "
+"Millitärstützpunkte, Handelszentren, Tiefenraum-Siedlungen, oder kleine "
 "Schiffswerften. Nur ein geballter Angriff kann die Schilde einer großen "
 "Station durchdringen, und ihre Hülle widersteht den meisten Waffen für "
 "längere Zeit."
+
 #: scripts/shiptemplates/stations.lua:23
 msgid "Huge Station"
-msgstr "Große Station"
+msgstr "Sehr große Station"
+
 #: scripts/shiptemplates/stations.lua:24
 msgid ""
 "The size of a sprawling town, stations at this scale represent a faction's "
@@ -81,4 +89,3 @@ msgstr ""
 "der Regel lange genug Stand, bis Verstärkung eintrifft - selbst wenn sie "
 "einer großen Belagerung, oder einem massiven, koordinierten Angriff "
 "ausgesetzt ist."
-#, fuzzy
