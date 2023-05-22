@@ -7545,9 +7545,9 @@ function handleDockedState()
 	end
 	if comms_target == stationVaiken then
 		if beamRangeUpgradeAvailable then
-			addCommsReply(_("upgrade-comms", "Apply Marconi station beam range upgrade"), function()
+			addCommsReply(_("opt1BeamRangeUpgrade-comms", "Apply Marconi station beam range upgrade"), function()
 				if comms_source.marconiBeamUpgrade then
-					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
+					setCommsMessage(_("opt1BeamRangeUpgrade-comms", "You already have the upgrade"))
 				else
 					if comms_source:getBeamWeaponRange(0) > 0 then
 						local bi = 0
@@ -7561,52 +7561,52 @@ function handleDockedState()
 							bi = bi + 1
 						until(comms_source:getBeamWeaponRange(bi) < 1)
 						comms_source.marconiBeamUpgrade = true
-						setCommsMessage(_("upgrade-comms", "Your beam range has been improved by 25 percent"))
+						setCommsMessage(_("opt1BeamRangeUpgrade-comms", "Your beam range has been improved by 25 percent"))
 					else
-						setCommsMessage(_("upgrade-comms", "Your ship type does not support a beam weapon upgrade."))
+						setCommsMessage(_("opt1BeamRangeUpgrade-comms", "Your ship type does not support a beam weapon upgrade."))
 					end
 				end
 			end)
 		end
 		if impulseSpeedUpgradeAvailable then
-			addCommsReply(_("upgrade-comms", "Apply Nikhil Morrison impulse engine upgrade"), function()
+			addCommsReply(_("opt4ImpulseUpgrade-comms", "Apply Nikhil Morrison impulse engine upgrade"), function()
 				if comms_source.morrisonUpgrade then
-					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
+					setCommsMessage(_("opt4ImpulseUpgrade-comms", "You already have the upgrade"))
 				else
 					comms_source:setImpulseMaxSpeed(comms_source:getImpulseMaxSpeed()*1.25)
 					comms_source.morrisonUpgrade = true
-					setCommsMessage(_("upgrade-comms", "Your impulse engine speed has been improved by 25 percent"))
+					setCommsMessage(_("opt4ImpulseUpgrade-comms", "Your impulse engine speed has been improved by 25 percent"))
 				end
 			end)
 		end
 		if spinUpgradeAvailable then
-			addCommsReply(_("upgrade-comms", "Apply maneuver upgrade"), function()
+			addCommsReply(_("opt3SpinUpgrade-comms", "Apply maneuver upgrade"), function()
 				if comms_source.spinUpgrade then
-					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
+					setCommsMessage(_("opt3SpinUpgrade-comms", "You already have the upgrade"))
 				else
 					comms_source:setRotationMaxSpeed(comms_source:getRotationMaxSpeed()*2)
 					comms_source.spinUpgrade = true
-					setCommsMessage(_("upgrade-comms", "Your spin speed has been doubled"))
+					setCommsMessage(_("opt3SpinUpgrade-comms", "Your spin speed has been doubled"))
 				end
 			end)
 		end
 		if shieldUpgradeAvailable then
-			addCommsReply(_("upgrade-comms", "Apply Phillip Organa shield upgrade"), function()
+			addCommsReply(_("opt5ShieldsUpgrade-comms", "Apply Phillip Organa shield upgrade"), function()
 				if comms_source.shieldUpgrade then
-					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
+					setCommsMessage(_("opt5ShieldsUpgrade-comms", "You already have the upgrade"))
 				else
 					local frontShieldValue = comms_source:getShieldMax(0)
 					local rearShieldValue = comms_source:getShieldMax(1)
 					comms_source:setShieldsMax(frontShieldValue*1.25,rearShieldValue*1.25)
 					comms_source.shieldUpgrade = true
-					setCommsMessage(_("upgrade-comms", "Your shield capacity has been increased by 25 percent"))
+					setCommsMessage(_("opt5ShieldsUpgrade-comms", "Your shield capacity has been increased by 25 percent"))
 				end
 			end)
 		end
 		if beamDamageUpgradeAvailable then
-			addCommsReply(_("upgrade-comms", "Apply Nefatha beam damage upgrade"), function()
+			addCommsReply(_("opt2BeamDamUpgrade-comms", "Apply Nefatha beam damage upgrade"), function()
 				if comms_source.nefathaUpgrade then
-					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
+					setCommsMessage(_("opt2BeamDamUpgrade-comms", "You already have the upgrade"))
 				else
 					if comms_source:getBeamWeaponRange(0) > 0 then
 						local bi = 0
@@ -7620,9 +7620,9 @@ function handleDockedState()
 							bi = bi + 1
 						until(comms_source:getBeamWeaponRange(bi) < 1)
 						comms_source.nefathaUpgrade = true
-						setCommsMessage(_("upgrade-comms", "Your beam weapons damage has improved by 25 percent"))
+						setCommsMessage(_("opt2BeamDamUpgrade-comms", "Your beam weapons damage has improved by 25 percent"))
 					else
-						setCommsMessage(_("upgrade-comms", "Your ship type does not support a beam weapon upgrade."))
+						setCommsMessage(_("opt2BeamDamUpgrade-comms", "Your ship type does not support a beam weapon upgrade."))
 					end
 				end
 			end)
@@ -7985,7 +7985,7 @@ function upgradeSensors()
 			s3PartQuantity = comms_source.goods[s3part]
 		end
 		if s1PartQuantity > 0 and s2PartQuantity > 0 and s3PartQuantity > 0 then
-			addCommsReply(string.format(_("upgrade-comms", "Provide %s, %s and %s for sensor upgrade"),s1part,s2part,s3part), function()
+			addCommsReply(string.format(_("upgradeSensors-comms", "Provide %s, %s and %s for sensor upgrade"),s1part,s2part,s3part), function()
 				comms_source.goods[s1part] = comms_source.goods[s1part] - 1
 				comms_source.goods[s2part] = comms_source.goods[s2part] - 1
 				comms_source.goods[s3part] = comms_source.goods[s3part] - 1
@@ -7999,7 +7999,7 @@ function upgradeSensors()
 						stettorTarget = stationEmpok
 					end
 				end
-				local oMsg = string.format(_("upgrade-comms", "Our upgraded sensors found an enemy base in sector %s"),stettorTarget:getSectorName())
+				local oMsg = string.format(_("upgradeSensors-comms", "Our upgraded sensors found an enemy base in sector %s"),stettorTarget:getSectorName())
 				comms_source.stettor = "provided"
 				setCommsMessage(oMsg)
 				addCommsReply(_("Back"), commsStation)
@@ -8019,14 +8019,14 @@ function researchBlackHole()
 			hr2partQuantity = comms_source.goods[hr2part]
 		end
 		if hr1partQuantity > 0 and hr2partQuantity > 0 then
-			addCommsReply(string.format(_("research-comms", "Provide %s and %s for black hole research"),hr1part,hr2part), function()
+			addCommsReply(string.format(_("blackHoleresearch-comms", "Provide %s and %s for black hole research"),hr1part,hr2part), function()
 				comms_source.goods[hr1part] = comms_source.goods[hr1part] - 1
 				comms_source.goods[hr2part] = comms_source.goods[hr2part] - 1
 				comms_source.cargo = comms_source.cargo + 2
-				local bhsMsg = _("research-comms", "With the materials you supplied, we installed special sensors on your ship. ")
-				bhsMsg = bhsMsg .. _("research-comms", "We need you to get close to the black hole and run sensor sweeps. ")
-				bhsMsg = bhsMsg .. _("research-comms", "Your science console will have the controls when your ship is in range.")
-				bhsMsg = bhsMsg .. string.format(_("research-comms", "\nThe mobile black hole was last seen in sector %s"), grawp:getSectorName())
+				local bhsMsg = _("blackHoleresearch-comms", "With the materials you supplied, we installed special sensors on your ship. ")
+				bhsMsg = bhsMsg .. _("blackHoleresearch-comms", "We need you to get close to the black hole and run sensor sweeps. ")
+				bhsMsg = bhsMsg .. _("blackHoleresearch-comms", "Your science console will have the controls when your ship is in range.")
+				bhsMsg = bhsMsg .. string.format(_("blackHoleresearch-comms", "\nThe mobile black hole was last seen in sector %s"), grawp:getSectorName())
 				setCommsMessage(bhsMsg)
 				comms_source.horizonComponents = "provided"
 			end)
@@ -8053,12 +8053,12 @@ function researchIncreasedBeamDamage()
 			bd3partQuantity = comms_source.goods[bd3part]
 		end
 		if bd1partQuantity > 0 and bd2partQuantity > 0 and bd3partQuantity > 0 then
-			addCommsReply(string.format(_("research-comms", "Provide %s, %s and %s for beam damage research"),bd1part,bd2part,bd3part), function()
+			addCommsReply(string.format(_("opt2BeamDamResearch-comms", "Provide %s, %s and %s for beam damage research"),bd1part,bd2part,bd3part), function()
 				comms_source.goods[bd1part] = comms_source.goods[bd1part] - 1
 				comms_source.goods[bd2part] = comms_source.goods[bd2part] - 1
 				comms_source.goods[bd3part] = comms_source.goods[bd3part] - 1
 				comms_source.cargo = comms_source.cargo + 3
-				setCommsMessage(_("research-comms", "Thanks. We completed our beam damage research. We transmitted our results to Vaiken. The next time you dock at Vaiken, you can upgrade your beam weapon damage."))
+				setCommsMessage(_("opt2BeamDamResearch-comms", "Thanks. We completed our beam damage research. We transmitted our results to Vaiken. The next time you dock at Vaiken, you can upgrade your beam weapon damage."))
 				comms_source.beamDamageComponents = "provided"
 			end)
 		end
@@ -8084,12 +8084,12 @@ function researchIncreasedBeamRange()
 			br3partQuantity = comms_source.goods[br3part]
 		end
 		if br1partQuantity > 0 and br2partQuantity > 0 and br3partQuantity > 0 then
-			addCommsReply(string.format(_("research-comms", "Provide %s, %s and %s for beam research project"),br1part,br2part,br3part), function()
+			addCommsReply(string.format(_("opt1BeamRangeResearch-comms", "Provide %s, %s and %s for beam research project"),br1part,br2part,br3part), function()
 				comms_source.goods[br1part] = comms_source.goods[br1part] - 1
 				comms_source.goods[br2part] = comms_source.goods[br2part] - 1
 				comms_source.goods[br3part] = comms_source.goods[br3part] - 1
 				comms_source.cargo = comms_source.cargo + 3
-				setCommsMessage(_("research-comms", "With the goods you provided, we completed our advanced beam weapons prototype. We transmitted our research results to Vaiken. The next time you dock at Vaiken, you can have the range of your beam weapons upgraded."))
+				setCommsMessage(_("opt1BeamRangeResearch-comms", "With the goods you provided, we completed our advanced beam weapons prototype. We transmitted our research results to Vaiken. The next time you dock at Vaiken, you can have the range of your beam weapons upgraded."))
 				comms_source.beamComponents = "provided"
 			end)
 		end
@@ -8107,11 +8107,11 @@ function researchImpulseUpgrade()
 			is2partQuantity = comms_source.goods[is2part]
 		end
 		if is2partQuantity > 0 and is2partQuantity > 0 then
-			addCommsReply(string.format(_("research-comms", "Provide %s and %s for impulse engine research project"),is1part,is2part), function()
+			addCommsReply(string.format(_("opt4ImpulseResearch-comms", "Provide %s and %s for impulse engine research project"),is1part,is2part), function()
 				comms_source.goods[is1part] = comms_source.goods[is1part] - 1
 				comms_source.goods[is2part] = comms_source.goods[is2part] - 1
 				comms_source.cargo = comms_source.cargo + 2
-				setCommsMessage(_("research-comms", "[Nikhil Morrison] With the goods you provided, I completed the impulse engine research. I transmitted the research results to Vaiken. The next time you dock at Vaiken, you can have the speed of your impulse engines improved."))
+				setCommsMessage(_("opt4ImpulseResearch-comms", "[Nikhil Morrison] With the goods you provided, I completed the impulse engine research. I transmitted the research results to Vaiken. The next time you dock at Vaiken, you can have the speed of your impulse engines improved."))
 				comms_source.impulseSpeedComponents = "provided"
 			end)
 		end
@@ -8133,12 +8133,12 @@ function researchManeuverUpgrade()
 			sp3partQuantity = comms_source.goods[sp3part]
 		end
 		if sp1partQuantity > 0 and sp2partQuantity > 0 and sp3partQuantity > 0 then
-			addCommsReply(string.format(_("research-comms", "Provide %s, %s and %s for maneuver research project"),sp1part,sp2part,sp3part), function()
+			addCommsReply(string.format(_("opt3SpinResearch-comms", "Provide %s, %s and %s for maneuver research project"),sp1part,sp2part,sp3part), function()
 				comms_source.goods[sp1part] = comms_source.goods[sp1part] - 1
 				comms_source.goods[sp2part] = comms_source.goods[sp2part] - 1
 				comms_source.goods[sp3part] = comms_source.goods[sp3part] - 1
 				comms_source.cargo = comms_source.cargo + 3
-				setCommsMessage(_("research-comms", "[Maneuver technician] With the goods you provided, we completed the maneuver research and transmitted the research results to Vaiken. The next time you dock at Vaiken, you can have your ship's maneuver speed improved."))
+				setCommsMessage(_("opt3SpinResearch-comms", "[Maneuver technician] With the goods you provided, we completed the maneuver research and transmitted the research results to Vaiken. The next time you dock at Vaiken, you can have your ship's maneuver speed improved."))
 				comms_source.spinComponents = "provided"
 			end)
 		end
@@ -8200,13 +8200,13 @@ function neutralFriendlyFreighterComms()
 		end
 		if distance(comms_source,comms_target) < 5000 then
 			if comms_target == hideTransport then
-				addCommsReply(_("trade-comms", "I need to talk to Charles Undercut"), function()
-					setCommsMessage(_("trade-comms", "[Charles Undercut] Haven't you destroyed my life enough?"))
-					addCommsReply(_("trade-comms", "We need the information you obtained about enemies in this region"), function()
-						setCommsMessage(_("trade-comms", "That will cost you something more than just pretty words. Got any luxury, gold or platinum goods?"))
+				addCommsReply(_("Undercut2-comms", "I need to talk to Charles Undercut"), function()
+					setCommsMessage(_("Undercut2-comms", "[Charles Undercut] Haven't you destroyed my life enough?"))
+					addCommsReply(_("Undercut2-comms", "We need the information you obtained about enemies in this region"), function()
+						setCommsMessage(_("Undercut2-comms", "That will cost you something more than just pretty words. Got any luxury, gold or platinum goods?"))
 						if comms_source.goods ~= nil then
 							if comms_source.goods["luxury"] ~= nil and comms_source.goods["luxury"] > 0 then
-								addCommsReply(_("trade-comms", "Trade luxury for information"), function()
+								addCommsReply(_("Undercut2-comms", "Trade luxury for information"), function()
 									comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									if stationGanalda:isValid() then
@@ -8216,13 +8216,13 @@ function neutralFriendlyFreighterComms()
 									else
 										undercutTarget = stationTic
 									end
-									comms_source:addToShipLog(string.format(_("trade-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
-									setCommsMessage(string.format(_("trade-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
+									comms_source:addToShipLog(string.format(_("Undercut2-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
+									setCommsMessage(string.format(_("Undercut2-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
 									undercutLocation = "free"
 								end)
 							end
 							if comms_source.goods["gold"] ~= nil and comms_source.goods["gold"] > 0 then
-								addCommsReply(_("trade-comms", "Trade gold for information"), function()
+								addCommsReply(_("Undercut2-comms", "Trade gold for information"), function()
 									comms_source.goods["gold"] = comms_source.goods["gold"] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									if stationGanalda:isValid() then
@@ -8232,13 +8232,13 @@ function neutralFriendlyFreighterComms()
 									else
 										undercutTarget = stationTic
 									end
-									comms_source:addToShipLog(string.format(_("trade-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
-									setCommsMessage(string.format(_("trade-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
+									comms_source:addToShipLog(string.format(_("Undercut2-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
+									setCommsMessage(string.format(_("Undercut2-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
 									undercutLocation = "free"
 								end)
 							end
 							if comms_source.goods["platinum"] ~= nil and comms_source.goods["platinum"] > 0 then
-								addCommsReply(_("trade-comms", "Trade platinum for information"), function()
+								addCommsReply(_("Undercut2-comms", "Trade platinum for information"), function()
 									comms_source.goods["platinum"] = comms_source.goods["platinum"] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									if stationGanalda:isValid() then
@@ -8248,8 +8248,8 @@ function neutralFriendlyFreighterComms()
 									else
 										undercutTarget = stationTic
 									end
-									comms_source:addToShipLog(string.format(_("trade-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
-									setCommsMessage(string.format(_("trade-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
+									comms_source:addToShipLog(string.format(_("Undercut2-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
+									setCommsMessage(string.format(_("Undercut2-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
 									undercutLocation = "free"
 								end)
 							end
@@ -8269,10 +8269,10 @@ function neutralFriendlyFreighterComms()
 			local x2, y2 = comms_target:getPosition()
 			if distance(x1,y1,x2,y2) < 5000 then
 				if sporiskyLocation ~= "aboard ship" then
-					addCommsReply(_("trade-comms", "We need you to hand over Annette Sporisky"), function()
-						local asMsg = _("trade-comms", "Why should we? Despite what you may have heard, she is not related to this freighter's owner. ")
-						asMsg = asMsg .. _("trade-comms", "However, she's obviously valuable. I'll hand her over for something I can trade, ")
-						asMsg = asMsg .. _("trade-comms", "one of the following types of goods: ")
+					addCommsReply(_("Undercut2-comms", "We need you to hand over Annette Sporisky"), function()
+						local asMsg = _("Undercut2-comms", "Why should we? Despite what you may have heard, she is not related to this freighter's owner. ")
+						asMsg = asMsg .. _("Undercut2-comms", "However, she's obviously valuable. I'll hand her over for something I can trade, ")
+						asMsg = asMsg .. _("Undercut2-comms", "one of the following types of goods: ")
 						if as1part == nil then
 							local as1choice = math.floor(random(1,3))
 							if as1choice == 1 then
@@ -8307,33 +8307,33 @@ function neutralFriendlyFreighterComms()
 						setCommsMessage(asMsg)
 						if comms_source.goods ~= nil then
 							if comms_source.goods[as1part] ~= nil and comms_source.goods[as1part] > 0 then
-								addCommsReply(string.format(_("trade-comms", "Trade %s for Annette Sporisky"),as1part), function()
+								addCommsReply(string.format(_("Undercut2-comms", "Trade %s for Annette Sporisky"),as1part), function()
 									comms_source.goods[as1part] = comms_source.goods[as1part] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									comms_source.traitorBought = true
-									comms_source:addToShipLog(_("trade-comms", "Annette Sporisky aboard"),"Magenta")
+									comms_source:addToShipLog(_("Undercut2-comms", "Annette Sporisky aboard"),"Magenta")
 									setCommsMessage(_("trade-comms", "Traded"))
 									sporiskyTarget = stationGanalda
 									sporiskyLocation = "aboard ship"
 								end)
 							end
 							if comms_source.goods[as2part] ~= nil and comms_source.goods[as2part] > 0 then
-								addCommsReply(string.format(_("trade-comms", "Trade %s for Annette Sporisky"),as2part), function()
+								addCommsReply(string.format(_("Undercut2-comms", "Trade %s for Annette Sporisky"),as2part), function()
 									comms_source.goods[as2part] = comms_source.goods[as2part] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									comms_source.traitorBought = true
-									comms_source:addToShipLog(_("trade-comms", "Annette Sporisky aboard"),"Magenta")
+									comms_source:addToShipLog(_("Undercut2-comms", "Annette Sporisky aboard"),"Magenta")
 									setCommsMessage(_("trade-comms", "Traded"))
 									sporiskyTarget = stationEmpok
 									sporiskyLocation = "aboard ship"
 								end)
 							end
 							if comms_source.goods[as3part] ~= nil and comms_source.goods[as3part] > 0 then
-								addCommsReply(string.format(_("trade-comms", "Trade %s for Annette Sporisky"),as3part), function()
+								addCommsReply(string.format(_("Undercut2-comms", "Trade %s for Annette Sporisky"),as3part), function()
 									comms_source.goods[as3part] = comms_source.goods[as3part] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									comms_source.traitorBought = true
-									comms_source:addToShipLog(_("trade-comms", "Annette Sporisky aboard"),"Magenta")
+									comms_source:addToShipLog(_("Undercut2-comms", "Annette Sporisky aboard"),"Magenta")
 									setCommsMessage(_("trade-comms", "Traded"))
 									sporiskyTarget = stationTic
 									sporiskyLocation = "aboard ship"
@@ -8356,10 +8356,10 @@ function friendlyFreighterComms()
 	end
 	if comms_source.interaction[comms_target].chat_list == nil then
 		comms_source.interaction[comms_target].chat_list = {
-			{prompt = _("trade-comms", "How's your family?"), 			resp = {_("trade-comms", "Pretty good."),_("trade-comms", "All healthy."),_("trade-comms", "I love 'em, but they bug me.")}},
-			{prompt = _("trade-comms", "How's business?"),				resp = {_("trade-comms", "Not bad."),_("trade-comms", "I'm making a fortune out here."),_("trade-comms", "Could be better."),_("trade-comms", "The pirates make it hard.")}},
-			{prompt = _("trade-comms", "Made any interesting contacts?"),	resp = {_("trade-comms", "Made a couple."),_("trade-comms", "Not this week."),_("trade-comms", "Met the friendliest alien the other day. Purchased all my cargo.")}},
-			{prompt = _("trade-comms", "What have you been up to?"),		resp = {_("trade-comms", "Oh, the usual."),_("trade-comms", "About 2 meters."),_("trade-comms", "Not much."),_("trade-comms", "Trying to stay alive, mostly.")}},
+			{prompt = _("friendlyFreighter-comms", "How's your family?"), 			resp = {_("friendlyFreighter-comms", "Pretty good."),_("friendlyFreighter-comms", "All healthy."),_("friendlyFreighter-comms", "I love 'em, but they bug me.")}},
+			{prompt = _("friendlyFreighter-comms", "How's business?"),				resp = {_("friendlyFreighter-comms", "Not bad."),_("friendlyFreighter-comms", "I'm making a fortune out here."),_("friendlyFreighter-comms", "Could be better."),_("trade-comms", "The pirates make it hard.")}},
+			{prompt = _("friendlyFreighter-comms", "Made any interesting contacts?"),	resp = {_("friendlyFreighter-comms", "Made a couple."),_("friendlyFreighter-comms", "Not this week."),_("friendlyFreighter-comms", "Met the friendliest alien the other day. Purchased all my cargo.")}},
+			{prompt = _("friendlyFreighter-comms", "What have you been up to?"),		resp = {_("friendlyFreighter-comms", "Oh, the usual."),_("friendlyFreighter-comms", "About 2 meters."),_("friendlyFreighter-comms", "Not much."),_("trade-comms", "Trying to stay alive, mostly.")}},
 		}
 	end
 	if #comms_source.interaction[comms_target].chat_list > 0 then
@@ -8476,7 +8476,7 @@ function friendlyFreighterComms()
 			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			local destRep = math.floor(random(1,5))
-			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %i reputation)"),destRep), function()
+			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
 					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
@@ -8924,13 +8924,13 @@ function friendlyComms(comms_data)
 			end
 			if distance(comms_source,comms_target) < 5000 then
 				if comms_target == hideTransport then
-					addCommsReply(_("trade-comms", "I need to talk to Charles Undercut"), function()
-						setCommsMessage(_("trade-comms", "[Charles Undercut] Haven't you destroyed my life enough?"))
-						addCommsReply(_("trade-comms", "We need the information you obtained about enemies in this region"), function()
-							setCommsMessage(_("trade-comms", "That will cost you something more than just pretty words. Got any luxury, gold or platinum goods?"))
+					addCommsReply(_("Undercut2-comms", "I need to talk to Charles Undercut"), function()
+						setCommsMessage(_("Undercut2-comms", "[Charles Undercut] Haven't you destroyed my life enough?"))
+						addCommsReply(_("Undercut2-comms", "We need the information you obtained about enemies in this region"), function()
+							setCommsMessage(_("Undercut2-comms", "That will cost you something more than just pretty words. Got any luxury, gold or platinum goods?"))
 							if comms_source.goods ~= nil then
 								if comms_source.goods["luxury"] ~= nil and comms_source.goods["luxury"] > 0 then
-									addCommsReply(_("trade-comms", "Trade luxury for information"), function()
+									addCommsReply(_("Undercut2-comms", "Trade luxury for information"), function()
 										comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
 										comms_source.cargo = comms_source.cargo + 1
 										if stationGanalda:isValid() then
@@ -8940,13 +8940,13 @@ function friendlyComms(comms_data)
 										else
 											undercutTarget = stationTic
 										end
-										comms_source:addToShipLog(string.format(_("trade-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
-										setCommsMessage(string.format(_("trade-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
+										comms_source:addToShipLog(string.format(_("Undercut2-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
+										setCommsMessage(string.format(_("Undercut2-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
 										undercutLocation = "free"
 									end)
 								end
 								if comms_source.goods["gold"] ~= nil and comms_source.goods["gold"] > 0 then
-									addCommsReply(_("trade-comms", "Trade gold for information"), function()
+									addCommsReply(_("Undercut2-comms", "Trade gold for information"), function()
 										comms_source.goods["gold"] = comms_source.goods["gold"] - 1
 										comms_source.cargo = comms_source.cargo + 1
 										if stationGanalda:isValid() then
@@ -8956,13 +8956,13 @@ function friendlyComms(comms_data)
 										else
 											undercutTarget = stationTic
 										end
-										comms_source:addToShipLog(string.format(_("trade-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
-										setCommsMessage(string.format(_("trade-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
+										comms_source:addToShipLog(string.format(_("Undercut2-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
+										setCommsMessage(string.format(_("Undercut2-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
 										undercutLocation = "free"
 									end)
 								end
 								if comms_source.goods["platinum"] ~= nil and comms_source.goods["platinum"] > 0 then
-									addCommsReply(_("trade-comms", "Trade platinum for information"), function()
+									addCommsReply(_("Undercut2-comms", "Trade platinum for information"), function()
 										comms_source.goods["platinum"] = comms_source.goods["platinum"] - 1
 										comms_source.cargo = comms_source.cargo + 1
 										if stationGanalda:isValid() then
@@ -8972,8 +8972,8 @@ function friendlyComms(comms_data)
 										else
 											undercutTarget = stationTic
 										end
-										comms_source:addToShipLog(string.format(_("trade-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
-										setCommsMessage(string.format(_("trade-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
+										comms_source:addToShipLog(string.format(_("Undercut2-shipLog", "enemy base identified in sector %s"), undercutTarget:getSectorName()),"Magenta")
+										setCommsMessage(string.format(_("Undercut2-comms", "I found an enemy base in sector %s"), undercutTarget:getSectorName()))
 										undercutLocation = "free"
 									end)
 								end
@@ -8993,10 +8993,10 @@ function friendlyComms(comms_data)
 				local x2, y2 = comms_target:getPosition()
 				if distance(x1,y1,x2,y2) < 5000 then
 					if sporiskyLocation ~= "aboard ship" then
-						addCommsReply(_("trade-comms", "We need you to hand over Annette Sporisky"), function()
-							local asMsg = _("trade-comms", "Why should we? Despite what you may have heard, she is not related to this freighter's owner. ")
-							asMsg = asMsg .. _("trade-comms", "However, she's obviously valuable. I'll hand her over for something I can trade, ")
-							asMsg = asMsg .. _("trade-comms", "one of the following types of goods: ")
+						addCommsReply(_("Undercut2-comms", "We need you to hand over Annette Sporisky"), function()
+							local asMsg = _("Undercut2-comms", "Why should we? Despite what you may have heard, she is not related to this freighter's owner. ")
+							asMsg = asMsg .. _("Undercut2-comms", "However, she's obviously valuable. I'll hand her over for something I can trade, ")
+							asMsg = asMsg .. _("Undercut2-comms", "one of the following types of goods: ")
 							if as1part == nil then
 								local as1choice = math.floor(random(1,3))
 								if as1choice == 1 then
@@ -9027,37 +9027,37 @@ function friendlyComms(comms_data)
 									as3part = "filament"
 								end
 							end
-							asMsg = asMsg .. as1part .. ", " .. as2part .. _("trade-comms", " or ") .. as3part
+							asMsg = asMsg .. as1part .. ", " .. as2part .. _("Undercut2-comms", " or ") .. as3part
 							setCommsMessage(asMsg)
 							if comms_source.goods ~= nil then
 								if comms_source.goods[as1part] ~= nil and comms_source.goods[as1part] > 0 then
-									addCommsReply(string.format(_("trade-comms", "Trade %s for Annette Sporisky"),as1part), function()
+									addCommsReply(string.format(_("Undercut2-comms", "Trade %s for Annette Sporisky"),as1part), function()
 										comms_source.goods[as1part] = comms_source.goods[as1part] - 1
 										comms_source.cargo = comms_source.cargo + 1
 										comms_source.traitorBought = true
-										comms_source:addToShipLog(_("trade-comms", "Annette Sporisky aboard"),"Magenta")
+										comms_source:addToShipLog(_("Undercut2-comms", "Annette Sporisky aboard"),"Magenta")
 										setCommsMessage(_("trade-comms", "Traded"))
 										sporiskyTarget = stationGanalda
 										sporiskyLocation = "aboard ship"
 									end)
 								end
 								if comms_source.goods[as2part] ~= nil and comms_source.goods[as2part] > 0 then
-									addCommsReply(string.format(_("trade-comms", "Trade %s for Annette Sporisky"),as2part), function()
+									addCommsReply(string.format(_("Undercut2-comms", "Trade %s for Annette Sporisky"),as2part), function()
 										comms_source.goods[as2part] = comms_source.goods[as2part] - 1
 										comms_source.cargo = comms_source.cargo + 1
 										comms_source.traitorBought = true
-										comms_source:addToShipLog(_("trade-comms", "Annette Sporisky aboard"),"Magenta")
+										comms_source:addToShipLog(_("Undercut2-comms", "Annette Sporisky aboard"),"Magenta")
 										setCommsMessage(_("trade-comms", "Traded"))
 										sporiskyTarget = stationEmpok
 										sporiskyLocation = "aboard ship"
 									end)
 								end
 								if comms_source.goods[as3part] ~= nil and comms_source.goods[as3part] > 0 then
-									addCommsReply(string.format(_("trade-comms", "Trade %s for Annette Sporisky"),as3part), function()
+									addCommsReply(string.format(_("Undercut2-comms", "Trade %s for Annette Sporisky"),as3part), function()
 										comms_source.goods[as3part] = comms_source.goods[as3part] - 1
 										comms_source.cargo = comms_source.cargo + 1
 										comms_source.traitorBought = true
-										comms_source:addToShipLog(_("trade-comms", "Annette Sporisky aboard"),"Magenta")
+										comms_source:addToShipLog(_("Undercut2-comms", "Annette Sporisky aboard"),"Magenta")
 										setCommsMessage(_("trade-comms", "Traded"))
 										sporiskyTarget = stationTic
 										sporiskyLocation = "aboard ship"
@@ -9794,7 +9794,7 @@ function waveNear(enemyWaveList)
 								end
 							end
 						end
-						local lMsg = string.format(_("-comms", "[%s, Sector %s] There are enemies nearby"), closestStation:getCallSign(), closestStation:getSectorName())
+						local lMsg = string.format(_("helpfullWarning-shipLog", "[%s, Sector %s] There are enemies nearby"), closestStation:getCallSign(), closestStation:getSectorName())
 						closestPlayer:addToShipLog(lMsg, "Red")
 						closestStation.warn_count = closestStation.warn_count + 1
 						return
@@ -9919,11 +9919,11 @@ function chooseUndercutBase()
 	hideStationSector = hideBase:getSectorName()
 end
 function undercutOrderMessage(delta)
-	local nMsg = _("UndercutOrders-shipLog", "[Vaiken] As a naval operative, Charles Undercut discovered information about enemies in this region. Unfortunately, he was fired for his poor performance as a maintenance technician by his commanding officer before he could file a report. We need his information.")
+	local nMsg = _("Undercut1Orders-shipLog", "[Vaiken] As a naval operative, Charles Undercut discovered information about enemies in this region. Unfortunately, he was fired for his poor performance as a maintenance technician by his commanding officer before he could file a report. We need his information.")
 	if difficulty > 1 then
-		nMsg = string.format(_("UndercutOrders-shipLog", "%s His last known location was station %s. Go find him and get that information"),nMsg,hideBase:getCallSign())
+		nMsg = string.format(_("Undercut1Orders-shipLog", "%s His last known location was station %s. Go find him and get that information"),nMsg,hideBase:getCallSign())
 	else
-		nMsg = string.format(_("UndercutOrders-shipLog", "%s His last known location was station %s in sector %s. Go find him and get that information"),nMsg,hideBase:getCallSign(),hideBase:getSectorName())
+		nMsg = string.format(_("Undercut1Orders-shipLog", "%s His last known location was station %s in sector %s. Go find him and get that information"),nMsg,hideBase:getCallSign(),hideBase:getSectorName())
 	end
 	for p11idx=1,8 do
 		local p11 = getPlayerShip(p11idx)
@@ -9932,9 +9932,9 @@ function undercutOrderMessage(delta)
 		end
 	end	
 	if difficulty > 1 then
-		secondaryOrders = string.format(_("UndercutOrders-comms", "\nFind Charles Undercut last reported at station %s who has information on enemy activity"), hideStationName)
+		secondaryOrders = string.format(_("Undercut1Orders-comms", "\nFind Charles Undercut last reported at station %s who has information on enemy activity"), hideStationName)
 	else
-		secondaryOrders = string.format(_("UndercutOrders-comms", "\nFind Charles Undercut last reported at station %s in sector %s who has information on enemy activity"), hideStationName, hideStationSector)
+		secondaryOrders = string.format(_("Undercut1Orders-comms", "\nFind Charles Undercut last reported at station %s in sector %s who has information on enemy activity"), hideStationName, hideStationSector)
 	end
 	plotR = undercutStation
 end
@@ -9969,8 +9969,8 @@ function undercutStation(delta)
 							hideTransport = farthestTransport
 						end
 						p9.undercut = hideTransport
-						local fMsg = string.format(_("Undercut-shipLog", "[%s] We haven't seen Charles Undercut in a while. He took a job as a maintenance technician aboard %s"), hideBase:getCallSign(), hideTransport:getCallSign())
-						fMsg = fMsg .. string.format(_("Undercut-shipLog", ".\nLast we heard, that ship was working in the %s sector. He was desperate for a job."), hideTransport:getSectorName())
+						local fMsg = string.format(_("Undercut1-shipLog", "[%s] We haven't seen Charles Undercut in a while. He took a job as a maintenance technician aboard %s"), hideBase:getCallSign(), hideTransport:getCallSign())
+						fMsg = fMsg .. string.format(_("Undercut1-shipLog", ".\nLast we heard, that ship was working in the %s sector. He was desperate for a job."), hideTransport:getSectorName())
 						p9:addToShipLog(fMsg,"Magenta")
 						plotR = undercutTransport
 						undercutLocation = "transport"
@@ -10068,15 +10068,15 @@ function undercutTransport(delta)
 							end
 						end
 					end
-					local hMsg = string.format(_("Undercut-shipLog", "[%s] we need help. Our maintenance technician says you might be interested. "), hideTransport:getCallSign())
-					hMsg = hMsg .. string.format(_("Undercut-shipLog", "We are in sector %s. Hurry."), hideTransport:getSectorName())
+					local hMsg = string.format(_("Undercut1-shipLog", "[%s] we need help. Our maintenance technician says you might be interested. "), hideTransport:getCallSign())
+					hMsg = hMsg .. string.format(_("Undercut1-shipLog", "We are in sector %s. Hurry."), hideTransport:getSectorName())
 					closestPlayer:addToShipLog(hMsg,"Magenta")
 				end
 				undercutHelp = delta + 30
 			end
 		end
 		if undercutLocation == "free" then
-			secondaryOrders = string.format(_("UndercutOrders-comms", "\nDestroy enemy base in sector %s"), undercutTarget:getSectorName())
+			secondaryOrders = string.format(_("Undercut1Orders-comms", "\nDestroy enemy base in sector %s"), undercutTarget:getSectorName())
 			plotR = undercutEnemyBase
 		end
 	else
@@ -10155,7 +10155,7 @@ function chooseSensorParts()
 	s3part = "sensor"
 end
 function stettorOrderMessage(delta)
-	local snsMsg = _("StettorOrdes-shipLog", "[Vaiken] Jing Stettor's research on advanced sensor technology produced a breakthrough. To facilitate rapid deployment, we need you to gather the following:\n")
+	local snsMsg = _("StettorOrders-shipLog", "[Vaiken] Jing Stettor's research on advanced sensor technology produced a breakthrough. To facilitate rapid deployment, we need you to gather the following:\n")
 	snsMsg = snsMsg .. s1part .. "\n"
 	snsMsg = snsMsg .. s2part .. "\n"
 	snsMsg = snsMsg .. s3part .. "\n"
@@ -10233,15 +10233,15 @@ function chooseTraitorBase()
 	traitorBaseSector = traitorBase:getSectorName()
 end
 function traitorOrderMessage(delta)
-	local tMsg = string.format(_("Spy-shipLog", "[Vaiken] Intelligence observed a spy for the enemy at station %s"), traitorBaseName)
+	local tMsg = string.format(_("Sporisky-shipLog", "[Vaiken] Intelligence observed a spy for the enemy at station %s"), traitorBaseName)
 	if difficulty <= 1 then
-		tMsg = string.format(_("Spy-shipLog", "%s in sector %s"), tMsg, traitorBaseSector)
+		tMsg = string.format(_("Sporisky-shipLog", "%s in sector %s"), tMsg, traitorBaseSector)
 	end
-	tMsg = string.format(_("SpyOrders-shipLog", "%s. Go find out what you can about this spy."), tMsg) 
+	tMsg = string.format(_("SporiskyOrders-shipLog", "%s. Go find out what you can about this spy."), tMsg) 
 	if difficulty <= 1 then
-		secondaryOrders = string.format(_("SpyOrders-comms", "\nInvestigate spy reported at station %s in sector %s"),traitorBaseName,traitorBaseSector)
+		secondaryOrders = string.format(_("SporiskyOrders-comms", "\nInvestigate spy reported at station %s in sector %s"),traitorBaseName,traitorBaseSector)
 	else
-		secondaryOrders = string.format(_("SpyOrders-comms", "\nInvestigate spy reported at station %s"),traitorBaseName)
+		secondaryOrders = string.format(_("SporiskyOrders-comms", "\nInvestigate spy reported at station %s"),traitorBaseName)
 	end
 	if traitorMessage == nil then
 		for p14idx=1,8 do
@@ -10285,14 +10285,14 @@ function traitorStation(delta)
 							runTransport = farthestTransport
 						end
 						p15.traitor = runTransport
-						local trMsg = string.format(_("Spy-shipLog", "[%s] The girl you're looking for is Annette Sporisky. She boarded a freighter owned by her family: %s"), traitorBaseName, runTransport:getCallSign())
-						trMsg = trMsg .. string.format(_("Spy-shipLog", ".\nLast we heard, that ship was working in the %s sector."), runTransport:getSectorName())
+						local trMsg = string.format(_("Sporisky-shipLog", "[%s] The girl you're looking for is Annette Sporisky. She boarded a freighter owned by her family: %s"), traitorBaseName, runTransport:getCallSign())
+						trMsg = trMsg .. string.format(_("Sporisky-shipLog", ".\nLast we heard, that ship was working in the %s sector."), runTransport:getSectorName())
 						p15:addToShipLog(trMsg,"Magenta")
 						plotR = sporiskyTransport
 						if difficulty > 1 then
 							runTransport:setImpulseMaxSpeed(runTransport:getImpulseMaxSpeed()*2)
 						end
-						secondaryOrders = string.format(_("SpyOrders-comms", "\nGet the spy Annette Sporisky from transport %s and bring her to Vaiken station for questioning"),runTransport:getCallSign())
+						secondaryOrders = string.format(_("SporiskyOrders-comms", "\nGet the spy Annette Sporisky from transport %s and bring her to Vaiken station for questioning"),runTransport:getCallSign())
 					end
 				end
 			end
@@ -10326,10 +10326,10 @@ function sporiskyQuestioned(delta)
 			if p17 ~= nil and p17:isValid() then
 				if p17:isDocked(stationVaiken) then
 					if p17.traitorBought then
-						p17:addToShipLog(_("Spy-shipLog", "Annette Sporisky transferred to Vaiken station"),"Magenta")
+						p17:addToShipLog(_("Sporisky-shipLog", "Annette Sporisky transferred to Vaiken station"),"Magenta")
 						if sporiskyTarget:isValid() then
-							p17:addToShipLog(string.format(_("Spy-shipLog", "Spy identified enemy base in sector %s"), sporiskyTarget:getSectorName()),"Magenta")
-							secondaryOrders = string.format(_("SpyOrders-comms", "\nDestroy enemy base in sector %s"),sporiskyTarget:getSectorName())
+							p17:addToShipLog(string.format(_("Sporisky-shipLog", "Spy identified enemy base in sector %s"), sporiskyTarget:getSectorName()),"Magenta")
+							secondaryOrders = string.format(_("SporiskyOrders-comms", "\nDestroy enemy base in sector %s"),sporiskyTarget:getSectorName())
 						else
 							if stationGanalda:isValid() then
 								sporiskyTarget = stationGanalda
@@ -10339,10 +10339,10 @@ function sporiskyQuestioned(delta)
 								sporiskyTarget = stationTic
 							end
 							if sporiskyTarget:isValid() then
-								p17:addToShipLog(string.format(_("Spy-shipLog", "Spy identified enemy base in sector %s"), sporiskyTarget:getSectorName()),"Magenta") 
-								secondaryOrders = string.format(_("SpyOrders-comms", "\nDestroy enemy base in sector %s"),sporiskyTarget:getSectorName())
+								p17:addToShipLog(string.format(_("Sporisky-shipLog", "Spy identified enemy base in sector %s"), sporiskyTarget:getSectorName()),"Magenta") 
+								secondaryOrders = string.format(_("SporiskyOrders-comms", "\nDestroy enemy base in sector %s"),sporiskyTarget:getSectorName())
 							else
-								p17:addToShipLog(string.format(_("Spy-shipLog", "The enemy base identified has already been destroyed")),"Magenta")
+								p17:addToShipLog(string.format(_("Sporisky-shipLog", "The enemy base identified has already been destroyed")),"Magenta")
 							end
 						end
 						plotR = sporiskyEnemyBase
@@ -10601,10 +10601,10 @@ function chooseBeamRangeParts()
 	end
 end
 function beamRangeMessage(delta)
-	optionalOrders = string.format(_("beamUpOrders-comms", "\nOptional: Gather and bring goods to station Marconi: %s, %s, %s"),br1part,br2part,br3part)
-	local obrMsg = string.format(_("beamUpOrders-shipLog", "[Station Marconi] Please bring us some components and materials for a project we are working on: %s, %s, %s"),br1part,br2part,br3part)
+	optionalOrders = string.format(_("opt1BeamRangeOrders-comms", "\nOptional: Gather and bring goods to station Marconi: %s, %s, %s"),br1part,br2part,br3part)
+	local obrMsg = string.format(_("opt1BeamRangeOrders-shipLog", "[Station Marconi] Please bring us some components and materials for a project we are working on: %s, %s, %s"),br1part,br2part,br3part)
 	if difficulty <= 1 then
-		obrMsg = obrMsg .. _("beamUpOrders-shipLog", ". The project relates to improving the range of beam weapons")
+		obrMsg = obrMsg .. _("opt1BeamRangeOrders-shipLog", ". The project relates to improving the range of beam weapons")
 	end
 	for p18idx=1,8 do
 		local p18 = getPlayerShip(p18idx)
@@ -10677,10 +10677,10 @@ function chooseBeamDamageParts()
 	end
 end
 function beamDamageMessage(delta)
-	optionalOrders = string.format(_("beamUpOrders-comms", "\nOptional: Gather and bring goods to station Nefatha: %s, %s, %s"),bd1part,bd2part,bd3part)
-	local obdMsg = string.format(_("beamUpOrders-shipLog", "[Station Nefatha] Please bring us some components and materials for a weapons project we are working on: %s, %s, %s"),bd1part,bd2part,bd3part)
+	optionalOrders = string.format(_("opt2BeamDamOrders-comms", "\nOptional: Gather and bring goods to station Nefatha: %s, %s, %s"),bd1part,bd2part,bd3part)
+	local obdMsg = string.format(_("opt2BeamDamOrders-shipLog", "[Station Nefatha] Please bring us some components and materials for a weapons project we are working on: %s, %s, %s"),bd1part,bd2part,bd3part)
 	if difficulty <= 1 then
-		obdMsg = obdMsg .. _("beamUpOrders-shipLog", ". The project relates to increasing the amount of damage that a beam weapon inflicts on the target")
+		obdMsg = obdMsg .. _("opt2BeamDam-shipLog", ". The project relates to increasing the amount of damage that a beam weapon inflicts on the target")
 	end
 	for p20idx=1,8 do
 		local p20 = getPlayerShip(p20idx)
@@ -10782,10 +10782,10 @@ function chooseSpinBaseParts()
 	end
 end
 function spinMessage(delta)
-	optionalOrders = string.format(_("SpinUpOrders-comms", "\nOptional: Bring %s, %s and %s to station %s in sector %s"),sp1part,sp2part,sp3part,spinBase:getCallSign(),spinBase:getSectorName())
-	local spMsg = string.format(_("SpinUpOrders-shipLog", "[Station %s, sector %s] Please bring us some goods to help us with a project: %s, %s, %s"),spinBase:getCallSign(),spinBase:getSectorName(),sp1part,sp2part,sp3part)
+	optionalOrders = string.format(_("opt3SpinOrders-comms", "\nOptional: Bring %s, %s and %s to station %s in sector %s"),sp1part,sp2part,sp3part,spinBase:getCallSign(),spinBase:getSectorName())
+	local spMsg = string.format(_("opt3SpinOrders-shipLog", "[Station %s, sector %s] Please bring us some goods to help us with a project: %s, %s, %s"),spinBase:getCallSign(),spinBase:getSectorName(),sp1part,sp2part,sp3part)
 	if difficulty <= 1 then
-		spMsg = spMsg .. _("SpinUpOrders-shipLog", ". The project relates to improved ship maneuverability")
+		spMsg = spMsg .. _("opt3SpinOrders-shipLog", ". The project relates to improved ship maneuverability")
 	end
 	for p28idx=1,8 do
 		local p28 = getPlayerShip(p28idx)
@@ -10861,8 +10861,8 @@ function impulseSpeedParts()
 	morrisonBaseSector = morrisonBase:getSectorName()
 end
 function impulseSpeedMessage(delta)
-	optionalOrders = string.format(_("NikhilOrders-comms", "\nOptional: Get Nikhil Morrison from station %s in sector %s"),morrisonBaseName,morrisonBaseSector)
-	local oisMsg = string.format(_("NikhilOrders-shipLog", "[Station %s] Research scientist Nikhil Morrison is close to a breakthrough on his project, but needs some assistance. Dock with us if you wish to help."),morrisonBaseName)
+	optionalOrders = string.format(_("opt4ImpulseOrders-comms", "\nOptional: Get Nikhil Morrison from station %s in sector %s"),morrisonBaseName,morrisonBaseSector)
+	local oisMsg = string.format(_("opt4ImpulseOrders-shipLog", "[Station %s] Research scientist Nikhil Morrison is close to a breakthrough on his project, but needs some assistance. Dock with us if you wish to help."),morrisonBaseName)
 	for p22idx=1,8 do
 		local p22 = getPlayerShip(p22idx)
 		if p22 ~= nil and p22:isValid() then
@@ -10879,12 +10879,12 @@ function impulseSpeedPartMessage(delta)
 				if p23:isDocked(morrisonBase) then
 					if p23.morrison ~= "aboard" then
 						p23.morrison = "aboard"
-						p23:addToShipLog(_("Nikhil-shipLog", "Nikhil Morrison is aboard"),"Magenta")
-						p23:addToShipLog(string.format(_("Nikhil-shipLog", "He requests that you get %s and %s type goods and take him to station Cyrus"),is1part,is2part),"Magenta")
+						p23:addToShipLog(_("opt4Impulse-shipLog", "Nikhil Morrison is aboard"),"Magenta")
+						p23:addToShipLog(string.format(_("Opt4ImpulseOrders-shipLog", "He requests that you get %s and %s type goods and take him to station Cyrus"),is1part,is2part),"Magenta")
 						if difficulty <= 1 then
-							p23:addToShipLog(_("Nikhil-shipLog", "He says his project relates to increasing ship impulse speeds"),"Magenta")
+							p23:addToShipLog(_("opt4Impulse-shipLog", "He says his project relates to increasing ship impulse speeds"),"Magenta")
 						end
-						optionalOrders = string.format(_("NikhilOrders-comms", "\nOptional: Get %s and %s and transport Nikhil Morrison to station Cyrus"),is1part,is2part)
+						optionalOrders = string.format(_("opt4ImpulseOrders-comms", "\nOptional: Get %s and %s and transport Nikhil Morrison to station Cyrus"),is1part,is2part)
 						plotO = impulseSpeedUpgrade
 					end
 				end
@@ -10929,10 +10929,10 @@ end
 --      Optional plot choice: Get quantum biometric artifact
 function quantumArtMessage(delta)
 	if stationOrgana:isValid() then
-		optionalOrders = string.format(_("quantumArtOrders-comms", "\nOptional: Retrieve artifact with quantum biometric characteristics and bring to station Organa in sector %s"),stationOrgana:getSectorName())
-		local qaMsg = string.format(_("quantumArtOrders-shipLog", "[Station Organa, sector %s] Research scientist Phillip Solo of the royal research academy finished the theoretical research portion of his dissertation. He needs an artifact with quantum biometric characteristics to apply his research. Please retrieve an artifact with quantum biometric characteristics and bring it to Organa station"),stationOrgana:getSectorName())
+		optionalOrders = string.format(_("opt5ShieldsOrders-comms", "\nOptional: Retrieve artifact with quantum biometric characteristics and bring to station Organa in sector %s"),stationOrgana:getSectorName())
+		local qaMsg = string.format(_("opt5ShieldsOrders-shipLog", "[Station Organa, sector %s] Research scientist Phillip Solo of the royal research academy finished the theoretical research portion of his dissertation. He needs an artifact with quantum biometric characteristics to apply his research. Please retrieve an artifact with quantum biometric characteristics and bring it to Organa station"),stationOrgana:getSectorName())
 		if difficulty <= 1 then
-			qaMsg = qaMsg .. string.format(_("quantumArt-shipLog", ". Possible items to examine have been located in %s, %s and %s"),art1:getSectorName(),art2:getSectorName(),art3:getSectorName())
+			qaMsg = qaMsg .. string.format(_("opt5Shields-shipLog", ". Possible items to examine have been located in %s, %s and %s"),art1:getSectorName(),art2:getSectorName(),art3:getSectorName())
 		end
 		for p40idx=1,8 do
 			local p40 = getPlayerShip(p40idx)
@@ -10983,9 +10983,9 @@ function quantumRetrieveArt(delta)
 		end
 		if quantumArtHintDelay < 0 then
 			if quantumArtHint == nil  and closestPlayer ~= nil then
-				closestPlayer:addToShipLog(string.format(_("quantumArt-shipLog", "[Station Organa] We just received a report that an artifact with quantum biometric characteristics may have been observed in sector %s"),artQ:getSectorName()),"Magenta")
+				closestPlayer:addToShipLog(string.format(_("opt5Shields-shipLog", "[Station Organa] We just received a report that an artifact with quantum biometric characteristics may have been observed in sector %s"),artQ:getSectorName()),"Magenta")
 				if difficulty <= 1 then
-					closestPlayer:addToShipLog(_("quantumArt-shipLog", "Solo's research may have application for ship shield systems"),"Magenta")
+					closestPlayer:addToShipLog(_("opt5Shields-shipLog", "Solo's research may have application for ship shield systems"),"Magenta")
 				end
 				quantumArtHint = "delivered"
 			end
@@ -11010,11 +11010,11 @@ function quantumDeliverArt(delta)
 			local p44 = getPlayerShip(p44idx)
 			if p44.artQ then
 				if p44.artQaboardMessage == nil then
-					p44:addToShipLog(_("quantumArt-shipLog", "Artifact is aboard"),"Magenta")
+					p44:addToShipLog(_("opt5Shields-shipLog", "Artifact is aboard"),"Magenta")
 					p44.artQaboardMessage = "sent"
 				end
 				if p44:isDocked(stationOrgana) then
-					p44:addToShipLog(_("quantumArt-shipLog", "[Phillip Organa] Thanks for the artifact. I completed my research. Next time you dock with Vaiken, you can improve your shield effectiveness."),"Magenta")
+					p44:addToShipLog(_("opt5Shields-shipLog", "[Phillip Organa] Thanks for the artifact. I completed my research. Next time you dock with Vaiken, you can improve your shield effectiveness."),"Magenta")
 					shieldUpgradeAvailable = true
 					p44:addReputationPoints(50-(difficulty*5))
 					quantumArtPlot = "done"
@@ -11037,7 +11037,7 @@ function vaikenStatus(delta)
 		local shield_max_total = 0
 		local shield_level = 0
 		local shield_max = 0
-		local shield_report = _("Shields:")
+		local shield_report = _("Vaiken-shipLog", "Shields:")
 		local critical_shield = ""
 		repeat
 			shield_level = stationVaiken:getShieldLevel(shield_index)

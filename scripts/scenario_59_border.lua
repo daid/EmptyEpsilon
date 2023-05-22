@@ -18422,9 +18422,9 @@ function stationWarning(delta)
 		local warning_message = ""
 		for _, obj in ipairs(warn_station:getObjectsInRange(20000)) do
 			if obj ~= nil and obj:isValid() and obj:isEnemy(warn_station) and obj.typeName == "CpuShip" then
-				warning_message = string.format("[%s in %s] We detect one or more enemies nearby",warn_station:getCallSign(),warn_station:getSectorName())
+				warning_message = string.format(_("helpfullWarning-shipLog", "[%s in %s] We detect one or more enemies nearby"),warn_station:getCallSign(),warn_station:getSectorName())
 				if difficulty < 2 then
-					warning_message = string.format("%s. At least one is of type %s",warning_message,obj:getTypeName())
+					warning_message = string.format(_("helpfullWarning-shipLog", "%s. At least one is of type %s"),warning_message,obj:getTypeName())
 				end
 				return warning_message
 			end

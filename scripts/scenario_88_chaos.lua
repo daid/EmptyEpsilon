@@ -9059,7 +9059,7 @@ function update(delta)
 								local obj_type_name = obj.typeName
 								if obj_type_name ~= nil and string.find(obj_type_name,"PlayerSpaceship") then
 									warning_station[stn_faction] = current_station
-									warning_message[stn_faction] = string.format("[%s in %s] We detect one or more enemies nearby. At least one is of type %s",current_station:getCallSign(),current_station:getSectorName(),obj:getTypeName())
+									warning_message[stn_faction] = string.format(_("helpfullWarning-shipLog", "[%s in %s] We detect one or more enemies nearby. At least one is of type %s"),current_station:getCallSign(),current_station:getSectorName(),obj:getTypeName())
 									current_station.proximity_warning = warning_message[stn_faction]
 									current_station.proximity_warning_timer = delta + 300
 									break
