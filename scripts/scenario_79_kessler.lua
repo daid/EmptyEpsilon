@@ -128,7 +128,6 @@ end
 
 function spyprobe_disabled(delta)
     mission_state=misson_idle
-    print "spyprobe disabled"
     local x, y = spyprobe:getPosition()
     local r = spyprobe:getRotation()
     ElectricExplosionEffect():setPosition(x,y):setSize(200)
@@ -315,8 +314,6 @@ function send_signal()
     for n=1,probe_amount do
         probe[n]:setFaction("Independent"):setScanned(true):orderIdle()
     end
-
-    print "send signal"
 end
 
 function sending_signal(delta)
@@ -443,7 +440,6 @@ function placeRandomFreq(amount, x1, y1, x2, y2, random_amount)
                 player:takeDamage(50, "kinetic",ax,ay );
             end
             debris_interactions=debris_interactions+1        
-            print(debris_interactions)
         end);
         
     end
