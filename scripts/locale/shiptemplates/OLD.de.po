@@ -294,6 +294,11 @@ msgctxt "class"
 msgid "Corvette"
 msgstr "Korvette"
 
+#: scripts/shiptemplates/OLD.lua:390
+msgctxt "playerShip"
+msgid "Ender"
+msgstr ""
+
 #: scripts/shiptemplates/OLD.lua:391
 msgid ""
 "Player version of the battle station. Only half es much shield strength, but "

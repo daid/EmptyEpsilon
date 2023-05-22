@@ -166,3 +166,9 @@ msgstr ""
 msgctxt "playerShip"
 msgid "ZX-Lindworm"
 msgstr ""
+
+#: scripts/shiptemplates/starFighters.lua:137
+msgid ""
+"The ZX-Lindworm is a vastly improved version of the WX-Lindworm. Additional "
+"beam weapon, more missiles, tougher, faster and more agile."
+msgstr ""

@@ -3964,19 +3964,19 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:7956
 #, lua-format
-msgctxt "-shipLog"
+msgctxt "ridExuari-shipLog"
 msgid "%s just launched these ships: %s"
 msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:7958
 #, lua-format
-msgctxt "-shipLog"
+msgctxt "ridExuari-shipLog"
 msgid "%s just launched %s"
 msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:8023
 #, lua-format
-msgctxt "-shipLog"
+msgctxt "cargo-shipLog"
 msgid ""
 "[%s] Your delivery contract calls for food, medicine, dilithium and "
 "tritanium. Return when you have all four of these and we'll consider your "
@@ -3985,7 +3985,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:8045
 #, lua-format
-msgctxt "-shipLog"
+msgctxt "cargo-shipLog"
 msgid ""
 "[%s] Thanks for the cargo, %s. We'll make good use of it. We've added 100 "
 "units to your battery capacity and reduced your beam cycle time by 1/3. "
@@ -3998,7 +3998,7 @@ msgid "The supply depot station has been destroyed"
 msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:8162
-msgctxt "-shipLog"
+msgctxt "Kraylor-shipLog"
 msgid ""
 "[Human Navy Regional Headquarters] All Human Navy vessels are hereby ordered "
 "to assist in the repelling of inbound Kraylor ships. We are not sure of "
@@ -4008,12 +4008,12 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:8163
 #, lua-format
-msgctxt "-shipLog"
+msgctxt "Kraylor-shipLog"
 msgid "This includes you, %s"
 msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:8164
-msgctxt "orders-comms"
+msgctxt "KraylorOrders-comms"
 msgid "Repel Kraylor"
 msgstr ""
 
@@ -4024,7 +4024,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:8321
 #, lua-format
-msgctxt "-shipLog"
+msgctxt "Kraylor-shipLog"
 msgid ""
 "Looks like the Kraylor have developed some kind of planet busting weapon. "
 "They just destroyed %s with it. Keep them away from %s!"
@@ -4063,7 +4063,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:8462
 #, lua-format
-msgctxt "-shipLog"
+msgctxt "contract-shipLog"
 msgid ""
 "[Captain's Log] Why can't the Exuari just leave us alone? I don't understand "
 "what it is about them that makes them want to prey on everyone.\n"
@@ -4114,7 +4114,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:8673
 #, lua-format
-msgctxt "-shipLog"
+msgctxt "Kraylor-shipLog"
 msgid ""
 "Kraylor have sabotaged station %s. It can no longer maintain orbit around "
 "%s. Fortunately, it looks to be in no danger from %s or %s, but the Kraylor "

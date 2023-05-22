@@ -378,6 +378,286 @@ msgid ""
 "shields. Trust me, it's always good to have stronger shields"
 msgstr ""
 
+#: scripts/scenario_48_visitors.lua:2250
+msgctxt "upgrade-comms"
+msgid "Reduce beam cycle time"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2272
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "After accepting your gift, he reduced your Beam cycle time by 25%%"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2274 scripts/scenario_48_visitors.lua:2432
+#: scripts/scenario_48_visitors.lua:2481
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s requires %s for the upgrade"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2288
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s reduced your Beam cycle time by 25%% at no cost in trade with the "
+"message, 'Go get those Exuari.'"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2291 scripts/scenario_48_visitors.lua:2396
+#: scripts/scenario_48_visitors.lua:2450 scripts/scenario_48_visitors.lua:2498
+msgctxt "upgrade-comms"
+msgid "Your ship type does not support a beam weapon upgrade."
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2298
+msgctxt "upgrade-comms"
+msgid "Increase spin speed"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2310
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Ship spin speed increased by 50%% after you gave %s to %s"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2312
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s requires %s for the spin upgrade"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2317
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: I increased the speed your ship spins by 50%%. Normally, I'd require %s, "
+"but seeing as you're going out to take on the Exuari, we worked it out"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2324
+msgctxt "upgrade-comms"
+msgid "Add missile tube"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2346
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s thanks you for the %s and the luxury and installs a homing missile tube "
+"for you"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2348
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s requires %s and luxury for the missile tube"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2358
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s installs a homing missile tube for you. The %s required was requisitioned "
+"from emergency contingency supplies"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2365
+msgctxt "upgrade-comms"
+msgid "Reduce beam heat"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2382
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Beam heat generation reduced by 50%%"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2384
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s says she needs %s before she can cool your beams"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2393
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: Beam heat generation reduced by 50%%, no %s necessary. Go shoot some "
+"Exuari for me"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2403
+msgctxt "upgrade-comms"
+msgid "Extend beam range"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2430
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s extended your beam range by 25%% and says thanks for the %s"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2447
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s increased your beam range by 25%% without the usual %s from your ship"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2457
+msgctxt "upgrade-comms"
+msgid "Increase beam damage"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2479
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s increased your beam damage by 20%% and stores away the %s"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2495
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s increased your beam damage by 20%%, waiving the usual %s requirement"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2505
+msgctxt "upgrade-comms"
+msgid "Increase missile storage capacity"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2521
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s: You can now store at least 25%% more missiles. I appreciate the %s"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2523
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s needs %s for the upgrade"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2531
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: You can now store at least 25%% more missiles. I found some spare %s on "
+"the station. Go launch those missiles at those perfidious Exuari"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2534
+msgctxt "upgrade-comms"
+msgid "Your ship type does not support a missile storage capacity upgrade."
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2541
+msgctxt "upgrade-comms"
+msgid "Speed up impulse engines"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2553
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: Your impulse engines now push you up to 25%% faster. Thanks for the %s"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2555
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "You need to bring %s to %s for the upgrade"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2560
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: Your impulse engines now push you up to 25%% faster. I didn't need %s "
+"after all. Go run circles around those blinking Exuari"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2567
+msgctxt "upgrade-comms"
+msgid "Strengthen hull"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2580
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s: Thank you for the %s. Your hull is 50%% stronger"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2582
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s: I need %s before I can increase your hull strength"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2588
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: I made your hull 50%% stronger. I scrounged some %s from around here "
+"since you are on the Exuari offense team"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2595
+msgctxt "upgrade-comms"
+msgid "Increase battery efficiency"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2608
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: I appreciate the %s. You have a 25%% greater energy capacity due to "
+"increased battery efficiency"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2610
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: You need to bring me some %s before I can increase your battery "
+"efficiency"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2616
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s increased your battery efficiency by 25%% without the need for %s due to "
+"the pressing military demands on your ship"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2623
+msgctxt "upgrade-comms"
+msgid "Strengthen shields"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2639
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: I've raised your shield maximum by 20%%, %s. Thanks for bringing the %s"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2641
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s: You need to provide %s before I can raise your shield strength"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:2650
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: Congratulations, %s, your shields are 20%% stronger. Don't worry about "
+"the %s. Go kick those Exuari outta here"
+msgstr ""
+
 #: scripts/scenario_48_visitors.lua:2856
 msgctxt "scienceDescription-station"
 msgid "Optical Components"
@@ -2580,6 +2860,49 @@ msgctxt "shipAssist-comms"
 msgid "Fleet status:"
 msgstr ""
 
+#: scripts/scenario_48_visitors.lua:7503 scripts/scenario_48_visitors.lua:7527
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+" %s:"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:7504
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Hull: %d%%"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:7507
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Shield: %d%%"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:7509
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Shields: "
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:7511
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front: %d%% Rear: %d%%"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:7514
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid " %d:%d%%"
+msgstr ""
+
 #: scripts/scenario_48_visitors.lua:7523
 msgctxt "shipAssist-comms"
 msgid "Report missile status"
@@ -2588,6 +2911,22 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:7524
 msgctxt "shipAssist-comms"
 msgid "Fleet missile status:"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:7532
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"      %s: %d/%d"
+msgstr ""
+
+#: scripts/scenario_48_visitors.lua:7536
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Missiles: %s"
 msgstr ""
 
 #: scripts/scenario_48_visitors.lua:7549

@@ -3969,8 +3969,8 @@ msgstr ""
 "Les modèles Farco sont des modifications évolutives du Phobos T3.\n"
 "\n"
 "Dans le cas du Farco 11, la vitesse de manœuvre est plus rapide, les "
-"faisceaux laser sont plus longs et plus rapides, il y a un faisceau "
-"\"sniper\" plus long et les boucliers sont plus solides."
+"faisceaux laser sont plus longs et plus rapides, il y a un faisceau \"sniper"
+"\" plus long et les boucliers sont plus solides."
 
 #: scripts/scenario_74_omicron.lua:8155
 msgctxt "scienceDB"
@@ -3983,9 +3983,9 @@ msgstr ""
 "Les modèles Farco sont des modifications évolutives du Phobos T3.\n"
 "\n"
 "Dans le cas du Farco 13, la vitesse de manœuvre est plus rapide, les "
-"faisceaux laser sont plus longs et plus rapides, il y a un faisceau "
-"\"sniper\" plus long, les tubes se chargent plus rapidement, il y a plus de "
-"missiles et les boucliers sont plus solides."
+"faisceaux laser sont plus longs et plus rapides, il y a un faisceau \"sniper"
+"\" plus long, les tubes se chargent plus rapidement, il y a plus de missiles "
+"et les boucliers sont plus solides."
 
 #: scripts/scenario_74_omicron.lua:8199
 msgctxt "scienceDB"
@@ -4299,6 +4299,30 @@ msgstr ""
 "Jump Freighter 4) modifié. Elle est conçue pour transporter des pièces de "
 "rechange et de l'équipement ainsi que du personnel de réparation là où il "
 "est nécessaire de réparer les stations et vaisseaux."
+
+#: scripts/scenario_74_omicron.lua:9204
+#, lua-format
+msgctxt "scienceDB"
+msgid "%.1f u/min"
+msgstr ""
+
+#: scripts/scenario_74_omicron.lua:9215
+#, fuzzy, lua-format
+msgctxt "scienceDB"
+msgid "Beam weapon %i:%i"
+msgstr "faisceaux laser"
+
+#: scripts/scenario_74_omicron.lua:9219
+#, lua-format
+msgctxt "scienceDB"
+msgid "%.1f Dmg / %.1f sec"
+msgstr ""
+
+#: scripts/scenario_74_omicron.lua:9238
+#, lua-format
+msgctxt "scienceDB"
+msgid "Storage %s"
+msgstr ""
 
 #: scripts/scenario_74_omicron.lua:9472
 #, lua-format
