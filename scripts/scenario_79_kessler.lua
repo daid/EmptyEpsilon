@@ -171,7 +171,7 @@ After that, you will receive further orders.]]))
 		player2:commandDock(geo_1)
 		player2:setCallSign("Tidy-2")
 		initSatNetwork()
-        message_sat_network=geo_1:sendCommsMessage(player1, _([[Bad news: The satellite woke up a whole network of military satellites that should have been out of service for ages. If we don't do anything against them, they will slowly but surely destroy all objects they can find. The debris will spread all over the orbit, destroying all our communications satellites.
+        message_sat_network=geo_1:sendCommsMessage(player1, _([[Bad news: The satellite woke up a whole group of military satellites that should have been out of service for ages. If we don't do anything against them, they will slowly but surely destroy all objects they can find. The debris will spread all over the orbit, destroying all our communications satellites.
 Not only would that be a disaster for science and spaceflight, but everyday things like Internet are in serious danger as well!
 We are currently making a plan to stop this. Please stay docked until you get new orders.
 ]]))
@@ -179,9 +179,9 @@ We are currently making a plan to stop this. Please stay docked until you get ne
     end
     if dock_message_sent==2 and player1:getEnergyLevel() > player1:getEnergyLevelMax()-2 and player1:isCommsInactive() then
 		if player1:hasPlayerAtPosition("Weapons") then  
-			message_sat_deactivate=geo_1:sendCommsMessage(player1, _([[New orders: We have to shut down the satellite network somehow. Therefore, you need to get as close as possible to the control node that is commanding the other satellites. Luckily, the satellites are in some kind of sleep mode right now, to recharge their batteries. You need another ship however, to get to them unnoticed. As soon you are getting closer, you should also turn off every system and device that is not necessary. When you are ready, your weapons officer can change the ship at the touch of a button.]]))
+			message_sat_deactivate=geo_1:sendCommsMessage(player1, _([[New orders: We have to shut down the rogue satellites somehow. Therefore, you need to get as close as possible to the control node that is commanding the other satellites. Luckily, the satellites are in some kind of sleep mode right now, to recharge their batteries. You need another ship however, to get to them unnoticed. As soon you are getting closer, you should also turn off every system and device that is not necessary. When you are ready, your weapons officer can change the ship at the touch of a button.]]))
         else
-			message_sat_deactivate=geo_1:sendCommsMessage(player1, _([[New orders: We have to shut down the satellite network somehow. Therefore, you need to get as close as possible to the control node that is commanding the other satellites. Luckily, the satellites are in some kind of sleep mode right now, to recharge their batteries. You need another ship however, to get to them unnoticed. As soon you are getting closer, you should also turn off every system and device that is not necessary. When you are ready, your tactical officer can change the ship at the touch of a button.]]))
+			message_sat_deactivate=geo_1:sendCommsMessage(player1, _([[New orders: We have to shut down the rogue satellites somehow. Therefore, you need to get as close as possible to the control node that is commanding the other satellites. Luckily, the satellites are in some kind of sleep mode right now, to recharge their batteries. You need another ship however, to get to them unnoticed. As soon you are getting closer, you should also turn off every system and device that is not necessary. When you are ready, your tactical officer can change the ship at the touch of a button.]]))
         end
         player1:addCustomButton("Weapons","change_ship_btn",_("change ship"),change_ship)
         player1:addCustomButton("Tactical","change_ship_btn_tac",_("change ship"),change_ship)
@@ -313,7 +313,7 @@ function send_signal()
     BeamEffect():setSource(player2, 0, 0, 0):setTarget(command_node, 0, 0):setDuration(3):setRing(false):setTexture("texture/electric_sphere_texture.png")
     mission_state=sending_signal
     for n=1,probe_amount do
-        probe[n]:setFaction("Independent"):setScanned(true)
+        probe[n]:setFaction("Independent"):setScanned(true):orderIdle()
     end
 
     print "send signal"
@@ -322,7 +322,7 @@ end
 function sending_signal(delta)
     sending_timer=sending_timer+delta
     if sending_timer>3 then
-		globalMessage(_("Satellite network shut down"))		
+		globalMessage(_("Rogue satellites shut down"))
         geo_1:sendCommsMessage(player2, _([[Congratulations! You saved the global satellite network from destruction. I call this a successful test run and we're gonna initiate the production of our fleet of tidying ships immediately. So eventually, we will get rid of this space junk problem once and for all. You and the rest of your crew did a great job!]]))
         mission_state=mission_victory
     end       
