@@ -99,12 +99,40 @@ end
 --- Returns true if the given SpaceObject's faction is hostile to this object's.
 --- Example: obj:isEnemy(target)
 function Entity:isEnemy(target)
+    if target == nil then return false end
+    local my_faction = self:getFactionId()
+    if my_faction == nil then return false end
+    local my_faction_info = my_faction.faction_info
+    if my_faction_info == nil then return false end
+    local target_faction = target:getFactionId()
+    if target_faction == nil then return false end
+    for n=1,#my_faction_info do
+        local relation = my_faction_info[n]
+        if relation.other_faction == target_faction then
+            return relation.relation == "enemy"
+        end
+    end
+    return false
 end
 --- Returns the friend-or-foe status of the given faction relative to this SpaceObject's faction.
 --- Returns true if the given SpaceObject's faction is friendly to this object's.
 --- If an object is neither friendly nor enemy, it is neutral.
 --- Example: obj:isFriendly(target)
 function Entity:isFriendly(target)
+    if target == nil then return false end
+    local my_faction = self:getFactionId()
+    if my_faction == nil then return false end
+    local my_faction_info = my_faction.faction_info
+    if my_faction_info == nil then return false end
+    local target_faction = target:getFactionId()
+    if target_faction == nil then return false end
+    for n=1,#my_faction_info do
+        local relation = my_faction_info[n]
+        if relation.other_faction == target_faction then
+            return relation.relation == "friendly"
+        end
+    end
+    return false
 end
 --- Sets the communications script used when this SpaceObject is hailed.
 --- Accepts the filename of a Lua script relative to the scripts/ directory.

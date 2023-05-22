@@ -31,7 +31,7 @@ function Asteroid()
         icon="radar/blip.png",
         radius=size,
         color={255, 200, 100, 255},
-        --TODO: flags="LongRange",
+        rotate=false,
     }
     e.spin={rate=random(0.1, 0.8)}
     e.avoid_object={range=size*2}
@@ -53,7 +53,7 @@ function PlayerSpaceship()
         icon="radar/dread.png",
         radius=size*0.8,
         max_size=1024,
-        --TODO: flags="Rotate | LongRange | ColorByFaction",
+        color_by_faction=true,
     }
     --e.docking_bay = {}
     e.docking_port = {}
@@ -70,8 +70,8 @@ function PlayerSpaceship()
     e.physics = {type="dynamic", size=size}
     
     --SpaceShip
-    --e.radar_trace.flags = e.radar_trace.flags | ArrowIfNotScanned
-    e.shields.frequency = irandom(0, 20);
+    e.radar_trace.arrow_if_not_scanned = true
+    e.shields.frequency = irandom(0, 20)
     e.beam_weapons = {{arc=30, direction=0},{arc=30, direction=-90},{arc=30, direction=90}}
     e.reactor = {}
     e.impulse_engine = {}
@@ -81,7 +81,6 @@ function PlayerSpaceship()
     e.jump_drive = {}
     e.missile_tubes = {
         {direction=15},{direction=-15},{direction=25},{direction=-25},
-        
     }
     
     --PlayerSpaceShip

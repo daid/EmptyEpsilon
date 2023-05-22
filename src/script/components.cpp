@@ -52,6 +52,16 @@
             t.SET(sp::script::Convert<decltype(std::declval<T>().GET())>::fromLua(L, -1)); \
         } \
     };
+#define BIND_MEMBER_FLAG(T, MEMBER, NAME, MASK) \
+    sp::script::ComponentHandler<T>::members[NAME] = { \
+        [](lua_State* L, const T& t) { \
+            return sp::script::Convert<bool>::toLua(L, ((t.MEMBER) & (MASK)) == (MASK) ); \
+        }, [](lua_State* L, T& t) { \
+            auto result = (t.MEMBER) & ~(MASK); \
+            if (sp::script::Convert<bool>::fromLua(L, -1)) result |= (MASK); \
+            t.MEMBER = result; \
+        } \
+    };
 #define BIND_ARRAY(T, A) \
     sp::script::ComponentHandler<T>::array_count_func = [](const T& t) -> int { return t.A.size(); }; \
     sp::script::ComponentHandler<T>::array_resize_func = [](T& t, int new_size) { t.A.resize(new_size); };
@@ -277,7 +287,11 @@ void initComponentScriptBindings()
     BIND_MEMBER(RadarTrace, max_size);
     BIND_MEMBER(RadarTrace, radius);
     BIND_MEMBER(RadarTrace, color);
-    BIND_MEMBER(RadarTrace, flags);
+    BIND_MEMBER_FLAG(RadarTrace, flags, "rotate", RadarTrace::Rotate);
+    BIND_MEMBER_FLAG(RadarTrace, flags, "color_by_faction", RadarTrace::ColorByFaction);
+    BIND_MEMBER_FLAG(RadarTrace, flags, "arrow_if_not_scanned", RadarTrace::ArrowIfNotScanned);
+    BIND_MEMBER_FLAG(RadarTrace, flags, "blend_add", RadarTrace::BlendAdd);
+    BIND_MEMBER_FLAG(RadarTrace, flags, "long_range", RadarTrace::LongRange);
 
     sp::script::ComponentHandler<RawRadarSignatureInfo>::name("radar_signature");
     BIND_MEMBER(RawRadarSignatureInfo, gravity);
