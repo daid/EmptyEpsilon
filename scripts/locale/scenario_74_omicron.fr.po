@@ -4300,6 +4300,30 @@ msgstr ""
 "rechange et de l'équipement ainsi que du personnel de réparation là où il "
 "est nécessaire de réparer les stations et vaisseaux."
 
+#: scripts/scenario_74_omicron.lua:9204
+#, lua-format
+msgctxt "scienceDB"
+msgid "%.1f u/min"
+msgstr "%.1f u/min"
+
+#: scripts/scenario_74_omicron.lua:9215
+#, lua-format
+msgctxt "scienceDB"
+msgid "Beam weapon %i:%i"
+msgstr "Faisceaux laser %i:%i"
+
+#: scripts/scenario_74_omicron.lua:9219
+#, lua-format
+msgctxt "scienceDB"
+msgid "%.1f Dmg / %.1f sec"
+msgstr "%.1f Dmg / %.1f sec"
+
+#: scripts/scenario_74_omicron.lua:9238
+#, lua-format
+msgctxt "scienceDB"
+msgid "Storage %s"
+msgstr "Stockage %s"
+
 #: scripts/scenario_74_omicron.lua:9472
 #, lua-format
 msgctxt "mission1st-incCall"
