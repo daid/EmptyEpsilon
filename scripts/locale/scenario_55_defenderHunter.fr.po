@@ -2166,7 +2166,7 @@ msgstr "Fournir du fret"
 #: scripts/scenario_55_defenderHunter.lua:5642
 msgctxt "-comms"
 msgid "Do you have something for us?"
-msgstr "Auriez-vous quelque chose pour nous?"
+msgstr "Auriez-vous quelque chose pour nous ?"
 
 #: scripts/scenario_55_defenderHunter.lua:5655
 msgctxt "upgrade-comms"
@@ -2181,7 +2181,7 @@ msgstr "Rappelez-moi les informations que j'ai promises."
 #: scripts/scenario_55_defenderHunter.lua:5702
 msgctxt "station-comms"
 msgid "Tell me more about your station"
-msgstr "Dites m'en plus à propos de votre station."
+msgstr "Dites m'en plus à propos de votre station"
 
 #: scripts/scenario_55_defenderHunter.lua:5703
 msgctxt "station-comms"

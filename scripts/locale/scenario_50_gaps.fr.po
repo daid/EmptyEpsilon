@@ -1803,7 +1803,7 @@ msgstr "Réparateur embauché"
 #: scripts/scenario_50_gaps.lua:2498
 msgctxt "station-comms"
 msgid "Tell me more about your station"
-msgstr "Dites m'en plus à propos de votre station."
+msgstr "Dites m'en plus à propos de votre station"
 
 #: scripts/scenario_50_gaps.lua:2499
 msgctxt "station-comms"
