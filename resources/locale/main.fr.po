@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-05-08 01:31+0200\n"
+"PO-Revision-Date: 2023-05-22 19:11+0200\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -770,9 +770,8 @@ msgid "Extra settings"
 msgstr "Réglages : scan, fréquences, piratage..."
 
 #: src/menus/shipSelectionScreen.cpp:280
-#, fuzzy
 msgid "Ship info..."
-msgstr "Vue fenêtre"
+msgstr "Description du vaisseau..."
 
 #: src/menus/shipSelectionScreen.cpp:286
 msgid "Select ship"
