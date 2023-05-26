@@ -3969,8 +3969,8 @@ msgstr ""
 "Les modèles Farco sont des modifications évolutives du Phobos T3.\n"
 "\n"
 "Dans le cas du Farco 11, la vitesse de manœuvre est plus rapide, les "
-"faisceaux laser sont plus longs et plus rapides, il y a un faisceau \"sniper"
-"\" plus long et les boucliers sont plus solides."
+"faisceaux laser sont plus longs et plus rapides, il y a un faisceau "
+"\"sniper\" plus long et les boucliers sont plus solides."
 
 #: scripts/scenario_74_omicron.lua:8155
 msgctxt "scienceDB"
@@ -3983,9 +3983,9 @@ msgstr ""
 "Les modèles Farco sont des modifications évolutives du Phobos T3.\n"
 "\n"
 "Dans le cas du Farco 13, la vitesse de manœuvre est plus rapide, les "
-"faisceaux laser sont plus longs et plus rapides, il y a un faisceau \"sniper"
-"\" plus long, les tubes se chargent plus rapidement, il y a plus de missiles "
-"et les boucliers sont plus solides."
+"faisceaux laser sont plus longs et plus rapides, il y a un faisceau "
+"\"sniper\" plus long, les tubes se chargent plus rapidement, il y a plus de "
+"missiles et les boucliers sont plus solides."
 
 #: scripts/scenario_74_omicron.lua:8199
 msgctxt "scienceDB"
@@ -4304,25 +4304,25 @@ msgstr ""
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f u/min"
-msgstr ""
+msgstr "%.1f u/min"
 
 #: scripts/scenario_74_omicron.lua:9215
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "Beam weapon %i:%i"
-msgstr "faisceaux laser"
+msgstr "Faisceaux laser %i:%i"
 
 #: scripts/scenario_74_omicron.lua:9219
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f Dmg / %.1f sec"
-msgstr ""
+msgstr "%.1f Dmg / %.1f sec"
 
 #: scripts/scenario_74_omicron.lua:9238
 #, lua-format
 msgctxt "scienceDB"
 msgid "Storage %s"
-msgstr ""
+msgstr "Stockage %s"
 
 #: scripts/scenario_74_omicron.lua:9472
 #, lua-format
