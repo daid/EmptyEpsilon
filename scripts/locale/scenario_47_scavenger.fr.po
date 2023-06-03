@@ -28,7 +28,7 @@ msgstr ""
 "- Difficulté :  ***  (variable)\n"
 "- Vaisseaux joueurs : 1\n"
 "\n"
-"TRADUCTION EN COURS 91% (A CHECKER)\n"
+"TRADUCTION EN COURS 96% (A CHECKER)\n"
 "\n"
 "Mission : Rester en vie tout en récupérant des trésors.\n"
 "\n"
@@ -2724,7 +2724,7 @@ msgstr ""
 "Je fais des recherches sur de nombreux astéroïdes à proximité. Il y en a un "
 "en particulier qui m'intéresse. Malheureusement, j'ai perdu l'accès a mes "
 "capteurs les plus puissants pour pouvoir scanner à distance, mon vaisseau de "
-"recherche a été abattu par des pirates. J'ai eu la chance de m'en sortir "
+"recherche a été abattu par des pirates. J'ai eu de la chance de m'en sortir "
 "vivante.\n"
 "\n"
 "Je voudrais localiser mon astéroïde spécial, mais je n'ai pas enregistré les "
@@ -3084,6 +3084,15 @@ msgid ""
 "What was your reading on osmium?\n"
 "Enter the 10's digit. For example, for 23.5, the 10's digit is 2"
 msgstr ""
+"Excellent !\n"
+"J'ai retrouvé mes notes sur la composition de l'astéroïde. Comparons vos "
+"valeurs à celles que j'ai prises. Dans l'ensemble, l'astéroïde contenait de "
+"l'osmium, de l'iridium, de l'olivine et du nickel. Le reste étant de la "
+"simple roche.\n"
+"\n"
+"Quelle était votre lecture sur l'osmium ?\n"
+"Entrez le chiffre des dizaines. (Par exemple, pour 23,5, le chiffre des "
+"dizaines est 2)"
 
 #: scripts/scenario_47_scavenger.lua:5756
 #, lua-format
@@ -3096,6 +3105,14 @@ msgid ""
 "What was your reading on osmium?\n"
 "Enter the 10's digit. For example, for 23.5, the 10's digit is 2"
 msgstr ""
+"Excellent !\n"
+"J'ai retrouvé mes notes sur la composition de l'astéroïde. Comparons vos "
+"valeurs à celles que j'ai prises. %s, l'astéroïde contenait de l'osmium, de "
+"l'iridium, de l'olivine et du nickel. Le reste étant de la simple roche.\n"
+"\n"
+"Quelle était votre lecture sur l'osmium ?\n"
+"Entrez le chiffre des dizaines. (Par exemple, pour 23,5, le chiffre des "
+"dizaines est 2)"
 
 #: scripts/scenario_47_scavenger.lua:5760
 #: scripts/scenario_47_scavenger.lua:5774
@@ -3104,12 +3121,14 @@ msgstr ""
 #, lua-format
 msgctxt "Jenny-comms"
 msgid "10's digit %i"
-msgstr ""
+msgstr "Chiffre des dizaines %i"
 
 #: scripts/scenario_47_scavenger.lua:5762
 msgctxt "Jenny-comms"
 msgid "Now for the osmium 1's digit. For example, for 23.5, the 1's digit is 3"
 msgstr ""
+"Passons maintenant au chiffre des unités de l'osmium. (Par exemple, pour "
+"23,5, le chiffre des unités est 3)"
 
 #: scripts/scenario_47_scavenger.lua:5764
 #: scripts/scenario_47_scavenger.lua:5778
@@ -3118,7 +3137,7 @@ msgstr ""
 #, lua-format
 msgctxt "Jenny-comms"
 msgid "1's digit %i"
-msgstr ""
+msgstr "Chiffre des unités %i"
 
 #: scripts/scenario_47_scavenger.lua:5766
 #: scripts/scenario_47_scavenger.lua:5780
@@ -3129,6 +3148,8 @@ msgid ""
 "And one digit after the decimal point. For example, for 23.5, the digit "
 "after the decimal point is 5"
 msgstr ""
+"Et le chiffre après la virgule. (Par exemple, pour 23,5, le chiffre après la "
+"virgule est 5)"
 
 #: scripts/scenario_47_scavenger.lua:5768
 #: scripts/scenario_47_scavenger.lua:5782
@@ -3137,7 +3158,7 @@ msgstr ""
 #, lua-format
 msgctxt "Jenny-comms"
 msgid "after decimal digit %i"
-msgstr ""
+msgstr "Chiffre après la virgule %i"
 
 #: scripts/scenario_47_scavenger.lua:5772
 #, lua-format
@@ -3146,12 +3167,17 @@ msgid ""
 "Osmium: %.1f\n"
 "The Iridium 10's digit. For example, for 23.5, the 10's digit is 2"
 msgstr ""
+"osmium : %.1f\n"
+"Le chiffre des dizaines de l'Iridium. (Par exemple, pour 23,5, le chiffre "
+"des dizaines est 2)"
 
 #: scripts/scenario_47_scavenger.lua:5776
 msgctxt "Jenny-comms"
 msgid ""
 "Now for the iridium 1's digit. For example, for 23.5, the 1's digit is 3"
 msgstr ""
+"Passons maintenant au chiffre des unités de l'iridium. (Par exemple, pour "
+"23,5, le chiffre des unités est 3)"
 
 #: scripts/scenario_47_scavenger.lua:5786
 #, lua-format
@@ -3161,12 +3187,18 @@ msgid ""
 "Iridium: %.1f\n"
 "The Olivine 10's digit. For example, for 23.5, the 10's digit is 2"
 msgstr ""
+"osmium : %.1f\n"
+"iridium : %.1f\n"
+"Le chiffre des dizaines de l'Olivine. (Par exemple, pour 23,5, le chiffre "
+"des dizaines est 2)"
 
 #: scripts/scenario_47_scavenger.lua:5790
 msgctxt "Jenny-comms"
 msgid ""
 "Now for the olivine 1's digit. For example, for 23.5, the 1's digit is 3"
 msgstr ""
+"Passons maintenant au chiffre des unités de l'olivine. (Par exemple, pour "
+"23,5, le chiffre des unités est 3)"
 
 #: scripts/scenario_47_scavenger.lua:5800
 #, lua-format
@@ -3177,11 +3209,18 @@ msgid ""
 "Olivine: %.1f\n"
 "The Nickel 10's digit. For example, for 23.5, the 10's digit is 2"
 msgstr ""
+"osmium : %.1f\n"
+"iridium : %.1f\n"
+"olivine : %.1f\n"
+"Le chiffre des dizaines du nickel. (Par exemple, pour 23,5, le chiffre des "
+"dizaines est 2)"
 
 #: scripts/scenario_47_scavenger.lua:5804
 msgctxt "Jenny-comms"
 msgid "Now for the nickel 1's digit. For example, for 23.5, the 1's digit is 3"
 msgstr ""
+"Passons maintenant au chiffre des unités du nickel. (Par exemple, pour 23,5, "
+"le chiffre des unités est 3)"
 
 #: scripts/scenario_47_scavenger.lua:5814
 #, lua-format
@@ -3192,6 +3231,10 @@ msgid ""
 "Olivine: %.1f\n"
 "Nickel: %.1f"
 msgstr ""
+"osmium : %.1f\n"
+"iridium : %.1f\n"
+"olivine : %.1f\n"
+"nickel : %.1f"
 
 #: scripts/scenario_47_scavenger.lua:5819
 #, lua-format
@@ -3203,6 +3246,11 @@ msgid ""
 "take me to within 5 units of the asteroid. You may want to put a waypoint on "
 "it"
 msgstr ""
+"Oui parfait ! Vos lectures de pourcentages de composition :\n"
+"%s\n"
+"...correspondent exactement à mes pourcentages de composition enregistrés ! "
+"Maintenant, j'ai besoin que vous m'emmeniez à moins de 5 unités de "
+"l'astéroïde. Vous voudrez peut-être y placer un marqueur."
 
 #: scripts/scenario_47_scavenger.lua:5822
 #, lua-format
@@ -3213,6 +3261,11 @@ msgid ""
 "...do not match the asteroid I am looking for. But don't give up! Please "
 "keep looking and contact me when you find another asteroid candidate."
 msgstr ""
+"Malheureusement, ces pourcentages de composition que vous m'avez fournis :\n"
+"%s\n"
+"...ne correspondent pas à l'astéroïde que je recherche. Mais n'abandonnez "
+"pas ! S'il vous plaît, continuez à chercher et contactez-moi lorsque vous "
+"trouverez un autre astéroïde potentiel."
 
 #: scripts/scenario_47_scavenger.lua:5872
 #, lua-format
@@ -3220,18 +3273,18 @@ msgctxt "Jenny-comms"
 msgid ""
 "Communication routed to guest quarters aboard %s\n"
 "\n"
-msgstr ""
+msgstr "Communication reroutée vers les quartiers VIP à bord du %s.\n"
 
 #: scripts/scenario_47_scavenger.lua:5874
 #, lua-format
 msgctxt "Jenny-comms"
 msgid "%sYes? What can I do for you?"
-msgstr ""
+msgstr "%s Oui ? Que puis-je faire pour vous ?"
 
 #: scripts/scenario_47_scavenger.lua:5875
 msgctxt "Jenny-comms"
 msgid "What were those asteroid compositional percentages?"
-msgstr ""
+msgstr "Quels étaient ces pourcentages de composition de l'astéroïde ?"
 
 #: scripts/scenario_47_scavenger.lua:5876
 #, lua-format
@@ -3242,11 +3295,15 @@ msgid ""
 "Olivine: %.1f\n"
 "Nickel: %.1f"
 msgstr ""
+"osmium : %.1f\n"
+"iridium : %.1f\n"
+"olivine : %.1f\n"
+"nickel : %.1f"
 
 #: scripts/scenario_47_scavenger.lua:5881
 msgctxt "Jenny-comms"
 msgid "Asteroid under 1.5 units away"
-msgstr ""
+msgstr "Astéroïde à moins de 1,5 unités de distance"
 
 #: scripts/scenario_47_scavenger.lua:5884
 #, lua-format
@@ -3255,11 +3312,14 @@ msgid ""
 "%s must come to a complete stop before I can deactivate the cloaking "
 "mechanism"
 msgstr ""
+"%s doit s'arrêter complètement avant que je puisse désactiver le mécanisme "
+"de camouflage."
 
 #: scripts/scenario_47_scavenger.lua:5886
 msgctxt "Jenny-comms"
 msgid "Cloaking mechanism deactivated, please retrieve my data store"
 msgstr ""
+"Mécanisme de camouflage désactivé, veuillez récupérer mon stock de données"
 
 #: scripts/scenario_47_scavenger.lua:5889
 msgctxt "scienceDescription-artifact"
@@ -3270,7 +3330,7 @@ msgstr "Conteneur militaire"
 msgctxt "scienceDescription-artifact"
 msgid "Stasis container with a high density data store inside"
 msgstr ""
-"Conteneur militaire avec un stockage de données haute densité à l'intérieur"
+"Conteneur militaire avec un stock de données haute densité à l'intérieur"
 
 #: scripts/scenario_47_scavenger.lua:5890
 #, lua-format
@@ -3279,11 +3339,14 @@ msgid ""
 "[Jenny McGuire] Thank you for picking up my research for me, %s. Next time "
 "you dock with %s you can get the upgrade I promised"
 msgstr ""
+"[Jenny McGuire]\n"
+"Merci d'avoir récupérés mes recherches pour moi, %s. La prochaine fois que "
+"vous irez sur %s, vous pourrez obtenir la mise à niveau promise."
 
 #: scripts/scenario_47_scavenger.lua:5897
 msgctxt "Jenny-comms"
 msgid "What is the asteroid approach procedure?"
-msgstr ""
+msgstr "Quelle est la procédure d'approche des astéroïdes ?"
 
 #: scripts/scenario_47_scavenger.lua:5899
 msgctxt "Jenny-comms"
@@ -3291,17 +3354,20 @@ msgid ""
 "Get within 1.5 units of the asteroid and contact me. I will deactivate the "
 "cloaking mechanism on my research data store so that you can then pick it up"
 msgstr ""
+"Approchez vous à moins de 1,5 unités de l'astéroïde et contactez-moi. Je "
+"vais désactiver le mécanisme de camouflage de mon stock de données de "
+"recherche afin que vous puissiez ensuite le récupérer."
 
 #: scripts/scenario_47_scavenger.lua:5901
 #, lua-format
 msgctxt "Jenny-comms"
 msgid "First, you have to pick me up from %s"
-msgstr ""
+msgstr "D'abord, vous devez venir me récupérer sur %s."
 
 #: scripts/scenario_47_scavenger.lua:5907
 msgctxt "Jenny-comms"
 msgid "The asteroid may have been destroyed"
-msgstr ""
+msgstr "L'astéroïde a peut-être été détruit"
 
 #: scripts/scenario_47_scavenger.lua:5908
 msgctxt "Jenny-comms"
@@ -3309,17 +3375,21 @@ msgid ""
 "So it seems. Looks like I'll have to find another asteroid. Thanks for your "
 "help."
 msgstr ""
+"Il semblerai. On dirait que je vais devoir trouver un autre astéroïde. Merci "
+"pour votre aide."
 
 #: scripts/scenario_47_scavenger.lua:5914
 #, lua-format
 msgctxt "Jenny-comms"
 msgid "Thanks for getting my research for me. Dock with %s to get the upgrade"
 msgstr ""
+"Merci d'avoir récupérés mes recherches pour moi. Amarrez-vous à %s pour "
+"obtenir la mise à niveau."
 
 #: scripts/scenario_47_scavenger.lua:5916
 msgctxt "Jenny-comms"
 msgid "Please retrieve my data store"
-msgstr ""
+msgstr "Merci de récupérer mon stock de données."
 
 #: scripts/scenario_47_scavenger.lua:5944
 msgctxt "station-comms"
@@ -4694,6 +4764,9 @@ msgid ""
 "Jenny McGuire is now aboard. She's a bit paranoid and has sealed the door to "
 "her quarters. You'll have to contact %s to talk to her"
 msgstr ""
+"Jenny McGuire est maintenant à bord.\n"
+"Elle est un peu paranoïaque et a barricadée la porte de ses quartiers. Vous "
+"devrez contacter %s pour lui parler."
 
 #: scripts/scenario_47_scavenger.lua:8564
 msgctxt "energy-msgScience"
