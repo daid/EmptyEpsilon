@@ -1872,7 +1872,7 @@ msgid ""
 "May overcharge jump drive"
 msgstr ""
 "%s\n"
-"- Peut booster la téléportation."
+"- Peut booster la téléportation (rechargement)."
 
 #: scripts/scenario_55_defenderHunter.lua:5433
 #: scripts/scenario_55_defenderHunter.lua:6506
@@ -2023,7 +2023,8 @@ msgstr "Booster la téléportation (10 rép)."
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
-msgstr "Votre téléportation a été boostée à %ik."
+msgstr ""
+"Votre recharge (délai) de votre moteur de téléportation a été boosté à %ik."
 
 #: scripts/scenario_55_defenderHunter.lua:5462
 #: scripts/scenario_55_defenderHunter.lua:5495
