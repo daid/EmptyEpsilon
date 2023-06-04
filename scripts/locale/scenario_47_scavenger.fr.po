@@ -25,10 +25,10 @@ msgid ""
 "Version 0"
 msgstr ""
 "- Durée approx. : + de 2h\n"
-"- Difficulté :  ***  (variable)\n"
+"- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1\n"
 "\n"
-"TRADUCTION EN COURS 96% (A CHECKER)\n"
+"TRADUCTION EN COURS 99% (A CHECKER)\n"
 "\n"
 "Mission : Rester en vie tout en récupérant des trésors.\n"
 "\n"
@@ -597,7 +597,7 @@ msgid ""
 "well as other independent clients on a contract basis"
 msgstr ""
 "Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
-"téléporteurs pour la flotte de la marine humaine ainsi que pour d'autres "
+"téléporteurs pour la flotte de la Marine Humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
 
 #: scripts/scenario_47_scavenger.lua:968
@@ -2005,7 +2005,7 @@ msgid ""
 "How may we help you today?"
 msgstr ""
 "Salutations %s !\n"
-"Comment pouvons-nous vous aider aujourd'hui ?"
+"Comment pouvons-nous vous aider aujourd'hui ? "
 
 #: scripts/scenario_47_scavenger.lua:4836
 msgctxt "station-comms"
@@ -2032,6 +2032,7 @@ msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
 "enemies nearby."
 msgstr ""
+"\n"
 "Veuillez nous excuser si nous semblons un peu distraits. Nous surveillons "
 "attentivement les ennemis à proximité."
 
@@ -2127,7 +2128,7 @@ msgstr "État des services d'accueil"
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s docking services status:"
-msgstr "État des services d'accueil de la station %s :"
+msgstr "État des services d'accueil de la station %s :\n"
 
 #: scripts/scenario_47_scavenger.lua:4939
 #: scripts/scenario_47_scavenger.lua:6104
@@ -2260,7 +2261,7 @@ msgid ""
 "May overcharge jump drive"
 msgstr ""
 "%s\n"
-"- Peut booster la téléportation."
+"- Peut booster la téléportation (rechargement)."
 
 #: scripts/scenario_47_scavenger.lua:4981
 #: scripts/scenario_47_scavenger.lua:6146
@@ -2352,7 +2353,7 @@ msgstr "Rumeurs"
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "Tell me about %s"
-msgstr "Parlez-moi de %s."
+msgstr "Parlez-moi de %s"
 
 #: scripts/scenario_47_scavenger.lua:5038
 #: scripts/scenario_47_scavenger.lua:6038
@@ -2446,7 +2447,8 @@ msgstr "Booster la téléportation (10 rép)"
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
-msgstr "Votre téléportation a été boostée à %ik."
+msgstr ""
+"Votre recharge (délai) de votre moteur de téléportation a été boosté à %ik."
 
 #: scripts/scenario_47_scavenger.lua:5121
 #: scripts/scenario_47_scavenger.lua:5154
@@ -2548,7 +2550,7 @@ msgid ""
 "mines. We have modified %s with a rear facing mining tube. Due to ship size "
 "constraints, we were only able to provide you with two mines."
 msgstr ""
-"La marine humaine exige que tous les vaisseaux armés soient en capacité de "
+"La Marine Humaine exige que tous les vaisseaux armés soient en capacité de "
 "larguer des mines. Nous avons modifié %s avec un tube de minage orienté vers "
 "l'arrière. En raison des contraintes de taille des vaisseaux, nous n'avons "
 "pu vous fournir que 2 mines."
@@ -2577,7 +2579,7 @@ msgid ""
 msgstr ""
 ") a été supprimée pour faire de la place à votre cargaison sous contrat et "
 "pour aider à couvrir le coût de mise à niveau de votre vaisseau aux normes "
-"de la marine humaine."
+"de la Marine Humaine."
 
 #: scripts/scenario_47_scavenger.lua:5248
 #, lua-format
@@ -2609,7 +2611,7 @@ msgid ""
 "Thanks for taking care of those Exuari. We've upgraded the topspeed of your "
 "impulse engines"
 msgstr ""
-"Merci de vous occuper de ces Éxuaris. Nous avons augmenté la vitesse "
+"Merci de vous être occupé de ces Éxuaris. Nous avons augmenté la vitesse "
 "maximale de vos moteurs à impulsion pour vous aider."
 
 #: scripts/scenario_47_scavenger.lua:5268
@@ -2628,7 +2630,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:5271
 #, lua-format
-msgctxt "ridExuari-comms"
+msgctxt "ridExuari-"
 msgid ""
 "%s has asked for help against Exuari forces and has provided your ship with "
 "missile weapons to help you destroy %s"
@@ -2672,7 +2674,8 @@ msgstr ""
 "\n"
 "Nous avons également reconnu officiellement votre compétence. Cela vous "
 "permet de conclure des contrats avec des entités indépendantes de la région. "
-"Il peut même y avoir des contrats disponibles en provenance de cette station."
+"Vous pourrez même trouver des contrats disponibles en provenance de cette "
+"station."
 
 #: scripts/scenario_47_scavenger.lua:5293
 msgctxt "Jenny-comms"
@@ -2824,11 +2827,19 @@ msgid ""
 "ship with a Human Navy squawker if you desire based on the service you've "
 "already provided in this area."
 msgstr ""
+"Les grandes lignes indiquent que le contrat commence à la station %s, une "
+"station de la Marine Humaine se trouvant à %i unités d'ici. Cela ressemble à "
+"une livraison longue distance relativement simple pour une autre station de "
+"la Marine Humaine située entre 100 et 200 unités de distance.\n"
+"Il est également mentionné que seuls les vaisseaux de la Marine peuvent "
+"remplir ce contrat. Cela ne devrait pas être un problème puisque la station "
+"%s se fera un plaisir d'équiper votre vaisseau d'un transpondeur si vous le "
+"désirez, étant donné le service que vous avez déjà fourni dans ce domaine."
 
 #: scripts/scenario_47_scavenger.lua:5365
 msgctxt "contract-comms"
 msgid "Accept"
-msgstr ""
+msgstr "Contrat à prendre"
 
 #: scripts/scenario_47_scavenger.lua:5369
 #, lua-format
@@ -2837,6 +2848,9 @@ msgid ""
 "Station %s has fitted you with a Human Navy Identification Friend or Foe "
 "(IFF) and increased your jump drive and sensor ranges to 30 units."
 msgstr ""
+"La station %s vous a équipé d'un transpondeur permettant votre "
+"identification comme vaisseau de la Marine Humaine et a augmenté la portée "
+"de votre téléportation et de vos capteurs à 30 unités."
 
 #: scripts/scenario_47_scavenger.lua:5373
 #, lua-format
@@ -2846,6 +2860,9 @@ msgid ""
 "They also placed waypoint %i in your navigation system for station %s in "
 "sector %s."
 msgstr ""
+"%s\n"
+"Ils ont également placé le marqueur %i sur votre console de navigation pour "
+"la station %s dans le secteur %s."
 
 #: scripts/scenario_47_scavenger.lua:5375
 #, lua-format
@@ -2854,12 +2871,19 @@ msgid ""
 "%s\n"
 "You can find station %s in sector %s."
 msgstr ""
+"%s\n"
+"Vous pouvez trouver la station %s dans le secteur %s."
 
 #: scripts/scenario_47_scavenger.lua:5401
 #, lua-format
 msgctxt "contract-comms"
 msgid "Contract report from station %s:"
-msgstr ""
+msgstr "Rapport de contrat de la station %s :"
+
+#: scripts/scenario_47_scavenger.lua:5403
+msgctxt "contract-comms"
+msgid "Browse Contracts"
+msgstr "Parcourir les contrats"
 
 #: scripts/scenario_47_scavenger.lua:5407
 msgctxt "contract-comms"
@@ -2867,12 +2891,14 @@ msgid ""
 "\n"
 "To Accept: "
 msgstr ""
+"\n"
+"Accepter : "
 
 #: scripts/scenario_47_scavenger.lua:5408
 #, lua-format
 msgctxt "contract-comms"
 msgid "Accept %s contract"
-msgstr ""
+msgstr "Accepter le contrat %s"
 
 #: scripts/scenario_47_scavenger.lua:5413
 msgctxt "contract-comms"
@@ -2880,12 +2906,14 @@ msgid ""
 "\n"
 "To Fulfill: "
 msgstr ""
+"\n"
+"À remplir : "
 
 #: scripts/scenario_47_scavenger.lua:5414
 #, lua-format
 msgctxt "contract-comms"
 msgid "Fulfill %s contract"
-msgstr ""
+msgstr "Remplir le contrat %s"
 
 #: scripts/scenario_47_scavenger.lua:5431
 #: scripts/scenario_47_scavenger.lua:5448
@@ -3167,7 +3195,7 @@ msgid ""
 "Osmium: %.1f\n"
 "The Iridium 10's digit. For example, for 23.5, the 10's digit is 2"
 msgstr ""
-"osmium : %.1f\n"
+"Osmium : %.1f\n"
 "Le chiffre des dizaines de l'Iridium. (Par exemple, pour 23,5, le chiffre "
 "des dizaines est 2)"
 
@@ -3187,9 +3215,9 @@ msgid ""
 "Iridium: %.1f\n"
 "The Olivine 10's digit. For example, for 23.5, the 10's digit is 2"
 msgstr ""
-"osmium : %.1f\n"
+"Osmium : %.1f\n"
 "iridium : %.1f\n"
-"Le chiffre des dizaines de l'Olivine. (Par exemple, pour 23,5, le chiffre "
+"Le chiffre des dizaines de l'olivine. (Par exemple, pour 23,5, le chiffre "
 "des dizaines est 2)"
 
 #: scripts/scenario_47_scavenger.lua:5790
@@ -3209,7 +3237,7 @@ msgid ""
 "Olivine: %.1f\n"
 "The Nickel 10's digit. For example, for 23.5, the 10's digit is 2"
 msgstr ""
-"osmium : %.1f\n"
+"Osmium : %.1f\n"
 "iridium : %.1f\n"
 "olivine : %.1f\n"
 "Le chiffre des dizaines du nickel. (Par exemple, pour 23,5, le chiffre des "
@@ -3248,7 +3276,7 @@ msgid ""
 msgstr ""
 "Oui parfait ! Vos lectures de pourcentages de composition :\n"
 "%s\n"
-"...correspondent exactement à mes pourcentages de composition enregistrés ! "
+"correspondent exactement à mes pourcentages de composition enregistrés ! "
 "Maintenant, j'ai besoin que vous m'emmeniez à moins de 5 unités de "
 "l'astéroïde. Vous voudrez peut-être y placer un marqueur."
 
@@ -3263,8 +3291,8 @@ msgid ""
 msgstr ""
 "Malheureusement, ces pourcentages de composition que vous m'avez fournis :\n"
 "%s\n"
-"...ne correspondent pas à l'astéroïde que je recherche. Mais n'abandonnez "
-"pas ! S'il vous plaît, continuez à chercher et contactez-moi lorsque vous "
+"ne correspondent pas à l'astéroïde que je recherche. Mais n'abandonnez pas ! "
+"S'il vous plaît, continuez à chercher et contactez-moi lorsque vous "
 "trouverez un autre astéroïde potentiel."
 
 #: scripts/scenario_47_scavenger.lua:5872
@@ -4545,8 +4573,8 @@ msgid ""
 "ourselves. Your ship is the only thing that stands between us and "
 "destruction."
 msgstr ""
-"[%s en secteur %s] Approche hostile d'Éxuaris.\n"
-"Aidez-nous s'il-vous-plaît.\n"
+"[%s en secteur %s]\n"
+"Approche hostile d'Éxuaris. Aidez-nous s'il-vous-plaît.\n"
 "Nous ne pouvons pas nous défendre. Votre vaisseau est la seule chose qui se "
 "dresse entre nous et notre destruction."
 
@@ -4634,8 +4662,9 @@ msgid ""
 "Thanks for taking care of that Exuari base and all the Exuari ships it "
 "deployed. Dock with us for a token of our appreciation"
 msgstr ""
-"Merci de prendre soin de cette base Éxuarie et de tous les vaisseaux Éxuaris "
-"qu'elle a déployés. Amarrez-vous à nous en gage de notre reconnaissance."
+"Merci de vous êtres occupé de cette base Éxuarie et de tous les vaisseaux "
+"Éxuaris qu'elle a déployés.\n"
+"Amarrez-vous à nous en gage de notre reconnaissance."
 
 #: scripts/scenario_47_scavenger.lua:7956
 #, lua-format
@@ -4688,17 +4717,22 @@ msgid ""
 "their intent, but we are sure it is not good. Destroy them before they can "
 "destroy us"
 msgstr ""
+"[Quartier régional de la Marine Humaine]\n"
+"Tous les vaisseaux de la Marine Humaine reçoivent l'ordre d'aider à "
+"repousser les vaisseaux Kraylors entrants.\n"
+"Nous ne sommes pas sûrs de leur intention, mais nous sommes sûrs que ce "
+"n'est rien de bon. Détruisez-les avant qu'ils ne puissent nous attaquer."
 
 #: scripts/scenario_47_scavenger.lua:8163
 #, lua-format
 msgctxt "Kraylor-shipLog"
 msgid "This includes you, %s"
-msgstr ""
+msgstr "Cela vous inclut, %s."
 
 #: scripts/scenario_47_scavenger.lua:8164
 msgctxt "KraylorOrders-comms"
 msgid "Repel Kraylor"
-msgstr ""
+msgstr "Repousser les Kraylors."
 
 #: scripts/scenario_47_scavenger.lua:8275
 msgctxt "msgMainscreen"
@@ -4712,6 +4746,9 @@ msgid ""
 "Looks like the Kraylor have developed some kind of planet busting weapon. "
 "They just destroyed %s with it. Keep them away from %s!"
 msgstr ""
+"On dirait que les Kraylors ont développé une sorte d'arme de destruction de "
+"planètes. Ils viennent de détruire %s avec.\n"
+"Tenez-les éloignés de %s à tout prix !"
 
 #: scripts/scenario_47_scavenger.lua:8351
 #, lua-format
@@ -4729,12 +4766,12 @@ msgstr "La planète %s a été détruite."
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "station %s destroyed"
-msgstr "station %s détruite"
+msgstr "station %s détruite."
 
 #: scripts/scenario_47_scavenger.lua:8441
 msgctxt "msgMainscreen"
 msgid "Your contract destination station was destroyed"
-msgstr ""
+msgstr "La destination de votre contract a été détruite."
 
 #: scripts/scenario_47_scavenger.lua:8453
 #: scripts/scenario_47_scavenger.lua:8496
@@ -4756,6 +4793,14 @@ msgid ""
 "confidence of stations %s, %s and %s, I feel we will succeed as the space "
 "entrepeneurs we want to be."
 msgstr ""
+"[Journal du capitaine]\n"
+"Pourquoi les Éxuaris ne peuvent-ils pas nous laisser tranquilles ? Je ne "
+"comprends pas ce qu'il y a chez eux qui leur donne envie de s'en prendre à "
+"tout le monde.\n"
+"Les mises à niveau de notre %s sont vraiment bien. Elles ont déjà "
+"certainement été utiles. Avec la confiance des stations %s, %s et %s, je "
+"pense que nous réussirons en tant qu'entrepreneurs de l'espace que nous "
+"voulons être."
 
 #: scripts/scenario_47_scavenger.lua:8511
 #, lua-format
@@ -4771,22 +4816,22 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:8564
 msgctxt "energy-msgScience"
 msgid "Energy surge from supply drop"
-msgstr ""
+msgstr "Augmentation de l'énergie due à la cargaison de ravitaillement"
 
 #: scripts/scenario_47_scavenger.lua:8568
 msgctxt "energy-msgOperations"
 msgid "Energy surge from supply drop"
-msgstr ""
+msgstr "Augmentation de l'énergie due à la cargaison de ravitaillement"
 
 #: scripts/scenario_47_scavenger.lua:8577
 msgctxt "energy-msgScience"
 msgid "Energy surge from area highlighted in yellow"
-msgstr ""
+msgstr "Augmentation de l'énergie de la zone surlignée en jaune"
 
 #: scripts/scenario_47_scavenger.lua:8581
 msgctxt "energy-msgOperations"
 msgid "Energy surge from area highlighted in yellow"
-msgstr ""
+msgstr "Augmentation de l'énergie de la zone surlignée en jaune"
 
 #: scripts/scenario_47_scavenger.lua:8616
 msgctxt "scienceDescription-jammer"
@@ -4810,6 +4855,9 @@ msgid ""
 "%s. Fortunately, it looks to be in no danger from %s or %s, but the Kraylor "
 "pose a more significant threat"
 msgstr ""
+"Les Kraylors ont saboté la station %s. Elle ne peut plus maintenir son "
+"orbite autour de %s. Heureusement, il semble que %s et %s ne soient en "
+"danger, mais les Kraylors représentent une menace bien plus importante."
 
 # Scenario name
 #~ msgid "Basic Battle"
