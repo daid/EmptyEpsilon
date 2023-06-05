@@ -5268,7 +5268,7 @@ function handleDockedState()
 					addCommsReply(_("ridExuari-comms", "Add missile tubes"), function()
 						missileTubeUpgrade(comms_source)
 						setCommsMessage(_("ridExuari-comms", "Thanks for continuing to shoot down those Exuari. We've added some missile tubes to help you destroy the Exuari station"))
-						plot1_message = string.format(_("ridExuari-comms", "%s has asked for help against Exuari forces and has provided your ship with missile weapons to help you destroy %s"),first_station:getCallSign(),exuari_harassing_station:getCallSign())
+						plot1_message = string.format(_("ridExuari-", "%s has asked for help against Exuari forces and has provided your ship with missile weapons to help you destroy %s"),first_station:getCallSign(),exuari_harassing_station:getCallSign())
 						addCommsReply(_("Back"),commsStation)
 					end)
 				end
@@ -5400,7 +5400,7 @@ function handleDockedState()
 			end
 			local contract_report = string.format(_("contract-comms", "Contract report from station %s:"),comms_target:getCallSign())
 			if contract_available then
-				addCommsReply("Browse Contracts", function()
+				addCommsReply(_("contract-comms", "Browse Contracts"), function()
 					for contract, details in pairs(ctd.contract) do
 						if details.type == "start" then
 							if details.accepted ~= nil and not details.accepted and details.prompt ~= nil then

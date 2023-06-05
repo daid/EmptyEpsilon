@@ -1213,7 +1213,7 @@ msgstr "État des services d'accueil"
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s docking services status:"
-msgstr "État des services d'accueil de la station %s :"
+msgstr "État des services d'accueil de la station %s :\n"
 
 #: scripts/scenario_74_omicron.lua:3627 scripts/scenario_74_omicron.lua:4493
 #, lua-format
@@ -1332,7 +1332,7 @@ msgid ""
 "May overcharge jump drive"
 msgstr ""
 "%s\n"
-"Peut booster la téléportation."
+"- Peut booster la téléportation (rechargement)."
 
 #: scripts/scenario_74_omicron.lua:3669 scripts/scenario_74_omicron.lua:4535
 #, lua-format
@@ -1393,7 +1393,8 @@ msgstr "Booster la téléportation (10 rép)"
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
-msgstr "Votre téléportation a été boostée à %ik."
+msgstr ""
+"Votre recharge (délai) de votre moteur de téléportation a été boosté à %ik."
 
 #: scripts/scenario_74_omicron.lua:3698 scripts/scenario_74_omicron.lua:3731
 #: scripts/scenario_74_omicron.lua:3744 scripts/scenario_74_omicron.lua:3757
