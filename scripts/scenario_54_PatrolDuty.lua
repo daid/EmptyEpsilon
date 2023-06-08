@@ -3,29 +3,23 @@
 ---
 --- Version 8
 -- Type: Mission
--- Variation[Easy]: Easy goals and/or enemies
--- Variation[Hard]: Hard goals and/or enemies
--- Variation[Self-destructive]: Extremely difficult goals and/or enemies
--- Variation[Short]: Fewer mission goals or shorter mission goals, shorter time taken
--- Variation[Timed 15]: End in 15 minutes
--- Variation[Timed 30]: End in 30 minutes
--- Variation[Short Easy]: Shorter time taken, easy goals and/or enemies
--- Variation[Timed 15 Easy]: End in 15 minutes, easy goals and/or enemies
--- Variation[Timed 30 Easy]: End in 30 minutes, easy goals and/or enemies
--- Variation[Short Hard]: Shorter time taken, hard goals and/or enemies
--- Variation[Timed 15 Hard]: End in 15 minutes, hard goals and/or enemies
--- Variation[Timed 30 Hard]: End in 30 minutes, hard goals and/or enemies
--- Variation[Short Self-destructive]: Shorter time taken, extremely difficult goals and/or enemies
--- Variation[Timed 15 Self-destructive]: End in 15 minutes, extremely difficult goals and/or enemies
--- Variation[Timed 30 Self-destructive]: End in 30 minutes, extremely difficult goals and/or enemies
--- Variation[Long]: More mission goals, longer time taken
--- Variation[Long Easy]: Longer time taken, easy goals and/or enemies
--- Variation[Long Hard]: Longer time taken, hard goals and/or enemies
--- Variation[Long Self-destructive]: Longer time taken, extremely difficult goals and/or enemies
--- Variation[Extended]: Longer missions than the long variation, longest time taken
--- Variation[Extended Easy]: Longest time taken, easy goals and/or enemies
--- Variation[Extended Hard]: Longest time taken, hard goals and/or enemies
--- Variation[Extended Self-destructive]: Longest time taken, extremely difficult goals and/or enemies
+-- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
+-- Enemies[Easy]: Fewer or weaker enemies
+-- Enemies[Normal|Default]: Normal number or strength of enemies
+-- Enemies[Hard]: More or stronger enemies
+-- Setting[Murphy]: Configures the perversity of the universe according to Murphy's law
+-- Murphy[Easy]: Random factors are more in your favor
+-- Murphy[Normal|Default]: Random factors are normal
+-- Murphy[Hard]: Random factors are more against you
+-- Setting[Length]: Determines the number of mission goals
+-- Length[Short]: Fewer mission goals
+-- Length[Normal|Default]: Normal number of mission goals
+-- Length[Long]: More mission goals
+-- Length[Extended]: Maximum number of mission goals
+-- Setting[Timed]: Determines whether or not there is a fixed time limit for the game and its duration
+-- Timed[No|Default]: No game time limit
+-- Timed[15]: Fifteen minute time limit
+-- Timed[30]: Thirty minute time limit
 
 require("utils.lua")
 
@@ -169,46 +163,41 @@ function init()
 	addGMFunction(_("buttonGM", "Skip to destroy S.C."),skipToDestroySC)
 end
 function setVariations()
-	-- Difficulty setting: 1 = normal, .5 is easy, 2 is hard, 5 is ridiculously hard
-	difficultyList = {.5, 1, 2, 5}
-	difficultySettingList = {"Easy", "Normal", "Hard", "Self-Destructive"}
-	difficultyIndex = 2		--default to normal difficulty
-	difficulty = difficultyList[difficultyIndex]
-	if string.find(getScenarioVariation(),"Short") or string.find(getScenarioVariation(),"Timed") then
-		patrolGoal = 6			--short and timed missions get a patrol goal of 6
-		missionLength = 1		--short and timed missions are categorized as mission length 1
-	else
-		patrolGoal = 9			--normal, long and extended get a patrol goal of 9
-		if string.find(getScenarioVariation(),"Long") then
-			missionLength = 3	--long missions are categorized as mission length 3
-		elseif string.find(getScenarioVariation(),"Extended") then
-			missionLength = 4	--extended missions are categorized as mission length 4
-		else
-			missionLength = 2	--normal missions are categorized as mission length 2
-		end
-	end
-	if string.find(getScenarioVariation(),"Easy") then
-		difficulty = .5			--easy missions get a .5 difficulty
-	elseif string.find(getScenarioVariation(),"Hard") then
-		difficulty = 2			--hard missions get a difficulty of 2
-	elseif string.find(getScenarioVariation(),"Self-destructive") then
-		difficulty = 5			--self destructive missions get a difficulty of 5
-	else
-		difficulty = 1			--default: normal mission difficulty of 1
-	end
-	playWithTimeLimit = false	--assume no time limit
-	if string.find(getScenarioVariation(),"15") then
-		gameTimeLimit = 15		--set 15 minute time limit
-	elseif string.find(getScenarioVariation(),"30") then
-		gameTimeLimit = 30		--set 30 minute time limit
-	else
-		gameTimeLimit = 0		--default: set no time limit
-	end
+	local enemy_config = {
+		["Easy"] =		{number = .5},
+		["Normal"] =	{number = 1},
+		["Hard"] =		{number = 2},
+	}
+	enemy_power =	enemy_config[getScenarioSetting("Enemies")].number
+	local murphy_config = {
+		["Easy"] =		{number = .5,	rep = 70,	adverse = .999,	lose_coolant = .99999,	gain_coolant = .005},
+		["Normal"] =	{number = 1,	rep = 50,	adverse = .995,	lose_coolant = .99995,	gain_coolant = .001},
+		["Hard"] =		{number = 2,	rep = 30,	adverse = .99,	lose_coolant = .9999,	gain_coolant = .0001},
+	}
+	difficulty =	murphy_config[getScenarioSetting("Murphy")].number
+	local length_config = {
+		["Short"] = 	{number = 1},
+		["Normal"] = 	{number = 2},
+		["Long"] = 		{number = 3},
+		["Extended"] =	{number = 4}
+	}
+	patrolGoal = 9
+	missionLength = length_config[getScenarioSetting("Length")].number
+	local time_config = {
+		["No"] = 0,
+		["15"] = 15,
+		["30"] = 30,
+	}
+	gameTimeLimit = time_config[getScenarioSetting("Timed")]
+	playWithTimeLimit = false
 	if gameTimeLimit > 0 then
 		gameTimeLimit = gameTimeLimit*60	--convert minutes to seconds for time limit countdown
 		ambushTime = gameTimeLimit/2		--set halfway point for ambush in timed scenarios
 		playWithTimeLimit = true			--set time limit boolean
 		plot7 = beforeAmbush				--use time limit plot
+	end
+	if mission_length == 1 or gameTimeLimit > 0 then
+		patrolGoal = 6
 	end
 end
 function setConstants()
@@ -6664,7 +6653,7 @@ function patrolAsimovUtopiaPlanitiaArmstrong(delta)
 		--ox, oy = vectorFromAngle(random(0,360),getLongRangeRadarRange()+1000)
 		--ox, oy = vectorFromAngle(random(0,360),31000)	--workaround
 		ox, oy = vectorFromAngle(random(0,360),p:getLongRangeRadarRange()+1000)
-		harassFleet = spawnEnemies(px+ox,py+oy,difficulty)
+		harassFleet = spawnEnemies(px+ox,py+oy,enemy_power)
 		whatToDo = math.random(1,3)
 		if whatToDo == 1 then
 			for i, enemy in ipairs(harassFleet) do
@@ -8242,7 +8231,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
 	if danger == nil then 
 		danger = 1
 	end
-	enemyStrength = math.max(danger * difficulty * playerPower(),5)
+	enemyStrength = math.max(danger * enemy_power * playerPower(),5)
 	enemyPosition = 0
 	sp = irandom(300,500)			--random spacing of spawned group
 	deployConfig = random(1,100)	--randomly choose between squarish formation and hexagonish formation
@@ -8451,7 +8440,7 @@ function relayStatus(delta)
 							if p.patrolLegAsimov > p.patrolLegArmstrong then
 								mission_status = string.format(_("-tabRelay&Operations", "%s -Armstrong"),mission_status)
 							else
-								mission_status = string.format("-tabRelay&Operations", "%s +Armstrong",mission_status)
+								mission_status = string.format(_("-tabRelay&Operations", "%s +Armstrong"),mission_status)
 							end
 						end
 					end
