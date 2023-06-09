@@ -13,6 +13,7 @@ function CpuShip()
     local e = createEntity()
     e.transform = {rotation=random(0, 360)}
     e.ai_controller = {}
+    e:setFaction("Kraylor")
     return e
 end
 

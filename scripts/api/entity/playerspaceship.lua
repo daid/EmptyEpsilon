@@ -8,6 +8,7 @@ function PlayerSpaceship()
     e.player_control = {}
     e.transform = {rotation=random(0, 360)}
     e.callsign = {callsign="PL-???"}
+    e:setFaction("Human Navy")
     return e
 end
 

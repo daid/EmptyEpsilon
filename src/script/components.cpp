@@ -334,7 +334,10 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<LongRangeRadar>::name("long_range_radar");
     BIND_MEMBER(LongRangeRadar, short_range);
     BIND_MEMBER(LongRangeRadar, long_range);
-    //TODO: Waypoints, radar_view_linked_entity, callbacks
+    BIND_ARRAY(LongRangeRadar, waypoints);
+    BIND_ARRAY_MEMBER(LongRangeRadar, waypoints, x);
+    BIND_ARRAY_MEMBER(LongRangeRadar, waypoints, y);
+    //TODO: radar_view_linked_entity, callbacks
 
     sp::script::ComponentHandler<Hull>::name("hull");
     BIND_MEMBER(Hull, current);
