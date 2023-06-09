@@ -3815,6 +3815,38 @@ msgid ""
 "shields. Trust me, it's always good to have stronger shields"
 msgstr ""
 
+#: scripts/scenario_59_border.lua:9577
+msgctxt "upgrade-comms"
+msgid "Reduce beam cycle time"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9606
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "After accepting your gift, he reduced your Beam cycle time by %i%%"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9608 scripts/scenario_59_border.lua:9803
+#: scripts/scenario_59_border.lua:9861
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s requires %s for the upgrade"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9622
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s reduced your Beam cycle time by 25%% at no cost in trade with the "
+"message, 'Go get those Kraylors.'"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9625 scripts/scenario_59_border.lua:9755
+#: scripts/scenario_59_border.lua:9822 scripts/scenario_59_border.lua:9878
+msgctxt "upgrade-comms"
+msgid "Your ship type does not support a beam weapon upgrade."
+msgstr ""
+
 #: scripts/scenario_59_border.lua:9627 scripts/scenario_59_border.lua:9661
 #: scripts/scenario_59_border.lua:9711 scripts/scenario_59_border.lua:9757
 #: scripts/scenario_59_border.lua:9824 scripts/scenario_59_border.lua:9880
@@ -3879,6 +3911,255 @@ msgstr ""
 #: scripts/scenario_59_border.lua:13470 scripts/scenario_59_border.lua:13494
 #: scripts/scenario_59_border.lua:13516 scripts/scenario_59_border.lua:13540
 msgid "Back"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9633
+msgctxt "upgrade-comms"
+msgid "Increase spin speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9652
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Ship spin speed increased by %i%% after you gave %s to %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9654
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s requires %s for the spin upgrade"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9659
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: I increased the speed your ship spins by 50%%. Normally, I'd require %s, "
+"but seeing as you're going out to take on the Kraylors, we worked it out"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9667
+msgctxt "upgrade-comms"
+msgid "Add missle tube"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9697
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s thanks you for the %s and the luxury and installs a homing missile tube "
+"for you"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9699
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s requires %s and luxury for the missile tube"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9709
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s installs a homing missile tube for you. The %s required was requisitioned "
+"from wartime contingency supplies"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9717
+msgctxt "upgrade-comms"
+msgid "Reduce beam heat"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9741
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Beam heat generation reduced by %i%%"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9743
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s says she needs %s before she can cool your beams"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9752
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: Beam heat generation reduced by 50%%, no %s necessary. Go shoot some "
+"Kraylors for me"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9763
+msgctxt "upgrade-comms"
+msgid "Extend beam range"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9801
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s extended your beam range by %i%% and says thanks for the %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9819
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s increased your beam range by 25%% without the usual %s from your ship"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9830
+msgctxt "upgrade-comms"
+msgid "Increase beam damage"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9859
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s increased your beam damage by %i%% and stores away the %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9875
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s increased your beam damage by 20%%, waiving the usual %s requirement"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9886
+msgctxt "upgrade-comms"
+msgid "Increase missile storage capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9909
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s: You can now store at least %i%% more missiles. I appreciate the %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9911
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s needs %s for the upgrade"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9919
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: You can now store at least 25%% more missiles. I found some spare %s on "
+"the station. Go launch those missiles at those perfidious treaty-breaking "
+"Kraylors"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9922
+msgctxt "upgrade-comms"
+msgid "Your ship type does not support a missile storage capacity upgrade."
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9930
+msgctxt "upgrade-comms"
+msgid "Speed up impulse engines"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9949
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: Your impulse engines now push you up to %i%% faster. Thanks for the %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9951
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "You need to bring %s to %s for the upgrade"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9956
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: Your impulse engines now push you up to 25%% faster. I didn't need %s "
+"after all. Go run circles around those blinking Kraylors"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9964
+msgctxt "upgrade-comms"
+msgid "Strengthen hull"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9984
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s: Thank you for the %s. Your hull is %i%% stronger"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9986
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s: I need %s before I can increase your hull strength"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9992
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: I made your hull 50%% stronger. I scrounged some %s from around here "
+"since you are on the Kraylor offense team"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:10000
+msgctxt "upgrade-comms"
+msgid "Increase battery efficiency"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:10020
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: I appreciate the %s. You have a %i%% greater energy capacity due to "
+"increased battery efficiency"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:10022
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: You need to bring me some %s before I can increase your battery "
+"efficiency"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:10028
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s increased your battery efficiency by 25%% without the need for %s due to "
+"the pressing military demands on your ship"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:10036
+msgctxt "upgrade-comms"
+msgid "Strengthen shields"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:10059
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: I've raised your shield maximum by %i%%, %s. Thanks for bringing the %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:10061
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s: You need to provide %s before I can raise your shield strength"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:10070
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: Congratulations, %s, your shields are 20%% stronger. Don't worry about "
+"the %s. Go kick those Kraylors outta here"
 msgstr ""
 
 #: scripts/scenario_59_border.lua:10125
@@ -5423,6 +5704,87 @@ msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr ""
 
+#: scripts/scenario_59_border.lua:12582
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Direct %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:12583
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "What command should be given to %s?"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:12584
+msgctxt "shipAssist-comms"
+msgid "Report hull and shield status"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:12585
+msgctxt "shipAssist-comms"
+msgid "Fleet status:"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:12588 scripts/scenario_59_border.lua:12612
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+" %s:"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:12589
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Hull: %d%%"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:12592
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Shield: %d%%"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:12594
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Shields: "
+msgstr ""
+
+#: scripts/scenario_59_border.lua:12596
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front: %d%% Rear: %d%%"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:12599
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid " %d:%d%%"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:12617
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"      %s: %d/%d"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:12621
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Missiles: %s"
+msgstr ""
+
 #: scripts/scenario_59_border.lua:12634
 #, lua-format
 msgctxt "shipAssist-comms"
@@ -5784,6 +6146,40 @@ msgctxt "coolant-tabEngineer&Engineer+"
 msgid "Configuring Collectors %i"
 msgstr ""
 
+#: scripts/scenario_59_border.lua:16419
+msgctxt "scienceDB"
+msgid "Jump range"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:16423
+msgctxt "scienceDB"
+msgid "Warp Speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:16423
+#, lua-format
+msgctxt "scienceDB"
+msgid "%.1f u/min"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:16433
+#, lua-format
+msgctxt "scienceDB"
+msgid "Beam weapon %i:%i"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:16437
+#, lua-format
+msgctxt "scienceDB"
+msgid "%.1f Dmg / %.1f sec"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:16452
+#, lua-format
+msgctxt "scienceDB"
+msgid "Storage %s"
+msgstr ""
+
 #: scripts/scenario_59_border.lua:17103
 #, lua-format
 msgctxt "scienceDescription-artifact"
@@ -5850,6 +6246,18 @@ msgstr ""
 #: scripts/scenario_59_border.lua:18301
 msgctxt "mining-buttonScience"
 msgid "Other mining target"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:18425
+#, lua-format
+msgctxt "helpfullWarning-shipLog"
+msgid "[%s in %s] We detect one or more enemies nearby"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:18427
+#, lua-format
+msgctxt "helpfullWarning-shipLog"
+msgid "%s. At least one is of type %s"
 msgstr ""
 
 #: scripts/scenario_59_border.lua:18906

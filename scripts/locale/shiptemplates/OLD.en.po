@@ -32,7 +32,7 @@ msgstr ""
 
 #: scripts/shiptemplates/OLD.lua:176 scripts/shiptemplates/OLD.lua:239
 #: scripts/shiptemplates/OLD.lua:264 scripts/shiptemplates/OLD.lua:275
-#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/OLD.lua:474
+#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/OLD.lua:475
 msgctxt "class"
 msgid "Frigate"
 msgstr ""
@@ -239,28 +239,36 @@ msgctxt "playerShip"
 msgid "Ender"
 msgstr ""
 
-#: scripts/shiptemplates/OLD.lua:459
+#: scripts/shiptemplates/OLD.lua:391
+msgid ""
+"Player version of the battle station. Only half es much shield strength, but "
+"more speed and maneuverability, so it is surprisingly agile - for a capital "
+"ship, of course. Piloting this colossus still feels very different compared "
+"to other ships. It also has two additional missile tubes."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:460
 msgctxt "ship"
 msgid "Weapons platform"
 msgstr ""
 
-#: scripts/shiptemplates/OLD.lua:461
+#: scripts/shiptemplates/OLD.lua:462
 msgid ""
 "The weapons-platform is a stationary platform with beam-weapons. It's "
 "extremely slow to turn, but it's beam weapons do a huge amount of damage."
 msgstr ""
 
-#: scripts/shiptemplates/OLD.lua:474
+#: scripts/shiptemplates/OLD.lua:475
 msgctxt "ship"
 msgid "Blockade Runner"
 msgstr ""
 
-#: scripts/shiptemplates/OLD.lua:474
+#: scripts/shiptemplates/OLD.lua:475
 msgctxt "subclass"
 msgid "High Punch"
 msgstr ""
 
-#: scripts/shiptemplates/OLD.lua:476
+#: scripts/shiptemplates/OLD.lua:477
 msgid ""
 "Blockade runner is a reasonably fast, high shield, slow on weapons ship "
 "designed to break through defense lines and deliver goods."

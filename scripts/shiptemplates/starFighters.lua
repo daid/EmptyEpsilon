@@ -134,6 +134,7 @@ template:setTubeDirection(1, 1):setWeaponTubeExclusiveFor(1, "HVLI")
 template:setTubeDirection(2,-1):setWeaponTubeExclusiveFor(2, "HVLI")
 
 variation = template:copy("ZX-Lindworm"):setLocaleName(_("playerShip", "ZX-Lindworm")):setModel("LindwurmFighterBlue"):setType("playership")
+variation:setDescription(_([[The ZX-Lindworm is a vastly improved version of the WX-Lindworm. Additional beam weapon, more missiles, tougher, faster and more agile.]]))
 variation:setHull(75)
 variation:setShields(40)
 variation:setSpeed(70, 15, 25)

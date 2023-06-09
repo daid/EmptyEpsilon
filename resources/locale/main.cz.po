@@ -304,8 +304,8 @@ msgctxt "connectserver"
 msgid "Connecting..."
 msgstr "Připojuji se..."
 
-#: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:56
-#: src/menus/shipSelectionScreen.cpp:524 src/screens/gm/gameMasterScreen.cpp:93
+#: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:58
+#: src/menus/shipSelectionScreen.cpp:544 src/screens/gm/gameMasterScreen.cpp:93
 #: src/screens/gm/objectCreationView.cpp:142
 #: src/screens/gm/globalMessageEntryView.cpp:19
 #: src/screenComponents/selfDestructButton.cpp:25
@@ -519,7 +519,7 @@ msgstr "IP adresy serveru: "
 
 #: src/menus/serverCreationScreen.cpp:101
 #: src/menus/serverCreationScreen.cpp:136
-#: src/menus/serverCreationScreen.cpp:215 src/menus/shipSelectionScreen.cpp:252
+#: src/menus/serverCreationScreen.cpp:215 src/menus/shipSelectionScreen.cpp:260
 #, fuzzy
 msgid "Close"
 msgstr "Zavřít"
@@ -659,19 +659,19 @@ msgstr "Hlasitost impulz. motoru: {volume}%"
 msgid "Preview Soundtracks"
 msgstr "Náhled zvukového podkladu"
 
-#: src/menus/shipSelectionScreen.cpp:40 src/menus/shipSelectionScreen.cpp:294
+#: src/menus/shipSelectionScreen.cpp:42 src/menus/shipSelectionScreen.cpp:306
 msgid "Enter this ship's control code:"
 msgstr "Zadejte ovládací kód lodi:"
 
-#: src/menus/shipSelectionScreen.cpp:65
+#: src/menus/shipSelectionScreen.cpp:67
 msgid "Ok"
 msgstr "Ok"
 
-#: src/menus/shipSelectionScreen.cpp:72
+#: src/menus/shipSelectionScreen.cpp:74
 msgid "OK"
 msgstr "OK"
 
-#: src/menus/shipSelectionScreen.cpp:104
+#: src/menus/shipSelectionScreen.cpp:106
 msgid ""
 "Control code accepted.\n"
 "Granting access."
@@ -679,157 +679,162 @@ msgstr ""
 "Ovládací kód přijat.\n"
 "Uděluji přístup."
 
-#: src/menus/shipSelectionScreen.cpp:113
+#: src/menus/shipSelectionScreen.cpp:115
 #, fuzzy
 msgid "Incorrect control code. Re-enter code:"
 msgstr "Nesprávný kód. Zadejte znovu kód pána hry:"
 
-#: src/menus/shipSelectionScreen.cpp:151
+#: src/menus/shipSelectionScreen.cpp:159
 msgid "Game master"
 msgstr "Pán hry"
 
-#: src/menus/shipSelectionScreen.cpp:156 src/menus/shipSelectionScreen.cpp:183
+#: src/menus/shipSelectionScreen.cpp:164 src/menus/shipSelectionScreen.cpp:191
 msgid "Enter the GM control code:"
 msgstr "Zadejte kód pána hry:"
 
-#: src/menus/shipSelectionScreen.cpp:178
+#: src/menus/shipSelectionScreen.cpp:186
 msgid "Spectate (view all)"
 msgstr "Pozorovat (zobrazit vše)"
 
-#: src/menus/shipSelectionScreen.cpp:204
+#: src/menus/shipSelectionScreen.cpp:212
 #, fuzzy
 msgid "Cinematic"
 msgstr "Filmový pohled"
 
-#: src/menus/shipSelectionScreen.cpp:220
+#: src/menus/shipSelectionScreen.cpp:228
 msgid "Scan complexity: "
 msgstr "Složitost skenu: "
 
-#: src/menus/shipSelectionScreen.cpp:223
+#: src/menus/shipSelectionScreen.cpp:231
 msgctxt "scanning"
 msgid "None (delay)"
 msgstr "Žádná (zpoždení)"
 
-#: src/menus/shipSelectionScreen.cpp:223
+#: src/menus/shipSelectionScreen.cpp:231
 msgctxt "scanning"
 msgid "Simple"
 msgstr "Jednoduchá"
 
-#: src/menus/shipSelectionScreen.cpp:223
+#: src/menus/shipSelectionScreen.cpp:231
 msgctxt "scanning"
 msgid "Normal"
 msgstr "Normální"
 
-#: src/menus/shipSelectionScreen.cpp:223
+#: src/menus/shipSelectionScreen.cpp:231
 msgctxt "scanning"
 msgid "Advanced"
 msgstr "Pokročilá"
 
-#: src/menus/shipSelectionScreen.cpp:228
+#: src/menus/shipSelectionScreen.cpp:236
 msgid "Hacking difficulty: "
 msgstr "Obtížnost hackování: "
 
-#: src/menus/shipSelectionScreen.cpp:231
+#: src/menus/shipSelectionScreen.cpp:239
 msgctxt "hacking"
 msgid "Simple"
 msgstr "Jednoduchá"
 
-#: src/menus/shipSelectionScreen.cpp:231
+#: src/menus/shipSelectionScreen.cpp:239
 msgctxt "hacking"
 msgid "Normal"
 msgstr "Normální"
 
-#: src/menus/shipSelectionScreen.cpp:231
+#: src/menus/shipSelectionScreen.cpp:239
 msgctxt "hacking"
 msgid "Difficult"
 msgstr "Obtížná"
 
-#: src/menus/shipSelectionScreen.cpp:231
+#: src/menus/shipSelectionScreen.cpp:239
 msgctxt "hacking"
 msgid "Fiendish"
 msgstr "Ďábelská"
 
-#: src/menus/shipSelectionScreen.cpp:236
+#: src/menus/shipSelectionScreen.cpp:244
 msgid "Hacking type: "
 msgstr "Typ hackovani: "
 
-#: src/menus/shipSelectionScreen.cpp:239
+#: src/menus/shipSelectionScreen.cpp:247
 msgctxt "hacking"
 msgid "Mine"
 msgstr "Miny"
 
-#: src/menus/shipSelectionScreen.cpp:239
+#: src/menus/shipSelectionScreen.cpp:247
 msgctxt "hacking"
 msgid "Lights"
 msgstr "Světla"
 
-#: src/menus/shipSelectionScreen.cpp:239
+#: src/menus/shipSelectionScreen.cpp:247
 msgctxt "hacking"
 msgid "All"
 msgstr "Vše"
 
-#: src/menus/shipSelectionScreen.cpp:244
+#: src/menus/shipSelectionScreen.cpp:252
 msgid "Beam/shield frequencies"
 msgstr "Frekvence paprsků/štítů"
 
-#: src/menus/shipSelectionScreen.cpp:248
+#: src/menus/shipSelectionScreen.cpp:256
 msgid "Per-system damage"
 msgstr "Poškození systémů"
 
-#: src/menus/shipSelectionScreen.cpp:259
+#: src/menus/shipSelectionScreen.cpp:267
 msgid "Extra settings"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:274
+#: src/menus/shipSelectionScreen.cpp:280
+#, fuzzy
+msgid "Ship info..."
+msgstr "Okno z lodi"
+
+#: src/menus/shipSelectionScreen.cpp:286
 msgid "Select ship"
 msgstr "Vyberte loď"
 
-#: src/menus/shipSelectionScreen.cpp:275
+#: src/menus/shipSelectionScreen.cpp:287
 msgid "Waiting for server to spawn a ship"
 msgstr "Čekám až server přidá loď"
 
-#: src/menus/shipSelectionScreen.cpp:340
+#: src/menus/shipSelectionScreen.cpp:358
 msgid "Spawn player ship"
 msgstr "Přidat hráčskou loď"
 
-#: src/menus/shipSelectionScreen.cpp:361
+#: src/menus/shipSelectionScreen.cpp:379
 msgid "Scenario selection"
 msgstr "Výběr scénáře"
 
-#: src/menus/shipSelectionScreen.cpp:368
+#: src/menus/shipSelectionScreen.cpp:386
 msgid "Disconnect"
 msgstr "Odpojit"
 
-#: src/menus/shipSelectionScreen.cpp:457
+#: src/menus/shipSelectionScreen.cpp:477
 msgid "6/5 player crew"
 msgstr "posádka: 6/5 hráčů"
 
-#: src/menus/shipSelectionScreen.cpp:460
+#: src/menus/shipSelectionScreen.cpp:480
 msgid "Main screen"
 msgstr "Hlavní obrazovka"
 
-#: src/menus/shipSelectionScreen.cpp:482
+#: src/menus/shipSelectionScreen.cpp:502
 #, fuzzy
 msgid "4/3/1 player crew"
 msgstr "posádka: 4/3 hráči"
 
-#: src/menus/shipSelectionScreen.cpp:490
+#: src/menus/shipSelectionScreen.cpp:510
 msgid "Alternative options"
 msgstr "Alternativní možnosti"
 
-#: src/menus/shipSelectionScreen.cpp:497
+#: src/menus/shipSelectionScreen.cpp:517
 msgid "Main screen controls"
 msgstr "Ovládání hlavní obrazovky"
 
-#: src/menus/shipSelectionScreen.cpp:505
+#: src/menus/shipSelectionScreen.cpp:525
 msgid "Ship window"
 msgstr "Okno z lodi"
 
-#: src/menus/shipSelectionScreen.cpp:518
+#: src/menus/shipSelectionScreen.cpp:538
 msgid "Top-down 3D view"
 msgstr "3D pohled shora"
 
-#: src/menus/shipSelectionScreen.cpp:528
+#: src/menus/shipSelectionScreen.cpp:548
 #, fuzzy
 msgctxt "button"
 msgid "Ready"

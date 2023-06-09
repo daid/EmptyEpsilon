@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: scripts/science_db.lua:8
 msgid "Natural"
@@ -25,13 +25,18 @@ msgid ""
 "these phenomena, knowing their properties can offer an advantage in "
 "conflicts near them."
 msgstr ""
+"Diese Datenbank deckt natürlich vorkommende Phänomene ab, auf die "
+"Raumschiffbesatzungen treffen könnten.\n"
+"\n"
+"Captains sind angehalten, unnötige Interaktionen mit diesen Phänomenen zu "
+"vermeiden, aber das Wissen um ihre Natur kann bei Missionen in ihrer Nähe "
+"von Vorteil sein."
 
 #: scripts/science_db.lua:13
 msgid "Asteroid"
 msgstr "Asteroid"
 
 #: scripts/science_db.lua:14
-#, fuzzy
 msgid ""
 "An asteroid is a minor planet, usually smaller than a few kilometers. Larger "
 "variants are sometimes refered to as planetoids."
@@ -75,7 +80,6 @@ msgid "Nebula"
 msgstr "Nebel"
 
 #: scripts/science_db.lua:22
-#, fuzzy
 msgid ""
 "Nebulae are the birthing places of new stars. These gas fields, usually "
 "created by the death of an old star, slowly form new stars due to the "
@@ -86,15 +90,15 @@ msgid ""
 "advised to rely on probes and visual observations."
 msgstr ""
 "Nebel sind die Geburtsstätten neuer Sterne. Diese Gasfelder entstehen meist "
-"beim Tod eines alten Sterns, und langsam neue Sterne indem sie sich aufgrund "
-"der Schwerkraft über lange Zeiträume zusammenziehen. Den meisten Scannern "
-"ist es nicht möglich, diese Nebel zu durchdringen. Wissenschaftsoffiziere "
-"sind daher dazu angehalten, sich auf Sonden und visuelle Beobachtungen zu "
-"verlassen."
+"beim Tod eines alten Sterns und formen langsam neue Sterne, indem sie sich "
+"aufgrund der Schwerkraft über lange Zeiträume zusammenziehen. Den meisten "
+"Scannern ist es nicht möglich, diese Nebel zu durchdringen. "
+"Wissenschaftsoffiziere sind daher dazu angehalten, sich auf Sonden und "
+"visuelle Beobachtungen zu verlassen."
 
 #: scripts/science_db.lua:26
 msgid "Planet"
-msgstr ""
+msgstr "Planet"
 
 #: scripts/science_db.lua:27
 msgid ""
@@ -105,6 +109,13 @@ msgid ""
 "Planets often have gaseous atmospheres, and some are orbited by one or more "
 "large planetoids typically called moons."
 msgstr ""
+"Ein Planet großer, dichter, nahezu kugelförmiger astronomischer Körper, der "
+"aus verschiedenen Formen von Materie besteht. Die meisten Planeten sind "
+"entweder terrestrisch wie die Erde, oder Riesen wie der Gasriese Jupiter, "
+"oder der Eisriese Neptun.\n"
+"\n"
+"Planeten haben oft eine Gasatmosphäre, und manche werden von einem oder "
+"mehreren großen Planetoiden umkreist, die üblicherweise Monde genannt werden."
 
 #: scripts/science_db.lua:31
 msgid "Wormhole"
@@ -141,7 +152,7 @@ msgstr ""
 
 #: scripts/science_db.lua:37
 msgid "Technologies"
-msgstr ""
+msgstr "Technologien"
 
 #: scripts/science_db.lua:38
 msgid ""
@@ -152,18 +163,25 @@ msgid ""
 "manuals and training materials for details on maintaining and operating your "
 "craft."
 msgstr ""
+"Diese Datenbank deckt Schiffssysteme und technologisch erzeugte Phänomene "
+"ab, auf die Raumschiffbesatzungen in dicht besiedelten Regionen des "
+"Weltraums treffen können.\n"
+"\n"
+"Diese Referenz ist nur als Leitfaden gedacht. Einzelheiten zur Wartung und "
+"zum Betrieb Ihres Schiffes finden Sie in den technischen Handbüchern und "
+"Übungsmaterialien Ihres Schiffes."
 
 #: scripts/science_db.lua:42
 msgid "Beam/shield frequencies"
-msgstr ""
+msgstr "Laser-/Schildfrequenzen"
 
 #: scripts/science_db.lua:43
 msgid "Unit"
-msgstr ""
+msgstr "Einheit"
 
 #: scripts/science_db.lua:43
 msgid "Terahertz"
-msgstr ""
+msgstr "Terahertz"
 
 #: scripts/science_db.lua:44
 msgid ""
@@ -179,19 +197,31 @@ msgid ""
 "them with a detailed analysis of beam and shield frequencies and suggests "
 "optimal values for each."
 msgstr ""
+"Schiffe mit Schild- und Lasersystemen können oft die Frequenz davon "
+"anpassen. Durch die Manipulation dieser Frequenzen können versierte "
+"Schiffsbesatzungen die Effizienz ihrer Laser maximieren und die der "
+"feindlichen Laser reduzieren.\n"
+"Eine Laserfrequenz, die mit der Schildfrequenz eines Ziels in Resonanz ist, "
+"kann erheblich mehr Schaden anrichten, und Strahlenfrequenzen können schnell "
+"moduliert werden. Schilde hingegen brauchen Zeit, um sich neu zu "
+"kalibrieren.\n"
+"\n"
+"Wenn wenn ein Ziel vollständig gescannt wurde, zeigt der Schiffscomputer "
+"eine detaillierte Analyse der Laser- und Schildfrequenzen an und schlägt "
+"jeweils optimale Werte vor."
 
 #: scripts/science_db.lua:50
 msgid "Hacking measure"
-msgstr ""
+msgstr "Hacking"
 
 #: scripts/science_db.lua:51 scripts/science_db.lua:72
 #: scripts/science_db.lua:85 scripts/science_db.lua:93
 msgid "Interaction"
-msgstr ""
+msgstr "Interaktion"
 
 #: scripts/science_db.lua:51
 msgid "Long-range transmission"
-msgstr ""
+msgstr "Langstreckenübertragung"
 
 #: scripts/science_db.lua:52
 msgid ""
@@ -207,42 +237,50 @@ msgid ""
 "have abstracted the required inputs into common puzzles that even a Relay "
 "crew member can successfully complete."
 msgstr ""
+"Dank der Teams für verdeckte Operationen haben wir genug Informationen über "
+"die Computersysteme unserer Feinde gesammelt, um unsere Langstrecken-"
+"Kommunikationssysteme auch zum Hacken feindlicher Systeme nutzen zu können.\n"
+"\n"
+"Zwar ist es uns gelungen Algorithmen zu entwickeln, die aus der Ferne "
+"eingesetzt werden können, um bestimmte Schiffssysteme anzugreifen und zu "
+"beeinträchtigen, doch erfordern diese Angriffe immer noch menschliches "
+"Eingreifen, um vollständig zu funktionieren."
 
 #: scripts/science_db.lua:58
 msgid "Radar signature"
-msgstr ""
+msgstr "Radarsignatur"
 
 #: scripts/science_db.lua:59
 msgid "Signature"
-msgstr ""
+msgstr "Signatur"
 
 #: scripts/science_db.lua:59
 msgid "Related color bands"
-msgstr ""
+msgstr "Entsprechende Farblinien"
 
 #: scripts/science_db.lua:60
 msgid "Biological"
-msgstr ""
+msgstr "Biologisch"
 
 #: scripts/science_db.lua:60
 msgid "Red, green"
-msgstr ""
+msgstr "Rot, Grün"
 
 #: scripts/science_db.lua:61
 msgid "Electrical"
-msgstr ""
+msgstr "Elektromagnetisch"
 
 #: scripts/science_db.lua:61
 msgid "Red, blue"
-msgstr ""
+msgstr "Rot, blau"
 
 #: scripts/science_db.lua:62
 msgid "Gravitational"
-msgstr ""
+msgstr "Gravitativ"
 
 #: scripts/science_db.lua:62
 msgid "Green, blue"
-msgstr ""
+msgstr "Grün, Blau"
 
 #: scripts/science_db.lua:63
 msgid ""
@@ -261,27 +299,42 @@ msgid ""
 "gravitational (green, blue) output. After completing a jump a ship performs "
 "a massive power transfer that raw sensor data reads as an electrical spike."
 msgstr ""
+"Der äußere Ring der Wissenschaft-Radarschirme enthält drei farbige Bänder, "
+"die die Rohdaten der Langstreckensensoren darstellen. Schiffe und "
+"Weltraumphänomene emittieren Strahlung oder weisen Eigenschaften auf, die "
+"Ihr Sensorensystem in Symbole auf Ihrem Radar übersetzt, aber diese rohen "
+"Ringe können einem gut geschulten Auge Informationen zu Objekten liefern, "
+"die sich außerhalb des Radarschirms befinden.\n"
+"\n"
+"Die von Schiffssystemen erzeugte Wärme in den Rohdaten der Wärmesensoren auf "
+"ähnliche Weise registriert wie biologische Quellen (rot&grün). Wenn die "
+"Systeme eines Schiffes unterversorgt oder bei voller Leistung sind, ändern "
+"sich die elektrischen Messwerte(rot&blau) entsprechend.\n"
+"\n"
+"Ein Schiff im Warpflug, oder in Vorbereitung auf einen Sprung, erhöht seine "
+"Gravitationsverzerrung (grün, blau) exponentiell. Nach einem Sprung führt "
+"das Schiff einen massiven Energietransfer durch, der von den Rohdaten der "
+"Sensoren als elektromagnetische Spitze angezeigt wird."
 
 #: scripts/science_db.lua:69
 msgid "Scan probe"
-msgstr ""
+msgstr "Sonde"
 
 #: scripts/science_db.lua:70
-#, fuzzy
 msgid "Radar range"
-msgstr "Reichweite"
+msgstr "Radar-Reichweite"
 
 #: scripts/science_db.lua:71
 msgid "Typical lifetime"
-msgstr ""
+msgstr "Typische Lebensdauer"
 
 #: scripts/science_db.lua:71
 msgid "10 minutes"
-msgstr ""
+msgstr "10 Minuten"
 
 #: scripts/science_db.lua:72
 msgid "Systems link"
-msgstr ""
+msgstr "Verbindung mit Wissenschaft"
 
 #: scripts/science_db.lua:75
 msgid ""
@@ -303,23 +356,40 @@ msgid ""
 "ship carries a limited number of them that only some stations can or will "
 "replenish."
 msgstr ""
+"Ganz gleich, ob Ihre Mission wissenschaftliche Untersuchungen, die Erkundung "
+"des Weltraums oder militärische Operationen umfasst, denken Sie daran, die "
+"Sonden ihres Schiffes ausgiebig zu nutzen.\n"
+"\n"
+"Über die Kommunikationsstation kann eine Sonde zu beliebigen Koordinaten in "
+"seiner Sektorkarte gesendet werden, die dann mit hoher Geschwindigkeit "
+"direkt die Zielkoordinaten ansteuert. Nach der Ankunft kann dann die Sonde "
+"mit dem Wissenschaftsstation verbunden werden, wo dann vom Langstreckenradar "
+"auf das Kurzstreckenradar der Sonde umgeschaltet werden kann.\n"
+"\n"
+"Auf diese Weise kann die Wissenschaftsstation Objekte scannen, die weit "
+"außerhalb der Reichweite des Langstreckenradars Ihres Schiffes liegen, "
+"einschließlich Regionen, die durch Phänomene wie Nebel verdeckt sind, die "
+"Ihre Sensoren beinträchtigen.\n"
+"\n"
+"Sonden haben einen begrenzten Energievorrat der innerhalb weniger Minuten "
+"aufgebraucht ist. Ihr Schiff hat nur eine begrenzte Anzahl von Sonden an "
+"Bord, die nur von einigen Raumstationen wieder aufgestockt werden können."
 
 #: scripts/science_db.lua:83
 msgid "Supply drop"
-msgstr ""
+msgstr "Voratscontainer"
 
 #: scripts/science_db.lua:84
 msgid "Contents"
-msgstr ""
+msgstr "Inhalt"
 
 #: scripts/science_db.lua:84
-#, fuzzy
 msgid "Weapons, energy"
-msgstr "Waffen"
+msgstr "Waffen, Energie"
 
 #: scripts/science_db.lua:85
 msgid "Close-range retrieval"
-msgstr ""
+msgstr "Bergung aus nächster Nähe"
 
 #: scripts/science_db.lua:88
 msgid ""
@@ -332,14 +402,23 @@ msgid ""
 "acquisition and integration systems. Supply drops are cryptographically "
 "keyed to respond only to ships of the same faction, so theft isn't possible."
 msgstr ""
+"Um Nachschubaktionen zu beschleunigen, haben unsere Ingenieure "
+"standardisierte Container für Waffen und Energie entwickelt, die automatisch "
+"und schnell in die Systeme Ihres Schiffes integriert werden können.\n"
+"\n"
+"Ihr Schiff muss nur in Kontaktreichweite mit einem dieser Container kommen, "
+"um automatisch die Bergungs- und Integrationssysteme Ihres Schiffes zu "
+"aktivieren. Die Container sind kryptografisch so verschlüsselt, dass sie nur "
+"in Schiffe der gleichen Fraktion integriert werden können, so dass ein "
+"Diebstahl nicht möglich ist."
 
 #: scripts/science_db.lua:92
 msgid "Warp jammer"
-msgstr ""
+msgstr "Störsender"
 
 #: scripts/science_db.lua:93
 msgid "Short-range encounter"
-msgstr ""
+msgstr "Störfeld"
 
 #: scripts/science_db.lua:96
 msgid ""
@@ -357,13 +436,26 @@ msgid ""
 "Ship captains who value the option of retreat are advised to either give "
 "warp jammers a wide berth or prioritize their destruction."
 msgstr ""
+"Warp- und Sprungtechnologien beruhen auf der Manipulation von "
+"Gravitationskräften, um Langstreckenreisen zu ermöglichen. Diese "
+"Manipulationen können jedoch durch Geräte, die elektromagnetisch simulierte "
+"Gravitationsquellen erzeugen, gestört oder verhindert werden. Solche Geräte "
+"werden umgangssprachlich als Gravitationsfeld-Störsender oder einfach "
+"Störsender bezeichnet, auch wenn sie ebenfalls Sprünge verhindern können.\n"
+"\n"
+"Ein Warpschiff, das in den Radius eines Störsenders gerät, wird gestoppt und "
+"auf Impulsgeschwindigkeit verlangsamt. Ein sprungfähiges Schiff kann seinen "
+"Sprungantrieb nicht aktivieren, wenn es sich im Radius eines Störsenders "
+"befindet.\n"
+"\n"
+"Captains, die Wert auf die Möglichkeit des Rückzugs legen, sollten entweder "
+"einen großen Bogen um Störsender machen oder sie möglichst schnell zerstören."
 
 #: scripts/science_db.lua:103
 msgid "Weapons"
 msgstr "Waffen"
 
 #: scripts/science_db.lua:104
-#, fuzzy
 msgid ""
 "This database covers only the basic versions of missile weapons used "
 "throughout the galaxy.\n"
@@ -399,7 +491,7 @@ msgstr "Zielsuchrakete"
 #: scripts/science_db.lua:111 scripts/science_db.lua:116
 #: scripts/science_db.lua:135 scripts/science_db.lua:142
 msgid "Range"
-msgstr "Reichweite"
+msgstr "Radar-Reichweite"
 
 #: scripts/science_db.lua:112 scripts/science_db.lua:143
 msgid "Damage"

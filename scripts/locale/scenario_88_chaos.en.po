@@ -1478,6 +1478,40 @@ msgctxt "msgGM"
 msgid "Empty Template pool: fix excludes or other criteria"
 msgstr ""
 
+#: scripts/scenario_88_chaos.lua:4745
+msgctxt "scienceDB"
+msgid "Jump range"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4749
+msgctxt "scienceDB"
+msgid "Warp Speed"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4749
+#, lua-format
+msgctxt "scienceDB"
+msgid "%.1f u/min"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4759
+#, lua-format
+msgctxt "scienceDB"
+msgid "Beam weapon %i:%i"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4763
+#, lua-format
+msgctxt "scienceDB"
+msgid "%.1f Dmg / %.1f sec"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:4778
+#, lua-format
+msgctxt "scienceDB"
+msgid "Storage %s"
+msgstr ""
+
 #: scripts/scenario_88_chaos.lua:5888
 msgctxt "msgGM"
 msgid "Player creation failed"
@@ -2711,6 +2745,49 @@ msgctxt "shipAssist-comms"
 msgid "Fleet %i status:"
 msgstr ""
 
+#: scripts/scenario_88_chaos.lua:8384 scripts/scenario_88_chaos.lua:8410
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+" %s:"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:8385
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Hull: %d%%"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:8388
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Shield: %d%%"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:8390
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Shields: "
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:8392
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front: %d%% Rear: %d%%"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:8395
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid " %d:%d%%"
+msgstr ""
+
 #: scripts/scenario_88_chaos.lua:8405
 msgctxt "shipAssist-comms"
 msgid "Report missile status"
@@ -2720,6 +2797,22 @@ msgstr ""
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Fleet %i missile status:"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:8415
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"      %s: %d/%d"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:8419
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Missiles: %s"
 msgstr ""
 
 #: scripts/scenario_88_chaos.lua:8435
@@ -2892,6 +2985,13 @@ msgstr ""
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i"
+msgstr ""
+
+#: scripts/scenario_88_chaos.lua:9062
+#, lua-format
+msgctxt "helpfullWarning-shipLog"
+msgid ""
+"[%s in %s] We detect one or more enemies nearby. At least one is of type %s"
 msgstr ""
 
 #: scripts/scenario_88_chaos.lua:9184

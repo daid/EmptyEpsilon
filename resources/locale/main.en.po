@@ -289,8 +289,8 @@ msgctxt "connectserver"
 msgid "Connecting..."
 msgstr ""
 
-#: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:56
-#: src/menus/shipSelectionScreen.cpp:524 src/screens/gm/gameMasterScreen.cpp:93
+#: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:58
+#: src/menus/shipSelectionScreen.cpp:544 src/screens/gm/gameMasterScreen.cpp:93
 #: src/screens/gm/objectCreationView.cpp:142
 #: src/screens/gm/globalMessageEntryView.cpp:19
 #: src/screenComponents/selfDestructButton.cpp:25
@@ -489,7 +489,7 @@ msgstr ""
 
 #: src/menus/serverCreationScreen.cpp:101
 #: src/menus/serverCreationScreen.cpp:136
-#: src/menus/serverCreationScreen.cpp:215 src/menus/shipSelectionScreen.cpp:252
+#: src/menus/serverCreationScreen.cpp:215 src/menus/shipSelectionScreen.cpp:260
 msgid "Close"
 msgstr ""
 
@@ -625,172 +625,176 @@ msgstr ""
 msgid "Preview Soundtracks"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:40 src/menus/shipSelectionScreen.cpp:294
+#: src/menus/shipSelectionScreen.cpp:42 src/menus/shipSelectionScreen.cpp:306
 msgid "Enter this ship's control code:"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:65
+#: src/menus/shipSelectionScreen.cpp:67
 msgid "Ok"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:72
+#: src/menus/shipSelectionScreen.cpp:74
 msgid "OK"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:104
+#: src/menus/shipSelectionScreen.cpp:106
 msgid ""
 "Control code accepted.\n"
 "Granting access."
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:113
+#: src/menus/shipSelectionScreen.cpp:115
 msgid "Incorrect control code. Re-enter code:"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:151
+#: src/menus/shipSelectionScreen.cpp:159
 msgid "Game master"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:156 src/menus/shipSelectionScreen.cpp:183
+#: src/menus/shipSelectionScreen.cpp:164 src/menus/shipSelectionScreen.cpp:191
 msgid "Enter the GM control code:"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:178
+#: src/menus/shipSelectionScreen.cpp:186
 msgid "Spectate (view all)"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:204
+#: src/menus/shipSelectionScreen.cpp:212
 msgid "Cinematic"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:220
+#: src/menus/shipSelectionScreen.cpp:228
 msgid "Scan complexity: "
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:223
+#: src/menus/shipSelectionScreen.cpp:231
 msgctxt "scanning"
 msgid "None (delay)"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:223
+#: src/menus/shipSelectionScreen.cpp:231
 msgctxt "scanning"
 msgid "Simple"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:223
+#: src/menus/shipSelectionScreen.cpp:231
 msgctxt "scanning"
 msgid "Normal"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:223
+#: src/menus/shipSelectionScreen.cpp:231
 msgctxt "scanning"
 msgid "Advanced"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:228
+#: src/menus/shipSelectionScreen.cpp:236
 msgid "Hacking difficulty: "
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:231
+#: src/menus/shipSelectionScreen.cpp:239
 msgctxt "hacking"
 msgid "Simple"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:231
+#: src/menus/shipSelectionScreen.cpp:239
 msgctxt "hacking"
 msgid "Normal"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:231
+#: src/menus/shipSelectionScreen.cpp:239
 msgctxt "hacking"
 msgid "Difficult"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:231
+#: src/menus/shipSelectionScreen.cpp:239
 msgctxt "hacking"
 msgid "Fiendish"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:236
+#: src/menus/shipSelectionScreen.cpp:244
 msgid "Hacking type: "
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:239
+#: src/menus/shipSelectionScreen.cpp:247
 msgctxt "hacking"
 msgid "Mine"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:239
+#: src/menus/shipSelectionScreen.cpp:247
 msgctxt "hacking"
 msgid "Lights"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:239
+#: src/menus/shipSelectionScreen.cpp:247
 msgctxt "hacking"
 msgid "All"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:244
+#: src/menus/shipSelectionScreen.cpp:252
 msgid "Beam/shield frequencies"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:248
+#: src/menus/shipSelectionScreen.cpp:256
 msgid "Per-system damage"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:259
+#: src/menus/shipSelectionScreen.cpp:267
 msgid "Extra settings"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:274
+#: src/menus/shipSelectionScreen.cpp:280
+msgid "Ship info..."
+msgstr ""
+
+#: src/menus/shipSelectionScreen.cpp:286
 msgid "Select ship"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:275
+#: src/menus/shipSelectionScreen.cpp:287
 msgid "Waiting for server to spawn a ship"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:340
+#: src/menus/shipSelectionScreen.cpp:358
 msgid "Spawn player ship"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:361
+#: src/menus/shipSelectionScreen.cpp:379
 msgid "Scenario selection"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:368
+#: src/menus/shipSelectionScreen.cpp:386
 msgid "Disconnect"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:457
+#: src/menus/shipSelectionScreen.cpp:477
 msgid "6/5 player crew"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:460
+#: src/menus/shipSelectionScreen.cpp:480
 msgid "Main screen"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:482
+#: src/menus/shipSelectionScreen.cpp:502
 msgid "4/3/1 player crew"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:490
+#: src/menus/shipSelectionScreen.cpp:510
 msgid "Alternative options"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:497
+#: src/menus/shipSelectionScreen.cpp:517
 msgid "Main screen controls"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:505
+#: src/menus/shipSelectionScreen.cpp:525
 msgid "Ship window"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:518
+#: src/menus/shipSelectionScreen.cpp:538
 msgid "Top-down 3D view"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:528
+#: src/menus/shipSelectionScreen.cpp:548
 msgctxt "button"
 msgid "Ready"
 msgstr ""
