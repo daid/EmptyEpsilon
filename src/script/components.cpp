@@ -274,10 +274,14 @@ void initComponentScriptBindings()
     BIND_MEMBER_GS(sp::Physics, "type", getType, setType);
     sp::script::ComponentHandler<sp::Physics>::members["size"] = {
         [](lua_State* L, const sp::Physics& p) {
-            //TODO: Handle rectangular size
+            if (p.getShape() == sp::Physics::Shape::Rectangle)
+                return sp::script::Convert<glm::vec2>::toLua(L, p.getSize());
             return sp::script::Convert<float>::toLua(L, p.getSize().x);
         }, [](lua_State* L, sp::Physics& p) {
-            p.setCircle(p.getType(), sp::script::Convert<float>::fromLua(L, -1));
+            if (lua_istable(L, -1))
+                p.setRectangle(p.getType(), sp::script::Convert<glm::vec2>::fromLua(L, -1));
+            else
+                p.setCircle(p.getType(), sp::script::Convert<float>::fromLua(L, -1));
         }
     };
     BIND_MEMBER_GS(sp::Physics, "velocity", getVelocity, setVelocity);
@@ -385,7 +389,11 @@ void initComponentScriptBindings()
     BIND_MEMBER(DockingPort, auto_reload_missiles);
 
     sp::script::ComponentHandler<DockingBay>::name("docking_bay");
-    BIND_MEMBER(DockingBay, flags);
+    BIND_MEMBER_FLAG(DockingBay, flags, "share_energy", DockingBay::ShareEnergy);
+    BIND_MEMBER_FLAG(DockingBay, flags, "repair", DockingBay::Repair);
+    BIND_MEMBER_FLAG(DockingBay, flags, "charge_shields", DockingBay::ChargeShield);
+    BIND_MEMBER_FLAG(DockingBay, flags, "restock_probes", DockingBay::RestockProbes);
+    BIND_MEMBER_FLAG(DockingBay, flags, "restock_missiles", DockingBay::RestockMissiles);
 
     sp::script::ComponentHandler<BeamWeaponSys>::name("beam_weapons");
     BIND_SHIP_SYSTEM(BeamWeaponSys);

@@ -15,6 +15,15 @@ __player_ship_templates = {}
 --- -- Set the Phobos T3's appearance to the ModelData named "AtlasHeavyFighterYellow"
 --- template:setModel("AtlasHeavyFighterYellow")
 ShipTemplate = createClass()
+function ShipTemplate:__init__()
+    self.radar_trace = {
+        icon="radar/arrow.png",
+        radius=300.0*0.8,
+        max_size=1024,
+        color_by_faction=true,
+    }
+end
+
 --- Sets this ShipTemplate's unique reference name.
 --- Use this value for referencing this ShipTemplate in scripts.
 --- If this value begins with "Player ", including the trailing space, EmptyEpsilon uses only what follows as the name.
@@ -43,8 +52,8 @@ end
 --- template:setClass(_("class","Frigate"),_("subclass","Cruiser"))
 function ShipTemplate:setClass(class, subclass)
     if self.docking_port == nil then self.docking_port = {} end
-    self.docking_port.class = class
-    self.docking_port.subclass = subclass
+    self.docking_port.dock_class = class
+    self.docking_port.dock_subclass = subclass
     return self
 end
 --- Sets the description shown in the science database for ShipTemplateBasedObjects created from this ShipTemplate.
@@ -65,6 +74,9 @@ function ShipTemplate:setType(template_type)
     if template_type == "station" then
         if self.docking_bay == nil then self.docking_bay = {} end
         self.docking_bay.repair = true
+        if self.radar_trace.icon == "radar/arrow.png" then
+            self.radar_trace.icon = "radar/blip.png"
+        end
     end
     return self
 end
@@ -85,7 +97,7 @@ end
 --- - "missilevolley" prefers lining up missile attacks from long range
 --- Example: template:setAI("fighter") -- default to the "fighter" combat AI state
 function ShipTemplate:setDefaultAI(default_ai)
-    self.ai_controller = {type=default_ai}
+    self.ai_controller = {new_name=default_ai}
     return self
 end
 --- Sets the 3D appearance, by ModelData name, of ShipTemplateBasedObjects created from this ShipTemplate.
@@ -96,6 +108,13 @@ function ShipTemplate:setModel(model_data_name)
     for k, v in pairs(__model_data[model_data_name]) do
         if string.sub(1, 2) ~= "__" then
             self[k] = table.deepcopy(v)
+        end
+    end
+    if self.physics and self.radar_trace then
+        if type(self.physics.size) == "table" then
+            self.radar_trace.radius = self.physics.size[1] * 0.8
+        else
+            self.radar_trace.radius = self.physics.size * 0.8
         end
     end
     return self

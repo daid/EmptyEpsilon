@@ -6,6 +6,7 @@ local Entity = getLuaEntityFunctionTable()
 --- Example: obj:setPosition(x,y)
 function Entity:setPosition(x, y)
     if self.transform then self.transform.position = {x, y} end
+    return self
 end
 --- Returns this object's position on the map.
 --- Example: x,y = obj:getPosition()
@@ -19,6 +20,7 @@ end
 --- Example: obj:setRotation(270)
 function Entity:setRotation(rotation)
     if self.transform then self.transform.rotation = rotation end
+    return self
 end
 --- Returns this SpaceObject's absolute rotation, in degrees.
 --- Example: local rotation = obj:getRotation()
@@ -32,6 +34,7 @@ end
 --- Example: obj:setHeading(0)
 function Entity:setHeading(heading)
     if self.transform then self.transform.rotation = heading - 90 end
+    return self
 end
 --- Returns this SpaceObject's heading, in degrees ranging from 0 to 360.
 --- Example: heading = obj:getHeading(0)
@@ -56,10 +59,12 @@ end
 function Entity:setFaction(faction_name)
     local faction = getFactionInfo(faction_name)
     if faction == nil then
+        print("Failed to find faction: " .. faction_name)
         self.faction = nil
     else
         self.faction = {entity=faction}
     end
+    return self
 end
 --- Returns the name of the faction to which this SpaceObject belongs.
 --- Example: obj:getFaction()
@@ -86,6 +91,7 @@ function Entity:setFactionId(faction_id)
     else
         self.faction = {entity=faction_id}
     end
+    return self
 end
 --- Returns the faction list index for the faction to which this SpaceObject belongs.
 --- Use with SpaceObject:setFactionId() to ensure that two objects belong to the same faction.
@@ -145,6 +151,7 @@ end
 --- obj:setCommsScript("comms_custom_script.lua") -- sets scripts/comms_custom_script.lua as this object's comms script
 --- obj:setCommsScript("") -- disables comms with this object
 function Entity:setCommsScript(script_name)
+    return self
 end
 --- Defines a function to call when this SpaceObject is hailed, in lieu of any current or default comms script.
 --- For a detailed example, see scripts/scenario_53_escape.lua.
@@ -156,12 +163,14 @@ end
 --- obj:setCommsFunction(function(comms_source, comms_target) ... end)
 --- Example: obj:setCommsFunction(commsStation) -- where commsStation is a function that calls setCommsMessage() at least once, and uses addCommsReply() to let players respond
 function Entity:setCommsFunction(callback)
+    return self
 end
 --- Sets this SpaceObject's callsign.
 --- EmptyEpsilon generates random callsigns for objects upon creation, and this function overrides that default.
 --- Example: obj:setCallSign("Epsilon")
 function Entity:setCallSign(callsign)
     self.callsign = {callsign=callsign}
+    return self
 end
 --- Hails a PlayerSpaceship from this SpaceObject.
 --- The PlayerSpaceship's comms position is notified and can accept or refuse the hail.

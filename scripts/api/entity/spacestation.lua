@@ -7,5 +7,7 @@
 --- - When destroyed by damage, it awards or deducts a number of reputation points relative to its total shield strength and segments.
 --- - Any non-hostile SpaceShip can dock with it by default.
 function SpaceStation()
-    --TODO
+    local e = createEntity()
+    e.transform = {rotation=random(0, 360)}
+    return e
 end

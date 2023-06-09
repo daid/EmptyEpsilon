@@ -70,6 +70,14 @@ static int luaCreateObjectFunc(lua_State* L)
     lua_newtable(L);
     lua_pushvalue(L, lua_upvalueindex(1));
     lua_setmetatable(L, -2);
+
+    lua_getfield(L, -1, "__init__");
+    if (lua_isfunction(L, -1)) {
+        lua_pushvalue(L, -2);
+        lua_call(L, 1, 0);
+    } else {
+        lua_pop(L, 1);
+    }
     return 1;
 }
 
@@ -134,6 +142,14 @@ static int luaGetEntityFunctionTable(lua_State* L)
     return 1;
 }
 
+static void luaVictory(string faction)
+{
+    gameGlobalInfo->setVictory(faction);
+    if (engine->getObject("scenario"))
+        engine->getObject("scenario")->destroy();
+    engine->setGameSpeed(0.0);
+}
+
 void setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
@@ -145,6 +161,7 @@ void setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("createEntity", &luaCreateEntity);
     env.setGlobal("getLuaEntityFunctionTable", &luaGetEntityFunctionTable);
     env.setGlobal("createClass", &luaCreateClass);
+    env.setGlobal("victory", &luaVictory);
 
     LuaConsole::checkResult(env.runFile<void>("luax.lua"));
     LuaConsole::checkResult(env.runFile<void>("api/all.lua"));

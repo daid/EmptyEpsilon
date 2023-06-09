@@ -4,9 +4,11 @@ local Entity = getLuaEntityFunctionTable()
 --- If a function name begins with "command", the function is equivalent to the crew taking a corresponding action.
 --- Such commands can be limited by the ship's capabilities, including systems damage, lack of power, or insufficient weapons stocks.
 function PlayerSpaceship()
-    local ship = createEntity()
-    ship.player_control = {}
-    return ship
+    local e = createEntity()
+    e.player_control = {}
+    e.transform = {rotation=random(0, 360)}
+    e.callsign = {callsign="PL-???"}
+    return e
 end
 
 --- Returns the coordinates of a waypoint with the given index that's been set by this PlayerSpaceship.

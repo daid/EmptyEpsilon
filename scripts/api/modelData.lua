@@ -83,7 +83,7 @@ end
 --- Example: model:setRenderOffset(1,2,5) -- offsets its in-game position from its mesh file position when rendered
 function ModelData:setRenderOffset(x, y, z)
     if self.mesh_render == nil then self.mesh_render = {} end
-    self.mesh_render.offset={x, y, z}
+    self.mesh_render.mesh_offset = {x, y, z}
     return self
 end
 --- Scales this ModelData's mesh by the given factor.
@@ -93,7 +93,7 @@ end
 --- Example: model:setScale(20) -- scales the model up by 20x
 function ModelData:setScale()
     if self.mesh_render == nil then self.mesh_render = {} end
-    self.mesh_render.scale={x, y, z}
+    self.mesh_render.scale = {x, y, z}
     return self
 end
 --- Sets this ModelData's base radius.

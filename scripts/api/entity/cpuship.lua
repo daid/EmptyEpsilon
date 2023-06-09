@@ -10,9 +10,10 @@ local Entity = getLuaEntityFunctionTable()
 --- -- Place a Fighter-class Human Navy CpuShip, order it to roam, and if it engages in combat it will fight evasively
 --- ship = CpuShip():setTemplate("Fighter"):setPosition(10000,3000):setFaction("Human Navy"):orderRoaming():setAI("evasive"):setScanned(true)
 function CpuShip()
-    local ship = createEntity()
-    ship.ai_controller = {}
-    return ship
+    local e = createEntity()
+    e.transform = {rotation=random(0, 360)}
+    e.ai_controller = {}
+    return e
 end
 
 --- Sets the default combat AI state for this CpuShip.
@@ -26,13 +27,15 @@ end
 --- - "missilevolley" prefers lining up missile attacks from long range
 --- Example: ship:setAI("fighter")
 function Entity:setAI(ai_name)
-    --TODO
+    if e.ai_controller then e.ai_controller.new_name = ai_name end
+    return self
 end
 --- Orders this CpuShip to stay at its current position and do nothing.
 --- Idle CpuShips don't target or attack nearby enemies.
 --- Example: ship:orderIdle()
 function Entity:orderIdle()
     --TODO
+    return self
 end
 --- Orders this CpuShip to roam and engage at will, without a specific target.
 --- A Roaming ship can acquire hostile targets within its long-range radar range, and prefers the best hostile target within 2U of its short-range radar range.
@@ -40,6 +43,7 @@ end
 --- Example: ship:orderRoaming()
 function Entity:orderRoaming()
     --TODO
+    return self
 end
 --- Orders this CpuShip to move toward the given SpaceObject and dock, restock weapons, and repair its hull.
 --- If the SpaceObject is a dockable ShipTemplateBasedObject, this ship moves directly toward it and docks with it as soon as possible.
@@ -48,18 +52,21 @@ end
 --- Example: ship:orderRetreat(base) -- retreat to the SpaceObject `base`
 function Entity:orderRetreat(target)
     --TODO
+    return self
 end
 --- Orders this CpuShip to stay at its current position and attack nearby hostiles.
 --- This ship will rotate to face a target and fires missiles within 4.5U if it has any, but won't move, roam, or patrol.
 --- Example: ship:orderStandGround()
 function Entity:orderStandGround()
     --TODO
+    return self
 end
 --- Orders this CpuShip to move to the given coordinates, patrol within a 1.5U radius, and attack any hostiles that move within 2U of its short-range radar range.
 --- If a targeted hostile moves more than 3U out of this ship's short-range radar range, this ship drops the target and resumes defending its position.
 --- Example: ship:orderDefendLocation(500, 1000) -- defend the space near these coordinates
 function Entity:orderDefendLocation(x, y)
     --TODO
+    return self
 end
 --- Orders this CpuShip to maintain a 2U escort distance from the given SpaceObject and attack nearby hostiles.
 --- If a targeted hostile moves more than 3U out of this ship's short-range radar range, this ship drops the target and resumes escorting.
@@ -67,6 +74,7 @@ end
 --- Example: ship:orderDefendTarget(base) -- defend the space near the SpaceObject `base`
 function Entity:orderDefendTarget(target)
     --TODO
+    return self
 end
 --- Orders this CpuShip to fly toward the given SpaceObject and follow it from the given offset distance.
 --- This ship also targets anything its given SpaceObject targets.
@@ -75,6 +83,7 @@ end
 --- Example: ship:orderFlyFormation(leader, 500, 250) -- fly 0.5U off the wing and 0.25U off the tail of the SpaceObject `leader`
 function Entity:orderFlyFormation(target, offset_x, offset_y)
     --TODO
+    return self
 end
 --- Orders this CpuShip to move toward the given coordinates, and to attack hostiles that approach within its short-range radar range during transit.
 --- This ship uses any warp or jump drive capabilities to arrive near its destination.
@@ -83,23 +92,27 @@ end
 --- Example: ship:orderFlyTowards(500, 1000) -- move to these coordinates, attacking nearby hostiles on the way
 function Entity:orderFlyTowards(x, y)
     --TODO
+    return self
 end
 --- Orders this CpuShip to move toward the given coordinates, ignoring all hostiles on the way.
 --- Upon arrival, this ship reverts to the Idle orders.
 --- Example: ship:orderFlyTowardsBlind(500, 1000) -- move to these coordinates, ignoring hostiles
 function Entity:orderFlyTowardsBlind(x, y)
     --TODO
+    return self
 end
 --- Orders this CpuShip to attack the given SpaceObject.
 --- Example: ship:orderAttack(player)
 function Entity:orderAttack(target)
     --TODO
+    return self
 end
 --- Orders this CpuShip to Fly Toward and dock with the given SpaceObject, if possible.
 --- If its target doesn't exist, revert to Roaming orders.
 --- Example: ship:orderDock(spaceStation)
 function Entity:orderDock(target)
     --TODO
+    return self
 end
 --- Returns this CpuShip's current orders.
 --- Example: ship_orders = ship:getOrder()

@@ -16,25 +16,40 @@ local Entity = getLuaEntityFunctionTable()
 --- PlayerSpaceship():setTemplate("Phobos M3P")
 --- SpaceStation():setTemplate("Large Station")
 function Entity:setTemplate(template_name)
-    --TODO
+    local template = __ship_templates[template_name]
+    if template == nil then
+        return error("Failed to find template: " .. template_name)
+    end
+    print("Setting template:" .. template_name)
+    for key, value in next, template, nil do
+        if string.sub(key, 1, 2) ~= "__" then
+            print(key, value)
+            self[key] = value
+        end
+    end
+    if template.__type == "station" then
+        self.physics.type = "static"
+    end
+    return self
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setTemplate().
 function Entity:setShipTemplate(template_name)
-    self:setTemplate(template_name)
+    print("Called DEPRECATED setShipTemplate function")
+    return self:setTemplate(template_name)
 end
 --- Sets this STBO's vessel classification name, such as "Starfighter" or "Cruiser".
 --- This overrides the vessel class name provided by the ShipTemplate.
 --- Example: stbo:setTypeName("Prototype")
 function Entity:setTypeName(type_name)
-    --TODO
+    e.typename = {type_name=type_name}
 end
 --- Returns this STBO's vessel classification name.
 --- Example:
 --- stbo:setTypeName("Prototype")
 --- stbo:getTypeName() -- returns "Prototype"
 function Entity:getTypeName()
-    --TODO
+    return e.typename.type_name
 end
 --- Returns this STBO's hull points.
 --- Example: stbo:getHull()
