@@ -9,13 +9,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
 # Scenario name
 msgid "Battlefield"
 msgstr "Champ de bataille"
+
 # Scenario description
 msgid ""
 "More than 60 Human Navy and Exuari ships face off in all-out war near a "
@@ -37,32 +39,42 @@ msgstr ""
 "https://discord.gg/GjqM9Y9yBe\n"
 "- Traduction FR : Muerte\n"
 "https://discord.gg/2NPKyMnGwp"
+
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
-msgstr "Ennemis"
+msgstr "Puissance ennemie"
+
 msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
 msgstr "Définit le nombre d'ennemis générés dans le scénario."
+
 msgctxt "Enemies"
 msgid "Large"
-msgstr "Grand"
+msgstr "Grande"
+
 msgctxt "Enemies"
 msgid "Larger battle. This increases the fleet sizes to 100 ships per side."
 msgstr ""
-"Plus grande bataille. Cela augmente la taille de la flotte à 100 navires "
-"par côté."
+"Plus grande bataille.\n"
+"Cela augmente la taille de la flotte à 100 vaisseaux par côté."
+
 msgctxt "Enemies"
 msgid "Medium"
-msgstr "Moyen"
+msgstr "Moyenne"
+
 msgctxt "Enemies"
 msgid "Medium battle. 60 ships per side."
-msgstr "Bataille moyenne. 60 navires par coté."
+msgstr ""
+"Bataille moyenne.\n"
+"60 vaisseaux par coté."
+
 msgctxt "Enemies"
 msgid "Huge"
 msgstr "Immense"
+
 msgctxt "Enemies"
 msgid "Huge battle. This increases the fleet sizes to 500 ships per side."
 msgstr ""
-"Bataille immense. Cela augmente la taille de la flotte à 500 navires par "
-"côté."
+"Bataille immense.\n"
+"Cela augmente la taille de la flotte à 500 vaisseaux par côté."

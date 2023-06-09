@@ -47,7 +47,7 @@ msgstr ""
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
-msgstr "Ennemis"
+msgstr "Puissance ennemie"
 
 msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
@@ -63,7 +63,7 @@ msgstr "Objectifs et/ou quantité d'ennemis faciles."
 
 msgctxt "Enemies"
 msgid "Normal"
-msgstr "Normal"
+msgstr "Normale"
 
 msgctxt "Enemies"
 msgid "Normal goals and/or enemies."

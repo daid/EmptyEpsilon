@@ -77,7 +77,7 @@ msgstr ""
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
-msgstr "Ennemis"
+msgstr "Puissance ennemie"
 
 msgctxt "setting"
 msgid "Configures the number and type of enemies"
@@ -93,7 +93,7 @@ msgstr "Vaisseaux ennemis moins nombreux et/ou plus faibles."
 
 msgctxt "Enemies"
 msgid "Normal"
-msgstr "Normal"
+msgstr "Normale"
 
 msgctxt "Enemies"
 msgid "Normal difficulty"
@@ -207,7 +207,7 @@ msgstr "Les facteurs aléatoires sont plus en votre faveur."
 
 msgctxt "Murphy"
 msgid "Normal"
-msgstr "Normal"
+msgstr "Normale"
 
 msgctxt "Murphy"
 msgid "Random factors are normal"
