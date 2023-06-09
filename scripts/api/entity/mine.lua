@@ -16,7 +16,7 @@ end
 local Entity = getLuaEntityFunctionTable()
 
 function Entity:getOwner()
-
+    --TODO
 end
 
 function Entity:onDestruction(callback)

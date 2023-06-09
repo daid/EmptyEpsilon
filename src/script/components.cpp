@@ -243,6 +243,82 @@ template<> struct Convert<FactionRelation> {
         return FactionRelation::Neutral;
     }
 };
+template<> struct Convert<AIOrder> {
+    static int toLua(lua_State* L, AIOrder value) {
+        switch(value) {
+        case AIOrder::Idle: lua_pushstring(L, "idle"); break;
+        case AIOrder::Roaming: lua_pushstring(L, "roaming"); break;
+        case AIOrder::Retreat: lua_pushstring(L, "retreat"); break;
+        case AIOrder::StandGround: lua_pushstring(L, "standground"); break;
+        case AIOrder::DefendLocation: lua_pushstring(L, "defendlocation"); break;
+        case AIOrder::DefendTarget: lua_pushstring(L, "defendtarget"); break;
+        case AIOrder::FlyFormation: lua_pushstring(L, "flyformation"); break;
+        case AIOrder::FlyTowards: lua_pushstring(L, "flytowards"); break;
+        case AIOrder::FlyTowardsBlind: lua_pushstring(L, "flytowardsblind"); break;
+        case AIOrder::Dock: lua_pushstring(L, "dock"); break;
+        case AIOrder::Attack: lua_pushstring(L, "attack"); break;
+        }
+        return 1;
+    }
+    static AIOrder fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "idle")
+            return AIOrder::Idle;
+        else if (str == "roaming")
+            return AIOrder::Roaming;
+        else if (str == "retreat")
+            return AIOrder::Retreat;
+        else if (str == "standground")
+            return AIOrder::StandGround;
+        else if (str == "defendlocation")
+            return AIOrder::DefendLocation;
+        else if (str == "defendtarget")
+            return AIOrder::DefendTarget;
+        else if (str == "flyformation")
+            return AIOrder::FlyFormation;
+        else if (str == "flytowards")
+            return AIOrder::FlyTowards;
+        else if (str == "flytowardsblind")
+            return AIOrder::FlyTowardsBlind;
+        else if (str == "dock")
+            return AIOrder::Dock;
+        else if (str == "attack")
+            return AIOrder::Attack;
+        luaL_error(L, "Unknown AIOrder type: %s", str.c_str());
+        return AIOrder::Idle;
+    }
+};
+template<> struct Convert<EMissileWeapons> {
+    static int toLua(lua_State* L, EMissileWeapons value) {
+        switch(value) {
+        case EMissileWeapons::MW_None: lua_pushstring(L, "none"); break;
+        case EMissileWeapons::MW_Homing: lua_pushstring(L, "homing"); break;
+        case EMissileWeapons::MW_Nuke: lua_pushstring(L, "nuke"); break;
+        case EMissileWeapons::MW_Mine: lua_pushstring(L, "mine"); break;
+        case EMissileWeapons::MW_EMP: lua_pushstring(L, "emp"); break;
+        case EMissileWeapons::MW_HVLI: lua_pushstring(L, "hvli"); break;
+        case EMissileWeapons::MW_Count: lua_pushstring(L, "none"); break;
+        }
+        return 1;
+    }
+    static EMissileWeapons fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "none")
+            return EMissileWeapons::MW_None;
+        else if (str == "homing")
+            return EMissileWeapons::MW_Homing;
+        else if (str == "nuke")
+            return EMissileWeapons::MW_Nuke;
+        else if (str == "mine")
+            return EMissileWeapons::MW_Mine;
+        else if (str == "emp")
+            return EMissileWeapons::MW_EMP;
+        else if (str == "hvli")
+            return EMissileWeapons::MW_HVLI;
+        luaL_error(L, "Unknown EMissileWeapons type: %s", str.c_str());
+        return EMissileWeapons::MW_None;
+    }
+};
 }
 
 void initComponentScriptBindings()
@@ -463,7 +539,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(MissileTubes, mounts, type_allowed_mask);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, direction);
     //TODO: BIND_ARRAY_MEMBER(MissileTubes, mounts, size);
-    //TODO: BIND_ARRAY_MEMBER(MissileTubes, mounts, type_loaded);
+    BIND_ARRAY_MEMBER(MissileTubes, mounts, type_loaded);
     //TODO: BIND_ARRAY_MEMBER(MissileTubes, mounts, state);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, delay);
 
@@ -505,7 +581,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(FactionInfo, relations, relation);
 
     sp::script::ComponentHandler<AIController>::name("ai_controller");
-    //TODO: BIND_MEMBER(AIController, orders);
+    BIND_MEMBER(AIController, orders);
     BIND_MEMBER(AIController, order_target_location);
     BIND_MEMBER(AIController, order_target);
     BIND_MEMBER(AIController, new_name);

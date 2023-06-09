@@ -151,6 +151,7 @@ end
 --- obj:setCommsScript("comms_custom_script.lua") -- sets scripts/comms_custom_script.lua as this object's comms script
 --- obj:setCommsScript("") -- disables comms with this object
 function Entity:setCommsScript(script_name)
+    --TODO
     return self
 end
 --- Defines a function to call when this SpaceObject is hailed, in lieu of any current or default comms script.
@@ -163,6 +164,7 @@ end
 --- obj:setCommsFunction(function(comms_source, comms_target) ... end)
 --- Example: obj:setCommsFunction(commsStation) -- where commsStation is a function that calls setCommsMessage() at least once, and uses addCommsReply() to let players respond
 function Entity:setCommsFunction(callback)
+    --TODO
     return self
 end
 --- Sets this SpaceObject's callsign.
@@ -181,15 +183,18 @@ end
 --- Requires a target PlayerShip and message, though the message can be an empty string.
 --- Example: obj:sendCommsMessage(player, "Prepare to die")
 function Entity:sendCommsMessage(target, message)
+    --TODO
 end
 --- As SpaceObject:sendCommsMessage(), but does not log a failed hail to the target ship's comms log.
 --- Example: obj:sendCommsMessageNoLog(player, "Prepare to die")
 function Entity:sendCommsMessageNoLog(target, message)
+    --TODO
 end
 --- As SpaceObject:sendCommsMessage(), but sends an empty string as the message.
 --- This calls the SpaceObject's comms function.
 --- Example: obj:openCommsTo(player)
 function Entity:openCommsTo(target)
+    --TODO
 end
 --- Returns this SpaceObject's callsign.
 --- Example: obj:getCallSign()
@@ -199,11 +204,13 @@ end
 --- Returns whether any SpaceObject from a hostile faction are within a given radius of this SpaceObject, in (unit?).
 --- Example: obj:areEnemiesInRange(5000) -- returns true if hostiles are within 5U of this object
 function Entity:areEnemiesInRange(range)
+    --TODO
 end
 --- Returns any SpaceObject within a specific radius, in (unit?), of this SpaceObject.
 --- Returns a list of all SpaceObjects within range.
 --- Example: obj:getObjectsInRange(5000) -- returns all objects within 5U of this SpaceObject.
 function Entity:getObjectsInRange(range)
+    --TODO
 end
 --- Returns this SpaceObject's faction reputation points.
 --- Example: obj:getReputationPoints()
@@ -246,6 +253,7 @@ end
 --- Returns the name of the map sector, such as "A4", where this SpaceObject is located.
 --- Example: obj:getSectorName()
 function Entity:getSectorName()
+    --TODO
 end
 --- Deals a specific amount of a specific type of damage to this SpaceObject.
 --- Requires a numeric value for the damage amount, and accepts an optional DamageInfo type.
@@ -257,6 +265,7 @@ end
 --- obj:takeDamage(20, "emp", 1000, 0) -- deals 20 EMP damage as if it had originated from coordinates 1000,0
 --- obj:takeDamage(20) -- deals 20 energy damage
 function Entity:takeDamage(amount, type, originx, originy)
+    --TODO
 end
 --- Sets this SpaceObject's description in unscanned and scanned states.
 --- The science screen displays these descriptions when targeting a scanned object.
@@ -264,10 +273,12 @@ end
 --- Example:
 ---   obj:setDescriptions("A refitted Atlantis X23...", "It's a trap!")
 function Entity:setDescriptions(unscanned_description, scanned_description)
+    --TODO
 end
 --- As setDescriptions, but sets the same description for both unscanned and scanned states.
 --- Example: obj:setDescription("A refitted Atlantis X23 for more ...")
 function Entity:setDescription(description)
+    --TODO
 end
 --- Sets a description for a given EScannedState on this SpaceObject.
 --- Only SpaceShip objects are created in an unscanned state. Other SpaceObjects are created as fully scanned.
@@ -277,6 +288,7 @@ end
 --- - "fullscan" or "full": The object is fully scanned.
 --- Example: obj:setDescriptionForScanState("friendorfoeidentified", "A refitted...")
 function Entity:setDescriptionForScanState(state, description)
+    --TODO
 end
 --- Returns this SpaceObject's description for the given EScannedState.
 --- Accepts an optional string-equivalent EScannedState, which determines which description to return.
@@ -285,6 +297,7 @@ end
 --- obj:getDescription() -- returns the "fullscan" description
 --- obj:getDescription("friendorfoeidentified") -- returns the "friendorfoeidentified" description
 function Entity:getDescription(state)
+    --TODO
 end
 --- Sets this SpaceObject's radar signature, which creates noise on the science screen's raw radar signal ring.
 --- The raw signal ring contains red, green, and blue bands of waveform noise.
@@ -296,31 +309,38 @@ end
 --- - Biological signatures amplify noise on the red and green bands.
 --- Example: obj:setRadarSignatureInfo(0.0, 0.5, 1.0) -- a radar signature of 0 gravitational, 0.5 electrical, and 1.0 biological
 function Entity:setRadarSignatureInfo(gravity, electrical, biological)
+    --TODO
 end
 --- Returns this SpaceObject's gravitational radar signature value.
 --- Example: obj:getRadarSignatureGravity()
 function Entity:getRadarSignatureGravity()
+    --TODO
 end
 --- Returns this SpaceObject's electical radar signature value.
 --- Example: obj:getRadarSignatureElectrical()
 function Entity:getRadarSignatureElectrical()
+    --TODO
 end
 --- Returns this SpaceObject's biological radar signature value.
 --- Example: obj:getRadarSignatureBiological()
 function Entity:getRadarSignatureBiological()
+    --TODO
 end
 --- Sets this SpaceObject's scanning complexity (number of bars in the scanning minigame) and depth (number of scanning minigames to complete until fully scanned), respectively.
 --- Setting this also clears the object's scanned state.
 --- Example: obj:setScanningParameters(2, 3)
 function Entity:setScanningParameters(complexity, depth)
+    --TODO
 end
 --- Returns the scanning complexity for the given SpaceObject.
 --- Example: obj:scanningComplexity(obj)
 function Entity:scanningComplexity()
+    --TODO
 end
 --- Returns the maximum scanning depth for the given SpaceObject.
 --- Example: obj:scanningChannelDepth(obj)
 function Entity:scanningChannelDepth()
+    --TODO
 end
 --- Defines whether all factions consider this SpaceObject as having been scanned.
 --- Only SpaceShip objects are created in an unscanned state. Other SpaceObjects are created as fully scanned.
@@ -328,29 +348,35 @@ end
 --- If true, all factions treat this object as fully scanned.
 --- Example: obj:setScanned(true)
 function Entity:setScanned(is_scanned)
+    --TODO
 end
 --- [DEPRECATED]
 --- Returns whether this SpaceObject has been scanned.
 --- Use SpaceObject:isScannedBy() or SpaceObject:isScannedByFaction() instead.
 function Entity:isScanned()
+    --TODO
 end
 --- Returns whether the given SpaceObject has successfully scanned this SpaceObject.
 --- Example: obj:isScannedBy(other)
 function Entity:isScannedBy()
+    --TODO
 end
 --- Defines whether a given faction considers this SpaceObject as having been scanned.
 --- Requires a faction name string value as defined by its FactionInfo, and a Boolean value.
 --- Example: obj:setScannedByFaction("Human Navy", false)
 function Entity:setScannedByFaction(faction_name, is_scanned)
+    --TODO
 end
 --- Returns whether the given faction has successfully scanned this SpaceObject.
 --- Requires a faction name string value as defined by its FactionInfo.
 --- Example: obj:isScannedByFaction("Human Navy")
 function Entity:isScannedByFaction(faction_name)
+    --TODO
 end
 --- Defines a function to call when this SpaceObject is destroyed by any means.
 --- Example:
 --- -- Prints to the console window or logging file when this SpaceObject is destroyed
 --- obj:onDestroyed(function() print("Object destroyed!") end)
 function Entity:onDestroyed(callback)
+    --TODO
 end
