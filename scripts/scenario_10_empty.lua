@@ -4,11 +4,6 @@
 
 --- Scenario
 -- @script scenario_10_empty
-require("luax.lua")
-require("api/all.lua")
-require("model_data.lua")
-require("shipTemplates.lua")
-require("factionInfo.lua")
 
 
 function Asteroid()

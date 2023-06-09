@@ -12,7 +12,7 @@ class LuaConsole : public GuiCanvas, public Updatable
 public:
     LuaConsole();
 
-    template<typename T> static void checkResult(sp::Result<T>& r) {
+    template<typename T> static void checkResult(const sp::Result<T>& r) {
         if (r.isErr()) {
             LOG(Error, "LUA-Error:", r.error());
             addLog(r.error());

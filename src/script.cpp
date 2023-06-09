@@ -145,8 +145,13 @@ void setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("createEntity", &luaCreateEntity);
     env.setGlobal("getLuaEntityFunctionTable", &luaGetEntityFunctionTable);
     env.setGlobal("createClass", &luaCreateClass);
-    //TODO: Load factions
-    //TODO: Load ship templates
+
+    LuaConsole::checkResult(env.runFile<void>("luax.lua"));
+    LuaConsole::checkResult(env.runFile<void>("api/all.lua"));
+
+    LuaConsole::checkResult(env.runFile<void>("model_data.lua"));
+    LuaConsole::checkResult(env.runFile<void>("factionInfo.lua"));
+    LuaConsole::checkResult(env.runFile<void>("shipTemplates.lua"));
     //TODO: Load science database
 }
 

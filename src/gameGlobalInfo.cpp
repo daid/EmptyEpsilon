@@ -78,6 +78,10 @@ void GameGlobalInfo::update(float delta)
             my_spaceship = my_player_info->ship;
     }
     elapsed_time += delta;
+
+    if (main_script) {
+        LuaConsole::checkResult(main_script->call<void>("update", delta));
+    }
 }
 
 string GameGlobalInfo::getNextShipCallsign()
