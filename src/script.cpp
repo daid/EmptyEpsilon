@@ -25,12 +25,9 @@ static int luaRequire(lua_State* L)
     // Load the locale file for this script.
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
 
-    string filecontents;
-    do
-    {
-        string line = stream->readLine();
-        filecontents += line + "\n";
-    }while(stream->tell() < stream->getSize());
+    string filecontents = stream->readAll();
+    stream->destroy();
+    stream = nullptr;
 
     if (luaL_loadbuffer(L, filecontents.c_str(), filecontents.length(), ("@" + filename).c_str()))
     {

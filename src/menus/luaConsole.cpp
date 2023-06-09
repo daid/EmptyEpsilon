@@ -7,8 +7,11 @@
 #include "gui/gui2_textentry.h"
 #include "gui/theme.h"
 
+#include "io/keybinding.h"
+
 
 static LuaConsole* console;
+sp::io::Keybinding open_console_key("CONSOLE_KEY", {"`"});
 
 
 LuaConsole::LuaConsole()
@@ -38,6 +41,9 @@ LuaConsole::LuaConsole()
         if (gameGlobalInfo)
             gameGlobalInfo->execScriptCode(s);
     });
+
+    top->hide();
+    entry->hide();
 }
 
 void LuaConsole::addLog(const string& message)
@@ -48,4 +54,35 @@ void LuaConsole::addLog(const string& message)
         console->log_messages.erase(console->log_messages.begin());
     console->log->setText(string("\n").join(console->log_messages));
     console->log->setCursorPosition(console->log->getText().size());
+    if (!console->is_open) {
+        console->message_show_timers.emplace_back();
+        console->message_show_timers.back().start(5.0f);
+        console->top->layout.size.y = std::min(450.0f, console->message_show_timers.size() * 15.0f);
+        console->top->show();
+    }
+}
+
+void LuaConsole::update(float delta)
+{
+    if (open_console_key.getDown()) {
+        if (is_open) {
+            is_open = false;
+            top->hide();
+            entry->hide();
+        } else {
+            is_open = true;
+            top->layout.size.y = 450;
+            message_show_timers.clear();
+            top->show();
+            entry->show();
+        }
+    }
+    while(!message_show_timers.empty() && message_show_timers.front().isExpired()) {
+        message_show_timers.erase(message_show_timers.begin());
+        if (message_show_timers.empty()) {
+            top->hide();
+        } else {
+            top->layout.size.y = std::min(450.0f, message_show_timers.size() * 15.0f);
+        }
+    }
 }

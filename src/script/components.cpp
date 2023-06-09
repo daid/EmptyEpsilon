@@ -26,6 +26,8 @@
 #include "components/hacking.h"
 #include "components/player.h"
 #include "components/faction.h"
+#include "components/ai.h"
+#include "ai/ai.h"
 
 
 #define BIND_MEMBER(T, MEMBER) \
@@ -490,4 +492,10 @@ void initComponentScriptBindings()
     BIND_ARRAY(FactionInfo, relations);
     BIND_ARRAY_MEMBER(FactionInfo, relations, other_faction);
     BIND_ARRAY_MEMBER(FactionInfo, relations, relation);
+
+    sp::script::ComponentHandler<AIController>::name("ai_controller");
+    //TODO: BIND_MEMBER(AIController, orders);
+    BIND_MEMBER(AIController, order_target_location);
+    BIND_MEMBER(AIController, order_target);
+    BIND_MEMBER(AIController, new_name);
 }

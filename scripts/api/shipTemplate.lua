@@ -299,18 +299,21 @@ end
 --- Defaults to true.
 --- Example: template:setSharesEnergyWithDocked(false)
 function ShipTemplate:setSharesEnergyWithDocked(enabled)
+    --TODO
     return self
 end
 --- Defines whether ShipTemplateBasedObjects created from this template repair docked SpaceShips.
 --- Defaults to false. ShipTemplate:setType("station") sets this to true.
 --- Example: template:setRepairDocked(true)
 function ShipTemplate:setRepairDocked(enabled)
+    --TODO
     return self
 end
 --- Defines whether ShipTemplateBasedObjects created from this ShipTemplate restock scan probes on docked PlayerSpaceships.
 --- Defaults to false.
 --- Example: template:setRestocksScanProbes(true)
 function ShipTemplate:setRestocksScanProbes(enabled)
+    --TODO
     return self
 end
 --- Defines whether ShipTemplateBasedObjects created from this ShipTemplate restock missiles on docked CpuShips.
@@ -318,6 +321,7 @@ end
 --- Defaults to false.
 --- Example template:setRestocksMissilesDocked(true)
 function ShipTemplate:setRestocksMissilesDocked(enabled)
+    --TODO
     return self
 end
 --- Defines whether SpaceShips created from this ShipTemplate have a jump drive.
@@ -364,6 +368,7 @@ end
 --- To place multiple rooms, declare addRoom() multiple times.
 --- Example: template::addRoom(0,0,3,2) -- adds a 3x2 room with its upper-left coordinate at position 0,0
 function ShipTemplate:addRoom(x, y, w, h)
+    --TODO
     return self
 end
 
@@ -374,6 +379,7 @@ end
 --- To place multiple rooms, declare addRoomSystem() multiple times.
 --- Example: template:addRoomSystem(1,2,3,4,"reactor")  -- adds a 3x4 room with its upper-left coordinate at position 1,2 that contains the Reactor system
 function ShipTemplate:addRoomSystem(x, y, w, h, system)
+    --TODO
     return self
 end
 --- Adds a door between rooms in a ShipTemplate.
@@ -384,6 +390,7 @@ end
 --- To place multiple doors, declare addDoor() multiple times.
 --- Example: template:addDoor(2,1,true) -- places a horizontal door with its left-most point at 2,1
 function ShipTemplate:addDoor(x, y, horizontal)
+    --TODO
     return self
 end
 --- Sets the default radar trace image for ShipTemplateBasedObjects created from this ShipTemplate.
@@ -392,6 +399,7 @@ end
 --- Defaults to arrow.png. ShipTemplate:setType("station") sets this to blip.png.
 --- Example: template:setRadarTrace("cruiser.png")
 function ShipTemplate:setRadarTrace(trace)
+    --TODO
     return self
 end
 --- Sets the long-range radar range of SpaceShips created from this ShipTemplate.
@@ -400,6 +408,7 @@ end
 --- Defaults to 30000.0 (30U).
 --- Example: template:setLongRangeRadarRange(20000) -- sets the long-range radar range to 20U
 function ShipTemplate:setLongRangeRadarRange(range)
+    --TODO
     return self
 end
 --- Sets the short-range radar range of SpaceShips created from this ShipTemplate.
@@ -409,6 +418,7 @@ end
 --- Defaults to 5000.0 (5U).
 --- Example: template:setShortRangeRadarRange(4000) -- sets the short-range radar range to 4U
 function ShipTemplate:setShortRangeRadarRange(range)
+    --TODO
     return self
 end
 --- Sets the sound file used for the impulse drive sounds on SpaceShips created from this ShipTemplate.
@@ -417,6 +427,7 @@ end
 --- Defaults to sfx/engine.wav.
 --- Example: template:setImpulseSoundFile("sfx/engine_fighter.wav")
 function ShipTemplate:setImpulseSoundFile(sfx)
+    --TODO
     return self
 end
 --- Defines whether scanning features appear on related crew screens in PlayerSpaceships created from this ShipTemplate.
@@ -444,12 +455,14 @@ end
 --- Defaults to true.
 --- Example: template:setCanCombatManeuver(false)
 function ShipTemplate:setCanCombatManeuver(enabled)
+    --TODO
     return self
 end
 --- Defines whether self-destruct controls appear on related crew screens in PlayerSpaceships created from this ShipTemplate.
 --- Defaults to true.
 --- Example: template:setCanSelfDestruct(false)
 function ShipTemplate:setCanSelfDestruct(enabled)
+    --TODO
     return self
 end
 --- Defines whether ScanProbe-launching controls appear on related crew screens in PlayerSpaceships created from this ShipTemplate.
