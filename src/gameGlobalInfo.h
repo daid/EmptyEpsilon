@@ -62,7 +62,7 @@ public:
     bool intercept_all_comms_to_gm;
 
     //Callback called when a new player ship is created on the ship selection screen.
-    ScriptSimpleCallback on_new_player_ship;
+    sp::script::Callback on_new_player_ship;
     bool allow_new_player_ships = true;
 
     std::function<void(glm::vec2)> on_gm_click;

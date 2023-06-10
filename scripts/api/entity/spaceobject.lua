@@ -216,14 +216,14 @@ end
 --- Example: obj:getReputationPoints()
 function Entity:getReputationPoints()
     if self.faction and self.faction.entity and self.faction.entity.faction_info then
-        return self.self.faction.entity.faction_info.reputation_points
+        return self.faction.entity.faction_info.reputation_points
     end
 end
 --- Sets this SpaceObject's faction reputation points to the given amount.
 --- Example: obj:setReputationPoints(1000)
 function Entity:setReputationPoints(amount)
     if self.faction and self.faction.entity and self.faction.entity.faction_info then
-        self.self.faction.entity.faction_info.reputation_points = amount
+        self.faction.entity.faction_info.reputation_points = amount
     end
 end
 --- Deducts a given number of faction reputation points from this SpaceObject.
@@ -232,9 +232,9 @@ end
 --- Example: obj:takeReputationPoints(1000) -- returns false if `obj` has fewer than 1000 reputation points, otherwise returns true and deducts the points
 function Entity:takeReputationPoints(amount)
     if self.faction and self.faction.entity and self.faction.entity.faction_info then
-        local points = self.self.faction.entity.faction_info.reputation_points
+        local points = self.faction.entity.faction_info.reputation_points
         if points >= amount then
-            self.self.faction.entity.faction_info.reputation_points = points - amount
+            self.faction.entity.faction_info.reputation_points = points - amount
             return true
         end
     end
@@ -244,9 +244,9 @@ end
 --- Example: obj:addReputationPoints(1000)
 function Entity:addReputationPoints(amount)
     if self.faction and self.faction.entity and self.faction.entity.faction_info then
-        local points = self.self.faction.entity.faction_info.reputation_points
+        local points = self.faction.entity.faction_info.reputation_points
         if points >= -amount then
-            self.self.faction.entity.faction_info.reputation_points = points + amount
+            self.faction.entity.faction_info.reputation_points = points + amount
         end
     end
 end

@@ -420,16 +420,19 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<LongRangeRadar>::name("long_range_radar");
     BIND_MEMBER(LongRangeRadar, short_range);
     BIND_MEMBER(LongRangeRadar, long_range);
+    BIND_MEMBER(LongRangeRadar, radar_view_linked_entity);
     BIND_ARRAY(LongRangeRadar, waypoints);
     BIND_ARRAY_MEMBER(LongRangeRadar, waypoints, x);
     BIND_ARRAY_MEMBER(LongRangeRadar, waypoints, y);
-    //TODO: radar_view_linked_entity, callbacks
+    //TODO: callbacks for probes
 
     sp::script::ComponentHandler<Hull>::name("hull");
     BIND_MEMBER(Hull, current);
     BIND_MEMBER(Hull, max);
     BIND_MEMBER(Hull, allow_destruction);
-    BIND_MEMBER(Hull, damaged_by_flags);
+    BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_energy", (1 << int(DamageType::Energy)));
+    BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_kinetic", (1 << int(DamageType::Kinetic)));
+    BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_emp", (1 << int(DamageType::EMP)));
 
     sp::script::ComponentHandler<Shields>::name("shields");
     BIND_MEMBER_NAMED(Shields, front_system.health, "front_health");

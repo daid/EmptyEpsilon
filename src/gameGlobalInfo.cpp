@@ -710,8 +710,7 @@ REGISTER_SCRIPT_FUNCTION(isLongRangeRadarAllowed);
 
 static int onNewPlayerShip(lua_State* L)
 {
-    int idx = 1;
-    convert<ScriptSimpleCallback>::param(L, idx, gameGlobalInfo->on_new_player_ship);
+    //TODO
     return 0;
 }
 /// void onNewPlayerShip(ScriptSimpleCallback callback)
