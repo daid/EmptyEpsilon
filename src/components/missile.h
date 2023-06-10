@@ -8,7 +8,8 @@
 class MissileFlight
 {
 public:
-    float speed;
+    float speed=100.0f;
+    float timeout=0.0f;
 };
 
 class MissileHoming
