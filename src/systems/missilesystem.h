@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ecs/system.h"
+#include "components/missile.h"
 #include "components/missiletubes.h"
 #include "systems/collision.h"
 
@@ -19,5 +20,6 @@ public:
     static float calculateFiringSolution(sp::ecs::Entity source, const MissileTubes::MountPoint& tube, sp::ecs::Entity target);
 
 private:
+    static void explode(sp::ecs::Entity source, sp::ecs::Entity target, ExplodeOnTouch& eot);
     static void spawnProjectile(sp::ecs::Entity source, MissileTubes::MountPoint& tube, float angle, sp::ecs::Entity target);
 };

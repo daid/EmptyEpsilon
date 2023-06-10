@@ -7,9 +7,15 @@
 --- To create objects with more complex collision mechanics, use an Artifact.
 --- Example: mine = Mine():setPosition(1000,1000):onDestruction(this_mine, instigator) print("Tripped a mine!") end)
 function Mine()
+    local blast_range = 1000.0
     local e = createEntity()
     e.transform = {}
-    --TODO
+    e.radar_trace = {icon="radar/blip.png", min_size=10, max_size = 10}
+    e.constant_particle_emitter = {interval=0.4, start_color={1, 1, 1}, end_color={0, 0, 1}, start_size=30.0, end_size=0.0, life_time=10.0}
+    e.radar_signature = {electrical=0.05}
+    e.avoid_object = {range=blast_range*1.2}
+    e.physics = {type="sensor", size=blast_range*0.6}
+    e.delayed_explode_on_touch = {delay=1.0, damage_at_center=160.0, damage_at_edge=30.0, blast_range=1000.0}
     return e
 end
 

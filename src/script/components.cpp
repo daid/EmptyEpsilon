@@ -29,7 +29,7 @@
 #include "components/ai.h"
 #include "ai/ai.h"
 
-
+#define STRINGIFY(n) #n
 #define BIND_MEMBER(T, MEMBER) \
     sp::script::ComponentHandler<T>::members[STRINGIFY(MEMBER)] = { \
         [](lua_State* L, const T& t) { \
@@ -402,6 +402,16 @@ void initComponentScriptBindings()
     BIND_MEMBER(ExplodeOnTouch, damage_type);
     BIND_MEMBER(ExplodeOnTouch, explosion_sfx);
 
+    sp::script::ComponentHandler<DelayedExplodeOnTouch>::name("delayed_explode_on_touch");
+    BIND_MEMBER(DelayedExplodeOnTouch, delay);
+    BIND_MEMBER(DelayedExplodeOnTouch, triggered);
+    BIND_MEMBER(DelayedExplodeOnTouch, damage_at_center);
+    BIND_MEMBER(DelayedExplodeOnTouch, damage_at_edge);
+    BIND_MEMBER(DelayedExplodeOnTouch, blast_range);
+    BIND_MEMBER(DelayedExplodeOnTouch, owner);
+    BIND_MEMBER(DelayedExplodeOnTouch, damage_type);
+    BIND_MEMBER(DelayedExplodeOnTouch, explosion_sfx);
+
     sp::script::ComponentHandler<CallSign>::name("callsign");
     BIND_MEMBER(CallSign, callsign);
     sp::script::ComponentHandler<TypeName>::name("typename");
@@ -585,4 +595,13 @@ void initComponentScriptBindings()
     BIND_MEMBER(AIController, order_target_location);
     BIND_MEMBER(AIController, order_target);
     BIND_MEMBER(AIController, new_name);
+
+    sp::script::ComponentHandler<ConstantParticleEmitter>::name("constant_particle_emitter");
+    BIND_MEMBER(ConstantParticleEmitter, interval);
+    BIND_MEMBER(ConstantParticleEmitter, travel_random_range);
+    BIND_MEMBER(ConstantParticleEmitter, start_color);
+    BIND_MEMBER(ConstantParticleEmitter, end_color);
+    BIND_MEMBER(ConstantParticleEmitter, start_size);
+    BIND_MEMBER(ConstantParticleEmitter, end_size);
+    BIND_MEMBER(ConstantParticleEmitter, life_time);
 }

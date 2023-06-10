@@ -13,6 +13,7 @@
 #include "spaceObjects/explosionEffect.h"
 #include "spaceObjects/electricExplosionEffect.h"
 #include "particleEffect.h"
+#include "random.h"
 
 
 MissileSystem::MissileSystem()
@@ -90,8 +91,17 @@ void MissileSystem::update(float delta)
         emitter.delay -= delta;
         if (emitter.delay <= 0.0f) {
             emitter.delay = emitter.interval;
-            ParticleEngine::spawn(glm::vec3(transform.getPosition().x, transform.getPosition().y, 0), glm::vec3(transform.getPosition().x, transform.getPosition().y, 0), emitter.start_color, emitter.end_color, emitter.start_size, emitter.end_size, emitter.life_time);
+            auto pos = glm::vec3(transform.getPosition().x, transform.getPosition().y, 0);
+            ParticleEngine::spawn(pos, pos + glm::vec3(random(-emitter.travel_random_range, emitter.travel_random_range), random(-emitter.travel_random_range, emitter.travel_random_range), random(-emitter.travel_random_range, emitter.travel_random_range)), emitter.start_color, emitter.end_color, emitter.start_size, emitter.end_size, emitter.life_time);
         }
+    }
+
+    for(auto [entity, deot, transform] : sp::ecs::Query<DelayedExplodeOnTouch, sp::Transform>()) {
+        if (!deot.triggered) continue;
+        deot.delay -= delta;
+        if (deot.delay >= 0.0f) continue;
+
+        explode(entity, {}, deot);
     }
 
     // TODO: Not really part of missile
@@ -107,36 +117,47 @@ void MissileSystem::update(float delta)
 void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
 {
     if (!game_server) return;
-    auto mc = a.getComponent<ExplodeOnTouch>();
-    if (!mc) return;
-    if (mc->owner == b) return;
+    auto deot = a.getComponent<DelayedExplodeOnTouch>();
+    if (deot) {
+        auto hull = b.getComponent<Hull>();
+        if (!hull) return;
+        deot->triggered = true;
+    }
+    auto eot = a.getComponent<ExplodeOnTouch>();
+    if (eot) return;
+    if (eot->owner == b) return;
     auto hull = b.getComponent<Hull>();
     if (!hull) return;
-    if (!(hull->damaged_by_flags & (1 << int(mc->damage_type)))) return;
-    auto transform = a.getComponent<sp::Transform>();
-    if (!transform) return;
+    if (!(hull->damaged_by_flags & (1 << int(eot->damage_type)))) return;
 
-    DamageInfo info(mc->owner, mc->damage_type, transform->getPosition());
-    if (mc->blast_range > 100.0f) {
-        DamageSystem::damageArea(transform->getPosition(), mc->blast_range, mc->damage_at_edge, mc->damage_at_center, info, 10.0f);
+    explode(a, b, *eot);
+}
+
+void MissileSystem::explode(sp::ecs::Entity source, sp::ecs::Entity target, ExplodeOnTouch& eot)
+{
+    auto transform = source.getComponent<sp::Transform>();
+    if (!transform) return;
+    DamageInfo info(eot.owner, eot.damage_type, transform->getPosition());
+    if (eot.blast_range > 100.0f || !target) {
+        DamageSystem::damageArea(transform->getPosition(), eot.blast_range, eot.damage_at_edge, eot.damage_at_center, info, eot.blast_range / 2);
     } else {
-        DamageSystem::applyDamage(b, mc->damage_at_center, info);
+        DamageSystem::applyDamage(target, eot.damage_at_center, info);
     }
 
-    if (mc->damage_type == DamageType::EMP) {
+    if (eot.damage_type == DamageType::EMP) {
         P<ElectricExplosionEffect> e = new ElectricExplosionEffect();
-        e->setSize(mc->blast_range);
+        e->setSize(eot.blast_range);
         e->setPosition(transform->getPosition());
         e->setOnRadar(true);
     } else {
         P<ExplosionEffect> e = new ExplosionEffect();
-        e->setSize(mc->blast_range);
+        e->setSize(eot.blast_range);
         e->setPosition(transform->getPosition());
         e->setOnRadar(true);
-        if (!mc->explosion_sfx.empty())
-            e->setExplosionSound(mc->explosion_sfx);
+        if (!eot.explosion_sfx.empty())
+            e->setExplosionSound(eot.explosion_sfx);
     }
-    a.destroy();
+    source.destroy();
 }
 
 void MissileSystem::startLoad(sp::ecs::Entity source, MissileTubes::MountPoint& tube, EMissileWeapons type)
