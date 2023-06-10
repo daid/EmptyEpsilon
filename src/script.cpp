@@ -153,7 +153,7 @@ static void luaVictory(string faction)
 void setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
-    env.setGlobal("random", &random);
+    env.setGlobal("random", static_cast<float(*)(float, float)>(&random));
     env.setGlobal("irandom", &irandom);
     env.setGlobal("print", &luaPrint);
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
