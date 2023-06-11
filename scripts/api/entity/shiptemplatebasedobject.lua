@@ -20,10 +20,10 @@ function Entity:setTemplate(template_name)
     if template == nil then
         return error("Failed to find template: " .. template_name)
     end
-    print("Setting template:" .. template_name)
+    -- print("Setting template:" .. template_name)
     for key, value in next, template, nil do
         if string.sub(key, 1, 2) ~= "__" then
-            print(key, value)
+            -- print(key, value)
             self[key] = value
         end
     end

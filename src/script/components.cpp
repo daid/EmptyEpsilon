@@ -27,8 +27,9 @@
 #include "components/player.h"
 #include "components/faction.h"
 #include "components/ai.h"
-#include "components/radarblock.h"
 #include "ai/ai.h"
+#include "components/radarblock.h"
+#include "components/gravity.h"
 
 #define STRINGIFY(n) #n
 #define BIND_MEMBER(T, MEMBER) \
@@ -627,4 +628,11 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(NebulaRenderer, clouds, offset);
     BIND_ARRAY_MEMBER_NAMED(NebulaRenderer, clouds, "texture", texture.name);
     BIND_ARRAY_MEMBER(NebulaRenderer, clouds, size);
+
+    sp::script::ComponentHandler<Gravity>::name("gravity");
+    BIND_MEMBER(Gravity, range);
+    BIND_MEMBER(Gravity, force);
+    BIND_MEMBER(Gravity, damage);
+    BIND_MEMBER(Gravity, wormhole_target);
+    //todo: on_teleportation
 }
