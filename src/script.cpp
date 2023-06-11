@@ -168,6 +168,17 @@ static void luaGlobalMessage(string message, std::optional<float> timeout)
     gameGlobalInfo->global_message_timeout = timeout.has_value() ? timeout.value() : 5.0f;
 }
 
+static void luaAddGMFunction(string label, sp::script::Callback callback)
+{
+    gameGlobalInfo->gm_callback_functions.emplace_back(label);
+    gameGlobalInfo->gm_callback_functions.back().callback = callback;
+}
+
+static void luaClearGMFunctions()
+{
+    gameGlobalInfo->gm_callback_functions.clear();
+}
+
 void setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
@@ -186,6 +197,9 @@ void setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("onNewPlayerShip", &luaOnNewPlayerShip);
     env.setGlobal("globalMessage", &luaGlobalMessage);
     env.setGlobal("victory", &luaVictory);
+
+    env.setGlobal("addGMFunction", &luaAddGMFunction);
+    env.setGlobal("clearGMFunctions", &luaClearGMFunctions);
 
     LuaConsole::checkResult(env.runFile<void>("luax.lua"));
     LuaConsole::checkResult(env.runFile<void>("api/all.lua"));
