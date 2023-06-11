@@ -40,3 +40,16 @@ public:
     };
     std::vector<Emitter> emitters;
 };
+
+class NebulaRenderer
+{
+public:
+    struct Cloud
+    {
+        glm::vec2 offset{0, 0};
+        TextureRef texture;
+        float size = 512.0f;
+    };
+
+    std::vector<Cloud> clouds;
+};

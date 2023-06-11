@@ -27,6 +27,7 @@
 #include "components/player.h"
 #include "components/faction.h"
 #include "components/ai.h"
+#include "components/radarblock.h"
 #include "ai/ai.h"
 
 #define STRINGIFY(n) #n
@@ -69,6 +70,14 @@
     sp::script::ComponentHandler<T>::array_resize_func = [](T& t, int new_size) { t.A.resize(new_size); };
 #define BIND_ARRAY_MEMBER(T, A, MEMBER) \
     sp::script::ComponentHandler<T>::indexed_members[STRINGIFY(MEMBER)] = { \
+        [](lua_State* L, const T& t, int n) { \
+            return sp::script::Convert<decltype(t.A[n].MEMBER)>::toLua(L, t.A[n].MEMBER); \
+        }, [](lua_State* L, T& t, int n) { \
+            t.A[n].MEMBER = sp::script::Convert<decltype(t.A[n].MEMBER)>::fromLua(L, -1); \
+        } \
+    };
+#define BIND_ARRAY_MEMBER_NAMED(T, A, NAME, MEMBER) \
+    sp::script::ComponentHandler<T>::indexed_members[NAME] = { \
         [](lua_State* L, const T& t, int n) { \
             return sp::script::Convert<decltype(t.A[n].MEMBER)>::toLua(L, t.A[n].MEMBER); \
         }, [](lua_State* L, T& t, int n) { \
@@ -607,4 +616,15 @@ void initComponentScriptBindings()
     BIND_MEMBER(ConstantParticleEmitter, start_size);
     BIND_MEMBER(ConstantParticleEmitter, end_size);
     BIND_MEMBER(ConstantParticleEmitter, life_time);
+
+    sp::script::ComponentHandler<RadarBlock>::name("radar_block");
+    BIND_MEMBER(RadarBlock, range);
+    BIND_MEMBER(RadarBlock, behind);
+    sp::script::ComponentHandler<NeverRadarBlocked>::name("never_radar_blocked");
+
+    sp::script::ComponentHandler<NebulaRenderer>::name("nebula_renderer");
+    BIND_ARRAY(NebulaRenderer, clouds);
+    BIND_ARRAY_MEMBER(NebulaRenderer, clouds, offset);
+    BIND_ARRAY_MEMBER_NAMED(NebulaRenderer, clouds, "texture", texture.name);
+    BIND_ARRAY_MEMBER(NebulaRenderer, clouds, size);
 }

@@ -10,3 +10,4 @@ require("api/entity/spacestation.lua")
 
 require("api/entity/asteroid.lua")
 require("api/entity/mine.lua")
+require("api/entity/nebula.lua")

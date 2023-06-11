@@ -124,3 +124,67 @@ void MeshRenderSystem::render3D(sp::ecs::Entity e)
     if (mrc->specular_texture.ptr || mrc->illumination_texture.ptr)
         glActiveTexture(GL_TEXTURE0);
 }
+
+NebulaRenderSystem::NebulaRenderSystem()
+{
+    RenderSystem::add3DHandler<NebulaRenderSystem>(this, true);
+}
+
+void NebulaRenderSystem::update(float delta)
+{
+}
+
+void NebulaRenderSystem::render3D(sp::ecs::Entity e)
+{
+    auto nr = e.getComponent<NebulaRenderer>();
+    if (!nr) return;
+    auto transform = e.getComponent<sp::Transform>();
+    if (!transform) return;
+
+    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
+
+    struct VertexAndTexCoords
+    {
+        glm::vec3 vertex;
+        glm::vec2 texcoords;
+    };
+    std::array<VertexAndTexCoords, 4> quad{
+        glm::vec3{}, {0.f, 1.f},
+        glm::vec3{}, {1.f, 1.f},
+        glm::vec3{}, {1.f, 0.f},
+        glm::vec3{}, {0.f, 0.f}
+    };
+
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+
+    for(auto& cloud : nr->clouds)
+    {
+        glm::vec3 position = glm::vec3(transform->getPosition().x, transform->getPosition().y, 0) + glm::vec3(cloud.offset.x, cloud.offset.y, 0);
+        float size = cloud.size;
+
+        float distance = glm::length(camera_position - position);
+        float alpha = 1.0f - (distance / 10000.0f);
+        if (alpha < 0.0f)
+            continue;
+
+        // setup our quad.
+        for (auto& point : quad)
+        {
+            point.vertex = position;
+        }
+
+        if (!cloud.texture.ptr)
+            cloud.texture.ptr = textureManager.getTexture(cloud.texture.name);
+        if (cloud.texture.ptr)
+            cloud.texture.ptr->bind();
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha * 0.8f, alpha * 0.8f, alpha * 0.8f, size);
+        auto cloud_model_matrix = glm::translate(glm::identity<glm::mat4>(), {cloud.offset.x, cloud.offset.y, 0});
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(cloud_model_matrix));
+
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+        std::initializer_list<uint16_t> indices = { 0, 3, 2, 0, 2, 1 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
+    }
+}
