@@ -15,16 +15,16 @@ REGISTER_MULTIPLAYER_CLASS(HomingMissile, "HomingMissile");
 HomingMissile::HomingMissile()
 : MissileWeapon("HomingMissile", MissileWeaponData::getDataFor(MW_Homing))
 {
-    setRadarSignatureInfo(0.0, 0.1, 0.2);
+    setRadarSignatureInfo(0.0f, 0.1f, 0.2f);
 }
 
 void HomingMissile::hitObject(P<SpaceObject> object)
 {
     DamageInfo info(owner, DT_Kinetic, getPosition());
-    object->takeDamage(category_modifier * 35, info);
+    object->takeDamage(category_modifier * 35.0f, info);
     P<ExplosionEffect> e = new ExplosionEffect();
-    e->setSize(category_modifier * 30);
+    e->setSize(category_modifier * 30.0f);
     e->setPosition(getPosition());
     e->setOnRadar(true);
-    e->setRadarSignatureInfo(0.0, 0.0, 0.5);
+    e->setRadarSignatureInfo(0.0f, 0.0f, 0.5f);
 }

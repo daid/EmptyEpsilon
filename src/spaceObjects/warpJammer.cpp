@@ -46,11 +46,11 @@ PVector<WarpJammer> WarpJammer::jammer_list;
 WarpJammer::WarpJammer()
 : SpaceObject(100, "WarpJammer")
 {
-    range = 7000.0;
-    hull = 50;
+    range = 7000.0f;
+    hull = 50.0f;
 
     jammer_list.push_back(this);
-    setRadarSignatureInfo(0.05, 0.5, 0.0);
+    setRadarSignatureInfo(0.05f, 0.5f, 0.0f);
 
     registerMemberReplication(&range);
 
@@ -74,7 +74,7 @@ void WarpJammer::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, flo
         color = glm::u8vec4(200, 150, 100, 64);
         if (my_spaceship && my_spaceship->isEnemy(this))
             color = glm::u8vec4(255, 0, 0, 64);
-        renderer.drawCircleOutline(position, range*scale, 2.0, color);
+        renderer.drawCircleOutline(position, range * scale, 2.0f, color);
     }
 }
 
@@ -83,12 +83,12 @@ void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
     if (info.type == DT_EMP)
         return;
     hull -= damage_amount;
-    if (hull <= 0)
+    if (hull <= 0.0f)
     {
         P<ExplosionEffect> e = new ExplosionEffect();
         e->setSize(getRadius());
         e->setPosition(getPosition());
-        e->setRadarSignatureInfo(0.5, 0.5, 0.1);
+        e->setRadarSignatureInfo(0.5f, 0.5f, 0.1f);
 
         if (on_destruction.isSet())
         {

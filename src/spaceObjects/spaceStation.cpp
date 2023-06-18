@@ -29,7 +29,7 @@ SpaceStation::SpaceStation()
     restocks_scan_probes = true;
     restocks_missiles_docked = true;
     comms_script_name = "comms_station.lua";
-    setRadarSignatureInfo(0.2, 0.5, 0.5);
+    setRadarSignatureInfo(0.2f, 0.5f, 0.5f);
 
     callsign = "DS" + string(getMultiplayerId());
 }
@@ -69,7 +69,7 @@ void SpaceStation::destroyedByDamage(DamageInfo& info)
     ExplosionEffect* e = new ExplosionEffect();
     e->setSize(getRadius());
     e->setPosition(getPosition());
-    e->setRadarSignatureInfo(0.0, 0.4, 0.4);
+    e->setRadarSignatureInfo(0.0f, 0.4f, 0.4f);
 
     if (info.instigator)
     {

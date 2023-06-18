@@ -20,7 +20,6 @@ struct VertexAndTexCoords
     glm::vec2 texcoords;
 };
 
-
 /// A Nebula is a piece of space terrain with a 5U radius that blocks long-range radar, but not short-range radar.
 /// This hides any SpaceObjects inside of a Nebula, as well as SpaceObjects on the other side of its radar "shadow", from any SpaceShip outside of it.
 /// Likewise, a SpaceShip fully inside of a nebula has effectively no long-range radar functionality.
@@ -41,7 +40,7 @@ Nebula::Nebula()
     setCollisionRadius(1);
     setRotation(random(0, 360));
     radar_visual = irandom(1, 3);
-    setRadarSignatureInfo(0.0, 0.8, -1.0);
+    setRadarSignatureInfo(0.0f, 0.8f, -1.0f);
 
     registerMemberReplication(&radar_visual);
 

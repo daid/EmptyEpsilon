@@ -30,15 +30,15 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     auto stats = new GuiElement(this, "ENGINEER_STATS");
     stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 200)->setAttribute("layout", "vertical");
 
-    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45f, tr("Energy"), "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setSize(240, 40);
-    hull_display = new GuiKeyValueDisplay(stats, "HULL_DISPLAY", 0.45, tr("health","Hull"), "");
+    hull_display = new GuiKeyValueDisplay(stats, "HULL_DISPLAY", 0.45f, tr("health","Hull"), "");
     hull_display->setIcon("gui/icons/hull")->setTextSize(20)->setSize(240, 40);
-    front_shield_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45, tr("shields", "Front"), "");
+    front_shield_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45f, tr("shields", "Front"), "");
     front_shield_display->setIcon("gui/icons/shields-fore")->setTextSize(20)->setSize(240, 40);
-    rear_shield_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45, tr("shields", "Rear"), "");
+    rear_shield_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45f, tr("shields", "Rear"), "");
     rear_shield_display->setIcon("gui/icons/shields-aft")->setTextSize(20)->setSize(240, 40);
-    coolant_display = new GuiKeyValueDisplay(stats, "COOLANT_DISPLAY", 0.45, tr("total","Coolant"), "");
+    coolant_display = new GuiKeyValueDisplay(stats, "COOLANT_DISPLAY", 0.45f, tr("total","Coolant"), "");
     coolant_display->setIcon("gui/icons/coolant")->setTextSize(20)->setSize(240, 40);
 
     self_destruct_button = new GuiSelfDestructButton(this, "SELF_DESTRUCT");
@@ -453,7 +453,7 @@ void EngineeringScreen::addSystemEffect(string key, string value)
 {
     if (system_effects_index == system_effects.size())
     {
-        GuiKeyValueDisplay* item = new GuiKeyValueDisplay(system_effects_container, "", 0.7, key, value);
+        GuiKeyValueDisplay* item = new GuiKeyValueDisplay(system_effects_container, "", 0.7f, key, value);
         item->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 40);
         system_effects.push_back(item);
     }else{

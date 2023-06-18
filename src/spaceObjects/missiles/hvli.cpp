@@ -16,7 +16,7 @@ REGISTER_MULTIPLAYER_CLASS(HVLI, "HVLI");
 HVLI::HVLI()
 : MissileWeapon("HVLI", MissileWeaponData::getDataFor(MW_HVLI))
 {
-    setRadarSignatureInfo(0.1, 0.0, 0.0);
+    setRadarSignatureInfo(0.1f, 0.0f, 0.0f);
     setCollisionBox({10, 30}); // Make it a bit harder to the HVLI to phase trough smaller enemies
 }
 
@@ -25,12 +25,12 @@ void HVLI::hitObject(P<SpaceObject> object)
     DamageInfo info(owner, DT_Kinetic, getPosition());
     float alive_for = MissileWeaponData::getDataFor(MW_HVLI).lifetime - lifetime;
     if (alive_for > 2.0f)
-        object->takeDamage(category_modifier * 10, info);
+        object->takeDamage(category_modifier * 10.0f, info);
     else
-        object->takeDamage(category_modifier * 10 * (alive_for / 2.0f), info);
+        object->takeDamage(category_modifier * 10.0f * (alive_for / 2.0f), info);
     P<ExplosionEffect> e = new ExplosionEffect();
-    e->setSize(category_modifier * 20);
+    e->setSize(category_modifier * 20.0f);
     e->setPosition(getPosition());
     e->setOnRadar(true);
-    setRadarSignatureInfo(0.0, 0.0, 0.1);
+    setRadarSignatureInfo(0.0f, 0.0f, 0.1f);
 }

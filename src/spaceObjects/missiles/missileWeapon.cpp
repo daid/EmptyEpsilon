@@ -62,7 +62,7 @@ void MissileWeapon::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, 
 {
     if (long_range) return;
 
-    renderer.drawRotatedSprite("radar/arrow.png", position, 32 * (0.25f + 0.25f * category_modifier), getRotation()-rotation, data.color);
+    renderer.drawRotatedSprite("radar/arrow.png", position, 32.0f * (0.25f + 0.25f * category_modifier), getRotation() - rotation, data.color);
 }
 
 void MissileWeapon::update(float delta)
@@ -74,20 +74,20 @@ void MissileWeapon::update(float delta)
 
     if (!launch_sound_played)
     {
-        soundManager->playSound(data.fire_sound, getPosition(), 400.0, 0.6, (1.0f + random(-0.2f, 0.2f)) * size_speed_modifier);
+        soundManager->playSound(data.fire_sound, getPosition(), 400.0f, 0.6f, (1.0f + random(-0.2f, 0.2f)) * size_speed_modifier);
         launch_sound_played = true;
     }
 
     // Since we do want the range to remain the same, ensure that slow missiles don't die down as fast.
     lifetime -= delta * size_speed_modifier;
-    if (lifetime < 0 && isServer())
+    if (lifetime < 0.0f && isServer())
     {
         lifeEnded();
         destroy();
     }
     setVelocity(vec2FromAngle(getRotation()) * data.speed * size_speed_modifier);
 
-    if (delta > 0)
+    if (delta > 0.0f)
     {
         ParticleEngine::spawn(glm::vec3(getPosition().x, getPosition().y, 0), glm::vec3(getPosition().x, getPosition().y, 0), glm::vec3(1, 0.8, 0.8), glm::vec3(0, 0, 0), 5, 20, 5.0);
     }

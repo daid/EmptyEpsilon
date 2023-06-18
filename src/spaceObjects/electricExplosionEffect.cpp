@@ -148,8 +148,8 @@ void ElectricExplosionEffect::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 
 
 void ElectricExplosionEffect::update(float delta)
 {
-    if (delta > 0 && lifetime == maxLifetime)
-        soundManager->playSound("sfx/emp_explosion.wav", getPosition(), size * 2, 0.6);
+    if (delta > 0.0f && lifetime == maxLifetime)
+        soundManager->playSound("sfx/emp_explosion.wav", getPosition(), size * 2.0f, 0.6f);
     lifetime -= delta;
     if (lifetime < 0)
         destroy();

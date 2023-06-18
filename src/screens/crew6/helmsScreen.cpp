@@ -70,11 +70,11 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
     heading_hint->setAlignment(sp::Alignment::Center)->setSize(0, 0);
 
-    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45f, tr("Energy"), "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 40);
-    heading_display = new GuiKeyValueDisplay(this, "HEADING_DISPLAY", 0.45, tr("Heading"), "");
+    heading_display = new GuiKeyValueDisplay(this, "HEADING_DISPLAY", 0.45f, tr("Heading"), "");
     heading_display->setIcon("gui/icons/heading")->setTextSize(20)->setPosition(20, 140, sp::Alignment::TopLeft)->setSize(240, 40);
-    velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
+    velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45f, tr("Speed"), "");
     velocity_display->setIcon("gui/icons/speed")->setTextSize(20)->setPosition(20, 180, sp::Alignment::TopLeft)->setSize(240, 40);
 
     GuiElement* engine_layout = new GuiElement(this, "ENGINE_LAYOUT");
