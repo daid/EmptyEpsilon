@@ -276,7 +276,6 @@ msgstr ""
 #: scripts/scenario_30_brokenglass.lua:1231
 msgctxt "wormhole-comms"
 msgid ""
-"\n"
 "Hello Captain. Have you noticed our cool wormhole?\n"
 "\n"
 "We're studying the energy radiating from the wormhole, and the similarities "

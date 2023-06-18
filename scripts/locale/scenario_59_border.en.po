@@ -6272,8 +6272,8 @@ msgstr ""
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
-"Enemy stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f"
-"%%)\n"
+"Enemy stations: %i out of %i survived (%.1f%%), strength: %i out of %i "
+"(%.1f%%)\n"
 msgstr ""
 
 #: scripts/scenario_59_border.lua:18910
