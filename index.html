@@ -934,7 +934,7 @@ function updateDownloadList(div_id, prerelease=false)
 			{
                 var asset = release["assets"][idx2];
                 var title = asset["name"];
-				var url = asset["browser_download_url"];
+                var url = asset["browser_download_url"];
                 var os = "unknown";
                 if (title.startsWith("Win32_"))
                     os = "windows";
@@ -944,10 +944,12 @@ function updateDownloadList(div_id, prerelease=false)
                     os = "android";
                 if (title.endsWith(".deb"))
                     os = "debian";
-				var row = '<tr class="' + os + '"><td><a href="' + url + '"><img src="images/os_' + os + '.svg" width="24"></a><td><a href="' + url + '" class="download ' + os + '">' + title + '</a><td>' + release_name;
+                var row = '<tr class="' + os + '"><td><a href="' + url + '"><img src="images/os_' + os + '.svg" width="24"></a><td><a href="' + url + '" class="download ' + os + '">' + title + '</a><td>' + release_name;
     			html += row;
-                if (os == "android")
-                    html += " [BETA]";
+                if (os == "android") {
+                    if (/(\d+)\.(\d+)\.(\d+)/.exec(title)[1] < 2023)
+                        html += " [BETA]";
+                }
                 if (prerelease)
                     html += " [PRERELEASE]";
 			}
