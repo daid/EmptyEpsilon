@@ -315,6 +315,7 @@ public:
     // Call on the server to play a sound on the main screen.
     void playSoundOnMainScreen(string sound_name);
 
+    float getNetSubsystemEnergyUsage(ESystem system);
     float getNetSystemEnergyUsage();
 
     // Ship's log functions

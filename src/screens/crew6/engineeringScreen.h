@@ -44,6 +44,7 @@ private:
         GuiArrow* heat_arrow;
         GuiImage* heat_icon;
         GuiProgressSlider* power_bar;
+        GuiLabel* power_label;
         GuiProgressSlider* coolant_bar;
         GuiImage* coolant_max_indicator;
     };
