@@ -13,6 +13,7 @@ public:
 
 protected:
     string text;
+    bool delete_on_focus;
     int selection_start = 0;
     int selection_end = 0;
 
@@ -31,7 +32,7 @@ protected:
 
     glm::vec2 render_offset{0, 0};
 public:
-    GuiTextEntry(GuiContainer* owner, string id, string text);
+    GuiTextEntry(GuiContainer* owner, string id, string text, bool focusdelete=false);
     virtual ~GuiTextEntry();
 
     virtual void onDraw(sp::RenderTarget& renderer) override;

@@ -3,12 +3,13 @@
 #include "clipboard.h"
 
 
-GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
+GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text, bool focusdelete)
 : GuiElement(owner, id), text(text), text_size(30), func(nullptr)
 {
     blink_timer.repeat(blink_rate);
     front_style = theme->getStyle("textentry.front");
     back_style = theme->getStyle("textentry.back");
+    delete_on_focus = focus;
 }
 
 GuiTextEntry::~GuiTextEntry()
@@ -338,6 +339,7 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
 
 void GuiTextEntry::onFocusGained()
 {
+    if (delete_on_focus) setText("");
     typing_indicator = true;
     blink_timer.repeat(blink_rate);
     SDL_StartTextInput();
