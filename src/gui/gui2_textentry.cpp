@@ -9,7 +9,7 @@ GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text, bool foc
     blink_timer.repeat(blink_rate);
     front_style = theme->getStyle("textentry.front");
     back_style = theme->getStyle("textentry.back");
-    delete_on_focus = focus;
+    delete_on_focus = focusdelete;
 }
 
 GuiTextEntry::~GuiTextEntry()
