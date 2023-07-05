@@ -12,4 +12,5 @@ class TypeName
 {
 public:
     string type_name;
+    string localized;
 };

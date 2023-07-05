@@ -406,6 +406,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(CallSign, callsign);
     sp::script::ComponentHandler<TypeName>::name("typename");
     BIND_MEMBER(TypeName, type_name);
+    BIND_MEMBER(TypeName, localized);
 
     sp::script::ComponentHandler<LongRangeRadar>::name("long_range_radar");
     BIND_MEMBER(LongRangeRadar, short_range);
@@ -498,6 +499,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(ImpulseEngine, actual);
     sp::script::ComponentHandler<ManeuveringThrusters>::name("maneuvering_thrusters");
     BIND_SHIP_SYSTEM(ManeuveringThrusters);
+    BIND_MEMBER(ManeuveringThrusters, speed);
+    BIND_MEMBER(ManeuveringThrusters, target);
+    BIND_MEMBER(ManeuveringThrusters, rotation_request);
     sp::script::ComponentHandler<CombatManeuveringThrusters>::name("combat_maneuvering_thrusters");
     BIND_MEMBER(CombatManeuveringThrusters, charge);
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.speed, "boost_speed");

@@ -6,7 +6,7 @@
 -- @script scenario_10_empty
 
 
-function Asteroid()
+function AsteroidX()
     local e = createEntity()
     e.transform = {rotation=random(0, 360)}
     e.radar_signature = {gravity=0.05}
@@ -34,7 +34,7 @@ function Asteroid()
     return e
 end
 
-function PlayerSpaceship()
+function PlayerSpaceshipX()
     local e = createEntity()
     local size = 300
     e.transform = {rotation=random(0, 360)}
@@ -95,15 +95,22 @@ end
 
 function init()
     local a = Asteroid()
-    a.transform = {position={500, 1000}}
+    a:setPosition(500, 1000)
     
     p = PlayerSpaceship()
-    p.transform = {position={5000, 5000}}
+    p:setTemplate("Atlantis")
+    p:setPosition(0, 0)
 
     print("Print function from init.")
     print("Player is at:", p.transform.position)
 end
 
+print_delay = 3
 function update(delta)
     -- No victory condition
+    print_delay = print_delay - delta
+    if print_delay < 0 then
+        print_delay = random(1, 4)
+        print(print_delay)
+    end
 end

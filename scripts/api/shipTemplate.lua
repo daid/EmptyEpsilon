@@ -31,7 +31,7 @@ end
 --- Example: template:setName("Phobos T3")
 function ShipTemplate:setName(name)
     __ship_templates[name] = self
-    self.typename = {type_name=name}
+    self.typename = {type_name=name, localized=name}
     return self
 end
 --- Sets the displayed vessel model designation for ShipTemplateBasedObjects created from this ShipTemplate.
@@ -40,7 +40,7 @@ end
 --- template:setLocaleName("Phobos T3")
 --- template:setLocaleName(_("ship","Phobos T3")) -- with a translation-exposed name
 function ShipTemplate:setLocaleName(name)
-    --TODO
+    self.typename.localized = name
     return self
 end
 --- Sets the vessel class and subclass for ShipTemplateBasedObjects created from this ShipTemplate.
@@ -59,6 +59,7 @@ end
 --- Sets the description shown in the science database for ShipTemplateBasedObjects created from this ShipTemplate.
 --- Example: template:setDescription(_("The Phobos T3 is most any navy's workhorse frigate."))
 function ShipTemplate:setDescription(description)
+    --TODO
     return self
 end
 --- Sets the object-oriented subclass of ShipTemplateBasedObject to create from this ShipTemplate.
@@ -70,6 +71,13 @@ function ShipTemplate:setType(template_type)
     self.__type = template_type
     if template_type == "playership" then
         __player_ship_templates[#__player_ship_templates + 1] = self
+        --Add some default player ship components.
+        self.reactor = {}
+        self.coolant = {}
+        self.self_destruct = {}
+        self.science_scanner = {}
+        self.scan_probe_launcher = {}
+        self.hacking_device = {}
     end
     if template_type == "station" then
         if self.docking_bay == nil then self.docking_bay = {} end
@@ -214,29 +222,37 @@ end
 --- The default ShipTemplate adds 0 tubes and an 8-second loading time.
 --- Example: template:setTubes(6,15.0) -- creates 6 weapon tubes with 15-second loading times
 function ShipTemplate:setTubes(amount, loading_time)
+    self.missile_tubes = {}
+    for n=1,amount do
+        self.missile_tubes[n] = {load_time=loading_time}
+    end
     return self
 end
 --- Sets the delay, in seconds, for loading and unloading the WeaponTube with the given index.
 --- Defaults to 8.0.
 --- Example: template:setTubeLoadTime(0,12) -- sets the loading time for tube 0 to 12 seconds
 function ShipTemplate:setTubeLoadTime(index, time)
+    self.missile_tubes[index+1].load_time = time
     return self
 end
 --- Sets which weapon types the WeaponTube with the given index can load.
 --- Note the spelling of "missle".
 --- Example: template:weaponTubeAllowMissle(0,"Homing") -- allows Homing missiles to be loaded in tube 0
 function ShipTemplate:weaponTubeAllowMissle(index, type)
+    --TODO
     return self
 end
 --- Sets which weapon types the WeaponTube with the given index can't load.
 --- Note the spelling of "missle".
 --- Example: template:weaponTubeDisallowMissle(0,"Homing") -- prevents Homing missiles from being loaded in tube 0
 function ShipTemplate:weaponTubeDisallowMissle(index, type)
+    --TODO
     return self
 end
 --- Sets a WeaponTube with the given index to allow loading only the given weapon type.
 --- Example: template:setWeaponTubeExclusiveFor(0,"Homing") -- allows only Homing missiles to be loaded in tube 0
 function ShipTemplate:setWeaponTubeExclusiveFor(index, type)
+    --TODO
     return self
 end
 --- Sets the angle, relative to the ShipTemplateBasedObject's forward bearing, toward which the WeaponTube with the given index points.
@@ -245,6 +261,7 @@ end
 --- -- Sets tube 0 to point 90 degrees right of forward, and tube 1 to point 90 degrees left of forward
 --- template:setTubeDirection(0,90):setTubeDirection(1,-90)
 function ShipTemplate:setTubeDirection(index, direction)
+    self.missile_tubes[index+1].direction = direction
     return self
 end
 --- Sets the weapon size launched from the WeaponTube with the given index.
@@ -285,10 +302,12 @@ end
 --- Example:
 --- -- Sets the forward impulse speed to 80, rotational speed to 15, forward acceleration to 25, reverse speed to 20, and reverse acceleration to the same as the forward acceleration
 --- template:setSpeed(80,15,25,20)
-function ShipTemplate:setSpeed(forward_speed, forward_acceleration, reverse_speed, reverse_acceleration)
+function ShipTemplate:setSpeed(forward_speed, turn_rate, forward_acceleration, reverse_speed, reverse_acceleration)
     if reverse_speed == nil then reverse_speed = forward_speed end
     if reverse_acceleration == nil then reverse_acceleration = forward_acceleration end
+    if self.maneuvering_thrusters == nil then self.maneuvering_thrusters = {} end
     if self.impulse_engine == nil then self.impulse_engine = {} end
+    self.maneuvering_thrusters.speed = turn_rate
     self.impulse_engine.max_speed_forward = forward_speed
     self.impulse_engine.max_speed_reverse = reverse_speed
     self.impulse_engine.acceleration_forward = forward_acceleration
@@ -418,7 +437,7 @@ end
 --- Defaults to arrow.png. ShipTemplate:setType("station") sets this to blip.png.
 --- Example: template:setRadarTrace("cruiser.png")
 function ShipTemplate:setRadarTrace(trace)
-    --TODO
+    self.radar_trace.icon = "radar/" .. trace
     return self
 end
 --- Sets the long-range radar range of SpaceShips created from this ShipTemplate.
@@ -474,14 +493,14 @@ end
 --- Defaults to true.
 --- Example: template:setCanCombatManeuver(false)
 function ShipTemplate:setCanCombatManeuver(enabled)
-    --TODO
+    if enabled then self.combat_maneuvering_thrusters = {} else self.combat_maneuvering_thrusters = nil end
     return self
 end
 --- Defines whether self-destruct controls appear on related crew screens in PlayerSpaceships created from this ShipTemplate.
 --- Defaults to true.
 --- Example: template:setCanSelfDestruct(false)
 function ShipTemplate:setCanSelfDestruct(enabled)
-    --TODO
+    if enabled then self.self_destruct = {} else self.self_destruct = nil end
     return self
 end
 --- Defines whether ScanProbe-launching controls appear on related crew screens in PlayerSpaceships created from this ShipTemplate.

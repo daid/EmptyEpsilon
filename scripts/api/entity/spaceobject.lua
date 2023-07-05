@@ -253,7 +253,8 @@ end
 --- Returns the name of the map sector, such as "A4", where this SpaceObject is located.
 --- Example: obj:getSectorName()
 function Entity:getSectorName()
-    --TODO
+    local x, y = self:getPosition()
+    return getSectorName(x, y)
 end
 --- Deals a specific amount of a specific type of damage to this SpaceObject.
 --- Requires a numeric value for the damage amount, and accepts an optional DamageInfo type.
