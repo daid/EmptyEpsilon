@@ -426,7 +426,8 @@ end
 --- To place multiple rooms, declare addRoom() multiple times.
 --- Example: template::addRoom(0,0,3,2) -- adds a 3x2 room with its upper-left coordinate at position 0,0
 function ShipTemplate:addRoom(x, y, w, h)
-    --TODO
+    if self.internal_rooms == nil then self.internal_rooms = {} end
+    self.internal_rooms[#self.internal_rooms+1] = {position={x, y}, size={w, h}}
     return self
 end
 
@@ -437,7 +438,9 @@ end
 --- To place multiple rooms, declare addRoomSystem() multiple times.
 --- Example: template:addRoomSystem(1,2,3,4,"reactor")  -- adds a 3x4 room with its upper-left coordinate at position 1,2 that contains the Reactor system
 function ShipTemplate:addRoomSystem(x, y, w, h, system)
-    --TODO
+    if self.internal_rooms == nil then self.internal_rooms = {} end
+    self.internal_rooms[#self.internal_rooms+1] = {position={x, y}, size={w, h}}
+    --TODO: system
     return self
 end
 --- Adds a door between rooms in a ShipTemplate.

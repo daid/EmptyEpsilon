@@ -30,6 +30,7 @@
 #include "ai/ai.h"
 #include "components/radarblock.h"
 #include "components/gravity.h"
+#include "components/internalrooms.h"
 
 #define STRINGIFY(n) #n
 #define BIND_MEMBER(T, MEMBER) \
@@ -196,6 +197,28 @@ template<> struct Convert<glm::u8vec4> {
             result.g = float((n >> 8) & 0xFF) / 255.0f;
             result.b = float((n >> 16) & 0xFF) / 255.0f;
             result.a = 1.0f;
+        }
+        return result;
+    }
+};
+template<> struct Convert<glm::ivec2> {
+    static int toLua(lua_State* L, glm::ivec2 value) {
+        lua_createtable(L, 3, 0);
+        lua_pushinteger(L, value.x);
+        lua_rawseti(L, -2, 1);
+        lua_pushinteger(L, value.y);
+        lua_rawseti(L, -2, 2);
+        return 1;
+    }
+    static glm::ivec2 fromLua(lua_State* L, int idx) {
+        glm::ivec2 result{};
+        if (lua_istable(L, idx)) {
+            lua_geti(L, idx, 1);
+            result.x = lua_tointeger(L, -1);
+            lua_pop(L, 1);
+            lua_geti(L, idx, 2);
+            result.y = lua_tointeger(L, -1);
+            lua_pop(L, 1);
         }
         return result;
     }
@@ -696,5 +719,12 @@ void initComponentScriptBindings()
     BIND_MEMBER(Gravity, force);
     BIND_MEMBER(Gravity, damage);
     BIND_MEMBER(Gravity, wormhole_target);
-    //todo: on_teleportation
+    //TODO: on_teleportation
+
+    sp::script::ComponentHandler<InternalRooms>::name("internal_rooms");
+    BIND_ARRAY(InternalRooms, rooms);
+    BIND_ARRAY_MEMBER(InternalRooms, rooms, position);
+    BIND_ARRAY_MEMBER(InternalRooms, rooms, size);
+    //TODO: BIND_ARRAY_MEMBER(InternalRooms, rooms, system);
+    //TODO: Doors
 }
