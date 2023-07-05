@@ -1,34 +1,50 @@
+#include "scanning.h"
+#include "components/scanning.h"
+#include "multiplayer_server.h"
 
-/*
-TODO
-    if (game_server)
-    {
-        if (scanning_target)
-        {
+#include <ecs/query.h>
+
+
+void ScanningSystem::update(float delta)
+{
+    for(auto [entity, scanner] : sp::ecs::Query<ScienceScanner>()) {
+        if (auto ss = scanner.target.getComponent<ScanState>()) {
             // If the scan setting or a target's scan complexity is none/0,
             // complete the scan after a delay.
-            if (scanning_complexity < 1)
+            if (ss->complexity < 1)
             {
-                scanning_delay -= delta;
-                if (scanning_delay < 0)
-                {
-                    scanning_target->scannedBy(this);
-                    scanning_target = NULL;
-                }
+                scanner.delay -= delta;
+                if (scanner.delay < 0 && game_server)
+                    scanningFinished(entity);
             }
         }else{
             // Otherwise, ignore the scanning_delay setting.
-            scanning_delay = 0.0;
-        }
-    }else{
-        // Actions performed on the client-side only.
-
-        // If scan settings or the scan target's complexity is 0/none, tick
-        // the scan delay timer.
-        if (scanning_complexity < 1)
-        {
-            if (scanning_delay > 0.0f)
-                scanning_delay -= delta;
+            scanner.delay = 0.0;
         }
     }
-*/
+}
+
+void ScanningSystem::scanningFinished(sp::ecs::Entity source)
+{
+    auto scanner = source.getComponent<ScienceScanner>();
+    if (!scanner) return;
+    auto ss = scanner->target.getComponent<ScanState>();
+    if (ss) {
+        switch(ss->getStateFor(source)) {
+        case ScanState::State::NotScanned:
+        case ScanState::State::FriendOrFoeIdentified:
+            if (ss->allow_simple_scan)
+                ss->setStateFor(source, ScanState::State::SimpleScan);
+            else
+                ss->setStateFor(source, ScanState::State::FullScan);
+            break;
+        case ScanState::State::SimpleScan:
+            ss->setStateFor(source, ScanState::State::FullScan);
+            break;
+        case ScanState::State::FullScan:
+            break;
+        }
+    }
+    scanner->target = {};
+    scanner->delay = 0.0;
+}

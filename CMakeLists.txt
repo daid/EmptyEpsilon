@@ -435,6 +435,8 @@ set(MAIN_SOURCES
     src/systems/pathfinding.cpp
     src/systems/rendering.h
     src/systems/rendering.cpp
+    src/systems/scanning.h
+    src/systems/scanning.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

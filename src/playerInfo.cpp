@@ -49,6 +49,7 @@
 #include "systems/missilesystem.h"
 #include "systems/selfdestruct.h"
 #include "systems/comms.h"
+#include "systems/scanning.h"
 
 //Ship commands
 static const uint16_t CMD_TARGET_ROTATION = 0x0001;
@@ -692,26 +693,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         }
         break;
     case CMD_SCAN_DONE:
-        if (auto ss = my_spaceship.getComponent<ScienceScanner>()) {
-            if (auto scanstate = ss->target.getComponent<ScanState>()) {
-                switch(scanstate->getStateFor(my_spaceship)) {
-                case ScanState::State::NotScanned:
-                case ScanState::State::FriendOrFoeIdentified:
-                    if (scanstate->allow_simple_scan)
-                        scanstate->setStateFor(my_spaceship, ScanState::State::SimpleScan);
-                    else
-                        scanstate->setStateFor(my_spaceship, ScanState::State::FullScan);
-                    break;
-                case ScanState::State::SimpleScan:
-                    scanstate->setStateFor(my_spaceship, ScanState::State::FullScan);
-                    break;
-                case ScanState::State::FullScan:
-                    break;
-                }
-            }
-            ss->target = {};
-            ss->delay = 0.0;
-        }
+        ScanningSystem::scanningFinished(my_spaceship);
         break;
     case CMD_SCAN_CANCEL:
         if (auto ss = my_spaceship.getComponent<ScienceScanner>()) {

@@ -46,6 +46,7 @@
 #include "systems/internalcrew.h"
 #include "systems/pathfinding.h"
 #include "systems/rendering.h"
+#include "systems/scanning.h"
 #include "packResourceProvider.h"
 #include "main.h"
 #include "epsilonServer.h"
@@ -171,6 +172,7 @@ int main(int argc, char** argv)
     engine->registerSystem<InternalCrewSystem>();
     engine->registerSystem<PathFindingSystem>();
     engine->registerSystem<MeshRenderSystem>();
+    engine->registerSystem<ScanningSystem>();
     initComponentScriptBindings();
     string configuration_path = ".";
     if (getenv("HOME"))
