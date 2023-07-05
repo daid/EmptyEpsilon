@@ -28,8 +28,10 @@
 #include "components/faction.h"
 #include "components/ai.h"
 #include "ai/ai.h"
+#include "components/radarblock.h"
+#include "components/gravity.h"
 
-
+#define STRINGIFY(n) #n
 #define BIND_MEMBER(T, MEMBER) \
     sp::script::ComponentHandler<T>::members[STRINGIFY(MEMBER)] = { \
         [](lua_State* L, const T& t) { \
@@ -69,6 +71,14 @@
     sp::script::ComponentHandler<T>::array_resize_func = [](T& t, int new_size) { t.A.resize(new_size); };
 #define BIND_ARRAY_MEMBER(T, A, MEMBER) \
     sp::script::ComponentHandler<T>::indexed_members[STRINGIFY(MEMBER)] = { \
+        [](lua_State* L, const T& t, int n) { \
+            return sp::script::Convert<decltype(t.A[n].MEMBER)>::toLua(L, t.A[n].MEMBER); \
+        }, [](lua_State* L, T& t, int n) { \
+            t.A[n].MEMBER = sp::script::Convert<decltype(t.A[n].MEMBER)>::fromLua(L, -1); \
+        } \
+    };
+#define BIND_ARRAY_MEMBER_NAMED(T, A, NAME, MEMBER) \
+    sp::script::ComponentHandler<T>::indexed_members[NAME] = { \
         [](lua_State* L, const T& t, int n) { \
             return sp::script::Convert<decltype(t.A[n].MEMBER)>::toLua(L, t.A[n].MEMBER); \
         }, [](lua_State* L, T& t, int n) { \
@@ -402,6 +412,16 @@ void initComponentScriptBindings()
     BIND_MEMBER(ExplodeOnTouch, damage_type);
     BIND_MEMBER(ExplodeOnTouch, explosion_sfx);
 
+    sp::script::ComponentHandler<DelayedExplodeOnTouch>::name("delayed_explode_on_touch");
+    BIND_MEMBER(DelayedExplodeOnTouch, delay);
+    BIND_MEMBER(DelayedExplodeOnTouch, triggered);
+    BIND_MEMBER(DelayedExplodeOnTouch, damage_at_center);
+    BIND_MEMBER(DelayedExplodeOnTouch, damage_at_edge);
+    BIND_MEMBER(DelayedExplodeOnTouch, blast_range);
+    BIND_MEMBER(DelayedExplodeOnTouch, owner);
+    BIND_MEMBER(DelayedExplodeOnTouch, damage_type);
+    BIND_MEMBER(DelayedExplodeOnTouch, explosion_sfx);
+
     sp::script::ComponentHandler<CallSign>::name("callsign");
     BIND_MEMBER(CallSign, callsign);
     sp::script::ComponentHandler<TypeName>::name("typename");
@@ -411,16 +431,19 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<LongRangeRadar>::name("long_range_radar");
     BIND_MEMBER(LongRangeRadar, short_range);
     BIND_MEMBER(LongRangeRadar, long_range);
+    BIND_MEMBER(LongRangeRadar, radar_view_linked_entity);
     BIND_ARRAY(LongRangeRadar, waypoints);
     BIND_ARRAY_MEMBER(LongRangeRadar, waypoints, x);
     BIND_ARRAY_MEMBER(LongRangeRadar, waypoints, y);
-    //TODO: radar_view_linked_entity, callbacks
+    //TODO: callbacks for probes
 
     sp::script::ComponentHandler<Hull>::name("hull");
     BIND_MEMBER(Hull, current);
     BIND_MEMBER(Hull, max);
     BIND_MEMBER(Hull, allow_destruction);
-    BIND_MEMBER(Hull, damaged_by_flags);
+    BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_energy", (1 << int(DamageType::Energy)));
+    BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_kinetic", (1 << int(DamageType::Kinetic)));
+    BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_emp", (1 << int(DamageType::EMP)));
 
     sp::script::ComponentHandler<Shields>::name("shields");
     BIND_MEMBER_NAMED(Shields, front_system.health, "front_health");
@@ -589,4 +612,31 @@ void initComponentScriptBindings()
     BIND_MEMBER(AIController, order_target_location);
     BIND_MEMBER(AIController, order_target);
     BIND_MEMBER(AIController, new_name);
+
+    sp::script::ComponentHandler<ConstantParticleEmitter>::name("constant_particle_emitter");
+    BIND_MEMBER(ConstantParticleEmitter, interval);
+    BIND_MEMBER(ConstantParticleEmitter, travel_random_range);
+    BIND_MEMBER(ConstantParticleEmitter, start_color);
+    BIND_MEMBER(ConstantParticleEmitter, end_color);
+    BIND_MEMBER(ConstantParticleEmitter, start_size);
+    BIND_MEMBER(ConstantParticleEmitter, end_size);
+    BIND_MEMBER(ConstantParticleEmitter, life_time);
+
+    sp::script::ComponentHandler<RadarBlock>::name("radar_block");
+    BIND_MEMBER(RadarBlock, range);
+    BIND_MEMBER(RadarBlock, behind);
+    sp::script::ComponentHandler<NeverRadarBlocked>::name("never_radar_blocked");
+
+    sp::script::ComponentHandler<NebulaRenderer>::name("nebula_renderer");
+    BIND_ARRAY(NebulaRenderer, clouds);
+    BIND_ARRAY_MEMBER(NebulaRenderer, clouds, offset);
+    BIND_ARRAY_MEMBER_NAMED(NebulaRenderer, clouds, "texture", texture.name);
+    BIND_ARRAY_MEMBER(NebulaRenderer, clouds, size);
+
+    sp::script::ComponentHandler<Gravity>::name("gravity");
+    BIND_MEMBER(Gravity, range);
+    BIND_MEMBER(Gravity, force);
+    BIND_MEMBER(Gravity, damage);
+    BIND_MEMBER(Gravity, wormhole_target);
+    //todo: on_teleportation
 }

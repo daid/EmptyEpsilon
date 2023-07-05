@@ -14,9 +14,6 @@ class Nebula : public SpaceObject
 {
     static const int cloud_count = 32;
 
-    int radar_visual;
-    NebulaCloud clouds[cloud_count];
-
 public:
     float radius = 5000.0;
 

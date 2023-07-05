@@ -11,7 +11,6 @@
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
 #include "spaceObjects/asteroid.h"
-#include "spaceObjects/mine.h"
 #include "spaceObjects/blackHole.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/spaceship.h"
@@ -267,8 +266,8 @@ bool GameStateLogger::isStatic(P<SpaceObject> obj)
         return true;
     if (P<Nebula>(obj))
         return true;
-    if (P<Mine>(obj))
-        return true;
+    //if (P<Mine>(obj))
+    //    return true;
     if (P<Planet>(obj))
         return true;
     return false;

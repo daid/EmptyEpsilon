@@ -150,18 +150,56 @@ static void luaVictory(string faction)
     engine->setGameSpeed(0.0);
 }
 
+static string luaGetScenarioSetting(string key)
+{
+    if (gameGlobalInfo->scenario_settings.find(key) != gameGlobalInfo->scenario_settings.end())
+        return gameGlobalInfo->scenario_settings[key];
+    return "";
+}
+
+static void luaOnNewPlayerShip(sp::script::Callback callback)
+{
+    gameGlobalInfo->on_new_player_ship = callback;
+}
+
+static void luaGlobalMessage(string message, std::optional<float> timeout)
+{
+    gameGlobalInfo->global_message = message;
+    gameGlobalInfo->global_message_timeout = timeout.has_value() ? timeout.value() : 5.0f;
+}
+
+static void luaAddGMFunction(string label, sp::script::Callback callback)
+{
+    gameGlobalInfo->gm_callback_functions.emplace_back(label);
+    gameGlobalInfo->gm_callback_functions.back().callback = callback;
+}
+
+static void luaClearGMFunctions()
+{
+    gameGlobalInfo->gm_callback_functions.clear();
+}
+
 void setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
-    env.setGlobal("random", &random);
+    env.setGlobal("random", static_cast<float(*)(float, float)>(&random));
     env.setGlobal("irandom", &irandom);
     env.setGlobal("print", &luaPrint);
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
     env.setGlobal("_", &luaTranslate);
+    
     env.setGlobal("createEntity", &luaCreateEntity);
     env.setGlobal("getLuaEntityFunctionTable", &luaGetEntityFunctionTable);
+    
     env.setGlobal("createClass", &luaCreateClass);
+
+    env.setGlobal("getScenarioSetting", &luaGetScenarioSetting);
+    env.setGlobal("onNewPlayerShip", &luaOnNewPlayerShip);
+    env.setGlobal("globalMessage", &luaGlobalMessage);
     env.setGlobal("victory", &luaVictory);
+
+    env.setGlobal("addGMFunction", &luaAddGMFunction);
+    env.setGlobal("clearGMFunctions", &luaClearGMFunctions);
 
     LuaConsole::checkResult(env.runFile<void>("luax.lua"));
     LuaConsole::checkResult(env.runFile<void>("api/all.lua"));

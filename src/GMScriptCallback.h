@@ -1,13 +1,13 @@
 #ifndef GM_SCRIPT_CALLBACK_H
 #define GM_SCRIPT_CALLBACK_H
 
-#include "scriptInterface.h"
+#include "script/callback.h"
 
 class GMScriptCallback
 {
 public:
     string name;
-    ScriptSimpleCallback callback;
+    sp::script::Callback callback;
 
     GMScriptCallback(string name);
 };
