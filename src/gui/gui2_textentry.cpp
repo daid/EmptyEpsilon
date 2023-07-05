@@ -340,7 +340,7 @@ void GuiTextEntry::onFocusGained()
 {
     if (select_on_focus) {
 		selection_end = 0;
-        selection_start = text.length();
+		selection_start = text.length();
     }
     typing_indicator = true;
     blink_timer.repeat(blink_rate);
