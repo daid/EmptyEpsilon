@@ -21,6 +21,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
 
     tube_rows_layout = new GuiElement(this, "TUBE_ROWS_LAYOUT");
     tube_rows_layout->setAttribute("layout", "vertical");
+    tube_rows_layout->layout.size.x = 330; // Not sure why this is needed, else buttons of tubes don't work...
 
     for (int n = MW_Count-1; n >= 0; n--)
     {

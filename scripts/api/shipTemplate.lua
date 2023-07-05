@@ -248,20 +248,28 @@ end
 --- Note the spelling of "missle".
 --- Example: template:weaponTubeAllowMissle(0,"Homing") -- allows Homing missiles to be loaded in tube 0
 function ShipTemplate:weaponTubeAllowMissle(index, type)
-    --TODO
+    local type = string.lower(type)
+    self.missile_tubes[index+1]["allow_"..type] = true
     return self
 end
 --- Sets which weapon types the WeaponTube with the given index can't load.
 --- Note the spelling of "missle".
 --- Example: template:weaponTubeDisallowMissle(0,"Homing") -- prevents Homing missiles from being loaded in tube 0
 function ShipTemplate:weaponTubeDisallowMissle(index, type)
-    --TODO
+    local type = string.lower(type)
+    self.missile_tubes[index+1]["allow_"..type] = false
     return self
 end
 --- Sets a WeaponTube with the given index to allow loading only the given weapon type.
 --- Example: template:setWeaponTubeExclusiveFor(0,"Homing") -- allows only Homing missiles to be loaded in tube 0
 function ShipTemplate:setWeaponTubeExclusiveFor(index, type)
-    --TODO
+    local type = string.lower(type)
+    self.missile_tubes[index+1]["allow_homing"] = false
+    self.missile_tubes[index+1]["allow_nuke"] = false
+    self.missile_tubes[index+1]["allow_mine"] = false
+    self.missile_tubes[index+1]["allow_emp"] = false
+    self.missile_tubes[index+1]["allow_hvli"] = false
+    self.missile_tubes[index+1]["allow_"..type] = true
     return self
 end
 --- Sets the angle, relative to the ShipTemplateBasedObject's forward bearing, toward which the WeaponTube with the given index points.

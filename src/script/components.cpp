@@ -77,6 +77,16 @@
             t.A[n].MEMBER = sp::script::Convert<decltype(t.A[n].MEMBER)>::fromLua(L, -1); \
         } \
     };
+#define BIND_ARRAY_MEMBER_FLAG(T, A, MEMBER, NAME, MASK) \
+    sp::script::ComponentHandler<T>::indexed_members[NAME] = { \
+        [](lua_State* L, const T& t, int n) { \
+            return sp::script::Convert<bool>::toLua(L, ((t.A[n].MEMBER) & (MASK)) == (MASK) ); \
+        }, [](lua_State* L, T& t, int n) { \
+            auto result = (t.A[n].MEMBER) & ~(MASK); \
+            if (sp::script::Convert<bool>::fromLua(L, -1)) result |= (MASK); \
+            t.A[n].MEMBER = result; \
+        } \
+    };
 #define BIND_ARRAY_MEMBER_NAMED(T, A, NAME, MEMBER) \
     sp::script::ComponentHandler<T>::indexed_members[NAME] = { \
         [](lua_State* L, const T& t, int n) { \
@@ -575,7 +585,11 @@ void initComponentScriptBindings()
     BIND_ARRAY(MissileTubes, mounts);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, position);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, load_time);
-    BIND_ARRAY_MEMBER(MissileTubes, mounts, type_allowed_mask);
+    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_homing", 1 << MW_Homing);
+    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_nuke", 1 << MW_Nuke);
+    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_mine", 1 << MW_Mine);
+    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_emp", 1 << MW_EMP);
+    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_hvli", 1 << MW_HVLI);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, direction);
     //TODO: BIND_ARRAY_MEMBER(MissileTubes, mounts, size);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, type_loaded);
