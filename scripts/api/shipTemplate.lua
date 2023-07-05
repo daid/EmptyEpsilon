@@ -168,7 +168,7 @@ function ShipTemplate:setRepairCrewCount(amount)
 end
 --- As ShipTemplate:setBeamWeapon().
 function ShipTemplate:setBeam(index, arc, direction, range, cycle_time, damage)
-    return self
+    return self:setBeamWeapon(index, arc, direction, range, cycle_time, damage)
 end
 --- Defines the traits of a BeamWeapon for ShipTemplateBasedObjects created from this ShipTemplate.
 --- - index: Each beam weapon in this ShipTemplate must have a unique index.
@@ -181,6 +181,11 @@ end
 --- To create a turreted beam, also add ShipTemplate:setBeamWeaponTurret(), and set the beam weapon's arc to be smaller than the turret's arc.
 --- Example: setBeamWeapon(0,90,-15,1200,3,1) -- index 0, 90-degree arc centered -15 degrees from forward, extending 1.2U, firing every 3 seconds and dealing 1 damage
 function ShipTemplate:setBeamWeapon(index, arc, direction, range, cycle_time, damage)
+    if self.beam_weapons == nil then self.beam_weapons = {} end
+    while #self.beam_weapons < index + 1 do
+        self.beam_weapons[#self.beam_weapons + 1] = {}
+    end
+    self.beam_weapons[index + 1] = {arc=arc, direction=direction, range=range, cycle_time=cycle_time, damage=damage}
     return self
 end
 --- Converts a BeamWeapon into a turret and defines its traits for SpaceShips created from this ShipTemplate.
@@ -194,12 +199,14 @@ end
 --- -- Makes beam weapon 0 a turret with a 200-degree turret arc centered on 90 degrees from forward, rotating at 5 degrees per tick (unit?)
 --- template:setBeamWeaponTurret(0,200,90,5)
 function ShipTemplate:setBeamWeaponTurret(index, arc, direction, rotation_rate)
+    --TODO
     return self
 end
 --- Sets the BeamEffect texture, by filename, for the BeamWeapon with the given index on SpaceShips created from this ShipTemplate.
 --- See BeamEffect:setTexture().
 --- Example: template:setBeamWeaponTexture("texture/beam_blue.png")
 function ShipTemplate:setBeamTexture(index, texture)
+    --TODO
     return self
 end
 --- Sets how much energy is drained each time the BeamWeapon with the given index is fired.
@@ -207,6 +214,7 @@ end
 --- Defaults to 3.0, as defined in src/spaceObjects/spaceshipParts/beamWeapon.cpp.
 --- Example: template:setBeamWeaponEnergyPerFire(0,1) -- sets beam 0 to use 1 energy per firing
 function ShipTemplate:setBeamWeaponEnergyPerFire(index, amount)
+    --TODO
     return self
 end
 --- Sets how much "beamweapon" system heat is generated, in percentage of total system heat capacity, each time the BeamWeapon with the given index is fired.
@@ -214,6 +222,7 @@ end
 --- Defaults to 0.02, as defined in src/spaceObjects/spaceshipParts/beamWeapon.cpp.
 --- Example: template:setBeamWeaponHeatPerFire(0,0.5) -- sets beam 0 to generate 0.5 (50%) system heat per firing
 function ShipTemplate:setBeamWeaponHeatPerFire(index, amount)
+    --TODO
     return self
 end
 --- Sets the number of WeaponTubes for ShipTemplateBasedObjects created from this ShipTemplate, and the default delay for loading and unloading each tube, in seconds.
@@ -222,7 +231,7 @@ end
 --- The default ShipTemplate adds 0 tubes and an 8-second loading time.
 --- Example: template:setTubes(6,15.0) -- creates 6 weapon tubes with 15-second loading times
 function ShipTemplate:setTubes(amount, loading_time)
-    self.missile_tubes = {}
+    if self.missile_tubes == nil then self.missile_tubes = {} end
     for n=1,amount do
         self.missile_tubes[n] = {load_time=loading_time}
     end
@@ -393,7 +402,7 @@ end
 --- Example: template:setWeaponStorage("HVLI", 6):setWeaponStorage("Homing",4) -- sets HVLI capacity to 6 and Homing capacity to 4
 function ShipTemplate:setWeaponStorage(type, amount)
     if self.missile_tubes == nil then self.missile_tubes = {} end
-    type = string.lower(type)
+    local type = string.lower(type)
     self.missile_tubes["storage_" .. type] = amount
     self.missile_tubes["max_" .. type] = amount
     return self

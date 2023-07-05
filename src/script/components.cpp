@@ -505,6 +505,18 @@ void initComponentScriptBindings()
     BIND_ARRAY(BeamWeaponSys, mounts);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, direction);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, range);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, turret_arc);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, turret_direction);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, turret_rotation_rate);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, cycle_time);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, damage);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, energy_per_beam_fire);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, heat_per_beam_fire);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc_color);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc_color_fire);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, damage_type);
+    //TODO: BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, texture);
 
     sp::script::ComponentHandler<Reactor>::name("reactor");
     BIND_SHIP_SYSTEM(Reactor);

@@ -23,13 +23,16 @@ function Entity:setTemplate(template_name)
     -- print("Setting template:" .. template_name)
     for key, value in next, template, nil do
         if string.sub(key, 1, 2) ~= "__" then
-            -- print(key, value)
+            print(key, value)
             self[key] = value
         end
     end
     if template.__type == "station" then
         self.physics.type = "static"
+    elseif template.__type == "playership" then
+        if self.shields then self.shields.active = false end
     end
+    --TODO: Setup energy cost distribution for available systems.
     return self
 end
 --- [DEPRECATED]

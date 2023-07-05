@@ -1,4 +1,5 @@
 local Entity = getLuaEntityFunctionTable()
+__default_player_ship_faction = "Human Navy"
 
 --- A PlayerSpaceship is a SpaceShip controlled by a player crew.
 --- If a function name begins with "command", the function is equivalent to the crew taking a corresponding action.
@@ -8,7 +9,7 @@ function PlayerSpaceship()
     e.player_control = {}
     e.transform = {rotation=random(0, 360)}
     e.callsign = {callsign="PL-???"}
-    e:setFaction("Human Navy")
+    e:setFaction(__default_player_ship_faction)
     return e
 end
 

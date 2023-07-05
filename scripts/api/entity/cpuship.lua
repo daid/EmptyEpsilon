@@ -1,4 +1,5 @@
 local Entity = getLuaEntityFunctionTable()
+__default_cpu_ship_faction = "Kraylor"
 
 --- A CpuShip is an AI-controlled SpaceShip.
 --- The AI can be assigned an order (be idle, roam freely, defend location, etc.) and a combat behavior state (attack at close or long range, be evasive).
@@ -13,7 +14,7 @@ function CpuShip()
     local e = createEntity()
     e.transform = {rotation=random(0, 360)}
     e.ai_controller = {}
-    e:setFaction("Kraylor")
+    e:setFaction(__default_cpu_ship_faction)
     return e
 end
 
