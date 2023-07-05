@@ -133,7 +133,7 @@ void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
         deot->triggered = true;
     }
     auto eot = a.getComponent<ExplodeOnTouch>();
-    if (eot) return;
+    if (!eot) return;
     if (eot->owner == b) return;
     auto hull = b.getComponent<Hull>();
     if (!hull) return;

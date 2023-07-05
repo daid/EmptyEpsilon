@@ -9,6 +9,7 @@ function PlayerSpaceship()
     e.player_control = {}
     e.transform = {rotation=random(0, 360)}
     e.callsign = {callsign="PL-???"}
+    e.scan_state = {complexity=2, depth=2, allow_simple_scan=true}
     e:setFaction(__default_player_ship_faction)
     return e
 end

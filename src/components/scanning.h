@@ -13,13 +13,18 @@ public:
         SimpleScan,
         FullScan
     };
+    struct Entry
+    {
+        sp::ecs::Entity faction;
+        ScanState::State state;
+    };
 
     /*!
      * Scan state per FactionInfo.
      * When the required faction is not in the vector, the scan state
      * is SS_NotScanned
      */
-    std::vector<std::pair<sp::ecs::Entity, ScanState::State>> per_faction;
+    std::vector<Entry> per_faction;
 
     bool allow_simple_scan = false; // Does the first scan go to a full scan or a simple scan.
     int complexity = -1; //Amount of bars each minigame has (-1 for default)

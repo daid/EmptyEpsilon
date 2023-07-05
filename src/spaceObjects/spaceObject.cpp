@@ -336,8 +336,8 @@ ScanState::State SpaceObject::getScannedStateForFaction(sp::ecs::Entity faction_
     if (!scanstate) return ScanState::State::FullScan;
 
     for(auto& it : scanstate->per_faction) {
-        if (it.first == faction_entity)
-            return it.second;
+        if (it.faction == faction_entity)
+            return it.state;
     }
     return ScanState::State::NotScanned;
 }
@@ -348,8 +348,8 @@ void SpaceObject::setScannedStateForFaction(sp::ecs::Entity faction_entity, Scan
     if (!scanstate) return;
 
     for(auto& it : scanstate->per_faction) {
-        if (it.first == faction_entity) {
-            it.second = state;
+        if (it.faction == faction_entity) {
+            it.state = state;
             return;
         }
     }
@@ -363,7 +363,7 @@ bool SpaceObject::isScanned()
     auto scanstate = entity.getComponent<ScanState>();
     if (!scanstate) return true;
     for(auto& it : scanstate->per_faction) {
-        if (it.second > ScanState::State::FriendOrFoeIdentified)
+        if (it.state > ScanState::State::FriendOrFoeIdentified)
             return true;
     }
     return false;

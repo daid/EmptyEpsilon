@@ -103,6 +103,9 @@ function init()
 
     print("Print function from init.")
     print("Player is at:", p.transform.position)
+
+    c = CpuShip()
+    c:setTemplate("Phobos T3"):setPosition(5000, 5000)
 end
 
 print_delay = 3

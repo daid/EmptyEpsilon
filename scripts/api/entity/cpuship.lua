@@ -13,7 +13,8 @@ __default_cpu_ship_faction = "Kraylor"
 function CpuShip()
     local e = createEntity()
     e.transform = {rotation=random(0, 360)}
-    e.ai_controller = {}
+    e.ai_controller = {new_name="default", orders="roaming"}
+    e.scan_state = {complexity=2, depth=2, allow_simple_scan=true}
     e:setFaction(__default_cpu_ship_faction)
     return e
 end

@@ -710,6 +710,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 }
             }
             ss->target = {};
+            ss->delay = 0.0;
         }
         break;
     case CMD_SCAN_CANCEL:

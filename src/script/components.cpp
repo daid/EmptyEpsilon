@@ -263,6 +263,30 @@ template<> struct Convert<FactionRelation> {
         return FactionRelation::Neutral;
     }
 };
+template<> struct Convert<ScanState::State> {
+    static int toLua(lua_State* L, ScanState::State value) {
+        switch(value) {
+        case ScanState::State::NotScanned: lua_pushstring(L, "none"); break;
+        case ScanState::State::FriendOrFoeIdentified: lua_pushstring(L, "fof"); break;
+        case ScanState::State::SimpleScan: lua_pushstring(L, "simple"); break;
+        case ScanState::State::FullScan: lua_pushstring(L, "full"); break;
+        }
+        return 1;
+    }
+    static ScanState::State fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "none")
+            return ScanState::State::NotScanned;
+        else if (str == "fof")
+            return ScanState::State::FriendOrFoeIdentified;
+        else if (str == "simple")
+            return ScanState::State::SimpleScan;
+        else if (str == "full")
+            return ScanState::State::FullScan;
+        luaL_error(L, "Unknown scan state type: %s", str.c_str());
+        return ScanState::State::NotScanned;
+    }
+};
 template<> struct Convert<AIOrder> {
     static int toLua(lua_State* L, AIOrder value) {
         switch(value) {
@@ -610,6 +634,14 @@ void initComponentScriptBindings()
     BIND_MEMBER(ScienceScanner, delay);
     BIND_MEMBER(ScienceScanner, max_scanning_delay);
     BIND_MEMBER(ScienceScanner, target);
+    sp::script::ComponentHandler<ScanState>::name("scan_state");
+    BIND_MEMBER(ScanState, allow_simple_scan);
+    BIND_MEMBER(ScanState, complexity);
+    BIND_MEMBER(ScanState, depth);
+    BIND_ARRAY(ScanState, per_faction);
+    BIND_ARRAY_MEMBER(ScanState, per_faction, faction);
+    BIND_ARRAY_MEMBER(ScanState, per_faction, state);
+
     sp::script::ComponentHandler<ScanProbeLauncher>::name("scan_probe_launcher");
     BIND_MEMBER(ScanProbeLauncher, max);
     BIND_MEMBER(ScanProbeLauncher, stock);

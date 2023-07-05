@@ -17,16 +17,16 @@ void ScanState::setStateFor(sp::ecs::Entity entity, ScanState::State state)
 ScanState::State ScanState::getStateForFaction(sp::ecs::Entity faction_entity)
 {
     for(const auto& it : per_faction)
-        if (it.first == faction_entity)
-            return it.second;
+        if (it.faction == faction_entity)
+            return it.state;
     return ScanState::State::NotScanned;
 }
 
 void ScanState::setStateForFaction(sp::ecs::Entity faction_entity, ScanState::State state)
 {
     for(auto& it : per_faction) {
-        if (it.first == faction_entity) {
-            it.second = state;
+        if (it.faction == faction_entity) {
+            it.state = state;
             return;
         }
     }
