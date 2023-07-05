@@ -59,7 +59,7 @@ end
 --- Sets the description shown in the science database for ShipTemplateBasedObjects created from this ShipTemplate.
 --- Example: template:setDescription(_("The Phobos T3 is most any navy's workhorse frigate."))
 function ShipTemplate:setDescription(description)
-    --TODO
+    self.__description = description
     return self
 end
 --- Sets the object-oriented subclass of ShipTemplateBasedObject to create from this ShipTemplate.
@@ -199,14 +199,16 @@ end
 --- -- Makes beam weapon 0 a turret with a 200-degree turret arc centered on 90 degrees from forward, rotating at 5 degrees per tick (unit?)
 --- template:setBeamWeaponTurret(0,200,90,5)
 function ShipTemplate:setBeamWeaponTurret(index, arc, direction, rotation_rate)
-    --TODO
+    self.beam_weapons[index + 1].turret_arc = arc
+    self.beam_weapons[index + 1].turret_direction = arc
+    self.beam_weapons[index + 1].turret_rotation_rate = rotation_rate
     return self
 end
 --- Sets the BeamEffect texture, by filename, for the BeamWeapon with the given index on SpaceShips created from this ShipTemplate.
 --- See BeamEffect:setTexture().
 --- Example: template:setBeamWeaponTexture("texture/beam_blue.png")
 function ShipTemplate:setBeamTexture(index, texture)
-    --TODO
+    self.beam_weapons[index + 1].texture = texture
     return self
 end
 --- Sets how much energy is drained each time the BeamWeapon with the given index is fired.
@@ -214,7 +216,7 @@ end
 --- Defaults to 3.0, as defined in src/spaceObjects/spaceshipParts/beamWeapon.cpp.
 --- Example: template:setBeamWeaponEnergyPerFire(0,1) -- sets beam 0 to use 1 energy per firing
 function ShipTemplate:setBeamWeaponEnergyPerFire(index, amount)
-    --TODO
+    self.beam_weapons[index + 1].energy_per_beam_fire = amount
     return self
 end
 --- Sets how much "beamweapon" system heat is generated, in percentage of total system heat capacity, each time the BeamWeapon with the given index is fired.
@@ -222,7 +224,7 @@ end
 --- Defaults to 0.02, as defined in src/spaceObjects/spaceshipParts/beamWeapon.cpp.
 --- Example: template:setBeamWeaponHeatPerFire(0,0.5) -- sets beam 0 to generate 0.5 (50%) system heat per firing
 function ShipTemplate:setBeamWeaponHeatPerFire(index, amount)
-    --TODO
+    self.beam_weapons[index + 1].heat_per_beam_fire = amount
     return self
 end
 --- Sets the number of WeaponTubes for ShipTemplateBasedObjects created from this ShipTemplate, and the default delay for loading and unloading each tube, in seconds.
@@ -285,6 +287,7 @@ end
 --- Defaults to "medium".
 --- Example: template:setTubeSize(0,"large") -- sets tube 0 to fire large weapons
 function ShipTemplate:setTubeSize(index, size)
+    --TODO
     return self
 end
 --- Sets the number of default hull points for ShipTemplateBasedObjects created from this ShipTemplate.

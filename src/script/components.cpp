@@ -550,7 +550,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc_color);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc_color_fire);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, damage_type);
-    //TODO: BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, texture);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, texture);
 
     sp::script::ComponentHandler<Reactor>::name("reactor");
     BIND_SHIP_SYSTEM(Reactor);

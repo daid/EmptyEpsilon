@@ -35,7 +35,8 @@ end
 --- Compare to CpuShips, whose shields are always active.
 --- Example: player:setShieldsActive(true)
 function Entity:setShieldsActive(active)
-    --TODO
+    if self.shields != nil then self.shields.active = active end
+    return self
 end
 --- Adds a message to this PlayerSpaceship's log.
 --- Takes a string as the message and a color applied to the logged message.
