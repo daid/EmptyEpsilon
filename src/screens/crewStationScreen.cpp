@@ -311,6 +311,7 @@ void CrewStationScreen::update(float delta)
 
 void CrewStationScreen::showNextTab(int offset)
 {
+    if (tabs.size() < 1) return;
     int current = 0;
 
     for(unsigned int n=0; n<tabs.size(); n++)
