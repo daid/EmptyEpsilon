@@ -111,6 +111,44 @@ void GameGlobalInfo::execScriptCode(const string& code)
     }
 }
 
+namespace sp::script {
+    template<> struct Convert<std::vector<GameGlobalInfo::ShipSpawnInfo>> {
+        static std::vector<GameGlobalInfo::ShipSpawnInfo> fromLua(lua_State* L, int idx) {
+            std::vector<GameGlobalInfo::ShipSpawnInfo> result{};
+            if (lua_istable(L, idx)) {
+                for(int index=1; lua_geti(L, idx, index) == LUA_TTABLE; index++) {
+                    lua_geti(L, -1, 1); auto key = lua_tostring(L, -1); lua_pop(L, 1);
+                    lua_geti(L, -1, 2); auto label = lua_tostring(L, -1); lua_pop(L, 1);
+                    lua_geti(L, -1, 3); auto description = lua_tostring(L, -1); lua_pop(L, 1);
+                    lua_pop(L, 1);
+                    result.push_back({key ? key : "", label ? label : "", description ? description : ""});
+                }
+                lua_pop(L, 1);
+            }
+            return result;
+        }
+    };
+}
+std::vector<GameGlobalInfo::ShipSpawnInfo> GameGlobalInfo::getSpawnablePlayerShips()
+{
+    std::vector<GameGlobalInfo::ShipSpawnInfo> info;
+    if (main_script) {
+        auto res = main_script->call<std::vector<GameGlobalInfo::ShipSpawnInfo>>("getSpawnablePlayerShips");
+        LuaConsole::checkResult(res);
+        if (res.isOk())
+            info = res.value();
+    }
+    return info;
+}
+
+void GameGlobalInfo::spawnPlayerShip(string key)
+{
+    if (main_script) {
+        auto res = main_script->call<void>("spawnPlayerShipFromUI", key);
+        LuaConsole::checkResult(res);
+    }
+}
+
 void GameGlobalInfo::addScript(P<Script> script)
 {
     script_list.update();

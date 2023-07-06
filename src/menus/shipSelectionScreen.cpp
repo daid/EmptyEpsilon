@@ -335,40 +335,25 @@ ShipSelectionScreen::ShipSelectionScreen()
     {
         GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", [this](int index, string value)
         {
-			P<ShipTemplate> ship_template = ShipTemplate::getTemplate(value);
-			playership_info->setText(ship_template->getDescription());
+			//TODO: playership_info->setText(ship_template->getDescription());
         });
 
         // List only ships with templates designated for player use.
-        std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
-        std::sort(template_names.begin(), template_names.end());
-        for(string& template_name : template_names)
-        {
-            P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
-            if (!ship_template->visible)
-                continue;
-            ship_template_selector->addEntry(template_name + " (" + ship_template->getClass() + ":" + ship_template->getSubClass() + ")", template_name);
+        auto spawn_info = gameGlobalInfo->getSpawnablePlayerShips();
+        for(const auto& info : spawn_info) {
+            ship_template_selector->addEntry(info.label, info.key);
         }
         ship_template_selector->setSelectionIndex(0);
         ship_template_selector->setPosition(0, 630, sp::Alignment::TopCenter)->setSize(490, 50);
-        P<ShipTemplate> ship_template = ShipTemplate::getTemplate(ship_template_selector->getSelectionValue());
-        playership_info->setText(ship_template->getDescription());
+        if (spawn_info.size() > 0)
+            playership_info->setText(spawn_info[0].description);
 
         // Spawn a ship of the selected template near 0,0 and give it a random
         // heading.
         (new GuiButton(left_container, "CREATE_SHIP_BUTTON", tr("Spawn player ship"), [ship_template_selector]() {
             if (!gameGlobalInfo->allow_new_player_ships)
                 return;
-            P<PlayerSpaceship> ship = new PlayerSpaceship();
-
-            if (ship)
-            {
-                // set the position before the template so that onNewPlayerShip has as much data as possible
-                ship->setRotation(random(0, 360));
-                ship->setPosition(glm::vec2(random(-100, 100), random(-100, 100)));
-                ship->setTemplate(ship_template_selector->getSelectionValue());
-                my_player_info->commandSetShip(ship->entity);
-            }
+            gameGlobalInfo->spawnPlayerShip(ship_template_selector->getSelectionValue());
         }))->setPosition(0, 680, sp::Alignment::TopCenter)->setSize(490, 50);
     }
 

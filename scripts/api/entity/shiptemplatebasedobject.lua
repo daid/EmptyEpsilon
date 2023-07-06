@@ -23,7 +23,6 @@ function Entity:setTemplate(template_name)
     -- print("Setting template:" .. template_name)
     for key, value in next, template, nil do
         if string.sub(key, 1, 2) ~= "__" then
-            print(key, value)
             self[key] = value
         end
     end

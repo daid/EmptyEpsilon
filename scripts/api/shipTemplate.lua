@@ -2,6 +2,19 @@
 __ship_templates = {}
 __player_ship_templates = {}
 
+-- Called by the engine to populate the list of player ships that can be spawned.
+-- Returns a list of {key, label, description}.
+function getSpawnablePlayerShips()
+    local result = {}
+    for i, v in ipairs(__player_ship_templates) do
+        result[i] = {v.typename.localized, v.typename.localized, v.__description}
+    end
+    return result
+end
+function spawnPlayerShipFromUI(key)
+    print("spawnPlayerShipFromUI:", key)
+end
+
 --- A ShipTemplate defines the base functionality, stats, models, and other details for the ShipTemplateBasedObjects created from it.
 --- ShipTemplateBasedObjects belong to either the SpaceStation or SpaceShip subclasses. SpaceShips in turn belong to the CpuShip or PlayerSpaceship classes.
 --- ShipTemplates appear in ship and space station creation lists, such as the ship selection screen on scenarios that allow player ship creation, or the GM console's object creation tool.
@@ -287,7 +300,7 @@ end
 --- Defaults to "medium".
 --- Example: template:setTubeSize(0,"large") -- sets tube 0 to fire large weapons
 function ShipTemplate:setTubeSize(index, size)
-    --TODO
+    self.missile_tubes[index+1].size = size
     return self
 end
 --- Sets the number of default hull points for ShipTemplateBasedObjects created from this ShipTemplate.
@@ -439,8 +452,7 @@ end
 --- Example: template:addRoomSystem(1,2,3,4,"reactor")  -- adds a 3x4 room with its upper-left coordinate at position 1,2 that contains the Reactor system
 function ShipTemplate:addRoomSystem(x, y, w, h, system)
     if self.internal_rooms == nil then self.internal_rooms = {} end
-    self.internal_rooms[#self.internal_rooms+1] = {position={x, y}, size={w, h}}
-    --TODO: system
+    self.internal_rooms[#self.internal_rooms+1] = {position={x, y}, size={w, h}, system=system}
     return self
 end
 --- Adds a door between rooms in a ShipTemplate.

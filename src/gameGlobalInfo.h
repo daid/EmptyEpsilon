@@ -93,6 +93,13 @@ public:
 
     string getNextShipCallsign();
 
+    struct ShipSpawnInfo {
+        string key;
+        string label;
+        string description;
+    };
+    std::vector<ShipSpawnInfo> getSpawnablePlayerShips();
+    void spawnPlayerShip(string key);
     void execScriptCode(const string& code);
 private:
     P<GameStateLogger> state_logger;

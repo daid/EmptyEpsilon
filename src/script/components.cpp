@@ -428,6 +428,28 @@ template<> struct Convert<ShipSystem::Type> {
         return ShipSystem::Type::None;
     }
 };
+template<> struct Convert<EMissileSizes> {
+    static int toLua(lua_State* L, EMissileSizes value) {
+        switch(value) {
+        case EMissileSizes::MS_Small: lua_pushstring(L, "small"); break;
+        case EMissileSizes::MS_Medium: lua_pushstring(L, "medium"); break;
+        case EMissileSizes::MS_Large: lua_pushstring(L, "large"); break;
+        default: lua_pushstring(L, "none"); break;
+        }
+        return 1;
+    }
+    static EMissileSizes fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "small")
+            return EMissileSizes::MS_Small;
+        else if (str == "medium")
+            return EMissileSizes::MS_Medium;
+        else if (str == "large")
+            return EMissileSizes::MS_Large;
+        luaL_error(L, "Unknown EMissileSizes: %s", str.c_str());
+        return EMissileSizes::MS_Medium;
+    }
+};
 }
 
 void initComponentScriptBindings()
@@ -680,7 +702,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_emp", 1 << MW_EMP);
     BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_hvli", 1 << MW_HVLI);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, direction);
-    //TODO: BIND_ARRAY_MEMBER(MissileTubes, mounts, size);
+    BIND_ARRAY_MEMBER(MissileTubes, mounts, size);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, type_loaded);
     //TODO: BIND_ARRAY_MEMBER(MissileTubes, mounts, state);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, delay);
@@ -771,7 +793,8 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(InternalRooms, rooms, system);
     sp::script::ComponentHandler<InternalRooms>::members["doors"] = {
         [](lua_State* L, const InternalRooms& t) {
-            return 0; // TODO: No getter for doors
+            lua_newtable(L);
+            return 1; // TODO: No getter for doors
         }, [](lua_State* L, InternalRooms& t) {
             t.doors.clear();
             while(true) {
