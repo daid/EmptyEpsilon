@@ -451,7 +451,9 @@ end
 --- To place multiple doors, declare addDoor() multiple times.
 --- Example: template:addDoor(2,1,true) -- places a horizontal door with its left-most point at 2,1
 function ShipTemplate:addDoor(x, y, horizontal)
-    --TODO
+    if self.internal_rooms == nil then self.internal_rooms = {} end
+    if self.internal_rooms.doors == nil then self.internal_rooms.doors = {} end
+    self.internal_rooms.doors[#self.internal_rooms.doors+1] = {x, y, horizontal}
     return self
 end
 --- Sets the default radar trace image for ShipTemplateBasedObjects created from this ShipTemplate.

@@ -386,6 +386,48 @@ template<> struct Convert<EMissileWeapons> {
         return EMissileWeapons::MW_None;
     }
 };
+template<> struct Convert<ShipSystem::Type> {
+    static int toLua(lua_State* L, ShipSystem::Type value) {
+        switch(value) {
+        case ShipSystem::Type::Reactor: lua_pushstring(L, "reactor"); break;
+        case ShipSystem::Type::BeamWeapons: lua_pushstring(L, "beamweapons"); break;
+        case ShipSystem::Type::MissileSystem: lua_pushstring(L, "missilesystem"); break;
+        case ShipSystem::Type::Maneuver: lua_pushstring(L, "maneuver"); break;
+        case ShipSystem::Type::Impulse: lua_pushstring(L, "impulse"); break;
+        case ShipSystem::Type::Warp: lua_pushstring(L, "warp"); break;
+        case ShipSystem::Type::JumpDrive: lua_pushstring(L, "jumpdrive"); break;
+        case ShipSystem::Type::FrontShield: lua_pushstring(L, "frontshield"); break;
+        case ShipSystem::Type::RearShield: lua_pushstring(L, "rearshield"); break;
+        default: lua_pushstring(L, "none"); break;
+        }
+        return 1;
+    }
+    static ShipSystem::Type fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "none")
+            return ShipSystem::Type::None;
+        else if (str == "reactor")
+            return ShipSystem::Type::Reactor;
+        else if (str == "beamweapons")
+            return ShipSystem::Type::BeamWeapons;
+        else if (str == "missilesystem")
+            return ShipSystem::Type::MissileSystem;
+        else if (str == "maneuver")
+            return ShipSystem::Type::Maneuver;
+        else if (str == "impulse")
+            return ShipSystem::Type::Impulse;
+        else if (str == "warp")
+            return ShipSystem::Type::Warp;
+        else if (str == "jumpdrive")
+            return ShipSystem::Type::JumpDrive;
+        else if (str == "frontshield")
+            return ShipSystem::Type::FrontShield;
+        else if (str == "rearshield")
+            return ShipSystem::Type::RearShield;
+        luaL_error(L, "Unknown ShipSystem::Type: %s", str.c_str());
+        return ShipSystem::Type::None;
+    }
+};
 }
 
 void initComponentScriptBindings()
@@ -558,7 +600,7 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<BeamWeaponSys>::name("beam_weapons");
     BIND_SHIP_SYSTEM(BeamWeaponSys);
     BIND_MEMBER(BeamWeaponSys, frequency);
-    //TODO: BIND_MEMBER(BeamWeaponSys, system_target);
+    BIND_MEMBER(BeamWeaponSys, system_target);
     BIND_ARRAY(BeamWeaponSys, mounts);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, direction);
@@ -722,9 +764,28 @@ void initComponentScriptBindings()
     //TODO: on_teleportation
 
     sp::script::ComponentHandler<InternalRooms>::name("internal_rooms");
+    BIND_MEMBER(InternalRooms, auto_repair_enabled);
     BIND_ARRAY(InternalRooms, rooms);
     BIND_ARRAY_MEMBER(InternalRooms, rooms, position);
     BIND_ARRAY_MEMBER(InternalRooms, rooms, size);
-    //TODO: BIND_ARRAY_MEMBER(InternalRooms, rooms, system);
-    //TODO: Doors
+    BIND_ARRAY_MEMBER(InternalRooms, rooms, system);
+    sp::script::ComponentHandler<InternalRooms>::members["doors"] = {
+        [](lua_State* L, const InternalRooms& t) {
+            return 0; // TODO: No getter for doors
+        }, [](lua_State* L, InternalRooms& t) {
+            t.doors.clear();
+            while(true) {
+                lua_geti(L, -1, t.doors.size() + 1);
+                if (!lua_istable(L, -1))
+                    break;
+                lua_geti(L, -1, 1); auto x = lua_tonumber(L, -1); lua_pop(L, 1);
+                lua_geti(L, -1, 2); auto y = lua_tonumber(L, -1); lua_pop(L, 1);
+                lua_geti(L, -1, 3); bool horizontal = lua_toboolean(L, -1); lua_pop(L, 1);
+                t.doors.push_back({{x, y}, horizontal});
+
+                lua_pop(L, 1);
+            }
+            lua_pop(L, 1);
+        }
+    };
 }
