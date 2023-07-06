@@ -81,7 +81,6 @@ public:
      */
     FactionInfo* getVictoryFaction() { if (!victory_faction) return nullptr; return victory_faction.getComponent<FactionInfo>(); }
 
-    void addScript(P<Script> script);
     //Reset the global game state (called when we want to load a new scenario, and clear out this one)
     void reset();
     void setScenarioSettings(const string filename, std::unordered_map<string, string> new_settings);
@@ -101,16 +100,15 @@ public:
     std::vector<ShipSpawnInfo> getSpawnablePlayerShips();
     void spawnPlayerShip(string key);
     void execScriptCode(const string& code);
+
+    //List of extra scripts that run next to the main script.
+    std::vector<std::unique_ptr<sp::script::Environment>> additional_scripts;
 private:
     P<GameStateLogger> state_logger;
     sp::ecs::Entity victory_faction;
     int callsign_counter;
 
     std::unique_ptr<sp::script::Environment> main_script;
-    /*!
-     * \brief List of known scripts
-     */
-    PVector<Script> script_list;
 };
 
 string getSectorName(glm::vec2 position);

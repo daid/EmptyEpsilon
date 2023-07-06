@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scriptInterface.h"
+#include "script/callback.h"
 
 class ScanProbeLauncher
 {
@@ -9,5 +9,5 @@ public:
     int stock = 8;
     float recharge = 0.0;
     float charge_time = 10.0f;
-    ScriptSimpleCallback on_launch;
+    sp::script::Callback on_launch;
 };

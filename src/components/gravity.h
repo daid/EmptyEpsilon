@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/vec2.hpp>
-#include "scriptInterface.h"
+#include "script/callback.h"
 
 
 class Gravity
@@ -12,5 +12,5 @@ public:
     bool damage = false;
 
     glm::vec2 wormhole_target{};
-    ScriptSimpleCallback on_teleportation;
+    sp::script::Callback on_teleportation;
 };

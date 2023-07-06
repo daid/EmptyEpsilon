@@ -9,19 +9,6 @@
 #include "components/jumpdrive.h"
 #include "components/warpdrive.h"
 
-// TODO
-static std::array<float, ShipSystem::COUNT> default_system_power_factors{
-    /*ShipSystem::Type::Reactor*/     -25.f,
-    /*ShipSystem::Type::BeamWeapons*/   3.f,
-    /*ShipSystem::Type::MissileSystem*/ 1.f,
-    /*ShipSystem::Type::Maneuver*/      2.f,
-    /*ShipSystem::Type::Impulse*/       4.f,
-    /*ShipSystem::Type::Warp*/          5.f,
-    /*ShipSystem::Type::JumpDrive*/     5.f,
-    /*ShipSystem::Type::FrontShield*/   5.f,
-    /*ShipSystem::Type::RearShield*/    5.f,
-};
-
 
 // Overheat subsystem damage rate
 constexpr static float damage_per_second_on_overheat = 0.08f;

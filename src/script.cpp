@@ -179,6 +179,43 @@ static void luaClearGMFunctions()
     gameGlobalInfo->gm_callback_functions.clear();
 }
 
+static int luaCreateAdditionalScript(lua_State* L)
+{
+    auto env = std::make_unique<sp::script::Environment>();
+    setupScriptEnvironment(*env.get());
+    auto ptr = reinterpret_cast<sp::script::Environment**>(lua_newuserdata(L, sizeof(sp::script::Environment*)));
+    *ptr = env.get();
+    luaL_getmetatable(L, "ScriptObject");
+    if (lua_isnil(L, -1)) {
+        lua_pop(L, 1);
+        luaL_newmetatable(L, "ScriptObject");
+        lua_newtable(L);
+        lua_pushcfunction(L, [](lua_State* LL) {
+            auto ptr = reinterpret_cast<sp::script::Environment**>(luaL_checkudata(LL, 1, "ScriptObject"));
+            if (!ptr) return 0;
+            string filename = luaL_checkstring(LL, 2);
+            i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+            auto res = (*ptr)->runFile<void>(filename);
+            LuaConsole::checkResult(res);
+            return 0;
+        });
+        lua_setfield(L, -2, "run");
+        lua_pushcfunction(L, [](lua_State* LL) {
+            auto ptr = reinterpret_cast<sp::script::Environment**>(luaL_checkudata(LL, 1, "ScriptObject"));
+            if (!ptr) return 0;
+            string name = luaL_checkstring(LL, 2);
+            string value = luaL_checkstring(LL, 3);
+            (*ptr)->setGlobal(name, value);
+            return 0;
+        });
+        lua_setfield(L, -2, "setVariable");
+        lua_setfield(L, -2, "__index");
+    }
+    lua_setmetatable(L, -2);
+    gameGlobalInfo->additional_scripts.push_back(std::move(env));
+    return 0;
+}
+
 void setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
@@ -201,6 +238,8 @@ void setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("addGMFunction", &luaAddGMFunction);
     env.setGlobal("clearGMFunctions", &luaClearGMFunctions);
 
+    env.setGlobal("Script", &luaCreateAdditionalScript);
+
     LuaConsole::checkResult(env.runFile<void>("luax.lua"));
     LuaConsole::checkResult(env.runFile<void>("api/all.lua"));
 
@@ -209,105 +248,3 @@ void setupScriptEnvironment(sp::script::Environment& env)
     LuaConsole::checkResult(env.runFile<void>("shipTemplates.lua"));
     //TODO: Load science database
 }
-
-/// A Script object can create and run another Lua script.
-/// Other Scripts have their own lifetime, update, and init functions.
-/// Scripts can destroy themselves (destroyScript()) or be destroyed by the main script.
-/// Example: local script = Script():run("script.lua"); script:destroy();
-REGISTER_SCRIPT_CLASS(Script)
-{
-    /// Runs a script with the given filename.
-    /// Loads the localized file if it exists at locale/<FILENAME>.<LANGUAGE>.po.
-    /// Returns true if the resulting SeriousProton ScriptObject was successfully run.
-    /// Example: script = Script():run("script.lua")
-    REGISTER_SCRIPT_CLASS_FUNCTION(Script, run);
-    /// Sets a global variable in this Script instance that is accessible from the main Script.
-    REGISTER_SCRIPT_CLASS_FUNCTION(ScriptObjectLegacy, setVariable<string>);
-}
-
-Script::Script()
-{
-    if (!gameGlobalInfo)
-    {
-        destroy();
-        return;
-    }
-
-    gameGlobalInfo->addScript(this);
-}
-
-bool Script::run(string filename)
-{
-    // Load the locale file for this script.
-    i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
-
-    return ScriptObjectLegacy::run(filename);
-}
-
-static int require(lua_State* L)
-{
-    int old_top = lua_gettop(L);
-    string filename = luaL_checkstring(L, 1);
-
-    P<ResourceStream> stream = getResourceStream(filename);
-    if (!stream)
-    {
-        LOG(ERROR) << "Require: Script not found: " << filename;
-        lua_pushstring(L, ("Require: Script not found: " + filename).c_str());
-        return lua_error(L);
-    }
-
-    // Load the locale file for this script.
-    i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
-
-    string filecontents = stream->readAll();
-    stream->destroy();
-    stream = nullptr;
-
-    if (luaL_loadbuffer(L, filecontents.c_str(), filecontents.length(), filename.c_str()))
-    {
-        string error_string = luaL_checkstring(L, -1);
-        LOG(ERROR) << "LUA: require: " << error_string;
-        lua_pushstring(L, ("require:" + error_string).c_str());
-        return lua_error(L);
-    }
-    lua_pushvalue(L, lua_upvalueindex(1));
-    lua_setupvalue(L, -2, 1);
-
-    //Call the actual code.
-    if (lua_pcall(L, 0, LUA_MULTRET, 0))
-    {
-        string error_string = luaL_checkstring(L, -1);
-        LOG(ERROR) << "LUA: require: " << error_string;
-        lua_pushstring(L, ("require:" + error_string).c_str());
-        return lua_error(L);
-    }
-
-    return lua_gettop(L) - old_top;
-}
-/// void require(string filename)
-/// Runs the Lua script with the given filename in the same context as the running Script.
-/// Loads the localized file if it exists at locale/<FILENAME>.<LANGUAGE>.po.
-REGISTER_SCRIPT_FUNCTION(require);
-
-static int _(lua_State* L)
-{
-    auto str_1 = luaL_checkstring(L, 1);
-    auto str_2 = luaL_optstring(L, 2, nullptr);
-    if (str_2)
-        lua_pushstring(L, tr(str_1, str_2).c_str());
-    else
-        lua_pushstring(L, tr(str_1).c_str());
-    return 1;
-}
-/// string _(string text, std::optional<string> default)
-/// Adds a translation context to the given string.
-/// Accepts either one or two values.
-/// If passed one value, this function makes the string available for translation without a category.
-/// If passed two values, the first value is the category, and the second is the string to translate.
-/// Categorizing strings allows for organization, and for the content to be translated differently in multiple contexts if necessary.
-/// Examples:
-///   message1 = _("We will destroy you!") -- tags the string for translation
-///   message2 = _("taunt", "We will destroy you!") -- categorizes the same string as a "taunt" for translation
-///   message3 = _("promise", "We will destroy you!") -- categorizes the same string as a "promise" for translation
-REGISTER_SCRIPT_FUNCTION(_);

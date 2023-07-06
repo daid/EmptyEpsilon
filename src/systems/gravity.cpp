@@ -6,6 +6,7 @@
 #include "multiplayer_server.h"
 #include "ecs/query.h"
 #include "random.h"
+#include "menus/luaConsole.h"
 #include <glm/gtx/norm.hpp>
 
 
@@ -39,9 +40,9 @@ void GravitySystem::update(float delta)
                 {
                     if (game_server) {
                         tt->setPosition( (grav.wormhole_target + glm::vec2(random(-wormhole_target_spread, wormhole_target_spread), random(-wormhole_target_spread, wormhole_target_spread))));
-                        if (grav.on_teleportation.isSet())
+                        if (grav.on_teleportation)
                         {
-                            grav.on_teleportation.call<void>(source, target);
+                            LuaConsole::checkResult(grav.on_teleportation.call<void>(source, target));
                             continue; //callback could destroy the entity, so do no extra processing.
                         }
                         //if (spaceship)

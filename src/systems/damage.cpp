@@ -7,6 +7,7 @@
 #include "gameGlobalInfo.h"
 #include <glm/geometric.hpp>
 #include "random.h"
+#include "menus/luaConsole.h"
 
 #include "spaceObjects/spaceObject.h"
 #include "spaceObjects/explosionEffect.h"
@@ -153,13 +154,13 @@ void DamageSystem::takeHullDamage(sp::ecs::Entity entity, float amount, const Da
         return;
     }
 
-    if (hull->on_taking_damage.isSet())
+    if (hull->on_taking_damage)
     {
         if (info.instigator)
         {
-            hull->on_taking_damage.call<void>(entity, info.instigator);
+            LuaConsole::checkResult(hull->on_taking_damage.call<void>(entity, info.instigator));
         } else {
-            hull->on_taking_damage.call<void>(entity);
+            LuaConsole::checkResult(hull->on_taking_damage.call<void>(entity));
         }
     }
 }
@@ -197,13 +198,13 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
     }
 
     auto hull = entity.getComponent<Hull>();
-    if (hull->on_destruction.isSet())
+    if (hull->on_destruction)
     {
         if (info.instigator)
         {
-            hull->on_destruction.call<void>(entity, info.instigator);
+            LuaConsole::checkResult(hull->on_destruction.call<void>(entity, info.instigator));
         } else {
-            hull->on_destruction.call<void>(entity);
+            LuaConsole::checkResult(hull->on_destruction.call<void>(entity));
         }
     }
 

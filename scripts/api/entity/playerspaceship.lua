@@ -123,25 +123,29 @@ end
 --- Sets this PlayerSpaceship's energy level.
 --- Values are limited from 0 to the energy level max. Negative or excess values are capped to the limits.
 --- Example: player:setEnergyLevel(1000) -- sets the ship's energy to either 1000 or the max limit, whichever is lower
-function Entity:setEnergyLevel()
-    --TODO
+function Entity:setEnergyLevel(amount)
+    if self.reactor then self.reactor.energy = amount end
+    return self
 end
 --- Sets this PlayerSpaceship's energy capacity.
 --- Valid values are 0 or any positive number.
 --- If the new limit is lower than the ship's current energy level, this also reduces the energy level.
 --- Example: player:setEnergyLevelMax(1000) -- sets the ship's energy limit to 1000
-function Entity:setEnergyLevelMax()
-    --TODO
+function Entity:setEnergyLevelMax(amount)
+    if self.reactor then self.reactor.max_energy = amount end
+    return self
 end
 --- Returns this PlayerSpaceship's energy level.
 --- Example: player:getEnergyLevel()
 function Entity:getEnergyLevel()
-    --TODO
+    if self.reactor then return self.reactor.energy end
+    return 0
 end
 --- Returns this PlayerSpaceship's energy capacity.
 --- Example: player:getEnergyLevelMax()
 function Entity:getEnergyLevelMax()
-    --TODO
+    if self.reactor then return self.reactor.max_energy end
+    return 0
 end
 
 --- Returns how much energy is consumed per second by this PlayerSpaceship's shields while active.
@@ -500,21 +504,24 @@ end
 --- If the value is less than the number of repair crews, this function removes repair crews.
 --- If the value is greater, this function adds new repair crews into random rooms.
 --- Example: player:setRepairCrewCount(5)
-function Entity:setRepairCrewCount()
+function Entity:setRepairCrewCount(amount)
     --TODO
+    return self
 end
 --- Defines whether automatic coolant distribution is enabled on this PlayerSpaceship.
 --- If true, coolant is automatically distributed proportionally to the amount of heat in that system.
 --- Use this command to reduce the need for player interaction in Engineering, especially when combined with commandSetAutoRepair/auto_repair_enabled.
 --- Example: player:setAutoCoolant(true)
-function Entity:setAutoCoolant()
+function Entity:setAutoCoolant(enabled)
     --TODO
+    return self
 end
 --- Sets a control code password required for a player to join this PlayerSpaceship.
 --- Control codes are case-insensitive.
 --- Example: player:setControlCode("abcde") -- matches "abcde", "ABCDE", "aBcDe"
-function Entity:setControlCode()
+function Entity:setControlCode(code)
     --TODO
+    return self
 end
 --- Defines a function to call when this PlayerSpaceship launches a probe.
 --- Passes the launching PlayerSpaceship and launched ScanProbe.
@@ -525,6 +532,7 @@ end
 --- end)
 function Entity:onProbeLaunch()
     --TODO
+    return self
 end
 --- Defines a function to call when this PlayerSpaceship links a probe to the science screen.
 --- Passes the PlayerShip and linked ScanProbe.
@@ -535,6 +543,7 @@ end
 --- end)
 function Entity:onProbeLink(callback)
     --TODO
+    return self
 end
 --- Defines a function to call when this PlayerSpaceship unlinks a probe from the science screen.
 --- Passes the PlayerShip and previously linked ScanProbe.
@@ -547,6 +556,7 @@ end
 --- end)
 function Entity:onProbeUnlink(callback)
     --TODO
+    return self
 end
 --- Returns this PlayerSpaceship's long-range radar range.
 --- Example: player:getLongRangeRadarRange()
@@ -563,6 +573,7 @@ end
 --- Example: player:setLongRangeRadarRange(30000) -- sets the ship's long-range radar range to 30U
 function Entity:setLongRangeRadarRange(range)
     --TODO
+    return self
 end
 --- Sets this PlayerSpaceship's short-range radar range.
 --- PlayerSpaceships use this range on the helms, weapons, and single pilot screens' radar.
@@ -570,11 +581,13 @@ end
 --- Example: player:setShortRangeRadarRange(5000) -- sets the ship's long-range radar range to 5U
 function Entity:setShortRangeRadarRange(range)
     --TODO
+    return self
 end
 --- Defines whether scanning features appear on related crew screens in this PlayerSpaceship.
 --- Example: player:setCanScan(true)
 function Entity:setCanScan(enabled)
     --TODO
+    return self
 end
 --- Returns whether scanning features appear on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanScan()
@@ -585,6 +598,7 @@ end
 --- Example: player:setCanHack(true)
 function Entity:setCanHack(enabled)
     --TODO
+    return self
 end
 --- Returns whether hacking features appear on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanHack()
@@ -596,6 +610,7 @@ end
 --- Example: player:setCanDock(true)
 function Entity:setCanDock(enabled)
     --TODO
+    return self
 end
 --- Returns whether the "Request Docking" button appears on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanDock()
@@ -606,6 +621,7 @@ end
 --- Example: player:setCanCombatManeuver(true)
 function Entity:setCanCombatManeuver(enabled)
     --TODO
+    return self
 end
 --- Returns whether combat maneuver controls appear on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanCombatManeuver()
@@ -616,6 +632,7 @@ end
 --- Example: player:setCanLaunchProbe(true)
 function Entity:setCanLaunchProbe(enabled)
     --TODO
+    return self
 end
 --- Returns whether ScanProbe-launching controls appear on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanLaunchProbe()
@@ -626,6 +643,7 @@ end
 --- Example: player:setCanSelfDestruct(true)
 function Entity:setCanSelfDestruct(enabled)
     --TODO
+    return self
 end
 --- Returns whether self-destruct controls appear on related crew screens in this PlayerSpaceship.
 --- This returns false if this ship's self-destruct size and damage are both 0, even if you set setCanSelfDestruct(true).
@@ -637,22 +655,26 @@ end
 --- Any given value is randomized +/- 33 percent upon self-destruction.
 --- Example: player:setSelfDestructDamage(150)
 function Entity:setSelfDestructDamage(amount)
-    --TODO
+    if self.self_destruct then self.self_destruct.damage = amount end
+    return self
 end
 --- Returns the amount of base damage done to nearby SpaceObjects when this PlayerSpaceship self-destructs.
 --- Example: player:getSelfDestructDamage()
 function Entity:getSelfDestructDamage()
-    --TODO
+    if self.self_destruct then return self.self_destruct.damage end
+    return 0
 end
 --- Sets the radius of the explosion created when this PlayerSpaceship self-destructs.
 --- All SpaceObjects within this radius are dealt damage upon self-destruction.
 --- Example: player:setSelfDestructSize(1500) -- sets a 1.5U self-destruction explosion and damage radius
 function Entity:setSelfDestructSize(size)
-    --TODO
+    if self.self_destruct then self.self_destruct.size = size end
+    return self
 end
 --- Returns the radius of the explosion created when this PlayerSpaceship self-destructs.
 --- All SpaceObjects within this radius are dealt damage upon self-destruction.
 --- Example: ship:getSelfDestructSize()
 function Entity:getSelfDestructSize()
-    --TODO
+    if self.self_destruct then return self.self_destruct.size end
+    return 0
 end

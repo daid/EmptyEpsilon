@@ -392,15 +392,15 @@ void ShipTemplateBasedObject::setRestocksMissilesDocked(bool enabled) { /*TODO*/
 void ShipTemplateBasedObject::onTakingDamage(ScriptSimpleCallback callback)
 {
     auto hull = entity.getComponent<Hull>();
-    if (hull)
-        hull->on_taking_damage = callback;
+    //if (hull)
+    //    hull->on_taking_damage = callback;
 }
 
 void ShipTemplateBasedObject::onDestruction(ScriptSimpleCallback callback)
 {
     auto hull = entity.getComponent<Hull>();
-    if (hull)
-        hull->on_destruction = callback;
+    //if (hull)
+    //    hull->on_destruction = callback;
 }
 
 string ShipTemplateBasedObject::getShieldDataString()

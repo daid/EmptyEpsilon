@@ -9,7 +9,6 @@ local Entity = getLuaEntityFunctionTable()
 --- Sets this ShipTemplate that defines this STBO's traits, and then applies them to this STBO.
 --- ShipTemplates define the STBO's class, weapons, hull and shield strength, 3D appearance, and more.
 --- See the ShipTemplate class for details, and files in scripts/shiptemplates/ for the default templates.
---- WARNING: Using a string that is not a valid ShipTemplate name crashes the game!
 --- ShipTemplate string names are case-sensitive.
 --- Examples:
 --- CpuShip():setTemplate("Phobos T3")
@@ -32,6 +31,20 @@ function Entity:setTemplate(template_name)
         if self.shields then self.shields.active = false end
     end
     --TODO: Setup energy cost distribution for available systems.
+    --[[
+        // TODO
+static std::array<float, ShipSystem::COUNT> default_system_power_factors{
+    /*ShipSystem::Type::Reactor*/     -25.f,
+    /*ShipSystem::Type::BeamWeapons*/   3.f,
+    /*ShipSystem::Type::MissileSystem*/ 1.f,
+    /*ShipSystem::Type::Maneuver*/      2.f,
+    /*ShipSystem::Type::Impulse*/       4.f,
+    /*ShipSystem::Type::Warp*/          5.f,
+    /*ShipSystem::Type::JumpDrive*/     5.f,
+    /*ShipSystem::Type::FrontShield*/   5.f,
+    /*ShipSystem::Type::RearShield*/    5.f,
+};
+    --]]
     return self
 end
 --- [DEPRECATED]
@@ -56,12 +69,14 @@ end
 --- Returns this STBO's hull points.
 --- Example: stbo:getHull()
 function Entity:getHull()
-    --TODO
+    if self.hull then return self.hull.current end
+    return 0
 end
 --- Returns this STBO's maximum limit of hull points.
 --- Example: stbo:getHullMax()
 function Entity:getHullMax()
-    --TODO
+    if self.hull then return self.hull.max end
+    return 0
 end
 --- Sets this STBO's hull points.
 --- If set to a value larger than the maximum, this sets the value to the limit.
@@ -69,24 +84,28 @@ end
 --- Note that setting this value to 0 doesn't immediately destroy the STBO.
 --- Example: stbo:setHull(100) -- sets the hull point limit to either 100, or the limit if less than 100
 function Entity:setHull(amount)
-    --TODO
+    if self.hull then self.hull.current = amount end
+    return self
 end
 --- Sets this STBO's maximum limit of hull points.
 --- Note that SpaceStations can't repair their own hull, so this only changes the percentage of remaining hull.
 --- Example: stbo:setHullMax(100) -- sets the hull point limit to 100
 function Entity:setHullMax(amount)
-    --TODO
+    if self.hull then self.hull.max = amount end
+    return self
 end
 --- Defines whether this STBO can be destroyed by damage.
 --- Defaults to true.
 --- Example: stbo:setCanBeDestroyed(false) -- prevents the STBO from being destroyed by damage
 function Entity:setCanBeDestroyed(allow_destroy)
-    --TODO
+    if self.hull then self.hull.allow_destruction = allow_destroy end
+    return self    
 end
 --- Returns whether the STBO can be destroyed by damage.
 --- Example: stbo:getCanBeDestroyed()
 function Entity:getCanBeDestroyed()
-    --TODO
+    if self.hull then return self.hull.allow_destruction end
+    return false
 end
 --- Returns the shield points for this STBO's shield segment with the given index.
 --- Shield segments are 0-indexed.
@@ -101,7 +120,8 @@ end
 --- The segments' order starts with the front-facing segment, then proceeds clockwise.
 --- Example: stbo:getShieldCount()
 function Entity:getShieldCount()
-    --TODO
+    if self.shields then return #self.shields end
+    return 0
 end
 --- Returns the maximum shield points for the STBO's shield segment with the given index.
 --- Example: stbo:getShieldMax(0) -- returns the max shield strength for segment 0

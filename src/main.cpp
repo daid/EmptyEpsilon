@@ -384,28 +384,6 @@ int main(int argc, char** argv)
 
     sp::RenderTarget::setDefaultFont(main_font);
 
-    {
-        P<ScriptObjectLegacy> modelDataScript = new ScriptObjectLegacy("model_data.lua");
-        if (modelDataScript->getError() != "") exit(1);
-        modelDataScript->destroy();
-
-        P<ScriptObjectLegacy> shipTemplatesScript = new ScriptObjectLegacy("shipTemplates.lua");
-        if (shipTemplatesScript->getError() != "") exit(1);
-        shipTemplatesScript->destroy();
-
-        //Find out which model data isn't used by ship templates and output that to log.
-        std::set<string> used_model_data;
-        for(string template_name : ShipTemplate::getAllTemplateNames())
-            used_model_data.insert(ShipTemplate::getTemplate(template_name)->model_data->getName());
-        for(string name : ModelData::getModelDataNames())
-        {
-            if (used_model_data.find(name) == used_model_data.end())
-            {
-                LOG(INFO) << "Model data: " << name << " is not used by any ship template";
-            }
-        }
-    }
-
     // On Android, this requires the 'record audio' permissions,
     // which is always a scary thing for users.
     // Since there is no way to access it (yet) via a touchscreen, compile out.

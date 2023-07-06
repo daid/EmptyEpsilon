@@ -335,18 +335,20 @@ ShipSelectionScreen::ShipSelectionScreen()
     {
         GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", [this](int index, string value)
         {
-			//TODO: playership_info->setText(ship_template->getDescription());
+            for(auto& info : ship_spawn_info)
+                if (info.key == value)
+                    playership_info->setText(info.description);
         });
 
         // List only ships with templates designated for player use.
-        auto spawn_info = gameGlobalInfo->getSpawnablePlayerShips();
-        for(const auto& info : spawn_info) {
+        ship_spawn_info = gameGlobalInfo->getSpawnablePlayerShips();
+        for(const auto& info : ship_spawn_info) {
             ship_template_selector->addEntry(info.label, info.key);
         }
         ship_template_selector->setSelectionIndex(0);
         ship_template_selector->setPosition(0, 630, sp::Alignment::TopCenter)->setSize(490, 50);
-        if (spawn_info.size() > 0)
-            playership_info->setText(spawn_info[0].description);
+        if (ship_spawn_info.size() > 0)
+            playership_info->setText(ship_spawn_info[0].description);
 
         // Spawn a ship of the selected template near 0,0 and give it a random
         // heading.

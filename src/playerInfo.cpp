@@ -1,5 +1,6 @@
 #include <i18n.h>
 #include "playerInfo.h"
+#include "menus/luaConsole.h"
 #include "screens/mainScreen.h"
 #include "screens/crewStationScreen.h"
 
@@ -891,8 +892,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 p->setPosition(t->getPosition());
                 p->setTarget(target);
                 p->setOwner(my_spaceship);
-                if (spl->on_launch.isSet())
-                    spl->on_launch.call<void>(my_spaceship, p);
+                if (spl->on_launch)
+                    LuaConsole::checkResult(spl->on_launch.call<void>(my_spaceship, p->entity));
                 spl->stock--;
             }
         }

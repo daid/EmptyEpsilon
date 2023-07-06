@@ -80,7 +80,14 @@ void GameGlobalInfo::update(float delta)
     elapsed_time += delta;
 
     if (main_script) {
-        LuaConsole::checkResult(main_script->call<void>("update", delta));
+        auto res = main_script->call<void>("update", delta);
+        if (res.isErr() && res.error() != "Not a function")
+            LuaConsole::checkResult(res);
+        for(auto& as : additional_scripts) {
+            res = as->call<void>("update", delta);
+            if (res.isErr() && res.error() != "Not a function")
+                LuaConsole::checkResult(res);
+        }
     }
 }
 
@@ -149,12 +156,6 @@ void GameGlobalInfo::spawnPlayerShip(string key)
     }
 }
 
-void GameGlobalInfo::addScript(P<Script> script)
-{
-    script_list.update();
-    script_list.push_back(script);
-}
-
 void GameGlobalInfo::reset()
 {
     if (state_logger)
@@ -171,9 +172,8 @@ void GameGlobalInfo::reset()
     foreach(SpaceObject, o, space_object_list)
         o->destroy();
     main_script = nullptr;
+    additional_scripts.clear();
 
-    foreach(Script, s, script_list)
-        s->destroy();
     elapsed_time = 0.0f;
     callsign_counter = 0;
     allow_new_player_ships = true;
