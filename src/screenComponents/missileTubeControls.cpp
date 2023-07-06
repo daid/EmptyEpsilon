@@ -21,7 +21,6 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
 
     tube_rows_layout = new GuiElement(this, "TUBE_ROWS_LAYOUT");
     tube_rows_layout->setAttribute("layout", "vertical");
-    tube_rows_layout->layout.size.x = 330; // Not sure why this is needed, else buttons of tubes don't work...
 
     for (int n = MW_Count-1; n >= 0; n--)
     {
@@ -190,7 +189,7 @@ void GuiMissileTubeControls::createTubeRow()
 
     TubeRow row;
     row.layout = new GuiElement(tube_rows_layout, id + "_ROW_" + string(n));
-    row.layout->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
+    row.layout->setAttribute("layout", "horizontal");
     row.load_button = new GuiButton(row.layout, id + "_" + string(n) + "_LOAD_BUTTON", "Load", [this, n]() {
         if (!my_spaceship) return;
         auto tubes = my_spaceship.getComponent<MissileTubes>();
