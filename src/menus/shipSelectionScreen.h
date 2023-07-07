@@ -56,7 +56,7 @@ private:
     GuiToggleButton* crew_position_button[max_crew_positions];
     GuiToggleButton* main_screen_controls_button;
     GuiToggleButton* window_button;
-    GuiSlider* window_angle;
+    GuiTextEntry* window_angle;
     GuiLabel* window_angle_label;
     GuiToggleButton* topdown_button;
 };
