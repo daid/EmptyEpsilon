@@ -222,7 +222,6 @@ set(MAIN_SOURCES
     src/httpScriptAccess.cpp
     src/modelInfo.cpp
     src/packResourceProvider.cpp
-    src/scienceDatabase.cpp
     src/modelData.cpp
     src/gameGlobalInfo.cpp
     src/GMActions.cpp
@@ -502,7 +501,6 @@ set(MAIN_SOURCES
     src/playerInfo.h
     src/preferenceManager.h
     src/scenarioInfo.h
-    src/scienceDatabase.h
     src/screenComponents/aimLock.h
     src/screenComponents/alertLevelButton.h
     src/screenComponents/alertOverlay.h

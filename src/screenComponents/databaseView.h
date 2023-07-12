@@ -14,7 +14,6 @@ public:
     bool findAndDisplayEntry(string name);
 
 private:
-    sp::ecs::Entity findEntryById(uint32_t id);
     bool findAndDisplayEntry(string name, sp::ecs::Entity parent);
     //Fill the selection listbox with options from the selected_entry, or the main database list if selected_entry is nullptr
     void fillListBox();

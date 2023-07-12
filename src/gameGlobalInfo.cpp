@@ -2,7 +2,6 @@
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 #include "scenarioInfo.h"
-#include "scienceDatabase.h"
 #include "multiplayer_client.h"
 #include "soundManager.h"
 #include "random.h"
@@ -165,7 +164,6 @@ void GameGlobalInfo::reset()
     gm_messages.clear();
     on_gm_click = nullptr;
 
-    flushDatabaseData();
     FactionInfoLegacy::reset();
 
     sp::ecs::Entity::destroyAllEntities();

@@ -15,27 +15,12 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
 : GuiElement(owner, "DATABASE_VIEW")
 {
     item_list = new GuiListbox(this, "DATABASE_ITEM_LIST", [this](int index, string value) {
-        uint32_t id = std::stoul(value, nullptr, 10);
-        selected_entry = findEntryById(id);
+        selected_entry = sp::ecs::Entity::fromString(value);
         display();
     });
     setAttribute("layout", "horizontal");
     item_list->setMargins(20, 20, 20, 120)->setSize(navigation_width, GuiElement::GuiSizeMax);
     display();
-}
-
-sp::ecs::Entity DatabaseViewComponent::findEntryById(uint32_t id)
-{
-    if (id == 0)
-    {
-        return {};
-    }
-    for(auto [entity, database] : sp::ecs::Query<Database>())
-    {
-        if (entity.getIndex() == id)
-            return entity;
-    }
-    return {};
 }
 
 bool DatabaseViewComponent::findAndDisplayEntry(string name)
@@ -85,11 +70,11 @@ void DatabaseViewComponent::fillListBox()
     {
         if (children.size() != 0)
         {
-            item_list->addEntry(tr("button", "Back"), std::to_string(selected_database->parent.getIndex()));
+            item_list->addEntry(tr("button", "Back"), selected_database->parent.toString());
         }
         else if(parent_entry)
         {
-            item_list->addEntry(tr("button", "Back"), std::to_string(parent_entry->parent.getIndex()));
+            item_list->addEntry(tr("button", "Back"), parent_entry->parent.toString());
         }
     }
 
@@ -102,7 +87,7 @@ void DatabaseViewComponent::fillListBox()
 
     for (auto [entity, database] : display)
     {
-        int item_list_idx = item_list->addEntry(database->name, std::to_string(entity.getIndex()));
+        int item_list_idx = item_list->addEntry(database->name, entity.toString());
         if (selected_entry && selected_entry.getComponent<Database>() == database)
         {
             item_list->setSelectionIndex(item_list_idx);
