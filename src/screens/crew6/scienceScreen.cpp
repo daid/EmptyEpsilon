@@ -3,7 +3,6 @@
 #include "scienceScreen.h"
 #include "spaceObjects/nebula.h"
 #include "preferenceManager.h"
-#include "shipTemplate.h"
 #include "multiplayer_client.h"
 
 #include "components/beamweapon.h"

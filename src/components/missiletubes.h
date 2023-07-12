@@ -3,7 +3,6 @@
 #include "ecs/entity.h"
 #include "shipsystem.h"
 #include "missileWeaponData.h"
-#include "shipTemplate.h"
 #include <glm/vec3.hpp>
 
 

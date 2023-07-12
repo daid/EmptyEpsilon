@@ -2,7 +2,7 @@
 #define SUPPLY_DROP_H
 
 #include "spaceObject.h"
-#include "shipTemplate.h"
+#include "missileWeaponData.h"
 
 class SupplyDrop : public SpaceObject
 {

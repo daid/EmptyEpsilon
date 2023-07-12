@@ -1,5 +1,4 @@
 #include "shipSelectionScreen.h"
-#include "shipTemplate.h"
 
 #include "featureDefs.h"
 #include "glObjects.h"

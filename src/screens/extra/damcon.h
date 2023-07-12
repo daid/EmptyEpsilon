@@ -2,7 +2,7 @@
 #define DAMCON_H
 
 #include "gui/gui2_overlay.h"
-#include "shipTemplate.h"
+#include "components/shipsystem.h"
 
 class GuiKeyValueDisplay;
 

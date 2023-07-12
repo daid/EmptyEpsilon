@@ -1,7 +1,6 @@
 #include <i18n.h>
 #include "hotkeyConfig.h"
 #include "preferenceManager.h"
-#include "shipTemplate.h"
 
 Keys keys;
 extern sp::io::Keybinding fullscreen_key;

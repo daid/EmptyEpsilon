@@ -1,5 +1,4 @@
 #include "shipLogScreen.h"
-#include "shipTemplate.h"
 #include "playerInfo.h"
 #include "components/shiplog.h"
 

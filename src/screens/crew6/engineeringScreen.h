@@ -2,7 +2,6 @@
 #define ENGINEERING_SCREEN_H
 
 #include "gui/gui2_overlay.h"
-#include "shipTemplate.h"
 #include "playerInfo.h"
 
 class GuiSelfDestructButton;

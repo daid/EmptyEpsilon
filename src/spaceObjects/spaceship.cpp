@@ -6,7 +6,6 @@
 
 #include "mesh.h"
 #include "random.h"
-#include "shipTemplate.h"
 #include "playerInfo.h"
 #include "spaceObjects/beamEffect.h"
 #include "factionInfo.h"

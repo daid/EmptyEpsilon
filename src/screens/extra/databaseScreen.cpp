@@ -1,5 +1,4 @@
 #include "databaseScreen.h"
-#include "shipTemplate.h"
 
 #include "screenComponents/databaseView.h"
 #include "screenComponents/customShipFunctions.h"

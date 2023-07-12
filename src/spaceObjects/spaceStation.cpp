@@ -6,7 +6,6 @@
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/avoidobject.h"
-#include "shipTemplate.h"
 #include "playerInfo.h"
 #include "factionInfo.h"
 #include "mesh.h"
