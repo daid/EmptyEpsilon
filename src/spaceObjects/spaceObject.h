@@ -6,7 +6,6 @@
 #include "featureDefs.h"
 #include "modelInfo.h"
 #include "factionInfo.h"
-#include "shipTemplate.h"
 #include "graphics/renderTarget.h"
 #include "ecs/entity.h"
 #include "components/radar.h"

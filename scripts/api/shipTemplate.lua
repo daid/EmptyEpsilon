@@ -7,7 +7,7 @@ __player_ship_templates = {}
 function getSpawnablePlayerShips()
     local result = {}
     for i, v in ipairs(__player_ship_templates) do
-        if not self.__hidden then
+        if not v.__hidden then
             result[#result+1] = {v.typename.localized, v.typename.localized, v.__description}
         end
     end

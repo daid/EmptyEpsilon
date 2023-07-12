@@ -1,6 +1,8 @@
 #include <i18n.h>
 #include "databaseView.h"
-#include "scienceDatabase.h"
+#include "components/database.h"
+#include "components/rendering.h"
+#include "ecs/query.h"
 
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_image.h"
@@ -13,9 +15,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
 : GuiElement(owner, "DATABASE_VIEW")
 {
     item_list = new GuiListbox(this, "DATABASE_ITEM_LIST", [this](int index, string value) {
-        P<ScienceDatabase> entry;
-
-        int32_t id = std::stoul(value, nullptr, 10);
+        uint32_t id = std::stoul(value, nullptr, 10);
         selected_entry = findEntryById(id);
         display();
     });
@@ -24,31 +24,27 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
     display();
 }
 
-P<ScienceDatabase> DatabaseViewComponent::findEntryById(int32_t id)
+sp::ecs::Entity DatabaseViewComponent::findEntryById(uint32_t id)
 {
     if (id == 0)
     {
-        return nullptr;
+        return {};
     }
-    for(auto sd: ScienceDatabase::science_databases)
+    for(auto [entity, database] : sp::ecs::Query<Database>())
     {
-        if (!sd) continue;
-        if (sd->getId() == id)
-        {
-            return sd;
-        }
+        if (entity.getIndex() == id)
+            return entity;
     }
-    return nullptr;
+    return {};
 }
 
 bool DatabaseViewComponent::findAndDisplayEntry(string name)
 {
-    for(auto sd : ScienceDatabase::science_databases)
+    for(auto [entity, database] : sp::ecs::Query<Database>())
     {
-        if (!sd) continue;
-        if (sd->getName() == name)
+        if (database.name == name)
         {
-            selected_entry = sd;
+            selected_entry = entity;
             display();
             return true;
         }
@@ -62,63 +58,52 @@ void DatabaseViewComponent::fillListBox()
     item_list->setSelectionIndex(-1);
 
     // indices of child or sibling pages in the science_databases vector
-    std::vector<unsigned> children_idx;
-    std::vector<unsigned> siblings_idx;
-    P<ScienceDatabase> parent_entry;
+    std::vector<std::pair<sp::ecs::Entity, Database*>> children;
+    std::vector<std::pair<sp::ecs::Entity, Database*>> siblings;
+    auto selected_database = selected_entry.getComponent<Database>();
+    Database* parent_entry = nullptr;
 
-    for (unsigned idx=0; idx<ScienceDatabase::science_databases.size(); idx++)
+    for(auto [entity, database] : sp::ecs::Query<Database>())
     {
-        P<ScienceDatabase> sd = ScienceDatabase::science_databases[idx];
-        if (!sd) continue;
-
-        if(selected_entry)
+        if(selected_database)
         {
-            if(sd->getId() == selected_entry->getParentId())
-            {
-                parent_entry = sd;
-            }
-            if(sd->getParentId() == selected_entry->getParentId())
-            {
-                siblings_idx.push_back(idx);
-            }
-            if(sd->getParentId() == selected_entry->getId())
-            {
-                children_idx.push_back(idx);
-            }
+            if(entity == selected_database->parent)
+                parent_entry = &database;
+            if(database.parent == selected_database->parent)
+                siblings.push_back({entity, &database});
+            if(database.parent == selected_entry)
+                children.push_back({entity, &database});
         }
         else
         {
-            if(sd->getParentId() == 0)
-            {
-                siblings_idx.push_back(idx);
-            }
+            if(!database.parent)
+                siblings.push_back({entity, &database});
         }
     }
 
-    if(selected_entry)
+    if(selected_database)
     {
-        if (children_idx.size() != 0)
+        if (children.size() != 0)
         {
-            item_list->addEntry(tr("button", "Back"), std::to_string(selected_entry->getParentId()));
+            item_list->addEntry(tr("button", "Back"), std::to_string(selected_database->parent.getIndex()));
         }
         else if(parent_entry)
         {
-            item_list->addEntry(tr("button", "Back"), std::to_string(parent_entry->getParentId()));
+            item_list->addEntry(tr("button", "Back"), std::to_string(parent_entry->parent.getIndex()));
         }
     }
 
     // the indices we actually want to display
-    std::vector<unsigned> display_idx = children_idx.size() > 0 ? children_idx : siblings_idx;
+    auto& display = children.size() > 0 ? children : siblings;
 
-    sort(display_idx.begin(), display_idx.end(), [](unsigned idxA, unsigned idxB) -> bool {
-        return ScienceDatabase::science_databases[idxA] < ScienceDatabase::science_databases[idxB];
+    sort(display.begin(), display.end(), [](const auto& A, const auto& B) -> bool {
+        return A.second->name.lower() < B.second->name.lower();
     });
 
-    for (auto idx : display_idx)
+    for (auto [entity, database] : display)
     {
-        P<ScienceDatabase> sd = ScienceDatabase::science_databases[idx];
-        int item_list_idx = item_list->addEntry(sd->getName(), std::to_string(sd->getId()));
-        if (selected_entry && selected_entry->getId() == sd->getId())
+        int item_list_idx = item_list->addEntry(database->name, std::to_string(entity.getIndex()));
+        if (selected_entry && selected_entry.getComponent<Database>() == database)
         {
             item_list->setSelectionIndex(item_list_idx);
         }
@@ -141,42 +126,42 @@ void DatabaseViewComponent::display()
 
     fillListBox();
 
-    if (!selected_entry)
+    auto database = selected_entry.getComponent<Database>();
+    if (!database)
         return;
+    auto mrc = selected_entry.getComponent<MeshRenderComponent>();
 
-    bool has_key_values = selected_entry->keyValuePairs.size() > 0;
-    bool has_image_or_model = selected_entry->hasModelData() || selected_entry->getImage() != "";
-    bool has_text = selected_entry->getLongDescription().length() > 0;
+    bool has_key_values = database->key_values.size() > 0;
+    bool has_image_or_model = mrc || database->image != "";
+    bool has_text = database->description.length() > 0;
 
     if (has_image_or_model)
     {
         GuiElement* visual = (new GuiElement(details_container, "DATABASE_VISUAL_ELEMENT"))->setMargins(0, 0, 0, 40)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-        if (selected_entry->hasModelData())
+        if (mrc)
         {
-            (new GuiRotatingModelView(visual, "DATABASE_MODEL_VIEW", selected_entry->getModelData()))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-            if(selected_entry->getImage() != "")
+            //TODO: (new GuiRotatingModelView(visual, "DATABASE_MODEL_VIEW", selected_entry))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+            if(database->image != "")
             {
-                (new GuiImage(visual, "DATABASE_IMAGE", selected_entry->image))->setMargins(0)->setSize(32, 32);
+                (new GuiImage(visual, "DATABASE_IMAGE", database->image))->setMargins(0)->setSize(32, 32);
             }
         }
-        else if(selected_entry->getImage() != "")
+        else if(database->image != "")
         {
-            auto image = new GuiImage(visual, "DATABASE_IMAGE", selected_entry->image);
+            auto image = new GuiImage(visual, "DATABASE_IMAGE", database->image);
             image->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         }
     }
     if (has_text)
     {
-        (new GuiScrollText(details_container, "DATABASE_LONG_DESCRIPTION", selected_entry->getLongDescription()))->setTextSize(24)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiScrollText(details_container, "DATABASE_LONG_DESCRIPTION", database->description))->setTextSize(24)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
 
     if (has_key_values)
     {
-        for(unsigned int n=0; n<selected_entry->keyValuePairs.size(); n++)
-        {
-            (new GuiKeyValueDisplay(keyvalue_container, "", 0.37, selected_entry->keyValuePairs[n].key, selected_entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
-        }
+        for(auto& kv : database->key_values)
+            (new GuiKeyValueDisplay(keyvalue_container, "", 0.37, kv.key, kv.value))->setSize(GuiElement::GuiSizeMax, 40);
     } else {
         keyvalue_container->destroy();
         keyvalue_container = nullptr;

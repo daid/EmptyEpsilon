@@ -2,6 +2,7 @@
 #define MINE_H
 
 #include "spaceObject.h"
+#include "missileWeaponData.h"
 
 class Mine : public SpaceObject, public Updatable
 {

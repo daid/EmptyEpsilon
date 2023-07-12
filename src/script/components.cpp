@@ -31,6 +31,7 @@
 #include "components/radarblock.h"
 #include "components/gravity.h"
 #include "components/internalrooms.h"
+#include "components/database.h"
 
 #define STRINGIFY(n) #n
 #define BIND_MEMBER(T, MEMBER) \
@@ -811,4 +812,13 @@ void initComponentScriptBindings()
             lua_pop(L, 1);
         }
     };
+
+    sp::script::ComponentHandler<Database>::name("science_database");
+    BIND_MEMBER(Database, name);
+    BIND_MEMBER(Database, description);
+    BIND_MEMBER(Database, image);
+    BIND_MEMBER(Database, parent);
+    BIND_ARRAY(Database, key_values);
+    BIND_ARRAY_MEMBER(Database, key_values, key);
+    BIND_ARRAY_MEMBER(Database, key_values, value);
 }

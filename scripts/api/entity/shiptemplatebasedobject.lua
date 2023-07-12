@@ -30,21 +30,21 @@ function Entity:setTemplate(template_name)
     elseif template.__type == "playership" then
         if self.shields then self.shields.active = false end
     end
-    --TODO: Setup energy cost distribution for available systems.
-    --[[
-        // TODO
-static std::array<float, ShipSystem::COUNT> default_system_power_factors{
-    /*ShipSystem::Type::Reactor*/     -25.f,
-    /*ShipSystem::Type::BeamWeapons*/   3.f,
-    /*ShipSystem::Type::MissileSystem*/ 1.f,
-    /*ShipSystem::Type::Maneuver*/      2.f,
-    /*ShipSystem::Type::Impulse*/       4.f,
-    /*ShipSystem::Type::Warp*/          5.f,
-    /*ShipSystem::Type::JumpDrive*/     5.f,
-    /*ShipSystem::Type::FrontShield*/   5.f,
-    /*ShipSystem::Type::RearShield*/    5.f,
-};
-    --]]
+
+    if self.reactor then
+        local reactor_power_factor = 0
+        if self.beam_weapons then self.beam_weapons.power_factor = 3.0; reactor_power_factor = reactor_power_factor - 3.0 end
+        if self.missile_tubes then self.missile_tubes.power_factor = 1.0; reactor_power_factor = reactor_power_factor - 1.0 end
+        if self.maneuvering_thrusters then self.maneuvering_thrusters.power_factor = 2.0; reactor_power_factor = reactor_power_factor - 2.0 end
+        if self.impulse_engine then self.impulse_engine.power_factor = 4.0; reactor_power_factor = reactor_power_factor - 4.0 end
+        if self.warp_drive then self.warp_drive.power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0 end
+        if self.jump_drive then self.jump_drive.power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0 end
+        if self.shields then
+            self.shields.front_power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0
+            self.shields.rear_power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0
+        end
+        self.reactor.power_factor = reactor_power_factor
+    end
     return self
 end
 --- [DEPRECATED]

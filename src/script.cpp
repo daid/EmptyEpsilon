@@ -246,5 +246,5 @@ void setupScriptEnvironment(sp::script::Environment& env)
     LuaConsole::checkResult(env.runFile<void>("model_data.lua"));
     LuaConsole::checkResult(env.runFile<void>("factionInfo.lua"));
     LuaConsole::checkResult(env.runFile<void>("shipTemplates.lua"));
-    //TODO: Load science database
+    LuaConsole::checkResult(env.runFile<void>("science_db.lua"));
 }

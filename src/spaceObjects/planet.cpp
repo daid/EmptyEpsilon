@@ -1,6 +1,7 @@
 #include <graphics/opengl.h>
 #include "planet.h"
 #include "main.h"
+#include "engine.h"
 
 #include "scriptInterface.h"
 #include "glObjects.h"
