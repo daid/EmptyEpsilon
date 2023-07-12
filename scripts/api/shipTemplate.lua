@@ -309,7 +309,7 @@ end
 --- Defaults to 70.
 --- Example: template:setHull(100)
 function ShipTemplate:setHull(amount)
-    self.hull = {current=amount, max=current}
+    self.hull = {current=amount, max=amount}
     return self
 end
 --- Sets the maximum points per shield segment for ShipTemplateBasedObjects created from this ShipTemplate.
