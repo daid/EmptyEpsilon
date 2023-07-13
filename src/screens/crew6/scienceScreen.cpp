@@ -326,10 +326,21 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         if (auto cs = target.getComponent<CallSign>())
             info_callsign->setValue(cs->callsign);
 
-        string description = ""; //TODO: target->getDescriptionFor(my_spaceship);
+        auto scanstate_component = target.getComponent<ScanState>();
+        auto scanstate = scanstate_component ? scanstate_component->getStateFor(my_spaceship) : ScanState::State::FullScan;
 
-        if (description.size() > 0)
+        auto sd = target.getComponent<ScienceDescription>();
+        string description = "";
+        if (sd)
         {
+            switch(scanstate) {
+            case ScanState::State::NotScanned: description = sd->not_scanned; break;
+            case ScanState::State::FriendOrFoeIdentified: description = sd->friend_or_foe_identified; break;
+            case ScanState::State::SimpleScan: description = sd->simple_scan; break;
+            case ScanState::State::FullScan: description = sd->full_scan; break;
+            }
+        }
+        if (!description.empty()) {
             info_description->setText(description)->show();
 
             if (sidebar_pager->indexByValue("Description") < 0)
@@ -346,13 +357,9 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
         string sidebar_pager_selection = sidebar_pager->getSelectionValue();
 
-        // If the target is a ship, show information about the ship based on how
-        // deeply we've scanned it.
-
-        auto scanstate = target.getComponent<ScanState>();
         // On a simple scan or deeper, show the faction, ship type, shields,
         // hull integrity, and database reference button.
-        if (!scanstate || scanstate->getStateFor(my_spaceship) >= ScanState::State::SimpleScan)
+        if (scanstate >= ScanState::State::SimpleScan)
         {
             auto faction = Faction::getInfo(target);
             info_faction->setValue(faction.locale_name);
@@ -374,7 +381,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
         // On a full scan, show tactical and systems data (if any), and its
         // description (if one is set).
-        if (!scanstate || scanstate->getStateFor(my_spaceship) >= ScanState::State::FullScan)
+        if (scanstate >= ScanState::State::FullScan)
         {
             sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
 

@@ -40,7 +40,7 @@ class ScienceDescription
 {
 public:
     string not_scanned;
-    string friend_of_foe_identified;
+    string friend_or_foe_identified;
     string simple_scan;
     string full_scan;
 };

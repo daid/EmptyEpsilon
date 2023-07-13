@@ -718,6 +718,11 @@ void initComponentScriptBindings()
     BIND_MEMBER(SelfDestruct, countdown);
     BIND_MEMBER(SelfDestruct, damage);
     BIND_MEMBER(SelfDestruct, size);
+    sp::script::ComponentHandler<ScienceDescription>::name("science_description");
+    BIND_MEMBER(ScienceDescription, not_scanned);
+    BIND_MEMBER(ScienceDescription, friend_or_foe_identified);
+    BIND_MEMBER(ScienceDescription, simple_scan);
+    BIND_MEMBER(ScienceDescription, full_scan);
     sp::script::ComponentHandler<ScienceScanner>::name("science_scanner");
     BIND_MEMBER(ScienceScanner, delay);
     BIND_MEMBER(ScienceScanner, max_scanning_delay);

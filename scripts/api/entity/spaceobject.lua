@@ -274,12 +274,8 @@ end
 --- Example:
 ---   obj:setDescriptions("A refitted Atlantis X23...", "It's a trap!")
 function Entity:setDescriptions(unscanned_description, scanned_description)
-    --TODO
-end
---- As setDescriptions, but sets the same description for both unscanned and scanned states.
---- Example: obj:setDescription("A refitted Atlantis X23 for more ...")
-function Entity:setDescription(description)
-    --TODO
+    self.science_description = {not_scanned=unscanned_description, friend_or_foe_identified=unscanned_description, simple_scan=scanned_description, full_scan=scanned_description}
+    return self
 end
 --- Sets a description for a given EScannedState on this SpaceObject.
 --- Only SpaceShip objects are created in an unscanned state. Other SpaceObjects are created as fully scanned.
@@ -289,7 +285,12 @@ end
 --- - "fullscan" or "full": The object is fully scanned.
 --- Example: obj:setDescriptionForScanState("friendorfoeidentified", "A refitted...")
 function Entity:setDescriptionForScanState(state, description)
-    --TODO
+    if self.science_description == nil then self.science_description = {} end
+    if state == "notscanned" or state == "not" then self.science_description.not_scanned = description end
+    if state == "friendorfoeidentified" then self.science_description.friend_or_foe_identified = description end
+    if state == "simplescan" or state == "simple" then self.science_description.simple_scan = description end
+    if state == "fullscan" or state == "full" then self.science_description.full_scan = description end
+    return self
 end
 --- Returns this SpaceObject's description for the given EScannedState.
 --- Accepts an optional string-equivalent EScannedState, which determines which description to return.
@@ -298,7 +299,11 @@ end
 --- obj:getDescription() -- returns the "fullscan" description
 --- obj:getDescription("friendorfoeidentified") -- returns the "friendorfoeidentified" description
 function Entity:getDescription(state)
-    --TODO
+    if self.science_description == nil then return "" end
+    if state == "notscanned" or state == "not" then return self.science_description.not_scanned end
+    if state == "friendorfoeidentified" then return self.science_description.friend_or_foe_identified end
+    if state == "simplescan" or state == "simple" then return self.science_description.simple_scan end
+    return self.science_description.full_scan end
 end
 --- Sets this SpaceObject's radar signature, which creates noise on the science screen's raw radar signal ring.
 --- The raw signal ring contains red, green, and blue bands of waveform noise.

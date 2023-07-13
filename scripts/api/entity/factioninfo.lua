@@ -61,15 +61,6 @@ function Entity:setGMColor(r, g, b)
     end
     return self
 end
---- Sets this faction's longform description as shown in its Factions ScienceDatabase child entry.
---- Wrap the string in the _() function to make it available for translation.
---- Example: faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
-function Entity:setDescription(description)
-    if self.faction_info then
-        self.faction_info.description = description
-    end
-    return self
-end
 --- Sets the given faction to appear as hostile to SpaceObjects of this faction.
 --- For example, Spaceships of this faction can target and fire at SpaceShips of the given faction.
 --- Defaults to no hostile factions.
