@@ -4,6 +4,7 @@
 #include "ai/ai.h"
 #include "ai/aiFactory.h"
 #include "random.h"
+#include "components/ai.h"
 #include "components/docking.h"
 #include "components/impulse.h"
 #include "components/warpdrive.h"

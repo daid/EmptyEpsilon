@@ -4,6 +4,8 @@
 #include "ai/aiFactory.h"
 #include "random.h"
 #include "systems/collision.h"
+#include "components/ai.h"
+#include "components/docking.h"
 #include "components/missiletubes.h"
 #include "components/beamweapon.h"
 #include "components/collision.h"

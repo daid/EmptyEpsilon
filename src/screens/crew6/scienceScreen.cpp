@@ -7,6 +7,7 @@
 
 #include "components/beamweapon.h"
 #include "components/shields.h"
+#include "components/hull.h"
 #include "components/collision.h"
 
 #include "systems/radarblock.h"
@@ -297,30 +298,35 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
     if (targets.get())
     {
-        auto target_ptr = targets.get().getComponent<SpaceObject*>();
-        P<SpaceObject> obj = target_ptr ? *target_ptr : nullptr;
-        P<SpaceShip> ship = obj;
-        P<SpaceStation> station = obj;
+        auto target = targets.get();
 
-        auto transform = my_spaceship.getComponent<sp::Transform>();
-        auto position_diff = obj->getPosition() - (transform ? transform->getPosition() : glm::vec2{0, 0});
-        float distance = glm::length(position_diff);
-        float heading = vec2ToAngle(position_diff) - 270;
+        auto my_transform = my_spaceship.getComponent<sp::Transform>();
+        auto target_transform = target.getComponent<sp::Transform>();
 
-        while(heading < 0) heading += 360;
+        if (my_transform && target_transform) {
+            auto position_diff = target_transform->getPosition() - my_transform->getPosition();
+            float distance = glm::length(position_diff);
+            float heading = vec2ToAngle(position_diff) - 270;
 
-        auto physics = my_spaceship.getComponent<sp::Physics>();
-        float rel_velocity = dot(obj->getVelocity(), position_diff / distance) - dot(physics ? physics->getVelocity() : glm::vec2{0, 0}, position_diff / distance);
+            while(heading < 0) heading += 360;
 
-        if (std::abs(rel_velocity) < 0.01f)
-            rel_velocity = 0.0f;
+            info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
+            info_heading->setValue(string(int(heading)));
 
-        info_callsign->setValue(obj->getCallSign());
-        info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
-        info_heading->setValue(string(int(heading)));
-        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+            auto my_physics = my_spaceship.getComponent<sp::Physics>();
+            auto target_physics = target.getComponent<sp::Physics>();
+            if (my_physics && target_physics) {
+                float rel_velocity = dot(target_physics->getVelocity(), position_diff / distance) - dot(my_physics->getVelocity(), position_diff / distance);
 
-        string description = obj->getDescriptionFor(my_spaceship);
+                if (std::abs(rel_velocity) < 0.01f)
+                    rel_velocity = 0.0f;
+                info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+            }
+        }
+        if (auto cs = target.getComponent<CallSign>())
+            info_callsign->setValue(cs->callsign);
+
+        string description = ""; //TODO: target->getDescriptionFor(my_spaceship);
 
         if (description.size() > 0)
         {
@@ -342,110 +348,102 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
         // If the target is a ship, show information about the ship based on how
         // deeply we've scanned it.
-        if (ship)
+
+        auto scanstate = target.getComponent<ScanState>();
+        // On a simple scan or deeper, show the faction, ship type, shields,
+        // hull integrity, and database reference button.
+        if (!scanstate || scanstate->getStateFor(my_spaceship) >= ScanState::State::SimpleScan)
         {
-            auto scanstate = targets.get().getComponent<ScanState>();
-            // On a simple scan or deeper, show the faction, ship type, shields,
-            // hull integrity, and database reference button.
-            if (!scanstate || scanstate->getStateFor(my_spaceship) >= ScanState::State::SimpleScan)
-            {
-                auto faction = Faction::getInfo(obj->entity);
-                info_faction->setValue(faction.locale_name);
-                info_type->setValue(ship->getTypeName());
-                info_type_button->show();
-                info_shields->setValue(ship->getShieldDataString());
-                info_hull->setValue(int(ceil(ship->getHull())));
+            auto faction = Faction::getInfo(target);
+            info_faction->setValue(faction.locale_name);
+            if (auto tn = target.getComponent<TypeName>())
+                info_type->setValue(tn->localized);
+            info_type_button->show();
+            if (auto shields = target.getComponent<Shields>()) {
+                string str = "";
+                for(size_t n=0; n<shields->entries.size(); n++) {
+                    if (n > 0)
+                        str += ":";
+                    str += string(int(shields->entries[n].level));
+                }
+                info_shields->setValue(str);
             }
-
-            // On a full scan, show tactical and systems data (if any), and its
-            // description (if one is set).
-            if (!scanstate || scanstate->getStateFor(my_spaceship) >= ScanState::State::FullScan)
-            {
-                sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
-
-                // Check sidebar pager state.
-                if (sidebar_pager_selection == "Tactical")
-                {
-                    info_shield_frequency->show();
-                    info_beam_frequency->show();
-
-                    for(int n = 0; n < ShipSystem::COUNT; n++)
-                    {
-                        info_system[n]->hide();
-                    }
-
-                    info_description->hide();
-                }
-                else if (sidebar_pager_selection == "Systems")
-                {
-                    info_shield_frequency->hide();
-                    info_beam_frequency->hide();
-
-                    for(int n = 0; n < ShipSystem::COUNT; n++)
-                    {
-                        info_system[n]->show();
-                    }
-
-                    info_description->hide();
-                }
-                else if (sidebar_pager_selection == "Description")
-                {
-                    info_shield_frequency->hide();
-                    info_beam_frequency->hide();
-
-                    for(int n = 0; n < ShipSystem::COUNT; n++)
-                    {
-                        info_system[n]->hide();
-                    }
-
-                    info_description->show();
-                }
-                else
-                {
-                    LOG(WARNING) << "Invalid pager state: " << sidebar_pager_selection;
-                }
-
-                // If beam and shield frequencies are enabled on the server,
-                // populate their graphs.
-                if (gameGlobalInfo->use_beam_shield_frequencies)
-                {
-                    auto shieldsystem = ship->entity.getComponent<Shields>();
-                    info_shield_frequency->setFrequency(shieldsystem ? shieldsystem->frequency : -1);
-                    auto beamsystem = ship->entity.getComponent<BeamWeaponSys>();
-                    info_beam_frequency->setFrequency(beamsystem ? beamsystem->frequency : -1);
-
-                    // Show on graph information that target has no shields instead of frequencies. 
-                    info_shield_frequency->setEnemyHasEquipment(shieldsystem);
-
-                    // Show on graph information that target has no beams instad of frequencies. 
-                    info_beam_frequency->setEnemyHasEquipment(beamsystem);
-                }
-
-                // Show the status of each subsystem.
-                for(int n = 0; n < ShipSystem::COUNT; n++)
-                {
-                    auto sys = ShipSystem::get(ship->entity, ShipSystem::Type(n));
-                    if (sys) {
-                        float system_health = sys->health;
-                        info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
-                    }
-                }
-            }
+            if (auto hull = target.getComponent<Hull>())
+                info_hull->setValue(int(ceil(hull->current)));
         }
 
-        // If the target isn't a ship, show basic info.
-        else
+        // On a full scan, show tactical and systems data (if any), and its
+        // description (if one is set).
+        if (!scanstate || scanstate->getStateFor(my_spaceship) >= ScanState::State::FullScan)
         {
-            sidebar_pager->hide();
-            auto faction = Faction::getInfo(obj->entity);
-            info_faction->setValue(faction.locale_name);
+            sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
 
-            // If the target is a station, show basic tactical info.
-            if (station)
+            // Check sidebar pager state.
+            if (sidebar_pager_selection == "Tactical")
             {
-                info_type->setValue(station->template_name);
-                info_shields->setValue(station->getShieldDataString());
-                info_hull->setValue(int(ceil(station->getHull())));
+                info_shield_frequency->show();
+                info_beam_frequency->show();
+
+                for(int n = 0; n < ShipSystem::COUNT; n++)
+                {
+                    info_system[n]->hide();
+                }
+
+                info_description->hide();
+            }
+            else if (sidebar_pager_selection == "Systems")
+            {
+                info_shield_frequency->hide();
+                info_beam_frequency->hide();
+
+                for(int n = 0; n < ShipSystem::COUNT; n++)
+                {
+                    info_system[n]->show();
+                }
+
+                info_description->hide();
+            }
+            else if (sidebar_pager_selection == "Description")
+            {
+                info_shield_frequency->hide();
+                info_beam_frequency->hide();
+
+                for(int n = 0; n < ShipSystem::COUNT; n++)
+                {
+                    info_system[n]->hide();
+                }
+
+                info_description->show();
+            }
+            else
+            {
+                LOG(WARNING) << "Invalid pager state: " << sidebar_pager_selection;
+            }
+
+            // If beam and shield frequencies are enabled on the server,
+            // populate their graphs.
+            if (gameGlobalInfo->use_beam_shield_frequencies)
+            {
+                auto shieldsystem = target.getComponent<Shields>();
+                info_shield_frequency->setFrequency(shieldsystem ? shieldsystem->frequency : -1);
+                auto beamsystem = target.getComponent<BeamWeaponSys>();
+                info_beam_frequency->setFrequency(beamsystem ? beamsystem->frequency : -1);
+
+                // Show on graph information that target has no shields instead of frequencies. 
+                info_shield_frequency->setEnemyHasEquipment(shieldsystem);
+
+                // Show on graph information that target has no beams instad of frequencies. 
+                info_beam_frequency->setEnemyHasEquipment(beamsystem);
+            }
+
+            // Show the status of each subsystem.
+            for(int n = 0; n < ShipSystem::COUNT; n++)
+            {
+                auto sys = ShipSystem::get(target, ShipSystem::Type(n));
+                if (sys) {
+                    float system_health = sys->health;
+                    info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
+                }
             }
         }
     }

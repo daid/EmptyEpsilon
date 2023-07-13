@@ -18,6 +18,7 @@
 
 #include "screenComponents/radarView.h"
 
+#include "components/ai.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_listbox.h"
@@ -115,10 +116,10 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
                 ship_tweak_dialog->open(obj);
                 break;
             }
-            else if (P<SpaceStation>(obj))
-            {
-                station_tweak_dialog->open(obj);
-            }
+            //else if (P<SpaceStation>(obj))
+            //{
+            //    station_tweak_dialog->open(obj);
+            //}
             else if (P<WarpJammerObject>(obj))
             {
                 jammer_tweak_dialog->open(obj);
@@ -176,31 +177,34 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     order_layout->setPosition(-20, -90, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
 
     (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", tr("Defend location"), [this]() {
-        for(auto obj : targets.getTargets()) {
-            auto obj_ptr = obj.getComponent<SpaceObject*>();
-            if (obj_ptr && P<CpuShip>(P<SpaceObject>(*obj_ptr)))
-                P<CpuShip>(P<SpaceObject>(*obj_ptr))->orderDefendLocation(P<SpaceObject>(*obj_ptr)->getPosition());
+        for(auto target : targets.getTargets()) {
+            if (auto ai = target.getComponent<AIController>()) {
+                if (auto transform = target.getComponent<sp::Transform>()) {
+                    ai->orders = AIOrder::DefendLocation;
+                    ai->order_target_location = transform->getPosition();
+                }
+            }
         }
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_STAND_GROUND", tr("Stand ground"), [this]() {
         for(auto obj : targets.getTargets()) {
             auto obj_ptr = obj.getComponent<SpaceObject*>();
-            if (obj_ptr && P<CpuShip>(P<SpaceObject>(*obj_ptr)))
-                P<CpuShip>(P<SpaceObject>(*obj_ptr))->orderStandGround();
+            //if (obj_ptr && P<CpuShip>(P<SpaceObject>(*obj_ptr)))
+            //    P<CpuShip>(P<SpaceObject>(*obj_ptr))->orderStandGround();
         }
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_ROAMING", tr("Roaming"), [this]() {
         for(auto obj : targets.getTargets()) {
             auto obj_ptr = obj.getComponent<SpaceObject*>();
-            if (obj_ptr && P<CpuShip>(P<SpaceObject>(*obj_ptr)))
-                P<CpuShip>(P<SpaceObject>(*obj_ptr))->orderRoaming();
+            //if (obj_ptr && P<CpuShip>(P<SpaceObject>(*obj_ptr)))
+            //    P<CpuShip>(P<SpaceObject>(*obj_ptr))->orderRoaming();
         }
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_IDLE", tr("Idle"), [this]() {
         for(auto obj : targets.getTargets()) {
             auto obj_ptr = obj.getComponent<SpaceObject*>();
-            if (obj_ptr && P<CpuShip>(P<SpaceObject>(*obj_ptr)))
-                P<CpuShip>(P<SpaceObject>(*obj_ptr))->orderIdle();
+            //if (obj_ptr && P<CpuShip>(P<SpaceObject>(*obj_ptr)))
+            //    P<CpuShip>(P<SpaceObject>(*obj_ptr))->orderIdle();
         }
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiLabel(order_layout, "ORDERS_LABEL", tr("Orders:"), 20))->addBackground()->setSize(GuiElement::GuiSizeMax, 30);
@@ -332,10 +336,10 @@ void GameMasterScreen::update(float delta)
         if (obj_ptr && *obj_ptr) {
             P<SpaceObject> obj = *obj_ptr;
             has_object = true;
-            if (P<CpuShip>(obj))
-                has_cpu_ship = true;
-            else if (P<PlayerSpaceship>(obj))
-                has_player_ship = true;
+            //if (P<CpuShip>(obj))
+            //    has_cpu_ship = true;
+            //else if (P<PlayerSpaceship>(obj))
+            //    has_player_ship = true;
         }
     }
 
@@ -526,19 +530,20 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             {
                 auto obj_ptr = obj.getComponent<SpaceObject*>();
                 if (!obj_ptr) continue;
-                P<CpuShip> cpu_ship = P<SpaceObject>(*obj_ptr);
-                if (!cpu_ship)
-                    continue;
+                //P<CpuShip> cpu_ship = P<SpaceObject>(*obj_ptr);
+                //if (!cpu_ship)
+                //    continue;
 
-                lower_bound.x = std::min(lower_bound.x, cpu_ship->getPosition().x);
-                lower_bound.y = std::min(lower_bound.y, cpu_ship->getPosition().y);
-                upper_bound.x = std::max(upper_bound.x, cpu_ship->getPosition().x);
-                upper_bound.y = std::max(upper_bound.y, cpu_ship->getPosition().y);
+                //lower_bound.x = std::min(lower_bound.x, cpu_ship->getPosition().x);
+                //lower_bound.y = std::min(lower_bound.y, cpu_ship->getPosition().y);
+                //upper_bound.x = std::max(upper_bound.x, cpu_ship->getPosition().x);
+                //upper_bound.y = std::max(upper_bound.y, cpu_ship->getPosition().y);
             }
             glm::vec2 objects_center = (upper_bound + lower_bound) / 2.0f;
 
             for(auto obj : targets.getTargets())
             {
+                /*
                 auto obj_ptr = obj.getComponent<SpaceObject*>();
                 if (!obj_ptr) continue;
                 P<CpuShip> cpu_ship = P<SpaceObject>(*obj_ptr);
@@ -569,6 +574,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                 {
                     wormhole->setTargetPosition(position);
                 }
+                */
             }
         }
         break;

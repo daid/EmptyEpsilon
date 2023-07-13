@@ -245,32 +245,22 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
 
     if (targets.get())
     {
-        auto entity = targets.get();
-        auto obj_ptr = entity.getComponent<SpaceObject*>();
-        P<SpaceObject> obj = obj_ptr ? *obj_ptr : nullptr;
-        P<SpaceShip> ship = obj;
-        P<SpaceStation> station = obj;
-        P<ScanProbe> probe = obj;
+        auto target = targets.get();
 
-        info_callsign->setValue(obj->getCallSign());
+        if (auto cs = target.getComponent<CallSign>())
+            info_callsign->setValue(cs->callsign);
 
-        auto faction = Faction::getInfo(obj->entity);
-        if (ship)
-        {
-            if (ship->getScannedStateFor(my_spaceship) >= ScanState::State::SimpleScan)
-            {
-                info_faction->setValue(faction.locale_name);
-            }
-        }else{
+        auto faction = Faction::getInfo(target);
+        auto scanstate = target.getComponent<ScanState>();
+        if (!scanstate || scanstate->getStateFor(my_spaceship) >= ScanState::State::SimpleScan)
             info_faction->setValue(faction.locale_name);
-        }
 
-        if (auto arl = entity.getComponent<AllowRadarLink>())
+        if (auto arl = target.getComponent<AllowRadarLink>())
         {
             if (arl->owner == my_spaceship) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
                 if (lrr)
-                    link_to_science_button->setValue(lrr->radar_view_linked_entity == entity);
+                    link_to_science_button->setValue(lrr->radar_view_linked_entity == target);
                 link_to_science_button->enable();
             } else {
                 link_to_science_button->setValue(false);
@@ -282,7 +272,7 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
             link_to_science_button->setValue(false);
             link_to_science_button->disable();
         }
-        if (canHack(obj->entity))
+        if (canHack(target))
         {
             hack_target_button->enable();
         }else{

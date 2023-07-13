@@ -1,4 +1,5 @@
 #include "spaceObjects/cpuShip.h"
+#include "components/ai.h"
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
 #include "components/collision.h"
