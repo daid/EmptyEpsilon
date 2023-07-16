@@ -332,7 +332,7 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
 
         // Get target parameters in the tube centered reference frame:
         const glm::vec2 target_position = transform_global_to_tube(target->getPosition() - parent->getPosition(), tube_angle);
-        const glm::vec2 target_velocity = transform_global_to_tube(target->getVelocity() - parent->getVelocity(), tube_angle);
+        const glm::vec2 target_velocity = transform_global_to_tube(target->getVelocity(), tube_angle);
 
         const int MAX_ITER = 10;
         const float tolerance = 0.1f * target->getRadius();
