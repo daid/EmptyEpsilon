@@ -306,63 +306,108 @@ string WeaponTube::getTubeName()
     return "?" + string(direction);
 }
 
+// Coordinate transform from global reference frame (X: right/east, Y: down/south)
+// to weapon tube reference frame (X: right of tube, Y: direction of fire)
+static glm::vec2 transform_global_to_tube(glm::vec2 vec, float angle)
+{
+    const float heading = angle + 0.5f*float(M_PI);
+    const float c = glm::cos(heading);
+    const float s = glm::sin(heading);
+    return glm::vec2(c*vec.x + s*vec.y, s*vec.x - c*vec.y);
+}
+
 float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
 {
-    if (!target)
-        return std::numeric_limits<float>::infinity();
-    const MissileWeaponData& data = MissileWeaponData::getDataFor(type_loaded);
-    if (data.turnrate == 0.0f)  //If the missile cannot turn, we cannot find a firing solution.
-        return std::numeric_limits<float>::infinity();
-
-    auto target_position = target->getPosition();
-    auto target_velocity = target->getVelocity();
-    float target_velocity_length = glm::length(target_velocity);
-    float missile_angle = vec2ToAngle(target_position - parent->getPosition());
-    float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * float(M_PI));
-    float missile_exit_angle = parent->getRotation() + direction;
-
-    for(int iterations=0; iterations<10; iterations++)
+    const MissileWeaponData& missile = MissileWeaponData::getDataFor(type_loaded);
+    float missile_angle;
+    if (!target || missile.turnrate == 0.0f)
     {
-        float angle_diff = angleDifference(missile_angle, missile_exit_angle);
-
-        float left_or_right = 90;
-        if (angle_diff > 0)
-            left_or_right = -90;
-
-        auto turn_center = parent->getPosition() + vec2FromAngle(missile_exit_angle + left_or_right) * turn_radius;
-        auto turn_exit = turn_center + vec2FromAngle(missile_angle - left_or_right) * turn_radius;
-        if (target_velocity_length < 1.0f)
-        {
-            //If the target is almost standing still, just target the position directly instead of using the velocity of the target in the calculations.
-            float time_missile = glm::length(turn_exit - target_position) / data.speed;
-            auto interception = turn_exit + vec2FromAngle(missile_angle) * data.speed * time_missile;
-            float r = target->getRadius() / 2;
-            if (glm::length2(interception - target_position) < r*r)
-                return missile_angle;
-            missile_angle = vec2ToAngle(target_position - turn_exit);
-        }
-        else
-        {
-            auto missile_velocity = vec2FromAngle(missile_angle) * data.speed;
-            //Calculate the position where missile and the target will cross each others path.
-            auto intersection = lineLineIntersection(target_position, target_position + target_velocity, turn_exit, turn_exit + missile_velocity);
-            //Calculate the time it will take for the target and missile to reach the intersection
-            float turn_time = fabs(angle_diff) / data.turnrate;
-            float time_target = glm::length((target_position - intersection)) / target_velocity_length;
-            float time_missile = glm::length(turn_exit - intersection) / data.speed + turn_time;
-            //Calculate the time in which the radius will be on the intersection, to know in which time range we need to hit.
-            float time_radius = (target->getRadius() / 2.0f) / target_velocity_length;//TODO: This value could be improved, as it is allowed to be bigger when the angle between the missile and the ship is low
-            // When both the missile and the target are at the same position at the same time, we can take a shot!
-            if (fabsf(time_target - time_missile) < time_radius)
-                return missile_angle;
-
-            //When we cannot hit the target with this setup yet. Calculate a new intersection target, and aim for that.
-            float guessed_impact_time = (time_target * target_velocity_length / (target_velocity_length + data.speed)) + (time_missile * data.speed / (target_velocity_length + data.speed));
-            auto new_target_position = target_position + target_velocity * guessed_impact_time;
-            missile_angle = vec2ToAngle(new_target_position - turn_exit);
-        }
+        missile_angle = std::numeric_limits<float>::infinity();
     }
-    return std::numeric_limits<float>::infinity();
+    else
+    {
+        const float tube_angle = glm::radians(parent->getRotation() + direction);
+        const float turn_rate = glm::radians(missile.turnrate);
+        const float turn_radius = missile.speed / turn_rate;
+
+        // Get target parameters in the tube centered reference frame:
+        const glm::vec2 target_position = transform_global_to_tube(target->getPosition() - parent->getPosition(), tube_angle);
+        const glm::vec2 target_velocity = transform_global_to_tube(target->getVelocity() - parent->getVelocity(), tube_angle);
+
+        const int MAX_ITER = 10;
+        const float tolerance = 0.1f * target->getRadius();
+        bool converged = false;
+        glm::vec2 aim_position = target_position; // Set initial aim point
+        float turn_direction; // Left: -1, Right: +1, No turn: 0
+        float turn_angle; // In radians. Value of 0 means no turn.
+        for (int iterations=0; iterations<MAX_ITER && converged == false; iterations++)
+        {
+            // Select turn direction
+            // Turn in the direction of the target on condition that the target
+            // is not inside the turning circle of that side. If it is inside
+            // the turning circle, turn in the opposite direction.
+            const float r_left = glm::length(aim_position - glm::vec2(-turn_radius, 0.0f));
+            const float r_right = glm::length(aim_position - glm::vec2(turn_radius, 0.0f));
+            if ((aim_position.x < 0.0f && r_left >= turn_radius) || r_right < turn_radius)
+                turn_direction = -1.0f;
+            else if ((aim_position.x >= 0.0f && r_right >= turn_radius) || r_left < turn_radius)
+                turn_direction = 1.0f;
+            else
+                turn_direction = 0.0f;
+            
+            // Calculate turn angle
+            if (turn_direction == 0.0f)
+            {
+                turn_angle = 0.0f;
+            }
+            else
+            {
+                const float x = turn_direction * aim_position.x;
+                const float aim_radius = glm::length(aim_position - turn_direction*glm::vec2(turn_radius, 0.0f));
+                const float a = glm::acos((turn_radius - x) / aim_radius);
+                const float b = glm::acos(turn_radius / aim_radius);
+                if (aim_position.y >= 0.0f)
+                {
+                    if (x >= 0.0f)
+                        turn_angle = a - b;
+                    else
+                        turn_angle = 2.0f*float(M_PI) + a - b;
+                }
+                else
+                {
+                    turn_angle = 2.0f*float(M_PI) - a - b;
+                }
+            }
+
+            // Calculate missile and target parameters at turn exit
+            const float exit_time = turn_angle / turn_rate;
+            const glm::vec2 missile_position_exit = turn_radius * glm::vec2(turn_direction * (1.0f - glm::cos(turn_angle)), glm::sin(turn_angle));
+            const glm::vec2 missile_velocity = missile.speed * glm::vec2(turn_direction * glm::sin(turn_angle), glm::cos(turn_angle));
+            const glm::vec2 target_position_exit = glm::vec2(target_position + target_velocity*exit_time);
+
+            // Calculate nearest approach
+            const glm::vec2 relative_position_exit = target_position_exit - missile_position_exit;
+            const glm::vec2 relative_velocity = target_velocity - missile_velocity;
+            const float relative_speed = glm::length(relative_velocity);
+            float nearest_time; // Time after turn exit when nearest approach occurs
+            if (relative_speed == 0.0f)
+                nearest_time = 0.0f;
+            else
+                nearest_time = -glm::dot(relative_position_exit, relative_velocity) / relative_speed / relative_speed;
+            const float nearest_distance = glm::length(relative_position_exit + relative_velocity*nearest_time);
+
+            // Check if solution has converged or if we must adjust aim
+            if (nearest_distance < tolerance && nearest_time >= 0.0f)
+                converged = true;
+            else
+                aim_position = target_position + target_velocity*(exit_time + nearest_time);
+        }
+        if (converged == true && turn_angle < float(M_PI))
+            missile_angle = glm::degrees(tube_angle + turn_direction*turn_angle);
+        else
+            missile_angle = std::numeric_limits<float>::infinity();
+    }
+    return missile_angle;
 }
 
 void WeaponTube::setSize(EMissileSizes size)
