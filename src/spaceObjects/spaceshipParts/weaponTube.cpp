@@ -316,6 +316,23 @@ static glm::vec2 transform_global_to_tube(glm::vec2 vec, float angle)
     return glm::vec2(c*vec.x + s*vec.y, s*vec.x - c*vec.y);
 }
 
+static float calculateTurnAngle(glm::vec2 aim_position, float turn_direction, float turn_radius)
+{
+    float turn_angle;
+    const float d = glm::length(aim_position - turn_direction*glm::vec2(turn_radius, 0.0f));
+    if (d >= turn_radius)
+    {
+        const float a = glm::atan(aim_position.y, turn_direction*aim_position.x - turn_radius);
+        const float b = glm::acos(turn_radius / d);
+        turn_angle = float(M_PI) - a - b;
+    }
+    else
+    {
+        turn_angle = 0.0f;
+    }
+    return turn_angle;
+}
+
 float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
 {
     const MissileWeaponData& missile = MissileWeaponData::getDataFor(type_loaded);
@@ -342,41 +359,26 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
         float turn_angle; // In radians. Value of 0 means no turn.
         for (int iterations=0; iterations<MAX_ITER && converged == false; iterations++)
         {
-            // Select turn direction
+            // Select turn direction and calculate turn angle
             // Turn in the direction of the target on condition that the target
             // is not inside the turning circle of that side. If it is inside
             // the turning circle, turn in the opposite direction.
-            const float r_left = glm::length(aim_position - glm::vec2(-turn_radius, 0.0f));
-            const float r_right = glm::length(aim_position - glm::vec2(turn_radius, 0.0f));
-            if ((aim_position.x < 0.0f && r_left >= turn_radius) || r_right < turn_radius)
-                turn_direction = -1.0f;
-            else if ((aim_position.x >= 0.0f && r_right >= turn_radius) || r_left < turn_radius)
-                turn_direction = 1.0f;
-            else
-                turn_direction = 0.0f;
-            
-            // Calculate turn angle
-            if (turn_direction == 0.0f)
+            const float d_left = glm::length(aim_position - glm::vec2(-turn_radius, 0.0f)); // Distance from left turn center
+            const float d_right = glm::length(aim_position - glm::vec2(turn_radius, 0.0f)); // Distance from right turn center
+            if ((aim_position.x < 0.0f && d_left >= turn_radius) || d_right < turn_radius)
             {
-                turn_angle = 0.0f;
+                turn_direction = -1.0f;
+                turn_angle = calculateTurnAngle(aim_position, turn_direction, turn_radius);
+            }
+            else if ((aim_position.x >= 0.0f && d_right >= turn_radius) || d_left < turn_radius)
+            {
+                turn_direction = 1.0f;
+                turn_angle = calculateTurnAngle(aim_position, turn_direction, turn_radius);
             }
             else
             {
-                const float x = turn_direction * aim_position.x;
-                const float aim_radius = glm::length(aim_position - turn_direction*glm::vec2(turn_radius, 0.0f));
-                const float a = glm::acos((turn_radius - x) / aim_radius);
-                const float b = glm::acos(turn_radius / aim_radius);
-                if (aim_position.y >= 0.0f)
-                {
-                    if (x >= 0.0f)
-                        turn_angle = a - b;
-                    else
-                        turn_angle = 2.0f*float(M_PI) + a - b;
-                }
-                else
-                {
-                    turn_angle = 2.0f*float(M_PI) - a - b;
-                }
+                turn_direction = 0.0f;
+                turn_angle = 0.0f;
             }
 
             // Calculate missile and target parameters at turn exit
