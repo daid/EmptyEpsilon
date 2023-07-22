@@ -306,25 +306,17 @@ string WeaponTube::getTubeName()
     return "?" + string(direction);
 }
 
-// Coordinate transform from global reference frame (X: right/east, Y: down/south)
-// to weapon tube reference frame (X: right of tube, Y: direction of fire)
-static glm::vec2 transform_global_to_tube(glm::vec2 vec, float angle)
-{
-    const float heading = angle + 0.5f*float(M_PI);
-    const float c = glm::cos(heading);
-    const float s = glm::sin(heading);
-    return glm::vec2(c*vec.x + s*vec.y, s*vec.x - c*vec.y);
-}
-
 static float calculateTurnAngle(glm::vec2 aim_position, float turn_direction, float turn_radius)
 {
     float turn_angle;
-    const float d = glm::length(aim_position - turn_direction*glm::vec2(turn_radius, 0.0f));
+    const float d = glm::length(aim_position - turn_direction*glm::vec2(0.0f, turn_radius)); // Distance from turn center
     if (d >= turn_radius)
     {
-        const float a = glm::atan(aim_position.y, turn_direction*aim_position.x - turn_radius);
+        const float a = glm::atan(aim_position.x, turn_direction*aim_position.y - turn_radius);
         const float b = glm::acos(turn_radius / d);
         turn_angle = float(M_PI) - a - b;
+        if (turn_angle < 0.0f)
+            turn_angle = turn_angle + 2.0f*float(M_PI);
     }
     else
     {
@@ -343,13 +335,15 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
     }
     else
     {
-        const float tube_angle = glm::radians(parent->getRotation() + direction);
+        const float tube_angle = parent->getRotation() + direction; // Degrees
         const float turn_rate = glm::radians(missile.turnrate);
         const float turn_radius = missile.speed / turn_rate;
 
         // Get target parameters in the tube centered reference frame:
-        const glm::vec2 target_position = transform_global_to_tube(target->getPosition() - parent->getPosition(), tube_angle);
-        const glm::vec2 target_velocity = transform_global_to_tube(target->getVelocity(), tube_angle);
+        // X axis pointing in direction of fire
+        // Y axis pointing to the right of the tube
+        const glm::vec2 target_position = rotateVec2(target->getPosition() - parent->getPosition(), -tube_angle);
+        const glm::vec2 target_velocity = rotateVec2(target->getVelocity(), -tube_angle);
 
         const int MAX_ITER = 10;
         const float tolerance = 0.1f * target->getRadius();
@@ -363,14 +357,14 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
             // Turn in the direction of the target on condition that the target
             // is not inside the turning circle of that side. If it is inside
             // the turning circle, turn in the opposite direction.
-            const float d_left = glm::length(aim_position - glm::vec2(-turn_radius, 0.0f)); // Distance from left turn center
-            const float d_right = glm::length(aim_position - glm::vec2(turn_radius, 0.0f)); // Distance from right turn center
-            if ((aim_position.x < 0.0f && d_left >= turn_radius) || d_right < turn_radius)
+            const float d_left = glm::length(aim_position + glm::vec2(0.0f, turn_radius)); // Distance from left turn center
+            const float d_right = glm::length(aim_position - glm::vec2(0.0f, turn_radius)); // Distance from right turn center
+            if (d_left >= turn_radius && (aim_position.y < 0.0f || d_right < turn_radius))
             {
                 turn_direction = -1.0f;
                 turn_angle = calculateTurnAngle(aim_position, turn_direction, turn_radius);
             }
-            else if ((aim_position.x >= 0.0f && d_right >= turn_radius) || d_left < turn_radius)
+            else if (d_right >= turn_radius && (aim_position.y >= 0.0f || d_left < turn_radius))
             {
                 turn_direction = 1.0f;
                 turn_angle = calculateTurnAngle(aim_position, turn_direction, turn_radius);
@@ -383,8 +377,8 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
 
             // Calculate missile and target parameters at turn exit
             const float exit_time = turn_angle / turn_rate;
-            const glm::vec2 missile_position_exit = turn_radius * glm::vec2(turn_direction * (1.0f - glm::cos(turn_angle)), glm::sin(turn_angle));
-            const glm::vec2 missile_velocity = missile.speed * glm::vec2(turn_direction * glm::sin(turn_angle), glm::cos(turn_angle));
+            const glm::vec2 missile_position_exit = turn_radius * glm::vec2(glm::sin(turn_angle), turn_direction * (1.0f - glm::cos(turn_angle)));
+            const glm::vec2 missile_velocity = missile.speed * glm::vec2(glm::cos(turn_angle), turn_direction * glm::sin(turn_angle));
             const glm::vec2 target_position_exit = glm::vec2(target_position + target_velocity*exit_time);
 
             // Calculate nearest approach
@@ -405,7 +399,7 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
                 aim_position = target_position + target_velocity*(exit_time + nearest_time);
         }
         if (converged == true && turn_angle < float(M_PI))
-            missile_angle = glm::degrees(tube_angle + turn_direction*turn_angle);
+            missile_angle = tube_angle + glm::degrees(turn_direction*turn_angle);
         else
             missile_angle = std::numeric_limits<float>::infinity();
     }
