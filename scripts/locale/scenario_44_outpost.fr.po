@@ -6798,7 +6798,7 @@ msgstr "Défendez le marqueur %d"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
-msgstr "Nous partons pour défendre le marqueur %d."
+msgstr "Nous partons immédiatement défendre le marqueur %d."
 
 #: scripts/scenario_44_outpost.lua:14222 scripts/scenario_44_outpost.lua:15134
 msgctxt "shipAssist-comms"
@@ -7136,7 +7136,7 @@ msgstr ""
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %i."
-msgstr "Nous partons pour défendre le marqueur %i."
+msgstr "Nous partons immédiatement défendre le marqueur %i."
 
 #: scripts/scenario_44_outpost.lua:15175
 msgctxt "shipAssist-comms"
