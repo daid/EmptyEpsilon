@@ -19,7 +19,6 @@ msgid "Shoreline Version 2"
 msgstr "Rivage"
 
 # Scenario description
-#, fuzzy
 msgid ""
 "Waves of increasingly difficult enemies. Warp capable ship is strongly "
 "suggested. At least one required mission and several optional missions. "
@@ -50,14 +49,10 @@ msgstr ""
 "\n"
 "- Titre original : Shoreline V2\n"
 "- Auteur : Xansta (2018)\n"
-"https://discord.gg/GjqM9Y9yBe\n"
 "- Traduction FR : Muerte\n"
-"https://discord.gg/2NPKyMnGwp\n"
 "\n"
-"Sur le Discord USN : https://discord.gg/PntGG3a vous pouvez rejoindre la "
-"communauté anglophone et jouer des parties en ligne. Il y en a tous les "
-"samedis à 17h00 heure française. Tous les niveaux d'expérience sont les "
-"bienvenus."
+"Communauté française et anglophone sur le Discord USN https://discord.gg/"
+"TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 #: scripts/scenario_57_shoreline.lua:230
 #, lua-format
