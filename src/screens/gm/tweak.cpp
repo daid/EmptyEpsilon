@@ -435,20 +435,20 @@ GuiAsteroidTweak::GuiAsteroidTweak(GuiContainer* owner)
 
     (new GuiLabel(left_col, "", tr("Asteroid Size:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     asteroid_size_slider = new GuiSlider(left_col, "", 10, 500, 0, [this](float value) {
-        target->setSize(value);
+        //target->setSize(value);
     });
     asteroid_size_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 }
 
 void GuiAsteroidTweak::open(P<SpaceObject> target)
 {
-    P<Asteroid> asteroid = target;
-    this->target = asteroid;
+    //P<Asteroid> asteroid = target;
+    //this->target = asteroid;
 }
 
 void GuiAsteroidTweak::onDraw(sp::RenderTarget& renderer)
 {
-    asteroid_size_slider->setValue(target->getSize());
+    //asteroid_size_slider->setValue(target->getSize());
 }
 
 void GuiShipTweakMissileWeapons::onDraw(sp::RenderTarget& renderer)

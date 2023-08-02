@@ -7,7 +7,6 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/warpJammer.h"
-#include "spaceObjects/asteroid.h"
 
 class SpaceShip;
 class GuiKeyValueDisplay;
@@ -114,7 +113,7 @@ public:
 class GuiAsteroidTweak : public GuiTweakPage
 {
 private:
-    P<Asteroid> target;
+    //P<Asteroid> target;
 
     GuiSlider* asteroid_size_slider;
 public:

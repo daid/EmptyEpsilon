@@ -10,8 +10,6 @@
 #include "gameStateLogger.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
-#include "spaceObjects/asteroid.h"
-#include "spaceObjects/blackHole.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/planet.h"

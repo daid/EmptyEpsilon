@@ -1,4 +1,3 @@
-#include "spaceObjects/cpuShip.h"
 #include "components/impulse.h"
 #include "components/shields.h"
 #include "components/missiletubes.h"

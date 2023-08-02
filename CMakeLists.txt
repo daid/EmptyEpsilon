@@ -334,17 +334,13 @@ set(MAIN_SOURCES
     src/spaceObjects/spaceObject.cpp
     src/spaceObjects/nebula.cpp
     src/spaceObjects/explosionEffect.cpp
-    src/spaceObjects/cpuShip.cpp
-    src/spaceObjects/asteroid.cpp
     src/spaceObjects/mine.cpp
-    src/spaceObjects/blackHole.cpp
     src/spaceObjects/playerSpaceship.cpp
     src/spaceObjects/beamEffect.cpp
     src/spaceObjects/electricExplosionEffect.cpp
     src/spaceObjects/supplyDrop.cpp
     src/spaceObjects/warpJammer.cpp
     src/spaceObjects/scanProbe.cpp
-    src/spaceObjects/artifact.cpp
     src/spaceObjects/shipTemplateBasedObject.cpp
     src/spaceObjects/planet.cpp
     src/spaceObjects/zone.cpp
@@ -577,11 +573,7 @@ set(MAIN_SOURCES
     src/script.h
     src/shaderRegistry.h
     src/shipTemplate.h
-    src/spaceObjects/artifact.h
-    src/spaceObjects/asteroid.h
     src/spaceObjects/beamEffect.h
-    src/spaceObjects/blackHole.h
-    src/spaceObjects/cpuShip.h
     src/spaceObjects/electricExplosionEffect.h
     src/spaceObjects/explosionEffect.h
     src/spaceObjects/mine.h

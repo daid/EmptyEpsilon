@@ -1,4 +1,3 @@
-#include "spaceObjects/cpuShip.h"
 #include "spaceObjects/nebula.h"
 #include "ai/evasionAI.h"
 #include "ai/aiFactory.h"

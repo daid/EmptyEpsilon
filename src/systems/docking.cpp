@@ -9,9 +9,6 @@
 #include "components/jumpdrive.h"
 #include "components/missiletubes.h"
 #include "components/probe.h"
-#include "spaceObjects/spaceship.h"
-#include "spaceObjects/playerSpaceship.h"
-#include "spaceObjects/cpuShip.h"
 #include "ecs/query.h"
 #include "multiplayer_server.h"
 

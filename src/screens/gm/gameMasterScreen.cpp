@@ -7,7 +7,6 @@
 #include "tweak.h"
 #include "clipboard.h"
 #include "chatDialog.h"
-#include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/wormHole.h"
 #include "spaceObjects/zone.h"
@@ -124,10 +123,10 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
             {
                 jammer_tweak_dialog->open(obj);
             }
-            else if (P<Asteroid>(obj))
-            {
-                asteroid_tweak_dialog->open(obj);
-            }
+            //else if (P<Asteroid>(obj))
+            //{
+            //    asteroid_tweak_dialog->open(obj);
+            //}
             else
             {
                 object_tweak_dialog->open(obj);
