@@ -576,7 +576,6 @@ set(MAIN_SOURCES
     src/spaceObjects/beamEffect.h
     src/spaceObjects/electricExplosionEffect.h
     src/spaceObjects/explosionEffect.h
-    src/spaceObjects/mine.h
     src/spaceObjects/nebula.h
     src/spaceObjects/planet.h
     src/spaceObjects/playerSpaceship.h

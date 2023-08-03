@@ -22,7 +22,9 @@ end
 local Entity = getLuaEntityFunctionTable()
 
 function Entity:getOwner()
-    --TODO
+    if self.delayed_explode_on_touch then
+        return self.delayed_explode_on_touch.owner
+    end
 end
 
 function Entity:onDestruction(callback)
