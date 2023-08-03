@@ -2,8 +2,8 @@
 #include "radarView.h"
 #include "playerInfo.h"
 #include "random.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "components/collision.h"
+#include "components/radar.h"
 #include "ecs/query.h"
 
 

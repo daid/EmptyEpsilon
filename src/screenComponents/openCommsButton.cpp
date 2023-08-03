@@ -2,7 +2,6 @@
 
 #include "targetsContainer.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "components/comms.h"
 
 

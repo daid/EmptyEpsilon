@@ -1,4 +1,5 @@
 #include "shipsystem.h"
+#include "i18n.h"
 #include "gameGlobalInfo.h"
 #include "components/reactor.h"
 #include "components/beamweapon.h"
@@ -104,4 +105,40 @@ ShipSystem* ShipSystem::get(sp::ecs::Entity entity, Type type)
         }
     }
     return nullptr;
+}
+
+string getSystemName(ShipSystem::Type system)
+{
+    switch(system)
+    {
+    case ShipSystem::Type::Reactor: return "reactor";
+    case ShipSystem::Type::BeamWeapons: return "beamweapons";
+    case ShipSystem::Type::MissileSystem: return "missilesystem";
+    case ShipSystem::Type::Maneuver: return "maneuvering";
+    case ShipSystem::Type::Impulse: return "impulse";
+    case ShipSystem::Type::Warp: return "warpdrive";
+    case ShipSystem::Type::JumpDrive: return "jumpdrive";
+    case ShipSystem::Type::FrontShield: return "frontshield";
+    case ShipSystem::Type::RearShield: return "rearshield";
+    default:
+        return "UNKNOWN";
+    }
+}
+
+string getLocaleSystemName(ShipSystem::Type system)
+{
+    switch(system)
+    {
+    case ShipSystem::Type::Reactor: return tr("system", "Reactor");
+    case ShipSystem::Type::BeamWeapons: return tr("system", "Beam Weapons");
+    case ShipSystem::Type::MissileSystem: return tr("system", "Missile System");
+    case ShipSystem::Type::Maneuver: return tr("system", "Maneuvering");
+    case ShipSystem::Type::Impulse: return tr("system", "Impulse Engines");
+    case ShipSystem::Type::Warp: return tr("system", "Warp Drive");
+    case ShipSystem::Type::JumpDrive: return tr("system", "Jump Drive");
+    case ShipSystem::Type::FrontShield: return tr("system", "Front Shield Generator");
+    case ShipSystem::Type::RearShield: return tr("system", "Rear Shield Generator");
+    default:
+        return "UNKNOWN";
+    }
 }

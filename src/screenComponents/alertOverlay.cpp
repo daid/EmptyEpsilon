@@ -1,6 +1,5 @@
 #include "alertOverlay.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 
 
 AlertLevelOverlay::AlertLevelOverlay(GuiContainer* owner)

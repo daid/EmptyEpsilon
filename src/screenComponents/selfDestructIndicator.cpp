@@ -1,6 +1,6 @@
 #include "selfDestructIndicator.h"
+#include "i18n.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "components/selfdestruct.h"
 
 #include "gui/gui2_panel.h"

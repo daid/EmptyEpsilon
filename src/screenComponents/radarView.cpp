@@ -9,10 +9,12 @@
 #include "components/missiletubes.h"
 #include "components/target.h"
 #include "components/radarblock.h"
+#include "components/impulse.h"
 #include "systems/missilesystem.h"
 #include "systems/radarblock.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
+#include "tween.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/scanProbe.h"
 #include "playerInfo.h"
@@ -251,12 +253,11 @@ void GuiRadarView::updateGhostDots()
     if (next_ghost_dot_update < engine->getElapsedTime())
     {
         next_ghost_dot_update = engine->getElapsedTime() + 5.0f;
-        foreach(SpaceObject, obj, space_object_list)
+        for(auto [entity, impulse, transform] : sp::ecs::Query<ImpulseEngine, sp::Transform>())
         {
-            P<SpaceShip> ship = obj;
-            if (ship && glm::length(obj->getPosition() - view_position) < distance)
+            if (glm::length(transform.getPosition() - view_position) < distance)
             {
-                ghost_dots.push_back(GhostDot(obj->getPosition()));
+                ghost_dots.push_back(GhostDot(transform.getPosition()));
             }
         }
 

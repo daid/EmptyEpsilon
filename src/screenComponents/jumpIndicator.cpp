@@ -1,7 +1,7 @@
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "jumpIndicator.h"
 #include "components/jumpdrive.h"
+#include "i18n.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"

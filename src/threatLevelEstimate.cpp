@@ -5,7 +5,9 @@
 #include "components/collision.h"
 #include "components/shields.h"
 #include "components/beamweapon.h"
+#include "components/missiletubes.h"
 #include "components/missile.h"
+#include "components/player.h"
 #include "systems/collision.h"
 
 
@@ -68,11 +70,8 @@ float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
         auto ship_position = transform->getPosition();
         for(auto entity : sp::CollisionSystem::queryArea(ship_position - glm::vec2(radius, radius), ship_position + glm::vec2(radius, radius)))
         {
-            auto ptr = entity.getComponent<SpaceObject*>();
-            if (!ptr) continue;
-            P<SpaceObject> obj = *ptr;
-            P<SpaceShip> other_ship = obj;
-            if (!other_ship || Faction::getRelation(ship, entity) == FactionRelation::Enemy)
+            bool is_shiplike = entity.hasComponent<BeamWeaponSys>() || entity.hasComponent<MissileTubes>();
+            if (!is_shiplike || Faction::getRelation(ship, entity) == FactionRelation::Enemy)
             {
                 if (entity.hasComponent<MissileFlight>() && entity.hasComponent<ExplodeOnTouch>())
                     threat += 5000.0f;

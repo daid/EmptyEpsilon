@@ -1,6 +1,8 @@
 #include "systems/comms.h"
 #include "components/comms.h"
 #include "components/shiplog.h"
+#include "components/name.h"
+#include "i18n.h"
 #include "multiplayer_server.h"
 #include "gameGlobalInfo.h"
 #include "ecs/query.h"

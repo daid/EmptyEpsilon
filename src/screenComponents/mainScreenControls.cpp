@@ -1,6 +1,7 @@
 #include "mainScreenControls.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+#include "i18n.h"
 
 #include "gui/gui2_togglebutton.h"
 

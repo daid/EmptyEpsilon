@@ -3,10 +3,10 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "mineSweeper.h"
 #include "lightsOut.h"
 #include "miniGame.h"
+#include "i18n.h"
 #include <memory>
 #include <algorithm>
 

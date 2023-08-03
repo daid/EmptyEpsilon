@@ -471,7 +471,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 
         auto shields = entity.getComponent<Shields>();
         if (shields)
-            shields->frequency = irandom(0, max_frequency);
+            shields->frequency = irandom(0, BeamWeaponSys::max_frequency);
     }
 }
 
@@ -1051,66 +1051,6 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     }
 */
     return ret;
-}
-
-string getMissileWeaponName(EMissileWeapons missile)
-{
-    switch(missile)
-    {
-    case MW_None:
-        return "-";
-    case MW_Homing:
-        return "Homing";
-    case MW_Nuke:
-        return "Nuke";
-    case MW_Mine:
-        return "Mine";
-    case MW_EMP:
-        return "EMP";
-    case MW_HVLI:
-        return "HVLI";
-    default:
-        return "UNK: " + string(int(missile));
-    }
-}
-
-string getLocaleMissileWeaponName(EMissileWeapons missile)
-{
-    switch(missile)
-    {
-    case MW_None:
-        return "-";
-    case MW_Homing:
-        return tr("missile","Homing");
-    case MW_Nuke:
-        return tr("missile","Nuke");
-    case MW_Mine:
-        return tr("missile","Mine");
-    case MW_EMP:
-        return tr("missile","EMP");
-    case MW_HVLI:
-        return tr("missile","HVLI");
-    default:
-        return "UNK: " + string(int(missile));
-    }
-}
-
-
-float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
-{
-    if (beam_frequency < 0 || shield_frequency < 0)
-        return 1.f;
-
-    float diff = static_cast<float>(abs(beam_frequency - shield_frequency));
-    float f1 = sinf(Tween<float>::linear(diff, 0, SpaceShip::max_frequency, 0, float(M_PI) * (1.2f + shield_frequency * 0.05f)) + float(M_PI) / 2.0f);
-    f1 = f1 * Tween<float>::easeInCubic(diff, 0, SpaceShip::max_frequency, 1.f, 0.1f);
-    f1 = Tween<float>::linear(f1, 1.f, -1.f, 0.5f, 1.5f);
-    return f1;
-}
-
-string frequencyToString(int frequency)
-{
-    return string(400 + (frequency * 20)) + "THz";
 }
 
 #include "spaceship.hpp"

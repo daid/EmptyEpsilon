@@ -1,8 +1,8 @@
 #include <i18n.h>
 #include "shieldFreqencySelect.h"
 #include "playerInfo.h"
+#include "components/beamweapon.h"
 #include "components/shields.h"
-#include "spaceObjects/playerSpaceship.h"
 
 #include "screenComponents/shieldsEnableButton.h"
 
@@ -26,7 +26,7 @@ GuiShieldFrequencySelect::GuiShieldFrequencySelect(GuiContainer* owner, string i
     });
     calibrate_button->setSize(GuiElement::GuiSizeMax, 50);
 
-    for(int n=0; n<=SpaceShip::max_frequency; n++)
+    for(int n=0; n<=BeamWeaponSys::max_frequency; n++)
     {
         new_frequency->addEntry(frequencyToString(n), string(n));
     }

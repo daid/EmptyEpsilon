@@ -1,7 +1,6 @@
 #include "scanTargetButton.h"
 #include "playerInfo.h"
 #include "targetsContainer.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_progressbar.h"
 #include "components/scanning.h"

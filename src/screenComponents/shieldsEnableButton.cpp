@@ -1,10 +1,10 @@
 #include <i18n.h>
 #include "shieldsEnableButton.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
 #include "gameGlobalInfo.h"
 #include "components/shields.h"
+#include "components/beamweapon.h"
 
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_progressbar.h"

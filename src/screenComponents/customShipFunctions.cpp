@@ -1,6 +1,5 @@
 #include "customShipFunctions.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_label.h"
 #include "components/customshipfunction.h"

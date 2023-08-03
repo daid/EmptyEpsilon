@@ -5,6 +5,8 @@
 #include "main.h"
 #include "multiplayer_client.h"
 #include "components/collision.h"
+#include "components/name.h"
+#include "i18n.h"
 #include "ecs/query.h"
 
 #include "screenComponents/indicatorOverlays.h"

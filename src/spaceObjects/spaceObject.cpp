@@ -5,6 +5,7 @@
 #include "components/collision.h"
 #include "systems/collision.h"
 #include "systems/comms.h"
+#include "playerSpaceship.h"
 #include "ecs/query.h"
 
 #include <glm/ext/matrix_transform.hpp>

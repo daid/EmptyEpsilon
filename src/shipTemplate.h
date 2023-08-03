@@ -189,8 +189,6 @@ public:
     static std::vector<string> getAllTemplateNames();
     static std::vector<string> getTemplateNameList(TemplateType type);
 };
-string getSystemName(ShipSystem::Type system);
-string getLocaleSystemName(ShipSystem::Type system);
 
 /* Define script conversion function for the ShipTemplate::TemplateType enum. */
 template<> void convert<ShipTemplate::TemplateType>::param(lua_State* L, int& idx, ShipTemplate::TemplateType& tt);

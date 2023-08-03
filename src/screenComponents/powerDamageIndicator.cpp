@@ -1,5 +1,5 @@
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
+#include "i18n.h"
 #include "powerDamageIndicator.h"
 #include "systems/warpsystem.h"
 #include "components/reactor.h"

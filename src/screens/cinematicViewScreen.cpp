@@ -5,9 +5,11 @@
 #include "main.h"
 #include "multiplayer_client.h"
 #include "ecs/query.h"
+#include "i18n.h"
 #include "components/collision.h"
 #include "components/target.h"
 #include "components/player.h"
+#include "components/name.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"

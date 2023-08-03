@@ -1,6 +1,5 @@
 #include "impulseSound.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "components/impulse.h"
 #include "preferenceManager.h"
 #include "soundManager.h"

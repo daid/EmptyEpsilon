@@ -1,5 +1,5 @@
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
+#include "i18n.h"
 #include "commsOverlay.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_progressbar.h"
@@ -8,7 +8,9 @@
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_textentry.h"
+#include "components/comms.h"
 #include "systems/comms.h"
+#include "engine.h"
 
 #include "onScreenKeyboard.h"
 

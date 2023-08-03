@@ -33,6 +33,7 @@ public:
         string texture;
     };
 
+    constexpr static int max_frequency = 20;
     int frequency = 0;
     ShipSystem::Type system_target = ShipSystem::Type::None;
 
@@ -53,3 +54,6 @@ public:
     bool fire_ring;
     string beam_texture;
 };
+
+float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
+string frequencyToString(int frequency);

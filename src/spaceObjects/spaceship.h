@@ -22,8 +22,6 @@ template<> int convert<Speeds>::returnType(lua_State* L, const Speeds &speeds);
 class SpaceShip : public ShipTemplateBasedObject
 {
 public:
-    constexpr static int max_frequency = 20;
-
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
     virtual ~SpaceShip();
 
@@ -178,12 +176,5 @@ public:
     string getScriptExportModificationsOnTemplate();
     
 };
-
-float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
-
-string getMissileWeaponName(EMissileWeapons missile);
-string getLocaleMissileWeaponName(EMissileWeapons missile);
-
-string frequencyToString(int frequency);
 
 #endif//SPACESHIP_H

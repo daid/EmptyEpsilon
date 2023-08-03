@@ -1,6 +1,8 @@
 #include "alertLevelButton.h"
+#include "i18n.h"
+#include "components/player.h"
+#include "playerInfo.h"
 #include "gui/gui2_togglebutton.h"
-#include "spaceObjects/playerSpaceship.h"
 
 
 GuiAlertLevelSelect::GuiAlertLevelSelect(GuiContainer* owner, string id)

@@ -2,7 +2,6 @@
 #include "selfDestructButton.h"
 #include "gui/colorConfig.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "components/selfdestruct.h"
 
 #include "gui/gui2_button.h"

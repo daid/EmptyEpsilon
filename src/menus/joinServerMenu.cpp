@@ -5,6 +5,7 @@
 #include "playerInfo.h"
 #include "preferenceManager.h"
 #include "gameGlobalInfo.h"
+#include "i18n.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_panel.h"
 

@@ -18,6 +18,7 @@
 #include "components/hull.h"
 #include "components/rendering.h"
 #include "components/impulse.h"
+#include "components/name.h"
 #include "systems/rendering.h"
 
 #include <glm/glm.hpp>

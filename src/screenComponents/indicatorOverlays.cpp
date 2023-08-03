@@ -9,6 +9,8 @@
 #include "components/jumpdrive.h"
 #include "components/shields.h"
 #include "components/hull.h"
+#include "multiplayer_server.h"
+#include "i18n.h"
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_label.h"

@@ -53,3 +53,6 @@ public:
 
     static ShipSystem* get(sp::ecs::Entity entity, Type type);
 };
+
+string getSystemName(ShipSystem::Type system);
+string getLocaleSystemName(ShipSystem::Type system);

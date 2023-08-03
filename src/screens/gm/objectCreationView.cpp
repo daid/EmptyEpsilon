@@ -5,6 +5,7 @@
 #include "shipTemplate.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
+#include "i18n.h"
 #include "gameGlobalInfo.h"
 
 

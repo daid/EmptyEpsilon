@@ -1,11 +1,18 @@
 #ifndef GAME_GLOBAL_INFO_H
 #define GAME_GLOBAL_INFO_H
 
-#include "spaceObjects/playerSpaceship.h"
 #include "script.h"
 #include "GMScriptCallback.h"
 #include "GMMessage.h"
 #include "gameStateLogger.h"
+#include "components/faction.h"
+#include "Updatable.h"
+#include "multiplayer.h"
+#include "GMMessage.h"
+#include "scriptInterface.h"
+#include <list>
+#include <functional>
+
 
 class GameStateLogger;
 class GameGlobalInfo;

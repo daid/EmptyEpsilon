@@ -4,6 +4,7 @@
 #include "components/collision.h"
 #include "components/hull.h"
 #include "components/shields.h"
+#include "components/beamweapon.h"
 #include "gameGlobalInfo.h"
 #include <glm/geometric.hpp>
 #include "random.h"

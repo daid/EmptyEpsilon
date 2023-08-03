@@ -361,6 +361,7 @@ set(MAIN_SOURCES
     src/components/shields.h
     src/components/shields.cpp
     src/components/beamweapon.h
+    src/components/beamweapon.cpp
     src/components/target.h
     src/components/missiletubes.h
     src/components/selfdestruct.h

@@ -2,7 +2,6 @@
 #include "tutorialGame.h"
 #include "scriptInterface.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "preferenceManager.h"
 #include "main.h"
 

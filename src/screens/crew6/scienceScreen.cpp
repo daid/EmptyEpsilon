@@ -4,6 +4,7 @@
 #include "spaceObjects/nebula.h"
 #include "preferenceManager.h"
 #include "multiplayer_client.h"
+#include "i18n.h"
 
 #include "components/beamweapon.h"
 #include "components/shields.h"

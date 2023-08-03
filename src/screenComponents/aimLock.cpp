@@ -2,7 +2,6 @@
 #include "aimLock.h"
 
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "missileTubeControls.h"
 #include "components/collision.h"
 

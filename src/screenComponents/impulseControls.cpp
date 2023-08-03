@@ -1,6 +1,5 @@
 #include <i18n.h>
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "impulseControls.h"
 #include "components/impulse.h"
 #include "powerDamageIndicator.h"

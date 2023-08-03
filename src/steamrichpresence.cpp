@@ -1,7 +1,6 @@
 #include "steamrichpresence.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include <steam/steam_api.h>
 
 

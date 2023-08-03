@@ -785,7 +785,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> new_frequency;
             auto beamweapons = my_spaceship.getComponent<BeamWeaponSys>();
             if (beamweapons)
-                beamweapons->frequency = std::clamp(new_frequency, 0, SpaceShip::max_frequency);
+                beamweapons->frequency = std::clamp(new_frequency, 0, BeamWeaponSys::max_frequency);
         }
         break;
     case CMD_SET_BEAM_SYSTEM_TARGET:
@@ -809,8 +809,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 shields->active = false;
                 if (shields->frequency < 0)
                     shields->frequency = 0;
-                if (shields->frequency > SpaceShip::max_frequency)
-                    shields->frequency = SpaceShip::max_frequency;
+                if (shields->frequency > BeamWeaponSys::max_frequency)
+                    shields->frequency = BeamWeaponSys::max_frequency;
             }
         }
         break;

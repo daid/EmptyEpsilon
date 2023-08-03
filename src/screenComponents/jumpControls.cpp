@@ -1,9 +1,9 @@
 #include <i18n.h>
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "jumpControls.h"
 #include "powerDamageIndicator.h"
 #include "components/jumpdrive.h"
+#include "featureDefs.h"
 
 #include "gui/gui2_slider.h"
 #include "gui/gui2_keyvaluedisplay.h"

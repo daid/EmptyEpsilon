@@ -1,10 +1,11 @@
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
+#include "i18n.h"
 #include "missileTubeControls.h"
 #include "powerDamageIndicator.h"
 #include "components/warpdrive.h"
 #include "components/missiletubes.h"
 #include "components/collision.h"
+#include "components/target.h"
 #include "components/target.h"
 #include "systems/missilesystem.h"
 

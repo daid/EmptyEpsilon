@@ -2,7 +2,8 @@
 #define SELF_DESTRUCT_ENTRY_H
 
 #include "gui/gui2_element.h"
-#include "spaceObjects/playerSpaceship.h"
+#include "playerInfo.h"
+
 
 class GuiPanel;
 class GuiLabel;

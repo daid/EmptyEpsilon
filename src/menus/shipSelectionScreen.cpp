@@ -6,6 +6,7 @@
 #include "random.h"
 #include "multiplayer_client.h"
 #include "ecs/query.h"
+#include "i18n.h"
 
 #include "serverCreationScreen.h"
 #include "epsilonServer.h"

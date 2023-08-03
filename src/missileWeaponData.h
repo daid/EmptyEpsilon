@@ -23,6 +23,8 @@ enum EMissileSizes
     MS_Large = 2,
 };
 string getMissileSizeString(EMissileSizes size);
+string getMissileWeaponName(EMissileWeapons missile);
+string getLocaleMissileWeaponName(EMissileWeapons missile);
 
 /* Define script conversion function for the EMissileWeapons enum. */
 template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissileWeapons& es);

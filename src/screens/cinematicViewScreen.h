@@ -38,7 +38,7 @@ private:
     glm::vec2 camera_position_2D{0, 0};
     float target_rotation;
 
-    P<SpaceObject> target_of_target;
+    sp::ecs::Entity target_of_target;
 
     glm::vec2 tot_position_2D{0, 0};
     glm::vec3 tot_position_3D{};

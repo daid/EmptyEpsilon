@@ -1,6 +1,5 @@
 #include <i18n.h>
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "components/maneuveringthrusters.h"
 #include "combatManeuver.h"
 #include "powerDamageIndicator.h"

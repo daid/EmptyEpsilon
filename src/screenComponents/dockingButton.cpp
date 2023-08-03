@@ -1,10 +1,11 @@
 #include <i18n.h>
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "dockingButton.h"
 #include "systems/collision.h"
 #include "systems/docking.h"
 #include "components/collision.h"
+#include "components/docking.h"
+#include "components/faction.h"
 #include "ecs/query.h"
 
 

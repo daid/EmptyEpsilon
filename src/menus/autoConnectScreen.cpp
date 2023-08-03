@@ -7,6 +7,8 @@
 #include "multiplayer_client.h"
 #include "multiplayer_server_scanner.h"
 #include "ecs/query.h"
+#include "components/faction.h"
+#include "components/name.h"
 
 #include "gui/gui2_label.h"
 

@@ -1,7 +1,7 @@
 #include "discord.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "spaceObjects/playerSpaceship.h"
+#include "components/name.h"
 #include <discord_game_sdk.h>
 
 static IDiscordCore* core;
