@@ -1,11 +1,12 @@
 #include "powerManagement.h"
+#include "i18n.h"
 #include "missileWeaponData.h"
 #include "components/reactor.h"
 #include "components/coolant.h"
 
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "screenComponents/customShipFunctions.h"
+#include "engine.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"

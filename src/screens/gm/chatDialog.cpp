@@ -1,8 +1,9 @@
 #include "chatDialog.h"
+#include "i18n.h"
 #include "gameGlobalInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "components/comms.h"
 #include "components/collision.h"
+#include "components/name.h"
 #include "systems/comms.h"
 
 #include "screenComponents/radarView.h"

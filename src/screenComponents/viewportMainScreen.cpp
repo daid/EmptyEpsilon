@@ -1,7 +1,6 @@
 #include "viewportMainScreen.h"
 #include "playerInfo.h"
 #include "preferenceManager.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "components/collision.h"
 #include "components/target.h"
 #include "main.h"

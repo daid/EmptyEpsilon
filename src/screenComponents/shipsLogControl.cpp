@@ -1,5 +1,4 @@
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "components/shiplog.h"
 #include "shipsLogControl.h"
 

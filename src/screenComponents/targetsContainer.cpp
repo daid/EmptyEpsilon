@@ -1,6 +1,5 @@
 #include "targetsContainer.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "systems/collision.h"
 #include "components/hull.h"
 #include "components/collision.h"

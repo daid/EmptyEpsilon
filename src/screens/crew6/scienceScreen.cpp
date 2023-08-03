@@ -1,7 +1,6 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "scienceScreen.h"
-#include "spaceObjects/nebula.h"
 #include "preferenceManager.h"
 #include "multiplayer_client.h"
 #include "i18n.h"

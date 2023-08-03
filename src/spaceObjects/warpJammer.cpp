@@ -1,6 +1,5 @@
 #include "warpJammer.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "components/collision.h"
 #include "components/warpdrive.h"
 #include "components/rendering.h"

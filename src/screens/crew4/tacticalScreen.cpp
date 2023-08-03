@@ -1,6 +1,6 @@
 #include "playerInfo.h"
+#include "i18n.h"
 #include "gameGlobalInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "tacticalScreen.h"
 #include "preferenceManager.h"
 

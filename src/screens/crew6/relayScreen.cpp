@@ -1,7 +1,7 @@
 #include "relayScreen.h"
+#include "i18n.h"
 #include "gameGlobalInfo.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/scanProbe.h"
 #include "scriptInterface.h"
 #include "ecs/query.h"

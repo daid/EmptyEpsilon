@@ -1,14 +1,15 @@
 #include <i18n.h>
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "helmsScreen.h"
 #include "preferenceManager.h"
+#include "featureDefs.h"
 
 #include "components/reactor.h"
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/collision.h"
 #include "components/maneuveringthrusters.h"
+#include "components/docking.h"
 
 #include "screenComponents/combatManeuver.h"
 #include "screenComponents/radarView.h"

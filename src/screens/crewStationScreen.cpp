@@ -3,7 +3,6 @@
 #include "main.h"
 #include "preferenceManager.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "multiplayer_client.h"
 #include "soundManager.h"
 

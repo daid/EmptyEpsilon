@@ -1,4 +1,5 @@
 #include "playerInfo.h"
+#include "i18n.h"
 #include "gameGlobalInfo.h"
 #include "operationsScreen.h"
 #include "preferenceManager.h"
@@ -14,7 +15,6 @@
 #include "screenComponents/commsOverlay.h"
 #include "screenComponents/shipsLogControl.h"
 
-#include "spaceObjects/playerSpaceship.h"
 
 OperationScreen::OperationScreen(GuiContainer* owner)
 : GuiOverlay(owner, "", colorConfig.background)

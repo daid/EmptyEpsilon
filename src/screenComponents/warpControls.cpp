@@ -1,7 +1,6 @@
 #include <i18n.h>
 #include "warpControls.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
 #include "components/warpdrive.h"
 

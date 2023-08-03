@@ -1,6 +1,6 @@
 #include "main.h"
+#include "i18n.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "singlePilotScreen.h"
 #include "preferenceManager.h"
 
