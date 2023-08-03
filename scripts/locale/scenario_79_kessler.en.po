@@ -1,0 +1,313 @@
+# Scenario name
+msgid "Kessler"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Save the global satellite network by catching space debris and prevent the "
+"Kessler Syndrome! This is a beginner scenario initially created to be played "
+"by a crew of school kids. It still assumes general knowledge about operating "
+"the stations, so a previous tutorial session or on-site introduction is "
+"recommended. The officer(s) on relay&science or on operations should be able "
+"to read fluently."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:22
+msgid "Earth"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:22
+msgid "The blue planet"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:40
+msgid "Mission data"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:41
+msgid "Kessler Syndrome"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:42
+msgid ""
+"The Kessler Syndrome is a theoretical Scenario first proposed by NASA "
+"Scientist Donald J. Kessler in 1978. It describes the situation where the "
+"density of objects in Earth's orbit is high enough to cause a chain reaction "
+"of collisions. Each collision will create a huge debris field of multiple "
+"objects, and many of them will collide with other objects. Ultimately, the "
+"Orbit will be full of tiny objects destroying satellites and making space "
+"flight very hard, if not impossible. Also, much of our daily life depends on "
+"satellites, like TV, communication, navigation and internet. The Kessler "
+"Syndrome would be a serious threat to all of this. This is why clearing "
+"space debris, and preventing that kind of scenario is extremely important.\n"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:46
+msgctxt "buttonGM"
+msgid "Unusual Readings"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:48
+msgctxt "buttonGM"
+msgid "Order to dock"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:50
+msgctxt "buttonGM"
+msgid "Showdown"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:54
+msgid ""
+"Greetings!\n"
+"We are glad to welcome you aboard our new prototype! If it becomes "
+"successful, we might soon start assembling a fleet of tidying ships! "
+"Hopefully, they will be able to finally solve the problem of space debris in "
+"our orbit!\n"
+"This first prototype will only be able to capture larger space junk. We "
+"found several suitable candidates for your first test run, they will appear "
+"with a four-digit call sign on your radar.\n"
+"To capture them, you have to calibrate your shields correctly, so be sure "
+"the object will be scanned. A successful scan will reveal the correct "
+"capturing frequency. Now, the shields have to be calibrated with the correct "
+"frequency. Make sure to activate the shields after calibration. Then you can "
+"fly towards the pieces of space junk, and it should successfully be "
+"captured.\n"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:63
+msgid ""
+"Good day, officer. If you need repairs or to replenish your energy, please "
+"dock with us."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:71
+msgid ""
+"Shield frequencies are required for this scenario. Please enable frequencies "
+"in extra settings."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:83
+msgid ""
+"We are getting strange readings from sector C7. It looks like the source is "
+"an abandoned satellite. Please investigate, but be careful."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:85
+msgid "An abandoned satellite"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:85
+msgid ""
+"An old military satellite. Capturing frequency is blocked. Behaviour "
+"unknown. Recommendation: Jump not closer than 10U, then advance using the "
+"impulse drive."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:88
+msgid "Additional debris created!"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:113
+msgid ""
+"The satellite started to attack objects in its proximity! That way, more "
+"fragments will be created that may harm other satellites. You must stop it! "
+"Try to NOT destroy it, target its impulse drive instead."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:136
+msgid "A deactivated military satellite. Scan to get the capturing frequency."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:136 scripts/scenario_79_kessler.lua:416
+msgid "Capturing frequency:"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:161
+msgid ""
+"It looks like the old satellite was hit by a piece of space debris and thus "
+"reactivated. This also caused it to malfunction. \n"
+"Just before its deactivation, it was able to send a signal. We have to "
+"investigate this.\n"
+"But first, please dock with us. If necessary, we can repair the hull, and "
+"you can recharge your energy. \n"
+"After that, you will receive further orders."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:173
+msgid ""
+"Bad news: The satellite woke up a whole group of military satellites that "
+"should have been out of service for ages. If we don't do anything against "
+"them, they will slowly but surely destroy all objects they can find. The "
+"debris will spread all over the orbit, destroying all our communications "
+"satellites.\n"
+"Not only would that be a disaster for science and spaceflight, but everyday "
+"things like Internet are in serious danger as well!\n"
+"We are currently making a plan to stop this. Please stay docked until you "
+"get new orders.\n"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:181
+msgid ""
+"New orders: We have to shut down the rogue satellites somehow. Therefore, "
+"you need to get as close as possible to the control node that is commanding "
+"the other satellites. Luckily, the satellites are in some kind of sleep mode "
+"right now, to recharge their batteries. You need another ship however, to "
+"get to them unnoticed. As soon you are getting closer, you should also turn "
+"off every system and device that is not necessary. When you are ready, your "
+"weapons officer can change the ship at the touch of a button."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:183
+msgid ""
+"New orders: We have to shut down the rogue satellites somehow. Therefore, "
+"you need to get as close as possible to the control node that is commanding "
+"the other satellites. Luckily, the satellites are in some kind of sleep mode "
+"right now, to recharge their batteries. You need another ship however, to "
+"get to them unnoticed. As soon you are getting closer, you should also turn "
+"off every system and device that is not necessary. When you are ready, your "
+"tactical officer can change the ship at the touch of a button."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:185 scripts/scenario_79_kessler.lua:186
+msgid "change ship"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:193
+msgid ""
+"Welcome to the new ship. It is smaller and more unsuspicious. On the "
+"downside, it is also less robust. Instead of a jump drive, it is equipped "
+"with a so-called warp drive. \n"
+"You can fly much faster with it, but the drive tends to overheat easily. "
+"Keep in mind to turn off all non-essential systems and devices as soon you "
+"are getting closer to the dangerous satellites.\n"
+"This ship has a transmitter installed that is strong enough to overwhelm the "
+"jammer of the control node and to send a shutdown signal. But you have to be "
+"very close for it to work.\n"
+"We detected the control node at a heading of about 125 degrees from our "
+"position, but a newly formed dust cloud prevents us to get more details. We "
+"don't know if this cloud was created intentionally to serve as a hiding "
+"place. It might as well be a side effect of their destructive activities or "
+"just fuel leaking out of their old tanks. Good luck!\n"
+"    "
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:204
+msgid ""
+"The dust cloud is causing large electromagnetic interferences. Which means "
+"that as soon you are far enough away from the station, you can guess it's "
+"direction by looking at the red line at the edge of your radar screen."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:212 scripts/scenario_79_kessler.lua:213
+msgid "Activate transmitter"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:226
+msgid ""
+"As soon as your transmitter is fully charged, the weapons officer has to "
+"sync the shields with the transmitter (a Button will appear on the console). "
+"Then, you yourself on Relay will have to send the signal. (There will be a "
+"button for this as well.) Good luck!\""
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:228
+msgid ""
+"As soon as your transmitter is fully charged, the weapons officer has to "
+"sync the shields with the transmitter (a Button will appear on the console. "
+"Then, you yourself on Operations will have to send the signal. (You will "
+"have to change your sidebar from 'Scanning' to 'Other' by pressing the "
+"'Scanning' headline or the arrows next to it.) Good luck!"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:233
+msgid "Charging of Transmitter initiated"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:234 scripts/scenario_79_kessler.lua:235
+msgid "Transmitter is charging.."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:248 scripts/scenario_79_kessler.lua:249
+msgid "Transmitter charging"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:270
+msgid ""
+"If not done yet, you should now change the headline of your sidebar from "
+"'scan' to 'other', so you can send the signal as soon as it is available."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:275
+msgid "Transmitter is ready to be synced with shields"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:278 scripts/scenario_79_kessler.lua:279
+msgid "Transmitter is ready"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:281 scripts/scenario_79_kessler.lua:282
+msgid "Sync with shields"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:288
+msgid "Syncing shields with transmitter. Please stand by..."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:298 scripts/scenario_79_kessler.lua:300
+msgid "send signal"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:322
+msgid "Rogue satellites shut down"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:323
+msgid ""
+"Congratulations! You saved the global satellite network from destruction. I "
+"call this a successful test run and we're gonna initiate the production of "
+"our fleet of tidying ships immediately. So eventually, we will get rid of "
+"this space junk problem once and for all. You and the rest of your crew did "
+"a great job!"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:379 scripts/scenario_79_kessler.lua:380
+msgid "Out of reach"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:381
+msgid "Transmitter is not linked yet"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:394 scripts/scenario_79_kessler.lua:396
+msgid ""
+"This is the command node that controls the rogue satellites. We have to shut "
+"it down!"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:416
+msgid "A piece of space junk. Scan to find out the capturing frequency"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:435
+msgid ""
+"Very good so far! Don't worry, you don't have to clean up all of the marked "
+"space junk in your first test run, but we still need quite a few of them "
+"before we call it a day."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:456
+msgid "An old military satellite"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:456
+msgid "An old military satellite. Capturing frequency is blocked."
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:468
+msgid "An operational satellite"
+msgstr ""
+
+#: scripts/scenario_79_kessler.lua:468
+msgid "This satellite is fully operational. Do not capture!"
+msgstr ""
