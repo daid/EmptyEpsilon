@@ -1,7 +1,8 @@
 #pragma once
 
 #include "stringImproved.h"
-#include "scriptInterface.h"
+#include "playerInfo.h"
+#include "script/callback.h"
 #include <vector>
 
 
@@ -21,7 +22,7 @@ public:
         string name;
         string caption;
         ECrewPosition crew_position;
-        ScriptSimpleCallback callback;
+        sp::script::Callback callback;
         int order;
 
         bool operator!=(const Function& csf) { return type != csf.type || name != csf.name || caption != csf.caption || crew_position != csf.crew_position; }

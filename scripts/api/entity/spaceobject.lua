@@ -303,7 +303,7 @@ function Entity:getDescription(state)
     if state == "notscanned" or state == "not" then return self.science_description.not_scanned end
     if state == "friendorfoeidentified" then return self.science_description.friend_or_foe_identified end
     if state == "simplescan" or state == "simple" then return self.science_description.simple_scan end
-    return self.science_description.full_scan end
+    return self.science_description.full_scan
 end
 --- Sets this SpaceObject's radar signature, which creates noise on the science screen's raw radar signal ring.
 --- The raw signal ring contains red, green, and blue bands of waveform noise.

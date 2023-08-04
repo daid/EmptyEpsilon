@@ -65,7 +65,7 @@ end
 --- This ship will rotate to face a target and fires missiles within 4.5U if it has any, but won't move, roam, or patrol.
 --- Example: ship:orderStandGround()
 function Entity:orderStandGround()
-    if self.ai_controller then self.ai_controller = {orders = "standground", order_target=target} end
+    if self.ai_controller then self.ai_controller = {orders = "standground"} end
     return self
 end
 --- Orders this CpuShip to move to the given coordinates, patrol within a 1.5U radius, and attack any hostiles that move within 2U of its short-range radar range.

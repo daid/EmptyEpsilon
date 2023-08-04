@@ -671,7 +671,7 @@ void PlayerSpaceship::addCustomButton(ECrewPosition position, string name, strin
     f.name = name;
     f.crew_position = position;
     f.caption = caption;
-    f.callback = callback;
+    //TODO: f.callback = callback;
     f.order = order.value_or(0);
     std::stable_sort(csf.functions.begin(), csf.functions.end());
 }
@@ -713,7 +713,7 @@ void PlayerSpaceship::addCustomMessageWithCallback(ECrewPosition position, strin
     f.name = name;
     f.crew_position = position;
     f.caption = caption;
-    f.callback = callback;
+    //TODO: f.callback = callback;
     std::stable_sort(csf.functions.begin(), csf.functions.end());
 }
 
