@@ -1,4 +1,5 @@
 #include "main.h"
+#include "i18n.h"
 #include "autoConnectScreen.h"
 #include "preferenceManager.h"
 #include "epsilonServer.h"
@@ -9,6 +10,7 @@
 #include "ecs/query.h"
 #include "components/faction.h"
 #include "components/name.h"
+#include "screens/windowScreen.h"
 
 #include "gui/gui2_label.h"
 
@@ -26,6 +28,8 @@ AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_m
     status_label->setPosition(0, 300, sp::Alignment::TopCenter)->setSize(0, 50);
 
     string position_name = "Main screen";
+    if (crew_position_raw >= 1000 && crew_position_raw <= 1360)
+        position_name = tr("Ship window");
     if (crew_position < max_crew_positions)
         position_name = getCrewPositionName(crew_position);
 
@@ -120,7 +124,12 @@ void AutoConnectScreen::update(float delta)
                         if (my_spaceship == my_player_info->ship && (crew_position == max_crew_positions || my_player_info->crew_position[crew_position]))
                         {
                             destroy();
-                            my_player_info->spawnUI(0, getRenderLayer());
+                            if (crew_position_raw >=1000 && crew_position_raw<=1360){
+                                uint8_t window_flags = PreferencesManager::get("ship_window_flags", "1").toInt();
+                                new WindowScreen(getRenderLayer(), crew_position_raw-1000, window_flags);
+                            } else{
+                                my_player_info->spawnUI(0, getRenderLayer());
+                            }
                         }
                     }
                 }else{

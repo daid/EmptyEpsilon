@@ -338,6 +338,10 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
 
 void GuiTextEntry::onFocusGained()
 {
+    if (select_on_focus) {
+		selection_end = 0;
+		selection_start = text.length();
+    }
     typing_indicator = true;
     blink_timer.repeat(blink_rate);
     SDL_StartTextInput();
@@ -382,6 +386,12 @@ GuiTextEntry* GuiTextEntry::setTextSize(float size)
 GuiTextEntry* GuiTextEntry::setMultiline(bool enabled)
 {
     multiline = enabled;
+    return this;
+}
+
+GuiTextEntry* GuiTextEntry::setSelectOnFocus(bool enabled)
+{
+    select_on_focus = enabled;
     return this;
 }
 

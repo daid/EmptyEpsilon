@@ -54,7 +54,7 @@ msgstr ""
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
-msgstr "Ennemis"
+msgstr "Puissance ennemie"
 
 msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
@@ -85,7 +85,7 @@ msgstr "Moins d'ennemis. Recommandé pour les équipages inexpérimentés."
 
 msgctxt "Enemies"
 msgid "Normal"
-msgstr "Normal"
+msgstr "Normale"
 
 msgctxt "Enemies"
 msgid "Normal amount of enemies. Recommended for a normal crew."
@@ -119,7 +119,7 @@ msgstr "Durée"
 
 msgctxt "setting"
 msgid "Sets up how much time the players have for the scenario"
-msgstr "Définit le temps dont disposent les joueurs pour le scénario."
+msgstr "Définit le temps dont disposent les joueurs."
 
 msgctxt "Time"
 msgid "Unlimited"

@@ -85,7 +85,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
         info_sidebar->setVisible(index == 0);
         custom_function_sidebar->setVisible(index == 1);
     });
-    sidebar_selector->setOptions({"Scanning", "Other"});
+    sidebar_selector->setOptions({tr("scienceTab", "Scanning"), tr("scienceTab", "Other")});
     sidebar_selector->setSelectionIndex(0);
     sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50);
 
@@ -101,19 +101,19 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     scan_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<ScienceScanner>());
 
     // Simple scan data.
-    info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4, tr("Callsign"), "");
+    info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4, tr("science", "Callsign"), "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
-    info_distance = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_DISTANCE", 0.4, tr("science","Distance"), "");
+    info_distance = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_DISTANCE", 0.4, tr("science", "Distance"), "");
     info_distance->setSize(GuiElement::GuiSizeMax, 30);
-    info_heading = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HEADING", 0.4, tr("Bearing"), "");
+    info_heading = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HEADING", 0.4, tr("science", "Bearing"), "");
     info_heading->setSize(GuiElement::GuiSizeMax, 30);
-    info_relspeed = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_REL_SPEED", 0.4, tr("Rel. Speed"), "");
+    info_relspeed = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_REL_SPEED", 0.4, tr("science", "Rel. Speed"), "");
     info_relspeed->setSize(GuiElement::GuiSizeMax, 30);
-    info_faction = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_FACTION", 0.4, tr("Faction"), "");
+    info_faction = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_FACTION", 0.4, tr("science", "Faction"), "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
-    info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4, tr("science","Type"), "");
+    info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4, tr("science", "Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30);
-    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("database", "DB"), [this]() {
+    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("scienceButton", "DB"), [this]() {
         auto ship = targets.get();
         if (auto tn = ship.getComponent<TypeName>())
         {
@@ -183,7 +183,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     database_view->hide()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Probe view button
-    probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("button", "Probe View"), [this](bool value){
+    probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("scienceButton", "Probe View"), [this](bool value){
         auto lrr = my_spaceship.getComponent<LongRangeRadar>();
         if (value && lrr && lrr->radar_view_linked_entity)
         {
@@ -205,7 +205,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     zoom_slider = new GuiSlider(radar_view, "", lrr ? lrr->long_range : 30000.0f, lrr ? lrr->short_range : 5000.0f, lrr ? lrr->long_range : 30000.0f, [this](float value)
     {
         if (auto lrr = my_spaceship.getComponent<LongRangeRadar>())
-            zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(lrr->long_range / value, 1)}}));
+            zoom_label->setText(tr("scienceButton", "Zoom: {zoom}x").format({{"zoom", string(lrr->long_range / value, 1)}}));
         science_radar->setDistance(value);
     });
     zoom_slider->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(250, 50);
@@ -218,7 +218,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
         background_gradient->setVisible(index == 0);
         database_view->setVisible(index == 1);
     });
-    view_mode_selection->setOptions({tr("button", "Radar"), tr("button", "Database")})->setSelectionIndex(0)->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(200, 100);
+    view_mode_selection->setOptions({tr("scienceButton", "Radar"), tr("scienceButton", "Database")})->setSelectionIndex(0)->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(200, 100);
 
     // Scanning dialog.
     new GuiScanningDialog(this, "SCANNING_DIALOG");
@@ -247,7 +247,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         science_radar->setDistance(view_distance);
         // Keep the zoom slider in sync.
         zoom_slider->setValue(view_distance)->setRange(lrr->long_range, lrr->short_range);
-        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(lrr->long_range / view_distance, 1)}}));
+        zoom_label->setText(tr("scienceButton", "Zoom: {zoom}x").format({{"zoom", string(lrr->long_range / view_distance, 1)}}));
     }
 
     if (probe_view_button->getValue() && lrr->radar_view_linked_entity)

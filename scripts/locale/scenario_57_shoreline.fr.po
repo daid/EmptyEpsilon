@@ -19,6 +19,7 @@ msgid "Shoreline Version 2"
 msgstr "Rivage"
 
 # Scenario description
+#, fuzzy
 msgid ""
 "Waves of increasingly difficult enemies. Warp capable ship is strongly "
 "suggested. At least one required mission and several optional missions. "
@@ -33,14 +34,15 @@ msgstr ""
 "- Difficulté :  ***  (variable)\n"
 "- Vaisseaux joueurs : 1 à 8\n"
 "\n"
-"TRADUCTION EN COURS 99% (A CHECKER)\n"
+"TRADUCTION EN COURS DE RELECTURE\n"
 "\n"
 "Mission : Des vagues d'ennemis de plus en plus difficiles à contenir. Au "
 "moins une mission obligatoire et plusieurs missions facultatives.\n"
 "\n"
 "Les missions sont sélectionnées au hasard sauf si le maître de jeu (MJ) "
 "intervient.\n"
-"Un vaisseau disposant de la vitesse lumière est fortement recommandé.\n"
+"Un vaisseau disposant de la vitesse lumière est fortement recommandé : "
+"Crucible, Flavia, Maverick, Hornet, Phobos, Striker, Lindworm.\n"
 "Un maximum de 8 vaisseaux joueurs sont pris en charge par le scénario. Plus "
 "de vaisseaux peuvent créer des résultats étranges.\n"
 "\n"
@@ -3989,6 +3991,148 @@ msgstr ""
 "Défendre les bases de la zone (marine humaine et indépendante) contre les "
 "attaques ennemies et détruire 3 bases ennemies."
 
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "Enemies"
+#~ msgstr "Puissance ennemie"
+
+#~ msgctxt "setting"
+#~ msgid "Configures strength and/or number of enemies in this scenario"
+#~ msgstr "Définit le nombre et/ou la puissance des ennemis."
+
+#~ msgctxt "Enemies"
+#~ msgid "Very Easy"
+#~ msgstr "Très facile"
+
+#~ msgctxt "Enemies"
+#~ msgid "The fewest or weakest enemies"
+#~ msgstr "Ennemis vraiment moins nombreux et/ou plus faibles."
+
+#~ msgctxt "Enemies"
+#~ msgid "Easy"
+#~ msgstr "Facile"
+
+#~ msgctxt "Enemies"
+#~ msgid "Fewer or weaker enemies"
+#~ msgstr "Ennemis moins nombreux et/ou plus faibles."
+
+#~ msgctxt "Enemies"
+#~ msgid "Normal"
+#~ msgstr "Normale"
+
+#~ msgctxt "Enemies"
+#~ msgid "Normal number or strength of enemies"
+#~ msgstr "Ennemis plus nombreux et/ou plus puissants."
+
+#~ msgctxt "Enemies"
+#~ msgid "Hard"
+#~ msgstr "Difficile"
+
+#~ msgctxt "Enemies"
+#~ msgid "More or stronger enemies"
+#~ msgstr "Ennemis plus nombreux et/ou plus puissants."
+
+#~ msgctxt "Enemies"
+#~ msgid "Very Hard"
+#~ msgstr "Très difficile"
+
+#~ msgctxt "Enemies"
+#~ msgid "The most or strongest enemies"
+#~ msgstr "Ennemis vraiment plus nombreux et/ou plus puissants."
+
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "Murphy"
+#~ msgstr "Loi de Murphy"
+
+#~ msgctxt "setting"
+#~ msgid "Configures the perversity of the universe according to Murphy's law"
+#~ msgstr "Définit la perversité de l'univers selon la loi de Murphy."
+
+#~ msgctxt "Murphy"
+#~ msgid "Very Easy"
+#~ msgstr "Très facile"
+
+#~ msgctxt "Murphy"
+#~ msgid "Random factors are very much in your favor"
+#~ msgstr "Les facteurs aléatoires sont vraiment plus en votre faveur."
+
+#~ msgctxt "Murphy"
+#~ msgid "Easy"
+#~ msgstr "Facile"
+
+#~ msgctxt "Murphy"
+#~ msgid "Random factors are more in your favor"
+#~ msgstr "Les facteurs aléatoires sont plus en votre faveur."
+
+#~ msgctxt "Murphy"
+#~ msgid "Normal"
+#~ msgstr "Normale"
+
+#~ msgctxt "Murphy"
+#~ msgid "Random factors are normal"
+#~ msgstr "Les facteurs aléatoires sont équilibrés."
+
+#~ msgctxt "Murphy"
+#~ msgid "Hard"
+#~ msgstr "Difficile"
+
+#~ msgctxt "Murphy"
+#~ msgid "Random factors are more against you"
+#~ msgstr "Les facteurs aléatoires sont plus contre vous."
+
+#~ msgctxt "Murphy"
+#~ msgid "Very Hard"
+#~ msgstr "Très difficile"
+
+#~ msgctxt "Murphy"
+#~ msgid "Random factors are strongly against you"
+#~ msgstr "Les facteurs aléatoires sont vraiment contre vous."
+
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "Timed"
+#~ msgstr "Chronométré"
+
+#~ msgctxt "setting"
+#~ msgid ""
+#~ "Configures whether or not there is a 45 minute time limit or not. Default "
+#~ "is no time limit."
+#~ msgstr "Active ou non une limite de temps de 45 minutes."
+
+#~ msgctxt "Timed"
+#~ msgid "No"
+#~ msgstr "Non"
+
+#~ msgctxt "Timed"
+#~ msgid "No time limit"
+#~ msgstr "Sans limite de temps."
+
+#~ msgctxt "Timed"
+#~ msgid "Yes"
+#~ msgstr "Oui"
+
+#~ msgctxt "Timed"
+#~ msgid "45 minute time limit"
+#~ msgstr "Délai de 45 minutes."
+
+#, lua-format
+#~ msgctxt "buttonGM"
+#~ msgid "-Main Completed:%i"
+#~ msgstr "-Requises terminées : %i"
+
+#~ msgctxt "upgradeSensors-comms"
+#~ msgid ""
+#~ "Our upgraded sensors have determined that all enemy bases have been "
+#~ "destroyed"
+#~ msgstr ""
+#~ "Nos capteurs optimisés ont déterminé que toutes les bases ennemies ont "
+#~ "été détruites"
+
+#~ msgctxt "Undercut2-shipLog"
+#~ msgid "All enemy bases have been destroyed"
+#~ msgstr "Toutes les bases ennemies ont été détruites."
+
 #, lua-format
 #~ msgctxt "trade-comms"
 #~ msgid "Where are you headed? (cost: %i reputation)"
@@ -4044,15 +4188,6 @@ msgstr ""
 #~ "- Traduction FR : Muerte\n"
 #~ "https://discord.gg/2NPKyMnGwp"
 
-# Scenario setting
-#~ msgctxt "setting"
-#~ msgid "Enemies"
-#~ msgstr "Ennemis"
-
-#~ msgctxt "setting"
-#~ msgid "Configures the amount of enemies spawned in the scenario."
-#~ msgstr "Définit le nombre d'ennemis générés dans le scénario."
-
 #~ msgctxt "Enemies"
 #~ msgid ""
 #~ "No enemies. Recommended for GM-controlled scenarios and rookie crew "
@@ -4065,25 +4200,13 @@ msgstr ""
 #~ "soient détruits."
 
 #~ msgctxt "Enemies"
-#~ msgid "Easy"
-#~ msgstr "Facile"
-
-#~ msgctxt "Enemies"
 #~ msgid "Fewer enemies. Recommended for inexperienced crews."
 #~ msgstr "Moins d'ennemis. Recommandé pour les équipages inexpérimentés."
-
-#~ msgctxt "Enemies"
-#~ msgid "Normal"
-#~ msgstr "Normal"
 
 #~ msgctxt "Enemies"
 #~ msgid "Normal amount of enemies. Recommended for a normal crew."
 #~ msgstr ""
 #~ "Quantité d'ennemis par défaut. Recommandé pour un équipage standard."
-
-#~ msgctxt "Enemies"
-#~ msgid "Hard"
-#~ msgstr "Difficile"
 
 #~ msgctxt "Enemies"
 #~ msgid ""
@@ -4104,11 +4227,6 @@ msgstr ""
 #~ "Beaucoup d'ennemis. Les équipages de joueurs inexpérimentés seront "
 #~ "sûrement submergés."
 
-# Scenario setting
-#~ msgctxt "setting"
-#~ msgid "Time"
-#~ msgstr "Durée"
-
 #~ msgctxt "setting"
 #~ msgid "Sets up how much time the players have for the scenario"
 #~ msgstr "Définit le temps dont disposent les joueurs pour le scénario."
@@ -4116,10 +4234,6 @@ msgstr ""
 #~ msgctxt "Time"
 #~ msgid "Unlimited"
 #~ msgstr "Illimitée"
-
-#~ msgctxt "Time"
-#~ msgid "No time limit"
-#~ msgstr "Sans limite de temps."
 
 #~ msgctxt "Time"
 #~ msgid "20min"
@@ -4189,10 +4303,6 @@ msgstr ""
 #~ msgid "Victory?"
 #~ msgstr "Victoire ?"
 
-#~ msgctxt "buttonGM"
-#~ msgid "Yes"
-#~ msgstr "Oui"
-
 #~ msgctxt "msgGM"
 #~ msgid ""
 #~ "Players have won.\n"
@@ -4200,10 +4310,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Les joueurs ont gagné.\n"
 #~ "Scénario terminé."
-
-#~ msgctxt "buttonGM"
-#~ msgid "No"
-#~ msgstr "Non"
 
 #~ msgctxt "buttonGM"
 #~ msgid "Position: "

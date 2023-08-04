@@ -366,7 +366,6 @@ msgstr "Défendre la station Wormhole."
 #, fuzzy
 msgctxt "wormhole-comms"
 msgid ""
-"\n"
 "Hello Captain. Have you noticed our cool wormhole?\n"
 "\n"
 "We're studying the energy radiating from the wormhole, and the similarities "

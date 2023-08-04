@@ -4,8 +4,14 @@
 --- Version 0
 -- Type: Mission
 -- Type: Replayable Mission
--- Variation[Easy]: Easy goals and/or enemies
--- Variation[Hard]: Hard goals and/or enemies
+-- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
+-- Enemies[Easy]: Fewer or weaker enemies
+-- Enemies[Normal|Default]: Normal number or strength of enemies
+-- Enemies[Hard]: More or stronger enemies
+-- Setting[Murphy]: Configures the perversity of the universe according to Murphy's law
+-- Murphy[Easy]: Random factors are more in your favor
+-- Murphy[Normal|Default]: Random factors are normal
+-- Murphy[Hard]: Random factors are more against you
 
 require("utils.lua")
 function createRandomAlongArc(object_type, amount, x, y, distance, startArc, endArcClockwise, randomize)
@@ -854,14 +860,18 @@ function setPlayer()
 	end
 end
 function setVariations()
-	local svs = getScenarioVariation()	--scenario variation string
-	if string.find(svs,"Easy") then
-		difficulty = .5
-	elseif string.find(svs,"Hard") then
-		difficulty = 2
-	else
-		difficulty = 1		--default (normal)
-	end
+	local enemy_config = {
+		["Easy"] =		{number = .5},
+		["Normal"] =	{number = 1},
+		["Hard"] =		{number = 2},
+	}
+	enemy_power =	enemy_config[getScenarioSetting("Enemies")].number
+	local murphy_config = {
+		["Easy"] =		{number = .5,	rep = 70,	adverse = .999,	lose_coolant = .99999,	gain_coolant = .005},
+		["Normal"] =	{number = 1,	rep = 50,	adverse = .995,	lose_coolant = .99995,	gain_coolant = .001},
+		["Hard"] =		{number = 2,	rep = 30,	adverse = .99,	lose_coolant = .9999,	gain_coolant = .0001},
+	}
+	difficulty =	murphy_config[getScenarioSetting("Murphy")].number
 	gameTimeLimit = 0
 	playWithTimeLimit = false
 end
@@ -7151,7 +7161,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, perimeter_min, per
 		danger = 1
 	end
 	if spawn_enemy_diagnostic then print(string.format("x: %.1f, y: %.1f, danger: %.1f, faction: %s",xOrigin,yOrigin,danger,enemyFaction)) end
-	local enemyStrength = math.max(danger * difficulty * playerPower(),5)
+	local enemyStrength = math.max(danger * enemy_power * playerPower(),5)
 	local enemyPosition = 0
 	local sp = irandom(400,900)			--random spacing of spawned group
 	local deployConfig = random(1,100)	--randomly choose between squarish formation and hexagonish formation

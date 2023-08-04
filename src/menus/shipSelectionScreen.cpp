@@ -509,14 +509,14 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     window_button = new GuiToggleButton(window_button_row, "WINDOW_BUTTON", tr("Ship window"), [this](bool value) {
         disableAllExcept(window_button);
     });
-    window_button->setSize(175, 50);
+    window_button->setSize(GuiElement::GuiSizeMax, 50);
 
-    window_angle = new GuiSlider(window_button_row, "WINDOW_ANGLE", 0.0, 359.0, 0.0, [this](float value) {
-        window_angle_label->setText(string("{angle}°").format({{"angle", string(int(window_angle->getValue()))}}));
-    });
-    window_angle->setSize(GuiElement::GuiSizeMax, 50);
-    window_angle_label = new GuiLabel(window_angle, "WINDOW_ANGLE_LABEL", "0°", 30);
-    window_angle_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    window_angle = new GuiTextEntry(window_button_row, "WINDOW_ANGLE","0");
+    window_angle->setSize(75, 50);
+    window_angle->setSelectOnFocus();
+
+    window_angle_label = new GuiLabel(window_button_row, "WINDOW_ANGLE_LABEL", "°", 30);
+    window_angle_label->setSize(12, GuiElement::GuiSizeMax);
 
     // Top-down view button
     topdown_button = new GuiToggleButton(layout, "TOP_DOWN_3D_BUTTON", tr("Top-down 3D view"), [this](bool value) {
@@ -605,7 +605,7 @@ void CrewPositionSelection::spawnUI(RenderLayer* render_layer)
     {
         destroy();
         uint8_t window_flags = PreferencesManager::get("ship_window_flags", "1").toInt();
-        new WindowScreen(render_layer, int(window_angle->getValue()), window_flags);
+        new WindowScreen(render_layer, window_angle->getText().toInt(), window_flags);
     }else if(topdown_button->getValue())
     {
         my_player_info->commandSetShip({});
