@@ -23,7 +23,7 @@ function init()
 
     sun1 = Planet():setPosition(5000, 35000):setPlanetRadius(1000):setDistanceFromMovementPlane(-2000):setPlanetAtmosphereTexture("planets/star-1.png"):setPlanetAtmosphereColor(1.0,1.0,1.0)
 
-    geo_1=SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("Geo-1"):setPosition(33064, -49665):setDescription("A supply station in geostationary orbit")
+    geo_1=SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("Geo-1"):setPosition(33064, -49665):setDescription(_("A supply station in geostationary orbit"))
     geo_1:setCommsFunction(geo_comm)
 
     placeRandomFreq(35, -750, -20000, -1250, 20000, 2000)
@@ -225,7 +225,7 @@ function activate_transmitter()
     if player2:hasPlayerAtPosition("Relay") then
 		geo_1:sendCommsMessage(player2, _([[As soon as your transmitter is fully charged, the weapons officer has to sync the shields with the transmitter (a Button will appear on the console). Then, you yourself on Relay will have to send the signal. (There will be a button for this as well.) Good luck!"]]))
     else
-		geo_1:sendCommsMessage(player2, _([[As soon as your transmitter is fully charged, the weapons officer has to sync the shields with the transmitter (a Button will appear on the console. Then, you yourself on Operations will have to send the signal. (You will have to change your sidebar from 'Scanning' to 'Other' by pressing the 'Scanning' headline or the arrows next to it.) Good luck!]]))
+		geo_1:sendCommsMessage(player2, _([[As soon as your transmitter is fully charged, the weapons officer has to sync the shields with the transmitter (a Button will appear on the console). Then, you yourself on Operations will have to send the signal. (You will have to change your sidebar from 'Scanning' to 'Other' by pressing the 'Scanning' headline or the arrows next to it.) Good luck!]]))
     end
     mission_state=boot_transmitter
     player2:removeCustom("activate_transmitter_btn")
@@ -277,7 +277,7 @@ function boot_transmitter(delta)
         player2:removeCustom("activate_transmitter_btn")
         player2:addCustomInfo("Engineering","activate_transmitter_info",_("Transmitter is ready"))
         player2:addCustomInfo("Engineering+","activate_transmitter_info_plus",_("Transmitter is ready"))
-        player2:addCustomInfo("Weapons","connect_to_shields_info","Transmitter:")
+        player2:addCustomInfo("Weapons","connect_to_shields_info",_("Transmitter:"))
         player2:addCustomButton("Weapons","connect_to_shields_btn",_("Sync with shields"),connect_to_shields)
         player2:addCustomButton("Tactical","connect_to_shields_btn_tactical",_("Sync with shields"),connect_to_shields)
         mission_state=misson_idle
@@ -454,7 +454,7 @@ function placeProbesAroundPoint( amount, dist_min, dist_max, x0, y0)
         y = y0 + math.sin(r / 180 * math.pi) * distance
         probe[n] = CpuShip():setFaction("Ghosts"):setAI("fighter"):setTemplate("ANT 615"):setHullMax(100):setHull(100):setPosition(x,y):orderIdle():setCallSign("IC"..n+5)
         probe[n]:setDescriptions(_("An old military satellite"), _("An old military satellite. Capturing frequency is blocked."))
-        probe[n]:setImpulseMaxSpeed(0)               
+        probe[n]:setImpulseMaxSpeed(0)
     end
 end
 
