@@ -163,6 +163,7 @@ function spyprobe_disabled(delta)
         else
             ExplosionEffect():setPosition(x,y):setSize(200)
             player:takeDamage(50, "kinetic",ax, ay)
+            globalMessage(_("Additional debris created!"))
         end
     end)    
 end
