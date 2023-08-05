@@ -237,7 +237,7 @@ function activate_transmitter()
     transmitter_txt=0
     transmitter_step = 10
     if player2:hasPlayerAtPosition("Relay") then
-		geo_1:sendCommsMessage(player2, _([[As soon as your transmitter is fully charged, the weapons officer has to sync the shields with the transmitter (a Button will appear on the console). Then, you yourself on Relay will have to send the signal. (There will be a button for this as well.) Good luck!"]]))
+		geo_1:sendCommsMessage(player2, _([[As soon as your transmitter is fully charged, the weapons officer has to sync the shields with the transmitter (a Button will appear on the console). Then, you yourself on Relay will have to send the signal. (There will be a button for this as well.) Good luck!]]))
     else
 		geo_1:sendCommsMessage(player2, _([[As soon as your transmitter is fully charged, the weapons officer has to sync the shields with the transmitter (a Button will appear on the console). Then, you yourself on Operations will have to send the signal. (You will have to change your sidebar from 'Scanning' to 'Other' by pressing the 'Scanning' headline or the arrows next to it.) Good luck!]]))
     end
