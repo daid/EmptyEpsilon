@@ -1,6 +1,7 @@
 #include "steamrichpresence.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+#include "components/name.h"
 #include <steam/steam_api.h>
 
 
