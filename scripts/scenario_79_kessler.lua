@@ -68,7 +68,7 @@ function geo_comm()
             setCommsMessage(_("Your ship is fully refuelled and repaired."))
         end
     else
-        setCommsMessage(_("Good day, officer. If you need repairs or to replenish your energy, please dock with us."))
+        setCommsMessage(_('Good day, officer. If you need repairs or to replenish your energy, please dock with us. For more background information about your mission, see the "Mission data" section in the science database.'))
     end
 end
 
