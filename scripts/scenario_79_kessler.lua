@@ -182,7 +182,6 @@ After that, you will receive further orders.]]))
     
     if player1:isDocked(geo_1) and dock_message_sent==1 and player1:isCommsInactive() then
 		player2:commandDock(geo_1)
-		player2:setCallSign("Tidy-2")
 		initSatNetwork()
         message_sat_network=geo_1:sendCommsMessage(player1, _([[Bad news: The satellite woke up a whole group of military satellites that should have been out of service for ages. If we don't do anything against them, they will slowly but surely destroy all objects they can find. The debris will spread all over the orbit, destroying all our communications satellites.
 Not only would that be a disaster for science and spaceflight, but everyday things like Internet are in serious danger as well!
@@ -204,6 +203,7 @@ end
 
 function change_ship()
     player1:transferPlayersToShip(player2)
+    player2:setCallSign("Tidy-2")
     geo_1:sendCommsMessage(player2, _([[Welcome to the new ship. It is smaller and more unsuspicious. On the downside, it is also less robust. Instead of a jump drive, it is equipped with a so-called warp drive. 
 You can fly much faster with it, but the drive tends to overheat easily. Keep in mind to turn off all non-essential systems and devices as soon you are getting closer to the dangerous satellites.
 This ship has a transmitter installed that is strong enough to overwhelm the jammer of the control node and to send a shutdown signal. But you have to be very close for it to work.
@@ -289,9 +289,10 @@ function boot_transmitter(delta)
         globalMessage(_("Transmitter is ready to be synced with shields"))
         player2:removeCustom("out_of_reach_info")
         player2:removeCustom("activate_transmitter_btn")
-        player2:addCustomInfo("Engineering","activate_transmitter_info",_("Transmitter is ready"))
-        player2:addCustomInfo("Engineering+","activate_transmitter_info_plus",_("Transmitter is ready"))
+        player2:addCustomInfo("Engineering","activate_transmitter_info",_("Transmitter fully charged"))
+        player2:addCustomInfo("Engineering+","activate_transmitter_info_plus",_("Transmitter fully charged"))
         player2:addCustomInfo("Weapons","connect_to_shields_info",_("Transmitter:"))
+        player2:addCustomInfo("Tactical","connect_to_shields_info_tactical",_("Transmitter:"))
         player2:addCustomButton("Weapons","connect_to_shields_btn",_("Sync with shields"),connect_to_shields)
         player2:addCustomButton("Tactical","connect_to_shields_btn_tactical",_("Sync with shields"),connect_to_shields)
         mission_state=misson_idle
@@ -302,6 +303,8 @@ function connect_to_shields()
     globalMessage(_("Syncing shields with transmitter. Please stand by..."))
     player2:removeCustom("connect_to_shields_btn")
     player2:removeCustom("connect_to_shields_btn_tactical")
+    player2:addCustomInfo("Weapons","connect_to_shields_info",_("Syncing transmitter..."))
+    player2:addCustomInfo("Tactical","connect_to_shields_info_tactical",_("Syncing transmitter..."))
     mission_state= connecting_shields
     connect_timer=0
 end
@@ -312,6 +315,8 @@ function connecting_shields(delta)
         player2:addCustomButton("Relay","send_signal_btn",_("send signal"),send_signal)
         player2:removeCustom("transmitter_unlinked_info")
         player2:addCustomButton("Operations","send_signal_btn_ops",_("send signal"),send_signal)
+        player2:addCustomInfo("Weapons","connect_to_shields_info",_("Transmitter is ready"))
+        player2:addCustomInfo("Tactical","connect_to_shields_info_tactical",_("Transmitter is ready"))
         mission_state=misson_idle
     end
 end
@@ -375,6 +380,7 @@ function triggerPhase4()
 	if not(player2) then
 		init_player2()
 	end
+    player2:setCallSign("Tidy-2")
 	initSatNetwork()
 	player2:setPosition(80000, -20000)
     mission_state = towards_commandnode
@@ -387,7 +393,7 @@ end
 
 function init_player2()
         player2 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Flavia P.Falcon"):setWeaponTubeCount(0)
-        player2:setCallSign("Duster")
+        player2:setCallSign(_("Empty ship")) -- as players might not realise that this is a player ship and could be confused when noone is answering their call
         player2:setWeaponStorageMax("Nuke",0):setWeaponStorageMax("Homing",0):setWeaponStorageMax("HVLI",0):setWeaponStorageMax("Mine",0):setWeaponStorageMax("Emp",0)
         player2:setPosition(32500,-49000)
         player2:addCustomInfo("Engineering","out_of_reach_info",_("Out of reach"))
