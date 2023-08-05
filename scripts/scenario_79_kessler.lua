@@ -60,7 +60,20 @@ end
 ------------------------ end of initialisation ------------------------
 
 function geo_comm()
-    setCommsMessage(_("Good day, officer. If you need repairs or to replenish your energy, please dock with us."))
+    if comms_source:isDocked(comms_target) then
+        if comms_source:getHull() < comms_source:getHullMax() -1 or comms_source:getEnergyLevel() < comms_source:getEnergyLevelMax() -1
+        then
+            setCommsMessage(_("Repairs and refueling in progress."))
+        else
+            setCommsMessage(_("Your ship is fully refuelled and repaired."))
+        end
+    else
+        setCommsMessage(_("Good day, officer. If you need repairs or to replenish your energy, please dock with us."))
+    end
+end
+
+function no_reply()
+    setCommsMessage()
 end
 
 function mission_start_state(delta)
@@ -452,7 +465,7 @@ function placeProbesAroundPoint( amount, dist_min, dist_max, x0, y0)
         local distance = random(dist_min, dist_max)
         x = x0 + math.cos(r / 180 * math.pi) * distance
         y = y0 + math.sin(r / 180 * math.pi) * distance
-        probe[n] = CpuShip():setFaction("Ghosts"):setAI("fighter"):setTemplate("ANT 615"):setHullMax(100):setHull(100):setPosition(x,y):orderIdle():setCallSign("IC"..n+5)
+        probe[n] = CpuShip():setFaction("Ghosts"):setAI("fighter"):setTemplate("ANT 615"):setHullMax(100):setHull(100):setPosition(x,y):orderIdle():setCallSign("IC"..n+5):setCommsFunction(no_reply)
         probe[n]:setDescriptions(_("An old military satellite"), _("An old military satellite. Capturing frequency is blocked."))
         probe[n]:setImpulseMaxSpeed(0)
     end
