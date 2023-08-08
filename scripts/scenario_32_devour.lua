@@ -105,7 +105,7 @@ function setConstants()
 	player_ship_spawn_count = 0
 	player_ship_death_count = 0
 	max_repeat_loop = 300
-	primary_orders = _("orders-comms","Save the planets from destruction")
+	primary_orders = _("orders-comms", "Save the planets from destruction")
 	plotCI = cargoInventory
 	plotH = healthCheck				--Damage to ship can kill repair crew members
 	healthCheckTimerInterval = 8
@@ -753,12 +753,12 @@ function setConstants()
 	approached_devourer = false
 end
 function clarifyExistingScience()
-	local weapons_key = _("scienceDB","Weapons")
+	local weapons_key = _("scienceDB", "Weapons")
 	local weapons_db = queryScienceDatabase(weapons_key)
 	if weapons_db == nil then
 		weapons_db = ScienceDatabase():setName(weapons_key)
 	end
-	weapons_db:setLongDescription(_("scienceDB","This database only covers the basic versions of the missiles used throughout the galaxy.\n\nIt has been reported that some battleships started using larger variations of those missiles. Small fighters and even frigates should not have too much trouble dodging them, but space captains of bigger ships should be wary of their doubled damage potential.\n\nSmaller variations of these missiles have become common in the galaxy, too. Fighter pilots praise their speed and maneuverability, because it gives them an edge against small and fast-moving targets. They only deal half the damage of their basic counterparts, but what good is a missile if it does not hit its target?\n\nSome ships in your fleet have been equipped with these different sized weapons tubes. In some cases, the weapons officer might see a banner on the weapons console describing these tubes using the following shorthand:\n    S = Small\n    M = Medium (the normal sized missile tube)\n    L = Large\nThese letters describe the tube sizes in order from top to bottom."))
+	weapons_db:setLongDescription(_("scienceDB", "This database only covers the basic versions of the missiles used throughout the galaxy.\n\nIt has been reported that some battleships started using larger variations of those missiles. Small fighters and even frigates should not have too much trouble dodging them, but space captains of bigger ships should be wary of their doubled damage potential.\n\nSmaller variations of these missiles have become common in the galaxy, too. Fighter pilots praise their speed and maneuverability, because it gives them an edge against small and fast-moving targets. They only deal half the damage of their basic counterparts, but what good is a missile if it does not hit its target?\n\nSome ships in your fleet have been equipped with these different sized weapons tubes. In some cases, the weapons officer might see a banner on the weapons console describing these tubes using the following shorthand:\n    S = Small\n    M = Medium (the normal sized missile tube)\n    L = Large\nThese letters describe the tube sizes in order from top to bottom."))
 end
 -- Game Master functions --
 function setGMButtons()
@@ -767,35 +767,35 @@ function setGMButtons()
 end
 function mainGMButtons()
 	clearGMFunctions()
-	addGMFunction(string.format(_("buttonGM","Version %s"),scenario_version),function()
-		local version_message = string.format(_("msgGM","Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
+	addGMFunction(string.format(_("buttonGM", "Version %s"),scenario_version),function()
+		local version_message = string.format(_("msgGM", "Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
-	addGMFunction(_("buttonGM","+Station Reports"),stationReports)
+	addGMFunction(_("buttonGM", "+Station Reports"),stationReports)
 end
 function mainGMButtonsDuringPause()
 	clearGMFunctions()
-	addGMFunction(string.format(_("buttonGM","Version %s"),scenario_version),function()
-		local version_message = string.format(_("msgGM","Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
+	addGMFunction(string.format(_("buttonGM", "Version %s"),scenario_version),function()
+		local version_message = string.format(_("msgGM", "Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
-	addGMFunction(_("buttonGM","+Station Reports"),stationReports)
-	addGMFunction(_("buttonGM","+Difficulty"),setDifficulty)
-	addGMFunction(_("buttonGM","+Enemy Power"),setEnemyPower)
-	addGMFunction(_("buttonGM","+Reputation"),setInitialReputation)
+	addGMFunction(_("buttonGM", "+Station Reports"),stationReports)
+	addGMFunction(_("buttonGM", "+Difficulty"),setDifficulty)
+	addGMFunction(_("buttonGM", "+Enemy Power"),setEnemyPower)
+	addGMFunction(_("buttonGM", "+Reputation"),setInitialReputation)
 end
 function mainGMButtonsAfterPause()
 	clearGMFunctions()
-	addGMFunction(string.format(_("buttonGM","Version %s"),scenario_version),function()
-		local version_message = string.format(_("msgGM","Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
+	addGMFunction(string.format(_("buttonGM", "Version %s"),scenario_version),function()
+		local version_message = string.format(_("msgGM", "Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
 		print(version_message)
 	end)
-	addGMFunction(_("buttonGM","+Station Reports"),stationReports)
-	addGMFunction(_("buttonGM","Nerf Devourer"),nerfDevourer)
-	addGMFunction(_("buttonGM","Un-nerf Devourer"),function()
+	addGMFunction(_("buttonGM", "+Station Reports"),stationReports)
+	addGMFunction(_("buttonGM", "Nerf Devourer"),nerfDevourer)
+	addGMFunction(_("buttonGM", "Un-nerf Devourer"),function()
 --           					 Arc, Dir, Range, Cycle, Damage
 		devourer:setBeamWeapon(0, 90,   0,	3200,	  3, 10)
 		devourer:setBeamWeapon(1, 90,22.5,	3200,	  3, 10)
@@ -808,16 +808,16 @@ function mainGMButtonsAfterPause()
 end
 function setEnemyPower()
 	clearGMFunctions()
-	addGMFunction(_("buttonGM","-From Enemy Power"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-From Enemy Power"),mainGMButtons)
 	local powers = {
-		{val = .5,	desc = _("buttonGM","Easy")},
-		{val = 1,	desc = _("buttonGM","Normal")},
-		{val = 2,	desc = _("buttonGM","Hard")},
-		{val = 3,	desc = _("buttonGM","Extreme")},
-		{val = 5,	desc = _("buttonGM","Quixotic")},
+		{val = .5,	desc = _("buttonGM", "Easy")},
+		{val = 1,	desc = _("buttonGM", "Normal")},
+		{val = 2,	desc = _("buttonGM", "Hard")},
+		{val = 3,	desc = _("buttonGM", "Extreme")},
+		{val = 5,	desc = _("buttonGM", "Quixotic")},
 	}
 	for index, power in ipairs(powers) do
-		local button_label = string.format("%s %.1f",power.desc,power.val)
+		local button_label = string.format(_("buttonGM", "%s %.1f"),power.desc,power.val)
 		if power.val == enemy_power then
 			button_label = button_label .. "*"
 		end
@@ -829,14 +829,14 @@ function setEnemyPower()
 end
 function setDifficulty()
 	clearGMFunctions()
-	addGMFunction(_("buttonGM","-From Difficulty"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-From Difficulty"),mainGMButtons)
 	local difficulties = {
-		{val = .5,	desc = _("buttonGM","Easy")},
-		{val = 1,	desc = _("buttonGM","Normal")},
-		{val = 2,	desc = _("buttonGM","Hard")},
+		{val = .5,	desc = _("buttonGM", "Easy")},
+		{val = 1,	desc = _("buttonGM", "Normal")},
+		{val = 2,	desc = _("buttonGM", "Hard")},
 	}
 	for index, diff in ipairs(difficulties) do
-		local button_label = string.format("%s %.1f",diff.desc,diff.val)
+		local button_label = string.format(_("buttonGM", "%s %.1f"),diff.desc,diff.val)
 		if diff.val == difficulty then
 			button_label = button_label .. "*"
 		end
@@ -848,16 +848,16 @@ function setDifficulty()
 end
 function setInitialReputation()
 	clearGMFunctions()
-	addGMFunction(_("buttonGM","-From Reputation"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-From Reputation"),mainGMButtons)
 	local reputation_values = {
-		{name = _("buttonGM","Unknown"),		value = 0},
-		{name = _("buttonGM","Nice"),			value = 20},
-		{name = _("buttonGM","Hero"),			value = 50},
-		{name = _("buttonGM","Major Hero"),		value = 100},
-		{name = _("buttonGM","Super Hero"),		value = 200},
+		{name = _("buttonGM", "Unknown"),		value = 0},
+		{name = _("buttonGM", "Nice"),			value = 20},
+		{name = _("buttonGM", "Hero"),			value = 50},
+		{name = _("buttonGM", "Major Hero"),		value = 100},
+		{name = _("buttonGM", "Super Hero"),		value = 200},
 	}
 	for index, rep in ipairs(reputation_values) do
-		local button_label = string.format("%s %i",rep.name,rep.value)
+		local button_label = string.format(_("buttonGM", "%s %i"),rep.name,rep.value)
 		if reputation_start_amount == rep.value then
 			button_label = button_label .. "*"
 		end
@@ -869,7 +869,7 @@ function setInitialReputation()
 end
 function stationReports()
 	clearGMFunctions()
-	addGMFunction(_("buttonGM","-Main"),mainGMButtons)
+	addGMFunction(_("buttonGM", "-Main"),mainGMButtons)
 	if station_list ~= nil and #station_list > 0 then
 		local applicable_station_count = 0
 		for index, station in ipairs(station_list) do
@@ -877,10 +877,10 @@ function stationReports()
 				local tpa = Artifact():setFaction(player_faction)
 				if station:isFriendly(tpa) or not station:isEnemy(tpa) then
 					applicable_station_count = applicable_station_count + 1
-					addGMFunction(string.format(_("stationReport-buttonGM","%s %s"),station:getCallSign(),station:getSectorName()),function()
-						local out = string.format(_("stationReport-buttonGM","%s %s  %s  %s  Friendliness:%s"),station:getSectorName(),station:getCallSign(),station:getTypeName(),station:getFaction(),station.comms_data.friendlyness)
-						out = string.format(_("stationReport-buttonGM","%s\nShares Energy: %s,  Repairs Hull: %s,  Restocks Scan Probes: %s"),out,station:getSharesEnergyWithDocked(),station:getRepairDocked(),station:getRestocksScanProbes())
-						out = string.format(_("stationReport-buttonGM","%s\nFix Probes: %s,  Fix Hack: %s,  Fix Scan: %s,  Fix Combat Maneuver: %s,  Fix Destruct: %s, Fix Slow Tube: %s"),out,station.comms_data.probe_launch_repair,station.comms_data.hack_repair,station.comms_data.scan_repair,station.comms_data.combat_maneuver_repair,station.comms_data.self_destruct_repair,station.comms_data.self_destruct_repair,station.comms_data.tube_slow_down_repair)
+					addGMFunction(string.format(_("stationReport-msgGM", "%s %s"),station:getCallSign(),station:getSectorName()),function()
+						local out = string.format(_("stationReport-msgGM", "%s %s  %s  %s  Friendliness:%s"),station:getSectorName(),station:getCallSign(),station:getTypeName(),station:getFaction(),station.comms_data.friendlyness)
+						out = string.format(_("stationReport-msgGM", "%s\nShares Energy: %s,  Repairs Hull: %s,  Restocks Scan Probes: %s"),out,station:getSharesEnergyWithDocked(),station:getRepairDocked(),station:getRestocksScanProbes())
+						out = string.format(_("stationReport-msgGM", "%s\nFix Probes: %s,  Fix Hack: %s,  Fix Scan: %s,  Fix Combat Maneuver: %s,  Fix Destruct: %s, Fix Slow Tube: %s"),out,station.comms_data.probe_launch_repair,station.comms_data.hack_repair,station.comms_data.scan_repair,station.comms_data.combat_maneuver_repair,station.comms_data.self_destruct_repair,station.comms_data.self_destruct_repair,station.comms_data.tube_slow_down_repair)
 						if station.comms_data.weapon_cost == nil then
 							station.comms_data.weapon_cost = {
 								Homing = math.random(1,4),
@@ -906,43 +906,43 @@ function stationReports()
 								station.comms_data.weapon_cost.EMP = math.random(7,13)
 							end
 						end
-						out = string.format(_("stationReport-buttonGM","%s\nHoming: %s %s,   Nuke: %s %s,   Mine: %s %s,   EMP: %s %s,   HVLI: %s %s"),out,station.comms_data.weapon_available.Homing,station.comms_data.weapon_cost.Homing,station.comms_data.weapon_available.Nuke,station.comms_data.weapon_cost.Nuke,station.comms_data.weapon_available.Mine,station.comms_data.weapon_cost.Mine,station.comms_data.weapon_available.EMP,station.comms_data.weapon_cost.EMP,station.comms_data.weapon_available.HVLI,station.comms_data.weapon_cost.HVLI)
---							out = string.format("%s\n      Cost multipliers and Max Refill:   Friend: %.1f %.1f,   Neutral: %.1f %.1f",out,station.comms_data.reputation_cost_multipliers.friend,station.comms_data.max_weapon_refill_amount.friend,station.comms_data.reputation_cost_multipliers.neutral,station.comms_data.max_weapon_refill_amount.neutral)
-							out = string.format(_("stationReport-buttonGM","%s\nServices and their costs and availability:"),out)
+						out = string.format(_("stationReport-msgGM", "%s\nHoming: %s %s,   Nuke: %s %s,   Mine: %s %s,   EMP: %s %s,   HVLI: %s %s"),out,station.comms_data.weapon_available.Homing,station.comms_data.weapon_cost.Homing,station.comms_data.weapon_available.Nuke,station.comms_data.weapon_cost.Nuke,station.comms_data.weapon_available.Mine,station.comms_data.weapon_cost.Mine,station.comms_data.weapon_available.EMP,station.comms_data.weapon_cost.EMP,station.comms_data.weapon_available.HVLI,station.comms_data.weapon_cost.HVLI)
+--							out = string.format(_("stationReport-msgGM", "%s\n      Cost multipliers and Max Refill:   Friend: %.1f %.1f,   Neutral: %.1f %.1f"),out,station.comms_data.reputation_cost_multipliers.friend,station.comms_data.max_weapon_refill_amount.friend,station.comms_data.reputation_cost_multipliers.neutral,station.comms_data.max_weapon_refill_amount.neutral)
+							out = string.format(_("stationReport-msgGM", "%s\nServices and their costs and availability:"),out)
 						for service, cost in pairs(station.comms_data.service_cost) do
-							out = string.format("%s\n      %s: %s",out,service,cost)
---							out = string.format("%s\n      %s: %s %s",out,service,cost,station.comms_data.service_available[service])
+							out = string.format(_("stationReport-msgGM", "%s\n      %s: %s"),out,service,cost)
+--							out = string.format(_("stationReport-msgGM", "%s\n      %s: %s %s"),out,service,cost,station.comms_data.service_available[service])
 						end
 						if station.comms_data.jump_overcharge then
-							out = string.format(_("stationReport-buttonGM","%s\n      jump overcharge: 10"),out)
+							out = string.format(_("stationReport-msgGM", "%s\n      jump overcharge: 10"),out)
 						end
 						if station.comms_data.upgrade_path ~= nil then
-							out = string.format(_("stationReport-buttonGM","%s\nUpgrade paths for player ship types and their max level:"),out)
+							out = string.format(_("stationReport-msgGM", "%s\nUpgrade paths for player ship types and their max level:"),out)
 							for ship_type, upgrade in pairs(station.comms_data.upgrade_path) do
-								out = string.format(_("stationReport-buttonGM","%s\n      Ship template type: %s"),out,ship_type)
+								out = string.format(_("stationReport-msgGM", "%s\n      Ship template type: %s"),out,ship_type)
 								for upgrade_type, max_level in pairs(upgrade) do
-									out = string.format("%s\n            %s: %s",out,upgrade_type,max_level)
+									out = string.format(_("stationReport-msgGM", "%s\n            %s: %s"),out,upgrade_type,max_level)
 								end
 							end
 						end
 						if station.comms_data.goods ~= nil or station.comms_data.trade ~= nil or station.comms_data.buy ~= nil then
-							out = string.format(_("stationReport-buttonGM","%s\nGoods:"),out)
+							out = string.format(_("stationReport-msgGM", "%s\nGoods:"),out)
 							if station.comms_data.goods ~= nil then
-								out = string.format(_("stationReport-buttonGM","%s\n    Sell:"),out)
+								out = string.format(_("stationReport-msgGM", "%s\n    Sell:"),out)
 								for good, good_detail in pairs(station.comms_data.goods) do
-									out = string.format(_("stationReport-buttonGM","%s\n        %s: Cost:%s   Quantity:%s"),out,good,good_detail.cost,good_detail.quantity)
+									out = string.format(_("stationReport-msgGM", "%s\n        %s: Cost:%s   Quantity:%s"),out,good,good_detail.cost,good_detail.quantity)
 								end
 							end
 							if station.comms_data.trade ~= nil then
-								out = string.format(_("stationReport-buttonGM","%s\n    Trade:"),out)
+								out = string.format(_("stationReport-msgGM", "%s\n    Trade:"),out)
 								for good, trade in pairs(station.comms_data.trade) do
-									out = string.format("%s\n        %s: %s",out,good,trade)
+									out = string.format(_("stationReport-msgGM", "%s\n        %s: %s"),out,good,trade)
 								end
 							end
 							if station.comms_data.buy ~= nil then
-								out = string.format(_("stationReport-buttonGM","%s\n    Buy:"),out)
+								out = string.format(_("stationReport-msgGM", "%s\n    Buy:"),out)
 								for good, amount in pairs(station.comms_data.buy) do
-									out = string.format("%s\n        %s: %s",out,good,amount)
+									out = string.format(_("stationReport-msgGM", "%s\n        %s: %s"),out,good,amount)
 								end
 							end
 						end
@@ -954,11 +954,11 @@ function stationReports()
 			end
 		end
 		if applicable_station_count == 0 then
-			addGMMessage(_("stationReport-buttonGM","No applicable stations. Reports useless. No action taken"))
+			addGMMessage(_("stationReport-msgGM", "No applicable stations. Reports useless. No action taken"))
 			mainGMButtons()
 		end
 	else
-		addGMMessage(_("stationReport-buttonGM","No applicable stations. Reports useless. No action taken"))
+		addGMMessage(_("stationReport-msgGM", "No applicable stations. Reports useless. No action taken"))
 		mainGMButtons()
 	end
 end
@@ -992,7 +992,7 @@ function updatePlayerSoftTemplate(p)
 			end
 			p.score_settings_source = tempTypeName
 		else
-			addGMMessage(string.format("Player ship %s's template type (%s) could not be found in table PlayerShipStats",p:getCallSign(),tempTypeName))
+			addGMMessage(string.format(_("stationReport-msgGM", "Player ship %s's template type (%s) could not be found in table PlayerShipStats"),p:getCallSign(),tempTypeName))
 		end
 	end
 	p.maxRepairCrew = p:getRepairCrewCount()
@@ -1593,9 +1593,9 @@ function placeSensorBuoy(axis)
 					if #selected_stations > 0 then
 						local station = tableRemoveRandom(selected_stations)
 						if out == "" then
-							out = string.format(_("scienceDescription-buoy","Sensor Record: %s station %s in %s"),station:getFaction(),station:getCallSign(),station:getSectorName())
+							out = string.format(_("scienceDescription-buoy", "Sensor Record: %s station %s in %s"),station:getFaction(),station:getCallSign(),station:getSectorName())
 						else
-							out = string.format(_("scienceDescription-buoy","%s, %s station %s in %s"),out,station:getFaction(),station:getCallSign(),station:getSectorName())
+							out = string.format(_("scienceDescription-buoy", "%s, %s station %s in %s"),out,station:getFaction(),station:getCallSign(),station:getSectorName())
 						end
 					else
 						break
@@ -1625,9 +1625,9 @@ function placeSensorBuoy(axis)
 							end
 						end
 						if out == "" then
-							out = string.format(_("scienceDescription-buoy","Sensor Record: %s %s %s in %s carrying %s"),transport:getFaction(),transport:getTypeName(),transport:getCallSign(),transport:getSectorName(),goods_carrying)
+							out = string.format(_("scienceDescription-buoy", "Sensor Record: %s %s %s in %s carrying %s"),transport:getFaction(),transport:getTypeName(),transport:getCallSign(),transport:getSectorName(),goods_carrying)
 						else
-							out = string.format(_("scienceDescription-buoy","%s; %s %s %s in %s carrying %s"),out,transport:getFaction(),transport:getTypeName(),transport:getCallSign(),transport:getSectorName(),goods_carrying)
+							out = string.format(_("scienceDescription-buoy", "%s; %s %s %s in %s carrying %s"),out,transport:getFaction(),transport:getTypeName(),transport:getCallSign(),transport:getSectorName(),goods_carrying)
 						end
 					else
 						break
@@ -1635,9 +1635,9 @@ function placeSensorBuoy(axis)
 				end
 			end
 		else
-			out = _("scienceDescription-buoy","No data recorded")
+			out = _("scienceDescription-buoy", "No data recorded")
 		end
-		sb:setDescriptions(_("scienceDescription-buoy","Automated data gathering device"),out)
+		sb:setDescriptions(_("scienceDescription-buoy", "Automated data gathering device"),out)
 		table.insert(place_space,{obj=sb,dist=200,shape="circle"})
 	end
 end
@@ -1646,21 +1646,21 @@ function placeAdBuoy(axis)
 	if eo_x ~= nil then
 		local ab = Artifact():setPosition(eo_x, eo_y):setScanningParameters(difficulty*2,1):setRadarSignatureInfo(random(0,1),random(0,1),random(0,1)):setModel("SensorBuoyMKIII")
 		local billboards = {
-			_("scienceDescription-buoy","Come to Billy Bob's for the best food in the sector"),
-			_("scienceDescription-buoy","It's never too late to buy life insurance"),
-			_("scienceDescription-buoy","You'll feel better in an Adder Mark 9"),
-			_("scienceDescription-buoy","Visit Repulse shipyards for the best deals"),
-			_("scienceDescription-buoy","Fresh fish! We catch, you buy!"),
-			_("scienceDescription-buoy","Get your fuel cells at Melinda's Market"),
-			_("scienceDescription-buoy","Find a special companion. All species available"),
-			_("scienceDescription-buoy","Feeling down? Robotherapist is there for you"),
-			_("scienceDescription-buoy","30 days, 30 kilograms, guaranteed"),
-			_("scienceDescription-buoy","Try our asteroid dust diet weight loss program"),
-			_("scienceDescription-buoy","Best tasting water in the quadrant at Willy's Waterway"),
-			_("scienceDescription-buoy","Amazing shows every night at Lenny's Lounge"),
-			_("scienceDescription-buoy","Tip: make lemons an integral part of your diet"),
+			_("scienceDescription-buoy", "Come to Billy Bob's for the best food in the sector"),
+			_("scienceDescription-buoy", "It's never too late to buy life insurance"),
+			_("scienceDescription-buoy", "You'll feel better in an Adder Mark 9"),
+			_("scienceDescription-buoy", "Visit Repulse shipyards for the best deals"),
+			_("scienceDescription-buoy", "Fresh fish! We catch, you buy!"),
+			_("scienceDescription-buoy", "Get your fuel cells at Melinda's Market"),
+			_("scienceDescription-buoy", "Find a special companion. All species available"),
+			_("scienceDescription-buoy", "Feeling down? Robotherapist is there for you"),
+			_("scienceDescription-buoy", "30 days, 30 kilograms, guaranteed"),
+			_("scienceDescription-buoy", "Try our asteroid dust diet weight loss program"),
+			_("scienceDescription-buoy", "Best tasting water in the quadrant at Willy's Waterway"),
+			_("scienceDescription-buoy", "Amazing shows every night at Lenny's Lounge"),
+			_("scienceDescription-buoy", "Tip: make lemons an integral part of your diet"),
 		}
-		ab:setDescriptions(_("scienceDescription-buoy","Automated data gathering device"),billboards[math.random(1,#billboards)])
+		ab:setDescriptions(_("scienceDescription-buoy", "Automated data gathering device"),billboards[math.random(1,#billboards)])
 		table.insert(place_space,{obj=ab,dist=200,shape="circle"})
 	end
 end
@@ -2542,39 +2542,39 @@ function handleDockedState()
 			addCommsReply(_("Back"), commsStation)
 		end)
 		if comms_target:isFriendly(comms_source) then
-			addCommsReply(_("station-comms","Locate planet devourer"),function()
-				local output_message = string.format(_("station-comms","%s is located in sector %s."),devourer:getCallSign(),devourer:getSectorName())
+			addCommsReply(_("mission-comms","Locate planet devourer"),function()
+				local output_message = string.format(_("mission-comms","%s is located in sector %s."),devourer:getCallSign(),devourer:getSectorName())
 				if devourer.planet_target ~= nil and devourer.planet_target:isValid() then
-					output_message = string.format(_("station-comms","%s We project that %s plans to destroy %s in sector %s"),output_message,devourer:getCallSign(),devourer.planet_target:getCallSign(),devourer.planet_target:getSectorName())
+					output_message = string.format(_("mission-comms","%s We project that %s plans to destroy %s in sector %s"),output_message,devourer:getCallSign(),devourer.planet_target:getCallSign(),devourer.planet_target:getSectorName())
 				end
 				setCommsMessage(output_message)
 				addCommsReply(_("Back"), commsStation)
 			end)
 			if approached_devourer then
-				addCommsReply(string.format(_("station-comms","How do we destroy %s?"),devourer:getCallSign()),function()
+				addCommsReply(string.format(_("mission-comms","How do we destroy %s?"),devourer:getCallSign()),function()
 					if comms_source.plan_extractor ~= nil and comms_source.plan_extractor == "extracted" then
-						setCommsMessage(_("station-comms","Were you able to get the plans?"))
-						addCommsReply(_("station-comms","We got the plans. Now what?"),function()
-							local beam_nerf = _("station-comms","Four")
-							local missile_nerf = _("station-comms","three")
+						setCommsMessage(_("mission-comms","Were you able to get the plans?"))
+						addCommsReply(_("mission-comms","We got the plans. Now what?"),function()
+							local beam_nerf = _("mission-comms","Four")
+							local missile_nerf = _("mission-comms","three")
 							if difficulty == 1 then
-								beam_nerf = _("station-comms","Six")
-								missile_nerf = _("station-comms","six")
+								beam_nerf = _("mission-comms","Six")
+								missile_nerf = _("mission-comms","six")
 							elseif difficulty < 1 then
-								bem_nerf = _("station-comms","Eight")
-								missile_nerf = _("station-comms","nine")
+								bem_nerf = _("mission-comms","Eight")
+								missile_nerf = _("mission-comms","nine")
 							end
-							setCommsMessage(string.format(_("station-comms","Good job bringing in those plans. Our analysis shows a weakness in the weapons control system of the %s. If we can upload a digital virus through a small thermal exhaust port just below the main port, we should be able to create a virtual canyon between the weapons systems by forcing them into maintenance mode. %s out of sixteen beam emplacements will be reduced in range from 3.2 units to 1 unit and their cycle time will be increased from 3 seconds to 30 seconds. Similarly, %s out of fifteen weapons tubes will have their load times increased from 3 seconds to 3 minutes. This should make it easier for you to deliver destructuve beam and missile fire to %s"),devourer:getCallSign(),beam_nerf,missile_nerf,devourer:getCallSign()))
-							addCommsReply(_("station-comms","How do we upload this virus?"),function()
+							setCommsMessage(string.format(_("mission-comms","Good job bringing in those plans. Our analysis shows a weakness in the weapons control system of the %s. If we can upload a digital virus through a small thermal exhaust port just below the main port, we should be able to create a virtual canyon between the weapons systems by forcing them into maintenance mode. %s out of sixteen beam emplacements will be reduced in range from 3.2 units to 1 unit and their cycle time will be increased from 3 seconds to 30 seconds. Similarly, %s out of fifteen weapons tubes will have their load times increased from 3 seconds to 3 minutes. This should make it easier for you to deliver destructuve beam and missile fire to %s"),devourer:getCallSign(),beam_nerf,missile_nerf,devourer:getCallSign()))
+							addCommsReply(_("mission-comms","How do we upload this virus?"),function()
 								comms_source.virus_upload = "enabled"
-								setCommsMessage(string.format(_("station-comms","The approach will not be easy. You are required to maneuver straight down this trench and skim the surface to this point. The target area is only two meters wide... ...uh... ...sorry, I'm reading from the wrong script. Simply approach within 3 units of %s and have your engineer activate the upload using the button that should appear on the engineering console. Remember that the beam range on the %s is 3.2 units, so you'll have to take a couple of hits to deliver the virus. Your engineer will want to boost the shields for better protection. You'll probably also want your weapons officer to calibrate your shields, too."),devourer:getCallSign(),devourer:getCallSign()))
+								setCommsMessage(string.format(_("mission-comms","The approach will not be easy. You are required to maneuver straight down this trench and skim the surface to this point. The target area is only two meters wide... ...uh... ...sorry, I'm reading from the wrong script. Simply approach within 3 units of %s and have your engineer activate the upload using the button that should appear on the engineering console. Remember that the beam range on the %s is 3.2 units, so you'll have to take a couple of hits to deliver the virus. Your engineer will want to boost the shields for better protection. You'll probably also want your weapons officer to calibrate your shields, too."),devourer:getCallSign(),devourer:getCallSign()))
 								addCommsReply(_("Back"), commsStation)
 							end)
 							addCommsReply(_("Back"), commsStation)
 						end)
 					else
-						setCommsMessage(_("station-comms","It's a monster. If we had the technical readouts for the planet devourer, we might find a weakness, and exploit it."))
-						addCommsReply(_("station-comms","Where can we get the plans for the planet devourer?"),function()
+						setCommsMessage(_("mission-comms","It's a monster. If we had the technical readouts for the planet devourer, we might find a weakness, and exploit it."))
+						addCommsReply(_("mission-comms","Where can we get the plans for the planet devourer?"),function()
 							if station_kraylor == nil then
 								for _, station in ipairs(station_list) do
 									if station ~= nil and station:isValid() then
@@ -2586,34 +2586,34 @@ function handleDockedState()
 								end
 							end
 							if station_kraylor ~= nil and station_kraylor:isValid() then
-								setCommsMessage(string.format(_("station-comms","Kraylor station %s in sector %s probably has them. But they are likely to be heavily protected."),station_kraylor:getCallSign(),station_kraylor:getSectorName()))
-								addCommsReply(_("station-comms","How can we get those plans?"),function()
-									setCommsMessage(_("station-comms","You can't"))
-									addCommsReply(_("station-comms","What? There must be something we can do"),function()
-										setCommsMessage(_("station-comms","I can't think of anything. Do you have any ideas?"))
-										addCommsReply(_("station-comms","Threaten to destroy them unless they give up the plans."),function()
-											setCommsMessage(_("station-comms","They'd call your bluff. We can't get the plans if the station has been destroyed."))
+								setCommsMessage(string.format(_("mission-comms","Kraylor station %s in sector %s probably has them. But they are likely to be heavily protected."),station_kraylor:getCallSign(),station_kraylor:getSectorName()))
+								addCommsReply(_("mission-comms","How can we get those plans?"),function()
+									setCommsMessage(_("mission-comms","You can't"))
+									addCommsReply(_("mission-comms","What? There must be something we can do"),function()
+										setCommsMessage(_("mission-comms","I can't think of anything. Do you have any ideas?"))
+										addCommsReply(_("mission-comms","Threaten to destroy them unless they give up the plans."),function()
+											setCommsMessage(_("mission-comms","They'd call your bluff. We can't get the plans if the station has been destroyed."))
 											addCommsReply(_("Back"), commsStation)
 										end)
-										addCommsReply(_("station-comms","Sneak aboard the station and steal the plans."),function()
-											setCommsMessage(_("station-comms","They would not let you dock. Even if you could force your way onto the station, standard protocol is to wipe the databanks. However, we might be able to install a powerful cyber system on your ship. You'd have to get close and stay close for it to work."))
-											addCommsReply(_("station-comms","That sounds better than nothing. Let's try it"),function()
-												setCommsMessage(_("station-comms","You'd have to get within 2.5 units and stay there for at least 47 seconds for the system to infiltrate and extract the plans."))
-												addCommsReply(_("station-comms","Got it. Please install it quickly"),function()
+										addCommsReply(_("mission-comms","Sneak aboard the station and steal the plans."),function()
+											setCommsMessage(_("mission-comms","They would not let you dock. Even if you could force your way onto the station, standard protocol is to wipe the databanks. However, we might be able to install a powerful cyber system on your ship. You'd have to get close and stay close for it to work."))
+											addCommsReply(_("mission-comms","That sounds better than nothing. Let's try it"),function()
+												setCommsMessage(_("mission-comms","You'd have to get within 2.5 units and stay there for at least 47 seconds for the system to infiltrate and extract the plans."))
+												addCommsReply(_("mission-comms","Got it. Please install it quickly"),function()
 													comms_source.plan_extractor = "installed"
-													setCommsMessage(_("station-comms","We installed the cyber system. Your engineer will see an activation button when you get in range."))
+													setCommsMessage(_("mission-comms","We installed the cyber system. Your engineer will see an activation button when you get in range."))
 													addCommsReply(_("Back"), commsStation)
 												end)
 												addCommsReply(_("Back"), commsStation)
 											end)
 											addCommsReply(_("Back"), commsStation)
 										end)
-										addCommsReply(_("station-comms","Check with other stations for the plans."),function()
-											setCommsMessage(_("station-comms","Those plans are highly classified by the Kraylor. We've been trying to talk to anyone that's worked on it outside of Kraylor controlled groups, but that information is just not available anywhere but within Kraylor controlled space."))
+										addCommsReply(_("mission-comms","Check with other stations for the plans."),function()
+											setCommsMessage(_("mission-comms","Those plans are highly classified by the Kraylor. We've been trying to talk to anyone that's worked on it outside of Kraylor controlled groups, but that information is just not available anywhere but within Kraylor controlled space."))
 											addCommsReply(_("Back"), commsStation)
 										end)
-										addCommsReply(string.format(_("station-comms","Deep scan %s ourselves to determine a weakness"),devourer:getCallSign()),function()
-											setCommsMessage(string.format(_("station-comms","%s has very strong shields. They prevent detailed analysis of ship functions. Even if you got some information, by the time you determined a weakness, the planets in this area will all have been destroyed."),devourer:getCallSign()))
+										addCommsReply(string.format(_("mission-comms","Deep scan %s ourselves to determine a weakness"),devourer:getCallSign()),function()
+											setCommsMessage(string.format(_("mission-comms","%s has very strong shields. They prevent detailed analysis of ship functions. Even if you got some information, by the time you determined a weakness, the planets in this area will all have been destroyed."),devourer:getCallSign()))
 											addCommsReply(_("Back"), commsStation)
 										end)
 										addCommsReply(_("Back"), commsStation)
@@ -2621,7 +2621,7 @@ function handleDockedState()
 									addCommsReply(_("Back"), commsStation)
 								end)
 							else
-								setCommsMessage(_("station-comms","All the Kraylor stations in the area have been destroyed. Too bad."))
+								setCommsMessage(_("mission-comms","All the Kraylor stations in the area have been destroyed. Too bad."))
 							end
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -3290,25 +3290,25 @@ function handleUndockedState()
  	addCommsReply(_("station-comms", "I need information"), function()
 		setCommsMessage(_("station-comms", "What kind of information do you need?"))
 		if comms_target:isFriendly(comms_source) then
-			addCommsReply(_("station-comms","Locate planet devourer"),function()
-				local output_message = string.format(_("station-comms","%s is located in sector %s."),devourer:getCallSign(),devourer:getSectorName())
+			addCommsReply(_("mission-comms","Locate planet devourer"),function()
+				local output_message = string.format(_("mission-comms","%s is located in sector %s."),devourer:getCallSign(),devourer:getSectorName())
 				if devourer.planet_target ~= nil and devourer.planet_target:isValid() then
-					output_message = string.format(_("station-comms","%s We project that %s plans to destroy %s in sector %s"),output_message,devourer:getCallSign(),devourer.planet_target:getCallSign(),devourer.planet_target:getSectorName())
+					output_message = string.format(_("mission-comms","%s We project that %s plans to destroy %s in sector %s"),output_message,devourer:getCallSign(),devourer.planet_target:getCallSign(),devourer.planet_target:getSectorName())
 				end
 				setCommsMessage(output_message)
 				addCommsReply(_("Back"), commsStation)
 			end)
 			if approached_devourer then
 				if comms_source.plan_extractor == nil or comms_source.plan_extractor ~= "extracted" then
-					addCommsReply(string.format(_("station-comms","How do we destroy %s?"),devourer:getCallSign()),function()
-						setCommsMessage(_("station-comms","What a terrible thing to contemplate, much less say out loud. Seriously, if you want to discuss such things, you should dock first so that the Kraylor cannot intercept the transmission no matter how good the encryption protocols."))
+					addCommsReply(string.format(_("mission-comms","How do we destroy %s?"),devourer:getCallSign()),function()
+						setCommsMessage(_("mission-comms","What a terrible thing to contemplate, much less say out loud. Seriously, if you want to discuss such things, you should dock first so that the Kraylor cannot intercept the transmission no matter how good the encryption protocols."))
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end	
 			if comms_source.plan_extractor == "extracted" then
-				addCommsReply(_("station-comms","We got the plans. Now what?"),function()
-					setCommsMessage(_("station-comms","Bring them to a friendly station for analysis. Subspace communications bandwidth prevent transmission and decryption without Kraylor destructive interference. We've started analysis based on the gestalt, but need the physical plans to complete it and provide an exploitable weakness."))
+				addCommsReply(_("mission-comms","We got the plans. Now what?"),function()
+					setCommsMessage(_("mission-comms","Bring them to a friendly station for analysis. Subspace communications bandwidth prevent transmission and decryption without Kraylor destructive interference. We've started analysis based on the gestalt, but need the physical plans to complete it and provide an exploitable weakness."))
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
@@ -3445,7 +3445,7 @@ function handleUndockedState()
 				addCommsReply(_("trade-comms", "What goods do you have available for sale or trade?"), function()
 					local goodsAvailableMsg = string.format(_("trade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
 					for good, goodData in pairs(comms_target.comms_data.goods) do
-						goodsAvailableMsg = goodsAvailableMsg .. string.format("\n   %14s: %2i, %3i",good,goodData["quantity"],goodData["cost"])
+						goodsAvailableMsg = goodsAvailableMsg .. string.format(_("trade-comms", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
 					end
 					setCommsMessage(goodsAvailableMsg)
 					addCommsReply(_("Back"), commsStation)
@@ -3610,7 +3610,7 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,comms_source:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
+                     addCommsReply(string.format(_("stationAssist-comms", "WP %d"),n), function()
 						if comms_source:takeReputationPoints(getServiceCost("reinforcements")) then
 							ship = CpuShip():setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setCallSign(generateCallSign(nil,"Human Navy")):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
 							ship:setFactionId(comms_target:getFactionId())
@@ -3676,7 +3676,7 @@ function handleUndockedState()
     			out = out .. _("stationAssist-comms","\n\nNote: if you want to use a waypoint, you will have to back out and set one and come back.")
     		else
     			for n=1,comms_source:getWaypointCount() do
-    				addCommsReply(string.format(_("stationAssist-comms","Rendezvous at waypoint %i"),n),function()
+    				addCommsReply(string.format(_("stationAssist-comms","Rendez-vous at waypoint %i"),n),function()
     					if comms_source:takeReputationPoints(getServiceCost("servicejonque")) then
     						ship = serviceJonque(comms_target:getFaction()):setPosition(comms_target:getPosition()):setCallSign(generateCallSign(nil,comms_target:getFaction())):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
 							ship.comms_data = {
@@ -4486,7 +4486,7 @@ function checkContinuum(delta)
 						resetContinuum(p)
 					end
 				else
-					local timer_display = string.format(_("tabRelay","Disruption %i"),math.floor(p.continuum_timer))
+					local timer_display = string.format(_("-tabRelay&Operations", "Disruption %i"),math.floor(p.continuum_timer))
 					if p:hasPlayerAtPosition("Relay") then
 						p.continuum_timer_display = "continuum_timer_display"
 						p:addCustomInfo("Relay",p.continuum_timer_display,timer_display,1)
@@ -4525,7 +4525,7 @@ function neutralComms(comms_data)
 			for good, goodData in pairs(comms_data.goods) do
 				if goodData.quantity > 0 then
 					if goodCount > 0 then
-						cargoMsg = cargoMsg .. ", " .. good
+						cargoMsg = cargoMsg .. _("trade-comms",", ") .. good
 					else
 						cargoMsg = cargoMsg .. good
 					end
@@ -5457,9 +5457,9 @@ end
 --	Update loop related functions
 function updatePlayerTubeSizeBanner(p)
 	if p.tube_size ~= nil then
-		local tube_size_banner = string.format(_("tabWeapons","%s tubes: %s"),p:getCallSign(),p.tube_size)
+		local tube_size_banner = string.format(_("-tabWeapons&Tactical","%s tubes: %s"),p:getCallSign(),p.tube_size)
 		if #p.tube_size == 1 then
-			tube_size_banner = string.format(_("tabWeapons","%s tube: %s"),p:getCallSign(),p.tube_size)
+			tube_size_banner = string.format(_("-tabWeapons&Tactical","%s tube: %s"),p:getCallSign(),p.tube_size)
 		end
 		p.tube_sizes_wea = "tube_sizes_wea"
 		p:addCustomInfo("Weapons",p.tube_sizes_wea,tube_size_banner,5)
@@ -5518,7 +5518,7 @@ function devourPlanets()
 				devourer:orderFlyTowards(px,py)
 			end
 		else
-			globalMessage(_("msgMainscreen","All the planets have been destroyed"))
+			globalMessage(_("msgMainscreen", "All the planets have been destroyed"))
 			victory("Kraylor")
 		end
 	else
@@ -5704,39 +5704,39 @@ function stealPlans(p)
 						p:removeCustom(p.extract_info_epl)
 						p:removeCustom(p.extract_info_hlm)
 						p.plans_extracted_msg_eng = "plans_extracted_msg_eng"
-						p:addCustomMessage("Engineering",p.plans_extracted_msg_eng,string.format("The technical readouts for %s have been extracted from the databanks on Kraylor station %s",devourer:getCallSign(),station_kraylor:getCallSign()))
+						p:addCustomMessage("Engineering",p.plans_extracted_msg_eng,string.format(_("mission-msgEngineer", "The technical readouts for %s have been extracted from the databanks on Kraylor station %s"),devourer:getCallSign(),station_kraylor:getCallSign()))
 						p.plans_extracted_msg_epl = "plans_extracted_msg_epl"
-						p:addCustomMessage("Engineering+",p.plans_extracted_msg_epl,string.format("The technical readouts for %s have been extracted from the databanks on Kraylor station %s",devourer:getCallSign(),station_kraylor:getCallSign()))
+						p:addCustomMessage("Engineering+",p.plans_extracted_msg_epl,string.format(_("mission-msgEngineer+", "The technical readouts for %s have been extracted from the databanks on Kraylor station %s"),devourer:getCallSign(),station_kraylor:getCallSign()))
 					else
-						p:addCustomInfo("Engineering",p.extract_info_eng,string.format("Extract timer:%i",math.floor(p.extract_time - getScenarioTime())),30)
-						p:addCustomInfo("Engineering+",p.extract_info_epl,string.format("Extract timer:%i",math.floor(p.extract_time - getScenarioTime())),30)
-						p:addCustomInfo("Helms",p.extract_info_hlm,string.format("Extract timer:%i",math.floor(p.extract_time - getScenarioTime())),30)
+						p:addCustomInfo("Engineering",p.extract_info_eng,string.format(_("mission-tabEngineer", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
+						p:addCustomInfo("Engineering+",p.extract_info_epl,string.format(_("mission-tabEngineer+", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
+						p:addCustomInfo("Helms",p.extract_info_hlm,string.format(_("mission-tabHelms", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
 					end
 				else
 					if p.extract_button_eng == nil then
 						p.extract_button_eng = "extract_button_eng"
-						p:addCustomButton("Engineering",p.extract_button_eng,"Extract Plans",function()
+						p:addCustomButton("Engineering",p.extract_button_eng,_("mission-buttonEngineer", "Extract Plans"),function()
 							p:removeCustom(p.extract_button_eng)
 							p:removeCustom(p.extract_button_epl)
 							p.extract_time = getScenarioTime() + 47
 							p.extract_info_eng = "extract_info_eng"
-							p:addCustomInfo("Engineering",p.extract_info_eng,string.format("Extract timer:%i",math.floor(p.extract_time - getScenarioTime())),30)
+							p:addCustomInfo("Engineering",p.extract_info_eng,string.format(_("mission-tabEngineer", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
 							p.extract_info_epl = "extract_info_epl"
-							p:addCustomInfo("Engineering+",p.extract_info_epl,string.format("Extract timer:%i",math.floor(p.extract_time - getScenarioTime())),30)
+							p:addCustomInfo("Engineering+",p.extract_info_epl,string.format(_("mission-tabEngineer+", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
 							p.extract_info_hlm = "extract_info_hlm"
-							p:addCustomInfo("Helms",p.extract_info_hlm,string.format("Extract timer:%i",math.floor(p.extract_time - getScenarioTime())),30)
+							p:addCustomInfo("Helms",p.extract_info_hlm,string.format(_("mission-tabHelms", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
 						end,29)
 					end
 					if p.extract_button_epl == nil then
 						p.extract_button_epl = "extract_button_epl"
-						p:addCustomButton("Engineering+",p.extract_button_epl,"Extract Plans",function()
+						p:addCustomButton("Engineering+",p.extract_button_epl,_("mission-buttonEngineer+", "Extract Plans"),function()
 							p:removeCustom(p.extract_button_epl)
 							p:removeCustom(p.extract_button_eng)
 							p.extract_time = getScenarioTime() + 47
 							p.extract_info_eng = "extract_info_eng"
-							p:addCustomInfo("Engineering",p.extract_info_eng,string.format("Extract timer:%i",math.floor(p.extract_time - getScenarioTime())),30)
+							p:addCustomInfo("Engineering",p.extract_info_eng,string.format(_("mission-tabEngineer", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
 							p.extract_info_epl = "extract_info_epl"
-							p:addCustomInfo("Engineering+",p.extract_info_epl,string.format("Extract timer:%i",math.floor(p.extract_time - getScenarioTime())),30)
+							p:addCustomInfo("Engineering+",p.extract_info_epl,string.format(_("mission-tabEngineer+", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
 						end,29)
 					end
 				end
@@ -5767,7 +5767,7 @@ function deployVirus(p)
 		if p.devourer_nerfed_eng == nil and p.devourer_nerfed_epl == nil then
 			if distance(p,devourer) < 3000 then
 				p.deploy_virus_eng = "deploy_virus_eng"
-				p:addCustomButton("Engineering",p.deploy_virus_eng,"Upload Virus",function()
+				p:addCustomButton("Engineering",p.deploy_virus_eng,_("mission-buttonEngineer", "Upload Virus"),function()
 					p:removeCustom(p.deploy_virus_eng)
 					p:removeCustom(p.deploy_virus_epl)
 					nerfDevourer()
@@ -5776,15 +5776,15 @@ function deployVirus(p)
 						p:addReputationPoints(100)
 					end
 					p.devourer_nerfed_eng = "devourer_nerfed_eng"
-					p:addCustomMessage("Engineering",p.devourer_nerfed_eng,string.format("The virus has been uploaded to %s. A portion of the Planet Devourer's beam and missile systems have entered maintenance mode.",devourer:getCallSign()))
+					p:addCustomMessage("Engineering",p.devourer_nerfed_eng,string.format(_("mission-msgEngineer", "The virus has been uploaded to %s. A portion of the Planet Devourer's beam and missile systems have entered maintenance mode."),devourer:getCallSign()))
 				end,33)
 				p.deploy_virus_epl = "deploy_virus_epl"
-				p:addCustomButton("Engineering+",p.deploy_virus_epl,"Upload Virus",function()
+				p:addCustomButton("Engineering+",p.deploy_virus_epl,_("mission-buttonEngineer+", "Upload Virus"),function()
 					p:removeCustom(p.deploy_virus_epl)
 					p:removeCustom(p.deploy_virus_eng)
 					nerfDevourer()
 					p.devourer_nerfed_epl = "devourer_nerfed_epl"
-					p:addCustomMessage("Engineering+",p.devourer_nerfed_epl,string.format("The virus has been uploaded to %s. A portion of the Planet Devourer's beam and missile systems have entered maintenance mode.",devourer:getCallSign()))
+					p:addCustomMessage("Engineering+",p.devourer_nerfed_epl,string.format(_("mission-msgEngineer+", "The virus has been uploaded to %s. A portion of the Planet Devourer's beam and missile systems have entered maintenance mode."),devourer:getCallSign()))
 				end,33)
 			else
 				if p.deploy_virus_eng ~= nil then
@@ -5899,7 +5899,7 @@ function explodeDevourer()
 						planet_count = planet_count + 1
 					end
 				end
-				globalMessage(string.format("Planet Devourer destroyed. %i out of 5 planets saved.",planet_count))
+				globalMessage(string.format(_("msgMainscreen", "Planet Devourer destroyed. %i out of 5 planets saved."),planet_count))
 				victory("Human Navy")
 			end
 		end
@@ -6207,14 +6207,14 @@ function cargoInventory(delta)
 				if p:hasPlayerAtPosition("Relay") then
 					if p.inventoryButton == nil then
 						local tbi = "inventory" .. p:getCallSign()
-						p:addCustomButton("Relay",tbi,_("tabRelay","Inventory"),function() playerShipCargoInventory(p) end,2)
+						p:addCustomButton("Relay",tbi,_("inventory-buttonRelay", "Inventory"),function() playerShipCargoInventory(p) end,2)
 						p.inventoryButton = true
 					end
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					if p.inventoryButton == nil then
 						local tbi = "inventoryOp" .. p:getCallSign()
-						p:addCustomButton("Operations",tbi,_("tabRelay","Inventory"),function() playerShipCargoInventory(p) end,2)
+						p:addCustomButton("Operations",tbi,_("inventory-buttonOperations", "Inventory"),function() playerShipCargoInventory(p) end,2)
 						p.inventoryButton = true
 					end
 				end
@@ -6249,7 +6249,7 @@ function updateInner(delta)
 		return
 	end
 	if not isPerSystemDamageUsed() then
-		reason = _("msgMainscreen","Scenario needs the 'Per-system damage' option under 'Extra settings'")
+		reason = _("msgMainscreen", "Scenario needs the 'Per-system damage' option under 'Extra settings'")
 		globalMessage(reason)
 		setBanner(reason)
 		victory("Kraylor")
