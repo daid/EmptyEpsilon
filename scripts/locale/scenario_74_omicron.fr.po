@@ -712,7 +712,7 @@ msgstr "Enregistrement du capteur : station %s %s en secteur %s "
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s, %s station %s in %s"
-msgstr "%s, %s station %s en secteur %s "
+msgstr "%s, station %s %s en secteur %s "
 
 #: scripts/scenario_74_omicron.lua:2415
 #, lua-format
@@ -3162,7 +3162,7 @@ msgid "In what sector is %s located?"
 msgstr "Dans quel secteur se situe %s ?"
 
 #: scripts/scenario_74_omicron.lua:5027 scripts/scenario_74_omicron.lua:5030
-#: scripts/scenario_74_omicron.lua:5037
+#: scripts/scenario_74_omicron.lua:5034 scripts/scenario_74_omicron.lua:5037
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "%s is located in sector %s."
@@ -3551,7 +3551,7 @@ msgstr "Défendez le marqueur %i."
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %i."
-msgstr "Nous partons pour défendre le marqueur %i."
+msgstr "Nous partons immédiatement défendre le marqueur %i."
 
 #: scripts/scenario_74_omicron.lua:6057
 msgctxt "shipAssist-comms"
@@ -3909,6 +3909,12 @@ msgstr "Inventaire"
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
 msgstr "%s Cargaison actuelle :"
+
+#: scripts/scenario_74_omicron.lua:7017
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "     %s: %i"
+msgstr "     %s : %i"
 
 #: scripts/scenario_74_omicron.lua:7021
 msgctxt "inventory-shipLog"

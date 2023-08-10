@@ -1,5 +1,5 @@
 -- Name: Planet Devourer
--- Description: Stop the planet devourer before all the planets are gone
+-- Description: Stop the Planet Devourer before all the planets are gone
 --- 
 --- Written for EE games on May 4th, 2023 = "May the 4th be with you"
 ---
@@ -2542,7 +2542,7 @@ function handleDockedState()
 			addCommsReply(_("Back"), commsStation)
 		end)
 		if comms_target:isFriendly(comms_source) then
-			addCommsReply(_("mission-comms", "Locate planet devourer"),function()
+			addCommsReply(_("mission-comms", "Locate Planet Devourer"),function()
 				local output_message = string.format(_("mission-comms", "%s is located in sector %s."),devourer:getCallSign(),devourer:getSectorName())
 				if devourer.planet_target ~= nil and devourer.planet_target:isValid() then
 					output_message = string.format(_("mission-comms", "%s We project that %s plans to destroy %s in sector %s"),output_message,devourer:getCallSign(),devourer.planet_target:getCallSign(),devourer.planet_target:getSectorName())
@@ -2573,8 +2573,8 @@ function handleDockedState()
 							addCommsReply(_("Back"), commsStation)
 						end)
 					else
-						setCommsMessage(_("mission-comms", "It's a monster. If we had the technical readouts for the planet devourer, we might find a weakness, and exploit it."))
-						addCommsReply(_("mission-comms", "Where can we get the plans for the planet devourer?"),function()
+						setCommsMessage(_("mission-comms", "It's a monster. If we had the technical readouts for the Planet Devourer, we might find a weakness, and exploit it."))
+						addCommsReply(_("mission-comms", "Where can we get the plans for the Planet Devourer?"),function()
 							if station_kraylor == nil then
 								for _, station in ipairs(station_list) do
 									if station ~= nil and station:isValid() then
@@ -3290,7 +3290,7 @@ function handleUndockedState()
  	addCommsReply(_("station-comms", "I need information"), function()
 		setCommsMessage(_("station-comms", "What kind of information do you need?"))
 		if comms_target:isFriendly(comms_source) then
-			addCommsReply(_("mission-comms", "Locate planet devourer"),function()
+			addCommsReply(_("mission-comms", "Locate Planet Devourer"),function()
 				local output_message = string.format(_("mission-comms", "%s is located in sector %s."),devourer:getCallSign(),devourer:getSectorName())
 				if devourer.planet_target ~= nil and devourer.planet_target:isValid() then
 					output_message = string.format(_("mission-comms", "%s We project that %s plans to destroy %s in sector %s"),output_message,devourer:getCallSign(),devourer.planet_target:getCallSign(),devourer.planet_target:getSectorName())
@@ -3315,7 +3315,7 @@ function handleUndockedState()
 			addCommsReply(_("orders-comms", "What are my current orders?"), function()
 				setOptionalOrders()
 				setSecondaryOrders()
-				primary_orders = _("orders-comms", "Save the planets from destruction.")
+				primary_orders = _("orders-comms", "Save the planets from destruction")
 				ordMsg = primary_orders .. "\n" .. secondary_orders .. optional_orders
 				if playWithTimeLimit then
 					ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))

@@ -5031,7 +5031,7 @@ function medicalBaseLocationAssistanceComms()
 					end)
 				else
 					addCommsReply(string.format(_("mission3th-comms","In what sector is %s located?"),station_regional_hq:getCallSign()), function()
-						setCommsMessage(string.format("%s is located in sector %s.",station_regional_hq:getCallSign(),station_regional_hq:getSectorName()))
+						setCommsMessage(string.format(_("mission3th-comms","%s is located in sector %s."),station_regional_hq:getCallSign(),station_regional_hq:getSectorName()))
 					end)
 					addCommsReply(string.format(_("mission3th-comms","In what sector is %s located?"),station_medical_research:getCallSign()), function()
 						setCommsMessage(string.format(_("mission3th-comms","%s is located in sector %s."),station_medical_research:getCallSign(),station_medical_research:getSectorName()))
@@ -7009,18 +7009,18 @@ function cargoInventory(delta)
 	end
 end
 function playerShipCargoInventory(p)
-	p:addToShipLog(string.format(_("inventory-shipLog","%s Current cargo:"),p:getCallSign()),"Yellow")
+	p:addToShipLog(string.format(_("inventory-shipLog", "%s Current cargo:"),p:getCallSign()),"Yellow")
 	local goodCount = 0
 	if p.goods ~= nil then
 		for good, goodQuantity in pairs(p.goods) do
 			goodCount = goodCount + 1
-			p:addToShipLog(string.format("     %s: %i",good,goodQuantity),"Yellow")
+			p:addToShipLog(string.format(_("inventory-shipLog", "     %s: %i"),good,goodQuantity),"Yellow")
 		end
 	end
 	if goodCount < 1 then
 		p:addToShipLog(_("inventory-shipLog","     Empty"),"Yellow")
 	end
-	p:addToShipLog(string.format(_("inventory-shipLog","Available space: %i"),p.cargo),"Yellow")
+	p:addToShipLog(string.format(_("inventory-shipLog", "Available space: %i"),p.cargo),"Yellow")
 end
 --		Generate call sign functions
 function generateCallSign(prefix,faction)
