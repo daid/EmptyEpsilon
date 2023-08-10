@@ -2075,9 +2075,9 @@ function sensorJammerPickupProcess(self,retriever)
 	if not self:isScannedBy(retriever) then
 		retriever:setCanScan(false)
 		retriever.scanner_dead = "scanner_dead"
-		retriever:addCustomMessage("Science",retriever.scanner_dead,_("damage-msgScience","The unscanned artifact we just picked up has fried our scanners"))
+		retriever:addCustomMessage("Science",retriever.scanner_dead,_("damage-msgScience", "The unscanned artifact we just picked up has fried our scanners"))
 		retriever.scanner_dead_ops = "scanner_dead_ops"
-		retriever:addCustomMessage("Operations",retriever.scanner_dead_ops,_("damage-msgOperations","The unscanned artifact we just picked up has fried our scanners"))
+		retriever:addCustomMessage("Operations",retriever.scanner_dead_ops,_("damage-msgOperations", "The unscanned artifact we just picked up has fried our scanners"))
 	end
 end
 function sensorJammer(x,y)
@@ -2085,8 +2085,8 @@ function sensorJammer(x,y)
 	artifact_number = artifact_number + math.random(1,4)
 	local random_suffix = string.char(math.random(65,90))
 	local jammer_call_sign = string.format("SJ%i%s",artifact_number,random_suffix)
-	local scanned_description = string.format(_("scienceDescription-artifact","Source of emanations interfering with long range sensors. Range:%.1fu Impact:%.1fu"),sensor_jammer_range/1000,sensor_jammer_impact/1000)
-	local sensor_jammer = Artifact():setPosition(x,y):setScanningParameters(sensor_jammer_scan_complexity,sensor_jammer_scan_depth):setRadarSignatureInfo(.2,.4,.1):setModel("SensorBuoyMKIII"):setDescriptions(_("scienceDescription-artifact","Source of unusual emanations"),scanned_description):setCallSign(jammer_call_sign)
+	local scanned_description = string.format(_("scienceDescription-artifact", "Source of emanations interfering with long range sensors. Range:%.1fu Impact:%.1fu"),sensor_jammer_range/1000,sensor_jammer_impact/1000)
+	local sensor_jammer = Artifact():setPosition(x,y):setScanningParameters(sensor_jammer_scan_complexity,sensor_jammer_scan_depth):setRadarSignatureInfo(.2,.4,.1):setModel("SensorBuoyMKIII"):setDescriptions(_("scienceDescription-artifact", "Source of unusual emanations"),scanned_description):setCallSign(jammer_call_sign)
 	if sj_diagnostic then
 		print(jammer_call_sign,sensor_jammer:getSectorName(),string.format("Range:%.1fu Impact:%.1fu",sensor_jammer_range/1000,sensor_jammer_impact/1000),"complexity:",sensor_jammer_scan_complexity,"depth:",sensor_jammer_scan_depth)
 	end
@@ -2230,7 +2230,7 @@ function commsStation()
         return false
     end
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage(_("station-comms","We are under attack! No time for chatting!"))
+        setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"))
         return true
     end
     if not comms_source:isDocked(comms_target) then
@@ -2243,21 +2243,21 @@ end
 function handleDockedState()
 	if comms_source:isFriendly(comms_target) then
 		if comms_target.comms_data.friendlyness > 66 then
-			oMsg = string.format(_("station-comms","Greetings %s!\nHow may we help you today?"),comms_source:getCallSign())
+			oMsg = string.format(_("station-comms", "Greetings %s!\nHow may we help you today?"),comms_source:getCallSign())
 		elseif comms_target.comms_data.friendlyness > 33 then
-			oMsg = _("station-comms","Good day, officer!\nWhat can we do for you today?")
+			oMsg = _("station-comms", "Good day, officer!\nWhat can we do for you today?")
 		else
-			oMsg = _("station-comms","Hello, may I help you?")
+			oMsg = _("station-comms", "Hello, may I help you?")
 		end
 	else
-		oMsg = _("station-comms","Welcome to our lovely station.")
+		oMsg = _("station-comms", "Welcome to our lovely station.")
 	end
 	if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. _("station-comms","\nForgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
+		oMsg = oMsg .. _("station-comms", "\nForgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
 	end
 	setCommsMessage(oMsg)
-	addCommsReply(_("station-comms","Station services (restock ordnance, repairs)"),function()
-		setCommsMessage(_("station-comms","What station service are you interested in?"))
+	addCommsReply(_("station-comms", "Station services (restock ordnance, repairs)"),function()
+		setCommsMessage(_("station-comms", "What station service are you interested in?"))
 		local missilePresence = 0
 		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 		for _, missile_type in ipairs(missile_types) do
@@ -2353,7 +2353,7 @@ function handleDockedState()
 					}
 					comms_target.probe_fail_reason = reason_list[math.random(1,#reason_list)]
 				end
-				service_status = string.format("%s\n%s",service_status,comms_target.probe_fail_reason)
+				service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.probe_fail_reason)
 			end
 			if comms_target:getRepairDocked() then
 				service_status = string.format(_("stationServices-comms", "%s\nShip hull repair."),service_status)
@@ -2366,7 +2366,7 @@ function handleDockedState()
 					}
 					comms_target.repair_fail_reason = reason_list[math.random(1,#reason_list)]
 				end
-				service_status = string.format("%s\n%s",service_status,comms_target.repair_fail_reason)
+				service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.repair_fail_reason)
 			end
 			if comms_target:getSharesEnergyWithDocked() then
 				service_status = string.format(_("stationServices-comms", "%s\nRecharge ship energy stores."),service_status)
@@ -2379,7 +2379,7 @@ function handleDockedState()
 					}
 					comms_target.energy_fail_reason = reason_list[math.random(1,#reason_list)]
 				end
-				service_status = string.format("%s\n%s",service_status,comms_target.energy_fail_reason)
+				service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.energy_fail_reason)
 			end
 			if comms_target.comms_data.jump_overcharge then
 				service_status = string.format(_("stationServices-comms", "%s\nMay overcharge jump drive"),service_status)
@@ -2443,10 +2443,10 @@ function handleDockedState()
 		end
 		if offer_repair then
 			addCommsReply(_("stationServices-comms", "Repair ship system"),function()
-				setCommsMessage(string.format(_("stationServices-comms","What system would you like repaired?\n\nReputation: %i"),math.floor(comms_source:getReputationPoints())))
+				setCommsMessage(string.format(_("stationServices-comms", "What system would you like repaired?\n\nReputation: %i"),math.floor(comms_source:getReputationPoints())))
 				if comms_target.comms_data.probe_launch_repair then
 					if not comms_source:getCanLaunchProbe() then
-						addCommsReply(string.format(_("stationServices-comms","Repair probe launch system (%s Rep)"),comms_target.comms_data.service_cost.probe_launch_repair),function()
+						addCommsReply(string.format(_("stationServices-comms", "Repair probe launch system (%s Rep)"),comms_target.comms_data.service_cost.probe_launch_repair),function()
 							if not comms_source:isDocked(comms_target) then 
 								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
@@ -2463,7 +2463,7 @@ function handleDockedState()
 				end
 				if comms_target.comms_data.hack_repair then
 					if not comms_source:getCanHack() then
-						addCommsReply(string.format(_("stationServices-comms","Repair hacking system (%s Rep)"),comms_target.comms_data.service_cost.hack_repair),function()
+						addCommsReply(string.format(_("stationServices-comms", "Repair hacking system (%s Rep)"),comms_target.comms_data.service_cost.hack_repair),function()
 							if not comms_source:isDocked(comms_target) then 
 								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
@@ -2480,7 +2480,7 @@ function handleDockedState()
 				end
 				if comms_target.comms_data.scan_repair then
 					if not comms_source:getCanScan() then
-						addCommsReply(string.format(_("stationServices-comms","Repair scanning system (%s Rep)"),comms_target.comms_data.service_cost.scan_repair),function()
+						addCommsReply(string.format(_("stationServices-comms", "Repair scanning system (%s Rep)"),comms_target.comms_data.service_cost.scan_repair),function()
 							if not comms_source:isDocked(comms_target) then 
 								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
@@ -2498,7 +2498,7 @@ function handleDockedState()
 				if comms_target.comms_data.combat_maneuver_repair then
 					if not comms_source:getCanCombatManeuver() then
 						if comms_source.combat_maneuver_capable then
-							addCommsReply(string.format(_("stationServices-comms","Repair combat maneuver (%s Rep)"),comms_target.comms_data.service_cost.combat_maneuver_repair),function()
+							addCommsReply(string.format(_("stationServices-comms", "Repair combat maneuver (%s Rep)"),comms_target.comms_data.service_cost.combat_maneuver_repair),function()
 								if not comms_source:isDocked(comms_target) then 
 									setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 									return
@@ -2516,7 +2516,7 @@ function handleDockedState()
 				end
 				if comms_target.comms_data.self_destruct_repair then
 					if not comms_source:getCanSelfDestruct() then
-						addCommsReply(string.format(_("stationServices-comms","Repair self destruct system (%s Rep)"),comms_target.comms_data.service_cost.self_destruct_repair),function()
+						addCommsReply(string.format(_("stationServices-comms", "Repair self destruct system (%s Rep)"),comms_target.comms_data.service_cost.self_destruct_repair),function()
 							if not comms_source:isDocked(comms_target) then 
 								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
 								return
@@ -2542,39 +2542,39 @@ function handleDockedState()
 			addCommsReply(_("Back"), commsStation)
 		end)
 		if comms_target:isFriendly(comms_source) then
-			addCommsReply(_("mission-comms","Locate planet devourer"),function()
-				local output_message = string.format(_("mission-comms","%s is located in sector %s."),devourer:getCallSign(),devourer:getSectorName())
+			addCommsReply(_("mission-comms", "Locate planet devourer"),function()
+				local output_message = string.format(_("mission-comms", "%s is located in sector %s."),devourer:getCallSign(),devourer:getSectorName())
 				if devourer.planet_target ~= nil and devourer.planet_target:isValid() then
-					output_message = string.format(_("mission-comms","%s We project that %s plans to destroy %s in sector %s"),output_message,devourer:getCallSign(),devourer.planet_target:getCallSign(),devourer.planet_target:getSectorName())
+					output_message = string.format(_("mission-comms", "%s We project that %s plans to destroy %s in sector %s"),output_message,devourer:getCallSign(),devourer.planet_target:getCallSign(),devourer.planet_target:getSectorName())
 				end
 				setCommsMessage(output_message)
 				addCommsReply(_("Back"), commsStation)
 			end)
 			if approached_devourer then
-				addCommsReply(string.format(_("mission-comms","How do we destroy %s?"),devourer:getCallSign()),function()
+				addCommsReply(string.format(_("mission-comms", "How do we destroy %s?"),devourer:getCallSign()),function()
 					if comms_source.plan_extractor ~= nil and comms_source.plan_extractor == "extracted" then
-						setCommsMessage(_("mission-comms","Were you able to get the plans?"))
-						addCommsReply(_("mission-comms","We got the plans. Now what?"),function()
-							local beam_nerf = _("mission-comms","Four")
-							local missile_nerf = _("mission-comms","three")
+						setCommsMessage(_("mission-comms", "Were you able to get the plans?"))
+						addCommsReply(_("mission-comms", "We got the plans. Now what?"),function()
+							local beam_nerf = _("mission-comms", "Four")
+							local missile_nerf = _("mission-comms", "three")
 							if difficulty == 1 then
-								beam_nerf = _("mission-comms","Six")
-								missile_nerf = _("mission-comms","six")
+								beam_nerf = _("mission-comms", "Six")
+								missile_nerf = _("mission-comms", "six")
 							elseif difficulty < 1 then
-								bem_nerf = _("mission-comms","Eight")
-								missile_nerf = _("mission-comms","nine")
+								bem_nerf = _("mission-comms", "Eight")
+								missile_nerf = _("mission-comms", "nine")
 							end
-							setCommsMessage(string.format(_("mission-comms","Good job bringing in those plans. Our analysis shows a weakness in the weapons control system of the %s. If we can upload a digital virus through a small thermal exhaust port just below the main port, we should be able to create a virtual canyon between the weapons systems by forcing them into maintenance mode. %s out of sixteen beam emplacements will be reduced in range from 3.2 units to 1 unit and their cycle time will be increased from 3 seconds to 30 seconds. Similarly, %s out of fifteen weapons tubes will have their load times increased from 3 seconds to 3 minutes. This should make it easier for you to deliver destructuve beam and missile fire to %s"),devourer:getCallSign(),beam_nerf,missile_nerf,devourer:getCallSign()))
-							addCommsReply(_("mission-comms","How do we upload this virus?"),function()
+							setCommsMessage(string.format(_("mission-comms", "Good job bringing in those plans. Our analysis shows a weakness in the weapons control system of the %s. If we can upload a digital virus through a small thermal exhaust port just below the main port, we should be able to create a virtual canyon between the weapons systems by forcing them into maintenance mode. %s out of sixteen beam emplacements will be reduced in range from 3.2 units to 1 unit and their cycle time will be increased from 3 seconds to 30 seconds. Similarly, %s out of fifteen weapons tubes will have their load times increased from 3 seconds to 3 minutes. This should make it easier for you to deliver destructuve beam and missile fire to %s"),devourer:getCallSign(),beam_nerf,missile_nerf,devourer:getCallSign()))
+							addCommsReply(_("mission-comms", "How do we upload this virus?"),function()
 								comms_source.virus_upload = "enabled"
-								setCommsMessage(string.format(_("mission-comms","The approach will not be easy. You are required to maneuver straight down this trench and skim the surface to this point. The target area is only two meters wide... ...uh... ...sorry, I'm reading from the wrong script. Simply approach within 3 units of %s and have your engineer activate the upload using the button that should appear on the engineering console. Remember that the beam range on the %s is 3.2 units, so you'll have to take a couple of hits to deliver the virus. Your engineer will want to boost the shields for better protection. You'll probably also want your weapons officer to calibrate your shields, too."),devourer:getCallSign(),devourer:getCallSign()))
+								setCommsMessage(string.format(_("mission-comms", "The approach will not be easy. You are required to maneuver straight down this trench and skim the surface to this point. The target area is only two meters wide... ...uh... ...sorry, I'm reading from the wrong script. Simply approach within 3 units of %s and have your engineer activate the upload using the button that should appear on the engineering console. Remember that the beam range on the %s is 3.2 units, so you'll have to take a couple of hits to deliver the virus. Your engineer will want to boost the shields for better protection. You'll probably also want your weapons officer to calibrate your shields, too."),devourer:getCallSign(),devourer:getCallSign()))
 								addCommsReply(_("Back"), commsStation)
 							end)
 							addCommsReply(_("Back"), commsStation)
 						end)
 					else
-						setCommsMessage(_("mission-comms","It's a monster. If we had the technical readouts for the planet devourer, we might find a weakness, and exploit it."))
-						addCommsReply(_("mission-comms","Where can we get the plans for the planet devourer?"),function()
+						setCommsMessage(_("mission-comms", "It's a monster. If we had the technical readouts for the planet devourer, we might find a weakness, and exploit it."))
+						addCommsReply(_("mission-comms", "Where can we get the plans for the planet devourer?"),function()
 							if station_kraylor == nil then
 								for _, station in ipairs(station_list) do
 									if station ~= nil and station:isValid() then
@@ -2586,34 +2586,34 @@ function handleDockedState()
 								end
 							end
 							if station_kraylor ~= nil and station_kraylor:isValid() then
-								setCommsMessage(string.format(_("mission-comms","Kraylor station %s in sector %s probably has them. But they are likely to be heavily protected."),station_kraylor:getCallSign(),station_kraylor:getSectorName()))
-								addCommsReply(_("mission-comms","How can we get those plans?"),function()
-									setCommsMessage(_("mission-comms","You can't"))
-									addCommsReply(_("mission-comms","What? There must be something we can do"),function()
-										setCommsMessage(_("mission-comms","I can't think of anything. Do you have any ideas?"))
-										addCommsReply(_("mission-comms","Threaten to destroy them unless they give up the plans."),function()
-											setCommsMessage(_("mission-comms","They'd call your bluff. We can't get the plans if the station has been destroyed."))
+								setCommsMessage(string.format(_("mission-comms", "Kraylor station %s in sector %s probably has them. But they are likely to be heavily protected."),station_kraylor:getCallSign(),station_kraylor:getSectorName()))
+								addCommsReply(_("mission-comms", "How can we get those plans?"),function()
+									setCommsMessage(_("mission-comms", "You can't"))
+									addCommsReply(_("mission-comms", "What? There must be something we can do"),function()
+										setCommsMessage(_("mission-comms", "I can't think of anything. Do you have any ideas?"))
+										addCommsReply(_("mission-comms", "Threaten to destroy them unless they give up the plans."),function()
+											setCommsMessage(_("mission-comms", "They'd call your bluff. We can't get the plans if the station has been destroyed."))
 											addCommsReply(_("Back"), commsStation)
 										end)
-										addCommsReply(_("mission-comms","Sneak aboard the station and steal the plans."),function()
-											setCommsMessage(_("mission-comms","They would not let you dock. Even if you could force your way onto the station, standard protocol is to wipe the databanks. However, we might be able to install a powerful cyber system on your ship. You'd have to get close and stay close for it to work."))
-											addCommsReply(_("mission-comms","That sounds better than nothing. Let's try it"),function()
-												setCommsMessage(_("mission-comms","You'd have to get within 2.5 units and stay there for at least 47 seconds for the system to infiltrate and extract the plans."))
-												addCommsReply(_("mission-comms","Got it. Please install it quickly"),function()
+										addCommsReply(_("mission-comms", "Sneak aboard the station and steal the plans."),function()
+											setCommsMessage(_("mission-comms", "They would not let you dock. Even if you could force your way onto the station, standard protocol is to wipe the databanks. However, we might be able to install a powerful cyber system on your ship. You'd have to get close and stay close for it to work."))
+											addCommsReply(_("mission-comms", "That sounds better than nothing. Let's try it"),function()
+												setCommsMessage(_("mission-comms", "You'd have to get within 2.5 units and stay there for at least 47 seconds for the system to infiltrate and extract the plans."))
+												addCommsReply(_("mission-comms", "Got it. Please install it quickly"),function()
 													comms_source.plan_extractor = "installed"
-													setCommsMessage(_("mission-comms","We installed the cyber system. Your engineer will see an activation button when you get in range."))
+													setCommsMessage(_("mission-comms", "We installed the cyber system. Your engineer will see an activation button when you get in range."))
 													addCommsReply(_("Back"), commsStation)
 												end)
 												addCommsReply(_("Back"), commsStation)
 											end)
 											addCommsReply(_("Back"), commsStation)
 										end)
-										addCommsReply(_("mission-comms","Check with other stations for the plans."),function()
-											setCommsMessage(_("mission-comms","Those plans are highly classified by the Kraylor. We've been trying to talk to anyone that's worked on it outside of Kraylor controlled groups, but that information is just not available anywhere but within Kraylor controlled space."))
+										addCommsReply(_("mission-comms", "Check with other stations for the plans."),function()
+											setCommsMessage(_("mission-comms", "Those plans are highly classified by the Kraylor. We've been trying to talk to anyone that's worked on it outside of Kraylor controlled groups, but that information is just not available anywhere but within Kraylor controlled space."))
 											addCommsReply(_("Back"), commsStation)
 										end)
-										addCommsReply(string.format(_("mission-comms","Deep scan %s ourselves to determine a weakness"),devourer:getCallSign()),function()
-											setCommsMessage(string.format(_("mission-comms","%s has very strong shields. They prevent detailed analysis of ship functions. Even if you got some information, by the time you determined a weakness, the planets in this area will all have been destroyed."),devourer:getCallSign()))
+										addCommsReply(string.format(_("mission-comms", "Deep scan %s ourselves to determine a weakness"),devourer:getCallSign()),function()
+											setCommsMessage(string.format(_("mission-comms", "%s has very strong shields. They prevent detailed analysis of ship functions. Even if you got some information, by the time you determined a weakness, the planets in this area will all have been destroyed."),devourer:getCallSign()))
 											addCommsReply(_("Back"), commsStation)
 										end)
 										addCommsReply(_("Back"), commsStation)
@@ -2621,7 +2621,7 @@ function handleDockedState()
 									addCommsReply(_("Back"), commsStation)
 								end)
 							else
-								setCommsMessage(_("mission-comms","All the Kraylor stations in the area have been destroyed. Too bad."))
+								setCommsMessage(_("mission-comms", "All the Kraylor stations in the area have been destroyed. Too bad."))
 							end
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -2662,18 +2662,18 @@ function handleDockedState()
 			end)	--end station info comms reply branch
 		end
 		if comms_source:isFriendly(comms_target) then
-			addCommsReply(_("station-comms","Explain sensor jammers"),function()
-				setCommsMessage(_("station-comms","You mean those things that have a call sign that starts with SJ?"))
-				addCommsReply(_("station-comms","Yes. Why so many?"),function()
-					setCommsMessage(_("station-comms","They were made during a big technological arms race. All the factions tried to make them to hinder their enemies as they approached. Most ships have got ways around them now, but nobody has gone out to clean up the leftovers. The closest thing to clean up done by the factions is to give them all SJ call signs to make ships aware of the potential navigation hazard."))
+			addCommsReply(_("station-comms", "Explain sensor jammers"),function()
+				setCommsMessage(_("station-comms", "You mean those things that have a call sign that starts with SJ?"))
+				addCommsReply(_("station-comms", "Yes. Why so many?"),function()
+					setCommsMessage(_("station-comms", "They were made during a big technological arms race. All the factions tried to make them to hinder their enemies as they approached. Most ships have got ways around them now, but nobody has gone out to clean up the leftovers. The closest thing to clean up done by the factions is to give them all SJ call signs to make ships aware of the potential navigation hazard."))
 					addCommsReply(_("Back"), commsStation)
 				end)
-				addCommsReply(_("station-comms","Yes. What do they do?"),function()
-					setCommsMessage(_("station-comms","The sensor jammers reduce your long range sensor range. The degree and range of effectiveness varies with each one. They're also designed to be booby traps. If you don't disable the trap, they'll fry your scanners if you pick them up to neutralize them."))
+				addCommsReply(_("station-comms", "Yes. What do they do?"),function()
+					setCommsMessage(_("station-comms", "The sensor jammers reduce your long range sensor range. The degree and range of effectiveness varies with each one. They're also designed to be booby traps. If you don't disable the trap, they'll fry your scanners if you pick them up to neutralize them."))
 					addCommsReply(_("Back"), commsStation)
 				end)
-				addCommsReply(_("station-comms","Yes. How do I get rid of them?"),function()
-					setCommsMessage(_("station-comms","Just pick them up. You'll want to scan them first if you don't want your scanners fried."))
+				addCommsReply(_("station-comms", "Yes. How do I get rid of them?"),function()
+					setCommsMessage(_("station-comms", "Just pick them up. You'll want to scan them first if you don't want your scanners fried."))
 					addCommsReply(_("Back"), commsStation)
 				end)
 				addCommsReply(_("Back"), commsStation)
@@ -2681,7 +2681,7 @@ function handleDockedState()
 			addCommsReply(_("orders-comms", "What are my current orders?"), function()
 				setOptionalOrders()
 				setSecondaryOrders()
-				primary_orders = _("orders-comms","Save the planets from destruction")
+				primary_orders = _("orders-comms", "Save the planets from destruction")
 				ordMsg = primary_orders .. "\n" .. secondary_orders .. optional_orders
 				if playWithTimeLimit then
 					ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
@@ -2691,8 +2691,8 @@ function handleDockedState()
 			end)
 		end
 	end)
-	addCommsReply(_("station-comms","Resources (repair crew, coolant, goods)"),function()
-		setCommsMessage(_("station-comms","Which of the following are you interested in?"))
+	addCommsReply(_("station-comms", "Resources (repair crew, coolant, goods)"),function()
+		setCommsMessage(_("station-comms", "Which of the following are you interested in?"))
 		if comms_source:isFriendly(comms_target) then
 			getRepairCrewFromStation("friendly")
 			getCoolantFromStation("friendly")
@@ -2913,7 +2913,7 @@ function handleDockedState()
 	end)
 end	--end of handleDockedState function
 function getRepairCrewFromStation(relationship)
-	addCommsReply(_("trade-comms","Recruit repair crew member"),function()
+	addCommsReply(_("trade-comms", "Recruit repair crew member"),function()
 		if comms_target.comms_data.available_repair_crew == nil then
 			comms_target.comms_data.available_repair_crew = math.random(0,3)
 		end
@@ -2933,7 +2933,7 @@ function getRepairCrewFromStation(relationship)
 							hire_cost = math.random(45,90)
 						end
 					end
-					setCommsMessage(_("trade-comms","We have a repair crew candidate for you to consider"))
+					setCommsMessage(_("trade-comms", "We have a repair crew candidate for you to consider"))
 					addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hire_cost), function()
 						if not comms_source:isDocked(comms_target) then 
 							setCommsMessage(_("station-comms", "You need to stay docked for that action."))
@@ -2953,21 +2953,21 @@ function getRepairCrewFromStation(relationship)
 					end)
 				else	--repair crew delayed
 					local delay_reason = {
-						_("trade-comms","A possible repair recruit is awaiting final certification. They should be available in "),
-						_("trade-comms","There's one repair crew candidate completing their license application. They should be available in "),
-						_("trade-comms","One repair crew should be getting here from their medical checkout in "),
+						_("trade-comms", "A possible repair recruit is awaiting final certification. They should be available in "),
+						_("trade-comms", "There's one repair crew candidate completing their license application. They should be available in "),
+						_("trade-comms", "One repair crew should be getting here from their medical checkout in "),
 					}
 					local delay_seconds = math.random(10,30)
 					comms_target.comms_data.crew_available_delay = getScenarioTime() + delay_seconds
 					comms_target.comms_data.crew_available_delay_reason = delay_reason[math.random(1,#delay_reason)]
-					setCommsMessage(string.format(_("trade-comms","%s %i seconds"),comms_target.comms_data.crew_available_delay_reason,delay_seconds))
+					setCommsMessage(string.format(_("trade-comms", "%s %i seconds"),comms_target.comms_data.crew_available_delay_reason,delay_seconds))
 				end
 			else	--delay in progress
 				local delay_seconds = math.floor(comms_target.comms_data.crew_available_delay - getScenarioTime())
 				if delay_seconds > 1 then
-					setCommsMessage(string.format(_("trade-comms","%s %i seconds"),comms_target.comms_data.crew_available_delay_reason,delay_seconds))
+					setCommsMessage(string.format(_("trade-comms", "%s %i seconds"),comms_target.comms_data.crew_available_delay_reason,delay_seconds))
 				else
-					setCommsMessage(string.format(_("trade-comms","%s a second"),comms_target.comms_data.crew_available_delay_reason))
+					setCommsMessage(string.format(_("trade-comms", "%s a second"),comms_target.comms_data.crew_available_delay_reason))
 				end
 			end
 		else	--station does not have repair crew available
@@ -2977,30 +2977,30 @@ function getRepairCrewFromStation(relationship)
 			if getScenarioTime() > comms_target.comms_data.new_repair_crew_delay then
 				comms_target.comms_data.available_repair_crew = math.random(1,3)
 				local delay_reason = {
-					_("trade-comms","A possible repair recruit is awaiting final certification. They should be available in "),
-					_("trade-comms","There's one repair crew candidate completing their license application. They should be available in "),
-					_("trade-comms","One repair crew should be getting here from their medical checkout in "),
+					_("trade-comms", "A possible repair recruit is awaiting final certification. They should be available in "),
+					_("trade-comms", "There's one repair crew candidate completing their license application. They should be available in "),
+					_("trade-comms", "One repair crew should be getting here from their medical checkout in "),
 				}
 				local delay_seconds = math.random(10,30)
 				comms_target.comms_data.crew_available_delay = getScenarioTime() + delay_seconds
 				comms_target.comms_data.crew_available_delay_reason = delay_reason[math.random(1,#delay_reason)]
-				setCommsMessage(string.format(_("trade-comms","Several arrived on station earlier. %s %i seconds"),comms_target.comms_data.crew_available_delay_reason,delay_seconds))
+				setCommsMessage(string.format(_("trade-comms", "Several arrived on station earlier. %s %i seconds"),comms_target.comms_data.crew_available_delay_reason,delay_seconds))
 			else
 				local delay_time = math.floor(comms_target.comms_data.new_repair_crew_delay - getScenarioTime())
 				local delay_minutes = math.floor(delay_time / 60)
 				local delay_seconds = math.floor(delay_time % 60)
-				local delay_status = string.format(_("trade-comms","%i seconds"),delay_seconds)
+				local delay_status = string.format(_("trade-comms", "%i seconds"),delay_seconds)
 				if delay_seconds == 1 then
-					delay_status = string.format(_("trade-comms","%i second"),delay_seconds)
+					delay_status = string.format(_("trade-comms", "%i second"),delay_seconds)
 				end
 				if delay_minutes > 0 then
 					if delay_minutes > 1 then
-						delay_status = string.format(_("trade-comms","%i minutes and %s"),delay_minutes,delay_status)
+						delay_status = string.format(_("trade-comms", "%i minutes and %s"),delay_minutes,delay_status)
 					else
-						delay_status = string.format(_("trade-comms","%i minute and %s"),delay_minutes,delay_status)
+						delay_status = string.format(_("trade-comms", "%i minute and %s"),delay_minutes,delay_status)
 					end							
 				end
-				setCommsMessage(string.format(_("trade-comms","There are some repair crew recruits in route for %s. Travel time remaining is %s."),comms_target:getCallSign(),delay_status))
+				setCommsMessage(string.format(_("trade-comms", "There are some repair crew recruits in route for %s. Travel time remaining is %s."),comms_target:getCallSign(),delay_status))
 			end
 		end
 		addCommsReply(_("Back"), commsStation)
@@ -3008,7 +3008,7 @@ function getRepairCrewFromStation(relationship)
 end
 function getCoolantFromStation(relationship)
 	if comms_source.initialCoolant ~= nil then
-		addCommsReply(_("trade-comms","Purchase Coolant"),function()
+		addCommsReply(_("trade-comms", "Purchase Coolant"),function()
 			if comms_target.comms_data.coolant_inventory == nil then
 				comms_target.comms_data.coolant_inventory = math.random(0,3)*2
 			end
@@ -3028,7 +3028,7 @@ function getCoolantFromStation(relationship)
 								coolantCost = math.random(45,90)
 							end
 						end
-						setCommsMessage(_("trade-comms","We've got some coolant available for you"))
+						setCommsMessage(_("trade-comms", "We've got some coolant available for you"))
 						addCommsReply(string.format(_("trade-comms", "Purchase coolant for %i reputation"),coolantCost), function()
 							if not comms_source:isDocked(comms_target) then 
 								setCommsMessage(_("station-comms", "You need to stay docked for that action."))
@@ -3049,14 +3049,14 @@ function getCoolantFromStation(relationship)
 					else
 						local delay_seconds = math.random(3,20)
 						comms_target.comms_data.coolant_packaging_delay = getScenarioTime() + delay_seconds
-						setCommsMessage(string.format(_("trade-comms","The coolant preparation facility is having difficulty packaging the coolant for transport. They say they should have it working in about %i seconds"),delay_seconds))
+						setCommsMessage(string.format(_("trade-comms", "The coolant preparation facility is having difficulty packaging the coolant for transport. They say they should have it working in about %i seconds"),delay_seconds))
 					end
 				else	--delay in progress
 					local delay_seconds = math.floor(comms_target.comms_data.coolant_packaging_delay - getScenarioTime())
 					if delay_seconds > 1 then
-						setCommsMessage(string.format(_("trade-comms","The coolant preparation facility is having difficulty packaging the coolant for transport. They say they should have it working in about %i seconds"),delay_seconds))
+						setCommsMessage(string.format(_("trade-comms", "The coolant preparation facility is having difficulty packaging the coolant for transport. They say they should have it working in about %i seconds"),delay_seconds))
 					else
-						setCommsMessage(_("trade-comms","The coolant preparation facility is having difficulty packaging the coolant for transportation. They say they should have it working in a second"))
+						setCommsMessage(_("trade-comms", "The coolant preparation facility is having difficulty packaging the coolant for transportation. They say they should have it working in a second"))
 					end
 				end
 			else	--station is out of coolant
@@ -3067,23 +3067,23 @@ function getCoolantFromStation(relationship)
 					comms_target.comms_data.coolant_inventory = math.random(1,3)*2
 					local delay_seconds = math.random(3,20)
 					comms_target.comms_data.coolant_packaging_delay = getScenarioTime() + delay_seconds
-					setCommsMessage(string.format(_("trade-comms","Our coolant production facility just made some, but it's not quite ready to be transported. The preparation facility says it should take about %i seconds"),delay_seconds))
+					setCommsMessage(string.format(_("trade-comms", "Our coolant production facility just made some, but it's not quite ready to be transported. The preparation facility says it should take about %i seconds"),delay_seconds))
 				else
 					local delay_time = math.floor(comms_target.comms_data.coolant_inventory_delay - getScenarioTime())
 					local delay_minutes = math.floor(delay_time / 60)
 					local delay_seconds = math.floor(delay_time % 60)
-					local delay_status = string.format(_("trade-comms","%i seconds"),delay_seconds)
+					local delay_status = string.format(_("trade-comms", "%i seconds"),delay_seconds)
 					if delay_seconds == 1 then
-						delay_status = string.format(_("trade-comms","%i second"),delay_seconds)
+						delay_status = string.format(_("trade-comms", "%i second"),delay_seconds)
 					end
 					if delay_minutes > 0 then
 						if delay_minutes > 1 then
-							delay_status = string.format(_("trade-comms","%i minutes and %s"),delay_minutes,delay_status)
+							delay_status = string.format(_("trade-comms", "%i minutes and %s"),delay_minutes,delay_status)
 						else
-							delay_status = string.format(_("trade-comms","%i minute and %s"),delay_minutes,delay_status)
+							delay_status = string.format(_("trade-comms", "%i minute and %s"),delay_minutes,delay_status)
 						end							
 					end
-					setCommsMessage(string.format(_("trade-comms","Our coolant production facility is making more right now. Coolant manufacturing time remaining is %s."),delay_status))
+					setCommsMessage(string.format(_("trade-comms", "Our coolant production facility is making more right now. Coolant manufacturing time remaining is %s."),delay_status))
 				end
 			end
 			addCommsReply(_("Back"), commsStation)
@@ -3093,12 +3093,12 @@ end
 function setSecondaryOrders()
 	secondary_orders = ""
 	if comms_source.plan_extractor == "installed" then
-		secondary_orders = _("station-comms","Steal Planet Devourer plans from Kraylor")
+		secondary_orders = _("orders-comms", "Steal Planet Devourer plans from Kraylor")
 	elseif comms_source.plan_extractor == "extracted" then
-		secondary_orders = _("station-comms","Deliver stolen Planet Devourer plans to friendly station")
+		secondary_orders = _("orders-comms", "Deliver stolen Planet Devourer plans to friendly station")
 	end
 	if comms_source.virus_upload == "enabled" then
-		secondary_orders = _("station-comms","Upload virus to Planet Devourer")
+		secondary_orders = _("orders-comms","Upload virus to Planet Devourer")
 	end
 end
 function setOptionalOrders()
@@ -3148,8 +3148,8 @@ function handleWeaponRestock(weapon)
 			end
 		else
 			if comms_source:getReputationPoints() > points_per_item then
-				setCommsMessage(_("ammo-comms","You can't afford as much as I'd like to give you"))
-				addCommsReply(_("ammo-comms","Get just one"), function()
+				setCommsMessage(_("ammo-comms", "You can't afford as much as I'd like to give you"))
+				addCommsReply(_("ammo-comms", "Get just one"), function()
 					if comms_source:takeReputationPoints(points_per_item) then
 						comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + 1)
 						if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
@@ -3216,8 +3216,8 @@ function handleUndockedState()
 		end
 	end
 	if #accessible_warp_jammers > 0 then
-		addCommsReply(_("station-comms","Connect to warp jammer"),function()
-			setCommsMessage(_("station-comms","Which one would you like to connect to?"))
+		addCommsReply(_("station-comms", "Connect to warp jammer"),function()
+			setCommsMessage(_("station-comms", "Which one would you like to connect to?"))
 			local pay_rep = false
 			for index, wj in ipairs(accessible_warp_jammers) do
 				local wj_rep = 0
@@ -3254,28 +3254,28 @@ function handleUndockedState()
 				end
 				local reputation_prompt = ""
 				if wj_rep > 0 then
-					reputation_prompt = string.format(_("station-comms","(%i reputation)"),wj_rep)
+					reputation_prompt = string.format(_("station-comms", "(%i reputation)"),wj_rep)
 					pay_rep = true
 				end
 				addCommsReply(string.format("%s %s",wj:getCallSign(),reputation_prompt),function()
 					if comms_source:takeReputationPoints(wj_rep) then
-						setCommsMessage(string.format(_("station-comms","%s Automated warp jammer access menu"),wj:getCallSign()))
-						addCommsReply(_("station-comms","Reduce range to 1 unit for 1 minute"),function()
+						setCommsMessage(string.format(_("station-comms", "%s Automated warp jammer access menu"),wj:getCallSign()))
+						addCommsReply(_("station-comms", "Reduce range to 1 unit for 1 minute"),function()
 							wj:setRange(1000)
 							wj.reset_time = getScenarioTime() + 60
-							setCommsMessage(_("station-comms","Acknowledged. Range adjusted. Reset timer engaged."))
+							setCommsMessage(_("station-comms", "Acknowledged. Range adjusted. Reset timer engaged."))
 							addCommsReply(_("Back"), commsStation)
 						end)
-						addCommsReply(_("station-comms","Reduce range by 50% for 2 minutes"),function()
+						addCommsReply(_("station-comms", "Reduce range by 50% for 2 minutes"),function()
 							wj:setRange(wj.range/2)
 							wj.reset_time = getScenarioTime() + 120
-							setCommsMessage(_("station-comms","Acknowledged. Range adjusted. Reset timer engaged."))
+							setCommsMessage(_("station-comms", "Acknowledged. Range adjusted. Reset timer engaged."))
 							addCommsReply(_("Back"), commsStation)
 						end)
-						addCommsReply(_("station-comms","Reduce range by 25% for 3 minutes"),function()
+						addCommsReply(_("station-comms", "Reduce range by 25% for 3 minutes"),function()
 							wj:setRange(wj.range*.75)
 							wj.reset_time = getScenarioTime() + 180
-							setCommsMessage(_("station-comms","Acknowledged. Range adjusted. Reset timer engaged."))
+							setCommsMessage(_("station-comms", "Acknowledged. Range adjusted. Reset timer engaged."))
 							addCommsReply(_("Back"), commsStation)
 						end)
 					else
@@ -3290,32 +3290,32 @@ function handleUndockedState()
  	addCommsReply(_("station-comms", "I need information"), function()
 		setCommsMessage(_("station-comms", "What kind of information do you need?"))
 		if comms_target:isFriendly(comms_source) then
-			addCommsReply(_("mission-comms","Locate planet devourer"),function()
-				local output_message = string.format(_("mission-comms","%s is located in sector %s."),devourer:getCallSign(),devourer:getSectorName())
+			addCommsReply(_("mission-comms", "Locate planet devourer"),function()
+				local output_message = string.format(_("mission-comms", "%s is located in sector %s."),devourer:getCallSign(),devourer:getSectorName())
 				if devourer.planet_target ~= nil and devourer.planet_target:isValid() then
-					output_message = string.format(_("mission-comms","%s We project that %s plans to destroy %s in sector %s"),output_message,devourer:getCallSign(),devourer.planet_target:getCallSign(),devourer.planet_target:getSectorName())
+					output_message = string.format(_("mission-comms", "%s We project that %s plans to destroy %s in sector %s"),output_message,devourer:getCallSign(),devourer.planet_target:getCallSign(),devourer.planet_target:getSectorName())
 				end
 				setCommsMessage(output_message)
 				addCommsReply(_("Back"), commsStation)
 			end)
 			if approached_devourer then
 				if comms_source.plan_extractor == nil or comms_source.plan_extractor ~= "extracted" then
-					addCommsReply(string.format(_("mission-comms","How do we destroy %s?"),devourer:getCallSign()),function()
-						setCommsMessage(_("mission-comms","What a terrible thing to contemplate, much less say out loud. Seriously, if you want to discuss such things, you should dock first so that the Kraylor cannot intercept the transmission no matter how good the encryption protocols."))
+					addCommsReply(string.format(_("mission-comms", "How do we destroy %s?"),devourer:getCallSign()),function()
+						setCommsMessage(_("mission-comms", "What a terrible thing to contemplate, much less say out loud. Seriously, if you want to discuss such things, you should dock first so that the Kraylor cannot intercept the transmission no matter how good the encryption protocols."))
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end	
 			if comms_source.plan_extractor == "extracted" then
-				addCommsReply(_("mission-comms","We got the plans. Now what?"),function()
-					setCommsMessage(_("mission-comms","Bring them to a friendly station for analysis. Subspace communications bandwidth prevent transmission and decryption without Kraylor destructive interference. We've started analysis based on the gestalt, but need the physical plans to complete it and provide an exploitable weakness."))
+				addCommsReply(_("mission-comms", "We got the plans. Now what?"),function()
+					setCommsMessage(_("mission-comms", "Bring them to a friendly station for analysis. Subspace communications bandwidth prevent transmission and decryption without Kraylor destructive interference. We've started analysis based on the gestalt, but need the physical plans to complete it and provide an exploitable weakness."))
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			addCommsReply(_("orders-comms", "What are my current orders?"), function()
 				setOptionalOrders()
 				setSecondaryOrders()
-				primary_orders = _("orders-comms","Save the planets from destruction.")
+				primary_orders = _("orders-comms", "Save the planets from destruction.")
 				ordMsg = primary_orders .. "\n" .. secondary_orders .. optional_orders
 				if playWithTimeLimit then
 					ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
@@ -3324,8 +3324,8 @@ function handleUndockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply(_("station-comms","Station services (ordnance restock, repair)"),function()
-			setCommsMessage(_("station-comms","We offer a variety of services when you dock with us."))
+		addCommsReply(_("station-comms", "Station services (ordnance restock, repair)"),function()
+			setCommsMessage(_("station-comms", "We offer a variety of services when you dock with us."))
 			addCommsReply(_("ammo-comms", "What ordnance do you have available for restock?"), function()
 				local missileTypeAvailableCount = 0
 				local ordnanceListMsg = ""
@@ -3360,8 +3360,8 @@ function handleUndockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 			addCommsReply(_("stationServices-comms", "Docking services status"), function()
-				setCommsMessage(_("stationServices-comms","Which docking service category do you want a status for?\n    Primary services:\n        Charge battery, repair hull, replenish probes\n    Secondary systems repair:\n        Scanners, hacking, probe launch, combat maneuver, self destruct"))
-				addCommsReply(_("stationServices-comms","Primary services"),function()
+				setCommsMessage(_("stationServices-comms", "Which docking service category do you want a status for?\n    Primary services:\n        Charge battery, repair hull, replenish probes\n    Secondary systems repair:\n        Scanners, hacking, probe launch, combat maneuver, self destruct"))
+				addCommsReply(_("stationServices-comms", "Primary services"),function()
 					local service_status = string.format(_("stationServices-comms", "Station %s primary docking services status:"),comms_target:getCallSign())
 					if comms_target:getRestocksScanProbes() then
 						service_status = string.format(_("stationServices-comms", "%s\nReplenish scan probes."),service_status)
@@ -3374,7 +3374,7 @@ function handleUndockedState()
 							}
 							comms_target.probe_fail_reason = reason_list[math.random(1,#reason_list)]
 						end
-						service_status = string.format("%s\n%s",service_status,comms_target.probe_fail_reason)
+						service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.probe_fail_reason)
 					end
 					if comms_target:getRepairDocked() then
 						service_status = string.format(_("stationServices-comms", "%s\nShip hull repair."),service_status)
@@ -3387,7 +3387,7 @@ function handleUndockedState()
 							}
 							comms_target.repair_fail_reason = reason_list[math.random(1,#reason_list)]
 						end
-						service_status = string.format("%s\n%s",service_status,comms_target.repair_fail_reason)
+						service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.repair_fail_reason)
 					end
 					if comms_target:getSharesEnergyWithDocked() then
 						service_status = string.format(_("stationServices-comms", "%s\nRecharge ship energy stores."),service_status)
@@ -3400,12 +3400,12 @@ function handleUndockedState()
 							}
 							comms_target.energy_fail_reason = reason_list[math.random(1,#reason_list)]
 						end
-						service_status = string.format("%s\n%s",service_status,comms_target.energy_fail_reason)
+						service_status = string.format(_("stationServices-comms", "%s\n%s"),service_status,comms_target.energy_fail_reason)
 					end
 					setCommsMessage(service_status)
 					addCommsReply(_("Back"), commsStation)
 				end)
-				addCommsReply(_("stationServices-comms","Secondary systems repair"),function()
+				addCommsReply(_("stationServices-comms", "Secondary systems repair"),function()
 					local service_status = string.format(_("stationServices-comms", "Station %s docking repair services status:"),comms_target:getCallSign())
 					if comms_target.comms_data.jump_overcharge then
 						service_status = string.format(_("stationServices-comms", "%s\nMay overcharge jump drive"),service_status)
@@ -3431,8 +3431,8 @@ function handleUndockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end)
-		addCommsReply(string.format(_("station-comms","Goods information at %s or near %s"),comms_target:getCallSign(),comms_target:getCallSign()),function()
-			setCommsMessage(_("station-comms","Always good to get some goods"))
+		addCommsReply(string.format(_("station-comms", "Goods information at %s or near %s"),comms_target:getCallSign(),comms_target:getCallSign()),function()
+			setCommsMessage(_("station-comms", "Always good to get some goods"))
 			local goodsAvailable = false
 			if comms_target.comms_data.goods ~= nil then
 				for good, goodData in pairs(comms_target.comms_data.goods) do
@@ -3451,8 +3451,8 @@ function handleUndockedState()
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
-			addCommsReply(_("trade-comms","Where can I find particular goods?"), function()
-				gkMsg = _("trade-comms","Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury.")
+			addCommsReply(_("trade-comms", "Where can I find particular goods?"), function()
+				gkMsg = _("trade-comms", "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury.")
 				if comms_target.comms_data.goodsKnowledge == nil then
 					comms_target.comms_data.goodsKnowledge = {}
 					local knowledgeCount = 0
@@ -3494,7 +3494,7 @@ function handleUndockedState()
 						local sectorName = comms_target.comms_data.goodsKnowledge[good]["sector"]
 						local goodName = good
 						local goodCost = comms_target.comms_data.goodsKnowledge[good]["cost"]
-						setCommsMessage(string.format(_("trade-comms","Station %s in sector %s has %s for %i reputation"),stationName,sectorName,goodName,goodCost))
+						setCommsMessage(string.format(_("trade-comms", "Station %s in sector %s has %s for %i reputation"),stationName,sectorName,goodName,goodCost))
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
@@ -3511,16 +3511,16 @@ function handleUndockedState()
 		if (comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "") or
 			(comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "") or
 			(comms_source:isFriendly(comms_target) and comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" and has_gossip) then
-			addCommsReply(_("station-comms","Tell me more about your station"), function()
-				setCommsMessage(_("station-comms","What would you like to know?"))
+			addCommsReply(_("station-comms", "Tell me more about your station"), function()
+				setCommsMessage(_("station-comms", "What would you like to know?"))
 				if comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "" then
-					addCommsReply(_("stationGeneralInfo-comms","General information"), function()
+					addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 						setCommsMessage(comms_target.comms_data.general)
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "" then
-					addCommsReply(_("stationStory-comms","Station history"), function()
+					addCommsReply(_("stationStory-comms", "Station history"), function()
 						setCommsMessage(comms_target.comms_data.history)
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -3563,7 +3563,7 @@ function handleUndockedState()
 				end)
 			end
 		end
-		addCommsReply(_("stationAssist-comms","Report status"), function()
+		addCommsReply(_("stationAssist-comms", "Report status"), function()
 			msg = string.format(_("stationAssist-comms", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
 			local shields = comms_target:getShieldCount()
 			if shields == 1 then
@@ -3627,8 +3627,8 @@ function handleUndockedState()
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.servicejonque) then
-    	addCommsReply(_("stationAssist-comms","Please send a service jonque for repairs"), function()
-    		local out = string.format(_("stationAssist-comms","Would you like the service jonque to come to you directly or would you prefer to set up a rendezvous via a waypoint? Either way, you will need %.1f reputation."),getServiceCost("servicejonque"))
+    	addCommsReply(_("stationAssist-comms", "Please send a service jonque for repairs"), function()
+    		local out = string.format(_("stationAssist-comms", "Would you like the service jonque to come to you directly or would you prefer to set up a rendezvous via a waypoint? Either way, you will need %.1f reputation."),getServiceCost("servicejonque"))
     		addCommsReply("Direct",function()
     			if comms_source:takeReputationPoints(getServiceCost("servicejonque")) then
 					ship = serviceJonque(comms_target:getFaction()):setPosition(comms_target:getPosition()):setCallSign(generateCallSign(nil,comms_target:getFaction())):setScanned(true):orderDefendTarget(comms_source)
@@ -3667,16 +3667,16 @@ function handleUndockedState()
 							neutral = math.max(comms_target.comms_data.reputation_cost_multipliers.friend,comms_target.comms_data.reputation_cost_multipliers.neutral/2)
 						},
 					}
-					setCommsMessage(string.format(_("stationAssist-comms","We have dispatched %s to come to you to help with repairs"),ship:getCallSign()))
+					setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to come to you to help with repairs"),ship:getCallSign()))
     			else
 					setCommsMessage(_("needRep-comms", "Not enough reputation!"));
     			end
     		end)
     		if comms_source:getWaypointCount() < 1 then
-    			out = out .. _("stationAssist-comms","\n\nNote: if you want to use a waypoint, you will have to back out and set one and come back.")
+    			out = out .. _("stationAssist-comms", "\n\nNote: if you want to use a waypoint, you will have to back out and set one and come back.")
     		else
     			for n=1,comms_source:getWaypointCount() do
-    				addCommsReply(string.format(_("stationAssist-comms","Rendez-vous at waypoint %i"),n),function()
+    				addCommsReply(string.format(_("stationAssist-comms", "Rendez-vous at waypoint %i"),n),function()
     					if comms_source:takeReputationPoints(getServiceCost("servicejonque")) then
     						ship = serviceJonque(comms_target:getFaction()):setPosition(comms_target:getPosition()):setCallSign(generateCallSign(nil,comms_target:getFaction())):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
 							ship.comms_data = {
@@ -3714,7 +3714,7 @@ function handleUndockedState()
 									neutral = math.max(comms_target.comms_data.reputation_cost_multipliers.friend,comms_target.comms_data.reputation_cost_multipliers.neutral/2)
 								},
 							}
-    						setCommsMessage(string.format(_("stationAssist-comms","We have dispatched %s to rendezvous at waypoint %i"),ship:getCallSign(),n))
+    						setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to rendez-vous at waypoint %i"),ship:getCallSign(),n))
     					else
 							setCommsMessage(_("needRep-comms", "Not enough reputation!"));
     					end
@@ -3829,12 +3829,12 @@ function friendlyComms(comms_data)
 		end
 		local docked_with = comms_target:getDockedWith()
 		if docked_with ~= nil then
-			msg = string.format(_("shipAssist-comms","%s\nDocked with %s"),msg,docked_with:getCallSign())
+			msg = string.format(_("shipAssist-comms", "%s\nDocked with %s"),msg,docked_with:getCallSign())
 		else
 			if string.find("Dock",comms_target:getOrder()) then
 				local transport_target = comms_target:getOrderTarget()
 				if transport_target ~= nil and transport_target:isValid() then
-					msg = string.format(_("shipAssist-comms","%s\nHeading for %s station %s in %s"),msg,transport_target:getFaction(),transport_target:getCallSign(),transport_target:getSectorName())
+					msg = string.format(_("shipAssist-comms", "%s\nHeading for %s station %s in %s"),msg,transport_target:getFaction(),transport_target:getCallSign(),transport_target:getSectorName())
 				end
 			end
 		end
@@ -3949,7 +3949,7 @@ function friendlyComms(comms_data)
 					else	--not goods or equipment freighter
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format(_("trade-comms","Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
 									if comms_source:takeReputationPoints(goodData.cost*2) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -3975,7 +3975,7 @@ function friendlyComms(comms_data)
 					if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format(_("trade-comms","Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
 									if comms_source:takeReputationPoints(goodData.cost*2) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -3998,13 +3998,13 @@ function friendlyComms(comms_data)
 				end	--player has room to get goods
 			end	--various friendliness choices
 		else	--not close enough to sell
-			addCommsReply(_("trade-comms","Do you have cargo you might sell?"), function()
+			addCommsReply(_("trade-comms", "Do you have cargo you might sell?"), function()
 				local goodCount = 0
-				local cargoMsg = _("trade-comms","We've got ")
+				local cargoMsg = _("trade-comms", "We've got ")
 				for good, goodData in pairs(comms_data.goods) do
 					if goodData.quantity > 0 then
 						if goodCount > 0 then
-							cargoMsg = cargoMsg .. ", " .. good
+							cargoMsg = cargoMsg .. _("trade-comms", ", ") .. good
 						else
 							cargoMsg = cargoMsg .. good
 						end
@@ -4012,7 +4012,7 @@ function friendlyComms(comms_data)
 					goodCount = goodCount + goodData.quantity
 				end
 				if goodCount == 0 then
-					cargoMsg = cargoMsg .. _("trade-comms","nothing")
+					cargoMsg = cargoMsg .. _("trade-comms", "nothing")
 				end
 				setCommsMessage(cargoMsg)
 				addCommsReply(_("Back"), commsShip)
@@ -4038,51 +4038,51 @@ function enemyComms(comms_data)
 			setCommsMessage(_("shipEnemy-comms", "Ktzzzsss.\nYou will DIEEee weaklingsss!"));
 			local kraylorTauntChoice = math.random(1,3)
 			if kraylorTauntChoice == 1 then
-				taunt_option = _("shipEnemy-comms","We will destroy you")
-				taunt_success_reply = _("shipEnemy-comms","We think not. It is you who will experience destruction!")
+				taunt_option = _("shipEnemy-comms", "We will destroy you")
+				taunt_success_reply = _("shipEnemy-comms", "We think not. It is you who will experience destruction!")
 			elseif kraylorTauntChoice == 2 then
-				taunt_option = _("shipEnemy-comms","You have no honor")
-				taunt_success_reply = _("shipEnemy-comms","Your insult has brought our wrath upon you. Prepare to die.")
-				taunt_failed_reply = _("shipEnemy-comms","Your comments about honor have no meaning to us")
+				taunt_option = _("shipEnemy-comms", "You have no honor")
+				taunt_success_reply = _("shipEnemy-comms", "Your insult has brought our wrath upon you. Prepare to die.")
+				taunt_failed_reply = _("shipEnemy-comms", "Your comments about honor have no meaning to us")
 			else
-				taunt_option = _("shipEnemy-comms","We pity your pathetic race")
-				taunt_success_reply = _("shipEnemy-comms","Pathetic? You will regret your disparagement!")
-				taunt_failed_reply = _("shipEnemy-comms","We don't care what you think of us")
+				taunt_option = _("shipEnemy-comms", "We pity your pathetic race")
+				taunt_success_reply = _("shipEnemy-comms", "Pathetic? You will regret your disparagement!")
+				taunt_failed_reply = _("shipEnemy-comms", "We don't care what you think of us")
 			end
 		elseif faction == "Arlenians" then
 			taunt_threshold = 25
 			immolation_threshold = 4
-			setCommsMessage(_("shipEnemy-comms","We wish you no harm, but will harm you if we must.\nEnd of transmission."))
+			setCommsMessage(_("shipEnemy-comms", "We wish you no harm, but will harm you if we must.\nEnd of transmission."))
 		elseif faction == "Exuari" then
 			taunt_threshold = 40
 			immolation_threshold = 7
-			setCommsMessage(_("shipEnemy-comms","Stay out of our way, or your death will amuse us extremely!"))
+			setCommsMessage(_("shipEnemy-comms", "Stay out of our way, or your death will amuse us extremely!"))
 		elseif faction == "Ghosts" then
 			taunt_threshold = 20
 			immolation_threshold = 3
-			setCommsMessage(_("shipEnemy-comms","One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."))
-			taunt_option = _("shipEnemy-comms","EXECUTE: SELFDESTRUCT")
-			taunt_success_reply = _("shipEnemy-comms","Rogue command received. Targeting source.")
-			taunt_failed_reply = _("shipEnemy-comms","External command ignored.")
+			setCommsMessage(_("shipEnemy-comms", "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."))
+			taunt_option = _("shipEnemy-comms", "EXECUTE: SELFDESTRUCT")
+			taunt_success_reply = _("shipEnemy-comms", "Rogue command received. Targeting source.")
+			taunt_failed_reply = _("shipEnemy-comms", "External command ignored.")
 		elseif faction == "Ktlitans" then
-			setCommsMessage(_("shipEnemy-comms","The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."))
-			taunt_option = _("shipEnemy-comms","<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>")
-			taunt_success_reply = _("shipEnemy-comms","We do not need permission to pluck apart such an insignificant threat.")
-			taunt_failed_reply = _("shipEnemy-comms","The hive has greater priorities than exterminating pests.")
+			setCommsMessage(_("shipEnemy-comms", "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."))
+			taunt_option = _("shipEnemy-comms", "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>")
+			taunt_success_reply = _("shipEnemy-comms", "We do not need permission to pluck apart such an insignificant threat.")
+			taunt_failed_reply = _("shipEnemy-comms", "The hive has greater priorities than exterminating pests.")
 		elseif faction == "TSN" then
 			taunt_threshold = 15
 			immolation_threshold = 2
-			setCommsMessage(_("shipEnemy-comms","State your business"))
+			setCommsMessage(_("shipEnemy-comms", "State your business"))
 		elseif faction == "USN" then
 			taunt_threshold = 15
 			immolation_threshold = 2
-			setCommsMessage(_("shipEnemy-comms","What do you want? (not that we care)"))
+			setCommsMessage(_("shipEnemy-comms", "What do you want? (not that we care)"))
 		elseif faction == "CUF" then
 			taunt_threshold = 15
 			immolation_threshold = 2
-			setCommsMessage(_("shipEnemy-comms","Don't waste our time"))
+			setCommsMessage(_("shipEnemy-comms", "Don't waste our time"))
 		else
-			setCommsMessage(_("shipEnemy-comms","Mind your own business!"))
+			setCommsMessage(_("shipEnemy-comms", "Mind your own business!"))
 		end
 		comms_data.friendlyness = comms_data.friendlyness - random(0, 10)	--reduce friendlyness after each interaction
 		addCommsReply(taunt_option, function()
@@ -4122,7 +4122,7 @@ function enemyComms(comms_data)
 			else
 				--possible alternative consequences when taunt fails
 				if random(1,100) < (immolation_threshold + difficulty) then	--final: immolation_threshold (set to 100 for testing)
-					setCommsMessage(_("shipEnemy-comms","Subspace and time continuum disruption authorized"))
+					setCommsMessage(_("shipEnemy-comms", "Subspace and time continuum disruption authorized"))
 					comms_source.continuum_target = true
 					comms_source.continuum_initiator = comms_target
 					plotContinuum = checkContinuum
@@ -4140,7 +4140,7 @@ function enemyComms(comms_data)
 		--amenable logic
 		local amenable_chance = comms_data.friendlyness/3 + (1 - enemy_health)*30
 		if change_enemy_order_diagnostic then print(string.format("   amenability:     %.1f",amenable_chance)) end
-		addCommsReply(_("shipEnemy-comms","Stop your actions"),function()
+		addCommsReply(_("shipEnemy-comms", "Stop your actions"),function()
 			local amenable_roll = random(1,100)
 			if change_enemy_order_diagnostic then print(string.format("   amenable roll:   %.1f",amenable_roll)) end
 			if amenable_roll < amenable_chance then
@@ -4164,9 +4164,9 @@ function enemyComms(comms_data)
 				comms_target.amenability_may_expire = true		--set up conditional in future refactoring
 				comms_target:orderIdle()
 				comms_target:setFaction("Independent")
-				setCommsMessage(_("shipEnemy-comms","Just this once, we'll take your advice"))
+				setCommsMessage(_("shipEnemy-comms", "Just this once, we'll take your advice"))
 			else
-				setCommsMessage(_("shipEnemy-comms","No"))
+				setCommsMessage(_("shipEnemy-comms", "No"))
 			end
 		end)
 		comms_data.friendlyness = comms_data.friendlyness - random(0, 10)	--reduce friendlyness after each interaction
@@ -4518,14 +4518,14 @@ end
 function neutralComms(comms_data)
 	local shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
-		setCommsMessage(_("trade-comms","Yes?"))
-		addCommsReply(_("trade-comms","Do you have cargo you might sell?"), function()
+		setCommsMessage(_("trade-comms", "Yes?"))
+		addCommsReply(_("trade-comms", "Do you have cargo you might sell?"), function()
 			local goodCount = 0
 			local cargoMsg = _("trade-comms","We've got ")
 			for good, goodData in pairs(comms_data.goods) do
 				if goodData.quantity > 0 then
 					if goodCount > 0 then
-						cargoMsg = cargoMsg .. _("trade-comms",", ") .. good
+						cargoMsg = cargoMsg .. _("trade-comms", ", ") .. good
 					else
 						cargoMsg = cargoMsg .. good
 					end
@@ -4533,22 +4533,22 @@ function neutralComms(comms_data)
 				goodCount = goodCount + goodData.quantity
 			end
 			if goodCount == 0 then
-				cargoMsg = cargoMsg .. _("trade-comms","nothing")
+				cargoMsg = cargoMsg .. _("trade-comms", "nothing")
 			end
 			setCommsMessage(cargoMsg)
 		end)
 		if distance_diagnostic then print("distance_diagnostic 9",comms_source,comms_target) end
 		if distance(comms_source,comms_target) < 5000 then
-			addCommsReply(_("shipAssist-comms","Where are you going?"),function()
+			addCommsReply(_("shipAssist-comms", "Where are you going?"),function()
 				local docked_with = comms_target:getDockedWith()
-				local msg = string.format(_("shipAssist-comms","Hi %s,"),comms_source:getCallSign())
+				local msg = string.format(_("shipAssist-comms", "Hi %s,"),comms_source:getCallSign())
 				if docked_with ~= nil then
-					msg = string.format(_("shipAssist-comms","%s\nDocked with %s"),msg,docked_with:getCallSign())
+					msg = string.format(_("shipAssist-comms", "%s\nDocked with %s"),msg,docked_with:getCallSign())
 				else
 					if string.find("Dock",comms_target:getOrder()) then
 						local transport_target = comms_target:getOrderTarget()
 						if transport_target ~= nil and transport_target:isValid() then
-							msg = string.format(_("shipAssist-comms","%s\nHeading for %s station %s in sector %s"),msg,transport_target:getFaction(),transport_target:getCallSign(),transport_target:getSectorName())
+							msg = string.format(_("shipAssist-comms", "%s\nHeading for %s station %s in sector %s"),msg,transport_target:getFaction(),transport_target:getCallSign(),transport_target:getSectorName())
 						end
 					end
 				end
@@ -4604,7 +4604,7 @@ function neutralComms(comms_data)
 					else
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format(_("trade-comms","Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
 									if comms_source:takeReputationPoints(goodData.cost*2) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -4628,7 +4628,7 @@ function neutralComms(comms_data)
 					if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format(_("trade-comms","Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*2)), function()
 									if comms_source:takeReputationPoints(goodData.cost*2) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -4650,7 +4650,7 @@ function neutralComms(comms_data)
 					else
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format(_("trade-comms","Buy one %s for %i reputation"),good,math.floor(goodData.cost*3)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*3)), function()
 									if comms_source:takeReputationPoints(goodData.cost*3) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -4674,7 +4674,7 @@ function neutralComms(comms_data)
 					if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format(_("trade-comms","Buy one %s for %i reputation"),good,math.floor(goodData.cost*3)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*3)), function()
 									if comms_source:takeReputationPoints(goodData.cost*3) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -4721,19 +4721,19 @@ function commsServiceJonque()
 end
 function friendlyServiceJonqueComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage(_("shipAssist-comms","What do you want?"))
+		setCommsMessage(_("shipAssist-comms", "What do you want?"))
 	else
-		setCommsMessage(_("shipAssist-comms","Sir, how can we assist?"))
+		setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"))
 	end
-	addCommsReply(_("shipAssist-comms","Defend a waypoint"), function()
+	addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 		if comms_source:getWaypointCount() == 0 then
-			setCommsMessage(_("shipAssist-comms","No waypoints set. Please set a waypoint first."))
+			setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."))
 		else
-			setCommsMessage(_("shipAssist-comms","Which waypoint should we defend?"))
+			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"))
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply(string.format(_("shipAssist-comms","Defend WP %i"),n), function()
+				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %i"),n), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-					setCommsMessage(string.format(_("shipAssist-comms","We are heading to assist at WP %i."),n))
+					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %i."),n))
 					addCommsReply(_("Back"), commsServiceJonque)
 				end)
 			end
@@ -4741,13 +4741,13 @@ function friendlyServiceJonqueComms(comms_data)
 		addCommsReply("Back", commsServiceJonque)
 	end)
 	if comms_data.friendlyness > 0.2 then
-		addCommsReply(_("shipAssist-comms","Assist me"), function()
-			setCommsMessage(_("shipAssist-comms","Heading toward you to assist."))
+		addCommsReply(_("shipAssist-comms", "Assist me"), function()
+			setCommsMessage(_("shipAssist-comms", "Heading toward you to assist."))
 			comms_target:orderDefendTarget(comms_source)
 			addCommsReply(_("Back"), commsServiceJonque)
 		end)
 	end
-	addCommsReply(_("shipAssist-comms","Report status"), function()
+	addCommsReply(_("shipAssist-comms", "Report status"), function()
 		msg = string.format(_("shipAssist-comms", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
 		local shields = comms_target:getShieldCount()
 		if shields == 1 then
@@ -4766,8 +4766,8 @@ function friendlyServiceJonqueComms(comms_data)
 	for index, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 			if comms_target:getTypeName() ~= "Defense platform" then
-				addCommsReply(string.format(_("shipAssist-comms","Dock at %s"),obj:getCallSign()), function()
-					setCommsMessage(string.format(_("shipAssist-comms","Docking at %s."),obj:getCallSign()))
+				addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"),obj:getCallSign()), function()
+					setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."),obj:getCallSign()))
 					comms_target:orderDock(obj)
 					addCommsReply(_("Back"), commsServiceJonque)
 				end)
@@ -4780,11 +4780,11 @@ function friendlyServiceJonqueComms(comms_data)
 end
 function neutralServiceJonqueComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage(_("shipAssist-comms","What do you want?"))
+		setCommsMessage(_("shipAssist-comms", "What do you want?"))
 	else
-		setCommsMessage(_("shipAssist-comms","Sir, how can we assist?"))
+		setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"))
 	end
-	addCommsReply(_("shipAssist-comms","How are you doing?"), function()
+	addCommsReply(_("shipAssist-comms", "How are you doing?"), function()
 		msg = string.format(_("shipAssist-comms", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
 		local shields = comms_target:getShieldCount()
 		if shields == 1 then
@@ -4803,7 +4803,7 @@ function neutralServiceJonqueComms(comms_data)
 	commonServiceOptions()
 end
 function commonServiceOptions()
-	addCommsReply(_("shipServices-comms","Service options"),function()
+	addCommsReply(_("shipServices-comms", "Service options"),function()
 		local offer_repair = false
 		if not comms_source:getCanLaunchProbe() then
 			offer_repair = true
@@ -4821,59 +4821,59 @@ function commonServiceOptions()
 			offer_repair = true
 		end
 		if offer_repair then
-			addCommsReply(_("shipServices-comms-comms","Repair ship system"),function()
-				setCommsMessage(_("shipServices-comms-comms","What system would you like repaired?"))
+			addCommsReply(_("shipServices-comms", "Repair ship system"),function()
+				setCommsMessage(_("shipServices-comms", "What system would you like repaired?"))
 				if not comms_source:getCanLaunchProbe() then
-					addCommsReply(_("shipServices-comms","Repair probe launch system"),function()
+					addCommsReply(_("shipServices-comms", "Repair probe launch system"),function()
 						if distance(comms_source,comms_target) < 5000 then
 							comms_source:setCanLaunchProbe(true)
-							setCommsMessage(_("shipServices-comms","Your probe launch system has been repaired"))
+							setCommsMessage(_("shipServices-comms", "Your probe launch system has been repaired"))
 						else
-							setCommsMessage(_("shipServices-comms","You need to stay close if you want me to fix your ship"))
+							setCommsMessage(_("shipServices-comms", "You need to stay close if you want me to fix your ship"))
 						end
 						addCommsReply(_("Back"), commsServiceJonque)
 					end)
 				end
 				if not comms_source:getCanHack() then
-					addCommsReply(_("shipServices-comms","Repair hacking system"),function()
+					addCommsReply(_("shipServices-comms", "Repair hacking system"),function()
 						if distance(comms_source,comms_target) < 5000 then
 							comms_source:setCanHack(true)
-							setCommsMessage(_("shipServices-comms","Your hack system has been repaired"))
+							setCommsMessage(_("shipServices-comms", "Your hack system has been repaired"))
 						else
-							setCommsMessage(_("shipServices-comms","You need to stay close if you want me to fix your ship"))
+							setCommsMessage(_("shipServices-comms", "You need to stay close if you want me to fix your ship"))
 						end
 						addCommsReply(_("Back"), commsServiceJonque)
 					end)
 				end
 				if not comms_source:getCanScan() then
-					addCommsReply(_("shipServices-comms","Repair scanning system"),function()
+					addCommsReply(_("shipServices-comms", "Repair scanning system"),function()
 						if distance(comms_source,comms_target) < 5000 then
 							comms_source:setCanScan(true)
-							setCommsMessage(_("shipServices-comms","Your scanners have been repaired"))
+							setCommsMessage(_("shipServices-comms", "Your scanners have been repaired"))
 						else
-							setCommsMessage(_("shipServices-comms","You need to stay close if you want me to fix your ship"))
+							setCommsMessage(_("shipServices-comms", "You need to stay close if you want me to fix your ship"))
 						end
 						addCommsReply(_("Back"), commsServiceJonque)
 					end)
 				end
 				if not comms_source:getCanCombatManeuver() then
-					addCommsReply(_("shipServices-comms","Repair combat maneuver"),function()
+					addCommsReply(_("shipServices-comms", "Repair combat maneuver"),function()
 						if distance(comms_source,comms_target) < 5000 then
 							comms_source:setCanCombatManeuver(true)
-							setCommsMessage(_("shipServices-comms","Your combat maneuver has been repaired"))
+							setCommsMessage(_("shipServices-comms", "Your combat maneuver has been repaired"))
 						else
-							setCommsMessage(_("shipServices-comms","You need to stay close if you want me to fix your ship"))
+							setCommsMessage(_("shipServices-comms", "You need to stay close if you want me to fix your ship"))
 						end
 						addCommsReply(_("Back"), commsServiceJonque)
 					end)
 				end
 				if not comms_source:getCanSelfDestruct() then
-					addCommsReply(_("shipServices-comms","Repair self destruct system"),function()
+					addCommsReply(_("shipServices-comms", "Repair self destruct system"),function()
 						if distance(comms_source,comms_target) < 5000 then
 							comms_source:setCanSelfDestruct(true)
-							setCommsMessage(_("shipServices-comms","Your self destruct system has been repaired"))
+							setCommsMessage(_("shipServices-comms", "Your self destruct system has been repaired"))
 						else
-							setCommsMessage(_("shipServices-comms","You need to stay close if you want me to fix your ship"))
+							setCommsMessage(_("shipServices-comms", "You need to stay close if you want me to fix your ship"))
 						end
 						addCommsReply(_("Back"), commsServiceJonque)
 					end)
@@ -4893,42 +4893,42 @@ function commonServiceOptions()
 			elseif full_repair > 50 then
 				premium = 60
 			end
-			addCommsReply(string.format(_("shipServices-comms","Full hull repair (%i reputation)"),math.floor(full_repair + premium)),function()
+			addCommsReply(string.format(_("shipServices-comms", "Full hull repair (%i reputation)"),math.floor(full_repair + premium)),function()
 				if distance(comms_source,comms_target) < 5000 then
 					if comms_source:takeReputationPoints(math.floor(full_repair + premium)) then
 						comms_source:setHull(comms_source:getHullMax())
-						setCommsMessage(_("shipServices-comms","All fixed up and ready to go"))
+						setCommsMessage(_("shipServices-comms", "All fixed up and ready to go"))
 					else
-						setCommsMessage(_("needRep-comms","Insufficient reputation"))
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
 				else
-					setCommsMessage(_("shipServices-comms","You need to stay close if you want me to fix your ship"))
+					setCommsMessage(_("shipServices-comms", "You need to stay close if you want me to fix your ship"))
 				end
 				addCommsReply(_("Back"), commsServiceJonque)
 			end)
-			addCommsReply(string.format(_("shipServices-comms","Add %i%% to hull (%i reputation)"),math.floor(full_repair/2/comms_source:getHullMax()*100),math.floor(full_repair/2 + premium/2)),function()
+			addCommsReply(string.format(_("shipServices-comms", "Add %i%% to hull (%i reputation)"),math.floor(full_repair/2/comms_source:getHullMax()*100),math.floor(full_repair/2 + premium/2)),function()
 				if distance(comms_source,comms_target) < 5000 then
 					if comms_source:takeReputationPoints(math.floor(full_repair/2 + premium/2)) then
 						comms_source:setHull(comms_source:getHull() + (full_repair/2))
-						setCommsMessage(_("shipServices-comms","Repairs completed as requested"))
+						setCommsMessage(_("shipServices-comms", "Repairs completed as requested"))
 					else
-						setCommsMessage(_("needRep-comms","Insufficient reputation"))
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
 				else
-					setCommsMessage(_("shipServices-comms","You need to stay close if you want me to fix your ship"))
+					setCommsMessage(_("shipServices-comms", "You need to stay close if you want me to fix your ship"))
 				end
 				addCommsReply(_("Back"), commsServiceJonque)
 			end)
-			addCommsReply(string.format(_("shipServices-comms","Add %i%% to hull (%i reputation)"),math.floor(full_repair/3/comms_source:getHullMax()*100),math.floor(full_repair/3)),function()
+			addCommsReply(string.format(_("shipServices-comms", "Add %i%% to hull (%i reputation)"),math.floor(full_repair/3/comms_source:getHullMax()*100),math.floor(full_repair/3)),function()
 				if distance(comms_source,comms_target) < 5000 then
 					if comms_source:takeReputationPoints(math.floor(full_repair/3)) then
 						comms_source:setHull(comms_source:getHull() + (full_repair/3))
-						setCommsMessage(_("shipServices-comms","Repairs completed as requested"))
+						setCommsMessage(_("shipServices-comms", "Repairs completed as requested"))
 					else
-						setCommsMessage(_("needRep-comms","Insufficient reputation"))
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
 				else
-					setCommsMessage(_("shipServices-comms","You need to stay close if you want me to fix your ship"))
+					setCommsMessage(_("shipServices-comms", "You need to stay close if you want me to fix your ship"))
 				end
 				addCommsReply(_("Back"), commsServiceJonque)
 			end)
@@ -4961,32 +4961,32 @@ function commonServiceOptions()
 			end
 		end
 		if offer_ordnance then
-			addCommsReply(_("ammo-comms","Restock ordnance"),function()
+			addCommsReply(_("ammo-comms", "Restock ordnance"),function()
 				for missile_type, ord in pairs(player_missile_types) do
 					if ord.current < ord.max and comms_target.comms_data.weapon_inventory[missile_type] > 0 then
 						comms_data = comms_target.comms_data
-						setCommsMessage(_("ammo-comms","What kind of ordnance?"))
-						addCommsReply(string.format(_("ammo-comms","%s (%i reputation each)"),missile_type,getWeaponCost(missile_type)),function()
+						setCommsMessage(_("ammo-comms", "What kind of ordnance?"))
+						addCommsReply(string.format(_("ammo-comms", "%s (%i reputation each)"),missile_type,getWeaponCost(missile_type)),function()
 							if distance(comms_source,comms_target) < 5000 then
 								if comms_target.comms_data.weapon_inventory[missile_type] >= ord.need then
 									if comms_source:takeReputationPoints(getWeaponCost(missile_type)*ord.need) then
 										comms_source:setWeaponStorage(missile_type,ord.max)
 										comms_target.comms_data.weapon_inventory[missile_type] = comms_target.comms_data.weapon_inventory[missile_type] - ord.need
-										setCommsMessage(string.format(_("ammo-comms","Restocked your %s type ordnance"),missile_type))
+										setCommsMessage(string.format(_("ammo-comms", "Restocked your %s type ordnance"),missile_type))
 									else
 										if comms_source:getReputationPoints() > getWeaponCost(missile_type) then
-											setCommsMessage(string.format(_("needRep-comms","You don't have enough reputation to fully replenish your %s type ordnance. You need %i and you only have %i. How would you like to proceed?"),missile_type,getWeaponCost(missile_type)*ord.need,math.floor(comms_source:getReputationPoints())))
-											addCommsReply(string.format(_("ammo-comms","Get one (%i reputation)"),getWeaponCost(missile_type)), function()
+											setCommsMessage(string.format(_("needRep-comms", "You don't have enough reputation to fully replenish your %s type ordnance. You need %i and you only have %i. How would you like to proceed?"),missile_type,getWeaponCost(missile_type)*ord.need,math.floor(comms_source:getReputationPoints())))
+											addCommsReply(string.format(_("ammo-comms", "Get one (%i reputation)"),getWeaponCost(missile_type)), function()
 												if distance(comms_source,comms_target) < 5000 then
 													if comms_source:takeReputationPoints(getWeaponCost(missile_type)) then
 														comms_source:setWeaponStorage(missile_type,comms_source:getWeaponStorage(missile_type) + 1)
 														comms_target.comms_data.weapon_inventory[missile_type] = comms_target.comms_data.weapon_inventory[missile_type] - 1
 														setCommsMessage(string.format(_("ammo-comms", "One %s provided"),missile_type))
 													else
-														setCommsMessage(_("needRep-comms","Insufficient reputation"))
+														setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 													end
 												else
-													setCommsMessage(_("ammo-comms","You need to stay close if you want me to restock your ordnance"))
+													setCommsMessage(_("ammo-comms", "You need to stay close if you want me to restock your ordnance"))
 												end
 												addCommsReply(_("Back"), commsServiceJonque)
 											end)
@@ -4997,23 +4997,23 @@ function commonServiceOptions()
 													max_afford = max_afford + getWeaponCost(missile_type)
 													missile_count = missile_count + 1
 												until(max_afford + getWeaponCost(missile_type) > comms_source:getReputationPoints())
-												addCommsReply(string.format(_("ammo-comms","Get %i (%i reputation)"),missile_count,max_afford),function()
+												addCommsReply(string.format(_("ammo-comms", "Get %i (%i reputation)"),missile_count,max_afford),function()
 													if distance(comms_source,comms_target) < 5000 then
 														if comms_source:takeReputationPoints(getWeaponCost(missile_type)*missile_count) then
 															comms_source:setWeaponStorage(missile_type,comms_source:getWeaponStorage(missile_type) + missile_count)
 															comms_target.comms_data.weapon_inventory[missile_type] = comms_target.comms_data.weapon_inventory[missile_type] - missile_count
-															setCommsMessage(string.format(_("ammo-comms","%i %ss provided"),missile_count,missile_type))
+															setCommsMessage(string.format(_("ammo-comms", "%i %ss provided"),missile_count,missile_type))
 														else
-															setCommsMessage(_("needRep-comms","Insufficient reputation"))
+															setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 														end
 													else
-														setCommsMessage(_("ammo-comms","You need to stay close if you want me to restock your ordnance"))
+														setCommsMessage(_("ammo-comms", "You need to stay close if you want me to restock your ordnance"))
 													end
 													addCommsReply(_("Back"), commsServiceJonque)
 												end)
 											end
 										else
-											setCommsMessage(_("needRep-comms","Insufficient reputation"))
+											setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 										end
 									end
 								else
@@ -6228,7 +6228,7 @@ function playerShipCargoInventory(p)
 	if p.goods ~= nil then
 		for good, goodQuantity in pairs(p.goods) do
 			goodCount = goodCount + 1
-			p:addToShipLog(string.format("     %s: %i",good,goodQuantity),"Yellow")
+			p:addToShipLog(string.format(_("inventory-shipLog", "     %s: %i"),good,goodQuantity),"Yellow")
 		end
 	end
 	if goodCount < 1 then
@@ -6264,7 +6264,7 @@ function updateInner(delta)
 	explodeDevourer()
 	for _, p in ipairs(getActivePlayerShips()) do
 		if p.start_message == nil then
-			p:addToShipLog(string.format("From: Headquarters\nTo: Captain and crew of %s\nThe Kraylor have decided to field test some newly developed weaponry. All we know is that it's big. Find out what they are up to. If, as usual, they are up to no good, stop them.\nGood luck.",p:getCallSign()),"Magenta")
+			p:addToShipLog(string.format(_("goal-shipLog", "From: Headquarters\nTo: Captain and crew of %s\nThe Kraylor have decided to field test some newly developed weaponry. All we know is that it's big. Find out what they are up to. If, as usual, they are up to no good, stop them.\nGood luck."),p:getCallSign()),"Magenta")
 			p.start_message = "sent"
 		end
 		if p.more_info_message == nil then
@@ -6280,9 +6280,9 @@ function updateInner(delta)
 						end
 					end
 					if friendly_station ~= nil then
-						local output_message = "We intercepted some Kraylor transmissions on that weapons test. They say they are going to demonstrate the destructive power of their ultimate force in the universe. This is starting to sound like the plot from a late 20th century space opera movie...\nAnyway, the ship type is the Planet Devourer (not the Death Star for all you 20th century movie history buffs). We expect the Kraylor to wantonly destroy all the planets in the area, because that's just the kind of beings they are."
+						local output_message = _("mission-incCall", "We intercepted some Kraylor transmissions on that weapons test. They say they are going to demonstrate the destructive power of their ultimate force in the universe. This is starting to sound like the plot from a late 20th century space opera movie...\nAnyway, the ship type is the Planet Devourer (not the Death Star for all you 20th century movie history buffs). We expect the Kraylor to wantonly destroy all the planets in the area, because that's just the kind of beings they are.")
 						if devourer ~= nil and devourer:isValid() then
-							output_message = string.format("We intercepted some Kraylor transmissions on that weapons test. They say they are going to demonstrate the destructive power of their ultimate force in the universe. This is starting to sound like the plot from a late 20th century space opera movie...\nAnyway, the ship name is the %s (not the Death Star for all you 20th century movie history buffs). The ship class is Planet Devourer. We expect the Kraylor to wantonly destroy all the planets in the area, because that's just the kind of beings they are.",devourer:getCallSign())
+							output_message = string.format(_("mission-incCall", "We intercepted some Kraylor transmissions on that weapons test. They say they are going to demonstrate the destructive power of their ultimate force in the universe. This is starting to sound like the plot from a late 20th century space opera movie...\nAnyway, the ship name is the %s (not the Death Star for all you 20th century movie history buffs). The ship class is Planet Devourer. We expect the Kraylor to wantonly destroy all the planets in the area, because that's just the kind of beings they are."),devourer:getCallSign())
 						end
 						friendly_station:sendCommsMessage(p,output_message)
 						p.more_info_message = "sent"
@@ -6301,9 +6301,9 @@ function updateInner(delta)
 			deployVirus(p)
 		end
 		p.name_tag_hlm = "name_tag_hlm"
-		p:addCustomInfo("Helms",p.name_tag_hlm,string.format("%s %s in %s",p:getFaction(),p:getCallSign(),p:getSectorName()),3)
+		p:addCustomInfo("Helms",p.name_tag_hlm,string.format(_("mission-tabHelms", "%s %s in %s"),p:getFaction(),p:getCallSign(),p:getSectorName()),3)
 		p.name_tag_tac = "name_tag_tac"
-		p:addCustomInfo("Tactical",p.name_tag_tac,string.format("%s %s in %s",p:getFaction(),p:getCallSign(),p:getSectorName()),3)
+		p:addCustomInfo("Tactical",p.name_tag_tac,string.format(_("mission-tabTactical", "%s %s in %s"),p:getFaction(),p:getCallSign(),p:getSectorName()),3)
 	end
 	if maintenancePlot ~= nil then
 		maintenancePlot(delta)
