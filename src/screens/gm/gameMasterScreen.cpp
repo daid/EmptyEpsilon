@@ -1,4 +1,5 @@
 #include "gameMasterScreen.h"
+#include "i18n.h"
 #include "shipTemplate.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
@@ -11,8 +12,13 @@
 #include "components/collision.h"
 #include "components/gravity.h"
 #include "components/hull.h"
+#include "components/comms.h"
+#include "components/player.h"
+#include "components/name.h"
+#include "components/docking.h"
 #include "systems/collision.h"
 #include "ecs/query.h"
+#include "multiplayer_server.h"
 
 #include "screenComponents/radarView.h"
 
@@ -101,36 +107,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     tweak_button = new GuiButton(this, "TWEAK_OBJECT", tr("button", "Tweak"), [this]() {
         for(auto entity : targets.getTargets())
         {
-            auto obj_ptr = entity.getComponent<SpaceObject*>();
-            if (!obj_ptr) continue;
-            P<SpaceObject> obj = *obj_ptr;
-            if (P<PlayerSpaceship>(obj))
-            {
-                player_tweak_dialog->open(obj);
-                break;
-            }
-            else if (P<SpaceShip>(obj))
-            {
-                ship_tweak_dialog->open(obj);
-                break;
-            }
-            //else if (P<SpaceStation>(obj))
-            //{
-            //    station_tweak_dialog->open(obj);
-            //}
-            else if (P<WarpJammerObject>(obj))
-            {
-                jammer_tweak_dialog->open(obj);
-            }
-            //else if (P<Asteroid>(obj))
-            //{
-            //    asteroid_tweak_dialog->open(obj);
-            //}
-            else
-            {
-                object_tweak_dialog->open(obj);
-                break;
-            }
+            tweak_dialog->open(entity);
+            break;
         }
     });
     tweak_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
@@ -209,18 +187,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     chat_layer = new GuiElement(this, "");
     chat_layer->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    player_tweak_dialog = new GuiObjectTweak(this, TW_Player);
-    player_tweak_dialog->hide();
-    ship_tweak_dialog = new GuiObjectTweak(this, TW_Ship);
-    ship_tweak_dialog->hide();
-    object_tweak_dialog = new GuiObjectTweak(this, TW_Object);
-    object_tweak_dialog->hide();
-    station_tweak_dialog = new GuiObjectTweak(this, TW_Station);
-    station_tweak_dialog->hide();
-    jammer_tweak_dialog = new GuiObjectTweak(this, TW_Jammer);
-    jammer_tweak_dialog->hide();
-    asteroid_tweak_dialog = new GuiObjectTweak(this, TW_Asteroid);
-    asteroid_tweak_dialog->hide();
+    tweak_dialog = new GuiEntityTweak(this);
+    tweak_dialog->hide();
 
     global_message_entry = new GuiGlobalMessageEntryView(this);
     global_message_entry->hide();

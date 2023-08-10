@@ -10,7 +10,7 @@
 
 class GuiGlobalMessageEntry;
 class GuiObjectCreationScreen;
-class GuiObjectTweak;
+class GuiEntityTweak;
 class GuiRadarView;
 class GuiOverlay;
 class GuiSelector;
@@ -35,12 +35,7 @@ private:
     std::vector<GameMasterChatDialog*> chat_dialog_per_ship;
     GuiGlobalMessageEntryView* global_message_entry;
     GuiObjectCreationView* object_creation_view;
-    GuiObjectTweak* player_tweak_dialog;
-    GuiObjectTweak* ship_tweak_dialog;
-    GuiObjectTweak* object_tweak_dialog;
-    GuiObjectTweak* station_tweak_dialog;
-    GuiObjectTweak* jammer_tweak_dialog;
-    GuiObjectTweak* asteroid_tweak_dialog;
+    GuiEntityTweak* tweak_dialog;
 
     GuiElement* info_layout;
     std::vector<GuiKeyValueDisplay*> info_items;
