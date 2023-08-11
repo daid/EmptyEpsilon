@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-05-22 19:11+0200\n"
+"PO-Revision-Date: 2023-08-07 20:18+0200\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -813,7 +813,7 @@ msgstr "Options alternatives"
 msgid "Main screen controls"
 msgstr "Contrôle écran principal"
 
-#: src/menus/shipSelectionScreen.cpp:525
+#: src/menus/shipSelectionScreen.cpp:525 src/menus/autoConnectScreen.cpp:28
 msgid "Ship window"
 msgstr "Vue fenêtre"
 
@@ -1040,7 +1040,18 @@ msgstr "Dommages supplémentaires"
 msgid "Damage negate"
 msgstr "Réduction des dégâts"
 
-#: src/screens/crew6/scienceScreen.cpp:96 src/screens/crew6/relayScreen.cpp:81
+#: src/screens/crew6/scienceScreen.cpp:80
+msgctxt "scienceTab"
+msgid "Scanning"
+msgstr "Analyse"
+
+#: src/screens/crew6/scienceScreen.cpp:80
+msgctxt "scienceTab"
+msgid "Other"
+msgstr "Autres infos"
+
+#: src/screens/crew6/scienceScreen.cpp:96
+msgctxt "science"
 msgid "Callsign"
 msgstr "Nom"
 
@@ -1050,14 +1061,17 @@ msgid "Distance"
 msgstr "Distance"
 
 #: src/screens/crew6/scienceScreen.cpp:100
+msgctxt "science"
 msgid "Bearing"
 msgstr "Cap"
 
 #: src/screens/crew6/scienceScreen.cpp:102
+msgctxt "science"
 msgid "Rel. Speed"
 msgstr "Vit. relative"
 
-#: src/screens/crew6/scienceScreen.cpp:104 src/screens/crew6/relayScreen.cpp:84
+#: src/screens/crew6/scienceScreen.cpp:104
+msgctxt "science"
 msgid "Faction"
 msgstr "Faction"
 
@@ -1067,7 +1081,7 @@ msgid "Type"
 msgstr "Modèle"
 
 #: src/screens/crew6/scienceScreen.cpp:108
-msgctxt "database"
+msgctxt "scienceButton"
 msgid "DB"
 msgstr "BD"
 
@@ -1097,24 +1111,37 @@ msgid "Description"
 msgstr "Description"
 
 #: src/screens/crew6/scienceScreen.cpp:178
-msgctxt "button"
+msgctxt "scienceButton"
 msgid "Probe View"
 msgstr "Vue sonde"
 
 #: src/screens/crew6/scienceScreen.cpp:204
-#: src/screens/crew6/scienceScreen.cpp:246 src/screens/crew6/relayScreen.cpp:88
+#: src/screens/crew6/scienceScreen.cpp:246
+msgctxt "scienceButton"
 msgid "Zoom: {zoom}x"
 msgstr "Zoom : {zoom}x"
 
 #: src/screens/crew6/scienceScreen.cpp:217
-msgctxt "button"
+msgctxt "scienceButton"
 msgid "Radar"
 msgstr "Radar"
 
 #: src/screens/crew6/scienceScreen.cpp:217
-msgctxt "button"
+msgctxt "scienceButton"
 msgid "Database"
 msgstr "Base de données"
+
+#: src/screens/crew6/relayScreen.cpp:81
+msgid "Callsign"
+msgstr "Nom"
+
+#: src/screens/crew6/relayScreen.cpp:84
+msgid "Faction"
+msgstr "Faction"
+
+#: src/screens/crew6/relayScreen.cpp:88
+msgid "Zoom: {zoom}x"
+msgstr "Zoom : {zoom}x"
 
 #: src/screens/crew6/relayScreen.cpp:103
 msgid "Link to Comms"
@@ -3305,3 +3332,7 @@ msgstr "Afficher les FPS"
 msgctxt "hotkey_debug"
 msgid "Show debug timing"
 msgstr "Afficher le graphique de débogage"
+
+#~ msgctxt "button"
+#~ msgid "Database"
+#~ msgstr "Base de données"
