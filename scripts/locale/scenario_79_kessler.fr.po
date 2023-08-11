@@ -149,11 +149,13 @@ msgstr ""
 
 #: scripts/scenario_79_kessler.lua:66
 msgid "Repairs and refueling in progress."
-msgstr "Réparations et ravitaillement en cours."
+msgstr "Réparation de la coque et ravitaillement d'énergie en cours."
 
 #: scripts/scenario_79_kessler.lua:68
 msgid "Your ship is fully refuelled and repaired."
-msgstr "Votre vaisseau est entièrement ravitaillé et réparé."
+msgstr ""
+"La coque de votre vaisseau a été entièrement réparée et on vous a fait le "
+"plein d'énergie."
 
 #: scripts/scenario_79_kessler.lua:71
 msgid ""
@@ -162,11 +164,11 @@ msgid ""
 "\"Mission data\" section in the science database."
 msgstr ""
 "Bonjour officier,\n"
-"Si vous avez besoin de réparations ou de refaire le plein d'énergie, "
-"veuillez vous amarrer à notre station.\n"
+"Si vous avez besoin de réparations sur la coque de votre vaisseau ou de "
+"refaire le plein d'énergie, veuillez vous amarrer à notre station.\n"
 "\n"
-"Pour plus d'informations sur votre mission, consultez la section \"Données "
-"de la mission\" dans la base de données scientifique."
+"Pour plus d'informations sur votre mission, veuillez consulter la section "
+"\"Données de la mission\" dans la base de données scientifique."
 
 #: scripts/scenario_79_kessler.lua:84
 msgid ""
