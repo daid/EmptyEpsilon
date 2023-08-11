@@ -1560,7 +1560,7 @@ msgstr "ajouter des faisceaux laser"
 #: scripts/scenario_44_outpost.lua:2986
 msgctxt "upgrade-comms"
 msgid "increase center beam range by 25%"
-msgstr "augmente la portée du faisceau central de 25%"
+msgstr "augmenter la portée du faisceau central de 25%"
 
 #: scripts/scenario_44_outpost.lua:2995
 msgctxt "upgrade-comms"
