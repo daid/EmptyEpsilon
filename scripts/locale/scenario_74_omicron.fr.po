@@ -898,13 +898,13 @@ msgstr ""
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tubes: %s"
-msgstr "%s tubes : %s"
+msgstr "%s Taille tubes : %s"
 
 #: scripts/scenario_74_omicron.lua:3232
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tube: %s"
-msgstr "%s tube : %s"
+msgstr "%s Taille du tube : %s"
 
 #: scripts/scenario_74_omicron.lua:3391
 msgctxt "station-comms"

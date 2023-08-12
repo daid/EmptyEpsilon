@@ -8632,13 +8632,13 @@ msgstr ""
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tubes: %s"
-msgstr "Taille des tubes %s : %s"
+msgstr "%s Taille tubes : %s"
 
 #: scripts/scenario_44_outpost.lua:18914
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tube: %s"
-msgstr "Taille du tube %s : %s"
+msgstr "%s Taille du tube : %s"
 
 #: scripts/scenario_44_outpost.lua:18969
 msgctxt "shipLog"
