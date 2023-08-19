@@ -3676,7 +3676,7 @@ function handleUndockedState()
     			out = out .. _("stationAssist-comms", "\n\nNote: if you want to use a waypoint, you will have to back out and set one and come back.")
     		else
     			for n=1,comms_source:getWaypointCount() do
-    				addCommsReply(string.format(_("stationAssist-comms", "Rendez-vous at waypoint %i"),n),function()
+    				addCommsReply(string.format(_("stationAssist-comms", "Rendezvous at waypoint %i"),n),function()
     					if comms_source:takeReputationPoints(getServiceCost("servicejonque")) then
     						ship = serviceJonque(comms_target:getFaction()):setPosition(comms_target:getPosition()):setCallSign(generateCallSign(nil,comms_target:getFaction())):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
 							ship.comms_data = {
@@ -3714,7 +3714,7 @@ function handleUndockedState()
 									neutral = math.max(comms_target.comms_data.reputation_cost_multipliers.friend,comms_target.comms_data.reputation_cost_multipliers.neutral/2)
 								},
 							}
-    						setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to rendez-vous at waypoint %i"),ship:getCallSign(),n))
+    						setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to rendezvous at waypoint %i"),ship:getCallSign(),n))
     					else
 							setCommsMessage(_("needRep-comms", "Not enough reputation!"));
     					end
@@ -3870,7 +3870,7 @@ function friendlyComms(comms_data)
 								comms_source.goods[good] = comms_source.goods[good] - 1
 								comms_source.cargo = comms_source.cargo + 1
 								setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
-								addCommsReply("Back", commsShip)
+								addCommsReply(_("Back"), commsShip)
 							end)
 						end
 					end
