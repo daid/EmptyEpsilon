@@ -2223,21 +2223,22 @@ msgid ""
 "Replenish scan probes."
 msgstr ""
 "%s\n"
-"Réapprovisionner les sondes."
+"- Réapprovisionnement des sondes."
 
 #: scripts/scenario_47_scavenger.lua:4953
 #: scripts/scenario_47_scavenger.lua:6118
 msgctxt "stationServices-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
 msgstr ""
-"Impossible de réapprovisionner les sondes en raison d'une défaillance de "
-"l'unité de fabrication."
+"- Sondes : impossible de réapprovisionner les sondes en raison d'une "
+"défaillance de l'unité de fabrication."
 
 #: scripts/scenario_47_scavenger.lua:4954
 #: scripts/scenario_47_scavenger.lua:6119
 msgctxt "stationServices-comms"
 msgid "Parts shortage prevents scan probe replenishment."
-msgstr "Le manque de pièces empêche le réapprovisionnement des sondes."
+msgstr ""
+"- Sondes : le manque de pièces empêche le réapprovisionnement des sondes."
 
 #: scripts/scenario_47_scavenger.lua:4955
 #: scripts/scenario_47_scavenger.lua:6120
@@ -2246,8 +2247,8 @@ msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
 "reasons."
 msgstr ""
-"Les gestionnaires de la station ont réduit le réapprovisionnement des sondes "
-"pour des raisons de réduction des coûts."
+"- Sondes : les gestionnaires de la station ont réduit le réapprovisionnement "
+"des sondes pour des raisons de réduction des coûts."
 
 #: scripts/scenario_47_scavenger.lua:4959
 #: scripts/scenario_47_scavenger.lua:4972
@@ -2273,30 +2274,30 @@ msgid ""
 "Ship hull repair."
 msgstr ""
 "%s\n"
-"Réparation de la coque."
+"- Réparation de la coque."
 
 #: scripts/scenario_47_scavenger.lua:4966
 #: scripts/scenario_47_scavenger.lua:6131
 msgctxt "stationServices-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
-"Nous n'avons plus les matériaux et fournitures nécessaires pour réparer la "
-"coque."
+"- Coque : nous n'avons plus les matériaux et fournitures nécessaires pour "
+"réparer la coque."
 
 #: scripts/scenario_47_scavenger.lua:4967
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
-"L'automatisation de réparation de la coque n'est pas disponible pendant la "
-"maintenance."
+"- Coque : l'automatisation de réparation de la coque n'est pas disponible "
+"pendant la maintenance."
 
 #: scripts/scenario_47_scavenger.lua:4968
 #: scripts/scenario_47_scavenger.lua:6133
 msgctxt "stationServices-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
-"Tous les techniciens de réparation de coque mis en quarantaine dans leur "
-"quartiers pour cause de maladie."
+"- Coque : tous les techniciens de réparation de coque sont en quarantaine "
+"dans leur quartiers pour cause de maladie."
 
 #: scripts/scenario_47_scavenger.lua:4975
 #: scripts/scenario_47_scavenger.lua:6140
@@ -2307,7 +2308,7 @@ msgid ""
 "Recharge ship energy stores."
 msgstr ""
 "%s\n"
-"Recharger les réserves d'énergie du vaisseau."
+"- Recharge des réserves d'énergie du vaisseau."
 
 #: scripts/scenario_47_scavenger.lua:4979
 #: scripts/scenario_47_scavenger.lua:6144
@@ -2316,15 +2317,16 @@ msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
 msgstr ""
-"Une récente panne de réacteur nous a mis sous tension auxiliaire, nous ne "
-"pouvons donc pas recharger les navires."
+"- Énergie : une récente panne de réacteur nous a mis sous tension "
+"auxiliaire, nous ne pouvons donc pas recharger les vaisseaux."
 
 #: scripts/scenario_47_scavenger.lua:4980
 #: scripts/scenario_47_scavenger.lua:6145
 msgctxt "stationServices-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
-"Un couplage électrique défectueux rend la recharge des navires trop risquée."
+"- Énergie : un couplage électrique défectueux rend la recharge des vaisseaux "
+"trop risquée."
 
 #: scripts/scenario_47_scavenger.lua:4981
 #: scripts/scenario_47_scavenger.lua:6146
@@ -2333,8 +2335,9 @@ msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
 "can't recharge ships right now."
 msgstr ""
-"Une frappe d'astéroïde a endommagé nos cellules solaires et nous manquons de "
-"puissance, nous ne pouvons donc pas recharger les navires pour le moment."
+"- Énergie : une frappe d'astéroïde a endommagé nos cellules solaires et nous "
+"manquons de puissance, nous ne pouvons donc pas recharger les vaisseaux pour "
+"le moment."
 
 #: scripts/scenario_47_scavenger.lua:4988
 #: scripts/scenario_47_scavenger.lua:6153
@@ -2532,7 +2535,7 @@ msgstr "Booster la téléportation (10 rép)"
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
 msgstr ""
-"Votre recharge (délai) de votre moteur de téléportation a été boosté à %ik."
+"Le délai de recharge de votre moteur de téléportation a été boosté à %ik."
 
 #: scripts/scenario_47_scavenger.lua:5131
 #: scripts/scenario_47_scavenger.lua:5164
