@@ -712,7 +712,7 @@ msgstr "Enregistrement du capteur : station %s %s en secteur %s "
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s, %s station %s in %s"
-msgstr "%s, %s station %s en secteur %s "
+msgstr "%s, station %s %s en secteur %s "
 
 #: scripts/scenario_74_omicron.lua:2415
 #, lua-format
@@ -898,13 +898,13 @@ msgstr ""
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tubes: %s"
-msgstr "%s tubes : %s"
+msgstr "%s Taille tubes : %s"
 
 #: scripts/scenario_74_omicron.lua:3232
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tube: %s"
-msgstr "%s tube : %s"
+msgstr "%s Taille du tube : %s"
 
 #: scripts/scenario_74_omicron.lua:3391
 msgctxt "station-comms"
@@ -1219,20 +1219,20 @@ msgid ""
 "Replenish scan probes."
 msgstr ""
 "%s\n"
-"Réapprovisionnement des sondes."
+"- Réapprovisionnement des sondes."
 
 #: scripts/scenario_74_omicron.lua:3631 scripts/scenario_74_omicron.lua:4497
 msgctxt "stationServices-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
 msgstr ""
-"Sondes : impossible de réapprovisionner les sondes en raison d'une "
+"- Sondes : impossible de réapprovisionner les sondes en raison d'une "
 "défaillance de l'unité de fabrication."
 
 #: scripts/scenario_74_omicron.lua:3632 scripts/scenario_74_omicron.lua:4498
 msgctxt "stationServices-comms"
 msgid "Parts shortage prevents scan probe replenishment."
 msgstr ""
-"Sondes : le manque de pièces empêche le réapprovisionnement des sondes."
+"- Sondes : le manque de pièces empêche le réapprovisionnement des sondes."
 
 #: scripts/scenario_74_omicron.lua:3633 scripts/scenario_74_omicron.lua:4499
 msgctxt "stationServices-comms"
@@ -1240,7 +1240,7 @@ msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
 "reasons."
 msgstr ""
-"Sondes : les gestionnaires de la station ont réduit le réapprovisionnement "
+"- Sondes : les gestionnaires de la station ont réduit le réapprovisionnement "
 "des sondes pour des raisons de réduction des coûts."
 
 #: scripts/scenario_74_omicron.lua:3640 scripts/scenario_74_omicron.lua:4506
@@ -1251,28 +1251,28 @@ msgid ""
 "Ship hull repair."
 msgstr ""
 "%s\n"
-"Réparation de la coque."
+"- Réparation de la coque."
 
 #: scripts/scenario_74_omicron.lua:3644 scripts/scenario_74_omicron.lua:4510
 msgctxt "stationServices-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
-"Coque : nous n'avons plus les matériaux et fournitures nécessaires pour "
+"- Coque : nous n'avons plus les matériaux et fournitures nécessaires pour "
 "réparer la coque."
 
 #: scripts/scenario_74_omicron.lua:3645
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
-"Coque : l'automatisation de réparation de la coque n'est pas disponible "
+"- Coque : l'automatisation de réparation de la coque n'est pas disponible "
 "pendant la maintenance."
 
 #: scripts/scenario_74_omicron.lua:3646 scripts/scenario_74_omicron.lua:4512
 msgctxt "stationServices-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
-"Coque : tous les techniciens de réparation de coque sont en quarantaine dans "
-"leur quartiers pour cause de maladie."
+"- Coque : tous les techniciens de réparation de coque sont en quarantaine "
+"dans leur quartiers pour cause de maladie."
 
 #: scripts/scenario_74_omicron.lua:3653 scripts/scenario_74_omicron.lua:4519
 #, lua-format
@@ -1282,7 +1282,7 @@ msgid ""
 "Recharge ship energy stores."
 msgstr ""
 "%s\n"
-"Recharge des réserves d'énergie du vaisseau."
+"- Recharge des réserves d'énergie du vaisseau."
 
 #: scripts/scenario_74_omicron.lua:3657 scripts/scenario_74_omicron.lua:4523
 msgctxt "stationServices-comms"
@@ -1290,14 +1290,14 @@ msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
 msgstr ""
-"Batteries : une récente panne de réacteur nous a mis sous tension "
+"- Énergie : une récente panne de réacteur nous a mis sous tension "
 "auxiliaire, nous ne pouvons donc pas recharger les vaisseaux."
 
 #: scripts/scenario_74_omicron.lua:3658 scripts/scenario_74_omicron.lua:4524
 msgctxt "stationServices-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
-"Batteries : un couplage électrique défectueux rend la recharge des vaisseaux "
+"- Énergie : un couplage électrique défectueux rend la recharge des vaisseaux "
 "trop risquée."
 
 #: scripts/scenario_74_omicron.lua:3659 scripts/scenario_74_omicron.lua:4525
@@ -1306,7 +1306,7 @@ msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
 "can't recharge ships right now."
 msgstr ""
-"Batteries : une frappe d'astéroïde a endommagé nos cellules solaires et nous "
+"- Énergie : une frappe d'astéroïde a endommagé nos cellules solaires et nous "
 "manquons de puissance, nous ne pouvons donc pas recharger les vaisseaux pour "
 "le moment."
 
@@ -1338,7 +1338,7 @@ msgid ""
 "May repair probe launch system"
 msgstr ""
 "%s\n"
-"Peut réparer le système de lancement de sonde."
+"- Peut réparer le système de lancement de sonde."
 
 #: scripts/scenario_74_omicron.lua:3672 scripts/scenario_74_omicron.lua:4538
 #, lua-format
@@ -1348,7 +1348,7 @@ msgid ""
 "May repair hacking system"
 msgstr ""
 "%s\n"
-"Peut réparer le système de piratage."
+"- Peut réparer le système de piratage."
 
 #: scripts/scenario_74_omicron.lua:3675 scripts/scenario_74_omicron.lua:4541
 #, lua-format
@@ -1358,7 +1358,7 @@ msgid ""
 "May repair scanners"
 msgstr ""
 "%s\n"
-"Peut réparer les scanners."
+"- Peut réparer les scanners."
 
 #: scripts/scenario_74_omicron.lua:3678 scripts/scenario_74_omicron.lua:4544
 #, lua-format
@@ -1368,7 +1368,7 @@ msgid ""
 "May repair combat maneuver"
 msgstr ""
 "%s\n"
-"Peut réparer la manœuvre de combat."
+"- Peut réparer la manœuvre de combat."
 
 #: scripts/scenario_74_omicron.lua:3681 scripts/scenario_74_omicron.lua:4547
 #, lua-format
@@ -1378,7 +1378,7 @@ msgid ""
 "May repair self destruct system"
 msgstr ""
 "%s\n"
-"Peut réparer le système d'autodestruction."
+"- Peut réparer le système d'autodestruction."
 
 #: scripts/scenario_74_omicron.lua:3693
 msgctxt "stationServices-comms"
@@ -1390,7 +1390,7 @@ msgstr "Booster la téléportation (10 rép)"
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
 msgstr ""
-"Votre recharge (délai) de votre moteur de téléportation a été boosté à %ik."
+"Le délai de recharge de votre moteur de téléportation a été boosté à %ik."
 
 #: scripts/scenario_74_omicron.lua:3698 scripts/scenario_74_omicron.lua:3731
 #: scripts/scenario_74_omicron.lua:3744 scripts/scenario_74_omicron.lua:3757
@@ -3162,7 +3162,7 @@ msgid "In what sector is %s located?"
 msgstr "Dans quel secteur se situe %s ?"
 
 #: scripts/scenario_74_omicron.lua:5027 scripts/scenario_74_omicron.lua:5030
-#: scripts/scenario_74_omicron.lua:5037
+#: scripts/scenario_74_omicron.lua:5034 scripts/scenario_74_omicron.lua:5037
 #, lua-format
 msgctxt "mission3th-comms"
 msgid "%s is located in sector %s."
@@ -3551,7 +3551,7 @@ msgstr "Défendez le marqueur %i."
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %i."
-msgstr "Nous partons pour défendre le marqueur %i."
+msgstr "Nous partons immédiatement défendre le marqueur %i."
 
 #: scripts/scenario_74_omicron.lua:6057
 msgctxt "shipAssist-comms"
@@ -3909,6 +3909,12 @@ msgstr "Inventaire"
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
 msgstr "%s Cargaison actuelle :"
+
+#: scripts/scenario_74_omicron.lua:7017
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "     %s: %i"
+msgstr "     %s : %i"
 
 #: scripts/scenario_74_omicron.lua:7021
 msgctxt "inventory-shipLog"

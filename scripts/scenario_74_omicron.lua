@@ -4743,7 +4743,7 @@ if #accessible_warp_jammers > 0 then
     end
     if isAllowedTo(comms_target.comms_data.services.servicejonque) then
     	addCommsReply(_("stationAssist-comms","Please send a service jonque for repairs"), function()
-    		local out = string.format(_("stationAssist-comms","Would you like the service jonque to come to you directly or would you prefer to set up a rendez-vous via a waypoint? Either way, you will need %.1f reputation."),getServiceCost("servicejonque"))
+    		local out = string.format(_("stationAssist-comms","Would you like the service jonque to come to you directly or would you prefer to set up a rendezvous via a waypoint? Either way, you will need %.1f reputation."),getServiceCost("servicejonque"))
     		addCommsReply("Direct",function()
     			if comms_source:takeReputationPoints(getServiceCost("servicejonque")) then
 					ship = serviceJonque(comms_target:getFaction()):setPosition(comms_target:getPosition()):setCallSign(generateCallSign(nil,comms_target:getFaction())):setScanned(true):orderDefendTarget(comms_source)
@@ -4791,7 +4791,7 @@ if #accessible_warp_jammers > 0 then
     			out = out .. _("stationAssist-comms","\n\nNote: if you want to use a waypoint, you will have to back out and set one and come back.")
     		else
     			for n=1,comms_source:getWaypointCount() do
-    				addCommsReply(string.format(_("stationAssist-comms","Rendez-vous at waypoint %d"),n),function()
+    				addCommsReply(string.format(_("stationAssist-comms","Rendezvous at waypoint %d"),n),function()
     					if comms_source:takeReputationPoints(getServiceCost("servicejonque")) then
     						ship = serviceJonque(comms_target:getFaction()):setPosition(comms_target:getPosition()):setCallSign(generateCallSign(nil,comms_target:getFaction())):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
 							ship.comms_data = {
@@ -4829,7 +4829,7 @@ if #accessible_warp_jammers > 0 then
 									neutral = math.max(comms_target.comms_data.reputation_cost_multipliers.friend,comms_target.comms_data.reputation_cost_multipliers.neutral/2)
 								},
 							}
-    						setCommsMessage(string.format(_("stationAssist-comms","We have dispatched %s to rendez-vous at waypoint %d"),ship:getCallSign(),n))
+    						setCommsMessage(string.format(_("stationAssist-comms","We have dispatched %s to rendezvous at waypoint %d"),ship:getCallSign(),n))
     					else
 							setCommsMessage(_("needRep-comms", "Not enough reputation!"));
     					end
@@ -5031,7 +5031,7 @@ function medicalBaseLocationAssistanceComms()
 					end)
 				else
 					addCommsReply(string.format(_("mission3th-comms","In what sector is %s located?"),station_regional_hq:getCallSign()), function()
-						setCommsMessage(string.format("%s is located in sector %s.",station_regional_hq:getCallSign(),station_regional_hq:getSectorName()))
+						setCommsMessage(string.format(_("mission3th-comms","%s is located in sector %s."),station_regional_hq:getCallSign(),station_regional_hq:getSectorName()))
 					end)
 					addCommsReply(string.format(_("mission3th-comms","In what sector is %s located?"),station_medical_research:getCallSign()), function()
 						setCommsMessage(string.format(_("mission3th-comms","%s is located in sector %s."),station_medical_research:getCallSign(),station_medical_research:getSectorName()))
@@ -7009,18 +7009,18 @@ function cargoInventory(delta)
 	end
 end
 function playerShipCargoInventory(p)
-	p:addToShipLog(string.format(_("inventory-shipLog","%s Current cargo:"),p:getCallSign()),"Yellow")
+	p:addToShipLog(string.format(_("inventory-shipLog", "%s Current cargo:"),p:getCallSign()),"Yellow")
 	local goodCount = 0
 	if p.goods ~= nil then
 		for good, goodQuantity in pairs(p.goods) do
 			goodCount = goodCount + 1
-			p:addToShipLog(string.format("     %s: %i",good,goodQuantity),"Yellow")
+			p:addToShipLog(string.format(_("inventory-shipLog", "     %s: %i"),good,goodQuantity),"Yellow")
 		end
 	end
 	if goodCount < 1 then
 		p:addToShipLog(_("inventory-shipLog","     Empty"),"Yellow")
 	end
-	p:addToShipLog(string.format(_("inventory-shipLog","Available space: %i"),p.cargo),"Yellow")
+	p:addToShipLog(string.format(_("inventory-shipLog", "Available space: %i"),p.cargo),"Yellow")
 end
 --		Generate call sign functions
 function generateCallSign(prefix,faction)

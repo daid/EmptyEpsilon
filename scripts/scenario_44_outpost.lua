@@ -5309,7 +5309,7 @@ function setConstants()
 				{tube = 3,	ord = 3, desc = _("upgrade-comms","add broadside tubes")},											--4
 				{tube = 4,	ord = 3, desc = _("upgrade-comms","switch to medium sized tubes")},									--5
 				{tube = 5,	ord = 4, desc = _("upgrade-comms","add nukes and EMPs to front tubes")},							--6
-				{tube = 5,	ord = 5, desc = _("upgrade-comms","increase hpoming capacity by 60%")},								--7
+				{tube = 5,	ord = 5, desc = _("upgrade-comms","increase homing capacity by 60%")},								--7
 				{tube = 6,	ord = 5, desc = _("upgrade-comms","add more broadside tubes")},										--8
 				{tube = 6,	ord = 6, desc = _("upgrade-comms","triple mine capacity")},											--9
 				{tube = 7,	ord = 6, desc = _("upgrade-comms","make second broadside tubes large")},							--10
@@ -19267,7 +19267,7 @@ function playerShipCargoInventory(p)
 	if p.goods ~= nil then
 		for good, goodQuantity in pairs(p.goods) do
 			goodCount = goodCount + 1
-			p:addToShipLog(string.format("     %s: %i",good,goodQuantity),"Yellow")
+			p:addToShipLog(string.format(_("inventory-shipLog", "     %s: %i"),good,goodQuantity),"Yellow")
 		end
 	end
 	if goodCount < 1 then
