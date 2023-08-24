@@ -1,0 +1,486 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+# Scenario name
+msgid "Kessler"
+msgstr "Kessler"
+
+# Scenario description
+msgid ""
+"Save the global satellite network by catching space debris and prevent the "
+"Kessler Syndrome! This is a beginner scenario initially created to be played "
+"by a crew of school kids. It still assumes general knowledge about operating "
+"the stations, so a previous tutorial session or on-site introduction is "
+"recommended. The officer(s) on relay&science or on operations should be able "
+"to read fluently."
+msgstr ""
+"Rettet das globale Satellitennetzwerk, indem ihr Weltraumschrott einsammelt "
+"und das Kessler-Syndrom verhindert! Dies ist ein Einstiegsszenario, das "
+"ursprünglich gedacht war, von einer Crew aus Schulkindern gespielt zu "
+"werden. Es setzt jedoch Grundkenntnisse der einzelnen Stationen voraus, "
+"daher wird ein vorheriges durchspielen der Tutorials oder eine Einweisung  "
+"vor Ort empfohlen. Wer Kommunikation&Wissenschaft oder die Ops-Station "
+"bedient, sollte fließend lesen können."
+
+#: scripts/scenario_79_kessler.lua:22
+msgid "Earth"
+msgstr "Erde"
+
+#: scripts/scenario_79_kessler.lua:22
+msgid "The blue planet"
+msgstr "Der blaue Planet"
+
+#: scripts/scenario_79_kessler.lua:26
+msgid "A supply station in geostationary orbit"
+msgstr "Eine Versorgungsstation in der geostationären Umlaufbahn"
+
+#: scripts/scenario_79_kessler.lua:40
+msgid "Mission data"
+msgstr "Missionsdaten"
+
+#: scripts/scenario_79_kessler.lua:41
+msgid "Kessler Syndrome"
+msgstr "Kessler-Syndrom"
+
+#: scripts/scenario_79_kessler.lua:42
+msgid ""
+"The Kessler Syndrome is a theoretical Scenario first proposed by NASA "
+"Scientist Donald J. Kessler in 1978. It describes the situation where the "
+"density of objects in Earth's orbit is high enough to cause a chain reaction "
+"of collisions. Each collision will create a huge debris field of multiple "
+"objects, and many of them will collide with other objects. Ultimately, the "
+"Orbit will be full of tiny objects destroying satellites and making space "
+"flight very hard, if not impossible. Also, much of our daily life depends on "
+"satellites, like TV, communication, navigation and internet. The Kessler "
+"Syndrome would be a serious threat to all of this. This is why clearing "
+"space debris, and preventing that kind of scenario is extremely important.\n"
+msgstr ""
+"Das Kessler-Syndrom ist ein theoretisches Szenario, das erstmals 1978 vom "
+"NASA-Wissenschaftler Donald J. Kessler vorgeschlagen wurde. Es beschreibt "
+"die Situation, in der die Dichte von Objekten in der Erdumlaufbahn hoch "
+"genug ist, um eine Kettenreaktion von Kollisionen zu verursachen. Bei jeder "
+"Kollision entsteht ein riesiges Trümmerfeld aus mehreren Objekten, von denen "
+"viele wiederum mit anderen Objekten kollidieren werden. Letztendlich wird "
+"die Umlaufbahn voller kleiner Objekte sein, die Satelliten zerstören und die "
+"Raumfahrt sehr schwierig, wenn nicht gar unmöglich machen. Außerdem hängt "
+"ein großer Teil unseres täglichen Lebens von Satelliten ab, wie Fernsehen, "
+"Kommunikation, Navigation und Internet. Das Kessler-Syndrom ist eine "
+"ernsthafte Bedrohung für all diese Dinge. Deshalb ist die Beseitigung von "
+"Weltraumschrott und die Verhinderung eines solchen Szenarios extrem "
+"wichtig.\n"
+
+#: scripts/scenario_79_kessler.lua:46
+msgctxt "buttonGM"
+msgid "Unusual Readings"
+msgstr "Seltsame Werte"
+
+#: scripts/scenario_79_kessler.lua:48
+msgctxt "buttonGM"
+msgid "Order to dock"
+msgstr "Befehl zum Andocken"
+
+#: scripts/scenario_79_kessler.lua:50
+msgctxt "buttonGM"
+msgid "Showdown"
+msgstr "Showdown"
+
+#: scripts/scenario_79_kessler.lua:54
+msgid ""
+"Greetings!\n"
+"We are glad to welcome you aboard our new prototype! If it becomes "
+"successful, we might soon start assembling a fleet of tidying ships! "
+"Hopefully, they will be able to finally solve the problem of space debris in "
+"our orbit!\n"
+"This first prototype will only be able to capture larger space junk. We "
+"found several suitable candidates for your first test run, they will appear "
+"with a four-digit call sign on your radar.\n"
+"To capture them, you have to calibrate your shields correctly, so be sure "
+"the object will be scanned. A successful scan will reveal the correct "
+"capturing frequency. Now, the shields have to be calibrated with the correct "
+"frequency. Make sure to activate the shields after calibration. Then you can "
+"fly towards the pieces of space junk, and it should successfully be "
+"captured.\n"
+msgstr ""
+"Guten Tag!\n"
+"Willkommen an Bord unseres neuen Prototyps! Wenn er erfolgreich ist, können "
+"wir bald damit anfangen, eine ganze Flotte von Aufräumschiffen herzustellen! "
+"Hoffentlich werden sie so unser Problem mit dem Weltraumschrott in unserer "
+"Umlaufbahn lösen. Dieser erste Prototyp kann nur größere Stücke Schrott "
+"einsammeln. Wir haben einige Kandidaten für den ersten Testlauf markiert. "
+"Auf dem Radar sind sie daran zu erkennen, dass sie mit vier Ziffern "
+"beschriftet sind.\n"
+"Um sie einfangen zu können, müssen die Schilde richtig kalibriert werden, "
+"dafür muss das Stück Schrott gescannt werden. Ein erfolgreicher Scan zeigt "
+"die richtige Frequenz zum einsammeln an. Nun müssen die Schilde mit der "
+"richtigen Frequenz kalibriert werden. Achten Sie darauf, die Schilde nach "
+"der Kalibrierung zu aktivieren. Dann können Sie auf den Weltraumschrott "
+"zufliegen, und er sollte erfolgreich eingefangen werden.\n"
+
+#: scripts/scenario_79_kessler.lua:66
+msgid "Repairs and refueling in progress."
+msgstr ""
+"Ihr Schiff wird gerade repariert und die Energiespeicher wieder aufgeladen."
+
+#: scripts/scenario_79_kessler.lua:68
+msgid "Your ship is fully refuelled and repaired."
+msgstr ""
+"Die Hülle wurde repariert und die Energiespeicher sind wieder aufgeladen."
+
+#: scripts/scenario_79_kessler.lua:71
+msgid ""
+"Good day, officer. If you need repairs or to replenish your energy, please "
+"dock with us. For more background information about your mission, see the "
+"\"Mission data\" section in the science database."
+msgstr ""
+"Guten Tag. bitte docken Sie bei uns an, wenn sie Energie aufladen wollen "
+"oder das Schiff repariert werden muss. Mehr Hintergrundinformationen zu "
+"Ihrer Mission finden Sie in der Wissenschaftsdatenbank unter \"Missionsdaten"
+"\"."
+
+#: scripts/scenario_79_kessler.lua:84
+msgid ""
+"Shield frequencies are required for this scenario. Please enable frequencies "
+"in extra settings."
+msgstr ""
+"Für dieses Szenario sind Schildfrequenzen erforderlich. Bitte aktiviere "
+"\"Frequenzen\" unter \"Zusätzliche Einstellungen\"."
+
+#: scripts/scenario_79_kessler.lua:96
+msgid ""
+"We are getting strange readings from sector C7. It looks like the source is "
+"an abandoned satellite. Please investigate, but be careful."
+msgstr ""
+"Wir empfangen seltsame Werte aus Sektor C7. Es sieht so aus, als wenn sie "
+"von einem nicht mehr genutzten Satelliten stammen. Bitte gehen Sie dem nach, "
+"seien Sie aber vorsichtig."
+
+#: scripts/scenario_79_kessler.lua:98
+msgid "An abandoned satellite"
+msgstr "Ein nicht mehr genutzter Satellit"
+
+#: scripts/scenario_79_kessler.lua:98
+msgid ""
+"An old military satellite. Capturing frequency is blocked. Behaviour "
+"unknown. Recommendation: Jump not closer than 10U, then advance using the "
+"impulse drive."
+msgstr ""
+"Eine alter Militär-Satellit. Frequenz zum einfangen wird blockiert. "
+"Verhalten unbekannt. Empfehlung: nicht direkt heran springen, sondern etwa "
+"10U Abstand halten, und nach dem Sprung mit Impulsantrieb näher fliegen."
+
+#: scripts/scenario_79_kessler.lua:101 scripts/scenario_79_kessler.lua:166
+msgid "Additional debris created!"
+msgstr "Zusätzlicher Weltraumschrott wurde verursacht!"
+
+#: scripts/scenario_79_kessler.lua:126
+msgid ""
+"The satellite started to attack objects in its proximity! That way, more "
+"fragments will be created that may harm other satellites. You must stop it! "
+"Try to NOT destroy it, target its impulse drive instead."
+msgstr ""
+"Der Satellit greift Objekte in seiner Nähe an! Dadurch werden immer mehr "
+"Einzelteile entstehen und andere Satelliten in Gefahr bringen. Das müssen "
+"Sie verhindern! Versuchen Sie, ihn NICHT zu zerstören sondern zielen Sie auf "
+"seinen Impuls-Antrieb."
+
+#: scripts/scenario_79_kessler.lua:149
+msgid "A deactivated military satellite. Scan to get the capturing frequency."
+msgstr ""
+"Eine deaktivierter Militär-Satellit. Scanne, um die Frequenz zum einfangen "
+"herauszufinden."
+
+#: scripts/scenario_79_kessler.lua:149 scripts/scenario_79_kessler.lua:436
+msgid "Capturing frequency:"
+msgstr "Frequenz zum einfangen:"
+
+#: scripts/scenario_79_kessler.lua:175
+msgid ""
+"It looks like the old satellite was hit by a piece of space debris and thus "
+"reactivated. This also caused it to malfunction. \n"
+"Just before its deactivation, it was able to send a signal. We have to "
+"investigate this.\n"
+"But first, please dock with us. If necessary, we can repair the hull, and "
+"you can recharge your energy. \n"
+"After that, you will receive further orders."
+msgstr ""
+"Der alte Satellit wurde offenbar von einem Stück Weltraumschrott getroffen "
+"und dadurch aktiviert, aber mit einer Fehlfunktion.\n"
+"Er konnte kurz vor seiner Abschaltung noch ein Signal senden. Dem müssen wir "
+"nachgehen.\n"
+"Fliegen Sie aber bitte zuerst zu uns, wir können ihr Schiff reparieren falls "
+"es nötig ist und sie können Energie auftanken.\n"
+"Danach werden Sie weitere Befehle erhalten."
+
+#: scripts/scenario_79_kessler.lua:186
+msgid ""
+"Bad news: The satellite woke up a whole group of military satellites that "
+"should have been out of service for ages. If we don't do anything against "
+"them, they will slowly but surely destroy all objects they can find. The "
+"debris will spread all over the orbit, destroying all our communications "
+"satellites.\n"
+"Not only would that be a disaster for science and spaceflight, but everyday "
+"things like Internet are in serious danger as well!\n"
+"We are currently making a plan to stop this. Please stay docked until you "
+"get new orders.\n"
+msgstr ""
+"Schlechte Nachrichten: Der Satellit hat mit einem Signal eine ganzes Gruppe "
+"von Millitärsatelliten aufgeweckt, die eigentlich schon lange nicht mehr im "
+"Betrieb waren. Wenn wir nichts dagegen unternehmen, werden sie nach und nach "
+"immer mehr Objekte in ihrer Nähe zerstören. Die Einzelteile werden sich über "
+"die ganze Umlaufbahn verteilen und alle unsere wichtigen Nachrichten-und "
+"Kommunkations-Satelliten zerstören.\n"
+
+#: scripts/scenario_79_kessler.lua:194
+msgid ""
+"New orders: We have to shut down the rogue satellites somehow. Therefore, "
+"you need to get as close as possible to the control node that is commanding "
+"the other satellites. Luckily, the satellites are in some kind of sleep mode "
+"right now, to recharge their batteries. You need another ship however, to "
+"get to them unnoticed. As soon you are getting closer, you should also turn "
+"off every system and device that is not necessary. When you are ready, your "
+"weapons officer can change the ship at the touch of a button."
+msgstr ""
+"Neue Befehle: Wir müssen versuchen, die fehlerhaften Satelliten "
+"abzuschalten. Dazu müssen Sie möglichst nahe an den Kontroll-Satelliten "
+"kommen, der den anderen Befehle gibt. Zum Glück sind die Satelliten gerade "
+"in einer Art Ruhemodus, um ihre Energiespeicher aufzuladen. Wir brauchen "
+"allerdings ein kleineres Schiff, um unauffällig an sie heranzukommen. "
+"Außerdem sollten sie alle Systeme abschalten, die nicht unbedingt notwendig "
+"sind, sobald sie in die Nähe kommen. Sobald Sie bereit sind, kann an der "
+"Waffenstation auf das neue Schiff gewechselt werden."
+
+#: scripts/scenario_79_kessler.lua:196
+msgid ""
+"New orders: We have to shut down the rogue satellites somehow. Therefore, "
+"you need to get as close as possible to the control node that is commanding "
+"the other satellites. Luckily, the satellites are in some kind of sleep mode "
+"right now, to recharge their batteries. You need another ship however, to "
+"get to them unnoticed. As soon you are getting closer, you should also turn "
+"off every system and device that is not necessary. When you are ready, your "
+"tactical officer can change the ship at the touch of a button."
+msgstr ""
+"Neue Befehle: Wir müssen versuchen, die fehlerhaften Satelliten "
+"abzuschalten. Dazu müssen Sie möglichst nahe an den Kontroll-Satelliten "
+"kommen, der den anderen Befehle gibt. Zum Glück sind die Satelliten gerade "
+"in einem Art Ruhemodus, um ihre Energiespeicher aufzuladen. Wir brauchen "
+"allerdings ein kleineres Schiff, um unauffällig an sie heranzukommen. "
+"Außerdem sollten sie alle Systeme abschalten, die nicht unbedingt notwendig "
+"sind, sobald sie in die Nähe kommen. Sobald Sie bereit sind, kann an der "
+"taktischen Station auf das neue Schiff gewechselt werden."
+
+#: scripts/scenario_79_kessler.lua:198 scripts/scenario_79_kessler.lua:199
+msgid "change ship"
+msgstr "Schiff wechseln"
+
+#: scripts/scenario_79_kessler.lua:207
+msgid ""
+"Welcome to the new ship. It is smaller and more unsuspicious. On the "
+"downside, it is also less robust. Instead of a jump drive, it is equipped "
+"with a so-called warp drive. \n"
+"You can fly much faster with it, but the drive tends to overheat easily. "
+"Keep in mind to turn off all non-essential systems and devices as soon you "
+"are getting closer to the dangerous satellites.\n"
+"This ship has a transmitter installed that is strong enough to overwhelm the "
+"jammer of the control node and to send a shutdown signal. But you have to be "
+"very close for it to work.\n"
+"We detected the control node at a heading of about 125 degrees from our "
+"position, but a newly formed dust cloud prevents us to get more details. We "
+"don't know if this cloud was created intentionally to serve as a hiding "
+"place. It might as well be a side effect of their destructive activities or "
+"just fuel leaking out of their old tanks. Good luck!\n"
+"    "
+msgstr ""
+"Willkommen auf dem neuen Schiff. Es ist kleiner und unauffälliger. Dadurch "
+"ist es leider auch weniger stabil. Statt einem Sprungantrieb hat es einen "
+"sogenannten Warpantrieb. Damit können Sie sehr schnell fliegen, allerdings "
+"verbraucht der Antrieb viel Energie und wird sehr schnell heiß. Denken Sie "
+"daran, alle unnötigen Systeme abzuschalten, sobald sie in die Nähe der "
+"gefährlichen Satelliten kommen.\n"
+"Dieses Schiff hat einen Sender an Bord, der stark genug ist, um die "
+"Störsignale des Kontrollsatelliten zu ignorieren und ein Abschaltsignal zu "
+"senden. Aber das Schiff muss sehr nah dran sein, damit es funktioniert.\n"
+"Der Kontrollsatellit befindet sich von uns aus in einer ungefähren Richtung "
+"von 125 Grad, aber eine neu entstandene Staubwolke verhindert, dass wir mehr "
+"Details erkennen können. Wir wissen nicht, ob diese Wolke absichtlich "
+"erzeugt wurde, um sich darin zu verstecken. Es könnte auch ein Nebeneffekt "
+"von ihrem zerstörerischen Verhalten sein oder einfach nur Treibstoff, der "
+"aus den alten Tanks austritt. Viel Glück!\n"
+" "
+
+#: scripts/scenario_79_kessler.lua:218
+msgid ""
+"The dust cloud is causing large electromagnetic interferences. Which means "
+"that as soon you are far enough away from the station, you can guess it's "
+"direction by looking at the red line at the edge of your radar screen."
+msgstr ""
+"Die Staubwolke verursacht starke elektromagnetische Verzerrungen. Das "
+"bedeutet, dass Sie, sobald Sie weit genug von der Station entfernt sind, die "
+"Richtung durch einen Blick auf die roten und blauen Linien am Rand des "
+"Radarschirms abschätzen können."
+
+#: scripts/scenario_79_kessler.lua:226 scripts/scenario_79_kessler.lua:227
+msgid "Activate transmitter"
+msgstr "Sender einschalten"
+
+#: scripts/scenario_79_kessler.lua:240
+msgid ""
+"As soon as your transmitter is fully charged, the weapons officer has to "
+"sync the shields with the transmitter (a Button will appear on the console). "
+"Then, you yourself on Relay will have to send the signal. (There will be a "
+"button for this as well.) Good luck!"
+msgstr ""
+"Sobald der Sender aufgeladen ist, muss die über die Taktik oder die "
+"Waffenstation den Schild mit dem Sender koppeln, ein Knopf zum Koppeln wird "
+"erscheinen sobald es möglich ist. Danach müssen Sie selbst an der "
+"Kommunikations-Station das Signal absenden (ebenfalls nachdem ein neuer "
+"Knopf erschienen ist). Viel Glück!"
+
+#: scripts/scenario_79_kessler.lua:242
+msgid ""
+"As soon as your transmitter is fully charged, the weapons officer has to "
+"sync the shields with the transmitter (a Button will appear on the console). "
+"Then, you yourself on Operations will have to send the signal. (You will "
+"have to change your sidebar from 'Scanning' to 'Other' by pressing the "
+"'Scanning' headline or the arrows next to it.) Good luck!"
+msgstr ""
+"Sobald der Sender aufgeladen ist, muss die über die Taktik oder die "
+"Waffenstation den Schild mit dem Sender koppeln, ein Knopf zum Koppeln wird "
+"erscheinen sobald es möglich ist. Danach müssen Sie selbst an der Ops-"
+"Station das Signal absenden. (Sie müssen die Leiste auf der rechten Seite "
+"von 'Scanning' auf 'Other' ändern, indem Sie auf die Überschrift \"Scanning"
+"\" oder die Pfeile daneben klicken.) Viel Glück!"
+
+#: scripts/scenario_79_kessler.lua:247
+msgid "Charging of Transmitter initiated"
+msgstr "Hochfahren des Senders wird eingeleitet"
+
+#: scripts/scenario_79_kessler.lua:248 scripts/scenario_79_kessler.lua:249
+msgid "Transmitter is charging.."
+msgstr "Sender wird aufgeladen.."
+
+#: scripts/scenario_79_kessler.lua:262 scripts/scenario_79_kessler.lua:263
+msgid "Transmitter charging"
+msgstr "Sender wird aufgeladen"
+
+#: scripts/scenario_79_kessler.lua:284
+msgid ""
+"If not done yet, you should now change the headline of your sidebar from "
+"'scan' to 'other', so you can send the signal as soon as it is available."
+msgstr ""
+"Falls noch nicht geschehen, sollten Sie jetzt den Titel auf Ihrer "
+"Seitenleiste von \"Scanning\" zu \"Other\" umstellen, so dass Sie das Signal "
+"so früh wie möglich senden können."
+
+#: scripts/scenario_79_kessler.lua:289
+msgid "Transmitter is ready to be synced with shields"
+msgstr "Sender ist bereit, mit den Schilden gekoppelt zu werden"
+
+#: scripts/scenario_79_kessler.lua:292 scripts/scenario_79_kessler.lua:293
+msgid "Transmitter fully charged"
+msgstr "Sender ist aufgeladen"
+
+#: scripts/scenario_79_kessler.lua:294 scripts/scenario_79_kessler.lua:295
+msgid "Transmitter:"
+msgstr "Sender:"
+
+#: scripts/scenario_79_kessler.lua:296 scripts/scenario_79_kessler.lua:297
+msgid "Sync with shields"
+msgstr "Mit Schild koppeln"
+
+#: scripts/scenario_79_kessler.lua:303
+msgid "Syncing shields with transmitter. Please stand by..."
+msgstr "Schild wird mit Sender gekoppelt. Bitte warten..."
+
+#: scripts/scenario_79_kessler.lua:306 scripts/scenario_79_kessler.lua:307
+msgid "Syncing transmitter..."
+msgstr "Sender wird gekoppelt..."
+
+#: scripts/scenario_79_kessler.lua:315 scripts/scenario_79_kessler.lua:317
+msgid "send signal"
+msgstr "Signal senden"
+
+#: scripts/scenario_79_kessler.lua:318 scripts/scenario_79_kessler.lua:319
+msgid "Transmitter is ready"
+msgstr "Sender ist bereit"
+
+#: scripts/scenario_79_kessler.lua:341
+msgid "Rogue satellites shut down"
+msgstr "Fehlerhafte Satelliten deaktiviert"
+
+#: scripts/scenario_79_kessler.lua:342
+msgid ""
+"Congratulations! You saved the global satellite network from destruction. I "
+"call this a successful test run and we're gonna initiate the production of "
+"our fleet of tidying ships immediately. So eventually, we will get rid of "
+"this space junk problem once and for all. You and the rest of your crew did "
+"a great job!"
+msgstr ""
+"Sie haben das weltweite Satellitennetzwerk vor der Zerstörung gerettet! Das "
+"nenne ich einen erfolgreichen Testlauf!  Wir werden uns so schnell wie "
+"möglich daran machen, eine ganze Flotte von Aufräumschiffen herzustellen. So "
+"werden wir endlich das Problem mit dem Weltraumschrott in den Griff "
+"bekommen!\n"
+"Sie und der Rest Ihrer Crew haben hervorragende Arbeit geleistet!"
+
+#: scripts/scenario_79_kessler.lua:396
+msgid "Empty ship"
+msgstr "Leeres Schiff"
+
+#: scripts/scenario_79_kessler.lua:399 scripts/scenario_79_kessler.lua:400
+msgid "Out of reach"
+msgstr "Außer Reichweite"
+
+#: scripts/scenario_79_kessler.lua:401
+msgid "Transmitter is not linked yet"
+msgstr "Sender ist noch nicht gekoppelt"
+
+#: scripts/scenario_79_kessler.lua:414 scripts/scenario_79_kessler.lua:416
+msgid ""
+"This is the command node that controls the rogue satellites. We have to shut "
+"it down!"
+msgstr ""
+"Dies ist der Kontrollsatellit, der die fehlerhaften Militärsatelliten "
+"kontrolliert. Wir müssen ihn irgendwie abschalten!"
+
+#: scripts/scenario_79_kessler.lua:436
+msgid "A piece of space junk. Scan to find out the capturing frequency"
+msgstr ""
+"Ein Stück Weltraumschrott. Bitte scannen, um die Frequenz zum Einfangen "
+"herauszufinden"
+
+#: scripts/scenario_79_kessler.lua:455
+msgid ""
+"Very good so far! Don't worry, you don't have to clean up all of the marked "
+"space junk in your first test run, but we still need quite a few of them "
+"before we call it a day."
+msgstr ""
+"Sehr gut! Keine Sorge, Sie müssen nicht alle markierten Schrottteile "
+"aufsammeln, das ist nur ein erster Testlauf. Trotzdem brauchen wir noch ein "
+"paar davon, bevor Sie Feierabend machen können."
+
+#: scripts/scenario_79_kessler.lua:476
+msgid "An old military satellite"
+msgstr "Ein alter Militärsatellit"
+
+#: scripts/scenario_79_kessler.lua:476
+msgid "An old military satellite. Capturing frequency is blocked."
+msgstr "Ein alter Militärsatellit. Frequenz zum einfangen wird blockiert."
+
+#: scripts/scenario_79_kessler.lua:488
+msgid "An operational satellite"
+msgstr "Ein funktionsfähiger Satellit"
+
+#: scripts/scenario_79_kessler.lua:488
+msgid "This satellite is fully operational. Do not capture!"
+msgstr "Dieser Satellit ist voll funktionsfähig. Nicht einfangen!"
