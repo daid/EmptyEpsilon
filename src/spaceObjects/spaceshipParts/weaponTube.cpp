@@ -375,6 +375,7 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
             glm::vec2 aim_position = target_position; // Set initial aim point
             float turn_direction; // Left: -1, Right: +1, No turn: 0
             float turn_angle; // In radians. Value of 0 means no turn.
+            float intercept_time;
             for (int iterations=0; iterations<MAX_ITER && converged == false; iterations++)
             {
                 // Select turn direction and calculate turn angle
@@ -417,12 +418,13 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
                 const float nearest_distance = glm::length(relative_position_exit + relative_velocity*nearest_time);
 
                 // Check if solution has converged or if we must adjust aim
-                if (nearest_distance < tolerance && nearest_time >= 0.0f)
+                intercept_time = exit_time + nearest_time;
+                if (nearest_distance < tolerance && intercept_time > exit_time)
                     converged = true;
                 else
-                    aim_position = target_position + target_velocity*(exit_time + nearest_time);
+                    aim_position = target_position + target_velocity*intercept_time;
             }
-            if (converged == true && turn_angle < float(M_PI))
+            if (converged == true && turn_angle < float(M_PI) && missile.lifetime > intercept_time)
                 missile_angle = tube_angle + glm::degrees(turn_direction*turn_angle);
             else
                 missile_angle = std::numeric_limits<float>::infinity();
