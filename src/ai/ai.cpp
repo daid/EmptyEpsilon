@@ -768,28 +768,6 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
         }
     }
 
-    if (type == MW_HVLI)    //Custom HVLI targeting for AI, as the calculate firing solution
-    {
-        const MissileWeaponData& data = MissileWeaponData::getDataFor(type);
-
-        auto target_position = target->getPosition();
-        float target_angle = vec2ToAngle(target_position - owner->getPosition());
-        float fire_angle = owner->getRotation() + owner->weapon_tube[tube_index].getDirection();
-
-        //HVLI missiles do not home or turn. So use a different targeting mechanism.
-        float angle_diff = angleDifference(target_angle, fire_angle);
-
-        //Target is moving. Estimate where he will be when the missile hits.
-        float fly_time = target_distance / data.speed;
-        target_position += target->getVelocity() * fly_time;
-
-        //If our "error" of hitting is less then double the radius of the target, fire.
-        if (std::abs(angle_diff) < 80.0f && target_distance * glm::degrees(tanf(fabs(angle_diff))) < target->getRadius() * 2.0f)
-            return fire_angle;
-
-        return std::numeric_limits<float>::infinity();
-    }
-
     if (type == MW_Nuke || type == MW_EMP)
     {
         auto target_position = target->getPosition();
