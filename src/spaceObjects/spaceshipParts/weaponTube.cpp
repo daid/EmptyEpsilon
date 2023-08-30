@@ -335,6 +335,7 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
     else
     {
         const MissileWeaponData& missile = MissileWeaponData::getDataFor(type_loaded);
+        const float missile_speed = missile.speed / MissileWeaponData::convertSizeToCategoryModifier(size); // Adjust for missile size
         const float tube_angle = parent->getRotation() + direction; // Degrees
 
         // Get target parameters in the tube centered reference frame:
@@ -348,7 +349,7 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
             // For missiles that cannot turn (e.g. HVLI), check if the missile
             // will intercept the target within the specified distance
             // tolerance.
-            const glm::vec2 missile_velocity = missile.speed * glm::vec2(1.0f, 0.0f);
+            const glm::vec2 missile_velocity = missile_speed * glm::vec2(1.0f, 0.0f);
             const float tolerance = target->getRadius();
             const glm::vec2 relative_velocity = target_velocity - missile_velocity;
             const float relative_speed = glm::length(relative_velocity);
@@ -366,9 +367,11 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
         }
         else
         {
-            // For missiles that can turn (e.g. homing missiles)
+            // For missiles that can turn (e.g. homing missiles), calculate the
+            // turn angle required to intercept the target within the specified
+            // distance tolerance.
             const float turn_rate = glm::radians(missile.turnrate);
-            const float turn_radius = missile.speed / turn_rate;
+            const float turn_radius = missile_speed / turn_rate;
             const int MAX_ITER = 10;
             const float tolerance = 0.1f * target->getRadius();
             bool converged = false;
@@ -403,7 +406,7 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
                 // Calculate missile and target parameters at turn exit
                 const float exit_time = turn_angle / turn_rate;
                 const glm::vec2 missile_position_exit = turn_radius * glm::vec2(glm::sin(turn_angle), turn_direction * (1.0f - glm::cos(turn_angle)));
-                const glm::vec2 missile_velocity = missile.speed * glm::vec2(glm::cos(turn_angle), turn_direction * glm::sin(turn_angle));
+                const glm::vec2 missile_velocity = missile_speed * glm::vec2(glm::cos(turn_angle), turn_direction * glm::sin(turn_angle));
                 const glm::vec2 target_position_exit = glm::vec2(target_position + target_velocity*exit_time);
                 
                 // Calculate nearest approach

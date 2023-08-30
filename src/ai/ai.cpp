@@ -500,52 +500,139 @@ void ShipAI::runOrders()
     }
 }
 
+static glm::vec2 calculateInterceptPosition(glm::vec2 target_position, glm::vec2 target_velocity, float interceptor_speed)
+{
+    // Calculate the position vector of the point of interception.
+    // If interception is not possible, return the target position.
+    const float target_distance = glm::length(target_position);
+    const float target_speed = glm::length(target_velocity);
+    const float a = target_speed*target_speed - interceptor_speed*interceptor_speed;
+    const float b = 2.0f * glm::dot(target_position, target_velocity);
+    const float c = target_distance * target_distance;
+    const float det = b*b - 4.0f*a*c;
+    float intercept_time;
+    if (det > 0.0f)
+        intercept_time = (-b - glm::sqrt(det)) / 2.0f / a;
+    else
+        intercept_time = 0.0f;
+    return target_position + target_velocity*intercept_time;
+}
+
 void ShipAI::runAttack(P<SpaceObject> target)
 {
-    float attack_distance = 4000.0;
+    const glm::vec2 target_position = target->getPosition() - owner->getPosition();
+    const glm::vec2 target_velocity = target->getVelocity();
+    const float target_distance = glm::length(target_position);
+    const float target_heading = vec2ToAngle(target_position);
+
+    float attack_distance = 4000.0f;
     if (has_missiles && best_missile_type == MW_HVLI)
-        attack_distance = 2500.0;
+        attack_distance = 2500.0f;
     if (has_beams)
         attack_distance = beam_weapon_range * 0.7f;
 
-    auto position_diff = target->getPosition() - owner->getPosition();
-    float distance = glm::length(position_diff);
+    float attack_distance_tolerance;
+    if (owner->turn_speed > 0.0f && owner->impulse_max_speed > 0.0f)
+        attack_distance_tolerance = owner->impulse_max_speed / glm::radians(owner->turn_speed); // Match ship turn radius
+    else
+        attack_distance_tolerance = 1000.0f; // Null and divide-by-zero error protection
 
-    // missile attack
-    if (distance < 4500 && has_missiles)
+    float weapon_angle;
+    if ((weapon_direction == EWeaponDirection::Side && angleDifference(target_heading, owner->getRotation()) >= 0.0f) || weapon_direction == EWeaponDirection::Left)
+        weapon_angle = -90.0f;
+    else if ((weapon_direction == EWeaponDirection::Side && angleDifference(target_heading, owner->getRotation()) < 0.0f) || weapon_direction == EWeaponDirection::Right)
+        weapon_angle = 90.0f;
+    else
+        weapon_angle = 0.0f;
+
+    // WARNING:
+    // Special logic to detect when we should aim specifically for HVLI.
+    // Not robust to changes in HVLI missile!
+
+    // HVLI angle tolerance of +-30deg means that no matter the placement of
+    // the weapon tube, one of the cardinal directions will always be inside
+    // the tolerance arc.
+    const float hvli_tolerance = 30.0f;
+    const float hvli_min_distance = 1000.0f; // Min distance for full damage
+    bool aim_for_hvli = false;
+    int hvli_tube_index;
+    float hvli_speed;
+    for (int n=0; n < owner->weapon_tube_count && aim_for_hvli == false; n++)
+    {
+        WeaponTube &tube = owner->weapon_tube[n];
+        const float tube_angle = owner->getRotation() + tube.getDirection();
+        if (
+            tube.getLoadType() == MW_HVLI &&
+            (
+                (
+                    tube.isLoaded() &&
+                    std::abs(angleDifference(target_heading, tube_angle)) < hvli_tolerance &&
+                    target_distance < attack_distance + attack_distance_tolerance &&
+                    target_distance > hvli_min_distance
+                ) ||
+                tube.isFiring()
+            )
+        )
+        {
+            aim_for_hvli = true;
+            hvli_tube_index = n;
+            hvli_speed = MissileWeaponData::getDataFor(MW_HVLI).speed / MissileWeaponData::convertSizeToCategoryModifier(owner->weapon_tube[hvli_tube_index].getSize());
+            weapon_angle = tube.getDirection();
+        }
+    }
+
+    // Maneuver orders
+    if (owner->getOrder() == AI_StandGround)
+    {
+        // Aim weapons at target
+        if (aim_for_hvli == true)
+           owner->target_rotation = vec2ToAngle(calculateInterceptPosition(target_position, target_velocity, hvli_speed)) - weapon_angle;
+        else
+            owner->target_rotation = target_heading - weapon_angle;
+    }
+    else if (std::abs(target_distance - attack_distance) < attack_distance_tolerance || aim_for_hvli == true)
+    {
+        // Aim weapons at target
+        if (aim_for_hvli == true)
+            owner->target_rotation = vec2ToAngle(calculateInterceptPosition(target_position, target_velocity, hvli_speed)) - weapon_angle;
+        else
+            owner->target_rotation = target_heading - weapon_angle;
+
+        // Maintain distance from target
+        const float normalized_target_distance = (target_distance - attack_distance) / attack_distance_tolerance;
+        if (weapon_direction == EWeaponDirection::Front)
+            owner->impulse_request = normalized_target_distance;
+        else if (weapon_direction == EWeaponDirection::Rear)
+            owner->impulse_request = -normalized_target_distance;
+        else
+            owner->impulse_request = 1.0f;
+    }
+    else
+    {
+        // Move to attack position
+        // For side firing, fly into an orbit around the target at attack
+        // distance, while pointing weapons at the target. Otherwise, plot an
+        // intercept course.
+        if (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right)
+            flyTowards(target->getPosition() - attack_distance*target_position/target_distance + vec2FromAngle(target_heading - weapon_angle)*attack_distance_tolerance, 0.0f);
+        else
+            flyTowards(calculateInterceptPosition(target->getPosition(), target_velocity, owner->impulse_max_speed), attack_distance);
+    }
+
+    // Fire missiles if there is a valid firing solution
+    if (target_distance < 4500.0f && has_missiles)
     {
         for(int n=0; n<owner->weapon_tube_count; n++)
         {
             if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.0f)
             {
-                float target_angle = calculateFiringSolution(target, n);
+                const float target_angle = calculateFiringSolution(target, n);
                 if (target_angle != std::numeric_limits<float>::infinity())
                 {
                     owner->weapon_tube[n].fire(target_angle);
                     missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0f;
                 }
             }
-        }
-    }
-
-    if (owner->getOrder() == AI_StandGround)
-    {
-        owner->target_rotation = vec2ToAngle(position_diff);
-    }else{
-        if (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right)
-        {
-            //We have side beams, find out where we want to attack from.
-            auto target_position = target->getPosition();
-            auto diff = target_position - owner->getPosition();
-            float angle = vec2ToAngle(diff);
-            if ((weapon_direction == EWeaponDirection::Side && angleDifference(angle, owner->getRotation()) > 0) || weapon_direction == EWeaponDirection::Left)
-                angle += 160;
-            else
-                angle -= 160;
-            target_position += vec2FromAngle(angle) * (attack_distance + target->getRadius());
-            flyTowards(target_position, 0);
-        }else{
-            flyTowards(target->getPosition(), attack_distance);
         }
     }
 }
@@ -828,4 +915,3 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float ra
     }
     return target;
 }
-
