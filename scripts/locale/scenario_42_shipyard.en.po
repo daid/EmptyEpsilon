@@ -1,0 +1,4205 @@
+# Scenario name
+msgid "Shipyard Inspection"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Evaluate the newest ship provided by the shipyard\n"
+"\n"
+"Designed as an introductory mission for one player ship. The terrain differs "
+"each game, though the mission goals are the same.\n"
+"\n"
+"Duration: 20 - 50 minutes\n"
+"\n"
+"Version 1\n"
+"\n"
+"USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
+"There's one every Saturday at 1600 UTC (aka GMT or Zulu). All experience "
+"levels are welcome."
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Enemies"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures strength and/or number of enemies in this scenario"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Fewer or weaker enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal number or strength of enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "More or stronger enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Extreme"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Much stronger, many more enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Quixotic"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Insanely strong and/or inordinately large numbers of enemies"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Murphy"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures the perversity of the universe according to Murphy's law"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are more in your favor"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are normal"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are more against you"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Reputation"
+msgstr ""
+
+msgctxt "setting"
+msgid "Amount of reputation to start with"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Unknown"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Zero reputation - nobody knows anything about you"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Nice"
+msgstr ""
+
+msgctxt "Reputation"
+msgid ""
+"20 reputation - you've had a small positive influence on the local community"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Hero"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "50 reputation - you helped important people or lots of people"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Major Hero"
+msgstr ""
+
+msgctxt "Reputation"
+msgid ""
+"100 reputation - you're well known by nearly everyone as a force for good"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Super Hero"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "200 reputation - everyone knows you and relies on you for help"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:116
+msgctxt "orders-comms"
+msgid "Survive"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:802
+msgctxt "scienceDB"
+msgid "Weapons"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:807
+msgctxt "scienceDB"
+msgid ""
+"This database only covers the basic versions of the missiles used throughout "
+"the galaxy.\n"
+"\n"
+"It has been reported that some battleships started using larger variations "
+"of those missiles. Small fighters and even frigates should not have too much "
+"trouble dodging them, but space captains of bigger ships should be wary of "
+"their doubled damage potential.\n"
+"\n"
+"Smaller variations of these missiles have become common in the galaxy, too. "
+"Fighter pilots praise their speed and maneuverability, because it gives them "
+"an edge against small and fast-moving targets. They only deal half the "
+"damage of their basic counterparts, but what good is a missile if it does "
+"not hit its target?\n"
+"\n"
+"Some ships in your fleet have been equipped with these different sized "
+"weapons tubes. In some cases, the weapons officer might see a banner on the "
+"weapons console describing these tubes using the following shorthand:\n"
+"    S = Small\n"
+"    M = Medium (the normal sized missile tube)\n"
+"    L = Large\n"
+"These letters describe the tube sizes in order from top to bottom."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:816 scripts/scenario_42_shipyard.lua:825
+#: scripts/scenario_42_shipyard.lua:837
+#, lua-format
+msgctxt "buttonGM"
+msgid "Version %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:817 scripts/scenario_42_shipyard.lua:826
+#: scripts/scenario_42_shipyard.lua:838
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Scenario version %s\n"
+" LUA version %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:821 scripts/scenario_42_shipyard.lua:830
+#: scripts/scenario_42_shipyard.lua:842
+msgctxt "buttonGM"
+msgid "+Station Reports"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:831
+msgctxt "buttonGM"
+msgid "+Difficulty"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:832
+msgctxt "buttonGM"
+msgid "+Enemy Power"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:833
+msgctxt "buttonGM"
+msgid "+Reputation"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:870
+msgctxt "buttonGM"
+msgid "-From Enemy Power"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:872 scripts/scenario_42_shipyard.lua:893
+msgctxt "buttonGM"
+msgid "Easy"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:873 scripts/scenario_42_shipyard.lua:894
+msgctxt "buttonGM"
+msgid "Normal"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:874 scripts/scenario_42_shipyard.lua:895
+msgctxt "buttonGM"
+msgid "Hard"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:875
+msgctxt "buttonGM"
+msgid "Extreme"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:876
+msgctxt "buttonGM"
+msgid "Quixotic"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:879 scripts/scenario_42_shipyard.lua:898
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s %.1f"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:891
+msgctxt "buttonGM"
+msgid "-From Difficulty"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:910
+msgctxt "buttonGM"
+msgid "-From Reputation"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:912
+msgctxt "buttonGM"
+msgid "Unknown"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:913
+msgctxt "buttonGM"
+msgid "Nice"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:914
+msgctxt "buttonGM"
+msgid "Hero"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:915
+msgctxt "buttonGM"
+msgid "Major Hero"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:916
+msgctxt "buttonGM"
+msgid "Super Hero"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:919
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:931 scripts/scenario_42_shipyard.lua:1026
+msgctxt "buttonGM"
+msgid "-Main"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:939
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid "%s %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:940
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid "%s %s  %s  %s  Friendliness:%s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:941
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Shares Energy: %s,  Repairs Hull: %s,  Restocks Scan Probes: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:942
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Fix Probes: %s,  Fix Hack: %s,  Fix Scan: %s,  Fix Combat Maneuver: %s,  Fix "
+"Destruct: %s, Fix Slow Tube: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:968
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Homing: %s %s,   Nuke: %s %s,   Mine: %s %s,   EMP: %s %s,   HVLI: %s %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:970
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Services and their costs and availability:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:973
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"      %s: %s %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:976
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"      jump overcharge: 10"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:979
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Upgrade paths for player ship types and their max level:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:981
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"      Ship template type: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:983
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"            %s: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:988
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"Goods:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:990
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"    Sell:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:992
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"        %s: Cost:%s   Quantity:%s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:996
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"    Trade:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:998 scripts/scenario_42_shipyard.lua:1004
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"        %s: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1002
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"%s\n"
+"    Buy:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1016 scripts/scenario_42_shipyard.lua:1020
+msgctxt "stationReport-msgGM"
+msgid "No applicable stations. Reports useless. No action taken"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1096
+#, lua-format
+msgctxt "stationReport-msgGM"
+msgid ""
+"Player ship %s's template type (%s) could not be found in table "
+"PlayerShipStats"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1894
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "Sensor Record: %s station %s in %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1896
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "%s, %s station %s in %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1926
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "Sensor Record: %s %s %s in %s carrying %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1928
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "%s; %s %s %s in %s carrying %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1936
+msgctxt "scienceDescription-buoy"
+msgid "No data recorded"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1938 scripts/scenario_42_shipyard.lua:1961
+msgctxt "scienceDescription-buoy"
+msgid "Automated data gathering device"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1947
+msgctxt "scienceDescription-buoy"
+msgid "Come to Billy Bob's for the best food in the sector"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1948
+msgctxt "scienceDescription-buoy"
+msgid "It's never too late to buy life insurance"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1949
+msgctxt "scienceDescription-buoy"
+msgid "You'll feel better in an Adder Mark 9"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1950
+msgctxt "scienceDescription-buoy"
+msgid "Visit Repulse shipyards for the best deals"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1951
+msgctxt "scienceDescription-buoy"
+msgid "Fresh fish! We catch, you buy!"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1952
+msgctxt "scienceDescription-buoy"
+msgid "Get your fuel cells at Melinda's Market"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1953
+msgctxt "scienceDescription-buoy"
+msgid "Find a special companion. All species available"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1954
+msgctxt "scienceDescription-buoy"
+msgid "Feeling down? Robotherapist is there for you"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1955
+msgctxt "scienceDescription-buoy"
+msgid "30 days, 30 kilograms, guaranteed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1956
+msgctxt "scienceDescription-buoy"
+msgid "Try our asteroid dust diet weight loss program"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1957
+msgctxt "scienceDescription-buoy"
+msgid "Best tasting water in the quadrant at Willy's Waterway"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1958
+msgctxt "scienceDescription-buoy"
+msgid "Amazing shows every night at Lenny's Lounge"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:1959
+msgctxt "scienceDescription-buoy"
+msgid "Tip: make lemons an integral part of your diet"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2285
+msgctxt "damage-msgScience"
+msgid "The unscanned artifact we just picked up has fried our scanners"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2287
+msgctxt "damage-msgOperations"
+msgid "The unscanned artifact we just picked up has fried our scanners"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2296
+#, lua-format
+msgctxt "scienceDescription-artifact"
+msgid ""
+"Source of emanations interfering with long range sensors. Range:%.1fu Impact:"
+"%.1fu"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2297
+msgctxt "scienceDescription-artifact"
+msgid "Source of unusual emanations"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2441
+msgctxt "station-comms"
+msgid "We are under attack! No time for chatting!"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2453
+#, lua-format
+msgctxt "mission-comms"
+msgid "Return %s to shipyard"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2455
+msgctxt "mission-comms"
+msgid "Thank you!"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2464
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Shipyard Inspection checklist completed in %i minutes and %i seconds"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2466
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Enemy stations destroyed: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2471
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"Your orders are to return %s to regional headquarters, %s. All you need to "
+"do is dock with %s, open communications and click the Return %s to shipyard "
+"button."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2472
+#, lua-format
+msgctxt "mission-comms"
+msgid "Returning %s ends the mission?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2473
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"Yes. We need you to return %s so we can put the final touches on her before "
+"she is deployed to the fleet. I understand there's need for her in the gamma "
+"quadrant."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2474
+msgctxt "mission-comms"
+msgid "What about the Kraylor we saw?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2475
+msgctxt "mission-comms"
+msgid ""
+"Technically, we don't care about those Kraylor, even though we do. We just "
+"need you to return that ship!"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2476
+#, lua-format
+msgctxt "mission-comms"
+msgid "Those Kraylor pose a threat to %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2477
+msgctxt "mission-comms"
+msgid ""
+"The defense platform protects us. Your concern is touching, but unwarranted. "
+"You have your orders."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2478
+#, lua-format
+msgctxt "mission-comms"
+msgid "We like %s and don't want to give her up"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2481
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"Look, we've seen this happen on multiple occasions. A crew tries out a new "
+"ship and they don't want to let her go. This is why we give you such a "
+"generous return time. You're free to do whatever you want. Shoot down as "
+"many Kraylor as you want. But, you'll all be cashiered if you don't return "
+"%s by the time the clock runs down. You've got %i minutes and %i seconds "
+"remaining. Got it?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2482
+msgctxt "mission-comms"
+msgid "Got it"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2483
+#, lua-format
+msgctxt "mission-comms"
+msgid "Good. Don't be late. %s out."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2485 scripts/scenario_42_shipyard.lua:2487
+#: scripts/scenario_42_shipyard.lua:2489 scripts/scenario_42_shipyard.lua:2491
+#: scripts/scenario_42_shipyard.lua:2494 scripts/scenario_42_shipyard.lua:2527
+#: scripts/scenario_42_shipyard.lua:2531 scripts/scenario_42_shipyard.lua:2535
+#: scripts/scenario_42_shipyard.lua:2546 scripts/scenario_42_shipyard.lua:2551
+#: scripts/scenario_42_shipyard.lua:2553 scripts/scenario_42_shipyard.lua:2555
+#: scripts/scenario_42_shipyard.lua:2587 scripts/scenario_42_shipyard.lua:2591
+#: scripts/scenario_42_shipyard.lua:2595 scripts/scenario_42_shipyard.lua:2599
+#: scripts/scenario_42_shipyard.lua:2610 scripts/scenario_42_shipyard.lua:2615
+#: scripts/scenario_42_shipyard.lua:2617 scripts/scenario_42_shipyard.lua:2628
+#: scripts/scenario_42_shipyard.lua:2633 scripts/scenario_42_shipyard.lua:2635
+#: scripts/scenario_42_shipyard.lua:2637 scripts/scenario_42_shipyard.lua:2667
+#: scripts/scenario_42_shipyard.lua:2671 scripts/scenario_42_shipyard.lua:2675
+#: scripts/scenario_42_shipyard.lua:2686 scripts/scenario_42_shipyard.lua:2691
+#: scripts/scenario_42_shipyard.lua:2693 scripts/scenario_42_shipyard.lua:2695
+#: scripts/scenario_42_shipyard.lua:2723 scripts/scenario_42_shipyard.lua:2727
+#: scripts/scenario_42_shipyard.lua:2733 scripts/scenario_42_shipyard.lua:2736
+#: scripts/scenario_42_shipyard.lua:2740 scripts/scenario_42_shipyard.lua:2742
+#: scripts/scenario_42_shipyard.lua:2857 scripts/scenario_42_shipyard.lua:3029
+#: scripts/scenario_42_shipyard.lua:3049 scripts/scenario_42_shipyard.lua:3086
+#: scripts/scenario_42_shipyard.lua:3103 scripts/scenario_42_shipyard.lua:3120
+#: scripts/scenario_42_shipyard.lua:3138 scripts/scenario_42_shipyard.lua:3156
+#: scripts/scenario_42_shipyard.lua:3160 scripts/scenario_42_shipyard.lua:3168
+#: scripts/scenario_42_shipyard.lua:3179 scripts/scenario_42_shipyard.lua:3185
+#: scripts/scenario_42_shipyard.lua:3193 scripts/scenario_42_shipyard.lua:3198
+#: scripts/scenario_42_shipyard.lua:3207 scripts/scenario_42_shipyard.lua:3211
+#: scripts/scenario_42_shipyard.lua:3215 scripts/scenario_42_shipyard.lua:3217
+#: scripts/scenario_42_shipyard.lua:3238 scripts/scenario_42_shipyard.lua:3311
+#: scripts/scenario_42_shipyard.lua:3328 scripts/scenario_42_shipyard.lua:3359
+#: scripts/scenario_42_shipyard.lua:3392 scripts/scenario_42_shipyard.lua:3425
+#: scripts/scenario_42_shipyard.lua:3432 scripts/scenario_42_shipyard.lua:3449
+#: scripts/scenario_42_shipyard.lua:3453 scripts/scenario_42_shipyard.lua:3458
+#: scripts/scenario_42_shipyard.lua:3501 scripts/scenario_42_shipyard.lua:3555
+#: scripts/scenario_42_shipyard.lua:3596 scripts/scenario_42_shipyard.lua:3638
+#: scripts/scenario_42_shipyard.lua:3801 scripts/scenario_42_shipyard.lua:3836
+#: scripts/scenario_42_shipyard.lua:3944 scripts/scenario_42_shipyard.lua:3950
+#: scripts/scenario_42_shipyard.lua:3956 scripts/scenario_42_shipyard.lua:3961
+#: scripts/scenario_42_shipyard.lua:3964 scripts/scenario_42_shipyard.lua:3987
+#: scripts/scenario_42_shipyard.lua:4022 scripts/scenario_42_shipyard.lua:4068
+#: scripts/scenario_42_shipyard.lua:4091 scripts/scenario_42_shipyard.lua:4093
+#: scripts/scenario_42_shipyard.lua:4113 scripts/scenario_42_shipyard.lua:4160
+#: scripts/scenario_42_shipyard.lua:4169 scripts/scenario_42_shipyard.lua:4181
+#: scripts/scenario_42_shipyard.lua:4187 scripts/scenario_42_shipyard.lua:4195
+#: scripts/scenario_42_shipyard.lua:4224 scripts/scenario_42_shipyard.lua:4239
+#: scripts/scenario_42_shipyard.lua:4261 scripts/scenario_42_shipyard.lua:4265
+#: scripts/scenario_42_shipyard.lua:4284 scripts/scenario_42_shipyard.lua:4288
+#: scripts/scenario_42_shipyard.lua:4383 scripts/scenario_42_shipyard.lua:4388
+#: scripts/scenario_42_shipyard.lua:4460 scripts/scenario_42_shipyard.lua:4464
+#: scripts/scenario_42_shipyard.lua:4470 scripts/scenario_42_shipyard.lua:4504
+#: scripts/scenario_42_shipyard.lua:4512 scripts/scenario_42_shipyard.lua:4535
+#: scripts/scenario_42_shipyard.lua:4539 scripts/scenario_42_shipyard.lua:4558
+#: scripts/scenario_42_shipyard.lua:4582 scripts/scenario_42_shipyard.lua:4607
+#: scripts/scenario_42_shipyard.lua:4629 scripts/scenario_42_shipyard.lua:4655
+#: scripts/scenario_42_shipyard.lua:4680 scripts/scenario_42_shipyard.lua:5218
+#: scripts/scenario_42_shipyard.lua:5235 scripts/scenario_42_shipyard.lua:5239
+#: scripts/scenario_42_shipyard.lua:5262 scripts/scenario_42_shipyard.lua:5284
+#: scripts/scenario_42_shipyard.lua:5308 scripts/scenario_42_shipyard.lua:5330
+#: scripts/scenario_42_shipyard.lua:5354 scripts/scenario_42_shipyard.lua:5399
+#: scripts/scenario_42_shipyard.lua:5403 scripts/scenario_42_shipyard.lua:5409
+#: scripts/scenario_42_shipyard.lua:5426 scripts/scenario_42_shipyard.lua:5434
+#: scripts/scenario_42_shipyard.lua:5463 scripts/scenario_42_shipyard.lua:5496
+#: scripts/scenario_42_shipyard.lua:5507 scripts/scenario_42_shipyard.lua:5518
+#: scripts/scenario_42_shipyard.lua:5529 scripts/scenario_42_shipyard.lua:5540
+#: scripts/scenario_42_shipyard.lua:5543 scripts/scenario_42_shipyard.lua:5569
+#: scripts/scenario_42_shipyard.lua:5582 scripts/scenario_42_shipyard.lua:5595
+#: scripts/scenario_42_shipyard.lua:5653 scripts/scenario_42_shipyard.lua:5674
+#: scripts/scenario_42_shipyard.lua:5706 scripts/scenario_42_shipyard.lua:5727
+#: scripts/scenario_42_shipyard.lua:5744 scripts/scenario_42_shipyard.lua:5750
+#: scripts/scenario_42_shipyard.lua:5754 scripts/scenario_42_shipyard.lua:5773
+#: scripts/scenario_42_shipyard.lua:5796
+msgid "Back"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2497
+msgctxt "mission-comms"
+msgid "Shipyard inspection checklist"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2498
+msgctxt "mission-comms"
+msgid ""
+"These are the things that need to be checked (grouped by primary officer "
+"responsibility)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2511
+msgctxt "mission-comms"
+msgid "Helm"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2513
+msgctxt "mission-comms"
+msgid "Helm - partially complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2515
+msgctxt "mission-comms"
+msgid "Helm - complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2519
+msgctxt "mission-comms"
+msgid "These checklist items directly relate to helm functionality."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2521 scripts/scenario_42_shipyard.lua:2581
+#: scripts/scenario_42_shipyard.lua:2661 scripts/scenario_42_shipyard.lua:2717
+msgctxt "mission-comms"
+msgid "incomplete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2522 scripts/scenario_42_shipyard.lua:2582
+#: scripts/scenario_42_shipyard.lua:2662 scripts/scenario_42_shipyard.lua:2718
+msgctxt "mission-comms"
+msgid "complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2523 scripts/scenario_42_shipyard.lua:2583
+#: scripts/scenario_42_shipyard.lua:2663 scripts/scenario_42_shipyard.lua:2719
+msgctxt "mission-comms"
+msgid "started"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2525
+#, lua-format
+msgctxt "mission-comms"
+msgid "Maneuver - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2526
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"This checklist item is semi-automated. Helm clicks the button to start the "
+"test and the system monitors how fast the ship turns. Once both the low and "
+"high targets are met, the checklist item is considered complete. Current "
+"state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2529
+#, lua-format
+msgctxt "mission-comms"
+msgid "Impulse - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2530
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"This checklist item is semi-automated. Helm clicks the button to start the "
+"test and the system monitors how fast the ship moves. Once both the low and "
+"high targets are met, the checklist item is considered complete. Current "
+"state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2533
+#, lua-format
+msgctxt "mission-comms"
+msgid "Jump Drive - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2534
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"This checklist item is semi-automated. Helm clicks the button to start the "
+"test and the system monitors how the jump drive performs on a maximum "
+"distance jump. Completion of the test requires that the jump drive be fully "
+"recharged. Current state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2537
+#, lua-format
+msgctxt "mission-comms"
+msgid "Combat Maneuver - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2538
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"Ask helm whether or not combat maneuver is working properly or not. Current "
+"state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2539
+msgctxt "mission-comms"
+msgid "Helm states combat maneuver works"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2540
+msgctxt "mission-comms"
+msgid "Combat maneuver has been marked as completed on the checklist"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2548
+msgctxt "mission-comms"
+msgid "Helm states combat maneuver does not work"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2549
+msgctxt "mission-comms"
+msgid "Combat maneuver checklist item is pending"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2571
+msgctxt "mission-comms"
+msgid "Weapons"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2573
+msgctxt "mission-comms"
+msgid "Weapons - partially complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2575
+msgctxt "mission-comms"
+msgid "Weapons - complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2579
+msgctxt "mission-comms"
+msgid "These checklist items directly relate to weapons functionality."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2585
+#, lua-format
+msgctxt "mission-comms"
+msgid "Front Shield - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2586 scripts/scenario_42_shipyard.lua:2590
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"This checklist item is semi-automated. Weapons clicks the button to start "
+"the test and the system monitors how well the shield handles damage and "
+"recharges. Current state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2589
+#, lua-format
+msgctxt "mission-comms"
+msgid "Rear Shield - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2593
+#, lua-format
+msgctxt "mission-comms"
+msgid "Beam Calibration - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2594
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"This checklist item is semi-automated. Weapons clicks the button to start "
+"the test and the system monitors the changes in beam frequency. Current "
+"state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2597
+#, lua-format
+msgctxt "mission-comms"
+msgid "Shield Calibration - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2598
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"This checklist item is semi-automated. Weapons clicks the button to start "
+"the test and the system monitors the changes in shield frequency. Final step "
+"is to raise shields after calibration. Current state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2601
+#, lua-format
+msgctxt "mission-comms"
+msgid "Beam Firing - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2602
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"Ask weapons whether or not beam firing is working properly or not. Current "
+"state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2603
+msgctxt "mission-comms"
+msgid "Weapons states that beam systems work"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2604
+msgctxt "mission-comms"
+msgid "Beam systems have been marked as completed on the checklist"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2612
+msgctxt "mission-comms"
+msgid "Weapons states that the beams do not work"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2613
+msgctxt "mission-comms"
+msgid "The beam systems checklist item is pending"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2619
+#, lua-format
+msgctxt "mission-comms"
+msgid "Missile Systems - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2620
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"Ask weapons whether or not missile loading, firing and unloading is working "
+"properly or not. Current state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2621
+msgctxt "mission-comms"
+msgid "Weapons states that the missile systems work"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2622
+msgctxt "mission-comms"
+msgid "Missile systems have been marked as completed on the checklist"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2630
+msgctxt "mission-comms"
+msgid "Weapons states that the missile systems do not work"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2631
+msgctxt "mission-comms"
+msgid "The missile systems checklist item is pending"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2651
+msgctxt "mission-comms"
+msgid "Relay and Science"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2653
+msgctxt "mission-comms"
+msgid "Relay and Science - partially complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2655
+msgctxt "mission-comms"
+msgid "Relay and Science - complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2659
+msgctxt "mission-comms"
+msgid ""
+"These checklist items directly relate to relay and science functionality."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2665
+#, lua-format
+msgctxt "mission-comms"
+msgid "Waypoint - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2666
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"This checklist item is semi-automated. Relay clicks the button to start the "
+"test and the system monitors the establishment of a waypoint. Current state: "
+"%s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2669
+#, lua-format
+msgctxt "mission-comms"
+msgid "Probe - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2670
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"This checklist item is semi-automated. Relay clicks the button to start the "
+"test and the system monitors the launch and replishment of probes. Current "
+"state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2673
+#, lua-format
+msgctxt "mission-comms"
+msgid "Link/Unlink Probe - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2674
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"This checklist item is semi-automated. Relay clicks the button to start the "
+"test and the system monitors the linking and unlinking of probes. Current "
+"state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2677
+#, lua-format
+msgctxt "mission-comms"
+msgid "Scanners - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2678
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"Ask science whether or not the scanners are working properly or not. Current "
+"state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2679
+msgctxt "mission-comms"
+msgid "Science states that the scanners work"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2680
+msgctxt "mission-comms"
+msgid "Scanners have been marked as completed on the checklist"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2688
+msgctxt "mission-comms"
+msgid "Science states that the scanners do not work"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2689
+msgctxt "mission-comms"
+msgid "The scanners checklist item is pending"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2707
+msgctxt "mission-comms"
+msgid "Engineering"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2709
+msgctxt "mission-comms"
+msgid "Engineering - partially complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2711
+msgctxt "mission-comms"
+msgid "Engineering - complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2715
+msgctxt "mission-comms"
+msgid ""
+"These checklist items directly relate to engineering functionality. There "
+"are fewer tests, but they take a bit longer."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2721
+#, lua-format
+msgctxt "mission-comms"
+msgid "Coolant - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2722
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"This checklist item is semi-automated. Engineering clicks the button to "
+"start the test and the system monitors the flow of coolant to each system. "
+"Current state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2725
+#, lua-format
+msgctxt "mission-comms"
+msgid "Power - %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2726
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"This checklist item is semi-automated. Engineering clicks the button to "
+"start the test and the system monitors the flow of coolant to each system. "
+"System is checked off once minimum and maximum power observed in all "
+"systems. Current state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2730
+msgctxt "mission-comms"
+msgid "Self Destruct - incomplete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2732
+msgctxt "mission-comms"
+msgid ""
+"Just kidding. There's no need to destroy yourselves for the sake of a "
+"checklist."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2738
+msgctxt "mission-comms"
+msgid "Alternative consoles"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2739
+msgctxt "mission-comms"
+msgid ""
+"Some crews do not divide officer responsibilities into five areas: helm, "
+"weapons, engineering, science, relay. If that's the case for your crew, you "
+"may use the following consoles:\n"
+"    Helm: use Tactical\n"
+"    Weapons: use Tactical and/or Engineering+\n"
+"    Engineering: use Engineering+\n"
+"    Science: use Operations\n"
+"    Relay: use Operations\n"
+"Running checks simultaneously on the alternate consoles takes more console "
+"screen real estate."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2752
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"Greetings %s, welcome to station %s.\n"
+"I hope your journey was pleasant. I understand you are here to inspect and "
+"evaluate one of the ships just coming out of our shipyard. You may choose "
+"between two ships.\n"
+"     The first is the %s, an Atlantis MK2.\n"
+"     The second is the %s, a Corsair.\n"
+"We will transfer your crew to the ship you choose so that you may begin your "
+"inspection immediately. Check back with us any time to ascertain your "
+"progress on the checklist."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2753 scripts/scenario_42_shipyard.lua:2805
+#, lua-format
+msgctxt "mission-comms"
+msgid "Inspect the %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2783 scripts/scenario_42_shipyard.lua:2793
+#: scripts/scenario_42_shipyard.lua:2835 scripts/scenario_42_shipyard.lua:2845
+msgctxt "mission-comms"
+msgid "Reactor"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2784 scripts/scenario_42_shipyard.lua:2794
+#: scripts/scenario_42_shipyard.lua:2836 scripts/scenario_42_shipyard.lua:2846
+msgctxt "mission-comms"
+msgid "Beam Weapons"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2785 scripts/scenario_42_shipyard.lua:2795
+#: scripts/scenario_42_shipyard.lua:2837 scripts/scenario_42_shipyard.lua:2847
+msgctxt "mission-comms"
+msgid "Missile System"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2786 scripts/scenario_42_shipyard.lua:2796
+#: scripts/scenario_42_shipyard.lua:2838 scripts/scenario_42_shipyard.lua:2848
+msgctxt "mission-comms"
+msgid "Maneuvering"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2787 scripts/scenario_42_shipyard.lua:2797
+#: scripts/scenario_42_shipyard.lua:2839 scripts/scenario_42_shipyard.lua:2849
+msgctxt "mission-comms"
+msgid "Impulse Engines"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2788 scripts/scenario_42_shipyard.lua:2798
+#: scripts/scenario_42_shipyard.lua:2840 scripts/scenario_42_shipyard.lua:2850
+msgctxt "mission-comms"
+msgid "Jump Drive"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2789 scripts/scenario_42_shipyard.lua:2799
+#: scripts/scenario_42_shipyard.lua:2841 scripts/scenario_42_shipyard.lua:2851
+msgctxt "mission-comms"
+msgid "Front Shield Generator"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2790 scripts/scenario_42_shipyard.lua:2800
+#: scripts/scenario_42_shipyard.lua:2842 scripts/scenario_42_shipyard.lua:2852
+msgctxt "mission-comms"
+msgid "Rear Shield Generator"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2861
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Greetings %s!\n"
+"How may we help you today?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2863
+msgctxt "station-comms"
+msgid ""
+"Good day, officer!\n"
+"What can we do for you today?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2865
+msgctxt "station-comms"
+msgid "Hello, may I help you?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2868
+msgctxt "station-comms"
+msgid "Welcome to our lovely station."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2871
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Forgive us if we seem a little distracted. We are carefully monitoring the "
+"enemies nearby."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2878 scripts/scenario_42_shipyard.lua:3857
+#, lua-format
+msgctxt "mission-comms"
+msgid ""
+"Congratulations captain and crew of the newly built %s, you completed the "
+"inspection checklist in %i minutes and %i seconds!"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2885
+msgctxt "station-comms"
+msgid "Station services (restock ordnance, repairs)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2886
+msgctxt "station-comms"
+msgid "What station service are you interested in?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2898
+msgctxt "ammo-comms"
+msgid "I need ordnance restocked"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2900
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"What type of ordnance?\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2907
+msgctxt "ammo-comms"
+msgid "Can you supply us with some nukes? ("
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2909
+msgctxt "ammo-comms"
+msgid "We really need some nukes ("
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2912 scripts/scenario_42_shipyard.lua:2925
+#: scripts/scenario_42_shipyard.lua:2937 scripts/scenario_42_shipyard.lua:2949
+#: scripts/scenario_42_shipyard.lua:2961
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s%d rep each)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2921
+msgctxt "ammo-comms"
+msgid "Please re-stock our EMP missiles. ("
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2923
+msgctxt "ammo-comms"
+msgid "Got any EMPs? ("
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2933
+msgctxt "ammo-comms"
+msgid "Do you have spare homing missiles for us? ("
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2935
+msgctxt "ammo-comms"
+msgid "Do you have extra homing missiles? ("
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2945
+msgctxt "ammo-comms"
+msgid "We could use some mines. ("
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2947
+msgctxt "ammo-comms"
+msgid "How about mines? ("
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2957
+msgctxt "ammo-comms"
+msgid "What about HVLI? ("
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2959
+msgctxt "ammo-comms"
+msgid "Could you provide HVLI? ("
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2969 scripts/scenario_42_shipyard.lua:4024
+msgctxt "stationServices-comms"
+msgid "Docking services status"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2970
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Station %s docking services status:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2972 scripts/scenario_42_shipyard.lua:4029
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Replenish scan probes."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2976 scripts/scenario_42_shipyard.lua:4033
+msgctxt "stationServices-comms"
+msgid "Cannot replenish scan probes due to fabrication unit failure."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2977 scripts/scenario_42_shipyard.lua:4034
+msgctxt "stationServices-comms"
+msgid "Parts shortage prevents scan probe replenishment."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2978 scripts/scenario_42_shipyard.lua:4035
+msgctxt "stationServices-comms"
+msgid ""
+"Station management has curtailed scan probe replenishment for cost cutting "
+"reasons."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2982 scripts/scenario_42_shipyard.lua:2995
+#: scripts/scenario_42_shipyard.lua:3008 scripts/scenario_42_shipyard.lua:4039
+#: scripts/scenario_42_shipyard.lua:4052 scripts/scenario_42_shipyard.lua:4065
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2985 scripts/scenario_42_shipyard.lua:4042
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Ship hull repair."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2989 scripts/scenario_42_shipyard.lua:4046
+msgctxt "stationServices-comms"
+msgid "We're out of the necessary materials and supplies for hull repair."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2990
+msgctxt "stationServices-comms"
+msgid "Hull repair automation unavailable while it is undergoing maintenance."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2991 scripts/scenario_42_shipyard.lua:4048
+msgctxt "stationServices-comms"
+msgid "All hull repair technicians quarantined to quarters due to illness."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:2998 scripts/scenario_42_shipyard.lua:4055
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Recharge ship energy stores."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3002 scripts/scenario_42_shipyard.lua:4059
+msgctxt "stationServices-comms"
+msgid ""
+"A recent reactor failure has put us on auxiliary power, so we cannot "
+"recharge ships."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3003 scripts/scenario_42_shipyard.lua:4060
+msgctxt "stationServices-comms"
+msgid "A damaged power coupling makes it too dangerous to recharge ships."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3004 scripts/scenario_42_shipyard.lua:4061
+msgctxt "stationServices-comms"
+msgid ""
+"An asteroid strike damaged our solar cells and we are short on power, so we "
+"can't recharge ships right now."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3011 scripts/scenario_42_shipyard.lua:4073
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May overcharge jump drive"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3014 scripts/scenario_42_shipyard.lua:4076
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair probe launch system"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3017 scripts/scenario_42_shipyard.lua:4079
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair hacking system"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3020 scripts/scenario_42_shipyard.lua:4082
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair scanners"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3023 scripts/scenario_42_shipyard.lua:4085
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair combat maneuver"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3026 scripts/scenario_42_shipyard.lua:4088
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair self destruct system"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3038
+msgctxt "stationServices-comms"
+msgid "Overcharge Jump Drive (10 Rep)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3040 scripts/scenario_42_shipyard.lua:3077
+#: scripts/scenario_42_shipyard.lua:3094 scripts/scenario_42_shipyard.lua:3111
+#: scripts/scenario_42_shipyard.lua:3129 scripts/scenario_42_shipyard.lua:3147
+#: scripts/scenario_42_shipyard.lua:3284 scripts/scenario_42_shipyard.lua:3319
+#: scripts/scenario_42_shipyard.lua:3340 scripts/scenario_42_shipyard.lua:3373
+#: scripts/scenario_42_shipyard.lua:3406 scripts/scenario_42_shipyard.lua:3488
+#: scripts/scenario_42_shipyard.lua:3583 scripts/scenario_42_shipyard.lua:3784
+msgctxt "station-comms"
+msgid "You need to stay docked for that action."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3045
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Your jump drive has been overcharged to %ik"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3047 scripts/scenario_42_shipyard.lua:3084
+#: scripts/scenario_42_shipyard.lua:3101 scripts/scenario_42_shipyard.lua:3118
+#: scripts/scenario_42_shipyard.lua:3136 scripts/scenario_42_shipyard.lua:3154
+#: scripts/scenario_42_shipyard.lua:3492 scripts/scenario_42_shipyard.lua:3587
+#: scripts/scenario_42_shipyard.lua:3959 scripts/scenario_42_shipyard.lua:5564
+#: scripts/scenario_42_shipyard.lua:5577 scripts/scenario_42_shipyard.lua:5590
+#: scripts/scenario_42_shipyard.lua:5648 scripts/scenario_42_shipyard.lua:5669
+#: scripts/scenario_42_shipyard.lua:5678 scripts/scenario_42_shipyard.lua:5701
+#: scripts/scenario_42_shipyard.lua:5722 scripts/scenario_42_shipyard.lua:5739
+#: scripts/scenario_42_shipyard.lua:5768 scripts/scenario_42_shipyard.lua:5791
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3071
+msgctxt "stationServices-comms"
+msgid "Repair ship system"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3072
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"What system would you like repaired?\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3075
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair probe launch system (%s Rep)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3082
+msgctxt "stationServices-comms"
+msgid "Your probe launch system has been repaired"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3092
+#, lua-format
+msgctxt "station-comms"
+msgid "Repair hacking system (%s Rep)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3099
+msgctxt "station-comms"
+msgid "Your hack system has been repaired"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3109
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair scanning system (%s Rep)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3116
+msgctxt "station-comms"
+msgid "Your scanners have been repaired"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3127
+#, lua-format
+msgctxt "station-comms"
+msgid "Repair combat maneuver (%s Rep)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3134
+msgctxt "station-comms"
+msgid "Your combat maneuver has been repaired"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3145
+#, lua-format
+msgctxt "station-comms"
+msgid "Repair self destruct system (%s Rep)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3152
+msgctxt "station-comms"
+msgid "Your self destruct system has been repaired"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3164 scripts/scenario_42_shipyard.lua:3967
+msgctxt "station-comms"
+msgid "I need information"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3165
+msgctxt "station-comms"
+msgid "What do you need to know?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3166
+msgctxt "station-comms"
+msgid "What's with the warp jammers?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3167
+msgctxt "station-comms"
+msgid ""
+"When factions in various stations in the area started attacking each other, "
+"there was a particularly nasty tactic employed where warp or jump ships "
+"would ambush a station. Stations could not maintain defensive patrols "
+"indefinitely due to the expense. Putting in a warp jammer gives the station "
+"a chance to scramble their defense fleet when an enemy approaches. Of "
+"course, it slows friendly traffic, commercial or military, too. So, most "
+"warp jammers are controlled by nearby factions to allow them to enable or "
+"disable them upon request to facilitate the flow of ships. You can't connect "
+"to the warp jammer while docked because you're clearly not yet ready to "
+"traverse the controlled area. Destroying a warp jammer may have undesired "
+"indirect consequences, but there's no official rule against it."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3174 scripts/scenario_42_shipyard.lua:4176
+msgctxt "station-comms"
+msgid "Tell me more about your station"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3175 scripts/scenario_42_shipyard.lua:4177
+msgctxt "station-comms"
+msgid "What would you like to know?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3177 scripts/scenario_42_shipyard.lua:4179
+msgctxt "stationGeneralInfo-comms"
+msgid "General information"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3183 scripts/scenario_42_shipyard.lua:4185
+msgctxt "stationStory-comms"
+msgid "Station history"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3191 scripts/scenario_42_shipyard.lua:4193
+msgctxt "gossip-comms"
+msgid "Gossip"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3203
+msgctxt "station-comms"
+msgid "Explain sensor jammers"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3204
+msgctxt "station-comms"
+msgid "You mean those things that have a call sign that starts with SJ?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3205
+msgctxt "station-comms"
+msgid "Yes. Why so many?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3206
+msgctxt "station-comms"
+msgid ""
+"They were made during a big technological arms race. All the factions tried "
+"to make them to hinder their enemies as they approached. Most ships have got "
+"ways around them now, but nobody has gone out to clean up the leftovers. The "
+"closest thing to clean up done by the factions is to give them all SJ call "
+"signs to make ships aware of the potential navigation hazard."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3209
+msgctxt "station-comms"
+msgid "Yes. What do they do?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3210
+msgctxt "station-comms"
+msgid ""
+"The sensor jammers reduce your long range sensor range. The degree and range "
+"of effectiveness varies with each one. They're also designed to be booby "
+"traps. If you don't disable the trap, they'll fry your scanners if you pick "
+"them up to neutralize them."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3213
+msgctxt "station-comms"
+msgid "Yes. How do I get rid of them?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3214
+msgctxt "station-comms"
+msgid ""
+"Just pick them up. You'll want to scan them first if you don't want your "
+"scanners fried."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3220 scripts/scenario_42_shipyard.lua:3969
+msgctxt "orders-comms"
+msgid "What are my current orders?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3224 scripts/scenario_42_shipyard.lua:3973
+#, lua-format
+msgctxt "orders-comms"
+msgid "Complete the inspection checklist for %s."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3226 scripts/scenario_42_shipyard.lua:3975
+msgctxt "orders-comms"
+msgid "Return the ship to the shipyard"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3229 scripts/scenario_42_shipyard.lua:3978
+#, lua-format
+msgctxt "orders-comms"
+msgid "Inspect ship produced by the shipyard at %s."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3231 scripts/scenario_42_shipyard.lua:3980
+#, lua-format
+msgctxt "orders-comms"
+msgid "Be a shining example of a crewmember of %s."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3235 scripts/scenario_42_shipyard.lua:3984
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"   %i Minutes remain in game"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3242
+msgctxt "station-comms"
+msgid "Resources (repair crew, coolant, goods)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3243
+msgctxt "station-comms"
+msgid "Which of the following are you interested in?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3256
+msgctxt "trade-comms"
+msgid "Buy, sell, trade"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3257
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available for sale: quantity, cost in reputation\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3259
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i, %i\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3262
+msgctxt "trade-comms"
+msgid "Goods or components station will buy: price in reputation\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3264 scripts/scenario_42_shipyard.lua:3273
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3267
+#, lua-format
+msgctxt "trade-comms"
+msgid "Current cargo aboard %s:\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3277
+msgctxt "trade-comms"
+msgid "     Empty\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3279
+#, lua-format
+msgctxt "trade-comms"
+msgid "Available Space: %i, Available Reputation: %i\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3282 scripts/scenario_42_shipyard.lua:4567
+#: scripts/scenario_42_shipyard.lua:4592 scripts/scenario_42_shipyard.lua:4614
+#: scripts/scenario_42_shipyard.lua:4640 scripts/scenario_42_shipyard.lua:5247
+#: scripts/scenario_42_shipyard.lua:5269 scripts/scenario_42_shipyard.lua:5293
+#: scripts/scenario_42_shipyard.lua:5315 scripts/scenario_42_shipyard.lua:5339
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3287
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i, Rep: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3289
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient cargo space for purchase"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3291 scripts/scenario_42_shipyard.lua:3307
+msgctxt "needRep-comms"
+msgid ""
+"\n"
+"Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3293 scripts/scenario_42_shipyard.lua:3345
+#: scripts/scenario_42_shipyard.lua:3378 scripts/scenario_42_shipyard.lua:3411
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient station inventory"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3305
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"purchased"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3317
+#, lua-format
+msgctxt "trade-comms"
+msgid "Sell one %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3322
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Reputation price: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3325
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"One sold"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3338
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade food for %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3343 scripts/scenario_42_shipyard.lua:3376
+#: scripts/scenario_42_shipyard.lua:3409
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Quantity: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3356 scripts/scenario_42_shipyard.lua:3389
+#: scripts/scenario_42_shipyard.lua:3422
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Traded"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3371
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade medicine for %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3404 scripts/scenario_42_shipyard.lua:4547
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3441 scripts/scenario_42_shipyard.lua:4527
+#: scripts/scenario_42_shipyard.lua:5227
+msgctxt "trade-comms"
+msgid "Jettison cargo"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3442 scripts/scenario_42_shipyard.lua:4528
+#: scripts/scenario_42_shipyard.lua:5228
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Available space: %i\n"
+"What would you like to jettison?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3448 scripts/scenario_42_shipyard.lua:4534
+#: scripts/scenario_42_shipyard.lua:5234
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s jettisoned"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3456
+msgctxt "explainGoods-comms"
+msgid "No tutorial covered goods or cargo. Explain"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3457
+msgctxt "explainGoods-comms"
+msgid ""
+"Different types of cargo or goods may be obtained from stations, freighters "
+"or other sources. They go by one word descriptions such as dilithium, optic, "
+"warp, etc. Certain mission goals may require a particular type or types of "
+"cargo. Each player ship differs in cargo carrying capacity. Goods may be "
+"obtained by spending reputation points or by trading other types of cargo "
+"(typically food, medicine or luxury)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3465
+msgctxt "trade-comms"
+msgid "Recruit repair crew member"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3485
+msgctxt "trade-comms"
+msgid "We have a repair crew candidate for you to consider"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3486
+#, lua-format
+msgctxt "trade-comms"
+msgid "Recruit repair crew member for %i reputation"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3499
+msgctxt "trade-comms"
+msgid "Repair crew member hired"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3505 scripts/scenario_42_shipyard.lua:3529
+msgctxt "trade-comms"
+msgid ""
+"A possible repair recruit is awaiting final certification. They should be "
+"available in "
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3506 scripts/scenario_42_shipyard.lua:3530
+msgctxt "trade-comms"
+msgid ""
+"There's one repair crew candidate completing their license application. They "
+"should be available in "
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3507 scripts/scenario_42_shipyard.lua:3531
+msgctxt "trade-comms"
+msgid "One repair crew should be getting here from their medical checkout in "
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3512 scripts/scenario_42_shipyard.lua:3517
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s %i seconds"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3519
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s a second"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3536
+#, lua-format
+msgctxt "trade-comms"
+msgid "Several arrived on station earlier. %s %i seconds"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3541 scripts/scenario_42_shipyard.lua:3624
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i seconds"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3543 scripts/scenario_42_shipyard.lua:3626
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i second"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3547 scripts/scenario_42_shipyard.lua:3630
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i minutes and %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3549 scripts/scenario_42_shipyard.lua:3632
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i minute and %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3552
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"There are some repair crew recruits in route for %s. Travel time remaining "
+"is %s."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3560
+msgctxt "trade-comms"
+msgid "Purchase Coolant"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3580
+msgctxt "trade-comms"
+msgid "We've got some coolant available for you"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3581
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchase coolant for %i reputation"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3594
+msgctxt "trade-comms"
+msgid "Additional coolant purchased"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3601 scripts/scenario_42_shipyard.lua:3606
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"The coolant preparation facility is having difficulty packaging the coolant "
+"for transport. They say they should have it working in about %i seconds"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3608
+msgctxt "trade-comms"
+msgid ""
+"The coolant preparation facility is having difficulty packaging the coolant "
+"for transportation. They say they should have it working in a second"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3619
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Our coolant production facility just made some, but it's not quite ready to "
+"be transported. The preparation facility says it should take about %i seconds"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3635
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Our coolant production facility is making more right now. Coolant "
+"manufacturing time remaining is %s."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3647
+#, lua-format
+msgctxt "orders-comms"
+msgid "Destroy aggressive enemy bases including %s station %s in %s."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3649
+msgctxt "orders-comms"
+msgid "Destroy aggressive enemy bases."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3657
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Optional:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3661
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Transport %s to %s station %s in %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3663
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Transport %s to station %s (defunct)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3669
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Deliver cargo for %s to station %s in %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3671
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Deliver cargo for %s to station %s (defunct)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3675
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Pick up cargo for %s at station %s in %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3677
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Pick up cargo for %s at station %s (defunct)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3714
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Explosives planted on aggressive %s station %s. Expect detonation in %s "
+"seconds"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3716
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur's ship, %s, docked with %s station %s in sector %s. %s has been "
+"identified as an aggressive station. Explosives have been planted. Expect "
+"detonation in %s seconds"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3719
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Sabotage target station has been destroyed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3737
+#, lua-format
+msgctxt "orders-comms"
+msgid "%s's destination station, %s in %s, is not an aggressive enemy station."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3739
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s's destination station, %s in %s, has been identified as an aggressive "
+"enemy station."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3742
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur's ship, %s, is in transit in sector %s. %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3753
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur's ship, %s, docked with %s station %s in sector %s. %s has been "
+"identified as an aggressive station"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3755
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur's ship, %s, docked with %s station %s in sector %s. %s is not an "
+"aggressive station"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3758
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur's ship, %s, docked with %s station %s in sector %s."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3763
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur successfully destroyed aggressive enemy station %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3766
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Saboteur's ship, %s, has been destroyed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3769
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Plant saboteur on freighter"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3788
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3789
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3790
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3797
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3799
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3807 scripts/scenario_42_shipyard.lua:3822
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3809 scripts/scenario_42_shipyard.lua:3824
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3812 scripts/scenario_42_shipyard.lua:3827
+#: scripts/scenario_42_shipyard.lua:3832
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3817
+msgctxt "ammo-comms"
+msgid "You can't afford as much as I'd like to give you"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3818
+msgctxt "ammo-comms"
+msgid "Get just one"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3845
+msgctxt "station-comms"
+msgid ""
+"Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3847
+msgctxt "station-comms"
+msgid ""
+"Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3850
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Be aware that if enemies in the area get much closer, we will be too busy to "
+"conduct business with you."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3896
+msgctxt "station-comms"
+msgid "Connect to warp jammer"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3897
+msgctxt "station-comms"
+msgid "Which one would you like to connect to?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3934
+#, lua-format
+msgctxt "station-comms"
+msgid "(%i reputation)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3939
+#, lua-format
+msgctxt "station-comms"
+msgid "%s Automated warp jammer access menu"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3940
+msgctxt "station-comms"
+msgid "Reduce range to 1 unit for 1 minute"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3943 scripts/scenario_42_shipyard.lua:3949
+#: scripts/scenario_42_shipyard.lua:3955
+msgctxt "station-comms"
+msgid "Acknowledged. Range adjusted. Reset timer engaged."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3946
+msgctxt "station-comms"
+msgid "Reduce range by 50% for 2 minutes"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3952
+msgctxt "station-comms"
+msgid "Reduce range by 25% for 3 minutes"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3968
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3989
+msgctxt "station-comms"
+msgid "Station services (ordnance restock, repair)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3990
+msgctxt "station-comms"
+msgid "We offer a variety of services when you dock with us."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3991
+msgctxt "ammo-comms"
+msgid "What ordnance do you have available for restock?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:3996
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Nuke"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4000
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   EMP"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4004
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Homing"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4008
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Mine"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4012
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   HVLI"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4015
+msgctxt "ammo-comms"
+msgid "We have no ordnance available for restock"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4017
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following type of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4019
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following types of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4025
+msgctxt "stationServices-comms"
+msgid ""
+"Which docking service category do you want a status for?\n"
+"    Primary services:\n"
+"        Charge battery, repair hull, replenish probes\n"
+"    Secondary systems repair:\n"
+"        Scanners, hacking, probe launch, combat maneuver, self destruct\n"
+"    Upgrade ship systems:\n"
+"        Beam, missile, shield, hull, impulse, ftl, sensors"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4026
+msgctxt "stationServices-comms"
+msgid "Primary services"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4027
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Station %s primary docking services status:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4047
+msgctxt "stationServices-comms"
+msgid "Hull repair automation unavailable whie it is undergoing maintenance."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4070
+msgctxt "stationServices-comms"
+msgid "Secondary systems repair"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4071
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Station %s docking repair services status:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4096
+#, lua-format
+msgctxt "station-comms"
+msgid "Goods information at %s or near %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4097
+msgctxt "station-comms"
+msgid "Always good to get some goods"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4107
+msgctxt "trade-comms"
+msgid "What goods do you have available for sale or trade?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4108
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available: quantity, cost in reputation"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4110
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"   %14s: %2i, %3i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4116
+msgctxt "trade-comms"
+msgid "Where can I find particular goods?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4117
+msgctxt "trade-comms"
+msgid ""
+"Friendly stations often have food or medicine or both. Neutral stations may "
+"trade their goods for food, medicine or luxury."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4159
+#, lua-format
+msgctxt "trade-comms"
+msgid "Station %s in sector %s has %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4164
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"\n"
+"What goods are you interested in?\n"
+"I've heard about these:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4166
+msgctxt "trade-comms"
+msgid " Beyond that, I have no knowledge of specific stations"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4204
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "Tell me about %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4211
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "Never heard of %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4213
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s died last week. The funeral was yesterday"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4215
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s? Who's %s? There's nobody here named %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4217
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "We don't talk about %s. They are gone and good riddance"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4219
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "I think %s moved away"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4228
+msgctxt "stationAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4229
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4232
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4235
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4243
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop? (%d rep)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4245
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request backup."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4247
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4249 scripts/scenario_42_shipyard.lua:4275
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "WP %d"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4257
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship toward WP %d"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4259 scripts/scenario_42_shipyard.lua:4282
+#: scripts/scenario_42_shipyard.lua:4334 scripts/scenario_42_shipyard.lua:4381
+msgctxt "needRep-comms"
+msgid "Not enough reputation!"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4269
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send reinforcements! (%d rep)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4271
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request reinforcements."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4273
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the reinforcements?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4280
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to assist at WP %d"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4292
+msgctxt "stationAssist-comms"
+msgid "Please send a service jonque for repairs"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4293
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid ""
+"Would you like the service jonque to come to you directly or would you "
+"prefer to set up a rendezvous via a waypoint? Either way, you will need %.1f "
+"reputation."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4332
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to come to you to help with repairs"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4338
+msgctxt "stationAssist-comms"
+msgid ""
+"\n"
+"\n"
+"Note: if you want to use a waypoint, you will have to back out and set one "
+"and come back."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4341
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Rendezvous at waypoint %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4379
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to rendezvous at waypoint %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4447 scripts/scenario_42_shipyard.lua:5386
+#: scripts/scenario_42_shipyard.lua:5445
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4449 scripts/scenario_42_shipyard.lua:5388
+#: scripts/scenario_42_shipyard.lua:5447
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4451 scripts/scenario_42_shipyard.lua:5390
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4453 scripts/scenario_42_shipyard.lua:5392
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4455 scripts/scenario_42_shipyard.lua:5394
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4457
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %d"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4459
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %d."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4467 scripts/scenario_42_shipyard.lua:5406
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4468 scripts/scenario_42_shipyard.lua:5407
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4473 scripts/scenario_42_shipyard.lua:5412
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4474 scripts/scenario_42_shipyard.lua:5413
+#: scripts/scenario_42_shipyard.lua:5450
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4477 scripts/scenario_42_shipyard.lua:5416
+#: scripts/scenario_42_shipyard.lua:5453
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4479 scripts/scenario_42_shipyard.lua:5418
+#: scripts/scenario_42_shipyard.lua:5455
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4480 scripts/scenario_42_shipyard.lua:5419
+#: scripts/scenario_42_shipyard.lua:5456
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Rear Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4483 scripts/scenario_42_shipyard.lua:5422
+#: scripts/scenario_42_shipyard.lua:5459
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4489
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s Missiles: %d/%d\n"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4494 scripts/scenario_42_shipyard.lua:5208
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"Docked with %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4499 scripts/scenario_42_shipyard.lua:5213
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"Heading for %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4509 scripts/scenario_42_shipyard.lua:5431
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4510 scripts/scenario_42_shipyard.lua:5432
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4557
+#, lua-format
+msgctxt "trade-comms"
+msgid "Traded luxury for %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4578 scripts/scenario_42_shipyard.lua:4603
+#: scripts/scenario_42_shipyard.lua:4625 scripts/scenario_42_shipyard.lua:4651
+#: scripts/scenario_42_shipyard.lua:5258 scripts/scenario_42_shipyard.lua:5280
+#: scripts/scenario_42_shipyard.lua:5304 scripts/scenario_42_shipyard.lua:5326
+#: scripts/scenario_42_shipyard.lua:5350
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchased %s from %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4580 scripts/scenario_42_shipyard.lua:4605
+#: scripts/scenario_42_shipyard.lua:4627 scripts/scenario_42_shipyard.lua:4653
+#: scripts/scenario_42_shipyard.lua:5260 scripts/scenario_42_shipyard.lua:5282
+#: scripts/scenario_42_shipyard.lua:5306 scripts/scenario_42_shipyard.lua:5328
+#: scripts/scenario_42_shipyard.lua:5352
+msgctxt "needRep-comms"
+msgid "Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4663 scripts/scenario_42_shipyard.lua:5184
+msgctxt "trade-comms"
+msgid "Do you have cargo you might sell?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4665 scripts/scenario_42_shipyard.lua:5186
+msgctxt "trade-comms"
+msgid "We've got "
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4669 scripts/scenario_42_shipyard.lua:5190
+msgctxt "trade-comms"
+msgid ", "
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4677 scripts/scenario_42_shipyard.lua:5198
+msgctxt "trade-comms"
+msgid "nothing"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4692
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4693
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4694
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4700
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4703
+msgctxt "shipEnemy-comms"
+msgid "We will destroy you"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4704
+msgctxt "shipEnemy-comms"
+msgid "We think not. It is you who will experience destruction!"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4706
+msgctxt "shipEnemy-comms"
+msgid "You have no honor"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4707
+msgctxt "shipEnemy-comms"
+msgid "Your insult has brought our wrath upon you. Prepare to die."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4708
+msgctxt "shipEnemy-comms"
+msgid "Your comments about honor have no meaning to us"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4710
+msgctxt "shipEnemy-comms"
+msgid "We pity your pathetic race"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4711
+msgctxt "shipEnemy-comms"
+msgid "Pathetic? You will regret your disparagement!"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4712
+msgctxt "shipEnemy-comms"
+msgid "We don't care what you think of us"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4717
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4721
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4725
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4726
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4727
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4728
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4730
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4731
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4732
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4733
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4737
+msgctxt "shipEnemy-comms"
+msgid "State your business"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4741
+msgctxt "shipEnemy-comms"
+msgid "What do you want? (not that we care)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4745
+msgctxt "shipEnemy-comms"
+msgid "Don't waste our time"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4747
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4787
+msgctxt "shipEnemy-comms"
+msgid "Subspace and time continuum disruption authorized"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4805
+msgctxt "shipEnemy-comms"
+msgid "Stop your actions"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4829
+msgctxt "shipEnemy-comms"
+msgid "Just this once, we'll take your advice"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:4831
+msgctxt "shipEnemy-comms"
+msgid "No"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5151
+#, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "Disruption %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5183
+msgctxt "trade-comms"
+msgid "Yes?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5204
+msgctxt "shipAssist-comms"
+msgid "Where are you going?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5206
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hi %s,"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5364
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5366
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5396
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5398
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %i."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5449
+msgctxt "shipAssist-comms"
+msgid "How are you doing?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5468
+msgctxt "shipServices-comms"
+msgid "Service options"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5486
+msgctxt "shipServices-comms"
+msgid "Repair ship system"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5487
+msgctxt "shipServices-comms"
+msgid "What system would you like repaired?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5489
+msgctxt "shipServices-comms"
+msgid "Repair probe launch system"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5492
+msgctxt "shipServices-comms"
+msgid "Your probe launch system has been repaired"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5494 scripts/scenario_42_shipyard.lua:5505
+#: scripts/scenario_42_shipyard.lua:5516 scripts/scenario_42_shipyard.lua:5527
+#: scripts/scenario_42_shipyard.lua:5538 scripts/scenario_42_shipyard.lua:5567
+#: scripts/scenario_42_shipyard.lua:5580 scripts/scenario_42_shipyard.lua:5593
+msgctxt "shipServices-comms"
+msgid "You need to stay close if you want me to fix your ship"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5500
+msgctxt "shipServices-comms"
+msgid "Repair hacking system"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5503
+msgctxt "shipServices-comms"
+msgid "Your hack system has been repaired"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5511
+msgctxt "shipServices-comms"
+msgid "Repair scanning system"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5514
+msgctxt "shipServices-comms"
+msgid "Your scanners have been repaired"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5522
+msgctxt "shipServices-comms"
+msgid "Repair combat maneuver"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5525
+msgctxt "shipServices-comms"
+msgid "Your combat maneuver has been repaired"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5533
+msgctxt "shipServices-comms"
+msgid "Repair self destruct system"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5536
+msgctxt "shipServices-comms"
+msgid "Your self destruct system has been repaired"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5558
+#, lua-format
+msgctxt "shipServices-comms"
+msgid "Full hull repair (%i reputation)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5562
+msgctxt "shipServices-comms"
+msgid "All fixed up and ready to go"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5571 scripts/scenario_42_shipyard.lua:5584
+#, lua-format
+msgctxt "shipServices-comms"
+msgid "Add %i%% to hull (%i reputation)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5575 scripts/scenario_42_shipyard.lua:5588
+msgctxt "shipServices-comms"
+msgid "Repairs completed as requested"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5626
+msgctxt "ammo-comms"
+msgid "Restock ordnance"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5630
+msgctxt "ammo-comms"
+msgid "What kind of ordnance?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5631
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s (%i reputation each)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5637
+#, lua-format
+msgctxt "ammo-comms"
+msgid "Restocked your %s type ordnance"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5640
+#, lua-format
+msgctxt "needRep-comms"
+msgid ""
+"You don't have enough reputation to fully replenish your %s type ordnance. "
+"You need %i and you only have %i. How would you like to proceed?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5641 scripts/scenario_42_shipyard.lua:5694
+#: scripts/scenario_42_shipyard.lua:5732
+#, lua-format
+msgctxt "ammo-comms"
+msgid "Get one (%i reputation)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5646 scripts/scenario_42_shipyard.lua:5689
+#: scripts/scenario_42_shipyard.lua:5699 scripts/scenario_42_shipyard.lua:5737
+#, lua-format
+msgctxt "ammo-comms"
+msgid "One %s provided"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5651 scripts/scenario_42_shipyard.lua:5672
+#: scripts/scenario_42_shipyard.lua:5704 scripts/scenario_42_shipyard.lua:5725
+#: scripts/scenario_42_shipyard.lua:5742 scripts/scenario_42_shipyard.lua:5748
+msgctxt "ammo-comms"
+msgid "You need to stay close if you want me to restock your ordnance"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5662 scripts/scenario_42_shipyard.lua:5715
+#, lua-format
+msgctxt "ammo-comms"
+msgid "Get %i (%i reputation)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5667 scripts/scenario_42_shipyard.lua:5687
+#: scripts/scenario_42_shipyard.lua:5720
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%i %ss provided"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5682
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"I don't have enough %s type ordnance to fully restock you. How would you "
+"like to proceed?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5683
+msgctxt "ammo-comms"
+msgid "We'll take all you've got"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5693
+#, lua-format
+msgctxt "needRep-comms"
+msgid ""
+"You don't have enough reputation to get all of our %s type ordnance. You "
+"need %i and you only have %i. How would you like to proceed?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5762
+msgctxt "shipServices-comms"
+msgid "Restock scan probes (5 reputation)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5766
+msgctxt "shipServices-comms"
+msgid "I replenished your probes for you."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5771
+msgctxt "shipServices-comms"
+msgid "You need to stay close if you want me to restock your probes"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5782
+#, lua-format
+msgctxt "shipServices-comms"
+msgid "Quick charge the main batteries (%i reputation)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5789
+msgctxt "shipServices-comms"
+msgid "Your batteries have been charged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5794
+msgctxt "shipServices-comms"
+msgid "You need to stay close if you want your batteries charged quickly"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5800
+msgctxt "shipServices-comms"
+msgid "How can I help you get your ship in good running order?"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:5802
+msgctxt "shipServices-comms"
+msgid "There's nothing on your ship that I can help you fix. Sorry."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6312
+#, lua-format
+msgctxt "-tabWeapons&Tactical"
+msgid "%s tubes: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6314
+#, lua-format
+msgctxt "-tabWeapons&Tactical"
+msgid "%s tube: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6358
+#, lua-format
+msgctxt "mission-tabHelm&Tactical"
+msgid "Angular Velocity: %.1f"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6367
+#, lua-format
+msgctxt "mission-tabHelm&Tactical"
+msgid "AV Max: %.1f"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6373
+#, lua-format
+msgctxt "mission-tabHelm&Tactical"
+msgid "AV Lo Target: %.1f"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6375 scripts/scenario_42_shipyard.lua:6384
+#: scripts/scenario_42_shipyard.lua:6447 scripts/scenario_42_shipyard.lua:6456
+#, lua-format
+msgctxt "mission-tabHelm&Tactical"
+msgid "%s Met"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6382
+#, lua-format
+msgctxt "mission-tabHelm&Tactical"
+msgid "AV Hi Target: %.1f"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6405
+msgctxt "mission-msgHelms"
+msgid ""
+"Maneuver check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6407
+msgctxt "mission-msgTactical"
+msgid ""
+"Maneuver check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6416
+msgctxt "mission-buttonHelm"
+msgid "Check Maneuver"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6421
+msgctxt "mission-buttonTactical"
+msgid "Check Maneuver"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6439
+#, lua-format
+msgctxt "mission-tabHelm&Tactical"
+msgid "Velocity Max: %.1f"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6445
+#, lua-format
+msgctxt "mission-tabHelm&Tactical"
+msgid "Velocity Lo Target: %.1f"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6454
+#, lua-format
+msgctxt "mission-tabHelm&Tactical"
+msgid "Velocity Hi Target: %.1f"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6475
+msgctxt "mission-msgHelms"
+msgid ""
+"Impulse check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6477
+msgctxt "mission-msgTactical"
+msgid ""
+"Impulse check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6486
+msgctxt "mission-buttonHelm"
+msgid "Check Impulse"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6491
+msgctxt "mission-buttonTactical"
+msgid "Check Impulse"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6506
+#, lua-format
+msgctxt "mission-tabHelm&Tactical"
+msgid "Jump Charge: %.1fK"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6512
+msgctxt "mission-tabHelm&Tactical"
+msgid "charged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6513
+msgctxt "mission-tabHelm&Tactical"
+msgid "under charged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6514
+msgctxt "mission-tabHelm&Tactical"
+msgid "overcharged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6522
+#, lua-format
+msgctxt "mission-tabHelm&Tactical"
+msgid "Charge state: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6535
+msgctxt "mission-tabHelm&Tactical"
+msgid "Waiting for recharge"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6537
+msgctxt "mission-tabHelm&Tactical"
+msgid "Jump check complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6544
+msgctxt "mission-tabHelm&Tactical"
+msgid "Waiting for jump"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6546
+msgctxt "mission-tabHelm&Tactical"
+msgid "Waiting for 50K charge"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6564
+msgctxt "mission-msgHelms"
+msgid ""
+"Jump drive check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6566
+msgctxt "mission-msgTactical"
+msgid ""
+"Jump drive check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6575
+msgctxt "mission-buttonHelm"
+msgid "Check Jump Drive"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6580
+msgctxt "mission-buttonTactical"
+msgid "Check Jump Drive"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6596 scripts/scenario_42_shipyard.lua:6678
+msgctxt "mission-tabWeapons&Tactical"
+msgid "charged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6597 scripts/scenario_42_shipyard.lua:6679
+msgctxt "mission-tabWeapons&Tactical"
+msgid "under charged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6598 scripts/scenario_42_shipyard.lua:6680
+msgctxt "mission-tabWeapons&Tactical"
+msgid "overcharged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6606
+#, lua-format
+msgctxt "mission-tabWeapons&Tactical"
+msgid "Front shield: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6619 scripts/scenario_42_shipyard.lua:6701
+msgctxt "mission-tabWeapons&Tactical"
+msgid "Waiting for recharge"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6621
+msgctxt "mission-tabWeapons&Tactical"
+msgid "Front Shield Ck complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6628 scripts/scenario_42_shipyard.lua:6710
+msgctxt "mission-tabWeapons&Tactical"
+msgid "Waiting for hit"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6630 scripts/scenario_42_shipyard.lua:6712
+msgctxt "mission-tabWeapons&Tactical"
+msgid "Waiting for 100% charge"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6646
+msgctxt "mission-msgWeapons"
+msgid ""
+"Front shield check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6648
+msgctxt "mission-msgTactical"
+msgid ""
+"Front shield check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6657
+msgctxt "mission-buttonWeapons"
+msgid "Check Front Shield"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6662
+msgctxt "mission-buttonTactical"
+msgid "Check Front Shield"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6688
+#, lua-format
+msgctxt "mission-tabWeapons&Tactical"
+msgid "Rear shield: %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6703
+msgctxt "mission-tabWeapons&Tactical"
+msgid "Rear Shield Ck complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6728
+msgctxt "mission-msgWeapons"
+msgid ""
+"Rear shield check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6730
+msgctxt "mission-msgTactical"
+msgid ""
+"Rear shield check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6739
+msgctxt "mission-buttonWeapons"
+msgid "Check Rear Shield"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6744
+msgctxt "mission-buttonTactical"
+msgid "Check Rear Shield"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6765
+msgctxt "mission-tabWeapons&Tactical"
+msgid "Waiting for beam calibration"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6767
+msgctxt "mission-tabWeapons&Tactical"
+msgid "Beam calibrate ck complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6778
+msgctxt "mission-msgWeapons"
+msgid ""
+"beam weapon calibration check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6780
+msgctxt "mission-msgTactical"
+msgid ""
+"beam weapon calibration check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6789
+msgctxt "mission-buttonWeapons"
+msgid "Check Beam Calibration"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6794
+msgctxt "mission-buttonTactical"
+msgid "Check Beam Calibration"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6813
+msgctxt "mission-tabWeapons&Engineer+"
+msgid "Waiting for shield calibration"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6816 scripts/scenario_42_shipyard.lua:6824
+msgctxt "mission-tabWeapons&Engineer+"
+msgid "Shield calibrate ck complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6822
+msgctxt "mission-tabWeapons&Engineer+"
+msgid "Wating for shield activation"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6837
+msgctxt "mission-msgWeapons"
+msgid ""
+"shield calibration check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6839
+msgctxt "mission-msgEngineer+"
+msgid ""
+"shield calibration check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6848
+msgctxt "mission-buttonWeapons"
+msgid "Check Shield Calibration"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6853
+msgctxt "mission-buttonEngineer+"
+msgid "Check Shield Calibration"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6875
+msgctxt "mission-tabRelay&Operations"
+msgid "Waiting for waypoint"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6877
+msgctxt "mission-tabRelay&Operations"
+msgid "Waypoint check complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6888
+msgctxt "mission-msgRelay"
+msgid ""
+"Waypoint system check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6890
+msgctxt "mission-msgOperations"
+msgid ""
+"Waypoint system check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6899
+msgctxt "mission-buttonRelay"
+msgid "Check Waypoint"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6904
+msgctxt "mission-buttonOperations"
+msgid "Check Waypoint"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6930
+msgctxt "mission-tabRelay&Operations"
+msgid "Waiting for probe launch"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6932
+msgctxt "mission-tabRelay&Operations"
+msgid "Restock probes"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6934
+msgctxt "mission-tabRelay&Operations"
+msgid "Probe check complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6946
+msgctxt "mission-msgRelay"
+msgid ""
+"Scan probe system check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6948
+msgctxt "mission-msgOperations"
+msgid ""
+"Scan probe system check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6957
+msgctxt "mission-buttonRelay"
+msgid "Check Probes"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6962
+msgctxt "mission-buttonOperations"
+msgid "Check Probes"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6982
+msgctxt "mission-tabRelay&Operations"
+msgid "Waiting for link"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6984
+msgctxt "mission-tabRelay&Operations"
+msgid "Waiting for unlink"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6986
+msgctxt "mission-tabRelay&Operations"
+msgid "Link check complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:6998
+msgctxt "mission-msgRelay"
+msgid ""
+"Probe link system check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7000
+msgctxt "mission-msgOperations"
+msgid ""
+"Probe link system check has been completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7009
+msgctxt "mission-buttonRelay"
+msgid "Check Probe Link"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7014
+msgctxt "mission-buttonOperations"
+msgid "Check Probe Link"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7045
+#, lua-format
+msgctxt "mission-tabEngineer&Engineer+"
+msgid "Coolant Count: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7047
+msgctxt "mission-tabEngineer&Engineer+"
+msgid "Coolant checks completed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7064
+msgctxt "mission-msgEngineer"
+msgid ""
+"Coolant flow checks completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7066
+msgctxt "mission-msgEngineer+"
+msgid ""
+"Coolant flow checks completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7075
+msgctxt "mission-buttonEngineer"
+msgid "Check Coolant"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7080
+msgctxt "mission-buttonEngineer"
+msgid "Coolant Check Status"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7081
+msgctxt "mission-msgEngineer"
+msgid "Coolant flow check status by system:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7085
+#, lua-format
+msgctxt "mission-msgEngineer"
+msgid ""
+"%s\n"
+"%s: complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7088
+#, lua-format
+msgctxt "mission-msgEngineer"
+msgid ""
+"%s\n"
+"%s: %.1f (need to reach 10)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7091
+#, lua-format
+msgctxt "mission-msgEngineer"
+msgid ""
+"%s\n"
+"Count of systems checked: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7096
+msgctxt "mission-buttonEngineer+"
+msgid "Check Coolant"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7101
+msgctxt "mission-buttonEngineer+"
+msgid "Coolant Check Status"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7102
+msgctxt "mission-msgEngineer+"
+msgid "Coolant flow check status by system:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7106
+#, lua-format
+msgctxt "mission-msgEngineer+"
+msgid ""
+"%s\n"
+"%s: complete"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7109
+#, lua-format
+msgctxt "mission-msgEngineer+"
+msgid ""
+"%s\n"
+"%s: %.1f (need to reach 10)"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7112
+#, lua-format
+msgctxt "mission-msgEngineer+"
+msgid ""
+"%s\n"
+"Count of systems checked: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7150
+#, lua-format
+msgctxt "mission-tabEngineer&Engineer+"
+msgid "Power Max Count: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7152
+msgctxt "mission-tabEngineer&Engineer+"
+msgid "Power max ck completed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7154
+#, lua-format
+msgctxt "mission-tabEngineer&Engineer+"
+msgid "Power Min Count: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7156
+msgctxt "mission-tabEngineer&Engineer+"
+msgid "Power min ck completed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7179
+msgctxt "mission-msgEngineer"
+msgid ""
+"Power flow checks completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7181
+msgctxt "mission-msgEngineer+"
+msgid ""
+"Power flow checks completed.\n"
+"Status: passed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7190
+msgctxt "mission-buttonEngineer"
+msgid "Check Power"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7195
+msgctxt "mission-buttonEngineer"
+msgid "Power Check Status"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7196
+msgctxt "mission-msgEngineer"
+msgid ""
+"Power flow check status by system. Must go up to 3 for max check and down to "
+"zero for min check:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7207
+#, lua-format
+msgctxt "mission-msgEngineer"
+msgid ""
+"%s\n"
+"%s: completed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7209
+#, lua-format
+msgctxt "mission-msgEngineer"
+msgid ""
+"%s\n"
+"%s: %.1f"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7212
+#, lua-format
+msgctxt "mission-msgEngineer"
+msgid ""
+"%s\n"
+"Systems that have reached minimum power level: %i\n"
+"Systems that have reached maximum power level: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7217
+msgctxt "mission-buttonEngineer+"
+msgid "Check Power"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7222
+msgctxt "mission-buttonEngineer+"
+msgid "Power Check Status"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7223
+msgctxt "mission-msgEngineer+"
+msgid ""
+"Power flow check status by system. Must go up to 3 for max check and down to "
+"zero for min check:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7234
+#, lua-format
+msgctxt "mission-msgEngineer+"
+msgid ""
+"%s\n"
+"%s: completed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7236
+#, lua-format
+msgctxt "mission-msgEngineer+"
+msgid ""
+"%s\n"
+"%s: %.1f"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7239
+#, lua-format
+msgctxt "mission-msgEngineer+"
+msgid ""
+"%s\n"
+"Systems that have reached minimum power level: %i\n"
+"Systems that have reached maximum power level: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7276
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "You failed to return %s within the time allowed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7281
+#, lua-format
+msgctxt "mission-tabRelay&Operations"
+msgid "Return: %s:%.2i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7300
+msgctxt "msgMainscreen"
+msgid "The shipyard has been destroyed"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7386
+msgctxt "repairCrew-msgEngineer"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7390
+msgctxt "repairCrew-msgEngineer+"
+msgid "Medical team has revived one of your repair crew"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7408
+msgctxt "coolant-msgEngineer"
+msgid "Automated systems have recovered some coolant"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7411
+msgctxt "coolant-msgEngineer+"
+msgid "Automated systems have recovered some coolant"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7451 scripts/scenario_42_shipyard.lua:7486
+msgctxt "repairCrew-msgEngineer"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7455 scripts/scenario_42_shipyard.lua:7490
+msgctxt "repairCrew-msgEngineer+"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7507
+msgctxt "coolant-msgEngineer"
+msgid "Damage has caused a loss of coolant"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7511
+msgctxt "coolant-msgEngineer+"
+msgid "Damage has caused a loss of coolant"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7518
+msgctxt "damage-msgEngineer"
+msgid "The probe launch system has been damaged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7521
+msgctxt "damage-msgEngineer+"
+msgid "The probe launch system has been damaged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7526
+msgctxt "damage-msgEngineer"
+msgid "The hacking system has been damaged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7529
+msgctxt "damage-msgEngineer+"
+msgid "The hacking system has been damaged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7534
+msgctxt "damage-msgEngineer"
+msgid "The scanners have been damaged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7537
+msgctxt "damage-msgEngineer+"
+msgid "The scanners have been damaged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7542
+msgctxt "damage-msgEngineer"
+msgid "Combat maneuver has been damaged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7545
+msgctxt "damage-msgEngineer+"
+msgid "Combat maneuver has been damaged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7550
+msgctxt "damage-msgEngineer"
+msgid "Self destruct system has been damaged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7553
+msgctxt "damage-msgEngineer+"
+msgid "Self destruct system has been damaged"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7578
+msgctxt "inventory-buttonRelay"
+msgid "Inventory"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7585
+msgctxt "inventory-buttonOperations"
+msgid "Inventory"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7594
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "%s Current cargo:"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7599
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "     %s: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7603
+msgctxt "inventory-shipLog"
+msgid "     Empty"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7605
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "Available space: %i"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7620
+msgctxt "msgMainscreen"
+msgid "Scenario needs the 'Per-system damage' option under 'Extra settings'"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7633
+#, lua-format
+msgctxt "goal-shipLog"
+msgid ""
+"From: Central Headquarters Command\n"
+"To: Captain and crew of %s\n"
+"Greetings %s. You have completed your journey from central headquarters to "
+"regional headquarters, %s. You are here to inspect a ship produced by the "
+"shipyard here. Contact %s for details on starting your inspection."
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7643
+#, lua-format
+msgctxt "-tabHelms"
+msgid "%s %s in %s"
+msgstr ""
+
+#: scripts/scenario_42_shipyard.lua:7645
+#, lua-format
+msgctxt "-tabTactical"
+msgid "%s %s in %s"
+msgstr ""
