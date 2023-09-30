@@ -2440,8 +2440,8 @@ msgstr "Merci de nous envoyer une Jonque de service pour les réparations."
 msgctxt "stationAssist-comms"
 msgid ""
 "Would you like the service jonque to come to you directly or would you "
-"prefer to set up a rendez-vous via a waypoint? Either way, you will need "
-"%.1f reputation."
+"prefer to set up a rendezvous via a waypoint? Either way, you will need %.1f "
+"reputation."
 msgstr ""
 "Souhaitez-vous qu'une Jonque de service vienne directement à vous ou "
 "préférez-vous fixer un rendez-vous via un marqueur ? Dans tous les cas, vous "
@@ -2470,13 +2470,13 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:4794
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "Rendez-vous at waypoint %d"
+msgid "Rendezvous at waypoint %d"
 msgstr "Rendez-vous au marqueur %d."
 
 #: scripts/scenario_74_omicron.lua:4832
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "We have dispatched %s to rendez-vous at waypoint %d"
+msgid "We have dispatched %s to rendezvous at waypoint %d"
 msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au marqueur %d."
 
 #: scripts/scenario_74_omicron.lua:4858

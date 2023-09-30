@@ -1067,29 +1067,30 @@ msgstr ""
 #: scripts/scenario_32_devour.lua:2669 scripts/scenario_32_devour.lua:2673
 #: scripts/scenario_32_devour.lua:2677 scripts/scenario_32_devour.lua:2679
 #: scripts/scenario_32_devour.lua:2690 scripts/scenario_32_devour.lua:2763
-#: scripts/scenario_32_devour.lua:2811 scripts/scenario_32_devour.lua:2844
-#: scripts/scenario_32_devour.lua:2877 scripts/scenario_32_devour.lua:2884
-#: scripts/scenario_32_devour.lua:2901 scripts/scenario_32_devour.lua:2905
-#: scripts/scenario_32_devour.lua:2910 scripts/scenario_32_devour.lua:2952
-#: scripts/scenario_32_devour.lua:3006 scripts/scenario_32_devour.lua:3047
-#: scripts/scenario_32_devour.lua:3089 scripts/scenario_32_devour.lua:3135
-#: scripts/scenario_32_devour.lua:3170 scripts/scenario_32_devour.lua:3267
-#: scripts/scenario_32_devour.lua:3273 scripts/scenario_32_devour.lua:3279
-#: scripts/scenario_32_devour.lua:3284 scripts/scenario_32_devour.lua:3287
-#: scripts/scenario_32_devour.lua:3299 scripts/scenario_32_devour.lua:3305
-#: scripts/scenario_32_devour.lua:3312 scripts/scenario_32_devour.lua:3324
-#: scripts/scenario_32_devour.lua:3360 scripts/scenario_32_devour.lua:3406
-#: scripts/scenario_32_devour.lua:3429 scripts/scenario_32_devour.lua:3431
-#: scripts/scenario_32_devour.lua:3451 scripts/scenario_32_devour.lua:3498
-#: scripts/scenario_32_devour.lua:3507 scripts/scenario_32_devour.lua:3519
-#: scripts/scenario_32_devour.lua:3525 scripts/scenario_32_devour.lua:3533
-#: scripts/scenario_32_devour.lua:3562 scripts/scenario_32_devour.lua:3577
-#: scripts/scenario_32_devour.lua:3599 scripts/scenario_32_devour.lua:3603
-#: scripts/scenario_32_devour.lua:3622 scripts/scenario_32_devour.lua:3626
-#: scripts/scenario_32_devour.lua:3721 scripts/scenario_32_devour.lua:3726
-#: scripts/scenario_32_devour.lua:3798 scripts/scenario_32_devour.lua:3802
-#: scripts/scenario_32_devour.lua:3808 scripts/scenario_32_devour.lua:3842
-#: scripts/scenario_32_devour.lua:3850 scripts/scenario_32_devour.lua:3877
+#: scripts/scenario_32_devour.lua:2780 scripts/scenario_32_devour.lua:2811
+#: scripts/scenario_32_devour.lua:2844 scripts/scenario_32_devour.lua:2877
+#: scripts/scenario_32_devour.lua:2884 scripts/scenario_32_devour.lua:2901
+#: scripts/scenario_32_devour.lua:2905 scripts/scenario_32_devour.lua:2910
+#: scripts/scenario_32_devour.lua:2952 scripts/scenario_32_devour.lua:3006
+#: scripts/scenario_32_devour.lua:3047 scripts/scenario_32_devour.lua:3089
+#: scripts/scenario_32_devour.lua:3135 scripts/scenario_32_devour.lua:3170
+#: scripts/scenario_32_devour.lua:3267 scripts/scenario_32_devour.lua:3273
+#: scripts/scenario_32_devour.lua:3279 scripts/scenario_32_devour.lua:3284
+#: scripts/scenario_32_devour.lua:3287 scripts/scenario_32_devour.lua:3299
+#: scripts/scenario_32_devour.lua:3305 scripts/scenario_32_devour.lua:3312
+#: scripts/scenario_32_devour.lua:3324 scripts/scenario_32_devour.lua:3360
+#: scripts/scenario_32_devour.lua:3406 scripts/scenario_32_devour.lua:3429
+#: scripts/scenario_32_devour.lua:3431 scripts/scenario_32_devour.lua:3451
+#: scripts/scenario_32_devour.lua:3498 scripts/scenario_32_devour.lua:3507
+#: scripts/scenario_32_devour.lua:3519 scripts/scenario_32_devour.lua:3525
+#: scripts/scenario_32_devour.lua:3533 scripts/scenario_32_devour.lua:3562
+#: scripts/scenario_32_devour.lua:3577 scripts/scenario_32_devour.lua:3599
+#: scripts/scenario_32_devour.lua:3603 scripts/scenario_32_devour.lua:3622
+#: scripts/scenario_32_devour.lua:3626 scripts/scenario_32_devour.lua:3721
+#: scripts/scenario_32_devour.lua:3726 scripts/scenario_32_devour.lua:3798
+#: scripts/scenario_32_devour.lua:3802 scripts/scenario_32_devour.lua:3808
+#: scripts/scenario_32_devour.lua:3842 scripts/scenario_32_devour.lua:3850
+#: scripts/scenario_32_devour.lua:3873 scripts/scenario_32_devour.lua:3877
 #: scripts/scenario_32_devour.lua:3896 scripts/scenario_32_devour.lua:3920
 #: scripts/scenario_32_devour.lua:3945 scripts/scenario_32_devour.lua:3967
 #: scripts/scenario_32_devour.lua:3993 scripts/scenario_32_devour.lua:4018
@@ -1097,18 +1098,18 @@ msgstr ""
 #: scripts/scenario_32_devour.lua:4577 scripts/scenario_32_devour.lua:4600
 #: scripts/scenario_32_devour.lua:4622 scripts/scenario_32_devour.lua:4646
 #: scripts/scenario_32_devour.lua:4668 scripts/scenario_32_devour.lua:4692
-#: scripts/scenario_32_devour.lua:4737 scripts/scenario_32_devour.lua:4747
-#: scripts/scenario_32_devour.lua:4764 scripts/scenario_32_devour.lua:4772
-#: scripts/scenario_32_devour.lua:4801 scripts/scenario_32_devour.lua:4834
-#: scripts/scenario_32_devour.lua:4845 scripts/scenario_32_devour.lua:4856
-#: scripts/scenario_32_devour.lua:4867 scripts/scenario_32_devour.lua:4878
-#: scripts/scenario_32_devour.lua:4881 scripts/scenario_32_devour.lua:4907
-#: scripts/scenario_32_devour.lua:4920 scripts/scenario_32_devour.lua:4933
-#: scripts/scenario_32_devour.lua:4991 scripts/scenario_32_devour.lua:5012
-#: scripts/scenario_32_devour.lua:5044 scripts/scenario_32_devour.lua:5065
-#: scripts/scenario_32_devour.lua:5082 scripts/scenario_32_devour.lua:5088
-#: scripts/scenario_32_devour.lua:5092 scripts/scenario_32_devour.lua:5111
-#: scripts/scenario_32_devour.lua:5134
+#: scripts/scenario_32_devour.lua:4737 scripts/scenario_32_devour.lua:4741
+#: scripts/scenario_32_devour.lua:4747 scripts/scenario_32_devour.lua:4764
+#: scripts/scenario_32_devour.lua:4772 scripts/scenario_32_devour.lua:4801
+#: scripts/scenario_32_devour.lua:4834 scripts/scenario_32_devour.lua:4845
+#: scripts/scenario_32_devour.lua:4856 scripts/scenario_32_devour.lua:4867
+#: scripts/scenario_32_devour.lua:4878 scripts/scenario_32_devour.lua:4881
+#: scripts/scenario_32_devour.lua:4907 scripts/scenario_32_devour.lua:4920
+#: scripts/scenario_32_devour.lua:4933 scripts/scenario_32_devour.lua:4991
+#: scripts/scenario_32_devour.lua:5012 scripts/scenario_32_devour.lua:5044
+#: scripts/scenario_32_devour.lua:5065 scripts/scenario_32_devour.lua:5082
+#: scripts/scenario_32_devour.lua:5088 scripts/scenario_32_devour.lua:5092
+#: scripts/scenario_32_devour.lua:5111 scripts/scenario_32_devour.lua:5134
 msgid "Back"
 msgstr "Précédent"
 
@@ -2532,13 +2533,13 @@ msgstr ""
 #: scripts/scenario_32_devour.lua:3679
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "Rendez-vous at waypoint %i"
+msgid "Rendezvous at waypoint %i"
 msgstr "Rendez-vous au marqueur %i."
 
 #: scripts/scenario_32_devour.lua:3717
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "We have dispatched %s to rendez-vous at waypoint %i"
+msgid "We have dispatched %s to rendezvous at waypoint %i"
 msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au marqueur %i."
 
 #: scripts/scenario_32_devour.lua:3785 scripts/scenario_32_devour.lua:4724
