@@ -69,14 +69,6 @@ public:
     void render3D(sp::ecs::Entity e) override;
 };
 
-class BeamRenderSystem : public sp::ecs::System, public Render3DInterface
-{
-public:
-    BeamRenderSystem();
-    void update(float delta) override;
-    void render3D(sp::ecs::Entity e) override;
-};
-
 class NebulaRenderSystem : public sp::ecs::System, public Render3DInterface
 {
 public:

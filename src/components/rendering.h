@@ -53,27 +53,3 @@ public:
 
     std::vector<Cloud> clouds;
 };
-
-// Renders a beam from the source to the target, used for beam weapons but can also be used for other visual effects.
-class BeamRenderer
-{
-public:
-    float lifetime;
-    sp::ecs::Entity source;
-    sp::ecs::Entity target;
-    glm::vec3 source_offset{};
-    glm::vec3 target_offset{};
-    glm::vec2 target_location{};
-    TextureRef texture;
-};
-
-// Renders a single quad texture as "hit effect" of beam weapons.
-class HitRingRenderer
-{
-public:
-    sp::ecs::Entity target;
-    glm::vec2 target_location{};
-    glm::vec3 target_offset{};
-    glm::vec3 hit_normal{};
-    TextureRef texture;
-};

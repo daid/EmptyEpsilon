@@ -6,6 +6,7 @@
 #include "components/reactor.h"
 #include "components/warpdrive.h"
 #include "components/target.h"
+#include "components/shields.h"
 #include "components/faction.h"
 #include "components/sfx.h"
 #include "ecs/query.h"
@@ -14,6 +15,7 @@
 #include "glObjects.h"
 #include "shaderRegistry.h"
 #include "tween.h"
+#include "random.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -101,8 +103,11 @@ void BeamWeaponSystem::update(float delta)
                             mount.cooldown = mount.cycle_time; // Reset time of weapon
 
                             auto hit_location = target_transform->getPosition();
-                            if (auto physics = target.entity.getComponent<sp::Physics>())
+                            auto r = 100.0f;
+                            if (auto physics = target.entity.getComponent<sp::Physics>()) {
                                 hit_location -= glm::normalize(target_transform->getPosition() - transform.getPosition()) * physics->getSize().x;
+                                r = physics->getSize().x;
+                            }
 
                             auto e = sp::ecs::Entity::create();
                             e.addComponent<sp::Transform>(transform);
@@ -111,11 +116,20 @@ void BeamWeaponSystem::update(float delta)
                             be.target = target.entity;
                             be.source_offset = mount.position;
                             be.target_location = hit_location;
-                            //TODO: be.target_offset
                             be.beam_texture = mount.texture;
                             auto& sfx = e.addComponent<Sfx>();
                             sfx.sound = "sfx/laser_fire.wav";
                             sfx.power = mount.damage / 6.0f;
+                            {
+                                hit_location -= target_transform->getPosition();
+                                be.target_offset = glm::vec3(hit_location.x + random(-r/2.0f, r/2.0f), hit_location.y + random(-r/2.0f, r/2.0f), random(-r/4.0f, r/4.0f));
+
+                                auto shield = target.entity.getComponent<Shields>();
+                                if (shield && shield->active)
+                                    be.target_offset = glm::normalize(be.target_offset) * r;
+                                else
+                                    be.target_offset = glm::normalize(be.target_offset) * random(0, r / 2.0f);
+                            }
 
                             DamageInfo info(entity, mount.damage_type, hit_location);
                             info.frequency = beamsys.frequency;
