@@ -153,34 +153,41 @@ void BeamRenderSystem::render3D(sp::ecs::Entity e)
 
     ShaderRegistry::ScopedShader beamShader(ShaderRegistry::Shaders::Basic);
 
+    auto position = transform->getPosition();
+    auto rotation = transform->getRotation();
+    auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
+    model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
+
     glUniform4f(beamShader.get().uniform(ShaderRegistry::Uniforms::Color), br->lifetime, br->lifetime, br->lifetime, 1.f);
-    glUniformMatrix4fv(beamShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(getModelMatrix()));
+    glUniformMatrix4fv(beamShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
     
     gl::ScopedVertexAttribArray positions(beamShader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(beamShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 
+    struct VertexAndTexCoords{
+        glm::vec3 vertex;
+        glm::vec2 texcoords;
+    };
     std::array<VertexAndTexCoords, 4> quad;
-    // Beam
-    {
-        glm::vec3 v0 = startPoint + eyeNormal * 4.0f;
-        glm::vec3 v1 = endPoint + eyeNormal * 4.0f;
-        glm::vec3 v2 = endPoint - eyeNormal * 4.0f;
-        glm::vec3 v3 = startPoint - eyeNormal * 4.0f;
-        quad[0].vertex = v0;
-        quad[0].texcoords = { 0.f, 0.f };
-        quad[1].vertex = v1;
-        quad[1].texcoords = { 0.f, 1.f };
-        quad[2].vertex = v2;
-        quad[2].texcoords = { 1.f, 1.f };
-        quad[3].vertex = v3;
-        quad[3].texcoords = { 1.f, 0.f };
 
-        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
-        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
-        // Draw the beam
-        std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
-    }
+    glm::vec3 v0 = startPoint + eyeNormal * 4.0f;
+    glm::vec3 v1 = endPoint + eyeNormal * 4.0f;
+    glm::vec3 v2 = endPoint - eyeNormal * 4.0f;
+    glm::vec3 v3 = startPoint - eyeNormal * 4.0f;
+    quad[0].vertex = v0;
+    quad[0].texcoords = { 0.f, 0.f };
+    quad[1].vertex = v1;
+    quad[1].texcoords = { 0.f, 1.f };
+    quad[2].vertex = v2;
+    quad[2].texcoords = { 1.f, 1.f };
+    quad[3].vertex = v3;
+    quad[3].texcoords = { 1.f, 0.f };
+
+    glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+    glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+    // Draw the beam
+    std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
 }
 
 NebulaRenderSystem::NebulaRenderSystem()
