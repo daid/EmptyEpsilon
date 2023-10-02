@@ -125,6 +125,64 @@ void MeshRenderSystem::render3D(sp::ecs::Entity e)
         glActiveTexture(GL_TEXTURE0);
 }
 
+BeamRenderSystem::BeamRenderSystem()
+{
+    RenderSystem::add3DHandler<BeamRenderer>(this, false);
+}
+
+void BeamRenderSystem::update(float delta)
+{
+}
+
+void BeamRenderSystem::render3D(sp::ecs::Entity e)
+{
+    auto br = e.getComponent<BeamRenderer>();
+    if (!br) return;
+    auto transform = e.getComponent<sp::Transform>();
+    if (!transform) return;
+
+    
+    glm::vec3 startPoint(transform->getPosition().x, transform->getPosition().y, br->source_offset.z);
+    glm::vec3 endPoint(br->target_location.x, br->target_location.y, br->target_offset.z);
+    glm::vec3 eyeNormal = glm::normalize(glm::cross(camera_position - startPoint, endPoint - startPoint));
+
+    if (!br->texture.ptr && !br->texture.name.empty())
+        br->texture.ptr = textureManager.getTexture(br->texture.name);
+    if (br->texture.ptr)
+        br->texture.ptr->bind();
+
+    ShaderRegistry::ScopedShader beamShader(ShaderRegistry::Shaders::Basic);
+
+    glUniform4f(beamShader.get().uniform(ShaderRegistry::Uniforms::Color), br->lifetime, br->lifetime, br->lifetime, 1.f);
+    glUniformMatrix4fv(beamShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(getModelMatrix()));
+    
+    gl::ScopedVertexAttribArray positions(beamShader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(beamShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+
+    std::array<VertexAndTexCoords, 4> quad;
+    // Beam
+    {
+        glm::vec3 v0 = startPoint + eyeNormal * 4.0f;
+        glm::vec3 v1 = endPoint + eyeNormal * 4.0f;
+        glm::vec3 v2 = endPoint - eyeNormal * 4.0f;
+        glm::vec3 v3 = startPoint - eyeNormal * 4.0f;
+        quad[0].vertex = v0;
+        quad[0].texcoords = { 0.f, 0.f };
+        quad[1].vertex = v1;
+        quad[1].texcoords = { 0.f, 1.f };
+        quad[2].vertex = v2;
+        quad[2].texcoords = { 1.f, 1.f };
+        quad[3].vertex = v3;
+        quad[3].texcoords = { 1.f, 0.f };
+
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+        // Draw the beam
+        std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
+    }
+}
+
 NebulaRenderSystem::NebulaRenderSystem()
 {
     RenderSystem::add3DHandler<NebulaRenderSystem>(this, true);

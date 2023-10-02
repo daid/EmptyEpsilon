@@ -178,26 +178,4 @@ void MissileWeapon::setMissileSize(EMissileSizes missile_size)
     category_modifier = MissileWeaponData::convertSizeToCategoryModifier(missile_size);
 }
 
-std::unordered_map<string, string> MissileWeapon::getGMInfo()
-{
-    std::unordered_map<string, string> ret;
-
-    if (owner)
-    {
-        //ret[trMark("gm_info", "Owner")] = owner->getCallSign();
-    }
-
-    /*P<SpaceObject> target = game_server->getObjectById(target_id);
-
-    if (target)
-    {
-        ret[trMark("gm_info", "Target")] = target->getCallSign();
-    }
-
-    ret[trMark("gm_info", "Faction")] = getLocaleFaction();
-    ret[trMark("gm_info", "Lifetime")] = lifetime;
-    ret[trMark("gm_info", "Size")] = getMissileSize();
-
-    return ret;
-}
 */

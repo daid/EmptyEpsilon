@@ -24,7 +24,6 @@ public:
     virtual void draw3DTransparent() override;
     virtual void update(float delta) override;
 
-    virtual std::unordered_map<string, string> getGMInfo() override;
     virtual bool canBeTargetedBy(sp::ecs::Entity other) override { return true; }
     virtual bool hasShield() override;
 

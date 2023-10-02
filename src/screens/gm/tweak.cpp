@@ -81,6 +81,7 @@ void GuiEntityTweak::open(sp::ecs::Entity e)
     entity = e;
     for(auto page : pages)
         page->open(e);
+    show();
 }
 
 GuiTweakPage::GuiTweakPage(GuiContainer* owner)

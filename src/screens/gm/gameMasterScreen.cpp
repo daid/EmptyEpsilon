@@ -30,6 +30,35 @@
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_textentry.h"
 
+static std::unordered_map<string, string> getGMInfo(sp::ecs::Entity entity)
+{
+    std::unordered_map<string, string> result;
+    //ret[trMark("gm_info", "CallSign")] = callsign;
+    //ret[trMark("gm_info", "Type")] = type_name;
+    //ret[trMark("gm_info", "Hull")] = string(hull_strength) + "/" + string(hull_max);
+    //for(int n=0; n<shield_count; n++) {
+        // Note, translators: this is a compromise.
+        // Because of the deferred translation the variable parameter can't be forwarded, so it'll always be a suffix.
+    //    ret[trMark("gm_info", "Shield") + string(n + 1)] = string(shield_level[n]) + "/" + string(shield_max[n]);
+    //}
+    /* from missile weapons
+    if (owner)
+    {
+        //ret[trMark("gm_info", "Owner")] = owner->getCallSign();
+    }
+
+    P<SpaceObject> target = game_server->getObjectById(target_id);
+    if (target)
+    {
+        ret[trMark("gm_info", "Target")] = target->getCallSign();
+    }
+    ret[trMark("gm_info", "Faction")] = getLocaleFaction();
+    ret[trMark("gm_info", "Lifetime")] = lifetime;
+    ret[trMark("gm_info", "Size")] = getMissileSize();
+    */
+    return result;
+}
+
 GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
 : GuiCanvas(render_layer), click_and_drag_state(CD_None)
 {
@@ -319,11 +348,10 @@ void GameMasterScreen::update(float delta)
     std::unordered_map<string, string> selection_info;
 
     // For each selected object, determine and report their type.
-    for(auto obj : targets.getTargets())
+    for(auto entity : targets.getTargets())
     {
-        /*TODO
-        std::unordered_map<string, string> info = obj->getGMInfo();
-        for(std::unordered_map<string, string>::iterator i = info.begin(); i != info.end(); i++)
+        auto info = getGMInfo(entity);
+        for(auto i = info.begin(); i != info.end(); i++)
         {
             if (selection_info.find(i->first) == selection_info.end())
             {
@@ -334,12 +362,12 @@ void GameMasterScreen::update(float delta)
                 selection_info[i->first] = tr("*mixed*");
             }
         }
-        */
     }
 
     if (targets.getTargets().size() == 1)
     {
-        //TODO selection_info[trMark("gm_info", "Position")] = string(targets.getTargets()[0]->getPosition().x, 0) + "," + string(targets.getTargets()[0]->getPosition().y, 0);
+        if (auto t = targets.get().getComponent<sp::Transform>())
+            selection_info[trMark("gm_info", "Position")] = string(t->getPosition().x, 0) + "," + string(t->getPosition().y, 0);
     }
 
     unsigned int cnt = 0;
