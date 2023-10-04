@@ -1,11 +1,10 @@
 #include "systems/selfdestruct.h"
 #include "components/selfdestruct.h"
 #include "components/collision.h"
+#include "components/rendering.h"
 #include "systems/damage.h"
 #include "ecs/query.h"
 #include "multiplayer_server.h"
-#include "spaceObjects/spaceObject.h"
-#include "spaceObjects/explosionEffect.h"
 #include "random.h"
 
 
@@ -43,10 +42,10 @@ void SelfDestructSystem::update(float delta)
                 if (transform) {
                     for(int n = 0; n < 5; n++)
                     {
-                        ExplosionEffect* e = new ExplosionEffect();
-                        e->setSize(self_destruct.size * 0.67f);
-                        e->setPosition(transform->getPosition() + rotateVec2(glm::vec2(0, random(0, self_destruct.size * 0.33f)), random(0, 360)));
-                        e->setRadarSignatureInfo(0.0, 0.6, 0.6);
+                        auto e = sp::ecs::Entity::create();
+                        e.addComponent<ExplosionEffect>().size = self_destruct.size * 0.67f;
+                        e.addComponent<sp::Transform>(*transform);
+                        //TODO: e->setRadarSignatureInfo(0.0, 0.6, 0.6);
                     }
 
                     DamageInfo info(entity, DamageType::Kinetic, transform->getPosition());
@@ -54,9 +53,7 @@ void SelfDestructSystem::update(float delta)
                 }
 
                 //Finally, destroy the entity.
-                auto obj_ptr = entity.getComponent<SpaceObject*>();
-                if (obj_ptr)
-                    (*obj_ptr)->destroy();
+                entity.destroy();
             }
         }
     }

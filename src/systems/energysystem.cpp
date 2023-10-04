@@ -4,8 +4,7 @@
 #include "components/reactor.h"
 #include "components/hull.h"
 #include "components/collision.h"
-#include "spaceObjects/spaceObject.h"
-#include "spaceObjects/explosionEffect.h"
+#include "components/rendering.h"
 #include "multiplayer_server.h"
 
 
@@ -47,21 +46,16 @@ void EnergySystem::update(float delta)
             if (hull && hull->allow_destruction) {
                 auto transform = entity.getComponent<sp::Transform>();
                 if (transform) {
-                    auto e = new ExplosionEffect();
-                    e->setSize(1000.0f);
-                    e->setPosition(transform->getPosition());
-                    e->setRadarSignatureInfo(0.0, 0.4, 0.4);
+                    auto e = sp::ecs::Entity::create();
+                    e.addComponent<ExplosionEffect>().size = 1000.0;
+                    e.addComponent<sp::Transform>(*transform);
+                    //TODO: e->setRadarSignatureInfo(0.0, 0.4, 0.4);
 
                     DamageInfo info(entity, DamageType::Kinetic, transform->getPosition());
                     DamageSystem::damageArea(transform->getPosition(), 500, 30, 60, info, 0.0);
                 }
 
-                auto obj_ptr = entity.getComponent<SpaceObject*>();
-                if (obj_ptr) {
-                    (*obj_ptr)->destroy();
-                } else {
-                    entity.destroy();
-                }
+                entity.destroy();
             }
         }
     }

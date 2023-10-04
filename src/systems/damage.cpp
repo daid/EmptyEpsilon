@@ -5,13 +5,11 @@
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/beamweapon.h"
+#include "components/rendering.h"
 #include "gameGlobalInfo.h"
 #include <glm/geometric.hpp>
 #include "random.h"
 #include "menus/luaConsole.h"
-
-#include "spaceObjects/spaceObject.h"
-#include "spaceObjects/explosionEffect.h"
 
 
 void DamageSystem::update(float delta)
@@ -170,10 +168,10 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
 {
     if (auto transform = entity.getComponent<sp::Transform>()) {
         if (auto physics = entity.getComponent<sp::Physics>()) {
-            ExplosionEffect* e = new ExplosionEffect();
-            e->setSize(physics->getSize().x * 1.5f);
-            e->setPosition(transform->getPosition());
-            e->setRadarSignatureInfo(0.0, 0.4, 0.4);
+            auto e = sp::ecs::Entity::create();
+            e.addComponent<ExplosionEffect>().size = physics->getSize().x * 1.5f;
+            e.addComponent<sp::Transform>(*transform);
+            //TODO: e->setRadarSignatureInfo(0.0, 0.4, 0.4);
         }
     }
 
@@ -210,7 +208,5 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
     }
 
     //Finally, destroy the entity.
-    auto obj_ptr = entity.getComponent<SpaceObject*>();
-    if (obj_ptr)
-        (*obj_ptr)->destroy();
+    entity.destroy();
 }

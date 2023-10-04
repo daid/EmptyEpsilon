@@ -76,3 +76,11 @@ public:
     void update(float delta) override;
     void render3D(sp::ecs::Entity e) override;
 };
+
+class ExplosionRenderSystem : public sp::ecs::System, public Render3DInterface
+{
+public:
+    ExplosionRenderSystem();
+    void update(float delta) override;
+    void render3D(sp::ecs::Entity e) override;
+};

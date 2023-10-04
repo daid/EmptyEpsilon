@@ -7,10 +7,11 @@
 #include "components/radar.h"
 #include "components/docking.h"
 #include "components/warpdrive.h"
+#include "components/sfx.h"
+#include "components/rendering.h"
+#include "components/faction.h"
 #include "ecs/query.h"
 #include "multiplayer_server.h"
-#include "spaceObjects/explosionEffect.h"
-#include "spaceObjects/electricExplosionEffect.h"
 #include "particleEffect.h"
 #include "random.h"
 
@@ -153,18 +154,18 @@ void MissileSystem::explode(sp::ecs::Entity source, sp::ecs::Entity target, Expl
         DamageSystem::applyDamage(target, eot.damage_at_center, info);
     }
 
+    auto e = sp::ecs::Entity::create();
+    e.addComponent<sp::Transform>(*transform);
+    auto& ee = e.addComponent<ExplosionEffect>();
+    ee.size = eot.blast_range;
+    ee.radar = true;
+    if (!eot.explosion_sfx.empty()) {
+        //soundManager->playSound(explosion_sound, getPosition(), size * 2, 0.6);
+        e.addComponent<Sfx>().sound = eot.explosion_sfx;
+    }
     if (eot.damage_type == DamageType::EMP) {
-        P<ElectricExplosionEffect> e = new ElectricExplosionEffect();
-        e->setSize(eot.blast_range);
-        e->setPosition(transform->getPosition());
-        e->setOnRadar(true);
-    } else {
-        P<ExplosionEffect> e = new ExplosionEffect();
-        e->setSize(eot.blast_range);
-        e->setPosition(transform->getPosition());
-        e->setOnRadar(true);
-        if (!eot.explosion_sfx.empty())
-            e->setExplosionSound(eot.explosion_sfx);
+        e.addComponent<Sfx>().sound = "sfx/emp_explosion.wav";
+        ee.electrical = true;
     }
     source.destroy();
 }

@@ -1,6 +1,5 @@
 #include "playerSpaceship.h"
 #include "gui/colorConfig.h"
-#include "explosionEffect.h"
 #include "gameGlobalInfo.h"
 #include "main.h"
 #include "preferenceManager.h"

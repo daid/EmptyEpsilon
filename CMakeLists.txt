@@ -333,11 +333,9 @@ set(MAIN_SOURCES
     src/spaceObjects/wormHole.cpp
     src/spaceObjects/spaceObject.cpp
     src/spaceObjects/nebula.cpp
-    src/spaceObjects/explosionEffect.cpp
     src/spaceObjects/mine.cpp
     src/spaceObjects/playerSpaceship.cpp
     src/spaceObjects/beamEffect.cpp
-    src/spaceObjects/electricExplosionEffect.cpp
     src/spaceObjects/supplyDrop.cpp
     src/spaceObjects/warpJammer.cpp
     src/spaceObjects/scanProbe.cpp
@@ -575,8 +573,6 @@ set(MAIN_SOURCES
     src/shaderRegistry.h
     src/shipTemplate.h
     src/spaceObjects/beamEffect.h
-    src/spaceObjects/electricExplosionEffect.h
-    src/spaceObjects/explosionEffect.h
     src/spaceObjects/nebula.h
     src/spaceObjects/planet.h
     src/spaceObjects/playerSpaceship.h

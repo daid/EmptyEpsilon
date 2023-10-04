@@ -53,3 +53,20 @@ public:
 
     std::vector<Cloud> clouds;
 };
+
+class ExplosionEffect
+{
+public:
+    constexpr static float max_lifetime = 2.f;
+    constexpr static int particle_count = 1000;
+
+    float lifetime = max_lifetime;
+    float size = 1.0;
+    glm::vec3 particle_directions[particle_count];
+    bool radar = false;
+    bool electrical = false;
+
+    // Fit elements in a uint8 - at 4 vertices per quad, that's (256 / 4 =) 64 quads.
+    static constexpr size_t max_quad_count = particle_count * 4;
+    gl::Buffers<2> particles_buffers{ gl::Unitialized{} };
+};
