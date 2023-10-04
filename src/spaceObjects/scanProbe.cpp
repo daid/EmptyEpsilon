@@ -1,6 +1,5 @@
 #include <graphics/opengl.h>
 #include "scanProbe.h"
-#include "explosionEffect.h"
 #include "main.h"
 #include "random.h"
 #include "components/hull.h"

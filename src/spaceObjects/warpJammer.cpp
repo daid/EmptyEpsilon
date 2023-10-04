@@ -3,7 +3,6 @@
 #include "components/collision.h"
 #include "components/warpdrive.h"
 #include "components/rendering.h"
-#include "explosionEffect.h"
 #include "components/hull.h"
 #include "main.h"
 

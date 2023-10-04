@@ -9,7 +9,6 @@
 #include "playerInfo.h"
 #include "spaceObjects/beamEffect.h"
 #include "factionInfo.h"
-#include "spaceObjects/explosionEffect.h"
 #include "particleEffect.h"
 #include "spaceObjects/warpJammer.h"
 #include "textureManager.h"

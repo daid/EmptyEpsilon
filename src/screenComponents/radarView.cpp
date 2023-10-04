@@ -804,6 +804,8 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         }
     };
 
+    //TODO: Draw "on radar" explosions
+
     // Draw beam arcs on short-range radar only, and only for fully scanned
     // ships.
     if (!long_range) {
