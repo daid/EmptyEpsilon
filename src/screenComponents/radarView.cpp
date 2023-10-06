@@ -15,7 +15,6 @@
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "tween.h"
-#include "spaceObjects/nebula.h"
 #include "spaceObjects/scanProbe.h"
 #include "playerInfo.h"
 #include "radarView.h"

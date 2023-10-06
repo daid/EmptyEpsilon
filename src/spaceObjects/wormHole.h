@@ -1,8 +1,15 @@
 #ifndef WORM_HOLE_H
 #define WORM_HOLE_H
 
-#include "nebula.h"
 #include "spaceObject.h"
+
+class NebulaCloud
+{
+public:
+    glm::vec2 offset;
+    int texture;
+    float size;
+};
 
 class WormHole : public SpaceObject, public Updatable
 {

@@ -7,7 +7,6 @@
 #include "mesh.h"
 #include "random.h"
 #include "playerInfo.h"
-#include "spaceObjects/beamEffect.h"
 #include "factionInfo.h"
 #include "particleEffect.h"
 #include "spaceObjects/warpJammer.h"

@@ -572,8 +572,6 @@ set(MAIN_SOURCES
     src/script.h
     src/shaderRegistry.h
     src/shipTemplate.h
-    src/spaceObjects/beamEffect.h
-    src/spaceObjects/nebula.h
     src/spaceObjects/planet.h
     src/spaceObjects/playerSpaceship.h
     src/spaceObjects/scanProbe.h

@@ -1,4 +1,3 @@
-#include "spaceObjects/nebula.h"
 #include "ai/evasionAI.h"
 #include "ai/aiFactory.h"
 #include "random.h"
@@ -12,6 +11,7 @@
 #include "components/warpdrive.h"
 #include "components/impulse.h"
 #include "components/target.h"
+#include "components/faction.h"
 #include "systems/radarblock.h"
 
 

@@ -1,7 +1,6 @@
 #ifndef PLANET_H
 #define PLANET_H
 
-#include "nebula.h"
 #include "spaceObject.h"
 
 class Planet : public SpaceObject, public Updatable

@@ -3,7 +3,6 @@
 #include "logging.h"
 #include "gameGlobalInfo.h"
 #include "playerInfo.h"
-#include "spaceObjects/nebula.h"
 #include "spaceObjects/warpJammer.h"
 #include "ecs/query.h"
 
