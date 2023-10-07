@@ -11,13 +11,17 @@ protected:
     {
     public:
         string prefix;
+        sp::Font::PreparedFontString prepared_prefix;
         string text;
+        sp::Font::PreparedFontString prepared_text;
         glm::u8vec4 color;
     };
 
     std::vector<Entry> entries;
     GuiScrollbar* scrollbar;
     float text_size;
+    float rect_width;
+    float max_prefix_width;
     bool auto_scroll_down;
 public:
     GuiAdvancedScrollText(GuiContainer* owner, string id);
@@ -29,8 +33,8 @@ public:
     GuiAdvancedScrollText* setTextSize(float text_size) { this->text_size = text_size; return this; }
 
     unsigned int getEntryCount() const;
-    string getEntryText(int index) const;
-    GuiAdvancedScrollText* removeEntry(int index);
+    string getEntryText(unsigned int index) const;
+    GuiAdvancedScrollText* removeEntry(unsigned int index);
     GuiAdvancedScrollText* clearEntries();
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
