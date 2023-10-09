@@ -108,7 +108,7 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
     }
 
     //Calculate how many lines we have to display in total.
-    const int line_count = draw_offset + scrollbar->getValue();
+    const int line_count = (draw_offset - text_size - 12.0f) + scrollbar->getValue();
 
     //Check if we need to update the scroll bar.
     if (scrollbar->getMax() != line_count)
