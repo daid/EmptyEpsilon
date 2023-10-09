@@ -22,7 +22,10 @@ protected:
     float text_size;
     float rect_width;
     float max_prefix_width;
+    std::map<float, int> prefix_widths;
     bool auto_scroll_down;
+    GuiAdvancedScrollText::Entry prepEntry(GuiAdvancedScrollText::Entry& e);
+
 public:
     GuiAdvancedScrollText(GuiContainer* owner, string id);
 

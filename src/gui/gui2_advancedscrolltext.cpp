@@ -11,12 +11,10 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string tex
 {
     Entry& entry = entries.emplace_back();
     entry.prefix = prefix;
-    entry.prepared_prefix = sp::RenderTarget::getDefaultFont()->prepare(prefix, 32, text_size, rect.size, sp::Alignment::TopLeft);
-    max_prefix_width = std::max(max_prefix_width, entry.prepared_prefix.getUsedAreaSize().x);
     entry.text = text;
-    entry.prepared_text = sp::RenderTarget::getDefaultFont()->prepare(text, 32, text_size, {rect.size.x - max_prefix_width - 50.0f, rect.size.y}, sp::Alignment::TopLeft, sp::Font::FlagLineWrap | sp::Font::FlagClip);
     entry.color = color;
-    // For each entry, fix the maximum prefix width, so we know how much space we have for the text.
+    prepEntry(entry);
+
     return this;
 }
 
@@ -32,37 +30,60 @@ string GuiAdvancedScrollText::getEntryText(unsigned int index) const
     return entries[index].text;
 }
 
+GuiAdvancedScrollText::Entry GuiAdvancedScrollText::prepEntry(GuiAdvancedScrollText::Entry& e){
+    e.prepared_prefix = sp::RenderTarget::getDefaultFont()->prepare(e.prefix, 32, text_size, rect.size, sp::Alignment::TopLeft);
+    const float entry_prefix_width = e.prepared_prefix.getUsedAreaSize().x;
+    prefix_widths[entry_prefix_width] += 1;
+    max_prefix_width = std::max(max_prefix_width, entry_prefix_width);
+    e.prepared_text = sp::RenderTarget::getDefaultFont()->prepare(e.text, 32, text_size, {rect.size.x - max_prefix_width - 50.0f, rect.size.y}, sp::Alignment::TopLeft, sp::Font::FlagLineWrap | sp::Font::FlagClip);
+    return e;
+}
+
 GuiAdvancedScrollText* GuiAdvancedScrollText::removeEntry(unsigned int index)
 {
     if (index > getEntryCount())
         return this;
+
+    // Find new max prefix if entry was the last one with the current max
+    const float entry_prefix_width = entries[index].prepared_prefix.getUsedAreaSize().x;
+    bool last_with_width = false;
+    if(--prefix_widths[entry_prefix_width] == 0){
+        last_with_width = true;
+        prefix_widths.erase(entry_prefix_width);
+    }
+    if (entry_prefix_width == max_prefix_width && last_with_width){
+        max_prefix_width = prefix_widths.end()->first;
+    }
+
     entries.erase(entries.begin() + index);
+
     return this;
 }
 
 GuiAdvancedScrollText* GuiAdvancedScrollText::clearEntries()
 {
     entries.clear();
+    prefix_widths.clear();
+    max_prefix_width = 0;
     return this;
 }
 
 void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
 {
     const bool is_resized = rect_width != rect.size.x;
-    if (is_resized) { rect_width = rect.size.x; }
+    if (is_resized) {
+        rect_width = rect.size.x;
+        prefix_widths.clear();
+        max_prefix_width = 0;
+    }
 
     //Draw the visible entries
     float draw_offset = -scrollbar->getValue() + text_size + 12.0f;
 
     for(Entry& e : entries)
     {
-        if (is_resized)
-        {
-            // Window width has changed. Re-prep fonts.
-            e.prepared_prefix = sp::RenderTarget::getDefaultFont()->prepare(e.prefix, 32, text_size, rect.size, sp::Alignment::TopLeft);
-            max_prefix_width = std::max(max_prefix_width, e.prepared_prefix.getUsedAreaSize().x);
-            e.prepared_text = sp::RenderTarget::getDefaultFont()->prepare(e.text, 32, text_size, {rect.size.x - max_prefix_width - 50.0f, rect.size.y}, sp::Alignment::TopLeft, sp::Font::FlagLineWrap | sp::Font::FlagClip);
-        }
+        // Window width has changed. Re-prep fonts.
+        if (is_resized){ prepEntry(e); }
 
         const float height = e.prepared_text.getUsedAreaSize().y;
 
