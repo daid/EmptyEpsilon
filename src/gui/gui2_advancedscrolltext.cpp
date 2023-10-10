@@ -41,7 +41,7 @@ GuiAdvancedScrollText::Entry GuiAdvancedScrollText::prepEntry(GuiAdvancedScrollT
 
 GuiAdvancedScrollText* GuiAdvancedScrollText::removeEntry(unsigned int index)
 {
-    if (index > getEntryCount())
+    if (index >= getEntryCount())
         return this;
 
     // Find new max prefix if entry was the last one with the current max
