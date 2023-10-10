@@ -24,7 +24,7 @@ protected:
     float max_prefix_width;
     std::map<float, int> prefix_widths;
     bool auto_scroll_down;
-    GuiAdvancedScrollText::Entry prepEntry(GuiAdvancedScrollText::Entry& e);
+    Entry prepEntry(Entry& e);
 
 public:
     GuiAdvancedScrollText(GuiContainer* owner, string id);
