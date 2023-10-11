@@ -7,14 +7,14 @@ GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
     scrollbar->setPosition(0, 0, sp::Alignment::TopRight)->setSize(50, GuiElement::GuiSizeMax);
 }
 
-GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string text, glm::u8vec4 color)
+GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string text, glm::u8vec4 color, unsigned int seq)
 {
     Entry& entry = entries.emplace_back();
     entry.prefix = prefix;
     entry.text = text;
     entry.color = color;
+    entry.seq = seq;
     prepEntry(entry);
-
     return this;
 }
 
@@ -37,6 +37,13 @@ GuiAdvancedScrollText::Entry GuiAdvancedScrollText::prepEntry(GuiAdvancedScrollT
     max_prefix_width = std::max(max_prefix_width, entry_prefix_width);
     e.prepared_text = sp::RenderTarget::getDefaultFont()->prepare(e.text, 32, text_size, {rect.size.x - max_prefix_width - 50.0f, rect.size.y}, sp::Alignment::TopLeft, sp::Font::FlagLineWrap | sp::Font::FlagClip);
     return e;
+}
+
+unsigned int GuiAdvancedScrollText::getEntrySeq(int index) const
+{
+    if (index < 0 || index >= static_cast<int>(getEntryCount()))
+        return 0;
+    return entries[index].seq;
 }
 
 GuiAdvancedScrollText* GuiAdvancedScrollText::removeEntry(int index)

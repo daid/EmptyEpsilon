@@ -15,6 +15,7 @@ protected:
         string text;
         sp::Font::PreparedFontString prepared_text;
         glm::u8vec4 color;
+        unsigned int seq;
     };
 
     std::vector<Entry> entries;
@@ -32,11 +33,12 @@ public:
     GuiAdvancedScrollText* enableAutoScrollDown() { auto_scroll_down = true; return this; }
     GuiAdvancedScrollText* disableAutoScrollDown() { auto_scroll_down = false; return this; }
 
-    GuiAdvancedScrollText* addEntry(string prefix, string text, glm::u8vec4 color);
+    GuiAdvancedScrollText* addEntry(string prefix, string text, glm::u8vec4 color, unsigned int seq);
     GuiAdvancedScrollText* setTextSize(float text_size) { this->text_size = text_size; return this; }
 
     unsigned int getEntryCount() const;
     string getEntryText(int index) const;
+    unsigned int getEntrySeq(int index) const;
     GuiAdvancedScrollText* removeEntry(int index);
     GuiAdvancedScrollText* clearEntries();
 
