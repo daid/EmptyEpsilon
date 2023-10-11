@@ -23,9 +23,9 @@ unsigned int GuiAdvancedScrollText::getEntryCount() const
     return entries.size();
 }
 
-string GuiAdvancedScrollText::getEntryText(unsigned int index) const
+string GuiAdvancedScrollText::getEntryText(int index) const
 {
-    if (index >= getEntryCount())
+    if (index < 0 || index >= static_cast<int>(getEntryCount()))
         return "";
     return entries[index].text;
 }
@@ -39,9 +39,9 @@ GuiAdvancedScrollText::Entry GuiAdvancedScrollText::prepEntry(GuiAdvancedScrollT
     return e;
 }
 
-GuiAdvancedScrollText* GuiAdvancedScrollText::removeEntry(unsigned int index)
+GuiAdvancedScrollText* GuiAdvancedScrollText::removeEntry(int index)
 {
-    if (index >= getEntryCount())
+    if (index < 0 || index >= static_cast<int>(getEntryCount()))
         return this;
 
     // Find new max prefix if entry was the last one with the current max
