@@ -253,7 +253,7 @@ msgstr "%s %i"
 #, lua-format
 msgctxt "audio-tabRelay&Operations"
 msgid "%s %i:%.2i"
-msgstr "%s %i : %.2i"
+msgstr "%s %i:%.2i"
 
 #: scripts/scenario_51_deliverAmbassador.lua:437
 msgctxt "audio-incCall"
@@ -480,8 +480,8 @@ msgid ""
 msgstr ""
 "(Ambassadeur Gremus) Merci de m'avoir transporté jusqu'ici, %s. Les tensions "
 "sont fortes, mais je pense que les négociations sont en bonne voie.\n"
-"Sans vous nous n'y serions pas arrivé. En attendant, méfiez-vous des navires "
-"hostiles."
+"Sans vous nous n'y serions pas arrivé. En attendant, méfiez-vous des "
+"vaisseaux hostiles."
 
 #: scripts/scenario_51_deliverAmbassador.lua:812
 msgctxt "audio-incCall"
@@ -518,8 +518,8 @@ msgid ""
 msgstr ""
 "(Ambassadeur Gremus) Merci d'avoir recherché les artefacts, %d. Les tensions "
 "sont fortes, mais je pense que les négociations aboutiront.\n"
-"Sans vous nous n'y serions pas arrivé. En attendant, méfiez-vous des navires "
-"hostiles."
+"Sans vous nous n'y serions pas arrivé. En attendant, méfiez-vous des "
+"vaisseaux hostiles."
 
 #: scripts/scenario_51_deliverAmbassador.lua:900
 msgctxt "station-comms"

@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-02-26 00:15+0100\n"
+"PO-Revision-Date: 2023-10-11 19:34+0200\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
-"X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: .\n"
 
 #: scripts/factionInfo.lua:4
 msgid "Independent"
@@ -65,7 +65,7 @@ msgstr ""
 
 #: scripts/factionInfo.lua:16
 msgid "Kraylor"
-msgstr "Kraylor"
+msgstr "Kraylors"
 
 #: scripts/factionInfo.lua:19
 msgid ""
@@ -145,7 +145,7 @@ msgstr ""
 
 #: scripts/factionInfo.lua:36
 msgid "Exuari"
-msgstr "Éxuari"
+msgstr "Éxuaris"
 
 #: scripts/factionInfo.lua:42
 msgid ""
@@ -285,8 +285,8 @@ msgstr ""
 "autres races à vue et sans avertissement.\n"
 "\n"
 "Nous savons cependant que l'ensemble de la ruche est dirigé par une reine. "
-"Les individus situés au pied de leur échelle sociale sont surnommés \"drones"
-"\" par la Marine Humaine. \n"
+"Les individus situés au pied de leur échelle sociale sont surnommés "
+"\"drones\" par la Marine Humaine. \n"
 "\n"
 "Leurs capacités de combat ne sont pas à prendre à la légère, car si la "
 "plupart des vaisseaux de leur flotte sont faibles individuellement, leur "
