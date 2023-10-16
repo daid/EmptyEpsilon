@@ -61,7 +61,7 @@ void ShipLogScreen::onDraw(sp::RenderTarget& renderer)
         while(log_text->getEntryCount() < logs->entries.size())
         {
             int n = log_text->getEntryCount();
-            log_text->addEntry(logs->entries[n].prefix, logs->entries[n].text, logs->entries[n].color);
+            log_text->addEntry(logs->entries[n].prefix, logs->entries[n].text, logs->entries[n].color, 0);
         }
     }
 }

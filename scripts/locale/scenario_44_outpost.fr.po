@@ -45,8 +45,8 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"Loin des siens, un avant-poste isolé de la marine tente de survivre dans un "
-"environnement hostile.\n"
+"Mission : Loin des siens, un avant-poste isolé de la marine tente de "
+"survivre dans un environnement hostile.\n"
 "L'histoire commence simplement mais le défi est de taille.\n"
 "\n"
 "Scenario conçu pour être joué sur un terrain différent à chaque fois. Votre "
@@ -56,27 +56,22 @@ msgstr ""
 "Grade décerné en fin de mission du plus faible au plus élevé : Cadet, Sous-"
 "officier, Officier, Lieutenant, Commandant, Capitaine, Amiral.\n"
 "\n"
-"Durée : Environ une heure si vous jouez jusqu'à la première attaque majeure. "
-"Si vous y survivez et souhaitez tenter la victoire, la partie peut durer "
-"cinq heures ou plus. Prévoyez vos contraintes de temps réelles avant de "
-"commencer.\n"
+"Durée : Environ 1h si vous jouez jusqu'à la première attaque majeure. Si "
+"vous y survivez et souhaitez tenter la victoire, la partie peut durer 5h ou "
+"plus. Prévoyez vos contraintes de temps réelles avant de commencer.\n"
 "\n"
 "Non recommandé pour des joueurs voulant remporter la victoire à chaque coup "
 "ou se sentant claustrophobes en commençant dans un vaisseau aux capacités "
 "limitées.\n"
 "\n"
-"Sur le Discord USN : https://discord.gg/PntGG3a vous pouvez rejoindre la "
-"communauté anglophone et jouer des parties en ligne. Il y en a tous les "
-"samedis à 17h00 heure française. Tous les niveaux d'expérience sont les "
-"bienvenus.\n"
-"\n"
-"Version 1.09 - Février 2023\n"
+"Version 1.09 - Mars 2023\n"
 "\n"
 "- Titre original : Doomed Outpost\n"
-"- Auteur : Xansta\n"
-"https://discord.gg/GjqM9Y9yBe\n"
+"- Auteur : Xansta (Janv. 2023)\n"
 "- Traduction FR : Muerte\n"
-"https://discord.gg/2NPKyMnGwp"
+"\n"
+"Communauté française et anglophone sur le Discord USN https://discord.gg/"
+"TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 # Scenario setting
 msgctxt "setting"
@@ -1565,7 +1560,7 @@ msgstr "ajouter des faisceaux laser"
 #: scripts/scenario_44_outpost.lua:2986
 msgctxt "upgrade-comms"
 msgid "increase center beam range by 25%"
-msgstr "augmente la portée du faisceau central de 25%"
+msgstr "augmenter la portée du faisceau central de 25%"
 
 #: scripts/scenario_44_outpost.lua:2995
 msgctxt "upgrade-comms"
@@ -3756,7 +3751,7 @@ msgstr "Enregistrement du capteur : station %s %s en secteur %s"
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s, %s station %s in %s"
-msgstr "%s, %s station %s en secteur %s "
+msgstr "%s, station %s %s en secteur %s "
 
 #: scripts/scenario_44_outpost.lua:10857
 #, lua-format
@@ -4546,7 +4541,7 @@ msgstr "Booster la téléportation (10 rép)"
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
 msgstr ""
-"Votre recharge (délai) de votre moteur de téléportation a été boosté à %ik."
+"Le délai de recharge de votre moteur de téléportation a été boosté à %ik."
 
 #: scripts/scenario_44_outpost.lua:12206
 msgctxt "stationServices-comms"
@@ -4666,11 +4661,10 @@ msgstr ""
 "activer ou désactiver sur demande et ainsi faciliter le traffic des "
 "vaisseaux.\n"
 "\n"
-"Vous ne pouvez pas vous connecter au brouilleur de distorsion tant que vous "
-"êtes amarré à une station car vous n'êtes clairement pas encore prêt à "
-"traverser la zone contrôlée. La destruction d'un brouilleur peut avoir des "
-"conséquences indirectes indésirables, mais il n'y a pas de règle officielle "
-"contre cela."
+"Vous ne pouvez pas vous connecter aux brouilleurs tant que vous êtes amarré "
+"à une station car vous n'êtes clairement pas encore prêt à traverser la zone "
+"contrôlée. La destruction d'un brouilleur peut avoir des conséquences "
+"indirectes indésirables, mais il n'y a pas de règle officielle contre cela."
 
 #: scripts/scenario_44_outpost.lua:12309 scripts/scenario_44_outpost.lua:13405
 msgctxt "station-comms"
@@ -5199,7 +5193,7 @@ msgid ""
 "Transport %s to %s station %s in %s"
 msgstr ""
 "%s\n"
-"Transporter %s vers %s station %s en %s."
+"Transporter %s vers station %s %s en %s."
 
 #: scripts/scenario_44_outpost.lua:12813
 #, lua-format
@@ -5660,7 +5654,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:13176
 msgctxt "station-comms"
 msgid "Station services (ordnance restock, repair, upgrade)"
-msgstr "Services : munitions, réparations, améliorations"
+msgstr "Services : améliorations, réparations, munitions"
 
 #: scripts/scenario_44_outpost.lua:13177
 msgctxt "station-comms"
@@ -6331,7 +6325,7 @@ msgstr ""
 #, lua-format
 msgctxt "orders-comms"
 msgid "%s station %s in %s"
-msgstr "%s station %s en secteur %s."
+msgstr "Station %s %s en secteur %s."
 
 #: scripts/scenario_44_outpost.lua:13814
 #, lua-format
@@ -6798,7 +6792,7 @@ msgstr "Défendez le marqueur %d"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
-msgstr "Nous partons pour défendre le marqueur %d."
+msgstr "Nous partons immédiatement défendre le marqueur %d."
 
 #: scripts/scenario_44_outpost.lua:14222 scripts/scenario_44_outpost.lua:15134
 msgctxt "shipAssist-comms"
@@ -7136,7 +7130,7 @@ msgstr ""
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %i."
-msgstr "Nous partons pour défendre le marqueur %i."
+msgstr "Nous partons immédiatement défendre le marqueur %i."
 
 #: scripts/scenario_44_outpost.lua:15175
 msgctxt "shipAssist-comms"
@@ -8638,13 +8632,13 @@ msgstr ""
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tubes: %s"
-msgstr "Taille des tubes %s : %s"
+msgstr "%s Taille tubes : %s"
 
 #: scripts/scenario_44_outpost.lua:18914
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s tube: %s"
-msgstr "Taille du tube %s : %s"
+msgstr "%s Taille du tube : %s"
 
 #: scripts/scenario_44_outpost.lua:18969
 msgctxt "shipLog"
@@ -8756,6 +8750,12 @@ msgstr "Inventaire"
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
 msgstr "%s Cargaison actuelle :"
+
+#: scripts/scenario_44_outpost.lua:19270
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "     %s: %i"
+msgstr "     %s : %i"
 
 #: scripts/scenario_44_outpost.lua:19274
 msgctxt "inventory-shipLog"
