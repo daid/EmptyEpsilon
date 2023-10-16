@@ -4,7 +4,7 @@
 ---Duration: Plan for 3+ hours on Easy, with harder difficulties taking longer
 ---Player ships: 1
 ---
----Author: Chris Sibbit. Revisions: Xansta, Muerte Jan2023
+---Author: Chris Sibbitt. Revisions: Xansta, Muerte Jan2023
 ---Created: Dec2022
 ---Feedback: USN Discord: https://discord.gg/7Kr32ezJFF in the #ee-scenario-feedback channel
 -- Type: Replayable Mission
