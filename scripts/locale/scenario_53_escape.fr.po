@@ -86,7 +86,7 @@ msgstr "Activer diagnostic"
 #: scripts/scenario_53_escape.lua:111
 msgctxt "scienceDescription-debris"
 msgid "Debris"
-msgstr "Des débris"
+msgstr "Des débris de vaisseaux"
 
 #: scripts/scenario_53_escape.lua:105
 msgctxt "scienceDescription-debris"
@@ -94,8 +94,9 @@ msgid ""
 "Debris: Various broken ship components. Possibly useful for engine or "
 "weapons systems repair"
 msgstr ""
-"Débris : Divers composants cassés de vaisseaux. Pourrait être utile pour la "
-"réparation des moteurs et système d'armement."
+"[Débris]\n"
+"Divers composants cassés de vaisseaux.\n"
+"Pourrait être utile pour la réparation des moteurs et système d'armement."
 
 #: scripts/scenario_53_escape.lua:108
 msgctxt "scienceDescription-debris"
@@ -103,8 +104,10 @@ msgid ""
 "Debris: Various broken ship components. Possibly useful for shield or beam "
 "systems repair"
 msgstr ""
-"Débris : Divers composants cassés de vaisseaux. Pourrait être utile pour la "
-"réparation des systèmes de boucliers et des faisceaux."
+"[Débris]\n"
+"Divers composants cassés de vaisseaux.\n"
+"Pourrait être utile pour la réparation des systèmes de boucliers et des "
+"faisceaux."
 
 #: scripts/scenario_53_escape.lua:111
 msgctxt "scienceDescription-debris"
@@ -112,14 +115,16 @@ msgid ""
 "Debris: Various broken ship components. Possibly useful for hull or reactor "
 "systems repair"
 msgstr ""
-"Débris : Divers composants cassés de vaisseaux. Pourrait être utile pour la "
-"réparation des systèmes du réacteur et du blindage de la coque."
+"[Débris]\n"
+"Divers composants cassés de vaisseaux.\n"
+"Pourrait être utile pour la réparation des systèmes du réacteur et du "
+"blindage de la coque."
 
 #: scripts/scenario_53_escape.lua:118 scripts/scenario_53_escape.lua:121
 #: scripts/scenario_53_escape.lua:124
 msgctxt "scienceDescription-buoy"
 msgid "Space Message Buoy"
-msgstr "Bouée de messages spatiaux"
+msgstr "Une bouée de messages spatiaux"
 
 #: scripts/scenario_53_escape.lua:118
 msgctxt "scienceDescription-buoy"
@@ -127,8 +132,9 @@ msgid ""
 "Space Message Buoy reading 'Welcome to the Boris Junk Yard and Emporium' in "
 "the Kraylor language"
 msgstr ""
-"Bouee : il est écrit en langage Kraylor <Bienvenue chez le ferrailleur et "
-"magasin Boris>"
+"[Bouée]\n"
+"Il est écrit en langage Kraylor :\n"
+"Bienvenue chez Boris, magasin et ferrailleur."
 
 #: scripts/scenario_53_escape.lua:121
 msgctxt "scienceDescription-buoy"
@@ -136,8 +142,10 @@ msgid ""
 "Space Message Buoy reading 'Boris Junk Yard: Browse for parts, take home an "
 "asteroid for the kids' in the Kraylor language"
 msgstr ""
-"Bouée : il est écrit en langage Kraylor <Entrepôt Boris : recherchez des "
-"pièces, ramenez chez vous un astéroïde pour les enfants>"
+"[Bouée]\n"
+"Il est écrit en langage Kraylor :\n"
+"Entrepôt Boris : recherchez des pièces détachées, ramenez chez vous un "
+"astéroïde pour les enfants."
 
 #: scripts/scenario_53_escape.lua:124
 msgctxt "scienceDescription-buoy"
@@ -145,8 +153,9 @@ msgid ""
 "Space Message Buoy reading 'Boris Junk Yard: Best prices in 20 sectors' in "
 "the Kraylor language"
 msgstr ""
-"Bouée : il est écrit en langage Kraylor <Ferrailleur Boris : les meilleurs "
-"prix sur 20 secteurs à la ronde>"
+"[Bouée]\n"
+"Il est écrit en langage Kraylor :\n"
+"Ferrailleur Boris : les meilleurs prix à moins de 20 secteurs à la ronde."
 
 #: scripts/scenario_53_escape.lua:205
 #, lua-format
@@ -158,12 +167,14 @@ msgid ""
 "this area. You need to make good your escape and dock with a Human Navy "
 "space station"
 msgstr ""
-"Vous vous êtes échappé de la prison de la station %s et avez pu vous "
-"refugier sur un vaisseau délabré dans une zone à proximité qui sert de casse "
-"aux vaisseaux hors-services. Vous êtes en possession d'informations "
-"essentielles pour la Marine Humaine concernant l'activité des Kraylors dans "
-"ce secteur. Vous devez réussir votre évasion et rejoindre une station "
-"spatiale de la Marine humaine."
+"Équipage,\n"
+"Vous vous êtes échappé de prison sur la station %s et avez pu vous refugier "
+"sur un vaisseau délabré dans une zone à proximité qui sert de casse aux "
+"vaisseaux hors-services.\n"
+"Vous êtes en possession d'informations essentielles pour la Marine humaine "
+"concernant l'activité des Kraylors dans ce secteur.\n"
+"Vous devez réussir votre évasion et rejoindre une station spatiale de la "
+"Marine humaine."
 
 #: scripts/scenario_53_escape.lua:373
 msgctxt "scienceDescription-planet"
@@ -290,7 +301,7 @@ msgid ""
 "well as other independent clients on a contract basis"
 msgstr ""
 "Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
-"téléporteurs pour la flotte de la marine humaine ainsi que pour d'autres "
+"téléporteurs pour la flotte de la Marine humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
 
 #: scripts/scenario_53_escape.lua:1166
@@ -1835,8 +1846,9 @@ msgid ""
 "I can do that for you. However, that means you'll go from being Independent "
 "to being in the Human Navy"
 msgstr ""
-"Je peux faire ça pour vous. Cependant, cela signifie que vous allez passer "
-"du statut d'indépendant à celui de la marine."
+"Je peux faire ça pour vous.\n"
+"Cependant, cela signifie que vous allez passer du statut d'indépendant à "
+"celui de la Marine humaine."
 
 #: scripts/scenario_53_escape.lua:3606
 msgctxt "crewFriends-comms"
@@ -3061,7 +3073,7 @@ msgstr ""
 "[Fred (Membre de l'équipe de réparation)] L'équipe pour laquelle travaille "
 "ma femme sur %s est spécialisée dans les communications à longue portée. "
 "Elle pourrait probablement connecter nos systèmes au réseau de communication "
-"de la Marine Humaine."
+"de la Marine humaine."
 
 #: scripts/scenario_53_escape.lua:5132
 #, lua-format
