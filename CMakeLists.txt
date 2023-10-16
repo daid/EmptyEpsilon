@@ -432,6 +432,8 @@ set(MAIN_SOURCES
     src/systems/rendering.cpp
     src/systems/scanning.h
     src/systems/scanning.cpp
+    src/systems/planet.h
+    src/systems/planet.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
@@ -572,20 +574,18 @@ set(MAIN_SOURCES
     src/script.h
     src/shaderRegistry.h
     src/shipTemplate.h
-    src/spaceObjects/planet.h
     src/spaceObjects/playerSpaceship.h
     src/spaceObjects/scanProbe.h
     src/spaceObjects/shipTemplateBasedObject.h
     src/spaceObjects/spaceObject.h
     src/spaceObjects/spaceship.h
-    src/spaceObjects/spaceStation.h
     src/spaceObjects/supplyDrop.h
-    src/spaceObjects/warpJammer.h
-    src/spaceObjects/wormHole.h
     src/spaceObjects/zone.h
     src/threatLevelEstimate.h
     src/tutorialGame.h
     src/script/components.h
+    src/script/vector.h
+    src/script/enum.h
 )
 
 if (WITH_DISCORD)

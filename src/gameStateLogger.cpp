@@ -11,7 +11,6 @@
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
 #include "spaceObjects/spaceship.h"
-#include "spaceObjects/planet.h"
 
 class JSONGenerator
 {

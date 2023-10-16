@@ -1,4 +1,6 @@
 #include "components.h"
+#include "vector.h"
+#include "enum.h"
 #include "script/environment.h"
 #include "script/component.h"
 #include "script/callback.h"
@@ -6,6 +8,7 @@
 #include "components/radar.h"
 #include "components/rendering.h"
 #include "components/spin.h"
+#include "components/orbit.h"
 #include "components/avoidobject.h"
 #include "components/missile.h"
 #include "components/name.h"
@@ -36,36 +39,44 @@
 #define STRINGIFY(n) #n
 #define BIND_MEMBER(T, MEMBER) \
     sp::script::ComponentHandler<T>::members[STRINGIFY(MEMBER)] = { \
-        [](lua_State* L, const T& t) { \
-            return sp::script::Convert<decltype(t.MEMBER)>::toLua(L, t.MEMBER); \
-        }, [](lua_State* L, T& t) { \
-            t.MEMBER = sp::script::Convert<decltype(t.MEMBER)>::fromLua(L, -1); \
+        [](lua_State* L, const void* ptr) { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<decltype(t->MEMBER)>::toLua(L, t->MEMBER); \
+        }, [](lua_State* L, void* ptr) { \
+            auto t = reinterpret_cast<T*>(ptr); \
+            t->MEMBER = sp::script::Convert<decltype(t->MEMBER)>::fromLua(L, -1); \
         } \
     };
 #define BIND_MEMBER_NAMED(T, MEMBER, NAME) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
-        [](lua_State* L, const T& t) { \
-            return sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t.MEMBER)>>>::toLua(L, t.MEMBER); \
-        }, [](lua_State* L, T& t) { \
-            t.MEMBER = sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t.MEMBER)>>>::fromLua(L, -1); \
+        [](lua_State* L, const void* ptr) { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t->MEMBER)>>>::toLua(L, t->MEMBER); \
+        }, [](lua_State* L, void* ptr) { \
+            auto t = reinterpret_cast<T*>(ptr); \
+            t->MEMBER = sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t->MEMBER)>>>::fromLua(L, -1); \
         } \
     };
 #define BIND_MEMBER_GS(T, NAME, GET, SET) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
-        [](lua_State* L, const T& t) { \
-            return sp::script::Convert<decltype(std::declval<T>().GET())>::toLua(L, t.GET()); \
-        }, [](lua_State* L, T& t) { \
-            t.SET(sp::script::Convert<decltype(std::declval<T>().GET())>::fromLua(L, -1)); \
+        [](lua_State* L, const void* ptr) { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<decltype(std::declval<T>().GET())>::toLua(L, t->GET()); \
+        }, [](lua_State* L, void* ptr) { \
+            auto t = reinterpret_cast<T*>(ptr); \
+            t->SET(sp::script::Convert<decltype(std::declval<T>().GET())>::fromLua(L, -1)); \
         } \
     };
 #define BIND_MEMBER_FLAG(T, MEMBER, NAME, MASK) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
-        [](lua_State* L, const T& t) { \
-            return sp::script::Convert<bool>::toLua(L, ((t.MEMBER) & (MASK)) == (MASK) ); \
-        }, [](lua_State* L, T& t) { \
-            auto result = (t.MEMBER) & ~(MASK); \
+        [](lua_State* L, const void* ptr) { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<bool>::toLua(L, ((t->MEMBER) & (MASK)) == (MASK) ); \
+        }, [](lua_State* L, void* ptr) { \
+            auto t = reinterpret_cast<T*>(ptr); \
+            auto result = (t->MEMBER) & ~(MASK); \
             if (sp::script::Convert<bool>::fromLua(L, -1)) result |= (MASK); \
-            t.MEMBER = result; \
+            t->MEMBER = result; \
         } \
     };
 #define BIND_ARRAY(T, A) \
@@ -73,28 +84,34 @@
     sp::script::ComponentHandler<T>::array_resize_func = [](T& t, int new_size) { t.A.resize(new_size); };
 #define BIND_ARRAY_MEMBER(T, A, MEMBER) \
     sp::script::ComponentHandler<T>::indexed_members[STRINGIFY(MEMBER)] = { \
-        [](lua_State* L, const T& t, int n) { \
-            return sp::script::Convert<decltype(t.A[n].MEMBER)>::toLua(L, t.A[n].MEMBER); \
-        }, [](lua_State* L, T& t, int n) { \
-            t.A[n].MEMBER = sp::script::Convert<decltype(t.A[n].MEMBER)>::fromLua(L, -1); \
+        [](lua_State* L, const void* ptr, int n) { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<decltype(t->A[n].MEMBER)>::toLua(L, t->A[n].MEMBER); \
+        }, [](lua_State* L, void* ptr, int n) { \
+            auto t = reinterpret_cast<T*>(ptr); \
+            t->A[n].MEMBER = sp::script::Convert<decltype(t->A[n].MEMBER)>::fromLua(L, -1); \
         } \
     };
 #define BIND_ARRAY_MEMBER_FLAG(T, A, MEMBER, NAME, MASK) \
     sp::script::ComponentHandler<T>::indexed_members[NAME] = { \
-        [](lua_State* L, const T& t, int n) { \
-            return sp::script::Convert<bool>::toLua(L, ((t.A[n].MEMBER) & (MASK)) == (MASK) ); \
-        }, [](lua_State* L, T& t, int n) { \
-            auto result = (t.A[n].MEMBER) & ~(MASK); \
+        [](lua_State* L, const void* ptr, int n) { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<bool>::toLua(L, ((t->A[n].MEMBER) & (MASK)) == (MASK) ); \
+        }, [](lua_State* L, void* ptr, int n) { \
+            auto t = reinterpret_cast<T*>(ptr); \
+            auto result = (t->A[n].MEMBER) & ~(MASK); \
             if (sp::script::Convert<bool>::fromLua(L, -1)) result |= (MASK); \
-            t.A[n].MEMBER = result; \
+            t->A[n].MEMBER = result; \
         } \
     };
 #define BIND_ARRAY_MEMBER_NAMED(T, A, NAME, MEMBER) \
     sp::script::ComponentHandler<T>::indexed_members[NAME] = { \
-        [](lua_State* L, const T& t, int n) { \
-            return sp::script::Convert<decltype(t.A[n].MEMBER)>::toLua(L, t.A[n].MEMBER); \
-        }, [](lua_State* L, T& t, int n) { \
-            t.A[n].MEMBER = sp::script::Convert<decltype(t.A[n].MEMBER)>::fromLua(L, -1); \
+        [](lua_State* L, const void* ptr, int n) { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<decltype(t->A[n].MEMBER)>::toLua(L, t->A[n].MEMBER); \
+        }, [](lua_State* L, void* ptr, int n) { \
+            auto t = reinterpret_cast<T*>(ptr); \
+            t->A[n].MEMBER = sp::script::Convert<decltype(t->A[n].MEMBER)>::fromLua(L, -1); \
         } \
     };
 #define BIND_SHIP_SYSTEM(T) \
@@ -114,382 +131,51 @@
     BIND_MEMBER(T, auto_repair_per_second);
 
 
-namespace sp::script {
-template<> struct Convert<glm::vec2> {
-    static int toLua(lua_State* L, glm::vec2 value) {
-        lua_createtable(L, 3, 0);
-        lua_pushnumber(L, value.x);
-        lua_rawseti(L, -2, 1);
-        lua_pushnumber(L, value.y);
-        lua_rawseti(L, -2, 2);
-        return 1;
-    }
-    static glm::vec2 fromLua(lua_State* L, int idx) {
-        glm::vec2 result{};
-        if (lua_istable(L, idx)) {
-            lua_geti(L, idx, 1);
-            result.x = lua_tonumber(L, -1);
-            lua_pop(L, 1);
-            lua_geti(L, idx, 2);
-            result.y = lua_tonumber(L, -1);
-            lua_pop(L, 1);
-        }
-        return result;
-    }
-};
-template<> struct Convert<glm::vec3> {
-    static int toLua(lua_State* L, glm::vec3 value) {
-        lua_createtable(L, 3, 0);
-        lua_pushnumber(L, value.x);
-        lua_rawseti(L, -2, 1);
-        lua_pushnumber(L, value.y);
-        lua_rawseti(L, -2, 2);
-        lua_pushnumber(L, value.z);
-        lua_rawseti(L, -2, 3);
-        return 1;
-    }
-    static glm::vec3 fromLua(lua_State* L, int idx) {
-        glm::vec3 result{};
-        if (lua_istable(L, idx)) {
-            lua_geti(L, idx, 1);
-            result.x = lua_tonumber(L, -1);
-            lua_pop(L, 1);
-            lua_geti(L, idx, 2);
-            result.y = lua_tonumber(L, -1);
-            lua_pop(L, 1);
-            lua_geti(L, idx, 3);
-            result.z = lua_tonumber(L, -1);
-            lua_pop(L, 1);
-        }
-        return result;
-    }
-};
-template<> struct Convert<glm::u8vec4> {
-    static int toLua(lua_State* L, glm::u8vec4 value) {
-        lua_createtable(L, 4, 0);
-        lua_pushnumber(L, value.r);
-        lua_rawseti(L, -2, 1);
-        lua_pushnumber(L, value.g);
-        lua_rawseti(L, -2, 2);
-        lua_pushnumber(L, value.b);
-        lua_rawseti(L, -2, 3);
-        lua_pushnumber(L, value.a);
-        lua_rawseti(L, -2, 4);
-        return 1;
-    }
-    static glm::u8vec4 fromLua(lua_State* L, int idx) {
-        glm::u8vec4 result{};
-        if (lua_istable(L, idx)) {
-            lua_geti(L, idx, 1);
-            result.r = lua_tonumber(L, -1);
-            lua_pop(L, 1);
-            lua_geti(L, idx, 2);
-            result.g = lua_tonumber(L, -1);
-            lua_pop(L, 1);
-            lua_geti(L, idx, 3);
-            result.b = lua_tonumber(L, -1);
-            lua_pop(L, 1);
-            lua_geti(L, idx, 4);
-            result.a = lua_tonumber(L, -1);
-            lua_pop(L, 1);
-        } else if (lua_isinteger(L, idx)) {
-            int n = lua_tointeger(L, idx);
-            result.r = float(n & 0xFF) / 255.0f;
-            result.g = float((n >> 8) & 0xFF) / 255.0f;
-            result.b = float((n >> 16) & 0xFF) / 255.0f;
-            result.a = 1.0f;
-        }
-        return result;
-    }
-};
-template<> struct Convert<glm::ivec2> {
-    static int toLua(lua_State* L, glm::ivec2 value) {
-        lua_createtable(L, 3, 0);
-        lua_pushinteger(L, value.x);
-        lua_rawseti(L, -2, 1);
-        lua_pushinteger(L, value.y);
-        lua_rawseti(L, -2, 2);
-        return 1;
-    }
-    static glm::ivec2 fromLua(lua_State* L, int idx) {
-        glm::ivec2 result{};
-        if (lua_istable(L, idx)) {
-            lua_geti(L, idx, 1);
-            result.x = lua_tointeger(L, -1);
-            lua_pop(L, 1);
-            lua_geti(L, idx, 2);
-            result.y = lua_tointeger(L, -1);
-            lua_pop(L, 1);
-        }
-        return result;
-    }
-};
-template<> struct Convert<DamageType> {
-    static int toLua(lua_State* L, DamageType value) {
-        switch(value) {
-        case DamageType::Energy: lua_pushstring(L, "energy"); break;
-        case DamageType::Kinetic: lua_pushstring(L, "kinetic"); break;
-        case DamageType::EMP: lua_pushstring(L, "emp"); break;
-        }
-        return 1;
-    }
-    static DamageType fromLua(lua_State* L, int idx) {
-        string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "energy")
-            return DamageType::Energy;
-        else if (str == "kinetic")
-            return DamageType::Kinetic;
-        else if (str == "emp")
-            return DamageType::EMP;
-        luaL_error(L, "Unknown damage type: %s", str.c_str());
-        return DamageType::Energy;
-    }
-};
-template<> struct Convert<sp::Physics::Type> {
-    static int toLua(lua_State* L, sp::Physics::Type value) {
-        switch(value) {
-        case sp::Physics::Type::Sensor: lua_pushstring(L, "sensor"); break;
-        case sp::Physics::Type::Dynamic: lua_pushstring(L, "dynamic"); break;
-        case sp::Physics::Type::Static: lua_pushstring(L, "static"); break;
-        }
-        return 1;
-    }
-    static sp::Physics::Type fromLua(lua_State* L, int idx) {
-        string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "sensor")
-            return sp::Physics::Type::Sensor;
-        else if (str == "dynamic")
-            return sp::Physics::Type::Dynamic;
-        else if (str == "static")
-            return sp::Physics::Type::Static;
-        luaL_error(L, "Unknown physics type: %s", str.c_str());
-        return sp::Physics::Type::Sensor;
-    }
-};
-template<> struct Convert<FactionRelation> {
-    static int toLua(lua_State* L, FactionRelation value) {
-        switch(value) {
-        case FactionRelation::Friendly: lua_pushstring(L, "friendly"); break;
-        case FactionRelation::Neutral: lua_pushstring(L, "neutral"); break;
-        case FactionRelation::Enemy: lua_pushstring(L, "enemy"); break;
-        }
-        return 1;
-    }
-    static FactionRelation fromLua(lua_State* L, int idx) {
-        string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "friendly")
-            return FactionRelation::Friendly;
-        else if (str == "neutral")
-            return FactionRelation::Neutral;
-        else if (str == "enemy")
-            return FactionRelation::Enemy;
-        luaL_error(L, "Unknown relation type: %s", str.c_str());
-        return FactionRelation::Neutral;
-    }
-};
-template<> struct Convert<ScanState::State> {
-    static int toLua(lua_State* L, ScanState::State value) {
-        switch(value) {
-        case ScanState::State::NotScanned: lua_pushstring(L, "none"); break;
-        case ScanState::State::FriendOrFoeIdentified: lua_pushstring(L, "fof"); break;
-        case ScanState::State::SimpleScan: lua_pushstring(L, "simple"); break;
-        case ScanState::State::FullScan: lua_pushstring(L, "full"); break;
-        }
-        return 1;
-    }
-    static ScanState::State fromLua(lua_State* L, int idx) {
-        string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "none")
-            return ScanState::State::NotScanned;
-        else if (str == "fof")
-            return ScanState::State::FriendOrFoeIdentified;
-        else if (str == "simple")
-            return ScanState::State::SimpleScan;
-        else if (str == "full")
-            return ScanState::State::FullScan;
-        luaL_error(L, "Unknown scan state type: %s", str.c_str());
-        return ScanState::State::NotScanned;
-    }
-};
-template<> struct Convert<AIOrder> {
-    static int toLua(lua_State* L, AIOrder value) {
-        switch(value) {
-        case AIOrder::Idle: lua_pushstring(L, "idle"); break;
-        case AIOrder::Roaming: lua_pushstring(L, "roaming"); break;
-        case AIOrder::Retreat: lua_pushstring(L, "retreat"); break;
-        case AIOrder::StandGround: lua_pushstring(L, "standground"); break;
-        case AIOrder::DefendLocation: lua_pushstring(L, "defendlocation"); break;
-        case AIOrder::DefendTarget: lua_pushstring(L, "defendtarget"); break;
-        case AIOrder::FlyFormation: lua_pushstring(L, "flyformation"); break;
-        case AIOrder::FlyTowards: lua_pushstring(L, "flytowards"); break;
-        case AIOrder::FlyTowardsBlind: lua_pushstring(L, "flytowardsblind"); break;
-        case AIOrder::Dock: lua_pushstring(L, "dock"); break;
-        case AIOrder::Attack: lua_pushstring(L, "attack"); break;
-        }
-        return 1;
-    }
-    static AIOrder fromLua(lua_State* L, int idx) {
-        string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "idle")
-            return AIOrder::Idle;
-        else if (str == "roaming")
-            return AIOrder::Roaming;
-        else if (str == "retreat")
-            return AIOrder::Retreat;
-        else if (str == "standground")
-            return AIOrder::StandGround;
-        else if (str == "defendlocation")
-            return AIOrder::DefendLocation;
-        else if (str == "defendtarget")
-            return AIOrder::DefendTarget;
-        else if (str == "flyformation")
-            return AIOrder::FlyFormation;
-        else if (str == "flytowards")
-            return AIOrder::FlyTowards;
-        else if (str == "flytowardsblind")
-            return AIOrder::FlyTowardsBlind;
-        else if (str == "dock")
-            return AIOrder::Dock;
-        else if (str == "attack")
-            return AIOrder::Attack;
-        luaL_error(L, "Unknown AIOrder type: %s", str.c_str());
-        return AIOrder::Idle;
-    }
-};
-template<> struct Convert<EMissileWeapons> {
-    static int toLua(lua_State* L, EMissileWeapons value) {
-        switch(value) {
-        case EMissileWeapons::MW_None: lua_pushstring(L, "none"); break;
-        case EMissileWeapons::MW_Homing: lua_pushstring(L, "homing"); break;
-        case EMissileWeapons::MW_Nuke: lua_pushstring(L, "nuke"); break;
-        case EMissileWeapons::MW_Mine: lua_pushstring(L, "mine"); break;
-        case EMissileWeapons::MW_EMP: lua_pushstring(L, "emp"); break;
-        case EMissileWeapons::MW_HVLI: lua_pushstring(L, "hvli"); break;
-        case EMissileWeapons::MW_Count: lua_pushstring(L, "none"); break;
-        }
-        return 1;
-    }
-    static EMissileWeapons fromLua(lua_State* L, int idx) {
-        string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "none")
-            return EMissileWeapons::MW_None;
-        else if (str == "homing")
-            return EMissileWeapons::MW_Homing;
-        else if (str == "nuke")
-            return EMissileWeapons::MW_Nuke;
-        else if (str == "mine")
-            return EMissileWeapons::MW_Mine;
-        else if (str == "emp")
-            return EMissileWeapons::MW_EMP;
-        else if (str == "hvli")
-            return EMissileWeapons::MW_HVLI;
-        luaL_error(L, "Unknown EMissileWeapons type: %s", str.c_str());
-        return EMissileWeapons::MW_None;
-    }
-};
-template<> struct Convert<ShipSystem::Type> {
-    static int toLua(lua_State* L, ShipSystem::Type value) {
-        switch(value) {
-        case ShipSystem::Type::Reactor: lua_pushstring(L, "reactor"); break;
-        case ShipSystem::Type::BeamWeapons: lua_pushstring(L, "beamweapons"); break;
-        case ShipSystem::Type::MissileSystem: lua_pushstring(L, "missilesystem"); break;
-        case ShipSystem::Type::Maneuver: lua_pushstring(L, "maneuver"); break;
-        case ShipSystem::Type::Impulse: lua_pushstring(L, "impulse"); break;
-        case ShipSystem::Type::Warp: lua_pushstring(L, "warp"); break;
-        case ShipSystem::Type::JumpDrive: lua_pushstring(L, "jumpdrive"); break;
-        case ShipSystem::Type::FrontShield: lua_pushstring(L, "frontshield"); break;
-        case ShipSystem::Type::RearShield: lua_pushstring(L, "rearshield"); break;
-        default: lua_pushstring(L, "none"); break;
-        }
-        return 1;
-    }
-    static ShipSystem::Type fromLua(lua_State* L, int idx) {
-        string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "none")
-            return ShipSystem::Type::None;
-        else if (str == "reactor")
-            return ShipSystem::Type::Reactor;
-        else if (str == "beamweapons")
-            return ShipSystem::Type::BeamWeapons;
-        else if (str == "missilesystem")
-            return ShipSystem::Type::MissileSystem;
-        else if (str == "maneuver")
-            return ShipSystem::Type::Maneuver;
-        else if (str == "impulse")
-            return ShipSystem::Type::Impulse;
-        else if (str == "warp")
-            return ShipSystem::Type::Warp;
-        else if (str == "jumpdrive")
-            return ShipSystem::Type::JumpDrive;
-        else if (str == "frontshield")
-            return ShipSystem::Type::FrontShield;
-        else if (str == "rearshield")
-            return ShipSystem::Type::RearShield;
-        luaL_error(L, "Unknown ShipSystem::Type: %s", str.c_str());
-        return ShipSystem::Type::None;
-    }
-};
-template<> struct Convert<EMissileSizes> {
-    static int toLua(lua_State* L, EMissileSizes value) {
-        switch(value) {
-        case EMissileSizes::MS_Small: lua_pushstring(L, "small"); break;
-        case EMissileSizes::MS_Medium: lua_pushstring(L, "medium"); break;
-        case EMissileSizes::MS_Large: lua_pushstring(L, "large"); break;
-        default: lua_pushstring(L, "none"); break;
-        }
-        return 1;
-    }
-    static EMissileSizes fromLua(lua_State* L, int idx) {
-        string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "small")
-            return EMissileSizes::MS_Small;
-        else if (str == "medium")
-            return EMissileSizes::MS_Medium;
-        else if (str == "large")
-            return EMissileSizes::MS_Large;
-        luaL_error(L, "Unknown EMissileSizes: %s", str.c_str());
-        return EMissileSizes::MS_Medium;
-    }
-};
-}
-
 void initComponentScriptBindings()
 {
     sp::script::ComponentHandler<sp::Transform>::name("transform");
     sp::script::ComponentHandler<sp::Transform>::members["x"] = {
-        [](lua_State* L, const sp::Transform& t) {
-            return sp::script::Convert<float>::toLua(L, t.getPosition().x);
-        }, [](lua_State* L, sp::Transform& t) {
-            t.setPosition({sp::script::Convert<float>::fromLua(L, -1), t.getPosition().y});
+        [](lua_State* L, const void* ptr) {
+            auto t = reinterpret_cast<const sp::Transform*>(ptr);
+            return sp::script::Convert<float>::toLua(L, t->getPosition().x);
+        }, [](lua_State* L, void* ptr) {
+            auto t = reinterpret_cast<sp::Transform*>(ptr);
+            t->setPosition({sp::script::Convert<float>::fromLua(L, -1), t->getPosition().y});
         }
     };
     sp::script::ComponentHandler<sp::Transform>::members["y"] = {
-        [](lua_State* L, const sp::Transform& t) {
-            return sp::script::Convert<float>::toLua(L, t.getPosition().y);
-        }, [](lua_State* L, sp::Transform& t) {
-            t.setPosition({t.getPosition().x, sp::script::Convert<float>::fromLua(L, -1)});
+        [](lua_State* L, const void* ptr) {
+            auto t = reinterpret_cast<const sp::Transform*>(ptr);
+            return sp::script::Convert<float>::toLua(L, t->getPosition().y);
+        }, [](lua_State* L, void* ptr) {
+            auto t = reinterpret_cast<sp::Transform*>(ptr);
+            t->setPosition({t->getPosition().x, sp::script::Convert<float>::fromLua(L, -1)});
         }
     };
     BIND_MEMBER_GS(sp::Transform, "position", getPosition, setPosition);
     sp::script::ComponentHandler<sp::Transform>::members["rotation"] = {
-        [](lua_State* L, const sp::Transform& t) {
-            return sp::script::Convert<float>::toLua(L, t.getRotation());
-        }, [](lua_State* L, sp::Transform& t) {
-            t.setRotation(sp::script::Convert<float>::fromLua(L, -1));
+        [](lua_State* L, const void* ptr) {
+            auto t = reinterpret_cast<const sp::Transform*>(ptr);
+            return sp::script::Convert<float>::toLua(L, t->getRotation());
+        }, [](lua_State* L, void* ptr) {
+            auto t = reinterpret_cast<sp::Transform*>(ptr);
+            t->setRotation(sp::script::Convert<float>::fromLua(L, -1));
         }
     };
     sp::script::ComponentHandler<sp::Physics>::name("physics");
     BIND_MEMBER_GS(sp::Physics, "type", getType, setType);
     sp::script::ComponentHandler<sp::Physics>::members["size"] = {
-        [](lua_State* L, const sp::Physics& p) {
-            if (p.getShape() == sp::Physics::Shape::Rectangle)
-                return sp::script::Convert<glm::vec2>::toLua(L, p.getSize());
-            return sp::script::Convert<float>::toLua(L, p.getSize().x);
-        }, [](lua_State* L, sp::Physics& p) {
+        [](lua_State* L, const void* ptr) {
+            auto p = reinterpret_cast<const sp::Physics*>(ptr);
+            if (p->getShape() == sp::Physics::Shape::Rectangle)
+                return sp::script::Convert<glm::vec2>::toLua(L, p->getSize());
+            return sp::script::Convert<float>::toLua(L, p->getSize().x);
+        }, [](lua_State* L, void* ptr) {
+            auto p = reinterpret_cast<sp::Physics*>(ptr);
             if (lua_istable(L, -1))
-                p.setRectangle(p.getType(), sp::script::Convert<glm::vec2>::fromLua(L, -1));
+                p->setRectangle(p->getType(), sp::script::Convert<glm::vec2>::fromLua(L, -1));
             else
-                p.setCircle(p.getType(), sp::script::Convert<float>::fromLua(L, -1));
+                p->setCircle(p->getType(), sp::script::Convert<float>::fromLua(L, -1));
         }
     };
     BIND_MEMBER_GS(sp::Physics, "velocity", getVelocity, setVelocity);
@@ -520,8 +206,23 @@ void initComponentScriptBindings()
     BIND_MEMBER(MeshRenderComponent, mesh_offset);
     BIND_MEMBER(MeshRenderComponent, scale);
 
+    sp::script::ComponentHandler<PlanetRender>::name("planet_render");
+    BIND_MEMBER(PlanetRender, size);
+    BIND_MEMBER(PlanetRender, cloud_size);
+    BIND_MEMBER(PlanetRender, atmosphere_size);
+    BIND_MEMBER(PlanetRender, texture);
+    BIND_MEMBER(PlanetRender, cloud_texture);
+    BIND_MEMBER(PlanetRender, atmosphere_texture);
+    BIND_MEMBER(PlanetRender, atmosphere_color);
+    BIND_MEMBER(PlanetRender, distance_from_movement_plane);
+
     sp::script::ComponentHandler<Spin>::name("spin");
     BIND_MEMBER(Spin, rate);
+    sp::script::ComponentHandler<Orbit>::name("orbit");
+    BIND_MEMBER(Orbit, target);
+    BIND_MEMBER(Orbit, center);
+    BIND_MEMBER(Orbit, distance);
+    BIND_MEMBER(Orbit, time);
 
     sp::script::ComponentHandler<AvoidObject>::name("avoid_object");
     BIND_MEMBER(AvoidObject, range);
@@ -674,6 +375,8 @@ void initComponentScriptBindings()
     BIND_MEMBER(WarpDrive, energy_warp_per_second);
     BIND_MEMBER(WarpDrive, request);
     BIND_MEMBER(WarpDrive, current);
+    sp::script::ComponentHandler<WarpJammer>::name("warp_jammer");
+    BIND_MEMBER(WarpJammer, range);
     sp::script::ComponentHandler<JumpDrive>::name("jump_drive");
     BIND_SHIP_SYSTEM(JumpDrive);
     BIND_MEMBER(JumpDrive, min_distance);
@@ -740,8 +443,8 @@ void initComponentScriptBindings()
     BIND_MEMBER(ScanProbeLauncher, stock);
     BIND_MEMBER(ScanProbeLauncher, recharge);
     BIND_MEMBER(ScanProbeLauncher, charge_time);
-    sp::script::ComponentHandler<HackingDevice>::name("hacking_device");
     sp::script::ComponentHandler<PlayerControl>::name("player_control");
+    sp::script::ComponentHandler<HackingDevice>::name("hacking_device");
     //TODO: BIND_MEMBER(PlayerControl, alert_level);
     BIND_MEMBER(PlayerControl, control_code);
 
@@ -798,19 +501,21 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(InternalRooms, rooms, size);
     BIND_ARRAY_MEMBER(InternalRooms, rooms, system);
     sp::script::ComponentHandler<InternalRooms>::members["doors"] = {
-        [](lua_State* L, const InternalRooms& t) {
+        [](lua_State* L, const void* ptr) {
+            auto t = reinterpret_cast<const InternalRooms*>(ptr); \
             lua_newtable(L);
             return 1; // TODO: No getter for doors
-        }, [](lua_State* L, InternalRooms& t) {
-            t.doors.clear();
+        }, [](lua_State* L, void* ptr) {
+            auto t = reinterpret_cast<InternalRooms*>(ptr); \
+            t->doors.clear();
             while(true) {
-                lua_geti(L, -1, t.doors.size() + 1);
+                lua_geti(L, -1, t->doors.size() + 1);
                 if (!lua_istable(L, -1))
                     break;
                 lua_geti(L, -1, 1); auto x = lua_tonumber(L, -1); lua_pop(L, 1);
                 lua_geti(L, -1, 2); auto y = lua_tonumber(L, -1); lua_pop(L, 1);
                 lua_geti(L, -1, 3); bool horizontal = lua_toboolean(L, -1); lua_pop(L, 1);
-                t.doors.push_back({{x, y}, horizontal});
+                t->doors.push_back({{x, y}, horizontal});
 
                 lua_pop(L, 1);
             }

@@ -46,6 +46,7 @@
 #include "systems/internalcrew.h"
 #include "systems/pathfinding.h"
 #include "systems/rendering.h"
+#include "systems/planet.h"
 #include "systems/scanning.h"
 #include "packResourceProvider.h"
 #include "main.h"
@@ -172,6 +173,8 @@ int main(int argc, char** argv)
     engine->registerSystem<InternalCrewSystem>();
     engine->registerSystem<PathFindingSystem>();
     engine->registerSystem<NebulaRenderSystem>();
+    engine->registerSystem<PlanetRenderSystem>();
+    engine->registerSystem<PlanetTransparentRenderSystem>();
     engine->registerSystem<MeshRenderSystem>();
     engine->registerSystem<ScanningSystem>();
     initComponentScriptBindings();

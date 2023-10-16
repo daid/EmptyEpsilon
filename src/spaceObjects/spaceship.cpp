@@ -9,7 +9,6 @@
 #include "playerInfo.h"
 #include "factionInfo.h"
 #include "particleEffect.h"
-#include "spaceObjects/warpJammer.h"
 #include "textureManager.h"
 #include "multiplayer_client.h"
 #include "gameGlobalInfo.h"

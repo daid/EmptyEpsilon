@@ -5,7 +5,6 @@
 #include "components/warpdrive.h"
 #include "components/reactor.h"
 #include "components/shields.h"
-#include "spaceObjects/warpJammer.h"
 #include "ecs/query.h"
 
 

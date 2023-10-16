@@ -6,7 +6,6 @@
 #include <optional>
 
 #include "shipTemplateBasedObject.h"
-#include "spaceStation.h"
 #include "tween.h"
 #include "components/docking.h"
 

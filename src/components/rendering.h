@@ -70,3 +70,17 @@ public:
     static constexpr size_t max_quad_count = particle_count * 4;
     gl::Buffers<2> particles_buffers{ gl::Unitialized{} };
 };
+
+
+class PlanetRender
+{
+public:
+    float size;
+    float cloud_size;
+    float atmosphere_size;
+    string texture;
+    string cloud_texture;
+    string atmosphere_texture;
+    glm::vec3 atmosphere_color{};
+    float distance_from_movement_plane;
+};
