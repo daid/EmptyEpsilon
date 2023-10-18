@@ -25,6 +25,7 @@ public:
     glm::u8vec4 getArcFireColor();
 
     void setDamageType(EDamageType type);
+    EDamageType getDamageType();
 
     void setDirection(float direction);
     float getDirection();

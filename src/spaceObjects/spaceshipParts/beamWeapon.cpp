@@ -78,6 +78,11 @@ void BeamWeapon::setDamageType(EDamageType type)
     damage_type = type;
 }
 
+EDamageType BeamWeapon::getDamageType()
+{
+    return damage_type;
+}
+
 void BeamWeapon::setDirection(float direction)
 {
     this->direction = direction;

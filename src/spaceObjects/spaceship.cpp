@@ -315,7 +315,14 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Actual damage can be modified by "beamweapon" system effectiveness.
     /// Example: ship:getBeamWeaponDamage(0); -- returns beam weapon 0's damage
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDamage);
-    /// Returns how much of this SpaceShip's energy is drained each time the BeamWeapon with the given index is fired.
+    /// Returns the damage type of the BeamWeapon with the given index on this SpaceShip.
+    /// Example: ship:getBeamWeaponDamageType(0); -- returns beam weapon 0's damage type as a string
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDamageType);
+    /// Returns the BeamEffect texture, by filename, for the BeamWeapon with the given index on this SpaceShip.
+    /// See BeamEffect:setTexture().
+    /// Example: ship:getBeamWeaponTexture(0); -- returns a string like "texture/beam_orange.png"
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponTexture);
+   /// Returns how much of this SpaceShip's energy is drained each time the BeamWeapon with the given index is fired.
     /// Actual drain can be modified by "beamweapon" system effectiveness.
     /// Example: ship:getBeamWeaponEnergyPerFire(0); -- returns beam weapon 0's energy use per firing
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponEnergyPerFire);
@@ -1758,10 +1765,12 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
         ret += ":setHullMax(" + string(hull_max, 0) + ")";
     if (hull_strength != ship_template->hull)
         ret += ":setHull(" + string(hull_strength, 0) + ")";
-    if (impulse_max_speed != ship_template->impulse_speed)
-        ret += ":setImpulseMaxSpeed(" + string(impulse_max_speed, 1) + ")";
-    if (impulse_max_reverse_speed != ship_template->impulse_reverse_speed)
-        ret += ":setImpulseMaxReverseSpeed(" + string(impulse_max_reverse_speed, 1) + ")";
+    if (impulse_max_speed != ship_template->impulse_speed
+        || impulse_max_reverse_speed != ship_template->impulse_reverse_speed)
+        ret += ":setImpulseMaxSpeed(" + string(impulse_max_speed, 1) + "," + string(impulse_max_reverse_speed, 1) + ")";
+    if (impulse_acceleration != ship_template->impulse_acceleration
+        || impulse_reverse_acceleration != ship_template->impulse_reverse_acceleration)
+        ret += ":setAcceleration(" + string(impulse_acceleration, 1) + "," + string(impulse_reverse_acceleration, 1) + ")";
     if (turn_speed != ship_template->turn_speed)
         ret += ":setRotationMaxSpeed(" + string(turn_speed, 1) + ")";
     if (has_jump_drive != ship_template->has_jump_drive)
@@ -1851,19 +1860,44 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     }
 
     // Beam weapon data
-    for(int n=0; n<max_beam_weapons; n++)
+    for (int n = 0; n < max_beam_weapons; n++)
     {
         if (beam_weapons[n].getArc() != ship_template->beams[n].getArc()
-         || beam_weapons[n].getDirection() != ship_template->beams[n].getDirection()
-         || beam_weapons[n].getRange() != ship_template->beams[n].getRange()
-         || beam_weapons[n].getTurretArc() != ship_template->beams[n].getTurretArc()
-         || beam_weapons[n].getTurretDirection() != ship_template->beams[n].getTurretDirection()
-         || beam_weapons[n].getTurretRotationRate() != ship_template->beams[n].getTurretRotationRate()
-         || beam_weapons[n].getCycleTime() != ship_template->beams[n].getCycleTime()
-         || beam_weapons[n].getDamage() != ship_template->beams[n].getDamage())
+            || beam_weapons[n].getDirection() != ship_template->beams[n].getDirection()
+            || beam_weapons[n].getRange() != ship_template->beams[n].getRange()
+            || beam_weapons[n].getCycleTime() != ship_template->beams[n].getCycleTime()
+            || beam_weapons[n].getDamage() != ship_template->beams[n].getDamage()
+        )
         {
             ret += ":setBeamWeapon(" + string(n) + ", " + string(beam_weapons[n].getArc(), 0) + ", " + string(beam_weapons[n].getDirection(), 0) + ", " + string(beam_weapons[n].getRange(), 0) + ", " + string(beam_weapons[n].getCycleTime(), 1) + ", " + string(beam_weapons[n].getDamage(), 1) + ")";
+        }
+
+        if (beam_weapons[n].getTurretArc() != ship_template->beams[n].getTurretArc()
+            || beam_weapons[n].getTurretDirection() != ship_template->beams[n].getTurretDirection()
+            || beam_weapons[n].getTurretRotationRate() != ship_template->beams[n].getTurretRotationRate()
+        )
+        {
             ret += ":setBeamWeaponTurret(" + string(n) + ", " + string(beam_weapons[n].getTurretArc(), 0) + ", " + string(beam_weapons[n].getTurretDirection(), 0) + ", " + string(beam_weapons[n].getTurretRotationRate(), 0) + ")";
+        }
+
+        if (beam_weapons[n].getBeamTexture() != ship_template->beams[n].getBeamTexture())
+        {
+            ret += ":setBeamWeaponTexture(" + string(n) + ", " + beam_weapons[n].getBeamTexture() + ")";
+        }
+
+        if (beam_weapons[n].getEnergyPerFire() != ship_template->beams[n].getEnergyPerFire())
+        {
+            ret += ":setBeamWeaponEnergyPerFire(" + string(n) + ", " + string(beam_weapons[n].getEnergyPerFire(), 2) + ")";
+        }
+
+        if (beam_weapons[n].getHeatPerFire() != ship_template->beams[n].getHeatPerFire())
+        {
+            ret += ":setBeamWeaponHeatPerFire(" + string(n) + ", " + string(beam_weapons[n].getHeatPerFire(), 2) + ")";
+        }
+
+        if (beam_weapons[n].getDamageType() != DT_Energy) // templates can't yet set beam weapon damage type
+        {
+            ret += ":setBeamWeaponDamageType(" + string(n) + ", \"" + getDamageTypeName(beam_weapons[n].getDamageType()) + "\")";
         }
     }
 
@@ -1912,6 +1946,20 @@ string getLocaleMissileWeaponName(EMissileWeapons missile)
     }
 }
 
+string getDamageTypeName(EDamageType type)
+{
+    switch (type)
+    {
+    case DT_EMP:
+        return "emp";
+    case DT_Kinetic:
+        return "kinetic";
+    case DT_Energy:
+        return "energy";
+    default:
+        return "UNK: " + string(int(type));
+    }
+}
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
 {
