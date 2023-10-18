@@ -40,11 +40,6 @@ public:
     string getLocaleName() { return this->locale_name; }
 
     /*!
-     * \brief Get description of faction.
-     * \return String description of the faction
-     */
-    string getDescription() {return this->description;}
-    /*!
      * \brief Set color of faction on GM screen.
      * \param r Red component.
      * \param g Green component.
@@ -52,11 +47,18 @@ public:
      */
     void setGMColor(int r, int g, int b) { gm_color = glm::u8vec4(r, g, b, 255); }
     glm::u8vec4 getGMColor() { return gm_color; }
+
     /*!
      * \brief Set description of faction.
      * \param description
      */
     void setDescription(string description) { this->description = description; }
+    /*!
+     * \brief Get description of faction.
+     * \return String description of the faction
+     */
+    string getDescription() {return this->description;}
+
     /*!
      * \brief Add another faction that this faction sees as an enemy.
      * \param faction info object.
