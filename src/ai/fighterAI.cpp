@@ -93,7 +93,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
         else
         {
             owner->target_rotation = evade_direction;
-            owner->impulse_request = 1.0;
+            owner->setImpulseRequest(1.0f);
         }
         break;
     case recharge:

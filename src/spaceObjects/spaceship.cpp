@@ -460,7 +460,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     setCollisionPhysics(true, false);
 
     target_rotation = getRotation();
-    impulse_request = 0;
+    impulse_request = 0.0f;
     current_impulse = 0;
     has_warp_drive = true;
     warp_request = 0;
@@ -960,9 +960,9 @@ void SpaceShip::update(float delta)
             else
                 target_rotation = vec2ToAngle(getPosition() - docking_target->getPosition());
             if (fabs(angleDifference(target_rotation, getRotation())) < 10.0f)
-                impulse_request = -1.f;
+                setImpulseRequest(-1.f);
             else
-                impulse_request = 0.f;
+                setImpulseRequest(0.f);
         }
         if (docking_state == DS_Docked)
         {
@@ -985,7 +985,7 @@ void SpaceShip::update(float delta)
                     }
                 }
             }
-            impulse_request = 0.f;
+            setImpulseRequest(0.f);
         }
         if ((docking_state == DS_Docked) || (docking_state == DS_Docking))
             warp_request = 0;
@@ -1102,10 +1102,9 @@ void SpaceShip::update(float delta)
             }
         }
         current_warp = 0.f;
-        if (impulse_request > 1.0f)
-            impulse_request = 1.0f;
-        if (impulse_request < -1.0f)
-            impulse_request = -1.0f;
+        // Validate impulse request; this might not be necessary.
+        setImpulseRequest(impulse_request);
+
         if (current_impulse < impulse_request)
         {
             if (cap_speed > 0)
@@ -1312,7 +1311,7 @@ void SpaceShip::requestUndock()
     {
         docked_style = DockStyle::None;
         docking_state = DS_NotDocking;
-        impulse_request = 0.5;
+        setImpulseRequest(0.5f);
     }
 }
 
@@ -1321,7 +1320,7 @@ void SpaceShip::abortDock()
     if (docking_state == DS_Docking)
     {
         docking_state = DS_NotDocking;
-        impulse_request = 0.f;
+        setImpulseRequest(0.f);
         warp_request = 0;
         target_rotation = getRotation();
     }

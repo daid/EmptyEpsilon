@@ -375,6 +375,7 @@ public:
         impulse_max_speed = forward_speed; 
         impulse_max_reverse_speed = reverse_speed.value_or(forward_speed);
     }
+    void setImpulseRequest(float request) { impulse_request = std::clamp(request, -1.0f, 1.0f); }
     float getSystemCoolantRate(ESystem system) const { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].coolant_rate_per_second; }
     void setSystemCoolantRate(ESystem system, float rate) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_rate_per_second = rate; }
     float getRotationMaxSpeed() { return turn_speed; }
