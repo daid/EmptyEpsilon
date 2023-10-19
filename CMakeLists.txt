@@ -386,6 +386,9 @@ set(MAIN_SOURCES
     src/components/sfx.h
     src/components/missile.h
     src/components/database.h
+    src/components/zone.h
+    src/components/moveto.h
+    src/components/lifetime.h
     src/systems/ai.h
     src/systems/ai.cpp
     src/systems/docking.h
@@ -434,6 +437,8 @@ set(MAIN_SOURCES
     src/systems/scanning.cpp
     src/systems/planet.h
     src/systems/planet.cpp
+    src/systems/radar.h
+    src/systems/radar.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
@@ -575,7 +580,6 @@ set(MAIN_SOURCES
     src/shaderRegistry.h
     src/shipTemplate.h
     src/spaceObjects/playerSpaceship.h
-    src/spaceObjects/scanProbe.h
     src/spaceObjects/shipTemplateBasedObject.h
     src/spaceObjects/spaceObject.h
     src/spaceObjects/spaceship.h

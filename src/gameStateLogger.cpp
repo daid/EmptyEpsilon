@@ -9,8 +9,6 @@
 
 #include "gameStateLogger.h"
 #include "gameGlobalInfo.h"
-#include "spaceObjects/spaceObject.h"
-#include "spaceObjects/spaceship.h"
 
 class JSONGenerator
 {

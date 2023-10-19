@@ -2,7 +2,6 @@
 #define PLAYER_SPACESHIP_H
 
 #include "spaceship.h"
-#include "scanProbe.h"
 #include "playerInfo.h"
 #include "components/player.h"
 #include "components/comms.h"

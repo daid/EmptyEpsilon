@@ -3,6 +3,8 @@
 #include "systems/collision.h"
 #include "components/hull.h"
 #include "components/collision.h"
+#include "components/scanning.h"
+#include "components/radar.h"
 
 
 TargetsContainer::TargetsContainer()

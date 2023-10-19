@@ -8,6 +8,8 @@
 #include "ecs/query.h"
 #include "i18n.h"
 
+#include "components/name.h"
+
 #include "serverCreationScreen.h"
 #include "epsilonServer.h"
 #include "main.h"

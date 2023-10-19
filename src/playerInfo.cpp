@@ -44,6 +44,8 @@
 #include "components/maneuveringthrusters.h"
 #include "components/selfdestruct.h"
 #include "components/hacking.h"
+#include "components/scanning.h"
+#include "components/radar.h"
 #include "components/internalrooms.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
@@ -222,7 +224,7 @@ void PlayerInfo::commandFireTubeAtTarget(uint32_t tubeNumber, sp::ecs::Entity ta
     float targetAngle = 0.0;
     auto missiletubes = my_spaceship.getComponent<MissileTubes>();
 
-    if (!target || !missiletubes || tubeNumber < 0 || tubeNumber >= missiletubes->mounts.size())
+    if (!target || !missiletubes || tubeNumber >= missiletubes->mounts.size())
         return;
 
     targetAngle = MissileSystem::calculateFiringSolution(my_spaceship, missiletubes->mounts[tubeNumber], target);
@@ -620,7 +622,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> tube_nr >> type;
 
             auto missiletubes = my_spaceship.getComponent<MissileTubes>();
-            if (missiletubes && tube_nr >= 0 && tube_nr < missiletubes->mounts.size())
+            if (missiletubes && tube_nr < missiletubes->mounts.size())
                 MissileSystem::startLoad(my_spaceship, missiletubes->mounts[tube_nr], type);
         }
         break;
@@ -630,7 +632,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> tube_nr;
 
             auto missiletubes = my_spaceship.getComponent<MissileTubes>();
-            if (missiletubes && tube_nr >= 0 && tube_nr < missiletubes->mounts.size())
+            if (missiletubes && tube_nr < missiletubes->mounts.size())
                 MissileSystem::startUnload(my_spaceship, missiletubes->mounts[tube_nr]);
         }
         break;
@@ -641,7 +643,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> tube_nr >> missile_target_angle;
 
             auto missiletubes = my_spaceship.getComponent<MissileTubes>();
-            if (missiletubes && tube_nr >= 0 && tube_nr < missiletubes->mounts.size()) {
+            if (missiletubes && tube_nr < missiletubes->mounts.size()) {
                 sp::ecs::Entity target;
                 if (auto t = my_spaceship.getComponent<Target>())
                     target = t->entity;
@@ -729,10 +731,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_DOCK:
         {
             int32_t id;
-            packet >> id;
-            P<SpaceObject> obj = game_server->getObjectById(id);
-            if (obj)
-                DockingSystem::requestDock(my_spaceship, obj->entity);
+            sp::ecs::Entity target;
+            packet >> id >> target;
+            if (target)
+                DockingSystem::requestDock(my_spaceship, target);
         }
         break;
     case CMD_UNDOCK:
@@ -888,12 +890,14 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             if (t && spl->stock > 0) {
                 glm::vec2 target{};
                 packet >> target;
+                /*TODO spawn scan probe
                 P<ScanProbe> p = new ScanProbe();
                 p->setPosition(t->getPosition());
                 p->setTarget(target);
                 p->setOwner(my_spaceship);
                 if (spl->on_launch)
                     LuaConsole::checkResult(spl->on_launch.call<void>(my_spaceship, p->entity));
+                */
                 spl->stock--;
             }
         }

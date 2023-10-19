@@ -1,5 +1,7 @@
 #include <graphics/opengl.h>
+#include <unordered_set>
 
+#include "featureDefs.h"
 #include "ecs/query.h"
 #include "systems/collision.h"
 #include "components/collision.h"
@@ -8,14 +10,16 @@
 #include "components/shields.h"
 #include "components/missiletubes.h"
 #include "components/target.h"
+#include "components/radar.h"
 #include "components/radarblock.h"
 #include "components/impulse.h"
+#include "components/scanning.h"
 #include "systems/missilesystem.h"
 #include "systems/radarblock.h"
+#include "systems/radar.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "tween.h"
-#include "spaceObjects/scanProbe.h"
 #include "playerInfo.h"
 #include "radarView.h"
 #include "missileTubeControls.h"
@@ -584,15 +588,12 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
 {
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-    std::unordered_set<SpaceObject*> visible_objects;
-    visible_objects.reserve(space_object_list.size());
+    sp::Bitset visible_objects;
     switch(fog_style)
     {
     case NoFogOfWar:
-        foreach(SpaceObject, obj, space_object_list)
-        {
-            visible_objects.emplace(*obj);
-        }
+        for(auto [entity, transform] : sp::ecs::Query<sp::Transform>())
+            visible_objects.set(entity.getIndex());
         break;
     case FriendlysShortRangeFogOfWar:
         // Reveal objects if they are within short-range radar range (or 5U) of
@@ -605,12 +606,12 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         }
 
         // For each SpaceObject on the map...
-        foreach(SpaceObject, obj, space_object_list)
+        for(auto [entity, transform] : sp::ecs::Query<sp::Transform>())
         {
             // If the object can't hide in a nebula, it's considered visible.
-            if (obj->entity.hasComponent<NeverRadarBlocked>())
-            {
-                visible_objects.emplace(*obj);
+            if (entity.hasComponent<NeverRadarBlocked>()) {
+                visible_objects.set(entity.getIndex());
+                continue;
             }
 
             // Consider the object only if it is:
@@ -619,31 +620,28 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
             // - The player's ship
             // - A scan probe owned by the player's ship
             // This check is duplicated in RelayScreen::onDraw.
-            if (!obj->entity.hasComponent<ShareShortRangeRadar>())
+            if (!entity.hasComponent<ShareShortRangeRadar>())
                 continue;
-            if (Faction::getRelation(my_spaceship, obj->entity) != FactionRelation::Friendly)
+            if (Faction::getRelation(my_spaceship, entity) != FactionRelation::Friendly)
                 continue;
 
             // Set the radius to reveal as getShortRangeRadarRange() if the
             // object's a ShipTemplateBasedObject. Otherwise, default to 5U.
-            float r = obj->entity.getComponent<LongRangeRadar>() ? obj->entity.getComponent<LongRangeRadar>()->short_range : 5000.0f;
+            float r = entity.getComponent<LongRangeRadar>() ? entity.getComponent<LongRangeRadar>()->short_range : 5000.0f;
 
             // Query for objects within short-range radar/5U of this object.
-            auto position = obj->getPosition();
+            auto position = transform.getPosition();
 
             // For each of those objects, check if it is at least partially
             // inside the revealed radius. If so, reveal the object on the map.
-            for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r)))
+            for(auto entity2 : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r)))
             {
-                auto ptr = entity.getComponent<SpaceObject*>();
-                if (!ptr || !*ptr) continue;
-                P<SpaceObject> obj2 = *ptr;
-
-                auto trace = obj2->entity.getComponent<RadarTrace>();
+                //TODO: This isn't great, as not everything will have collision shapes attached.
+                auto trace = entity2.getComponent<RadarTrace>();
                 float r2 = trace ? trace->radius * scale : 0.0f;
-                if (obj2 && glm::length2(obj->getPosition() - obj2->getPosition()) < r2*r2)
-                {
-                    visible_objects.emplace(*obj2);
+                if (auto t2 = entity2.getComponent<sp::Transform>()) {
+                    if (glm::length2(transform.getPosition() - t2->getPosition()) < r2*r2)
+                        visible_objects.set(entity2.getIndex());
                 }
             }
         }
@@ -654,255 +652,29 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         {
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
             auto short_range = lrr ? lrr->short_range : 5000.0f;
-            foreach(SpaceObject, obj, space_object_list)
+            for(auto [entity, t] : sp::ecs::Query<sp::Transform>())
             {
-                if (RadarBlockSystem::isRadarBlockedFrom(transform->getPosition(), obj->entity, short_range))
+                if (RadarBlockSystem::isRadarBlockedFrom(transform->getPosition(), entity, short_range))
                     continue;
-                visible_objects.emplace(*obj);
+                visible_objects.set(entity.getIndex());
             }
         }
         break;
     }
 
-    std::vector objects_to_draw(std::begin(visible_objects), std::end(visible_objects));
-    std::sort(std::begin(objects_to_draw), std::end(objects_to_draw), [](const auto& lhs, const auto& rhs)
-    {
-        const auto lhsLayer = lhs->getRadarLayer();
-        const auto rhsLayer = rhs->getRadarLayer();
-        if (lhsLayer < rhsLayer)
-            return true;
-        if (lhsLayer > rhsLayer)
-            return false;
-        if (!lhs->entity.template hasComponent<NeverRadarBlocked>() && rhs->entity.template hasComponent<NeverRadarBlocked>())
-            return true;
-        if (lhs->entity.template hasComponent<NeverRadarBlocked>() && !rhs->entity.template hasComponent<NeverRadarBlocked>())
-            return false;
-        return lhs->getMultiplayerId() < rhs->getMultiplayerId();
-    });
-
-    auto draw_object = [&renderer, this, scale](SpaceObject* obj)
-    {
-        auto object_position_on_screen = worldToScreen(obj->getPosition());
-        auto trace = obj->entity.getComponent<RadarTrace>();
-        float r = trace ? trace->radius * scale : 0.0f;
-        sp::Rect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
-        if (obj->entity != my_spaceship && rect.overlaps(object_rect))
-        {
-            obj->drawOnRadar(renderer, object_position_on_screen, scale, view_rotation, long_range);
-            if (show_callsigns && obj->getCallSign() != "")
-                renderer.drawText(sp::Rect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), sp::Alignment::Center, 15, bold_font);
-        }
-    };
+    int flags = 0;
+    if (long_range)
+        flags |= RadarRenderSystem::FlagLongRange;
+    else
+        flags |= RadarRenderSystem::FlagShortRange;
+    if (show_game_master_data)
+        flags |= RadarRenderSystem::FlagGM;
+    glm::vec2 radar_screen_center = rect.center();
 
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
-    for(SpaceObject* obj : objects_to_draw)
-    {
-        draw_object(obj);
-    }
-
-    auto draw_arc = [&renderer](auto arc_center, auto angle0, auto arc_angle, auto arc_radius, auto color)
-    {
-        // Initialize variables from the beam's data.
-        float beam_arc = arc_angle;
-        float beam_range = arc_radius;
-
-        // Set the beam's origin on radar to its relative position on the mesh.
-        float outline_thickness = std::min(20.0f, beam_range * 0.2f);
-        float beam_arc_curve_length = beam_range * beam_arc / 180.0f * glm::pi<float>();
-        outline_thickness = std::min(outline_thickness, beam_arc_curve_length * 0.25f);
-
-        size_t curve_point_count = 0;
-        if (outline_thickness > 0.f)
-            curve_point_count = static_cast<size_t>(beam_arc_curve_length / (outline_thickness * 0.9f));
-
-        struct ArcPoint {
-            glm::vec2 point;
-            glm::vec2 normal; // Direction towards the center.
-        };
-
-        //Arc points
-        std::vector<ArcPoint> arc_points;
-        arc_points.reserve(curve_point_count + 1);
-        
-        for (size_t i = 0; i < curve_point_count; i++)
-        {
-            auto angle = vec2FromAngle(angle0 + i * beam_arc / curve_point_count) * beam_range;
-            arc_points.emplace_back(ArcPoint{ arc_center + angle, glm::normalize(angle) });
-        }
-        {
-            auto angle = vec2FromAngle(angle0 + beam_arc) * beam_range;
-            arc_points.emplace_back(ArcPoint{ arc_center + angle, glm::normalize(angle) });
-        }
-
-        for (size_t n = 0; n < arc_points.size() - 1; n++)
-        {
-            const auto& p0 = arc_points[n].point;
-            const auto& p1 = arc_points[n + 1].point;
-            const auto& n0 = arc_points[n].normal;
-            const auto& n1 = arc_points[n + 1].normal;
-            renderer.drawTexturedQuad("gradient.png",
-                p0, p0 - n0 * outline_thickness,
-                p1 - n1 * outline_thickness, p1,
-                { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
-                color);
-        }
-
-        if (beam_arc < 360.f)
-        {
-            // Arc bounds.
-            // We use the left- and right-most edges as lines, going inwards, parallel to the center.
-            const auto left_edge = vec2FromAngle(angle0) * beam_range;
-            const auto right_edge = vec2FromAngle(angle0 + beam_arc) * beam_range;
-        
-            // Compute the half point, always going clockwise from the left edge.
-            // This makes sure the algorithm never takes the short road.
-            auto halfway_angle = vec2FromAngle(angle0 + beam_arc / 2.f) * beam_range;
-            auto middle = glm::normalize(halfway_angle);
-
-            // Edge vectors.
-            const auto left_edge_vector = glm::normalize(left_edge);
-            const auto right_edge_vector = glm::normalize(right_edge);
-
-            // Edge normals, inwards.
-            auto left_edge_normal = glm::vec2{ left_edge_vector.y, -left_edge_vector.x };
-            const auto right_edge_normal = glm::vec2{ -right_edge_vector.y, right_edge_vector.x };
-
-            // Initial offset, follow along the edges' normals, inwards.
-            auto left_inner_offset = -left_edge_normal * outline_thickness;
-            auto right_inner_offset = -right_edge_normal * outline_thickness;
-
-            if (beam_arc < 180.f)
-            {
-                // The thickness being perpendicular from the edges,
-                // the inner lines just crosses path on the height,
-                // so just use that point.
-                left_inner_offset = middle * outline_thickness / sinf(glm::radians(beam_arc / 2.f));
-                right_inner_offset = left_inner_offset;
-            }
-            else
-            {
-                // Make it shrink nicely as it grows up to 360 deg.
-                // For that, we use the edge's normal against the height which will change from 0 to 90deg.
-                // Also flip the direction so our points stay inside the beam.
-                auto thickness_scale = -glm::dot(middle, right_edge_normal);
-                left_inner_offset *= thickness_scale;
-                right_inner_offset *= thickness_scale;
-            }
-
-            renderer.drawTexturedQuad("gradient.png",
-                arc_center, arc_center + left_inner_offset,
-                arc_center + left_edge - left_edge_normal * outline_thickness, arc_center + left_edge,
-                { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
-                color);
-
-            renderer.drawTexturedQuad("gradient.png",
-                arc_center, arc_center + right_inner_offset,
-                arc_center + right_edge - right_edge_normal * outline_thickness, arc_center + right_edge,
-                { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
-                color);
-        }
-    };
-
+    RadarRenderSystem::render(renderer, radar_screen_center, scale, view_position, view_rotation, flags);
+/*
     //TODO: Draw "on radar" explosions
-
-    // Draw beam arcs on short-range radar only, and only for fully scanned
-    // ships.
-    if (!long_range) {
-        for(auto [entity, beamsystem, transform, scanstate] : sp::ecs::Query<BeamWeaponSys, sp::Transform, sp::ecs::optional<ScanState>>()) {
-            auto object_position_on_screen = worldToScreen(transform.getPosition());
-            if (scanstate && my_spaceship && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
-                continue;
-
-            // For each beam ...
-            for(auto& mount : beamsystem.mounts) {
-                // Draw beam arcs only if the beam has a range. A beam with range 0
-                // effectively doesn't exist; exit if that's the case.
-                if (mount.range == 0.0f) continue;
-
-                // If the beam is cooling down, flash and fade the arc color.
-                glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, mount.cooldown), 0, mount.cycle_time, mount.arc_color, mount.arc_color_fire);
-
-                
-                // Initialize variables from the beam's data.
-                float beam_direction = mount.direction;
-                float beam_arc = mount.arc;
-                float beam_range = mount.range;
-
-                // Set the beam's origin on radar to its relative position on the mesh.
-                auto beam_offset = rotateVec2(glm::vec2(mount.position.x, mount.position.y) * scale, transform.getRotation() - view_rotation);
-                auto arc_center = beam_offset + object_position_on_screen;
-
-                draw_arc(arc_center, transform.getRotation() - view_rotation + (beam_direction - beam_arc / 2.0f), beam_arc, beam_range * scale, color);
-            
-
-                // If the beam is turreted, draw the turret's arc. Otherwise, exit.
-                if (mount.arc == 0.0f)
-                    continue;
-
-                // Initialize variables from the turret data.
-                float turret_arc = mount.turret_arc;
-                float turret_direction = mount.turret_direction;
-
-                // Draw the turret's bounds, at half the transparency of the beam's.
-                // TODO: Make this color configurable.
-                color.a /= 4;
-
-                draw_arc(arc_center, transform.getRotation() - view_rotation + (turret_direction - turret_arc / 2.0f), turret_arc, beam_range * scale, color);
-            }
-        }
-    }
-    
-    for(auto [entity, trace, transform, scanstate] : sp::ecs::Query<RadarTrace, sp::Transform, sp::ecs::optional<ScanState>>()) {
-        auto object_position_on_screen = worldToScreen(transform.getPosition());
-        //TODO: Only draw things that are in range of this radar view.
-
-        if (long_range && !(trace.flags & RadarTrace::LongRange))
-            continue;
-
-        auto size = trace.radius * scale * 2.0f;
-        size = std::clamp(size, trace.min_size, trace.max_size);
-
-        auto color = trace.color;
-        if (trace.flags & RadarTrace::ColorByFaction) {
-            color = Faction::getInfo(entity).gm_color;
-            if (my_spaceship)
-            {
-                if (entity == my_spaceship)
-                    color = glm::u8vec4(192, 192, 255, 255);
-                else if (scanstate && scanstate->getStateFor(my_spaceship) == ScanState::State::NotScanned)
-                    color = glm::u8vec4(192, 192, 192, 255);
-                else if (Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy)
-                    color = glm::u8vec4(255, 0, 0, 255);
-                else if (Faction::getRelation(my_spaceship, entity) == FactionRelation::Friendly)
-                    color = glm::u8vec4(128, 255, 128, 255);
-                else
-                    color = glm::u8vec4(128, 128, 255, 255);
-            }
-        }
-        auto icon = trace.icon;
-        if (trace.flags & RadarTrace::ArrowIfNotScanned && scanstate && my_spaceship)
-        {
-            // If the object is a ship that hasn't been scanned, draw the default icon.
-            // Otherwise, draw the ship-specific icon.
-            switch(scanstate->getStateFor(my_spaceship)) {
-            case ScanState::State::NotScanned:
-            case ScanState::State::FriendOrFoeIdentified:
-                icon = "radar/arrow.png";
-                break;
-            default:
-                break;
-            }
-        }
-
-        if ((trace.flags & RadarTrace::BlendAdd) && (trace.flags & RadarTrace::Rotate))
-            renderer.drawRotatedSpriteBlendAdd(icon, object_position_on_screen, size, transform.getRotation() - view_rotation);
-        else if (trace.flags & RadarTrace::BlendAdd)
-            renderer.drawRotatedSpriteBlendAdd(icon, object_position_on_screen, size, 0);
-        else if (trace.flags & RadarTrace::Rotate)
-            renderer.drawRotatedSprite(icon, object_position_on_screen, size, transform.getRotation() - view_rotation, color);
-        else
-            renderer.drawSprite(icon, object_position_on_screen, size, color);
-    }
 
     if (!long_range) {
         for(auto [entity, shields, trace, transform, scanstate] : sp::ecs::Query<Shields, RadarTrace, sp::Transform, sp::ecs::optional<ScanState>>()) {
@@ -972,10 +744,12 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         if (obj_ptr)
             (*obj_ptr)->drawOnRadar(renderer, object_position_on_screen, scale, view_rotation, long_range);
     }
+    */
 }
 
 void GuiRadarView::drawObjectsGM(sp::RenderTarget& renderer)
 {
+    /*
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
     foreach(SpaceObject, obj, space_object_list)
     {
@@ -996,6 +770,7 @@ void GuiRadarView::drawObjectsGM(sp::RenderTarget& renderer)
             }
         }
     }
+    */
 }
 
 void GuiRadarView::drawTargets(sp::RenderTarget& renderer)

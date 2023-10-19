@@ -4,11 +4,15 @@
 #include "preferenceManager.h"
 #include "multiplayer_client.h"
 #include "i18n.h"
+#include "featureDefs.h"
 
 #include "components/beamweapon.h"
 #include "components/shields.h"
 #include "components/hull.h"
 #include "components/collision.h"
+#include "components/radar.h"
+#include "components/scanning.h"
+#include "components/name.h"
 
 #include "systems/radarblock.h"
 
@@ -509,51 +513,8 @@ void ScienceScreen::onUpdate()
             my_spaceship.hasComponent<ScienceScanner>() &&
             my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
         {
-            auto my_transform = my_spaceship.getComponent<sp::Transform>();
-            auto my_position = my_transform ? my_transform->getPosition() : glm::vec2{0,0};
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-            bool current_found = false;
-            for (P<SpaceObject> obj : space_object_list)
-            {
-                // If this object is the current object, flag and skip it.
-                if (obj->entity == targets.get())
-                {
-                    current_found = true;
-                    continue;
-                }
-
-                // If this object is my ship or not visible due to a Nebula,
-                // skip it.
-                if (obj->entity == my_spaceship ||
-                    RadarBlockSystem::isRadarBlockedFrom(my_position, obj->entity, lrr ? lrr->short_range : 5000.0f))
-                    continue;
-
-                // If this is a scannable object and the currently selected
-                // object, and it remains in radar range, continue to set it.
-                if (current_found &&
-                    glm::length(obj->getPosition() - my_position) < science_radar->getDistance() &&
-                    obj->canBeScannedBy(my_spaceship))
-                {
-                    targets.set(obj->entity);
-                    return;
-                }
-            }
-
-            // Advance to the next object.
-            for (P<SpaceObject> obj : space_object_list)
-            {
-                if (obj->entity == targets.get() ||
-                    obj->entity == my_spaceship ||
-                    RadarBlockSystem::isRadarBlockedFrom(my_position, obj->entity, lrr ? lrr->short_range : 5000.0f))
-                    continue;
-
-                if (glm::length(obj->getPosition() - my_position) < science_radar->getDistance() &&
-                    obj->canBeScannedBy(my_spaceship))
-                {
-                    targets.set(obj->entity);
-                    return;
-                }
-            }
+            targets.setNext(lrr ? lrr->long_range : 25000.0f, TargetsContainer::ESelectionType::Scannable);
         }
     }
 }

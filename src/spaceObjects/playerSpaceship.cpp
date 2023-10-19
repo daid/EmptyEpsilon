@@ -6,6 +6,7 @@
 #include "soundManager.h"
 #include "random.h"
 #include "ecs/query.h"
+#include "multiplayer_server.h"
 
 #include "components/collision.h"
 #include "components/impulse.h"

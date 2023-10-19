@@ -5,6 +5,7 @@
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/customShipFunctions.h"
 #include "components/hull.h"
+#include "i18n.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
 

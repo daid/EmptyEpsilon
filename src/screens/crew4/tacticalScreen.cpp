@@ -1,5 +1,6 @@
 #include "playerInfo.h"
 #include "i18n.h"
+#include "featureDefs.h"
 #include "gameGlobalInfo.h"
 #include "tacticalScreen.h"
 #include "preferenceManager.h"
@@ -10,6 +11,7 @@
 #include "components/collision.h"
 #include "components/shields.h"
 #include "components/target.h"
+#include "components/radar.h"
 
 #include "screenComponents/combatManeuver.h"
 #include "screenComponents/radarView.h"

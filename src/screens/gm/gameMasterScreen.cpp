@@ -632,8 +632,8 @@ string GameMasterScreen::getScriptExport(bool selected_only)
     {
         objs = targets.getTargets();
     }else{
-        foreach(SpaceObject, obj, space_object_list)
-            objs.push_back(obj->entity);
+        //TODO foreach(SpaceObject, obj, space_object_list)
+        //    objs.push_back(obj->entity);
     }
 
     for(auto e : objs)

@@ -1,7 +1,8 @@
 #ifndef TARGETS_CONTAINER_H
 #define TARGETS_CONTAINER_H
 
-#include "spaceObjects/spaceObject.h"
+#include "ecs/entity.h"
+#include "components/faction.h"
 
 class TargetsContainer
 {
@@ -14,7 +15,8 @@ public:
     enum ESelectionType
     {
         Targetable,
-        Selectable
+        Selectable,
+        Scannable,
     };
 
     TargetsContainer();

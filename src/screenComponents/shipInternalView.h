@@ -2,7 +2,6 @@
 #define SHIP_INTERNAL_VIEW_H
 
 #include "gui/gui2_element.h"
-#include "spaceObjects/spaceship.h"
 
 class RepairCrew;
 class GuiShipRoomContainer;

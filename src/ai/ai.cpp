@@ -1,4 +1,3 @@
-#include "spaceObjects/scanProbe.h"
 #include "ai/ai.h"
 #include "ai/aiFactory.h"
 #include "random.h"
@@ -12,6 +11,7 @@
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
 #include "components/target.h"
+#include "components/faction.h"
 #include "components/collision.h"
 #include "components/radar.h"
 #include "systems/collision.h"

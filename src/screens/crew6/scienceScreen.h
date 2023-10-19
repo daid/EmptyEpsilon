@@ -3,7 +3,6 @@
 
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2_overlay.h"
-#include "spaceObjects/scanProbe.h"
 #include "playerInfo.h"
 
 class GuiListbox;
@@ -57,7 +56,7 @@ public:
     GuiKeyValueDisplay* info_system[ShipSystem::COUNT];
 
     GuiToggleButton* probe_view_button;
-    P<ScanProbe> observation_point;
+    sp::ecs::Entity observation_point;
     GuiListbox* view_mode_selection;
 public:
     ScienceScreen(GuiContainer* owner, ECrewPosition crew_position=scienceOfficer);

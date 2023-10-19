@@ -1,5 +1,6 @@
 #include "main.h"
 #include "i18n.h"
+#include "featureDefs.h"
 #include "playerInfo.h"
 #include "singlePilotScreen.h"
 #include "preferenceManager.h"
@@ -11,6 +12,7 @@
 #include "components/maneuveringthrusters.h"
 #include "components/shields.h"
 #include "components/target.h"
+#include "components/radar.h"
 
 #include "screenComponents/viewport3d.h"
 

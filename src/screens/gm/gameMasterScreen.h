@@ -7,6 +7,7 @@
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
+#include "Updatable.h"
 
 class GuiGlobalMessageEntry;
 class GuiObjectCreationScreen;

@@ -229,8 +229,7 @@ void TutorialGame::finish()
 {
     if (repeated_tutorial)
     {
-        foreach(SpaceObject, obj, space_object_list)
-            obj->destroy();
+        sp::ecs::Entity::destroyAllEntities();
         script->destroy();
         hideAllScreens();
 

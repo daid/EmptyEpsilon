@@ -8,9 +8,10 @@ function WarpJammer()
     e.warp_jammer = {range=7000}
     for k, v in pairs(__model_data["shield_generator"]) do
         if string.sub(1, 2) ~= "__" then
-            self[k] = table.deepcopy(v)
+            e[k] = table.deepcopy(v)
         end
     end
+    return e
 end
 
 local Entity = getLuaEntityFunctionTable()

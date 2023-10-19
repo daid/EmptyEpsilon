@@ -7,6 +7,7 @@
 #include "gui/gui2_keyvaluedisplay.h"
 
 #include "components/scanning.h"
+#include "components/radar.h"
 
 #include "screens/crew6/scienceScreen.h"
 

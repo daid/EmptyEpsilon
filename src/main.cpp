@@ -27,7 +27,6 @@
 #include "menus/luaConsole.h"
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
-#include "spaceObjects/spaceObject.h"
 #include "systems/ai.h"
 #include "systems/docking.h"
 #include "systems/impulse.h"
@@ -48,6 +47,8 @@
 #include "systems/rendering.h"
 #include "systems/planet.h"
 #include "systems/scanning.h"
+#include "systems/radar.h"
+#include "components/radar.h"
 #include "packResourceProvider.h"
 #include "main.h"
 #include "epsilonServer.h"
@@ -177,6 +178,7 @@ int main(int argc, char** argv)
     engine->registerSystem<PlanetTransparentRenderSystem>();
     engine->registerSystem<MeshRenderSystem>();
     engine->registerSystem<ScanningSystem>();
+    engine->registerSystem<BasicRadarRendering>();
     initComponentScriptBindings();
     string configuration_path = ".";
     if (getenv("HOME"))

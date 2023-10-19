@@ -7,6 +7,7 @@
 #include "components/reactor.h"
 #include "components/shields.h"
 #include "components/target.h"
+#include "components/radar.h"
 
 #include "screenComponents/missileTubeControls.h"
 #include "screenComponents/aimLock.h"

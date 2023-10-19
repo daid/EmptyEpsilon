@@ -1,5 +1,6 @@
 #include "beamweapon.h"
 #include "multiplayer_server.h"
+#include "components/scanning.h"
 #include "components/beamweapon.h"
 #include "components/collision.h"
 #include "components/docking.h"
@@ -16,6 +17,7 @@
 #include "shaderRegistry.h"
 #include "tween.h"
 #include "random.h"
+#include "playerInfo.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -248,5 +250,154 @@ void BeamWeaponSystem::render3D(sp::ecs::Entity e)
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
         std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
+    }
+}
+
+static void drawArc(sp::RenderTarget& renderer, glm::vec2 arc_center, float angle0, float arc_angle, float arc_radius, glm::u8vec4 color)
+{
+    // Initialize variables from the beam's data.
+    float beam_arc = arc_angle;
+    float beam_range = arc_radius;
+
+    // Set the beam's origin on radar to its relative position on the mesh.
+    float outline_thickness = std::min(20.0f, beam_range * 0.2f);
+    float beam_arc_curve_length = beam_range * beam_arc / 180.0f * glm::pi<float>();
+    outline_thickness = std::min(outline_thickness, beam_arc_curve_length * 0.25f);
+
+    size_t curve_point_count = 0;
+    if (outline_thickness > 0.f)
+        curve_point_count = static_cast<size_t>(beam_arc_curve_length / (outline_thickness * 0.9f));
+
+    struct ArcPoint {
+        glm::vec2 point;
+        glm::vec2 normal; // Direction towards the center.
+    };
+
+    //Arc points
+    std::vector<ArcPoint> arc_points;
+    arc_points.reserve(curve_point_count + 1);
+    
+    for (size_t i = 0; i < curve_point_count; i++)
+    {
+        auto angle = vec2FromAngle(angle0 + i * beam_arc / curve_point_count) * beam_range;
+        arc_points.emplace_back(ArcPoint{ arc_center + angle, glm::normalize(angle) });
+    }
+    {
+        auto angle = vec2FromAngle(angle0 + beam_arc) * beam_range;
+        arc_points.emplace_back(ArcPoint{ arc_center + angle, glm::normalize(angle) });
+    }
+
+    for (size_t n = 0; n < arc_points.size() - 1; n++)
+    {
+        const auto& p0 = arc_points[n].point;
+        const auto& p1 = arc_points[n + 1].point;
+        const auto& n0 = arc_points[n].normal;
+        const auto& n1 = arc_points[n + 1].normal;
+        renderer.drawTexturedQuad("gradient.png",
+            p0, p0 - n0 * outline_thickness,
+            p1 - n1 * outline_thickness, p1,
+            { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
+            color);
+    }
+
+    if (beam_arc < 360.f)
+    {
+        // Arc bounds.
+        // We use the left- and right-most edges as lines, going inwards, parallel to the center.
+        const auto left_edge = vec2FromAngle(angle0) * beam_range;
+        const auto right_edge = vec2FromAngle(angle0 + beam_arc) * beam_range;
+    
+        // Compute the half point, always going clockwise from the left edge.
+        // This makes sure the algorithm never takes the short road.
+        auto halfway_angle = vec2FromAngle(angle0 + beam_arc / 2.f) * beam_range;
+        auto middle = glm::normalize(halfway_angle);
+
+        // Edge vectors.
+        const auto left_edge_vector = glm::normalize(left_edge);
+        const auto right_edge_vector = glm::normalize(right_edge);
+
+        // Edge normals, inwards.
+        auto left_edge_normal = glm::vec2{ left_edge_vector.y, -left_edge_vector.x };
+        const auto right_edge_normal = glm::vec2{ -right_edge_vector.y, right_edge_vector.x };
+
+        // Initial offset, follow along the edges' normals, inwards.
+        auto left_inner_offset = -left_edge_normal * outline_thickness;
+        auto right_inner_offset = -right_edge_normal * outline_thickness;
+
+        if (beam_arc < 180.f)
+        {
+            // The thickness being perpendicular from the edges,
+            // the inner lines just crosses path on the height,
+            // so just use that point.
+            left_inner_offset = middle * outline_thickness / sinf(glm::radians(beam_arc / 2.f));
+            right_inner_offset = left_inner_offset;
+        }
+        else
+        {
+            // Make it shrink nicely as it grows up to 360 deg.
+            // For that, we use the edge's normal against the height which will change from 0 to 90deg.
+            // Also flip the direction so our points stay inside the beam.
+            auto thickness_scale = -glm::dot(middle, right_edge_normal);
+            left_inner_offset *= thickness_scale;
+            right_inner_offset *= thickness_scale;
+        }
+
+        renderer.drawTexturedQuad("gradient.png",
+            arc_center, arc_center + left_inner_offset,
+            arc_center + left_edge - left_edge_normal * outline_thickness, arc_center + left_edge,
+            { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
+            color);
+
+        renderer.drawTexturedQuad("gradient.png",
+            arc_center, arc_center + right_inner_offset,
+            arc_center + right_edge - right_edge_normal * outline_thickness, arc_center + right_edge,
+            { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
+            color);
+    }
+};
+
+void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, BeamWeaponSys& beamsystem)
+{
+    if (entity != my_spaceship) {
+        auto scanstate = entity.getComponent<ScanState>();
+        if (scanstate && my_spaceship && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
+            return;
+    }
+
+    // For each beam ...
+    for(auto& mount : beamsystem.mounts) {
+        // Draw beam arcs only if the beam has a range. A beam with range 0
+        // effectively doesn't exist; exit if that's the case.
+        if (mount.range == 0.0f) continue;
+
+        // If the beam is cooling down, flash and fade the arc color.
+        glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, mount.cooldown), 0, mount.cycle_time, mount.arc_color, mount.arc_color_fire);
+
+        
+        // Initialize variables from the beam's data.
+        float beam_direction = mount.direction;
+        float beam_arc = mount.arc;
+        float beam_range = mount.range;
+
+        // Set the beam's origin on radar to its relative position on the mesh.
+        auto beam_offset = rotateVec2(glm::vec2(mount.position.x, mount.position.y) * scale, rotation);
+        auto arc_center = beam_offset + screen_position;
+
+        drawArc(renderer, arc_center, rotation + (beam_direction - beam_arc / 2.0f), beam_arc, beam_range * scale, color);
+    
+
+        // If the beam is turreted, draw the turret's arc. Otherwise, exit.
+        if (mount.arc == 0.0f)
+            continue;
+
+        // Initialize variables from the turret data.
+        float turret_arc = mount.turret_arc;
+        float turret_direction = mount.turret_direction;
+
+        // Draw the turret's bounds, at half the transparency of the beam's.
+        // TODO: Make this color configurable.
+        color.a /= 4;
+
+        drawArc(renderer, arc_center, rotation + (turret_direction - turret_arc / 2.0f), turret_arc, beam_range * scale, color);
     }
 }
