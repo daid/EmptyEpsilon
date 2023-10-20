@@ -2440,8 +2440,8 @@ msgstr "Merci de nous envoyer une Jonque de service pour les réparations."
 msgctxt "stationAssist-comms"
 msgid ""
 "Would you like the service jonque to come to you directly or would you "
-"prefer to set up a rendez-vous via a waypoint? Either way, you will need "
-"%.1f reputation."
+"prefer to set up a rendezvous via a waypoint? Either way, you will need %.1f "
+"reputation."
 msgstr ""
 "Souhaitez-vous qu'une Jonque de service vienne directement à vous ou "
 "préférez-vous fixer un rendez-vous via un marqueur ? Dans tous les cas, vous "
@@ -2470,13 +2470,13 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:4794
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "Rendez-vous at waypoint %d"
+msgid "Rendezvous at waypoint %d"
 msgstr "Rendez-vous au marqueur %d."
 
 #: scripts/scenario_74_omicron.lua:4832
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "We have dispatched %s to rendez-vous at waypoint %d"
+msgid "We have dispatched %s to rendezvous at waypoint %d"
 msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au marqueur %d."
 
 #: scripts/scenario_74_omicron.lua:4858
@@ -3066,7 +3066,7 @@ msgstr "Nous aimerions vous aider, mais nous avons du mal à vous trouver"
 msgctxt "mission3th-comms"
 msgid "We're in sector %s. Please hurry, the Exuari look dangerous."
 msgstr ""
-"Nous sommes dans le secteur %s. Dépêchez-vous, les Exuari ont l'air "
+"Nous sommes dans le secteur %s. Dépêchez-vous, les Éxuaris ont l'air "
 "dangereux."
 
 #: scripts/scenario_74_omicron.lua:5002
@@ -4345,7 +4345,7 @@ msgstr ""
 "Salutations %s,\n"
 "\n"
 "Veuillez escorter immédiatement le cargo %s jusqu'à %s. Il semblerait que "
-"les Exuari envisagent de les attaquer."
+"les Éxuaris envisagent de les attaquer."
 
 #: scripts/scenario_74_omicron.lua:9481 scripts/scenario_74_omicron.lua:9531
 msgctxt "msgMainscreen"
@@ -4376,9 +4376,9 @@ msgstr ""
 "Salutation %s,\n"
 "\n"
 "Nos moteurs sont tombés en panne et la seule personne à bord qui puisse les "
-"réparer est bien trop malade pour travailler dessus. Pourriez-vous nous "
-"envoyer un de vos techniciens de réparation pour nous aider, s'il vous "
-"plaît ?"
+"réparer est bien trop malade pour travailler dessus.\n"
+"Pourriez-vous nous envoyer un de vos techniciens de réparation afin de nous "
+"aider, s'il vous plaît ?"
 
 #: scripts/scenario_74_omicron.lua:9499
 msgctxt "crewTransfer-buttonEngineer"
@@ -4687,7 +4687,7 @@ msgid ""
 "the Exuari plague station, %s."
 msgstr ""
 "[%s] Notre analyse de la télémétrie de routine de votre vaisseau nous "
-"indique que vous avez dépassé la station Exuari %s qui fabrique le virus de "
+"indique que vous avez dépassé la station Éxuarie %s qui fabrique le virus de "
 "la peste."
 
 #: scripts/scenario_74_omicron.lua:9925 scripts/scenario_74_omicron.lua:9927
