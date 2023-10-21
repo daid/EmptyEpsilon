@@ -22,11 +22,11 @@ static std::vector<std::pair<glm::ivec2, float>> astarGetNeighbors(glm::ivec2 po
     }
     for(auto& door : pathfind_rooms->doors) {
         if (door.horizontal) {
-            if (door.position == pos) result.push_back({pos + glm::ivec2{-1, 0}, 1.1f});
-            if (door.position == pos - glm::ivec2{1, 0}) result.push_back({pos + glm::ivec2{1, 0}, 1.1f});
-        } else {
             if (door.position == pos) result.push_back({pos + glm::ivec2{0, -1}, 1.1f});
-            if (door.position == pos - glm::ivec2{1, 0}) result.push_back({pos + glm::ivec2{0, 1}, 1.1f});
+            if (door.position == pos + glm::ivec2{0, 1}) result.push_back({pos + glm::ivec2{0, 1}, 1.1f});
+        } else {
+            if (door.position == pos) result.push_back({pos + glm::ivec2{-1, 0}, 1.1f});
+            if (door.position == pos + glm::ivec2{1, 0}) result.push_back({pos + glm::ivec2{1, 0}, 1.1f});
         }
     }
     return result;
