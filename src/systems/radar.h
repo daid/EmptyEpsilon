@@ -21,6 +21,7 @@ public:
             PRIO, FLAGS, rrif, [](sp::RenderTarget& renderer, void* interface) {
                 auto rr = reinterpret_cast<RenderRadarInterface<T, PRIO, FLAGS>*>(interface);
                 for(auto [entity, component, transform] : sp::ecs::Query<T, sp::Transform>()) {
+                    if (!visible_objects.has(entity.getIndex())) continue;
 
                     auto radar_position = rotateVec2((transform.getPosition() - view_position) * current_scale, current_rotation_offset);
                     radar_position += radar_screen_center;
@@ -33,12 +34,13 @@ public:
         });
     }
 
-    static void render(sp::RenderTarget& renderer, glm::vec2 _radar_screen_center, float scale, glm::vec2 _view_position, float view_rotation, int flags) {
+    static void render(sp::RenderTarget& renderer, glm::vec2 _radar_screen_center, float scale, glm::vec2 _view_position, float view_rotation, int flags, sp::Bitset _visible_objects) {
         radar_screen_center = _radar_screen_center;
         current_scale = scale;
         current_rotation_offset = -view_rotation;
         current_flags = flags;
         view_position = _view_position;
+        visible_objects = _visible_objects;
 
 
         for(auto& handler : handlers) {
@@ -57,6 +59,7 @@ private:
     static float current_rotation_offset;
     static glm::vec2 radar_screen_center;
     static glm::vec2 view_position;
+    static sp::Bitset visible_objects;
     struct Handler {
         int priority;
         int flags;

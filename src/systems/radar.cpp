@@ -9,6 +9,7 @@ float RadarRenderSystem::current_scale;
 float RadarRenderSystem::current_rotation_offset;
 glm::vec2 RadarRenderSystem::radar_screen_center;
 glm::vec2 RadarRenderSystem::view_position;
+sp::Bitset RadarRenderSystem::visible_objects;
 std::vector<RadarRenderSystem::Handler> RadarRenderSystem::handlers;
 
 

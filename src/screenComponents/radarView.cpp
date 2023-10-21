@@ -672,7 +672,7 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
     glm::vec2 radar_screen_center = rect.center();
 
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
-    RadarRenderSystem::render(renderer, radar_screen_center, scale, view_position, view_rotation, flags);
+    RadarRenderSystem::render(renderer, radar_screen_center, scale, view_position, view_rotation, flags, visible_objects);
 /*
     //TODO: Draw "on radar" explosions
 

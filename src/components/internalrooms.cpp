@@ -19,8 +19,8 @@ glm::ivec2 InternalRooms::roomMax()
         return {0, 0};
     auto max = rooms[0].position + rooms[0].size;
     for(const auto& r : rooms) {
-        max.x = std::min(max.x, r.position.x + r.size.x);
-        max.y = std::min(max.y, r.position.y + r.size.y);
+        max.x = std::max(max.x, r.position.x + r.size.x);
+        max.y = std::max(max.y, r.position.y + r.size.y);
     }
     return max;
 }
