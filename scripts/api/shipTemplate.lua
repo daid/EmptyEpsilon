@@ -153,7 +153,7 @@ end
 --- Example: template:setExternalDockClasses(_("class","Frigate"),_("class","Corvette")) -- all Frigate and Corvette ships can dock to the outside of this ShipTemplateBasedObject
 function ShipTemplate:setExternalDockClasses(...)
     if self.docking_bay == nil then self.docking_bay = {} end
-    --TODO
+    self.docking_bay.external_dock_classes = {...}
     return self
 end
 --- Defines a list of ship classes that can be docked inside of ShipTemplateBasedObjects created from this ShipTemplate.
@@ -162,7 +162,7 @@ end
 --- Example: template:setInternalDockClasses(_("class","Starfighter")) -- all Starfighter ships can dock inside of this ShipTemplateBasedObject
 function ShipTemplate:setInternalDockClasses(...)
     if self.docking_bay == nil then self.docking_bay = {} end
-    --TODO
+    self.docking_bay.internal_dock_classes = {...}
     return self
 end
 --- Sets the amount of energy available for PlayerSpaceships created from this ShipTemplate.

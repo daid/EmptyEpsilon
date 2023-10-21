@@ -320,6 +320,50 @@ void initComponentScriptBindings()
     BIND_MEMBER_FLAG(DockingBay, flags, "charge_shields", DockingBay::ChargeShield);
     BIND_MEMBER_FLAG(DockingBay, flags, "restock_probes", DockingBay::RestockProbes);
     BIND_MEMBER_FLAG(DockingBay, flags, "restock_missiles", DockingBay::RestockMissiles);
+    sp::script::ComponentHandler<DockingBay>::members["external_dock_classes"] = {
+        [](lua_State* L, const void* ptr) {
+            auto bay = reinterpret_cast<const DockingBay*>(ptr);
+            lua_createtable(L, bay->external_dock_classes.size(), 0);
+            int idx = 1;
+            for(const auto& c : bay->external_dock_classes) {
+                lua_pushstring(L, c.c_str());
+                lua_seti(L, -2, idx++);
+            }
+            return 1;
+        }, [](lua_State* L, void* ptr) {
+            auto p = reinterpret_cast<DockingBay*>(ptr);
+            p->external_dock_classes.clear();
+            if (lua_istable(L, -1)) {
+                for(int idx = 1; lua_geti(L, -1, idx); idx++) {
+                    p->external_dock_classes.insert(lua_tostring(L, -1));
+                    lua_pop(L, 1);
+                }
+                lua_pop(L, 1);
+            }
+        }
+    };
+    sp::script::ComponentHandler<DockingBay>::members["internal_dock_classes"] = {
+        [](lua_State* L, const void* ptr) {
+            auto bay = reinterpret_cast<const DockingBay*>(ptr);
+            lua_createtable(L, bay->internal_dock_classes.size(), 0);
+            int idx = 1;
+            for(const auto& c : bay->internal_dock_classes) {
+                lua_pushstring(L, c.c_str());
+                lua_seti(L, -2, idx++);
+            }
+            return 1;
+        }, [](lua_State* L, void* ptr) {
+            auto p = reinterpret_cast<DockingBay*>(ptr);
+            p->internal_dock_classes.clear();
+            if (lua_istable(L, -1)) {
+                for(int idx = 1; lua_geti(L, -1, idx); idx++) {
+                    p->internal_dock_classes.insert(lua_tostring(L, -1));
+                    lua_pop(L, 1);
+                }
+                lua_pop(L, 1);
+            }
+        }
+    };
 
     sp::script::ComponentHandler<BeamWeaponSys>::name("beam_weapons");
     BIND_SHIP_SYSTEM(BeamWeaponSys);
@@ -502,11 +546,18 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(InternalRooms, rooms, system);
     sp::script::ComponentHandler<InternalRooms>::members["doors"] = {
         [](lua_State* L, const void* ptr) {
-            auto t = reinterpret_cast<const InternalRooms*>(ptr); \
+            auto t = reinterpret_cast<const InternalRooms*>(ptr);
             lua_newtable(L);
-            return 1; // TODO: No getter for doors
+            for(size_t n=0; n<t->doors.size(); n++) {
+                lua_newtable(L);
+                lua_pushinteger(L, t->doors[n].position.x); lua_seti(L, -2, 1);
+                lua_pushinteger(L, t->doors[n].position.y); lua_seti(L, -2, 2);
+                lua_pushboolean(L, t->doors[n].horizontal); lua_seti(L, -2, 3);
+                lua_seti(L, -2, n+1);
+            }
+            return 1;
         }, [](lua_State* L, void* ptr) {
-            auto t = reinterpret_cast<InternalRooms*>(ptr); \
+            auto t = reinterpret_cast<InternalRooms*>(ptr);
             t->doors.clear();
             while(true) {
                 lua_geti(L, -1, t->doors.size() + 1);

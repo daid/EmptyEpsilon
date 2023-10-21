@@ -213,7 +213,7 @@ static int luaCreateAdditionalScript(lua_State* L)
     }
     lua_setmetatable(L, -2);
     gameGlobalInfo->additional_scripts.push_back(std::move(env));
-    return 0;
+    return 1;
 }
 
 void setupScriptEnvironment(sp::script::Environment& env)
