@@ -37,6 +37,7 @@ function ShipTemplate:__init__()
         max_size=1024,
         color_by_faction=true,
     }
+    self.__repair_crew_count = 3
 end
 
 --- Sets this ShipTemplate's unique reference name.

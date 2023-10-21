@@ -45,6 +45,13 @@ function Entity:setTemplate(template_name)
         end
         self.reactor.power_factor = reactor_power_factor
     end
+    if self.internal_rooms and template.__repair_crew_count and template.__repair_crew_count > 0 then
+        for n=1,template.__repair_crew_count do
+            local crew = createEntity()
+            crew.internal_crew = {ship=self}
+            crew.internal_repair_crew = {}
+        end
+    end
     return self
 end
 --- [DEPRECATED]

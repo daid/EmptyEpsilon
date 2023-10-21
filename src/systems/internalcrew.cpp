@@ -12,7 +12,7 @@ static InternalRooms* pathfind_rooms;
 static std::vector<std::pair<glm::ivec2, float>> astarGetNeighbors(glm::ivec2 pos) {
     std::vector<std::pair<glm::ivec2, float>> result;
     for(auto& room : pathfind_rooms->rooms) {
-        if (pos.x >= room.position.x && pos.x < room.position.x + room.size.x && pos.x >= room.position.x && pos.y < room.position.y + room.size.y) {
+        if (pos.x >= room.position.x && pos.x < room.position.x + room.size.x && pos.y >= room.position.y && pos.y < room.position.y + room.size.y) {
             if (pos.x > room.position.x) result.push_back({pos + glm::ivec2{-1, 0}, 1.0f});
             if (pos.x < room.position.x + room.size.x - 1) result.push_back({pos + glm::ivec2{1, 0}, 1.0f});
             if (pos.y > room.position.y) result.push_back({pos + glm::ivec2{0, -1}, 1.0f});

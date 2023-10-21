@@ -573,6 +573,15 @@ void initComponentScriptBindings()
             lua_pop(L, 1);
         }
     };
+    sp::script::ComponentHandler<InternalCrew>::name("internal_crew");
+    BIND_MEMBER(InternalCrew, move_speed);
+    BIND_MEMBER(InternalCrew, position);
+    BIND_MEMBER(InternalCrew, target_position);
+    //TODO: action, direction, action_delay
+    BIND_MEMBER(InternalCrew, ship);
+    sp::script::ComponentHandler<InternalRepairCrew>::name("internal_repair_crew");
+    BIND_MEMBER(InternalRepairCrew, repair_per_second);
+    BIND_MEMBER(InternalRepairCrew, unhack_per_second);
 
     sp::script::ComponentHandler<Database>::name("science_database");
     BIND_MEMBER(Database, name);

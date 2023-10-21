@@ -83,6 +83,7 @@ void GuiShipInternalView::onDraw(sp::RenderTarget& target)
                 crew_list.push_back(new GuiShipCrew(room_container, "CREW", entity, selected_crew_member, [this](sp::ecs::Entity crew_member){
                     selected_crew_member = crew_member;
                 }));
+                crew_list.back()->setSize(room_size, room_size);
             }
         }
         crew_list.erase(std::remove_if(crew_list.begin(), crew_list.end(), [](GuiShipCrew* cr) {

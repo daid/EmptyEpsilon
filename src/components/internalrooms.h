@@ -45,7 +45,7 @@ public:
     };
 
     float move_speed = 2.0f;
-    glm::vec2 position{0,0};
+    glm::vec2 position{-1,-1};
     glm::ivec2 target_position{0,0};
     Action action = Action::Idle;
     Direction direction = Direction::None;
