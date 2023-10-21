@@ -80,6 +80,162 @@ variation:addDoor(8, 4, false);
 --variation:addDoor(2, 2, false);
 --variation:addDoor(2, 5, false);
 
+template = ShipTemplate():setName("Atlantis MK2"):setLocaleName(_("playerShip", "Atlantis MK2")):setType("playership"):setClass(_("class", "Corvette"), _("subclass", "Destroyer")):setModel("battleship_destroyer_1_upgraded")
+template:setDescription(_("Improvements in weapons technology inspired the Atlantis Mark 2 design. Compared to the original Atlantis, this design adds two small forward HVLI tubes and converts a broadisde tube on each side to a large tube capable of firing HVLIs and Homing missiles. Two small beams were added to cover the rear. These primarily serve as fighter deterrents. The interior was rearranged to allow for more repair crew to access various ship systems."))
+template:setRadarTrace("dread.png")
+template:setHull(220)
+template:setShields(200, 200)
+template:setSpeed(90, 10, 20)
+template:setCombatManeuver(400, 250)
+template:setJumpDrive(true)
+--                  Arc, Dir,  Range,   CycleTime, Dmg
+template:setBeam(0,	100, -20,	1500,			6, 8)
+template:setBeam(1,	100,  20,	1500,			6, 8)
+template:setBeam(2,	 10,-125,	1000,			6, 4)
+template:setBeam(3,	 10, 125,	1000,			6, 4)
+--								Arc, Dir, Rotate speed
+template:setBeamWeaponTurret(2, 135,-125, 1)
+template:setBeamWeaponTurret(3, 135, 125, 1)
+template:setTubes(7, 8)
+template:setWeaponStorage("HVLI", 20)
+template:setWeaponStorage("Homing", 12)
+template:setWeaponStorage("Nuke", 4)
+template:setWeaponStorage("Mine", 8)
+template:setWeaponStorage("EMP", 6)
+template:setTubeDirection(0, -1):setTubeSize(0, "small"):setTubeLoadTime(0, 6):setWeaponTubeExclusiveFor(0,"HVLI")
+template:setTubeDirection(1,  1):setTubeSize(1, "small"):setTubeLoadTime(1, 6):setWeaponTubeExclusiveFor(1,"HVLI")
+template:setTubeDirection(2,-90):setTubeSize(2, "large"):setTubeLoadTime(2,12):setWeaponTubeExclusiveFor(2,"HVLI"):weaponTubeAllowMissle(2,"Homing")
+template:setTubeDirection(3,-90):setTubeSize(3,"medium"):setTubeLoadTime(3, 8):weaponTubeDisallowMissle(3, "Mine")
+template:setTubeDirection(4, 90):setTubeSize(4, "large"):setTubeLoadTime(4,12):setWeaponTubeExclusiveFor(4,"HVLI"):weaponTubeAllowMissle(4,"Homing")
+template:setTubeDirection(5, 90):setTubeSize(5,"medium"):setTubeLoadTime(5, 8):weaponTubeDisallowMissle(5, "Mine")
+template:setTubeDirection(6,180):setTubeSize(6,"medium"):setTubeLoadTime(6, 8):setWeaponTubeExclusiveFor(6,"Mine")
+
+template:setRepairCrewCount(5)
+template:addRoomSystem(0, 0, 4, 1, "Maneuver")
+template:addRoomSystem(0, 1, 2, 2, "Reactor")
+template:addRoomSystem(0, 3, 2, 2, "RearShield")
+template:addRoomSystem(0, 5, 2, 2, "Warp")
+template:addRoomSystem(0, 7, 4, 1, "Impulse")
+template:addRoomSystem(2, 2, 2, 4, "JumpDrive")
+template:addRoom(4, 3, 2, 1)
+template:addRoom(4, 4, 2, 1)
+template:addRoomSystem(6, 2, 3, 1, "BeamWeapons")
+template:addRoomSystem(6, 3, 2, 2, "FrontShield")
+template:addRoomSystem(6, 5, 3, 1, "MissileSystem")
+
+template:addDoor(1, 1, true)
+template:addDoor(0, 3, true)
+template:addDoor(0, 5, true)
+template:addDoor(1, 7, true)
+template:addDoor(2, 3, false)
+template:addDoor(4, 4, false)
+template:addDoor(4, 4, true)
+template:addDoor(6, 3, false)
+template:addDoor(7, 3, true)
+template:addDoor(7, 5, true)
+
+template = ShipTemplate():setName("Corsair DX"):setLocaleName(_("Corsair DX")):setClass(_("Corvette"), _("Destroyer")):setModel("battleship_destroyer_2_upgraded")
+template:setRadarTrace("corsair.png")
+template:setDescription(_([[The Corsair DX is designed to be an active guardian of capital ships and bases. The combination of jump drive, missiles and beams gives flexibility to the ways it can hunt down threats]]))
+template:setHull(100)
+template:setSpeed(60, 10, 20)
+template:setShields(150, 150, 150, 150)
+template:setJumpDrive(true)
+--                 Arc, Dir,  Range,  CycleTime, Dmg
+template:setBeam(0, 30, -10, 1500.0,		6.0, 6)
+template:setBeam(1, 30,  10, 1500.0,		6.0, 6)
+template:setBeam(2, 50, -20, 1300.0,		6.0, 6)
+template:setBeam(3, 50,  20, 1300.0,		6.0, 6)
+template:setBeam(4, 80, -30, 1100.0,		6.0, 6)
+template:setBeam(5, 80,  30, 1100.0,		6.0, 6)
+
+template:setTubes(7, 10)
+template:setWeaponTubeExclusiveFor(0, "HVLI")	--left, small, fast
+template:setWeaponTubeExclusiveFor(1, "HVLI")	--right, small, fast
+template:setWeaponTubeExclusiveFor(2, "EMP")	--left, small, fast
+template:setWeaponTubeExclusiveFor(3, "EMP")	--right, small, fast
+template:setWeaponTubeExclusiveFor(4, "Nuke")	--left
+template:setWeaponTubeExclusiveFor(5, "Nuke")	--right
+template:setWeaponTubeExclusiveFor(6, "Homing")	--rear, large, slow
+template:setTubeDirection(0, -90)
+template:setTubeDirection(1,  90)
+template:setTubeDirection(2, -90)
+template:setTubeDirection(3,  90)
+template:setTubeDirection(4, -90)
+template:setTubeDirection(5,  90)
+template:setTubeDirection(6, 180)
+template:setTubeLoadTime(0,6)				
+template:setTubeLoadTime(1,6)
+template:setTubeLoadTime(2,6)
+template:setTubeLoadTime(3,6)
+template:setTubeLoadTime(6,15)
+template:setTubeSize(0, "small")
+template:setTubeSize(1, "small")
+template:setTubeSize(2, "small")
+template:setTubeSize(3, "small")
+template:setTubeSize(6, "large")
+template:setWeaponStorage("HVLI", 16)
+template:setWeaponStorage("Homing", 6)
+template:setWeaponStorage("EMP", 6)
+template:setWeaponStorage("Nuke", 4)
+
+variation = template:copy("Corsair"):setLocaleName(_("Corsair")):setType("playership"):setClass(_("Corvette"), _("Destroyer"))
+variation:setHull(150)
+variation:setSpeed(95, 12, 30)
+variation:setShields(150, 150)
+variation:setCombatManeuver(400, 250)
+--                 Arc, Dir,  Range,  CycleTime, Dmg
+variation:setBeam(0, 60, -60, 1500.0,		6.0, 6)
+variation:setBeam(1, 60,  60, 1500.0,		6.0, 6)
+variation:setBeam(2, 30, -90, 1400.0,		6.0, 6)
+variation:setBeam(3, 30,  90, 1400.0,		6.0, 6)
+variation:setBeam(4, 60,-120, 1200.0,		6.0, 6)
+variation:setBeam(5, 60, 120, 1200.0,		6.0, 6)
+
+variation:setTubes(4, 8.0)
+variation:setWeaponTubeExclusiveFor(0, "HVLI")		--front, small, fast, HVLI
+variation:setWeaponTubeExclusiveFor(1, "EMP")		--front, EMP and Nuke
+variation:setWeaponTubeExclusiveFor(2, "Homing")	--rear, slow, large, Homing
+variation:setWeaponTubeExclusiveFor(3, "Mine")		--rear, even slower, Mine
+variation:weaponTubeAllowMissle(1, "Nuke")
+variation:setTubeDirection(0, 0)
+variation:setTubeDirection(1, 0)
+variation:setTubeDirection(2, 180)
+variation:setTubeDirection(3, 180)
+variation:setTubeLoadTime(0,5)
+variation:setTubeLoadTime(2,10)
+variation:setTubeLoadTime(3,12)
+variation:setTubeSize(0, "small")
+variation:setTubeSize(1, "medium")
+variation:setTubeSize(2, "large")
+variation:setTubeSize(3, "medium")
+variation:setWeaponStorage("Mine", 2)
+
+variation:setRepairCrewCount(4)
+--	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
+variation:addRoomSystem(0, 0, 3, 1, "Maneuver");
+variation:addRoomSystem(0, 1, 4, 2, "Impulse");
+variation:addRoomSystem(1, 3, 2, 2, "Warp");
+variation:addRoomSystem(0, 5, 4, 2, "JumpDrive");
+variation:addRoomSystem(0, 7, 3, 1, "RearShield");
+variation:addRoomSystem(3, 3, 2, 2, "BeamWeapons");
+variation:addRoomSystem(5, 3, 2, 2, "Reactor");
+variation:addRoomSystem(7, 3, 2, 2, "FrontShield");
+variation:addRoomSystem(6, 2, 2, 1, "MissileSystem");
+variation:addRoom(6, 5, 2, 1);
+
+--(H)oriz, (V)ert H, V, true = horizontal
+variation:addDoor(1, 1, true)
+variation:addDoor(3, 3, true)
+variation:addDoor(1, 3, true)
+variation:addDoor(2, 5, true)
+variation:addDoor(1, 7, true)
+variation:addDoor(5, 4, false)
+variation:addDoor(6, 5, true)
+variation:addDoor(7, 5, true)
+variation:addDoor(7, 3, true)
+
+
 template = ShipTemplate():setName("Starhammer II"):setLocaleName(_("ship", "Starhammer II")):setClass(_("class", "Corvette"), _("subclass", "Destroyer")):setModel("battleship_destroyer_4_upgraded")
 template:setDescription(_([[Contrary to its predecessor, the Starhammer II lives up to its name. By resolving the original Starhammer's power and heat management issues, the updated model makes for a phenomenal frontal assault ship. Its low speed makes it difficult to position, but when in the right place at the right time, even the strongest shields can't withstand a Starhammer's assault for long.]]))
 template:setRadarTrace("dread.png")
