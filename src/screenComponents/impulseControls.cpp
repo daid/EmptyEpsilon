@@ -36,7 +36,7 @@ void GuiImpulseControls::onUpdate()
     {
         const float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
         if (change != 0.0f)
-            my_spaceship->commandImpulse(std::clamp(-1.0f, 1.0f, slider->getValue() + change * 0.01f));
+            my_spaceship->commandImpulse(std::clamp(slider->getValue() + change * 0.01f, -1.0f, 1.0f));
         if (keys.helms_increase_impulse_1.getDown())
             my_spaceship->commandImpulse(std::min(1.0f, slider->getValue() + 0.01f));
         if (keys.helms_decrease_impulse_1.getDown())
