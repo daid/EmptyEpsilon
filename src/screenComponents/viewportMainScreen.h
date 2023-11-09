@@ -10,7 +10,7 @@ public:
 
     virtual void onDraw(sp::RenderTarget& target) override;
 
-    bool first_person = false;
+    bool first_person = true;
 
     constexpr static uint8_t flag_callsigns = 0x04;
     constexpr static uint8_t flag_headings  = 0x02;
