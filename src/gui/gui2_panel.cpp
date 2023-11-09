@@ -1,16 +1,20 @@
 #include "gui2_panel.h"
+#include "theme.h"
+
 
 GuiPanel::GuiPanel(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
+    style = theme->getStyle("panel");
 }
 
-void GuiPanel::onDraw(sf::RenderTarget& window)
+void GuiPanel::onDraw(sp::RenderTarget& renderer)
 {
-    drawStretchedHV(window, rect, 25.0f, "gui/PanelBackground");
+    const auto& s = style->get(getState());
+    renderer.drawStretchedHV(rect, s.size, s.texture, s.color);
 }
 
-bool GuiPanel::onMouseDown(sf::Vector2f position)
+bool GuiPanel::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     return true;
 }

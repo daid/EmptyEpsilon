@@ -12,16 +12,20 @@ public:
     int model_number;
 
     Asteroid();
-    
-    virtual void draw3D();
 
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
+    virtual void draw3D() override;
+
+    virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
     virtual void collide(Collisionable* target, float force) override;
-    
+
     void setSize(float size);
-    
-    virtual string getExportLine() { return "Asteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
+    float getSize();
+
+    virtual string getExportLine() override { return "Asteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + ":setSize(" + string(getSize(),0) + ")"; }
+
+protected:
+    glm::mat4 getModelMatrix() const override;
 };
 
 class VisualAsteroid : public SpaceObject
@@ -34,11 +38,15 @@ public:
 
     VisualAsteroid();
 
-    virtual void draw3D();
-    
-    void setSize(float size);
+    virtual void draw3D() override;
 
-    virtual string getExportLine() { return "VisualAsteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
+    void setSize(float size);
+    float getSize();
+
+    virtual string getExportLine() override { return "VisualAsteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" ":setSize(" + string(getSize(),0) + ")"; }
+
+protected:
+    glm::mat4 getModelMatrix() const override;
 };
 
 #endif//ASTEROID_H

@@ -1,0 +1,371 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+#: scripts/shiptemplates/stations.lua:5
+msgid "Small Station"
+msgstr "Stazione piccola"
+#: scripts/shiptemplates/stations.lua:6
+msgid ""
+"Stations of this size are often used as research outposts, listening "
+"stations, and security checkpoints. Crews turn over frequently in a small "
+"station's cramped accommodatations, but they are small enough to look like "
+"ships on many long-range sensors, and organized raiders sometimes take "
+"advantage of this by placing small stations in nebulae to serve as raiding "
+"bases. They are lightly shielded and vulnerable to swarming assaults."
+msgstr ""
+"Stazioni di queste dimensioni sono spesso utilizzate come avamposti di "
+"ricerca, stazioni di ascolto e checkpoint di sicurezza. Gli equipaggi si "
+"intercambiano spesso negli alloggi angusti delle stazioni piccole, ma esse "
+"sono abbastanza piccole da sembrare navi su molti sensori a lungo raggio e "
+"predoni organizzati a volte ne approfittano posizionando nelle nebulose "
+"stazioni piccole che fungono da basi per incursioni. Hanno scudi leggeri e "
+"sono vulnerabili ad assalti in gruppo."
+#: scripts/shiptemplates/stations.lua:11
+msgid "Medium Station"
+msgstr "Stazione media"
+#: scripts/shiptemplates/stations.lua:12
+msgid ""
+"Large enough to accommodate small crews for extended periods of times, "
+"stations of this size are often trading posts, refuelling bases, mining "
+"operations, and forward military bases. While their shields are strong, "
+"concerted attacks by many ships can bring them down quickly."
+msgstr ""
+"Abbastanza grandi da ospitare piccoli equipaggi per lunghi periodi di tempo, "
+"le stazioni di queste dimensioni sono spesso empori commerciali, basi di "
+"rifornimento, avamposti minerari e basi militari avanzate. Sebbene i loro "
+"scudi siano resistenti, gli attacchi combinati di molte navi possono "
+"abbatterli rapidamente."
+#: scripts/shiptemplates/stations.lua:17
+msgid "Large Station"
+msgstr "Stazione grande"
+#: scripts/shiptemplates/stations.lua:18
+msgid ""
+"These spaceborne communities often represent permanent bases in a sector. "
+"Stations of this size can be military installations, commercial hubs, deep-"
+"space settlements, and small shipyards. Only a concentrated attack can "
+"penetrate a large station's shields, and its hull can withstand all but the "
+"most powerful weaponry."
+msgstr ""
+"Queste comunità spaziali spesso rappresentano basi permanenti in un settore. "
+"Stazioni di queste dimensioni possono essere installazioni militari, snodi "
+"commerciali, insediamenti nello spazio profondo e piccoli cantieri navali. "
+"Solo un attacco concentrato può penetrare gli scudi di una stazione grande e "
+"il suo scafo può resistere a tutte le armi tranne le più potenti."
+#: scripts/shiptemplates/stations.lua:23
+msgid "Huge Station"
+msgstr "Stazione enorme"
+#: scripts/shiptemplates/stations.lua:24
+msgid ""
+"The size of a sprawling town, stations at this scale represent a faction's "
+"center of spaceborne power in a region. They serve many functions at once "
+"and represent an extensive investment of time, money, and labor. A huge "
+"station's shields and thick hull can keep it intact long enough for "
+"reinforcements to arrive, even when faced with an ongoing siege or massive, "
+"perfectly coordinated assault."
+msgstr ""
+"Delle dimensioni di un'estesa città, stazioni di questa scala sono il fulcro "
+"del potere spaziale di una fazione in una regione. Svolgono molte funzioni "
+"insieme e rappresentano un notevole investimento di tempo, denaro e lavoro. "
+"Gli scudi di una stazione enorme e lo spesso scafo possono mantenerla "
+"intatta abbastanza a lungo da far arrivare i rinforzi, anche di fronte ad un "
+"assedio in corso, o ad un massiccio assalto perfettamente coordinato."
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+# destroyer->incrociatore come hanno fatto per star wars
+# letteralmente sarebbe cacciatorpediniere
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy

@@ -1,0 +1,137 @@
+[base] {
+    font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
+    
+    [button] {
+        color: #ffffff
+        size: 30
+        [button.back] {
+            image: gui/widget/ButtonBackground.png
+            image.hover: gui/widget/ButtonBackground.hover.png
+            image.disabled: gui/widget/ButtonBackground.disabled.png
+            
+            [button.selfdestruct.back] {
+                color: #FF0000
+                color.disabled: #A08080
+            }
+            [button.toggle.off.back] {
+            }
+            [button.toggle.on.back] {
+                image: gui/widget/ButtonBackground.active.png
+                image.hover: gui/widget/ButtonBackground.active.png
+                image.disabled: gui/widget/ButtonBackground.active.png
+            }
+        }
+        [button.front] {
+            color.disabled: #FFFFFF4D
+
+            [button.selfdestruct.front] {
+                color: #FF0000
+                color.active: #120000
+                color.disabled: #FF00004D
+            }
+            [button.toggle.off.front] {
+            }
+            [button.toggle.on.front] {
+                color: #120A00
+            }
+        }
+        [button.arrow] {
+            image: gui/widget/SelectorArrow.png
+            color.hover: #CCCCCC
+            color.disabled: #FFFFFF4D
+        }
+    }
+    
+    [label] {
+        [label.back] {
+            image: gui/widget/LabelBackground.png
+        }
+    }
+    
+    [textentry] {
+        size: 30
+        [textentry.back] {
+            image: gui/widget/TextEntryBackground.png
+            image.focus: gui/widget/TextEntryBackground.focused.png
+        }
+    }
+    
+    [slider] {
+        [slider.back] {
+            size: 25
+            image: gui/widget/SliderBackground.png
+        }
+        [slider.tick] {
+            image: gui/widget/SliderTick.png
+        }
+        [slider.front] {
+            image: gui/widget/SliderKnob.png
+            color.disabled: #404040
+            color.hover: #CCCCCC
+        }
+    }
+    
+    [scrollbar] {
+        [scrollbar.back] {
+            image: gui/widget/ScrollbarBackground.png
+        }
+        [scrollbar.front] {
+            image: gui/widget/ScrollbarSelection.png
+            color.disabled: #404040
+            color.hover: #CCCCCC
+        }
+    }
+    
+    [panel] {
+        size: 25.0
+        image: gui/widget/PanelBackground.png
+    }
+    
+    [progressbar] {
+        [progressbar.back] {
+            image: gui/widget/ProgressbarBackground.png
+        }
+        [progressbar.front] {
+            size: 25
+            image: gui/widget/ProgressbarFill.png
+        }
+    }
+    
+    [keyvalue] {
+        [keyvalue.back] {
+            image: gui/widget/KeyValueBackground.png
+        }
+        [keyvalue.key] {
+        }
+        [keyvalue.value] {
+            font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+        }
+    }
+
+    [listbox] {
+        color: #ffffff
+        [listbox.back] {
+            image: gui/widget/ButtonBackground.png
+            image.hover: gui/widget/ButtonBackground.hover.png
+            image.disabled: gui/widget/ButtonBackground.disabled.png
+            
+            [listbox.selected.back] {
+                image: gui/widget/ButtonBackground.active.png
+                image.hover: gui/widget/ButtonBackground.active.png
+                image.disabled: gui/widget/ButtonBackground.active.png
+            }
+        }
+        [listbox.front] {
+            color.disabled: #FFFFFF4D
+
+            [listbox.selected.front] {
+                color: #120A00
+            }
+        }
+    }
+    
+    # Stronger font used at a few locations without UI widgets.
+    [bold] {
+        font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+    }
+}

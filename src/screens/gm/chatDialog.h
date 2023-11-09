@@ -13,7 +13,7 @@ class GameMasterChatDialog : public GuiResizableDialog
 public:
     GameMasterChatDialog(GuiContainer* owner, GuiRadarView* radar, int index);
 
-    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onDraw(sp::RenderTarget& target) override;
 private:
     int player_index;
     P<PlayerSpaceship> player;
@@ -23,12 +23,10 @@ private:
 
     GuiTextEntry* text_entry;
     GuiScrollText* chat_text;
-    
+
     void disableComms(string title);
-    
-    void onClose();
-    
-    void drawLine(sf::RenderTarget& window, sf::Vector2f target);
+
+    void onClose() override;
 };
 
 #endif//CHAT_DIALOG_H

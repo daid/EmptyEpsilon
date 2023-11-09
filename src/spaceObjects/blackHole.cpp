@@ -1,12 +1,28 @@
+#include <graphics/opengl.h>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "blackHole.h"
 #include "pathPlanner.h"
 #include "main.h"
-#include <SFML/OpenGL.hpp>
+#include "textureManager.h"
 
 #include "scriptInterface.h"
+#include "glObjects.h"
+#include "shaderRegistry.h"
 
-/// A blackhole has a 5km radius where it pulls in all near objects. At the center of the black hole everything gets a lot of damage.
-/// Which will lead to the eventual destruction of said object.
+
+struct VertexAndTexCoords
+{
+    glm::vec3 vertex;
+    glm::vec2 texcoords;
+};
+
+/// A BlackHole is a piece of space terrain that pulls all nearby SpaceObjects within a 5U radius, including otherwise immobile objects like SpaceStations, toward its center.
+/// A SpaceObject capable of taking damage is dealt an increasing amount of damage as it approaches the BlackHole's center.
+/// Upon reaching the center, any SpaceObject is instantly destroyed even if it's otherwise incapable of taking damage.
+/// AI behaviors avoid BlackHoles by a 2U margin.
+/// In 3D space, a BlackHole resembles a black sphere with blue horizon.
+/// Example: black_hole = BlackHole():setPosition(1000,2000)
 REGISTER_SCRIPT_SUBCLASS(BlackHole, SpaceObject)
 {
 }
@@ -25,63 +41,70 @@ void BlackHole::update(float delta)
     update_delta = delta;
 }
 
-#if FEATURE_3D_RENDERING
 void BlackHole::draw3DTransparent()
 {
-    float distance = sf::length(camera_position - sf::Vector3f(getPosition().x, getPosition().y, 0));
+    static std::array<VertexAndTexCoords, 4> quad{
+        glm::vec3{}, {0.f, 1.f},
+        glm::vec3{}, {1.f, 1.f},
+        glm::vec3{}, {1.f, 0.f},
+        glm::vec3{}, {0.f, 0.f}
+    };
+
+    textureManager.getTexture("blackHole3d.png")->bind();
+    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
+
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(getModelMatrix()));
+    glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 5000.f);
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("blackHole3d.png"));
-    sf::Shader::bind(ShaderManager::getShader("billboardShader"));
-    glColor4f(1, 1, 1, 5000.0);
-    glBegin(GL_QUADS);
-    glTexCoord2f(0, 0);
-    glVertex3f(0, 0, 0);
-    glTexCoord2f(1, 0);
-    glVertex3f(0, 0, 0);
-    glTexCoord2f(1, 1);
-    glVertex3f(0, 0, 0);
-    glTexCoord2f(0, 1);
-    glVertex3f(0, 0, 0);
-    glEnd();
+
+    glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+    glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+
+    std::initializer_list<uint16_t> indices = { 0, 2, 1, 0, 3, 2 };
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
     glBlendFunc(GL_ONE, GL_ONE);
 }
-#endif
 
-void BlackHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void BlackHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "blackHole.png");
-    object_sprite.setRotation(getRotation());
-    object_sprite.setPosition(position);
-    float size = getRadius() * scale / object_sprite.getTextureRect().width * 2;
-    object_sprite.setScale(size, size);
-    object_sprite.setColor(sf::Color(64, 64, 255));
-    window.draw(object_sprite);
-    object_sprite.setColor(sf::Color(0, 0, 0));
-    window.draw(object_sprite);
+    float size = getRadius() * scale * 2;
+    renderer.drawSprite("radar/blackHole.png", position, size, glm::u8vec4(64, 64, 255, 255));
+    renderer.drawSprite("radar/blackHole.png", position, size, glm::u8vec4(0, 0, 0, 255));
 }
 
 void BlackHole::collide(Collisionable* target, float collision_force)
 {
-    if (update_delta == 0.0)
+    if (update_delta == 0.0f)
         return;
 
-    sf::Vector2f diff = getPosition() - target->getPosition();
-    float distance = sf::length(diff);
+    P<SpaceObject> obj = P<Collisionable>(target);
+    if (!obj) return;
+    if (!obj->hasWeight()) { return; } // the object is not affected by gravitation
+
+    auto diff = getPosition() - target->getPosition();
+    float distance = glm::length(diff);
     float force = (getRadius() * getRadius() * 50.0f) / (distance * distance);
-    if (force > 10000.0)
-    {
-        force = 10000.0;
-        if (isServer())
-            target->destroy();
-    }
     DamageInfo info(NULL, DT_Kinetic, getPosition());
-    if (force > 100.0 && isServer())
+    if (force > 10000.0f)
     {
-        P<SpaceObject> obj = P<Collisionable>(target);
-        if (obj)
-            obj->takeDamage(force * update_delta / 10.0f, info);
+        force = 10000.0f;
+        if (isServer())
+        {
+            obj->takeDamage(100000.0, info); //try to destroy the object by inflicting a huge amount of damage
+            if (target)
+            {
+                target->destroy();
+                return;
+            }
+        }
     }
-    target->setPosition(target->getPosition() + diff / distance * update_delta * force);
+    if (force > 100.0f && isServer())
+    {
+        obj->takeDamage(force * update_delta / 10.0f, info);
+    }
+    if (!obj) {return;}
+    obj->setPosition(obj->getPosition() + diff / distance * update_delta * force);
 }

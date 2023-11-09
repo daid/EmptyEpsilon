@@ -1,7 +1,7 @@
 #ifndef GM_ACTIONS
 #define GM_ACTIONS
 
-#include "engine.h"
+#include "multiplayer.h"
 
 
 class GameMasterActions;
@@ -16,7 +16,7 @@ public:
 
     void commandRunScript(string code);
     void commandSendGlobalMessage(string message);
-    virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet);
+    virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
 };
 
 #endif//GM_ACTIONS

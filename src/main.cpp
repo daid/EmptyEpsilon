@@ -1,30 +1,51 @@
+#include <memory>
+#include <set>
+#include <filesystem>
 #include <string.h>
-#ifndef _MSC_VER
+#include <i18n.h>
+#include <multiplayer_proxy.h>
+#ifdef _MSC_VER
+#include <direct.h>
+#else
 #include <unistd.h>
 #include <sys/stat.h>
 #endif
 #include <sys/types.h>
+#include "textureManager.h"
+#include "soundManager.h"
+#include "graphics/freetypefont.h"
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
 #include "gui/colorConfig.h"
+#include "gui/theme.h"
 #include "gui/hotkeyConfig.h"
+#include "gui/joystickConfig.h"
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
 #include "menus/shipSelectionScreen.h"
-#include "mouseCalibrator.h"
+#include "menus/optionsMenu.h"
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
 #include "packResourceProvider.h"
-#include "scienceDatabase.h"
 #include "main.h"
 #include "epsilonServer.h"
 #include "httpScriptAccess.h"
 #include "preferenceManager.h"
 #include "networkRecorder.h"
 #include "tutorialGame.h"
+#include "windowManager.h"
+
+#include "graphics/opengl.h"
 
 #include "hardware/hardwareController.h"
+#if WITH_DISCORD
+#include "discord.h"
+#endif
+#if STEAMSDK
+#include "steam/steam_api.h"
+#include "steamrichpresence.h"
+#endif
 
 #ifdef __APPLE__
 #include <CoreFoundation/CoreFoundation.h>
@@ -32,18 +53,27 @@
 #include <libgen.h>
 #endif
 
-sf::Vector3f camera_position;
+#include "shaderRegistry.h"
+#include "glObjects.h"
+
+glm::vec3 camera_position;
 float camera_yaw;
 float camera_pitch;
-sf::Font* main_font;
-sf::Font* bold_font;
-RenderLayer* backgroundLayer;
-RenderLayer* objectLayer;
-RenderLayer* effectLayer;
-RenderLayer* hudLayer;
+sp::Font* main_font;
+sp::Font* bold_font;
 RenderLayer* mouseLayer;
 PostProcessor* glitchPostProcessor;
 PostProcessor* warpPostProcessor;
+PVector<Window> windows;
+std::vector<RenderLayer*> window_render_layers;
+
+#include "gui/layout/vertical.h"
+#include "gui/layout/horizontal.h"
+GUI_REGISTER_LAYOUT("default", GuiLayout);
+GUI_REGISTER_LAYOUT("vertical", GuiLayoutVertical);
+GUI_REGISTER_LAYOUT("verticalbottom", GuiLayoutVerticalBottom);
+GUI_REGISTER_LAYOUT("horizontal", GuiLayoutHorizontal);
+GUI_REGISTER_LAYOUT("horizontalright", GuiLayoutHorizontalRight);
 
 int main(int argc, char** argv)
 {
@@ -94,16 +124,23 @@ int main(int argc, char** argv)
 #else
     Logging::setLogLevel(LOGLEVEL_INFO);
 #endif
-#if defined(__WIN32__) && !defined(DEBUG)
+#if defined(_WIN32) && !defined(DEBUG)
     Logging::setLogFile("EmptyEpsilon.log");
 #endif
-#ifdef CONFIG_DIR
-    PreferencesManager::load(CONFIG_DIR "options.ini");
-#endif
+    LOG(Info, "Starting...");
+    new Engine();
+    string configuration_path = ".";
     if (getenv("HOME"))
-        PreferencesManager::load(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
-    else
-        PreferencesManager::load("options.ini");
+        configuration_path = string(getenv("HOME")) + "/.emptyepsilon";
+#ifdef STEAMSDK
+    {
+        char path_buffer[1024];
+        if (SteamUser()->GetUserDataFolder(path_buffer, sizeof(path_buffer)))
+            configuration_path = path_buffer;
+    }
+#endif
+    LOG(Info, "Using ", configuration_path, " as configuration path");
+    PreferencesManager::load(configuration_path + "/options.ini");
 
     for(int n=1; n<argc; n++)
     {
@@ -113,7 +150,28 @@ int main(int argc, char** argv)
         PreferencesManager::set(string(argv[n]).strip(), string(value).strip());
     }
 
-    new Engine();
+    if (PreferencesManager::get("proxy") != "")
+    {
+        int port = defaultServerPort;
+        string password = "";
+        int listenPort = defaultServerPort;
+        string proxyName = "";
+        auto parts = PreferencesManager::get("proxy").split(":");
+        string host = parts[0];
+        if (parts.size() > 1) port = parts[1].toInt();
+        if (parts.size() > 2) password = parts[2].upper();
+        if (parts.size() > 3) listenPort = parts[3].toInt();
+        if (parts.size() > 4) proxyName = parts[4];
+        if (host == "listen")
+            new GameServerProxy(password, listenPort, proxyName);
+        else
+            new GameServerProxy(host, port, password, listenPort, proxyName);
+        engine->runMainLoop();
+        return 0;
+    }
+
+    if (PreferencesManager::get("headless") != "")
+        textureManager.setDisabled(true);
 
     if (PreferencesManager::get("mod") != "")
     {
@@ -127,26 +185,23 @@ int main(int argc, char** argv)
         PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod);
     }
 
-#ifdef RESOURCE_BASE_DIR
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "packs/SolCommand/");
-    PackResourceProvider::addPackResourcesForDirectory(RESOURCE_BASE_DIR "packs");
-#endif
+    new DirectoryResourceProvider("resources/");
+    new DirectoryResourceProvider("scripts/");
+    PackResourceProvider::addPackResourcesForDirectory("packs/");
     if (getenv("HOME"))
     {
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/scripts/");
-        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
+        PackResourceProvider::addPackResourcesForDirectory(string(getenv("HOME")) + "/.emptyepsilon/packs/");
     }
-    new DirectoryResourceProvider("resources/");
-    new DirectoryResourceProvider("scripts/");
-    new DirectoryResourceProvider("packs/SolCommand/");
-    PackResourceProvider::addPackResourcesForDirectory("packs");
+#ifdef RESOURCE_BASE_DIR
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
+    PackResourceProvider::addPackResourcesForDirectory(RESOURCE_BASE_DIR "packs");
+#endif
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
-    textureManager.setAutoSprite(false);
-    textureManager.getTexture("Tokka_WalkingMan.png", sf::Vector2i(6, 1)); //Setup the sprite mapping.
+    i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
 
     if (PreferencesManager::get("httpserver").toInt() != 0)
     {
@@ -155,32 +210,46 @@ int main(int argc, char** argv)
             port_nr = 80;
         LOG(INFO) << "Enabling HTTP script access on port: " << port_nr;
         LOG(INFO) << "NOTE: This is potentially a risk!";
-        HttpServer* server = new HttpServer(port_nr);
-        server->addHandler(new HttpRequestFileHandler("www"));
-        server->addHandler(new HttpScriptHandler());
+        new EEHttpServer(port_nr, PreferencesManager::get("www_directory", "www"));
     }
 
     colorConfig.load();
-    hotkeys.load();
+    sp::io::Keybinding::loadKeybindings(configuration_path + "/keybindings.json");
+    keys.init();
+
+    if (PreferencesManager::get("username", "") == "")
+    {
+#ifdef STEAMSDK
+        PreferencesManager::set("username", SteamFriends()->GetPersonaName());
+#else
+        if (getenv("USERNAME"))
+            PreferencesManager::set("username", getenv("USERNAME"));
+        else if (getenv("USER"))
+            PreferencesManager::set("username", getenv("USER"));
+#endif
+    }
+
+    if (!GuiTheme::loadTheme("default", PreferencesManager::get("guitheme", "gui/default.theme.txt")))
+    {
+        LOG(ERROR, "Failed to load default theme, exiting.");
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing?", nullptr);
+        return 1;
+    }
 
     if (PreferencesManager::get("headless") == "")
     {
         //Setup the rendering layers.
-        backgroundLayer = new RenderLayer();
-        objectLayer = new RenderLayer(backgroundLayer);
-        effectLayer = new RenderLayer(objectLayer);
-        hudLayer = new RenderLayer(effectLayer);
-        mouseLayer = new RenderLayer(hudLayer);
-        glitchPostProcessor = new PostProcessor("glitch", mouseLayer);
+        defaultRenderLayer = new RenderLayer();
+        mouseLayer = new RenderLayer(defaultRenderLayer);
+        glitchPostProcessor = new PostProcessor("shaders/glitch", mouseLayer);
         glitchPostProcessor->enabled = false;
-        warpPostProcessor = new PostProcessor("warp", glitchPostProcessor);
+        warpPostProcessor = new PostProcessor("shaders/warp", glitchPostProcessor);
         warpPostProcessor->enabled = false;
-        defaultRenderLayer = objectLayer;
 
         int width = 1200;
         int height = 900;
         int fsaa = 0;
-        bool fullscreen = PreferencesManager::get("fullscreen", "1").toInt();
+        Window::Mode fullscreen = (Window::Mode)PreferencesManager::get("fullscreen", "1").toInt();
 
         if (PreferencesManager::get("fsaa").toInt() > 0)
         {
@@ -188,46 +257,84 @@ int main(int argc, char** argv)
             if (fsaa < 2)
                 fsaa = 2;
         }
-        P<WindowManager> window_manager = new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa);
-        window_manager->setAllowVirtualResize(true);
-        engine->registerObject("windowManager", window_manager);
-    }
-    if (PreferencesManager::get("touchscreen").toInt())
-    {
-        InputHandler::touch_screen = true;
-    }
-    if (!InputHandler::touch_screen)
-    {
-        engine->registerObject("mouseRenderer", new MouseRenderer());
-    }
 
-    new DebugRenderer();
-
-    if (PreferencesManager::get("touchcalibfile") != "")
-    {
-        FILE* f = fopen(PreferencesManager::get("touchcalibfile").c_str(), "r");
-        if (f)
+#ifndef ANDROID
+        if (PreferencesManager::get("touchscreen").toInt() == 0)
         {
-            float m[6];
-            if (fscanf(f, "%f %f %f %f %f %f", &m[0], &m[1], &m[2], &m[3], &m[4], &m[5]) == 6)
-                InputHandler::mouse_transform = sf::Transform(m[0], m[1], m[2], m[3], m[4], m[5], 0, 0, 1);
-            fclose(f);
+            engine->registerObject("mouseRenderer", new MouseRenderer(mouseLayer));
+        }
+#endif
+
+        windows.push_back(new Window({width, height}, fullscreen, warpPostProcessor, fsaa));
+        window_render_layers.push_back(defaultRenderLayer);
+
+        if (PreferencesManager::get("multimonitor", "0").toInt() != 0)
+        {
+            while(int(windows.size()) < SDL_GetNumVideoDisplays())
+            {
+                auto wrl = new RenderLayer();
+                auto ml = new RenderLayer(wrl);
+                new MouseRenderer(ml);
+                windows.push_back(new Window({width, height}, fullscreen, ml, fsaa));
+                window_render_layers.push_back(wrl);
+                new SecondMonitorScreen(windows.size() - 1);
+            }
+        }
+
+#if defined(DEBUG)
+        // Synchronous gl debug output always in debug.
+        constexpr bool wants_gl_debug = true;
+        constexpr bool wants_gl_debug_synchronous = true;
+#else
+        auto wants_gl_debug = !PreferencesManager::get("gl_debug").empty();
+        auto wants_gl_debug_synchronous = !PreferencesManager::get("gl_debug_synchronous").empty();
+#endif
+        if (wants_gl_debug)
+        {
+            if (sp::gl::enableDebugOutput(wants_gl_debug_synchronous))
+                LOG(INFO, "GL Debug output enabled.");
+            else
+                LOG(WARNING, "GL Debug output requested but not available on this system.");
+        }
+
+        for(size_t n=0; n<windows.size(); n++)
+        {
+            P<Window> window = windows[n];
+            string postfix = "";
+            if (n > 0)
+                postfix = " - " + string(int(n));
+            if (PreferencesManager::get("instance_name") != "")
+                window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name") + postfix);
+            else
+                window->setTitle("EmptyEpsilon" + postfix);
+        }
+
+        if (gl::isAvailable())
+        {
+            if (!ShaderRegistry::Shader::initialize())
+            {
+                LOG(ERROR, "Failed to initialize shaders, exiting.");
+                SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to initialize shaders (possible cause: cannot find shader files)", nullptr);
+                return 1;
+            }
         }
     }
+
+    new DebugRenderer(mouseLayer);
 
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
-    if (PreferencesManager::get("disable_shaders").toInt())
-        PostProcessor::setEnable(false);
+    main_font = GuiTheme::getTheme("default")->getStyle("base")->states[0].font;
+    bold_font = GuiTheme::getTheme("default")->getStyle("bold")->states[0].font;
+    if (!main_font || !bold_font)
+    {
+        LOG(ERROR, "Missing font or bold font.");
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load main or bold font, resources missing?", nullptr);
+        return 1;
+    }
 
-    P<ResourceStream> main_font_stream = getResourceStream("gui/fonts/BebasNeue Regular.otf");
-    main_font = new sf::Font();
-    main_font->loadFromStream(**main_font_stream);
-
-    P<ResourceStream> bold_font_stream = getResourceStream("gui/fonts/BebasNeue Bold.otf");
-    bold_font = new sf::Font();
-    bold_font->loadFromStream(**bold_font_stream);
+    sp::RenderTarget::setDefaultFont(main_font);
 
     {
         P<ScriptObject> modelDataScript = new ScriptObject("model_data.lua");
@@ -237,16 +344,6 @@ int main(int argc, char** argv)
         P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
         if (shipTemplatesScript->getError() != "") exit(1);
         shipTemplatesScript->destroy();
-
-        P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
-        if (factionInfoScript->getError() != "") exit(1);
-        factionInfoScript->destroy();
-
-        fillDefaultDatabaseData();
-
-        P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
-        if (scienceInfoScript->getError() != "") exit(1);
-        scienceInfoScript->destroy();
 
         //Find out which model data isn't used by ship templates and output that to log.
         std::set<string> used_model_data;
@@ -261,73 +358,106 @@ int main(int argc, char** argv)
         }
     }
 
-    P<HardwareController> hardware_controller = new HardwareController();
-#ifdef CONFIG_DIR
-    hardware_controller->loadConfiguration(CONFIG_DIR "hardware.ini");
+    // On Android, this requires the 'record audio' permissions,
+    // which is always a scary thing for users.
+    // Since there is no way to access it (yet) via a touchscreen, compile out.
+#if !defined(ANDROID)
+    // Set up voice chat and key bindings.
+    NetworkAudioRecorder* nar = new NetworkAudioRecorder();
+    nar->addKeyActivation(&keys.voice_all, 0);
+    nar->addKeyActivation(&keys.voice_ship, 1);
 #endif
-    if (getenv("HOME"))
-        hardware_controller->loadConfiguration(string(getenv("HOME")) + "/.emptyepsilon/hardware.ini");
-    else
-        hardware_controller->loadConfiguration("hardware.ini");
 
-    returnToMainMenu();
+    P<HardwareController> hardware_controller = new HardwareController();
+    hardware_controller->loadConfiguration(configuration_path + "/hardware.ini");
+
+#if WITH_DISCORD
+    {
+        std::filesystem::path discord_sdk
+        {
+#ifdef RESOURCE_BASE_DIR
+        RESOURCE_BASE_DIR
+#endif
+        };
+        discord_sdk /= std::filesystem::path{ "plugins" } / DynamicLibrary::add_native_suffix("discord_game_sdk");
+        new DiscordRichPresence(discord_sdk);
+    }
+#endif // WITH_DISCORD
+#if STEAMSDK
+    new SteamRichPresence();
+#endif //STEAMSDK
+
+    if (PreferencesManager::get("server_scenario") == "")
+        returnToMainMenu(defaultRenderLayer);
+    else
+    {
+        // server_scenario creates a server running the specified scenario
+        // using its defined default settings, and launches directly into
+        // the ship selection screen instead of the main menu.
+
+        // Create the server.
+        new EpsilonServer(defaultServerPort);
+
+        // Load the scenario and open the ship selection screen.
+        gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"));
+        new ShipSelectionScreen();
+    }
+
     engine->runMainLoop();
 
     // Set FSAA and fullscreen defaults from windowManager.
-    P<WindowManager> windowManager = engine->getObject("windowManager");
-    if (windowManager)
+    if (windows.size() > 0)
     {
-        PreferencesManager::set("fsaa", windowManager->getFSAA());
-        PreferencesManager::set("fullscreen", windowManager->isFullscreen() ? 1 : 0);
+        PreferencesManager::set("fsaa", windows[0]->getFSAA());
+        PreferencesManager::set("fullscreen", (int)windows[0]->getMode());
     }
 
-    // Set the default music_volume and sound_volume to the current volume.
+    // Set the default music_, sound_, and engine_volume to the current volume.
     PreferencesManager::set("music_volume", soundManager->getMusicVolume());
     PreferencesManager::set("sound_volume", soundManager->getMasterSoundVolume());
+    PreferencesManager::set("engine_volume", PreferencesManager::get("engine_volume", "50"));
 
-    // Enable music on the main screen only by default.
+    // Enable music and engine sounds on the main screen only by default.
     if (PreferencesManager::get("music_enabled").empty())
         PreferencesManager::set("music_enabled", "2");
 
-    // Set shaders to default.
-    PreferencesManager::set("disable_shaders", PostProcessor::isEnabled() ? 0 : 1);
+    if (PreferencesManager::get("engine_enabled").empty())
+        PreferencesManager::set("engine_enabled", "2");
 
     if (PreferencesManager::get("headless") == "")
     {
-#ifndef _MSC_VER
-		// MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
-        if (getenv("HOME"))
-        {
-#ifdef __WIN32__
-            mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
+#ifdef _WIN32
+        mkdir(configuration_path.c_str());
 #else
-            mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+        mkdir(configuration_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 #endif
-            PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
-        }else
-#endif
-		{
-            PreferencesManager::save("options.ini");
-        }
+        PreferencesManager::save(configuration_path + "/options.ini");
+        sp::io::Keybinding::saveKeybindings(configuration_path + "/keybindings.json");
     }
-
+    windows.clear();
     delete engine;
 
     return 0;
 }
 
-void returnToMainMenu()
+void returnToMainMenu(RenderLayer* render_layer)
 {
+    if (render_layer != defaultRenderLayer) // Handle secondary monitors
+    {
+        returnToShipSelection(render_layer);
+        return;
+    }
+
     if (PreferencesManager::get("headless") != "")
     {
-        new EpsilonServer();
+        new EpsilonServer(defaultServerPort);
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
-        if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password"));
-        if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer("http://daid.eu/ee/register.php");
-        if (PreferencesManager::get("variation") != "") gameGlobalInfo->variation = PreferencesManager::get("variation");
+        if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
+        if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
         gameGlobalInfo->startScenario(PreferencesManager::get("headless"));
 
-        engine->setGameSpeed(1.0);
+        if (PreferencesManager::get("startpaused") != "1")
+            engine->setGameSpeed(1.0);
     }
     else if (PreferencesManager::get("autoconnect").toInt())
     {
@@ -335,10 +465,6 @@ void returnToMainMenu()
         if (crew_position < 0) crew_position = 0;
         if (crew_position > max_crew_positions) crew_position = max_crew_positions;
         new AutoConnectScreen(ECrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
-    }
-    else if (PreferencesManager::get("touchcalib").toInt())
-    {
-        new MouseCalibrator(PreferencesManager::get("touchcalibfile"));
     }
     else if (PreferencesManager::get("tutorial").toInt())
     {
@@ -348,15 +474,27 @@ void returnToMainMenu()
     }
 }
 
-void returnToShipSelection()
+void returnToShipSelection(RenderLayer* render_layer)
 {
-    if (PreferencesManager::get("autoconnect").toInt())
+    if (render_layer != defaultRenderLayer)
     {
-        //If we are auto connect, return to the auto connect screen instead of the ship selection. The returnToMainMenu will handle this.
-        returnToMainMenu();
+        for(size_t n=0; n<window_render_layers.size(); n++)
+            if (window_render_layers[n] == render_layer)
+                new SecondMonitorScreen(n);
+    } else {
+        if (PreferencesManager::get("autoconnect").toInt())
+        {
+            //If we are auto connect, return to the auto connect screen instead of the ship selection. The returnToMainMenu will handle this.
+            returnToMainMenu(render_layer);
+        }
+        else
+        {
+            new ShipSelectionScreen();
+        }
     }
-    else
-    {
-        new ShipSelectionScreen();
-    }
+}
+
+void returnToOptionMenu()
+{
+    new OptionsMenu();
 }

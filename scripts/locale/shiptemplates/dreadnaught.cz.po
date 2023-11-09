@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: EmptyEpsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: hemmond\n"
+"Language: cs_CZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.0\n"
+#: scripts/shiptemplates/dreadnaught.lua:9
+msgctxt "ship"
+msgid "Odin"
+msgstr ""
+#: scripts/shiptemplates/dreadnaught.lua:9
+msgctxt "class"
+msgid "Dreadnought"
+msgstr ""
+#: scripts/shiptemplates/dreadnaught.lua:9
+msgctxt "subclass"
+msgid "Odin"
+msgstr ""
+#: scripts/shiptemplates/dreadnaught.lua:11
+msgid ""
+"The Odin is a \"ship\" so large and unique that it's almost a class of its "
+"own.\n"
+"\n"
+"The ship is often nicknamed the \"all-father\", a name that aptly describes "
+"the many roles this ship can fulfill. It's both a supply station and an "
+"extremely heavily armored and shielded weapon station capable of "
+"annihilating small fleets on its own.\n"
+"\n"
+"Odin's core contains the largest jump drive ever created. About 150 support "
+"crew are needed to operate the jump drive alone, and it takes 5 days of "
+"continuous operation to power it.\n"
+"\n"
+"Due to the enormous cost of this Dreadnought, only the richest star systems "
+"are able to build and maintain ships like the Odin.\n"
+"\n"
+"This machine's primary tactic is to jump into an unsuspecting enemy system "
+"and destroy everything before they know what hit them. It's effective and "
+"destructive, but extremely expensive."
+msgstr ""
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+# Pozemske Hvezdne Namornictvo
+# Spojene Hvezdne Namornictvo
+# Nebeska Sopojena Flotila

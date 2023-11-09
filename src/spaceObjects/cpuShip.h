@@ -8,6 +8,7 @@ enum EAIOrder
 {
     AI_Idle,            //Don't do anything, don't even attack.
     AI_Roaming,         //Fly around and engage at will, without a clear target
+    AI_Retreat,         //Dock on [order_target] that can restore our weapons. Find one if neccessary. Continue roaming after our missiles are restocked, or no target is found.
     AI_StandGround,     //Keep current position, do not fly away, but attack nearby targets.
     AI_DefendLocation,  //Defend against enemies getting close to [order_target_location]
     AI_DefendTarget,    //Defend against enemies getting close to [order_target] (falls back to AI_Roaming if the target is destroyed)
@@ -26,7 +27,7 @@ class CpuShip : public SpaceShip
     static constexpr float missile_resupply_time = 10.0f;
 
     EAIOrder orders;                    //Server only
-    sf::Vector2f order_target_location; //Server only
+    glm::vec2 order_target_location{};  //Server only
     P<SpaceObject> order_target;        //Server only
     ShipAI* ai;
 
@@ -41,21 +42,22 @@ public:
 
     void orderIdle();
     void orderRoaming();
-    void orderRoamingAt(sf::Vector2f position);
+    void orderRoamingAt(glm::vec2 position);
+    void orderRetreat(P<SpaceObject> object);
     void orderStandGround();
-    void orderDefendLocation(sf::Vector2f position);
+    void orderDefendLocation(glm::vec2 position);
     void orderDefendTarget(P<SpaceObject> object);
-    void orderFlyFormation(P<SpaceObject> object, sf::Vector2f offset);
-    void orderFlyTowards(sf::Vector2f target);
-    void orderFlyTowardsBlind(sf::Vector2f target);
+    void orderFlyFormation(P<SpaceObject> object, glm::vec2 offset);
+    void orderFlyTowards(glm::vec2 target);
+    void orderFlyTowardsBlind(glm::vec2 target);
     void orderAttack(P<SpaceObject> object);
     void orderDock(P<SpaceObject> object);
 
     EAIOrder getOrder() { return orders; }
-    sf::Vector2f getOrderTargetLocation() { return order_target_location; }
+    glm::vec2 getOrderTargetLocation() { return order_target_location; }
     P<SpaceObject> getOrderTarget() { return order_target; }
 
-    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+    virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual std::unordered_map<string, string> getGMInfo() override;
 
     virtual string getExportLine() override;
@@ -63,6 +65,7 @@ public:
     float missile_resupply;
 };
 string getAIOrderString(EAIOrder order);
+string getLocaleAIOrderString(EAIOrder order);
 
 template<> int convert<EAIOrder>::returnType(lua_State* L, EAIOrder o);
 

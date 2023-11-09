@@ -1,0 +1,367 @@
+#: scripts/shiptemplates/frigates.lua:14
+msgctxt "ship"
+msgid "Phobos T3"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:14 scripts/shiptemplates/frigates.lua:87
+#: scripts/shiptemplates/frigates.lua:116
+#: scripts/shiptemplates/frigates.lua:133
+#: scripts/shiptemplates/frigates.lua:179
+#: scripts/shiptemplates/frigates.lua:272
+#: scripts/shiptemplates/frigates.lua:299
+#: scripts/shiptemplates/frigates.lua:312
+#: scripts/shiptemplates/frigates.lua:369
+#: scripts/shiptemplates/frigates.lua:414
+msgctxt "class"
+msgid "Frigate"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:14
+msgctxt "subclass"
+msgid "Cruiser"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:16
+msgid ""
+"The Phobos T3, just like the Atlantis, is the workhorse of almost any navy. "
+"It's extremely easy to modify, which makes retro-fitting this ship a breeze. "
+"Its basic stats aren't impressive, but due to its modular nature, it's "
+"fairly easy to produce in large quantities."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:28
+msgctxt "ship"
+msgid "Elara P2"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:29
+msgid ""
+"Inspired by the Phobos T3 design, the Elara P2 is nearly identical. With the "
+"addition of a warp drive and stronger front shields, the Elara P2 poses a "
+"greater threat than the Phobos"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:33
+msgctxt "ship"
+msgid "Phobos M3"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:34
+msgid ""
+"The Phobos M3 is one of the most common variants of the Phobos T3. It adds a "
+"mine-laying tube, but the extra storage required for the mines slows this "
+"ship down slightly."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:41
+msgctxt "playerShip"
+msgid "Phobos M3P"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:42
+msgid ""
+"Player variant of the Phobos M3, not as strong as the atlantis, but has "
+"front firing tubes, making it an easier to use ship in some scenarios."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:87
+msgctxt "ship"
+msgid "Nirvana R5"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:87
+msgctxt "subclass"
+msgid "Cruiser: Anti-fighter"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:89
+msgid ""
+"The Nirvana R5 is an anti-fighter cruiser. It has several rapid-firing, low-"
+"damage point-defense weapons to quickly take out starfighters."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:98
+msgctxt "ship"
+msgid "Nirvana R5A"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:99
+msgid ""
+"An improved version of the Nirvana R5 with faster turning speed and firing "
+"rates."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:106
+msgctxt "ship"
+msgid "Nirvana R3"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:107
+msgid ""
+"One of the earliest mass produced Nirvana models, the Nirvana R3 is designed "
+"to be used against fighters. It's got several fast, low damage, point "
+"defense beam weapons. Compared to the later, more common Nirvana R5, it has "
+"shorter beams, weaker shields and hull and a slower impulse drive."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:116
+msgctxt "ship"
+msgid "Storm"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:116
+msgctxt "subclass"
+msgid "Cruiser: Heavy Artillery"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:118
+msgid ""
+"A heavy artillery cruiser, the Storm fires bunches of missiles from forward "
+"facing tubes."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:133
+msgctxt "playerShip"
+msgid "Hathcock"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:133
+#: scripts/shiptemplates/frigates.lua:299
+msgctxt "subclass"
+msgid "Cruiser: Sniper"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:135
+msgid ""
+"Long range narrow beam and some point defense beams, broadside missiles. "
+"Agile for a frigate"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:179
+msgctxt "ship"
+msgid "Piranha F12"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:179
+msgctxt "subclass"
+msgid "Cruiser: Light Artillery"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:181
+msgid ""
+"A light artillery cruiser, the Piranha F12 is the smallest ship to "
+"exclusively fire from broadside weapon tubes."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:201
+msgctxt "ship"
+msgid "Piranha F12.M"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:202
+msgid ""
+"This modified Piranha F12 is in all respects the same vessel except for "
+"special weapon tube modifications that allow it to fire nukes in addition to "
+"its normal loadout. However, these changes reduce its overall missile "
+"storage capacity."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:207
+msgctxt "ship"
+msgid "Piranha F8"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:208
+msgid ""
+"The first version of the Piranha was not popular due to its meager firepower "
+"and odd tube configuration. The result was a huge financial failure."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:216
+msgctxt "playerShip"
+msgid "Piranha"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:217
+msgid ""
+"This combat-specialized Piranha F12 adds mine-laying tubes, combat "
+"maneuvering systems, and a jump drive."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:272
+msgctxt "ship"
+msgid "Stalker Q7"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:272
+msgctxt "subclass"
+msgid "Cruiser: Strike ship"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:274
+msgid ""
+"The Stalker is a strike ship designed to swoop into battle, deal damage "
+"quickly, and get out fast. The Q7 model is fitted with a warp drive."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:282
+msgctxt "ship"
+msgid "Stalker Q5"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:283
+msgid ""
+"The stalker Q5 predates the Stalker Q7. Like the Q7, the Q5 is designed to "
+"swoop into battle, deal damage quickly and retreat. Compared to the Q7, the "
+"Q5 has weaker shields and hull, but a faster turn speed"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:288
+msgctxt "ship"
+msgid "Stalker R7"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:289
+msgid ""
+"The Stalker is a strike ship designed to swoop into battle, deal damage "
+"quickly, and get out fast. The R7 model is fitted with a jump drive."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:293
+msgctxt "ship"
+msgid "Stalker R5"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:294
+msgid ""
+"The stalker R5 predates the Stalker R7. Like the R7, the R5 is designed to "
+"swoop into battle, deal damage quickly and retreat. Compared to the R7, the "
+"R5 has weaker shields and hull, but a faster turn speed"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:299
+msgctxt "ship"
+msgid "Ranus U"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:301
+msgid ""
+"The Ranus U sniper is built to deal a large amounts of damage quickly and "
+"from a distance before escaping. It's the only basic frigate that carries "
+"nuclear weapons, even though it's also the smallest of all frigate-class "
+"ships."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:312
+msgctxt "ship"
+msgid "Flavia"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:312
+msgctxt "subclass"
+msgid "Light transport"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:314
+msgid ""
+"Popular among traders and smugglers, the Flavia is a small cargo and "
+"passenger transport. It's cheaper than a freighter for small loads and short "
+"distances, and is often used to carry high-value cargo discreetly."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:319
+msgctxt "ship"
+msgid "Flavia Falcon"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:320
+msgid ""
+"The Flavia Falcon is a Flavia transport modified for faster flight, and adds "
+"rear-mounted lasers to keep enemies off its back."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:325
+msgctxt "playerShip"
+msgid "Flavia P.Falcon"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:326
+msgid ""
+"The Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp "
+"drive."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:369
+msgctxt "playerShip"
+msgid "Repulse"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:369
+msgctxt "subclass"
+msgid "Armored Transport"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:371
+msgid "Jump/Turret version of Flavia Falcon"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:414
+msgctxt "ship"
+msgid "Fiend G3"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:414
+msgctxt "subclass"
+msgid "Gunship"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:416
+msgid ""
+"The Fiend G3 was the first model produced by Conversions R Us. They got a "
+"good deal on a number of used Gunships. They added a cheap jump drive to the "
+"Gunship and viola! they made the Fiend G3. Like the Gunship, it has a homing "
+"missile tube and beams to readily take down weaker ships. With the jump "
+"drive, it becomes quite a bit more dangerous than the stock Gunship."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:428
+msgctxt "ship"
+msgid "Fiend G4"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:429
+msgid ""
+"The Fiend G4 was among the first models produced by Conversions R Us. They "
+"got a good deal on a number of used Gunships. They added a cheap warp drive "
+"to the Gunship and viola! they made the Fiend G4. Like the Gunship, it has a "
+"homing missile tube and beams to readily take down weaker ships. With the "
+"warp drive, it becomes quite a bit more dangerous than the stock Gunship."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:433
+msgctxt "ship"
+msgid "Fiend G6"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:434
+msgid ""
+"With the success of the Fiend G3 and G4 models, Conversions R Us continued "
+"their streak with the Fiend G6. They acquired some used Advanced Gunships "
+"and added cheap warp drives to them and made the Fiend G6. Like the Advanced "
+"Gunship, it has two homing missile tubes and beams to readily take down "
+"weaker ships. The warp drive makes it all the more dangerous."
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:437
+msgctxt "ship"
+msgid "Fiend G5"
+msgstr ""
+
+#: scripts/shiptemplates/frigates.lua:438
+msgid ""
+"With the success of the Fiend G3 and G4 models, Conversions R Us continued "
+"their streak with the Fiend G5. They acquired some used Advanced Gunships "
+"and added cheap jump drives to them and made the Fiend G5. Like the Advanced "
+"Gunship, it has two homing missile tubes and beams to readily take down "
+"weaker ships. The jump drive makes it all the more dangerous."
+msgstr ""

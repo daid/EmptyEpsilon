@@ -1,6 +1,7 @@
 #include "spaceObjects/cpuShip.h"
 #include "ai/fighterAI.h"
 #include "ai/aiFactory.h"
+#include "random.h"
 
 
 REGISTER_SHIP_AI(FighterAI, "fighter");
@@ -25,22 +26,22 @@ bool FighterAI::canSwitchAI()
 
 void FighterAI::run(float delta)
 {
-    if (timeout > 0.0)
+    if (timeout > 0.0f)
         timeout -= delta;
     ShipAI::run(delta);
 }
 
 void FighterAI::runOrders()
 {
-    if (aggression > 0.5)
+    if (aggression > 0.5f)
         aggression -= random(0.0, 0.25);
     ShipAI::runOrders();
 }
 
 void FighterAI::runAttack(P<SpaceObject> target)
 {
-    sf::Vector2f position_diff = target->getPosition() - owner->getPosition();
-    float distance = sf::length(position_diff);
+    auto position_diff = target->getPosition() - owner->getPosition();
+    float distance = glm::length(position_diff);
 
     switch(attack_state)
     {
@@ -49,13 +50,13 @@ void FighterAI::runAttack(P<SpaceObject> target)
         {
             for(int n=0; n<owner->weapon_tube_count; n++)
             {
-                if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.0)
+                if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.0f)
                 {
                     float target_angle = calculateFiringSolution(target, owner->weapon_tube[n].getLoadType());
                     if (target_angle != std::numeric_limits<float>::infinity())
                     {
                         owner->weapon_tube[n].fire(target_angle);
-                        missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0;
+                        missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0f;
                     }
                 }
             }
@@ -66,12 +67,12 @@ void FighterAI::runAttack(P<SpaceObject> target)
         if (distance < 500 + target->getRadius())
         {
             aggression += random(0, 0.05);
-            
+
             attack_state = evade;
             timeout = 30.0f - std::min(aggression, 1.0f) * 20.0f;
 
-            float target_dir = sf::vector2ToAngle(position_diff);
-            float a_diff = sf::angleDifference(target_dir, owner->getRotation());
+            float target_dir = vec2ToAngle(position_diff);
+            float a_diff = angleDifference(target_dir, owner->getRotation());
             if (a_diff < 0)
                 evade_direction = target_dir - random(25, 40);
             else
@@ -85,7 +86,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
         }
         break;
     case evade:
-        if (distance > 2000 + target->getRadius() || timeout <= 0.0)
+        if (distance > 2000 + target->getRadius() || timeout <= 0.0f)
         {
             attack_state = dive;
         }
@@ -96,13 +97,13 @@ void FighterAI::runAttack(P<SpaceObject> target)
         }
         break;
     case recharge:
-        if (owner->shield_level[0] > owner->shield_max[0] * 0.9 || timeout <= 0.0)
+        if (owner->shield_level[0] > owner->shield_max[0] * 0.9f || timeout <= 0.0f)
         {
             attack_state = dive;
         }else{
-            sf::Vector2f target_position = target->getPosition();
-            float circle_distance = 2000.0f + target->getRadius() * 2.0 + owner->getRadius() * 2.0;
-            target_position += sf::vector2FromAngle(sf::vector2ToAngle(target_position - owner->getPosition()) + 170.0f) * circle_distance;
+            auto target_position = target->getPosition();
+            float circle_distance = 2000.0f + target->getRadius() * 2.0f + owner->getRadius() * 2.0f;
+            target_position += vec2FromAngle(vec2ToAngle(target_position - owner->getPosition()) + 170.0f) * circle_distance;
             flyTowards(target_position);
         }
         break;

@@ -4,8 +4,11 @@
 #include "epsilonServer.h"
 #include "gameGlobalInfo.h"
 #include "playerInfo.h"
+#include "multiplayer_client.h"
+#include "multiplayer_server_scanner.h"
 
 #include "gui/gui2_label.h"
+
 
 AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen, string ship_filter)
 : crew_position(crew_position), control_main_screen(control_main_screen)
@@ -15,16 +18,16 @@ AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_m
         scanner = new ServerScanner(VERSION_NUMBER);
         scanner->scanLocalNetwork();
     }
-    
+
     status_label = new GuiLabel(this, "STATUS", "Searching for server...", 50);
-    status_label->setPosition(0, 300, ATopCenter)->setSize(0, 50);
+    status_label->setPosition(0, 300, sp::Alignment::TopCenter)->setSize(0, 50);
 
     string position_name = "Main screen";
     if (crew_position < max_crew_positions)
         position_name = getCrewPositionName(crew_position);
 
-    (new GuiLabel(this, "POSITION", position_name, 50))->setPosition(0, 400, ATopCenter)->setSize(0, 30);
-    
+    (new GuiLabel(this, "POSITION", position_name, 50))->setPosition(0, 400, sp::Alignment::TopCenter)->setSize(0, 30);
+
     for(string filter : ship_filter.split(";"))
     {
         std::vector<string> key_value = filter.split("=", 1);
@@ -41,7 +44,7 @@ AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_m
 
     if (PreferencesManager::get("instance_name") != "")
     {
-        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25))->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(0, 18);
+        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25))->setAlignment(sp::Alignment::CenterLeft)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(0, 18);
     }
 }
 
@@ -56,23 +59,30 @@ void AutoConnectScreen::update(float delta)
     if (scanner)
     {
         std::vector<ServerScanner::ServerInfo> serverList = scanner->getServerList();
+        string autoconnect_address = PreferencesManager::get("autoconnect_address", "");
 
-        if (serverList.size() > 0)
-        {
+        if (autoconnect_address != "") {
+            status_label->setText("Using autoconnect server " + autoconnect_address);
+            connect_to_address = autoconnect_address;
+            new GameClient(VERSION_NUMBER, autoconnect_address);
+            scanner->destroy();
+        } else if (serverList.size() > 0) {
             status_label->setText("Found server " + serverList[0].name);
             connect_to_address = serverList[0].address;
             new GameClient(VERSION_NUMBER, serverList[0].address);
             scanner->destroy();
-        }else{
+        } else {
             status_label->setText("Searching for server...");
         }
     }else{
         switch(game_client->getStatus())
         {
-        case GameClient::ReadyToConnect:
         case GameClient::Connecting:
         case GameClient::Authenticating:
-            status_label->setText("Connecting: " + connect_to_address.toString());
+            if (!connect_to_address.getHumanReadable().empty())
+                status_label->setText("Connecting: " + connect_to_address.getHumanReadable()[0]);
+            else
+                status_label->setText("Connecting...");
             break;
         case GameClient::WaitingForPassword: //For now, just disconnect when we found a password protected server.
         case GameClient::Disconnected:
@@ -88,7 +98,11 @@ void AutoConnectScreen::update(float delta)
                         my_player_info = i;
                 if (my_player_info && gameGlobalInfo)
                 {
-                    status_label->setText("Waiting for ship...");
+                    my_player_info->commandSetName(PreferencesManager::get("username"));
+                    if (!connect_to_address.getHumanReadable().empty())
+                        status_label->setText("Waiting for ship on " + connect_to_address.getHumanReadable()[0] + "...");
+                    else
+                        status_label->setText("Waiting for ship...");
                     if (!my_spaceship)
                     {
                         for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
@@ -99,11 +113,11 @@ void AutoConnectScreen::update(float delta)
                                 break;
                             }
                         }
-                    }else{
+                    } else {
                         if (my_spaceship->getMultiplayerId() == my_player_info->ship_id && (crew_position == max_crew_positions || my_player_info->crew_position[crew_position]))
                         {
                             destroy();
-                            my_player_info->spawnUI();
+                            my_player_info->spawnUI(0, getRenderLayer());
                         }
                     }
                 }else{
@@ -167,8 +181,10 @@ void AutoConnectScreen::connectToShip(int index)
 
     if (crew_position != max_crew_positions)    //If we are not the main screen, setup the right crew position.
     {
-        my_player_info->commandSetCrewPosition(crew_position, true);
-        my_player_info->commandSetMainScreenControl(control_main_screen);
+        my_player_info->commandSetCrewPosition(0, crew_position, true);
+        my_player_info->commandSetMainScreenControl(0, control_main_screen);
+    } else {
+        my_player_info->commandSetMainScreen(0, true);
     }
     my_player_info->commandSetShipId(ship->getMultiplayerId());
 }

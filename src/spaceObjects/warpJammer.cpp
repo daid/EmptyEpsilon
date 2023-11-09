@@ -5,14 +5,37 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+
+/// A WarpJammer restricts the ability of any SpaceShips to use warp or jump drives within its radius.
+/// WarpJammers can be targeted, damaged, and destroyed.
+/// Example: jammer = WarpJammer():setPosition(1000,1000):setRange(10000):setHull(20)
 REGISTER_SCRIPT_SUBCLASS(WarpJammer, SpaceObject)
 {
+    /// Returns this WarpJammer's jamming range, represented on radar as a circle with jammer in the middle.
+    /// No warp/jump travel is possible within this radius.
+    /// Example: jammer:getRange()
+    REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, getRange);
+    /// Sets this WarpJammer's jamming radius.
+    /// No warp/jump travel is possible within this radius.
+    /// Defaults to 7000.0.
+    /// Example: jammer:setRange(10000) -- sets a 10U jamming radius 
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, setRange);
-    /// Set a function that will be called if the warp jammer is taking damage.
-    /// First argument given to the function will be the warp jammer, the second the instigator SpaceObject (or nil).
+
+    /// Returns this WarpJammer's hull points.
+    /// Example: jammer:getHull()
+    REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, getHull);
+    /// Sets this WarpJammer's hull points.
+    /// Defaults to 50
+    /// Example: jammer:setHull(20)
+    REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, setHull);
+
+    /// Defines a function to call when this WarpJammer takes damage.
+    /// Passes the WarpJammer object and the damage instigator SpaceObject (or nil if none).
+    /// Example: jammer:onTakingDamage(function(this_jammer,instigator) print("Jammer damaged!") end)
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, onTakingDamage);
-    /// Set a function that will be called if the warp jammer is destroyed by taking damage.
-    /// First argument given to the function will be the warp jammer, the second the instigator SpaceObject that gave the final blow (or nil).
+    /// Defines a function to call when the WarpJammer is destroyed by taking damage.
+    /// Passes the WarpJammer object and the damage instigator SpaceObject (or nil if none).
+    /// Example: jammer:onDestruction(function(this_jammer,instigator) print("Jammer destroyed!") end)
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, onDestruction);
 }
 
@@ -30,33 +53,28 @@ WarpJammer::WarpJammer()
     setRadarSignatureInfo(0.05, 0.5, 0.0);
 
     registerMemberReplication(&range);
-    
+
     model_info.setData("shield_generator");
 }
 
-void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+// Due to a suspected compiler bug this desconstructor needs to be explicity defined
+WarpJammer::~WarpJammer()
 {
-    sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "RadarBlip.png");
-    object_sprite.setRotation(getRotation());
-    object_sprite.setPosition(position);
+}
+
+void WarpJammer::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
+{
+    glm::u8vec4 color(200, 150, 100, 255);
     if (my_spaceship && my_spaceship->isEnemy(this))
-        object_sprite.setColor(sf::Color(255, 0, 0));
-    else
-        object_sprite.setColor(sf::Color(200, 150, 100));
-    float size = 0.6;
-    object_sprite.setScale(size, size);
-    window.draw(object_sprite);
+        color = glm::u8vec4(255, 0, 0, 255);
+    renderer.drawSprite("radar/blip.png", position, 20, color);
 
     if (long_range)
     {
-        sf::CircleShape range_circle(range * scale);
-        range_circle.setOrigin(range * scale, range * scale);
-        range_circle.setPosition(position);
-        range_circle.setFillColor(sf::Color::Transparent);
-        range_circle.setOutlineColor(sf::Color(255, 255, 255, 64));
-        range_circle.setOutlineThickness(2.0);
-        window.draw(range_circle);
+        color = glm::u8vec4(200, 150, 100, 64);
+        if (my_spaceship && my_spaceship->isEnemy(this))
+            color = glm::u8vec4(255, 0, 0, 64);
+        renderer.drawCircleOutline(position, range*scale, 2.0, color);
     }
 }
 
@@ -70,14 +88,15 @@ void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
         P<ExplosionEffect> e = new ExplosionEffect();
         e->setSize(getRadius());
         e->setPosition(getPosition());
+        e->setRadarSignatureInfo(0.5, 0.5, 0.1);
 
         if (on_destruction.isSet())
         {
             if (info.instigator)
             {
-                on_destruction.call(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
+                on_destruction.call<void>(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
             } else {
-                on_destruction.call(P<WarpJammer>(this));
+                on_destruction.call<void>(P<WarpJammer>(this));
             }
         }
 
@@ -87,52 +106,51 @@ void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
         {
             if (info.instigator)
             {
-                on_taking_damage.call(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
+                on_taking_damage.call<void>(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
             } else {
-                on_taking_damage.call(P<WarpJammer>(this));
+                on_taking_damage.call<void>(P<WarpJammer>(this));
             }
         }
     }
 }
 
-bool WarpJammer::isWarpJammed(sf::Vector2f position)
+bool WarpJammer::isWarpJammed(glm::vec2 position)
 {
     foreach(WarpJammer, wj, jammer_list)
     {
-        if (wj->getPosition() - position < wj->range)
+        if (glm::length2(wj->getPosition() - position) < wj->range * wj->range)
             return true;
     }
     return false;
 }
 
-sf::Vector2f WarpJammer::getFirstNoneJammedPosition(sf::Vector2f start, sf::Vector2f end)
+glm::vec2 WarpJammer::getFirstNoneJammedPosition(glm::vec2 start, glm::vec2 end)
 {
-    sf::Vector2f startEndDiff = end - start;
-    float startEndLength = sf::length(startEndDiff);
+    auto startEndDiff = end - start;
+    float startEndLength = glm::length(startEndDiff);
     P<WarpJammer> first_jammer;
     float first_jammer_f = startEndLength;
-    sf::Vector2f first_jammer_q;
+    glm::vec2 first_jammer_q{0, 0};
     foreach(WarpJammer, wj, jammer_list)
     {
-        float f = sf::dot(startEndDiff, wj->getPosition() - start) / startEndLength;
-        if (f < 0.0)
-            f = 0;
-        sf::Vector2f q = start + startEndDiff / startEndLength * f;
-        if ((q - wj->getPosition()) < wj->range)
+        float f_inf = glm::dot(startEndDiff, wj->getPosition() - start) / startEndLength;
+	float f_limited = std::min(std::max(0.0f, f_inf), startEndLength);
+        glm::vec2 q_limited = start + startEndDiff / startEndLength * f_limited;
+        if (glm::length2(q_limited - wj->getPosition()) < wj->range*wj->range)
         {
-            if (!first_jammer || f < first_jammer_f)
+            if (!first_jammer || f_limited < first_jammer_f)
             {
                 first_jammer = wj;
-                first_jammer_f = f;
-                first_jammer_q = q;
+                first_jammer_f = f_limited;
+                first_jammer_q = start + startEndDiff / startEndLength * f_inf;
             }
         }
     }
     if (!first_jammer)
         return end;
 
-    float d = sf::length(first_jammer_q - first_jammer->getPosition());
-    return first_jammer_q + sf::normalize(start - end) * sqrtf(first_jammer->range * first_jammer->range - d * d);
+    float d = glm::length(first_jammer_q - first_jammer->getPosition());
+    return first_jammer_q + glm::normalize(start - end) * sqrtf(first_jammer->range * first_jammer->range - d * d);
 }
 
 void WarpJammer::onTakingDamage(ScriptSimpleCallback callback)
@@ -143,4 +161,19 @@ void WarpJammer::onTakingDamage(ScriptSimpleCallback callback)
 void WarpJammer::onDestruction(ScriptSimpleCallback callback)
 {
     this->on_destruction = callback;
+}
+
+string WarpJammer::getExportLine()
+{
+    string ret = "WarpJammer():setFaction(\"" + getFaction() + "\")";
+    ret += ":setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+
+    if (getRange() != 7000.0f) {
+        ret += ":setRange("+string(getRange())+")";
+    }
+    if (getHull() != 50.0f) {
+        ret += ":setHull(" + string(getHull()) + ")";
+    }
+
+    return ret;
 }

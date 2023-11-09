@@ -1,4 +1,6 @@
-
+-- A FactionInfo object contains presentation details and faction relationships for member SpaceObjects.
+-- This file is loaded upon launching a scenario.
+-- For details, see the FactionInfo class and getFactionInfo() global function in the scripting reference.
 
 corp = FactionInfo():setName("Corporate owned")
 corp:setGMColor(255, 2, 128)

@@ -2,6 +2,8 @@
 #define GUI2_SELECTOR_H
 
 #include "gui2_entrylist.h"
+#include "gui2_togglebutton.h"
+
 
 class GuiArrowButton;
 
@@ -9,18 +11,18 @@ class GuiSelector : public GuiEntryList
 {
 protected:
     float text_size;
-    EGuiAlign text_alignment;
+    sp::Alignment text_alignment;
     GuiArrowButton* left;
     GuiArrowButton* right;
     GuiElement* popup;
-    std::vector<GuiButton*> popup_buttons;
+    std::vector<GuiToggleButton*> popup_buttons;
 public:
     GuiSelector(GuiContainer* owner, string id, func_t func);
 
-    virtual void onDraw(sf::RenderTarget& window) override;
-    virtual bool onMouseDown(sf::Vector2f position) override;
-    virtual void onMouseUp(sf::Vector2f position) override;
-    
+    virtual void onDraw(sp::RenderTarget& renderer) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
+
     GuiSelector* setTextSize(float size);
 };
 

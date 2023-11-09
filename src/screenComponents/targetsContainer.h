@@ -9,16 +9,16 @@ private:
     PVector<SpaceObject> entries;
     bool allow_waypoint_selection;
     int waypoint_selection_index;
-    sf::Vector2f waypoint_selection_position;
+    glm::vec2 waypoint_selection_position{};
 public:
     enum ESelectionType
     {
         Targetable,
         Selectable
     };
-    
+
     TargetsContainer();
-    
+
     void setAllowWaypointSelection() { allow_waypoint_selection = true; }
 
     void clear();
@@ -29,8 +29,8 @@ public:
     P<SpaceObject> get() { entries.update(); if (entries.size() > 0) return entries[0]; return nullptr; }
     int getWaypointIndex();
     void setWaypointIndex(int index);
-    
-    void setToClosestTo(sf::Vector2f position, float max_range, ESelectionType selection_type);
+
+    void setToClosestTo(glm::vec2 position, float max_range, ESelectionType selection_type);
 };
 
 #endif//TARGETS_CONTAINER_H

@@ -1,5 +1,9 @@
 #include "preferenceManager.h"
 
+#if defined(ANDROID)
+#include <SDL.h>
+#endif
+
 std::unordered_map<string, string> PreferencesManager::preference;
 
 void PreferencesManager::set(string key, string value)
@@ -16,6 +20,9 @@ string PreferencesManager::get(string key, string default_value)
 
 void PreferencesManager::load(string filename)
 {
+#if defined(ANDROID)
+    filename = string(SDL_AndroidGetInternalStoragePath()) + "/" + filename.substr(filename.rfind("/")+1);
+#endif
     FILE* f = fopen(filename.c_str(), "r");
     if (f)
     {
@@ -39,12 +46,18 @@ void PreferencesManager::load(string filename)
 
 void PreferencesManager::save(string filename)
 {
+#if defined(ANDROID)
+    //I guess nobody wants to set something like options.ini and then some_directory/options.ini
+    //so here the directory hierarchy is not kept.
+    //On Android you have to write your user files to a specific directory.
+    filename = string(SDL_AndroidGetInternalStoragePath()) + "/" + filename.substr(filename.rfind("/")+1);
+#endif
     FILE* f = fopen(filename.c_str(), "w");
     if (f)
     {
         fprintf(f, "# Empty Epsilon Settings\n# This file will be overwritten by EE.\n\n");
         fprintf(f, "# Include the following line to enable an experimental http server:\n# httpserver=8080\n\n");
-        fprintf(f, "# For possible hotkey values check: http://www.sfml-dev.org/documentation/2.3.1/classsf_1_1Keyboard.php#acb4cacd7cc5802dec45724cf3314a142\n\n");
+        fprintf(f, "# Values for ship_window_flags and main_screen_flags are: spacedust:1, headings:2, callsigns:4 \n# Add them for any combination. Example: ship_window_flags=7 for all three\n\n");
         std::vector<string> keys;
         for(std::unordered_map<string, string>::iterator i = preference.begin(); i != preference.end(); i++)
         {

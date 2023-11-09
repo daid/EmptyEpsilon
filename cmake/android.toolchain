@@ -1,0 +1,193 @@
+# Android APK build toolchain file.
+# This toolchain file differs from most others and should not be seen as an example.
+# This is because the android NDK has a perfectly usable toolchain file already,
+# and thus we use that.
+# This file just facilitates in setting up the SDK/NDK if we do not have it yet.
+
+
+# We need the following things:
+# - Android SDK, with:
+#   - build-tools (aapt, dx, zipalign, apksigner)
+#   - platform/android-{target_api} (for android.jar)
+# - java JDK with:
+#   - javac compiler for java 8 
+# - SDL2 build with the toolchain
+# - a signing key
+# This toolchain file is designed to setup everything if it's not supplied by the user, with the exception of the java JDK
+set(ANDROID_SDK_PATH "" CACHE PATH "Location of the android SDK installation.")
+set(ANDROID_API_MIN "16" CACHE STRING "Minimal API version for android build, any device below this version is not supported.")
+set(ANDROID_API_TARGET "26" CACHE STRING "Targeting API version for android, any features above this version cannot be used.")
+set(ANDROID_NDK_VERSION "23.2.8568313" CACHE STRING "NDK version to use. Be mindful, this is brittle across SDL2/CMake/NDK configurations.")
+set(ANDROID_ABI "armeabi-v7a" CACHE STRING "Target ABI")
+
+# Signing key to use to sign the APK. You can generate one with:
+#       keytool -genkey -alias ${ANDROID_SIGN_KEY_NAME} -keyalg RSA -keysize 2048 -validity 10000
+set(ANDROID_SIGN_KEYSTORE "~/.keystore" CACHE STRING "Path to keystore")
+set(ANDROID_SIGN_KEY_NAME "Android" CACHE STRING "Which key to use to sign the final APK for android")
+set(ANDROID_SIGN_KEY_PASSWORD "password" CACHE STRING "Password that is used to protect the key. NOTE: This is stored in the cache, so readable for anyone with access to the drive where you run this.")
+
+
+#################################################################################
+
+# Configuration options for the NDK CMake toolchain file.
+set(ANDROID_PLATFORM "android-${ANDROID_API_MIN}")
+
+find_package(Java 1.8 COMPONENTS Development REQUIRED)
+
+function(execute_process_ex)
+    execute_process(${ARGV} RESULT_VARIABLE RES)
+    if(RES)
+        message(FATAL_ERROR "Failed to execute: ${ARGV}")
+    endif()
+endfunction()
+
+if(ANDROID_SDK_PATH STREQUAL "")
+    set(ANDROID_SDK_PATH "${CMAKE_CURRENT_LIST_DIR}/android/sdk" CACHE PATH "" FORCE)
+    set(ANDROID_BUILD_TOOLS_VERSION "30.0.2")
+    find_program(sdkmanager sdkmanager PATHS "${ANDROID_SDK_PATH}/cmdline-tools/bin" NO_DEFAULT_PATH)
+    if(NOT sdkmanager)
+        file(WRITE "${ANDROID_SDK_PATH}/licenses/android-sdk-license" "24333f8a63b6825ea9c5514f83c2829b004d1fee")
+        if(CMAKE_HOST_WIN32)
+            file(DOWNLOAD https://dl.google.com/android/repository/commandlinetools-windows-7583922_latest.zip "${ANDROID_SDK_PATH}/commandlinetools-tools.zip" SHOW_PROGRESS)
+        else()
+            file(DOWNLOAD https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip "${ANDROID_SDK_PATH}/commandlinetools-tools.zip" SHOW_PROGRESS)
+        endif()
+        execute_process_ex(COMMAND ${CMAKE_COMMAND} -E tar -xf commandlinetools-tools.zip WORKING_DIRECTORY "${ANDROID_SDK_PATH}")
+        find_program(sdkmanager sdkmanager PATHS "${ANDROID_SDK_PATH}/cmdline-tools/bin" NO_DEFAULT_PATH)
+    endif()
+ 
+    if(NOT EXISTS "${ANDROID_SDK_PATH}/platforms/android-${ANDROID_API_TARGET}")
+        execute_process_ex(COMMAND "${sdkmanager}" --sdk_root=${ANDROID_SDK_PATH} "platforms\;android-${ANDROID_API_TARGET}")
+    endif()
+    if(NOT EXISTS "${ANDROID_SDK_PATH}/build-tools/${ANDROID_BUILD_TOOLS_VERSION}")
+        execute_process_ex(COMMAND "${sdkmanager}" --sdk_root=${ANDROID_SDK_PATH} "build-tools\;${ANDROID_BUILD_TOOLS_VERSION}")
+    endif()
+    if(NOT EXISTS "${ANDROID_SDK_PATH}/ndk/${ANDROID_NDK_VERSION}")
+        execute_process_ex(COMMAND "${sdkmanager}" --sdk_root=${ANDROID_SDK_PATH} "ndk\;${ANDROID_NDK_VERSION}")
+    endif()
+    if(NOT EXISTS "${ANDROID_SDK_PATH}/platform-tools")
+        execute_process_ex(COMMAND "${sdkmanager}" --sdk_root=${ANDROID_SDK_PATH} "platform-tools")
+    endif()
+endif()
+
+file(GLOB ANDROID_BUILD_TOOLS_VERSION LIST_DIRECTORIES true "${ANDROID_SDK_PATH}/build-tools/*.*.*")
+get_filename_component(ANDROID_BUILD_TOOLS_VERSION "${ANDROID_BUILD_TOOLS_VERSION}" NAME)
+if(NOT EXISTS "${ANDROID_SDK_PATH}/platforms/android-${ANDROID_API_TARGET}")
+    message(FATAL_ERROR "Missing android platform in supplied android SDK: android-${ANDROID_API_TARGET}")
+endif()
+
+find_program(AAPT aapt PATHS "${ANDROID_SDK_PATH}/build-tools/${ANDROID_BUILD_TOOLS_VERSION}" NO_DEFAULT_PATH)
+find_program(DX dx PATHS "${ANDROID_SDK_PATH}/build-tools/${ANDROID_BUILD_TOOLS_VERSION}" NO_DEFAULT_PATH)
+find_program(ZIPALIGN zipalign PATHS "${ANDROID_SDK_PATH}/build-tools/${ANDROID_BUILD_TOOLS_VERSION}" NO_DEFAULT_PATH)
+find_program(APKSIGNER apksigner PATHS "${ANDROID_SDK_PATH}/build-tools/${ANDROID_BUILD_TOOLS_VERSION}" NO_DEFAULT_PATH)
+find_file(ANDROID_PLATFORM_JAR android.jar PATHS "${ANDROID_SDK_PATH}/platforms/android-${ANDROID_API_TARGET}" NO_DEFAULT_PATH)
+find_program(ADB adb PATHS "${ANDROID_SDK_PATH}/platform-tools" NO_DEFAULT_PATH)
+
+
+set(SDL_BASE_PATH "${CMAKE_CURRENT_LIST_DIR}/android/SDL/${ANDROID_ABI}")
+set(SDL_SRC_PATH "${SDL_BASE_PATH}/source")
+set(SDL_INSTALL_PATH "${SDL_BASE_PATH}/install")
+if(NOT EXISTS "${SDL_SRC_PATH}")
+    file(DOWNLOAD https://www.libsdl.org/release/SDL2-2.0.16.zip "${SDL_BASE_PATH}/SDL2_src.zip" SHOW_PROGRESS)
+    execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf SDL2_src.zip WORKING_DIRECTORY "${SDL_BASE_PATH}")
+    file(RENAME "${SDL_BASE_PATH}/SDL2-2.0.16" "${SDL_SRC_PATH}")
+endif()
+if(NOT EXISTS "${SDL_INSTALL_PATH}")
+    file(MAKE_DIRECTORY "${SDL_BASE_PATH}/build")
+    execute_process(
+        COMMAND "${CMAKE_COMMAND}" "${SDL_SRC_PATH}" "-G" "Ninja"
+            "-DCMAKE_TOOLCHAIN_FILE=${ANDROID_SDK_PATH}/ndk/${ANDROID_NDK_VERSION}/build/cmake/android.toolchain.cmake"
+            "-DANDROID_ABI=${ANDROID_ABI}" "-DANDROID_PLATFORM=${ANDROID_PLATFORM}"
+            "-DCMAKE_INSTALL_PREFIX=${SDL_INSTALL_PATH}" "-DCMAKE_BUILD_TYPE=Release"
+        WORKING_DIRECTORY "${SDL_BASE_PATH}/build")
+    execute_process(
+        COMMAND ${CMAKE_COMMAND} --build . --target install
+        WORKING_DIRECTORY "${SDL_BASE_PATH}/build")
+endif()
+set(SDL2_DIR "${SDL_INSTALL_PATH}/lib/cmake/SDL2")
+
+# Macro to build the android apk
+macro(android_apk NAME APK_WITH_PACKS)
+    get_target_property(MAINLIB_NAME ${NAME} NAME)
+    set(MAINLIB_DEBUGGABLE "false")
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+        set(MAINLIB_DEBUGGABLE "true")
+    endif()
+    # Setup Android Manifest.
+    configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/android/AndroidManifest.xml.in" "${CMAKE_CURRENT_BINARY_DIR}/AndroidManifest.xml")
+    configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/android/Activity.java.in" "${CMAKE_CURRENT_BINARY_DIR}/java_source/eu/daid/${NAME}/Activity.java")
+
+    # Generate the R.java file
+    add_custom_command(
+        OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/java_source/eu/daid/${NAME}/R.java"
+        COMMAND "${AAPT}" ARGS package -m -J "${CMAKE_CURRENT_BINARY_DIR}/java_source" -M "${CMAKE_CURRENT_BINARY_DIR}/AndroidManifest.xml" -S "${CMAKE_CURRENT_SOURCE_DIR}/android/res" -I "${ANDROID_PLATFORM_JAR}"
+        DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/AndroidManifest.xml"
+    )
+
+    # Generate apk with resource files and manifest, but nothing else
+    # Compile the java sources (TODO, warning about bootstrap classpath, rt.jar wrong version)
+    file(GLOB JAVA_SOURCES "${SDL_SRC_PATH}/android-project/app/src/main/java/org/libsdl/app/*.java")
+    list(APPEND JAVA_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/java_source/eu/daid/${NAME}/R.java" "${CMAKE_CURRENT_BINARY_DIR}/java_source/eu/daid/${NAME}/Activity.java")
+    file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/java_compiled/")
+    add_custom_command(
+        OUTPUT "java_compiled/eu/daid/${NAME}/R.class"
+        COMMAND ${Java_JAVAC_EXECUTABLE} ARGS -source 1.8 -target 1.8 -classpath "${ANDROID_PLATFORM_JAR}" ${JAVA_SOURCES} -d "${CMAKE_CURRENT_BINARY_DIR}/java_compiled/"
+        DEPENDS ${JAVA_SOURCES}
+    )
+
+    # Convert sources into dex file
+    add_custom_command(
+        OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex"
+        COMMAND "${DX}" ARGS "--dex" "--output=${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex" "${CMAKE_CURRENT_BINARY_DIR}/java_compiled/"
+        DEPENDS "java_compiled/eu/daid/${NAME}/R.class"
+    )
+    
+    file(COPY "${SDL_INSTALL_PATH}/lib/libSDL2.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
+    file(COPY "${SDL_INSTALL_PATH}/lib/libhidapi.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
+    
+    set(MAINLIB_FILENAME lib${MAINLIB_NAME}.so)
+    add_custom_command(
+        OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/${MAINLIB_FILENAME}"
+        COMMAND "${CMAKE_COMMAND}" ARGS -E copy "$<TARGET_FILE:${NAME}>" "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/$<TARGET_FILE_NAME:${NAME}>"
+        DEPENDS "$<TARGET_FILE:${NAME}>"
+    )
+
+    set(APK_ALIGNED "${CMAKE_CURRENT_BINARY_DIR}/${NAME}-${ANDROID_ABI}.apk")
+    set(APK "${APK_ALIGNED}.unaligned")
+    file(REMOVE_RECURSE "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
+    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/resources" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
+    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/scripts" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
+    
+    if(APK_WITH_PACKS)
+        file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/packs" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
+    endif()
+
+    file(GLOB_RECURSE ASSETS LIST_DIRECTORIES false RELATIVE "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/" "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/*")
+    
+    add_custom_command(
+        OUTPUT "${APK}"
+        COMMAND "${AAPT}" ARGS package -f -M "${CMAKE_CURRENT_BINARY_DIR}/AndroidManifest.xml" -S "${CMAKE_CURRENT_SOURCE_DIR}/android/res" -I "${ANDROID_PLATFORM_JAR}" -F "${APK}"
+        COMMAND "${AAPT}" ARGS add "${APK}" classes.dex
+        COMMAND "${AAPT}" ARGS add "${APK}" lib/${ANDROID_ABI}/$<TARGET_FILE_NAME:${NAME}> lib/${ANDROID_ABI}/libSDL2.so lib/${ANDROID_ABI}/libhidapi.so
+        COMMAND "${AAPT}" ARGS add "${APK}" ${ASSETS}
+        WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/"
+        DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex" "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/$<TARGET_FILE_NAME:${NAME}>"
+    )
+    
+    add_custom_command(
+        OUTPUT "${APK_ALIGNED}"
+        COMMAND "${CMAKE_COMMAND}" -E remove -f "${APK_ALIGNED}"
+        COMMAND "${ZIPALIGN}" ARGS 4 "${APK}" "${APK_ALIGNED}"
+        COMMAND "${APKSIGNER}" ARGS sign --verbose --min-sdk-version ${ANDROID_API_MIN} --max-sdk-version ${ANDROID_API_TARGET} --ks "${ANDROID_SIGN_KEYSTORE}" --ks-pass pass:${ANDROID_SIGN_KEY_PASSWORD} --ks-key-alias ${ANDROID_SIGN_KEY_NAME} "${APK_ALIGNED}"
+        DEPENDS "${APK}"
+    )
+    add_custom_target(apk ALL DEPENDS "${APK_ALIGNED}")
+    add_custom_target(upload
+        COMMAND ${ADB} install -r "${APK_ALIGNED}"
+        COMMAND ${ADB} shell am start -n "eu.daid.${NAME}.Activity"
+        DEPENDS "${APK_ALIGNED}" WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+    )
+endmacro()
+
+
+include("${ANDROID_SDK_PATH}/ndk/${ANDROID_NDK_VERSION}/build/cmake/android.toolchain.cmake")

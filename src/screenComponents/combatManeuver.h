@@ -11,12 +11,14 @@ class GuiCombatManeuver : public GuiElement
 private:
     GuiSnapSlider2D* slider;
     GuiProgressbar* charge_bar;
+    bool hotkey_strafe_active = false;
+    bool hotkey_boost_active = false;
 public:
     GuiCombatManeuver(GuiContainer* owner, string id);
-    
-    virtual void onDraw(sf::RenderTarget& window) override;
-    virtual void onHotkey(const HotkeyResult& key) override;
-    
+
+    virtual void onUpdate() override;
+    virtual void onDraw(sp::RenderTarget& target) override;
+
     void setBoostValue(float value);
     void setStrafeValue(float value);
 };

@@ -1,47 +1,53 @@
-Building the Android version is a bit of a hassle right now.
+Building for Android depends on the cmake toolchain file in `cmake/android.toolchain`, and having `cmake` and [Oracle Java 8 or newer JRE and JDK packages](https://www.oracle.com/java/technologies/downloads/) for your OS installed. (OpenJDK does NOT work for building!)
 
-First, you need the following things:
-* Android SDK
-* Android NDK
-* SFML-2.3.1 sources
-* EmptyEpsilon sources
-* SeriousProton sources
+In addition configuring the EE build, this toolchain file does a few additional things:
 
-Next, you need to patch SFML-2.3.1 it to prevent a crash bug:
-See: http://en.sfml-dev.org/forums/index.php?topic=18581.0
+-   Downloads and installs the android SDK + NDK with all required tools. This requires accepting a license.
+-   Downloads and compiles SDL2 with requirements and installs those in the NDK folder.
+-   Builds an APK from the compiled sources.
 
+## Build for 32-bit ARM v7
 
-Finally, you need to build SFML for android.
-This guide explains it:
-https://github.com/SFML/SFML/wiki/Tutorial:-Building-SFML-for-Android
+Building 32-bit EE for Android should be as easy as running from the repo root:
 
-For reference. I've used linux. Installed the android NDK and SDK in $HOME/android
-I've build SFML-2.3.1 with the following commands:
 ```
-export PATH=$PATH:$HOME/android/android-sdk-linux/tools:$HOME/android/android-sdk-linux/platform-tools:$HOME/android/android-ndk-r10e
-export ANDROID_NDK=$HOME/android/android-ndk-r10e
-mkdir build_armeabi-v7a
-cd build_armeabi-v7a
-cmake -DANDROID_ABI=armeabi-v7a -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.toolchain.cmake ..
-make -j 3
-make install
+mkdir _build_android
+cd _build_android
+cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain
+ninja
 ```
 
-To test this, I highly recommend building the SFML android example to see if it works.
-```
-cd SFML-2.3.1/examples/android
-android update project --name Example --target "android-16" --path .
-ndk-build
-ant debug
-```
-And install the resulting bin/Example-debug.apk to your device to test it.
-(uninstall it afterwards, as it has the tendency to keep running and drain your battery)
+## Build for 64-bit ARM v8
 
+Some newer devices, such as the Pixel 7 series, won't run 32-bit Android apps.
 
-Finally, build EmptyEpsilon:
+To build 64-bit EE for Android, add the `-DANDROID_ABI=arm64-v8a` flag:
+
 ```
-cd EmptyEpsilon/android
-android update project --name EmptyEpsilon --target "android-16" --path .
-ndk-build
-and debug
+mkdir _build_android_64
+cd _build_android_64
+cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain -DANDROID_ABI=arm64-v8a
+ninja
 ```
+
+## Troubleshooting
+
+### "CMAKE_MAKE_PROGRAM is not set"
+
+If you encounter a `CMAKE_MAKE_PROGRAM is not set` error, make sure you've installed `make`. If you've installed it, ensure it's in your `$PATH`/`%PATH%`; if it is and it still fails, add `-DCMAKE_MAKE_PROGRAM=$(which make)` to manually specify its location.
+
+### "jarsigner error"
+
+If you encounter a `jarsigner error: java.lang.RuntimeException: keystore load: ... (No such file or directory)` error, you need to create a keystore. The Android build script uses:
+
+```
+keytool -genkey -alias ${ANDROID_SIGN_KEY_NAME} -keyalg RSA -keysize 2048 -validity 10000
+```
+
+where the default `ANDROID_SIGN_KEY_NAME` is `"Android"` and the default password is `password`, and the command generates the keystore file at `~/.keystore`.
+
+### "Invalid keystore format"
+
+If you have a keystore but get a `keystore load: Invalid keystore format` error, ensure that the keystore conforms to the above command's flags and is at the specified location. See `cmake/android.toolchain` for details.
+
+Note that this only works on Linux. Building for Android from Windows is not supported at the moment.

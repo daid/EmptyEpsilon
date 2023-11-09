@@ -1,10 +1,11 @@
--- Name: utils
--- Description: Bunch of useful utility functions that can be used in any scenario script.
-
---[[ These functions should be as generic as possible, so they are highly usable. --]]
+--- Utils.
+--
+-- Bunch of useful utility functions that can be used in any scenario script.
+--
+-- These functions should be as generic as possible, so they are highly usable.
 
 -- Given enough information, find the distance between two positions.
--- This function can be called four ways:
+-- This function can be called in four ways:
 --
 -- distance(obj1, obj2)
 --   Returns the distance between two objects.
@@ -37,45 +38,115 @@
 --   Example:
 --     distance(-100, 100, 0, 100) -- Returns 100
 function distance(a, b, c, d)
-    local x1, y1 = 0, 0
-    local x2, y2 = 0, 0
-    if type(a) == "table" and type(b) == "table" then
-        -- a and b are bth tables.
-        -- Assume distance(obj1, obj2)
-        x1, y1 = a:getPosition()
-        x2, y2 = b:getPosition()
-    elseif type(a) == "table" and type(b) == "number" and type(c) == "number" then
-        -- Assume distance(obj, x, y)
-        x1, y1 = a:getPosition()
-        x2, y2 = b, c
-    elseif type(a) == "number" and type(b) == "number" and type(c) == "table" then
-        -- Assume distance(x, y, obj)
-        x1, y1 = a, b:getPosition()
-        x2, y2 = c:getPosition()
-    elseif type(a) == "number" and type(b) == "number" and type(c) == "number" and type(d) == "number" then
-        -- a and b are both tables.
-        -- Assume distance(obj1, obj2)
-        x1, y1 = a, b
-        x2, y2 = c, d
-    else
-        -- Not a valid use of the distance function. Throw an error.
-        print(type(a), type(b), type(c), type(d))
-        error("distance() function used incorrectly", 2)
-    end
+    local x1, y1, x2, y2
+    x1, y1, x2, y2 = _fourArgumentsIntoCoordinates(a, b, c, d)
     local xd, yd = (x1 - x2), (y1 - y2)
     return math.sqrt(xd * xd + yd * yd)
 end
 
+-- Given enough information, calculate rotation angle from first position/object to second position/object.
+-- Rotation angle 0 degrees is to the right of the GM screen. 
+-- This function can be called in four ways:
+--
+-- angleRotation(obj1, obj2)
+--   Returns the rotation angle from obj1 to obj2.
+--
+--   obj1, obj2: Two objects. Calls getPosition() on each.
+--
+--   Example:
+--     rock1 = Asteroid():setPosition(-100, 100)
+--     rock2 = Asteroid():setPosition(0, 100)
+--     angleRotation(rock1, rock2) -- Returns 0.0
+--
+-- angleRotation(obj, x, y)
+-- angleRotation(x, y, obj)
+--   Find the rotation angle from an object to a position,
+--   or from a position to an object.
+--
+--   obj: An object. Calls getPosition() on it.
+--   x, y: Coordinates of a position.
+--
+--   Example:
+--     rock1 = Asteroid():setPosition(-100, 100)
+--     angleRotation(rock1, 0, 100) -- Returns 0.0
+--     angleRotation(0, 100, rock1) -- Returns 0.0
+--
+-- angleRotation(x1, y1, x2, y2)
+--   Find the rotation angle from first position to second position.
+--
+--   x1, y1: Origin position's coordinates.
+--   x2, y2: Destination position's coordinates.
+--
+--   Example:
+--     angleRotation(-100, 100, 0, 100) -- Returns 0.0
+function angleRotation(a, b, c, d)
+    local x1, y1, x2, y2
+    x1, y1, x2, y2 = _fourArgumentsIntoCoordinates(a, b, c, d)
+
+    local dx = x2-x1
+    local dy = y2-y1
+    local d = math.atan2(dy,dx)*180/math.pi     -- Get degrees in range -180, 180 where 0 is to the left from point 1. 
+    return d%360                                -- Transform degrees to range [0, 360]
+end
+
+-- Given enough information, calculate heading from first position/object to second position/object.
+-- Heading 0 degrees is to the top of the GM screen (same as 0 degrees on the radar). 
+-- This function can be called in four ways:
+--
+-- angleHeading(obj1, obj2)
+--   Returns the heading from obj1 to obj2.
+--
+--   obj1, obj2: Two objects. Calls getPosition() on each.
+--
+--   Example:
+--     rock1 = Asteroid():setPosition(-100, 100)
+--     rock2 = Asteroid():setPosition(0, 100)
+--     angleRotation(rock1, rock2) -- Returns 0.0
+--
+-- angleRotation(obj, x, y)
+-- angleRotation(x, y, obj)
+--   Find the heading from an object to a position,
+--   or from a position to an object.
+--
+--   obj: An object. Calls getPosition() on it.
+--   x, y: Coordinates of a position.
+--
+--   Example:
+--     rock1 = Asteroid():setPosition(-100, 100)
+--     angleRotation(rock1, 0, 100) -- Returns 0.0
+--     angleRotation(0, 100, rock1) -- Returns 0.0
+--
+-- angleRotation(x1, y1, x2, y2)
+--   Find the heading from first position to second position.
+--
+--   x1, y1: Origin position's coordinates.
+--   x2, y2: Destination position's coordinates.
+--
+--   Example:
+--     angleRotation(-100, 100, 0, 100) -- Returns 0.0
+function angleHeading(a, b, c, d)
+    local d = angleRotation(a, b, c, d) -- Get rotation vector
+    d = d+90                            -- Convert to heading
+    return d%360                        -- Transform degrees to range [0, 360]
+end
+
 -- Given an angle and length, return a relative vector (x, y coordinates).
 --
--- vectorFromAngle(angle, length)
---   angle: Relative heading, in degrees
+-- vectorFromAngle(angle, length, angle_is_heading)
+--   angle: Relative angle (as rotation vector), in degrees
 --   length: Relative distance, in thousandths of an in-game unit (1000 = 1U)
+--   angle_is_heading: Optional argument, if set to TRUE, then angle will be treated
+--                     as heading instead of rotation vector. 
 --
--- Example: For relative x and y coordinates 1000 units away at a heading of
--- 45 degrees, run:
---   vectorFromAngle(45, 1000).
-function vectorFromAngle(angle, length)
+-- Example: 
+--   For relative x and y coordinates 1000 units away at a rotation angle of 45 degrees, run:
+--     x, y = vectorFromAngle(45, 1000).
+--   For relative x and y coordinates 1000 units away at a heading of 45 degrees, run:
+--     x, y = vectorFromAngle(45, 1000, true)
+function vectorFromAngle(angle, length, angle_is_heading)
+    if angle_is_heading ~= nil and angle_is_heading == true then
+        angle=angle-90  -- if angle was set as heading, sanitize it.
+    end
     return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
 end
 
@@ -86,15 +157,19 @@ end
 --   obj: An object.
 --   x, y: Origin coordinates.
 --   angle, distance: Relative heading and distance from the origin.
+--   angle_is_heading: Optional argument, if set to TRUE, then angle will be treated
+--                     as heading instead of rotation vector. 
 --
 -- Returns the object with its position set to the resulting coordinates, by
 -- calling setPosition().
 --
--- Example: To create a space station 10000 units from coordinates 100, -100
--- at a heading of 45 degrees, run
---   setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000)
-function setCirclePos(obj, x, y, angle, distance)
-    dx, dy = vectorFromAngle(angle, distance)
+-- Example: 
+--   To create a space station 10000 units from coordinates 100, -100 at a rotation vector of 45 degrees, run:
+--     setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000)
+--   To create a space station 10000 units from coordinates 100, -100 at a heading of 45 degrees, run:
+--     setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000, true)
+function setCirclePos(obj, x, y, angle, distance, angle_is_heading)
+    local dx, dy = vectorFromAngle(angle, distance, angle_is_heading)
     return obj:setPosition(x + dx, y + dy)
 end
 
@@ -124,14 +199,20 @@ end
 --   asteroid fields:
 --     createObjectsOnLine(0, 0, 10000, 0, 300, Asteroid, 4, 100, 800)
 function createObjectsOnLine(x1, y1, x2, y2, spacing, object_type, rows, chance, randomize)
-    if rows == nil then rows = 1 end
-    if chance == nil then chance = 100 end
-    if randomize == nil then randomize = 0 end
+    if rows == nil then
+        rows = 1
+    end
+    if chance == nil then
+        chance = 100
+    end
+    if randomize == nil then
+        randomize = 0
+    end
     local d = distance(x1, y1, x2, y2)
     local xd = (x2 - x1) / d
     local yd = (y2 - y1) / d
-    for cnt_x=0,d,spacing do
-        for cnt_y=0,(rows-1)*spacing,spacing do
+    for cnt_x = 0, d, spacing do
+        for cnt_y = 0, (rows - 1) * spacing, spacing do
             local px = x1 + xd * cnt_x + yd * (cnt_y - (rows - 1) * spacing * 0.5) + random(-randomize, randomize)
             local py = y1 + yd * cnt_x - xd * (cnt_y - (rows - 1) * spacing * 0.5) + random(-randomize, randomize)
             if random(0, 100) < chance then
@@ -158,24 +239,22 @@ function mergeTables(table_a, table_b)
     end
 end
 
-
 -- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
 function placeRandomAroundPoint(object_type, amount, dist_min, dist_max, x0, y0)
-    for n=1,amount do
+    for n = 1, amount do
         local r = random(0, 360)
         local distance = random(dist_min, dist_max)
-        x = x0 + math.cos(r / 180 * math.pi) * distance
-        y = y0 + math.sin(r / 180 * math.pi) * distance
+        local x = x0 + math.cos(r / 180 * math.pi) * distance
+        local y = y0 + math.sin(r / 180 * math.pi) * distance
         object_type():setPosition(x, y)
     end
 end
-
 
 -- Place semi-random object_types around point (x,y) in a (x_grids by y_grids) area
 -- Perlin Noise is used to create a sort of natural look to the created objects.
 -- Use the perlin_z-parameter together with density to control amound of placed objects
 -- Sensible values for perlin_z are in a range of {0.1 .. 0.5}
--- 
+--
 -- Example:
 --
 --   -- Creates a 10x10 grid space filled with some asteroids and nebulas
@@ -187,23 +266,21 @@ function placeRandomObjects(object_type, density, perlin_z, x, y, x_grids, y_gri
     require("perlin_noise.lua")
     perlin:load()
 
-
     -- Size of EE grid
     local grid_size = 20000
 
-    -- Z-axis of Perlin distribution. 
+    -- Z-axis of Perlin distribution.
     local perlin_magic_z = perlin_z
 
     -- Perlin noise is not random, so we'll pick a random spot in its distribution
-    perlin_section_i = random(0, 1000)
-    perlin_section_j = random(0, 1000)
+    local perlin_section_i = random(0, 1000)
+    local perlin_section_j = random(0, 1000)
 
     -- Create a XY intensity map
-    for i=1,x_grids do
-        for j=1,y_grids do
-
+    for i = 1, x_grids do
+        for j = 1, y_grids do
             -- Get intensity from perlin distribution, and do a very rough normalization to {0 .. 0.6}
-            local intensity = (perlin:noise(i+perlin_section_i, j+perlin_section_j, perlin_magic_z) + perlin_magic_z)
+            local intensity = (perlin:noise(i + perlin_section_i, j + perlin_section_j, perlin_magic_z) + perlin_magic_z)
 
             -- Cube it to get blobs of objects
             intensity = intensity * intensity * intensity
@@ -211,11 +288,58 @@ function placeRandomObjects(object_type, density, perlin_z, x, y, x_grids, y_gri
             -- Use it to fill patches of space with randomly placed objects
             if (intensity > 0) then
                 local nr_of_objects = intensity * density
-                local x_start = ((i-x_grids/2) * grid_size) + x
-                local y_start = ((j-x_grids/2) * grid_size ) + y
+                local x_start = ((i - x_grids / 2) * grid_size) + x
+                local y_start = ((j - x_grids / 2) * grid_size) + y
 
-                placeRandomAroundPoint(object_type, nr_of_objects, 0, grid_size/1.5, x_start, y_start)
+                placeRandomAroundPoint(object_type, nr_of_objects, 0, grid_size / 1.5, x_start, y_start)
             end
         end
     end
+end
+
+-- Extract coordinates between two objects, two points, object and point or point and object
+-- This is only helper function for distance(a,b,c,d) and angle(a,b,c,d). 
+-- Returns two sets of coordinates: x1, y1, x2, y2.
+function _fourArgumentsIntoCoordinates(a, b, c, d)
+    local x1, y1 = 0, 0
+    local x2, y2 = 0, 0
+    if type(a) == "table" and type(b) == "table" then
+        -- a and b are bth tables.
+        -- Assume function(obj1, obj2)
+        x1, y1 = a:getPosition()
+        x2, y2 = b:getPosition()
+    elseif type(a) == "table" and type(b) == "number" and type(c) == "number" then
+        -- Assume function(obj1, x2, y2)
+        x1, y1 = a:getPosition()
+        x2, y2 = b, c
+    elseif type(a) == "number" and type(b) == "number" and type(c) == "table" then
+        -- Assume function(x1, y1, obj2)
+        x1, y1 = a, b
+        x2, y2 = c:getPosition()
+    elseif type(a) == "number" and type(b) == "number" and type(c) == "number" and type(d) == "number" then
+        -- Assume function(x1, y1, x2, y2)
+        x1, y1 = a, b
+        x2, y2 = c, d
+    else
+        -- Not a valid use of the distance function. Throw an error.
+        print(type(a), type(b), type(c), type(d))
+        error("_fourArgumentsIntoCoordinates() function used incorrectly", 2)
+    end
+    return x1, y1, x2, y2
+end
+
+-- Converts a number of seconds to a string in hh:mm:ss format.
+function formatTime(seconds)
+    local str = ""
+    local minutes = math.floor(seconds / 60) % 60
+    local hours = math.floor(seconds / 60 / 60)
+    seconds = math.floor(seconds % 60)
+    if hours > 0 then
+        str = string.format("%02.f:%02.f:%02.f", hours, minutes, seconds)
+    elseif minutes > 0 then
+        str = string.format("%02.f:%02.f", minutes, seconds)
+    else
+        str = string.format("%02.f", seconds)
+    end
+    return str
 end

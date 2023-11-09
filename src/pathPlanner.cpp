@@ -1,7 +1,9 @@
 #include "pathPlanner.h"
+#include "spaceObjects/spaceObject.h"
 
-const double small_object_grid_size = 5000.0f;
-const double small_object_max_size = 1000.0f;
+
+const float small_object_grid_size = 5000.0f;
+const float small_object_max_size = 1000.0f;
 
 static uint32_t hashSector(uint32_t x, uint32_t y)
 {
@@ -10,10 +12,10 @@ static uint32_t hashSector(uint32_t x, uint32_t y)
 
 static uint32_t positionToSector(float f)
 {
-    return uint32_t(f / small_object_grid_size);
+    return std::lrint(f / small_object_grid_size);
 }
 
-static uint32_t hashPosition(sf::Vector2f position)
+static uint32_t hashPosition(glm::vec2 position)
 {
     return hashSector(positionToSector(position.x), positionToSector(position.y));
 }
@@ -44,7 +46,7 @@ void PathPlannerManager::update(float delta)
             i = big_objects.erase(i);
         }
     }
-    
+
     std::vector<PathPlannerAvoidObject> add_list;
     for(auto h_it = small_objects.begin(); h_it != small_objects.end(); h_it++)
     {
@@ -70,33 +72,35 @@ void PathPlannerManager::update(float delta)
     }
 }
 
-PathPlanner::PathPlanner()
+PathPlanner::PathPlanner(float my_size)
+: my_size(my_size)
 {
     manager = PathPlannerManager::getInstance();
 }
 
-void PathPlanner::plan(sf::Vector2f start, sf::Vector2f end)
+void PathPlanner::plan(glm::vec2 start, glm::vec2 end)
 {
-    if (route.size() == 0 || sf::length(route.back() - end) > 2000)
+    if (route.size() == 0 || glm::length(route.back() - end) > 2000)
     {
         route.clear();
-        recursivePlan(start, end);
+        int recursion_counter = 0;
+        recursivePlan(start, end, recursion_counter);
         route.push_back(end);
-        
+
         insert_idx = 0;
         remove_idx = 1;
         remove_idx2 = 1;
     }else{
         route.back() = end;
-        
-        sf::Vector2f p0 = start;
+
+        glm::vec2 p0 = start;
         if (insert_idx < route.size())
         {
             if (insert_idx > 0)
                 p0 = route[insert_idx - 1];
-            sf::Vector2f p1 = route[insert_idx];
-            
-            sf::Vector2f new_point;
+            glm::vec2 p1 = route[insert_idx];
+
+            glm::vec2 new_point{};
             if (checkToAvoid(p0, p1, new_point))
             {
                 route.insert(route.begin() + insert_idx, new_point);
@@ -106,21 +110,21 @@ void PathPlanner::plan(sf::Vector2f start, sf::Vector2f end)
         {
             if (remove_idx > 1)
                 p0 = route[remove_idx - 2];
-            sf::Vector2f p1 = route[remove_idx];
-            sf::Vector2f new_position;
-            sf::Vector2f alt_position;
+            glm::vec2 p1 = route[remove_idx];
+            glm::vec2 new_position{};
+            glm::vec2 alt_position{};
             if (!checkToAvoid(p0, p1, new_position, &alt_position))
             {
                 route.erase(route.begin() + remove_idx - 1);
             }else{
-                if ((route[remove_idx-1] - new_position) > 200.0f && (route[remove_idx-1] - alt_position) > 200.0f)
+                if (glm::length2(route[remove_idx-1] - new_position) > 200.0f*200.0f && glm::length2(route[remove_idx-1] - alt_position) > 200.0f * 200.0f)
                     route[remove_idx-1] = new_position;
                 remove_idx++;
             }
         }else if (remove_idx2 < route.size())
         {
-            sf::Vector2f new_point;
-            sf::Vector2f p1 = route[remove_idx2];
+            glm::vec2 new_point{};
+            glm::vec2 p1 = route[remove_idx2];
             if (!checkToAvoid(p0, p1, new_point))
             {
                 route.erase(route.begin(), route.begin() + remove_idx2);
@@ -140,38 +144,39 @@ void PathPlanner::clear()
     route.clear();
 }
 
-void PathPlanner::recursivePlan(sf::Vector2f start, sf::Vector2f end)
+void PathPlanner::recursivePlan(glm::vec2 start, glm::vec2 end, int& recursion_counter)
 {
-    sf::Vector2f new_point;
-    if (checkToAvoid(start, end, new_point))
+    glm::vec2 new_point{};
+    if (recursion_counter < 100 && checkToAvoid(start, end, new_point))
     {
-        recursivePlan(start, new_point);
-        recursivePlan(new_point, end);
+        recursion_counter += 1;
+        recursivePlan(start, new_point, recursion_counter);
+        recursivePlan(new_point, end, recursion_counter);
     }else{
         route.push_back(end);
     }
 }
 
-bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2f& new_point, sf::Vector2f* alt_point)
+bool PathPlanner::checkToAvoid(glm::vec2 start, glm::vec2 end, glm::vec2& new_point, glm::vec2* alt_point)
 {
-    sf::Vector2f startEndDiff = end - start;
-    float startEndLength = sf::length(startEndDiff);
-    if (startEndLength < 100.0)
+    glm::vec2 startEndDiff = end - start;
+    float startEndLength = glm::length(startEndDiff);
+    if (startEndLength < 100.0f)
         return false;
     float firstAvoidF = startEndLength;
     PathPlannerManager::PathPlannerAvoidObject avoidObject(NULL, 0);
-    sf::Vector2f firstAvoidQ;
+    glm::vec2 firstAvoidQ{};
 
     for(std::list<PathPlannerManager::PathPlannerAvoidObject>::iterator i = manager->big_objects.begin(); i != manager->big_objects.end(); )
     {
         if (i->source)
         {
-            sf::Vector2f position = i->source->getPosition();
-            float f = sf::dot(startEndDiff, position - start) / startEndLength;
+            auto position = i->source->getPosition();
+            float f = glm::dot(startEndDiff, position - start) / startEndLength;
             if (f > 0 && f < startEndLength - i->size)
             {
-                sf::Vector2f q = start + startEndDiff / startEndLength * f;
-                if ((q - position) < i->size)
+                glm::vec2 q = start + startEndDiff / startEndLength * f;
+                if (glm::length2(q - position) < (i->size + my_size) * (i->size + my_size))
                 {
                     if (f < firstAvoidF)
                     {
@@ -186,9 +191,9 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
             i = manager->big_objects.erase(i);
         }
     }
-    
+
     {
-        // Bresenham's line algorithm to 
+        // Bresenham's line algorithm to
         int x1 = positionToSector(start.x);
         int y1 = positionToSector(start.y);
         int x2 = positionToSector(end.x);
@@ -225,17 +230,17 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
             {
                 hash = hashSector(x, y);
             }
-            
+
             for(std::list<PathPlannerManager::PathPlannerAvoidObject>::iterator i = manager->small_objects[hash].begin(); i != manager->small_objects[hash].end(); )
             {
                 if (i->source)
                 {
-                    sf::Vector2f position = i->source->getPosition();
-                    float f = sf::dot(startEndDiff, position - start) / startEndLength;
+                    glm::vec2 position = i->source->getPosition();
+                    float f = glm::dot(startEndDiff, position - start) / startEndLength;
                     if (f > 0 && f < startEndLength - i->size)
                     {
-                        sf::Vector2f q = start + startEndDiff / startEndLength * f;
-                        if ((q - position) < i->size)
+                        glm::vec2 q = start + startEndDiff / startEndLength * f;
+                        if (glm::length2(q - position) < (i->size + my_size) * (i->size + my_size))
                         {
                             if (f < firstAvoidF)
                             {
@@ -259,13 +264,15 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
             }
         }
     }
-    
+
     if (firstAvoidF < startEndLength)
     {
-        sf::Vector2f position = avoidObject.source->getPosition();
-        new_point = position + sf::normalize(firstAvoidQ - position) * avoidObject.size * 1.1f;
+        glm::vec2 position = avoidObject.source->getPosition();
+        if (firstAvoidQ.x == position.x && firstAvoidQ.y == position.y)
+            firstAvoidQ.x += 0.1f;
+        new_point = position + glm::normalize(firstAvoidQ - position) * (avoidObject.size * 1.1f + my_size);
         if (alt_point)
-            *alt_point = position - sf::normalize(firstAvoidQ - position) * avoidObject.size * 1.1f;
+            *alt_point = position - glm::normalize(firstAvoidQ - position) * (avoidObject.size * 1.1f + my_size);
         return true;
     }
     return false;

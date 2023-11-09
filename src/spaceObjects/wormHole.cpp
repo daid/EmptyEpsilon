@@ -1,114 +1,123 @@
-#include <SFML/OpenGL.hpp>
+#include <graphics/opengl.h>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "main.h"
+#include "random.h"
 #include "wormHole.h"
 #include "spaceship.h"
 #include "scriptInterface.h"
+#include "textureManager.h"
 
-#define FORCE_MULTIPLIER          50.0
-#define FORCE_MAX                 10000.0
-#define ALPHA_MULTIPLIER          10.0
-#define DEFAULT_COLLISION_RADIUS  2500
-#define AVOIDANCE_MULTIPLIER      1.2
-#define TARGET_SPREAD             500
+#include "glObjects.h"
+#include "shaderRegistry.h"
 
-// A wormhole object that drags objects toward it like a black hole, and then
-// teleports them to another point when they reach its center.
+#include <glm/ext/matrix_transform.hpp>
+
+#define FORCE_MULTIPLIER          50.0f
+#define FORCE_MAX                 10000.0f
+#define ALPHA_MULTIPLIER          10.0f
+#define DEFAULT_COLLISION_RADIUS  2500.0f
+#define AVOIDANCE_MULTIPLIER      1.2f
+#define TARGET_SPREAD             500.0f
+
+struct VertexAndTexCoords
+{
+    glm::vec3 vertex;
+    glm::vec2 texcoords;
+};
+
+/// A WormHole is a piece of space terrain that pulls all nearby SpaceObjects within a 5U radius, including otherwise immobile objects like SpaceStations, toward its center.
+/// Any SpaceObject that reaches its center is teleported to another point in space.
+/// AI behaviors avoid WormHoles by a 2U margin.
+/// Example: wormhole = WormHole():setPosition(1000,1000):setTargetPosition(10000,10000)
 REGISTER_SCRIPT_SUBCLASS(WormHole, SpaceObject)
 {
-    /// Set the target of this wormhole
+    /// Sets the target teleportation coordinates for SpaceObjects that pass through the center of this WormHole.
+    /// Example: wormhole:setTargetPosition(10000,10000)
     REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, setTargetPosition);
+    /// Returns the target teleportation coordinates for SpaceObjects that pass through the center of this WormHole.
+    /// Example: wormhole:getTargetPosition()
     REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, getTargetPosition);
-    /// Set a function that will be called if a SpaceObject is teleported.
-    /// First argument given to the function will be the WormHole, the second the SpaceObject that has been teleported.
+    /// Defines a function to call when this WormHole teleports a SpaceObject.
+    /// Passes the WormHole object and the teleported SpaceObject.
+    /// Example:
+    /// -- Outputs teleportation details to the console window and logging file
+    /// wormhole:onTeleportation(function(this_wormhole,teleported_object) print(teleported_object:getCallSign() .. " teleported to " .. this_wormhole:getTargetPosition()) end)
     REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, onTeleportation);
 }
 
 REGISTER_MULTIPLAYER_CLASS(WormHole, "WormHole");
 WormHole::WormHole()
-: SpaceObject(DEFAULT_COLLISION_RADIUS, "WormHole") 
+: SpaceObject(DEFAULT_COLLISION_RADIUS, "WormHole")
 {
     pathPlanner = PathPlannerManager::getInstance();
     pathPlanner->addAvoidObject(this, (DEFAULT_COLLISION_RADIUS * AVOIDANCE_MULTIPLIER) );
-    
+
     setRadarSignatureInfo(0.9, 0.0, 0.0);
 
     // Choose a texture to show on radar
     radar_visual = irandom(1, 3);
     registerMemberReplication(&radar_visual);
-    
+
     // Create some overlaying clouds
     for(int n=0; n<cloud_count; n++)
     {
         clouds[n].size = random(1024, 1024 * 4);
         clouds[n].texture = irandom(1, 3);
-        clouds[n].offset = sf::Vector2f(0, 0); 
+        clouds[n].offset = glm::vec2(0, 0);
     }
 }
 
-#if FEATURE_3D_RENDERING
 void WormHole::draw3DTransparent()
 {
-    glRotatef(getRotation(), 0, 0, -1);
-    glTranslatef(-getPosition().x, -getPosition().y, 0);
+    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
+
+    std::array<VertexAndTexCoords, 4> quad{
+        glm::vec3{}, {0.f, 1.f},
+        glm::vec3{}, {1.f, 1.f},
+        glm::vec3{}, {1.f, 0.f},
+        glm::vec3{}, {0.f, 0.f}
+    };
+
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+
     for(int n=0; n<cloud_count; n++)
     {
         NebulaCloud& cloud = clouds[n];
 
-        sf::Vector3f position = sf::Vector3f(getPosition().x, getPosition().y, 0) + sf::Vector3f(cloud.offset.x, cloud.offset.y, 0);
+        auto position = glm::vec3(getPosition().x, getPosition().y, 0) + glm::vec3(cloud.offset.x, cloud.offset.y, 0);
         float size = cloud.size;
-        
-        float distance = sf::length(camera_position - position);
-        float alpha = 1.0 - (distance / 10000.0f);
-        if (alpha < 0.0)
+
+        float distance = glm::length(camera_position - position);
+        float alpha = 1.0f - (distance / 10000.0f);
+        if (alpha < 0.0f)
             continue;
 
-        ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("wormHole" + string(cloud.texture) + ".png"));
-        sf::Shader::bind(ShaderManager::getShader("billboardShader"));
-        glBegin(GL_QUADS);
-        glColor4f(alpha * 0.8, alpha * 0.8, alpha * 0.8, size);
-        glTexCoord2f(0, 0);
-        glVertex3f(position.x, position.y, position.z);
-        glTexCoord2f(1, 0);
-        glVertex3f(position.x, position.y, position.z);
-        glTexCoord2f(1, 1);
-        glVertex3f(position.x, position.y, position.z);
-        glTexCoord2f(0, 1);
-        glVertex3f(position.x, position.y, position.z);
-        glEnd();
+        textureManager.getTexture("wormHole" + string(cloud.texture) + ".png")->bind();
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha * 0.8f, alpha * 0.8f, alpha * 0.8f, size);
+        auto model_matrix = glm::translate(getModelMatrix(), {cloud.offset.x, cloud.offset.y, 0});
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+        std::initializer_list<uint16_t> indices = { 0, 2, 1, 0, 3, 2 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
     }
 }
-#endif//FEATURE_3D_RENDERING
 
-
-void WormHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void WormHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "wormHole" + string(radar_visual) + ".png");
-    object_sprite.setRotation(getRotation());
-    object_sprite.setPosition(position);
-    float size = getRadius() * scale / object_sprite.getTextureRect().width * 3.0;
-    object_sprite.setScale(size, size);
-    object_sprite.setColor(sf::Color(255, 255, 255));
-    window.draw(object_sprite, sf::RenderStates(sf::BlendAdd));
+    renderer.drawRotatedSpriteBlendAdd("wormHole" + string(radar_visual) + ".png", position, getRadius() * scale * 3.0f, getRotation() - rotation);
 }
 
 // Draw a line toward the target position
-void WormHole::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
-{    
-    sf::VertexArray a(sf::Lines, 2);
-    a[0].position = position;
-    a[1].position = position + (target_position - getPosition()) * scale;
-    a[0].color = sf::Color(255, 255, 255, 32);
-    window.draw(a);
-    
-    sf::CircleShape range_circle(getRadius() * scale);
-    range_circle.setOrigin(getRadius() * scale, getRadius() * scale);
-    range_circle.setPosition(position);
-    range_circle.setFillColor(sf::Color::Transparent);
-    range_circle.setOutlineColor(sf::Color(255, 255, 255, 32));
-    range_circle.setOutlineThickness(2.0);
-    window.draw(range_circle);
+void WormHole::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
+{
+    auto offset = target_position - getPosition();
+    renderer.drawLine(position, position + glm::vec2(offset.x, offset.y) * scale, glm::u8vec4(255, 255, 255, 32));
+
+    renderer.drawCircleOutline(position, getRadius() * scale, 2.0, glm::u8vec4(255, 255, 255, 32));
 }
 
 
@@ -119,46 +128,49 @@ void WormHole::update(float delta)
 
 void WormHole::collide(Collisionable* target, float collision_force)
 {
-    if (update_delta == 0.0)
+    if (update_delta == 0.0f)
         return;
 
-    sf::Vector2f diff = getPosition() - target->getPosition();
-    float distance = sf::length(diff);
+    P<SpaceObject> obj = P<Collisionable>(target);
+    if (!obj) return;
+    if (!obj->hasWeight()) { return; } // the object is not affected by gravitation
+
+    auto diff = getPosition() - target->getPosition();
+    float distance = glm::length(diff);
     float force = (getRadius() * getRadius() * FORCE_MULTIPLIER) / (distance * distance);
-    
-    P<SpaceShip> obj = P<Collisionable>(target);
-    
+
+    P<SpaceShip> spaceship = P<Collisionable>(target);
+
+    // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
+    if (spaceship)
+        spaceship->wormhole_alpha = ((distance / getRadius()) * ALPHA_MULTIPLIER);
+
     if (force > FORCE_MAX)
     {
         force = FORCE_MAX;
         if (isServer())
-            target->setPosition( (target_position + 
-                                  sf::Vector2f(random(-TARGET_SPREAD, TARGET_SPREAD), 
-                                               random(-TARGET_SPREAD, TARGET_SPREAD))));
-        if (obj)
+            target->setPosition( (target_position +
+                                  glm::vec2(random(-TARGET_SPREAD, TARGET_SPREAD), random(-TARGET_SPREAD, TARGET_SPREAD))));
+        if (on_teleportation.isSet())
         {
-            obj->wormhole_alpha = 0.0;
-            if (on_teleportation.isSet())
-            {
-                on_teleportation.call(P<WormHole>(this), obj);
-            }
+            on_teleportation.call<void>(P<WormHole>(this), obj);
+        }
+        if (spaceship)
+        {
+            spaceship->wormhole_alpha = 0.0;
         }
     }
-    
-    // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
-    if (obj)
-        obj->wormhole_alpha = ((distance / getRadius()) * ALPHA_MULTIPLIER);
-    
+
     // TODO: Escaping is impossible. Change setPosition to something Newtonianish.
     target->setPosition(target->getPosition() + diff / distance * update_delta * force);
 }
 
-void WormHole::setTargetPosition(sf::Vector2f v)
+void WormHole::setTargetPosition(glm::vec2 v)
 {
     target_position = v;
 }
 
-sf::Vector2f WormHole::getTargetPosition()
+glm::vec2 WormHole::getTargetPosition()
 {
     return target_position;
 }
@@ -166,4 +178,9 @@ sf::Vector2f WormHole::getTargetPosition()
 void WormHole::onTeleportation(ScriptSimpleCallback callback)
 {
     this->on_teleportation = callback;
+}
+
+glm::mat4 WormHole::getModelMatrix() const
+{
+    return glm::identity<glm::mat4>();
 }

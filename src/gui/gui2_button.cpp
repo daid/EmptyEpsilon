@@ -1,68 +1,57 @@
 #include "soundManager.h"
-#include "colorConfig.h"
+#include "theme.h"
 #include "gui2_button.h"
 #include "preferenceManager.h"
 
 GuiButton::GuiButton(GuiContainer* owner, string id, string text, func_t func)
 : GuiElement(owner, id), text(text), func(func)
 {
-    text_size = 30;
+    text_size = -1;
+    back_style = theme->getStyle("button.back");
+    front_style = theme->getStyle("button.front");
 }
 
-void GuiButton::onDraw(sf::RenderTarget& window)
+void GuiButton::onDraw(sp::RenderTarget& renderer)
 {
-    sf::Color color = selectColor(colorConfig.button.background);
-    sf::Color text_color = selectColor(colorConfig.button.forground);
-    
-    if (!enabled)
-        drawStretched(window, rect, "gui/ButtonBackground.disabled", color);
-    else if (active)
-        drawStretched(window, rect, "gui/ButtonBackground.active", color);
-    else if (hover)
-        drawStretched(window, rect, "gui/ButtonBackground.hover", color);
-    else
-        drawStretched(window, rect, "gui/ButtonBackground", color);
+    const auto& back = back_style->get(getState());
+    const auto& front = front_style->get(getState());
+    renderer.drawStretched(rect, back.texture, back.color);
 
     if (icon_name != "")
     {
-        sf::FloatRect text_rect = rect;
-        sf::Sprite icon;
-        EGuiAlign text_align = ACenterLeft;
-        textureManager.setTexture(icon, icon_name);
-        float scale = rect.height / icon.getTextureRect().height * 0.8;
-        icon.setScale(scale, scale);
-        icon.setRotation(icon_rotation);
+        sp::Rect text_rect = rect;
+        sp::Alignment text_align = sp::Alignment::CenterLeft;
+        float icon_x;
         switch(icon_alignment)
         {
-        case ACenterLeft:
-        case ATopLeft:
-        case ABottomLeft:
-            icon.setPosition(rect.left + rect.height / 2, rect.top + rect.height / 2);
-            text_rect.left = rect.left + rect.height;
+        case sp::Alignment::CenterLeft:
+        case sp::Alignment::TopLeft:
+        case sp::Alignment::BottomLeft:
+            icon_x = rect.position.x + rect.size.y * 0.5f;
+            text_rect.position.x = rect.position.x + rect.size.y;
             break;
         default:
-            icon.setPosition(rect.left + rect.width - rect.height / 2, rect.top + rect.height / 2);
-            text_rect.width = rect.width - rect.height;
-            text_align = ACenterRight;
+            icon_x = rect.position.x + rect.size.x - rect.size.y * 0.5f;
+            text_rect.size.x = rect.size.x - rect.size.y;
+            text_align = sp::Alignment::CenterRight;
         }
-        icon.setColor(text_color);
-        window.draw(icon);
-        drawText(window, text_rect, text, text_align, text_size, main_font, text_color);
+        renderer.drawRotatedSprite(icon_name, glm::vec2(icon_x, rect.position.y + rect.size.y * 0.5f), rect.size.y * 0.8f, icon_rotation, front.color);
+        renderer.drawText(text_rect, text, text_align, text_size > 0 ? text_size : front.size, front.font, front.color);
     }else{
-        drawText(window, rect, text, ACenter, text_size, main_font, text_color);
+        renderer.drawText(rect, text, sp::Alignment::Center, text_size > 0 ? text_size : front.size, front.font, front.color);
     }
 }
 
-bool GuiButton::onMouseDown(sf::Vector2f position)
+bool GuiButton::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     return true;
 }
 
-void GuiButton::onMouseUp(sf::Vector2f position)
+void GuiButton::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (rect.contains(position))
     {
-        soundManager->playSound("button.wav");
+        soundManager->playSound("sfx/button.wav");
         if (func)
         {
             func_t f = func;
@@ -88,11 +77,18 @@ GuiButton* GuiButton::setTextSize(float size)
     return this;
 }
 
-GuiButton* GuiButton::setIcon(string icon_name, EGuiAlign icon_alignment, float rotation)
+GuiButton* GuiButton::setIcon(string icon_name, sp::Alignment icon_alignment, float rotation)
 {
     this->icon_name = icon_name;
     this->icon_alignment = icon_alignment;
     this->icon_rotation = rotation;
+    return this;
+}
+
+GuiButton* GuiButton::setStyle(const string& style)
+{
+    back_style = theme->getStyle(style + ".back");
+    front_style = theme->getStyle(style + ".front");
     return this;
 }
 

@@ -429,6 +429,10 @@
                         {
                             this.drawCircle(ctx, x, y, this._zoom_scale, "#FFC864", 1.0, 1)
                         }
+                        else if (entry.type == "Planet")
+                        {
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#00A", 1.0, Math.floor(entry["planet_radius"] / 20))
+                        }
                         else if (entry.type == "ScanProbe")
                         {
                             // Draw probe scan radius.

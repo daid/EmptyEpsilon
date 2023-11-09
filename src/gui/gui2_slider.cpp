@@ -2,88 +2,171 @@
 
 #include "gui2_slider.h"
 #include "preferenceManager.h"
+#include "theme.h"
 
-GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
+
+GuiBasicSlider::GuiBasicSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
 {
-    overlay_label = nullptr;
+    front_style = theme->getStyle("slider.front");
+    back_style = theme->getStyle("slider.back");
 }
 
-void GuiSlider::onDraw(sf::RenderTarget& window)
+void GuiBasicSlider::onDraw(sp::RenderTarget& renderer)
 {
-    drawStretched(window, rect, "gui/SliderBackground", selectColor(colorConfig.slider.background));
+    const auto& back = back_style->get(getState());
+    const auto& front = front_style->get(getState());
 
-    sf::Color color = selectColor(colorConfig.slider.forground);
+    renderer.drawStretched(rect, back.texture, back.color);
 
-    if (rect.width > rect.height)
+    if (rect.size.x > rect.size.y)
+    {
+        float x;
+        x = rect.position.x + (rect.size.x - rect.size.y) * (value - min_value) / (max_value - min_value);
+
+        renderer.drawSprite(front.texture, glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, front.color);
+    }else{
+        float y;
+        y = rect.position.y + (rect.size.y - rect.size.x) * (value - min_value) / (max_value - min_value);
+
+        renderer.drawSprite(front.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, front.color);
+    }
+}
+
+bool GuiBasicSlider::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
+{
+    onMouseDrag(position, id);
+    return true;
+}
+
+void GuiBasicSlider::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
+{
+    float new_value;
+    if (rect.size.x > rect.size.y)
+        new_value = (position.x - rect.position.x - (rect.size.y / 2.0f)) / (rect.size.x - rect.size.y);
+    else
+        new_value = (position.y - rect.position.y - (rect.size.x / 2.0f)) / (rect.size.y - rect.size.x);
+    new_value = min_value + (max_value - min_value) * new_value;
+    if (min_value < max_value)
+    {
+        if (new_value < min_value)
+            new_value = min_value;
+        if (new_value > max_value)
+            new_value = max_value;
+    }else{
+        if (new_value > min_value)
+            new_value = min_value;
+        if (new_value < max_value)
+            new_value = max_value;
+    }
+    if (value != new_value)
+    {
+        value = new_value;
+        if (func)
+        {
+            func_t f = func;
+            f(value);
+        }
+    }
+}
+
+void GuiBasicSlider::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
+{
+}
+
+GuiBasicSlider* GuiBasicSlider::setValue(float value)
+{
+    if (min_value < max_value)
+    {
+        if (value < min_value)
+            value = min_value;
+        if (value > max_value)
+            value = max_value;
+    }else{
+        if (value > min_value)
+            value = min_value;
+        if (value < max_value)
+            value = max_value;
+    }
+    this->value = value;
+    return this;
+}
+
+GuiBasicSlider* GuiBasicSlider::setRange(float min, float max)
+{
+    this->min_value = min;
+    this->max_value = max;
+    setValue(this->value);
+    return this;
+}
+
+float GuiBasicSlider::getValue() const
+{
+    return value;
+}
+
+
+
+GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
+: GuiBasicSlider(owner, id, min_value, max_value, start_value, func)
+{
+    overlay_label = nullptr;
+    tick_style = theme->getStyle("slider.tick");
+}
+
+void GuiSlider::onDraw(sp::RenderTarget& renderer)
+{
+    const auto& back = back_style->get(getState());
+    const auto& tick = tick_style->get(getState());
+    const auto& front = front_style->get(getState());
+
+    renderer.drawStretched(rect, back.texture, back.color);
+
+    if (rect.size.x > rect.size.y)
     {
         float x;
 
         for(TSnapPoint& point : snap_points)
         {
-            x = rect.left + (rect.width - rect.height) * (point.value - min_value) / (max_value - min_value);
+            x = rect.position.x + (rect.size.x - rect.size.y) * (point.value - min_value) / (max_value - min_value);
 
-            sf::Sprite snap_sprite;
-            textureManager.setTexture(snap_sprite, "gui/SliderTick");
-            snap_sprite.setRotation(90);
-            snap_sprite.setPosition(x + rect.height / 2, rect.top + rect.height / 2);
-            snap_sprite.setScale(rect.height / snap_sprite.getTextureRect().width, rect.height / snap_sprite.getTextureRect().width);
-            snap_sprite.setColor(selectColor(colorConfig.slider.background));
-            window.draw(snap_sprite);
+            renderer.drawRotatedSprite(tick.texture, glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, 90, tick.color);
         }
-        x = rect.left + (rect.width - rect.height) * (value - min_value) / (max_value - min_value);
+        x = rect.position.x + (rect.size.x - rect.size.y) * (value - min_value) / (max_value - min_value);
 
-        sf::Sprite sprite;
-        textureManager.setTexture(sprite, "gui/SliderKnob");
-        sprite.setOrigin(0, 0);
-        sprite.setPosition(x, rect.top);
-        sprite.setScale(rect.height / sprite.getTextureRect().width, rect.height / sprite.getTextureRect().width);
-        sprite.setColor(color);
-        window.draw(sprite);
+        renderer.drawSprite(front.texture, glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, front.color);
     }else{
         float y;
         for(TSnapPoint& point : snap_points)
         {
-            y = rect.top + (rect.height - rect.width) * (point.value - min_value) / (max_value - min_value);
+            y = rect.position.y + (rect.size.y - rect.size.x) * (point.value - min_value) / (max_value - min_value);
 
-            sf::Sprite snap_sprite;
-            textureManager.setTexture(snap_sprite, "gui/SliderTick");
-            snap_sprite.setOrigin(0, 0);
-            snap_sprite.setPosition(rect.left, y);
-            snap_sprite.setScale(rect.width / snap_sprite.getTextureRect().width, rect.width / snap_sprite.getTextureRect().width);
-            snap_sprite.setColor(selectColor(colorConfig.slider.background));
-            window.draw(snap_sprite);
+            renderer.drawSprite(tick.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, tick.color);
         }
-        y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
+        y = rect.position.y + (rect.size.y - rect.size.x) * (value - min_value) / (max_value - min_value);
 
-        sf::Sprite sprite;
-        textureManager.setTexture(sprite, "gui/SliderKnob");
-        sprite.setOrigin(0, 0);
-        sprite.setPosition(rect.left, y);
-        sprite.setScale(rect.width / sprite.getTextureRect().width, rect.width / sprite.getTextureRect().width);
-        sprite.setColor(color);
-        window.draw(sprite);
+        renderer.drawSprite(front.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, front.color);
     }
-    
+
     if (overlay_label)
     {
         overlay_label->setText(string(value, 0));
     }
 }
 
-bool GuiSlider::onMouseDown(sf::Vector2f position)
+bool GuiSlider::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    onMouseDrag(position);
+    onMouseDrag(position, id);
     return true;
 }
 
-void GuiSlider::onMouseDrag(sf::Vector2f position)
+void GuiSlider::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
     float new_value;
-    if (rect.width > rect.height)
-        new_value = (position.x - rect.left - (rect.height / 2.0)) / (rect.width - rect.height);
+    if (rect.size.x > rect.size.y)
+        new_value = (position.x - rect.position.x - (rect.size.y / 2.0f)) / (rect.size.x - rect.size.y);
     else
-        new_value = (position.y - rect.top - (rect.width / 2.0)) / (rect.height - rect.width);
+        new_value = (position.y - rect.position.y - (rect.size.x / 2.0f)) / (rect.size.y - rect.size.x);
     new_value = min_value + (max_value - min_value) * new_value;
     for(TSnapPoint& point : snap_points)
     {
@@ -113,7 +196,7 @@ void GuiSlider::onMouseDrag(sf::Vector2f position)
     }
 }
 
-void GuiSlider::onMouseUp(sf::Vector2f position)
+void GuiSlider::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
 }
 
@@ -131,32 +214,6 @@ GuiSlider* GuiSlider::addSnapValue(float value, float range)
     return this;
 }
 
-GuiSlider* GuiSlider::setValue(float value)
-{
-    if (min_value < max_value)
-    {
-        if (value < min_value)
-            value = min_value;
-        if (value > max_value)
-            value = max_value;
-    }else{
-        if (value > min_value)
-            value = min_value;
-        if (value < max_value)
-            value = max_value;
-    }
-    this->value = value;
-    return this;
-}
-
-GuiSlider* GuiSlider::setRange(float min, float max)
-{
-    this->min_value = min;
-    this->max_value = max;
-    setValue(this->value);
-    return this;
-}
-
 GuiSlider* GuiSlider::addOverlay()
 {
     if (!overlay_label)
@@ -167,45 +224,38 @@ GuiSlider* GuiSlider::addOverlay()
     return this;
 }
 
-float GuiSlider::getValue() const
-{
-    return value;
-}
 
-GuiSlider2D::GuiSlider2D(GuiContainer* owner, string id, sf::Vector2f min_value, sf::Vector2f max_value, sf::Vector2f start_value, func_t func)
+GuiSlider2D::GuiSlider2D(GuiContainer* owner, string id, glm::vec2 min_value, glm::vec2 max_value, glm::vec2 start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
 {
+    front_style = theme->getStyle("slider.front");
+    back_style = theme->getStyle("slider.back");
 }
 
-void GuiSlider2D::onDraw(sf::RenderTarget& window)
+void GuiSlider2D::onDraw(sp::RenderTarget& renderer)
 {
-    drawStretchedHV(window, rect, 25.0f, "gui/SliderBackground", selectColor(colorConfig.slider.background));
+    const auto& back = back_style->get(getState());
+    const auto& front = front_style->get(getState());
 
-    sf::Color color = selectColor(colorConfig.slider.forground);
+    renderer.drawStretchedHV(rect, back.size, back.texture, back.color);
 
-    float x = rect.left + (rect.width - 50.0) * (value.x - min_value.x) / (max_value.x - min_value.x);
-    float y = rect.top + (rect.height - 50.0) * (value.y - min_value.y) / (max_value.y - min_value.y);
+    float x = rect.position.x + (rect.size.x - 50.0f) * (value.x - min_value.x) / (max_value.x - min_value.x);
+    float y = rect.position.y + (rect.size.y - 50.0f) * (value.y - min_value.y) / (max_value.y - min_value.y);
 
-    sf::Sprite sprite;
-    textureManager.setTexture(sprite, "gui/SliderKnob");
-    sprite.setOrigin(0, 0);
-    sprite.setPosition(x, y);
-    sprite.setScale(50.0 / sprite.getTextureRect().width, 50.0 / sprite.getTextureRect().width);
-    sprite.setColor(color);
-    window.draw(sprite);
+    renderer.drawSprite(front.texture, glm::vec2(x + 25, y + 25), 50, front.color);
 }
 
-bool GuiSlider2D::onMouseDown(sf::Vector2f position)
+bool GuiSlider2D::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    onMouseDrag(position);
+    onMouseDrag(position, id);
     return true;
 }
 
-void GuiSlider2D::onMouseDrag(sf::Vector2f position)
+void GuiSlider2D::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
-    sf::Vector2f new_value;
-    new_value.x = (position.x - rect.left - 25.0f) / (rect.width - 50.0f);
-    new_value.y = (position.y - rect.top - 25.0f) / (rect.height - 50.0f);
+    glm::vec2 new_value;
+    new_value.x = (position.x - rect.position.x - 25.0f) / (rect.size.x - 50.0f);
+    new_value.y = (position.y - rect.position.y - 25.0f) / (rect.size.y - 50.0f);
     new_value.x = min_value.x + (max_value.x - min_value.x) * new_value.x;
     new_value.y = min_value.y + (max_value.y - min_value.y) * new_value.y;
     for(TSnapPoint& point : snap_points)
@@ -245,7 +295,7 @@ void GuiSlider2D::onMouseDrag(sf::Vector2f position)
     }
 }
 
-void GuiSlider2D::onMouseUp(sf::Vector2f position)
+void GuiSlider2D::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
 }
 
@@ -255,7 +305,7 @@ GuiSlider2D* GuiSlider2D::clearSnapValues()
     return this;
 }
 
-GuiSlider2D* GuiSlider2D::addSnapValue(sf::Vector2f value, sf::Vector2f range)
+GuiSlider2D* GuiSlider2D::addSnapValue(glm::vec2 value, glm::vec2 range)
 {
     snap_points.emplace_back();
     snap_points.back().value = value;
@@ -263,7 +313,7 @@ GuiSlider2D* GuiSlider2D::addSnapValue(sf::Vector2f value, sf::Vector2f range)
     return this;
 }
 
-GuiSlider2D* GuiSlider2D::setValue(sf::Vector2f value)
+GuiSlider2D* GuiSlider2D::setValue(glm::vec2 value)
 {
     if (min_value.x < max_value.x)
     {
@@ -293,7 +343,7 @@ GuiSlider2D* GuiSlider2D::setValue(sf::Vector2f value)
     return this;
 }
 
-sf::Vector2f GuiSlider2D::getValue()
+glm::vec2 GuiSlider2D::getValue()
 {
     return value;
 }

@@ -1,25 +1,19 @@
 #include "gui2_container.h"
 #include "gui2_element.h"
 #include "gui2_canvas.h"
-#include "input.h"
-
-GuiContainer::GuiContainer()
-{
-}
 
 GuiContainer::~GuiContainer()
 {
-    for(GuiElement* element : elements)
+    for(GuiElement* element : children)
     {
         element->owner = nullptr;
         delete element;
     }
 }
 
-void GuiContainer::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& window)
+void GuiContainer::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& renderer)
 {
-    sf::Vector2f mouse_position = InputHandler::getMousePos();
-    for(auto it = elements.begin(); it != elements.end(); )
+    for(auto it = children.begin(); it != children.end(); )
     {
         GuiElement* element = *it;
         if (element->destroyed)
@@ -30,18 +24,18 @@ void GuiContainer::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& win
                 canvas->unfocusElementTree(element);
 
             //Delete it from our list.
-            it = elements.erase(it);
-            
+            it = children.erase(it);
+
             // Free up the memory used by the element.
             element->owner = nullptr;
             delete element;
         }else{
-            element->updateRect(parent_rect);
             element->hover = element->rect.contains(mouse_position);
+
             if (element->visible)
             {
-                element->onDraw(window);
-                element->drawElements(element->rect, window);
+                element->onDraw(renderer);
+                element->drawElements(mouse_position, element->rect, renderer);
             }
 
             it++;
@@ -49,40 +43,34 @@ void GuiContainer::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& win
     }
 }
 
-void GuiContainer::drawDebugElements(sf::FloatRect parent_rect, sf::RenderTarget& window)
+void GuiContainer::drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& renderer)
 {
-    sf::Vector2f mouse_position = InputHandler::getMousePos();
-    for(GuiElement* element : elements)
+    for(GuiElement* element : children)
     {
         if (element->visible)
         {
-            sf::RectangleShape draw_rect(sf::Vector2f(element->rect.width, element->rect.height));
-            draw_rect.setPosition(element->rect.left, element->rect.top);
-            draw_rect.setFillColor(sf::Color(255, 255, 255, 5));
-            draw_rect.setOutlineColor(sf::Color::Magenta);
-            draw_rect.setOutlineThickness(2.0);
-            window.draw(draw_rect);
+            renderer.fillRect(element->rect, glm::u8vec4(255, 255, 255, 5));
+            //TODO_GFX: renderer.outlineRect(element->rect, glm::u8vec4(255, 0, 255, 255));
 
-            element->drawDebugElements(element->rect, window);
+            element->drawDebugElements(element->rect, renderer);
 
-            if (element->rect.contains(mouse_position))
-                element->drawText(window, sf::FloatRect(element->rect.left, element->rect.top - 20, element->rect.width, 20), element->id, ATopLeft, 20, main_font, sf::Color::Red);
+            renderer.drawText(sp::Rect(element->rect.position.x, element->rect.position.y - 20, element->rect.size.x, 20), element->id, sp::Alignment::TopLeft, 20, nullptr, glm::u8vec4(255, 0, 0, 255));
         }
     }
 }
 
-GuiElement* GuiContainer::getClickElement(sf::Vector2f mouse_position)
+GuiElement* GuiContainer::getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    for(std::list<GuiElement*>::reverse_iterator it = elements.rbegin(); it != elements.rend(); it++)
+    for(auto it = children.rbegin(); it != children.rend(); it++)
     {
         GuiElement* element = *it;
-        
-        if (element->hover && element->visible && element->enabled)
+
+        if (element->visible && element->enabled && element->rect.contains(position))
         {
-            GuiElement* clicked = element->getClickElement(mouse_position);
+            GuiElement* clicked = element->getClickElement(button, position, id);
             if (clicked)
                 return clicked;
-            if (element->onMouseDown(mouse_position))
+            if (element->onMouseDown(button, position, id))
             {
                 return element;
             }
@@ -91,63 +79,173 @@ GuiElement* GuiContainer::getClickElement(sf::Vector2f mouse_position)
     return nullptr;
 }
 
-void GuiContainer::forwardKeypressToElements(const HotkeyResult& key)
+void GuiContainer::updateLayout(const sp::Rect& rect)
 {
-    for(GuiElement* element : elements)
+    this->rect = rect;
+    if (layout_manager || !children.empty())
     {
-        if (element->isVisible())
+        if (!layout_manager)
+            layout_manager = std::make_unique<GuiLayout>();
+
+        glm::vec2 padding_size(layout.padding.left + layout.padding.right, layout.padding.top + layout.padding.bottom);
+        layout_manager->updateLoop(*this, sp::Rect(rect.position + glm::vec2{layout.padding.left, layout.padding.top}, rect.size - padding_size));
+        if (layout.match_content_size)
         {
-            if (element->isEnabled())
-                element->onHotkey(key);
-            element->forwardKeypressToElements(key);
+            glm::vec2 content_size_min(std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
+            glm::vec2 content_size_max(std::numeric_limits<float>::min(), std::numeric_limits<float>::min());
+            for(auto w : children)
+            {
+                if (w && w->isVisible())
+                {
+                    glm::vec2 p0 = w->rect.position;
+                    glm::vec2 p1 = p0 + w->rect.size;
+                    content_size_min.x = std::min(content_size_min.x, p0.x - w->layout.margin.left);
+                    content_size_min.y = std::min(content_size_min.y, p0.y - w->layout.margin.top);
+                    content_size_max.x = std::max(content_size_max.x, p1.x + w->layout.margin.right);
+                    content_size_max.y = std::max(content_size_max.y, p1.y + w->layout.margin.bottom);
+                }
+            }
+            if (content_size_max.x != std::numeric_limits<float>::min())
+            {
+                this->rect.size = (content_size_max - content_size_min) + padding_size;
+                layout.size = this->rect.size;
+            }
         }
     }
 }
 
-bool GuiContainer::forwardJoystickXYMoveToElements(sf::Vector2f position)
+void GuiContainer::setAttribute(const string& key, const string& value)
 {
-    for(GuiElement* element : elements)
+    if (key == "size")
     {
-        if (element->isVisible())
+        auto p = value.partition(",");
+        layout.size.x = p.first.strip().toFloat();
+        layout.size.y = p.second.strip().toFloat();
+        layout.match_content_size = false;
+    }
+    else if (key == "width")
+    {
+        layout.size.x = value.toFloat();
+        layout.match_content_size = false;
+    }
+    else if (key == "height")
+    {
+        layout.size.y = value.toFloat();
+        layout.match_content_size = false;
+    }
+    else if (key == "position")
+    {
+        auto p = value.partition(",");
+        layout.position.x = p.first.strip().toFloat();
+        layout.position.y = p.first.strip().toFloat();
+    }
+    else if (key == "margin")
+    {
+        auto values = value.split(",", 3);
+        if (values.size() == 1)
         {
-            if (element->isEnabled())
-                if (element->onJoystickXYMove(position))
-                    return true;
-            if (element->forwardJoystickXYMoveToElements(position))
-                return true;
+            layout.margin.top = layout.margin.bottom = layout.margin.left = layout.margin.right = values[0].strip().toFloat();
+        }
+        else if (values.size() == 2)
+        {
+            layout.margin.left = layout.margin.right = values[0].strip().toFloat();
+            layout.margin.top = layout.margin.bottom = values[1].strip().toFloat();
+        }
+        else if (values.size() == 3)
+        {
+            layout.margin.left = layout.margin.right = values[0].strip().toFloat();
+            layout.margin.top = values[1].strip().toFloat();
+            layout.margin.bottom = values[2].strip().toFloat();
+        }
+        else if (values.size() == 4)
+        {
+            layout.margin.left = values[0].strip().toFloat();
+            layout.margin.right = values[1].strip().toFloat();
+            layout.margin.top = values[2].strip().toFloat();
+            layout.margin.bottom = values[3].strip().toFloat();
         }
     }
-    return false;
-}
-
-bool GuiContainer::forwardJoystickZMoveToElements(float position)
-{
-    for(GuiElement* element : elements)
+    else if (key == "padding")
     {
-        if (element->isVisible())
+        auto values = value.split(",", 3);
+        if (values.size() == 1)
         {
-            if (element->isEnabled())
-                if (element->onJoystickZMove(position))
-                    return true;
-            if (element->forwardJoystickZMoveToElements(position))
-                return true;
+            layout.padding.top = layout.padding.bottom = layout.padding.left = layout.padding.right = values[0].strip().toFloat();
+        }
+        else if (values.size() == 2)
+        {
+            layout.padding.left = layout.padding.right = values[0].strip().toFloat();
+            layout.padding.top = layout.padding.bottom = values[1].strip().toFloat();
+        }
+        else if (values.size() == 3)
+        {
+            layout.padding.left = layout.padding.right = values[0].strip().toFloat();
+            layout.padding.top = values[1].strip().toFloat();
+            layout.padding.bottom = values[2].strip().toFloat();
+        }
+        else if (values.size() == 4)
+        {
+            layout.padding.left = values[0].strip().toFloat();
+            layout.padding.right = values[1].strip().toFloat();
+            layout.padding.top = values[2].strip().toFloat();
+            layout.padding.bottom = values[3].strip().toFloat();
         }
     }
-    return false;
-}
-
-bool GuiContainer::forwardJoystickRMoveToElements(float position)
-{
-    for(GuiElement* element : elements)
+    else if (key == "span")
     {
-        if (element->isVisible())
+        auto p = value.partition(",");
+        layout.span.x = p.first.strip().toInt();
+        layout.span.y = p.second.strip().toInt();
+    }
+    else if (key == "alignment")
+    {
+        string v = value.lower();
+        if (v == "topleft" || v == "lefttop") layout.alignment = sp::Alignment::TopLeft;
+        else if (v == "top" || v == "topcenter" || v == "centertop") layout.alignment = sp::Alignment::TopCenter;
+        else if (v == "topright" || v == "righttop") layout.alignment = sp::Alignment::TopRight;
+        else if (v == "left" || v == "leftcenter" || v == "centerleft") layout.alignment = sp::Alignment::CenterLeft;
+        else if (v == "center") layout.alignment = sp::Alignment::Center;
+        else if (v == "right" || v == "rightcenter" || v == "centerright") layout.alignment = sp::Alignment::CenterRight;
+        else if (v == "bottomleft" || v == "leftbottom") layout.alignment = sp::Alignment::BottomLeft;
+        else if (v == "bottom" || v == "bottomcenter" || v == "centerbottom") layout.alignment = sp::Alignment::BottomCenter;
+        else if (v == "bottomright" || v == "rightbottom") layout.alignment = sp::Alignment::BottomRight;
+        else LOG(Warning, "Unknown alignment:", value);
+    }
+    else if (key == "layout")
+    {
+        GuiLayoutClassRegistry* reg;
+        for(reg = GuiLayoutClassRegistry::first; reg != nullptr; reg = reg->next)
         {
-            if (element->isEnabled())
-                if (element->onJoystickRMove(position))
-                    return true;
-            if (element->forwardJoystickRMoveToElements(position))
-                return true;
+            if (value == reg->name)
+                break;
+        }
+        if (reg)
+        {
+            layout_manager = reg->creation_function();
+        }else{
+            LOG(Error, "Failed to find layout type:", value);
         }
     }
-    return false;
+    else if (key == "stretch")
+    {
+        if (value == "aspect")
+            layout.fill_height = layout.fill_width = layout.lock_aspect_ratio = true;
+        else
+            layout.fill_height = layout.fill_width = value.toBool();
+        layout.match_content_size = false;
+    }
+    else if (key == "fill_height")
+    {
+        layout.fill_height = value.toBool();
+        layout.match_content_size = false;
+    }
+    else if (key == "fill_width")
+    {
+        layout.fill_width = value.toBool();
+        layout.match_content_size = false;
+    }
+    else
+    {
+        LOG(Warning, "Tried to set unknown widget attribute:", key, "to", value);
+    }
 }

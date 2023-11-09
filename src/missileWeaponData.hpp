@@ -43,4 +43,35 @@ template<> int convert<EMissileWeapons>::returnType(lua_State* L, EMissileWeapon
     }
 }
 
+template <> void convert<EMissileSizes>::param(lua_State* L, int& idx, EMissileSizes& es)
+{
+    string str = string(luaL_checkstring(L, idx++)).lower();
+    if (str == "small")
+        es = MS_Small;
+    else if (str == "medium")
+        es = MS_Medium;
+    else if (str == "large")
+        es = MS_Large;
+    else
+        es = MS_Medium; // Fault handling, if we don't recognise it, asume it's medium.
+}
+
+template<> int convert<EMissileSizes>::returnType(lua_State* L, EMissileSizes es)
+{
+    switch(es)
+    {
+    case MS_Small:
+        lua_pushstring(L, "small");
+        return 1;
+    case MS_Medium:
+        lua_pushstring(L, "medium");
+        return 1;
+    case MS_Large:
+        lua_pushstring(L, "large");
+        return 1;
+    default:
+        return 0;
+    }
+}
+
 #endif /* _MISSILEWEAPONDATA_HPP_ */

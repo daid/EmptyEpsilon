@@ -3,21 +3,23 @@
 #include "topDownScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
+#include "multiplayer_client.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
-TopDownScreen::TopDownScreen()
+TopDownScreen::TopDownScreen(RenderLayer* render_layer)
+: GuiCanvas(render_layer)
 {
     // Create a full-screen viewport and draw callsigns on ships.
     viewport = new GuiViewport3D(this, "VIEWPORT");
     viewport->showCallsigns();
-    viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    viewport->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Set the camera's vertical position/zoom.
-    camera_position.z = 7000.0;
+    camera_position.z = 7000.0f;
 
     // Let the screen operator select a player ship to lock the camera onto.
     camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
@@ -25,11 +27,11 @@ TopDownScreen::TopDownScreen()
         if (ship)
             target = ship;
     });
-    camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, ABottomLeft)->setSize(300, 50)->hide();
+    camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
 
     // Toggle whether to lock onto a player ship.
-    camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", "Lock camera on ship", [this](bool value) {});
-    camera_lock_toggle->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->hide();
+    camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", tr("button", "Lock camera on ship"), [this](bool value) {});
+    camera_lock_toggle->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
 
     new GuiIndicatorOverlays(this);
 
@@ -54,19 +56,88 @@ void TopDownScreen::update(float delta)
     {
         destroy();
         disconnectFromServer();
-        returnToMainMenu();
+        returnToMainMenu(getRenderLayer());
         return;
     }
 
     // Enable mouse wheel zoom.
-    float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
-    if (mouse_wheel_delta != 0.0)
+    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
+    if (mouse_wheel_delta != 0.0f)
     {
-        camera_position.z = camera_position.z * (1.0 - (mouse_wheel_delta) * 0.1f);
+        camera_position.z = camera_position.z * (1.0f - (mouse_wheel_delta) * 4 * delta);
         if (camera_position.z > 10000)
             camera_position.z = 10000;
         if (camera_position.z < 1000)
             camera_position.z = 1000;
+    }
+
+    if (keys.topdown.toggle_ui.getDown())
+    {
+        if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible())
+        {
+            camera_lock_toggle->hide();
+            camera_lock_selector->hide();
+        }
+        else {
+            camera_lock_toggle->show();
+            camera_lock_selector->show();
+        }
+    }
+
+    if (keys.topdown.lock_camera.getDown())
+    {
+        camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
+    }
+
+    if (keys.topdown.previous_player_ship.getDown())
+    {
+        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
+        if (camera_lock_selector->getSelectionIndex() < 0)
+            camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
+        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+    }
+
+    if (keys.topdown.next_player_ship.getDown())
+    {
+        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
+        if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
+            camera_lock_selector->setSelectionIndex(0);
+        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+    }
+
+    if (keys.topdown.pan_up.get())
+    {
+        if (!camera_lock_toggle->getValue())
+            camera_position.y = camera_position.y - ((3 * delta * camera_position.z) / 10);
+    }
+
+    if (keys.topdown.pan_left.get())
+    {
+        if (!camera_lock_toggle->getValue())
+            camera_position.x = camera_position.x - ((3 * delta * camera_position.z) / 10);
+    }
+
+    if (keys.topdown.pan_down.get())
+    {
+        if (!camera_lock_toggle->getValue())
+            camera_position.y = camera_position.y + ((3 * delta * camera_position.z) / 10);
+    }
+
+    if (keys.topdown.pan_right.get())
+    {
+        if (!camera_lock_toggle->getValue())
+            camera_position.x = camera_position.x + ((3 * delta * camera_position.z) / 10);
+    }
+
+    if (keys.escape.getDown())
+    {
+        destroy();
+        returnToShipSelection(getRenderLayer());
+    }
+    if (keys.pause.getDown())
+    {
+        if (game_server)
+            engine->setGameSpeed(0.0);
     }
 
     // Add and remove entries from the player ship list.
@@ -90,88 +161,9 @@ void TopDownScreen::update(float delta)
     // If locked onto a player ship, move the camera along with it.
     if (camera_lock_toggle->getValue() && target)
     {
-        sf::Vector2f target_position = target->getPosition();
+        auto target_position = target->getPosition();
 
         camera_position.x = target_position.x;
         camera_position.y = target_position.y;
-    }
-}
-
-void TopDownScreen::onKey(sf::Event::KeyEvent key, int unicode)
-{
-    switch(key.code)
-    {
-    // Toggle UI visibility with the H key.
-    case sf::Keyboard::H:
-        if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible())
-        {
-            camera_lock_toggle->hide();
-            camera_lock_selector->hide();
-        }else{
-            camera_lock_toggle->show();
-            camera_lock_selector->show();
-        }
-        break;
-    // Toggle camera lock with the L key.
-    case sf::Keyboard::L:
-        camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
-        break;
-    // Cycle through player ships with the J and K keys.
-    case sf::Keyboard::J:
-        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
-        if (camera_lock_selector->getSelectionIndex() < 0)
-            camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
-        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
-        break;
-    case sf::Keyboard::K:
-        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
-        if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
-            camera_lock_selector->setSelectionIndex(0);
-        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
-        break;
-    // WASD controls for the unlocked camera.
-    case sf::Keyboard::W:
-        if (!camera_lock_toggle->getValue())
-            camera_position.y = camera_position.y - (50 * (camera_position.z / 1000));
-        break;
-    case sf::Keyboard::A:
-        if (!camera_lock_toggle->getValue())
-            camera_position.x = camera_position.x - (50 * (camera_position.z / 1000));
-        break;
-    case sf::Keyboard::S:
-        if (!camera_lock_toggle->getValue())
-            camera_position.y = camera_position.y + (50 * (camera_position.z / 1000));
-        break;
-    case sf::Keyboard::D:
-        if (!camera_lock_toggle->getValue())
-            camera_position.x = camera_position.x + (50 * (camera_position.z / 1000));
-        break;
-    // Zoom the camera in and out with the R and F keys.
-    case sf::Keyboard::R:
-        if (camera_position.z > 1000.0)
-            camera_position.z -= 100.0;
-        else
-            camera_position.z = 1000.0;
-        break;
-    case sf::Keyboard::F:
-        if (camera_position.z < 10000.0)
-            camera_position.z += 100.0;
-        else
-            camera_position.z = 10000.0;
-        break;
-    // TODO: This is more generic code and is duplicated.
-    // Exit the screen with the escape or home keys.
-    case sf::Keyboard::Escape:
-    case sf::Keyboard::Home:
-        destroy();
-        returnToShipSelection();
-        break;
-    // If this is the server, pause the game with the P key.
-    case sf::Keyboard::P:
-        if (game_server)
-            engine->setGameSpeed(0.0);
-        break;
-    default:
-        break;
     }
 }

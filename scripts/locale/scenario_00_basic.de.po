@@ -1,0 +1,350 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+# Scenario name
+msgid "Basic Battle"
+msgstr "Kampf und Verteidigung"
+
+# Scenario description
+msgid ""
+"A few random stations are under attack by enemies, with random terrain "
+"around them. Destroy all enemies to win.\n"
+"\n"
+"The scenario provides a single player-controlled Atlantis, which is "
+"sufficient to win even in the \"Extreme\" variant.\n"
+"\n"
+"Other player ships can be spawned, but the strength of enemy ships is "
+"independent of the number and types of player ships."
+msgstr ""
+"Einige zufällig verstreute Stationen in zufällig generierter Umgebung werden "
+"angegriffen. Zerstört alle feindlichen Einheiten, um zu gewinnen!\n"
+"\n"
+"Der Schiffstyp \"Atlantis\" ist ausreichend, um selbst die Variante \"Extrem"
+"\" mit einem einzelnen Schiff zu gewinnen.\n"
+"\n"
+"Andere Schiffe können gespawnt werden, aber die Stärke der feindlichen "
+"Schiffe ist unabhängig von Anzahl und Typ der spielbaren Schiffe."
+
+# Scenario setting
+msgctxt "setting"
+msgid "Enemies"
+msgstr "Feinde"
+
+msgctxt "setting"
+msgid "Configures the amount of enemies spawned in the scenario."
+msgstr "Anzahl der feindlichen Schiffe in diesem Szenario."
+
+msgctxt "Enemies"
+msgid "Empty"
+msgstr "Leer"
+
+msgctxt "Enemies"
+msgid ""
+"No enemies. Recommended for GM-controlled scenarios and rookie crew "
+"orientation. The scenario continues until the GM declares victory or all "
+"Human Navy ships are destroyed."
+msgstr ""
+"Keine feindlichen Einheiten. Empfohlen für SL-kontrollierte Szenarios und "
+"zur Orientierung für Anfäger-Crews. Das Szenario läuft bis die SL euren Sieg "
+"erklärt oder alle Schiffe der menschlichen Navy zerstört wurden."
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr "Einfach"
+
+msgctxt "Enemies"
+msgid "Fewer enemies. Recommended for inexperienced crews."
+msgstr "Weniger feindliche Schiffe. Empfohlen für unerfahrene Crews."
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr "Normal"
+
+msgctxt "Enemies"
+msgid "Normal amount of enemies. Recommended for a normal crew."
+msgstr "Normale Anzahl feindlicher Schiffe. Empfohlen für normale Crews."
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr "Schwer"
+
+msgctxt "Enemies"
+msgid "More enemies. Recommended if you have multiple player-controlled ships."
+msgstr ""
+"Mehr feindliche Einheiten, Empfohlen bei mehreren von Spieler:innen "
+"gesteuerten Schiffen."
+
+msgctxt "Enemies"
+msgid "Extreme"
+msgstr "Extrem"
+
+msgctxt "Enemies"
+msgid ""
+"Many enemies. Inexperienced player crews will pretty surely be overwhelmed."
+msgstr ""
+"Viele feindliche Einheiten. Unerfahrene Crews werden überwältigt werden."
+
+# Scenario setting
+msgctxt "setting"
+msgid "Time"
+msgstr "Zeit"
+
+msgctxt "setting"
+msgid "Sets up how much time the players have for the scenario"
+msgstr "Die Zeit, welche für das Bestehen des Szenarios zur Verfügung steht"
+
+msgctxt "Time"
+msgid "Unlimited"
+msgstr "Unbegrenzt"
+
+msgctxt "Time"
+msgid "No time limit"
+msgstr "Kein Zeitlimit"
+
+msgctxt "Time"
+msgid "20min"
+msgstr "20min"
+
+msgctxt "Time"
+msgid "Automatic loss after 20 minutes"
+msgstr "Automatische Niederlage nach 20 Minuten"
+
+msgctxt "Time"
+msgid "30min"
+msgstr "30min"
+
+msgctxt "Time"
+msgid "Automatic loss after 30 minutes"
+msgstr "Automatische Niederlage nach 30 Minuten"
+
+msgctxt "Time"
+msgid "60min"
+msgstr "60min"
+
+msgctxt "Time"
+msgid "Automatic loss after 60 minutes"
+msgstr "Automatische Niederlage nach 20 Minuten"
+
+# Scenario setting
+msgctxt "setting"
+msgid "PlayerShip"
+msgstr "Spielerschiff"
+
+msgctxt "setting"
+msgid "Sets the default player ship"
+msgstr "Das erste spielbare Schiff (weitere können gespawnt werden)"
+
+msgctxt "PlayerShip"
+msgid "Atlantis"
+msgstr "Atlantis"
+
+msgctxt "PlayerShip"
+msgid ""
+"Powerful ship with sidewards missile tubes. Requires more advanced play."
+msgstr ""
+"Starkes Schiff mit seitlichen Raketenschächten.  Benötigt eine etwas "
+"fortgeschrittenere Spielweise."
+
+msgctxt "PlayerShip"
+msgid "Phobos M3P"
+msgstr "Phobos M3P"
+
+msgctxt "PlayerShip"
+msgid ""
+"Simpler, less powerful ship. But easier to handle. Recommended for new crews."
+msgstr ""
+"Simpleres, weniger starkes Schiff, aber einfacher zu bedienen. Für "
+"unerfahrene Crews empfohlen."
+
+#: scripts/scenario_00_basic.lua:205
+msgctxt "buttonGM"
+msgid "+Named Waves"
+msgstr "+Welle: aus Schiffstyp"
+
+#: scripts/scenario_00_basic.lua:206
+msgctxt "buttonGM"
+msgid "Random wave"
+msgstr "Zufällige Welle"
+
+#: scripts/scenario_00_basic.lua:217
+msgctxt "buttonGM"
+msgid "Random friendly"
+msgstr "Zufälliger Verbündeter"
+
+#: scripts/scenario_00_basic.lua:238
+msgctxt "buttonGM"
+msgid "Win"
+msgstr "Sieg für menschl.Navy"
+
+#: scripts/scenario_00_basic.lua:244
+msgctxt "buttonGM"
+msgid "Victory?"
+msgstr "Gewonnen?"
+
+#: scripts/scenario_00_basic.lua:245
+msgctxt "buttonGM"
+msgid "Yes"
+msgstr "Ja"
+
+#: scripts/scenario_00_basic.lua:248
+msgctxt "msgGM"
+msgid ""
+"Players have won.\n"
+"Scenario ended."
+msgstr ""
+"Menschliche Navy hat gewonnen.\n"
+"Szenario beendet."
+
+#: scripts/scenario_00_basic.lua:251
+msgctxt "buttonGM"
+msgid "No"
+msgstr "Nein"
+
+#: scripts/scenario_00_basic.lua:256
+msgctxt "buttonGM"
+msgid "Position: "
+msgstr "Position: "
+
+#: scripts/scenario_00_basic.lua:259
+msgctxt "buttonGM"
+msgid "GM"
+msgstr "festlegen"
+
+#: scripts/scenario_00_basic.lua:261
+msgctxt "buttonGM"
+msgid "Random"
+msgstr "Zufall"
+
+#: scripts/scenario_00_basic.lua:274
+msgctxt "buttonGM"
+msgid "Strikeship"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:275
+msgctxt "buttonGM"
+msgid "Fighter"
+msgstr "Jäger"
+
+#: scripts/scenario_00_basic.lua:276
+msgctxt "buttonGM"
+msgid "Gunship"
+msgstr "Kanonenboot"
+
+#: scripts/scenario_00_basic.lua:277
+msgctxt "buttonGM"
+msgid "Dreadnought"
+msgstr "Dreadnought"
+
+#: scripts/scenario_00_basic.lua:278
+msgctxt "buttonGM"
+msgid "Missile Cruiser"
+msgstr "Raketenkreuzer"
+
+#: scripts/scenario_00_basic.lua:279
+msgctxt "buttonGM"
+msgid "Cruiser"
+msgstr "Kreuzer"
+
+#: scripts/scenario_00_basic.lua:280
+msgctxt "buttonGM"
+msgid "Adv. striker"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:283
+msgctxt "buttonGM"
+msgid "-From Named Waves"
+msgstr "-Welle: aus Schiffstyp"
+
+#: scripts/scenario_00_basic.lua:475
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"%s, your objective is to fend off the incoming Kraylor attack.\n"
+"\n"
+"Please inform your Captain and crew that you have a total of %d minutes for "
+"this mission.\n"
+"\n"
+"The mission started at the arrival of this message.\n"
+"\n"
+"Good luck."
+msgstr ""
+"%s, Ihr Ziel ist es, den bevorstehenden  Kraylor-Angriff abzuwehren.\n"
+"\n"
+"Bitte teilen Sie Captain und Crew mit, dass Sie insgesamt %d Minuten für "
+"diese Mission haben.\n"
+"\n"
+"Die Mission beginnt mit dem Erhalt dieser Botschaft.\n"
+"\n"
+"Viel Glück."
+
+#: scripts/scenario_00_basic.lua:485
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"%s, your objective is to fend off the incoming Kraylor attack.\n"
+"\n"
+"Good luck."
+msgstr ""
+"%s, Ihr Ziel ist es, den bevorstehenden  Kraylor-Angriff abzuwehren.\n"
+"\n"
+"Viel Glück."
+
+#: scripts/scenario_00_basic.lua:520
+#, lua-format
+msgctxt "msgMainscreen&Spectbanner"
+msgid "Mission: SUCCESS (%d seconds left)"
+msgstr "Mission ERFOLGREICH!  (%d Sekunden verbleibend)"
+
+#: scripts/scenario_00_basic.lua:531
+msgctxt "msgMainscreen&Spectbanner"
+msgid "Mission: FAILED (time has run out)"
+msgstr "Mission FEHLGESCHLAGEN (Zeit abgelaufen)"
+
+#: scripts/scenario_00_basic.lua:539
+#, lua-format
+msgctxt "time-incCall"
+msgid "%s, you have %d minute remaining."
+msgstr "%s, Sie haben noch %d Minute Zeit."
+
+#: scripts/scenario_00_basic.lua:544
+#, lua-format
+msgctxt "time-incCall"
+msgid "%s, you have %d minutes remaining."
+msgstr "%s, Sie haben noch %d Minuten Zeit."
+
+#: scripts/scenario_00_basic.lua:549
+#, lua-format
+msgctxt "time-incCall"
+msgid "%s, you have %d minutes remaining of mission time."
+msgstr "%s, Sie haben noch %d Minuten Zeit für die Mission."
+
+#: scripts/scenario_00_basic.lua:559
+msgctxt "msgMainscreen&Spectbanner"
+msgid "Mission: FAILED (no friendlies left)"
+msgstr "Mission FEHLGESCHLAGEN (keine Verbündeten mehr übrig)"
+
+#: scripts/scenario_00_basic.lua:576
+msgctxt "msgMainscreen&Spectbanner"
+msgid "Mission: FAILED (all your ships destroyed)"
+msgstr "Mission FEHLGESCHLAGEN (alle eigenen Schiffe zerstört)"
+
+#: scripts/scenario_00_basic.lua:584
+#, lua-format
+msgctxt "msgSpectbanner"
+msgid "Mission in progress - Time left: %d:%02d - Enemies: %d"
+msgstr "Mission läuft. Verbleibende Zeit: %d:%02d - Feinde: %d"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Scenario ended"
+#~ msgstr "Szenario beendet"

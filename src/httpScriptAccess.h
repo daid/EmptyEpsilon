@@ -1,12 +1,15 @@
 #ifndef HTTP_SCRIPT_ACCESS_H
 #define HTTP_SCRIPT_ACCESS_H
 
-#include "httpServer.h"
+#include "io/http/server.h"
 
-class HttpScriptHandler : public HttpRequestHandler
+class EEHttpServer
 {
 public:
-    virtual bool handleRequest(HttpRequest& request, HttpServerConnection* connection);
+    EEHttpServer(int port, string static_file_path);
+
+private:
+    sp::io::http::Server server;
 };
 
 #endif//HTTP_SCRIPT_ACCESS_H

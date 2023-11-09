@@ -1,0 +1,698 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+#: scripts/shiptemplates/frigates.lua:14
+#, fuzzy
+msgctxt "ship"
+msgid "Phobos T3"
+msgstr "Phobos T3"
+#: scripts/shiptemplates/frigates.lua:14 scripts/shiptemplates/frigates.lua:87
+#: scripts/shiptemplates/frigates.lua:116
+#: scripts/shiptemplates/frigates.lua:133
+#: scripts/shiptemplates/frigates.lua:179
+#: scripts/shiptemplates/frigates.lua:272
+#: scripts/shiptemplates/frigates.lua:299
+#: scripts/shiptemplates/frigates.lua:312
+#: scripts/shiptemplates/frigates.lua:369
+#: scripts/shiptemplates/frigates.lua:414
+#, fuzzy
+msgctxt "class"
+msgid "Frigate"
+msgstr "Fregata"
+#: scripts/shiptemplates/frigates.lua:14
+#, fuzzy
+msgctxt "subclass"
+msgid "Cruiser"
+msgstr "Incrociatore"
+#: scripts/shiptemplates/frigates.lua:16
+msgid ""
+"The Phobos T3, just like the Atlantis, is the workhorse of almost any navy. "
+"It's extremely easy to modify, which makes retro-fitting this ship a breeze. "
+"Its basic stats aren't impressive, but due to its modular nature, it's "
+"fairly easy to produce in large quantities."
+msgstr ""
+"La Phobos T3, proprio come la Atlantis, è la bestia da soma di quasi tutte "
+"le marine. È estremamente facile da modificare, il che rende il "
+"potenziamento un gioco da ragazzi. Le sue statistiche base non sono "
+"impressionanti ma in virtù della sua natura modulare è abbastanza facile da "
+"produrre in grandi quantità."
+#: scripts/shiptemplates/frigates.lua:28
+#, fuzzy
+msgctxt "ship"
+msgid "Elara P2"
+msgstr "Elara P2"
+#: scripts/shiptemplates/frigates.lua:29
+msgid ""
+"Inspired by the Phobos T3 design, the Elara P2 is nearly identical. With the "
+"addition of a warp drive and stronger front shields, the Elara P2 poses a "
+"greater threat than the Phobos"
+msgstr ""
+"Ispirata al design della Phobos T3, la Elara P2 è quasi identica ad essa. "
+"Con l'aggiunta di un motore a curvatura e scudi anteriori più potenti la "
+"Elara P2 rappresenta una minaccia maggiore rispetto alla Phobos."
+#: scripts/shiptemplates/frigates.lua:33
+#, fuzzy
+msgctxt "ship"
+msgid "Phobos M3"
+msgstr "Phobos M3"
+#: scripts/shiptemplates/frigates.lua:34
+msgid ""
+"The Phobos M3 is one of the most common variants of the Phobos T3. It adds a "
+"mine-laying tube, but the extra storage required for the mines slows this "
+"ship down slightly."
+msgstr ""
+"La Phobos M3 è una delle varianti più comuni della Phobos T3. Aggiunge un "
+"tubo per la posa di mine, ma lo spazio di carico aggiuntivo richiesto per le "
+"mine rallenta leggermente la nave."
+#: scripts/shiptemplates/frigates.lua:41
+#, fuzzy
+msgctxt "playerShip"
+msgid "Phobos M3P"
+msgstr "Phobos M3P"
+#: scripts/shiptemplates/frigates.lua:42
+msgid ""
+"Player variant of the Phobos M3, not as strong as the atlantis, but has "
+"front firing tubes, making it an easier to use ship in some scenarios."
+msgstr ""
+"Variante per giocatori della Phobos M3. Non è forte come la Atlantis ma ha "
+"tubi siluri frontali, il che la rende una nave più facile da usare in alcuni "
+"scenari."
+#: scripts/shiptemplates/frigates.lua:87
+#, fuzzy
+msgctxt "ship"
+msgid "Nirvana R5"
+msgstr "Nirvana R5"
+#: scripts/shiptemplates/frigates.lua:87
+#, fuzzy
+msgctxt "subclass"
+msgid "Cruiser: Anti-fighter"
+msgstr "Incrociatore: anti-caccia"
+#: scripts/shiptemplates/frigates.lua:89
+msgid ""
+"The Nirvana R5 is an anti-fighter cruiser. It has several rapid-firing, low-"
+"damage point-defense weapons to quickly take out starfighters."
+msgstr ""
+"La Nirvana è un incrociatore anti-caccia. Ha diverse armi di difesa di punto "
+"a fuoco rapido e basso danno per eliminare rapidamente i caccia stellari."
+#: scripts/shiptemplates/frigates.lua:98
+#, fuzzy
+msgctxt "ship"
+msgid "Nirvana R5A"
+msgstr "Nirvana R5A"
+#: scripts/shiptemplates/frigates.lua:99
+msgid ""
+"An improved version of the Nirvana R5 with faster turning speed and firing "
+"rates."
+msgstr ""
+"Una versione migliorata della Nirvana R5 con velocità di virata e velocità "
+"di fuoco più elevate."
+#: scripts/shiptemplates/frigates.lua:106
+#, fuzzy
+msgctxt "ship"
+msgid "Nirvana R3"
+msgstr "Nirvana R3"
+#: scripts/shiptemplates/frigates.lua:107
+msgid ""
+"One of the earliest mass produced Nirvana models, the Nirvana R3 is designed "
+"to be used against fighters. It's got several fast, low damage, point "
+"defense beam weapons. Compared to the later, more common Nirvana R5, it has "
+"shorter beams, weaker shields and hull and a slower impulse drive."
+msgstr ""
+"Uno dei primi modelli Nirvana prodotti in serie, la Nirvana R3 è progettata "
+"per essere utilizzata contro i caccia. Ha diverse armi a raggi di difesa di "
+"punto veloci a basso danno. Rispetto alla più recente e più comune Nirvana "
+"R5, ha cannoni più corti, scudi e scafo più deboli e un motori a impulso più "
+"lento."
+#: scripts/shiptemplates/frigates.lua:116
+#, fuzzy
+msgctxt "ship"
+msgid "Storm"
+msgstr "Storm"
+#: scripts/shiptemplates/frigates.lua:116
+#, fuzzy
+msgctxt "subclass"
+msgid "Cruiser: Heavy Artillery"
+msgstr "Incrociatore: artiglieria pesante"
+#: scripts/shiptemplates/frigates.lua:118
+msgid ""
+"A heavy artillery cruiser, the Storm fires bunches of missiles from forward "
+"facing tubes."
+msgstr ""
+"Un incrociatore di artiglieria pesante, la Storm è in grado di sparare "
+"mucchi di missili dai tubi frontali."
+#: scripts/shiptemplates/frigates.lua:133
+#, fuzzy
+msgctxt "playerShip"
+msgid "Hathcock"
+msgstr "Hathcock"
+#: scripts/shiptemplates/frigates.lua:133
+#: scripts/shiptemplates/frigates.lua:299
+#, fuzzy
+msgctxt "subclass"
+msgid "Cruiser: Sniper"
+msgstr "Incrociatore: cecchino"
+#: scripts/shiptemplates/frigates.lua:135
+msgid ""
+"Long range narrow beam and some point defense beams, broadside missiles. "
+"Agile for a frigate"
+msgstr ""
+"Un cannone a raggi a lunga gittata, alcuni cannoni di difesa di punto e "
+"missili laterali. Agile per essere una fregata."
+#: scripts/shiptemplates/frigates.lua:179
+#, fuzzy
+msgctxt "ship"
+msgid "Piranha F12"
+msgstr "Piranha F12"
+#: scripts/shiptemplates/frigates.lua:179
+#, fuzzy
+msgctxt "subclass"
+msgid "Cruiser: Light Artillery"
+msgstr "Incrociatore: artiglieria leggera"
+#: scripts/shiptemplates/frigates.lua:181
+msgid ""
+"A light artillery cruiser, the Piranha F12 is the smallest ship to "
+"exclusively fire from broadside weapon tubes."
+msgstr ""
+"Un incrociatore di artiglieria leggera, la Piranha F12 è la più piccola nave "
+"a sparare esclusivamente con i tubi laterali."
+#: scripts/shiptemplates/frigates.lua:201
+#, fuzzy
+msgctxt "ship"
+msgid "Piranha F12.M"
+msgstr "Piranha F12.M"
+#: scripts/shiptemplates/frigates.lua:202
+#, fuzzy
+msgid ""
+"This modified Piranha F12 is in all respects the same vessel except for "
+"special weapon tube modifications that allow it to fire nukes in addition to "
+"its normal loadout. However, these changes reduce its overall missile "
+"storage capacity."
+msgstr ""
+"Questa Piranha F12 modificata è in tutto e per tutto la stessa nave tranne "
+"che per delle speciali modifiche ai tubi missilistici che le consentono di "
+"lanciare missili nucleari oltre che al suo normale arsenale. Tuttavia, "
+"queste modifiche riducono la capacità complessiva di stoccaggio missilistico."
+#: scripts/shiptemplates/frigates.lua:207
+#, fuzzy
+msgctxt "ship"
+msgid "Piranha F8"
+msgstr "Piranha F8"
+#: scripts/shiptemplates/frigates.lua:208
+msgid ""
+"The first version of the Piranha was not popular due to its meager firepower "
+"and odd tube configuration. The result was a huge financial failure."
+msgstr ""
+"La prima versione della Piranha non era popolare a causa della sua scarsa "
+"potenza di fuoco e della strana configurazione dei tubi. Il risultato è "
+"stato un enorme fallimento finanziario."
+#: scripts/shiptemplates/frigates.lua:216
+#, fuzzy
+msgctxt "playerShip"
+msgid "Piranha"
+msgstr "Piranha F12"
+#: scripts/shiptemplates/frigates.lua:217
+msgid ""
+"This combat-specialized Piranha F12 adds mine-laying tubes, combat "
+"maneuvering systems, and a jump drive."
+msgstr ""
+"Questa Piranha F12 specializzata nel combattimento aggiunge tubi per la posa "
+"di mine, sistemi di manovra in combattimento e un motore di salto."
+#: scripts/shiptemplates/frigates.lua:272
+#, fuzzy
+msgctxt "ship"
+msgid "Stalker Q7"
+msgstr "Stalker Q7"
+#: scripts/shiptemplates/frigates.lua:272
+#, fuzzy
+msgctxt "subclass"
+msgid "Cruiser: Strike ship"
+msgstr "Incrociatore: nave d'assalto"
+#: scripts/shiptemplates/frigates.lua:274
+msgid ""
+"The Stalker is a strike ship designed to swoop into battle, deal damage "
+"quickly, and get out fast. The Q7 model is fitted with a warp drive."
+msgstr ""
+"La Stalker è una nave d'assalto progettata per piombare in battaglia, "
+"infliggere danni rapidamente e allontanarsi in fretta. Il modello Q7 è "
+"dotato di un motore a curvatura."
+#: scripts/shiptemplates/frigates.lua:282
+#, fuzzy
+msgctxt "ship"
+msgid "Stalker Q5"
+msgstr "Stalker Q5"
+#: scripts/shiptemplates/frigates.lua:283
+msgid ""
+"The stalker Q5 predates the Stalker Q7. Like the Q7, the Q5 is designed to "
+"swoop into battle, deal damage quickly and retreat. Compared to the Q7, the "
+"Q5 has weaker shields and hull, but a faster turn speed"
+msgstr ""
+"La stalker Q5 è antecedente alla Stalker Q7. Come la Q7, la Q5 è progettata "
+"per piombare in battaglia, infliggere danni rapidamente e ritirarsi. "
+"Rispetto alla Q7, la Q5 ha scudi e scafo più deboli, ma una velocità di "
+"virata maggiore"
+#: scripts/shiptemplates/frigates.lua:288
+#, fuzzy
+msgctxt "ship"
+msgid "Stalker R7"
+msgstr "Stalker R7"
+#: scripts/shiptemplates/frigates.lua:289
+msgid ""
+"The Stalker is a strike ship designed to swoop into battle, deal damage "
+"quickly, and get out fast. The R7 model is fitted with a jump drive."
+msgstr ""
+"La Stalker è una nave d'assalto progettata per piombare in battaglia, "
+"infliggere danni rapidamente e allontanarsi in fretta. Il modello R7 è "
+"dotato di un motore di salto."
+#: scripts/shiptemplates/frigates.lua:293
+#, fuzzy
+msgctxt "ship"
+msgid "Stalker R5"
+msgstr "Stalker R5"
+#: scripts/shiptemplates/frigates.lua:294
+msgid ""
+"The stalker R5 predates the Stalker R7. Like the R7, the R5 is designed to "
+"swoop into battle, deal damage quickly and retreat. Compared to the R7, the "
+"R5 has weaker shields and hull, but a faster turn speed"
+msgstr ""
+"La stalker R5 precede la Stalker R7. Come la R7, la R5 è progettata per "
+"piombare in battaglia, infliggere danni rapidamente e ritirarsi. Rispetto "
+"alla R7, la R5 ha scudi e scafo più deboli, ma una velocità di virata "
+"maggiore."
+#: scripts/shiptemplates/frigates.lua:299
+#, fuzzy
+msgctxt "ship"
+msgid "Ranus U"
+msgstr "Ranus U"
+#: scripts/shiptemplates/frigates.lua:301
+msgid ""
+"The Ranus U sniper is built to deal a large amounts of damage quickly and "
+"from a distance before escaping. It's the only basic frigate that carries "
+"nuclear weapons, even though it's also the smallest of all frigate-class "
+"ships."
+msgstr ""
+"La nave cecchino Ranus U è costruita per infliggere una grande quantità di "
+"danni rapidamente e da lontano prima di fuggire. È l'unica fregata di base "
+"che trasporta armi nucleari, anche se è la più piccola tra le navi di classe "
+"fregata"
+#: scripts/shiptemplates/frigates.lua:312
+#, fuzzy
+msgctxt "ship"
+msgid "Flavia"
+msgstr "Flavia"
+#: scripts/shiptemplates/frigates.lua:312
+#, fuzzy
+msgctxt "subclass"
+msgid "Light transport"
+msgstr "Trasporto leggero"
+#: scripts/shiptemplates/frigates.lua:314
+msgid ""
+"Popular among traders and smugglers, the Flavia is a small cargo and "
+"passenger transport. It's cheaper than a freighter for small loads and short "
+"distances, and is often used to carry high-value cargo discreetly."
+msgstr ""
+"Popolare tra commercianti e contrabbandieri, la Flavia è una piccola nave da "
+"trasporto merci e passeggeri. È più economica di un mercantile per piccoli "
+"carichi e brevi distanze ed è spesso utilizzata per trasportare "
+"discretamente merci di alto valore."
+#: scripts/shiptemplates/frigates.lua:319
+#, fuzzy
+msgctxt "ship"
+msgid "Flavia Falcon"
+msgstr "Flavia Falcon"
+#: scripts/shiptemplates/frigates.lua:320
+msgid ""
+"The Flavia Falcon is a Flavia transport modified for faster flight, and adds "
+"rear-mounted lasers to keep enemies off its back."
+msgstr ""
+"La Flavia Falcon è una nave da trasporto Flavia modificata per un volo più "
+"veloce e aggiunge laser montati sul retro per tenere alla larga i nemici."
+#: scripts/shiptemplates/frigates.lua:325
+#, fuzzy
+msgctxt "playerShip"
+msgid "Flavia P.Falcon"
+msgstr "Flavia P.Falcon"
+#: scripts/shiptemplates/frigates.lua:326
+msgid ""
+"The Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp "
+"drive."
+msgstr ""
+"La Flavia P. Falcon ha un tubo missilistico nucleare rivolto all'indietro e "
+"un motore a curvatura."
+#: scripts/shiptemplates/frigates.lua:369
+#, fuzzy
+msgctxt "playerShip"
+msgid "Repulse"
+msgstr "Repulse"
+#: scripts/shiptemplates/frigates.lua:369
+#, fuzzy
+msgctxt "subclass"
+msgid "Armored Transport"
+msgstr "Trasporto corazzato"
+#: scripts/shiptemplates/frigates.lua:371
+msgid "Jump/Turret version of Flavia Falcon"
+msgstr "Versione della Flavia Falcon con motore di salto e torretta"
+#: scripts/shiptemplates/frigates.lua:414
+#, fuzzy
+msgctxt "ship"
+msgid "Fiend G3"
+msgstr "Fiend G3"
+#: scripts/shiptemplates/frigates.lua:414
+msgctxt "subclass"
+msgid "Gunship"
+msgstr "Cannoniera"
+#: scripts/shiptemplates/frigates.lua:416
+msgid ""
+"The Fiend G3 was the first model produced by Conversions R Us. They got a "
+"good deal on a number of used Gunships. They added a cheap jump drive to the "
+"Gunship and viola! they made the Fiend G3. Like the Gunship, it has a homing "
+"missile tube and beams to readily take down weaker ships. With the jump "
+"drive, it becomes quite a bit more dangerous than the stock Gunship."
+msgstr ""
+"La Fiend G3 è stata il primo modello prodotto da Conversions R Us. Hanno "
+"ottenuto un buon affare su un certo numero di Cannoniere usate. Hanno "
+"aggiunto un motore di salto economico alla cannoniera e -voilà!- hanno "
+"realizzato la Fiend G3. Come la Cannoniera, ha un tubo missilistico "
+"autoguidato e cannoni a raggi per abbattere facilmente le navi più deboli. "
+"Con il motore di salto diventa un po'più pericolosa della Cannoniera di "
+"serie."
+#: scripts/shiptemplates/frigates.lua:428
+#, fuzzy
+msgctxt "ship"
+msgid "Fiend G4"
+msgstr "Fiend G4"
+#: scripts/shiptemplates/frigates.lua:429
+msgid ""
+"The Fiend G4 was among the first models produced by Conversions R Us. They "
+"got a good deal on a number of used Gunships. They added a cheap warp drive "
+"to the Gunship and viola! they made the Fiend G4. Like the Gunship, it has a "
+"homing missile tube and beams to readily take down weaker ships. With the "
+"warp drive, it becomes quite a bit more dangerous than the stock Gunship."
+msgstr ""
+"La Fiend G4 è stata tra i primi modelli prodotti da Conversions R Us. Hanno "
+"ottenuto un buon affare su un certo numero di Cannoniere usate. Hanno "
+"aggiunto un motore a curvatura economico alla Cannoniera e -voilà!- hanno "
+"creato la Fiend G4. Come la Cannoniera, ha un tubo missilistico autoguidato "
+"e cannoni a raggi per abbattere facilmente le navi più deboli. Con il motore "
+"a curvatura, diventa un po' più pericolosa della Cannoniera di serie."
+#: scripts/shiptemplates/frigates.lua:433
+#, fuzzy
+msgctxt "ship"
+msgid "Fiend G6"
+msgstr "Fiend G6"
+#: scripts/shiptemplates/frigates.lua:434
+msgid ""
+"With the success of the Fiend G3 and G4 models, Conversions R Us continued "
+"their streak with the Fiend G6. They acquired some used Advanced Gunships "
+"and added cheap warp drives to them and made the Fiend G6. Like the Advanced "
+"Gunship, it has two homing missile tubes and beams to readily take down "
+"weaker ships. The warp drive makes it all the more dangerous."
+msgstr ""
+"Con il successo dei modelli Fiend G3 e G4, Conversions R Us ha continuato la "
+"sua serie di successi con la Fiend G6. Hanno acquisito alcune Cannoniere "
+"Avanzate usate, hanno aggiunto motori a curvatura economici e hanno "
+"realizzato la Fiend G6. Come la Cannoniera Avanzata, ha due tubi "
+"missilistici autoguidati e cannoni a raggi per abbattere prontamente le navi "
+"più deboli. Il motore a curvatura la rende ancora più pericolosa."
+#: scripts/shiptemplates/frigates.lua:437
+#, fuzzy
+msgctxt "ship"
+msgid "Fiend G5"
+msgstr "Fiend G5"
+#: scripts/shiptemplates/frigates.lua:438
+msgid ""
+"With the success of the Fiend G3 and G4 models, Conversions R Us continued "
+"their streak with the Fiend G5. They acquired some used Advanced Gunships "
+"and added cheap jump drives to them and made the Fiend G5. Like the Advanced "
+"Gunship, it has two homing missile tubes and beams to readily take down "
+"weaker ships. The jump drive makes it all the more dangerous."
+msgstr ""
+"Con il successo dei modelli Fiend G3 e G4, Conversions R Us ha continuato la "
+"sua serie di successi con la Fiend G5. Hanno acquisito alcune Cannoniere "
+"Avanzate usate, hanno aggiunto motori di salto economici e hanno realizzato "
+"la Fiend G5. Come la Cannoniera Avanzata, ha due tubi missilistici "
+"autoguidati e cannoni a raggi per abbattere prontamente le navi più deboli. "
+"Il motore di salto la rende ancora più pericolosa."
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+# destroyer->incrociatore come hanno fatto per star wars
+# letteralmente sarebbe cacciatorpediniere
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy

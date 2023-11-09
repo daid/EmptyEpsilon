@@ -15,10 +15,6 @@
 
 #include "hardwareMappingEffects.h"
 
-HardwareController::HardwareController()
-{
-}
-
 HardwareController::~HardwareController()
 {
     for(HardwareOutputDevice* device : devices)
@@ -63,7 +59,7 @@ void HardwareController::loadConfiguration(string filename)
     }
     if (section != "")
         handleConfig(section, settings);
-    
+
     fclose(f);
 
     channels.resize(0);
@@ -72,7 +68,7 @@ void HardwareController::loadConfiguration(string filename)
         channels.resize(channels.size() + device->getChannelCount(), 0.0f);
     }
     LOG(INFO) << "Hardware subsystem initialized with: " << channels.size() << " channels";
-    
+
     if (devices.size() < 1)
     {
         LOG(INFO) << "List of available serial ports:";
@@ -88,7 +84,7 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
     if (section == "[hardware]")
     {
         HardwareOutputDevice* device = nullptr;
-        
+
         if (settings["device"] == "")
             LOG(ERROR) << "No device definition in [hardware] section";
         else if (settings["device"] == "DMX512SerialDevice")
@@ -152,10 +148,7 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
                 for(std::pair<string, string> item : settings)
                 {
                     std::vector<string> values = item.second.split(",");
-                    if (values.size() > idx)
-                        per_channel_settings[item.first] = values[idx].strip();
-                    else
-                        per_channel_settings[item.first] = values[values.size() - 1].strip();
+                    per_channel_settings[item.first] = values[idx % values.size()].strip();
                 }
                 createNewHardwareMappingState(channel_numbers[idx], per_channel_settings);
             }
@@ -173,10 +166,7 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
                 for(std::pair<string, string> item : settings)
                 {
                     std::vector<string> values = item.second.split(",");
-                    if (values.size() > idx)
-                        per_channel_settings[item.first] = values[idx];
-                    else
-                        per_channel_settings[item.first] = values[values.size() - 1];
+                    per_channel_settings[item.first] = values[idx % values.size()];
                 }
                 createNewHardwareMappingEvent(channel_numbers[idx], per_channel_settings);
             }
@@ -206,7 +196,7 @@ void HardwareController::update(float delta)
             case HardwareMappingState::NotEqual: active = value != state.compare_value; break;
             }
         }
-        
+
         if (active && state.channel_nr < int(channels.size()))
         {
             channels[state.channel_nr] = state.effect->onActive();
@@ -225,15 +215,15 @@ void HardwareController::update(float delta)
                 switch(event.compare_operator)
                 {
                 case HardwareMappingEvent::Change:
-                    if (fabs(event.previous_value - value) > 0.1)
+                    if (fabs(event.previous_value - value) > 0.1f)
                         trigger = true;
                     break;
                 case HardwareMappingEvent::Increase:
-                    if (value > event.previous_value + 0.1)
+                    if (value > event.previous_value + 0.1f)
                         trigger = true;
                     break;
                 case HardwareMappingEvent::Decrease:
-                    if (value < event.previous_value - 0.1)
+                    if (value < event.previous_value - 0.1f)
                         trigger = true;
                     break;
                 }
@@ -245,14 +235,12 @@ void HardwareController::update(float delta)
         }
         if (trigger)
         {
-            event.triggered = true;
-            event.start_time.restart();
+            event.timer.start(event.runtime);
         }
-        if (event.triggered && event.channel_nr < int(channels.size()))
+        if (event.timer.isRunning() && event.channel_nr < int(channels.size()))
         {
             channels[event.channel_nr] = event.effect->onActive();
-            if (event.start_time.getElapsedTime().asSeconds() > event.runtime)
-                event.triggered = false;
+            event.timer.isExpired(); //reset the running state if it is expired.
         }else{
             event.effect->onInactive();
         }
@@ -269,13 +257,13 @@ void HardwareController::update(float delta)
 void HardwareController::createNewHardwareMappingState(int channel_number, std::unordered_map<string, string>& settings)
 {
     string condition = settings["condition"];
-    
+
     HardwareMappingState state;
     state.variable = condition;
     state.compare_operator = HardwareMappingState::Greater;
     state.compare_value = 0.0;
     state.channel_nr = channel_number;
-    
+
     for(HardwareMappingState::EOperator compare_operator : {HardwareMappingState::Less, HardwareMappingState::Greater, HardwareMappingState::Equal, HardwareMappingState::NotEqual})
     {
         string compare_string = "<";
@@ -293,9 +281,9 @@ void HardwareController::createNewHardwareMappingState(int channel_number, std::
             state.compare_value = condition.substr(condition.find(compare_string) + 1).strip().toFloat();
         }
     }
-    
+
     state.effect = createEffect(settings);
-    
+
     if (state.effect)
     {
         LOG(DEBUG) << "New hardware state: " << state.channel_nr << ":" << state.variable << " " << state.compare_operator << " " << state.compare_value;
@@ -306,7 +294,7 @@ void HardwareController::createNewHardwareMappingState(int channel_number, std::
 void HardwareController::createNewHardwareMappingEvent(int channel_number, std::unordered_map<string, string>& settings)
 {
     string trigger = settings["trigger"];
-    
+
     HardwareMappingEvent event;
     event.compare_operator = HardwareMappingEvent::Change;
     if (trigger.startswith("<"))
@@ -322,9 +310,8 @@ void HardwareController::createNewHardwareMappingEvent(int channel_number, std::
     event.trigger_variable = trigger;
     event.channel_nr = channel_number;
     event.runtime = settings["runtime"].toFloat();
-    event.triggered = false;
     event.previous_value = 0.0;
-    
+
     event.effect = createEffect(settings);
     if (event.effect)
     {
@@ -347,7 +334,7 @@ HardwareMappingEffect* HardwareController::createEffect(std::unordered_map<strin
         effect = new HardwareMappingEffectVariable(this);
     else if (effect_name == "noise")
         effect = new HardwareMappingEffectNoise();
-    
+
     if (effect->configure(settings))
         return effect;
     delete effect;
@@ -360,7 +347,7 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     P<PlayerSpaceship> ship = my_spaceship;
     if (!ship && gameGlobalInfo)
         ship = gameGlobalInfo->getPlayerShip(0);
-    
+
     if (variable_name == "Always")
     {
         value = 1.0;
@@ -395,6 +382,8 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     SHIP_VARIABLE("Alert", ship->getAlertLevel() != AL_Normal ? 1.0f : 0.0f);
     SHIP_VARIABLE("YellowAlert", ship->getAlertLevel() == AL_YellowAlert ? 1.0f : 0.0f);
     SHIP_VARIABLE("RedAlert", ship->getAlertLevel() == AL_RedAlert ? 1.0f : 0.0f);
+    SHIP_VARIABLE("SelfDestruct", ship->activate_self_destruct ? 1.0f : 0.0f);
+    SHIP_VARIABLE("SelfDestructCountdown", ship->self_destruct_countdown / 10.0f);
     for(int n=0; n<max_weapon_tubes; n++)
     {
         SHIP_VARIABLE("TubeLoaded" + string(n), ship->weapon_tube[n].isLoaded() ? 1.0f : 0.0f);
@@ -405,12 +394,12 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     for(int n=0; n<SYS_COUNT; n++)
     {
         SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Health", ship->systems[n].health);
-        SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Power", ship->systems[n].power_level / 3.0);
+        SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Power", ship->systems[n].power_level / 3.0f);
         SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Heat", ship->systems[n].heat_level);
         SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Coolant", ship->systems[n].coolant_level);
         SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Hacked", ship->systems[n].hacked_level);
     }
-    
+
     LOG(WARNING) << "Unknown variable: " << variable_name;
     value = 0.0;
     return false;

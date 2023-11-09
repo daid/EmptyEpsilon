@@ -9,10 +9,10 @@ public:
     : Renderable(mouseLayer), device(device)
     {
     }
-    
-    virtual void render(sf::RenderTarget& window)
+
+    virtual void render(sp::RenderTarget& renderer) override
     {
-        device->render(window);
+        device->render(renderer);
     }
 };
 
@@ -82,12 +82,12 @@ int VirtualOutputDevice::getChannelCount()
     return channel_count;
 }
 
-void VirtualOutputDevice::render(sf::RenderTarget& window)
+void VirtualOutputDevice::render(sp::RenderTarget& renderer)
 {
     int location = 0;
     for(int n=0; n<channel_count; n+=channel_data[n].composition, location++)
     {
-        sf::Color color(0, 0, 0, 255);
+        glm::u8vec4 color(0, 0, 0, 255);
         for(int offset=0; offset<channel_data[n].composition; offset++)
         {
             ChannelData& data = channel_data[n + offset];
@@ -109,10 +109,7 @@ void VirtualOutputDevice::render(sf::RenderTarget& window)
                 break;
             }
         }
-    
-        sf::RectangleShape rect(sf::Vector2f(32, 32));
-        rect.setPosition((location % 32) * 32 + 64, (location / 32) * 32 + 64);
-        rect.setFillColor(color);
-        window.draw(rect, sf::BlendAdd);
+
+        renderer.fillRect(sp::Rect((location % 32) * 32 + 64, (location / 32) * 32 + 64, 32, 32), color);
     }
 }

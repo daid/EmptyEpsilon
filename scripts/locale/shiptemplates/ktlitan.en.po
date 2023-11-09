@@ -1,0 +1,39 @@
+#: scripts/shiptemplates/ktlitan.lua:2
+msgctxt "ship"
+msgid "Ktlitan Fighter"
+msgstr ""
+
+#: scripts/shiptemplates/ktlitan.lua:9
+msgctxt "ship"
+msgid "Ktlitan Breaker"
+msgstr ""
+
+#: scripts/shiptemplates/ktlitan.lua:19
+msgctxt "ship"
+msgid "Ktlitan Worker"
+msgstr ""
+
+#: scripts/shiptemplates/ktlitan.lua:26
+msgctxt "ship"
+msgid "Ktlitan Drone"
+msgstr ""
+
+#: scripts/shiptemplates/ktlitan.lua:32
+msgctxt "ship"
+msgid "Ktlitan Feeder"
+msgstr ""
+
+#: scripts/shiptemplates/ktlitan.lua:42
+msgctxt "ship"
+msgid "Ktlitan Scout"
+msgstr ""
+
+#: scripts/shiptemplates/ktlitan.lua:48
+msgctxt "ship"
+msgid "Ktlitan Destroyer"
+msgstr ""
+
+#: scripts/shiptemplates/ktlitan.lua:59
+msgctxt "ship"
+msgid "Ktlitan Queen"
+msgstr ""

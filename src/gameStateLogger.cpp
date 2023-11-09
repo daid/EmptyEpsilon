@@ -1,7 +1,11 @@
+#include <memory>
 #include <time.h>
 
-//We need a really fast float to string conversion. dtoa from milo does this very well.
-#include "dtoa/dtoa_milo.h"
+// SeriousProton provides nlohmann/json.
+// nlohmann::detail::to_chars implements a Grisu2 double-to-char method for
+// fast float-to-string conversions designed for JSON output, with a
+// std::to_chars-like implementation.
+#include "nlohmann/json.hpp"
 
 #include "gameStateLogger.h"
 #include "gameGlobalInfo.h"
@@ -11,6 +15,8 @@
 #include "spaceObjects/blackHole.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/spaceship.h"
+#include "spaceObjects/missiles/missileWeapon.h"
+#include "spaceObjects/planet.h"
 
 class JSONGenerator
 {
@@ -20,12 +26,12 @@ public:
     {
         *ptr++ = '{';
     }
-    
+
     ~JSONGenerator()
     {
         *ptr++ = '}';
     }
-    
+
     template<typename T> void write(const char* key, const T& value)
     {
         if (!first)
@@ -91,10 +97,23 @@ private:
         while(*c)
             *ptr++ = *c++;
     }
+    // TODO: Replace int/float writers with std::to_chars, when/if Apple Clang
+    // ever reliably supports both.
     void writeValue(int i) { ptr += sprintf(ptr, "%d", i); }
-    void writeValue(float _f) { dtoa_milo(_f, ptr); ptr += strlen(ptr); }
+    void writeValue(float _f) {
+        char buf[24] = {}; // arbitrary
+
+        // nlohmann::detail::to_chars returns end-of-chars. Unlike
+        // std::to_chars, we have to explicitly reserve the terminator.
+        const auto last = nlohmann::detail::to_chars(buf, buf + 23, _f);
+        *last = '\0';
+
+        char* b = buf;
+        while(*b)
+            *ptr++ = *b++;
+    }
     void writeValue(const char* value)
-    { /*ptr += sprintf(ptr, "\"%s\"", value);*/ 
+    { /*ptr += sprintf(ptr, "\"%s\"", value);*/
         *ptr++ = '"';
         while(*value)
             *ptr++ = *value++;
@@ -151,14 +170,14 @@ void GameStateLogger::stop()
 
 void GameStateLogger::update(float delta)
 {
-    if (!log_file || delta == 0.0)
+    if (!log_file || delta == 0.0f)
         return;
-    
+
     logging_delay -= delta;
-    if (logging_delay > 0.0)
+    if (logging_delay > 0.0f)
         return;
     logging_delay = logging_interval;
-    
+
     logGameState();
 }
 
@@ -166,7 +185,7 @@ void GameStateLogger::update(float delta)
    The state entry looke like:
     {
         "type": "state",
-        "time": game time passed sinds start of logging,
+        "time": game time passed since start of logging,
         "new_static": [ list of object entries that are not likely to change, and only send once ],
         "objects": [ list of updated objects, this can include objects that have been created by new_static before ],
         "del_static": [ list of ids that have been added with "new_static" in a previous entry, but have been destroyed now ]
@@ -176,7 +195,7 @@ void GameStateLogger::logGameState()
 {
     static char log_line_buffer[1024*1024*10];
     char* ptr = log_line_buffer;
-    
+
     {
         JSONGenerator json(ptr);
         json.write("type", "state");
@@ -189,7 +208,7 @@ void GameStateLogger::logGameState()
                 static_objects[obj->getMultiplayerId()] = obj->getPosition();
                 JSONGenerator entry = json.arrayCreateDict();
                 writeObjectEntry(entry, obj);
-                
+
                 if ((unsigned int)(ptr - log_line_buffer) > sizeof(log_line_buffer) / 2)
                 {
                     fwrite(log_line_buffer, 1, ptr - log_line_buffer, log_file);
@@ -213,7 +232,7 @@ void GameStateLogger::logGameState()
             static_objects.erase(id);
         }
         json.endArray();
-        
+
         json.startArray("objects");
         foreach(SpaceObject, obj, space_object_list)
         {
@@ -233,7 +252,7 @@ void GameStateLogger::logGameState()
         }
         json.endArray();
     }
-    
+
     *ptr++ = '\n';
     *ptr = '\0';
     fwrite(log_line_buffer, 1, ptr - log_line_buffer, log_file);
@@ -251,6 +270,8 @@ bool GameStateLogger::isStatic(P<SpaceObject> obj)
         return true;
     if (P<Mine>(obj))
         return true;
+    if (P<Planet>(obj))
+        return true;
     return false;
 }
 
@@ -264,23 +285,44 @@ void GameStateLogger::writeObjectEntry(JSONGenerator& json, P<SpaceObject> obj)
     json.endArray();
     json.write("rotation", obj->getRotation());
     P<SpaceShip> ship = obj;
+
     if (ship)
     {
         writeShipEntry(json, ship);
-    }else{
+    }
+    else
+    {
         P<SpaceStation> station = obj;
+
         if (station)
         {
             writeStationEntry(json, station);
         }
+        else
+        {
+            P<MissileWeapon> missile = obj;
+
+            if (missile)
+            {
+                writeMissileEntry(json, missile);
+            }
+            else
+            {
+                P<Planet> planet = obj;
+
+                if (planet)
+                {
+                    writePlanetEntry(json, planet);
+                }
+            }
+        }
     }
 }
-
 
 void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
 {
     bool has_beam_weapons = false;
-    
+
     json.write("callsign", ship->getCallSign());
     json.write("faction", ship->getFaction());
     json.write("ship_type", ship->type_name);
@@ -360,10 +402,14 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
                 JSONGenerator system = systems.createDict(getSystemName(ESystem(n)).c_str());
                 system.write("health", ship->systems[n].health);
                 system.write("power_level", ship->systems[n].power_level);
+                system.write("power_rate_per_second", ship->systems[n].power_rate_per_second);
                 system.write("power_request", ship->systems[n].power_request);
                 system.write("heat", ship->systems[n].heat_level);
+                system.write("heat_rate_per_second", ship->systems[n].heat_rate_per_second);
                 system.write("coolant_level", ship->systems[n].coolant_level);
+                system.write("coolant_rate_per_second", ship->systems[n].coolant_rate_per_second);
                 system.write("coolant_request", ship->systems[n].coolant_request);
+                system.write("power_factor", ship->systems[n].power_factor);
             }
         }
     }
@@ -406,6 +452,8 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
         config.write("turn_speed", ship->turn_speed);
         config.write("impulse_speed", ship->impulse_max_speed);
         config.write("impulse_acceleration", ship->impulse_acceleration);
+        config.write("impulse_reverse_speed", ship->impulse_max_reverse_speed);
+        config.write("impulse_reverse_acceleration", ship->impulse_reverse_acceleration);
         config.write("hull", ship->hull_max);
         if (ship->has_warp_drive)
             config.write("warp", ship->warp_speed_per_warp_level);
@@ -445,7 +493,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
                 json.arrayWrite(ship->shield_max[n]);
             config.endArray();
         }
-        
+
         has_beam_weapons = false;
         for(int n=0; n<max_beam_weapons; n++)
         {
@@ -502,4 +550,27 @@ void GameStateLogger::writeStationEntry(JSONGenerator& json, P<SpaceStation> sta
             config.endArray();
         }
     }
+}
+
+void GameStateLogger::writeMissileEntry(JSONGenerator& json, P<MissileWeapon> missile)
+{
+    json.write("category_modifier", missile->category_modifier);
+
+    // A missile's owner might not exist when we log data. Skip the owner_id if so.
+    if (missile->owner)
+    {
+        json.write("owner_id", missile->owner->getMultiplayerId());
+    }
+
+    // Don't bother writing a target ID if it's unguided or targetless.
+    if (missile->target_id != -1)
+    {
+        json.write("target_id", missile->target_id);
+    }
+}
+
+void GameStateLogger::writePlanetEntry(JSONGenerator& json, P<Planet> planet)
+{
+    json.write("planet_radius", planet->getPlanetRadius());
+    json.write("collision_size", planet->getCollisionSize());
 }

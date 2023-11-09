@@ -6,17 +6,17 @@
 class BlackHole : public SpaceObject, public Updatable
 {
     float update_delta;
+
 public:
     BlackHole();
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 
-#if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;
-#endif
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+    virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
     virtual bool canHideInNebula()  override { return false; }
+    virtual ERadarLayer getRadarLayer() const override { return ERadarLayer::BackgroundObjects; }
 
     virtual void collide(Collisionable* target, float force) override;
 

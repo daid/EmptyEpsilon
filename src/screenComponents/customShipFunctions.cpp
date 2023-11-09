@@ -5,11 +5,12 @@
 #include "gui/gui2_label.h"
 
 GuiCustomShipFunctions::GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id)
-: GuiAutoLayout(owner, id, GuiAutoLayout::LayoutVerticalTopToBottom), position(position)
+: GuiElement(owner, id), position(position)
 {
+    setAttribute("layout", "vertical");
 }
 
-void GuiCustomShipFunctions::onDraw(sf::RenderTarget& window)
+void GuiCustomShipFunctions::onUpdate()
 {
     if (!my_spaceship)
         return;
@@ -25,10 +26,27 @@ void GuiCustomShipFunctions::checkEntries()
     }
     for(unsigned int n=0; n<entries.size(); n++)
     {
+        string caption = my_spaceship->custom_functions[n].caption;
         if (entries[n].name != my_spaceship->custom_functions[n].name)
         {
             createEntries();
             return;
+        }
+        else if (my_spaceship->custom_functions[n].type == PlayerSpaceship::CustomShipFunction::Type::Button)
+        {
+            GuiButton* button = dynamic_cast<GuiButton*>(entries[n].element);
+            if (button && button->getText() != caption)
+            {
+                button->setText(caption);
+            }
+        }
+        else if (my_spaceship->custom_functions[n].type == PlayerSpaceship::CustomShipFunction::Type::Info)
+        {
+            GuiLabel* label = dynamic_cast<GuiLabel*>(entries[n].element);
+            if (label && label->getText() != caption)
+            {
+                label->setText(caption);
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include <limits>
 
 #include "ai/aiFactory.h"
@@ -7,42 +8,97 @@
 #include "playerInfo.h"
 #include "pathPlanner.h"
 #include "nebula.h"
+#include "random.h"
+#include "multiplayer_server.h"
 
 #include "scriptInterface.h"
 
-/// CpuShips are AI controlled ships.
-/// They can get different orders.
-/// Example: CpuShip():setTemplate("Fighter"):setPosition(random(-10000, 10000), random(0, 3000)):setFaction("Human Navy"):orderRoaming():setScanned(true)
+/// A CpuShip is an AI-controlled SpaceShip.
+/// The AI can be assigned an order (be idle, roam freely, defend location, etc.) and a combat behavior state (attack at close or long range, be evasive).
+/// AI behaviors are defined in ai.cpp and other files in src/ai/.
+/// CpuShip:order... functions also broadcast their orders over friendly comms.
+/// Autonomous combat AI orders use the CpuShip's short- and long-range radar ranges to acquire targets, which can be affected by nebulae.
+/// They also rank prospective targets by their type, distance, and capabilities.
+/// Example:
+/// -- Place a Fighter-class Human Navy CpuShip, order it to roam, and if it engages in combat it will fight evasively
+/// ship = CpuShip():setTemplate("Fighter"):setPosition(10000,3000):setFaction("Human Navy"):orderRoaming():setAI("evasive"):setScanned(true)
 REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
 {
-    /// Switch the AI to a different type. AI can be set per ship, or left per default which will be taken from the shipTemplate then.
+    /// Sets the default combat AI state for this CpuShip.
+    /// Combat AI states determine the AI's combat tactics and responses.
+    /// They're distinct from orders, which determine the ship's active objectives and are defined by CpuShip:order...() functions.
+    /// Combat AI state can be set per CpuShip, defined in the ShipTemplate, or left to "default".
+    /// Valid combat AI states are:
+    /// - "default" directly pursues enemies at beam range while making opportunistic missile attacks
+    /// - "evasion" maintains distance from enemy weapons and evades attacks
+    /// - "fighter" prefers strafing maneuvers and attacks briefly at close range while passing
+    /// - "missilevolley" prefers lining up missile attacks from long range
+    /// Example: ship:setAI("fighter")
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, setAI);
-
-    /// Order this ship to stand still and do nothing.
+    /// Orders this CpuShip to stay at its current position and do nothing.
+    /// Idle CpuShips don't target or attack nearby enemies.
+    /// Example: ship:orderIdle()
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderIdle);
-    /// Order this ship to roam around the world and attack targets
+    /// Orders this CpuShip to roam and engage at will, without a specific target.
+    /// A Roaming ship can acquire hostile targets within its long-range radar range, and prefers the best hostile target within 2U of its short-range radar range.
+    /// If this ship has weapon tubes but lacks beam weapons and is out of weapons stock, it attempts to Retreat to a weapons restock target within long-range radar range.
+    /// Example: ship:orderRoaming()
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderRoaming);
-    /// Order this ship to stand still, but still target and try to hit nearby enemies
+    /// Orders this CpuShip to move toward the given SpaceObject and dock, restock weapons, and repair its hull.
+    /// If the SpaceObject is a dockable ShipTemplateBasedObject, this ship moves directly toward it and docks with it as soon as possible.
+    /// If not, this ship moves toward the best weapons restocking target within relay range (double its long-range radar range).
+    /// If this ship still can't find a restocking target, or it is fully repaired and re-stocked, this ship reverts to Roaming orders.
+    /// Example: ship:orderRetreat(base) -- retreat to the SpaceObject `base`
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderRetreat);
+    /// Orders this CpuShip to stay at its current position and attack nearby hostiles.
+    /// This ship will rotate to face a target and fires missiles within 4.5U if it has any, but won't move, roam, or patrol.
+    /// Example: ship:orderStandGround()
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderStandGround);
-    /// Order this ship to defend a specific location. It will attack enemies near this target.
+    /// Orders this CpuShip to move to the given coordinates, patrol within a 1.5U radius, and attack any hostiles that move within 2U of its short-range radar range.
+    /// If a targeted hostile moves more than 3U out of this ship's short-range radar range, this ship drops the target and resumes defending its position.
+    /// Example: ship:orderDefendLocation(500, 1000) -- defend the space near these coordinates
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDefendLocation);
-    /// Order this ship to defend a specific object. It will attack enemies near this object.
+    /// Orders this CpuShip to maintain a 2U escort distance from the given SpaceObject and attack nearby hostiles.
+    /// If a targeted hostile moves more than 3U out of this ship's short-range radar range, this ship drops the target and resumes escorting.
+    /// If the SpaceObject being defended is destroyed, this ship reverts to Roaming orders.
+    /// Example: ship:orderDefendTarget(base) -- defend the space near the SpaceObject `base`
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDefendTarget);
-    /// Order this ship to fly in formation with another ship. It will attack nearby enemies.
+    /// Orders this CpuShip to fly toward the given SpaceObject and follow it from the given offset distance.
+    /// This ship also targets anything its given SpaceObject targets.
+    /// If the SpaceObject being followed is destroyed, this ship reverts to Roaming orders.
+    /// Give multiple CpuShips the same SpaceObject and different offsets to create a formation.
+    /// Example: ship:orderFlyFormation(leader, 500, 250) -- fly 0.5U off the wing and 0.25U off the tail of the SpaceObject `leader`
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyFormation);
-    /// Order this ship to fly to a location, attacking everything alogn the way.
+    /// Orders this CpuShip to move toward the given coordinates, and to attack hostiles that approach within its short-range radar range during transit.
+    /// This ship uses any warp or jump drive capabilities to arrive near its destination.
+    /// This ship disengages from combat and continues toward its destination if its target moves more than 3U out of its short-range radar range.
+    /// Upon arrival, this ship reverts to the Defend Location orders with its destination as the target.
+    /// Example: ship:orderFlyTowards(500, 1000) -- move to these coordinates, attacking nearby hostiles on the way
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowards);
-    /// Order this ship to fly to a location, without attacking anything
+    /// Orders this CpuShip to move toward the given coordinates, ignoring all hostiles on the way.
+    /// Upon arrival, this ship reverts to the Idle orders.
+    /// Example: ship:orderFlyTowardsBlind(500, 1000) -- move to these coordinates, ignoring hostiles
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowardsBlind);
-    /// Order this ship to attack a specific target. If the target is destroyed it will fall back to roaming orders.
+    /// Orders this CpuShip to attack the given SpaceObject.
+    /// Example: ship:orderAttack(player)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderAttack);
-    /// Order this ship to dock at a specific object (station or otherwise)
+    /// Orders this CpuShip to Fly Toward and dock with the given SpaceObject, if possible.
+    /// If its target doesn't exist, revert to Roaming orders.
+    /// Example: ship:orderDock(spaceStation)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDock);
-    /// Get the order this ship is executing
+    /// Returns this CpuShip's current orders.
+    /// Example: ship_orders = ship:getOrder()
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, getOrder);
-    /// Get the target location of the currently executed order
+    /// Returns the coordinates for this CpuShip's orders.
+    /// If the orders target a SpaceObject instead of coordinates, use CpuShip:getOrderTarget().
+    /// Some orders, such as Roaming, have no target.
+    /// Returns the order's x,y coordinates, or 0,0 if not defined.
+    /// Example: x,y = ship:getOrderTargetLocation()
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, getOrderTargetLocation);
-    /// Get the target SpaceObject of the currently executed order
+    /// Returns the target SpaceObject for this CpuShip's orders.
+    /// If the orders target coordinates instead of an object, use CpuShip:getOrderTargetLocation().
+    /// Some orders, such as Roaming, have no target.
+    /// Example: target = ship:getOrderTarget()
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, getOrderTarget);
 }
 
@@ -56,14 +112,13 @@ CpuShip::CpuShip()
     setRotation(random(0, 360));
     target_rotation = getRotation();
 
+    restocks_missiles_docked = true;
     comms_script_name = "comms_ship.lua";
 
     missile_resupply = 0.0;
 
-    if (game_server)
-        ai = ShipAIFactory::getAIFactory("default")(this);
-    else
-        ai = NULL;
+    new_ai_name = "default";
+    ai = nullptr;
 }
 
 CpuShip::~CpuShip()
@@ -82,22 +137,23 @@ void CpuShip::update(float delta)
     for(int n=0; n<SYS_COUNT; n++)
         systems[n].health = std::min(1.0f, systems[n].health + delta * auto_system_repair_per_second);
 
-    if (new_ai_name.length() && ai->canSwitchAI())
+    if (new_ai_name.length() && (!ai || ai->canSwitchAI()))
     {
         shipAIFactoryFunc_t f = ShipAIFactory::getAIFactory(new_ai_name);
         delete ai;
         ai = f(this);
         new_ai_name = "";
     }
-    ai->run(delta);
+    if (ai)
+        ai->run(delta);
 
-    //recharge missiles of CPU ships docked to station. uses the same trick as player ships. VERY hackish.
+    //recharge missiles of CPU ships docked to station. Can be disabled setting the restocks_missiles_docked flag to false.
     if (docking_state == DS_Docked)
     {
         P<ShipTemplateBasedObject> docked_with_template_based = docking_target;
         P<SpaceShip> docked_with_ship = docking_target;
 
-        if (docked_with_template_based && !docked_with_ship)
+        if (docked_with_template_based && docked_with_template_based->restocks_missiles_docked)
         {
             bool needs_missile = 0;
 
@@ -138,7 +194,7 @@ void CpuShip::orderIdle()
 {
     orders = AI_Idle;
     order_target = NULL;
-    order_target_location = sf::Vector2f();
+    order_target_location = glm::vec2(0, 0);
 }
 
 void CpuShip::orderRoaming()
@@ -146,17 +202,31 @@ void CpuShip::orderRoaming()
     target_rotation = getRotation();
     orders = AI_Roaming;
     order_target = NULL;
-    order_target_location = sf::Vector2f();
-    this->addBroadcast(FVF_Friendly,"Searching for targets.");
+    order_target_location = glm::vec2(0, 0);
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Searching for targets."));
 }
 
-void CpuShip::orderRoamingAt(sf::Vector2f position)
+void CpuShip::orderRoamingAt(glm::vec2 position)
 {
     target_rotation = getRotation();
     orders = AI_Roaming;
     order_target = NULL;
     order_target_location = position;
-    this->addBroadcast(FVF_Friendly, "Searching for hostiles around " + string(position.x) + "," + string(position.y) + ".");
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Searching for hostiles around {x},{y}.").format({{"x", string(position.x)}, {"y", string(position.y)}}));
+}
+
+void CpuShip::orderRetreat(P<SpaceObject> object)
+{
+    orders = AI_Retreat;
+    if (!object)
+    {
+        order_target = NULL;
+        this->addBroadcast(FVF_Friendly, tr("cpulog", "Searching for supplies."));
+    }else{
+        order_target = object;
+        this->addBroadcast(FVF_Friendly, tr("cpulog", "Docking to {callsign}.").format({{"callsign", object->getCallSign()}}));
+    }
+    order_target_location = glm::vec2(0, 0);
 }
 
 void CpuShip::orderStandGround()
@@ -164,16 +234,16 @@ void CpuShip::orderStandGround()
     target_rotation = getRotation();
     orders = AI_StandGround;
     order_target = NULL;
-    order_target_location = sf::Vector2f();
-    this->addBroadcast(FVF_Friendly, "Standing ground for now.");
+    order_target_location = glm::vec2(0, 0);
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Standing ground for now."));
 }
 
-void CpuShip::orderDefendLocation(sf::Vector2f position)
+void CpuShip::orderDefendLocation(glm::vec2 position)
 {
     orders = AI_DefendLocation;
     order_target = NULL;
     order_target_location = position;
-    this->addBroadcast(FVF_Friendly, "Defending " + string(position.x) + "," + string(position.y) + ".");
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Defending {x},{y}.").format({{"x", string(position.x)}, {"y", string(position.y)}}));
 }
 
 void CpuShip::orderDefendTarget(P<SpaceObject> object)
@@ -182,44 +252,53 @@ void CpuShip::orderDefendTarget(P<SpaceObject> object)
         return;
     orders = AI_DefendTarget;
     order_target = object;
-    order_target_location = sf::Vector2f();
-    this->addBroadcast(FVF_Friendly, "Defending " + object->getCallSign() + ".");
+    order_target_location = glm::vec2(0, 0);
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Defending {callsign}.").format({{"callsign", object->getCallSign()}}));
 }
 
-void CpuShip::orderFlyFormation(P<SpaceObject> object, sf::Vector2f offset)
+void CpuShip::orderFlyFormation(P<SpaceObject> object, glm::vec2 offset)
 {
     if (!object)
         return;
     orders = AI_FlyFormation;
     order_target = object;
     order_target_location = offset;
-    this->addBroadcast(FVF_Friendly, "Following " + object->getCallSign() + ".");
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Following {callsign}.").format({{"callsign", object->getCallSign()}}));
 }
 
-void CpuShip::orderFlyTowards(sf::Vector2f target)
+void CpuShip::orderFlyTowards(glm::vec2 target)
 {
     orders = AI_FlyTowards;
     order_target = NULL;
     order_target_location = target;
-    this->addBroadcast(FVF_Friendly, "Moving to " + string(target.x) + "," + string(target.y) + ".");
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to {x},{y}.").format({{"x", string(target.x)}, {"y", string(target.y)}}));
 }
 
-void CpuShip::orderFlyTowardsBlind(sf::Vector2f target)
+void CpuShip::orderFlyTowardsBlind(glm::vec2 target)
 {
     orders = AI_FlyTowardsBlind;
     order_target = NULL;
     order_target_location = target;
-    this->addBroadcast(FVF_Friendly,"Moving to " + string(target.x) + "," + string(target.y) + ".");
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to {x},{y}.").format({{"x", string(target.x)}, {"y", string(target.y)}}));
 }
 
 void CpuShip::orderAttack(P<SpaceObject> object)
 {
     if (!object)
         return;
-    orders = AI_Attack;
-    order_target = object;
-    order_target_location = sf::Vector2f();
-    this->addBroadcast(FVF_Friendly, "Moving to attack " + object->getCallSign() + "!");
+    
+    // Attack only if the target is hostile.
+    // Otherwise we just chase the target without firing on it.
+    if (this->isEnemy(object))
+    {
+        orders = AI_Attack;
+        order_target = object;
+        order_target_location = glm::vec2(0, 0);
+        this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to attack {callsign}!").format({{"callsign", object->getCallSign()}}));
+    } else {
+        LOG(WARNING) << "Tried to give " + this->getCallSign() + " an order to attack a non-hostile target";
+        return;
+    }
 }
 
 void CpuShip::orderDock(P<SpaceObject> object)
@@ -228,30 +307,45 @@ void CpuShip::orderDock(P<SpaceObject> object)
         return;
     orders = AI_Dock;
     order_target = object;
-    order_target_location = sf::Vector2f();
-    this->addBroadcast(FVF_Friendly, "Docking to " + object->getCallSign() + ".");
+    order_target_location = glm::vec2(0, 0);
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Docking to {callsign}.").format({{"callsign", object->getCallSign()}}));
 }
 
-void CpuShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void CpuShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    SpaceShip::drawOnGMRadar(window, position, scale, long_range);
-    ai->drawOnGMRadar(window, position, scale);
+    if (docked_style == DockStyle::Internal) return;
+
+    SpaceShip::drawOnGMRadar(renderer, position, scale, rotation, long_range);
+    if (game_server && ai)
+        ai->drawOnGMRadar(renderer, position, scale);
 }
 
 std::unordered_map<string, string> CpuShip::getGMInfo()
 {
     std::unordered_map<string, string> ret = SpaceShip::getGMInfo();
-    ret["Orders"] = getAIOrderString(orders);
+    ret[trMark("gm_info", "Orders")] = getLocaleAIOrderString(orders);
     return ret;
 }
 
 string CpuShip::getExportLine()
 {
     string ret = "CpuShip():setFaction(\"" + getFaction() + "\"):setTemplate(\"" + template_name + "\"):setCallSign(\"" + getCallSign() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+
+    if (getShortRangeRadarRange() != ship_template->short_range_radar_range)
+    {
+        ret += ":setShortRangeRadarRange(" + string(getShortRangeRadarRange(), 0) + ")";
+    }
+
+    if (getLongRangeRadarRange() != ship_template->long_range_radar_range)
+    {
+        ret += ":setLongRangeRadarRange(" + string(getLongRangeRadarRange(), 0) + ")";
+    }
+
     switch(orders)
     {
     case AI_Idle: break;
     case AI_Roaming: ret += ":orderRoaming()"; break;
+    case AI_Retreat: ret += ":orderRetreat(?)"; break;
     case AI_StandGround: ret += ":orderStandGround()"; break;
     case AI_DefendLocation: ret += ":orderDefendLocation(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
     case AI_DefendTarget: ret += ":orderDefendTarget(?)"; break;
@@ -270,6 +364,7 @@ string getAIOrderString(EAIOrder order)
     {
     case AI_Idle: return "Idle";
     case AI_Roaming: return "Roaming";
+    case AI_Retreat: return "Retreat";
     case AI_StandGround: return "Stand Ground";
     case AI_DefendLocation: return "Defend Location";
     case AI_DefendTarget: return "Defend Target";
@@ -278,6 +373,25 @@ string getAIOrderString(EAIOrder order)
     case AI_FlyTowardsBlind: return "Fly towards (ignore all)";
     case AI_Attack: return "Attack";
     case AI_Dock: return "Dock";
+    }
+    return "Unknown";
+}
+
+string getLocaleAIOrderString(EAIOrder order)
+{
+    switch(order)
+    {
+    case AI_Idle: return tr("orderscpu", "Idle");
+    case AI_Roaming: return tr("orderscpu", "Roaming");
+    case AI_Retreat: return tr("orderscpu", "Retreat");
+    case AI_StandGround: return tr("orderscpu", "Stand Ground");
+    case AI_DefendLocation: return tr("orderscpu", "Defend Location");
+    case AI_DefendTarget: return tr("orderscpu", "Defend Target");
+    case AI_FlyFormation: return tr("orderscpu", "Fly in formation");
+    case AI_FlyTowards: return tr("orderscpu", "Fly towards");
+    case AI_FlyTowardsBlind: return tr("orderscpu", "Fly towards (ignore all)");
+    case AI_Attack: return tr("orderscpu", "Attack");
+    case AI_Dock: return tr("orderscpu", "Dock");
     }
     return "Unknown";
 }

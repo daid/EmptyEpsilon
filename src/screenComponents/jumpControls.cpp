@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "jumpControls.h"
@@ -12,45 +13,45 @@ GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
     slider = new GuiSlider(this, id + "_SLIDER", 5000.0, 50000.0, 10000.0, nullptr);
-    slider->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
-    
+    slider->setPosition(0, -50, sp::Alignment::BottomLeft)->setSize(50, GuiElement::GuiSizeMax);
+
     charge_bar = new GuiProgressbar(this, id + "_CHARGE", 0.0, 50000.0, 0.0);
-    charge_bar->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
+    charge_bar->setPosition(0, -50, sp::Alignment::BottomLeft)->setSize(50, GuiElement::GuiSizeMax);
     charge_bar->hide();
-    
-    label = new GuiKeyValueDisplay(this, id + "_LABEL", 0.5, "Distance", "10.0");
-    label->setTextSize(30)->setPosition(50, -50, ABottomLeft)->setSize(40, GuiElement::GuiSizeMax);
-    
-    button = new GuiButton(this, id + "_BUTTON", "Jump", [this]() {
+
+    label = new GuiKeyValueDisplay(this, id + "_LABEL", 0.5, tr("jumpcontrol", "Distance"), "10.0");
+    label->setTextSize(30)->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(40, GuiElement::GuiSizeMax);
+
+    button = new GuiButton(this, id + "_BUTTON", tr("jumpcontrol", "Jump"), [this]() {
         my_spaceship->commandJump(slider->getValue());
     });
-    button->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
-    
-    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_JumpDrive, ATopCenter))->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
+    button->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+
+    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_JumpDrive, sp::Alignment::TopCenter))->setPosition(0, -50, sp::Alignment::BottomLeft)->setSize(50, GuiElement::GuiSizeMax);
 }
 
-void GuiJumpControls::onDraw(sf::RenderTarget& window)
+void GuiJumpControls::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        if (my_spaceship->jump_delay > 0.0)
+        if (my_spaceship->jump_delay > 0.0f)
         {
-            label->setKey("Jump in");
+            label->setKey(tr("jumpcontrol","Jump in"));
             label->setValue(string(int(ceilf(my_spaceship->jump_delay))));
             slider->disable();
             button->disable();
             charge_bar->hide();
         }else if (my_spaceship->jump_drive_charge < my_spaceship->jump_drive_max_distance)
         {
-            label->setKey("Charging");
+            label->setKey(tr("jumpcontrol", "Charging"));
             label->setValue("...");
             slider->hide();
             button->disable();
             charge_bar->setRange(0.0, my_spaceship->jump_drive_max_distance);
             charge_bar->setValue(my_spaceship->jump_drive_charge)->show();
         }else{
-            label->setKey("Distance");
-            label->setValue(string(slider->getValue() / 1000.0, 1) + DISTANCE_UNIT_1K);
+            label->setKey(tr("jumpcontrol", "Distance"));
+            label->setValue(string(slider->getValue() / 1000.0f, 1) + DISTANCE_UNIT_1K);
             slider->enable()->show();
             slider->setRange(my_spaceship->jump_drive_max_distance, my_spaceship->jump_drive_min_distance);
             button->enable();
@@ -59,15 +60,13 @@ void GuiJumpControls::onDraw(sf::RenderTarget& window)
     }
 }
 
-void GuiJumpControls::onHotkey(const HotkeyResult& key)
+void GuiJumpControls::onUpdate()
 {
-    if (key.category == "HELMS" && my_spaceship)
+    if (my_spaceship && isVisible())
     {
-        if (key.hotkey == "INC_JUMP")
-            slider->setValue(slider->getValue() + 1000.0f);
-        if (key.hotkey == "DEC_JUMP")
-            slider->setValue(slider->getValue() - 1000.0f);
-        if (key.hotkey == "JUMP")
+        auto adjust = keys.helms_increase_jump_distance.getValue() - keys.helms_decrease_jump_distance.getValue();
+        slider->setValue(slider->getValue() + 1000.0f * adjust);
+        if (keys.helms_execute_jump.getDown())
             my_spaceship->commandJump(slider->getValue());
     }
 }

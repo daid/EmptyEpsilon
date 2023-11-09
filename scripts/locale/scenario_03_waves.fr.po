@@ -1,0 +1,125 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Empty Epsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: muerteFR\n"
+"Language-Team: muerteFR\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "Waves"
+msgstr "Vagues"
+
+# Scenario description
+msgid ""
+"Waves of increasingly difficult enemies attack friendly stations. There is "
+"no victory. How many waves can you destroy?\n"
+"\n"
+"Spawn the player ships you want. The strength of enemy ships is independent "
+"of the number and type of player ships."
+msgstr ""
+"- Durée approx. : 2h\n"
+"- Difficulté : Facile (variable)\n"
+"- Vaisseaux joueurs : 1 à plusieurs\n"
+"\n"
+"Des vagues d'ennemis de plus en plus difficiles à contenir attaquent les "
+"stations amies.\n"
+"\n"
+"Il n'y a pas de victoire.\n"
+"Combien de vagues pourrez-vous détruire ?\n"
+"\n"
+"Ajoutez les vaisseaux joueurs de votre choix. La force des vaisseaux ennemis "
+"est indépendante du nombre et du type de vaisseaux joueurs.\n"
+"\n"
+"- Titre original : Waves\n"
+"- Auteur : Daid\n"
+"https://discord.gg/GjqM9Y9yBe\n"
+"- Traduction FR : Muerte\n"
+"https://discord.gg/2NPKyMnGwp"
+
+# Scenario setting
+msgctxt "setting"
+msgid "Enemies"
+msgstr "Puissance ennemie"
+
+msgctxt "setting"
+msgid "Configures the amount of enemies spawned in the scenario."
+msgstr "Définit le nombre d'ennemis générés dans le scénario."
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr "Facile"
+
+msgctxt "Enemies"
+msgid ""
+"Decreases the number of ships in each wave. Good for new players, but takes "
+"longer for the players to be overwhelmed."
+msgstr ""
+"Diminue le nombre de vaisseaux à chaque vague. Moins difficile mais plus "
+"long. Idéal pour les nouveaux joueurs."
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr "Normale"
+
+msgctxt "Enemies"
+msgid "Normal amount of enemies. Recommended for a normal crew."
+msgstr "Quantité d'ennemis par défaut. Recommandé pour un équipage standard."
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr "Difficile"
+
+msgctxt "Enemies"
+msgid ""
+"Difficulty starts at wave 5 and increases by 1.5 after the players defeat "
+"each wave. Players are overwhelmed more quickly, leading to shorter games."
+msgstr ""
+"La difficulté commence à la vague n°5 et augmente de 1,5 après chaque "
+"succès. Les joueurs sont submergés plus rapidement, ce qui conduit à des "
+"parties plus courtes."
+
+#: scripts/scenario_03_waves.lua:45
+msgctxt "goal-shipLog"
+msgid ""
+"At least one friendly base must survive.\n"
+"\n"
+"Destroy all enemy ships. After a short delay, the next wave will appear. And "
+"so on ...\n"
+"\n"
+"How many waves can you destroy?"
+msgstr ""
+"Au moins une base alliée doit survivre.\n"
+"Détruisez tous les vaisseaux ennemis. Après un court laps de temps, la "
+"prochaine vague apparaîtra. Et ainsi de suite…\n"
+"Combien de vagues serez-vous en mesure de détruire ?"
+
+#: scripts/scenario_03_waves.lua:127
+#, lua-format
+msgctxt "shipLog"
+msgid "Wave %d"
+msgstr "Vague n° %d"
+
+#: scripts/scenario_03_waves.lua:220
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Wave %d"
+msgstr "Vague n° %d"
+
+#: scripts/scenario_03_waves.lua:253
+msgctxt "msgMainscreen"
+msgid "Wave cleared!"
+msgstr "Vague éliminée !"
+
+#: scripts/scenario_03_waves.lua:254
+#, lua-format
+msgctxt "shipLog"
+msgid "Wave %d cleared."
+msgstr "Vague %d éliminée !"

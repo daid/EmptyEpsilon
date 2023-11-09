@@ -13,11 +13,11 @@ GuiBeamFrequencySelector::GuiBeamFrequencySelector(GuiContainer* owner, string i
         hide();
 }
 
-void GuiBeamFrequencySelector::onHotkey(const HotkeyResult& key)
+void GuiBeamFrequencySelector::onUpdate()
 {
-    if (key.category == "WEAPONS" && my_spaceship && gameGlobalInfo->use_beam_shield_frequencies)
+    if (my_spaceship && gameGlobalInfo->use_beam_shield_frequencies && isVisible())
     {
-        if (key.hotkey == "BEAM_FREQUENCY_INCREASE")
+        if (keys.weapons_beam_frequence_increase.getDown())
         {
             if (getSelectionIndex() >= (int)entries.size() - 1)
                 setSelectionIndex(0);
@@ -25,7 +25,7 @@ void GuiBeamFrequencySelector::onHotkey(const HotkeyResult& key)
                 setSelectionIndex(getSelectionIndex() + 1);
             callback();
         }
-        if (key.hotkey == "BEAM_FREQUENCY_DECREASE")
+        if (keys.weapons_beam_frequence_decrease.getDown())
         {
             if (getSelectionIndex() <= 0)
                 setSelectionIndex(entries.size() - 1);

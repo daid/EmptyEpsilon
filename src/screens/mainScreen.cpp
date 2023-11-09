@@ -4,45 +4,58 @@
 #include "main.h"
 #include "epsilonServer.h"
 #include "preferenceManager.h"
+#include "soundManager.h"
+#include "multiplayer_client.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/selfDestructIndicator.h"
 #include "screenComponents/globalMessage.h"
 #include "screenComponents/jumpIndicator.h"
 #include "screenComponents/commsOverlay.h"
-#include "screenComponents/viewport3d.h"
+#include "screenComponents/viewportMainScreen.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/shipDestroyedPopup.h"
+#include "screenComponents/impulseSound.h"
 
+#include "gui/gui2_panel.h"
 #include "gui/gui2_overlay.h"
 
-ScreenMainScreen::ScreenMainScreen()
-{
-    new GuiOverlay(this, "", sf::Color::Black);
+#include <i18n.h>
 
-    viewport = new GuiViewport3D(this, "VIEWPORT");
-    viewport->showCallsigns()->showHeadings()->showSpacedust();
-    viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
-   (new GuiRadarView(viewport, "VIEWPORT_RADAR", 5000.0f, nullptr))->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, ATopRight);
-    
-//    tactical_radar = new GuiRadarView(this, "TACTICAL", 5000.0f, nullptr); //Riffi edit
-    tactical_radar = new GuiRadarView(this, "TACTICAL", 10000.0f, nullptr); //Riffi edit
-    tactical_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
+: GuiCanvas(render_layer)
+{
+    new GuiOverlay(this, "", glm::u8vec4(0,0,0,255));
+
+    viewport = new GuiViewportMainScreen(this, "VIEWPORT");
+    viewport->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    main_screen_radar = new GuiRadarView(viewport, "VIEWPORT_RADAR", 5000.0f, nullptr);
+    main_screen_radar->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, sp::Alignment::TopRight);
+
+    tactical_radar = new GuiRadarView(this, "TACTICAL", 10000.0f, nullptr);
+    tactical_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->hide();
-    long_range_radar = new GuiRadarView(this, "TACTICAL", gameGlobalInfo->long_range_radar_range, nullptr);
-    long_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    long_range_radar = new GuiRadarView(this, "TACTICAL", nullptr);
+    long_range_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     onscreen_comms = new GuiCommsOverlay(this);
     onscreen_comms->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setVisible(false);
 
     new GuiShipDestroyedPopup(this);
-    
+
     new GuiJumpIndicator(this);
     new GuiSelfDestructIndicator(this);
     new GuiGlobalMessage(this);
-    new GuiIndicatorOverlays(this);
+    (new GuiIndicatorOverlays(this))->hasGlobalMessage();
+
+    keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
+
+    for (auto binding : sp::io::Keybinding::listAllByCategory(tr("hotkey_menu", "Main Screen")))
+        keyboard_general += tr("hotkey_F1", "{label}:\t{button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
+
+    keyboard_help->setText(keyboard_general);
 
     if (PreferencesManager::get("music_enabled") != "0")
     {
@@ -56,71 +69,49 @@ ScreenMainScreen::ScreenMainScreen()
         });
     }
 
-    first_person = true; //Riffi edit, turned to true
+    // Initialize and play the impulse engine sound.
+    impulse_sound = std::unique_ptr<ImpulseSound>( new ImpulseSound(PreferencesManager::get("impulse_sound_enabled", "2") != "0") );
+}
+
+void ScreenMainScreen::destroy()
+{
+    if (threat_estimate)
+        threat_estimate->destroy();
+    PObject::destroy();
 }
 
 void ScreenMainScreen::update(float delta)
 {
+    if (keys.escape.getDown())
+    {
+        soundManager->stopMusic();
+        impulse_sound->stop();
+        destroy();
+        returnToShipSelection(getRenderLayer());
+    }
+    if (keys.help.getDown())
+    {
+        // Toggle keyboard help.
+        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
+    }
+    if (keys.pause.getDown())
+    {
+        if (game_server)
+            engine->setGameSpeed(0.0);
+    }
+
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
         soundManager->stopMusic();
-        soundManager->stopSound(impulse_sound);
+        impulse_sound->stop();
         destroy();
         disconnectFromServer();
-        returnToMainMenu();
+        returnToMainMenu(getRenderLayer());
         return;
     }
 
     if (my_spaceship)
     {
-        P<SpaceObject> target_ship = my_spaceship->getTarget();
-        float target_camera_yaw = my_spaceship->getRotation();
-        switch(my_spaceship->main_screen_setting)
-        {
-        case MSS_Back: target_camera_yaw += 180; break;
-        case MSS_Left: target_camera_yaw -= 90; break;
-        case MSS_Right: target_camera_yaw += 90; break;
-        case MSS_Target:
-            if (target_ship)
-            {
-                sf::Vector2f target_camera_diff = my_spaceship->getPosition() - target_ship->getPosition();
-                target_camera_yaw = sf::vector2ToAngle(target_camera_diff) + 180;
-            }
-            break;
-        default: break;
-        }
-        camera_pitch = 30.0f;
-
-        float camera_ship_distance = 420.0f;
-        float camera_ship_height = 420.0f;
-        if (first_person)
-        {
-            camera_ship_distance = -my_spaceship->getRadius();
-            camera_ship_height = my_spaceship->getRadius() / 10.f;
-            camera_pitch = 0;
-        }
-        sf::Vector2f cameraPosition2D = my_spaceship->getPosition() + sf::vector2FromAngle(target_camera_yaw) * -camera_ship_distance;
-        sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
-#ifdef DEBUG
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-        {
-            targetCameraPosition.x = my_spaceship->getPosition().x;
-            targetCameraPosition.y = my_spaceship->getPosition().y;
-            targetCameraPosition.z = 3000.0;
-            camera_pitch = 90.0f;
-        }
-#endif
-        if (first_person)
-        {
-            camera_position = targetCameraPosition;
-            camera_yaw = target_camera_yaw;
-        }
-        else
-        {
-            camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
-            camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
-        }
-
         switch(my_spaceship->main_screen_setting)
         {
         case MSS_Front:
@@ -156,39 +147,84 @@ void ScreenMainScreen::update(float delta)
             break;
         }
 
-        // If we have an impulse power, loop the engine sound.
-        float impulse_ability = std::max(0.0f, std::min(my_spaceship->getSystemEffectiveness(SYS_Impulse), my_spaceship->getSystemPower(SYS_Impulse)));
-        string impulse_sound_file = my_spaceship->impulse_sound_file;
-        if (impulse_ability > 0 && impulse_sound_file.length() > 0)
-        {
-            if (impulse_sound > -1)
-            {
-                soundManager->setSoundVolume(impulse_sound, std::max(10.0f * impulse_ability, fabsf(my_spaceship->current_impulse) * 10.0f * std::max(0.1f, impulse_ability)));
-                soundManager->setSoundPitch(impulse_sound, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * std::max(0.1f, impulse_ability)));
-            }
-            else
-            {
-                impulse_sound = soundManager->playSound(impulse_sound_file, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * impulse_ability), std::max(30.0f, fabsf(my_spaceship->current_impulse) * 10.0f * impulse_ability), true);
-            }
-        }
-        // If we don't have impulse available, stop the engine sound.
-        else if (impulse_sound > -1)
-        {
-            soundManager->stopSound(impulse_sound);
-            // TODO: Play an engine failure sound.
-            impulse_sound = -1;
-        }
+        // Update impulse sound volume and pitch.
+        impulse_sound->update(delta);
+    } else {
+        // If we're not the player ship (ie. we exploded), don't play impulse
+        // engine sounds.
+        impulse_sound->stop();
+    }
 
+    if (my_spaceship)
+    {
+        if (keys.mainscreen_forward.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_Front);
+        if (keys.mainscreen_left.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_Left);
+        if (keys.mainscreen_right.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_Right);
+        if (keys.mainscreen_back.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_Back);
+        if (keys.mainscreen_target.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_Target);
+        if (keys.mainscreen_tactical_radar.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_Tactical);
+        if (keys.mainscreen_long_range_radar.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_LongRange);
+        if (keys.mainscreen_first_person.getDown())
+            viewport->first_person = !viewport->first_person;
     }
 }
 
-void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
+bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
+    if (GuiCanvas::onPointerDown(button, position, id))
+        return true;
     if (!my_spaceship)
-        return;
-    
-    if (InputHandler::mouseIsPressed(sf::Mouse::Left))
+        return false;
+
+    if (button == sp::io::Pointer::Button::Touch && id != sp::io::Pointer::mouse)
     {
+        // When the radar is up, clicking 'inside' toggles (middle mouse),
+        // 'outside' closes (Left mouse).
+        auto check_radar = [position](const auto& radar)
+        {
+            auto size = radar.getRect().size;
+            auto radius = std::min(size.x, size.y) / 2.f;
+            if (glm::length(position - radar.getCenterPoint()) < radius)
+                return sp::io::Pointer::Button::Middle;
+
+            return sp::io::Pointer::Button::Left;
+        };
+
+        switch (my_spaceship->main_screen_setting)
+        {
+        case MSS_Tactical:
+            button = check_radar(*tactical_radar);
+            break;
+        case MSS_LongRange:
+            button = check_radar(*long_range_radar);
+            break;
+        default:
+            // Tapping the radar brings it up (middle mouse)
+            if (main_screen_radar->getRect().contains(position))
+                button = sp::io::Pointer::Button::Middle;
+            else
+            {
+                // Split screen in two - tapping left rotates left (as if left mouse), and right... right.
+                if (position.x < viewport->getCenterPoint().x)
+                    button = sp::io::Pointer::Button::Left;
+                else
+                    button = sp::io::Pointer::Button::Right;
+            }
+        }
+    }
+
+    switch(button)
+    {
+    case sp::io::Pointer::Button::Left:
+        [[fallthrough]];
+    case sp::io::Pointer::Button::Touch:
         switch(my_spaceship->main_screen_setting)
         {
         case MSS_Front: my_spaceship->commandMainScreenSetting(MSS_Left); break;
@@ -197,9 +233,8 @@ void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
         case MSS_Right: my_spaceship->commandMainScreenSetting(MSS_Front); break;
         default: my_spaceship->commandMainScreenSetting(MSS_Front); break;
         }
-    }
-    if (InputHandler::mouseIsPressed(sf::Mouse::Right))
-    {
+        break;
+    case sp::io::Pointer::Button::Right:
         switch(my_spaceship->main_screen_setting)
         {
         case MSS_Front: my_spaceship->commandMainScreenSetting(MSS_Right); break;
@@ -208,9 +243,8 @@ void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
         case MSS_Left: my_spaceship->commandMainScreenSetting(MSS_Front); break;
         default: my_spaceship->commandMainScreenSetting(MSS_Front); break;
         }
-    }
-    if (InputHandler::mouseIsPressed(sf::Mouse::Middle))
-    {
+        break;
+    case sp::io::Pointer::Button::Middle:
         switch(my_spaceship->main_screen_setting)
         {
         default:
@@ -228,58 +262,9 @@ void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
                 my_spaceship->commandMainScreenSetting(MSS_Tactical);
             break;
         }
-    }
-}
-
-void ScreenMainScreen::onKey(sf::Event::KeyEvent key, int unicode)
-{
-    switch(key.code)
-    {
-    case sf::Keyboard::Up:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Front);
-        break;
-    case sf::Keyboard::Left:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Left);
-        break;
-    case sf::Keyboard::Right:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Right);
-        break;
-    case sf::Keyboard::Down:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Back);
-        break;
-    case sf::Keyboard::T:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Target);
-        break;
-    case sf::Keyboard::Tab:
-        if (my_spaceship && gameGlobalInfo->allow_main_screen_tactical_radar)
-            my_spaceship->commandMainScreenSetting(MSS_Tactical);
-        break;
-    case sf::Keyboard::Q:
-        if (my_spaceship && gameGlobalInfo->allow_main_screen_long_range_radar)
-            my_spaceship->commandMainScreenSetting(MSS_LongRange);
-        break;
-    case sf::Keyboard::F:
-        first_person = !first_person;
-        break;
-    
-    //TODO: This is more generic code and is duplicated.
-    case sf::Keyboard::Escape:
-    case sf::Keyboard::Home:
-        soundManager->stopMusic();
-        soundManager->stopSound(impulse_sound);
-        destroy();
-        returnToShipSelection();
-        break;
-    case sf::Keyboard::P:
-        if (game_server)
-            engine->setGameSpeed(0.0);
         break;
     default:
         break;
     }
+    return true;
 }
