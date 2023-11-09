@@ -348,7 +348,7 @@ ShipTemplate::ShipTemplate()
     has_cloaking = false;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
-    long_range_radar_range = 30000.0f;
+    long_range_radar_range = 100000.0f;
     short_range_radar_range = 5000.0f;
     radar_trace = "radar/arrow.png";
     impulse_sound_file = "sfx/engine.wav";

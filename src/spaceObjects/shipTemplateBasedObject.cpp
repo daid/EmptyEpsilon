@@ -194,7 +194,7 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     }
     hull_strength = hull_max = 100.0;
 
-    long_range_radar_range = 30000.0f;
+    long_range_radar_range = 100000.0f;
     short_range_radar_range = 5000.0f;
 
     registerMemberReplication(&template_name);
