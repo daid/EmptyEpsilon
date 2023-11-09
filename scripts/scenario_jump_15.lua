@@ -1,5 +1,5 @@
 -- Name: Jump 15
--- Type: Mission
+-- Type: Odysseus
 -- Description: Onload: Odysseus, random asteroids. EOC fleet. Planet LA05-WE50
 
 require("utils.lua")

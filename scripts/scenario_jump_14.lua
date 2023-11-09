@@ -1,5 +1,5 @@
 -- Name: Jump 14
--- Type: Mission
+-- Type: Odysseus
 -- Description: Onload: Odysseus, random asteroids. EOC fleet. Asteroid belt.
 
 require("utils.lua")

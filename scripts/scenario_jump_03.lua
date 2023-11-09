@@ -1,5 +1,5 @@
 -- Name: Jump 03
--- Type: Mission
+-- Type: Odysseus
 -- Description: Onload: Odysseus, random asteroids. Planet DE47-HC55
 
 require("utils.lua")

@@ -1,5 +1,5 @@
 -- Name: Jump 05
--- Type: Mission
+-- Type: Odysseus
 -- Description: Onload: Odysseus, random asteroids. EOC fleet. Planet TE49-HE75
 
 require("utils.lua")

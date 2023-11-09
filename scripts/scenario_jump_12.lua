@@ -1,5 +1,5 @@
 -- Name: Jump 12
--- Type: Mission
+-- Type: Odysseus
 -- Description: Onload: Odysseus, random asteroids.
 
 require("utils.lua")
