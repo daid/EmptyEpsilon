@@ -1,5 +1,0 @@
-#: scripts/shiptemplates/transport.lua:4
-#, lua-format
-msgctxt "ship"
-msgid "Transport %dx%d"
-msgstr ""
