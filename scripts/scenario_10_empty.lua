@@ -4,7 +4,7 @@
 
 --- Scenario
 -- @script scenario_10_empty
-
+require("spawn_ships_scenario_utility.lua")
 function init()
     --SpaceStation():setPosition(1000, 1000):setTemplate('Small Station'):setFaction("Human Navy"):setRotation(random(0, 360))
     --SpaceStation():setPosition(-1000, 1000):setTemplate('Medium Station'):setFaction("Human Navy"):setRotation(random(0, 360))
@@ -25,7 +25,11 @@ function init()
     local sun1 = Planet():setPosition(5000, 15000):setPlanetRadius(1000):setDistanceFromMovementPlane(-2000):setPlanetAtmosphereTexture("planets/star-1.png"):setPlanetAtmosphereColor(1.0, 1.0, 1.0)
     planet1:setOrbit(sun1, 40)
     moon1:setOrbit(planet1, 20.0)
+	mainGMButtons()
+end
 
+function mainGMButtons()
+	clearGMFunctions()
     addGMFunction(
         _("buttonGM", "Random asteroid field"),
         function()
@@ -62,6 +66,7 @@ function init()
             end
         end
     )
+    addGMFunction("+Spawn Ship(s)",spawnGMShips)
 end
 
 function cleanup()
