@@ -3,31 +3,33 @@
 
 #include "gui2_element.h"
 #include "gui2_entrylist.h"
-#include "gui2_button.h"
+#include "gui2_togglebutton.h"
 #include "gui2_scrollbar.h"
 
 class GuiListbox : public GuiEntryList
 {
 protected:
-    std::vector<GuiButton*> buttons;
     float text_size;
     float button_height;
-    EGuiAlign text_alignment;
-    sf::Color selected_color;
-    sf::Color unselected_color;
+    sp::Alignment text_alignment;
     GuiScrollbar* scroll;
-    sf::FloatRect last_rect;
+    sp::Rect last_rect;
+
+    const GuiThemeStyle* back_style;
+    const GuiThemeStyle* front_style;
+    const GuiThemeStyle* back_selected_style;
+    const GuiThemeStyle* front_selected_style;
 public:
     GuiListbox(GuiContainer* owner, string id, func_t func);
 
     GuiListbox* setTextSize(float size);
     GuiListbox* setButtonHeight(float height);
 
-    virtual void onDraw(sf::RenderTarget& window);
-    virtual bool onMouseDown(sf::Vector2f position);
-    virtual void onMouseUp(sf::Vector2f position);
-private:
-    virtual void entriesChanged();
+    GuiListbox* scrollTo(int index);
+
+    virtual void onDraw(sp::RenderTarget& renderer) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 };
 
 #endif//GUI2_LISTBOX_H

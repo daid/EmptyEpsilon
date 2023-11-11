@@ -10,8 +10,8 @@ private:
     P<ModelData> model;
 public:
     GuiRotatingModelView(GuiContainer* owner, string id, P<ModelData> model);
-    
-    virtual void onDraw(sf::RenderTarget& window);
+
+    virtual void onDraw(sp::RenderTarget& target) override;
 };
 
 #endif//ROTATING_MODEL_VIEW_H

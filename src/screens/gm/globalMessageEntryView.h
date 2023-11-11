@@ -13,8 +13,8 @@ private:
     GuiTextEntry* message_entry;
 public:
     GuiGlobalMessageEntryView(GuiContainer* owner);
-    
-    virtual bool onMouseDown(sf::Vector2f position);
+
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
 };
 
 #endif//GLOBAL_MESSAGE_ENTRY_VIEW

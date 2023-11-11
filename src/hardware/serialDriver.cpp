@@ -1,15 +1,17 @@
 #include "logging.h"
-#ifdef __WIN32__
+#ifdef _WIN32
     #include <windows.h>
 #endif
 #ifdef __gnu_linux__
     //Including ioctl or termios conflicts with asm/termios.h which we need for TCGETS2. So locally define the ioctl and tcsendbreak functions. Yes, it's dirty, but it works.
     //#include <sys/ioctl.h>
     //#include <termios.h>
+#ifndef ANDROID
     extern "C" {
     extern int ioctl (int __fd, unsigned long int __request, ...) __THROW;
     extern int tcsendbreak (int __fd, int __duration) __THROW;
     }
+#endif
     #include <asm/termios.h>
     #include <fcntl.h>
     #include <unistd.h>
@@ -38,7 +40,7 @@ SerialPort::SerialPort(string name)
         LOG(INFO) << "Selected port: " << ports[0] << " for pseudo name: " << name;
         name = ports[0];
     }
-#ifdef __WIN32__
+#ifdef _WIN32
     handle = CreateFile(("\\\\.\\" + name).c_str(), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (isOpen())
     {
@@ -70,7 +72,7 @@ SerialPort::~SerialPort()
     if (!isOpen())
         return;
 
-#ifdef __WIN32__
+#ifdef _WIN32
     CloseHandle(handle);
     handle = INVALID_HANDLE_VALUE;
 #endif
@@ -82,7 +84,7 @@ SerialPort::~SerialPort()
 
 bool SerialPort::isOpen()
 {
-#ifdef __WIN32__
+#ifdef _WIN32
     return handle != INVALID_HANDLE_VALUE;
 #endif
 #if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
@@ -95,7 +97,7 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
 {
     if (!isOpen())
         return;
-#ifdef __WIN32__
+#ifdef _WIN32
     FlushFileBuffers(handle);
 
     DCB dcb;
@@ -300,7 +302,7 @@ void SerialPort::send(void* data, int data_size)
 {
     if (!isOpen())
         return;
-#ifdef __WIN32__
+#ifdef _WIN32
     while(data_size > 0)
     {
         DWORD written = 0;
@@ -332,7 +334,7 @@ int SerialPort::recv(void* data, int data_size)
     if (!isOpen())
         return 0;
 
-#ifdef __WIN32__
+#ifdef _WIN32
     DWORD read_size = 0;
     if (!ReadFile(handle, data, data_size, &read_size, NULL))
     {
@@ -356,7 +358,7 @@ void SerialPort::setDTR()
 {
     if (!isOpen())
         return;
-#ifdef __WIN32__
+#ifdef _WIN32
     EscapeCommFunction(handle, SETDTR);
 #endif
 #ifdef __gnu_linux__
@@ -372,7 +374,7 @@ void SerialPort::clearDTR()
 {
     if (!isOpen())
         return;
-#ifdef __WIN32__
+#ifdef _WIN32
     EscapeCommFunction(handle, CLRDTR);
 #endif
 #ifdef __gnu_linux__
@@ -388,7 +390,7 @@ void SerialPort::setRTS()
 {
     if (!isOpen())
         return;
-#ifdef __WIN32__
+#ifdef _WIN32
     EscapeCommFunction(handle, SETRTS);
 #endif
 #ifdef __gnu_linux__
@@ -404,7 +406,7 @@ void SerialPort::clearRTS()
 {
     if (!isOpen())
         return;
-#ifdef __WIN32__
+#ifdef _WIN32
     EscapeCommFunction(handle, CLRRTS);
 #endif
 #ifdef __gnu_linux__
@@ -418,12 +420,12 @@ void SerialPort::clearRTS()
 
 void SerialPort::sendBreak()
 {
-#ifdef __WIN32__
+#ifdef _WIN32
     SetCommBreak(handle);
     Sleep(1);
     ClearCommBreak(handle);
 #endif
-#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
+#if (defined(__gnu_linux__) && !defined(ANDROID)) || (defined(__APPLE__) && defined(__MACH__))
     tcsendbreak(handle, 0);
 #endif
 }
@@ -431,7 +433,7 @@ void SerialPort::sendBreak()
 std::vector<string> SerialPort::getAvailablePorts()
 {
     std::vector<string> names;
-#ifdef __WIN32__
+#ifdef _WIN32
     HKEY key;
     if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DEVICEMAP\\SERIALCOMM", 0, KEY_READ | KEY_QUERY_VALUE, &key) == ERROR_SUCCESS)
     {
@@ -477,7 +479,7 @@ std::vector<string> SerialPort::getAvailablePorts()
 
 string SerialPort::getPseudoDriverName(string port)
 {
-#ifdef __WIN32__
+#ifdef _WIN32
     string ret;
     HKEY key;
     if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DEVICEMAP\\SERIALCOMM", 0, KEY_READ | KEY_QUERY_VALUE, &key) == ERROR_SUCCESS)

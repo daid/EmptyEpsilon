@@ -10,16 +10,15 @@ class GuiScrollText;
 class GuiHelpOverlay : public GuiElement
 {
 private:
-    GuiCanvas* owner;
     GuiScrollText* text;
 
     string help_text = "";
 public:
-    GuiHelpOverlay(GuiCanvas* owner, string title = "", string contents = "");
+    GuiHelpOverlay(GuiContainer* owner, string title = "", string contents = "");
     GuiPanel* frame;
 
     virtual void setText(string new_text);
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target) override;
 };
 
 #endif//HELP_OVERLAY_H

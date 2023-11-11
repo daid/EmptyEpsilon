@@ -9,9 +9,9 @@ class GuiOpenCommsButton : public GuiButton
 {
     TargetsContainer* targets;
 public:
-    GuiOpenCommsButton(GuiContainer* owner, string id, TargetsContainer* targets);
-    
-    virtual void onDraw(sf::RenderTarget& window);
+    GuiOpenCommsButton(GuiContainer* owner, string id, string name, TargetsContainer* targets);
+
+    virtual void onDraw(sp::RenderTarget& target) override;
 };
 
 #endif//OPEN_COMMS_BUTTON_H

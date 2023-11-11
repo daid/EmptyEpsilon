@@ -8,26 +8,26 @@
 ShipsLog::ShipsLog(GuiContainer* owner)
 : GuiElement(owner, "")
 {
-    setPosition(0, 0, ABottomCenter);
+    setPosition(0, 0, sp::Alignment::BottomCenter);
     setSize(GuiElement::GuiSizeMax, 50);
     setMargins(20, 0);
-    
+
     open = false;
-    
+
     log_text = new GuiAdvancedScrollText(this, "");
     log_text->enableAutoScrollDown();
-    log_text->setMargins(15, 15, 15, 0)->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    log_text->setMargins(15, 4, 15, 0)->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
-void ShipsLog::onDraw(sf::RenderTarget& window)
+void ShipsLog::onDraw(sp::RenderTarget& renderer)
 {
-    drawStretchedHV(window, sf::FloatRect(rect.left, rect.top, rect.width, rect.height + 100), 25.0f, "gui/PanelBackground");
+    renderer.drawStretchedHV(sp::Rect(rect.position.x, rect.position.y, rect.size.x, rect.size.y + 100), 25.0f, "gui/widget/PanelBackground.png");
 
     if (!my_spaceship)
         return;
 
     const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog();
-    
+
     if (open)
     {
         const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog();
@@ -38,7 +38,7 @@ void ShipsLog::onDraw(sf::RenderTarget& window)
         {
             log_text->removeEntry(0);
         }
-        
+
         if (log_text->getEntryCount() > 0 && logs.size() > 0 && log_text->getEntryText(0) != logs[0].text)
         {
             bool updated = false;
@@ -55,7 +55,7 @@ void ShipsLog::onDraw(sf::RenderTarget& window)
             if (!updated)
                 log_text->clearEntries();
         }
-        
+
         while(log_text->getEntryCount() < logs.size())
         {
             int n = log_text->getEntryCount();
@@ -74,7 +74,7 @@ void ShipsLog::onDraw(sf::RenderTarget& window)
     }
 }
 
-bool ShipsLog::onMouseDown(sf::Vector2f position)
+bool ShipsLog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     open = !open;
     if (open)

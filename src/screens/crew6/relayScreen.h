@@ -6,7 +6,6 @@
 
 class GuiRadarView;
 class GuiKeyValueDisplay;
-class GuiAutoLayout;
 class GuiButton;
 class GuiToggleButton;
 class GuiSlider;
@@ -33,25 +32,23 @@ private:
     GuiKeyValueDisplay* info_faction;
 
     GuiKeyValueDisplay* info_reputation;
-    GuiAutoLayout* option_buttons;
+    GuiKeyValueDisplay* info_clock;
+    GuiElement* option_buttons;
     GuiButton* hack_target_button;
     GuiToggleButton* link_to_science_button;
     GuiButton* delete_waypoint_button;
     GuiButton* launch_probe_button;
 
-    GuiToggleButton* alert_level_button;
-    std::vector<GuiButton*> alert_level_buttons;
-
     GuiSlider* zoom_slider;
     GuiLabel* zoom_label;
-    
+
     GuiHackingDialog* hacking_dialog;
 
-    sf::Vector2f mouse_down_position;
+    glm::vec2 mouse_down_position{};
 public:
-    RelayScreen(GuiContainer* owner);
+    RelayScreen(GuiContainer* owner, bool allow_comms);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target) override;
 };
 
 #endif//RELAY_SCREEN_H

@@ -1,3 +1,6 @@
+-- A ModelData object contains 3D appearance and SeriousProton physics collision details.
+-- This file is loaded when EmptyEpsilon is launched.
+-- For details, see the ModelData class in the scripting reference.
 model = ModelData()
 model:setName("eoc_fighter")
 model:setMesh("EOC_fighter.obj")
@@ -294,8 +297,8 @@ model:setScale(4)
 model:setRadius(200)
 
 -- Visual positions of the beams/missiletubes (blender: -X, Y, Z)
-model:addBeamPosition(4, -27, -0.5)
-model:addBeamPosition(4,  27, -0.5)
+model:addBeamPosition(-2, -31, -0.5)
+model:addBeamPosition(-2,  31, -0.5)
 model:addTubePosition(27, 0, -0.5)
 model:addTubePosition(27, 0, -0.5)
 model:addEngineEmitter(-33, 0, 0,  1.0, 0.2, 0.1, 16.0)
@@ -307,10 +310,10 @@ model:addEngineEmitter(-27,-24, 0,  1.0, 0.2, 0.1, 5.0)
 
 model = ModelData()
 model:setName("Ender Battlecruiser")
-model:setMesh("Ender Battlecruiser.obj")
-model:setTexture("Ender Battlecruiser.png")
-model:setSpecular("Ender Battlecruiser_illumination.png")
-model:setIllumination("Ender Battlecruiser_illumination.png")
+model:setMesh("mesh/ship/Ender Battlecruiser.obj")
+model:setTexture("mesh/ship/Ender Battlecruiser.png")
+model:setSpecular("mesh/ship/Ender Battlecruiser_illumination.png")
+model:setIllumination("mesh/ship/Ender Battlecruiser_illumination.png")
 model:setScale(5)
 model:setRadius(1000)
 model:setCollisionBox(2000, 600)
@@ -406,18 +409,18 @@ model:setRadius(350)
 model = ModelData()
 model:setName("ammo_box")
 model:setRadius(50)
-model:setMesh("ammo_box.obj")
-model:setTexture("ammo_box.png")
-model:setSpecular("ammo_box_specular.png")
-model:setIllumination("ammo_box_illumination.png")
+model:setMesh("mesh/ammo_box.obj")
+model:setTexture("mesh/ammo_box.png")
+model:setSpecular("mesh/ammo_box_specular.png")
+model:setIllumination("mesh/ammo_box_illumination.png")
 
 model = ModelData()
 model:setName("shield_generator")
 model:setRadius(150)
 model:setScale(3)
-model:setMesh("Shield bubble generator.obj")
-model:setTexture("Shield bubble generator.jpg")
-model:setSpecular("Shield bubble generator specular.jpg")
+model:setMesh("mesh/various/Shield bubble generator.obj")
+model:setTexture("mesh/various/Shield bubble generator.jpg")
+model:setSpecular("mesh/various/Shield bubble generator specular.jpg")
 
 model = ModelData()
 model:setName("small_frigate_1")
@@ -488,7 +491,7 @@ model:addEngineEmitter(-95,-30, 8,  0.2, 0.2, 1.0, 5.0)
 model:addEngineEmitter(-95,-30, 0,  0.2, 0.2, 1.0, 5.0)
 model:addEngineEmitter(-95,-30,-8,  0.2, 0.2, 1.0, 5.0)
 
-for _, color in ipairs({"Blue", "Green", "Grey", "Red", "White", "Yellow"}) do
+for idx, color in ipairs({"Blue", "Green", "Grey", "Red", "White", "Yellow"}) do
     model = ModelData()
     model:setName("AdlerLongRangeScout" .. color)
     model:setMesh("AdlerLongRangeScout/AdlerLongRangeSoutHull.model")
@@ -655,14 +658,14 @@ model:setSpecular("SensorBuoy/SensorBuoyPBRSpecular.png")
 model:setScale(300)
 model:setRadius(15)
 
-ModelData():setName("artifact1"):setScale(3):setRadius(50):setMesh("Artifact1.obj"):setTexture("electric_sphere_texture.png")
-ModelData():setName("artifact2"):setScale(3):setRadius(50):setMesh("Artifact2.obj"):setTexture("electric_sphere_texture.png")
-ModelData():setName("artifact3"):setScale(3):setRadius(50):setMesh("Artifact3.obj"):setTexture("electric_sphere_texture.png")
-ModelData():setName("artifact4"):setScale(3):setRadius(50):setMesh("Artifact4.obj"):setTexture("electric_sphere_texture.png")
-ModelData():setName("artifact5"):setScale(3):setRadius(50):setMesh("Artifact5.obj"):setTexture("electric_sphere_texture.png")
-ModelData():setName("artifact6"):setScale(3):setRadius(50):setMesh("Artifact6.obj"):setTexture("electric_sphere_texture.png")
-ModelData():setName("artifact7"):setScale(3):setRadius(50):setMesh("Artifact7.obj"):setTexture("electric_sphere_texture.png")
-ModelData():setName("artifact8"):setScale(3):setRadius(50):setMesh("Artifact8.obj"):setTexture("electric_sphere_texture.png")
+ModelData():setName("artifact1"):setScale(3):setRadius(50):setMesh("mesh/Artifact1.obj"):setTexture("texture/electric_sphere_texture.png")
+ModelData():setName("artifact2"):setScale(3):setRadius(50):setMesh("mesh/Artifact2.obj"):setTexture("texture/electric_sphere_texture.png")
+ModelData():setName("artifact3"):setScale(3):setRadius(50):setMesh("mesh/Artifact3.obj"):setTexture("texture/electric_sphere_texture.png")
+ModelData():setName("artifact4"):setScale(3):setRadius(50):setMesh("mesh/Artifact4.obj"):setTexture("texture/electric_sphere_texture.png")
+ModelData():setName("artifact5"):setScale(3):setRadius(50):setMesh("mesh/Artifact5.obj"):setTexture("texture/electric_sphere_texture.png")
+ModelData():setName("artifact6"):setScale(3):setRadius(50):setMesh("mesh/Artifact6.obj"):setTexture("texture/electric_sphere_texture.png")
+ModelData():setName("artifact7"):setScale(3):setRadius(50):setMesh("mesh/Artifact7.obj"):setTexture("texture/electric_sphere_texture.png")
+ModelData():setName("artifact8"):setScale(3):setRadius(50):setMesh("mesh/Artifact8.obj"):setTexture("texture/electric_sphere_texture.png")
 
 for type=1,5 do
     for cnt=1,5 do
@@ -676,3 +679,46 @@ for type=1,5 do
         model:setIllumination("transport_space_ship_" .. type .. "/transport_space_ship_" .. type .. "_illumination.png")
     end
 end
+
+-------- Civil cuboid satellite
+
+model = ModelData()
+model:setName("cubesat")
+model:setMesh("mesh/various/cubesat.obj")
+model:setTexture("mesh/various/cubesat.png")
+model:setSpecular("mesh/various/cubesat-specular.png")
+model:setScale(10)
+model:setRadius(100)
+
+model:addEngineEmitter(.7, -.35, 0,  0.2, 0.2, 0.7, 0.5)
+model:addEngineEmitter(.7,  .35, 0,  0.2, 0.2, 0.7, 0.5)
+
+-------- Military satellite
+
+model = ModelData()
+model:setName("combatsat")
+model:setMesh("mesh/various/combatsat.obj")
+model:setTexture("mesh/various/combatsat.png")
+model:setSpecular("mesh/various/combatsat-specular.png")
+model:setScale(10)
+model:setRadius(55)
+-- Visual positions of the beams/missiletubes (blender: -X, Y, Z)
+model:addBeamPosition(2.7,-0.5,0)
+model:addBeamPosition(2.7, 0.5,0)
+model:addEngineEmitter(-1.5, -.4, 0,  0.2, 0.2, 0.7, 0.5)
+model:addEngineEmitter(-1.5,  .4, 0,  0.2, 0.2, 0.7, 0.5)
+
+-------- Debris
+
+model = ModelData()
+model:setName("debris-cubesat")
+model:setMesh("mesh/various/debris-cubesat.obj")
+model:setTexture("mesh/various/cubesat.png")
+model:setScale(10)
+model:setRadius(100)
+
+model = ModelData():setName("debris-blob")
+model:setScale(2):setRadius(100)
+model:setMesh("mesh/various/debris-blob.obj")
+model:setTexture("mesh/various/debris-blob.jpg")
+model:setSpecular("mesh/various/debris-blob-specular.jpg")

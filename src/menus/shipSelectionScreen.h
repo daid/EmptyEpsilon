@@ -3,8 +3,9 @@
 
 #include "playerInfo.h"
 #include "gui/gui2_canvas.h"
+#include "gui/gui2_panel.h"
 
-class GuiAutoLayout;
+class GuiScrollText;
 class GuiLabel;
 class GuiListbox;
 class GuiOverlay;
@@ -14,52 +15,61 @@ class GuiPanel;
 class GuiButton;
 class GuiToggleButton;
 class GuiTextEntry;
+class CrewPositionSelection;
+class PasswordDialog;
 
 class ShipSelectionScreen : public GuiCanvas, public Updatable
 {
 private:
-    GuiAutoLayout* container;
+    GuiScrollText* playership_info;
+    GuiElement* container;
     GuiElement* left_container;
     GuiElement* right_container;
 
     GuiLabel* no_ships_label;
     GuiListbox* player_ship_list;
+
+    GuiOverlay* crew_position_selection_overlay;
+    CrewPositionSelection* crew_position_selection;
+
+    PasswordDialog* password_dialog;
+public:
+    ShipSelectionScreen();
+
+    virtual void update(float delta) override;
+};
+
+class CrewPositionSelection : public GuiPanel
+{
+public:
+    CrewPositionSelection(GuiContainer* owner, string id, int window_index, std::function<void()> on_cancel, std::function<void()> on_ready);
+
+    virtual void onUpdate() override;
+    void spawnUI(RenderLayer* render_layer);
+private:
+    void disableAllExcept(GuiToggleButton* button);
+    void unselectSingleOptions();
+
+    int window_index;
     GuiButton* ready_button;
-    GuiSelector* crew_type_selector;
-    GuiOverlay* password_overlay;
-    GuiLabel* password_label;
-    GuiPanel* password_entry_box;
-    GuiTextEntry* password_entry;
-    GuiButton* password_entry_ok;
-    GuiButton* password_cancel;
-    GuiButton* password_confirmation;
-    
     GuiToggleButton* main_screen_button;
     GuiToggleButton* crew_position_button[max_crew_positions];
     GuiToggleButton* main_screen_controls_button;
-    GuiToggleButton* game_master_button;
-    GuiAutoLayout* window_button_row;
     GuiToggleButton* window_button;
     GuiSlider* window_angle;
     GuiLabel* window_angle_label;
     GuiToggleButton* topdown_button;
-    GuiToggleButton* cinematic_view_button;
-    
-public:
-    ShipSelectionScreen();
+};
 
-    virtual void update(float delta);
+class SecondMonitorScreen : public GuiCanvas, public Updatable
+{
+public:
+    SecondMonitorScreen(int window_index);
+
+    virtual void update(float delta) override;
 private:
-    /**!
-     * \brief check if this console can be mainscreen.
-     * Being a main screen requires a bit more than the normal GUI, so we need to do some checks.
-     */
-    bool canDoMainScreen() { return PostProcessor::isEnabled() && sf::Shader::isAvailable(); }
-    
-    void updateReadyButton();
-    void updateCrewTypeOptions();
-    
-    void onReadyClick();
+    int monitor_index;
+    CrewPositionSelection* crew_position_selection = nullptr;
 };
 
 #endif//SHIP_SELECTION_SCREEN_H

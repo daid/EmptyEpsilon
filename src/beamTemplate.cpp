@@ -10,7 +10,7 @@ BeamTemplate::BeamTemplate()
     turret_rotation_rate = 0;
     cycle_time = 0;
     damage = 0;
-    beam_texture = "beam_orange.png";
+    beam_texture = "texture/beam_orange.png";
 
     energy_per_beam_fire = 3.0;
     heat_per_beam_fire = 0.02;
@@ -105,12 +105,12 @@ float BeamTemplate::getTurretRotationRate()
 
 void BeamTemplate::setTurretRotationRate(float rotation_rate)
 {
-    if (rotation_rate < 0)
-        this->turret_rotation_rate = 0.0;
+    if (rotation_rate < 0.0f)
+        this->turret_rotation_rate = 0.0f;
     // 25 is an arbitrary limit. Values greater than 25.0 are nearly
     // instantaneous.
-    else if (rotation_rate > 25.0)
-        this->turret_rotation_rate = 25.0;
+    else if (rotation_rate > 25.0f)
+        this->turret_rotation_rate = 25.0f;
     else
         this->turret_rotation_rate = rotation_rate;
 }

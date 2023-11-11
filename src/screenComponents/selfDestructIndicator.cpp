@@ -11,13 +11,13 @@ GuiSelfDestructIndicator::GuiSelfDestructIndicator(GuiContainer* owner)
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     box = new GuiPanel(owner, "SELF_DESTRUCT_INDICATOR_BOX");
-    box->setSize(800, 150)->setPosition(0, 150, ATopCenter);
-    (new GuiLabel(box, "SELF_DESTRUCT_INDICATOR_LABEL", "SELF DESTRUCT ACTIVATED", 50))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, -25, ACenter);
+    box->setSize(800, 150)->setPosition(0, 150, sp::Alignment::TopCenter);
+    (new GuiLabel(box, "SELF_DESTRUCT_INDICATOR_LABEL", tr("SELF DESTRUCT ACTIVATED"), 50))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, -25, sp::Alignment::Center);
     label = new GuiLabel(box, "SELF_DESTRUCT_INDICATOR_LABEL2", "", 30);
-    label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 30, ACenter);
+    label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 30, sp::Alignment::Center);
 }
 
-void GuiSelfDestructIndicator::onDraw(sf::RenderTarget& window)
+void GuiSelfDestructIndicator::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship && my_spaceship->activate_self_destruct)
     {
@@ -29,12 +29,16 @@ void GuiSelfDestructIndicator::onDraw(sf::RenderTarget& window)
             for(int n=0; n<PlayerSpaceship::max_self_destruct_codes; n++)
                 if (!my_spaceship->self_destruct_code_confirmed[n])
                     todo++;
-            label->setText("Waiting for autorization input: " + string(todo) + " left");
+            label->setText(tr("Waiting for authorization input: {codes} left").format({{"codes", string(todo)}}));
         }else{
             if (my_spaceship->self_destruct_countdown <= 3.0f)
-                label->setText("Have a nice day.");
+            {
+                label->setText(tr("Have a nice day."));
+            }
             else
-                label->setText("This ship will self-destruct in exactly 10 seconds.");
+            {
+                label->setText(tr("This ship will self-destruct in {seconds} seconds.").format({{"seconds", string(int(std::nearbyint(my_spaceship->self_destruct_countdown)))}}));
+            }
         }
     }else{
         box->hide();

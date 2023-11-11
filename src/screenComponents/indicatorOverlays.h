@@ -4,6 +4,7 @@
 #include "gui/gui2_element.h"
 
 class GuiOverlay;
+class GuiPanel;
 class GuiLabel;
 /**
     * Full screen overlay for shield hit effect
@@ -22,16 +23,20 @@ private:
     GuiOverlay* shield_low_warning_overlay;
     GuiOverlay* pause_overlay;
     GuiOverlay* victory_overlay;
+    GuiPanel* victory_panel;
     GuiLabel* victory_label;
+    bool has_global_message = false;
+
 public:
     GuiIndicatorOverlays(GuiContainer* owner);
     virtual ~GuiIndicatorOverlays();
-    
-    virtual void onDraw(sf::RenderTarget& window);
-    
-    virtual bool onMouseDown(sf::Vector2f position);
+
+    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+
+    void hasGlobalMessage() { has_global_message = true; }
 private:
-    void drawAlertLevel(sf::RenderTarget& window);
+    void drawAlertLevel(sp::RenderTarget& renderer);
 };
 
 #endif//INDICATOR_OVERLAYS_H

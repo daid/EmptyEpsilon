@@ -1,9 +1,15 @@
-#include <SFML/OpenGL.hpp>
+#include <graphics/opengl.h>
+#include <glm/gtc/type_ptr.hpp>
 
+#include "engine.h"
 #include "particleEffect.h"
+#include "vectorUtils.h"
+#include "textureManager.h"
 #include "modelInfo.h"
 #include "featureDefs.h"
 #include "main.h"
+
+#include "shaderRegistry.h"
 
 ModelInfo::ModelInfo()
 : last_engine_particle_time(0), last_warp_particle_time(0), engine_scale(0), warp_scale(0.0f)
@@ -19,23 +25,23 @@ void ModelInfo::setData(string name)
     }
 }
 
-void ModelInfo::render(sf::Vector2f position, float rotation)
+void ModelInfo::render(glm::vec2 position, float rotation, const glm::mat4& model_matrix)
 {
     if (!data)
         return;
 
-    data->render();
+    data->render(model_matrix);
 
     if (engine_scale > 0.0f)
     {
-        if (engine->getElapsedTime() - last_engine_particle_time > 0.1)
+        if (engine->getElapsedTime() - last_engine_particle_time > 0.1f)
         {
             for (unsigned int n=0; n<data->engine_emitters.size(); n++)
             {
-                sf::Vector3f offset = data->engine_emitters[n].position * data->scale;
-                sf::Vector2f pos2d = position + sf::rotateVector(sf::Vector2f(offset.x, offset.y), rotation);
-                sf::Vector3f color = data->engine_emitters[n].color;
-                sf::Vector3f pos3d = sf::Vector3f(pos2d.x, pos2d.y, offset.z);
+                glm::vec3 offset = data->engine_emitters[n].position * data->scale;
+                glm::vec2 pos2d = position + rotateVec2(glm::vec2(offset.x, offset.y), rotation);
+                glm::vec3 color = data->engine_emitters[n].color;
+                glm::vec3 pos3d = glm::vec3(pos2d.x, pos2d.y, offset.z);
                 float scale = data->scale * data->engine_emitters[n].scale * engine_scale;
                 ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
             }
@@ -45,15 +51,15 @@ void ModelInfo::render(sf::Vector2f position, float rotation)
 
     if (warp_scale > 0.0f)
     {
-        if (engine->getElapsedTime() - last_warp_particle_time > 0.1)
+        if (engine->getElapsedTime() - last_warp_particle_time > 0.1f)
         {
             int count = warp_scale * 10.0f;
             for(int n=0; n<count; n++)
             {
-                sf::Vector3f offset = (data->mesh->randomPoint() + data->mesh_offset) * data->scale;
-                sf::Vector2f pos2d = position + sf::rotateVector(sf::Vector2f(offset.x, offset.y), rotation);
-                sf::Vector3f color = sf::Vector3f(0.6, 0.6, 1);
-                sf::Vector3f pos3d = sf::Vector3f(pos2d.x, pos2d.y, offset.z);
+                glm::vec3 offset = (data->mesh->randomPoint() + data->mesh_offset) * data->scale;
+                glm::vec2 pos2d = position + rotateVec2(glm::vec2(offset.x, offset.y), rotation);
+                glm::vec3 color = glm::vec3(0.6, 0.6, 1);
+                glm::vec3 pos3d = glm::vec3(pos2d.x, pos2d.y, offset.z);
                 ParticleEngine::spawn(pos3d, pos3d, color, color, data->getRadius() / 15.0f, 0.0, 3.0);
             }
             last_warp_particle_time = engine->getElapsedTime();
@@ -61,58 +67,72 @@ void ModelInfo::render(sf::Vector2f position, float rotation)
     }
 }
 
-void ModelInfo::renderOverlay(sf::Texture* texture, float alpha)
+void ModelInfo::renderOverlay(const glm::mat4& model_matrix, sp::Texture* texture, float alpha)
 {
-#if FEATURE_3D_RENDERING
     if (!data)
         return;
 
-    glPushMatrix();
+    auto overlay_matrix = glm::scale(model_matrix, glm::vec3(data->scale));
+    overlay_matrix = glm::translate(overlay_matrix, glm::vec3(data->mesh_offset.x, data->mesh_offset.y, data->mesh_offset.z));
 
-    glScalef(data->scale, data->scale, data->scale);
-    glTranslatef(data->mesh_offset.x, data->mesh_offset.y, data->mesh_offset.z);
     glDepthFunc(GL_EQUAL);
-    glColor4f(alpha, alpha, alpha, 1);
-    ShaderManager::getShader("basicShader")->setUniform("textureMap", *texture);
-    sf::Shader::bind(ShaderManager::getShader("basicShader"));
-    data->mesh->render();
+    {
+        ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
+
+        glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(overlay_matrix));
+        texture->bind();
+
+        gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+        data->mesh->render(positions.get(), texcoords.get(), normals.get());
+    }
+    
     glDepthFunc(GL_LESS);
-
-    glPopMatrix();
-#endif//FEATURE_3D_RENDERING
 }
 
-void ModelInfo::renderShield(float alpha)
+void ModelInfo::renderShield(const glm::mat4& model_matrix, float alpha)
 {
-#if FEATURE_3D_RENDERING
-    ShaderManager::getShader("basicShader")->setUniform("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
-    sf::Shader::bind(ShaderManager::getShader("basicShader"));
+    auto shield_matrix = glm::rotate(model_matrix, glm::radians(engine->getElapsedTime() * 5), {0.f, 0.f, 1.f});
+    shield_matrix = glm::scale(shield_matrix, 1.2f * glm::vec3{data->radius});
 
-    glPushMatrix();
-    glColor4f(alpha, alpha, alpha, 1);
-    glRotatef(engine->getElapsedTime() * 5, 0, 0, 1);
-    glScalef(data->radius * 1.2, data->radius * 1.2, data->radius * 1.2);
-    Mesh* m = Mesh::getMesh("sphere.obj");
-    m->render();
-    glPopMatrix();
-#endif//FEATURE_3D_RENDERING
+    Mesh* m = Mesh::getMesh("mesh/sphere.obj");
+    {
+        ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
+
+        glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(shield_matrix));
+        textureManager.getTexture("texture/shield_hit_effect.png")->bind();
+
+        gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+        m->render(positions.get(), texcoords.get(), normals.get());
+    }
 }
 
-void ModelInfo::renderShield(float alpha, float angle)
+void ModelInfo::renderShield(const glm::mat4& model_matrix, float alpha, float angle)
 {
-#if FEATURE_3D_RENDERING
-    if (!data) return;
+    if (!data)
+        return;
+    auto shield_matrix = glm::rotate(model_matrix, glm::radians(angle), glm::vec3(0.f, 0.f, 1.f));
+        shield_matrix = glm::rotate(shield_matrix, glm::radians(engine->getElapsedTime() * 5), glm::vec3(0.f, 0.f, 1.f));
+        shield_matrix = glm::scale(shield_matrix, 1.2f * glm::vec3(data->radius));
+    Mesh* m = Mesh::getMesh("mesh/half_sphere.obj");
+    {
+        ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
 
-    ShaderManager::getShader("basicShader")->setUniform("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
-    sf::Shader::bind(ShaderManager::getShader("basicShader"));
+        glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(shield_matrix));
+        textureManager.getTexture("texture/shield_hit_effect.png")->bind();
 
-    glPushMatrix();
-    glColor4f(alpha, alpha, alpha, 1);
-    glRotatef(angle, 0, 0, 1);
-    glRotatef(engine->getElapsedTime() * 5, 1, 0, 0);
-    glScalef(data->radius * 1.2, data->radius * 1.2, data->radius * 1.2);
-    Mesh* m = Mesh::getMesh("half_sphere.obj");
-    m->render();
-    glPopMatrix();
-#endif//FEATURE_3D_RENDERING
+        gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+        m->render(positions.get(), texcoords.get(), normals.get());
+    }
 }

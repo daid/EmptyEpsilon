@@ -4,6 +4,7 @@
 #include "gui/gui2_overlay.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/targetsContainer.h"
+#include "gui/joystickConfig.h"
 
 class GuiMissileTubeControls;
 class GuiKeyValueDisplay;
@@ -13,7 +14,6 @@ class GuiRotationDial;
 class WeaponsScreen : public GuiOverlay
 {
 private:
-    GuiOverlay* background_gradient;
     GuiOverlay* background_crosses;
 
     TargetsContainer targets;
@@ -26,9 +26,9 @@ private:
     GuiToggleButton* lock_aim;
 public:
     WeaponsScreen(GuiContainer* owner);
-    
-    virtual void onDraw(sf::RenderTarget& window) override;
-    virtual void onHotkey(const HotkeyResult& key) override;
+
+    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onUpdate() override;
 };
 
 #endif//WEAPONS_SCREEN_H

@@ -11,7 +11,7 @@ public:
     OnScreenKeyboardControl(GuiContainer* owner, GuiTextEntry* target);
 private:
     GuiTextEntry* target;
-    
+
     void addButtonsToRow(GuiContainer* row, const char* button_keys);
 };
 

@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "engine.h"
 #include "tutorialMenu.h"
 #include "main.h"
@@ -17,18 +18,23 @@
 TutorialMenu::TutorialMenu()
 {
     new GuiOverlay(this, "", colorConfig.background);
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+
+    // Draw a one-column autolayout container with margins.
+    container = new GuiElement(this, "TUTORIAL_CONTAINER");
+    container->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(50)->setAttribute("layout", "vertical");
 
     // Tutorial section.
-    (new GuiLabel(this, "TUTORIAL_LABEL", "Tutorials", 30))->addBackground()->setPosition(50, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(container, "TUTORIAL_LABEL", tr("title", "Tutorials"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     // List each scenario derived from scenario_*.lua files in Resources.
-    GuiListbox* tutorial_list = new GuiListbox(this, "TUTORIAL_LIST", [this](int index, string value) {
+    GuiListbox* tutorial_list = new GuiListbox(container, "TUTORIAL_LIST", [this](int index, string value)
+    {
         selectTutorial(value);
     });
-    tutorial_list->setPosition(50, 120, ATopLeft)->setSize(GuiElement::GuiSizeMax, 250);
+    tutorial_list->setSize(GuiElement::GuiSizeMax, 350);
 
-        // Fetch and sort all Lua files starting with "tutorial_".
-    std::vector<string> tutorial_filenames = findResources("tutorial_*.lua");
+    // Fetch and sort all Lua files starting with "tutorial_".
+    std::vector<string> tutorial_filenames = findResources("tutorial/*.lua");
     std::sort(tutorial_filenames.begin(), tutorial_filenames.end());
 
     // For each scenario file, extract its name, then add it to the list.
@@ -38,26 +44,30 @@ TutorialMenu::TutorialMenu()
         tutorial_list->addEntry(info.name, filename);
     }
 
-
-        // Show the scenario description text.
-    GuiPanel* panel = new GuiPanel(this, "VARIATION_DESCRIPTION_BOX");
-    panel->setSize(GuiElement::GuiSizeMax, 400)->setPosition(50, 400, ATopLeft);
+    // Show the scenario description text.
+    GuiPanel* panel = new GuiPanel(container, "TUTORIAL_DESCRIPTION_BOX");
+    panel->setSize(GuiElement::GuiSizeMax, 350);
     tutorial_description = new GuiScrollText(panel, "TUTORIAL_DESCRIPTION", "");
     tutorial_description->setTextSize(24)->setMargins(15)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    start_tutorial_button = new GuiButton(this, "START_TUTORIAL", "Start Tutorial", [this]() {
+    // Bottom GUI.
+    bottom_row = new GuiElement(container, "TUTORIAL_BOTTOM_ROW");
+    bottom_row->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Start tutorial button.
+    start_tutorial_button = new GuiButton(bottom_row, "START_TUTORIAL", tr("Start Tutorial"), [this]() {
         destroy();
         new TutorialGame(false,selected_tutorial_filename);
     });
-    start_tutorial_button->setEnable(false)->setPosition(0, -50, ABottomRight)->setSize(300, 50);
-    // Bottom GUI.
+    start_tutorial_button->setEnable(false)->setPosition(0, 0, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax);
+
     // Back button.
-    (new GuiButton(this, "BACK", "Back", [this]()
+    (new GuiButton(bottom_row, "BACK", tr("button", "Back"), [this]()
     {
         // Close this menu, stop the music, and return to the main menu.
         destroy();
-        returnToMainMenu();
-    }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
+        returnToMainMenu(getRenderLayer());
+    }))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(300, GuiElement::GuiSizeMax);
 
     // Select the first scenario in the list by default.
     if (!tutorial_filenames.empty()) {
@@ -74,17 +84,11 @@ void TutorialMenu::selectTutorial(string filename)
     tutorial_description->setText(info.description);
 }
 
-void TutorialMenu::onKey(sf::Event::KeyEvent key, int unicode)
+void TutorialMenu::update(float delta)
 {
-    switch(key.code)
+    if (keys.escape.getDown())
     {
-    //TODO: This is more generic code and is duplicated.
-    case sf::Keyboard::Escape:
-    case sf::Keyboard::Home:
         destroy();
-        returnToMainMenu();
-        break;
-    default:
-        break;
+        returnToMainMenu(getRenderLayer());
     }
 }

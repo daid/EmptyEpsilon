@@ -5,10 +5,11 @@ GuiEntryList::GuiEntryList(GuiContainer* owner, string id, func_t func)
 {
 }
 
-GuiEntryList* GuiEntryList::setOptions(std::vector<string> options)
+GuiEntryList* GuiEntryList::setOptions(const std::vector<string>& options)
 {
     entries.clear();
-    for(string option : options)
+    entries.reserve(options.size());
+    for(const auto& option : options)
     {
         entries.emplace_back(option, option);
     }
@@ -16,12 +17,14 @@ GuiEntryList* GuiEntryList::setOptions(std::vector<string> options)
     return this;
 }
 
-GuiEntryList* GuiEntryList::setOptions(std::vector<string> options, std::vector<string> values)
+GuiEntryList* GuiEntryList::setOptions(const std::vector<string>& options, const std::vector<string>& values)
 {
-    for(unsigned int n=0; n<options.size(); n++)
+    auto count = std::min(options.size(), values.size());
+    entries.clear();
+    entries.reserve(entries.size() + count);
+    for(unsigned int n=0; n<count; n++)
     {
-        if (n < values.size())
-            entries.emplace_back(options[n], values[n]);
+        entries.emplace_back(options[n], values[n]);
     }
     entriesChanged();
     return this;
@@ -40,6 +43,14 @@ void GuiEntryList::setEntryValue(int index, string value)
     if (index < 0 || index >= (int)entries.size())
         return;
     entries[index].value = value;
+    entriesChanged();
+}
+
+void GuiEntryList::setEntryIcon(int index, string icon_name)
+{
+    if (index < 0 || index >= (int)entries.size())
+        return;
+    entries[index].icon_name = icon_name;
     entriesChanged();
 }
 
@@ -96,6 +107,13 @@ string GuiEntryList::getEntryValue(int index) const
     if (index < 0 || index >= int(entries.size()))
         return "";
     return entries[index].value;
+}
+
+string GuiEntryList::getEntryIcon(int index) const
+{
+    if (index < 0 || index >= int(entries.size()))
+        return "";
+    return entries[index].icon_name;
 }
 
 int GuiEntryList::getSelectionIndex() const

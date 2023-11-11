@@ -8,7 +8,7 @@ class GuiNoiseOverlay : public GuiElement
 public:
     GuiNoiseOverlay(GuiContainer* owner);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target) override;
 };
 
 #endif//NOISE_OVERLAY_H

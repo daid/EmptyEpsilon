@@ -1,7 +1,7 @@
 #ifndef MISSILE_TUBE_CONTROLS_H
 #define MISSILE_TUBE_CONTROLS_H
 
-#include "gui/gui2_autolayout.h"
+#include "gui/gui2_element.h"
 #include "missileWeaponData.h"
 
 class GuiButton;
@@ -9,11 +9,11 @@ class GuiProgressbar;
 class GuiLabel;
 class GuiToggleButton;
 
-class GuiMissileTubeControls : public GuiAutoLayout
+class GuiMissileTubeControls : public GuiElement
 {
 private:
     struct TubeRow {
-        GuiAutoLayout* layout;
+        GuiElement* layout;
         GuiButton* load_button;
         GuiButton* fire_button;
         GuiProgressbar* loading_bar;
@@ -22,7 +22,7 @@ private:
     std::vector<TubeRow> rows;
     class TypeRow {
     public:
-        GuiAutoLayout* layout;
+        GuiElement* layout;
         GuiToggleButton* button;
     };
     TypeRow load_type_rows[MW_Count];
@@ -31,13 +31,12 @@ private:
     float missile_target_angle;
 public:
     GuiMissileTubeControls(GuiContainer* owner, string id);
-    
-    virtual void onDraw(sf::RenderTarget& window) override;
-    virtual void onHotkey(const HotkeyResult& key) override;
-    
+
+    virtual void onUpdate() override;
+
     void setMissileTargetAngle(float angle);
     float getMissileTargetAngle();
-    
+
     void setManualAim(bool manual);
     bool getManualAim();
 

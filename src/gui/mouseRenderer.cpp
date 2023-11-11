@@ -1,20 +1,38 @@
 #include "mouseRenderer.h"
 #include "main.h"
 
-MouseRenderer::MouseRenderer()
-: Renderable(mouseLayer)
+MouseRenderer::MouseRenderer(RenderLayer* render_layer)
+: Renderable(render_layer)
 {
     visible = true;
 }
 
-void MouseRenderer::render(sf::RenderTarget& window)
+void MouseRenderer::render(sp::RenderTarget& renderer)
 {
     if (!visible) return;
 
-    sf::Vector2f mouse = InputHandler::getMousePos();
+    renderer.drawSprite("mouse.png", position, 32.0);
+}
 
-    sf::Sprite mouseSprite;
-    textureManager.setTexture(mouseSprite, "mouse.png");
-    mouseSprite.setPosition(mouse);
-    window.draw(mouseSprite);
+bool MouseRenderer::onPointerMove(glm::vec2 position, sp::io::Pointer::ID id)
+{
+    if (id == -1) {
+        this->position = position;
+        visible = true;
+    }
+    return false;
+}
+
+void MouseRenderer::onPointerLeave(sp::io::Pointer::ID id)
+{
+    if (id == -1)
+        visible = false;
+}
+
+void MouseRenderer::onPointerDrag(glm::vec2 position, sp::io::Pointer::ID id)
+{
+    if (id == -1) {
+        this->position = position;
+        visible = true;
+    }
 }

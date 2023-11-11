@@ -3,6 +3,9 @@
 
 #include "engine.h"
 #include "hardwareOutputDevice.h"
+#include "timer.h"
+#include "Updatable.h"
+
 
 class HardwareOutputDevice;
 class HardwareMappingEffect;
@@ -21,7 +24,7 @@ public:
     EOperator compare_operator;
     float compare_value;
     int channel_nr;
-    
+
     HardwareMappingEffect* effect;
 };
 class HardwareMappingEvent
@@ -33,17 +36,16 @@ public:
         Increase,
         Decrease
     };
-    
+
     string trigger_variable;
     float runtime;
-    bool triggered;
-    sf::Clock start_time;
+    sp::Timer timer;
 
     EOperator compare_operator;
     bool previous_valid;
     float previous_value;
     int channel_nr;
-    
+
     HardwareMappingEffect* effect;
 };
 class HardwareController : public Updatable
@@ -55,12 +57,12 @@ private:
     std::vector<HardwareMappingEvent> events;
     std::vector<float> channels;
 public:
-    HardwareController();
+    HardwareController() = default;
     ~HardwareController();
-    
+
     void loadConfiguration(string filename);
-    
-    virtual void update(float delta);
+
+    virtual void update(float delta) override;
 
     bool getVariableValue(string variable_name, float& value);
 private:

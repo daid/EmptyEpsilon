@@ -1,15 +1,16 @@
 #ifndef MATH_TRIANGULATE_H
 #define MATH_TRIANGULATE_H
 
-#include <SFML/System/Vector2.hpp>
+#include <glm/vec2.hpp>
 #include <vector>
 
-template<typename T> class Triangulate
+class Triangulate
 {
 public:
-    typedef std::vector<sf::Vector2<T>> Path;
-    
-    static bool process(const Path& input, Path& output)
+    typedef std::vector<glm::vec2> Path;
+    typedef std::vector<uint16_t> Indices;
+
+    static bool process(const Path& input, Indices& output)
     {
         int n = input.size();
         if (n < 3)
@@ -33,7 +34,7 @@ public:
             if (count-- < 0)
             {
                 //** Triangulate: ERROR - probable bad polygon!
-                delete indexes;
+                delete[] indexes;
                 return false;
             }
 
@@ -50,9 +51,9 @@ public:
                 a = indexes[u]; b = indexes[v]; c = indexes[w];
 
                 /* output Triangle */
-                output.push_back(input[a]);
-                output.push_back(input[b]);
-                output.push_back(input[c]);
+                output.push_back(a);
+                output.push_back(b);
+                output.push_back(c);
 
                 m++;
 
@@ -65,14 +66,14 @@ public:
             }
         }
 
-        delete indexes;
+        delete[] indexes;
         return true;
     }
 
 private:
-    static T area(const Path &input)
+    static float area(const Path &input)
     {
-        T result = 0;
+        float result = 0;
         int p0 = input.size() - 1;
         for(unsigned int p1=0; p1<input.size(); p1++)
         {
@@ -82,27 +83,27 @@ private:
         return result * 0.5f;
     }
 
-    static bool inside(sf::Vector2<T> a, sf::Vector2<T> b, sf::Vector2<T> c, sf::Vector2<T> p)
+    static bool inside(glm::vec2 a, glm::vec2 b, glm::vec2 c, glm::vec2 p)
     {
-        sf::Vector2<T> cb = c - b;
-        sf::Vector2<T> ac = a - c;
-        sf::Vector2<T> ba = b - a;
-        
-        sf::Vector2<T> pa = p - a;
-        sf::Vector2<T> pb = p - b;
-        sf::Vector2<T> pc = p - c;
+        glm::vec2 cb = c - b;
+        glm::vec2 ac = a - c;
+        glm::vec2 ba = b - a;
 
-        T cross_a = ba.x * pa.y - ba.y * pa.x;
-        T cross_b = cb.x * pb.y - cb.y * pb.x;
-        T cross_c = ac.x * pc.y - ac.y * pc.x;
+        glm::vec2 pa = p - a;
+        glm::vec2 pb = p - b;
+        glm::vec2 pc = p - c;
+
+        float cross_a = ba.x * pa.y - ba.y * pa.x;
+        float cross_b = cb.x * pb.y - cb.y * pb.x;
+        float cross_c = ac.x * pc.y - ac.y * pc.x;
         return cross_a >= 0.0f && cross_b >= 0.0f && cross_c >= 0.0f;
     }
-    
+
     static bool snip(const Path &input, int u, int v, int w, int n, int* indexes)
     {
-        sf::Vector2<T> a = input[indexes[u]];
-        sf::Vector2<T> b = input[indexes[v]];
-        sf::Vector2<T> c = input[indexes[w]];
+        glm::vec2 a = input[indexes[u]];
+        glm::vec2 b = input[indexes[v]];
+        glm::vec2 c = input[indexes[w]];
 
         if (0.0000000001f > (((b.x-a.x)*(c.y-a.y)) - ((b.y-a.y)*(c.x-a.x))) )
             return false;
@@ -111,7 +112,7 @@ private:
         {
             if( (index == u) || (index == v) || (index == w) )
                 continue;
-            sf::Vector2<T> p = input[indexes[index]];
+            glm::vec2 p = input[indexes[index]];
             if (inside(a, b, c, p))
                 return false;
         }

@@ -1,0 +1,59 @@
+# Scenario name
+msgid "Training: Cruiser"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Basic Training Cource\n"
+"\n"
+"Objective: Destroy all enemy ships in the area.\n"
+"\n"
+"Description:\n"
+"During this training your will learn to coordinate the actions of your crew "
+"and destoy an Exuari training ground.\n"
+"\n"
+"Your ship is a Phobos light cruiser - the most common vessel in the navy.\n"
+"\n"
+"This is a short mission for inexperienced players."
+msgstr ""
+
+#: scripts/scenario_20_training1.lua:130
+msgctxt "goal-incCall"
+msgid ""
+"This is Commander Saberhagen.\n"
+"\n"
+"In this training mission you will practice the basic controls of a Phobos "
+"light cruiser.\n"
+"Since this is not a tutorial, you will be on your own to decide how to "
+"destroy all enemy targets in an Exuari training ground.\n"
+"There will be not much resistance, so you can try different approaches and "
+"tactics savely.\n"
+"\n"
+"Here's your chance to beat up some helpless opponents.\n"
+"Commander Saberhagen out."
+msgstr ""
+
+#: scripts/scenario_20_training1.lua:148
+msgctxt "msgMainscreen-bonusTarget"
+msgid "escaped."
+msgstr ""
+
+#: scripts/scenario_20_training1.lua:150
+msgctxt "msgMainscreen-bonusTarget"
+msgid "destroyed."
+msgstr ""
+
+#: scripts/scenario_20_training1.lua:152
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"Mission Complete.\n"
+"Your Time: %d\n"
+"Bonus target %s\n"
+"\n"
+"If you feel ready for combat, play scenario 'Basic Battle'.\n"
+"If you want to try another ship, play the next training mission.\n"
+"\n"
+"If you need more practice, play this training again\n"
+"with different stations assigned to your crew members."
+msgstr ""

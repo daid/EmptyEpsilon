@@ -36,12 +36,15 @@ class Client:
                 if key == "instance_name":
                     self.__name = value
                 elif key == "autoconnect":
-                    position = int(value)
-                    if position <= 0:
-                        self.__auto_connect = False
+                    if value:
+                        position = int(value)
+                        if position <= 0:
+                            self.__auto_connect = False
+                        else:
+                            self.__auto_connect = True
+                            self.__station = self.POSITIONS[position]
                     else:
-                        self.__auto_connect = True
-                        self.__station = self.POSITIONS[position]
+                        self.__auto_connect = False
                 elif key == "autoconnectship":
                     self.__ship = value
             f.close()

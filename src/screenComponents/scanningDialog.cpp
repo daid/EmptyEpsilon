@@ -1,6 +1,7 @@
 #include "scanningDialog.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "playerInfo.h"
+#include "random.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_slider.h"
@@ -14,40 +15,40 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     scan_depth = 0;
 
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     box = new GuiPanel(this, id + "_BOX");
-    box->setSize(500, 545)->setPosition(0, 0, ACenter);
-    
-    signal_label = new GuiLabel(box, id + "_LABEL", "Electric signature", 30);
-    signal_label->addBackground()->setPosition(0, 20, ATopCenter)->setSize(450, 50);
-    
+    box->setSize(500, 545)->setPosition(0, 0, sp::Alignment::Center);
+
+    signal_label = new GuiLabel(box, id + "_LABEL", tr("scanning", "Electric signature"), 30);
+    signal_label->addBackground()->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(450, 50);
+
     signal_quality = new GuiSignalQualityIndicator(box, id + "_SIGNAL");
-    signal_quality->setPosition(0, 80, ATopCenter)->setSize(450, 100);
-    
-    locked_label = new GuiLabel(signal_quality, id + "_LOCK_LABEL", "LOCKED", 50);
+    signal_quality->setPosition(0, 80, sp::Alignment::TopCenter)->setSize(450, 100);
+
+    locked_label = new GuiLabel(signal_quality, id + "_LOCK_LABEL", tr("scanning", "LOCKED"), 50);
     locked_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     for(int n=0; n<max_sliders; n++)
     {
         sliders[n] = new GuiSlider(box, id + "_SLIDER_" + string(n), 0.0, 1.0, 0.0, nullptr);
-        sliders[n]->setPosition(0, 200 + n * 70, ATopCenter)->setSize(450, 50);
+        sliders[n]->setPosition(0, 200 + n * 70, sp::Alignment::TopCenter)->setSize(450, 50);
     }
-    cancel_button = new GuiButton(box, id + "_CANCEL", "Cancel", []() {
+    cancel_button = new GuiButton(box, id + "_CANCEL", tr("button", "Cancel"), []() {
         if (my_spaceship)
             my_spaceship->commandScanCancel();
     });
-    cancel_button->setPosition(0, -20, ABottomCenter)->setSize(300, 50);
+    cancel_button->setPosition(0, -20, sp::Alignment::BottomCenter)->setSize(300, 50);
 
     setupParameters();
 }
 
-void GuiScanningDialog::onDraw(sf::RenderTarget& window)
+void GuiScanningDialog::onDraw(sp::RenderTarget& target)
 {
     updateSignal();
-    
+
     if (my_spaceship)
     {
-        if (my_spaceship->scanning_delay > 0.0 && my_spaceship->scanning_complexity > 0)
+        if (my_spaceship->scanning_delay > 0.0f && my_spaceship->scanning_complexity > 0)
         {
             if (!box->isVisible())
             {
@@ -55,7 +56,7 @@ void GuiScanningDialog::onDraw(sf::RenderTarget& window)
                 scan_depth = 0;
                 setupParameters();
             }
-            
+
             if (locked && engine->getElapsedTime() - lock_start_time > lock_delay)
             {
                 scan_depth += 1;
@@ -67,7 +68,7 @@ void GuiScanningDialog::onDraw(sf::RenderTarget& window)
                     setupParameters();
                 }
             }
-            
+
             if (locked && engine->getElapsedTime() - lock_start_time > lock_delay / 2.0f)
             {
                 locked_label->show();
@@ -80,11 +81,35 @@ void GuiScanningDialog::onDraw(sf::RenderTarget& window)
     }
 }
 
+void GuiScanningDialog::onUpdate()
+{
+    if(my_spaceship && isVisible())
+    {
+        for(int n=0; n<max_sliders; n++)
+        {
+            float adjust = (keys.science_scan_param_increase[n].getValue() - keys.science_scan_param_decrease[n].getValue()) * 0.01f;
+            if (adjust != 0.0f)
+            {
+                sliders[n]->setValue(sliders[n]->getValue() + adjust);
+                updateSignal();
+            }
+
+            float set_value = keys.science_scan_param_set[n].getValue();
+            if (set_value != sliders[n]->getValue() && (set_value != 0.0f || set_active[n]))
+            {
+                sliders[n]->setValue(set_value);
+                updateSignal();
+                set_active[n] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
+            }
+        }
+    }
+}
+
 void GuiScanningDialog::setupParameters()
 {
     if (!my_spaceship)
         return;
-    
+
     for(int n=0; n<max_sliders; n++)
     {
         if (n < my_spaceship->scanning_complexity)
@@ -98,11 +123,11 @@ void GuiScanningDialog::setupParameters()
     {
         target[n] = random(0.0, 1.0);
         sliders[n]->setValue(random(0.0, 1.0));
-        while(fabsf(target[n] - sliders[n]->getValue()) < 0.2)
+        while(fabsf(target[n] - sliders[n]->getValue()) < 0.2f)
             sliders[n]->setValue(random(0.0, 1.0));
     }
     updateSignal();
-    
+
     string label = "[" + string(scan_depth + 1) + "/" + string(my_spaceship->scanning_depth) + "] ";
     switch(irandom(0, 10))
     {
@@ -156,7 +181,7 @@ void GuiScanningDialog::updateSignal()
     }else{
         locked = false;
     }
-    
+
     signal_quality->setNoiseError(noise);
     signal_quality->setPeriodError(period);
     signal_quality->setPhaseError(phase);

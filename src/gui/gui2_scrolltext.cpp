@@ -1,12 +1,12 @@
-#include "main.h"
 #include "gui2_scrolltext.h"
+
 
 GuiScrollText::GuiScrollText(GuiContainer* owner, string id, string text)
 : GuiElement(owner, id), text(text), text_size(30)
 {
     auto_scroll_down = false;
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
-    scrollbar->setPosition(0, 0, ATopRight)->setSize(50, GuiElement::GuiSizeMax);
+    scrollbar->setPosition(0, 0, sp::Alignment::TopRight)->setSize(50, GuiElement::GuiSizeMax);
 }
 
 GuiScrollText* GuiScrollText::setText(string text)
@@ -26,41 +26,32 @@ GuiScrollText* GuiScrollText::setScrollbarWidth(float width)
     return this;
 }
 
-void GuiScrollText::onDraw(sf::RenderTarget& window)
+void GuiScrollText::onDraw(sp::RenderTarget& renderer)
 {
-    LineWrapResult wrap = doLineWrap(this->text, text_size, rect.width - scrollbar->getSize().x);
-    
-    int start_pos = 0;
-    for(int n=0; n<scrollbar->getValue(); n++)
+    auto text_rect = sp::Rect(rect.position.x, rect.position.y, rect.size.x - scrollbar->getSize().x, rect.size.y);
+    auto prepared = sp::RenderTarget::getDefaultFont()->prepare(this->text, 32, text_size, text_rect.size, sp::Alignment::TopLeft, sp::Font::FlagClip | sp::Font::FlagLineWrap);
+    auto text_draw_size = prepared.getUsedAreaSize();
+
+    int scroll_max = text_draw_size.y;
+    if (scrollbar->getMax() != scroll_max)
     {
-        int next = wrap.text.find("\n", start_pos) + 1;
-        if (next > 0)
-            start_pos = next;
-    }
-    if (start_pos > 0)
-        wrap.text = wrap.text.substr(start_pos);
-    int max_lines = rect.height / main_font->getLineSpacing(text_size);
-    if (wrap.line_count - scrollbar->getValue() > max_lines)
-    {
-        int end_pos = 0;
-        for(int n=0; n<max_lines; n++)
-        {
-            int next = wrap.text.find("\n", end_pos) + 1;
-            if (next > 0)
-                end_pos = next;
-        }
-        if (end_pos > 0)
-            wrap.text = wrap.text.substr(0, end_pos);
-    }
-    
-    if (scrollbar->getMax() != wrap.line_count)
-    {
-        int diff = wrap.line_count - scrollbar->getMax();
-        scrollbar->setRange(0, wrap.line_count);
-        scrollbar->setValueSize(max_lines);
+        int diff = scroll_max - scrollbar->getMax();
+        scrollbar->setRange(0, scroll_max);
+        scrollbar->setValueSize(text_rect.size.y);
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }
 
-    drawText(window, sf::FloatRect(rect.left, rect.top, rect.width - scrollbar->getSize().x, rect.height), wrap.text, ATopLeft, text_size, main_font, selectColor(colorConfig.textbox.forground));
+    if (text_rect.size.y >= text_draw_size.y)
+    {
+        scrollbar->hide();
+        renderer.drawText(rect, this->text, sp::Alignment::TopLeft, text_size, nullptr, selectColor(colorConfig.textbox.forground), sp::Font::FlagClip | sp::Font::FlagLineWrap);
+    }
+    else
+    {
+        for(auto& g : prepared.data)
+            g.position.y -= scrollbar->getValue();
+        scrollbar->show();
+        renderer.drawText(text_rect, prepared, text_size, selectColor(colorConfig.textbox.forground), sp::Font::FlagClip | sp::Font::FlagLineWrap);
+    }
 }

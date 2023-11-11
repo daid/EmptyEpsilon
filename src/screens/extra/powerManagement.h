@@ -7,10 +7,19 @@
 class GuiPanel;
 class GuiSlider;
 class GuiProgressbar;
+class GuiKeyValueDisplay;
 
 class PowerManagementScreen : public GuiOverlay
 {
 private:
+    GuiKeyValueDisplay* energy_display;
+    GuiKeyValueDisplay* coolant_display;
+
+    float previous_energy_measurement;
+    float previous_energy_level;
+    float average_energy_delta;
+    ESystem selected_system = SYS_None;
+
     class SystemRow
     {
     public:
@@ -24,8 +33,9 @@ private:
     SystemRow systems[SYS_COUNT];
 public:
     PowerManagementScreen(GuiContainer* owner);
-    
-    void onDraw(sf::RenderTarget& window) override;
+
+    void onDraw(sp::RenderTarget& target) override;
+    virtual void onUpdate() override;
 };
 
 #endif//POWER_MANAGEMENT_H

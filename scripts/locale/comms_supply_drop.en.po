@@ -1,0 +1,11 @@
+#: scripts/comms_supply_drop.lua:11
+msgctxt "commsShip"
+msgid "Transporting goods."
+msgstr ""
+
+#: scripts/comms_supply_drop.lua:17
+msgctxt "commsShip"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""

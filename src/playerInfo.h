@@ -1,7 +1,8 @@
 #ifndef PLAYER_INFO_H
 #define PLAYER_INFO_H
 
-#include "engine.h"
+#include "multiplayer.h"
+#include "scriptInterface.h"
 
 enum ECrewPosition
 {
@@ -21,12 +22,15 @@ enum ECrewPosition
     damageControl,
     powerManagement,
     databaseView,
-
+    altRelay,
+    commsOnly,
+    shipLog,
     max_crew_positions
 };
 
 class PlayerInfo;
 class PlayerSpaceship;
+class RenderLayer;
 extern P<PlayerInfo> my_player_info;
 extern P<PlayerSpaceship> my_spaceship;
 extern PVector<PlayerInfo> player_info_list;
@@ -36,19 +40,27 @@ class PlayerInfo : public MultiplayerObject
 public:
     int32_t client_id;
 
-    bool crew_position[max_crew_positions];
-    bool main_screen_control;
+    uint32_t crew_position[max_crew_positions];
+    uint32_t main_screen = 0;
+    uint32_t main_screen_control = 0;
     int32_t ship_id;
+    string name;
+    string last_ship_password;
 
     PlayerInfo();
 
-    bool isMainScreen();
-    void commandSetCrewPosition(ECrewPosition position, bool active);
-    void commandSetShipId(int32_t id);
-    void commandSetMainScreenControl(bool control);
-    virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet);
+    void reset();
 
-    void spawnUI();
+    bool isOnlyMainScreen(int monitor_index);
+
+    void commandSetCrewPosition(int monitor_index, ECrewPosition position, bool active);
+    void commandSetShipId(int32_t id);
+    void commandSetMainScreen(int monitor_index, bool enabled);
+    void commandSetMainScreenControl(int monitor_index, bool control);
+    void commandSetName(const string& name);
+    virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
+
+    void spawnUI(int monitor_index, RenderLayer* render_layer);
 };
 
 REGISTER_MULTIPLAYER_ENUM(ECrewPosition);

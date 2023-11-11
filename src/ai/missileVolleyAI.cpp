@@ -34,16 +34,16 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
         return;
     }
 
-    sf::Vector2f position_diff = target->getPosition() - owner->getPosition();
-    float target_angle = sf::vector2ToAngle(position_diff);
-    float distance = sf::length(position_diff);
-    
+    auto position_diff = target->getPosition() - owner->getPosition();
+    float target_angle = vec2ToAngle(position_diff);
+    float distance = glm::length(position_diff);
+
     if (flank_position == Unknown)
     {
         //No flanking position. Do we want to go left or right of the target?
-        sf::Vector2f left_point = target->getPosition() + sf::vector2FromAngle(target_angle - 120) * 3500.0f;
-        sf::Vector2f right_point = target->getPosition() + sf::vector2FromAngle(target_angle + 120) * 3500.0f;
-        if (sf::angleDifference(sf::vector2ToAngle(left_point - owner->getPosition()), owner->getRotation()) < sf::angleDifference(sf::vector2ToAngle(right_point - owner->getPosition()), owner->getRotation()))
+        auto left_point = target->getPosition() + vec2FromAngle(target_angle - 120) * 3500.0f;
+        auto right_point = target->getPosition() + vec2FromAngle(target_angle + 120) * 3500.0f;
+        if (angleDifference(vec2ToAngle(left_point - owner->getPosition()), owner->getRotation()) < angleDifference(vec2ToAngle(right_point - owner->getPosition()), owner->getRotation()))
         {
             flank_position = Left;
         }else{
@@ -65,7 +65,7 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
                 break;
             }
         }
-        
+
         if (all_possible_loaded)
         {
             int can_fire_count = 0;
@@ -77,7 +77,7 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
                     can_fire_count++;
                 }
             }
-            
+
             for(int n=0; n<owner->weapon_tube_count; n++)
             {
                 float target_angle = calculateFiringSolution(target, n);
@@ -95,17 +95,17 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
         }
     }
 
-    sf::Vector2f target_position;
+    glm::vec2 target_position{};
     if (flank_position == Left)
     {
-        target_position = target->getPosition() + sf::vector2FromAngle(target_angle - 120) * 3500.0f;
+        target_position = target->getPosition() + vec2FromAngle(target_angle - 120) * 3500.0f;
     }else{
-        target_position = target->getPosition() + sf::vector2FromAngle(target_angle + 120) * 3500.0f;
+        target_position = target->getPosition() + vec2FromAngle(target_angle + 120) * 3500.0f;
     }
-    
+
     if (owner->getOrder() == AI_StandGround)
     {
-        owner->target_rotation = sf::vector2ToAngle(target_position - owner->getPosition());
+        owner->target_rotation = vec2ToAngle(target_position - owner->getPosition());
     }else{
         flyTowards(target_position, 0.0f);
     }

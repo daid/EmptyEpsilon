@@ -4,10 +4,12 @@
 #include <math.h>
 
 #include "gui/gui2_element.h"
+#include "timer.h"
+
 
 class GuiSignalQualityIndicator : public GuiElement
 {
-    sf::Clock clock;
+    sp::SystemStopwatch clock;
     float target_period;
     float error_noise;
     float error_period;
@@ -15,8 +17,8 @@ class GuiSignalQualityIndicator : public GuiElement
 public:
     GuiSignalQualityIndicator(GuiContainer* owner, string id);
 
-    virtual void onDraw(sf::RenderTarget& window);
-    
+    virtual void onDraw(sp::RenderTarget& target) override;
+
     void setNoiseError(float f) { error_noise = std::min(fabsf(f), 1.0f); }
     void setPeriodError(float f) { error_period = std::min(fabsf(f), 1.0f); }
     void setPhaseError(float f) { error_phase = std::min(fabsf(f), 1.0f); }

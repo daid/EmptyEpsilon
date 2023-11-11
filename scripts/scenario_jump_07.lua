@@ -1,5 +1,5 @@
 -- Name: Jump 07
--- Type: Mission
+-- Type: Odysseus
 -- Description: Onload: Odysseus, random asteroids. EOC fleet. Planet CA95-LN71
 
 require("utils.lua")

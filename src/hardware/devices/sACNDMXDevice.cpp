@@ -1,12 +1,10 @@
 #include <string.h>
 
-#include "fixedSocket.h"
 #include "sACNDMXDevice.h"
 #include "random.h"
 #include "logging.h"
 
 StreamingAcnDMXDevice::StreamingAcnDMXDevice()
-: update_thread(&StreamingAcnDMXDevice::updateLoop, this)
 {
     for(int n=0; n<512; n++)
         channel_data[n] = 0;
@@ -14,13 +12,14 @@ StreamingAcnDMXDevice::StreamingAcnDMXDevice()
 
     multicast = false;
     resend_delay = 50;
-    
+
     universe = 1;
     for(int n=0; n<16; n++)
         uuid[n] = uint8_t(irandom(0, 255));
     memset(source_name, 0, sizeof(source_name));
     strcpy((char*)source_name, "EmptyEpsilon");
     run_thread = false;
+    socket.bind(acn_port - 1);
 }
 
 StreamingAcnDMXDevice::~StreamingAcnDMXDevice()
@@ -28,7 +27,7 @@ StreamingAcnDMXDevice::~StreamingAcnDMXDevice()
     if (run_thread)
     {
         run_thread = false;
-        update_thread.wait();
+        update_thread.join();
     }
 }
 
@@ -50,9 +49,9 @@ bool StreamingAcnDMXDevice::configure(std::unordered_map<string, string> setting
     {
         multicast = settings["multicast"].toInt() != 0;
     }
-    
+
     run_thread = true;
-    update_thread.launch();
+    update_thread = std::thread(&StreamingAcnDMXDevice::updateLoop, this);
     return true;
 }
 
@@ -60,7 +59,7 @@ bool StreamingAcnDMXDevice::configure(std::unordered_map<string, string> setting
 void StreamingAcnDMXDevice::setChannelData(int channel, float value)
 {
     if (channel >= 0 && channel < channel_count)
-        channel_data[channel] = int((value * 255.0) + 0.5);
+        channel_data[channel] = int((value * 255.0f) + 0.5f);
 }
 
 //Return the number of output channels supported by this device.
@@ -74,43 +73,47 @@ void StreamingAcnDMXDevice::updateLoop()
     uint8_t sequence_number = 0;
     while(run_thread)
     {
-        sf::Packet packet;
+        std::vector<uint8_t> buffer;
+        auto addU8 = [&buffer](uint8_t d) { buffer.resize(buffer.size() + 1); buffer[buffer.size()-1] = d; };
+        auto addU16 = [&buffer](uint16_t d) { buffer.resize(buffer.size() + 2); buffer[buffer.size()-2] = d >> 8; buffer[buffer.size()-1] = d; };
+        auto addU32 = [&buffer](uint16_t d) { buffer.resize(buffer.size() + 4); buffer[buffer.size()-4] = d >> 24; buffer[buffer.size()-3] = d >> 16; buffer[buffer.size()-2] = d >> 8; buffer[buffer.size()-1] = d; };
+
         //Root layer
-        packet << uint16_t(0x0010); //RLP Size
-        packet << uint16_t(0x0000); //RLP Preamble size
-        packet << uint8_t('A') << uint8_t('S') << uint8_t('C') << uint8_t('-') << uint8_t('E') << uint8_t('1') << uint8_t('.') << uint8_t('1') << uint8_t('7') << uint8_t('\0') << uint8_t('\0') << uint8_t('\0'); //ACN Packet identifier
-        packet << uint16_t(0x7000 | (110 + channel_count)); //Flags and length
-        packet << uint32_t(0x0004); //Vector, identifies as PDU protocol
+        addU16(0x0010); //RLP Size
+        addU16(0x0000); //RLP Preamble size
+        addU8('A'); addU8('S'); addU8('C'); addU8('-'); addU8('E'); addU8('1'); addU8('.'); addU8('1'); addU8('7'); addU8('\0'); addU8('\0'); addU8('\0'); //ACN Packet identifier
+        addU16(0x7000 | (110 + channel_count)); //Flags and length
+        addU32(0x0004); //Vector, identifies as PDU protocol
         for(int n=0; n<16; n++)
-            packet << uuid[n];//Sender Unique ID, needs to be an UUID by spec. But most likely ignored by equipment.
+            addU8(uuid[n]);//Sender Unique ID, needs to be an UUID by spec. But most likely ignored by equipment.
         //Framing layer
-        packet << uint16_t(0x7000 | (88 + channel_count)); //Flags and length
-        packet << uint32_t(0x0002); //Vector, identifies as DMP protocol PDU
+        addU16(0x7000 | (88 + channel_count)); //Flags and length
+        addU32(0x0002); //Vector, identifies as DMP protocol PDU
         for(int n=0; n<64; n++)
-            packet << source_name[n];//Source name, needs to be an UTF-8 zero terminated string. Only for ID goals.
-        packet << uint8_t(100); //Priority
-        packet << uint16_t(0);  //Reserved
-        packet << uint8_t(sequence_number);  //sequence number
-        packet << uint8_t(0);  //option flags
-        packet << uint16_t(universe);  //Universe number
+            addU8(source_name[n]);//Source name, needs to be an UTF-8 zero terminated string. Only for ID goals.
+        addU8(100); //Priority
+        addU16(0);  //Reserved
+        addU8(sequence_number);  //sequence number
+        addU8(0);  //option flags
+        addU16(universe);  //Universe number
         //DMP layer
-        packet << uint16_t(0x7000 | (11 + channel_count)); //Flags and length
-        packet << uint8_t(2);  //Vector, message is PDU
-        packet << uint8_t(0xa1);  //Format of address and data
-        packet << uint16_t(0x0000);  //First property address
-        packet << uint16_t(0x0001);  //Address increments
-        packet << uint16_t(1 + channel_count);  //Value count
-        packet << uint8_t(0x00); //DMX512 start byte.
+        addU16(0x7000 | (11 + channel_count)); //Flags and length
+        addU8(2);  //Vector, message is PDU
+        addU8(0xa1);  //Format of address and data
+        addU16(0x0000);  //First property address
+        addU16(0x0001);  //Address increments
+        addU16(1 + channel_count);  //Value count
+        addU8(0x00); //DMX512 start byte.
         for(int n=0; n<channel_count; n++)
-            packet << uint8_t(channel_data[n]);
+            addU8(channel_data[n]);
 
         sequence_number++;
-        
+
         if (multicast)
-            socket.send(packet.getData(), packet.getDataSize(), sf::IpAddress(239, 255, (universe >> 8), universe & 0xFF), acn_port);
+            socket.sendMulticast(buffer.data(), buffer.size(), universe, acn_port);
         else
-            UDPbroadcastPacket(socket, packet.getData(), packet.getDataSize(), acn_port);
-        
-        sf::sleep(sf::milliseconds(resend_delay));
+            socket.sendBroadcast(buffer.data(), buffer.size(), acn_port);
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(resend_delay));
     }
 }

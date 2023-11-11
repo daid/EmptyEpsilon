@@ -1,100 +1,138 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 #include <unordered_map>
-#include "engine.h"
+#include <SDL_endian.h>
+#include <meshoptimizer.h>
+#include <glm/gtx/norm.hpp>
+
+#include "resources.h"
+#include "random.h"
 #include "mesh.h"
-#include "featureDefs.h"
 
-static inline int readInt(P<ResourceStream> stream)
+namespace
 {
-    int32_t ret = 0;
-    stream->read(&ret, sizeof(int32_t));
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__ || defined(_WIN32)
-    return (ret & 0xFF) << 24 | (ret & 0xFF00) << 8 | (ret & 0xFF0000) >> 8 | (ret & 0xFF000000) >> 24;
-#endif
-    return ret;
-}
-
-const unsigned int NO_BUFFER = 0;
-
-static std::unordered_map<string, Mesh*> meshMap;
-
-Mesh::Mesh()
-{
-    vertices = NULL;
-    vertexCount = 0;
-    vbo = NO_BUFFER;
-}
-
-Mesh::Mesh(std::vector<MeshVertex>& vertices)
-{
-    this->vertices = new MeshVertex[vertices.size()];
-    memcpy(this->vertices, vertices.data(), sizeof(MeshVertex) * vertices.size());
-    vertexCount = vertices.size();
-    vbo = NO_BUFFER;
-}
-
-Mesh::~Mesh()
-{
-    if (vertices) delete vertices;
-    if (vbo != NO_BUFFER)
-        glDeleteBuffers(1, &vbo);
-}
-
-void Mesh::render()
-{
-#if FEATURE_3D_RENDERING
-    if (!vertexCount)
-        return;
-    if (glGenBuffers)
+    inline int32_t readInt(const P<ResourceStream>& stream)
     {
-        if (vbo == NO_BUFFER)
-        {
-            glGenBuffers(1, &vbo);
-            glBindBuffer(GL_ARRAY_BUFFER, vbo);
-            glBufferData(GL_ARRAY_BUFFER, sizeof(MeshVertex) * vertexCount, &vertices[0], GL_STATIC_DRAW);
-            glBindBuffer(GL_ARRAY_BUFFER, 0);
-        }
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glEnableClientState(GL_NORMAL_ARRAY);
-        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-        glDisableClientState(GL_COLOR_ARRAY);
-        glVertexPointer(3, GL_FLOAT, sizeof(float) * (3 * 2 + 2), (void*)offsetof(MeshVertex, position));
-        glNormalPointer(GL_FLOAT, sizeof(float) * (3 * 2 + 2), (void*)offsetof(MeshVertex, normal));
-        glTexCoordPointer(2, GL_FLOAT, sizeof(float) * (3 * 2 + 2), (void*)offsetof(MeshVertex, uv));
-        glDrawArrays(GL_TRIANGLES, 0, vertexCount);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-    }else{
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glEnableClientState(GL_NORMAL_ARRAY);
-        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-        glDisableClientState(GL_COLOR_ARRAY);
-        glVertexPointer(3, GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].position[0]);
-        glNormalPointer(GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].normal[0]);
-        glTexCoordPointer(2, GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].uv[0]);
-        glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+        int32_t ret = 0;
+        stream->read(&ret, sizeof(int32_t));
+        return SDL_SwapBE32(ret);
     }
-#endif//FEATURE_3D_RENDERING
+
+    constexpr uint32_t NO_BUFFER = 0;
+    std::unordered_map<string, Mesh*> meshMap;
 }
 
-sf::Vector3f Mesh::randomPoint()
+Mesh::Mesh(std::vector<MeshVertex>&& unindexed_vertices)
+    :face_count{ static_cast<uint32_t>(unindexed_vertices.size()) / 3}
 {
-    //int idx = irandom(0, vertexCount-1);
-    //return sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
-    int idx = irandom(0, vertexCount / 3) * 3;
-    sf::Vector3f v0 = sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
-    sf::Vector3f v1 = sf::Vector3f(vertices[idx+1].position[0], vertices[idx+1].position[1], vertices[idx+1].position[2]);
-    sf::Vector3f v2 = sf::Vector3f(vertices[idx+2].position[0], vertices[idx+2].position[1], vertices[idx+2].position[2]);
+    if (!unindexed_vertices.empty())
+    {
+        vbo_ibo = gl::Buffers<2>{};
+
+        auto index_count = 3 * face_count;
+        std::vector<uint32_t> remap_indices;
+        {
+            std::vector<uint32_t> remap(index_count); // allocate temporary memory for the remap table
+            vertices.resize(meshopt_generateVertexRemap(remap.data(), nullptr, index_count, unindexed_vertices.data(), index_count, sizeof(MeshVertex)));
+
+            remap_indices.resize(index_count * sizeof(uint32_t));
+            meshopt_remapIndexBuffer(reinterpret_cast<uint32_t*>(remap_indices.data()), nullptr, index_count, remap.data());
+            meshopt_remapVertexBuffer(vertices.data(), unindexed_vertices.data(), index_count, sizeof(MeshVertex), remap.data());
+
+            if (vertices.size() > size_t{ std::numeric_limits<uint16_t>::max() })
+            {
+                // ES 2 only supports u16 for indices - u32 is only available through an extension
+                // (a lot of systems should have it, but SP doesn't have support for it yet).
+                // Forego the indices, and inform the user.
+                vertices = std::move(unindexed_vertices);
+                LOG(WARNING) << "Loading mesh with a large number of vertices (" << vertices.size() << ").";
+            }
+            else
+            {
+                indices.assign(std::begin(remap_indices), std::end(remap_indices));
+                unindexed_vertices.clear();
+            }
+        }
+
+        glBindBuffer(GL_ARRAY_BUFFER, vbo_ibo[0]);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(MeshVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
+        
+        if (!indices.empty())
+        {
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo_ibo[1]);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_count * sizeof(uint16_t), indices.data(), GL_STATIC_DRAW);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
+        }
+    }
+}
+
+void Mesh::render(int32_t position_attrib, int32_t texcoords_attrib, int32_t normal_attrib)
+{
+    if (vertices.empty() || vbo_ibo[0] == NO_BUFFER || (!indices.empty() && vbo_ibo[1] == NO_BUFFER))
+        return;
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_ibo[0]);
+
+    if (position_attrib != -1)
+        glVertexAttribPointer(position_attrib, 3, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, position));
     
-    float f1 = random(0.0, 1.0);
-    float f2 = random(0.0, 1.0);
+    if (normal_attrib != -1)
+        glVertexAttribPointer(normal_attrib, 3, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, normal));
+    
+    if (texcoords_attrib != -1)
+        glVertexAttribPointer(texcoords_attrib, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, uv));
+
+
+    if (!indices.empty())
+    {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo_ibo[1]);
+        glDrawElements(GL_TRIANGLES, face_count * 3, GL_UNSIGNED_SHORT, nullptr);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
+    }
+        
+    else
+    {
+        glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
+    }
+    
+    glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
+}
+
+glm::vec3 Mesh::randomPoint()
+{
+    if (vertices.empty())
+        return glm::vec3{};
+
+    // Pick a face
+    size_t v0_index{}, v1_index{}, v2_index{};
+    if (!indices.empty())
+    {
+        auto face_index = static_cast<size_t>(irandom(0, face_count - 1));
+        v0_index = indices[3 * face_index];
+        v1_index = indices[3 * face_index + 1];
+        v2_index = indices[3 * face_index + 2];
+    }
+    else
+    {
+        
+        v0_index = static_cast<size_t>(irandom(0, static_cast<int>(vertices.size()) / 3 - 1)) * 3;
+        v1_index = v0_index + 1;
+        v2_index = v0_index + 2;
+    }
+
+    glm::vec3 v0(vertices[v0_index].position[0], vertices[v0_index].position[1], vertices[v0_index].position[2]);
+    glm::vec3 v1(vertices[v1_index].position[0], vertices[v1_index].position[1], vertices[v1_index].position[2]);
+    glm::vec3 v2(vertices[v2_index].position[0], vertices[v2_index].position[1], vertices[v2_index].position[2]);
+
+    float f1 = random(0.f, 1.f);
+    float f2 = random(0.f, 1.f);
     if (f1 + f2 > 1.0f)
     {
         f1 = 1.0f - f1;
         f2 = 1.0f - f2;
     }
-    sf::Vector3f v01 = (v0 * f1) + (v1 * (1.0f - f1));
-    sf::Vector3f ret = (v01 * f2) + (v2 * (1.0f - f2));
+    glm::vec3 v01 = (v0 * f1) + (v1 * (1.0f - f1));
+    glm::vec3 ret = (v01 * f2) + (v2 * (1.0f - f2));
     return ret;
 }
 
@@ -105,7 +143,7 @@ struct IndexInfo
     int n;
 };
 
-Mesh* Mesh::getMesh(string filename)
+Mesh* Mesh::getMesh(const string& filename)
 {
     Mesh* ret = meshMap[filename];
     if (ret)
@@ -115,12 +153,13 @@ Mesh* Mesh::getMesh(string filename)
     if (!stream)
         return NULL;
 
-    ret = new Mesh();
+    std::vector<MeshVertex> mesh_vertices;
     if (filename.endswith(".obj"))
     {
-        std::vector<sf::Vector3f> vertices;
-        std::vector<sf::Vector3f> normals;
-        std::vector<sf::Vector2f> texCoords;
+        bool parsing_ok = true;
+        std::vector<glm::vec3> vertices;
+        std::vector<glm::vec3> normals;
+        std::vector<glm::vec2> texCoords;
         std::vector<IndexInfo> indices;
 
         do
@@ -133,62 +172,119 @@ Mesh* Mesh::getMesh(string filename)
                     continue;
                 if (parts[0] == "v")
                 {
-                    vertices.push_back(sf::Vector3f(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat()));
+                    if (parts.size() >= 4)
+                    {
+                        vertices.emplace_back(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat());
+                    }
+                    else
+                    {
+                        LOG(ERROR, "Bad vertex line: ", line);
+                        parsing_ok = false;
+                    }
+
                 }else if (parts[0] == "vn")
                 {
-                    normals.push_back(sf::normalize(sf::Vector3f(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat())));
+                    if (parts.size() >= 4)
+                    {
+                        normals.push_back(glm::normalize(glm::vec3(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat())));
+                    }
+                    else
+                    {
+                        LOG(ERROR, "Bad normal line: ", line);
+                        parsing_ok = false;
+                    }
+                    
                 }else if (parts[0] == "vt")
                 {
-                    texCoords.push_back(sf::Vector2f(parts[1].toFloat(), parts[2].toFloat()));
+                    if (parts.size() >= 3)
+                    {
+                        texCoords.push_back(glm::vec2(parts[1].toFloat(), parts[2].toFloat()));
+                    }
+                    else
+                    {
+                        LOG(ERROR, "Bad vertex texcoord line: ", line);
+                        parsing_ok = false;
+                    }
+                    
                 }else if (parts[0] == "f")
                 {
-                    for(unsigned int n=3; n<parts.size(); n++)
+                    if (parts.size() >= 4)
                     {
-                        std::vector<string> p0 = parts[1].split("/");
-                        std::vector<string> p1 = parts[n].split("/");
-                        std::vector<string> p2 = parts[n-1].split("/");
+                        for (unsigned int n = 3; parsing_ok && n < parts.size(); n++)
+                        {
+                            std::vector<string> p0 = parts[1].split("/");
+                            std::vector<string> p1 = parts[n].split("/");
+                            std::vector<string> p2 = parts[n - 1].split("/");
 
-                        IndexInfo info;
-                        info.v = p0[0].toInt() - 1;
-                        info.t = p0[1].toInt() - 1;
-                        info.n = p0[2].toInt() - 1;
-                        indices.push_back(info);
-                        info.v = p1[0].toInt() - 1;
-                        info.t = p1[1].toInt() - 1;
-                        info.n = p1[2].toInt() - 1;
-                        indices.push_back(info);
-                        info.v = p2[0].toInt() - 1;
-                        info.t = p2[1].toInt() - 1;
-                        info.n = p2[2].toInt() - 1;
-                        indices.push_back(info);
+                            if (p0.size() == 3 && p1.size() == 3 && p2.size() == 3)
+                            {
+                                IndexInfo info;
+                                info.v = p0[0].toInt() - 1;
+                                info.t = p0[1].toInt() - 1;
+                                info.n = p0[2].toInt() - 1;
+                                indices.push_back(info);
+                                info.v = p2[0].toInt() - 1;
+                                info.t = p2[1].toInt() - 1;
+                                info.n = p2[2].toInt() - 1;
+                                indices.push_back(info);
+                                info.v = p1[0].toInt() - 1;
+                                info.t = p1[1].toInt() - 1;
+                                info.n = p1[2].toInt() - 1;
+                                indices.push_back(info);
+                            }
+                            else
+                            {
+                                LOG(ERROR, "Bad face triangle: ", line);
+                                parsing_ok = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        LOG(ERROR, "Bad face line: ", line);
+                        parsing_ok = false;
                     }
                 }else{
-                    //printf("%s\n", parts[0].c_str());
+                    LOG(DEBUG, "mesh: ignored: ", line);
                 }
             }
-        }while(stream->tell() < stream->getSize());
-        ret->vertexCount = indices.size();
-        ret->vertices = new MeshVertex[indices.size()];
-        for(unsigned int n=0; n<indices.size(); n++)
+        }while(parsing_ok && stream->tell() < stream->getSize());
+
+        if (parsing_ok)
         {
-            ret->vertices[n].position[0] = -vertices[indices[n].v].x;
-            ret->vertices[n].position[1] = vertices[indices[n].v].z;
-            ret->vertices[n].position[2] = vertices[indices[n].v].y;
-            ret->vertices[n].normal[0] = -normals[indices[n].n].x;
-            ret->vertices[n].normal[1] = normals[indices[n].n].z;
-            ret->vertices[n].normal[2] = normals[indices[n].n].y;
-            ret->vertices[n].uv[0] = texCoords[indices[n].t].x;
-            ret->vertices[n].uv[1] = 1.0 - texCoords[indices[n].t].y;
+            mesh_vertices.resize(indices.size());
+            for (unsigned int n = 0; n < indices.size(); n++)
+            {
+                mesh_vertices[n].position[0] = vertices[indices[n].v].x;
+                mesh_vertices[n].position[1] = vertices[indices[n].v].z;
+                mesh_vertices[n].position[2] = vertices[indices[n].v].y;
+                mesh_vertices[n].normal[0] = normals[indices[n].n].x;
+                mesh_vertices[n].normal[1] = normals[indices[n].n].z;
+                mesh_vertices[n].normal[2] = normals[indices[n].n].y;
+                mesh_vertices[n].uv[0] = texCoords[indices[n].t].x;
+                mesh_vertices[n].uv[1] = 1.f - texCoords[indices[n].t].y;
+            }
         }
+        else
+        {
+            LOG(ERROR, "Failed to parse ", filename);
+        }
+        
+        
     }else if (filename.endswith(".model"))
     {
-        ret->vertexCount = readInt(stream);
-        ret->vertices = new MeshVertex[ret->vertexCount];
-        stream->read(ret->vertices, sizeof(MeshVertex) * ret->vertexCount);
+        mesh_vertices.resize(readInt(stream));
+        stream->read(mesh_vertices.data(), sizeof(MeshVertex) * mesh_vertices.size());
     }else{
         LOG(ERROR) << "Unknown mesh format: " << filename;
     }
 
-    meshMap[filename] = ret;
+    if (!mesh_vertices.empty())
+    {
+        ret = new Mesh(std::move(mesh_vertices));
+        meshMap[filename] = ret;
+    }
+
+   
     return ret;
 }

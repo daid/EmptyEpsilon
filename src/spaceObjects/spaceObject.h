@@ -1,11 +1,16 @@
 #ifndef SPACE_OBJECT_H
 #define SPACE_OBJECT_H
 
-#include "engine.h"
+#include "collisionable.h"
+#include "multiplayer.h"
+#include "scriptInterface.h"
 #include "featureDefs.h"
 #include "modelInfo.h"
 #include "factionInfo.h"
 #include "shipTemplate.h"
+#include "graphics/renderTarget.h"
+
+#include <glm/mat4x4.hpp>
 
 enum EDamageType
 {
@@ -14,12 +19,19 @@ enum EDamageType
     DT_EMP
 };
 
+enum class DockStyle
+{
+    None,
+    External,
+    Internal,
+};
+
 class DamageInfo
 {
 public:
     P<SpaceObject> instigator;
     EDamageType type;
-    sf::Vector2f location;
+    glm::vec2 location{0, 0};
     int frequency;
     ESystem system_target;
 
@@ -27,7 +39,7 @@ public:
     : instigator(), type(DT_Energy), location(0, 0), frequency(-1), system_target(SYS_None)
     {}
 
-    DamageInfo(P<SpaceObject> instigator, EDamageType type, sf::Vector2f location)
+    DamageInfo(P<SpaceObject> instigator, EDamageType type, glm::vec2 location)
     : instigator(instigator), type(type), location(location), frequency(-1), system_target(SYS_None)
     {}
 };
@@ -73,6 +85,16 @@ enum EScannedState
     SS_FullScan
 };
 
+/*! Radar rendering layer.
+* Allow relative ordering of objects for drawing
+*/
+enum class ERadarLayer
+{
+    BackgroundZone,
+    BackgroundObjects,
+    Default
+};
+
 class SpaceObject;
 class PlayerSpaceship;
 extern PVector<SpaceObject> space_object_list;
@@ -107,9 +129,12 @@ public:
     string callsign;
 
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
+    virtual ~SpaceObject();
 
-    float getRadius() { return object_radius; }
+    float getRadius() const { return object_radius; }
     void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
+
+    bool hasWeight() { return has_weight; }
 
     // Return the object's raw radar signature. The default signature is 0,0,0.
     virtual RawRadarSignatureInfo getRadarSignatureInfo() { return radar_signature; }
@@ -117,6 +142,7 @@ public:
     float getRadarSignatureGravity() { return radar_signature.gravity; }
     float getRadarSignatureElectrical() { return radar_signature.electrical; }
     float getRadarSignatureBiological() { return radar_signature.biological; }
+    virtual ERadarLayer getRadarLayer() const { return ERadarLayer::Default; }
 
     string getDescription(EScannedState state)
     {
@@ -161,17 +187,22 @@ public:
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
     void setHeading(float heading) { setRotation(heading - 90); }
 
-#if FEATURE_3D_RENDERING
+    void onDestroyed(ScriptSimpleCallback callback)
+    {
+        on_destroyed = callback;
+    }
+
     virtual void draw3D();
     virtual void draw3DTransparent() {}
-#endif//FEATURE_3D_RENDERING
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
-    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
-    virtual void destroy();
+    virtual void drawOnRadar(sp::RenderTarget& window, glm::vec2 position, float scale, float rotation, bool longRange);
+    virtual void drawOnGMRadar(sp::RenderTarget& window, glm::vec2 position, float scale, float rotation, bool longRange);
+    virtual void destroy() override;
 
     virtual void setCallSign(string new_callsign) { callsign = new_callsign; }
     virtual string getCallSign() { return callsign; }
-    virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
+    virtual DockStyle canBeDockedBy(P<SpaceObject> obj) { return DockStyle::None; }
+    virtual DockStyle getDockedStyle() { return DockStyle::None; }
+    virtual bool canRestockMissiles() { return false; }
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
     virtual bool canBeTargetedBy(P<SpaceObject> other);
@@ -191,18 +222,19 @@ public:
     void setScannedByFaction(string faction_name, bool scanned);
     virtual void scannedBy(P<SpaceObject> other);
     virtual bool canBeHackedBy(P<SpaceObject> other);
-    virtual std::vector<std::pair<string, float> > getHackingTargets();
+    virtual std::vector<std::pair<ESystem, float> > getHackingTargets();
     virtual void hackFinished(P<SpaceObject> source, string target);
     virtual void takeDamage(float damage_amount, DamageInfo info) {}
     virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }
     virtual string getExportLine() { return ""; }
 
-    static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range);
+    static void damageArea(glm::vec2 position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range);
 
     bool isEnemy(P<SpaceObject> obj);
     bool isFriendly(P<SpaceObject> obj);
     void setFaction(string faction_name) { this->faction_id = FactionInfo::findFactionId(faction_name); }
-    string getFaction() { return factionInfo[this->faction_id]->getName(); }
+    string getFaction() { if (factionInfo[faction_id]) return factionInfo[this->faction_id]->getName(); return ""; }
+    string getLocaleFaction() { if (factionInfo[faction_id]) return factionInfo[this->faction_id]->getLocaleName(); return ""; }
     void setFactionId(unsigned int faction_id) { this->faction_id = faction_id; }
     unsigned int getFactionId() { return faction_id; }
     void setReputationPoints(float amount);
@@ -210,20 +242,26 @@ public:
     bool takeReputationPoints(float amount);
     void removeReputationPoints(float amount);
     void addReputationPoints(float amount);
-    void setCommsScript(string script_name) { this->comms_script_name = script_name; this->comms_script_callback.clear(); }
+    void setCommsScript(string script_name);
     void setCommsFunction(ScriptSimpleCallback callback) { this->comms_script_name = ""; this->comms_script_callback = callback; }
     bool areEnemiesInRange(float range);
     PVector<SpaceObject> getObjectsInRange(float range);
     string getSectorName();
     bool openCommsTo(P<PlayerSpaceship> target);
     bool sendCommsMessage(P<PlayerSpaceship> target, string message);
+    bool sendCommsMessageNoLog(P<PlayerSpaceship> target, string message);
 
-    ScriptCallback onDestroyed;
+    ScriptSimpleCallback on_destroyed;
+
+    glm::mat4 getModelTransform() const { return getModelMatrix(); }
 
 protected:
+    virtual glm::mat4 getModelMatrix() const;
     ModelInfo model_info;
+    bool has_weight = true;
 };
 
+template<> void convert<EDamageType>::param(lua_State* L, int& idx, EDamageType& dt);
 // Define a script conversion function for the DamageInfo structure.
 template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di);
 // Function to convert a lua parameter to a scan state.

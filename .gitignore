@@ -34,9 +34,17 @@ thumbs.db
 # vim
 *.swp
 
+# gettext temp files
+*.po~
+
 options.ini
+keybindings.json
 
 
 .vscode
 logs
 *.log
+build*/
+_build*/
+cmake/_win32/
+cmake/android/

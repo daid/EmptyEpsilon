@@ -1,7 +1,7 @@
 #ifndef SERIAL_DRIVER_H
 #define SERIAL_DRIVER_H
 
-#ifdef __WIN32__
+#ifdef _WIN32
 #include <windows.h>
 #endif
 #include "stringImproved.h"
@@ -11,7 +11,7 @@
 class SerialPort
 {
 private:
-#ifdef __WIN32__
+#ifdef _WIN32
     HANDLE handle;
 #endif
 #if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
@@ -35,20 +35,20 @@ public:
 
     SerialPort(string name);
     ~SerialPort();
-    
+
     bool isOpen();
-    
+
     void configure(int baudrate, int databits, EParity parity, EStopBits stopbits);
-    
+
     void send(void* data, int data_size);
     int recv(void* data, int data_size);
-    
+
     void setDTR();
     void clearDTR();
     void setRTS();
     void clearRTS();
     void sendBreak();
-    
+
     static std::vector<string> getAvailablePorts();
     static string getPseudoDriverName(string port);
     static std::vector<string> portsByPseudoDriverName(string driver_name);

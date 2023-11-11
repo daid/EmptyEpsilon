@@ -1,12 +1,12 @@
 #ifndef BEAM_WEAPON_H
 #define BEAM_WEAPON_H
 
-#include "SFML/System/NonCopyable.hpp"
 #include "stringImproved.h"
 #include "spaceObjects/spaceObject.h"
+
 class SpaceShip;
 
-class BeamWeapon : public sf::NonCopyable
+class BeamWeapon : sp::NonCopyable
 {
 public:
     BeamWeapon();
@@ -17,6 +17,14 @@ public:
 
     void setArc(float arc);
     float getArc();
+
+    void setArcColor(glm::u8vec4 color);
+    glm::u8vec4 getArcColor();
+
+    void setArcFireColor(glm::u8vec4 color);
+    glm::u8vec4 getArcFireColor();
+
+    void setDamageType(EDamageType type);
 
     void setDirection(float direction);
     float getDirection();
@@ -35,7 +43,7 @@ public:
 
     void setCycleTime(float cycle_time);
     float getCycleTime();
-    
+
     void setDamage(float damage);
     float getDamage();
 
@@ -45,17 +53,17 @@ public:
     float getHeatPerFire();
     void setHeatPerFire(float heat);
 
-    void setPosition(sf::Vector3f position);
-    sf::Vector3f getPosition();
-    
+    void setPosition(glm::vec3 position);
+    glm::vec3 getPosition();
+
     void setBeamTexture(string beam_texture);
     string getBeamTexture();
 
     float getCooldown();
-    
+
     void update(float delta);
 protected:
-    sf::Vector3f position;//Visual position on the 3D model where this beam is fired from.
+    glm::vec3 position;//Visual position on the 3D model where this beam is fired from.
     SpaceShip* parent; //The ship that this beam weapon is attached to.
 
     //Beam configuration
@@ -69,6 +77,9 @@ protected:
     float damage;//Server side only
     float energy_per_beam_fire;//Server side only
     float heat_per_beam_fire;//Server side only
+    glm::u8vec4 arc_color;
+    glm::u8vec4 arc_color_fire;
+    EDamageType damage_type;
     //Beam runtime state
     float cooldown;
     string beam_texture;

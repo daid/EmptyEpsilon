@@ -1,10 +1,11 @@
 #include "debugRenderer.h"
-#include "main.h"
+#include "multiplayer_server.h"
+#include "hotkeyConfig.h"
 
-DebugRenderer::DebugRenderer()
-: Renderable(mouseLayer)
+
+DebugRenderer::DebugRenderer(RenderLayer* renderLayer)
+: Renderable(renderLayer)
 {
-    fps_timer.restart();
     fps = 0.0;
     fps_counter = 0;
 
@@ -17,98 +18,77 @@ DebugRenderer::DebugRenderer()
 #endif
 }
 
-void DebugRenderer::render(sf::RenderTarget& window)
+void DebugRenderer::render(sp::RenderTarget& renderer)
 {
+    if (keys.debug_show_fps.getDown())
+    {
+        show_fps = !show_fps;
+        show_datarate = !show_datarate;
+    }
+    if (keys.debug_show_timing.getDown())
+    {
+        show_timing_graph = !show_timing_graph;
+        timing_graph_points.clear();
+    }
+
     fps_counter++;
     if (fps_counter > 30)
     {
-        fps = fps_counter / fps_timer.restart().asSeconds();
+        fps = fps_counter / fps_timer.restart();
         fps_counter = 0;
     }
     string text = "";
     if (show_fps)
         text = text + "FPS: " + string(fps) + "\n";
-    
+
     if (show_datarate && game_server)
     {
         text = text + string(game_server->getSendDataRate() / 1000, 1) + " kb per second\n";
         text = text + string(game_server->getSendDataRatePerClient() / 1000, 1) + " kb per client\n";
     }
+
     if (show_timing_graph)
     {
-        if (timing_graph_points.size() > window.getView().getSize().x)
+        auto window_size = renderer.getVirtualSize();
+        if (timing_graph_points.size() > size_t(window_size.x))
             timing_graph_points.clear();
         timing_graph_points.push_back(engine->getEngineTiming());
-        sf::VertexArray update_points(sf::LinesStrip, timing_graph_points.size());
-        sf::VertexArray server_update_points(sf::LinesStrip, timing_graph_points.size());
-        sf::VertexArray collision_points(sf::LinesStrip, timing_graph_points.size());
-        sf::VertexArray render_points(sf::LinesStrip, timing_graph_points.size());
+
+        std::vector<glm::vec2> update_points;
+        std::vector<glm::vec2> server_update_points;
+        std::vector<glm::vec2> collision_points;
+        std::vector<glm::vec2> render_points;
         for(unsigned int n=0; n<timing_graph_points.size(); n++)
         {
-            update_points[n].position.x = float(n);
-            update_points[n].position.y = window.getView().getSize().y - timing_graph_points[n].update * 10000;
-            server_update_points[n].position.x = float(n);
-            server_update_points[n].position.y = window.getView().getSize().y - timing_graph_points[n].server_update * 10000;
-            collision_points[n].position.x = float(n);
-            collision_points[n].position.y = window.getView().getSize().y - (timing_graph_points[n].update + timing_graph_points[n].collision) * 10000;
-            render_points[n].position.x = float(n);
-            render_points[n].position.y = window.getView().getSize().y - (timing_graph_points[n].render + timing_graph_points[n].update + timing_graph_points[n].collision) * 10000;
-            
-            update_points[n].color = sf::Color::Red;
-            server_update_points[n].color = sf::Color::Yellow;
-            collision_points[n].color = sf::Color::Cyan;
-            render_points[n].color = sf::Color::Green;
+            update_points.emplace_back(float(n), window_size.y - timing_graph_points[n].update * 10000);
+            server_update_points.emplace_back(float(n), window_size.y - timing_graph_points[n].server_update * 10000);
+            collision_points.emplace_back(float(n), window_size.y - (timing_graph_points[n].update + timing_graph_points[n].collision) * 10000);
+            render_points.emplace_back(float(n), window_size.y - (timing_graph_points[n].render + timing_graph_points[n].update + timing_graph_points[n].collision) * 10000);
         }
-        window.draw(server_update_points);
-        window.draw(update_points);
-        window.draw(collision_points);
-        window.draw(render_points);
-        
-        sf::Text text_update("Update: " + string(timing_graph_points.back().update * 1000) + "ms", *main_font, 18);
-        sf::Text text_server_update("ServerUpdate: " + string(timing_graph_points.back().server_update * 1000) + "ms", *main_font, 18);
-        sf::Text text_collision("Collision: " + string(timing_graph_points.back().collision * 1000) + "ms", *main_font, 18);
-        sf::Text text_render("Render: " + string(timing_graph_points.back().render * 1000) + "ms", *main_font, 18);
+        renderer.drawLine(update_points, {255, 0, 0, 255});
+        renderer.drawLine(server_update_points, {255, 255, 0, 255});
+        renderer.drawLine(collision_points, {0, 255, 255, 255});
+        renderer.drawLine(render_points, {0, 255, 0, 255});
 
-        sf::VertexArray fps60_line(sf::LinesStrip, 2);
-        fps60_line[0].position = sf::Vector2f(0, window.getView().getSize().y - 166);
-        fps60_line[1].position = sf::Vector2f(window.getView().getSize().x, window.getView().getSize().y - 166);
-        fps60_line[0].color = sf::Color(255, 255, 255, 128);
-        fps60_line[1].color = sf::Color(255, 255, 255, 128);
-        window.draw(fps60_line);
-        
-        text_update.setPosition(0, window.getView().getSize().y - 18 * 4 - 170);
-        text_server_update.setPosition(0, window.getView().getSize().y - 18 * 3 - 170);
-        text_collision.setPosition(0, window.getView().getSize().y - 18 * 2 - 170);
-        text_render.setPosition(0, window.getView().getSize().y - 18 - 170);
-        text_update.setColor(sf::Color::Red);
-        text_server_update.setColor(sf::Color::Yellow);
-        text_collision.setColor(sf::Color::Cyan);
-        text_render.setColor(sf::Color::Green);
-        window.draw(text_update);
-        window.draw(text_server_update);
-        window.draw(text_collision);
-        window.draw(text_render);
-    }
+        //60FPS line
+        renderer.drawLine({0, window_size.y - 166}, {window_size.x, window_size.y - 166}, glm::u8vec4{255,255,255,128});
 
-    sf::Text textElement(text, *main_font, 18);
-    textElement.setPosition(0, 0);
-    window.draw(textElement);
-}
-
-void DebugRenderer::handleKeyPress(sf::Event::KeyEvent key, int unicode)
-{
-    if (key.code == sf::Keyboard::F10)
-    {
-        show_fps = !show_fps;
-        show_datarate = !show_datarate;
+        renderer.drawText(
+            sp::Rect(0, 0, 0, renderer.getVirtualSize().y - 18 * 4),
+            "Update: " + string(timing_graph_points.back().update * 1000) + "ms",
+            sp::Alignment::BottomLeft, 18, nullptr, glm::u8vec4{255,0,0,255});
+        renderer.drawText(
+            sp::Rect(0, 0, 0, renderer.getVirtualSize().y - 18 * 3),
+            "ServerUpdate: " + string(timing_graph_points.back().server_update * 1000) + "ms",
+            sp::Alignment::BottomLeft, 18, nullptr, glm::u8vec4{255,255,0,255});
+        renderer.drawText(
+            sp::Rect(0, 0, 0, renderer.getVirtualSize().y - 18 * 2),
+            "Collision: " + string(timing_graph_points.back().collision * 1000) + "ms",
+            sp::Alignment::BottomLeft, 18, nullptr, glm::u8vec4{0,255,255,255});
+        renderer.drawText(
+            sp::Rect(0, 0, 0, renderer.getVirtualSize().y - 18 * 1),
+            "Render: " + string(timing_graph_points.back().render * 1000) + "ms",
+            sp::Alignment::BottomLeft, 18, nullptr, glm::u8vec4{0,255,0,255});
     }
-    if (key.code == sf::Keyboard::F11)
-    {
-        show_timing_graph = !show_timing_graph;
-        timing_graph_points.clear();
-        if (show_timing_graph)
-            P<WindowManager>(engine->getObject("windowManager"))->setFrameLimit(0);
-        else
-            P<WindowManager>(engine->getObject("windowManager"))->setFrameLimit(60);
-    }
+    renderer.drawText(sp::Rect(0, 0, 0, 0), text, sp::Alignment::TopLeft, 18);
 }

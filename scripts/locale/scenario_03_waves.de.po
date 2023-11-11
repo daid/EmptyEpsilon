@@ -1,0 +1,113 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+# Scenario name
+msgid "Waves"
+msgstr "Endlose Wellen"
+
+# Scenario description
+msgid ""
+"Waves of increasingly difficult enemies attack friendly stations. There is "
+"no victory. How many waves can you destroy?\n"
+"\n"
+"Spawn the player ships you want. The strength of enemy ships is independent "
+"of the number and type of player ships."
+msgstr ""
+"Wellen immer schwerer werdender Feinde greifen befreundete Stationen an. "
+"Einen Sieg gibt es nicht. Wie viele Wellen könnt ihr zerstören?\\n\n"
+"\\n\n"
+"Erstellt die gewünschten Spielerschiffe. Die Stärke der feindlichen Schiffe "
+"ist unabhängig von der Anzahl und Art der Spielerschiffe."
+
+# Scenario setting
+msgctxt "setting"
+msgid "Enemies"
+msgstr "Feinde"
+
+msgctxt "setting"
+msgid "Configures the amount of enemies spawned in the scenario."
+msgstr "Legt die Anzahl der im Szenario gespawnten Feinde fest."
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr "Einfach"
+
+msgctxt "Enemies"
+msgid ""
+"Decreases the number of ships in each wave. Good for new players, but takes "
+"longer for the players to be overwhelmed."
+msgstr ""
+"Verringert die Anzahl der Schiffe in jeder Welle. Gut für Neulinge, aber es "
+"dauert länger, bis die Spielenden überwältigt überwältigt werden."
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr "Normal"
+
+msgctxt "Enemies"
+msgid "Normal amount of enemies. Recommended for a normal crew."
+msgstr "Normale Anzahl von Feinden. Empfohlen für eine normale Besatzung."
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr "Schwer"
+
+msgctxt "Enemies"
+msgid ""
+"Difficulty starts at wave 5 and increases by 1.5 after the players defeat "
+"each wave. Players are overwhelmed more quickly, leading to shorter games."
+msgstr ""
+"Der Schwierigkeitsgrad beginnt bei Welle 5 und erhöht sich um 1,5 nach der "
+"jede Welle besiegten Welle. Die Crew wird schneller überwältigt werden, was "
+"zu kürzeren Spielen führt."
+
+#: scripts/scenario_03_waves.lua:45
+msgctxt "goal-shipLog"
+msgid ""
+"At least one friendly base must survive.\n"
+"\n"
+"Destroy all enemy ships. After a short delay, the next wave will appear. And "
+"so on ...\n"
+"\n"
+"How many waves can you destroy?"
+msgstr ""
+"Mindestens eine befreundete Basis muss überleben.\\n\n"
+"\\n\n"
+"Zerstören Sie alle feindlichen Schiffe. Nach einer kurzen Verzögerung wird "
+"die nächste Welle erscheinen. Und so weiter ...\\n\n"
+"\\n\n"
+"Wie viele Wellen können Sie erledigen?"
+
+#: scripts/scenario_03_waves.lua:127
+#, lua-format
+msgctxt "shipLog"
+msgid "Wave %d"
+msgstr "Welle %d"
+
+#: scripts/scenario_03_waves.lua:220
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Wave %d"
+msgstr "Welle %d"
+
+#: scripts/scenario_03_waves.lua:253
+msgctxt "msgMainscreen"
+msgid "Wave cleared!"
+msgstr "Welle besiegt!"
+
+#: scripts/scenario_03_waves.lua:254
+#, lua-format
+msgctxt "shipLog"
+msgid "Wave %d cleared."
+msgstr "Welle %d besiegt."

@@ -11,12 +11,12 @@ class GuiResizableDialog : public GuiPanel
 {
 public:
     GuiResizableDialog(GuiContainer* owner, string id, string title);
-    
-    virtual void onDraw(sf::RenderTarget& window) override;
 
-    virtual bool onMouseDown(sf::Vector2f position) override;
-    virtual void onMouseDrag(sf::Vector2f position) override;
-    
+    virtual void onDraw(sp::RenderTarget& renderer) override;
+
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
+
     void minimize(bool minimize=true);
     bool isMinimized() const;
     void setTitle(string title);
@@ -29,19 +29,19 @@ private:
     GuiButton* close_button;
     bool minimized;
     float original_height;
-    
+
     enum class ClickState
     {
         None,
         Resize,
         Drag
     };
-    sf::Vector2f click_offset;
+    glm::vec2 click_offset;
     ClickState click_state;
-    
+
     virtual void onClose();
 protected:
-    sf::Vector2f min_size;
+    glm::vec2 min_size;
     GuiElement* contents;
 };
 
