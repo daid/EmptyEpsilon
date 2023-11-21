@@ -732,9 +732,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         break;
     case CMD_DOCK:
         {
-            int32_t id;
             sp::ecs::Entity target;
-            packet >> id >> target;
+            packet >> target;
             if (target)
                 DockingSystem::requestDock(my_spaceship, target);
         }

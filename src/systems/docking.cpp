@@ -188,11 +188,11 @@ void DockingSystem::requestDock(sp::ecs::Entity entity, sp::ecs::Entity target)
     auto bay = target.getComponent<DockingBay>();
     if (!bay || docking_port->canDockOn(*bay) == DockingStyle::None) return;
     auto position = entity.getComponent<sp::Transform>();
-    if (position) return;
+    if (!position) return;
     auto target_position = target.getComponent<sp::Transform>();
-    if (target_position) return;
+    if (!target_position) return;
     auto target_physics = target.getComponent<sp::Physics>();
-    if (target_physics) return;
+    if (!target_physics) return;
 
     if (glm::length(position->getPosition() - target_position->getPosition()) > 1000.0f + target_physics->getSize().x)
         return;

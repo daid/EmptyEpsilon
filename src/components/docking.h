@@ -45,6 +45,7 @@ public:
     static constexpr float auto_reload_missile_time = 10.0f;
 
     DockingStyle canDockOn(DockingBay& bay) {
+        if (bay.external_dock_classes.empty() && bay.internal_dock_classes.empty()) return DockingStyle::External;
         if (bay.external_dock_classes.find(dock_class) != bay.external_dock_classes.end()) return DockingStyle::External;
         if (bay.external_dock_classes.find(dock_subclass) != bay.external_dock_classes.end()) return DockingStyle::External;
         if (bay.internal_dock_classes.find(dock_class) != bay.internal_dock_classes.end()) return DockingStyle::Internal;
