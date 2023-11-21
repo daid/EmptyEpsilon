@@ -39,6 +39,7 @@ function ShipTemplate:__init__()
     }
     self.__repair_crew_count = 3
     self.share_short_range_radar = {}
+    self.comms_receiver = {script="comms_ship.lua"}
 end
 
 --- Sets this ShipTemplate's unique reference name.
@@ -96,6 +97,8 @@ function ShipTemplate:setType(template_type)
         self.scan_probe_launcher = {}
         self.hacking_device = {}
         self.long_range_radar = {}
+        self.comms_transmitter = {}
+        self.comms_receiver = nil
     end
     if template_type == "station" then
         if self.docking_bay == nil then self.docking_bay = {} end
@@ -103,6 +106,7 @@ function ShipTemplate:setType(template_type)
         if self.radar_trace.icon == "radar/arrow.png" then
             self.radar_trace.icon = "radar/blip.png"
         end
+        self.comms_receiver = {script="comms_station.lua"}
     end
     return self
 end

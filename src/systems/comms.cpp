@@ -7,6 +7,7 @@
 #include "gameGlobalInfo.h"
 #include "ecs/query.h"
 #include "gui/colorConfig.h"
+#include "menus/luaConsole.h"
 
 
 static sp::ecs::Entity script_active_entity;
@@ -68,6 +69,7 @@ void CommsSystem::openTo(sp::ecs::Entity player, sp::ecs::Entity target)
             else
                 transmitter->target_name = "?";
             transmitter->incomming_message = tr("chatdialog", "Opened comms with {name}").format({{"name", transmitter->target_name}});
+            transmitter->target = target;
             if (auto log = player.getComponent<ShipLog>())
                 log->add(tr("shiplog", "Hailing: {name}").format({{"name", transmitter->target_name}}), colorConfig.log_generic);
         } else {
@@ -352,12 +354,12 @@ bool CommsSystem::openChannel(sp::ecs::Entity player, sp::ecs::Entity target)
         transmitter->script_environment->setGlobal("player", player);
         transmitter->script_environment->setGlobal("comms_source", player);
         transmitter->script_environment->setGlobal("comms_target", target);
-        transmitter->script_environment->runFile<void>(script_name);
+        LuaConsole::checkResult(transmitter->script_environment->runFile<void>(script_name));
     }else if (receiver->callback)
     {
         //TODO: receiver->callback.getScriptObject()->registerObject(player, "comms_source");
         //TODO: receiver->callback.getScriptObject()->registerObject(target, "comms_target");
-        receiver->callback.call<void>(player, target);
+        LuaConsole::checkResult(receiver->callback.call<void>(player, target));
     }
     script_active_entity = {};
     return transmitter->incomming_message != "???";

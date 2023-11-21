@@ -28,6 +28,7 @@
 #include "components/probe.h"
 #include "components/hacking.h"
 #include "components/player.h"
+#include "components/comms.h"
 #include "components/faction.h"
 #include "components/ai.h"
 #include "ai/ai.h"
@@ -365,6 +366,11 @@ void initComponentScriptBindings()
             }
         }
     };
+    sp::script::ComponentHandler<CommsTransmitter>::name("comms_transmitter");
+
+    sp::script::ComponentHandler<CommsReceiver>::name("comms_receiver");
+    BIND_MEMBER(CommsReceiver, script);
+    //BIND_MEMBER(CommsReceiver, callback);
 
     sp::script::ComponentHandler<BeamWeaponSys>::name("beam_weapons");
     BIND_SHIP_SYSTEM(BeamWeaponSys);

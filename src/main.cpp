@@ -29,6 +29,7 @@
 #include "gameGlobalInfo.h"
 #include "systems/ai.h"
 #include "systems/docking.h"
+#include "systems/comms.h"
 #include "systems/impulse.h"
 #include "systems/warpsystem.h"
 #include "systems/jumpsystem.h"
@@ -161,6 +162,7 @@ int main(int argc, char** argv)
     engine->registerSystem<DamageSystem>();
     engine->registerSystem<EnergySystem>();
     engine->registerSystem<DockingSystem>();
+    engine->registerSystem<CommsSystem>();
     engine->registerSystem<ImpulseSystem>();
     engine->registerSystem<ManeuveringSystem>();
     engine->registerSystem<WarpSystem>();
