@@ -367,10 +367,15 @@ void initComponentScriptBindings()
         }
     };
     sp::script::ComponentHandler<CommsTransmitter>::name("comms_transmitter");
+    BIND_MEMBER(CommsTransmitter, state);
+    BIND_MEMBER(CommsTransmitter, open_delay);
+    BIND_MEMBER(CommsTransmitter, target_name);
+    BIND_MEMBER(CommsTransmitter, incomming_message);
+    BIND_MEMBER(CommsTransmitter, target);
 
     sp::script::ComponentHandler<CommsReceiver>::name("comms_receiver");
     BIND_MEMBER(CommsReceiver, script);
-    //BIND_MEMBER(CommsReceiver, callback);
+    BIND_MEMBER(CommsReceiver, callback);
 
     sp::script::ComponentHandler<BeamWeaponSys>::name("beam_weapons");
     BIND_SHIP_SYSTEM(BeamWeaponSys);

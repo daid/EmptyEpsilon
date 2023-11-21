@@ -6,6 +6,7 @@
 #include "components/faction.h"
 #include "components/ai.h"
 #include "components/scanning.h"
+#include "components/comms.h"
 #include "missileWeaponData.h"
 
 
@@ -235,6 +236,49 @@ template<> struct Convert<EMissileSizes> {
             return EMissileSizes::MS_Large;
         luaL_error(L, "Unknown EMissileSizes: %s", str.c_str());
         return EMissileSizes::MS_Medium;
+    }
+};
+template<> struct Convert<CommsTransmitter::State> {
+    static int toLua(lua_State* L, CommsTransmitter::State value) {
+        switch(value) {
+        case CommsTransmitter::State::Inactive: lua_pushstring(L, "inactive"); break;
+        case CommsTransmitter::State::OpeningChannel: lua_pushstring(L, "opening"); break;
+        case CommsTransmitter::State::BeingHailed: lua_pushstring(L, "hailed"); break;
+        case CommsTransmitter::State::BeingHailedByGM: lua_pushstring(L, "hailed_gm"); break;
+        case CommsTransmitter::State::ChannelOpen: lua_pushstring(L, "open"); break;
+        case CommsTransmitter::State::ChannelOpenPlayer: lua_pushstring(L, "open_player"); break;
+        case CommsTransmitter::State::ChannelOpenGM: lua_pushstring(L, "open_gm"); break;
+        case CommsTransmitter::State::ChannelFailed: lua_pushstring(L, "failed"); break;
+        case CommsTransmitter::State::ChannelBroken: lua_pushstring(L, "broken"); break;
+        case CommsTransmitter::State::ChannelClosed: lua_pushstring(L, "closed"); break;
+        default: lua_pushstring(L, "none"); break;
+        }
+        return 1;
+    }
+    static CommsTransmitter::State fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "inactive")
+            return CommsTransmitter::State::Inactive;
+        else if (str == "opening")
+            return CommsTransmitter::State::OpeningChannel;
+        else if (str == "hailed")
+            return CommsTransmitter::State::BeingHailed;
+        else if (str == "hailed_gm")
+            return CommsTransmitter::State::BeingHailedByGM;
+        else if (str == "open")
+            return CommsTransmitter::State::ChannelOpen;
+        else if (str == "open_player")
+            return CommsTransmitter::State::ChannelOpenPlayer;
+        else if (str == "open_gm")
+            return CommsTransmitter::State::ChannelOpenGM;
+        else if (str == "failed")
+            return CommsTransmitter::State::ChannelFailed;
+        else if (str == "broken")
+            return CommsTransmitter::State::ChannelBroken;
+        else if (str == "closed")
+            return CommsTransmitter::State::ChannelClosed;
+        luaL_error(L, "Unknown CommsTransmitter::State: %s", str.c_str());
+        return CommsTransmitter::State::Inactive;
     }
 };
 }
