@@ -123,8 +123,8 @@ void BeamWeaponSystem::update(float delta)
                             sfx.sound = "sfx/laser_fire.wav";
                             sfx.power = mount.damage / 6.0f;
                             {
-                                hit_location -= target_transform->getPosition();
-                                be.target_offset = glm::vec3(hit_location.x + random(-r/2.0f, r/2.0f), hit_location.y + random(-r/2.0f, r/2.0f), random(-r/4.0f, r/4.0f));
+                                auto local_hit_location = hit_location - target_transform->getPosition();
+                                be.target_offset = glm::vec3(local_hit_location.x + random(-r/2.0f, r/2.0f), local_hit_location.y + random(-r/2.0f, r/2.0f), random(-r/4.0f, r/4.0f));
 
                                 auto shield = target.entity.getComponent<Shields>();
                                 if (shield && shield->active)

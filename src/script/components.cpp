@@ -259,6 +259,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(LongRangeRadar, waypoints, x);
     BIND_ARRAY_MEMBER(LongRangeRadar, waypoints, y);
     //TODO: callbacks for probes
+    sp::script::ComponentHandler<ShareShortRangeRadar>::name("share_short_range_radar");
 
     sp::script::ComponentHandler<Hull>::name("hull");
     BIND_MEMBER(Hull, current);

@@ -1,5 +1,6 @@
 #include <i18n.h>
 #include "playerInfo.h"
+#include "random.h"
 #include "menus/luaConsole.h"
 #include "screens/mainScreen.h"
 #include "screens/crewStationScreen.h"
@@ -47,6 +48,7 @@
 #include "components/scanning.h"
 #include "components/radar.h"
 #include "components/internalrooms.h"
+#include "components/moveto.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
 #include "systems/missilesystem.h"
@@ -890,14 +892,40 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             if (t && spl->stock > 0) {
                 glm::vec2 target{};
                 packet >> target;
-                /*TODO spawn scan probe
-                P<ScanProbe> p = new ScanProbe();
-                p->setPosition(t->getPosition());
-                p->setTarget(target);
-                p->setOwner(my_spaceship);
-                if (spl->on_launch)
-                    LuaConsole::checkResult(spl->on_launch.call<void>(my_spaceship, p->entity));
+
+                auto p = sp::ecs::Entity::create();
+                p.addComponent<sp::Transform>(*t);
+                p.addComponent<LifeTime>().lifetime = 60*10;
+                if (auto faction = my_spaceship.getComponent<Faction>())
+                    p.addComponent<Faction>() = *faction;
+                auto& mt = p.addComponent<MoveTo>();
+                mt.target = target;
+                mt.speed = 1000;
+                p.addComponent<AllowRadarLink>().owner = my_spaceship;
+                //TODO: setRadarSignatureInfo(0.0, 0.2, 0.0);
+                //TODO: setCallSign(string(getMultiplayerId()) + "P");
+                auto& trace = p.addComponent<RadarTrace>();
+                trace.icon = "radar/probe.png";
+                trace.min_size = 10.0;
+                trace.max_size = 10.0;
+                trace.color = {96, 192, 128, 255};
+                trace.flags = RadarTrace::LongRange;
+                auto& hull = p.addComponent<Hull>();
+                hull.current = hull.max = 1;
+                p.addComponent<ShareShortRangeRadar>();
+                auto model = "SensorBuoyMKI";
+                auto idx = irandom(1, 3);
+                if (idx == 2) model = "SensorBuoyMKII";
+                if (idx == 3) model = "SensorBuoyMKIII";
+                /*TODO 3D model
+                for k, v in pairs(__model_data[model]) do
+                    if string.sub(1, 2) ~= "__" then
+                        e[k] = table.deepcopy(v)
+                    end
+                end
                 */
+                if (spl->on_launch)
+                    LuaConsole::checkResult(spl->on_launch.call<void>(my_spaceship, p));
                 spl->stock--;
             }
         }

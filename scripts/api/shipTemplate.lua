@@ -38,6 +38,7 @@ function ShipTemplate:__init__()
         color_by_faction=true,
     }
     self.__repair_crew_count = 3
+    self.share_short_range_radar = {}
 end
 
 --- Sets this ShipTemplate's unique reference name.
@@ -327,6 +328,9 @@ function ShipTemplate:setShields(...)
     if self.shields == nil then self.shields = {} end
     for n, level in ipairs({...}) do
         self.shields[n] = {level=level, max=level}
+    end
+    for n=#{...} + 1, #self.shields do
+        self.shields[n] = nil
     end
     return self
 end
