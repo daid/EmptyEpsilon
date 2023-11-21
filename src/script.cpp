@@ -5,6 +5,7 @@
 #include "resources.h"
 #include "random.h"
 #include "menus/luaConsole.h"
+#include "systems/comms.h"
 
 
 /// void require(string filename)
@@ -239,6 +240,10 @@ void setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("clearGMFunctions", &luaClearGMFunctions);
 
     env.setGlobal("Script", &luaCreateAdditionalScript);
+
+    env.setGlobal("setCommsMessage", &CommsSystem::luaSetCommsMessage);
+    env.setGlobal("addCommsReply", &CommsSystem::luaAddCommsReply);
+    env.setGlobal("commsSwitchToGM", &CommsSystem::luaCommsSwitchToGM);
 
     LuaConsole::checkResult(env.runFile<void>("luax.lua"));
     LuaConsole::checkResult(env.runFile<void>("api/all.lua"));

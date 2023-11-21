@@ -5,6 +5,7 @@
 #include "stringImproved.h"
 
 
+struct lua_State;
 class CommsSystem : public sp::ecs::System
 {
 public:
@@ -24,6 +25,10 @@ public:
     static void addCommsIncommingMessage(sp::ecs::Entity player, string message);
     static void addCommsOutgoingMessage(sp::ecs::Entity player, string message);
     static void setCommsMessage(sp::ecs::Entity player, string message);
+
+    static int luaSetCommsMessage(lua_State* L);
+    static int luaAddCommsReply(lua_State* L);
+    static int luaCommsSwitchToGM(lua_State* L);
 private:
     static bool openChannel(sp::ecs::Entity player, sp::ecs::Entity target);
 };

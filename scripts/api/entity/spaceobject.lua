@@ -200,6 +200,7 @@ end
 --- Example: obj:getCallSign()
 function Entity:getCallSign()
     if self.callsign then return self.callsign.callsign end
+    return "?"
 end
 --- Returns whether any SpaceObject from a hostile faction are within a given radius of this SpaceObject, in (unit?).
 --- Example: obj:areEnemiesInRange(5000) -- returns true if hostiles are within 5U of this object

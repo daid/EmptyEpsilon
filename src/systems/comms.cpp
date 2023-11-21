@@ -270,7 +270,7 @@ void CommsSystem::selectScriptReply(sp::ecs::Entity player, int index)
         }
         transmitter->script_replies.clear();
         transmitter->incomming_message = "?";
-        callback.call<void>(player, transmitter->target);
+        LuaConsole::checkResult(callback.call<void>(player, transmitter->target));
     }
 
     script_active_entity = {};
@@ -348,7 +348,7 @@ bool CommsSystem::openChannel(sp::ecs::Entity player, sp::ecs::Entity target)
     if (script_name != "")
     {
         transmitter->script_environment = std::make_unique<sp::script::Environment>();
-        //TODO: Register all default global functions and shizzle.
+        setupScriptEnvironment(*transmitter->script_environment);
 
         // consider "player" deprecated, but keep it for a long time
         transmitter->script_environment->setGlobal("player", player);
@@ -365,7 +365,7 @@ bool CommsSystem::openChannel(sp::ecs::Entity player, sp::ecs::Entity target)
     return transmitter->incomming_message != "???";
 }
 
-static int setCommsMessage(lua_State* L)
+int CommsSystem::luaSetCommsMessage(lua_State* L)
 {
     if (!script_active_entity)
         return 0;
@@ -373,21 +373,19 @@ static int setCommsMessage(lua_State* L)
     return 0;
 }
 
-static int addCommsReply(lua_State* L)
+int CommsSystem::luaAddCommsReply(lua_State* L)
 {
     auto transmitter = script_active_entity.getComponent<CommsTransmitter>();
     if (!transmitter)
         return 0;
 
     string message = luaL_checkstring(L, 1);
-    ScriptSimpleCallback callback;
-    int idx = 2;
-    convert<ScriptSimpleCallback>::param(L, idx, callback);
-    //TODO: transmitter->script_replies.push_back({message, callback});
+    auto callback = sp::script::Convert<sp::script::Callback>::fromLua(L, 2);
+    transmitter->script_replies.push_back({message, callback});
     return 0;
 }
 
-static int commsSwitchToGM(lua_State* L)
+int CommsSystem::luaCommsSwitchToGM(lua_State* L)
 {
     auto transmitter = script_active_entity.getComponent<CommsTransmitter>();
     if (!transmitter)
@@ -415,7 +413,7 @@ static int commsSwitchToGM(lua_State* L)
 /// end
 /// -- When some_ship is hailed, run friendlyComms() with some_ship as the comms_target and the player as the comms_source
 /// some_ship:setCommsFunction(friendlyComms)
-REGISTER_SCRIPT_FUNCTION(setCommsMessage);
+//REGISTER_SCRIPT_FUNCTION(setCommsMessage);
 /// void addCommsReply(string message, ScriptSimpleCallback callback)
 /// Adds a selectable reply option to a communications dialogue as a button with the given text.
 /// When clicked, the button calls the given function.
@@ -431,7 +429,7 @@ REGISTER_SCRIPT_FUNCTION(setCommsMessage);
 ///   addCommsReply("Can you send a supply drop?", function(comms_source, comms_target) ... end) -- runs the given function when selected
 ///   ...
 /// Deprecated: In a comms script, `player` can also be used for `comms_source`.
-REGISTER_SCRIPT_FUNCTION(addCommsReply);
+//REGISTER_SCRIPT_FUNCTION(addCommsReply);
 /// void commsSwitchToGM()
 /// Switches a PlayerSpaceship communications dialogue from a comms script/function to interactive chat with the GM.
 /// When triggered, this opens a comms chat window on both the player crew's screen and GM console.
@@ -441,4 +439,4 @@ REGISTER_SCRIPT_FUNCTION(addCommsReply);
 ///   setCommsMessage("Hello, friend!")
 ///   addCommsReply("I want to speak to your manager!", function() commsSwitchToGM() end) -- launches a GM chat when selected
 ///   ...
-REGISTER_SCRIPT_FUNCTION(commsSwitchToGM);
+//REGISTER_SCRIPT_FUNCTION(commsSwitchToGM);
