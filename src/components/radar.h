@@ -2,7 +2,7 @@
 
 #include "io/dataBuffer.h"
 #include "multiplayer.h"
-#include "scriptInterface.h"
+#include "script/callback.h"
 
 
 class RadarTrace
@@ -86,8 +86,8 @@ public:
     std::vector<glm::vec2> waypoints;
     sp::ecs::Entity radar_view_linked_entity;
 
-    ScriptSimpleCallback on_probe_link;
-    ScriptSimpleCallback on_probe_unlink;
+    sp::script::Callback on_probe_link;
+    sp::script::Callback on_probe_unlink;
 };
 
 class ShareShortRangeRadar

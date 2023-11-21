@@ -231,9 +231,12 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 {
     GuiOverlay::onDraw(renderer);
+    if (!isVisible())
+        return;
 
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-    if (!lrr || !isVisible())
+    science_radar->setVisible(lrr != nullptr);
+    if (!lrr)
         return;
 
     float view_distance = science_radar->getDistance();

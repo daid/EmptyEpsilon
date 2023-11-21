@@ -6,93 +6,6 @@
 -- @script scenario_10_empty
 
 
-function AsteroidX()
-    local e = createEntity()
-    e.transform = {rotation=random(0, 360)}
-    e.radar_signature = {gravity=0.05}
-    local z = random(-50, 50)
-    local size = random(110, 130)
-
-    local model_number = irandom(1, 10)
-    e.mesh_render = {
-        mesh="Astroid_" .. model_number .. ".model",
-        mesh_offset={0, 0, z},
-        texture="Astroid_" .. model_number .. "_d.png",
-        specular_texture="Astroid_" .. model_number .. "_s.png",
-        scale=size,
-    }
-    e.physics = {type="Sensor", size=size}
-    e.radar_trace = {
-        icon="radar/blip.png",
-        radius=size,
-        color={255, 200, 100, 255},
-        rotate=false,
-    }
-    e.spin={rate=random(0.1, 0.8)}
-    e.avoid_object={range=size*2}
-    e.explode_on_touch={damage_at_center=35, damage_at_edge=35,blast_range=size}
-    return e
-end
-
-function PlayerSpaceshipX()
-    local e = createEntity()
-    local size = 300
-    e.transform = {rotation=random(0, 360)}
-    e.callsign = {callsign="Player"}
-    e.typename = {type_name="Atlantis"}
-    --ShipTemplateBasedObject
-    e.long_range_radar = {}
-    e.hull = {}
-    e.shields = {{level=100,max=100}, {level=50,max=50}}
-    e.radar_trace = {
-        icon="radar/dread.png",
-        radius=size*0.8,
-        max_size=1024,
-        color_by_faction=true,
-    }
-    --e.docking_bay = {}
-    e.docking_port = {}
-    e.share_short_range_radar = {}
-    e.mesh_render = {
-        mesh="small_fighter_1.model",
-        mesh_offset={0, 0, 0},
-        texture="small_fighter_1_color.jpg",
-        specular_texture="small_fighter_1_specular.jpg",
-        illumination_texture="small_fighter_1_illumination.jpg",
-        scale=3.0,
-    }
-    e.engine_emitter = {}
-    e.physics = {type="dynamic", size=size}
-    
-    --SpaceShip
-    e.radar_trace.arrow_if_not_scanned = true
-    e.shields.frequency = irandom(0, 20)
-    e.beam_weapons = {{arc=30, direction=0},{arc=30, direction=-90},{arc=30, direction=90}}
-    e.reactor = {}
-    e.impulse_engine = {}
-    e.maneuvering_thrusters = {}
-    e.combat_maneuvering_thrusters = {}
-    e.warp_drive = {}
-    e.jump_drive = {}
-    e.missile_tubes = {
-        {direction=15},{direction=-15},{direction=25},{direction=-25},
-    }
-    
-    --PlayerSpaceShip
-    --TODO: Set scan state for each faction
-    --TODO: Faction
-    --TODO: Repair crew + InternalRooms
-    e.coolant = {}
-    e.self_destruct = {}
-    e.science_scanner = {}
-    e.scan_probe_launcher = {}
-    e.hacking_device = {}
-    e.player_control = {}
-    
-    return e
-end
-
-
 function init()
     local a = Asteroid()
     a:setPosition(500, 1000)
@@ -106,14 +19,11 @@ function init()
 
     c = CpuShip()
     c:setTemplate("Phobos T3"):setPosition(5000, 5000)
+
+    s = SpaceStation()
+    s:setTemplate("Small Station"):setPosition(-2000, -2000):setFaction("Human Navy")
 end
 
-print_delay = 3
 function update(delta)
     -- No victory condition
-    print_delay = print_delay - delta
-    if print_delay < 0 then
-        print_delay = random(1, 4)
-        print(print_delay)
-    end
 end

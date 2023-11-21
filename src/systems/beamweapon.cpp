@@ -136,7 +136,7 @@ void BeamWeaponSystem::update(float delta)
                             DamageInfo info(entity, mount.damage_type, hit_location);
                             info.frequency = beamsys.frequency;
                             info.system_target = beamsys.system_target;
-                            DamageSystem::applyDamage(entity, mount.damage, info);
+                            DamageSystem::applyDamage(target.entity, mount.damage, info);
                         }
                     }
                 }

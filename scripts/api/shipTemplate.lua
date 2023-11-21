@@ -94,6 +94,7 @@ function ShipTemplate:setType(template_type)
         self.science_scanner = {}
         self.scan_probe_launcher = {}
         self.hacking_device = {}
+        self.long_range_radar = {}
     end
     if template_type == "station" then
         if self.docking_bay == nil then self.docking_bay = {} end

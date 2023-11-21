@@ -917,11 +917,11 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             // TODO: Check if this probe is ours
             if (auto lrr = my_spaceship.getComponent<LongRangeRadar>()) {
                 auto old = lrr->radar_view_linked_entity;
-                if (lrr->on_probe_link.isSet() && target)
-                    lrr->on_probe_link.call<void>(my_spaceship, target);
+                if (lrr->on_probe_link && target)
+                    LuaConsole::checkResult(lrr->on_probe_link.call<void>(my_spaceship, target));
                 lrr->radar_view_linked_entity = target;
-                if (lrr->on_probe_unlink.isSet() && old)
-                    lrr->on_probe_unlink.call<void>(my_spaceship, old);
+                if (lrr->on_probe_unlink && old)
+                    LuaConsole::checkResult(lrr->on_probe_unlink.call<void>(my_spaceship, old));
             }
         }
         break;

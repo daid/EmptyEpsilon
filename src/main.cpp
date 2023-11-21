@@ -159,6 +159,7 @@ int main(int argc, char** argv)
     new Engine();
     engine->registerSystem<AISystem>();
     engine->registerSystem<DamageSystem>();
+    engine->registerSystem<EnergySystem>();
     engine->registerSystem<DockingSystem>();
     engine->registerSystem<ImpulseSystem>();
     engine->registerSystem<ManeuveringSystem>();

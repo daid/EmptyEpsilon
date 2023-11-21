@@ -27,6 +27,7 @@ __faction_info = {}
 function FactionInfo()
     local fi = createEntity()
     fi.faction_info = {}
+    fi:__setFactionRelation(fi, "friendly")
     return fi
 end
 function getFactionInfo(name)
