@@ -158,6 +158,13 @@ static string luaGetScenarioSetting(string key)
     return "";
 }
 
+static string luaGetScenarioVariation()
+{
+    if (gameGlobalInfo->scenario_settings.find("variation") != gameGlobalInfo->scenario_settings.end())
+        return gameGlobalInfo->scenario_settings["variation"];
+    return "None";
+}
+
 static void luaOnNewPlayerShip(sp::script::Callback callback)
 {
     gameGlobalInfo->on_new_player_ship = callback;
@@ -231,9 +238,26 @@ void setupScriptEnvironment(sp::script::Environment& env)
     
     env.setGlobal("createClass", &luaCreateClass);
 
+    /// string getScenarioSetting(string key)
+    /// Returns the given scenario setting's value, or an empty string if the setting is not found.
+    /// Warning: Headless server modes might load scenarios without default setting values.
+    /// Example: getScenarioSetting("Difficulty") -- if a scenario has Setting[Difficulty], returns its value, such as "Easy" or "Normal"
     env.setGlobal("getScenarioSetting", &luaGetScenarioSetting);
+    // this returns the "variation" scenario setting for backwards compatibility
+    /// string getScenarioVariation()
+    /// [DEPRECATED]
+    /// As getScenarioSetting("variation").
+    env.setGlobal("getScenarioVariation", &luaGetScenarioVariation);
     env.setGlobal("onNewPlayerShip", &luaOnNewPlayerShip);
+    /// void globalMessage(string message, std::optional<float> timeout)
+    /// Displays a message on the main screens of all active player ships.
+    /// The message appears for 5 seconds, but new messages immediately replace any displayed message.
+    /// Example: globalMessage("You will soon die!")
     env.setGlobal("globalMessage", &luaGlobalMessage);
+    /// void victory(string faction_name)
+    /// Sets the given faction as the scenario's victor and ends the scenario.
+    /// (The GM can unpause the game, but the scenario with its update function is destroyed.)
+    /// Example: victory("Exuari") -- ends the scenario, Exuari win
     env.setGlobal("victory", &luaVictory);
 
     env.setGlobal("addGMFunction", &luaAddGMFunction);

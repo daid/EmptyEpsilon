@@ -371,32 +371,6 @@ int sectorToXY(lua_State* L)
 /// x,y = sectorToXY("BA12") -- x = 140000, y = 940000
 REGISTER_SCRIPT_FUNCTION(sectorToXY);
 
-static int victory(lua_State* L)
-{
-    gameGlobalInfo->setVictory(luaL_checkstring(L, 1));
-    if (engine->getObject("scenario"))
-        engine->getObject("scenario")->destroy();
-    engine->setGameSpeed(0.0);
-    return 0;
-}
-/// void victory(string faction_name)
-/// Sets the given faction as the scenario's victor and ends the scenario.
-/// (The GM can unpause the game, but the scenario with its update function is destroyed.)
-/// Example: victory("Exuari") -- ends the scenario, Exuari win
-REGISTER_SCRIPT_FUNCTION(victory);
-
-static int globalMessage(lua_State* L)
-{
-    gameGlobalInfo->global_message = luaL_checkstring(L, 1);
-    gameGlobalInfo->global_message_timeout = luaL_optnumber(L, 2, 5.0);
-    return 0;
-}
-/// void globalMessage(string message, std::optional<float> timeout)
-/// Displays a message on the main screens of all active player ships.
-/// The message appears for 5 seconds, but new messages immediately replace any displayed message.
-/// Example: globalMessage("You will soon die!")
-REGISTER_SCRIPT_FUNCTION(globalMessage);
-
 static int setBanner(lua_State* L)
 {
     gameGlobalInfo->banner_string = luaL_checkstring(L, 1);
@@ -488,35 +462,6 @@ static int getAllObjects(lua_State* L)
 /// This can return a very long list and could slow down the game if called every tick.
 /// Example: getAllObjects()
 REGISTER_SCRIPT_FUNCTION(getAllObjects);
-
-static int getScenarioVariation(lua_State* L)
-{
-    if (gameGlobalInfo->scenario_settings.find("variation") != gameGlobalInfo->scenario_settings.end())
-        lua_pushstring(L, gameGlobalInfo->scenario_settings["variation"].c_str());
-    else
-        lua_pushstring(L, "None");
-    return 1;
-}
-// this returns the "variation" scenario setting for backwards compatibility
-/// string getScenarioVariation()
-/// [DEPRECATED]
-/// As getScenarioSetting("variation").
-REGISTER_SCRIPT_FUNCTION(getScenarioVariation);
-
-static int getScenarioSetting(lua_State* L)
-{
-    auto key = luaL_checkstring(L, 1);
-    if (gameGlobalInfo->scenario_settings.find(key) != gameGlobalInfo->scenario_settings.end())
-        lua_pushstring(L, gameGlobalInfo->scenario_settings[key].c_str());
-    else
-        lua_pushstring(L, "");
-    return 1;
-}
-/// string getScenarioSetting(string key)
-/// Returns the given scenario setting's value, or an empty string if the setting is not found.
-/// Warning: Headless server modes might load scenarios without default setting values.
-/// Example: getScenarioSetting("Difficulty") -- if a scenario has Setting[Difficulty], returns its value, such as "Easy" or "Normal"
-REGISTER_SCRIPT_FUNCTION(getScenarioSetting);
 
 static int getGameLanguage(lua_State* L)
 {

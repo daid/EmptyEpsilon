@@ -317,6 +317,7 @@ end
 --- Example: obj:setRadarSignatureInfo(0.0, 0.5, 1.0) -- a radar signature of 0 gravitational, 0.5 electrical, and 1.0 biological
 function Entity:setRadarSignatureInfo(gravity, electrical, biological)
     --TODO
+    return self
 end
 --- Returns this SpaceObject's gravitational radar signature value.
 --- Example: obj:getRadarSignatureGravity()
@@ -338,6 +339,7 @@ end
 --- Example: obj:setScanningParameters(2, 3)
 function Entity:setScanningParameters(complexity, depth)
     --TODO
+    return self
 end
 --- Returns the scanning complexity for the given SpaceObject.
 --- Example: obj:scanningComplexity(obj)
@@ -356,6 +358,7 @@ end
 --- Example: obj:setScanned(true)
 function Entity:setScanned(is_scanned)
     --TODO
+    return self
 end
 --- [DEPRECATED]
 --- Returns whether this SpaceObject has been scanned.
@@ -373,6 +376,7 @@ end
 --- Example: obj:setScannedByFaction("Human Navy", false)
 function Entity:setScannedByFaction(faction_name, is_scanned)
     --TODO
+    return self
 end
 --- Returns whether the given faction has successfully scanned this SpaceObject.
 --- Requires a faction name string value as defined by its FactionInfo.
@@ -386,4 +390,5 @@ end
 --- obj:onDestroyed(function() print("Object destroyed!") end)
 function Entity:onDestroyed(callback)
     --TODO
+    return self
 end
