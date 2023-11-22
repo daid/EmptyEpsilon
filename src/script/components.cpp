@@ -312,7 +312,7 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<DockingPort>::name("docking_port");
     BIND_MEMBER(DockingPort, dock_class);
     BIND_MEMBER(DockingPort, dock_subclass);
-    //TODO: BIND_MEMBER(DockingPort, state);
+    BIND_MEMBER(DockingPort, state);
     BIND_MEMBER(DockingPort, target);
     BIND_MEMBER(DockingPort, auto_reload_missiles);
 

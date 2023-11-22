@@ -120,7 +120,10 @@ end
 --- stbo:getShieldLevel(0) -- returns front shield points
 --- stbo:getShieldLevel(1) -- returns rear shield points
 function Entity:getShieldLevel(index)
-    --TODO
+    if self.shields and index < #self.shields then
+        return self.shields[index+1].level
+    end
+    return 0
 end
 --- Returns this STBO's number of shield segments.
 --- Each segment divides the 360-degree shield arc equally for each segment, up to a maximum of 8 segments.
@@ -133,7 +136,10 @@ end
 --- Returns the maximum shield points for the STBO's shield segment with the given index.
 --- Example: stbo:getShieldMax(0) -- returns the max shield strength for segment 0
 function Entity:getShieldMax(index)
-    --TODO
+    if self.shields and index < #self.shields then
+        return self.shields[index+1].max
+    end
+    return 0
 end
 --- Sets this STBO's shield points.
 --- Each number provided as a parameter sets the points for a corresponding shield segment.
@@ -161,13 +167,18 @@ end
 function Entity:setShieldsMax(...)
     --TODO
 end
---- Sets this STBO's trace image.
+--- Sets the radar trace image for this entity.
 --- Valid values are filenames of PNG images relative to the resources/radar directory.
 --- Radar trace images should be white with a transparent background.
+--- Only scanned SpaceShips use a specific radar trace image. Unscanned SpaceShips always display as an arrow.
 --- Example: stbo:setRadarTrace("arrow.png") -- sets the radar trace to resources/radar/arrow.png
+--- Example: ship:setRadarTrace("blip.png") -- displays a dot for this ship on radar when scanned
 function Entity:setRadarTrace(filename)
-    --TODO
+    if self.radar_trace then
+        self.radar_trace.icon = "radar/" .. filename
+    end
 end
+
 --- Sets this STBO's impulse engine sound effect.
 --- Valid values are filenames of WAV files relative to the resources/ directory.
 --- Use a looping sound file that tolerates being pitched up and down as the ship's impulse speed changes.
@@ -179,7 +190,8 @@ end
 --- Always returns true except for PlayerSpaceships, because only players can deactivate shields.
 --- Example stbo:getShieldsActive() -- returns true if up, false if down
 function Entity:getShieldsActive()
-    --TODO
+    if self.shields then return self.shields.active end
+    return false
 end
 --- Returns whether this STBO supplies energy to docked PlayerSpaceships.
 --- Example: stbo:getSharesEnergyWithDocked()
@@ -249,22 +261,24 @@ end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:getShieldLevel() with an index value.
 function Entity:getFrontShield()
-    --TODO
+    return self.getShieldLevel(0)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldsMax().
 function Entity:getFrontShieldMax()
-    --TODO
+    return self.getShieldMax(0)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldLevel() with an index value.
 function Entity:setFrontShield(amount)
-    --TODO
+    self.setShieldLevel(0, amount)
+    return self
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldsMax().
 function Entity:setFrontShieldMax(amount)
     --TODO
+    return self
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:getShieldLevel() with an index value.

@@ -6,6 +6,7 @@
 #include "components/faction.h"
 #include "components/ai.h"
 #include "components/scanning.h"
+#include "components/docking.h"
 #include "components/comms.h"
 #include "missileWeaponData.h"
 
@@ -236,6 +237,28 @@ template<> struct Convert<EMissileSizes> {
             return EMissileSizes::MS_Large;
         luaL_error(L, "Unknown EMissileSizes: %s", str.c_str());
         return EMissileSizes::MS_Medium;
+    }
+};
+template<> struct Convert<DockingPort::State> {
+    static int toLua(lua_State* L, DockingPort::State value) {
+        switch(value) {
+        case DockingPort::State::NotDocking: lua_pushstring(L, "not_docking"); break;
+        case DockingPort::State::Docking: lua_pushstring(L, "docking"); break;
+        case DockingPort::State::Docked: lua_pushstring(L, "docked"); break;
+        default: lua_pushstring(L, "none"); break;
+        }
+        return 1;
+    }
+    static DockingPort::State fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "not_docking")
+            return DockingPort::State::NotDocking;
+        else if (str == "opening")
+            return DockingPort::State::Docking;
+        else if (str == "hailed")
+            return DockingPort::State::Docked;
+        luaL_error(L, "Unknown DockingPort::State: %s", str.c_str());
+        return DockingPort::State::NotDocking;
     }
 };
 template<> struct Convert<CommsTransmitter::State> {

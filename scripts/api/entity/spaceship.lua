@@ -32,14 +32,6 @@ end
 function Entity:isFullyScannedByFaction(faction)
     --TODO
 end
---- Returns whether this SpaceShip is docked with a station or another ship.
-function Entity:isDocked()
-    --TODO
-end
---- Returns the object with which this SpaceShip is docked.
-function Entity:getDockedWith()
-    --TODO
-end
 --- Returns whether this SpaceShip has been identified by the given SpaceObject as either hostile or friendly.
 --- Example: ship:isFriendOrFoeIdentifiedBy(enemy)
 function Entity:isFriendOrFoeIdentifiedBy(enemy)
@@ -65,12 +57,16 @@ end
 --- Returns whether this SpaceShip is docked with the given SpaceObject.
 --- Example: ship:isDocked(base) -- returns true if `ship` is fully docked with `base`
 function Entity:isDocked(target)
-    --TODO
+    if self.docking_port and self.docking_port.state == "docked" then
+        return self.docking_port.target == target
+    end
 end
 --- Returns the SoaceObject with which this SpaceShip is docked.
 --- Example: base = ship:getDockedWith()
 function Entity:getDockedWith()
-    --TODO
+    if self.docking_port and self.docking_port.state == "docked" then
+        return self.docking_port.target
+    end
 end
 --- Returns the EDockingState value of this SpaceShip.
 --- 0 = Not docked
@@ -78,7 +74,12 @@ end
 --- 2 = Docked
 --- Example: ds = ship:getDockingState()
 function Entity:getDockingState()
-    --TODO
+    if self.docking_port then
+        local state = self.docking_port.state
+        if state == "docking" then return 1 end
+        if state == "docked" then return 2 end
+    end
+    return 0
 end
 --- Returns this SpaceShip's weapons target.
 --- For a CpuShip, this can differ from its orders target.
@@ -566,14 +567,6 @@ end
 --- Sets the time, in seconds, required to load the weapon tube with the given index on this SpaceShip.
 --- Example: ship:setTubeLoadTime(0,12) -- sets the loading time for tube 0 to 12 seconds
 function Entity:setTubeLoadTime(index, load_time)
-    --TODO
-end
---- Sets the radar trace image for this SpaceShip.
---- Valid values are filenames to PNG images relative to the resources/radar/ directory.
---- Radar trace images should be white with a transparent background.
---- Only scanned SpaceShips use a specific radar trace image. Unscanned SpaceShips always display as an arrow.
---- Example: ship:setRadarTrace("blip.png") -- displays a dot for this ship on radar when scanned
-function Entity:setRadarTrace(tracename)
     --TODO
 end
 --- Returns the dynamic gravitational radar signature value emitted by this SpaceShip.

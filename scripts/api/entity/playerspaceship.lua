@@ -67,57 +67,80 @@ end
 --- Use this to determine whether the player can accept an incoming hail or chat.
 --- Example: player:isCommsInactive()
 function Entity:isCommsInactive()
-    --TODO
+    if self.comms_transmitter then return self.comms_transmitter.state == "inactive" end
+    return true
 end
 --- Returns whether this PlayerSpaceship is opening comms with another SpaceObject.
 --- Example: player:isCommsOpening()
 function Entity:isCommsOpening()
-    --TODO
+    if self.comms_transmitter then
+        return self.comms_transmitter.state == "opening"
+    end
 end
 --- Returns whether this PlayerSpaceship is being hailed by another SpaceObject.
 --- Example: player:isCommsBeingHailed()
 function Entity:isCommsBeingHailed()
-    --TODO
+    if self.comms_transmitter then
+        local state = self.comms_transmitter.state
+        return state == "hailed" or state == "hailed_player" or state == "hailed_gm"
+    end
 end
 --- Returns whether this PlayerSpaceship is being hailed by the GM.
 --- Example: player:isCommsBeingHailedByGM()
 function Entity:isCommsBeingHailedByGM()
-    --TODO
+    if self.comms_transmitter then
+        return self.comms_transmitter.state == "hailed_gm"
+    end
 end
 --- Returns whether comms to this PlayerSpaceship have failed to open.
 --- Example: player:isCommsFailed()
 function Entity:isCommsFailed()
-    --TODO
+    if self.comms_transmitter then
+        return self.comms_transmitter.state == "failed"
+    end
 end
 --- Returns whether comms to this PlayerSpaceship were broken off by the other SpaceObject.
 --- Example: player:isCommsBroken()
 function Entity:isCommsBroken()
-    --TODO
+    if self.comms_transmitter then
+        return self.comms_transmitter.state == "broken"
+    end
 end
 --- Returns whether comms between this PlayerSpaceship and a SpaceObject were intentionally closed.
 --- Example: player:isCommsClosed()
 function Entity:isCommsClosed()
-    --TODO
+    if self.comms_transmitter then
+        return self.comms_transmitter.state == "closed"
+    end
 end
 --- Returns whether this PlayerSpaceship is engaged in text chat with either the GM or another PlayerSpaceship.
 --- Example: player:isCommsChatOpen()
 function Entity:isCommsChatOpen()
-    --TODO
+    if self.comms_transmitter then
+        local state = self.comms_transmitter.state
+        return state == "open_gm" or state == "open_player"
+    end
 end
 --- Returns whether this PlayerSpaceship is engaged in text chat with the GM.
 --- Example: player:isCommsChatOpenToGM()
 function Entity:isCommsChatOpenToGM()
-    --TODO
+    if self.comms_transmitter then
+        return self.comms_transmitter.state == "open_gm"
+    end
 end
 --- Returns whether this PlayerSpaceship is engaged in text chat with another PlayerSpaceship.
 --- Example: player:isCommsChatOpenToPlayer()
 function Entity:isCommsChatOpenToPlayer()
-    --TODO
+    if self.comms_transmitter then
+        return self.comms_transmitter.state == "open_player"
+    end
 end
 --- Returns whether this PlayerSpaceship is engaged in comms with a scripted SpaceObject.
 --- Example: player:isCommsScriptOpen()
 function Entity:isCommsScriptOpen()
-    --TODO
+    if self.comms_transmitter then
+        return self.comms_transmitter.state == "open"
+    end
 end
 
 --- Sets this PlayerSpaceship's energy level.
