@@ -247,9 +247,4 @@ void setupScriptEnvironment(sp::script::Environment& env)
 
     LuaConsole::checkResult(env.runFile<void>("luax.lua"));
     LuaConsole::checkResult(env.runFile<void>("api/all.lua"));
-
-    LuaConsole::checkResult(env.runFile<void>("model_data.lua"));
-    LuaConsole::checkResult(env.runFile<void>("factionInfo.lua"));
-    LuaConsole::checkResult(env.runFile<void>("shipTemplates.lua"));
-    LuaConsole::checkResult(env.runFile<void>("science_db.lua"));
 }
