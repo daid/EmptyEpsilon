@@ -4,6 +4,7 @@
 #include "script.h"
 #include "resources.h"
 #include "random.h"
+#include "script/vector.h"
 #include "menus/luaConsole.h"
 #include "systems/comms.h"
 
@@ -224,6 +225,58 @@ static int luaCreateAdditionalScript(lua_State* L)
     return 1;
 }
 
+static glm::vec2 luaSectorToXY(string sector)
+{
+    constexpr float sector_size = 20000;
+    int x, y, intpart;
+
+    if(sector.length() < 2){
+        return glm::vec2(0,0);
+    }
+
+    // Y axis is complicated
+    if(sector[0] >= char('A') && sector[1] >= char('A')){
+        // Case with two letters
+        char a1 = sector[0];
+        char a2 = sector[1];
+        try{
+            intpart = stoi(sector.substr(2));
+        }
+        catch(const std::exception& e){
+            return glm::vec2(0,0);
+        }
+        if(a1 > char('a')){
+            // Case with two lowercase letters (zz10) counting down towards the North
+            y = (((char('z') - a1) * 26) + (char('z') - a2 + 6)) * -sector_size; // 6 is the offset from F5 to zz5
+        }else{
+            // Case with two uppercase letters (AB20) counting up towards the South
+            y = (((a1 - char('A')) * 26) + (a2 - char('A') + 21)) * sector_size; // 21 is the offset from F5 to AA5
+        }
+    }else{
+        //Case with just one letter (A9/a9 - these are the same sector, as case only matters in the two-letter sectors)
+        char alphaPart = toupper(sector[0]);
+        try{
+            intpart = stoi(sector.substr(1));
+        }catch(const std::exception& e){
+            return glm::vec2(0,0);
+        }
+        y = (alphaPart - char('F')) * sector_size;
+    }
+    // X axis is simple
+    x = (intpart - 5) * sector_size; // 5 is the numeric component of the F5 origin
+    return glm::vec2(x, y);
+}
+
+static void luaSetBanner(string banner)
+{
+    gameGlobalInfo->banner_string = banner;
+}
+
+static float luaGetScenarioTime()
+{
+    return gameGlobalInfo->elapsed_time;
+}
+
 void setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
@@ -259,6 +312,29 @@ void setupScriptEnvironment(sp::script::Environment& env)
     /// (The GM can unpause the game, but the scenario with its update function is destroyed.)
     /// Example: victory("Exuari") -- ends the scenario, Exuari win
     env.setGlobal("victory", &luaVictory);
+    /// string getSectorName(float x, float y)
+    /// Returns the name of the sector containing the given x/y coordinates.
+    /// Coordinates 0,0 are the top-left ("northwest") point of sector F5.
+    /// See also SpaceObject:getSectorName().
+    /// Example: getSectorName(20000,-40000) -- returns "D6"
+    env.setGlobal("getSectorName", &getSectorName);
+    /// glm::vec2 sectorToXY(string sector_name)
+    /// Returns the top-left ("northwest") x/y coordinates for the given sector mame.
+    /// Examples:
+    /// x,y = sectorToXY("A0") -- x = -100000, y = -100000
+    /// x,y = sectorToXY("zz-23") -- x = -560000, y = -120000
+    /// x,y = sectorToXY("BA12") -- x = 140000, y = 940000
+    env.setGlobal("sectorToXY", &luaSectorToXY);
+    /// void setBanner(string banner)
+    /// Displays a scrolling banner containing the given text on the cinematic and top-down views.
+    /// Example: setBanner("You will soon die!")
+    env.setGlobal("setBanner", &luaSetBanner);
+    /// float getScenarioTime()
+    /// Returns the elapsed time of the scenario, in seconds.
+    /// This timer stops when the game is paused.
+    /// Example: getScenarioTime() -- after two minutes, returns 120.0
+    env.setGlobal("getScenarioTime", &luaGetScenarioTime);
+
 
     env.setGlobal("addGMFunction", &luaAddGMFunction);
     env.setGlobal("clearGMFunctions", &luaClearGMFunctions);
