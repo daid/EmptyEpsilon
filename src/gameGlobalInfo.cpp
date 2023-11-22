@@ -240,6 +240,11 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     main_script = std::make_unique<sp::script::Environment>();
     setupScriptEnvironment(*main_script.get());
 
+    LuaConsole::checkResult(main_script->runFile<void>("model_data.lua"));
+    LuaConsole::checkResult(main_script->runFile<void>("factionInfo.lua"));
+    LuaConsole::checkResult(main_script->runFile<void>("shipTemplates.lua"));
+    LuaConsole::checkResult(main_script->runFile<void>("science_db.lua"));
+
     //TODO: int max_cycles = PreferencesManager::get("script_cycle_limit", "0").toInt();
     //TODO: if (max_cycles > 0)
     //TODO:     script->setMaxRunCycles(max_cycles);

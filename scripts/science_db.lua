@@ -203,7 +203,6 @@ function __fillDefaultDatabaseData()
 			if ship_template.docking_port ~= nil then class_name = ship_template.docking_port.dock_class end
 
 			if class_set[class_name] == nil then
-				print(class_name)
 				class_list[#class_list + 1] = class_name
 				class_set[class_name] = true
 			end
