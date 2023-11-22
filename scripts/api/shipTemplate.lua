@@ -8,13 +8,21 @@ function getSpawnablePlayerShips()
     local result = {}
     for i, v in ipairs(__player_ship_templates) do
         if not v.__hidden then
-            result[#result+1] = {v.typename.localized, v.typename.localized, v.__description}
+            result[#result+1] = {v.typename.type_name, v.typename.localized, v.__description}
         end
     end
     return result
 end
+-- Called by the engine when on the server the user wants to spawn a player ship.
+-- Called with the [key] from the list returned in getSpawnablePlayerShips
 function spawnPlayerShipFromUI(key)
-    print("spawnPlayerShipFromUI:", key)
+    for i, v in ipairs(__player_ship_templates) do
+        if not v.__hidden and v.typename.type_name == key then
+            local ship = PlayerSpaceship()
+            ship:setTemplate(key)
+            return ship
+        end
+    end
 end
 
 --- A ShipTemplate defines the base functionality, stats, models, and other details for the ShipTemplateBasedObjects created from it.

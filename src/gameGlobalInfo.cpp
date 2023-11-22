@@ -152,7 +152,7 @@ std::vector<GameGlobalInfo::ShipSpawnInfo> GameGlobalInfo::getSpawnablePlayerShi
 void GameGlobalInfo::spawnPlayerShip(string key)
 {
     if (main_script) {
-        auto res = main_script->call<void>("spawnPlayerShipFromUI", key);
+        auto res = main_script->call<sp::ecs::Entity>("spawnPlayerShipFromUI", key);
         LuaConsole::checkResult(res);
     }
 }
