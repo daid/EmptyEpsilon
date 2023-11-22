@@ -265,8 +265,8 @@ void CommsSystem::selectScriptReply(sp::ecs::Entity player, int index)
         auto callback = transmitter->script_replies[index].callback;
         if (!transmitter->script_environment)
         {
-            //TODO: callback.getScriptObject()->registerObject(player, "comms_source");
-            //TODO: callback.getScriptObject()->registerObject(transmitter->target, "comms_target");
+            callback.setGlobal("comms_source", player);
+            callback.setGlobal("comms_target", transmitter->target);
         }
         transmitter->script_replies.clear();
         transmitter->incomming_message = "?";
@@ -357,8 +357,8 @@ bool CommsSystem::openChannel(sp::ecs::Entity player, sp::ecs::Entity target)
         LuaConsole::checkResult(transmitter->script_environment->runFile<void>(script_name));
     }else if (receiver->callback)
     {
-        //TODO: receiver->callback.getScriptObject()->registerObject(player, "comms_source");
-        //TODO: receiver->callback.getScriptObject()->registerObject(target, "comms_target");
+        receiver->callback.setGlobal("comms_source", player);
+        receiver->callback.setGlobal("comms_target", transmitter->target);
         LuaConsole::checkResult(receiver->callback.call<void>(player, target));
     }
     script_active_entity = {};

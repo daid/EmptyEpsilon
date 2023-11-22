@@ -150,7 +150,14 @@ end
 --- -- On a ship with 2 segments, this sets forward 50, rear 40
 --- stbo:setShields(50,40,30,20)
 function Entity:setShields(...)
-    --TODO
+    if self.shields then
+        for i, level in ipairs({...}) do
+            if i <= #self.shields then
+                self.shields[i].level = level
+            end
+        end
+    end
+    return self
 end
 --- Sets this STBO's maximum shield points per segment, and can also create new segments.
 --- The number of parameters defines the STBO's number of shield segments, to a maximum of 8 segments.
@@ -165,7 +172,14 @@ end
 --- -- On a ship with 2 segments, this does the same, but its current rear shield points become right shield points, and the new rear and left shield segments have 0 points
 --- stbo:setShieldsMax(50,40,30,20)
 function Entity:setShieldsMax(...)
-    --TODO
+    if self.shields then
+        for i, level in ipairs({...}) do
+            if i <= #self.shields then
+                self.shields[i].max = max
+            end
+        end
+    end
+    return self
 end
 --- Sets the radar trace image for this entity.
 --- Valid values are filenames of PNG images relative to the resources/radar directory.
@@ -202,6 +216,7 @@ end
 --- Example: stbo:getSharesEnergyWithDocked(false)
 function Entity:setSharesEnergyWithDocked(allow_energy_share)
     --TODO
+    return self
 end
 --- Returns whether this STBO repairs docked SpaceShips.
 --- Example: stbo:getRepairDocked()
@@ -212,6 +227,7 @@ end
 --- Example: stbo:setRepairDocked(true)
 function Entity:setRepairDocked(allow_repair)
     --TODO
+    return self
 end
 --- Returns whether the STBO restocks scan probes for docked PlayerSpaceships.
 --- Example: stbo:getRestocksScanProbes()
@@ -222,6 +238,7 @@ end
 --- Example: stbo:setRestocksScanProbes(true)
 function Entity:setRestocksScanProbes(allow_restock)
     --TODO
+    return self
 end
 --- Returns whether this STBO restocks missiles for docked CpuShips.
 --- Example: stbo:getRestocksMissilesDocked()
@@ -233,6 +250,7 @@ end
 --- Example: stbo:setRestocksMissilesDocked(true)
 function Entity:setRestocksMissilesDocked(allow_restock)
     --TODO
+    return self
 end
 --- Returns this STBO's long-range radar range.
 --- Example: stbo:getLongRangeRadarRange()
@@ -245,6 +263,7 @@ end
 --- Example: stbo:setLongRangeRadarRange(20000) -- sets the long-range radar range to 20U
 function Entity:setLongRangeRadarRange(range)
     --TODO
+    return self
 end
 --- Returns this STBO's short-range radar range.
 function Entity:getShortRangeRadarRange()
@@ -257,6 +276,7 @@ end
 --- Example: stbo:setShortRangeRadarRange(4000) -- sets the short-range radar range to 4U
 function Entity:setShortRangeRadarRange(range)
     --TODO
+    return self
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:getShieldLevel() with an index value.
@@ -294,21 +314,25 @@ end
 --- Use ShipTemplateBasedObject:setShieldLevel() with an index value.
 function Entity:setRearShield(amount)
     --TODO
+    return self
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldsMax().
 function Entity:setRearShieldMax(amount)
     --TODO
+    return self
 end
 --- Defines a function to call when this STBO takes damage.
 --- Passes the object taking damage and the instigator SpaceObject (or nil) to the function.
 --- Example: stbo:onTakingDamage(function(this_stbo,instigator) print(this_stbo:getCallSign() .. " was damaged by " .. instigator:getCallSign()) end)
 function Entity:onTakingDamage(callback)
     --TODO
+    return self
 end
 --- Defines a function to call when this STBO is destroyed by taking damage.
 --- Passes the object taking damage and the instigator SpaceObject that delivered the destroying damage (or nil) to the function.
 --- Example: stbo:onTakingDamage(function(this_stbo,instigator) print(this_stbo:getCallSign() .. " was destroyed by " .. instigator:getCallSign()) end)
 function Entity:onDestruction(callback)
     --TODO
+    return self
 end
