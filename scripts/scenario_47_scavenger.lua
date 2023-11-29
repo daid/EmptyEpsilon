@@ -1,7 +1,7 @@
 -- Name: Scurvy Scavenger
 -- Description: Stay alive while scavenging treasures. Length: > 2 hours
 ---
---- Version 0
+--- Version 1
 -- Type: Mission
 -- Type: Replayable Mission
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
@@ -365,7 +365,7 @@ function missionSelection()
 		end)
 	end
 	addGMFunction(_("buttonGM", "Mark asteroids"),function()
-		for _,asteroid in pairs(research_asteroids) do
+		for i,asteroid in pairs(research_asteroids) do
 			if asteroid.osmium ~= nil and asteroid.iridium ~= nil then
 				local ax, ay = asteroid:getPosition()
 				local d = 250
@@ -817,6 +817,7 @@ function setPlayer()
 				player:setCallSign(playerShipNamesForStriker[name_index])
 				table.remove(playerShipNamesForStriker,name_index)
 			end
+			player:setImpulseMaxSpeed(60)
 			player.shipScore = 8
 			player.maxCargo = 4
 			player:setFaction(plot_faction)
@@ -4253,7 +4254,7 @@ function populateStationPool()
 	table.insert(station_priority,"Generic")
 	for group, list in pairs(station_pool) do
 		local already_inserted = false
-		for _, previous_group in ipairs(station_priority) do
+		for i, previous_group in ipairs(station_priority) do
 			if group == previous_group then
 				already_inserted = true
 				break
@@ -4291,7 +4292,7 @@ function placeStation(x,y,name,faction,size)
 	else
 		local function Set(list)
 			local set = {}
-			for _, item in ipairs(list) do
+			for i, item in ipairs(list) do
 				set[item] = true
 			end
 			return set
@@ -4497,7 +4498,7 @@ function pickStation(name)
 	local station = nil
 	if name == nil then
 		--default to random in priority order
-		for _, group in ipairs(station_priority) do
+		for i, group in ipairs(station_priority) do
 			if station_pool[group] ~= nil then
 				for station, details in pairs(station_pool[group]) do
 					table.insert(station_selection_list,station)
@@ -4680,7 +4681,7 @@ end
 ------------------------------
 function impulseUpgrade(ship)
 	ship.impulse_upgrade = true
-	ship:setImpulseMaxSpeed(ship:getImpulseMaxSpeed()*2)
+	ship:setImpulseMaxSpeed(90)
 end
 function missileTubeUpgrade(ship)
 	ship.missile_upgrade = true
@@ -4860,7 +4861,7 @@ function handleDockedState()
 	end
 	local missilePresence = 0
 	local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
-	for _, missile_type in ipairs(missile_types) do
+	for i, missile_type in ipairs(missile_types) do
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
@@ -5262,6 +5263,13 @@ function handleDockedState()
 				end)
 				addCommsReply(_("Back"),commsStation)
 			end)
+		else	--all the bad guys need to be shot down before anyone will talk about the contract
+			addCommsReply(_("contract-comms", "Check long distance contract"),function()
+				setCommsMessage(_("contract-comms","No long distance contract here."))
+				addCommsReply(_("contract-comms","I was told there was a long distance contract that started here"),nervousAdministrators)
+				addCommsReply(_("contract-comms","You mean I came all this way for nothing?"),nervousAdministrators)
+				addCommsReply(_("contract-comms","I risked my ship for a contract that does not exist?"),nervousAdministrators)
+			end)
 		end
 	end
 	if comms_target == first_station then
@@ -5611,6 +5619,10 @@ function handleDockedState()
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
+end
+function nervousAdministrators()
+	setCommsMessage(_("contract-comms","I'm sure there will be one soon, but the administrators are nervously watching enemies fly around. I suggest you make a good name for yourself and go kill those enemies."))
+	addCommsReply(_("Back"),commsStation)
 end
 function createTransitionSystem()
 	if transition_station == nil then
@@ -6475,6 +6487,61 @@ function friendlyComms(comms_data)
 	else
 		setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"));
 	end
+	local nearby_enemy_ships = {}
+	local obj_list = comms_target:getObjectsInRange(6000)
+	for i,obj in ipairs(obj_list) do
+		if obj.typeName == "CpuShip" then
+			if obj:isEnemy(comms_target) then
+				local ship = {ship = ship, name = obj:getCallSign()}
+				if obj:isFullyScannedBy(comms_source) then
+					ship.shield = obj:getShieldsFrequency()
+					ship.beam = obj:getBeamFrequency()
+				end
+				table.insert(nearby_enemy_ships,ship)
+			end
+		end
+	end
+	if #nearby_enemy_ships > 0 then
+		--[[	--setBeamFrequency is not available
+		if comms_target:getBeamWeaponRange(0) > 1 then
+			addCommsReply("Set your beam frequency",function()
+				local out = "Enemy ships nearby:"
+				for i, ship in ipairs(nearby_enemy_ships) do
+					if ship.shield ~= nil then
+						out = string.format("%s\n%s: Shields best against beams at %i THz",out,ship.name,ship.shield * 20 + 400)
+					else
+						out = string.format("%s\n%s",out,ship.name)
+					end
+				end
+				setCommsMessage(out)
+				for i=0,20 do
+					addCommsReply(string.format("Set beams to frequency %i THz",i * 20 + 400),function()
+						comms_target:setBeamFrequency(i)
+					end)
+				end
+			end)
+		end
+		--]]
+		addCommsReply(_("shipAssist-comms","Set your shield frequency"),function()
+			local out = _("shipAssist-comms","Enemy ships nearby:")
+			for i, ship in ipairs(nearby_enemy_ships) do
+				if ship.beam ~= nil then
+					out = string.format(_("shipAssist-comms","%s\n%s: Beams penetrate best against shields at %i THz"),out,ship.name,ship.beam * 20 + 400)
+				else
+					out = string.format("%s\n%s",out,ship.name)
+				end
+			end
+			setCommsMessage(out)
+			for i=0,20 do
+				addCommsReply(string.format(_("shipAssist-comms","Set shields to frequency %i THz"),i * 20 + 400),function()
+					comms_target:setShieldsFrequency(i)
+					setCommsMessage(string.format(_("shipAssist-comms","Shields set to %i THz"),i * 20 + 400))
+					addCommsReply(_("Back"), commsShip)
+				end)
+			end
+			addCommsReply(_("Back"), commsShip)
+		end)
+	end
 	addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 		if comms_source:getWaypointCount() == 0 then
 			setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
@@ -6520,7 +6587,7 @@ function friendlyComms(comms_data)
 		setCommsMessage(msg);
 		addCommsReply(_("Back"), commsShip)
 	end)
-	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
+	for i, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
@@ -6534,7 +6601,7 @@ function friendlyComms(comms_data)
 			setCommsMessage(string.format(_("shipAssist-comms", "What command should be given to %s?"),comms_target.fleet))
 			addCommsReply(_("shipAssist-comms", "Report hull and shield status"), function()
 				msg = _("shipAssist-comms", "Fleet status:")
-				for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
+				for i, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 					if fleetShip ~= nil and fleetShip:isValid() then
 						msg = msg .. string.format(_("shipAssist-comms", "\n %s:"), fleetShip:getCallSign())
 						msg = msg .. string.format(_("shipAssist-comms", "\n    Hull: %d%%"), math.floor(fleetShip:getHull() / fleetShip:getHullMax() * 100))
@@ -6558,12 +6625,12 @@ function friendlyComms(comms_data)
 			end)
 			addCommsReply(_("shipAssist-comms", "Report missile status"), function()
 				msg = _("shipAssist-comms", "Fleet missile status:")
-				for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
+				for i, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 					if fleetShip ~= nil and fleetShip:isValid() then
 						msg = msg .. string.format(_("shipAssist-comms", "\n %s:"), fleetShip:getCallSign())
 						local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 						missileMsg = ""
-						for _, missile_type in ipairs(missile_types) do
+						for j, missile_type in ipairs(missile_types) do
 							if fleetShip:getWeaponStorageMax(missile_type) > 0 then
 								missileMsg = missileMsg .. string.format(_("shipAssist-comms", "\n      %s: %d/%d"), missile_type, math.floor(fleetShip:getWeaponStorage(missile_type)), math.floor(fleetShip:getWeaponStorageMax(missile_type)))
 							end
@@ -6577,7 +6644,7 @@ function friendlyComms(comms_data)
 				addCommsReply(_("Back"), commsShip)
 			end)
 			addCommsReply(_("shipAssist-comms", "Assist me"), function()
-				for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
+				for i, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 					if fleetShip ~= nil and fleetShip:isValid() then
 						fleetShip:orderDefendTarget(comms_source)
 					end
@@ -6593,7 +6660,7 @@ function friendlyComms(comms_data)
 					setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 					for n=1,comms_source:getWaypointCount() do
 						addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
-							for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
+							for i, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 								if fleetShip ~= nil and fleetShip:isValid() then
 									fleetShip:orderDefendLocation(comms_source:getWaypoint(n))
 								end
@@ -7144,7 +7211,7 @@ function addShipToDatabase(base_db,modified_db,ship,description,tube_directions,
 			end
 		end
 		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
-		for _, missile_type in ipairs(missile_types) do
+		for i, missile_type in ipairs(missile_types) do
 			local max_storage = ship:getWeaponStorageMax(missile_type)
 			if max_storage > 0 then
 				modified_db:setKeyValue(string.format(_("scienceDB", "Storage %s"),missile_type),string.format("%i",max_storage))
@@ -7206,7 +7273,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, perimeter_min, per
 		if perimeter_max ~= nil then
 			perimeter_deploy = random(perimeter_min,perimeter_max)
 		end
-		for _, enemy in pairs(enemyList) do
+		for i, enemy in pairs(enemyList) do
 			local dex, dey = vectorFromAngle(enemy_angle,perimeter_deploy)
 			enemy:setPosition(xOrigin+dex, yOrigin+dey)
 			if spawn_enemy_diagnostic then print(string.format("deploy coordinates: x: %.1f, y: %.f, angle: %.1f",xOrigin+dex,yOrigin+dey,enemy_angle)) end
@@ -7576,7 +7643,7 @@ end
 function workingTransports(delta)
 	transportCheckDelayTimer = transportCheckDelayTimer - delta
 	if transportCheckDelayTimer < 0 then
-		for _, wt in pairs(transports_around_independent_trio) do
+		for i, wt in pairs(transports_around_independent_trio) do
 			if wt ~= nil and wt:isValid() then
 				if wt.targetStart ~= nil and wt.targetStart:isValid() then
 					if wt:isDocked(wt.targetStart) then
@@ -7641,7 +7708,7 @@ function exuariHarassment(delta)
 	if plot1_fleet_spawned then
 		if exuari_harass_diagnostic then print("fleet spawned") end
 		local plot1_fleet_count = 0
-		for _, enemy in pairs(plot1_fleet) do
+		for i, enemy in pairs(plot1_fleet) do
 			if enemy ~= nil and enemy:isValid() then
 				plot1_fleet_count = plot1_fleet_count + 1
 				break
@@ -7700,7 +7767,7 @@ function exuariHarassment(delta)
 			efy = efy + spy
 		end
 		plot1_fleet = spawnEnemies(efx,efy,plot1_danger,"Exuari")
-		for _, enemy in pairs(plot1_fleet) do
+		for i, enemy in pairs(plot1_fleet) do
 			enemy:orderFlyTowards(spx,spy)
 		end
 		plot1_fleet_spawned = true
@@ -7708,7 +7775,7 @@ function exuariHarassment(delta)
 	end
 	if plot1_independent_fleet_spawned then
 		plot1_fleet_count = 0
-		for _, enemy in pairs(plot1_independent_fleet) do
+		for i, enemy in pairs(plot1_independent_fleet) do
 			if enemy ~= nil and enemy:isValid() then
 				plot1_fleet_count = plot1_fleet_count + 1
 			end
@@ -7721,7 +7788,7 @@ function exuariHarassment(delta)
 			if (plot1_danger % 2) == 0 then
 				spx, spy = first_station:getPosition()
 				plot1_independent_fleet = spawnEnemies(spx,spy,plot1_danger,"Independent",2000)
-				for _, enemy in pairs(plot1_independent_fleet) do
+				for i, enemy in pairs(plot1_independent_fleet) do
 					enemy:orderDefendTarget(first_station)
 					enemy:setScannedByFaction("Independent",true)
 				end
@@ -7732,7 +7799,7 @@ function exuariHarassment(delta)
 	if plot1_defensive_fleet_spawned then
 		if exuari_harass_diagnostic then print("defensive fleet spawned") end
 		plot1_fleet_count = 0
-		for _, enemy in pairs(plot1_defensive_fleet) do
+		for i, enemy in pairs(plot1_defensive_fleet) do
 			if enemy ~= nil and enemy:isValid() then
 				plot1_fleet_count = plot1_fleet_count + 1
 				local current_order = enemy:getOrder()
@@ -7741,7 +7808,7 @@ function exuariHarassment(delta)
 					if enemy:getWeaponTubeCount() > 0 then
 						local low_on_missiles = false
 						local zero_missiles = true
-						for _, missile_type in ipairs(missile_types) do
+						for j, missile_type in ipairs(missile_types) do
 							local max_missile = enemy:getWeaponStorageMax(missile_type)
 							if max_missile > 0 then
 								local current_count = enemy:getWeaponStorage(missile_type)
@@ -7755,7 +7822,7 @@ function exuariHarassment(delta)
 						end
 						local evaluate_objects = enemy:getObjectsInRange(7500)
 						local enemy_in_range = false
-						for _, obj in pairs(evaluate_objects) do
+						for j, obj in pairs(evaluate_objects) do
 							if obj.typeName == "PlayerSpaceship" then
 								if obj:getFactionId() ~= enemy:getFactionId() then
 									enemy_in_range = true
@@ -7768,7 +7835,7 @@ function exuariHarassment(delta)
 						end
 						evaluate_objects = enemy:getObjectsInRange(5000)
 						enemy_in_range = false
-						for _, obj in pairs(evaluate_objects) do
+						for j, obj in pairs(evaluate_objects) do
 							if obj.typeName == "PlayerSpaceship" then
 								if obj:getFactionId() ~= enemy:getFactionId() then
 									enemy_in_range = true
@@ -7784,7 +7851,7 @@ function exuariHarassment(delta)
 				if current_order == "Dock" then
 					evaluate_objects = enemy:getObjectsInRange(7500)
 					enemy_in_range = false
-					for _, obj in pairs(evaluate_objects) do
+					for j, obj in pairs(evaluate_objects) do
 						if obj.typeName == "PlayerSpaceship" then
 							if obj:getFactionId() ~= enemy:getFactionId() then
 								enemy_in_range = true
@@ -7797,7 +7864,7 @@ function exuariHarassment(delta)
 							enemy:orderDefendTarget(exuari_harassing_station)
 						else
 							if enemy:getWeaponTubeCount() > 0 then
-								for _, missile_type in ipairs(missile_types) do
+								for k, missile_type in ipairs(missile_types) do
 									if enemy:getWeaponStorage(missile_type) > 0 then
 										enemy:orderDefendTarget(exuari_harassing_station)
 										break
@@ -7807,7 +7874,7 @@ function exuariHarassment(delta)
 						end
 					else
 						local full_on_missiles = true
-						for _, missile_type in ipairs(missile_types) do
+						for j, missile_type in ipairs(missile_types) do
 							local max_missile = enemy:getWeaponStorageMax(missile_type)
 							if max_missile > 0 then
 								if enemy:getWeaponStorage(missile_type) < max_missile then
@@ -7841,7 +7908,7 @@ function exuariHarassment(delta)
 			spx, spy = exuari_harassing_station:getPosition()
 			plot1_defensive_fleet = spawnEnemies(spx,spy,1,"Exuari",2000)
 			if exuari_harass_diagnostic then print("back from spawnEnemies function") end
-			for _, enemy in pairs(plot1_defensive_fleet) do
+			for i, enemy in pairs(plot1_defensive_fleet) do
 				enemy:orderDefendTarget(exuari_harassing_station)
 			end
 			if exuari_harass_diagnostic then print("Orders given to defensive fleet") end
@@ -7850,14 +7917,14 @@ function exuariHarassment(delta)
 	end
 	if plot1_last_defense then
 		if exuari_harassing_station ~= nil and exuari_harassing_station:isValid() then
-			for _, enemy in pairs(plot1_last_defense_fleet) do
+			for i, enemy in pairs(plot1_last_defense_fleet) do
 				if enemy ~= nil and enemy:isValid() then
 					currrent_order = enemy:getOrder()
 					if current_order == "Defend Target" then
 						if enemy:getWeaponTubeCount() > 0 then
 							low_on_missiles = false
 							zero_missiles = true
-							for _, missile_type in ipairs(missile_types) do
+							for j, missile_type in ipairs(missile_types) do
 								max_missile = enemy:getWeaponStorageMax(missile_type)
 								if max_missile > 0 then
 									current_count = enemy:getWeaponStorage(missile_type)
@@ -7871,7 +7938,7 @@ function exuariHarassment(delta)
 							end
 							evaluate_objects = enemy:getObjectsInRange(7500)
 							enemy_in_range = false
-							for _, obj in pairs(evaluate_objects) do
+							for j, obj in pairs(evaluate_objects) do
 								if obj.typeName == "PlayerSpaceship" then
 									if obj:getFactionId() ~= enemy:getFactionId() then
 										enemy_in_range = true
@@ -7884,7 +7951,7 @@ function exuariHarassment(delta)
 							end
 							evaluate_objects = enemy:getObjectsInRange(5000)
 							enemy_in_range = false
-							for _, obj in pairs(evaluate_objects) do
+							for j, obj in pairs(evaluate_objects) do
 								if obj.typeName == "PlayerSpaceship" then
 									if obj:getFactionId() ~= enemy:getFactionId() then
 										enemy_in_range = true
@@ -7900,7 +7967,7 @@ function exuariHarassment(delta)
 					if current_order == "Dock" then
 						evaluate_objects = enemy:getObjectsInRange(7500)
 						enemy_in_range = false
-						for _, obj in pairs(evaluate_objects) do
+						for j, obj in pairs(evaluate_objects) do
 							if obj.typeName == "PlayerSpaceship" then
 								if obj:getFactionId() ~= enemy:getFactionId() then
 									enemy_in_range = true
@@ -7913,7 +7980,7 @@ function exuariHarassment(delta)
 								enemy:orderDefendTarget(exuari_harassing_station)
 							else
 								if enemy:getWeaponTubeCount() > 0 then
-									for _, missile_type in ipairs(missile_types) do
+									for j, missile_type in ipairs(missile_types) do
 										if enemy:getWeaponStorage(missile_type) > 0 then
 											enemy:orderDefendTarget(exuari_harassing_station)
 											break
@@ -7923,7 +7990,7 @@ function exuariHarassment(delta)
 							end
 						else
 							full_on_missiles = true
-							for _, missile_type in ipairs(missile_types) do
+							for j, missile_type in ipairs(missile_types) do
 								local max_missile = enemy:getWeaponStorageMax(missile_type)
 								if max_missile > 0 then
 									if enemy:getWeaponStorage(missile_type) < max_missile then
@@ -7954,7 +8021,7 @@ function exuariHarassment(delta)
 					player:commandSetShields(true)
 				end
 				local ship_call_signs = ""
-				for _, enemy in ipairs(plot1_last_defense_fleet) do
+				for i, enemy in ipairs(plot1_last_defense_fleet) do
 					enemy:orderDefendTarget(exuari_harassing_station)
 					if ship_call_signs == "" then
 						ship_call_signs = enemy:getCallSign()
@@ -7979,17 +8046,17 @@ function transitionContract(delta)
 		if distance(p,transition_station) <= 45000 then
 			local px, py = p:getPosition()
 			transition_station.in_fleet = spawnEnemies((sx+px)/2,(sy+py)/2,2,"Exuari")
-			for _,enemy in ipairs(transition_station.in_fleet) do
+			for i,enemy in ipairs(transition_station.in_fleet) do
 				enemy:orderFlyTowards(sx,sy)
 			end
 			transition_station.out_fleet = spawnEnemies((sx+px)/2,(sy+py)/2,2,"Exuari")
-			for _,enemy in ipairs(transition_station.out_fleet) do
+			for i,enemy in ipairs(transition_station.out_fleet) do
 				enemy:orderFlyTowards(px,py)
 			end
 		end
 	else
 		local fleet_count = 0
-		for _,enemy in pairs(transition_station.out_fleet) do
+		for i,enemy in pairs(transition_station.out_fleet) do
 			if enemy ~= nil and enemy:isValid() then
 				fleet_count = fleet_count + 1
 				if string.find(enemy:getOrder(),"Defend") then
@@ -7997,7 +8064,7 @@ function transitionContract(delta)
 				end
 			end
 		end
-		for _,enemy in pairs(transition_station.in_fleet) do
+		for i,enemy in pairs(transition_station.in_fleet) do
 			if enemy ~= nil and enemy:isValid() then
 				fleet_count = fleet_count + 1
 			end
@@ -8065,26 +8132,26 @@ function longDistanceCargo(delta)
 				local sdx, sdy = supply_depot_station:getPosition()
 				local spx, spy = vectorFromAngle(random(0,360),random(15000,25000) - (difficulty*3000))
 				local enemy_fleet = spawnEnemies(sdx+spx,sdy+spy,3,"Exuari")
-				for _, enemy in ipairs(enemy_fleet) do
+				for i, enemy in ipairs(enemy_fleet) do
 					enemy:orderAttack(supply_depot_station)
 					table.insert(supply_sabotage_fleet,enemy)
 				end
 				spx, spy = vectorFromAngle(random(0,360),random(15000,25000) - (difficulty*3000))
 				enemy_fleet = spawnEnemies(sdx+spx,sdy+spy,3,"Exuari")
-				for _, enemy in ipairs(enemy_fleet) do
+				for i, enemy in ipairs(enemy_fleet) do
 					enemy:orderAttack(p)
 					table.insert(supply_sabotage_fleet,enemy)
 				end
 				spx, spy = vectorFromAngle(random(0,360),random(15000,25000) - (difficulty*3000))
 				enemy_fleet = spawnEnemies(sdx+spx,sdy+spy,3,"Exuari")
-				for _, enemy in ipairs(enemy_fleet) do
+				for i, enemy in ipairs(enemy_fleet) do
 					enemy:orderRoaming()
 					table.insert(supply_sabotage_fleet,enemy)
 				end
 			end
 		else
 			local fleet_count = 0
-			for _,enemy in pairs(supply_sabotage_fleet) do
+			for i,enemy in pairs(supply_sabotage_fleet) do
 				if enemy ~= nil and enemy:isValid() then
 					fleet_count = fleet_count + 1
 				end
@@ -8123,12 +8190,12 @@ function opportunisticPirates(delta)
 		end
 		local gpx, gpy = vectorFromAngle(random(0,360),random(10000,30000))
 		greedy_pirate_fleet = spawnEnemies(ptx+gpx,pty+gpy,greedy_pirate_danger,"Exuari")
-		for _, enemy in ipairs(greedy_pirate_fleet) do
+		for i, enemy in ipairs(greedy_pirate_fleet) do
 			enemy:orderFlyTowards(ptx,pty)
 		end
 	 else
 		local pirate_count = 0
-		for _, enemy in ipairs(greedy_pirate_fleet) do
+		for i, enemy in ipairs(greedy_pirate_fleet) do
 			if enemy ~= nil and enemy:isValid() then
 				pirate_count = pirate_count + 1
 				break
@@ -8152,7 +8219,7 @@ function kraylorDiversionarySabotage(delta)
 	end
 	if diversionary_sabotage_fleet == nil then
 		diversionary_sabotage_fleet = spawnEnemies(sdx+rvx,sdy+rvy,kraylor_diversion_danger,"Kraylor")
-		for _, enemy in ipairs(diversionary_sabotage_fleet) do
+		for i, enemy in ipairs(diversionary_sabotage_fleet) do
 			rvx, rvy = vectorFromAngle(random(0,360),random(10000,20000))
 			enemy:setPosition(sdx+rvx,sdy+rvy)
 			if supply_depot_station ~= nil and supply_depot_station:isValid() then
@@ -8175,7 +8242,7 @@ function kraylorDiversionarySabotage(delta)
 			end
 			local enemy_count = 0
 			local enemy_close_to_supply = 0
-			for _, enemy in pairs(diversionary_sabotage_fleet) do
+			for i, enemy in pairs(diversionary_sabotage_fleet) do
 				if enemy ~= nil and enemy:isValid() then
 					enemy_count = enemy_count + 1
 					if supply_depot_station ~= nil and supply_depot_station:isValid() then
@@ -8201,7 +8268,7 @@ function kraylorDiversionarySabotage(delta)
 			if enemy_count < 1 then
 				kraylor_diversion_danger = kraylor_diversion_danger + 1
 				diversionary_sabotage_fleet = spawnEnemies(sdx+rvx,sdy+rvy,kraylor_diversion_danger,"Kraylor")
-				for _, enemy in ipairs(diversionary_sabotage_fleet) do
+				for i, enemy in ipairs(diversionary_sabotage_fleet) do
 					rvx, rvy = vectorFromAngle(random(0,360),random(10000,20000))
 					enemy:setPosition(sdx+rvx,sdy+rvy)
 					if supply_depot_station ~= nil and supply_depot_station:isValid() then
@@ -8219,7 +8286,7 @@ function kraylorDiversionarySabotage(delta)
 				if enemy_close_to_supply < 1 then
 					kraylor_diversion_danger = kraylor_diversion_danger + 1
 					local kraylor_fleet = spawnEnemies(sdx+spx,sdy+spy,kraylor_diversion_danger,"Kraylor")
-					for _, enemy in ipairs(kraylor_fleet) do
+					for i, enemy in ipairs(kraylor_fleet) do
 						rvx, rvy = vectorFromAngle(random(0,360),random(10000,20000))
 						enemy:setPosition(sdx+rvx,sdy+rvy)
 						local whim = math.random(1,3)
@@ -8244,7 +8311,7 @@ function kraylorDiversionarySabotage(delta)
 					kraylor_defense_fleet = spawnEnemies(sdx+rvx,sdy+rvy,kraylor_diversion_danger-2,"Human Navy")
 					angle_increment = 360/#kraylor_defense_fleet
 					angle = random(0,360)
-					for _, ship in ipairs(kraylor_defense_fleet) do
+					for i, ship in ipairs(kraylor_defense_fleet) do
 						if supply_depot_station ~= nil and supply_depot_station:isValid() then
 							rvx, rvy = vectorFromAngle(angle,1200)
 							ship:setPosition(sdx+rvx,sdy+rvy)
@@ -8258,7 +8325,7 @@ function kraylorDiversionarySabotage(delta)
 					end
 				else
 					local defensive_ships = 0
-					for _, ship in pairs(kraylor_defense_fleet) do
+					for i, ship in pairs(kraylor_defense_fleet) do
 						if ship ~= nil and ship:isValid() then
 							defensive_ships = defensive_ships + 1
 						end
@@ -8267,7 +8334,7 @@ function kraylorDiversionarySabotage(delta)
 						local more_friendlies = spawnEnemies(sdx+rvx,sdy+rvy,kraylor_diversion_danger-2,"Human Navy")
 						angle_increment = 360/#more_friendlies
 						angle = random(0,360)
-						for _, ship in ipairs(more_friendlies) do
+						for i, ship in ipairs(more_friendlies) do
 							if supply_depot_station ~= nil and supply_depot_station:isValid() then
 								rvx, rvy = vectorFromAngle(angle,1200)
 								ship:setPosition(sdx+rvx,sdy+rvy)
@@ -8291,6 +8358,10 @@ function kraylorDiversionarySabotage(delta)
 	end
 end
 function kraylorPlanetBuster(delta)
+	local sdx, sdy = planet_secondus_moon:getPosition()
+	if supply_depot_station ~= nil and supply_depot_station:isValid() then
+		local sdx, sdy = supply_depot_station:getPosition()
+	end
 	kraylor_planet_buster_timer = kraylor_planet_buster_timer - delta
 	if kraylor_planet_buster_timer < 0 then
 		kraylor_planet_buster_timer_interval = 60
@@ -8307,7 +8378,7 @@ function kraylorPlanetBuster(delta)
 		end
 		if planetary_attack_fleet == nil then
 			planetary_attack_fleet = spawnEnemies(plx+rvx,ply+rvy,kraylor_planetary_danger,"Kraylor")
-			for _, enemy in ipairs(planetary_attack_fleet) do
+			for i, enemy in ipairs(planetary_attack_fleet) do
 				rvx, rvy = vectorFromAngle(random(0,360),random(10000,20000))
 				enemy:setPosition(plx+rvx,ply+rvy)
 				if planet_secondus_moon ~= nil then
@@ -8319,10 +8390,10 @@ function kraylorPlanetBuster(delta)
 		else
 			local enemy_count = 0
 			local enemy_close_to_planet_count = 0
-			for _, enemy in pairs(planetary_attack_fleet) do
+			for i, enemy in pairs(planetary_attack_fleet) do
 				if enemy ~= nil and enemy:isValid() then
 					enemy_count = enemy_count + 1
-					if planet_secondus_moon ~= nil then
+					if planet_secondus_moon ~= nil and planet_secondus_moon:isValid() then
 						if distance(enemy,planet_secondus_moon) < (1500 + secondus_moon_radius) then
 							local explosion_x, explosion_y = planet_secondus_moon:getPosition()
 							local moon_name = planet_secondus_moon:getCallSign()
@@ -8340,7 +8411,7 @@ function kraylorPlanetBuster(delta)
 			if enemy_count < 1 then
 				kraylor_planetary_danger = kraylor_planetary_danger + 1
 				planetary_attack_fleet = spawnEnemies(sdx+rvx,sdy+rvy,kraylor_planetary_danger,"Kraylor")
-				for _, enemy in ipairs(planetary_attack_fleet) do
+				for i, enemy in ipairs(planetary_attack_fleet) do
 					rvx, rvy = vectorFromAngle(random(0,360),random(10000,20000))
 					enemy:setPosition(plx+rvx,plx+rvy)
 					if planet_secondus_moon ~= nil then
@@ -8387,30 +8458,30 @@ function contractTarget(delta)
 		end
 		local ev_fleet = spawnEnemies(evx,evy,exuari_vengance_danger,"Exuari")
 		local fsx, fsy = first_station:getPosition()
-		for _, enemy in ipairs(ev_fleet) do
+		for i, enemy in ipairs(ev_fleet) do
 			enemy:orderFlyTowards(fsx,fsy)
 		end
 		local evs_x, evs_y = vectorFromAngle((ev_angle+90)%360,8000)
 		ev_fleet = spawnEnemies(evx+evs_x,evy+evs_y,exuari_vengance_danger,"Exuari")
 		local evd_x, evd_y = vectorFromAngle(ev_angle,40000)
-		for _, enemy in ipairs(ev_fleet) do
+		for i, enemy in ipairs(ev_fleet) do
 			enemy:orderFlyTowards(evx+evs_x+evd_x,evy+evs_y+evd_y)
 		end
 		evs_x, evs_y = vectorFromAngle((ev_angle+270)%360,8000)
 		ev_fleet = spawnEnemies(evx+evs_x,evy+evs_y,exuari_vengance_danger,"Exuari")
-		for _, enemy in ipairs(ev_fleet) do
+		for i, enemy in ipairs(ev_fleet) do
 			enemy:orderFlyTowards(evx+evs_x+evd_x,evy+evs_y+evd_y)
 		end
 		evs_x, evs_y = vectorFromAngle((ev_angle+270)%360,16000)
 		local is_x, is_y = independent_station[2]:getPosition()
 		ev_fleet = spawnEnemies(evx+evs_x,evy+evs_y,exuari_vengance_danger,"Exuari")
-		for _, enemy in ipairs(ev_fleet) do
+		for i, enemy in ipairs(ev_fleet) do
 			enemy:orderFlyTowards(is_x, is_y)
 		end
 		evs_x, evs_y = vectorFromAngle((ev_angle+90)%360,16000)
 		is_x, is_y = independent_station[3]:getPosition()
 		ev_fleet = spawnEnemies(evx+evs_x,evy+evs_y,exuari_vengance_danger,"Exuari")
-		for _, enemy in ipairs(ev_fleet) do
+		for i, enemy in ipairs(ev_fleet) do
 			enemy:orderFlyTowards(is_x, is_y)
 		end
 		exuari_vengance_fleet = 600 - (difficulty*100)
@@ -8420,7 +8491,7 @@ function contractTarget(delta)
 			exuari_vengance_fleet = nil
 		end
 	end
-	for _, target_station in pairs(contract_station) do
+	for i, target_station in pairs(contract_station) do
 		if target_station ~= nil and target_station:isValid() then
 			if target_station.delay_timer == nil then
 				target_station.delay_timer = delta + random(5,30)
@@ -8436,7 +8507,7 @@ function contractTarget(delta)
 					end
 				else
 					local fleet_count = 0
-					for _, enemy in pairs(target_station.harass_fleet) do
+					for j, enemy in pairs(target_station.harass_fleet) do
 						if enemy ~= nil and enemy:isValid() then
 							fleet_count = fleet_count + 1
 						end
@@ -8475,7 +8546,7 @@ function contractTarget(delta)
 					end
 				end
 				local contract_remains = false
-				for _, station in pairs(independent_station) do
+				for i, station in pairs(independent_station) do
 					if station:isValid() then
 						if station.comms_data.contract ~= nil then
 							for contract, details in pairs(station.comms_data.contract) do
@@ -8599,7 +8670,7 @@ function highwaymenPounce(delta)
 		local px, py = player:getPosition()
 		local angle_increment = 360/#highwaymen_fleet
 		local angle = random(0,360)
-		for _,enemy in ipairs(highwaymen_fleet) do
+		for i,enemy in ipairs(highwaymen_fleet) do
 			local eax, eay = vectorFromAngle(angle,random(7200,7900) - (difficulty * 500))
 			enemy:setPosition(px+eax,py+eay):orderAttack(player)
 			angle = (angle + angle_increment) % 360
@@ -8614,7 +8685,7 @@ function highwaymenPounce(delta)
 end
 function highwaymenAftermath(delta)
 	local enemy_count = 0
-	for _,enemy in pairs(highwaymen_fleet) do
+	for i,enemy in pairs(highwaymen_fleet) do
 		if enemy ~= nil and enemy:isValid() then
 			enemy_count = enemy_count + 1
 			break
@@ -8628,11 +8699,11 @@ function highwaymenAftermath(delta)
 			highway_timer = delta + 200
 			local etx, ety = highwaymen_jammer:getPosition()
 			highwaymen_fleet = spawnEnemies(etx, ety,4,"Exuari")
-			for _,enemy in ipairs(highwaymen_fleet) do
+			for i,enemy in ipairs(highwaymen_fleet) do
 				enemy:orderAttack(player)
 			end
 			local temp_fleet = spawnEnemies(etx, ety,4,"Exuari")
-			for _,enemy in ipairs(temp_fleet) do
+			for i,enemy in ipairs(temp_fleet) do
 				table.insert(highwaymen_fleet,enemy)
 				enemy:orderRoaming()
 			end
@@ -8644,7 +8715,7 @@ function highwaymenReset(delta)
 	if highway_timer < 0 then
 		if highwaymen_jammer ~= nil then
 			local enemy_count = 0
-			for _,enemy in pairs(highwaymen_fleet) do
+			for i,enemy in pairs(highwaymen_fleet) do
 				if enemy ~= nil and enemy:isValid() then
 					enemy_count = enemy_count + 1
 					break
