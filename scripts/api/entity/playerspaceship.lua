@@ -18,18 +18,21 @@ end
 --- Waypoints are 1-indexed.
 --- Example: x,y = player:getWaypoint(1)
 function Entity:getWaypoint(index)
-    --TODO
+    if self.long_range_radar and index > 0 and index <= #self.long_range_radar then return self.long_range_radar[index] end
+    return 0, 0
 end
 --- Returns the total number of active waypoints owned by this PlayerSpaceship.
 --- Example: player:getWaypointCount()
 function Entity:getWaypointCount()
-    --TODO
+    if self.long_range_radar then return #self.long_range_radar end
+    return 0
 end
 --- Returns this PlayerSpaceship's EAlertLevel.
 --- Returns "Normal", "YELLOW ALERT", "RED ALERT", which differ from the valid values for PlayerSpaceship:commandSetAlertLevel().
 --- Example: player:getAlertLevel()
 function Entity:getAlertLevel()
-    --TODO
+    if self.player_control then return self.player_control.alert_level end
+    return "Normal"
 end
 --- Defines whether this PlayerSpaceship's shields are raised (true) or lowered (false).
 --- Compare to CpuShips, whose shields are always active.
@@ -61,6 +64,7 @@ end
 --- Example: player:hasPlayerAtPosition("helms")
 function Entity:hasPlayerAtPosition(station)
     --TODO
+    return false
 end
 
 --- Returns whether this PlayerSpaceship's comms are not in use.
@@ -174,22 +178,26 @@ end
 --- Returns how much energy is consumed per second by this PlayerSpaceship's shields while active.
 --- Example: player:getEnergyShieldUsePerSecond()
 function Entity:getEnergyShieldUsePerSecond()
-    --TODO
+    if self.shields then return self.shields.energy_use_per_second end
+    return 0.0
 end
 --- Sets how much energy is consumed per second by this PlayerSpaceship's shields while active.
 --- Example: player:setEnergyShieldUsePerSecond(1.5)
 function Entity:setEnergyShieldUsePerSecond(amount)
-    --TODO
+    if self.shields then self.shields.energy_use_per_second = amount end
+    return self
 end
 --- Returns how much energy is consumed per second by this PlayerSpaceship's warp drive while in use.
 --- Example: player:getEnergyWarpPerSecond()
 function Entity:getEnergyWarpPerSecond()
-    --TODO
+    if self.warp_drive then return self.warp_drive.energy_warp_per_second end
+    return 0.0
 end
 --- Sets how much energy is consumed per second by this PlayerSpaceship's warp drive while in use.
 --- Example: player:setEnergyWarpPerSecond(1.7)
 function Entity:setEnergyWarpPerSecond(amount)
-    --TODO
+    if self.warp_drive then self.warp_drive.energy_warp_per_second = amount end
+    return self
 end
 
 --- Sets the maximum amount of coolant available to engineering on this PlayerSpaceship.
@@ -197,37 +205,43 @@ end
 --- Valid values are 0 or any positive number.
 --- If the new limit is less than the coolant already distributed, this automatically reduces distribution percentages.
 --- Example: player:setMaxCoolant(5) -- halves the amount of available coolant
-function Entity:setMaxCoolant()
-    --TODO
+function Entity:setMaxCoolant(amount)
+    if self.coolant then self.coolant.max = amount end
+    return self
 end
 --- Returns the maximum amount of coolant available to engineering on this PlayerSpaceship.
 --- Example: player:getMaxCoolant()
 function Entity:getMaxCoolant()
-    --TODO
+    if self.coolant then return self.coolant.max end
+    return 0.0
 end
 
 --- Sets the number of scan probes stocked by this PlayerSpaceship.
 --- Values are limited from 0 to the scan probe count max. Negative or excess values are capped to the limits.
 --- Example: player:setScanProbeCount(20) -- sets the ship's scan probes to either 20 or the max limit, whichever is fewer
 function Entity:setScanProbeCount(amount)
-    --TODO
+    if self.scan_probe_launcher then self.scan_probe_launcher.stock = amount end
+    return self
 end
 --- Returns the number of scan probes stocked by this PlayerSpaceship.
 --- Example: player:getScanProbeCount()
 function Entity:getScanProbeCount()
-    --TODO
+    if self.scan_probe_launcher then return self.scan_probe_launcher.stock end
+    return 0
 end
 --- Sets this PlayerSpaceship's capacity for scan probes.
 --- Valid values are 0 or any positive number.
 --- If the new limit is less than the current scan probe stock, this automatically reduces the stock.
 --- Example: player:setMaxScanProbeCount(30) -- sets the ship's scan probe capacity to 30
 function Entity:setMaxScanProbeCount(amount)
-    --TODO
+    if self.scan_probe_launcher then self.scan_probe_launcher.max = amount end
+    return self
 end
 --- Returns this PlayerSpaceship's capacity for scan probes.
 --- Example: player:getMaxScanProbeCount()
 function Entity:getMaxScanProbeCount()
-    --TODO
+    if self.scan_probe_launcher then return self.scan_probe_launcher.max end
+    return 0
 end
 
 --- Adds a custom interactive button with the given reference name to the given crew position screen.

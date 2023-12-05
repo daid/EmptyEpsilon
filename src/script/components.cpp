@@ -500,9 +500,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(ScanProbeLauncher, recharge);
     BIND_MEMBER(ScanProbeLauncher, charge_time);
     sp::script::ComponentHandler<PlayerControl>::name("player_control");
-    sp::script::ComponentHandler<HackingDevice>::name("hacking_device");
-    //TODO: BIND_MEMBER(PlayerControl, alert_level);
+    BIND_MEMBER(PlayerControl, alert_level);
     BIND_MEMBER(PlayerControl, control_code);
+    sp::script::ComponentHandler<HackingDevice>::name("hacking_device");
 
     sp::script::ComponentHandler<Faction>::name("faction");
     BIND_MEMBER(Faction, entity);

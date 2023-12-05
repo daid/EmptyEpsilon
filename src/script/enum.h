@@ -8,6 +8,7 @@
 #include "components/scanning.h"
 #include "components/docking.h"
 #include "components/comms.h"
+#include "components/player.h"
 #include "missileWeaponData.h"
 
 
@@ -304,4 +305,27 @@ template<> struct Convert<CommsTransmitter::State> {
         return CommsTransmitter::State::Inactive;
     }
 };
+template<> struct Convert<AlertLevel> {
+    static int toLua(lua_State* L, AlertLevel value) {
+        switch(value) {
+        case AlertLevel::Normal: lua_pushstring(L, "Normal"); break;
+        case AlertLevel::YellowAlert: lua_pushstring(L, "YELLOW ALERT"); break;
+        case AlertLevel::RedAlert: lua_pushstring(L, "RED ALERT"); break;
+        default: lua_pushstring(L, "none"); break;
+        }
+        return 1;
+    }
+    static AlertLevel fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "normal")
+            return AlertLevel::Normal;
+        else if (str == "yellow alert")
+            return AlertLevel::YellowAlert;
+        else if (str == "red alert")
+            return AlertLevel::RedAlert;
+        luaL_error(L, "Unknown AlertLevel: %s", str.c_str());
+        return AlertLevel::Normal;
+    }
+};
+
 }
