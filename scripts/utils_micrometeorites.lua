@@ -1,3 +1,4 @@
+
 -- Utils for micrometeorite point defense
 -----------
 -- Usage -- 
@@ -24,8 +25,8 @@ function MicroMeteorites:init(player_ship)
 	player_ship.micrometeorite_phase = 1
 
 	player_ship:addCustomInfo("Weapons","point_defense_info",_("MicroMeteorite Defense"),10)
-	player_ship:addCustomButton("Weapons","point_defense_btn_left",_("« Left"),function () MicroMeteorites:fired(1,player_ship) end,11)
-	player_ship:addCustomButton("Weapons","point_defense_btn_right",_("» Right"),function () MicroMeteorites:fired(2,player_ship) end,12)
+	player_ship:addCustomButton("Weapons","point_defense_btn_left","« ".._("Left"),function () MicroMeteorites:fired(1,player_ship) end,11)
+	player_ship:addCustomButton("Weapons","point_defense_btn_right","» ".._("Right"),function () MicroMeteorites:fired(2,player_ship) end,12)
 end
 
 function MicroMeteorites:remove(player_ship)
@@ -36,7 +37,7 @@ function MicroMeteorites:remove(player_ship)
 end
 
 
-function MicroMeteorites:update(delta,player_ship) 
+function MicroMeteorites:update(delta,player_ship)
 	if player_ship.micrometeorite_phase == 1 then
 		MicroMeteorites:timer(delta,player_ship)
 	end
@@ -44,6 +45,7 @@ function MicroMeteorites:update(delta,player_ship)
 		MicroMeteorites:incoming(delta,player_ship)
 	end	
 end
+
 
 function MicroMeteorites:timer(delta,player_ship)
     if (not player_ship:getShieldsActive()) and player_ship:hasPlayerAtPosition("Weapons") then -- do not bother the player when shields are up or no weapons officer is around (tactical and single pilot are busy enough)
@@ -63,7 +65,6 @@ function MicroMeteorites:incoming(delta,player_ship)
     
     if player_ship.micrometeorite_impact_time < player_ship.micrometeorite_impact_countdown-1 then
         player_ship.micrometeorite_impact_countdown=player_ship.micrometeorite_impact_countdown-1
-        print (player_ship.micrometeorite_impact_countdown)
         if player_ship.micrometeorite_direction==1 then
             player_ship:addCustomButton("Weapons","point_defense_btn_left","« ".._("Left in").." "..(player_ship.micrometeorite_impact_countdown),function () MicroMeteorites:fired(1,player_ship) end,11)          			
         else
@@ -89,9 +90,9 @@ function MicroMeteorites:incoming(delta,player_ship)
         
         --reset info and buttons
         player_ship:addCustomInfo("Weapons","point_defense_info",_("MicroMeteorite Defense"),10)
-		player_ship:addCustomButton("Weapons","point_defense_btn_left",_("« Left"),function () MicroMeteorites:fired(1,player_ship) end,11)
-		player_ship:addCustomButton("Weapons","point_defense_btn_right",_("» Right"),function () MicroMeteorites:fired(2,player_ship) end,12)
-        
+        player_ship:addCustomButton("Weapons","point_defense_btn_left","« ".._("Left"),function () MicroMeteorites:fired(1,player_ship) end,11)
+        player_ship:addCustomButton("Weapons","point_defense_btn_right","» ".._("Right"),function () MicroMeteorites:fired(2,player_ship) end,12)
+
         player_ship.micrometeorite_phase=1
     end
 
@@ -99,7 +100,6 @@ end
 
 function MicroMeteorites:fired(button_direction,player_ship)
 	if player_ship:getSystemHeat("beamweapons")<0.99 and player_ship:getSystemHealth("beamweapons")>0.0 and player_ship:getSystemPower("beamweapons")>0.1 then
-		print (player_ship:getSystemHeat("beamweapons"))
 		x, y = player_ship:getPosition()
 		if button_direction==1 then
 			beam_angle=math.random(315,350)+player_ship:getRotation()
@@ -116,15 +116,15 @@ function MicroMeteorites:fired(button_direction,player_ship)
 			
 			--reset info and buttons
 			player_ship:addCustomInfo("Weapons","point_defense_info",_("MicroMeteorite Defense"),10)
-			player_ship:addCustomButton("Weapons","point_defense_btn_left",_("« Left"),function () MicroMeteorites:fired(1,player_ship) end,11)
-			player_ship:addCustomButton("Weapons","point_defense_btn_right",_("» Right"),function () MicroMeteorites:fired(2,player_ship) end,12)
+            player_ship:addCustomButton("Weapons","point_defense_btn_left","« ".._("Left"),function () MicroMeteorites:fired(1,player_ship) end,11)
+            player_ship:addCustomButton("Weapons","point_defense_btn_right","» ".._("Right"),function () MicroMeteorites:fired(2,player_ship) end,12)
         
 			player_ship.micrometeorite_phase=1
-			BeamEffect():setSource(player_ship, 0, 0, 0):setTarget(debris, 0, 0):setDuration(0.5):setRing(false):setTexture("texture/beam_blue.png")
+			BeamEffect():setSource(player_ship, 0, 0, 0):setTarget(debris, 0, 0):setDuration(0.5):setRing(false):setTexture("texture/beam_blue.png"):setBeamFireSoundPower(0.1)
 			ExplosionEffect():setPosition(x+xx,y+yy):setSize(5)
 			player_ship.micrometeorite_direction=0
 		else
-			BeamEffect():setSource(player_ship, 0, 0, 0):setTarget(debris, 0, 0):setDuration(0.5):setRing(false):setTexture("texture/beam_blue.png")
+			BeamEffect():setSource(player_ship, 0, 0, 0):setTarget(debris, 0, 0):setDuration(0.5):setRing(false):setTexture("texture/beam_blue.png"):setBeamFireSoundPower(0.1)
 			player_ship:setSystemHeat("beamweapons", player_ship:getSystemHeat("beamweapons")+0.1) -- some heat to prevent button spamming
 		end
 		debris:destroy()
