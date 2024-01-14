@@ -1,15 +1,15 @@
-
 -- Utils for micrometeorite point defense
 -----------
 -- Usage -- 
 -----------
--- For each player ship you want to add micrometeorites for:
+-- Place this line somewhere in the update function:
+-- MicroMeteorites:updateAll(delta)
 
--- In init function:
+-- To add MicroMeteorites to a ship
 -- MicroMeteorites:init([playership])
 
--- In update function:
--- MicroMeteorites:update(delta,[playership])
+-- To remove MicroMeteorites from a ship:
+-- MicroMeteorites:remove([playership])
 
 require('utils.lua')
 
@@ -46,6 +46,13 @@ function MicroMeteorites:update(delta,player_ship)
 	end	
 end
 
+function MicroMeteorites:updateAll(delta)
+    for _, p in ipairs(getActivePlayerShips()) do
+        if p ~= nil then
+            MicroMeteorites:update(delta,p)
+		end
+	end
+end
 
 function MicroMeteorites:timer(delta,player_ship)
     if (not player_ship:getShieldsActive()) and player_ship:hasPlayerAtPosition("Weapons") then -- do not bother the player when shields are up or no weapons officer is around (tactical and single pilot are busy enough)
