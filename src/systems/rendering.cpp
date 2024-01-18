@@ -193,7 +193,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e)
 
 ExplosionRenderSystem::ExplosionRenderSystem()
 {
-    RenderSystem::add3DHandler<ExplosionRenderSystem>(this, true);
+    RenderSystem::add3DHandler<ExplosionEffect>(this, true);
 }
 
 void ExplosionRenderSystem::update(float delta)
