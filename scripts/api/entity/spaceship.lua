@@ -99,17 +99,41 @@ end
 --- Returns the number of the given weapon type stocked by this SpaceShip.
 --- Example: homing = ship:getWeaponStorage("Homing")
 function Entity:getWeaponStorage(weapon_type)
-    --TODO
+    if self.missile_tubes then
+        weapon_type = string.lower(weapon_type)
+        if weapon_type == "homing" then return self.missile_tubes.storage_homing end
+        if weapon_type == "nuke" then return self.missile_tubes.storage_nuke end
+        if weapon_type == "mine" then return self.missile_tubes.storage_mine end
+        if weapon_type == "emp" then return self.missile_tubes.storage_emp end
+        if weapon_type == "hvli" then return self.missile_tubes.storage_hvli end
+    end
+    return 0
 end
 --- Returns this SpaceShip's capacity for the given weapon type.
 --- Example: homing_max = ship:getWeaponStorageMax("Homing")
 function Entity:getWeaponStorageMax(weapon_type)
-    --TODO
+    if self.missile_tubes then
+        weapon_type = string.lower(weapon_type)
+        if weapon_type == "homing" then return self.missile_tubes.max_homing end
+        if weapon_type == "nuke" then return self.missile_tubes.max_nuke end
+        if weapon_type == "mine" then return self.missile_tubes.max_mine end
+        if weapon_type == "emp" then return self.missile_tubes.max_emp end
+        if weapon_type == "hvli" then return self.missile_tubes.max_hvli end
+    end
+    return 0
 end
 --- Sets the number of the given weapon type stocked by this SpaceShip.
 --- Example: ship:setWeaponStorage("Homing", 2) -- this ship has 2 Homing missiles
 function Entity:setWeaponStorage(weapon_type, amount)
-    --TODO
+    if self.missile_tubes then
+        weapon_type = string.lower(weapon_type)
+        if weapon_type == "homing" then self.missile_tubes.storage_homing = amount end
+        if weapon_type == "nuke" then self.missile_tubes.storage_nuke = amount end
+        if weapon_type == "mine" then self.missile_tubes.storage_mine = amount end
+        if weapon_type == "emp" then self.missile_tubes.storage_emp = amount end
+        if weapon_type == "hvli" then self.missile_tubes.storage_hvli = amount end
+    end
+    return self
 end
 --- Sets this SpaceShip's capacity for the given weapon type.
 --- If this ship has more stock of that weapon type than the new capacity, its stock is reduced.
@@ -117,7 +141,15 @@ end
 --- Use SpaceShip:setWeaponStorage() to update the stocks.
 --- Example: ship:setWeaponStorageMax("Homing", 4) -- this ship can carry 4 Homing missiles
 function Entity:setWeaponStorageMax(weapon_type, amount)
-    --TODO
+    if self.missile_tubes then
+        weapon_type = string.lower(weapon_type)
+        if weapon_type == "homing" then self.missile_tubes.max_homing = amount end
+        if weapon_type == "nuke" then self.missile_tubes.max_nuke = amount end
+        if weapon_type == "mine" then self.missile_tubes.max_mine = amount end
+        if weapon_type == "emp" then self.missile_tubes.max_emp = amount end
+        if weapon_type == "hvli" then self.missile_tubes.max_hvli = amount end
+    end
+    return self
 end
 --- Returns this SpaceShip's shield frequency index.
 --- To convert the index to the value used by players, multiply it by 20, then add 400.
@@ -126,7 +158,8 @@ end
 --- -- Outputs "Ship's shield frequency is 600THz"
 --- print("Ship's shield frequency is " .. (frequency * 20) + 400 .. "THz")
 function Entity:getShieldsFrequency()
-    --TODO
+    if self.shields then return self.shields.frequency end
+    return 0
 end
 --- Sets this SpaceShip's shield frequency index.
 --- To convert the index to the value used by players, multiply it by 20, then add 400.
@@ -134,7 +167,8 @@ end
 --- Unlike PlayerSpaceship:commandSetShieldFrequency(), this instantly changes the frequency with no calibration delay.
 --- Example: frequency = ship:setShieldsFrequency(10) -- frequency is 600THz
 function Entity:setShieldsFrequency(frequency)
-    --TODO
+    if self.shields then self.shields.frequency = frequency end
+    return self
 end
 --- Returns this SpaceShip's beam weapon frequency.
 --- To convert the index to the value used by players, multiply it by 20, then add 400.
@@ -143,24 +177,28 @@ end
 --- -- Outputs "Ship's beam frequency is 600THz"
 --- print("Ship's beam frequency is " .. (frequency * 20) + 400 .. "THz")
 function Entity:getBeamFrequency()
-    --TODO
+    if self.beam_weapons then return self.beam_weapons.frequency end
+    return 0
 end
 --- Returns this SpaceShip's energy capacity.
 --- Example: ship:getMaxEnergy()
 function Entity:getMaxEnergy()
-    --TODO
+    if self.reactor then return self.reactor.max_energy end
+    return 1000
 end
 --- Sets this SpaceShip's energy capacity.
 --- CpuShips don't consume energy. Setting this value has no effect on their behavior or functionality.
 --- For PlayerSpaceships, see PlayerSpaceship:setEnergyLevelMax().
 --- Example: ship:setMaxEnergy(800)
 function Entity:setMaxEnergy(amount)
-    --TODO
+    if self.reactor then self.reactor.max_energy = amount end
+    return self
 end
 --- Returns this SpaceShip's energy level.
 --- Example: ship:getEnergy()
 function Entity:getEnergy()
-    --TODO
+    if self.reactor then return self.reactor.energy end
+    return 1000
 end
 --- Sets this SpaceShip's energy level.
 --- Valid values are any greater than 0 and less than the energy capacity (getMaxEnergy()).
@@ -169,86 +207,128 @@ end
 --- For PlayerSpaceships, see PlayerSpaceship:setEnergyLevel().
 --- Example: ship:setEnergy(1000) -- sets the ship's energy to 1000 if its capacity is 1000 or more
 function Entity:setEnergy(amount)
-    --TODO
+    if self.reactor then self.reactor.energy = amount end
+    return self
 end
+
+
+function __getSystemByName(entity, system_name)
+    system_name = string.lower(system_name)
+    if system_name == "reactor" then return entity.reactor end
+    if system_name == "beamweapons" then return entity.beam_weapons end
+    if system_name == "missilesystem" then return entity.missile_tubes end
+    if system_name == "maneuver" then return entity.maneuvering_thrusters end
+    if system_name == "impulse" then return entity.impulse_engine end
+    if system_name == "warp" then return entity.warp_drive end
+    if system_name == "jumpdrive" then return entity.jump_drive end
+    if system_name == "frontshield" then return entity.shields end
+    if system_name == "rearshield" and #entity.shields > 1 then return entity.shields end
+    return nil
+end
+
+function __getSystemPropertyByName(entity, system_name, property)
+    system_name = string.lower(system_name)
+    local sys = __getSystemByName(entity, system_name)
+    if sys == nil then return 0.0 end
+    if system_name == "frontshield" then return sys["front_" .. property] end
+    if system_name == "rearshield" then return sys["rear_" .. property] end
+    return sys[property]
+end
+
+function __setSystemPropertyByName(entity, system_name, property, value)
+    system_name = string.lower(system_name)
+    local sys = __getSystemByName(entity, system_name)
+    if sys == nil then return end
+    if system_name == "frontshield" then sys["front_" .. property] = value
+    elseif system_name == "rearshield" then return sys["rear_" .. property] = value
+    else sys[property] = value end
+end
+
 --- Returns whether this SpaceShip has the given system.
 --- Example: ship:hasSystem("impulse") -- returns true if the ship has impulse drive
 function Entity:hasSystem(system_name)
-    --TODO
+    return __getSystemByName(self, system_name) ~= nil
 end
 --- Returns the hacked level for the given system on this SpaceShip.
 --- Returns a value between 0.0 (unhacked) and 1.0 (fully hacked).
 --- Example: ship:getSystemHackedLevel("impulse")
 function Entity:getSystemHackedLevel(system_name)
-    --TODO
+    return __getSystemPropertyByName(self, system_name, "hacked_level")
 end
 --- Sets the hacked level for the given system on this SpaceShip.
 --- Valid range is 0.0 (unhacked) to 1.0 (fully hacked).
 --- Example: ship:setSystemHackedLevel("impulse",0.5) -- sets the ship's impulse drive to half hacked
-function Entity:setSystemHackedLevel(system_name)
-    --TODO
+function Entity:setSystemHackedLevel(system_name, level)
+    __setSystemPropertyByName(self, system_name, "hacked_level", level)
+    return self
 end
 --- Returns the given system's health on this SpaceShip.
 --- System health is related to damage, and is separate from its hacked level.
 --- Returns a value between 0.0 (fully disabled) and 1.0 (undamaged).
 --- Example: ship:getSystemHealth("impulse")
 function Entity:getSystemHealth(system_name)
-    --TODO
+    return __getSystemPropertyByName(self, system_name, "health")
 end
 --- Sets the given system's health on this SpaceShip.
 --- System health is related to damage, and is separate from its hacked level.
 --- Valid range is 0.0 (fully disabled) and 1.0 (undamaged).
 --- Example: ship:setSystemHealth("impulse",0.5) -- sets the ship's impulse drive to half damaged
 function Entity:setSystemHealth(system_name, amount)
-    --TODO
+    __setSystemPropertyByName(self, system_name, "health", amount)
+    return self
 end
 --- Returns the given system's maximum health on this SpaceShip.
 --- Returns a value between 0.0 (fully disabled) and 1.0 (undamaged).
 --- Example: ship:getSystemHealthMax("impulse")
 function Entity:getSystemHealthMax(system_name)
-    --TODO
+    return __getSystemPropertyByName(self, system_name, "max_health")
 end
 --- Sets the given system's maximum health on this SpaceShip.
 --- Valid range is 0.0 (fully disabled) and 1.0 (undamaged).
 --- Example: ship:setSystemHealthMax("impulse", 0.5) -- limits the ship's impulse drive health to half
 function Entity:setSystemHealthMax(system_name, amount)
-    --TODO
+    __setSystemPropertyByName(self, system_name, "max_health", amount)
+    return self
 end
 --- Returns the given system's heat level on this SpaceShip.
 --- Returns a value between 0.0 (no heat) and 1.0 (overheating).
 --- Example: ship:getSystemHeat("impulse")
 function Entity:getSystemHeat(system_name)
-    --TODO
+    return __getSystemPropertyByName(self, system_name, "heat")
 end
 --- Sets the given system's heat level on this SpaceShip.
 --- CpuShips don't generate or manage heat. Setting this has no effect on them.
 --- Valid range is 0.0 (fully disabled) to 1.0 (undamaged).
 --- Example: ship:setSystemHeat("impulse", 0.5) -- sets the ship's impulse drive heat to half of capacity
-function Entity:setSystemHeat(system_name)
-    --TODO
+function Entity:setSystemHeat(system_name, amount)
+    __setSystemPropertyByName(self, system_name, "heat", amount)
+    return self
 end
 --- Returns the given system's rate of heating or cooling, in percent (0.01 = 1%) per second?, on this SpaceShip.
 --- Example: ship:getSystemHeatRate("impulse")
 function Entity:getSystemHeatRate(system_name)
-    --TODO
+    return __getSystemPropertyByName(self, system_name, "heat_add_rate_per_second")
 end
 --- Sets the given system's rate of heating or cooling, in percent (0.01 = 1%) per second?, on this SpaceShip.
 --- CpuShips don't generate or manage heat. Setting this has no effect on them.
 --- Example: ship:setSystemHeatRate("impulse", 0.05)
 function Entity:setSystemHeatRate(system_name, amount)
-    --TODO
+    __setSystemPropertyByName(self, system_name, "heat_add_rate_per_second", amount)
+    return self
 end
 --- Returns the given system's power level on this SpaceShip.
 --- Returns a value between 0.0 (unpowered) and 1.0 (fully powered).
 --- Example: ship:getSystemPower("impulse")
 function Entity:getSystemPower(system_name)
-    --TODO
+    return __getSystemPropertyByName(self, system_name, "power_level")
 end
 --- Sets the given system's power level.
 --- Valid range is 0.0 (unpowered) to 1.0 (fully powered).
 --- Example: ship:setSystemPower("impulse", 0.5) -- sets the ship's impulse drive to half power
 function Entity:setSystemPower(system_name, amount)
-    --TODO
+    __setSystemPropertyByName(self, system_name, "power_level", amount)
+    __setSystemPropertyByName(self, system_name, "power_request", amount)
+    return self
 end
 --- Returns the given system's rate of consuming power, in points per second?, in this SpaceShip.
 --- Example: ship:getSystemPowerRate("impulse")
@@ -264,45 +344,50 @@ end
 --- Returns the relative power drain factor for the given system.
 --- Example: ship:getSystemPowerFactor("impulse")
 function Entity:getSystemPowerFactor(system_name)
-    --TODO
+    return __getSystemPropertyByName(self, system_name, "power_factor")
 end
 --- Sets the relative power drain factor? for the given system in this SpaceShip.
 --- "reactor" has a negative value because it generates power rather than draining it.
 --- CpuShips don't consume energy. Setting this has no effect.
 --- Example: ship:setSystemPowerFactor("impulse", 4)
 function Entity:setSystemPowerFactor(system_name, amount)
-    --TODO
+    __setSystemPropertyByName(self, system_name, "power_factor", amount)
+    return self
 end
 --- Returns the coolant distribution for the given system in this SpaceShip.
 --- Returns a value between 0.0 (none) and 1.0 (capacity).
 --- Example: ship:getSystemCoolant("impulse")
 function Entity:getSystemCoolant(system_name)
-    --TODO
+    return __getSystemPropertyByName(self, system_name, "coolant_level")
 end
 --- Sets the coolant quantity for the given system in this SpaceShip.
 --- CpuShips don't generate or manage heat. Setting this has no effect on them.
 --- Valid range is 0.0 (none) to 1.0 (capacity).
 --- Example: ship:setSystemPowerFactor("impulse", 4)
 function Entity:setSystemCoolant(system_name, amount)
-    --TODO
+    __setSystemPropertyByName(self, system_name, "coolant_level", amount)
+    __setSystemPropertyByName(self, system_name, "coolant_request", amount)
+    return self
 end
 --- Returns the rate at which the given system in this SpaceShip takes coolant, in points per second?
 --- Example: ship:getSystemCoolantRate("impulse")
 function Entity:getSystemCoolantRate(system_name)
-    --TODO
+    return __getSystemPropertyByName(self, system_name, "coolant_change_rate_per_second")
 end
 --- Sets the rate at which the given system in this SpaceShip takes coolant, in points per second?
 --- CpuShips don't generate or manage heat. Setting this has no effect on them.
 --- Example: ship:setSystemCoolantRate("impulse", 1.2)
 function Entity:setSystemCoolantRate(system_name, amount)
-    --TODO
+    __setSystemPropertyByName(self, system_name, "coolant_change_rate_per_second", amount)
+    return self
 end
 --- Returns this SpaceShip's forward and reverse impulse speed limits.
 --- Examples:
 --- forward,reverse = getImpulseMaxSpeed()
 --- forward = getImpulseMaxSpeed() -- forward speed only
 function Entity:getImpulseMaxSpeed()
-    --TODO
+    if self.impulse_engine then return self.impulse_engine.max_speed_forward end
+    return 0.0
 end
 --- Sets this SpaceShip's maximum forward and reverse impulse speeds.
 --- The reverse maximum speed value is optional.
@@ -311,24 +396,35 @@ end
 --- ship:setImpulseMaxSpeed(30,20) -- sets the max forward speed to 30 and reverse to 20
 --- ship:setImpulseMaxSpeed(30) -- sets the max forward and reverse speed to 30
 function Entity:setImpulseMaxSpeed(forward, reverse)
-    --TODO
+    if self.impulse_engine then
+        self.impulse_engine.max_speed_forward = forward
+        if reverse == nil then
+            self.impulse_engine.max_speed_reverse = forward
+        else
+            self.impulse_engine.max_speed_reverse = reverse
+        end
+    end
+    return self
 end
 --- Returns this SpaceShip's maximum rotational speed, in degrees per second?
 --- Example: ship:getRotationMaxSpeed()
 function Entity:getRotationMaxSpeed()
-    --TODO
+    if self.maneuvering_thrusters then return self.maneuvering_thrusters.speed end
+    return 0.0
 end
 --- Sets this SpaceShip's maximum rotational speed, in degrees per second?
 --- Example: ship:setRotationMaxSpeed(10)
 function Entity:setRotationMaxSpeed(speed)
-    --TODO
+    if self.maneuvering_thrusters then self.maneuvering_thrusters.speed = speed end
+    return self
 end
 --- Returns the SpaceShip's forward and reverse impulse acceleration values, in (unit?)
 --- Examples:
 --- forward,reverse = getAcceleration()
 --- forward = getAcceleration() -- forward acceleration only
 function Entity:getAcceleration()
-    --TODO
+    if self.impulse_engine then return self.impulse_engine.acceleration_forward end
+    return 0.0
 end
 --- Sets the SpaceShip's forward and reverse impulse acceleration values, in (unit?)
 --- The reverse acceleration value is optional.
@@ -337,30 +433,44 @@ end
 --- ship:setAcceleration(5,3.5) -- sets the max forward acceleration to 5 and reverse to 3.5
 --- ship:setAcceleration(5) -- sets the max forward and reverse acceleration to 5
 function Entity:setAcceleration(forward, reverse)
-    --TODO
+    if self.impulse_engine then
+        self.impulse_engine.acceleration_forward = forward
+        if reverse == nil then
+            self.impulse_engine.acceleration_reverse = forward
+        else
+            self.impulse_engine.acceleration_reverse = reverse
+        end
+    end
+    return self
 end
 --- Sets the SpaceShip's combat maneuvering capacities.
 --- The boost value sets the forward maneuver capacity, and the strafe value sets the lateral maneuver capacity.
 --- Example: ship:setCombatManeuver(400,250) -- sets boost capacity to 400 and lateral to 250
 function Entity:setCombatManeuver(boost, strafe)
-    --TODO
+    self.combat_maneuvering_thrusters = {boost_speed=boost, strafe_speed=strafe}
+    return self
 end
 --- Returns whether the SpaceShip has a jump drive.
 --- Example: ship:hasJumpDrive()
 function Entity:hasJumpDrive()
-    --TODO
+    return self.jump_drive ~= nil
 end
 --- Defines whether the SpaceShip has a jump drive.
 --- If true, this ship gains jump drive controls and a "jumpdrive" ship system.
 --- Example: ship:setJumpDrive(true) -- gives this ship a jump drive
 function Entity:setJumpDrive(enabled)
-    --TODO
+    if enabled then self.jump_drive = {} else self.jump_drive = nil end
+    return self
 end
 --- Sets the minimum and maximum jump distances for this SpaceShip.
 --- Defaults to (5000,50000) if not set by the ShipTemplate.
 --- Example: ship:setJumpDriveRange(2500,25000) -- sets the minimum jump distance to 2.5U and maximum to 25U
 function Entity:setJumpDriveRange(min_range, max_range)
-    --TODO
+    if self.jump_drive then
+        self.jump_drive.min_distance = min_range
+        self.jump_drive.max_distance = max_range
+    end
+    return self
 end
 --- Sets this SpaceShip's current jump drive charge.
 --- Jumping depletes the ship's jump drive charge by a value equal to the distance jumped.
@@ -370,12 +480,14 @@ end
 --- Jump drive charge regenerates at a rate modified by the "jumpdrive" system's effectiveness.
 --- Example: ship:setJumpDriveCharge(50000)
 function Entity:setJumpDriveCharge(charge)
-    --TODO
+    if self.jump_drive then self.jump_drive.charge = charge end
+    return self
 end
 --- Returns this SpaceShip's current jump drive charge.
 --- Example: jump_charge = ship:getJumpDriveCharge()
 function Entity:getJumpDriveCharge()
-    --TODO
+    if self.jump_drive then return self.jump_drive.charge end
+    return 0.0
 end
 --- Returns the time required by this SpaceShip to complete a jump once initiated.
 --- A ship can't perform certain actions, such as docking, while its jump delay is not 0.
@@ -384,7 +496,9 @@ end
 --- System effectiveness can modify this delay.
 --- Example: ship:getJumpDelay()
 function Entity:getJumpDelay()
-    --TODO
+    if self.jump_drive then return self.jump_drive.delay end
+    return 0.0
+
 end
 --- Returns whether this SpaceShip has a warp drive.
 --- Example: ship:hasWarpDrive()
