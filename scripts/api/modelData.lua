@@ -151,5 +151,13 @@ end
 --- -- Add an engine emitter at the given model X/Y/Z coordinates, with a RGB color of 1.0/0.2/0.2 and scale of 3.
 --- model:addEngineEmitter(-28, 1.5,-5,1.0,0.2,0.2,3.0)
 function ModelData:addEngineEmitter(x, y, z, r, g, b, scale)
+    if self.engine_emitter == nil then self.engine_emitter = {} end
+    if self.mesh_render then
+        x = x * self.mesh_render.scale
+        y = y * self.mesh_render.scale
+        z = z * self.mesh_render.scale
+        scale = scale * self.mesh_render.scale
+    end
+    self.engine_emitter[#self.engine_emitter+1] = {position = {x, y, z}, color={r, g, b}, scale=scale}
     return self
 end

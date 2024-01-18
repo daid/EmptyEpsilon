@@ -206,6 +206,11 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(MeshRenderComponent, illumination_texture.name, "illumination_texture");
     BIND_MEMBER(MeshRenderComponent, mesh_offset);
     BIND_MEMBER(MeshRenderComponent, scale);
+    sp::script::ComponentHandler<EngineEmitter>::name("engine_emitter");
+    BIND_ARRAY(EngineEmitter, emitters);
+    BIND_ARRAY_MEMBER(EngineEmitter, emitters, position);
+    BIND_ARRAY_MEMBER(EngineEmitter, emitters, color);
+    BIND_ARRAY_MEMBER(EngineEmitter, emitters, scale);
 
     sp::script::ComponentHandler<PlanetRender>::name("planet_render");
     BIND_MEMBER(PlanetRender, size);
