@@ -147,7 +147,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
 
 void GuiObjectCreationView::onDraw(sp::RenderTarget& target)
 {
-    if (gameGlobalInfo->allow_new_player_ships)
+    if (gameGlobalInfo->allowNewPlayerShips())
     {
         player_cpu_selector->show();
     } else {

@@ -275,7 +275,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     }
 
     // If this is the server, add a panel to create player ships.
-    if (game_server && gameGlobalInfo->allow_new_player_ships)
+    if (game_server)
     {
         (new GuiPanel(left_container, "CREATE_SHIP_BOX"))->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 700);
         auto right_panel_2 = new GuiPanel(right_container, "PLAYER_SHIP_INFO_BOX");
@@ -333,32 +333,31 @@ ShipSelectionScreen::ShipSelectionScreen()
     player_ship_list->setPosition(0, 100, sp::Alignment::TopCenter)->setSize(490, 500);
 
     // If this is the server, add buttons and a selector to create player ships.
-    if (game_server && gameGlobalInfo->allow_new_player_ships)
+    if (game_server)
     {
-        GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", [this](int index, string value)
-        {
-            for(auto& info : ship_spawn_info)
-                if (info.key == value)
-                    playership_info->setText(info.description);
-        });
-
         // List only ships with templates designated for player use.
         ship_spawn_info = gameGlobalInfo->getSpawnablePlayerShips();
-        for(const auto& info : ship_spawn_info) {
-            ship_template_selector->addEntry(info.label, info.key);
-        }
-        ship_template_selector->setSelectionIndex(0);
-        ship_template_selector->setPosition(0, 630, sp::Alignment::TopCenter)->setSize(490, 50);
-        if (ship_spawn_info.size() > 0)
+        if (ship_spawn_info.size() > 0) {
+            GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", [this](int index, string value)
+            {
+                for(auto& info : ship_spawn_info)
+                    if (info.key == value)
+                        playership_info->setText(info.description);
+            });
+
+            for(const auto& info : ship_spawn_info) {
+                ship_template_selector->addEntry(info.label, info.key);
+            }
+            ship_template_selector->setSelectionIndex(0);
+            ship_template_selector->setPosition(0, 630, sp::Alignment::TopCenter)->setSize(490, 50);
             playership_info->setText(ship_spawn_info[0].description);
 
-        // Spawn a ship of the selected template near 0,0 and give it a random
-        // heading.
-        (new GuiButton(left_container, "CREATE_SHIP_BUTTON", tr("Spawn player ship"), [ship_template_selector]() {
-            if (!gameGlobalInfo->allow_new_player_ships)
-                return;
-            gameGlobalInfo->spawnPlayerShip(ship_template_selector->getSelectionValue());
-        }))->setPosition(0, 680, sp::Alignment::TopCenter)->setSize(490, 50);
+            // Spawn a ship of the selected template near 0,0 and give it a random
+            // heading.
+            (new GuiButton(left_container, "CREATE_SHIP_BUTTON", tr("Spawn player ship"), [ship_template_selector]() {
+                gameGlobalInfo->spawnPlayerShip(ship_template_selector->getSelectionValue());
+            }))->setPosition(0, 680, sp::Alignment::TopCenter)->setSize(490, 50);
+        }
     }
 
     if (game_server)

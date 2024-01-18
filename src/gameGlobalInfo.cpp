@@ -119,6 +119,13 @@ void GameGlobalInfo::execScriptCode(const string& code)
     }
 }
 
+bool GameGlobalInfo::allowNewPlayerShips()
+{
+    auto res = main_script->call<bool>("allowNewPlayerShips");
+    LuaConsole::checkResult(res);
+    return res.value();
+}
+
 namespace sp::script {
     template<> struct Convert<std::vector<GameGlobalInfo::ShipSpawnInfo>> {
         static std::vector<GameGlobalInfo::ShipSpawnInfo> fromLua(lua_State* L, int idx) {
@@ -176,7 +183,6 @@ void GameGlobalInfo::reset()
 
     elapsed_time = 0.0f;
     callsign_counter = 0;
-    allow_new_player_ships = true;
     global_message = "";
     global_message_timeout = 0.0f;
     banner_string = "";
@@ -614,23 +620,3 @@ static int onNewPlayerShip(lua_State* L)
 /// Passes the newly created PlayerSpaceship.
 /// Example: onNewPlayerShip(function(player) print(player:getCallSign()) end) -- prints the callsign of new PlayerSpaceships to the console
 REGISTER_SCRIPT_FUNCTION(onNewPlayerShip);
-
-static int allowNewPlayerShips(lua_State* L)
-{
-    gameGlobalInfo->allow_new_player_ships = lua_toboolean(L, 1);
-    return 0;
-}
-/// void allowNewPlayerShips(bool allow)
-/// Defines whether the "Spawn player ship" button appears on the ship creation screen.
-/// Example: allowNewPlayerShips(false) -- removes the button
-REGISTER_SCRIPT_FUNCTION(allowNewPlayerShips);
-
-static int getEEVersion(lua_State* L)
-{
-    lua_pushinteger(L, VERSION_NUMBER);
-    return 1;
-}
-/// string getEEVersion()
-/// Returns a string with the current EmptyEpsilon version number, such as "20221029".
-/// Example: getEEVersion() -- returns 20221029 on EE-2022.10.29
-REGISTER_SCRIPT_FUNCTION(getEEVersion);

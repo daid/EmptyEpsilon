@@ -4,6 +4,7 @@
 #include "script.h"
 #include "resources.h"
 #include "random.h"
+#include "config.h"
 #include "script/vector.h"
 #include "menus/luaConsole.h"
 #include "systems/comms.h"
@@ -277,6 +278,11 @@ static float luaGetScenarioTime()
     return gameGlobalInfo->elapsed_time;
 }
 
+static int luaGetEEVersion()
+{
+    return VERSION_NUMBER;
+}
+
 void setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
@@ -344,6 +350,8 @@ void setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("setCommsMessage", &CommsSystem::luaSetCommsMessage);
     env.setGlobal("addCommsReply", &CommsSystem::luaAddCommsReply);
     env.setGlobal("commsSwitchToGM", &CommsSystem::luaCommsSwitchToGM);
+
+    env.setGlobal("getEEVersion", &luaGetEEVersion);
 
     LuaConsole::checkResult(env.runFile<void>("luax.lua"));
     LuaConsole::checkResult(env.runFile<void>("api/all.lua"));

@@ -70,7 +70,6 @@ public:
 
     //Callback called when a new player ship is created on the ship selection screen.
     sp::script::Callback on_new_player_ship;
-    bool allow_new_player_ships = true;
 
     std::function<void(glm::vec2)> on_gm_click;
 
@@ -107,6 +106,7 @@ public:
     std::vector<ShipSpawnInfo> getSpawnablePlayerShips();
     void spawnPlayerShip(string key);
     void execScriptCode(const string& code);
+    bool allowNewPlayerShips();
 
     //List of extra scripts that run next to the main script.
     std::vector<std::unique_ptr<sp::script::Environment>> additional_scripts;

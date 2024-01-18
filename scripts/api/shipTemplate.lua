@@ -1,14 +1,17 @@
 -- Global to store all the templates.
 __ship_templates = {}
 __player_ship_templates = {}
+__allow_new_player_ships = true
 
 -- Called by the engine to populate the list of player ships that can be spawned.
 -- Returns a list of {key, label, description}.
 function getSpawnablePlayerShips()
     local result = {}
-    for i, v in ipairs(__player_ship_templates) do
-        if not v.__hidden then
-            result[#result+1] = {v.typename.type_name, v.typename.localized, v.__description}
+    if __allow_new_player_ships then
+        for i, v in ipairs(__player_ship_templates) do
+            if not v.__hidden then
+                result[#result+1] = {v.typename.type_name, v.typename.localized, v.__description}
+            end
         end
     end
     return result
@@ -16,6 +19,7 @@ end
 -- Called by the engine when on the server the user wants to spawn a player ship.
 -- Called with the [key] from the list returned in getSpawnablePlayerShips
 function spawnPlayerShipFromUI(key)
+    if not __allow_new_player_ships then return end
     for i, v in ipairs(__player_ship_templates) do
         if not v.__hidden and v.typename.type_name == key then
             local ship = PlayerSpaceship()
@@ -23,6 +27,13 @@ function spawnPlayerShipFromUI(key)
             return ship
         end
     end
+end
+
+function allowNewPlayerShips(enabled)
+    if enabled ~= nil then
+        __allow_new_player_ships = enabled
+    end
+    return __allow_new_player_ships
 end
 
 --- A ShipTemplate defines the base functionality, stats, models, and other details for the ShipTemplateBasedObjects created from it.
