@@ -401,21 +401,21 @@ end
 --- Defaults to true.
 --- Example: template:setSharesEnergyWithDocked(false)
 function ShipTemplate:setSharesEnergyWithDocked(enabled)
-    --TODO
+    if self.docking_bay then self.docking_bay.share_energy = enabled end
     return self
 end
 --- Defines whether ShipTemplateBasedObjects created from this template repair docked SpaceShips.
 --- Defaults to false. ShipTemplate:setType("station") sets this to true.
 --- Example: template:setRepairDocked(true)
 function ShipTemplate:setRepairDocked(enabled)
-    --TODO
+    if self.docking_bay then self.docking_bay.repair = enabled end
     return self
 end
 --- Defines whether ShipTemplateBasedObjects created from this ShipTemplate restock scan probes on docked PlayerSpaceships.
 --- Defaults to false.
 --- Example: template:setRestocksScanProbes(true)
 function ShipTemplate:setRestocksScanProbes(enabled)
-    --TODO
+    if self.docking_bay then self.docking_bay.restock_probes = enabled end
     return self
 end
 --- Defines whether ShipTemplateBasedObjects created from this ShipTemplate restock missiles on docked CpuShips.
@@ -423,7 +423,7 @@ end
 --- Defaults to false.
 --- Example template:setRestocksMissilesDocked(true)
 function ShipTemplate:setRestocksMissilesDocked(enabled)
-    --TODO
+    if self.docking_bay then self.docking_bay.restock_missiles = enabled end
     return self
 end
 --- Defines whether SpaceShips created from this ShipTemplate have a jump drive.
@@ -514,7 +514,7 @@ end
 --- Defaults to 30000.0 (30U).
 --- Example: template:setLongRangeRadarRange(20000) -- sets the long-range radar range to 20U
 function ShipTemplate:setLongRangeRadarRange(range)
-    --TODO
+    if self.long_range_radar then self.long_range_radar.long_range = range end
     return self
 end
 --- Sets the short-range radar range of SpaceShips created from this ShipTemplate.
@@ -524,7 +524,7 @@ end
 --- Defaults to 5000.0 (5U).
 --- Example: template:setShortRangeRadarRange(4000) -- sets the short-range radar range to 4U
 function ShipTemplate:setShortRangeRadarRange(range)
-    --TODO
+    if self.long_range_radar then self.long_range_radar.short_range = range end
     return self
 end
 --- Sets the sound file used for the impulse drive sounds on SpaceShips created from this ShipTemplate.
@@ -533,7 +533,7 @@ end
 --- Defaults to sfx/engine.wav.
 --- Example: template:setImpulseSoundFile("sfx/engine_fighter.wav")
 function ShipTemplate:setImpulseSoundFile(sfx)
-    --TODO
+    if self.impulse_engine then self.impulse_engine.sound = sfx end
     return self
 end
 --- Defines whether scanning features appear on related crew screens in PlayerSpaceships created from this ShipTemplate.

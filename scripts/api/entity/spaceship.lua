@@ -9,19 +9,25 @@ local Entity = getLuaEntityFunctionTable()
 --- [DEPRECATED]
 --- Use SpaceShip:isFriendOrFoeIdentifiedBy() or SpaceShip:isFriendOrFoeIdentifiedByFaction().
 function Entity:isFriendOrFoeIdentified()
-    --TODO
+    if self.scan_state then
+        for n=1,#self.scan_state do
+            if self.scan_state[n].state != "none" then return true end
+        end
+    end
+    return false
 end
 --- [DEPRECATED]
 --- Use SpaceShip:isFullyScannedBy() or SpaceShip:isFullyScannedByFaction().
 function Entity:isFullyScanned()
-    --TODO
+    if self.scan_state then
+        for n=1,#self.scan_state do
+            if self.scan_state[n].state == "full" then return true end
+        end
+    end
+    return false
 end
 --- Returns whether this SpaceShip has been identified by the given ship as either hostile or friendly.
 function Entity:isFriendOrFoeIdentifiedBy(faction)
-    --TODO
-end
---- Returns whether this SpaceShip has been fully scanned by the given ship.
-function Entity:isFullyScannedBy()
     --TODO
 end
 --- Returns whether this SpaceShip has been identified by the given faction as either hostile or friendly.
@@ -85,7 +91,10 @@ end
 --- For a CpuShip, this can differ from its orders target.
 --- Example: target = ship:getTarget()
 function Entity:getTarget()
-    --TODO
+    if self.weapons_target then
+        return self.weapons_target.entity
+    end
+    return nil
 end
 --- Returns the number of the given weapon type stocked by this SpaceShip.
 --- Example: homing = ship:getWeaponStorage("Homing")

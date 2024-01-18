@@ -16,6 +16,7 @@
 #include "components/shields.h"
 #include "components/docking.h"
 #include "components/beamweapon.h"
+#include "components/target.h"
 #include "components/reactor.h"
 #include "components/impulse.h"
 #include "components/maneuveringthrusters.h"
@@ -401,6 +402,8 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc_color_fire);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, damage_type);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, texture);
+    sp::script::ComponentHandler<Target>::name("weapons_target");
+    BIND_MEMBER(Target, entity);
 
     sp::script::ComponentHandler<Reactor>::name("reactor");
     BIND_SHIP_SYSTEM(Reactor);
