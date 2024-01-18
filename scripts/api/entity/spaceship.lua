@@ -503,26 +503,29 @@ end
 --- Returns whether this SpaceShip has a warp drive.
 --- Example: ship:hasWarpDrive()
 function Entity:hasWarpDrive()
-    --TODO
+    return self.warp_drive ~= nil
 end
 --- Defines whether this SpaceShip has a warp drive.
 --- If true, this ship gains warp drive controls and a "warp" ship system.
 --- Example: ship:setWarpDrive(true)
 function Entity:setWarpDrive(enabled)
-    --TODO
+    if enabled then self.warp_drive = {} else self.warp_drive = nil end
+    return self
 end
 --- Sets this SpaceShip's warp speed factor.
 --- Valid values are any greater than 0. Ships don't tend to go faster than 24000 (1400U/min) due to engine limitations.
 --- Unlike ShipTemplate:setWarpSpeed(), setting this value does NOT also grant this ship a warp drive.
 --- Example: ship:setWarpSpeed(1000);
 function Entity:setWarpSpeed(speed)
-    --TODO
+    if self.warp_drive then self.warp_drive.speed_per_level = speed end
+    return self
 end
 --- Returns this SpaceShip's warp speed factor.
 --- Actual warp speed can be modified by "warp" system effectiveness.
 --- Example: ship:getWarpSpeed(()
 function Entity:getWarpSpeed()
-    --TODO
+    if self.warp_drive then return self.warp_drive.speed_per_level end
+    return 0.0
 end
 --- Returns the arc, in degrees, for the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:getBeamWeaponArc(0); -- returns beam weapon 0's arc
