@@ -3449,7 +3449,7 @@ function handleDockedState()
 					setCommsMessage(_("crewFriends-comms", "Should be easy enough. I'm grateful to you for helping Edwina escape."))
 					playerRepulse.maxMissile = 1
 					playerRepulse.missileFix = "done"
-					addCommsReply("Thanks", function()
+					addCommsReply(_("crewFriends-comms", "Thanks"), function()
 						setCommsMessage(_("crewFriends-comms", "You're quite welcome"))
 						playerRepulse:addReputationPoints(30)
 						addCommsReply(_("Back"),commsStation)

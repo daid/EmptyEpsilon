@@ -41,7 +41,7 @@ void GuiImpulseControls::onUpdate()
         if (engine) {
             float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
             if (change != 0.0f)
-                my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + change * 0.01f));
+                my_player_info->commandImpulse(std::clamp(slider->getValue() + change * 0.01f, -1.0f, 1.0f));
             if (keys.helms_increase_impulse_1.getDown())
                 my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.01f));
             if (keys.helms_decrease_impulse_1.getDown())

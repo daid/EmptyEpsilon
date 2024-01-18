@@ -2269,7 +2269,7 @@ msgstr "ajouter des armes nucléaires (nuke) et des EMP aux tubes avant"
 
 #: scripts/scenario_44_outpost.lua:5312
 msgctxt "upgrade-comms"
-msgid "increase hpoming capacity by 60%"
+msgid "increase homing capacity by 60%"
 msgstr "augmenter la capacité de stockage des homing de 60%"
 
 #: scripts/scenario_44_outpost.lua:5313

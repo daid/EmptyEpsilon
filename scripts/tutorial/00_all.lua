@@ -69,6 +69,7 @@ addToSequence(helmsTutorial, function()
     resetPlayerShip()
     player:setJumpDrive(false)
     player:setWarpDrive(false)
+    player:setCanCombatManeuver(false)
     player:setImpulseMaxSpeed(0);
     player:setRotationMaxSpeed(0);
 end)

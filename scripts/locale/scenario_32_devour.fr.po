@@ -34,9 +34,9 @@ msgstr ""
 "- Difficulté : *** (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"TRADUCTION EN COURS 97%\n"
+"TRADUCTION EN COURS DE RELECTURE\n"
 "\n"
-"Mission : Arrêter le dévoreur de planètes avant que toutes les planètes ne "
+"Mission : Stopper le dévoreur de planètes avant que toutes les planètes ne "
 "disparaissent.\n"
 "\n"
 "Scénario écrit pour les jeux EE du 4 mai 2023 : \"May the 4th be with "
@@ -291,16 +291,14 @@ msgid "+Reputation"
 msgstr "+ Réputation"
 
 #: scripts/scenario_32_devour.lua:797
-#, fuzzy
 msgctxt "buttonGM"
 msgid "Nerf Devourer"
-msgstr "Dévoreur moins fort"
+msgstr "Dévoreur + faible"
 
 #: scripts/scenario_32_devour.lua:798
-#, fuzzy
 msgctxt "buttonGM"
 msgid "Un-nerf Devourer"
-msgstr "Annuler Dévoreur - fort"
+msgstr "Annuler Dévoreur + faible"
 
 #: scripts/scenario_32_devour.lua:811
 msgctxt "buttonGM"
@@ -607,6 +605,28 @@ msgid ""
 "these theories are based on late 20th century space themed movie franchises "
 "(Star Wars and Star Trek respectively)."
 msgstr ""
+"Le Dévoreur de planètes est un Odin modifié.\n"
+"\n"
+"La téléportation a été supprimée au profit de moteurs principaux puissants "
+"et d'une manœuvre renforcée. Les tubes sont nombreux et variés : 5 petits, 5 "
+"moyens et 5 grands. Le stock de missiles a été décuplé. Des hangars à "
+"chasseurs ainsi que des installations automatisées de maintenance et de "
+"construction de chasseurs ont été ajoutés.\n"
+"\n"
+"Comme son nom l'indique, il dispose d'une sorte d'armement spécialisé conçu "
+"pour attaquer les planètes. Au moment de rentrer les données dans la base, "
+"les détails sur cet armement sont en grande partie inconnus.\n"
+"\n"
+"Dans les communications interceptées liées au Dévoreur de planètes ils "
+"l'appellent \"LDS\". Nous sommes habitués à l’omniprésence des acronymes "
+"dans l’armée, mais nous n’arrivons pas à déchiffrer celui-ci. Nous savons "
+"qu'il y a beaucoup de cinéphiles de la fin du XXe siècle parmi l'équipage, "
+"les techniciens de maintenance et le personnel de construction.\n"
+"Ainsi, nos deux principales théories sont : la Petite Étoile de la Mort "
+"(Little Death Star) et une référence éloignée au LSD (D-lysergic acid "
+"diethylamide). Ces deux théories sont basées sur des franchises de films sur "
+"le thème de l'espace de la fin du XXe siècle, respectivement Star Wars et "
+"Star Trek."
 
 #: scripts/scenario_32_devour.lua:1596
 #, lua-format
@@ -1067,29 +1087,30 @@ msgstr ""
 #: scripts/scenario_32_devour.lua:2669 scripts/scenario_32_devour.lua:2673
 #: scripts/scenario_32_devour.lua:2677 scripts/scenario_32_devour.lua:2679
 #: scripts/scenario_32_devour.lua:2690 scripts/scenario_32_devour.lua:2763
-#: scripts/scenario_32_devour.lua:2811 scripts/scenario_32_devour.lua:2844
-#: scripts/scenario_32_devour.lua:2877 scripts/scenario_32_devour.lua:2884
-#: scripts/scenario_32_devour.lua:2901 scripts/scenario_32_devour.lua:2905
-#: scripts/scenario_32_devour.lua:2910 scripts/scenario_32_devour.lua:2952
-#: scripts/scenario_32_devour.lua:3006 scripts/scenario_32_devour.lua:3047
-#: scripts/scenario_32_devour.lua:3089 scripts/scenario_32_devour.lua:3135
-#: scripts/scenario_32_devour.lua:3170 scripts/scenario_32_devour.lua:3267
-#: scripts/scenario_32_devour.lua:3273 scripts/scenario_32_devour.lua:3279
-#: scripts/scenario_32_devour.lua:3284 scripts/scenario_32_devour.lua:3287
-#: scripts/scenario_32_devour.lua:3299 scripts/scenario_32_devour.lua:3305
-#: scripts/scenario_32_devour.lua:3312 scripts/scenario_32_devour.lua:3324
-#: scripts/scenario_32_devour.lua:3360 scripts/scenario_32_devour.lua:3406
-#: scripts/scenario_32_devour.lua:3429 scripts/scenario_32_devour.lua:3431
-#: scripts/scenario_32_devour.lua:3451 scripts/scenario_32_devour.lua:3498
-#: scripts/scenario_32_devour.lua:3507 scripts/scenario_32_devour.lua:3519
-#: scripts/scenario_32_devour.lua:3525 scripts/scenario_32_devour.lua:3533
-#: scripts/scenario_32_devour.lua:3562 scripts/scenario_32_devour.lua:3577
-#: scripts/scenario_32_devour.lua:3599 scripts/scenario_32_devour.lua:3603
-#: scripts/scenario_32_devour.lua:3622 scripts/scenario_32_devour.lua:3626
-#: scripts/scenario_32_devour.lua:3721 scripts/scenario_32_devour.lua:3726
-#: scripts/scenario_32_devour.lua:3798 scripts/scenario_32_devour.lua:3802
-#: scripts/scenario_32_devour.lua:3808 scripts/scenario_32_devour.lua:3842
-#: scripts/scenario_32_devour.lua:3850 scripts/scenario_32_devour.lua:3877
+#: scripts/scenario_32_devour.lua:2780 scripts/scenario_32_devour.lua:2811
+#: scripts/scenario_32_devour.lua:2844 scripts/scenario_32_devour.lua:2877
+#: scripts/scenario_32_devour.lua:2884 scripts/scenario_32_devour.lua:2901
+#: scripts/scenario_32_devour.lua:2905 scripts/scenario_32_devour.lua:2910
+#: scripts/scenario_32_devour.lua:2952 scripts/scenario_32_devour.lua:3006
+#: scripts/scenario_32_devour.lua:3047 scripts/scenario_32_devour.lua:3089
+#: scripts/scenario_32_devour.lua:3135 scripts/scenario_32_devour.lua:3170
+#: scripts/scenario_32_devour.lua:3267 scripts/scenario_32_devour.lua:3273
+#: scripts/scenario_32_devour.lua:3279 scripts/scenario_32_devour.lua:3284
+#: scripts/scenario_32_devour.lua:3287 scripts/scenario_32_devour.lua:3299
+#: scripts/scenario_32_devour.lua:3305 scripts/scenario_32_devour.lua:3312
+#: scripts/scenario_32_devour.lua:3324 scripts/scenario_32_devour.lua:3360
+#: scripts/scenario_32_devour.lua:3406 scripts/scenario_32_devour.lua:3429
+#: scripts/scenario_32_devour.lua:3431 scripts/scenario_32_devour.lua:3451
+#: scripts/scenario_32_devour.lua:3498 scripts/scenario_32_devour.lua:3507
+#: scripts/scenario_32_devour.lua:3519 scripts/scenario_32_devour.lua:3525
+#: scripts/scenario_32_devour.lua:3533 scripts/scenario_32_devour.lua:3562
+#: scripts/scenario_32_devour.lua:3577 scripts/scenario_32_devour.lua:3599
+#: scripts/scenario_32_devour.lua:3603 scripts/scenario_32_devour.lua:3622
+#: scripts/scenario_32_devour.lua:3626 scripts/scenario_32_devour.lua:3721
+#: scripts/scenario_32_devour.lua:3726 scripts/scenario_32_devour.lua:3798
+#: scripts/scenario_32_devour.lua:3802 scripts/scenario_32_devour.lua:3808
+#: scripts/scenario_32_devour.lua:3842 scripts/scenario_32_devour.lua:3850
+#: scripts/scenario_32_devour.lua:3873 scripts/scenario_32_devour.lua:3877
 #: scripts/scenario_32_devour.lua:3896 scripts/scenario_32_devour.lua:3920
 #: scripts/scenario_32_devour.lua:3945 scripts/scenario_32_devour.lua:3967
 #: scripts/scenario_32_devour.lua:3993 scripts/scenario_32_devour.lua:4018
@@ -1097,18 +1118,18 @@ msgstr ""
 #: scripts/scenario_32_devour.lua:4577 scripts/scenario_32_devour.lua:4600
 #: scripts/scenario_32_devour.lua:4622 scripts/scenario_32_devour.lua:4646
 #: scripts/scenario_32_devour.lua:4668 scripts/scenario_32_devour.lua:4692
-#: scripts/scenario_32_devour.lua:4737 scripts/scenario_32_devour.lua:4747
-#: scripts/scenario_32_devour.lua:4764 scripts/scenario_32_devour.lua:4772
-#: scripts/scenario_32_devour.lua:4801 scripts/scenario_32_devour.lua:4834
-#: scripts/scenario_32_devour.lua:4845 scripts/scenario_32_devour.lua:4856
-#: scripts/scenario_32_devour.lua:4867 scripts/scenario_32_devour.lua:4878
-#: scripts/scenario_32_devour.lua:4881 scripts/scenario_32_devour.lua:4907
-#: scripts/scenario_32_devour.lua:4920 scripts/scenario_32_devour.lua:4933
-#: scripts/scenario_32_devour.lua:4991 scripts/scenario_32_devour.lua:5012
-#: scripts/scenario_32_devour.lua:5044 scripts/scenario_32_devour.lua:5065
-#: scripts/scenario_32_devour.lua:5082 scripts/scenario_32_devour.lua:5088
-#: scripts/scenario_32_devour.lua:5092 scripts/scenario_32_devour.lua:5111
-#: scripts/scenario_32_devour.lua:5134
+#: scripts/scenario_32_devour.lua:4737 scripts/scenario_32_devour.lua:4741
+#: scripts/scenario_32_devour.lua:4747 scripts/scenario_32_devour.lua:4764
+#: scripts/scenario_32_devour.lua:4772 scripts/scenario_32_devour.lua:4801
+#: scripts/scenario_32_devour.lua:4834 scripts/scenario_32_devour.lua:4845
+#: scripts/scenario_32_devour.lua:4856 scripts/scenario_32_devour.lua:4867
+#: scripts/scenario_32_devour.lua:4878 scripts/scenario_32_devour.lua:4881
+#: scripts/scenario_32_devour.lua:4907 scripts/scenario_32_devour.lua:4920
+#: scripts/scenario_32_devour.lua:4933 scripts/scenario_32_devour.lua:4991
+#: scripts/scenario_32_devour.lua:5012 scripts/scenario_32_devour.lua:5044
+#: scripts/scenario_32_devour.lua:5065 scripts/scenario_32_devour.lua:5082
+#: scripts/scenario_32_devour.lua:5088 scripts/scenario_32_devour.lua:5092
+#: scripts/scenario_32_devour.lua:5111 scripts/scenario_32_devour.lua:5134
 msgid "Back"
 msgstr "Précédent"
 
@@ -1350,11 +1371,27 @@ msgid ""
 "their load times increased from 3 seconds to 3 minutes. This should make it "
 "easier for you to deliver destructuve beam and missile fire to %s"
 msgstr ""
+"Joli travail !\n"
+"\n"
+"Après un long moment à étudier les plans…\n"
+"\n"
+"Nos analyses nous montre une faiblesse dans le système de contrôle des armes "
+"du %s.\n"
+"Si nous pouvions diffuser un virus informatique via un petit port "
+"d’échappement thermique se trouvant juste en dessous du port principal, nous "
+"devrions pouvoir créer un tunnel virtuel entre les systèmes d’armes en les "
+"forçant à passer en mode maintenance.\n"
+"\n"
+"La portée de %s des 16 faisceaux laser passerait alors de 3,2u à 1u et leur "
+"temps de rechargement passerait de 3s à 30s. De même, %s tubes de missiles "
+"sur 15 verraient leur temps de chargement passer de 3s à 3mn.\n"
+"Cela devrait vous permettre de lancer plus facilement vos attaques avec vos "
+"faisceaux laser et vos missiles destructeurs sur %s."
 
 #: scripts/scenario_32_devour.lua:2568
 msgctxt "mission-comms"
 msgid "How do we upload this virus?"
-msgstr "Comment télécharge-t-on ce virus ?"
+msgstr "Et comment diffuse-t-on ce virus ?"
 
 #: scripts/scenario_32_devour.lua:2570
 #, lua-format
@@ -1370,6 +1407,18 @@ msgid ""
 "for better protection. You'll probably also want your weapons officer to "
 "calibrate your shields, too."
 msgstr ""
+"Oh, l'approche ne sera pas facile.\n"
+"\n"
+"Vous devrez manœuvrer en suivant cette tranchée et parcourir la surface "
+"jusqu'à ce point. La zone cible ne fait que 2 mètres de large... ..."
+"euh... ...désolé, je lis le mauvais script.\n"
+"Approchez vous simplement à moins de 3 unités de %s et demandez à votre "
+"ingénieur d'activer la diffusion du virus à l'aide du bouton qui apparaîtra "
+"à ce moment là sur la console d'ingénierie.\n"
+"\n"
+"N'oubliez pas que la portée des faisceaux laser sur le %s est de 3,2u, vous "
+"devrez donc essuyer quelques tirs pour transmettre le virus. Votre ingénieur "
+"sera avisé de renforcer les boucliers pour une meilleure protection."
 
 #: scripts/scenario_32_devour.lua:2576
 msgctxt "mission-comms"
@@ -1384,7 +1433,7 @@ msgstr ""
 #: scripts/scenario_32_devour.lua:2577
 msgctxt "mission-comms"
 msgid "Where can we get the plans for the Planet Devourer?"
-msgstr "Où peut-on se procurer les plans du Dévoreur de planète ?"
+msgstr "Où peut-on se procurer les plans du Dévoreur de planètes ?"
 
 #: scripts/scenario_32_devour.lua:2589
 #, lua-format
@@ -1393,7 +1442,7 @@ msgid ""
 "Kraylor station %s in sector %s probably has them. But they are likely to be "
 "heavily protected."
 msgstr ""
-"La station Kraylor %s qui se trouve dans le secteur %s en a probablement. "
+"La station Kraylor %s qui se trouve dans le secteur %s les a probablement. "
 "Mais ils sont susceptibles d'être fortement protégés."
 
 #: scripts/scenario_32_devour.lua:2590
@@ -1409,13 +1458,14 @@ msgstr "Vous ne pouvez pas."
 #: scripts/scenario_32_devour.lua:2592
 msgctxt "mission-comms"
 msgid "What? There must be something we can do"
-msgstr "Quoi? Il doit bien y avoir quelque chose que nous pouvons faire"
+msgstr "Quoi ? Il doit bien il y avoir quelque chose que nous pouvons faire"
 
 #: scripts/scenario_32_devour.lua:2593
 msgctxt "mission-comms"
 msgid "I can't think of anything. Do you have any ideas?"
 msgstr ""
-"Je ne trouve aucune solution. Avez-vous une quelconque idée à soumettre ?"
+"Je ne trouve aucune solution. Auriez-vous une quelconque idée à nous "
+"soumettre ?"
 
 #: scripts/scenario_32_devour.lua:2594
 msgctxt "mission-comms"
@@ -1445,10 +1495,11 @@ msgid ""
 "close and stay close for it to work."
 msgstr ""
 "Ils ne vous laisseraient pas vous amarrer. Et même si vous pouviez vous "
-"frayer un chemin jusqu'à la station, le protocole standard consiste à "
-"effacer complètement les banques de données. Cependant, nous pourrions peut-"
-"être installer un puissant programme informatique sur votre vaisseau. Il "
-"faudrait s'approcher et rester près pour que ça marche."
+"frayer un chemin jusqu'à la station, le protocole standard de sécurité "
+"consiste à effacer complètement les banques de données. Cependant…\n"
+"Nous pourrions peut-être installer un puissant programme informatique sur "
+"votre vaisseau. Il faudrait s'approcher de la station et rester suffisamment "
+"près pour que ça marche."
 
 #: scripts/scenario_32_devour.lua:2600
 msgctxt "mission-comms"
@@ -1463,7 +1514,8 @@ msgid ""
 msgstr ""
 "Entendu,\n"
 "Vous devrez vous approcher à moins de 2,5 unités et y rester pendant au "
-"moins 47 secondes pour que le programme s'infiltre et extraie les plans."
+"moins 47 secondes pour que le programme s'infiltre et extraie les plans de "
+"leur banque de données."
 
 #: scripts/scenario_32_devour.lua:2602
 msgctxt "mission-comms"
@@ -1479,8 +1531,8 @@ msgstr ""
 "...Après quelques minutes d'attente...\n"
 "\n"
 "C'est fait. Nous avons installé le programme.\n"
-"Votre ingénieur verra s'afficher un bouton d'activation lorsque vous serez à "
-"portée."
+"Votre ingénieur verra s'afficher un bouton d'activation sur sa console "
+"lorsque vous serez à portée."
 
 #: scripts/scenario_32_devour.lua:2611
 msgctxt "mission-comms"
@@ -1495,13 +1547,17 @@ msgid ""
 "information is just not available anywhere but within Kraylor controlled "
 "space."
 msgstr ""
+"Ces plans sont hautement classifiés par les Kraylors. Nous avons essayé de "
+"parler à tous ceux qui ont travaillé dessus en dehors des groupes contrôlés "
+"par les Kraylors, mais il faut croire que cette information n'est disponible "
+"nulle part ailleurs que dans l'espace Kraylor."
 
 #: scripts/scenario_32_devour.lua:2615
 #, lua-format
 msgctxt "mission-comms"
 msgid "Deep scan %s ourselves to determine a weakness"
 msgstr ""
-"Analysons %s nous-mêmes de manière approfondie pour déterminer une faiblesse"
+"Analysons %s nous-mêmes de manière approfondie pour trouver une faiblesse"
 
 #: scripts/scenario_32_devour.lua:2616
 #, lua-format
@@ -1511,6 +1567,11 @@ msgid ""
 "functions. Even if you got some information, by the time you determined a "
 "weakness, the planets in this area will all have been destroyed."
 msgstr ""
+"Les boucliers de %s sont trop puissants. Ils empêcheraient toute analyse "
+"détaillée des fonctions du vaisseau.\n"
+"Et même si vous arriviez à obtenir des informations, le temps que vous "
+"trouviez une faiblesse, toutes les planètes de cette zone auront été "
+"détruites."
 
 #: scripts/scenario_32_devour.lua:2624
 msgctxt "mission-comms"
@@ -2016,7 +2077,7 @@ msgstr "Livrez les plans volés du Dévoreur de planètes à une station amie."
 #: scripts/scenario_32_devour.lua:3101
 msgctxt "orders-comms"
 msgid "Upload virus to Planet Devourer"
-msgstr "Chargez le virus sur le Dévoreur de planètes."
+msgstr "Diffuser le virus sur le Dévoreur de planètes."
 
 #: scripts/scenario_32_devour.lua:3122
 msgctxt "ammo-comms"
@@ -2163,6 +2224,10 @@ msgid ""
 "cannot intercept the transmission no matter how good the encryption "
 "protocols."
 msgstr ""
+"Quelle triste spectacle se serait...\n"
+"Sérieusement, si vous voulez discuter d'un sujet aussi sensible, amarrez-"
+"vous d'abord à nous, que les Kraylors ne puissent intercepter nos "
+"transmissions, quelle que soit l'efficacité des protocoles de cryptage."
 
 #: scripts/scenario_32_devour.lua:3311
 msgctxt "mission-comms"
@@ -2172,6 +2237,12 @@ msgid ""
 "interference. We've started analysis based on the gestalt, but need the "
 "physical plans to complete it and provide an exploitable weakness."
 msgstr ""
+"Apportez-les à une station alliée pour analyse.\n"
+"La bande passante limitée des communications subspatiales empêche toute "
+"transmission et décryptage sans interférence destructrice des Kraylors.\n"
+"Nous avons commencé une analyse basée sur la Gestalt (analyse globale et "
+"synthétique), mais nous avons besoin des plans physiques pour la compléter "
+"et trouver une faiblesse exploitable."
 
 #: scripts/scenario_32_devour.lua:3327
 msgctxt "station-comms"
@@ -2532,13 +2603,13 @@ msgstr ""
 #: scripts/scenario_32_devour.lua:3679
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "Rendez-vous at waypoint %i"
+msgid "Rendezvous at waypoint %i"
 msgstr "Rendez-vous au marqueur %i."
 
 #: scripts/scenario_32_devour.lua:3717
 #, lua-format
 msgctxt "stationAssist-comms"
-msgid "We have dispatched %s to rendez-vous at waypoint %i"
+msgid "We have dispatched %s to rendezvous at waypoint %i"
 msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au marqueur %i."
 
 #: scripts/scenario_32_devour.lua:3785 scripts/scenario_32_devour.lua:4724
@@ -3255,35 +3326,35 @@ msgstr ""
 #, lua-format
 msgctxt "mission-tabEngineer"
 msgid "Extract timer:%i"
-msgstr "Minuterie d'extraction :%i"
+msgstr "Extraction : %i"
 
 #: scripts/scenario_32_devour.lua:5712 scripts/scenario_32_devour.lua:5725
 #: scripts/scenario_32_devour.lua:5739
 #, lua-format
 msgctxt "mission-tabEngineer+"
 msgid "Extract timer:%i"
-msgstr "Minuterie d'extraction :%i"
+msgstr "Extraction : %i"
 
 #: scripts/scenario_32_devour.lua:5713 scripts/scenario_32_devour.lua:5727
 #, lua-format
 msgctxt "mission-tabHelms"
 msgid "Extract timer:%i"
-msgstr "Minuterie d'extraction :%i"
+msgstr "Extraction : %i"
 
 #: scripts/scenario_32_devour.lua:5718
 msgctxt "mission-buttonEngineer"
 msgid "Extract Plans"
-msgstr "Plans d'extraction"
+msgstr "Extraction des plans"
 
 #: scripts/scenario_32_devour.lua:5732
 msgctxt "mission-buttonEngineer+"
 msgid "Extract Plans"
-msgstr "Plans d'extraction"
+msgstr "Extraction des plans"
 
 #: scripts/scenario_32_devour.lua:5770
 msgctxt "mission-buttonEngineer"
 msgid "Upload Virus"
-msgstr "Charger le virus"
+msgstr "Diffusion du virus"
 
 #: scripts/scenario_32_devour.lua:5779
 #, lua-format
@@ -3292,13 +3363,14 @@ msgid ""
 "The virus has been uploaded to %s. A portion of the Planet Devourer's beam "
 "and missile systems have entered maintenance mode."
 msgstr ""
-"Le virus a bien été chargé sur %s. Une partie des systèmes des faisceaux "
-"laser et des missiles du Dévoreur de planètes est entrée en mode maintenance."
+"Le virus a bien été diffusé sur %s. Une partie des systèmes des faisceaux "
+"laser et des missiles du Dévoreur de planètes est entrée en mode maintenance "
+"comme prévu."
 
 #: scripts/scenario_32_devour.lua:5782
 msgctxt "mission-buttonEngineer+"
 msgid "Upload Virus"
-msgstr "Charger le virus"
+msgstr "Diffusion du virus"
 
 #: scripts/scenario_32_devour.lua:5787
 #, lua-format
@@ -3307,8 +3379,9 @@ msgid ""
 "The virus has been uploaded to %s. A portion of the Planet Devourer's beam "
 "and missile systems have entered maintenance mode."
 msgstr ""
-"Le virus a bien été chargé sur %s. Une partie des systèmes des faisceaux "
-"laser et des missiles du Dévoreur de planètes est entrée en mode maintenance."
+"Le virus a bien été diffusé sur %s. Une partie des systèmes des faisceaux "
+"laser et des missiles du Dévoreur de planètes est entrée en mode maintenance "
+"comme prévu."
 
 #: scripts/scenario_32_devour.lua:5902
 #, lua-format
@@ -3476,6 +3549,14 @@ msgid ""
 "20th century movie history buffs). We expect the Kraylor to wantonly destroy "
 "all the planets in the area, because that's just the kind of beings they are."
 msgstr ""
+"Nous avons intercepté des transmissions Kraylor lors de ce test de tir.\n"
+"Ils parlent de démontrer le pouvoir destructeur de leur force ultime dans "
+"l’univers. Cela commence à ressembler à l’intrigue d’une saga "
+"cinématographique culte de science-fiction de la fin du XXe siècle…\n"
+"Quoi qu'il en soit, ce vaisseau est le Dévoreur de planètes (et non l'Étoile "
+"de la Mort - Pour tous les cinéphiles du 20e siècle).\n"
+"Nous nous attendons à ce que les Kraylors détruisent sans raison toutes les "
+"planètes de la région, tout simplement car ils en sont apparemment capable."
 
 #: scripts/scenario_32_devour.lua:6285
 #, lua-format
@@ -3490,6 +3571,15 @@ msgid ""
 "Kraylor to wantonly destroy all the planets in the area, because that's just "
 "the kind of beings they are."
 msgstr ""
+"Nous avons intercepté des transmissions Kraylor lors de ce test de tir.\n"
+"Ils parlent de démontrer le pouvoir destructeur de leur force ultime dans "
+"l’univers. Cela commence à ressembler à l’intrigue d’une saga "
+"cinématographique culte de science-fiction de la fin du XXe siècle…\n"
+"Quoi qu'il en soit, le nom du vaisseau est %s (et non l'Étoile de la Mort - "
+"Pour tous les cinéphiles du 20e siècle).\n"
+"La classe du vaisseau est Dévoreur de planètes. Nous nous attendons à ce que "
+"les Kraylors détruisent sans raison toutes les planètes de la région, tout "
+"simplement car ils en sont apparemment capable."
 
 #: scripts/scenario_32_devour.lua:6304
 #, lua-format
