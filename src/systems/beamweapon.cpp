@@ -35,12 +35,12 @@ void BeamWeaponSystem::update(float delta)
     if (delta <= 0.0f) return;
 
     for(auto [entity, beamsys, target, transform, reactor, docking_port] : sp::ecs::Query<BeamWeaponSys, Target, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>>()) {
-        if (!target.entity) continue;
         auto warp = entity.getComponent<WarpDrive>();
 
         for(auto& mount : beamsys.mounts) {
             if (mount.cooldown > 0.0f)
                 mount.cooldown -= delta * beamsys.getSystemEffectiveness();
+            if (!target.entity) continue;
 
             // Check on beam weapons only if we are on the server, have a target, and
             // not paused, and if the beams are cooled down or have a turret arc.
@@ -387,7 +387,7 @@ void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
     
 
         // If the beam is turreted, draw the turret's arc. Otherwise, exit.
-        if (mount.arc == 0.0f)
+        if (mount.turret_arc == 0.0f)
             continue;
 
         // Initialize variables from the turret data.

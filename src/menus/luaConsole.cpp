@@ -19,7 +19,7 @@ LuaConsole::LuaConsole()
 {
     console = this;
 
-    top = new GuiOverlay(this, "", {0, 0, 0, 128});
+    top = new GuiOverlay(this, "", {0, 0, 0, 192});
     top->layout.fill_height = false;
     top->layout.size.y = 450;
     top->layout.margin.left = 50;
