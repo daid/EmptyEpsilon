@@ -178,6 +178,7 @@ int main(int argc, char** argv)
     engine->registerSystem<InternalCrewSystem>();
     engine->registerSystem<PathFindingSystem>();
     engine->registerSystem<NebulaRenderSystem>();
+    engine->registerSystem<ExplosionRenderSystem>();
     engine->registerSystem<PlanetRenderSystem>();
     engine->registerSystem<PlanetTransparentRenderSystem>();
     engine->registerSystem<MeshRenderSystem>();

@@ -91,9 +91,9 @@ end
 --- Use this if models you load are smaller or larger than expected.
 --- Defaults to 1.0.
 --- Example: model:setScale(20) -- scales the model up by 20x
-function ModelData:setScale()
+function ModelData:setScale(scale)
     if self.mesh_render == nil then self.mesh_render = {} end
-    self.mesh_render.scale = {x, y, z}
+    self.mesh_render.scale = scale
     return self
 end
 --- Sets this ModelData's base radius.
