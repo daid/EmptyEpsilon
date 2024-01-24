@@ -728,10 +728,29 @@ end
 --- Sets the scan state of this SpaceShip for every faction.
 --- Example: ship:setScanState("fullscan") -- every faction treats this ship as fully scanned
 function Entity:setScanState(state)
-    --TODO
+    local ss = self.scan_state
+    if ss ~= nil then
+        for name, faction in pairs(__faction_info) do
+            self.setScanStateByFaction(name, state)
+        end
+    end
+    return self
 end
 --- Sets the scan state of this SpaceShip for a given faction.
 --- Example: ship:setScanStateByFaction("Kraylor","fullscan") -- Kraylor faction treats this ship as fully scanned
 function Entity:setScanStateByFaction(faction, state)
-    --TODO
+    local ss = self.scan_state
+    if ss ~= nil then
+        local f = getFactionInfo(faction)
+        if f ~= nil then
+            for n=1,#ss do
+                if ss[n].faction == f then
+                    ss[n].state = state
+                    return self
+                end
+            end
+            ss[#ss+1] = {faction=f, state=state}
+        end
+    end
+    return self
 end

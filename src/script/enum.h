@@ -94,7 +94,7 @@ template<> struct Convert<ScanState::State> {
             return ScanState::State::FriendOrFoeIdentified;
         else if (str == "simple")
             return ScanState::State::SimpleScan;
-        else if (str == "full")
+        else if (str == "full" || str == "fullscan")
             return ScanState::State::FullScan;
         luaL_error(L, "Unknown scan state type: %s", str.c_str());
         return ScanState::State::NotScanned;

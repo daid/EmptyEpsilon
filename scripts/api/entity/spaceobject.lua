@@ -151,7 +151,8 @@ end
 --- obj:setCommsScript("comms_custom_script.lua") -- sets scripts/comms_custom_script.lua as this object's comms script
 --- obj:setCommsScript("") -- disables comms with this object
 function Entity:setCommsScript(script_name)
-    --TODO
+    self.comms_receiver = {script=script_name}
+    self.comms_receiver.callback = nil
     return self
 end
 --- Defines a function to call when this SpaceObject is hailed, in lieu of any current or default comms script.
@@ -164,7 +165,8 @@ end
 --- obj:setCommsFunction(function(comms_source, comms_target) ... end)
 --- Example: obj:setCommsFunction(commsStation) -- where commsStation is a function that calls setCommsMessage() at least once, and uses addCommsReply() to let players respond
 function Entity:setCommsFunction(callback)
-    --TODO
+    self.comms_receiver = {callback=callback}
+    self.comms_receiver.script = ""
     return self
 end
 --- Sets this SpaceObject's callsign.
@@ -323,33 +325,39 @@ end
 --- Example: obj:getRadarSignatureGravity()
 function Entity:getRadarSignatureGravity()
     --TODO
+    return 0.0
 end
 --- Returns this SpaceObject's electical radar signature value.
 --- Example: obj:getRadarSignatureElectrical()
 function Entity:getRadarSignatureElectrical()
     --TODO
+    return 0.0
 end
 --- Returns this SpaceObject's biological radar signature value.
 --- Example: obj:getRadarSignatureBiological()
 function Entity:getRadarSignatureBiological()
     --TODO
+    return 0.0
 end
 --- Sets this SpaceObject's scanning complexity (number of bars in the scanning minigame) and depth (number of scanning minigames to complete until fully scanned), respectively.
 --- Setting this also clears the object's scanned state.
 --- Example: obj:setScanningParameters(2, 3)
 function Entity:setScanningParameters(complexity, depth)
-    --TODO
+    self.scan_state = {complexity=complexity, depth=depth}
+    self.setScanned(false)
     return self
 end
 --- Returns the scanning complexity for the given SpaceObject.
 --- Example: obj:scanningComplexity(obj)
 function Entity:scanningComplexity()
-    --TODO
+    if self.scan_state then return self.scan_state.complexity end
+    return 0
 end
 --- Returns the maximum scanning depth for the given SpaceObject.
 --- Example: obj:scanningChannelDepth(obj)
 function Entity:scanningChannelDepth()
-    --TODO
+    if self.scan_state then return self.scan_state.depth end
+    return 0
 end
 --- Defines whether all factions consider this SpaceObject as having been scanned.
 --- Only SpaceShip objects are created in an unscanned state. Other SpaceObjects are created as fully scanned.
@@ -357,32 +365,72 @@ end
 --- If true, all factions treat this object as fully scanned.
 --- Example: obj:setScanned(true)
 function Entity:setScanned(is_scanned)
-    --TODO
+    if is_scanned then self:setScanState("full") else self:setScanState("none") end
     return self
 end
 --- [DEPRECATED]
 --- Returns whether this SpaceObject has been scanned.
 --- Use SpaceObject:isScannedBy() or SpaceObject:isScannedByFaction() instead.
 function Entity:isScanned()
-    --TODO
+    local ss = self.scan_state
+    if ss then
+        for n=1,#ss do
+            if ss[n].state == "full" return true end
+            if ss[n].state == "simple" return true end
+        end
+        return false
+    end
+    return true
 end
 --- Returns whether the given SpaceObject has successfully scanned this SpaceObject.
 --- Example: obj:isScannedBy(other)
-function Entity:isScannedBy()
-    --TODO
+function Entity:isScannedBy(other)
+    if not other then return false end
+    local f = other:getFactionId()
+    if f then
+        local ss = self.scan_state
+        if ss then
+            for n=1,#ss do
+                if ss[n].faction == f then
+                    if ss[n].state == "full" return true end
+                    if ss[n].state == "simple" return true end
+                    return false
+                end
+            end
+            return false
+        end
+    end
+    return true
 end
 --- Defines whether a given faction considers this SpaceObject as having been scanned.
 --- Requires a faction name string value as defined by its FactionInfo, and a Boolean value.
 --- Example: obj:setScannedByFaction("Human Navy", false)
 function Entity:setScannedByFaction(faction_name, is_scanned)
-    --TODO
+    if is_scanned then
+        setScanStateByFaction(faction_name, "full")
+    else
+        setScanStateByFaction(faction_name, "none")
+    end
     return self
 end
 --- Returns whether the given faction has successfully scanned this SpaceObject.
 --- Requires a faction name string value as defined by its FactionInfo.
 --- Example: obj:isScannedByFaction("Human Navy")
 function Entity:isScannedByFaction(faction_name)
-    --TODO
+    local ss = self.scan_state
+    if ss then
+        local f = getFactionInfo(faction)
+        if f ~= nil then
+            for n=1,#ss do
+                if ss[n].faction == f then
+                    if ss[n].state == "full" return true end
+                    if ss[n].state == "simple" return true end
+                    return false
+                end
+            end
+        end
+    end
+    return false
 end
 --- Defines a function to call when this SpaceObject is destroyed by any means.
 --- Example:
