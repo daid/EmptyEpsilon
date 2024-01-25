@@ -661,36 +661,36 @@ end
 --- Defines whether combat maneuver controls appear on related crew screens in this PlayerSpaceship.
 --- Example: player:setCanCombatManeuver(true)
 function Entity:setCanCombatManeuver(enabled)
-    --TODO
+    if enabled then self.combat_maneuvering_thrusters = {} else self.combat_maneuvering_thrusters = nil end
     return self
 end
 --- Returns whether combat maneuver controls appear on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanCombatManeuver()
 function Entity:getCanCombatManeuver()
-    --TODO
+    return self.combat_maneuvering_thrusters ~= nil
 end
 --- Defines whether ScanProbe-launching controls appear on related crew screens in this PlayerSpaceship.
 --- Example: player:setCanLaunchProbe(true)
 function Entity:setCanLaunchProbe(enabled)
-    --TODO
+    if enabled then self.scan_probe_launcher = {} else self.scan_probe_launcher = nil end
     return self
 end
 --- Returns whether ScanProbe-launching controls appear on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanLaunchProbe()
 function Entity:getCanLaunchProbe()
-    --TODO
+    return self.scan_probe_launcher ~= nil
 end
 --- Defines whether self-destruct controls appear on related crew screens in this PlayerSpaceship.
 --- Example: player:setCanSelfDestruct(true)
 function Entity:setCanSelfDestruct(enabled)
-    --TODO
+    if enabled then self.self_destruct = {} else self.self_destruct = nil end
     return self
 end
 --- Returns whether self-destruct controls appear on related crew screens in this PlayerSpaceship.
 --- This returns false if this ship's self-destruct size and damage are both 0, even if you set setCanSelfDestruct(true).
 --- Example: player:getCanSelfDestruct()
 function Entity:getCanSelfDestruct()
-    --TODO
+    return self.self_destruct ~= nil
 end
 --- Sets the amount of damage done to nearby SpaceObjects when this PlayerSpaceship self-destructs.
 --- Any given value is randomized +/- 33 percent upon self-destruction.
