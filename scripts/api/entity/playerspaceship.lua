@@ -623,36 +623,40 @@ end
 --- Defines whether scanning features appear on related crew screens in this PlayerSpaceship.
 --- Example: player:setCanScan(true)
 function Entity:setCanScan(enabled)
-    --TODO
+    if enabled then self.science_scanner = {} else self.science_scanner = nil end
     return self
 end
 --- Returns whether scanning features appear on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanScan()
 function Entity:getCanScan()
-    --TODO
+    return self.science_scanner ~= nil
 end
 --- Defines whether hacking features appear on related crew screens in thisPlayerSpaceship.
 --- Example: player:setCanHack(true)
 function Entity:setCanHack(enabled)
-    --TODO
+    if enabled then self.hacking_device = {} else self.hacking_device = nil end
     return self
 end
 --- Returns whether hacking features appear on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanHack()
 function Entity:getCanHack()
-    --TODO
+    return self.hacking_device ~= nil
 end
 --- Defines whether the "Request Docking" button appears on related crew screens in this PlayerSpaceship.
 --- This doesn't override any docking class restrictions set on a target SpaceShip.
 --- Example: player:setCanDock(true)
 function Entity:setCanDock(enabled)
-    --TODO
+    if enabled then
+        self.docking_port = {}
+    else
+        self.docking_port = nil
+    end
     return self
 end
 --- Returns whether the "Request Docking" button appears on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanDock()
 function Entity:getCanDock()
-    --TODO
+    return self.docking_port ~= nil
 end
 --- Defines whether combat maneuver controls appear on related crew screens in this PlayerSpaceship.
 --- Example: player:setCanCombatManeuver(true)
