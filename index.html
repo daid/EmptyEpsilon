@@ -977,11 +977,14 @@ $(function() {
 	$("#download-tabs li" ).removeClass("ui-corner-top").addClass("ui-corner-left");
 	$("#download-tabs div" ).removeClass("ui-corner-bottom");
 
-
 	$('[href="#tabs-stations"]').click(() => $("#tabs").tabs("option", "active", 3));
 	$('[href="#tabs-scripting"]').click(
 		() => $("#tabs").tabs("option", "active", 4)
 	);
+	$('[href="#tabs-science"]').click(() => {
+		$("#tabs").tabs("option", "active", 3);
+		$("#station-tabs").tabs("option", "active", 4);
+	});
 
 	// $.each($("img"), function(idx, element)
 	// {
