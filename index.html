@@ -977,6 +977,10 @@ $(function() {
 	$("#download-tabs li" ).removeClass("ui-corner-top").addClass("ui-corner-left");
 	$("#download-tabs div" ).removeClass("ui-corner-bottom");
 
+	$('[href="#tabs-scripting"]').click(
+		() => $("#tabs").tabs("option", "active", 4)
+	);
+
 	// $.each($("img"), function(idx, element)
 	// {
 	// 	element = $(element)
