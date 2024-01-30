@@ -449,7 +449,7 @@ void ShipAI::runOrders()
         {
             P<ShipTemplateBasedObject> target = owner->getOrderTarget();
             bool allow_undock = true;
-            if (target->restocks_missiles_docked)
+            if (target->canRestockMissiles(owner))
             {
                 for(int n = 0; n < MW_Count; n++)
                 {
@@ -829,7 +829,10 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float ra
         P<SpaceObject> space_object = obj;
         if (!space_object || !owner->isFriendly(space_object) || space_object == target)
             continue;
-        if (space_object->canBeDockedBy(owner) == DockStyle::None || !space_object->canRestockMissiles())
+        if (space_object->canBeDockedBy(owner) == DockStyle::None)
+            continue;
+        P<ShipTemplateBasedObject> stbo = space_object;
+        if (stbo && !stbo->canRestockMissiles(owner))
             continue;
         //calculate score
         auto position_difference = space_object->getPosition() - owner_position;

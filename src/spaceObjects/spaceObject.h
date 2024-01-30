@@ -202,7 +202,6 @@ public:
     virtual string getCallSign() { return callsign; }
     virtual DockStyle canBeDockedBy(P<SpaceObject> obj) { return DockStyle::None; }
     virtual DockStyle getDockedStyle() { return DockStyle::None; }
-    virtual bool canRestockMissiles() { return false; }
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
     virtual bool canBeTargetedBy(P<SpaceObject> other);

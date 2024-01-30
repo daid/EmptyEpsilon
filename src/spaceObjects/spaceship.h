@@ -93,6 +93,7 @@ public:
     constexpr static float heat_per_combat_maneuver_strafe = 0.2f;
     constexpr static float heat_per_warp = 0.02f;
     constexpr static float unhack_time = 180.0f; //It takes this amount of time to go from 100% hacked to 0% hacked for systems.
+    constexpr static float missile_resupply_time = 10.0f;
 
     float energy_level;
     float max_energy_level;
@@ -211,6 +212,8 @@ public:
     DockStyle docked_style = DockStyle::None;
     P<SpaceObject> docking_target; //Server only
     glm::vec2 docking_offset{0, 0}; //Server only
+
+    float missile_resupply_delay = missile_resupply_time;
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
     virtual ~SpaceShip();
