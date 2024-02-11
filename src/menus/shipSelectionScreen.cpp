@@ -593,6 +593,7 @@ void CrewPositionSelection::onUpdate()
     bool any_selected = main_screen_button->getValue() || window_button->getValue() || topdown_button->getValue();
     // If a position already has a player on the currently selected player ship,
     // indicate that on the button.
+    string crew_text = "";
     for(int n = 0; n < max_crew_positions; n++)
     {
         string button_text = getCrewPositionName(ECrewPosition(n));
@@ -611,13 +612,16 @@ void CrewPositionSelection::onUpdate()
 
             if (players.size() > 0)
             {
-                crew_position_button[n]->setText(button_text + " (" + string(", ").join(players) + ")");
+                crew_position_button[n]->setText(button_text + " [x]");
+                crew_text += "\n" + button_text + ": " + string(", ").join(players) + "";
             } else {
                 crew_position_button[n]->setText(button_text);
             }
             any_selected = any_selected || crew_position_button[n]->getValue();
         }
     }
+    if (crew_text != "") crew_text = "\n\n" + tr("--- Crew ---") + crew_text;
+    station_info->setText(station_info_text + crew_text);
 
     ready_button->setEnable(any_selected);
 }
