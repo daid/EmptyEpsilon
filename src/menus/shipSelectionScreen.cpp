@@ -580,9 +580,10 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     for(int n=int(singlePilot) + 1; n<int(max_crew_positions); n++)
     create_crew_position_button(layout, n);
 	// Info text panel
-	auto info_panel= new GuiPanel(right_container,"");
+	auto info_panel = new GuiPanel(right_container,"");
 	station_info_text = tr("You can select multiple stations and switch between them during the game.\nIf mainscreen is selected alongside stations, it will be shown next to the current station (if the total screen size is wide enough).");
 	info_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
 	station_info = new GuiScrollText(info_panel, "STATION_INFO", station_info_text);
 	station_info->setPosition(0, 10, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(15, 0, 15, 10);
 
@@ -612,7 +613,7 @@ void CrewPositionSelection::onUpdate()
 
             if (players.size() > 0)
             {
-                crew_position_button[n]->setText(button_text + " [x]");
+                crew_position_button[n]->setText(button_text + " ["+ std::to_string(players.size()) +"]");
                 crew_text += "\n" + button_text + ": " + string(", ").join(players) + "";
             } else {
                 crew_position_button[n]->setText(button_text);
