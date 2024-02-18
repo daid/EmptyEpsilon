@@ -146,11 +146,11 @@ ShipSelectionScreen::ShipSelectionScreen()
     auto right_panel = new GuiPanel(right_container, "DIRECT_OPTIONS_PANEL");
     if (game_server) {
     right_panel->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 325);
-	}
-	else
-	{
-	right_panel->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 560);
-	}
+    }
+    else
+    {
+    right_panel->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 560);
+    }
     auto right_content = new GuiElement(right_panel, "");
     right_content->setMargins(50)->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
@@ -334,8 +334,8 @@ ShipSelectionScreen::ShipSelectionScreen()
     {
         GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", [this](int index, string value)
         {
-			P<ShipTemplate> ship_template = ShipTemplate::getTemplate(value);
-			playership_info->setText(ship_template->getDescription());
+            P<ShipTemplate> ship_template = ShipTemplate::getTemplate(value);
+            playership_info->setText(ship_template->getDescription());
         });
 
         // List only ships with templates designated for player use.
@@ -484,7 +484,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     right_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
     right_container->setMargins(25, 50, 25, 100);
 
-	// 5-6-crew panel
+    // 5-6-crew panel
     auto standard_crew_panel = new GuiPanel(left_container, "");
     standard_crew_panel->setSize(GuiElement::GuiSizeMax, 335)->setPosition(0, 0, sp::Alignment::BottomCenter)->setMargins(0, 0, 0, 25);
     (new GuiLabel(standard_crew_panel, "CREW_POSITION_SELECT_LABEL", tr("6/5 player crew"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setMargins(15, 0);
@@ -506,7 +506,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
         create_crew_position_button(layout, n);
 
 
-	// 3-4-crew panel
+    // 3-4-crew panel
     auto limited_crew_panel = new GuiPanel(left_container, "");
     limited_crew_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);;
     (new GuiLabel(limited_crew_panel, "CREW_POSITION_SELECT_LABEL", tr("4/3/1 player crew"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setMargins(15, 0);
@@ -564,7 +564,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     ready_button->setSize(300, 50)->setPosition(-100, -25, sp::Alignment::BottomRight);
 
 
-	// Alternative options panel
+    // Alternative options panel
     auto alternative_options_panel = new GuiPanel(center_container, "");
     alternative_options_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);;
     (new GuiLabel(alternative_options_panel, "CREW_POSITION_SELECT_LABEL", tr("Alternative options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setMargins(15, 0);
@@ -579,13 +579,13 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     layout->setMargins(25, 50, 25, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
     for(int n=int(singlePilot) + 1; n<int(max_crew_positions); n++)
     create_crew_position_button(layout, n);
-	// Info text panel
-	auto info_panel = new GuiPanel(right_container,"");
-	station_info_text = tr("You can select multiple stations and switch between them during the game.\nIf mainscreen is selected alongside stations, it will be shown next to the current station (if the total screen size is wide enough).");
-	info_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    // Info text panel
+    auto info_panel = new GuiPanel(right_container,"");
+    station_info_text = tr("You can select multiple stations and switch between them during the game.\nIf mainscreen is selected alongside stations, it will be shown next to the current station (if the total screen size is wide enough).");
+    info_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-	station_info = new GuiScrollText(info_panel, "STATION_INFO", station_info_text);
-	station_info->setPosition(0, 10, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(15, 0, 15, 10);
+    station_info = new GuiScrollText(info_panel, "STATION_INFO", station_info_text);
+    station_info->setPosition(0, 10, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(15, 0, 15, 10);
 
 }
 
