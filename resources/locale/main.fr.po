@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-08-07 20:18+0200\n"
+"PO-Revision-Date: 2024-02-27 23:18+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: .\n"
 
 #: src/scienceDatabase.cpp:397
@@ -315,7 +315,7 @@ msgid "Connecting..."
 msgstr "Connexion en cours..."
 
 #: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:58
-#: src/menus/shipSelectionScreen.cpp:544 src/screens/gm/gameMasterScreen.cpp:93
+#: src/menus/shipSelectionScreen.cpp:559 src/screens/gm/gameMasterScreen.cpp:93
 #: src/screens/gm/objectCreationView.cpp:142
 #: src/screens/gm/globalMessageEntryView.cpp:19
 #: src/screenComponents/selfDestructButton.cpp:25
@@ -793,38 +793,57 @@ msgstr "Retour scénario"
 msgid "Disconnect"
 msgstr "Déconnexion"
 
-#: src/menus/shipSelectionScreen.cpp:477
+#: src/menus/shipSelectionScreen.cpp:490
 msgid "6/5 player crew"
 msgstr "Équipage 5/6 joueurs"
 
-#: src/menus/shipSelectionScreen.cpp:480
-msgid "Main screen"
-msgstr "Écran principal"
-
-#: src/menus/shipSelectionScreen.cpp:502
+#: src/menus/shipSelectionScreen.cpp:512
 msgid "4/3/1 player crew"
 msgstr "Équipage 1/3/4 joueurs"
 
-#: src/menus/shipSelectionScreen.cpp:510
-msgid "Alternative options"
-msgstr "Options alternatives"
+#: src/menus/shipSelectionScreen.cpp:521
+msgid "3D screens"
+msgstr "Vues de l'espace en 3D"
 
-#: src/menus/shipSelectionScreen.cpp:517
-msgid "Main screen controls"
-msgstr "Contrôle écran principal"
+#: src/menus/shipSelectionScreen.cpp:524
+msgid "Main screen"
+msgstr "Écran principal"
 
-#: src/menus/shipSelectionScreen.cpp:525 src/menus/autoConnectScreen.cpp:28
+#: src/menus/shipSelectionScreen.cpp:534 src/menus/autoConnectScreen.cpp:28
 msgid "Ship window"
-msgstr "Vue fenêtre"
+msgstr "Vue du vaisseau"
 
-#: src/menus/shipSelectionScreen.cpp:538
+#: src/menus/shipSelectionScreen.cpp:553
 msgid "Top-down 3D view"
-msgstr "Vue de haut en 3D"
+msgstr "Vue plongeante"
 
-#: src/menus/shipSelectionScreen.cpp:548
+#: src/menus/shipSelectionScreen.cpp:563
 msgctxt "button"
 msgid "Ready"
 msgstr "Démarrer la partie"
+
+#: src/menus/shipSelectionScreen.cpp:570
+msgid "Alternative options"
+msgstr "Options alternatives"
+
+#: src/menus/shipSelectionScreen.cpp:574
+msgid "Main screen controls"
+msgstr "Contrôle écran principal"
+
+#: src/menus/shipSelectionScreen.cpp:584
+msgid ""
+"You can select multiple stations and switch between them during the game.\n"
+"If mainscreen is selected alongside stations, it will be shown next to the "
+"current station (if the total screen size is wide enough)."
+msgstr ""
+"Vous pouvez sélectionner plusieurs postes et switcher entre eux (touche Tab) "
+"durant la partie.\n"
+"Si vous sélectionnez aussi l'écran principal, il s'affichera à droite de "
+"votre poste (si votre écran est suffisamment large)."
+
+#: src/menus/shipSelectionScreen.cpp:624
+msgid "--- Crew ---"
+msgstr "--- Équipage ---"
 
 #: src/screens/cinematicViewScreen.cpp:41 src/screens/topDownScreen.cpp:33
 msgctxt "button"
