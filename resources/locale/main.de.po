@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: src/scienceDatabase.cpp:397
 msgctxt "database direction"
@@ -312,7 +312,7 @@ msgid "Connecting..."
 msgstr "Verbinde..."
 
 #: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:58
-#: src/menus/shipSelectionScreen.cpp:544 src/screens/gm/gameMasterScreen.cpp:93
+#: src/menus/shipSelectionScreen.cpp:559 src/screens/gm/gameMasterScreen.cpp:93
 #: src/screens/gm/objectCreationView.cpp:142
 #: src/screens/gm/globalMessageEntryView.cpp:19
 #: src/screenComponents/selfDestructButton.cpp:25
@@ -791,38 +791,58 @@ msgstr "Szenario-Auswahl"
 msgid "Disconnect"
 msgstr "Verbindung trennen"
 
-#: src/menus/shipSelectionScreen.cpp:477
+#: src/menus/shipSelectionScreen.cpp:490
 msgid "6/5 player crew"
 msgstr "Crewstärke: 5-6 Personen"
 
-#: src/menus/shipSelectionScreen.cpp:480
-msgid "Main screen"
-msgstr "Hauptschirm"
-
-#: src/menus/shipSelectionScreen.cpp:502
+#: src/menus/shipSelectionScreen.cpp:512
 msgid "4/3/1 player crew"
 msgstr "Crewstärke: 4/3/1 Personen"
 
-#: src/menus/shipSelectionScreen.cpp:510
-msgid "Alternative options"
-msgstr "Weitere Optionen"
+#: src/menus/shipSelectionScreen.cpp:521
+msgid "3D screens"
+msgstr "3D-Ansicht"
 
-#: src/menus/shipSelectionScreen.cpp:517
-msgid "Main screen controls"
-msgstr "Hauptschirm-Steuerung"
+#: src/menus/shipSelectionScreen.cpp:524
+msgid "Main screen"
+msgstr "Hauptschirm"
 
-#: src/menus/shipSelectionScreen.cpp:525
+#: src/menus/shipSelectionScreen.cpp:534 src/menus/autoConnectScreen.cpp:28
 msgid "Ship window"
 msgstr "Schiffsfenster"
 
-#: src/menus/shipSelectionScreen.cpp:538
+#: src/menus/shipSelectionScreen.cpp:553
 msgid "Top-down 3D view"
 msgstr "Draufsicht"
 
-#: src/menus/shipSelectionScreen.cpp:548
+#: src/menus/shipSelectionScreen.cpp:563
 msgctxt "button"
 msgid "Ready"
 msgstr "Bereit"
+
+#: src/menus/shipSelectionScreen.cpp:570
+msgid "Alternative options"
+msgstr "Weitere Optionen"
+
+#: src/menus/shipSelectionScreen.cpp:574
+msgid "Main screen controls"
+msgstr "Hauptschirm-Steuerung"
+
+#: src/menus/shipSelectionScreen.cpp:584
+msgid ""
+"You can select multiple stations and switch between them during the game.\n"
+"If mainscreen is selected alongside stations, it will be shown next to the "
+"current station (if the total screen size is wide enough)."
+msgstr ""
+"Du kannst mehrere Stationen auswählen und während des Spiels zwischen ihnen "
+"wechseln.\n"
+"Wurde zusätzlich zu einer Station auch der Hauptschirm ausgewählt, so wird "
+"dieser neben der aktiven Station angezeigt (vorausgesetzt, der "
+"Gesamtbildschirm ist breit genug)."
+
+#: src/menus/shipSelectionScreen.cpp:624
+msgid "--- Crew ---"
+msgstr "--- Crew ---"
 
 #: src/screens/cinematicViewScreen.cpp:41 src/screens/topDownScreen.cpp:33
 msgctxt "button"
@@ -1038,7 +1058,18 @@ msgstr "Zusatzschaden"
 msgid "Damage negate"
 msgstr "Schadensreduktion"
 
-#: src/screens/crew6/scienceScreen.cpp:96 src/screens/crew6/relayScreen.cpp:81
+#: src/screens/crew6/scienceScreen.cpp:80
+msgctxt "scienceTab"
+msgid "Scanning"
+msgstr "Scan"
+
+#: src/screens/crew6/scienceScreen.cpp:80
+msgctxt "scienceTab"
+msgid "Other"
+msgstr "Sonstiges"
+
+#: src/screens/crew6/scienceScreen.cpp:96
+msgctxt "science"
 msgid "Callsign"
 msgstr "Rufzeichen"
 
@@ -1048,14 +1079,17 @@ msgid "Distance"
 msgstr "Entfernung"
 
 #: src/screens/crew6/scienceScreen.cpp:100
+msgctxt "science"
 msgid "Bearing"
 msgstr "Richtung"
 
 #: src/screens/crew6/scienceScreen.cpp:102
+msgctxt "science"
 msgid "Rel. Speed"
 msgstr "Rel. Geschwind."
 
-#: src/screens/crew6/scienceScreen.cpp:104 src/screens/crew6/relayScreen.cpp:84
+#: src/screens/crew6/scienceScreen.cpp:104
+msgctxt "science"
 msgid "Faction"
 msgstr "Fraktion"
 
@@ -1065,7 +1099,7 @@ msgid "Type"
 msgstr "Typ"
 
 #: src/screens/crew6/scienceScreen.cpp:108
-msgctxt "database"
+msgctxt "scienceButton"
 msgid "DB"
 msgstr "DB"
 
@@ -1095,24 +1129,37 @@ msgid "Description"
 msgstr "Beschreibung"
 
 #: src/screens/crew6/scienceScreen.cpp:178
-msgctxt "button"
+msgctxt "scienceButton"
 msgid "Probe View"
 msgstr "Sondenansicht"
 
 #: src/screens/crew6/scienceScreen.cpp:204
-#: src/screens/crew6/scienceScreen.cpp:246 src/screens/crew6/relayScreen.cpp:88
+#: src/screens/crew6/scienceScreen.cpp:246
+msgctxt "scienceButton"
 msgid "Zoom: {zoom}x"
 msgstr "Zoom: {zoom}x"
 
 #: src/screens/crew6/scienceScreen.cpp:217
-msgctxt "button"
+msgctxt "scienceButton"
 msgid "Radar"
 msgstr "Radar"
 
 #: src/screens/crew6/scienceScreen.cpp:217
-msgctxt "button"
+msgctxt "scienceButton"
 msgid "Database"
 msgstr "Datenbank"
+
+#: src/screens/crew6/relayScreen.cpp:81
+msgid "Callsign"
+msgstr "Rufzeichen"
+
+#: src/screens/crew6/relayScreen.cpp:84
+msgid "Faction"
+msgstr "Fraktion"
+
+#: src/screens/crew6/relayScreen.cpp:88
+msgid "Zoom: {zoom}x"
+msgstr "Zoom: {zoom}x"
 
 #: src/screens/crew6/relayScreen.cpp:103
 msgid "Link to Comms"
@@ -1687,7 +1734,7 @@ msgstr "gewünschte Rate"
 
 #: src/screens/gm/tweak.cpp:983
 msgid "Control code:"
-msgstr "Kontrollcode: "
+msgstr "Kontrollcode:"
 
 #: src/screens/gm/tweak.cpp:992
 msgid "Reputation:"
@@ -2261,7 +2308,7 @@ msgstr "Suche nach Vorräten."
 #: src/spaceObjects/cpuShip.cpp:227 src/spaceObjects/cpuShip.cpp:311
 msgctxt "cpulog"
 msgid "Docking to {callsign}."
-msgstr "Docke an {object}."
+msgstr "Docke an {callsign}."
 
 #: src/spaceObjects/cpuShip.cpp:238
 msgctxt "cpulog"
@@ -2271,27 +2318,27 @@ msgstr "Halte Position."
 #: src/spaceObjects/cpuShip.cpp:246
 msgctxt "cpulog"
 msgid "Defending {x},{y}."
-msgstr "Verteidige {object}."
+msgstr "Verteidige {x},{y}."
 
 #: src/spaceObjects/cpuShip.cpp:256
 msgctxt "cpulog"
 msgid "Defending {callsign}."
-msgstr "Verteidige {object}."
+msgstr "Verteidige {callsign}."
 
 #: src/spaceObjects/cpuShip.cpp:266
 msgctxt "cpulog"
 msgid "Following {callsign}."
-msgstr "Folge {object}."
+msgstr "Folge {callsign}."
 
 #: src/spaceObjects/cpuShip.cpp:274 src/spaceObjects/cpuShip.cpp:282
 msgctxt "cpulog"
 msgid "Moving to {x},{y}."
-msgstr "Fliege zu  {xposition},{yposition}."
+msgstr "Fliege zu  {x},{y}."
 
 #: src/spaceObjects/cpuShip.cpp:297
 msgctxt "cpulog"
 msgid "Moving to attack {callsign}!"
-msgstr "Greife {object} an!"
+msgstr "Greife {callsign} an!"
 
 #: src/spaceObjects/cpuShip.cpp:326
 msgctxt "gm_info"
@@ -3305,3 +3352,7 @@ msgstr "FPS anzeigen"
 msgctxt "hotkey_debug"
 msgid "Show debug timing"
 msgstr "Timing-infos anzeigen"
+
+#~ msgctxt "button"
+#~ msgid "Database"
+#~ msgstr "Datenbank"
