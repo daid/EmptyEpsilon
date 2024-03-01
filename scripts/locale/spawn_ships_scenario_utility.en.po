@@ -1,0 +1,557 @@
+#: scripts/spawn_ships_scenario_utility.lua:26
+msgctxt "buttonGM"
+msgid "-Main From Spawn Ships"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:27
+msgctxt "buttonGM"
+msgid "+Spawn Fleet"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:28
+msgctxt "buttonGM"
+msgid "+Spawn a ship"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:33
+msgctxt "buttonGM"
+msgid "+Spawn Fighter Wing"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:63
+msgctxt "buttonGM"
+msgid "Random"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:64
+msgctxt "buttonGM"
+msgid "Fighters"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:65
+msgctxt "buttonGM"
+msgid "Chasers"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:66
+msgctxt "buttonGM"
+msgid "Frigates"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:67
+msgctxt "buttonGM"
+msgid "Beamers"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:68
+msgctxt "buttonGM"
+msgid "Missilers"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:69
+msgctxt "buttonGM"
+msgid "Adders"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:70
+msgctxt "buttonGM"
+msgid "Non-DB"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:71
+msgctxt "buttonGM"
+msgid "Drones"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:77
+msgctxt "buttonGM"
+msgid "Unmodified"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:78
+msgctxt "buttonGM"
+msgid "Improved"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:79
+msgctxt "buttonGM"
+msgid "Degraded"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:80
+msgctxt "buttonGM"
+msgid "Tinkered"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:89
+msgctxt "buttonGM"
+msgid "Stand Ground"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:90
+msgctxt "buttonGM"
+msgid "Roaming"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:91
+msgctxt "buttonGM"
+msgid "Idle"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:97
+msgctxt "buttonGM"
+msgid "At Click"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:98
+msgctxt "buttonGM"
+msgid "Ambush"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:107
+msgctxt "buttonGM"
+msgid "full"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:108
+msgctxt "buttonGM"
+msgid "less/heavy"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:109
+msgctxt "buttonGM"
+msgid "more/light"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1356
+msgctxt "msgGM"
+msgid "fleet spawn"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1357
+msgctxt "msgGM"
+msgid "set prebuilt target"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1358
+msgctxt "msgGM"
+msgid "spawn prebuilt fleet"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1359
+msgctxt "msgGM"
+msgid "ship spawn"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1395
+msgctxt "buttonGM"
+msgid "-Main From Flt Spwn"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1396
+#: scripts/spawn_ships_scenario_utility.lua:1509
+#: scripts/spawn_ships_scenario_utility.lua:1588
+#: scripts/spawn_ships_scenario_utility.lua:1709
+#: scripts/spawn_ships_scenario_utility.lua:1739
+#: scripts/spawn_ships_scenario_utility.lua:2162
+#: scripts/spawn_ships_scenario_utility.lua:2445
+#: scripts/spawn_ships_scenario_utility.lua:2454
+#: scripts/spawn_ships_scenario_utility.lua:2490
+#: scripts/spawn_ships_scenario_utility.lua:2526
+#: scripts/spawn_ships_scenario_utility.lua:2647
+msgctxt "buttonGM"
+msgid "-Fleet or Ship"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1401
+#, lua-format
+msgctxt "buttonGM"
+msgid "+%s*player strength: %s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1403
+#: scripts/spawn_ships_scenario_utility.lua:1514
+#, lua-format
+msgctxt "buttonGM"
+msgid "+1/4 player strength: %s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1405
+#: scripts/spawn_ships_scenario_utility.lua:1516
+#, lua-format
+msgctxt "buttonGM"
+msgid "+1/2 player strength: %s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1409
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Fixed Strength %i"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1412
+msgctxt "buttonGM"
+msgid "+Formation"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1439
+msgctxt "buttonGM"
+msgid ">Spawn<"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1441
+msgctxt "buttonGM"
+msgid "Spawn"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1508
+msgctxt "buttonGM"
+msgid "-Main from Rel Str"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1510
+#: scripts/spawn_ships_scenario_utility.lua:1589
+#: scripts/spawn_ships_scenario_utility.lua:1620
+#: scripts/spawn_ships_scenario_utility.lua:1710
+#: scripts/spawn_ships_scenario_utility.lua:1740
+#: scripts/spawn_ships_scenario_utility.lua:2163
+#: scripts/spawn_ships_scenario_utility.lua:2446
+#: scripts/spawn_ships_scenario_utility.lua:2455
+#: scripts/spawn_ships_scenario_utility.lua:2491
+#: scripts/spawn_ships_scenario_utility.lua:2527
+msgctxt "buttonGM"
+msgid "-Fleet Spawn"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1512
+#, lua-format
+msgctxt "buttonGM"
+msgid "-%s*player strength: %s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1519
+#: scripts/spawn_ships_scenario_utility.lua:2164
+msgctxt "buttonGM"
+msgid "Switch to Fixed Strength"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1524
+#: scripts/spawn_ships_scenario_utility.lua:1596
+msgctxt "buttonGM"
+msgid "Switch to Formation"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1587
+msgctxt "buttonGM"
+msgid "-Main from Fix Str"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1590
+msgctxt "buttonGM"
+msgid "-Fixed Strength "
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1591
+#: scripts/spawn_ships_scenario_utility.lua:2169
+msgctxt "buttonGM"
+msgid "Switch to Relative"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1619
+msgctxt "buttonGM"
+msgid "-Main from Flt Chng"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1665
+#: scripts/spawn_ships_scenario_utility.lua:1686
+#: scripts/spawn_ships_scenario_utility.lua:1695
+#, lua-format
+msgctxt "buttonGM"
+msgid "Change Chance %s%%*"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1669
+#: scripts/spawn_ships_scenario_utility.lua:1673
+#: scripts/spawn_ships_scenario_utility.lua:1678
+#: scripts/spawn_ships_scenario_utility.lua:1682
+#: scripts/spawn_ships_scenario_utility.lua:1691
+#: scripts/spawn_ships_scenario_utility.lua:1699
+#, lua-format
+msgctxt "buttonGM"
+msgid "Change Chance %s%%"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1708
+msgctxt "buttonGM"
+msgid "-Main from Flt Ord"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1738
+msgctxt "buttonGM"
+msgid "-Main from Flt Loctn"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1742
+msgctxt "buttonGM"
+msgid "-Ship Spawn"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1745
+#, lua-format
+msgctxt "buttonGM"
+msgid "Ambush %i"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1764
+msgctxt "buttonGM"
+msgid "-From Ambush Dist"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1769
+#, lua-format
+msgctxt "buttonGM"
+msgid "Ambush Dist:%su"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1794
+#: scripts/spawn_ships_scenario_utility.lua:2597
+#: scripts/spawn_ships_scenario_utility.lua:2631
+#: scripts/spawn_ships_scenario_utility.lua:2697
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Cancelled current GM Click mode\n"
+"   %s\n"
+"In favor of\n"
+"   %s\n"
+"GM click mode."
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1800
+#: scripts/spawn_ships_scenario_utility.lua:2703
+msgctxt "msgGM"
+msgid "Fleet spawn failed: nothing selected for spawn location determination"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:1833
+msgctxt "msgGM"
+msgid "Empty Template pool: fix excludes or other criteria"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2161
+msgctxt "buttonGM"
+msgid "-Main from Formation"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2174
+msgctxt "buttonGM"
+msgid "+Shape"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2178
+#, lua-format
+msgctxt "msgGM"
+msgid "No entry in ship template for %s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2186
+msgctxt "buttonGM"
+msgid "+Composition"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2199
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Spacing %.1fu"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2202
+msgctxt "buttonGM"
+msgid ">Set Fleet Target<"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2204
+msgctxt "buttonGM"
+msgid "Spawn Fleet"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2214
+#: scripts/spawn_ships_scenario_utility.lua:2281
+msgctxt "buttonGM"
+msgid "-From composition"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2218
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Group %s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2230
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Exclude%s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2233
+#, lua-format
+msgctxt "buttonGM"
+msgid "selectivity: %s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2244
+#, lua-format
+msgctxt "buttonGM"
+msgid "Increase Pool: %i"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2248
+msgctxt "msgGM"
+msgid "Reached maximum ship template selection pool size of 20"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2252
+#, lua-format
+msgctxt "buttonGM"
+msgid "Decrease Pool: %i"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2256
+msgctxt "msgGM"
+msgid "Reached minimum ship template selection pool size of 1"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2264
+msgctxt "buttonGM"
+msgid "-From composition group"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2285
+msgctxt "buttonGM"
+msgid "-From Exclusions"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2308
+msgctxt "buttonGM"
+msgid "+Line"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2444
+msgctxt "buttonGM"
+msgid "-Main from Composition"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2447
+#: scripts/spawn_ships_scenario_utility.lua:2456
+#: scripts/spawn_ships_scenario_utility.lua:2492
+#: scripts/spawn_ships_scenario_utility.lua:2528
+msgctxt "buttonGM"
+msgid "-Formation"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2448
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Lead:%s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2449
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Follow:%s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2453
+msgctxt "buttonGM"
+msgid "-Main from Follow"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2489
+msgctxt "buttonGM"
+msgid "-Main from Lead"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2525
+msgctxt "buttonGM"
+msgid "-Main from Spacing"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2533
+#: scripts/spawn_ships_scenario_utility.lua:2544
+#: scripts/spawn_ships_scenario_utility.lua:2555
+#: scripts/spawn_ships_scenario_utility.lua:2566
+#: scripts/spawn_ships_scenario_utility.lua:2577
+#, lua-format
+msgctxt "buttonGM"
+msgid "Spacing %.1fu"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2646
+msgctxt "buttonGM"
+msgid "-Main From Ship Spawn"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2651
+#, lua-format
+msgctxt "buttonGM"
+msgid ">Spawn %s<"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2653
+#, lua-format
+msgctxt "buttonGM"
+msgid "Spawn %s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2755
+msgctxt "buttonGM"
+msgid "-Main From Ftr Wing"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2756
+msgctxt "buttonGM"
+msgid "-Spawn Ships"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2757
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Type %s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2786
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Count %s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2789
+msgctxt "buttonGM"
+msgid "Wing Count "
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2800
+#, lua-format
+msgctxt "buttonGM"
+msgid "Spawn Wing:%s"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2809
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"The ship template table does not have a dist entry for %s. Defaulting to 400 "
+"distance"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2813
+#, lua-format
+msgctxt "msgGM"
+msgid "No template for %s. Defaulting to 400 distance"
+msgstr ""
+
+#: scripts/spawn_ships_scenario_utility.lua:2826
+msgctxt "msgGM"
+msgid ""
+"Selected carrier object is no longer valid. Select another. No action taken"
+msgstr ""
