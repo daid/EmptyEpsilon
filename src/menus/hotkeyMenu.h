@@ -5,6 +5,7 @@
 #include "gui/gui2_entrylist.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_scrollbar.h"
+#include "gui/gui2_scrolltext.h"
 #include "gui/hotkeyBinder.h"
 #include "Updatable.h"
 
@@ -25,18 +26,20 @@ private:
     const int KEY_LABEL_WIDTH = 375;
     const int KEY_FIELD_WIDTH = 150;
     const int KEY_LABEL_MARGIN = 25;
-    const int KEY_COLUMN_TOP = ROW_HEIGHT * 2;
+    const int KEY_COLUMN_TOP = ROW_HEIGHT * 1.5;
     const int KEY_ROW_COUNT = 10;
     const int KEY_COLUMN_WIDTH = KEY_LABEL_WIDTH + KEY_LABEL_MARGIN + KEY_FIELD_WIDTH;
     const int KEY_COLUMN_HEIGHT = ROW_HEIGHT * KEY_ROW_COUNT + FRAME_MARGIN * 2;
     const int PAGER_BREAKPOINT = KEY_COLUMN_WIDTH * 2 + FRAME_MARGIN * 2;
 
+    GuiScrollText* help_text;
     GuiElement* container;
     GuiElement* top_row;
     GuiPanel* rebinding_ui;
     GuiElement* bottom_row;
 
     GuiElement* rebinding_container;
+    GuiElement* info_container;
     std::vector<GuiElement*> rebinding_columns;
     std::vector<GuiElement*> rebinding_rows;
     std::vector<GuiHotkeyBinder*> text_entries;
