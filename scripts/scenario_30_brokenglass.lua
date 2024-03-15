@@ -6,7 +6,7 @@
 ---
 ---Author: Chris Sibbitt. Revisions: Xansta, Muerte Jan2023
 ---Created: Dec2022
----Feedback: USN Discord: https://discord.gg/7Kr32ezJFF in the #ee-scenario-feedback channel
+---Feedback: USN Discord: https://discord.gg/7Kr32ezJFF
 -- Type: Replayable Mission
 -- Setting[Difficulty]: Configures the difficulty in the scenario. Default is Easy
 -- Difficulty[Easy|Default]: Minor enemy resistance and easier missions.
@@ -352,7 +352,7 @@ function init()
     self:setModel("artifact1"):allowPickup(true):onPickUp(function ()
       self.wasFound = true
       Player:setRepairCrewCount(Player:getRepairCrewCount() + 1)
-      Player:addToShipLog(_("nebulaBbonuses-shipLog", "A stranded repair crew has been rescued"),"Green")
+      Player:addToShipLog(_("nebulaBonuses-shipLog", "A stranded repair crew has been rescued"),"Green")
     end)
   end
 
@@ -1149,7 +1149,7 @@ function KWGoAggro(self, instigator)
   end
   local repToLose = 10 * Difficulty
   Player:takeReputationPoints(repToLose)
-  Player:addToShipLog(string.format(_("KraylorWarning-shipLog", "We have lost %s reputation for breaking the treaty"),repToLose), "Red")
+  Player:addToShipLog(string.format(_("KraylorWarning-shipLog","We have lost %s reputation for breaking the treaty"),repToLose), "Red")
   Kw_mainStation:sendCommsMessage(Player, _("KraylorWarning-IncCall",[[You will regret this!
 
 You have violated our non-aggression treaty, and will soon regret your actions.]]))
@@ -1743,7 +1743,7 @@ end
 
 function FinishMissionLost()
   Player:setLongRangeRadarRange(35000)
-  Player:addToShipLog(_("finishMissionNebulae-shipLog","Sensors have been upgraded."),"Green")
+  Player:addToShipLog(_("finishMissionNebulae-shipLog", "Sensors have been upgraded."),"Green")
   Player:addReputationPoints(5)
 
   -- Send to a random colony station
@@ -1841,7 +1841,7 @@ function UpdateMissionPatrol()
 You have repelled the attackers and the SW Checkpoint is safe for now, but intelligence reports show a huge drone convoy in your vicinity to the NW.
 
 INVESTIGATE BUT DO NOT ENGAGE! We have it on good word that attacking this convoy is extremely risky. Keep your distance, but we'd like to know where they are going.]]))
-      Player:addToShipLog("defenceStn-shipLog","Investigte the convoy, but DO NOT ENGAGE", "Red")
+      Player:addToShipLog(_("defenceStn-shipLog", "Investigate the convoy, but DO NOT ENGAGE"), "Red")
 
       Defence_station.mission_state = "drone convoy"
       SpawnConvoyEnemies()
@@ -2407,21 +2407,21 @@ end
 function CheckDefeatConditions()
   for _, stn in ipairs(Patrol_stations) do
     if not stn:isValid() then
-      Player:addToShipLog(_("defeat-shipLog","DEFEAT - A Patrol Station has been destroyed"), "Red")
+      Player:addToShipLog(_("defeat-shipLog", "DEFEAT - A Patrol Station has been destroyed"), "Red")
       victory("Exuari")
     end
   end
 
   for _, stn in ipairs({Admin_station, Defence_station, Wormhole_station}) do
     if not stn:isValid() then
-      Player:addToShipLog(_("defeat-shipLog","DEFEAT - A Core station (Admin, Defence, Wormhole) has been destroyed"), "Red")
+      Player:addToShipLog(_("defeat-shipLog", "DEFEAT - A Core station (Admin, Defence, Wormhole) has been destroyed"), "Red")
       victory("Exuari")
     end
   end
 
   if Defence_station.tier2_mission_state == "done" then
     if not Liquidation_station:isValid() then
-      Player:addToShipLog(_("defeat-shipLog","DEFEAT - Station B-3 has been destroyed"), "Red")
+      Player:addToShipLog(_("defeat-shipLog", "DEFEAT - Station B-3 has been destroyed"), "Red")
       victory("Exuari")
     end
   end
