@@ -10,10 +10,9 @@ msgid ""
 "Duration: Plan for 3+ hours on Easy, with harder difficulties taking longer\n"
 "Player ships: 1\n"
 "\n"
-"Author: Chris Sibbit. Revisions: Xansta, Muerte Jan2023\n"
+"Author: Chris Sibbitt. Revisions: Xansta, Muerte Jan2023\n"
 "Created: Dec2022\n"
-"Feedback: USN Discord: https://discord.gg/7Kr32ezJFF in the #ee-scenario-"
-"feedback channel"
+"Feedback: USN Discord: https://discord.gg/7Kr32ezJFF"
 msgstr ""
 
 # Scenario setting
@@ -73,7 +72,7 @@ msgid "A Nuke and additional nuke storage have been added to our arsenal"
 msgstr ""
 
 #: scripts/scenario_30_brokenglass.lua:355
-msgctxt "nebulaBbonuses-shipLog"
+msgctxt "nebulaBonuses-shipLog"
 msgid "A stranded repair crew has been rescued"
 msgstr ""
 
@@ -1155,6 +1154,11 @@ msgid ""
 "INVESTIGATE BUT DO NOT ENGAGE! We have it on good word that attacking this "
 "convoy is extremely risky. Keep your distance, but we'd like to know where "
 "they are going."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1844
+msgctxt "defenceStn-shipLog"
+msgid "Investigte the convoy, but DO NOT ENGAGE"
 msgstr ""
 
 #: scripts/scenario_30_brokenglass.lua:1874
