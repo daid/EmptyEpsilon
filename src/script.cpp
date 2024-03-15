@@ -15,40 +15,51 @@
 /// Loads the localized file if it exists at locale/<FILENAME>.<LANGUAGE>.po.
 static int luaRequire(lua_State* L)
 {
+    bool error = false;
     int old_top = lua_gettop(L);
     string filename = luaL_checkstring(L, 1);
 
-    P<ResourceStream> stream = getResourceStream(filename);
-    if (!stream)
     {
-        lua_pushstring(L, ("Require: Script not found: " + filename).c_str());
-        return lua_error(L);
+        //Start a new scope to ensure things are properly destroyed before we call lua_error(), as lua_error does not properly call destructors.
+        P<ResourceStream> stream = getResourceStream(filename);
+        if (!stream)
+        {
+            lua_pushstring(L, ("Require: Script not found: " + filename).c_str());
+            error = true;
+        }
+
+        if (!error) {
+            // Load the locale file for this script.
+            i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+
+            string filecontents = stream->readAll();
+            stream->destroy();
+            stream = nullptr;
+
+            if (luaL_loadbuffer(L, filecontents.c_str(), filecontents.length(), ("@" + filename).c_str()))
+            {
+                string error_string = luaL_checkstring(L, -1);
+                lua_pushstring(L, ("require:" + error_string).c_str());
+                error = true;
+            }
+        }
     }
 
-    // Load the locale file for this script.
-    i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+    if (!error) {
+        lua_pushvalue(L, lua_upvalueindex(1));
+        lua_setupvalue(L, -2, 1);
 
-    string filecontents = stream->readAll();
-    stream->destroy();
-    stream = nullptr;
-
-    if (luaL_loadbuffer(L, filecontents.c_str(), filecontents.length(), ("@" + filename).c_str()))
-    {
-        string error_string = luaL_checkstring(L, -1);
-        lua_pushstring(L, ("require:" + error_string).c_str());
-        return lua_error(L);
-    }
-    lua_pushvalue(L, lua_upvalueindex(1));
-    lua_setupvalue(L, -2, 1);
-
-    //Call the actual code.
-    if (lua_pcall(L, 0, LUA_MULTRET, 0))
-    {
-        string error_string = luaL_checkstring(L, -1);
-        lua_pushstring(L, ("require:" + error_string).c_str());
-        return lua_error(L);
+        //Call the actual code.
+        if (lua_pcall(L, 0, LUA_MULTRET, 0))
+        {
+            string error_string = luaL_checkstring(L, -1);
+            lua_pushstring(L, ("require:" + error_string).c_str());
+            error = true;
+        }
     }
 
+    if (error)
+        return lua_error(L);
     return lua_gettop(L) - old_top;
 }
 
