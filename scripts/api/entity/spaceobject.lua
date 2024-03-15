@@ -185,18 +185,32 @@ end
 --- Requires a target PlayerShip and message, though the message can be an empty string.
 --- Example: obj:sendCommsMessage(player, "Prepare to die")
 function Entity:sendCommsMessage(target, message)
-    --TODO
+    --TODO: log message
+    return self:sendCommsMessageNoLog(target, message)
 end
 --- As SpaceObject:sendCommsMessage(), but does not log a failed hail to the target ship's comms log.
 --- Example: obj:sendCommsMessageNoLog(player, "Prepare to die")
 function Entity:sendCommsMessageNoLog(target, message)
-    --TODO
+    if self:openCommsTo(target) then
+        target.comms_transmitter.incomming_message = message
+        return true
+    end
+    return false
 end
 --- As SpaceObject:sendCommsMessage(), but sends an empty string as the message.
 --- This calls the SpaceObject's comms function.
 --- Example: obj:openCommsTo(player)
 function Entity:openCommsTo(target)
-    --TODO
+    if target and target.comms_transmitter then
+        if target.comms_transmitter.state == "inactive" or target.comms_transmitter.state == "broken" then
+            target.comms_transmitter.state = "hailed"
+            target.comms_transmitter.incomming_message = ""
+            target.comms_transmitter.target = self
+            target.comms_transmitter.target_name = self:getCallSign()
+            return true
+        end
+    end
+    return false
 end
 --- Returns this SpaceObject's callsign.
 --- Example: obj:getCallSign()
