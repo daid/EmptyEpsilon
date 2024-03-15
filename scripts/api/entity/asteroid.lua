@@ -64,4 +64,5 @@ end
 --- Example: asteroid:getSize()
 function Entity:getSize()
     --TODO
+    return 100.0
 end

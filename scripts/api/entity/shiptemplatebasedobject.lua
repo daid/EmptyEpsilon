@@ -252,32 +252,6 @@ function Entity:setRestocksMissilesDocked(allow_restock)
     --TODO
     return self
 end
---- Returns this STBO's long-range radar range.
---- Example: stbo:getLongRangeRadarRange()
-function Entity:getLongRangeRadarRange()
-    --TODO
-end
---- Sets this STBO's long-range radar range.
---- PlayerSpaceships use this range on the science and operations screens' radar.
---- AI orders of CpuShips use this range to detect potential targets.
---- Example: stbo:setLongRangeRadarRange(20000) -- sets the long-range radar range to 20U
-function Entity:setLongRangeRadarRange(range)
-    --TODO
-    return self
-end
---- Returns this STBO's short-range radar range.
-function Entity:getShortRangeRadarRange()
-    --TODO
-end
---- Sets this STBO's short-range radar range.
---- PlayerSpaceships use this range on the helms, weapons, and single pilot screens' radar.
---- AI orders of CpuShips use this range to decide when to disengage pursuit of fleeing targets.
---- This also defines the shared radar radius on the relay screen for friendly ships and stations, and how far into nebulae that this SpaceShip can detect objects.
---- Example: stbo:setShortRangeRadarRange(4000) -- sets the short-range radar range to 4U
-function Entity:setShortRangeRadarRange(range)
-    --TODO
-    return self
-end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:getShieldLevel() with an index value.
 function Entity:getFrontShield()

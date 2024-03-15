@@ -290,13 +290,15 @@ end
 --- Returns -1 for the hull.
 --- Example: player:getBeamSystemTarget()
 function Entity:getBeamSystemTarget()
-    --TODO
+    --TODO: convert to index if self.beam_weapons then return self.beam_weapons.system_target end
+    return -1
 end
 --- Returns the name of the ESystem targeted by this PlayerSpaceship's weapons.
 --- Returns "UNKNOWN" for the hull.
 --- Example: player:getBeamSystemTargetName()
 function Entity:getBeamSystemTargetName()
-    --TODO
+    if self.beam_weapons then return self.beam_weapons.system_target end
+    return "UNKNOWN"
 end
 
 --- Commands this PlayerSpaceship to set a new target rotation.
@@ -550,14 +552,14 @@ end
 --- Use this command to reduce the need for player interaction in Engineering, especially when combined with commandSetAutoRepair/auto_repair_enabled.
 --- Example: player:setAutoCoolant(true)
 function Entity:setAutoCoolant(enabled)
-    --TODO
+    if self.coolant then self.coolant.auto_levels = enabled end
     return self
 end
 --- Sets a control code password required for a player to join this PlayerSpaceship.
 --- Control codes are case-insensitive.
 --- Example: player:setControlCode("abcde") -- matches "abcde", "ABCDE", "aBcDe"
 function Entity:setControlCode(code)
-    --TODO
+    if self.player_control then self.player_control.control_code = code end
     return self
 end
 --- Defines a function to call when this PlayerSpaceship launches a probe.
@@ -595,21 +597,23 @@ function Entity:onProbeUnlink(callback)
     --TODO
     return self
 end
---- Returns this PlayerSpaceship's long-range radar range.
+--- Returns this ships's long-range radar range.
 --- Example: player:getLongRangeRadarRange()
 function Entity:getLongRangeRadarRange()
-    --TODO
+    if self.long_range_radar then return self.long_range_radar.long_range end
+    return 50000
 end
 --- Returns this PlayerSpaceship's short-range radar range.
 --- Example: player:getShortRangeRadarRange()
 function Entity:getShortRangeRadarRange()
-    --TODO
+    if self.long_range_radar then return self.long_range_radar.short_range end
+    return 5000
 end
 --- Sets this PlayerSpaceship's long-range radar range.
 --- PlayerSpaceships use this range on the science and operations screens' radar.
 --- Example: player:setLongRangeRadarRange(30000) -- sets the ship's long-range radar range to 30U
 function Entity:setLongRangeRadarRange(range)
-    --TODO
+    if self.long_range_radar then self.long_range_radar.long_range = range end
     return self
 end
 --- Sets this PlayerSpaceship's short-range radar range.
@@ -617,7 +621,7 @@ end
 --- This also defines the shared radar radius on the relay screen for friendly ships and stations, and how far into nebulae that this SpaceShip can detect objects.
 --- Example: player:setShortRangeRadarRange(5000) -- sets the ship's long-range radar range to 5U
 function Entity:setShortRangeRadarRange(range)
-    --TODO
+    if self.long_range_radar then self.long_range_radar.short_range = range end
     return self
 end
 --- Defines whether scanning features appear on related crew screens in this PlayerSpaceship.

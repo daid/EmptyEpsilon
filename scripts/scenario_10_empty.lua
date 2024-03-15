@@ -17,13 +17,34 @@ function init()
     print("Print function from init.")
     print("Player is at:", p.transform.position)
 
-    c = CpuShip()
-    c:setTemplate("Phobos T3"):setPosition(5000, 5000)
+    --c = CpuShip()
+    --c:setTemplate("Phobos T3"):setPosition(5000, 5000)
 
-    s = SpaceStation()
-    s:setTemplate("Small Station"):setPosition(-2000, -2000):setFaction("Human Navy")
+    --s = SpaceStation()
+    --s:setTemplate("Small Station"):setPosition(-2000, -2000):setFaction("Human Navy")
 end
 
+
+function hue_to_color(h)
+    if h > 360 then h = h - 360 end
+    local color = {0, 0, 0}
+    local c = 1.0
+    local x = 1.0 - math.abs(((h % 120) / 60) - 1.0);
+    if h < 60 then color[1] = c; color[2] = x
+    elseif h < 120 then color[1] = x; color[2] = c
+    elseif h < 180 then color[2] = c; color[3] = x
+    elseif h < 240 then color[2] = x; color[3] = c
+    elseif h < 300 then color[1] = x; color[3] = c
+    else color[1] = c; color[3] = x end
+    return color
+end
+
+local hue = 0
 function update(delta)
+    hue = hue + delta * 60
+    if hue > 360 then hue = hue - 360 end
+    for n=1,#p.engine_emitter do
+        p.engine_emitter[n].color = hue_to_color(hue + n * 60)
+    end
     -- No victory condition
 end

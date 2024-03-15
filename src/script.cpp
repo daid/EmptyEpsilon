@@ -283,7 +283,7 @@ static int luaGetEEVersion()
     return VERSION_NUMBER;
 }
 
-void setupScriptEnvironment(sp::script::Environment& env)
+bool setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
     env.setGlobal("random", static_cast<float(*)(float, float)>(&random));
@@ -353,6 +353,13 @@ void setupScriptEnvironment(sp::script::Environment& env)
 
     env.setGlobal("getEEVersion", &luaGetEEVersion);
 
-    LuaConsole::checkResult(env.runFile<void>("luax.lua"));
-    LuaConsole::checkResult(env.runFile<void>("api/all.lua"));
+    auto res = env.runFile<void>("luax.lua");
+    LuaConsole::checkResult(res);
+    if (res.isErr())
+        return false;
+    res = env.runFile<void>("api/all.lua");
+    LuaConsole::checkResult(res);
+    if (res.isErr())
+        return false;
+    return true;
 }

@@ -19,43 +19,14 @@ local Entity = getLuaEntityFunctionTable()
 --- No warp/jump travel is possible within this radius.
 --- Example: jammer:getRange()
 function Entity:getRange()
-    --TODO
-    return self
+    if self.warp_jammer then return self.warp_jammer.range end
+    return 0
 end
 --- Sets this WarpJammer's jamming radius.
 --- No warp/jump travel is possible within this radius.
 --- Defaults to 7000.0.
 --- Example: jammer:setRange(10000) -- sets a 10U jamming radius 
-function Entity:setRange()
-    --TODO
-    return self
-end
-
---- Returns this WarpJammer's hull points.
---- Example: jammer:getHull()
-function Entity:getHull()
-    --TODO
-    return self
-end
---- Sets this WarpJammer's hull points.
---- Defaults to 50
---- Example: jammer:setHull(20)
-function Entity:setHull()
-    --TODO
-    return self
-end
-
---- Defines a function to call when this WarpJammer takes damage.
---- Passes the WarpJammer object and the damage instigator SpaceObject (or nil if none).
---- Example: jammer:onTakingDamage(function(this_jammer,instigator) print("Jammer damaged!") end)
-function Entity:onTakingDamage()
-    --TODO
-    return self
-end
---- Defines a function to call when the WarpJammer is destroyed by taking damage.
---- Passes the WarpJammer object and the damage instigator SpaceObject (or nil if none).
---- Example: jammer:onDestruction(function(this_jammer,instigator) print("Jammer destroyed!") end)
-function Entity:onDestruction()
-    --TODO
+function Entity:setRange(range)
+    if self.warp_jammer then self.warp_jammer.range = range end
     return self
 end

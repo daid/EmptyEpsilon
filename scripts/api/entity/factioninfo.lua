@@ -34,16 +34,6 @@ function getFactionInfo(name)
     return __faction_info[name]
 end
 
---- Sets this faction's internal string name, used to reference this faction regardless of EmptyEpsilon's language setting.
---- If no locale name is defined, this sets the locale name to the same value.
---- Example: faction:setName("USN")
-function Entity:setName(name)
-    if self.faction_info then
-        self.faction_info.name = name
-        __faction_info[name] = self
-    end
-    return self
-end
 --- Sets this faction's name as presented in the user interface.
 --- Wrap the string in the _() function to make it available for translation.
 --- Example: faction:setLocaleName(_("USN"))

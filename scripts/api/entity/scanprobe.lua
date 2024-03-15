@@ -106,10 +106,3 @@ function Entity:onExpiration()
     --TODO
     return self
 end
---- Defines a function to call when this ScanProbe is destroyed by damage.
---- Passes the probe and instigator as arguments to the function.
---- Example: probe:onDestruction(function(this_probe, instigator) print("Probe destroyed!") end)
-function Entity:onDestruction()
-    --TODO
-    return self
-end

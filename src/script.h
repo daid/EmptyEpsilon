@@ -3,6 +3,6 @@
 
 #include "script/environment.h"
 
-void setupScriptEnvironment(sp::script::Environment& env);
+bool setupScriptEnvironment(sp::script::Environment& env);
 
 #endif//SCRIPT_H

@@ -11,7 +11,7 @@ local Entity = getLuaEntityFunctionTable()
 function Entity:isFriendOrFoeIdentified()
     if self.scan_state then
         for n=1,#self.scan_state do
-            if self.scan_state[n].state != "none" then return true end
+            if self.scan_state[n].state ~= "none" then return true end
         end
     end
     return false
@@ -26,18 +26,7 @@ function Entity:isFullyScanned()
     end
     return false
 end
---- Returns whether this SpaceShip has been identified by the given ship as either hostile or friendly.
-function Entity:isFriendOrFoeIdentifiedBy(faction)
-    --TODO
-end
---- Returns whether this SpaceShip has been identified by the given faction as either hostile or friendly.
-function Entity:isFriendOrFoeIdentifiedByFaction(faction)
-    --TODO
-end
---- Returns whether this SpaceShip has been fully scanned by the given faction.
-function Entity:isFullyScannedByFaction(faction)
-    --TODO
-end
+
 --- Returns whether this SpaceShip has been identified by the given SpaceObject as either hostile or friendly.
 --- Example: ship:isFriendOrFoeIdentifiedBy(enemy)
 function Entity:isFriendOrFoeIdentifiedBy(enemy)
@@ -240,7 +229,7 @@ function __setSystemPropertyByName(entity, system_name, property, value)
     local sys = __getSystemByName(entity, system_name)
     if sys == nil then return end
     if system_name == "frontshield" then sys["front_" .. property] = value
-    elseif system_name == "rearshield" then return sys["rear_" .. property] = value
+    elseif system_name == "rearshield" then sys["rear_" .. property] = value
     else sys[property] = value end
 end
 
@@ -530,51 +519,60 @@ end
 --- Returns the arc, in degrees, for the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:getBeamWeaponArc(0); -- returns beam weapon 0's arc
 function Entity:getBeamWeaponArc(index)
-    --TODO
+    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].arc end
+    return 0.0
 end
 --- Returns the direction, in degrees relative to the ship's forward bearing, for the arc's center of the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:getBeamWeaponDirection(0); -- returns beam weapon 0's direction
 function Entity:getBeamWeaponDirection(index)
-    --TODO
+    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].direction end
+    return 0.0
 end
 --- Returns the range for the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:getBeamWeaponRange(0); -- returns beam weapon 0's range
 function Entity:getBeamWeaponRange(index)
-    --TODO
+    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].range end
+    return 0.0
 end
 --- Returns the turret arc, in degrees, for the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:getBeamWeaponTurretArc(0); -- returns beam weapon 0's turret arc
 function Entity:getBeamWeaponTurretArc(index)
-    --TODO
+    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].turret_arc end
+    return 0.0
 end
 --- Returns the direction, in degrees relative to the ship's forward bearing, for the turret arc's center for the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:getBeamWeaponTurretDirection(0); -- returns beam weapon 0's turret direction
 function Entity:getBeamWeaponTurretDirection(index)
-    --TODO
+    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].turret_direction end
+    return 0.0
 end
 --- Returns the base firing delay, in seconds, for the BeamWeapon with the given index on this SpaceShip.
 --- Actual cycle time can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponCycleTime(0); -- returns beam weapon 0's cycle time
 function Entity:getBeamWeaponCycleTime(index)
-    --TODO
+    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].cycle_time end
+    return 0.0
 end
 --- Returns the base damage dealt by the BeamWeapon with the given index on this SpaceShip.
 --- Actual damage can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponDamage(0); -- returns beam weapon 0's damage
 function Entity:getBeamWeaponDamage(index)
-    --TODO
+    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].damage end
+    return 0.0
 end
 --- Returns how much of this SpaceShip's energy is drained each time the BeamWeapon with the given index is fired.
 --- Actual drain can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponEnergyPerFire(0); -- returns beam weapon 0's energy use per firing
 function Entity:getBeamWeaponEnergyPerFire(index)
-    --TODO
+    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].energy_per_beam_fire end
+    return 0.0
 end
 --- Returns the heat generated by each firing of the BeamWeapon with the given index on this SpaceShip.
 --- Actual heat generation can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponHeatPerFire(0); -- returns beam weapon 0's heat generation per firing
 function Entity:getBeamWeaponHeatPerFire(index)
-    --TODO
+    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].heat_per_beam_fire end
+    return 0.0
 end
 --- Defines the traits of a BeamWeapon with the given index on this SpaceShip.
 --- - index: Each beam weapon on this SpaceShip must have a unique index.
@@ -589,6 +587,7 @@ end
 --- ship:setBeamWeapon(0,90,180,1000,1,1)
 function Entity:setBeamWeapon(index, arc, direction, range, cycle_time, damage)
     --TODO
+    return self
 end
 --- Converts a BeamWeapon with the given index on this SpaceShip into a turret and defines its traits.
 --- A turreted beam weapon rotates within its turret arc toward the weapons target at the given rotation rate.
@@ -602,70 +601,87 @@ end
 --- ship:setBeamWeaponTurret(0,200,90,5)
 function Entity:setBeamWeaponTurret(index, arc, direction, rotation_rate)
     --TODO
+    return self
 end
 --- Sets the BeamEffect texture, by filename, for the BeamWeapon with the given index on this SpaceShip.
 --- See BeamEffect:setTexture().
 --- Example: ship:setBeamWeaponTexture(0,"texture/beam_blue.png")
 function Entity:setBeamWeaponTexture(index, texture)
     --TODO
+    return self
 end
 --- Sets how much energy is drained each time the BeamWeapon with the given index is fired on this SpaceShip.
 --- Only PlayerSpaceships consume energy. Setting this for other ShipTemplateBasedObject types has no effect.
 --- Example: ship:setBeamWeaponEnergyPerFire(0,1) -- sets beam 0 to use 1 energy per firing
 function Entity:setBeamWeaponEnergyPerFire(index, energy)
     --TODO
+    return self
 end
 --- Sets how much "beamweapon" system heat is generated, in percentage of total system heat capacity, each time the BeamWeapon with the given index is fired on this SpaceShip.
 --- Only PlayerSpaceships generate and manage heat. Setting this for other ShipTemplateBasedObject types has no effect.
 --- Example: ship:setBeamWeaponHeatPerFire(0,0.02) -- sets beam 0 to generate 0.02 (2%) system heat per firing
 function Entity:setBeamWeaponHeatPerFire(index, heat)
     --TODO
+    return self
 end
 --- Sets the colors used to draw the radar arc for the BeamWeapon with the given index on this SpaceShip.
 --- The first three-number value sets the RGB color for the arc when idle, and the second sets the color when firing.
 --- Example: ship:setBeamWeaponArcColor(0,0,128,0,0,255,0) -- makes beam 0's arc green
 function Entity:setBeamWeaponArcColor(index, idle_r, idle_g, idle_b, fire_r, fire_g, fire_b)
     --TODO
+    return self
 end
 --- Sets the damage type dealt by the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:setBeamWeaponDamageType(0,"emp") -- makes beam 0 deal EMP damage
 function Entity:setBeamWeaponDamageType(index, damage_type)
     --TODO
+    return self
 end
 --- Sets the number of WeaponTubes for this SpaceShip.
 --- Weapon tubes are 0-indexed. For example, 3 tubes would be indexed 0, 1, and 2.
---- Ships are limited to a maximum of 16 weapon tubes.
 --- Example: ship:setWeaponTubeCount(4)
 function Entity:setWeaponTubeCount(amount)
-    --TODO
+    self.missile_tubes = {}
+    for n=1,amount do
+        self.missile_tubes[n] = {}
+    end
+    while #self.missile_tubes > amount do
+        self.missile_tubes[#self.missile_tubes] = nil
+    end
+    return self
 end
 --- Returns the number of WeaponTube on this SpaceShip.
 --- Example: ship:getWeaponTubeCount()
 function Entity:getWeaponTubeCount()
-    --TODO
+    if self.missile_tubes then return #self.missile_tubes end
+    return 0
 end
 --- Returns the weapon type loaded into the WeaponTube with the given index on this SpaceShip.
 --- Returns no value if no weapon is loaded, which includes the tube being in a loading or unloading state.
 --- Example: ship:getWeaponTubeLoadType(0)
 function Entity:getWeaponTubeLoadType(index)
     --TODO
+    return self
 end
 --- Sets which weapon types the WeaponTube with the given index on this SpaceShip can load.
 --- Note the spelling of "missle".
 --- Example: ship:weaponTubeAllowMissle(0,"Homing") -- allows Homing missiles to be loaded in WeaponTube 0
 function Entity:weaponTubeAllowMissle(index, weapon_type)
     --TODO
+    return self
 end
 --- Sets which weapon types the WeaponTube with the given index can't load on this SpaceShip.
 --- Note the spelling of "missle".
 --- Example: ship:weaponTubeDisallowMissle(0,"Homing") -- prevents Homing missiles from being loaded in tube 0
 function Entity:weaponTubeDisallowMissle(index, weapon_type)
     --TODO
+    return self
 end
 --- Sets a weapon tube with the given index on this SpaceShip to allow loading only the given weapon type.
 --- Example: ship:setWeaponTubeExclusiveFor(0,"Homing") -- allows only Homing missiles to be loaded in tube 0
 function Entity:setWeaponTubeExclusiveFor(index, weapon_type)
     --TODO
+    return self
 end
 --- Sets the angle, relative to this SpaceShip's forward bearing, toward which the WeaponTube with the given index on this SpaceShip points.
 --- Accepts 0, negative, and positive values.
@@ -673,27 +689,32 @@ end
 --- -- Sets tube 0 to point 90 degrees right of forward, and tube 1 to point 90 degrees left of forward
 --- ship:setWeaponTubeDirection(0,90):setWeaponTubeDirection(1,-90)
 function Entity:setWeaponTubeDirection(index, direction)
-    --TODO
+    if self.missile_tubes then self.missile_tubes[index+1].direction = direction end
+    return self
 end
 --- Sets the weapon size launched from the WeaponTube with the given index on this SpaceShip.
 --- Example: ship:setTubeSize(0,"large") -- sets tube 0 to fire large weapons
 function Entity:setTubeSize(index, size)
-    --TODO
+    if self.missile_tubes then self.missile_tubes[index+1].size = size end
+    return self
 end
 --- Returns the size of the weapon tube with the given index on this SpaceShip.
 --- Example: ship:getTubeSize(0)
 function Entity:getTubeSize(index)
-    --TODO
+    if self.missile_tubes then return self.missile_tubes[index+1].size end
+    return "medium"
 end
 --- Returns the delay, in seconds, for loading and unloading the WeaponTube with the given index on this SpaceShip.
 --- Example: ship:getTubeLoadTime(0)
 function Entity:getTubeLoadTime(index)
-    --TODO
+    if self.missile_tubes then return self.missile_tubes[index+1].load_time end
+    return 0.0
 end
 --- Sets the time, in seconds, required to load the weapon tube with the given index on this SpaceShip.
 --- Example: ship:setTubeLoadTime(0,12) -- sets the loading time for tube 0 to 12 seconds
 function Entity:setTubeLoadTime(index, load_time)
-    --TODO
+    if self.missile_tubes then self.missile_tubes[index+1].load_time = load_time end
+    return self
 end
 --- Returns the dynamic gravitational radar signature value emitted by this SpaceShip.
 --- Ship functions can dynamically modify this SpaceShip's radar signature values.

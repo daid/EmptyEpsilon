@@ -348,13 +348,13 @@ bool CommsSystem::openChannel(sp::ecs::Entity player, sp::ecs::Entity target)
     if (script_name != "")
     {
         transmitter->script_environment = std::make_unique<sp::script::Environment>();
-        setupScriptEnvironment(*transmitter->script_environment);
-
-        // consider "player" deprecated, but keep it for a long time
-        transmitter->script_environment->setGlobal("player", player);
-        transmitter->script_environment->setGlobal("comms_source", player);
-        transmitter->script_environment->setGlobal("comms_target", target);
-        LuaConsole::checkResult(transmitter->script_environment->runFile<void>(script_name));
+        if (setupScriptEnvironment(*transmitter->script_environment)) {
+            // consider "player" deprecated, but keep it for a long time
+            transmitter->script_environment->setGlobal("player", player);
+            transmitter->script_environment->setGlobal("comms_source", player);
+            transmitter->script_environment->setGlobal("comms_target", target);
+            LuaConsole::checkResult(transmitter->script_environment->runFile<void>(script_name));
+        }
     }else if (receiver->callback)
     {
         receiver->callback.setGlobal("comms_source", player);

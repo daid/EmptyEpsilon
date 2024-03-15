@@ -26,8 +26,3 @@ function Entity:getOwner()
         return self.delayed_explode_on_touch.owner
     end
 end
-
-function Entity:onDestruction(callback)
-    --TODO
-    return self
-end

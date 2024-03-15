@@ -375,8 +375,8 @@ function Entity:isScanned()
     local ss = self.scan_state
     if ss then
         for n=1,#ss do
-            if ss[n].state == "full" return true end
-            if ss[n].state == "simple" return true end
+            if ss[n].state == "full" then return true end
+            if ss[n].state == "simple" then return true end
         end
         return false
     end
@@ -392,8 +392,8 @@ function Entity:isScannedBy(other)
         if ss then
             for n=1,#ss do
                 if ss[n].faction == f then
-                    if ss[n].state == "full" return true end
-                    if ss[n].state == "simple" return true end
+                    if ss[n].state == "full" then return true end
+                    if ss[n].state == "simple" then return true end
                     return false
                 end
             end
@@ -423,8 +423,8 @@ function Entity:isScannedByFaction(faction_name)
         if f ~= nil then
             for n=1,#ss do
                 if ss[n].faction == f then
-                    if ss[n].state == "full" return true end
-                    if ss[n].state == "simple" return true end
+                    if ss[n].state == "full" then return true end
+                    if ss[n].state == "simple" then return true end
                     return false
                 end
             end
