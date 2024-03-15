@@ -29,5 +29,5 @@ public:
     sp::ecs::Entity order_target;
 
     std::unique_ptr<ShipAI> ai;
-    string new_name;
+    string new_name = "default";
 };

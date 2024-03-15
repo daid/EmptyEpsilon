@@ -15,7 +15,7 @@ public:
     static constexpr uint32_t LongRange = 1 << 4;
 
     string icon;
-    float min_size = 8.0;   //Size in screen "pixels"
+    float min_size = 16.0;   //Size in screen "pixels"
     float max_size = 256.0; //Size in screen "pixels"
     float radius = 0.0;     // Size in world "units"
     glm::u8vec4 color{255,255,255,255};

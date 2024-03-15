@@ -70,16 +70,16 @@ end
 --- Example: obj:getFaction()
 function Entity:getFaction()
     local f = self.faction
-    if f and f.faction_info then
-        return f.faction_info.name
+    if f and f.entity and f.entity.faction_info then
+        return f.entity.faction_info.name
     end
 end
 --- Returns the localized name of the faction to which this SpaceObject belongs.
 --- Example: obj:getLocaleFaction()
 function Entity:getLocaleFaction()
     local f = self.faction
-    if f and f.faction_info then
-        return f.faction_info.locale_name
+    if f and f.entity and f.entity.faction_info then
+        return f.entity.faction_info.locale_name
     end
 end
 --- Returns the faction to which this SpaceObject belongs, by the faction's index in the faction list.
