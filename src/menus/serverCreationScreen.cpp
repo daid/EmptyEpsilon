@@ -234,7 +234,6 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
             // Destroy this screen and move on to ship selection.
             destroy();
             returnToShipSelection(getRenderLayer());
-            new ScriptErrorRenderer(mouseLayer);
         }
         else
         {
@@ -344,7 +343,6 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
         // Destroy this screen and move on to ship selection.
         destroy();
         returnToShipSelection(getRenderLayer());
-        new ScriptErrorRenderer(mouseLayer);
     });
     start_button->setPosition(250, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
     start_button->setEnable(scenario_settings.size() >= info.settings.size());

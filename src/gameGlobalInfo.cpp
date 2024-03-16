@@ -80,15 +80,22 @@ void GameGlobalInfo::update(float delta)
     }
     elapsed_time += delta;
 
-    if (main_script) {
+    if (main_script && main_script_error_count < 5) {
         auto res = main_script->call<void>("update", delta);
+        if (res.isErr() && res.error() != "Not a function") {
+            LuaConsole::checkResult(res);
+            main_script_error_count += 1;
+            if (main_script_error_count == 5) {
+                LuaConsole::addLog("5 repeated script update errors, stopping updates.");
+            }
+        } else {
+            main_script_error_count = 0;
+        }
+    }
+    for(auto& as : additional_scripts) {
+        auto res = as->call<void>("update", delta);
         if (res.isErr() && res.error() != "Not a function")
             LuaConsole::checkResult(res);
-        for(auto& as : additional_scripts) {
-            res = as->call<void>("update", delta);
-            if (res.isErr() && res.error() != "Not a function")
-                LuaConsole::checkResult(res);
-        }
     }
 }
 
@@ -244,6 +251,7 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
 
     main_script = std::make_unique<sp::script::Environment>();
+    main_script_error_count = 0;
     if (setupScriptEnvironment(*main_script.get())) {
         auto res = main_script->runFile<void>("model_data.lua");
         LuaConsole::checkResult(res);

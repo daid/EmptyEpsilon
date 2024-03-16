@@ -116,6 +116,7 @@ private:
     int callsign_counter;
 
     std::unique_ptr<sp::script::Environment> main_script;
+    int main_script_error_count = 0;
 };
 
 string getSectorName(glm::vec2 position);

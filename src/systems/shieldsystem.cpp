@@ -41,6 +41,8 @@ void ShieldSystem::update(float delta)
                 }
 
                 shield.level = std::min(shield.max, shield.level + delta * rate);
+            } else {
+                shield.level = shield.max;
             }
             if (shield.hit_effect > 0)
                 shield.hit_effect -= delta;
