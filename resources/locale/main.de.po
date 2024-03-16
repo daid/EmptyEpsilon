@@ -362,7 +362,7 @@ msgid "unspecified error {error}"
 msgstr "nicht benannter Fehler"
 
 #: src/menus/serverBrowseMenu.cpp:51 src/menus/tutorialMenu.cpp:65
-#: src/menus/optionsMenu.cpp:135 src/menus/hotkeyMenu.cpp:69
+#: src/menus/optionsMenu.cpp:135 src/menus/hotkeyMenu.cpp:71
 #: src/screenComponents/databaseView.cpp:102
 #: src/screenComponents/databaseView.cpp:106
 msgctxt "button"
@@ -508,7 +508,7 @@ msgstr ""
 
 #: src/menus/serverCreationScreen.cpp:89
 msgid "Server IP: "
-msgstr "Server-IP:"
+msgstr "Server-IP: "
 
 #: src/menus/serverCreationScreen.cpp:101
 #: src/menus/serverCreationScreen.cpp:136
@@ -591,9 +591,9 @@ msgstr "Rotierendes Wissenschafts-Radar"
 msgid "Control Options"
 msgstr "Steuerung"
 
-#: src/menus/optionsMenu.cpp:100 src/menus/hotkeyMenu.cpp:37
-msgid "Configure Keyboard"
-msgstr "Tastenbelegung"
+#: src/menus/optionsMenu.cpp:100 src/menus/hotkeyMenu.cpp:38
+msgid "Configure Keyboard/Joystick"
+msgstr "Tasten- und Joystickbelegung"
 
 #: src/menus/optionsMenu.cpp:107
 msgid "Language (applies on back)"
@@ -650,7 +650,7 @@ msgstr "Vorschau Soundtracks"
 
 #: src/menus/shipSelectionScreen.cpp:42 src/menus/shipSelectionScreen.cpp:306
 msgid "Enter this ship's control code:"
-msgstr "Schiffs-Kontrollcde eingeben:"
+msgstr "Schiffs-Kontrollcode eingeben:"
 
 #: src/menus/shipSelectionScreen.cpp:67
 msgid "Ok"
@@ -843,6 +843,17 @@ msgstr ""
 #: src/menus/shipSelectionScreen.cpp:624
 msgid "--- Crew ---"
 msgstr "--- Crew ---"
+
+#: src/menus/hotkeyMenu.cpp:70
+msgid ""
+"Left Click: Assign input. Middle Click: Add input. Right Click: Delete "
+"inputs.\n"
+"Possible inputs: Keyboard keys, joystick buttons, joystick axes."
+msgstr ""
+"Linke Maustaste: Eingabe zuweisen. Mittelklick: Weitere Eingabe hinzufügen. "
+"Rechtsklick: Eingaben des jeweiligen Feldes löschen.\n"
+"Zugewiesen werden können Tasten der Tastatur, Joystickbuttons oder "
+"Joystickachsen."
 
 #: src/screens/cinematicViewScreen.cpp:41 src/screens/topDownScreen.cpp:33
 msgctxt "button"
@@ -1247,7 +1258,7 @@ msgstr "Schiff rufen"
 
 #: src/screens/gm/gameMasterScreen.cpp:170
 msgid "Defend location"
-msgstr "Verteitigungspunkt"
+msgstr "Verteidigungspunkt"
 
 #: src/screens/gm/gameMasterScreen.cpp:175
 msgid "Stand ground"
@@ -1514,7 +1525,7 @@ msgstr "Max. Impulsgeschwindigkeit:"
 
 #: src/screens/gm/tweak.cpp:240
 msgid "Impulse acceleration:"
-msgstr "Impuls-Beschleuningung:"
+msgstr "Impuls-Beschleunigung:"
 
 #: src/screens/gm/tweak.cpp:246
 msgid "Impulse max reverse speed:"
@@ -1530,7 +1541,7 @@ msgstr "Wendigkeit:"
 
 #: src/screens/gm/tweak.cpp:264
 msgid "Docking state:"
-msgstr "Andockstatuns:"
+msgstr "Andockstatus:"
 
 #: src/screens/gm/tweak.cpp:265 src/screens/gm/tweak.cpp:327
 msgid "Not docked"
@@ -1684,12 +1695,12 @@ msgstr "Abklingzeit:"
 #: src/screens/gm/tweak.cpp:693
 msgctxt "beam"
 msgid "Energy used per fire:"
-msgstr "Energieverbrauch pro Schuss"
+msgstr "Energieverbrauch pro Schuss:"
 
 #: src/screens/gm/tweak.cpp:699
 msgctxt "beam"
 msgid "Heat generated per fire:"
-msgstr "Erhitzung pro Schuss"
+msgstr "Erhitzung pro Schuss:"
 
 #: src/screens/gm/tweak.cpp:712
 msgctxt "beam"
@@ -2538,6 +2549,10 @@ msgctxt "tube"
 msgid "Rear"
 msgstr "Heck"
 
+#: src/gui/hotkeyBinder.cpp:36
+msgid "[New Input]"
+msgstr "[Neue Eingabe]"
+
 #: src/gui/hotkeyConfig.cpp:31
 msgctxt "hotkey_menu"
 msgid "Cinematic View"
@@ -2626,7 +2641,7 @@ msgstr "Draufsicht"
 #: src/gui/hotkeyConfig.cpp:63
 msgctxt "hotkey_Topdown"
 msgid "Toggle UI"
-msgstr "UI Umschalten"
+msgstr "UI umschalten"
 
 #: src/gui/hotkeyConfig.cpp:64
 msgctxt "hotkey_Topdown"
@@ -2782,7 +2797,7 @@ msgstr "Kamera folgt Ziel"
 #: src/gui/hotkeyConfig.cpp:305
 msgctxt "hotkey_MainScreen"
 msgid "View tactical radar"
-msgstr "ZeigeTaktisches Radar"
+msgstr "Zeige taktisches Radar"
 
 #: src/gui/hotkeyConfig.cpp:306
 msgctxt "hotkey_MainScreen"
@@ -3018,7 +3033,7 @@ msgstr "Schacht {number} abfeuern"
 #: src/gui/hotkeyConfig.cpp:352
 msgctxt "hotkey_Weapons"
 msgid "Select next hostile target"
-msgstr "Nnächstes feindliches Ziel"
+msgstr "Nächstes feindliches Ziel"
 
 #: src/gui/hotkeyConfig.cpp:353
 msgctxt "hotkey_Weapons"
@@ -3115,7 +3130,7 @@ msgstr "Objekt scannen"
 #: src/gui/hotkeyConfig.cpp:372
 msgctxt "hotkey_Science"
 msgid "Select next scannable object"
-msgstr "Nächstes scanbares Object wählen"
+msgstr "Nächstes scanbares Objekt wählen"
 
 #: src/gui/hotkeyConfig.cpp:375
 msgctxt "hotkey_Science"
@@ -3239,12 +3254,12 @@ msgstr "Setze Systemleistung: 300%"
 #: src/gui/hotkeyConfig.cpp:398
 msgctxt "hotkey_Engineering"
 msgid "Increase system power"
-msgstr "Systemleistung verringern"
+msgstr "Systemleistung erhöhen"
 
 #: src/gui/hotkeyConfig.cpp:399
 msgctxt "hotkey_Engineering"
 msgid "Decrease system power"
-msgstr "System-Leistung verringern"
+msgstr "Systemleistung verringern"
 
 #: src/gui/hotkeyConfig.cpp:400
 msgctxt "hotkey_Engineering"
@@ -3284,7 +3299,7 @@ msgstr "Crewbewegung: rechts"
 #: src/gui/hotkeyConfig.cpp:407
 msgctxt "hotkey_Engineering"
 msgid "Start self-destruct"
-msgstr "Leite Selbstzertörung ein"
+msgstr "Leite Selbstzerstörung ein"
 
 #: src/gui/hotkeyConfig.cpp:408
 msgctxt "hotkey_Engineering"
