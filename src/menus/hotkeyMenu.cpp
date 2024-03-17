@@ -19,14 +19,15 @@ HotkeyMenu::HotkeyMenu()
 
     // TODO: Figure out how to make this an AutoLayout.
     container = new GuiElement(this, "HOTKEY_CONFIG_CONTAINER");
-    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft)->setMargins(FRAME_MARGIN);
+    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft)->setMargins(FRAME_MARGIN / 2);
 
     top_row = new GuiElement(container, "TOP_ROW_CONTAINER");
     top_row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)->setPosition(0, 0, sp::Alignment::TopLeft);
 
     rebinding_ui = new GuiPanel(container, "REBINDING_UI_CONTAINER");
     rebinding_ui->setSize(GuiElement::GuiSizeMax, KEY_COLUMN_HEIGHT)->setPosition(0, KEY_COLUMN_TOP, sp::Alignment::TopLeft);
-
+    info_container = new GuiElement(container, "info_container_CONTAINER");
+    info_container->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)->setPosition(0, KEY_COLUMN_TOP+KEY_COLUMN_HEIGHT, sp::Alignment::TopLeft);
     bottom_row = new GuiElement(container, "BOTTOM_ROW_CONTAINER");
     bottom_row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)->setPosition(0, 0, sp::Alignment::BottomLeft);
 
@@ -34,7 +35,7 @@ HotkeyMenu::HotkeyMenu()
     // Top: Title and category navigation
 
     // Title label
-    (new GuiLabel(top_row, "CONFIGURE_KEYBOARD_LABEL", tr("Configure Keyboard"), 30))->addBackground()->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    (new GuiLabel(top_row, "CONFIGURE_KEYBOARD_LABEL", tr("Configure Keyboard/Joystick"), 30))->addBackground()->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(350, GuiElement::GuiSizeMax);
 
     // Category selector
     // Get a list of hotkey categories
@@ -66,6 +67,7 @@ HotkeyMenu::HotkeyMenu()
 
     // Bottom: Menu navigation
     // Back button to return to the Options menu
+    (new GuiScrollText(info_container, "INFO_LABEL", tr("Left Click: Assign input. Middle Click: Add input. Right Click: Delete inputs.\nPossible inputs: Keyboard keys, joystick buttons, joystick axes.")))->setPosition(10, 0, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT*3);
     (new GuiButton(bottom_row, "BACK", tr("button", "Back"), [this]()
     {
         // Close this menu, stop the music, and return to the main menu.

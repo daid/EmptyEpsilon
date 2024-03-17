@@ -1,79 +1,88 @@
 -- Name: What the Dickens
--- Description: Patrol around the London area during Christmas. Bah! Humbug!
+-- Description: Patrol around the London area during Christmas. Bah! Humbug! Only one player ship.
+---
+--- Version 2
+---
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one nearly every weekend. All experience levels are welcome. 
 -- Type: Mission
+-- Author: Xansta
 -- Setting[Enemies]: Configures the amount of enemies spawned in the scenario.
 -- Enemies[Easy]: Easy goals and/or enemies. Good for solo players, short handed crews or less experienced crews.
 -- Enemies[Normal|Default]: Normal goals and/or enemies. Good for a normal crew.
 -- Enemies[Hard]: Hard goals and/or enemies. Good for experienced crews looking for a challenge.
 
 require("utils.lua")
-
+--	Initialization functions
 function init()
-	diagnostic = true
+	scenario_version = "2.0.0"
+	ee_version = "2023.06.17"
+	print(string.format("    ----    Scenario: What the Dickens    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
+	print(_VERSION)
+	diagnostic = false
 	setSettings()
 	stationFaction = "Human Navy"
 	stationBedlam = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationBedlam:setCallSign("Bedlam"):setPosition(27333, 54000)
+	stationBedlam:setCallSign("Bedlam"):setPosition(27333, 54000):setCommsScript(""):setCommsFunction(commsStation)
 	stationTavistock = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationTavistock:setCallSign("Tavistock"):setPosition(-33111, -68222)
+	stationTavistock:setCallSign("Tavistock"):setPosition(-33111, -68222):setCommsScript(""):setCommsFunction(commsStation)
 	stationCornhill = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationCornhill:setCallSign("Cornhill"):setPosition(78667, -20444)
+	stationCornhill:setCallSign("Cornhill"):setPosition(78667, -20444):setCommsScript(""):setCommsFunction(commsStation)
 	stationCamden = SpaceStation():setTemplate("Large Station"):setFaction(stationFaction)
-	stationCamden:setCallSign("Camden"):setPosition(-65556, -82667)
+	stationCamden:setCallSign("Camden"):setPosition(-65556, -82667):setCommsScript(""):setCommsFunction(commsStation)
 	stationCity = SpaceStation():setTemplate("Huge Station"):setFaction(stationFaction)
-	stationCity:setCallSign("City"):setPosition(82889, -10444)
+	stationCity:setCallSign("City"):setPosition(82889, -10444):setCommsScript(""):setCommsFunction(commsStation)
 	stationSomerset = SpaceStation():setTemplate("Large Station"):setFaction(stationFaction)
 	stationSomerset:setCallSign("Somerset"):setPosition(500, -10000):setCommsScript(""):setCommsFunction(commsStation)
 	stationMillbank = SpaceStation():setTemplate("Medium Station"):setFaction(stationFaction)
-	stationMillbank:setCallSign("Millbank"):setPosition(-35000, 48000)
+	stationMillbank:setCallSign("Millbank"):setPosition(-35000, 48000):setCommsScript(""):setCommsFunction(commsStation)
 	stationChange = SpaceStation():setTemplate("Medium Station"):setFaction(stationFaction)
-	stationChange:setCallSign("Change"):setPosition(85333, -21111)
+	stationChange:setCallSign("Change"):setPosition(85333, -21111):setCommsScript(""):setCommsFunction(commsStation)
 	stationDevonshire = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationDevonshire:setCallSign("Devonshire"):setPosition(-82000, -59000)
+	stationDevonshire:setCallSign("Devonshire"):setPosition(-82000, -59000):setCommsScript(""):setCommsFunction(commsStation)
 	stationCavendish = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationCavendish:setCallSign("Cavendish"):setPosition(-77000, -36000)
+	stationCavendish:setCallSign("Cavendish"):setPosition(-77000, -36000):setCommsScript(""):setCommsFunction(commsStation)
 	stationFoundling = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
 	stationFoundling:setCallSign("Foundling"):setPosition(-5000, -63000):setDescription(_("scienceDescription-station", "Medical research and support"))
-	stationSoho = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationSoho:setCallSign("Soho"):setPosition(-40000, -28000)
+	stationSoho = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
+	stationSoho:setCallSign("Soho"):setPosition(-40000, -28000):setCommsScript(""):setCommsFunction(commsStation)
 	stationGrosvenor = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationGrosvenor:setCallSign("Grosvenor"):setPosition(-92000, -12000)
+	stationGrosvenor:setCallSign("Grosvenor"):setPosition(-92000, -12000):setCommsScript(""):setCommsFunction(commsStation)
 	stationPentonville = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationPentonville:setCallSign("Pentonville"):setPosition(50, -78000)
+	stationPentonville:setCallSign("Pentonville"):setPosition(50, -78000):setCommsScript(""):setCommsFunction(commsStation)
 	stationCovent = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
 	stationCovent:setCallSign("Covent"):setPosition(-15000, -14000):setDescription(_("scienceDescription-station", "Hydroponics and plant life"))
-	stationCheshire = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
+	stationCheshire = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationCheshire:setCallSign("Cheshire"):setPosition(23000, -23000):setDescription(_("scienceDescription-station", "Cheese, food, drink"))
 	stationSouthwark = SpaceStation():setTemplate("Medium Station"):setFaction(stationFaction)
-	stationSouthwark:setCallSign("Southwark"):setPosition(52000, 19000)
+	stationSouthwark:setCallSign("Southwark"):setPosition(52000, 19000):setCommsScript(""):setCommsFunction(commsStation)
 	stationLambeth = SpaceStation():setTemplate("Medium Station"):setFaction(stationFaction)
-	stationLambeth:setCallSign("Lambeth"):setPosition(22000, 51000)
+	stationLambeth:setCallSign("Lambeth"):setPosition(22000, 51000):setCommsScript(""):setCommsFunction(commsStation)
 	stationBorough = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationBorough:setCallSign("Borough"):setPosition(38500, 40500)
+	stationBorough:setCallSign("Borough"):setPosition(38500, 40500):setCommsScript(""):setCommsFunction(commsStation)
 	stationChelsea = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationChelsea:setCallSign("Chelsea"):setPosition(-53000, 81500)
+	stationChelsea:setCallSign("Chelsea"):setPosition(-53000, 81500):setCommsScript(""):setCommsFunction(commsStation)
 	stationTower = SpaceStation():setTemplate("Medium Station"):setFaction(stationFaction)
-	stationTower:setCallSign("Tower"):setPosition(118000, 3000)
+	stationTower:setCallSign("Tower"):setPosition(118000, 3000):setCommsScript(""):setCommsFunction(commsStation)
 	stationCripplegate = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationCripplegate:setCallSign("Cripplegate"):setPosition(60500, -50500)
+	stationCripplegate:setCallSign("Cripplegate"):setPosition(60500, -50500):setCommsScript(""):setCommsFunction(commsStation)
 	stationHolborn = SpaceStation():setTemplate("Medium Station"):setFaction(stationFaction)
-	stationHolborn:setCallSign("Holborn"):setPosition(25000, -46000)
+	stationHolborn:setCallSign("Holborn"):setPosition(25000, -46000):setCommsScript(""):setCommsFunction(commsStation)
 	stationBloomsbury = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationBloomsbury:setCallSign("Bloomsbury"):setPosition(-50, -57000)
+	stationBloomsbury:setCallSign("Bloomsbury"):setPosition(-50, -57000):setCommsScript(""):setCommsFunction(commsStation)
 	stationSpitalfields = SpaceStation():setTemplate("Medium Station"):setFaction(stationFaction)
-	stationSpitalfields:setCallSign("Spitalfields"):setPosition(117000, -39000)
+	stationSpitalfields:setCallSign("Spitalfields"):setPosition(117000, -39000):setCommsScript(""):setCommsFunction(commsStation)
 	stationBishopsgate = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationBishopsgate:setCallSign("Bishopsgate"):setPosition(101000, -32000)
+	stationBishopsgate:setCallSign("Bishopsgate"):setPosition(101000, -32000):setCommsScript(""):setCommsFunction(commsStation)
 	stationMoorgate = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationMoorgate:setCallSign("Moorgate"):setPosition(82000, -40000)
+	stationMoorgate:setCallSign("Moorgate"):setPosition(82000, -40000):setCommsScript(""):setCommsFunction(commsStation)
 	stationWestminster = SpaceStation():setTemplate("Medium Station"):setFaction(stationFaction)
-	stationWestminster:setCallSign("Westminster"):setPosition(-36000, 51000)
+	stationWestminster:setCallSign("Westminster"):setPosition(-36000, 51000):setCommsScript(""):setCommsFunction(commsStation)
 	stationBuckingham = SpaceStation():setTemplate("Medium Station"):setFaction(stationFaction)
-	stationBuckingham:setCallSign("Buckingham"):setPosition(-68000, 33000)
+	stationBuckingham:setCallSign("Buckingham"):setPosition(-68000, 33000):setCommsScript(""):setCommsFunction(commsStation)
 	stationKensington = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationKensington:setCallSign("Kensington"):setPosition(-108000, 35000)
+	stationKensington:setCallSign("Kensington"):setPosition(-108000, 35000):setCommsScript(""):setCommsFunction(commsStation)
 	stationAldgate = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationAldgate:setCallSign("Aldgate"):setPosition(115000, -19000)
+	stationAldgate:setCallSign("Aldgate"):setPosition(115000, -19000):setCommsScript(""):setCommsFunction(commsStation)
 	riverZone = Zone():setColor(0,0,255)
 	riverZone:setPoints(-60000,160000,
 						-39778,108667,
@@ -218,8 +227,9 @@ function init()
     Nebula():setPosition(-90111, -80000)
 	createRandomAlongArc(Asteroid, 50, 0, 0, 70000, 180, 270, 25000)
 	player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Repulse"):setCallSign("HMS Scrooge"):addReputationPoints(77)
+	allowNewPlayerShips(false)
 	plotZ = zoneChecks
-	plot1timer = 5
+	plot1_time = getScenarioTime() + 5
 	plot1 = missionMessage
 	plot1name = "missionMessage"
 	primaryOrders = string.format(_("orders-comms", "Protect Somerset in %s"),stationSomerset:getSectorName())
@@ -229,14 +239,25 @@ function init()
 	graveyardSpawned = false
 	cemeteryDocked = false
 	necropolisDocked = false
+	--	GM functions
 	GMChristmasPast = _("buttonGM", "Christmas Past")
-	addGMFunction(GMChristmasPast,christmasPast)
+	addGMFunction(GMChristmasPast,function()
+		plot1 = startChristmasPast
+		removeGMFunction(GMChristmasPast)
+	end)
 	GMChristmasPresent = _("buttonGM", "Christmas Present")
-	addGMFunction(GMChristmasPresent,christmasPresent)
+	addGMFunction(GMChristmasPresent,function()
+		plot1 = startChristmasPresent
+		removeGMFunction(GMChristmasPresent)
+	end)
 	GMChristmasFuture = _("buttonGM", "Christmas Future")
-	addGMFunction(GMChristmasFuture,christmasFuture)
+	addGMFunction(GMChristmasFuture,function()
+		plot1 = startChristmasFuture
+		removeGMFunction(GMChristmasFuture)
+	end)
 	wfv = "end of init"
 end
+function createRandomAlongArc(object_type, amount, x, y, distance, startArc, endArcClockwise, randomize)
 -- Create amount of objects of type object_type along arc
 -- Center defined by x and y
 -- Radius defined by distance
@@ -244,7 +265,6 @@ end
 -- Use randomize to vary the distance from the center point. Omit to keep distance constant
 -- Example:
 --   createRandomAlongArc(Asteroid, 100, 500, 3000, 65, 120, 450)
-function createRandomAlongArc(object_type, amount, x, y, distance, startArc, endArcClockwise, randomize)
 	if randomize == nil then randomize = 0 end
 	if amount == nil then amount = 1 end
 	arcLen = endArcClockwise - startArc
@@ -256,22 +276,42 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 		for ndex=1,arcLen do
 			radialPoint = startArc+ndex
 			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			local ax = x + math.cos(radialPoint / 180 * math.pi) * pointDist
+			local ay = y + math.sin(radialPoint / 180 * math.pi) * pointDist
+			local obj = object_type():setPosition(ax,ay)
+			if obj.typeName == "Asteroid" then
+				obj:setSize(random(10,800))
+				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
+				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
+			end	
 		end
 		for ndex=1,amount-arcLen do
 			radialPoint = random(startArc,endArcClockwise)
 			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+			local ax = x + math.cos(radialPoint / 180 * math.pi) * pointDist
+			local ay = y + math.sin(radialPoint / 180 * math.pi) * pointDist
+			local obj = object_type():setPosition(ax,ay)
+			if obj.typeName == "Asteroid" then
+				obj:setSize(random(10,800))
+				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
+				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
+			end	
 		end
 	else
 		for ndex=1,amount do
 			radialPoint = random(startArc,endArcClockwise)
 			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
+			local ax = x + math.cos(radialPoint / 180 * math.pi) * pointDist
+			local ay = y + math.sin(radialPoint / 180 * math.pi) * pointDist
+			local obj = object_type():setPosition(ax,ay)
+			if obj.typeName == "Asteroid" then
+				obj:setSize(random(10,800))
+				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
+				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
+			end	
 		end
 	end
 end
-
 function setSettings()
 	if string.find(getScenarioSetting("Enemies"),"Easy") then
 		difficulty = .5
@@ -315,7 +355,7 @@ function zoneChecks(delta)
 		end
 	end
 end
-
+--	Station communications
 function commsStation()
     if comms_target.comms_data == nil then
         comms_target.comms_data = {}
@@ -354,11 +394,9 @@ function commsStation()
         }
     })
     comms_data = comms_target.comms_data
-
     if player:isEnemy(comms_target) then
         return false
     end
-
     if comms_target:areEnemiesInRange(5000) then
         setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"));
         return true
@@ -370,7 +408,6 @@ function commsStation()
     end
     return true
 end
-
 function handleDockedState()
     -- Handle communications while docked with this station.
     if player:isFriendly(comms_target) then
@@ -378,7 +415,6 @@ function handleDockedState()
     else
         setCommsMessage(_("station-comms", "Welcome to our lovely station."))
     end
-
     if player:getWeaponStorageMax("Homing") > 0 then
         addCommsReply(string.format(_("ammo-comms", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost("Homing")), function()
             handleWeaponRestock("Homing")
@@ -443,8 +479,13 @@ function handleDockedState()
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
+    if comms_target == stationCamden then
+    	addCommsReply(_("station-comms","What do you know about unusual readings around here?"),function()
+    		setCommsMessage(_("station-comms","The unusual readings happen in A2. They are sporadic, illogical, and creepy."))
+    		addCommsReply(_("Back"), commsStation)
+    	end)
+    end
 end
-
 function handleWeaponRestock(weapon)
     if not player:isDocked(comms_target) then setCommsMessage(_("station-comms", "You need to stay docked for that action.")); return end
     if not isAllowedTo(comms_data.weapons[weapon]) then
@@ -476,7 +517,6 @@ function handleWeaponRestock(weapon)
         addCommsReply(_("Back"), commsStation)
     end
 end
-
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if player:isFriendly(comms_target) then
@@ -566,8 +606,13 @@ function handleUndockedState()
             addCommsReply(_("Back"), commsStation)
         end)
     end
+    if comms_target == stationCamden then
+    	addCommsReply(_("station-comms","What do you know about unusual readings around here?"),function()
+    		setCommsMessage(_("station-comms","The unusual readings happen in A2. They are sporadic, illogical, and creepy."))
+    		addCommsReply(_("Back"), commsStation)
+    	end)
+    end
 end
-
 function isAllowedTo(state)
     if state == "friend" and player:isFriendly(comms_target) then
         return true
@@ -577,19 +622,12 @@ function isAllowedTo(state)
     end
     return false
 end
-
--- Return the number of reputation points that a specified weapon costs for the
--- current player.
 function getWeaponCost(weapon)
     return math.ceil(comms_data.weapon_cost[weapon] * comms_data.reputation_cost_multipliers[getFriendStatus()])
 end
-
--- Return the number of reputation points that a specified service costs for
--- the current player.
 function getServiceCost(service)
     return math.ceil(comms_data.service_cost[service])
 end
-
 function getFriendStatus()
     if player:isFriendly(comms_target) then
         return "friend"
@@ -597,33 +635,16 @@ function getFriendStatus()
         return "neutral"
     end
 end
-
-function christmasPast()
-	plot1 = startChristmasPast
-	removeGMFunction(GMChristmasPast)
-end
-
-function christmasPresent()
-	plot1 = startChristmasPresent
-	removeGMFunction(GMChristmasPresent)
-end
-
-function christmasFuture()
-	plot1 = startChristmasFuture
-	removeGMFunction(GMChristmasFuture)
-end
-
+--	plot1 functions
 function missionMessage(delta)
-	plot1timer = plot1timer - delta
-	if plot1timer < 0 then
-		player:addToShipLog(string.format(_("goal-shipLog", "Your mission is to protect station Somerset in %s. Other missions may be added. Dock with Somerset for additional mission parameters. Welcome to the london area of human navy influence"),stationSomerset:getSectorName()),"Magenta")
+	if getScenarioTime() > plot1_time then
+		player:addToShipLog(string.format(_("goal-shipLog", "Your mission is to protect station Somerset in %s. Other missions may be added. Dock with Somerset for additional mission parameters. Welcome to the London area of human navy influence"),stationSomerset:getSectorName()),"Magenta")
 		primaryOrders = string.format(_("orders-comms", "Protect Somerset in %s"),stationSomerset:getSectorName())
 		secondaryOrders = _("orders-comms", "Dock with Somerset")
 		plot1 = camdenSensorReading
 		plot1name = "camdenSensorReading"
 	end
 end
-
 function camdenSensorReading(delta)
 	if player:isDocked(stationSomerset) then
 		player:addToShipLog(_("ordersAudio-shipLog", "Investigate unusual sensor readings near station Camden in A2"),"Magenta")
@@ -633,7 +654,6 @@ function camdenSensorReading(delta)
 		plot1name = "arriveA2"
 	end
 end
-
 function arriveA2(delta)
 	if player:getSectorName() == "A2" then
 		px, py = player:getPosition()
@@ -643,30 +663,25 @@ function arriveA2(delta)
 		plot1name = "scanMarleyArtifact"
 	end
 end
-
 function scanMarleyArtifact(delta)
 	if marleyArt:isScannedBy(player) then
 		player:addToShipLog(_("audio-shipLog", "[Jacob Marley] Do you remember your partner from previous missions? Especially the one where Marley station was destroyed? I am doomed to haunt this area of space forever. Take care or suffer the same fate."),"Red")
 		playSoundFile("audio/scenario/62/sa_62_Marley1.ogg")
 		plot1 = explosionDelay
 		plot1name = "explosionDelay"
-		explosionDelayTimer = 10
+		explosion_delay_time = getScenarioTime() + 10
 	end
 end
-
 function explosionDelay(delta)
-	explosionDelayTimer = explosionDelayTimer - delta
-	if explosionDelayTimer < 0 then
+	if getScenarioTime() > explosion_delay_time then
 		marleyArt:explode()
 		plot1 = marleyMob
 		plot1name = "marleyMob"
-		plot1timer = 20
+		plot1_time = getScenarioTime() + 20
 	end
 end
-
 function marleyMob(delta)
-	plot1timer = plot1timer - delta
-	if plot1timer < 0 then
+	if getScenarioTime() > plot1_time then
 		marleyList = {}
 		px, py = player:getPosition()
 		startAngle = random(0,360)
@@ -709,10 +724,9 @@ function marleyMob(delta)
 		secondaryOrders = _("orders-comms", "Defeat Kraylors")
 	end
 end
-
 function destroyMarleyMob(delta)
 	marleyMobCount = 0
-	for _, enemy in ipairs(marleyList) do
+	for i, enemy in ipairs(marleyList) do
 		if enemy:isValid() then
 			marleyMobCount = marleyMobCount + 1
 		end
@@ -727,7 +741,7 @@ function destroyMarleyMob(delta)
 		removeGMFunction(GMChristmasPast)
 	end
 end
-
+--	plot1 Christmas past functions
 function startChristmasPast(delta)
 	if player:isDocked(stationSomerset) then
 		player:addToShipLog(string.format(_("ordersAudio-shipLog", "I'm guessing you handled whatever was in A2. Those unusual readings have disappeared. However, we show an unusually high level of chroniton particles near station Millbank in %s. Recommend you investigate."),stationMillbank:getSectorName()),"Magenta")
@@ -737,74 +751,34 @@ function startChristmasPast(delta)
 		plot1name = "arriveNearMillbank"
 	end
 end
-
 function arriveNearMillbank(delta)
 	if distance(player,stationMillbank) < 15000 then
 		smx, smy = stationMillbank:getPosition()
 		vx, vy = vectorFromAngle(random(0,360),2500)
 		pastArt = Artifact():setPosition(smx+vx,smy+vy):setModel("artifact3"):allowPickup(false):setDescriptions(_("scienceDescription-artifact", "Tiny escape pod"),_("scienceDescription-artifact", "Tiny escape pod from a previous generation")):setRadarSignatureInfo(0,0.9,0):setScanningParameters(2,1)
-		hopTimer = 1
+		hop_time = getScenarioTime() + 1
 		plot1 = hopArt
 		plot1name = "hopArt"
 		plot2 = pastArtScan
 		plot2name = "pastArtScan"
 	end
 end
-
 function hopArt(delta)
-	hopTimer = hopTimer - delta
-	if hopTimer < 0 then
+	if getScenarioTime() > hop_time then
 		vx, vy = vectorFromAngle(random(0,360),2500)
 		pastArt:setPosition(smx+vx,smy+vy)
-		hopTimer = delta + 1
+		hop_time = getScenarioTime() + 1
 	end
 end
-
-function pastArtScan(delta)
-	if pastArt:isScannedByFaction("Human Navy") then
-		px, py = player:getPosition()
-		fezx = (px + smx)/2
-		fezy = (py + smy)/2
-		if distance(player,fezx,fezy) < 1000 then
-			wfv = "alternate fez"
-			fezx = fezx + 3000
-			fezy = fezy + 3000
-		end
-		plot1 = fezEffect
-		plot1name = "fezEffect"
-		plot2 = podToFez
-		podToFezTimer = 1
-		plot2name = "podToFez"
-	end
-end
-
-function podToFez(delta)
-	podToFezTimer = podToFezTimer - delta
-	if podToFezTimer < 0 then
-		if stationFezziwig ~= nil then
-			if distance(stationFezziwig,pastArt) < 100 then
-				pastArt:destroy()
-				plot2 = nil
-				plot2name = ""
-			end
-		end
-		pox, poy = pastArt:getPosition()
-		pastArt:setPosition((pox+fezx)/2,(poy+fezy)/2)
-		podToFezTimer = delta + 1
-	end
-end
-
 function fezEffect(delta)
 	fezNeb1 = Nebula():setPosition(fezx,fezy)
-	fez2Timer = 3
+	fez_2_timer = getScenarioTime() + 3
 	plot1 = fez2Effect
 	plot1name = "fez2Effect"
 end
-
 function fez2Effect(delta)
-	fez2Timer = fez2Timer - delta
-	if fez2Timer < 0 then
-		fez3Timer = 3
+	if getScenarioTime() > fez_2_timer then
+		fez_3_time = getScenarioTime() + 3
 		plot1 = fez3Effect
 		plot1name = "fez3Effect"
 		fezNeb2 = Nebula():setPosition(fezx,fezy+5000)
@@ -813,31 +787,25 @@ function fez2Effect(delta)
 		fezNeb5 = Nebula():setPosition(fezx-5000,fezy)
 	end
 end
-
 function fez3Effect(delta)
-	fez3Timer = fez3Timer - delta
-	if fez3Timer < 0 then
+	if getScenarioTime() > fez_3_time then
 		stationFezziwig = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("Fezziwig"):setPosition(fezx, fezy)
 		plot1 = fezWelcomeMessage
 		plot1name = "fezWelcomeMessage"
-		fezWelcomeTimer = 5
+		fez_welcome_time = getScenarioTime() + 5
 	end
 end
-
 function fezWelcomeMessage(delta)
-	fezWelcomeTimer = fezWelcomeTimer - delta
-	if fezWelcomeTimer < 0 then
+	if getScenarioTime() > fez_welcome_time then
 		player:addToShipLog(_("audio-shipLog", "Welcome to the Christmases of your past, Scrooge"),"Blue")
 		playSoundFile("audio/scenario/62/sa_62_Child1.ogg")
 		plot1 = fezFleet
 		plot1name = "fezFleet"
-		fezFleetTimer = 7
+		fez_fleet_time = getScenarioTime() + 7
 	end
 end
-
 function fezFleet(delta)
-	fezFleetTimer = fezFleetTimer - delta
-	if fezFleetTimer < 0 then
+	if getScenarioTime() > fez_fleet_time then
 		fezList = {}
 		px, py = player:getPosition()
 		startAngle = random(35,55)
@@ -870,7 +838,6 @@ function fezFleet(delta)
 		end
 	end
 end
-
 function destroyFezFleet(delta)
 	fezFleetCount = 0
 	for _, enemy in ipairs(fezList) do
@@ -888,13 +855,11 @@ function destroyFezFleet(delta)
 		plot1 = belleNemesis
 		plot1name = "belleNemesis"
 		secondaryOrders = _("orders-comms", "Protect Belle")
-		belleNemesisTimer = 10
+		belle_nemesis_time = getScenarioTime() + 10
 	end
 end
-
 function belleNemesis(delta)
-	belleNemesisTimer = belleNemesisTimer - delta
-	if belleNemesisTimer < 0 then
+	if getScenarioTime() > belle_nemesis_time then
 		belleList = {}
 		vx, vy = vectorFromAngle(belleAngle-10,24000)
 		enemyIdol = CpuShip():setFaction("Exuari"):setCallSign("Idol"):setTemplate("MT52 Hornet"):orderAttack(friendBelle):setPosition(fezx+vx,fezy+vy):setRotation(startAngle+170)
@@ -919,9 +884,9 @@ function belleNemesis(delta)
 		end
 	end
 end
-
 function destroyBelleFleet(delta)
 	if not friendBelle:isValid() then
+		globalMessage(_("msgMainscreen", "You did not protect Belle, your dearest love. HMS Scrooge experienced catastrophic environmental systems failure due to crew anguish. All of you suffocated."))
 		victory("Exuari")
 	end
 	belleFleetCount = 0
@@ -947,7 +912,7 @@ function destroyBelleFleet(delta)
 		friendBelle:destroy()
 	end
 end
-
+--	plot1 Christmas present functions
 function startChristmasPresent(delta)
 	if player:isDocked(stationSomerset) then
 		player:addToShipLog(string.format(_("ordersAudio-shipLog", "Our sensors indicated nebulas forming then disappearing. That is impossible, of course. We started level three diagnostics on our sensors to discover what's wrong. Just before starting the diagnostic, we picked up unusual readings near Bedlam in %s. Perhaps you should investigate"),stationBedlam:getSectorName()),"Magenta")
@@ -957,7 +922,6 @@ function startChristmasPresent(delta)
 		plot1name = "arriveNearBedlam"
 	end
 end
-
 function arriveNearBedlam(delta)
 	if distance(player,stationBedlam) < 3000 then
 		player:addToShipLog(_("ordersAudio-shipLog", "[Bob Cratchit on station Bedlam] Happy Christmas, Scrooge! You are just in time to make our holiday bright. I know it is against your nature, but surely you can decorate our skies with alien enemy ship explosions. In the worst case, we will get a sky decorated with your ship exploding."),"Yellow")
@@ -988,7 +952,6 @@ function arriveNearBedlam(delta)
 		end
 	end
 end
-
 function destroyCratchitFleet(delta)
 	cratchitFleetCount = 0
 	for _, enemy in ipairs(cratchitList) do
@@ -1011,116 +974,41 @@ function destroyCratchitFleet(delta)
 			timAboard = false
 			plot2 = turkeyNemesis
 			plot2name = "turkeyNemesis"
-			turkeyNemesisTimer = 30
-			timLifeTimer = 240
-			timHalfLife = timLifeTimer/2
+			turkey_nemesis_time = getScenarioTime() + 30
+			tim_life_time = getScenarioTime() + 480
+			tim_half_life_time = getScenarioTime() + 240
 		else
-			globalMessage(_("msgMainscreen", "[Ghost of Christmas present] While you fought off the ships near Bedlam, Tiny Tim, Bob Cratchit's maintenance technician perished along with the others aboard station Bedlam. Your engineering crew were so overcome with grief that they neglected a routie maintenance cycle causing engine failure on HMS Scrooge."),"Red")
+			globalMessage(_("msgMainscreen", "While you fought off the ships near Bedlam, Tiny Tim, Bob Cratchit's maintenance technician perished along with the others aboard station Bedlam. Your engineering crew were so overcome with grief that they neglected a routie maintenance cycle causing engine failure on HMS Scrooge."))
 			victory("Ghosts")
 		end
 	end
 end
-
-function turkeyNemesis(delta)
-	turkeyNemesisTimer = turkeyNemesisTimer - delta
-	if turkeyNemesisTimer < 0 then
-		turkeyList = {}
-		tx, ty = friendTurkeySurprise:getPosition()
-		tgAngle = random(0,360)
-		vx, vy = vectorFromAngle(tgAngle,random(4000,5000))
-		enemyCrutch = CpuShip():setFaction("Ghosts"):setCallSign("Crutch"):setTemplate("Piranha F12"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
-		table.insert(turkeyList, enemyCrutch)
-		plot2 = presentHunters
-		plot2name = "presentHunters"
-		presentHuntersTimer = 30
-		vx, vy = vectorFromAngle(tgAngle,random(5000,6000))
-		enemyConsumption = CpuShip():setFaction("Ghosts"):setCallSign("Consumption"):setTemplate("Karnack"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
-		table.insert(turkeyList, enemyConsumption)
-		if difficulty >= 1 then
-			tgAngle = random(0,360)
-			vx, vy = vectorFromAngle(tgAngle,random(4000,5000))
-			enemyMalnutrition = CpuShip():setFaction("Ghosts"):setCallSign("Malnutrition"):setTemplate("Piranha F12"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
-			table.insert(turkeyList, enemyMalnutrition)
-			vx, vy = vectorFromAngle(tgAngle,random(5000,6000))
-			enemyRags = CpuShip():setFaction("Ghosts"):setCallSign("Rags"):setTemplate("Karnack"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
-			table.insert(turkeyList, enemyRags)
-		end
-		if difficulty > 1 then
-			tgAngle = random(0,360)
-			vx, vy = vectorFromAngle(tgAngle,random(4000,5000))
-			enemyPlague = CpuShip():setFaction("Ghosts"):setCallSign("Plague"):setTemplate("Piranha F12.M"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
-			table.insert(turkeyList, enemyPlague)
-			vx, vy = vectorFromAngle(tgAngle,random(5000,6000))
-			enemyLimp = CpuShip():setFaction("Ghosts"):setCallSign("Limp"):setTemplate("Karnack"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
-			table.insert(turkeyList, enemyLimp)
-		end
-	end
-end
-
-function presentHunters(delta)
-	presentHuntersTimer = presentHuntersTimer - delta
-	if presentHuntersTimer < 0 then
-		tx, ty = friendTurkeySurprise:getPosition()
-		sx, sy = stationSomerset:getPosition()
-		enemyGoose = CpuShip():setFaction("Ghosts"):setCallSign("Goose"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2,(ty+sy)/2)
-		table.insert(turkeyList, enemyGoose)
-		plot2 = presentOutrage
-		plot2name = "presentOutrage"
-		presentOutrageTimer = 30
-		if difficulty >= 1 then
-			enemySuckingPig = CpuShip():setFaction("Ghosts"):setCallSign("Sucking Pig"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2 + 1000,(ty+sy)/2)
-			table.insert(turkeyList, enemySuckingPig)
-			enemyMincePie = CpuShip():setFaction("Ghosts"):setCallSign("Mince Pie"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2 - 1000,(ty+sy)/2)
-			table.insert(turkeyList, enemyMincePie)
-		end
-		if difficulty > 1 then
-			enemyPlumPudding = CpuShip():setFaction("Ghosts"):setCallSign("Plum Pudding"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2,(ty+sy)/2 + 1000)
-			table.insert(turkeyList, enemyPlumPudding)
-			enemyChestnut = CpuShip():setFaction("Ghosts"):setCallSign("Chestnut"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2,(ty+sy)/2 - 1000)
-			table.insert(turkeyList, enemyChestnut)
-		end
-	end
-end
-
-function presentOutrage(delta)
-	presentOutrageTimer = presentOutrageTimer - delta
-	if presentOutrageTimer < 0 then
-		player:addToShipLog(_("audio-shipLog", "How dare you bring us here!"),"#556b2f")
-		playSoundFile("audio/scenario/62/sa_62_Kralien1.ogg")
-		plot2 = presentIntent
-		plot2name = "presentIntent"
-		presentIntentTimer = 20
-	end
-end
-
-function presentIntent(delta)
-	presentIntentTimer = presentIntentTimer - delta
-	if presentIntentTimer < 0 then
-		player:addToShipLog(_("audio-shipLog", "Silence! Since we are here, let us destroy Somerset"),"#556b2f")
-		playSoundFile("audio/scenario/62/sa_62_Kralien2.ogg")
-		plot2 = nil
-		plot2name = ""
-	end
-end
-
 function timIll(delta)
-	timLifeTimer = timLifeTimer - delta
 	if not timAboard then
 		if player:isDocked(stationBedlam) then
 			timAboard = true
-			player:addToShipLog(string.format(_("shipLog", "[Bob Cratchit] Tim has been transported aboard %s. Hurry to Turkey Surprise. The doctors say he has about %i minutes to live"),player:getCallSign(),math.floor(timLifeTimer/60)),"Yellow")
+			local remaining_minutes = math.floor((tim_life_time - getScenarioTime())/60)
+			if remaining_minutes < 1 then
+				player:addToShipLog(string.format(_("shipLog", "[Bob Cratchit] Tim has been transported aboard %s. Hurry to Turkey Surprise. The doctors say he has about %i seconds to live"),player:getCallSign(),math.floor((tim_life_time - getScenarioTime()))),"Yellow")
+			else
+				if remaining_minutes > 1 then
+					player:addToShipLog(string.format(_("shipLog", "[Bob Cratchit] Tim has been transported aboard %s. Hurry to Turkey Surprise. The doctors say he has about %i minutes to live"),player:getCallSign(),remaining_minutes),"Yellow")
+				else
+					player:addToShipLog(string.format(_("shipLog", "[Bob Cratchit] Tim has been transported aboard %s. Hurry to Turkey Surprise. The doctors say he has about %i minute to live"),player:getCallSign(),remaining_minutes),"Yellow")
+				end
+			end
 		end
-		if timLifeTimer < timHalfLife then
+		if getScenarioTime() > tim_half_life_time then
 			if halfMsg == nil then
 				halfMsg = "sent"
-				player:addToShipLog(string.format(_("shipLog", "[Bob Cratchit] Please hurry, the doctors say Tim has less than %i seconds to live"),timHalfLife),"Yellow")
+				player:addToShipLog(string.format(_("shipLog", "[Bob Cratchit] Please hurry, the doctors say Tim has less than %i seconds to live"),math.floor(getScenarioTime() - tim_half_life_time)),"Yellow")
 			end
 		end
 	else
-		if timLifeTimer < timHalfLife then
+		if getScenarioTime() > tim_half_life_time then
 			if halfMsg == nil then
 				halfMsg = "sent"
-				player:addToShipLog(string.format(_("shipLog", "[Sick Bay] Tim has less than %i seconds to live"),timHalfLife),"Magenta")
+				player:addToShipLog(string.format(_("shipLog", "[Sick Bay] Tim has less than %i seconds to live"),math.floor(getScenarioTime() - tim_half_life_time)),"Magenta")
 			end
 		end
 		if friendTurkeySurprise:isValid() then
@@ -1137,20 +1025,21 @@ function timIll(delta)
 					plot1 = timHeal
 					plot1name = "timHeal"
 					secondaryOrders = _("orders-comms", "Protect Turkey Surprise")
-					timHealTimer = 50
+					tim_heal_time = getScenarioTime() + 50
 				end
 			end
+		else
+			globalMessage(string.format(_("msgMainscreen", "Tim dies with Turkey Surprise. %s disabled by a broken heart (engine failure)"),player:getCallSign()))
+			victory("Ghosts")
 		end
 	end
-	if timLifeTimer < 0 then
+	if getScenarioTime() > tim_life_time then
 		globalMessage(string.format(_("msgMainscreen", "Tim dies. %s disabled by a broken heart (engine failure)"),player:getCallSign()))
 		victory("Ghosts")
 	end
 end
-
 function timHeal(delta)
-	timHealTimer = timHealTimer - delta
-	if timHealTimer < 0 then
+	if getScenarioTime() > tim_heal_time then
 		player:addToShipLog(_("ordersAudio-shipLog", "[Bob Cratchit] Turkey Surprise tells me Tim is doing fine. In fact, he's ready to return to duty. We need him here for critical repairs. Would you bring him home, please?"),"Yellow")
 		playSoundFile("audio/scenario/62/sa_62_BobCratchit3.ogg")
 		timAboard = false
@@ -1163,7 +1052,6 @@ function timHeal(delta)
 		victory("Ghosts")
 	end
 end
-
 function returnTim(delta)
 	if timAboard then
 		if player:isDocked(stationBedlam) then
@@ -1192,7 +1080,6 @@ function returnTim(delta)
 		end
 	end
 end
-
 function endChristmasPast(delta)
 	for _, enemy in ipairs(turkeyList) do
 		enemy:destroy()
@@ -1202,7 +1089,7 @@ function endChristmasPast(delta)
 	plot1 = startChristmasFuture
 	plot1name = "startChristmasFuture"
 end
-
+--	plot1 Christmas future functions
 function startChristmasFuture(delta)
 	secondaryOrders = _("orders-comms", "Dock with Somerset")
 	if player:isDocked(stationSomerset) then
@@ -1214,23 +1101,19 @@ function startChristmasFuture(delta)
 		futy = cy - 5000
 		plot1 = futureEffect1
 		plot1name = "futureEffect1"
-		futureEffect1Timer = 15
+		future_effect_1_time = getScenarioTime() + 15
 	end
 end
-
 function futureEffect1(delta)
-	futureEffect1Timer = futureEffect1Timer - delta
-	if futureEffect1Timer < 0 then
+	if getScenarioTime() > future_effect_1_time then
 		futNeb1 = Nebula():setPosition(futx, futy)
-		futureEffect2Timer = 10
+		future_effect_2_time = getScenarioTime() + 10
 		plot1 = futureEffect2
 		plot1name = "futureEffect2"
 	end
 end
-
 function futureEffect2(delta)
-	futureEffect2Timer = futureEffect2Timer - delta
-	if futureEffect2Timer < 0 then
+	if getScenarioTime() > future_effect_2_time then
 		futNeb2 = Nebula():setPosition(futx+10000,futy)
 		futNeb3 = Nebula():setPosition(futx-10000,futy)
 		futNeb4 = Nebula():setPosition(futx,futy+10000)
@@ -1239,15 +1122,13 @@ function futureEffect2(delta)
 		futNeb7 = Nebula():setPosition(futx+10000,futy-10000)
 		futNeb8 = Nebula():setPosition(futx-10000,futy+10000)
 		futNeb9 = Nebula():setPosition(futx+10000,futy+10000)
-		futureEffect3Timer = 10
+		future_effect_3_time = getScenarioTime() + 10
 		plot1 = futureEffect3
 		plot1name = "futureEffect3"
 	end
 end
-
 function futureEffect3(delta)
-	futureEffect3Timer = futureEffect3Timer - delta
-	if futureEffect3Timer < 0 then
+	if getScenarioTime() > future_effect_3_time then
 		movingNebula = {}
 		nebAngle = 0
 		for nidx=1,12 do
@@ -1260,10 +1141,394 @@ function futureEffect3(delta)
 		plot2 = moveNebula
 		plot1 = futureEffect4
 		plot1name = "futureEffect4"
-		futureEffect4Timer = 10
+		future_effect_4_time = getScenarioTime() + 10
 	end
 end
-
+function futureEffect4(delta)
+	if getScenarioTime() > future_effect_4_time then
+		vx, vy = vectorFromAngle(0,2500)
+		stationGraveyard = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCallSign("Graveyard"):setPosition(futx+vx, futy+vy)
+		stationGraveyard.angle = 0
+		vx, vy = vectorFromAngle(120,2500)
+		stationCemetery = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCallSign("Cemetery"):setPosition(futx+vx, futy+vy)
+		stationCemetery.angle = 120
+		vx, vy = vectorFromAngle(240,2500)
+		stationNecropolis = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCallSign("Necropolis"):setPosition(futx+vx, futy+vy)
+		stationNecropolis.angle = 240
+		player:addToShipLog(_("shipLog", "Face your future"),"178,34,34")
+		ghostly_hint_time = getScenarioTime() + 120
+		graveyardList = {}
+		cemeteryList = {}
+		necropolisList = {}
+		plot3 = orbitStations
+		plot3name = "orbitStations"
+		plot1 = futureCheck
+		plot1name = "futureCheck"
+	end
+end
+function futureCheck(delta)
+	if player:isDocked(stationGraveyard) then
+		graveyardDocked = true
+--		print("docked with Graveyard")
+		if graveyardSpawned then
+			graveyardFleetCount = 0
+			for i, enemy in ipairs(graveyardList) do
+				if enemy:isValid() then
+					graveyardFleetCount = graveyardFleetCount + 1
+				end
+			end
+			if graveyardFleetCount == 0 then
+				for i, enemy in ipairs(graveyardList) do
+					enemy:destroy()
+				end
+				graveyardSpawned = false
+--				print("resetting Graveyard spawned boolean")
+			end
+		else
+			spawnGraveyard()
+		end
+	end
+	if player:isDocked(stationCemetery) then
+		cemeteryDocked = true
+--		print("docked with Cemetary")
+		if cemeterySpawned then
+			cemeteryFleetCount = 0
+			for i, enemy in ipairs(cemeteryList) do
+				if enemy:isValid() then
+					cemeteryFleetCount = cemeteryFleetCount + 1
+				end
+			end
+			if cemeteryFleetCount == 0 then
+				for i, enemy in ipairs(cemeteryList) do
+					enemy:destroy()
+				end
+				cemeterySpawned = false
+--				print("resetting Cemetary spawned boolean")
+			end
+		else
+			spawnCemetery()
+		end
+	end
+	if player:isDocked(stationNecropolis) then
+		necropolisDocked = true
+--		print("docked with Necropolis")
+		if necropolisSpawned then
+			necropolisFleetCount = 0
+			for i, enemy in ipairs(necropolisList) do
+				if enemy:isValid() then
+					necropolisFleetCount = necropolisFleetCount + 1
+				end
+			end
+			if necropolisFleetCount == 0 then
+				for i, enemy in ipairs(necropolisList) do
+					enemy:destroy()
+				end
+				necropolisSpawned = false
+--				print("resetting Necropolis spawned boolean")
+			end
+		else
+			spawnNecropolis()
+		end
+	end
+	if graveyardDocked and cemeteryDocked and necropolisDocked then
+--		print("player has docked at Graveyard, Cemetary and Necropolis")
+		fleetCount = 0
+		if graveyardSpawned then
+			graveyardFleetCount = 0
+			for i, enemy in ipairs(graveyardList) do
+				if enemy:isValid() then
+					graveyardFleetCount = graveyardFleetCount + 1
+				end
+			end
+			fleetCount = fleetCount + graveyardFleetCount
+		end
+		if cemeterySpawned then
+			cemeteryFleetCount = 0
+			for i, enemy in ipairs(cemeteryList) do
+				if enemy:isValid() then
+					cemeteryFleetCount = cemeteryFleetCount + 1
+				end
+			end
+			fleetCount = fleetCount + cemeteryFleetCount
+		end
+		if necropolisSpawned then
+			necropolisFleetCount = 0
+			for i, enemy in ipairs(necropolisList) do
+				if enemy:isValid() then
+					necropolisFleetCount = necropolisFleetCount + 1
+				end
+			end
+			fleetCount = fleetCount + necropolisFleetCount
+		end
+		if fleetCount == 0 then
+			plot1 = cleanFuture
+			plot1name = "cleanFuture"
+		end
+	end
+end
+function spawnGraveyard()
+	graveyardSpawned = true
+--	print("Spawning Graveyard (Button, Boot, Sheet)")
+	enemyButton = CpuShip():setFaction("Ktlitans"):setCallSign("Button"):setTemplate("Ktlitan Drone"):orderAttack(player):setPosition(futx,futy)
+	table.insert(graveyardList, enemyButton)
+	if difficulty >= 1 then
+		enemyBoot = CpuShip():setFaction("Ktlitans"):setCallSign("Boot"):setTemplate("Ktlitan Drone"):orderAttack(player):setPosition(futx+800,futy)
+		table.insert(graveyardList, enemyBoot)
+		enemySheet = CpuShip():setFaction("Ktlitans"):setCallSign("Sheet"):setTemplate("Ktlitan Drone"):orderAttack(player):setPosition(futx-800,futy)
+		table.insert(graveyardList, enemySheet)
+	end
+	if difficulty > 1 then
+		enemyBedCurtain = CpuShip():setFaction("Ktlitans"):setCallSign("Bed Curtain"):setTemplate("Ktlitan Drone"):orderAttack(player):setPosition(futx,futy+800)
+		table.insert(graveyardList, enemyBedCurtain)
+	end
+end
+function spawnCemetery()
+	cemeterySpawned = true
+--	print("Spawning Cemetary (Relent, Ruin, Creditor)")
+	enemyRelent = CpuShip():setFaction("Ktlitans"):setCallSign("Relent"):setTemplate("Ktlitan Scout"):orderAttack(player):setPosition(futx,futy)
+	table.insert(cemeteryList, enemyRelent)
+	if difficulty >= 1 then
+		enemyRuin = CpuShip():setFaction("Ktlitans"):setCallSign("Ruin"):setTemplate("Ktlitan Scout"):orderAttack(player):setPosition(futx,futy+800)
+		table.insert(cemeteryList, enemyRuin)
+		enemyCreditor = CpuShip():setFaction("Ktlitans"):setCallSign("Creditor"):setTemplate("Ktlitan Scout"):orderAttack(player):setPosition(futx,futy-800)
+		table.insert(cemeteryList, enemyCreditor)
+	end
+	if difficulty > 1 then
+		enemyDelight = CpuShip():setFaction("Ktlitans"):setCallSign("Delight"):setTemplate("Ktlitan Scout"):orderAttack(player):setPosition(futx-800,futy)
+		table.insert(cemeteryList, enemyDelight)
+	end
+end
+function spawnNecropolis()
+	necropolisSpawned = true
+--	print("Spawning Necropolis (Absent, Grief)")
+	enemyAbsent = CpuShip():setFaction("Ktlitans"):setCallSign("Absent"):setTemplate("Ktlitan Breaker"):orderAttack(player):setPosition(futx,futy)
+	table.insert(necropolisList, enemyAbsent)
+	if difficulty >= 1 then
+		enemyGrief = CpuShip():setFaction("Ktlitans"):setCallSign("Grief"):setTemplate("Ktlitan Breaker"):orderAttack(player):setPosition(futx+800,futy+800)
+		table.insert(necropolisList, enemyGrief)
+	end
+	if difficulty > 1 then
+		enemyTomb = CpuShip():setFaction("Ktlitans"):setCallSign("Tomb"):setTemplate("Ktlitan Breaker"):orderAttack(player):setPosition(futx-800,futy-800)
+		table.insert(necropolisList, enemyTomb)
+	end
+end
+function cleanFuture(delta)
+	player:addToShipLog(_("shipLog", "You have faced your future"),"178,34,34")
+	plot2 = nil
+	plot3 = nil
+	stationGraveyard:destroy()
+	stationCemetery:destroy()
+	stationNecropolis:destroy()
+	for nidx=1,#movingNebula do
+		movingNebula[nidx]:destroy()
+	end
+	futNeb1:destroy()
+	futNeb2:destroy()
+	futNeb3:destroy()
+	futNeb4:destroy()
+	futNeb5:destroy()
+	futNeb6:destroy()
+	futNeb7:destroy()
+	futNeb8:destroy()
+	futNeb9:destroy()
+	plot1 = returnMsg1
+	plot1name = "returnMsg1"
+end
+--	plot1 closing functions
+function returnMsg1(delta)
+	player:addToShipLog(_("return-shipLog", "Dock at Somerset for a well deserved Christmas break"),"Magenta")
+	plot1 = returnMsg2
+	plot1name = "returnMsg2"
+	return_message_2_time = getScenarioTime() + 4
+end
+function returnMsg2(delta)
+	if getScenarioTime() > return_message_2_time and distance(player,stationSomerset) < 80000 then
+		player:addToShipLog(_("returnAudio-shipLog", "[Jacob Marley] Good to see you spreading joy and easing pain, Scrooge"),"Red")
+		playSoundFile("audio/scenario/62/sa_62_Marley4.ogg")
+		plot1 = returnMsg3
+		plot1name = "returnMsg3"
+		return_message_3_time = getScenarioTime() + 4
+	end
+end
+function returnMsg3(delta)
+	if getScenarioTime() > return_message_3_time and distance(player,stationSomerset) < 70000 then
+		player:addToShipLog(_("returnAudio-shipLog", "May the shadows of the things that have been continue to remind you of the joy of Christmas"),"Blue")
+		playSoundFile("audio/scenario/62/sa_62_Child4.ogg")
+		plot1 = returnMsg4
+		plot1name = "returnMsg4"
+		return_message_4_time = getScenarioTime() + 8
+	end
+end
+function returnMsg4(delta)
+	if getScenarioTime() > return_message_4_time and distance(player,stationSomerset) < 60000 then
+		player:addToShipLog(_("return-shipLog", "Despite Ignorance and Want, prisons and workhouses, know each day fully and celebrate it, especially Christmas"),"Yellow")
+		plot1 = returnMsg5
+		plot1name = "returnMsg5"
+		return_message_5_time = getScenarioTime() + 15
+	end
+end
+function returnMsg5(delta)
+	if getScenarioTime() > return_message_5_time and distance(player,stationSomerset) < 50000 then
+		player:addToShipLog(_("returnAudio-shipLog", "[Urchin Express]\nHappy Christmas, sir!\nTop o' the day to ya!\nThanks for the shillings!"),"Cyan")
+		playSoundFile("audio/scenario/62/sa_62_Urchins.ogg")
+		plot1 = returnMsg6
+		plot1name = "returnMsg6"
+		return_message_6_time = getScenarioTime() + 3
+	end
+end
+function returnMsg6(delta)
+	if getScenarioTime() > return_message_6_time and distance(player,stationSomerset) < 40000 then
+		player:addToShipLog(_("returnAudio-shipLog", "[Fred from QE17] Merry Christmas, uncle! Stop by and share Christmas dinner with us when you're off duty"),"Green")
+		playSoundFile("audio/scenario/62/sa_62_Fred.ogg")
+		plot1 = returnMsg7
+		plot1name = "returnMsg7"
+		return_message_7_time = getScenarioTime() + 6
+	end
+end
+function returnMsg7(delta)
+	if getScenarioTime() > return_message_7_time and distance(player,stationSomerset) < 30000 then
+		player:addToShipLog(_("returnAudio-shipLog", "[Bob on Cratchit Cruiser] Happy Christmas, Mr. Scrooge. Thanks for the raise and for helping Tiny Tim"),"Yellow")
+		playSoundFile("audio/scenario/62/sa_62_BobCratchit5.ogg")
+		plot1 = returnMsg8
+		plot1name = "returnMsg8"
+		return_message_8_time = getScenarioTime() + 10
+	end
+end
+function returnMsg8(delta)
+	if getScenarioTime() > return_message_8_time and distance(player,stationSomerset) < 20000 then
+		player:addToShipLog(_("returnAudio-shipLog", "[Tim on Cratchit Cruiser] God bless us every one"),"White")
+		playSoundFile("audio/scenario/62/sa_62_Tim.ogg")
+		plot1 = returnMsg9
+		plot1name = "returnMsg9"
+		return_message_9_time = getScenarioTime() + 6
+	end
+end
+function returnMsg9(delta)
+	if getScenarioTime() > return_message_9_time and distance(player,stationSomerset) < 10000 then
+		if difficulty > 1 then
+			player:addToShipLog(_("returnAudio-shipLog", "[Tim on Cratchit Cruiser] Give me some freakin' eggnog"),"White")
+			playSoundFile("audio/scenario/62/sa_62_Tim2.ogg")
+		end
+		plot1 = finalDock
+		plot1name = "finalDock"
+	end
+end
+function finalDock(delta)
+	if player:isDocked(stationSomerset) then
+		globalMessage(_("msgMainscreen", "Merry Christmas!"))
+		victory("Human Navy")
+	end
+end
+--	plot2 functions
+function pastArtScan(delta)
+	if pastArt:isScannedByFaction("Human Navy") then
+		px, py = player:getPosition()
+		fezx = (px + smx)/2
+		fezy = (py + smy)/2
+		if distance(player,fezx,fezy) < 1000 then
+			wfv = "alternate fez"
+			fezx = fezx + 3000
+			fezy = fezy + 3000
+		end
+		plot1 = fezEffect
+		plot1name = "fezEffect"
+		plot2 = podToFez
+		pod_to_fez_time = getScenarioTime() + 1
+		plot2name = "podToFez"
+	end
+end
+--	plot2 Christmas past functions
+function podToFez(delta)
+	if getScenarioTime() > pod_to_fez_time then
+		if stationFezziwig ~= nil then
+			if distance(stationFezziwig,pastArt) < 100 then
+				pastArt:destroy()
+				plot2 = nil
+				plot2name = ""
+			end
+		end
+		if pastArt ~= nil and pastArt:isValid() then
+			pox, poy = pastArt:getPosition()
+			pastArt:setPosition((pox+fezx)/2,(poy+fezy)/2)
+		end
+		pod_to_fez_time = getScenarioTime() + 1
+	end
+end
+function turkeyNemesis(delta)
+	if getScenarioTime() > turkey_nemesis_time then
+		turkeyList = {}
+		tx, ty = friendTurkeySurprise:getPosition()
+		tgAngle = random(0,360)
+		vx, vy = vectorFromAngle(tgAngle,random(4000,5000))
+		enemyCrutch = CpuShip():setFaction("Ghosts"):setCallSign("Crutch"):setTemplate("Piranha F12"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
+		table.insert(turkeyList, enemyCrutch)
+		plot2 = presentHunters
+		plot2name = "presentHunters"
+		present_hunters_time = getScenarioTime() + 30
+		vx, vy = vectorFromAngle(tgAngle,random(5000,6000))
+		enemyConsumption = CpuShip():setFaction("Ghosts"):setCallSign("Consumption"):setTemplate("Karnack"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
+		table.insert(turkeyList, enemyConsumption)
+		if difficulty >= 1 then
+			tgAngle = random(0,360)
+			vx, vy = vectorFromAngle(tgAngle,random(4000,5000))
+			enemyMalnutrition = CpuShip():setFaction("Ghosts"):setCallSign("Malnutrition"):setTemplate("Piranha F12"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
+			table.insert(turkeyList, enemyMalnutrition)
+			vx, vy = vectorFromAngle(tgAngle,random(5000,6000))
+			enemyRags = CpuShip():setFaction("Ghosts"):setCallSign("Rags"):setTemplate("Karnack"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
+			table.insert(turkeyList, enemyRags)
+		end
+		if difficulty > 1 then
+			tgAngle = random(0,360)
+			vx, vy = vectorFromAngle(tgAngle,random(4000,5000))
+			enemyPlague = CpuShip():setFaction("Ghosts"):setCallSign("Plague"):setTemplate("Piranha F12.M"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
+			table.insert(turkeyList, enemyPlague)
+			vx, vy = vectorFromAngle(tgAngle,random(5000,6000))
+			enemyLimp = CpuShip():setFaction("Ghosts"):setCallSign("Limp"):setTemplate("Karnack"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
+			table.insert(turkeyList, enemyLimp)
+		end
+	end
+end
+function presentHunters(delta)
+	if getScenarioTime() > present_hunters_time then
+		tx, ty = friendTurkeySurprise:getPosition()
+		sx, sy = stationSomerset:getPosition()
+		enemyGoose = CpuShip():setFaction("Ghosts"):setCallSign("Goose"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2,(ty+sy)/2)
+		table.insert(turkeyList, enemyGoose)
+		plot2 = presentOutrage
+		plot2name = "presentOutrage"
+		present_outrage_time = getScenarioTime() + 30
+		if difficulty >= 1 then
+			enemySuckingPig = CpuShip():setFaction("Ghosts"):setCallSign("Sucking Pig"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2 + 1000,(ty+sy)/2)
+			table.insert(turkeyList, enemySuckingPig)
+			enemyMincePie = CpuShip():setFaction("Ghosts"):setCallSign("Mince Pie"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2 - 1000,(ty+sy)/2)
+			table.insert(turkeyList, enemyMincePie)
+		end
+		if difficulty > 1 then
+			enemyPlumPudding = CpuShip():setFaction("Ghosts"):setCallSign("Plum Pudding"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2,(ty+sy)/2 + 1000)
+			table.insert(turkeyList, enemyPlumPudding)
+			enemyChestnut = CpuShip():setFaction("Ghosts"):setCallSign("Chestnut"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2,(ty+sy)/2 - 1000)
+			table.insert(turkeyList, enemyChestnut)
+		end
+	end
+end
+function presentOutrage(delta)
+	if getScenarioTime() > present_outrage_time then
+		player:addToShipLog(_("audio-shipLog", "How dare you bring us here!"),"85,107,47")
+		playSoundFile("audio/scenario/62/sa_62_Kralien1.ogg")
+		plot2 = presentIntent
+		plot2name = "presentIntent"
+		present_intent_time = getScenarioTime() + 20
+	end
+end
+function presentIntent(delta)
+	if getScenarioTime() > present_intent_time then
+		player:addToShipLog(_("audio-shipLog", "Silence! Since we are here, let us destroy Somerset"),"85,107,47")
+		playSoundFile("audio/scenario/62/sa_62_Kralien2.ogg")
+		plot2 = nil
+		plot2name = ""
+	end
+end
+--	plot2 Christmas future function
 function moveNebula(delta)
 	for nidx=1,#movingNebula do
 		newAngle = movingNebula[nidx].angle + .1
@@ -1275,30 +1540,7 @@ function moveNebula(delta)
 		movingNebula[nidx]:setPosition(futx+vnx,futy+vny)
 	end
 end
-
-function futureEffect4(delta)
-	futureEffect4Timer = futureEffect4Timer - delta
-	if futureEffect4Timer < 0 then
-		vx, vy = vectorFromAngle(0,2500)
-		stationGraveyard = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCallSign("Graveyard"):setPosition(futx+vx, futy+vy)
-		stationGraveyard.angle = 0
-		vx, vy = vectorFromAngle(120,2500)
-		stationCemetery = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCallSign("Cemetery"):setPosition(futx+vx, futy+vy)
-		stationCemetery.angle = 120
-		vx, vy = vectorFromAngle(240,2500)
-		stationNecropolis = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCallSign("Necropolis"):setPosition(futx+vx, futy+vy)
-		stationNecropolis.angle = 240
-		player:addToShipLog(_("shipLog", "Face your future"),"Red")
-		graveyardList = {}
-		cemeteryList = {}
-		necropolisList = {}
-		plot3 = orbitStations
-		plot3name = "orbitStations"
-		plot1 = futureCheck
-		plot1name = "futureCheck"
-	end
-end
-
+--	plot3 Christmas future function
 function orbitStations(delta)
 	newStationAngle = stationGraveyard.angle - .1
 	if newStationAngle < 0 then
@@ -1321,270 +1563,11 @@ function orbitStations(delta)
 	stationNecropolis.angle = newStationAngle
 	vsx, vsy = vectorFromAngle(newStationAngle,2500)
 	stationNecropolis:setPosition(futx+vsx,futy+vsy)
-end
-
-function futureCheck(delta)
-	if player:isDocked(stationGraveyard) then
-		graveyardDocked = true
-		if graveyardSpawned then
-			graveyardFleetCount = 0
-			for _, enemy in ipairs(graveyardList) do
-				if enemy:isValid() then
-					graveyardFleetCount = graveyardFleetCount + 1
-				end
-			end
-			if graveyardFleetCount == 0 then
-				for _, enemy in ipairs(graveyardList) do
-					enemy:destroy()
-				end
-				graveyardSpawned = false
-			end
-		else
-			spawnGraveyard()
+	if getScenarioTime() > ghostly_hint_time then
+		if ghostly_hint_sent == nil then
+			player:addToShipLog(_("shipLog", "Dock with Graveyard, Cemetery and Necropolis."),"178,34,34")
+			ghostly_hint_sent = "sent"
 		end
-	end
-	if player:isDocked(stationCemetery) then
-		cemeteryDocked = true
-		if cemeterySpawned then
-			cemeteryFleetCount = 0
-			for _, enemy in ipairs(cemeteryList) do
-				if enemy:isValid() then
-					cemeteryFleetCount = cemeteryFleetCount + 1
-				end
-			end
-			if cemeteryFleetCount == 0 then
-				for _, enemy in ipairs(cemeteryList) do
-					enemy:destroy()
-				end
-				cemeterySpawned = false
-			end
-		else
-			spawnCemetery()
-		end
-	end
-	if player:isDocked(stationNecropolis) then
-		necropolisDocked = true
-		if necropolisSpawned then
-			necropolisFleetCount = 0
-			for _, enemy in ipairs(necropolisList) do
-				if enemy:isValid() then
-					necropolisFleetCount = necropolisFleetCount + 1
-				end
-			end
-			if necropolisFleetCount == 0 then
-				for _, enemy in ipairs(necropolisList) do
-					enemy:destroy()
-				end
-				necropolisSpawned = false
-			end
-		else
-			spawnNecropolis()
-		end
-	end
-	if graveyardDocked and cemeteryDocked and necropolisDocked then
-		fleetCount = 0
-		if graveyardSpawned then
-			graveyardFleetCount = 0
-			for _, enemy in ipairs(graveyardList) do
-				if enemy:isValid() then
-					graveyardFleetCount = graveyardFleetCount + 1
-				end
-			end
-			fleetCount = fleetCount + graveyardFleetCount
-		end
-		if cemeterySpawned then
-			cemeteryFleetCount = 0
-			for _, enemy in ipairs(cemeteryList) do
-				if enemy:isValid() then
-					cemeteryFleetCount = cemeteryFleetCount + 1
-				end
-			end
-			fleetCount = fleetCount + cemeteryFleetCount
-		end
-		if necropolisSpawned then
-			necropolisFleetCount = 0
-			for _, enemy in ipairs(necropolisList) do
-				if enemy:isValid() then
-					necropolisFleetCount = necropolisFleetCount + 1
-				end
-			end
-			fleetCount = fleetCount + necropolisFleetCount
-		end
-		if fleetCount == 0 then
-			plot1 = cleanFuture
-			plot1name = "cleanFuture"
-		end
-	end
-end
-
-function spawnGraveyard()
-	graveyardSpawned = true
-	enemyButton = CpuShip():setFaction("Ktlitans"):setCallSign("Button"):setTemplate("Ktlitan Drone"):orderAttack(player):setPosition(futx,futy)
-	table.insert(graveyardList, enemyButton)
-	if difficulty >= 1 then
-		enemyBoot = CpuShip():setFaction("Ktlitans"):setCallSign("Boot"):setTemplate("Ktlitan Drone"):orderAttack(player):setPosition(futx+800,futy)
-		table.insert(graveyardList, enemyBoot)
-		enemySheet = CpuShip():setFaction("Ktlitans"):setCallSign("Sheet"):setTemplate("Ktlitan Drone"):orderAttack(player):setPosition(futx-800,futy)
-		table.insert(graveyardList, enemySheet)
-	end
-	if difficulty > 1 then
-		enemyBedCurtain = CpuShip():setFaction("Ktlitans"):setCallSign("Bed Curtain"):setTemplate("Ktlitan Drone"):orderAttack(player):setPosition(futx,futy+800)
-		table.insert(graveyardList, enemyBedCurtain)
-	end
-end
-
-function spawnCemetery()
-	cemeterySpawned = true
-	enemyRelent = CpuShip():setFaction("Ktlitans"):setCallSign("Relent"):setTemplate("Ktlitan Scout"):orderAttack(player):setPosition(futx,futy)
-	table.insert(cemeteryList, enemyRelent)
-	if difficulty >= 1 then
-		enemyRuin = CpuShip():setFaction("Ktlitans"):setCallSign("Ruin"):setTemplate("Ktlitan Scout"):orderAttack(player):setPosition(futx,futy+800)
-		table.insert(cemeteryList, enemyRuin)
-		enemyCreditor = CpuShip():setFaction("Ktlitans"):setCallSign("Creditor"):setTemplate("Ktlitan Scout"):orderAttack(player):setPosition(futx,futy-800)
-		table.insert(cemeteryList, enemyCreditor)
-	end
-	if difficulty > 1 then
-		enemyDelight = CpuShip():setFaction("Ktlitans"):setCallSign("Delight"):setTemplate("Ktlitan Scout"):orderAttack(player):setPosition(futx-800,futy)
-		table.insert(cemeteryList, enemyDelight)
-	end
-end
-
-function spawnNecropolis()
-	necropolisSpawned = true
-	enemyAbsent = CpuShip():setFaction("Ktlitans"):setCallSign("Absent"):setTemplate("Ktlitan Breaker"):orderAttack(player):setPosition(futx,futy)
-	table.insert(necropolisList, enemyAbsent)
-	if difficulty >= 1 then
-		enemyGrief = CpuShip():setFaction("Ktlitans"):setCallSign("Grief"):setTemplate("Ktlitan Breaker"):orderAttack(player):setPosition(futx+800,futy+800)
-		table.insert(necropolisList, enemyGrief)
-	end
-	if difficulty > 1 then
-		enemyTomb = CpuShip():setFaction("Ktlitans"):setCallSign("Tomb"):setTemplate("Ktlitan Breaker"):orderAttack(player):setPosition(futx-800,futy-800)
-		table.insert(necropolisList, enemyTomb)
-	end
-end
-
-function cleanFuture(delta)
-	player:addToShipLog(_("shipLog", "You have faced your future"),"Red")
-	plot2 = nil
-	plot3 = nil
-	stationGraveyard:destroy()
-	stationCemetery:destroy()
-	stationNecropolis:destroy()
-	for nidx=1,#movingNebula do
-		movingNebula[nidx]:destroy()
-	end
-	futNeb1:destroy()
-	futNeb2:destroy()
-	futNeb3:destroy()
-	futNeb4:destroy()
-	futNeb5:destroy()
-	futNeb6:destroy()
-	futNeb7:destroy()
-	futNeb8:destroy()
-	futNeb9:destroy()
-	plot1 = returnMsg1
-	plot1name = "returnMsg1"
-end
-
-function returnMsg1(delta)
-	player:addToShipLog(_("return-shipLog", "Dock at Somerset for a well deserved Christmas break"),"Magenta")
-	plot1 = returnMsg2
-	plot1name = "returnMsg2"
-	returnMsg2Timer = 4
-end
-
-function returnMsg2(delta)
-	returnMsg2Timer = returnMsg2Timer - delta
-	if returnMsg2Timer < 0 and distance(player,stationSomerset) < 80000 then
-		player:addToShipLog(_("returnAudio-shipLog", "[Jacob Marley] Good to see you spreading joy and easing pain, Scrooge"),"Red")
-		playSoundFile("audio/scenario/62/sa_62_Marley4.ogg")
-		plot1 = returnMsg3
-		plot1name = "returnMsg3"
-		returnMsg3Timer = 4
-	end
-end
-
-function returnMsg3(delta)
-	returnMsg3Timer = returnMsg3Timer - delta
-	if returnMsg3Timer < 0 and distance(player,stationSomerset) < 70000 then
-		player:addToShipLog(_("returnAudio-shipLog", "May the shadows of the things that have been continue to remind you of the joy of Christmas"),"Blue")
-		playSoundFile("audio/scenario/62/sa_62_Child4.ogg")
-		plot1 = returnMsg4
-		plot1name = "returnMsg4"
-		returnMsg4Timer = 8
-	end
-end
-
-function returnMsg4(delta)
-	returnMsg4Timer = returnMsg4Timer - delta
-	if returnMsg4Timer < 0 and distance(player,stationSomerset) < 60000 then
-		player:addToShipLog(_("return-shipLog", "Despite Ignorance and Want, prisons and workhouses, know each day fully and celebrate it, especially Christmas"),"Yellow")
-		plot1 = returnMsg5
-		plot1name = "returnMsg5"
-		returnMsg5Timer = 15
-	end
-end
-
-function returnMsg5(delta)
-	returnMsg5Timer = returnMsg5Timer - delta
-	if returnMsg5Timer < 0 and distance(player,stationSomerset) < 50000 then
-		player:addToShipLog(_("returnAudio-shipLog", "[Urchin Express]\nHappy Christmas, sir!\nTop o' the day to ya!\nThanks for the shillings!"),"Cyan")
-		playSoundFile("audio/scenario/62/sa_62_Urchins.ogg")
-		plot1 = returnMsg6
-		plot1name = "returnMsg6"
-		returnMsg6Timer = 3
-	end
-end
-
-function returnMsg6(delta)
-	returnMsg6Timer = returnMsg6Timer - delta
-	if returnMsg6Timer < 0 and distance(player,stationSomerset) < 40000 then
-		player:addToShipLog(_("returnAudio-shipLog", "[Fred from QE17] Merry Christmas, uncle! Stop by and share Christmas dinner with us when you're off duty"),"Green")
-		playSoundFile("audio/scenario/62/sa_62_Fred.ogg")
-		plot1 = returnMsg7
-		plot1name = "returnMsg7"
-		returnMsg7Timer = 6
-	end
-end
-
-function returnMsg7(delta)
-	returnMsg7Timer = returnMsg7Timer - delta
-	if returnMsg7Timer < 0 and distance(player,stationSomerset) < 30000 then
-		player:addToShipLog(_("returnAudio-shipLog", "[Bob on Cratchit Cruiser] Happy Christmas, Mr. Scrooge. Thanks for the raise and for helping Tiny Tim"),"Yellow")
-		playSoundFile("audio/scenario/62/sa_62_BobCratchit5.ogg")
-		plot1 = returnMsg8
-		plot1name = "returnMsg8"
-		returnMsg8Timer = 10
-	end
-end
-
-function returnMsg8(delta)
-	returnMsg8Timer = returnMsg8Timer - delta
-	if returnMsg8Timer < 0 and distance(player,stationSomerset) < 20000 then
-		player:addToShipLog(_("returnAudio-shipLog", "[Tim on Cratchit Cruiser] God bless us every one"),"White")
-		playSoundFile("audio/scenario/62/sa_62_Tim.ogg")
-		plot1 = returnMsg9
-		plot1name = "returnMsg9"
-		returnMsg9Timer = 6
-	end
-end
-
-function returnMsg9(delta)
-	returnMsg9Timer = returnMsg9Timer - delta
-	if returnMsg9Timer < 0 and distance(player,stationSomerset) < 10000 then
-		if difficulty > 1 then
-			player:addToShipLog(_("returnAudio-shipLog", "[Tim on Cratchit Cruiser] Give me some freakin' eggnog"),"White")
-			playSoundFile("audio/scenario/62/sa_62_Tim2.ogg")
-		end
-		plot1 = finalDock
-		plot1name = "finalDock"
-	end
-end
-
-function finalDock(delta)
-	if player:isDocked(stationSomerset) then
-		globalMessage(_("msgMainscreen", "Merry Christmas!"))
-		victory("Human Navy")
 	end
 end
 

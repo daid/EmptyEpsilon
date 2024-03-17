@@ -186,7 +186,9 @@ int main(int argc, char** argv)
     engine->registerSystem<BasicRadarRendering>();
     initComponentScriptBindings();
     string configuration_path = ".";
-    if (getenv("HOME"))
+    if (getenv("EE_CONF_DIR"))
+        configuration_path = string(getenv("EE_CONF_DIR"));
+    else if (getenv("HOME"))
         configuration_path = string(getenv("HOME")) + "/.emptyepsilon";
 #ifdef STEAMSDK
     {

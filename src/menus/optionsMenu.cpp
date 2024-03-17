@@ -97,7 +97,7 @@ OptionsMenu::OptionsMenu()
     (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Control Options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
 
     // Keyboard config (hotkeys/keybindings)
-    (new GuiButton(interface_page, "CONFIGURE_KEYBOARD", tr("Configure Keyboard"), [this]()
+    (new GuiButton(interface_page, "CONFIGURE_KEYBOARD", tr("Configure Keyboard/Joystick"), [this]()
     {
         new HotkeyMenu();
         destroy();
