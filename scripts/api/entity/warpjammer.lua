@@ -7,6 +7,12 @@ function WarpJammer()
     e.transform = {rotation=random(0, 360)}
     e.hull = {max=50, current=50}
     e.warp_jammer = {range=7000}
+    e.radar_trace = {
+        icon="radar/blip.png",
+        radius=120.0,
+        rotate=false,
+        color_by_faction=true,
+    }
     for k, v in pairs(__model_data["shield_generator"]) do
         if string.sub(1, 2) ~= "__" then
             e[k] = table.deepcopy(v)
