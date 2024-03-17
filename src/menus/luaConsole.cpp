@@ -49,8 +49,9 @@ LuaConsole::LuaConsole()
 void LuaConsole::addLog(const string& message)
 {
     if (!console) return;
-    console->log_messages.push_back(message);
-    if (console->log_messages.size() > 50)
+    for(auto msg : message.split("\n"))
+        console->log_messages.push_back(msg);
+    while(console->log_messages.size() > 50)
         console->log_messages.erase(console->log_messages.begin());
     console->log->setText(string("\n").join(console->log_messages));
     console->log->setCursorPosition(console->log->getText().size());

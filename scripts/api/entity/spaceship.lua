@@ -113,6 +113,8 @@ function Entity:getWeaponStorageMax(weapon_type)
 end
 --- Sets the number of the given weapon type stocked by this SpaceShip.
 --- Example: ship:setWeaponStorage("Homing", 2) -- this ship has 2 Homing missiles
+--- Sets the weapon type and amount restocked upon pickup when a SpaceShip collides with this SupplyDrop.
+--- Example: supply_drop:setWeaponStorage("Homing",6)
 function Entity:setWeaponStorage(weapon_type, amount)
     if self.missile_tubes then
         weapon_type = string.lower(weapon_type)
@@ -122,6 +124,7 @@ function Entity:setWeaponStorage(weapon_type, amount)
         if weapon_type == "emp" then self.missile_tubes.storage_emp = amount end
         if weapon_type == "hvli" then self.missile_tubes.storage_hvli = amount end
     end
+    --TODO: Supplydrop
     return self
 end
 --- Sets this SpaceShip's capacity for the given weapon type.
@@ -188,16 +191,6 @@ end
 function Entity:getEnergy()
     if self.reactor then return self.reactor.energy end
     return 1000
-end
---- Sets this SpaceShip's energy level.
---- Valid values are any greater than 0 and less than the energy capacity (getMaxEnergy()).
---- Invalid values are ignored.
---- CpuShips don't consume energy. Setting this value has no effect on their behavior or functionality.
---- For PlayerSpaceships, see PlayerSpaceship:setEnergyLevel().
---- Example: ship:setEnergy(1000) -- sets the ship's energy to 1000 if its capacity is 1000 or more
-function Entity:setEnergy(amount)
-    if self.reactor then self.reactor.energy = amount end
-    return self
 end
 
 

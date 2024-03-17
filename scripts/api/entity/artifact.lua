@@ -86,11 +86,15 @@ end
 --- Defines a function to call once when a PlayerSpaceship collides with the artifact and allowPickup is enabled.
 --- Passes the artifact and colliding PlayerSpaceship to the called function.
 --- Example: artifact:onPickUp(function(artifact, player) print("Artifact retrieved") end)
+    --- Defines a function to call when a SpaceShip collides with the supply drop.
+--- Passes the supply drop and the colliding ship (if it's a PlayerSpaceship) to the function.
+--- Example: supply_drop:onPickUp(function(drop,ship) print("Supply drop picked up") end)
 function Entity:onPickUp(callback)
     --[[TODO
     auto& pickup = entity.getOrAddComponent<PickupCallback>();
     pickup.callback = callback;
     --]]
+    --TODO: Supplydrop
     return self
 end
 --- Alias of Artifact:onPickUp().

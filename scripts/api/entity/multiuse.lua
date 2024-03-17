@@ -33,3 +33,16 @@ function Entity:setDescription(description)
     return self
 end
 
+--- Sets this SpaceShip's energy level.
+--- Valid values are any greater than 0 and less than the energy capacity (getMaxEnergy()).
+--- Invalid values are ignored.
+--- CpuShips don't consume energy. Setting this value has no effect on their behavior or functionality.
+--- For PlayerSpaceships, see PlayerSpaceship:setEnergyLevel().
+--- Example: ship:setEnergy(1000) -- sets the ship's energy to 1000 if its capacity is 1000 or more
+--- Sets the amount of energy recharged upon pickup when a PlayerSpaceship collides with this SupplyDrop.
+--- Example: supply_drop:setEnergy(500)
+function Entity:setEnergy(amount)
+    if self.reactor then self.reactor.energy = amount end
+    --TODO: Supplydrop
+    return self
+end

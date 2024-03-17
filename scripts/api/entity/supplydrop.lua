@@ -6,12 +6,13 @@
 --- Example: SupplyDrop():setEnergy(500):setWeaponStorage("Homing",6)
 function SupplyDrop()
     local e = createEntity()
-
+    e.transform = {}
     for k, v in pairs(__model_data["ammo_box"]) do
         if string.sub(1, 2) ~= "__" then
             e[k] = table.deepcopy(v)
         end
     end
+    e.physics = {type="Sensor"}
 
     e.radar_trace = {
         color={100, 200, 255},
@@ -22,25 +23,4 @@ function SupplyDrop()
     }
 
     return e
-end
-
-local Entity = getLuaEntityFunctionTable()
---- Sets the amount of energy recharged upon pickup when a PlayerSpaceship collides with this SupplyDrop.
---- Example: supply_drop:setEnergy(500)
-function Entity:setEnergy(amount)
-    --TODO
-    return self
-end    
---- Sets the weapon type and amount restocked upon pickup when a SpaceShip collides with this SupplyDrop.
---- Example: supply_drop:setWeaponStorage("Homing",6)
-function Entity:setWeaponStorage(weapon, amount)
-    --TODO
-    return self
-end    
---- Defines a function to call when a SpaceShip collides with the supply drop.
---- Passes the supply drop and the colliding ship (if it's a PlayerSpaceship) to the function.
---- Example: supply_drop:onPickUp(function(drop,ship) print("Supply drop picked up") end)
-function Entity:onPickUp(callback)
-    --TODO
-    return self
 end

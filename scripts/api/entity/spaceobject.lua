@@ -358,7 +358,7 @@ end
 --- Example: obj:setScanningParameters(2, 3)
 function Entity:setScanningParameters(complexity, depth)
     self.scan_state = {complexity=complexity, depth=depth}
-    self.setScanned(false)
+    self:setScanned(false)
     return self
 end
 --- Returns the scanning complexity for the given SpaceObject.

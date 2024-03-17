@@ -4,6 +4,7 @@
 --- Example: jammer = WarpJammer():setPosition(1000,1000):setRange(10000):setHull(20)
 function WarpJammer()
     local e = createEntity()
+    e.transform = {rotation=random(0, 360)}
     e.hull = {max=50, current=50}
     e.warp_jammer = {range=7000}
     for k, v in pairs(__model_data["shield_generator"]) do
@@ -11,6 +12,7 @@ function WarpJammer()
             e[k] = table.deepcopy(v)
         end
     end
+    e.physics = {type="static"}
     return e
 end
 
