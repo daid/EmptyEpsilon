@@ -13,44 +13,11 @@
 #include <sys/types.h>
 #include "textureManager.h"
 #include "soundManager.h"
-#include "graphics/freetypefont.h"
-#include "gui/mouseRenderer.h"
-#include "gui/debugRenderer.h"
-#include "gui/colorConfig.h"
 #include "gui/theme.h"
-#include "gui/hotkeyConfig.h"
-#include "gui/joystickConfig.h"
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
 #include "menus/shipSelectionScreen.h"
 #include "menus/optionsMenu.h"
-#include "menus/luaConsole.h"
-#include "factionInfo.h"
-#include "gameGlobalInfo.h"
-#include "systems/ai.h"
-#include "systems/docking.h"
-#include "systems/comms.h"
-#include "systems/impulse.h"
-#include "systems/warpsystem.h"
-#include "systems/jumpsystem.h"
-#include "systems/beamweapon.h"
-#include "systems/shieldsystem.h"
-#include "systems/shipsystemssystem.h"
-#include "systems/coolantsystem.h"
-#include "systems/missilesystem.h"
-#include "systems/maneuvering.h"
-#include "systems/energysystem.h"
-#include "systems/selfdestruct.h"
-#include "systems/basicmovement.h"
-#include "systems/gravity.h"
-#include "systems/internalcrew.h"
-#include "systems/pathfinding.h"
-#include "systems/rendering.h"
-#include "systems/planet.h"
-#include "systems/scanning.h"
-#include "systems/radar.h"
-#include "components/radar.h"
-#include "packResourceProvider.h"
 #include "main.h"
 #include "epsilonServer.h"
 #include "httpScriptAccess.h"
@@ -58,8 +25,10 @@
 #include "networkRecorder.h"
 #include "tutorialGame.h"
 #include "windowManager.h"
-#include "ecs/multiplayer.h"
-#include "script/components.h"
+#include "init/config.h"
+#include "init/resources.h"
+#include "init/displaywindows.h"
+#include "init/ecs.h"
 
 #include "graphics/opengl.h"
 
@@ -70,12 +39,6 @@
 #if STEAMSDK
 #include "steam/steam_api.h"
 #include "steamrichpresence.h"
-#endif
-
-#ifdef __APPLE__
-#include <CoreFoundation/CoreFoundation.h>
-#include <mach-o/dyld.h>
-#include <libgen.h>
 #endif
 
 #include "shaderRegistry.h"
@@ -101,53 +64,29 @@ GUI_REGISTER_LAYOUT("verticalbottom", GuiLayoutVerticalBottom);
 GUI_REGISTER_LAYOUT("horizontal", GuiLayoutHorizontal);
 GUI_REGISTER_LAYOUT("horizontalright", GuiLayoutHorizontalRight);
 
-sp::ecs::ComponentReplication<RawRadarSignatureInfo> cr_RawRadarSignatureInfo;
-sp::ecs::ComponentReplication<RadarTrace> cr_RadarTrace;
+
+int runProxyServer()
+{
+    int port = defaultServerPort;
+    string password = "";
+    int listenPort = defaultServerPort;
+    string proxyName = "";
+    auto parts = PreferencesManager::get("proxy").split(":");
+    string host = parts[0];
+    if (parts.size() > 1) port = parts[1].toInt();
+    if (parts.size() > 2) password = parts[2].upper();
+    if (parts.size() > 3) listenPort = parts[3].toInt();
+    if (parts.size() > 4) proxyName = parts[4];
+    if (host == "listen")
+        new GameServerProxy(password, listenPort, proxyName);
+    else
+        new GameServerProxy(host, port, password, listenPort, proxyName);
+    engine->runMainLoop();
+    return 0;
+}
 
 int main(int argc, char** argv)
 {
-#ifdef __APPLE__
-    // TODO: Find a proper solution.
-    // Seems to be non-NULL even outside of a proper bundle.
-    CFBundleRef bundle = CFBundleGetMainBundle();
-    if (bundle)
-    {
-        char bundle_path[PATH_MAX], exe_path[PATH_MAX];
-
-        CFURLRef bundleURL = CFBundleCopyBundleURL(bundle);
-        CFURLGetFileSystemRepresentation(bundleURL, true, (unsigned char*)bundle_path, PATH_MAX);
-        CFRelease(bundleURL);
-
-        uint32_t size = sizeof(exe_path);
-        if (_NSGetExecutablePath(exe_path, &size) != 0)
-        {
-          fprintf(stderr, "Failed to get executable path.\n");
-          return 1;
-        }
-
-        char *exe_realpath = realpath(exe_path, NULL);
-        char *exe_dir      = dirname(exe_realpath);
-
-        if (strcmp(exe_dir, bundle_path))
-        {
-          char resources_path[PATH_MAX];
-
-          CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(bundle);
-          CFURLGetFileSystemRepresentation(resourcesURL, true, (unsigned char*)resources_path, PATH_MAX);
-          CFRelease(resourcesURL);
-
-          chdir(resources_path);
-        }
-        else
-        {
-          chdir(exe_dir);
-        }
-
-        free(exe_realpath);
-        free(exe_dir);
-    }
-#endif
-
 #ifdef DEBUG
     Logging::setLogLevel(LOGLEVEL_DEBUG);
 #else
@@ -158,105 +97,17 @@ int main(int argc, char** argv)
 #endif
     LOG(Info, "Starting...");
     new Engine();
-    engine->registerSystem<AISystem>();
-    engine->registerSystem<DamageSystem>();
-    engine->registerSystem<EnergySystem>();
-    engine->registerSystem<DockingSystem>();
-    engine->registerSystem<CommsSystem>();
-    engine->registerSystem<ImpulseSystem>();
-    engine->registerSystem<ManeuveringSystem>();
-    engine->registerSystem<WarpSystem>();
-    engine->registerSystem<JumpSystem>();
-    engine->registerSystem<BeamWeaponSystem>();
-    engine->registerSystem<MissileSystem>();
-    engine->registerSystem<ShieldSystem>();
-    engine->registerSystem<CoolantSystem>();
-    engine->registerSystem<ShipSystemsSystem>();
-    engine->registerSystem<SelfDestructSystem>();
-    engine->registerSystem<BasicMovementSystem>();
-    engine->registerSystem<GravitySystem>();
-    engine->registerSystem<InternalCrewSystem>();
-    engine->registerSystem<PathFindingSystem>();
-    engine->registerSystem<NebulaRenderSystem>();
-    engine->registerSystem<ExplosionRenderSystem>();
-    engine->registerSystem<PlanetRenderSystem>();
-    engine->registerSystem<PlanetTransparentRenderSystem>();
-    engine->registerSystem<MeshRenderSystem>();
-    engine->registerSystem<ScanningSystem>();
-    engine->registerSystem<BasicRadarRendering>();
-    initComponentScriptBindings();
-    string configuration_path = ".";
-    if (getenv("EE_CONF_DIR"))
-        configuration_path = string(getenv("EE_CONF_DIR"));
-    else if (getenv("HOME"))
-        configuration_path = string(getenv("HOME")) + "/.emptyepsilon";
-#ifdef STEAMSDK
-    {
-        char path_buffer[1024];
-        if (SteamUser()->GetUserDataFolder(path_buffer, sizeof(path_buffer)))
-            configuration_path = path_buffer;
-    }
-#endif
-    LOG(Info, "Using ", configuration_path, " as configuration path");
-    PreferencesManager::load(configuration_path + "/options.ini");
+    initSystemsAndComponents();
 
-    for(int n=1; n<argc; n++)
-    {
-        char* value = strchr(argv[n], '=');
-        if (!value) continue;
-        *value++ = '\0';
-        PreferencesManager::set(string(argv[n]).strip(), string(value).strip());
-    }
+    auto configuration_path = initConfiguration(argc, argv);
 
     if (PreferencesManager::get("proxy") != "")
-    {
-        int port = defaultServerPort;
-        string password = "";
-        int listenPort = defaultServerPort;
-        string proxyName = "";
-        auto parts = PreferencesManager::get("proxy").split(":");
-        string host = parts[0];
-        if (parts.size() > 1) port = parts[1].toInt();
-        if (parts.size() > 2) password = parts[2].upper();
-        if (parts.size() > 3) listenPort = parts[3].toInt();
-        if (parts.size() > 4) proxyName = parts[4];
-        if (host == "listen")
-            new GameServerProxy(password, listenPort, proxyName);
-        else
-            new GameServerProxy(host, port, password, listenPort, proxyName);
-        engine->runMainLoop();
-        return 0;
-    }
+        return runProxyServer();
 
     if (PreferencesManager::get("headless") != "")
         textureManager.setDisabled(true);
 
-    if (PreferencesManager::get("mod") != "")
-    {
-        string mod = PreferencesManager::get("mod");
-        if (getenv("HOME"))
-        {
-            new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
-            PackResourceProvider::addPackResourcesForDirectory(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
-        }
-        new DirectoryResourceProvider("resources/mods/" + mod);
-        PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod);
-    }
-
-    new DirectoryResourceProvider("resources/");
-    new DirectoryResourceProvider("scripts/");
-    PackResourceProvider::addPackResourcesForDirectory("packs/");
-    if (getenv("HOME"))
-    {
-        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
-        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/scripts/");
-        PackResourceProvider::addPackResourcesForDirectory(string(getenv("HOME")) + "/.emptyepsilon/packs/");
-    }
-#ifdef RESOURCE_BASE_DIR
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
-    PackResourceProvider::addPackResourcesForDirectory(RESOURCE_BASE_DIR "packs");
-#endif
+    initResourcePaths();
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
     i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
@@ -271,22 +122,6 @@ int main(int argc, char** argv)
         new EEHttpServer(port_nr, PreferencesManager::get("www_directory", "www"));
     }
 
-    colorConfig.load();
-    sp::io::Keybinding::loadKeybindings(configuration_path + "/keybindings.json");
-    keys.init();
-
-    if (PreferencesManager::get("username", "") == "")
-    {
-#ifdef STEAMSDK
-        PreferencesManager::set("username", SteamFriends()->GetPersonaName());
-#else
-        if (getenv("USERNAME"))
-            PreferencesManager::set("username", getenv("USERNAME"));
-        else if (getenv("USER"))
-            PreferencesManager::set("username", getenv("USER"));
-#endif
-    }
-
     if (!GuiTheme::loadTheme("default", PreferencesManager::get("guitheme", "gui/default.theme.txt")))
     {
         LOG(ERROR, "Failed to load default theme, exiting.");
@@ -296,92 +131,9 @@ int main(int argc, char** argv)
 
     if (PreferencesManager::get("headless") == "")
     {
-        //Setup the rendering layers.
-        defaultRenderLayer = new RenderLayer();
-        consoleRenderLayer = new RenderLayer(defaultRenderLayer);
-        mouseLayer = new RenderLayer(consoleRenderLayer);
-        glitchPostProcessor = new PostProcessor("shaders/glitch", mouseLayer);
-        glitchPostProcessor->enabled = false;
-        warpPostProcessor = new PostProcessor("shaders/warp", glitchPostProcessor);
-        warpPostProcessor->enabled = false;
-
-        new LuaConsole();
-
-        int width = 1200;
-        int height = 900;
-        int fsaa = 0;
-        Window::Mode fullscreen = (Window::Mode)PreferencesManager::get("fullscreen", "1").toInt();
-
-        if (PreferencesManager::get("fsaa").toInt() > 0)
-        {
-            fsaa = PreferencesManager::get("fsaa").toInt();
-            if (fsaa < 2)
-                fsaa = 2;
-        }
-
-#ifndef ANDROID
-        if (PreferencesManager::get("touchscreen").toInt() == 0)
-        {
-            engine->registerObject("mouseRenderer", new MouseRenderer(mouseLayer));
-        }
-#endif
-
-        windows.push_back(new Window({width, height}, fullscreen, warpPostProcessor, fsaa));
-        window_render_layers.push_back(defaultRenderLayer);
-
-        if (PreferencesManager::get("multimonitor", "0").toInt() != 0)
-        {
-            while(int(windows.size()) < SDL_GetNumVideoDisplays())
-            {
-                auto wrl = new RenderLayer();
-                auto ml = new RenderLayer(wrl);
-                new MouseRenderer(ml);
-                windows.push_back(new Window({width, height}, fullscreen, ml, fsaa));
-                window_render_layers.push_back(wrl);
-                new SecondMonitorScreen(windows.size() - 1);
-            }
-        }
-
-#if defined(DEBUG)
-        // Synchronous gl debug output always in debug.
-        constexpr bool wants_gl_debug = true;
-        constexpr bool wants_gl_debug_synchronous = true;
-#else
-        auto wants_gl_debug = !PreferencesManager::get("gl_debug").empty();
-        auto wants_gl_debug_synchronous = !PreferencesManager::get("gl_debug_synchronous").empty();
-#endif
-        if (wants_gl_debug)
-        {
-            if (sp::gl::enableDebugOutput(wants_gl_debug_synchronous))
-                LOG(INFO, "GL Debug output enabled.");
-            else
-                LOG(WARNING, "GL Debug output requested but not available on this system.");
-        }
-
-        for(size_t n=0; n<windows.size(); n++)
-        {
-            P<Window> window = windows[n];
-            string postfix = "";
-            if (n > 0)
-                postfix = " - " + string(int(n));
-            if (PreferencesManager::get("instance_name") != "")
-                window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name") + postfix);
-            else
-                window->setTitle("EmptyEpsilon" + postfix);
-        }
-
-        if (gl::isAvailable())
-        {
-            if (!ShaderRegistry::Shader::initialize())
-            {
-                LOG(ERROR, "Failed to initialize shaders, exiting.");
-                SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to initialize shaders (possible cause: cannot find shader files)", nullptr);
-                return 1;
-            }
-        }
+        if (!createDisplayWindows())
+            return 1;
     }
-
-    new DebugRenderer(mouseLayer);
 
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
@@ -412,8 +164,7 @@ int main(int argc, char** argv)
 
 #if WITH_DISCORD
     {
-        std::filesystem::path discord_sdk
-        {
+        std::filesystem::path discord_sdk{
 #ifdef RESOURCE_BASE_DIR
         RESOURCE_BASE_DIR
 #endif

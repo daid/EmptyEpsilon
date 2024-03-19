@@ -214,6 +214,15 @@ set(GUI_LIB_SOURCES
 )
 
 set(MAIN_SOURCES
+    src/init/config.h
+    src/init/config.cpp
+    src/init/resources.h
+    src/init/resources.cpp
+    src/init/displaywindows.h
+    src/init/displaywindows.cpp
+    src/init/ecs.h
+    src/init/ecs.cpp
+
     src/main.cpp
     src/threatLevelEstimate.cpp
     src/preferenceManager.cpp
