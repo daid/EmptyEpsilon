@@ -43,6 +43,6 @@ end
 --- Example: supply_drop:setEnergy(500)
 function Entity:setEnergy(amount)
     if self.reactor then self.reactor.energy = amount end
-    --TODO: Supplydrop
+    if self.pickup then self.pickup.give_energy = amount end
     return self
 end

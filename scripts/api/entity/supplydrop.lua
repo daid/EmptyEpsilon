@@ -21,6 +21,7 @@ function SupplyDrop()
         rotate=false,
         color_by_faction=true,
     }
+    e.pickup = {}
 
     return e
 end

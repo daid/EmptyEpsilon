@@ -37,6 +37,7 @@
 #include "components/gravity.h"
 #include "components/internalrooms.h"
 #include "components/database.h"
+#include "components/pickup.h"
 
 #define STRINGIFY(n) #n
 #define BIND_MEMBER(T, MEMBER) \
@@ -611,4 +612,13 @@ void initComponentScriptBindings()
     BIND_ARRAY(Database, key_values);
     BIND_ARRAY_MEMBER(Database, key_values, key);
     BIND_ARRAY_MEMBER(Database, key_values, value);
+
+    sp::script::ComponentHandler<CollisionCallback>::name("pickup");
+    BIND_MEMBER(PickupCallback, callback);
+    BIND_MEMBER(PickupCallback, player);
+    BIND_MEMBER(PickupCallback, give_energy);
+
+    sp::script::ComponentHandler<CollisionCallback>::name("collision_callback");
+    BIND_MEMBER(CollisionCallback, callback);
+    BIND_MEMBER(CollisionCallback, player);
 }
