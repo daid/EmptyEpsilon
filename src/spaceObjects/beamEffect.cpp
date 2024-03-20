@@ -34,12 +34,14 @@ REGISTER_SCRIPT_SUBCLASS(BeamEffect, SpaceObject)
     /// Example: beamfx:setTarget(target,0,0,0)
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setTarget);
     /// Sets the BeamEffect's texture.
-    /// Valid values are filenames of PNG files relative to the resources/ directory.
+    /// Valid values are filenames of image files relative to a resource path.
+    /// You can also reference textures from resource packs.
     /// Defaults to "texture/beam_orange.png".
-    /// Example: beamfx:setTexture("beam_blue.png")
+    /// Example: beamfx:setTexture("texture/beam_blue.png")
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setTexture);
     /// Sets the BeamEffect's sound effect.
-    /// Valid values are filenames of WAV files relative to the resources/ directory.
+    /// Valid values are filenames of sound files relative to a resource path.
+    /// You can also reference sound files from resource packs.
     /// Defaults to "sfx/laser_fire.wav".
     /// Example: beamfx:setBeamFireSound("sfx/hvli_fire.wav")
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setBeamFireSound);

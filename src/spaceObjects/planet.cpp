@@ -120,19 +120,22 @@ REGISTER_SCRIPT_SUBCLASS(Planet, SpaceObject)
     /// Example: planet:setPlanetAtmosphereColor(0.2,0.2,1.0) -- sets a blue atmosphere
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetAtmosphereColor);
     /// Sets this Planet's atmospheric effect texture.
-    /// Valid values are filenames of PNG files relative to the resources/ directory.
     /// Optional; if defined, atmosphere textures should be transparent or translucent.
+    /// Valid values are filenames of texture files relative to a resource path.
+    /// You can also reference textures from resource packs.
     /// For stars, you can set an atmosphere texture such as planets/star-1.png with no surface texture.
     /// Example: planet:setPlanetSurfaceTexture("planets/atmosphere.png")
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetAtmosphereTexture);
     /// Sets this Planet's surface texture.
-    /// Valid values are filenames of PNG files relative to the resources/ directory.
     /// Optional; if defined, surface textures should be opaque and use a 2:1-ratio equirectangular projection.
+    /// Valid values are filenames of image files relative to a resource path.
+    /// You can also reference textures from resource packs.
     /// Example: planet:setPlanetSurfaceTexture("planets/planet-1.png")
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetSurfaceTexture);
     /// Sets this Planet's cloud layer effect texture, which rotates independently of the planet.
-    /// Valid values are filenames of PNG files relative to the resources/ directory.
     /// Optional; if defined, cloud layer textures should be transparent or translucent.
+    /// Valid values are filenames of image files relative to a resource path.
+    /// You can also reference textures from resource packs.
     /// Example: planet:setPlanetCloudTexture("planets/cloud-1.png")
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetCloudTexture);
     /// Returns this Planet's radius.
