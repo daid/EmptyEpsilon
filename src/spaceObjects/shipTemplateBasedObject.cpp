@@ -508,7 +508,7 @@ string ShipTemplateBasedObject::getShieldDataString()
     {
         if (n > 0)
             data += ":";
-        data += string(int(shield_level[n]));
+        data += string(int(shield_level[n])) + "/" + string(int(shield_max[n]));
     }
     return data;
 }
