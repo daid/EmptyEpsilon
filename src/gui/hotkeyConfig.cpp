@@ -88,7 +88,7 @@ Keys::Keys() :
     station_weapons("STATION_WEAPONS", "F3"),
     station_engineering("STATION_ENGINEERING", "F4"),
     station_science("STATION_SCIENCE", "F5"),
-    station_relay("STATION_RELAY", "F5"),
+    station_relay("STATION_RELAY", "F6"),
 
     //Main screen
     mainscreen_forward("MAINSCREEN_FORWARD", "Up"),
