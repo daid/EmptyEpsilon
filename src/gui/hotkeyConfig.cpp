@@ -87,7 +87,7 @@ Keys::Keys() :
     station_weapons("STATION_WEAPONS", "F3"),
     station_engineering("STATION_ENGINEERING", "F4"),
     station_science("STATION_SCIENCE", "F5"),
-    station_relay("STATION_RELAY", "F5"),
+    station_relay("STATION_RELAY", "F6"),
 
     //Main screen
     mainscreen_forward("MAINSCREEN_FORWARD", "Up"),
@@ -243,20 +243,20 @@ Keys::Keys() :
     engineering_set_power_000("ENGINEERING_POWER_000"),
     engineering_set_power_030("ENGINEERING_POWER_030"),
     engineering_set_power_050("ENGINEERING_POWER_050"),
-    engineering_set_power_100("ENGINEERING_POWER_100", "Space"),
+    engineering_set_power_100("ENGINEERING_POWER_100", "\\"),
     engineering_set_power_150("ENGINEERING_POWER_150"),
     engineering_set_power_200("ENGINEERING_POWER_200"),
     engineering_set_power_250("ENGINEERING_POWER_250"),
     engineering_set_power_300("ENGINEERING_POWER_300"),
-    engineering_increase_power("ENGINEERING_POWER_INCREASE", "Up"),
-    engineering_decrease_power("ENGINEERING_POWER_DECREASE", "Down"),
-    engineering_increase_coolant("ENGINEERING_COOLANT_INCREASE", "Left"),
-    engineering_decrease_coolant("ENGINEERING_COOLANT_DECREASE", "Right"),
-    engineering_next_repair_crew("ENGINEERING_REPAIR_CREW_NEXT", "Q"),
-    engineering_repair_crew_up("ENGINEERING_REPAIR_CREW_UP", "W"),
-    engineering_repair_crew_down("ENGINEERING_REPAIR_CREW_DOWN", "S"),
-    engineering_repair_crew_left("ENGINEERING_REPAIR_CREW_LEFT", "A"),
-    engineering_repair_crew_right("ENGINEERING_REPAIR_CREW_RIGHT", "D"),
+    engineering_increase_power("ENGINEERING_POWER_INCREASE", "]"),
+    engineering_decrease_power("ENGINEERING_POWER_DECREASE", "["),
+    engineering_increase_coolant("ENGINEERING_COOLANT_INCREASE", "="),
+    engineering_decrease_coolant("ENGINEERING_COOLANT_DECREASE", "-"),
+    engineering_next_repair_crew("ENGINEERING_REPAIR_CREW_NEXT", "C"),
+    engineering_repair_crew_up("ENGINEERING_REPAIR_CREW_UP", "Up"),
+    engineering_repair_crew_down("ENGINEERING_REPAIR_CREW_DOWN", "Down"),
+    engineering_repair_crew_left("ENGINEERING_REPAIR_CREW_LEFT", "Left"),
+    engineering_repair_crew_right("ENGINEERING_REPAIR_CREW_RIGHT", "Right"),
     engineering_self_destruct_start("ENGINEERING_SELF_DESTRUCT_START"),
     engineering_self_destruct_confirm("ENGINEERING_SELF_DESTRUCT_CONFIRM"),
     engineering_self_destruct_cancel("ENGINEERING_SELF_DESTRUCT_CANCEL"),
@@ -362,7 +362,7 @@ void Keys::init()
     weapons_beam_frequence_decrease.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Decrease beam frequency"));
     weapons_toggle_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Toggle missile aim lock"));
     weapons_enable_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Enable missile aim lock"));
-    weapons_disable_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Disable"));
+    weapons_disable_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Disable missile aim lock"));
     weapons_aim_left.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the left"));
     weapons_aim_right.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the right"));
 
