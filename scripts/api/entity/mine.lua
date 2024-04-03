@@ -20,9 +20,3 @@ function Mine()
 end
 
 local Entity = getLuaEntityFunctionTable()
-
-function Entity:getOwner()
-    if self.delayed_explode_on_touch then
-        return self.delayed_explode_on_touch.owner
-    end
-end

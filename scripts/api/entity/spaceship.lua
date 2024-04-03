@@ -76,15 +76,7 @@ function Entity:getDockingState()
     end
     return 0
 end
---- Returns this SpaceShip's weapons target.
---- For a CpuShip, this can differ from its orders target.
---- Example: target = ship:getTarget()
-function Entity:getTarget()
-    if self.weapons_target then
-        return self.weapons_target.entity
-    end
-    return nil
-end
+
 --- Returns the number of the given weapon type stocked by this SpaceShip.
 --- Example: homing = ship:getWeaponStorage("Homing")
 function Entity:getWeaponStorage(weapon_type)

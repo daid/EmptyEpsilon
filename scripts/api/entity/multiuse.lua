@@ -46,3 +46,26 @@ function Entity:setEnergy(amount)
     if self.pickup then self.pickup.give_energy = amount end
     return self
 end
+
+--- Returns this SpaceShip's weapons target.
+--- For a CpuShip, this can differ from its orders target.
+--- Example: target = ship:getTarget()
+--- Returns this ScanProbe's target coordinates.
+--- Example: targetX,targetY = probe:getTarget()
+function Entity:getTarget()
+    if self.weapons_target then
+        return self.weapons_target.entity
+    end
+    --TODO: ScanProbe
+    return nil
+end
+
+--- Returns this ScanProbe's owner SpaceObject.
+--- Example: probe:getOwner()
+function Entity:getOwner()
+    if self.delayed_explode_on_touch then
+        return self.delayed_explode_on_touch.owner
+    end
+    --TODO: Scanprobe
+    return self
+end

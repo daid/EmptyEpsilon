@@ -50,6 +50,5 @@ string initConfiguration(int argc, char** argv)
 
     colorConfig.load();
     sp::io::Keybinding::loadKeybindings(configuration_path + "/keybindings.json");
-    keys.init();
     return configuration_path;
 }

@@ -68,12 +68,6 @@ function Entity:setTarget()
     --TODO
     return self
 end
---- Returns this ScanProbe's target coordinates.
---- Example: targetX,targetY = probe:getTarget()
-function Entity:getTarget()
-    --TODO
-    return self
-end
 --- Sets this ScanProbe's owner SpaceObject.
 --- Example: probe:setOwner(owner)
 function Entity:setOwner()
@@ -84,12 +78,6 @@ function Entity:setOwner()
         entity.getOrAddComponent<Faction>().entity = f->entity;
     entity.getOrAddComponent<AllowRadarLink>().owner = owner;
     --]]
-    return self
-end
---- Returns this ScanProbe's owner SpaceObject.
---- Example: probe:getOwner()
-function Entity:getOwner()
-    --TODO
     return self
 end
 --- Defines a function to call when this ScanProbe arrives to its target coordinates.
