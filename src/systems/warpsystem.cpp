@@ -5,7 +5,9 @@
 #include "components/warpdrive.h"
 #include "components/reactor.h"
 #include "components/shields.h"
+#include "components/faction.h"
 #include "ecs/query.h"
+#include "playerInfo.h"
 
 
 void WarpSystem::update(float delta)
@@ -60,6 +62,14 @@ void WarpSystem::update(float delta)
             current_velocity = glm::vec2{0, 0};
         physics.setVelocity(current_velocity + forward * (warp.current * warp.speed_per_level * warp.getSystemEffectiveness()));
     }
+}
+
+void WarpSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, WarpJammer& component)
+{
+    auto color = glm::u8vec4(200, 150, 100, 64);
+    if (my_spaceship && Faction::getRelation(my_spaceship, e) == FactionRelation::Enemy)
+        color = glm::u8vec4(255, 0, 0, 64);
+    renderer.drawCircleOutline(screen_position, component.range*scale, 2.0, color);
 }
 
 bool WarpSystem::isWarpJammed(sp::ecs::Entity entity)
