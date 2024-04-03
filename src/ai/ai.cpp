@@ -598,14 +598,21 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
         if (pathPlanner.route.size() > 1)
             keep_distance = 0.0;
 
-        if (distance > keep_distance + owner->impulse_max_speed * 5.0f)
-            owner->setImpulseRequest(1.0f);
-        else
-            owner->setImpulseRequest((distance - keep_distance) / owner->impulse_max_speed * 5.0f);
-        if (rotation_diff > 90)
-            owner->setImpulseRequest(-owner->impulse_request);
-        else if (rotation_diff < 45)
-            owner->setImpulseRequest(owner->impulse_request * (1.0f - ((rotation_diff - 45.0f) / 45.0f)));
+        // setImpulseRequest only if impulse_max_speed is greater than 0.0
+        if (owner->impulse_max_speed > 0.0f)
+        {
+            owner->setImpulseRequest(0.0f);
+        } else {
+            if (distance > keep_distance + owner->impulse_max_speed * 5.0f)
+                owner->setImpulseRequest(1.0f);
+            else
+                owner->setImpulseRequest((distance - keep_distance) / owner->impulse_max_speed * 5.0f);
+
+            if (rotation_diff > 90)
+                owner->setImpulseRequest(-owner->impulse_request);
+            else if (rotation_diff < 45)
+                owner->setImpulseRequest(owner->impulse_request * (1.0f - ((rotation_diff - 45.0f) / 45.0f)));
+        }
     }
 }
 
