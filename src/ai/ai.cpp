@@ -600,7 +600,7 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
 
         // setImpulseRequest only if impulse_max_speed is greater than 0.0
         if (owner->impulse_max_speed > 0.0f)
-        {}
+        {
             if (distance > keep_distance + owner->impulse_max_speed * 5.0f)
                 owner->setImpulseRequest(1.0f);
             else
