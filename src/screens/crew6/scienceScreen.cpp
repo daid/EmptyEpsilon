@@ -346,7 +346,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 info_type->setValue(ship->getTypeName());
                 info_type_button->show();
                 info_shields->setValue(ship->getShieldDataString());
-                info_hull->setValue(int(ceil(ship->getHull())));
+                info_hull->setValue(string(int(ceil(ship->getHull()))) + "/" + string(int(ceil(ship->getHullMax()))));
             }
 
             // On a full scan, show tactical and systems data (if any), and its
@@ -422,8 +422,12 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 // Show the status of each subsystem.
                 for(int n = 0; n < SYS_COUNT; n++)
                 {
-                    float system_health = ship->systems[n].health;
-                    info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
+                    if (ship->hasSystem(ESystem(n))) {
+                        float system_health = ship->systems[n].health;
+                        info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
+                    } else {
+                        info_system[n]->setValue("-");
+                    }
                 }
             }
         }
@@ -439,7 +443,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             {
                 info_type->setValue(station->template_name);
                 info_shields->setValue(station->getShieldDataString());
-                info_hull->setValue(int(ceil(station->getHull())));
+                info_hull->setValue(string(int(ceil(station->getHull()))) + "/" + string(int(ceil(station->getHullMax()))));
             }
         }
     }
