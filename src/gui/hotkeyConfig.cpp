@@ -232,15 +232,17 @@ Keys::Keys() :
     }},
 
     //Engineering
-    engineering_select_reactor("ENGINEERING_SELECT_SYSTEM_REACTOR", "1"),
-    engineering_select_beam_weapons("ENGINEERING_SELECT_SYSTEM_BEAM_WEAPONS", "2"),
-    engineering_select_missile_system("ENGINEERING_SELECT_SYSTEM_MISSILE", "3"),
-    engineering_select_maneuvering_system("ENGINEERING_SELECT_SYSTEM_MANEUVERING", "4"),
-    engineering_select_impulse_system("ENGINEERING_SELECT_SYSTEM_IMPULSE", "5"),
-    engineering_select_warp_system("ENGINEERING_SELECT_SYSTEM_WARP", "6"),
-    engineering_select_jump_drive_system("ENGINEERING_SELECT_SYSTEM_JUMP_DRIVE", "7"),
-    engineering_select_front_shield_system("ENGINEERING_SELECT_SYSTEM_FRONT_SHIELD", "8"),
-    engineering_select_rear_shield_system("ENGINEERING_SELECT_SYSTEM_READ_SHIELD", "9"),
+    engineering_select_system{
+        {"ENGINEERING_SELECT_SYSTEM_REACTOR", "1"},
+        {"ENGINEERING_SELECT_SYSTEM_BEAM_WEAPONS", "2"},
+        {"ENGINEERING_SELECT_SYSTEM_MISSILE", "3"},
+        {"ENGINEERING_SELECT_SYSTEM_MANEUVERING", "4"},
+        {"ENGINEERING_SELECT_SYSTEM_IMPULSE", "5"},
+        {"ENGINEERING_SELECT_SYSTEM_WARP", "6"},
+        {"ENGINEERING_SELECT_SYSTEM_JUMP_DRIVE", "7"},
+        {"ENGINEERING_SELECT_SYSTEM_FRONT_SHIELD", "8"},
+        {"ENGINEERING_SELECT_SYSTEM_READ_SHIELD", "9"},
+    },
     engineering_set_power_000("ENGINEERING_POWER_000"),
     engineering_set_power_030("ENGINEERING_POWER_030"),
     engineering_set_power_050("ENGINEERING_POWER_050"),
@@ -251,8 +253,10 @@ Keys::Keys() :
     engineering_set_power_300("ENGINEERING_POWER_300"),
     engineering_increase_power("ENGINEERING_POWER_INCREASE", "]"),
     engineering_decrease_power("ENGINEERING_POWER_DECREASE", "["),
+    engineering_set_power("ENGINEERING_POWER_SET"),
     engineering_increase_coolant("ENGINEERING_COOLANT_INCREASE", "="),
     engineering_decrease_coolant("ENGINEERING_COOLANT_DECREASE", "-"),
+    engineering_set_coolant("ENGINEERING_COOLANT_SET"),
     engineering_next_repair_crew("ENGINEERING_REPAIR_CREW_NEXT", "C"),
     engineering_repair_crew_up("ENGINEERING_REPAIR_CREW_UP", "Up"),
     engineering_repair_crew_down("ENGINEERING_REPAIR_CREW_DOWN", "Down"),
@@ -261,6 +265,28 @@ Keys::Keys() :
     engineering_self_destruct_start("ENGINEERING_SELF_DESTRUCT_START"),
     engineering_self_destruct_confirm("ENGINEERING_SELF_DESTRUCT_CONFIRM"),
     engineering_self_destruct_cancel("ENGINEERING_SELF_DESTRUCT_CANCEL"),
+    engineering_set_power_for_system{
+        {"ENGINEERING_SET_SYSTEM_POWER_REACTOR"},
+        {"ENGINEERING_SET_SYSTEM_POWER_BEAM_WEAPONS"},
+        {"ENGINEERING_SET_SYSTEM_POWER_MISSILE"},
+        {"ENGINEERING_SET_SYSTEM_POWER_MANEUVERING"},
+        {"ENGINEERING_SET_SYSTEM_POWER_IMPULSE"},
+        {"ENGINEERING_SET_SYSTEM_POWER_WARP"},
+        {"ENGINEERING_SET_SYSTEM_POWER_JUMP_DRIVE"},
+        {"ENGINEERING_SET_SYSTEM_POWER_FRONT_SHIELD"},
+        {"ENGINEERING_SET_SYSTEM_POWER_READ_SHIELD"},
+    },
+    engineering_set_coolant_for_system{
+        {"ENGINEERING_SET_SYSTEM_COOLANT_REACTOR"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_BEAM_WEAPONS"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_MISSILE"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_MANEUVERING"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_IMPULSE"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_WARP"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_JUMP_DRIVE"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_FRONT_SHIELD"},
+        {"ENGINEERING_SET_SYSTEM_COOLANT_READ_SHIELD"},
+    },
 
     relay_alert_level_none("RELAY_ALERT_NONE"),
     relay_alert_level_yellow("RELAY_ALERT_YELLOW"),
@@ -378,15 +404,15 @@ void Keys::init()
     }
 
     //Engineering
-    engineering_select_reactor.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select reactor system"));
-    engineering_select_beam_weapons.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select beam weapon system"));
-    engineering_select_missile_system.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select missile weapon system"));
-    engineering_select_maneuvering_system.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select maneuvering system"));
-    engineering_select_impulse_system.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select impulse system"));
-    engineering_select_warp_system.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select warp system"));
-    engineering_select_jump_drive_system.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select jump drive system"));
-    engineering_select_front_shield_system.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select front shields system"));
-    engineering_select_rear_shield_system.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select rear shields system"));
+    engineering_select_system[SYS_Reactor].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select reactor system"));
+    engineering_select_system[SYS_BeamWeapons].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select beam weapon system"));
+    engineering_select_system[SYS_MissileSystem].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select missile weapon system"));
+    engineering_select_system[SYS_Maneuver].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select maneuvering system"));
+    engineering_select_system[SYS_Impulse].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select impulse system"));
+    engineering_select_system[SYS_Warp].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select warp system"));
+    engineering_select_system[SYS_JumpDrive].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select jump drive system"));
+    engineering_select_system[SYS_FrontShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select front shields system"));
+    engineering_select_system[SYS_RearShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select rear shields system"));
     engineering_set_power_000.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 0%"));
     engineering_set_power_030.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 30%"));
     engineering_set_power_050.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 50%"));
@@ -397,8 +423,10 @@ void Keys::init()
     engineering_set_power_300.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 300%"));
     engineering_increase_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system power"));
     engineering_decrease_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system power"));
+    engineering_set_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power (analogue)"));
     engineering_increase_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system coolant"));
     engineering_decrease_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system coolant"));
+    engineering_set_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system coolant (analogue)"));
     engineering_next_repair_crew.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Next repair crew"));
     engineering_repair_crew_up.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move up"));
     engineering_repair_crew_down.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move down"));
@@ -407,6 +435,26 @@ void Keys::init()
     engineering_self_destruct_start.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Start self-destruct"));
     engineering_self_destruct_confirm.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Confirm self-destruct"));
     engineering_self_destruct_cancel.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Cancel self-destruct"));
+
+    engineering_set_power_for_system[SYS_Reactor].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set reactor power (analogue)"));
+    engineering_set_power_for_system[SYS_BeamWeapons].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set beam weapon power (analogue)"));
+    engineering_set_power_for_system[SYS_MissileSystem].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set missile weapon power (analogue)"));
+    engineering_set_power_for_system[SYS_Maneuver].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set maneuvering power (analogue)"));
+    engineering_set_power_for_system[SYS_Impulse].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set impulse power (analogue)"));
+    engineering_set_power_for_system[SYS_Warp].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set warp power (analogue)"));
+    engineering_set_power_for_system[SYS_JumpDrive].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set jump drive power (analogue)"));
+    engineering_set_power_for_system[SYS_FrontShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields power (analogue)"));
+    engineering_set_power_for_system[SYS_RearShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields power (analogue)"));
+
+    engineering_set_coolant_for_system[SYS_Reactor].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set reactor coolant (analogue)"));
+    engineering_set_coolant_for_system[SYS_BeamWeapons].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set beam weapon coolant (analogue)"));
+    engineering_set_coolant_for_system[SYS_MissileSystem].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set missile weapon coolant (analogue)"));
+    engineering_set_coolant_for_system[SYS_Maneuver].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set maneuvering coolant (analogue)"));
+    engineering_set_coolant_for_system[SYS_Impulse].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set impulse coolant (analogue)"));
+    engineering_set_coolant_for_system[SYS_Warp].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set warp coolant (analogue)"));
+    engineering_set_coolant_for_system[SYS_JumpDrive].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set jump drive coolant (analogue)"));
+    engineering_set_coolant_for_system[SYS_FrontShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields coolant (analogue)"));
+    engineering_set_coolant_for_system[SYS_RearShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields coolant (analogue)"));
 
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
     relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Yellow"));

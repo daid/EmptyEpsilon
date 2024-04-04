@@ -117,15 +117,22 @@ void PowerManagementScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        if (keys.engineering_select_reactor.getDown()) selected_system = SYS_Reactor;
-        if (keys.engineering_select_beam_weapons.getDown()) selected_system = SYS_BeamWeapons;
-        if (keys.engineering_select_missile_system.getDown()) selected_system = SYS_MissileSystem;
-        if (keys.engineering_select_maneuvering_system.getDown()) selected_system = SYS_Maneuver;
-        if (keys.engineering_select_impulse_system.getDown()) selected_system = SYS_Impulse;
-        if (keys.engineering_select_warp_system.getDown()) selected_system = SYS_Warp;
-        if (keys.engineering_select_jump_drive_system.getDown()) selected_system = SYS_JumpDrive;
-        if (keys.engineering_select_front_shield_system.getDown()) selected_system = SYS_FrontShield;
-        if (keys.engineering_select_rear_shield_system.getDown()) selected_system = SYS_RearShield;
+        for(unsigned int n=0; n<SYS_COUNT; n++) {
+            if (keys.engineering_select_system[n].getDown()) selected_system = static_cast<ESystem>(n);
+
+            float set_value = keys.engineering_set_power_for_system[n].getValue() * 3.0f;
+            if (set_value != my_spaceship->systems[n].power_request && (set_value != 0.0f || set_power_active[n]))
+            {
+                my_spaceship->commandSetSystemPowerRequest(selected_system, set_value);
+                set_power_active[n] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
+            }
+            set_value = keys.engineering_set_coolant_for_system[n].getValue() * my_spaceship->max_coolant_per_system;
+            if (set_value != my_spaceship->systems[n].coolant_request && (set_value != 0.0f || set_coolant_active[n]))
+            {
+                my_spaceship->commandSetSystemCoolantRequest(selected_system, set_value);
+                set_coolant_active[n] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
+            }
+        }
 
         // Don't act if the selected system doesn't exist.
         if (!my_spaceship->hasSystem(selected_system))
