@@ -367,13 +367,13 @@ void EngineeringScreen::onUpdate()
             float set_value = keys.engineering_set_power_for_system[n].getValue() * 3.0f;
             if (set_value != my_spaceship->systems[n].power_request && (set_value != 0.0f || set_power_active[n]))
             {
-                my_spaceship->commandSetSystemPowerRequest(selected_system, set_value);
+                my_spaceship->commandSetSystemPowerRequest(static_cast<ESystem>(n), set_value);
                 set_power_active[n] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
             }
             set_value = keys.engineering_set_coolant_for_system[n].getValue() * my_spaceship->max_coolant_per_system;
             if (set_value != my_spaceship->systems[n].coolant_request && (set_value != 0.0f || set_coolant_active[n]))
             {
-                my_spaceship->commandSetSystemCoolantRequest(selected_system, set_value);
+                my_spaceship->commandSetSystemCoolantRequest(static_cast<ESystem>(n), set_value);
                 set_coolant_active[n] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
             }
         }
