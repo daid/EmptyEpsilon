@@ -31,6 +31,8 @@ private:
         GuiProgressbar* coolant_bar;
     };
     SystemRow systems[ShipSystem::COUNT];
+    bool set_power_active[ShipSystem::COUNT] = {false};
+    bool set_coolant_active[ShipSystem::COUNT] = {false};
 public:
     PowerManagementScreen(GuiContainer* owner);
 

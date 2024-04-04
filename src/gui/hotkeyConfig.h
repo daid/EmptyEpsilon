@@ -6,6 +6,8 @@
 #include <SDL.h>
 #include <io/keybinding.h>
 #include "stringImproved.h"
+#include "components/shipsystem.h"
+
 
 class Keys
 {
@@ -107,15 +109,7 @@ public:
     std::array<sp::io::Keybinding, 4> science_scan_param_set;
 
     //Engineering
-    sp::io::Keybinding engineering_select_reactor;
-    sp::io::Keybinding engineering_select_beam_weapons;
-    sp::io::Keybinding engineering_select_missile_system;
-    sp::io::Keybinding engineering_select_maneuvering_system;
-    sp::io::Keybinding engineering_select_impulse_system;
-    sp::io::Keybinding engineering_select_warp_system;
-    sp::io::Keybinding engineering_select_jump_drive_system;
-    sp::io::Keybinding engineering_select_front_shield_system;
-    sp::io::Keybinding engineering_select_rear_shield_system;
+    sp::io::Keybinding engineering_select_system[ShipSystem::COUNT];
     sp::io::Keybinding engineering_set_power_000;
     sp::io::Keybinding engineering_set_power_030;
     sp::io::Keybinding engineering_set_power_050;
@@ -126,8 +120,10 @@ public:
     sp::io::Keybinding engineering_set_power_300;
     sp::io::Keybinding engineering_increase_power;
     sp::io::Keybinding engineering_decrease_power;
+    sp::io::Keybinding engineering_set_power;
     sp::io::Keybinding engineering_increase_coolant;
     sp::io::Keybinding engineering_decrease_coolant;
+    sp::io::Keybinding engineering_set_coolant;
     sp::io::Keybinding engineering_next_repair_crew;
     sp::io::Keybinding engineering_repair_crew_up;
     sp::io::Keybinding engineering_repair_crew_down;
@@ -136,6 +132,9 @@ public:
     sp::io::Keybinding engineering_self_destruct_start;
     sp::io::Keybinding engineering_self_destruct_confirm;
     sp::io::Keybinding engineering_self_destruct_cancel;
+
+    sp::io::Keybinding engineering_set_power_for_system[ShipSystem::COUNT];
+    sp::io::Keybinding engineering_set_coolant_for_system[ShipSystem::COUNT];
 
     //Relay
     sp::io::Keybinding relay_alert_level_none;

@@ -56,6 +56,9 @@ private:
     float previous_energy_level;
     float average_energy_delta;
 
+    bool set_power_active[ShipSystem::COUNT] = {false};
+    bool set_coolant_active[ShipSystem::COUNT] = {false};
+
     void addSystemEffect(string key, string value);
     void selectSystem(ShipSystem::Type system);
 
