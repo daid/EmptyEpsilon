@@ -670,7 +670,7 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
             keep_distance = 0.0;
 
         auto impulse = owner.getComponent<ImpulseEngine>();
-        if (impulse) {
+        if (impulse && impulse->max_speed_forward > 0.0f) {
             if (distance > keep_distance + impulse->max_speed_forward * 5.0f)
                 impulse->request = 1.0f;
             else
