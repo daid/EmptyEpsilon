@@ -4,6 +4,7 @@
 #include <preferenceManager.h>
 #include "gui/colorConfig.h"
 #include "gui/hotkeyConfig.h"
+#include <cstring>
 
 #if STEAMSDK
 #include "steam/steam_api.h"
