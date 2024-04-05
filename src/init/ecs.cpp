@@ -3,6 +3,7 @@
 #include <engine.h>
 
 #include "ecs/multiplayer.h"
+#include "multiplayer/collision.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -30,8 +31,63 @@
 
 void initSystemsAndComponents()
 {
-    sp::ecs::MultiplayerReplication::registerComponentReplication<sp::ecs::ComponentReplication<RawRadarSignatureInfo>>();
+    //BeamWeaponSys
+    //BeamEffect
+    //CommsReceiver (client needs to know this exists to be able to initiate comms)
+    //CommsTransmitter
+    //Coolant
+    //CustomShipFunctions
+    //Database
+    //DockingBay
+    //DockingPort
+    //Faction
+    //FactionInfo
+    //Gravity
+    //HackingDevice
+    //Hull
+    //ImpulseEngine
+    //InternalRooms
+    //InternalCrew
+    //JumpDrive
+    //ManeuveringThrusters
+    //CombatManeuveringThrusters
+    //MissileFlight
+    //MissileHoming
+    //ConstantParticleEmitter
+    //MissileTubes
+    //MoveTo
+    //CallSign
+    //TypeName
+    //Orbit
+    //PlayerControl
+    //ScanProbeLauncher
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::ecs::ComponentReplication<RadarTrace>>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<sp::ecs::ComponentReplication<RawRadarSignatureInfo>>();
+    //LongRangeRadar
+    //ShareShortRangeRadar
+    //AllowRadarLink
+    //RadarBlock
+    //NeverRadarBlocked
+    //Reactor
+    //MeshRenderComponent
+    //EngineEmitter
+    //NebulaRenderer
+    //ExplosionEffect
+    //PlanetRender
+    //ScanState
+    //ScienceDescription
+    //ScienceScanner
+    //SelfDestruct
+    //Sfx
+    //Shields
+    //ShipLog
+    //Spin
+    //Target
+    //WarpDrive
+    //WarpJammer
+    //Zone
+    sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::TransformReplication>();
+    //sp::Physics
 
     engine->registerSystem<AISystem>();
     engine->registerSystem<DamageSystem>();
