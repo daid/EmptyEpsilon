@@ -10,23 +10,14 @@ function getSpawnablePlayerShips()
     if __allow_new_player_ships then
         for i, v in ipairs(__player_ship_templates) do
             if not v.__hidden then
-                result[#result+1] = {v.typename.type_name, v.typename.localized, v.__description}
+                result[#result+1] = {__spawnPlayerShipFunc(v.typename.type_name), v.typename.localized, v.__description}
             end
         end
     end
     return result
 end
--- Called by the engine when on the server the user wants to spawn a player ship.
--- Called with the [key] from the list returned in getSpawnablePlayerShips
-function spawnPlayerShipFromUI(key)
-    if not __allow_new_player_ships then return end
-    for i, v in ipairs(__player_ship_templates) do
-        if not v.__hidden and v.typename.type_name == key then
-            local ship = PlayerSpaceship()
-            ship:setTemplate(key)
-            return ship
-        end
-    end
+function __spawnPlayerShipFunc(key)
+    return function() return PlayerSpaceship():setTemplate(key):setRotation(random(0, 360)) end
 end
 
 function allowNewPlayerShips(enabled)

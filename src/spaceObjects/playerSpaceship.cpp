@@ -509,10 +509,11 @@ void PlayerSpaceship::applyTemplateValues()
 
     // Set the ship's number of repair crews in Engineering from the ship's
     // template.
-    setRepairCrewCount(ship_template->repair_crew_count);
+    //setRepairCrewCount(ship_template->repair_crew_count);
 
     if (entity) {
         entity.getOrAddComponent<Coolant>();
+        /*
         if (!ship_template->can_combat_maneuver)
             entity.removeComponent<CombatManeuveringThrusters>();
         if (ship_template->can_self_destruct)
@@ -523,6 +524,7 @@ void PlayerSpaceship::applyTemplateValues()
             entity.getOrAddComponent<ScanProbeLauncher>();
         if (ship_template->can_hack)
             entity.getOrAddComponent<HackingDevice>();
+        */
     }
 
     if (!on_new_player_ship_called)
@@ -753,8 +755,8 @@ void PlayerSpaceship::setCanDock(bool enabled)
         entity.removeComponent<DockingPort>();
     } else {
         auto& port = entity.getOrAddComponent<DockingPort>();
-        port.dock_class = ship_template->getClass();
-        port.dock_subclass = ship_template->getSubClass();
+        //port.dock_class = ship_template->getClass();
+        //port.dock_subclass = ship_template->getSubClass();
     }
 }
 
@@ -815,10 +817,10 @@ void PlayerSpaceship::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 positi
 string PlayerSpaceship::getExportLine()
 {
     string result = "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();
-    if (getShortRangeRadarRange() != ship_template->short_range_radar_range)
-        result += ":setShortRangeRadarRange(" + string(getShortRangeRadarRange(), 0) + ")";
-    if (getLongRangeRadarRange() != ship_template->long_range_radar_range)
-        result += ":setLongRangeRadarRange(" + string(getLongRangeRadarRange(), 0) + ")";
+    //if (getShortRangeRadarRange() != ship_template->short_range_radar_range)
+    //    result += ":setShortRangeRadarRange(" + string(getShortRangeRadarRange(), 0) + ")";
+    //if (getLongRangeRadarRange() != ship_template->long_range_radar_range)
+    //    result += ":setLongRangeRadarRange(" + string(getLongRangeRadarRange(), 0) + ")";
     //if (can_scan != ship_template->can_scan)
     //    result += ":setCanScan(" + string(can_scan, true) + ")";
     //if (can_hack != ship_template->can_hack)

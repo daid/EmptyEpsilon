@@ -3,7 +3,7 @@
 
 #include "engine.h"
 #include "spaceObject.h"
-#include "shipTemplate.h"
+//#include "shipTemplate.h"
 
 /**
     An object which is based on a ship template. Contains generic behaviour for:
@@ -16,7 +16,7 @@ class ShipTemplateBasedObject : public SpaceObject, public Updatable
 {
 public:
     string template_name;
-    P<ShipTemplate> ship_template;
+    //P<ShipTemplate> ship_template;
 
 public:
     ShipTemplateBasedObject(float collision_range, string multiplayer_name, float multiplayer_significant_range=-1);

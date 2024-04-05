@@ -57,6 +57,7 @@ void GameMasterActions::commandRunScript(string code)
     packet << CMD_RUN_SCRIPT << code;
     sendClientCommand(packet);
 }
+
 void GameMasterActions::commandSendGlobalMessage(string message)
 {
     sp::io::DataBuffer packet;

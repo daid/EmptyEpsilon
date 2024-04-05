@@ -139,11 +139,11 @@ namespace sp::script {
             std::vector<GameGlobalInfo::ShipSpawnInfo> result{};
             if (lua_istable(L, idx)) {
                 for(int index=1; lua_geti(L, idx, index) == LUA_TTABLE; index++) {
-                    lua_geti(L, -1, 1); auto key = lua_tostring(L, -1); lua_pop(L, 1);
+                    lua_geti(L, -1, 1); auto callback = Convert<sp::script::Callback>::fromLua(L, -1); lua_pop(L, 1);
                     lua_geti(L, -1, 2); auto label = lua_tostring(L, -1); lua_pop(L, 1);
                     lua_geti(L, -1, 3); auto description = lua_tostring(L, -1); lua_pop(L, 1);
                     lua_pop(L, 1);
-                    result.push_back({key ? key : "", label ? label : "", description ? description : ""});
+                    result.push_back({callback, label ? label : "", description ? description : ""});
                 }
                 lua_pop(L, 1);
             }
@@ -162,14 +162,36 @@ std::vector<GameGlobalInfo::ShipSpawnInfo> GameGlobalInfo::getSpawnablePlayerShi
     }
     return info;
 }
-
-void GameGlobalInfo::spawnPlayerShip(string key)
-{
-    if (main_script) {
-        auto res = main_script->call<sp::ecs::Entity>("spawnPlayerShipFromUI", key);
-        LuaConsole::checkResult(res);
-    }
+namespace sp::script {
+    template<> struct Convert<std::vector<GameGlobalInfo::ObjectSpawnInfo>> {
+        static std::vector<GameGlobalInfo::ObjectSpawnInfo> fromLua(lua_State* L, int idx) {
+            std::vector<GameGlobalInfo::ObjectSpawnInfo> result{};
+            if (lua_istable(L, idx)) {
+                for(int index=1; lua_geti(L, idx, index) == LUA_TTABLE; index++) {
+                    lua_geti(L, -1, 1); auto callback = Convert<sp::script::Callback>::fromLua(L, -1); lua_pop(L, 1);
+                    lua_geti(L, -1, 2); auto label = lua_tostring(L, -1); lua_pop(L, 1);
+                    lua_geti(L, -1, 3); auto category = lua_tostring(L, -1); lua_pop(L, 1);
+                    lua_pop(L, 1);
+                    result.push_back({callback, label ? label : "", category ? category : ""});
+                }
+                lua_pop(L, 1);
+            }
+            return result;
+        }
+    };
 }
+std::vector<GameGlobalInfo::ObjectSpawnInfo> GameGlobalInfo::getGMSpawnableObjects()
+{
+    std::vector<GameGlobalInfo::ObjectSpawnInfo> info;
+    if (main_script) {
+        auto res = main_script->call<std::vector<GameGlobalInfo::ObjectSpawnInfo>>("getSpawnableGMObjects");
+        LuaConsole::checkResult(res);
+        if (res.isOk())
+            info = res.value();
+    }
+    return info;
+}
+
 
 void GameGlobalInfo::reset()
 {

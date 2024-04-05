@@ -237,7 +237,6 @@ set(MAIN_SOURCES
     src/script.cpp
     src/playerInfo.cpp
     src/gameStateLogger.cpp
-    src/shipTemplate.cpp
     src/beamTemplate.cpp
     src/missileWeaponData.cpp
     src/factionInfo.cpp
@@ -587,7 +586,6 @@ set(MAIN_SOURCES
     src/screens/windowScreen.h
     src/script.h
     src/shaderRegistry.h
-    src/shipTemplate.h
     src/spaceObjects/playerSpaceship.h
     src/spaceObjects/shipTemplateBasedObject.h
     src/spaceObjects/spaceObject.h

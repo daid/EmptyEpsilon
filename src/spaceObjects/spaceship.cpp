@@ -479,6 +479,7 @@ SpaceShip::~SpaceShip()
 
 void SpaceShip::applyTemplateValues()
 {
+    /*
     for(int n=0; n<16; n++)
     {
         if (ship_template->beams[n].getRange() > 0.0f) {
@@ -551,11 +552,12 @@ void SpaceShip::applyTemplateValues()
 
     ship_template->setCollisionData(this);
     //model_info.setData(ship_template->model_data);
+    */
 }
 
 void SpaceShip::draw3DTransparent()
 {
-    if (!ship_template) return;
+    //if (!ship_template) return;
     ShipTemplateBasedObject::draw3DTransparent();
 /*  TODO
     auto jump = entity.getComponent<JumpDrive>();
@@ -930,8 +932,8 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
 
     // If traits don't differ from the ship template, don't bother exporting
     // them.
-    if (getTypeName() != ship_template->getName())
-        ret += ":setTypeName(\"" + getTypeName() + "\")";
+    //if (getTypeName() != ship_template->getName())
+    //    ret += ":setTypeName(\"" + getTypeName() + "\")";
     //if (hull_max != ship_template->hull)
     //    ret += ":setHullMax(" + string(hull_max, 0) + ")";
     //if (hull_strength != ship_template->hull)
@@ -954,11 +956,12 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
 
     // Shield data
     // Determine whether to export shield data.
-    bool add_shields_max_line = getShieldCount() != ship_template->shield_count;
-    bool add_shields_line = getShieldCount() != ship_template->shield_count;
+    //bool add_shields_max_line = getShieldCount() != ship_template->shield_count;
+    //bool add_shields_line = getShieldCount() != ship_template->shield_count;
 
     // If shield max and level don't differ from the template, don't bother
     // exporting them.
+    /*
     for(int n = 0; n < getShieldCount(); n++)
     {
         if (getShieldMax(n) != ship_template->shield_level[n])
@@ -1000,6 +1003,7 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
 
         ret += ")";
     }
+    */
 
     // Missile weapon data
     /*

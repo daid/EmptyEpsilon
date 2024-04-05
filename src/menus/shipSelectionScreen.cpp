@@ -20,6 +20,7 @@
 #include "screens/cinematicViewScreen.h"
 #include "screens/spectatorScreen.h"
 #include "screens/gm/gameMasterScreen.h"
+#include "menus/luaConsole.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
@@ -340,13 +341,12 @@ ShipSelectionScreen::ShipSelectionScreen()
         if (ship_spawn_info.size() > 0) {
             GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", [this](int index, string value)
             {
-                for(auto& info : ship_spawn_info)
-                    if (info.key == value)
-                        playership_info->setText(info.description);
+                if (index < int(ship_spawn_info.size()))
+                    playership_info->setText(ship_spawn_info[index].description);
             });
 
             for(const auto& info : ship_spawn_info) {
-                ship_template_selector->addEntry(info.label, info.key);
+                ship_template_selector->addEntry(info.label, info.label);
             }
             ship_template_selector->setSelectionIndex(0);
             ship_template_selector->setPosition(0, 630, sp::Alignment::TopCenter)->setSize(490, 50);
@@ -354,8 +354,15 @@ ShipSelectionScreen::ShipSelectionScreen()
 
             // Spawn a ship of the selected template near 0,0 and give it a random
             // heading.
-            (new GuiButton(left_container, "CREATE_SHIP_BUTTON", tr("Spawn player ship"), [ship_template_selector]() {
-                gameGlobalInfo->spawnPlayerShip(ship_template_selector->getSelectionValue());
+            (new GuiButton(left_container, "CREATE_SHIP_BUTTON", tr("Spawn player ship"), [this, ship_template_selector]() {
+                auto index = ship_template_selector->getSelectionIndex();
+                if (index < int(ship_spawn_info.size())) {
+                    auto res = ship_spawn_info[index].create_callback.call<sp::ecs::Entity>();
+                    LuaConsole::checkResult(res);
+                    if (res.isOk()) {
+                        //TODO: Apply some player properties like faction/position.
+                    }
+                }
             }))->setPosition(0, 680, sp::Alignment::TopCenter)->setSize(490, 50);
         }
     }

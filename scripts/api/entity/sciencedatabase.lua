@@ -127,8 +127,12 @@ end
 --- entry:getKeyValues() -- returns the key/value table for this entry
 --- for k,v in pairs(kv) do print(k,v) end -- Print each key/value pair for this entry to the console
 function Entity:getKeyValues()
-    --TODO
-    return {}
+    if not self.science_database then return {} end
+    local result = {}
+    for n=1,#self.science_database do
+        result[self.science_database[n].key] = self.science_database[n].value
+    end
+    return result
 end
 --- Removes all key/value pairs matching the given case-insensitive key in this ScienceDatabase entry's key/value data.
 --- If duplicate matching keys exist, this removes all of them.

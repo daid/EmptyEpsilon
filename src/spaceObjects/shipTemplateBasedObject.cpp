@@ -222,6 +222,7 @@ void ShipTemplateBasedObject::draw3DTransparent()
 
 void ShipTemplateBasedObject::update(float delta)
 {
+    /*
     // All ShipTemplateBasedObjects should have a valid template.
     // If this object lacks a template, or has an inconsistent template...
     if (!ship_template || ship_template->getName() != template_name)
@@ -241,6 +242,7 @@ void ShipTemplateBasedObject::update(float delta)
         ship_template->setCollisionData(this);
         //model_info.setData(ship_template->model_data);
     }
+    */
 }
 
 bool ShipTemplateBasedObject::hasShield()
@@ -258,6 +260,7 @@ void ShipTemplateBasedObject::setHullMax(float amount) { /*TODO*/ }
 
 void ShipTemplateBasedObject::setTemplate(string template_name)
 {
+    /*
     P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(template_name);
     this->template_name = template_name;
     ship_template = new_ship_template;
@@ -331,6 +334,7 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
 
     //Call the virtual applyTemplateValues function so subclasses can get extra values from the ship templates.
     applyTemplateValues();
+    */
 }
 
 void ShipTemplateBasedObject::setShields(const std::vector<float>& amounts)

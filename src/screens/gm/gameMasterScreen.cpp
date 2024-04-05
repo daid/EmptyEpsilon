@@ -1,6 +1,5 @@
 #include "gameMasterScreen.h"
 #include "i18n.h"
-#include "shipTemplate.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "objectCreationView.h"
@@ -33,9 +32,12 @@
 static std::unordered_map<string, string> getGMInfo(sp::ecs::Entity entity)
 {
     std::unordered_map<string, string> result;
-    //ret[trMark("gm_info", "CallSign")] = callsign;
-    //ret[trMark("gm_info", "Type")] = type_name;
-    //ret[trMark("gm_info", "Hull")] = string(hull_strength) + "/" + string(hull_max);
+    if (auto cs = entity.getComponent<CallSign>())
+        result[trMark("gm_info", "CallSign")] = cs->callsign;
+    if (auto tn = entity.getComponent<TypeName>())
+        result[trMark("gm_info", "Type")] = tn->localized;
+    if (auto hull = entity.getComponent<Hull>())
+        result[trMark("gm_info", "Hull")] = string(hull->current) + "/" + string(hull->max);
     //for(int n=0; n<shield_count; n++) {
         // Note, translators: this is a compromise.
         // Because of the deferred translation the variable parameter can't be forwarded, so it'll always be a suffix.

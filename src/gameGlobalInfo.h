@@ -99,12 +99,17 @@ public:
     string getNextShipCallsign();
 
     struct ShipSpawnInfo {
-        string key;
+        sp::script::Callback create_callback;
         string label;
         string description;
     };
     std::vector<ShipSpawnInfo> getSpawnablePlayerShips();
-    void spawnPlayerShip(string key);
+    struct ObjectSpawnInfo {
+        sp::script::Callback create_callback;
+        string label;
+        string category;
+    };
+    std::vector<ObjectSpawnInfo> getGMSpawnableObjects();
     void execScriptCode(const string& code);
     bool allowNewPlayerShips();
 

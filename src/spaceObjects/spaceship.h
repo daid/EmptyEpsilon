@@ -8,6 +8,7 @@
 #include "shipTemplateBasedObject.h"
 #include "tween.h"
 #include "components/docking.h"
+#include "missileWeaponData.h"
 
 
 struct Speeds
