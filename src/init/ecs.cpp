@@ -28,12 +28,11 @@
 #include "systems/radar.h"
 
 
-sp::ecs::ComponentReplication<RawRadarSignatureInfo> cr_RawRadarSignatureInfo;
-sp::ecs::ComponentReplication<RadarTrace> cr_RadarTrace;
-
-
 void initSystemsAndComponents()
 {
+    sp::ecs::MultiplayerReplication::registerComponentReplication<sp::ecs::ComponentReplication<RawRadarSignatureInfo>>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<sp::ecs::ComponentReplication<RadarTrace>>();
+
     engine->registerSystem<AISystem>();
     engine->registerSystem<DamageSystem>();
     engine->registerSystem<EnergySystem>();
