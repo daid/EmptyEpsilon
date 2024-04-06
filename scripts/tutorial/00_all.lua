@@ -36,7 +36,7 @@ addToSequence(radarTutorial, _([[To the right of your ship is a brown dot. This 
 Asteroid impacts will damage your ship, so avoid hitting them.]]))
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object = Mine():setPosition(5000, 0) end)
-addToSequence(radarTutorial, _([[The white dot is a mine. When you move near a mine, it explodes with a powerful 1u-radius blast. Striking a mine while your shields are down will surely destroy your ship.]]))
+addToSequence(radarTutorial, _([[This is a mine. When you move near a mine, it explodes with a powerful 1u-radius blast. Striking a mine while your shields are down will surely destroy your ship.]]))
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(5000, 0) end)
 addToSequence(radarTutorial, function() prev_object2 = SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setPosition(5000, 5000) end)
