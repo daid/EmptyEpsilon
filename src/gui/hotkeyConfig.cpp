@@ -400,7 +400,7 @@ void Keys::init()
     {
         science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} increase").format({{"number", string(n+1)}}));
         science_scan_param_decrease[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} decrease").format({{"number", string(n+1)}}));
-        science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter set {number}").format({{"number", string(n+1)}}));
+        science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Set scanning parameter {number} (joystick)").format({{"number", string(n+1)}}));
     }
 
     //Engineering
@@ -423,10 +423,10 @@ void Keys::init()
     engineering_set_power_300.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 300%"));
     engineering_increase_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system power"));
     engineering_decrease_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system power"));
-    engineering_set_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power (analogue)"));
+    engineering_set_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power (joystick)"));
     engineering_increase_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system coolant"));
     engineering_decrease_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system coolant"));
-    engineering_set_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system coolant (analogue)"));
+    engineering_set_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system coolant (joystick)"));
     engineering_next_repair_crew.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Next repair crew"));
     engineering_repair_crew_up.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move up"));
     engineering_repair_crew_down.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move down"));
@@ -436,25 +436,25 @@ void Keys::init()
     engineering_self_destruct_confirm.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Confirm self-destruct"));
     engineering_self_destruct_cancel.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Cancel self-destruct"));
 
-    engineering_set_power_for_system[SYS_Reactor].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set reactor power (analogue)"));
-    engineering_set_power_for_system[SYS_BeamWeapons].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set beam weapon power (analogue)"));
-    engineering_set_power_for_system[SYS_MissileSystem].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set missile weapon power (analogue)"));
-    engineering_set_power_for_system[SYS_Maneuver].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set maneuvering power (analogue)"));
-    engineering_set_power_for_system[SYS_Impulse].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set impulse power (analogue)"));
-    engineering_set_power_for_system[SYS_Warp].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set warp power (analogue)"));
-    engineering_set_power_for_system[SYS_JumpDrive].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set jump drive power (analogue)"));
-    engineering_set_power_for_system[SYS_FrontShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields power (analogue)"));
-    engineering_set_power_for_system[SYS_RearShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields power (analogue)"));
+    engineering_set_power_for_system[SYS_Reactor].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set reactor power (joystick)"));
+    engineering_set_power_for_system[SYS_BeamWeapons].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set beam weapon power (joystick)"));
+    engineering_set_power_for_system[SYS_MissileSystem].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set missile weapon power (joystick)"));
+    engineering_set_power_for_system[SYS_Maneuver].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set maneuvering power (joystick)"));
+    engineering_set_power_for_system[SYS_Impulse].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set impulse power (joystick)"));
+    engineering_set_power_for_system[SYS_Warp].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set warp power (joystick)"));
+    engineering_set_power_for_system[SYS_JumpDrive].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set jump drive power (joystick)"));
+    engineering_set_power_for_system[SYS_FrontShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields power (joystick)"));
+    engineering_set_power_for_system[SYS_RearShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields power (joystick)"));
 
-    engineering_set_coolant_for_system[SYS_Reactor].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set reactor coolant (analogue)"));
-    engineering_set_coolant_for_system[SYS_BeamWeapons].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set beam weapon coolant (analogue)"));
-    engineering_set_coolant_for_system[SYS_MissileSystem].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set missile weapon coolant (analogue)"));
-    engineering_set_coolant_for_system[SYS_Maneuver].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set maneuvering coolant (analogue)"));
-    engineering_set_coolant_for_system[SYS_Impulse].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set impulse coolant (analogue)"));
-    engineering_set_coolant_for_system[SYS_Warp].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set warp coolant (analogue)"));
-    engineering_set_coolant_for_system[SYS_JumpDrive].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set jump drive coolant (analogue)"));
-    engineering_set_coolant_for_system[SYS_FrontShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields coolant (analogue)"));
-    engineering_set_coolant_for_system[SYS_RearShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields coolant (analogue)"));
+    engineering_set_coolant_for_system[SYS_Reactor].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set reactor coolant (joystick)"));
+    engineering_set_coolant_for_system[SYS_BeamWeapons].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set beam weapon coolant (joystick)"));
+    engineering_set_coolant_for_system[SYS_MissileSystem].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set missile weapon coolant (joystick)"));
+    engineering_set_coolant_for_system[SYS_Maneuver].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set maneuvering coolant (joystick)"));
+    engineering_set_coolant_for_system[SYS_Impulse].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set impulse coolant (joystick)"));
+    engineering_set_coolant_for_system[SYS_Warp].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set warp coolant (joystick)"));
+    engineering_set_coolant_for_system[SYS_JumpDrive].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set jump drive coolant (joystick)"));
+    engineering_set_coolant_for_system[SYS_FrontShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields coolant (joystick)"));
+    engineering_set_coolant_for_system[SYS_RearShield].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields coolant (joystick)"));
 
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
     relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Yellow"));
