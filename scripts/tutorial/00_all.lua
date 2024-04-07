@@ -28,12 +28,12 @@ addToSequence(mainscreenTutorial, function() tutorial:switchViewToMainScreen() e
 addToSequence(mainscreenTutorial, _([[This is the main screen, which displays your ship and the surrounding space.
 While you cannot move the ship from this screen, you can use it to visually identify objects.]]))
 
+
 radarTutorial = createSequence()
 addToSequence(radarTutorial, function() tutorial:switchViewToLongRange() end)
 addToSequence(radarTutorial, _([[Welcome to the long-range radar. This radar can detect objects up to 30u from your ship, depicted at the radar's center. This radar allows you to quickly identify distant objects.]]))
-addToSequence(radarTutorial, function() prev_object = Asteroid():setPosition(5000, 0) end)
-addToSequence(radarTutorial, _([[To the right of your ship is a brown dot. This is an asteroid.
-Asteroid impacts will damage your ship, so avoid hitting them.]]))
+addToSequence(radarTutorial, function() prev_object = Asteroid():setPosition(5000, 0):setSize(243) end)
+addToSequence(radarTutorial, _([[This is an asteroid. Flying into an asteroid will damage your ship, so avoid hitting them.]]))
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object = Mine():setPosition(5000, 0) end)
 addToSequence(radarTutorial, _([[The white dot is a mine. When you move near a mine, it explodes with a powerful 1u-radius blast. Striking a mine while your shields are down will surely destroy your ship.]]))
