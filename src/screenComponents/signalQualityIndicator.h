@@ -6,7 +6,7 @@
 #include "gui/gui2_element.h"
 #include "timer.h"
 
-
+// Class for drawing bands in the Science Station's "Scanning" mini-game
 class GuiSignalQualityIndicator : public GuiElement
 {
     sp::SystemStopwatch clock;
