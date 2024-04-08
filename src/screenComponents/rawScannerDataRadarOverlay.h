@@ -5,6 +5,7 @@
 
 class GuiRadarView;
 
+// Class for drawing the Science Bands (red, green, blue) around the Radar for the Science Station
 class RawScannerDataRadarOverlay : public GuiElement
 {
 public:

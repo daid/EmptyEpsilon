@@ -45,7 +45,7 @@ void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
         f = (1.0f - noise[2]) * f + noise[2] * random(-1.0, 1.0);
         b.emplace_back(rect.position.x + 4.0f + n * 4, rect.position.y + rect.size.y / 2.0f + f * amp);
     }
-    renderer.drawLineBlendAdd(r, glm::u8vec4(255, 0, 0, 255));
-    renderer.drawLineBlendAdd(g, glm::u8vec4(0, 255, 0, 255));
-    renderer.drawLineBlendAdd(b, glm::u8vec4(0, 0, 255, 255));
+    renderer.drawLineBlendAdd(r, glm::u8vec4(255, 45, 84, 255)); // red
+    renderer.drawLineBlendAdd(g, glm::u8vec4(65, 255, 81, 255)); // green
+    renderer.drawLineBlendAdd(b, glm::u8vec4(70, 120, 255, 255)); // blue
 }
