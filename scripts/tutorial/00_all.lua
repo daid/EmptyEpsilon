@@ -28,12 +28,12 @@ addToSequence(mainscreenTutorial, function() tutorial:switchViewToMainScreen() e
 addToSequence(mainscreenTutorial, _([[This is the main screen, which displays your ship and the surrounding space.
 While you cannot move the ship from this screen, you can use it to visually identify objects.]]))
 
+
 radarTutorial = createSequence()
 addToSequence(radarTutorial, function() tutorial:switchViewToLongRange() end)
 addToSequence(radarTutorial, _([[Welcome to the long-range radar. This radar can detect objects up to 30u from your ship, depicted at the radar's center. This radar allows you to quickly identify distant objects.]]))
-addToSequence(radarTutorial, function() prev_object = Asteroid():setPosition(5000, 0) end)
-addToSequence(radarTutorial, _([[To the right of your ship is a brown dot. This is an asteroid.
-Asteroid impacts will damage your ship, so avoid hitting them.]]))
+addToSequence(radarTutorial, function() prev_object = Asteroid():setPosition(5000, 0):setSize(243) end)
+addToSequence(radarTutorial, _([[This is an asteroid. Flying into an asteroid will damage your ship, so avoid hitting them.]]))
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object = Mine():setPosition(5000, 0) end)
 addToSequence(radarTutorial, _([[The white dot is a mine. When you move near a mine, it explodes with a powerful 1u-radius blast. Striking a mine while your shields are down will surely destroy your ship.]]))
@@ -41,7 +41,7 @@ addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(5000, 0) end)
 addToSequence(radarTutorial, function() prev_object2 = SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setPosition(5000, 5000) end)
 addToSequence(radarTutorial, function() prev_object3 = SpaceStation():setTemplate("Huge Station"):setFaction("Kraylor"):setPosition(5000, -5000) end)
-addToSequence(radarTutorial, _([[This large dot is a station. Stations can be several different sizes and belong to different factions. The dot's color indicates whether the station is friendly (green), neutral (light blue), or hostile (red).]]))
+addToSequence(radarTutorial, _([[These are stations. Stations can be several different sizes and belong to different factions. Their color indicates whether the station is friendly (green), neutral (light blue), or hostile (red).]]))
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object2:destroy() end)
 addToSequence(radarTutorial, function() prev_object3:destroy() end)
@@ -98,7 +98,7 @@ addToSequence(helmsTutorial, function() prev_object:destroy() end)
 addToSequence(helmsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(-1500, 1500):orderIdle():setScanned(true):setHull(15):setShieldsMax(15) end)
 addToSequence(helmsTutorial, function() player:commandSetTarget(prev_object) end)
 addToSequence(helmsTutorial, _([[Ok, there are just a few more things that you need to know.
-Remember those beam weapons? As helms officer, it is your task to keep those beams on your target.
+See the red arcs coming from your ship? Those are your beam weapons. As helms officer, it is your task to keep those beams on your target.
 I've set up an stationary enemy ship as a target. Destroy it with your beam weapons. Note that at every shot, the corresponding firing arc will change color.]]), function() return not prev_object:isValid() end)
 addToSequence(helmsTutorial, _([[Aggression is not always the solution, but boy, it is fun!
 
