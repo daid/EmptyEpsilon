@@ -58,7 +58,7 @@ void Mine::draw3DTransparent()
 
 void Mine::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    renderer.drawSprite("radar/mine.png", position, 0.5 * 32, data.color);
+    renderer.drawSprite("radar/mine.png", position, 0.4 * 32, data.color);
 }
 
 void Mine::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
