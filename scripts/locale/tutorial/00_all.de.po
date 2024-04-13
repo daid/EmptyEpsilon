@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 # Scenario name
 msgid "Run All"
@@ -31,7 +31,7 @@ msgstr ""
 "darstellt. Von hier aus kannst du das Schiff nicht steuern, aber visuell "
 "Objekte identifizieren."
 
-#: scripts/tutorial/00_all.lua:33
+#: scripts/tutorial/00_all.lua:34
 msgid ""
 "Welcome to the long-range radar. This radar can detect objects up to 30u "
 "from your ship, depicted at the radar's center. This radar allows you to "
@@ -41,13 +41,12 @@ msgstr ""
 "30u erfassen, wobei das Schiff in der Radarmitte dargestellt wird. Dieses "
 "Radar erlaubt dir, schnell entfernte Objekte zu identifizieren."
 
-#: scripts/tutorial/00_all.lua:35
+#: scripts/tutorial/00_all.lua:36
 msgid ""
-"To the right of your ship is a brown dot. This is an asteroid.\n"
-"Asteroid impacts will damage your ship, so avoid hitting them."
+"This is an asteroid. Flying into an asteroid will damage your ship, so avoid "
+"hitting them."
 msgstr ""
-"Rechterhand des Schiffes ist ein brauner Punkt zu erkennen. Dies ist ein "
-"Asteroid.\n"
+"Dies ist ein Asteroid.\n"
 "Kollisionen mit Asteroiden können das Schiff beschädigen, daher solltest du "
 "diese vermeiden."
 
@@ -63,9 +62,9 @@ msgstr ""
 
 #: scripts/tutorial/00_all.lua:44
 msgid ""
-"This large dot is a station. Stations can be several different sizes and "
-"belong to different factions. The dot's color indicates whether the station "
-"is friendly (green), neutral (light blue), or hostile (red)."
+"These are stations. Stations can be several different sizes and belong to "
+"different factions. Their color indicates whether the station is friendly "
+"(green), neutral (light blue), or hostile (red)."
 msgstr ""
 "Dies sind Raumstationen. Raumstationen können in verschiedenen Größen "
 "vorkommen und unterschiedlichen Fraktionen angehören. Die Farbe des Symbols "
@@ -110,7 +109,7 @@ msgstr ""
 "Schiffstyp hat eine andere Konfiguration der Laserwaffen, mit "
 "unterschiedlichen Reichweite und Anordnung."
 
-#: scripts/tutorial/00_all.lua:75
+#: scripts/tutorial/00_all.lua:76
 msgid ""
 "This is the helms screen.\n"
 "As the helms officer, you command your ship's movement in space."
@@ -119,7 +118,7 @@ msgstr ""
 "Als Steuerperson bist du für die Bewegung des Schiffes im Raum "
 "verantwortlich."
 
-#: scripts/tutorial/00_all.lua:78
+#: scripts/tutorial/00_all.lua:79
 msgid ""
 "Your primary controls are your impulse engines and maneuvering thrusters.\n"
 "Your impulse controls are on the left side of the screen.\n"
@@ -131,7 +130,7 @@ msgstr ""
 "\n"
 "Setze den Impulsantrieb auf 100%, um das Schiff vorwärts zu bewegen.."
 
-#: scripts/tutorial/00_all.lua:83
+#: scripts/tutorial/00_all.lua:84
 msgid ""
 "Good. You now know how to move forward.\n"
 "\n"
@@ -148,7 +147,7 @@ msgstr ""
 "diese Richtung zu drehen.\n"
 "Versuche nun, das Schiff in Richtung 200 Grad auszurichten."
 
-#: scripts/tutorial/00_all.lua:90
+#: scripts/tutorial/00_all.lua:91
 msgid ""
 "Excellent!\n"
 "\n"
@@ -169,7 +168,7 @@ msgstr ""
 "ab.\n"
 "Nähere dich nun der Station und fordere eine Andockerlaubnis an."
 
-#: scripts/tutorial/00_all.lua:95
+#: scripts/tutorial/00_all.lua:96
 msgid ""
 "Now that you are docked, your movement is locked. As helms officer, there is "
 "nothing else you can do but undock, so do that now."
@@ -178,22 +177,23 @@ msgstr ""
 "Steuerperson gibt es nichts was du im Moment tun kannst - außer abzudocken. "
 "Daher wähle nun \"abdocken\"."
 
-#: scripts/tutorial/00_all.lua:99
+#: scripts/tutorial/00_all.lua:100
 msgid ""
 "Ok, there are just a few more things that you need to know.\n"
-"Remember those beam weapons? As helms officer, it is your task to keep those "
-"beams on your target.\n"
+"See the red arcs coming from your ship? Those are your beam weapons. As "
+"helms officer, it is your task to keep those beams on your target.\n"
 "I've set up an stationary enemy ship as a target. Destroy it with your beam "
 "weapons. Note that at every shot, the corresponding firing arc will change "
 "color."
 msgstr ""
 "Okay, Es gibt noch ein paar Dinge die du wissen solltest.\n"
-"Erinnerst du dich an die Laserwaffen? An der Steuerkonsole ist es dein Job, "
-"diese Strahlen auf das Ziel ausgerichtet zu halten.\n"
+"Siehst du die roten Bögen, an deinem Schiff? Diese zeigen die Reichweite der "
+"Laser des Schiffs an. An der Steuerkonsole ist es dein Job, diesen auf das "
+"Ziel ausgerichtet zu halten.\n"
 "Ich habe nun ein stationäres feindliches Schiff als Ziel erfasst. Zerstöre "
 "es mit den Lasern."
 
-#: scripts/tutorial/00_all.lua:102
+#: scripts/tutorial/00_all.lua:103
 msgid ""
 "Aggression is not always the solution, but boy, it is fun!\n"
 "\n"
@@ -212,7 +212,7 @@ msgstr ""
 "Der Warpantrieb bewegt das Schiff mit hoher Geschwindigkeit, während dich "
 "der Sprungantrieb direkt zu einem Weit entfernten Punkt teleportiert."
 
-#: scripts/tutorial/00_all.lua:108
+#: scripts/tutorial/00_all.lua:109
 msgid ""
 "First, let us try the warp drive.\n"
 "\n"
@@ -226,7 +226,7 @@ msgstr ""
 "vorwärts bewegen und verbraucht wesentlich mehr Energie.\n"
 "Nutze den Warpantrieb um dich mehr als 30u vom Startpunkt zu entfernen."
 
-#: scripts/tutorial/00_all.lua:113
+#: scripts/tutorial/00_all.lua:114
 msgid ""
 "Next, let us demonstrate the jump drive.\n"
 "\n"
@@ -243,7 +243,7 @@ msgstr ""
 "Sprungantrieb, um dich in beliebiger Richtung mehr als 30u vom Startpunkt "
 "wegzubewegen."
 
-#: scripts/tutorial/00_all.lua:116
+#: scripts/tutorial/00_all.lua:117
 msgid ""
 "Notice how your jump drive needs to recharge after use.\n"
 "\n"
@@ -253,7 +253,7 @@ msgstr ""
 "\n"
 "Damit kennst du die Grundlagen zur Benutzung der Steuerkonsole."
 
-#: scripts/tutorial/00_all.lua:131
+#: scripts/tutorial/00_all.lua:132
 msgid ""
 "This is the weapons screen.\n"
 "As the weapons officer, you are responsible for targeting beam weapons, "
@@ -263,7 +263,7 @@ msgstr ""
 "Als Waffenoffizier:in bist du für die Zielerfassung der Laserwaffen und "
 "Raketen, das Laden und abfeuern von Raketen, sowie für die Schilde zuständig."
 
-#: scripts/tutorial/00_all.lua:134
+#: scripts/tutorial/00_all.lua:135
 msgid ""
 "Your most fundamental task is to target your ship's weapons.\n"
 "Your beam weapons only fire at your selected target, and homing missiles "
@@ -277,19 +277,19 @@ msgstr ""
 "\n"
 "Erfasse das Schiff vor dir, indem du es anwählst."
 
-#: scripts/tutorial/00_all.lua:138
+#: scripts/tutorial/00_all.lua:139
 msgid ""
 "Good! Notice that your beam weapons did not fire on this ship until you "
 "targeted it.\n"
 "\n"
 "Next up: shield controls."
 msgstr ""
-"Gut! Denke daran, dass die Laserwaffen nicht auf das Schiff feuern bevor es "
+"Gut! Denke daran, dass die Laserwaffen nicht auf das Schiff feuern, bevor es "
 "als Ziel erfasst ist.\n"
 "\n"
 "Nächster Schritt: Schildkontrolle."
 
-#: scripts/tutorial/00_all.lua:143
+#: scripts/tutorial/00_all.lua:144
 msgid ""
 "As you might notice, you are being shot at. Do not worry, you cannot die "
 "right now.\n"
@@ -302,7 +302,7 @@ msgstr ""
 "Allerdings bekommst du Schaden - aktiviere also die Schilde, um dich zu "
 "schützen."
 
-#: scripts/tutorial/00_all.lua:158
+#: scripts/tutorial/00_all.lua:159
 msgid ""
 "Shields protect your ship from direct damage, but they cost extra energy to "
 "maintain, can take only a limited amount of damage, and are slow to "
@@ -317,7 +317,7 @@ msgstr ""
 "\n"
 "Deaktiviere die Schilde um fortzufahren."
 
-#: scripts/tutorial/00_all.lua:162
+#: scripts/tutorial/00_all.lua:163
 msgid ""
 "While only a single button, your shields are vital for survival. They "
 "protect against all kinds of damage, including beam weapons, missiles, "
@@ -331,7 +331,7 @@ msgstr ""
 "\n"
 "Als nächstes beginnt die Action so richtig: Raketen."
 
-#: scripts/tutorial/00_all.lua:173
+#: scripts/tutorial/00_all.lua:174
 msgid ""
 "You have 1 homing missile in your missile storage now, and 1 weapon tube.\n"
 "You can load this missile into your weapon tube. Depending on your ship "
@@ -349,62 +349,102 @@ msgstr ""
 "dann den Laden-Knopf betätigst. Du wirst sehen, dass das Beladen etwas Zeit "
 "braucht."
 
-#: scripts/tutorial/00_all.lua:178
+#: scripts/tutorial/00_all.lua:179
 msgid "Great! Now fire this missile by clicking on the tube."
 msgstr ""
 "Sehr gut! Nun feuere die Rakete ab, indem du auf die Schaltfläche für den "
 "Raketenschacht drückst."
 
-#: scripts/tutorial/00_all.lua:179
+#: scripts/tutorial/00_all.lua:180
 msgid "Missile away!"
 msgstr "Feuer frei!"
 
-#: scripts/tutorial/00_all.lua:182
+#: scripts/tutorial/00_all.lua:185
 msgid ""
-"BOOM! That was just firing straight ahead, but you can also aim missiles.\n"
+"BOOM! That was just firing straight ahead, but missiles also have a homing "
+"feature, so let's try that!\n"
 "\n"
-"First, unlock your aim by pressing the [Lock] button above the radar view.\n"
-"Next, aim your missiles with the aiming dial surrounding the radar.\n"
-"Point the aiming dial at the next ship, load a missile, and fire."
+"First, load a homing missile in the tube.\n"
+"Next, target the enemy ship by pressing it to guide your homing missiles "
+"toward your selected target.\n"
+"Then fire your missile!"
 msgstr ""
-"BOOM! Das war einfach ein gerader Schuss, doch du kannst auch zielen.\n"
-"\n"
-"Zuerst entsperre den Sucher, indem du den [Auto]-Knopf über dem Radar "
-"betätigst.\n"
-"Als nächstes ziele mit dem Zielrad, welches das Radar umgibt.\n"
-"Richte das Zielrad auf das nächste Schiff aus, lade eine Rakete, und feuere "
-"sie ab."
+"Boom! Das war eben einfach ein gerader Schuss, aber Raketen haben auch eine "
+"Zielsuchfähigkeit.\n"
+"Lade nun eine Rakete in den Schacht.\n"
+"Dann erfasse das das Ziel indem du es anklickst, damit die Raketen "
+"automatisch das Ziel anfliegen.\n"
+"Feuere dann die Rakete ab!"
 
-#: scripts/tutorial/00_all.lua:193
+#: scripts/tutorial/00_all.lua:195
 msgid ""
-"Perfect aim!\n"
-"\n"
-"The next ship is behind you. Target the ship by pressing it to guide your "
-"homing missiles toward your selected target.\n"
 "While not necessary against a stationary target, this homing ability can "
 "make all the difference against a moving target."
 msgstr ""
-"Perfekter Schuss!\n"
-"\n"
-"Das nächste Schiff befindet sich hinter dir. Erfasse das Schiff in dem du "
-"darauf klickst. Damit leitest du die Zielsuchraketen zum gewählten Ziel..\n"
 "Auch wenn es bei einem stationären Ziel unnötig ist, kann diese "
 "Zielsuchfähigkeit bei bewegten Zielen entscheidend sein."
 
-#: scripts/tutorial/00_all.lua:204
+#: scripts/tutorial/00_all.lua:199
 msgid ""
-"In addition to homing missiles, your ship might have nukes, EMPs, and mines. "
-"Nukes and EMPs have the same features as homing missiles, but have a 1u-"
-"radius blast and do much more damage. EMPs damage only shields, and thus are "
-"great for weakening heavily shielded enemies."
+"You can also manually aim missiles.\n"
+"\n"
+"First, unlock your aim by pressing the [Lock] button above the radar view.\n"
+"Load a missile to view your missile's trajectory.\n"
+"Next, aim your missiles with the aiming dial surrounding the radar.\n"
+"Point the aiming dial at the next ship and fire."
 msgstr ""
-"Zusätzlich zu Zielsuchraketen kann dein Schiff auch Nukes, EMPs und Minen "
-"besitzen. Nukes und EMPs funktionieren wie Zielsuchraketen, allerdings "
-"explodieren sie in einem Radius von 1u und machen mehr Schaden. EMPs "
-"beschädigen ausschließlich Schilde, und sind daher perfekt um Schiffe mit "
-"starken Schilden zu schwächen."
+"Du kannst auch manuell zielen.\n"
+"\n"
+"Zuerst entsperre den Sucher, indem du den [Auto]-Knopf über dem Radar "
+"betätigst.\n"
+"Lade eine Rakete um die Flugbahn anzuzeigen\n"
+"Als nächstes ziele mit dem Zielrad, welches das Radar umgibt.\n"
+"Richte das Zielrad auf das andere Schiff aus, und feuere die Rakete ab."
 
-#: scripts/tutorial/00_all.lua:212
+#: scripts/tutorial/00_all.lua:213
+msgid ""
+"Perfect aim! The next ship is behind you. Notice how it's out of reach when "
+"you try to aim manually and, if you only use the homing ability, the "
+"trajectory won't reach the enemy. Manually aiming and the missile's homing "
+"ability aren't mutually exclusive to one another. You can hit the ship if "
+"you put the two abilities together.\n"
+"\n"
+"First, make sure your aim is unlocked and aim your missile as close to the "
+"enemy as you can.\n"
+"Next, target the enemy ship by pressing it.\n"
+"Then fire! The missile will first follow your manually-aimed trajectory, and "
+"then start homing in on the enemy.\n"
+msgstr ""
+"Guter Schuss! Das nächste Schiff befindet sich hinter dir. Wie du sehen "
+"wirst, erreichst du es nicht ganz, wenn du versuchst manuell zu zielen. Die "
+"automatische Zielsuchfähigkeit alleine wird es ebenfalls nicht erreichen. Du "
+"kannst das Schiff aber treffen, indem du beides miteinander kombinierst.\n"
+"Nutze zuerst das manuelle Zielen, und richte die Flugbahn so nahe wie "
+"möglich am Ziel aus. Dann erfasse das Ziel indem du es anklickst\n"
+"Feuere dann die Rakete ab! Sie wird zunächst der vorgegebenen Flugbahn "
+"folgen, und dann das Ziel ansteuern.\n"
+
+#: scripts/tutorial/00_all.lua:228
+msgid ""
+"In addition to homing missiles, your ship might have HVLIs, nukes, EMPs, and "
+"mines.\n"
+"HVLI stands for \"High Velocity Lead Impactor\". They fire in straight lines "
+"and do not have homing abilities.\n"
+"Nukes and EMPs also have homing abilities and have a 1u-radius blast and do "
+"more damage.\n"
+"EMPs damage only shields, and thus are great for weakening heavily shielded "
+"enemies."
+msgstr ""
+"Zusätzlich zu Zielsuchraketen kann dein Schiff auch HGBIs, Nukes, EMPs und "
+"Minen besitzen. \n"
+"HGBI steht für Hochgeschwindigkeits-Blei-Impaktor, sie feuern in einer "
+"geraden Linie und haben keine Zielsuchfähigkeit.\n"
+"Nukes und EMPs funktionieren wie Zielsuchraketen, allerdings explodieren sie "
+"in einem Radius von 1u und machen mehr Schaden. EMPs beschädigen "
+"ausschließlich Schilde, und sind daher perfekt um Schiffe mit starken "
+"Schilden zu schwächen."
+
+#: scripts/tutorial/00_all.lua:239
 msgid ""
 "Welcome to engineering.\n"
 "Engineering is split into two parts. The top part shows your ship's "
@@ -416,7 +456,7 @@ msgstr ""
 "Innere des Schiffs, inklusive der Standorte der Reparaturteams.\n"
 "Der untere Teil steuert Energiezufuhr und Kühlung der Schiffssysteme."
 
-#: scripts/tutorial/00_all.lua:217
+#: scripts/tutorial/00_all.lua:244
 msgid ""
 "First, we will explain your control over your ship's systems.\n"
 "Each row on the bottom area of the screen represents one of your ship's "
@@ -437,7 +477,7 @@ msgstr ""
 "Warpsystem leitest. Wähle das Warpsystem aus und schiebe den Kühlmittel-"
 "Regler nach oben."
 
-#: scripts/tutorial/00_all.lua:222
+#: scripts/tutorial/00_all.lua:249
 msgid ""
 "I've also overheated the impulse system. As before, increase the system's "
 "coolant level to mitigate the effect. Note that the warp system's coolant "
@@ -455,7 +495,7 @@ msgstr ""
 "Dies liegt daran, dass nur eine begrenzte Menge an Kühlflüssigkeit zur "
 "Verfügung steht, die auf die einzelnen Systeme verteilt werden kann."
 
-#: scripts/tutorial/00_all.lua:225
+#: scripts/tutorial/00_all.lua:252
 msgid ""
 "Good! Next up: power levels.\n"
 "You can manage each system's power level independently. Adding power to a "
@@ -473,7 +513,7 @@ msgstr ""
 "\n"
 "Erhöhe nun die Leistung der Frontschilde auf Maximum."
 
-#: scripts/tutorial/00_all.lua:229
+#: scripts/tutorial/00_all.lua:256
 msgid ""
 "The added power increases the amount of heat in the system.\n"
 "\n"
@@ -483,7 +523,7 @@ msgstr ""
 "\n"
 "Warte, bis das System überhitzt."
 
-#: scripts/tutorial/00_all.lua:234
+#: scripts/tutorial/00_all.lua:261
 msgid ""
 "Note that as the system overheats, it takes damage. Because the system is "
 "damaged, it functions less effectively.\n"
@@ -497,11 +537,11 @@ msgstr ""
 "Systeme können ebenfalls beschädigt werden, wenn das Schiff getroffen wird "
 "und die Schilde unten sind."
 
-#: scripts/tutorial/00_all.lua:238
+#: scripts/tutorial/00_all.lua:265
 msgid "In this top area, you see your damage control teams in your ship."
 msgstr "Im oberen Bereich siehst du die Reparaturteams auf dem Schiff."
 
-#: scripts/tutorial/00_all.lua:239
+#: scripts/tutorial/00_all.lua:266
 msgid ""
 "The front shield system is damaged, as indicated by the color of this room's "
 "outline.\n"
@@ -517,7 +557,7 @@ msgstr ""
 "zu veranlassen.\n"
 "(Dies wird einen Moment dauern.)"
 
-#: scripts/tutorial/00_all.lua:244
+#: scripts/tutorial/00_all.lua:271
 msgid ""
 "Good. Now you know your most important tasks. Next, we'll go over each "
 "system's function in detail.\n"
@@ -531,7 +571,7 @@ msgstr ""
 "arbeitet schlechter wenn es Schaden nimmt. Deine Aufgabe ist es, die "
 "wichtigen System so gut wie möglich am laufen zu halten."
 
-#: scripts/tutorial/00_all.lua:246
+#: scripts/tutorial/00_all.lua:273
 msgid ""
 "Reactor:\n"
 "\n"
@@ -543,7 +583,7 @@ msgstr ""
 "Der Reaktor erzeugt Energie. Wenn du die Leistung des Reaktors erhöhst, wird "
 "die Energieproduktion gesteigert."
 
-#: scripts/tutorial/00_all.lua:249
+#: scripts/tutorial/00_all.lua:276
 msgid ""
 "Beam Weapons:\n"
 "\n"
@@ -557,7 +597,7 @@ msgstr ""
 "verursachenden Schaden.\n"
 "Beachte: Jeder abgefeuerte Strahl erhöht zusätzlich die Wärme des Systems."
 
-#: scripts/tutorial/00_all.lua:253
+#: scripts/tutorial/00_all.lua:280
 msgid ""
 "Missile System:\n"
 "\n"
@@ -567,7 +607,7 @@ msgstr ""
 "\n"
 "Eine höhere Systemleistung senkt die Ladezeiten für die Raketenschächte."
 
-#: scripts/tutorial/00_all.lua:256
+#: scripts/tutorial/00_all.lua:283
 msgid ""
 "Maneuvering:\n"
 "\n"
@@ -579,7 +619,7 @@ msgstr ""
 "Eine höhere Leistung der Manövrierdüsen lässt das Schiff sich schneller "
 "drehen. Außerdem reduziert sich die Aufladezeit des Flugmanöversystems."
 
-#: scripts/tutorial/00_all.lua:259
+#: scripts/tutorial/00_all.lua:286
 msgid ""
 "Impulse Engines:\n"
 "\n"
@@ -589,7 +629,7 @@ msgstr ""
 "\n"
 "Mehr Leistung in diesem System erhöht die Fluggeschwindigkeit bei Impuls."
 
-#: scripts/tutorial/00_all.lua:262
+#: scripts/tutorial/00_all.lua:289
 msgid ""
 "Warp Drive:\n"
 "\n"
@@ -600,7 +640,7 @@ msgstr ""
 "Ähnlich wie bei Impuls, ermöglicht eine höhere Leistung in diesem System "
 "höhere Warpgeschwindigkeiten."
 
-#: scripts/tutorial/00_all.lua:265
+#: scripts/tutorial/00_all.lua:292
 msgid ""
 "Jump Drive:\n"
 "\n"
@@ -612,7 +652,7 @@ msgstr ""
 "Ein Sprungantrieb mit mehr Leistung lädt sich schneller wieder auf und "
 "reduziert die sonst üblichen 10 Sekunden bis zum Sprung."
 
-#: scripts/tutorial/00_all.lua:268
+#: scripts/tutorial/00_all.lua:295
 msgid ""
 "Shields:\n"
 "\n"
@@ -624,7 +664,7 @@ msgstr ""
 "Mehr Leistung auf den Schilden reduziert ihre Aufladezeit, sowie die "
 "Schwächung der Schilde bei einem Treffer."
 
-#: scripts/tutorial/00_all.lua:271
+#: scripts/tutorial/00_all.lua:298
 msgid ""
 "This concludes the overview of the engineering station. Be sure to keep your "
 "ship running in top condition!"
@@ -632,7 +672,7 @@ msgstr ""
 "Damit wären wir am Ende der Übersicht zu dieser Konsole angelangt. Halte das "
 "Schiff in einem guten Zustand!"
 
-#: scripts/tutorial/00_all.lua:279
+#: scripts/tutorial/00_all.lua:306
 msgid ""
 "Welcome, science officer.\n"
 "\n"
@@ -646,7 +686,7 @@ msgstr ""
 "Crew mit Informationen zu versorgen. Von deiner Station aus kannst du in "
 "einem Radius von 30U Objekte erfassen und scannen."
 
-#: scripts/tutorial/00_all.lua:284 scripts/tutorial/00_all.lua:370
+#: scripts/tutorial/00_all.lua:311 scripts/tutorial/00_all.lua:397
 msgid ""
 "On this radar, you can select objects to get information about them.\n"
 "I've added a friendly ship and a station for you to examine. Select them and "
@@ -662,7 +702,7 @@ msgstr ""
 "Richtung und Entfernung sind besonders wichtig, denn ohne diese Infos müsste "
 "der Pilot einen Sprung ins Ungewisse machen."
 
-#: scripts/tutorial/00_all.lua:289 scripts/tutorial/00_all.lua:375
+#: scripts/tutorial/00_all.lua:316 scripts/tutorial/00_all.lua:402
 msgid ""
 "I've replaced the friendly station with an unknown ship. Once you select it, "
 "notice that you know nothing about this ship.\n"
@@ -676,7 +716,7 @@ msgstr ""
 "musst du die Frequenzen des Scanners an die Zielfrequenz angleichen.\n"
 "Scanne nun das Schiff."
 
-#: scripts/tutorial/00_all.lua:292 scripts/tutorial/00_all.lua:378
+#: scripts/tutorial/00_all.lua:319 scripts/tutorial/00_all.lua:405
 msgid ""
 "Good. Notice that you now know this ship is unfriendly. It might have been a "
 "friendly or neutral ship as well, but until you scanned it, you do not know."
@@ -685,7 +725,7 @@ msgstr ""
 "neutral sein können, aber bevor du es gescannt hast, konntest du das nicht "
 "wissen."
 
-#: scripts/tutorial/00_all.lua:293 scripts/tutorial/00_all.lua:379
+#: scripts/tutorial/00_all.lua:320 scripts/tutorial/00_all.lua:406
 msgid ""
 "Note that you have less information about this ship than the friendly ship. "
 "You must perform a deep scan of this ship to acquire more information.\n"
@@ -699,7 +739,7 @@ msgstr ""
 "Führe nun einen Tiefenscan bei dem feindlichen Schiff durch, indem du ein "
 "zweites Mal scannst."
 
-#: scripts/tutorial/00_all.lua:296 scripts/tutorial/00_all.lua:382
+#: scripts/tutorial/00_all.lua:323 scripts/tutorial/00_all.lua:409
 msgid ""
 "Excellent. Notice that this took more time and concentration than the simple "
 "scan, so be careful to perform deep scans only when necessary or you could "
@@ -709,7 +749,7 @@ msgstr ""
 "ein einfacher Scan. Achte also darauf, Tiefenscans nur durchzuführen wenn es "
 "nötig ist, um nicht zu viel Zeit zu verlieren."
 
-#: scripts/tutorial/00_all.lua:300 scripts/tutorial/00_all.lua:386
+#: scripts/tutorial/00_all.lua:327 scripts/tutorial/00_all.lua:413
 msgid ""
 "Next to the long-range radar, the science station can also access the "
 "science database.\n"
@@ -723,7 +763,7 @@ msgstr ""
 "In dieser Datenbank kannst du detaillierte Information zu Dingen wie "
 "Schiffstypen, Waffen, und anderen Objekten abrufen."
 
-#: scripts/tutorial/00_all.lua:303 scripts/tutorial/00_all.lua:389
+#: scripts/tutorial/00_all.lua:330 scripts/tutorial/00_all.lua:416
 msgid ""
 "Remember, your job is to supply information. Knowing the location and status "
 "of other ships is vital to your captain.\n"
@@ -736,7 +776,7 @@ msgstr ""
 "\n"
 "Ohne deine Informationen ist die Crew größtenteils blind."
 
-#: scripts/tutorial/00_all.lua:313
+#: scripts/tutorial/00_all.lua:340
 msgid ""
 "Welcome to relay!\n"
 "\n"
@@ -750,7 +790,7 @@ msgstr ""
 "hast du Zugriff auf die Kurzstreckendaten befreundeter Schiffe und Stationen "
 "und kannst Navigationspunkte setzen sowie Sonden starten."
 
-#: scripts/tutorial/00_all.lua:316
+#: scripts/tutorial/00_all.lua:343
 msgid ""
 "Your first responsibility is to coordinate the ship's communications.\n"
 "\n"
@@ -764,34 +804,34 @@ msgstr ""
 "Kommunikationsversuch starten. Andere Schiffe können ebenfalls versuchen mit "
 "dir zu kommunizieren."
 
-#: scripts/tutorial/00_all.lua:322 scripts/tutorial/00_all.lua:398
+#: scripts/tutorial/00_all.lua:349 scripts/tutorial/00_all.lua:425
 msgid "You successfully opened communications. Congratulations."
 msgstr "Glückwunsch, du hast erfolgreich einen Kommunikationskanal geöffnet."
 
-#: scripts/tutorial/00_all.lua:323 scripts/tutorial/00_all.lua:399
+#: scripts/tutorial/00_all.lua:350 scripts/tutorial/00_all.lua:426
 msgid "Tell me more!"
 msgstr "Erzählen Sie mir mehr!"
 
-#: scripts/tutorial/00_all.lua:324 scripts/tutorial/00_all.lua:400
+#: scripts/tutorial/00_all.lua:351 scripts/tutorial/00_all.lua:427
 msgid "Sorry, there's nothing more to tell you."
 msgstr "Es tut mir leid, es gibt nichts weiteres zu sagen."
 
-#: scripts/tutorial/00_all.lua:326 scripts/tutorial/00_all.lua:402
+#: scripts/tutorial/00_all.lua:353 scripts/tutorial/00_all.lua:429
 msgid "Continue with the tutorial."
 msgstr "Fahre mit dem Tutorial fort."
 
-#: scripts/tutorial/00_all.lua:327 scripts/tutorial/00_all.lua:403
+#: scripts/tutorial/00_all.lua:354 scripts/tutorial/00_all.lua:430
 msgid ""
 "The tutorial will continue when you close communications with this station."
 msgstr ""
 "Das Tutorial wird fortgesetzt, sobald du die Kommunikation mit der Station "
 "beendest."
 
-#: scripts/tutorial/00_all.lua:331 scripts/tutorial/00_all.lua:407
+#: scripts/tutorial/00_all.lua:358 scripts/tutorial/00_all.lua:434
 msgid "Open communications with the station near you to continue the tutorial."
 msgstr "Öffne nun einen Kommunikationskanal zu der Station in deiner Nähe."
 
-#: scripts/tutorial/00_all.lua:333 scripts/tutorial/00_all.lua:409
+#: scripts/tutorial/00_all.lua:360 scripts/tutorial/00_all.lua:436
 msgid "Now finish your talk with the station."
 msgstr ""
 "Nun beende dein Gespräch mit der Station. Abhängig vom Szenario hast du "
@@ -801,7 +841,7 @@ msgstr ""
 "Waffenvorräte aufstocken. All dies ist Teil der Aufgaben als "
 "Kommunikationsoffizier."
 
-#: scripts/tutorial/00_all.lua:336 scripts/tutorial/00_all.lua:412
+#: scripts/tutorial/00_all.lua:363 scripts/tutorial/00_all.lua:439
 msgid ""
 "Depending on the scenario, you might have different options when "
 "communicating with stations.\n"
@@ -816,7 +856,7 @@ msgstr ""
 "Waffenvorräte aufstocken. All dies ist Teil der Aufgaben als "
 "Kommunikationsoffizier:in."
 
-#: scripts/tutorial/00_all.lua:342
+#: scripts/tutorial/00_all.lua:369
 msgid ""
 "Your station also includes this radar map.\n"
 "\n"
@@ -832,7 +872,7 @@ msgstr ""
 "andere ist für dich nicht sichtbar. Dadurch hast du eine andere Ansicht als "
 "die Wissenschafts-Station, auch da du die Inhalte von Nebeln scannen kannst."
 
-#: scripts/tutorial/00_all.lua:345
+#: scripts/tutorial/00_all.lua:372
 msgid ""
 "Finally, you control your ship's probes. Probes can expand your radar view. "
 "Launch a probe to the top right, toward the ship designated DMY-01."
@@ -841,7 +881,7 @@ msgstr ""
 "Radaransicht erweitern. Starte eine Sonde nach rechts oben, in Richtung des "
 "Schiffes mit der Identifikationsnummer DMY-01."
 
-#: scripts/tutorial/00_all.lua:356
+#: scripts/tutorial/00_all.lua:383
 msgid ""
 "Probes can expand your sensory capabilities beyond your normal range and "
 "explore nebulae. However, you have a limited supply of them and can't "
@@ -851,7 +891,7 @@ msgstr ""
 "ist ihr Vorrat begrenzt und kann nur wieder aufgefüllt werden, wenn du an "
 "einer Station andockst."
 
-#: scripts/tutorial/00_all.lua:365
+#: scripts/tutorial/00_all.lua:392
 msgid ""
 "Welcome, operations officer.\n"
 "\n"
@@ -865,7 +905,7 @@ msgstr ""
 "Crew mit Informationen zu versorgen. Von deiner Station aus kannst du in "
 "einem Radius von 30U Objekte erfassen und scannen."
 
-#: scripts/tutorial/00_all.lua:392
+#: scripts/tutorial/00_all.lua:419
 msgid ""
 "Your second responsibility is to coordinate the ship's communications.\n"
 "\n"
@@ -879,7 +919,7 @@ msgstr ""
 "Kommunikationsversuch starten. Andere Schiffe können ebenfalls versuchen mit "
 "dir zu kommunizieren."
 
-#: scripts/tutorial/00_all.lua:418
+#: scripts/tutorial/00_all.lua:445
 msgid ""
 "This concludes the tutorial. While we have covered the basics, there are "
 "more advanced features in the game that you might discover."
