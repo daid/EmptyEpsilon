@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-04-18 18:05+0200\n"
+"PO-Revision-Date: 2024-04-18 19:43+0200\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -851,6 +851,10 @@ msgid ""
 "inputs.\n"
 "Possible inputs: Keyboard keys, joystick buttons, joystick axes."
 msgstr ""
+"Clic gauche : attribue une entrée. Clic du milieu : ajoute une entrée. Clic "
+"droit : supprime une entrée.\n"
+"Saisies possibles : touches du clavier, boutons du joystick, axes du "
+"joystick."
 
 #: src/screens/cinematicViewScreen.cpp:41 src/screens/topDownScreen.cpp:33
 msgctxt "button"
@@ -2546,7 +2550,7 @@ msgstr "Arrière"
 
 #: src/gui/hotkeyBinder.cpp:36
 msgid "[New input]"
-msgstr ""
+msgstr "Nouv. entrée"
 
 #: src/gui/hotkeyConfig.cpp:31
 msgctxt "hotkey_menu"
@@ -3138,7 +3142,6 @@ msgid "Scanning parameter {number} decrease"
 msgstr "Scan niveau {number} vers la gauche"
 
 #: src/gui/hotkeyConfig.cpp:403
-#, fuzzy
 msgctxt "hotkey_Science"
 msgid "Set scanning parameter {number} (joystick)"
 msgstr "Régler scan niveau {number} (joystick)"
@@ -3268,7 +3271,6 @@ msgid "Decrease system power"
 msgstr "Réduire la puissance du système"
 
 #: src/gui/hotkeyConfig.cpp:426
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set system power (joystick)"
 msgstr "Régler puissance système (joystick)"
@@ -3284,10 +3286,9 @@ msgid "Decrease system coolant"
 msgstr "Réduire liquide de refroidissement"
 
 #: src/gui/hotkeyConfig.cpp:429
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set system coolant (joystick)"
-msgstr "Régler le liquide de ref. du système (joystick)"
+msgstr "Régler liq. de ref. système (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:430
 msgctxt "hotkey_Engineering"
@@ -3330,112 +3331,94 @@ msgid "Cancel self-destruct"
 msgstr "Annuler l'autodestruction"
 
 #: src/gui/hotkeyConfig.cpp:439
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set reactor power (joystick)"
 msgstr "Régler puissance réacteur (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:440
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set beam weapon power (joystick)"
-msgstr "Régler puissance faisceaux laser (joystick)"
+msgstr "Régler puissance faisceaux (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:441
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set missile weapon power (joystick)"
-msgstr "Régler puissance système de missiles (joystick)"
+msgstr "Régler puiss. sys. missiles (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:442
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set maneuvering power (joystick)"
-msgstr "1 Sélectionner la manoeuvre"
+msgstr "Régler puissance manœuvre (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:443
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set impulse power (joystick)"
-msgstr "1 Activer les moteurs (joystick)"
+msgstr "Régler puissance moteurs (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:444
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set warp power (joystick)"
-msgstr "1 Activer les moteurs (joystick)"
+msgstr "Régler puiss. vit. lumière (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:445
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set jump drive power (joystick)"
-msgstr "1 Activer les moteurs (joystick)"
+msgstr "Régler puiss. téléportation (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:446
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set front shields power (joystick)"
-msgstr "1 Sélectionner les boucliers avant"
+msgstr "Régler puiss. bouc. avant (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:447
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set rear shields power (joystick)"
-msgstr "1 Activer les moteurs (joystick)"
+msgstr "Régler puiss. bouc. arrière (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:449
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set reactor coolant (joystick)"
-msgstr "1 Activer les moteurs (joystick)"
+msgstr "Régler liq. de ref. réacteur (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:450
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set beam weapon coolant (joystick)"
-msgstr "1 Sélectionner les faisceaux laser"
+msgstr "Régler liq. de ref. faisceaux (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:451
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set missile weapon coolant (joystick)"
-msgstr "1 Sélectionner le système de missiles"
+msgstr "Régler liq. de ref. missiles (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:452
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set maneuvering coolant (joystick)"
-msgstr "1 Sélectionner la manœuvre"
+msgstr "Régler liq. ref. manœuvre (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:453
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set impulse coolant (joystick)"
-msgstr "1 Activer les moteurs (joystick)"
+msgstr "Régler liq. de ref. moteurs (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:454
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set warp coolant (joystick)"
-msgstr "1 Activer les moteurs (joystick)"
+msgstr "Régler liq. ref. vit. lumière (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:455
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set jump drive coolant (joystick)"
-msgstr "1 Activer les moteurs (joystick)"
+msgstr "Régler liq. ref. téléportation (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:456
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set front shields coolant (joystick)"
-msgstr "1 Sélectionner les boucliers avant"
+msgstr "Régler liq. ref. bouc. avant (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:457
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Set rear shields coolant (joystick)"
-msgstr "1 Sélectionner les boucliers arrière"
+msgstr "Régler liq. ref. bouc. arrière (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:459 src/gui/hotkeyConfig.cpp:460
 #: src/gui/hotkeyConfig.cpp:461
