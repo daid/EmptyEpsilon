@@ -570,15 +570,16 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
             bool alt_down = SDL_GetModState() & KMOD_ALT;
             std::vector<sp::ecs::Entity> entities;
-            for(auto [entity, transform] : sp::ecs::Query<sp::Transform>())
+            for(auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
             {
-                if (transform.getPosition().x < std::min(drag_start_position.x, position.x))
+                auto size = physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f;
+                if (transform.getPosition().x + size < std::min(drag_start_position.x, position.x))
                     continue;
-                if (transform.getPosition().x > std::max(drag_start_position.x, position.x))
+                if (transform.getPosition().x - size > std::max(drag_start_position.x, position.x))
                     continue;
-                if (transform.getPosition().y < std::min(drag_start_position.y, position.y))
+                if (transform.getPosition().y + size < std::min(drag_start_position.y, position.y))
                     continue;
-                if (transform.getPosition().y > std::max(drag_start_position.y, position.y))
+                if (transform.getPosition().y - size > std::max(drag_start_position.y, position.y))
                     continue;
                 if (ctrl_down && !entity.hasComponent<PlayerControl>() && !entity.hasComponent<AIController>() && !entity.hasComponent<DockingBay>())
                     continue;
