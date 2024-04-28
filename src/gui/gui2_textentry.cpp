@@ -22,7 +22,8 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
     const auto& back = back_style->get(getState());
     const auto& front = front_style->get(getState());
 
-    renderer.drawStretchedHV(rect, back.size, back.texture, back.color);
+    if (!back.texture.empty())
+        renderer.drawStretchedHV(rect, back.size, back.texture, back.color);
     if (blink_timer.isExpired())
         typing_indicator = !typing_indicator;
 
@@ -36,28 +37,27 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
         d.position += render_offset;
     auto linespacing = front.font->getLineSpacing(32) * text_size / float(32);
 
-    if (focus)
+    float start_x = -1;
+    int selection_min = std::min(selection_start, selection_end);
+    int selection_max = std::max(selection_start, selection_end);
+    for(auto d : prepared.data)
     {
-        float start_x = -1;
-        int selection_min = std::min(selection_start, selection_end);
-        int selection_max = std::max(selection_start, selection_end);
-        for(auto d : prepared.data)
+        if (d.string_offset == selection_end)
         {
-            if (d.string_offset == selection_end)
-            {
-                if (d.position.x > text_rect.size.x)
-                    render_offset.x -= d.position.x - text_rect.size.x;
-                if (d.position.x < 0.0f)
-                    render_offset.x -= d.position.x;
-                if (multiline && d.position.y > text_rect.size.y - linespacing * 0.3f)
-                    render_offset.y -= d.position.y - text_rect.size.y + linespacing * 0.3f;
-                if (multiline && d.position.y < linespacing)
-                    render_offset.y -= d.position.y - linespacing;
-            }
-            if (d.string_offset == selection_min)
-            {
-                start_x = d.position.x;
-            }
+            if (d.position.x > text_rect.size.x)
+                render_offset.x -= d.position.x - text_rect.size.x;
+            if (d.position.x < 0.0f)
+                render_offset.x -= d.position.x;
+            if (multiline && d.position.y > text_rect.size.y - linespacing * 0.3f)
+                render_offset.y -= d.position.y - text_rect.size.y + linespacing * 0.3f;
+            if (multiline && d.position.y < linespacing)
+                render_offset.y -= d.position.y - linespacing;
+        }
+        if (d.string_offset == selection_min)
+        {
+            start_x = d.position.x;
+        }
+        if (focus) {
             if ((d.string_offset == selection_max) || (d.char_code == 0 && start_x > -1.0f))
             {
                 float end_x = d.position.x;
@@ -352,6 +352,18 @@ void GuiTextEntry::onFocusLost()
     SDL_StopTextInput();
 }
 
+void GuiTextEntry::setAttribute(const string& key, const string& value)
+{
+    if (key == "style") {
+        front_style = theme->getStyle(value + ".front");
+        back_style = theme->getStyle(value + ".back");
+    } else if (key == "readonly") {
+        readonly = value.toBool();
+    } else {
+        GuiElement::setAttribute(key, value);
+    }
+}
+
 string GuiTextEntry::getText() const
 {
     return text;
@@ -401,6 +413,11 @@ GuiTextEntry* GuiTextEntry::enterCallback(func_t func)
     return this;
 }
 
+void GuiTextEntry::setCursorPosition(int offset)
+{
+    selection_start = selection_end = std::clamp(offset, 0, int(text.size()));
+}
+
 int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
 {
     position -= rect.position;
@@ -436,7 +453,6 @@ int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
     }
     return result;
 }
-
 
 void GuiTextEntry::runChangeCallback()
 {

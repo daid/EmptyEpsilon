@@ -1,4 +1,5 @@
 #include <i18n.h>
+#include "menus/luaConsole.h"
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 #include "scenarioInfo.h"
@@ -429,6 +430,9 @@ static int getPlayerShip(lua_State* L)
         }
         return 0;
     }
+    if (index == -2) {
+        return convert<P<PlayerSpaceship> >::returnType(L, my_spaceship);
+    }
     if (index < 1 || index > GameGlobalInfo::max_player_ships)
         return 0;
     P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(index - 1);
@@ -441,6 +445,7 @@ static int getPlayerShip(lua_State* L)
 /// PlayerSpaceships are 1-indexed.
 /// A new ship is assigned the lowest available index, and a destroyed ship leaves its index vacant.
 /// Pass -1 to return the first active player ship.
+/// Pass -2 to return the current player ship.
 /// Example: getPlayerShip(2) -- returns the second-indexed ship, if it exists
 REGISTER_SCRIPT_FUNCTION(getPlayerShip);
 
@@ -793,3 +798,45 @@ static int getEEVersion(lua_State* L)
 /// Returns a string with the current EmptyEpsilon version number, such as "20221029".
 /// Example: getEEVersion() -- returns 20221029 on EE-2022.10.29
 REGISTER_SCRIPT_FUNCTION(getEEVersion);
+
+static int luaPrint(lua_State* L)
+{
+    string message;
+    int n = lua_gettop(L);  /* number of arguments */
+    for (int i=1; i<=n; i++) {
+        if (lua_istable(L, i)) {
+            if (i > 1)
+                message += " ";
+            message += "{";
+            lua_pushnil(L);
+            bool first = true;
+            while(lua_next(L, i)) {
+                if (first) first = false; else message += ",";
+                auto s = luaL_tolstring(L, -2, nullptr);
+                if (s != nullptr) {
+                    message += s;
+                    message += "=";
+                }
+                lua_pop(L, 1);
+                s = luaL_tolstring(L, -1, nullptr);
+                if (s != nullptr) {
+                    message += s;
+                }
+                lua_pop(L, 2);
+            }
+            message += "}";
+        } else {
+            auto s = luaL_tolstring(L, i, nullptr);
+            if (s != nullptr) {
+                if (i > 1)
+                    message += " ";
+                message += s;
+            }
+            lua_pop(L, 1);
+        }
+    }
+    LOG(Info, "LUA:", message);
+    LuaConsole::addLog(message);
+    return 0;
+}
+REGISTER_SCRIPT_FUNCTION_NAMED(luaPrint, "print");
