@@ -1,0 +1,324 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+# Scenario name
+msgid "Locust Swarm"
+msgstr "Heuschreckenschwarm"
+
+# Scenario description
+msgid ""
+"What happens when you're attacked by a swarm of locusts?\n"
+"\n"
+"Designed to run with one or more player ships with different terrain each "
+"time.\n"
+"\n"
+"Version 1\n"
+"\n"
+"USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
+"There's one every weekend. All experience levels are welcome."
+msgstr ""
+"Was passiert, wenn euch ein Schwarm Heuschrecken angreift?\n"
+"\n"
+"Für ein oder mehrere spielbare Schiffe ausgelegt, die Umgebung variiert von "
+"Spiel zu Spiel.\n"
+"\n"
+"Version 1\n"
+"USN Discord: https://discord.gg/PntGG3a - hier kannst du online an Spielen "
+"teilnehmen. Jedes Wochenende findet ein Spiel statt, alle Erfahrungsgrade "
+"sind willkoimmen."
+
+# Scenario setting
+msgctxt "setting"
+msgid "Swarm"
+msgstr "Schwarm"
+
+msgctxt "setting"
+msgid "Configures the size of the swarm"
+msgstr "Legt die Größe des Schwarms fest"
+
+msgctxt "Swarm"
+msgid "Tiny"
+msgstr "Winzig"
+
+msgctxt "Swarm"
+msgid "Tiny sized swarm"
+msgstr "Winziger Schwarm"
+
+msgctxt "Swarm"
+msgid "Small"
+msgstr "Klein"
+
+msgctxt "Swarm"
+msgid "Small sized swarm"
+msgstr "Kleiner Schwarm"
+
+msgctxt "Swarm"
+msgid "Normal"
+msgstr "Normal"
+
+msgctxt "Swarm"
+msgid "Normal sized swarm"
+msgstr "Normal großer Schwarm"
+
+msgctxt "Swarm"
+msgid "Large"
+msgstr "Groß"
+
+msgctxt "Swarm"
+msgid "Large sized swarm"
+msgstr "Großer Schwarm"
+
+msgctxt "Swarm"
+msgid "Huge"
+msgstr "Riesig"
+
+msgctxt "Swarm"
+msgid "Huge sized swarm"
+msgstr "Riegiger Schwarm"
+
+# Scenario setting
+msgctxt "setting"
+msgid "Basis"
+msgstr "Basis"
+
+msgctxt "setting"
+msgid "Configures the ship that serves as the basis for the locusts"
+msgstr ""
+"Legt den Typ des Schiffs fest, dass als Grundlage für die Heuschrecken dient"
+
+msgctxt "Basis"
+msgid "Fighter"
+msgstr "Fighter"
+
+msgctxt "Basis"
+msgid "The Fighter is the basis for the locusts"
+msgstr "Der \"Fighter\" ist die Grundlage der Heuschrecken"
+
+msgctxt "Basis"
+msgid "Hornet"
+msgstr "Hornet"
+
+msgctxt "Basis"
+msgid "The Hornet is the basis for the locusts"
+msgstr "Die \"Hornet\" ist die Grundlage der Heuschrecken"
+
+msgctxt "Basis"
+msgid "Drone"
+msgstr "Drone"
+
+msgctxt "Basis"
+msgid "The Ktlitan Drone is the basis for the locusts"
+msgstr "Die \"Ktlitan Drone\" ist die Grundlage der Heuschrecken"
+
+#: scripts/scenario_39_locusts.lua:38
+msgctxt "orders-comms"
+msgid "thirty"
+msgstr "dreißig"
+
+#: scripts/scenario_39_locusts.lua:39
+msgctxt "orders-comms"
+msgid "fifty"
+msgstr "fünfzig"
+
+#: scripts/scenario_39_locusts.lua:40
+msgctxt "orders-comms"
+msgid "eighty"
+msgstr "achtzig"
+
+#: scripts/scenario_39_locusts.lua:41
+msgctxt "orders-comms"
+msgid "one hundred"
+msgstr "einhundert"
+
+#: scripts/scenario_39_locusts.lua:42
+msgctxt "orders-comms"
+msgid "one hundred and fifty"
+msgstr "einhundertfünfzig"
+
+#: scripts/scenario_39_locusts.lua:48
+msgctxt "orders-comms"
+msgid "fighter"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:49
+msgctxt "orders-comms"
+msgid "hornet"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:50
+msgctxt "orders-comms"
+msgid "drone"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:906
+msgctxt "buttonRelay"
+msgid "Locust Status"
+msgstr "Heuschrecken-Status"
+
+#: scripts/scenario_39_locusts.lua:911
+msgctxt "buttonOperations"
+msgid "Locust Status"
+msgstr "Heuschrecken-Status"
+
+#: scripts/scenario_39_locusts.lua:931
+#, lua-format
+msgctxt "msgRelay"
+msgid "%i Locusts remain."
+msgstr "%i Heuschrecken übrig."
+
+#: scripts/scenario_39_locusts.lua:933
+#, lua-format
+msgctxt "msgRelay"
+msgid "One Locust remains in sector %s"
+msgstr "Eine Heuschrecke übrig in Sektor %s"
+
+#: scripts/scenario_39_locusts.lua:935
+#, lua-format
+msgctxt "msgRelay"
+msgid ""
+"%s\n"
+"The closest is in sector %s"
+msgstr ""
+"%s\n"
+"Der nächste Sektor ist %s"
+
+#: scripts/scenario_39_locusts.lua:1175
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"Hello %s,\n"
+"Our sensors have picked up numerous Exuari ships."
+msgstr ""
+"Hallo %s,\n"
+"Unsere Sensoren haben eine große Anzahl an Exuari-Schiffen erfasst."
+
+#: scripts/scenario_39_locusts.lua:1176
+msgctxt "orders-comms"
+msgid "How many is numerous?"
+msgstr "Was bedeutet \"große Anzahl\"?"
+
+#: scripts/scenario_39_locusts.lua:1177
+#, lua-format
+msgctxt "orders-comms"
+msgid "Approximately %s"
+msgstr "Ungefähr %s"
+
+#: scripts/scenario_39_locusts.lua:1178
+msgctxt "orders-comms"
+msgid "That's quite a few. What kind of ships?"
+msgstr "Das ist eine Menge, welche Art von Schiffen?"
+
+#: scripts/scenario_39_locusts.lua:1179
+#, lua-format
+msgctxt "orders-comms"
+msgid "They look like %ss. The computer calls them locusts. They're very fast."
+msgstr ""
+"Sie sehen wie %s aus. Der Computer nennt sie Heuschrecken. Sie sind sehr "
+"schnell."
+
+#: scripts/scenario_39_locusts.lua:1180
+msgctxt "orders-comms"
+msgid "Should we be worried?"
+msgstr "Sollten wir uns Sorgen machen?"
+
+#: scripts/scenario_39_locusts.lua:1181
+msgctxt "orders-comms"
+msgid ""
+"Individually, they should be easy to handle. As a group, they could be a "
+"problem."
+msgstr ""
+"Einzeln solltet Sie ohne Probleme mit ihnen fertig werden. In Gruppen "
+"könnten sie zu einem Problem werden."
+
+#: scripts/scenario_39_locusts.lua:1182
+msgctxt "orders-comms"
+msgid "What do you want us to do about them?"
+msgstr "Was sollen wir unternehmen?"
+
+#: scripts/scenario_39_locusts.lua:1183
+msgctxt "orders-comms"
+msgid "Get rid of them. Every last one of them."
+msgstr "Werdet sie los. Jedes einzelne Schiff."
+
+#: scripts/scenario_39_locusts.lua:1194
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"Greetings %s,\n"
+"We've got an update for you on those Exuari Locusts."
+msgstr ""
+"Grüße, %s,\n"
+"Wir haben neue Informationen über die Heuschrecken."
+
+#: scripts/scenario_39_locusts.lua:1195
+msgctxt "orders-comms"
+msgid "Tell us about it."
+msgstr "Welche Informationen?"
+
+#: scripts/scenario_39_locusts.lua:1196
+msgctxt "orders-comms"
+msgid "All the Exuari on our sensors have started moving."
+msgstr "Alle Exuari auf unseren Sensoren ändern ihren Kurs."
+
+#: scripts/scenario_39_locusts.lua:1197
+msgctxt "orders-comms"
+msgid "Where are they going?"
+msgstr "Wohin fliegen sie?"
+
+#: scripts/scenario_39_locusts.lua:1198
+msgctxt "orders-comms"
+msgid ""
+"We are not quite sure, but they seem to be converging on a central location."
+msgstr ""
+"Wir sind nicht ganz sicher, aber sie scheinen alle auf einen zentralen Punkt "
+"zuzufliegen."
+
+#: scripts/scenario_39_locusts.lua:1199
+msgctxt "orders-comms"
+msgid "That could make it harder for us to get rid of them."
+msgstr "Das könnte es erschweren, sie loszuwerden."
+
+#: scripts/scenario_39_locusts.lua:1200
+msgctxt "orders-comms"
+msgid ""
+"How perceptive of you! We are so glad you are out there working to rid us of "
+"these Locusts. Keep up the good work!"
+msgstr ""
+"Sehr gute Auffassungsgabe! Wir sind so froh, dass sie daran arbeiten, diese "
+"Heuschrecken loszuwerden. Weiter so!"
+
+#: scripts/scenario_39_locusts.lua:1383
+msgctxt "msgMainscreen"
+msgid "Scenario needs the 'Per-system damage' option under 'Extra settings'"
+msgstr ""
+"Für dieses Szenario muss die Option \"Schaden pro System\" unter "
+"\"Zusätzliche Einstellungen\" aktiviert sein."
+
+#: scripts/scenario_39_locusts.lua:1442
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"Surviving stations: %i\n"
+"Friendly: %i out of %i\n"
+"Neutral: %i out of %i\n"
+"Enemy: %i out of %i"
+msgstr ""
+"Überlebende Stationen: %i\n"
+"Freundlich: %i von %i\n"
+"Neutral: %i von %i\n"
+"Feindlich: %i von %i"
+
+#: scripts/scenario_39_locusts.lua:1465
+msgctxt "msgMainscreen"
+msgid "All friendly stations have been destroyed."
+msgstr "Alle befreundete Stationen wurden zerstört."
