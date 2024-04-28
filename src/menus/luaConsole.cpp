@@ -59,7 +59,7 @@ void LuaConsole::addLog(const string& message)
     if (!console->is_open) {
         console->message_show_timers.emplace_back();
         console->message_show_timers.back().start(5.0f);
-        console->top->layout.size.y = std::min(450.0f, console->message_show_timers.size() * 15.0f);
+        console->top->layout.size.y = std::min(450.0f, 15.0f + console->message_show_timers.size() * 15.0f);
         console->top->show();
     }
 }
@@ -93,7 +93,7 @@ void LuaConsole::update(float delta)
         if (message_show_timers.empty()) {
             top->hide();
         } else {
-            top->layout.size.y = std::min(450.0f, message_show_timers.size() * 15.0f);
+            top->layout.size.y = std::min(450.0f, 15.0f + message_show_timers.size() * 15.0f);
         }
     }
 }
