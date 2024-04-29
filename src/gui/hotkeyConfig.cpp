@@ -79,7 +79,7 @@ Keys::Keys() :
     zoom_in("ZOOM_IN", {"wheel:y"}),
     zoom_out("ZOOM_OUT"),
     voice_all("VOICE_ALL", "Backspace"),
-    voice_ship("VOICE_SHIP", "Tilde"),
+    voice_ship("VOICE_SHIP"),
 
     //General
     next_station("STATION_NEXT", "Tab"),
