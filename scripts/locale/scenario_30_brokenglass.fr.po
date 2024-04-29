@@ -1506,7 +1506,7 @@ msgstr ""
 
 #: scripts/scenario_30_brokenglass.lua:1844
 msgctxt "defenceStn-shipLog"
-msgid "Investigte the convoy, but DO NOT ENGAGE"
+msgid "Investigate the convoy, but DO NOT ENGAGE"
 msgstr "Enquêtez sur le convoi mais N'ENGAGEZ PAS LE COMBAT !"
 
 #: scripts/scenario_30_brokenglass.lua:1874

@@ -6,6 +6,7 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_textentry.h"
 #include "gui/theme.h"
+#include "i18n.h"
 
 #include "io/keybinding.h"
 
@@ -18,6 +19,7 @@ LuaConsole::LuaConsole()
 : GuiCanvas(consoleRenderLayer)
 {
     console = this;
+    open_console_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Open LUA console"));
 
     top = new GuiOverlay(this, "", {0, 0, 0, 192});
     top->layout.fill_height = false;
@@ -58,7 +60,7 @@ void LuaConsole::addLog(const string& message)
     if (!console->is_open) {
         console->message_show_timers.emplace_back();
         console->message_show_timers.back().start(5.0f);
-        console->top->layout.size.y = std::min(450.0f, console->message_show_timers.size() * 15.0f);
+        console->top->layout.size.y = std::min(450.0f, 15.0f + console->message_show_timers.size() * 15.0f);
         console->top->show();
     }
 }
@@ -83,7 +85,7 @@ void LuaConsole::update(float delta)
         if (message_show_timers.empty()) {
             top->hide();
         } else {
-            top->layout.size.y = std::min(450.0f, message_show_timers.size() * 15.0f);
+            top->layout.size.y = std::min(450.0f, 15.0f + message_show_timers.size() * 15.0f);
         }
     }
 }

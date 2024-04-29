@@ -1,4 +1,5 @@
 #include <i18n.h>
+#include "menus/luaConsole.h"
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 #include "scenarioInfo.h"
@@ -353,6 +354,9 @@ static int getPlayerShip(lua_State* L)
             return convert<sp::ecs::Entity>::returnType(L, entity);
         return 0;
     }
+    if (index == -2) {
+        return convert<sp::ecs::Entity>::returnType(L, my_spaceship);
+    }
     for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
         if (--index == 0)
             return convert<sp::ecs::Entity>::returnType(L, entity);
@@ -363,6 +367,7 @@ static int getPlayerShip(lua_State* L)
 /// PlayerSpaceships are 1-indexed.
 /// A new ship is assigned the lowest available index, and a destroyed ship leaves its index vacant.
 /// Pass -1 to return the first active player ship.
+/// Pass -2 to return the current player ship.
 /// Example: getPlayerShip(2) -- returns the second-indexed ship, if it exists
 REGISTER_SCRIPT_FUNCTION(getPlayerShip);
 
