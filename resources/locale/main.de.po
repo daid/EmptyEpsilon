@@ -855,6 +855,19 @@ msgstr ""
 "Zugewiesen werden können Tasten der Tastatur, Joystickbuttons oder "
 "Joystickachsen."
 
+#: src/menus/luaConsole.cpp:21 src/gui/hotkeyConfig.cpp:317
+#: src/gui/hotkeyConfig.cpp:318 src/gui/hotkeyConfig.cpp:319
+#: src/gui/hotkeyConfig.cpp:320 src/gui/hotkeyConfig.cpp:321
+#: src/gui/hotkeyConfig.cpp:322 src/gui/hotkeyConfig.cpp:323
+msgctxt "hotkey_menu"
+msgid "General"
+msgstr "Allgemein"
+
+#: src/menus/luaConsole.cpp:21
+msgctxt "hotkey_General"
+msgid "Open LUA console"
+msgstr "Lua Konsole öffnen/schließen"
+
 #: src/screens/cinematicViewScreen.cpp:41 src/screens/topDownScreen.cpp:33
 msgctxt "button"
 msgid "Lock camera on ship"
@@ -2725,14 +2738,6 @@ msgstr "Voicechat (schiffsweit)"
 msgctxt "hotkey_Basic"
 msgid "Fullscreen toggle"
 msgstr "Vollbild umschalten"
-
-#: src/gui/hotkeyConfig.cpp:317 src/gui/hotkeyConfig.cpp:318
-#: src/gui/hotkeyConfig.cpp:319 src/gui/hotkeyConfig.cpp:320
-#: src/gui/hotkeyConfig.cpp:321 src/gui/hotkeyConfig.cpp:322
-#: src/gui/hotkeyConfig.cpp:323
-msgctxt "hotkey_menu"
-msgid "General"
-msgstr "Allgemein"
 
 #: src/gui/hotkeyConfig.cpp:317
 msgctxt "hotkey_General"
