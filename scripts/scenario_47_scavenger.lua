@@ -810,7 +810,7 @@ function missionSelection()
 		end
 		out = string.format(_("msgGM","%s\nPlot 4:"),out)
 		if plot4 == nil then
-			out = string.format("%s nil",out)
+			out = string.format(_("msgGM","%s nil"),out)
 		else
 			if plot4 == highwaymen then
 				out = string.format(_("msgGM","%s highwaymen"),out)
@@ -874,7 +874,7 @@ function missionSelection()
 					end
 					out = string.format(_("msgGM","%s\n    planetary attack fleet size:%i"),out,fleet_count)
 					if fleet_count > 0 then
-						out = string.format("%s\n    %s",out,fleet_ships)
+						out = string.format(_("msgGM","%s\n    %s"),out,fleet_ships)
 					end
 				end
 				if kraylor_planetary_danger ~= nil then
@@ -891,7 +891,7 @@ function missionSelection()
 				out = string.format(_("msgGM","%s\n    seconds remaining until explosion actions are done:%i"),out,math.floor(exploding_planet_time - getScenarioTime()))
 			end
 		end
-		out = string.format("%s\nPlot 8:",out)
+		out = string.format(_("msgGM","%s\nPlot 8:"),out)
 		if plot8 == nil then
 			out = string.format(_("msgGM","%s nil"),out)
 		else
