@@ -4,6 +4,8 @@
 
 #include "ecs/multiplayer.h"
 #include "multiplayer/collision.h"
+#include "multiplayer/faction.h"
+#include "multiplayer/radar.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -40,7 +42,7 @@ void initSystemsAndComponents()
     //Database
     //DockingBay
     //DockingPort
-    //Faction
+    sp::ecs::MultiplayerReplication::registerComponentReplication<FactionReplication>();
     //FactionInfo
     //Gravity
     //HackingDevice
@@ -61,11 +63,11 @@ void initSystemsAndComponents()
     //Orbit
     //PlayerControl
     //ScanProbeLauncher
-    sp::ecs::MultiplayerReplication::registerComponentReplication<sp::ecs::ComponentReplication<RadarTrace>>();
-    sp::ecs::MultiplayerReplication::registerComponentReplication<sp::ecs::ComponentReplication<RawRadarSignatureInfo>>();
-    //LongRangeRadar
-    //ShareShortRangeRadar
-    //AllowRadarLink
+    sp::ecs::MultiplayerReplication::registerComponentReplication<RadarTraceReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<RawRadarSignatureInfoReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<LongRangeRadarReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ShareShortRangeRadarReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<AllowRadarLinkReplication>();
     //RadarBlock
     //NeverRadarBlocked
     //Reactor

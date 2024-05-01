@@ -447,6 +447,10 @@ set(MAIN_SOURCES
     src/systems/planet.cpp
     src/systems/radar.h
     src/systems/radar.cpp
+    src/multiplayer/faction.h
+    src/multiplayer/faction.cpp
+    src/multiplayer/radar.h
+    src/multiplayer/radar.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
