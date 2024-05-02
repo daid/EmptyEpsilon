@@ -457,7 +457,7 @@ msgid ""
 "    contract at %s: %s status: %s"
 msgstr ""
 "%s\n"
-"    contrat à %s : %s statut : %s"
+"    Contrat à %s : %s statut : %s"
 
 #: scripts/scenario_47_scavenger.lua:775
 #, lua-format
@@ -467,7 +467,7 @@ msgid ""
 "    seconds until transition contract:%i"
 msgstr ""
 "%s\n"
-"    secondes jusqu'au contrat de transition : %i"
+"    %i secondes jusqu'au contrat de transition."
 
 #: scripts/scenario_47_scavenger.lua:778
 #, lua-format

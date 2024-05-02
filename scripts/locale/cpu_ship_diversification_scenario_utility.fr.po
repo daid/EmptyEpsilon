@@ -1219,7 +1219,7 @@ msgstr ""
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1676
 msgctxt "scienceDB"
 msgid "Youchy"
-msgstr "Youchy"
+msgstr "Épineux"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1689
 msgctxt "scienceDB"
@@ -1227,7 +1227,7 @@ msgid ""
 "Touchy is a fighter with a highly modified beam weapon: narrower, longer, "
 "slower and stronger"
 msgstr ""
-"Le Touchy est un combattant doté de faisceaux laser grandement modifiés : "
+"L'Épineux est un combattant doté de faisceaux laser grandement modifiés : "
 "plus étroits, plus longs, plus lents et plus puissants."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1729
