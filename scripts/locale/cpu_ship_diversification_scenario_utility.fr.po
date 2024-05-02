@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:60
@@ -138,10 +138,9 @@ msgstr "Frégates"
 #: scripts/cpu_ship_diversification_scenario_utility.lua:135
 msgctxt "scienceDB"
 msgid "Barracuda"
-msgstr ""
+msgstr "Barracuda"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:142
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Small tubes 0"
 msgstr "Tube léger 0"
@@ -149,18 +148,17 @@ msgstr "Tube léger 0"
 #: scripts/cpu_ship_diversification_scenario_utility.lua:143
 msgctxt "scienceDB"
 msgid "7 sec / Homing, 8 sec / Nuke"
-msgstr ""
+msgstr "7s / Homing, 8s / Nuke"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:144
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Small tubes 5 & -5"
-msgstr "Tube léger -15"
+msgstr "Tubes légers 5 et -5"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:145
 msgctxt "scienceDB"
 msgid "8 sec / Homing, 9 sec / Nuke"
-msgstr ""
+msgstr "8s / Homing, 9s / Nuke"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:146
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1058
@@ -174,51 +172,47 @@ msgstr "Tube léger 0"
 #: scripts/cpu_ship_diversification_scenario_utility.lua:147
 msgctxt "scienceDB"
 msgid "5 sec / EMP"
-msgstr ""
+msgstr "5s / EMP"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:148
-#, fuzzy
 msgctxt "scienceDB"
 msgid " Small tubes 5 & -5"
-msgstr "Tube léger -15"
+msgstr "Tubes légers 5 et -5"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:149
 msgctxt "scienceDB"
 msgid "6 sec / EMP"
-msgstr ""
+msgstr "6s / EMP"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:150
-#, fuzzy
 msgctxt "scienceDB"
 msgid "  Small tube 0"
-msgstr "Tube léger 0"
+msgstr " Tube léger 0"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:151
 msgctxt "scienceDB"
 msgid "3 sec / HVLI"
-msgstr ""
+msgstr "3s / HVLI"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:152
-#, fuzzy
 msgctxt "scienceDB"
 msgid "   Small tubes 5 & -5"
-msgstr "Tube léger -15"
+msgstr " Tubes légers 5 et -5"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:153
 msgctxt "scienceDB"
 msgid "4 sec / HVLI"
-msgstr ""
+msgstr "4s / HVLI"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:154
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Small tubes 10 & -10"
-msgstr "Tube léger -10"
+msgstr "Tubes légers 10 et -10"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:155
 msgctxt "scienceDB"
 msgid "5 sec / HVLI"
-msgstr ""
+msgstr "5s / HVLI"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:156
 #: scripts/cpu_ship_diversification_scenario_utility.lua:306
@@ -236,7 +230,7 @@ msgstr "Tube 0"
 #: scripts/cpu_ship_diversification_scenario_utility.lua:157
 msgctxt "scienceDB"
 msgid "5 sec / Homing"
-msgstr ""
+msgstr "5s / Homing"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:158
 #: scripts/cpu_ship_diversification_scenario_utility.lua:837
@@ -246,10 +240,9 @@ msgid " Tube 0"
 msgstr " Tube 0"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:159
-#, fuzzy
 msgctxt "scienceDB"
 msgid "10 sec / Nuke"
-msgstr "10 sec"
+msgstr "10s / Nuke"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:160
 #: scripts/cpu_ship_diversification_scenario_utility.lua:506
@@ -272,6 +265,13 @@ msgid ""
 "\n"
 "It barely qualifies as a frigate, it's more like a mini-corvette."
 msgstr ""
+"Le Barracuda a démarré comme un Phobos T3. Il a reçu des améliorations "
+"massives au niveau de ses boucliers, coque et missiles. Les systèmes à "
+"impulsion ont également été améliorés. Il est conçu pour lancer des missiles "
+"à une vitesse prodigieuse.\n"
+"\n"
+"On le qualifie à peine de frégate, elle s'apparente plutôt à une mini-"
+"corvette."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:194
 msgctxt "scienceDB"
@@ -1085,19 +1085,19 @@ msgstr ""
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1472
 msgctxt "scienceDB"
 msgid "Shepherd"
-msgstr ""
+msgstr "Berger"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1480
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1683
 msgctxt "scienceDB"
 msgid "Exuari"
-msgstr ""
+msgstr "Éxuari"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1481
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1684
 msgctxt "scienceDB"
 msgid "Dagger"
-msgstr ""
+msgstr "Dague"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1486
 msgctxt "scienceDB"
@@ -1105,6 +1105,8 @@ msgid ""
 "The Shepherd is a Fighter with a long narrow beam. Tactical recommendation: "
 "hack the impulse engines"
 msgstr ""
+"Le Berger est un combattant doté d'un faisceau long et étroit.\n"
+"Recommandation tactique : pirater les moteurs à impulsions adverses."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1514
 msgctxt "scienceDB"
@@ -1217,7 +1219,7 @@ msgstr ""
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1676
 msgctxt "scienceDB"
 msgid "Youchy"
-msgstr ""
+msgstr "Youchy"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1689
 msgctxt "scienceDB"
@@ -1225,6 +1227,8 @@ msgid ""
 "Touchy is a fighter with a highly modified beam weapon: narrower, longer, "
 "slower and stronger"
 msgstr ""
+"Le Touchy est un combattant doté de faisceaux laser grandement modifiés : "
+"plus étroits, plus longs, plus lents et plus puissants."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1729
 msgctxt "scienceDB"

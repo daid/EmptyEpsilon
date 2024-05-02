@@ -34,7 +34,7 @@ msgstr ""
 "\n"
 "- Titre original : Scurvy Scavenger\n"
 "- Auteur : Xansta (2020)\n"
-"- Traduction FR : Muerte (Fév. 24)\n"
+"- Traduction FR : Muerte (Mai 24)\n"
 "TRADUCTION EN COURS DE RELECTURE\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
@@ -203,12 +203,12 @@ msgstr "- Menu principal"
 #: scripts/scenario_47_scavenger.lua:629
 msgctxt "buttonGM"
 msgid "Mission Status"
-msgstr ""
+msgstr "État de la mission"
 
 #: scripts/scenario_47_scavenger.lua:630
 msgctxt "msgGM"
 msgid "Plot 1:"
-msgstr ""
+msgstr "Intrigue 1 :"
 
 #: scripts/scenario_47_scavenger.lua:632 scripts/scenario_47_scavenger.lua:727
 #: scripts/scenario_47_scavenger.lua:780 scripts/scenario_47_scavenger.lua:813
@@ -217,37 +217,37 @@ msgstr ""
 #, lua-format
 msgctxt "msgGM"
 msgid "%s nil"
-msgstr ""
+msgstr "%s nul"
 
 #: scripts/scenario_47_scavenger.lua:635
 #, lua-format
 msgctxt "msgGM"
 msgid "%s Kraylor diversionary sabotage"
-msgstr ""
+msgstr "%s sabotage de diversion Kraylor"
 
 #: scripts/scenario_47_scavenger.lua:637
 #, lua-format
 msgctxt "msgGM"
 msgid "%s long distance cargo"
-msgstr ""
+msgstr "%s fret longue distance"
 
 #: scripts/scenario_47_scavenger.lua:639
 #, lua-format
 msgctxt "msgGM"
 msgid "%s transition contract"
-msgstr ""
+msgstr "Contrat de transition %s"
 
 #: scripts/scenario_47_scavenger.lua:641
 #, lua-format
 msgctxt "msgGM"
 msgid "%s Exuari harassment"
-msgstr ""
+msgstr "%s Harcèlement Éxuari"
 
 #: scripts/scenario_47_scavenger.lua:644
 #, lua-format
 msgctxt "msgGM"
 msgid "%s (optional)"
-msgstr ""
+msgstr "%s (facultatif)"
 
 #: scripts/scenario_47_scavenger.lua:648
 #, lua-format
@@ -256,6 +256,8 @@ msgid ""
 "%s\n"
 "    seconds remaining until next harassment wave:%i"
 msgstr ""
+"%s\n"
+"    secondes restantes jusqu'à la prochaine vague de harcèlement : %i"
 
 #: scripts/scenario_47_scavenger.lua:652
 #, lua-format
@@ -264,6 +266,8 @@ msgid ""
 "%s\n"
 "    defensive fleet size:%i"
 msgstr ""
+"%s\n"
+"    taille de la flotte défensive :%i"
 
 #: scripts/scenario_47_scavenger.lua:656
 #, lua-format
@@ -272,6 +276,8 @@ msgid ""
 "%s\n"
 "    seconds remaining until next defensive fleet:%i"
 msgstr ""
+"%s\n"
+"    secondes restantes jusqu'à la prochaine flotte défensive : %i"
 
 #: scripts/scenario_47_scavenger.lua:660
 #, lua-format
@@ -280,6 +286,8 @@ msgid ""
 "%s\n"
 "    danger:%.2f"
 msgstr ""
+"%s\n"
+"    danger : %.2f"
 
 #: scripts/scenario_47_scavenger.lua:663
 #, lua-format
@@ -288,6 +296,8 @@ msgid ""
 "%s\n"
 "    fleets destroyed:%i"
 msgstr ""
+"%s\n"
+"    flottes détruites : %i"
 
 #: scripts/scenario_47_scavenger.lua:673
 #, lua-format
@@ -296,6 +306,8 @@ msgid ""
 "%s\n"
 "    last defense fleet size:%i"
 msgstr ""
+"%s\n"
+"    Taille de la dernière flotte de défense : %i"
 
 #: scripts/scenario_47_scavenger.lua:685
 #, lua-format
@@ -304,6 +316,8 @@ msgid ""
 "%s\n"
 "    Kraylor diversionary fleet size:%i"
 msgstr ""
+"%s\n"
+"    Taille de la flotte de diversion Kraylor : %i"
 
 #: scripts/scenario_47_scavenger.lua:688
 #, lua-format
@@ -312,6 +326,8 @@ msgid ""
 "%s\n"
 "    seconds remaining until next check for reinforcements:%i"
 msgstr ""
+"%s\n"
+"    secondes restantes jusqu'à la prochaine vérification des renforts : %i"
 
 #: scripts/scenario_47_scavenger.lua:691
 #, lua-format
@@ -320,34 +336,40 @@ msgid ""
 "%s\n"
 "    Kraylor diversion danger:%i"
 msgstr ""
+"%s\n"
+"    Danger de diversion Kraylor : %i"
 
 #: scripts/scenario_47_scavenger.lua:700
 #, lua-format
 msgctxt "msgGM"
 msgid "%s/n    defend against Kraylor fleet size:%i"
-msgstr ""
+msgstr "%s/n     se défend contre la taille de la flotte Kraylor : %i"
 
 #: scripts/scenario_47_scavenger.lua:704
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "    supply depot station %s has been sabotaged."
-msgstr "Le dépôt de ravitaillement a été "
+msgstr ""
+"%s\n"
+"    la station du dépôt de ravitaillement %s a été sabotée."
 
 #: scripts/scenario_47_scavenger.lua:707
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "    supply depot station has been destroyed"
-msgstr "Le dépôt de ravitaillement a été détruit."
+msgstr ""
+"%s\n"
+"    la station du dépôt de ravitaillement a été détruite."
 
 #: scripts/scenario_47_scavenger.lua:712
 #, lua-format
 msgctxt "msgGM"
 msgid "%s    distance between %s and %s:%i units"
-msgstr ""
+msgstr "%s    distance entre %s et %s : %i unités"
 
 #: scripts/scenario_47_scavenger.lua:721
 #, lua-format
@@ -356,6 +378,8 @@ msgid ""
 "%s\n"
 "    supply sabotage fleet size:%i"
 msgstr ""
+"%s\n"
+"    Taille de la flotte de sabotage d'approvisionnement : %i"
 
 #: scripts/scenario_47_scavenger.lua:725
 #, lua-format
@@ -364,12 +388,14 @@ msgid ""
 "%s\n"
 "Plot 2:"
 msgstr ""
+"%s\n"
+"Intrigue 2 :"
 
 #: scripts/scenario_47_scavenger.lua:729
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgGM"
 msgid "%s contract target"
-msgstr "Accepter le contrat %s"
+msgstr "Objectif du contrat %s"
 
 #: scripts/scenario_47_scavenger.lua:731
 #, lua-format
@@ -378,50 +404,50 @@ msgid ""
 "%s\n"
 "    seconds remaining until next Exuari vengance fleet:%i"
 msgstr ""
+"%s\n"
+"    secondes restantes jusqu'à la prochaine flotte de vengeance Éxuarie : %i"
 
 #: scripts/scenario_47_scavenger.lua:735
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "    contract target station %s"
-msgstr "Rapport de contrat de la station %s :"
+msgstr ""
+"%s\n"
+"    Station cible du contrat %s"
 
 #: scripts/scenario_47_scavenger.lua:743
 #, lua-format
 msgctxt "msgGM"
 msgid "%s, harassing Exuari fleet size:%i"
-msgstr ""
+msgstr "%s, taille de la flotte Éxuarie harceleuse :%i"
 
 #: scripts/scenario_47_scavenger.lua:746
 #, lua-format
 msgctxt "msgGM"
 msgid "%s, seconds until next harassment check:%i"
-msgstr ""
+msgstr "%s, secondes jusqu'à la prochaine vérification du harcèlement : %i"
 
 #: scripts/scenario_47_scavenger.lua:758
-#, fuzzy
 msgctxt "msgGM"
 msgid "accepted"
-msgstr "Contrat à prendre"
+msgstr "accepté"
 
 #: scripts/scenario_47_scavenger.lua:760
 msgctxt "msgGM"
 msgid "not accepted"
-msgstr ""
+msgstr "pas accepté"
 
 #: scripts/scenario_47_scavenger.lua:764
 msgctxt "msgGM"
 msgid "fulfilled"
-msgstr ""
+msgstr "accompli"
 
 #: scripts/scenario_47_scavenger.lua:766
-#, fuzzy
 msgctxt "msgGM"
 msgid "not fulfilled"
-msgstr ""
-"\n"
-"À remplir : "
+msgstr "non accompli"
 
 #: scripts/scenario_47_scavenger.lua:769
 #, lua-format
@@ -430,6 +456,8 @@ msgid ""
 "%s\n"
 "    contract at %s: %s status: %s"
 msgstr ""
+"%s\n"
+"    contrat à %s : %s statut : %s"
 
 #: scripts/scenario_47_scavenger.lua:775
 #, lua-format
@@ -438,6 +466,8 @@ msgid ""
 "%s\n"
 "    seconds until transition contract:%i"
 msgstr ""
+"%s\n"
+"    secondes jusqu'au contrat de transition : %i"
 
 #: scripts/scenario_47_scavenger.lua:778
 #, lua-format
@@ -446,12 +476,14 @@ msgid ""
 "%s\n"
 "Plot 3:"
 msgstr ""
+"%s\n"
+"Intrigue 3 :"
 
 #: scripts/scenario_47_scavenger.lua:782
 #, lua-format
 msgctxt "msgGM"
 msgid "%s Jenny asteroid (optional)"
-msgstr ""
+msgstr "Astéroïde de Jenny %s (facultatif)"
 
 #: scripts/scenario_47_scavenger.lua:785
 #, lua-format
@@ -460,6 +492,8 @@ msgid ""
 "%s\n"
 "    asteroid structure in notes"
 msgstr ""
+"%s\n"
+"    structure des astéroïdes dans les notes"
 
 #: scripts/scenario_47_scavenger.lua:789
 #, lua-format
@@ -468,6 +502,8 @@ msgid ""
 "%s\n"
 "    asteroid identified"
 msgstr ""
+"%s\n"
+"    astéroïde identifié"
 
 #: scripts/scenario_47_scavenger.lua:791
 #, lua-format
@@ -476,6 +512,8 @@ msgid ""
 "%s\n"
 "    Jenny is aboard"
 msgstr ""
+"%s\n"
+"    Jenny est à bord"
 
 #: scripts/scenario_47_scavenger.lua:794
 #, lua-format
@@ -484,6 +522,8 @@ msgid ""
 "%s\n"
 "    asteroid research reward is available on %s"
 msgstr ""
+"%s\n"
+"    la récompense pour la recherche sur les astéroïdes est disponible sur %s"
 
 #: scripts/scenario_47_scavenger.lua:796
 #, lua-format
@@ -492,6 +532,9 @@ msgid ""
 "%s\n"
 "    asteroid research reward has not yet been claimed by %s"
 msgstr ""
+"%s\n"
+"    la récompense pour la recherche sur les astéroïdes n'a pas encore été "
+"réclamée par %s"
 
 #: scripts/scenario_47_scavenger.lua:799
 #, lua-format
@@ -500,6 +543,9 @@ msgid ""
 "%s\n"
 "    asteroid research reward is not yet available on %s"
 msgstr ""
+"%s\n"
+"    la récompense pour la recherche sur les astéroïdes n'est pas encore "
+"disponible sur %s"
 
 #: scripts/scenario_47_scavenger.lua:802
 #, lua-format
@@ -509,6 +555,9 @@ msgid ""
 "    mission cannot be completed due to the destruction of the first mission "
 "station."
 msgstr ""
+"%s\n"
+"    la mission ne peut pas être terminée en raison de la destruction de la "
+"station de la première mission."
 
 #: scripts/scenario_47_scavenger.lua:805
 #, lua-format
@@ -517,14 +566,18 @@ msgid ""
 "%s\n"
 "    Jenny has not yet boarded %s"
 msgstr ""
+"%s\n"
+"    Jenny n'est pas encore à bord de %s"
 
 #: scripts/scenario_47_scavenger.lua:808
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "    asteroid has not yet been identified"
-msgstr "L'astéroïde a peut-être été détruit"
+msgstr ""
+"%s\n"
+"    l'astéroïde n'a pas encore été identifié"
 
 #: scripts/scenario_47_scavenger.lua:811
 #, lua-format
@@ -533,36 +586,38 @@ msgid ""
 "%s\n"
 "Plot 4:"
 msgstr ""
+"%s\n"
+"Intrigue 4 :"
 
 #: scripts/scenario_47_scavenger.lua:816
 #, lua-format
 msgctxt "msgGM"
 msgid "%s highwaymen"
-msgstr ""
+msgstr "%s bandits de grand chemin"
 
 #: scripts/scenario_47_scavenger.lua:818
 #, lua-format
 msgctxt "msgGM"
 msgid "%s highwaymen alerted"
-msgstr ""
+msgstr "%s bandits de grand chemin alertés"
 
 #: scripts/scenario_47_scavenger.lua:820
 #, lua-format
 msgctxt "msgGM"
 msgid "%s highwaymen pounce"
-msgstr ""
+msgstr "%s bandits de grand chemin se jettent sur"
 
 #: scripts/scenario_47_scavenger.lua:822
 #, lua-format
 msgctxt "msgGM"
 msgid "%s highwaymen aftermath"
-msgstr ""
+msgstr "%s séquelles des bandits de grand chemin"
 
 #: scripts/scenario_47_scavenger.lua:824
 #, lua-format
 msgctxt "msgGM"
 msgid "%s highwaymen reset"
-msgstr ""
+msgstr "%s des bandits de grand chemin : réinitialisation"
 
 #: scripts/scenario_47_scavenger.lua:827
 #, lua-format
@@ -571,6 +626,8 @@ msgid ""
 "%s\n"
 "    seconds until next event:%i"
 msgstr ""
+"%s\n"
+"    secondes jusqu'au prochain événement : %i"
 
 #: scripts/scenario_47_scavenger.lua:836
 #, lua-format
@@ -579,6 +636,8 @@ msgid ""
 "%s\n"
 "    highwaymen fleet size:%i"
 msgstr ""
+"%s\n"
+"    Taille de la flotte des bandits de grand chemin: %i"
 
 #: scripts/scenario_47_scavenger.lua:839
 #, lua-format
@@ -587,18 +646,20 @@ msgid ""
 "%s\n"
 "Plot 5:"
 msgstr ""
+"%s\n"
+"Intrigue 5 :"
 
 #: scripts/scenario_47_scavenger.lua:843
 #, lua-format
 msgctxt "msgGM"
 msgid "%s highwaymen warning zone"
-msgstr ""
+msgstr "%s zone d'avertissement des bandits de grand chemin"
 
 #: scripts/scenario_47_scavenger.lua:845
 #, lua-format
 msgctxt "msgGM"
 msgid "%s: seconds until zone removal:%i"
-msgstr ""
+msgstr "%s : secondes jusqu'à la suppression de la zone : %i"
 
 #: scripts/scenario_47_scavenger.lua:848
 #, lua-format
@@ -607,18 +668,20 @@ msgid ""
 "%s\n"
 "Plot 6:"
 msgstr ""
+"%s\n"
+"Intrigue 6 :"
 
 #: scripts/scenario_47_scavenger.lua:853
 #, lua-format
 msgctxt "msgGM"
 msgid "%s world end"
-msgstr ""
+msgstr "%s fin du monde"
 
 #: scripts/scenario_47_scavenger.lua:855
 #, lua-format
 msgctxt "msgGM"
 msgid "%s Kraylor planet buster"
-msgstr ""
+msgstr "%s briseur de planète Kraylor"
 
 #: scripts/scenario_47_scavenger.lua:857
 #, lua-format
@@ -627,6 +690,8 @@ msgid ""
 "%s\n"
 "    seconds until next fleet check:%i"
 msgstr ""
+"%s\n"
+"    secondes jusqu'à la prochaine vérification de la flotte : %i"
 
 #: scripts/scenario_47_scavenger.lua:860
 #, lua-format
@@ -635,18 +700,21 @@ msgid ""
 "%s\n"
 "    seconds until next fleet target adjustment/planet check:%i"
 msgstr ""
+"%s\n"
+"    secondes jusqu'au prochain ajustement de la cible de la flotte/"
+"vérification de la planète : %i"
 
 #: scripts/scenario_47_scavenger.lua:869
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgGM"
 msgid "Ships: %s"
-msgstr "Vaisseaux"
+msgstr "Vaisseaux : %s"
 
 #: scripts/scenario_47_scavenger.lua:871
 #, lua-format
 msgctxt "msgGM"
 msgid "%s, %s"
-msgstr ""
+msgstr "%s, %s"
 
 #: scripts/scenario_47_scavenger.lua:875
 #, lua-format
@@ -655,6 +723,8 @@ msgid ""
 "%s\n"
 "    planetary attack fleet size:%i"
 msgstr ""
+"%s\n"
+"    Taille de la flotte d'attaque planétaire : %i"
 
 #: scripts/scenario_47_scavenger.lua:877
 #, lua-format
@@ -663,6 +733,8 @@ msgid ""
 "%s\n"
 "    %s"
 msgstr ""
+"%s\n"
+"    %s"
 
 #: scripts/scenario_47_scavenger.lua:881
 #, lua-format
@@ -671,6 +743,8 @@ msgid ""
 "%s\n"
 "    Kraylor planetary danger:%i"
 msgstr ""
+"%s\n"
+"    Danger planétaire Kraylor : %i"
 
 #: scripts/scenario_47_scavenger.lua:885
 #, lua-format
@@ -679,12 +753,14 @@ msgid ""
 "%s\n"
 "Plot 7:"
 msgstr ""
+"%s\n"
+"Intrigue 7 :"
 
 #: scripts/scenario_47_scavenger.lua:889
 #, lua-format
 msgctxt "msgGM"
 msgid "%s exploding planet debris"
-msgstr ""
+msgstr "%s débris planétaires explosant"
 
 #: scripts/scenario_47_scavenger.lua:891
 #, lua-format
@@ -693,6 +769,9 @@ msgid ""
 "%s\n"
 "    seconds remaining until explosion actions are done:%i"
 msgstr ""
+"%s\n"
+"    secondes restantes jusqu'à ce que les actions d'explosion soient "
+"effectuées : %i"
 
 #: scripts/scenario_47_scavenger.lua:894
 #, lua-format
@@ -701,12 +780,14 @@ msgid ""
 "%s\n"
 "Plot 8:"
 msgstr ""
+"%s\n"
+"Intrigue 8 :"
 
 #: scripts/scenario_47_scavenger.lua:898
 #, lua-format
 msgctxt "msgGM"
 msgid "%s opportunistic pirates"
-msgstr ""
+msgstr "%s pirates opportunistes"
 
 #: scripts/scenario_47_scavenger.lua:906
 #, lua-format
@@ -715,6 +796,8 @@ msgid ""
 "%s\n"
 "    greedy pirate fleet size:%i"
 msgstr ""
+"%s\n"
+"    Taille de la flotte de pirates cupides : %i"
 
 #: scripts/scenario_47_scavenger.lua:909
 #, lua-format
@@ -723,6 +806,9 @@ msgid ""
 "%s\n"
 "    seconds remaining until next pirate fleet adjustment check:%i"
 msgstr ""
+"%s\n"
+"    secondes restantes jusqu'à la prochaine vérification d'ajustement de la "
+"flotte pirate : %i"
 
 #: scripts/scenario_47_scavenger.lua:912
 #, lua-format
@@ -731,6 +817,8 @@ msgid ""
 "%s\n"
 "    greedy pirate danger:%i"
 msgstr ""
+"%s\n"
+"    Danger : pirate cupide : %i"
 
 #: scripts/scenario_47_scavenger.lua:918
 msgctxt "buttonGM"
@@ -3756,6 +3844,11 @@ msgid ""
 "now as self-sufficient contractors, capable of more than mere deliveries. We "
 "now go to develop further standing with the Human Navy."
 msgstr ""
+"Notre premier contrat dans une station loin de « chez nous » marque un "
+"changement significatif dans notre développement en tant qu'équipage. %s et "
+"le reste des stations nous connaissent désormais comme des entrepreneurs "
+"autonomes, capables de faire plus que de simples livraisons. Nous allons "
+"maintenant développer notre position auprès de la Marine Humaine."
 
 #: scripts/scenario_47_scavenger.lua:4773
 #, lua-format
@@ -3836,12 +3929,14 @@ msgid ""
 "Save planet %s from Kraylor destruction like they destroyed %s by keeping "
 "the Kraylor away from %s."
 msgstr ""
+"Sauvez la planète %s de la destruction des Kraylors tout comme ils ont "
+"détruit %s en gardant les Kraylors loin de %s."
 
 #: scripts/scenario_47_scavenger.lua:5140
 #, lua-format
 msgctxt "Kraylor-shipLog"
 msgid "Oops, there goes %s"
-msgstr ""
+msgstr "Oups, voilà %s"
 
 #: scripts/scenario_47_scavenger.lua:5142
 #, lua-format
@@ -3943,43 +4038,43 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:5550
 msgctxt "scienceDescription-artifact"
 msgid "Unknown tech device"
-msgstr ""
+msgstr "Appareil technologique d'origine inconnue"
 
 #: scripts/scenario_47_scavenger.lua:5551
 msgctxt "scienceDescription-artifact"
 msgid "Partly melted machinery"
-msgstr ""
+msgstr "Machine partiellement fondue"
 
 #: scripts/scenario_47_scavenger.lua:5552
-#, fuzzy
 msgctxt "scienceDescription-artifact"
 msgid "Device of unknown purpose"
-msgstr "Objet d'origine inconnue"
+msgstr "Objet à l'usage inconnu"
 
 #: scripts/scenario_47_scavenger.lua:5553
 msgctxt "scienceDescription-artifact"
 msgid "Fragment of advanced technology"
-msgstr ""
+msgstr "Fragment de technologie avancée"
 
 #: scripts/scenario_47_scavenger.lua:5558
 msgctxt "scienceDescription-artifact"
 msgid "Origin: Kraylor. Purpose: unknown."
-msgstr ""
+msgstr "Origine : Kraylor. Objectif : inconnu."
 
 #: scripts/scenario_47_scavenger.lua:5559
 msgctxt "scienceDescription-artifact"
 msgid "Source: Kraylor. Possibly a remnant of a planet-busting device."
 msgstr ""
+"Source : Kraylor. Peut-être le vestige d'un appareil destructeur de planètes."
 
 #: scripts/scenario_47_scavenger.lua:5560
 msgctxt "scienceDescription-artifact"
 msgid "Purpose: unknown. Volatile material detected."
-msgstr ""
+msgstr "Objectif : inconnu. Matière volatile détectée."
 
 #: scripts/scenario_47_scavenger.lua:5561
 msgctxt "scienceDescription-artifact"
 msgid "Origin: Kraylor."
-msgstr ""
+msgstr "Origine : Kraylor"
 
 #: scripts/scenario_47_scavenger.lua:5633
 #, lua-format
