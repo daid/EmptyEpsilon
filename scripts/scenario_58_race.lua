@@ -712,7 +712,7 @@ function mainGMButtonsAfterPause()
 			}
 			for i=1,#reward_grid[player_count] do
 				if reward_grid[player_count][i] > 0 then
-					out = string.format("%s\n    %s:%s",out,place_name[i],reward_grid[player_count][i])
+					out = string.format(_("msgGM", "%s\n    %s:%s"),out,place_name[i],reward_grid[player_count][i])
 				else
 					break
 				end
@@ -1664,25 +1664,25 @@ function handleDockedState()
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
-	addCommsReply("Do you upgrade spaceships?", function()
+	addCommsReply(_("upgrade-comms",  "Do you upgrade spaceships?"), function()
 		if comms_target == stationZefram then
-			setCommsMessage("We can upgrade your jump drive maximum range for nanites or robotic goods")
+			setCommsMessage(_("upgrade-comms", "We can upgrade your jump drive maximum range for nanites or robotic goods"))
 		elseif comms_target == stationCarradine then
-			setCommsMessage(string.format("We can increase the speed of your impulse engines by %.2f percent for tritanium or dilithium",impulseBump))
+			setCommsMessage(string.format(_("upgrade-comms", "We can increase the speed of your impulse engines by %.2f percent for tritanium or dilithium"),impulseBump))
 		elseif comms_target == spinStation then
-			setCommsMessage(string.format("We can increase the speed your rotate speed by %.2f percent for %s",spinBump,spinComponent))
+			setCommsMessage(string.format(_("upgrade-comms", "We can increase the speed your rotate speed by %.2f percent for %s"),spinBump,spinComponent))
 		elseif comms_target == stationMarconi then
-			setCommsMessage(string.format("We can increase the range of your beam weapons by %.2f percent for %s",beamRangeBump,beamComponent))
+			setCommsMessage(string.format(_("upgrade-comms", "We can increase the range of your beam weapons by %.2f percent for %s"),beamRangeBump,beamComponent))
 		elseif comms_target == tubeStation then
-			setCommsMessage(string.format("We can add a homing missile tube to your ship for %s",tubeComponent))
+			setCommsMessage(string.format(_("upgrade-comms", "We can add a homing missile tube to your ship for %s"),tubeComponent))
 --			elseif comms_target == stationArcher then
---				setCommsMessage(string.format("We can upgrade the durability of your hull by %.2f percent for %s",hullBump,hullComponent))
+--				setCommsMessage(string.format(_("upgrade-comms", "We can upgrade the durability of your hull by %.2f percent for %s")),hullBump,hullComponent))
 		elseif comms_target == shieldStation then
-			setCommsMessage(string.format("We can upgrade your shields by %.2f percent for %s",shieldBump,shieldComponent))
+			setCommsMessage(string.format(_("upgrade-comms", "We can upgrade your shields by %.2f percent for %s"),shieldBump,shieldComponent))
 		elseif comms_target == stationNefatha then
-			setCommsMessage(string.format("We can upgrade your energy capacity by 25 percent for %s",energyComponent))
+			setCommsMessage(string.format(_("upgrade-comms", "We can upgrade your energy capacity by 25 percent for %s"),energyComponent))
 		else
-			setCommsMessage("We don't upgrade spaceships")
+			setCommsMessage(_("upgrade-comms", "We don't upgrade spaceships"))
 		end
 	end)
 	addCommsReply(_("cartographyOffice-comms", "Visit cartography office"), function()
@@ -1993,9 +1993,9 @@ function handleDockedState()
 		until(gi > #goods[comms_source])
 		if naniteQuantity > 0 then
 			if comms_source:hasJumpDrive() then
-				addCommsReply("Provide nanites for jump drive upgrade", function()
+				addCommsReply(_("upgrade-comms", "Provide nanites for jump drive upgrade"), function()
 					if comms_source.jumpUpgrade then
-						setCommsMessage("You already have the upgrade")
+						setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 					else
 						decrementPlayerGoods("nanites")
 						comms_source.cargo = comms_source.cargo + 1
@@ -2005,16 +2005,16 @@ function handleDockedState()
 						else
 							comms_source:setJumpDriveRange(5000,55000)
 						end
-						setCommsMessage("Your jump drive has been upgraded")
+						setCommsMessage(_("upgrade-comms", "Your jump drive has been upgraded"))
 					end
 				end)
 			end
 		end
 		if roboticQuantity > 0 then
 			if comms_source:hasJumpDrive() then
-				addCommsReply("Provide robotic goods for jump drive upgrade", function()
+				addCommsReply(_("upgrade-comms", "Provide robotic goods for jump drive upgrade"), function()
 					if comms_source.jumpUpgrade then
-						setCommsMessage("You already have the upgrade")
+						setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 					else
 						decrementPlayerGoods("robotic")
 						comms_source.cargo = comms_source.cargo + 1
@@ -2024,7 +2024,7 @@ function handleDockedState()
 						else
 							comms_source:setJumpDriveRange(5000,55000)
 						end
-						setCommsMessage("Your jump drive has been upgraded")
+						setCommsMessage(_("upgrade-comms", "Your jump drive has been upgraded"))
 					end
 				end)
 			end
@@ -2044,28 +2044,28 @@ function handleDockedState()
 			gi = gi + 1
 		until(gi > #goods[comms_source])		
 		if tritaniumQuantity > 0 then
-			addCommsReply(string.format("Provide tritanium for %.2f percent impulse engine speed upgrade",impulseBump), function()
+			addCommsReply(string.format(_("upgrade-comms", "Provide tritanium for %.2f percent impulse engine speed upgrade"),impulseBump), function()
 				if comms_source.impulseUpgrade then
-					setCommsMessage("You already have the upgrade")
+					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 				else
 					decrementPlayerGoods("tritanium")
 					comms_source.cargo = comms_source.cargo + 1
 					comms_source.impulseUpgrade = true
 					comms_source:setImpulseMaxSpeed(comms_source:getImpulseMaxSpeed()*(1+impulseBump/100))
-					setCommsMessage("Your impulse engine speed has been upgraded")
+					setCommsMessage(_("upgrade-comms", "Your impulse engine speed has been upgraded"))
 				end
 			end)
 		end
 		if dilithiumQuantity > 0 then
-			addCommsReply(string.format("Provide dilithium for %f percent impulse engine speed upgrade",impulseBump), function()
+			addCommsReply(string.format(_("upgrade-comms", "Provide dilithium for %f percent impulse engine speed upgrade"),impulseBump), function()
 				if comms_source.impulseUpgrade then
-					setCommsMessage("You already have the upgrade")
+					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 				else
 					decrementPlayerGoods("dilithium")
 					comms_source.cargo = comms_source.cargo + 1
 					comms_source.impulseUpgrade = true
 					comms_source:setImpulseMaxSpeed(comms_source:getImpulseMaxSpeed()*(1+impulseBump/100))
-					setCommsMessage("Your impulse engine speed has been upgraded")
+					setCommsMessage(_("upgrade-comms", "Your impulse engine speed has been upgraded"))
 				end
 			end)
 		end
@@ -2080,15 +2080,15 @@ function handleDockedState()
 			gi = gi + 1
 		until(gi > #goods[comms_source])
 		if spinQuantity > 0 then
-			addCommsReply(string.format("Provide %s for %.2f percent maneuver speed upgrade",spinComponent,spinBump), function()
+			addCommsReply(string.format(_("upgrade-comms", "Provide %s for %.2f percent maneuver speed upgrade"),spinComponent,spinBump), function()
 				if comms_source.spinUpgrade then
-					setCommsMessage("You already have the upgrade")
+					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 				else
 					decrementPlayerGoods(spinComponent)
 					comms_source.cargo = comms_source.cargo + 1
 					comms_source.spinUpgrade = true
 					comms_source:setRotationMaxSpeed(comms_source:getRotationMaxSpeed()*(1+spinBump/100))
-					setCommsMessage("Your spin speed has been upgraded")
+					setCommsMessage(_("upgrade-comms", "Your spin speed has been upgraded"))
 				end
 			end)
 		end
@@ -2103,9 +2103,9 @@ function handleDockedState()
 			gi = gi + 1
 		until(gi > #goods[comms_source])
 		if beamQuantity > 0 then
-			addCommsReply(string.format("Provide %s for %.2f percent beam range upgrade",beamComponent,beamRangeBump), function()
+			addCommsReply(string.format(_("upgrade-comms", "Provide %s for %.2f percent beam range upgrade"),beamComponent,beamRangeBump), function()
 				if comms_source.beamRangeUpgrade then
-					setCommsMessage("You already have the upgrade")
+					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 				else
 					if comms_source:getBeamWeaponRange(0) > 0 then
 						decrementPlayerGoods(beamComponent)
@@ -2119,9 +2119,9 @@ function handleDockedState()
 							tempDirection = comms_source:getBeamWeaponDirection(b)
 							comms_source:setBeamWeapon(b,tempArc,tempDirection,newRange,tempCycle,tempDamage)
 						end	
-						setCommsMessage("Your beam range has been upgraded")					
+						setCommsMessage(_("upgrade-comms", "Your beam range has been upgraded"))
 					else
-						setCommsMessage("Your ship does not support a beam weapon upgrade")
+						setCommsMessage(_("upgrade-comms", "Your ship does not support a beam weapon upgrade"))
 					end
 				end
 			end)
@@ -2137,9 +2137,9 @@ function handleDockedState()
 			gi = gi + 1
 		until(gi > #goods[comms_source])
 		if tubeQuantity > 0 then
-			addCommsReply(string.format("Provide %s for additional homing missile tube",tubeComponent), function()
+			addCommsReply(string.format(_("upgrade-comms", "Provide %s for additional homing missile tube"),tubeComponent), function()
 				if comms_source.tubeUpgrade then
-					setCommsMessage("You already have the upgrade")
+					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 				else
 					decrementPlayerGoods(tubeComponent)
 					comms_source.cargo = comms_source.cargo + 1
@@ -2150,7 +2150,7 @@ function handleDockedState()
 					comms_source:setWeaponTubeExclusiveFor(originalTubes, "Homing")
 					comms_source:setWeaponStorageMax("Homing", comms_source:getWeaponStorageMax("Homing") + 2)
 					comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorage("Homing") + 2)
-					setCommsMessage("You now have an additional homing missle tube")
+					setCommsMessage(_("upgrade-comms", "You now have an additional homing missile tube"))
 				end
 			end)
 		end
@@ -2165,15 +2165,15 @@ function handleDockedState()
 --			gi = gi + 1
 --		until(gi > #goods[comms_source])
 --		if hullQuantity > 0 then
---			addCommsReply(string.format("Provide %s for %.2f percent hull upgrade",hullComponent,hullBump), function()
+--			addCommsReply(string.format(_("upgrade-comms", "Provide %s for %.2f percent hull upgrade"),hullComponent,hullBump), function()
 --				if comms_source.hullUpgrade then
---					setCommsMessage("You already have the upgrade")
+--					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 --				else
 --					decrementPlayerGoods(hullComponent)
 --					comms_source.cargo = comms_source.cargo + 1
 --					comms_source.hullUpgrade = true
 --					comms_source:setHullMax(comms_source:getHullMax()*(1+hullBump/100))
---					setCommsMessage("You now have an upgraded hull")
+--					setCommsMessage(_("upgrade-comms", "You now have an upgraded hull"))
 --				end
 --			end)
 --		end
@@ -2188,15 +2188,15 @@ function handleDockedState()
 			gi = gi + 1
 		until(gi > #goods[comms_source])
 		if energyQuantity > 0 then
-			addCommsReply(string.format("Provide %s for 25 percent energy capacity upgrade",energyComponent), function()
+			addCommsReply(string.format(_("upgrade-comms", "Provide %s for 25 percent energy capacity upgrade"),energyComponent), function()
 				if comms_source.energyUpgrade then
-					setCommsMessage("You already have the upgrade")
+					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 				else
 					decrementPlayerGoods(energyComponent)
 					comms_source.cargo = comms_source.cargo + 1
 					comms_source.energyUpgrade = true
 					comms_source:setMaxEnergy(comms_source:getMaxEnergy()*1.25)
-					setCommsMessage("You now have upgraded energy capacity")
+					setCommsMessage(_("upgrade-comms", "You now have upgraded energy capacity"))
 				end
 			end)
 		end
@@ -2211,9 +2211,9 @@ function handleDockedState()
 			gi = gi + 1
 		until(gi > #goods[comms_source])
 		if shieldQuantity > 0 then
-			addCommsReply(string.format("Provide %s for %.2f percent front shield upgrade",shieldComponent,shieldBump), function()
+			addCommsReply(string.format(_("upgrade-comms", "Provide %s for %.2f percent front shield upgrade"),shieldComponent,shieldBump), function()
 				if comms_source.frontShieldUpgrade then
-					setCommsMessage("You already have the upgrade")
+					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 				else
 					decrementPlayerGoods(shieldComponent)
 					comms_source.cargo = comms_source.cargo + 1
@@ -2224,20 +2224,20 @@ function handleDockedState()
 					else
 						comms_source:setShieldsMax(comms_source:getShieldMax(0)*(1+shieldBump/100), comms_source:getShieldMax(1))
 					end
-					setCommsMessage("You now have an upgraded front shield")
+					setCommsMessage(_("upgrade-comms", "You now have an upgraded front shield"))
 				end
 			end)
 			if comms_source:getShieldCount() > 1 then
-				addCommsReply(string.format("Provide %s for %.2f percent rear shield upgrade",shieldComponent,shieldBump), function()
+				addCommsReply(string.format(_("upgrade-comms", "Provide %s for %.2f percent rear shield upgrade"),shieldComponent,shieldBump), function()
 					if comms_source.rearShieldUpgrade then
-						setCommsMessage("You already have the upgrade")
+						setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 					else
 						decrementPlayerGoods(shieldComponent)
 						comms_source.cargo = comms_source.cargo + 1
 						comms_source.rearShieldUpgrade = true
 						si = comms_source:getShieldCount()
 						comms_source:setShieldsMax(comms_source:getShieldMax(0), comms_source:getShieldMax(1)*(1+shieldBump/100))
-						setCommsMessage("You now have an upgraded rear shield")
+						setCommsMessage(_("upgrade-comms", "You now have an upgraded rear shield"))
 					end				
 				end)
 			end
@@ -2303,25 +2303,25 @@ function handleUndockedState()
 	setCommsMessage(oMsg)
  	addCommsReply(_("station-comms", "I need information"), function()
 		setCommsMessage(_("station-comms", "What kind of information do you need?"))
-		addCommsReply(_("station-comms","Do you upgrade spaceships?"), function()
+		addCommsReply(_("upgrade-comms","Do you upgrade spaceships?"), function()
 			if comms_target == stationZefram then
-				setCommsMessage(_("station-comms","We can upgrade your jump drive maximum range for nanites or robotic goods"))
+				setCommsMessage(_("upgrade-comms","We can upgrade your jump drive maximum range for nanites or robotic goods"))
 			elseif comms_target == stationCarradine then
-				setCommsMessage(string.format(_("station-comms","We can increase the speed of your impulse engines by %.2f percent for tritanium or dilithium"),impulseBump))
+				setCommsMessage(string.format(_("upgrade-comms","We can increase the speed of your impulse engines by %.2f percent for tritanium or dilithium"),impulseBump))
 			elseif comms_target == spinStation then
-				setCommsMessage(string.format(_("station-comms","We can increase the speed your rotate speed by %.2f percent for %s"),spinBump,spinComponent))
+				setCommsMessage(string.format(_("upgrade-comms","We can increase the speed your rotate speed by %.2f percent for %s"),spinBump,spinComponent))
 			elseif comms_target == stationMarconi then
-				setCommsMessage(string.format(_("station-comms","We can increase the range of your beam weapons by %.2f percent for %s"),beamRangeBump,beamComponent))
+				setCommsMessage(string.format(_("upgrade-comms","We can increase the range of your beam weapons by %.2f percent for %s"),beamRangeBump,beamComponent))
 			elseif comms_target == tubeStation then
-				setCommsMessage(string.format(_("station-comms","We can add a homing missile tube to your ship for %s"),tubeComponent))
+				setCommsMessage(string.format(_("upgrade-comms","We can add a homing missile tube to your ship for %s"),tubeComponent))
 --			elseif comms_target == stationArcher then
---				setCommsMessage(string.format("We can upgrade the durability of your hull by %.2f percent for %s",hullBump,hullComponent))
+--				setCommsMessage(string.format(_("upgrade-comms", "We can upgrade the durability of your hull by %.2f percent for %s"),hullBump,hullComponent))
 			elseif comms_target == shieldStation then
-				setCommsMessage(string.format(_("station-comms","We can upgrade your shields by %.2f percent for %s"),shieldBump,shieldComponent))
+				setCommsMessage(string.format(_("upgrade-comms","We can upgrade your shields by %.2f percent for %s"),shieldBump,shieldComponent))
 			elseif comms_target == stationNefatha then
-				setCommsMessage(string.format(_("station-comms","We can upgrade your energy capacity by 25 percent for %s"),energyComponent))
+				setCommsMessage(string.format(_("upgrade-comms","We can upgrade your energy capacity by 25 percent for %s"),energyComponent))
 			else
-				setCommsMessage(_("station-comms","We don't upgrade spaceships"))
+				setCommsMessage(_("upgrade-comms","We don't upgrade spaceships"))
 			end
 		end)
 		if comms_target == stationTimer then
