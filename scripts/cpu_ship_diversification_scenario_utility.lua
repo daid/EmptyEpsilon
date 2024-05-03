@@ -24,7 +24,7 @@
 --	cloned from scenario to scenario until I put them in this document in an effort to 
 --	reduce the workload on the pull request reviewer.
 --
---	Version 2
+--	Version 2.1
 function stockTemplate(enemyFaction,template)
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate(template)
 	ship:onTakingDamage(function(self,instigator)
@@ -39,6 +39,7 @@ end
 --	Additional enemy ships with some modifications from the original template parameters  --
 --------------------------------------------------------------------------------------------
 function atlantisY42(enemyFaction)
+	--Relative strength reference number: 60
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Atlantis X23")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -89,7 +90,99 @@ function atlantisY42(enemyFaction)
 	end
 	return ship		
 end
+function barracuda(enemyFaction)
+	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
+	ship:onTakingDamage(function(self,instigator)
+		string.format("")	--serious proton needs a global context
+		if instigator ~= nil then
+			self.damage_instigator = instigator
+		end
+	end)
+	ship:setTypeName("Barracuda")
+	ship:setHullMax(200)			--stronger hull (vs 70)
+	ship:setHull(200)
+	ship:setShieldsMax(200,100,100)	--stronger shields (vs 50,40)
+	ship:setShields(200,100,100)
+	ship:setImpulseMaxSpeed(75)		--faster impulse (vs 60)
+	ship:setRotationMaxSpeed(15)	--faster maneuver (vs 10)
+	ship:setWeaponTubeCount(16)		--more (vs 2)
+	ship:setWeaponTubeDirection(0,   5):setTubeSize(0,  "small"):setTubeLoadTime(0,  8):setWeaponTubeExclusiveFor(0, "Homing")
+	ship:setWeaponTubeDirection(1,  -5):setTubeSize(1,  "small"):setTubeLoadTime(1,  8):setWeaponTubeExclusiveFor(1, "Homing")
+	ship:setWeaponTubeDirection(2,   0):setTubeSize(2,  "small"):setTubeLoadTime(2,  7):setWeaponTubeExclusiveFor(2, "Homing")
+	ship:setWeaponTubeDirection(3,   5):setTubeSize(3,  "small"):setTubeLoadTime(3,  6):setWeaponTubeExclusiveFor(3, "EMP")
+	ship:setWeaponTubeDirection(4,  -5):setTubeSize(4,  "small"):setTubeLoadTime(4,  6):setWeaponTubeExclusiveFor(4, "EMP")
+	ship:setWeaponTubeDirection(5,   0):setTubeSize(5,  "small"):setTubeLoadTime(5,  5):setWeaponTubeExclusiveFor(5, "EMP")
+	ship:setWeaponTubeDirection(6,   5):setTubeSize(6,  "small"):setTubeLoadTime(6,  9):setWeaponTubeExclusiveFor(6, "Nuke")
+	ship:setWeaponTubeDirection(7,  -5):setTubeSize(7,  "small"):setTubeLoadTime(7,  9):setWeaponTubeExclusiveFor(7, "Nuke")
+	ship:setWeaponTubeDirection(8,   0):setTubeSize(8,  "small"):setTubeLoadTime(8,  8):setWeaponTubeExclusiveFor(8, "Nuke")
+	ship:setWeaponTubeDirection(9,   5):setTubeSize(9,  "small"):setTubeLoadTime(9,  4):setWeaponTubeExclusiveFor(9, "HVLI")
+	ship:setWeaponTubeDirection(10, -5):setTubeSize(10, "small"):setTubeLoadTime(10, 4):setWeaponTubeExclusiveFor(10,"HVLI")
+	ship:setWeaponTubeDirection(11,  0):setTubeSize(11, "small"):setTubeLoadTime(11, 3):setWeaponTubeExclusiveFor(11,"HVLI")
+	ship:setWeaponTubeDirection(12,-10):setTubeSize(12, "small"):setTubeLoadTime(12, 5):setWeaponTubeExclusiveFor(12,"HVLI")
+	ship:setWeaponTubeDirection(13, 10):setTubeSize(13, "small"):setTubeLoadTime(13, 5):setWeaponTubeExclusiveFor(13,"HVLI")
+	ship:setWeaponTubeDirection(14,  0):setTubeSize(14,"medium"):setTubeLoadTime(14, 5):setWeaponTubeExclusiveFor(14,"Homing")
+	ship:setWeaponTubeDirection(15,  0):setTubeSize(15,"medium"):setTubeLoadTime(15,10):setWeaponTubeExclusiveFor(15,"Nuke")
+	ship:setWeaponStorageMax("Homing", 32)		--more (vs 6)
+	ship:setWeaponStorage("Homing",    32)
+	ship:setWeaponStorageMax("EMP",    20)		--more (vs 0)
+	ship:setWeaponStorage("EMP",       20)
+	ship:setWeaponStorageMax("Nuke",   18)		--more (vs 0)
+	ship:setWeaponStorage("Nuke",      18)
+	ship:setWeaponStorageMax("HVLI",   55)		--more (vs 12)
+	ship:setWeaponStorage("HVLI",      55)
+	local ships_key = _("scienceDB","Ships")
+	local frigate_key = _("scienceDB","Frigate")
+	local barracuda_key = _("scienceDB","Barracuda")
+	local barracuda_db = queryScienceDatabase(ships_key,frigate_key,barracuda_key)
+	if barracuda_db == nil then
+		local frigate_db = queryScienceDatabase(ships_key,frigate_key)
+		if frigate_db ~= nil then
+			frigate_db:addEntry(barracuda_key)
+			barracuda_db = queryScienceDatabase(ships_key,frigate_key,barracuda_key)
+			local small_tubes_0_key = _("scienceDB","Small tubes 0")
+			local small_tubes_0_val = _("scienceDB","7 sec / Homing, 8 sec / Nuke")
+			local small_tubes_5_1_key = _("scienceDB","Small tubes 5 & -5")
+			local small_tubes_5_1_val = _("scienceDB","8 sec / Homing, 9 sec / Nuke")
+			local small_tube_0_key = _("scienceDB","Small tube 0")
+			local small_tube_0_val = _("scienceDB","5 sec / EMP")
+			local small_tubes_5_2_key = _("scienceDB"," Small tubes 5 & -5")
+			local small_tubes_5_2_val = _("scienceDB","6 sec / EMP")
+			local small_tube_0_2_key = _("scienceDB","  Small tube 0")
+			local small_tube_0_2_val = _("scienceDB","3 sec / HVLI")
+			local small_tubes_5_3_key = _("scienceDB","   Small tubes 5 & -5")
+			local small_tubes_5_3_val = _("scienceDB","4 sec / HVLI")
+			local small_tubes_10_key = _("scienceDB","Small tubes 10 & -10")
+			local small_tubes_10_val = _("scienceDB","5 sec / HVLI")
+			local tube_0_key = _("scienceDB","Tube 0")
+			local tube_0_val = _("scienceDB","5 sec / Homing")
+			local tube_0_2_key = _("scienceDB"," Tube 0")
+			local tube_0_2_val = _("scienceDB","10 sec / Nuke")
+			local phobos_t3_key = _("scienceDB","Phobos T3")
+			addShipToDatabase(
+				queryScienceDatabase(ships_key,frigate_key,phobos_t3_key),	--base ship database entry
+				barracuda_db,		--modified ship database entry
+				ship,			--ship just created, long description on the next line
+				_("scienceDB","The Barracuda started off as a Phobos T3. It was given massive upgrades to shields, hull and missile weapons. The impulse systems were also upgraded. It's designed to spray missiles forth at a prodigious rate.\n\nIt barely qualifies as a frigate, it's more like a mini-corvette."),
+				{
+					{key = small_tubes_0_key, value = small_tubes_0_val},	--torpedo tube direction and load speed
+					{key = small_tubes_5_1_key, value = small_tubes_5_1_val},	--torpedo tube direction and load speed
+					{key = small_tube_0_key, value = small_tube_0_val},	--torpedo tube direction and load speed
+					{key = small_tubes_5_2_key, value = small_tubes_5_2_val},	--torpedo tube direction and load speed
+					{key = small_tube_0_2_key, value = small_tube_0_2_val},	--torpedo tube direction and load speed
+					{key = small_tubes_5_3_key, value = small_tubes_5_3_val},	--torpedo tube direction and load speed
+					{key = small_tubes_10_key, value = small_tubes_10_val},	--torpedo tube direction and load speed
+					{key = tube_0_key, value = tube_0_val},	--torpedo tube direction and load speed
+					{key = tube_0_2_key, value = tube_0_2_val},	--torpedo tube direction and load speed
+				},
+				nil,	--jump range
+				"AtlasHeavyFighterYellow"
+			)
+		end
+	end
+	return ship
+end
 function cruiserdrone(enemyFaction)
+	--Relative strength reference number: 23
 	--courtesy of Black Wall scenario
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Cruiser")
 	ship:onTakingDamage(function(self,instigator)
@@ -134,6 +227,7 @@ function cruiserdrone(enemyFaction)
 	return ship
 end
 function cucaracha(enemyFaction)
+	--Relative strength reference number: 36
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Tug")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -175,6 +269,7 @@ function cucaracha(enemyFaction)
 end
 function dreadnought2(enemyFaction)
 	--courtesy of Black Wall scenario
+	--Relative strength reference number: 85
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Dreadnought")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -225,6 +320,7 @@ function dreadnought2(enemyFaction)
 	return ship
 end
 function droneHeavy(enemyFaction)
+	--Relative strength reference number: 5
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Drone")
 	ship:setTypeName("Heavy Drone")
 	ship:setHullMax(40)					--stronger hull (vs 30)
@@ -255,6 +351,7 @@ function droneHeavy(enemyFaction)
 	return ship
 end
 function droneJacket(enemyFaction)
+	--Relative strength reference number: 4
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Drone")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -291,6 +388,7 @@ function droneJacket(enemyFaction)
 	return ship
 end
 function droneLite(enemyFaction)
+	--Relative strength reference number: 3
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Drone")
 	ship:setTypeName("Lite Drone")
 	ship:setHullMax(20)					--weaker hull (vs 30)
@@ -322,6 +420,7 @@ function droneLite(enemyFaction)
 	return ship
 end
 function enforcer(enemyFaction)
+	--Relative strength reference number: 75
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Blockade Runner")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -387,6 +486,7 @@ function enforcer(enemyFaction)
 	return ship		
 end
 function farco3(enemyFaction)
+	--Relative strength reference number: 16
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -430,6 +530,7 @@ function farco3(enemyFaction)
 	return ship
 end
 function farco5(enemyFaction)
+	--Relative strength reference number: 16
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -472,6 +573,7 @@ function farco5(enemyFaction)
 	return ship
 end
 function farco8(enemyFaction)
+	--Relative strength reference number: 19
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -517,6 +619,7 @@ function farco8(enemyFaction)
 	return ship
 end
 function farco11(enemyFaction)
+	--Relative strength reference number: 21
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -562,6 +665,7 @@ function farco11(enemyFaction)
 	return ship
 end
 function farco13(enemyFaction)
+	--Relative strength reference number: 24
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -614,6 +718,7 @@ function farco13(enemyFaction)
 end
 function fighter2(enemyFaction)
 	--courtesy of Black Wall scenario
+	--Relative strength reference number: 9
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Fighter")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -664,6 +769,7 @@ function fighter2(enemyFaction)
 	return ship
 end
 function gnat(enemyFaction)
+	--Relative strength reference number: 2
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Drone")
 	ship:setTypeName("Gnat")
 	ship:setHullMax(15)					--weaker hull (vs 30)
@@ -697,6 +803,7 @@ function gnat(enemyFaction)
 end
 function gunship2(enemyFaction)
 	--courtesy of Black Wall scenario
+	--Relative strength reference number: 20
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adv. Gunship")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -745,6 +852,7 @@ function gunship2(enemyFaction)
 	return ship
 end
 function hornetFX64(enemyFaction)
+	--Relative strength reference number: 8
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("MT52 Hornet")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -782,6 +890,7 @@ function hornetFX64(enemyFaction)
 	return ship
 end
 function hornetMT55(enemyFaction)
+	--Relative strength reference number: 6
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("MT52 Hornet"):orderRoaming()
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -817,6 +926,7 @@ function hornetMT55(enemyFaction)
 	return ship
 end
 function hornetMV52(enemyFaction)
+	--Relative strength reference number: 6
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("MT52 Hornet")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -852,6 +962,7 @@ function hornetMV52(enemyFaction)
 	return ship
 end
 function hurricane(enemyFaction)
+	--Relative strength reference number: 46
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Piranha F8")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -921,6 +1032,7 @@ function hurricane(enemyFaction)
 	return ship
 end
 function jade5(enemyFaction)
+	--Relative strength reference number: 15
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adder MK5")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -961,6 +1073,7 @@ function jade5(enemyFaction)
 	return ship
 end
 function k2breaker(enemyFaction)
+	--Relative strength reference number: 55
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Breaker")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -1012,6 +1125,7 @@ function k2breaker(enemyFaction)
 	return ship
 end
 function k2fighter(enemyFaction)
+	--Relative strength reference number: 7
 	local k2_key = _("scienceDB","K2 Fighter")
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Fighter")
 	ship:setTypeName(k2_key)
@@ -1041,6 +1155,7 @@ function k2fighter(enemyFaction)
 	return ship
 end	
 function k3fighter(enemyFaction)
+	--Relative strength reference number: 8
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Fighter")
 	ship:setTypeName("K3 Fighter")
 	ship:setBeamWeapon(0, 60, 0, 1200.0, 2.5, 9)	--beams cycle faster and damage more (vs 4.0 & 6)
@@ -1070,6 +1185,7 @@ function k3fighter(enemyFaction)
 	return ship
 end	
 function maniapak(enemyFaction)
+	--Relative strength reference number: 34
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adder MK5")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -1169,6 +1285,7 @@ function maniapak(enemyFaction)
 	return ship		
 end
 function phobosR2(enemyFaction)
+	--Relative strength reference number: 13
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -1209,6 +1326,7 @@ function phobosR2(enemyFaction)
 	return ship
 end
 function phobosT4(enemyFaction)
+	--Relative strength reference number: 18
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -1253,6 +1371,7 @@ function phobosT4(enemyFaction)
 	return ship
 end
 function predator(enemyFaction)
+	--Relative strength reference number: 42
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Piranha F8")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -1336,7 +1455,45 @@ function predator(enemyFaction)
 	end
 	return ship		
 end
+function shepherd(enemyFaction)
+	--Relative strength reference number: 6
+	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Fighter")
+	ship:onTakingDamage(function(self,instigator)
+		string.format("")	--serious proton needs a global context
+		if instigator ~= nil then
+			self.damage_instigator = instigator
+		end
+	end)
+	ship:setTypeName("Shepherd")
+--				   Index,  Arc,	Dir,	Range, Cycle,	Damage
+	ship:setBeamWeapon(0,	10,	  0,	 3000,	   4,	4)	--narrower (vs 60), longer (vs 1000)
+	local ships_key = _("scienceDB","Ships")
+	local starfighter_key = _("scienceDB","Starfighter")
+	local shepherd_key = _("scienceDB","Shepherd")
+	local fighter_key = _("scienceDB","Fighter")
+	local shepherd_db = queryScienceDatabase(ships_key,starfighter_key,shepherd_key)
+	if shepherd_db == nil then
+		local starfighter_db = queryScienceDatabase(ships_key,starfighter_key)
+		if starfighter_db ~= nil then
+			starfighter_db:addEntry(shepherd_key)
+			shepherd_db = queryScienceDatabase(ships_key,starfighter_key,shepherd_key)
+			local exuari_key = _("scienceDB","Exuari")
+			local dagger_key = _("scienceDB","Dagger")
+			addShipToDatabase(
+				queryScienceDatabase(ships_key,exuari_key,dagger_key),	--base ship database entry
+				shepherd_db,	--modified ship database entry
+				ship,			--ship just created, long description on the next line
+				_("scienceDB","The Shepherd is a Fighter with a long narrow beam. Tactical recommendation: hack the impulse engines"),
+				nil,	--misc key value pairs
+				nil,	--jump range
+				"small_fighter_1"
+			)
+		end
+	end
+	return ship
+end
 function starhammerIII(enemyFaction)
+	--Relative strength reference number: 85
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Starhammer II")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -1382,6 +1539,7 @@ function starhammerIII(enemyFaction)
 	return ship
 end
 function starhammerV(enemyFaction)
+	--Relative strength reference number: 90
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Starhammer II")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -1430,6 +1588,7 @@ function starhammerV(enemyFaction)
 	return ship		
 end
 function tempest(enemyFaction)
+	--Relative strength reference number: 30
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Piranha F12")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -1500,7 +1659,44 @@ function tempest(enemyFaction)
 	end
 	return ship
 end
+function touchy(enemyFaction)
+	--Relative strength reference number: 7
+	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Fighter")
+	ship:onTakingDamage(function(self,instigator)
+		string.format("")	--serious proton needs a global context
+		if instigator ~= nil then
+			self.damage_instigator = instigator
+		end
+	end)
+	ship:setTypeName("Touchy")
+--				   Index,  Arc,	Dir,	Range, Cycle,	Damage
+	ship:setBeamWeapon(0,	12,	  0,	 2200,	9.0,	9.0)	--narrower (vs 60), longer (vs 1000), slower (vs 4),  stronger (vs 4)
+	local ships_key = _("scienceDB","Ships")
+	local starfighter_key = _("scienceDB","Starfighter")
+	local touchy_key = _("scienceDB","Youchy")
+	local touchy_db = queryScienceDatabase(ships_key,starfighter_key,touchy_key)
+	if touchy_db == nil then
+		local starfighter_db = queryScienceDatabase(ships_key,starfighter_key)
+		if starfighter_db ~= nil then
+			starfighter_db:addEntry(touchy_key)
+			touchy_db = queryScienceDatabase(ships_key,starfighter_key,touchy_key)
+			local exuari_key = _("scienceDB","Exuari")
+			local dagger_key = _("scienceDB","Dagger")
+			addShipToDatabase(
+				queryScienceDatabase(ships_key,exuari_key,dagger_key),	--base ship database entry
+				touchy_db,		--modified ship database entry
+				ship,			--ship just created, long description on the next line
+				_("scienceDB","Touchy is a fighter with a highly modified beam weapon: narrower, longer, slower and stronger"),
+				nil,	--misc key value pairs
+				nil,	--jump range
+				"small_fighter_1"
+			)
+		end
+	end
+	return ship
+end
 function tyr(enemyFaction)
+	--Relative strength reference number: 150
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Battlestation")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -1552,6 +1748,7 @@ function tyr(enemyFaction)
 	return ship
 end
 function waddle5(enemyFaction)
+	--Relative strength reference number: 15
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adder MK5")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -1592,6 +1789,7 @@ function waddle5(enemyFaction)
 end
 function weaponsplatform2(enemyFaction)
 	--courtesy of Black Wall scenario
+	--Relative strength reference number: 50
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Weapons platform")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -1638,6 +1836,7 @@ function weaponsplatform2(enemyFaction)
 	return ship
 end
 function whirlwind(enemyFaction)
+	--Relative strength reference number: 26
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Storm")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
@@ -1704,6 +1903,7 @@ function whirlwind(enemyFaction)
 	return ship
 end
 function wzLindworm(enemyFaction)
+	--Relative strength reference number: 9
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("WX-Lindworm")
 	ship:setTypeName("WZ-Lindworm")
 	ship:setWeaponStorageMax("Nuke",2)		--more nukes (vs 0)
@@ -1748,6 +1948,7 @@ function wzLindworm(enemyFaction)
 end
 --	unarmed ships
 function spaceSedan(enemyFaction)
+	--Relative strength reference number: 1
 	local ship = CpuShip():setTemplate("Personnel Jump Freighter 3")
 	if enemyFaction ~= nil then
 		ship:setFaction(enemyFaction)
@@ -1758,6 +1959,7 @@ function spaceSedan(enemyFaction)
 	return ship
 end
 function courier(enemyFaction)
+	--Relative strength reference number: 1
 	local ship = CpuShip():setTemplate("Personnel Freighter 1")
 	if enemyFaction ~= nil then
 		ship:setFaction(enemyFaction)
@@ -1771,6 +1973,7 @@ function courier(enemyFaction)
 	return ship
 end
 function workWagon(enemyFaction)
+	--Relative strength reference number: 1
 	local ship = CpuShip():setTemplate("Equipment Freighter 2")
 	if enemyFaction ~= nil then
 		ship:setFaction(enemyFaction)
@@ -1783,6 +1986,7 @@ function workWagon(enemyFaction)
 	return ship
 end
 function omnibus(enemyFaction)
+	--Relative strength reference number: 1
 	local ship = CpuShip():setTemplate("Personnel Jump Freighter 5")
 	if enemyFaction ~= nil then
 		ship:setFaction(enemyFaction)
@@ -1793,6 +1997,7 @@ function omnibus(enemyFaction)
 	return ship
 end
 function ladenLorry(enemyFaction)
+	--Relative strength reference number: 1
 	local ship = CpuShip():setTemplate("Goods Freighter 3")
 	if enemyFaction ~= nil then
 		ship:setFaction(enemyFaction)
@@ -1805,6 +2010,7 @@ function ladenLorry(enemyFaction)
 	return ship
 end
 function physicsResearch(enemyFaction)
+	--Relative strength reference number: 1
 	local ship = CpuShip():setTemplate("Garbage Freighter 3")
 	if enemyFaction ~= nil then
 		ship:setFaction(enemyFaction)
@@ -1819,6 +2025,7 @@ function physicsResearch(enemyFaction)
 	return ship
 end
 function serviceJonque(enemyFaction)
+	--Relative strength reference number: 1
 	local ship = CpuShip():setTemplate("Garbage Jump Freighter 4")
 	if enemyFaction ~= nil then
 		ship:setFaction(enemyFaction)

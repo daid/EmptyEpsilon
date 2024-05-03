@@ -35,7 +35,7 @@ msgstr ""
 "Version 1\n"
 "USN Discord: https://discord.gg/PntGG3a - hier kannst du online an Spielen "
 "teilnehmen. Jedes Wochenende findet ein Spiel statt, alle Erfahrungsgrade "
-"sind willkoimmen."
+"sind willkommen."
 
 # Scenario setting
 msgctxt "setting"
