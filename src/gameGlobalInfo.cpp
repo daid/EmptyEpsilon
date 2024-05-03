@@ -799,7 +799,7 @@ static int getEEVersion(lua_State* L)
 /// Example: getEEVersion() -- returns 20221029 on EE-2022.10.29
 REGISTER_SCRIPT_FUNCTION(getEEVersion);
 
-static int luaPrint(lua_State* L)
+static int luaLogPrint(lua_State* L, bool print)
 {
     string message;
     int n = lua_gettop(L);  /* number of arguments */
@@ -836,7 +836,17 @@ static int luaPrint(lua_State* L)
         }
     }
     LOG(Info, "LUA:", message);
-    LuaConsole::addLog(message);
+    if (print)
+        LuaConsole::addLog(message);
     return 0;
 }
+static int luaPrint(lua_State* L)
+{
+    return luaLogPrint(L, true);
+}
+static int luaLog(lua_State* L)
+{
+    return luaLogPrint(L, false);
+}
 REGISTER_SCRIPT_FUNCTION_NAMED(luaPrint, "print");
+REGISTER_SCRIPT_FUNCTION_NAMED(luaLog, "log");
