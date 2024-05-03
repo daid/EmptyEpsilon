@@ -109,7 +109,7 @@ static int luaCreateClass(lua_State* L)
     return 1;
 }
 
-static int luaPrint(lua_State* L)
+static int luaPrintLog(lua_State* L, bool print)
 {
     string message;
     int n = lua_gettop(L);  /* number of arguments */
@@ -146,8 +146,19 @@ static int luaPrint(lua_State* L)
         }
     }
     LOG(Info, "LUA:", message);
-    LuaConsole::addLog(message);
+    if (print)
+        LuaConsole::addLog(message);
     return 0;
+}
+
+static int luaPrint(lua_State* L)
+{
+    return luaPrintLog(L, true);
+}
+
+static int luaLog(lua_State* L)
+{
+    return luaPrintLog(L, false);
 }
 
 static int luaGetEntityFunctionTable(lua_State* L)
@@ -300,6 +311,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("random", static_cast<float(*)(float, float)>(&random));
     env.setGlobal("irandom", &irandom);
     env.setGlobal("print", &luaPrint);
+    env.setGlobal("log", &luaLog);
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
     env.setGlobal("_", &luaTranslate);
     
