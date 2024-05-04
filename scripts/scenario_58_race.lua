@@ -2576,7 +2576,7 @@ function enemyComms(comms_data)
 			return true
 		end
 	else
-		setCommsMessage("I belong to " .. comms_target.owner)
+		setCommsMessage(_("shipEnemy-comms", "I belong to ") .. comms_target.owner)
 		addCommsReply(_("Back"), commsShip)
 	end
 	return false
@@ -2985,7 +2985,7 @@ function competeResults()
 		for pl=1,#playerList do
 			if playerList[pl].timePoints == nil then
 				playerList[pl].timePoints = 0
-				gMsg = gMsg .. string.format("\n%s time: %.2f seconds. Time rank: %s. Placement points: 0",playerList[pl]:getCallSign(),playerList[pl].raceTime,playerList[pl].timeRank)
+				gMsg = gMsg .. string.format(_("msgMainscreen", "\n%s time: %.2f seconds. Time rank: %s. Placement points: 0"),playerList[pl]:getCallSign(),playerList[pl].raceTime,playerList[pl].timeRank)
 			end
 		end
 	end
@@ -3347,12 +3347,12 @@ function update(delta)
 	if raceInstructionMessage ~= "sent" then
 		game_state = "introducing"
 		raceInstructionMessage = "sent"
-		primaryOrders = string.format("Start race on time at waypoint 1\nRace Length: %f units",raceLength)
+		primaryOrders = string.format(_("raceOrders-comms", "Start race on time at waypoint 1\nRace Length: %f units"),raceLength)
 		for p1idx=1,32 do
 			local p1 = getPlayerShip(p1idx)
 			if p1 ~= nil and p1:isValid() then
-				p1:addToShipLog("Race starts in 10 minutes. Be at waypoint 1 on time or forfeit","Magenta")
-				p1:addToShipLog(string.format("Today's race length: %.1f units",raceLength),"Magenta")
+				p1:addToShipLog(_("raceOrders-shipLog", "Race starts in 10 minutes. Be at waypoint 1 on time or forfeit"),"Magenta")
+				p1:addToShipLog(string.format(_("raceOrders-shipLog", "Today's race length: %.1f units"),raceLength),"Magenta")
 			end
 		end
 	end
@@ -3360,7 +3360,7 @@ function update(delta)
 		game_state = "countdown"
 		--before race start
 		raceStartDelay = raceStartDelay - delta
-		stationTimer:setCallSign(string.format("Race Start Countdown: %.2f",raceStartDelay))
+		stationTimer:setCallSign(string.format(_("race-", "Race Start Countdown: %.2f"),raceStartDelay))
 		if stationsBuilt == "done" then
 			for p2idx=1,32 do
 				p2 = getPlayerShip(p2idx)
@@ -3372,11 +3372,11 @@ function update(delta)
 						p2:commandAddWaypoint(racePoint4x,racePoint4y)
 					end
 					if p2.readyMessage ~= "done" and raceStartDelay > 1 and raceStartDelay < 2 then
-						p2:addToShipLog("Ready...","Blue")
+						p2:addToShipLog(_("race-shipLog", "Ready..."),"Blue")
 						p2.readyMessage = "done"
 					end
 					if p2.setMessage ~= "done" and raceStartDelay < 1 then
-						p2:addToShipLog("Set...","Magenta")
+						p2:addToShipLog(_("race-shipLog", "Set..."),"Magenta")
 						p2.setMessage = "done"
 					end
 				end
@@ -3388,7 +3388,7 @@ function update(delta)
 		if startLineCheck ~= "done" then
 			startLineCheck = "done"
 			raceTimer = 0
-			primaryOrders = "Complete race. Win if possible."
+			primaryOrders = _("raceOrders-comms", "Complete race. Win if possible.")
 			player_start_list = {}
 			original_player_count = player_count
 			player_count = 0
@@ -3401,7 +3401,7 @@ function update(delta)
 						p4.laps = 0
 						p4.laptimer = 0
 						p4.legtimer = 0
-						p4:addToShipLog("Go!","Red")
+						p4:addToShipLog(_("raceOrders-shipLog", "Go!"),"Red")
 						player_start_list[p4:getCallSign()] = p4
 						player_count = player_count + 1
 					else
@@ -3422,7 +3422,7 @@ function update(delta)
 				end
 			end
 		else
-			stationTimer:setCallSign(string.format("Race Run Time %.2f",raceTimer))
+			stationTimer:setCallSign(string.format(_("race-", "Race Run Time %.2f"),raceTimer))
 			raceTimer = raceTimer + delta
 			if hazards then
 				hazardDelay = hazardDelay - 1
@@ -3446,14 +3446,14 @@ function update(delta)
 			end
 			if follow_up_message == nil then
 				follow_up_message = "sent"
-				local msg = "The race has begun!"
+				local msg = _("race-", "The race has begun!")
 				for name, p in pairs(player_start_list) do
 					p:addToShipLog(msg,"Magenta")
 				end
 				if player_count == original_player_count then
-					msg = string.format("With %i racers, we have the following points awarded for final race place:",player_count)
+					msg = string.format(_("race-", "With %i racers, we have the following points awarded for final race place:"),player_count)
 				else
-					msg = string.format("With %i racers remaining from the original %i registrants, we have the following points awarded for final race place:",player_count,original_player_count)
+					msg = string.format(_("race-", "With %i racers remaining from the original %i registrants, we have the following points awarded for final race place:"),player_count,original_player_count)
 				end
 				for name, p in pairs(player_start_list) do
 					p:addToShipLog(msg,"Magenta")
@@ -3485,7 +3485,7 @@ function update(delta)
 					end
 				else
 					game_state = "aborted"
-					globalMessage(_("msgMainscreen","Race aborted. Nobody made it to the starting line"))
+					globalMessage(_("race-msgMainscreen","Race aborted. Nobody made it to the starting line"))
 					victory("Exuari")
 				end
 				for name, p in pairs(player_start_list) do
@@ -3513,7 +3513,7 @@ function update(delta)
 							end
 						end
 					end
-					local name_tag_text = string.format(_("-tabHelms&Tactical&Singlepilot", "%s in %s"),p5:getCallSign(),p5:getSectorName())
+					local name_tag_text = string.format(_("race-tabHelms&Tactical&Singlepilot", "%s in %s"),p5:getCallSign(),p5:getSectorName())
 					if p5:hasPlayerAtPosition("Helms") then
 						p5.name_tag_helm = "name_tag_helm"
 						p5:addCustomInfo("Helms",p5.name_tag_helm,name_tag_text)
@@ -3534,7 +3534,7 @@ function update(delta)
 							else
 								lapString = "laps"
 							end
-							p5:addToShipLog(string.format(_("-shipLog", "Waypoint 2 met. Go to waypoint 3. Leg took %f seconds. You have completed %i %s."),p5.legtimer,p5.laps,lapString),"Magenta")
+							p5:addToShipLog(string.format(_("race-shipLog", "Waypoint 2 met. Go to waypoint 3. Leg took %f seconds. You have completed %i %s."),p5.legtimer,p5.laps,lapString),"Magenta")
 							p5.legtimer = 0
 						end
 					elseif p5.goal == 3 then
@@ -3545,7 +3545,7 @@ function update(delta)
 							else
 								lapString = "laps"
 							end
-							p5:addToShipLog(string.format(_("-shipLog", "Waypoint 3 met. Go to waypoint 4. Leg took %f seconds. You have completed %i %s."),p5.legtimer,p5.laps,lapString),"Magenta")
+							p5:addToShipLog(string.format(_("race-shipLog", "Waypoint 3 met. Go to waypoint 4. Leg took %f seconds. You have completed %i %s."),p5.legtimer,p5.laps,lapString),"Magenta")
 							p5.legtimer = 0
 						end
 					elseif p5.goal == 4 then
@@ -3556,7 +3556,7 @@ function update(delta)
 							else
 								lapString = "laps"
 							end
-							p5:addToShipLog(string.format(_("-shipLog", "Waypoint 4 met. Go to waypoint 1. Leg took %f seconds. You have completed %i %s."),p5.legtimer,p5.laps,lapString),"Magenta")
+							p5:addToShipLog(string.format(_("race-shipLog", "Waypoint 4 met. Go to waypoint 1. Leg took %f seconds. You have completed %i %s."),p5.legtimer,p5.laps,lapString),"Magenta")
 							p5.legtimer = 0
 						end
 					elseif p5.goal == 1 then
@@ -3564,7 +3564,7 @@ function update(delta)
 							p5.laps = p5.laps + 1
 							if p5.laps >= 3 then
 								p5.raceTime = raceTimer
-								p5:addToShipLog(string.format(_("-shipLog", "Completed race. Race time in seconds: %f"),p5.raceTime),"Magenta")
+								p5:addToShipLog(string.format(_("race-shipLog", "Completed race. Race time in seconds: %f"),p5.raceTime),"Magenta")
 							else
 								p5.goal = 2
 								if p5.laps == 1 then
@@ -3572,7 +3572,7 @@ function update(delta)
 								else
 									lapString = "laps"
 								end
-								p5:addToShipLog(string.format(_("-shipLog", "Waypoint 1 met. Go to waypoint 2. Leg took %f seconds. You have completed %i %s. Lap took %f seconds."),p5.legtimer,p5.laps,lapString,p5.laptimer),"Magenta")
+								p5:addToShipLog(string.format(_("race-shipLog", "Waypoint 1 met. Go to waypoint 2. Leg took %f seconds. You have completed %i %s. Lap took %f seconds."),p5.legtimer,p5.laps,lapString,p5.laptimer),"Magenta")
 								p5.laptimer = 0
 								p5.legtimer = 0
 							end
