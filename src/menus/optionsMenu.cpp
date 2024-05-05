@@ -7,6 +7,7 @@
 #include "soundManager.h"
 #include "windowManager.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_togglebutton.h"
@@ -104,31 +105,77 @@ OptionsMenu::OptionsMenu()
     }))->setSize(GuiElement::GuiSizeMax, 50);
 
     //Select the language
-    (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
-    
-    std::vector<string> languages = findResources("locale/main.*.po");
-    
-    for(string &language : languages) 
     {
-        //strip extension
-        language = language.substr(language.find(".") + 1, language.rfind("."));
-    }
-    std::sort(languages.begin(), languages.end());
+        (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
+        
+        std::vector<string> languages = findResources("locale/main.*.po");
+        
+        for(string &language : languages) 
+        {
+            //strip extension
+            language = language.substr(language.find(".") + 1, language.rfind("."));
+        }
+        std::sort(languages.begin(), languages.end());
 
-    int default_index = 0;
-    auto default_elem = std::find(languages.begin(), languages.end(), PreferencesManager::get("language", "en"));
-    if(default_elem != languages.end())
-    {
-        default_index =  static_cast<int>(default_elem - languages.begin());
+        int default_index = 0;
+        auto default_elem = std::find(languages.begin(), languages.end(), PreferencesManager::get("language", "en"));
+        if(default_elem != languages.end())
+        {
+            default_index =  static_cast<int>(default_elem - languages.begin());
+        }
+
+        (new GuiSelector(interface_page, "LANGUAGE_SELECTOR", [](int index, string value)
+        {
+            i18n::reset();
+            i18n::load("locale/main." + value + ".po");
+            PreferencesManager::set("language", value);
+            keys.init(); // Reinit keyboard shortcut labels
+        }))->setOptions(languages)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
     }
     
-    (new GuiSelector(interface_page, "LANGUAGE_SELECTOR", [](int index, string value)
+    //Gui theme selection
     {
-        i18n::reset();
-        i18n::load("locale/main." + value + ".po");
-        PreferencesManager::set("language", value);
-        keys.init(); // Reinit keyboard shortcut labels
-    }))->setOptions(languages)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiLabel(interface_page, "GUI_THEME_OPTIONS_LABEL", tr("Interface Theme"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
+        
+        std::vector<string> themes = findResources("gui/*.theme.txt");
+        
+        auto iter = themes.begin();
+        while(iter != themes.end()) 
+        {
+            //strip extension
+            *iter = iter->substr(iter->find("/")+1, iter->find("."));
+            if (!GuiTheme::loadTheme(*iter, "gui/" + *iter +".theme.txt"))
+            {
+                LOG(ERROR, "Failed to load theme : ", *iter);
+                iter = themes.erase(iter);
+            }
+            else
+            {
+                ++iter;
+            }
+        }
+        
+        std::sort(themes.begin(), themes.end());
+        if(0 == themes.size())
+        {
+            LOG(ERROR, "Failed to load any theme, exiting");
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load any theme, resources missing ? Should be gui/*.theme.txt. and not contain errors.", nullptr);
+            exit(1);
+        }
+
+        int default_index = 0;
+        auto default_elem = std::find(themes.begin(), themes.end(), PreferencesManager::get("guitheme", "default"));
+        if(default_elem != themes.end())
+        {
+            default_index =  static_cast<int>(default_elem - themes.begin());
+        }
+
+        (new GuiSelector(interface_page, "GUI_THEME_SELECTOR", [](int index, string theme_name)
+        {
+            LOG(INFO, "Set theme to : ", theme_name);
+            PreferencesManager::set("guitheme", theme_name);
+        }))->setOptions(themes)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
+    }
     
     // Bottom GUI.
     // Back button.

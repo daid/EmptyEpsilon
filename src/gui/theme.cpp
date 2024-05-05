@@ -1,4 +1,5 @@
 #include "gui/theme.h"
+#include "resources.h"
 #include <io/keyValueTreeLoader.h>
 #include <graphics/freetypefont.h>
 #include <logging.h>
@@ -44,7 +45,7 @@ const GuiThemeStyle* GuiTheme::getStyle(const string& element)
     int n = element.rfind(".");
     if (n == -1)
     {
-        LOG(Warning, "Cannot find", element, "in theme", name);
+        LOG(Warning, "Cannot find ", element, " in theme ", name);
         return getStyle("fallback");
     }
     return getStyle(element.substr(0, n));
@@ -60,7 +61,7 @@ GuiTheme* GuiTheme::getTheme(const string& name)
         LOG(Error, "Default theme not found. Most likely crashing now.");
         return nullptr;
     }
-    LOG(Warning, "Theme", name, "not found. Falling back to [default] theme.");
+    LOG(Warning, "Theme ", name, " not found. Falling back to [default] theme.");
     return getTheme("default");
 }
 
@@ -133,6 +134,11 @@ GuiTheme::GuiTheme(const string& name)
     fallback_state.color = {255, 255, 255, 255};
     fallback_state.size = 12;
     fallback_state.font = nullptr;
+    std::vector<string> fonts = findResources("gui/fonts/*.ttf");
+    if(fonts.size() > 0)
+    {
+        fallback_state.font = getFont(fonts[0]);
+    }
     fallback_state.texture = "";
     GuiThemeStyle fallback;
     for(unsigned int n=0; n<int(GuiElement::State::COUNT); n++)

@@ -229,11 +229,19 @@ int main(int argc, char** argv)
 #endif
     }
 
-    if (!GuiTheme::loadTheme("default", PreferencesManager::get("guitheme", "gui/default.theme.txt")))
+    //For now there is only one named theme : default.
+    string theme_name = PreferencesManager::get("guitheme", "default");
+    if (!GuiTheme::loadTheme(theme_name, "gui/" + theme_name +".theme.txt"))
     {
-        LOG(ERROR, "Failed to load default theme, exiting.");
-        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing?", nullptr);
-        return 1;
+        LOG(ERROR, "Failed to load "+ theme_name + " theme, trying default. Resources missing or contains errors ? Check gui/" + theme_name + ".theme.txt");
+        if (!GuiTheme::loadTheme("default", "gui/default.theme.txt"))
+        {
+            LOG(ERROR, "Failed to load default theme, exiting. Check gui/default.theme.txt"); //Yes, we may try to load twice default theme but this should be a rare error case which always finish in exit
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing or contains errors ? Check gui/default.theme.txt", nullptr);
+            return 1;
+        }
+        LOG(INFO, "Set theme to : default.");
+        PreferencesManager::set("guitheme", "default");
     }
 
     if (PreferencesManager::get("headless") == "")
@@ -325,8 +333,8 @@ int main(int argc, char** argv)
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
-    main_font = GuiTheme::getTheme("default")->getStyle("base")->states[0].font;
-    bold_font = GuiTheme::getTheme("default")->getStyle("bold")->states[0].font;
+    main_font = GuiTheme::getTheme(PreferencesManager::get("guitheme", "default"))->getStyle("base")->states[0].font;
+    bold_font = GuiTheme::getTheme(PreferencesManager::get("guitheme", "default"))->getStyle("bold")->states[0].font;
     if (!main_font || !bold_font)
     {
         LOG(ERROR, "Missing font or bold font.");
