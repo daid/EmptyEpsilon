@@ -52,7 +52,7 @@ void ShipAI::run(float delta)
 {
     owner->target_rotation = owner->getRotation();
     owner->warp_request = 0.0;
-    owner->impulse_request = 0.0f;
+    owner->setImpulseRequest(0.0f);
 
     updateWeaponState(delta);
     if (update_target_delay > 0.0f)
@@ -598,14 +598,19 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
         if (pathPlanner.route.size() > 1)
             keep_distance = 0.0;
 
-        if (distance > keep_distance + owner->impulse_max_speed * 5.0f)
-            owner->impulse_request = 1.0f;
-        else
-            owner->impulse_request = (distance - keep_distance) / owner->impulse_max_speed * 5.0f;
-        if (rotation_diff > 90)
-            owner->impulse_request = -owner->impulse_request;
-        else if (rotation_diff < 45)
-            owner->impulse_request *= 1.0f - ((rotation_diff - 45.0f) / 45.0f);
+        // setImpulseRequest only if impulse_max_speed is greater than 0.0
+        if (owner->impulse_max_speed > 0.0f)
+        {
+            if (distance > keep_distance + owner->impulse_max_speed * 5.0f)
+                owner->setImpulseRequest(1.0f);
+            else
+                owner->setImpulseRequest((distance - keep_distance) / owner->impulse_max_speed * 5.0f);
+
+            if (rotation_diff > 90.0f)
+                owner->setImpulseRequest(-owner->impulse_request);
+            else if (rotation_diff < 45.0f)
+                owner->setImpulseRequest(owner->impulse_request * (1.0f - ((rotation_diff - 45.0f) / 45.0f)));
+        }
     }
 }
 
@@ -633,19 +638,19 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
         {
             float angle_diff = angleDifference(owner->target_rotation, owner->getRotation());
             if (angle_diff > 10.0f)
-                owner->impulse_request = 0.0f;
+                owner->setImpulseRequest(0.0f);
             else if (angle_diff > 5.0f)
-                owner->impulse_request = (10.0f - angle_diff) / 5.0f;
+                owner->setImpulseRequest((10.0f - angle_diff) / 5.0f);
             else
-                owner->impulse_request = 1.0f;
+                owner->setImpulseRequest(1.0f);
         }else{
             if (distance > r / 2.0f)
             {
                 owner->target_rotation += angleDifference(owner->target_rotation, target->getRotation()) * (1.0f - distance / r);
-                owner->impulse_request = distance / r;
+                owner->setImpulseRequest(distance / r);
             }else{
                 owner->target_rotation = target->getRotation();
-                owner->impulse_request = 0.0f;
+                owner->setImpulseRequest(0.0f);
             }
         }
     }else{

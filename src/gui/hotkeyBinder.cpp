@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "engine.h"
 #include "hotkeyConfig.h"
 #include "hotkeyBinder.h"
@@ -32,6 +33,6 @@ void GuiHotkeyBinder::onDraw(sp::RenderTarget& renderer)
     for(int n=1; key->getKeyType(n) != sp::io::Keybinding::Type::None; n++)
         text += "," + key->getHumanReadableKeyName(n);
     if (key->isUserRebinding())
-        text = "[Press new key]";
+        text = tr("[New input]");
     renderer.drawText(sp::Rect(rect.position.x + 16, rect.position.y, rect.size.x, rect.size.y), text, sp::Alignment::CenterLeft, front.size, front.font, front.color);
 }

@@ -28,12 +28,12 @@ addToSequence(mainscreenTutorial, function() tutorial:switchViewToMainScreen() e
 addToSequence(mainscreenTutorial, _([[This is the main screen, which displays your ship and the surrounding space.
 While you cannot move the ship from this screen, you can use it to visually identify objects.]]))
 
+
 radarTutorial = createSequence()
 addToSequence(radarTutorial, function() tutorial:switchViewToLongRange() end)
 addToSequence(radarTutorial, _([[Welcome to the long-range radar. This radar can detect objects up to 30u from your ship, depicted at the radar's center. This radar allows you to quickly identify distant objects.]]))
-addToSequence(radarTutorial, function() prev_object = Asteroid():setPosition(5000, 0) end)
-addToSequence(radarTutorial, _([[To the right of your ship is a brown dot. This is an asteroid.
-Asteroid impacts will damage your ship, so avoid hitting them.]]))
+addToSequence(radarTutorial, function() prev_object = Asteroid():setPosition(5000, 0):setSize(243) end)
+addToSequence(radarTutorial, _([[This is an asteroid. Flying into an asteroid will damage your ship, so avoid hitting them.]]))
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object = Mine():setPosition(5000, 0) end)
 addToSequence(radarTutorial, _([[The white dot is a mine. When you move near a mine, it explodes with a powerful 1u-radius blast. Striking a mine while your shields are down will surely destroy your ship.]]))
@@ -41,7 +41,7 @@ addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(5000, 0) end)
 addToSequence(radarTutorial, function() prev_object2 = SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setPosition(5000, 5000) end)
 addToSequence(radarTutorial, function() prev_object3 = SpaceStation():setTemplate("Huge Station"):setFaction("Kraylor"):setPosition(5000, -5000) end)
-addToSequence(radarTutorial, _([[This large dot is a station. Stations can be several different sizes and belong to different factions. The dot's color indicates whether the station is friendly (green), neutral (light blue), or hostile (red).]]))
+addToSequence(radarTutorial, _([[These are stations. Stations can be several different sizes and belong to different factions. Their color indicates whether the station is friendly (green), neutral (light blue), or hostile (red).]]))
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object2:destroy() end)
 addToSequence(radarTutorial, function() prev_object3:destroy() end)
@@ -69,6 +69,7 @@ addToSequence(helmsTutorial, function()
     resetPlayerShip()
     player:setJumpDrive(false)
     player:setWarpDrive(false)
+    player:setCanCombatManeuver(false)
     player:setImpulseMaxSpeed(0);
     player:setRotationMaxSpeed(0);
 end)
@@ -97,7 +98,7 @@ addToSequence(helmsTutorial, function() prev_object:destroy() end)
 addToSequence(helmsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(-1500, 1500):orderIdle():setScanned(true):setHull(15):setShieldsMax(15) end)
 addToSequence(helmsTutorial, function() player:commandSetTarget(prev_object) end)
 addToSequence(helmsTutorial, _([[Ok, there are just a few more things that you need to know.
-Remember those beam weapons? As helms officer, it is your task to keep those beams on your target.
+See the red arcs coming from your ship? Those are your beam weapons. As helms officer, it is your task to keep those beams on your target.
 I've set up an stationary enemy ship as a target. Destroy it with your beam weapons. Note that at every shot, the corresponding firing arc will change color.]]), function() return not prev_object:isValid() end)
 addToSequence(helmsTutorial, _([[Aggression is not always the solution, but boy, it is fun!
 
@@ -177,31 +178,57 @@ Load this homing missile into the weapon tube by selecting the homing missile, a
     function() return player:getWeaponTubeLoadType(0) == "homing" end)
 addToSequence(weaponsTutorial, _([[Great! Now fire this missile by clicking on the tube.]]), function() return player:getWeaponTubeLoadType(0) == nil end)
 addToSequence(weaponsTutorial, _([[Missile away!]]), function() return not prev_object:isValid() end)
+
+
 addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(2000, -2000):setRotation(0):orderIdle():setScanned(true):setHull(1):setShieldsMax(1) end)
 addToSequence(weaponsTutorial, function() tutorial:setMessageToBottomPosition() end)
-addToSequence(weaponsTutorial, _([[BOOM! That was just firing straight ahead, but you can also aim missiles.
+addToSequence(weaponsTutorial, _([[BOOM! That was just firing straight ahead, but missiles also have a homing feature, so let's try that!
+
+First, load a homing missile in the tube.
+Next, target the enemy ship by pressing it to guide your homing missiles toward your selected target.
+Then fire your missile!]]), function()
+    if player:getWeaponStorage("homing") < 1 then
+        player:setWeaponStorage("homing", 1)
+    end
+    return not prev_object:isValid()
+end)
+addToSequence(weaponsTutorial, _([[While not necessary against a stationary target, this homing ability can make all the difference against a moving target.]]))
+
+
+addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(3000, -1500):setRotation(0):orderIdle():setScanned(true):setHull(1):setShieldsMax(1) end)
+addToSequence(weaponsTutorial, _([[You can also manually aim missiles.
 
 First, unlock your aim by pressing the [Lock] button above the radar view.
+Load a missile to view your missile's trajectory.
 Next, aim your missiles with the aiming dial surrounding the radar.
-Point the aiming dial at the next ship, load a missile, and fire.]]), function()
+Point the aiming dial at the next ship and fire.]]), function()
     if player:getWeaponStorage("homing") < 1 then
         player:setWeaponStorage("homing", 1)
     end
     return not prev_object:isValid()
 end)
-addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(-1550, -1900):setRotation(0):orderIdle():setScanned(true):setHull(1):setShieldsMax(1) end)
-addToSequence(weaponsTutorial, _([[Perfect aim!
 
-The next ship is behind you. Target the ship by pressing it to guide your homing missiles toward your selected target.
-While not necessary against a stationary target, this homing ability can make all the difference against a moving target.]]), function()
+
+addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(-1550, -1900):setRotation(0):orderIdle():setScanned(true):setHull(1):setShieldsMax(1) end)
+addToSequence(weaponsTutorial, _([[Perfect aim! The next ship is behind you. Notice how it's out of reach when you try to aim manually and, if you only use the homing ability, the trajectory won't reach the enemy. Manually aiming and the missile's homing ability aren't mutually exclusive to one another. You can hit the ship if you put the two abilities together.
+
+First, make sure your aim is unlocked and aim your missile as close to the enemy as you can.
+Next, target the enemy ship by pressing it.
+Then fire! The missile will first follow your manually-aimed trajectory, and then start homing in on the enemy.
+]]), function()
     if player:getWeaponStorage("homing") < 1 then
         player:setWeaponStorage("homing", 1)
     end
     return not prev_object:isValid()
 end)
+
+
 addToSequence(weaponsTutorial, function() player:setWeaponStorage("homing", 0):setWeaponStorageMax("homing", 0) end)
 addToSequence(weaponsTutorial, function() tutorial:setMessageToTopPosition() end)
-addToSequence(weaponsTutorial, _([[In addition to homing missiles, your ship might have nukes, EMPs, and mines. Nukes and EMPs have the same features as homing missiles, but have a 1u-radius blast and do much more damage. EMPs damage only shields, and thus are great for weakening heavily shielded enemies.]]))
+addToSequence(weaponsTutorial, _([[In addition to homing missiles, your ship might have HVLIs, nukes, EMPs, and mines.
+HVLI stands for "High Velocity Lead Impactor". They fire in straight lines and do not have homing abilities.
+Nukes and EMPs also have homing abilities and have a 1u-radius blast and do more damage.
+EMPs damage only shields, and thus are great for weakening heavily shielded enemies.]]))
 
 engineeringTutorial = createSequence()
 addToSequence(engineeringTutorial, function()

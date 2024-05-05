@@ -1,0 +1,4892 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Empty Epsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: muerteFR\n"
+"Language-Team: muerteFR\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: scripts/spawn_ships_scenario_utility.lua:28
+msgctxt "buttonGM"
+msgid "-Main From Spawn Ships"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:29
+msgctxt "buttonGM"
+msgid "+Spawn Fleet"
+msgstr "+ Ajouter une flotte"
+
+#: scripts/spawn_ships_scenario_utility.lua:30
+msgctxt "buttonGM"
+msgid "+Spawn a ship"
+msgstr "+ Ajouter un vaisseau"
+
+#: scripts/spawn_ships_scenario_utility.lua:35
+#, fuzzy
+msgctxt "buttonGM"
+msgid "+Spawn Fighter Wing"
+msgstr "+ App. Chasseurs stel."
+
+#: scripts/spawn_ships_scenario_utility.lua:65
+msgctxt "buttonGM"
+msgid "Random"
+msgstr " Aléatoire "
+
+#: scripts/spawn_ships_scenario_utility.lua:66
+msgctxt "buttonGM"
+msgid "Fighters"
+msgstr " Chasseurs stel. "
+
+#: scripts/spawn_ships_scenario_utility.lua:67
+msgctxt "buttonGM"
+msgid "Chasers"
+msgstr "Avec télép./vit. lum."
+
+#: scripts/spawn_ships_scenario_utility.lua:68
+msgctxt "buttonGM"
+msgid "Frigates"
+msgstr " Frégates "
+
+#: scripts/spawn_ships_scenario_utility.lua:69
+msgctxt "buttonGM"
+msgid "Beamers"
+msgstr " Avec faisc. laser "
+
+#: scripts/spawn_ships_scenario_utility.lua:70
+msgctxt "buttonGM"
+msgid "Missilers"
+msgstr " Avec missiles "
+
+#: scripts/spawn_ships_scenario_utility.lua:71
+msgctxt "buttonGM"
+msgid "Adders"
+msgstr " Vipères "
+
+#: scripts/spawn_ships_scenario_utility.lua:72
+msgctxt "buttonGM"
+msgid "Non-DB"
+msgstr " Non-BD "
+
+#: scripts/spawn_ships_scenario_utility.lua:73
+msgctxt "buttonGM"
+msgid "Drones"
+msgstr " Drones "
+
+#: scripts/spawn_ships_scenario_utility.lua:79
+msgctxt "buttonGM"
+msgid "Unmodified"
+msgstr " Non modifié"
+
+#: scripts/spawn_ships_scenario_utility.lua:80
+msgctxt "buttonGM"
+msgid "Improved"
+msgstr " Amélioré"
+
+#: scripts/spawn_ships_scenario_utility.lua:81
+msgctxt "buttonGM"
+msgid "Degraded"
+msgstr " Dégradé"
+
+#: scripts/spawn_ships_scenario_utility.lua:82
+msgctxt "buttonGM"
+msgid "Tinkered"
+msgstr " Amélioré ou dégradé"
+
+#: scripts/spawn_ships_scenario_utility.lua:91
+msgctxt "buttonGM"
+msgid "Stand Ground"
+msgstr " Tenir sa position"
+
+#: scripts/spawn_ships_scenario_utility.lua:92
+msgctxt "buttonGM"
+msgid "Roaming"
+msgstr " Errer"
+
+#: scripts/spawn_ships_scenario_utility.lua:93
+msgctxt "buttonGM"
+msgid "Idle"
+msgstr " Au repos"
+
+#: scripts/spawn_ships_scenario_utility.lua:99
+msgctxt "buttonGM"
+msgid "At Click"
+msgstr " Au clic"
+
+#: scripts/spawn_ships_scenario_utility.lua:100
+msgctxt "buttonGM"
+msgid "Ambush"
+msgstr " Embuscade"
+
+#: scripts/spawn_ships_scenario_utility.lua:109
+#, fuzzy
+msgctxt "buttonGM"
+msgid "full"
+msgstr "Plein"
+
+#: scripts/spawn_ships_scenario_utility.lua:110
+#, fuzzy
+msgctxt "buttonGM"
+msgid "less/heavy"
+msgstr "moins/lourd"
+
+#: scripts/spawn_ships_scenario_utility.lua:111
+#, fuzzy
+msgctxt "buttonGM"
+msgid "more/light"
+msgstr "plus/léger"
+
+#: scripts/spawn_ships_scenario_utility.lua:1361
+msgctxt "msgGM"
+msgid "fleet spawn"
+msgstr "Ajouter une flotte"
+
+#: scripts/spawn_ships_scenario_utility.lua:1362
+#, fuzzy
+msgctxt "msgGM"
+msgid "set prebuilt target"
+msgstr "Définir une cible prédéfinie"
+
+#: scripts/spawn_ships_scenario_utility.lua:1363
+#, fuzzy
+msgctxt "msgGM"
+msgid "spawn prebuilt fleet"
+msgstr "Apparition d'une flotte préconstruite"
+
+#: scripts/spawn_ships_scenario_utility.lua:1364
+msgctxt "msgGM"
+msgid "ship spawn"
+msgstr "Ajouter un vaisseau"
+
+#: scripts/spawn_ships_scenario_utility.lua:1400
+msgctxt "buttonGM"
+msgid "-Main From Flt Spwn"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:1401
+#: scripts/spawn_ships_scenario_utility.lua:1514
+#: scripts/spawn_ships_scenario_utility.lua:1593
+#: scripts/spawn_ships_scenario_utility.lua:1714
+#: scripts/spawn_ships_scenario_utility.lua:1744
+#: scripts/spawn_ships_scenario_utility.lua:2167
+#: scripts/spawn_ships_scenario_utility.lua:2450
+#: scripts/spawn_ships_scenario_utility.lua:2459
+#: scripts/spawn_ships_scenario_utility.lua:2495
+#: scripts/spawn_ships_scenario_utility.lua:2531
+#: scripts/spawn_ships_scenario_utility.lua:2652
+msgctxt "buttonGM"
+msgid "-Fleet or Ship"
+msgstr "- Menu Ajouter"
+
+#: scripts/spawn_ships_scenario_utility.lua:1406
+#, lua-format
+msgctxt "buttonGM"
+msgid "+%s*player strength: %s"
+msgstr "+ %s*Force du joueur : %s"
+
+#: scripts/spawn_ships_scenario_utility.lua:1408
+#: scripts/spawn_ships_scenario_utility.lua:1519
+#, lua-format
+msgctxt "buttonGM"
+msgid "+1/4 player strength: %s"
+msgstr "+ 1/4 Force du joueur : %s"
+
+#: scripts/spawn_ships_scenario_utility.lua:1410
+#: scripts/spawn_ships_scenario_utility.lua:1521
+#, lua-format
+msgctxt "buttonGM"
+msgid "+1/2 player strength: %s"
+msgstr "+ 1/2 Force du joueur : %s"
+
+#: scripts/spawn_ships_scenario_utility.lua:1414
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Fixed Strength %i"
+msgstr "+ Force fixe : %i"
+
+#: scripts/spawn_ships_scenario_utility.lua:1417
+msgctxt "buttonGM"
+msgid "+Formation"
+msgstr "+ Formation :"
+
+#: scripts/spawn_ships_scenario_utility.lua:1444
+msgctxt "buttonGM"
+msgid ">Spawn<"
+msgstr "> Ajout <"
+
+#: scripts/spawn_ships_scenario_utility.lua:1446
+msgctxt "buttonGM"
+msgid "Spawn"
+msgstr "Ajout"
+
+#: scripts/spawn_ships_scenario_utility.lua:1513
+msgctxt "buttonGM"
+msgid "-Main from Rel Str"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:1515
+#: scripts/spawn_ships_scenario_utility.lua:1594
+#: scripts/spawn_ships_scenario_utility.lua:1625
+#: scripts/spawn_ships_scenario_utility.lua:1715
+#: scripts/spawn_ships_scenario_utility.lua:1745
+#: scripts/spawn_ships_scenario_utility.lua:2168
+#: scripts/spawn_ships_scenario_utility.lua:2451
+#: scripts/spawn_ships_scenario_utility.lua:2460
+#: scripts/spawn_ships_scenario_utility.lua:2496
+#: scripts/spawn_ships_scenario_utility.lua:2532
+msgctxt "buttonGM"
+msgid "-Fleet Spawn"
+msgstr "- Menu Flotte"
+
+#: scripts/spawn_ships_scenario_utility.lua:1517
+#, lua-format
+msgctxt "buttonGM"
+msgid "-%s*player strength: %s"
+msgstr "- %s*Force du joueur : %s"
+
+#: scripts/spawn_ships_scenario_utility.lua:1524
+#: scripts/spawn_ships_scenario_utility.lua:2169
+msgctxt "buttonGM"
+msgid "Switch to Fixed Strength"
+msgstr "Passer en force fixe"
+
+#: scripts/spawn_ships_scenario_utility.lua:1529
+#: scripts/spawn_ships_scenario_utility.lua:1601
+msgctxt "buttonGM"
+msgid "Switch to Formation"
+msgstr "Passer en formation"
+
+#: scripts/spawn_ships_scenario_utility.lua:1592
+msgctxt "buttonGM"
+msgid "-Main from Fix Str"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:1595
+msgctxt "buttonGM"
+msgid "-Fixed Strength "
+msgstr "- Force fixe :"
+
+#: scripts/spawn_ships_scenario_utility.lua:1596
+#: scripts/spawn_ships_scenario_utility.lua:2174
+msgctxt "buttonGM"
+msgid "Switch to Relative"
+msgstr "Passer en force variable"
+
+#: scripts/spawn_ships_scenario_utility.lua:1624
+msgctxt "buttonGM"
+msgid "-Main from Flt Chng"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:1670
+#: scripts/spawn_ships_scenario_utility.lua:1691
+#: scripts/spawn_ships_scenario_utility.lua:1700
+#, lua-format
+msgctxt "buttonGM"
+msgid "Change Chance %s%%*"
+msgstr "jusqu'à %s%% de chance*"
+
+#: scripts/spawn_ships_scenario_utility.lua:1674
+#: scripts/spawn_ships_scenario_utility.lua:1678
+#: scripts/spawn_ships_scenario_utility.lua:1683
+#: scripts/spawn_ships_scenario_utility.lua:1687
+#: scripts/spawn_ships_scenario_utility.lua:1696
+#: scripts/spawn_ships_scenario_utility.lua:1704
+#, lua-format
+msgctxt "buttonGM"
+msgid "Change Chance %s%%"
+msgstr "jusqu'à %s%% de chance"
+
+#: scripts/spawn_ships_scenario_utility.lua:1713
+msgctxt "buttonGM"
+msgid "-Main from Flt Ord"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:1743
+msgctxt "buttonGM"
+msgid "-Main from Flt Loctn"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:1747
+msgctxt "buttonGM"
+msgid "-Ship Spawn"
+msgstr "- Menu Ajout 1 vaisseau"
+
+#: scripts/spawn_ships_scenario_utility.lua:1750
+#, lua-format
+msgctxt "buttonGM"
+msgid "Ambush %i"
+msgstr " Embuscade %i"
+
+#: scripts/spawn_ships_scenario_utility.lua:1769
+msgctxt "buttonGM"
+msgid "-From Ambush Dist"
+msgstr "- Précédent"
+
+#: scripts/spawn_ships_scenario_utility.lua:1774
+#, lua-format
+msgctxt "buttonGM"
+msgid "Ambush Dist:%su"
+msgstr "Embuscade : %su de dist."
+
+#: scripts/spawn_ships_scenario_utility.lua:1799
+#: scripts/spawn_ships_scenario_utility.lua:2602
+#: scripts/spawn_ships_scenario_utility.lua:2636
+#: scripts/spawn_ships_scenario_utility.lua:2702
+#, fuzzy, lua-format
+msgctxt "msgGM"
+msgid ""
+"Cancelled current GM Click mode\n"
+"   %s\n"
+"In favor of\n"
+"   %s\n"
+"GM click mode."
+msgstr ""
+"Mode clic GM actuel annulé\n"
+"   %s\n"
+"En faveur de\n"
+"   %s\n"
+"Mode clic GM."
+
+#: scripts/spawn_ships_scenario_utility.lua:1805
+#: scripts/spawn_ships_scenario_utility.lua:2708
+msgctxt "msgGM"
+msgid "Fleet spawn failed: nothing selected for spawn location determination"
+msgstr ""
+"La création de la flotte a échoué : les options n'ont pas été paramétrées "
+"pour déterminer l'emplacement d'apparition."
+
+#: scripts/spawn_ships_scenario_utility.lua:1838
+msgctxt "msgGM"
+msgid "Empty Template pool: fix excludes or other criteria"
+msgstr "Pool de modèles vide : correction des exclusions ou d'autres critères"
+
+#: scripts/spawn_ships_scenario_utility.lua:2166
+msgctxt "buttonGM"
+msgid "-Main from Formation"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:2179
+msgctxt "buttonGM"
+msgid "+Shape"
+msgstr "+ Forme"
+
+#: scripts/spawn_ships_scenario_utility.lua:2183
+#, fuzzy, lua-format
+msgctxt "msgGM"
+msgid "No entry in ship template for %s"
+msgstr "Aucune entrée dans le modèle de vaisseau pour %s"
+
+#: scripts/spawn_ships_scenario_utility.lua:2191
+msgctxt "buttonGM"
+msgid "+Composition"
+msgstr "+ Composition"
+
+#: scripts/spawn_ships_scenario_utility.lua:2204
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Spacing %.1fu"
+msgstr "+ Espacement %.1fu"
+
+#: scripts/spawn_ships_scenario_utility.lua:2207
+msgctxt "buttonGM"
+msgid ">Set Fleet Target<"
+msgstr "> Choisir cible flotte <"
+
+#: scripts/spawn_ships_scenario_utility.lua:2209
+msgctxt "buttonGM"
+msgid "Spawn Fleet"
+msgstr "Ajout flotte"
+
+#: scripts/spawn_ships_scenario_utility.lua:2219
+#: scripts/spawn_ships_scenario_utility.lua:2286
+msgctxt "buttonGM"
+msgid "-From composition"
+msgstr "- Menu flotte"
+
+#: scripts/spawn_ships_scenario_utility.lua:2223
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Group %s"
+msgstr "+ Groupe %s"
+
+#: scripts/spawn_ships_scenario_utility.lua:2235
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Exclude%s"
+msgstr "+ Exclure %s"
+
+#: scripts/spawn_ships_scenario_utility.lua:2238
+#, fuzzy, lua-format
+msgctxt "buttonGM"
+msgid "selectivity: %s"
+msgstr "sélectivité : %s"
+
+#: scripts/spawn_ships_scenario_utility.lua:2249
+#, fuzzy, lua-format
+msgctxt "buttonGM"
+msgid "Increase Pool: %i"
+msgstr "Augmenter pool : %i"
+
+#: scripts/spawn_ships_scenario_utility.lua:2253
+#, fuzzy
+msgctxt "msgGM"
+msgid "Reached maximum ship template selection pool size of 20"
+msgstr ""
+"Taille maximale du pool de sélection de modèles de vaisseaux atteinte : 20"
+
+#: scripts/spawn_ships_scenario_utility.lua:2257
+#, fuzzy, lua-format
+msgctxt "buttonGM"
+msgid "Decrease Pool: %i"
+msgstr "Diminuer pool : %i"
+
+#: scripts/spawn_ships_scenario_utility.lua:2261
+#, fuzzy
+msgctxt "msgGM"
+msgid "Reached minimum ship template selection pool size of 1"
+msgstr ""
+"Taille minimale du pool de sélection de modèles de vaisseaux atteinte : 1"
+
+#: scripts/spawn_ships_scenario_utility.lua:2269
+msgctxt "buttonGM"
+msgid "-From composition group"
+msgstr "- Précédent"
+
+#: scripts/spawn_ships_scenario_utility.lua:2290
+msgctxt "buttonGM"
+msgid "-From Exclusions"
+msgstr "- Précédent"
+
+#: scripts/spawn_ships_scenario_utility.lua:2313
+#, fuzzy
+msgctxt "buttonGM"
+msgid "+Line"
+msgstr "+Ligne"
+
+#: scripts/spawn_ships_scenario_utility.lua:2449
+msgctxt "buttonGM"
+msgid "-Main from Composition"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:2452
+#: scripts/spawn_ships_scenario_utility.lua:2461
+#: scripts/spawn_ships_scenario_utility.lua:2497
+#: scripts/spawn_ships_scenario_utility.lua:2533
+msgctxt "buttonGM"
+msgid "-Formation"
+msgstr "- Menu Formation"
+
+#: scripts/spawn_ships_scenario_utility.lua:2453
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Lead:%s"
+msgstr "+ Leader : %s"
+
+#: scripts/spawn_ships_scenario_utility.lua:2454
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Follow:%s"
+msgstr "+ Suiveurs : %s"
+
+#: scripts/spawn_ships_scenario_utility.lua:2458
+msgctxt "buttonGM"
+msgid "-Main from Follow"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:2494
+msgctxt "buttonGM"
+msgid "-Main from Lead"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:2530
+msgctxt "buttonGM"
+msgid "-Main from Spacing"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:2538
+#: scripts/spawn_ships_scenario_utility.lua:2549
+#: scripts/spawn_ships_scenario_utility.lua:2560
+#: scripts/spawn_ships_scenario_utility.lua:2571
+#: scripts/spawn_ships_scenario_utility.lua:2582
+#, lua-format
+msgctxt "buttonGM"
+msgid "Spacing %.1fu"
+msgstr "Espacement %.1fu"
+
+#: scripts/spawn_ships_scenario_utility.lua:2651
+msgctxt "buttonGM"
+msgid "-Main From Ship Spawn"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:2656
+#, lua-format
+msgctxt "buttonGM"
+msgid ">Spawn %s<"
+msgstr "> Ajout %s <"
+
+#: scripts/spawn_ships_scenario_utility.lua:2658
+#, lua-format
+msgctxt "buttonGM"
+msgid "Spawn %s"
+msgstr "Ajout %s"
+
+#: scripts/spawn_ships_scenario_utility.lua:2760
+msgctxt "buttonGM"
+msgid "-Main From Ftr Wing"
+msgstr "- Menu principal"
+
+#: scripts/spawn_ships_scenario_utility.lua:2761
+#, fuzzy
+msgctxt "buttonGM"
+msgid "-Spawn Ships"
+msgstr "- Ajout vaisseaux"
+
+#: scripts/spawn_ships_scenario_utility.lua:2762
+#, fuzzy, lua-format
+msgctxt "buttonGM"
+msgid "+Type %s"
+msgstr "+Type %s"
+
+#: scripts/spawn_ships_scenario_utility.lua:2791
+#, fuzzy, lua-format
+msgctxt "buttonGM"
+msgid "+Count %s"
+msgstr "+Compter %s"
+
+#: scripts/spawn_ships_scenario_utility.lua:2794
+#, fuzzy
+msgctxt "buttonGM"
+msgid "Wing Count "
+msgstr "Nombre d'ailes"
+
+#: scripts/spawn_ships_scenario_utility.lua:2805
+#, fuzzy, lua-format
+msgctxt "buttonGM"
+msgid "Spawn Wing:%s"
+msgstr "Apparition Ailes :%s"
+
+#: scripts/spawn_ships_scenario_utility.lua:2814
+#, fuzzy, lua-format
+msgctxt "msgGM"
+msgid ""
+"The ship template table does not have a dist entry for %s. Defaulting to 400 "
+"distance"
+msgstr ""
+"La table du modèle de vaisseau n'a pas d'entrée de distribution pour %s. Par "
+"défaut à 400 de distance."
+
+#: scripts/spawn_ships_scenario_utility.lua:2818
+#, fuzzy, lua-format
+msgctxt "msgGM"
+msgid "No template for %s. Defaulting to 400 distance"
+msgstr "Aucun modèle pour %s. Par défaut à 400 de distance."
+
+#: scripts/spawn_ships_scenario_utility.lua:2831
+#, fuzzy
+msgctxt "msgGM"
+msgid ""
+"Selected carrier object is no longer valid. Select another. No action taken"
+msgstr ""
+"L'objet porteur sélectionné n'est plus valide. Sélectionnez-en un autre. Pas "
+"d'action effectuée."
+
+# Scenario name
+#~ msgid "Scurvy Scavenger"
+#~ msgstr "Chasseurs de trésors"
+
+# Scenario description
+#~ msgid ""
+#~ "Stay alive while scavenging treasures. Length: > 2 hours\n"
+#~ "\n"
+#~ "Version 1"
+#~ msgstr ""
+#~ "- Durée approx. : + de 2h\n"
+#~ "- Difficulté : Difficile (variable)\n"
+#~ "- Vaisseaux joueurs : 1\n"
+#~ "\n"
+#~ "TRADUCTION EN COURS DE RELECTURE\n"
+#~ "\n"
+#~ "Mission : Récupérer des trésors tout en restant en vie.\n"
+#~ "\n"
+#~ "Version 1 - Déc. 2023\n"
+#~ "\n"
+#~ "- Titre original : Scurvy Scavenger\n"
+#~ "- Auteur : Xansta (2020)\n"
+#~ "- Traduction FR : Muerte (Fév.24)\n"
+#~ "\n"
+#~ "Communauté française et anglophone sur Discord USN https://discord.gg/"
+#~ "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les "
+#~ "we."
+
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "Enemies"
+#~ msgstr "Puissance ennemie"
+
+#~ msgctxt "setting"
+#~ msgid "Configures strength and/or number of enemies in this scenario"
+#~ msgstr "Définit le nombre et/ou la puissance des ennemis."
+
+#~ msgctxt "Enemies"
+#~ msgid "Easy"
+#~ msgstr "Facile"
+
+#~ msgctxt "Enemies"
+#~ msgid "Fewer or weaker enemies"
+#~ msgstr "Ennemis moins nombreux et/ou plus faibles."
+
+#~ msgctxt "Enemies"
+#~ msgid "Normal"
+#~ msgstr "Normale"
+
+#~ msgctxt "Enemies"
+#~ msgid "Normal number or strength of enemies"
+#~ msgstr "Difficulté normale."
+
+#~ msgctxt "Enemies"
+#~ msgid "Hard"
+#~ msgstr "Difficile"
+
+#~ msgctxt "Enemies"
+#~ msgid "More or stronger enemies"
+#~ msgstr "Ennemis plus nombreux et/ou plus puissants."
+
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "Murphy"
+#~ msgstr "Loi de Murphy"
+
+#~ msgctxt "setting"
+#~ msgid "Configures the perversity of the universe according to Murphy's law"
+#~ msgstr "Définit la perversité de l'univers selon la loi de Murphy."
+
+#~ msgctxt "Murphy"
+#~ msgid "Easy"
+#~ msgstr "Facile"
+
+#~ msgctxt "Murphy"
+#~ msgid "Random factors are more in your favor"
+#~ msgstr "Les facteurs aléatoires sont plus en votre faveur."
+
+#~ msgctxt "Murphy"
+#~ msgid "Normal"
+#~ msgstr "Normale"
+
+#~ msgctxt "Murphy"
+#~ msgid "Random factors are normal"
+#~ msgstr "Les facteurs aléatoires sont équilibrés."
+
+#~ msgctxt "Murphy"
+#~ msgid "Hard"
+#~ msgstr "Difficile"
+
+#~ msgctxt "Murphy"
+#~ msgid "Random factors are more against you"
+#~ msgstr "Les facteurs aléatoires sont plus contre vous."
+
+#~ msgctxt "orders-comms"
+#~ msgid "No primary orders"
+#~ msgstr "Aucun ordre majeur en cours."
+
+#~ msgctxt "scienceDescription-artifact"
+#~ msgid "Object of unknown origin"
+#~ msgstr "Objet d'origine inconnue"
+
+#~ msgctxt "scienceDescription-artifact"
+#~ msgid "Object of unknown origin, advanced technology detected"
+#~ msgstr "Objet d'origine inconnue, technologie de pointe détectée"
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "Deliver three %s to %s. Upon delivery, they will increase your hull "
+#~ "strength"
+#~ msgstr ""
+#~ "Livrez 3 %s à %s. À la livraison, ils augmenteront la résistance de votre "
+#~ "coque."
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid "Three %s to %s"
+#~ msgstr "3 %s à %s"
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid "Fulfill %s 3 %s %s contract"
+#~ msgstr "Remplir le contrat %s 3 %s %s"
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid "Three %s from %s"
+#~ msgstr "3 %s de %s"
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "Deliver two %s to %s. Upon delivery, they will increase your shield "
+#~ "strength"
+#~ msgstr ""
+#~ "Livrez 2 %s à %s. À la livraison, ils augmenteront la force de votre "
+#~ "bouclier."
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid "Two %s to %s"
+#~ msgstr "2 %s à %s"
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid "Fulfill %s 2 %s %s contract"
+#~ msgstr "Remplir le contrat %s 2 %s %s"
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid "Two %s from %s"
+#~ msgstr "2 %s de %s"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Show delta sum"
+#~ msgstr "Afficher Somme delta"
+
+#, lua-format
+#~ msgctxt "msgGM"
+#~ msgid ""
+#~ "Accumulated delta:\n"
+#~ "%f"
+#~ msgstr ""
+#~ "Delta cumulé :\n"
+#~ "%f"
+
+#, lua-format
+#~ msgctxt "msgGM"
+#~ msgid ""
+#~ "\n"
+#~ "%i:%.2i:%.2i"
+#~ msgstr ""
+#~ "\n"
+#~ "%i:%.2i:%.2i"
+
+#, lua-format
+#~ msgctxt "msgGM"
+#~ msgid ""
+#~ "\n"
+#~ "%i:%.2i"
+#~ msgstr ""
+#~ "\n"
+#~ "%i:%.2i"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Skip Harassment"
+#~ msgstr "Ignorer Harcèlement"
+
+#~ msgctxt "msgGM"
+#~ msgid "Harassment skipped"
+#~ msgstr "Harcèlement ignoré."
+
+#~ msgctxt "buttonGM"
+#~ msgid "Skip Local Contracts"
+#~ msgstr "Ignorer Contrats locaux"
+
+#, lua-format
+#~ msgctxt "contract-shipLog"
+#~ msgid "A rare long range contract has been posted at station %s"
+#~ msgstr "Un contrat rare à longue distance a été affiché à la station %s."
+
+#~ msgctxt "msgGM"
+#~ msgid "Local contracts skipped"
+#~ msgstr "Contrats locaux ignorés."
+
+#~ msgctxt "buttonGM"
+#~ msgid "Mark asteroids"
+#~ msgstr "Marquer les astéroïdes"
+
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "Structure: solid"
+#~ msgstr "Composition : solide"
+
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "Structure: rubble"
+#~ msgstr "Composition : gravats"
+
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "Structure: binary"
+#~ msgstr "Composition : binaire"
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%sosmium:%.1f%% "
+#~ msgstr "%sosmium : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%siridium:%.1f%% "
+#~ msgstr "%siridium : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%solivine:%.1f%% "
+#~ msgstr "%solivine : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%snickel:%.1f%% "
+#~ msgstr "%snickel : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%s, %srock:remainder"
+#~ msgstr "%s, %sreste de roche"
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%sruthenium:%.1f%% "
+#~ msgstr "%sruthénium : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%srhodium:%.1f%% "
+#~ msgstr "%srhodium : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%smagnesium:%.1f%% "
+#~ msgstr "%smagnesium : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%splatinum:%.1f%% "
+#~ msgstr "%splatinem : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%sgold:%.1f%% "
+#~ msgstr "%sor : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%spalladium:%.1f%% "
+#~ msgstr "%spalladium : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%soxygen:%.1f%% "
+#~ msgstr "%soxygène : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%ssilicon:%.1f%% "
+#~ msgstr "%ssilicium : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%shydrogen:%.1f%% "
+#~ msgstr "%shydrogène : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%snitrogen:%.1f%% "
+#~ msgstr "%sazote : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%spyroxene:remainder"
+#~ msgstr "%sreste de pyroxène"
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%spyroxene:%.1f%% "
+#~ msgstr "%spyroxène : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%solivine:remainder"
+#~ msgstr "%sreste d'olivine"
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%scobalt:remainder"
+#~ msgstr "%sreste de cobalt"
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%scobalt:%.1f%% "
+#~ msgstr "%scobalt : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%sdilithium:remainder"
+#~ msgstr "%sreste de dilithium"
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%sdilithium:%.1f%% "
+#~ msgstr "%sdilithium : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%scalcium:remainder"
+#~ msgstr "%sreste de calcium"
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%scalcium:%.1f%% "
+#~ msgstr "%scalcium : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%snickel:remainder"
+#~ msgstr "%sreste de nickel"
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%siron:remainder"
+#~ msgstr "%sreste de fer"
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%siron:%.1f%% "
+#~ msgstr "%sfer : %.1f%% "
+
+#, lua-format
+#~ msgctxt "scienceDescription-asteroid"
+#~ msgid "%s, just rock"
+#~ msgstr "%s, juste de la roche"
+
+#, lua-format
+#~ msgctxt "inventory-shipLog"
+#~ msgid "%s Current cargo:"
+#~ msgstr "%s Cargaison actuelle :"
+
+#, lua-format
+#~ msgctxt "inventory-shipLog"
+#~ msgid "     %s: %i"
+#~ msgstr "     %s: %i"
+
+#~ msgctxt "inventory-shipLog"
+#~ msgid "     Empty"
+#~ msgstr "     Vide"
+
+#, lua-format
+#~ msgctxt "inventory-shipLog"
+#~ msgid "Available space: %i"
+#~ msgstr "Espace disponible : %i"
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "Your available cargo space, %i, is insufficient for this contract. You "
+#~ "need at least 3"
+#~ msgstr ""
+#~ "Votre espace de chargement disponible, %i, est insuffisant pour ce "
+#~ "contrat. Vous avez besoin d'au moins 3 espaces de stockage."
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "Cargo of three %s has been loaded onto your ship. Deliver to %s in %s"
+#~ msgstr ""
+#~ "Une cargaison de 3 %s a été chargée sur votre vaisseau. À livrer à %s "
+#~ "dans le secteur %s."
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "This contract is no longer valid since the destination, %s, no longer "
+#~ "exists. Sorry for the clerical error. Have a nice day"
+#~ msgstr ""
+#~ "Ce contrat n'est plus valide puisque la destination, %s, n'existe plus. "
+#~ "Désolé pour l'erreur d'écriture.\n"
+#~ "Bonne journée."
+
+#~ msgid "Back"
+#~ msgstr "Précédent"
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid "Thanks for the %s, %s. We increased your hull strength by 50%%"
+#~ msgstr ""
+#~ "Merci pour le %s, %s. Nous avons augmenté la résistance de votre coque de "
+#~ "50%%."
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "The terms of the contract require the delivery of three %s. This has not "
+#~ "been met"
+#~ msgstr ""
+#~ "Les termes du contrat exigent la livraison de 3 %s. Cela n'a pas été "
+#~ "atteint."
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid "Cargo of two %s has been loaded onto your ship. Deliver to %s in %s"
+#~ msgstr ""
+#~ "Une cargaison de 2 %s a été chargée sur votre vaisseau. À livrer à %s "
+#~ "dans le secteur %s."
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid "Thanks for the %s, %s. We increased your shield strength by 25%%"
+#~ msgstr ""
+#~ "Merci pour le %s, %s. Nous avons augmenté la force de votre bouclier de "
+#~ "25%%."
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "The terms of the contract require the delivery of two %s. This has not "
+#~ "been met"
+#~ msgstr ""
+#~ "Les termes du contrat exigent la livraison de 2 %s. Cela n'a pas été "
+#~ "atteint."
+
+#~ msgctxt "characterInfo-comms"
+#~ msgid ""
+#~ "His penchant for miniaturization and tinkering allows him to add a beam "
+#~ "weapon to any ship"
+#~ msgstr ""
+#~ "Sa passion pour la miniaturisation et le bricolage lui permet d'ajouter "
+#~ "des faisceaux laser sur n'importe quel vaisseau."
+
+#~ msgctxt "characterInfo-comms"
+#~ msgid ""
+#~ "She knows how to increase your maximum energy capacity by improving "
+#~ "battery efficiency"
+#~ msgstr ""
+#~ "Elle sait comment augmenter votre capacité énergétique maximale en "
+#~ "améliorant l'efficacité de la batterie."
+
+#~ msgctxt "artifact-shipLog"
+#~ msgid "The artifact we picked up has damaged our ship"
+#~ msgstr "L'artefact que nous avons ramassé a endommagé notre vaisseau"
+
+#~ msgctxt "artifact-shipLog"
+#~ msgid ""
+#~ "The technology gleaned from the artifact has allowed our technicians to "
+#~ "increase the damage inflicted by our beam weapons"
+#~ msgstr ""
+#~ "La technologie glanée sur l'artefact a permis à nos techniciens "
+#~ "d'augmenter les dégâts infligés par nos faisceaux laser."
+
+#, lua-format
+#~ msgctxt "artifact-shipLog"
+#~ msgid ""
+#~ "The technology gleaned from the artifact has allowed our technicians to "
+#~ "increase our maneuver speed by %.1f%%"
+#~ msgstr ""
+#~ "La technologie glanée sur l'artefact a permis à nos techniciens "
+#~ "d'augmenter notre vitesse de manœuvre de %.1f%%."
+
+#~ msgctxt "station-comms"
+#~ msgid "We are under attack! No time for chatting!"
+#~ msgstr ""
+#~ "Nous sommes en train de nous faire attaquer ! Pas le temps de discuter !"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Greetings %s!\n"
+#~ "How may we help you today?"
+#~ msgstr ""
+#~ "Salutations %s !\n"
+#~ "Comment pouvons-nous vous aider aujourd'hui ? "
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Good day, officer!\n"
+#~ "What can we do for you today?"
+#~ msgstr ""
+#~ "Bonjour officier !\n"
+#~ "Que pouvons-nous faire pour vous aujourd'hui ?"
+
+#~ msgctxt "station-comms"
+#~ msgid "Hello, may I help you?"
+#~ msgstr "Bonjour, puis-je vous aider ?"
+
+#~ msgctxt "station-comms"
+#~ msgid "Welcome to our lovely station."
+#~ msgstr "Bienvenue dans notre charmante petite station."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Forgive us if we seem a little distracted. We are carefully monitoring "
+#~ "the enemies nearby."
+#~ msgstr ""
+#~ "\n"
+#~ "Veuillez nous excuser si nous semblons un peu distraits. Nous surveillons "
+#~ "attentivement les ennemis à proximité."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "I need ordnance restocked"
+#~ msgstr "Nous avons besoin de nous réapprovisionner en munitions."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "What type of ordnance?"
+#~ msgstr "Quel genre de munitions ?"
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Can you supply us with some nukes? ("
+#~ msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We really need some nukes ("
+#~ msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke). ("
+
+#, lua-format
+#~ msgctxt "ammo-comms"
+#~ msgid "%s%d rep each)"
+#~ msgstr "%s%d rép chacun)"
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Please re-stock our EMP missiles. ("
+#~ msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Got any EMPs? ("
+#~ msgstr "Avez-vous des EMP ? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Do you have spare homing missiles for us? ("
+#~ msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Do you have extra homing missiles? ("
+#~ msgstr "Avez-vous des missiles homing supplémentaires ? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We could use some mines. ("
+#~ msgstr "Nous pourrions avoir besoin de quelques mines. ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "How about mines? ("
+#~ msgstr "Concernant les mines ? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "What about HVLI? ("
+#~ msgstr "Concernant les HVLI ? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Could you provide HVLI? ("
+#~ msgstr "Pourriez-vous fournir des HVLI ? ("
+
+#~ msgctxt "station-comms"
+#~ msgid "I need information"
+#~ msgstr "j'aurai besoin d'informations"
+
+#~ msgctxt "station-comms"
+#~ msgid "What kind of information are you looking for?"
+#~ msgstr "Quel genre d'information recherchez-vous ?"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Docking services status"
+#~ msgstr "État des services d'accueil"
+
+#, lua-format
+#~ msgctxt "stationServices-comms"
+#~ msgid "Station %s docking services status:"
+#~ msgstr "État des services d'accueil de la station %s :\n"
+
+#, lua-format
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Replenish scan probes."
+#~ msgstr ""
+#~ "%s\n"
+#~ "- Réapprovisionnement des sondes."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Cannot replenish scan probes due to fabrication unit failure."
+#~ msgstr ""
+#~ "- Sondes : impossible de réapprovisionner les sondes en raison d'une "
+#~ "défaillance de l'unité de fabrication."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Parts shortage prevents scan probe replenishment."
+#~ msgstr ""
+#~ "- Sondes : le manque de pièces empêche le réapprovisionnement des sondes."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "Station management has curtailed scan probe replenishment for cost "
+#~ "cutting reasons."
+#~ msgstr ""
+#~ "- Sondes : les gestionnaires de la station ont réduit le "
+#~ "réapprovisionnement des sondes pour des raisons de réduction des coûts."
+
+#, lua-format
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "%s"
+
+#, lua-format
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Ship hull repair."
+#~ msgstr ""
+#~ "%s\n"
+#~ "- Réparation de la coque."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "We're out of the necessary materials and supplies for hull repair."
+#~ msgstr ""
+#~ "- Coque : nous n'avons plus les matériaux et fournitures nécessaires pour "
+#~ "réparer la coque."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "Hull repair automation unavailable while it is undergoing maintenance."
+#~ msgstr ""
+#~ "- Coque : l'automatisation de réparation de la coque n'est pas disponible "
+#~ "pendant la maintenance."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "All hull repair technicians quarantined to quarters due to illness."
+#~ msgstr ""
+#~ "- Coque : tous les techniciens de réparation de coque sont en quarantaine "
+#~ "dans leur quartiers pour cause de maladie."
+
+#, lua-format
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Recharge ship energy stores."
+#~ msgstr ""
+#~ "%s\n"
+#~ "- Recharge des réserves d'énergie du vaisseau."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "A recent reactor failure has put us on auxiliary power, so we cannot "
+#~ "recharge ships."
+#~ msgstr ""
+#~ "- Énergie : une récente panne de réacteur nous a mis sous tension "
+#~ "auxiliaire, nous ne pouvons donc pas recharger les vaisseaux."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "A damaged power coupling makes it too dangerous to recharge ships."
+#~ msgstr ""
+#~ "- Énergie : un couplage électrique défectueux rend la recharge des "
+#~ "vaisseaux trop risquée."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "An asteroid strike damaged our solar cells and we are short on power, so "
+#~ "we can't recharge ships right now."
+#~ msgstr ""
+#~ "- Énergie : une frappe d'astéroïde a endommagé nos cellules solaires et "
+#~ "nous manquons de puissance, nous ne pouvons donc pas recharger les "
+#~ "vaisseaux pour le moment."
+
+#, lua-format
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "May overcharge jump drive"
+#~ msgstr ""
+#~ "%s\n"
+#~ "- Peut booster la téléportation (rechargement)."
+
+#, lua-format
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "May repair probe launch system"
+#~ msgstr ""
+#~ "%s\n"
+#~ "- Peut réparer le système de lancement de sonde."
+
+#, lua-format
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "May repair hacking system"
+#~ msgstr ""
+#~ "%s\n"
+#~ "- Peut réparer le système de piratage."
+
+#, lua-format
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "May repair scanners"
+#~ msgstr ""
+#~ "%s\n"
+#~ "- Peut réparer les scanners."
+
+#, lua-format
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "May repair combat maneuver"
+#~ msgstr ""
+#~ "%s\n"
+#~ "- Peut réparer la manœuvre de combat."
+
+#, lua-format
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "May repair self destruct system"
+#~ msgstr ""
+#~ "%s\n"
+#~ "- Peut réparer le système d'autodestruction."
+
+#~ msgctxt "station-comms"
+#~ msgid "Tell me more about your station"
+#~ msgstr "Dites m'en plus à propos de votre station"
+
+#~ msgctxt "station-comms"
+#~ msgid "What would you like to know?"
+#~ msgstr "Qu'aimeriez-vous savoir ?"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "General information"
+#~ msgstr "Informations générales"
+
+#~ msgctxt "stationStory-comms"
+#~ msgid "Station history"
+#~ msgstr "L'histoire de la station"
+
+#~ msgctxt "gossip-comms"
+#~ msgid "Gossip"
+#~ msgstr "Rumeurs"
+
+#, lua-format
+#~ msgctxt "characterInfo-comms"
+#~ msgid "Tell me about %s"
+#~ msgstr "Parlez-moi de %s"
+
+#, lua-format
+#~ msgctxt "characterInfo-comms"
+#~ msgid "Never heard of %s"
+#~ msgstr "Jamais entendu parler de %s."
+
+#, lua-format
+#~ msgctxt "characterInfo-comms"
+#~ msgid "%s died last week. The funeral was yesterday"
+#~ msgstr "%s est décédé la semaine dernière. L'enterrement a eu lieu hier."
+
+#, lua-format
+#~ msgctxt "characterInfo-comms"
+#~ msgid "%s? Who's %s? There's nobody here named %s"
+#~ msgstr "%s ? Qui est %s ? Il n'y a personne ici qui s'appelle %s."
+
+#, lua-format
+#~ msgctxt "characterInfo-comms"
+#~ msgid "We don't talk about %s. They are gone and good riddance"
+#~ msgstr "Pas envie de parler de %s. Ils sont partis et bon débarras."
+
+#, lua-format
+#~ msgctxt "characterInfo-comms"
+#~ msgid "I think %s moved away"
+#~ msgstr "Je pense que %s a déménagé."
+
+#~ msgctxt "orders-comms"
+#~ msgid "What are my current orders?"
+#~ msgstr "Quels sont nos ordres en cours ?"
+
+#~ msgctxt "orders-comms"
+#~ msgid "\n"
+#~ msgstr "\n"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "\n"
+#~ "   %i Minutes remain in game"
+#~ msgstr ""
+#~ "\n"
+#~ "   %i minutes restantes dans le jeu."
+
+#~ msgctxt "explainGoods-comms"
+#~ msgid "No tutorial covered goods or cargo. Explain"
+#~ msgstr "Explications sur les marchandises et cargaisons"
+
+#~ msgctxt "explainGoods-comms"
+#~ msgid ""
+#~ "Different types of cargo or goods may be obtained from stations, "
+#~ "freighters or other sources. They go by one word descriptions such as "
+#~ "dilithium, optic, warp, etc. Certain mission goals may require a "
+#~ "particular type or types of cargo. Each player ship differs in cargo "
+#~ "carrying capacity. Goods may be obtained by spending reputation points or "
+#~ "by trading other types of cargo (typically food, medicine or luxury)"
+#~ msgstr ""
+#~ "Différents types de marchandises ou cargaisons peuvent être obtenus "
+#~ "auprès des stations, des cargos ou d'autres sources. Ces ressources "
+#~ "peuvent être du dilithium, de l'optique, des moteurs de vitesse lumière, "
+#~ "etc. Certains objectifs de mission peuvent nécessiter un ou plusieurs "
+#~ "types de marchandises particulières. Chaque vaisseau joueur diffère par "
+#~ "sa capacité de transport de marchandises. Les marchandises peuvent être "
+#~ "obtenues en dépensant des points de réputation ou en échangeant d'autres "
+#~ "types de marchandises (généralement de la nourriture, des médicaments ou "
+#~ "des produits de luxe)."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Overcharge Jump Drive (10 Rep)"
+#~ msgstr "Booster la téléportation (10 rép)"
+
+#, lua-format
+#~ msgctxt "stationServices-comms"
+#~ msgid "Your jump drive has been overcharged to %ik"
+#~ msgstr ""
+#~ "Le délai de recharge de votre moteur de téléportation a été boosté à %ik."
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Insufficient reputation"
+#~ msgstr "Réputation insuffisante."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Repair ship system"
+#~ msgstr "Réparer les systèmes du vaisseau"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "What system would you like repaired?"
+#~ msgstr "Quel système souhaitez-vous réparer ?"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Repair probe launch system (5 Rep)"
+#~ msgstr "Réparer le système de lancement de sonde (5 rép)"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Your probe launch system has been repaired"
+#~ msgstr "Votre système de lancement de sonde a été réparé."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Repair hacking system (5 Rep)"
+#~ msgstr "Réparer le système de piratage (5 rép)"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Your hack system has been repaired"
+#~ msgstr "Votre système de piratage a été réparé."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Repair scanners (5 Rep)"
+#~ msgstr "Réparer les scanners (5 rép)"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Your scanners have been repaired"
+#~ msgstr "Vos scanners ont été réparés."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Repair combat maneuver (5 Rep)"
+#~ msgstr "Réparer la manœuvre de combat (5 rép)"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Your combat maneuver has been repaired"
+#~ msgstr "Votre manœuvre de combat a été réparée."
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Repair self destruct system (5 Rep)"
+#~ msgstr "Réparer le système d'autodestruction (5 rép)"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "Your self destruct system has been repaired"
+#~ msgstr "Votre système d'autodestruction a été réparé."
+
+#~ msgctxt "contract-comms"
+#~ msgid "Check long distance contract"
+#~ msgstr "Consulter les contrats longue distance"
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "Contract Details:\n"
+#~ "Travel to %s system to deliver cargo to supply station %s. Distance to "
+#~ "system: %i units. Upon delivery, %s technicians will upgrade your battery "
+#~ "efficiency and beam cycle time."
+#~ msgstr ""
+#~ "Détails du contrat :\n"
+#~ "Rendez-vous au système %s pour livrer la cargaison à la station de "
+#~ "ravitaillement %s. Distance jusqu'au système : %i unités.\n"
+#~ "À la livraison, %s techniciens amélioreront l'efficacité de votre "
+#~ "batterie et le temps de cycle de vos faisceaux laser."
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "The Human Navy requires all armed ships be equipped with the ability to "
+#~ "drop mines. We have modified %s with a rear facing mining tube. Due to "
+#~ "ship size constraints, we were only able to provide you with two mines."
+#~ msgstr ""
+#~ "La Marine humaine exige que tous les vaisseaux armés soient en capacité "
+#~ "de larguer des mines. Nous avons modifié %s avec un tube de minage "
+#~ "orienté vers l'arrière. En raison des contraintes de taille des "
+#~ "vaisseaux, nous n'avons pu vous fournir que 2 mines."
+
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Your current cargo ("
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Votre cargaison actuelle ("
+
+#~ msgctxt "contract-comms"
+#~ msgid ", "
+#~ msgstr ", "
+
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ ") has been removed to make room for your contract cargo and to help "
+#~ "defray the cost of upgrading your ship to Human Navy standards."
+#~ msgstr ""
+#~ ") a été supprimée pour faire de la place à votre cargaison sous contrat "
+#~ "et pour aider à couvrir le coût de mise à niveau de votre vaisseau aux "
+#~ "normes de la Marine humaine."
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Critical cargo has been loaded aboard your ship, %s. Take the cargo to "
+#~ "the %s system centered in sector %s. Find %s, the second planet out from "
+#~ "star %s. Dock at station %s in orbit around %s's moon, %s to deliver the "
+#~ "cargo. They will have crew standing by to immediately offload the cargo"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Une cargaison critique a été chargée à bord de votre vaisseau, %s. Amenez "
+#~ "la cargaison au système %s centré dans le secteur %s.\n"
+#~ "Trouvez %s, la deuxième planète en partant de l'étoile %s. Amarrez-vous à "
+#~ "la station %s en orbite autour de la lune de %s, %s pour livrer la "
+#~ "cargaison. Un équipage prêt à décharger immédiatement la cargaison vous "
+#~ "attendra."
+
+#~ msgctxt "contract-comms"
+#~ msgid "No long distance contract here."
+#~ msgstr "Pas de contrat longue distance ici, désolé."
+
+#~ msgctxt "contract-comms"
+#~ msgid "I was told there was a long distance contract that started here"
+#~ msgstr "On m'a dit qu'il y avait un contrat longue distance ici ?"
+
+#~ msgctxt "contract-comms"
+#~ msgid "You mean I came all this way for nothing?"
+#~ msgstr "Vous voulez dire que l'on a fait tout ce chemin pour rien ?"
+
+#~ msgctxt "contract-comms"
+#~ msgid "I risked my ship for a contract that does not exist?"
+#~ msgstr "On a risqué notre vaisseau pour un contrat fantôme ?"
+
+#~ msgctxt "ridExuari-comms"
+#~ msgid "Upgrade impulse engines"
+#~ msgstr "Améliorer les moteurs à impulsion"
+
+#~ msgctxt "ridExuari-comms"
+#~ msgid ""
+#~ "Thanks for taking care of those Exuari. We've upgraded the topspeed of "
+#~ "your impulse engines"
+#~ msgstr ""
+#~ "Merci de vous être occupé de ces Éxuaris. Nous avons augmenté la vitesse "
+#~ "maximale de vos moteurs à impulsion pour vous aider."
+
+#~ msgctxt "ridExuari-comms"
+#~ msgid "Add missile tubes"
+#~ msgstr "Ajouter des tubes de missiles"
+
+#~ msgctxt "ridExuari-comms"
+#~ msgid ""
+#~ "Thanks for continuing to shoot down those Exuari. We've added some "
+#~ "missile tubes to help you destroy the Exuari station"
+#~ msgstr ""
+#~ "Merci de continuer à abattre ces Éxuaris. Nous vous avons ajouté des "
+#~ "tubes lance-missiles pour vous aider à détruire cette station Éxuarie."
+
+#, lua-format
+#~ msgctxt "ridExuari-"
+#~ msgid ""
+#~ "%s has asked for help against Exuari forces and has provided your ship "
+#~ "with missile weapons to help you destroy %s"
+#~ msgstr ""
+#~ "%s vous a demandé de l'aide contre les forces Éxuaries et vous a fourni "
+#~ "des missiles pour vous aider à détruire la station %s."
+
+#~ msgctxt "ridExuari-comms"
+#~ msgid "Upgrade beam damage"
+#~ msgstr "Améliorer les dégâts des faisceaux laser"
+
+#~ msgctxt "ridExuari-comms"
+#~ msgid ""
+#~ "Looks like you're having a hard time with those Exuari. We've increased "
+#~ "the damage your beam weapons deal out"
+#~ msgstr ""
+#~ "On dirait que vous passez un sale moment avec ces Éxuaris. Nous avons "
+#~ "augmenté les dégâts infligés par vos faisceaux laser."
+
+#~ msgctxt "ridExuari-comms"
+#~ msgid "Add jump drive"
+#~ msgstr "Ajouter un moteur de téléportation"
+
+#~ msgctxt "ridExuari-comms"
+#~ msgid ""
+#~ "That Exuari station was a pain. Thanks for getting rid of it. We have "
+#~ "fitted your ship with a 25 unit jump drive as a token of our gratitude.\n"
+#~ "\n"
+#~ "We have also formally recognized your competence. This allows you to "
+#~ "enter into contracts with independent entities in the area. There may "
+#~ "even be contracts available originating from this station."
+#~ msgstr ""
+#~ "Cette station Éxuarie était une vrai plaie. Merci de vous en être "
+#~ "débarrassé.\n"
+#~ "Nous avons équipé votre vaisseau d'un moteur de téléportation de 25 "
+#~ "unités de distance en gage de notre gratitude.\n"
+#~ "\n"
+#~ "Nous avons également reconnu officiellement votre compétence. Cela vous "
+#~ "permet de conclure des contrats avec des entités indépendantes de la "
+#~ "région. Vous pourrez même trouver des contrats disponibles en provenance "
+#~ "de cette station."
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "Asteroid research request"
+#~ msgstr "Demande de recherche d'astéroïdes"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Posted on the station electronic request board:\n"
+#~ "\n"
+#~ "Request services of vessel in the area to scan asteroids in search of "
+#~ "asteroid with particular characteristics. Substantial reward. No formal "
+#~ "contract available. For further details, contact Jenny McGuire"
+#~ msgstr ""
+#~ "Affichée sur le tableau électronique des petites annonces de la "
+#~ "station :\n"
+#~ "\n"
+#~ "Sollicite les services d'un vaisseau dans la zone pour scanner les "
+#~ "astéroïdes.\n"
+#~ "À la recherche d'astéroïdes aux caractéristiques particulières.\n"
+#~ "Récompense conséquente.\n"
+#~ "Aucun contrat officiel disponible.\n"
+#~ "Pour plus de détails, contacter Jenny McGuire"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "Contact Jenny McGuire"
+#~ msgstr "Contacter Jenny McGuire"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Hi %s, I'm so glad you contacted me. I've been researching many of the "
+#~ "nearby asteroids. There is one in particular that I am interested in. "
+#~ "Unfortunately, I lost access to sensors with enough detail to scan from a "
+#~ "distance and my research ship was shot out from under me by pirates. I "
+#~ "was lucky to escape with my life. I would like to locate my special "
+#~ "asteroid, but I did not record location details, only sensor details. The "
+#~ "asteroid I am interested in has traces of osmium and iridium, both of "
+#~ "which are fairly rare, but together, they are exceptionally rare. If you "
+#~ "run across an asteroid like that, could you let me know? If I were able "
+#~ "to continue my research, I would be very appreciative. I know several "
+#~ "technicians that would be more than willing to provide your ship with a "
+#~ "valuable upgrade."
+#~ msgstr ""
+#~ "Bonjour %s, je suis ravie que vous m'ayez contacté.\n"
+#~ "Je fais des recherches sur de nombreux astéroïdes à proximité. Il y en a "
+#~ "un en particulier qui m'intéresse. Malheureusement, j'ai perdu l'accès a "
+#~ "mes capteurs les plus puissants pour pouvoir scanner à distance, mon "
+#~ "vaisseau de recherche a été abattu par des pirates. J'ai eu de la chance "
+#~ "de m'en sortir vivante.\n"
+#~ "\n"
+#~ "Je voudrais localiser mon astéroïde spécial, mais je n'ai pas enregistré "
+#~ "les détails de l'emplacement, seulement les détails de l'analyse des "
+#~ "capteurs.\n"
+#~ "L'astéroïde qui m'intéresse a des traces d'osmium et d'iridium, qui sont "
+#~ "tous deux assez rares, mais ensemble, ils sont exceptionnellement rares. "
+#~ "Si vous rencontrez un astéroïde comme celui-là, pourriez-vous me le faire "
+#~ "savoir ?\n"
+#~ "\n"
+#~ "Si je pouvais continuer mes recherches, je vous serais très "
+#~ "reconnaissant. Je connais plusieurs techniciens qui seraient plus que "
+#~ "disposés à vous fournir des mises à niveau précieuses pour votre vaisseau."
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "We will look, but can't promise anything"
+#~ msgstr "Nous allons jeter un œil, mais nous ne pouvons rien vous promettre"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Thanks. I understand about priorities. Please contact me if you find "
+#~ "anything"
+#~ msgstr ""
+#~ "Merci. Je comprends vos priorités. S'il vous plaît contactez-moi si vous "
+#~ "trouvez quelque chose."
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "Get ship upgrade promised by Jenny McGuire"
+#~ msgstr "Obtenir la mise à niveau du vaisseau promise par Jenny McGuire"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "Choose one of these upgrades from Jenny McGuire's friends"
+#~ msgstr ""
+#~ "Choisir l'une de ces mise à niveau de la part des amis de Jenny McGuire"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "Decrease beam cycle time"
+#~ msgstr "Diminuer le temps de cycle des faisceaux laser"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Your beam cycle time has been reduced. Jenny McGuire thanks you again and "
+#~ "leaves %s to resume her work on %s"
+#~ msgstr ""
+#~ "Le temps de cycle des faisceaux laser a été réduit. Jenny McGuire vous "
+#~ "remercie encore et quitte %s pour reprendre son travail sur %s."
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "Decrease heat generated per beam fired"
+#~ msgstr "Diminuer la chaleur générée par les tirs des faisceaux laser"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "The heat generated when firing your beams has been reduced. Jenny McGuire "
+#~ "thanks you again and leaves %s to resume her work on %s"
+#~ msgstr ""
+#~ "La chaleur générée lors des tirs de vos faisceaux laser a été réduite. "
+#~ "Jenny McGuire vous remercie encore et quitte %s pour reprendre son "
+#~ "travail sur %s."
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "Increase ship acceleration"
+#~ msgstr "Augmenter l'accélération du vaisseau"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Your ship acceleration has been increased. Jenny McGuire thanks you again "
+#~ "and leaves %s to resume her work on %s"
+#~ msgstr ""
+#~ "L'accélération maximale de votre vaisseau a été augmentée. Jenny McGuire "
+#~ "vous remercie encore et quitte %s pour reprendre son travail sur %s."
+
+#~ msgctxt "contract-comms"
+#~ msgid "Check long range contract"
+#~ msgstr "Consulter les grandes lignes du contrat"
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "The contract outline indicates that the contract starts at station %s, a "
+#~ "Human Navy station %i units from here. It looks like a relatively "
+#~ "straighforward delivery to another Human Navy station between 100 and 200 "
+#~ "units away. It also mentions that only Human Navy ships may fulfill this "
+#~ "contract. That should not be a problem since station %s will gladly fit "
+#~ "your ship with a Human Navy squawker if you desire based on the service "
+#~ "you've already provided in this area."
+#~ msgstr ""
+#~ "Les grandes lignes indiquent que le contrat commence à la station %s, une "
+#~ "station de la Marine humaine se trouvant à %i unités d'ici. Cela "
+#~ "ressemble à une livraison longue distance relativement simple pour une "
+#~ "autre station de la Marine humaine située entre 100 et 200 unités de "
+#~ "distance.\n"
+#~ "Il est également mentionné que seuls les vaisseaux de la Marine humaine "
+#~ "peuvent remplir ce contrat. Cela ne devrait pas être un problème puisque "
+#~ "la station %s se fera un plaisir d'équiper votre vaisseau d'un "
+#~ "transpondeur si vous le désirez, étant donné le service que vous avez "
+#~ "déjà fourni dans ce domaine."
+
+#~ msgctxt "contract-comms"
+#~ msgid "Accept"
+#~ msgstr "Contrat à prendre"
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "Station %s has fitted you with a Human Navy Identification Friend or Foe "
+#~ "(IFF) and increased your jump drive and sensor ranges to 30 units."
+#~ msgstr ""
+#~ "La station %s vous a équipé d'un transpondeur permettant votre "
+#~ "identification comme vaisseau de la Marine humaine et a augmenté la "
+#~ "portée de votre téléportation et de vos capteurs à 30 unités."
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "They also placed waypoint %i in your navigation system for station %s in "
+#~ "sector %s."
+#~ msgstr ""
+#~ "%s\n"
+#~ "Ils ont également placé le marqueur %i sur votre console de navigation "
+#~ "pour la station %s dans le secteur %s."
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "You can find station %s in sector %s."
+#~ msgstr ""
+#~ "%s\n"
+#~ "Vous pouvez trouver la station %s dans le secteur %s."
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid "Contract report from station %s:"
+#~ msgstr "Rapport de contrat de la station %s :"
+
+#~ msgctxt "contract-comms"
+#~ msgid "Browse Contracts"
+#~ msgstr "Parcourir les contrats"
+
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "\n"
+#~ "To Accept: "
+#~ msgstr ""
+#~ "\n"
+#~ "Accepter : "
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid "Accept %s contract"
+#~ msgstr "Accepter le contrat %s"
+
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "\n"
+#~ "To Fulfill: "
+#~ msgstr ""
+#~ "\n"
+#~ "À remplir : "
+
+#, lua-format
+#~ msgctxt "contract-comms"
+#~ msgid "Fulfill %s contract"
+#~ msgstr "Remplir le contrat %s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Recruit repair crew member for %i reputation"
+#~ msgstr "Recruter un membre de l'équipe de réparation pour %i réputation"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Repair crew member hired"
+#~ msgstr "Réparateur embauché"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Buy, sell, trade"
+#~ msgstr "Acheter, vendre, échanger"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "Station %s:\n"
+#~ "Goods or components available for sale: quantity, cost in reputation\n"
+#~ msgstr ""
+#~ "Station %s :\n"
+#~ "Marchandises ou composants à vendre : quantité, coût en rép. :\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "     %s: %i, %i\n"
+#~ msgstr "     %s: %i, %i\n"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Goods or components station will buy: price in reputation\n"
+#~ msgstr ""
+#~ "Marchandises ou composants que la station achètera : (prix en "
+#~ "réputation)\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "     %s: %i\n"
+#~ msgstr "     %s: %i\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Current cargo aboard %s:\n"
+#~ msgstr "Cargaison actuelle à bord de %s :\n"
+
+#~ msgctxt "trade-comms"
+#~ msgid "     Empty\n"
+#~ msgstr "     Vide\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Available Space: %i, Available Reputation: %i\n"
+#~ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Buy one %s for %i reputation"
+#~ msgstr "Achetez 1 %s pour %i rép"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Type: %s, Quantity: %i, Rep: %i"
+#~ msgstr "Type : %s, Quantité : %i, Rép : %i"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Insufficient cargo space for purchase"
+#~ msgstr ""
+#~ "\n"
+#~ "Espace de chargement insuffisant pour acheter"
+
+#~ msgctxt "needRep-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Insufficient reputation for purchase"
+#~ msgstr ""
+#~ "\n"
+#~ "Réputation insuffisante pour acheter."
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Insufficient station inventory"
+#~ msgstr ""
+#~ "\n"
+#~ "Stock insuffisant dans la station"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "purchased"
+#~ msgstr ""
+#~ "\n"
+#~ "Acheté"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Trade food for %s"
+#~ msgstr "Échanger de la Nourriture (food) contre %s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Type: %s,  Quantity: %i"
+#~ msgstr "Type : %s, Quantité : %i"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Trade medicine for %s"
+#~ msgstr "Échanger des Médicaments (medicine) contre %s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Trade luxury for %s"
+#~ msgstr "Échanger des produits de luxe (luxury) contre %s"
+
+#~ msgctxt "contract-comms"
+#~ msgid ""
+#~ "I'm sure there will be one soon, but the administrators are nervously "
+#~ "watching enemies fly around. I suggest you make a good name for yourself "
+#~ "and go kill those enemies."
+#~ msgstr ""
+#~ "Je suis sûr qu'il y en aura bientôt un, mais les administrateurs "
+#~ "regardent nerveusement des vaisseaux ennemis nous tourner autour. Je vous "
+#~ "suggère d'améliorer votre réputation en allant tuer ces ennemis."
+
+#~ msgctxt "scienceDescription-supply"
+#~ msgid "Supply Drop"
+#~ msgstr "Caisse d'approvisionnement"
+
+#~ msgctxt "scienceDescription-supply"
+#~ msgid ""
+#~ "Supply Drop containing energy, missiles and various ship system repair "
+#~ "parts"
+#~ msgstr ""
+#~ "Cargaison de ravitaillement contenant de l'énergie, des missiles et "
+#~ "diverses pièces de réparation des systèmes du vaisseau."
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "Were you able to find an asteroid with osmium and iridium?"
+#~ msgstr ""
+#~ "Avez-vous pu trouver un astéroïde contenant de l'osmium et de l'iridium ?"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "We think so"
+#~ msgstr "Oui, nous le pensons"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Excellent! I found my notes on the asteroid composition. Let's compare "
+#~ "your readings to the ones I took. Overall, the asteroid had osmium, "
+#~ "iridium, olivine and nickel. The rest was rock.\n"
+#~ "\n"
+#~ "What was your reading on osmium?\n"
+#~ "Enter the 10's digit. For example, for 23.5, the 10's digit is 2"
+#~ msgstr ""
+#~ "Excellent !\n"
+#~ "J'ai retrouvé mes notes sur la composition de l'astéroïde. Comparons vos "
+#~ "valeurs à celles que j'ai prises. Dans l'ensemble, l'astéroïde contenait "
+#~ "de l'osmium, de l'iridium, de l'olivine et du nickel. Le reste étant de "
+#~ "la simple roche.\n"
+#~ "\n"
+#~ "Quelle était votre lecture sur l'osmium ?\n"
+#~ "Entrez le chiffre des dizaines. (Par exemple, pour 23,5, le chiffre des "
+#~ "dizaines est 2)"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Excellent! I found my notes on the asteroid composition. Let's compare "
+#~ "your readings to the ones I took. %s, the asteroid had osmium, iridium, "
+#~ "olivine and nickel. The rest was rock.\n"
+#~ "\n"
+#~ "What was your reading on osmium?\n"
+#~ "Enter the 10's digit. For example, for 23.5, the 10's digit is 2"
+#~ msgstr ""
+#~ "Excellent !\n"
+#~ "J'ai retrouvé mes notes sur la composition de l'astéroïde. Comparons vos "
+#~ "valeurs à celles que j'ai prises. %s, l'astéroïde contenait de l'osmium, "
+#~ "de l'iridium, de l'olivine et du nickel. Le reste étant de la simple "
+#~ "roche.\n"
+#~ "\n"
+#~ "Quelle était votre lecture sur l'osmium ?\n"
+#~ "Entrez le chiffre des dizaines. (Par exemple, pour 23,5, le chiffre des "
+#~ "dizaines est 2)"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid "10's digit %i"
+#~ msgstr "Chiffre des dizaines %i"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Now for the osmium 1's digit. For example, for 23.5, the 1's digit is 3"
+#~ msgstr ""
+#~ "Passons maintenant au chiffre des unités de l'osmium. (Par exemple, pour "
+#~ "23,5, le chiffre des unités est 3)"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid "1's digit %i"
+#~ msgstr "Chiffre des unités %i"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "And one digit after the decimal point. For example, for 23.5, the digit "
+#~ "after the decimal point is 5"
+#~ msgstr ""
+#~ "Et le chiffre après la virgule. (Par exemple, pour 23,5, le chiffre après "
+#~ "la virgule est 5)"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid "after decimal digit %i"
+#~ msgstr "Chiffre après la virgule %i"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Osmium: %.1f\n"
+#~ "The Iridium 10's digit. For example, for 23.5, the 10's digit is 2"
+#~ msgstr ""
+#~ "Osmium : %.1f\n"
+#~ "Le chiffre des dizaines de l'Iridium. (Par exemple, pour 23,5, le chiffre "
+#~ "des dizaines est 2)"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Now for the iridium 1's digit. For example, for 23.5, the 1's digit is 3"
+#~ msgstr ""
+#~ "Passons maintenant au chiffre des unités de l'iridium. (Par exemple, pour "
+#~ "23,5, le chiffre des unités est 3)"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Osmium: %.1f\n"
+#~ "Iridium: %.1f\n"
+#~ "The Olivine 10's digit. For example, for 23.5, the 10's digit is 2"
+#~ msgstr ""
+#~ "Osmium : %.1f\n"
+#~ "iridium : %.1f\n"
+#~ "Le chiffre des dizaines de l'olivine. (Par exemple, pour 23,5, le chiffre "
+#~ "des dizaines est 2)"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Now for the olivine 1's digit. For example, for 23.5, the 1's digit is 3"
+#~ msgstr ""
+#~ "Passons maintenant au chiffre des unités de l'olivine. (Par exemple, pour "
+#~ "23,5, le chiffre des unités est 3)"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Osmium: %.1f\n"
+#~ "Iridium: %.1f\n"
+#~ "Olivine: %.1f\n"
+#~ "The Nickel 10's digit. For example, for 23.5, the 10's digit is 2"
+#~ msgstr ""
+#~ "Osmium : %.1f\n"
+#~ "iridium : %.1f\n"
+#~ "olivine : %.1f\n"
+#~ "Le chiffre des dizaines du nickel. (Par exemple, pour 23,5, le chiffre "
+#~ "des dizaines est 2)"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Now for the nickel 1's digit. For example, for 23.5, the 1's digit is 3"
+#~ msgstr ""
+#~ "Passons maintenant au chiffre des unités du nickel. (Par exemple, pour "
+#~ "23,5, le chiffre des unités est 3)"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "osmium: %.1f\n"
+#~ "iridium: %.1f\n"
+#~ "Olivine: %.1f\n"
+#~ "Nickel: %.1f"
+#~ msgstr ""
+#~ "osmium : %.1f\n"
+#~ "iridium : %.1f\n"
+#~ "olivine : %.1f\n"
+#~ "nickel : %.1f"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "That's it! Your reported compositional percentages:\n"
+#~ "%s\n"
+#~ "...exactly match my recorded compositional percentages! Now I need you to "
+#~ "take me to within 5 units of the asteroid. You may want to put a waypoint "
+#~ "on it"
+#~ msgstr ""
+#~ "Oui parfait ! Vos lectures de pourcentages de composition :\n"
+#~ "%s\n"
+#~ "correspondent exactement à mes pourcentages de composition enregistrés ! "
+#~ "Maintenant, j'ai besoin que vous m'emmeniez à moins de 5 unités de "
+#~ "l'astéroïde. Vous voudrez peut-être y placer un marqueur."
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Unfortunately, those compositional percentages you provided:\n"
+#~ "%s\n"
+#~ "...do not match the asteroid I am looking for. But don't give up! Please "
+#~ "keep looking and contact me when you find another asteroid candidate."
+#~ msgstr ""
+#~ "Malheureusement, ces pourcentages de composition que vous m'avez "
+#~ "fournis :\n"
+#~ "%s\n"
+#~ "ne correspondent pas à l'astéroïde que je recherche. Mais n'abandonnez "
+#~ "pas ! S'il vous plaît, continuez à chercher et contactez-moi lorsque vous "
+#~ "trouverez un autre astéroïde potentiel."
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Communication routed to guest quarters aboard %s\n"
+#~ "\n"
+#~ msgstr "Communication reroutée vers les quartiers VIP à bord du %s.\n"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid "%sYes? What can I do for you?"
+#~ msgstr "%s Oui ? Que puis-je faire pour vous ?"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "What were those asteroid compositional percentages?"
+#~ msgstr "Quels étaient ces pourcentages de composition de l'astéroïde ?"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Osmium: %.1f\n"
+#~ "Iridium: %.1f\n"
+#~ "Olivine: %.1f\n"
+#~ "Nickel: %.1f"
+#~ msgstr ""
+#~ "osmium : %.1f\n"
+#~ "iridium : %.1f\n"
+#~ "olivine : %.1f\n"
+#~ "nickel : %.1f"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "Asteroid under 1.5 units away"
+#~ msgstr "Astéroïde à moins de 1,5 unités de distance"
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "%s must come to a complete stop before I can deactivate the cloaking "
+#~ "mechanism"
+#~ msgstr ""
+#~ "%s doit s'arrêter complètement avant que je puisse désactiver le "
+#~ "mécanisme de camouflage."
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "Cloaking mechanism deactivated, please retrieve my data store"
+#~ msgstr ""
+#~ "Mécanisme de camouflage désactivé, veuillez récupérer mon stock de données"
+
+#~ msgctxt "scienceDescription-artifact"
+#~ msgid "Stasis container"
+#~ msgstr "Conteneur militaire"
+
+#~ msgctxt "scienceDescription-artifact"
+#~ msgid "Stasis container with a high density data store inside"
+#~ msgstr ""
+#~ "Conteneur militaire avec un stock de données haute densité à l'intérieur"
+
+#, lua-format
+#~ msgctxt "Jenny-shipLog"
+#~ msgid ""
+#~ "[Jenny McGuire] Thank you for picking up my research for me, %s. Next "
+#~ "time you dock with %s you can get the upgrade I promised"
+#~ msgstr ""
+#~ "[Jenny McGuire]\n"
+#~ "Merci d'avoir récupérés mes recherches pour moi, %s. La prochaine fois "
+#~ "que vous irez sur %s, vous pourrez obtenir la mise à niveau promise."
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "What is the asteroid approach procedure?"
+#~ msgstr "Quelle est la procédure d'approche des astéroïdes ?"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Get within 1.5 units of the asteroid and contact me. I will deactivate "
+#~ "the cloaking mechanism on my research data store so that you can then "
+#~ "pick it up"
+#~ msgstr ""
+#~ "Approchez vous à moins de 1,5 unités de l'astéroïde et contactez-moi. Je "
+#~ "vais désactiver le mécanisme de camouflage de mon stock de données de "
+#~ "recherche afin que vous puissiez ensuite le récupérer."
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid "First, you have to pick me up from %s"
+#~ msgstr "D'abord, vous devez venir me récupérer sur %s."
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "The asteroid may have been destroyed"
+#~ msgstr "L'astéroïde a peut-être été détruit"
+
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "So it seems. Looks like I'll have to find another asteroid. Thanks for "
+#~ "your help."
+#~ msgstr ""
+#~ "Il semblerai. On dirait que je vais devoir trouver un autre astéroïde. "
+#~ "Merci pour votre aide."
+
+#, lua-format
+#~ msgctxt "Jenny-comms"
+#~ msgid ""
+#~ "Thanks for getting my research for me. Dock with %s to get the upgrade"
+#~ msgstr ""
+#~ "Merci d'avoir récupérés mes recherches pour moi. Amarrez-vous à %s pour "
+#~ "obtenir la mise à niveau."
+
+#~ msgctxt "Jenny-comms"
+#~ msgid "Please retrieve my data store"
+#~ msgstr "Merci de récupérer mon stock de données."
+
+#~ msgctxt "station-comms"
+#~ msgid "You need to stay docked for that action."
+#~ msgstr "Vous devez rester amarré à la station pour cette action."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We do not deal in weapons of mass destruction."
+#~ msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We do not deal in weapons of mass disruption."
+#~ msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We do not deal in those weapons."
+#~ msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "All nukes are charged and primed for destruction."
+#~ msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Sorry, sir, but you are as fully stocked as I can allow."
+#~ msgstr ""
+#~ "Désolé, officier, mais vous êtes au maximum de ce que vous pouvez stocker."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "You are fully loaded and ready to explode things."
+#~ msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "We generously resupplied you with some weapon charges.\n"
+#~ "Put them to good use."
+#~ msgstr ""
+#~ "Nous vous avons généreusement réapprovisionné en munitions.\n"
+#~ "Faites-en bon usage."
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Not enough reputation."
+#~ msgstr "Pas assez de réputation."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "You can't afford as much as I'd like to give you"
+#~ msgstr ""
+#~ "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Get just one"
+#~ msgstr "Prendre juste celui-là."
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "We generously resupplied you with one weapon charge.\n"
+#~ "Put it to good use."
+#~ msgstr ""
+#~ "Nous vous avons généreusement réapprovisionné en munitions.\n"
+#~ "Faites-en bon usage."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Good day, officer.\n"
+#~ "If you need supplies, please dock with us first."
+#~ msgstr ""
+#~ "Bonjour, officier.\n"
+#~ "Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
+#~ "station au préalable."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Greetings.\n"
+#~ "If you want to do business, please dock with us first."
+#~ msgstr ""
+#~ "Salutations.\n"
+#~ "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Be aware that if enemies in the area get much closer, we will be too busy "
+#~ "to conduct business with you."
+#~ msgstr ""
+#~ "\n"
+#~ "Sachez que si les ennemis de la zone se rapprochent encore, nous serons "
+#~ "trop occupés pour faire affaire avec vous."
+
+#~ msgctxt "station-comms"
+#~ msgid "What kind of information do you need?"
+#~ msgstr "De quel genre d'informations avez-vous besoin ?"
+
+#~ msgctxt "ammo-comms"
+#~ msgid "What ordnance do you have available for restock?"
+#~ msgstr "De quelles munitions disposez-vous ?"
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "\n"
+#~ "   Nuke"
+#~ msgstr ""
+#~ "\n"
+#~ "   Nuke"
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "\n"
+#~ "   EMP"
+#~ msgstr ""
+#~ "\n"
+#~ "   EMP"
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "\n"
+#~ "   Homing"
+#~ msgstr ""
+#~ "\n"
+#~ "   Homing"
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "\n"
+#~ "   Mine"
+#~ msgstr ""
+#~ "\n"
+#~ "   Mine"
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "\n"
+#~ "   HVLI"
+#~ msgstr ""
+#~ "\n"
+#~ "   HVLI"
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We have no ordnance available for restock"
+#~ msgstr ""
+#~ "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
+
+#, lua-format
+#~ msgctxt "ammo-comms"
+#~ msgid "We have the following type of ordnance available for restock:%s"
+#~ msgstr ""
+#~ "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+
+#, lua-format
+#~ msgctxt "ammo-comms"
+#~ msgid "We have the following types of ordnance available for restock:%s"
+#~ msgstr ""
+#~ "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid ""
+#~ "Hull repair automation unavailable whie it is undergoing maintenance."
+#~ msgstr ""
+#~ "Automatisation de réparation de coque indisponible, elle est en cours de "
+#~ "maintenance."
+
+#~ msgctxt "trade-comms"
+#~ msgid "What goods do you have available for sale or trade?"
+#~ msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "Station %s:\n"
+#~ "Goods or components available: quantity, cost in reputation"
+#~ msgstr ""
+#~ "Station %s :\n"
+#~ "Marchandises ou composants disponibles : (quantité, coût en réputation)"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "   %14s: %2i, %3i"
+#~ msgstr ""
+#~ "\n"
+#~ "   %14s: %2i, %3i"
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Report status"
+#~ msgstr "Au rapport"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Hull: %d%%\n"
+#~ msgstr "Coque : %d%%\n"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Shield: %d%%\n"
+#~ msgstr "Boucliers : %d%%\n"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Shield %s: %d%%\n"
+#~ msgstr "Bouclier %s : %d%%\n"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Can you send a supply drop? (%d rep)"
+#~ msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rep)"
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "You need to set a waypoint before you can request backup."
+#~ msgstr ""
+#~ "Vous devez définir un marqueur avant de faire une demande de "
+#~ "ravitaillement."
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "To which waypoint should we deliver your supplies?"
+#~ msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "WP %d"
+#~ msgstr "Marqueur %d"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "We have dispatched a supply ship toward WP %d"
+#~ msgstr ""
+#~ "Nous venons de déployer un vaisseau qui vous déposera la capsule de "
+#~ "ravitaillement au marqueur %d."
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Not enough reputation!"
+#~ msgstr "Pas assez de réputation !"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Please send Adder MK5 reinforcements! (%d rep)"
+#~ msgstr "Merci de nous envoyer un Adder MK5 en renforts ! (%d rep)"
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "You need to set a waypoint before you can request reinforcements."
+#~ msgstr ""
+#~ "Vous devez définir un marqueur avant de pouvoir demander des renforts."
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "To which waypoint should we dispatch the reinforcements?"
+#~ msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "We have dispatched %s to assist at waypoint %d"
+#~ msgstr ""
+#~ "Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
+#~ "marqueur %d."
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Please send Phobos T3 reinforcements! (%d rep)"
+#~ msgstr "Merci de nous envoyer un Phobos T3 en renforts ! (%d rep)"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Please send Stalker Q7 reinforcements! (%d rep)"
+#~ msgstr "Merci de nous envoyer un Stalker Q7 en renforts ! (%d rep)"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "What do you want?"
+#~ msgstr "Que voulez-vous ?"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Sir, how can we assist?"
+#~ msgstr "Monsieur, comment pouvons-nous vous assister ?"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Set your shield frequency"
+#~ msgstr "Réglez la fréquence de votre bouclier"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Enemy ships nearby:"
+#~ msgstr "Vaisseaux ennemis à proximité :"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "%s: Beams penetrate best against shields at %i THz"
+#~ msgstr ""
+#~ "%s\n"
+#~ "%s : les faisceaux sont plus efficaces contre les boucliers à %i THz."
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Set shields to frequency %i THz"
+#~ msgstr "Réglez les boucliers sur la fréquence %i THz"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Shields set to %i THz"
+#~ msgstr "Boucliers réglés sur %i THz."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Defend a waypoint"
+#~ msgstr "Défendez un marqueur"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "No waypoints set. Please set a waypoint first."
+#~ msgstr ""
+#~ "Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en "
+#~ "placer un."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Which waypoint should we defend?"
+#~ msgstr "Quel marqueur devons-nous défendre ?"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Defend WP %d"
+#~ msgstr "Défendez le marqueur %d"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "We are heading to assist at WP %d."
+#~ msgstr "Nous partons immédiatement défendre le marqueur %d."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Assist me"
+#~ msgstr "Aidez-nous !"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Heading toward you to assist."
+#~ msgstr "Entendu, nous partons immédiatement vous aider."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Report status"
+#~ msgstr "Au rapport"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Hull: %d%%\n"
+#~ msgstr "Coque : %d%%\n"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Shield: %d%%\n"
+#~ msgstr "Boucliers : %d%%\n"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Front Shield: %d%%\n"
+#~ msgstr "Boucliers avant : %d%%\n"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Rear Shield: %d%%\n"
+#~ msgstr "Boucliers arrière : %d%%\n"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Shield %s: %d%%\n"
+#~ msgstr "Bouclier %s : %d%%\n"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "%s Missiles: %d/%d\n"
+#~ msgstr "%s Missiles : %d/%d\n"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Dock at %s"
+#~ msgstr "Amarrez-vous à %s."
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Docking at %s."
+#~ msgstr "En cours d'amarrage à %s."
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Direct %s"
+#~ msgstr "Diriger %s"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "What command should be given to %s?"
+#~ msgstr "Quelle commande doit être donnée à %s ?"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Report hull and shield status"
+#~ msgstr "État de la coque et des boucliers"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Fleet status:"
+#~ msgstr "État de la flotte :"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid ""
+#~ "\n"
+#~ " %s:"
+#~ msgstr ""
+#~ "\n"
+#~ " %s :"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid ""
+#~ "\n"
+#~ "    Hull: %d%%"
+#~ msgstr ""
+#~ "\n"
+#~ "    Coque : %d%%"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid ""
+#~ "\n"
+#~ "    Shield: %d%%"
+#~ msgstr ""
+#~ "\n"
+#~ "    Boucliers : %d%%"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid ""
+#~ "\n"
+#~ "    Shields: "
+#~ msgstr ""
+#~ "\n"
+#~ "    Boucliers : "
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Front: %d%% Rear: %d%%"
+#~ msgstr "Avant : %d%% Arrière : %d%%"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid " %d:%d%%"
+#~ msgstr " %d :%d%%"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Report missile status"
+#~ msgstr "Rapport de l'état des missiles"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Fleet missile status:"
+#~ msgstr "État des missiles de la flotte :"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid ""
+#~ "\n"
+#~ "      %s: %d/%d"
+#~ msgstr ""
+#~ "\n"
+#~ "      %s : %d/%d"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid ""
+#~ "\n"
+#~ "    Missiles: %s"
+#~ msgstr ""
+#~ "\n"
+#~ "    Missiles: %s"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "%s heading toward you to assist"
+#~ msgstr "%s, nous partons immédiatement vous aider."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Traded your luxury for %s from %s"
+#~ msgstr "Échanger vos produits de luxe (luxury) contre du %s auprès de %s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Purchased %s from %s"
+#~ msgstr "%s acheté auprès de %s"
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Insufficient reputation for purchase"
+#~ msgstr "Réputation insuffisante pour acheter."
+
+#~ msgctxt "trade-comms"
+#~ msgid "Do you have cargo you might sell?"
+#~ msgstr "Auriez-vous de la cargaison à vendre ?"
+
+#~ msgctxt "trade-comms"
+#~ msgid "We've got "
+#~ msgstr "Nous avons "
+
+#~ msgctxt "trade-comms"
+#~ msgid ", "
+#~ msgstr ", "
+
+#~ msgctxt "trade-comms"
+#~ msgid "nothing"
+#~ msgstr "Rien du tout."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We will see to your destruction!"
+#~ msgstr "Nous allons vous détruire !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your bloodline will end here!"
+#~ msgstr "Votre race va s'éteindre ici et maintenant !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your feeble threats are meaningless."
+#~ msgstr "Vos petites menaces ne nous impressionnent pas."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "Ktzzzsss.\n"
+#~ "You will DIEEee weaklingsss!"
+#~ msgstr ""
+#~ "Ktzzzsss.\n"
+#~ "\n"
+#~ "Vous allez mourir faibles créatures insignifiantes !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We will destroy you"
+#~ msgstr "Nous allons vous détruire !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We think not. It is you who will experience destruction!"
+#~ msgstr ""
+#~ "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "You have no honor"
+#~ msgstr "Vous n'avez aucun honneur."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your insult has brought our wrath upon you. Prepare to die."
+#~ msgstr ""
+#~ "Votre insulte a attiré notre colère sur vous. Préparez-vous à mourir !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your comments about honor have no meaning to us"
+#~ msgstr ""
+#~ "Vos commentaires sur l'honneur n'ont aucune signification pour nous."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We pity your pathetic race"
+#~ msgstr "Nous plaignons votre race pathétique."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Pathetic? You will regret your disparagement!"
+#~ msgstr "Pathétique ? Vous allez regretter votre insolence !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We don't care what you think of us"
+#~ msgstr "Peu importe ce que vous pensez de nous."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "We wish you no harm, but will harm you if we must.\n"
+#~ "End of transmission."
+#~ msgstr ""
+#~ "Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
+#~ "\n"
+#~ "Fin de transmission."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Stay out of our way, or your death will amuse us extremely!"
+#~ msgstr ""
+#~ "Restez en dehors de notre chemin, ou votre mort sera une amusante "
+#~ "distraction pour nous !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "One zero one.\n"
+#~ "No binary communication detected.\n"
+#~ "Switching to universal speech.\n"
+#~ "Generating appropriate response for target from human language archives.\n"
+#~ ":Do not cross us:\n"
+#~ "Communication halted."
+#~ msgstr ""
+#~ "000110011010...Grzzzz..\n"
+#~ "\n"
+#~ "Communication binaire non détectée..Grzzz Nous passons en communication "
+#~ "universelle..Grrzzz\n"
+#~ "\n"
+#~ "Générer une réponse appropriée pour la cible en langage humain à partir "
+#~ "des archives...Grrzzzz\n"
+#~ "\n"
+#~ "Ne nous approchez pas! Grrzzz\n"
+#~ "\n"
+#~ "Communication interrompue."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "EXECUTE: SELFDESTRUCT"
+#~ msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Rogue command received. Targeting source."
+#~ msgstr "Commande non autorisée reçue. Cible verrouillée."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "External command ignored."
+#~ msgstr "Ordre externe ignoré."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "The hive suffers no threats. Opposition to any of us is opposition to us "
+#~ "all.\n"
+#~ "Stand down or prepare to donate your corpses toward our nutrition."
+#~ msgstr ""
+#~ "Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
+#~ "s'opposer à nous tous.\n"
+#~ "\n"
+#~ "Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+#~ msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "We do not need permission to pluck apart such an insignificant threat."
+#~ msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "The hive has greater priorities than exterminating pests."
+#~ msgstr ""
+#~ "Notre peuple a d'autres priorités que l'extermination de parasites tels "
+#~ "que vous."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Mind your own business!"
+#~ msgstr "Occupez-vous de vos affaires !"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Yes?"
+#~ msgstr "Oui ?"
+
+#~ msgctxt "ship-comms"
+#~ msgid ""
+#~ "Sorry, we have no time to chat with you.\n"
+#~ "We are on an important mission."
+#~ msgstr ""
+#~ "Désolé, nous n'avons pas le temps de discuter avec vous.\n"
+#~ "\n"
+#~ "Nous sommes en mission de la plus haute importance."
+
+#~ msgctxt "ship-comms"
+#~ msgid ""
+#~ "We have nothing for you.\n"
+#~ "Good day."
+#~ msgstr ""
+#~ "Nous n'avons rien pour vous.\n"
+#~ "\n"
+#~ "Bonne journée."
+
+#~ msgctxt "upgrade-comms"
+#~ msgid "Add beam weapon"
+#~ msgstr "Ajouter des faisceaux laser"
+
+#~ msgctxt "upgrade-comms"
+#~ msgid "A beam wepon has been added to your ship"
+#~ msgstr "Des faisceaux laser ont été ajoutée à votre vaisseau"
+
+#, lua-format
+#~ msgctxt "upgrade-comms"
+#~ msgid "%s cannot add a beam weapon to your ship unless you provide %s"
+#~ msgstr ""
+#~ "%s ne peut pas ajouter de faisceaux laser à votre vaisseau à moins que "
+#~ "vous ne lui fournissiez du %s."
+
+#~ msgctxt "upgrade-comms"
+#~ msgid "Increase battery efficiency"
+#~ msgstr "Augmenter l'efficacité de la batterie"
+
+#, lua-format
+#~ msgctxt "upgrade-comms"
+#~ msgid ""
+#~ "%s: I appreciate the %s and %s. You have a 50%% greater energy capacity "
+#~ "due to increased battery efficiency"
+#~ msgstr ""
+#~ "%s : J'apprécie le %s et le %s. Vous disposez désormais d'une capacité "
+#~ "énergétique supérieure de 50%% grâce à l'efficacité accrue de la batterie."
+
+#, lua-format
+#~ msgctxt "upgrade-comms"
+#~ msgid ""
+#~ "%s: You need to bring me some %s and %s before I can increase your "
+#~ "battery efficiency"
+#~ msgstr ""
+#~ "%s : vous devez m'apporter du %s et du %s avant que je puisse augmenter "
+#~ "l'efficacité de votre batterie."
+
+#~ msgctxt "upgrade-comms"
+#~ msgid "Reduce beam cycle time"
+#~ msgstr "Réduire le temps de cycle des faisceaux laser"
+
+#~ msgctxt "upgrade-comms"
+#~ msgid "After accepting your gift, he reduced your Beam cycle time."
+#~ msgstr ""
+#~ "Après avoir accepté votre cadeau, il a réduit le temps de cycle de vos "
+#~ "faisceaux laser."
+
+#, lua-format
+#~ msgctxt "upgrade-comms"
+#~ msgid "%s requires %s for the upgrade"
+#~ msgstr "%s réclame du %s pour effectuer la mise à niveau."
+
+#, lua-format
+#~ msgctxt "upgrade-comms"
+#~ msgid ""
+#~ "%s reduced your Beam cycle time at no cost in trade with the message, 'Go "
+#~ "get those Kraylors.'"
+#~ msgstr ""
+#~ "%s a réduit gratuitement le temps de cycle de vos faisceaux laser en "
+#~ "échange du message \"Allez chercher ces Kraylors !\"."
+
+#~ msgctxt "upgrade-comms"
+#~ msgid "Your ship type does not support a beam weapon upgrade."
+#~ msgstr ""
+#~ "Votre type de vaisseau ne prend pas en charge les mises à niveau de "
+#~ "faisceaux laser."
+
+#~ msgctxt "repairCrew-msgEngineer"
+#~ msgid "Medical team has revived one of your repair crew"
+#~ msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
+
+#~ msgctxt "repairCrew-msgEngineer+"
+#~ msgid "Medical team has revived one of your repair crew"
+#~ msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
+
+#~ msgctxt "coolant-msgEngineer"
+#~ msgid "Automated systems have recovered some coolant"
+#~ msgstr ""
+#~ "Les systèmes automatisés ont récupéré du liquide de refroidissement."
+
+#~ msgctxt "coolant-msgEngineer+"
+#~ msgid "Automated systems have recovered some coolant"
+#~ msgstr ""
+#~ "Les systèmes automatisés ont récupéré du liquide de refroidissement."
+
+#~ msgctxt "repairCrew-msgEngineer"
+#~ msgid "One of your repair crew has perished"
+#~ msgstr "Un de vos réparateurs a péri."
+
+#~ msgctxt "repairCrew-msgEngineer+"
+#~ msgid "One of your repair crew has perished"
+#~ msgstr "Un de vos réparateurs a péri."
+
+#~ msgctxt "coolant-msgEngineer"
+#~ msgid "Damage has caused a loss of coolant"
+#~ msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
+
+#~ msgctxt "coolant-msgEngineer+"
+#~ msgid "Damage has caused a loss of coolant"
+#~ msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
+
+#~ msgctxt "damage-msgEngineer"
+#~ msgid "The probe launch system has been damaged"
+#~ msgstr "Le système de lancement des sondes a été endommagé."
+
+#~ msgctxt "damage-msgEngineer+"
+#~ msgid "The probe launch system has been damaged"
+#~ msgstr "Le système de lancement des sondes a été endommagé."
+
+#~ msgctxt "damage-msgEngineer"
+#~ msgid "The hacking system has been damaged"
+#~ msgstr "Le système de piratage a été endommagé."
+
+#~ msgctxt "damage-msgEngineer+"
+#~ msgid "The hacking system has been damaged"
+#~ msgstr "Le système de piratage a été endommagé."
+
+#~ msgctxt "damage-msgEngineer"
+#~ msgid "The scanners have been damaged"
+#~ msgstr "Les scanners ont été endommagés."
+
+#~ msgctxt "damage-msgEngineer+"
+#~ msgid "The scanners have been damaged"
+#~ msgstr "Les scanners ont été endommagés."
+
+#~ msgctxt "damage-msgEngineer"
+#~ msgid "Combat maneuver has been damaged"
+#~ msgstr "La manœuvre de combat a été endommagée."
+
+#~ msgctxt "damage-msgEngineer+"
+#~ msgid "Combat maneuver has been damaged"
+#~ msgstr "La manœuvre de combat a été endommagée."
+
+#~ msgctxt "damage-msgEngineer"
+#~ msgid "Self destruct system has been damaged"
+#~ msgstr "Le système d'autodestruction a été endommagé."
+
+#~ msgctxt "damage-msgEngineer+"
+#~ msgid "Self destruct system has been damaged"
+#~ msgstr "Le système d'autodestruction a été endommagé."
+
+#, lua-format
+#~ msgctxt "ridExuari-incCall"
+#~ msgid ""
+#~ "[%s in %s] Hostile Exuari approach. Help us, please. We cannot defend "
+#~ "ourselves. Your ship is the only thing that stands between us and "
+#~ "destruction."
+#~ msgstr ""
+#~ "[%s en secteur %s]\n"
+#~ "Approche hostile d'Éxuaris. Aidez-nous s'il-vous-plaît.\n"
+#~ "Nous ne pouvons pas nous défendre. Votre vaisseau est la seule chose qui "
+#~ "se dresse entre nous et notre destruction."
+
+#, lua-format
+#~ msgctxt "ridExuari-incCall"
+#~ msgid ""
+#~ "%s\n"
+#~ "\n"
+#~ "We think there is an Exuari base hiding in a nebula in sector %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "\n"
+#~ "Nous pensons qu'il existe une base Éxuarie cachée dans une nébuleuse en "
+#~ "secteur %s."
+
+#, lua-format
+#~ msgctxt "ridExuari-incCall"
+#~ msgid "%s has asked for help against the Exuari"
+#~ msgstr "%s demande de l'aide contre les Éxuaris."
+
+#, lua-format
+#~ msgctxt "ridExuari-msgMainscreen"
+#~ msgid "Station %s destroyed"
+#~ msgstr "Station %s détruite"
+
+#, lua-format
+#~ msgctxt "ridExuari-shipLog"
+#~ msgid ""
+#~ "[Captain's Log] We have started our initial shakedown cruise of %s, a %s "
+#~ "class ship. The crew are glad to be moving up from the class three "
+#~ "freighter we used to run. After several years of doing cargo delivery "
+#~ "runs and personnel transfers, it's nice to be on a ship with more self "
+#~ "reliance. We've got beam weapons! Our previous ship was defenseless. "
+#~ "Unfortunately, our impulse engines are not as fast as our previous ship, "
+#~ "but we might be able to fix that. That's the kind of compromise you make "
+#~ "when you purchase surplus military hardware. I suspect that we got such a "
+#~ "good deal on the ship because the previous owner, the governer of station "
+#~ "%s, has an ulterior motive. After all, we are the best qualified to run "
+#~ "this ship in the sector and we have not seen any other friendly armed "
+#~ "ships around here."
+#~ msgstr ""
+#~ "[Journal du capitaine]\n"
+#~ "Nous avons commencé notre première croisière de fortune à bord du %s, un "
+#~ "vaisseau de classe %s. L'équipage est heureux de quitter le cargo de "
+#~ "classe 3 que nous avions l'habitude d'utiliser. Après plusieurs années à "
+#~ "effectuer des livraisons de fret et du transfert de personnel, c'est "
+#~ "agréable d'être sur un vaisseau avec plus d'autonomie. Nous avons même "
+#~ "des faisceaux laser. Notre vaisseau précédent, lui, était sans défense.\n"
+#~ "\n"
+#~ "Malheureusement, nos moteurs à impulsions ne sont pas aussi rapides que "
+#~ "sur notre ancien cargo, mais nous pourrions peut-être résoudre ce "
+#~ "problème.\n"
+#~ "C'est le genre de compromis que vous faites lorsque vous achetez du "
+#~ "matériel militaire excédentaire. Je pense que si nous avons fait une si "
+#~ "bonne affaire avec ce vaisseau, c'est parce que l'ancien propriétaire, le "
+#~ "gouverneur de la station %s, avait une idée en tête. Après tout, nous "
+#~ "sommes l'équipage le mieux qualifié pour diriger ce vaisseau dans ce "
+#~ "secteur et nous n'avons vu aucun autre vaisseau allié armé par ici."
+
+#, lua-format
+#~ msgctxt "ridExuari-shipLog"
+#~ msgid ""
+#~ "[Station %s] Based on our observation of the Exuari base %s in %s, we "
+#~ "think it will continue to launch harassing spacecraft in our direction. "
+#~ "We know it's a large target for a small fighter, but we believe you can "
+#~ "destroy it, %s. We would be very grateful if you would do just that. Our "
+#~ "defenses are very limited."
+#~ msgstr ""
+#~ "[Station %s]\n"
+#~ "D'après nos observations de la base Éxuarie %s en %s, nous pensons "
+#~ "qu'elle continuera à lancer régulièrement des vaisseaux hostiles dans "
+#~ "notre direction.\n"
+#~ "\n"
+#~ "Nous savons que c'est une grande cible pour votre petit Combattant, mais "
+#~ "nous pensons que vous pouvez la détruire.\n"
+#~ "%s, nous vous serions très reconnaissants de le faire. Nos défenses sont "
+#~ "très limitées."
+
+#~ msgctxt "ridExuari-incCall"
+#~ msgid ""
+#~ "Thanks for taking care of that Exuari base and all the Exuari ships it "
+#~ "deployed. Dock with us for a token of our appreciation"
+#~ msgstr ""
+#~ "Merci de vous êtres occupé de cette base Éxuarie et de tous les vaisseaux "
+#~ "Éxuaris qu'elle a déployés.\n"
+#~ "Amarrez-vous à nous en gage de notre reconnaissance."
+
+#, lua-format
+#~ msgctxt "ridExuari-shipLog"
+#~ msgid "%s just launched these ships: %s"
+#~ msgstr "%s vient de lancer ses vaisseaux : %s"
+
+#, lua-format
+#~ msgctxt "ridExuari-shipLog"
+#~ msgid "%s just launched %s"
+#~ msgstr "%s vient de lancer %s"
+
+#, lua-format
+#~ msgctxt "cargo-shipLog"
+#~ msgid ""
+#~ "[%s] Your delivery contract calls for food, medicine, dilithium and "
+#~ "tritanium. Return when you have all four of these and we'll consider your "
+#~ "contract fulfilled"
+#~ msgstr ""
+#~ "[%s]\n"
+#~ "Votre contrat de livraison prévoit de la nourriture ( food), des "
+#~ "médicaments (medicine), du dilithium et du tritanium. Revenez lorsque "
+#~ "vous aurez les quatre et nous considérerons que votre contrat est rempli."
+
+#, lua-format
+#~ msgctxt "cargo-shipLog"
+#~ msgid ""
+#~ "[%s] Thanks for the cargo, %s. We'll make good use of it. We've added 100 "
+#~ "units to your battery capacity and reduced your beam cycle time. Enjoy "
+#~ "your visit to the %s system"
+#~ msgstr ""
+#~ "[%s]\n"
+#~ "Merci pour la cargaison, %s. Nous en ferons bon usage. Nous avons ajouté "
+#~ "100 unités à la capacité de votre batterie et réduit le temps de cycle de "
+#~ "vos faisceaux laser. Bonne visite dans le système %s."
+
+#~ msgctxt "msgMainscreen"
+#~ msgid "The supply depot station has been destroyed"
+#~ msgstr "Le dépôt de ravitaillement a été détruit."
+
+#~ msgctxt "Kraylor-shipLog"
+#~ msgid ""
+#~ "[Human Navy Regional Headquarters] All Human Navy vessels are hereby "
+#~ "ordered to assist in the repelling of inbound Kraylor ships. We are not "
+#~ "sure of their intent, but we are sure it is not good. Destroy them before "
+#~ "they can destroy us"
+#~ msgstr ""
+#~ "[Quartier régional de la Marine humaine]\n"
+#~ "Tous les vaisseaux de la Marine humaine reçoivent l'ordre d'aider à "
+#~ "repousser les vaisseaux Kraylors entrants.\n"
+#~ "Nous ne sommes pas sûrs de leur intention, mais nous sommes sûrs que ce "
+#~ "n'est rien de bon. Détruisez-les avant qu'ils ne puissent nous attaquer."
+
+#, lua-format
+#~ msgctxt "Kraylor-shipLog"
+#~ msgid "This includes you, %s"
+#~ msgstr "Cela vous inclut, %s."
+
+#~ msgctxt "KraylorOrders-comms"
+#~ msgid "Repel Kraylor"
+#~ msgstr "Repousser les Kraylors."
+
+#~ msgctxt "msgMainscreen"
+#~ msgid "You successfully handled the Kraylor threat"
+#~ msgstr "Vous avez géré avec succès la menace Kraylor."
+
+#, lua-format
+#~ msgctxt "Kraylor-shipLog"
+#~ msgid ""
+#~ "Looks like the Kraylor have developed some kind of planet busting weapon. "
+#~ "They just destroyed %s with it. Keep them away from %s!"
+#~ msgstr ""
+#~ "On dirait que les Kraylors ont développé une sorte d'arme de destruction "
+#~ "de planètes. Ils viennent de détruire %s avec.\n"
+#~ "Tenez-les éloignés de %s à tout prix !"
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid "You've saved planet %s"
+#~ msgstr "Vous avez sauvé la planète %s."
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid "Planet %s was destroyed"
+#~ msgstr "La planète %s a été détruite."
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid "station %s destroyed"
+#~ msgstr "station %s détruite."
+
+#~ msgctxt "msgMainscreen"
+#~ msgid "Your contract destination station was destroyed"
+#~ msgstr "La destination de votre contract a été détruite."
+
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "Mourning over the loss of the station has halted all business\n"
+#~ "The mission is over"
+#~ msgstr ""
+#~ "Le deuil de la perte de la station a stoppé toutes les activités.\n"
+#~ "La mission est terminée."
+
+#, lua-format
+#~ msgctxt "contract-shipLog"
+#~ msgid ""
+#~ "[Captain's Log] Why can't the Exuari just leave us alone? I don't "
+#~ "understand what it is about them that makes them want to prey on "
+#~ "everyone.\n"
+#~ "The upgrades for %s are very nice. They certainly came in handy. With the "
+#~ "confidence of stations %s, %s and %s, I feel we will succeed as the space "
+#~ "entrepeneurs we want to be."
+#~ msgstr ""
+#~ "[Journal du capitaine]\n"
+#~ "Pourquoi les Éxuaris ne peuvent-ils pas nous laisser tranquilles ? Je ne "
+#~ "comprends pas ce qu'il y a chez eux qui leur donne envie de s'en prendre "
+#~ "à tout le monde.\n"
+#~ "Les mises à niveau de notre %s sont vraiment bien. Elles ont déjà "
+#~ "certainement été utiles. Avec la confiance des stations %s, %s et %s, je "
+#~ "pense que nous réussirons en tant qu'entrepreneurs de l'espace que nous "
+#~ "voulons être."
+
+#, lua-format
+#~ msgctxt "Jenny-shipLog"
+#~ msgid ""
+#~ "Jenny McGuire is now aboard. She's a bit paranoid and has sealed the door "
+#~ "to her quarters. You'll have to contact %s to talk to her"
+#~ msgstr ""
+#~ "Jenny McGuire est maintenant à bord.\n"
+#~ "Elle est un peu paranoïaque et a barricadée la porte de ses quartiers. "
+#~ "Vous devrez contacter %s pour lui parler."
+
+#~ msgctxt "energy-msgScience"
+#~ msgid "Energy surge from supply drop"
+#~ msgstr "Augmentation de l'énergie due à la cargaison de ravitaillement"
+
+#~ msgctxt "energy-msgOperations"
+#~ msgid "Energy surge from supply drop"
+#~ msgstr "Augmentation de l'énergie due à la cargaison de ravitaillement"
+
+#~ msgctxt "energy-msgScience"
+#~ msgid "Energy surge from area highlighted in yellow"
+#~ msgstr "Augmentation de l'énergie de la zone surlignée en jaune"
+
+#~ msgctxt "energy-msgOperations"
+#~ msgid "Energy surge from area highlighted in yellow"
+#~ msgstr "Augmentation de l'énergie de la zone surlignée en jaune"
+
+#~ msgctxt "scienceDescription-jammer"
+#~ msgid "Jump and Warp Jammer"
+#~ msgstr "Brouilleurs de téléportation et vitesse lumière"
+
+#~ msgctxt "scienceDescription-jammer"
+#~ msgid ""
+#~ "Jump and Warp Jammer with external dynamic range control and sensor decoy "
+#~ "mechanism"
+#~ msgstr ""
+#~ "Brouilleurs de téléportation et vitesse lumière avec contrôle de plage "
+#~ "dynamique externe et mécanisme de leurre de capteur"
+
+#, lua-format
+#~ msgctxt "Kraylor-shipLog"
+#~ msgid ""
+#~ "Kraylor have sabotaged station %s. It can no longer maintain orbit around "
+#~ "%s. Fortunately, it looks to be in no danger from %s or %s, but the "
+#~ "Kraylor pose a more significant threat"
+#~ msgstr ""
+#~ "Les Kraylors ont saboté la station %s. Elle ne peut plus maintenir son "
+#~ "orbite autour de %s. Heureusement, il semble que %s et %s ne soient en "
+#~ "danger, mais les Kraylors représentent une menace bien plus importante."
+
+#~ msgctxt "ridExuari-msgMainscreen"
+#~ msgid "Dash your hopes and dreams again?"
+#~ msgstr "Anéantir à nouveau vos espoirs et vos rêves ?"
+
+#~ msgctxt "inventory-buttonRelay"
+#~ msgid "Inventory"
+#~ msgstr "Inventaire"
+
+#~ msgctxt "inventory-buttonOperations"
+#~ msgid "Inventory"
+#~ msgstr "Inventaire"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Training and Coordination"
+#~ msgstr "Formation et coordination"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We train naval cadets in routine and specialized functions aboard space "
+#~ "vessels and coordinate naval activity throughout the sector"
+#~ msgstr ""
+#~ "Nous formons des élèves-officiers de la marine aux fonctions routinières "
+#~ "et spécialisées à bord de vaisseaux spatiaux et coordonnons l'activité "
+#~ "navale de l'ensemble du secteur."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The original station builders were fans of the late 20th century "
+#~ "scientist and author Isaac Asimov. The station was initially named "
+#~ "Foundation, but was later changed simply to Asimov. It started off as a "
+#~ "stellar observatory, then became a supply stop and as it has grown has "
+#~ "become an educational and coordination hub for the region"
+#~ msgstr ""
+#~ "Les constructeurs de la station d'origine étaient des fans du "
+#~ "scientifique et auteur de la fin du 20e siècle, Isaac Asimov. La station "
+#~ "s'appelait initialement Foundation, mais fut plus tard simplement changée "
+#~ "en Asimov. Elle a commencé comme observatoire stellaire, puis est devenue "
+#~ "une station d'approvisionnement et au fur et à mesure qu'elle s'est "
+#~ "développée, elle est devenue un centre d'éducation et de coordination "
+#~ "pour la région."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Warp and Impulse engine manufacturing"
+#~ msgstr "Fabrication de moteurs à impulsions et à vitesse lumière"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We manufacture warp, impulse and jump engines for the human navy fleet as "
+#~ "well as other independent clients on a contract basis"
+#~ msgstr ""
+#~ "Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
+#~ "téléporteurs pour la flotte de la Marine Humaine ainsi que pour d'autres "
+#~ "clients indépendants sur une base contractuelle."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after the late 19th century astronaut as well as the "
+#~ "fictionlized stations that followed. The station initially constructed "
+#~ "entire space worthy vessels. In time, it transitioned into specializeing "
+#~ "in propulsion systems."
+#~ msgstr ""
+#~ "La station porte le nom de l'astronaute de la fin du XIXe siècle ainsi "
+#~ "que des stations fictives qui ont suivi. La station a initialement "
+#~ "construit des navires dignes de tout l'espace. Avec le temps, elle s'est "
+#~ "spécialisée dans les systèmes de propulsion."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Warp drive components"
+#~ msgstr "Composants pour système de vitesse lumière"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide warp drive engines and components"
+#~ msgstr ""
+#~ "Nous fournissons des moteurs et des composants pour système de vitesse "
+#~ "lumière."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station is named after Chris Van Den Broeck who did some initial "
+#~ "research into the possibility of warp drive in the late 20th century on "
+#~ "Earth"
+#~ msgstr ""
+#~ "Cette station porte le nom de Chris Van Den Broeck qui a initialement "
+#~ "fait des recherches sur la possibilité de distorsion de l'espace et du "
+#~ "temps à la fin du 20e siècle sur Terre."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Shielded circuitry fabrication"
+#~ msgstr "Fabrication de circuits blindés"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We make a large variety of circuits for numerous ship systems shielded "
+#~ "from sensor detection and external control interference"
+#~ msgstr ""
+#~ "Nous fabriquons une grande variété de circuits pour de nombreux systèmes "
+#~ "de navires, blindés et protégés de la détection des capteurs et des "
+#~ "interférences de contrôle externes."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Our station is named after the law which quantifies the amount of force "
+#~ "with which stationary electrically charged particals repel or attact each "
+#~ "other - a fundamental principle in the design of our circuits"
+#~ msgstr ""
+#~ "Notre station est nommée d'après la loi qui quantifie la quantité de "
+#~ "force avec laquelle les particules stationnaires chargées électriquement "
+#~ "se repoussent ou s'attaquent - un principe fondamental dans la conception "
+#~ "de nos circuits."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Sensor components"
+#~ msgstr "Composants de capteurs"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research and manufacture sensor components and systems"
+#~ msgstr ""
+#~ "Nous faisons de la rechercher et fabriquons des composants et des "
+#~ "systèmes de capteurs."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Tony Heyes the inventor of some of the "
+#~ "earliest electromagnetic sensors in the mid 20th century on Earth in the "
+#~ "United Kingdom to assist blind human mobility"
+#~ msgstr ""
+#~ "La station porte le nom de Tony Heyes, l'inventeur de certains des "
+#~ "premiers capteurs électromagnétiques du milieu du 20e siècle sur Terre au "
+#~ "Royaume-Uni pour aider à la mobilité des humains non voyants."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Nanite supplier"
+#~ msgstr "Fournisseur de nanites"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide nanites for various organic and non-organic systems"
+#~ msgstr ""
+#~ "Nous fournissons des nanites pour divers systèmes organiques et non "
+#~ "organiques."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station is named after the nanotechnologist Hossam Haick from the "
+#~ "early 21st century on Earth in Israel"
+#~ msgstr ""
+#~ "Cette station porte le nom du nanotechnologue Hossam Haick du début du "
+#~ "21e siècle sur Terre en Israël."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Energy beam components"
+#~ msgstr "Composants de faisceau d'énergie"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research and manufacture energy beam components and systems"
+#~ msgstr ""
+#~ "Nous faisons de la recherche et fabriquons des composants et des systèmes "
+#~ "de faisceaux d'énergie."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Theodore Maiman who researched and built the "
+#~ "first laser in the mid 20th century on Earth"
+#~ msgstr ""
+#~ "La station porte le nom de Theodore Maiman qui a fait des recherches et "
+#~ "construit le premier laser au milieu du 20e siècle sur Terre."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Energy Beam Components"
+#~ msgstr "Composants de faisceau d'énergie"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We manufacture energy beam components"
+#~ msgstr "Nous fabriquons des composants de faisceaux d'énergie."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Station named after Guglielmo Marconi an Italian inventor from early 20th "
+#~ "century Earth who, along with Nicolo Tesla, claimed to have invented a "
+#~ "death ray or particle beam weapon"
+#~ msgstr ""
+#~ "Station nommée d'après Guglielmo Marconi, un inventeur italien de la "
+#~ "Terre du début du XXe siècle qui, avec Nicolo Tesla, a prétendu avoir "
+#~ "inventé une arme à rayon de la mort ou à faisceau de particules."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Exobiology research"
+#~ msgstr "Recherche en exobiologie"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We study recently discovered life forms not native to Earth"
+#~ msgstr ""
+#~ "Nous étudions des formes de vie récemment découvertes et non originaires "
+#~ "de la Terre."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station was named after one of the early exobiologists from mid 20th "
+#~ "century Earth, Dr. Stanley Miller"
+#~ msgstr ""
+#~ "Cette station porte le nom d'un des premiers exobiologistes de la Terre "
+#~ "du milieu du 20e siècle, le Dr Stanley Miller."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Impulse engine components"
+#~ msgstr "Composants de moteurs à impulsions"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research and manufacture impulse engine components and systems"
+#~ msgstr ""
+#~ "Nous faisons de la recherche et fabriquons des composants et systèmes "
+#~ "pour moteurs à impulsion."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Roger Shawyer who built the first prototype "
+#~ "impulse engine in the early 21st century"
+#~ msgstr ""
+#~ "La station porte le nom de Roger Shawyer qui a construit le premier "
+#~ "prototype de moteur à impulsion au début du 21e siècle."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Energy and particle beam components"
+#~ msgstr "Composants de faisceau d'énergie et de particules"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We fabricate general and specialized components for ship beam systems"
+#~ msgstr ""
+#~ "Nous fabriquons des composants généraux et spécialisés pour les faisceaux "
+#~ "des navires."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station was named after Archimedes who, according to legend, used a "
+#~ "series of adjustable focal length mirrors to focus sunlight on a Roman "
+#~ "naval fleet invading Syracuse, setting fire to it"
+#~ msgstr ""
+#~ "Cette station porte le nom d'Archimède qui, selon la légende, a utilisé "
+#~ "une série de miroirs à focale réglable pour concentrer la lumière du "
+#~ "soleil sur une flotte navale romaine envahissant Syracuse, y mettant le "
+#~ "feu."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Trading station"
+#~ msgstr "Station de commerce"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "Only the largest market and trading location in twenty sectors. You can "
+#~ "find your heart's desire here"
+#~ msgstr ""
+#~ "Tout simplement le plus grand marché et lieu de négoce sur vingt secteurs "
+#~ "à la ronde. Vous pouvez y trouver l'objet de tous vos désirs ici."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Modeled after the early 21st century bazaar on Earth in Bangkok, "
+#~ "Thailand. Designed and built with trade and commerce in mind"
+#~ msgstr ""
+#~ "Inspiré du bazar du début du 21e siècle sur Terre à Bangkok, en "
+#~ "Thaïlande. Conçu et construit dans l'unique but de développer le commerce "
+#~ "et les affaires."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Mining"
+#~ msgstr "Exploitation minière"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We mine nearby asteroids for precious minerals and process them for sale"
+#~ msgstr ""
+#~ "Nous extrayons des astéroïdes à proximité à la recherche de minéraux "
+#~ "précieux et les traitons pour les vendre."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station's name is inspired by a large gold mine on Earth in "
+#~ "Indonesia. The station builders hoped to have a similar amount of "
+#~ "minerals found amongst these asteroids"
+#~ msgstr ""
+#~ "Le nom de cette station est inspiré d'une grande mine d'or sur Terre en "
+#~ "Indonésie. Les constructeurs de la station espéraient trouver une "
+#~ "quantité similaire de minéraux parmi ces astéroïdes."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Observatory and stellar mapping"
+#~ msgstr "Observatoire et cartographie stellaire"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We study the cosmos and map stellar phenomena. We also track moving "
+#~ "asteroids. Look out! Just kidding"
+#~ msgstr ""
+#~ "Nous étudions le cosmos et cartographions les phénomènes stellaires. Nous "
+#~ "suivons également les astéroïdes en mouvement. Attention ! Je rigole."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Station named in honor of Charles Hayden whose philanthropy continued "
+#~ "astrophysical research and education on Earth in the early 20th century"
+#~ msgstr ""
+#~ "Station nommée en l'honneur de Charles Hayden dont la philanthropie a "
+#~ "permis de continuer la recherche et l'éducation en astrophysique sur "
+#~ "Terre au début du 20e siècle."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Autodoc components"
+#~ msgstr "Composants Autodoc"
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Dr. Lipkin who pioneered some of the research "
+#~ "and application around robot assisted surgery in the area of partial "
+#~ "nephrectomy for renal tumors in the early 21st century on Earth"
+#~ msgstr ""
+#~ "La station porte le nom du Dr Lipkin qui a été le pionnier de certaines "
+#~ "recherches et applications autour de la chirurgie assistée par robot dans "
+#~ "le domaine de la néphrectomie partielle pour les tumeurs rénales au début "
+#~ "du 21e siècle sur Terre."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Zero gravity sports and entertainment"
+#~ msgstr "Sports et divertissement en apesanteur"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Come take in a game or two or perhaps see a show"
+#~ msgstr "Venez assister à un match ou deux et peut-être voir un spectacle."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Named after Madison Square Gardens from 21st century Earth, this station "
+#~ "was designed to serve similar purposes in space - a venue for sports and "
+#~ "entertainment"
+#~ msgstr ""
+#~ "Nommée d'après le Madison Square Garden de la Terre du 21e siècle, cette "
+#~ "station a été conçue pour servir des objectifs similaires dans l'espace - "
+#~ "un lieu de sport et de divertissement."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Shield components and research"
+#~ msgstr "Composants et recherche sur les boucliers"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research and fabricate components for ship shield systems"
+#~ msgstr ""
+#~ "Nous effectuons des recherches et fabriquons des composants pour les "
+#~ "systèmes de boucliers de navire."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station was named after the national research institution Rutherford "
+#~ "Appleton Laboratory in the United Kingdom which conducted some "
+#~ "preliminary research into the feasability of generating an energy shield "
+#~ "in the late 20th century"
+#~ msgstr ""
+#~ "Cette station porte le nom de l'institut de recherche national Rutherford "
+#~ "Appleton Laboratory au Royaume-Uni, qui a mené des recherches "
+#~ "préliminaires sur la faisabilité de générer un bouclier énergétique à la "
+#~ "fin du 20e siècle."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Shield and armor components and research"
+#~ msgstr "Boucliers et armures : Composants et recherche"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We research and make general and specialized components for ship shield "
+#~ "and ship armor systems"
+#~ msgstr ""
+#~ "Nous faisons de la recherche et fabriquons des composants généraux et "
+#~ "spécialisés pour les systèmes de bouclier et d'armures de navire."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station was named after one of the earliest researchers in shield "
+#~ "technology, Alexander Toohie back when it was considered impractical to "
+#~ "construct shields due to the physics involved."
+#~ msgstr ""
+#~ "Cette station a été nommée d'après l'un des premiers chercheurs en "
+#~ "technologie de boucliers, Alexander Toohie, à l'époque où il était "
+#~ "considéré comme impossible de construire des boucliers en raison de la "
+#~ "physique impliquée."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Battery and software engineering"
+#~ msgstr "Ingénierie en batteries et logiciels"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We provide high quality high capacity batteries and specialized software "
+#~ "for all shipboard systems"
+#~ msgstr ""
+#~ "Nous fournissons des batteries haute capacité de haute qualité et des "
+#~ "logiciels spécialisés pour tous les systèmes de bord."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after a fictional software engineer in a late 20th "
+#~ "century movie depicting humanity unknowingly conquered by aliens and kept "
+#~ "docile by software generated illusion"
+#~ msgstr ""
+#~ "La station porte le nom d'un ingénieur logiciel fictif dans un film de la "
+#~ "fin du 20e siècle dépeignant l'humanité inconsciemment conquise par des "
+#~ "extraterrestres et maintenue docile par une illusion générée par un "
+#~ "logiciel."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Shield and Armor Research"
+#~ msgstr "Recherche sur les boucliers et armures"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "The finest shield and armor manufacturer in the quadrant"
+#~ msgstr "Le meilleur fabricant de boucliers et d'armures du quadrant."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "We named this station for the pioneering spirit of the 22nd century "
+#~ "Starfleet explorer, Captain Jonathan Archer"
+#~ msgstr ""
+#~ "Nous avons nommé cette station en mémoire à l'esprit pionnier de "
+#~ "l'explorateur du Starfleet du 22ème siècle, le capitaine Jonathan Archer."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Communication components"
+#~ msgstr "Composants pour systèmes de communication"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We provide a range of communication equipment and software for use aboard "
+#~ "ships"
+#~ msgstr ""
+#~ "Nous fournissons toute une gamme d'équipements et de logiciels de "
+#~ "communication à utiliser à bord des navires."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Reginald Barclay who established the first "
+#~ "transgalactic com link through the creative application of a quantum "
+#~ "singularity. Station personnel often refer to the station as the Broccoli "
+#~ "station"
+#~ msgstr ""
+#~ "La station porte le nom de Reginald Barclay qui a établi le premier lien "
+#~ "de communication transgalactique grâce à une application créative de "
+#~ "singularité quantique. Le personnel de la station se réfère souvent à la "
+#~ "station comme étant la station de brocoli."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Robotic research"
+#~ msgstr "Recherche robotique"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research and provide robotic systems and components"
+#~ msgstr ""
+#~ "Nous faisons de la recherche et fournissons des systèmes et composants "
+#~ "robotiques."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station is named after Dr. Susan Calvin who pioneered robotic "
+#~ "behavioral research and programming"
+#~ msgstr ""
+#~ "Cette station porte le nom du Dr Susan Calvin, pionnière de la recherche "
+#~ "et de la programmation comportementales robotique."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Advanced Material components"
+#~ msgstr "Composants de matériaux avancés"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We fabricate several different kinds of materials critical to various "
+#~ "space industries like ship building, station construction and mineral "
+#~ "extraction"
+#~ msgstr ""
+#~ "Nous fabriquons plusieurs types de matériaux essentiels à diverses "
+#~ "industries spatiales telles que la construction navale, la construction "
+#~ "de stations et l'extraction de minéraux."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "We named our station after Dr. Cavor, the physicist that invented a "
+#~ "barrier material for gravity waves - Cavorite"
+#~ msgstr ""
+#~ "Nous avons nommé notre station d'après le Dr Cavor, le physicien qui a "
+#~ "inventé un matériau de confinage pour les ondes de gravité - Cavorite."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We supply high quality impulse engines and parts for use aboard ships"
+#~ msgstr ""
+#~ "Nous fournissons des moteurs à impulsions et des pièces de haute qualité "
+#~ "pour une utilisation à bord des navires."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station was named after the fictional engineer, Cyrus Smith created "
+#~ "by 19th century author Jules Verne"
+#~ msgstr ""
+#~ "Cette station a été nommée d'après l'ingénieur fictif Cyrus Smith créé "
+#~ "par l'auteur du 19ème siècle Jules Verne."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Android components"
+#~ msgstr "Composants pour androïdes"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Supplier of android components, programming and service"
+#~ msgstr ""
+#~ "Fournisseur de composants pour androïdes, de programmation et de service."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Named for Richard Deckard who inspired many of the sophisticated safety "
+#~ "security algorithms now required for all androids"
+#~ msgstr ""
+#~ "Nommé en l'honneur de Richard Deckard qui a inspiré de nombreux "
+#~ "algorithmes sophistiqués de sécurité désormais requis pour tous les "
+#~ "androïdes."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Transporter components"
+#~ msgstr "Composants de transporteur"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We provide transporters used aboard ships as well as the components for "
+#~ "repair and maintenance"
+#~ msgstr ""
+#~ "Nous fournissons des transporteurs utilisés à bord des navires ainsi que "
+#~ "des composants pour la réparation et l'entretien."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after the early 22nd century inventor of the "
+#~ "transporter, Dr. Emory Erickson. This station is proud to have received "
+#~ "the endorsement of Admiral Leonard McCoy"
+#~ msgstr ""
+#~ "La station porte le nom de l'inventeur du transporteur au début du 22e "
+#~ "siècle, le Dr Emory Erickson. Cette station est fière d'avoir reçu "
+#~ "l'approbation de l'amiral Leonard McCoy."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Xenopsychology training"
+#~ msgstr "Formation en xénopsychologie"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We provide classes and simulation to help train diverse species in how to "
+#~ "relate to each other"
+#~ msgstr ""
+#~ "Nous proposons des cours et des simulations pour aider à former diverses "
+#~ "espèces sur la façon de les relier les unes aux autres."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "A continuation of the research initially conducted by Dr. Gennady Komov "
+#~ "in the early 22nd century on Venus, supported by the application of these "
+#~ "principles"
+#~ msgstr ""
+#~ "Poursuite des recherches initialement menées par le Dr Gennady Komov au "
+#~ "début du 22ème siècle sur Vénus, appuyées par l'application de ces "
+#~ "principes."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Come to Muddvile for all your trade and commerce needs and desires"
+#~ msgstr "Venez à Muddvile pour tous vos besoins et désirs d'achats."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Upon retirement, Harry Mudd started this commercial venture using his "
+#~ "leftover inventory and extensive connections obtained while he traveled "
+#~ "the stars as a salesman"
+#~ msgstr ""
+#~ "À la retraite, Harry Mudd a lancé cette entreprise commerciale en "
+#~ "utilisant son stock restant et ses nombreuses relations obtenues alors "
+#~ "qu'il parcourait les étoiles en tant que vendeur."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Androids, their parts, maintenance and recylcling"
+#~ msgstr "Androïdes : pièces, entretien et recyclage."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "We named the station after the ground breaking android model produced by "
+#~ "the Tyrell corporation"
+#~ msgstr ""
+#~ "La station porte le nom du modèle révolutionnaire d'androïde produit par "
+#~ "la société Tyrell."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We research and fabricate high quality transporters and transporter "
+#~ "components for use aboard ships"
+#~ msgstr ""
+#~ "Nous faisons de la recherche et fabriquons des transporteurs et des "
+#~ "composants de transporteur de haute qualité pour une utilisation à bord "
+#~ "des navires."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Miles O'Brien started this business after his experience as a transporter "
+#~ "chief"
+#~ msgstr ""
+#~ "Miles O'Brien a démarré cette entreprise après son expérience en tant que "
+#~ "chef de transporteur."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Diplomatic training"
+#~ msgstr "Formation diplomatique"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "The premeire academy for leadership and diplomacy training in the region"
+#~ msgstr ""
+#~ "L'académie de premier plan pour la formation au leadership et à la "
+#~ "diplomatie dans la région."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Established by the royal family so critical during the political upheaval "
+#~ "era"
+#~ msgstr ""
+#~ "Établie par la famille royale si critique à l'époque des bouleversements "
+#~ "politiques."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Load lifters and components"
+#~ msgstr "Élévateurs de charge et composants"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide load lifters and components for various ship systems"
+#~ msgstr ""
+#~ "Nous fournissons des élévateurs de charge et des composants pour divers "
+#~ "systèmes de navires."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Owens started off in the moisture vaporator business on Tattooine then "
+#~ "branched out into load lifters based on acquisition of proprietary "
+#~ "software and protocols. The station name recognizes the tragic loss of "
+#~ "our founder to Imperial violence"
+#~ msgstr ""
+#~ "Owens a démarré dans le domaine des vaporisateurs d'humidité sur "
+#~ "Tattooine, puis s'est diversifié dans les élévateurs de charge sur la "
+#~ "base de l'acquisition de logiciels et de protocoles propriétaires. Le nom "
+#~ "de la station reconnaît la perte tragique de notre fondateur due à la "
+#~ "violence impériale."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide load lifters and components"
+#~ msgstr "Nous fournissons des élévateurs de charge et des composants."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Ellen Ripley who made creative and effective "
+#~ "use of one of our load lifters when defending her ship"
+#~ msgstr ""
+#~ "La station porte le nom d'Ellen Ripley qui a fait un usage créatif et "
+#~ "efficace de l'un de nos élévateurs de charge lors de la défense de son "
+#~ "vaisseau."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We create androids and android components"
+#~ msgstr "Nous créons des androïdes et des composants pour androïdes."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after Dr. Noonian Soong, the famous android "
+#~ "researcher and builder"
+#~ msgstr ""
+#~ "La station porte le nom du Dr Noonian Soong, le célèbre chercheur et "
+#~ "créateur d'androïdes."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Logistics coordination"
+#~ msgstr "Coordination logistique"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We support the stations and ships in the area with planning and "
+#~ "communication services"
+#~ msgstr ""
+#~ "Nous soutenons les stations et les vaisseaux de la région avec des "
+#~ "services de planification et de communication."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "We recognize the influence of Starfleet Captain James Tiberius Kirk in "
+#~ "the 23rd century in our station name"
+#~ msgstr ""
+#~ "Nous reconnaissons l'influence du capitaine du Starfleet James Tiberius "
+#~ "Kirk au 23e siècle dans le nom de notre station."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Advanced material components"
+#~ msgstr "Composants de matériaux avancés"
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "We learned several of our critical industrial processes from the Tokra "
+#~ "race, so we honor our fortune by naming the station after them"
+#~ msgstr ""
+#~ "Nous avons développé plusieurs de nos processus industriels grâce à la "
+#~ "race Tokra, nous honorons donc notre succès en donnant leur nom à la "
+#~ "station."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Ship building and maintenance facility"
+#~ msgstr "Construction de navires et établissement d'entretien"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We work on all aspects of naval ship building and maintenance. Many of "
+#~ "the naval models are researched, designed and built right here on this "
+#~ "station. Our design goals seek to make the space faring experience as "
+#~ "simple as possible given the tremendous capabilities of the modern naval "
+#~ "vessel"
+#~ msgstr ""
+#~ "Nous intervenons sur tous les aspects de la construction et de "
+#~ "l'entretien des navires spatiaux. Beaucoup de modèles sont recherchés, "
+#~ "conçus et construits ici même sur cette station. Nos objectifs de "
+#~ "conception visent à rendre l'expérience de navigation spatiale aussi "
+#~ "simple que possible compte tenu des capacités extraordinaires du vaisseau "
+#~ "spatial moderne."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Warp engine components"
+#~ msgstr "Composants pour moteurs à vitesse lumière"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We specialize in the esoteric components necessary to make warp drives "
+#~ "function properly"
+#~ msgstr ""
+#~ "Nous nous spécialisons dans les composants ésotériques nécessaires au bon "
+#~ "fonctionnement des moteurs à vitesse lumière."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Zefram Cochrane constructed the first warp drive in human history. We "
+#~ "named our station after him because of the specialized warp systems work "
+#~ "we do"
+#~ msgstr ""
+#~ "Zefram Cochrane a construit le premier moteur à vitesse lumière de "
+#~ "l'histoire de l'humanité. Nous avons nommé notre station en son honneur "
+#~ "en raison du travail spécialisé que nous effectuons sur les systèmes de "
+#~ "vitesse lumière."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Commerce and gambling"
+#~ msgstr "Commerce et jeux d'argent"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Come play some games and shop. House take does not exceed 4 percent"
+#~ msgstr ""
+#~ "Venez jouer à quelques jeux et faire du shopping. La taxe maison ne "
+#~ "dépasse pas 4%."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Casino and Gambling"
+#~ msgstr "Casino et jeux d'argent"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Routine maintenance and entertainment"
+#~ msgstr "Maintenance courante et divertissement"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "Stop by for repairs. Take in one of our juggling shows featuring the four-"
+#~ "armed Skandars"
+#~ msgstr ""
+#~ "Faites une halte pour vos réparations. Assistez à l'un de nos spectacles "
+#~ "de jonglage mettant en vedette les Skandars à quatre bras."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The nomadic Skandars have set up at this station to practice their "
+#~ "entertainment and maintenance skills as well as build a community where "
+#~ "Skandars can relax"
+#~ msgstr ""
+#~ "Les nomades Skandars se sont installés dans cette station pour mettre en "
+#~ "pratique leurs compétences en matière de divertissement et d'entretien, "
+#~ "ainsi que pour créer une communauté où les Skandars peuvent se détendre."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Automated weapons systems"
+#~ msgstr "Systèmes d'armes automatisées"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We research and create automated weapons systems to improve ship combat "
+#~ "capability"
+#~ msgstr ""
+#~ "Nous faisons de la recherche et créons des systèmes d'armes automatisés "
+#~ "pour améliorer la capacité de combat des navires."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Lost the history memory bank. Recovery efforts only brought back the "
+#~ "phrase, 'I'll be back'"
+#~ msgstr ""
+#~ "Nous avons perdu la banque de mémoire de notre historique. Les efforts de "
+#~ "récupération n'ont fait que retrouver la phrase \"Je reviendrai\"."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Optical Components"
+#~ msgstr "Composants optiques"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We make and supply optic components for various station and ship systems"
+#~ msgstr ""
+#~ "Nous fabriquons et fournissons des composants optiques pour divers "
+#~ "systèmes de stations et de navires."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station continues the businesses from Earth based on the merging of "
+#~ "several companies including Leica from Switzerland, the lens manufacturer "
+#~ "and the Japanese advanced low carbon (ALCA) electronic and optic research "
+#~ "and development company"
+#~ msgstr ""
+#~ "Cette station gère les activités de la Terre sur la base de la fusion de "
+#~ "plusieurs sociétés, dont Leica de Suisse, le fabricant de lentilles et la "
+#~ "société japonaise de recherche et de développement électronique et "
+#~ "optique à faible émission de carbone (ALCA)."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Medical research"
+#~ msgstr "Recherche médicale"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research and treat exotic medical conditions"
+#~ msgstr "Nous recherchons et traitons des conditions médicales exotiques."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is named after the United States national medical research "
+#~ "center based in Bethesda, Maryland on earth which was established in the "
+#~ "mid 20th century"
+#~ msgstr ""
+#~ "La station porte le nom du centre national de recherche médicale des "
+#~ "États-Unis situé à Bethesda, dans le Maryland sur terre et qui a fût créé "
+#~ "au milieu du 20e siècle."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Repulsor and Tractor Beam Components"
+#~ msgstr "Composants de faisceaux répulseur et tracteur"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We can meet all your pushing and pulling needs with specialized equipment "
+#~ "custom made"
+#~ msgstr ""
+#~ "Nous pouvons répondre à tous vos besoins de poussée et de traction avec "
+#~ "des équipements spécialisés fabriqués sur mesure."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station name comes from a short story by the 20th century author "
+#~ "Clifford D. Simak as well as from the 19th century developer John Deere "
+#~ "who inspired a company that makes the Earth bound equivalents of our "
+#~ "products"
+#~ msgstr ""
+#~ "Le nom de la station provient d'une nouvelle de l'auteur du 20e siècle "
+#~ "Clifford D. Simak ainsi que du développeur du 19e siècle John Deere qui a "
+#~ "inspiré une entreprise qui fabrique des équivalents terrestres de nos "
+#~ "produits."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide components for automated medical machinery"
+#~ msgstr ""
+#~ "Nous fournissons des composants pour des machines médicales automatisées."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The station is the evolution of the company that started automated "
+#~ "pharmaceutical dispensing in the early 21st century on Earth in Finland"
+#~ msgstr ""
+#~ "Cette station est l'évolution de l'entreprise qui a commencé la "
+#~ "distribution automatisée de produits pharmaceutiques au début du 21e "
+#~ "siècle sur Terre en Finlande."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Nanotechnology research"
+#~ msgstr "Recherche en nanotechnologie"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide nanites and software for a variety of ship-board systems"
+#~ msgstr ""
+#~ "Nous fournissons des nanites et des logiciels pour une variété de "
+#~ "systèmes embarqués."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station's name recognizes one of the first scientific researchers "
+#~ "into nanotechnology, physicist Richard Feynman"
+#~ msgstr ""
+#~ "Le nom de cette station rend hommage à l'un des premiers chercheurs "
+#~ "scientifiques en nanotechnologie, le physicien Richard Feynman."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Medical Research"
+#~ msgstr "Recherche médicale"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We research exotic diseases and other human medical conditions"
+#~ msgstr ""
+#~ "Nous faisons des recherches sur des maladies exotiques et d'autres "
+#~ "conditions médicales humaines."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "We continue the medical work started by William Worrall Mayo in the late "
+#~ "19th century on Earth"
+#~ msgstr ""
+#~ "Nous poursuivons le travail médical commencé par William Worrall Mayo à "
+#~ "la fin du 19ème siècle sur Terre."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Optical components"
+#~ msgstr "Composants optiques"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We fabricate optical lenses and related equipment as well as fiber optic "
+#~ "cabling and components"
+#~ msgstr ""
+#~ "Nous fabriquons des lentilles optiques et équipements associés ainsi que "
+#~ "des câbles et composants en fibres optiques."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station grew out of the Olympus company based on earth in the early "
+#~ "21st century. It merged with Infinera, then bought several software "
+#~ "comapnies before branching out into space based industry"
+#~ msgstr ""
+#~ "Cette station est née de la société Olympus basée sur la terre au début "
+#~ "du 21e siècle. Elle a fusionné avec Infinera, puis a racheté plusieurs "
+#~ "sociétés de logiciels avant de se lancer dans l'industrie spatiale."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Optic components"
+#~ msgstr "Composants optiques"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We provide optic components for various ship systems"
+#~ msgstr ""
+#~ "Nous fournissons des composants optiques pour divers systèmes de navires."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "This station is an outgrowth of the Panduit corporation started in the "
+#~ "mid 20th century on Earth in the United States"
+#~ msgstr ""
+#~ "Cette station est une excroissance de la société Panduit créée au milieu "
+#~ "du 20e siècle sur Terre aux États-Unis."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Repulsor and tractor beam components"
+#~ msgstr "Composants de faisceaux répulseur et tracteur"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We make ship systems designed to push or pull other objects around in "
+#~ "space"
+#~ msgstr ""
+#~ "Nous fabriquons des systèmes pour vaisseaux conçus pour pousser ou tirer "
+#~ "d'autres objets dans l'espace."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Our station is named Shree after one of many tugboat manufacturers in the "
+#~ "early 21st century on Earth in India. Tugboats serve a similar purpose "
+#~ "for ocean-going vessels on earth as tractor and repulsor beams serve for "
+#~ "space-going vessels today"
+#~ msgstr ""
+#~ "Notre station est nommée Shree d'après l'un des nombreux fabricants de "
+#~ "remorqueurs du début du 21e siècle sur Terre en Inde. Les remorqueurs sur "
+#~ "terre er sur les océans ont une fonction similaire aux navires spatiaux "
+#~ "avec leur faisceaux tracteurs et répulseurs."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Shielded Circuitry Fabrication"
+#~ msgstr "Fabrication de circuits blindés"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We specialize in circuitry shielded from external hacking suitable for "
+#~ "ship systems"
+#~ msgstr ""
+#~ "Nous nous spécialisons dans les circuits protégés contre le piratage "
+#~ "externe et adaptés aux systèmes de navires."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "We started as an expansion from the lunar based chip manufacturer of "
+#~ "Earth legacy Intel electronic chips"
+#~ msgstr ""
+#~ "Nous avons commencé comme succursale du fabricant de puces électroniques "
+#~ "lunaires Intel, héritées de la Terre."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We research and construct components for the most powerful and accurate "
+#~ "sensors used aboard ships along with the software to make them easy to use"
+#~ msgstr ""
+#~ "Nous faisons de la recherche et construisons des composants pour les "
+#~ "capteurs les plus puissants et les plus précis utilisés à bord des "
+#~ "navires ainsi que le logiciel pour les rendre faciles à utiliser."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "The Veloquan company has its roots in the manufacturing of LIDAR sensors "
+#~ "in the early 21st century on Earth in the United States for autonomous "
+#~ "ground-based vehicles. They expanded research and manufacturing "
+#~ "operations to include various sensors for space vehicles. Veloquan was "
+#~ "the result of numerous mergers and acquisitions of several companies "
+#~ "including Velodyne and Quanergy"
+#~ msgstr ""
+#~ "La société Veloquan a ses racines dans la fabrication de capteurs LIDAR "
+#~ "au début du 21e siècle sur Terre aux États-Unis pour les véhicules "
+#~ "terrestres autonomes. Ils ont élargi les opérations de recherche et de "
+#~ "fabrication pour inclure divers capteurs pour les véhicules spatiaux. "
+#~ "Veloquan est le résultat de nombreuses fusions et acquisitions de "
+#~ "plusieurs sociétés dont Velodyne et Quanergy."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Biotechnology research"
+#~ msgstr "Recherche en biotechnologie"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Merging the organic and inorganic through research"
+#~ msgstr "Fusionner l'organique et l'inorganique par la recherche."
+
+#~ msgctxt "stationStory-comms"
+#~ msgid ""
+#~ "Continued from the Tandon school of engineering started on Earth in the "
+#~ "early 21st century"
+#~ msgstr ""
+#~ "Suite de l'école d'ingénierie Tandon commencée sur Terre au début du 21e "
+#~ "siècle."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Mining station"
+#~ msgstr "Station minière"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We mine nearby asteroids for precious minerals"
+#~ msgstr ""
+#~ "Nous extrayons des astéroïdes à proximité à la recherche de minéraux "
+#~ "précieux."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Mining and trade"
+#~ msgstr "Exploitation minière et commerce"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Mining and gambling"
+#~ msgstr "Exploitation minière et jeux de hasard"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Observatory"
+#~ msgstr "Observatoire"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Gambling and resupply"
+#~ msgstr "Jeu d'argent et réapprovisionnement"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Relax and meet some interesting players"
+#~ msgstr "Détendez-vous et rencontrez des joueurs intéressants."
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Commerce and recreation"
+#~ msgstr "Commerce et loisirs"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Xenopsychology research"
+#~ msgstr "Recherche en xénopsychologie"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Resupply"
+#~ msgstr "Ravitaillement"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Textiles and fashion"
+#~ msgstr "Mode et textile"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Stress Psychology Research"
+#~ msgstr "Recherche en psychologie du stress"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Low gravity research"
+#~ msgstr "Recherche sur la basse gravité"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Get your energy here! Grab a drink before you go!"
+#~ msgstr "Obtenez votre énergie ici ! Prenez un verre avant de partir !"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Research Lab and Observatory"
+#~ msgstr "Laboratoire de recherche et observatoire"
+
+#~ msgctxt "scienceDescription-station"
+#~ msgid "Biotech research"
+#~ msgstr "Recherche en biotechnologie"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "The oldest station in the quadrant"
+#~ msgstr "La plus ancienne station du quadrant"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid ""
+#~ "We create multiple types of advanced material components. Our most "
+#~ "popular products are our filaments"
+#~ msgstr ""
+#~ "Nous fabriquons plusieurs types de composants de matériaux avancés. Nos "
+#~ "produits les plus populaires sont nos filaments."
+
+#~ msgctxt "inventory-shipLog"
+#~ msgid "     Empty\n"
+#~ msgstr "     Vide\n"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Where can I find particular goods?"
+#~ msgstr "Où puis-je trouver des marchandises particulières ?"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "Friendly stations often have food or medicine or both. Neutral stations "
+#~ "may trade their goods for food, medicine or luxury."
+#~ msgstr ""
+#~ "Les stations amicales ont souvent de la nourriture (food) ou des "
+#~ "médicaments (medicine) ou les deux. Les stations neutres peuvent échanger "
+#~ "leurs marchandises contre de la nourriture, des médicaments ou du luxe "
+#~ "(luxury)."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Station %s in sector %s has %s for %i reputation"
+#~ msgstr "La station %s dans le secteur %s possède du %s pour %i rép."
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "What goods are you interested in?\n"
+#~ "I've heard about these:"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Quelles marchandises vous intéressent ?\n"
+#~ "J'ai entendu parler de ça :"
+
+#~ msgctxt "trade-comms"
+#~ msgid " Beyond that, I have no knowledge of specific stations"
+#~ msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
+
+#~ msgctxt "trade-comms"
+#~ msgid " and will trade it for medicine"
+#~ msgstr " et va l'échanger contre des Médicaments (medicine)"
+
+#~ msgctxt "trade-comms"
+#~ msgid " or food"
+#~ msgstr " ou de la Nourriture (food)"
+
+#~ msgctxt "trade-comms"
+#~ msgid " and will trade it for food"
+#~ msgstr " et va l'échanger contre de la Nourriture (food)"
+
+#~ msgctxt "trade-comms"
+#~ msgid " or luxury"
+#~ msgstr " ou des Produits de luxe (luxury)"
+
+#~ msgctxt "trade-comms"
+#~ msgid " and will trade it for luxury"
+#~ msgstr " et va l'échanger contre des Produits de luxe (luxury)"
+
+#~ msgctxt "scienceDB"
+#~ msgid "Ships"
+#~ msgstr "Vaisseaux"
+
+#~ msgctxt "scienceDB"
+#~ msgid "Adder MK4"
+#~ msgstr "Vipère MK4"
+
+#~ msgctxt "scienceDB"
+#~ msgid "Small tube 0"
+#~ msgstr "Tube léger 0"
+
+#~ msgctxt "scienceDB"
+#~ msgid "20 sec"
+#~ msgstr "20 sec"
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Adder MK3 is one of the first of the Adder line to meet with some "
+#~ "success. A large number of them were made before the manufacturer went "
+#~ "through its first bankruptcy. There has been a recent surge of purchases "
+#~ "of the Adder MK3 in the secondary market due to its low price and its "
+#~ "similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 "
+#~ "has weaker shields and hull, but a faster turn speed"
+#~ msgstr ""
+#~ "Le Vipère MK3 est l'un des premiers de la gamme Vipère à rencontrer un "
+#~ "certain succès. Un grand nombre d'entre eux ont été produits avant que le "
+#~ "fabricant ne fasse sa première faillite.\n"
+#~ "\n"
+#~ "Il y a eu une augmentation récente des achats de Vipère MK3 sur le marché "
+#~ "secondaire en raison de son prix bas et de sa similitude avec les modèles "
+#~ "suivants. Comparé au MK4, le MK3 a des boucliers et une coque plus "
+#~ "faibles, mais une vitesse de rotation plus rapide."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The release of the Adder Mark 7 sent the manufacturer into a second "
+#~ "bankruptcy. They made improvements to the Mark 7 over the Mark 6 like "
+#~ "stronger shields and longer beams, but the popularity of their previous "
+#~ "models, especially the Mark 5, prevented them from raising the purchase "
+#~ "price enough to recoup the development and manufacturing costs of the "
+#~ "Mark 7"
+#~ msgstr ""
+#~ "La sortie du Vipère MK7 a conduit le fabricant à une seconde faillite.\n"
+#~ "\n"
+#~ "Ils lui ont apportés des améliorations par rapport au MK6, comme des "
+#~ "boucliers plus solides et des faisceaux laser plus grand.\n"
+#~ "\n"
+#~ "Malgré cela, la popularité de leurs modèles précédents, en particulier le "
+#~ "MK5, les a empêchés d'augmenter suffisamment le prix d'achat pour amortir "
+#~ "les coûts de développement et de fabrication du MK7."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "New management after bankruptcy revisited their most popular Adder Mark 5 "
+#~ "model with improvements: stronger shields, longer and stronger beams and "
+#~ "a faster turn speed. Thus was born the Adder Mark 8 model. Targeted to "
+#~ "the practical but nostalgic buyer who must purchase replacements for "
+#~ "their Adder Mark 5 fleet"
+#~ msgstr ""
+#~ "Après avoir fait faillite, la nouvelle direction a revisité son modèle le "
+#~ "plus populaire, le MK5, avec plusieurs améliorations : des boucliers plus "
+#~ "solides, des faisceaux plus amples et plus puissants ainsi qu'une vitesse "
+#~ "de rotation plus rapide.\n"
+#~ "\n"
+#~ "Ainsi est né le modèle MK8. Il se destine a l'acheteur pragmatique mais "
+#~ "nostalgique qui doit acheter des pièces de rechange pour sa flotte de MK5."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Phobos R2 model is very similar to the Phobos T3. It's got a faster "
+#~ "turn speed, but only one missile tube"
+#~ msgstr ""
+#~ "Le modèle Phobos R2 est très similaire au Phobos T3. Il a une vitesse de "
+#~ "rotation plus rapide, mais un seul tube de missile."
+
+#, lua-format
+#~ msgid "%i"
+#~ msgstr "%i"
+
+#, lua-format
+#~ msgid "%s/%i"
+#~ msgstr "%s/%i"
+
+#, lua-format
+#~ msgctxt "scienceDB"
+#~ msgid "%i"
+#~ msgstr "%i"
+
+#, lua-format
+#~ msgctxt "scienceDB"
+#~ msgid "%.1f u/min"
+#~ msgstr "%.1f u/min"
+
+#, lua-format
+#~ msgctxt "scienceDB"
+#~ msgid "%.1f deg/sec"
+#~ msgstr "%.1f deg/sec"
+
+#~ msgctxt "scienceDB"
+#~ msgid "Warp Speed"
+#~ msgstr "Vitesse lumière"
+
+#, lua-format
+#~ msgctxt "scienceDB"
+#~ msgid "Beam weapon %i:%i"
+#~ msgstr "Faisceaux (-%i : %i°)"
+
+#, lua-format
+#~ msgctxt "scienceDB"
+#~ msgid "%.1f Dmg / %.1f sec"
+#~ msgstr "%.1f Dmg / %.1f sec"
+
+#, lua-format
+#~ msgctxt "scienceDB"
+#~ msgid "Storage %s"
+#~ msgstr "Stockage %s"
+
+# Scenario name
+#~ msgid "Basic Battle"
+#~ msgstr "Bataille simple"
+
+# Scenario description
+#~ msgid ""
+#~ "A few random stations are under attack by enemies, with random terrain "
+#~ "around them. Destroy all enemies to win.\n"
+#~ "\n"
+#~ "The scenario provides a single player-controlled Atlantis, which is "
+#~ "sufficient to win even in the \"Extreme\" variant.\n"
+#~ "\n"
+#~ "Other player ships can be spawned, but the strength of enemy ships is "
+#~ "independent of the number and types of player ships."
+#~ msgstr ""
+#~ "- Durée approx. : 30mn (variable)\n"
+#~ "- Difficulté : Facile (variable)\n"
+#~ "- Vaisseaux joueurs : 1 à plusieurs\n"
+#~ "\n"
+#~ "Mission : Quelques stations pour se ravitailler, entourées d'éléments "
+#~ "aléatoires, sont attaquées par des ennemis.\n"
+#~ "Protégez les stations et détruisez tous les ennemis pour gagner.\n"
+#~ "\n"
+#~ "Le scénario propose de base un seul vaisseau joueurs : l'Atlantis ou le "
+#~ "Phobos m3p, ce qui est suffisant pour gagner même dans la variante "
+#~ "\"Extrême\".\n"
+#~ "D'autres vaisseaux joueurs peuvent être ajoutés, mais la force des "
+#~ "vaisseaux ennemis est indépendante du nombre et du type de vaisseaux "
+#~ "joueurs.\n"
+#~ "\n"
+#~ "Version - Oct 2021\n"
+#~ "\n"
+#~ "- Titre original : Basic Battle\n"
+#~ "- Auteur : Daid (2015)\n"
+#~ "https://discord.gg/GjqM9Y9yBe\n"
+#~ "- Traduction FR : Muerte\n"
+#~ "https://discord.gg/2NPKyMnGwp"
+
+#~ msgctxt "Enemies"
+#~ msgid ""
+#~ "No enemies. Recommended for GM-controlled scenarios and rookie crew "
+#~ "orientation. The scenario continues until the GM declares victory or all "
+#~ "Human Navy ships are destroyed."
+#~ msgstr ""
+#~ "Aucun ennemi. Recommandé pour les scénarios contrôlés par le MJ et "
+#~ "l'initiation des équipages débutants. Le scénario continue jusqu'à ce que "
+#~ "le MJ déclare la victoire ou que tous les vaisseaux de la Marine Humaine "
+#~ "soient détruits."
+
+#~ msgctxt "Enemies"
+#~ msgid "Fewer enemies. Recommended for inexperienced crews."
+#~ msgstr "Moins d'ennemis. Recommandé pour les équipages inexpérimentés."
+
+#~ msgctxt "Enemies"
+#~ msgid "Normal amount of enemies. Recommended for a normal crew."
+#~ msgstr ""
+#~ "Quantité d'ennemis par défaut. Recommandé pour un équipage standard."
+
+#~ msgctxt "Enemies"
+#~ msgid ""
+#~ "More enemies. Recommended if you have multiple player-controlled ships."
+#~ msgstr ""
+#~ "Plus d'ennemis. Recommandé si vous avez plusieurs vaisseaux contrôlés par "
+#~ "des joueurs."
+
+#~ msgctxt "Enemies"
+#~ msgid "Extreme"
+#~ msgstr "Extrême"
+
+#~ msgctxt "Enemies"
+#~ msgid ""
+#~ "Many enemies. Inexperienced player crews will pretty surely be "
+#~ "overwhelmed."
+#~ msgstr ""
+#~ "Beaucoup d'ennemis. Les équipages de joueurs inexpérimentés seront "
+#~ "sûrement submergés."
+
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "Time"
+#~ msgstr "Durée"
+
+#~ msgctxt "setting"
+#~ msgid "Sets up how much time the players have for the scenario"
+#~ msgstr "Définit le temps dont disposent les joueurs pour le scénario."
+
+#~ msgctxt "Time"
+#~ msgid "Unlimited"
+#~ msgstr "Illimitée"
+
+#~ msgctxt "Time"
+#~ msgid "No time limit"
+#~ msgstr "Sans limite de temps."
+
+#~ msgctxt "Time"
+#~ msgid "20min"
+#~ msgstr "20 min"
+
+#~ msgctxt "Time"
+#~ msgid "Automatic loss after 20 minutes"
+#~ msgstr "Défaite automatique après 20 minutes."
+
+#~ msgctxt "Time"
+#~ msgid "30min"
+#~ msgstr "30 min"
+
+#~ msgctxt "Time"
+#~ msgid "Automatic loss after 30 minutes"
+#~ msgstr "Défaite automatique après 30 minutes."
+
+#~ msgctxt "Time"
+#~ msgid "60min"
+#~ msgstr "60 min"
+
+#~ msgctxt "Time"
+#~ msgid "Automatic loss after 60 minutes"
+#~ msgstr "Défaite automatique après 60 minutes."
+
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "PlayerShip"
+#~ msgstr "Vaisseau joueurs"
+
+#~ msgctxt "setting"
+#~ msgid "Sets the default player ship"
+#~ msgstr "Définit le vaisseau joueurs par défaut."
+
+#~ msgctxt "PlayerShip"
+#~ msgid ""
+#~ "Powerful ship with sidewards missile tubes. Requires more advanced play."
+#~ msgstr ""
+#~ "Vaisseau puissant avec tubes lance-missiles latéraux. Nécessite un peu "
+#~ "d'expérience."
+
+#~ msgctxt "PlayerShip"
+#~ msgid ""
+#~ "Simpler, less powerful ship. But easier to handle. Recommended for new "
+#~ "crews."
+#~ msgstr ""
+#~ "Vaisseau plus simple et moins puissant mais plus facile à maîtriser que "
+#~ "l'Atlantis. Recommandé pour les nouveaux équipages."
+
+#~ msgctxt "buttonGM"
+#~ msgid "+Named Waves"
+#~ msgstr "+ Vagues nommées"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Random wave"
+#~ msgstr "Vague aléatoire"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Random friendly"
+#~ msgstr "Allié aléatoire"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Win"
+#~ msgstr "Gagner"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Victory?"
+#~ msgstr "Victoire ?"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Yes"
+#~ msgstr "Oui"
+
+#~ msgctxt "msgGM"
+#~ msgid ""
+#~ "Players have won.\n"
+#~ "Scenario ended."
+#~ msgstr ""
+#~ "Les joueurs ont gagné.\n"
+#~ "Scénario terminé."
+
+#~ msgctxt "buttonGM"
+#~ msgid "No"
+#~ msgstr "Non"
+
+#~ msgctxt "buttonGM"
+#~ msgid "GM"
+#~ msgstr "MJ"
+
+#~ msgctxt "buttonGM"
+#~ msgid "-From Named Waves"
+#~ msgstr "- Vagues nommées"
+
+#~ msgctxt "goal-incCall"
+#~ msgid ""
+#~ "%s, your objective is to fend off the incoming Kraylor attack.\n"
+#~ "\n"
+#~ "Please inform your Captain and crew that you have a total of %d minutes "
+#~ "for this mission.\n"
+#~ "\n"
+#~ "The mission started at the arrival of this message.\n"
+#~ "\n"
+#~ "Good luck."
+#~ msgstr ""
+#~ "%s, votre objectif est de repousser l'attaque Kraylor en cours.\n"
+#~ "\n"
+#~ "Veuillez informer votre capitaine et l'équipage que vous disposez de %d "
+#~ "minutes maximum pour mener à bien votre mission.\n"
+#~ "\n"
+#~ "La mission commence à réception de ce message.\n"
+#~ "\n"
+#~ "Bonne chance."
+
+#~ msgctxt "goal-incCall"
+#~ msgid ""
+#~ "%s, your objective is to fend off the incoming Kraylor attack.\n"
+#~ "\n"
+#~ "Good luck."
+#~ msgstr ""
+#~ "%s, votre objectif est de repousser l'attaque Kraylor.\n"
+#~ "\n"
+#~ "Bonne chance."
+
+#~ msgctxt "msgMainscreen&Spectbanner"
+#~ msgid "Mission: SUCCESS (%d seconds left)"
+#~ msgstr "Mission : SUCCES (%d secondes restantes)"
+
+#~ msgctxt "msgMainscreen&Spectbanner"
+#~ msgid "Mission: FAILED (time has run out)"
+#~ msgstr "Mission : ECHEC (temps écoulé)"
+
+#~ msgctxt "time-incCall"
+#~ msgid "%s, you have %d minute remaining."
+#~ msgstr "%s, il ne vous reste qu'%d minute."
+
+#~ msgctxt "time-incCall"
+#~ msgid "%s, you have %d minutes remaining of mission time."
+#~ msgstr "%s, il ne vous reste que %d minutes pour réussir votre mission."
+
+#~ msgctxt "msgMainscreen&Spectbanner"
+#~ msgid "Mission: FAILED (no friendlies left)"
+#~ msgstr "Mission : ECHEC (aucune base alliée restante)"
+
+#~ msgctxt "msgMainscreen&Spectbanner"
+#~ msgid "Mission: FAILED (all your ships destroyed)"
+#~ msgstr "Mission : ECHEC (tous vos vaisseaux détruits)"
+
+#~ msgctxt "msgSpectbanner"
+#~ msgid "Mission in progress - Time left: %d:%02d - Enemies: %d"
+#~ msgstr "Mission en cours - Temps restant : %d:%02d - Ennemis : %d"

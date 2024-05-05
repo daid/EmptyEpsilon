@@ -52,7 +52,7 @@ require("place_station_scenario_utility.lua")
 -- Initialization --
 --------------------
 function init()
-	scenario_version = "0.0.1"
+	scenario_version = "1.0.2"
 	print(string.format("     -----     Scenario: Omicron     -----     Version %s     -----",scenario_version))
 	print(_VERSION)
 	spawn_enemy_diagnostic = false
@@ -1695,6 +1695,7 @@ function constructEnvironment()
 					local mwj = WarpJammer():setPosition(barrier_center_x + mwj_x, barrier_center_y + mwj_y):setRange(warp_jammer_a.range + 1200):setFaction(station:getFaction())
 					warp_jammer_info[station:getFaction()].count = warp_jammer_info[station:getFaction()].count + 1
 					mwj:setCallSign(string.format("%sWJ%i",warp_jammer_info[station:getFaction()].id,warp_jammer_info[station:getFaction()].count))
+					mwj.range = warp_jammer_a.range + 1200
 					table.insert(warp_jammer_list,mwj)
 					local nd_angle = random(0,360)
 					local bn_x, bn_y = vectorFromAngle(nd_angle,random(1000,4000))
@@ -1774,6 +1775,7 @@ function constructEnvironment()
 					local mwj = WarpJammer():setPosition(barrier_center_x + mwj_x, barrier_center_y + mwj_y):setRange(warp_jammer_a.range + 1200):setFaction(station:getFaction())
 					warp_jammer_info[station:getFaction()].count = warp_jammer_info[station:getFaction()].count + 1
 					mwj:setCallSign(string.format("%sWJ%i",warp_jammer_info[station:getFaction()].id,warp_jammer_info[station:getFaction()].count))
+					mwj.range = warp_jammer_a.range + 1200
 					table.insert(warp_jammer_list,mwj)
 					local nd_angle = random(0,360)
 					local bn_x, bn_y = vectorFromAngle(nd_angle,random(1000,4000))
@@ -2996,11 +2998,20 @@ end
 function warpJammerMaintenance()
 	if #warp_jammer_list > 0 then
 		for wj_index, wj in ipairs(warp_jammer_list) do
+			local set_default_range = false
 			if wj ~= nil and wj:isValid() then
 				if wj.reset_time ~= nil then
 					if getScenarioTime() > wj.reset_time then
+						if wj.range == nil then
+							wj.range = wj:getRange()
+							print("warp jammer did not have range value set, so setting it to current value:")
+							set_default_range = true
+						end
 						wj:setRange(wj.range)
 						wj.reset_time = nil
+						if set_default_range then
+							print("warp jammer call sign:",wj:getCallSign())
+						end
 					end
 				end
 			else
@@ -5190,7 +5201,7 @@ function friendlyComms(comms_data)
 				if comms_source.cargo > 0 then
 					for good, goodData in pairs(comms_data.goods) do
 						if goodData.quantity > 0 then
-							addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(good_data.cost)), function()
+							addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost)), function()
 								if comms_source:takeReputationPoints(goodData.cost) then
 									goodData.quantity = goodData.quantity - 1
 									if comms_source.goods == nil then
@@ -5215,7 +5226,7 @@ function friendlyComms(comms_data)
 					if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(good_data.cost)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost)), function()
 									if comms_source:takeReputationPoints(goodData.cost) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -5854,7 +5865,7 @@ function neutralComms(comms_data)
 					if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(good_data.cost)), function()
+								addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost)), function()
 									if comms_source:takeReputationPoints(goodData.cost) then
 										goodData.quantity = goodData.quantity - 1
 										if comms_source.goods == nil then
@@ -9505,6 +9516,11 @@ function checkFreighter()
 									string.format("")
 									sendRepairCrewToFreighter(p)
 								end)
+								p.send_repair_crew_to_freighter_dmg = "send_repair_crew_to_freighter_dmg"
+								p:addCustomButton("DamageControl",p.send_repair_crew_to_freighter_dmg,_("crewTransfer-buttonDamageControl", "Send Repair Crew"),function()
+									string.format("")
+									sendRepairCrewToFreighter(p)
+								end)
 							end
 							critical_transport:setSystemHealthMax("impulse",.01)
 							critical_transport:setSystemHealthMax("jumpdrive",.01)
@@ -9558,6 +9574,7 @@ function getRepairCrewFromFreighter(p)
 						for pidx2, p2 in ipairs(getActivePlayerShips()) do
 							p2:removeCustom(p2.get_repair_crew_from_freighter_eng)
 							p2:removeCustom(p2.get_repair_crew_from_freighter_plus)
+							p2:removeCustom(p2.get_repair_crew_from_freighter_dmg)
 						end
 					end
 				end
@@ -9614,6 +9631,7 @@ function sendRepairCrewToFreighter(p)
 							p2:addToShipLog(string.format(_("crewTransfer-shipLog", "%s has transported one of her repair crew to %s. They report that the engines should be fixed in a minute or two."),p:getCallSign(),critical_transport:getCallSign()),"Magenta")
 							p2:removeCustom(p2.send_repair_crew_to_freighter_eng)
 							p2:removeCustom(p2.send_repair_crew_to_freighter_plus)
+							p2:removeCustom(p2.send_repair_crew_to_freighter_dmg)
 							p2.get_repair_crew_from_freighter_eng = "get_repair_crew_from_freighter_eng"
 							p2:addCustomButton("Engineering",p2.get_repair_crew_from_freighter_eng,_("crewTransfer-buttonEngineer", "Get Repair Crew"),function()
 								string.format("")
@@ -9621,6 +9639,11 @@ function sendRepairCrewToFreighter(p)
 							end)
 							p2.get_repair_crew_from_freighter_plus = "get_repair_crew_from_freighter_plus"
 							p2:addCustomButton("Engineering+",p2.get_repair_crew_from_freighter_plus,_("crewTransfer-buttonEngineer+", "Get Repair Crew"),function()
+								string.format("")
+								getRepairCrewFromFreighter(p2)
+							end)
+							p2.get_repair_crew_from_freighter_dmg = "get_repair_crew_from_freighter_dmg"
+							p2:addCustomButton("DamageControl",p2.get_repair_crew_from_freighter_dmg,_("crewTransfer-buttonEngineer+", "Get Repair Crew"),function()
 								string.format("")
 								getRepairCrewFromFreighter(p2)
 							end)
@@ -9841,7 +9864,7 @@ function availableForComms(p)
 		return false
 	end
 	if p:isCommsChatOpenToPlayer() then
-		return
+		return false
 	end
 	if p:isCommsScriptOpen() then
 		return false

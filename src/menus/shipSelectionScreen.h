@@ -59,6 +59,8 @@ private:
     GuiTextEntry* window_angle;
     GuiLabel* window_angle_label;
     GuiToggleButton* topdown_button;
+    GuiScrollText* station_info;
+    string station_info_text;
 };
 
 class SecondMonitorScreen : public GuiCanvas, public Updatable

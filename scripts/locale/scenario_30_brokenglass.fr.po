@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -25,10 +25,9 @@ msgid ""
 "Duration: Plan for 3+ hours on Easy, with harder difficulties taking longer\n"
 "Player ships: 1\n"
 "\n"
-"Author: Chris Sibbit. Revisions: Xansta, Muerte Jan2023\n"
+"Author: Chris Sibbitt. Revisions: Xansta, Muerte Jan2023\n"
 "Created: Dec2022\n"
-"Feedback: USN Discord: https://discord.gg/7Kr32ezJFF in the #ee-scenario-"
-"feedback channel"
+"Feedback: USN Discord: https://discord.gg/7Kr32ezJFF"
 msgstr ""
 "- Durée approx. : + de 3h (variable)\n"
 "- Difficulté : Moyenne (variable)\n"
@@ -38,16 +37,16 @@ msgstr ""
 "protégez les chercheurs qui y travaillent.\n"
 "\n"
 "10 objectifs variés à accomplir.\n"
-"Prévoir plus de 3 heures en mode Facile, les modes plus difficiles prenant "
+"Prévoir plus de 3 heures en mode facile, les modes plus difficiles prenant "
 "plus de temps.\n"
 "\n"
 "Version 2 - Janv. 2023\n"
 "\n"
 "- Titre original : Broken Glass\n"
 "- Auteur : Csibbitt (Déc. 2022) Révisé par Xansta, Muerte\n"
-"- Traduction FR : Muerte\n"
+"- Traduction FR : Muerte (Mars 24)\n"
 "\n"
-"Communauté française et anglophone sur le Discord USN https://discord.gg/"
+"Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 msgctxt "setting"
@@ -114,7 +113,7 @@ msgstr ""
 "ajoutés à notre arsenal."
 
 #: scripts/scenario_30_brokenglass.lua:355
-msgctxt "nebulaBbonuses-shipLog"
+msgctxt "nebulaBonuses-shipLog"
 msgid "A stranded repair crew has been rescued"
 msgstr "Une équipe de réparation égarée a été secourue."
 
@@ -188,12 +187,12 @@ msgstr ""
 #: scripts/scenario_30_brokenglass.lua:826
 msgctxt "buttonGM"
 msgid "+Start Mission"
-msgstr "+Début de mission"
+msgstr "+ Début de mission"
 
 #: scripts/scenario_30_brokenglass.lua:827
 msgctxt "buttonGM"
 msgid "+Finish Mission"
-msgstr "+Fin de mission"
+msgstr "+ Fin de mission"
 
 #: scripts/scenario_30_brokenglass.lua:828
 msgctxt "buttonGM"
@@ -203,7 +202,7 @@ msgstr "+ Apparition ennemis"
 #: scripts/scenario_30_brokenglass.lua:832
 msgctxt "buttonGM"
 msgid "-From Spawn Stuff"
-msgstr "<- Apparition ennemis"
+msgstr "- Menu principal"
 
 # Scenario setting
 #: scripts/scenario_30_brokenglass.lua:833
@@ -219,7 +218,7 @@ msgstr "Harcèlement"
 #: scripts/scenario_30_brokenglass.lua:838
 msgctxt "buttonGM"
 msgid "-From Finish Mission"
-msgstr "<-Fin de mission"
+msgstr "- Menu principal"
 
 #: scripts/scenario_30_brokenglass.lua:839
 #: scripts/scenario_30_brokenglass.lua:847
@@ -248,7 +247,7 @@ msgstr "Réparation"
 #: scripts/scenario_30_brokenglass.lua:846
 msgctxt "buttonGM"
 msgid "-From Start Mission"
-msgstr "<-Début de mission"
+msgstr "- Menu principal"
 
 #: scripts/scenario_30_brokenglass.lua:848
 msgctxt "buttonGM"
@@ -1504,6 +1503,11 @@ msgstr ""
 "Nous vous demandons d'enquêter. N'ENGAGEZ PAS LE COMBAT ! Attaquer cet "
 "essaim serait extrêmement risqué. Gardez vos distances, Nous voulons juste "
 "savoir où ils vont."
+
+#: scripts/scenario_30_brokenglass.lua:1844
+msgctxt "defenceStn-shipLog"
+msgid "Investigate the convoy, but DO NOT ENGAGE"
+msgstr "Enquêtez sur le convoi mais N'ENGAGEZ PAS LE COMBAT !"
 
 #: scripts/scenario_30_brokenglass.lua:1874
 msgctxt "defenceStn-incCall"
