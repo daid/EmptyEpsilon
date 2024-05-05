@@ -1673,7 +1673,7 @@ function touchy(enemyFaction)
 	ship:setBeamWeapon(0,	12,	  0,	 2200,	9.0,	9.0)	--narrower (vs 60), longer (vs 1000), slower (vs 4),  stronger (vs 4)
 	local ships_key = _("scienceDB","Ships")
 	local starfighter_key = _("scienceDB","Starfighter")
-	local touchy_key = _("scienceDB","Youchy")
+	local touchy_key = _("scienceDB","Touchy")
 	local touchy_db = queryScienceDatabase(ships_key,starfighter_key,touchy_key)
 	if touchy_db == nil then
 		local starfighter_db = queryScienceDatabase(ships_key,starfighter_key)
