@@ -24,6 +24,7 @@ void CommsSystem::update(float delta)
                     comms.state = CommsTransmitter::State::ChannelBroken;
                 }else{
                     comms.script_replies.clear();
+                    comms.script_replies_dirty = true;
                     if (auto other_transmitter = comms.target.getComponent<CommsTransmitter>())
                     {
                         comms.open_delay = channel_open_time;
@@ -119,6 +120,7 @@ void CommsSystem::answer(sp::ecs::Entity player, bool allow)
                     if (auto log = player.getComponent<ShipLog>())
                         log->add(tr("shiplog", "Accepted hail from {callsign}").format({{"callsign", transmitter->target_name}}), colorConfig.log_generic);
                     transmitter->script_replies.clear();
+                    transmitter->script_replies_dirty = true;
                     if (transmitter->incomming_message == "")
                     {
                         if (openChannel(player, transmitter->target))
@@ -263,12 +265,12 @@ void CommsSystem::selectScriptReply(sp::ecs::Entity player, int index)
         if (auto log = player.getComponent<ShipLog>())
             log->add(transmitter->script_replies[index].message, colorConfig.log_send);
         auto callback = transmitter->script_replies[index].callback;
-        if (!transmitter->script_environment)
-        {
+        if (!player.hasComponent<CommsTransmitterEnvironment>()) {
             callback.setGlobal("comms_source", player);
             callback.setGlobal("comms_target", transmitter->target);
         }
         transmitter->script_replies.clear();
+        transmitter->script_replies_dirty = true;
         transmitter->incomming_message = "?";
         LuaConsole::checkResult(callback.call<void>(player, transmitter->target));
     }
@@ -340,20 +342,22 @@ bool CommsSystem::openChannel(sp::ecs::Entity player, sp::ecs::Entity target)
     script_active_entity = player;
 
     transmitter->script_replies.clear();
+    transmitter->script_replies_dirty = true;
     transmitter->target = target;
 
-    transmitter->script_environment = nullptr;
+    player.removeComponent<CommsTransmitterEnvironment>();
     transmitter->incomming_message = "???";
 
     if (script_name != "")
     {
-        transmitter->script_environment = std::make_unique<sp::script::Environment>();
-        if (setupScriptEnvironment(*transmitter->script_environment)) {
+        auto& env = player.addComponent<CommsTransmitterEnvironment>();
+        env.script_environment = std::make_unique<sp::script::Environment>();
+        if (setupScriptEnvironment(*env.script_environment)) {
             // consider "player" deprecated, but keep it for a long time
-            transmitter->script_environment->setGlobal("player", player);
-            transmitter->script_environment->setGlobal("comms_source", player);
-            transmitter->script_environment->setGlobal("comms_target", target);
-            LuaConsole::checkResult(transmitter->script_environment->runFile<void>(script_name));
+            env.script_environment->setGlobal("player", player);
+            env.script_environment->setGlobal("comms_source", player);
+            env.script_environment->setGlobal("comms_target", target);
+            LuaConsole::checkResult(env.script_environment->runFile<void>(script_name));
         }
     }else if (receiver->callback)
     {
@@ -382,6 +386,7 @@ int CommsSystem::luaAddCommsReply(lua_State* L)
     string message = luaL_checkstring(L, 1);
     auto callback = sp::script::Convert<sp::script::Callback>::fromLua(L, 2);
     transmitter->script_replies.push_back({message, callback});
+    transmitter->script_replies_dirty = true;
     return 0;
 }
 

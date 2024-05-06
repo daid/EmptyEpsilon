@@ -37,9 +37,11 @@ public:
     string target_name;
     string incomming_message;
     sp::ecs::Entity target; // Server only
+    bool script_replies_dirty = true;
     std::vector<ScriptReply> script_replies;
-    
-    //CommsScriptInterface
-    bool has_message = false;
+};
+class CommsTransmitterEnvironment
+{
+public:    
     std::unique_ptr<sp::script::Environment> script_environment;
 };

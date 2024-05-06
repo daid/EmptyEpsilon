@@ -43,7 +43,7 @@ void initSystemsAndComponents()
     //DockingBay
     //DockingPort
     sp::ecs::MultiplayerReplication::registerComponentReplication<FactionReplication>();
-    //FactionInfo
+    sp::ecs::MultiplayerReplication::registerComponentReplication<FactionInfoReplication>();
     //Gravity
     //HackingDevice
     //Hull

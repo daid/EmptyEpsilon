@@ -451,6 +451,8 @@ set(MAIN_SOURCES
     src/multiplayer/faction.cpp
     src/multiplayer/radar.h
     src/multiplayer/radar.cpp
+    src/multiplayer/comms.h
+    src/multiplayer/comms.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
