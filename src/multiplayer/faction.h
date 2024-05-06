@@ -4,3 +4,4 @@
 #include "components/faction.h"
 
 BASIC_REPLICATION_CLASS(FactionReplication, Faction);
+BASIC_REPLICATION_CLASS(FactionInfoReplication, FactionInfo);

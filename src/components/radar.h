@@ -68,6 +68,7 @@ public:
     float short_range = 5000.0f;
     float long_range = 30000.0f;
 
+    bool waypoints_dirty = true;
     std::vector<glm::vec2> waypoints;
     sp::ecs::Entity radar_view_linked_entity;
 

@@ -822,8 +822,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             glm::vec2 position{};
             packet >> position;
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-            if (lrr && lrr->waypoints.size() < 9)
+            if (lrr && lrr->waypoints.size() < 9) {
                 lrr->waypoints.push_back(position);
+                lrr->waypoints_dirty = true;
+            }
         }
         break;
     case CMD_REMOVE_WAYPOINT:
@@ -831,8 +833,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             int32_t index;
             packet >> index;
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-            if (lrr && index >= 0 && index < int(lrr->waypoints.size()))
+            if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
                 lrr->waypoints.erase(lrr->waypoints.begin() + index);
+                lrr->waypoints_dirty = true;
+            }
         }
         break;
     case CMD_MOVE_WAYPOINT:
@@ -841,8 +845,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             glm::vec2 position{};
             packet >> index >> position;
             auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-            if (lrr && index >= 0 && index < int(lrr->waypoints.size()))
+            if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
                 lrr->waypoints[index] = position;
+                lrr->waypoints_dirty = true;
+            }
         }
         break;
     case CMD_ACTIVATE_SELF_DESTRUCT:

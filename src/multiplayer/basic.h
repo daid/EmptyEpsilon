@@ -3,6 +3,10 @@
 #include "ecs/multiplayer.h"
 #include "ecs/query.h"
 
+namespace sp::io {
+    template<typename T> static inline DataBuffer& operator << (DataBuffer& packet, const std::vector<T>& v) { return packet << uint32_t(v.size()); for(size_t n=0; n<v.size(); n++) packet << v[n]; } \
+    template<typename T> static inline DataBuffer& operator >> (DataBuffer& packet, std::vector<T>& v) { uint32_t size = 0; packet >> size; v.resize(size); for(size_t n=0; n<v.size(); n++) packet >> v[n]; return packet; }
+}
 
 enum class BasicReplicationRequest {
     SendAll, Update, Receive
@@ -63,7 +67,7 @@ enum class BasicReplicationRequest {
 #define BASIC_REPLICATION_FIELD(FIELD) \
     switch(BRR) { \
     case BasicReplicationRequest::SendAll: flags |= flag; tmp << target.FIELD; break; \
-    case BasicReplicationRequest::Update: flags |= flag; tmp << target.FIELD; break; \
+    case BasicReplicationRequest::Update: if (target.FIELD != backup->FIELD) { flags |= flag; tmp << target.FIELD; backup->FIELD = target.FIELD; } break; \
     case BasicReplicationRequest::Receive: if (flags & 1) packet >> target.FIELD; break; \
     } \
     flag <<= 1;
@@ -99,3 +103,11 @@ enum class BasicReplicationRequest {
     } \
     void CLASS::receive(sp::ecs::Entity entity, sp::io::DataBuffer& packet) { entity.getOrAddComponent<COMPONENT>(); } \
     void CLASS::remove(sp::ecs::Entity entity) { entity.removeComponent<COMPONENT>(); }
+
+#define REPLICATE_VECTOR_IF_DIRTY(VECTOR, DIRTY) \
+    switch(BRR) { \
+    case BasicReplicationRequest::SendAll: flags |= flag; tmp << target.VECTOR; break; \
+    case BasicReplicationRequest::Update: if (target.DIRTY) { flags |= flag; tmp << target.VECTOR; target.DIRTY = false; } break; \
+    case BasicReplicationRequest::Receive: if (flags & 1) packet >> target.VECTOR; break; \
+    } \
+    flag <<= 1;

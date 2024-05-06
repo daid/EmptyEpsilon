@@ -41,6 +41,7 @@ public:
         sp::ecs::Entity other_faction;
         FactionRelation relation;
     };
+    bool relations_dirty = true;
     std::vector<Relation> relations;
 
     FactionRelation getRelation(sp::ecs::Entity faction_entity);

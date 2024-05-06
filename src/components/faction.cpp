@@ -72,10 +72,12 @@ void FactionInfo::setRelation(sp::ecs::Entity faction_entity, FactionRelation re
     for(auto& it : relations) {
         if (it.other_faction == faction_entity) {
             it.relation = relation;
+            relations_dirty = true;
             return;
         }
     }
     relations.push_back({faction_entity, relation});
+    relations_dirty = true;
 }
 
 FactionInfo* FactionInfo::find(const string& name)

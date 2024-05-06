@@ -117,6 +117,41 @@
             t->A[n].MEMBER = sp::script::Convert<decltype(t->A[n].MEMBER)>::fromLua(L, -1); \
         } \
     };
+#define BIND_ARRAY_DIRTY_FLAG(T, A, DIRTY) \
+    sp::script::ComponentHandler<T>::array_count_func = [](const T& t) -> int { return t.A.size(); }; \
+    sp::script::ComponentHandler<T>::array_resize_func = [](T& t, int new_size) { t.A.resize(new_size); t.DIRTY = true; };
+#define BIND_ARRAY_DIRTY_FLAG_MEMBER(T, A, MEMBER, DIRTY) \
+    sp::script::ComponentHandler<T>::indexed_members[STRINGIFY(MEMBER)] = { \
+        [](lua_State* L, const void* ptr, int n) { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<decltype(t->A[n].MEMBER)>::toLua(L, t->A[n].MEMBER); \
+        }, [](lua_State* L, void* ptr, int n) { \
+            auto t = reinterpret_cast<T*>(ptr); \
+            t->A[n].MEMBER = sp::script::Convert<decltype(t->A[n].MEMBER)>::fromLua(L, -1); t->DIRTY = true; \
+        } \
+    };
+#define BIND_ARRAY_DIRTY_FLAG_MEMBER_FLAG(T, A, MEMBER, NAME, MASK, DIRTY) \
+    sp::script::ComponentHandler<T>::indexed_members[NAME] = { \
+        [](lua_State* L, const void* ptr, int n) { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<bool>::toLua(L, ((t->A[n].MEMBER) & (MASK)) == (MASK) ); \
+        }, [](lua_State* L, void* ptr, int n) { \
+            auto t = reinterpret_cast<T*>(ptr); \
+            auto result = (t->A[n].MEMBER) & ~(MASK); \
+            if (sp::script::Convert<bool>::fromLua(L, -1)) result |= (MASK); \
+            t->A[n].MEMBER = result; t->DIRTY = true; \
+        } \
+    };
+#define BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(T, A, NAME, MEMBER, DIRTY) \
+    sp::script::ComponentHandler<T>::indexed_members[NAME] = { \
+        [](lua_State* L, const void* ptr, int n) { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<decltype(t->A[n].MEMBER)>::toLua(L, t->A[n].MEMBER); \
+        }, [](lua_State* L, void* ptr, int n) { \
+            auto t = reinterpret_cast<T*>(ptr); \
+            t->A[n].MEMBER = sp::script::Convert<decltype(t->A[n].MEMBER)>::fromLua(L, -1); t->DIRTY = true; \
+        } \
+    };
 #define BIND_SHIP_SYSTEM(T) \
     BIND_MEMBER(T, health); \
     BIND_MEMBER(T, health_max); \
@@ -263,10 +298,11 @@ void initComponentScriptBindings()
     BIND_MEMBER(LongRangeRadar, short_range);
     BIND_MEMBER(LongRangeRadar, long_range);
     BIND_MEMBER(LongRangeRadar, radar_view_linked_entity);
-    BIND_ARRAY(LongRangeRadar, waypoints);
-    BIND_ARRAY_MEMBER(LongRangeRadar, waypoints, x);
-    BIND_ARRAY_MEMBER(LongRangeRadar, waypoints, y);
-    //TODO: callbacks for probes
+    BIND_ARRAY_DIRTY_FLAG(LongRangeRadar, waypoints, waypoints_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(LongRangeRadar, waypoints, x, waypoints_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(LongRangeRadar, waypoints, y, waypoints_dirty);
+    BIND_MEMBER(LongRangeRadar, on_probe_link);
+    BIND_MEMBER(LongRangeRadar, on_probe_unlink);
     sp::script::ComponentHandler<ShareShortRangeRadar>::name("share_short_range_radar");
 
     sp::script::ComponentHandler<Hull>::name("hull");
@@ -522,9 +558,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(FactionInfo, locale_name);
     BIND_MEMBER(FactionInfo, description);
     BIND_MEMBER(FactionInfo, reputation_points);
-    BIND_ARRAY(FactionInfo, relations);
-    BIND_ARRAY_MEMBER(FactionInfo, relations, other_faction);
-    BIND_ARRAY_MEMBER(FactionInfo, relations, relation);
+    BIND_ARRAY_DIRTY_FLAG(FactionInfo, relations, relations_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(FactionInfo, relations, other_faction, relations_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(FactionInfo, relations, relation, relations_dirty);
 
     sp::script::ComponentHandler<AIController>::name("ai_controller");
     BIND_MEMBER(AIController, orders);
