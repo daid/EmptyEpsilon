@@ -343,8 +343,8 @@ int main(int argc, char** argv)
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
-    main_font = GuiTheme::getTheme(PreferencesManager::get("guitheme", "default"))->getStyle("base")->states[0].font;
-    bold_font = GuiTheme::getTheme(PreferencesManager::get("guitheme", "default"))->getStyle("bold")->states[0].font;
+    main_font = GuiTheme::getCurrentTheme()->getStyle("base")->states[0].font;
+    bold_font = GuiTheme::getCurrentTheme()->getStyle("bold")->states[0].font;
     if (!main_font || !bold_font)
     {
         LOG(ERROR, "Missing font or bold font.");
