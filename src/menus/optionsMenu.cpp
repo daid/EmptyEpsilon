@@ -172,8 +172,8 @@ OptionsMenu::OptionsMenu()
 
         (new GuiSelector(interface_page, "GUI_THEME_SELECTOR", [](int index, string theme_name)
         {
-            LOG(INFO, "Set theme to : ", theme_name);
             PreferencesManager::set("guitheme", theme_name);
+            GuiTheme::setCurrentTheme(theme_name);
         }))->setOptions(themes)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
     }
     

@@ -7,6 +7,7 @@
 
 static std::unordered_map<string, sp::Font*> fonts;
 std::unordered_map<string, GuiTheme*> GuiTheme::themes;
+string GuiTheme::current_theme = "default";
 
 static glm::u8vec4 toColor(const string& s)
 {
@@ -63,6 +64,20 @@ GuiTheme* GuiTheme::getTheme(const string& name)
     }
     LOG(Warning, "Theme ", name, " not found. Falling back to [default] theme.");
     return getTheme("default");
+}
+
+void GuiTheme::setCurrentTheme(const string &theme_name)
+{
+    if(themes.find(theme_name) != themes.end())
+    {
+        LOG(INFO, "Set theme to : ", theme_name);
+        GuiTheme::current_theme = theme_name;
+    }
+}
+
+GuiTheme* GuiTheme::getCurrentTheme()
+{
+    return GuiTheme::getTheme(GuiTheme::current_theme);
 }
 
 bool GuiTheme::loadTheme(const string& name, const string& resource_name)

@@ -244,8 +244,11 @@ int main(int argc, char** argv)
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing or contains errors ? Check gui/default.theme.txt", nullptr);
             return 1;
         }
-        LOG(INFO, "Set theme to : default.");
-        PreferencesManager::set("guitheme", "default");
+        GuiTheme::setCurrentTheme("default");
+    }
+    else
+    {
+        GuiTheme::setCurrentTheme(theme_name);
     }
 
     if (PreferencesManager::get("headless") == "")
