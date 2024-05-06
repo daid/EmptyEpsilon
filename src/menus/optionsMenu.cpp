@@ -149,6 +149,12 @@ OptionsMenu::OptionsMenu()
                 LOG(ERROR, "Failed to load theme : ", *iter);
                 iter = themes.erase(iter);
             }
+            else if (!GuiTheme::getTheme(*iter)->getStyle("base")->states[0].font 
+             || !GuiTheme::getTheme(*iter)->getStyle("bold")->states[0].font)
+            {
+                LOG(ERROR, "Missing base font or bold font for theme : ", *iter);
+                iter = themes.erase(iter);
+            }
             else
             {
                 ++iter;
@@ -172,8 +178,11 @@ OptionsMenu::OptionsMenu()
 
         (new GuiSelector(interface_page, "GUI_THEME_SELECTOR", [](int index, string theme_name)
         {
-            PreferencesManager::set("guitheme", theme_name);
             GuiTheme::setCurrentTheme(theme_name);
+            main_font = GuiTheme::getCurrentTheme()->getStyle("base")->states[0].font;
+            bold_font = GuiTheme::getCurrentTheme()->getStyle("bold")->states[0].font;
+            //Render default font is applied on back only
+            PreferencesManager::set("guitheme", theme_name);
         }))->setOptions(themes)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
     }
     
@@ -181,6 +190,8 @@ OptionsMenu::OptionsMenu()
     // Back button.
     (new GuiButton(this, "BACK", tr("button", "Back"), [this]()
     {
+        //Apply potentially modified font now, in order not to have some half rendered panel with one font and another
+        sp::RenderTarget::setDefaultFont(main_font);
         // Close this menu, stop the music, and return to the main menu.
         destroy();
         soundManager->stopMusic();
