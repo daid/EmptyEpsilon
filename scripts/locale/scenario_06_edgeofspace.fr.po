@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-08-03 19:51+0200\n"
+"PO-Revision-Date: 2024-05-07 14:03+0200\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -708,12 +708,12 @@ msgstr "Avez-vous des missiles nucléaires nukes ? (15 rép chacun)"
 #: scripts/scenario_06_edgeofspace.lua:952
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
-msgstr "Officier, vos nukes sont en capacité maximale et prêtes à servir !"
+msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
 
 #: scripts/scenario_06_edgeofspace.lua:956
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
-msgstr "Vous êtes chargés au max et prêt à tout faire péter."
+msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
 
 #: scripts/scenario_06_edgeofspace.lua:962
 msgctxt "ammo-comms"
