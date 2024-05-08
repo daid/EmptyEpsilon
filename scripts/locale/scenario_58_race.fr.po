@@ -19,6 +19,7 @@ msgid "Fermi 500"
 msgstr ""
 
 # Scenario description
+#, fuzzy
 msgid ""
 "Race three laps of four waypoints (1 to 2 to 3 to 4 to 1 = 1 lap) in the "
 "shortest time. Play for time by yourself, but have more fun with multiple "
@@ -35,6 +36,23 @@ msgid ""
 "Your competitors may also try to destroy you despite being your nominal "
 "allies, so beware"
 msgstr ""
+"\n"
+"EN COURS DE TRADUCTION : 51%\n"
+"\n"
+"Race three laps of four waypoints (1 to 2 to 3 to 4 to 1 = 1 lap) in the "
+"shortest time. Play for time by yourself, but have more fun with multiple "
+"player ships.\n"
+"\n"
+"Placement points depend on the number of racers present at the starting "
+"point when the race starts. Precise values are given to Relay at that time. "
+"Each target drone of yours shot earns one point. Shoot an opponent's drone "
+"and they get the point.\n"
+"\n"
+"Before the race starts, scope out the course, visit some stations, maybe "
+"improve your ship for the race. But, watch your time carefully. If you are "
+"not at waypoint 1 at the start of the race, your ship will be destroyed. "
+"Your competitors may also try to destroy you despite being your nominal "
+"allies, so beware"
 
 # Scenario setting
 msgctxt "setting"
@@ -47,13 +65,12 @@ msgstr ""
 
 msgctxt "Shoot Back"
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 msgctxt "Shoot Back"
 msgid "Targets along the course do not shoot back"
 msgstr ""
 
-#, fuzzy
 msgctxt "Shoot Back"
 msgid "Yes"
 msgstr "Oui"
@@ -135,7 +152,6 @@ msgid ""
 "master screen to get control codes"
 msgstr ""
 
-#, fuzzy
 msgctxt "Ship Name"
 msgid "Random"
 msgstr " Aléatoire "
@@ -694,7 +710,6 @@ msgid "Lush planet with only mild seasonal variations"
 msgstr "Planète luxuriante avec seulement de légères variations saisonnières"
 
 #: scripts/scenario_58_race.lua:1616
-#, fuzzy
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
@@ -715,7 +730,6 @@ msgid "Welcome to our lovely station.\n"
 msgstr "Bienvenue dans notre charmante petite station.\n"
 
 #: scripts/scenario_58_race.lua:1633
-#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
@@ -741,7 +755,6 @@ msgid "%s (%d rep each)"
 msgstr "%s (%d rép chacun)"
 
 #: scripts/scenario_58_race.lua:1654 scripts/scenario_58_race.lua:2345
-#, fuzzy
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr "Quels sont nos ordres en cours ?"
@@ -753,6 +766,8 @@ msgid ""
 "\n"
 "%i Seconds remain until start of race"
 msgstr ""
+"\n"
+"   %i secondes restantes jusqu'au début de la course."
 
 #: scripts/scenario_58_race.lua:1660 scripts/scenario_58_race.lua:2351
 #, lua-format
@@ -1009,10 +1024,10 @@ msgid "Goods or components available here: quantity, cost in reputation\n"
 msgstr ""
 
 #: scripts/scenario_58_race.lua:1832
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s: %i, %i\n"
+msgstr "     %s : %i, %i\n"
 
 #: scripts/scenario_58_race.lua:1835
 msgctxt "trade-comms"
@@ -1020,19 +1035,18 @@ msgid "Current Cargo:\n"
 msgstr "Cargaison actuelle\n"
 
 #: scripts/scenario_58_race.lua:1842
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
-msgstr "     %s: %i\n"
+msgstr "     %s : %i\n"
 
 #: scripts/scenario_58_race.lua:1848
-#, fuzzy
 msgctxt "trade-comms"
 msgid "     Empty\n"
 msgstr "     Vide\n"
 
 #: scripts/scenario_58_race.lua:1851
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
 msgstr "Espace disponible : %i, Réputation disponible : %i\n"
@@ -1040,7 +1054,7 @@ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 #: scripts/scenario_58_race.lua:1859 scripts/scenario_58_race.lua:2634
 #: scripts/scenario_58_race.lua:2675 scripts/scenario_58_race.lua:2701
 #: scripts/scenario_58_race.lua:2732
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
 msgstr "Achetez 1 %s pour %i rép"
@@ -1052,7 +1066,6 @@ msgid "Type: %s, Quantity: %i, Rep: %i"
 msgstr "Type : %s, Quantité : %i, Rép : %i"
 
 #: scripts/scenario_58_race.lua:1862
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -1062,14 +1075,13 @@ msgstr ""
 "Espace de chargement insuffisant pour acheter"
 
 #: scripts/scenario_58_race.lua:1864 scripts/scenario_58_race.lua:1869
-#, fuzzy
 msgctxt "needRep-comms"
 msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
 "\n"
-"Réputation insuffisante pour acheter"
+"Réputation insuffisante pour acheter."
 
 #: scripts/scenario_58_race.lua:1866 scripts/scenario_58_race.lua:1900
 #: scripts/scenario_58_race.lua:1932 scripts/scenario_58_race.lua:1964
@@ -1091,7 +1103,7 @@ msgstr ""
 "Acheté"
 
 #: scripts/scenario_58_race.lua:1897
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
 msgstr "Échanger de la Nourriture (food) contre %s"
@@ -1105,7 +1117,6 @@ msgstr "Type : %s, Quantité : %i"
 
 #: scripts/scenario_58_race.lua:1905 scripts/scenario_58_race.lua:1937
 #: scripts/scenario_58_race.lua:1969
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -1115,13 +1126,13 @@ msgstr ""
 "Échangé"
 
 #: scripts/scenario_58_race.lua:1929 scripts/scenario_58_race.lua:2610
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr "Échanger des produits de luxe (luxury) contre %s"
 
 #: scripts/scenario_58_race.lua:1961
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
 msgstr "Échanger des Médicaments (medicine) contre %s"
@@ -1239,7 +1250,6 @@ msgid "You now have an upgraded rear shield"
 msgstr ""
 
 #: scripts/scenario_58_race.lua:2258
-#, fuzzy
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
@@ -1320,7 +1330,6 @@ msgstr ""
 "occupés pour faire affaire avec vous."
 
 #: scripts/scenario_58_race.lua:2304
-#, fuzzy
 msgctxt "station-comms"
 msgid "I need information"
 msgstr "j'aurai besoin d'informations"
@@ -1358,32 +1367,30 @@ msgid "%s, my messaging terminal says you're %.1f units away, %s."
 msgstr ""
 
 #: scripts/scenario_58_race.lua:2402
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rép)"
 
 #: scripts/scenario_58_race.lua:2404
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
 "Vous devez définir un marqueur avant de faire une demande de ravitaillement."
 
 #: scripts/scenario_58_race.lua:2406
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
 
 #: scripts/scenario_58_race.lua:2408 scripts/scenario_58_race.lua:2434
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
 msgstr "Marqueur %d"
 
 #: scripts/scenario_58_race.lua:2416
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
@@ -1391,25 +1398,22 @@ msgstr ""
 "ravitaillement au marqueur %d."
 
 #: scripts/scenario_58_race.lua:2418 scripts/scenario_58_race.lua:2439
-#, fuzzy
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr "Pas assez de réputation !"
 
 #: scripts/scenario_58_race.lua:2428
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
 msgstr "Merci de nous envoyer des renforts ! (%d rép)"
 
 #: scripts/scenario_58_race.lua:2430
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr "Vous devez définir un marqueur avant de pouvoir demander des renforts."
 
 #: scripts/scenario_58_race.lua:2432
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
@@ -1433,13 +1437,11 @@ msgid "Sir, how can we assist?"
 msgstr "Monsieur, comment pouvons-nous vous assister ?"
 
 #: scripts/scenario_58_race.lua:2486
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr "Défendez un marqueur."
+msgstr "Défendez un marqueur"
 
 #: scripts/scenario_58_race.lua:2488
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
@@ -1447,19 +1449,18 @@ msgstr ""
 "un."
 
 #: scripts/scenario_58_race.lua:2491
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/scenario_58_race.lua:2493
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
-msgstr "Défendez le marqueur %d."
+msgstr "Défendez le marqueur %d"
 
 #: scripts/scenario_58_race.lua:2495
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
 msgstr "Nous partons immédiatement défendre le marqueur %d."
@@ -1543,7 +1544,6 @@ msgid "Your feeble threats are meaningless."
 msgstr "Vos petites menaces ne nous impressionnent pas."
 
 #: scripts/scenario_58_race.lua:2549
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
@@ -1593,7 +1593,6 @@ msgstr ""
 "Communication interrompue."
 
 #: scripts/scenario_58_race.lua:2556
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
@@ -1658,13 +1657,11 @@ msgid "Where are you headed?"
 msgstr "Où allez-vous ?"
 
 #: scripts/scenario_58_race.lua:2612
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter for trade"
 msgstr "Stock insuffisant sur le cargo pour commercer"
 
 #: scripts/scenario_58_race.lua:2617
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Traded"
 msgstr "Échangé"
@@ -1676,7 +1673,6 @@ msgstr "Luxe insuffisant pour commercer"
 
 #: scripts/scenario_58_race.lua:2636 scripts/scenario_58_race.lua:2677
 #: scripts/scenario_58_race.lua:2703 scripts/scenario_58_race.lua:2734
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Insufficient cargo space for purchase"
 msgstr "Espace de chargement insuffisant pour acheter"
@@ -1689,29 +1685,26 @@ msgstr "Stock insuffisant sur le cargo"
 
 #: scripts/scenario_58_race.lua:2641 scripts/scenario_58_race.lua:2682
 #: scripts/scenario_58_race.lua:2708 scripts/scenario_58_race.lua:2739
-#, fuzzy
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr "Réputation insuffisante pour acheter"
+msgstr "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_58_race.lua:2646 scripts/scenario_58_race.lua:2687
 #: scripts/scenario_58_race.lua:2713 scripts/scenario_58_race.lua:2744
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Purchased"
 msgstr "Acheté"
 
 #: scripts/scenario_58_race.lua:2659
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous ? (coût : %f réputation)"
+msgstr "Où allez-vous ? (coût : %f rép)"
 
 #: scripts/scenario_58_race.lua:2661
-#, fuzzy
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr "Réputation insuffisante"
+msgstr "Réputation insuffisante."
 
 #: scripts/scenario_58_race.lua:2723
 msgctxt "trade-comms"
@@ -1729,7 +1722,6 @@ msgstr ""
 "Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_58_race.lua:2758
-#, fuzzy
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
@@ -1740,7 +1732,6 @@ msgstr ""
 "Bonne journée."
 
 #: scripts/scenario_58_race.lua:2912
-#, fuzzy
 msgctxt "msgMainscreen"
 msgid "Admiral"
 msgstr "Amiral"
@@ -1761,7 +1752,6 @@ msgid "Lieutenant"
 msgstr "Lieutenant"
 
 #: scripts/scenario_58_race.lua:2920
-#, fuzzy
 msgctxt "msgMainscreen"
 msgid "Ensign"
 msgstr "Officier"
