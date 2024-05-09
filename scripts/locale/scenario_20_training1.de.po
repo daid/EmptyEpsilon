@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 # Scenario name
 msgid "Training: Cruiser"
@@ -38,12 +38,27 @@ msgstr ""
 "Während dieses Trainings lernt ihr, die Aktionen eurer Crew zu koordinieren "
 "und ein Exuari-Übungsgelände zu zerstören.\n"
 "\n"
-"Ihr Schiff ist ein leichter Phobos-Kreuzer - das häufigste Schiff der "
-"Marine.\n"
+"Euer Schiff ist ein leichter Phobos-Kreuzer - das häufigste Schiff der "
+"Navy.\n"
 "\n"
 "Dies ist eine kurze Mission für eine unerfahrene Crew."
 
-#: scripts/scenario_20_training1.lua:130
+#: scripts/scenario_20_training1.lua:36
+msgctxt "scienceDescription-shipname"
+msgid "Exuari transport"
+msgstr "Ein Exuari-Transportschiff"
+
+#: scripts/scenario_20_training1.lua:40
+msgctxt "scienceDescription-shipname"
+msgid "Exuari freighter"
+msgstr "Ein Exuari-Frachter"
+
+#: scripts/scenario_20_training1.lua:44
+msgctxt "scienceDescription-shipname"
+msgid "Exuari shuttle"
+msgstr "Ein Shuttle der Exuari"
+
+#: scripts/scenario_20_training1.lua:79
 msgctxt "goal-incCall"
 msgid ""
 "This is Commander Saberhagen.\n"
@@ -62,25 +77,25 @@ msgstr ""
 "\n"
 "In dieser Trainingsmission üben Sie die grundlegende Steuerung der Phobos, "
 "eines leichten Kreuzers.\n"
-"Da es sich nicht um ein Tutorial handelt, entscheiden Sie selbst, wie Sie "
-"alle feindlichen Ziele auf einem Exuari-Übungsgelände zerstören.\n"
-"Es wird nicht viel Widerstand geben, so dass Sie in aller Ruhe verschiedene "
-"Ansätze und Taktiken ausprobieren können.\n"
+"Da es sich nicht um ein Tutorial handelt, entscheidet ihr selbst, wie ihr "
+"alle feindlichen Ziele auf einem Exuari-Übungsgelände zerstört.\n"
+"Es wird nicht viel Widerstand geben, so dass ihr in aller Ruhe verschiedene "
+"Ansätze und Taktiken ausprobieren könnt.\n"
 "\n"
-"Hier ist Ihre Chance, ein paar hilflose Gegner zu verprügeln.\n"
+"Hier ist eure Chance, ein paar hilflose Gegner zu verprügeln.\n"
 "Commander Saberhagen Ende."
 
-#: scripts/scenario_20_training1.lua:148
+#: scripts/scenario_20_training1.lua:98
 msgctxt "msgMainscreen-bonusTarget"
 msgid "escaped."
 msgstr "geflohen."
 
-#: scripts/scenario_20_training1.lua:150
+#: scripts/scenario_20_training1.lua:100
 msgctxt "msgMainscreen-bonusTarget"
 msgid "destroyed."
 msgstr "zerstört."
 
-#: scripts/scenario_20_training1.lua:152
+#: scripts/scenario_20_training1.lua:102
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
