@@ -52,7 +52,7 @@ msgid ""
 "Version 2"
 msgstr ""
 "\n"
-"EN COURS DE TRADUCTION 35%\n"
+"EN COURS DE TRADUCTION 39%\n"
 "\n"
 "Get rid of the unwanted visitors. Other missions follow. Check friendly "
 "stations for mission orders. Dispatch office provides new missions. Continue "
@@ -85,7 +85,6 @@ msgstr ""
 "Version 2"
 
 # Scenario setting
-#, fuzzy
 msgctxt "setting"
 msgid "Enemies"
 msgstr "Puissance ennemie"
@@ -139,7 +138,6 @@ msgctxt "setting"
 msgid "Murphy"
 msgstr "Loi de Murphy"
 
-#, fuzzy
 msgctxt "setting"
 msgid "Configures the perversity of the universe according to Murphy's law"
 msgstr "Définit la perversité de l'univers selon la loi de Murphy."
@@ -241,10 +239,9 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:398 scripts/scenario_48_visitors.lua:417
 #: scripts/scenario_48_visitors.lua:446 scripts/scenario_48_visitors.lua:488
 #: scripts/scenario_48_visitors.lua:501
-#, fuzzy
 msgctxt "buttonGM"
 msgid "-Main"
-msgstr "- Précédent"
+msgstr ""
 
 #: scripts/scenario_48_visitors.lua:111
 msgctxt "buttonGM"
@@ -788,11 +785,11 @@ msgid "Reduce beam cycle time"
 msgstr "Réduire le temps de cycle des faisceaux laser"
 
 #: scripts/scenario_48_visitors.lua:2571
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "upgrade-comms"
 msgid "After accepting your gift, he reduced your Beam cycle time by 25%%"
 msgstr ""
-"Après avoir accepté votre cadeau, il a réduit le temps de cycle des "
+"Après avoir accepté votre cadeau, il a réduit le temps de cycle de vos "
 "faisceaux laser de 25%%."
 
 #: scripts/scenario_48_visitors.lua:2573 scripts/scenario_48_visitors.lua:2739
@@ -1130,18 +1127,17 @@ msgid "Hello, may I help you?"
 msgstr "Bonjour, puis-je vous aider ?"
 
 #: scripts/scenario_48_visitors.lua:3107
-#, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
 msgstr "Bienvenue dans notre charmante petite station."
 
 #: scripts/scenario_48_visitors.lua:3110
-#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
 "enemies nearby."
 msgstr ""
+"\n"
 "Veuillez nous excuser si nous semblons un peu distraits. Nous surveillons "
 "attentivement les ennemis à proximité."
 
@@ -2005,7 +2001,6 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_48_visitors.lua:3807 scripts/scenario_48_visitors.lua:4853
-#, fuzzy
 msgctxt "station-comms"
 msgid "Tell me more about your station"
 msgstr "Dites m'en plus à propos de votre station"
@@ -2220,10 +2215,10 @@ msgstr ""
 "   %i minutes restantes dans le jeu."
 
 #: scripts/scenario_48_visitors.lua:4001 scripts/scenario_48_visitors.lua:4036
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation."
+msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
 
 #: scripts/scenario_48_visitors.lua:4003 scripts/scenario_48_visitors.lua:4019
 #: scripts/scenario_48_visitors.lua:4038 scripts/scenario_48_visitors.lua:4054
@@ -2239,13 +2234,12 @@ msgid "Insufficient reputation"
 msgstr "Réputation insuffisante."
 
 #: scripts/scenario_48_visitors.lua:4006 scripts/scenario_48_visitors.lua:4041
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
 msgstr "Réparateur embauché."
 
 #: scripts/scenario_48_visitors.lua:4017 scripts/scenario_48_visitors.lua:4052
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Purchase coolant for %i reputation"
 msgstr "Acheter du liquide de refroidissement pour %i de réputation"
@@ -2535,15 +2529,15 @@ msgid "Buy, sell, trade"
 msgstr "Acheter, vendre, échanger"
 
 #: scripts/scenario_48_visitors.lua:4252
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles à la vente : quantité, coût en "
-"réputation\n"
+"Marchandises ou composants disponibles à la vente : (quantité, coût en "
+"réputation)\n"
 
 #: scripts/scenario_48_visitors.lua:4254
 #, lua-format
@@ -3036,24 +3030,24 @@ msgid "What goods do you have available for sale or trade?"
 msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
 
 #: scripts/scenario_48_visitors.lua:4790
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
 "Goods or components available: quantity, cost in reputation"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles : quantité, coût en réputation"
+"Marchandises ou composants disponibles : (quantité, coût en réputation)"
 
 #: scripts/scenario_48_visitors.lua:4792
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "   %14s: %2i, %3i"
 msgstr ""
 "\n"
-"   %14s: %2i, %3i"
+"   %14s : %2i, %3i"
 
 #: scripts/scenario_48_visitors.lua:4798
 msgctxt "trade-comms"
@@ -3061,7 +3055,6 @@ msgid "Where can I find particular goods?"
 msgstr "Où puis-je trouver des marchandises particulières ?"
 
 #: scripts/scenario_48_visitors.lua:4800
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
@@ -3072,13 +3065,12 @@ msgstr ""
 "marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
 
 #: scripts/scenario_48_visitors.lua:4840
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
 msgstr "La station %s dans le secteur %s possède du %s pour %i rép."
 
 #: scripts/scenario_48_visitors.lua:4845
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -3092,7 +3084,6 @@ msgstr ""
 "J'ai entendu parler de ça :"
 
 #: scripts/scenario_48_visitors.lua:4847
-#, fuzzy
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
 msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
@@ -3202,7 +3193,6 @@ msgid " or food"
 msgstr " ou de la Nourriture (food)"
 
 #: scripts/scenario_48_visitors.lua:5017
-#, fuzzy
 msgctxt "trade-comms"
 msgid " and will trade it for food"
 msgstr " et va l'échanger contre de la Nourriture (food)"
@@ -3213,7 +3203,6 @@ msgid " or luxury"
 msgstr " ou des Produits de luxe (luxury)"
 
 #: scripts/scenario_48_visitors.lua:5025
-#, fuzzy
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
 msgstr " et va l'échanger contre des Produits de luxe (luxury)"
@@ -3261,46 +3250,39 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_48_visitors.lua:5104
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Small Station"
 msgstr "1. Petite station"
 
 #: scripts/scenario_48_visitors.lua:5105
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Medium Station"
 msgstr "2. Station moyenne"
 
 #: scripts/scenario_48_visitors.lua:5106
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Large Station"
 msgstr "3. Grande station"
 
 #: scripts/scenario_48_visitors.lua:5107
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Huge Station"
 msgstr "4. Immense station"
 
 #: scripts/scenario_48_visitors.lua:5109
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Small"
-msgstr "Léger"
+msgstr ""
 
 #: scripts/scenario_48_visitors.lua:5116
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Medium"
-msgstr "Moyenne"
+msgstr ""
 
 #: scripts/scenario_48_visitors.lua:5123
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Large"
-msgstr "Large"
+msgstr ""
 
 #: scripts/scenario_48_visitors.lua:5130
 msgctxt "scienceDB"
@@ -3728,13 +3710,11 @@ msgid "Insufficient reputation for purchase"
 msgstr "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_48_visitors.lua:5587 scripts/scenario_48_visitors.lua:5669
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
 msgstr "Auriez-vous des marchandises à vendre ?"
 
 #: scripts/scenario_48_visitors.lua:5589 scripts/scenario_48_visitors.lua:5671
-#, fuzzy
 msgctxt "trade-comms"
 msgid "We've got "
 msgstr "Nous avons "
@@ -3742,10 +3722,9 @@ msgstr "Nous avons "
 #: scripts/scenario_48_visitors.lua:5593 scripts/scenario_48_visitors.lua:5675
 msgctxt "trade-comms"
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: scripts/scenario_48_visitors.lua:5601 scripts/scenario_48_visitors.lua:5683
-#, fuzzy
 msgctxt "trade-comms"
 msgid "nothing"
 msgstr "Rien du tout."
@@ -4098,10 +4077,9 @@ msgid "%.1f seconds remain to be scanned"
 msgstr ""
 
 #: scripts/scenario_48_visitors.lua:6428
-#, fuzzy
 msgctxt "Polly-tabHelmTactical"
 msgid "Range"
-msgstr "Portée"
+msgstr ""
 
 #: scripts/scenario_48_visitors.lua:6430
 #, lua-format
