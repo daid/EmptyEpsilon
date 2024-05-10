@@ -6,6 +6,7 @@
 #include "multiplayer/collision.h"
 #include "multiplayer/faction.h"
 #include "multiplayer/radar.h"
+#include "multiplayer/comms.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -35,8 +36,8 @@ void initSystemsAndComponents()
 {
     //BeamWeaponSys
     //BeamEffect
-    //CommsReceiver (client needs to know this exists to be able to initiate comms)
-    //CommsTransmitter
+    sp::ecs::MultiplayerReplication::registerComponentReplication<CommsReceiverReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<CommsTransmitterReplication>();
     //Coolant
     //CustomShipFunctions
     //Database
