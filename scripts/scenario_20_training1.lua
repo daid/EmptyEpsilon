@@ -84,7 +84,6 @@ There will be not much resistance, so you can try different approaches and tacti
 
 Here's your chance to beat up some helpless opponents.
 Commander Saberhagen out.]]))
-    globalMessage("Test")
     end
 end
 
