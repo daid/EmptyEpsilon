@@ -54,18 +54,6 @@ WormHole::WormHole()
     pathPlanner->addAvoidObject(this, (DEFAULT_COLLISION_RADIUS * AVOIDANCE_MULTIPLIER) );
 
     setRadarSignatureInfo(0.9, 0.0, 0.0);
-
-    // Choose a texture to show on radar
-    radar_visual = irandom(1, 3);
-    registerMemberReplication(&radar_visual);
-
-    // Create some overlaying clouds
-    for(int n=0; n<cloud_count; n++)
-    {
-        clouds[n].size = random(1024, 1024 * 4);
-        clouds[n].texture = irandom(1, 3);
-        clouds[n].offset = glm::vec2(0, 0);
-    }
 }
 
 void WormHole::draw3DTransparent()
@@ -102,7 +90,7 @@ void WormHole::draw3DTransparent()
 
 void WormHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    renderer.drawRotatedSpriteBlendAdd("wormHole" + string(radar_visual) + ".png", position, getRadius() * scale * 3.0f, getRotation() - rotation);
+    renderer.drawRotatedSpriteBlendAdd("radar/wormHole.png", position, getRadius() * scale * 3.0f, getRotation() - rotation);
 }
 
 // Draw a line toward the target position
