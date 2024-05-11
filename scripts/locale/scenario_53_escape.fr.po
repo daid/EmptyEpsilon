@@ -53,10 +53,9 @@ msgctxt "setting"
 msgid "Enemies"
 msgstr "Puissance ennemie"
 
-#, fuzzy
 msgctxt "setting"
 msgid "Configures the amount/strength of enemies spawned in the scenario."
-msgstr "Définit le nombre d'ennemis générés dans le scénario."
+msgstr "Définit le nombre et/ou la puissance des ennemis."
 
 msgctxt "Enemies"
 msgid "Easy"
@@ -225,6 +224,8 @@ msgstr "Boucliers complètement opérationnels"
 msgctxt "defeat-msgMainscreen"
 msgid "You were destroyed. The Human Navy did not receive your Kraylor intel."
 msgstr ""
+"Vous avez été détruit.\n"
+"La Marine Humaine n'a pas pu recevoir vos informations sur les Kraylors."
 
 #: scripts/scenario_53_escape.lua:233
 msgctxt "repair-msgEngineer"
@@ -288,27 +289,27 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:300
 msgctxt "scienceDB"
 msgid "Stations"
-msgstr ""
+msgstr "Stations"
 
 #: scripts/scenario_53_escape.lua:302
 msgctxt "scienceDB"
 msgid "Class"
-msgstr ""
+msgstr "Classe"
 
 #: scripts/scenario_53_escape.lua:303
 msgctxt "scienceDB"
 msgid "Size"
-msgstr ""
+msgstr "Taille"
 
 #: scripts/scenario_53_escape.lua:304
 msgctxt "scienceDB"
 msgid "Shield"
-msgstr ""
+msgstr "Boucliers"
 
 #: scripts/scenario_53_escape.lua:305
 msgctxt "scienceDB"
 msgid "Hull"
-msgstr ""
+msgstr "Coque"
 
 #: scripts/scenario_53_escape.lua:308
 msgctxt "scienceDB"
@@ -317,11 +318,16 @@ msgid ""
 "interact with station personnel, etc. They are like oases, service stations, "
 "villages, towns, cities, etc."
 msgstr ""
+"Les stations spatiales sont des lieux où les vaisseaux peuvent accoster, "
+"être réparés, réapprovisionnés, interagir avec le personnel de la station, "
+"etc.\n"
+"Elles peuvent être des stations-service, des villages, des villes, des oasis "
+"etc."
 
 #: scripts/scenario_53_escape.lua:309
 msgctxt "scienceDB"
 msgid "Small Station"
-msgstr ""
+msgstr "Small Station"
 
 #: scripts/scenario_53_escape.lua:312
 msgctxt "scienceDB"
@@ -333,16 +339,25 @@ msgid ""
 "advantage of this by placing small stations in nebulae to serve as raiding "
 "bases. They are lightly shielded and vulnerable to swarming assaults."
 msgstr ""
+"Les stations de cette taille sont souvent utilisées comme avant-poste de "
+"recherche, station d'écoute ou poste de contrôle. Les équipages viennent se "
+"reposer fréquemment dans les logements exigus de ces petites stations.\n"
+"\n"
+"Leur taille réduite leur permet d'apparaître comme des vaisseaux sur de "
+"nombreux capteurs longue distance, et des pirates organisés s'en servent "
+"parfois en plaçant de petites stations dans des nébuleuses pour servir de "
+"base de pillage. Elles disposent de boucliers légers et sont donc "
+"vulnérables à de petits assauts organisés."
 
 #: scripts/scenario_53_escape.lua:314
 msgctxt "scienceDB"
 msgid "Small"
-msgstr ""
+msgstr "Petite"
 
 #: scripts/scenario_53_escape.lua:319
 msgctxt "scienceDB"
 msgid "Medium Station"
-msgstr ""
+msgstr "2. Station moyenne"
 
 #: scripts/scenario_53_escape.lua:322
 msgctxt "scienceDB"
@@ -352,16 +367,23 @@ msgid ""
 "operations, and forward military bases. While their shields are strong, "
 "concerted attacks by many ships can bring them down quickly."
 msgstr ""
+"Assez grandes pour héberger de petits équipages pendant de longues périodes, "
+"les stations de cette taille servent souvent de comptoir de commerce, de "
+"base de ravitaillement, de base militaire avancée ou encore pour des "
+"opérations minières.\n"
+"\n"
+"Malgré leurs puissants boucliers, des attaques coordonnées par plusieurs "
+"vaisseaux peuvent les faire tomber rapidement."
 
 #: scripts/scenario_53_escape.lua:324
 msgctxt "scienceDB"
 msgid "Medium"
-msgstr ""
+msgstr "Moyenne"
 
 #: scripts/scenario_53_escape.lua:329
 msgctxt "scienceDB"
 msgid "Large Station"
-msgstr ""
+msgstr "3. Grande station"
 
 #: scripts/scenario_53_escape.lua:332
 msgctxt "scienceDB"
@@ -372,16 +394,25 @@ msgid ""
 "penetrate a large station's shields, and its hull can withstand all but the "
 "most powerful weaponry."
 msgstr ""
+"Les communautés spatiales représentent souvent des bases permanentes dans un "
+"secteur.\n"
+"Les stations de cette taille peuvent servir d'installation militaire, de "
+"plaque tournante commerciale, de colonie dans l'espace reculé, ou de petit "
+"chantier naval.\n"
+"\n"
+"Seule une attaque concentrée pourrait pénétrer les boucliers d'une grande "
+"station, et seuls les armements les plus puissants pourraient venir à bout "
+"de sa coque."
 
 #: scripts/scenario_53_escape.lua:334
 msgctxt "scienceDB"
 msgid "Large"
-msgstr ""
+msgstr "Grande"
 
 #: scripts/scenario_53_escape.lua:339
 msgctxt "scienceDB"
 msgid "Huge Station"
-msgstr ""
+msgstr "4. Immense station"
 
 #: scripts/scenario_53_escape.lua:342
 msgctxt "scienceDB"
@@ -393,21 +424,30 @@ msgid ""
 "reinforcements to arrive, even when faced with an ongoing siege or massive, "
 "perfectly coordinated assault."
 msgstr ""
+"De la taille d'une ville étendue, les stations de cette ampleur représentent "
+"le centre spatial de pouvoir d'une faction dans cette region. Elles "
+"remplissent plusieurs fonctions à la fois et représentent un investissement "
+"considérable en temps, en argent et en travail.\n"
+"\n"
+"Les énormes boucliers et la coque épaisse d'une telle station peuvent garder "
+"celle-ci intacte suffisamment longtemps jusqu'à ce que les renforts "
+"arrivent, même face à un siège continu ou à un assaut massif parfaitement "
+"coordonné."
 
 #: scripts/scenario_53_escape.lua:344
 msgctxt "scienceDB"
 msgid "Huge"
-msgstr ""
+msgstr "Immense"
 
 #: scripts/scenario_53_escape.lua:353
 msgctxt "scienceDB"
 msgid "Ships"
-msgstr ""
+msgstr "Vaisseaux"
 
 #: scripts/scenario_53_escape.lua:355
 msgctxt "scienceDB"
 msgid "Starfighter"
-msgstr ""
+msgstr "Chasseurs stellaires"
 
 #: scripts/scenario_53_escape.lua:358
 msgctxt "scienceDB"
@@ -428,6 +468,26 @@ msgid ""
 "package. Usually come without any lasers, but the largers bombers have been "
 "known to deliver nukes."
 msgstr ""
+"Les Chasseurs stellaires sont de petits vaisseaux pouvant accueillir de 1 à "
+"3 personnes. Ils sont le plus souvent utilisés dans un rôle de puissance de "
+"feu légère.\n"
+"Ils sont assez courants dans les grandes escouades et ont besoin d'une "
+"station ou d'un vaisseau de soutien à proximité, car ils ne disposent pas "
+"d'un système de survie à long terme.\n"
+"Il est rare de voir des chasseurs stellaires dotés de plus d'une section de "
+"bouclier.\n"
+"\n"
+"L'un des chasseurs stellaires les plus connus est le X-Wing.\n"
+"\n"
+"Les chasseurs stellaires se répartissent en 3 sous-classes :\n"
+"* Interceptor (Intercepteur) : rapides, faible puissance de feu, très "
+"maniables.\n"
+"* Gunship (Combattant) : équipés de plus d'armes, mais perdent en "
+"maniabilité à cause de cela.\n"
+"* Bomber (Bombardier) : le plus lent de tous les chasseurs stellaires et est "
+"généralement démuni de faisceaux laser. Néanmoins il contient du lourd dans "
+"un petit format. Les bombardiers les plus gros sont connus pour lancer des "
+"bombes nucléaires."
 
 #: scripts/scenario_53_escape.lua:360
 msgctxt "scienceDB"
@@ -457,11 +517,32 @@ msgid ""
 "hull fitted with whatever was needed. Anything from mine-layers to science "
 "vessels."
 msgstr ""
+"Les Frégates sont des vaisseaux d'une taille supérieure à celle des "
+"Chasseurs Stellaires. Ils nécessitent un équipage de 3 à 20 personnes.\n"
+"Pensez Firefly, Faucon Millenium, Esclave I (le navire de Boba Fett) dans "
+"Star Wars.\n"
+"\n"
+"Ils comportent généralement 2 sections de bouclier ou plus, mais rarement "
+"plus de 4.\n"
+"\n"
+"Cette classe de vaisseaux n'est normalement pas équipée de la téléportation "
+"ou de la vitesse lumière. Mais dans certains cas, les vaisseaux sont "
+"modifiés pour les inclure.\n"
+"\n"
+"Ils sont divisés en 3 sous-classes différentes :\n"
+"* Cruiser (Croiseur) : frégates armées, axées sur le combat. Jouent "
+"différents rôles.\n"
+"* Light transport (Transport léger) : petits transports, pouvant transporter "
+"jusqu'à 50 soldats dans des conditions spartiates ou quelques diplomates "
+"dans le confort. Selon leur rôles, ils peuvent disposer d'armes.\n"
+"* Support (Soutien) : les types de soutiens sont très variés. Il s'agit "
+"simplement d'une coque de frégate équipée de tout ce qui est nécessaire. "
+"Tout, des poseurs de mines aux vaisseaux scientifiques."
 
 #: scripts/scenario_53_escape.lua:365
 msgctxt "scienceDB"
 msgid "Corvette"
-msgstr ""
+msgstr "Corvettes"
 
 #: scripts/scenario_53_escape.lua:368
 msgctxt "scienceDB"
@@ -482,11 +563,28 @@ msgid ""
 "freighters, using specialized jumpdrives to cross large distances with large "
 "amounts of cargo."
 msgstr ""
+"Les Corvettes sont de grands vaisseaux ordinaires. Plus grands qu'une "
+"Frégate, plus petits qu'un Cuirassé.\n"
+"Ils comportent généralement 4 sections de bouclier ou plus. Naviguent avec à "
+"leur bord un équipage de 20 à 250 personnes.\n"
+"Cette classe possède généralement la téléportation ou la vitesse lumière. "
+"Mais il lui manque la maniabilité des Frégates.\n"
+"\n"
+"Ils se répartissent en 3 sous-classes différentes :\n"
+"* Destroyer : vaisseaux orientés combat. Pas de science, pas de transport. "
+"Juste la mort dans un gros emballage.\n"
+"* Support (Soutien) : rôles de soutien à grande échelle. Les transporteurs "
+"de drones entrent dans cette catégorie, ainsi que les centres de réparation "
+"mobiles.\n"
+"* Freighter (Cargo) : grande gamme de vaisseaux de transport. Les plus "
+"courants ici sont les cargos équipés de la téléportation, spécialisés pour "
+"parcourir de grandes distances avec de grandes quantités de marchandises, "
+"troupes, carburant, déchets..."
 
 #: scripts/scenario_53_escape.lua:370
 msgctxt "scienceDB"
 msgid "Dreadnought"
-msgstr ""
+msgstr "Cuirassés"
 
 #: scripts/scenario_53_escape.lua:373
 msgctxt "scienceDB"
@@ -499,26 +597,33 @@ msgid ""
 "\n"
 "Think: Stardestroyer."
 msgstr ""
+"Les Cuirassés sont les plus gros des vaisseaux.\n"
+"Ils sont si imposants et si rares que chaque type de cuirassé constitue "
+"pratiquement sa propre sous-classe.\n"
+"Ils sont généralement livrés avec 6 sections de bouclier ou plus et "
+"nécessitent un équipage de plus de 250 personnes pour fonctionner.\n"
+"\n"
+"Pensez Destroyer stellaire (Star Wars)."
 
 #: scripts/scenario_53_escape.lua:378
 msgctxt "scienceDB"
 msgid "Cruiser"
-msgstr ""
+msgstr "Croiseur"
 
 #: scripts/scenario_53_escape.lua:380
 msgctxt "scienceDB"
 msgid "Sub-class"
-msgstr ""
+msgstr "Sous-classe"
 
 #: scripts/scenario_53_escape.lua:381
 msgctxt "scienceDB"
 msgid "Move speed"
-msgstr ""
+msgstr "Vit. de mouvement"
 
 #: scripts/scenario_53_escape.lua:382
 msgctxt "scienceDB"
 msgid "Turn speed"
-msgstr ""
+msgstr "Vit. de rotation"
 
 #: scripts/scenario_53_escape.lua:386
 msgctxt "scienceDB"
@@ -531,36 +636,48 @@ msgid ""
 "requested feature by several factions once they realized that their old "
 "surplus mark I ships were used for less savoury purposes."
 msgstr ""
+"Fabriqué par : Chantiers navals Repulse.\n"
+"\n"
+"Le Croiseur, parfois connu sous le nom de Karnack MK2, est le successeur du "
+"grand succès commercial : le croiseur Karnack.\n"
+"\n"
+"Ce vaisseau a connu plusieurs améliorations notables par rapport au vaisseau "
+"d'origine, y compris un meilleur blindage, un armement légèrement amélioré "
+"et une personnalisation par les chantiers navals.\n"
+"\n"
+"Cette dernière amélioration a été la caractéristique la plus demandée par "
+"plusieurs factions une fois qu'elles ont réalisé que leurs vieux vaisseaux "
+"MK2 excédentaires étaient utilisés à des fins moins...règlementaires."
 
 #: scripts/scenario_53_escape.lua:392
 msgctxt "scienceDB"
 msgid "3.6 U/min"
-msgstr ""
+msgstr "3.6 U/min"
 
 #: scripts/scenario_53_escape.lua:393
 msgctxt "scienceDB"
 msgid "6 deg/sec"
-msgstr ""
+msgstr "6 deg/sec"
 
 #: scripts/scenario_53_escape.lua:394
 msgctxt "scienceDB"
 msgid "Beam weapon 345:90"
-msgstr ""
+msgstr "Faisc. laser 345°:90°"
 
 #: scripts/scenario_53_escape.lua:394 scripts/scenario_53_escape.lua:395
 msgctxt "scienceDB"
 msgid "Rng:1 Dmg:6 Cyc:6"
-msgstr ""
+msgstr "Portée:1  Dégâts:6  Cycle:6s"
 
 #: scripts/scenario_53_escape.lua:395
 msgctxt "scienceDB"
 msgid "Beam weapon 15:90"
-msgstr ""
+msgstr "Faisc. laser 15°:90°"
 
 #: scripts/scenario_53_escape.lua:402
 msgctxt "scienceDB"
 msgid "Mainstream"
-msgstr ""
+msgstr "Grand public"
 
 #: scripts/scenario_53_escape.lua:405
 msgctxt "scienceDB"
@@ -569,11 +686,15 @@ msgid ""
 "crews serving on the front lines or in well established areas under the "
 "protection of the Human Navy more generally."
 msgstr ""
+"Les vaisseaux Grand public sont souvent utilisés par les équipages de la FCU "
+"(Flotte Celeste Unifiée) servant sur les lignes de front ou, de manière plus "
+"générale, dans des zones bien établies sous la protection de la Marine "
+"Humaine."
 
 #: scripts/scenario_53_escape.lua:410
 msgctxt "scienceDB"
 msgid "Repulse"
-msgstr ""
+msgstr "Repulse"
 
 #: scripts/scenario_53_escape.lua:413
 msgctxt "scienceDB"
@@ -582,26 +703,30 @@ msgid ""
 "beams covering both sides and a forward and rear tube. The nukes and mines "
 "are gone"
 msgstr ""
+"Un Faucon P. Flavia avec une coque et des boucliers améliorés, la "
+"téléportation, 2 tourelles de faisceaux laser couvrant tous les côtés et 2 "
+"tubes lance-missiles : avant et arrière.\n"
+"Les missiles nucléaires (nukes) et les mines ont disparu."
 
 #: scripts/scenario_53_escape.lua:415
 msgctxt "scienceDB"
 msgid "Cruiser: Armored Transport"
-msgstr ""
+msgstr "Croiseur : transport blindé"
 
 #: scripts/scenario_53_escape.lua:419
 msgctxt "scienceDB"
 msgid "Repair Crew"
-msgstr ""
+msgstr "réparateurs"
 
 #: scripts/scenario_53_escape.lua:420
 msgctxt "scienceDB"
 msgid "Jump Range"
-msgstr ""
+msgstr "Portée de saut"
 
 #: scripts/scenario_53_escape.lua:420
 msgctxt "scienceDB"
 msgid "5 - 50 U"
-msgstr ""
+msgstr "5 - 50 u"
 
 #: scripts/scenario_53_escape.lua:421
 msgctxt "scienceDB"
@@ -611,57 +736,57 @@ msgstr "Portée des capteurs"
 #: scripts/scenario_53_escape.lua:421
 msgctxt "scienceDB"
 msgid "Long: 38 U / Short: 5 U"
-msgstr ""
+msgstr "Longue : 38u / Courte : 5u"
 
 #: scripts/scenario_53_escape.lua:422
 msgctxt "scienceDB"
 msgid "3.3 U/min"
-msgstr ""
+msgstr "3.3 u/min"
 
 #: scripts/scenario_53_escape.lua:423
 msgctxt "scienceDB"
 msgid "9 deg/sec"
-msgstr ""
+msgstr "9°/sec"
 
 #: scripts/scenario_53_escape.lua:424
 msgctxt "scienceDB"
 msgid "Beam weapon 90:200"
-msgstr ""
+msgstr "Faisc. laser 90°:200°"
 
 #: scripts/scenario_53_escape.lua:424 scripts/scenario_53_escape.lua:425
 msgctxt "scienceDB"
 msgid "Rng:1.2 Dmg:5 Cyc:6"
-msgstr ""
+msgstr "Portée:1.2  Dégâts:5  Cycle:6s"
 
 #: scripts/scenario_53_escape.lua:425
 msgctxt "scienceDB"
 msgid "Beam weapon 270:200"
-msgstr ""
+msgstr "Faisc. laser 270°:200°"
 
 #: scripts/scenario_53_escape.lua:426
 msgctxt "scienceDB"
 msgid "Tube 0"
-msgstr ""
+msgstr "Tube Avant"
 
 #: scripts/scenario_53_escape.lua:426 scripts/scenario_53_escape.lua:427
 msgctxt "scienceDB"
 msgid "20 sec"
-msgstr ""
+msgstr "20 sec"
 
 #: scripts/scenario_53_escape.lua:427
 msgctxt "scienceDB"
 msgid "Tube 180"
-msgstr ""
+msgstr "Tube Arrière"
 
 #: scripts/scenario_53_escape.lua:428
 msgctxt "scienceDB"
 msgid "Storage Homing"
-msgstr ""
+msgstr "Stockage Homing"
 
 #: scripts/scenario_53_escape.lua:429
 msgctxt "scienceDB"
 msgid "Storage HVLI"
-msgstr ""
+msgstr "Stockage HVLI"
 
 #: scripts/scenario_53_escape.lua:571
 msgctxt "scienceDescription-planet"
@@ -1501,32 +1626,35 @@ msgstr ""
 "de luxe)."
 
 #: scripts/scenario_53_escape.lua:1954
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "Report status"
 msgstr "Au rapport"
 
 #: scripts/scenario_53_escape.lua:1955
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "Hull:%s"
-msgstr "Coque : %d%%\n"
+msgstr "Coque : %s"
 
 #: scripts/scenario_53_escape.lua:1958
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid ""
 "%s\n"
 "Shield:%s"
-msgstr " Boucliers : %s (secteur %s) "
+msgstr ""
+"%s\n"
+"Boucliers : %s"
 
 #: scripts/scenario_53_escape.lua:1961
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid ""
 "%s\n"
 "Shield %s:%s"
-msgstr "Bouclier %s : %d%%\n"
+msgstr ""
+"%s\n"
+"Boucliers %s : %s"
 
 #: scripts/scenario_53_escape.lua:1966
 #, lua-format
@@ -2339,6 +2467,9 @@ msgid ""
 "The Repulse ship %s seems like it's in the best condition. You should ask "
 "the science officer to scan it again to check the state of its engines."
 msgstr ""
+"Le vaisseau Repulse %s semble être dans son état optimal. Vous devriez "
+"demander à l'officier scientifique de le scanner à nouveau pour vérifier "
+"l'état de ses moteurs."
 
 #: scripts/scenario_53_escape.lua:2865
 #, lua-format
@@ -2347,6 +2478,9 @@ msgid ""
 "The Repulse ship %s seems like it's in the best condition. You should ask "
 "the science officer to scan it again to check the state of its engines."
 msgstr ""
+"Le vaisseau Repulse %s semble être dans son état optimal. Vous devriez "
+"demander à l'officier scientifique de le scanner à nouveau pour vérifier "
+"l'état de ses moteurs."
 
 #: scripts/scenario_53_escape.lua:2870
 msgctxt "airTimer-tabScience&Eng&Eng+&Ops"
@@ -2708,13 +2842,13 @@ msgstr "[%s] Je vais encore vous capturer et vous remettre en prison."
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] I will hunt you down and destroy you like vermin."
-msgstr ""
+msgstr "[%s] Je vais vous traquer et vous détruire comme de la vermine."
 
 #: scripts/scenario_53_escape.lua:3382
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] Slow down, I promise not to destroy you immediately."
-msgstr ""
+msgstr "[%s] Ralentissez, je promets de ne pas vous détruire immédiatement."
 
 #: scripts/scenario_53_escape.lua:3397
 msgctxt "Boris-incCall"
@@ -2744,6 +2878,8 @@ msgctxt "Boris-incCall"
 msgid ""
 "You must pay for the ship you stole from Boris Junk Yard... with your life."
 msgstr ""
+"Vous devez payer le vaisseau que vous avez volé à la casse Boris… Le payer "
+"de votre vie."
 
 #: scripts/scenario_53_escape.lua:3416
 #, lua-format
@@ -2770,7 +2906,7 @@ msgstr "[%s] J'ai des tonnes de vaisseaux."
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] This is merely a temporary setback."
-msgstr ""
+msgstr "[%s] Il s'agit simplement d'un revers temporaire."
 
 #: scripts/scenario_53_escape.lua:3438
 msgctxt "crewRepair-shipLog"
@@ -2800,6 +2936,9 @@ msgid ""
 "Congratulations! You escaped the Kraylor clutches and returned all your "
 "gathered data on the Kraylor to the Human Navy."
 msgstr ""
+"Toutes nos félicitations !\n"
+"Vous avez su échapper aux griffes des Kraylors et transmis avec succès les "
+"données Kraylors à la Marine Humaine."
 
 #: scripts/scenario_53_escape.lua:3796
 msgctxt "ZoneLabelDescription-junk"
