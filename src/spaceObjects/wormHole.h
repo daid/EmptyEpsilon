@@ -12,10 +12,6 @@ private:
     float update_delta = 0.0f;
     P<PathPlannerManager>  pathPlanner;
 
-    int radar_visual;
-    static const int cloud_count = 5;
-    NebulaCloud clouds[cloud_count];
-
     ScriptSimpleCallback on_teleportation;
 
 public:
@@ -33,9 +29,6 @@ public:
     void onTeleportation(ScriptSimpleCallback callback);
 
     virtual string getExportLine() override { return "WormHole():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + "):setTargetPosition(" + string(target_position.x, 0) + ", " + string(target_position.y, 0) + ")"; }
-
-protected:
-    glm::mat4 getModelMatrix() const override;
 };
 
 #endif//WORM_HOLE_H
