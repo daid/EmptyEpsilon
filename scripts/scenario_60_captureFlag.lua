@@ -5192,7 +5192,7 @@ function resupplyStation()
         return false
     end
     if comms_source:isDocked(comms_target) then
-		setCommsMessage("Greetings")
+		setCommsMessage(_("station-comms", "Greetings"))
 		missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 		missilePresence = 0
 		for _, missile_type in ipairs(missile_types) do
@@ -6001,9 +6001,9 @@ end
 function setP1FlagButton()
 	if p1FlagButton == nil and not p1FlagDrop then
 		p1FlagButton = "p1FlagButton"
-		p1:addCustomButton("Weapons", p1FlagButton, _("-buttonWeapons", "Drop flag"), p1DropFlag)
+		p1:addCustomButton("Weapons", p1FlagButton, _("flag-buttonWeapons", "Drop flag"), p1DropFlag)
 		p1FlagButtonT = "p1FlagButtonT"
-		p1:addCustomButton("Tactical", p1FlagButtonT, _("-buttonTactical", "Drop flag"), p1DropFlag)
+		p1:addCustomButton("Tactical", p1FlagButtonT, _("flag-buttonTactical", "Drop flag"), p1DropFlag)
 	end
 end
 function removeP1FlagButton()
@@ -6017,9 +6017,9 @@ end
 function setP2FlagButton()
 	if p2FlagButton == nil and not p2FlagDrop then
 		p2FlagButton = "p2FlagButton"
-		p2:addCustomButton("Weapons", p2FlagButton, _("-buttonWeapons", "Drop flag"), p2DropFlag)
+		p2:addCustomButton("Weapons", p2FlagButton, _("flag-buttonWeapons", "Drop flag"), p2DropFlag)
 		p2FlagButtonT = "p2FlagButtonT"
-		p2:addCustomButton("Tactical", p2FlagButtonT, _("-buttonTactical", "Drop flag"), p2DropFlag)
+		p2:addCustomButton("Tactical", p2FlagButtonT, _("flag-buttonTactical", "Drop flag"), p2DropFlag)
 	end
 end
 function removeP2FlagButton()
@@ -6396,7 +6396,7 @@ function deployDronesForPlayer(p,playerIndex,droneNumber)
 	end
 	local squadIndex = p.squadCount + 1
 	local pName = p:getCallSign()
-	local squadName = string.format("%s-Sq%i",pName,squadIndex)
+	local squadName = string.format(_("callsign-squad", "%s-Sq%i"),pName,squadIndex)
 	all_squad_count = all_squad_count + 1
 	for i=1,droneNumber do
 		local vx, vy = vectorFromAngle(360/droneNumber*i,800)
@@ -6445,9 +6445,9 @@ function deployDronesForPlayer(p,playerIndex,droneNumber)
 		end
 	end
 	if droneNumber > 1 then
-		p:addToShipLog(string.format("Deployed %i drones as squadron %s",droneNumber,squadName),"White")
+		p:addToShipLog(string.format(_("drones-shipLog", "Deployed %i drones as squadron %s"),droneNumber,squadName),"White")
 	else
-		p:addToShipLog(string.format("Deployed %i drone as squadron %s",droneNumber,squadName),"White")
+		p:addToShipLog(string.format(_("drones-shipLog", "Deployed %i drone as squadron %s"),droneNumber,squadName),"White")
 	end
 --	updateDroneAvailableCount(p)
 end
@@ -6455,7 +6455,7 @@ function droneDestructionManagement(destroyed_drone, attacker_ship)
 	local drone_name = destroyed_drone:getCallSign()
 	local squad_name = destroyed_drone.squadName
 	local attacker_name = attacker_ship:getCallSign()
-	local notice = string.format("  WHACK!  Drone %s in squadron %s has been destroyed by %s!",
+	local notice = string.format(_("drones-", "  WHACK!  Drone %s in squadron %s has been destroyed by %s!"),
 		drone_name,
 		squad_name,
 		attacker_name)
@@ -6691,7 +6691,7 @@ function friendlyComms(comms_data)
 					else
 						setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 						for n=1,comms_source:getWaypointCount() do
-							addCommsReply("Go to WP" .. n, function()
+							addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),n), function()
 								for _, drone in pairs(comms_source.droneSquads[squadName]) do
 									if drone ~= nil and drone:isValid() then
 										drone:orderFlyTowards(comms_source:getWaypoint(n))
@@ -7530,30 +7530,30 @@ function manageHuntPhaseMechanics()
 							if p.flag then
 								if p:hasPlayerAtPosition("Helms") then
 									p.flag_badge = "flag_badge"
-									p:addCustomInfo("Helms",p.flag_badge,_("-tabHelms", "Human Flag Aboard"))
+									p:addCustomInfo("Helms",p.flag_badge,_("flag-tabHelms", "Human Flag Aboard"))
 								end
 								if p:hasPlayerAtPosition("Tactical") then
 									p.flag_badge_tac = "flag_badge_tac"
-									p:addCustomInfo("Tactical",p.flag_badge_tac,_("-tabTactical", "Human Flag Aboard"))
+									p:addCustomInfo("Tactical",p.flag_badge_tac,_("flag-tabTactical", "Human Flag Aboard"))
 								end
 							end
 							p1Flag:destroy()
-							p:addToShipLog("You picked up the Human Navy flag","Green")
+							p:addToShipLog(_("flag-shipLog", "You picked up the Human Navy flag"),"Green")
 							if flag_reveal then
 								if flag_grab < 2 then
 									for i,cp in ipairs(getActivePlayerShips()) do
 										if cp ~= p then
 											if p:getFaction() == "Human Navy" then
 												if flag_grab < 1 then
-													cp:addToShipLog(string.format("Kraylor ship %s picked up your flag",p:getCallSign()),"Magenta")
+													cp:addToShipLog(string.format(_("flag-shipLog", "Kraylor ship %s picked up your flag"),p:getCallSign()),"Magenta")
 												else
-													cp:addToShipLog("The Kraylor picked up your flag","Magenta")
+													cp:addToShipLog(_("flag-shipLog", "The Kraylor picked up your flag"),"Magenta")
 												end
 											elseif p:getFaction() == "Kraylor" then
 												if flag_grab < 1 then
-													cp:addToShipLog(string.format("%s picked up the Human Navy Flag",p:getCallSign()),"Magenta")
+													cp:addToShipLog(string.format(_("flag-shipLog", "%s picked up the Human Navy Flag"),p:getCallSign()),"Magenta")
 												else
-													cp:addToShipLog("Your team picked up the Human Navy flag","Magenta")
+													cp:addToShipLog(_("flag-shipLog", "Your team picked up the Human Navy flag"),"Magenta")
 												end
 											end
 										end
@@ -7607,15 +7607,15 @@ function manageHuntPhaseMechanics()
 													if cp ~= p then
 														if p:getFaction() == "Human Navy" then
 															if flag_drop < 1 then
-																cp:addToShipLog(string.format("Kraylor ship %s dropped your flag",p:getCallSign()),"Magenta")
+																cp:addToShipLog(string.format(_("flag-shipLog", "Kraylor ship %s dropped your flag"),p:getCallSign()),"Magenta")
 															else
-																cp:addToShipLog("The Kraylor dropped your flag","Magenta")
+																cp:addToShipLog(_("flag-shipLog", "The Kraylor dropped your flag"),"Magenta")
 															end
 														elseif p:getFaction() == "Kraylor" then
 															if flag_drop < 1 then
-																cp:addToShipLog(string.format("%s dropped the Human Navy Flag",p:getCallSign()),"Magenta")
+																cp:addToShipLog(string.format(_("flag-shipLog", "%s dropped the Human Navy Flag"),p:getCallSign()),"Magenta")
 															else
-																cp:addToShipLog("Your team dropped the Human Navy flag","Magenta")
+																cp:addToShipLog(_("flag-shipLog", "Your team dropped the Human Navy flag"),"Magenta")
 															end
 														end
 													end
@@ -7650,30 +7650,30 @@ function manageHuntPhaseMechanics()
 							if p.flag then
 								if p:hasPlayerAtPosition("Helms") then
 									p.flag_badge = "flag_badge"
-									p:addCustomInfo("Helms",p.flag_badge,_("-tabHelms", "Kraylor Flag Aboard"))
+									p:addCustomInfo("Helms",p.flag_badge,_("flag-tabHelms", "Kraylor Flag Aboard"))
 								end
 								if p:hasPlayerAtPosition("Tactical") then
 									p.flag_badge_tac = "flag_badge_tac"
-									p:addCustomInfo("Tactical",p.flag_badge_tac,_("-tabTactical", "Kraylor Flag Aboard"))
+									p:addCustomInfo("Tactical",p.flag_badge_tac,_("flag-tabTactical", "Kraylor Flag Aboard"))
 								end
 							end
 							p2Flag:destroy()
-							p:addToShipLog("You picked up the Kraylor flag","Green")
+							p:addToShipLog(_("flag-shipLog", "You picked up the Kraylor flag"),"Green")
 							if flag_reveal then
 								if flag_grab < 2 then
 									for i,cp in ipairs(getActivePlayerShips()) do
 										if cp ~= p then
 											if p:getFaction() == "Kraylor" then
 												if flag_grab < 1 then
-													cp:addToShipLog(string.format("Human Navy ship %s picked up your flag",p:getCallSign()),"Magenta")
+													cp:addToShipLog(string.format(_("flag-shipLog", "Human Navy ship %s picked up your flag"),p:getCallSign()),"Magenta")
 												else
-													cp:addToShipLog("The Human Navy picked up your flag","Magenta")
+													cp:addToShipLog(_("flag-shipLog", "The Human Navy picked up your flag"),"Magenta")
 												end
 											elseif p:getFaction() == "Human Navy" then
 												if flag_grab < 1 then
-													cp:addToShipLog(string.format("%s picked up the Kraylor Flag",p:getCallSign()),"Magenta")
+													cp:addToShipLog(string.format(_("flag-shipLog", "%s picked up the Kraylor Flag"),p:getCallSign()),"Magenta")
 												else
-													cp:addToShipLog("Your team picked up the Kraylor flag","Magenta")
+													cp:addToShipLog(_("flag-shipLog", "Your team picked up the Kraylor flag"),"Magenta")
 												end
 											end
 										end
