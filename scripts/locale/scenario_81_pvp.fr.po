@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -275,7 +275,7 @@ msgstr "Ces mines sont à vous."
 #: scripts/scenario_81_pvp.lua:271
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes?"
-msgstr "Avez-vous des missiles nucléaires nukes ?"
+msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ?"
 
 #: scripts/scenario_81_pvp.lua:272
 msgctxt "ammo-comms"
