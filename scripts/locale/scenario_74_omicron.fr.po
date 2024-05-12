@@ -1173,7 +1173,7 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_74_omicron.lua:3599
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Des missiles homing de rechange pour nous ? ("
+msgstr "Auriez-vous des homing missiles pour nous ? ("
 
 #: scripts/scenario_74_omicron.lua:3601
 msgctxt "ammo-comms"
@@ -1531,14 +1531,14 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles à la vente : quantité, coût en "
-"réputation :\n"
+"Marchandises ou composants disponibles à la vente : (quantité, coût en "
+"réputation)\n"
 
 #: scripts/scenario_74_omicron.lua:3859
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s: %i, %i\n"
+msgstr "     %s : %i, %i\n"
 
 #: scripts/scenario_74_omicron.lua:3862
 msgctxt "trade-comms"
@@ -1741,7 +1741,7 @@ msgstr "Nous avons une nouvelle recrue à vous proposer au poste de réparateur.
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation."
+msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
 
 #: scripts/scenario_74_omicron.lua:4073
 msgctxt "trade-comms"
@@ -2314,7 +2314,7 @@ msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "Tell me about %s"
-msgstr "Parlez-moi de %s."
+msgstr "Parlez-moi de %s"
 
 #: scripts/scenario_74_omicron.lua:4675
 #, lua-format

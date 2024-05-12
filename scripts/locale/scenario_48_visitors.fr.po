@@ -52,7 +52,7 @@ msgid ""
 "Version 2"
 msgstr ""
 "\n"
-"EN COURS DE TRADUCTION 39%\n"
+"EN COURS DE TRADUCTION 42%\n"
 "\n"
 "Get rid of the unwanted visitors. Other missions follow. Check friendly "
 "stations for mission orders. Dispatch office provides new missions. Continue "
@@ -99,7 +99,7 @@ msgstr "Facile"
 
 msgctxt "Enemies"
 msgid "Enemies are weaker or fewer than normal"
-msgstr ""
+msgstr "Ennemis plus faibles ou moins nombreux que la normale."
 
 msgctxt "Enemies"
 msgid "Normal"
@@ -107,7 +107,7 @@ msgstr "Normale"
 
 msgctxt "Enemies"
 msgid "Enemies are normal strength"
-msgstr ""
+msgstr "Difficulté normale."
 
 msgctxt "Enemies"
 msgid "Hard"
@@ -115,7 +115,7 @@ msgstr "Difficile"
 
 msgctxt "Enemies"
 msgid "Enemies are stronger or more numerous than normal"
-msgstr ""
+msgstr "Ennemis plus forts ou plus nombreux que la normale."
 
 msgctxt "Enemies"
 msgid "Extreme"
@@ -1149,37 +1149,37 @@ msgstr "Nous avons besoin de nous réapprovisionner en munitions"
 #: scripts/scenario_48_visitors.lua:3125
 msgctxt "ammo-comms"
 msgid "What type of ordnance do you need?"
-msgstr ""
+msgstr "De quel type de munitions avez-vous besoin ?"
 
 #: scripts/scenario_48_visitors.lua:3128
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes?"
-msgstr "Avez-vous des missiles nucléaires nukes ?"
+msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ?"
 
 #: scripts/scenario_48_visitors.lua:3129
 msgctxt "ammo-comms"
 msgid "We really need some nukes."
-msgstr ""
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke)."
 
 #: scripts/scenario_48_visitors.lua:3130
 msgctxt "ammo-comms"
 msgid "Can you restock our nuclear missiles?"
-msgstr ""
+msgstr "Pouvez-vous réapprovisionner nos missiles nucléaires ?"
 
 #: scripts/scenario_48_visitors.lua:3133
 msgctxt "ammo-comms"
 msgid "Please restock our EMP missiles."
-msgstr ""
+msgstr "Veuillez réapprovisionner nos missiles EMP."
 
 #: scripts/scenario_48_visitors.lua:3134
 msgctxt "ammo-comms"
 msgid "Got any EMPs?"
-msgstr ""
+msgstr "Avez-vous des EMP ?"
 
 #: scripts/scenario_48_visitors.lua:3135
 msgctxt "ammo-comms"
 msgid "We need Electro-Magnetic Pulse missiles."
-msgstr ""
+msgstr "Nous avons besoin de missiles EMP."
 
 #: scripts/scenario_48_visitors.lua:3138
 msgctxt "ammo-comms"
@@ -1189,17 +1189,17 @@ msgstr "Auriez-vous des homing missiles pour nous ?"
 #: scripts/scenario_48_visitors.lua:3139
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles?"
-msgstr ""
+msgstr "Avez-vous des missiles homing supplémentaires ?"
 
 #: scripts/scenario_48_visitors.lua:3140
 msgctxt "ammo-comms"
 msgid "Please replenish our homing missiles."
-msgstr ""
+msgstr "Merci de réapprovisionner nos missiles à tête chercheuse."
 
 #: scripts/scenario_48_visitors.lua:3143
 msgctxt "ammo-comms"
 msgid "We could use some mines."
-msgstr ""
+msgstr "Nous pourrions avoir besoin de quelques mines."
 
 #: scripts/scenario_48_visitors.lua:3144
 msgctxt "ammo-comms"
@@ -1209,7 +1209,7 @@ msgstr "Concernant les mines ?"
 #: scripts/scenario_48_visitors.lua:3145
 msgctxt "ammo-comms"
 msgid "Got mines for us?"
-msgstr ""
+msgstr "Avez-vous des mines à nous fournir ?"
 
 #: scripts/scenario_48_visitors.lua:3148
 msgctxt "ammo-comms"
@@ -1219,12 +1219,12 @@ msgstr "Concernant les HVLI ?"
 #: scripts/scenario_48_visitors.lua:3149
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI?"
-msgstr ""
+msgstr "Pourriez-vous fournir des HVLI ?"
 
 #: scripts/scenario_48_visitors.lua:3150
 msgctxt "ammo-comms"
 msgid "We need High Velocity Lead Impactors."
-msgstr ""
+msgstr "Nous avons besoin de HVLI. En avez-vous ?"
 
 #: scripts/scenario_48_visitors.lua:3155
 #, lua-format
@@ -1308,6 +1308,8 @@ msgid ""
 "%s\n"
 "We don't have ordnance for you."
 msgstr ""
+"%s\n"
+"Nous n'avons pas de munitions pour vous."
 
 #: scripts/scenario_48_visitors.lua:3168 scripts/scenario_48_visitors.lua:3240
 #: scripts/scenario_48_visitors.lua:3312
@@ -3272,17 +3274,17 @@ msgstr "4. Immense station"
 #: scripts/scenario_48_visitors.lua:5109
 msgctxt "scienceDB"
 msgid "Small"
-msgstr ""
+msgstr "Petite"
 
 #: scripts/scenario_48_visitors.lua:5116
 msgctxt "scienceDB"
 msgid "Medium"
-msgstr ""
+msgstr "Moyenne"
 
 #: scripts/scenario_48_visitors.lua:5123
 msgctxt "scienceDB"
 msgid "Large"
-msgstr ""
+msgstr "Grande"
 
 #: scripts/scenario_48_visitors.lua:5130
 msgctxt "scienceDB"
@@ -3353,7 +3355,7 @@ msgstr ""
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, %s"
-msgstr ""
+msgstr "%s, %s"
 
 #: scripts/scenario_48_visitors.lua:5204
 msgctxt "scienceDB"

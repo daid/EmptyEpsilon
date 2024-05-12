@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -1811,14 +1811,14 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles à la vente : quantité, coût en "
-"réputation :\n"
+"Marchandises ou composants disponibles à la vente : (quantité, coût en "
+"réputation)\n"
 
 #: scripts/scenario_57_shoreline.lua:7367
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s: %i, %i\n"
+msgstr "     %s : %i, %i\n"
 
 #: scripts/scenario_57_shoreline.lua:7370
 msgctxt "trade-comms"

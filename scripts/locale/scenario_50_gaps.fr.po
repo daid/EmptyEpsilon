@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -1787,7 +1787,7 @@ msgstr "Que montrent les capteurs pour la brèche ouest ?"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation"
+msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
 
 #: scripts/scenario_50_gaps.lua:2473 scripts/scenario_50_gaps.lua:2489
 #: scripts/scenario_50_gaps.lua:3445

@@ -860,7 +860,7 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_32_devour.lua:2307
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Des missiles homing de rechange pour nous ? ("
+msgstr "Auriez-vous des homing missiles pour nous ? ("
 
 #: scripts/scenario_32_devour.lua:2309
 msgctxt "ammo-comms"
@@ -1145,7 +1145,7 @@ msgstr "Booster la téléportation (10 rép)"
 #: scripts/scenario_32_devour.lua:3034 scripts/scenario_32_devour.lua:3118
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
-msgstr "Vous devez rester amarré pour cette action."
+msgstr "Vous devez rester amarré à la station pour cette action."
 
 #: scripts/scenario_32_devour.lua:2419
 #, lua-format
@@ -1707,8 +1707,8 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles à la vente : quantité, coût en "
-"réputation :\n"
+"Marchandises ou composants disponibles à la vente : (quantité, coût en "
+"réputation)\n"
 
 #: scripts/scenario_32_devour.lua:2711
 #, lua-format
@@ -1917,7 +1917,7 @@ msgstr "Nous avons une nouvelle recrue à vous proposer au poste de réparateur.
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation."
+msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
 
 #: scripts/scenario_32_devour.lua:2950
 msgctxt "trade-comms"
@@ -2450,7 +2450,7 @@ msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "Tell me about %s"
-msgstr "Parlez-moi de %s."
+msgstr "Parlez-moi de %s"
 
 #: scripts/scenario_32_devour.lua:3549
 #, lua-format
