@@ -1115,8 +1115,8 @@ function plotTeamDemarcationLine()
 		buoy_beam_timer = buoy_beam_interval
 		buoy_beam_count = 0
 		for i=1,80 do
-			table.insert(boundary_items,Artifact():allowPickup(false):setPosition(0,i*2500):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(100):setCallSign("Marker Buoy"):setDescriptions(_("scienceDescription-artifact", "Territory boundary marker"),_("scienceDescription-artifact", "A buoy placed on the line marking the boundary between Human and Kraylor territory")):setScanningParameters(1,1):setRadarSignatureInfo(.5,1,0))
-			table.insert(boundary_items,Artifact():allowPickup(false):setPosition(0,i*-2500):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(100):setCallSign("Marker Buoy"):setDescriptions(_("scienceDescription-artifact", "Territory boundary marker"),_("scienceDescription-artifact", "A buoy placed on the line marking the boundary between Human and Kraylor territory")):setScanningParameters(1,1):setRadarSignatureInfo(0,.5,1))
+			table.insert(boundary_items,Artifact():allowPickup(false):setPosition(0,i*2500):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(100):setCallSign("Marker Buoy"):setDescriptions(_("scienceDescription-buoy", "Territory boundary marker"),_("scienceDescription-buoy", "A buoy placed on the line marking the boundary between Human and Kraylor territory")):setScanningParameters(1,1):setRadarSignatureInfo(.5,1,0))
+			table.insert(boundary_items,Artifact():allowPickup(false):setPosition(0,i*-2500):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(100):setCallSign("Marker Buoy"):setDescriptions(_("scienceDescription-buoy", "Territory boundary marker"),_("scienceDescription-buoy", "A buoy placed on the line marking the boundary between Human and Kraylor territory")):setScanningParameters(1,1):setRadarSignatureInfo(0,.5,1))
 		end
 	end
 end
@@ -1186,7 +1186,7 @@ function createBoundaryMarker(position_x, position_y)
 			:setPlanetSurfaceTexture("planets/star-1.png")
 			:setPlanetAtmosphereColor(1.0,1.0,1.0)
 	elseif boundary_marker == "buoys" then
-		temp_marker = Artifact():allowPickup(false):setPosition(position_x,position_y):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(50):setDescriptions(_("scienceDescription-artifact", "Flag hiding territory boundary marker"), _("scienceDescription-artifact", "A temporary buoy placed on the edge of the territory where a flag or decoy may be hidden")):setScanningParameters(1,1):setRadarSignatureInfo(.3,.5,0)
+		temp_marker = Artifact():allowPickup(false):setPosition(position_x,position_y):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(50):setDescriptions(_("scienceDescription-flag", "Flag hiding territory boundary marker"), _("scienceDescription-flag", "A temporary buoy placed on the edge of the territory where a flag or decoy may be hidden")):setScanningParameters(1,1):setRadarSignatureInfo(.3,.5,0)
 	end
 	return temp_marker
 end
@@ -2131,7 +2131,7 @@ function setPlayer(pobj,playerIndex)
 			end
 			local squadIndex = p.squadCount + 1
 			local pName = p:getCallSign()
-			local squadName = string.format("%s-Sq%i",pName,squadIndex)
+			local squadName = string.format(_("callsign-squad", "%s-Sq%i"),pName,squadIndex)
 			all_squad_count = all_squad_count + 1
 			for i=1,droneNumber do
 				local vx, vy = vectorFromAngle(360/droneNumber*i,800)
@@ -2194,20 +2194,20 @@ function setPlayer(pobj,playerIndex)
 		end
 		pobj.drone_hull_status = function(pidx)
 			local player_ship = getPlayerShip(pidx)
-			local drone_report_message = "> > > > > > > > Drone Hull Status Report: < < < < < < < <"
+			local drone_report_message = _("drones-", "> > > > > > > > Drone Hull Status Report: < < < < < < < <")
 			--drone_report_message = drone_report_message .. "\n    Current number of stored drones:  " .. player_ship.dronePool
 			local player_drone_squad_count = 0
 			local active_drone_count = 0
 			if player_ship.droneSquads ~= nil then
 				for squadName, droneList in pairs(player_ship.droneSquads) do
 					player_drone_squad_count = player_drone_squad_count + 1
-					drone_report_message = drone_report_message .. "\n        Drone Squad: " .. squadName
+					drone_report_message = drone_report_message .. _("drones-", "\n        Drone Squad: ") .. squadName
 					local active_drone_in_squad_count = 0
 					local squad_report = ""
 					for i=1,#droneList do
 						local drone = droneList[i]
 						if drone:isValid() then
-							squad_report = squad_report .. string.format("\n            Drone %i (%s) Hull: %i/%i",
+							squad_report = squad_report .. string.format(_("drones-", "\n            Drone %i (%s) Hull: %i/%i"),
 								i,
 								drone:getCallSign(),
 								math.floor(drone:getHull()),
@@ -2215,18 +2215,18 @@ function setPlayer(pobj,playerIndex)
 							active_drone_count = active_drone_count + 1
 							active_drone_in_squad_count = active_drone_in_squad_count + 1
 						else
-							squad_report = squad_report .. string.format("\n            Drone %i --Destroyed--",i)
+							squad_report = squad_report .. string.format(_("drones-", "\n            Drone %i --Destroyed--"),i)
 						end
 					end
 					if active_drone_in_squad_count > 0 then
 						drone_report_message = drone_report_message .. squad_report
 					else
-						drone_report_message = drone_report_message .. " --Destroyed--"
+						drone_report_message = drone_report_message .. _("drones-", " --Destroyed--")
 					end
 				end
 			end
-			drone_report_message = drone_report_message .. "\n    Number of deployed drone squadrons: " .. player_drone_squad_count
-			drone_report_message = drone_report_message .. "\n    Current number of live deployed drones: " .. active_drone_count
+			drone_report_message = drone_report_message .. _("drones-msgEngineer&Engineer+", "\n    Number of deployed drone squadrons: ") .. player_drone_squad_count
+			drone_report_message = drone_report_message .. _("drones-msgEngineer&Engineer+", "\n    Current number of live deployed drones: ") .. active_drone_count
 			local p_name = player_ship:getCallSign()
 			if player_ship:hasPlayerAtPosition("Engineering") then
 				player_ship:addCustomMessage("Engineering",string.format("%sengineeringdronesstatus",p_name),drone_report_message)
@@ -2237,21 +2237,21 @@ function setPlayer(pobj,playerIndex)
 		end
 		pobj.drone_locations = function(pidx)
 			local player_ship = getPlayerShip(pidx)
-			local drone_report_message = "> > > > > > > > Drone Location Report: < < < < < < < <"
+			local drone_report_message = _("drones-", "> > > > > > > > Drone Location Report: < < < < < < < <")
 			--drone_report_message = drone_report_message .. "\n    Current number of stored drones:  " .. player_ship.dronePool
 			local player_drone_squad_count = 0
 			local active_drone_count = 0
 			if player_ship.droneSquads ~= nil then
 				for squadName, droneList in pairs(player_ship.droneSquads) do
 					player_drone_squad_count = player_drone_squad_count + 1
-					drone_report_message = drone_report_message .. "\n        Drone Squad: " .. squadName
+					drone_report_message = drone_report_message .. _("drones-", "\n        Drone Squad: ") .. squadName
 					local active_drone_in_squad_count = 0
 					local squad_report = ""
 					for i=1,#droneList do
 						local drone = droneList[i]
 						if drone:isValid() then
 							local drone_x, drone_y = drone:getPosition()
-							squad_report = squad_report .. string.format("\n            Drone %i (%s) Sector %s, X: %7.0f, Y: %7.0f",
+							squad_report = squad_report .. string.format(_("drones-", "\n            Drone %i (%s) Sector %s, X: %7.0f, Y: %7.0f"),
 								i,
 								drone:getCallSign(),
 								drone:getSectorName(),
@@ -2260,18 +2260,18 @@ function setPlayer(pobj,playerIndex)
 							active_drone_count = active_drone_count + 1
 							active_drone_in_squad_count = active_drone_in_squad_count + 1
 						else
-							squad_report = squad_report .. string.format("\n            Drone %i --Destroyed--",i)
+							squad_report = squad_report .. string.format(_("drones-", "\n            Drone %i --Destroyed--"),i)
 						end
 					end
 					if active_drone_in_squad_count > 0 then
 						drone_report_message = drone_report_message .. squad_report
 					else
-						drone_report_message = drone_report_message .. " --Destroyed--"
+						drone_report_message = drone_report_message .. _("drones-", " --Destroyed--")
 					end
 				end
 			end
-			drone_report_message = drone_report_message .. "\n    Number of deployed drone squadrons: " .. player_drone_squad_count
-			drone_report_message = drone_report_message .. "\n    Current number of live deployed drones: " .. active_drone_count
+			drone_report_message = drone_report_message .. _("drones-msgHelms&Tactical", "\n    Number of deployed drone squadrons: ") .. player_drone_squad_count
+			drone_report_message = drone_report_message .. _("drones-msgHelms&Tactical", "\n    Current number of live deployed drones: ") .. active_drone_count
 			local p_name = player_ship:getCallSign()
 			if player_ship:hasPlayerAtPosition("Helms") then
 				player_ship:addCustomMessage("Helms",string.format("%shelmdroneslocation",p_name),drone_report_message)
@@ -2285,43 +2285,43 @@ function setPlayer(pobj,playerIndex)
 		if pobj.droneButton == nil then
 			pobj.droneButton = true
 			pobj.dronePool = uniform_drone_carrying_capacity
-			pobj:addCustomButton("Weapons",string.format("%sdeploy5weapons",pName),_("-buttonWeapons", "5 Drones"),function()
+			pobj:addCustomButton("Weapons",string.format("%sdeploy5weapons",pName),_("drones-buttonWeapons", "5 Drones"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.deploy_drone(playerIndex,5)
 			end)
-			pobj:addCustomButton("Tactical",string.format("%sdeploy5tactical",pName),_("-buttonTactical", "5 Drones"),function()
+			pobj:addCustomButton("Tactical",string.format("%sdeploy5tactical",pName),_("drones-buttonTactical", "5 Drones"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.deploy_drone(playerIndex,5)
 			end)
-			pobj:addCustomButton("Weapons",string.format("%sdeploy10weapons",pName),_("-buttonWeapons", "10 Drones"),function()
+			pobj:addCustomButton("Weapons",string.format("%sdeploy10weapons",pName),_("drones-buttonWeapons", "10 Drones"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.deploy_drone(playerIndex,10)
 			end)
-			pobj:addCustomButton("Tactical",string.format("%sdeploy10tactical",pName),_("-buttonTactical", "10 Drones"),function()
+			pobj:addCustomButton("Tactical",string.format("%sdeploy10tactical",pName),_("drones-buttonTactical", "10 Drones"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.deploy_drone(playerIndex,10)
 			end)
-			pobj:addCustomButton("Weapons",string.format("%scountWeapons",pName),_("-buttonWeapons", "Count Drones"),function()
+			pobj:addCustomButton("Weapons",string.format("%scountWeapons",pName),_("drones-buttonWeapons", "Count Drones"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.count_drones(playerIndex)
 			end)
-			pobj:addCustomButton("Tactical",string.format("%scountTactical",pName),_("-buttonTactical", "Count Drones"),function()
+			pobj:addCustomButton("Tactical",string.format("%scountTactical",pName),_("drones-buttonTactical", "Count Drones"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.count_drones(playerIndex)
 			end)
-			pobj:addCustomButton("Engineering",string.format("%shullEngineering",pName),_("-buttonEngineer", "Drone Hulls"),function()
+			pobj:addCustomButton("Engineering",string.format("%shullEngineering",pName),_("drones-buttonEngineer", "Drone Hulls"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.drone_hull_status(playerIndex)
 			end)
-			pobj:addCustomButton("Engineering+",string.format("%shullEngineeringPlus",pName),_("-buttonEngineer+", "Drone Hulls"),function()
+			pobj:addCustomButton("Engineering+",string.format("%shullEngineeringPlus",pName),_("drones-buttonEngineer+", "Drone Hulls"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.drone_hull_status(playerIndex)
 			end)
-			pobj:addCustomButton("Helms",string.format("%slocationHelm",pName),_("-buttonHelms", "Drone Locations"),function()
+			pobj:addCustomButton("Helms",string.format("%slocationHelm",pName),_("drones-buttonHelms", "Drone Locations"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.drone_locations(playerIndex)
 			end)
-			pobj:addCustomButton("Tactical",string.format("%slocationTactical",pName),_("-buttonTactical", "Drone Locations"),function()
+			pobj:addCustomButton("Tactical",string.format("%slocationTactical",pName),_("drones-buttonTactical", "Drone Locations"),function()
 				string.format("")	--global context for SeriousProton
 				pobj.drone_locations(playerIndex)
 			end)
@@ -2375,16 +2375,16 @@ function setPlayer(pobj,playerIndex)
 			if my_faction == "Kraylor" then
 				p1Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
 				table.insert(human_flags,p1Flag)
-				p1Flag:setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Human Navy Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+				p1Flag:setDescriptions(_("scienceDescription-flag", "Flag"),_("scienceDescription-flag", "Human Navy Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 				if flag_reveal then
 					if flag_drop < 2 then
 						if flag_drop < 1 then
-							globalMessage(string.format("%s dropped Human Navy flag",self:getCallSign()))
+							globalMessage(string.format(_("flag-msgMainscreen", "%s dropped Human Navy flag"),self:getCallSign()))
 						else
-							globalMessage("Human Navy flag dropped")
+							globalMessage(_("flag-msgMainscreen", "Human Navy flag dropped"))
 						end
 					else
-						globalMessage("Flag dropped")
+						globalMessage(_("flag-msgMainscreen", "Flag dropped"))
 					end
 				end
 				if not flag_rescan then
@@ -2393,16 +2393,16 @@ function setPlayer(pobj,playerIndex)
 			elseif my_faction == "Human Navy" then
 				p2Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
 				table.insert(kraylor_flags,p2Flag)
-				p2Flag:setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Kraylor Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+				p2Flag:setDescriptions(_("scienceDescription-flag", "Flag"),_("scienceDescription-flag", "Kraylor Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 				if flag_reveal then
 					if flag_drop < 2 then
 						if flag_drop < 1 then
-							globalMessage(string.format("%s dropped Kraylor flag",self:getCallSign()))
+							globalMessage(string.format(_("flag-msgMainscreen", "%s dropped Kraylor flag"),self:getCallSign()))
 						else
-							globalMessage("Kraylor flag dropped")
+							globalMessage(_("flag-msgMainscreen", "Kraylor flag dropped"))
 						end
 					else
-						globalMessage("Flag dropped")
+						globalMessage(_("flag-msgMainscreen", "Flag dropped"))
 					end
 				end
 				if not flag_rescan then
@@ -7338,7 +7338,7 @@ function transitionFromPreparationToHunt()
 		if p1Flagy > boundary/2 then
 			p1Flagy = boundary/2
 		end
-		p1Flag = Artifact():setPosition(p1Flagx,p1Flagy):setModel("artifact5"):allowPickup(false):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Human Navy Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+		p1Flag = Artifact():setPosition(p1Flagx,p1Flagy):setModel("artifact5"):allowPickup(false):setDescriptions(_("scienceDescription-flag", "Flag"),_("scienceDescription-flag", "Human Navy Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 		table.insert(human_flags,p1Flag)
 		if difficulty < 1 then
 			p1Flag:setScannedByFaction("Kraylor")
@@ -7374,7 +7374,7 @@ function transitionFromPreparationToHunt()
 		if p2Flagy > boundary/2 then
 			p2Flagy = boundary/2
 		end
-		p2Flag = Artifact():setPosition(p2Flagx,p2Flagy):setModel("artifact5"):allowPickup(false):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Kraylor Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+		p2Flag = Artifact():setPosition(p2Flagx,p2Flagy):setModel("artifact5"):allowPickup(false):setDescriptions(_("scienceDescription-flag", "Flag"),_("scienceDescription-flag", "Kraylor Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 		table.insert(kraylor_flags,p2Flag)
 		if difficulty < 1 then
 			p2Flag:setScannedByFaction("Human Navy")
@@ -7401,7 +7401,7 @@ function transitionFromPreparationToHunt()
 	if decoyH1 == nil then
 		if decoyH1x ~= nil then
 			if decoyH1x > -1*boundary and decoyH1y > -1*boundary/2 and decoyH1y < boundary/2 then
-				decoyH1 = Artifact():setPosition(decoyH1x,decoyH1y):setModel("artifact5"):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Human Navy Decoy Flag")):allowPickup(false)
+				decoyH1 = Artifact():setPosition(decoyH1x,decoyH1y):setModel("artifact5"):setDescriptions(_("scienceDescription-flag", "Flag"),_("scienceDescription-flag", "Human Navy Decoy Flag")):allowPickup(false)
 				table.insert(human_flags,decoyH1)
 				if difficulty > 1 then
 					decoyH1:setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
@@ -7414,7 +7414,7 @@ function transitionFromPreparationToHunt()
 	if decoyK1 == nil then
 		if decoyK1x ~= nil then
 			if decoyK1x < boundary and decoyK1y > -1*boundary/2 and decoyK1y < boundary/2 then
-				decoyK1 = Artifact():setPosition(decoyK1x,decoyK1y):setModel("artifact5"):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Kraylor Decoy Flag")):allowPickup(false)
+				decoyK1 = Artifact():setPosition(decoyK1x,decoyK1y):setModel("artifact5"):setDescriptions(_("scienceDescription-flag", "Flag"),_("scienceDescription-flag", "Kraylor Decoy Flag")):allowPickup(false)
 				table.insert(kraylor_flags,decoyK1)
 				if difficulty > 1 then
 					decoyK1:setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
@@ -7427,7 +7427,7 @@ function transitionFromPreparationToHunt()
 	if decoyH2 == nil then
 		if decoyH2x ~= nil then
 			if decoyH2x > -1*boundary and decoyH2y > -1*boundary/2 and decoyH2y < boundary/2 then
-				decoyH2 = Artifact():setPosition(decoyH2x,decoyH2y):setModel("artifact5"):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Human Navy Decoy Flag")):allowPickup(false)
+				decoyH2 = Artifact():setPosition(decoyH2x,decoyH2y):setModel("artifact5"):setDescriptions(_("scienceDescription-flag", "Flag"),_("scienceDescription-flag", "Human Navy Decoy Flag")):allowPickup(false)
 				table.insert(human_flags,decoyH2)
 				if difficulty > 1 then
 					decoyH2:setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
@@ -7440,7 +7440,7 @@ function transitionFromPreparationToHunt()
 	if decoyK2 == nil then
 		if decoyK2x ~= nil then
 			if decoyK2x < boundary and decoyK2y > -1*boundary/2 and decoyK2y < boundary/2 then
-				decoyK2 = Artifact():setPosition(decoyK2x,decoyK2y):setModel("artifact5"):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Kraylor Decoy Flag")):allowPickup(false)
+				decoyK2 = Artifact():setPosition(decoyK2x,decoyK2y):setModel("artifact5"):setDescriptions(_("scienceDescription-flag", "Flag"),_("scienceDescription-flag", "Kraylor Decoy Flag")):allowPickup(false)
 				table.insert(kraylor_flags,decoyK2)
 				if difficulty > 1 then
 					decoyK2:setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
@@ -7453,7 +7453,7 @@ function transitionFromPreparationToHunt()
 	if decoyH3 == nil then
 		if decoyH3x ~= nil then
 			if decoyH3x > -1*boundary and decoyH3y > -1*boundary/2 and decoyH3y < boundary/2 then
-				decoyH3 = Artifact():setPosition(decoyH3x,decoyH3y):setModel("artifact5"):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Human Navy Decoy Flag")):allowPickup(false)
+				decoyH3 = Artifact():setPosition(decoyH3x,decoyH3y):setModel("artifact5"):setDescriptions(_("scienceDescription-flag", "Flag"),_("scienceDescription-flag", "Human Navy Decoy Flag")):allowPickup(false)
 				table.insert(human_flags,decoyH3)
 				if difficulty > 1 then
 					decoyH3:setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
@@ -7466,7 +7466,7 @@ function transitionFromPreparationToHunt()
 	if decoyK3 == nil then
 		if decoyK3x ~= nil then
 			if decoyK3x < boundary and decoyK3y > -1*boundary/2 and decoyK3y < boundary/2 then
-				decoyK3 = Artifact():setPosition(decoyK3x,decoyK3y):setModel("artifact5"):setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Kraylor Decoy Flag")):allowPickup(false)
+				decoyK3 = Artifact():setPosition(decoyK3x,decoyK3y):setModel("artifact5"):setDescriptions(_("scienceDescription-flag", "Flag"),_("scienceDescription-flag", "Kraylor Decoy Flag")):allowPickup(false)
 				table.insert(kraylor_flags,decoyK3)
 				if difficulty > 1 then
 					decoyK3:setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
@@ -7559,12 +7559,12 @@ function manageHuntPhaseMechanics()
 										end
 									end
 									if flag_grab < 1 then
-										globalMessage(string.format("Kraylor ship %s obtained Human Navy flag",p:getCallSign()))
+										globalMessage(string.format(_("flag-msgMainscreen", "Kraylor ship %s obtained Human Navy flag"),p:getCallSign()))
 									else
-										globalMessage("Kraylor obtained Human Navy flag")
+										globalMessage(_("flag-msgMainscreen", "Kraylor obtained Human Navy flag"))
 									end
 								else
-									globalMessage("Flag obtained")
+									globalMessage(_("flag-msgMainscreen", "Flag obtained"))
 								end
 							end
 						end
@@ -7600,7 +7600,7 @@ function manageHuntPhaseMechanics()
 										end
 										p1Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
 										table.insert(human_flags,p1Flag)
-										p1Flag:setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Human Navy Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+										p1Flag:setDescriptions(_("scienceDescription-flag", "Flag"),_("scienceDescription-flag", "Human Navy Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 										if flag_revel then
 											if flag_drop < 2 then
 												for i,cp in ipairs(getActivePlayerShips()) do
@@ -7621,12 +7621,12 @@ function manageHuntPhaseMechanics()
 													end
 												end
 												if flag_drop < 1 then
-													globalMessage(string.format("Kraylor ship %s dropped Human Navy flag",p:getCallSign()))
+													globalMessage(string.format(_("flag-msgMainscreen", "Kraylor ship %s dropped Human Navy flag"),p:getCallSign()))
 												else
-													globalMessage("Human Navy flag dropped")
+													globalMessage(_("flag-msgMainscreen", "Human Navy flag dropped"))
 												end
 											else
-												globalMessage("Flag dropped")
+												globalMessage(_("flag-msgMainscreen", "Flag dropped"))
 											end
 										end
 										if not flag_rescan then
@@ -7679,12 +7679,12 @@ function manageHuntPhaseMechanics()
 										end
 									end
 									if flag_grab < 1 then
-										globalMessage(string.format("Human Navy ship %s obtained Kraylor flag",p:getCallSign()))
+										globalMessage(string.format(_("flag-msgMainscreen", "Human Navy ship %s obtained Kraylor flag"),p:getCallSign()))
 									else
-										globalMessage("Human Navy obtained Kraylor flag")
+										globalMessage(_("flag-msgMainscreen", "Human Navy obtained Kraylor flag"))
 									end
 								else
-									globalMessage("Flag obtained")
+									globalMessage(_("flag-msgMainscreen", "Flag obtained"))
 								end
 							end
 						end
@@ -7720,33 +7720,33 @@ function manageHuntPhaseMechanics()
 										end
 										p2Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
 										table.insert(kraylor_flags,p2Flag)
-										p2Flag:setDescriptions(_("scienceDescription-artifact", "Flag"),_("scienceDescription-artifact", "Kraylor Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+										p2Flag:setDescriptions(_("scienceDescription-flag", "Flag"),_("scienceDescription-flag", "Kraylor Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 										if flag_reveal then
 											if flag_drop < 2 then
 												for i,cp in ipairs(getActivePlayerShips()) do
 													if cp ~= p then
 														if p:getFaction() == "Kraylor" then
 															if flag_drop < 1 then
-																cp:addToShipLog(string.format("Human Navy ship %s dropped your flag",p:getCallSign()),"Magenta")
+																cp:addToShipLog(string.format(_("flag-shipLog", "Human Navy ship %s dropped your flag"),p:getCallSign()),"Magenta")
 															else
-																cp:addToShipLog("The Human Navy dropped your flag","Magenta")
+																cp:addToShipLog(_("flag-shipLog", "The Human Navy dropped your flag"),"Magenta")
 															end
 														elseif p:getFaction() == "Human Navy" then
 															if flag_drop < 1 then
-																cp:addToShipLog(string.format("%s dropped the Kraylor Flag",p:getCallSign()),"Magenta")
+																cp:addToShipLog(string.format(_("flag-shipLog", "%s dropped the Kraylor Flag"),p:getCallSign()),"Magenta")
 															else
-																cp:addToShipLog("Your team dropped the Kraylor flag","Magenta")
+																cp:addToShipLog(_("flag-shipLog", "Your team dropped the Kraylor flag"),"Magenta")
 															end
 														end
 													end
 												end
 												if flag_drop < 1 then
-													globalMessage(string.format("Human Navy %s dropped Kraylor flag",p:getCallSign()))
+													globalMessage(string.format(_("flag-msgMainscreen", "Human Navy %s dropped Kraylor flag"),p:getCallSign()))
 												else
-													globalMessage("Human Navy flag dropped")
+													globalMessage(_("flag-msgMainscreen", "Human Navy flag dropped"))
 												end
 											else
-												globalMessage("Flag dropped")
+												globalMessage(_("flag-msgMainscreen", "Flag dropped"))
 											end
 										end
 										if not flag_rescan then
