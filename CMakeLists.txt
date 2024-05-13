@@ -145,7 +145,6 @@ set(GUI_LIB_SOURCES
     src/gui/hotkeyConfig.cpp
     src/gui/joystickConfig.cpp
     src/gui/mouseRenderer.cpp
-    src/gui/scriptError.cpp
     src/gui/gui2_slider.cpp
     src/gui/gui2_togglebutton.cpp
     src/gui/gui2_arrow.cpp
@@ -210,7 +209,6 @@ set(GUI_LIB_SOURCES
     src/gui/hotkeyConfig.h
     src/gui/joystickConfig.h
     src/gui/mouseRenderer.h
-    src/gui/scriptError.h
 )
 
 set(MAIN_SOURCES
