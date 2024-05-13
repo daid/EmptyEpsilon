@@ -135,8 +135,6 @@ OptionsMenu::OptionsMenu()
     
     //Gui theme selection
     {
-        (new GuiLabel(interface_page, "GUI_THEME_OPTIONS_LABEL", tr("Interface Theme"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
-        
         std::vector<string> themes = findResources("gui/*.theme.txt");
         
         auto iter = themes.begin();
@@ -176,14 +174,17 @@ OptionsMenu::OptionsMenu()
             default_index =  static_cast<int>(default_elem - themes.begin());
         }
 
-        (new GuiSelector(interface_page, "GUI_THEME_SELECTOR", [](int index, string theme_name)
-        {
-            GuiTheme::setCurrentTheme(theme_name);
-            main_font = GuiTheme::getCurrentTheme()->getStyle("base")->states[0].font;
-            bold_font = GuiTheme::getCurrentTheme()->getStyle("bold")->states[0].font;
-            //Render default font is applied on back only
-            PreferencesManager::set("guitheme", theme_name);
-        }))->setOptions(themes)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
+        if (themes.size() > 1) {
+            (new GuiLabel(interface_page, "GUI_THEME_OPTIONS_LABEL", tr("Interface Theme"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
+            (new GuiSelector(interface_page, "GUI_THEME_SELECTOR", [](int index, string theme_name)
+            {
+                GuiTheme::setCurrentTheme(theme_name);
+                main_font = GuiTheme::getCurrentTheme()->getStyle("base")->states[0].font;
+                bold_font = GuiTheme::getCurrentTheme()->getStyle("bold")->states[0].font;
+                //Render default font is applied on back only
+                PreferencesManager::set("guitheme", theme_name);
+            }))->setOptions(themes)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
+        }
     }
     
     // Bottom GUI.
