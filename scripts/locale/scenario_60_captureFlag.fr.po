@@ -46,7 +46,7 @@ msgid ""
 "Version 2"
 msgstr ""
 "\n"
-"EN COURS DE TRADUCTION : 22%\n"
+"EN COURS DE TRADUCTION : 40%\n"
 "\n"
 "Capture opposing team's \"flag\" before they capture yours\n"
 "\n"
@@ -75,15 +75,15 @@ msgstr ""
 # Scenario setting
 msgctxt "setting"
 msgid "Terrain"
-msgstr ""
+msgstr "Terrain"
 
 msgctxt "setting"
 msgid "Selects the type of terrain for the game"
-msgstr ""
+msgstr "Sélectionne le type de terrain pour le jeu."
 
 msgctxt "Terrain"
 msgid "Asymmetric"
-msgstr ""
+msgstr "Asymétrique"
 
 msgctxt "Terrain"
 msgid "No effort made to make the two sides of the arena equivalent"
@@ -108,7 +108,7 @@ msgstr ""
 
 msgctxt "Terrain"
 msgid "Symmetric"
-msgstr ""
+msgstr "Symétrique"
 
 msgctxt "Terrain"
 msgid "Randomly symmetric"
@@ -123,23 +123,21 @@ msgid "Down the rabbit hole. Largely symmetric. Wormholes connect each side."
 msgstr ""
 
 # Scenario setting
-#, fuzzy
 msgctxt "setting"
 msgid "Enemies"
 msgstr "Puissance ennemie"
 
 msgctxt "setting"
 msgid "Configures strength and/or number of external enemies in this scenario"
-msgstr ""
+msgstr "Définit le nombre et/ou la puissance des ennemis extérieurs."
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "None"
-msgstr "Aucun"
+msgstr "Aucune"
 
 msgctxt "Enemies"
 msgid "No external enemies"
-msgstr ""
+msgstr "Pas d'ennemis extérieurs."
 
 msgctxt "Enemies"
 msgid "Easy"
@@ -149,12 +147,10 @@ msgctxt "Enemies"
 msgid "Fewer or weaker enemies"
 msgstr "Ennemis moins nombreux et/ou plus faibles."
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Normal"
 msgstr "Normale"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Normal number or strength of enemies"
 msgstr "Difficulté normale."
@@ -175,12 +171,10 @@ msgctxt "Enemies"
 msgid "Much stronger, many more enemies"
 msgstr "Ennemis beaucoup plus nombreux et/ou beaucoup plus puissants."
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Quixotic"
 msgstr "Chimérique"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Insanely strong and/or inordinately large numbers of enemies"
 msgstr "Ennemis en nombre démesuré et/ou incroyablement puissants."
@@ -190,7 +184,6 @@ msgctxt "setting"
 msgid "Murphy"
 msgstr "Loi de Murphy"
 
-#, fuzzy
 msgctxt "setting"
 msgid "Configures the perversity of the universe according to Murphy's law"
 msgstr "Définit la perversité de l'univers selon la loi de Murphy."
@@ -203,12 +196,10 @@ msgctxt "Murphy"
 msgid "Random factors are more in your favor"
 msgstr "Les facteurs aléatoires sont plus en votre faveur."
 
-#, fuzzy
 msgctxt "Murphy"
 msgid "Normal"
 msgstr "Normale"
 
-#, fuzzy
 msgctxt "Murphy"
 msgid "Random factors are normal"
 msgstr "Les facteurs aléatoires sont équilibrés."
@@ -224,59 +215,55 @@ msgstr "Les facteurs aléatoires sont plus contre vous."
 # Scenario setting
 msgctxt "setting"
 msgid "Arena"
-msgstr ""
+msgstr "Arène"
 
 msgctxt "setting"
 msgid ""
 "Configures the size of the playing arena. Default is normal or 100 units"
-msgstr ""
+msgstr "Configure la taille de l'arène de jeu."
 
-#, fuzzy
 msgctxt "Arena"
 msgid "Normal"
 msgstr "Normale"
 
 msgctxt "Arena"
 msgid "Normal 100 unit sized arena"
-msgstr ""
+msgstr "Arène moyenne de 100 unités."
 
-#, fuzzy
 msgctxt "Arena"
 msgid "Small"
 msgstr "Petite"
 
 msgctxt "Arena"
 msgid "Small 50 unit sized arena"
-msgstr ""
+msgstr "Petite arène de 50 unités."
 
-#, fuzzy
 msgctxt "Arena"
 msgid "Large"
 msgstr "Grande"
 
 msgctxt "Arena"
 msgid "Large 200 unit sized arena"
-msgstr ""
+msgstr "Grande arène de 200 unités."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Flag Scan"
-msgstr ""
+msgstr "Analyse des drapeaux"
 
 msgctxt "setting"
 msgid ""
 "Configures the depth and complexity required to scan a flag. Default is "
 "normal: depth is 2 or 3, complexity is 2"
-msgstr ""
+msgstr "Configure la complexité et la profondeur de scan des drapeaux."
 
-#, fuzzy
 msgctxt "Flag Scan"
 msgid "Normal"
 msgstr "Normale"
 
 msgctxt "Flag Scan"
 msgid "Depth is 2 or 3, complexity is 2"
-msgstr ""
+msgstr "La profondeur est de 2 ou 3, la complexité est de 2."
 
 msgctxt "Flag Scan"
 msgid "Easy"
@@ -284,7 +271,7 @@ msgstr "Facile"
 
 msgctxt "Flag Scan"
 msgid "Depth is 1, complexity is 1 or 2"
-msgstr ""
+msgstr "La profondeur est de 1, la complexité est de 1 ou 2."
 
 msgctxt "Flag Scan"
 msgid "Hard"
@@ -292,21 +279,20 @@ msgstr "Difficile"
 
 msgctxt "Flag Scan"
 msgid "Depth is 1, 2 or 3, complexity is 3 or 4"
-msgstr ""
+msgstr "La profondeur est de 1, 2 ou 3, la complexité est de 3 ou 4."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Tracking"
-msgstr ""
+msgstr "Suivi"
 
 msgctxt "setting"
 msgid "Configures information given about flag."
-msgstr ""
+msgstr "Configure les informations fournies sur le drapeau."
 
-#, fuzzy
 msgctxt "Tracking"
 msgid "Normal"
-msgstr "Normale"
+msgstr "Normal"
 
 msgctxt "Tracking"
 msgid ""
@@ -337,7 +323,7 @@ msgstr ""
 
 msgctxt "Tracking"
 msgid "Secret"
-msgstr ""
+msgstr "Secret"
 
 msgctxt "Tracking"
 msgid ""
@@ -351,10 +337,9 @@ msgid "Referee"
 msgstr ""
 
 #: scripts/scenario_60_captureFlag.lua:750
-#, fuzzy
 msgctxt "buttonGM"
 msgid "None"
-msgstr "Aucun"
+msgstr "Aucune"
 
 #: scripts/scenario_60_captureFlag.lua:751
 msgctxt "buttonGM"
@@ -362,7 +347,6 @@ msgid "Easy"
 msgstr "Facile"
 
 #: scripts/scenario_60_captureFlag.lua:752
-#, fuzzy
 msgctxt "buttonGM"
 msgid "Normal"
 msgstr "Normale"
@@ -378,7 +362,6 @@ msgid "Extreme"
 msgstr "Extrême"
 
 #: scripts/scenario_60_captureFlag.lua:755
-#, fuzzy
 msgctxt "buttonGM"
 msgid "Quixotic"
 msgstr "Chimérique"
@@ -395,7 +378,7 @@ msgstr "Facile"
 #: scripts/scenario_60_captureFlag.lua:822
 msgctxt "buttonGM"
 msgid "normal"
-msgstr "Normal"
+msgstr "Normale"
 
 #: scripts/scenario_60_captureFlag.lua:770
 #: scripts/scenario_60_captureFlag.lua:809
@@ -407,23 +390,22 @@ msgstr "Difficile"
 #: scripts/scenario_60_captureFlag.lua:793
 msgctxt "buttonGM"
 msgid "medium"
-msgstr ""
+msgstr "Normale"
 
 #: scripts/scenario_60_captureFlag.lua:794
 msgctxt "buttonGM"
 msgid "small"
-msgstr ""
+msgstr "Petite"
 
 #: scripts/scenario_60_captureFlag.lua:795
-#, fuzzy
 msgctxt "buttonGM"
 msgid "large"
-msgstr "Large"
+msgstr "Grande"
 
 #: scripts/scenario_60_captureFlag.lua:825
 msgctxt "buttonGM"
 msgid "secret"
-msgstr ""
+msgstr "Secret"
 
 #: scripts/scenario_60_captureFlag.lua:840
 msgctxt "buttonGM"
@@ -472,13 +454,13 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1580
 msgctxt "buttonGM"
 msgid "Turn on Diagnostic"
-msgstr ""
+msgstr "Turn On Diagnostic"
 
 #: scripts/scenario_60_captureFlag.lua:872
 #: scripts/scenario_60_captureFlag.lua:1582
 msgctxt "buttonGM"
 msgid "Turn off Diagnostic"
-msgstr ""
+msgstr "Désactiver diagnostic"
 
 #: scripts/scenario_60_captureFlag.lua:882
 #, lua-format
@@ -916,7 +898,6 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1480
 #: scripts/scenario_60_captureFlag.lua:1498
 #: scripts/scenario_60_captureFlag.lua:1516
-#, fuzzy
 msgctxt "buttonGM"
 msgid "-Main"
 msgstr "- Précédent"
@@ -1495,7 +1476,6 @@ msgstr ""
 
 #: scripts/scenario_60_captureFlag.lua:5235
 #: scripts/scenario_60_captureFlag.lua:5686
-#, fuzzy
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
@@ -1637,31 +1617,26 @@ msgid "Can you supply us with some nukes? ("
 msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 
 #: scripts/scenario_60_captureFlag.lua:5362
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
 msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 
 #: scripts/scenario_60_captureFlag.lua:5372
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+msgstr "Veuillez réapprovisionner nos missiles EMP ("
 
 #: scripts/scenario_60_captureFlag.lua:5374
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Got any EMPs? ("
 msgstr "Avez-vous des EMP ? ("
 
 #: scripts/scenario_60_captureFlag.lua:5384
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Auriez-vous des homing missiles pour nous ? ("
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
 
 #: scripts/scenario_60_captureFlag.lua:5386
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
 msgstr "Avez-vous des missiles homing supplémentaires ? ("
@@ -1669,29 +1644,27 @@ msgstr "Avez-vous des missiles homing supplémentaires ? ("
 #: scripts/scenario_60_captureFlag.lua:5397
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr "Nous pourrions avoir besoin de quelques mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_60_captureFlag.lua:5399
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "How about mines? ("
 msgstr "Concernant les mines ? ("
 
 #: scripts/scenario_60_captureFlag.lua:5401
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "More mines ("
-msgstr "Plus de mines. ("
+msgstr "Plus de mines ("
 
 #: scripts/scenario_60_captureFlag.lua:5403
 msgctxt "ammo-comms"
 msgid "All the mines we can take. ("
-msgstr "Toutes les mines que nous pouvons prendre. ("
+msgstr "Toutes les mines que nous pouvons prendre ("
 
 #: scripts/scenario_60_captureFlag.lua:5405
 msgctxt "ammo-comms"
 msgid "Mines! What else? ("
-msgstr "Des mines ! Quoi d'autre? ("
+msgstr "Des mines ! Quoi d'autre ? ("
 
 #: scripts/scenario_60_captureFlag.lua:5415
 msgctxt "ammo-comms"
@@ -1712,7 +1685,6 @@ msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
 
 #: scripts/scenario_60_captureFlag.lua:5436
 #: scripts/scenario_60_captureFlag.lua:5453
-#, fuzzy
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
 msgstr "Réputation insuffisante."
@@ -1725,7 +1697,6 @@ msgid "Repair crew member hired"
 msgstr "Réparateur embauché."
 
 #: scripts/scenario_60_captureFlag.lua:5463
-#, fuzzy
 msgctxt "station-comms"
 msgid "Tell me more about your station"
 msgstr "Dites m'en plus à propos de votre station"
@@ -1819,7 +1790,6 @@ msgstr ""
 
 #: scripts/scenario_60_captureFlag.lua:5527
 #: scripts/scenario_60_captureFlag.lua:5532
-#, fuzzy
 msgctxt "needRep-comms"
 msgid ""
 "\n"
@@ -1928,7 +1898,6 @@ msgstr ""
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_60_captureFlag.lua:5756
-#, fuzzy
 msgctxt "station-comms"
 msgid "I need information"
 msgstr "j'aurai besoin d'informations"
@@ -2028,7 +1997,6 @@ msgid "Yes, we see %i enemies within 30U"
 msgstr "Oui, nous comptons %i ennemis dans un rayon de 30U."
 
 #: scripts/scenario_60_captureFlag.lua:5826
-#, fuzzy
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see one enemy within 30U"
 msgstr "Oui, nous observons 1 ennemi à moins de 30U."
@@ -2098,39 +2066,36 @@ msgid "Station %s in sector %s has %s%s"
 msgstr "La station %s dans le secteur %s a %s%s"
 
 #: scripts/scenario_60_captureFlag.lua:5864
-#, fuzzy
 msgctxt "stationGeneralInfo-comms"
 msgid "General station information"
 msgstr "Informations générales sur la station"
 
 #: scripts/scenario_60_captureFlag.lua:5887
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rép)"
 
 #: scripts/scenario_60_captureFlag.lua:5889
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
 "Vous devez définir un marqueur avant de faire une demande de ravitaillement."
 
 #: scripts/scenario_60_captureFlag.lua:5891
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
 
 #: scripts/scenario_60_captureFlag.lua:5893
 #: scripts/scenario_60_captureFlag.lua:5919
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
 msgstr "Marqueur %d"
 
 #: scripts/scenario_60_captureFlag.lua:5901
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
@@ -2139,25 +2104,22 @@ msgstr ""
 
 #: scripts/scenario_60_captureFlag.lua:5903
 #: scripts/scenario_60_captureFlag.lua:5924
-#, fuzzy
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr "Pas assez de réputation !"
 
 #: scripts/scenario_60_captureFlag.lua:5913
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
 msgstr "Merci de nous envoyer des renforts ! (%d rép)"
 
 #: scripts/scenario_60_captureFlag.lua:5915
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr "Vous devez définir un marqueur avant de pouvoir demander des renforts."
 
 #: scripts/scenario_60_captureFlag.lua:5917
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
@@ -2319,7 +2281,6 @@ msgstr "Monsieur, comment pouvons-nous vous assister ?"
 
 #: scripts/scenario_60_captureFlag.lua:6517
 #: scripts/scenario_60_captureFlag.lua:6666
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr "Défendez un marqueur"
@@ -2330,7 +2291,6 @@ msgstr "Défendez un marqueur"
 #: scripts/scenario_60_captureFlag.lua:6669
 #: scripts/scenario_60_captureFlag.lua:6689
 #: scripts/scenario_60_captureFlag.lua:6709
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
@@ -2339,32 +2299,29 @@ msgstr ""
 
 #: scripts/scenario_60_captureFlag.lua:6522
 #: scripts/scenario_60_captureFlag.lua:6672
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/scenario_60_captureFlag.lua:6524
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
 msgstr "Défendez le marqueur %d"
 
 #: scripts/scenario_60_captureFlag.lua:6526
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
 msgstr "Nous partons immédiatement défendre le marqueur %d."
 
 #: scripts/scenario_60_captureFlag.lua:6533
 #: scripts/scenario_60_captureFlag.lua:6656
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr "Aidez-nous !"
 
 #: scripts/scenario_60_captureFlag.lua:6534
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr "Entendu, nous partons immédiatement vous aider."
@@ -2387,37 +2344,37 @@ msgid "Shield: %d%%\n"
 msgstr "Boucliers : %d%%\n"
 
 #: scripts/scenario_60_captureFlag.lua:6545
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
 msgstr "Boucliers avant : %d%%\n"
 
 #: scripts/scenario_60_captureFlag.lua:6546
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
 msgstr "Boucliers arrière : %d%%\n"
 
 #: scripts/scenario_60_captureFlag.lua:6549
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr "Bouclier %s : %d%%\n"
 
 #: scripts/scenario_60_captureFlag.lua:6556
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr "%s Missiles : %d/%d\n"
 
 #: scripts/scenario_60_captureFlag.lua:6565
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr "Amarrez-vous à %s."
 
 #: scripts/scenario_60_captureFlag.lua:6566
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr "En cours d'amarrage à %s."
@@ -2665,7 +2622,6 @@ msgid "Your feeble threats are meaningless."
 msgstr "Vos petites menaces ne nous impressionnent pas."
 
 #: scripts/scenario_60_captureFlag.lua:6790
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
@@ -2715,7 +2671,6 @@ msgstr ""
 "Communication interrompue."
 
 #: scripts/scenario_60_captureFlag.lua:6797
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
@@ -2775,7 +2730,6 @@ msgstr ""
 "Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_60_captureFlag.lua:6825
-#, fuzzy
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
