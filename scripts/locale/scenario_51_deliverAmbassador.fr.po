@@ -567,7 +567,7 @@ msgstr "Avez-vous des missiles homing supplémentaires ? (%d rép chacun)"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We could use some homing missiles. (%d rep each)"
-msgstr "Nous aurions besoin d'acheter des homing missiles. (%d rép chacun)"
+msgstr "Nous aurions besoin d'acheter des homing missiles (%d rép chacun)"
 
 #: scripts/scenario_51_deliverAmbassador.lua:932
 #, lua-format
@@ -591,7 +591,7 @@ msgstr "Nous avons besoin de HVLI. En avez-vous ? (%d rép chacun)"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Please restock our mines. (%d rep each)"
-msgstr "Merci de faire le plein de mines. (%d rép chacune)"
+msgstr "Merci de faire le plein de mines (%d rép chacune)"
 
 #: scripts/scenario_51_deliverAmbassador.lua:938
 #, lua-format
@@ -603,13 +603,13 @@ msgstr "Concernant les mines ? (%d rép chacune)"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We are running low on mines. (%d rep each)"
-msgstr "Nous manquons de mines. (%d rép chacune)"
+msgstr "Nous manquons de mines (%d rép chacune)"
 
 #: scripts/scenario_51_deliverAmbassador.lua:942
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Please restock our EMP missiles. (%d rep each)"
-msgstr "Veuillez réapprovisionner nos missiles EMP. (%d rép chacun)"
+msgstr "Veuillez réapprovisionner nos missiles EMP (%d rép chacun)"
 
 #: scripts/scenario_51_deliverAmbassador.lua:943
 #, lua-format
@@ -621,7 +621,7 @@ msgstr "Avez-vous des EMP ? (%d rép chacun)"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We need Electro-Magnetic Pulse missiles. (%d rep each)"
-msgstr "Nous avons besoin de missiles EMP. (%d rép chacun)"
+msgstr "Nous avons besoin de missiles EMP (%d rép chacun)"
 
 #: scripts/scenario_51_deliverAmbassador.lua:947
 #, lua-format
@@ -633,13 +633,13 @@ msgstr "Pouvez-vous nous fournir des armes nucléaires ? (%d rép chacune)"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We really need some nukes. (%d rep each)"
-msgstr "Nous avons vraiment besoin d'armes nucléaires. (%d rép chacune)"
+msgstr "Nous avons vraiment besoin d'armes nucléaires (%d rép chacune)"
 
 #: scripts/scenario_51_deliverAmbassador.lua:949
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We could use some nuclear missiles. (%d rep each)"
-msgstr "Nous pourrions avoir besoin de missiles nucléaires. (%d rép chacun)"
+msgstr "Nous pourrions avoir besoin de missiles nucléaires (%d rép chacun)"
 
 #: scripts/scenario_51_deliverAmbassador.lua:963
 msgctxt "orders-comms"

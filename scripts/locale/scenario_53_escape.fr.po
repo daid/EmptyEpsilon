@@ -850,7 +850,7 @@ msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ?"
 #: scripts/scenario_53_escape.lua:1347
 msgctxt "ammo-comms"
 msgid "We really need some nukes."
-msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke)."
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke)"
 
 #: scripts/scenario_53_escape.lua:1348
 msgctxt "ammo-comms"
@@ -860,7 +860,7 @@ msgstr "Pouvez-vous réapprovisionner nos missiles nucléaires ?"
 #: scripts/scenario_53_escape.lua:1351
 msgctxt "ammo-comms"
 msgid "Please restock our EMP missiles."
-msgstr "Veuillez réapprovisionner nos missiles EMP."
+msgstr "Veuillez réapprovisionner nos missiles EMP"
 
 #: scripts/scenario_53_escape.lua:1352
 msgctxt "ammo-comms"
@@ -870,12 +870,12 @@ msgstr "Avez-vous des EMP ?"
 #: scripts/scenario_53_escape.lua:1353
 msgctxt "ammo-comms"
 msgid "We need Electro-Magnetic Pulse missiles."
-msgstr "Nous avons besoin de missiles EMP."
+msgstr "Nous avons besoin de missiles EMP"
 
 #: scripts/scenario_53_escape.lua:1356
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us?"
-msgstr "Auriez-vous des homing missiles pour nous ?"
+msgstr "Des missiles à tête chercheuse (homing) pour nous ?"
 
 #: scripts/scenario_53_escape.lua:1357
 msgctxt "ammo-comms"
@@ -885,12 +885,12 @@ msgstr "Avez-vous des missiles homing supplémentaires ?"
 #: scripts/scenario_53_escape.lua:1358
 msgctxt "ammo-comms"
 msgid "Please replenish our homing missiles."
-msgstr "Merci de réapprovisionner nos missiles à tête chercheuse."
+msgstr "Merci de réapprovisionner nos missiles à tête chercheuse"
 
 #: scripts/scenario_53_escape.lua:1361
 msgctxt "ammo-comms"
 msgid "We could use some mines."
-msgstr "Nous pourrions avoir besoin de quelques mines."
+msgstr "Nous pourrions avoir besoin de quelques mines"
 
 #: scripts/scenario_53_escape.lua:1362
 msgctxt "ammo-comms"

@@ -1338,7 +1338,7 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:1919
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions."
+msgstr "Nous avons besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_47_scavenger.lua:1922
 msgctxt "ammo-comms"
@@ -1353,7 +1353,7 @@ msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 #: scripts/scenario_47_scavenger.lua:1931
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke). ("
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 
 #: scripts/scenario_47_scavenger.lua:1934
 #: scripts/scenario_47_scavenger.lua:1947
@@ -1368,7 +1368,7 @@ msgstr "%s%d rép chacun)"
 #: scripts/scenario_47_scavenger.lua:1943
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+msgstr "Veuillez réapprovisionner nos missiles EMP ("
 
 #: scripts/scenario_47_scavenger.lua:1945
 msgctxt "ammo-comms"
@@ -1378,7 +1378,7 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_47_scavenger.lua:1955
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Auriez-vous des homing missiles pour nous ? ("
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
 
 #: scripts/scenario_47_scavenger.lua:1957
 msgctxt "ammo-comms"
@@ -1388,7 +1388,7 @@ msgstr "Avez-vous des missiles homing supplémentaires ? ("
 #: scripts/scenario_47_scavenger.lua:1967
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr "Nous pourrions avoir besoin de quelques mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_47_scavenger.lua:1969
 msgctxt "ammo-comms"

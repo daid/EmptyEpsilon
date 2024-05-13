@@ -1747,7 +1747,7 @@ msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 #: scripts/scenario_54_PatrolDuty.lua:4348
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr "Nous avons vraiment besoin d'armes nucléaires. (nuke) ("
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 
 #: scripts/scenario_54_PatrolDuty.lua:4350
 #: scripts/scenario_54_PatrolDuty.lua:4363
@@ -1762,7 +1762,7 @@ msgstr "%s%d rép chacun)"
 #: scripts/scenario_54_PatrolDuty.lua:4359
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+msgstr "Veuillez réapprovisionner nos missiles EMP ("
 
 #: scripts/scenario_54_PatrolDuty.lua:4361
 msgctxt "ammo-comms"
@@ -1772,7 +1772,7 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_54_PatrolDuty.lua:4371
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Des missiles homing de rechange pour nous ? ("
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
 
 #: scripts/scenario_54_PatrolDuty.lua:4373
 msgctxt "ammo-comms"
@@ -1782,7 +1782,7 @@ msgstr "Avez-vous des missiles homing supplémentaires ? ("
 #: scripts/scenario_54_PatrolDuty.lua:4383
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr "Nous pourrions avoir besoin de quelques mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_54_PatrolDuty.lua:4385
 msgctxt "ammo-comms"

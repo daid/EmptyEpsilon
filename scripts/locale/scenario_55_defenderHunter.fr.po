@@ -1662,7 +1662,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:5323
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions."
+msgstr "Nous avons besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_55_defenderHunter.lua:5324
 msgctxt "ammo-comms"
@@ -1692,7 +1692,7 @@ msgstr "%s%d rép chacun)"
 #: scripts/scenario_55_defenderHunter.lua:5340
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+msgstr "Veuillez réapprovisionner nos missiles EMP ("
 
 #: scripts/scenario_55_defenderHunter.lua:5342
 msgctxt "ammo-comms"
@@ -1702,7 +1702,7 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_55_defenderHunter.lua:5352
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Auriez-vous des homing missiles pour nous ? ("
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
 
 #: scripts/scenario_55_defenderHunter.lua:5354
 msgctxt "ammo-comms"
@@ -1712,7 +1712,7 @@ msgstr "Avez-vous des missiles homing supplémentaires ? ("
 #: scripts/scenario_55_defenderHunter.lua:5364
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr "Nous pourrions avoir besoin de quelques mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_55_defenderHunter.lua:5366
 msgctxt "ammo-comms"
