@@ -250,7 +250,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Sets the default radar trace image for ShipTemplateBasedObjects created from this ShipTemplate.
     /// Valid values are filenames of PNG images relative to the resources/radar/ directory.
     /// Radar trace images should be white with a transparent background.
-    /// Defaults to arrow.png. ShipTemplate:setType("station") sets this to blip.png.
+    /// Defaults to ship.png. ShipTemplate:setType("station") sets this to blip.png.
     /// Example: template:setRadarTrace("cruiser.png")
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
     /// Sets the long-range radar range of SpaceShips created from this ShipTemplate.
@@ -350,7 +350,7 @@ ShipTemplate::ShipTemplate()
         weapon_storage[n] = 0;
     long_range_radar_range = 30000.0f;
     short_range_radar_range = 5000.0f;
-    radar_trace = "radar/arrow.png";
+    radar_trace = "radar/ship.png";
     impulse_sound_file = "sfx/engine.wav";
     default_ai_name = "default";
 }
@@ -415,7 +415,7 @@ void ShipTemplate::setTubeSize(int index, EMissileSizes size)
 
 void ShipTemplate::setType(TemplateType type)
 {
-    if (radar_trace == "radar/arrow.png" && type == Station)
+    if (radar_trace == "radar/ship.png" && type == Station)
     {
         radar_trace = "radar/blip.png";
     }
