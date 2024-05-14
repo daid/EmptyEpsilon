@@ -1,0 +1,281 @@
+# Scenario name
+msgid "Locust Swarm"
+msgstr ""
+
+# Scenario description
+msgid ""
+"What happens when you're attacked by a swarm of locusts?\n"
+"\n"
+"Designed to run with one or more player ships with different terrain each "
+"time.\n"
+"\n"
+"Version 1\n"
+"\n"
+"USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
+"There's one every weekend. All experience levels are welcome."
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Swarm"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures the size of the swarm"
+msgstr ""
+
+msgctxt "Swarm"
+msgid "Tiny"
+msgstr ""
+
+msgctxt "Swarm"
+msgid "Tiny sized swarm"
+msgstr ""
+
+msgctxt "Swarm"
+msgid "Small"
+msgstr ""
+
+msgctxt "Swarm"
+msgid "Small sized swarm"
+msgstr ""
+
+msgctxt "Swarm"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Swarm"
+msgid "Normal sized swarm"
+msgstr ""
+
+msgctxt "Swarm"
+msgid "Large"
+msgstr ""
+
+msgctxt "Swarm"
+msgid "Large sized swarm"
+msgstr ""
+
+msgctxt "Swarm"
+msgid "Huge"
+msgstr ""
+
+msgctxt "Swarm"
+msgid "Huge sized swarm"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Basis"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures the ship that serves as the basis for the locusts"
+msgstr ""
+
+msgctxt "Basis"
+msgid "Fighter"
+msgstr ""
+
+msgctxt "Basis"
+msgid "The Fighter is the basis for the locusts"
+msgstr ""
+
+msgctxt "Basis"
+msgid "Hornet"
+msgstr ""
+
+msgctxt "Basis"
+msgid "The Hornet is the basis for the locusts"
+msgstr ""
+
+msgctxt "Basis"
+msgid "Drone"
+msgstr ""
+
+msgctxt "Basis"
+msgid "The Ktlitan Drone is the basis for the locusts"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:38
+msgctxt "orders-comms"
+msgid "thirty"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:39
+msgctxt "orders-comms"
+msgid "fifty"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:40
+msgctxt "orders-comms"
+msgid "eighty"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:41
+msgctxt "orders-comms"
+msgid "one hundred"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:42
+msgctxt "orders-comms"
+msgid "one hundred and fifty"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:48
+msgctxt "orders-comms"
+msgid "fighter"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:49
+msgctxt "orders-comms"
+msgid "hornet"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:50
+msgctxt "orders-comms"
+msgid "drone"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:906
+msgctxt "buttonRelay"
+msgid "Locust Status"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:911
+msgctxt "buttonOperations"
+msgid "Locust Status"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:931
+#, lua-format
+msgctxt "msgRelay"
+msgid "%i Locusts remain."
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:933
+#, lua-format
+msgctxt "msgRelay"
+msgid "One Locust remains in sector %s"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:935
+#, lua-format
+msgctxt "msgRelay"
+msgid ""
+"%s\n"
+"The closest is in sector %s"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1175
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"Hello %s,\n"
+"Our sensors have picked up numerous Exuari ships."
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1176
+msgctxt "orders-comms"
+msgid "How many is numerous?"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1177
+#, lua-format
+msgctxt "orders-comms"
+msgid "Approximately %s"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1178
+msgctxt "orders-comms"
+msgid "That's quite a few. What kind of ships?"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1179
+#, lua-format
+msgctxt "orders-comms"
+msgid "They look like %ss. The computer calls them locusts. They're very fast."
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1180
+msgctxt "orders-comms"
+msgid "Should we be worried?"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1181
+msgctxt "orders-comms"
+msgid ""
+"Individually, they should be easy to handle. As a group, they could be a "
+"problem."
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1182
+msgctxt "orders-comms"
+msgid "What do you want us to do about them?"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1183
+msgctxt "orders-comms"
+msgid "Get rid of them. Every last one of them."
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1194
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"Greetings %s,\n"
+"We've got an update for you on those Exuari Locusts."
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1195
+msgctxt "orders-comms"
+msgid "Tell us about it."
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1196
+msgctxt "orders-comms"
+msgid "All the Exuari on our sensors have started moving."
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1197
+msgctxt "orders-comms"
+msgid "Where are they going?"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1198
+msgctxt "orders-comms"
+msgid ""
+"We are not quite sure, but they seem to be converging on a central location."
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1199
+msgctxt "orders-comms"
+msgid "That could make it harder for us to get rid of them."
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1200
+msgctxt "orders-comms"
+msgid ""
+"How perceptive of you! We are so glad you are out there working to rid us of "
+"these Locusts. Keep up the good work!"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1383
+msgctxt "msgMainscreen"
+msgid "Scenario needs the 'Per-system damage' option under 'Extra settings'"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1442
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"Surviving stations: %i\n"
+"Friendly: %i out of %i\n"
+"Neutral: %i out of %i\n"
+"Enemy: %i out of %i"
+msgstr ""
+
+#: scripts/scenario_39_locusts.lua:1465
+msgctxt "msgMainscreen"
+msgid "All friendly stations have been destroyed."
+msgstr ""
