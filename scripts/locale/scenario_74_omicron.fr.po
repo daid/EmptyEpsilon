@@ -1150,7 +1150,7 @@ msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 #: scripts/scenario_74_omicron.lua:3575
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr "Nous avons vraiment besoin d'armes nucléaires. (nuke) ("
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 
 #: scripts/scenario_74_omicron.lua:3578 scripts/scenario_74_omicron.lua:3591
 #: scripts/scenario_74_omicron.lua:3603 scripts/scenario_74_omicron.lua:3615
@@ -1163,7 +1163,7 @@ msgstr "%s%d rép chacun)"
 #: scripts/scenario_74_omicron.lua:3587
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+msgstr "Veuillez réapprovisionner nos missiles EMP ("
 
 #: scripts/scenario_74_omicron.lua:3589
 msgctxt "ammo-comms"
@@ -1173,7 +1173,7 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_74_omicron.lua:3599
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Auriez-vous des homing missiles pour nous ? ("
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
 
 #: scripts/scenario_74_omicron.lua:3601
 msgctxt "ammo-comms"
@@ -1183,7 +1183,7 @@ msgstr "Avez-vous des missiles homing supplémentaires ? ("
 #: scripts/scenario_74_omicron.lua:3611
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr "Nous pourrions avoir besoin de quelques mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_74_omicron.lua:3613
 msgctxt "ammo-comms"
@@ -1945,7 +1945,7 @@ msgstr "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
 #: scripts/scenario_74_omicron.lua:4263
 msgctxt "ammo-comms"
 msgid "Get just one"
-msgstr "Prendre juste celui-là."
+msgstr "Prendre juste celui-là"
 
 #: scripts/scenario_74_omicron.lua:4290
 msgctxt "station-comms"

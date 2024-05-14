@@ -174,7 +174,7 @@ msgstr "Pouvez-vous nous réapprovisionner en HVLI ? (%d rép chacun)"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Please re-stock our mines. (%d rep each)"
-msgstr "Merci de réapprovisionner notre stock de mines. (%d rép chacune)"
+msgstr "Merci de réapprovisionner notre stock de mines (%d rép chacune)"
 
 #: scripts/scenario_62_whatTheDickens.lua:434
 #, lua-format

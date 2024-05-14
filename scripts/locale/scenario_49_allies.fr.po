@@ -1532,7 +1532,7 @@ msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 #: scripts/scenario_49_allies.lua:3610
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke). ("
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 
 #: scripts/scenario_49_allies.lua:3612 scripts/scenario_49_allies.lua:3624
 #: scripts/scenario_49_allies.lua:3636 scripts/scenario_49_allies.lua:3648
@@ -1545,7 +1545,7 @@ msgstr "%s%d rép chacun)"
 #: scripts/scenario_49_allies.lua:3620
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+msgstr "Veuillez réapprovisionner nos missiles EMP ("
 
 #: scripts/scenario_49_allies.lua:3622
 msgctxt "ammo-comms"
@@ -1565,7 +1565,7 @@ msgstr "Avez-vous des missiles homing supplémentaires ? ("
 #: scripts/scenario_49_allies.lua:3644
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr "Nous pourrions avoir besoin de quelques mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_49_allies.lua:3646
 msgctxt "ammo-comms"

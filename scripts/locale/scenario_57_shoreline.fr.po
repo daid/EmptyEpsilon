@@ -2194,7 +2194,7 @@ msgstr "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
 #: scripts/scenario_57_shoreline.lua:7677
 msgctxt "ammo-comms"
 msgid "Get just one"
-msgstr "Prendre juste celui-là."
+msgstr "Prendre juste celui-là"
 
 #: scripts/scenario_57_shoreline.lua:7683
 msgctxt "ammo-comms"

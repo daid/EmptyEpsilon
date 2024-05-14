@@ -1159,7 +1159,7 @@ msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ?"
 #: scripts/scenario_48_visitors.lua:3129
 msgctxt "ammo-comms"
 msgid "We really need some nukes."
-msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke)."
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke)"
 
 #: scripts/scenario_48_visitors.lua:3130
 msgctxt "ammo-comms"
@@ -1169,7 +1169,7 @@ msgstr "Pouvez-vous réapprovisionner nos missiles nucléaires ?"
 #: scripts/scenario_48_visitors.lua:3133
 msgctxt "ammo-comms"
 msgid "Please restock our EMP missiles."
-msgstr "Veuillez réapprovisionner nos missiles EMP."
+msgstr "Veuillez réapprovisionner nos missiles EMP"
 
 #: scripts/scenario_48_visitors.lua:3134
 msgctxt "ammo-comms"
@@ -1179,12 +1179,12 @@ msgstr "Avez-vous des EMP ?"
 #: scripts/scenario_48_visitors.lua:3135
 msgctxt "ammo-comms"
 msgid "We need Electro-Magnetic Pulse missiles."
-msgstr "Nous avons besoin de missiles EMP."
+msgstr "Nous avons besoin de missiles EMP"
 
 #: scripts/scenario_48_visitors.lua:3138
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us?"
-msgstr "Auriez-vous des homing missiles pour nous ?"
+msgstr "Des missiles à tête chercheuse (homing) pour nous ?"
 
 #: scripts/scenario_48_visitors.lua:3139
 msgctxt "ammo-comms"
@@ -1194,12 +1194,12 @@ msgstr "Avez-vous des missiles homing supplémentaires ?"
 #: scripts/scenario_48_visitors.lua:3140
 msgctxt "ammo-comms"
 msgid "Please replenish our homing missiles."
-msgstr "Merci de réapprovisionner nos missiles à tête chercheuse."
+msgstr "Merci de réapprovisionner nos missiles à tête chercheuse"
 
 #: scripts/scenario_48_visitors.lua:3143
 msgctxt "ammo-comms"
 msgid "We could use some mines."
-msgstr "Nous pourrions avoir besoin de quelques mines."
+msgstr "Nous pourrions avoir besoin de quelques mines"
 
 #: scripts/scenario_48_visitors.lua:3144
 msgctxt "ammo-comms"
@@ -2895,7 +2895,7 @@ msgstr "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
 #: scripts/scenario_48_visitors.lua:4661
 msgctxt "ammo-comms"
 msgid "Get just one"
-msgstr "Prendre juste celui-là."
+msgstr "Prendre juste celui-là"
 
 #: scripts/scenario_48_visitors.lua:4667
 msgctxt "ammo-comms"

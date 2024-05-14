@@ -326,7 +326,6 @@ msgid "Hazards No"
 msgstr ""
 
 #: scripts/scenario_58_race.lua:634 scripts/scenario_58_race.lua:652
-#, fuzzy
 msgctxt "buttonGM"
 msgid "-Main"
 msgstr "- Précédent"

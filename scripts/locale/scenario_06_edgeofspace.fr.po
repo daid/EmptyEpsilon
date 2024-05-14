@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-05-07 14:03+0200\n"
+"PO-Revision-Date: 2024-05-13 18:59+0200\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -688,7 +688,7 @@ msgstr "Nous avons réapprovisionné votre stock de missiles."
 #: scripts/scenario_06_edgeofspace.lua:920
 msgctxt "ammo-comms"
 msgid "Please re-stock our mines. (2rep each)"
-msgstr "Merci de réapprovisionner notre stock de mines. (2 rép chacune)"
+msgstr "Merci de réapprovisionner notre stock de mines (2 rép chacune)"
 
 #: scripts/scenario_06_edgeofspace.lua:931
 msgctxt "ammo-comms"
@@ -718,7 +718,7 @@ msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
 #: scripts/scenario_06_edgeofspace.lua:962
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. (10rep each)"
-msgstr "Veuillez réapprovisionner nos missiles EMP. (10 rép chacun)"
+msgstr "Veuillez réapprovisionner nos missiles EMP (10 rép chacun)"
 
 #: scripts/scenario_06_edgeofspace.lua:973
 msgctxt "ammo-comms"
@@ -731,7 +731,7 @@ msgid ""
 "Recalibrated the electronics and fitted you with all the EMP missiles you "
 "can carry."
 msgstr ""
-"L' électronique a été recalibré et vous êtes chargé au maximum en missiles "
+"L'électronique a été recalibré et vous êtes chargé au maximum en missiles "
 "EMP."
 
 #: scripts/scenario_06_edgeofspace.lua:986
@@ -773,7 +773,7 @@ msgstr ""
 #: scripts/scenario_06_edgeofspace.lua:1018
 msgctxt "ammo-comms"
 msgid "Please re-stock our mines. (5rep each)"
-msgstr "Merci de nous réapprovisionner en mines. (5 rép chacune)"
+msgstr "Merci de nous réapprovisionner en mines (5 rép chacune)"
 
 #: scripts/scenario_06_edgeofspace.lua:1025
 msgctxt "ammo-comms"

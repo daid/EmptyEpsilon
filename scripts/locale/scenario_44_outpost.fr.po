@@ -4322,7 +4322,7 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_44_outpost.lua:12068
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Auriez-vous des homing missiles pour nous ? ("
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
 
 #: scripts/scenario_44_outpost.lua:12070
 msgctxt "ammo-comms"
@@ -4332,7 +4332,7 @@ msgstr "Avez-vous des missiles homing supplémentaires ? ("
 #: scripts/scenario_44_outpost.lua:12080
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr "Nous pourrions avoir besoin de quelques mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_44_outpost.lua:12082
 msgctxt "ammo-comms"
@@ -6797,7 +6797,7 @@ msgstr "Nous partons immédiatement défendre le marqueur %d."
 #: scripts/scenario_44_outpost.lua:14222 scripts/scenario_44_outpost.lua:15134
 msgctxt "shipAssist-comms"
 msgid "Assist me"
-msgstr "Aidez-nous"
+msgstr "Aidez-nous !"
 
 #: scripts/scenario_44_outpost.lua:14223 scripts/scenario_44_outpost.lua:15135
 msgctxt "shipAssist-comms"
@@ -6854,7 +6854,7 @@ msgstr "%s Missiles : %d/%d\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr "Amarrez-vous à %s"
+msgstr "Amarrez-vous à %s."
 
 #: scripts/scenario_44_outpost.lua:14253 scripts/scenario_44_outpost.lua:15159
 #, lua-format
