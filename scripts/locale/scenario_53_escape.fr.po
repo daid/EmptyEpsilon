@@ -2212,7 +2212,7 @@ msgstr "Espace de chargement insuffisant"
 #: scripts/scenario_53_escape.lua:2516
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr "Défendez un marqueur."
+msgstr "Défendez un marqueur"
 
 #: scripts/scenario_53_escape.lua:2518
 msgctxt "shipAssist-comms"
@@ -2230,7 +2230,7 @@ msgstr "Quel marqueur devons-nous défendre ?"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
-msgstr "Défendez le marqueur %d."
+msgstr "Défendez le marqueur %d"
 
 #: scripts/scenario_53_escape.lua:2525
 #, lua-format
@@ -2293,7 +2293,7 @@ msgstr "%s Missiles : %d/%d\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr "Amarrez-vous à %s."
+msgstr "Amarrez-vous à %s"
 
 #: scripts/scenario_53_escape.lua:2565
 #, lua-format

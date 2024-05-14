@@ -46,7 +46,7 @@ msgid ""
 "Version 2"
 msgstr ""
 "\n"
-"EN COURS DE TRADUCTION : 40%\n"
+"EN COURS DE TRADUCTION : 45%\n"
 "\n"
 "Capture opposing team's \"flag\" before they capture yours\n"
 "\n"
@@ -339,7 +339,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:750
 msgctxt "buttonGM"
 msgid "None"
-msgstr "Aucune"
+msgstr "Aucun"
 
 #: scripts/scenario_60_captureFlag.lua:751
 msgctxt "buttonGM"
@@ -349,7 +349,7 @@ msgstr "Facile"
 #: scripts/scenario_60_captureFlag.lua:752
 msgctxt "buttonGM"
 msgid "Normal"
-msgstr "Normale"
+msgstr "Normal"
 
 #: scripts/scenario_60_captureFlag.lua:753
 msgctxt "buttonGM"
@@ -378,7 +378,7 @@ msgstr "Facile"
 #: scripts/scenario_60_captureFlag.lua:822
 msgctxt "buttonGM"
 msgid "normal"
-msgstr "Normale"
+msgstr "Normal"
 
 #: scripts/scenario_60_captureFlag.lua:770
 #: scripts/scenario_60_captureFlag.lua:809
@@ -390,7 +390,7 @@ msgstr "Difficile"
 #: scripts/scenario_60_captureFlag.lua:793
 msgctxt "buttonGM"
 msgid "medium"
-msgstr "Normale"
+msgstr "Normal"
 
 #: scripts/scenario_60_captureFlag.lua:794
 msgctxt "buttonGM"
@@ -425,7 +425,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:843
 msgctxt "buttonGM"
 msgid "symmetric"
-msgstr ""
+msgstr "Symétrique"
 
 #: scripts/scenario_60_captureFlag.lua:844
 msgctxt "buttonGM"
@@ -454,7 +454,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1580
 msgctxt "buttonGM"
 msgid "Turn on Diagnostic"
-msgstr "Turn On Diagnostic"
+msgstr "Activer diagnostic"
 
 #: scripts/scenario_60_captureFlag.lua:872
 #: scripts/scenario_60_captureFlag.lua:1582
@@ -471,7 +471,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:883
 msgctxt "buttonGM"
 msgid "+Player Config"
-msgstr ""
+msgstr "+Configuration joueur"
 
 #: scripts/scenario_60_captureFlag.lua:885
 #, lua-format
@@ -1472,7 +1472,7 @@ msgstr "%s%d rép chacun)"
 #: scripts/scenario_60_captureFlag.lua:5229
 msgctxt "station-comms"
 msgid "Dock, please"
-msgstr ""
+msgstr "Merci de vous amarrer."
 
 #: scripts/scenario_60_captureFlag.lua:5235
 #: scripts/scenario_60_captureFlag.lua:5686
@@ -1561,7 +1561,6 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:6744
 #: scripts/scenario_60_captureFlag.lua:6754
 #: scripts/scenario_60_captureFlag.lua:6775
-#, fuzzy
 msgid "Back"
 msgstr "Précédent"
 
@@ -1678,7 +1677,7 @@ msgstr "Pourriez-vous fournir des HVLI ? ("
 
 #: scripts/scenario_60_captureFlag.lua:5434
 #: scripts/scenario_60_captureFlag.lua:5451
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
 msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
@@ -1691,7 +1690,6 @@ msgstr "Réputation insuffisante."
 
 #: scripts/scenario_60_captureFlag.lua:5440
 #: scripts/scenario_60_captureFlag.lua:5457
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
 msgstr "Réparateur embauché."
@@ -1738,7 +1736,7 @@ msgstr ""
 "Marchandises ou composants disponibles : (quantité, coût en réputation)\n"
 
 #: scripts/scenario_60_captureFlag.lua:5495
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
 msgstr "     %s : %i, %i\n"
@@ -1749,25 +1747,24 @@ msgid "Current Cargo:\n"
 msgstr "Cargaison actuelle\n"
 
 #: scripts/scenario_60_captureFlag.lua:5505
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
 msgstr "     %s : %i\n"
 
 #: scripts/scenario_60_captureFlag.lua:5511
-#, fuzzy
 msgctxt "trade-comms"
 msgid "     Empty\n"
 msgstr "     Vide\n"
 
 #: scripts/scenario_60_captureFlag.lua:5514
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
 msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 
 #: scripts/scenario_60_captureFlag.lua:5522
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
 msgstr "Achetez 1 %s pour %i rép"
@@ -1779,7 +1776,6 @@ msgid "Type: %s, Quantity: %i, Rep: %i"
 msgstr "Type : %s, Quantité : %i, Rép : %i"
 
 #: scripts/scenario_60_captureFlag.lua:5525
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -1820,7 +1816,7 @@ msgstr ""
 "Acheté"
 
 #: scripts/scenario_60_captureFlag.lua:5560
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
 msgstr "Échanger de la Nourriture (food) contre %s"
@@ -1836,7 +1832,6 @@ msgstr "Type : %s, Quantité : %i"
 #: scripts/scenario_60_captureFlag.lua:5568
 #: scripts/scenario_60_captureFlag.lua:5600
 #: scripts/scenario_60_captureFlag.lua:5632
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -1846,13 +1841,13 @@ msgstr ""
 "Échangé"
 
 #: scripts/scenario_60_captureFlag.lua:5592
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr "Échanger des produits de luxe (luxury) contre %s"
 
 #: scripts/scenario_60_captureFlag.lua:5624
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
 msgstr "Échanger des Médicaments (medicine) contre %s"
@@ -1863,7 +1858,7 @@ msgid "Jettison cargo"
 msgstr "Larguer la cargaison"
 
 #: scripts/scenario_60_captureFlag.lua:5655
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid ""
 "Available space: %i\n"
@@ -1983,7 +1978,7 @@ msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
 #, lua-format
 msgctxt "trade-comms"
 msgid "   %14s: %2i, %3i\n"
-msgstr "   %14s: %2i, %3i\n"
+msgstr "   %14s : %2i, %3i\n"
 
 #: scripts/scenario_60_captureFlag.lua:5814
 msgctxt "helpfullWarning-comms"
@@ -2017,7 +2012,6 @@ msgid "Where can I find particular goods?"
 msgstr "Où puis-je trouver des marchandises particulières ?"
 
 #: scripts/scenario_60_captureFlag.lua:5841
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "Friendly stations generally have food or medicine or both. Neutral stations "
@@ -2028,7 +2022,6 @@ msgstr ""
 "marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
 
 #: scripts/scenario_60_captureFlag.lua:5843
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 " Beyond that, I have no knowledge of specific stations.\n"
@@ -2040,13 +2033,11 @@ msgstr ""
 "Revenez plus tard, quelqu'un d'autre en saura peut-être plus que moi."
 
 #: scripts/scenario_60_captureFlag.lua:5849
-#, fuzzy
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
 msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 
 #: scripts/scenario_60_captureFlag.lua:5851
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -2143,7 +2134,6 @@ msgid " or food"
 msgstr " ou de la Nourriture (food)"
 
 #: scripts/scenario_60_captureFlag.lua:5968
-#, fuzzy
 msgctxt "trade-comms"
 msgid " and will trade it for food"
 msgstr " et va l'échanger contre de la Nourriture (food)"
@@ -2154,7 +2144,6 @@ msgid " or luxury"
 msgstr " ou des Produits de luxe (luxury)"
 
 #: scripts/scenario_60_captureFlag.lua:5976
-#, fuzzy
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
 msgstr " et va l'échanger contre des Produits de luxe (luxury)"
@@ -2371,7 +2360,7 @@ msgstr "%s Missiles : %d/%d\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr "Amarrez-vous à %s."
+msgstr "Amarrez-vous à %s"
 
 #: scripts/scenario_60_captureFlag.lua:6566
 #, lua-format
@@ -2382,7 +2371,7 @@ msgstr "En cours d'amarrage à %s."
 #: scripts/scenario_60_captureFlag.lua:6577
 msgctxt "shipAssist-comms"
 msgid "Go attack enemies"
-msgstr ""
+msgstr "Allez attaquer les ennemis"
 
 #: scripts/scenario_60_captureFlag.lua:6579
 msgctxt "shipAssist-comms"
