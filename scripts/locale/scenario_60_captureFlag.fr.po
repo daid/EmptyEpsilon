@@ -16,7 +16,7 @@ msgstr ""
 
 # Scenario name
 msgid "Capture the Flag"
-msgstr ""
+msgstr "Capture du drapeau"
 
 # Scenario description
 #, fuzzy
@@ -46,29 +46,34 @@ msgid ""
 "Version 2"
 msgstr ""
 "\n"
-"EN COURS DE TRADUCTION : 45%\n"
+"EN COURS DE TRADUCTION : 69%\n"
 "\n"
-"Capture opposing team's \"flag\" before they capture yours\n"
+"Capturez le « drapeau » de l'équipe adverse avant qu'elle ne capture le "
+"vôtre.\n"
 "\n"
-"The region consists of two halves divided by a line of nebulae and/or "
-"markers. The first 5 minutes (configurable) each side decides where to place "
-"their flag. The ships closest to the referee station determine the team's "
-"flag location during the initial phase. Crossing to the other side during "
-"this phase will result in ship destruction. The weapons officer will mark "
-"the flag coordinates when the ship reaches the flag location. After the flag "
-"hide timer expires, an artifact will be placed at the location representing "
-"the team's flag. If no place has been marked, the ship's current location "
-"will be used. If the location is outside the game boundaries, the flag will "
-"be placed at the nearest in bounds location\n"
+"La région se compose de deux moitiés divisées par une ligne de nébuleuses et/"
+"ou de marqueurs. Les 5 premières minutes (configurables), chaque camp décide "
+"où placer son drapeau. Les vaisseaux les plus proches du poste d'arbitrage "
+"déterminent l'emplacement du drapeau de l'équipe lors de la phase initiale. "
+"Passer de l’autre côté pendant cette phase entraînera la destruction du "
+"vaisseau. L'officier des armes marquera les coordonnées du drapeau lorsque "
+"le vaisseau atteindra l'emplacement du drapeau. Une fois le délai de "
+"masquage du drapeau expiré, un artefact sera placé à l'emplacement "
+"représentant le drapeau de l'équipe. Si aucun lieu n'a été marqué, "
+"l'emplacement actuel du vaisseau sera utilisé. Si l'emplacement est en "
+"dehors des limites du jeu, le drapeau sera placé à l'emplacement le plus "
+"proche des limites.\n"
 "\n"
-"Once the flags are placed, the hunt is on. Ships may cross the border in "
-"search of the other team's flag, but while they are in the other team's "
-"territory they may be tagged by an opponent ship within 0.75U. Being tagged "
-"sends you back to your own region with damage to your warp/jump drive. Each "
-"flag must be scanned before it can be retrived. Retrieval occurs by getting "
-"within 1U of the flag. Being tagged while in posession of the flag drops the "
-"flag at the location of the tag event. Cross back to your side with the flag "
-"to claim victory\n"
+"Une fois les drapeaux placés, la chasse est lancée. Les vaisseaux peuvent "
+"traverser la frontière à la recherche du drapeau de l'autre équipe, mais "
+"lorsqu'ils se trouvent sur le territoire de l'autre équipe, ils peuvent être "
+"touchés par un vaisseau adverse dans un rayon de 0,75 unité. Être marqué "
+"vous renvoie dans votre propre région avec des dommages à votre lecteur de "
+"distorsion/saut. Chaque drapeau doit être scanné avant de pouvoir être "
+"récupéré. La récupération s'effectue en se plaçant à moins de 1U du drapeau. "
+"Être marqué alors qu'il est en possession du drapeau laisse tomber le "
+"drapeau à l'emplacement de l'événement de tag. Revenez à vos côtés avec le "
+"drapeau pour remporter la victoire\n"
 "\n"
 "Version 2"
 
@@ -88,6 +93,7 @@ msgstr "Asymétrique"
 msgctxt "Terrain"
 msgid "No effort made to make the two sides of the arena equivalent"
 msgstr ""
+"Aucun effort n’est fait pour rendre équivalentes les deux zones de l’arène."
 
 # Scenario name
 msgctxt "Terrain"
@@ -96,7 +102,7 @@ msgstr "Vide"
 
 msgctxt "Terrain"
 msgid "No terrain. Used primarily for testing"
-msgstr ""
+msgstr "Aucun terrain. Utilisé principalement pour les tests."
 
 msgctxt "Terrain"
 msgid "Passing"
@@ -334,7 +340,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:735
 msgctxt "scienceDescription-station"
 msgid "Referee"
-msgstr ""
+msgstr "Arbitre"
 
 #: scripts/scenario_60_captureFlag.lua:750
 msgctxt "buttonGM"
@@ -525,9 +531,10 @@ msgid "Player Prefs"
 msgstr ""
 
 #: scripts/scenario_60_captureFlag.lua:950
+#, fuzzy
 msgctxt "msgGM"
 msgid "Remaining player preferences:"
-msgstr ""
+msgstr "Préférences restantes des joueurs :"
 
 #: scripts/scenario_60_captureFlag.lua:954
 #, lua-format
@@ -552,7 +559,7 @@ msgstr ""
 #, lua-format
 msgctxt "msgGM"
 msgid "    Faction:%s"
-msgstr ""
+msgstr "    Faction :%s"
 
 #: scripts/scenario_60_captureFlag.lua:963
 #, lua-format
@@ -616,7 +623,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1119
 msgctxt "scienceDescription-buoy"
 msgid "Territory boundary marker"
-msgstr ""
+msgstr "Borne de frontière de territoire"
 
 #: scripts/scenario_60_captureFlag.lua:1118
 #: scripts/scenario_60_captureFlag.lua:1119
@@ -625,6 +632,8 @@ msgid ""
 "A buoy placed on the line marking the boundary between Human and Kraylor "
 "territory"
 msgstr ""
+"Une bouée placée sur la ligne marquant la frontière entre les territoires "
+"Humain et Kraylor"
 
 #: scripts/scenario_60_captureFlag.lua:1189
 msgctxt "scienceDescription-flag"
@@ -637,6 +646,8 @@ msgid ""
 "A temporary buoy placed on the edge of the territory where a flag or decoy "
 "may be hidden"
 msgstr ""
+"Une bouée temporaire placée en bordure du territoire où un drapeau ou un "
+"leurre peut être caché."
 
 #: scripts/scenario_60_captureFlag.lua:1196
 msgctxt "buttonGM"
@@ -1087,9 +1098,10 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_60_captureFlag.lua:1908
+#, fuzzy
 msgctxt "msgGM"
 msgid "Human:"
-msgstr ""
+msgstr "Humains :"
 
 #: scripts/scenario_60_captureFlag.lua:1909
 #: scripts/scenario_60_captureFlag.lua:1916
@@ -1098,6 +1110,8 @@ msgid ""
 "\n"
 "   Number of active ships: "
 msgstr ""
+"\n"
+"   Nombre de vaisseaux actifs : "
 
 #: scripts/scenario_60_captureFlag.lua:1910
 #: scripts/scenario_60_captureFlag.lua:1917
@@ -1106,6 +1120,8 @@ msgid ""
 "\n"
 "   Number of destroyed ships: "
 msgstr ""
+"\n"
+"   Nombre de vaisseaux détruits : "
 
 #: scripts/scenario_60_captureFlag.lua:1912
 #: scripts/scenario_60_captureFlag.lua:1919
@@ -1114,6 +1130,8 @@ msgid ""
 "\n"
 "   Total number of active drones: "
 msgstr ""
+"\n"
+"   Nombre total de drones actifs : "
 
 #: scripts/scenario_60_captureFlag.lua:1913
 #: scripts/scenario_60_captureFlag.lua:1920
@@ -1122,6 +1140,8 @@ msgid ""
 "\n"
 "   Total number of destroyed drones: "
 msgstr ""
+"\n"
+"   Nombre total de drones détruits : "
 
 #: scripts/scenario_60_captureFlag.lua:1915
 msgctxt "msgGM"
@@ -1129,6 +1149,8 @@ msgid ""
 "\n"
 "Kraylor:"
 msgstr ""
+"\n"
+"Kraylors :"
 
 #: scripts/scenario_60_captureFlag.lua:1923
 msgctxt "msgGM"
@@ -1142,87 +1164,88 @@ msgstr ""
 #, lua-format
 msgctxt "callsign-squad"
 msgid "%s-Sq%i"
-msgstr ""
+msgstr "%s-Sq%i"
 
 #: scripts/scenario_60_captureFlag.lua:2140
 #: scripts/scenario_60_captureFlag.lua:6405
 #, lua-format
 msgctxt "callsign-drone"
 msgid "%s-#%i/%i"
-msgstr ""
+msgstr "%s-#%i/%i"
 
 #: scripts/scenario_60_captureFlag.lua:2142
 #: scripts/scenario_60_captureFlag.lua:6407
 #, lua-format
 msgctxt "callsign-drone"
 msgid "%s-%i of %i"
-msgstr ""
+msgstr "%s-%i de %i"
 
 #: scripts/scenario_60_captureFlag.lua:2152
 #: scripts/scenario_60_captureFlag.lua:6417
 #, lua-format
 msgctxt "callsign-drone"
 msgid "%s%i/%i"
-msgstr ""
+msgstr "%s%i/%i"
 
 #: scripts/scenario_60_captureFlag.lua:2170
 #: scripts/scenario_60_captureFlag.lua:6435
 #, lua-format
 msgctxt "drones-msgWeapons"
 msgid "%i drones launched"
-msgstr ""
+msgstr "%i drones largués."
 
 #: scripts/scenario_60_captureFlag.lua:2172
 #: scripts/scenario_60_captureFlag.lua:6437
 #, lua-format
 msgctxt "drones-msgWeapons"
 msgid "%i drone launched"
-msgstr ""
+msgstr "%i drone largué."
 
 #: scripts/scenario_60_captureFlag.lua:2177
 #: scripts/scenario_60_captureFlag.lua:6442
 #, lua-format
 msgctxt "drones-msgTactical"
 msgid "%i drones launched"
-msgstr ""
+msgstr "%i drones largués."
 
 #: scripts/scenario_60_captureFlag.lua:2179
 #: scripts/scenario_60_captureFlag.lua:6444
 #, lua-format
 msgctxt "drones-msgTactical"
 msgid "%i drone launched"
-msgstr ""
+msgstr "%i drone largué."
 
 #: scripts/scenario_60_captureFlag.lua:2183
 #: scripts/scenario_60_captureFlag.lua:6448
 #, lua-format
 msgctxt "drones-shipLog"
 msgid "Deployed %i drones as squadron %s"
-msgstr ""
+msgstr "%i drones déployés en tant qu'escadron %s."
 
 #: scripts/scenario_60_captureFlag.lua:2185
 #: scripts/scenario_60_captureFlag.lua:6450
 #, lua-format
 msgctxt "drones-shipLog"
 msgid "Deployed %i drone as squadron %s"
-msgstr ""
+msgstr "%i drone déployé en tant qu'escadron %s."
 
 #: scripts/scenario_60_captureFlag.lua:2191
 #, lua-format
 msgctxt "drones-msgWeapons"
 msgid "You have %i drones to deploy"
-msgstr ""
+msgstr "Vous avez %i drones à déployer."
 
 #: scripts/scenario_60_captureFlag.lua:2193
 #, lua-format
 msgctxt "drones-msgTactical"
 msgid "You have %i drones to deploy"
-msgstr ""
+msgstr "Vous avez %i drones à déployer."
 
 #: scripts/scenario_60_captureFlag.lua:2197
 msgctxt "drones-"
 msgid "> > > > > > > > Drone Hull Status Report: < < < < < < < <"
 msgstr ""
+"> > > > > > > > Rapport sur l'état de la coque des drones : < < < < < < < <"
 
 #: scripts/scenario_60_captureFlag.lua:2204
 #: scripts/scenario_60_captureFlag.lua:2247
@@ -1231,6 +1254,8 @@ msgid ""
 "\n"
 "        Drone Squad: "
 msgstr ""
+"\n"
+"        Escouade de drones :"
 
 #: scripts/scenario_60_captureFlag.lua:2210
 #, lua-format
@@ -1253,7 +1278,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:2269
 msgctxt "drones-"
 msgid " --Destroyed--"
-msgstr ""
+msgstr "-- Détruit --"
 
 #: scripts/scenario_60_captureFlag.lua:2228
 msgctxt "drones-msgEngineer&Engineer+"
@@ -1261,6 +1286,8 @@ msgid ""
 "\n"
 "    Number of deployed drone squadrons: "
 msgstr ""
+"\n"
+"    Nombre d'escadrons de drones déployés : "
 
 #: scripts/scenario_60_captureFlag.lua:2229
 msgctxt "drones-msgEngineer&Engineer+"
@@ -1268,11 +1295,13 @@ msgid ""
 "\n"
 "    Current number of live deployed drones: "
 msgstr ""
+"\n"
+"    Nombre actuel de drones déployés : "
 
 #: scripts/scenario_60_captureFlag.lua:2240
 msgctxt "drones-"
 msgid "> > > > > > > > Drone Location Report: < < < < < < < <"
-msgstr ""
+msgstr "> > > > > > > > Rapport de localisation des drones : < < < < < < < <"
 
 #: scripts/scenario_60_captureFlag.lua:2254
 #, lua-format
@@ -1288,6 +1317,8 @@ msgid ""
 "\n"
 "    Number of deployed drone squadrons: "
 msgstr ""
+"\n"
+"    Nombre d'escadrons de drones déployés : "
 
 #: scripts/scenario_60_captureFlag.lua:2274
 msgctxt "drones-msgHelms&Tactical"
@@ -1295,56 +1326,60 @@ msgid ""
 "\n"
 "    Current number of live deployed drones: "
 msgstr ""
+"\n"
+"    Nombre actuel de drones déployés : "
 
 #: scripts/scenario_60_captureFlag.lua:2288
 msgctxt "drones-buttonWeapons"
 msgid "5 Drones"
-msgstr ""
+msgstr "5 drones"
 
 #: scripts/scenario_60_captureFlag.lua:2292
 msgctxt "drones-buttonTactical"
 msgid "5 Drones"
-msgstr ""
+msgstr "5 drones"
 
 #: scripts/scenario_60_captureFlag.lua:2296
 msgctxt "drones-buttonWeapons"
 msgid "10 Drones"
-msgstr ""
+msgstr "10 drones"
 
 #: scripts/scenario_60_captureFlag.lua:2300
 msgctxt "drones-buttonTactical"
 msgid "10 Drones"
-msgstr ""
+msgstr "10 drones"
 
 #: scripts/scenario_60_captureFlag.lua:2304
 msgctxt "drones-buttonWeapons"
 msgid "Count Drones"
-msgstr ""
+msgstr "Compter les drones"
 
 #: scripts/scenario_60_captureFlag.lua:2308
 msgctxt "drones-buttonTactical"
 msgid "Count Drones"
-msgstr ""
+msgstr "Compter les drones"
 
 #: scripts/scenario_60_captureFlag.lua:2312
+#, fuzzy
 msgctxt "drones-buttonEngineer"
 msgid "Drone Hulls"
-msgstr ""
+msgstr "Coques de drones"
 
 #: scripts/scenario_60_captureFlag.lua:2316
+#, fuzzy
 msgctxt "drones-buttonEngineer+"
 msgid "Drone Hulls"
-msgstr ""
+msgstr "Coques de drones"
 
 #: scripts/scenario_60_captureFlag.lua:2320
 msgctxt "drones-buttonHelms"
 msgid "Drone Locations"
-msgstr ""
+msgstr "Emplacements des drones"
 
 #: scripts/scenario_60_captureFlag.lua:2324
 msgctxt "drones-buttonTactical"
 msgid "Drone Locations"
-msgstr ""
+msgstr "Emplacements des drones"
 
 #: scripts/scenario_60_captureFlag.lua:2378
 #: scripts/scenario_60_captureFlag.lua:2396
@@ -1360,27 +1395,27 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:7723
 msgctxt "scienceDescription-flag"
 msgid "Flag"
-msgstr ""
+msgstr "Drapeau"
 
 #: scripts/scenario_60_captureFlag.lua:2378
 #: scripts/scenario_60_captureFlag.lua:7341
 #: scripts/scenario_60_captureFlag.lua:7603
 msgctxt "scienceDescription-flag"
 msgid "Human Navy Flag"
-msgstr ""
+msgstr "Drapeau de la Marine humaine"
 
 #: scripts/scenario_60_captureFlag.lua:2382
 #, lua-format
 msgctxt "flag-msgMainscreen"
 msgid "%s dropped Human Navy flag"
-msgstr ""
+msgstr "%s a largué le drapeau de la Marine humaine."
 
 #: scripts/scenario_60_captureFlag.lua:2384
 #: scripts/scenario_60_captureFlag.lua:7626
 #: scripts/scenario_60_captureFlag.lua:7746
 msgctxt "flag-msgMainscreen"
 msgid "Human Navy flag dropped"
-msgstr ""
+msgstr "Le drapeau de la Marine humaine est largué."
 
 #: scripts/scenario_60_captureFlag.lua:2387
 #: scripts/scenario_60_captureFlag.lua:2405
@@ -1388,25 +1423,25 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:7749
 msgctxt "flag-msgMainscreen"
 msgid "Flag dropped"
-msgstr ""
+msgstr "Drapeau largué."
 
 #: scripts/scenario_60_captureFlag.lua:2396
 #: scripts/scenario_60_captureFlag.lua:7377
 #: scripts/scenario_60_captureFlag.lua:7723
 msgctxt "scienceDescription-flag"
 msgid "Kraylor Flag"
-msgstr ""
+msgstr "Drapeau Kraylor"
 
 #: scripts/scenario_60_captureFlag.lua:2400
 #, lua-format
 msgctxt "flag-msgMainscreen"
 msgid "%s dropped Kraylor flag"
-msgstr ""
+msgstr "%s a largué le drapeau Kraylor."
 
 #: scripts/scenario_60_captureFlag.lua:2402
 msgctxt "flag-msgMainscreen"
 msgid "Kraylor flag dropped"
-msgstr ""
+msgstr "Le drapeau Kraylor est largué."
 
 #: scripts/scenario_60_captureFlag.lua:2545
 msgctxt "repairCrew-msgEngineer"
@@ -1444,6 +1479,8 @@ msgid ""
 "Worm hole teleportation destination will change after the flag hiding time "
 "expires"
 msgstr ""
+"La destination de téléportation du trou de ver changera après l'expiration "
+"du délai de dissimulation du drapeau."
 
 #: scripts/scenario_60_captureFlag.lua:4002
 msgctxt "wormhole-msgTactical"
@@ -1451,6 +1488,8 @@ msgid ""
 "Worm hole teleportation destination will change after the flag hiding time "
 "expires"
 msgstr ""
+"La destination de téléportation du trou de ver changera après l'expiration "
+"du délai de dissimulation du drapeau."
 
 #: scripts/scenario_60_captureFlag.lua:5195
 msgctxt "station-comms"
@@ -2152,13 +2191,13 @@ msgstr " et va l'échanger contre des Produits de luxe (luxury)"
 #: scripts/scenario_60_captureFlag.lua:6020
 msgctxt "flag-buttonWeapons"
 msgid "Drop flag"
-msgstr ""
+msgstr "Larguer le drapeau"
 
 #: scripts/scenario_60_captureFlag.lua:6006
 #: scripts/scenario_60_captureFlag.lua:6022
 msgctxt "flag-buttonTactical"
 msgid "Drop flag"
-msgstr ""
+msgstr "Larguer le drapeau"
 
 #: scripts/scenario_60_captureFlag.lua:6040
 #: scripts/scenario_60_captureFlag.lua:6053
@@ -2167,6 +2206,8 @@ msgid ""
 "Flag position recorded. Flag will be placed here when preparation period "
 "complete"
 msgstr ""
+"Position du drapeau enregistrée. Le drapeau sera placé ici une fois la "
+"période de préparation terminée."
 
 #: scripts/scenario_60_captureFlag.lua:6044
 #: scripts/scenario_60_captureFlag.lua:6057
@@ -2175,6 +2216,8 @@ msgid ""
 "Flag position recorded. Flag will be placed here when preparation period "
 "complete"
 msgstr ""
+"Position du drapeau enregistrée. Le drapeau sera placé ici une fois la "
+"période de préparation terminée."
 
 #: scripts/scenario_60_captureFlag.lua:6189
 msgctxt "decoy-msgWeapons"
@@ -2182,6 +2225,8 @@ msgid ""
 "Decoy position recorded. Decoy will be placed here when preparation period "
 "complete"
 msgstr ""
+"Position du leurre enregistrée. Le leurre sera placé ici une fois la période "
+"de préparation terminée."
 
 #: scripts/scenario_60_captureFlag.lua:6193
 msgctxt "decoy-msgTactical"
@@ -2189,43 +2234,45 @@ msgid ""
 "Decoy position recorded. Decoy will be placed here when preparation period "
 "complete"
 msgstr ""
+"Position du leurre enregistrée. Le leurre sera placé ici une fois la période "
+"de préparation terminée."
 
 #: scripts/scenario_60_captureFlag.lua:6215
 #, lua-format
 msgctxt "decoy-buttonWeapons"
 msgid "Drop Decoy %i"
-msgstr ""
+msgstr "Lâcher le leurre %i"
 
 #: scripts/scenario_60_captureFlag.lua:6218
 #, lua-format
 msgctxt "decoy-buttonTactical"
 msgid "Drop Decoy %i"
-msgstr ""
+msgstr "Lâcher le leurre %i"
 
 #: scripts/scenario_60_captureFlag.lua:6337
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "drones-msgWeapons"
 msgid "You do not have %i drones to deploy"
-msgstr ""
+msgstr "Vous n'avez pas %i drones à déployer."
 
 #: scripts/scenario_60_captureFlag.lua:6339
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "drones-msgTactical"
 msgid "You do not have %i drones to deploy"
-msgstr ""
+msgstr "Vous n'avez pas %i drones à déployer."
 
 #: scripts/scenario_60_captureFlag.lua:6344
 #: scripts/scenario_60_captureFlag.lua:6374
 #, lua-format
 msgctxt "drones-tabWeapons&Tactical"
 msgid "Drones Available: %i"
-msgstr ""
+msgstr "Drones disponibles : %i"
 
 #: scripts/scenario_60_captureFlag.lua:6458
 #, lua-format
 msgctxt "drones-"
 msgid "  WHACK!  Drone %s in squadron %s has been destroyed by %s!"
-msgstr ""
+msgstr "BAAAMM! Le drone %s de l'escadron %s a été détruit par %s !"
 
 #: scripts/scenario_60_captureFlag.lua:6470
 msgctxt "drones-msgEngineer&Engineer+"
@@ -2233,30 +2280,36 @@ msgid ""
 "%s! Telemetry from %s in squad % stopped abruptly indicating destruction. "
 "Probable instigator: %s"
 msgstr ""
+"%s ! La liaison avec %s de l'escouade % s'est arrêtée brusquement, indiquant "
+"une destruction. Instigateur probable : %s"
 
 #: scripts/scenario_60_captureFlag.lua:6472
 #, lua-format
 msgctxt "drones-msgEngineer&Engineer+"
 msgid "*%s* Another drone bites the dust: %s in squad %s destroyed by %s"
 msgstr ""
+"*%s* Un autre drone vient de mordre la poussière : %s de l'escouade %s "
+"détruit par %s."
 
 #: scripts/scenario_60_captureFlag.lua:6474
 #, lua-format
 msgctxt "drones-msgEngineer&Engineer+"
 msgid "--%s-- Drone %s in squad %s just disappeared. %s was nearby"
 msgstr ""
+"--%s-- Le drone %s de l'escouade %s vient de disparaître. %s était à "
+"proximité."
 
 #: scripts/scenario_60_captureFlag.lua:6476
 #, lua-format
 msgctxt "drones-msgEngineer&Engineer+"
 msgid "%s! %s just took out Drone %s in squad %s"
-msgstr ""
+msgstr "%s ! %s vient d'éliminer le drone %s dans l'équipe %s."
 
 #: scripts/scenario_60_captureFlag.lua:6478
 #, lua-format
 msgctxt "drones-msgEngineer&Engineer+"
 msgid "%s! Drone %s in squad %s was destroyed by %s"
-msgstr ""
+msgstr "%s ! Le drone %s de l'escouade %s vient d'être détruit par %s."
 
 #: scripts/scenario_60_captureFlag.lua:6513
 msgctxt "shipAssist-comms"
@@ -2376,13 +2429,13 @@ msgstr "Allez attaquer les ennemis"
 #: scripts/scenario_60_captureFlag.lua:6579
 msgctxt "shipAssist-comms"
 msgid "Going roaming and attacking"
-msgstr ""
+msgstr "Parti vagabonder et attaquer."
 
 #: scripts/scenario_60_captureFlag.lua:6582
 #: scripts/scenario_60_captureFlag.lua:6686
 msgctxt "shipAssist-comms"
 msgid "Go to waypoint. Attack enemies en route"
-msgstr ""
+msgstr "Allez au marqueur et attaquez les ennemis en route"
 
 #: scripts/scenario_60_captureFlag.lua:6587
 #: scripts/scenario_60_captureFlag.lua:6602
@@ -2390,7 +2443,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:6712
 msgctxt "shipAssist-comms"
 msgid "Which waypoint?"
-msgstr ""
+msgstr "Quel marqueur ?"
 
 #: scripts/scenario_60_captureFlag.lua:6589
 #: scripts/scenario_60_captureFlag.lua:6604
@@ -2399,32 +2452,32 @@ msgstr ""
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Go to WP%d"
-msgstr ""
+msgstr "Allez au marqueur %d"
 
 #: scripts/scenario_60_captureFlag.lua:6591
 #: scripts/scenario_60_captureFlag.lua:6700
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Going to WP%d, watching for enemies en route"
-msgstr ""
+msgstr "Allez au marqueur %d, surveiller les ennemis en route"
 
 #: scripts/scenario_60_captureFlag.lua:6597
 #: scripts/scenario_60_captureFlag.lua:6706
 msgctxt "shipAssist-comms"
 msgid "Go to waypoint. Ignore enemies"
-msgstr ""
+msgstr "Allez au marqueur en ignorant les ennemis"
 
 #: scripts/scenario_60_captureFlag.lua:6606
 #: scripts/scenario_60_captureFlag.lua:6720
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Going to WP%d, ignoring enemies"
-msgstr ""
+msgstr "Aller au marqueur %d en ignorant les ennemis"
 
 #: scripts/scenario_60_captureFlag.lua:6612
 msgctxt "shipAssist-comms"
 msgid "Stop and defend your current position"
-msgstr ""
+msgstr "Arrêtez-vous et défendez votre position actuelle"
 
 #: scripts/scenario_60_captureFlag.lua:6614
 msgctxt "shipAssist-comms"
@@ -2434,7 +2487,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:6617
 msgctxt "shipAssist-comms"
 msgid "Stop. Do nothing"
-msgstr ""
+msgstr "Stop, ne faîtes rien"
 
 #: scripts/scenario_60_captureFlag.lua:6621
 msgctxt "shipAssist-comms"
@@ -2531,7 +2584,7 @@ msgstr "Diriger %s"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "What command should I give to %s?"
-msgstr ""
+msgstr "Quel ordre dois-je donner à %s ?"
 
 #: scripts/scenario_60_captureFlag.lua:6663
 #, lua-format
@@ -2554,7 +2607,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:6726
 msgctxt "shipAssist-comms"
 msgid "Go and swarm enemies"
-msgstr ""
+msgstr "Allez envahir les ennemis"
 
 #: scripts/scenario_60_captureFlag.lua:6733
 #, lua-format
@@ -2565,7 +2618,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:6736
 msgctxt "shipAssist-comms"
 msgid "Stop and defend your current positions"
-msgstr ""
+msgstr "Arrêtez-vous et défendez vos positions actuelles"
 
 #: scripts/scenario_60_captureFlag.lua:6743
 #, lua-format
@@ -2576,24 +2629,24 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:6746
 msgctxt "shipAssist-comms"
 msgid "Stop. Do Nothing"
-msgstr ""
+msgstr "Stop ! Ne faites rien"
 
 #: scripts/scenario_60_captureFlag.lua:6753
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s standing down"
-msgstr ""
+msgstr "%s se retire."
 
 #: scripts/scenario_60_captureFlag.lua:6756
 msgctxt "shipAssist-comms"
 msgid "Other drones in squad form up on me"
-msgstr ""
+msgstr "D'autres drones de l'escouade se forment sur moi."
 
 #: scripts/scenario_60_captureFlag.lua:6774
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s is forming up on me"
-msgstr ""
+msgstr "%s se forme sur moi"
 
 #: scripts/scenario_60_captureFlag.lua:6786
 msgctxt "shipEnemy-comms"
@@ -2732,7 +2785,7 @@ msgstr ""
 #, lua-format
 msgctxt "callsign-station"
 msgid "Hide flag %i:%.1f"
-msgstr ""
+msgstr "Drapeau caché %i :%.1f"
 
 #: scripts/scenario_60_captureFlag.lua:7308
 msgctxt "callsign-station"
@@ -2744,14 +2797,14 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:7456
 msgctxt "scienceDescription-flag"
 msgid "Human Navy Decoy Flag"
-msgstr ""
+msgstr "Drapeau leurre de la Marine humaine"
 
 #: scripts/scenario_60_captureFlag.lua:7417
 #: scripts/scenario_60_captureFlag.lua:7443
 #: scripts/scenario_60_captureFlag.lua:7469
 msgctxt "scienceDescription-flag"
 msgid "Kraylor Decoy Flag"
-msgstr ""
+msgstr "Drapeau leurre Kraylor"
 
 #: scripts/scenario_60_captureFlag.lua:7514
 #, lua-format
@@ -2762,160 +2815,160 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:7533
 msgctxt "flag-tabHelms"
 msgid "Human Flag Aboard"
-msgstr ""
+msgstr "Drapeau Humain à bord"
 
 #: scripts/scenario_60_captureFlag.lua:7537
 msgctxt "flag-tabTactical"
 msgid "Human Flag Aboard"
-msgstr ""
+msgstr "Drapeau Humain à bord"
 
 #: scripts/scenario_60_captureFlag.lua:7541
 msgctxt "flag-shipLog"
 msgid "You picked up the Human Navy flag"
-msgstr ""
+msgstr "Vous avez capturé le drapeau de la Marine humaine."
 
 #: scripts/scenario_60_captureFlag.lua:7548
 #, lua-format
 msgctxt "flag-shipLog"
 msgid "Kraylor ship %s picked up your flag"
-msgstr ""
+msgstr "Le vaisseau Kraylor %s a capturé votre drapeau."
 
 #: scripts/scenario_60_captureFlag.lua:7550
 msgctxt "flag-shipLog"
 msgid "The Kraylor picked up your flag"
-msgstr ""
+msgstr "Les Kraylors ont capturé votre drapeau."
 
 #: scripts/scenario_60_captureFlag.lua:7554
 #, lua-format
 msgctxt "flag-shipLog"
 msgid "%s picked up the Human Navy Flag"
-msgstr ""
+msgstr "%s a capturé le drapeau de la Marine humaine."
 
 #: scripts/scenario_60_captureFlag.lua:7556
 msgctxt "flag-shipLog"
 msgid "Your team picked up the Human Navy flag"
-msgstr ""
+msgstr "Votre équipe a capturé le drapeau de la Marine humaine."
 
 #: scripts/scenario_60_captureFlag.lua:7562
 #, lua-format
 msgctxt "flag-msgMainscreen"
 msgid "Kraylor ship %s obtained Human Navy flag"
-msgstr ""
+msgstr "Le vaisseau Kraylor %s a capturé le drapeau de la Marine humaine."
 
 #: scripts/scenario_60_captureFlag.lua:7564
 msgctxt "flag-msgMainscreen"
 msgid "Kraylor obtained Human Navy flag"
-msgstr ""
+msgstr "Les Kraylors ont capturé le drapeau de la Marine humaine."
 
 #: scripts/scenario_60_captureFlag.lua:7567
 #: scripts/scenario_60_captureFlag.lua:7687
 msgctxt "flag-msgMainscreen"
 msgid "Flag obtained"
-msgstr ""
+msgstr "Drapeau capturé."
 
 #: scripts/scenario_60_captureFlag.lua:7610
 #, lua-format
 msgctxt "flag-shipLog"
 msgid "Kraylor ship %s dropped your flag"
-msgstr ""
+msgstr "Le vaisseau Kraylor %s a largué votre drapeau."
 
 #: scripts/scenario_60_captureFlag.lua:7612
 msgctxt "flag-shipLog"
 msgid "The Kraylor dropped your flag"
-msgstr ""
+msgstr "Les Kraylors ont largué votre drapeau."
 
 #: scripts/scenario_60_captureFlag.lua:7616
 #, lua-format
 msgctxt "flag-shipLog"
 msgid "%s dropped the Human Navy Flag"
-msgstr ""
+msgstr "%s a largué le drapeau de la Marine humaine."
 
 #: scripts/scenario_60_captureFlag.lua:7618
 msgctxt "flag-shipLog"
 msgid "Your team dropped the Human Navy flag"
-msgstr ""
+msgstr "Votre équipe a largué le drapeau de la Marine humaine."
 
 #: scripts/scenario_60_captureFlag.lua:7624
 #, lua-format
 msgctxt "flag-msgMainscreen"
 msgid "Kraylor ship %s dropped Human Navy flag"
-msgstr ""
+msgstr "Le vaisseau Kraylor %s a largué le drapeau de la Marine humaine."
 
 #: scripts/scenario_60_captureFlag.lua:7653
 msgctxt "flag-tabHelms"
 msgid "Kraylor Flag Aboard"
-msgstr ""
+msgstr "Drapeau Kraylor à bord"
 
 #: scripts/scenario_60_captureFlag.lua:7657
 msgctxt "flag-tabTactical"
 msgid "Kraylor Flag Aboard"
-msgstr ""
+msgstr "Drapeau Kraylor à bord"
 
 #: scripts/scenario_60_captureFlag.lua:7661
 msgctxt "flag-shipLog"
 msgid "You picked up the Kraylor flag"
-msgstr ""
+msgstr "Vous avez capturé le drapeau Kraylor."
 
 #: scripts/scenario_60_captureFlag.lua:7668
 #, lua-format
 msgctxt "flag-shipLog"
 msgid "Human Navy ship %s picked up your flag"
-msgstr ""
+msgstr "Le vaisseau de la Marine humaine %s a capturé votre drapeau."
 
 #: scripts/scenario_60_captureFlag.lua:7670
 msgctxt "flag-shipLog"
 msgid "The Human Navy picked up your flag"
-msgstr ""
+msgstr "La Marine humaine a capturé votre drapeau."
 
 #: scripts/scenario_60_captureFlag.lua:7674
 #, lua-format
 msgctxt "flag-shipLog"
 msgid "%s picked up the Kraylor Flag"
-msgstr ""
+msgstr "%s a capturé le drapeau Kraylor."
 
 #: scripts/scenario_60_captureFlag.lua:7676
 msgctxt "flag-shipLog"
 msgid "Your team picked up the Kraylor flag"
-msgstr ""
+msgstr "Votre équipe a capturé le drapeau Kraylor."
 
 #: scripts/scenario_60_captureFlag.lua:7682
 #, lua-format
 msgctxt "flag-msgMainscreen"
 msgid "Human Navy ship %s obtained Kraylor flag"
-msgstr ""
+msgstr "Le vaisseau de la Marine humaine %s a capturé le drapeau Kraylor."
 
 #: scripts/scenario_60_captureFlag.lua:7684
 msgctxt "flag-msgMainscreen"
 msgid "Human Navy obtained Kraylor flag"
-msgstr ""
+msgstr "La Marine humaine a capturé le drapeau Kraylor."
 
 #: scripts/scenario_60_captureFlag.lua:7730
 #, lua-format
 msgctxt "flag-shipLog"
 msgid "Human Navy ship %s dropped your flag"
-msgstr ""
+msgstr "Le vaisseau de la Marine humaine %s a largué votre drapeau."
 
 #: scripts/scenario_60_captureFlag.lua:7732
 msgctxt "flag-shipLog"
 msgid "The Human Navy dropped your flag"
-msgstr ""
+msgstr "La Marine humaine a largué votre drapeau."
 
 #: scripts/scenario_60_captureFlag.lua:7736
 #, lua-format
 msgctxt "flag-shipLog"
 msgid "%s dropped the Kraylor Flag"
-msgstr ""
+msgstr "%s a largué le drapeau Kraylor."
 
 #: scripts/scenario_60_captureFlag.lua:7738
 msgctxt "flag-shipLog"
 msgid "Your team dropped the Kraylor flag"
-msgstr ""
+msgstr "Votre équipe a largué le drapeau Kraylor."
 
 #: scripts/scenario_60_captureFlag.lua:7744
 #, lua-format
 msgctxt "flag-msgMainscreen"
 msgid "Human Navy %s dropped Kraylor flag"
-msgstr ""
+msgstr "La Marine humaine %s a largué le drapeau Kraylor."
 
 #: scripts/scenario_60_captureFlag.lua:7814
 #: scripts/scenario_60_captureFlag.lua:7831
@@ -2927,6 +2980,8 @@ msgstr ""
 msgctxt "drones-msgScience"
 msgid "Drone %s in sector %s reports possible flag in sector %s"
 msgstr ""
+"Le drone %s dans le secteur %s signale un drapeau possible dans le secteur "
+"%s."
 
 #: scripts/scenario_60_captureFlag.lua:7818
 #: scripts/scenario_60_captureFlag.lua:7835
@@ -2938,6 +2993,8 @@ msgstr ""
 msgctxt "drones-msgOperations"
 msgid "Drone %s in sector %s reports possible flag in sector %s"
 msgstr ""
+"Le drone %s dans le secteur %s signale un drapeau possible dans le secteur "
+"%s."
 
 #: scripts/scenario_60_captureFlag.lua:8013
 #, lua-format
