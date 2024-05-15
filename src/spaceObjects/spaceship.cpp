@@ -902,7 +902,7 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
     // Otherwise, draw the ship-specific icon.
     if (my_spaceship && (getScannedStateFor(my_spaceship) == SS_NotScanned || getScannedStateFor(my_spaceship) == SS_FriendOrFoeIdentified))
     {
-        object_sprite = "radar/arrow.png";
+        object_sprite = "radar/ship.png";
     }
 
     glm::u8vec4 color;
