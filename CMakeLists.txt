@@ -445,6 +445,8 @@ set(MAIN_SOURCES
     src/systems/planet.cpp
     src/systems/radar.h
     src/systems/radar.cpp
+    src/multiplayer/beamweapon.h
+    src/multiplayer/beamweapon.cpp
     src/multiplayer/faction.h
     src/multiplayer/faction.cpp
     src/multiplayer/radar.h
