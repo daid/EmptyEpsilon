@@ -45,24 +45,26 @@ msgid ""
 "\n"
 "Version 2"
 msgstr ""
+"- Durée approx. : *** (***)\n"
+"- Difficulté : *** (variable)\n"
+"- Vaisseaux joueurs : 2 à plusieurs\n"
 "\n"
-"EN COURS DE TRADUCTION : 69%\n"
+"EN COURS DE TRADUCTION : 71%\n"
 "\n"
-"Capturez le « drapeau » de l'équipe adverse avant qu'elle ne capture le "
-"vôtre.\n"
+"Mission : Capturez le « drapeau » de l'équipe adverse avant qu'elle ne "
+"capture le vôtre.\n"
 "\n"
-"La région se compose de deux moitiés divisées par une ligne de nébuleuses et/"
-"ou de marqueurs. Les 5 premières minutes (configurables), chaque camp décide "
-"où placer son drapeau. Les vaisseaux les plus proches du poste d'arbitrage "
-"déterminent l'emplacement du drapeau de l'équipe lors de la phase initiale. "
-"Passer de l’autre côté pendant cette phase entraînera la destruction du "
-"vaisseau. L'officier des armes marquera les coordonnées du drapeau lorsque "
-"le vaisseau atteindra l'emplacement du drapeau. Une fois le délai de "
-"masquage du drapeau expiré, un artefact sera placé à l'emplacement "
-"représentant le drapeau de l'équipe. Si aucun lieu n'a été marqué, "
-"l'emplacement actuel du vaisseau sera utilisé. Si l'emplacement est en "
-"dehors des limites du jeu, le drapeau sera placé à l'emplacement le plus "
-"proche des limites.\n"
+"La région se compose de 2 camps délimités par des marqueurs. Durant les 5 "
+"premières minutes (configurables), chaque camp décide où placer son drapeau "
+"et les leurres. Si vous allez en terrain ennemi pendant cette phase, votre "
+"vaisseau est détruit. Les vaisseaux les plus proches du poste d'arbitrage "
+"choisissent l'emplacement du drapeau de leur équipe lors de cette phase "
+"initiale. Quand vous posez votre drapeau, l'officier des armes mémorise ses "
+"coordonnées. Une fois le délai de 5mn écoulé, un artefact représentant votre "
+"drapeau apparait à cet emplacement. Si aucun lieu n'a été marqué, "
+"l'emplacement actuel du vaisseau sera utilisé. Si vous posez votre drapeau "
+"l'emplacement est en dehors des limites de votre camp, il le drapeau sera "
+"placé à l'emplacement le plus proche des limites.\n"
 "\n"
 "Une fois les drapeaux placés, la chasse est lancée. Les vaisseaux peuvent "
 "traverser la frontière à la recherche du drapeau de l'autre équipe, mais "
@@ -75,12 +77,19 @@ msgstr ""
 "drapeau à l'emplacement de l'événement de tag. Revenez à vos côtés avec le "
 "drapeau pour remporter la victoire\n"
 "\n"
-"Version 2"
+"Version 2.0.1 - Mai 2024\n"
+"\n"
+"- Titre original : Capture the Flag\n"
+"- Auteur : Xansta & Kilted Klingon (Fév. 2019)\n"
+"- Traduction FR : Muerte (Mai 24)\n"
+"\n"
+"Communauté française et anglophone sur Discord USN https://discord.gg/"
+"TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Terrain"
-msgstr "Terrain"
+msgstr "Type de terrain"
 
 msgctxt "setting"
 msgid "Selects the type of terrain for the game"
@@ -92,8 +101,7 @@ msgstr "Asymétrique"
 
 msgctxt "Terrain"
 msgid "No effort made to make the two sides of the arena equivalent"
-msgstr ""
-"Aucun effort n’est fait pour rendre équivalentes les deux zones de l’arène."
+msgstr "Les 2 terrains ne sont pas nécessairement identiques."
 
 # Scenario name
 msgctxt "Terrain"
@@ -102,15 +110,15 @@ msgstr "Vide"
 
 msgctxt "Terrain"
 msgid "No terrain. Used primarily for testing"
-msgstr "Aucun terrain. Utilisé principalement pour les tests."
+msgstr "Aucun élément sur la carte. Utilisé principalement pour les tests."
 
 msgctxt "Terrain"
 msgid "Passing"
-msgstr ""
+msgstr "Trous noirs"
 
 msgctxt "Terrain"
 msgid "Just passing by. Symmetric, black holes on each side"
-msgstr ""
+msgstr "Un trou noir de chaque côté."
 
 msgctxt "Terrain"
 msgid "Symmetric"
@@ -118,15 +126,15 @@ msgstr "Symétrique"
 
 msgctxt "Terrain"
 msgid "Randomly symmetric"
-msgstr ""
+msgstr "Les 2 terrains sont symétriques et aléatoires."
 
 msgctxt "Terrain"
 msgid "Rabbit"
-msgstr ""
+msgstr "Terrier de lapin"
 
 msgctxt "Terrain"
 msgid "Down the rabbit hole. Largely symmetric. Wormholes connect each side."
-msgstr ""
+msgstr "Les 2 terrains sont symétriques. Des trous de ver relient chaque côté."
 
 # Scenario setting
 msgctxt "setting"
@@ -269,7 +277,9 @@ msgstr "Normale"
 
 msgctxt "Flag Scan"
 msgid "Depth is 2 or 3, complexity is 2"
-msgstr "La profondeur est de 2 ou 3, la complexité est de 2."
+msgstr ""
+"La profondeur est de 2 ou 3.\n"
+"La complexité est de 2."
 
 msgctxt "Flag Scan"
 msgid "Easy"
@@ -277,7 +287,9 @@ msgstr "Facile"
 
 msgctxt "Flag Scan"
 msgid "Depth is 1, complexity is 1 or 2"
-msgstr "La profondeur est de 1, la complexité est de 1 ou 2."
+msgstr ""
+"La profondeur est de 1.\n"
+"La complexité est de 1 ou 2."
 
 msgctxt "Flag Scan"
 msgid "Hard"
@@ -285,26 +297,32 @@ msgstr "Difficile"
 
 msgctxt "Flag Scan"
 msgid "Depth is 1, 2 or 3, complexity is 3 or 4"
-msgstr "La profondeur est de 1, 2 ou 3, la complexité est de 3 ou 4."
+msgstr ""
+"La profondeur est de 1, 2 ou 3.\n"
+"La complexité est de 3 ou 4."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Tracking"
-msgstr "Suivi"
+msgstr "Information de suivi des drapeaux"
 
 msgctxt "setting"
 msgid "Configures information given about flag."
-msgstr "Configure les informations fournies sur le drapeau."
+msgstr "Information diffusée lors du largage et capture de drapeaux."
 
 msgctxt "Tracking"
 msgid "Normal"
-msgstr "Normal"
+msgstr "Normale"
 
 msgctxt "Tracking"
 msgid ""
 "Drop: Kraylor or Human Navy flag dropped (main  screen). Grab: The Kraylor "
 "or Human Navy picked up your flag (main screen and ship log)"
 msgstr ""
+"Largage : le nom du camp qui largue un drapeau s'affiche sur l'écran "
+"principal.\n"
+"Capture : le nom du camp qui capture un drapeau s'affiche sur l'écran "
+"principal et journal de bord des vaisseaux."
 
 msgctxt "Tracking"
 msgid "Easy"
@@ -316,6 +334,10 @@ msgid ""
 "Kraylor or Human Navy ship ShipName picked up your flag (main screen and "
 "ship log)"
 msgstr ""
+"Largage : le nom du vaisseau qui largue un drapeau s'affiche sur l'écran "
+"principal.\n"
+"Capture : le nom du vaisseau qui capture un drapeau s'affiche sur l'écran "
+"principal et journal de bord des vaisseaux."
 
 msgctxt "Tracking"
 msgid "Hard"
@@ -326,16 +348,22 @@ msgid ""
 "Drop: Flag dropped (main screen). Grab: Flag obtained (main screen). Flag "
 "must be rescanned after drop"
 msgstr ""
+"Largage : un drapeau largué s'affiche sur l'écran principal.\n"
+"Capture : un drapeau capturé s'affiche sur l'écran principal et journal de "
+"bord des vaisseaux.\n"
+"Après largage, un drapeau doit être scanné à nouveau."
 
 msgctxt "Tracking"
 msgid "Secret"
-msgstr "Secret"
+msgstr "Secrète"
 
 msgctxt "Tracking"
 msgid ""
 "Neither dropping nor grabbing the flag will produce a message. Flag must be "
 "rescanned after drop"
 msgstr ""
+"Aucune information n'est diffusée.\n"
+"Après largage, un drapeau doit être scanné à nouveau."
 
 #: scripts/scenario_60_captureFlag.lua:735
 msgctxt "scienceDescription-station"
@@ -426,7 +454,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:842
 msgctxt "buttonGM"
 msgid "passing"
-msgstr ""
+msgstr "Trous noirs"
 
 #: scripts/scenario_60_captureFlag.lua:843
 msgctxt "buttonGM"
@@ -436,7 +464,7 @@ msgstr "Symétrique"
 #: scripts/scenario_60_captureFlag.lua:844
 msgctxt "buttonGM"
 msgid "rabbit"
-msgstr ""
+msgstr "Terrier de lapin"
 
 #: scripts/scenario_60_captureFlag.lua:865
 #: scripts/scenario_60_captureFlag.lua:1559
@@ -540,7 +568,7 @@ msgstr "Préférences restantes des joueurs :"
 #, lua-format
 msgctxt "msgGM"
 msgid "XO:%s"
-msgstr ""
+msgstr "XO :%s"
 
 #: scripts/scenario_60_captureFlag.lua:956
 #: scripts/scenario_60_captureFlag.lua:960
@@ -553,7 +581,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:995
 msgctxt "msgGM"
 msgid "\n"
-msgstr ""
+msgstr "\n"
 
 #: scripts/scenario_60_captureFlag.lua:958
 #, lua-format
@@ -565,43 +593,43 @@ msgstr "    Faction :%s"
 #, lua-format
 msgctxt "msgGM"
 msgid "    Ship name:%s"
-msgstr ""
+msgstr "    Nom du vaisseau :%s"
 
 #: scripts/scenario_60_captureFlag.lua:968
 #, lua-format
 msgctxt "msgGM"
 msgid "    Ship preference 1:%s"
-msgstr ""
+msgstr "    Préférence de vaisseau 1 :%s"
 
 #: scripts/scenario_60_captureFlag.lua:973
 #, lua-format
 msgctxt "msgGM"
 msgid "    Ship preference 2:%s"
-msgstr ""
+msgstr "    Préférence de vaisseau 2 :%s"
 
 #: scripts/scenario_60_captureFlag.lua:978
 #, lua-format
 msgctxt "msgGM"
 msgid "    Ship preference 3:%s"
-msgstr ""
+msgstr "    Préférence de vaisseau 3 :%s"
 
 #: scripts/scenario_60_captureFlag.lua:983
 #, lua-format
 msgctxt "msgGM"
 msgid "    Ship preference 4:%s"
-msgstr ""
+msgstr "    Préférence de vaisseau 4 :%s"
 
 #: scripts/scenario_60_captureFlag.lua:988
 #, lua-format
 msgctxt "msgGM"
 msgid "    Ship preference 5:%s"
-msgstr ""
+msgstr "    Préférence de vaisseau 5 :%s"
 
 #: scripts/scenario_60_captureFlag.lua:993
 #, lua-format
 msgctxt "msgGM"
 msgid "    Ship preference 6:%s"
-msgstr ""
+msgstr "    Préférence de vaisseau 6 :%s"
 
 #: scripts/scenario_60_captureFlag.lua:1004
 msgctxt "buttonGM"
@@ -683,11 +711,16 @@ msgid "Wing Names On"
 msgstr ""
 
 #: scripts/scenario_60_captureFlag.lua:1208
+#, fuzzy
 msgctxt "msgGM"
 msgid ""
 "Cannot disable wing names now that player ships have been spawned.\n"
 "Close the server and restart if you *really* don't want the wing names"
 msgstr ""
+"Impossible de désactiver les noms d'ailes maintenant que les vaisseaux des "
+"joueurs sont apparus.\n"
+"Fermez le serveur et redémarrez si vous ne voulez *vraiment* pas les noms "
+"d'ailes"
 
 #: scripts/scenario_60_captureFlag.lua:1217
 #, lua-format
@@ -1087,15 +1120,17 @@ msgstr ""
 #, lua-format
 msgctxt "msgGM"
 msgid "%s: %s %s\n"
-msgstr ""
+msgstr "%s : %s %s\n"
 
 #: scripts/scenario_60_captureFlag.lua:1674
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "New Bugger ship: %s\n"
 "Control code: %s"
 msgstr ""
+"Nouveau vaisseau Bugger : %s\n"
+"Code de contrôle : %s"
 
 #: scripts/scenario_60_captureFlag.lua:1908
 #, fuzzy
@@ -1153,11 +1188,14 @@ msgstr ""
 "Kraylors :"
 
 #: scripts/scenario_60_captureFlag.lua:1923
+#, fuzzy
 msgctxt "msgGM"
 msgid ""
 "\n"
 "Active buggers: "
 msgstr ""
+"\n"
+"Bougres actifs : "
 
 #: scripts/scenario_60_captureFlag.lua:2134
 #: scripts/scenario_60_captureFlag.lua:6399
@@ -1220,14 +1258,14 @@ msgstr "%i drone largué."
 #, lua-format
 msgctxt "drones-shipLog"
 msgid "Deployed %i drones as squadron %s"
-msgstr "%i drones déployés en tant qu'escadron %s."
+msgstr "%i drones déployés en tant qu'escouade %s."
 
 #: scripts/scenario_60_captureFlag.lua:2185
 #: scripts/scenario_60_captureFlag.lua:6450
 #, lua-format
 msgctxt "drones-shipLog"
 msgid "Deployed %i drone as squadron %s"
-msgstr "%i drone déployé en tant qu'escadron %s."
+msgstr "%i drone déployé en tant qu'escouade %s."
 
 #: scripts/scenario_60_captureFlag.lua:2191
 #, lua-format
@@ -1287,7 +1325,7 @@ msgid ""
 "    Number of deployed drone squadrons: "
 msgstr ""
 "\n"
-"    Nombre d'escadrons de drones déployés : "
+"    Nombre d'escouades de drones déployées : "
 
 #: scripts/scenario_60_captureFlag.lua:2229
 msgctxt "drones-msgEngineer&Engineer+"
@@ -1318,7 +1356,7 @@ msgid ""
 "    Number of deployed drone squadrons: "
 msgstr ""
 "\n"
-"    Nombre d'escadrons de drones déployés : "
+"    Nombre d'escouades de drones déployées : "
 
 #: scripts/scenario_60_captureFlag.lua:2274
 msgctxt "drones-msgHelms&Tactical"
@@ -2272,7 +2310,7 @@ msgstr "Drones disponibles : %i"
 #, lua-format
 msgctxt "drones-"
 msgid "  WHACK!  Drone %s in squadron %s has been destroyed by %s!"
-msgstr "BAAAMM! Le drone %s de l'escadron %s a été détruit par %s !"
+msgstr "BAAAMM !!! Le drone %s de l'escouade %s a été détruit par %s !"
 
 #: scripts/scenario_60_captureFlag.lua:6470
 msgctxt "drones-msgEngineer&Engineer+"
@@ -2429,13 +2467,15 @@ msgstr "Allez attaquer les ennemis"
 #: scripts/scenario_60_captureFlag.lua:6579
 msgctxt "shipAssist-comms"
 msgid "Going roaming and attacking"
-msgstr "Parti vagabonder et attaquer."
+msgstr ""
+"Nous partons immédiatement prospecter les environs et attaquer tout ennemi "
+"se trouvant sur notre passage."
 
 #: scripts/scenario_60_captureFlag.lua:6582
 #: scripts/scenario_60_captureFlag.lua:6686
 msgctxt "shipAssist-comms"
 msgid "Go to waypoint. Attack enemies en route"
-msgstr "Allez au marqueur et attaquez les ennemis en route"
+msgstr "Allez au marqueur et attaquez les ennemis sur votre chemin"
 
 #: scripts/scenario_60_captureFlag.lua:6587
 #: scripts/scenario_60_captureFlag.lua:6602
@@ -2459,7 +2499,10 @@ msgstr "Allez au marqueur %d"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Going to WP%d, watching for enemies en route"
-msgstr "Allez au marqueur %d, surveiller les ennemis en route"
+msgstr ""
+"Bien reçu,\n"
+"Nous nous dirigeons maintenant vers le marqueur %d, en surveillant les "
+"ennemis en route."
 
 #: scripts/scenario_60_captureFlag.lua:6597
 #: scripts/scenario_60_captureFlag.lua:6706
@@ -2472,7 +2515,10 @@ msgstr "Allez au marqueur en ignorant les ennemis"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Going to WP%d, ignoring enemies"
-msgstr "Aller au marqueur %d en ignorant les ennemis"
+msgstr ""
+"Entendu,\n"
+"Nous allons directement au marqueur %d en ignorant tout ennemi que l'on "
+"croiserait."
 
 #: scripts/scenario_60_captureFlag.lua:6612
 msgctxt "shipAssist-comms"
@@ -2483,6 +2529,8 @@ msgstr "Arrêtez-vous et défendez votre position actuelle"
 msgctxt "shipAssist-comms"
 msgid "Stopping and defending"
 msgstr ""
+"Bien reçu,\n"
+"À l'arrêt et en position défensive."
 
 #: scripts/scenario_60_captureFlag.lua:6617
 msgctxt "shipAssist-comms"
@@ -2602,7 +2650,7 @@ msgstr ""
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP%d."
-msgstr ""
+msgstr "Nous partons immédiatement défendre le marqueur %d."
 
 #: scripts/scenario_60_captureFlag.lua:6726
 msgctxt "shipAssist-comms"
@@ -2625,6 +2673,8 @@ msgstr "Arrêtez-vous et défendez vos positions actuelles"
 msgctxt "shipAssist-comms"
 msgid "%s standing ground"
 msgstr ""
+"A vos ordres,\n"
+"L'escouade %s tient sa position."
 
 #: scripts/scenario_60_captureFlag.lua:6746
 msgctxt "shipAssist-comms"
