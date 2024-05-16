@@ -5828,7 +5828,7 @@ end
 function handleVoiceQueue(delta)
 	if #voice_queue > 0 then
 		if voice_play_time == nil then
-			playSoundFile(string.format("scenario48audio/sa_48_%s.ogg",voice_queue[1]))
+			playSoundFile(string.format("audio/scenario/48/sa_48_%s.ogg",voice_queue[1]))
 			if voice_clips[voice_queue[1]] == nil then
 				print("In the voice clips list,",voice_queue[1],"comes up as nil. Setting play gap to 20")
 				voice_play_time = getScenarioTime() + 20
