@@ -10,7 +10,7 @@ function Mine()
     local blast_range = 1000.0
     local e = createEntity()
     e.transform = {}
-    e.radar_trace = {icon="radar/blip.png", min_size=10, max_size = 10}
+    e.radar_trace = {icon="radar/mine.png", min_size=10, max_size = 10}
     e.constant_particle_emitter = {interval=0.4, start_color={1, 1, 1}, end_color={0, 0, 1}, start_size=30.0, end_size=0.0, life_time=10.0}
     e.radar_signature = {electrical=0.05}
     e.avoid_object = {range=blast_range*1.2}

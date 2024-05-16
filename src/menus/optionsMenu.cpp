@@ -7,6 +7,7 @@
 #include "soundManager.h"
 #include "windowManager.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_togglebutton.h"
@@ -104,36 +105,94 @@ OptionsMenu::OptionsMenu()
     }))->setSize(GuiElement::GuiSizeMax, 50);
 
     //Select the language
-    (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
-    
-    std::vector<string> languages = findResources("locale/main.*.po");
-    
-    for(string &language : languages) 
     {
-        //strip extension
-        language = language.substr(language.find(".") + 1, language.rfind("."));
-    }
-    std::sort(languages.begin(), languages.end());
+        (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
+        
+        std::vector<string> languages = findResources("locale/main.*.po");
+        
+        for(string &language : languages) 
+        {
+            //strip extension
+            language = language.substr(language.find(".") + 1, language.rfind("."));
+        }
+        std::sort(languages.begin(), languages.end());
 
-    int default_index = 0;
-    auto default_elem = std::find(languages.begin(), languages.end(), PreferencesManager::get("language", "en"));
-    if(default_elem != languages.end())
-    {
-        default_index =  static_cast<int>(default_elem - languages.begin());
+        int default_index = 0;
+        auto default_elem = std::find(languages.begin(), languages.end(), PreferencesManager::get("language", "en"));
+        if(default_elem != languages.end())
+        {
+            default_index =  static_cast<int>(default_elem - languages.begin());
+        }
+
+        (new GuiSelector(interface_page, "LANGUAGE_SELECTOR", [](int index, string value)
+        {
+            i18n::reset();
+            i18n::load("locale/main." + value + ".po");
+            PreferencesManager::set("language", value);
+            keys.init(); // Reinit keyboard shortcut labels
+        }))->setOptions(languages)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
     }
     
-    (new GuiSelector(interface_page, "LANGUAGE_SELECTOR", [](int index, string value)
+    //Gui theme selection
     {
-        i18n::reset();
-        i18n::load("locale/main." + value + ".po");
-        PreferencesManager::set("language", value);
-        keys.init(); // Reinit keyboard shortcut labels
-    }))->setOptions(languages)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
+        std::vector<string> themes = findResources("gui/*.theme.txt");
+        
+        auto iter = themes.begin();
+        while(iter != themes.end()) 
+        {
+            //strip extension
+            *iter = iter->substr(iter->find("/")+1, iter->find("."));
+            if (!GuiTheme::loadTheme(*iter, "gui/" + *iter +".theme.txt"))
+            {
+                LOG(ERROR, "Failed to load theme : ", *iter);
+                iter = themes.erase(iter);
+            }
+            else if (!GuiTheme::getTheme(*iter)->getStyle("base")->states[0].font 
+             || !GuiTheme::getTheme(*iter)->getStyle("bold")->states[0].font)
+            {
+                LOG(ERROR, "Missing base font or bold font for theme : ", *iter);
+                iter = themes.erase(iter);
+            }
+            else
+            {
+                ++iter;
+            }
+        }
+        
+        std::sort(themes.begin(), themes.end());
+        if(0 == themes.size())
+        {
+            LOG(ERROR, "Failed to load any theme, exiting");
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load any theme, resources missing ? Should be gui/*.theme.txt. and not contain errors.", nullptr);
+            exit(1);
+        }
+
+        int default_index = 0;
+        auto default_elem = std::find(themes.begin(), themes.end(), PreferencesManager::get("guitheme", "default"));
+        if(default_elem != themes.end())
+        {
+            default_index =  static_cast<int>(default_elem - themes.begin());
+        }
+
+        if (themes.size() > 1) {
+            (new GuiLabel(interface_page, "GUI_THEME_OPTIONS_LABEL", tr("Interface Theme"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
+            (new GuiSelector(interface_page, "GUI_THEME_SELECTOR", [](int index, string theme_name)
+            {
+                GuiTheme::setCurrentTheme(theme_name);
+                main_font = GuiTheme::getCurrentTheme()->getStyle("base")->states[0].font;
+                bold_font = GuiTheme::getCurrentTheme()->getStyle("bold")->states[0].font;
+                //Render default font is applied on back only
+                PreferencesManager::set("guitheme", theme_name);
+            }))->setOptions(themes)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
+        }
+    }
     
     // Bottom GUI.
     // Back button.
     (new GuiButton(this, "BACK", tr("button", "Back"), [this]()
     {
+        //Apply potentially modified font now, in order not to have some half rendered panel with one font and another
+        sp::RenderTarget::setDefaultFont(main_font);
         // Close this menu, stop the music, and return to the main menu.
         destroy();
         soundManager->stopMusic();

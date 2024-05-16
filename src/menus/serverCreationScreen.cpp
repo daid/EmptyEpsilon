@@ -4,7 +4,6 @@
 #include "shipSelectionScreen.h"
 #include "gameGlobalInfo.h"
 #include "epsilonServer.h"
-#include "gui/scriptError.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -1747,7 +1747,7 @@ msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 #: scripts/scenario_54_PatrolDuty.lua:4348
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr "Nous avons vraiment besoin d'armes nucléaires. (nuke) ("
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 
 #: scripts/scenario_54_PatrolDuty.lua:4350
 #: scripts/scenario_54_PatrolDuty.lua:4363
@@ -1762,7 +1762,7 @@ msgstr "%s%d rép chacun)"
 #: scripts/scenario_54_PatrolDuty.lua:4359
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+msgstr "Veuillez réapprovisionner nos missiles EMP ("
 
 #: scripts/scenario_54_PatrolDuty.lua:4361
 msgctxt "ammo-comms"
@@ -1772,7 +1772,7 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_54_PatrolDuty.lua:4371
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Des missiles homing de rechange pour nous ? ("
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
 
 #: scripts/scenario_54_PatrolDuty.lua:4373
 msgctxt "ammo-comms"
@@ -1782,7 +1782,7 @@ msgstr "Avez-vous des missiles homing supplémentaires ? ("
 #: scripts/scenario_54_PatrolDuty.lua:4383
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr "Nous pourrions avoir besoin de quelques mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_54_PatrolDuty.lua:4385
 msgctxt "ammo-comms"
@@ -1996,7 +1996,7 @@ msgstr "Précédent"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation."
+msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
 
 #: scripts/scenario_54_PatrolDuty.lua:4455
 #: scripts/scenario_54_PatrolDuty.lua:4471
@@ -2165,7 +2165,7 @@ msgid ""
 "and is learning the broader area. The master knows the local and the broader "
 "area but can't be bothered with the local area'"
 msgstr ""
-"L'employée vous répond d'une voix assomante :\n"
+"L'employée vous répond d'une voix assommante :\n"
 "\n"
 "\"L'apprenti connaît bien la région proche mais apprend encore les régions "
 "les plus éloignées. Le maître, lui, connaît bien toutes les régions "
@@ -2390,7 +2390,8 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants à vendre : quantité, coût en rép. :\n"
+"Marchandises ou composants disponibles à la vente : (quantité, coût en "
+"réputation)\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:4761
 #, lua-format
@@ -2402,8 +2403,7 @@ msgstr "     %s: %i, %i\n"
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
 msgstr ""
-"\n"
-"Marchandises ou composants que la station achète : prix en rép.\n"
+"Marchandises ou composants que la station achètera : (prix en réputation)\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:4766
 #: scripts/scenario_54_PatrolDuty.lua:4775
@@ -2416,9 +2416,7 @@ msgstr "     %s : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
-msgstr ""
-"\n"
-"Cargaison actuelle à bord du %s :\n"
+msgstr "Cargaison actuelle à bord du %s :\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:4779
 msgctxt "trade-comms"
@@ -2429,9 +2427,7 @@ msgstr "     Vide\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr ""
-"\n"
-"Espace disponible : %i, Rép. disponible : %i\n"
+msgstr "Espace disponible : %i, Rép. disponible : %i\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:4784
 #: scripts/scenario_54_PatrolDuty.lua:5879
@@ -3146,7 +3142,7 @@ msgstr "Nous partons immédiatement défendre le marqueur %d."
 #: scripts/scenario_54_PatrolDuty.lua:5718
 msgctxt "shipAssist-comms"
 msgid "Assist me"
-msgstr "Aidez-nous"
+msgstr "Aidez-nous !"
 
 #: scripts/scenario_54_PatrolDuty.lua:5719
 msgctxt "shipAssist-comms"
@@ -3328,7 +3324,7 @@ msgstr "Oui ?"
 #: scripts/scenario_54_PatrolDuty.lua:5801
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
-msgstr "Auriez-vous de la cargaison à vendre ?"
+msgstr "Auriez-vous des marchandises à vendre ?"
 
 #: scripts/scenario_54_PatrolDuty.lua:5803
 msgctxt "trade-comms"
@@ -3374,7 +3370,7 @@ msgstr "Réputation insuffisante pour acheter"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous ? (coût : %f réputation)"
+msgstr "Où allez-vous ? (coût : %f rép)"
 
 #: scripts/scenario_54_PatrolDuty.lua:5959
 msgctxt "trade-comms"

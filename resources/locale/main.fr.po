@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-04-18 19:43+0200\n"
+"PO-Revision-Date: 2024-05-12 22:33+0200\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -365,7 +365,7 @@ msgid "unspecified error {error}"
 msgstr "Erreur non spécifiée {error}"
 
 #: src/menus/serverBrowseMenu.cpp:51 src/menus/tutorialMenu.cpp:65
-#: src/menus/optionsMenu.cpp:135 src/menus/hotkeyMenu.cpp:71
+#: src/menus/optionsMenu.cpp:191 src/menus/hotkeyMenu.cpp:71
 #: src/screenComponents/databaseView.cpp:102
 #: src/screenComponents/databaseView.cpp:106
 msgctxt "button"
@@ -561,92 +561,96 @@ msgstr "Tutoriels"
 msgid "Start Tutorial"
 msgstr "Tutoriel interactif"
 
-#: src/menus/optionsMenu.cpp:35
+#: src/menus/optionsMenu.cpp:36
 msgid "Graphics options"
 msgstr "Options graphiques"
 
-#: src/menus/optionsMenu.cpp:44
+#: src/menus/optionsMenu.cpp:45
 msgid "Audio options"
 msgstr "Options audio"
 
-#: src/menus/optionsMenu.cpp:53
+#: src/menus/optionsMenu.cpp:54
 msgid "Interface options"
 msgstr "Options d'interface"
 
-#: src/menus/optionsMenu.cpp:74
+#: src/menus/optionsMenu.cpp:75
 msgid "Radar Rotation"
 msgstr "Rotation des écrans radars"
 
-#: src/menus/optionsMenu.cpp:76
+#: src/menus/optionsMenu.cpp:77
 msgid "Helms Radar Lock"
 msgstr "Radar Navigation verrouillé"
 
-#: src/menus/optionsMenu.cpp:84
+#: src/menus/optionsMenu.cpp:85
 msgid "Weapons Radar Lock"
 msgstr "Radar armement verrouillé"
 
-#: src/menus/optionsMenu.cpp:90
+#: src/menus/optionsMenu.cpp:91
 msgid "Science Radar Lock"
 msgstr "Radar Science verrouillé"
 
-#: src/menus/optionsMenu.cpp:97
+#: src/menus/optionsMenu.cpp:98
 msgid "Control Options"
 msgstr "Options de controle"
 
-#: src/menus/optionsMenu.cpp:100 src/menus/hotkeyMenu.cpp:38
+#: src/menus/optionsMenu.cpp:101 src/menus/hotkeyMenu.cpp:38
 msgid "Configure Keyboard/Joystick"
 msgstr "Configurer Clavier et Joystick"
 
-#: src/menus/optionsMenu.cpp:107
+#: src/menus/optionsMenu.cpp:109
 msgid "Language (applies on back)"
 msgstr "Langue (à la sortie du menu)"
 
-#: src/menus/optionsMenu.cpp:143
+#: src/menus/optionsMenu.cpp:138
+msgid "Interface Theme"
+msgstr "Thème de l'interface"
+
+#: src/menus/optionsMenu.cpp:201
 msgctxt "options"
 msgid "Save"
 msgstr "Sauvegarder"
 
-#: src/menus/optionsMenu.cpp:165
+#: src/menus/optionsMenu.cpp:223
 msgid "Fullscreen toggle"
 msgstr "Activer plein écran"
 
-#: src/menus/optionsMenu.cpp:198 src/menus/optionsMenu.cpp:203
+#: src/menus/optionsMenu.cpp:256 src/menus/optionsMenu.cpp:261
 msgid "FoV: {fov}"
 msgstr "Champ de vision : {fov}"
 
-#: src/menus/optionsMenu.cpp:219 src/menus/optionsMenu.cpp:224
+#: src/menus/optionsMenu.cpp:277 src/menus/optionsMenu.cpp:282
 msgid "Sound Volume: {volume}%"
 msgstr "Volume sonore : {volume} %"
 
-#: src/menus/optionsMenu.cpp:228
+#: src/menus/optionsMenu.cpp:286
 msgid "Music Playback"
 msgstr "Musique de fond"
 
-#: src/menus/optionsMenu.cpp:238 src/menus/optionsMenu.cpp:263
+#: src/menus/optionsMenu.cpp:296 src/menus/optionsMenu.cpp:321
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: src/menus/optionsMenu.cpp:238 src/menus/optionsMenu.cpp:263
+#: src/menus/optionsMenu.cpp:296 src/menus/optionsMenu.cpp:321
 msgid "Enabled"
 msgstr "Activé"
 
-#: src/menus/optionsMenu.cpp:238 src/menus/optionsMenu.cpp:263
+#: src/menus/optionsMenu.cpp:296 src/menus/optionsMenu.cpp:321
 msgid "Main Screen only"
 msgstr "Écran principal"
 
-#: src/menus/optionsMenu.cpp:244 src/menus/optionsMenu.cpp:249
+#: src/menus/optionsMenu.cpp:302 src/menus/optionsMenu.cpp:307
 msgid "Music Volume: {volume}%"
 msgstr "Volume musique : {volume} %"
 
-#: src/menus/optionsMenu.cpp:253
+#: src/menus/optionsMenu.cpp:311
 msgid "Impulse Engine sound"
 msgstr "Son du moteur à impulsion"
 
-#: src/menus/optionsMenu.cpp:269 src/menus/optionsMenu.cpp:274
+#: src/menus/optionsMenu.cpp:327 src/menus/optionsMenu.cpp:332
 msgid "Impulse Volume: {volume}%"
 msgstr "Volume moteur : {volume} %"
 
-#: src/menus/optionsMenu.cpp:286
+#: src/menus/optionsMenu.cpp:344
 msgid "Preview Soundtracks"
 msgstr "Écoute des bandes-son"
 
@@ -855,6 +859,19 @@ msgstr ""
 "droit : supprime une entrée.\n"
 "Saisies possibles : touches du clavier, boutons du joystick, axes du "
 "joystick."
+
+#: src/menus/luaConsole.cpp:21 src/gui/hotkeyConfig.cpp:317
+#: src/gui/hotkeyConfig.cpp:318 src/gui/hotkeyConfig.cpp:319
+#: src/gui/hotkeyConfig.cpp:320 src/gui/hotkeyConfig.cpp:321
+#: src/gui/hotkeyConfig.cpp:322 src/gui/hotkeyConfig.cpp:323
+msgctxt "hotkey_menu"
+msgid "General"
+msgstr "Général"
+
+#: src/menus/luaConsole.cpp:21
+msgctxt "hotkey_General"
+msgid "Open LUA console"
+msgstr "Ouvrir la console LUA"
 
 #: src/screens/cinematicViewScreen.cpp:41 src/screens/topDownScreen.cpp:33
 msgctxt "button"
@@ -2724,14 +2741,6 @@ msgstr "Diffuser chat vocal sur le vaisseau"
 msgctxt "hotkey_Basic"
 msgid "Fullscreen toggle"
 msgstr "Basculer en plein écran"
-
-#: src/gui/hotkeyConfig.cpp:317 src/gui/hotkeyConfig.cpp:318
-#: src/gui/hotkeyConfig.cpp:319 src/gui/hotkeyConfig.cpp:320
-#: src/gui/hotkeyConfig.cpp:321 src/gui/hotkeyConfig.cpp:322
-#: src/gui/hotkeyConfig.cpp:323
-msgctxt "hotkey_menu"
-msgid "General"
-msgstr "Général"
 
 #: src/gui/hotkeyConfig.cpp:317
 msgctxt "hotkey_General"

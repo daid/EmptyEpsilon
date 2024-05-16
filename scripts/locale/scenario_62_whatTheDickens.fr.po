@@ -174,7 +174,7 @@ msgstr "Pouvez-vous nous réapprovisionner en HVLI ? (%d rép chacun)"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Please re-stock our mines. (%d rep each)"
-msgstr "Merci de réapprovisionner notre stock de mines. (%d rép chacune)"
+msgstr "Merci de réapprovisionner notre stock de mines (%d rép chacune)"
 
 #: scripts/scenario_62_whatTheDickens.lua:434
 #, lua-format
@@ -382,14 +382,13 @@ msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
 #: scripts/scenario_62_whatTheDickens.lua:501
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
-msgstr "Officier, vos nukes sont en capacité maximale et prêtes à servir !"
+msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
 
 #: scripts/scenario_62_whatTheDickens.lua:503
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
-"Désolé, officier, mais vous êtes déjà au max de ce que nous pouvons vous "
-"fournir."
+"Désolé, officier, mais vous êtes au maximum de ce que vous pouvez stocker."
 
 #: scripts/scenario_62_whatTheDickens.lua:508
 msgctxt "needRep-comms"
@@ -399,7 +398,7 @@ msgstr "Pas assez de réputation."
 #: scripts/scenario_62_whatTheDickens.lua:513
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
-msgstr "Vous êtes chargés au max et prêt à tout faire péter."
+msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
 
 #: scripts/scenario_62_whatTheDickens.lua:515
 msgctxt "ammo-comms"

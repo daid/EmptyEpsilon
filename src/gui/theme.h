@@ -46,6 +46,9 @@ public:
     const GuiThemeStyle* getStyle(const string& element);
 
     static GuiTheme* getTheme(const string& name);
+    //Will return default theme if not found
+    static GuiTheme* getCurrentTheme();
+    static void setCurrentTheme(const string &name); 
     static bool loadTheme(const string& name, const string& resource_name);
 private:
     GuiTheme(const string& name);
@@ -55,6 +58,7 @@ private:
     std::unordered_map<string, GuiThemeStyle> styles;
 
     static std::unordered_map<string, GuiTheme*> themes;
+    static string current_theme;
 };
 
 #endif//GUI_THEME_H

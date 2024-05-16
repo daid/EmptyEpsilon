@@ -11,6 +11,7 @@ function BlackHole()
     e.avoid_object = {range=7000}
     e.radar_signature = {gravity=0.9}
     e.radar_trace = {icon="radar/blackHole.png", min_size=0, max_size = 2048, radius=5000}
+    --TODO: 3D billboard
     return e
 end
 
@@ -26,17 +27,8 @@ function WormHole()
     e.gravity = {range=radius, damage=false}
     e.avoid_object = {range=radius*1.2}
     e.radar_signature = {gravity=0.9}
-    e.radar_trace = {icon="radar/wormHole"..irandom(1, 3)..".png", min_size=0, max_size = 2048, radius=radius}
-    local render_info = {}
-    local cloud_count = 5
-    for n=1,cloud_count do
-        local size = random(1024, 1024 * 2)
-        local dist = random(size / 2.0, radius - size)
-        local angle = n * 360 / cloud_count
-        local ox, oy = math.cos(angle / 180 * math.pi) * dist, math.sin(angle / 180 * math.pi) * dist
-        render_info[n] = {size=size, texture="wormHole" .. irandom(1, 3) .. ".png", offset={ox, oy}}
-    end
-    e.nebula_renderer = render_info
+    e.radar_trace = {icon="radar/wormhole.png", min_size=0, max_size = 2048, radius=radius}
+    --TODO: 3D billboard
     return e
 end
 

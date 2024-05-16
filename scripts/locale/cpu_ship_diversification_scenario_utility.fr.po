@@ -1217,8 +1217,9 @@ msgstr ""
 "Procurez-vous-en un aujourd'hui !"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1676
+#, fuzzy
 msgctxt "scienceDB"
-msgid "Youchy"
+msgid "Touchy"
 msgstr "Épineux"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1689

@@ -1338,7 +1338,7 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:1919
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions."
+msgstr "Nous avons besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_47_scavenger.lua:1922
 msgctxt "ammo-comms"
@@ -1353,7 +1353,7 @@ msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 #: scripts/scenario_47_scavenger.lua:1931
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke). ("
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 
 #: scripts/scenario_47_scavenger.lua:1934
 #: scripts/scenario_47_scavenger.lua:1947
@@ -1368,7 +1368,7 @@ msgstr "%s%d rép chacun)"
 #: scripts/scenario_47_scavenger.lua:1943
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+msgstr "Veuillez réapprovisionner nos missiles EMP ("
 
 #: scripts/scenario_47_scavenger.lua:1945
 msgctxt "ammo-comms"
@@ -1388,7 +1388,7 @@ msgstr "Avez-vous des missiles homing supplémentaires ? ("
 #: scripts/scenario_47_scavenger.lua:1967
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr "Nous pourrions avoir besoin de quelques mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_47_scavenger.lua:1969
 msgctxt "ammo-comms"
@@ -2244,13 +2244,13 @@ msgstr "Remplir le contrat %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation"
+msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
 
 #: scripts/scenario_47_scavenger.lua:2494
 #: scripts/scenario_47_scavenger.lua:2511
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
-msgstr "Réparateur embauché"
+msgstr "Réparateur embauché."
 
 #: scripts/scenario_47_scavenger.lua:2518
 msgctxt "trade-comms"
@@ -2265,13 +2265,14 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants à vendre : quantité, coût en rép. :\n"
+"Marchandises ou composants disponibles à la vente : (quantité, coût en "
+"réputation)\n"
 
 #: scripts/scenario_47_scavenger.lua:2522
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s: %i, %i\n"
+msgstr "     %s : %i, %i\n"
 
 #: scripts/scenario_47_scavenger.lua:2525
 msgctxt "trade-comms"
@@ -3354,7 +3355,7 @@ msgstr "Réputation insuffisante pour acheter."
 #: scripts/scenario_47_scavenger.lua:3833
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
-msgstr "Auriez-vous de la cargaison à vendre ?"
+msgstr "Auriez-vous des marchandises à vendre ?"
 
 #: scripts/scenario_47_scavenger.lua:3757
 #: scripts/scenario_47_scavenger.lua:3835

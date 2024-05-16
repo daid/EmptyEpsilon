@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -1421,7 +1421,7 @@ msgstr ""
 #: scripts/scenario_50_gaps.lua:2290
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions."
+msgstr "Nous avons besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_50_gaps.lua:2291
 msgctxt "ammo-comms"
@@ -1436,7 +1436,7 @@ msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 #: scripts/scenario_50_gaps.lua:2297
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke). ("
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 
 #: scripts/scenario_50_gaps.lua:2299 scripts/scenario_50_gaps.lua:2311
 #: scripts/scenario_50_gaps.lua:2323 scripts/scenario_50_gaps.lua:2342
@@ -1449,7 +1449,7 @@ msgstr "%s%d rép chacun)"
 #: scripts/scenario_50_gaps.lua:2307
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+msgstr "Veuillez réapprovisionner nos missiles EMP ("
 
 #: scripts/scenario_50_gaps.lua:2309
 msgctxt "ammo-comms"
@@ -1469,7 +1469,7 @@ msgstr "Avez-vous des missiles homing supplémentaires ? ("
 #: scripts/scenario_50_gaps.lua:2332
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr "Nous pourrions avoir besoin de quelques mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_50_gaps.lua:2334
 msgctxt "ammo-comms"
@@ -1479,17 +1479,17 @@ msgstr "Concernant les mines ? ("
 #: scripts/scenario_50_gaps.lua:2336
 msgctxt "ammo-comms"
 msgid "More mines ("
-msgstr "Plus de mines. ("
+msgstr "Plus de mines ("
 
 #: scripts/scenario_50_gaps.lua:2338
 msgctxt "ammo-comms"
 msgid "All the mines we can take. ("
-msgstr "Toutes les mines que nous pouvons prendre. ("
+msgstr "Toutes les mines que nous pouvons prendre ("
 
 #: scripts/scenario_50_gaps.lua:2340
 msgctxt "ammo-comms"
 msgid "Mines! What else? ("
-msgstr "Des mines ! Quoi d'autre? ("
+msgstr "Des mines ! Quoi d'autre ? ("
 
 #: scripts/scenario_50_gaps.lua:2350
 msgctxt "ammo-comms"
@@ -1787,7 +1787,7 @@ msgstr "Que montrent les capteurs pour la brèche ouest ?"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation"
+msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
 
 #: scripts/scenario_50_gaps.lua:2473 scripts/scenario_50_gaps.lua:2489
 #: scripts/scenario_50_gaps.lua:3445

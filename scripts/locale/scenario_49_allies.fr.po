@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -1532,7 +1532,7 @@ msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 #: scripts/scenario_49_allies.lua:3610
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke). ("
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 
 #: scripts/scenario_49_allies.lua:3612 scripts/scenario_49_allies.lua:3624
 #: scripts/scenario_49_allies.lua:3636 scripts/scenario_49_allies.lua:3648
@@ -1545,7 +1545,7 @@ msgstr "%s%d rép chacun)"
 #: scripts/scenario_49_allies.lua:3620
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+msgstr "Veuillez réapprovisionner nos missiles EMP ("
 
 #: scripts/scenario_49_allies.lua:3622
 msgctxt "ammo-comms"
@@ -1565,7 +1565,7 @@ msgstr "Avez-vous des missiles homing supplémentaires ? ("
 #: scripts/scenario_49_allies.lua:3644
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr "Nous pourrions avoir besoin de quelques mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_49_allies.lua:3646
 msgctxt "ammo-comms"
@@ -2230,7 +2230,7 @@ msgstr ""
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "Tell me about %s"
-msgstr "Parlez-moi de %s."
+msgstr "Parlez-moi de %s"
 
 #: scripts/scenario_49_allies.lua:3968 scripts/scenario_49_allies.lua:4460
 #, lua-format
@@ -2254,7 +2254,7 @@ msgstr "%s ? Qui est %s ? Il n'y a personne ici qui s'appelle %s."
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "We don't talk about %s. They are gone and good riddance"
-msgstr "On ne parle pas de %s. Ils sont partis et bon débarras."
+msgstr "Pas envie de parler de %s. Ils sont partis et bon débarras."
 
 #: scripts/scenario_49_allies.lua:3976 scripts/scenario_49_allies.lua:4468
 #, lua-format
@@ -2281,7 +2281,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i rép."
+msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
 
 #: scripts/scenario_49_allies.lua:4003 scripts/scenario_49_allies.lua:4019
 #: scripts/scenario_49_allies.lua:5133
@@ -2398,7 +2398,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s: %i, %i\n"
+msgstr "     %s : %i, %i\n"
 
 #: scripts/scenario_49_allies.lua:4061
 msgctxt "trade-comms"
@@ -3203,7 +3203,7 @@ msgstr "Bouclier %s : %d%%\n"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%.1f rep)"
-msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%.1f rep)"
+msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%.1f rép)"
 
 #: scripts/scenario_49_allies.lua:4609
 msgctxt "stationAssist-comms"
@@ -3241,7 +3241,7 @@ msgstr "Pas assez de réputation !"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Adder MK5 reinforcements! (%.1f rep)"
-msgstr "Merci de nous envoyer un Adder MK5 en renforts ! (%.1f rep)"
+msgstr "Merci de nous envoyer un Adder MK5 en renforts ! (%.1f rép)"
 
 #: scripts/scenario_49_allies.lua:4635 scripts/scenario_49_allies.lua:4656
 #: scripts/scenario_49_allies.lua:4677
@@ -3268,7 +3268,7 @@ msgstr ""
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Phobos T3 reinforcements! (%.1f rep)"
-msgstr "Merci de nous envoyer un Phobos T3 en renforts ! (%.1f rep)"
+msgstr "Merci de nous envoyer un Phobos T3 en renforts ! (%.1f rép)"
 
 #: scripts/scenario_49_allies.lua:4675
 #, lua-format
@@ -3332,7 +3332,7 @@ msgstr "Quel marqueur devons-nous défendre ?"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend waypoint %d"
-msgstr "Défendez le marqueur %i"
+msgstr "Défendez le marqueur %d"
 
 #: scripts/scenario_49_allies.lua:4803
 #, lua-format
@@ -3478,27 +3478,27 @@ msgstr "Nous allons vous détruire !"
 #: scripts/scenario_49_allies.lua:5009
 msgctxt "shipEnemy-comms"
 msgid "We think not. It is you who will experience destruction!"
-msgstr "Nous ne pensons pas. C'est vous qui subirez la destruction !"
+msgstr "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
 
 #: scripts/scenario_49_allies.lua:5011
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
-msgstr "Vous n'avez pas aucun honneur."
+msgstr "Vous n'avez aucun honneur."
 
 #: scripts/scenario_49_allies.lua:5012
 msgctxt "shipEnemy-comms"
 msgid "Your insult has brought our wrath upon you. Prepare to die."
-msgstr "Vos insultes ont attiré sur vous notre colère. Préparez-vous à mourir."
+msgstr "Votre insulte a attiré notre colère sur vous. Préparez-vous à mourir !"
 
 #: scripts/scenario_49_allies.lua:5013
 msgctxt "shipEnemy-comms"
 msgid "Your comments about honor have no meaning to us"
-msgstr "Vos commentaires sur l'honneur ne signifient rien pour nous."
+msgstr "Vos commentaires sur l'honneur n'ont aucune signification pour nous."
 
 #: scripts/scenario_49_allies.lua:5015
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
-msgstr "Nous avons pitié de votre race pathétique."
+msgstr "Nous plaignons votre race pathétique."
 
 #: scripts/scenario_49_allies.lua:5016
 msgctxt "shipEnemy-comms"
@@ -3508,7 +3508,7 @@ msgstr "Pathétique? Vous allez regretter votre dénigrement !"
 #: scripts/scenario_49_allies.lua:5017
 msgctxt "shipEnemy-comms"
 msgid "We don't care what you think of us"
-msgstr "Nous ne nous soucions guère de ce que vous pensez de nous"
+msgstr "Peu importe ce que vous pensez de nous."
 
 #: scripts/scenario_49_allies.lua:5020
 msgctxt "shipEnemy-comms"
@@ -3647,12 +3647,12 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:5459
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
-msgstr "Stock"
+msgstr "Inventaire"
 
 #: scripts/scenario_49_allies.lua:5466
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
-msgstr "Stock"
+msgstr "Inventaire"
 
 #: scripts/scenario_49_allies.lua:5476 scripts/scenario_49_allies.lua:5495
 #: scripts/scenario_49_allies.lua:5514 scripts/scenario_49_allies.lua:5533
@@ -3661,7 +3661,7 @@ msgstr "Stock"
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
-msgstr "%s Cargaison en cours :"
+msgstr "%s Cargaison actuelle :"
 
 #: scripts/scenario_49_allies.lua:5483 scripts/scenario_49_allies.lua:5502
 #: scripts/scenario_49_allies.lua:5521 scripts/scenario_49_allies.lua:5540
@@ -3670,7 +3670,7 @@ msgstr "%s Cargaison en cours :"
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
-msgstr "     %s: %i"
+msgstr "     %s : %i"
 
 #: scripts/scenario_49_allies.lua:5489 scripts/scenario_49_allies.lua:5508
 #: scripts/scenario_49_allies.lua:5527 scripts/scenario_49_allies.lua:5546

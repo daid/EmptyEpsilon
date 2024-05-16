@@ -42,7 +42,7 @@ end
 ShipTemplate = createClass()
 function ShipTemplate:__init__()
     self.radar_trace = {
-        icon="radar/arrow.png",
+        icon="radar/ship.png",
         radius=300.0*0.8,
         max_size=1024,
         color_by_faction=true,
@@ -113,7 +113,7 @@ function ShipTemplate:setType(template_type)
     if template_type == "station" then
         if self.docking_bay == nil then self.docking_bay = {} end
         self.docking_bay.repair = true
-        if self.radar_trace.icon == "radar/arrow.png" then
+        if self.radar_trace.icon == "radar/ship.png" then
             self.radar_trace.icon = "radar/blip.png"
         end
         self.comms_receiver = {script="comms_station.lua"}

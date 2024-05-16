@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -1662,7 +1662,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:5323
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions."
+msgstr "Nous avons besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_55_defenderHunter.lua:5324
 msgctxt "ammo-comms"
@@ -1692,7 +1692,7 @@ msgstr "%s%d rép chacun)"
 #: scripts/scenario_55_defenderHunter.lua:5340
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+msgstr "Veuillez réapprovisionner nos missiles EMP ("
 
 #: scripts/scenario_55_defenderHunter.lua:5342
 msgctxt "ammo-comms"
@@ -1702,7 +1702,7 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_55_defenderHunter.lua:5352
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Des missiles homing de rechange pour nous ? ("
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
 
 #: scripts/scenario_55_defenderHunter.lua:5354
 msgctxt "ammo-comms"
@@ -1712,7 +1712,7 @@ msgstr "Avez-vous des missiles homing supplémentaires ? ("
 #: scripts/scenario_55_defenderHunter.lua:5364
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr "Nous pourrions avoir besoin de quelques mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_55_defenderHunter.lua:5366
 msgctxt "ammo-comms"
@@ -2127,13 +2127,13 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation"
+msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
 
 #: scripts/scenario_55_defenderHunter.lua:5577
 #: scripts/scenario_55_defenderHunter.lua:5610
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
-msgstr "Réparateur embauché"
+msgstr "Réparateur embauché."
 
 #: scripts/scenario_55_defenderHunter.lua:5587
 #, lua-format
@@ -2221,8 +2221,8 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles à la vente : quantité, coût en "
-"réputation\n"
+"Marchandises ou composants disponibles à la vente : (quantité, coût en "
+"réputation)\n"
 
 #: scripts/scenario_55_defenderHunter.lua:5736
 #, lua-format
@@ -2402,8 +2402,7 @@ msgstr "Un %s largué"
 #: scripts/scenario_55_defenderHunter.lua:5910
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
-msgstr ""
-"Aucun tutoriel n'explique les marchandises ou cargaisons. Explication :"
+msgstr "Explications sur les marchandises et cargaisons"
 
 #: scripts/scenario_55_defenderHunter.lua:5911
 msgctxt "explainGoods-comms"

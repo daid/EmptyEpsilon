@@ -1,4 +1,5 @@
 /*TODO
+
 // Draw a line toward the target position
 void WormHole::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {

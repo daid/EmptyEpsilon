@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -4322,7 +4322,7 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_44_outpost.lua:12068
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Des missiles homing de rechange pour nous ? ("
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
 
 #: scripts/scenario_44_outpost.lua:12070
 msgctxt "ammo-comms"
@@ -4332,7 +4332,7 @@ msgstr "Avez-vous des missiles homing supplémentaires ? ("
 #: scripts/scenario_44_outpost.lua:12080
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr "Nous pourrions avoir besoin de quelques mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_44_outpost.lua:12082
 msgctxt "ammo-comms"
@@ -4809,8 +4809,8 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles à la vente : quantité, coût en "
-"réputation :\n"
+"Marchandises ou composants disponibles à la vente : (quantité, coût en "
+"réputation)\n"
 
 #: scripts/scenario_44_outpost.lua:12410
 #, lua-format
@@ -5019,7 +5019,7 @@ msgstr "Nous avons une nouvelle recrue à vous proposer au poste de réparateur.
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation."
+msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
 
 #: scripts/scenario_44_outpost.lua:12649
 msgctxt "trade-comms"
@@ -6797,7 +6797,7 @@ msgstr "Nous partons immédiatement défendre le marqueur %d."
 #: scripts/scenario_44_outpost.lua:14222 scripts/scenario_44_outpost.lua:15134
 msgctxt "shipAssist-comms"
 msgid "Assist me"
-msgstr "Aidez-nous"
+msgstr "Aidez-nous !"
 
 #: scripts/scenario_44_outpost.lua:14223 scripts/scenario_44_outpost.lua:15135
 msgctxt "shipAssist-comms"
@@ -6854,7 +6854,7 @@ msgstr "%s Missiles : %d/%d\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr "Amarrez-vous à %s"
+msgstr "Amarrez-vous à %s."
 
 #: scripts/scenario_44_outpost.lua:14253 scripts/scenario_44_outpost.lua:15159
 #, lua-format
@@ -6890,7 +6890,7 @@ msgstr "Réputation insuffisante pour acheter."
 #: scripts/scenario_44_outpost.lua:14406 scripts/scenario_44_outpost.lua:14927
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
-msgstr "Auriez-vous de la cargaison à vendre ?"
+msgstr "Auriez-vous des marchandises à vendre ?"
 
 #: scripts/scenario_44_outpost.lua:14408 scripts/scenario_44_outpost.lua:14929
 msgctxt "trade-comms"

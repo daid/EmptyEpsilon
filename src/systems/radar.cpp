@@ -47,7 +47,7 @@ void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Ent
         switch(scanstate->getStateFor(my_spaceship)) {
         case ScanState::State::NotScanned:
         case ScanState::State::FriendOrFoeIdentified:
-            icon = "radar/arrow.png";
+            icon = "radar/ship.png";
             break;
         default:
             break;

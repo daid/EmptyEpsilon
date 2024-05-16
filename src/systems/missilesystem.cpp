@@ -338,9 +338,9 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
 
         auto& trace = missile.addComponent<RadarTrace>();
         if (tube.type_loaded == MW_Mine)
-            trace.icon = "radar/blip.png";
+            trace.icon = "radar/mine.png";
         else
-            trace.icon = "radar/arrow.png";
+            trace.icon = "radar/missile.png";
         trace.radius = 32.0f;
         trace.max_size = trace.min_size = 32 * (0.25f + 0.25f * category_modifier);
         trace.flags = RadarTrace::Rotate;

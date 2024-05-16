@@ -3,9 +3,9 @@
 --- 
 --- Written for EE games on May 4th, 2023 = "May the 4th be with you"
 ---
---- Version 1
+--- Version 1.0.2
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every Saturday at 1600 UTC (aka GMT or Zulu). All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every weekend. All experience levels are welcome. 
 -- Type: Replayable Mission
 -- Author: Xansta
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
@@ -35,8 +35,9 @@ require("cpu_ship_diversification_scenario_utility.lua")
 -- Initialization --
 --------------------
 function init()
-	scenario_version = "1.0.1"
-	print(string.format("     -----     Scenario: Planet Devourer     -----     Version %s     -----",scenario_version))
+	scenario_version = "1.0.2"
+	ee_version = "2023.06.17"
+	print(string.format("    ----    Scenario: Planet Devourer    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
 	print(_VERSION)
 	spawn_enemy_diagnostic = false
 	setVariations()	--numeric difficulty, Kraylor fortress size
@@ -770,7 +771,6 @@ function mainGMButtons()
 	addGMFunction(string.format(_("buttonGM","Version %s"),scenario_version),function()
 		local version_message = string.format(_("msgGM","Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
-		print(version_message)
 	end)
 	addGMFunction(_("buttonGM","+Station Reports"),stationReports)
 end
@@ -779,7 +779,6 @@ function mainGMButtonsDuringPause()
 	addGMFunction(string.format(_("buttonGM","Version %s"),scenario_version),function()
 		local version_message = string.format(_("msgGM","Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
-		print(version_message)
 	end)
 	addGMFunction(_("buttonGM","+Station Reports"),stationReports)
 	addGMFunction(_("buttonGM","+Difficulty"),setDifficulty)
@@ -791,7 +790,6 @@ function mainGMButtonsAfterPause()
 	addGMFunction(string.format(_("buttonGM","Version %s"),scenario_version),function()
 		local version_message = string.format(_("msgGM","Scenario version %s\n LUA version %s"),scenario_version,_VERSION)
 		addGMMessage(version_message)
-		print(version_message)
 	end)
 	addGMFunction(_("buttonGM","+Station Reports"),stationReports)
 	addGMFunction(_("buttonGM","Nerf Devourer"),nerfDevourer)
@@ -1354,7 +1352,11 @@ function constructEnvironment()
 	--fill in roughly circular area with semi-random terrain
 	far_enough_fail = false
 	local black_hole_chance = 1
-	black_hole_count = math.random(3,9)
+	if difficulty > 1 then
+		black_hole_count = 1
+	else
+		black_hole_count = math.random(3,9)
+	end
 	local star_chance = 3
 	star_count = math.random(1,2)
 	local probe_chance = 6
@@ -1941,8 +1943,6 @@ function angleFromVectorNorth(p1x,p1y,p2x,p2y)
 	return (360 - (RAD2DEG * theta)) % 360
 end
 function vectorFromAngleNorth(angle,distance)
---	print("input angle to vectorFromAngleNorth:")
---	print(angle)
 	angle = (angle + 270) % 360
 	local x, y = vectorFromAngle(angle,distance)
 	return x, y
@@ -5710,9 +5710,13 @@ function stealPlans(p)
 						p.plans_extracted_msg_dmg = "plans_extracted_msg_dmg"
 						p:addCustomMessage("DamageControl",p.plans_extracted_msg_dmg,string.format(_("mission-msgDamageControl", "The technical readouts for %s have been extracted from the databanks on Kraylor station %s"),devourer:getCallSign(),station_kraylor:getCallSign()))
 					else
+						p.extract_info_eng = "extract_info_eng"
 						p:addCustomInfo("Engineering",p.extract_info_eng,string.format(_("mission-tabEngineer", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
+						p.extract_info_epl = "extract_info_epl"
 						p:addCustomInfo("Engineering+",p.extract_info_epl,string.format(_("mission-tabEngineer+", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
+						p.extract_info_dmg = "extract_info_dmg"
 						p:addCustomInfo("DamageControl",p.extract_info_dmg,string.format(_("mission-tabDamageControl", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
+						p.extract_info_hlm = "extract_info_hlm"
 						p:addCustomInfo("Helms",p.extract_info_hlm,string.format(_("mission-tabHelms", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
 					end
 				else
@@ -5746,6 +5750,8 @@ function stealPlans(p)
 							p:addCustomInfo("Engineering+",p.extract_info_epl,string.format(_("mission-tabEngineer+", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
 							p.extract_info_dmg = "extract_info_dmg"
 							p:addCustomInfo("DamageControl",p.extract_info_dmg,string.format(_("mission-tabDamageControl", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
+							p.extract_info_hlm = "extract_info_hlm"
+							p:addCustomInfo("Helms",p.extract_info_hlm,string.format(_("mission-tabHelms", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
 						end,29)
 					end
 					if p.extract_button_dmg == nil then
@@ -5761,6 +5767,8 @@ function stealPlans(p)
 							p:addCustomInfo("Engineering+",p.extract_info_epl,string.format(_("mission-tabEngineer+", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
 							p.extract_info_dmg = "extract_info_dmg"
 							p:addCustomInfo("DamageControl",p.extract_info_dmg,string.format(_("mission-tabDamageControl", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
+							p.extract_info_hlm = "extract_info_hlm"
+							p:addCustomInfo("Helms",p.extract_info_hlm,string.format(_("mission-tabHelms", "Extract timer:%i"),math.floor(p.extract_time - getScenarioTime())),30)
 						end,29)
 					end
 				end
