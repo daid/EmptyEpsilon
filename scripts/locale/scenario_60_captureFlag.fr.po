@@ -19,7 +19,6 @@ msgid "Capture the Flag"
 msgstr "Capture du drapeau"
 
 # Scenario description
-#, fuzzy
 msgid ""
 "Capture opposing team's \"flag\" before they capture yours\n"
 "\n"
@@ -45,37 +44,41 @@ msgid ""
 "\n"
 "Version 2"
 msgstr ""
-"- Durée approx. : *** (***)\n"
-"- Difficulté : *** (variable)\n"
+"- Durée approx. : 45mn (variable)\n"
+"- Difficulté : Facile (variable)\n"
 "- Vaisseaux joueurs : 2 à plusieurs\n"
 "\n"
-"EN COURS DE TRADUCTION : 71%\n"
+"EN COURS DE TRADUCTION : 85%\n"
 "\n"
 "Mission : Capturez le « drapeau » de l'équipe adverse avant qu'elle ne "
 "capture le vôtre.\n"
 "\n"
-"La région se compose de 2 camps délimités par des marqueurs. Durant les 5 "
-"premières minutes (configurables), chaque camp décide où placer son drapeau "
-"et les leurres. Si vous allez en terrain ennemi pendant cette phase, votre "
-"vaisseau est détruit. Les vaisseaux les plus proches du poste d'arbitrage "
-"choisissent l'emplacement du drapeau de leur équipe lors de cette phase "
-"initiale. Quand vous posez votre drapeau, l'officier des armes mémorise ses "
-"coordonnées. Une fois le délai de 5mn écoulé, un artefact représentant votre "
-"drapeau apparait à cet emplacement. Si aucun lieu n'a été marqué, "
-"l'emplacement actuel du vaisseau sera utilisé. Si vous posez votre drapeau "
-"l'emplacement est en dehors des limites de votre camp, il le drapeau sera "
-"placé à l'emplacement le plus proche des limites.\n"
+"La région se compose de 2 camps délimités par des marqueurs. Le jeu se "
+"déroule en 2 phases :\n"
+"1. Phase de placement : durant 5mn (configurable), chaque camp décide où "
+"placer son drapeau et les leurres.\n"
+"Vous ne pouvez aller en terrain ennemi durant cette phase, votre vaisseau "
+"serait détruit. C'est le vaisseau le plus proche du poste d'arbitrage qui "
+"possède le drapeau de son équipe. Une fois placé, l'officier des armes "
+"mémorise ses coordonnées. Quand le délai de 5mn est écoulé, des artefacts "
+"représentant les drapeaux et leurres apparaissent aux emplacements "
+"préalablement choisis. Si vous n'avez pas posé votre drapeau pendant ces "
+"5mn, l'emplacement actuel du vaisseau est utilisé. Si vous posez votre "
+"drapeau en dehors des limites de votre camp, il est placé au plus près à "
+"l'intérieur des limites.\n"
 "\n"
-"Une fois les drapeaux placés, la chasse est lancée. Les vaisseaux peuvent "
-"traverser la frontière à la recherche du drapeau de l'autre équipe, mais "
-"lorsqu'ils se trouvent sur le territoire de l'autre équipe, ils peuvent être "
-"touchés par un vaisseau adverse dans un rayon de 0,75 unité. Être marqué "
-"vous renvoie dans votre propre région avec des dommages à votre lecteur de "
-"distorsion/saut. Chaque drapeau doit être scanné avant de pouvoir être "
-"récupéré. La récupération s'effectue en se plaçant à moins de 1U du drapeau. "
-"Être marqué alors qu'il est en possession du drapeau laisse tomber le "
-"drapeau à l'emplacement de l'événement de tag. Revenez à vos côtés avec le "
-"drapeau pour remporter la victoire\n"
+"2. Phase de recherche : une fois les drapeaux et les leurres placés, la "
+"chasse est lancée.\n"
+"Les vaisseaux peuvent traverser la frontière à la recherche du drapeau de "
+"l'équipe adverse. S'ils sont touchés (approchés) par un vaisseau adverse "
+"dans un rayon de 0,75 unité (configurable), ils sont renvoyés dans leur "
+"propre camp avec des dégâts sur leur système de vitesse lumière et "
+"téléportation. Si le vaisseau touché possédait le drapeau adverse, ce "
+"dernier est laissé sur place.\n"
+"Chaque drapeau doit être scanné avant de pouvoir être récupéré. La "
+"récupération s'effectue en se plaçant à moins de 1u du drapeau.\n"
+"L'équipe qui ramène le drapeau adverse dans son propre camp remporte la "
+"victoire.\n"
 "\n"
 "Version 2.0.1 - Mai 2024\n"
 "\n"
@@ -449,7 +452,7 @@ msgstr "Vide"
 #: scripts/scenario_60_captureFlag.lua:841
 msgctxt "buttonGM"
 msgid "default"
-msgstr ""
+msgstr "Asymétrique"
 
 #: scripts/scenario_60_captureFlag.lua:842
 msgctxt "buttonGM"
@@ -500,7 +503,7 @@ msgstr "Désactiver diagnostic"
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Terrain: %s"
-msgstr ""
+msgstr "+Terrains : %s"
 
 #: scripts/scenario_60_captureFlag.lua:883
 msgctxt "buttonGM"
@@ -523,40 +526,40 @@ msgstr ""
 #, lua-format
 msgctxt "buttonGM"
 msgid "Enemies: %s ->Next"
-msgstr ""
+msgstr "Ennemis : %s ->"
 
 #: scripts/scenario_60_captureFlag.lua:900
 #, lua-format
 msgctxt "buttonGM"
 msgid "Flag scan: %s ->Next"
-msgstr ""
+msgstr "Scan drapeaux : %s ->"
 
 #: scripts/scenario_60_captureFlag.lua:911
 #, lua-format
 msgctxt "buttonGM"
 msgid "Flag track: %s ->Next"
-msgstr ""
+msgstr "Suivi drapeaux : %s ->"
 
 #: scripts/scenario_60_captureFlag.lua:924
 msgctxt "buttonGM"
 msgid "Destroy = end off"
-msgstr ""
+msgstr "Détruit = Défaite"
 
 #: scripts/scenario_60_captureFlag.lua:926
 msgctxt "buttonGM"
 msgid "Destroy = end on"
-msgstr ""
+msgstr "Détruit = continue"
 
 #: scripts/scenario_60_captureFlag.lua:936
 #, lua-format
 msgctxt "buttonGM"
 msgid "Marker: %s ->Next"
-msgstr ""
+msgstr "Marqueurs : %s ->"
 
 #: scripts/scenario_60_captureFlag.lua:949
 msgctxt "buttonGM"
 msgid "Player Prefs"
-msgstr ""
+msgstr "Préférences joueurs"
 
 #: scripts/scenario_60_captureFlag.lua:950
 #, fuzzy
@@ -634,18 +637,18 @@ msgstr "    Préférence de vaisseau 6 :%s"
 #: scripts/scenario_60_captureFlag.lua:1004
 msgctxt "buttonGM"
 msgid "-from Terrain"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1005
 #, lua-format
 msgctxt "buttonGM"
 msgid "Size: %s -> Next"
-msgstr ""
+msgstr "Arène : %s ->"
 
 #: scripts/scenario_60_captureFlag.lua:1034
 msgctxt "buttonGM"
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: scripts/scenario_60_captureFlag.lua:1118
 #: scripts/scenario_60_captureFlag.lua:1119
@@ -680,25 +683,25 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1196
 msgctxt "buttonGM"
 msgid "-from Player Config"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1197
 #: scripts/scenario_60_captureFlag.lua:1564
 msgctxt "buttonGM"
 msgid "Show control codes"
-msgstr ""
+msgstr "Codes de contrôle"
 
 #: scripts/scenario_60_captureFlag.lua:1198
 #: scripts/scenario_60_captureFlag.lua:1565
 msgctxt "buttonGM"
 msgid "Show Kraylor codes"
-msgstr ""
+msgstr "Codes Kraylors"
 
 #: scripts/scenario_60_captureFlag.lua:1199
 #: scripts/scenario_60_captureFlag.lua:1567
 msgctxt "buttonGM"
 msgid "Show Human codes"
-msgstr ""
+msgstr "Codes Humains"
 
 #: scripts/scenario_60_captureFlag.lua:1200
 msgctxt "buttonGM"
@@ -726,22 +729,22 @@ msgstr ""
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Tags %.2f, %.1fU"
-msgstr ""
+msgstr "+Balises %.2f, %.1fU"
 
 #: scripts/scenario_60_captureFlag.lua:1218
 msgctxt "buttonGM"
 msgid "+Drones Off"
-msgstr ""
+msgstr "+Drones Off"
 
 #: scripts/scenario_60_captureFlag.lua:1220
 msgctxt "buttonGM"
 msgid "+Drones On"
-msgstr ""
+msgstr "+Drones On"
 
 #: scripts/scenario_60_captureFlag.lua:1232
 msgctxt "buttonGM"
 msgid "-Main from times"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1233
 #, lua-format
@@ -790,7 +793,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1383
 msgctxt "buttonGM"
 msgid "-Main from Tag"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1282
 #: scripts/scenario_60_captureFlag.lua:1339
@@ -804,7 +807,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1517
 msgctxt "buttonGM"
 msgid "-Player Config"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1283
 #, lua-format
@@ -821,7 +824,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1288
 msgctxt "buttonGM"
 msgid "-From Drones"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1289
 msgctxt "buttonGM"
@@ -922,7 +925,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1385
 msgctxt "buttonGM"
 msgid "-From Tag Dmg"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1387
 #, lua-format
@@ -949,7 +952,7 @@ msgstr "- Précédent"
 #: scripts/scenario_60_captureFlag.lua:1404
 msgctxt "buttonGM"
 msgid "-From Capacity"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1406
 #: scripts/scenario_60_captureFlag.lua:1484
@@ -968,7 +971,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1422
 msgctxt "buttonGM"
 msgid "-From Drone Flag"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1424
 #, lua-format
@@ -1026,70 +1029,70 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1482
 msgctxt "buttonGM"
 msgid "-From Drone Hull"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1500
 msgctxt "buttonGM"
 msgid "-From Drone Impulse"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1502
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Add 5 -> %i"
-msgstr ""
+msgstr "%i Ajou 5 -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1508
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Del 5 -> %i"
-msgstr ""
+msgstr "%i Sup 5 -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1518
 msgctxt "buttonGM"
 msgid "-From Drone Beam"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1520
 #, lua-format
 msgctxt "buttonGM"
 msgid "Rng %.1fU Add .1 -> %.1fU"
-msgstr ""
+msgstr "Portée %.1fU Ajou .1 -> %.1fU"
 
 #: scripts/scenario_60_captureFlag.lua:1526
 #, lua-format
 msgctxt "buttonGM"
 msgid "Rng %.1fU Del .1 -> %.1fU"
-msgstr ""
+msgstr "Portée %.1fU Sup .1 -> %.1fU"
 
 #: scripts/scenario_60_captureFlag.lua:1532
 #, lua-format
 msgctxt "buttonGM"
 msgid "Dmg %.1f Add .5 -> %.1f"
-msgstr ""
+msgstr "Dég %.1f Ajou .5 -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1538
 #, lua-format
 msgctxt "buttonGM"
 msgid "Dmg %.1f Del .5 -> %.1f"
-msgstr ""
+msgstr "Dég. %.1f Sup .5 -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1544
 #, lua-format
 msgctxt "buttonGM"
 msgid "Cycle %.1f Add .5 -> %.1f"
-msgstr ""
+msgstr "Cycle %.1f Ajou .5 -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1550
 #, lua-format
 msgctxt "buttonGM"
 msgid "Cycle %.1f Del .5 -> %.1f"
-msgstr ""
+msgstr "Cycle %.1f Sup .5 -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1566
 msgctxt "buttonGM"
 msgid "Show Ktlitan codes"
-msgstr ""
+msgstr "Codes Ktlitans"
 
 #: scripts/scenario_60_captureFlag.lua:1568
 msgctxt "buttonGM"
@@ -1104,12 +1107,12 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1592
 msgctxt "buttonGM"
 msgid "Current Stats"
-msgstr ""
+msgstr "Stats en cours"
 
 #: scripts/scenario_60_captureFlag.lua:1594
 msgctxt "buttonGM"
 msgid "Detailed Drone Report"
-msgstr ""
+msgstr "Drones : rapport complet"
 
 #: scripts/scenario_60_captureFlag.lua:1597
 msgctxt "buttonGM"
@@ -1302,6 +1305,8 @@ msgid ""
 "\n"
 "            Drone %i (%s) Hull: %i/%i"
 msgstr ""
+"\n"
+"            Drone %i (%s) Coque : %i/%i"
 
 #: scripts/scenario_60_captureFlag.lua:2218
 #: scripts/scenario_60_captureFlag.lua:2263
@@ -1311,6 +1316,8 @@ msgid ""
 "\n"
 "            Drone %i --Destroyed--"
 msgstr ""
+"\n"
+"            Drone %i --Détruit--"
 
 #: scripts/scenario_60_captureFlag.lua:2224
 #: scripts/scenario_60_captureFlag.lua:2269
@@ -1348,6 +1355,8 @@ msgid ""
 "\n"
 "            Drone %i (%s) Sector %s, X: %7.0f, Y: %7.0f"
 msgstr ""
+"\n"
+"            Drone %i (%s) Secteur %s, X: %7.0f, Y : %7.0f"
 
 #: scripts/scenario_60_captureFlag.lua:2273
 msgctxt "drones-msgHelms&Tactical"
@@ -1398,21 +1407,19 @@ msgid "Count Drones"
 msgstr "Compter les drones"
 
 #: scripts/scenario_60_captureFlag.lua:2312
-#, fuzzy
 msgctxt "drones-buttonEngineer"
 msgid "Drone Hulls"
-msgstr "Coques de drones"
+msgstr "Rapport : Coques de drones"
 
 #: scripts/scenario_60_captureFlag.lua:2316
-#, fuzzy
 msgctxt "drones-buttonEngineer+"
 msgid "Drone Hulls"
-msgstr "Coques de drones"
+msgstr "Rapport : Coques de drones"
 
 #: scripts/scenario_60_captureFlag.lua:2320
 msgctxt "drones-buttonHelms"
 msgid "Drone Locations"
-msgstr "Emplacements des drones"
+msgstr "Emplacement drones"
 
 #: scripts/scenario_60_captureFlag.lua:2324
 msgctxt "drones-buttonTactical"
@@ -1504,12 +1511,12 @@ msgstr "Un de vos réparateurs a péri."
 #: scripts/scenario_60_captureFlag.lua:3827
 msgctxt "buttonGM"
 msgid "Orbit Toggle"
-msgstr ""
+msgstr "Orbite bascule"
 
 #: scripts/scenario_60_captureFlag.lua:3837
 msgctxt "buttonGM"
 msgid "Move Toggle"
-msgstr ""
+msgstr "Orbite déplacement"
 
 #: scripts/scenario_60_captureFlag.lua:3998
 msgctxt "wormhole-msgHelms"
@@ -2840,7 +2847,7 @@ msgstr "Drapeau caché %i :%.1f"
 #: scripts/scenario_60_captureFlag.lua:7308
 msgctxt "callsign-station"
 msgid "Transition"
-msgstr ""
+msgstr "Transition"
 
 #: scripts/scenario_60_captureFlag.lua:7404
 #: scripts/scenario_60_captureFlag.lua:7430
@@ -2860,7 +2867,7 @@ msgstr "Drapeau leurre Kraylor"
 #, lua-format
 msgctxt "callsign-station"
 msgid "Hunt flag %i:%.1f"
-msgstr ""
+msgstr "Chasse au drapeau %i :%.1f"
 
 #: scripts/scenario_60_captureFlag.lua:7533
 msgctxt "flag-tabHelms"
