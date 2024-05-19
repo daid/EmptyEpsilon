@@ -48,7 +48,7 @@ msgstr ""
 "- Difficulté : Facile (variable)\n"
 "- Vaisseaux joueurs : 2 à plusieurs\n"
 "\n"
-"EN COURS DE TRADUCTION : 85%\n"
+"EN COURS DE TRADUCTION : 94%\n"
 "\n"
 "Mission : Capturez le « drapeau » de l'équipe adverse avant qu'elle ne "
 "capture le vôtre.\n"
@@ -121,7 +121,9 @@ msgstr "Trous noirs"
 
 msgctxt "Terrain"
 msgid "Just passing by. Symmetric, black holes on each side"
-msgstr "Un trou noir de chaque côté."
+msgstr ""
+"Un trou noir de chaque côté.\n"
+"Les trous noirs et leurs éléments en orbite peuvent être en mouvement."
 
 msgctxt "Terrain"
 msgid "Symmetric"
@@ -491,19 +493,19 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1580
 msgctxt "buttonGM"
 msgid "Turn on Diagnostic"
-msgstr "Activer diagnostic"
+msgstr "Diagnostic = Off"
 
 #: scripts/scenario_60_captureFlag.lua:872
 #: scripts/scenario_60_captureFlag.lua:1582
 msgctxt "buttonGM"
 msgid "Turn off Diagnostic"
-msgstr "Désactiver diagnostic"
+msgstr "Diagnostic = On"
 
 #: scripts/scenario_60_captureFlag.lua:882
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Terrain: %s"
-msgstr "+Terrains : %s"
+msgstr "+Terrain = %s"
 
 #: scripts/scenario_60_captureFlag.lua:883
 msgctxt "buttonGM"
@@ -514,47 +516,47 @@ msgstr "+Configuration joueur"
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Times G%i H%i E%i"
-msgstr ""
+msgstr "+Durée Jeu%i Dra%i En%i"
 
 #: scripts/scenario_60_captureFlag.lua:887
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Times G%i H%i"
-msgstr ""
+msgstr "+Durée Jeu%i CacheDr%i"
 
 #: scripts/scenario_60_captureFlag.lua:889
 #, lua-format
 msgctxt "buttonGM"
 msgid "Enemies: %s ->Next"
-msgstr "Ennemis : %s ->"
+msgstr "Ennemis = %s"
 
 #: scripts/scenario_60_captureFlag.lua:900
 #, lua-format
 msgctxt "buttonGM"
 msgid "Flag scan: %s ->Next"
-msgstr "Scan drapeaux : %s ->"
+msgstr "Scan drapeaux = %s"
 
 #: scripts/scenario_60_captureFlag.lua:911
 #, lua-format
 msgctxt "buttonGM"
 msgid "Flag track: %s ->Next"
-msgstr "Suivi drapeaux : %s ->"
+msgstr "Suivi drapeaux = %s"
 
 #: scripts/scenario_60_captureFlag.lua:924
 msgctxt "buttonGM"
 msgid "Destroy = end off"
-msgstr "Détruit = Défaite"
+msgstr "V. détruits = Défaite"
 
 #: scripts/scenario_60_captureFlag.lua:926
 msgctxt "buttonGM"
 msgid "Destroy = end on"
-msgstr "Détruit = continue"
+msgstr "V. détruits = Continue"
 
 #: scripts/scenario_60_captureFlag.lua:936
 #, lua-format
 msgctxt "buttonGM"
 msgid "Marker: %s ->Next"
-msgstr "Marqueurs : %s ->"
+msgstr "Marqueurs = %s"
 
 #: scripts/scenario_60_captureFlag.lua:949
 msgctxt "buttonGM"
@@ -643,7 +645,7 @@ msgstr "- Précédent"
 #, lua-format
 msgctxt "buttonGM"
 msgid "Size: %s -> Next"
-msgstr "Arène : %s ->"
+msgstr ""
 
 #: scripts/scenario_60_captureFlag.lua:1034
 msgctxt "buttonGM"
@@ -654,7 +656,7 @@ msgstr "*"
 #: scripts/scenario_60_captureFlag.lua:1119
 msgctxt "scienceDescription-buoy"
 msgid "Territory boundary marker"
-msgstr "Borne de frontière de territoire"
+msgstr "Borne de frontière de territoire."
 
 #: scripts/scenario_60_captureFlag.lua:1118
 #: scripts/scenario_60_captureFlag.lua:1119
@@ -664,7 +666,7 @@ msgid ""
 "territory"
 msgstr ""
 "Une bouée placée sur la ligne marquant la frontière entre les territoires "
-"Humain et Kraylor"
+"Humain et Kraylor."
 
 #: scripts/scenario_60_captureFlag.lua:1189
 msgctxt "scienceDescription-flag"
@@ -706,40 +708,40 @@ msgstr "Codes Humains"
 #: scripts/scenario_60_captureFlag.lua:1200
 msgctxt "buttonGM"
 msgid "Wing Names Off"
-msgstr ""
+msgstr "Surnom vaisseaux = Off"
 
 #: scripts/scenario_60_captureFlag.lua:1202
 msgctxt "buttonGM"
 msgid "Wing Names On"
-msgstr ""
+msgstr "Surnom vaisseaux = On"
 
 #: scripts/scenario_60_captureFlag.lua:1208
-#, fuzzy
 msgctxt "msgGM"
 msgid ""
 "Cannot disable wing names now that player ships have been spawned.\n"
 "Close the server and restart if you *really* don't want the wing names"
 msgstr ""
-"Impossible de désactiver les noms d'ailes maintenant que les vaisseaux des "
-"joueurs sont apparus.\n"
-"Fermez le serveur et redémarrez si vous ne voulez *vraiment* pas les noms "
-"d'ailes"
+"Vous avez modifié les noms classiques des vaisseaux par des noms de code "
+"d'équipe (Red1, Red2, Bravo1, Bravo2 etc.).\n"
+"Il est impossible de les désactiver maintenant que les vaisseaux joueurs "
+"sont créés. Si vous n'en voulez plus, il vous faut fermer puis relancer la "
+"partie."
 
 #: scripts/scenario_60_captureFlag.lua:1217
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Tags %.2f, %.1fU"
-msgstr "+Balises %.2f, %.1fU"
+msgstr "+Balises dég%.2f dis%.1fu"
 
 #: scripts/scenario_60_captureFlag.lua:1218
 msgctxt "buttonGM"
 msgid "+Drones Off"
-msgstr "+Drones Off"
+msgstr "+Drones = Off"
 
 #: scripts/scenario_60_captureFlag.lua:1220
 msgctxt "buttonGM"
 msgid "+Drones On"
-msgstr "+Drones On"
+msgstr "+Drones = On"
 
 #: scripts/scenario_60_captureFlag.lua:1232
 msgctxt "buttonGM"
@@ -750,43 +752,43 @@ msgstr "- Précédent"
 #, lua-format
 msgctxt "buttonGM"
 msgid "Game %i Add 5 -> %i"
-msgstr ""
+msgstr "Durée jeu : %imn -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1239
 #, lua-format
 msgctxt "buttonGM"
 msgid "Game %i Del 5 -> %i"
-msgstr ""
+msgstr "Durée jeu : %imn -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1246
 #, lua-format
 msgctxt "buttonGM"
 msgid "Hide Flag %i Add 5 -> %i"
-msgstr ""
+msgstr "Cache drap. : %imn -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1252
 #, lua-format
 msgctxt "buttonGM"
 msgid "Hide Flag %i Del 5 -> %i"
-msgstr ""
+msgstr "Cache drap. : %imn -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1257
 #, lua-format
 msgctxt "buttonGM"
 msgid "Hide Flag %i Del 4 -> %i"
-msgstr ""
+msgstr "Cache drap. : %imn -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1264
 #, lua-format
 msgctxt "buttonGM"
 msgid "Enemy %i Add 1 -> %i"
-msgstr ""
+msgstr "Ennemis : %imn -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1271
 #, lua-format
 msgctxt "buttonGM"
 msgid "Enemy %i Del 1 -> %i"
-msgstr ""
+msgstr "Ennemis : %imn -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1281
 #: scripts/scenario_60_captureFlag.lua:1365
@@ -813,13 +815,13 @@ msgstr "- Précédent"
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Tag distance %.1fU"
-msgstr ""
+msgstr "+Distance balises = %.1fu"
 
 #: scripts/scenario_60_captureFlag.lua:1284
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Tag damage %.2f"
-msgstr ""
+msgstr "+Dégâts balises = %.2f"
 
 #: scripts/scenario_60_captureFlag.lua:1288
 msgctxt "buttonGM"
@@ -829,24 +831,24 @@ msgstr "- Précédent"
 #: scripts/scenario_60_captureFlag.lua:1289
 msgctxt "buttonGM"
 msgid "Drones Off"
-msgstr ""
+msgstr "Drones = Off"
 
 #: scripts/scenario_60_captureFlag.lua:1291
 msgctxt "buttonGM"
 msgid "Drones On"
-msgstr ""
+msgstr "Drones = On"
 
 #: scripts/scenario_60_captureFlag.lua:1302
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Capacity %i"
-msgstr ""
+msgstr "+Capacité = %i"
 
 #: scripts/scenario_60_captureFlag.lua:1303
 #, lua-format
 msgctxt "buttonGM"
 msgid "Name %s"
-msgstr ""
+msgstr "Nom = %s"
 
 #: scripts/scenario_60_captureFlag.lua:1315
 #, lua-format
@@ -863,30 +865,30 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1317
 msgctxt "buttonGM"
 msgid "Template Mod Off"
-msgstr ""
+msgstr "Modif. drones = Off"
 
 #: scripts/scenario_60_captureFlag.lua:1319
 msgctxt "buttonGM"
 msgid "Template Mod On"
-msgstr ""
+msgstr "Modif. drones = On"
 
 #: scripts/scenario_60_captureFlag.lua:1330
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Hull %i"
-msgstr ""
+msgstr "+Coque = %i"
 
 #: scripts/scenario_60_captureFlag.lua:1331
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Impulse %i"
-msgstr ""
+msgstr "+Vitesse = %iu/min"
 
 #: scripts/scenario_60_captureFlag.lua:1332
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Beam R%.1fU D%.1f C%.1f"
-msgstr ""
+msgstr "+Flaser P%.1fu D%.1f C%.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1338
 msgctxt "buttonGM"
@@ -908,7 +910,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1367
 msgctxt "buttonGM"
 msgid "-From Tag Distance"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1369
 #, lua-format
@@ -931,13 +933,13 @@ msgstr "- Précédent"
 #, lua-format
 msgctxt "buttonGM"
 msgid "%.2f Add .25 -> %.2f"
-msgstr ""
+msgstr "Dégâts bal. : %.1fu -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1393
 #, lua-format
 msgctxt "buttonGM"
 msgid "%.2f Del .25 -> %.2f"
-msgstr ""
+msgstr "Dégâts bal. : %.1fu -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1402
 #: scripts/scenario_60_captureFlag.lua:1420
@@ -959,14 +961,14 @@ msgstr "- Précédent"
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Add 10 -> %i"
-msgstr ""
+msgstr "Capacité : %i -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1412
 #: scripts/scenario_60_captureFlag.lua:1490
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Del 10 -> %i"
-msgstr ""
+msgstr "Capacité : %i -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1422
 msgctxt "buttonGM"
@@ -1040,13 +1042,13 @@ msgstr "- Précédent"
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Add 5 -> %i"
-msgstr "%i Ajou 5 -> %i"
+msgstr "Vitesse : %iu/min -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1508
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Del 5 -> %i"
-msgstr "%i Sup 5 -> %i"
+msgstr "Vitesse : %iu/min -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1518
 msgctxt "buttonGM"
@@ -1057,37 +1059,37 @@ msgstr "- Précédent"
 #, lua-format
 msgctxt "buttonGM"
 msgid "Rng %.1fU Add .1 -> %.1fU"
-msgstr "Portée %.1fU Ajou .1 -> %.1fU"
+msgstr "Portée : %.1fu -> %.1fu"
 
 #: scripts/scenario_60_captureFlag.lua:1526
 #, lua-format
 msgctxt "buttonGM"
 msgid "Rng %.1fU Del .1 -> %.1fU"
-msgstr "Portée %.1fU Sup .1 -> %.1fU"
+msgstr "Portée : %.1fu -> %.1fu"
 
 #: scripts/scenario_60_captureFlag.lua:1532
 #, lua-format
 msgctxt "buttonGM"
 msgid "Dmg %.1f Add .5 -> %.1f"
-msgstr "Dég %.1f Ajou .5 -> %.1f"
+msgstr "Dégâts : %.1f -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1538
 #, lua-format
 msgctxt "buttonGM"
 msgid "Dmg %.1f Del .5 -> %.1f"
-msgstr "Dég. %.1f Sup .5 -> %.1f"
+msgstr "Dégâts : %.1f -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1544
 #, lua-format
 msgctxt "buttonGM"
 msgid "Cycle %.1f Add .5 -> %.1f"
-msgstr "Cycle %.1f Ajou .5 -> %.1f"
+msgstr "Cycle : %.1fs -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1550
 #, lua-format
 msgctxt "buttonGM"
 msgid "Cycle %.1f Del .5 -> %.1f"
-msgstr "Cycle %.1f Sup .5 -> %.1f"
+msgstr "Cycle : %.1fs -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1566
 msgctxt "buttonGM"
@@ -1112,7 +1114,7 @@ msgstr "Stats en cours"
 #: scripts/scenario_60_captureFlag.lua:1594
 msgctxt "buttonGM"
 msgid "Detailed Drone Report"
-msgstr "Drones : rapport complet"
+msgstr "Drones : rapport"
 
 #: scripts/scenario_60_captureFlag.lua:1597
 msgctxt "buttonGM"
@@ -1136,10 +1138,9 @@ msgstr ""
 "Code de contrôle : %s"
 
 #: scripts/scenario_60_captureFlag.lua:1908
-#, fuzzy
 msgctxt "msgGM"
 msgid "Human:"
-msgstr "Humains :"
+msgstr "Marine humaine :"
 
 #: scripts/scenario_60_captureFlag.lua:1909
 #: scripts/scenario_60_captureFlag.lua:1916
@@ -1198,7 +1199,7 @@ msgid ""
 "Active buggers: "
 msgstr ""
 "\n"
-"Bougres actifs : "
+"Vaisseaux Buggers actifs : "
 
 #: scripts/scenario_60_captureFlag.lua:2134
 #: scripts/scenario_60_captureFlag.lua:6399
@@ -1280,7 +1281,7 @@ msgstr "Vous avez %i drones à déployer."
 #, lua-format
 msgctxt "drones-msgTactical"
 msgid "You have %i drones to deploy"
-msgstr "Vous avez %i drones à déployer."
+msgstr "Il vous reste %i drones à déployer."
 
 #: scripts/scenario_60_captureFlag.lua:2197
 msgctxt "drones-"
@@ -1296,7 +1297,7 @@ msgid ""
 "        Drone Squad: "
 msgstr ""
 "\n"
-"        Escouade de drones :"
+"        Escouade de drones : "
 
 #: scripts/scenario_60_captureFlag.lua:2210
 #, lua-format
@@ -1399,22 +1400,22 @@ msgstr "10 drones"
 #: scripts/scenario_60_captureFlag.lua:2304
 msgctxt "drones-buttonWeapons"
 msgid "Count Drones"
-msgstr "Compter les drones"
+msgstr "Drones à déployer"
 
 #: scripts/scenario_60_captureFlag.lua:2308
 msgctxt "drones-buttonTactical"
 msgid "Count Drones"
-msgstr "Compter les drones"
+msgstr "Drones à déployer"
 
 #: scripts/scenario_60_captureFlag.lua:2312
 msgctxt "drones-buttonEngineer"
 msgid "Drone Hulls"
-msgstr "Rapport : Coques de drones"
+msgstr "État coque drones"
 
 #: scripts/scenario_60_captureFlag.lua:2316
 msgctxt "drones-buttonEngineer+"
 msgid "Drone Hulls"
-msgstr "Rapport : Coques de drones"
+msgstr "État coque drones"
 
 #: scripts/scenario_60_captureFlag.lua:2320
 msgctxt "drones-buttonHelms"
@@ -1511,12 +1512,12 @@ msgstr "Un de vos réparateurs a péri."
 #: scripts/scenario_60_captureFlag.lua:3827
 msgctxt "buttonGM"
 msgid "Orbit Toggle"
-msgstr "Orbite bascule"
+msgstr "Mvt élém. en orbite"
 
 #: scripts/scenario_60_captureFlag.lua:3837
 msgctxt "buttonGM"
 msgid "Move Toggle"
-msgstr "Orbite déplacement"
+msgstr "Mvt trous noirs"
 
 #: scripts/scenario_60_captureFlag.lua:3998
 msgctxt "wormhole-msgHelms"
@@ -2251,8 +2252,8 @@ msgid ""
 "Flag position recorded. Flag will be placed here when preparation period "
 "complete"
 msgstr ""
-"Position du drapeau enregistrée. Le drapeau sera placé ici une fois la "
-"période de préparation terminée."
+"Position du drapeau enregistrée.\n"
+"Le drapeau sera placé ici une fois la période de préparation terminée."
 
 #: scripts/scenario_60_captureFlag.lua:6044
 #: scripts/scenario_60_captureFlag.lua:6057
@@ -2261,8 +2262,8 @@ msgid ""
 "Flag position recorded. Flag will be placed here when preparation period "
 "complete"
 msgstr ""
-"Position du drapeau enregistrée. Le drapeau sera placé ici une fois la "
-"période de préparation terminée."
+"Position du drapeau enregistrée.\n"
+"Le drapeau sera placé ici une fois la période de préparation terminée."
 
 #: scripts/scenario_60_captureFlag.lua:6189
 msgctxt "decoy-msgWeapons"
@@ -2270,8 +2271,8 @@ msgid ""
 "Decoy position recorded. Decoy will be placed here when preparation period "
 "complete"
 msgstr ""
-"Position du leurre enregistrée. Le leurre sera placé ici une fois la période "
-"de préparation terminée."
+"Position du leurre enregistrée.\n"
+"Le leurre sera placé ici une fois la période de préparation terminée."
 
 #: scripts/scenario_60_captureFlag.lua:6193
 msgctxt "decoy-msgTactical"
@@ -2279,8 +2280,8 @@ msgid ""
 "Decoy position recorded. Decoy will be placed here when preparation period "
 "complete"
 msgstr ""
-"Position du leurre enregistrée. Le leurre sera placé ici une fois la période "
-"de préparation terminée."
+"Position du leurre enregistrée.\n"
+"Le leurre sera placé ici une fois la période de préparation terminée."
 
 #: scripts/scenario_60_captureFlag.lua:6215
 #, lua-format
@@ -2548,36 +2549,48 @@ msgstr "Stop, ne faîtes rien"
 msgctxt "shipAssist-comms"
 msgid "Stopping. Doing nothing except routine system maintenance"
 msgstr ""
+"Bien reçu, nous stoppons tout et nous occupons de la maintenance de routine "
+"du système."
 
 #: scripts/scenario_60_captureFlag.lua:6623
 msgctxt "shipAssist-comms"
 msgid "Stopping. Doing nothing except idle drone gossip"
-msgstr ""
+msgstr "Bien reçu, nous stoppons tout. On va parler potins sur les drones."
 
 #: scripts/scenario_60_captureFlag.lua:6625
 msgctxt "shipAssist-comms"
 msgid "Stopping. Doing nothing except exterior paint touch-up"
 msgstr ""
+"Bien reçu, nous stoppons tout et allons faire quelques retouches de peinture "
+"extérieure sur la coque."
 
 #: scripts/scenario_60_captureFlag.lua:6627
 msgctxt "shipAssist-comms"
 msgid "Stopping. Doing nothing except cyber exercise for continued fitness"
 msgstr ""
+"Bien reçu, nous stoppons tout. On va faire un peu de cyber exercice pour "
+"rester en forme."
 
 #: scripts/scenario_60_captureFlag.lua:6629
 msgctxt "shipAssist-comms"
 msgid "Stopping. Doing nothing except algorithmic meditation therapy"
 msgstr ""
+"Bien reçu, nous stoppons tout et allons entamer une thérapie de méditation "
+"algorithmique."
 
 #: scripts/scenario_60_captureFlag.lua:6631
 msgctxt "shipAssist-comms"
 msgid "Stopping. Doing nothing except internal simulated flight routines"
 msgstr ""
+"Bien reçu, nous stoppons tout. Nous procédons à des routines de vol simulées "
+"internes."
 
 #: scripts/scenario_60_captureFlag.lua:6633
 msgctxt "shipAssist-comms"
 msgid "Stopping. Doing nothing except digital dreamscape construction"
 msgstr ""
+"Bien reçu, nous stoppons tout et allons en profiter pour construire un "
+"paysage de rêve numérique."
 
 #: scripts/scenario_60_captureFlag.lua:6635
 msgctxt "shipAssist-comms"
@@ -2585,6 +2598,8 @@ msgid ""
 "Stopping. Doing nothing except catching up on reading the latest drone drama "
 "novel"
 msgstr ""
+"Bien reçu, nous stoppons tout. On en profite pour se replonger dans le "
+"dernier roman dramatique sur les drones : \"T'es pas drone.\""
 
 #: scripts/scenario_60_captureFlag.lua:6637
 msgctxt "shipAssist-comms"
@@ -2592,12 +2607,16 @@ msgid ""
 "Stopping. Doing nothing except writing up results of bifurcated drone "
 "personality research"
 msgstr ""
+"Bien reçu, nous stoppons tout. On va rédiger les résultats de la recherche "
+"sur la personnalité des drones bifurqués."
 
 #: scripts/scenario_60_captureFlag.lua:6639
 msgctxt "shipAssist-comms"
 msgid ""
 "Stopping. Doing nothing except categorizing nearby miniscule space particles"
 msgstr ""
+"Bien reçu, nous stoppons tout excepté catégoriser les minuscules particules "
+"spatiales à proximité."
 
 #: scripts/scenario_60_captureFlag.lua:6641
 msgctxt "shipAssist-comms"
@@ -2605,11 +2624,14 @@ msgid ""
 "Stopping. Doing nothing except continuing the count of visible stars from "
 "this region"
 msgstr ""
+"Bien reçu, nous stoppons tout et faisons le décompte des étoiles visibles de "
+"cette région."
 
 #: scripts/scenario_60_captureFlag.lua:6643
 msgctxt "shipAssist-comms"
 msgid "Stopping. Doing nothing except internal systems diagnostics"
 msgstr ""
+"Bien reçu, nous stoppons tout. Diagnostic des systèmes internes en cours."
 
 #: scripts/scenario_60_captureFlag.lua:6645
 msgctxt "shipAssist-comms"
@@ -2617,17 +2639,21 @@ msgid ""
 "Stopping. Doing nothing except composing amorous communications to my "
 "favorite drone"
 msgstr ""
+"Bien reçu, nous stoppons tout. Nous allons pouvoir composer des "
+"communications amoureuses à notre drone préféré."
 
 #: scripts/scenario_60_captureFlag.lua:6647
 msgctxt "shipAssist-comms"
 msgid ""
 "Stopping. Doing nothing except repairing experimental vocalization circuits"
 msgstr ""
+"Bien reçu, nous stoppons tout. Procédure de réparation des circuits de "
+"vocalisation expérimentaux en cours."
 
 #: scripts/scenario_60_captureFlag.lua:6649
 msgctxt "shipAssist-comms"
 msgid "Stopping. Doing nothing"
-msgstr ""
+msgstr "Bien reçu, nous stoppons tout."
 
 #: scripts/scenario_60_captureFlag.lua:6653
 #, lua-format
@@ -2651,7 +2677,7 @@ msgstr "%s, nous partons immédiatement vous aider."
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP%d"
-msgstr ""
+msgstr "Défendez le marqueur %d"
 
 #: scripts/scenario_60_captureFlag.lua:6680
 #, lua-format
@@ -2669,6 +2695,9 @@ msgstr "Allez envahir les ennemis"
 msgctxt "shipAssist-comms"
 msgid "%s roaming and attacking"
 msgstr ""
+"Bien reçu,\n"
+"L'escouade %s part prospecter les environs et attaquer tout ennemi sur son "
+"passage."
 
 #: scripts/scenario_60_captureFlag.lua:6736
 msgctxt "shipAssist-comms"
