@@ -48,8 +48,6 @@ msgstr ""
 "- Difficulté : Facile (variable)\n"
 "- Vaisseaux joueurs : 2 à plusieurs\n"
 "\n"
-"EN COURS DE TRADUCTION : 94%\n"
-"\n"
 "Mission : Capturez le « drapeau » de l'équipe adverse avant qu'elle ne "
 "capture le vôtre.\n"
 "\n"
@@ -85,6 +83,7 @@ msgstr ""
 "- Titre original : Capture the Flag\n"
 "- Auteur : Xansta & Kilted Klingon (Fév. 2019)\n"
 "- Traduction FR : Muerte (Mai 24)\n"
+"TRADUCTION EN COURS DE RELECTURE\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -564,10 +563,9 @@ msgid "Player Prefs"
 msgstr "Préférences joueurs"
 
 #: scripts/scenario_60_captureFlag.lua:950
-#, fuzzy
 msgctxt "msgGM"
 msgid "Remaining player preferences:"
-msgstr "Préférences restantes des joueurs :"
+msgstr ""
 
 #: scripts/scenario_60_captureFlag.lua:954
 #, lua-format
@@ -645,7 +643,7 @@ msgstr "- Précédent"
 #, lua-format
 msgctxt "buttonGM"
 msgid "Size: %s -> Next"
-msgstr ""
+msgstr "Modifier les éléments"
 
 #: scripts/scenario_60_captureFlag.lua:1034
 msgctxt "buttonGM"
@@ -671,7 +669,7 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:1189
 msgctxt "scienceDescription-flag"
 msgid "Flag hiding territory boundary marker"
-msgstr ""
+msgstr "Borne de frontière délimitant la zone pour cacher son drapeau."
 
 #: scripts/scenario_60_captureFlag.lua:1189
 msgctxt "scienceDescription-flag"
@@ -842,7 +840,7 @@ msgstr "Drones = On"
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Capacity %i"
-msgstr "+Capacité = %i"
+msgstr "+Capacité stockage = %i"
 
 #: scripts/scenario_60_captureFlag.lua:1303
 #, lua-format
@@ -854,13 +852,13 @@ msgstr "Nom = %s"
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Flag I%i M%i"
-msgstr ""
+msgstr "+Drapeaux I%i M%i"
 
 #: scripts/scenario_60_captureFlag.lua:1316
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Distance F%.1fU S%.1fU"
-msgstr ""
+msgstr "+Distance F%.1fu S%.1fu"
 
 #: scripts/scenario_60_captureFlag.lua:1317
 msgctxt "buttonGM"
@@ -876,7 +874,7 @@ msgstr "Modif. drones = On"
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Hull %i"
-msgstr "+Coque = %i"
+msgstr "+Blindage coque = %i"
 
 #: scripts/scenario_60_captureFlag.lua:1331
 #, lua-format
@@ -888,24 +886,24 @@ msgstr "+Vitesse = %iu/min"
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Beam R%.1fU D%.1f C%.1f"
-msgstr "+Flaser P%.1fu D%.1f C%.1f"
+msgstr "+Flaser P%.1fu D%.1f C%.1fs"
 
 #: scripts/scenario_60_captureFlag.lua:1338
 msgctxt "buttonGM"
 msgid "-Main from Probes"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1341
 #, lua-format
 msgctxt "buttonGM"
 msgid "Probes %i Add 1 -> %i"
-msgstr ""
+msgstr "Sondes : %i -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1352
 #, lua-format
 msgctxt "buttonGM"
 msgid "Probes %i Del 1 -> %i"
-msgstr ""
+msgstr "Sondes : %i -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1367
 msgctxt "buttonGM"
@@ -916,13 +914,13 @@ msgstr "- Précédent"
 #, lua-format
 msgctxt "buttonGM"
 msgid "%.1fU Add .1 -> %.1fU"
-msgstr ""
+msgstr "Dist. bal. : %.1fu -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1375
 #, lua-format
 msgctxt "buttonGM"
 msgid "%.1fU Del .1 -> %.1fU"
-msgstr ""
+msgstr "Dist. bal. : %.1fu -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1385
 msgctxt "buttonGM"
@@ -933,13 +931,13 @@ msgstr "- Précédent"
 #, lua-format
 msgctxt "buttonGM"
 msgid "%.2f Add .25 -> %.2f"
-msgstr "Dégâts bal. : %.1fu -> %.1f"
+msgstr "Dégâts bal. : %.1f -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1393
 #, lua-format
 msgctxt "buttonGM"
 msgid "%.2f Del .25 -> %.2f"
-msgstr "Dégâts bal. : %.1fu -> %.1f"
+msgstr "Dégâts bal. : %.1f -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1402
 #: scripts/scenario_60_captureFlag.lua:1420
@@ -979,54 +977,54 @@ msgstr "- Précédent"
 #, lua-format
 msgctxt "buttonGM"
 msgid "Interval %i Add 1 -> %i"
-msgstr ""
+msgstr "Intervalle : %i -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1430
 #, lua-format
 msgctxt "buttonGM"
 msgid "Interval %i Del 1 -> %i"
-msgstr ""
+msgstr "Intervalle : %i -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1436
 #, lua-format
 msgctxt "buttonGM"
 msgid "Msg Reset %i Add 1 -> %i"
-msgstr ""
+msgstr "Reset msg : %i -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1442
 #, lua-format
 msgctxt "buttonGM"
 msgid "Msg Reset %i Del 1 -> %i"
-msgstr ""
+msgstr "Reset msg : %i -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1452
 msgctxt "buttonGM"
 msgid "-From Drone Distance"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_60_captureFlag.lua:1454
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "buttonGM"
 msgid "Form %.1fU Add .1 -> %.1fU"
-msgstr ""
+msgstr "Formation : %.1fu -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1460
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "buttonGM"
 msgid "Form %.1fU Del .1 -> %.1fU"
-msgstr ""
+msgstr "Formation : %.1fu -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1466
 #, lua-format
 msgctxt "buttonGM"
 msgid "Scan %.1fU Add .1 -> %.1fU"
-msgstr ""
+msgstr "Scan : %.1fu -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1472
 #, lua-format
 msgctxt "buttonGM"
 msgid "Scan %.1fU Del .1 -> %.1fU"
-msgstr ""
+msgstr "Scan : %.1fu -> %.1f"
 
 #: scripts/scenario_60_captureFlag.lua:1482
 msgctxt "buttonGM"
@@ -1042,13 +1040,13 @@ msgstr "- Précédent"
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Add 5 -> %i"
-msgstr "Vitesse : %iu/min -> %i"
+msgstr "Vit. : %iu/min -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1508
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Del 5 -> %i"
-msgstr "Vitesse : %iu/min -> %i"
+msgstr "Vit. : %iu/min -> %i"
 
 #: scripts/scenario_60_captureFlag.lua:1518
 msgctxt "buttonGM"
@@ -1117,9 +1115,10 @@ msgid "Detailed Drone Report"
 msgstr "Drones : rapport"
 
 #: scripts/scenario_60_captureFlag.lua:1597
+#, fuzzy
 msgctxt "buttonGM"
 msgid "Intelligent Bugger"
-msgstr ""
+msgstr "V. Bugger intelligent"
 
 #: scripts/scenario_60_captureFlag.lua:1644
 #, lua-format
@@ -2296,13 +2295,13 @@ msgid "Drop Decoy %i"
 msgstr "Lâcher le leurre %i"
 
 #: scripts/scenario_60_captureFlag.lua:6337
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "drones-msgWeapons"
 msgid "You do not have %i drones to deploy"
 msgstr "Vous n'avez pas %i drones à déployer."
 
 #: scripts/scenario_60_captureFlag.lua:6339
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "drones-msgTactical"
 msgid "You do not have %i drones to deploy"
 msgstr "Vous n'avez pas %i drones à déployer."
