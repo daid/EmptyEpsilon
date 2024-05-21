@@ -5,13 +5,13 @@
 #include "scriptInterface.h"
 #include "featureDefs.h"
 #include "modelInfo.h"
-#include "factionInfo.h"
 #include "graphics/renderTarget.h"
 #include "ecs/entity.h"
 #include "components/radar.h"
 #include "components/shipsystem.h"
 #include "components/name.h"
 #include "components/scanning.h"
+#include "components/faction.h"
 #include "systems/damage.h"
 
 #include <glm/mat4x4.hpp>

@@ -203,8 +203,6 @@ void GameGlobalInfo::reset()
     gm_messages.clear();
     on_gm_click = nullptr;
 
-    FactionInfoLegacy::reset();
-
     sp::ecs::Entity::destroyAllEntities();
     foreach(SpaceObject, o, space_object_list)
         o->destroy();

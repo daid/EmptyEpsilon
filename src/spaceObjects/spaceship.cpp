@@ -7,7 +7,6 @@
 #include "mesh.h"
 #include "random.h"
 #include "playerInfo.h"
-#include "factionInfo.h"
 #include "particleEffect.h"
 #include "textureManager.h"
 #include "multiplayer_client.h"

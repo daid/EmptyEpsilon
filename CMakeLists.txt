@@ -237,7 +237,6 @@ set(MAIN_SOURCES
     src/gameStateLogger.cpp
     src/beamTemplate.cpp
     src/missileWeaponData.cpp
-    src/factionInfo.cpp
     src/mesh.cpp
     src/scenarioInfo.cpp
     src/GMScriptCallback.cpp
@@ -476,7 +475,6 @@ set(MAIN_SOURCES
     src/ai/missileVolleyAI.h
     src/beamTemplate.h
     src/epsilonServer.h
-    src/factionInfo.h
     src/featureDefs.h
     src/gameGlobalInfo.h
     src/gameStateLogger.h

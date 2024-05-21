@@ -1,5 +1,4 @@
 #include "spaceObject.h"
-#include "factionInfo.h"
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 #include "components/collision.h"
