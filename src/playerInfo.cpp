@@ -224,14 +224,14 @@ void PlayerInfo::commandFireTube(uint32_t tubeNumber, float missile_target_angle
 void PlayerInfo::commandFireTubeAtTarget(uint32_t tubeNumber, sp::ecs::Entity target)
 {
     float targetAngle = 0.0;
-    auto missiletubes = my_spaceship.getComponent<MissileTubes>();
+    auto missiletubes = ship.getComponent<MissileTubes>();
 
     if (!target || !missiletubes || tubeNumber >= missiletubes->mounts.size())
         return;
 
-    targetAngle = MissileSystem::calculateFiringSolution(my_spaceship, missiletubes->mounts[tubeNumber], target);
+    targetAngle = MissileSystem::calculateFiringSolution(ship, missiletubes->mounts[tubeNumber], target);
     if (targetAngle == std::numeric_limits<float>::infinity()) {
-        if (auto transform = my_spaceship.getComponent<sp::Transform>())
+        if (auto transform = ship.getComponent<sp::Transform>())
             targetAngle = transform->getRotation() + missiletubes->mounts[tubeNumber].direction;
     }
 
@@ -269,7 +269,7 @@ void PlayerInfo::commandScan(sp::ecs::Entity object)
 void PlayerInfo::commandSetSystemPowerRequest(ShipSystem::Type system, float power_request)
 {
     sp::io::DataBuffer packet;
-    auto sys = ShipSystem::get(my_spaceship, system);
+    auto sys = ShipSystem::get(ship, system);
     if (sys) sys->power_request = power_request;
     packet << CMD_SET_SYSTEM_POWER_REQUEST << system << power_request;
     sendClientCommand(packet);
@@ -278,7 +278,7 @@ void PlayerInfo::commandSetSystemPowerRequest(ShipSystem::Type system, float pow
 void PlayerInfo::commandSetSystemCoolantRequest(ShipSystem::Type system, float coolant_request)
 {
     sp::io::DataBuffer packet;
-    auto sys = ShipSystem::get(my_spaceship, system);
+    auto sys = ShipSystem::get(ship, system);
     if (sys) sys->coolant_request = coolant_request;
     packet << CMD_SET_SYSTEM_COOLANT_REQUEST << system << coolant_request;
     sendClientCommand(packet);
@@ -414,7 +414,7 @@ void PlayerInfo::commandConfirmDestructCode(int8_t index, uint32_t code)
 
 void PlayerInfo::commandCombatManeuverBoost(float amount)
 {
-    auto combat = my_spaceship.getComponent<CombatManeuveringThrusters>();
+    auto combat = ship.getComponent<CombatManeuveringThrusters>();
     if (!combat) return;
     combat->boost.request = amount;
     sp::io::DataBuffer packet;
@@ -424,7 +424,7 @@ void PlayerInfo::commandCombatManeuverBoost(float amount)
 
 void PlayerInfo::commandCombatManeuverStrafe(float amount)
 {
-    auto combat = my_spaceship.getComponent<CombatManeuveringThrusters>();
+    auto combat = ship.getComponent<CombatManeuveringThrusters>();
     if (!combat) return;
     combat->strafe.request = amount;
     sp::io::DataBuffer packet;
@@ -576,17 +576,17 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_TARGET_ROTATION:{
         float f;
         packet >> f;
-        auto thrusters = my_spaceship.getComponent<ManeuveringThrusters>();
+        auto thrusters = ship.getComponent<ManeuveringThrusters>();
         if (thrusters) { thrusters->stop(); thrusters->target = f; }
         }break;
     case CMD_TURN_SPEED:{
         float f;
         packet >> f;
-        auto thrusters = my_spaceship.getComponent<ManeuveringThrusters>();
+        auto thrusters = ship.getComponent<ManeuveringThrusters>();
         if (thrusters) { thrusters->stop(); thrusters->rotation_request = f; }
         }break;
     case CMD_IMPULSE:{
-        auto engine = my_spaceship.getComponent<ImpulseEngine>();
+        auto engine = ship.getComponent<ImpulseEngine>();
         if (engine)
             packet >> engine->request;
         else {
@@ -595,7 +595,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         }
         } break;
     case CMD_WARP:{
-        auto warp = my_spaceship.getComponent<WarpDrive>();
+        auto warp = ship.getComponent<WarpDrive>();
         if (warp)
             packet >> warp->request;
         else {
@@ -607,14 +607,14 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             float distance;
             packet >> distance;
-            JumpSystem::initializeJump(my_spaceship, distance);
+            JumpSystem::initializeJump(ship, distance);
         }
         break;
     case CMD_SET_TARGET:
         {
             sp::ecs::Entity target;
             packet >> target;
-            my_spaceship.getOrAddComponent<Target>().entity = target;
+            ship.getOrAddComponent<Target>().entity = target;
         }
         break;
     case CMD_LOAD_TUBE:
@@ -623,9 +623,9 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             EMissileWeapons type;
             packet >> tube_nr >> type;
 
-            auto missiletubes = my_spaceship.getComponent<MissileTubes>();
+            auto missiletubes = ship.getComponent<MissileTubes>();
             if (missiletubes && tube_nr < missiletubes->mounts.size())
-                MissileSystem::startLoad(my_spaceship, missiletubes->mounts[tube_nr], type);
+                MissileSystem::startLoad(ship, missiletubes->mounts[tube_nr], type);
         }
         break;
     case CMD_UNLOAD_TUBE:
@@ -633,9 +633,9 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             uint32_t tube_nr;
             packet >> tube_nr;
 
-            auto missiletubes = my_spaceship.getComponent<MissileTubes>();
+            auto missiletubes = ship.getComponent<MissileTubes>();
             if (missiletubes && tube_nr < missiletubes->mounts.size())
-                MissileSystem::startUnload(my_spaceship, missiletubes->mounts[tube_nr]);
+                MissileSystem::startUnload(ship, missiletubes->mounts[tube_nr]);
         }
         break;
     case CMD_FIRE_TUBE:
@@ -644,12 +644,12 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float missile_target_angle;
             packet >> tube_nr >> missile_target_angle;
 
-            auto missiletubes = my_spaceship.getComponent<MissileTubes>();
+            auto missiletubes = ship.getComponent<MissileTubes>();
             if (missiletubes && tube_nr < missiletubes->mounts.size()) {
                 sp::ecs::Entity target;
-                if (auto t = my_spaceship.getComponent<Target>())
+                if (auto t = ship.getComponent<Target>())
                     target = t->entity;
-                MissileSystem::fire(my_spaceship, missiletubes->mounts[tube_nr], missile_target_angle, target);
+                MissileSystem::fire(ship, missiletubes->mounts[tube_nr], missile_target_angle, target);
             }
         }
         break;
@@ -658,7 +658,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             bool active;
             packet >> active;
 
-            auto shields = my_spaceship.getComponent<Shields>();
+            auto shields = ship.getComponent<Shields>();
             if (shields) {
                 if (shields->calibration_delay <= 0.0f && active != shields->active)
                 {
@@ -675,13 +675,13 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_SET_MAIN_SCREEN_SETTING:{
         MainScreenSetting mss;
         packet >> mss;
-        if (auto pc = my_spaceship.getComponent<PlayerControl>())
+        if (auto pc = ship.getComponent<PlayerControl>())
             pc->main_screen_setting = mss;
         }break;
     case CMD_SET_MAIN_SCREEN_OVERLAY:{
         MainScreenOverlay mso;
         packet >> mso;
-        if (auto pc = my_spaceship.getComponent<PlayerControl>())
+        if (auto pc = ship.getComponent<PlayerControl>())
             pc->main_screen_overlay = mso;
         }break;
         break;
@@ -690,7 +690,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             sp::ecs::Entity e;
             packet >> e;
 
-            if (auto scanner = my_spaceship.getComponent<ScienceScanner>())
+            if (auto scanner = ship.getComponent<ScienceScanner>())
             {
                 scanner->delay = scanner->max_scanning_delay;
                 scanner->target = e;
@@ -698,10 +698,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         }
         break;
     case CMD_SCAN_DONE:
-        ScanningSystem::scanningFinished(my_spaceship);
+        ScanningSystem::scanningFinished(ship);
         break;
     case CMD_SCAN_CANCEL:
-        if (auto ss = my_spaceship.getComponent<ScienceScanner>()) {
+        if (auto ss = ship.getComponent<ScienceScanner>()) {
             ss->target = {};
         }
         break;
@@ -710,7 +710,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             ShipSystem::Type system;
             float request;
             packet >> system >> request;
-            auto sys = ShipSystem::get(my_spaceship, system);
+            auto sys = ShipSystem::get(ship, system);
             if (sys && request >= 0.0f && request <= 3.0f)
                 sys->power_request = request;
         }
@@ -721,10 +721,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float request;
             packet >> system >> request;
 
-            auto coolant = my_spaceship.getComponent<Coolant>();
+            auto coolant = ship.getComponent<Coolant>();
             if (coolant) {
                 request = std::clamp(request, 0.0f, std::min(coolant->max_coolant_per_system, coolant->max));
-                auto sys = ShipSystem::get(my_spaceship, system);
+                auto sys = ShipSystem::get(ship, system);
                 if (sys)
                     sys->coolant_request = request;
             }
@@ -735,37 +735,37 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             sp::ecs::Entity target;
             packet >> target;
             if (target)
-                DockingSystem::requestDock(my_spaceship, target);
+                DockingSystem::requestDock(ship, target);
         }
         break;
     case CMD_UNDOCK:
-        DockingSystem::requestUndock(my_spaceship);
+        DockingSystem::requestUndock(ship);
         break;
     case CMD_ABORT_DOCK:
-        DockingSystem::abortDock(my_spaceship);
+        DockingSystem::abortDock(ship);
         break;
     case CMD_OPEN_TEXT_COMM:
         {
             sp::ecs::Entity target;
             packet >> target;
-            CommsSystem::openTo(my_spaceship, target);
+            CommsSystem::openTo(ship, target);
         }
         break;
     case CMD_CLOSE_TEXT_COMM:
-        CommsSystem::close(my_spaceship);
+        CommsSystem::close(ship);
         break;
     case CMD_ANSWER_COMM_HAIL: 
         {
             bool answer = false;
             packet >> answer;
-            CommsSystem::answer(my_spaceship, answer);
+            CommsSystem::answer(ship, answer);
         }
         break;
     case CMD_SEND_TEXT_COMM:
         {
             uint8_t index;
             packet >> index;
-            CommsSystem::selectScriptReply(my_spaceship, index);
+            CommsSystem::selectScriptReply(ship, index);
         }
         break;
     case CMD_SEND_TEXT_COMM_PLAYER:
@@ -773,7 +773,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             string message;
             packet >> message;
 
-            CommsSystem::textReply(my_spaceship, message);
+            CommsSystem::textReply(ship, message);
         }
         break;
     case CMD_SET_AUTO_REPAIR:
@@ -786,7 +786,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             int32_t new_frequency;
             packet >> new_frequency;
-            auto beamweapons = my_spaceship.getComponent<BeamWeaponSys>();
+            auto beamweapons = ship.getComponent<BeamWeaponSys>();
             if (beamweapons)
                 beamweapons->frequency = std::clamp(new_frequency, 0, BeamWeaponSys::max_frequency);
         }
@@ -795,7 +795,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             ShipSystem::Type system;
             packet >> system;
-            auto beamweapons = my_spaceship.getComponent<BeamWeaponSys>();
+            auto beamweapons = ship.getComponent<BeamWeaponSys>();
             if (beamweapons)
                 beamweapons->system_target = (ShipSystem::Type)std::clamp((int)system, 0, (int)(ShipSystem::COUNT - 1));
         }
@@ -804,7 +804,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             int32_t new_frequency;
             packet >> new_frequency;
-            auto shields = my_spaceship.getComponent<Shields>();
+            auto shields = ship.getComponent<Shields>();
             if (shields && shields->calibration_delay <= 0.0f && new_frequency != shields->frequency)
             {
                 shields->frequency = new_frequency;
@@ -821,7 +821,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             glm::vec2 position{};
             packet >> position;
-            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            auto lrr = ship.getComponent<LongRangeRadar>();
             if (lrr && lrr->waypoints.size() < 9) {
                 lrr->waypoints.push_back(position);
                 lrr->waypoints_dirty = true;
@@ -832,7 +832,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             int32_t index;
             packet >> index;
-            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            auto lrr = ship.getComponent<LongRangeRadar>();
             if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
                 lrr->waypoints.erase(lrr->waypoints.begin() + index);
                 lrr->waypoints_dirty = true;
@@ -844,7 +844,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             int32_t index;
             glm::vec2 position{};
             packet >> index >> position;
-            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            auto lrr = ship.getComponent<LongRangeRadar>();
             if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
                 lrr->waypoints[index] = position;
                 lrr->waypoints_dirty = true;
@@ -852,10 +852,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         }
         break;
     case CMD_ACTIVATE_SELF_DESTRUCT:
-        SelfDestructSystem::activate(my_spaceship);
+        SelfDestructSystem::activate(ship);
         break;
     case CMD_CANCEL_SELF_DESTRUCT:
-        if (auto self_destruct = my_spaceship.getComponent<SelfDestruct>()) {
+        if (auto self_destruct = ship.getComponent<SelfDestruct>()) {
             if (self_destruct->countdown <= 0.0f) {
                 self_destruct->active = false;
             }
@@ -866,7 +866,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             int8_t index;
             uint32_t code;
             packet >> index >> code;
-            if (auto self_destruct = my_spaceship.getComponent<SelfDestruct>()) {
+            if (auto self_destruct = ship.getComponent<SelfDestruct>()) {
                 if (index >= 0 && index < SelfDestruct::max_codes && self_destruct->code[index] == code && self_destruct->active)
                     self_destruct->confirmed[index] = true;
             }
@@ -876,7 +876,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             float request_amount;
             packet >> request_amount;
-            auto combat = my_spaceship.getComponent<CombatManeuveringThrusters>();
+            auto combat = ship.getComponent<CombatManeuveringThrusters>();
             if (combat)
                 combat->boost.request = request_amount;
         }
@@ -885,15 +885,15 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             float request_amount;
             packet >> request_amount;
-            auto combat = my_spaceship.getComponent<CombatManeuveringThrusters>();
+            auto combat = ship.getComponent<CombatManeuveringThrusters>();
             if (combat)
                 combat->strafe.request = request_amount;
         }
         break;
     case CMD_LAUNCH_PROBE:
-        if (auto spl = my_spaceship.getComponent<ScanProbeLauncher>())
+        if (auto spl = ship.getComponent<ScanProbeLauncher>())
         {
-            auto t = my_spaceship.getComponent<sp::Transform>();
+            auto t = ship.getComponent<sp::Transform>();
             if (t && spl->stock > 0) {
                 glm::vec2 target{};
                 packet >> target;
@@ -901,12 +901,12 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 auto p = sp::ecs::Entity::create();
                 p.addComponent<sp::Transform>(*t);
                 p.addComponent<LifeTime>().lifetime = 60*10;
-                if (auto faction = my_spaceship.getComponent<Faction>())
+                if (auto faction = ship.getComponent<Faction>())
                     p.addComponent<Faction>() = *faction;
                 auto& mt = p.addComponent<MoveTo>();
                 mt.target = target;
                 mt.speed = 1000;
-                p.addComponent<AllowRadarLink>().owner = my_spaceship;
+                p.addComponent<AllowRadarLink>().owner = ship;
                 //TODO: setRadarSignatureInfo(0.0, 0.2, 0.0);
                 //TODO: setCallSign(string(getMultiplayerId()) + "P");
                 auto& trace = p.addComponent<RadarTrace>();
@@ -930,7 +930,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 end
                 */
                 if (spl->on_launch)
-                    LuaConsole::checkResult(spl->on_launch.call<void>(my_spaceship, p));
+                    LuaConsole::checkResult(spl->on_launch.call<void>(ship, p));
                 spl->stock--;
             }
         }
@@ -938,7 +938,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_SET_ALERT_LEVEL:{
         AlertLevel al;
         packet >> al;
-        if (auto ps = my_spaceship.getComponent<PlayerControl>())
+        if (auto ps = ship.getComponent<PlayerControl>())
             ps->alert_level = al;
         }break;
     case CMD_SET_SCIENCE_LINK:
@@ -948,13 +948,13 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> target;
 
             // TODO: Check if this probe is ours
-            if (auto lrr = my_spaceship.getComponent<LongRangeRadar>()) {
+            if (auto lrr = ship.getComponent<LongRangeRadar>()) {
                 auto old = lrr->radar_view_linked_entity;
                 if (lrr->on_probe_link && target)
-                    LuaConsole::checkResult(lrr->on_probe_link.call<void>(my_spaceship, target));
+                    LuaConsole::checkResult(lrr->on_probe_link.call<void>(ship, target));
                 lrr->radar_view_linked_entity = target;
                 if (lrr->on_probe_unlink && old)
-                    LuaConsole::checkResult(lrr->on_probe_unlink.call<void>(my_spaceship, old));
+                    LuaConsole::checkResult(lrr->on_probe_unlink.call<void>(ship, old));
             }
         }
         break;
@@ -972,7 +972,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             string name;
             packet >> name;
-            if (auto csf = my_spaceship.getComponent<CustomShipFunctions>()) {
+            if (auto csf = ship.getComponent<CustomShipFunctions>()) {
                 for(auto& f : csf->functions)
                 {
                     if (f.name == name)

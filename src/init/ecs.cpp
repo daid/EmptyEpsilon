@@ -7,6 +7,10 @@
 #include "multiplayer/faction.h"
 #include "multiplayer/radar.h"
 #include "multiplayer/comms.h"
+#include "multiplayer/player.h"
+#include "multiplayer/name.h"
+#include "multiplayer/impulse.h"
+#include "multiplayer/warp.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -48,7 +52,7 @@ void initSystemsAndComponents()
     //Gravity
     //HackingDevice
     //Hull
-    //ImpulseEngine
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ImpulseEngineReplication>();
     //InternalRooms
     //InternalCrew
     //JumpDrive
@@ -59,10 +63,10 @@ void initSystemsAndComponents()
     //ConstantParticleEmitter
     //MissileTubes
     //MoveTo
-    //CallSign
-    //TypeName
+    sp::ecs::MultiplayerReplication::registerComponentReplication<CallSignReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<TypeNameReplication>();
     //Orbit
-    //PlayerControl
+    sp::ecs::MultiplayerReplication::registerComponentReplication<PlayerControlReplication>();
     //ScanProbeLauncher
     sp::ecs::MultiplayerReplication::registerComponentReplication<RadarTraceReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RawRadarSignatureInfoReplication>();
@@ -86,11 +90,11 @@ void initSystemsAndComponents()
     //ShipLog
     //Spin
     //Target
-    //WarpDrive
-    //WarpJammer
+    sp::ecs::MultiplayerReplication::registerComponentReplication<WarpDriveReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<WarpJammerReplication>();
     //Zone
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::TransformReplication>();
-    //sp::Physics
+    sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::PhysicsReplication>();
 
     engine->registerSystem<AISystem>();
     engine->registerSystem<DamageSystem>();

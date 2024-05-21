@@ -452,6 +452,14 @@ set(MAIN_SOURCES
     src/multiplayer/radar.cpp
     src/multiplayer/comms.h
     src/multiplayer/comms.cpp
+    src/multiplayer/player.h
+    src/multiplayer/player.cpp
+    src/multiplayer/name.h
+    src/multiplayer/name.cpp
+    src/multiplayer/impulse.h
+    src/multiplayer/impulse.cpp
+    src/multiplayer/warp.h
+    src/multiplayer/warp.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
