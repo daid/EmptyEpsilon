@@ -460,6 +460,8 @@ set(MAIN_SOURCES
     src/multiplayer/impulse.cpp
     src/multiplayer/warp.h
     src/multiplayer/warp.cpp
+    src/multiplayer/docking.h
+    src/multiplayer/docking.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

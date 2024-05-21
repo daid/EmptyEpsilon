@@ -19,7 +19,9 @@ public:
     static constexpr uint32_t RestockMissiles = 1 << 4;  // Only for AI controlled ships. Players use the comms system.
 
     std::unordered_set<string> external_dock_classes;
+    bool external_dock_classes_dirty = true;
     std::unordered_set<string> internal_dock_classes;
+    bool internal_dock_classes_dirty = true;
 
     uint32_t flags = 0;
 };

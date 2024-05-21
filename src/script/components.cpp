@@ -385,6 +385,7 @@ void initComponentScriptBindings()
                 }
                 lua_pop(L, 1);
             }
+            p->external_dock_classes_dirty = true;
         }
     };
     sp::script::ComponentHandler<DockingBay>::members["internal_dock_classes"] = {
@@ -407,6 +408,7 @@ void initComponentScriptBindings()
                 }
                 lua_pop(L, 1);
             }
+            p->internal_dock_classes_dirty = true;
         }
     };
     sp::script::ComponentHandler<CommsTransmitter>::name("comms_transmitter");
