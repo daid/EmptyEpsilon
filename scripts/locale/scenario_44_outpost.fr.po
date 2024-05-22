@@ -6854,7 +6854,7 @@ msgstr "%s Missiles : %d/%d\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr "Amarrez-vous à %s."
+msgstr "Amarrez-vous à %s"
 
 #: scripts/scenario_44_outpost.lua:14253 scripts/scenario_44_outpost.lua:15159
 #, lua-format

@@ -8,6 +8,7 @@
 #include "script/vector.h"
 #include "menus/luaConsole.h"
 #include "systems/comms.h"
+#include "io/json.h"
 
 
 /// void require(string filename)
@@ -305,6 +306,124 @@ static int luaGetEEVersion()
     return VERSION_NUMBER;
 }
 
+static nlohmann::json luaToJSONImpl(lua_State* L, int lua_index) {
+    if (lua_isboolean(L, lua_index)) {
+        return bool(lua_toboolean(L, lua_index));
+    } else if (lua_isinteger(L, lua_index)) {
+        return lua_tointeger(L, lua_index);
+    } else if (lua_isnumber(L, lua_index)) {
+        return lua_tonumber(L, lua_index);
+    } else if (lua_isstring(L, lua_index)) {
+        return lua_tostring(L, lua_index);
+    } else if (lua_istable(L, lua_index)) {
+        // Figure out of the table is a list or not.
+        bool is_array = true;
+        int index_max = std::numeric_limits<int>::min();
+        int index_min = std::numeric_limits<int>::max();
+        lua_pushnil(L);
+        while(lua_next(L, lua_index) && is_array) {
+            if (!lua_isinteger(L, -2)) {
+                is_array = false;
+            } else {
+                int idx = lua_tointeger(L, -2);
+                index_max = std::max(idx, index_max);
+                index_min = std::min(idx, index_min);
+            }
+            lua_pop(L, 1);
+        }
+        if (is_array && index_min == 1 && index_max < 0x10000) {
+            auto json = nlohmann::json::array();
+            for(int idx=1; idx<=index_max; idx++) {
+                lua_rawgeti(L, lua_index, idx);
+                json.push_back(luaToJSONImpl(L, lua_gettop(L)));
+                lua_pop(L, 1);
+            }
+            return json;
+        } else {
+            auto json = nlohmann::json::object();
+            lua_pushnil(L);
+            while(lua_next(L, lua_index)) {
+                std::string key = "?";
+                if (lua_isboolean(L, -2)) {
+                    key = lua_toboolean(L, -2) ? "true" : "false";
+                } else if (lua_isinteger(L, -2)) {
+                    key = std::to_string(lua_tointeger(L, -2));
+                } else if (lua_isnumber(L, -2)) {
+                    key = std::to_string(lua_tonumber(L, -2));
+                } else if (lua_isstring(L, -2)) {
+                    key = lua_tostring(L, -2);
+                }
+                json[key] = luaToJSONImpl(L, lua_gettop(L));
+                lua_pop(L, 1);
+            }
+            return json;
+        }
+    }
+    return {};
+}
+
+static int luaToJSON(lua_State* L)
+{
+    auto argc = lua_gettop(L);
+    for(int n=1; n<=argc; n++) {
+        auto json = luaToJSONImpl(L, n);
+        auto res = json.dump(-1, ' ', false, nlohmann::json::error_handler_t::replace);
+        lua_pushstring(L, res.c_str());
+    }
+    return argc;
+}
+
+static void luaFromJSONImpl(lua_State* L, const nlohmann::json& json)
+{
+    if (json.is_boolean()) {
+        lua_pushboolean(L, bool(json));
+    } else if (json.is_string()) {
+        auto s = static_cast<std::string>(json);
+        lua_pushlstring(L, s.c_str(), s.size());
+    } else if (json.is_number_integer()) {
+        lua_pushinteger(L, int(json));
+    } else if (json.is_number()) {
+        lua_pushnumber(L, json);
+    } else if (json.is_array()) {
+        lua_newtable(L);
+        int idx = 1;
+        for(const auto& v : json) {
+            luaFromJSONImpl(L, v);
+            lua_rawseti(L, -2, idx++);
+        }
+    } else if (json.is_object()) {
+        lua_newtable(L);
+        for(const auto& v : json.items()) {
+            lua_pushstring(L, v.key().c_str());
+            luaFromJSONImpl(L, v.value());
+            lua_rawset(L, -3);
+        }
+    } else {
+        lua_pushnil(L);
+    }
+}
+
+static int luaFromJSON(lua_State* L)
+{
+    bool error = false;
+    auto argc = lua_gettop(L);
+    for(int n=1; n<=argc; n++) {
+        auto str = lua_tostring(L, n);
+        std::string err;
+        auto res = sp::json::parse(str, err);
+        if (res.has_value()) {
+            luaFromJSONImpl(L, res.value());
+        } else {
+            lua_pushstring(L, err.c_str());
+            error = true;
+            break;
+        }
+    }
+    if (error)
+        return lua_error(L);
+    return argc;
+}
+
 bool setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
@@ -373,6 +492,13 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("setCommsMessage", &CommsSystem::luaSetCommsMessage);
     env.setGlobal("addCommsReply", &CommsSystem::luaAddCommsReply);
     env.setGlobal("commsSwitchToGM", &CommsSystem::luaCommsSwitchToGM);
+
+    /// string toJSON(data)
+    /// Returns a json string with the input data converted to json.
+    env.setGlobal("toJSON", &luaToJSON);
+    /// table/value fromJSON(data)
+    /// Returns a table/value converted from a json string
+    env.setGlobal("fromJSON", &luaFromJSON);
 
     env.setGlobal("getEEVersion", &luaGetEEVersion);
 

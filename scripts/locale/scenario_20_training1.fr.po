@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -48,7 +48,22 @@ msgstr ""
 "Communauté française et anglophone sur le Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
-#: scripts/scenario_20_training1.lua:130
+#: scripts/scenario_20_training1.lua:36
+msgctxt "scienceDescription-shipname"
+msgid "Exuari transport"
+msgstr "Un vaisseau de transport Éxuari."
+
+#: scripts/scenario_20_training1.lua:40
+msgctxt "scienceDescription-shipname"
+msgid "Exuari freighter"
+msgstr "Un vaisseau-cargo Éxuari."
+
+#: scripts/scenario_20_training1.lua:44
+msgctxt "scienceDescription-shipname"
+msgid "Exuari shuttle"
+msgstr "Une navette Éxuarie."
+
+#: scripts/scenario_20_training1.lua:79
 msgctxt "goal-incCall"
 msgid ""
 "This is Commander Saberhagen.\n"
@@ -76,17 +91,17 @@ msgstr ""
 "Voici votre chance de battre des adversaires impuissants.\n"
 "Briefing terminé."
 
-#: scripts/scenario_20_training1.lua:148
+#: scripts/scenario_20_training1.lua:97
 msgctxt "msgMainscreen-bonusTarget"
 msgid "escaped."
 msgstr "échappé."
 
-#: scripts/scenario_20_training1.lua:150
+#: scripts/scenario_20_training1.lua:99
 msgctxt "msgMainscreen-bonusTarget"
 msgid "destroyed."
 msgstr "détruit."
 
-#: scripts/scenario_20_training1.lua:152
+#: scripts/scenario_20_training1.lua:101
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""

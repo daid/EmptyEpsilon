@@ -1798,7 +1798,7 @@ msgstr "Réputation insuffisante."
 #: scripts/scenario_50_gaps.lua:2476 scripts/scenario_50_gaps.lua:2492
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
-msgstr "Réparateur embauché"
+msgstr "Réparateur embauché."
 
 #: scripts/scenario_50_gaps.lua:2498
 msgctxt "station-comms"
@@ -2332,7 +2332,7 @@ msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
 #, lua-format
 msgctxt "trade-comms"
 msgid "   %14s: %2i, %3i\n"
-msgstr "   %14s: %2i, %3i\n"
+msgstr "   %14s : %2i, %3i\n"
 
 #: scripts/scenario_50_gaps.lua:2930
 msgctxt "helpfullWarning-comms"
@@ -2610,7 +2610,7 @@ msgstr "%s Missiles : %d/%d\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr "Amarrez-vous à %s."
+msgstr "Amarrez-vous à %s"
 
 #: scripts/scenario_50_gaps.lua:3320
 #, lua-format

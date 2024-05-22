@@ -3258,7 +3258,7 @@ msgid ""
 "   %14s: %2i, %3i"
 msgstr ""
 "\n"
-"   %14s: %2i, %3i"
+"   %14s : %2i, %3i"
 
 #: scripts/scenario_55_defenderHunter.lua:6482
 msgctxt "stationServices-comms"
@@ -3494,7 +3494,7 @@ msgstr "%s Missiles : %d/%d\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr "Amarrez-vous à %s."
+msgstr "Amarrez-vous à %s"
 
 #: scripts/scenario_55_defenderHunter.lua:6818
 #, lua-format

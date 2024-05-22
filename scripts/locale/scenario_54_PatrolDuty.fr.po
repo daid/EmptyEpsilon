@@ -3009,7 +3009,7 @@ msgid ""
 "   %14s: %2i, %3i"
 msgstr ""
 "\n"
-"   %14s: %2i, %3i"
+"   %14s : %2i, %3i"
 
 #: scripts/scenario_54_PatrolDuty.lua:5435
 msgctxt "helpfullWarning-comms"

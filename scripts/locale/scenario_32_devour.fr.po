@@ -19,7 +19,6 @@ msgid "Planet Devourer"
 msgstr "Le Dévoreur de planètes"
 
 # Scenario description
-#, fuzzy
 msgid ""
 "Stop the Planet Devourer before all the planets are gone\n"
 "\n"
@@ -40,7 +39,7 @@ msgstr ""
 "Scénario écrit pour les jeux EE du 4 mai 2023 : \"May the 4th be with "
 "you\" (Que la \"fourth\" soit avec toi)\n"
 "\n"
-"Version 1 - Déc. 2023\n"
+"Version 1.0.2 - Mai 2024\n"
 "\n"
 "- Titre original : Planet Devourer\n"
 "- Auteur : Xansta (Juin 2023)\n"
@@ -2654,7 +2653,7 @@ msgstr "Défendez le marqueur %d"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
-msgstr "Nous partons pour défendre le marqueur %d."
+msgstr "Nous partons immédiatement défendre le marqueur %d."
 
 #: scripts/scenario_32_devour.lua:3805 scripts/scenario_32_devour.lua:4744
 msgctxt "shipAssist-comms"
@@ -3033,7 +3032,7 @@ msgstr ""
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %i"
-msgstr "Défendez le marqueur %i."
+msgstr "Défendez le marqueur %i"
 
 #: scripts/scenario_32_devour.lua:4736
 #, lua-format
