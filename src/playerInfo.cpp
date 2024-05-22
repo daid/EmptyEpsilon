@@ -963,9 +963,11 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             sp::ecs::Entity target;
             ShipSystem::Type target_system;
             packet >> target >> target_system;
-            auto sys = ShipSystem::get(target, target_system);
-            if (sys)
-                sys->hacked_level = std::min(1.0f, sys->hacked_level + 0.5f);
+            if (auto hd = ship.getComponent<HackingDevice>()) {
+                auto sys = ShipSystem::get(target, target_system);
+                if (sys)
+                    sys->hacked_level = std::min(1.0f, sys->hacked_level + hd->effectiveness);
+            }
         }
         break;
     case CMD_CUSTOM_FUNCTION:

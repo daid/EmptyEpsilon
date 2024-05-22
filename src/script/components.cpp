@@ -511,7 +511,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(MissileTubes, mounts, direction);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, size);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, type_loaded);
-    //TODO: BIND_ARRAY_MEMBER(MissileTubes, mounts, state);
+    BIND_ARRAY_MEMBER(MissileTubes, mounts, state);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, delay);
 
     sp::script::ComponentHandler<Coolant>::name("coolant");
@@ -546,10 +546,12 @@ void initComponentScriptBindings()
     BIND_MEMBER(ScanProbeLauncher, stock);
     BIND_MEMBER(ScanProbeLauncher, recharge);
     BIND_MEMBER(ScanProbeLauncher, charge_time);
+    BIND_MEMBER(ScanProbeLauncher, on_launch);
     sp::script::ComponentHandler<PlayerControl>::name("player_control");
     BIND_MEMBER(PlayerControl, alert_level);
     BIND_MEMBER(PlayerControl, control_code);
     sp::script::ComponentHandler<HackingDevice>::name("hacking_device");
+    BIND_MEMBER(HackingDevice, effectiveness);
 
     sp::script::ComponentHandler<Faction>::name("faction");
     BIND_MEMBER(Faction, entity);

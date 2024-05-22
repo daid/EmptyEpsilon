@@ -9,6 +9,7 @@
 #include "components/docking.h"
 #include "components/comms.h"
 #include "components/player.h"
+#include "components/missiletubes.h"
 #include "missileWeaponData.h"
 
 
@@ -238,6 +239,33 @@ template<> struct Convert<EMissileSizes> {
             return EMissileSizes::MS_Large;
         luaL_error(L, "Unknown EMissileSizes: %s", str.c_str());
         return EMissileSizes::MS_Medium;
+    }
+};
+template<> struct Convert<MissileTubes::MountPoint::State> {
+    static int toLua(lua_State* L, MissileTubes::MountPoint::State value) {
+        switch(value) {
+        case MissileTubes::MountPoint::State::Empty: lua_pushstring(L, "empty"); break;
+        case MissileTubes::MountPoint::State::Loading: lua_pushstring(L, "loading"); break;
+        case MissileTubes::MountPoint::State::Loaded: lua_pushstring(L, "loaded"); break;
+        case MissileTubes::MountPoint::State::Unloading: lua_pushstring(L, "unloading"); break;
+        case MissileTubes::MountPoint::State::Firing: lua_pushstring(L, "firing"); break;
+        }
+        return 1;
+    }
+    static MissileTubes::MountPoint::State fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "empty")
+            return MissileTubes::MountPoint::State::Empty;
+        else if (str == "loading")
+            return MissileTubes::MountPoint::State::Loading;
+        else if (str == "loaded")
+            return MissileTubes::MountPoint::State::Loaded;
+        else if (str == "unloading")
+            return MissileTubes::MountPoint::State::Unloading;
+        else if (str == "firing")
+            return MissileTubes::MountPoint::State::Firing;
+        luaL_error(L, "Unknown MissileTubes::MountPoint::State type: %s", str.c_str());
+        return MissileTubes::MountPoint::State::Empty;
     }
 };
 template<> struct Convert<DockingPort::State> {

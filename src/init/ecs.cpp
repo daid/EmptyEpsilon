@@ -18,6 +18,7 @@
 #include "multiplayer/database.h"
 #include "multiplayer/maneuveringthrusters.h"
 #include "multiplayer/jumpdrive.h"
+#include "multiplayer/hacking.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -57,7 +58,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<FactionReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<FactionInfoReplication>();
     //Gravity
-    //HackingDevice
+    sp::ecs::MultiplayerReplication::registerComponentReplication<HackingDeviceReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<HullReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ImpulseEngineReplication>();
     //InternalRooms

@@ -307,13 +307,14 @@ end
 --- Returns the given system's rate of consuming power, in points per second?, in this SpaceShip.
 --- Example: ship:getSystemPowerRate("impulse")
 function Entity:getSystemPowerRate(system_name)
-    --TODO
+    return __getSystemPropertyByName(self, system_name, "power_change_rate_per_second")
 end
 --- Sets the given system's rate of consuming power, in points per second?, in this SpaceShip.
 --- CpuShips don't consume energy. Setting this has no effect.
 --- Example: ship:setSystemPowerRate("impulse", 0.4)
 function Entity:setSystemPowerRate(system_name, amount)
-    --TODO
+    __setSystemPropertyByName(self, system_name, "power_change_rate_per_second", amount)
+    return self
 end
 --- Returns the relative power drain factor for the given system.
 --- Example: ship:getSystemPowerFactor("impulse")
@@ -706,18 +707,21 @@ end
 --- Example: ship:getDynamicRadarSignatureGravity()
 function Entity:getDynamicRadarSignatureGravity()
     --TODO
+    return 0.0
 end
 --- Returns the dynamic electrical radar signature value emitted by this SpaceShip.
 --- Ship functions can dynamically modify this SpaceShip's radar signature values.
 --- Example: ship:getDynamicRadarSignatureElectrical()
 function Entity:getDynamicRadarSignatureElectrical()
     --TODO
+    return 0.0
 end
 --- Returns the dynamic biological radar signature value emitted by this SpaceShip.
 --- Ship functions can dynamically modify this SpaceShip's radar signature values.
 --- Example: ship:getDynamicRadarSignatureBiological()
 function Entity:getDynamicRadarSignatureBiological()
     --TODO
+    return 0.0
 end
 --- Broadcasts a message from this SpaceShip to the comms of all other SpaceShips matching the threshold.
 --- The threshold value can be an integer equivalent of EFactionVsFactionState:
@@ -730,6 +734,7 @@ end
 --- ship:addBroadcast(2, "We're taking over!")
 function Entity:addBroadcast(target, message)
     --TODO
+    return self
 end
 --- Sets the scan state of this SpaceShip for every faction.
 --- Example: ship:setScanState("fullscan") -- every faction treats this ship as fully scanned
