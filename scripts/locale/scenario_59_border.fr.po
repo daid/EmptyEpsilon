@@ -1,0 +1,6662 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Empty Epsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: muerteFR\n"
+"Language-Team: muerteFR\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+# Scenario name
+msgid "Borderline Fever"
+msgstr ""
+
+# Scenario description
+msgid ""
+"War temperature rises along the border between Human Navy space and Kraylor "
+"space. The treaty holds for now, but the diplomats and intelligence "
+"operatives fear the Kraylors are about to break the treaty. We must maintain "
+"the treaty despite provocation until war is formally declared.\n"
+"\n"
+"Version 5"
+msgstr ""
+"EN COURS DE TRADUCTION 27%\n"
+"\n"
+"War temperature rises along the border between Human Navy space and Kraylor "
+"space. The treaty holds for now, but the diplomats and intelligence "
+"operatives fear the Kraylors are about to break the treaty. We must maintain "
+"the treaty despite provocation until war is formally declared.\n"
+"\n"
+"Version 5"
+
+# Scenario setting
+#, fuzzy
+msgctxt "setting"
+msgid "Enemies"
+msgstr "Puissance ennemie"
+
+#, fuzzy
+msgctxt "setting"
+msgid "Configures strength and/or number of enemies in this scenario"
+msgstr "Définit le nombre et/ou la puissance des ennemis."
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr "Facile"
+
+msgctxt "Enemies"
+msgid "Fewer or weaker enemies"
+msgstr "Ennemis moins nombreux et/ou plus faibles."
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr "Normale"
+
+msgctxt "Enemies"
+msgid "Normal number or strength of enemies"
+msgstr "Difficulté normale."
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr "Difficile"
+
+msgctxt "Enemies"
+msgid "More or stronger enemies"
+msgstr "Ennemis plus nombreux et/ou plus puissants."
+
+msgctxt "Enemies"
+msgid "Extreme"
+msgstr "Extrême"
+
+msgctxt "Enemies"
+msgid "Much stronger, many more enemies"
+msgstr "Ennemis beaucoup plus nombreux et/ou beaucoup plus puissants."
+
+msgctxt "Enemies"
+msgid "Quixotic"
+msgstr "Chimérique"
+
+#, fuzzy
+msgctxt "Enemies"
+msgid "Insanely strong and/or inordinately large numbers of enemies"
+msgstr "Ennemis en nombre démesuré et/ou incroyablement puissants."
+
+# Scenario setting
+msgctxt "setting"
+msgid "Murphy"
+msgstr "Loi de Murphy"
+
+#, fuzzy
+msgctxt "setting"
+msgid "Configures the perversity of the universe according to Murphy's law"
+msgstr "Définit la perversité de l'univers selon la loi de Murphy."
+
+msgctxt "Murphy"
+msgid "Easy"
+msgstr "Facile"
+
+msgctxt "Murphy"
+msgid "Random factors are more in your favor"
+msgstr "Les facteurs aléatoires sont plus en votre faveur."
+
+msgctxt "Murphy"
+msgid "Normal"
+msgstr "Normale"
+
+msgctxt "Murphy"
+msgid "Random factors are normal"
+msgstr "Les facteurs aléatoires sont équilibrés."
+
+msgctxt "Murphy"
+msgid "Hard"
+msgstr "Difficile"
+
+msgctxt "Murphy"
+msgid "Random factors are more against you"
+msgstr "Les facteurs aléatoires sont plus contre vous."
+
+msgctxt "Murphy"
+msgid "Quixotic"
+msgstr "Chimérique"
+
+msgctxt "Murphy"
+msgid "No need for paranoia, the universe *is* out to get you"
+msgstr "Pas besoin de paranoïa, l'univers *est* là pour t'attraper."
+
+# Scenario setting
+msgctxt "setting"
+msgid "Ending"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"Sets the conditions for ending the war: absolute strength % when friendly "
+"and Kraylor give up, relative strength % difference when friendly and "
+"Kraylor give up"
+msgstr ""
+
+msgctxt "Ending"
+msgid "Easy"
+msgstr "Facile"
+
+msgctxt "Ending"
+msgid "Cutoffs 10% easier than normal"
+msgstr ""
+
+#, fuzzy
+msgctxt "Ending"
+msgid "Normal"
+msgstr "Normal"
+
+msgctxt "Ending"
+msgid ""
+"Kraylor surrender if < 70% of their original strength, friendly surrender if "
+"< 50% of their original strength, either will surrender if < 20% relative "
+"strength difference"
+msgstr ""
+
+msgctxt "Ending"
+msgid "Hard"
+msgstr "Difficile"
+
+msgctxt "Ending"
+msgid "Cutoffs 10% harder than normal"
+msgstr ""
+
+msgctxt "Ending"
+msgid "Quixotic"
+msgstr "Chimérique"
+
+msgctxt "Ending"
+msgid "Cutoffs 20% harder than normal"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Timed"
+msgstr "Chronométré"
+
+msgctxt "setting"
+msgid ""
+"Sets whether or not the scenario has a time limit. Default is no time limit"
+msgstr ""
+
+#, fuzzy
+msgctxt "Timed"
+msgid "None"
+msgstr "Aucun"
+
+#, fuzzy
+msgctxt "Timed"
+msgid "No time limit"
+msgstr "Sans limite de temps."
+
+#, fuzzy
+msgctxt "Timed"
+msgid "15"
+msgstr "15 mn"
+
+msgctxt "Timed"
+msgid "Scenario ends in 15 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "20"
+msgstr "20 mn"
+
+msgctxt "Timed"
+msgid "Scenario ends in 20 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "25"
+msgstr "25 mn"
+
+msgctxt "Timed"
+msgid "Scenario ends in 25 minutes"
+msgstr ""
+
+#, fuzzy
+msgctxt "Timed"
+msgid "30"
+msgstr "30 mn"
+
+msgctxt "Timed"
+msgid "Scenario ends in 30 minutes"
+msgstr "Le scénario se termine après 30 minutes."
+
+msgctxt "Timed"
+msgid "35"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 35 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "40"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 40 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "45"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 45 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "50"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 50 minutes"
+msgstr ""
+
+msgctxt "Timed"
+msgid "55"
+msgstr ""
+
+msgctxt "Timed"
+msgid "Scenario ends in 55 minutes"
+msgstr ""
+
+# Scenario setting
+#, fuzzy
+msgctxt "setting"
+msgid "Reputation"
+msgstr "Réputation"
+
+msgctxt "setting"
+msgid ""
+"Starting reputation per player ship. The more initial reputation, the easier "
+"the scenario. Default: Hero = 400 reputation"
+msgstr ""
+
+msgctxt "Reputation"
+msgid "Unknown"
+msgstr "Inconnu"
+
+msgctxt "Reputation"
+msgid "Nobody knows you. Zero reputation"
+msgstr "Aucune réputation - Personne ne vous connaît, vous et votre équipage."
+
+msgctxt "Reputation"
+msgid "Nice"
+msgstr "Bon"
+
+msgctxt "Reputation"
+msgid "200 reputation - you've helped a few people"
+msgstr "Réputation 200 - Vous avez aidé quelques personnes."
+
+msgctxt "Reputation"
+msgid "Hero"
+msgstr "Bienfaiteur"
+
+msgctxt "Reputation"
+msgid "400 reputation - you've helped important people or lots of people"
+msgstr ""
+"Réputation 400 - Vous avez aidé beaucoup de personnes dont des personnes "
+"importantes."
+
+msgctxt "Reputation"
+msgid "Major Hero\""
+msgstr "Héros"
+
+msgctxt "Reputation"
+msgid ""
+"700 reputation - you're well known by nearly everyone as a force for good"
+msgstr ""
+"Réputation 700 - Vous êtes connu de presque tout le monde comme une force du "
+"bien."
+
+msgctxt "Reputation"
+msgid "Super Hero\""
+msgstr "Justicier de l'espace"
+
+msgctxt "Reputation"
+msgid "1000 reputation - everyone knows you and relies on you for help"
+msgstr ""
+"Réputation 1000 - Toute la galaxie vous connaît et compte sur vous pour "
+"obtenir de l'aide."
+
+# Scenario setting
+#, fuzzy
+msgctxt "setting"
+msgid "Unique Ship"
+msgstr "Vaisseau original"
+
+#, fuzzy
+msgctxt "setting"
+msgid "Choose player ship outside of standard player ship list"
+msgstr ""
+"Vous pouvez choisir un vaisseau en dehors de la liste des vaisseaux standard."
+
+#, fuzzy
+msgctxt "Unique Ship"
+msgid "None"
+msgstr "Aucun"
+
+msgctxt "Unique Ship"
+msgid "None: just use standard player ship list on spawn screen"
+msgstr ""
+"Aucun : choisissez un vaisseau parmi la liste standard disponible à l'écran "
+"suivant."
+
+msgctxt "Unique Ship"
+msgid "Spinstar"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on Atlantis, has spinal beam: narrow, long range, rapid firing, 5 "
+"second duration, 30 second recharge, fewer tubes, weaker shields and hull, "
+"warp, faster maneuver"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Narsil"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on Atlantis, slower impulse, faster maneuver, warp, weaker hull and "
+"shields, add forward HVLI tube and side beam turrets"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Blazon"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on Striker, faster impulse and maneuver, stronger shields, narrower "
+"beams, add beam, add missiles"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Headhunter"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on Piranha, shorter jump, stronger hull and shields, add beam, one "
+"fewer mining tube, fewer mines and nukes, more EMPs"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Simian"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on missile cruiser, 20k jump, add beam, weaker hull, fewer tubes and "
+"missiles"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Spyder"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Based on Atlantis, slower impulse, extra tube, angled tubes"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid "Sting"
+msgstr ""
+
+msgctxt "Unique Ship"
+msgid ""
+"Based on Hathcock, faster impulse, warp, add mining tube, no nukes or EMPs"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:1467
+msgctxt "scienceDescription-planet"
+msgid "Mining and Gambling"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:1497
+msgctxt "scienceDescription-planet"
+msgid "M class planet"
+msgstr "Planète de classe M"
+
+#: scripts/scenario_59_border.lua:1977
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the beam system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:1981
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the beam system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:1985
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the beam system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:1991
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the beam system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:1995
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the beam system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:1999
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the beam system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2004
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has had no impact on an already healthy beam system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2008
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has had no impact on an already healthy beam system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2012
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has had no impact on an already healthy beam system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2020
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the beam system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2024
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the beam system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2028
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the beam system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2034
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the beam system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2038
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the beam system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2042
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the beam system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2066
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the missile system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2070
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the missile system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2074
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the missile system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2080
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the missile system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2084
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the missile system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2088
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the missile system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2093
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has had no impact on an already healthy missile system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2097
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has had no impact on an already healthy missile system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2101
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has had no impact on an already healthy missile system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2109
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the missile system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2113
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the missile system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2117
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the missile system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2123
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the missile system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2127
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the missile system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2131
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the missile system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2155
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the impulse system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2159
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the impulse system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2163
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the impulse system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2169
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the impulse system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2173
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the impulse system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2177
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the impulse system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2182
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has had no impact on an already healthy impulse system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2186
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has had no impact on an already healthy impulse system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2190
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has had no impact on an already healthy impulse system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2198
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the impulse system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2202
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the impulse system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2206
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the impulse system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2212
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the impulse system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2216
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the impulse system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2220
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the impulse system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2245
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the warp system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2249
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the warp system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2253
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the warp system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2259
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the warp system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2263
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the warp system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2267
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the warp system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2272
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has had no impact on an already healthy warp system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2276
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has had no impact on an already healthy warp system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2280
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has had no impact on an already healthy warp system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2288
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the warp system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2292
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the warp system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2296
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the warp system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2302
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the warp system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2306
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the warp system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2310
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the warp system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2336
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the jump system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2340
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the jump system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2344
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the jump system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2350
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the jump system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2354
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the jump system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2358
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the jump system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2363
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has had no impact on an already healthy jump system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2367
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has had no impact on an already healthy jump system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2371
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has had no impact on an already healthy jump system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2379
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the jump system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2383
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the jump system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2387
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the jump system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2393
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the jump system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2397
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the jump system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2401
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the jump system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2429
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the front shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2433
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the front shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2437
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the front shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2443
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the rear shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2447
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the rear shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2451
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the rear shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2457
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the front shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2461
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the front shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2465
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the front shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2471
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the rear shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2475
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the rear shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2479
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the rear shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2484 scripts/scenario_59_border.lua:2593
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has had no impact on an already healthy shield system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2488 scripts/scenario_59_border.lua:2597
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has had no impact on an already healthy shield system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2492 scripts/scenario_59_border.lua:2601
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has had no impact on an already healthy shield system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2501
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the front shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2505
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the front shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2509
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the front shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2515
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the rear shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2519
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the rear shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2523
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the rear shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2531
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the front shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2535
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the front shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2539
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the front shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2545
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the rear shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2549
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the rear shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2553
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the rear shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2566
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2570
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2574
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2580
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2584
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2588
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2609
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2613
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2617
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the shield system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2623
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2627
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2631
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the shield system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2656
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the maneuver system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2660
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the maneuver system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2664
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the maneuver system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2670
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the maneuver system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2674
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the maneuver system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2678
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the maneuver system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2683
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid ""
+"The %s retrieved has had no impact on an already healthy maneuver system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2687
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid ""
+"The %s retrieved has had no impact on an already healthy maneuver system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2691
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid ""
+"The %s retrieved has had no impact on an already healthy maneuver system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2699
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the maneuver system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2703
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the maneuver system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2707
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the maneuver system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2713
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the maneuver system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2717
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the maneuver system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2721
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the maneuver system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2745
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the reactor system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2749
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the reactor system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2753
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the reactor system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2759
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has improved the reactor system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2763
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has improved the reactor system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2767
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has improved the reactor system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2772
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has had no impact on an already healthy reactor system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2776
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has had no impact on an already healthy reactor system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2780
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has had no impact on an already healthy reactor system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2788
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the reactor system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2792
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the reactor system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2796
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the reactor system health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2802
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the reactor system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2806
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the reactor system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2810
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the reactor system maximum health"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2833
+#, lua-format
+msgctxt "artifactEffect-msgScience"
+msgid "The %s retrieved has enabled the scanners"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2837
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved has enabled the scanners"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2842 scripts/scenario_59_border.lua:2863
+#, lua-format
+msgctxt "artifactEffect-msgScience"
+msgid "The %s retrieved does not effect the scanners"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2846 scripts/scenario_59_border.lua:2867
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved does not effect the scanners"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2854
+#, lua-format
+msgctxt "artifactEffect-msgScience"
+msgid "The %s retrieved has disabled the scanners"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2858
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved has disabled the scanners"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2890
+#, lua-format
+msgctxt "artifactEffect-msgHelms"
+msgid "The %s retrieved has enabled combat maneuver"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2894
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved has enabled combat maneuver"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2899 scripts/scenario_59_border.lua:2920
+#, lua-format
+msgctxt "artifactEffect-msgHelms"
+msgid "The %s retrieved does not effect combat maneuver"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2903 scripts/scenario_59_border.lua:2924
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved does not effect combat maneuver"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2911
+#, lua-format
+msgctxt "artifactEffect-msgHelms"
+msgid "The %s retrieved has disabled combat maneuver"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2915
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved has disabled combat maneuver"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2947
+#, lua-format
+msgctxt "artifactEffect-msgRelay"
+msgid "The %s retrieved has enabled probe launch"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2951
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved has enabled probe launch"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2956 scripts/scenario_59_border.lua:2977
+#, lua-format
+msgctxt "artifactEffect-msgRelay"
+msgid "The %s retrieved does not effect probe launch"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2960 scripts/scenario_59_border.lua:2981
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved does not effect probe launch"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2968
+#, lua-format
+msgctxt "artifactEffect-msgRelay"
+msgid "The %s retrieved has disabled probe launch"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:2972
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved has disabled probe launch"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3004
+#, lua-format
+msgctxt "artifactEffect-msgRelay"
+msgid "The %s retrieved has enabled hacking"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3008
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved has enabled hacking"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3013 scripts/scenario_59_border.lua:3034
+#, lua-format
+msgctxt "artifactEffect-msgRelay"
+msgid "The %s retrieved does not effect hacking"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3017 scripts/scenario_59_border.lua:3038
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved does not effect hacking"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3025
+#, lua-format
+msgctxt "artifactEffect-msgRelay"
+msgid "The %s retrieved has disabled hacking"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3029
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved has disabled hacking"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3060
+#, lua-format
+msgctxt "artifactEffect-msgScience"
+msgid "The %s retrieved has increased our sensor range"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3064
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved has increased our sensor range"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3070
+#, lua-format
+msgctxt "artifactEffect-msgScience"
+msgid "The %s retrieved has decreased our sensor range"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3074
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved has decreased our sensor range"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3095
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has increased our coolant"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3099
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has increased our coolant"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3103
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has increased our coolant"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3109
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid ""
+"The %s retrieved has decreased our coolant: incompatible, corrosive reaction"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3113
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid ""
+"The %s retrieved has decreased our coolant: incompatible, corrosive reaction"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3117
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid ""
+"The %s retrieved has decreased our coolant: incompatible, corrosive reaction"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3138
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has increased the number of repair crew"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3142
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has increased the number of repair crew"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3146
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has increased the number of repair crew"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3153
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid ""
+"The %s retrieved has decreased the number of repair crew: assassination "
+"malware"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3157
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid ""
+"The %s retrieved has decreased the number of repair crew: assassination "
+"malware"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3161
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid ""
+"The %s retrieved has decreased the number of repair crew: assassination "
+"malware"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3166
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid ""
+"The %s retrieved has had no effect on the number of repair crew: malfunction"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3170
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid ""
+"The %s retrieved has had no effect on the number of repair crew: malfunction"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3174
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid ""
+"The %s retrieved has had no effect on the number of repair crew: malfunction"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3196
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has repaired some hull damage"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3200
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has repaired some hull damage"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3204
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has repaired some hull damage"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3210
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has damaged the hull: poor integration"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3214
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has damaged the hull: poor integration"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3218
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has damaged the hull: poor integration"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3242
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has added charge to the shields"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3246
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has added charge to the shields"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3250
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has added charge to the shields"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3260
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has reduced shield charge: corroded couplings"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3264
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has reduced shield charge: corroded couplings"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3268
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has reduced shield charge: corroded couplings"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3289
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has added energy to our reserves"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3293
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has added energy to our reserves"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3297
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has added energy to our reserves"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3303
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved has drained some energy: incompatibility"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3307
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved has drained some energy: incompatibility"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3311
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved has drained some energy: incompatibility"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3322
+msgctxt "upgrade-buttonHelms"
+msgid "C.M. Boost"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3330
+msgctxt "upgrade-msgHelms"
+msgid "Combat maneuver boost (forward direction) ability increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3345
+msgctxt "upgrade-buttonTactical"
+msgid "C.M. Boost"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3353
+msgctxt "upgrade-msgTactical"
+msgid "Combat maneuver boost (forward direction) ability increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3371
+msgctxt "upgrade-buttonHelms"
+msgid "C.M. Strafe"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3379
+msgctxt "upgrade-msgHelms"
+msgid "Combat maneuver strafe (sideways direction) ability increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3394
+msgctxt "upgrade-buttonTactical"
+msgid "C.M. Strafe"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3402
+msgctxt "upgrade-msgTactical"
+msgid "Combat maneuver strafe (sideways direction) ability increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3420
+msgctxt "upgrade-buttonWeapons"
+msgid "Beam Damage"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3432
+msgctxt "upgrade-msgWeapons"
+msgid "Damage applied by beam weapons increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3447
+msgctxt "upgrade-buttonTactical"
+msgid "Beam Damage"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3459
+msgctxt "upgrade-msgTactical"
+msgid "Damage applied by beam weapons increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3477
+msgctxt "upgrade-buttonWeapons"
+msgid "Beam Cycle"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3489
+msgctxt "upgrade-msgWeapons"
+msgid "The time it takes to cycle the beams between firing has been reduced"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3504
+msgctxt "upgrade-buttonTactical"
+msgid "Beam Cycle"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3516
+msgctxt "upgrade-msgTactical"
+msgid "The time it takes to cycle the beams between firing has been reduced"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3534
+msgctxt "upgrade-buttonHelms"
+msgid "Impulse Speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3542
+msgctxt "upgrade-msgHelms"
+msgid "The maximum impulse speed has been increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3557
+msgctxt "upgrade-buttonTactical"
+msgid "Impulse Speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3565
+msgctxt "upgrade-msgTactical"
+msgid "The maximum impulse speed has been increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3583
+msgctxt "upgrade-buttonHelms"
+msgid "Warp Speed"
+msgstr "Vitesse lumière"
+
+#: scripts/scenario_59_border.lua:3591
+msgctxt "upgrade-msgHelms"
+msgid "The maximum warp speed has been increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3606
+msgctxt "upgrade-buttonTactical"
+msgid "Warp Speed"
+msgstr "Vitesse lumière"
+
+#: scripts/scenario_59_border.lua:3614
+msgctxt "upgrade-msgTactical"
+msgid "The maximum warp speed has been increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3632
+msgctxt "upgrade-buttonHelms"
+msgid "Jump Range"
+msgstr "Portée de saut"
+
+#: scripts/scenario_59_border.lua:3645
+msgctxt "upgrade-msgHelms"
+msgid "The maximum jump range has been increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3660
+msgctxt "upgrade-buttonTactical"
+msgid "Jump Range"
+msgstr "Portée de saut"
+
+#: scripts/scenario_59_border.lua:3673
+msgctxt "upgrade-msgTactical"
+msgid "The maximum jump range has been increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3691
+msgctxt "upgrade-buttonWeapons"
+msgid "Shield Capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3703
+msgctxt "upgrade-msgWeapons"
+msgid "The maximum shield strength has been increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3718
+msgctxt "upgrade-buttonTactical"
+msgid "Shield Capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3730
+msgctxt "upgrade-msgTactical"
+msgid "The maximum shield strength has been increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3748
+msgctxt "upgrade-buttonHelms"
+msgid "Spin Speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3756
+msgctxt "upgrade-msgHelms"
+msgid "The maximum spin speed has been increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3771
+msgctxt "upgrade-buttonTactical"
+msgid "Spin Speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3779
+msgctxt "upgrade-msgTactical"
+msgid "The maximum spin speed has been increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3797
+msgctxt "upgrade-buttonEngineer"
+msgid "Battery Capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3805
+msgctxt "upgrade-msgEngineer"
+msgid "The maximum battery capacity has been increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3820
+msgctxt "upgrade-buttonEngineer+"
+msgid "Battery Capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3828
+msgctxt "upgrade-msgEngineer+"
+msgid "The maximum battery capacity has been increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3843
+msgctxt "upgrade-buttonDamageControl"
+msgid "Battery Capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3851
+msgctxt "upgrade-msgDamageControl"
+msgid "The maximum battery capacity has been increased"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3886 scripts/scenario_59_border.lua:3932
+#, lua-format
+msgctxt "coolant-buttonEngineer"
+msgid "%s C. Pump"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3892 scripts/scenario_59_border.lua:3938
+#, lua-format
+msgctxt "coolant-msgEngineer"
+msgid "The %s coolant pump has been repaired"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3899 scripts/scenario_59_border.lua:3948
+#, lua-format
+msgctxt "coolant-buttonEngineer+"
+msgid "%s C. Pump"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3905 scripts/scenario_59_border.lua:3954
+#, lua-format
+msgctxt "coolant-msgEngineer+"
+msgid "The %s coolant pump has been repaired"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3912 scripts/scenario_59_border.lua:3964
+#, lua-format
+msgctxt "coolant-buttonDamageControl"
+msgid "%s C. Pump"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:3918 scripts/scenario_59_border.lua:3970
+#, lua-format
+msgctxt "coolant-msgDamageControl"
+msgid "The %s coolant pump has been repaired"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4017 scripts/scenario_59_border.lua:4087
+#: scripts/scenario_59_border.lua:4457 scripts/scenario_59_border.lua:4516
+#: scripts/scenario_59_border.lua:4585 scripts/scenario_59_border.lua:4731
+#, lua-format
+msgctxt "artifactEffect-msgHelms"
+msgid "The %s retrieved disabled a %s previously retrieved"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4021 scripts/scenario_59_border.lua:4091
+#: scripts/scenario_59_border.lua:4217 scripts/scenario_59_border.lua:4290
+#: scripts/scenario_59_border.lua:4461 scripts/scenario_59_border.lua:4520
+#: scripts/scenario_59_border.lua:4589 scripts/scenario_59_border.lua:4663
+#: scripts/scenario_59_border.lua:4735
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved disabled a %s previously retrieved"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4027
+#, lua-format
+msgctxt "artifactEffect-msgHelms"
+msgid ""
+"The %s retrieved reduced the combat maneuver boost (forward direction) "
+"ability"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4031
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid ""
+"The %s retrieved reduced the combat maneuver boost (forward direction) "
+"ability"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4038 scripts/scenario_59_border.lua:4108
+#, lua-format
+msgctxt "artifactEffect-msgHelms"
+msgid "The %s retrieved has had no effect on combat maneuver"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4042 scripts/scenario_59_border.lua:4112
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved has had no effect on combat maneuver"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4097
+#, lua-format
+msgctxt "artifactEffect-msgHelms"
+msgid ""
+"The %s retrieved reduced the combat maneuver strafe (sideways direction) "
+"ability"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4101
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid ""
+"The %s retrieved reduced the combat maneuver strafe (sideways direction) "
+"ability"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4134
+#, lua-format
+msgctxt "artifactEffect-msgRelay"
+msgid "The %s retrieved has restocked your probes"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4138
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved has restocked your probes"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4143 scripts/scenario_59_border.lua:4164
+#, lua-format
+msgctxt "artifactEffect-msgRelay"
+msgid "The %s retrieved does not effect probe stock"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4147 scripts/scenario_59_border.lua:4168
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved does not effect probe stock"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4155
+#, lua-format
+msgctxt "artifactEffect-msgRelay"
+msgid "The %s retrieved has depleted probe stock"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4159
+#, lua-format
+msgctxt "artifactEffect-msgOperations"
+msgid "The %s retrieved has depleted probe stock"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4213 scripts/scenario_59_border.lua:4286
+#: scripts/scenario_59_border.lua:4659
+#, lua-format
+msgctxt "artifactEffect-msgWeapons"
+msgid "The %s retrieved disabled a %s previously retrieved"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4227
+#, lua-format
+msgctxt "artifactEffect-msgWeapons"
+msgid "The %s retrieved reduced beam damage"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4231
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved reduced beam damage"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4238 scripts/scenario_59_border.lua:4311
+#, lua-format
+msgctxt "artifactEffect-msgWeapons"
+msgid ""
+"The %s retrieved has had no effect on your non-existent beam weapon system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4242 scripts/scenario_59_border.lua:4315
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid ""
+"The %s retrieved has had no effect on your non-existent beam weapon system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4300
+#, lua-format
+msgctxt "artifactEffect-msgWeapons"
+msgid "The %s retrieved slowed beam cycle time"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4304
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved slowed beam cycle time"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4349
+#, lua-format
+msgctxt "artifactEffect-msgWeapons"
+msgid "The %s retrieved has restocked your %ss"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4353
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved has restocked your %ss"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4358 scripts/scenario_59_border.lua:4388
+#, lua-format
+msgctxt "artifactEffect-msgWeapons"
+msgid "The %s retrieved does not effect missile stocks"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4362 scripts/scenario_59_border.lua:4392
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved does not effect missile stocks"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4379 scripts/scenario_59_border.lua:4399
+#, lua-format
+msgctxt "artifactEffect-msgWeapons"
+msgid "The %s retrieved has depleted your stock of %ss"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4383 scripts/scenario_59_border.lua:4403
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved has depleted your stock of %ss"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4410
+#, lua-format
+msgctxt "artifactEffect-msgWeapons"
+msgid "The %s retrieved does not effect your non-existent missile system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4414
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved does not effect your non-existent missile system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4467
+#, lua-format
+msgctxt "artifactEffect-msgHelms"
+msgid "The %s retrieved slowed maximum impulse speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4471
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved slowed maximum impulse speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4526
+#, lua-format
+msgctxt "artifactEffect-msgHelms"
+msgid "The %s retrieved slowed maximum warp speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4530
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved slowed maximum warp speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4537
+#, lua-format
+msgctxt "artifactEffect-msgHelms"
+msgid "The %s retrieved had no effect on your non-existent warp system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4541
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved had no effect on your non-existent warp system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4600
+#, lua-format
+msgctxt "artifactEffect-msgHelms"
+msgid "The %s retrieved reduced maximum jump range"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4604
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved reduced maximum jump range"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4611
+#, lua-format
+msgctxt "artifactEffect-msgHelms"
+msgid "The %s retrieved had no effect on your non-existent jump system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4615
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved had no effect on your non-existent jump system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4673
+#, lua-format
+msgctxt "artifactEffect-msgWeapons"
+msgid "The %s retrieved reduced maximum shield strength"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4677
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved reduced maximum shield strength"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4684
+#, lua-format
+msgctxt "artifactEffect-msgWeapons"
+msgid "The %s retrieved had no effect on your non-existent shield system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4688
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved had no effect on your non-existent shield system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4741
+#, lua-format
+msgctxt "artifactEffect-msgHelms"
+msgid "The %s retrieved reduced maximum spin speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4745
+#, lua-format
+msgctxt "artifactEffect-msgTactical"
+msgid "The %s retrieved reduced maximum spin speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4789
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved disabled a %s previously retrieved"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4793
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved disabled a %s previously retrieved"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4797
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved disabled a %s previously retrieved"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4803
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid "The %s retrieved reduced maximum battery capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4807
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid "The %s retrieved reduced maximum battery capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4811
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid "The %s retrieved reduced maximum battery capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4820
+#, lua-format
+msgctxt "scienceDescription-artifact"
+msgid "Cargo (type: %s)"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4840
+#, lua-format
+msgctxt "inventory-msgRelay"
+msgid "One %s added to ship inventory"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4844
+#, lua-format
+msgctxt "inventory-msgOperations"
+msgid "One %s added to ship inventory"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4849
+msgctxt "inventory-msgRelay"
+msgid "No cargo space available. Cargo wasted"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4853
+msgctxt "inventory-msgOperations"
+msgid "No cargo space available. Cargo wasted"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4861
+msgctxt "sabotage-msgRelay"
+msgid ""
+"Booby trapped cargo container. Fortunately automated safety protocols "
+"transported the cargo container off the ship before too much damage was taken"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4865
+msgctxt "sabotage-msgOperations"
+msgid ""
+"Booby trapped cargo container. Fortunately automated safety protocols "
+"transported the cargo container off the ship before too much damage was taken"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4888
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid ""
+"The %s retrieved provided spare coolant pump parts that may be used to "
+"repair a damaged coolant pump"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4892
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid ""
+"The %s retrieved provided spare coolant pump parts that may be used to "
+"repair a damaged coolant pump"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4896
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid ""
+"The %s retrieved provided spare coolant pump parts that may be used to "
+"repair a damaged coolant pump"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4918
+#, lua-format
+msgctxt "artifactEffect-msgEngineer"
+msgid ""
+"The %s retrieved contains no compatible or salvageable parts for your "
+"coolant pump system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4922
+#, lua-format
+msgctxt "artifactEffect-msgEngineer+"
+msgid ""
+"The %s retrieved contains no compatible or salvageable parts for your "
+"coolant pump system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4926
+#, lua-format
+msgctxt "artifactEffect-msgDamageControl"
+msgid ""
+"The %s retrieved contains no compatible or salvageable parts for your "
+"coolant pump system"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4937
+msgctxt "buttonGM"
+msgid "-From Debug"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4938
+msgctxt "buttonGM"
+msgid "Object Counts"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4941
+msgctxt "buttonGM"
+msgid "always popup debug"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4944
+msgctxt "buttonGM"
+msgid "once popup debug"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4947
+msgctxt "buttonGM"
+msgid "never popup debug"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4964
+#, lua-format
+msgctxt "buttonGM"
+msgid "+Player ships %i/%i"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4965
+msgctxt "buttonGM"
+msgid "+Set Time Limit"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4966
+msgctxt "buttonGM"
+msgid "+Show Player Info"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4967
+msgctxt "buttonGM"
+msgid "+debug"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4969
+msgctxt "buttonGM"
+msgid "Fixed->Random Names"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4982
+msgctxt "buttonGM"
+msgid "Random->Fixed Names"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:4989
+msgctxt "msgGM"
+msgid ""
+"No fixed names available. Either there never were any defined or they have "
+"all been used"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5002
+msgctxt "buttonGM"
+msgid "-From Player Info"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5003
+msgctxt "buttonGM"
+msgid "Show Info"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5005 scripts/scenario_59_border.lua:5013
+#: scripts/scenario_59_border.lua:5021 scripts/scenario_59_border.lua:5029
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s*"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5011
+msgctxt "buttonGM"
+msgid "Omit Info"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5019
+msgctxt "buttonGM"
+msgid "Only Name"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5027
+msgctxt "buttonGM"
+msgid "More than Name"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5044
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s Helm*"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5046
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s Helm"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5057
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s Weapons*"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5059
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s Weapons"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5070
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s Engineer*"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5072
+#, lua-format
+msgctxt "buttonGM"
+msgid "%s Engineer"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5261
+msgctxt "buttonGM"
+msgid "-From Player ships"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5262
+msgctxt "buttonGM"
+msgid "+Describe stock"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5263
+msgctxt "buttonGM"
+msgid "+Describe special"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5265
+msgctxt "buttonGM"
+msgid "Narsil"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5271
+msgctxt "buttonGM"
+msgid "Headhunter"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5277
+msgctxt "buttonGM"
+msgid "Blazon"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5283
+msgctxt "buttonGM"
+msgid "Sting"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5289
+msgctxt "buttonGM"
+msgid "Spyder"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5295
+msgctxt "buttonGM"
+msgid "Spinstar"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5301 scripts/scenario_59_border.lua:5310
+msgctxt "buttonGM"
+msgid "Simian"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5309 scripts/scenario_59_border.lua:5330
+msgctxt "buttonGM"
+msgid "-Back"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5311
+msgctxt "msgGM"
+msgid ""
+"Destroyer III(Simian):   Hull:100   Shield:110,70   Size:200   Repair "
+"Crew:3   Cargo:7   R.Strength:25\n"
+"Default advanced engine:Jump (2U - 20U)   Speeds: Impulse:60   Spin:8   "
+"Accelerate:15   C.Maneuver: Boost:450 Strafe:150\n"
+"Beam:1 Turreted Speed:0.2\n"
+"   Arc:270   Direction:0   Range:0.8   Cycle:5   Damage:6\n"
+"Tubes:5   Load Speed:8   Front:2   Side:2   Back:1\n"
+"   Direction:  0   Type:Exclude Mine\n"
+"   Direction:  0   Type:Exclude Mine\n"
+"   Direction:-90   Type:Homing Only\n"
+"   Direction: 90   Type:Homing Only\n"
+"   Direction:180   Type:Mine Only\n"
+"   Ordnance stock and type:\n"
+"      10 Homing\n"
+"      04 Nuke\n"
+"      06 Mine\n"
+"      05 EMP\n"
+"      10 HVLI\n"
+"Based on player missile cruiser: short jump drive (no warp), weaker hull, "
+"added one turreted beam, fewer tubes on side, fewer homing, nuke, EMP, mine "
+"and added HVLI"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5331
+#, fuzzy
+msgctxt "buttonGM"
+msgid "Atlantis"
+msgstr "m"
+
+#: scripts/scenario_59_border.lua:5332
+msgctxt "msgGM"
+msgid ""
+"Atlantis: Corvette, Destroyer   Hull:250   Shield:200,200   Size:400   "
+"Repair Crew:3   Cargo:6   R.Strength:52\n"
+"Default advanced engine:Jump   Speeds: Impulse:90   Spin:10   "
+"Accelerate:20   C.Maneuver: Boost:400 Strafe:250\n"
+"Beams:2\n"
+"   Arc:100   Direction:-20   Range:1.5   Cycle:6   Damage:8\n"
+"   Arc:100   Direction: 20   Range:1.5   Cycle:6   Damage:8\n"
+"Tubes:5   Load Speed:10   Side:4   Back:1\n"
+"   Direction:-90   Type:Exclude Mine\n"
+"   Direction:-90   Type:Exclude Mine\n"
+"   Direction: 90   Type:Exclude Mine\n"
+"   Direction: 90   Type:Exclude Mine\n"
+"   Direction:180   Type:Mine Only\n"
+"   Ordnance stock and type:\n"
+"      12 Homing\n"
+"      04 Nuke\n"
+"      08 Mine\n"
+"      06 EMP\n"
+"      20 HVLI\n"
+"A refitted Atlantis X23 for more general tasks. The large shield system has "
+"been replaced with an advanced combat maneuvering systems and improved "
+"impulse engines. Its missile loadout is also more diverse. Mistaking the "
+"modified Atlantis for an Atlantis X23 would be a deadly mistake."
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5334
+#, fuzzy
+msgctxt "buttonGM"
+msgid "Benedict"
+msgstr "Bénédict"
+
+#: scripts/scenario_59_border.lua:5335
+msgctxt "msgGM"
+msgid ""
+"Benedict: Corvette, Freighter/Carrier   Hull:200   Shield:70,70   Size:400   "
+"Repair Crew:3   Cargo Space:9   R.Strength:10\n"
+"Ship classes that may dock with Benedict:Starfighter, Frigate, Corvette\n"
+"Default advanced engine:Jump (5U - 90U)   Speeds: Impulse:60   Spin:6   "
+"Accelerate:8   C.Maneuver: Boost:400 Strafe:250\n"
+"Beams:2 Turreted Speed:6\n"
+"   Arc:90   Direction:  0   Range:1.5   Cycle:6   Damage:4\n"
+"   Arc:90   Direction:180   Range:1.5   Cycle:6   Damage:4\n"
+"Benedict is an improved version of the Jump Carrier"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5337
+msgctxt "buttonGM"
+msgid "Crucible"
+msgstr "Creuset"
+
+#: scripts/scenario_59_border.lua:5338
+msgctxt "msgGM"
+msgid ""
+"Crucible: Corvette, Popper   Hull:160   Shield:160,160   Size:200   Repair "
+"Crew:4   Cargo Space:5   R.Strength:45\n"
+"Default advanced engine:Warp (750)   Speeds: Impulse:80   Spin:15   "
+"Accelerate:40   C.Maneuver: Boost:400 Strafe:250\n"
+"Beams:2\n"
+"   Arc:70   Direction:-30   Range:1   Cycle:6   Damage:5\n"
+"   Arc:70   Direction: 30   Range:1   Cycle:6   Damage:5\n"
+"Tubes:6   Load Speed:8   Front:3   Side:2   Back:1\n"
+"   Direction:   0   Type:HVLI Only - Small\n"
+"   Direction:   0   Type:HVLI Only\n"
+"   Direction:   0   Type:HVLI Only - Large\n"
+"   Direction:-90   Type:Exclude Mine\n"
+"   Direction: 90   Type:Exclude Mine\n"
+"   Direction:180   Type:Mine Only\n"
+"   Ordnance stock and type:\n"
+"      08 Homing\n"
+"      04 Nuke\n"
+"      06 Mine\n"
+"      06 EMP\n"
+"      24 HVLI\n"
+"A number of missile tubes range around this ship. Beams were deemed lower "
+"priority, though they are still present. Stronger defenses than a frigate, "
+"but not as strong as the Atlantis"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5340
+msgctxt "buttonGM"
+msgid "Ender"
+msgstr "Ender"
+
+#: scripts/scenario_59_border.lua:5341
+msgctxt "msgGM"
+msgid ""
+"Ender: Dreadnaught, Battlecruiser   Hull:100   Shield:1200,1200   "
+"Size:2000   Repair Crew:8   Cargo Space:20   R.Strength:100\n"
+"Ship classes that may dock with Benedict:Starfighter, Frigate, Corvette   "
+"Energy:1200\n"
+"Default advanced engine:Jump   Speeds: Impulse:30   Spin:2   Accelerate:6   "
+"C.Maneuver: Boost:800 Strafe:500\n"
+"Beams:12 6 left, 6 right turreted Speed:6\n"
+"   Arc:120   Direction:-90   Range:2.5   Cycle:6.1   Damage:4\n"
+"   Arc:120   Direction:-90   Range:2.5   Cycle:6.0   Damage:4\n"
+"   Arc:120   Direction: 90   Range:2.5   Cycle:5.8   Damage:4\n"
+"   Arc:120   Direction: 90   Range:2.5   Cycle:6.3   Damage:4\n"
+"   Arc:120   Direction:-90   Range:2.5   Cycle:5.9   Damage:4\n"
+"   Arc:120   Direction:-90   Range:2.5   Cycle:6.4   Damage:4\n"
+"   Arc:120   Direction: 90   Range:2.5   Cycle:5.7   Damage:4\n"
+"   Arc:120   Direction: 90   Range:2.5   Cycle:5.6   Damage:4\n"
+"   Arc:120   Direction:-90   Range:2.5   Cycle:6.6   Damage:4\n"
+"   Arc:120   Direction:-90   Range:2.5   Cycle:5.5   Damage:4\n"
+"   Arc:120   Direction: 90   Range:2.5   Cycle:6.5   Damage:4\n"
+"   Arc:120   Direction: 90   Range:2.5   Cycle:6.2   Damage:4\n"
+"Tubes:2   Load Speed:8   Front:1   Back:1\n"
+"   Direction:   0   Type:Homing Only\n"
+"   Direction:180   Type:Mine Only\n"
+"   Ordnance stock and type:\n"
+"      6 Homing\n"
+"      6 Mine"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5343
+#, fuzzy
+msgctxt "buttonGM"
+msgid "Flavia P.Falcon"
+msgstr "Faucon P.Flavia"
+
+#: scripts/scenario_59_border.lua:5344
+msgctxt "msgGM"
+msgid ""
+"Flavia P.Falcon: Frigate, Light Transport   Hull:100   Shield:70,70   "
+"Size:200   Repair Crew:8   Cargo Space:15   R.Strength:13\n"
+"Default advanced engine:Warp (500)   Speeds: Impulse:60   Spin:10   "
+"Accelerate:10   C.Maneuver: Boost:250 Strafe:150\n"
+"Beams:2 rear facing\n"
+"   Arc:40   Direction:170   Range:1.2   Cycle:6   Damage:6\n"
+"   Arc:40   Direction:190   Range:1.2   Cycle:6   Damage:6\n"
+"Tubes:1   Load Speed:20   Back:1\n"
+"   Direction:180   Type:Any\n"
+"   Ordnance stock and type:\n"
+"      3 Homing\n"
+"      1 Nuke\n"
+"      1 Mine\n"
+"      5 HVLI\n"
+"The Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp "
+"drive."
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5346
+msgctxt "buttonGM"
+msgid "Hathcock"
+msgstr "Hathcock"
+
+#: scripts/scenario_59_border.lua:5347
+msgctxt "msgGM"
+msgid ""
+"Hathcock: Frigate, Cruiser: Sniper   Hull:120   Shield:70,70   Size:200   "
+"Repair Crew:2   Cargo Space:6   R.Strength:30\n"
+"Default advanced engine:Jump   Speeds: Impulse:50   Spin:15   Accelerate:8   "
+"C.Maneuver: Boost:200 Strafe:150\n"
+"Beams:4 front facing\n"
+"   Arc:04   Direction:0   Range:1.4   Cycle:6   Damage:4\n"
+"   Arc:20   Direction:0   Range:1.2   Cycle:6   Damage:4\n"
+"   Arc:60   Direction:0   Range:1.0   Cycle:6   Damage:4\n"
+"   Arc:90   Direction:0   Range:0.8   Cycle:6   Damage:4\n"
+"Tubes:2   Load Speed:15   Side:2\n"
+"   Direction:-90   Type:Any\n"
+"   Direction: 90   Type:Any\n"
+"   Ordnance stock and type:\n"
+"      4 Homing\n"
+"      1 Nuke\n"
+"      2 EMP\n"
+"      8 HVLI\n"
+"Long range narrow beam and some point defense beams, broadside missiles. "
+"Agile for a frigate"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5349
+msgctxt "buttonGM"
+msgid "Kiriya"
+msgstr "Kiriya"
+
+#: scripts/scenario_59_border.lua:5350
+msgctxt "msgGM"
+msgid ""
+"Kiriya: Corvette, Freighter/Carrier   Hull:200   Shield:70,70   Size:400   "
+"Repair Crew:3   Cargo Space:9   R.Strength:10\n"
+"Ship classes that may dock with Benedict:Starfighter, Frigate, Corvette\n"
+"Default advanced engine:Warp (750)   Speeds: Impulse:60   Spin:6   "
+"Accelerate:8   C.Maneuver: Boost:400 Strafe:250\n"
+"Beams:2 Turreted Speed:6\n"
+"   Arc:90   Direction:  0   Range:1.5   Cycle:6   Damage:4\n"
+"   Arc:90   Direction:180   Range:1.5   Cycle:6   Damage:4\n"
+"Kiriya is an improved warp drive version of the Jump Carrier"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5352
+msgctxt "buttonGM"
+msgid "MP52 Hornet"
+msgstr "Frelon MP52"
+
+#: scripts/scenario_59_border.lua:5353
+msgctxt "msgGM"
+msgid ""
+"MP52 Hornet: Starfighter, Interceptor   Hull:70   Shield:60   Size:100   "
+"Repair Crew:1   Cargo:3   R.Strength:7\n"
+"Default advanced engine:None   Speeds: Impulse:125   Spin:32   "
+"Accelerate:40   C.Maneuver: Boost:600   Energy:400\n"
+"Beams:2\n"
+"   Arc:30   Direction: 5   Range:.9   Cycle:4   Damage:2.5\n"
+"   Arc:30   Direction:-5   Range:.9   Cycle:4   Damage:2.5\n"
+"The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with "
+"nearly twice the hull strength, nearly three times the shielding, better "
+"acceleration, impulse boosters, and a second laser cannon."
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5355
+msgctxt "buttonGM"
+msgid "Maverick"
+msgstr "Dissident"
+
+#: scripts/scenario_59_border.lua:5356
+msgctxt "msgGM"
+msgid ""
+"Maverick: Corvette, Gunner   Hull:160   Shield:160,160   Size:200   Repair "
+"Crew:4   Cargo:5   R.Strength:45\n"
+"Default advanced engine:Warp (800)   Speeds: Impulse:80   Spin:15   "
+"Accelerate:40   C.Maneuver: Boost:400 Strafe:250\n"
+"Beams:6   3 forward, 2 side, 1 back (turreted speed .5)\n"
+"   Arc:10   Direction:  0   Range:2.0   Cycle:6   Damage:6\n"
+"   Arc: 90   Direction:-20   Range:1.5   Cycle:6   Damage:8\n"
+"   Arc: 90   Direction: 20   Range:1.5   Cycle:6   Damage:8\n"
+"   Arc: 40   Direction:-70   Range:1.0   Cycle:4   Damage:6\n"
+"   Arc: 40   Direction: 70   Range:1.0   Cycle:4   Damage:6\n"
+"   Arc:180   Direction:180   Range:0.8   Cycle:6   Damage:4   (turreted "
+"speed: .5)\n"
+"Tubes:3   Load Speed:8   Side:2   Back:1\n"
+"   Direction:-90   Type:Exclude Mine\n"
+"   Direction: 90   Type:Exclude Mine\n"
+"   Direction:180   Type:Mine Only\n"
+"   Ordnance stock and type:\n"
+"      06 Homing\n"
+"      02 Nuke\n"
+"      02 Mine\n"
+"      04 EMP\n"
+"      10 HVLI\n"
+"A number of beams bristle from various points on this gunner. Missiles were "
+"deemed lower priority, though they are still present. Stronger defenses than "
+"a frigate, but not as strong as the Atlantis"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5358
+msgctxt "buttonGM"
+msgid "Nautilus"
+msgstr "Nautilus"
+
+#: scripts/scenario_59_border.lua:5359
+msgctxt "msgGM"
+msgid ""
+"Nautilus: Frigate, Mine Layer   Hull:100   Shield:60,60   Size:200   Repair "
+"Crew:4   Cargo:7   R.Strength:12\n"
+"Default advanced engine:Jump   Speeds: Impulse:100   Spin:10   "
+"Accelerate:15   C.Maneuver: Boost:250 Strafe:150\n"
+"Beams:2 Turreted Speed:6\n"
+"   Arc:90   Direction: 35   Range:1   Cycle:6   Damage:6\n"
+"   Arc:90   Direction:-35   Range:1   Cycle:6   Damage:6\n"
+"Tubes:3   Load Speed:10   Back:3\n"
+"   Direction:180   Type:Mine Only\n"
+"   Direction:180   Type:Mine Only\n"
+"   Direction:180   Type:Mine Only\n"
+"   Ordnance stock and type:\n"
+"      12 Mine\n"
+"Small mine laying vessel with minimal armament, shields and hull"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5361
+msgctxt "buttonGM"
+msgid "Phobos MP3"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5362
+msgctxt "msgGM"
+msgid ""
+"Phobos MP3: Frigate, Cruiser   Hull:200   Shield:100,100   Size:200   Repair "
+"Crew:3   Cargo:10   R.Strength:19\n"
+"Default advanced engine:None   Speeds: Impulse:80   Spin:10   "
+"Accelerate:20   C.Maneuver: Boost:400 Strafe:250\n"
+"Beams:2\n"
+"   Arc:90   Direction:-15   Range:1.2   Cycle:8   Damage:6\n"
+"   Arc:90   Direction: 15   Range:1.2   Cycle:8   Damage:6\n"
+"Tubes:3   Load Speed:10   Front:2   Back:1\n"
+"   Direction: -1   Type:Exclude Mine\n"
+"   Direction:  1   Type:Exclude Mine\n"
+"   Direction:180   Type:Mine Only\n"
+"   Ordnance stock and type:\n"
+"      10 Homing\n"
+"      02 Nuke\n"
+"      04 Mine\n"
+"      03 EMP\n"
+"      20 HVLI\n"
+"Player variant of the Phobos M3, not as strong as the atlantis, but has "
+"front firing tubes, making it an easier to use ship in some scenarios."
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5364
+msgctxt "buttonGM"
+msgid "Piranha"
+msgstr "Piranha"
+
+#: scripts/scenario_59_border.lua:5365
+msgctxt "msgGM"
+msgid ""
+"Piranha: Frigate, Cruiser: Light Artillery   Hull:120   Shield:70,70   "
+"Size:200   Repair Crew:2   Cargo:8   R.Strength:16\n"
+"Default advanced engine:None   Speeds: Impulse:60   Spin:10   Accelerate:8   "
+"C.Maneuver: Boost:200 Strafe:150\n"
+"Tubes:8   Load Speed:8   Side:6   Back:2\n"
+"   Direction:-90   Type:HVLI and Homing Only\n"
+"   Direction:-90   Type:Any\n"
+"   Direction:-90   Type:HVLI and Homing Only\n"
+"   Direction: 90   Type:HVLI and Homing Only\n"
+"   Direction: 90   Type:Any\n"
+"   Direction: 90   Type:HVLI and Homing Only\n"
+"   Direction:170   Type:Mine Only\n"
+"   Direction:190   Type:Mine Only\n"
+"   Ordnance stock and type:\n"
+"      12 Homing\n"
+"      06 Nuke\n"
+"      08 Mine\n"
+"      20 HVLI\n"
+"This combat-specialized Piranha F12 adds mine-laying tubes, combat "
+"maneuvering systems, and a jump drive."
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5367
+#, fuzzy
+msgctxt "buttonGM"
+msgid "Player Cruiser"
+msgstr "Croiseur joueur"
+
+#: scripts/scenario_59_border.lua:5368
+msgctxt "msgGM"
+msgid ""
+"Player Cruiser:   Hull:200   Shield:80,80   Size:400   Repair Crew:3   "
+"Cargo:6   R.Strength:40\n"
+"Default advanced engine:Jump   Speeds: Impulse:90   Spin:10   "
+"Accelerate:20   C.Maneuver: Boost:400 Strafe:250\n"
+"Beams:2\n"
+"   Arc:90   Direction:-15   Range:1   Cycle:6   Damage:10\n"
+"   Arc:90   Direction: 15   Range:1   Cycle:6   Damage:10\n"
+"Tubes:3   Load Speed:8   Front:2   Back:1\n"
+"   Direction: -5   Type:Exclude Mine\n"
+"   Direction:  5   Type:Exclude Mine\n"
+"   Direction:180   Type:Mine Only\n"
+"   Ordnance stock and type:\n"
+"      12 Homing\n"
+"      04 Nuke\n"
+"      08 Mine\n"
+"      06 EMP"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5370
+msgctxt "buttonGM"
+msgid "Player Fighter"
+msgstr "Chasseur joueur"
+
+#: scripts/scenario_59_border.lua:5371
+msgctxt "msgGM"
+msgid ""
+"Player Fighter:   Hull:60   Shield:40   Size:100   Repair Crew:3   Cargo:3   "
+"R.Strength:7\n"
+"Default advanced engine:None   Speeds: Impulse:110   Spin:20   "
+"Accelerate:40   C.Maneuver: Boost:600   Energy:400\n"
+"Beams:2\n"
+"   Arc:40   Direction:-10   Range:1   Cycle:6   Damage:8\n"
+"   Arc:40   Direction: 10   Range:1   Cycle:6   Damage:8\n"
+"Tube:1   Load Speed:10   Front:1\n"
+"   Direction:0   Type:HVLI Only\n"
+"   Ordnance stock and type:\n"
+"      4 HVLI"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5373
+msgctxt "buttonGM"
+msgid "Player Missile Cr."
+msgstr "Croiseur de missiles joueur"
+
+#: scripts/scenario_59_border.lua:5374
+msgctxt "msgGM"
+msgid ""
+"Player Missile Cr.:   Hull:200   Shield:110,70   Size:200   Repair Crew:3   "
+"Cargo:8   R.Strength:45\n"
+"Default advanced engine:Warp (800)   Speeds: Impulse:60   Spin:8   "
+"Accelerate:15   C.Maneuver: Boost:450 Strafe:150\n"
+"Tubes:7   Load Speed:8   Front:2   Side:4   Back:1\n"
+"   Direction:  0   Type:Exclude Mine\n"
+"   Direction:  0   Type:Exclude Mine\n"
+"   Direction: 90   Type:Homing Only\n"
+"   Direction: 90   Type:Homing Only\n"
+"   Direction:-90   Type:Homing Only\n"
+"   Direction:-90   Type:Homing Only\n"
+"   Direction:180   Type:Mine Only\n"
+"   Ordnance stock and type:\n"
+"      30 Homing\n"
+"      08 Nuke\n"
+"      12 Mine\n"
+"      10 EMP"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5376
+#, fuzzy
+msgctxt "buttonGM"
+msgid "Repulse"
+msgstr "Repulse"
+
+#: scripts/scenario_59_border.lua:5377
+msgctxt "msgGM"
+msgid ""
+"Repulse: Frigate, Armored Transport   Hull:120   Shield:80,80   Size:200   "
+"Repair Crew:8   Cargo:12   R.Strength:14\n"
+"Default advanced engine:Jump   Speeds: Impulse:55   Spin:9   Accelerate:10   "
+"C.Maneuver: Boost:250 Strafe:150\n"
+"Beams:2 Turreted Speed:5\n"
+"   Arc:200   Direction: 90   Range:1.2   Cycle:6   Damage:5\n"
+"   Arc:200   Direction:-90   Range:1.2   Cycle:6   Damage:5\n"
+"Tubes:2   Load Speed:20   Front:1   Back:1\n"
+"   Direction:  0   Type:Any\n"
+"   Direction:180   Type:Any\n"
+"   Ordnance stock and type:\n"
+"      4 Homing\n"
+"      6 HVLI\n"
+"Jump/Turret version of Flavia Falcon"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5379
+msgctxt "buttonGM"
+msgid "Striker"
+msgstr "L'Eclair"
+
+#: scripts/scenario_59_border.lua:5380
+msgctxt "msgGM"
+msgid ""
+"Striker: Starfighter, Patrol   Hull:120   Shield:50,30   Size:200   Repair "
+"Crew:2   Cargo:4   R.Strength:8\n"
+"Default advanced engine:None   Speeds: Impulse:45   Spin:15   "
+"Accelerate:30   C.Maneuver: Boost:250 Strafe:150   Energy:500\n"
+"Beams:2 Turreted Speed:6\n"
+"   Arc:100   Direction:-15   Range:1   Cycle:6   Damage:6\n"
+"   Arc:100   Direction: 15   Range:1   Cycle:6   Damage:6\n"
+"The Striker is the predecessor to the advanced striker, slow but agile, but "
+"does not do an extreme amount of damage, and lacks in shields"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5382
+msgctxt "buttonGM"
+msgid "ZX-Lindworm"
+msgstr "Dragon-ZX"
+
+#: scripts/scenario_59_border.lua:5383
+msgctxt "msgGM"
+msgid ""
+"ZX-Lindworm: Starfighter, Bomber   Hull:75   Shield:40   Size:100   Repair "
+"Crew:1   Cargo:3   R.Strength:8\n"
+"Default advanced engine:None   Speeds: Impulse:70   Spin:15   "
+"Accelerate:25   C.Maneuver: Boost:250 Strafe:150   Energy:400\n"
+"Beam:1 Turreted Speed:4\n"
+"   Arc:270   Direction:180   Range:0.7   Cycle:6   Damage:2\n"
+"Tubes:3   Load Speed:10   Front:3 (small)\n"
+"   Direction: 0   Type:Any - small\n"
+"   Direction: 1   Type:HVLI Only - small\n"
+"   Direction:-1   Type:HVLI Only - small\n"
+"   Ordnance stock and type:\n"
+"      03 Homing\n"
+"      12 HVLI"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5388
+msgctxt "buttonGM"
+msgid "-From time limit"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5390
+#, lua-format
+msgctxt "buttonGM"
+msgid "%i minutes"
+msgstr "%i minutes"
+
+#: scripts/scenario_59_border.lua:5395
+#, lua-format
+msgctxt "msgGM"
+msgid "Game time limit set to %i minutes"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5410
+msgctxt "buttonGM"
+msgid "Limited War"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5426
+msgctxt "buttonGM"
+msgid "Full War"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5667
+#, lua-format
+msgctxt "-tabWeapons&Tactical"
+msgid "%s: %i"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5690
+msgctxt "-buttonWeapons"
+msgid "Spinal Beam"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5696
+msgctxt "-buttonTactical"
+msgid "Spinal Beam"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5708
+#, lua-format
+msgctxt "-tabWeapons"
+msgid "%s Charging: %i"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5933 scripts/scenario_59_border.lua:5954
+#: scripts/scenario_59_border.lua:5975 scripts/scenario_59_border.lua:5991
+#: scripts/scenario_59_border.lua:6007 scripts/scenario_59_border.lua:12818
+msgctxt "scienceDescription-artifact"
+msgid "Scan to gather intelligence"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:5933 scripts/scenario_59_border.lua:5954
+#: scripts/scenario_59_border.lua:5975 scripts/scenario_59_border.lua:5991
+#: scripts/scenario_59_border.lua:6007
+#, lua-format
+msgctxt "scienceDescription-artifact"
+msgid "Enemy fleet detected in sector %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6131 scripts/scenario_59_border.lua:11152
+#, fuzzy
+msgctxt "msgGM"
+msgid "Empty Template pool: fix excludes or other criteria"
+msgstr "Pool de modèles vide : corriger les exclusions ou d'autres critères"
+
+#: scripts/scenario_59_border.lua:6284
+msgctxt "characterInfo-comms"
+msgid ""
+"He dabbles in ship system innovations. He's been working on improving beam "
+"weapons by reducing the amount of time between firing. I hear he's already "
+"installed some improvements on ships that have docked here previously"
+msgstr ""
+"Il se lance dans les innovations en matière de système de vaisseau. "
+"Actuellement il travaille sur l'amélioration des faisceaux laser en "
+"augmentant leur cadence de tir.\n"
+"J'ai entendu dire qu'il avait installé quelques mises à niveau sur les "
+"vaisseaux qui ont déjà accosté ici."
+
+#: scripts/scenario_59_border.lua:6286
+msgctxt "scienceDB"
+msgid "May reduce beam cycle time"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6301
+#, lua-format
+msgctxt "gossip-comms"
+msgid ""
+"I heard there's a guy named %s that can fix ship beam systems up so that "
+"they shoot faster. He lives out on %s in %s. He won't charge you much, but "
+"it won't be free."
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6327
+msgctxt "characterInfo-comms"
+msgid ""
+"She tinkers with ship systems like engines and thrusters. She's consulted "
+"with the military on tuning spin time by increasing thruster power. She's "
+"got prototypes that are awaiting formal military approval before installation"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6329
+msgctxt "scienceDB"
+msgid "May improve maneuverability"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6344
+#, lua-format
+msgctxt "gossip-comms"
+msgid ""
+"My friend, %s recently quit her job as a ship maintenance technician to set "
+"up this side gig. She's been improving ship systems and she's pretty good at "
+"it. She set up shop on %s in %s. I hear she's even lining up a contract with "
+"the navy for her improvements."
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6370
+msgctxt "characterInfo-comms"
+msgid ""
+"He specializes in miniaturization of weapons systems. He's come up with a "
+"way to add a missile tube and some missiles to any ship regardless of size "
+"or configuration"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6372
+msgctxt "scienceDB"
+msgid "May add a missile tube"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6387
+#, lua-format
+msgctxt "gossip-comms"
+msgid ""
+"There's this guy, %s out on %s in %s that can add a missile tube to your "
+"ship. He even added one to my cousin's souped up freighter. You should see "
+"the new paint job: amusingly phallic"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6413
+msgctxt "characterInfo-comms"
+msgid ""
+"She developed this technique for cooling beam systems so that they can be "
+"fired more often without burning out"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6415
+msgctxt "scienceDB"
+msgid "May provide beam cooling upgrade"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6430
+#, lua-format
+msgctxt "gossip-comms"
+msgid ""
+"There's this girl on %s in %s. She is hot. Her name is %s. When I say she is "
+"hot, I mean she has a way of keeping your beam weapons from excessive heat."
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6456
+msgctxt "characterInfo-comms"
+msgid "He knows how to modify beam systems to extend their range"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6458
+msgctxt "scienceDB"
+msgid "May increase beam range"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6473
+#, lua-format
+msgctxt "gossip-comms"
+msgid ""
+"Do you know about %s? He can extend the range of your beam weapons. He's on "
+"%s in %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6499
+msgctxt "characterInfo-comms"
+msgid "She can make your beams hit harder"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6501
+msgctxt "scienceDB"
+msgid "May increase damage by beams"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6516
+#, lua-format
+msgctxt "gossip-comms"
+msgid ""
+"You should visit %s in %s. There's a specialist in beam technology that can "
+"increase the damage done by your beams. Her name is %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6542
+msgctxt "characterInfo-comms"
+msgid "He can fit more missiles aboard your ship"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6544
+msgctxt "scienceDB"
+msgid "May increase missile capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6559
+#, lua-format
+msgctxt "gossip-comms"
+msgid ""
+"Want to store more missiles on your ship? Talk to %s on station %s in %s. He "
+"can retrain your missile loaders and missile storage automation such that "
+"you will be able to store more missiles"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6585
+msgctxt "characterInfo-comms"
+msgid "She can soup up your impulse engines"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6587
+msgctxt "scienceDB"
+msgid "May increase impulse speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6602
+#, lua-format
+msgctxt "gossip-comms"
+msgid ""
+"%s, an engineer/mechanic who knows propulsion systems backwards and forwards "
+"has a bay at the shipyard on %s in %s. She can give your impulse engines a "
+"significant boost to their top speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6628
+msgctxt "characterInfo-comms"
+msgid "He can strengthen your hull"
+msgstr "Il peut renforcer votre coque."
+
+#: scripts/scenario_59_border.lua:6630
+msgctxt "scienceDB"
+msgid "May strengthen hull"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6645
+#, lua-format
+msgctxt "gossip-comms"
+msgid ""
+"I know of a materials specialist on %s in %s named %s. He can strengthen the "
+"hull on your ship"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6671
+msgctxt "characterInfo-comms"
+msgid ""
+"She knows how to increase your maximum energy capacity by improving battery "
+"efficiency"
+msgstr ""
+"Elle sait comment augmenter votre capacité énergétique maximale en "
+"améliorant l'efficacité de la batterie."
+
+#: scripts/scenario_59_border.lua:6673
+msgctxt "scienceDB"
+msgid "May increase battery capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6688
+#, lua-format
+msgctxt "gossip-comms"
+msgid ""
+"Have you heard about %s? She's on %s in %s and she can give your ship "
+"greater energy capacity by improving your battery efficiency"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6714
+msgctxt "characterInfo-comms"
+msgid "He can strengthen your shields"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6716
+msgctxt "scienceDB"
+msgid "May strengthen shields"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6731
+#, lua-format
+msgctxt "gossip-comms"
+msgid ""
+"If you stop at %s in %s, you should talk to %s. He can strengthen your "
+"shields. Trust me, it's always good to have stronger shields"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6765
+msgctxt "upgrade-comms"
+msgid "Reduce beam cycle time"
+msgstr "Réduire le temps de cycle des faisceaux laser"
+
+#: scripts/scenario_59_border.lua:6794
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "After accepting your gift, he reduced your Beam cycle time by %i%%"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6796 scripts/scenario_59_border.lua:6991
+#: scripts/scenario_59_border.lua:7049
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s requires %s for the upgrade"
+msgstr "%s réclame du %s pour effectuer la mise à niveau."
+
+#: scripts/scenario_59_border.lua:6810
+#, fuzzy, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s reduced your Beam cycle time by 25%% at no cost in trade with the "
+"message, 'Go get those Kraylors.'"
+msgstr ""
+"%s a réduit le temps de cycle de vos faisceaux laser de 25%% sans frais en "
+"échange du message \"Allez chercher ces Kraylors !\"."
+
+#: scripts/scenario_59_border.lua:6813 scripts/scenario_59_border.lua:6943
+#: scripts/scenario_59_border.lua:7010 scripts/scenario_59_border.lua:7066
+msgctxt "upgrade-comms"
+msgid "Your ship type does not support a beam weapon upgrade."
+msgstr ""
+"Votre type de vaisseau ne prend pas en charge les mises à niveau de "
+"faisceaux laser."
+
+#: scripts/scenario_59_border.lua:6815 scripts/scenario_59_border.lua:6849
+#: scripts/scenario_59_border.lua:6899 scripts/scenario_59_border.lua:6945
+#: scripts/scenario_59_border.lua:7012 scripts/scenario_59_border.lua:7068
+#: scripts/scenario_59_border.lua:7112 scripts/scenario_59_border.lua:7146
+#: scripts/scenario_59_border.lua:7182 scripts/scenario_59_border.lua:7218
+#: scripts/scenario_59_border.lua:7260 scripts/scenario_59_border.lua:7537
+#: scripts/scenario_59_border.lua:7553 scripts/scenario_59_border.lua:7607
+#: scripts/scenario_59_border.lua:7626 scripts/scenario_59_border.lua:7646
+#: scripts/scenario_59_border.lua:7665 scripts/scenario_59_border.lua:7684
+#: scripts/scenario_59_border.lua:7703 scripts/scenario_59_border.lua:7722
+#: scripts/scenario_59_border.lua:7726 scripts/scenario_59_border.lua:7757
+#: scripts/scenario_59_border.lua:7770 scripts/scenario_59_border.lua:7776
+#: scripts/scenario_59_border.lua:7784 scripts/scenario_59_border.lua:7789
+#: scripts/scenario_59_border.lua:7795 scripts/scenario_59_border.lua:7852
+#: scripts/scenario_59_border.lua:7864 scripts/scenario_59_border.lua:7878
+#: scripts/scenario_59_border.lua:7894 scripts/scenario_59_border.lua:7911
+#: scripts/scenario_59_border.lua:7927 scripts/scenario_59_border.lua:7946
+#: scripts/scenario_59_border.lua:7971 scripts/scenario_59_border.lua:7997
+#: scripts/scenario_59_border.lua:8034 scripts/scenario_59_border.lua:8040
+#: scripts/scenario_59_border.lua:8094 scripts/scenario_59_border.lua:8102
+#: scripts/scenario_59_border.lua:8143 scripts/scenario_59_border.lua:8150
+#: scripts/scenario_59_border.lua:8184 scripts/scenario_59_border.lua:8198
+#: scripts/scenario_59_border.lua:8207 scripts/scenario_59_border.lua:8209
+#: scripts/scenario_59_border.lua:8214 scripts/scenario_59_border.lua:8274
+#: scripts/scenario_59_border.lua:8287 scripts/scenario_59_border.lua:8314
+#: scripts/scenario_59_border.lua:8343 scripts/scenario_59_border.lua:8372
+#: scripts/scenario_59_border.lua:8379 scripts/scenario_59_border.lua:8396
+#: scripts/scenario_59_border.lua:8400 scripts/scenario_59_border.lua:8405
+#: scripts/scenario_59_border.lua:8472 scripts/scenario_59_border.lua:8481
+#: scripts/scenario_59_border.lua:8529 scripts/scenario_59_border.lua:8532
+#: scripts/scenario_59_border.lua:8565 scripts/scenario_59_border.lua:8614
+#: scripts/scenario_59_border.lua:8649 scripts/scenario_59_border.lua:8770
+#: scripts/scenario_59_border.lua:8804 scripts/scenario_59_border.lua:8917
+#: scripts/scenario_59_border.lua:8935 scripts/scenario_59_border.lua:8941
+#: scripts/scenario_59_border.lua:8988 scripts/scenario_59_border.lua:8997
+#: scripts/scenario_59_border.lua:9008 scripts/scenario_59_border.lua:9014
+#: scripts/scenario_59_border.lua:9022 scripts/scenario_59_border.lua:9070
+#: scripts/scenario_59_border.lua:9092 scripts/scenario_59_border.lua:9096
+#: scripts/scenario_59_border.lua:9143 scripts/scenario_59_border.lua:9147
+#: scripts/scenario_59_border.lua:9178 scripts/scenario_59_border.lua:9207
+#: scripts/scenario_59_border.lua:9231 scripts/scenario_59_border.lua:9255
+#: scripts/scenario_59_border.lua:9279 scripts/scenario_59_border.lua:9303
+#: scripts/scenario_59_border.lua:9322 scripts/scenario_59_border.lua:9343
+#: scripts/scenario_59_border.lua:9380 scripts/scenario_59_border.lua:9396
+#: scripts/scenario_59_border.lua:9412 scripts/scenario_59_border.lua:9428
+#: scripts/scenario_59_border.lua:9444 scripts/scenario_59_border.lua:9446
+#: scripts/scenario_59_border.lua:9464 scripts/scenario_59_border.lua:9492
+#: scripts/scenario_59_border.lua:9507 scripts/scenario_59_border.lua:9523
+#: scripts/scenario_59_border.lua:9541 scripts/scenario_59_border.lua:9562
+#: scripts/scenario_59_border.lua:9564 scripts/scenario_59_border.lua:9842
+#: scripts/scenario_59_border.lua:9934 scripts/scenario_59_border.lua:9961
+#: scripts/scenario_59_border.lua:9970 scripts/scenario_59_border.lua:9993
+#: scripts/scenario_59_border.lua:10000 scripts/scenario_59_border.lua:10029
+#: scripts/scenario_59_border.lua:10049 scripts/scenario_59_border.lua:10058
+#: scripts/scenario_59_border.lua:10063 scripts/scenario_59_border.lua:10098
+#: scripts/scenario_59_border.lua:10111 scripts/scenario_59_border.lua:10139
+#: scripts/scenario_59_border.lua:10143 scripts/scenario_59_border.lua:10167
+#: scripts/scenario_59_border.lua:10194 scripts/scenario_59_border.lua:10224
+#: scripts/scenario_59_border.lua:10249 scripts/scenario_59_border.lua:10280
+#: scripts/scenario_59_border.lua:10305 scripts/scenario_59_border.lua:10844
+#: scripts/scenario_59_border.lua:10848 scripts/scenario_59_border.lua:10871
+#: scripts/scenario_59_border.lua:10893 scripts/scenario_59_border.lua:10917
+#: scripts/scenario_59_border.lua:10939 scripts/scenario_59_border.lua:10963
+msgid "Back"
+msgstr "Précédent"
+
+#: scripts/scenario_59_border.lua:6821
+msgctxt "upgrade-comms"
+msgid "Increase spin speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6840
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Ship spin speed increased by %i%% after you gave %s to %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6842
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s requires %s for the spin upgrade"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6847
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: I increased the speed your ship spins by 50%%. Normally, I'd require %s, "
+"but seeing as you're going out to take on the Kraylors, we worked it out"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6855
+msgctxt "upgrade-comms"
+msgid "Add missle tube"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6885
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s thanks you for the %s and the luxury and installs a homing missile tube "
+"for you"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6887
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s requires %s and luxury for the missile tube"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6897
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s installs a homing missile tube for you. The %s required was requisitioned "
+"from wartime contingency supplies"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6905
+msgctxt "upgrade-comms"
+msgid "Reduce beam heat"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6929
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Beam heat generation reduced by %i%%"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6931
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s says she needs %s before she can cool your beams"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6940
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: Beam heat generation reduced by 50%%, no %s necessary. Go shoot some "
+"Kraylors for me"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6951
+msgctxt "upgrade-comms"
+msgid "Extend beam range"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:6989
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s extended your beam range by %i%% and says thanks for the %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7007
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s increased your beam range by 25%% without the usual %s from your ship"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7018
+msgctxt "upgrade-comms"
+msgid "Increase beam damage"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7047
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s increased your beam damage by %i%% and stores away the %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7063
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s increased your beam damage by 20%%, waiving the usual %s requirement"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7074
+msgctxt "upgrade-comms"
+msgid "Increase missile storage capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7097
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s: You can now store at least %i%% more missiles. I appreciate the %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7099
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s needs %s for the upgrade"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7107
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: You can now store at least 25%% more missiles. I found some spare %s on "
+"the station. Go launch those missiles at those perfidious treaty-breaking "
+"Kraylors"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7110
+msgctxt "upgrade-comms"
+msgid "Your ship type does not support a missile storage capacity upgrade."
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7118
+msgctxt "upgrade-comms"
+msgid "Speed up impulse engines"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7137
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: Your impulse engines now push you up to %i%% faster. Thanks for the %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7139
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "You need to bring %s to %s for the upgrade"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7144
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: Your impulse engines now push you up to 25%% faster. I didn't need %s "
+"after all. Go run circles around those blinking Kraylors"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7152
+msgctxt "upgrade-comms"
+msgid "Strengthen hull"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7172
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s: Thank you for the %s. Your hull is %i%% stronger"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7174
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s: I need %s before I can increase your hull strength"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7180
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: I made your hull 50%% stronger. I scrounged some %s from around here "
+"since you are on the Kraylor offense team"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7188
+msgctxt "upgrade-comms"
+msgid "Increase battery efficiency"
+msgstr "Augmenter l'efficacité de la batterie"
+
+#: scripts/scenario_59_border.lua:7208
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: I appreciate the %s. You have a %i%% greater energy capacity due to "
+"increased battery efficiency"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7210
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: You need to bring me some %s before I can increase your battery "
+"efficiency"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7216
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s increased your battery efficiency by 25%% without the need for %s due to "
+"the pressing military demands on your ship"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7224
+msgctxt "upgrade-comms"
+msgid "Strengthen shields"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7247
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: I've raised your shield maximum by %i%%, %s. Thanks for bringing the %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7249
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s: You need to provide %s before I can raise your shield strength"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7258
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"%s: Congratulations, %s, your shields are 20%% stronger. Don't worry about "
+"the %s. Go kick those Kraylors outta here"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7316
+#, fuzzy
+msgctxt "station-comms"
+msgid "We are under attack! No time for chatting!"
+msgstr ""
+"Nous sommes en train de nous faire attaquer ! Pas le temps de discuter !"
+
+#: scripts/scenario_59_border.lua:7330
+#, fuzzy, lua-format
+msgctxt "station-comms"
+msgid ""
+"Greetings %s!\n"
+"How may we help you today?"
+msgstr ""
+"Salutations %s !\n"
+"Comment pouvons-nous vous aider aujourd'hui ?"
+
+#: scripts/scenario_59_border.lua:7332
+msgctxt "station-comms"
+msgid ""
+"Good day, officer!\n"
+"What can we do for you today?"
+msgstr ""
+"Bonjour officier !\n"
+"Que pouvons-nous faire pour vous aujourd'hui ?"
+
+#: scripts/scenario_59_border.lua:7334
+msgctxt "station-comms"
+msgid "Hello, may I help you?"
+msgstr "Bonjour, puis-je vous aider ?"
+
+#: scripts/scenario_59_border.lua:7337
+#, fuzzy
+msgctxt "station-comms"
+msgid "Welcome to our lovely station."
+msgstr "Bienvenue dans notre charmante petite station."
+
+#: scripts/scenario_59_border.lua:7340
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Forgive us if we seem a little distracted. We are carefully monitoring the "
+"enemies nearby."
+msgstr ""
+"\n"
+"Veuillez nous excuser si nous semblons un peu distraits. Nous surveillons "
+"attentivement les ennemis à proximité."
+
+#: scripts/scenario_59_border.lua:7342
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+"%s\n"
+"\n"
+"Réputation : %i"
+
+#: scripts/scenario_59_border.lua:7355
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "I need ordnance restocked"
+msgstr "Nous avons besoin de nous réapprovisionner en munitions"
+
+#: scripts/scenario_59_border.lua:7358
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"What type of ordnance?\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+"Quel genre de munitions ?\n"
+"\n"
+"Réputation : %i"
+
+#: scripts/scenario_59_border.lua:7365
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "Can you supply us with some nukes? ("
+msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
+
+#: scripts/scenario_59_border.lua:7367
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "We really need some nukes ("
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
+
+#: scripts/scenario_59_border.lua:7370 scripts/scenario_59_border.lua:7383
+#: scripts/scenario_59_border.lua:7395 scripts/scenario_59_border.lua:7407
+#: scripts/scenario_59_border.lua:7419
+#, fuzzy, lua-format
+msgctxt "ammo-comms"
+msgid "%s%d rep each)"
+msgstr "%s%d rép chacun)"
+
+#: scripts/scenario_59_border.lua:7379
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "Please re-stock our EMP missiles. ("
+msgstr "Veuillez réapprovisionner nos missiles EMP ("
+
+#: scripts/scenario_59_border.lua:7381
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "Got any EMPs? ("
+msgstr "Avez-vous des EMP ? ("
+
+#: scripts/scenario_59_border.lua:7391
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "Do you have spare homing missiles for us? ("
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
+
+#: scripts/scenario_59_border.lua:7393
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "Do you have extra homing missiles? ("
+msgstr "Avez-vous des missiles homing supplémentaires ? ("
+
+#: scripts/scenario_59_border.lua:7403
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "We could use some mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
+
+#: scripts/scenario_59_border.lua:7405
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "How about mines? ("
+msgstr "Concernant les mines ? ("
+
+#: scripts/scenario_59_border.lua:7415
+msgctxt "ammo-comms"
+msgid "What about HVLI? ("
+msgstr "Concernant les HVLI ? ("
+
+#: scripts/scenario_59_border.lua:7417
+msgctxt "ammo-comms"
+msgid "Could you provide HVLI? ("
+msgstr "Pourriez-vous fournir des HVLI ? ("
+
+#: scripts/scenario_59_border.lua:7427 scripts/scenario_59_border.lua:8806
+msgctxt "stationServices-comms"
+msgid "Docking services status"
+msgstr "État des services d'accueil"
+
+#: scripts/scenario_59_border.lua:7428 scripts/scenario_59_border.lua:8808
+#, fuzzy, lua-format
+msgctxt "stationServices-comms"
+msgid "Station %s docking services status:"
+msgstr "État des services d'accueil de la station %s :\n"
+
+#: scripts/scenario_59_border.lua:7430 scripts/scenario_59_border.lua:8810
+#, fuzzy, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Replenish scan probes."
+msgstr ""
+"%s\n"
+"- Réapprovisionnement des sondes."
+
+#: scripts/scenario_59_border.lua:7434 scripts/scenario_59_border.lua:8814
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "Cannot replenish scan probes due to fabrication unit failure."
+msgstr ""
+"- Sondes : impossible de réapprovisionner les sondes en raison d'une "
+"défaillance de l'unité de fabrication."
+
+#: scripts/scenario_59_border.lua:7435 scripts/scenario_59_border.lua:8815
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "Parts shortage prevents scan probe replenishment."
+msgstr ""
+"- Sondes : le manque de pièces empêche le réapprovisionnement des sondes."
+
+#: scripts/scenario_59_border.lua:7436 scripts/scenario_59_border.lua:8816
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid ""
+"Station management has curtailed scan probe replenishment for cost cutting "
+"reasons."
+msgstr ""
+"- Sondes : les gestionnaires de la station ont réduit le réapprovisionnement "
+"des sondes pour des raisons de réduction des coûts."
+
+#: scripts/scenario_59_border.lua:7440 scripts/scenario_59_border.lua:7453
+#: scripts/scenario_59_border.lua:7466 scripts/scenario_59_border.lua:8820
+#: scripts/scenario_59_border.lua:8833 scripts/scenario_59_border.lua:8846
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"%s"
+msgstr ""
+"%s\n"
+"%s"
+
+#: scripts/scenario_59_border.lua:7443 scripts/scenario_59_border.lua:8823
+#, fuzzy, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Ship hull repair."
+msgstr ""
+"%s\n"
+"- Réparation de la coque."
+
+#: scripts/scenario_59_border.lua:7447 scripts/scenario_59_border.lua:8827
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "We're out of the necessary materials and supplies for hull repair."
+msgstr ""
+"- Coque : nous n'avons plus les matériaux et fournitures nécessaires pour "
+"réparer la coque."
+
+#: scripts/scenario_59_border.lua:7448
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "Hull repair automation unavailable while it is undergoing maintenance."
+msgstr ""
+"- Coque : l'automatisation de réparation de la coque n'est pas disponible "
+"pendant la maintenance."
+
+#: scripts/scenario_59_border.lua:7449 scripts/scenario_59_border.lua:8829
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "All hull repair technicians quarantined to quarters due to illness."
+msgstr ""
+"- Coque : tous les techniciens de réparation de coque sont en quarantaine "
+"dans leur quartiers pour cause de maladie."
+
+#: scripts/scenario_59_border.lua:7456 scripts/scenario_59_border.lua:8836
+#, fuzzy, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"Recharge ship energy stores."
+msgstr ""
+"%s\n"
+"- Recharge des réserves d'énergie du vaisseau."
+
+#: scripts/scenario_59_border.lua:7460 scripts/scenario_59_border.lua:8840
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid ""
+"A recent reactor failure has put us on auxiliary power, so we cannot "
+"recharge ships."
+msgstr ""
+"- Énergie : une récente panne de réacteur nous a mis sous tension "
+"auxiliaire, nous ne pouvons donc pas recharger les vaisseaux."
+
+#: scripts/scenario_59_border.lua:7461 scripts/scenario_59_border.lua:8841
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "A damaged power coupling makes it too dangerous to recharge ships."
+msgstr ""
+"- Énergie : un couplage électrique défectueux rend la recharge des vaisseaux "
+"trop risquée."
+
+#: scripts/scenario_59_border.lua:7462 scripts/scenario_59_border.lua:8842
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid ""
+"An asteroid strike damaged our solar cells and we are short on power, so we "
+"can't recharge ships right now."
+msgstr ""
+"- Énergie : une frappe d'astéroïde a endommagé nos cellules solaires et nous "
+"manquons de puissance, nous ne pouvons donc pas recharger les vaisseaux pour "
+"le moment."
+
+#: scripts/scenario_59_border.lua:7469 scripts/scenario_59_border.lua:8849
+#, fuzzy, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May overcharge jump drive"
+msgstr ""
+"%s\n"
+"- Peut booster la téléportation (rechargement)."
+
+#: scripts/scenario_59_border.lua:7471 scripts/scenario_59_border.lua:8851
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair the following primary systems:"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7476 scripts/scenario_59_border.lua:7488
+#: scripts/scenario_59_border.lua:7499 scripts/scenario_59_border.lua:7507
+#: scripts/scenario_59_border.lua:7515 scripts/scenario_59_border.lua:7523
+#: scripts/scenario_59_border.lua:7531 scripts/scenario_59_border.lua:8856
+#: scripts/scenario_59_border.lua:8868 scripts/scenario_59_border.lua:8879
+#: scripts/scenario_59_border.lua:8887 scripts/scenario_59_border.lua:8895
+#: scripts/scenario_59_border.lua:8903 scripts/scenario_59_border.lua:8911
+msgctxt "stationServices-comms"
+msgid ""
+"\n"
+"    "
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7483
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair the coolant pump on the following primary systems:"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7495 scripts/scenario_59_border.lua:8875
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair the following secondary systems:"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7502 scripts/scenario_59_border.lua:8882
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "%sprobe launch system   "
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7510 scripts/scenario_59_border.lua:8890
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "%shacking system   "
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7518 scripts/scenario_59_border.lua:8898
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "%sscanners   "
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7526 scripts/scenario_59_border.lua:8906
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "%scombat maneuver   "
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7534 scripts/scenario_59_border.lua:8914
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "%sself destruct system   "
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7546
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "Overcharge Jump Drive (10 Rep)"
+msgstr "Booster la téléportation (10 rép)"
+
+#: scripts/scenario_59_border.lua:7549
+#, fuzzy, lua-format
+msgctxt "stationServices-comms"
+msgid "Your jump drive has been overcharged to %ik"
+msgstr ""
+"Le délai de recharge de votre moteur de téléportation a été boosté à %ik."
+
+#: scripts/scenario_59_border.lua:7551 scripts/scenario_59_border.lua:7605
+#: scripts/scenario_59_border.lua:7624 scripts/scenario_59_border.lua:7644
+#: scripts/scenario_59_border.lua:7663 scripts/scenario_59_border.lua:7682
+#: scripts/scenario_59_border.lua:7701 scripts/scenario_59_border.lua:7720
+#: scripts/scenario_59_border.lua:7755 scripts/scenario_59_border.lua:7873
+#: scripts/scenario_59_border.lua:7889 scripts/scenario_59_border.lua:7906
+#: scripts/scenario_59_border.lua:7922 scripts/scenario_59_border.lua:7969
+#: scripts/scenario_59_border.lua:7995 scripts/scenario_59_border.lua:8032
+#: scripts/scenario_59_border.lua:8038 scripts/scenario_59_border.lua:8196
+#: scripts/scenario_59_border.lua:9176 scripts/scenario_59_border.lua:9204
+#: scripts/scenario_59_border.lua:9228 scripts/scenario_59_border.lua:9252
+#: scripts/scenario_59_border.lua:9276 scripts/scenario_59_border.lua:9300
+#: scripts/scenario_59_border.lua:9316 scripts/scenario_59_border.lua:9340
+#: scripts/scenario_59_border.lua:9501
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr "Réputation insuffisante."
+
+#: scripts/scenario_59_border.lua:7584
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "Repair ship system"
+msgstr "Réparer les systèmes du vaisseau"
+
+#: scripts/scenario_59_border.lua:7585
+#, fuzzy, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"What system would you like repaired?\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+"Quel système souhaitez-vous réparer ?\n"
+"\n"
+"Réputation : %i"
+
+#: scripts/scenario_59_border.lua:7599
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair %s (current max is %i%%) (5 Rep)"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7603
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "%s has been repaired"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7619
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "Repair %s coolant pump (5 Rep)"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7622
+#, lua-format
+msgctxt "stationServices-comms"
+msgid "%s coolant pump has been repaired"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7639
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "Repair probe launch system (5 Rep)"
+msgstr "Réparer le système de lancement de sonde (5 rép)"
+
+#: scripts/scenario_59_border.lua:7642
+msgctxt "stationServices-comms"
+msgid "Your probe launch system has been repaired"
+msgstr "Votre système de lancement de sonde a été réparé."
+
+#: scripts/scenario_59_border.lua:7658
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "Repair hacking system (5 Rep)"
+msgstr "Réparer le système de piratage (5 rép)"
+
+#: scripts/scenario_59_border.lua:7661
+msgctxt "stationServices-comms"
+msgid "Your hack system has been repaired"
+msgstr "Votre système de piratage a été réparé."
+
+#: scripts/scenario_59_border.lua:7677
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "Repair scanners (5 Rep)"
+msgstr "Réparer les scanners (5 rép)"
+
+#: scripts/scenario_59_border.lua:7680
+msgctxt "stationServices-comms"
+msgid "Your scanners have been repaired"
+msgstr "Vos scanners ont été réparés."
+
+#: scripts/scenario_59_border.lua:7696
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "Repair combat maneuver (5 Rep)"
+msgstr "Réparer la manœuvre de combat (5 rép)"
+
+#: scripts/scenario_59_border.lua:7699
+msgctxt "stationServices-comms"
+msgid "Your combat maneuver has been repaired"
+msgstr "Votre manœuvre de combat a été réparée."
+
+#: scripts/scenario_59_border.lua:7715
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "Repair self destruct system (5 Rep)"
+msgstr "Réparer le système d'autodestruction (5 rép)"
+
+#: scripts/scenario_59_border.lua:7718
+#, fuzzy
+msgctxt "stationServices-comms"
+msgid "Your self destruct system has been repaired"
+msgstr "Votre système d'autodestruction a été réparé."
+
+#: scripts/scenario_59_border.lua:7765 scripts/scenario_59_border.lua:9003
+#, fuzzy
+msgctxt "station-comms"
+msgid "Tell me more about your station"
+msgstr "Dites m'en plus à propos de votre station"
+
+#: scripts/scenario_59_border.lua:7766 scripts/scenario_59_border.lua:9004
+msgctxt "station-comms"
+msgid "What would you like to know?"
+msgstr "Qu'aimeriez-vous savoir ?"
+
+#: scripts/scenario_59_border.lua:7768 scripts/scenario_59_border.lua:9006
+msgctxt "stationGeneralInfo-comms"
+msgid "General information"
+msgstr "Informations générales"
+
+#: scripts/scenario_59_border.lua:7774 scripts/scenario_59_border.lua:9012
+msgctxt "stationStory-comms"
+msgid "Station history"
+msgstr "L'histoire de la station"
+
+#: scripts/scenario_59_border.lua:7782 scripts/scenario_59_border.lua:9020
+msgctxt "gossip-comms"
+msgid "Gossip"
+msgstr "Rumeurs"
+
+#: scripts/scenario_59_border.lua:7793 scripts/scenario_59_border.lua:9055
+msgctxt "station-comms"
+msgid "Why the yellow neutral border zones?"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7794 scripts/scenario_59_border.lua:9056
+msgctxt "station-comms"
+msgid ""
+"Each neutral border zone is equipped with sensors and an auto-transmitter. "
+"If the sensors detect enemy forces in the zone, the auto-transmitter sends "
+"encoded zone identifying details through subspace. Human navy ships are "
+"equipped to recognize this data and color code the appropriate zone on the "
+"science and relay consoles."
+msgstr ""
+
+#: scripts/scenario_59_border.lua:7799 scripts/scenario_59_border.lua:9031
+#, fuzzy, lua-format
+msgctxt "characterInfo-comms"
+msgid "Tell me about %s"
+msgstr "Parlez-moi de %s"
+
+#: scripts/scenario_59_border.lua:7806 scripts/scenario_59_border.lua:9038
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "Never heard of %s"
+msgstr "Jamais entendu parler de %s."
+
+#: scripts/scenario_59_border.lua:7808 scripts/scenario_59_border.lua:9040
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s died last week. The funeral was yesterday"
+msgstr "%s est décédé la semaine dernière. L'enterrement a eu lieu hier."
+
+#: scripts/scenario_59_border.lua:7810 scripts/scenario_59_border.lua:9042
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s? Who's %s? There's nobody here named %s"
+msgstr "%s ? Qui est %s ? Il n'y a personne ici qui s'appelle %s."
+
+#: scripts/scenario_59_border.lua:7812 scripts/scenario_59_border.lua:9044
+#, fuzzy, lua-format
+msgctxt "characterInfo-comms"
+msgid "We don't talk about %s. They are gone and good riddance"
+msgstr "Pas envie de parler de %s. Ils sont partis et bon débarras."
+
+#: scripts/scenario_59_border.lua:7814 scripts/scenario_59_border.lua:9046
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "I think %s moved away"
+msgstr "Je pense que %s a déménagé."
+
+#: scripts/scenario_59_border.lua:7856 scripts/scenario_59_border.lua:8762
+msgctxt "orders-comms"
+msgid "What are my current orders?"
+msgstr "Quels sont nos ordres en cours ?"
+
+#: scripts/scenario_59_border.lua:7861 scripts/scenario_59_border.lua:8767
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"   %i Minutes remain in game"
+msgstr ""
+"\n"
+"   %i minutes restantes dans le jeu."
+
+#: scripts/scenario_59_border.lua:7871 scripts/scenario_59_border.lua:7904
+#: scripts/scenario_59_border.lua:9314
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid "Recruit repair crew member for %i reputation"
+msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
+
+#: scripts/scenario_59_border.lua:7876 scripts/scenario_59_border.lua:7909
+#, fuzzy
+msgctxt "trade-comms"
+msgid "Repair crew member hired"
+msgstr "Réparateur embauché."
+
+#: scripts/scenario_59_border.lua:7887 scripts/scenario_59_border.lua:7920
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid "Purchase coolant for %i reputation"
+msgstr "Acheter du liquide de refroidissement pour %i de réputation"
+
+#: scripts/scenario_59_border.lua:7892 scripts/scenario_59_border.lua:7925
+msgctxt "trade-comms"
+msgid "Additional coolant purchased"
+msgstr "Liquide de refroidissement supplémentaire acheté"
+
+#: scripts/scenario_59_border.lua:7932
+msgctxt "cartographyOffice-comms"
+msgid "Visit cartography office"
+msgstr "Consulter le bureau de cartographie"
+
+#: scripts/scenario_59_border.lua:7936
+msgctxt "cartographyOffice-comms"
+msgid ""
+"The clerk behind the desk looks up briefly at you then goes back to filing "
+"her nails."
+msgstr ""
+"[L'employée derrière son bureau vous regarde brièvement… puis se remet à se "
+"limer les ongles.]"
+
+#: scripts/scenario_59_border.lua:7938
+msgctxt "cartographyOffice-comms"
+msgid ""
+"The clerk behind the desk examines you then returns to grooming her "
+"tentacles."
+msgstr ""
+"[L'employée derrière son bureau vous examine d'un regard intrigué… puis se "
+"remet à toiletter ses tentacules.]"
+
+#: scripts/scenario_59_border.lua:7940
+msgctxt "cartographyOffice-comms"
+msgid ""
+"The clerk behind the desk glances at you then returns to preening her "
+"feathers."
+msgstr ""
+"[L'employée derrière son bureau jette un rapide coup d'œil sur vous puis se "
+"remet aussitôt à son passe-temps : se lisser les plumes.]"
+
+#: scripts/scenario_59_border.lua:7943
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"\n"
+"You can examine the brochure on the coffee table, talk to the apprentice "
+"cartographer or talk to the master cartographer.\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+"%s\n"
+"\n"
+"Vous pouvez consulter la brochure sur la table basse, parler à l'apprenti "
+"cartographe ou bien encore parler au maître cartographe.\n"
+"\n"
+"Réputation : %i"
+
+#: scripts/scenario_59_border.lua:7944
+msgctxt "cartographyOffice-comms"
+msgid "What's the difference between the apprentice and the master?"
+msgstr "Quelle est la différence entre l'apprenti et le maître ?"
+
+#: scripts/scenario_59_border.lua:7945
+msgctxt "cartographyOffice-comms"
+msgid ""
+"The clerk responds in a bored voice, 'The apprentice knows the local area "
+"and is learning the broader area. The master knows the local and the broader "
+"area but can't be bothered with the local area'"
+msgstr ""
+"L'employée vous répond d'une voix assommante :\n"
+"\n"
+"\"L'apprenti connaît bien la région proche mais apprend encore les régions "
+"les plus éloignées. Le maître, lui, connaît bien toutes les régions "
+"jusqu'aux plus éloignées. Cependant, vous ne pouvez pas déranger le maître "
+"comme ça juste pour des renseignements concernant la région proche.\n"
+"Dans ce cas adressez-vous à l'apprenti.\""
+
+#: scripts/scenario_59_border.lua:7948
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "Examine brochure (%i rep)"
+msgstr "Examiner la brochure (%i rép)"
+
+#: scripts/scenario_59_border.lua:7950
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"The brochure has a list of nearby stations and has a list of goods nearby.\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+"Cette brochure contient la liste des stations et marchandises se trouvant à "
+"proximité.\n"
+"\n"
+"Réputation : %i"
+
+#: scripts/scenario_59_border.lua:7951
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "Examine station list (%i rep)"
+msgstr "Examiner la liste des stations (%i rép)"
+
+#: scripts/scenario_59_border.lua:7960 scripts/scenario_59_border.lua:8074
+#: scripts/scenario_59_border.lua:8123 scripts/scenario_59_border.lua:8164
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
+#: scripts/scenario_59_border.lua:7962
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"%s %s %s"
+msgstr ""
+"%s\n"
+"%s %s %s"
+
+#: scripts/scenario_59_border.lua:7973
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "Examine goods list (%i rep)"
+msgstr "Examiner la liste des marchandises (%i rép)"
+
+#: scripts/scenario_59_border.lua:7984
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"Good, quantity, cost, station:\n"
+"%s, %i, %i, %s"
+msgstr ""
+"Marchandise, quantité, coût, station :\n"
+"%s, %i, %i, %s"
+
+#: scripts/scenario_59_border.lua:7986
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"%s, %i, %i, %s"
+msgstr ""
+"%s\n"
+"%s, %i, %i, %s"
+
+#: scripts/scenario_59_border.lua:8019
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "Examine upgrades list (%i rep)"
+msgstr "Examiner la liste des mises à niveau (%i rép)"
+
+#: scripts/scenario_59_border.lua:8025
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "%s: %s: %s"
+msgstr "%s: %s : %s"
+
+#: scripts/scenario_59_border.lua:8027
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"%s: %s: %s"
+msgstr ""
+"%s\n"
+"%s : %s : %s"
+
+#: scripts/scenario_59_border.lua:8042
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "Talk to apprentice cartographer (%i rep)"
+msgstr "Parler à l'apprenti cartographe (%i rép)"
+
+#: scripts/scenario_59_border.lua:8060
+msgctxt "cartographyOffice-comms"
+msgid ""
+"Hi, would you like for me to locate a station, some goods or some upgrades "
+"for you?"
+msgstr ""
+"Bonjour, souhaitez-vous que je vous localise une station, des marchandises "
+"ou des mises à niveau ?"
+
+#: scripts/scenario_59_border.lua:8062
+msgctxt "cartographyOffice-comms"
+msgid "Hi, would you like for me to locate a station or some goods for you?"
+msgstr ""
+"Bonjour, souhaitez-vous que je vous localise une station ou des "
+"marchandises ?"
+
+#: scripts/scenario_59_border.lua:8064
+msgctxt "cartographyOffice-comms"
+msgid "Locate station"
+msgstr "Localiser une station"
+
+#: scripts/scenario_59_border.lua:8065
+msgctxt "cartographyOffice-comms"
+msgid "These are stations I have learned"
+msgstr "Ce sont des stations que j'ai appris."
+
+#: scripts/scenario_59_border.lua:8076 scripts/scenario_59_border.lua:8125
+#: scripts/scenario_59_border.lua:8166 scripts/scenario_59_border.lua:8451
+#: scripts/scenario_59_border.lua:8508 scripts/scenario_59_border.lua:8544
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"Good, quantity, cost"
+msgstr ""
+"%s\n"
+"Marchandise, quantité, coût"
+
+#: scripts/scenario_59_border.lua:8078 scripts/scenario_59_border.lua:8127
+#: scripts/scenario_59_border.lua:8168 scripts/scenario_59_border.lua:8453
+#: scripts/scenario_59_border.lua:8510 scripts/scenario_59_border.lua:8546
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"   %s, %i, %i"
+msgstr ""
+"%s\n"
+"   %s, %i, %i"
+
+#: scripts/scenario_59_border.lua:8082 scripts/scenario_59_border.lua:8131
+#: scripts/scenario_59_border.lua:8172 scripts/scenario_59_border.lua:8457
+#: scripts/scenario_59_border.lua:8514 scripts/scenario_59_border.lua:8550
+#, lua-format
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"%s\n"
+"General Information:\n"
+"   %s"
+msgstr ""
+"%s\n"
+"Informations générales :\n"
+"   %s"
+
+#: scripts/scenario_59_border.lua:8085 scripts/scenario_59_border.lua:8134
+#: scripts/scenario_59_border.lua:8175 scripts/scenario_59_border.lua:8460
+#: scripts/scenario_59_border.lua:8517 scripts/scenario_59_border.lua:8553
+#, lua-format
+msgctxt "stationStory-comms"
+msgid ""
+"%s\n"
+"History:\n"
+"   %s"
+msgstr ""
+"%s\n"
+"Histoire :\n"
+"   %s"
+
+#: scripts/scenario_59_border.lua:8088 scripts/scenario_59_border.lua:8137
+#: scripts/scenario_59_border.lua:8178 scripts/scenario_59_border.lua:8463
+#: scripts/scenario_59_border.lua:8520 scripts/scenario_59_border.lua:8556
+#, fuzzy, lua-format
+msgctxt "gossip-comms"
+msgid ""
+"%s\n"
+"Gossip:\n"
+"   %s"
+msgstr ""
+"%s\n"
+"Rumeurs :\n"
+"   %s"
+
+#: scripts/scenario_59_border.lua:8091 scripts/scenario_59_border.lua:8140
+#: scripts/scenario_59_border.lua:8181 scripts/scenario_59_border.lua:8466
+#: scripts/scenario_59_border.lua:8523 scripts/scenario_59_border.lua:8559
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"%s:\n"
+"   %s"
+msgstr ""
+"%s\n"
+"%s :\n"
+"   %s"
+
+#: scripts/scenario_59_border.lua:8100
+msgctxt "cartographyOffice-comms"
+msgid "I have learned of no stations yet"
+msgstr "Désolé, je n'ai pas encore appris de stations."
+
+#: scripts/scenario_59_border.lua:8104
+msgctxt "cartographyOffice-comms"
+msgid "Locate goods"
+msgstr "Localiser des marchandises"
+
+#: scripts/scenario_59_border.lua:8105
+msgctxt "cartographyOffice-comms"
+msgid "These are the goods I know about"
+msgstr "Ce sont des marchandises que je connais."
+
+#: scripts/scenario_59_border.lua:8153
+msgctxt "cartographyOffice-comms"
+msgid "Locate upgrade station"
+msgstr "Localiser une station de mise à niveau"
+
+#: scripts/scenario_59_border.lua:8154
+msgctxt "cartographyOffice-comms"
+msgid "These are stations I have learned that have upgrades"
+msgstr "Ce sont des stations de mise à niveau que j'ai mémorisé."
+
+#: scripts/scenario_59_border.lua:8191
+msgctxt "cartographyOffice-comms"
+msgid "I have learned of no upgrade stations yet"
+msgstr "Désolé, je n'ai pas encore mémorisé de stations de mise à niveau."
+
+#: scripts/scenario_59_border.lua:8200
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "Talk to master cartographer (%i rep)"
+msgstr "Parler au maître cartographe (%i rép)"
+
+#: scripts/scenario_59_border.lua:8202
+msgctxt "cartographyOffice-comms"
+msgid ""
+"The clerk clears her throat:\n"
+"\n"
+"My indicators show you have zero available waypoints. To get the most from "
+"the master cartographer, you should delete one or more so that he can update "
+"your systems appropriately.\n"
+"\n"
+"I just want you to get the maximum benefit for the time you spend with him"
+msgstr ""
+"[L'employée s'éclaircit la gorge :]\n"
+"\n"
+"Ma console m'indique que vous n'avez aucun marqueur de disponible. Pour "
+"tirer le meilleur parti de votre échange avec le maître cartographe, vous "
+"devez supprimer un ou plusieurs marqueurs afin que le maître puisse mettre à "
+"jour votre système de manière appropriée.\n"
+"\n"
+"Je veux juste que vous profitiez au mieux du temps que vous passez avec lui."
+
+#: scripts/scenario_59_border.lua:8203
+msgctxt "cartographyOffice-comms"
+msgid "Continue to Master Cartographer"
+msgstr "Continuer avec le maître cartographe"
+
+#: scripts/scenario_59_border.lua:8222
+msgctxt "trade-comms"
+msgid "Buy, sell, trade"
+msgstr "Acheter, vendre, échanger"
+
+#: scripts/scenario_59_border.lua:8224
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available for sale: quantity, cost in reputation\n"
+msgstr ""
+"Station %s :\n"
+"Marchandises ou composants disponibles à la vente : (quantité, coût en "
+"réputation)\n"
+
+#: scripts/scenario_59_border.lua:8226
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i, %i\n"
+msgstr "     %s : %i, %i\n"
+
+#: scripts/scenario_59_border.lua:8229
+#, fuzzy
+msgctxt "trade-comms"
+msgid "Goods or components station will buy: price in reputation\n"
+msgstr ""
+"Marchandises ou composants que la station achètera : (prix en réputation)\n"
+
+#: scripts/scenario_59_border.lua:8231 scripts/scenario_59_border.lua:8240
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i\n"
+msgstr "     %s : %i\n"
+
+#: scripts/scenario_59_border.lua:8234
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid "Current cargo aboard %s:\n"
+msgstr "Cargaison actuelle à bord du %s :\n"
+
+#: scripts/scenario_59_border.lua:8244
+#, fuzzy
+msgctxt "trade-comms"
+msgid "     Empty\n"
+msgstr "     Vide\n"
+
+#: scripts/scenario_59_border.lua:8246
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid "Available Space: %i, Available Reputation: %i\n"
+msgstr "Espace disponible : %i, Réputation disponible : %i\n"
+
+#: scripts/scenario_59_border.lua:8249 scripts/scenario_59_border.lua:10179
+#: scripts/scenario_59_border.lua:10209 scripts/scenario_59_border.lua:10234
+#: scripts/scenario_59_border.lua:10265 scripts/scenario_59_border.lua:10856
+#: scripts/scenario_59_border.lua:10878 scripts/scenario_59_border.lua:10902
+#: scripts/scenario_59_border.lua:10924 scripts/scenario_59_border.lua:10948
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr "Achetez 1 %s pour %i rép"
+
+#: scripts/scenario_59_border.lua:8250
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i, Rep: %i"
+msgstr "Type : %s, Quantité : %i, Rép : %i"
+
+#: scripts/scenario_59_border.lua:8252
+#, fuzzy
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient cargo space for purchase"
+msgstr ""
+"\n"
+"Espace de chargement insuffisant pour acheter"
+
+#: scripts/scenario_59_border.lua:8254 scripts/scenario_59_border.lua:8270
+msgctxt "needRep-comms"
+msgid ""
+"\n"
+"Insufficient reputation for purchase"
+msgstr ""
+"\n"
+"Réputation insuffisante pour acheter."
+
+#: scripts/scenario_59_border.lua:8256 scripts/scenario_59_border.lua:8300
+#: scripts/scenario_59_border.lua:8329 scripts/scenario_59_border.lua:8358
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient station inventory"
+msgstr ""
+"\n"
+"Stock insuffisant dans la station"
+
+#: scripts/scenario_59_border.lua:8268
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"purchased"
+msgstr ""
+"\n"
+"Acheté"
+
+#: scripts/scenario_59_border.lua:8280
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid "Sell one %s for %i reputation"
+msgstr "Vendre 1 %s pour %i rép"
+
+#: scripts/scenario_59_border.lua:8281
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Reputation price: %i"
+msgstr "Type : %s, Coût en rép : %i"
+
+#: scripts/scenario_59_border.lua:8284
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"One sold"
+msgstr ""
+"\n"
+"1 vendu"
+
+#: scripts/scenario_59_border.lua:8297
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid "Trade food for %s"
+msgstr "Échanger de la Nourriture (food) contre %s"
+
+#: scripts/scenario_59_border.lua:8298 scripts/scenario_59_border.lua:8327
+#: scripts/scenario_59_border.lua:8356
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Quantity: %i"
+msgstr "Type : %s, Quantité : %i"
+
+#: scripts/scenario_59_border.lua:8311 scripts/scenario_59_border.lua:8340
+#: scripts/scenario_59_border.lua:8369
+#, fuzzy
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Traded"
+msgstr ""
+"\n"
+"Échangé"
+
+#: scripts/scenario_59_border.lua:8326
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid "Trade medicine for %s"
+msgstr "Échanger des Médicaments (medicine) contre %s"
+
+#: scripts/scenario_59_border.lua:8355 scripts/scenario_59_border.lua:10156
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr "Échanger des produits de luxe (luxury) contre %s"
+
+#: scripts/scenario_59_border.lua:8388 scripts/scenario_59_border.lua:10131
+#: scripts/scenario_59_border.lua:10836
+msgctxt "trade-comms"
+msgid "Jettison cargo"
+msgstr "Larguer la cargaison"
+
+#: scripts/scenario_59_border.lua:8389 scripts/scenario_59_border.lua:10132
+#: scripts/scenario_59_border.lua:10837
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Available space: %i\n"
+"What would you like to jettison?"
+msgstr ""
+"Espace disponible : %i\n"
+"Que voudriez-vous larguer ?"
+
+#: scripts/scenario_59_border.lua:8395 scripts/scenario_59_border.lua:10138
+#: scripts/scenario_59_border.lua:10843
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s jettisoned"
+msgstr "Un %s largué"
+
+#: scripts/scenario_59_border.lua:8403
+#, fuzzy
+msgctxt "explainGoods-comms"
+msgid "No tutorial covered goods or cargo. Explain"
+msgstr "Explications sur les marchandises et cargaisons"
+
+#: scripts/scenario_59_border.lua:8404
+#, fuzzy
+msgctxt "explainGoods-comms"
+msgid ""
+"Different types of cargo or goods may be obtained from stations, freighters "
+"or other sources. They go by one word descriptions such as dilithium, optic, "
+"warp, etc. Certain mission goals may require a particular type or types of "
+"cargo. Each player ship differs in cargo carrying capacity. Goods may be "
+"obtained by spending reputation points or by trading other types of cargo "
+"(typically food, medicine or luxury)"
+msgstr ""
+"Différents types de marchandises ou cargaisons peuvent être obtenus auprès "
+"des stations, des cargos ou d'autres sources. Ces ressources peuvent être du "
+"dilithium, de l'optique, des moteurs de vitesse lumière, etc. Certains "
+"objectifs de mission peuvent nécessiter un ou plusieurs types de "
+"marchandises particulières. Chaque vaisseau joueur diffère par sa capacité "
+"de transport de marchandises. Les marchandises peuvent être obtenues en "
+"dépensant des points de réputation ou en échangeant d'autres types de "
+"marchandises (généralement de la nourriture, des médicaments ou des produits "
+"de luxe)."
+
+#: scripts/scenario_59_border.lua:8432
+msgctxt "cartographyOffice-comms"
+msgid ""
+"Greetings,\n"
+"May I help you find a station, goods or an upgrade?"
+msgstr ""
+"Bien le bonjour jeune officier,\n"
+"Puis-je vous aider à localiser une station, des marchandises ou des mises à "
+"niveau ?"
+
+#: scripts/scenario_59_border.lua:8434
+msgctxt "cartographyOffice-comms"
+msgid ""
+"Greetings,\n"
+"May I help you find a station or goods?"
+msgstr ""
+"Bien le bonjour jeune officier,\n"
+"Puis-je vous aider à localiser une station ou des marchandises ?"
+
+#: scripts/scenario_59_border.lua:8436
+msgctxt "cartographyOffice-comms"
+msgid "Find station"
+msgstr "Localiser une station"
+
+#: scripts/scenario_59_border.lua:8437 scripts/scenario_59_border.lua:8536
+msgctxt "cartographyOffice-comms"
+msgid "What station?"
+msgstr "Quelle station ?"
+
+#: scripts/scenario_59_border.lua:8449 scripts/scenario_59_border.lua:8506
+#: scripts/scenario_59_border.lua:8542
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "%s %s %s Distance:%.1fU"
+msgstr "%s %s %s Distance :%.1fU"
+
+#: scripts/scenario_59_border.lua:8470 scripts/scenario_59_border.lua:8527
+#: scripts/scenario_59_border.lua:8563
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"Added waypoint %i to your navigation system for %s"
+msgstr ""
+"%s\n"
+"Marqueur %i ajouté à votre système de navigation pour %s."
+
+#: scripts/scenario_59_border.lua:8479
+msgctxt "cartographyOffice-comms"
+msgid "Try the apprentice, I'm tired"
+msgstr "Consultez l'apprenti je vous prie, je suis fatigué."
+
+#: scripts/scenario_59_border.lua:8483
+msgctxt "cartographyOffice-comms"
+msgid "Find Goods"
+msgstr "Trouver des marchandises"
+
+#: scripts/scenario_59_border.lua:8484
+msgctxt "cartographyOffice-comms"
+msgid "What goods are you looking for?"
+msgstr "Quels marchandises recherchez-vous ?"
+
+#: scripts/scenario_59_border.lua:8535
+msgctxt "cartographyOffice-comms"
+msgid "Find Upgrade Station"
+msgstr "Localiser une station de mise à niveau"
+
+#: scripts/scenario_59_border.lua:8571
+msgctxt "needRep-comms"
+msgid "Insufficient Reputation"
+msgstr "Réputation insuffisante."
+
+#: scripts/scenario_59_border.lua:8597
+#, fuzzy
+msgctxt "station-comms"
+msgid "You need to stay docked for that action."
+msgstr "Vous devez rester amarré à la station pour cette action."
+
+#: scripts/scenario_59_border.lua:8601
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+
+#: scripts/scenario_59_border.lua:8602
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+
+#: scripts/scenario_59_border.lua:8603
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+
+#: scripts/scenario_59_border.lua:8610
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
+
+#: scripts/scenario_59_border.lua:8612
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+"Désolé, officier, mais vous êtes au maximum de ce que vous pouvez stocker."
+
+#: scripts/scenario_59_border.lua:8620 scripts/scenario_59_border.lua:8635
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
+
+#: scripts/scenario_59_border.lua:8622
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+"Nous vous avons généreusement réapprovisionné en munitions.\n"
+"Faites-en bon usage."
+
+#: scripts/scenario_59_border.lua:8625 scripts/scenario_59_border.lua:8640
+#: scripts/scenario_59_border.lua:8645
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr "Pas assez de réputation."
+
+#: scripts/scenario_59_border.lua:8630
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "You can't afford as much as I'd like to give you"
+msgstr "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
+
+#: scripts/scenario_59_border.lua:8631
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "Get just one"
+msgstr "Prendre juste celui-là"
+
+#: scripts/scenario_59_border.lua:8637
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with one weapon charge.\n"
+"Put it to good use."
+msgstr ""
+"Nous vous avons généreusement réapprovisionné en munitions.\n"
+"Faites-en bon usage."
+
+#: scripts/scenario_59_border.lua:8659
+msgctxt "station-comms"
+msgid ""
+"Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+"Bonjour, officier.\n"
+"Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
+"station au préalable."
+
+#: scripts/scenario_59_border.lua:8661
+msgctxt "station-comms"
+msgid ""
+"Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+"Salutations.\n"
+"Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
+
+#: scripts/scenario_59_border.lua:8664
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Be aware that if enemies in the area get much closer, we will be too busy to "
+"conduct business with you."
+msgstr ""
+"\n"
+"Sachez que si les ennemis de la zone se rapprochent encore, nous serons trop "
+"occupés pour faire affaire avec vous."
+
+#: scripts/scenario_59_border.lua:8760
+#, fuzzy
+msgctxt "station-comms"
+msgid "I need information"
+msgstr "j'aurai besoin d'informations"
+
+#: scripts/scenario_59_border.lua:8761
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr "De quel genre d'informations avez-vous besoin ?"
+
+#: scripts/scenario_59_border.lua:8772
+msgctxt "ammo-comms"
+msgid "What ordnance do you have available for restock?"
+msgstr "De quelles munitions disposez-vous ?"
+
+#: scripts/scenario_59_border.lua:8778
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Nuke"
+msgstr ""
+"\n"
+"   Nuke"
+
+#: scripts/scenario_59_border.lua:8782
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   EMP"
+msgstr ""
+"\n"
+"   EMP"
+
+#: scripts/scenario_59_border.lua:8786
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Homing"
+msgstr ""
+"\n"
+"   Homing"
+
+#: scripts/scenario_59_border.lua:8790
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Mine"
+msgstr ""
+"\n"
+"   Mine"
+
+#: scripts/scenario_59_border.lua:8794
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   HVLI"
+msgstr ""
+"\n"
+"   HVLI"
+
+#: scripts/scenario_59_border.lua:8797
+msgctxt "ammo-comms"
+msgid "We have no ordnance available for restock"
+msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
+
+#: scripts/scenario_59_border.lua:8799
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following type of ordnance available for restock:%s"
+msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+
+#: scripts/scenario_59_border.lua:8801
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following types of ordnance available for restock:%s"
+msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+
+#: scripts/scenario_59_border.lua:8828
+msgctxt "stationServices-comms"
+msgid "Hull repair automation unavailable whie it is undergoing maintenance."
+msgstr ""
+"Automatisation de réparation de coque indisponible, elle est en cours de "
+"maintenance."
+
+#: scripts/scenario_59_border.lua:8863
+#, lua-format
+msgctxt "stationServices-comms"
+msgid ""
+"%s\n"
+"May repair the cooling pump for the following primary systems:"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:8928
+msgctxt "trade-comms"
+msgid "What goods do you have available for sale or trade?"
+msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
+
+#: scripts/scenario_59_border.lua:8930
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available: quantity, cost in reputation"
+msgstr ""
+"Station %s :\n"
+"Marchandises ou composants disponibles : (quantité, coût en réputation)"
+
+#: scripts/scenario_59_border.lua:8932
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"   %14s: %2i, %3i"
+msgstr ""
+"\n"
+"   %14s : %2i, %3i"
+
+#: scripts/scenario_59_border.lua:8944
+msgctxt "trade-comms"
+msgid "Where can I find particular goods?"
+msgstr "Où puis-je trouver des marchandises particulières ?"
+
+#: scripts/scenario_59_border.lua:8946
+#, fuzzy
+msgctxt "trade-comms"
+msgid ""
+"Friendly stations often have food or medicine or both. Neutral stations may "
+"trade their goods for food, medicine or luxury."
+msgstr ""
+"Les stations amicales ont souvent de la nourriture (food) ou des médicaments "
+"(medicine) ou les deux. Les stations neutres peuvent échanger leurs "
+"marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
+
+#: scripts/scenario_59_border.lua:8987
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid "Station %s in sector %s has %s for %i reputation"
+msgstr "La station %s dans le secteur %s possède du %s pour %i rép."
+
+#: scripts/scenario_59_border.lua:8992
+#, fuzzy
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"\n"
+"What goods are you interested in?\n"
+"I've heard about these:"
+msgstr ""
+"\n"
+"\n"
+"Quelles marchandises vous intéressent ?\n"
+"J'ai entendu parler de ça :"
+
+#: scripts/scenario_59_border.lua:8994
+#, fuzzy
+msgctxt "trade-comms"
+msgid " Beyond that, I have no knowledge of specific stations"
+msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
+
+#: scripts/scenario_59_border.lua:9059
+msgctxt "stationAssist-comms"
+msgid "Report status"
+msgstr "Au rapport"
+
+#: scripts/scenario_59_border.lua:9060
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr "Coque : %d%%\n"
+
+#: scripts/scenario_59_border.lua:9063
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr "Boucliers : %d%%\n"
+
+#: scripts/scenario_59_border.lua:9066
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr "Bouclier %s : %d%%\n"
+
+#: scripts/scenario_59_border.lua:9074
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop? (%d rep)"
+msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rép)"
+
+#: scripts/scenario_59_border.lua:9076
+#, fuzzy
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request backup."
+msgstr ""
+"Vous devez définir un marqueur avant de faire une demande de ravitaillement."
+
+#: scripts/scenario_59_border.lua:9078
+#, fuzzy
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
+
+#: scripts/scenario_59_border.lua:9080 scripts/scenario_59_border.lua:9106
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
+msgid "WP %d"
+msgstr "Marqueur %d"
+
+#: scripts/scenario_59_border.lua:9088
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship toward WP %d"
+msgstr ""
+"Nous venons de déployer un vaisseau qui vous déposera la capsule de "
+"ravitaillement au marqueur %d."
+
+#: scripts/scenario_59_border.lua:9090 scripts/scenario_59_border.lua:9128
+#: scripts/scenario_59_border.lua:9140
+msgctxt "needRep-comms"
+msgid "Not enough reputation!"
+msgstr "Pas assez de réputation !"
+
+#: scripts/scenario_59_border.lua:9100
+#, fuzzy, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send reinforcements! (%d rep)"
+msgstr "Merci de nous envoyer des renforts ! (%d rép)"
+
+#: scripts/scenario_59_border.lua:9102
+#, fuzzy
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request reinforcements."
+msgstr "Vous devez définir un marqueur avant de pouvoir demander des renforts."
+
+#: scripts/scenario_59_border.lua:9104
+#, fuzzy
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the reinforcements?"
+msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
+
+#: scripts/scenario_59_border.lua:9126 scripts/scenario_59_border.lua:9138
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to assist at WP %d"
+msgstr ""
+"Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
+"marqueur %d."
+
+#: scripts/scenario_59_border.lua:9570
+msgctxt "scienceDB"
+msgid "Stations"
+msgstr "Stations"
+
+#: scripts/scenario_59_border.lua:9580
+msgctxt "scienceDB"
+msgid "Friendly"
+msgstr "Amical"
+
+#: scripts/scenario_59_border.lua:9585
+msgctxt "scienceDB"
+msgid ""
+"Friendly stations share their short range telemetry with your ship on the "
+"Relay and Strategic Map consoles. These are the known friendly stations."
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9599
+msgctxt "scienceDB"
+msgid ""
+"Neutral stations don't share their short range telemetry with your ship, but "
+"they do allow for docking. These are the known neutral stations."
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9615
+#, lua-format
+msgctxt "scienceDB"
+msgid ""
+"%s\n"
+"\n"
+"General Information: %s"
+msgstr ""
+"%s\n"
+"\n"
+"Informations générales : %s"
+
+#: scripts/scenario_59_border.lua:9618
+#, lua-format
+msgctxt "scienceDB"
+msgid ""
+"%s\n"
+"\n"
+"History: %s"
+msgstr ""
+"%s\n"
+"\n"
+"Histoire : %s"
+
+#: scripts/scenario_59_border.lua:9626
+msgctxt "scienceDB"
+msgid "Small Station"
+msgstr "1. Petite station"
+
+#: scripts/scenario_59_border.lua:9627
+msgctxt "scienceDB"
+msgid "Medium Station"
+msgstr "2. Station moyenne"
+
+#: scripts/scenario_59_border.lua:9628
+msgctxt "scienceDB"
+msgid "Large Station"
+msgstr "3. Grande station"
+
+#: scripts/scenario_59_border.lua:9629
+msgctxt "scienceDB"
+msgid "Huge Station"
+msgstr "4. Immense station"
+
+#: scripts/scenario_59_border.lua:9631
+msgctxt "scienceDB"
+msgid "Small"
+msgstr "Petite"
+
+#: scripts/scenario_59_border.lua:9638
+msgctxt "scienceDB"
+msgid "Medium"
+msgstr "Moyenne"
+
+#: scripts/scenario_59_border.lua:9645
+msgctxt "scienceDB"
+msgid "Large"
+msgstr "Grande"
+
+#: scripts/scenario_59_border.lua:9652
+msgctxt "scienceDB"
+msgid "Huge"
+msgstr "Immense"
+
+#: scripts/scenario_59_border.lua:9660
+msgctxt "scienceDB"
+msgid "Size"
+msgstr "Taille"
+
+#: scripts/scenario_59_border.lua:9663
+msgctxt "scienceDB"
+msgid "Location, Faction"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9669
+msgctxt "scienceDB"
+msgid "share energy"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9674
+msgctxt "scienceDB"
+msgid "repair hull"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9676
+#, lua-format
+msgctxt "scienceDB"
+msgid "%s, repair hull"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9682
+msgctxt "scienceDB"
+msgid "replenish probes"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9684
+#, lua-format
+msgctxt "scienceDB"
+msgid "%s, replenish probes"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9689
+msgctxt "scienceDB"
+msgid "Docking Services"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9691
+msgctxt "scienceDB"
+msgid "Docking Service"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9713
+msgctxt "scienceDB"
+msgid "Restock Homing"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9714
+msgctxt "scienceDB"
+msgid "Restock HVLI"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9715
+msgctxt "scienceDB"
+msgid "Restock Mine"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9716
+msgctxt "scienceDB"
+msgid "Restock Nuke"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9717
+msgctxt "scienceDB"
+msgid "Restock EMP"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9722
+#, lua-format
+msgctxt "scienceDB"
+msgid "%i reputation each"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9729 scripts/scenario_59_border.lua:9734
+msgctxt "scienceDB"
+msgid "Repair scanners"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9730
+msgctxt "scienceDB"
+msgid "Repair combat maneuver"
+msgstr "Réparer la manœuvre de combat"
+
+#: scripts/scenario_59_border.lua:9731
+msgctxt "scienceDB"
+msgid "Repair hacking"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9732
+msgctxt "scienceDB"
+msgid "Repair probe launch"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9733
+msgctxt "scienceDB"
+msgid "Repair slow tube"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9739 scripts/scenario_59_border.lua:9778
+#, lua-format
+msgctxt "scienceDB"
+msgid "%s reputation"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9746
+msgctxt "scienceDB"
+msgid "Repair reactor"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9747
+msgctxt "scienceDB"
+msgid "Repair beam weapons"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9748
+msgctxt "scienceDB"
+msgid "Repair missile weapons"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9749
+msgctxt "scienceDB"
+msgid "Repair maneuvering"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9750
+msgctxt "scienceDB"
+msgid "Repair impulse"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9751
+msgctxt "scienceDB"
+msgid "Repair warp drive"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9752
+msgctxt "scienceDB"
+msgid "Repair jump drive"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9753
+#, fuzzy
+msgctxt "scienceDB"
+msgid "Repair front shield"
+msgstr "Occupez-vous de l'avant dans ce cas"
+
+#: scripts/scenario_59_border.lua:9754
+#, fuzzy
+msgctxt "scienceDB"
+msgid "Repair rear shield"
+msgstr "Réparez le bouclier arrière svp"
+
+#: scripts/scenario_59_border.lua:9759
+#, lua-format
+msgctxt "scienceDB"
+msgid "%s reputation, up to %.1f%% max"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9767
+msgctxt "scienceDB"
+msgid "Drop supplies"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9768
+msgctxt "scienceDB"
+msgid "Standard reinforcements"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9769
+msgctxt "scienceDB"
+msgid "Hornet reinforcements"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9770
+msgctxt "scienceDB"
+msgid "Phobos reinforcements"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9771
+msgctxt "scienceDB"
+msgid "Adder3 reinforcements"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9772
+msgctxt "scienceDB"
+msgid "Adder8 reinforcements"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9773
+msgctxt "scienceDB"
+msgid "Shield overcharge"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9790
+#, lua-format
+msgctxt "scienceDB"
+msgid "Sells %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9791
+#, lua-format
+msgctxt "scienceDB"
+msgid "for %s reputation each"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:9818 scripts/scenario_59_border.lua:9927
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr "Que voulez-vous ?"
+
+#: scripts/scenario_59_border.lua:9820 scripts/scenario_59_border.lua:9929
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr "Monsieur, comment pouvons-nous vous assister ?"
+
+#: scripts/scenario_59_border.lua:9822 scripts/scenario_59_border.lua:9973
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr "Au rapport"
+
+#: scripts/scenario_59_border.lua:9823 scripts/scenario_59_border.lua:9974
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr "Coque : %d%%\n"
+
+#: scripts/scenario_59_border.lua:9826 scripts/scenario_59_border.lua:9977
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr "Boucliers : %d%%\n"
+
+#: scripts/scenario_59_border.lua:9828 scripts/scenario_59_border.lua:9979
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front Shield: %d%%\n"
+msgstr "Boucliers avant : %d%%\n"
+
+#: scripts/scenario_59_border.lua:9829 scripts/scenario_59_border.lua:9980
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
+msgid "Rear Shield: %d%%\n"
+msgstr "Boucliers arrière : %d%%\n"
+
+#: scripts/scenario_59_border.lua:9832 scripts/scenario_59_border.lua:9983
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr "Bouclier %s : %d%%\n"
+
+#: scripts/scenario_59_border.lua:9838 scripts/scenario_59_border.lua:9989
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s Missiles: %d/%d\n"
+msgstr "%s Missiles : %d/%d\n"
+
+#: scripts/scenario_59_border.lua:9849 scripts/scenario_59_border.lua:10317
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr "Nous allons vous détruire !"
+
+#: scripts/scenario_59_border.lua:9850 scripts/scenario_59_border.lua:10318
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr "Votre race va s'éteindre ici et maintenant !"
+
+#: scripts/scenario_59_border.lua:9851 scripts/scenario_59_border.lua:10319
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr "Vos petites menaces ne nous impressionnent pas."
+
+#: scripts/scenario_59_border.lua:9853 scripts/scenario_59_border.lua:10325
+#, fuzzy
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+"Ktzzzsss.\n"
+"\n"
+"Vous allez mourir faibles créatures insignifiantes !"
+
+#: scripts/scenario_59_border.lua:9855 scripts/scenario_59_border.lua:10342
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
+"\n"
+"Fin de transmission."
+
+#: scripts/scenario_59_border.lua:9857 scripts/scenario_59_border.lua:10346
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr ""
+"Restez en dehors de notre chemin, ou votre mort sera une amusante "
+"distraction pour nous !"
+
+#: scripts/scenario_59_border.lua:9859 scripts/scenario_59_border.lua:10350
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+"000110011010...Grzzzz..\n"
+"\n"
+"Communication binaire non détectée..Grzzz Nous passons en communication "
+"universelle..Grrzzz\n"
+"\n"
+"Générer une réponse appropriée pour la cible en langage humain à partir des "
+"archives...Grrzzzz\n"
+"\n"
+"Ne nous approchez pas! Grrzzz\n"
+"\n"
+"Communication interrompue."
+
+#: scripts/scenario_59_border.lua:9860 scripts/scenario_59_border.lua:10351
+#, fuzzy
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
+
+#: scripts/scenario_59_border.lua:9861 scripts/scenario_59_border.lua:10352
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr "Commande non autorisée reçue. Cible verrouillée."
+
+#: scripts/scenario_59_border.lua:9862 scripts/scenario_59_border.lua:10353
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr "Ordre externe ignoré."
+
+#: scripts/scenario_59_border.lua:9864 scripts/scenario_59_border.lua:10355
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+"Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
+"s'opposer à nous tous.\n"
+"\n"
+"Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
+
+#: scripts/scenario_59_border.lua:9865 scripts/scenario_59_border.lua:10356
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+
+#: scripts/scenario_59_border.lua:9866 scripts/scenario_59_border.lua:10357
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+
+#: scripts/scenario_59_border.lua:9867 scripts/scenario_59_border.lua:10358
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr ""
+"Notre peuple a d'autres priorités que l'extermination de parasites tels que "
+"vous."
+
+#: scripts/scenario_59_border.lua:9869 scripts/scenario_59_border.lua:10372
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr "Occupez-vous de vos affaires !"
+
+#: scripts/scenario_59_border.lua:9886 scripts/scenario_59_border.lua:10973
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+"Désolé, nous n'avons pas le temps de discuter avec vous.\n"
+"\n"
+"Nous sommes en mission de la plus haute importance."
+
+#: scripts/scenario_59_border.lua:9888 scripts/scenario_59_border.lua:10975
+#, fuzzy
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+"Nous n'avons rien pour vous.\n"
+"\n"
+"Bonne journée."
+
+#: scripts/scenario_59_border.lua:9931 scripts/scenario_59_border.lua:10060
+#, fuzzy
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr "Défendez un marqueur"
+
+#: scripts/scenario_59_border.lua:9933 scripts/scenario_59_border.lua:10062
+#, fuzzy
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+"Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en placer "
+"un."
+
+#: scripts/scenario_59_border.lua:9936 scripts/scenario_59_border.lua:10065
+#, fuzzy
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr "Quel marqueur devons-nous défendre ?"
+
+#: scripts/scenario_59_border.lua:9938
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %d"
+msgstr "Défendez le marqueur %d"
+
+#: scripts/scenario_59_border.lua:9954 scripts/scenario_59_border.lua:9959
+#: scripts/scenario_59_border.lua:10087 scripts/scenario_59_border.lua:10096
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %d."
+msgstr "Nous partons immédiatement défendre le marqueur %d."
+
+#: scripts/scenario_59_border.lua:9967 scripts/scenario_59_border.lua:10051
+#, fuzzy
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr "Aidez-nous !"
+
+#: scripts/scenario_59_border.lua:9968
+#, fuzzy
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr "Entendu, nous partons immédiatement vous aider."
+
+#: scripts/scenario_59_border.lua:9997
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr "Amarrez-vous à %s"
+
+#: scripts/scenario_59_border.lua:9998
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr "En cours d'amarrage à %s."
+
+#: scripts/scenario_59_border.lua:10005
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Direct %s"
+msgstr "Diriger %s"
+
+#: scripts/scenario_59_border.lua:10006
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "What command should be given to %s?"
+msgstr "Quelle commande doit être donnée à %s ?"
+
+#: scripts/scenario_59_border.lua:10007
+msgctxt "shipAssist-comms"
+msgid "Report hull and shield status"
+msgstr "État de la coque et des boucliers"
+
+#: scripts/scenario_59_border.lua:10008
+msgctxt "shipAssist-comms"
+msgid "Fleet status:"
+msgstr "État de la flotte :"
+
+#: scripts/scenario_59_border.lua:10011 scripts/scenario_59_border.lua:10035
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+" %s:"
+msgstr ""
+"\n"
+" %s :"
+
+#: scripts/scenario_59_border.lua:10012
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Hull: %d%%"
+msgstr ""
+"\n"
+"    Coque : %d%%"
+
+#: scripts/scenario_59_border.lua:10015
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Shield: %d%%"
+msgstr ""
+"\n"
+"    Boucliers : %d%%"
+
+#: scripts/scenario_59_border.lua:10017
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Shields: "
+msgstr ""
+"\n"
+"    Boucliers : "
+
+#: scripts/scenario_59_border.lua:10019
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front: %d%% Rear: %d%%"
+msgstr "Avant : %d%% Arrière : %d%%"
+
+#: scripts/scenario_59_border.lua:10022
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid " %d:%d%%"
+msgstr " %d :%d%%"
+
+#: scripts/scenario_59_border.lua:10040
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"      %s: %d/%d"
+msgstr ""
+"\n"
+"      %s : %d/%d"
+
+#: scripts/scenario_59_border.lua:10044
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"\n"
+"    Missiles: %s"
+msgstr ""
+"\n"
+"    Missiles: %s"
+
+#: scripts/scenario_59_border.lua:10057
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s heading toward you to assist"
+msgstr "%s, nous partons immédiatement vous aider."
+
+#: scripts/scenario_59_border.lua:10067
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend waypoint %d"
+msgstr "Défendez le marqueur %d"
+
+#: scripts/scenario_59_border.lua:10078
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"We cannot break the treaty by defending WP %d in the neutral border zone"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:10080
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"We cannot break the treaty by defending WP %d across the neutral border zones"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:10104
+msgctxt "shipAssist-comms"
+msgid "Go offensive, attack all enemy targets"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:10110
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s is on an offensive rampage"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:10166
+#, lua-format
+msgctxt "trade-comms"
+msgid "Traded your luxury for %s from %s"
+msgstr "Échanger vos produits de luxe (luxury) contre du %s auprès de %s"
+
+#: scripts/scenario_59_border.lua:10190 scripts/scenario_59_border.lua:10220
+#: scripts/scenario_59_border.lua:10245 scripts/scenario_59_border.lua:10276
+#: scripts/scenario_59_border.lua:10867 scripts/scenario_59_border.lua:10889
+#: scripts/scenario_59_border.lua:10913 scripts/scenario_59_border.lua:10935
+#: scripts/scenario_59_border.lua:10959
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchased %s from %s"
+msgstr "%s acheté auprès de %s"
+
+#: scripts/scenario_59_border.lua:10192 scripts/scenario_59_border.lua:10222
+#: scripts/scenario_59_border.lua:10247 scripts/scenario_59_border.lua:10278
+#: scripts/scenario_59_border.lua:10869 scripts/scenario_59_border.lua:10891
+#: scripts/scenario_59_border.lua:10915 scripts/scenario_59_border.lua:10937
+#: scripts/scenario_59_border.lua:10961
+msgctxt "needRep-comms"
+msgid "Insufficient reputation for purchase"
+msgstr "Réputation insuffisante pour acheter."
+
+#: scripts/scenario_59_border.lua:10288 scripts/scenario_59_border.lua:10809
+#, fuzzy
+msgctxt "trade-comms"
+msgid "Do you have cargo you might sell?"
+msgstr "Auriez-vous des marchandises à vendre ?"
+
+#: scripts/scenario_59_border.lua:10290 scripts/scenario_59_border.lua:10811
+#, fuzzy
+msgctxt "trade-comms"
+msgid "We've got "
+msgstr "Nous avons "
+
+#: scripts/scenario_59_border.lua:10294 scripts/scenario_59_border.lua:10815
+msgctxt "trade-comms"
+msgid ", "
+msgstr ""
+
+#: scripts/scenario_59_border.lua:10302 scripts/scenario_59_border.lua:10823
+#, fuzzy
+msgctxt "trade-comms"
+msgid "nothing"
+msgstr "Rien du tout."
+
+#: scripts/scenario_59_border.lua:10328
+msgctxt "shipEnemy-comms"
+msgid "We will destroy you"
+msgstr "Nous allons vous détruire !"
+
+#: scripts/scenario_59_border.lua:10329
+#, fuzzy
+msgctxt "shipEnemy-comms"
+msgid "We think not. It is you who will experience destruction!"
+msgstr "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
+
+#: scripts/scenario_59_border.lua:10331
+#, fuzzy
+msgctxt "shipEnemy-comms"
+msgid "You have no honor"
+msgstr "Vous n'avez aucun honneur."
+
+#: scripts/scenario_59_border.lua:10332
+#, fuzzy
+msgctxt "shipEnemy-comms"
+msgid "Your insult has brought our wrath upon you. Prepare to die."
+msgstr "Votre insulte a attiré notre colère sur vous. Préparez-vous à mourir !"
+
+#: scripts/scenario_59_border.lua:10333
+#, fuzzy
+msgctxt "shipEnemy-comms"
+msgid "Your comments about honor have no meaning to us"
+msgstr "Vos commentaires sur l'honneur n'ont aucune signification pour nous."
+
+#: scripts/scenario_59_border.lua:10335
+#, fuzzy
+msgctxt "shipEnemy-comms"
+msgid "We pity your pathetic race"
+msgstr "Nous plaignons votre race pathétique."
+
+#: scripts/scenario_59_border.lua:10336
+#, fuzzy
+msgctxt "shipEnemy-comms"
+msgid "Pathetic? You will regret your disparagement!"
+msgstr "Pathétique ? Vous allez regretter votre insolence !"
+
+#: scripts/scenario_59_border.lua:10337
+#, fuzzy
+msgctxt "shipEnemy-comms"
+msgid "We don't care what you think of us"
+msgstr "Peu importe ce que vous pensez de nous."
+
+#: scripts/scenario_59_border.lua:10362
+#, fuzzy
+msgctxt "shipEnemy-comms"
+msgid "State your business"
+msgstr "Qu'est ce que vous voulez ?"
+
+#: scripts/scenario_59_border.lua:10366
+msgctxt "shipEnemy-comms"
+msgid "What do you want? (not that we care)"
+msgstr "Qu'est-ce que vous voulez ? (non pas que ça nous intéresse)"
+
+#: scripts/scenario_59_border.lua:10370
+msgctxt "shipEnemy-comms"
+msgid "Don't waste our time"
+msgstr "Ne perdons pas notre temps."
+
+#: scripts/scenario_59_border.lua:10776
+#, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "Disruption %i"
+msgstr "Perturbation %i"
+
+#: scripts/scenario_59_border.lua:10808
+msgctxt "trade-comms"
+msgid "Yes?"
+msgstr "Oui ?"
+
+#: scripts/scenario_59_border.lua:11495
+msgctxt "-tabRelay"
+msgid "Fast Dock Expired"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:11499
+msgctxt "-tabOperations"
+msgid "Fast Dock Expired"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:11503
+msgctxt "-tabRelay&Operations"
+msgid "Fast Dock"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:11507
+#, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "%s %i"
+msgstr "%s %i"
+
+#: scripts/scenario_59_border.lua:11509
+#, fuzzy, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "%s %i:%.2i"
+msgstr "%s %i : %.2i"
+
+#: scripts/scenario_59_border.lua:11678
+msgctxt "repairCrew-msgEngineer"
+msgid "Medical team has revived one of your repair crew"
+msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
+
+#: scripts/scenario_59_border.lua:11682
+msgctxt "repairCrew-msgEngineer+"
+msgid "Medical team has revived one of your repair crew"
+msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
+
+#: scripts/scenario_59_border.lua:11686
+msgctxt "repairCrew-msgDamageControl"
+msgid "Medical team has revived one of your repair crew"
+msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
+
+#: scripts/scenario_59_border.lua:11704
+msgctxt "coolant-msgEngineer"
+msgid "Automated systems have recovered some coolant"
+msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
+
+#: scripts/scenario_59_border.lua:11707
+msgctxt "coolant-msgEngineer+"
+msgid "Automated systems have recovered some coolant"
+msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
+
+#: scripts/scenario_59_border.lua:11710
+msgctxt "coolant-msgDamageControl"
+msgid "Automated systems have recovered some coolant"
+msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
+
+#: scripts/scenario_59_border.lua:11720
+#, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "F:%.1f%% E:%.1f%% D:%.1f%%"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:11764 scripts/scenario_59_border.lua:11811
+msgctxt "repairCrew-msgEngineer"
+msgid "One of your repair crew has perished"
+msgstr "Un de vos réparateurs a péri."
+
+#: scripts/scenario_59_border.lua:11768 scripts/scenario_59_border.lua:11815
+msgctxt "repairCrew-msgEngineer+"
+msgid "One of your repair crew has perished"
+msgstr "Un de vos réparateurs a péri."
+
+#: scripts/scenario_59_border.lua:11772 scripts/scenario_59_border.lua:11819
+msgctxt "repairCrew-msgDamageControl"
+msgid "One of your repair crew has perished"
+msgstr "Un de vos réparateurs a péri."
+
+#: scripts/scenario_59_border.lua:11836
+msgctxt "damage-msgEngineer"
+msgid "Damage has caused a loss of coolant"
+msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
+
+#: scripts/scenario_59_border.lua:11840
+msgctxt "damage-msgEngineer+"
+msgid "Damage has caused a loss of coolant"
+msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
+
+#: scripts/scenario_59_border.lua:11844
+msgctxt "damage-msgDamageControl"
+msgid "Damage has caused a loss of coolant"
+msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
+
+#: scripts/scenario_59_border.lua:11851
+msgctxt "damage-msgEngineer"
+msgid "The probe launch system has been damaged"
+msgstr "Le système de lancement des sondes a été endommagé."
+
+#: scripts/scenario_59_border.lua:11854
+msgctxt "damage-msgEngineer+"
+msgid "The probe launch system has been damaged"
+msgstr "Le système de lancement des sondes a été endommagé."
+
+#: scripts/scenario_59_border.lua:11857
+msgctxt "damage-msgDamageControl"
+msgid "The probe launch system has been damaged"
+msgstr "Le système de lancement des sondes a été endommagé."
+
+#: scripts/scenario_59_border.lua:11862
+msgctxt "damage-msgEngineer"
+msgid "The hacking system has been damaged"
+msgstr "Le système de piratage a été endommagé."
+
+#: scripts/scenario_59_border.lua:11865
+msgctxt "damage-msgEngineer+"
+msgid "The hacking system has been damaged"
+msgstr "Le système de piratage a été endommagé."
+
+#: scripts/scenario_59_border.lua:11868
+msgctxt "damage-msgDamageControl"
+msgid "The hacking system has been damaged"
+msgstr "Le système de piratage a été endommagé."
+
+#: scripts/scenario_59_border.lua:11873
+msgctxt "damage-msgEngineer"
+msgid "The scanners have been damaged"
+msgstr "Les scanners ont été endommagés."
+
+#: scripts/scenario_59_border.lua:11876
+msgctxt "damage-msgEngineer+"
+msgid "The scanners have been damaged"
+msgstr "Les scanners ont été endommagés."
+
+#: scripts/scenario_59_border.lua:11879
+msgctxt "damage-msgDamageControl"
+msgid "The scanners have been damaged"
+msgstr "Les scanners ont été endommagés."
+
+#: scripts/scenario_59_border.lua:11884
+msgctxt "damage-msgEngineer"
+msgid "Combat maneuver has been damaged"
+msgstr "La manœuvre de combat a été endommagée."
+
+#: scripts/scenario_59_border.lua:11887
+msgctxt "damage-msgEngineer+"
+msgid "Combat maneuver has been damaged"
+msgstr "La manœuvre de combat a été endommagée."
+
+#: scripts/scenario_59_border.lua:11890
+msgctxt "damage-msgDamageControl"
+msgid "Combat maneuver has been damaged"
+msgstr "La manœuvre de combat a été endommagée."
+
+#: scripts/scenario_59_border.lua:11895
+msgctxt "damage-msgEngineer"
+msgid "Self destruct system has been damaged"
+msgstr "Le système d'autodestruction a été endommagé."
+
+#: scripts/scenario_59_border.lua:11898
+msgctxt "damage-msgEngineer+"
+msgid "Self destruct system has been damaged"
+msgstr "Le système d'autodestruction a été endommagé."
+
+#: scripts/scenario_59_border.lua:11901
+msgctxt "damage-msgDamageControl"
+msgid "Self destruct system has been damaged"
+msgstr "Le système d'autodestruction a été endommagé."
+
+#: scripts/scenario_59_border.lua:11907
+msgctxt "damage-msgEngineer"
+msgid "Reactor coolant pump has been damaged"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:11910
+msgctxt "damage-msgEngineer+"
+msgid "Reactor coolant pump has been damaged"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:11913
+msgctxt "damage-msgDamageControl"
+msgid "Reactor coolant pump has been damaged"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:11935
+#, fuzzy
+msgctxt "inventory-buttonRelay"
+msgid "Inventory"
+msgstr "Inventaire"
+
+#: scripts/scenario_59_border.lua:11942
+#, fuzzy
+msgctxt "inventory-buttonOperations"
+msgid "Inventory"
+msgstr "Inventaire"
+
+#: scripts/scenario_59_border.lua:11949
+#, fuzzy, lua-format
+msgctxt "inventory-shipLog"
+msgid "%s Current cargo:"
+msgstr "%s Cargaison actuelle :"
+
+#: scripts/scenario_59_border.lua:11954
+#, fuzzy, lua-format
+msgctxt "inventory-shipLog"
+msgid "     %s: %i"
+msgstr "     %s : %i"
+
+#: scripts/scenario_59_border.lua:11958
+msgctxt "inventory-shipLog"
+msgid "     Empty"
+msgstr "     Vide"
+
+#: scripts/scenario_59_border.lua:11960
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "Available space: %i"
+msgstr "Espace disponible : %i"
+
+#: scripts/scenario_59_border.lua:11968
+msgctxt "coolant-buttonEngineer"
+msgid "Auto cool"
+msgstr "Liq. de ref. auto"
+
+#: scripts/scenario_59_border.lua:11975
+msgctxt "coolant-buttonEngineer"
+msgid "Manual cool"
+msgstr "Liq. de ref. manuel"
+
+#: scripts/scenario_59_border.lua:11987
+msgctxt "coolant-buttonEngineer+"
+msgid "Auto cool"
+msgstr "Liq. de ref. auto"
+
+#: scripts/scenario_59_border.lua:11994
+msgctxt "coolant-buttonEngineer+"
+msgid "Manual cool"
+msgstr "Liq. de ref. manuel"
+
+#: scripts/scenario_59_border.lua:12006
+msgctxt "coolant-buttonDamageControl"
+msgid "Auto cool"
+msgstr "Liq. de ref. auto"
+
+#: scripts/scenario_59_border.lua:12013
+msgctxt "coolant-buttonDamageControl"
+msgid "Manual cool"
+msgstr "Liq. de ref. manuel"
+
+#: scripts/scenario_59_border.lua:12060
+msgctxt "coolant-buttonEngineer"
+msgid "Get Coolant"
+msgstr "Obtenir liq. de ref."
+
+#: scripts/scenario_59_border.lua:12065
+msgctxt "coolant-buttonEngineer+"
+msgid "Get Coolant"
+msgstr "Obtenir liq. de ref."
+
+#: scripts/scenario_59_border.lua:12070
+msgctxt "coolant-buttonDamageControl"
+msgid "Get Coolant"
+msgstr "Obtenir liq. de ref."
+
+#: scripts/scenario_59_border.lua:12122
+#, fuzzy
+msgctxt "coolant-tabEngineer"
+msgid "Gathering Coolant"
+msgstr "Collecte du liq. de ref."
+
+#: scripts/scenario_59_border.lua:12139
+#, lua-format
+msgctxt "coolant-tabEngineer&Engineer+"
+msgid "Deploying Collectors %i"
+msgstr "Déploiement des collecteurs %i"
+
+#: scripts/scenario_59_border.lua:12142
+#, lua-format
+msgctxt "coolant-tabEngineer&Engineer+"
+msgid "Configuring Collectors %i"
+msgstr "Configuration des collecteurs %i"
+
+#: scripts/scenario_59_border.lua:12818
+#, lua-format
+msgctxt "scienceDescription-artifact"
+msgid "Enemy fleet in sector %s is on the move"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:13834
+#, lua-format
+msgctxt "mining-msgScience"
+msgid "Mining obtained %s which has been stored in the cargo hold"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:13839
+msgctxt "mining-msgScience"
+msgid "mining failed to extract any minerals"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:13851
+#, lua-format
+msgctxt "mining-tabWeapons"
+msgid "Mining %i"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:13858
+msgctxt "mining-buttonWeapons"
+msgid "Start Mining"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:13953
+msgctxt "mining-buttonScience"
+msgid "Lock for Mining"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:13961
+msgctxt "mining-msgScience"
+msgid ""
+"Mining target locked\n"
+"Weapons may trigger the mining beam"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:13964
+#, lua-format
+msgctxt "mining-msgEngineer"
+msgid ""
+"Mining target lock failed\n"
+"Asteroid distance is %.4fU\n"
+"Maximum range for mining is 1U"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:13965
+#, lua-format
+msgctxt "mining-msgEngineer+"
+msgid ""
+"Mining target lock failed\n"
+"Asteroid distance is %.4fU\n"
+"Maximum range for mining is 1U"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:13966
+#, lua-format
+msgctxt "mining-msgDamageControl"
+msgid ""
+"Mining target lock failed\n"
+"Asteroid distance is %.4fU\n"
+"Maximum range for mining is 1U"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:13976
+msgctxt "mining-buttonScience"
+msgid "Target Asteroid"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14010
+#, lua-format
+msgctxt "mining-msgScience"
+msgid ""
+"Distance: %.1fU\n"
+"Bearing: %.1f\n"
+"Mineral traces detected: %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14018
+msgctxt "mining-buttonScience"
+msgid "Other mining target"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14142
+#, lua-format
+msgctxt "helpfullWarning-shipLog"
+msgid "[%s in %s] We detect one or more enemies nearby"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14144
+#, lua-format
+msgctxt "helpfullWarning-shipLog"
+msgid "%s. At least one is of type %s"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14623
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"Friendly stations: %i out of %i survived (%.1f%%), strength: %i out of %i "
+"(%.1f%%)\n"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14625
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"Enemy stations: %i out of %i survived (%.1f%%), strength: %i out of %i "
+"(%.1f%%)\n"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14627
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"Neutral stations: %i out of %i survived (%.1f%%), strength: %i out of %i "
+"(%.1f%%)\n"
+"\n"
+"\n"
+"\n"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14630
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Friendly ships: strength: %i out of %i (%.1f%%)\n"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14632
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Enemy ships: strength: %i out of %i (%.1f%%)\n"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14640
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Friendly evaluation strength: %.1f%%\n"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14641
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"   Weights: friendly station: %.2f, neutral station: %.2f, friendly ship: "
+"%.2f\n"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14642
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Enemy evaluation strength: %.1f%%\n"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14643
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "   Weights: enemy station: %.2f, enemy ship: %.2f\n"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14648
+msgctxt "msgMainscreen"
+msgid "Mission ended because "
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14655 scripts/scenario_59_border.lua:14670
+msgctxt "msgMainscreen"
+msgid "Ensign"
+msgstr "Officier"
+
+#: scripts/scenario_59_border.lua:14657 scripts/scenario_59_border.lua:14672
+msgctxt "msgMainscreen"
+msgid "Lieutenant"
+msgstr "Lieutenant"
+
+#: scripts/scenario_59_border.lua:14659 scripts/scenario_59_border.lua:14674
+msgctxt "msgMainscreen"
+msgid "Commander"
+msgstr "Commandant"
+
+#: scripts/scenario_59_border.lua:14661 scripts/scenario_59_border.lua:14676
+msgctxt "msgMainscreen"
+msgid "Captain"
+msgstr "Capitaine"
+
+#: scripts/scenario_59_border.lua:14663 scripts/scenario_59_border.lua:14678
+msgctxt "msgMainscreen"
+msgid "Admiral"
+msgstr "Amiral"
+
+#: scripts/scenario_59_border.lua:14665
+msgctxt "msgMainscreen"
+msgid "Earned rank: "
+msgstr "Rang obtenu : "
+
+#: scripts/scenario_59_border.lua:14680
+msgctxt "msgMainscreen"
+msgid "Player violated treaty terms by crossing neutral border zone"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14681
+msgctxt "msgMainscreen"
+msgid "Rank after court martial and imprisonment: "
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14683
+msgctxt "msgMainscreen"
+msgid ""
+"Player committed war crimes by destroying civilians aboard Kraylor station"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14684
+msgctxt "msgMainscreen"
+msgid "Rank after being stripped of ship responsibilities: "
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14687
+msgctxt "msgMainscreen"
+msgid "Rank after military reductions due to ignominious defeat: "
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14746 scripts/scenario_59_border.lua:14790
+msgctxt "-tabHelms&Tactical"
+msgid "C.M. Boost"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14750 scripts/scenario_59_border.lua:14794
+#: scripts/scenario_59_border.lua:14934 scripts/scenario_59_border.lua:14978
+#: scripts/scenario_59_border.lua:15022 scripts/scenario_59_border.lua:15116
+#, lua-format
+msgctxt "-tabHelms&Tactical"
+msgid "%s %i"
+msgstr "%s %i"
+
+#: scripts/scenario_59_border.lua:14752 scripts/scenario_59_border.lua:14796
+#: scripts/scenario_59_border.lua:14936 scripts/scenario_59_border.lua:14980
+#: scripts/scenario_59_border.lua:15024 scripts/scenario_59_border.lua:15118
+#, fuzzy, lua-format
+msgctxt "-tabHelms&Tactical"
+msgid "%s %i:%.2i"
+msgstr "%s %i : %.2i"
+
+#: scripts/scenario_59_border.lua:14834
+msgctxt "-tabWeapons&Tactical"
+msgid "Beam Damage"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14838 scripts/scenario_59_border.lua:14886
+#: scripts/scenario_59_border.lua:15067
+#, lua-format
+msgctxt "-tabWeapons&Tactical"
+msgid "%s %i"
+msgstr "%s %i"
+
+#: scripts/scenario_59_border.lua:14840 scripts/scenario_59_border.lua:14888
+#: scripts/scenario_59_border.lua:15069
+#, fuzzy, lua-format
+msgctxt "-tabWeapons&Tactical"
+msgid "%s %i:%.2i"
+msgstr "%s %i : %.2i"
+
+#: scripts/scenario_59_border.lua:14882
+msgctxt "-tabWeapons&Tactical"
+msgid "Beam Cycle"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14930
+msgctxt "-tabHelms&Tactical"
+msgid "Impulse Speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:14974
+msgctxt "-tabHelms&Tactical"
+msgid "Warp Speed"
+msgstr "Vitesse lumière"
+
+#: scripts/scenario_59_border.lua:15018
+msgctxt "-tabHelms&Tactical"
+msgid "Jump Range"
+msgstr "Portée de saut"
+
+#: scripts/scenario_59_border.lua:15063
+msgctxt "-tabWeapons&Tactical"
+msgid "Shield Capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:15112
+msgctxt "-tabHelms&Tactical"
+msgid "Spin Speed"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:15156
+msgctxt "-tabEngineer&Engineer+"
+msgid "Battery Capacity"
+msgstr ""
+
+#: scripts/scenario_59_border.lua:15160
+#, lua-format
+msgctxt "-tabEngineer&Engineer+"
+msgid "%s %i"
+msgstr "%s %i"
+
+#: scripts/scenario_59_border.lua:15162
+#, fuzzy, lua-format
+msgctxt "-tabEngineer&Engineer+"
+msgid "%s %i:%.2i"
+msgstr "%s %i : %.2i"
+
+# Scenario name
+#~ msgid "Empty space"
+#~ msgstr "Espace vide"
+
+# Scenario description
+#~ msgid ""
+#~ "Empty scenario, no enemies, no friendlies. Can be used by a GM player to "
+#~ "setup a scenario in the GM screen. The F5 key can be used to copy the "
+#~ "current layout to the clipboard for use in scenario scripts."
+#~ msgstr ""
+#~ "Scénario vide.\n"
+#~ "\n"
+#~ "Aucun ennemis ni alliés.\n"
+#~ "Peut être utilisé par un joueur MJ pour configurer un scénario à partir "
+#~ "de l'écran MJ.\n"
+#~ "\n"
+#~ "La touche F5 peut être utilisée pour copier la mise en page actuelle dans "
+#~ "le presse-papiers pour une utilisation dans des scripts de scénario au "
+#~ "format lua."
+
+#~ msgctxt "buttonGM"
+#~ msgid "Random asteroid field"
+#~ msgstr "Champ astér. aléatoire"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Random nebula field"
+#~ msgstr "Champ nébul. aléatoire"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Delete unselected"
+#~ msgstr "Supprime non sélect."

@@ -19,7 +19,6 @@ msgid "Unwanted Visitors"
 msgstr "Visiteurs indésirables"
 
 # Scenario description
-#, fuzzy
 msgid ""
 "Get rid of the unwanted visitors. Other missions follow. Check friendly "
 "stations for mission orders. Dispatch office provides new missions. Continue "
@@ -51,7 +50,6 @@ msgid ""
 "\n"
 "Version 2"
 msgstr ""
-"\n"
 "EN COURS DE TRADUCTION 42%\n"
 "\n"
 "Get rid of the unwanted visitors. Other missions follow. Check friendly "
@@ -622,6 +620,11 @@ msgid ""
 "weapons by reducing the amount of time between firing. I hear he's already "
 "installed some improvements on ships that have docked here previously"
 msgstr ""
+"Il se lance dans les innovations en matière de système de vaisseau. "
+"Actuellement il travaille sur l'amélioration des faisceaux laser en "
+"augmentant leur cadence de tir.\n"
+"J'ai entendu dire qu'il avait installé quelques mises à niveau sur les "
+"vaisseaux qui ont déjà accosté ici."
 
 #: scripts/scenario_48_visitors.lua:2396
 #, lua-format
@@ -739,7 +742,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:2477
 msgctxt "characterInfo-comms"
 msgid "He can strengthen your hull"
-msgstr ""
+msgstr "Il peut renforcer votre coque."
 
 #: scripts/scenario_48_visitors.lua:2484
 #, lua-format
@@ -2289,6 +2292,9 @@ msgid ""
 "The clerk behind the desk pauses, points a cluster of antennae at you, then "
 "continues manipulating an elaborate keyboard."
 msgstr ""
+"[L'employé derrière son bureau marque une pause, oriente vers vous ses "
+"antennes… puis continue de taper discrètement sur un clavier au design "
+"élaboré.]"
 
 #: scripts/scenario_48_visitors.lua:4074
 #, lua-format
@@ -2342,7 +2348,7 @@ msgstr ""
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine station list (%i reputation)"
-msgstr "Examiner la liste des stations (%i rep)"
+msgstr "Examiner la liste des stations (%i rép)"
 
 #: scripts/scenario_48_visitors.lua:4091 scripts/scenario_48_visitors.lua:4151
 #: scripts/scenario_48_visitors.lua:4200
@@ -2399,7 +2405,7 @@ msgstr ""
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Talk to apprentice cartographer (%i reputation)"
-msgstr "Parler à l'apprenti cartographe (%i rep)"
+msgstr "Parler à l'apprenti cartographe (%i rép)"
 
 #: scripts/scenario_48_visitors.lua:4140
 msgctxt "cartographyOffice-comms"
@@ -2752,6 +2758,8 @@ msgid ""
 "%s\n"
 "Note: this waypoint will be out of date shortly since %s is in motion"
 msgstr ""
+"%s\n"
+"Remarque : ce marqueur sera bientôt obsolète car %s est en mouvement."
 
 #: scripts/scenario_48_visitors.lua:4444
 msgctxt "cartographyOffice-comms"
@@ -3241,6 +3249,9 @@ msgid ""
 "\n"
 "General Information: %s"
 msgstr ""
+"%s\n"
+"\n"
+"Informations générales : %s"
 
 #: scripts/scenario_48_visitors.lua:5096
 #, lua-format
@@ -3250,6 +3261,9 @@ msgid ""
 "\n"
 "History: %s"
 msgstr ""
+"%s\n"
+"\n"
+"Histoire : %s"
 
 #: scripts/scenario_48_visitors.lua:5104
 msgctxt "scienceDB"
