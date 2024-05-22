@@ -4,7 +4,7 @@
 namespace sp::io {
     template<typename T> static inline DataBuffer& operator << (DataBuffer& packet, const std::unordered_set<T>& s) {
         packet << uint32_t(s.size());
-        for(const auto v : s) packet << v;
+        for(const auto& v : s) packet << v;
         return packet;
     }
     template<typename T> static inline DataBuffer& operator >> (DataBuffer& packet, std::unordered_set<T>& s) {

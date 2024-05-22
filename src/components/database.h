@@ -14,6 +14,7 @@ public:
         string value;
     };
     std::vector<KeyValue> key_values;
+    bool key_values_dirty = true;
     string description;
     string image;
 };

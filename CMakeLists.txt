@@ -462,6 +462,12 @@ set(MAIN_SOURCES
     src/multiplayer/warp.cpp
     src/multiplayer/docking.h
     src/multiplayer/docking.cpp
+    src/multiplayer/coolant.h
+    src/multiplayer/coolant.cpp
+    src/multiplayer/hull.h
+    src/multiplayer/hull.cpp
+    src/multiplayer/database.h
+    src/multiplayer/database.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

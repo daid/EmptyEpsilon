@@ -647,9 +647,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(Database, description);
     BIND_MEMBER(Database, image);
     BIND_MEMBER(Database, parent);
-    BIND_ARRAY(Database, key_values);
-    BIND_ARRAY_MEMBER(Database, key_values, key);
-    BIND_ARRAY_MEMBER(Database, key_values, value);
+    BIND_ARRAY_DIRTY_FLAG(Database, key_values, key_values_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(Database, key_values, key, key_values_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(Database, key_values, value, key_values_dirty);
 
     sp::script::ComponentHandler<CollisionCallback>::name("pickup");
     BIND_MEMBER(PickupCallback, callback);

@@ -11,6 +11,10 @@
 #include "multiplayer/name.h"
 #include "multiplayer/impulse.h"
 #include "multiplayer/warp.h"
+#include "multiplayer/docking.h"
+#include "multiplayer/hull.h"
+#include "multiplayer/coolant.h"
+#include "multiplayer/database.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -42,16 +46,16 @@ void initSystemsAndComponents()
     //BeamEffect
     sp::ecs::MultiplayerReplication::registerComponentReplication<CommsReceiverReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CommsTransmitterReplication>();
-    //Coolant
+    sp::ecs::MultiplayerReplication::registerComponentReplication<CoolantReplication>();
     //CustomShipFunctions
-    //Database
-    //DockingBay
-    //DockingPort
+    sp::ecs::MultiplayerReplication::registerComponentReplication<DatabaseReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<DockingBayReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<DockingPortReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<FactionReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<FactionInfoReplication>();
     //Gravity
     //HackingDevice
-    //Hull
+    sp::ecs::MultiplayerReplication::registerComponentReplication<HullReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ImpulseEngineReplication>();
     //InternalRooms
     //InternalCrew
