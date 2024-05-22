@@ -3,6 +3,7 @@
 #include <engine.h>
 
 #include "ecs/multiplayer.h"
+#include "multiplayer/beamweapon.h"
 #include "multiplayer/collision.h"
 #include "multiplayer/faction.h"
 #include "multiplayer/radar.h"
@@ -15,6 +16,8 @@
 #include "multiplayer/hull.h"
 #include "multiplayer/coolant.h"
 #include "multiplayer/database.h"
+#include "multiplayer/maneuveringthrusters.h"
+#include "multiplayer/jumpdrive.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -42,8 +45,8 @@
 
 void initSystemsAndComponents()
 {
-    //BeamWeaponSys
-    //BeamEffect
+    sp::ecs::MultiplayerReplication::registerComponentReplication<BeamWeaponSysReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<BeamEffectReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CommsReceiverReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CommsTransmitterReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CoolantReplication>();
@@ -59,9 +62,9 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<ImpulseEngineReplication>();
     //InternalRooms
     //InternalCrew
-    //JumpDrive
-    //ManeuveringThrusters
-    //CombatManeuveringThrusters
+    sp::ecs::MultiplayerReplication::registerComponentReplication<JumpDriveReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ManeuveringThrustersReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<CombatManeuveringThrustersReplication>();
     //MissileFlight
     //MissileHoming
     //ConstantParticleEmitter

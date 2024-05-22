@@ -460,6 +460,8 @@ set(MAIN_SOURCES
     src/multiplayer/impulse.cpp
     src/multiplayer/warp.h
     src/multiplayer/warp.cpp
+    src/multiplayer/jumpdrive.h
+    src/multiplayer/jumpdrive.cpp
     src/multiplayer/docking.h
     src/multiplayer/docking.cpp
     src/multiplayer/coolant.h
@@ -468,6 +470,8 @@ set(MAIN_SOURCES
     src/multiplayer/hull.cpp
     src/multiplayer/database.h
     src/multiplayer/database.cpp
+    src/multiplayer/maneuveringthrusters.h
+    src/multiplayer/maneuveringthrusters.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

@@ -1,8 +1,8 @@
-#include "multiplayer/warp.h"
+#include "multiplayer/maneuveringthrusters.h"
 #include "multiplayer.h"
 
 
-BASIC_REPLICATION_IMPL(WarpDriveReplication, WarpDrive)
+BASIC_REPLICATION_IMPL(ManeuveringThrustersReplication, ManeuveringThrusters)
     BASIC_REPLICATION_FIELD(health);
     BASIC_REPLICATION_FIELD(health_max);
     BASIC_REPLICATION_FIELD(power_level);
@@ -18,13 +18,17 @@ BASIC_REPLICATION_IMPL(WarpDriveReplication, WarpDrive)
     BASIC_REPLICATION_FIELD(power_change_rate_per_second);
     BASIC_REPLICATION_FIELD(auto_repair_per_second);
 
-    BASIC_REPLICATION_FIELD(max_level);
-    BASIC_REPLICATION_FIELD(speed_per_level);
-    BASIC_REPLICATION_FIELD(energy_warp_per_second);
-    BASIC_REPLICATION_FIELD(request);
-    BASIC_REPLICATION_FIELD(current);
+    BASIC_REPLICATION_FIELD(speed);
+    BASIC_REPLICATION_FIELD(target);
+    BASIC_REPLICATION_FIELD(rotation_request);
 }
 
-BASIC_REPLICATION_IMPL(WarpJammerReplication, WarpJammer)
-    BASIC_REPLICATION_FIELD(range);
+BASIC_REPLICATION_IMPL(CombatManeuveringThrustersReplication, CombatManeuveringThrusters)
+    BASIC_REPLICATION_FIELD(charge);
+    BASIC_REPLICATION_FIELD(boost.request);
+    BASIC_REPLICATION_FIELD(boost.active);
+    BASIC_REPLICATION_FIELD(boost.speed);
+    BASIC_REPLICATION_FIELD(strafe.request);
+    BASIC_REPLICATION_FIELD(strafe.active);
+    BASIC_REPLICATION_FIELD(strafe.speed);
 }
