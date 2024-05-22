@@ -7,8 +7,10 @@ class PreferencesManager
 {
 private:
     static std::unordered_map<string, string> preference;
+    static std::unordered_map<string, string> temporary;
 public:
     static void set(string key, string value);
+    static void setTemporary(string key, string value);
     static string get(string key, string default_value="");
 
     static void load(string filename);

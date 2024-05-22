@@ -151,7 +151,7 @@ int main(int argc, char** argv)
         char* value = strchr(argv[n], '=');
         if (!value) continue;
         *value++ = '\0';
-        PreferencesManager::set(string(argv[n]).strip(), string(value).strip());
+        PreferencesManager::setTemporary(string(argv[n]).strip(), string(value).strip());
     }
 
     if (PreferencesManager::get("proxy") != "")
@@ -224,12 +224,12 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("username", "") == "")
     {
 #ifdef STEAMSDK
-        PreferencesManager::set("username", SteamFriends()->GetPersonaName());
+        PreferencesManager::setTemporary("username", SteamFriends()->GetPersonaName());
 #else
         if (getenv("USERNAME"))
-            PreferencesManager::set("username", getenv("USERNAME"));
+            PreferencesManager::setTemporary("username", getenv("USERNAME"));
         else if (getenv("USER"))
-            PreferencesManager::set("username", getenv("USER"));
+            PreferencesManager::setTemporary("username", getenv("USER"));
 #endif
     }
 
