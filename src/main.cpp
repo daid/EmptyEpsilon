@@ -99,17 +99,7 @@ int main(int argc, char** argv)
     new Engine();
     initSystemsAndComponents();
 
-<<<<<<< HEAD
     auto configuration_path = initConfiguration(argc, argv);
-=======
-    for(int n=1; n<argc; n++)
-    {
-        char* value = strchr(argv[n], '=');
-        if (!value) continue;
-        *value++ = '\0';
-        PreferencesManager::setTemporary(string(argv[n]).strip(), string(value).strip());
-    }
->>>>>>> master
 
     if (PreferencesManager::get("proxy") != "")
         return runProxyServer();
