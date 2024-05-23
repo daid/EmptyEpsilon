@@ -383,42 +383,6 @@ static int getActivePlayerShips(lua_State* L)
 /// Example: getActivePlayerShips()[2] -- returns the second-indexed active ship
 REGISTER_SCRIPT_FUNCTION(getActivePlayerShips);
 
-static int getObjectsInRadius(lua_State* L)
-{
-    float x = luaL_checknumber(L, 1);
-    float y = luaL_checknumber(L, 2);
-    float r = luaL_checknumber(L, 3);
-
-    glm::vec2 position(x, y);
-
-    PVector<SpaceObject> objects;
-    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
-        auto entity_transform = entity.getComponent<sp::Transform>();
-        if (entity_transform) {
-            if (glm::length2(entity_transform->getPosition() - position) < r*r) {
-                auto obj = entity.getComponent<SpaceObject*>();
-                if (obj)
-                    objects.push_back(*obj);
-            }
-        }
-    }
-    return convert<PVector<SpaceObject> >::returnType(L, objects);
-}
-/// PVector<SpaceObject> getObjectsInRadius(float x, float y, float radius)
-/// Returns a list of all SpaceObjects within the given radius of the given x/y coordinates.
-/// Example: getObjectsInRadius(0,0,5000) -- returns all objects within 5U of 0,0
-REGISTER_SCRIPT_FUNCTION(getObjectsInRadius);
-
-static int getAllObjects(lua_State* L)
-{
-    return convert<PVector<SpaceObject> >::returnType(L, space_object_list);
-}
-/// PVector<SpaceObject> getAllObjects()
-/// Returns a list of all SpaceObjects.
-/// This can return a very long list and could slow down the game if called every tick.
-/// Example: getAllObjects()
-REGISTER_SCRIPT_FUNCTION(getAllObjects);
-
 static int getGameLanguage(lua_State* L)
 {
     lua_pushstring(L, PreferencesManager::get("language", "en").c_str());

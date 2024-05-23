@@ -8,6 +8,9 @@
 #include "script/vector.h"
 #include "menus/luaConsole.h"
 #include "systems/comms.h"
+#include "ecs/query.h"
+#include "components/collision.h"
+#include "systems/collision.h"
 #include "io/json.h"
 
 
@@ -303,6 +306,38 @@ static float luaGetScenarioTime()
     return gameGlobalInfo->elapsed_time;
 }
 
+static int luaGetAllObjects(lua_State* L)
+{
+    lua_newtable(L);
+    int idx = 1;
+    for(auto [e, t] : sp::ecs::Query<sp::Transform>()) {
+        sp::script::Convert<sp::ecs::Entity>::toLua(L, e);
+        lua_rawseti(L, -2, idx++);
+    }
+    return 1;
+}
+
+static int luaGetObjectsInRadius(lua_State* L)
+{
+    float x = luaL_checknumber(L, 1);
+    float y = luaL_checknumber(L, 2);
+    float r = luaL_checknumber(L, 3);
+
+    glm::vec2 position(x, y);
+    lua_newtable(L);
+    int idx = 1;
+    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
+        auto entity_transform = entity.getComponent<sp::Transform>();
+        if (entity_transform) {
+            if (glm::length2(entity_transform->getPosition() - position) < r*r) {
+                sp::script::Convert<sp::ecs::Entity>::toLua(L, entity);
+                lua_rawseti(L, -2, idx++);
+            }
+        }
+    }
+    return 1;
+}
+
 static int luaGetEEVersion()
 {
     return VERSION_NUMBER;
@@ -484,6 +519,17 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// This timer stops when the game is paused.
     /// Example: getScenarioTime() -- after two minutes, returns 120.0
     env.setGlobal("getScenarioTime", &luaGetScenarioTime);
+
+    /// std::vector<sp::ecs::Entity> getAllObjects()
+    /// Returns a list of all objects that have a position in the world.
+    /// This can return a very long list and could slow down the game if called every tick.
+    /// Example: getAllObjects()
+    env.setGlobal("getAllObjects", &luaGetAllObjects);
+    /// PVector<SpaceObject> getObjectsInRadius(float x, float y, float radius)
+    /// Returns a list of all SpaceObjects within the given radius of the given x/y coordinates.
+    /// Example: getObjectsInRadius(0,0,5000) -- returns all objects within 5U of 0,0
+    env.setGlobal("getObjectsInRadius", &luaGetObjectsInRadius);
+
 
 
     env.setGlobal("addGMFunction", &luaAddGMFunction);

@@ -599,7 +599,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(Gravity, force);
     BIND_MEMBER(Gravity, damage);
     BIND_MEMBER(Gravity, wormhole_target);
-    //TODO: on_teleportation
+    BIND_MEMBER(Gravity, on_teleportation);
 
     sp::script::ComponentHandler<InternalRooms>::name("internal_rooms");
     BIND_MEMBER(InternalRooms, auto_repair_enabled);
@@ -669,7 +669,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, type, functions_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, name, functions_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, caption, functions_dirty);
-    //TODO: BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, crew_position, functions_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, crew_position, functions_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, callback, functions_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, order, functions_dirty);
 }
