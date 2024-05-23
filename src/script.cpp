@@ -243,6 +243,8 @@ static int luaCreateAdditionalScript(lua_State* L)
         });
         lua_setfield(L, -2, "setVariable");
         lua_setfield(L, -2, "__index");
+        lua_pushstring(L, "sandboxed");
+        lua_setfield(L, -2, "__metatable");
     }
     lua_setmetatable(L, -2);
     gameGlobalInfo->additional_scripts.push_back(std::move(env));

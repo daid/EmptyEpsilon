@@ -19,6 +19,7 @@
 #include "multiplayer/maneuveringthrusters.h"
 #include "multiplayer/jumpdrive.h"
 #include "multiplayer/hacking.h"
+#include "multiplayer/customshipfunction.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -51,7 +52,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<CommsReceiverReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CommsTransmitterReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CoolantReplication>();
-    //CustomShipFunctions
+    sp::ecs::MultiplayerReplication::registerComponentReplication<CustomShipFunctionsReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<DatabaseReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<DockingBayReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<DockingPortReplication>();

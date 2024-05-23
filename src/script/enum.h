@@ -10,6 +10,7 @@
 #include "components/comms.h"
 #include "components/player.h"
 #include "components/missiletubes.h"
+#include "components/customshipfunction.h"
 #include "missileWeaponData.h"
 
 
@@ -353,6 +354,28 @@ template<> struct Convert<AlertLevel> {
             return AlertLevel::RedAlert;
         luaL_error(L, "Unknown AlertLevel: %s", str.c_str());
         return AlertLevel::Normal;
+    }
+};
+template<> struct Convert<CustomShipFunctions::Function::Type> {
+    static int toLua(lua_State* L, CustomShipFunctions::Function::Type value) {
+        switch(value) {
+        case CustomShipFunctions::Function::Type::Info: lua_pushstring(L, "info"); break;
+        case CustomShipFunctions::Function::Type::Button: lua_pushstring(L, "button"); break;
+        case CustomShipFunctions::Function::Type::Message: lua_pushstring(L, "message"); break;
+        default: lua_pushstring(L, "none"); break;
+        }
+        return 1;
+    }
+    static CustomShipFunctions::Function::Type fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "info")
+            return CustomShipFunctions::Function::Type::Info;
+        else if (str == "button")
+            return CustomShipFunctions::Function::Type::Button;
+        else if (str == "message")
+            return CustomShipFunctions::Function::Type::Message;
+        luaL_error(L, "Unknown CustomShipFunctions::Function::Type: %s", str.c_str());
+        return CustomShipFunctions::Function::Type::Info;
     }
 };
 

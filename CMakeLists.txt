@@ -474,6 +474,8 @@ set(MAIN_SOURCES
     src/multiplayer/maneuveringthrusters.cpp
     src/multiplayer/hacking.h
     src/multiplayer/hacking.cpp
+    src/multiplayer/customshipfunction.h
+    src/multiplayer/customshipfunction.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

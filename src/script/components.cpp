@@ -38,6 +38,8 @@
 #include "components/internalrooms.h"
 #include "components/database.h"
 #include "components/pickup.h"
+#include "components/customshipfunction.h"
+
 
 #define STRINGIFY(n) #n
 #define BIND_MEMBER(T, MEMBER) \
@@ -661,4 +663,13 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<CollisionCallback>::name("collision_callback");
     BIND_MEMBER(CollisionCallback, callback);
     BIND_MEMBER(CollisionCallback, player);
+
+    sp::script::ComponentHandler<CustomShipFunctions>::name("custom_ship_functions");
+    BIND_ARRAY_DIRTY_FLAG(CustomShipFunctions, functions, functions_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, type, functions_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, name, functions_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, caption, functions_dirty);
+    //TODO: BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, crew_position, functions_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, callback, functions_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, order, functions_dirty);
 }
