@@ -52,19 +52,18 @@ end
 --- Use this in scenarios to change the crew's ship.
 --- Example: player:transferPlayersToShip(player2) -- transfer all player crew to `player2`
 function Entity:transferPlayersToShip(other_ship)
-    --TODO
+    transferPlayersFromShipToShip(self, other_ship)
 end
 --- Transfers only the crew members on a specific crew position to another PlayerSpaceship.
 --- If a player is in multiple positions, this matches any of their positions and moves that player to all of the same positions on the destination ship.
 --- Example: player:transferPlayersAtPositionToShip("helms",player2) -- transfer all crew on Helms to `player2`
 function Entity:transferPlayersAtPositionToShip(station, other_ship)
-    --TODO
+    transferPlayersFromShipToShip(self, other_ship, station)
 end
 --- Returns whether a player occupies the given crew position on this PlayerSpaceship.
 --- Example: player:hasPlayerAtPosition("helms")
 function Entity:hasPlayerAtPosition(station)
-    --TODO
-    return false
+    return hasPlayerCrewAtPosition(self, station)
 end
 
 --- Returns whether this PlayerSpaceship's comms are not in use.
@@ -290,7 +289,16 @@ end
 --- Returns -1 for the hull.
 --- Example: player:getBeamSystemTarget()
 function Entity:getBeamSystemTarget()
-    --TODO: convert to index if self.beam_weapons then return self.beam_weapons.system_target end
+    local target_name = self:getBeamSystemTargetName()
+    if target_name == "reactor" then return 0 end
+    if target_name == "beamweapons" then return 1 end
+    if target_name == "missilesystem" then return 2 end
+    if target_name == "maneuver" then return 3 end
+    if target_name == "impulse" then return 4 end
+    if target_name == "warp" then return 5 end
+    if target_name == "jumpdrive" then return 6 end
+    if target_name == "frontshield" then return 7 end
+    if target_name == "rearshield" then return 8 end
     return -1
 end
 --- Returns the name of the ESystem targeted by this PlayerSpaceship's weapons.

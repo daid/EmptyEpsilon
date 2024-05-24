@@ -11,7 +11,9 @@
 #include "ecs/query.h"
 #include "components/collision.h"
 #include "systems/collision.h"
+#include "playerInfo.h"
 #include "io/json.h"
+#include "script/enum.h"
 
 
 /// void require(string filename)
@@ -338,6 +340,23 @@ static int luaGetObjectsInRadius(lua_State* L)
     return 1;
 }
 
+static void luaTransferPlayers(sp::ecs::Entity source, sp::ecs::Entity target, std::optional<ECrewPosition> station)
+{
+    if (!target.getComponent<PlayerControl>()) return;
+    // For each player, move them to the same station on the target.
+    for(auto i : player_info_list)
+        if (i->ship == source && (!station.has_value() || i->crew_position[station.value()]))
+            i->ship = target;
+}
+
+static bool luaHasPlayerAtPosition(sp::ecs::Entity source, ECrewPosition station)
+{
+    for(auto i : player_info_list)
+        if (i->ship == source && i->crew_position[station])
+            return true;
+    return false;
+}
+
 static int luaGetEEVersion()
 {
     return VERSION_NUMBER;
@@ -529,6 +548,9 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Returns a list of all SpaceObjects within the given radius of the given x/y coordinates.
     /// Example: getObjectsInRadius(0,0,5000) -- returns all objects within 5U of 0,0
     env.setGlobal("getObjectsInRadius", &luaGetObjectsInRadius);
+
+    env.setGlobal("transferPlayersFromShipToShip", &luaTransferPlayers);
+    env.setGlobal("hasPlayerCrewAtPosition", &luaHasPlayerAtPosition);
 
 
 

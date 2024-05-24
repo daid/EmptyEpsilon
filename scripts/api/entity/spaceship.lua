@@ -572,7 +572,11 @@ end
 --- -- Creates a beam weapon with index 0, arc of 90 degrees, direction pointing backward, range of 1U, base cycle time of 1 second, and base damage of 1 point
 --- ship:setBeamWeapon(0,90,180,1000,1,1)
 function Entity:setBeamWeapon(index, arc, direction, range, cycle_time, damage)
-    --TODO
+    if self.beam_weapons == nil then self.beam_weapons = {} end
+    while #self.beam_weapons < index + 1 do
+        self.beam_weapons[#self.beam_weapons + 1] = {}
+    end
+    self.beam_weapons[index + 1] = {arc=arc, direction=direction, range=range, cycle_time=cycle_time, damage=damage}
     return self
 end
 --- Converts a BeamWeapon with the given index on this SpaceShip into a turret and defines its traits.
@@ -586,41 +590,50 @@ end
 --- -- Makes beam weapon 0 a turret with a 200-degree turret arc centered on 90 degrees from forward, rotating at 5 degrees per tick (unit?)
 --- ship:setBeamWeaponTurret(0,200,90,5)
 function Entity:setBeamWeaponTurret(index, arc, direction, rotation_rate)
-    --TODO
+    if self.beam_weapons == nil or #self.beam_weapons <= index then return self end
+    self.beam_weapons[index + 1].turret_arc = arc
+    self.beam_weapons[index + 1].turret_direction = arc
+    self.beam_weapons[index + 1].turret_rotation_rate = rotation_rate
     return self
 end
 --- Sets the BeamEffect texture, by filename, for the BeamWeapon with the given index on this SpaceShip.
 --- See BeamEffect:setTexture().
 --- Example: ship:setBeamWeaponTexture(0,"texture/beam_blue.png")
 function Entity:setBeamWeaponTexture(index, texture)
-    --TODO
+    if self.beam_weapons == nil or #self.beam_weapons <= index then return self end
+    self.beam_weapons[index + 1].texture = texture
     return self
 end
 --- Sets how much energy is drained each time the BeamWeapon with the given index is fired on this SpaceShip.
 --- Only PlayerSpaceships consume energy. Setting this for other ShipTemplateBasedObject types has no effect.
 --- Example: ship:setBeamWeaponEnergyPerFire(0,1) -- sets beam 0 to use 1 energy per firing
 function Entity:setBeamWeaponEnergyPerFire(index, energy)
-    --TODO
+    if self.beam_weapons == nil or #self.beam_weapons <= index then return self end
+    self.beam_weapons[index + 1].energy_per_beam_fire = energy
     return self
 end
 --- Sets how much "beamweapon" system heat is generated, in percentage of total system heat capacity, each time the BeamWeapon with the given index is fired on this SpaceShip.
 --- Only PlayerSpaceships generate and manage heat. Setting this for other ShipTemplateBasedObject types has no effect.
 --- Example: ship:setBeamWeaponHeatPerFire(0,0.02) -- sets beam 0 to generate 0.02 (2%) system heat per firing
 function Entity:setBeamWeaponHeatPerFire(index, heat)
-    --TODO
+    if self.beam_weapons == nil or #self.beam_weapons <= index then return self end
+    self.beam_weapons[index + 1].heat_per_beam_fire = heat
     return self
 end
 --- Sets the colors used to draw the radar arc for the BeamWeapon with the given index on this SpaceShip.
 --- The first three-number value sets the RGB color for the arc when idle, and the second sets the color when firing.
 --- Example: ship:setBeamWeaponArcColor(0,0,128,0,0,255,0) -- makes beam 0's arc green
 function Entity:setBeamWeaponArcColor(index, idle_r, idle_g, idle_b, fire_r, fire_g, fire_b)
-    --TODO
+    if self.beam_weapons == nil or #self.beam_weapons <= index then return self end
+    self.beam_weapons[index + 1].arc_color = {idle_r, idle_g, idle_b}
+    self.beam_weapons[index + 1].arc_color_fire = {fire_r, fire_g, fire_b}
     return self
 end
 --- Sets the damage type dealt by the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:setBeamWeaponDamageType(0,"emp") -- makes beam 0 deal EMP damage
 function Entity:setBeamWeaponDamageType(index, damage_type)
-    --TODO
+    if self.beam_weapons == nil or #self.beam_weapons <= index then return self end
+    self.beam_weapons[index + 1].damage_type = damage_type
     return self
 end
 --- Sets the number of WeaponTubes for this SpaceShip.
