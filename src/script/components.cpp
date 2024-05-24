@@ -86,7 +86,16 @@
     };
 #define BIND_ARRAY(T, A) \
     sp::script::ComponentHandler<T>::array_count_func = [](const T& t) -> int { return t.A.size(); }; \
-    sp::script::ComponentHandler<T>::array_resize_func = [](T& t, int new_size) { t.A.resize(new_size); };
+    sp::script::ComponentHandler<T>::array_resize_func = [](T& t, int new_size) { t.A.resize(new_size); }; \
+    sp::script::ComponentHandler<T>::indexed_members["length"] = { \
+        [](lua_State* L, const void* ptr, int n) { \
+            auto t = reinterpret_cast<const T*>(ptr); \
+            return sp::script::Convert<int>::toLua(L, t->A.size()); \
+        }, [](lua_State* L, void* ptr, int n) { \
+            auto t = reinterpret_cast<T*>(ptr); \
+            t->A.resize(std::max(0, sp::script::Convert<int>::fromLua(L, -1))); \
+        } \
+    };
 #define BIND_ARRAY_MEMBER(T, A, MEMBER) \
     sp::script::ComponentHandler<T>::indexed_members[STRINGIFY(MEMBER)] = { \
         [](lua_State* L, const void* ptr, int n) { \

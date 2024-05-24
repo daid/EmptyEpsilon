@@ -1,5 +1,6 @@
 #include <i18n.h>
 #include "gameGlobalInfo.h"
+#include "soundManager.h"
 #include "preferenceManager.h"
 #include "script.h"
 #include "resources.h"
@@ -357,6 +358,121 @@ static bool luaHasPlayerAtPosition(sp::ecs::Entity source, ECrewPosition station
     return false;
 }
 
+
+static sp::ecs::Entity luaGetPlayerShip(int index)
+{
+    if (index == -1) {
+        for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+            return entity;
+        return {};
+    }
+    if (index == -2)
+        return my_spaceship;
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+        if (--index == 0)
+            return entity;
+    return {};
+}
+
+static int luaGetActivePlayerShips(lua_State* L)
+{
+    lua_newtable(L);
+    int index = 1;
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>()) {
+        sp::script::Convert<sp::ecs::Entity>::toLua(L, entity);
+        lua_rawseti(L, -2, index++);
+    }
+    return 1;
+}
+
+static string luaGetGameLanguage()
+{
+    return PreferencesManager::get("language", "en").c_str();
+}
+
+/** Short lived object to do a scenario change on the update loop. See "setScenario" for details */
+class ScenarioChanger : public Updatable
+{
+public:
+    ScenarioChanger(string script_name, std::unordered_map<string, string>&& settings)
+    : script_name(script_name), settings(std::move(settings))
+    {
+    }
+
+    virtual void update(float delta) override
+    {
+        gameGlobalInfo->startScenario(script_name, settings);
+        destroy();
+    }
+private:
+    string script_name;
+    std::unordered_map<string, string> settings;
+};
+
+static int luaSetScenario(lua_State* L)
+{
+    string script_name = luaL_checkstring(L, 1);
+    std::unordered_map<string, string> settings;
+
+    // Script filename must not be an empty string.
+    if (script_name == "")
+    {
+        LOG(ERROR) << "setScenario() requires a non-empty value.";
+        return 1;
+    }
+
+    if (lua_type(L, 2) == LUA_TSTRING) {
+        LOG(WARNING) << "LUA: DEPRECATED setScenario() called with scenario variation. Passing the value as the \"variation\" scenario setting instead.";
+        string variation = lua_tostring(L, 2);
+        settings["variation"] = variation;
+    }
+    if (lua_istable(L, 2)) {
+        lua_pushnil(L);
+        while(lua_next(L, 2)) {
+            settings[lua_tostring(L, -2)] = lua_tostring(L, -1);
+            lua_pop(L, 1);
+        }
+    }
+    new ScenarioChanger(script_name, std::move(settings));
+
+    // This could be called from a currently active scenario script.
+    // Calling GameGlobalInfo::startScenario is unsafe at this point,
+    // as this will destroy the lua state that this function is running in.
+    // So use the ScenarioChanger object which will do the change in the update loop. Which is safe.
+    return 0;
+}
+
+
+static void luaShutdownGame()
+{
+    engine->shutdown();
+}
+
+static void luaPauseGame()
+{
+    engine->setGameSpeed(0.0);
+}
+
+static void luaUnpauseGame()
+{
+    engine->setGameSpeed(1.0);
+}
+
+static void luaPlaySoundFile(string filename)
+{
+    int n = filename.rfind(".");
+    if (n > -1)
+    {
+        string filename_with_locale = filename.substr(0, n) + "." + PreferencesManager::get("language", "en") + filename.substr(n);
+        if (getResourceStream(filename_with_locale)) {
+            soundManager->playSound(filename_with_locale);
+            return;
+        }
+    }
+    soundManager->playSound(filename);
+    return;
+}
+
 static int luaGetEEVersion()
 {
     return VERSION_NUMBER;
@@ -548,6 +664,52 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Returns a list of all SpaceObjects within the given radius of the given x/y coordinates.
     /// Example: getObjectsInRadius(0,0,5000) -- returns all objects within 5U of 0,0
     env.setGlobal("getObjectsInRadius", &luaGetObjectsInRadius);
+    /// P<PlayerSpaceship> getPlayerShip(int index)
+    /// Returns the PlayerSpaceship with the given index.
+    /// PlayerSpaceships are 1-indexed.
+    /// A new ship is assigned the lowest available index, and a destroyed ship leaves its index vacant.
+    /// Pass -1 to return the first active player ship.
+    /// Pass -2 to return the current player ship.
+    /// Example: getPlayerShip(2) -- returns the second-indexed ship, if it exists
+    env.setGlobal("getPlayerShip", &luaGetPlayerShip);
+    /// PVector<PlayerSpaceship> getActivePlayerShips()
+    /// Returns a 1-indexed list of active PlayerSpaceships.
+    /// Unlike getPlayerShip()'s index, destroyed ships don't leave gaps.
+    /// Example: getActivePlayerShips()[2] -- returns the second-indexed active ship
+    env.setGlobal("getActivePlayerShips", &luaGetActivePlayerShips);
+    /// string getGameLanguage()
+    /// Returns the language as the string value of the language key in game preferences.
+    /// Example: getGameLanguage() -- returns "en" if the game language is set to English
+    env.setGlobal("getGameLanguage", &luaGetGameLanguage);
+    /// void setScenario(string script_name, std::optional<string> variation_name)
+    /// Launches the given scenario, even if another scenario is running.
+    /// Paths are relative to the scripts/ directory.
+    /// Example: setScenario("scenario_03_waves.lua") -- launches the scenario at scripts/scenario_03_waves.lua
+    env.setGlobal("setScenario", &luaSetScenario);
+    /// void shutdownGame()
+    /// Shuts down the server.
+    /// Use to gracefully shut down a headless server.
+    /// Example: shutdownGame()
+    env.setGlobal("shutdownGame", &luaShutdownGame);
+    /// void pauseGame()
+    /// Pauses the game.
+    /// Use to pause a headless server, which doesn't have access to the GM screen.
+    /// Example: pauseGame()
+    env.setGlobal("pauseGame", &luaPauseGame);
+    /// void unpauseGame()
+    /// Unpauses the game.
+    /// Use to unpause a headless server, which doesn't have access to the GM screen.
+    /// Example: unpauseGame()
+    env.setGlobal("unpauseGame", &luaUnpauseGame);
+    /// void playSoundFile(string filename)
+    /// Plays the given audio file on the server.
+    /// Paths are relative to the resources/ directory.
+    /// Works with any file format supported by SDL, including .wav, .ogg, .flac.
+    /// The sound is played only on the server, and not on any clients.
+    /// Example: playSoundFile("sfx/laser.wav")
+    env.setGlobal("playSoundFile", &luaPlaySoundFile);
+
+
 
     env.setGlobal("transferPlayersFromShipToShip", &luaTransferPlayers);
     env.setGlobal("hasPlayerCrewAtPosition", &luaHasPlayerAtPosition);

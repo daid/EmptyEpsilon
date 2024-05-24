@@ -118,7 +118,12 @@ end
 --- Returns an empty string if the key doesn't exist.
 --- Example: entry:getKeyValue("Legs") -- returns the value if found or "" if not
 function Entity:getKeyValue(key)
-    --TODO
+    if not self.science_database then return "" end
+    for n=1,#self.science_database do
+        if self.science_database[n].key == key then
+            return self.science_database[n].value
+        end
+    end
     return ""
 end
 --- Returns a table containing all key/value pairs in this ScienceDatabase entry.
@@ -138,7 +143,17 @@ end
 --- If duplicate matching keys exist, this removes all of them.
 --- Example: entry:removeKey("Legs") -- removes all key/value data with the key "Legs"
 function Entity:removeKey(key)
-    --TODO
+    if not self.science_database then return self end
+    local n=1
+    while n <= #self.science_database do
+        while self.science_database[n].key == key do
+            for m=n,#self.science_database-1 do
+                self.science_database[n] = {key=self.science_database[n+1].key, value=self.science_database[n+1].value}
+            end
+            self.science_database[#self.science_database] = nil
+        end
+        n = n + 1
+    end
     return self
 end
 --- Sets this ScienceDatabase entry's longform description to the given string.
