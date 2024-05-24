@@ -242,7 +242,6 @@ set(MAIN_SOURCES
     src/GMScriptCallback.cpp
     src/GMMessage.cpp
     src/tutorialGame.cpp
-    src/scriptDataStorage.cpp
     src/shaderRegistry.cpp
     src/glObjects.cpp
     src/menus/joinServerMenu.cpp
@@ -491,6 +490,8 @@ set(MAIN_SOURCES
     src/hardware/devices/virtualOutputDevice.cpp
     src/hardware/devices/philipsHueDevice.cpp
     src/script/components.cpp
+    src/script/dataStorage.h
+    src/script/dataStorage.cpp
 
     src/ai/aiFactory.h
     src/ai/ai.h
