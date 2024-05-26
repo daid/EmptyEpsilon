@@ -27,9 +27,9 @@ void GuiScrollbar::onDraw(sp::RenderTarget& renderer)
     // Update the bar's range, size, and draggable bar size.
     range = max_value - min_value - value_size;
     arrow_size = rect.size.x / 2.0f;
-    move_height = rect.size.y - arrow_size * 2;
+    move_height = std::max(20.0f, rect.size.y - arrow_size * 2);
     // Clamp the size of the draggable bar to no less than 20px.
-    bar_size = std::clamp(move_height * value_size / (range + value_size), 20.0F, move_height);
+    bar_size = std::clamp(move_height * value_size / (range + value_size), 20.0f, move_height);
     // Set the bottom of the draggable bar no lower than the top of the bottom arrow.
     const float bar_y = std::min((rect.position.y + arrow_size + (move_height - bar_size) * getValue() / range), rect.position.y + rect.size.y - arrow_size - bar_size);
 

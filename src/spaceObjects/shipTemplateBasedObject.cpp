@@ -262,6 +262,7 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
 {
     /*
     P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(template_name);
+    if (!new_ship_template) return;
     this->template_name = template_name;
     ship_template = new_ship_template;
     setTypeName(template_name);
