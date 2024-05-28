@@ -24,6 +24,7 @@ public:
      * When the required faction is not in the vector, the scan state
      * is SS_NotScanned
      */
+    bool per_faction_dirty = true;
     std::vector<Entry> per_faction;
 
     bool allow_simple_scan = false; // Does the first scan go to a full scan or a simple scan.

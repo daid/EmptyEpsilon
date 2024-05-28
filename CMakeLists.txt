@@ -475,6 +475,10 @@ set(MAIN_SOURCES
     src/multiplayer/hacking.cpp
     src/multiplayer/customshipfunction.h
     src/multiplayer/customshipfunction.cpp
+    src/multiplayer/gravity.h
+    src/multiplayer/gravity.cpp
+    src/multiplayer/scanning.h
+    src/multiplayer/scanning.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

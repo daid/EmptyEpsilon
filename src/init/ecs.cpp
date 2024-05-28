@@ -20,6 +20,8 @@
 #include "multiplayer/jumpdrive.h"
 #include "multiplayer/hacking.h"
 #include "multiplayer/customshipfunction.h"
+#include "multiplayer/gravity.h"
+#include "multiplayer/scanning.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -58,7 +60,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<DockingPortReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<FactionReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<FactionInfoReplication>();
-    //Gravity
+    sp::ecs::MultiplayerReplication::registerComponentReplication<GravityReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<HackingDeviceReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<HullReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ImpulseEngineReplication>();
@@ -90,9 +92,9 @@ void initSystemsAndComponents()
     //NebulaRenderer
     //ExplosionEffect
     //PlanetRender
-    //ScanState
-    //ScienceDescription
-    //ScienceScanner
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ScanStateReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceDescriptionReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceScannerReplication>();
     //SelfDestruct
     //Sfx
     //Shields

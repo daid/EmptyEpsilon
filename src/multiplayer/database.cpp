@@ -3,7 +3,7 @@
 
 
 namespace sp::io {
-    static inline DataBuffer& operator << (DataBuffer& packet, const Database::KeyValue& kv) { return packet << kv.key << kv.value; } \
+    static inline DataBuffer& operator << (DataBuffer& packet, const Database::KeyValue& kv) { return packet << kv.key << kv.value; }
     static inline DataBuffer& operator >> (DataBuffer& packet, Database::KeyValue& kv) { packet >> kv.key >> kv.value; return packet; }
 }
 

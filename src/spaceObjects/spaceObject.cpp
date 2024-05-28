@@ -354,6 +354,7 @@ void SpaceObject::setScannedStateForFaction(sp::ecs::Entity faction_entity, Scan
         }
     }
     scanstate->per_faction.push_back({faction_entity, state});
+    scanstate->per_faction_dirty = true;
 }
 
 bool SpaceObject::isScanned()
@@ -404,6 +405,7 @@ void SpaceObject::setScanningParameters(int complexity, int depth)
     scanstate.complexity = std::min(4, std::max(0, complexity));
     scanstate.depth = std::max(0, depth);
     scanstate.per_faction.clear();
+    scanstate.per_faction_dirty = true;
 }
 
 bool SpaceObject::isEnemy(P<SpaceObject> obj)

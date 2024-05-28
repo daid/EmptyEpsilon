@@ -31,4 +31,5 @@ void ScanState::setStateForFaction(sp::ecs::Entity faction_entity, ScanState::St
         }
     }
     per_faction.push_back({faction_entity, state});
+    per_faction_dirty = true;
 }
