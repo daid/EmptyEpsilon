@@ -143,6 +143,14 @@ void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
     explode(a, b, *eot);
 }
 
+void MissileSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, DelayedExplodeOnTouch& component)
+{
+    auto physics = e.getComponent<sp::Physics>();
+    if (!physics) return;
+    auto r = physics->getSize().x;
+    renderer.drawCircleOutline(screen_position, r * scale, 3.0, component.triggered ? glm::u8vec4(255, 0, 0, 128) : glm::u8vec4(255, 255, 255, 128));
+}
+
 void MissileSystem::explode(sp::ecs::Entity source, sp::ecs::Entity target, ExplodeOnTouch& eot)
 {
     auto transform = source.getComponent<sp::Transform>();
