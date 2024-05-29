@@ -45,6 +45,7 @@
 #include "systems/planet.h"
 #include "systems/scanning.h"
 #include "systems/radar.h"
+#include "systems/radarblock.h"
 
 
 void initSystemsAndComponents()
@@ -133,5 +134,6 @@ void initSystemsAndComponents()
     engine->registerSystem<MeshRenderSystem>();
     engine->registerSystem<ScanningSystem>();
     engine->registerSystem<BasicRadarRendering>();
+    engine->registerSystem<RadarBlockSystem>();
     initComponentScriptBindings();
 }

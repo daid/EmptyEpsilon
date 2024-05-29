@@ -5,6 +5,11 @@
 #include <glm/gtx/norm.hpp>
 
 
+void RadarBlockSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, RadarBlock& component)
+{
+    renderer.drawCircleOutline(screen_position, component.range * scale, 2.0, glm::u8vec4(255, 255, 255, 64));
+}
+
 bool RadarBlockSystem::isRadarBlockedFrom(glm::vec2 source, sp::ecs::Entity entity, float short_range)
 {
     if (entity.hasComponent<NeverRadarBlocked>()) return false;

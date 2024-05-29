@@ -336,7 +336,6 @@ set(MAIN_SOURCES
     src/spaceObjects/spaceship.cpp
     src/spaceObjects/wormHole.cpp
     src/spaceObjects/spaceObject.cpp
-    src/spaceObjects/nebula.cpp
     src/spaceObjects/playerSpaceship.cpp
     src/spaceObjects/beamEffect.cpp
     src/spaceObjects/supplyDrop.cpp
