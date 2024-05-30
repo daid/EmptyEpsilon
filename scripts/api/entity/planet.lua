@@ -95,16 +95,29 @@ function Entity:setDistanceFromMovementPlane(z)
     if e.planet_render then e.planet_render.distance_from_movement_plane = z end
     return self
 end
---- Sets this Planet's axial rotation time, in degrees per tick.
+--- Sets this Planet's axial rotation time, seconds per full rotation.
 --- Defaults to 0.
 --- Example: planet:setAxialRotationTime(20)
-function Entity:setAxialRotationTime()
-    --TODO: set spin
+function Entity:setAxialRotationTime(rotation_time)
+    if spin ~= 0.0 then
+        self.spin = {rate=360.0/rotation_time}
+    else
+        self.spin = nil
+    end
     return self
 end
 --- Sets a SpaceObject around which this Planet orbits, as well as its orbital period in orbital degrees per tick.
 --- Example: moon:setOrbit(planet, 20)
 function Entity:setOrbit(target, time)
-    --TODO: set orbit
+    local x0, y0 = self:getPosition()
+    local x1, y1 = target:getPosition()
+    local xd, yd = (x1 - x0), (y1 - y0)
+    local distance = math.sqrt(xd * xd + yd * yd)
+    self.orbit = {
+        target = target,
+        center = {x1, y1},
+        distance = distance,
+        time = time,
+    }
     return self
 end
