@@ -477,6 +477,8 @@ set(MAIN_SOURCES
     src/multiplayer/gravity.cpp
     src/multiplayer/scanning.h
     src/multiplayer/scanning.cpp
+    src/multiplayer/missile.h
+    src/multiplayer/missile.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

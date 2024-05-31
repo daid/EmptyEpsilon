@@ -22,6 +22,7 @@
 #include "multiplayer/customshipfunction.h"
 #include "multiplayer/gravity.h"
 #include "multiplayer/scanning.h"
+#include "multiplayer/missile.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -70,8 +71,8 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<JumpDriveReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ManeuveringThrustersReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CombatManeuveringThrustersReplication>();
-    //MissileFlight
-    //MissileHoming
+    sp::ecs::MultiplayerReplication::registerComponentReplication<MissileFlightReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<MissileHomingReplication>();
     //ConstantParticleEmitter
     //MissileTubes
     //MoveTo

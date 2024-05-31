@@ -15,10 +15,10 @@ public:
 class MissileHoming
 {
 public:
-    float turn_rate;
-    float range;
+    float turn_rate=1.0f;
+    float range=100.0f;
     sp::ecs::Entity target;
-    float target_angle;
+    float target_angle = 0.0f;
 };
 
 //TODO: Not really part of missile.h, also part of asteroids
