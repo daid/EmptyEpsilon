@@ -31,8 +31,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     // Render the radar shadow and background decorations.
     background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "gui/background/gradientOffset.png");
-    background_gradient->setPosition(glm::vec2(0, 0), sp::Alignment::Center)->setSize(1200, 900);
-
+    background_gradient->setPosition(glm::vec2(80, 0), sp::Alignment::CenterLeft)->setSize(1200, 900);
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
     background_crosses->setTextureTiled("gui/background/crosses.png");
 
@@ -45,8 +44,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     // Draw the science radar.
     science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f, &targets);
-    science_radar->setPosition(-270, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    science_radar->setPosition(120, 0, sp::Alignment::CenterLeft)->setSize(850, 850);
     science_radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
+
     science_radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
             if (!my_spaceship || my_spaceship->scanning_delay > 0.0f)
@@ -60,7 +60,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     // Draw and hide the probe radar.
     probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
-    probe_radar->setPosition(-270, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+    probe_radar->setPosition(120, 0, sp::Alignment::CenterLeft)->setSize(850, 850)->hide();
     probe_radar->setAutoCentering(false)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NoFogOfWar);
     probe_radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
@@ -86,7 +86,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
     custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
-    custom_function_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
+    custom_function_sidebar->setPosition(-15, 210, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
+
 
     // Scan button.
     scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
@@ -260,7 +261,26 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             targets.clear();
     }
 
-    sidebar_selector->setVisible(sidebar_selector->getSelectionIndex() > 0 || custom_function_sidebar->hasEntries());
+// Responsive layout for custom button sidebar. 900x1440 vpixels is 16:10, so this would roughly be the threshold.
+
+    int current_width = getRect().size.x;
+    sidebar_selector->setVisible(current_width < 1435 && (sidebar_selector->getSelectionIndex() > 0 || custom_function_sidebar->hasEntries()));
+    if (current_width < 1435 || !custom_function_sidebar->hasEntries())
+    {
+        info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
+        sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight);
+        custom_function_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 1);
+        custom_function_sidebar->setPosition(-20, 210, sp::Alignment::TopRight);
+        info_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 0);
+    }
+    else
+    {
+        info_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
+        sidebar_selector->setPosition(-280, 120, sp::Alignment::TopRight);
+        custom_function_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
+        custom_function_sidebar->show();
+        info_sidebar->show();
+    }
 
     info_callsign->setValue("-");
     info_distance->setValue("-");
