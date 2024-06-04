@@ -200,6 +200,13 @@ public:
     //Debug
     sp::io::Keybinding debug_show_fps;
     sp::io::Keybinding debug_show_timing;
+    
+    //Custom buttons
+    sp::io::Keybinding custom_button_launch_pad_1;
+    sp::io::Keybinding custom_button_launch_pad_2;
+    sp::io::Keybinding custom_button_launch_pad_3;
+    sp::io::Keybinding custom_button_launch_pad_4;
+    sp::io::Keybinding custom_button_dock_to_odysseus;
 };
 extern Keys keys;
 

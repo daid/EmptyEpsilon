@@ -78,6 +78,13 @@ function init()
 
 	starfall = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(-80000, -60000), y + random(-80000, -60000)):orderFlyFormation(flagship, -3500, 5500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("OSS Starfall"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false)
 
+  	-- Add common GM functions
+	addGMFunction("Sync buttons", sync_buttons)
+
+	addGMFunction("Enemy north", wavenorth)
+	addGMFunction("Enemy east", waveeast)
+	addGMFunction("Enemy south", wavesouth)
+	addGMFunction("Enemy west", wavewest)
 
 	addGMFunction("Change scenario to 06", changeScenarioPrep)
 

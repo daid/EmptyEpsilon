@@ -63,6 +63,13 @@ function init()
 
 	immortal = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(-80000, -50000), y + random(-80000, -50000)):orderFlyFormation(flagship, -5500, 3500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("OSS Immortal"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false)
 
+	-- Add common GM functions
+	addGMFunction("Sync buttons", sync_buttons)
+
+	addGMFunction("Enemy north", wavenorth)
+	addGMFunction("Enemy east", waveeast)
+	addGMFunction("Enemy south", wavesouth)
+	addGMFunction("Enemy west", wavewest)
 
 	addGMFunction("Change scenario to 12", changeScenarioPrep)
 end

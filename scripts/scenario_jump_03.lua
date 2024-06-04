@@ -7,15 +7,23 @@ require("utils_odysseus.lua")
 
 function init()
 
-  for n=1,100 do
-    Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
-    VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
-  end
+  	for n=1,100 do
+    	Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
+    	VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
+  	end
 
   -- Planet
 	planet1 = Planet():setPosition(82000, 40000):setPlanetSurfaceTexture("planets/DE47-HC55.png"):setPlanetRadius(40000)
 
-  addGMFunction("Generate EOC Fleet", function()
+  	-- Add common GM functions
+	addGMFunction("Sync buttons", sync_buttons)
+
+	addGMFunction("Enemy north", wavenorth)
+	addGMFunction("Enemy east", waveeast)
+	addGMFunction("Enemy south", wavesouth)
+	addGMFunction("Enemy west", wavewest)
+
+  	addGMFunction("Generate EOC Fleet", function()
 
 		x, y = odysseus:getPosition()
 

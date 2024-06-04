@@ -384,6 +384,12 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     SHIP_VARIABLE("RedAlert", ship->getAlertLevel() == AL_RedAlert ? 1.0f : 0.0f);
     SHIP_VARIABLE("SelfDestruct", ship->activate_self_destruct ? 1.0f : 0.0f);
     SHIP_VARIABLE("SelfDestructCountdown", ship->self_destruct_countdown / 10.0f);
+    SHIP_VARIABLE("LandingPad1Status", ship->isLandingPadDestroyed(1) ? 0.0f : ship->isLandingPadDocked(1) ? 0.5f : 1.0f);
+    SHIP_VARIABLE("LandingPad2Status", ship->isLandingPadDestroyed(2) ? 0.0f : ship->isLandingPadDocked(2) ? 0.5f : 1.0f);
+    SHIP_VARIABLE("LandingPad3Status", ship->isLandingPadDestroyed(3) ? 0.0f : ship->isLandingPadDocked(3) ? 0.5f : 1.0f);
+    SHIP_VARIABLE("LandingPad4Status", ship->isLandingPadDestroyed(4) ? 0.0f : ship->isLandingPadDocked(4) ? 0.5f : 1.0f);
+    SHIP_VARIABLE("AbsImpulse", abs(ship->current_impulse * ship->getSystemEffectiveness(SYS_Impulse)));
+
     for(int n=0; n<max_weapon_tubes; n++)
     {
         SHIP_VARIABLE("TubeLoaded" + string(n), ship->weapon_tube[n].isLoaded() ? 1.0f : 0.0f);

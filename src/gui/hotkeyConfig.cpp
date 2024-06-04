@@ -285,7 +285,13 @@ Keys::Keys() :
     spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
 
     debug_show_fps("DEBUG_SHOW_FPS", "F10"),
-    debug_show_timing("DEBUG_SHOW_TIMING", "F11")
+    debug_show_timing("DEBUG_SHOW_TIMING", "F11"),
+
+    custom_button_launch_pad_1("CUSTOM_BUTTON_LAUNCH_PAD_1"),
+    custom_button_launch_pad_2("CUSTOM_BUTTON_LAUNCH_PAD_2"),
+    custom_button_launch_pad_3("CUSTOM_BUTTON_LAUNCH_PAD_3"),
+    custom_button_launch_pad_4("CUSTOM_BUTTON_LAUNCH_PAD_4"),
+    custom_button_dock_to_odysseus("CUSTOM_BUTTON_DOCK_TO_ODYSSEUS")
 {
 }
 
@@ -449,4 +455,11 @@ void Keys::init()
     //Debug
     debug_show_fps.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_debug", "Show FPS"));
     debug_show_timing.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_debug", "Show debug timing"));
+
+    //Custom buttons
+    custom_button_launch_pad_1.setLabel(tr("hotkey_menu", "Custom"), tr("hotkey_custom", "Launch Landing Pad 1"));
+    custom_button_launch_pad_2.setLabel(tr("hotkey_menu", "Custom"), tr("hotkey_custom", "Launch Landing Pad 2"));
+    custom_button_launch_pad_3.setLabel(tr("hotkey_menu", "Custom"), tr("hotkey_custom", "Launch Landing Pad 3"));
+    custom_button_launch_pad_4.setLabel(tr("hotkey_menu", "Custom"), tr("hotkey_custom", "Launch Landing Pad 4"));
+    custom_button_dock_to_odysseus.setLabel(tr("hotkey_menu", "Custom"), tr("hotkey_custom", "Dock to Odysseus"));
 }

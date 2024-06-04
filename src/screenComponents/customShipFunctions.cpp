@@ -48,6 +48,22 @@ void GuiCustomShipFunctions::checkEntries()
                 label->setText(caption);
             }
         }
+
+        if (keys.custom_button_launch_pad_1.getDown() && entries[n].name == "launch_pad_1") {
+          my_spaceship->commandCustomFunction("launch_pad_1");          
+        }
+        if (keys.custom_button_launch_pad_2.getDown() && entries[n].name == "launch_pad_2") {
+          my_spaceship->commandCustomFunction("launch_pad_2");          
+        }
+        if (keys.custom_button_launch_pad_3.getDown() && entries[n].name == "launch_pad_3") {
+          my_spaceship->commandCustomFunction("launch_pad_3");          
+        }
+        if (keys.custom_button_launch_pad_4.getDown() && entries[n].name == "launch_pad_4") {
+          my_spaceship->commandCustomFunction("launch_pad_4");          
+        }
+        if (keys.custom_button_dock_to_odysseus.getDown() && entries[n].name == "dock_to_odysseus") {
+          my_spaceship->commandCustomFunction("dock_to_odysseus");          
+        }
     }
 }
 

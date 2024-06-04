@@ -7,16 +7,25 @@ require("utils_odysseus.lua")
 
 function init()
 
-  -- Station
-  station = SpaceStation():setFaction("EOC Starfleet"):setTemplate("Medium station"):setCallSign("Solaris 7"):setPosition(20000, 20000)
+  	-- Station
+  	station = SpaceStation():setFaction("EOC Starfleet"):setTemplate("Medium station"):setCallSign("Solaris 7"):setPosition(20000, 20000)
 
-  for n=1,100 do
-    Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
+  	for n=1,100 do
+    	Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
 		VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
-  end
+  	end
 	for n=1,10 do
 		Nebula():setPosition(random(-100000, 100000), random(-100000, 100000))
-  end
+ 	end
+
+	-- Add common GM functions
+	addGMFunction("Sync buttons", sync_buttons)
+
+	addGMFunction("Enemy north", wavenorth)
+	addGMFunction("Enemy east", waveeast)
+	addGMFunction("Enemy south", wavesouth)
+	addGMFunction("Enemy west", wavewest)
+
 	addGMFunction("Change scenario to 02", changeScenarioPrep)
 end
 

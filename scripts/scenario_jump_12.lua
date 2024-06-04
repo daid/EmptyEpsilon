@@ -11,6 +11,14 @@ function init()
 		Asteroid():setPosition(random(-75000, 75000), random(-75000, 75000))
 	end
 
+	-- Add common GM functions
+	addGMFunction("Sync buttons", sync_buttons)
+
+	addGMFunction("Enemy north", wavenorth)
+	addGMFunction("Enemy east", waveeast)
+	addGMFunction("Enemy south", wavesouth)
+	addGMFunction("Enemy west", wavewest)
+
 	addGMFunction("Change scenario to 13", changeScenarioPrep)
 
 end
