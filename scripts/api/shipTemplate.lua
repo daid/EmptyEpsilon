@@ -218,6 +218,9 @@ function ShipTemplate:setBeamWeapon(index, arc, direction, range, cycle_time, da
         self.beam_weapons[#self.beam_weapons + 1] = {}
     end
     self.beam_weapons[index + 1] = {arc=arc, direction=direction, range=range, cycle_time=cycle_time, damage=damage}
+    if range <= 0 and #self.beam_weapons == index + 1 then
+        self.beam_weapons[index + 1] = nil
+    end
     return self
 end
 --- Converts a BeamWeapon into a turret and defines its traits for SpaceShips created from this ShipTemplate.

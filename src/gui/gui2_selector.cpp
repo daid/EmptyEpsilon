@@ -83,6 +83,7 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
                 popup_buttons[n]->setTextSize(text_size);
             }else{
                 popup_buttons[n]->setText(entries[n].name);
+                popup_buttons[n]->show();
             }
             popup_buttons[n]->setValue(int(n) == selection_index);
             popup_buttons[n]->setPosition(0, n * 50, sp::Alignment::TopLeft);

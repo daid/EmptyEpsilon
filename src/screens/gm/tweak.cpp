@@ -66,6 +66,25 @@ public:
     }
     std::function<bool()> update_func;
 };
+class GuiVectorTweak : public GuiSelector {
+public:
+    GuiVectorTweak(GuiContainer* owner, string id)
+    : GuiSelector(owner, id, [](int index, string value) {}) {
+        setSize(GuiElement::GuiSizeMax, 30);
+        setTextSize(20);
+    }
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) {
+            int count = update_func();
+            while(count > entryCount())
+                addEntry(string(entryCount()+1), entryCount());
+            while(count < entryCount())
+                removeEntry(entryCount()-1);
+        }
+        GuiSelector::onDraw(target);
+    }
+    std::function<size_t()> update_func;
+};
 
 
 #define ADD_PAGE(LABEL, COMPONENT) \
@@ -101,7 +120,34 @@ public:
         auto ui = new GuiToggleTweak(row, "", [this](bool value) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = value; }); \
         ui->update_func = [this]() -> bool { auto v = entity.getComponent<COMPONENT>(); if (v) return v->VALUE; return false; }; \
     } while(0)
-
+#define ADD_VECTOR(LABEL, COMPONENT, VECTOR) do { \
+        auto row = new GuiElement(new_page->contents, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        vector_selector = new GuiVectorTweak(row, "VECTOR_SELECTOR"); \
+        vector_selector->update_func = [this]() -> size_t { auto v = entity.getComponent<COMPONENT>(); if (v) return v->VECTOR.size(); return 0; }; \
+        auto add = new GuiButton(row, "", "Add", [this, vector_selector](){ auto v = entity.getComponent<COMPONENT>(); if (v) { v->VECTOR.emplace_back(); vector_selector->setSelectionIndex(v->VECTOR.size()); } }); \
+        add->setTextSize(20)->setSize(50, 30); \
+        auto del = new GuiButton(row, "", "Del", [this](){ auto v = entity.getComponent<COMPONENT>(); if (v) v->VECTOR.pop_back(); }); \
+        del->setTextSize(20)->setSize(50, 30); \
+    } while(0)
+#define ADD_VECTOR_NUM_TEXT_TWEAK(LABEL, COMPONENT, VECTOR, VALUE) do { \
+        auto row = new GuiElement(new_page->contents, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiTextTweak(row); \
+        ui->update_func = [this, vector_selector]() -> string { auto v = entity.getComponent<COMPONENT>(); \
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) \
+                return string(v->VECTOR[vector_selector->getSelectionIndex()].VALUE); \
+            return ""; \
+        }; \
+        ui->callback([this, vector_selector](string text) { auto v = entity.getComponent<COMPONENT>(); \
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = text.toFloat(); \
+        }); \
+    } while(0)
 
 GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 : GuiPanel(owner, "GM_TWEAK_DIALOG")
@@ -120,6 +166,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     list->setPosition(25, 25, sp::Alignment::TopLeft);
 
     GuiTweakPage* new_page;
+    GuiVectorTweak* vector_selector;
     ADD_PAGE(tr("tweak-tab", "Callsign"), CallSign);
     ADD_TEXT_TWEAK(tr("tweak-text", "Callsign:"), CallSign, callsign);
     ADD_PAGE(tr("tweak-tab", "Typename"), TypeName);
@@ -162,6 +209,24 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change rate:"), ManeuveringThrusters, power_change_rate_per_second);
         ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair:"), ManeuveringThrusters, auto_repair_per_second);
     }
+    ADD_PAGE(tr("tweak-tab", "Beam weapons"), BeamWeaponSys);
+    {
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health:"), BeamWeaponSys, health);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health max:"), BeamWeaponSys, health_max);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat:"), BeamWeaponSys, heat_level);
+        ADD_BOOL_TWEAK(tr("tweak-text", "Can be hacked:"), BeamWeaponSys, can_be_hacked);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power factor:"), BeamWeaponSys, power_factor);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat rate:"), BeamWeaponSys, heat_add_rate_per_second);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Coolant change rate:"), BeamWeaponSys, coolant_change_rate_per_second);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change rate:"), BeamWeaponSys, power_change_rate_per_second);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair:"), BeamWeaponSys, auto_repair_per_second);
+    }
+    ADD_VECTOR(tr("tweak-vector", "Mounts"), BeamWeaponSys, mounts);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Arc:"), BeamWeaponSys, mounts, arc);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Direction:"), BeamWeaponSys, mounts, direction);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), BeamWeaponSys, mounts, range);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Cycle time:"), BeamWeaponSys, mounts, cycle_time);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Damage:"), BeamWeaponSys, mounts, damage);
 
     for(GuiTweakPage* page : pages)
     {
