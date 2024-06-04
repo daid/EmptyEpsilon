@@ -49,6 +49,7 @@
 #include "components/radar.h"
 #include "components/internalrooms.h"
 #include "components/moveto.h"
+#include "components/lifetime.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
 #include "systems/missilesystem.h"

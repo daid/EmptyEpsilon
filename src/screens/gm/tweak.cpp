@@ -3,7 +3,35 @@
 #include "playerInfo.h"
 #include "components/collision.h"
 #include "components/name.h"
+#include "components/ai.h"
+#include "components/avoidobject.h"
+#include "components/beamweapon.h"
+#include "components/comms.h"
 #include "components/coolant.h"
+#include "components/docking.h"
+#include "components/gravity.h"
+#include "components/hacking.h"
+#include "components/hull.h"
+#include "components/impulse.h"
+#include "components/jumpdrive.h"
+#include "components/lifetime.h"
+#include "components/maneuveringthrusters.h"
+#include "components/missile.h"
+#include "components/missiletubes.h"
+#include "components/name.h"
+#include "components/orbit.h"
+#include "components/pickup.h"
+#include "components/player.h"
+#include "components/probe.h"
+#include "components/radarblock.h"
+#include "components/reactor.h"
+#include "components/rendering.h"
+#include "components/scanning.h"
+#include "components/selfdestruct.h"
+#include "components/shields.h"
+#include "components/spin.h"
+#include "components/warpdrive.h"
+
 
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_keyvaluedisplay.h"
@@ -62,7 +90,7 @@ public:
         auto label = new GuiLabel(row, "", LABEL, 20); \
         label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
         auto ui = new GuiTextTweak(row); \
-        ui->update_func = [this]() -> string { auto v = entity.getComponent<COMPONENT>(); if (v) return std::to_string(v->VALUE); return ""; }; \
+        ui->update_func = [this]() -> string { auto v = entity.getComponent<COMPONENT>(); if (v) return string(v->VALUE); return ""; }; \
         ui->callback([this](string text) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = text.toFloat(); }); \
     } while(0)
 #define ADD_BOOL_TWEAK(LABEL, COMPONENT, VALUE) do { \
@@ -101,6 +129,27 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Coolant, max);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max per system:"), Coolant, max_coolant_per_system);
     ADD_BOOL_TWEAK(tr("tweak-text", "Auto levels:"), Coolant, auto_levels);
+    ADD_PAGE(tr("tweak-tab", "Hull"), Hull);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Current:"), Hull, current);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Hull, max);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Allow destruction:"), Hull, allow_destruction);
+    ADD_PAGE(tr("tweak-tab", "Impulse Engine"), ImpulseEngine);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed forward:"), ImpulseEngine, max_speed_forward);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed reverse:"), ImpulseEngine, max_speed_reverse);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Acceleration forward:"), ImpulseEngine, acceleration_forward);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Acceleration reverse:"), ImpulseEngine, acceleration_reverse);
+    {
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health:"), ImpulseEngine, health);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health max:"), ImpulseEngine, health_max);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat:"), ImpulseEngine, heat_level);
+        ADD_BOOL_TWEAK(tr("tweak-text", "Can be hacked:"), ImpulseEngine, can_be_hacked);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power factor:"), ImpulseEngine, power_factor);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat rate:"), ImpulseEngine, heat_add_rate_per_second);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Coolant change rate:"), ImpulseEngine, coolant_change_rate_per_second);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change rate:"), ImpulseEngine, power_change_rate_per_second);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair:"), ImpulseEngine, auto_repair_per_second);
+    }
+    ADD_PAGE(tr("tweak-tab", "Coolant"), Coolant);
 
     for(GuiTweakPage* page : pages)
     {

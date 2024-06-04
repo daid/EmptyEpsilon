@@ -3,6 +3,7 @@
 #include "components/collision.h"
 #include "components/missiletubes.h"
 #include "components/missile.h"
+#include "components/lifetime.h"
 #include "components/hull.h"
 #include "components/radar.h"
 #include "components/docking.h"

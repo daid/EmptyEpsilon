@@ -53,10 +53,3 @@ public:
     float end_size = 20.0f;
     float life_time = 5.0f;
 };
-
-//TODO: Not really part of missile.h
-class LifeTime
-{
-public:
-    float lifetime = 1.0f;
-};
