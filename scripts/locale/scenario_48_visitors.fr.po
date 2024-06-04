@@ -846,7 +846,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:2626
 msgctxt "upgrade-comms"
 msgid "Add missile tube"
-msgstr ""
+msgstr "Ajouter un tube de missile"
 
 #: scripts/scenario_48_visitors.lua:2649
 #, lua-format
@@ -3363,7 +3363,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:5197
 msgctxt "scienceDB"
 msgid "Location, Faction"
-msgstr ""
+msgstr "Localisation, faction"
 
 #: scripts/scenario_48_visitors.lua:5198
 #, lua-format
@@ -3374,49 +3374,49 @@ msgstr "%s, %s"
 #: scripts/scenario_48_visitors.lua:5204
 msgctxt "scienceDB"
 msgid "share energy"
-msgstr ""
+msgstr "partager l'énergie"
 
 #: scripts/scenario_48_visitors.lua:5209
 msgctxt "scienceDB"
 msgid "repair hull"
-msgstr ""
+msgstr "réparer la coque"
 
 #: scripts/scenario_48_visitors.lua:5211
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, repair hull"
-msgstr ""
+msgstr "%s, réparer la coque"
 
 #: scripts/scenario_48_visitors.lua:5217
 msgctxt "scienceDB"
 msgid "replenish probes"
-msgstr ""
+msgstr "réapprovisionner les sondes"
 
 #: scripts/scenario_48_visitors.lua:5219
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, replenish probes"
-msgstr ""
+msgstr "%s, réapprovisionner les sondes"
 
 #: scripts/scenario_48_visitors.lua:5224
 msgctxt "scienceDB"
 msgid "Docking Services"
-msgstr ""
+msgstr "Services d'accueil"
 
 #: scripts/scenario_48_visitors.lua:5226
 msgctxt "scienceDB"
 msgid "Docking Service"
-msgstr ""
+msgstr "Service d'accueil"
 
 #: scripts/scenario_48_visitors.lua:5248
 msgctxt "scienceDB"
 msgid "Restock Homing"
-msgstr ""
+msgstr "Réapprovisionner les Homing"
 
 #: scripts/scenario_48_visitors.lua:5249
 msgctxt "scienceDB"
 msgid "Restock HVLI"
-msgstr ""
+msgstr "Réapprovisionner les HVLI"
 
 #: scripts/scenario_48_visitors.lua:5250
 msgctxt "scienceDB"

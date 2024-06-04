@@ -27,7 +27,7 @@ msgid ""
 "\n"
 "Version 5"
 msgstr ""
-"EN COURS DE TRADUCTION 27%\n"
+"EN COURS DE TRADUCTION 29%\n"
 "\n"
 "War temperature rises along the border between Human Navy space and Kraylor "
 "space. The treaty holds for now, but the diplomats and intelligence "
@@ -3111,7 +3111,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:6286
 msgctxt "scienceDB"
 msgid "May reduce beam cycle time"
-msgstr ""
+msgstr "Peut réduire le temps de cycle des faisceaux laser"
 
 #: scripts/scenario_59_border.lua:6301
 #, lua-format
@@ -3156,7 +3156,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:6372
 msgctxt "scienceDB"
 msgid "May add a missile tube"
-msgstr ""
+msgstr "Peut ajouter un tube de missile"
 
 #: scripts/scenario_59_border.lua:6387
 #, lua-format
@@ -3731,7 +3731,6 @@ msgstr ""
 "Réputation : %i"
 
 #: scripts/scenario_59_border.lua:7355
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
 msgstr "Nous avons besoin de nous réapprovisionner en munitions"
@@ -3749,13 +3748,11 @@ msgstr ""
 "Réputation : %i"
 
 #: scripts/scenario_59_border.lua:7365
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? ("
 msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 
 #: scripts/scenario_59_border.lua:7367
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
 msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
@@ -3763,19 +3760,17 @@ msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 #: scripts/scenario_59_border.lua:7370 scripts/scenario_59_border.lua:7383
 #: scripts/scenario_59_border.lua:7395 scripts/scenario_59_border.lua:7407
 #: scripts/scenario_59_border.lua:7419
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
 msgstr "%s%d rép chacun)"
 
 #: scripts/scenario_59_border.lua:7379
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
 msgstr "Veuillez réapprovisionner nos missiles EMP ("
 
 #: scripts/scenario_59_border.lua:7381
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Got any EMPs? ("
 msgstr "Avez-vous des EMP ? ("
@@ -5340,54 +5335,54 @@ msgstr "Taille"
 #: scripts/scenario_59_border.lua:9663
 msgctxt "scienceDB"
 msgid "Location, Faction"
-msgstr ""
+msgstr "Localisation, faction"
 
 #: scripts/scenario_59_border.lua:9669
 msgctxt "scienceDB"
 msgid "share energy"
-msgstr ""
+msgstr "partager l'énergie"
 
 #: scripts/scenario_59_border.lua:9674
 msgctxt "scienceDB"
 msgid "repair hull"
-msgstr ""
+msgstr "réparer la coque"
 
 #: scripts/scenario_59_border.lua:9676
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, repair hull"
-msgstr ""
+msgstr "%s, réparer la coque"
 
 #: scripts/scenario_59_border.lua:9682
 msgctxt "scienceDB"
 msgid "replenish probes"
-msgstr ""
+msgstr "réapprovisionner les sondes"
 
 #: scripts/scenario_59_border.lua:9684
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, replenish probes"
-msgstr ""
+msgstr "%s, réapprovisionner les sondes"
 
 #: scripts/scenario_59_border.lua:9689
 msgctxt "scienceDB"
 msgid "Docking Services"
-msgstr ""
+msgstr "Services d'accueil"
 
 #: scripts/scenario_59_border.lua:9691
 msgctxt "scienceDB"
 msgid "Docking Service"
-msgstr ""
+msgstr "Service d'accueil"
 
 #: scripts/scenario_59_border.lua:9713
 msgctxt "scienceDB"
 msgid "Restock Homing"
-msgstr ""
+msgstr "Réapprovisionner Homing"
 
 #: scripts/scenario_59_border.lua:9714
 msgctxt "scienceDB"
 msgid "Restock HVLI"
-msgstr ""
+msgstr "Réapprovisionner les HVLI"
 
 #: scripts/scenario_59_border.lua:9715
 msgctxt "scienceDB"
@@ -6059,7 +6054,7 @@ msgid "%s %i"
 msgstr "%s %i"
 
 #: scripts/scenario_59_border.lua:11509
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i:%.2i"
 msgstr "%s %i : %.2i"
@@ -6558,7 +6553,7 @@ msgstr "%s %i"
 #: scripts/scenario_59_border.lua:14752 scripts/scenario_59_border.lua:14796
 #: scripts/scenario_59_border.lua:14936 scripts/scenario_59_border.lua:14980
 #: scripts/scenario_59_border.lua:15024 scripts/scenario_59_border.lua:15118
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "-tabHelms&Tactical"
 msgid "%s %i:%.2i"
 msgstr "%s %i : %.2i"
@@ -6577,7 +6572,7 @@ msgstr "%s %i"
 
 #: scripts/scenario_59_border.lua:14840 scripts/scenario_59_border.lua:14888
 #: scripts/scenario_59_border.lua:15069
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s %i:%.2i"
 msgstr "%s %i : %.2i"
@@ -6624,7 +6619,7 @@ msgid "%s %i"
 msgstr "%s %i"
 
 #: scripts/scenario_59_border.lua:15162
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "-tabEngineer&Engineer+"
 msgid "%s %i:%.2i"
 msgstr "%s %i : %.2i"
