@@ -149,7 +149,19 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change rate:"), ImpulseEngine, power_change_rate_per_second);
         ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair:"), ImpulseEngine, auto_repair_per_second);
     }
-    ADD_PAGE(tr("tweak-tab", "Coolant"), Coolant);
+    ADD_PAGE(tr("tweak-tab", "Maneuvering thrusters"), ManeuveringThrusters);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed:"), ManeuveringThrusters, speed);
+    {
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health:"), ManeuveringThrusters, health);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health max:"), ManeuveringThrusters, health_max);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat:"), ManeuveringThrusters, heat_level);
+        ADD_BOOL_TWEAK(tr("tweak-text", "Can be hacked:"), ManeuveringThrusters, can_be_hacked);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power factor:"), ManeuveringThrusters, power_factor);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat rate:"), ManeuveringThrusters, heat_add_rate_per_second);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Coolant change rate:"), ManeuveringThrusters, coolant_change_rate_per_second);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change rate:"), ManeuveringThrusters, power_change_rate_per_second);
+        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair:"), ManeuveringThrusters, auto_repair_per_second);
+    }
 
     for(GuiTweakPage* page : pages)
     {
