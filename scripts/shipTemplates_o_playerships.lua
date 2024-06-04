@@ -16,6 +16,9 @@ template:setTubeDirection(0, 0)
 template:setTubeDirection(1, 0)
 template:setWeaponStorage("Homing", 250)
 
+template:setShortRangeRadarRange(10000)
+template:setLongRangeRadarRange(100000)
+
 template:setRepairCrewCount(0)
 --	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
 template:addRoomSystem( 0, 1, 1, 2, "Impulse")
@@ -58,6 +61,8 @@ template:setCloaking(false)
 template:setEnergyStorage(600)
 template:setWeaponStorage("Homing", 250)
 
+template:setShortRangeRadarRange(10000)
+template:setLongRangeRadarRange(100000)
 
 template:setRepairCrewCount(0)
 --	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
@@ -105,6 +110,8 @@ template:setEnergyStorage(1000)
 template:setCombatManeuver(500, 150)
 template:setWeaponStorage("Homing", 500)
 template:setWeaponStorage("EMP", 500)
+template:setShortRangeRadarRange(10000)
+template:setLongRangeRadarRange(100000)
 
 template:setRepairCrewCount(0)
 --	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize

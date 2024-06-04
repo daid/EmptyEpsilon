@@ -113,6 +113,8 @@ Keys::Keys() :
     helms_min_impulse("HELMS_IMPULSE_MIN"),
     helms_turn_left("HELMS_TURN_LEFT", "Left"),
     helms_turn_right("HELMS_TURN_RIGHT", "Right"),
+    helms_turn_left_fine("HELMS_TURN_LEFT_FINE", "Left (fine)"),
+    helms_turn_right_fine("HELMS_TURN_RIGHT_FINE", "Right (fine)"),
     helms_warp0("HELMS_WARP0", "6"),
     helms_warp1("HELMS_WARP1", "7"),
     helms_warp2("HELMS_WARP2", "8"),
@@ -192,7 +194,9 @@ Keys::Keys() :
         {"WEAPONS_FIRE_TUBE16"},
     }},
     weapons_enemy_next_target("WEAPONS_TARGET_NEXT_ENEMY", "C"),
+		weapons_enemy_prev_target("WEAPONS_TARGET_PREV_ENEMY"),
     weapons_next_target("WEAPONS_TARGET_NEXT", "Z"),
+		weapons_prev_target("WEAPONS_TARGET_PREV"),
     weapons_toggle_shields("WEAPONS_SHIELDS_TOGGLE", "S"),
     weapons_enable_shields("WEAPONS_SHIELDS_ENABLE"),
     weapons_disable_shields("WEAPONS_SHIELDS_DISABLE"),
@@ -210,8 +214,11 @@ Keys::Keys() :
     weapons_aim_right("WEAPONS_AIM_RIGHT", "H"),
 
     //Science
+    science_probe_view("SCIENCE_PROBE_VIEW"),
     science_scan_object("SCIENCE_SCAN_OBJECT", "S"),
+    science_cancel_scan("SCIENCE_CANCEL_SCAN"),
     science_select_next_scannable("SCIENCE_SELECT_NEXT_SCANNABLE", "C"),
+    science_select_prev_scannable("SCIENCE_SELECT_PREV_SCANNABLE"),
     science_scan_param_increase{{
         {"SIENCE_SCAN_PARAM_INCREASE_1"},
         {"SIENCE_SCAN_PARAM_INCREASE_2"},
@@ -262,9 +269,15 @@ Keys::Keys() :
     engineering_self_destruct_confirm("ENGINEERING_SELF_DESTRUCT_CONFIRM"),
     engineering_self_destruct_cancel("ENGINEERING_SELF_DESTRUCT_CANCEL"),
 
+    //Relay
     relay_alert_level_none("RELAY_ALERT_NONE"),
     relay_alert_level_yellow("RELAY_ALERT_YELLOW"),
     relay_alert_level_red("RELAY_ALERT_RED"),
+    relay_probe_launch("RELAY_PROBE_LAUNCH"),
+    relay_probe_link_to_science("RELAY_PROBE_LINK_TO_SCIENCE"),
+    relay_hacking_start("RELAY HACKING_START"),
+    relay_waypoint_set("RELAY_WAYPOINT_SET"),
+    relay_waypoint_delete("RELAY_WAYOINT_DELETE"),
 
     gm_delete("GM_DELETE", "Delete"),
     gm_clipboardcopy("GM_CLIPBOARD_COPY", "F5"),
@@ -319,6 +332,8 @@ void Keys::init()
     helms_min_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Max reverse impulse"));
     helms_turn_left.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn left"));
     helms_turn_right.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn right"));
+    helms_turn_left_fine.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn left (fine)"));
+    helms_turn_right_fine.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn right (fine)"));
     helms_warp0.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Warp off"));
     helms_warp1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Warp 1"));
     helms_warp2.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Warp 2"));
@@ -350,7 +365,9 @@ void Keys::init()
         weapons_fire_tube[n].setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Fire tube {number}").format({{"number", string(n+1)}}));
     }
     weapons_enemy_next_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select next hostile target"));
+    weapons_enemy_prev_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select previous hostile target"));
     weapons_next_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select next target (any)"));
+    weapons_prev_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select previous target (any)"));
     weapons_toggle_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Toggle shields"));
     weapons_enable_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Enable shields"));
     weapons_disable_shields.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Disable shields"));
@@ -368,8 +385,11 @@ void Keys::init()
     weapons_aim_right.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the right"));
 
     //Science
+    science_probe_view.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Probe View"));
     science_scan_object.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object"));
+    science_cancel_scan.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Cancel scan"));
     science_select_next_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select next scannable object"));
+    science_select_prev_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select prev scannable object"));
     for(auto n = 0u; n < science_scan_param_increase.size(); n++)
     {
         science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} increase").format({{"number", string(n+1)}}));
@@ -411,6 +431,11 @@ void Keys::init()
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
     relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Yellow"));
     relay_alert_level_red.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Red"));
+    relay_probe_launch.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Launch probe"));
+    relay_probe_link_to_science.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Link probe to science"));
+    relay_hacking_start.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Start hacking"));
+    relay_waypoint_set.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Set waypoint"));
+    relay_waypoint_delete.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Delete waypoint"));
 
     cinematic.init();
     topdown.init();

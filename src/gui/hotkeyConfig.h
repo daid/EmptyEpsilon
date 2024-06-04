@@ -54,6 +54,8 @@ public:
     sp::io::Keybinding helms_min_impulse;
     sp::io::Keybinding helms_turn_left;
     sp::io::Keybinding helms_turn_right;
+    sp::io::Keybinding helms_turn_left_fine;
+    sp::io::Keybinding helms_turn_right_fine;
     sp::io::Keybinding helms_warp0;
     sp::io::Keybinding helms_warp1;
     sp::io::Keybinding helms_warp2;
@@ -82,7 +84,9 @@ public:
     std::array<sp::io::Keybinding, 16> weapons_unload_tube;
     std::array<sp::io::Keybinding, 16> weapons_fire_tube;
     sp::io::Keybinding weapons_enemy_next_target;
+    sp::io::Keybinding weapons_enemy_prev_target;
     sp::io::Keybinding weapons_next_target;
+    sp::io::Keybinding weapons_prev_target;
     sp::io::Keybinding weapons_toggle_shields;
     sp::io::Keybinding weapons_enable_shields;
     sp::io::Keybinding weapons_disable_shields;
@@ -100,8 +104,11 @@ public:
     sp::io::Keybinding weapons_aim_right;
 
     //Science
+    sp::io::Keybinding science_probe_view;
     sp::io::Keybinding science_scan_object;
+    sp::io::Keybinding science_cancel_scan;
     sp::io::Keybinding science_select_next_scannable;
+    sp::io::Keybinding science_select_prev_scannable;
     std::array<sp::io::Keybinding, 4> science_scan_param_increase;
     std::array<sp::io::Keybinding, 4> science_scan_param_decrease;
     std::array<sp::io::Keybinding, 4> science_scan_param_set;
@@ -141,6 +148,11 @@ public:
     sp::io::Keybinding relay_alert_level_none;
     sp::io::Keybinding relay_alert_level_yellow;
     sp::io::Keybinding relay_alert_level_red;
+    sp::io::Keybinding relay_probe_launch;
+    sp::io::Keybinding relay_probe_link_to_science;
+    sp::io::Keybinding relay_hacking_start;
+    sp::io::Keybinding relay_waypoint_set;
+    sp::io::Keybinding relay_waypoint_delete;
 
     // Cinematic View
     struct CinematicKeys {
