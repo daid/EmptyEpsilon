@@ -19,8 +19,7 @@ public:
     std::function<void(sp::ecs::Entity)> remove_component;
 
     GuiButton* add_remove_button;
-    GuiElement* left;
-    GuiElement* right;
+    GuiElement* contents;
 
     sp::ecs::Entity entity;
 };

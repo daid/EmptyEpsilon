@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "components/collision.h"
 #include "components/name.h"
+#include "components/coolant.h"
 
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_keyvaluedisplay.h"
@@ -16,13 +17,26 @@
 class GuiTextTweak : public GuiTextEntry {
 public:
     GuiTextTweak(GuiContainer* owner) : GuiTextEntry(owner, "", "") {
-        setSize(GuiElement::GuiSizeMax, 50);
+        setSize(GuiElement::GuiSizeMax, 30);
+        setTextSize(20);
     }
     virtual void onDraw(sp::RenderTarget& target) override {
         if (!focus) setText(update_func());
         GuiTextEntry::onDraw(target);
     }
     std::function<string()> update_func;
+};
+class GuiToggleTweak : public GuiToggleButton {
+public:
+    GuiToggleTweak(GuiContainer* owner, const string& label, GuiToggleButton::func_t callback) : GuiToggleButton(owner, "", label, callback) {
+        setSize(GuiElement::GuiSizeMax, 30);
+        setTextSize(20);
+    }
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) setValue(update_func());
+        GuiToggleButton::onDraw(target);
+    }
+    std::function<bool()> update_func;
 };
 
 
@@ -33,12 +47,33 @@ public:
     new_page->remove_component = [](sp::ecs::Entity e) { e.removeComponent<COMPONENT>(); }; \
     pages.push_back(new_page); \
     list->addEntry(LABEL, "");
-#define ADD_TEXT_TWEAK(SIDE, LABEL, COMPONENT, VALUE) do { \
-        (new GuiLabel(new_page->SIDE, "", LABEL, 30))->setSize(GuiElement::GuiSizeMax, 50); \
-        auto ui = new GuiTextTweak(new_page->SIDE); \
+#define ADD_TEXT_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->contents, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiTextTweak(row); \
         ui->update_func = [this]() -> string { auto v = entity.getComponent<COMPONENT>(); if (v) return v->VALUE; return ""; }; \
         ui->callback([this](string text) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = text; }); \
     } while(0)
+#define ADD_NUM_TEXT_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->contents, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiTextTweak(row); \
+        ui->update_func = [this]() -> string { auto v = entity.getComponent<COMPONENT>(); if (v) return std::to_string(v->VALUE); return ""; }; \
+        ui->callback([this](string text) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = text.toFloat(); }); \
+    } while(0)
+#define ADD_BOOL_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->contents, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiToggleTweak(row, "", [this](bool value) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = value; }); \
+        ui->update_func = [this]() -> bool { auto v = entity.getComponent<COMPONENT>(); if (v) return v->VALUE; return false; }; \
+    } while(0)
+
 
 GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 : GuiPanel(owner, "GM_TWEAK_DIALOG")
@@ -58,10 +93,14 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     GuiTweakPage* new_page;
     ADD_PAGE(tr("tweak-tab", "Callsign"), CallSign);
-    ADD_TEXT_TWEAK(left, tr("tweak-text", "Callsign:"), CallSign, callsign);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Callsign:"), CallSign, callsign);
     ADD_PAGE(tr("tweak-tab", "Typename"), TypeName);
-    ADD_TEXT_TWEAK(left, tr("tweak-text", "TypeName:"), TypeName, type_name);
-    ADD_TEXT_TWEAK(left, tr("tweak-text", "Localized:"), TypeName, localized);
+    ADD_TEXT_TWEAK(tr("tweak-text", "TypeName:"), TypeName, type_name);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Localized:"), TypeName, localized);
+    ADD_PAGE(tr("tweak-tab", "Coolant"), Coolant);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Coolant, max);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max per system:"), Coolant, max_coolant_per_system);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Auto levels:"), Coolant, auto_levels);
 
     for(GuiTweakPage* page : pages)
     {
@@ -95,11 +134,9 @@ GuiTweakPage::GuiTweakPage(GuiContainer* owner)
     });
     add_remove_button->setSize(300, 50)->setPosition(0, 15, sp::Alignment::TopCenter);
 
-    left = new GuiElement(this, "LEFT_LAYOUT");
-    left->setPosition(50, 75, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-
-    right = new GuiElement(this, "RIGHT_LAYOUT");
-    right->setPosition(-25, 75, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+    contents = new GuiElement(this, "CONTENT");
+    contents->setPosition(0, 75, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+    contents->setMargins(30, 0);
 }
 
 void GuiTweakPage::open(sp::ecs::Entity e)
@@ -111,11 +148,9 @@ void GuiTweakPage::onDraw(sp::RenderTarget& target)
 {
     if (has_component(entity)) {
         add_remove_button->setText(tr("tweak-button", "Remove component"));
-        left->show();
-        right->show();
+        contents->show();
     } else {
         add_remove_button->setText(tr("tweak-button", "Create component"));
-        left->hide();
-        right->hide();
+        contents->hide();
     }
 }
