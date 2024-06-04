@@ -6,10 +6,10 @@
 --- Example: SupplyDrop():setEnergy(500):setWeaponStorage("Homing",6)
 function SupplyDrop()
     local e = createEntity()
-    e.transform = {}
+    e.components.transform = {}
     for k, v in pairs(__model_data["ammo_box"]) do
         if string.sub(1, 2) ~= "__" then
-            e[k] = table.deepcopy(v)
+            e.components[k] = table.deepcopy(v)
         end
     end
     e.physics = {type="Sensor"}

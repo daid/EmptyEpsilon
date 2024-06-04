@@ -167,7 +167,7 @@ function __fillDefaultDatabaseData()
 	-- Populate the Factions top-level entry.
 	local faction_database = ScienceDatabase():setName(_("database", "Factions"))
 	for name, info in pairs(__faction_info) do
-        local entry = faction_database:addEntry(info.faction_info.locale_name);
+        local entry = faction_database:addEntry(info.components.faction_info.locale_name);
 		for name2, info2 in pairs(__faction_info) do
             if info ~= info2 then
 				local stance = _("stance", "Neutral");
@@ -178,10 +178,10 @@ function __fillDefaultDatabaseData()
 						if relation.relation == "friendly" then stance = _("stance", "Friendly") end
 					end
 				end
-				entry:addKeyValue(info2.faction_info.locale_name, stance);
+				entry:addKeyValue(info2.components.faction_info.locale_name, stance);
 			end
         end
-        entry:setLongDescription(info.description);
+        entry:setLongDescription(info.components.faction_info.description);
     end
 
     -- Populate the Ships top-level entry.

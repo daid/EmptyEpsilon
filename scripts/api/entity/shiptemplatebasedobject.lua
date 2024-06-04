@@ -16,40 +16,41 @@ local Entity = getLuaEntityFunctionTable()
 --- SpaceStation():setTemplate("Large Station")
 function Entity:setTemplate(template_name)
     local template = __ship_templates[template_name]
+    local comp = self.components
     if template == nil then
         return error("Failed to find template: " .. template_name)
     end
     -- print("Setting template:" .. template_name)
     for key, value in next, template, nil do
         if string.sub(key, 1, 2) ~= "__" then
-            self[key] = value
+            comp[key] = value
         end
     end
     if template.__type == "station" then
-        self.physics.type = "static"
+        comp.physics.type = "static"
     elseif template.__type == "playership" then
-        if self.shields then self.shields.active = false end
+        if comp.shields then comp.shields.active = false end
     end
 
-    if self.reactor then
+    if comp.reactor then
         local reactor_power_factor = 0
-        if self.beam_weapons then self.beam_weapons.power_factor = 3.0; reactor_power_factor = reactor_power_factor - 3.0 end
-        if self.missile_tubes then self.missile_tubes.power_factor = 1.0; reactor_power_factor = reactor_power_factor - 1.0 end
-        if self.maneuvering_thrusters then self.maneuvering_thrusters.power_factor = 2.0; reactor_power_factor = reactor_power_factor - 2.0 end
-        if self.impulse_engine then self.impulse_engine.power_factor = 4.0; reactor_power_factor = reactor_power_factor - 4.0 end
-        if self.warp_drive then self.warp_drive.power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0 end
-        if self.jump_drive then self.jump_drive.power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0 end
-        if self.shields then
-            self.shields.front_power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0
-            self.shields.rear_power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0
+        if comp.beam_weapons then comp.beam_weapons.power_factor = 3.0; reactor_power_factor = reactor_power_factor - 3.0 end
+        if comp.missile_tubes then comp.missile_tubes.power_factor = 1.0; reactor_power_factor = reactor_power_factor - 1.0 end
+        if comp.maneuvering_thrusters then comp.maneuvering_thrusters.power_factor = 2.0; reactor_power_factor = reactor_power_factor - 2.0 end
+        if comp.impulse_engine then comp.impulse_engine.power_factor = 4.0; reactor_power_factor = reactor_power_factor - 4.0 end
+        if comp.warp_drive then comp.warp_drive.power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0 end
+        if comp.jump_drive then comp.jump_drive.power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0 end
+        if comp.shields then
+            comp.shields.front_power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0
+            comp.shields.rear_power_factor = 5.0; reactor_power_factor = reactor_power_factor - 5.0
         end
-        self.reactor.power_factor = reactor_power_factor
+        comp.reactor.power_factor = reactor_power_factor
     end
-    if self.internal_rooms and template.__repair_crew_count and template.__repair_crew_count > 0 then
+    if comp.internal_rooms and template.__repair_crew_count and template.__repair_crew_count > 0 then
         for n=1,template.__repair_crew_count do
             local crew = createEntity()
-            crew.internal_crew = {ship=self}
-            crew.internal_repair_crew = {}
+            crew.components.internal_crew = {ship=self}
+            crew.components.internal_repair_crew = {}
         end
     end
     return self
@@ -64,25 +65,25 @@ end
 --- This overrides the vessel class name provided by the ShipTemplate.
 --- Example: stbo:setTypeName("Prototype")
 function Entity:setTypeName(type_name)
-    e.typename = {type_name=type_name}
+    self.components.typename = {type_name=type_name}
 end
 --- Returns this STBO's vessel classification name.
 --- Example:
 --- stbo:setTypeName("Prototype")
 --- stbo:getTypeName() -- returns "Prototype"
 function Entity:getTypeName()
-    return e.typename.type_name
+    return self.components.typename.type_name
 end
 --- Returns this STBO's hull points.
 --- Example: stbo:getHull()
 function Entity:getHull()
-    if self.hull then return self.hull.current end
+    if self.components.hull then return self.components.hull.current end
     return 0
 end
 --- Returns this STBO's maximum limit of hull points.
 --- Example: stbo:getHullMax()
 function Entity:getHullMax()
-    if self.hull then return self.hull.max end
+    if self.components.hull then return self.components.hull.max end
     return 0
 end
 --- Sets this STBO's hull points.
@@ -91,27 +92,27 @@ end
 --- Note that setting this value to 0 doesn't immediately destroy the STBO.
 --- Example: stbo:setHull(100) -- sets the hull point limit to either 100, or the limit if less than 100
 function Entity:setHull(amount)
-    if self.hull then self.hull.current = amount end
+    if self.components.hull then self.components.hull.current = amount end
     return self
 end
 --- Sets this STBO's maximum limit of hull points.
 --- Note that SpaceStations can't repair their own hull, so this only changes the percentage of remaining hull.
 --- Example: stbo:setHullMax(100) -- sets the hull point limit to 100
 function Entity:setHullMax(amount)
-    if self.hull then self.hull.max = amount end
+    if self.components.hull then self.components.hull.max = amount end
     return self
 end
 --- Defines whether this STBO can be destroyed by damage.
 --- Defaults to true.
 --- Example: stbo:setCanBeDestroyed(false) -- prevents the STBO from being destroyed by damage
 function Entity:setCanBeDestroyed(allow_destroy)
-    if self.hull then self.hull.allow_destruction = allow_destroy end
+    if self.components.hull then self.components.hull.allow_destruction = allow_destroy end
     return self    
 end
 --- Returns whether the STBO can be destroyed by damage.
 --- Example: stbo:getCanBeDestroyed()
 function Entity:getCanBeDestroyed()
-    if self.hull then return self.hull.allow_destruction end
+    if self.components.hull then return self.components.hull.allow_destruction end
     return false
 end
 --- Returns the shield points for this STBO's shield segment with the given index.
@@ -120,8 +121,8 @@ end
 --- stbo:getShieldLevel(0) -- returns front shield points
 --- stbo:getShieldLevel(1) -- returns rear shield points
 function Entity:getShieldLevel(index)
-    if self.shields and index < #self.shields then
-        return self.shields[index+1].level
+    if self.components.shields and index < #self.components.shields then
+        return self.components.shields[index+1].level
     end
     return 0
 end
@@ -130,14 +131,14 @@ end
 --- The segments' order starts with the front-facing segment, then proceeds clockwise.
 --- Example: stbo:getShieldCount()
 function Entity:getShieldCount()
-    if self.shields then return #self.shields end
+    if self.components.shields then return #self.components.shields end
     return 0
 end
 --- Returns the maximum shield points for the STBO's shield segment with the given index.
 --- Example: stbo:getShieldMax(0) -- returns the max shield strength for segment 0
 function Entity:getShieldMax(index)
-    if self.shields and index < #self.shields then
-        return self.shields[index+1].max
+    if self.components.shields and index < #self.components.shields then
+        return self.components.shields[index+1].max
     end
     return 0
 end
@@ -150,10 +151,10 @@ end
 --- -- On a ship with 2 segments, this sets forward 50, rear 40
 --- stbo:setShields(50,40,30,20)
 function Entity:setShields(...)
-    if self.shields then
+    if self.components.shields then
         for i, level in ipairs({...}) do
-            if i <= #self.shields then
-                self.shields[i].level = level
+            if i <= #self.components.shields then
+                self.components.shields[i].level = level
             end
         end
     end
@@ -172,10 +173,10 @@ end
 --- -- On a ship with 2 segments, this does the same, but its current rear shield points become right shield points, and the new rear and left shield segments have 0 points
 --- stbo:setShieldsMax(50,40,30,20)
 function Entity:setShieldsMax(...)
-    if self.shields then
+    if self.components.shields then
         for i, level in ipairs({...}) do
-            if i <= #self.shields then
-                self.shields[i].max = max
+            if i <= #self.components.shields then
+                self.components.shields[i].max = max
             end
         end
     end
@@ -188,8 +189,8 @@ end
 --- Example: stbo:setRadarTrace("arrow.png") -- sets the radar trace to resources/radar/arrow.png
 --- Example: ship:setRadarTrace("blip.png") -- displays a dot for this ship on radar when scanned
 function Entity:setRadarTrace(filename)
-    if self.radar_trace then
-        self.radar_trace.icon = "radar/" .. filename
+    if self.components.radar_trace then
+        self.components.radar_trace.icon = "radar/" .. filename
     end
 end
 
@@ -204,7 +205,7 @@ end
 --- Always returns true except for PlayerSpaceships, because only players can deactivate shields.
 --- Example stbo:getShieldsActive() -- returns true if up, false if down
 function Entity:getShieldsActive()
-    if self.shields then return self.shields.active end
+    if self.components.shields then return self.components.shields.active end
     return false
 end
 --- Returns whether this STBO supplies energy to docked PlayerSpaceships.

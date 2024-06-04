@@ -6,28 +6,28 @@
 --- Example: probe = ScanProbe():setSpeed(1500):setLifetime(60 * 30):setTarget(10000,10000):onArrival(function() print("Probe arrived!") end)
 function ScanProbe()
     local e = createEntity()
-    e.lifetime = {lifetime=60*10}
+    e.components.lifetime = {lifetime=60*10}
     --e.move_to = {speed=1000, target=??}
     --e.allow_radar_link = {owner=??}
     --e.faction = ???
     setRadarSignatureInfo(0.0, 0.2, 0.0);
     --TODO: setCallSign(string(getMultiplayerId()) + "P");
-    e.radar_trace = {
+    e.components.radar_trace = {
         icon="radar/probe.png",
         min_size=10.0,
         max_size=10.0,
         color={96, 192, 128, 255},
         rotate=false,
     }
-    e.hull = {max=1, current=1}
-    e.share_short_range_radar = {}
+    e.components.hull = {max=1, current=1}
+    e.components.share_short_range_radar = {}
     local model = "SensorBuoyMKI"
     local idx = irandom(1, 3)
     if idx == 2 then model = "SensorBuoyMKII" end
     if idx == 3 then model = "SensorBuoyMKIII" end
     for k, v in pairs(__model_data[model]) do
         if string.sub(1, 2) ~= "__" then
-            e[k] = table.deepcopy(v)
+            e.components[k] = table.deepcopy(v)
         end
     end
     return e

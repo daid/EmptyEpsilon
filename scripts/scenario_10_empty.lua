@@ -15,7 +15,7 @@ function init()
     p:setPosition(0, 0)
 
     print("Print function from init.")
-    print("Player is at:", p.transform.position)
+    print("Player is at:", p.components.transform.position)
 
     --c = CpuShip()
     --c:setTemplate("Phobos T3"):setPosition(5000, 5000)
@@ -43,8 +43,8 @@ local hue = 0
 function update(delta)
     hue = hue + delta * 60
     if hue > 360 then hue = hue - 360 end
-    for n=1,#p.engine_emitter do
-        p.engine_emitter[n].color = hue_to_color(hue + n * 60)
+    for n=1,#p.components.engine_emitter do
+        p.components.engine_emitter[n].color = hue_to_color(hue + n * 60)
     end
     -- No victory condition
 end

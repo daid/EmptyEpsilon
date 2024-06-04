@@ -12,9 +12,9 @@ __default_cpu_ship_faction = "Kraylor"
 --- ship = CpuShip():setTemplate("Fighter"):setPosition(10000,3000):setFaction("Human Navy"):orderRoaming():setAI("evasive"):setScanned(true)
 function CpuShip()
     local e = createEntity()
-    e.transform = {rotation=random(0, 360)}
-    e.ai_controller = {new_name="default", orders="roaming"}
-    e.scan_state = {complexity=2, depth=2, allow_simple_scan=true}
+    e.components.transform = {rotation=random(0, 360)}
+    e.components.ai_controller = {new_name="default", orders="roaming"}
+    e.components.scan_state = {complexity=2, depth=2, allow_simple_scan=true}
     e:setFaction(__default_cpu_ship_faction)
     return e
 end

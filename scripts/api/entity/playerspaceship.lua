@@ -6,10 +6,12 @@ __default_player_ship_faction = "Human Navy"
 --- Such commands can be limited by the ship's capabilities, including systems damage, lack of power, or insufficient weapons stocks.
 function PlayerSpaceship()
     local e = createEntity()
-    e.player_control = {}
-    e.transform = {rotation=random(0, 360)}
-    e.callsign = {callsign="PL-???"}
-    e.scan_state = {complexity=2, depth=2, allow_simple_scan=true}
+    e.components = {
+        player_control = {},
+        transform = {rotation=random(0, 360)},
+        callsign = {callsign="PL-???"},
+        scan_state = {complexity=2, depth=2, allow_simple_scan=true},
+    }
     e:setFaction(__default_player_ship_faction)
     return e
 end
@@ -18,27 +20,27 @@ end
 --- Waypoints are 1-indexed.
 --- Example: x,y = player:getWaypoint(1)
 function Entity:getWaypoint(index)
-    if self.long_range_radar and index > 0 and index <= #self.long_range_radar then return self.long_range_radar[index] end
+    if self.components.long_range_radar and index > 0 and index <= #self.components.long_range_radar then return self.components.long_range_radar[index] end
     return 0, 0
 end
 --- Returns the total number of active waypoints owned by this PlayerSpaceship.
 --- Example: player:getWaypointCount()
 function Entity:getWaypointCount()
-    if self.long_range_radar then return #self.long_range_radar end
+    if self.components.long_range_radar then return #self.components.long_range_radar end
     return 0
 end
 --- Returns this PlayerSpaceship's EAlertLevel.
 --- Returns "Normal", "YELLOW ALERT", "RED ALERT", which differ from the valid values for PlayerSpaceship:commandSetAlertLevel().
 --- Example: player:getAlertLevel()
 function Entity:getAlertLevel()
-    if self.player_control then return self.player_control.alert_level end
+    if self.components.player_control then return self.components.player_control.alert_level end
     return "Normal"
 end
 --- Defines whether this PlayerSpaceship's shields are raised (true) or lowered (false).
 --- Compare to CpuShips, whose shields are always active.
 --- Example: player:setShieldsActive(true)
 function Entity:setShieldsActive(active)
-    if self.shields ~= nil then self.shields.active = active end
+    if self.components.shields ~= nil then self.components.shields.active = active end
     return self
 end
 --- Adds a message to this PlayerSpaceship's log.
@@ -70,79 +72,79 @@ end
 --- Use this to determine whether the player can accept an incoming hail or chat.
 --- Example: player:isCommsInactive()
 function Entity:isCommsInactive()
-    if self.comms_transmitter then return self.comms_transmitter.state == "inactive" end
+    if self.components.comms_transmitter then return self.components.comms_transmitter.state == "inactive" end
     return true
 end
 --- Returns whether this PlayerSpaceship is opening comms with another SpaceObject.
 --- Example: player:isCommsOpening()
 function Entity:isCommsOpening()
-    if self.comms_transmitter then
-        return self.comms_transmitter.state == "opening"
+    if self.components.comms_transmitter then
+        return self.components.comms_transmitter.state == "opening"
     end
 end
 --- Returns whether this PlayerSpaceship is being hailed by another SpaceObject.
 --- Example: player:isCommsBeingHailed()
 function Entity:isCommsBeingHailed()
-    if self.comms_transmitter then
-        local state = self.comms_transmitter.state
+    if self.components.comms_transmitter then
+        local state = self.components.comms_transmitter.state
         return state == "hailed" or state == "hailed_player" or state == "hailed_gm"
     end
 end
 --- Returns whether this PlayerSpaceship is being hailed by the GM.
 --- Example: player:isCommsBeingHailedByGM()
 function Entity:isCommsBeingHailedByGM()
-    if self.comms_transmitter then
-        return self.comms_transmitter.state == "hailed_gm"
+    if self.components.comms_transmitter then
+        return self.components.comms_transmitter.state == "hailed_gm"
     end
 end
 --- Returns whether comms to this PlayerSpaceship have failed to open.
 --- Example: player:isCommsFailed()
 function Entity:isCommsFailed()
-    if self.comms_transmitter then
-        return self.comms_transmitter.state == "failed"
+    if self.components.comms_transmitter then
+        return self.components.comms_transmitter.state == "failed"
     end
 end
 --- Returns whether comms to this PlayerSpaceship were broken off by the other SpaceObject.
 --- Example: player:isCommsBroken()
 function Entity:isCommsBroken()
-    if self.comms_transmitter then
-        return self.comms_transmitter.state == "broken"
+    if self.components.comms_transmitter then
+        return self.components.comms_transmitter.state == "broken"
     end
 end
 --- Returns whether comms between this PlayerSpaceship and a SpaceObject were intentionally closed.
 --- Example: player:isCommsClosed()
 function Entity:isCommsClosed()
-    if self.comms_transmitter then
-        return self.comms_transmitter.state == "closed"
+    if self.components.comms_transmitter then
+        return self.components.comms_transmitter.state == "closed"
     end
 end
 --- Returns whether this PlayerSpaceship is engaged in text chat with either the GM or another PlayerSpaceship.
 --- Example: player:isCommsChatOpen()
 function Entity:isCommsChatOpen()
-    if self.comms_transmitter then
-        local state = self.comms_transmitter.state
+    if self.components.comms_transmitter then
+        local state = self.components.comms_transmitter.state
         return state == "open_gm" or state == "open_player"
     end
 end
 --- Returns whether this PlayerSpaceship is engaged in text chat with the GM.
 --- Example: player:isCommsChatOpenToGM()
 function Entity:isCommsChatOpenToGM()
-    if self.comms_transmitter then
-        return self.comms_transmitter.state == "open_gm"
+    if self.components.comms_transmitter then
+        return self.components.comms_transmitter.state == "open_gm"
     end
 end
 --- Returns whether this PlayerSpaceship is engaged in text chat with another PlayerSpaceship.
 --- Example: player:isCommsChatOpenToPlayer()
 function Entity:isCommsChatOpenToPlayer()
-    if self.comms_transmitter then
-        return self.comms_transmitter.state == "open_player"
+    if self.components.comms_transmitter then
+        return self.components.comms_transmitter.state == "open_player"
     end
 end
 --- Returns whether this PlayerSpaceship is engaged in comms with a scripted SpaceObject.
 --- Example: player:isCommsScriptOpen()
 function Entity:isCommsScriptOpen()
-    if self.comms_transmitter then
-        return self.comms_transmitter.state == "open"
+    if self.components.comms_transmitter then
+        return self.components.comms_transmitter.state == "open"
     end
 end
 
@@ -150,7 +152,7 @@ end
 --- Values are limited from 0 to the energy level max. Negative or excess values are capped to the limits.
 --- Example: player:setEnergyLevel(1000) -- sets the ship's energy to either 1000 or the max limit, whichever is lower
 function Entity:setEnergyLevel(amount)
-    if self.reactor then self.reactor.energy = amount end
+    if self.components.reactor then self.components.reactor.energy = amount end
     return self
 end
 --- Sets this PlayerSpaceship's energy capacity.
@@ -158,44 +160,44 @@ end
 --- If the new limit is lower than the ship's current energy level, this also reduces the energy level.
 --- Example: player:setEnergyLevelMax(1000) -- sets the ship's energy limit to 1000
 function Entity:setEnergyLevelMax(amount)
-    if self.reactor then self.reactor.max_energy = amount end
+    if self.components.reactor then self.components.reactor.max_energy = amount end
     return self
 end
 --- Returns this PlayerSpaceship's energy level.
 --- Example: player:getEnergyLevel()
 function Entity:getEnergyLevel()
-    if self.reactor then return self.reactor.energy end
+    if self.components.reactor then return self.components.reactor.energy end
     return 0
 end
 --- Returns this PlayerSpaceship's energy capacity.
 --- Example: player:getEnergyLevelMax()
 function Entity:getEnergyLevelMax()
-    if self.reactor then return self.reactor.max_energy end
+    if self.components.reactor then return self.components.reactor.max_energy end
     return 0
 end
 
 --- Returns how much energy is consumed per second by this PlayerSpaceship's shields while active.
 --- Example: player:getEnergyShieldUsePerSecond()
 function Entity:getEnergyShieldUsePerSecond()
-    if self.shields then return self.shields.energy_use_per_second end
+    if self.components.shields then return self.components.shields.energy_use_per_second end
     return 0.0
 end
 --- Sets how much energy is consumed per second by this PlayerSpaceship's shields while active.
 --- Example: player:setEnergyShieldUsePerSecond(1.5)
 function Entity:setEnergyShieldUsePerSecond(amount)
-    if self.shields then self.shields.energy_use_per_second = amount end
+    if self.components.shields then self.components.shields.energy_use_per_second = amount end
     return self
 end
 --- Returns how much energy is consumed per second by this PlayerSpaceship's warp drive while in use.
 --- Example: player:getEnergyWarpPerSecond()
 function Entity:getEnergyWarpPerSecond()
-    if self.warp_drive then return self.warp_drive.energy_warp_per_second end
+    if self.components.warp_drive then return self.components.warp_drive.energy_warp_per_second end
     return 0.0
 end
 --- Sets how much energy is consumed per second by this PlayerSpaceship's warp drive while in use.
 --- Example: player:setEnergyWarpPerSecond(1.7)
 function Entity:setEnergyWarpPerSecond(amount)
-    if self.warp_drive then self.warp_drive.energy_warp_per_second = amount end
+    if self.components.warp_drive then self.components.warp_drive.energy_warp_per_second = amount end
     return self
 end
 
@@ -205,13 +207,13 @@ end
 --- If the new limit is less than the coolant already distributed, this automatically reduces distribution percentages.
 --- Example: player:setMaxCoolant(5) -- halves the amount of available coolant
 function Entity:setMaxCoolant(amount)
-    if self.coolant then self.coolant.max = amount end
+    if self.components.coolant then self.components.coolant.max = amount end
     return self
 end
 --- Returns the maximum amount of coolant available to engineering on this PlayerSpaceship.
 --- Example: player:getMaxCoolant()
 function Entity:getMaxCoolant()
-    if self.coolant then return self.coolant.max end
+    if self.components.coolant then return self.components.coolant.max end
     return 0.0
 end
 
@@ -219,13 +221,13 @@ end
 --- Values are limited from 0 to the scan probe count max. Negative or excess values are capped to the limits.
 --- Example: player:setScanProbeCount(20) -- sets the ship's scan probes to either 20 or the max limit, whichever is fewer
 function Entity:setScanProbeCount(amount)
-    if self.scan_probe_launcher then self.scan_probe_launcher.stock = amount end
+    if self.components.scan_probe_launcher then self.components.scan_probe_launcher.stock = amount end
     return self
 end
 --- Returns the number of scan probes stocked by this PlayerSpaceship.
 --- Example: player:getScanProbeCount()
 function Entity:getScanProbeCount()
-    if self.scan_probe_launcher then return self.scan_probe_launcher.stock end
+    if self.components.scan_probe_launcher then return self.components.scan_probe_launcher.stock end
     return 0
 end
 --- Sets this PlayerSpaceship's capacity for scan probes.
@@ -233,13 +235,13 @@ end
 --- If the new limit is less than the current scan probe stock, this automatically reduces the stock.
 --- Example: player:setMaxScanProbeCount(30) -- sets the ship's scan probe capacity to 30
 function Entity:setMaxScanProbeCount(amount)
-    if self.scan_probe_launcher then self.scan_probe_launcher.max = amount end
+    if self.components.scan_probe_launcher then self.components.scan_probe_launcher.max = amount end
     return self
 end
 --- Returns this PlayerSpaceship's capacity for scan probes.
 --- Example: player:getMaxScanProbeCount()
 function Entity:getMaxScanProbeCount()
-    if self.scan_probe_launcher then return self.scan_probe_launcher.max end
+    if self.components.scan_probe_launcher then return self.components.scan_probe_launcher.max end
     return 0
 end
 
@@ -305,7 +307,7 @@ end
 --- Returns "UNKNOWN" for the hull.
 --- Example: player:getBeamSystemTargetName()
 function Entity:getBeamSystemTargetName()
-    if self.beam_weapons then return self.beam_weapons.system_target end
+    if self.components.beam_weapons then return self.components.beam_weapons.system_target end
     return "UNKNOWN"
 end
 
@@ -560,14 +562,14 @@ end
 --- Use this command to reduce the need for player interaction in Engineering, especially when combined with commandSetAutoRepair/auto_repair_enabled.
 --- Example: player:setAutoCoolant(true)
 function Entity:setAutoCoolant(enabled)
-    if self.coolant then self.coolant.auto_levels = enabled end
+    if self.components.coolant then self.components.coolant.auto_levels = enabled end
     return self
 end
 --- Sets a control code password required for a player to join this PlayerSpaceship.
 --- Control codes are case-insensitive.
 --- Example: player:setControlCode("abcde") -- matches "abcde", "ABCDE", "aBcDe"
 function Entity:setControlCode(code)
-    if self.player_control then self.player_control.control_code = code end
+    if self.components.player_control then self.components.player_control.control_code = code end
     return self
 end
 --- Defines a function to call when this PlayerSpaceship launches a probe.
@@ -578,7 +580,7 @@ end
 ---     print("Probe " .. probe:getCallSign() .. " launched from ship " .. player:getCallSign())
 --- end)
 function Entity:onProbeLaunch(callback)
-    if self.scan_probe_launcher then self.scan_probe_launcher.on_launch = callback end
+    if self.components.scan_probe_launcher then self.components.scan_probe_launcher.on_launch = callback end
     return self
 end
 --- Defines a function to call when this PlayerSpaceship links a probe to the science screen.
@@ -608,20 +610,20 @@ end
 --- Returns this ships's long-range radar range.
 --- Example: player:getLongRangeRadarRange()
 function Entity:getLongRangeRadarRange()
-    if self.long_range_radar then return self.long_range_radar.long_range end
+    if self.components.long_range_radar then return self.components.long_range_radar.long_range end
     return 50000
 end
 --- Returns this PlayerSpaceship's short-range radar range.
 --- Example: player:getShortRangeRadarRange()
 function Entity:getShortRangeRadarRange()
-    if self.long_range_radar then return self.long_range_radar.short_range end
+    if self.components.long_range_radar then return self.components.long_range_radar.short_range end
     return 5000
 end
 --- Sets this PlayerSpaceship's long-range radar range.
 --- PlayerSpaceships use this range on the science and operations screens' radar.
 --- Example: player:setLongRangeRadarRange(30000) -- sets the ship's long-range radar range to 30U
 function Entity:setLongRangeRadarRange(range)
-    if self.long_range_radar then self.long_range_radar.long_range = range end
+    if self.components.long_range_radar then self.components.long_range_radar.long_range = range end
     return self
 end
 --- Sets this PlayerSpaceship's short-range radar range.
@@ -629,105 +631,105 @@ end
 --- This also defines the shared radar radius on the relay screen for friendly ships and stations, and how far into nebulae that this SpaceShip can detect objects.
 --- Example: player:setShortRangeRadarRange(5000) -- sets the ship's long-range radar range to 5U
 function Entity:setShortRangeRadarRange(range)
-    if self.long_range_radar then self.long_range_radar.short_range = range end
+    if self.components.long_range_radar then self.components.long_range_radar.short_range = range end
     return self
 end
 --- Defines whether scanning features appear on related crew screens in this PlayerSpaceship.
 --- Example: player:setCanScan(true)
 function Entity:setCanScan(enabled)
-    if enabled then self.science_scanner = {} else self.science_scanner = nil end
+    if enabled then self.components.science_scanner = {} else self.components.science_scanner = nil end
     return self
 end
 --- Returns whether scanning features appear on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanScan()
 function Entity:getCanScan()
-    return self.science_scanner ~= nil
+    return self.components.science_scanner ~= nil
 end
 --- Defines whether hacking features appear on related crew screens in thisPlayerSpaceship.
 --- Example: player:setCanHack(true)
 function Entity:setCanHack(enabled)
-    if enabled then self.hacking_device = {} else self.hacking_device = nil end
+    if enabled then self.components.hacking_device = {} else self.components.hacking_device = nil end
     return self
 end
 --- Returns whether hacking features appear on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanHack()
 function Entity:getCanHack()
-    return self.hacking_device ~= nil
+    return self.components.hacking_device ~= nil
 end
 --- Defines whether the "Request Docking" button appears on related crew screens in this PlayerSpaceship.
 --- This doesn't override any docking class restrictions set on a target SpaceShip.
 --- Example: player:setCanDock(true)
 function Entity:setCanDock(enabled)
     if enabled then
-        self.docking_port = {}
+        self.components.docking_port = {}
     else
-        self.docking_port = nil
+        self.components.docking_port = nil
     end
     return self
 end
 --- Returns whether the "Request Docking" button appears on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanDock()
 function Entity:getCanDock()
-    return self.docking_port ~= nil
+    return self.components.docking_port ~= nil
 end
 --- Defines whether combat maneuver controls appear on related crew screens in this PlayerSpaceship.
 --- Example: player:setCanCombatManeuver(true)
 function Entity:setCanCombatManeuver(enabled)
-    if enabled then self.combat_maneuvering_thrusters = {} else self.combat_maneuvering_thrusters = nil end
+    if enabled then self.components.combat_maneuvering_thrusters = {} else self.components.combat_maneuvering_thrusters = nil end
     return self
 end
 --- Returns whether combat maneuver controls appear on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanCombatManeuver()
 function Entity:getCanCombatManeuver()
-    return self.combat_maneuvering_thrusters ~= nil
+    return self.components.combat_maneuvering_thrusters ~= nil
 end
 --- Defines whether ScanProbe-launching controls appear on related crew screens in this PlayerSpaceship.
 --- Example: player:setCanLaunchProbe(true)
 function Entity:setCanLaunchProbe(enabled)
-    if enabled then self.scan_probe_launcher = {} else self.scan_probe_launcher = nil end
+    if enabled then self.components.scan_probe_launcher = {} else self.components.scan_probe_launcher = nil end
     return self
 end
 --- Returns whether ScanProbe-launching controls appear on related crew screens in this PlayerSpaceship.
 --- Example: player:getCanLaunchProbe()
 function Entity:getCanLaunchProbe()
-    return self.scan_probe_launcher ~= nil
+    return self.components.scan_probe_launcher ~= nil
 end
 --- Defines whether self-destruct controls appear on related crew screens in this PlayerSpaceship.
 --- Example: player:setCanSelfDestruct(true)
 function Entity:setCanSelfDestruct(enabled)
-    if enabled then self.self_destruct = {} else self.self_destruct = nil end
+    if enabled then self.components.self_destruct = {} else self.components.self_destruct = nil end
     return self
 end
 --- Returns whether self-destruct controls appear on related crew screens in this PlayerSpaceship.
 --- This returns false if this ship's self-destruct size and damage are both 0, even if you set setCanSelfDestruct(true).
 --- Example: player:getCanSelfDestruct()
 function Entity:getCanSelfDestruct()
-    return self.self_destruct ~= nil
+    return self.components.self_destruct ~= nil
 end
 --- Sets the amount of damage done to nearby SpaceObjects when this PlayerSpaceship self-destructs.
 --- Any given value is randomized +/- 33 percent upon self-destruction.
 --- Example: player:setSelfDestructDamage(150)
 function Entity:setSelfDestructDamage(amount)
-    if self.self_destruct then self.self_destruct.damage = amount end
+    if self.components.self_destruct then self.components.self_destruct.damage = amount end
     return self
 end
 --- Returns the amount of base damage done to nearby SpaceObjects when this PlayerSpaceship self-destructs.
 --- Example: player:getSelfDestructDamage()
 function Entity:getSelfDestructDamage()
-    if self.self_destruct then return self.self_destruct.damage end
+    if self.components.self_destruct then return self.components.self_destruct.damage end
     return 0
 end
 --- Sets the radius of the explosion created when this PlayerSpaceship self-destructs.
 --- All SpaceObjects within this radius are dealt damage upon self-destruction.
 --- Example: player:setSelfDestructSize(1500) -- sets a 1.5U self-destruction explosion and damage radius
 function Entity:setSelfDestructSize(size)
-    if self.self_destruct then self.self_destruct.size = size end
+    if self.components.self_destruct then self.components.self_destruct.size = size end
     return self
 end
 --- Returns the radius of the explosion created when this PlayerSpaceship self-destructs.
 --- All SpaceObjects within this radius are dealt damage upon self-destruction.
 --- Example: ship:getSelfDestructSize()
 function Entity:getSelfDestructSize()
-    if self.self_destruct then return self.self_destruct.size end
+    if self.components.self_destruct then return self.components.self_destruct.size end
     return 0
 end

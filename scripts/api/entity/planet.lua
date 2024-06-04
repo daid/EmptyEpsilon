@@ -10,9 +10,9 @@
 --- moon = Planet():setPosition(5000, 0):setPlanetRadius(1000):setPlanetSurfaceTexture("planets/moon-1.png"):setAxialRotationTime(20.0):setOrbit(planet,20)
 function Planet()
     local e = createEntity()
-    e.transform = {rotation=random(0, 360)}
-    e.radar_signature = {gravity=0.5, biological=0.3}
-    e.planet_render = {
+    e.components.transform = {rotation=random(0, 360)}
+    e.components.radar_signature = {gravity=0.5, biological=0.3}
+    e.components.planet_render = {
         size=5000,
         cloud_size = 5200,
     }

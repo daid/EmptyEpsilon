@@ -31,14 +31,14 @@ local Entity = getLuaEntityFunctionTable()
 --- legs = species:getKeyValue("Legs") -- legs = "4"
 function ScienceDatabase()
     local e = createEntity()
-    e.science_database = {}
+    e.components.science_database = {}
     return e
 end
 
 --- Returns this ScienceDatabase entry's displayed name.
 --- Example: entry:getName()
 function Entity:getName()
-    if self.science_database then return self.science_database.name end
+    if self.components.science_database then return self.components.science_database.name end
     return ""
 end
 --- Returns this ScienceDatabase entry's unique multiplayer_id.
@@ -50,7 +50,7 @@ end
 --- Returns 0 if the entry has no parent.
 --- Example: entry:getParentId() -- returns the parent entry's ID
 function Entity:getParentId()
-    if self.science_database then return self.science_database.parent end
+    if self.components.science_database then return self.components.science_database.parent end
 end
 --- Creates a ScienceDatabase entry with the given name as a child of this ScienceDatabase entry.
 --- Returns the newly created entry. Chaining addEntry() creates a child of the new child entry.
@@ -59,10 +59,10 @@ end
 --- -- Adds an entry named "Felines" as a child of species, and an entry named "Calico" as a child of "Felines"
 --- species:addEntry("Felines"):addEntry("Calico")
 function Entity:addEntry(name)
-    if not self.science_database then return end
+    if not self.components.science_database then return end
     local child = ScienceDatabase()
-    child.science_database.name = name
-    child.science_database.parent = self
+    child.components.science_database.name = name
+    child.components.science_database.parent = self
     return child
 end
 --- Returns the first child ScienceDatabase entry of this ScienceDatabase entry found with the given case-insensitive name.
@@ -97,8 +97,8 @@ end
 --- entry:addKeyValue("Legs","4"):addKeyValue("Ears","2")
 --- entry:addKeyValue("Legs","2") -- adds "Legs","2", even if "Legs","4" is already present
 function Entity:addKeyValue(key, value)
-    if not self.science_database then return self end
-    self.science_database[#self.science_database+1] = {key=key, value=value}
+    if not self.components.science_database then return self end
+    self.components.science_database[#self.components.science_database+1] = {key=key, value=value}
     return self
 end
 --- Sets the value of all key/value pairs matching the given case-insensitive key in this ScienceDatabase entry's key/value data.
@@ -110,7 +110,7 @@ end
 --- entry:setKeyValue("Legs","2") -- changes this entry's "Legs" value to "2"
 --- entry:setKeyValue("Arms","2") -- adds "Arms","2" to the entry's key/value data
 function Entity:setKeyValue(key, value)
-    if not self.science_database then return self end
+    if not self.components.science_database then return self end
 
     return self:addKeyValue(key, value)
 end
@@ -118,10 +118,10 @@ end
 --- Returns an empty string if the key doesn't exist.
 --- Example: entry:getKeyValue("Legs") -- returns the value if found or "" if not
 function Entity:getKeyValue(key)
-    if not self.science_database then return "" end
-    for n=1,#self.science_database do
-        if self.science_database[n].key == key then
-            return self.science_database[n].value
+    if not self.components.science_database then return "" end
+    for n=1,#self.components.science_database do
+        if self.components.science_database[n].key == key then
+            return self.components.science_database[n].value
         end
     end
     return ""
@@ -132,10 +132,10 @@ end
 --- entry:getKeyValues() -- returns the key/value table for this entry
 --- for k,v in pairs(kv) do print(k,v) end -- Print each key/value pair for this entry to the console
 function Entity:getKeyValues()
-    if not self.science_database then return {} end
+    if not self.components.science_database then return {} end
     local result = {}
-    for n=1,#self.science_database do
-        result[self.science_database[n].key] = self.science_database[n].value
+    for n=1,#self.components.science_database do
+        result[self.components.science_database[n].key] = self.components.science_database[n].value
     end
     return result
 end
@@ -143,14 +143,14 @@ end
 --- If duplicate matching keys exist, this removes all of them.
 --- Example: entry:removeKey("Legs") -- removes all key/value data with the key "Legs"
 function Entity:removeKey(key)
-    if not self.science_database then return self end
+    if not self.components.science_database then return self end
     local n=1
-    while n <= #self.science_database do
-        while self.science_database[n].key == key do
-            for m=n,#self.science_database-1 do
-                self.science_database[n] = {key=self.science_database[n+1].key, value=self.science_database[n+1].value}
+    while n <= #self.components.science_database do
+        while self.components.science_database[n].key == key do
+            for m=n,#self.components.science_database-1 do
+                self.components.science_database[n] = {key=self.components.science_database[n+1].key, value=self.components.science_database[n+1].value}
             end
-            self.science_database[#self.science_database] = nil
+            self.components.science_database[#self.components.science_database] = nil
         end
         n = n + 1
     end
@@ -160,14 +160,14 @@ end
 --- The Database view's right column displays the longform description when its entry is selected.
 --- Example: entry:setLongDescription("This species is known for its loyalty...")
 function Entity:setLongDescription(description)
-    if self.science_database then self.science_database.description = description end
+    if self.components.science_database then self.components.science_database.description = description end
     return self
 end
 --- Returns this ScienceDatabase entry's longform description.
 --- Returns an empty string if no description is set.
 --- Example: entry:getLongDescription()
 function Entity:getLongDescription()
-    if self.science_database then return self.science_database.description end
+    if self.components.science_database then return self.components.science_database.description end
     return ""
 end
 --- Sets this ScienceDatabase entry's image file to the given filename.
@@ -175,14 +175,14 @@ end
 --- An empty string removes any set image.
 --- Example: entry:setImage("retriever.png") -- sets the entry's image to the file "resources/retriever.png"
 function Entity:setImage(image)
-    if self.science_database then self.science_database.image = image end
+    if self.components.science_database then self.components.science_database.image = image end
     return self
 end
 --- Returns this ScienceDatabase entry's image filename.
 --- Returns an empty string if no image is set.
 --- Example: entry:getImage()
 function Entity:getImage()
-    if self.science_database then return self.science_database.image end
+    if self.components.science_database then return self.components.science_database.image end
     return ""
 end
 --- Sets the 3D appearance, by ModelData name, used for this ScienceDatabase entry.
@@ -190,9 +190,9 @@ end
 --- Example: entry:setModelDataName("AtlasHeavyFighterYellow") -- uses the ModelData named "AtlasHeavyFighterYellow"
 function Entity:setModelDataName(model_data_name)
     if __model_data[model_data_name] then
-        self.mesh_render = __model_data[model_data_name].mesh_render
+        self.components.mesh_render = __model_data[model_data_name].mesh_render
     else
-        self.mesh_render = nil
+        self.components.mesh_render = nil
     end
     return self
 end

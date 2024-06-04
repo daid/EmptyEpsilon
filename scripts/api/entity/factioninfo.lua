@@ -26,7 +26,7 @@ local Entity = getLuaEntityFunctionTable()
 __faction_info = {}
 function FactionInfo()
     local fi = createEntity()
-    fi.faction_info = {}
+    fi.components.faction_info = {}
     fi:__setFactionRelation(fi, "friendly")
     return fi
 end
@@ -38,8 +38,8 @@ end
 --- Wrap the string in the _() function to make it available for translation.
 --- Example: faction:setLocaleName(_("USN"))
 function Entity:setLocaleName(name)
-    if self.faction_info then
-        self.faction_info.locale_name = name
+    if self.components.faction_info then
+        self.components.faction_info.locale_name = name
     end
     return self
 end
@@ -47,8 +47,8 @@ end
 --- Defaults to white (255,255,255).
 --- Example: faction:setGMColor(255,0,0) -- sets the color to red
 function Entity:setGMColor(r, g, b)
-    if self.faction_info then
-        self.faction_info.gm_color = {r, g, b, 255}
+    if self.components.faction_info then
+        self.components.faction_info.gm_color = {r, g, b, 255}
     end
     return self
 end
@@ -58,8 +58,8 @@ end
 --- Warning: A faction can be designated as hostile to itself, but the behavior is not well-defined.
 --- Example: faction:setEnemy(exuari) -- sets the Exuari to appear as hostile to this faction
 function Entity:setEnemy(other_faction)
-    if self.faction_info == nil then error("setEnemy can only be called on factions.") end
-    if other_faction.faction_info == nil then error("setEnemy can only be called on factions.") end
+    if self.components.faction_info == nil then error("setEnemy can only be called on factions.") end
+    if other_faction.components.faction_info == nil then error("setEnemy can only be called on factions.") end
     self:__setFactionRelation(other_faction, "enemy")
     other_faction:__setFactionRelation(self, "enemy")
     return self
@@ -69,8 +69,8 @@ end
 --- Defaults to no friendly factions.
 --- Example: faction:setFriendly(exuari) -- sets the Human Navy to appear as friendly to this faction
 function Entity:setFriendly(other_faction)
-    if self.faction_info == nil then error("setFriendly can only be called on factions.") end
-    if other_faction.faction_info == nil then error("setFriendly can only be called on factions.") end
+    if self.components.faction_info == nil then error("setFriendly can only be called on factions.") end
+    if other_faction.components.faction_info == nil then error("setFriendly can only be called on factions.") end
     self:__setFactionRelation(other_faction, "friendly")
     other_faction:__setFactionRelation(self, "friendly")
     return self
@@ -79,19 +79,19 @@ end
 --- This removes any existing faction relationships between the two factions.
 --- Example: faction:setNeutral(human_navy) -- sets the Human Navy to appear as neutral to this faction
 function Entity:setNeutral(other_faction)
-    if self.faction_info == nil then error("setNeutral can only be called on factions.") end
-    if other_faction.faction_info == nil then error("setNeutral can only be called on factions.") end
+    if self.components.faction_info == nil then error("setNeutral can only be called on factions.") end
+    if other_faction.components.faction_info == nil then error("setNeutral can only be called on factions.") end
     self:__setFactionRelation(other_faction, "neutral")
     other_faction:__setFactionRelation(self, "neutral")
     return self
 end
 
 function Entity:__setFactionRelation(other_faction, relation)
-    for n=1, #self.faction_info do
-        if self.faction_info[n].other_faction == other_faction then
-            self.faction_info[n].relation = relation
+    for n=1, #self.components.faction_info do
+        if self.components.faction_info[n].other_faction == other_faction then
+            self.components.faction_info[n].relation = relation
             return
         end
     end
-    self.faction_info[#self.faction_info+1] = {other_faction=other_faction, relation=relation}
+    self.components.faction_info[#self.components.faction_info+1] = {other_faction=other_faction, relation=relation}
 end

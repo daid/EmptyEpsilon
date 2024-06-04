@@ -9,9 +9,9 @@ local Entity = getLuaEntityFunctionTable()
 --- [DEPRECATED]
 --- Use SpaceShip:isFriendOrFoeIdentifiedBy() or SpaceShip:isFriendOrFoeIdentifiedByFaction().
 function Entity:isFriendOrFoeIdentified()
-    if self.scan_state then
-        for n=1,#self.scan_state do
-            if self.scan_state[n].state ~= "none" then return true end
+    if self.components.scan_state then
+        for n=1,#self.components.scan_state do
+            if self.components.scan_state[n].state ~= "none" then return true end
         end
     end
     return false
@@ -19,9 +19,9 @@ end
 --- [DEPRECATED]
 --- Use SpaceShip:isFullyScannedBy() or SpaceShip:isFullyScannedByFaction().
 function Entity:isFullyScanned()
-    if self.scan_state then
-        for n=1,#self.scan_state do
-            if self.scan_state[n].state == "full" then return true end
+    if self.components.scan_state then
+        for n=1,#self.components.scan_state do
+            if self.components.scan_state[n].state == "full" then return true end
         end
     end
     return false
@@ -52,15 +52,15 @@ end
 --- Returns whether this SpaceShip is docked with the given SpaceObject.
 --- Example: ship:isDocked(base) -- returns true if `ship` is fully docked with `base`
 function Entity:isDocked(target)
-    if self.docking_port and self.docking_port.state == "docked" then
-        return self.docking_port.target == target
+    if self.components.docking_port and self.components.docking_port.state == "docked" then
+        return self.components.docking_port.target == target
     end
 end
 --- Returns the SoaceObject with which this SpaceShip is docked.
 --- Example: base = ship:getDockedWith()
 function Entity:getDockedWith()
-    if self.docking_port and self.docking_port.state == "docked" then
-        return self.docking_port.target
+    if self.components.docking_port and self.components.docking_port.state == "docked" then
+        return self.components.docking_port.target
     end
 end
 --- Returns the EDockingState value of this SpaceShip.
@@ -69,8 +69,8 @@ end
 --- 2 = Docked
 --- Example: ds = ship:getDockingState()
 function Entity:getDockingState()
-    if self.docking_port then
-        local state = self.docking_port.state
+    if self.components.docking_port then
+        local state = self.components.docking_port.state
         if state == "docking" then return 1 end
         if state == "docked" then return 2 end
     end
@@ -80,26 +80,26 @@ end
 --- Returns the number of the given weapon type stocked by this SpaceShip.
 --- Example: homing = ship:getWeaponStorage("Homing")
 function Entity:getWeaponStorage(weapon_type)
-    if self.missile_tubes then
+    if self.components.missile_tubes then
         weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then return self.missile_tubes.storage_homing end
-        if weapon_type == "nuke" then return self.missile_tubes.storage_nuke end
-        if weapon_type == "mine" then return self.missile_tubes.storage_mine end
-        if weapon_type == "emp" then return self.missile_tubes.storage_emp end
-        if weapon_type == "hvli" then return self.missile_tubes.storage_hvli end
+        if weapon_type == "homing" then return self.components.missile_tubes.storage_homing end
+        if weapon_type == "nuke" then return self.components.missile_tubes.storage_nuke end
+        if weapon_type == "mine" then return self.components.missile_tubes.storage_mine end
+        if weapon_type == "emp" then return self.components.missile_tubes.storage_emp end
+        if weapon_type == "hvli" then return self.components.missile_tubes.storage_hvli end
     end
     return 0
 end
 --- Returns this SpaceShip's capacity for the given weapon type.
 --- Example: homing_max = ship:getWeaponStorageMax("Homing")
 function Entity:getWeaponStorageMax(weapon_type)
-    if self.missile_tubes then
+    if self.components.missile_tubes then
         weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then return self.missile_tubes.max_homing end
-        if weapon_type == "nuke" then return self.missile_tubes.max_nuke end
-        if weapon_type == "mine" then return self.missile_tubes.max_mine end
-        if weapon_type == "emp" then return self.missile_tubes.max_emp end
-        if weapon_type == "hvli" then return self.missile_tubes.max_hvli end
+        if weapon_type == "homing" then return self.components.missile_tubes.max_homing end
+        if weapon_type == "nuke" then return self.components.missile_tubes.max_nuke end
+        if weapon_type == "mine" then return self.components.missile_tubes.max_mine end
+        if weapon_type == "emp" then return self.components.missile_tubes.max_emp end
+        if weapon_type == "hvli" then return self.components.missile_tubes.max_hvli end
     end
     return 0
 end
@@ -108,13 +108,13 @@ end
 --- Sets the weapon type and amount restocked upon pickup when a SpaceShip collides with this SupplyDrop.
 --- Example: supply_drop:setWeaponStorage("Homing",6)
 function Entity:setWeaponStorage(weapon_type, amount)
-    if self.missile_tubes then
+    if self.components.missile_tubes then
         weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then self.missile_tubes.storage_homing = amount end
-        if weapon_type == "nuke" then self.missile_tubes.storage_nuke = amount end
-        if weapon_type == "mine" then self.missile_tubes.storage_mine = amount end
-        if weapon_type == "emp" then self.missile_tubes.storage_emp = amount end
-        if weapon_type == "hvli" then self.missile_tubes.storage_hvli = amount end
+        if weapon_type == "homing" then self.components.missile_tubes.storage_homing = amount end
+        if weapon_type == "nuke" then self.components.missile_tubes.storage_nuke = amount end
+        if weapon_type == "mine" then self.components.missile_tubes.storage_mine = amount end
+        if weapon_type == "emp" then self.components.missile_tubes.storage_emp = amount end
+        if weapon_type == "hvli" then self.components.missile_tubes.storage_hvli = amount end
     end
     --TODO: Supplydrop
     return self
@@ -125,13 +125,13 @@ end
 --- Use SpaceShip:setWeaponStorage() to update the stocks.
 --- Example: ship:setWeaponStorageMax("Homing", 4) -- this ship can carry 4 Homing missiles
 function Entity:setWeaponStorageMax(weapon_type, amount)
-    if self.missile_tubes then
+    if self.components.missile_tubes then
         weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then self.missile_tubes.max_homing = amount end
-        if weapon_type == "nuke" then self.missile_tubes.max_nuke = amount end
-        if weapon_type == "mine" then self.missile_tubes.max_mine = amount end
-        if weapon_type == "emp" then self.missile_tubes.max_emp = amount end
-        if weapon_type == "hvli" then self.missile_tubes.max_hvli = amount end
+        if weapon_type == "homing" then self.components.missile_tubes.max_homing = amount end
+        if weapon_type == "nuke" then self.components.missile_tubes.max_nuke = amount end
+        if weapon_type == "mine" then self.components.missile_tubes.max_mine = amount end
+        if weapon_type == "emp" then self.components.missile_tubes.max_emp = amount end
+        if weapon_type == "hvli" then self.components.missile_tubes.max_hvli = amount end
     end
     return self
 end
@@ -142,7 +142,7 @@ end
 --- -- Outputs "Ship's shield frequency is 600THz"
 --- print("Ship's shield frequency is " .. (frequency * 20) + 400 .. "THz")
 function Entity:getShieldsFrequency()
-    if self.shields then return self.shields.frequency end
+    if self.components.shields then return self.components.shields.frequency end
     return 0
 end
 --- Sets this SpaceShip's shield frequency index.
@@ -151,7 +151,7 @@ end
 --- Unlike PlayerSpaceship:commandSetShieldFrequency(), this instantly changes the frequency with no calibration delay.
 --- Example: frequency = ship:setShieldsFrequency(10) -- frequency is 600THz
 function Entity:setShieldsFrequency(frequency)
-    if self.shields then self.shields.frequency = frequency end
+    if self.components.shields then self.components.shields.frequency = frequency end
     return self
 end
 --- Returns this SpaceShip's beam weapon frequency.
@@ -161,13 +161,13 @@ end
 --- -- Outputs "Ship's beam frequency is 600THz"
 --- print("Ship's beam frequency is " .. (frequency * 20) + 400 .. "THz")
 function Entity:getBeamFrequency()
-    if self.beam_weapons then return self.beam_weapons.frequency end
+    if self.components.beam_weapons then return self.components.beam_weapons.frequency end
     return 0
 end
 --- Returns this SpaceShip's energy capacity.
 --- Example: ship:getMaxEnergy()
 function Entity:getMaxEnergy()
-    if self.reactor then return self.reactor.max_energy end
+    if self.components.reactor then return self.components.reactor.max_energy end
     return 1000
 end
 --- Sets this SpaceShip's energy capacity.
@@ -175,13 +175,13 @@ end
 --- For PlayerSpaceships, see PlayerSpaceship:setEnergyLevelMax().
 --- Example: ship:setMaxEnergy(800)
 function Entity:setMaxEnergy(amount)
-    if self.reactor then self.reactor.max_energy = amount end
+    if self.components.reactor then self.components.reactor.max_energy = amount end
     return self
 end
 --- Returns this SpaceShip's energy level.
 --- Example: ship:getEnergy()
 function Entity:getEnergy()
-    if self.reactor then return self.reactor.energy end
+    if self.components.reactor then return self.components.reactor.energy end
     return 1000
 end
 
@@ -361,7 +361,7 @@ end
 --- forward,reverse = getImpulseMaxSpeed()
 --- forward = getImpulseMaxSpeed() -- forward speed only
 function Entity:getImpulseMaxSpeed()
-    if self.impulse_engine then return self.impulse_engine.max_speed_forward end
+    if self.components.impulse_engine then return self.components.impulse_engine.max_speed_forward end
     return 0.0
 end
 --- Sets this SpaceShip's maximum forward and reverse impulse speeds.
@@ -371,12 +371,12 @@ end
 --- ship:setImpulseMaxSpeed(30,20) -- sets the max forward speed to 30 and reverse to 20
 --- ship:setImpulseMaxSpeed(30) -- sets the max forward and reverse speed to 30
 function Entity:setImpulseMaxSpeed(forward, reverse)
-    if self.impulse_engine then
-        self.impulse_engine.max_speed_forward = forward
+    if self.components.impulse_engine then
+        self.components.impulse_engine.max_speed_forward = forward
         if reverse == nil then
-            self.impulse_engine.max_speed_reverse = forward
+            self.components.impulse_engine.max_speed_reverse = forward
         else
-            self.impulse_engine.max_speed_reverse = reverse
+            self.components.impulse_engine.max_speed_reverse = reverse
         end
     end
     return self
@@ -384,13 +384,13 @@ end
 --- Returns this SpaceShip's maximum rotational speed, in degrees per second?
 --- Example: ship:getRotationMaxSpeed()
 function Entity:getRotationMaxSpeed()
-    if self.maneuvering_thrusters then return self.maneuvering_thrusters.speed end
+    if self.components.maneuvering_thrusters then return self.components.maneuvering_thrusters.speed end
     return 0.0
 end
 --- Sets this SpaceShip's maximum rotational speed, in degrees per second?
 --- Example: ship:setRotationMaxSpeed(10)
 function Entity:setRotationMaxSpeed(speed)
-    if self.maneuvering_thrusters then self.maneuvering_thrusters.speed = speed end
+    if self.components.maneuvering_thrusters then self.components.maneuvering_thrusters.speed = speed end
     return self
 end
 --- Returns the SpaceShip's forward and reverse impulse acceleration values, in (unit?)
@@ -398,7 +398,7 @@ end
 --- forward,reverse = getAcceleration()
 --- forward = getAcceleration() -- forward acceleration only
 function Entity:getAcceleration()
-    if self.impulse_engine then return self.impulse_engine.acceleration_forward end
+    if self.components.impulse_engine then return self.components.impulse_engine.acceleration_forward end
     return 0.0
 end
 --- Sets the SpaceShip's forward and reverse impulse acceleration values, in (unit?)
@@ -408,12 +408,12 @@ end
 --- ship:setAcceleration(5,3.5) -- sets the max forward acceleration to 5 and reverse to 3.5
 --- ship:setAcceleration(5) -- sets the max forward and reverse acceleration to 5
 function Entity:setAcceleration(forward, reverse)
-    if self.impulse_engine then
-        self.impulse_engine.acceleration_forward = forward
+    if self.components.impulse_engine then
+        self.components.impulse_engine.acceleration_forward = forward
         if reverse == nil then
-            self.impulse_engine.acceleration_reverse = forward
+            self.components.impulse_engine.acceleration_reverse = forward
         else
-            self.impulse_engine.acceleration_reverse = reverse
+            self.components.impulse_engine.acceleration_reverse = reverse
         end
     end
     return self
@@ -422,28 +422,28 @@ end
 --- The boost value sets the forward maneuver capacity, and the strafe value sets the lateral maneuver capacity.
 --- Example: ship:setCombatManeuver(400,250) -- sets boost capacity to 400 and lateral to 250
 function Entity:setCombatManeuver(boost, strafe)
-    self.combat_maneuvering_thrusters = {boost_speed=boost, strafe_speed=strafe}
+    self.components.combat_maneuvering_thrusters = {boost_speed=boost, strafe_speed=strafe}
     return self
 end
 --- Returns whether the SpaceShip has a jump drive.
 --- Example: ship:hasJumpDrive()
 function Entity:hasJumpDrive()
-    return self.jump_drive ~= nil
+    return self.components.jump_drive ~= nil
 end
 --- Defines whether the SpaceShip has a jump drive.
 --- If true, this ship gains jump drive controls and a "jumpdrive" ship system.
 --- Example: ship:setJumpDrive(true) -- gives this ship a jump drive
 function Entity:setJumpDrive(enabled)
-    if enabled then self.jump_drive = {} else self.jump_drive = nil end
+    if enabled then self.components.jump_drive = {} else self.components.jump_drive = nil end
     return self
 end
 --- Sets the minimum and maximum jump distances for this SpaceShip.
 --- Defaults to (5000,50000) if not set by the ShipTemplate.
 --- Example: ship:setJumpDriveRange(2500,25000) -- sets the minimum jump distance to 2.5U and maximum to 25U
 function Entity:setJumpDriveRange(min_range, max_range)
-    if self.jump_drive then
-        self.jump_drive.min_distance = min_range
-        self.jump_drive.max_distance = max_range
+    if self.components.jump_drive then
+        self.components.jump_drive.min_distance = min_range
+        self.components.jump_drive.max_distance = max_range
     end
     return self
 end
@@ -455,13 +455,13 @@ end
 --- Jump drive charge regenerates at a rate modified by the "jumpdrive" system's effectiveness.
 --- Example: ship:setJumpDriveCharge(50000)
 function Entity:setJumpDriveCharge(charge)
-    if self.jump_drive then self.jump_drive.charge = charge end
+    if self.components.jump_drive then self.components.jump_drive.charge = charge end
     return self
 end
 --- Returns this SpaceShip's current jump drive charge.
 --- Example: jump_charge = ship:getJumpDriveCharge()
 function Entity:getJumpDriveCharge()
-    if self.jump_drive then return self.jump_drive.charge end
+    if self.components.jump_drive then return self.components.jump_drive.charge end
     return 0.0
 end
 --- Returns the time required by this SpaceShip to complete a jump once initiated.
@@ -471,20 +471,20 @@ end
 --- System effectiveness can modify this delay.
 --- Example: ship:getJumpDelay()
 function Entity:getJumpDelay()
-    if self.jump_drive then return self.jump_drive.delay end
+    if self.components.jump_drive then return self.components.jump_drive.delay end
     return 0.0
 
 end
 --- Returns whether this SpaceShip has a warp drive.
 --- Example: ship:hasWarpDrive()
 function Entity:hasWarpDrive()
-    return self.warp_drive ~= nil
+    return self.components.warp_drive ~= nil
 end
 --- Defines whether this SpaceShip has a warp drive.
 --- If true, this ship gains warp drive controls and a "warp" ship system.
 --- Example: ship:setWarpDrive(true)
 function Entity:setWarpDrive(enabled)
-    if enabled then self.warp_drive = {} else self.warp_drive = nil end
+    if enabled then self.components.warp_drive = {} else self.components.warp_drive = nil end
     return self
 end
 --- Sets this SpaceShip's warp speed factor.
@@ -492,72 +492,72 @@ end
 --- Unlike ShipTemplate:setWarpSpeed(), setting this value does NOT also grant this ship a warp drive.
 --- Example: ship:setWarpSpeed(1000);
 function Entity:setWarpSpeed(speed)
-    if self.warp_drive then self.warp_drive.speed_per_level = speed end
+    if self.components.warp_drive then self.components.warp_drive.speed_per_level = speed end
     return self
 end
 --- Returns this SpaceShip's warp speed factor.
 --- Actual warp speed can be modified by "warp" system effectiveness.
 --- Example: ship:getWarpSpeed(()
 function Entity:getWarpSpeed()
-    if self.warp_drive then return self.warp_drive.speed_per_level end
+    if self.components.warp_drive then return self.components.warp_drive.speed_per_level end
     return 0.0
 end
 --- Returns the arc, in degrees, for the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:getBeamWeaponArc(0); -- returns beam weapon 0's arc
 function Entity:getBeamWeaponArc(index)
-    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].arc end
+    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].arc end
     return 0.0
 end
 --- Returns the direction, in degrees relative to the ship's forward bearing, for the arc's center of the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:getBeamWeaponDirection(0); -- returns beam weapon 0's direction
 function Entity:getBeamWeaponDirection(index)
-    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].direction end
+    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].direction end
     return 0.0
 end
 --- Returns the range for the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:getBeamWeaponRange(0); -- returns beam weapon 0's range
 function Entity:getBeamWeaponRange(index)
-    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].range end
+    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].range end
     return 0.0
 end
 --- Returns the turret arc, in degrees, for the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:getBeamWeaponTurretArc(0); -- returns beam weapon 0's turret arc
 function Entity:getBeamWeaponTurretArc(index)
-    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].turret_arc end
+    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].turret_arc end
     return 0.0
 end
 --- Returns the direction, in degrees relative to the ship's forward bearing, for the turret arc's center for the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:getBeamWeaponTurretDirection(0); -- returns beam weapon 0's turret direction
 function Entity:getBeamWeaponTurretDirection(index)
-    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].turret_direction end
+    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].turret_direction end
     return 0.0
 end
 --- Returns the base firing delay, in seconds, for the BeamWeapon with the given index on this SpaceShip.
 --- Actual cycle time can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponCycleTime(0); -- returns beam weapon 0's cycle time
 function Entity:getBeamWeaponCycleTime(index)
-    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].cycle_time end
+    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].cycle_time end
     return 0.0
 end
 --- Returns the base damage dealt by the BeamWeapon with the given index on this SpaceShip.
 --- Actual damage can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponDamage(0); -- returns beam weapon 0's damage
 function Entity:getBeamWeaponDamage(index)
-    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].damage end
+    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].damage end
     return 0.0
 end
 --- Returns how much of this SpaceShip's energy is drained each time the BeamWeapon with the given index is fired.
 --- Actual drain can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponEnergyPerFire(0); -- returns beam weapon 0's energy use per firing
 function Entity:getBeamWeaponEnergyPerFire(index)
-    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].energy_per_beam_fire end
+    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].energy_per_beam_fire end
     return 0.0
 end
 --- Returns the heat generated by each firing of the BeamWeapon with the given index on this SpaceShip.
 --- Actual heat generation can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponHeatPerFire(0); -- returns beam weapon 0's heat generation per firing
 function Entity:getBeamWeaponHeatPerFire(index)
-    if self.beam_weapons and #self.beam_weapons > index then return self.beam_weapons[index+1].heat_per_beam_fire end
+    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].heat_per_beam_fire end
     return 0.0
 end
 --- Defines the traits of a BeamWeapon with the given index on this SpaceShip.
@@ -572,11 +572,11 @@ end
 --- -- Creates a beam weapon with index 0, arc of 90 degrees, direction pointing backward, range of 1U, base cycle time of 1 second, and base damage of 1 point
 --- ship:setBeamWeapon(0,90,180,1000,1,1)
 function Entity:setBeamWeapon(index, arc, direction, range, cycle_time, damage)
-    if self.beam_weapons == nil then self.beam_weapons = {} end
-    while #self.beam_weapons < index + 1 do
-        self.beam_weapons[#self.beam_weapons + 1] = {}
+    if self.components.beam_weapons == nil then self.components.beam_weapons = {} end
+    while #self.components.beam_weapons < index + 1 do
+        self.components.beam_weapons[#self.components.beam_weapons + 1] = {}
     end
-    self.beam_weapons[index + 1] = {arc=arc, direction=direction, range=range, cycle_time=cycle_time, damage=damage}
+    self.components.beam_weapons[index + 1] = {arc=arc, direction=direction, range=range, cycle_time=cycle_time, damage=damage}
     return self
 end
 --- Converts a BeamWeapon with the given index on this SpaceShip into a turret and defines its traits.
@@ -590,69 +590,69 @@ end
 --- -- Makes beam weapon 0 a turret with a 200-degree turret arc centered on 90 degrees from forward, rotating at 5 degrees per tick (unit?)
 --- ship:setBeamWeaponTurret(0,200,90,5)
 function Entity:setBeamWeaponTurret(index, arc, direction, rotation_rate)
-    if self.beam_weapons == nil or #self.beam_weapons <= index then return self end
-    self.beam_weapons[index + 1].turret_arc = arc
-    self.beam_weapons[index + 1].turret_direction = arc
-    self.beam_weapons[index + 1].turret_rotation_rate = rotation_rate
+    if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
+    self.components.beam_weapons[index + 1].turret_arc = arc
+    self.components.beam_weapons[index + 1].turret_direction = arc
+    self.components.beam_weapons[index + 1].turret_rotation_rate = rotation_rate
     return self
 end
 --- Sets the BeamEffect texture, by filename, for the BeamWeapon with the given index on this SpaceShip.
 --- See BeamEffect:setTexture().
 --- Example: ship:setBeamWeaponTexture(0,"texture/beam_blue.png")
 function Entity:setBeamWeaponTexture(index, texture)
-    if self.beam_weapons == nil or #self.beam_weapons <= index then return self end
-    self.beam_weapons[index + 1].texture = texture
+    if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
+    self.components.beam_weapons[index + 1].texture = texture
     return self
 end
 --- Sets how much energy is drained each time the BeamWeapon with the given index is fired on this SpaceShip.
 --- Only PlayerSpaceships consume energy. Setting this for other ShipTemplateBasedObject types has no effect.
 --- Example: ship:setBeamWeaponEnergyPerFire(0,1) -- sets beam 0 to use 1 energy per firing
 function Entity:setBeamWeaponEnergyPerFire(index, energy)
-    if self.beam_weapons == nil or #self.beam_weapons <= index then return self end
-    self.beam_weapons[index + 1].energy_per_beam_fire = energy
+    if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
+    self.components.beam_weapons[index + 1].energy_per_beam_fire = energy
     return self
 end
 --- Sets how much "beamweapon" system heat is generated, in percentage of total system heat capacity, each time the BeamWeapon with the given index is fired on this SpaceShip.
 --- Only PlayerSpaceships generate and manage heat. Setting this for other ShipTemplateBasedObject types has no effect.
 --- Example: ship:setBeamWeaponHeatPerFire(0,0.02) -- sets beam 0 to generate 0.02 (2%) system heat per firing
 function Entity:setBeamWeaponHeatPerFire(index, heat)
-    if self.beam_weapons == nil or #self.beam_weapons <= index then return self end
-    self.beam_weapons[index + 1].heat_per_beam_fire = heat
+    if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
+    self.components.beam_weapons[index + 1].heat_per_beam_fire = heat
     return self
 end
 --- Sets the colors used to draw the radar arc for the BeamWeapon with the given index on this SpaceShip.
 --- The first three-number value sets the RGB color for the arc when idle, and the second sets the color when firing.
 --- Example: ship:setBeamWeaponArcColor(0,0,128,0,0,255,0) -- makes beam 0's arc green
 function Entity:setBeamWeaponArcColor(index, idle_r, idle_g, idle_b, fire_r, fire_g, fire_b)
-    if self.beam_weapons == nil or #self.beam_weapons <= index then return self end
-    self.beam_weapons[index + 1].arc_color = {idle_r, idle_g, idle_b}
-    self.beam_weapons[index + 1].arc_color_fire = {fire_r, fire_g, fire_b}
+    if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
+    self.components.beam_weapons[index + 1].arc_color = {idle_r, idle_g, idle_b}
+    self.components.beam_weapons[index + 1].arc_color_fire = {fire_r, fire_g, fire_b}
     return self
 end
 --- Sets the damage type dealt by the BeamWeapon with the given index on this SpaceShip.
 --- Example: ship:setBeamWeaponDamageType(0,"emp") -- makes beam 0 deal EMP damage
 function Entity:setBeamWeaponDamageType(index, damage_type)
-    if self.beam_weapons == nil or #self.beam_weapons <= index then return self end
-    self.beam_weapons[index + 1].damage_type = damage_type
+    if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
+    self.components.beam_weapons[index + 1].damage_type = damage_type
     return self
 end
 --- Sets the number of WeaponTubes for this SpaceShip.
 --- Weapon tubes are 0-indexed. For example, 3 tubes would be indexed 0, 1, and 2.
 --- Example: ship:setWeaponTubeCount(4)
 function Entity:setWeaponTubeCount(amount)
-    self.missile_tubes = {}
+    self.components.missile_tubes = {}
     for n=1,amount do
-        self.missile_tubes[n] = {}
+        self.components.missile_tubes[n] = {}
     end
-    while #self.missile_tubes > amount do
-        self.missile_tubes[#self.missile_tubes] = nil
+    while #self.components.missile_tubes > amount do
+        self.components.missile_tubes[#self.components.missile_tubes] = nil
     end
     return self
 end
 --- Returns the number of WeaponTube on this SpaceShip.
 --- Example: ship:getWeaponTubeCount()
 function Entity:getWeaponTubeCount()
-    if self.missile_tubes then return #self.missile_tubes end
+    if self.components.missile_tubes then return #self.components.missile_tubes end
     return 0
 end
 --- Returns the weapon type loaded into the WeaponTube with the given index on this SpaceShip.
@@ -688,31 +688,31 @@ end
 --- -- Sets tube 0 to point 90 degrees right of forward, and tube 1 to point 90 degrees left of forward
 --- ship:setWeaponTubeDirection(0,90):setWeaponTubeDirection(1,-90)
 function Entity:setWeaponTubeDirection(index, direction)
-    if self.missile_tubes then self.missile_tubes[index+1].direction = direction end
+    if self.components.missile_tubes then self.components.missile_tubes[index+1].direction = direction end
     return self
 end
 --- Sets the weapon size launched from the WeaponTube with the given index on this SpaceShip.
 --- Example: ship:setTubeSize(0,"large") -- sets tube 0 to fire large weapons
 function Entity:setTubeSize(index, size)
-    if self.missile_tubes then self.missile_tubes[index+1].size = size end
+    if self.components.missile_tubes then self.components.missile_tubes[index+1].size = size end
     return self
 end
 --- Returns the size of the weapon tube with the given index on this SpaceShip.
 --- Example: ship:getTubeSize(0)
 function Entity:getTubeSize(index)
-    if self.missile_tubes then return self.missile_tubes[index+1].size end
+    if self.components.missile_tubes then return self.components.missile_tubes[index+1].size end
     return "medium"
 end
 --- Returns the delay, in seconds, for loading and unloading the WeaponTube with the given index on this SpaceShip.
 --- Example: ship:getTubeLoadTime(0)
 function Entity:getTubeLoadTime(index)
-    if self.missile_tubes then return self.missile_tubes[index+1].load_time end
+    if self.components.missile_tubes then return self.components.missile_tubes[index+1].load_time end
     return 0.0
 end
 --- Sets the time, in seconds, required to load the weapon tube with the given index on this SpaceShip.
 --- Example: ship:setTubeLoadTime(0,12) -- sets the loading time for tube 0 to 12 seconds
 function Entity:setTubeLoadTime(index, load_time)
-    if self.missile_tubes then self.missile_tubes[index+1].load_time = load_time end
+    if self.components.missile_tubes then self.components.missile_tubes[index+1].load_time = load_time end
     return self
 end
 --- Returns the dynamic gravitational radar signature value emitted by this SpaceShip.
@@ -752,10 +752,10 @@ end
 --- Sets the scan state of this SpaceShip for every faction.
 --- Example: ship:setScanState("fullscan") -- every faction treats this ship as fully scanned
 function Entity:setScanState(state)
-    local ss = self.scan_state
+    local ss = self.components.scan_state
     if ss ~= nil then
         for name, faction in pairs(__faction_info) do
-            self.setScanStateByFaction(name, state)
+            self:setScanStateByFaction(name, state)
         end
     end
     return self
@@ -763,7 +763,7 @@ end
 --- Sets the scan state of this SpaceShip for a given faction.
 --- Example: ship:setScanStateByFaction("Kraylor","fullscan") -- Kraylor faction treats this ship as fully scanned
 function Entity:setScanStateByFaction(faction, state)
-    local ss = self.scan_state
+    local ss = self.components.scan_state
     if ss ~= nil then
         local f = getFactionInfo(faction)
         if f ~= nil then

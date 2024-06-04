@@ -6,49 +6,49 @@
 --- Example: asteroid = Asteroid():setSize(150):setPosition(1000,2000)
 function Asteroid()
     local e = createEntity()
-    e.transform = {rotation=random(0, 360)}
-    e.radar_signature = {gravity=0.05}
+    e.components.transform = {rotation=random(0, 360)}
+    e.components.radar_signature = {gravity=0.05}
     local z = random(-50, 50)
     local size = random(110, 130)
 
     local model_number = irandom(1, 10)
-    e.mesh_render = {
+    e.components.mesh_render = {
         mesh="Astroid_" .. model_number .. ".model",
         mesh_offset={0, 0, z},
         texture="Astroid_" .. model_number .. "_d.png",
         specular_texture="Astroid_" .. model_number .. "_s.png",
         scale=size,
     }
-    e.physics = {type="Sensor", size=size}
-    e.radar_trace = {
+    e.components.physics = {type="Sensor", size=size}
+    e.components.radar_trace = {
         icon="radar/blip.png",
         radius=size,
         color={255, 200, 100, 255},
         rotate=false,
     }
-    e.spin={rate=random(0.1, 0.8)}
-    e.avoid_object={range=size*2}
-    e.explode_on_touch={damage_at_center=35, damage_at_edge=35,blast_range=size}
+    e.components.spin={rate=random(0.1, 0.8)}
+    e.components.avoid_object={range=size*2}
+    e.components.explode_on_touch={damage_at_center=35, damage_at_edge=35,blast_range=size}
     return e
 end
 
 function VisualAsteroid()
     local e = createEntity()
-    e.transform = {rotation=random(0, 360)}
-    e.radar_signature = {gravity=0.05}
+    e.components.transform = {rotation=random(0, 360)}
+    e.components.radar_signature = {gravity=0.05}
     local z = random(300, 800);
     if random(0, 100) < 50 then z = -z end
     local size = random(110, 130)
 
     local model_number = irandom(1, 10)
-    e.mesh_render = {
+    e.components.mesh_render = {
         mesh="Astroid_" .. model_number .. ".model",
         mesh_offset={0, 0, z},
         texture="Astroid_" .. model_number .. "_d.png",
         specular_texture="Astroid_" .. model_number .. "_s.png",
         scale=size,
     }
-    e.spin={rate=random(0.1, 0.8)}
+    e.components.spin={rate=random(0.1, 0.8)}
     return e
 end
 

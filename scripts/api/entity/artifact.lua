@@ -3,15 +3,15 @@
 --- Example: artifact = Artifact():setModel("artifact6"):setSpin(0.5)
 function Artifact()
     local e = createEntity()
-    e.transform = {rotation=random(0, 360)}
+    e.components.transform = {rotation=random(0, 360)}
 
     local model_number = irandom(1, 8)
-    e.mesh_render = {
+    e.components.mesh_render = {
         mesh="mesh/Artifact" .. model_number .. ".obj",
         texture="texture/electric_sphere_texture.png",
         scale=3.0,
     }
-    e.radar_trace = {
+    e.components.radar_trace = {
         icon="radar/blip.png",
         radius=120.0,
         rotate=false,
