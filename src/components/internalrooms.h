@@ -18,7 +18,9 @@ public:
     };
 
     std::vector<Room> rooms;
+    bool rooms_dirty = true;
     std::vector<Door> doors;
+    bool doors_dirty = true;
 
     glm::ivec2 roomMin();
     glm::ivec2 roomMax();

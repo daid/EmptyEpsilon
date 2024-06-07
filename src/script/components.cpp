@@ -612,10 +612,10 @@ void initComponentScriptBindings()
 
     sp::script::ComponentHandler<InternalRooms>::name("internal_rooms");
     BIND_MEMBER(InternalRooms, auto_repair_enabled);
-    BIND_ARRAY(InternalRooms, rooms);
-    BIND_ARRAY_MEMBER(InternalRooms, rooms, position);
-    BIND_ARRAY_MEMBER(InternalRooms, rooms, size);
-    BIND_ARRAY_MEMBER(InternalRooms, rooms, system);
+    BIND_ARRAY_DIRTY_FLAG(InternalRooms, rooms, rooms_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(InternalRooms, rooms, position, rooms_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(InternalRooms, rooms, size, rooms_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(InternalRooms, rooms, system, rooms_dirty);
     sp::script::ComponentHandler<InternalRooms>::members["doors"] = {
         [](lua_State* L, const void* ptr) {
             auto t = reinterpret_cast<const InternalRooms*>(ptr);
@@ -643,6 +643,7 @@ void initComponentScriptBindings()
                 lua_pop(L, 1);
             }
             lua_pop(L, 1);
+            t->doors_dirty = true;
         }
     };
     sp::script::ComponentHandler<InternalCrew>::name("internal_crew");

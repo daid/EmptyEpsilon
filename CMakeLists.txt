@@ -479,6 +479,8 @@ set(MAIN_SOURCES
     src/multiplayer/scanning.cpp
     src/multiplayer/missile.h
     src/multiplayer/missile.cpp
+    src/multiplayer/internalrooms.h
+    src/multiplayer/internalrooms.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

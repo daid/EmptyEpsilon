@@ -23,6 +23,7 @@
 #include "multiplayer/gravity.h"
 #include "multiplayer/scanning.h"
 #include "multiplayer/missile.h"
+#include "multiplayer/internalrooms.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -66,14 +67,14 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<HackingDeviceReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<HullReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ImpulseEngineReplication>();
-    //InternalRooms
-    //InternalCrew
+    sp::ecs::MultiplayerReplication::registerComponentReplication<InternalRoomsReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<InternalCrewReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<JumpDriveReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ManeuveringThrustersReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CombatManeuveringThrustersReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<MissileFlightReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<MissileHomingReplication>();
-    //ConstantParticleEmitter
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ConstantParticleEmitterReplication>();
     //MissileTubes
     //MoveTo
     sp::ecs::MultiplayerReplication::registerComponentReplication<CallSignReplication>();
