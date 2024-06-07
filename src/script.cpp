@@ -16,6 +16,7 @@
 #include "io/json.h"
 #include "script/enum.h"
 #include "script/dataStorage.h"
+#include "script/component.h"
 
 
 /// void require(string filename)
@@ -85,6 +86,15 @@ static int luaTranslate(lua_State* L)
 static sp::ecs::Entity luaCreateEntity()
 {
     return sp::ecs::Entity::create();
+}
+
+static int luaQueryEntities(lua_State* L)
+{
+    auto key = luaL_checkstring(L, 1);
+    auto it = sp::script::ComponentRegistry::components.find(key);
+    if (it == sp::script::ComponentRegistry::components.end())
+        return luaL_error(L, "Tried to query non-existing component %s", key);
+    return it->second.query(L);
 }
 
 static int luaCreateObjectFunc(lua_State* L)
@@ -608,6 +618,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("_", &luaTranslate);
     
     env.setGlobal("createEntity", &luaCreateEntity);
+    env.setGlobal("getEntitiesWithComponent", &luaQueryEntities);
     env.setGlobal("getLuaEntityFunctionTable", &luaGetEntityFunctionTable);
     
     env.setGlobal("createClass", &luaCreateClass);
