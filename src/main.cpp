@@ -94,6 +94,8 @@ int main(int argc, char** argv)
 #endif
 #if defined(_WIN32) && !defined(DEBUG)
     Logging::setLogFile("EmptyEpsilon.log");
+#else
+    Logging::setLogStdout();
 #endif
     LOG(Info, "Starting...");
     new Engine();
@@ -104,8 +106,10 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("proxy") != "")
         return runProxyServer();
 
-    if (PreferencesManager::get("headless") != "")
+    if (PreferencesManager::get("headless") != "") {
         textureManager.setDisabled(true);
+        Logging::setLogStdout();
+    }
 
     initResourcePaths();
     textureManager.setDefaultSmooth(true);
