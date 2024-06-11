@@ -9,6 +9,7 @@
 #include "multiplayer/radar.h"
 #include "multiplayer/comms.h"
 #include "multiplayer/player.h"
+#include "multiplayer/probe.h"
 #include "multiplayer/name.h"
 #include "multiplayer/impulse.h"
 #include "multiplayer/warp.h"
@@ -82,7 +83,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<TypeNameReplication>();
     //Orbit
     sp::ecs::MultiplayerReplication::registerComponentReplication<PlayerControlReplication>();
-    //ScanProbeLauncher
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ScanProbeLauncherReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RadarTraceReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RawRadarSignatureInfoReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<LongRangeRadarReplication>();

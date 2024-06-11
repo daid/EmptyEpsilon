@@ -449,6 +449,8 @@ set(MAIN_SOURCES
     src/multiplayer/radar.cpp
     src/multiplayer/comms.h
     src/multiplayer/comms.cpp
+    src/multiplayer/probe.h
+    src/multiplayer/probe.cpp
     src/multiplayer/player.h
     src/multiplayer/player.cpp
     src/multiplayer/name.h
