@@ -4,6 +4,7 @@
 
 #include "ecs/multiplayer.h"
 #include "multiplayer/beamweapon.h"
+#include "multiplayer/shields.h"
 #include "multiplayer/collision.h"
 #include "multiplayer/faction.h"
 #include "multiplayer/radar.h"
@@ -102,7 +103,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceScannerReplication>();
     //SelfDestruct
     //Sfx
-    //Shields
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ShieldsReplication>();
     //ShipLog
     //Spin
     //Target
