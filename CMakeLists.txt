@@ -244,6 +244,8 @@ set(MAIN_SOURCES
     src/tutorialGame.cpp
     src/shaderRegistry.cpp
     src/glObjects.cpp
+    src/stdinLuaConsole.h
+    src/stdinLuaConsole.cpp
     src/menus/joinServerMenu.cpp
     src/menus/serverBrowseMenu.cpp
     src/menus/mainMenus.cpp

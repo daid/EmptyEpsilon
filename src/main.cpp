@@ -29,6 +29,7 @@
 #include "init/resources.h"
 #include "init/displaywindows.h"
 #include "init/ecs.h"
+#include "stdinLuaConsole.h"
 
 #include "graphics/opengl.h"
 
@@ -149,6 +150,8 @@ int main(int argc, char** argv)
     {
         if (!createDisplayWindows())
             return 1;
+    } else {
+        new StdinLuaConsole();
     }
 
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
