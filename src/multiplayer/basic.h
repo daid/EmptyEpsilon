@@ -78,18 +78,18 @@ enum class BasicReplicationRequest {
     case BasicReplicationRequest::Receive: if (flags & flag) { size_t size; packet >> size; target.FIELD.resize(size); } break; \
     } \
     flag <<= 1; \
-    for(size_t idx=0; idx<target.FIELD.size(); idx++) { \
+    for(size_t idx=0; (BRR==BasicReplicationRequest::Receive) || idx<target.FIELD.size(); idx++) { \
         uint32_t vector_flags = 0; \
         if (BRR == BasicReplicationRequest::Receive) { \
             packet >> vector_flags; \
             if (vector_flags == 0) break; \
             packet >> idx; \
-            if (idx >= target.FIELD.size()) break; \
+            if (idx >= target.FIELD.size()) { LOG(Warning, "Vector replication index out of range..."); break; } \
         } \
         auto vector_target = &target.FIELD[idx]; \
         auto vector_backup = backup ? &backup->FIELD[idx] : nullptr; \
         sp::io::DataBuffer vector_tmp; \
-        uint32_t vector_flag = 0;
+        uint32_t vector_flag = 1;
 
 #define VECTOR_REPLICATION_FIELD(FIELD) \
         switch(BRR) { \
@@ -100,7 +100,7 @@ enum class BasicReplicationRequest {
         vector_flag <<= 1;
 
 #define VECTOR_REPLICATION_END() \
-        if (vector_tmp.getDataSize() > 0) tmp.write(flags, idx, vector_tmp); \
+        if (vector_tmp.getDataSize() > 0) tmp.write(vector_flags, idx, vector_tmp); \
     } \
     if (tmp.getDataSize() > 0) tmp.write(uint32_t(0)); // end of vector update.
 
