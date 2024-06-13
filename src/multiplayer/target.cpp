@@ -3,5 +3,5 @@
 
 
 BASIC_REPLICATION_IMPL(TargetReplication, Target)
-    BASIC_REPLICATION_FIELD(target);
+    BASIC_REPLICATION_FIELD(entity);
 }
