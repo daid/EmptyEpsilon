@@ -450,17 +450,17 @@ string Planet::getExportLine()
 
     if (!atmosphere_texture.empty())
     {
-        ret += ":setPlanetAtmosphereTexture(" + atmosphere_texture + ")";
+        ret += ":setPlanetAtmosphereTexture(\"" + atmosphere_texture + "\")";
     }
 
     if (!planet_texture.empty())
     {
-        ret += ":setPlanetSurfaceTexture(" + planet_texture + ")";
+        ret += ":setPlanetSurfaceTexture(\"" + planet_texture + "\")";
     }
 
     if (!cloud_texture.empty())
     {
-        ret += ":setPlanetCloudTexture(" + cloud_texture + ")";
+        ret += ":setPlanetCloudTexture(\"" + cloud_texture + "\")";
     }
 
     if (cloud_size > 0.f)
