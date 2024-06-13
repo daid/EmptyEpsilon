@@ -17,6 +17,7 @@
 #include "multiplayer/docking.h"
 #include "multiplayer/hull.h"
 #include "multiplayer/coolant.h"
+#include "multiplayer/selfdestruct.h"
 #include "multiplayer/database.h"
 #include "multiplayer/maneuveringthrusters.h"
 #include "multiplayer/target.h"
@@ -102,7 +103,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScanStateReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceDescriptionReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceScannerReplication>();
-    //SelfDestruct
+    sp::ecs::MultiplayerReplication::registerComponentReplication<SelfDestructReplication>();
     //Sfx
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShieldsReplication>();
     //ShipLog

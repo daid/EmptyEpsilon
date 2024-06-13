@@ -469,6 +469,8 @@ set(MAIN_SOURCES
     src/multiplayer/docking.cpp
     src/multiplayer/coolant.h
     src/multiplayer/coolant.cpp
+    src/multiplayer/selfdestruct.h
+    src/multiplayer/selfdestruct.cpp
     src/multiplayer/hull.h
     src/multiplayer/hull.cpp
     src/multiplayer/target.h
