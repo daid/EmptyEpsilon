@@ -30,7 +30,7 @@ msgid ""
 "There's one every weekend. All experience levels are welcome."
 msgstr ""
 "- Durée approx. : 2h\n"
-"- Difficulté : *** (variable)\n"
+"- Difficulté : Très difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
 "Mission : Stopper le dévoreur de planètes avant que toutes les planètes ne "
@@ -43,8 +43,7 @@ msgstr ""
 "\n"
 "- Titre original : Planet Devourer\n"
 "- Auteur : Xansta (Juin 2023)\n"
-"- Traduction FR : Muerte (Mars 24)\n"
-"TRADUCTION EN COURS DE RELECTURE\n"
+"- Traduction FR : Muerte (Juin 24)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -68,7 +67,7 @@ msgstr "Ennemis moins nombreux et/ou plus faibles."
 
 msgctxt "Enemies"
 msgid "Normal"
-msgstr "Normal"
+msgstr "Normale"
 
 msgctxt "Enemies"
 msgid "Normal number or strength of enemies"
@@ -117,7 +116,7 @@ msgstr "Les facteurs aléatoires sont plus en votre faveur."
 
 msgctxt "Murphy"
 msgid "Normal"
-msgstr "Normal"
+msgstr "Normale"
 
 msgctxt "Murphy"
 msgid "Random factors are normal"
@@ -605,14 +604,14 @@ msgstr ""
 "Le Dévoreur de planètes est un Odin modifié.\n"
 "\n"
 "La téléportation a été supprimée au profit de moteurs principaux puissants "
-"et d'une manœuvre renforcée. Les tubes sont nombreux et variés : 5 petits, 5 "
-"moyens et 5 grands. Le stock de missiles a été décuplé. Des hangars à "
-"chasseurs ainsi que des installations automatisées de maintenance et de "
-"construction de chasseurs ont été ajoutés.\n"
+"et d'une manœuvre renforcée. Il possède 15 petits tubes lance-missiles. Le "
+"stock de missiles a été décuplé. Des hangars à chasseurs ainsi que des "
+"installations automatisées de maintenance et de construction de chasseurs "
+"ont été ajoutés.\n"
 "\n"
 "Comme son nom l'indique, il dispose d'une sorte d'armement spécialisé conçu "
-"pour attaquer les planètes. Au moment de rentrer les données dans la base, "
-"les détails sur cet armement sont en grande partie inconnus.\n"
+"pour attaquer les planètes. Au moment de rentrer ces données dans la base, "
+"les détails sur cet armement nous sont en grande partie inconnus.\n"
 "\n"
 "Dans les communications interceptées liées au Dévoreur de planètes ils "
 "l'appellent \"LDS\". Nous sommes habitués à l’omniprésence des acronymes "
@@ -1252,7 +1251,7 @@ msgstr "Qu'aimeriez-vous savoir ?"
 #: scripts/scenario_32_devour.lua:2540
 msgctxt "station-comms"
 msgid "What's with the warp jammers?"
-msgstr "C'est quoi les brouilleurs ?"
+msgstr "Que sont les brouilleurs de téléportation et vitesse lumière ?"
 
 #: scripts/scenario_32_devour.lua:2541
 msgctxt "station-comms"
@@ -1322,7 +1321,7 @@ msgstr "Avez-vous pu obtenir les plans ?"
 #: scripts/scenario_32_devour.lua:2557 scripts/scenario_32_devour.lua:3310
 msgctxt "mission-comms"
 msgid "We got the plans. Now what?"
-msgstr "Oui nous avons ces plans. Et après ?"
+msgstr "Nous avons les plans. Et maintenant ?"
 
 #: scripts/scenario_32_devour.lua:2558
 msgctxt "mission-comms"
@@ -1370,25 +1369,25 @@ msgid ""
 msgstr ""
 "Joli travail !\n"
 "\n"
-"Après un long moment à étudier les plans…\n"
+"...Après un long moment à étudier les plans…\n"
 "\n"
-"Nos analyses nous montre une faiblesse dans le système de contrôle des armes "
-"du %s.\n"
-"Si nous pouvions diffuser un virus informatique via un petit port "
-"d’échappement thermique se trouvant juste en dessous du port principal, nous "
+"Nous pensons avoir trouvé une faiblesse dans le système de contrôle des "
+"armes du %s.\n"
+"Si nous pouvions diffuser un virus informatique via un petit port de "
+"dissipation thermique se trouvant juste en dessous du port principal, nous "
 "devrions pouvoir créer un tunnel virtuel entre les systèmes d’armes en les "
 "forçant à passer en mode maintenance.\n"
 "\n"
 "La portée de %s des 16 faisceaux laser passerait alors de 3,2u à 1u et leur "
 "temps de rechargement passerait de 3s à 30s. De même, %s tubes de missiles "
 "sur 15 verraient leur temps de chargement passer de 3s à 3mn.\n"
-"Cela devrait vous permettre de lancer plus facilement vos attaques avec vos "
-"faisceaux laser et vos missiles destructeurs sur %s."
+"Cela devrait vous permettre de lancer plus facilement vos attaques sur %s "
+"avec vos faisceaux laser et vos missiles destructeurs."
 
 #: scripts/scenario_32_devour.lua:2568
 msgctxt "mission-comms"
 msgid "How do we upload this virus?"
-msgstr "Et comment diffuse-t-on ce virus ?"
+msgstr "D'accord, mais comment diffuse-t-on ce virus ?"
 
 #: scripts/scenario_32_devour.lua:2570
 #, lua-format
@@ -1405,13 +1404,12 @@ msgid ""
 "calibrate your shields, too."
 msgstr ""
 "Oh, l'approche ne sera pas facile.\n"
-"\n"
 "Vous devrez manœuvrer en suivant cette tranchée et parcourir la surface "
 "jusqu'à ce point. La zone cible ne fait que 2 mètres de large... ..."
 "euh... ...désolé, je lis le mauvais script.\n"
-"Approchez vous simplement à moins de 3 unités de %s et demandez à votre "
-"ingénieur d'activer la diffusion du virus à l'aide du bouton qui apparaîtra "
-"à ce moment là sur la console d'ingénierie.\n"
+"Approchez vous simplement à moins de 3u de %s et demandez à votre ingénieur "
+"d'activer la diffusion du virus à l'aide du bouton qui apparaîtra à ce "
+"moment là sur la console d'ingénierie.\n"
 "\n"
 "N'oubliez pas que la portée des faisceaux laser sur le %s est de 3,2u, vous "
 "devrez donc essuyer quelques tirs pour transmettre le virus. Votre ingénieur "
@@ -1439,8 +1437,8 @@ msgid ""
 "Kraylor station %s in sector %s probably has them. But they are likely to be "
 "heavily protected."
 msgstr ""
-"La station Kraylor %s qui se trouve dans le secteur %s les a probablement. "
-"Mais ils sont susceptibles d'être fortement protégés."
+"La station Kraylor %s qui se trouve dans le secteur %s les possède "
+"probablement. Mais ils sont surement fortement protégés."
 
 #: scripts/scenario_32_devour.lua:2590
 msgctxt "mission-comms"
@@ -1455,19 +1453,20 @@ msgstr "Vous ne pouvez pas."
 #: scripts/scenario_32_devour.lua:2592
 msgctxt "mission-comms"
 msgid "What? There must be something we can do"
-msgstr "Quoi ? Il doit bien il y avoir quelque chose que nous pouvons faire"
+msgstr "Quoi ? Il doit bien il y avoir quelque chose que nous pouvons faire ?"
 
 #: scripts/scenario_32_devour.lua:2593
 msgctxt "mission-comms"
 msgid "I can't think of anything. Do you have any ideas?"
 msgstr ""
-"Je ne trouve aucune solution. Auriez-vous une quelconque idée à nous "
+"Nous n'avons aucune solution. Auriez-vous une quelconque idée à nous "
 "soumettre ?"
 
 #: scripts/scenario_32_devour.lua:2594
 msgctxt "mission-comms"
 msgid "Threaten to destroy them unless they give up the plans."
-msgstr "Menacer de les détruire à moins qu'ils ne nous laissent leurs plans ?"
+msgstr ""
+"1. Menacer de les détruire à moins qu'ils ne nous laissent leurs plans ?"
 
 #: scripts/scenario_32_devour.lua:2595
 msgctxt "mission-comms"
@@ -1475,13 +1474,13 @@ msgid ""
 "They'd call your bluff. We can't get the plans if the station has been "
 "destroyed."
 msgstr ""
-"Ils ne croiraient pas à votre bluff. Car nous ne pourrions obtenir les plans "
-"si leur station était détruite."
+"Ça ne servirai à rien, ils ne croiraient pas votre bluff. Tout simplement "
+"car nous ne pourrions obtenir les plans si leur station était détruite."
 
 #: scripts/scenario_32_devour.lua:2598
 msgctxt "mission-comms"
 msgid "Sneak aboard the station and steal the plans."
-msgstr "Se faufilez à bord de la station et volez les plans ?"
+msgstr "2. Se faufilez à bord de la station et volez les plans ?"
 
 #: scripts/scenario_32_devour.lua:2599
 msgctxt "mission-comms"
@@ -1491,12 +1490,16 @@ msgid ""
 "able to install a powerful cyber system on your ship. You'd have to get "
 "close and stay close for it to work."
 msgstr ""
-"Ils ne vous laisseraient pas vous amarrer. Et même si vous pouviez vous "
-"frayer un chemin jusqu'à la station, le protocole standard de sécurité "
-"consiste à effacer complètement les banques de données. Cependant…\n"
+"Ils ne vous laisseraient pas vous amarrer.\n"
+"Et même si vous pouviez vous frayer un chemin jusqu'à la station, leur "
+"protocole standard de sécurité consiste à effacer complètement les banques "
+"de données.\n"
+"Cependant…\n"
 "Nous pourrions peut-être installer un puissant programme informatique sur "
-"votre vaisseau. Il faudrait s'approcher de la station et rester suffisamment "
-"près pour que ça marche."
+"votre vaisseau.\n"
+"Il faudrait pouvoir s'approcher de la station et rester suffisamment près le "
+"temps que le programme télécharge les plans.\n"
+"Qu'en pensez-vous ?"
 
 #: scripts/scenario_32_devour.lua:2600
 msgctxt "mission-comms"
@@ -1510,9 +1513,9 @@ msgid ""
 "for the system to infiltrate and extract the plans."
 msgstr ""
 "Entendu,\n"
-"Vous devrez vous approcher à moins de 2,5 unités et y rester pendant au "
-"moins 47 secondes pour que le programme s'infiltre et extraie les plans de "
-"leur banque de données."
+"Vous devrez vous approcher à moins de 2,5u de la station et d'après nos "
+"calculs, rester au moins 47 secondes sur place, le temps que le programme "
+"s'infiltre et extraie les plans de leur banque de données."
 
 #: scripts/scenario_32_devour.lua:2602
 msgctxt "mission-comms"
@@ -1527,14 +1530,14 @@ msgid ""
 msgstr ""
 "...Après quelques minutes d'attente...\n"
 "\n"
-"C'est fait. Nous avons installé le programme.\n"
+"C'est chose faite. Le programme est bien installé sur votre vaisseau.\n"
 "Votre ingénieur verra s'afficher un bouton d'activation sur sa console "
 "lorsque vous serez à portée."
 
 #: scripts/scenario_32_devour.lua:2611
 msgctxt "mission-comms"
 msgid "Check with other stations for the plans."
-msgstr "Vérifiez auprès des autres stations pour les plans"
+msgstr "3. Vérifiez auprès des autres stations pour les plans ?"
 
 #: scripts/scenario_32_devour.lua:2612
 msgctxt "mission-comms"
@@ -1544,17 +1547,16 @@ msgid ""
 "information is just not available anywhere but within Kraylor controlled "
 "space."
 msgstr ""
-"Ces plans sont hautement classifiés par les Kraylors. Nous avons essayé de "
-"parler à tous ceux qui ont travaillé dessus en dehors des groupes contrôlés "
-"par les Kraylors, mais il faut croire que cette information n'est disponible "
-"nulle part ailleurs que dans l'espace Kraylor."
+"Ces plans sont hautement classifiés par les Kraylors.\n"
+"Nous avons essayé de parler à tous ceux qui ont travaillé dessus en dehors "
+"des groupes contrôlés par les Kraylors, mais il faut croire que cette "
+"information n'est disponible nulle part ailleurs que dans l'espace Kraylor."
 
 #: scripts/scenario_32_devour.lua:2615
 #, lua-format
 msgctxt "mission-comms"
 msgid "Deep scan %s ourselves to determine a weakness"
-msgstr ""
-"Analysons %s nous-mêmes de manière approfondie pour trouver une faiblesse"
+msgstr "4. Analyer %s de manière approfondie pour trouver une faiblesse ?"
 
 #: scripts/scenario_32_devour.lua:2616
 #, lua-format
@@ -1605,17 +1607,17 @@ msgstr "Rumeurs"
 #: scripts/scenario_32_devour.lua:2665
 msgctxt "station-comms"
 msgid "Explain sensor jammers"
-msgstr "Expliquez-nous les brouilleurs de capteur"
+msgstr "Que sont les brouilleurs de capteurs ?"
 
 #: scripts/scenario_32_devour.lua:2666
 msgctxt "station-comms"
 msgid "You mean those things that have a call sign that starts with SJ?"
-msgstr "Vous parlez de ces choses qui ont un nom commençant par SJ ?"
+msgstr "Vous parlez de ces modules qui portent un nom commençant par SJ ?"
 
 #: scripts/scenario_32_devour.lua:2667
 msgctxt "station-comms"
 msgid "Yes. Why so many?"
-msgstr "Oui. Pourquoi autant ?"
+msgstr "Oui, pourquoi il y en a t-il autant ?"
 
 #: scripts/scenario_32_devour.lua:2668
 msgctxt "station-comms"
@@ -1638,7 +1640,7 @@ msgstr ""
 #: scripts/scenario_32_devour.lua:2671
 msgctxt "station-comms"
 msgid "Yes. What do they do?"
-msgstr "Oui. A quoi servent-ils?"
+msgstr "Oui, à quoi servent-ils ?"
 
 #: scripts/scenario_32_devour.lua:2672
 msgctxt "station-comms"
@@ -1648,16 +1650,17 @@ msgid ""
 "traps. If you don't disable the trap, they'll fry your scanners if you pick "
 "them up to neutralize them."
 msgstr ""
-"Les brouilleurs de capteur réduisent la portée de votre capteur longue "
+"Les brouilleurs de capteurs réduisent la portée de vos capteurs longue "
 "distance.\n"
 "L'angle et la portée de la zone d'émission varient d'un brouilleur à "
-"l'autre. Ils sont également conçus pour être piégés. Si vous ne désactivez "
-"pas ces pièges avant de les récupérer, ils grilleront vos scanners."
+"l'autre. Ils sont également conçus pour être protégés. Si vous ne désactivez "
+"pas cette protection en les scannant avant de les récupérer, ils grilleront "
+"vos scanners."
 
 #: scripts/scenario_32_devour.lua:2675
 msgctxt "station-comms"
 msgid "Yes. How do I get rid of them?"
-msgstr "Oui. Comment puis-je m'en débarrasser ?"
+msgstr "Oui, comment s'en débarrasser ?"
 
 #: scripts/scenario_32_devour.lua:2676
 msgctxt "station-comms"
@@ -1665,8 +1668,8 @@ msgid ""
 "Just pick them up. You'll want to scan them first if you don't want your "
 "scanners fried."
 msgstr ""
-"Il suffit de les ramasser. Vous voudrez d'abord les scanner si vous ne "
-"voulez pas griller vos scanners."
+"Il suffit de les ramasser. Pensez à les scanner avant si vous ne voulez pas "
+"griller vos scanners."
 
 #: scripts/scenario_32_devour.lua:2681 scripts/scenario_32_devour.lua:3315
 msgctxt "orders-comms"
@@ -1686,7 +1689,7 @@ msgstr ""
 #: scripts/scenario_32_devour.lua:2694
 msgctxt "station-comms"
 msgid "Resources (repair crew, coolant, goods)"
-msgstr "Ressources : réparateurs, liquide de ref., marchandises"
+msgstr "Ressources : réparateurs, liquide de refroidissement, marchandises"
 
 #: scripts/scenario_32_devour.lua:2695
 msgctxt "station-comms"
@@ -2058,8 +2061,8 @@ msgid ""
 "Our coolant production facility is making more right now. Coolant "
 "manufacturing time remaining is %s."
 msgstr ""
-"Notre usine de production de liquide de refroidissement en produit plus en "
-"ce moment. Le temps de fabrication est de %s."
+"Notre usine de production de liquide de refroidissement en produit davantage "
+"en ce moment. C'est en cours de fabrication. Ce sera prêt dans %s."
 
 #: scripts/scenario_32_devour.lua:3096
 msgctxt "orders-comms"
@@ -2221,10 +2224,9 @@ msgid ""
 "cannot intercept the transmission no matter how good the encryption "
 "protocols."
 msgstr ""
-"Quelle triste spectacle se serait...\n"
-"Sérieusement, si vous voulez discuter d'un sujet aussi sensible, amarrez-"
-"vous d'abord à nous, que les Kraylors ne puissent intercepter nos "
-"transmissions, quelle que soit l'efficacité des protocoles de cryptage."
+"Si vous voulez discuter d'un sujet aussi sensible, amarrez-vous d'abord à "
+"nous, que les Kraylors ne puissent intercepter nos transmissions, quelle que "
+"soit l'efficacité des protocoles de cryptage."
 
 #: scripts/scenario_32_devour.lua:3311
 msgctxt "mission-comms"
@@ -2776,7 +2778,7 @@ msgstr "Auriez-vous des marchandises à vendre ?"
 #: scripts/scenario_32_devour.lua:4003 scripts/scenario_32_devour.lua:4524
 msgctxt "trade-comms"
 msgid "We've got "
-msgstr "Nous avons "
+msgstr "Nous avons du "
 
 #: scripts/scenario_32_devour.lua:4007 scripts/scenario_32_devour.lua:4528
 msgctxt "trade-comms"
@@ -3310,8 +3312,9 @@ msgid ""
 "The technical readouts for %s have been extracted from the databanks on "
 "Kraylor station %s"
 msgstr ""
-"Les lectures techniques de %s ont été extraites des banques de données sur "
-"la station Kraylor %s."
+"Extraction des données réussie.\n"
+"Les plans techniques de %s ont été extraits de la banque de données de la "
+"station Kraylor %s avec succès."
 
 #: scripts/scenario_32_devour.lua:5709
 #, lua-format
@@ -3320,8 +3323,9 @@ msgid ""
 "The technical readouts for %s have been extracted from the databanks on "
 "Kraylor station %s"
 msgstr ""
-"Les lectures techniques de %s ont été extraites des banques de données sur "
-"la station Kraylor %s."
+"Extraction des données réussie.\n"
+"Les plans techniques de %s ont été extraits de la banque de données de la "
+"station Kraylor %s avec succès."
 
 #: scripts/scenario_32_devour.lua:5711
 #, lua-format
@@ -3330,36 +3334,37 @@ msgid ""
 "The technical readouts for %s have been extracted from the databanks on "
 "Kraylor station %s"
 msgstr ""
-"Les lectures techniques de %s ont été extraites des banques de données sur "
-"la station Kraylor %s."
+"Extraction des données réussie.\n"
+"Les plans techniques de %s ont été extraits de la banque de données de la "
+"station Kraylor %s avec succès."
 
 #: scripts/scenario_32_devour.lua:5714 scripts/scenario_32_devour.lua:5731
 #: scripts/scenario_32_devour.lua:5748 scripts/scenario_32_devour.lua:5765
 #, lua-format
 msgctxt "mission-tabEngineer"
 msgid "Extract timer:%i"
-msgstr "Extraction : %i"
+msgstr "Extraction : temps restant %is"
 
 #: scripts/scenario_32_devour.lua:5716 scripts/scenario_32_devour.lua:5733
 #: scripts/scenario_32_devour.lua:5750 scripts/scenario_32_devour.lua:5767
 #, lua-format
 msgctxt "mission-tabEngineer+"
 msgid "Extract timer:%i"
-msgstr "Extraction : %i"
+msgstr "Extraction : temps restant %is"
 
 #: scripts/scenario_32_devour.lua:5718 scripts/scenario_32_devour.lua:5735
 #: scripts/scenario_32_devour.lua:5752 scripts/scenario_32_devour.lua:5769
 #, lua-format
 msgctxt "mission-tabDamageControl"
 msgid "Extract timer:%i"
-msgstr "Extraction : %i"
+msgstr "Extraction : temps restant %is"
 
 #: scripts/scenario_32_devour.lua:5720 scripts/scenario_32_devour.lua:5737
 #: scripts/scenario_32_devour.lua:5754 scripts/scenario_32_devour.lua:5771
 #, lua-format
 msgctxt "mission-tabHelms"
 msgid "Extract timer:%i"
-msgstr "Extraction : %i"
+msgstr "Extraction : temps restant %is"
 
 #: scripts/scenario_32_devour.lua:5725
 msgctxt "mission-buttonEngineer"
@@ -3428,7 +3433,9 @@ msgstr ""
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Planet Devourer destroyed. %i out of 5 planets saved."
-msgstr "Dévoreur de planètes détruit. %i planètes sur 5 sauvées."
+msgstr ""
+"Le Dévoreur de planètes est détruit.\n"
+"Vous avez réussi à sauver %i planètes sur 5."
 
 #: scripts/scenario_32_devour.lua:6073
 msgctxt "repairCrew-msgEngineer"
@@ -3618,9 +3625,10 @@ msgid ""
 msgstr ""
 "De : Quartier général\n"
 "A : Capitaine et équipage du %s\n"
-"Les Kraylors ont décidé de tester sur le terrain des armes nouvellement "
-"développées. Tout ce que nous savons, c'est que c'est gros.\n"
-"Votre ordre de mission : Découvrez ce qu'ils font. Si, comme d'habitude, ils "
+"[MESSAGE URGENT]        Les Kraylors ont décidé de tester sur le terrain une "
+"arme récemment mise au point. Tout ce que nous savons, c'est que c'est du "
+"lourd, du très lourd.\n"
+"Votre ordre de mission : découvrir ce qu'ils font. Si, comme d'habitude, ils "
 "ne préparent rien de bon, stoppez-les.\n"
 "Bonne chance à vous."
 
@@ -3635,14 +3643,17 @@ msgid ""
 "20th century movie history buffs). We expect the Kraylor to wantonly destroy "
 "all the planets in the area, because that's just the kind of beings they are."
 msgstr ""
-"Nous avons intercepté des transmissions Kraylor lors de ce test de tir.\n"
-"Ils parlent de démontrer le pouvoir destructeur de leur force ultime dans "
-"l’univers. Cela commence à ressembler à l’intrigue d’une saga "
-"cinématographique culte de science-fiction de la fin du XXe siècle…\n"
-"Quoi qu'il en soit, ce vaisseau est le Dévoreur de planètes (et non l'Étoile "
-"de la Mort - Pour tous les cinéphiles du 20e siècle).\n"
-"Nous nous attendons à ce que les Kraylors détruisent sans raison toutes les "
-"planètes de la région, tout simplement car ils en sont apparemment capable."
+"Nous avons intercepté des transmissions Kraylors concernant le test de cette "
+"arme.\n"
+"Ils parlent de démontrer le pouvoir destructeur de cette force ultime dans "
+"l’univers.\n"
+"\n"
+"Cette arme est un vaisseau qu'ils nomment le Dévoreur de planètes. Cela fait "
+"penser à une certaine Étoile de la Mort que les cinéphiles du 20e siècle "
+"connaissent bien.\n"
+"Quoi qu'il en soit, nous nous attendons à ce que les Kraylors détruisent "
+"sans raison toutes les planètes de la région, tout simplement car ils en "
+"sont apparemment capable."
 
 #: scripts/scenario_32_devour.lua:6374
 #, lua-format
@@ -3657,15 +3668,18 @@ msgid ""
 "Kraylor to wantonly destroy all the planets in the area, because that's just "
 "the kind of beings they are."
 msgstr ""
-"Nous avons intercepté des transmissions Kraylor lors de ce test de tir.\n"
-"Ils parlent de démontrer le pouvoir destructeur de leur force ultime dans "
-"l’univers. Cela commence à ressembler à l’intrigue d’une saga "
-"cinématographique culte de science-fiction de la fin du XXe siècle…\n"
-"Quoi qu'il en soit, le nom du vaisseau est %s (et non l'Étoile de la Mort - "
-"Pour tous les cinéphiles du 20e siècle).\n"
-"La classe du vaisseau est Dévoreur de planètes. Nous nous attendons à ce que "
-"les Kraylors détruisent sans raison toutes les planètes de la région, tout "
-"simplement car ils en sont apparemment capable."
+"Nous avons intercepté des transmissions Kraylors concernant le test de cette "
+"arme.\n"
+"Ils parlent de démontrer le pouvoir destructeur de cette force ultime dans "
+"l’univers.\n"
+"Cela commence à ressembler à l’intrigue d’une saga de cinéma culte de "
+"science-fiction de la fin du XXe siècle…\n"
+"\n"
+"Cette arme est un vaisseau qu'ils nomment %s. Cela fait penser à une "
+"certaine Étoile de la Mort présente dans cette saga cinématographique.\n"
+"La classe du vaisseau est Dévoreur de planètes. \n"
+"Nous nous attendons à ce que les Kraylors détruisent sans raison toutes les "
+"planètes de la région, tout simplement car ils en sont apparemment capable."
 
 #: scripts/scenario_32_devour.lua:6393
 #, lua-format

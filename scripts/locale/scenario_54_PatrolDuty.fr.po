@@ -2191,7 +2191,7 @@ msgstr ""
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine station list (%i rep)"
-msgstr "Examiner la liste des stations (%i rep)"
+msgstr "Examiner la liste des stations (%i rép)"
 
 #: scripts/scenario_54_PatrolDuty.lua:4607
 #: scripts/scenario_54_PatrolDuty.lua:4664
@@ -2241,7 +2241,7 @@ msgstr ""
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Talk to apprentice cartographer (%i rep)"
-msgstr "Parler à l'apprenti cartographe (%i rep)"
+msgstr "Parler à l'apprenti cartographe (%i rép)"
 
 #: scripts/scenario_54_PatrolDuty.lua:4653
 msgctxt "cartographyOffice-comms"
