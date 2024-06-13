@@ -244,6 +244,8 @@ set(MAIN_SOURCES
     src/tutorialGame.cpp
     src/shaderRegistry.cpp
     src/glObjects.cpp
+    src/stdinLuaConsole.h
+    src/stdinLuaConsole.cpp
     src/menus/joinServerMenu.cpp
     src/menus/serverBrowseMenu.cpp
     src/menus/mainMenus.cpp
@@ -443,6 +445,8 @@ set(MAIN_SOURCES
     src/systems/radar.cpp
     src/multiplayer/beamweapon.h
     src/multiplayer/beamweapon.cpp
+    src/multiplayer/shields.h
+    src/multiplayer/shields.cpp
     src/multiplayer/faction.h
     src/multiplayer/faction.cpp
     src/multiplayer/radar.h
@@ -469,8 +473,12 @@ set(MAIN_SOURCES
     src/multiplayer/docking.cpp
     src/multiplayer/coolant.h
     src/multiplayer/coolant.cpp
+    src/multiplayer/selfdestruct.h
+    src/multiplayer/selfdestruct.cpp
     src/multiplayer/hull.h
     src/multiplayer/hull.cpp
+    src/multiplayer/target.h
+    src/multiplayer/target.cpp
     src/multiplayer/database.h
     src/multiplayer/database.cpp
     src/multiplayer/maneuveringthrusters.h

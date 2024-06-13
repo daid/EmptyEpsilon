@@ -4,6 +4,7 @@
 
 #include "ecs/multiplayer.h"
 #include "multiplayer/beamweapon.h"
+#include "multiplayer/shields.h"
 #include "multiplayer/collision.h"
 #include "multiplayer/faction.h"
 #include "multiplayer/radar.h"
@@ -16,8 +17,10 @@
 #include "multiplayer/docking.h"
 #include "multiplayer/hull.h"
 #include "multiplayer/coolant.h"
+#include "multiplayer/selfdestruct.h"
 #include "multiplayer/database.h"
 #include "multiplayer/maneuveringthrusters.h"
+#include "multiplayer/target.h"
 #include "multiplayer/jumpdrive.h"
 #include "multiplayer/hacking.h"
 #include "multiplayer/customshipfunction.h"
@@ -102,12 +105,12 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScanStateReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceDescriptionReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceScannerReplication>();
-    //SelfDestruct
+    sp::ecs::MultiplayerReplication::registerComponentReplication<SelfDestructReplication>();
     //Sfx
-    //Shields
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ShieldsReplication>();
     //ShipLog
     //Spin
-    //Target
+    sp::ecs::MultiplayerReplication::registerComponentReplication<TargetReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpDriveReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpJammerReplication>();
     //Zone

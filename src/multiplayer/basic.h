@@ -86,8 +86,8 @@ enum class BasicReplicationRequest {
             packet >> idx; \
             if (idx >= target.FIELD.size()) break; \
         } \
-        auto vector_target = &target.mounts[idx]; \
-        auto vector_backup = backup ? &backup->mounts[idx] : nullptr; \
+        auto vector_target = &target.FIELD[idx]; \
+        auto vector_backup = backup ? &backup->FIELD[idx] : nullptr; \
         sp::io::DataBuffer vector_tmp; \
         uint32_t vector_flag = 0;
 
