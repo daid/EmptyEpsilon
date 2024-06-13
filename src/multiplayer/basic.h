@@ -87,7 +87,7 @@ enum class BasicReplicationRequest {
             if (idx >= target.FIELD.size()) break; \
         } \
         auto vector_target = &target.mounts[idx]; \
-        auto vector_backup = BRR != BasicReplicationRequest::SendAll ? &backup->mounts[idx] : nullptr; \
+        auto vector_backup = backup ? &backup->mounts[idx] : nullptr; \
         sp::io::DataBuffer vector_tmp; \
         uint32_t vector_flag = 0;
 

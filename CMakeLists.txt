@@ -451,6 +451,10 @@ set(MAIN_SOURCES
     src/multiplayer/comms.cpp
     src/multiplayer/probe.h
     src/multiplayer/probe.cpp
+    src/multiplayer/orbit.h
+    src/multiplayer/orbit.cpp
+    src/multiplayer/radarblock.h
+    src/multiplayer/radarblock.cpp
     src/multiplayer/player.h
     src/multiplayer/player.cpp
     src/multiplayer/name.h

@@ -26,6 +26,8 @@
 #include "multiplayer/missile.h"
 #include "multiplayer/missiletubes.h"
 #include "multiplayer/internalrooms.h"
+#include "multiplayer/orbit.h"
+#include "multiplayer/radarblock.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -81,7 +83,7 @@ void initSystemsAndComponents()
     //MoveTo
     sp::ecs::MultiplayerReplication::registerComponentReplication<CallSignReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<TypeNameReplication>();
-    //Orbit
+    sp::ecs::MultiplayerReplication::registerComponentReplication<OrbitReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<PlayerControlReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScanProbeLauncherReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RadarTraceReplication>();
@@ -89,8 +91,8 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<LongRangeRadarReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShareShortRangeRadarReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<AllowRadarLinkReplication>();
-    //RadarBlock
-    //NeverRadarBlocked
+    sp::ecs::MultiplayerReplication::registerComponentReplication<RadarBlockReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<NeverRadarBlockedReplication>();
     //Reactor
     //MeshRenderComponent
     //EngineEmitter
