@@ -19,6 +19,7 @@
 #include "multiplayer/coolant.h"
 #include "multiplayer/database.h"
 #include "multiplayer/maneuveringthrusters.h"
+#include "multiplayer/target.h"
 #include "multiplayer/jumpdrive.h"
 #include "multiplayer/hacking.h"
 #include "multiplayer/customshipfunction.h"
@@ -106,7 +107,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShieldsReplication>();
     //ShipLog
     //Spin
-    //Target
+    sp::ecs::MultiplayerReplication::registerComponentReplication<TargetReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpDriveReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpJammerReplication>();
     //Zone

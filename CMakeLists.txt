@@ -471,6 +471,8 @@ set(MAIN_SOURCES
     src/multiplayer/coolant.cpp
     src/multiplayer/hull.h
     src/multiplayer/hull.cpp
+    src/multiplayer/target.h
+    src/multiplayer/target.cpp
     src/multiplayer/database.h
     src/multiplayer/database.cpp
     src/multiplayer/maneuveringthrusters.h
