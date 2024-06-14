@@ -352,6 +352,30 @@ static int luaGetObjectsInRadius(lua_State* L)
     return 1;
 }
 
+static int luaGetEnemiesInRadiusFor(lua_State* L)
+{
+    lua_newtable(L);
+    int idx = 1;
+    auto source = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
+    if (!source) return 1;
+    float r = luaL_checknumber(L, 2);
+    auto source_transform = source.getComponent<sp::Transform>();
+    if (!source_transform) return 1;
+    auto position = source_transform->getPosition();
+    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
+        auto entity_transform = entity.getComponent<sp::Transform>();
+        if (entity_transform) {
+            if (glm::length2(entity_transform->getPosition() - position) < r*r) {
+                if (Faction::getRelation(entity, source) == FactionRelation::Enemy) {
+                    sp::script::Convert<sp::ecs::Entity>::toLua(L, entity);
+                    lua_rawseti(L, -2, idx++);
+                }
+            }
+        }
+    }
+    return 1;
+}
+
 static void luaTransferPlayers(sp::ecs::Entity source, sp::ecs::Entity target, std::optional<ECrewPosition> station)
 {
     if (!target.getComponent<PlayerControl>()) return;
@@ -676,6 +700,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Returns a list of all SpaceObjects within the given radius of the given x/y coordinates.
     /// Example: getObjectsInRadius(0,0,5000) -- returns all objects within 5U of 0,0
     env.setGlobal("getObjectsInRadius", &luaGetObjectsInRadius);
+    /// PVector<SpaceObject> getEnemiesInRadiusFor(sp::ecs::Entity entity, float radius)
+    /// Returns a list of all entities within the given radius that are enemies of the given entity
+    /// Example: getEnemiesInRadiusFor(obj, 5000) -- returns all enemies within 5U of 0,0
+    env.setGlobal("getEnemiesInRadiusFor", &luaGetEnemiesInRadiusFor);
     /// P<PlayerSpaceship> getPlayerShip(int index)
     /// Returns the PlayerSpaceship with the given index.
     /// PlayerSpaceships are 1-indexed.

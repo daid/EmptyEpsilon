@@ -221,13 +221,14 @@ end
 --- Returns whether any SpaceObject from a hostile faction are within a given radius of this SpaceObject, in (unit?).
 --- Example: obj:areEnemiesInRange(5000) -- returns true if hostiles are within 5U of this object
 function Entity:areEnemiesInRange(range)
-    --TODO
+    return #getEnemiesInRadiusFor(self, range) > 0
 end
 --- Returns any SpaceObject within a specific radius, in (unit?), of this SpaceObject.
 --- Returns a list of all SpaceObjects within range.
 --- Example: obj:getObjectsInRange(5000) -- returns all objects within 5U of this SpaceObject.
 function Entity:getObjectsInRange(range)
-    --TODO
+    local x, y = self:getPosition()
+    return getObjectsInRadius(x, y, range)
 end
 --- Returns this SpaceObject's faction reputation points.
 --- Example: obj:getReputationPoints()
