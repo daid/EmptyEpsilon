@@ -473,6 +473,8 @@ set(MAIN_SOURCES
     src/multiplayer/docking.cpp
     src/multiplayer/coolant.h
     src/multiplayer/coolant.cpp
+    src/multiplayer/reactor.h
+    src/multiplayer/reactor.cpp
     src/multiplayer/selfdestruct.h
     src/multiplayer/selfdestruct.cpp
     src/multiplayer/hull.h
@@ -495,6 +497,10 @@ set(MAIN_SOURCES
     src/multiplayer/missile.cpp
     src/multiplayer/missiletubes.h
     src/multiplayer/missiletubes.cpp
+    src/multiplayer/spin.h
+    src/multiplayer/spin.cpp
+    src/multiplayer/moveto.h
+    src/multiplayer/moveto.cpp
     src/multiplayer/internalrooms.h
     src/multiplayer/internalrooms.cpp
     src/ai/fighterAI.cpp

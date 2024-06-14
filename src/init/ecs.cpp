@@ -17,6 +17,7 @@
 #include "multiplayer/docking.h"
 #include "multiplayer/hull.h"
 #include "multiplayer/coolant.h"
+#include "multiplayer/reactor.h"
 #include "multiplayer/selfdestruct.h"
 #include "multiplayer/database.h"
 #include "multiplayer/maneuveringthrusters.h"
@@ -30,6 +31,8 @@
 #include "multiplayer/missiletubes.h"
 #include "multiplayer/internalrooms.h"
 #include "multiplayer/orbit.h"
+#include "multiplayer/spin.h"
+#include "multiplayer/moveto.h"
 #include "multiplayer/radarblock.h"
 
 #include "systems/ai.h"
@@ -83,7 +86,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<MissileHomingReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ConstantParticleEmitterReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<MissileTubesReplication>();
-    //MoveTo
+    sp::ecs::MultiplayerReplication::registerComponentReplication<MoveToReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CallSignReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<TypeNameReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<OrbitReplication>();
@@ -96,7 +99,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<AllowRadarLinkReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RadarBlockReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<NeverRadarBlockedReplication>();
-    //Reactor
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ReactorReplication>();
     //MeshRenderComponent
     //EngineEmitter
     //NebulaRenderer
@@ -109,7 +112,7 @@ void initSystemsAndComponents()
     //Sfx
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShieldsReplication>();
     //ShipLog
-    //Spin
+    sp::ecs::MultiplayerReplication::registerComponentReplication<SpinReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<TargetReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpDriveReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpJammerReplication>();
