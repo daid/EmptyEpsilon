@@ -39,6 +39,7 @@
 #include "components/database.h"
 #include "components/pickup.h"
 #include "components/customshipfunction.h"
+#include "components/zone.h"
 
 
 #define STRINGIFY(n) #n
@@ -682,4 +683,40 @@ void initComponentScriptBindings()
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, crew_position, functions_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, callback, functions_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, order, functions_dirty);
+
+    sp::script::ComponentHandler<Zone>::name("zone");
+    BIND_MEMBER(Zone, color);
+    BIND_MEMBER(Zone, label);
+    sp::script::ComponentHandler<InternalRooms>::members["points"] = {
+        [](lua_State* L, const void* ptr) {
+            auto zone = reinterpret_cast<const Zone*>(ptr);
+            lua_newtable(L);
+            for(size_t n=0; n<zone->outline.size(); n++) {
+                lua_newtable(L);
+                lua_pushnumber(L, zone->outline[n].x); lua_seti(L, -2, 1);
+                lua_pushnumber(L, zone->outline[n].y); lua_seti(L, -2, 2);
+                lua_seti(L, -2, n+1);
+            }
+            return 1;
+        }, [](lua_State* L, void* ptr) {
+            auto zone = reinterpret_cast<Zone*>(ptr);
+            zone->outline.clear();
+            while(true) {
+                lua_geti(L, -1, zone->outline.size() + 1);
+                if (!lua_istable(L, -1))
+                    break;
+                lua_geti(L, -1, 1); auto x = lua_tonumber(L, -1); lua_pop(L, 1);
+                lua_geti(L, -1, 2); auto y = lua_tonumber(L, -1); lua_pop(L, 1);
+                zone->outline.push_back({x, y});
+
+                lua_pop(L, 1);
+            }
+            lua_pop(L, 1);
+
+            zone->updateTriangles();
+            zone->zone_dirty = true;
+        }
+    };
+    std::vector<glm::vec2> outline;
+    std::vector<uint16_t> triangles;
 }

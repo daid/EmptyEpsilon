@@ -12,5 +12,9 @@ public:
     std::vector<glm::vec2> outline;
     std::vector<uint16_t> triangles;
     string label;
+    glm::vec2 label_offset;
     float radius;
+    bool zone_dirty = true;
+
+    void updateTriangles();
 };

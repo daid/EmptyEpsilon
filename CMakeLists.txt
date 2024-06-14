@@ -391,6 +391,7 @@ set(MAIN_SOURCES
     src/components/missile.h
     src/components/database.h
     src/components/zone.h
+    src/components/zone.cpp
     src/components/moveto.h
     src/components/lifetime.h
     src/systems/ai.h
@@ -443,6 +444,8 @@ set(MAIN_SOURCES
     src/systems/planet.cpp
     src/systems/radar.h
     src/systems/radar.cpp
+    src/systems/zone.h
+    src/systems/zone.cpp
     src/multiplayer/beamweapon.h
     src/multiplayer/beamweapon.cpp
     src/multiplayer/shields.h
