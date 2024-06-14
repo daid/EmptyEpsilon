@@ -12,11 +12,11 @@ function getSpawnableGMObjects()
     result[#result+1] = {function() return Nebula() end, _("create", "Nebula"), _("create", "Various")}
     result[#result+1] = {function() return WormHole() end, _("create", "Worm Hole"), _("create", "Various")}
 
-    for i, v in ipairs(__ship_templates) do
+    for k, v in pairs(__ship_templates) do
         if not v.__hidden then
-            if self.__type == "playership" then
+            if v.__type == "playership" then
                 result[#result+1] = {__spawnPlayerShipFunc(v.typename.type_name), v.typename.localized, _("create", "player ship")}
-            elseif self.__type == "station" then
+            elseif v.__type == "station" then
                 result[#result+1] = {__spawnStationFunc(v.typename.type_name), v.typename.localized, _("create", "station")}
             else
                 result[#result+1] = {__spawnCpuShipFunc(v.typename.type_name), v.typename.localized, _("create", "cpu ship")}

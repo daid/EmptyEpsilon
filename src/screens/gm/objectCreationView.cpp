@@ -15,9 +15,12 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
 : GuiOverlay(owner, "OBJECT_CREATE_SCREEN", glm::u8vec4(0, 0, 0, 128))
 {
     spawn_list = gameGlobalInfo->getGMSpawnableObjects();
+    std::sort(spawn_list.begin(), spawn_list.end(), [](const GameGlobalInfo::ObjectSpawnInfo& a, const GameGlobalInfo::ObjectSpawnInfo& b) -> bool {
+        return a.label.compare(b.label) < 0;
+    });
 
     GuiPanel* box = new GuiPanel(this, "FRAME");
-    box->setPosition(0, 0, sp::Alignment::Center)->setSize(1000, 500);
+    box->setPosition(0, 0, sp::Alignment::Center)->setSize(1000, 650);
 
     faction_selector = new GuiSelector(box, "FACTION_SELECTOR", nullptr);
     for(auto [entity, info] : sp::ecs::Query<FactionInfo>())
@@ -46,7 +49,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     object_list = new GuiListbox(box, "OBJECT_LIST", [this](int index, string value) {
         for(auto& info : spawn_list) {
             if (info.category == category_selector->getSelectionValue() && info.label == value) {
-                gameGlobalInfo->on_gm_click = [&info] (glm::vec2 position)
+                gameGlobalInfo->on_gm_click = [&info, this] (glm::vec2 position)
                 {
                     auto res = info.create_callback.call<sp::ecs::Entity>();
                     LuaConsole::checkResult(res);
@@ -55,12 +58,18 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
                         auto transform = e.getComponent<sp::Transform>();
                         if (transform)
                             transform->setPosition(position);
+                        if (auto faction = e.getComponent<Faction>()) {
+                            for(auto [entity, info] : sp::ecs::Query<FactionInfo>()) {
+                                if (info.name == faction_selector->getSelectionValue())
+                                    faction->entity = entity;
+                            }
+                        }
                     }
                 };
             }
         }
     });
-    object_list->setPosition(320, 70)->setSize(300, 300);
+    object_list->setPosition(320, 20)->setSize(300, 600);
 
     (new GuiButton(box, "CLOSE_BUTTON", tr("button", "Cancel"), [this]() {
         this->hide();
