@@ -255,17 +255,17 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e)
     }
     std::vector<glm::vec3> vertices(4 * ee->max_quad_count);
 
-    if (!ee->particles_buffers[0]) {
+    if (!ee->particles_buffers) {
         for(int n=0; n<ee->particle_count; n++)
             ee->particle_directions[n] = glm::normalize(glm::vec3(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8f, 1.2f);
 
-        ee->particles_buffers = gl::Buffers<2>();
+        ee->particles_buffers = std::make_shared<gl::Buffers<2>>();
 
         // Each vertex is a position and a texcoords.
         // The two arrays are maintained separately (texcoords are fixed, vertices position change).
         constexpr size_t vertex_size = sizeof(glm::vec3) + sizeof(glm::vec2);
-        gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, ee->particles_buffers[0]);
-        gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, ee->particles_buffers[1]);
+        gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, (*ee->particles_buffers)[0]);
+        gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, (*ee->particles_buffers)[1]);
 
         // VBO
         glBufferData(GL_ARRAY_BUFFER, ee->max_quad_count * 4 * vertex_size, nullptr, GL_STREAM_DRAW);
@@ -295,8 +295,8 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint16_t), indices.data(), GL_STATIC_DRAW);
     }
 
-    gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, ee->particles_buffers[0]);
-    gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, ee->particles_buffers[1]);
+    gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, (*ee->particles_buffers)[0]);
+    gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, (*ee->particles_buffers)[1]);
 
     // Fire ring
     if (!ee->electrical)

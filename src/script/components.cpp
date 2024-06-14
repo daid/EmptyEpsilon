@@ -255,10 +255,10 @@ void initComponentScriptBindings()
     BIND_MEMBER(MeshRenderComponent, mesh_offset);
     BIND_MEMBER(MeshRenderComponent, scale);
     sp::script::ComponentHandler<EngineEmitter>::name("engine_emitter");
-    BIND_ARRAY(EngineEmitter, emitters);
-    BIND_ARRAY_MEMBER(EngineEmitter, emitters, position);
-    BIND_ARRAY_MEMBER(EngineEmitter, emitters, color);
-    BIND_ARRAY_MEMBER(EngineEmitter, emitters, scale);
+    BIND_ARRAY_DIRTY_FLAG(EngineEmitter, emitters, emitters_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(EngineEmitter, emitters, position, emitters_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(EngineEmitter, emitters, color, emitters_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(EngineEmitter, emitters, scale, emitters_dirty);
 
     sp::script::ComponentHandler<PlanetRender>::name("planet_render");
     BIND_MEMBER(PlanetRender, size);
@@ -598,10 +598,10 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<NeverRadarBlocked>::name("never_radar_blocked");
 
     sp::script::ComponentHandler<NebulaRenderer>::name("nebula_renderer");
-    BIND_ARRAY(NebulaRenderer, clouds);
-    BIND_ARRAY_MEMBER(NebulaRenderer, clouds, offset);
-    BIND_ARRAY_MEMBER_NAMED(NebulaRenderer, clouds, "texture", texture.name);
-    BIND_ARRAY_MEMBER(NebulaRenderer, clouds, size);
+    BIND_ARRAY_DIRTY_FLAG(NebulaRenderer, clouds, clouds_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(NebulaRenderer, clouds, offset, clouds_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(NebulaRenderer, clouds, "texture", texture.name, clouds_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(NebulaRenderer, clouds, size, clouds_dirty);
 
     sp::script::ComponentHandler<Gravity>::name("gravity");
     BIND_MEMBER(Gravity, range);

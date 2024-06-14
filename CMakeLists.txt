@@ -475,6 +475,8 @@ set(MAIN_SOURCES
     src/multiplayer/coolant.cpp
     src/multiplayer/reactor.h
     src/multiplayer/reactor.cpp
+    src/multiplayer/rendering.h
+    src/multiplayer/rendering.cpp
     src/multiplayer/selfdestruct.h
     src/multiplayer/selfdestruct.cpp
     src/multiplayer/hull.h

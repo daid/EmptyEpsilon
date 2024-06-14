@@ -18,6 +18,7 @@
 #include "multiplayer/hull.h"
 #include "multiplayer/coolant.h"
 #include "multiplayer/reactor.h"
+#include "multiplayer/rendering.h"
 #include "multiplayer/selfdestruct.h"
 #include "multiplayer/database.h"
 #include "multiplayer/maneuveringthrusters.h"
@@ -100,11 +101,11 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<RadarBlockReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<NeverRadarBlockedReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ReactorReplication>();
-    //MeshRenderComponent
-    //EngineEmitter
-    //NebulaRenderer
-    //ExplosionEffect
-    //PlanetRender
+    sp::ecs::MultiplayerReplication::registerComponentReplication<MeshRenderComponentReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<EngineEmitterReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<NebulaRendererReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ExplosionEffectReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<PlanetRenderReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScanStateReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceDescriptionReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceScannerReplication>();
