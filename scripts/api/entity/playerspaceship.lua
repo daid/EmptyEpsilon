@@ -547,14 +547,34 @@ end
 --- Returns the number of repair crews on this PlayerSpaceship.
 --- Example: player:getRepairCrewCount()
 function Entity:getRepairCrewCount()
-    --TODO
+    local count = 0
+    for idx, e in ipairs(getEntitiesWithComponent("internal_crew")) do
+        if e.components.internal_crew.ship == self then
+            count = count + 1
+        end
+    end
+    return count
 end
 --- Sets the total number of repair crews on this PlayerSpaceship.
 --- If the value is less than the number of repair crews, this function removes repair crews.
 --- If the value is greater, this function adds new repair crews into random rooms.
 --- Example: player:setRepairCrewCount(5)
 function Entity:setRepairCrewCount(amount)
-    --TODO
+    if self.components.internal_rooms then
+        for idx, e in ipairs(getEntitiesWithComponent("internal_crew")) do
+            if e.components.internal_crew.ship == self then
+                amount = amount - 1
+                if amount < 0 then
+                    e:destroy()
+                end
+            end
+        end
+        for n=1,amount do
+            local crew = createEntity()
+            crew.components.internal_crew = {ship=self}
+            crew.components.internal_repair_crew = {}
+        end
+    end
     return self
 end
 --- Defines whether automatic coolant distribution is enabled on this PlayerSpaceship.
@@ -591,7 +611,7 @@ end
 ---     print("Probe " .. probe:getCallSign() .. " linked to Science on ship " .. player:getCallSign())
 --- end)
 function Entity:onProbeLink(callback)
-    --TODO
+    if self.components.long_range_radar then self.components.long_range_radar.on_probe_link = callback end
     return self
 end
 --- Defines a function to call when this PlayerSpaceship unlinks a probe from the science screen.
@@ -604,7 +624,7 @@ end
 ---     print("Probe " .. probe:getCallSign() .. " unlinked from Science on ship " .. player:getCallSign())
 --- end)
 function Entity:onProbeUnlink(callback)
-    --TODO
+    if self.components.long_range_radar then self.components.long_range_radar.on_probe_unlink = callback end
     return self
 end
 --- Returns this ships's long-range radar range.
