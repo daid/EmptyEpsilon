@@ -1,179 +1,169 @@
 -- Name: Odysseus utils
--- Modified and simplified the functions after the Odysseus larp by Mikko B
--- FOR SOME REASON THE FIRST SCENE NEEDS TO BE LOADED TWICE FOR THE SCRIPTS TO WORK PROPERLY.
+-- Modified and simplified the functions by Mikko B, Ria B, Ville M
 
--- Add common GM functions
-addGMFunction("Enemy north", wavenorth)
-addGMFunction("Enemy east", waveeast)
-addGMFunction("Enemy south", wavesouth)
-addGMFunction("Enemy west", wavewest)
-addGMFunction("Allow ESSODY18", allow_essody18)
-addGMFunction("Allow ESSODY23", allow_essody23)
-addGMFunction("Allow ESSODY36", allow_essody36)
-addGMFunction("Allow STARCALLER", allow_starcaller)
+--Functions to set up next scenario
+require("utils_odysseus_scenariochange.lua")
+
+-- Functions to spawn enemies
+require("utils_odysseus_spawnenemy.lua")
+
+--Functions and logic to spawn different kind friendly fleet combinations
+require("utils_odysseus_spawnfleet.lua")
+
+-- Orders for the fleet
+require("utils_odysseus_fleet_orders.lua")
+
+--Functions and logic to spawn and dock fighters and starcaller
+require("utils_odysseus_spawnplayerships.lua")
+
+-- Generating machine callsigns
+require("generate_call_sign_scenario_utility.lua")
+
+-- Generating space objects for Odysseus
+require("utils_odysseus_generatespace.lua")
+
 
 -- spawn the ESS Odysseus
-odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743"):setCallSign("ESS Odysseus"):setPosition(0, 0):setCanBeDestroyed(false)
+local orotation = irandom(0, 360)
+odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Helios Corvette"):setCallSign("ESS Odysseus"):setPosition(0, 0):commandTargetRotation(orotation):setHeading(orotation+90):setCanBeDestroyed(false)
+odysseus:setCanSelfDestruct(false)
+
+addGMFunction(_("buttonGM", "Sync fighter status"), function() sync_buttons() end)
+
+--Sets suffix index for generating npc ship callsigns. Resets for every scenario
+suffix_index = 100
 
 
--- Enemy spawner
-function wavenorth()
-	x, y = odysseus:getPosition()
-	odysseus:addToShipLog("EVA sector scanner alarm. Multiple incoming jumps detected from heading 0.", "Red")
-	spawn_wave(x, y-60000)
-end
 
-function waveeast()
-	x, y = odysseus:getPosition()
-	odysseus:addToShipLog("EVA sector scanner alarm. Multiple incoming jumps detected from heading 90.", "Red")
-	spawn_wave(x+60000, y)
-end
+function setUpLaunchmissionButtons(minutes, lx, ly)
+	local travelDistance = math.floor(minutes*3000)
 
-function wavewest()
-	x, y = odysseus:getPosition()
-	odysseus:addToShipLog("EVA sector scanner alarm. Multiple incoming jumps detected from heading 270.", "Red")
-	spawn_wave(x-60000, y)
-end
+	local buttonTextArrival45 = string.format(("Launch LC45 - %d"), minutes)
+	local buttonTextArrival79 = string.format(("Launch LC79 - %d"), minutes)
+	local buttontTextDepart45 = string.format(("Return LC45 - %d"), minutes)
+	local buttontTextDepart79 = string.format(("Return LC79 - %d"), minutes)
 
-function wavesouth()
-	x, y = odysseus:getPosition()
-	odysseus:addToShipLog("EVA sector scanner alarm. Multiple incoming jumps detected from heading 180.", "Red")
-	spawn_wave(x, y+60000)
-end
+	local buttonTextDock45 = string.format(("Dock LC45"))
+	local buttonTextDock79 = string.format(("Dock LC79"))
 
-function spawn_wave(x, y)
-    for n=1, 30 do
-        local r = random(0, 360)
-        local distance = random(1000, 30000)
-        x1 = x + math.cos(r / 180 * math.pi) * distance
-        y1 = y + math.sin(r / 180 * math.pi) * distance
-        CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setPosition(x1, y1):orderRoaming(x, y)
-    end
-		for n=1, 5 do
-        local r = random(0, 360)
-        local distance = random(3000, 20000)
-        x1 = x + math.cos(r / 180 * math.pi) * distance
-        y1 = y + math.sin(r / 180 * math.pi) * distance
-        CpuShip():setFaction("Machines"):setTemplate("Frigate Stinger"):setPosition(x1, y1):orderRoaming(x, y)
-    end
-       CpuShip():setFaction("Machines"):setTemplate("Cruiser Reaper"):setPosition(x, y):orderRoaming(x, y)
-end
+	travelStage45 = "docked"
+	addGMFunction(_("buttonGM", buttonTextArrival45), function() launchLandmission("essodylc45") end)
+	travelStage79 = "docked"
+	addGMFunction(_("buttonGM", buttonTextArrival79), function() launchLandmission("essodylc79") end)
 
--- Ship Enabler
+	local ox, oy = odysseus:getPosition()
+	local lcAngle = angleHeading(ox, oy, lx, ly)
 
-function allow_essody18()
-	odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody18)
-	removeGMFunction("Allow ESSODY18")
-end
-function allow_essody23()
-	odysseus:addCustomButton("Relay", "Launch ESSODY23", "Launch ESSODY23", launch_essody23)
-	removeGMFunction("Allow ESSODY23")
-end
-function allow_essody36()
-	odysseus:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36)
-	removeGMFunction("Allow ESSODY36")
-end
-function allow_starcaller()
-	odysseus:addCustomButton("Relay", "Launch STARCALLER", "Launch STARCALLER", launch_starcaller)
-	removeGMFunction("Allow STARCALLER")
-end
+	local dx, dy = vectorFromAngle(lcAngle, travelDistance, true)
+	dx = math.floor(dx)
+	dy = math.floor(dy)
 
--- Ship Launcher (simplified and removed unnecessary confirmation)
-function launch_essody18()
-	odysseus:removeCustom("Launch ESSODY18")
-	spawn_essody18()
-end
-function launch_essody23()
-	odysseus:removeCustom("Launch ESSODY23")
-	spawn_essody23()
-end
-function launch_essody36()
-	odysseus:removeCustom("Launch ESSODY36")
-	spawn_essody36()
-end
-function launch_starcaller()
-	odysseus:removeCustom("Launch STARCALLER")
-	spawn_starcaller()
-end
 
--- Ship spawner
-function spawn_essody18()
-	x, y = odysseus:getPosition()
-	essody18 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x + 200, y + 200):setCallSign("ESSODY18"):setAutoCoolant(true)
-	essody18:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody18)
-	essody18_launched = 1
-end
-function spawn_essody23()
-	x, y = odysseus:getPosition()
-	essody23 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x + 250, y + 250):setCallSign("ESSODY23"):setAutoCoolant(true)
-	essody23:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody23)
-	essody23_launched = 1
-end
-function spawn_essody36()
-	x, y = odysseus:getPosition()
-	essody36 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x + 300, y + 300):setCallSign("ESSODY36"):setAutoCoolant(true)
-	essody36:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody36)
-	essody36_launched = 1
-end
-function spawn_starcaller()
-	x, y = odysseus:getPosition()
-	starcaller = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Scoutship S392"):setPosition(x - 400, y + 400):setCallSign("ESS Starcaller"):setAutoCoolant(true)
-	starcaller:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_starcaller)
-	starcaller_launched = 1
-end
+	function launchLandmission(ship)
+			
+		local x1 = ox-500
+		local y1 = oy+500
 
--- Ship docker
-dockingdist = 800   --Set docking distance to 0.8U
+		if ship == "essodylc45" then
+			if travelStage45 == "docked" then
+				essodylc45 = CpuShip():setCallSign("ESSODYLC-45"):setTemplate("Aurora Class Landing Craft"):setScannedByFaction("EOC Starfleet"):setFaction("EOC_Starfleet"):setPosition(x1, y1):setCanBeDestroyed(false)
+			end
+			essodylc45:orderFlyTowards(dx, dy)
+			travelStage45 = "departing"
+			removeGMFunction(buttonTextArrival45)
+		end
 
-function dock_essody18()
-	x, y = essody18:getPosition()
-	for _, obj in ipairs(getObjectsInRadius(x, y, dockingdist)) do
-		callSign = obj:getCallSign()
-		if callSign == "ESS Odysseus" then
-			essody18:destroy()
-			essody18_launched = 0
-			odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody18)
-		else
-			essody18:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+		if ship == "essodylc79" then
+			if travelStage79 == "docked" then
+				essodylc79 = CpuShip():setCallSign("ESSODYLC-79"):setTemplate("Aurora Class Landing Craft"):setScannedByFaction("EOC Starfleet"):setFaction("EOC_Starfleet"):setPosition(x1, y1):setCanBeDestroyed(false)
+			end
+			essodylc79:orderFlyTowards(dx, dy)
+			travelStage79 = "departing"
+			removeGMFunction(buttonTextArrival79)
+		end
+
+
+		checkFlightStatus(ship)
+
+	end
+
+	function checkFlightStatus(ship, delta)
+		if ship == "essodylc45" then
+			if travelStage45 == "departing" then
+				local targetDistance = math.floor(distance(essodylc45, dx, dy))
+				if targetDistance < 200 then
+					travelStage45 = "landmission"
+					essodylc45:orderIdle()
+					addGMFunction(_("buttonGM", buttontTextDepart45), function() returnLandmission(ship) end)
+				end
+			end
+			if travelStage45 == "arrival" then
+				local targetDistance = distance(essodylc45, dx, dy)
+				if targetDistance < 500 then
+					travelStage45 = "home"
+					essodylc45:orderIdle()
+					addGMFunction(_("buttonGM", buttontTextArrival45), function() launchLandmission(ship) end)
+					addGMFunction(_("buttonGM", buttonTextDock45), function() docktransport(ship) end)
+				end
+			end
+		end
+		if ship == "essodylc79" then
+			if travelStage79 == "departing" then
+				local targetDistance = distance(essodylc79, dx, dy)
+				if targetDistance < 200 then
+					travelStage79 = "landmission"
+					essodylc79:orderIdle()
+					addGMFunction(_("buttonGM", buttontTextDepart45), function() returnLandmission(ship) end)
+				end
+			end
+			if travelStage79 == "arrival" then
+				local targetDistance = distance(essodylc79, dx, dy)
+				if targetDistance < 500 then
+					travelStage79 = "home"
+					essodylc79:orderIdle()
+					addGMFunction(_("buttonGM", buttontTextArrival45), function() launchLandmission(ship) end)
+					addGMFunction(_("buttonGM", buttonTextDock45), function() docktransport(ship) end)
+				end
+			end
+		end
+
+	end
+
+	function docktransport(ship)
+		if ship == "essodylc45" then
+			removeGMFunction(buttonTextDock45)
+			essodylc45:destroy()
+		end
+		if ship == "essodylc79" then
+			removeGMFunction(buttonTextDock45)
+			essodylc79:destroy()
+		end
+
+	end
+
+	function returnLandmission(ship)
+		local x, y = odysseus:getPosition()
+		if ship == "essodylc45" then
+			travelStage45 = "arrival"
+			essodylc45:orderFlyTowards(x, y)
+			removeGMFunction(buttontTextDepart45)
+		end
+		if ship == "essodylc79" then
+			travelStage79 = "arrival"
+			essodylc79:orderFlyTowards(x, y)
+			removeGMFunction(buttontTextDepart79)
 		end
 	end
-end
-function dock_essody23()
-	x, y = essody23:getPosition()
-	for _, obj in ipairs(getObjectsInRadius(x, y, dockingdist)) do
-		callSign = obj:getCallSign()
-		if callSign == "ESS Odysseus" then
-			essody23:destroy()
-			essody23_launched = 0
-			odysseus:addCustomButton("Relay", "Launch ESSODY23", "Launch ESSODY23", launch_essody23)
-		else
-			essody23:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+
+	function update(delta)
+
+		if delta == 0 then
+			return
 		end
-	end
-end
-function dock_essody36()
-	x, y = essody36:getPosition()
-	for _, obj in ipairs(getObjectsInRadius(x, y, dockingdist)) do
-		callSign = obj:getCallSign()
-		if callSign == "ESS Odysseus" then
-			essody36:destroy()
-			essody36_launched = 0
-			odysseus:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36)
-		else
-			essody36:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+
+		if travelStage45 == "departing" or travelStage45 == "arrival" or travelStage79 == "departing" or travelStage79 == "arrival" then
+			checkFlightStatus(ship, delta)
 		end
-	end
-end
-function dock_starcaller()
-	x, y = starcaller:getPosition()
-	for _, obj in ipairs(getObjectsInRadius(x, y, dockingdist)) do
-		callSign = obj:getCallSign()
-		if callSign == "ESS Odysseus" then
-			starcaller:destroy()
-			starcaller_launched = 0
-			odysseus:addCustomButton("Relay", "Launch STARCALLER", "Launch STARCALLER", launch_starcaller)
-		else
-			starcaller:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
-		end
+
 	end
 end

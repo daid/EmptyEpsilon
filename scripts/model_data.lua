@@ -15,6 +15,7 @@ model:addEngineEmitter(-4.5, -3.5, 0,  0.45, 0.85, 1.0, 1)
 model:addEngineEmitter(-4.5, 3.5, 0,  0.45, 0.85, 1.0, 1)
 
 
+
 model = ModelData()
 model:setName("eoc_odysseus")
 model:setMesh("EOC_odysseus.obj")
@@ -36,19 +37,21 @@ model:addEngineEmitter(-7.3, -1, 0,  0.45, 0.85, 1.0, 1.5)
 model:addEngineEmitter(-7.5, -5.5, 0,  0.45, 0.85, 1.0, 1)
 model:addEngineEmitter(-7.5, 5.5, 0,  0.45, 0.85, 1.0, 1)
 
+
 model = ModelData()
 model:setName("eoc_frigate")
 model:setMesh("EOC_frigate.obj")
 model:setTexture("EOC_Frigate_diffuse2.png")
 model:setIllumination("EOC_Frigate_emission_ok.png")
-model:setScale(3)
+model:setScale(5)
 model:setRadius(10)
 model:addEngineEmitter(-3.8, 2.3, 0,  0.45, 0.85, 1.0, 1.5)
 model:addEngineEmitter(-3.8, -2.3, 0,  0.45, 0.85, 1.0, 1.5)
 
 
+
 model = ModelData()
-model:setName("machine_fighter")
+model:setName("machine_predator")
 model:setMesh("Machine_fighter.obj")
 model:setTexture("machinefighter_diffuse2.png")
 model:setIllumination("machinefighter_emission_ok.png")
@@ -57,8 +60,9 @@ model:setRadius(12)
 model:addEngineEmitter(-5, 0, 0,  1, 0, 0, 1.5)
 
 
+
 model = ModelData()
-model:setName("machine_frigate")
+model:setName("machine_stinger")
 model:setMesh("Machine_frigate.obj")
 model:setTexture("Machinefrigate_diffuse2.png")
 model:setIllumination("Machinefrigate_emission_ok.png")
@@ -68,7 +72,7 @@ model:addEngineEmitter(-8.2, 0, -2.4,  0.2, 0.2, 0.96, 1.5)
 
 
 model = ModelData()
-model:setName("machine_cruiser")
+model:setName("machine_reaper")
 model:setMesh("Machine_cruiser.obj")
 model:setTexture("machinecruiser_diffuse2.png")
 model:setIllumination("machinecruiser_emission_ok.png")
@@ -82,9 +86,9 @@ model:addEngineEmitter(-8.2, 0, -2.4,  0.2, 0.2, 0.96, 1.5)
 
 model = ModelData()
 model:setName("machine_mother")
-model:setMesh("Machine_Mothership.obj")
-model:setTexture("Mothership_diffuse2.png")
-model:setIllumination("Mothership_emission_ok.png")
+model:setMesh("NewMotherShip.obj")
+model:setTexture("NewMothership_colorDiffuseCombi.png")
+model:setIllumination("NewMothership_emission.png")
 model:setScale(300)
 model:setRadius(4600)
 
@@ -122,7 +126,7 @@ model:setTexture("space_station_2/space_station_2_color.jpg")
 model:setSpecular("space_station_2/space_station_2_specular.jpg")
 model:setIllumination("space_station_2/space_station_2_illumination.jpg")
 model:setRenderOffset(10, 0, 5)
-model:setScale(20)
+model:setScale(80)
 model:setRadius(1300)
 model:setCollisionBox(1400, 1000)
 
@@ -216,7 +220,7 @@ model:setMesh("battleship_destroyer_1_upgraded/battleship_destroyer_1_upgraded.m
 model:setTexture("battleship_destroyer_1_upgraded/battleship_destroyer_1_upgraded_color.jpg")
 model:setSpecular("battleship_destroyer_1_upgraded/battleship_destroyer_1_upgraded_specular.jpg")
 model:setIllumination("battleship_destroyer_1_upgraded/battleship_destroyer_1_upgraded_illumination.jpg")
-model:setScale(4)
+model:setScale(80)
 model:setRadius(200)
 -- Visual positions of the beams/missiletubes (blender: -X, Y, Z)
 model:addBeamPosition(34, -17, -7)

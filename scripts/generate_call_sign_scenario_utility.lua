@@ -35,7 +35,7 @@
 --		suffix_index - set to zero if not set externally
 --		prefix_length - set to zero if not set externally
 --		Faction flavored call sign prefixes: 
---			kraylor_names, exuari_names, ghosts_names, independent_names, human_names,
+--			Kraylor_names, exuari_names, ghosts_names, independent_names, human_names,
 --			arlenian_names, usn_names, tsn_names, cuf_names, ktlitan_names
 --	Faction flavored prefix names
 --		The Kraylor, Arlenian, Exuari and Ktlitan names are supposed to sound alien. They
@@ -49,6 +49,32 @@
 --
 --		You can set up your own list of names using the same list name and format. Once
 --		your names have been exhausted, the pool will be refilled with the names here.
+
+--Custom generateCallSign from the List for Odysseys
+function generateCallSignFromList(prefix,faction)
+	if faction == nil then
+		--If faction is missing, returns the original call sign script result
+		shipCallSign = generateCallSign(prefix, faction)
+	else
+		shipCallSign = string.format("%s",getFactionPrefix(faction))
+	end
+	if suffix_index == nil then
+		suffix_index = 0
+	end
+	--Left here, so that spawning friendly fleet also raises the numbers
+	suffix_index = suffix_index + math.random(1,8)
+	if suffix_index > 999 then 
+		-- Suffix_index starts always from 100
+		suffix_index = 100
+	end
+	-- Sets the callsign as the result from the list
+--	shipCallSign = string.format("%s%i",prefix)
+
+	return shipCallSign
+end
+
+
+-- ooB generate call sign function
 function generateCallSign(prefix,faction)
 	if faction == nil then
 		if prefix == nil then
@@ -104,17 +130,65 @@ function fillPrefixPool()
 end
 function getFactionPrefix(faction)
 	local faction_prefix = nil
+	if faction == "ESS Halo" then
+		if halo_names == nil then
+			setHaloNames()
+		else
+			if #halo_names < 1 then
+				setHaloNames()
+			end
+		end
+		local halo_name_choice = math.random(1,#halo_names)
+		faction_prefix = halo_names[halo_name_choice]
+		table.remove(halo_names,halo_name_choice)
+	end
+	if faction == "ESS Inferno" then
+		if inferno_names == nil then
+			setInfernoNames()
+		else
+			if #inferno_names < 1 then
+				setInfernoNames()
+			end
+		end
+		local inferno_name_choice = math.random(1,#inferno_names)
+		faction_prefix = inferno_names[inferno_name_choice]
+		table.remove(inferno_names,inferno_name_choice)
+	end
+	if faction == "ESS Valor" then
+		if valor_names == nil then
+			setValorNames()
+		else
+			if #valor_names < 1 then
+				setValorNames()
+			end
+		end
+		local valor_name_choice = math.random(1,#valor_names)
+		faction_prefix = valor_names[valor_name_choice]
+		table.remove(valor_names,valor_name_choice)
+	end
+	if faction == "ESS Aurora" then
+		if aurora_names == nil then
+			setAuroraNames()
+		else
+			if #aurora_names < 1 then
+				setAuroraNames()
+			end
+		end
+		local aurora_name_choice = math.random(1,#aurora_names)
+		faction_prefix = aurora_names[aurora_name_choice]
+		table.remove(aurora_names,aurora_name_choice)
+	end
 	if faction == "Kraylor" then
-		if kraylor_names == nil then
+		if Kraylor_names == nil then
 			setKraylorNames()
 		else
-			if #kraylor_names < 1 then
+			if #Kraylor_names < 1 then
 				setKraylorNames()
 			end
 		end
-		local kraylor_name_choice = math.random(1,#kraylor_names)
-		faction_prefix = kraylor_names[kraylor_name_choice]
-		table.remove(kraylor_names,kraylor_name_choice)
+		local Kraylor_name_choice = math.random(1,#Kraylor_names)
+		faction_prefix = Kraylor_names[Kraylor_name_choice]
+		table.remove(Kraylor_names,Kraylor_name_choice)
 	end
 	if faction == "Exuari" then
 		if exuari_names == nil then
@@ -443,109 +517,109 @@ function setExuariNames()
 	table.insert(exuari_names,"Zikandelat")
 end
 function setKraylorNames()		
-	kraylor_names = {}
-	table.insert(kraylor_names,"Abroten")
-	table.insert(kraylor_names,"Ankwar")
-	table.insert(kraylor_names,"Bakrik")
-	table.insert(kraylor_names,"Belgor")
-	table.insert(kraylor_names,"Benkop")
-	table.insert(kraylor_names,"Blargvet")
-	table.insert(kraylor_names,"Bloktarg")
-	table.insert(kraylor_names,"Bortok")
-	table.insert(kraylor_names,"Bredjat")
-	table.insert(kraylor_names,"Chankret")
-	table.insert(kraylor_names,"Chatork")
-	table.insert(kraylor_names,"Chokarp")
-	table.insert(kraylor_names,"Cloprak")
-	table.insert(kraylor_names,"Coplek")
-	table.insert(kraylor_names,"Cortek")
-	table.insert(kraylor_names,"Daltok")
-	table.insert(kraylor_names,"Darpik")
-	table.insert(kraylor_names,"Dastek")
-	table.insert(kraylor_names,"Dotark")
-	table.insert(kraylor_names,"Drambok")
-	table.insert(kraylor_names,"Duntarg")
-	table.insert(kraylor_names,"Earklat")
-	table.insert(kraylor_names,"Ekmit")
-	table.insert(kraylor_names,"Fakret")
-	table.insert(kraylor_names,"Fapork")
-	table.insert(kraylor_names,"Fawtrik")
-	table.insert(kraylor_names,"Fenturp")
-	table.insert(kraylor_names,"Feplik")
-	table.insert(kraylor_names,"Figront")
-	table.insert(kraylor_names,"Floktrag")
-	table.insert(kraylor_names,"Fonkack")
-	table.insert(kraylor_names,"Fontreg")
-	table.insert(kraylor_names,"Foondrap")
-	table.insert(kraylor_names,"Frotwak")
-	table.insert(kraylor_names,"Gastonk")
-	table.insert(kraylor_names,"Gentouk")
-	table.insert(kraylor_names,"Gonpruk")
-	table.insert(kraylor_names,"Gortak")
-	table.insert(kraylor_names,"Gronkud")
-	table.insert(kraylor_names,"Hewtang")
-	table.insert(kraylor_names,"Hongtag")
-	table.insert(kraylor_names,"Hortook")
-	table.insert(kraylor_names,"Indrut")
-	table.insert(kraylor_names,"Iprant")
-	table.insert(kraylor_names,"Jakblet")
-	table.insert(kraylor_names,"Jonket")
-	table.insert(kraylor_names,"Jontot")
-	table.insert(kraylor_names,"Kandarp")
-	table.insert(kraylor_names,"Kantrok")
-	table.insert(kraylor_names,"Kiptak")
-	table.insert(kraylor_names,"Kortrant")
-	table.insert(kraylor_names,"Krontgat")
-	table.insert(kraylor_names,"Lobreck")
-	table.insert(kraylor_names,"Lokrant")
-	table.insert(kraylor_names,"Lomprok")
-	table.insert(kraylor_names,"Lutrank")
-	table.insert(kraylor_names,"Makrast")
-	table.insert(kraylor_names,"Moklahft")
-	table.insert(kraylor_names,"Morpug")
-	table.insert(kraylor_names,"Nagblat")
-	table.insert(kraylor_names,"Nokrat")
-	table.insert(kraylor_names,"Nomek")
-	table.insert(kraylor_names,"Notark")
-	table.insert(kraylor_names,"Ontrok")
-	table.insert(kraylor_names,"Orkpent")
-	table.insert(kraylor_names,"Peechak")
-	table.insert(kraylor_names,"Plogrent")
-	table.insert(kraylor_names,"Pokrint")
-	table.insert(kraylor_names,"Potarg")
-	table.insert(kraylor_names,"Prangtil")
-	table.insert(kraylor_names,"Quagbrok")
-	table.insert(kraylor_names,"Quimprill")
-	table.insert(kraylor_names,"Reekront")
-	table.insert(kraylor_names,"Ripkort")
-	table.insert(kraylor_names,"Rokust")
-	table.insert(kraylor_names,"Rontrait")
-	table.insert(kraylor_names,"Saknep")
-	table.insert(kraylor_names,"Sengot")
-	table.insert(kraylor_names,"Skitkard")
-	table.insert(kraylor_names,"Skopgrek")
-	table.insert(kraylor_names,"Sletrok")
-	table.insert(kraylor_names,"Slorknat")
-	table.insert(kraylor_names,"Spogrunk")
-	table.insert(kraylor_names,"Staklurt")
-	table.insert(kraylor_names,"Stonkbrant")
-	table.insert(kraylor_names,"Swaktrep")
-	table.insert(kraylor_names,"Tandrok")
-	table.insert(kraylor_names,"Takrost")
-	table.insert(kraylor_names,"Tonkrut")
-	table.insert(kraylor_names,"Torkrot")
-	table.insert(kraylor_names,"Trablok")
-	table.insert(kraylor_names,"Trokdin")
-	table.insert(kraylor_names,"Unkelt")
-	table.insert(kraylor_names,"Urjop")
-	table.insert(kraylor_names,"Vankront")
-	table.insert(kraylor_names,"Vintrep")
-	table.insert(kraylor_names,"Volkerd")
-	table.insert(kraylor_names,"Vortread")
-	table.insert(kraylor_names,"Wickurt")
-	table.insert(kraylor_names,"Xokbrek")
-	table.insert(kraylor_names,"Yeskret")
-	table.insert(kraylor_names,"Zacktrope")
+	Kraylor_names = {}
+	table.insert(Kraylor_names,"Abroten")
+	table.insert(Kraylor_names,"Ankwar")
+	table.insert(Kraylor_names,"Bakrik")
+	table.insert(Kraylor_names,"Belgor")
+	table.insert(Kraylor_names,"Benkop")
+	table.insert(Kraylor_names,"Blargvet")
+	table.insert(Kraylor_names,"Bloktarg")
+	table.insert(Kraylor_names,"Bortok")
+	table.insert(Kraylor_names,"Bredjat")
+	table.insert(Kraylor_names,"Chankret")
+	table.insert(Kraylor_names,"Chatork")
+	table.insert(Kraylor_names,"Chokarp")
+	table.insert(Kraylor_names,"Cloprak")
+	table.insert(Kraylor_names,"Coplek")
+	table.insert(Kraylor_names,"Cortek")
+	table.insert(Kraylor_names,"Daltok")
+	table.insert(Kraylor_names,"Darpik")
+	table.insert(Kraylor_names,"Dastek")
+	table.insert(Kraylor_names,"Dotark")
+	table.insert(Kraylor_names,"Drambok")
+	table.insert(Kraylor_names,"Duntarg")
+	table.insert(Kraylor_names,"Earklat")
+	table.insert(Kraylor_names,"Ekmit")
+	table.insert(Kraylor_names,"Fakret")
+	table.insert(Kraylor_names,"Fapork")
+	table.insert(Kraylor_names,"Fawtrik")
+	table.insert(Kraylor_names,"Fenturp")
+	table.insert(Kraylor_names,"Feplik")
+	table.insert(Kraylor_names,"Figront")
+	table.insert(Kraylor_names,"Floktrag")
+	table.insert(Kraylor_names,"Fonkack")
+	table.insert(Kraylor_names,"Fontreg")
+	table.insert(Kraylor_names,"Foondrap")
+	table.insert(Kraylor_names,"Frotwak")
+	table.insert(Kraylor_names,"Gastonk")
+	table.insert(Kraylor_names,"Gentouk")
+	table.insert(Kraylor_names,"Gonpruk")
+	table.insert(Kraylor_names,"Gortak")
+	table.insert(Kraylor_names,"Gronkud")
+	table.insert(Kraylor_names,"Hewtang")
+	table.insert(Kraylor_names,"Hongtag")
+	table.insert(Kraylor_names,"Hortook")
+	table.insert(Kraylor_names,"Indrut")
+	table.insert(Kraylor_names,"Iprant")
+	table.insert(Kraylor_names,"Jakblet")
+	table.insert(Kraylor_names,"Jonket")
+	table.insert(Kraylor_names,"Jontot")
+	table.insert(Kraylor_names,"Kandarp")
+	table.insert(Kraylor_names,"Kantrok")
+	table.insert(Kraylor_names,"Kiptak")
+	table.insert(Kraylor_names,"Kortrant")
+	table.insert(Kraylor_names,"Krontgat")
+	table.insert(Kraylor_names,"Lobreck")
+	table.insert(Kraylor_names,"Lokrant")
+	table.insert(Kraylor_names,"Lomprok")
+	table.insert(Kraylor_names,"Lutrank")
+	table.insert(Kraylor_names,"Makrast")
+	table.insert(Kraylor_names,"Moklahft")
+	table.insert(Kraylor_names,"Morpug")
+	table.insert(Kraylor_names,"Nagblat")
+	table.insert(Kraylor_names,"Nokrat")
+	table.insert(Kraylor_names,"Nomek")
+	table.insert(Kraylor_names,"Notark")
+	table.insert(Kraylor_names,"Ontrok")
+	table.insert(Kraylor_names,"Orkpent")
+	table.insert(Kraylor_names,"Peechak")
+	table.insert(Kraylor_names,"Plogrent")
+	table.insert(Kraylor_names,"Pokrint")
+	table.insert(Kraylor_names,"Potarg")
+	table.insert(Kraylor_names,"Prangtil")
+	table.insert(Kraylor_names,"Quagbrok")
+	table.insert(Kraylor_names,"Quimprill")
+	table.insert(Kraylor_names,"Reekront")
+	table.insert(Kraylor_names,"Ripkort")
+	table.insert(Kraylor_names,"Rokust")
+	table.insert(Kraylor_names,"Rontrait")
+	table.insert(Kraylor_names,"Saknep")
+	table.insert(Kraylor_names,"Sengot")
+	table.insert(Kraylor_names,"Skitkard")
+	table.insert(Kraylor_names,"Skopgrek")
+	table.insert(Kraylor_names,"Sletrok")
+	table.insert(Kraylor_names,"Slorknat")
+	table.insert(Kraylor_names,"Spogrunk")
+	table.insert(Kraylor_names,"Staklurt")
+	table.insert(Kraylor_names,"Stonkbrant")
+	table.insert(Kraylor_names,"Swaktrep")
+	table.insert(Kraylor_names,"Tandrok")
+	table.insert(Kraylor_names,"Takrost")
+	table.insert(Kraylor_names,"Tonkrut")
+	table.insert(Kraylor_names,"Torkrot")
+	table.insert(Kraylor_names,"Trablok")
+	table.insert(Kraylor_names,"Trokdin")
+	table.insert(Kraylor_names,"Unkelt")
+	table.insert(Kraylor_names,"Urjop")
+	table.insert(Kraylor_names,"Vankront")
+	table.insert(Kraylor_names,"Vintrep")
+	table.insert(Kraylor_names,"Volkerd")
+	table.insert(Kraylor_names,"Vortread")
+	table.insert(Kraylor_names,"Wickurt")
+	table.insert(Kraylor_names,"Xokbrek")
+	table.insert(Kraylor_names,"Yeskret")
+	table.insert(Kraylor_names,"Zacktrope")
 end
 function setIndependentNames()
 	independent_names = {}
@@ -994,4 +1068,96 @@ function setArlenianNames()
 	table.insert(arlenian_names,"Wodarla")
 	table.insert(arlenian_names,"Yamelda")
 	table.insert(arlenian_names,"Yelanda")
+end
+function setValorNames()
+	valor_names = {}
+	table.insert(valor_names,"VALOR-F04")
+	table.insert(valor_names,"VALOR-F11")
+	table.insert(valor_names,"VALOR-F16")
+	table.insert(valor_names,"VALOR-F19")
+	table.insert(valor_names,"VALOR-F22")
+	table.insert(valor_names,"VALOR-F26")
+	table.insert(valor_names,"VALOR-F37")
+	table.insert(valor_names,"VALOR-F41")
+	table.insert(valor_names,"VALOR-F44")
+	table.insert(valor_names,"VALOR-F47")
+	table.insert(valor_names,"VALOR-F51")
+	table.insert(valor_names,"VALOR-F55")
+	table.insert(valor_names,"VALOR-F59")
+	table.insert(valor_names,"VALOR-F64")
+	table.insert(valor_names,"VALOR-F69")
+	table.insert(valor_names,"VALOR-F71")
+	table.insert(valor_names,"VALOR-F75")
+	table.insert(valor_names,"VALOR-F78")
+	table.insert(valor_names,"VALOR-F81")
+	table.insert(valor_names,"VALOR-F85")
+end
+function setHaloNames()
+	halo_names = {}
+	table.insert(halo_names,"HALO-F04")
+	table.insert(halo_names,"HALO-F11")
+	table.insert(halo_names,"HALO-F16")
+	table.insert(halo_names,"HALO-F19")
+	table.insert(halo_names,"HALO-F25")
+	table.insert(halo_names,"HALO-F26")
+	table.insert(halo_names,"HALO-F37")
+	table.insert(halo_names,"HALO-F41")
+	table.insert(halo_names,"HALO-F44")
+	table.insert(halo_names,"HALO-F47")
+	table.insert(halo_names,"HALO-F51")
+	table.insert(halo_names,"HALO-F55")
+	table.insert(halo_names,"HALO-F59")
+	table.insert(halo_names,"HALO-F64")
+	table.insert(halo_names,"HALO-F69")
+	table.insert(halo_names,"HALO-F71")
+	table.insert(halo_names,"HALO-F75")
+	table.insert(halo_names,"HALO-F78")
+	table.insert(halo_names,"HALO-F81")
+	table.insert(halo_names,"HALO-F85")
+end
+function setAuroraNames()
+	aurora_names = {}
+	table.insert(aurora_names,"AUROR-F04")
+	table.insert(aurora_names,"AUROR-F11")
+	table.insert(aurora_names,"AUROR-F16")
+	table.insert(aurora_names,"AUROR-F19")
+	table.insert(aurora_names,"AUROR-F22")
+	table.insert(aurora_names,"AUROR-F26")
+	table.insert(aurora_names,"AUROR-F37")
+	table.insert(aurora_names,"AUROR-F41")
+	table.insert(aurora_names,"AUROR-F44")
+	table.insert(aurora_names,"AUROR-F47")
+	table.insert(aurora_names,"AUROR-F51")
+	table.insert(aurora_names,"AUROR-F55")
+	table.insert(aurora_names,"AUROR-F59")
+	table.insert(aurora_names,"AUROR-F64")
+	table.insert(aurora_names,"AUROR-F69")
+	table.insert(aurora_names,"AUROR-F71")
+	table.insert(aurora_names,"AUROR-F75")
+	table.insert(aurora_names,"AUROR-F78")
+	table.insert(aurora_names,"AUROR-F81")
+	table.insert(aurora_names,"AUROR-F85")
+end
+function setInfernoNames()
+	inferno_names = {}
+	table.insert(inferno_names,"INFER-F04")
+	table.insert(inferno_names,"INFER-F11")
+	table.insert(inferno_names,"INFER-F16")
+	table.insert(inferno_names,"INFER-F19")
+	table.insert(inferno_names,"INFER-F22")
+	table.insert(inferno_names,"INFER-F26")
+	table.insert(inferno_names,"INFER-F37")
+	table.insert(inferno_names,"INFER-F41")
+	table.insert(inferno_names,"INFER-F44")
+	table.insert(inferno_names,"INFER-F47")
+	table.insert(inferno_names,"INFER-F51")
+	table.insert(inferno_names,"INFER-F55")
+	table.insert(inferno_names,"INFER-F59")
+	table.insert(inferno_names,"INFER-F64")
+	table.insert(inferno_names,"INFER-F69")
+	table.insert(inferno_names,"INFER-F71")
+	table.insert(inferno_names,"INFER-F75")
+	table.insert(inferno_names,"INFER-F78")
+	table.insert(inferno_names,"INFER-F81")
+	table.insert(inferno_names,"INFER-F85")
 end
