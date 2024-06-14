@@ -9,7 +9,7 @@ function PlayerSpaceship()
     e.components = {
         player_control = {},
         transform = {rotation=random(0, 360)},
-        callsign = {callsign="PL-???"},
+        callsign = {callsign=generateRandomCallSign()},
         scan_state = {complexity=2, depth=2, allow_simple_scan=true},
     }
     e:setFaction(__default_player_ship_faction)
