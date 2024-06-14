@@ -345,7 +345,6 @@ set(MAIN_SOURCES
     src/spaceObjects/scanProbe.cpp
     src/spaceObjects/shipTemplateBasedObject.cpp
     src/spaceObjects/planet.cpp
-    src/spaceObjects/zone.cpp
     src/components/faction.h
     src/components/faction.cpp
     src/components/radar.h
@@ -653,7 +652,6 @@ set(MAIN_SOURCES
     src/spaceObjects/spaceObject.h
     src/spaceObjects/spaceship.h
     src/spaceObjects/supplyDrop.h
-    src/spaceObjects/zone.h
     src/threatLevelEstimate.h
     src/tutorialGame.h
     src/script/components.h

@@ -51,6 +51,6 @@ end
 --- Returns whether the given SpaceObject is inside this Zone.
 --- Example: zone:isInside(obj) -- returns true if `obj` is within the zone's bounds
 function Entity:isInside()
-    --TODO
+    --TODO { if (!obj) return false; return insidePolygon(outline, obj->getPosition() - getPosition()); }
     return false
 end
