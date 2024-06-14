@@ -334,14 +334,12 @@ set(MAIN_SOURCES
     src/spaceObjects/missiles/homingMissile.cpp
     src/spaceObjects/missiles/hvli.cpp
     src/spaceObjects/missiles/nuke.cpp
-    src/spaceObjects/spaceStation.cpp
     src/spaceObjects/spaceship.cpp
     src/spaceObjects/wormHole.cpp
     src/spaceObjects/spaceObject.cpp
     src/spaceObjects/playerSpaceship.cpp
     src/spaceObjects/beamEffect.cpp
     src/spaceObjects/supplyDrop.cpp
-    src/spaceObjects/warpJammer.cpp
     src/spaceObjects/scanProbe.cpp
     src/spaceObjects/shipTemplateBasedObject.cpp
     src/spaceObjects/planet.cpp
