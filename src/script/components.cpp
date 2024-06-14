@@ -687,7 +687,7 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<Zone>::name("zone");
     BIND_MEMBER(Zone, color);
     BIND_MEMBER(Zone, label);
-    sp::script::ComponentHandler<InternalRooms>::members["points"] = {
+    sp::script::ComponentHandler<Zone>::members["points"] = {
         [](lua_State* L, const void* ptr) {
             auto zone = reinterpret_cast<const Zone*>(ptr);
             lua_newtable(L);
@@ -717,6 +717,4 @@ void initComponentScriptBindings()
             zone->zone_dirty = true;
         }
     };
-    std::vector<glm::vec2> outline;
-    std::vector<uint16_t> triangles;
 }

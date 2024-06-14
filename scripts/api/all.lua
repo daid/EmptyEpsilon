@@ -19,6 +19,7 @@ require("api/entity/sciencedatabase.lua")
 require("api/entity/multiuse.lua")
 require("api/entity/scanprobe.lua")
 require("api/entity/supplydrop.lua")
+require("api/entity/zone.lua")
 
 require("api/gm.lua")
 require("api/callsign.lua")

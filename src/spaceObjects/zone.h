@@ -2,7 +2,7 @@
 #define ZONE_H
 
 #include "spaceObject.h"
-
+/*
 class Zone : public SpaceObject
 {
 public:
@@ -28,5 +28,5 @@ private:
     string label;
     float radius;
 };
-
+*/
 #endif//ZONE_H

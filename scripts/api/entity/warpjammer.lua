@@ -4,21 +4,23 @@
 --- Example: jammer = WarpJammer():setPosition(1000,1000):setRange(10000):setHull(20)
 function WarpJammer()
     local e = createEntity()
-    e.components.transform = {rotation=random(0, 360)}
-    e.components.hull = {max=50, current=50}
-    e.components.warp_jammer = {range=7000}
-    e.components.radar_trace = {
-        icon="radar/blip.png",
-        radius=120.0,
-        rotate=false,
-        color_by_faction=true,
+    e.components = {
+        transform = {rotation=random(0, 360)},
+        hull = {max=50, current=50},
+        warp_jammer = {range=7000},
+        radar_trace = {
+            icon="radar/blip.png",
+            radius=120.0,
+            rotate=false,
+            color_by_faction=true,
+        },
+        physics = {type="static"},
     }
     for k, v in pairs(__model_data["shield_generator"]) do
         if string.sub(1, 2) ~= "__" then
             e.components[k] = table.deepcopy(v)
         end
     end
-    e.components.physics = {type="static"}
     return e
 end
 

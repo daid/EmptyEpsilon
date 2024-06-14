@@ -1,3 +1,4 @@
+/*
 #include "main.h"
 #include "zone.h"
 #include "playerInfo.h"
@@ -124,3 +125,4 @@ bool Zone::isInside(P<SpaceObject> obj)
         return false;
     return insidePolygon(outline, obj->getPosition() - getPosition());
 }
+*/
