@@ -4,6 +4,7 @@
 #include "joinServerMenu.h"
 #include "multiplayer_server_scanner.h"
 #include "preferenceManager.h"
+#include "config.h"
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_button.h"

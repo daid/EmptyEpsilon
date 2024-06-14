@@ -13,6 +13,7 @@
 #include "menus/serverBrowseMenu.h"
 #include "screens/gm/gameMasterScreen.h"
 #include "screenComponents/rotatingModelView.h"
+#include "config.h"
 
 #include "gui/gui2_image.h"
 #include "gui/gui2_label.h"

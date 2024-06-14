@@ -5,7 +5,7 @@
 #include "graphics/font.h"
 #include "Renderable.h"
 #include "postProcessManager.h"
-#include "config.h"
+
 
 extern glm::vec3 camera_position;
 extern float camera_yaw;

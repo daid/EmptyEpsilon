@@ -11,6 +11,7 @@
 #include "components/faction.h"
 #include "components/name.h"
 #include "screens/windowScreen.h"
+#include "config.h"
 
 #include "gui/gui2_label.h"
 

@@ -6,6 +6,8 @@
 #include "preferenceManager.h"
 #include "GMActions.h"
 #include "main.h"
+#include "config.h"
+
 
 EpsilonServer::EpsilonServer(int server_port)
 : GameServer("Server", VERSION_NUMBER, server_port)
