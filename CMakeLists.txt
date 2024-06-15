@@ -227,7 +227,6 @@ set(MAIN_SOURCES
     src/epsilonServer.cpp
     src/particleEffect.cpp
     src/httpScriptAccess.cpp
-    src/modelInfo.cpp
     src/packResourceProvider.cpp
     src/modelData.cpp
     src/gameGlobalInfo.cpp
@@ -235,7 +234,6 @@ set(MAIN_SOURCES
     src/script.cpp
     src/playerInfo.cpp
     src/gameStateLogger.cpp
-    src/beamTemplate.cpp
     src/missileWeaponData.cpp
     src/mesh.cpp
     src/scenarioInfo.cpp
@@ -528,7 +526,6 @@ set(MAIN_SOURCES
     src/ai/evasionAI.h
     src/ai/fighterAI.h
     src/ai/missileVolleyAI.h
-    src/beamTemplate.h
     src/epsilonServer.h
     src/featureDefs.h
     src/gameGlobalInfo.h
@@ -564,7 +561,6 @@ set(MAIN_SOURCES
     src/mesh.h
     src/missileWeaponData.h
     src/modelData.h
-    src/modelInfo.h
     src/packResourceProvider.h
     src/particleEffect.h
     src/playerInfo.h

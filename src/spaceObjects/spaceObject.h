@@ -4,7 +4,7 @@
 #include "multiplayer.h"
 #include "scriptInterface.h"
 #include "featureDefs.h"
-#include "modelInfo.h"
+#include "modelData.h"
 #include "graphics/renderTarget.h"
 #include "ecs/entity.h"
 #include "components/radar.h"
