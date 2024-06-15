@@ -337,7 +337,6 @@ set(MAIN_SOURCES
     src/spaceObjects/spaceObject.cpp
     src/spaceObjects/playerSpaceship.cpp
     src/spaceObjects/beamEffect.cpp
-    src/spaceObjects/supplyDrop.cpp
     src/spaceObjects/scanProbe.cpp
     src/spaceObjects/shipTemplateBasedObject.cpp
     src/spaceObjects/planet.cpp
@@ -645,7 +644,6 @@ set(MAIN_SOURCES
     src/spaceObjects/shipTemplateBasedObject.h
     src/spaceObjects/spaceObject.h
     src/spaceObjects/spaceship.h
-    src/spaceObjects/supplyDrop.h
     src/threatLevelEstimate.h
     src/tutorialGame.h
     src/script/components.h
