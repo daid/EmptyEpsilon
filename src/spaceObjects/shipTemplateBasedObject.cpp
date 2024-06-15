@@ -198,26 +198,7 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
 
 void ShipTemplateBasedObject::draw3DTransparent()
 {
-    auto shields = entity.getComponent<Shields>();
-    if (!shields || shields->entries.empty())
-        return;
-
-    float angle = 0.0;
-    float arc = 360.0f / shields->entries.size();
-    const auto model_matrix = getModelMatrix();
-    for(auto& shield : shields->entries)
-    {
-        if (shield.hit_effect > 0)
-        {
-            if (shields->entries.size() > 1)
-            {
-                //TODO: model_info.renderShield(model_matrix, (shields->entry[n].level / shields->entry[n].max) * shields->entry[n].hit_effect, angle);
-            }else{
-                //TODO: model_info.renderShield(model_matrix, (shields->entry[n].level / shields->entry[n].max) * shields->entry[n].hit_effect);
-            }
-        }
-        angle += arc;
-    }
+    
 }
 
 void ShipTemplateBasedObject::update(float delta)

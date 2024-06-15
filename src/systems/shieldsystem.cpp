@@ -8,6 +8,18 @@
 #include "playerInfo.h"
 #include "tween.h"
 
+#include "engine.h"
+#include "mesh.h"
+#include "shaderRegistry.h"
+#include "textureManager.h"
+#include "graphics/opengl.h"
+#include <glm/gtc/type_ptr.hpp>
+
+
+ShieldSystem::ShieldSystem()
+{
+    RenderSystem::add3DHandler<Shields>(this, true);
+}
 
 void ShieldSystem::update(float delta)
 {
@@ -49,6 +61,49 @@ void ShieldSystem::update(float delta)
             n++;
         }
 
+    }
+}
+
+void ShieldSystem::render3D(sp::ecs::Entity e)
+{
+    auto shields = e.getComponent<Shields>();
+    if (!shields || shields->entries.empty()) return;
+    auto transform = e.getComponent<sp::Transform>();
+    if (!transform) return;
+    auto physics = e.getComponent<sp::Physics>();
+    if (!physics) return;
+    auto radius = physics->getSize().x;
+
+    auto position = transform->getPosition();
+    auto rotation = transform->getRotation();
+    auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
+    model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
+
+    float angle = 0.0;
+    float arc = 360.0f / shields->entries.size();
+    for(auto& shield : shields->entries)
+    {
+        if (shield.hit_effect > 0)
+        {
+            auto shield_matrix = glm::rotate(model_matrix, glm::radians(angle), glm::vec3(0.f, 0.f, 1.f));
+            shield_matrix = glm::rotate(shield_matrix, glm::radians(engine->getElapsedTime() * 5), glm::vec3(1.f, 0.f, 0.f));
+            shield_matrix = glm::scale(shield_matrix, 1.2f * glm::vec3(radius));
+            auto mesh = shields->entries.size() > 1 ? Mesh::getMesh("mesh/half_sphere.obj") : Mesh::getMesh("mesh/sphere.obj");
+            auto alpha = (shield.level / shield.max) * shield.hit_effect;
+
+            ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
+
+            glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+            glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(shield_matrix));
+            textureManager.getTexture("texture/shield_hit_effect.png")->bind();
+
+            gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
+            gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+            gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+            mesh->render(positions.get(), texcoords.get(), normals.get());
+        }
+        angle += arc;
     }
 }
 

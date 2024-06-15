@@ -325,7 +325,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         }
     }
 
-    if (auto target_comp = my_spaceship.getComponent<Target>())
+    auto target_comp = my_spaceship.getComponent<Target>();
+    if (target_comp && target_comp->entity)
     {
         ShaderRegistry::ScopedShader billboard(ShaderRegistry::Shaders::Billboard);
 
