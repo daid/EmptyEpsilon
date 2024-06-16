@@ -6,6 +6,7 @@
 #include "ecs/query.h"
 #include "multiplayer_server.h"
 #include "random.h"
+#include "gameGlobalInfo.h"
 
 
 void SelfDestructSystem::update(float delta)
@@ -28,7 +29,7 @@ void SelfDestructSystem::update(float delta)
             if (do_self_destruct)
             {
                 self_destruct.countdown = 10.0f; //TODO?: PreferencesManager::get("self_destruct_countdown", "10").toFloat();
-                //TODO: playSoundOnMainScreen("sfx/vocal_self_destruction.wav");
+                gameGlobalInfo->playSoundOnMainScreen(entity, "sfx/vocal_self_destruction.wav");
             }
         }else{
             // If the countdown has started, tick the clock.

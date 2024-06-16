@@ -76,6 +76,8 @@ public:
     GameGlobalInfo();
     virtual ~GameGlobalInfo();
 
+    void onReceiveServerCommand(sp::io::DataBuffer& packet) override;
+    void playSoundOnMainScreen(sp::ecs::Entity ship, string sound_name);
     /*!
      * \brief Set a faction to victorious.
      * \param string Name of the faction that won.
@@ -122,6 +124,8 @@ private:
 
     std::unique_ptr<sp::script::Environment> main_script;
     int main_script_error_count = 0;
+
+    constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
 };
 
 string getSectorName(glm::vec2 position);

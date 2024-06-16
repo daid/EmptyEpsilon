@@ -549,15 +549,6 @@ void PlayerSpaceship::setSystemCoolantRequest(ShipSystem::Type system, float req
         sys->coolant_request = request;
 }
 
-void PlayerSpaceship::playSoundOnMainScreen(string sound_name)
-{
-    sp::io::DataBuffer packet;
-    packet << CMD_PLAY_CLIENT_SOUND;
-    packet << max_crew_positions;
-    packet << sound_name;
-    broadcastServerCommand(packet);
-}
-
 int PlayerSpaceship::getRepairCrewCount()
 {
     // Count and return the number of repair crews on this ship.
@@ -767,35 +758,6 @@ bool PlayerSpaceship::getCanDock()
 
 ShipSystem::Type PlayerSpaceship::getBeamSystemTarget() { return ShipSystem::Type::None; /* TODO */ }
 string PlayerSpaceship::getBeamSystemTargetName() { return ""; /* TODO */ }
-
-void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet)
-{
-    // Receive a command from a client. Code in this function is executed on
-    // the server only.
-    int16_t command;
-    packet >> command;
-}
-
-void PlayerSpaceship::onReceiveServerCommand(sp::io::DataBuffer& packet)
-{
-    int16_t command;
-    packet >> command;
-    switch(command)
-    {
-    case CMD_PLAY_CLIENT_SOUND:
-        if (my_spaceship == entity && my_player_info)
-        {
-            ECrewPosition position;
-            string sound_name;
-            packet >> position >> sound_name;
-            if ((position == max_crew_positions && my_player_info->main_screen) || (position < sizeof(my_player_info->crew_position) && my_player_info->crew_position[position]))
-            {
-                soundManager->playSound(sound_name);
-            }
-        }
-        break;
-    }
-}
 
 void PlayerSpaceship::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {

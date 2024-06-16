@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "playerInfo.h"
 #include "random.h"
+#include "gameGlobalInfo.h"
 #include "menus/luaConsole.h"
 #include "screens/mainScreen.h"
 #include "screens/crewStationScreen.h"
@@ -664,11 +665,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 if (shields->calibration_delay <= 0.0f && active != shields->active)
                 {
                     shields->active = active;
-                    /*TODO if (active)
-                        playSoundOnMainScreen("sfx/shield_up.wav");
+                    if (active)
+                        gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_up.wav");
                     else
-                        playSoundOnMainScreen("sfx/shield_down.wav");
-                    */
+                        gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_down.wav");
                 }
             }
         }

@@ -59,6 +59,35 @@ GameGlobalInfo::~GameGlobalInfo()
 {
 }
 
+void GameGlobalInfo::onReceiveServerCommand(sp::io::DataBuffer& packet)
+{
+    int16_t command;
+    packet >> command;
+    switch(command)
+    {
+    case CMD_PLAY_CLIENT_SOUND:{
+        ECrewPosition position;
+        string sound_name;
+        sp::ecs::Entity entity;
+        packet >> entity >> position >> sound_name;
+        if (my_spaceship == entity && my_player_info)
+        {
+            if ((position == max_crew_positions && my_player_info->main_screen) || (position < sizeof(my_player_info->crew_position) && my_player_info->crew_position[position]))
+            {
+                soundManager->playSound(sound_name);
+            }
+        }
+        }break;
+    }
+}
+
+void GameGlobalInfo::playSoundOnMainScreen(sp::ecs::Entity ship, string sound_name)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_PLAY_CLIENT_SOUND << ship << max_crew_positions << sound_name;
+    broadcastServerCommand(packet);
+}
+
 void GameGlobalInfo::update(float delta)
 {
     foreach(SpaceObject, obj, space_object_list) {

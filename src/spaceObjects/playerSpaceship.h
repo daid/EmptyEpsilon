@@ -80,9 +80,6 @@ public:
 
     ShipSystem::Type getBeamSystemTarget();
     string getBeamSystemTargetName();
-    // Client command functions
-    virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
-    virtual void onReceiveServerCommand(sp::io::DataBuffer& packet) override;
 
     // Template function
     virtual void applyTemplateValues() override;
@@ -101,9 +98,6 @@ public:
     void setEnergyShieldUsePerSecond(float rate) { } //TODO
     float getEnergyWarpPerSecond() const { return 0.0f; } //TODO
     void setEnergyWarpPerSecond(float rate) {} //TODO
-
-    // Call on the server to play a sound on the main screen.
-    void playSoundOnMainScreen(string sound_name);
 
     // Ship's log functions
     void addToShipLog(string message, glm::u8vec4 color);
