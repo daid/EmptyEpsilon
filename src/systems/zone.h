@@ -6,7 +6,7 @@
 #include "components/zone.h"
 
 
-class ZoneSystem : public sp::ecs::System, public RenderRadarInterface<Zone, 20, RadarRenderSystem::FlagLongRange>
+class ZoneSystem : public sp::ecs::System, public RenderRadarInterface<Zone, 5, RadarRenderSystem::FlagLongRange>
 {
 public:
     void update(float delta) override;
