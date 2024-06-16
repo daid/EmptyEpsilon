@@ -224,7 +224,7 @@ bool CommsSystem::hailByObject(sp::ecs::Entity player, sp::ecs::Entity source, c
     auto transmitter = player.getComponent<CommsTransmitter>();
     if (!transmitter) return false;
 
-    if (transmitter->state != CommsTransmitter::State::OpeningChannel || transmitter->state != CommsTransmitter::State::BeingHailed)
+    if (transmitter->state == CommsTransmitter::State::OpeningChannel || transmitter->state == CommsTransmitter::State::BeingHailed)
     {
         if (transmitter->target != source)
             return false;

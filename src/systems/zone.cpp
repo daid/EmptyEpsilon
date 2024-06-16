@@ -8,7 +8,7 @@ void ZoneSystem::update(float delta)
 
 void ZoneSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, Zone& zone)
 {
-    if (!zone.color.a == 0 || zone.outline.empty())
+    if (zone.color.a == 0 || zone.outline.empty())
         return;
     std::vector<glm::vec2> outline_points;
     for(auto p : zone.outline)
