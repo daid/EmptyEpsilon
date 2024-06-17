@@ -24,6 +24,7 @@ BeamWeapon::BeamWeapon()
     arc_color = {255, 0, 0, 128};
     arc_color_fire = {255, 255, 0, 128};
     damage_type = DT_Energy;
+    firing = false;
 }
 
 void BeamWeapon::setParent(SpaceShip* parent)
@@ -193,10 +194,20 @@ float BeamWeapon::getCooldown()
     return cooldown;
 }
 
+bool BeamWeapon::isFiring()
+{
+    return firing;
+}
+
 void BeamWeapon::update(float delta)
 {
     if (cooldown > 0.0f)
         cooldown -= delta * parent->getSystemEffectiveness(SYS_BeamWeapons);
+
+    // If the beam weapon fired, reset the firing variable
+    if (firing) {
+        firing = false;
+    }
 
     P<SpaceObject> target = parent->getTarget();
 
@@ -272,6 +283,7 @@ void BeamWeapon::fire(P<SpaceObject> target, ESystem system_target)
     //When we fire a beam, and we hit an enemy, check if we are not scanned yet, if we are not, and we hit something that we know is an enemy or friendly,
     //  we now know if this ship is an enemy or friend.
     parent->didAnOffensiveAction();
+    firing = true;
 
     cooldown = cycle_time; // Reset time of weapon
 

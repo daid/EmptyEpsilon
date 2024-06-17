@@ -405,6 +405,10 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
         SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Coolant", ship->systems[n].coolant_level);
         SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Hacked", ship->systems[n].hacked_level);
     }
+    for(int n=0; n<max_beam_weapons; n++)
+    {
+        SHIP_VARIABLE("BeamFiring" + string(n), ship->beam_weapons[n].isFiring() ? 1.0f : 0.0f);
+    }
 
     LOG(WARNING) << "Unknown variable: " << variable_name;
     value = 0.0;

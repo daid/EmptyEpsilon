@@ -104,8 +104,9 @@ void WeaponTube::fire(float target_angle)
         delay = 0.0;
     }else{
         spawnProjectile(target_angle);
-        state = WTS_Empty;
-        type_loaded = MW_None;
+        fire_count = 0;
+        state = WTS_Firing;
+        delay = 0.0;
     }
 }
 
@@ -233,9 +234,10 @@ void WeaponTube::update(float delta)
         case WTS_Firing:
             if (game_server)
             {
-                spawnProjectile(0);
-
-                fire_count -= 1;
+                if (fire_count > 0) {
+                    spawnProjectile(0);
+                    fire_count -= 1;
+                }
                 if (fire_count > 0)
                 {
                     delay = 1.5;
