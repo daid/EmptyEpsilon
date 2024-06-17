@@ -1254,7 +1254,7 @@ function updatePlayerSoftTemplate(p)
 	local system_types = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
 	p.normal_coolant_rate = {}
 	p.normal_power_rate = {}
-	for _, system in ipairs(system_types) do
+	for idx, system in ipairs(system_types) do
 		p.normal_coolant_rate[system] = p:getSystemCoolantRate(system)
 		p.normal_power_rate[system] = p:getSystemPowerRate(system)
 	end
@@ -1831,7 +1831,7 @@ function constructEnvironment()
 	local ly = {center_y + l1_y, center_y + l1_y + l2_y, center_y + l1_y + l3_y}
 	local leader = {leader_1, leader_2, leader_3}
 	for i=1,3 do
-		for _, form in ipairs(fly_formation[form_choice[difficulty]]) do
+		for idx, form in ipairs(fly_formation[form_choice[difficulty]]) do
 			local ship = ship_template[template].create(selected_faction,template)
 			local form_x, form_y = vectorFromAngleNorth(attack_angle + form.angle, form.dist * formation_spacing)
 			local form_prime_x, form_prime_y = vectorFromAngle(form.angle, form.dist * formation_spacing)
@@ -2375,7 +2375,7 @@ function placeSensorBuoy(axis)
 			buoy_type = tableRemoveRandom(buoy_type_list)
 			if buoy_type == "station" then
 				local selected_stations = {}
-				for _, station in ipairs(station_list) do
+				for idx, station in ipairs(station_list) do
 					table.insert(selected_stations,station)
 				end
 				for i=1,3 do
@@ -2393,7 +2393,7 @@ function placeSensorBuoy(axis)
 			end
 			if buoy_type == "transport" then
 				local selected_transports = {}
-				for _, transport in ipairs(transport_list) do
+				for idx, transport in ipairs(transport_list) do
 					table.insert(selected_transports,transport)
 				end
 				for i=1,3 do
@@ -2772,7 +2772,7 @@ function expeditionMaintenance(delta)
 			if fleet_count < expedition_count then
 				if #station_list > expedition_count then
 					local avail_station = {}
-					for _, station in ipairs(station_list) do
+					for idx, station in ipairs(station_list) do
 						if station.expedition_fleet == nil or #station.expedition_fleet < 1 then
 							table.insert(avail_station,station)
 						end
@@ -2802,7 +2802,7 @@ function expeditionMaintenance(delta)
 					template =  expedition_follower_templates[math.random(1,#expedition_follower_templates)]
 					local formation_list = {"Vac","V","V4","A","-","X"}
 					local selected_formation = formation_list[math.random(1,#formation_list)]
-					for _, form in ipairs(fly_formation[selected_formation]) do
+					for idx, form in ipairs(fly_formation[selected_formation]) do
 						local ship = ship_template[template].create(selected_faction,template)
 						local form_x, form_y = vectorFromAngleNorth(expedition_angle + form.angle, form.dist * formation_spacing)
 						local form_prime_x, form_prime_y = vectorFromAngle(form.angle, form.dist * formation_spacing)

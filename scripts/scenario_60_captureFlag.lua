@@ -1634,7 +1634,7 @@ function showControlCodes(faction_filter)
 	end
 	table.sort(sorted_names)
 	local output = ""
-	for _, name in ipairs(sorted_names) do
+	for idx, name in ipairs(sorted_names) do
 		local faction = ""
 		if code_list[name].faction == "Kraylor" then
 			faction = " (Kraylor)"
@@ -5814,7 +5814,7 @@ function handleUndockedState()
 		addCommsReply(_("helpfullWarning-comms", "See any enemies in your area?"), function()
 			if comms_source:isFriendly(comms_target) then
 				enemiesInRange = 0
-				for _, obj in ipairs(comms_target:getObjectsInRange(30000)) do
+				for idx, obj in ipairs(comms_target:getObjectsInRange(30000)) do
 					if obj:isEnemy(comms_source) then
 						enemiesInRange = enemiesInRange + 1
 					end
@@ -6560,7 +6560,7 @@ function friendlyComms(comms_data)
 		setCommsMessage(msg);
 		addCommsReply(_("Back"), commsShip)
 	end)
-	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
+	for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
@@ -7801,7 +7801,7 @@ function droneDetectFlagCheck(delta)
 		for hfi=1,#human_flags do
 			local flag = human_flags[hfi]
 			if flag ~= nil and flag:isValid() then
-				for _, obj in ipairs(flag:getObjectsInRange(drone_scan_range_for_flags)) do
+				for idx, obj in ipairs(flag:getObjectsInRange(drone_scan_range_for_flags)) do
 					if obj.typeName == "CpuShip" then
 						if obj.drone then
 							if obj.drone_message == nil then
@@ -7877,7 +7877,7 @@ function droneDetectFlagCheck(delta)
 		for kfi=1,#kraylor_flags do
 			local flag = kraylor_flags[kfi]
 			if flag ~= nil and flag:isValid() then
-				for _, obj in ipairs(flag:getObjectsInRange(5000)) do
+				for idx, obj in ipairs(flag:getObjectsInRange(5000)) do
 					if obj.typeName == "CpuShip" then
 						if obj.drone then
 							if obj.drone_message == nil then
