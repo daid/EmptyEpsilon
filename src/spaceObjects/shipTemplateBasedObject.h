@@ -44,29 +44,12 @@ public:
     virtual bool getShieldsActive() { return true; }
 
     ///Shield script binding functions
-    float getShieldLevel(int index) { /*TODO*/ return 0.0f; }
-    float getShieldMax(int index) { /*TODO*/ return 0.0f; }
-    int getShieldCount() { /*TODO*/ return 0; }
     void setShields(const std::vector<float>& amounts);
     void setShieldsMax(const std::vector<float>& amounts);
 
-    int getShieldPercentage(int index) { /*TODO*/ return 0; }
-
     ///Deprecated old script functions for shields
-    float getFrontShield() { /*TODO*/ return 0.0f; }
-    float getFrontShieldMax() { /*TODO*/ return 0.0f; }
-    void setFrontShield(float amount) { } //TODO
-    void setFrontShieldMax(float amount) { } //TODO
-    float getRearShield() { /*TODO*/ return 0.0f; }
-    float getRearShieldMax() { /*TODO*/ return 0.0f; }
-    void setRearShield(float amount) { } //TODO
-    void setRearShieldMax(float amount) { } //TODO
 
     // Radar range
-    float getLongRangeRadarRange() { return 30000.0f; } //TODO
-    float getShortRangeRadarRange() { return 5000.0f; } //TODO
-    void setLongRangeRadarRange(float range) { } //TODO
-    void setShortRangeRadarRange(float range) { } //TODO
 
     void setRadarTrace(string trace);
     void setImpulseSoundFile(string sound);

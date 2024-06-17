@@ -46,22 +46,6 @@ public:
     float getRadarSignatureBiological() { auto radar_signature = entity.getComponent<RawRadarSignatureInfo>(); if (!radar_signature) return 0.0; return radar_signature->biological; }
     virtual ERadarLayer getRadarLayer() const { return ERadarLayer::Default; }
 
-    string getDescription(ScanState::State state) { return ""; } //TODO
-
-    void setDescriptionForScanState(ScanState::State state, string description) {} //TODO
-
-    void setDescription(string description)
-    {
-        setDescriptions(description, description);
-    }
-
-    void setDescriptions(string unscanned_description, string scanned_description) {} //TODO
-
-    string getDescriptionFor(sp::ecs::Entity other)
-    {
-        return getDescription(getScannedStateFor(other));
-    }
-
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
     void setHeading(float heading) { setRotation(heading - 90); }
 
@@ -82,8 +66,6 @@ public:
     virtual bool canBeTargetedBy(sp::ecs::Entity other);
     virtual bool canBeSelectedBy(sp::ecs::Entity other);
     virtual bool canBeScannedBy(sp::ecs::Entity other);
-    virtual int scanningComplexity(P<SpaceObject> target) { return -1; } //TODO
-    virtual int scanningChannelDepth(P<SpaceObject> target) { return -1; } //TODO
     void setScanningParameters(int complexity, int depth);
     ScanState::State getScannedStateFor(sp::ecs::Entity other);
     void setScannedStateFor(P<SpaceObject> other, ScanState::State state);
@@ -111,7 +93,6 @@ public:
     void removeReputationPoints(float amount);
     void addReputationPoints(float amount);
     void setCommsScript(string script_name);
-    void setCommsFunction(ScriptSimpleCallback callback) { } //TODO
     bool areEnemiesInRange(float range);
     PVector<SpaceObject> getObjectsInRange(float range);
     string getSectorName();

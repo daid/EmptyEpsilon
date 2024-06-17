@@ -79,9 +79,13 @@ end
 --- Examples:
 --- template:setClass(_("class","Frigate"),_("subclass","Cruiser"))
 function ShipTemplate:setClass(class, subclass)
-    if self.docking_port == nil then self.docking_port = {} end
-    self.docking_port.dock_class = class
-    self.docking_port.dock_subclass = subclass
+    self.docking_port = {
+        dock_class = class
+        dock_subclass = subclass
+    }
+    if self.__type == "ship" or self.__type == nil then
+        self.docking_port.auto_reload_missiles = true
+    end
     return self
 end
 --- Sets the description shown in the science database for ShipTemplateBasedObjects created from this ShipTemplate.
@@ -109,6 +113,9 @@ function ShipTemplate:setType(template_type)
         self.long_range_radar = {}
         self.comms_transmitter = {}
         self.comms_receiver = nil
+        if self.docking_port then
+            self.docking_port.auto_reload_missiles = false
+        end
     end
     if template_type == "station" then
         if self.docking_bay == nil then self.docking_bay = {} end

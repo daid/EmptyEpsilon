@@ -77,53 +77,15 @@ public:
     bool isDocked(P<SpaceObject> target);
     P<SpaceObject> getDockedWith();
     DockingPort::State getDockingState();
-    int getWeaponStorage(EMissileWeapons weapon) { return 0; } //TODO
-    int getWeaponStorageMax(EMissileWeapons weapon) { return 0; } //TODO
-    void setWeaponStorage(EMissileWeapons weapon, int amount) { } //TODO
-    void setWeaponStorageMax(EMissileWeapons weapon, int amount) { } //TODO
     float getMaxEnergy();
     void setMaxEnergy(float amount);
     float getEnergy();
     void setEnergy(float amount);
-    float getSystemHackedLevel(ShipSystem::Type system) { return 0.0f; } //TODO
-    void setSystemHackedLevel(ShipSystem::Type system, float hacked_level) {} //TODO
-    float getSystemHealth(ShipSystem::Type system) { return 0.0f; } //TODO
-    void setSystemHealth(ShipSystem::Type system, float health) {} //TODO
-    float getSystemHealthMax(ShipSystem::Type system) { return 0.0f; } //TODO
-    void setSystemHealthMax(ShipSystem::Type system, float health_max) {} //TODO
-    float getSystemHeat(ShipSystem::Type system) { return 0.0f; } //TODO
-    void setSystemHeat(ShipSystem::Type system, float heat) {} //TODO
-    float getSystemHeatRate(ShipSystem::Type system) const { return 0.0f; } //TODO
-    void setSystemHeatRate(ShipSystem::Type system, float rate) {} //TODO
 
-    float getSystemPower(ShipSystem::Type system) { return 0.0f; } //TODO
-    void setSystemPower(ShipSystem::Type system, float power) {} //TODO
-    float getSystemPowerRate(ShipSystem::Type system) const { return 0.0f; } //TODO
-    void setSystemPowerRate(ShipSystem::Type system, float rate) {} //TODO
-    float getSystemPowerUserFactor(ShipSystem::Type system) { return 0.0f; } //TODO
-    float getSystemPowerFactor(ShipSystem::Type system) { return 0.0f; } //TODO
-    void setSystemPowerFactor(ShipSystem::Type system, float factor) {} //TODO
-    float getSystemCoolant(ShipSystem::Type system) { return 0.0f; } //TODO
-    void setSystemCoolant(ShipSystem::Type system, float coolant) {} //TODO
     Speeds getImpulseMaxSpeed();
     void setImpulseMaxSpeed(float forward_speed, std::optional<float> reverse_speed);
-    float getSystemCoolantRate(ShipSystem::Type system) const { return 0.0f; } //TODO
-    void setSystemCoolantRate(ShipSystem::Type system, float rate) {} //TODO
-    float getRotationMaxSpeed() { return 0.0f; } //TODO
-    void setRotationMaxSpeed(float speed) { } //TODO
     Speeds getAcceleration();
     void setAcceleration(float acceleration, std::optional<float> reverse_acceleration);
-    void setCombatManeuver(float boost, float strafe) { } //TODO
-    bool hasJumpDrive() { return false; } //TODO
-    void setJumpDrive(bool has_jump) {} //TODO
-    void setJumpDriveRange(float min, float max) {} //TODO
-    bool hasWarpDrive() { return false; } //TODO
-    void setWarpDrive(bool has_warp) {} //TODO
-    void setWarpSpeed(float speed) {} //TODO
-    float getWarpSpeed() { return 1000.0f; } //TODO
-    float getJumpDriveCharge() { return 0.0f; } //TODO
-    void setJumpDriveCharge(float charge) {} //TODO
-    float getJumpDelay() { return 0.0f; } //TODO
 
     float getBeamWeaponArc(int index);
     float getBeamWeaponDirection(int index);
@@ -139,9 +101,6 @@ public:
     float getBeamWeaponDamage(int index);
     float getBeamWeaponEnergyPerFire(int index);
     float getBeamWeaponHeatPerFire(int index);
-
-    int getShieldsFrequency() { return 0.0; } //TODO
-    void setShieldsFrequency(int freq) { return; } //TODO
 
     int getBeamFrequency();
 

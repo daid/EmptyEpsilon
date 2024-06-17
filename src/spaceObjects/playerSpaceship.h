@@ -45,28 +45,9 @@ public:
     float getEnergyLevel();
     float getEnergyLevelMax();
 
-    void setCanScan(bool enabled) {} //TODO
-    bool getCanScan() { return true; } //TODO
-    void setCanHack(bool enabled) { } //TODO
     bool getCanHack() { return true; }
     void setCanDock(bool enabled);
     bool getCanDock();
-    void setCanCombatManeuver(bool enabled) { } //TODO
-    bool getCanCombatManeuver() { return true; } // TODO
-    void setCanSelfDestruct(bool enabled) { }  // TODO
-    bool getCanSelfDestruct() { return false; } // TODO
-    void setCanLaunchProbe(bool enabled) { } // TODO
-    bool getCanLaunchProbe() { return true; } // TODO
-
-    void setSelfDestructDamage(float amount) { }  // TODO
-    float getSelfDestructDamage() { return 0.0f; }  // TODO
-    void setSelfDestructSize(float size) { } // TODO
-    float getSelfDestructSize() { return 0.0f; } // TODO
-
-    void setScanProbeCount(int amount) { } //TODO
-    int getScanProbeCount() { return 8; }
-    void setMaxScanProbeCount(int amount) { } //TODO
-    int getMaxScanProbeCount() { return 8; } //TODO
 
     void onProbeLaunch(ScriptSimpleCallback callback);
     void onProbeLink(ScriptSimpleCallback callback);
@@ -87,17 +68,11 @@ public:
     // Ship status functions
     void setSystemCoolantRequest(ShipSystem::Type system, float request);
     void setMaxCoolant(float coolant);
-    float getMaxCoolant() { return 10.0f; } //TODO
-    void setAutoCoolant(bool active) {} //TODO
     int getRepairCrewCount();
     void setRepairCrewCount(int amount);
     AlertLevel getAlertLevel() { return AlertLevel::Normal; } // TODO
 
     // Flow rate controls.
-    float getEnergyShieldUsePerSecond() const { return 0.0f; } //TODO
-    void setEnergyShieldUsePerSecond(float rate) { } //TODO
-    float getEnergyWarpPerSecond() const { return 0.0f; } //TODO
-    void setEnergyWarpPerSecond(float rate) {} //TODO
 
     // Ship's log functions
     void addToShipLog(string message, glm::u8vec4 color);
@@ -109,12 +84,8 @@ public:
     bool hasPlayerAtPosition(ECrewPosition position);
 
     // Ship shields functions
-    virtual bool getShieldsActive() override { return true; } //TODO
-    void setShieldsActive(bool active) { }
 
     // Waypoint functions
-    int getWaypointCount() { return 0; } //TODO
-    glm::vec2 getWaypoint(int index) { return glm::vec2(0, 0); } //TODO
 
     // Ship control code/password setter
     void setControlCode(string code) { } // TODO
