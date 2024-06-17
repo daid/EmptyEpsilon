@@ -1473,7 +1473,7 @@ function getTemplatePool(max_strength)
 	end)
 	local template_pool = {}
 	if pool_selectivity == "less/heavy" then
-		for _, current_ship_template in ipairs(ship_template_by_strength) do
+		for idx, current_ship_template in ipairs(ship_template_by_strength) do
 			if ship_template[current_ship_template].strength <= max_strength then
 				table.insert(template_pool,current_ship_template)
 			end

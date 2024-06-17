@@ -893,10 +893,10 @@ Don't waste your time shooting at that station. It has an Exuari emergency integ
 end
 
 function InitKraylor()
-  for _, e in ipairs(Kw_stations) do
+  for idx, e in ipairs(Kw_stations) do
     e:onTakingDamage(KWGoAggro)
   end
-  for _, e in ipairs(Kw_enemies) do
+  for idx, e in ipairs(Kw_enemies) do
     e:onTakingDamage(KWGoAggro)
   end
 end
@@ -910,13 +910,13 @@ function InitTraffic()
   Traffic.types = {'Atlantis', 'Transport1x2', 'Maverick', 'Kiriya', 'Hathcock', 'Flavia P.Falcon'}
   Traffic.srcdest = {'J2','D0','B10','J8','zz1','zz6','zz8','D10','H11','K5'}
   Traffic.stations = {Admin_station, Defence_station, Wormhole_station, Colony_area_station}
-  for _, stn in ipairs(Patrol_stations) do
+  for idx, stn in ipairs(Patrol_stations) do
     table.insert(Traffic.stations,stn)
   end
-  for _, stn in ipairs(Resupply_stations) do
+  for idx, stn in ipairs(Resupply_stations) do
     table.insert(Traffic.stations,stn)
   end
-  for _, stn in ipairs(Lookout_stations) do
+  for idx, stn in ipairs(Lookout_stations) do
     table.insert(Traffic.stations,stn)
   end
   Traffic.timer = getScenarioTime()
@@ -1028,7 +1028,7 @@ function SpawnPatrolEnemies()
   local x, y = Patrol_stations[2]:getPosition()
   Defence_station.patrol_enemies = SpawnEnemies(x - 5000, y - 5000, random(1.6,2), "Ghosts")
 
-  for _, enemy in ipairs(Defence_station.patrol_enemies) do
+  for idx, enemy in ipairs(Defence_station.patrol_enemies) do
     enemy:orderAttack(Patrol_stations[2])
   end
   Defence_station:sendCommsMessage(Player, _("defenceStnCheckpoint-IncCall",[[RED ALERT!
@@ -1075,7 +1075,7 @@ function ConvoyGoAggro(__, instigator)
 
   Player:setFaction("Human Navy")
   Defence_station.drones_think_were_friendly = false
-  for _, e in ipairs(Defence_station.convoy_enemies) do
+  for idx, e in ipairs(Defence_station.convoy_enemies) do
     if e.goneAggro ~= nil then return end   -- Bail if already activated
     e.goneAggro = true
     if e:isValid() then e:orderAttack(Player)end
@@ -1093,7 +1093,7 @@ function DroneStationGoAggro(self, instigator)
     local x, y = self:getPosition()
     local spx, spy = vectorFromAngle(irandom(0, 360), 1500)
     local defenders = SpawnEnemies(x + spx, y + spy, random(.8,1.2), "Ghosts")
-    for _, ship in ipairs(defenders) do
+    for idx, ship in ipairs(defenders) do
       table.insert(Defence_station.ghost_defenders, ship)
     end
   end
@@ -1111,26 +1111,26 @@ function SpawnKWEnemies(start_aggro)
   if Difficulty >= 1 then
     local x, y = sectorToXY("AI23")
     local enemies = SpawnEnemies(x, y, random(.8,1.2), "Kraylor")
-    for _, e in ipairs(enemies) do
+    for idx, e in ipairs(enemies) do
       table.insert(Kw_enemies, e)
     end
   end
   if Difficulty >= 3 then
     local x, y = sectorToXY("AG26")
     local enemies = SpawnEnemies(x, y, random(.8,1.2), "Kraylor")
-    for _, e in ipairs(enemies) do
+    for idx, e in ipairs(enemies) do
       table.insert(Kw_enemies, e)
     end
   end
   if Difficulty == 5 then
     local x, y = sectorToXY("AI25")
     local enemies = SpawnEnemies(x, y, random(.8,1.2), "Kraylor")
-    for _, e in ipairs(enemies) do
+    for idx, e in ipairs(enemies) do
       table.insert(Kw_enemies, e)
     end
   end
 
-  for _, e in ipairs(Kw_enemies) do
+  for idx, e in ipairs(Kw_enemies) do
     if start_aggro then
       e:orderAttack(Player)
     else
@@ -1142,7 +1142,7 @@ end
 
 function KWGoAggro(self, instigator)
   if instigator ~= Player then return end
-  for _, e in ipairs(Kw_enemies) do
+  for idx, e in ipairs(Kw_enemies) do
     if e.goneAggro == true then return end
     e.goneAggro = true
     e:orderAttack(Player)
@@ -1179,7 +1179,7 @@ function SpawnRepairEnemies()
   -- This is needed to get the Kraylor to actually attack it
   Wormhole_station:setFaction("Human Navy")
 
-  for _, enemy in ipairs(Wormhole_station.repair_enemies) do
+  for idx, enemy in ipairs(Wormhole_station.repair_enemies) do
     enemy:orderAttack(Wormhole_station)
   end
   Wormhole_station:sendCommsMessage(Player, _("wormhole-incCall",[[RED ALERT!
@@ -1194,7 +1194,7 @@ function SpawnHarrasment()
 
   Defence_station.harass_enemies = SpawnEnemies(x + spx, y + spy, random(0.25,0.5), "Exuari")
 
-  for _, enemy in ipairs(Defence_station.harass_enemies) do
+  for idx, enemy in ipairs(Defence_station.harass_enemies) do
     enemy:setWarpDrive(false)
     enemy:setJumpDrive(true)
     enemy:orderAttack(Player)
@@ -1825,7 +1825,7 @@ function UpdateMissionPatrol()
 
   if Defence_station.mission_state == "patrol attack" then
     local allDestroyed = true
-    for _, enemy in ipairs(Defence_station.patrol_enemies) do
+    for idx, enemy in ipairs(Defence_station.patrol_enemies) do
       if enemy:isValid() then
         allDestroyed = false
         if distance(enemy,Player) < 2000 then
@@ -1854,7 +1854,7 @@ INVESTIGATE BUT DO NOT ENGAGE! We have it on good word that attacking this convo
 end
 
 function CheckConvoyArrived()
-  for _, enemy in ipairs(Defence_station.convoy_enemies) do
+  for idx, enemy in ipairs(Defence_station.convoy_enemies) do
     -- Make them disappear when they get to G0
     if enemy:isValid() then
       if distance(enemy, enemy.dx, enemy.dy) < 1000 and not enemy.goneAggro then
@@ -2046,7 +2046,7 @@ function UpdateMissionDroneNest()
     local with_convoy = false
     if #Defence_station.convoy_enemies ~= 0 then
       CheckConvoyArrived()
-      for _, enemy in ipairs(Defence_station.convoy_enemies) do
+      for idx, enemy in ipairs(Defence_station.convoy_enemies) do
         if enemy:isValid() and distance(Player, enemy) < 5000 then
           with_convoy = true
         end
@@ -2084,14 +2084,14 @@ function FinishMissionDroneNest ()
   if MockDroneShip ~= nil and MockDroneShip:isValid() then
     MockDroneShip:destroy()
   end
-  for _, e in ipairs(Defence_station.convoy_enemies) do
+  for idx, e in ipairs(Defence_station.convoy_enemies) do
     if Difficulty == 5 then
       e:orderRoaming()
     else
       e:orderIdle()
     end
   end
-  for _, stn in ipairs(Drone_stations) do
+  for idx, stn in ipairs(Drone_stations) do
     if stn:isValid() then
       if stn == Drone_control_station then
         stn:onDestroyed(function ()
@@ -2169,7 +2169,7 @@ function UpdateMissionRepair(delta)
 
   if Wormhole_station.tier2_mission_state == "attack" then
     local allDestroyed = true
-    for _, enemy in ipairs(Wormhole_station.repair_enemies) do
+    for idx, enemy in ipairs(Wormhole_station.repair_enemies) do
       if enemy:isValid() then
         allDestroyed = false
         if distance(enemy,Player) < 2000 then
@@ -2254,7 +2254,7 @@ function TransferToPP1()
 end
 
 function UpdateNebulaBonuses()
-  for _, bonus in pairs(Admin_station.nebula_bonuses) do
+  for idx, bonus in pairs(Admin_station.nebula_bonuses) do
     if bonus.revealed == nil then
       if bonus:isScannedBy(Player) then
         bonus.revealed = true
@@ -2268,7 +2268,7 @@ function UpdateDroneStations()
 
   -- Proximity Defence
   if Defence_station.drones_think_were_friendly ~= true then
-    for _, stn in ipairs(Drone_stations) do
+    for idx, stn in ipairs(Drone_stations) do
       if stn:isValid() then
         if distance(Player, stn) > 80000 then return end -- Exit early (don't iterate all stations) if player is far
         if distance(Player, stn) < 2000 and stn.prox_spawned == nil then
@@ -2278,7 +2278,7 @@ function UpdateDroneStations()
           local x_d = x - (2 * (x - x_t)) + irandom(-2000, 2000)
           local y_d = y - (2 * (y - y_t)) + irandom(-2000, 2000)
           local defenders = SpawnEnemies(x_d, y_d, random(0.1,0.3), "Ghosts")
-          for _, d in ipairs(defenders) do
+          for idx2, d in ipairs(defenders) do
             d:orderAttack(Player)
             table.insert(Defence_station.ghost_defenders, d)
           end
@@ -2320,7 +2320,7 @@ end
 
 function UpdateHarassment()
   local alldead = true
-  for _, enemy in ipairs(Defence_station.harass_enemies) do
+  for idx, enemy in ipairs(Defence_station.harass_enemies) do
     if enemy:isValid() then
       alldead = false
       if distance(enemy, Player) > 240000 then
@@ -2405,14 +2405,14 @@ function HendrixHints(stn)
 end
 
 function CheckDefeatConditions()
-  for _, stn in ipairs(Patrol_stations) do
+  for idx, stn in ipairs(Patrol_stations) do
     if not stn:isValid() then
       Player:addToShipLog(_("defeat-shipLog", "DEFEAT - A Patrol Station has been destroyed"), "Red")
       victory("Exuari")
     end
   end
 
-  for _, stn in ipairs({Admin_station, Defence_station, Wormhole_station}) do
+  for idx, stn in ipairs({Admin_station, Defence_station, Wormhole_station}) do
     if not stn:isValid() then
       Player:addToShipLog(_("defeat-shipLog", "DEFEAT - A Core station (Admin, Defence, Wormhole) has been destroyed"), "Red")
       victory("Exuari")
@@ -2441,7 +2441,7 @@ end
 
 function CheckCheevoJunk()
   CHEEVOS["junk"] = true
-  for _, stn in ipairs(Exuari_junk_stations) do
+  for idx, stn in ipairs(Exuari_junk_stations) do
     if stn:isValid() then
       CHEEVOS["junk"] = false
       return
@@ -2451,14 +2451,14 @@ end
 
 function CheckCheevoNoGhosts()
   CHEEVOS["noghosts"] = true
-  for _, ship in ipairs(Defence_station.convoy_enemies) do
+  for idx, ship in ipairs(Defence_station.convoy_enemies) do
     if ship:isValid() then
       CHEEVOS["noghosts"] = false
       return
     end
   end
 
-  for _, ship in ipairs(Defence_station.ghost_defenders) do
+  for idx, ship in ipairs(Defence_station.ghost_defenders) do
     if ship:isValid() then
       CHEEVOS["noghosts"] = false
       return
@@ -2468,7 +2468,7 @@ end
 
 function CheckCheevoNoWormhole()
   CHEEVOS["nowormhole"] = true
-  for _, val in pairs(Wormhole_station.insults) do
+  for idx, val in pairs(Wormhole_station.insults) do
     if val ~= true then
       CHEEVOS["nowormhole"] = false
       return
@@ -2490,7 +2490,7 @@ end
 
 function CheckCheevoGrandSlam()
   CHEEVOS["grandslam"] = true
-  for _, val in pairs(CHEEVOS) do
+  for idx, val in pairs(CHEEVOS) do
     if val ~= true then
       CHEEVOS["grandslam"] = false
       return
