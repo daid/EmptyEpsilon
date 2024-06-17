@@ -159,7 +159,7 @@ function pickStation(name)
 	local station = nil
 	if name == nil then
 		--default to random in priority order
-		for _, group in ipairs(station_priority) do
+		for idx, group in ipairs(station_priority) do
 			if station_pool[group] ~= nil then
 				for station, details in pairs(station_pool[group]) do
 					table.insert(station_selection_list,station)
@@ -3305,7 +3305,7 @@ function populateStationPool()
 	end
 	for group, list in pairs(station_pool) do
 		local already_inserted = false
-		for _, previous_group in ipairs(station_priority) do
+		for idx, previous_group in ipairs(station_priority) do
 			if group == previous_group then
 				already_inserted = true
 				break
