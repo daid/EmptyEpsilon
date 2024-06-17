@@ -168,15 +168,19 @@ void TacticalScreen::onUpdate()
 
         if (keys.weapons_enemy_next_target.getDown())
         {
-            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-            targets.setNext(lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable);
-            my_player_info->commandSetTarget(targets.get());
+            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
+                auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+                targets.setNext(transform->getPosition(), lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable);
+                my_player_info->commandSetTarget(targets.get());
+            }
         }
         if (keys.weapons_next_target.getDown())
         {
-            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-            targets.setNext(lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable, FactionRelation::Enemy);
-            my_player_info->commandSetTarget(targets.get());
+            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
+                auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+                targets.setNext(transform->getPosition(), lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable, FactionRelation::Enemy);
+                my_player_info->commandSetTarget(targets.get());
+            }
         }
 
         auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();

@@ -57,14 +57,6 @@ bool ShipTemplateBasedObject::hasShield()
     return entity.hasComponent<Shields>();
 }
 
-void ShipTemplateBasedObject::setCanBeDestroyed(bool enabled) { /*TODO*/ }
-bool ShipTemplateBasedObject::getCanBeDestroyed() { return true; }
-
-float ShipTemplateBasedObject::getHull() { return 0.0f; /*TODO*/ }
-float ShipTemplateBasedObject::getHullMax() { return 0.0f; /*TODO*/ }
-void ShipTemplateBasedObject::setHull(float amount) { /*TODO*/ }
-void ShipTemplateBasedObject::setHullMax(float amount) { /*TODO*/ }
-
 void ShipTemplateBasedObject::setTemplate(string template_name)
 {
     /*
@@ -143,74 +135,4 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
     //Call the virtual applyTemplateValues function so subclasses can get extra values from the ship templates.
     applyTemplateValues();
     */
-}
-
-void ShipTemplateBasedObject::setShields(const std::vector<float>& amounts)
-{
-    //TODO
-}
-
-void ShipTemplateBasedObject::setShieldsMax(const std::vector<float>& amounts)
-{
-    //TODO
-}
-
-void ShipTemplateBasedObject::setRadarTrace(string trace)
-{
-    if (!entity) return;
-    entity.getOrAddComponent<RadarTrace>().icon = "radar/" + trace;
-}
-
-void ShipTemplateBasedObject::setImpulseSoundFile(string sound)
-{
-    //TODO
-}
-
-bool ShipTemplateBasedObject::getSharesEnergyWithDocked()
-{
-    return false;//TODO
-}
-void ShipTemplateBasedObject::setSharesEnergyWithDocked(bool enabled) { /*TODO*/ }
-bool ShipTemplateBasedObject::getRepairDocked()
-{
-    return false;//TODO
-}
-void ShipTemplateBasedObject::setRepairDocked(bool enabled) { /*TODO*/ }
-bool ShipTemplateBasedObject::getRestocksScanProbes()
-{
-    return false;//TODO
-}
-void ShipTemplateBasedObject::setRestocksScanProbes(bool enabled) { /*TODO*/ }
-bool ShipTemplateBasedObject::getRestocksMissilesDocked()
-{
-    return false;//TODO
-}
-void ShipTemplateBasedObject::setRestocksMissilesDocked(bool enabled) { /*TODO*/ }
-
-void ShipTemplateBasedObject::onTakingDamage(ScriptSimpleCallback callback)
-{
-    auto hull = entity.getComponent<Hull>();
-    //if (hull)
-    //    hull->on_taking_damage = callback;
-}
-
-void ShipTemplateBasedObject::onDestruction(ScriptSimpleCallback callback)
-{
-    auto hull = entity.getComponent<Hull>();
-    //if (hull)
-    //    hull->on_destruction = callback;
-}
-
-string ShipTemplateBasedObject::getShieldDataString()
-{
-    string data = "";
-    /* TODO
-    for(int n=0; n<shield_count; n++)
-    {
-        if (n > 0)
-            data += ":";
-        data += string(int(shield_level[n])) + "/" + string(int(shield_max[n]));
-    }
-    */
-    return data;
 }

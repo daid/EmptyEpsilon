@@ -323,99 +323,6 @@ bool SpaceShip::hasSystem(ShipSystem::Type system)
     return ShipSystem::get(entity, system) != nullptr;
 }
 
-float SpaceShip::getBeamWeaponArc(int index) { return 0.0f; /* TODO */ }
-float SpaceShip::getBeamWeaponDirection(int index) { return 0.0f; /* TODO */ }
-float SpaceShip::getBeamWeaponRange(int index) { return 0.0f; /* TODO */ }
-
-float SpaceShip::getBeamWeaponTurretArc(int index) { return 0.0f; /* TODO */ }
-
-float SpaceShip::getBeamWeaponTurretDirection(int index) { return 0.0f; /* TODO */ }
-
-float SpaceShip::getBeamWeaponTurretRotationRate(int index) { return 0.0f; /* TODO */ }
-
-float SpaceShip::getBeamWeaponCycleTime(int index) { return 0.0f; /* TODO */ }
-float SpaceShip::getBeamWeaponDamage(int index) { return 0.0f; /* TODO */ }
-float SpaceShip::getBeamWeaponEnergyPerFire(int index) { return 0.0f; /* TODO */ }
-float SpaceShip::getBeamWeaponHeatPerFire(int index) { return 0.0f; /* TODO */ }
-
-int SpaceShip::getBeamFrequency() { return 0; /* TODO */ }
-
-void SpaceShip::setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage) { /* TODO */ }
-
-void SpaceShip::setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate) { /* TODO */ }
-
-void SpaceShip::setBeamWeaponTexture(int index, string texture) { /* TODO */ }
-
-void SpaceShip::setBeamWeaponEnergyPerFire(int index, float energy) { /* TODO */ }
-void SpaceShip::setBeamWeaponHeatPerFire(int index, float heat) { /* TODO */ }
-void SpaceShip::setBeamWeaponArcColor(int index, float r, float g, float b, float fire_r, float fire_g, float fire_b) { /* TODO */ }
-void SpaceShip::setBeamWeaponDamageType(int index, DamageType type) { /* TODO */ }
-
-
-void SpaceShip::setWeaponTubeCount(int amount)
-{
-    //TODO
-}
-
-int SpaceShip::getWeaponTubeCount()
-{
-    //TODO
-    return 0;
-}
-
-EMissileWeapons SpaceShip::getWeaponTubeLoadType(int index)
-{
-    //TODO
-    return MW_None;
-}
-
-void SpaceShip::weaponTubeAllowMissle(int index, EMissileWeapons type)
-{
-    //TODO
-    return;
-}
-
-void SpaceShip::weaponTubeDisallowMissle(int index, EMissileWeapons type)
-{
-    //TODO
-    return;
-}
-
-void SpaceShip::setWeaponTubeExclusiveFor(int index, EMissileWeapons type)
-{
-    //TODO
-    return;
-}
-
-void SpaceShip::setWeaponTubeDirection(int index, float direction)
-{
-    //TODO
-    return;
-}
-
-void SpaceShip::setTubeSize(int index, EMissileSizes size)
-{
-    //TODO
-    return;
-}
-
-EMissileSizes SpaceShip::getTubeSize(int index)
-{
-    //TODO
-    return MS_Medium;
-}
-
-float SpaceShip::getTubeLoadTime(int index)
-{
-    //TODO
-    return 0;
-}
-
-void SpaceShip::setTubeLoadTime(int index, float time)
-{
-    return;
-}
-
 void SpaceShip::addBroadcast(FactionRelation threshold, string message)
 {
     if ((int(threshold) < 0) || (int(threshold) > 2))     //if an invalid threshold is defined, alert and default to ally only
@@ -477,32 +384,6 @@ DockingPort::State SpaceShip::getDockingState()
     auto port = entity.getComponent<DockingPort>();
     if (!port) return DockingPort::State::NotDocking;
     return port->state;
-}
-
-float SpaceShip::getMaxEnergy() { return 0.0f; } // TODO
-void SpaceShip::setMaxEnergy(float amount) {} // TODO
-float SpaceShip::getEnergy() { return 0.0f; } // TODO
-void SpaceShip::setEnergy(float amount) {} // TODO
-
-Speeds SpaceShip::getAcceleration()
-{
-    //TODO
-    return {0.0f, 0.0f};
-}
-
-void SpaceShip::setAcceleration(float acceleration, std::optional<float> reverse_acceleration)
-{
-    //TODO
-}
-
-Speeds SpaceShip::getImpulseMaxSpeed()
-{
-    //TODO
-    return {0.0f, 0.0f};
-}
-void SpaceShip::setImpulseMaxSpeed(float forward_speed, std::optional<float> reverse_speed)
-{
-    //TODO
 }
 
 string SpaceShip::getScriptExportModificationsOnTemplate()

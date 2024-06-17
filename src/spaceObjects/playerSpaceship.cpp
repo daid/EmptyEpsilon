@@ -286,42 +286,6 @@ void PlayerSpaceship::removeCustom(string name)
     }
 }
 
-void PlayerSpaceship::setCommsMessage(string message)
-{
-    if (auto transmitter = entity.getComponent<CommsTransmitter>()) {
-        // Record a new comms message to the ship's log.
-        for(string line : message.split("\n"))
-            addToShipLog(line, glm::u8vec4(192, 192, 255, 255));
-        // Display the message in the messaging window.
-        transmitter->incomming_message = message;
-    }
-}
-
-void PlayerSpaceship::setEnergyLevel(float amount) {} //TODO
-void PlayerSpaceship::setEnergyLevelMax(float amount) {} //TODO
-float PlayerSpaceship::getEnergyLevel() { return 0.0f; } //TODO
-float PlayerSpaceship::getEnergyLevelMax() { return 0.0f; } //TODO
-
-void PlayerSpaceship::setCanDock(bool enabled)
-{
-    if (!enabled) {
-        //TODO: Undock first!
-        entity.removeComponent<DockingPort>();
-    } else {
-        auto& port = entity.getOrAddComponent<DockingPort>();
-        //port.dock_class = ship_template->getClass();
-        //port.dock_subclass = ship_template->getSubClass();
-    }
-}
-
-bool PlayerSpaceship::getCanDock()
-{
-    return entity.hasComponent<DockingPort>();
-}
-
-ShipSystem::Type PlayerSpaceship::getBeamSystemTarget() { return ShipSystem::Type::None; /* TODO */ }
-string PlayerSpaceship::getBeamSystemTargetName() { return ""; /* TODO */ }
-
 void PlayerSpaceship::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     SpaceShip::drawOnGMRadar(renderer, position, scale, rotation, long_range);

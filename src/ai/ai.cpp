@@ -14,6 +14,7 @@
 #include "components/faction.h"
 #include "components/collision.h"
 #include "components/radar.h"
+#include "components/moveto.h"
 #include "systems/collision.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
@@ -832,8 +833,8 @@ bool ShipAI::betterTarget(sp::ecs::Entity new_target, sp::ecs::Entity current_ta
 float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes::MountPoint& tube)
 {
     // Never fire missiles at scan probes.
-    //TODO: if (P<ScanProbe>(target))
-    //    return std::numeric_limits<float>::infinity();
+    if (target.hasComponent<MoveTo>() && target.hasComponent<ShareShortRangeRadar>())
+        return std::numeric_limits<float>::infinity();
     auto tt = target.getComponent<sp::Transform>();
     if (!tt) return std::numeric_limits<float>::infinity();
     auto ot = owner.getComponent<sp::Transform>();

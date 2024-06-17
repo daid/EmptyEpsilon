@@ -290,16 +290,6 @@ void SpaceObject::addReputationPoints(float amount)
     faction.reputation_points = std::max(0.0f, faction.reputation_points + amount);
 }
 
-void SpaceObject::setCommsScript(string script_name)
-{
-    /*TODO
-    this->comms_script_name = script_name;
-    if (script_name != "")
-        i18n::load("locale/" + script_name.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
-    this->comms_script_callback.clear();
-    */
-}
-
 string SpaceObject::getSectorName()
 {
     return ::getSectorName(getPosition());

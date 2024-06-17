@@ -909,7 +909,6 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 mt.speed = 1000;
                 p.addComponent<AllowRadarLink>().owner = ship;
                 //TODO: setRadarSignatureInfo(0.0, 0.2, 0.0);
-                //TODO: setCallSign(string(getMultiplayerId()) + "P");
                 auto& trace = p.addComponent<RadarTrace>();
                 trace.icon = "radar/probe.png";
                 trace.min_size = 10.0;

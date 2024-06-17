@@ -516,8 +516,10 @@ void ScienceScreen::onUpdate()
             my_spaceship.hasComponent<ScienceScanner>() &&
             my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
         {
-            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-            targets.setNext(lrr ? lrr->long_range : 25000.0f, TargetsContainer::ESelectionType::Scannable);
+            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
+                auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+                targets.setNext(transform->getPosition(), lrr ? lrr->long_range : 25000.0f, TargetsContainer::ESelectionType::Scannable);
+            }
         }
     }
 }

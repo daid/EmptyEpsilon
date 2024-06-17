@@ -6,11 +6,6 @@
 
 class TargetsContainer
 {
-private:
-    std::vector<sp::ecs::Entity> entries;
-    bool allow_waypoint_selection;
-    int waypoint_selection_index;
-    glm::vec2 waypoint_selection_position{};
 public:
     enum ESelectionType
     {
@@ -33,8 +28,16 @@ public:
     void setWaypointIndex(int index);
 
     void setToClosestTo(glm::vec2 position, float max_range, ESelectionType selection_type);
-    void setNext(float max_range, ESelectionType selection_type);
-    void setNext(float max_range, ESelectionType selection_type, FactionRelation relation);
+    void setNext(glm::vec2 position, float max_range, ESelectionType selection_type);
+    void setNext(glm::vec2 position, float max_range, ESelectionType selection_type, FactionRelation relation);
+
+private:
+    std::vector<sp::ecs::Entity> entries;
+    bool allow_waypoint_selection;
+    int waypoint_selection_index;
+    glm::vec2 waypoint_selection_position{};
+
+    bool isValidTarget(sp::ecs::Entity entity, ESelectionType selection_type);
 };
 
 #endif//TARGETS_CONTAINER_H

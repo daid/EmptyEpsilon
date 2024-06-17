@@ -68,19 +68,8 @@ void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESele
     {
         auto transform = entity.getComponent<sp::Transform>();
         if (!transform) continue;
-        if (entity == my_spaceship) continue;
-
-        switch(selection_type)
-        {
-        case Selectable:
-            if (!entity.hasComponent<Hull>() && !entity.getComponent<ScanState>())
-                continue;
-            break;
-        case Targetable:
-            if (!entity.hasComponent<Hull>())
-                continue;
-            break;
-        }
+        if (!isValidTarget(entity, selection_type)) continue;
+        
         if (!target || glm::length2(position - transform->getPosition()) < glm::length2(position - target_position)) {
             target = entity;
             target_position = transform->getPosition();
@@ -127,14 +116,38 @@ void TargetsContainer::setWaypointIndex(int index)
         waypoint_selection_position = lrr->waypoints[index];
 }
 
-void TargetsContainer::setNext(float max_range, ESelectionType selection_type)
+void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type)
 {
     //TODO
 }
 
-void TargetsContainer::setNext(float max_range, ESelectionType selection_type, FactionRelation relation)
+void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type, FactionRelation relation)
 {
     //TODO
+}
+
+bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType selection_type)
+{
+    if (entity == my_spaceship) return false;
+
+    switch(selection_type)
+    {
+    case Selectable:
+        if (entity.hasComponent<Hull>()) return true;
+        if (entity.getComponent<ScanState>()) return true;
+        if (entity.getComponent<ShareShortRangeRadar>()) return true;
+        break;
+    case Targetable:
+        if (entity.hasComponent<Hull>()) return true;
+        break;
+    case Scannable:
+        if (entity.hasComponent<Hull>()) return true;
+        if (entity.getComponent<ScanState>()) return true;
+        if (entity.getComponent<ScienceDescription>()) return true;
+        if (entity.getComponent<ShareShortRangeRadar>()) return true;
+        break;
+    }
+    return false;
 }
 
 /*NEXT
