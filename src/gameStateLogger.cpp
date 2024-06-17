@@ -9,6 +9,7 @@
 
 #include "gameStateLogger.h"
 #include "gameGlobalInfo.h"
+#include "engine.h"
 
 class JSONGenerator
 {

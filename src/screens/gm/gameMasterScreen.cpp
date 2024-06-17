@@ -410,8 +410,8 @@ void GameMasterScreen::update(float delta)
 
     if (!gameGlobalInfo->gm_messages.empty())
     {
-        GMMessage* message = &gameGlobalInfo->gm_messages.front();
-        message_text->setText(message->text);
+        const auto& message = gameGlobalInfo->gm_messages.front();
+        message_text->setText(message);
         message_frame->show();
     } else {
         message_frame->hide();

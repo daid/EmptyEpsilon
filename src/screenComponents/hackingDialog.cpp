@@ -7,6 +7,7 @@
 #include "lightsOut.h"
 #include "miniGame.h"
 #include "i18n.h"
+#include "engine.h"
 #include <memory>
 #include <algorithm>
 

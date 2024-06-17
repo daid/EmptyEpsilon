@@ -2,13 +2,11 @@
 #define GAME_GLOBAL_INFO_H
 
 #include "script.h"
-#include "GMScriptCallback.h"
-#include "GMMessage.h"
+#include "script/gm.h"
 #include "gameStateLogger.h"
 #include "components/faction.h"
 #include "Updatable.h"
 #include "multiplayer.h"
-#include "GMMessage.h"
 #include "scriptInterface.h"
 #include <list>
 #include <functional>
@@ -64,7 +62,7 @@ public:
 
     //List of script functions that can be called from the GM interface (Server only!)
     std::list<GMScriptCallback> gm_callback_functions;
-    std::list<GMMessage> gm_messages;
+    std::list<string> gm_messages;
     //When active, all comms request goto the GM as chat, and normal scripted converstations are disabled. This does not disallow player<->player ship comms.
     bool intercept_all_comms_to_gm;
 

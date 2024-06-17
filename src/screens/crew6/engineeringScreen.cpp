@@ -2,6 +2,7 @@
 #include "gameGlobalInfo.h"
 #include "engineeringScreen.h"
 #include "i18n.h"
+#include "engine.h"
 
 #include "components/reactor.h"
 #include "components/coolant.h"

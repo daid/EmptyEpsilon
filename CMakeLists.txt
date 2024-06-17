@@ -237,8 +237,6 @@ set(MAIN_SOURCES
     src/missileWeaponData.cpp
     src/mesh.cpp
     src/scenarioInfo.cpp
-    src/GMScriptCallback.cpp
-    src/GMMessage.cpp
     src/tutorialGame.cpp
     src/shaderRegistry.cpp
     src/glObjects.cpp
@@ -521,6 +519,8 @@ set(MAIN_SOURCES
     src/script/components.cpp
     src/script/dataStorage.h
     src/script/dataStorage.cpp
+    src/script/gm.h
+    src/script/gm.cpp
 
     src/ai/aiFactory.h
     src/ai/ai.h
@@ -533,8 +533,6 @@ set(MAIN_SOURCES
     src/gameStateLogger.h
     src/glObjects.h
     src/GMActions.h
-    src/GMMessage.h
-    src/GMScriptCallback.h
     src/hardware/devices/dmx512SerialDevice.h
     src/hardware/devices/enttecDMXProDevice.h
     src/hardware/devices/philipsHueDevice.h

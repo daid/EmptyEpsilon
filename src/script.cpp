@@ -16,6 +16,7 @@
 #include "io/json.h"
 #include "script/enum.h"
 #include "script/dataStorage.h"
+#include "script/gm.h"
 #include "script/component.h"
 
 
@@ -814,6 +815,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
 
     env.setGlobal("getEEVersion", &luaGetEEVersion);
     registerScriptDataStorageFunctions(env);
+    registerScriptGMFunctions(env);
 
     auto res = env.runFile<void>("luax.lua");
     LuaConsole::checkResult(res);

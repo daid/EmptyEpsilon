@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "random.h"
 #include "components/scanning.h"
+#include "engine.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_slider.h"
