@@ -282,7 +282,7 @@ function missionGotoTransport(delta)
 Target its impulse engines with your beam weapons to halt its progress.]])
         )
 
-        for _, transport in ipairs(transports) do
+        for idx, transport in ipairs(transports) do
             transport:orderDock(research_station)
         end
 

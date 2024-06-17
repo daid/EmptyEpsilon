@@ -370,7 +370,7 @@ addToSequence(relayTutorial, _([[Your station also includes this radar map.
 
 On this map, you can detect objects within short-range radar range of all allied ships and stations. Everything else is invisible to you. This gives you a different view from the science officer, because you can scan the contents of nebulae.]]))
 addToSequence(relayTutorial, _([[Finally, you control your ship's probes. Probes can expand your radar view. Launch a probe to the top right, toward the ship designated DMY-01.]]), function()
-    for _, obj in ipairs(getObjectsInRadius(20000, -20000, 5000)) do
+    for idx, obj in ipairs(getObjectsInRadius(20000, -20000, 5000)) do
         if obj.typeName == "ScanProbe" then
             return true
         end

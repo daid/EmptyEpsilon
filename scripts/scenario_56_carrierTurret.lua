@@ -323,7 +323,7 @@ function GMSpawnsEnemies()
 	gmPlayer = nil
 	gmSelected = false
 	gmSelect = getGMSelection()
-	for _, obj in ipairs(gmSelect) do
+	for idx, obj in ipairs(gmSelect) do
 		if obj.typeName == "PlayerSpaceship" then
 			gmPlayer = obj
 			break
@@ -335,7 +335,7 @@ function GMSpawnsEnemies()
 	px, py = gmPlayer:getPosition()
 	sx, sy = vectorFromAngle(random(0,360),random(20000,30000))
 	ntf = spawnEnemies(px+sx,py+sy,dangerValue,targetEnemyStation:getFaction())
-	for _, enemy in ipairs(ntf) do
+	for idx, enemy in ipairs(ntf) do
 		enemy:orderAttack(gmPlayer)
 	end
 end

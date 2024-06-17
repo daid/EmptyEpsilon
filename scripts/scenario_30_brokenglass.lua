@@ -42,7 +42,7 @@ function init()
     SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("SE Checkpoint"):onTakingDamage(CommsBeingAttacked):setPosition(73035, 26331):setRepairDocked(true):setRestocksScanProbes(true):setSharesEnergyWithDocked(true),
     SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("NE Checkpoint"):onTakingDamage(CommsBeingAttacked):setPosition(75919, -30678):setRepairDocked(true):setRestocksScanProbes(true):setSharesEnergyWithDocked(true)
   }
-  for _, stn in ipairs(Patrol_stations) do
+  for idx, stn in ipairs(Patrol_stations) do
     stn:setCommsFunction(CommsPatrolStation)
   end
 
@@ -372,7 +372,7 @@ function init()
     self:setCallSign("")
     local x, y = self:getPosition()
     local defenders = SpawnEnemies(x + irandom(-5000, 5000), y + irandom(-5000, 5000), random(.6,1), "Ghosts")
-    for _, ship in ipairs(defenders) do
+    for idx, ship in ipairs(defenders) do
       table.insert(Defence_station.ghost_defenders, ship)
     end
     Player:addToShipLog(_("nebulaBonuses-shipLog", "We have activated a drone defence system!"),"Red")
@@ -859,7 +859,7 @@ end
 function InitDroneStations()
   Defence_station.drones_think_were_friendly = false
   Defence_station.convoy_enemies = {}
-  for _, stn in ipairs(Drone_stations) do
+  for idx, stn in ipairs(Drone_stations) do
     stn.spawns_left = 5
     stn:setCanBeDestroyed(false)
     stn:onTakingDamage(DroneStationGoAggro)

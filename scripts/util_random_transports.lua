@@ -12,7 +12,7 @@ end
 
 function init()
     tmp = SupplyDrop()
-    for _, obj in ipairs(tmp:getObjectsInRange(100000)) do
+    for idx, obj in ipairs(tmp:getObjectsInRange(100000)) do
         if obj.typeName == "SpaceStation" then
             table.insert(stationList, obj)
         end

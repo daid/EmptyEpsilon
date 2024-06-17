@@ -471,7 +471,7 @@ function GMSpawnsEnemies()
 -- Let the GM spawn a random group of enemies to attack a player
 	local gmPlayer = nil
 	local gmSelect = getGMSelection()
-	for _, obj in ipairs(gmSelect) do
+	for idx, obj in ipairs(gmSelect) do
 		if obj.typeName == "PlayerSpaceship" then
 			gmPlayer = obj
 			break
@@ -483,7 +483,7 @@ function GMSpawnsEnemies()
 	local px, py = gmPlayer:getPosition()
 	local sx, sy = vectorFromAngle(random(0,360),random(20000,30000))
 	ntf = spawnEnemies(px+sx,py+sy,dangerValue,targetEnemyStation:getFaction())
-	for _, enemy in ipairs(ntf) do
+	for idx, enemy in ipairs(ntf) do
 		enemy:orderAttack(gmPlayer)
 	end
 end
@@ -10464,7 +10464,7 @@ function endStatistics()
 	survivedFriendlyStations = 0
 	destroyedNeutralStations = 0
 	survivedNeutralStations = 0
-	for _, station in pairs(originalStationList) do
+	for idx, station in pairs(originalStationList) do
 		tp = getPlayerShip(-1)
 		if tp ~= nil and tp:isValid() then
 			if station:isFriendly(tp) then
@@ -10484,7 +10484,7 @@ function endStatistics()
 	destroyedFriendlyStations = startingFriendlyStations - survivedFriendlyStations
 	destroyedNeutralStations = startingNeutralStations - survivedNeutralStations
 	enemyStationsSurvived = 0
-	for _, station in pairs(enemyStationList) do
+	for idx, station in pairs(enemyStationList) do
 		if station:isValid() then
 			enemyStationsSurvived = enemyStationsSurvived + 1
 		end
