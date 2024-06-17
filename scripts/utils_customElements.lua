@@ -76,7 +76,7 @@ end
 -- @param caption: Label of the button (parameter of PlayerShip:addCustomButton)
 -- @param callback: Callback function to be run when button is pressed (parameter of PlayerShip:addCustomButton)
 function customElements:addCustomButton(player_ship, operator, name, caption, callback)
-    for _, station in ipairs(self:operatorPositions(operator)) do
+    for idx, station in ipairs(self:operatorPositions(operator)) do
         player_ship:addCustomButton(station, name..station, caption, callback)
     end
 end
@@ -87,7 +87,7 @@ end
 -- @param name: String identifier of the message (parameter of PlayerShip:addCustomInfo)
 -- @param caption: Text content of the info field (parameter of PlayerShip:addCustomInfo)
 function customElements:addCustomInfo(player_ship, operator, name, caption)
-    for _, station in ipairs(self:operatorPositions(operator)) do
+    for idx, station in ipairs(self:operatorPositions(operator)) do
         player_ship:addCustomInfo(station, name..station, caption)
     end
 end
@@ -98,7 +98,7 @@ end
 -- @param name: String identifier of the message (parameter of PlayerShip:addCustomMessage)
 -- @param caption: Text of the message (parameter of PlayerShip:addCustomMessage)
 function customElements:addCustomMessage(player_ship, operator, name, caption)
-    for _, station in ipairs(self:operatorPositions(operator)) do
+    for idx, station in ipairs(self:operatorPositions(operator)) do
         if self.close_all_messages_upon_close then
             player_ship:addCustomMessageWithCallback(station, name..station, caption, function()
                 customElements:removeCustom(player_ship, name)
@@ -116,7 +116,7 @@ end
 -- @param caption: Text of the message (parameter of PlayerShip:addCustomMessageWithCallback)
 -- @param callback: Callback function to be run when message is closed (parameter of PlayerShip:addCustomMessageWithCallback)
 function customElements:addCustomMessageWithCallback(player_ship, operator, name, caption, callback)
-    for _, station in ipairs(self:operatorPositions(operator)) do
+    for idx, station in ipairs(self:operatorPositions(operator)) do
         if self.close_all_messages_upon_close then
             player_ship:addCustomMessageWithCallback(station, name..station, caption, function()
                 customElements:removeCustom(player_ship, name)
@@ -135,7 +135,7 @@ function customElements:removeCustom(player_ship, name)
     local crew_positions = {"Helms", "Weapons", "Engineering", "Science", "Relay", "Tactical", 
                             "Engineering+", "Operations", "Single", "DamageControl", "PowerManagement", 
                             "Database", "AltRelay", "CommsOnly", "ShipLog"}
-    for _, station in ipairs(crew_positions) do
+    for idx, station in ipairs(crew_positions) do
         player_ship:removeCustom(name..station)
     end
 end
@@ -148,7 +148,7 @@ end
 -- @param operator_key: String identification of existing operator
 function customElements:printOperatorPositions(operator_key)
     print("Stations for "..operator_key..": ")
-    for _, station in ipairs(self:operatorPositions(operator_key)) do
+    for idx, station in ipairs(self:operatorPositions(operator_key)) do
         print (station)
     end
     print("=====")

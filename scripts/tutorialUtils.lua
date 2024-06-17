@@ -73,7 +73,7 @@ function resetPlayerShip()
     player:setWarpDrive(false)
     player:setImpulseMaxSpeed(1)
     player:setRotationMaxSpeed(1)
-    for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
+    for idx, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
         player:setSystemHealth(system, 1.0)
         player:setSystemHeat(system, 0.0)
         player:setSystemPower(system, 1.0)

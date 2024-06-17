@@ -237,12 +237,12 @@ function update(delta)
     -- Count enemies and friends
     local enemy_count = 0
     local friendly_count = 0
-    for _, enemy in ipairs(enemyList) do
+    for idx, enemy in ipairs(enemyList) do
         if enemy:isValid() then
             enemy_count = enemy_count + 1
         end
     end
-    for _, friendly in ipairs(friendlyList) do
+    for idx, friendly in ipairs(friendlyList) do
         if friendly:isValid() then
             friendly_count = friendly_count + 1
         end

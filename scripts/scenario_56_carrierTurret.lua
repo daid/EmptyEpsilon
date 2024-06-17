@@ -323,7 +323,7 @@ function GMSpawnsEnemies()
 	gmPlayer = nil
 	gmSelected = false
 	gmSelect = getGMSelection()
-	for _, obj in ipairs(gmSelect) do
+	for idx, obj in ipairs(gmSelect) do
 		if obj.typeName == "PlayerSpaceship" then
 			gmPlayer = obj
 			break
@@ -335,7 +335,7 @@ function GMSpawnsEnemies()
 	px, py = gmPlayer:getPosition()
 	sx, sy = vectorFromAngle(random(0,360),random(20000,30000))
 	ntf = spawnEnemies(px+sx,py+sy,dangerValue,targetEnemyStation:getFaction())
-	for _, enemy in ipairs(ntf) do
+	for idx, enemy in ipairs(ntf) do
 		enemy:orderAttack(gmPlayer)
 	end
 end
@@ -2756,7 +2756,7 @@ function transportPlot(delta)
 		lastTransportCount = transportCount
 		if transportCount < #transportList then
 			tempTransportList = {}
-			for _, obj in ipairs(transportList) do
+			for idx, obj in ipairs(transportList) do
 				if obj:isValid() then
 					table.insert(tempTransportList,obj)
 				end
@@ -2881,13 +2881,13 @@ function handleDockedState()
 	end
 	setCommsMessage(oMsg)
 	missilePresence = 0
-	for _, missile_type in ipairs(missile_types) do
+	for idx, missile_type in ipairs(missile_types) do
 		missilePresence = missilePresence + player:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
 		addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
 			setCommsMessage(_("ammo-comms", "What type of ordnance?"))
-			for _, missile_type in ipairs(missile_types) do
+			for idx, missile_type in ipairs(missile_types) do
 				if player:getWeaponStorageMax(missile_type) > 0 then
 					addCommsReply(string.format(_("ammo-comms", "%s (%d rep each)"), missile_type, getWeaponCost(missile_type)), function()
 						handleWeaponRestock(missile_type)
@@ -3501,7 +3501,7 @@ function handleUndockedState()
 		addCommsReply(_("helpfullWarning-comms", "See any enemies in your area?"), function()
 			if player:isFriendly(comms_target) then
 				enemiesInRange = 0
-				for _, obj in ipairs(comms_target:getObjectsInRange(30000)) do
+				for idx, obj in ipairs(comms_target:getObjectsInRange(30000)) do
 					if obj:isEnemy(player) then
 						enemiesInRange = enemiesInRange + 1
 					end
@@ -4020,7 +4020,7 @@ function friendlyComms(comms_data)
 			setCommsMessage(msg);
 			addCommsReply(_("Back"), commsShip)
 		end)
-		for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
+		for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 			if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 				addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 					setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
@@ -4041,7 +4041,7 @@ function friendlyComms(comms_data)
 				localTargetCount = 0
 				enemyTargetList = {}
 				etlCount = 0
-				for _, obj in ipairs(comms_target:getObjectsInRange(15000)) do
+				for idx, obj in ipairs(comms_target:getObjectsInRange(15000)) do
 					if comms_target:isEnemy(obj) then
 						addCommsReply(obj:getCallSign(), function()
 							setCommsMessage(_("shipAssist-comms", "Attacking ") .. obj:getCallSign())
@@ -4558,7 +4558,7 @@ function setEnemyDefenseFleet(delta)
 			else
 				ntf = spawnEnemies(defx,defy,1,enemyStationList[i]:getFaction())
 			end
-			for _, enemy in ipairs(ntf) do
+			for idx, enemy in ipairs(ntf) do
 				enemy:orderDefendTarget(enemyStationList[i])
 			end
 		end
@@ -4573,7 +4573,7 @@ function threadedPursuit(delta)
 		scx, scy = p:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(20000,30000))
 		ef2 = spawnEnemies(scx+cpx,scy+cpy,.8)
-		for _, enemy in ipairs(ef2) do
+		for idx, enemy in ipairs(ef2) do
 			if diagnostic then
 				enemy:setCallSign(enemy:getCallSign() .. "ef2")
 			end
@@ -4586,7 +4586,7 @@ function threadedPursuit(delta)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,.8)
-		for _, enemy in ipairs(ef3) do
+		for idx, enemy in ipairs(ef3) do
 			if diagnostic then
 				enemy:setCallSign(enemy:getCallSign() .. "ef3")
 			end
@@ -4598,7 +4598,7 @@ function threadedPursuit(delta)
 		scx, scy = p:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(40000,50000))
 		ef4 = spawnEnemies(scx+cpx,scy+cpy,1)
-		for _, enemy in ipairs(ef4) do
+		for idx, enemy in ipairs(ef4) do
 			if diagnostic then
 				enemy:setCallSign(enemy:getCallSign() .. "ef4")
 			end
@@ -4630,11 +4630,11 @@ function pressureWaves(delta)
 					ntf = spawnEnemies(esx,esy,dangerValue,enemyStationList[i]:getFaction())
 					if random(1,5) <= 3 then
 						p = closestPlayerTo(enemyStationList[i])
-						for _, enemy in ipairs(ntf) do
+						for idx, enemy in ipairs(ntf) do
 							enemy:orderAttack(p)
 						end
 					else
-						for _, enemy in ipairs(ntf) do
+						for idx, enemy in ipairs(ntf) do
 							enemy:orderDefendTarget(enemyStationList[i])
 						end
 					end
@@ -4645,7 +4645,7 @@ function pressureWaves(delta)
 			ntf = spawnEnemies(mnx,mny,dangerValue,targetEnemyStation:getFaction())
 			if random(1,5) >= 4 then
 				if homeStation:isValid() then
-					for _, enemy in ipairs(ntf) do
+					for idx, enemy in ipairs(ntf) do
 						enemy:orderAttack(homeStation)
 					end
 				end
@@ -4657,7 +4657,7 @@ function pressureWaves(delta)
 			px, py = p:getPosition()
 			ntf = spawnEnemies((esx+px)/2,(esy+py)/2,dangerValue,targetEnemyStation:getFaction())
 			if random(1,5) <= 2 then
-				for _, enemy in ipairs(ntf) do
+				for idx, enemy in ipairs(ntf) do
 					enemy:orderAttack(p)
 				end
 			end
@@ -4672,7 +4672,7 @@ function pressureWaves(delta)
 			ntf = spawnEnemies(hsx+spx,hsy+spy,dangerValue,targetEnemyStation:getFaction())
 			if random(1,5) <= 3 then
 				if homeStation:isValid() then
-					for _, enemy in ipairs(ntf) do
+					for idx, enemy in ipairs(ntf) do
 						enemy:orderFlyTowards(hsx,hsy)
 					end
 				end
@@ -4686,7 +4686,7 @@ end
 -----------------------------------------------------------------]]--
 function destroyef2(delta)
 	ef2Count = 0
-	for _, enemy in ipairs(ef2) do
+	for idx, enemy in ipairs(ef2) do
 		if enemy:isValid() then
 			ef2Count = ef2Count + 1
 		end
@@ -4727,7 +4727,7 @@ function betweenPlot2fleet()
 	scx, scy = p:getPosition()
 	cpx, cpy = vectorFromAngle(random(0,360),random(30000,35000))
 	ef2 = spawnEnemies(scx+cpx,scy+cpy,dangerValue)
-	for _, enemy in ipairs(ef2) do
+	for idx, enemy in ipairs(ef2) do
 		if diagnostic then
 			enemy:setCallSign(enemy:getCallSign() .. "ef2")
 		end
@@ -5021,7 +5021,7 @@ end
 function destroyef3(delta)
 	plot3name = "destroyef3"
 	ef3Count = 0
-	for _, enemy in ipairs(ef3) do
+	for idx, enemy in ipairs(ef3) do
 		if enemy:isValid() then
 			ef3Count = ef3Count + 1
 		end
@@ -5062,7 +5062,7 @@ function betweenPlot3fleet()
 	scx, scy = p:getPosition()
 	cpx, cpy = vectorFromAngle(random(0,360),random(30000,35000))
 	ef3 = spawnEnemies(scx+cpx,scy+cpy,dangerValue)
-	for _, enemy in ipairs(ef3) do
+	for idx, enemy in ipairs(ef3) do
 		if diagnostic then
 			enemy:setCallSign(enemy:getCallSign() .. "ef3")
 		end
@@ -5429,7 +5429,7 @@ end
 function destroyef4(delta)
 	plot4name = "destroyef4"
 	ef4Count = 0
-	for _, enemy in ipairs(ef4) do
+	for idx, enemy in ipairs(ef4) do
 		if enemy:isValid() then
 			ef4Count = ef4Count + 1
 		end
@@ -5890,7 +5890,7 @@ function endStatistics()
 	survivedFriendlyStations = 0
 	destroyedNeutralStations = 0
 	survivedNeutralStations = 0
-	for _, station in pairs(originalStationList) do
+	for idx, station in pairs(originalStationList) do
 		if station:isFriendly(getPlayerShip(-1)) then
 			if station:isValid() then
 				survivedStations = survivedStations + 1
@@ -5907,7 +5907,7 @@ function endStatistics()
 	destroyedFriendlyStations = startingFriendlyStations - survivedFriendlyStations
 	destroyedNeutralStations = startingNeutralStations - survivedNeutralStations
 	enemyStationsSurvived = 0
-	for _, station in pairs(enemyStationList) do
+	for idx, station in pairs(enemyStationList) do
 		if station:isValid() then
 			enemyStationsSurvived = enemyStationsSurvived + 1
 		end

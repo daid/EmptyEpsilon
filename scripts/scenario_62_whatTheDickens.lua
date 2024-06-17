@@ -840,7 +840,7 @@ function fezFleet(delta)
 end
 function destroyFezFleet(delta)
 	fezFleetCount = 0
-	for _, enemy in ipairs(fezList) do
+	for idx, enemy in ipairs(fezList) do
 		if enemy:isValid() then
 			fezFleetCount = fezFleetCount + 1
 		end
@@ -890,7 +890,7 @@ function destroyBelleFleet(delta)
 		victory("Exuari")
 	end
 	belleFleetCount = 0
-	for _, enemy in ipairs(belleList) do
+	for idx, enemy in ipairs(belleList) do
 		if enemy:isValid() then
 			belleFleetCount = belleFleetCount + 1
 		end
@@ -954,7 +954,7 @@ function arriveNearBedlam(delta)
 end
 function destroyCratchitFleet(delta)
 	cratchitFleetCount = 0
-	for _, enemy in ipairs(cratchitList) do
+	for idx, enemy in ipairs(cratchitList) do
 		if enemy:isValid() then
 			cratchitFleetCount = cratchitFleetCount + 1
 		end
@@ -1081,7 +1081,7 @@ function returnTim(delta)
 	end
 end
 function endChristmasPast(delta)
-	for _, enemy in ipairs(turkeyList) do
+	for idx, enemy in ipairs(turkeyList) do
 		enemy:destroy()
 	end
 	friendTurkeySurprise:destroy()

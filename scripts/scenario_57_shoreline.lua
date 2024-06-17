@@ -7299,7 +7299,7 @@ function handleDockedState()
 	end
 	setCommsMessage(oMsg)
 	local missilePresence = 0
-	for _, missile_type in ipairs(missile_types) do
+	for idx, missile_type in ipairs(missile_types) do
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
@@ -7310,7 +7310,7 @@ function handleDockedState()
 			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
 			addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
 				setCommsMessage(_("ammo-comms", "What type of ordnance?"))
-				for _, missile_type in ipairs(missile_types) do
+				for idx, missile_type in ipairs(missile_types) do
 					if comms_source:getWeaponStorageMax(missile_type) > 0 then
 						addCommsReply(string.format(_("ammo-comms", "%s (%d rep each)"), missile_type, getWeaponCost(missile_type)), function()
 							handleWeaponRestock(missile_type)
@@ -7717,7 +7717,7 @@ function handleUndockedState()
 		addCommsReply(_("helpfullWarning-comms", "See any enemies in your area?"), function()
 			if comms_source:isFriendly(comms_target) then
 				local enemiesInRange = 0
-				for _, obj in ipairs(comms_target:getObjectsInRange(30000)) do
+				for idx, obj in ipairs(comms_target:getObjectsInRange(30000)) do
 					if obj:isEnemy(comms_source) then
 						enemiesInRange = enemiesInRange + 1
 					end
@@ -8667,7 +8667,7 @@ function altFriendlyShipComms()
 			setCommsMessage(msg);
 			addCommsReply(_("Back"), altShipComms)
 		end)
-		for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
+		for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 			if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 				addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 					setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
@@ -9131,7 +9131,7 @@ function friendlyComms(comms_data)
 			setCommsMessage(msg);
 			addCommsReply(_("Back"), altShipComms)
 		end)
-		for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
+		for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 			if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 				addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 					setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
@@ -9740,7 +9740,7 @@ function helpWarn(delta)
 	end
 end
 function waveNear(enemyWaveList)
-	for _, enemy in pairs(enemyWaveList) do
+	for idx, enemy in pairs(enemyWaveList) do
 		if enemy ~= nil and enemy:isValid() then
 			local playerInRange = false -- no warning if a player in range
 			for p7idx=1,8 do
@@ -9759,7 +9759,7 @@ function waveNear(enemyWaveList)
 			if not playerInRange then
 				local distToEnemy = 999999
 				local closestStation = nil
-				for _, obj in ipairs(enemy:getObjectsInRange(30000)) do
+				for idx2, obj in ipairs(enemy:getObjectsInRange(30000)) do
 					if obj ~= nil and obj:isValid() then
 						if obj.typeName == "SpaceStation" then
 							if obj:getFaction() == "Human Navy" or obj:getFaction() == "Independent" then

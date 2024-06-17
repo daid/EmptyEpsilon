@@ -614,7 +614,7 @@ function constructEnvironment()
 				local spaced_station = true
 				local closest_station_distance = 999999
 				local closest_station = nil
-				for _, station in ipairs(station_list) do
+				for idx, station in ipairs(station_list) do
 					local current_distance = distance(station, ox, oy)
 					if current_distance < closest_station_distance then
 						closest_station_distance = current_distance
@@ -898,7 +898,7 @@ function updatePlayerSoftTemplate(p)
 	local system_types = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield"}
 	p.normal_coolant_rate = {}
 	p.normal_power_rate = {}
-	for _, system in ipairs(system_types) do
+	for idx, system in ipairs(system_types) do
 		p.normal_coolant_rate[system] = p:getSystemCoolantRate(system)
 		p.normal_power_rate[system] = p:getSystemPowerRate(system)
 	end

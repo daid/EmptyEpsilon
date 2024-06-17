@@ -386,13 +386,13 @@ With the Kraylor flagship out of the way, we can land the final blow!]])
     -- Count transports. Every 10 seconds, award 1 point per transport docked
     -- with Shangri-La.
     if troop_timer > 10 then
-        for _, transport in ipairs(troops_kraylor) do
+        for idx, transport in ipairs(troops_kraylor) do
             if transport:isValid() and transport:isDocked(shangri_la) then
                 points_kraylor = points_kraylor + 1
             end
         end
 
-        for _, transport in ipairs(troops_human) do
+        for idx, transport in ipairs(troops_human) do
             if transport:isValid() and transport:isDocked(shangri_la) then
                 points_human = points_human + 1
             end

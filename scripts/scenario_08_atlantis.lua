@@ -69,7 +69,7 @@ function init()
     player:setPosition(25276, 133850):setCallSign("Atlantis-1"):setRotation(-90):commandTargetRotation(-90)
 
     -- Set all systems to 0 power.
-    for _, system in ipairs(
+    for idx, system in ipairs(
         {
             "reactor",
             "beamweapons",
@@ -298,7 +298,7 @@ Doppler instability: %i]]),
     --[[TEMP
     mission_state = phase2SeekArtifact
     player:setPosition(310000, -71000)
-    for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
+    for idx, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
         player:setSystemPower(system, 1.0)
         player:commandSetSystemPowerRequest(system, 1.0)
     end
@@ -330,7 +330,7 @@ First, have your engineer power up all systems to 100%, as you are currently in 
 end
 
 function phase1WaitForPowerup(delta)
-    for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "frontshield", "rearshield"}) do
+    for idx, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "frontshield", "rearshield"}) do
         if player:getSystemPower(system) < 1.0 then
             return
         end
@@ -620,7 +620,7 @@ function phase4JumpBackToShipyard(delta)
 Dock with us and we'll take a shot at cracking them.]])
         )
         -- Remove all Kraylor ships attacking the player from the game. We no longer need them, and they could mess things up if they get the time to fly all the way to the shipyard.
-        for _, ship in ipairs(kraylor_defense_line_ships) do
+        for idx, ship in ipairs(kraylor_defense_line_ships) do
             if ship:isValid() then
                 ship:destroy()
             end
@@ -952,7 +952,7 @@ end
 
 function putKraylorDefenseLineOnFullOffense()
     if not kraylor_defense_line_engaged then
-        for _, ship in ipairs(kraylor_defense_line_ships) do
+        for idx, ship in ipairs(kraylor_defense_line_ships) do
             if ship:isValid() then
                 ship:orderAttack(player)
             end
@@ -976,7 +976,7 @@ function update(delta)
     end
 
     -- If the player enters the Kraylor defense line, or engages a forward station, attack with all forces.
-    for _, warp_jammer in ipairs(kraylor_defense_line) do
+    for idx, warp_jammer in ipairs(kraylor_defense_line) do
 		if warp_jammer ~= nil and warp_jammer:isValid() then
 			if distance(player, warp_jammer) < 6000 then
 				putKraylorDefenseLineOnFullOffense()
@@ -984,7 +984,7 @@ function update(delta)
 		end
     end
 
-    for _, station in ipairs(kraylor_forward_line) do
+    for idx, station in ipairs(kraylor_forward_line) do
 		if station ~= nil and station:isValid() then
 			if distance(player, station) < 3000 then
 				putKraylorDefenseLineOnFullOffense()

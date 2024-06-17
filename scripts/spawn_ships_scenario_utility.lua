@@ -1881,7 +1881,7 @@ function spawnRandomArmed(x, y, shape, spawn_distance, spawn_angle, px, py)
 			spawn_angle = random(0,360)
 		end
 		local circle_increment = 360/#enemyList
-		for _, enemy in ipairs(enemyList) do
+		for idx, enemy in ipairs(enemyList) do
 			local dex, dey = vectorFromAngleNorth(spawn_angle,spawn_distance*1000)
 			enemy:setPosition(x+dex,y+dey):setHeading(spawn_angle + 180)
 			spawn_angle = spawn_angle + circle_increment
@@ -2321,7 +2321,7 @@ end
 function setPrebuiltFormationCategoryOh()
 	clearGMFunctions()
 	local form_list = {"O","O2R","O3R","O4R","O5R","O6R","O7R"}
-	for _, form in ipairs(form_list) do
+	for idx, form in ipairs(form_list) do
 		local button_label = form
 		if form == formation_shape then
 			button_label = button_label .. "*"
@@ -2335,7 +2335,7 @@ end
 function setPrebuiltFormationCategorySplat()
 	clearGMFunctions()
 	local form_list = {"*","*12","*18"}
-	for _, form in ipairs(form_list) do
+	for idx, form in ipairs(form_list) do
 		local button_label = form
 		if form == formation_shape then
 			button_label = button_label .. "*"
@@ -2349,7 +2349,7 @@ end
 function setPrebuiltFormationCategoryH()
 	clearGMFunctions()
 	local form_list = {"H"}
-	for _, form in ipairs(form_list) do
+	for idx, form in ipairs(form_list) do
 		local button_label = form
 		if form == formation_shape then
 			button_label = button_label .. "*"
@@ -2363,7 +2363,7 @@ end
 function setPrebuiltFormationCategoryX()
 	clearGMFunctions()
 	local form_list = {"X","X8","Xac","Xac8","X12","Xac12","X16","Xac16"}
-	for _, form in ipairs(form_list) do
+	for idx, form in ipairs(form_list) do
 		local button_label = form
 		if form == formation_shape then
 			button_label = button_label .. "*"
@@ -2377,7 +2377,7 @@ end
 function setPrebuiltFormationCategoryW()
 	clearGMFunctions()
 	local form_list = {"W","W6","Wac","Wac6"}
-	for _, form in ipairs(form_list) do
+	for idx, form in ipairs(form_list) do
 		local button_label = form
 		if form == formation_shape then
 			button_label = button_label .. "*"
@@ -2391,7 +2391,7 @@ end
 function setPrebuiltFormationCategoryM()
 	clearGMFunctions()
 	local form_list = {"M","M6","Mac","Mac6"}
-	for _, form in ipairs(form_list) do
+	for idx, form in ipairs(form_list) do
 		local button_label = form
 		if form == formation_shape then
 			button_label = button_label .. "*"
@@ -2405,7 +2405,7 @@ end
 function setPrebuiltFormationCategoryLine()
 	clearGMFunctions()
 	local form_list = {"/","/ac","-","-4","\\","\\ac","|","|4"}
-	for _, form in ipairs(form_list) do
+	for idx, form in ipairs(form_list) do
 		local button_label = form
 		if form == formation_shape then
 			button_label = button_label .. "*"
@@ -2419,7 +2419,7 @@ end
 function setPrebuiltFormationCategoryA()
 	clearGMFunctions()
 	local form_list = {"A","A4","Aac","Aac4"}
-	for _, form in ipairs(form_list) do
+	for idx, form in ipairs(form_list) do
 		local button_label = form
 		if form == formation_shape then
 			button_label = button_label .. "*"
@@ -2433,7 +2433,7 @@ end
 function setPrebuiltFormationCategoryV()
 	clearGMFunctions()
 	local form_list = {"V","V4","Vac","Vac4"}
-	for _, form in ipairs(form_list) do
+	for idx, form in ipairs(form_list) do
 		local button_label = form
 		if form == formation_shape then
 			button_label = button_label .. "*"
@@ -2466,7 +2466,7 @@ function setPrebuiltFollower()
 			follower_suffix = "*"
 		end
 		local leader_suffix = ""
-		for _, leader in ipairs(leader_list) do
+		for idx, leader in ipairs(leader_list) do
 			if leader == prebuilt_leader then
 				leader_suffix = "*"
 				break
@@ -2476,7 +2476,7 @@ function setPrebuiltFollower()
 			prebuilt_follower = follower
 			local leader_list = prebuilt_followers[prebuilt_follower]
 			local leader_in_list = false
-			for _, leader in ipairs(leader_list) do
+			for idx, leader in ipairs(leader_list) do
 				if leader == prebuilt_leader then
 					leader_in_list = true
 					break
@@ -2502,7 +2502,7 @@ function setPrebuiltLeader()
 			leader_suffix = "*"
 		end
 		local follower_suffix = ""
-		for _, follower in ipairs(follower_list) do
+		for idx, follower in ipairs(follower_list) do
 			if follower == prebuilt_follower then
 				follower_suffix = "*"
 				break
@@ -2512,7 +2512,7 @@ function setPrebuiltLeader()
 			prebuilt_leader = leader
 			local follower_list = prebuilt_leaders[prebuilt_leader]
 			local follower_in_list = false
-			for _, follower in ipairs(follower_list) do
+			for idx, follower in ipairs(follower_list) do
 				if follower == prebuilt_follower then
 					follower_in_list = true
 					break
@@ -2611,7 +2611,7 @@ function gmClicksetPrebuiltFleetTarget(x,y)
 	local prebuilt_angle = angleFromVectorNorth(x,y,prebuilt_fleet_x,prebuilt_fleet_y)
 	leader_ship:setHeading(prebuilt_angle)
 	leader_ship.formation_ships = {}
-	for _, form in ipairs(fly_formation[formation_shape]) do
+	for idx, form in ipairs(fly_formation[formation_shape]) do
 		local ship = ship_template[prebuilt_follower].create(fleetSpawnFaction,prebuilt_follower)
 		local form_x, form_y = vectorFromAngleNorth(prebuilt_angle + form.angle, form.dist * formation_spacing)
 		local form_prime_x, form_prime_y = vectorFromAngle(form.angle, form.dist * formation_spacing)
@@ -2670,7 +2670,7 @@ function spawnGMShip()
 		end
 	end
 	table.sort(sandbox_templates)
-	for _, name in ipairs(sandbox_templates) do
+	for idx, name in ipairs(sandbox_templates) do
 		local short_name = string.sub(name,2)
 		local button_label = short_name
 		if string.sub(name,1,1) == "a" then
@@ -2777,7 +2777,7 @@ function setFighterWing()
 			end
 		end
 		clearGMFunctions()
-		for _,fighter in ipairs(wing_types) do
+		for idx, fighter in ipairs(wing_types) do
 			local button_label = fighter
 			if fighter == wing_type then
 				button_label = button_label .. "*"
