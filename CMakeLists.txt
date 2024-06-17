@@ -502,6 +502,8 @@ set(MAIN_SOURCES
     src/multiplayer/moveto.cpp
     src/multiplayer/internalrooms.h
     src/multiplayer/internalrooms.cpp
+    src/multiplayer/zone.h
+    src/multiplayer/zone.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

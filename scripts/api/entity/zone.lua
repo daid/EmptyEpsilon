@@ -33,7 +33,7 @@ end
 --- Defaults to white (255,255,255).
 --- Example: zone:setColor(255,140,0)
 function Entity:setColor(r, g, b)
-    if self.components.zone then self.components.zone.color = {r, g, b} end
+    if self.components.zone then self.components.zone.color = {r, g, b, 255} end
     return self
 end
 --- Sets this Zone's text label, rendered at the zone's center point.

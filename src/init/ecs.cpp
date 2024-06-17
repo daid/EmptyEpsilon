@@ -35,6 +35,7 @@
 #include "multiplayer/spin.h"
 #include "multiplayer/moveto.h"
 #include "multiplayer/radarblock.h"
+#include "multiplayer/zone.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -118,7 +119,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<TargetReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpDriveReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpJammerReplication>();
-    //Zone
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ZoneReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::TransformReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::PhysicsReplication>();
 
