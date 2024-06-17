@@ -18677,16 +18677,16 @@ function continuousSpawn(delta)
 				if continuous_spawn_diagnostic then print("pace factor:",pace_factor,"balance factor:",balance_factor,"Ene:",active_enemy_strength,"Frn:",active_friendly_strength,"Neu:",active_neutral_strength) end
 				if origin_station:isEnemy(spawn_target) then
 					fleet, fleet_strength = spawnEnemies(ox, oy,danger_value,origin_station:getFaction())
-					for _, ship in ipairs(fleet) do
+					for idx, ship in ipairs(fleet) do
 						table.insert(cpu_ships,ship)
 					end
 					if random(1,100) < 30 then
-						for _,ship in ipairs(fleet) do
+						for idx,ship in ipairs(fleet) do
 							ship:orderAttack(spawn_target)
 						end
 						if continuous_spawn_diagnostic then print("Enemy fleet from:",origin_station:getCallSign(),"attacking:",spawn_target:getCallSign(),"danger:",danger_value,"strength:",fleet_strength) end
 					else
-						for _,ship in ipairs(fleet) do
+						for idx,ship in ipairs(fleet) do
 							local tx, ty = spawn_target:getPosition()
 							ship:orderFlyTowards(tx, ty)
 						end
