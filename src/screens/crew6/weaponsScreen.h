@@ -24,6 +24,7 @@ private:
     GuiMissileTubeControls* tube_controls;
     GuiRotationDial* missile_aim;
     GuiToggleButton* lock_aim;
+    GuiElement* beam_info_box;
 public:
     WeaponsScreen(GuiContainer* owner);
 

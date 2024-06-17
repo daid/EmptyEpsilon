@@ -8,6 +8,7 @@
 #include "components/shields.h"
 #include "components/target.h"
 #include "components/radar.h"
+#include "components/beamweapon.h"
 #include "components/collision.h"
 
 #include "screenComponents/missileTubeControls.h"
@@ -66,7 +67,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
 
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
-        GuiElement* beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
+        beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
         beam_info_box->setPosition(-20, -120, sp::Alignment::BottomRight)->setSize(280, 150);
         (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam info"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))->setSize(GuiElement::GuiSizeMax, 50);
@@ -128,6 +129,8 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
             targets.set(sp::ecs::Entity{});
 
         missile_aim->setVisible(tube_controls->getManualAim());
+        if (beam_info_box)
+            beam_info_box->setVisible(my_spaceship.hasComponent<BeamWeaponSys>());
     }
     GuiOverlay::onDraw(renderer);
 }

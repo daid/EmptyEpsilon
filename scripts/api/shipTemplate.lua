@@ -80,8 +80,8 @@ end
 --- template:setClass(_("class","Frigate"),_("subclass","Cruiser"))
 function ShipTemplate:setClass(class, subclass)
     self.docking_port = {
-        dock_class = class
-        dock_subclass = subclass
+        dock_class = class,
+        dock_subclass = subclass,
     }
     if self.__type == "ship" or self.__type == nil then
         self.docking_port.auto_reload_missiles = true

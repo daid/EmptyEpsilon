@@ -63,7 +63,13 @@ void GuiMissileTubeControls::onUpdate()
     if (!my_spaceship || !isVisible())
         return;
     auto tubes = my_spaceship.getComponent<MissileTubes>();
-    if (!tubes) return;
+    if (!tubes) {
+        for (int n = 0; n < MW_Count; n++)
+            load_type_rows[n].layout->hide();
+        for(auto& row : rows)
+            row.layout->hide();
+        return;
+    }
     for (int n = 0; n < MW_Count; n++)
     {
         load_type_rows[n].button->setText(getLocaleMissileWeaponName(EMissileWeapons(n)) + " [" + string(tubes->storage[n]) + "/" + string(tubes->storage_max[n]) + "]");

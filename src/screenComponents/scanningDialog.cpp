@@ -49,7 +49,7 @@ void GuiScanningDialog::onDraw(sp::RenderTarget& target)
     updateSignal();
 
     auto ss = my_spaceship.getComponent<ScienceScanner>();
-    if (!ss) return;
+    if (!ss) { hide(); return; }
     auto scanstate = ss->target.getComponent<ScanState>();
     if (scanstate && scanstate->complexity > 0)
     {
