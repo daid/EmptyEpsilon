@@ -18,6 +18,12 @@
 #include "script/dataStorage.h"
 #include "script/gm.h"
 #include "script/component.h"
+#include "components/impulse.h"
+#include "components/warpdrive.h"
+#include "components/maneuveringthrusters.h"
+#include "components/target.h"
+#include "systems/jumpsystem.h"
+#include "systems/missilesystem.h"
 
 
 /// void require(string filename)
@@ -632,6 +638,77 @@ static int luaFromJSON(lua_State* L)
     return argc;
 }
 
+void luaCommandTargetRotation(sp::ecs::Entity ship, float rotation) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandTargetRotation(rotation); return; }
+    auto thrusters = ship.getComponent<ManeuveringThrusters>();
+    if (thrusters) { thrusters->stop(); thrusters->target = rotation; }
+}
+
+void luaCommandImpulse(sp::ecs::Entity ship, float target) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandImpulse(target); return; }
+    auto engine = ship.getComponent<ImpulseEngine>();
+    if (engine) engine->request = target;
+}
+
+void luaCommandWarp(sp::ecs::Entity ship, int target) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandWarp(target); return; }
+    auto warp = ship.getComponent<WarpDrive>();
+    if (warp) warp->request = target;
+}
+
+void luaCommandJump(sp::ecs::Entity ship, float distance) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandJump(distance); return; }
+    JumpSystem::initializeJump(ship, distance);
+}
+
+void luaCommandSetTarget(sp::ecs::Entity ship, sp::ecs::Entity target) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetTarget(target); return; }
+    ship.getOrAddComponent<Target>().entity = target;
+}
+
+void luaCommandLoadTube(sp::ecs::Entity ship, int tube_nr, EMissileWeapons type) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandLoadTube(tube_nr, type); return; }
+    auto missiletubes = ship.getComponent<MissileTubes>();
+    if (missiletubes && tube_nr >= 0 && tube_nr < int(missiletubes->mounts.size()))
+        MissileSystem::startLoad(ship, missiletubes->mounts[tube_nr], type);
+}
+
+void luaCommandUnloadTube(sp::ecs::Entity ship, int tube_nr) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandUnloadTube(tube_nr); return; }
+    auto missiletubes = ship.getComponent<MissileTubes>();
+    if (missiletubes && tube_nr >= 0 && tube_nr < int(missiletubes->mounts.size()))
+        MissileSystem::startUnload(ship, missiletubes->mounts[tube_nr]);
+}
+
+void luaCommandFireTube(sp::ecs::Entity ship, int tube_nr, float missile_target_angle) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandFireTube(tube_nr, missile_target_angle); return; }
+    auto missiletubes = ship.getComponent<MissileTubes>();
+    if (missiletubes && tube_nr >= 0 && tube_nr < int(missiletubes->mounts.size())) {
+        sp::ecs::Entity target;
+        if (auto t = ship.getComponent<Target>())
+            target = t->entity;
+        MissileSystem::fire(ship, missiletubes->mounts[tube_nr], missile_target_angle, target);
+    }
+}
+
+void luaCommandFireTubeAtTarget(sp::ecs::Entity ship, int tube_nr, sp::ecs::Entity target) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandFireTubeAtTarget(tube_nr, target); return; }
+    
+    float targetAngle = 0.0;
+    auto missiletubes = ship.getComponent<MissileTubes>();
+
+    if (!target || !missiletubes || tube_nr < 0 || tube_nr >= int(missiletubes->mounts.size()))
+        return;
+
+    targetAngle = MissileSystem::calculateFiringSolution(ship, missiletubes->mounts[tube_nr], target);
+    if (targetAngle == std::numeric_limits<float>::infinity()) {
+        if (auto transform = ship.getComponent<sp::Transform>())
+            targetAngle = transform->getRotation() + missiletubes->mounts[tube_nr].direction;
+    }
+
+    luaCommandFireTube(ship, tube_nr, targetAngle);
+}
+
 bool setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
@@ -750,7 +827,46 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Example: playSoundFile("sfx/laser.wav")
     env.setGlobal("playSoundFile", &luaPlaySoundFile);
 
-
+    env.setGlobal("commandTargetRotation", &luaCommandTargetRotation);
+    env.setGlobal("commandImpulse", &luaCommandImpulse);
+    env.setGlobal("commandWarp", &luaCommandWarp);
+    env.setGlobal("commandJump", &luaCommandJump);
+    env.setGlobal("commandSetTarget", &luaCommandSetTarget);
+    env.setGlobal("commandLoadTube", &luaCommandLoadTube);
+    env.setGlobal("commandUnloadTube", &luaCommandUnloadTube);
+    env.setGlobal("commandFireTube", &luaCommandFireTube);
+    env.setGlobal("commandFireTubeAtTarget", &luaCommandFireTubeAtTarget);
+    /*TODO
+    env.setGlobal("commandSetShields", &luaCommandSetShields);
+    env.setGlobal("commandMainScreenSetting", &luaCommandMainScreenSetting);
+    env.setGlobal("commandMainScreenOverlay", &luaCommandMainScreenOverlay);
+    env.setGlobal("commandScan", &luaCommandScan);
+    env.setGlobal("commandSetSystemPowerRequest", &luaCommandSetSystemPowerRequest);
+    env.setGlobal("commandSetSystemCoolantRequest", &luaCommandSetSystemCoolantRequest);
+    env.setGlobal("commandDock", &luaCommandDock);
+    env.setGlobal("commandUndock", &luaCommandUndock);
+    env.setGlobal("commandAbortDock", &luaCommandAbortDock);
+    env.setGlobal("commandOpenTextComm", &luaCommandOpenTextComm);
+    env.setGlobal("commandCloseTextComm", &luaCommandCloseTextComm);
+    env.setGlobal("commandAnswerCommHail", &luaCommandAnswerCommHail);
+    env.setGlobal("commandSendComm", &luaCommandSendComm);
+    env.setGlobal("commandSendCommPlayer", &luaCommandSendCommPlayer);
+    env.setGlobal("commandSetAutoRepair", &luaCommandSetAutoRepair);
+    env.setGlobal("commandSetBeamFrequency", &luaCommandSetBeamFrequency);
+    env.setGlobal("commandSetBeamSystemTarget", &luaCommandSetBeamSystemTarget);
+    env.setGlobal("commandSetShieldFrequency", &luaCommandSetShieldFrequency);
+    env.setGlobal("commandAddWaypoint", &luaCommandAddWaypoint);
+    env.setGlobal("commandRemoveWaypoint", &luaCommandRemoveWaypoint);
+    env.setGlobal("commandMoveWaypoint", &luaCommandMoveWaypoint);
+    env.setGlobal("commandActivateSelfDestruct", &luaCommandActivateSelfDestruct);
+    env.setGlobal("commandCancelSelfDestruct", &luaCommandCancelSelfDestruct);
+    env.setGlobal("commandConfirmDestructCode", &luaCommandConfirmDestructCode);
+    env.setGlobal("commandCombatManeuverBoost", &luaCommandCombatManeuverBoost);
+    env.setGlobal("commandLaunchProbe", &luaCommandLaunchProbe);
+    env.setGlobal("commandSetScienceLink", &luaCommandSetScienceLink);
+    env.setGlobal("commandClearScienceLink", &luaCommandClearScienceLink);
+    env.setGlobal("commandSetAlertLevel", &luaCommandSetAlertLevel);
+    */
 
     env.setGlobal("transferPlayersFromShipToShip", &luaTransferPlayers);
     env.setGlobal("hasPlayerCrewAtPosition", &luaHasPlayerAtPosition);

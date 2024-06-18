@@ -319,7 +319,7 @@ end
 --- player:commandTargetRotation(0) -- command the ship toward a heading of 90 degrees
 --- heading = 180; player:commandTargetRotation(heading - 90) -- command the ship toward a heading of 180 degrees
 function Entity:commandTargetRotation(target)
-    --TODO command*
+    commandTargetRotation(self, target)
     return self
 end
 --- Commands this PlayerSpaceship to request a new impulse speed.
@@ -327,42 +327,42 @@ end
 --- The ship's impulse value remains bound by its impulse acceleration rates.
 --- Example: player:commandImpulse(0.5) -- command this ship to engage forward half impulse
 function Entity:commandImpulse(target)
-    --TODO command*
+    commandImpulse(self, target)
     return self
 end
 --- Commands this PlayerSpaceship to request a new warp level.
 --- Valid values are any positive integer, or 0.
 --- Warp controls on crew position screens are limited to 4.
 --- Example: player:commandWarp(2) -- activate the warp drive at level 2
-function Entity:commandWarp()
-    --TODO command*
+function Entity:commandWarp(target)
+    commandWarp(self, target)
     return self
 end
 --- Commands this PlayerSpaceship to request a jump of the given distance.
 --- Valid values are any positive number, or 0, including values outside of the ship's minimum and maximum jump ranges.
 --- A jump of a greater distance than the ship's maximum jump range results in a negative jump drive charge.
 --- Example: player:commandJump(25000) -- initiate a 25U jump on the current heading
-function Entity:commandJump()
-    --TODO command*
+function Entity:commandJump(target)
+    commandJump(self, target)
     return self
 end
 --- Commands this PlayerSpaceship to set its weapons target to the given SpaceObject.
 --- Example: player:commandSetTarget(enemy)
-function Entity:commandSetTarget()
-    --TODO command*
+function Entity:commandSetTarget(target)
+    commandSetTarget(self, target)
     return self
 end
 --- Commands this PlayerSpaceship to load the WeaponTube with the given index with the given weapon type.
 --- This command respects tube allow/disallow limits.
 --- Example: player:commandLoadTube(0,"HVLI")
-function Entity:commandLoadTube()
-    --TODO command*
+function Entity:commandLoadTube(index, missile_type)
+    commandLoadTube(self, index, missile_type)
     return self
 end
 --- Commands this PlayerSpaceship to unload the WeaponTube with the given index.
 --- Example: player:commandUnloadTube(0)
-function Entity:commandUnloadTube()
-    --TODO command*
+function Entity:commandUnloadTube(index)
+    commandUnloadTube(self, index)
     return self
 end
 --- Commands this PlayerSpaceship to fire the WeaponTube with the given index at the given missile target angle in degrees, without a weapons target.
@@ -372,126 +372,126 @@ end
 --- Examples:
 --- player:commandFireTube(0,0) -- command firing tube 0 at a heading 90
 --- target_heading = 180; player:commandFireTube(0,target_heading - 90) -- command firing tube 0 at a heading 180
-function Entity:commandFireTube()
-    --TODO command*
+function Entity:commandFireTube(index)
+    commandFireTube(self, index)
     return self
 end
 --- Commands this PlayerSpaceship to fire the given weapons tube with the given SpaceObject as its target.
 --- Example: player:commandFireTubeAtTarget(0,enemy) -- command firing tube 0 at target `enemy`
-function Entity:commandFireTubeAtTarget()
-    --TODO command*
+function Entity:commandFireTubeAtTarget(index, target)
+    commandFireTubeAtTarget(self, index, target)
     return self
 end
 --- Commands this PlayerSpaceship to raise (true) or lower (false) its shields.
 --- Example: player:commandSetShields(true) -- command raising shields
-function Entity:commandSetShields()
-    --TODO command*
+function Entity:commandSetShields(enabled)
+    commandSetShields(self, enabled)
     return self
 end
 --- Commands this PlayerSpaceship to change its Main Screen view to the given setting.
 --- Example: player:commandMainScreenSetting("tactical") -- command setting the main screen view to tactical radar
-function Entity:commandMainScreenSetting()
-    --TODO command*
+function Entity:commandMainScreenSetting(setting)
+    commandMainScreenSetting(self, setting)
     return self
 end
 --- Commands this PlayerSpaceship to change its Main Screen comms overlay to the given setting.
 --- Example: player:commandMainScreenOverlay("hidecomms") -- command setting the main screen view to hide the comms overlay
-function Entity:commandMainScreenOverlay()
-    --TODO command*
+function Entity:commandMainScreenOverlay(setting)
+    commandMainScreenOverlay(self, setting)
     return self
 end
 --- Commands this PlayerSpaceship to initiate a scan of the given SpaceObject.
 --- If the scanning mini-game is enabled, this opens it on the relevant crew screens.
 --- This command does NOT respect the player's ability to select the object for scanning, whether due to it being out of radar range or otherwise untargetable.
 --- Example: player:commandScan(enemy)
-function Entity:commandScan()
-    --TODO command*
+function Entity:commandScan(target)
+    commandScan(self, target)
     return self
 end
 --- Commands this PlayerSpaceship to set the power level of the given system.
 --- Valid values are 0 or greater, with 1.0 equivalent to 100 percent. Values greater than 1.0 are allowed.
 --- Example: player:commandSetSystemPowerRequest("impulse",1.0) -- command setting the impulse drive power to 100%
-function Entity:commandSetSystemPowerRequest()
-    --TODO command*
+function Entity:commandSetSystemPowerRequest(system, request)
+    commandSetSystemPowerRequest(self, system, request)
     return self
 end
 --- Commands this PlayerSpaceship to set the coolant level of the given system.
 --- Valid values are from 0 to 10.0, with 10.0 equivalent to 100 percent.
 --- Values greater than 10.0 are allowed if the ship's coolant max is greater than 10.0, but controls on crew position screens are limited to 10.0 (100%).
 --- Example: player:commandSetSystemCoolantRequest("impulse",10.0) -- command setting the impulse drive coolant to 100%
-function Entity:commandSetSystemCoolantRequest()
-    --TODO command*
+function Entity:commandSetSystemCoolantRequest(system, request)
+    commandSetSystemCoolantRequest(self, system, request)
     return self
 end
 --- Commands this PlayerSpaceship to initiate docking with the given SpaceObject.
 --- This initiates docking only if the target is dockable and within docking range.
 --- Example: player:commandDock(base)
-function Entity:commandDock()
-    --TODO command*
+function Entity:commandDock(target)
+    commandDock(self, target)
     return self
 end
 --- Commands this PlayerSpaceship to undock from any SpaceObject it's docked with.
 --- Example: player:commandUndock()
 function Entity:commandUndock()
-    --TODO command*
+    commandUndock(self)
     return self
 end
 --- Commands this PlayerSpaceship to abort an in-progress docking operation.
 --- Example: player:commandAbortDock()
 function Entity:commandAbortDock()
-    --TODO command*
+    commandAbortDock(self)
     return self
 end
 --- Commands this PlayerSpaceship to hail the given SpaceObject.
 --- If the target object is a PlayerSpaceship or the GM is intercepting all comms, open text chat comms.
 --- Example: player:commandOpenTextComm(base)
-function Entity:commandOpenTextComm()
-    --TODO command*
+function Entity:commandOpenTextComm(target)
+    commandOpenTextComm(self, target)
     return self
 end
 --- Commands this PlayerSpaceship to close comms.
 --- Example: player:commandCloseTextComm()
 function Entity:commandCloseTextComm()
-    --TODO command*
+    commandCloseTextComm(self)
     return self
 end
 --- Commands whether this PlayerSpaceship answers (true) or rejects (false) an incoming hail.
 --- Example: player:commandAnswerCommHail(false) -- commands to reject an active incoming hail
-function Entity:commandAnswerCommHail()
-    --TODO command*
+function Entity:commandAnswerCommHail(response)
+    commandAnswerCommHail(self, response)
     return self
 end
 --- Commands this PlayerSpaceship to select the reply with the given index during a comms dialogue.
 --- Example: player:commandSendComm(0) -- commands to select the first option in a comms dialogue
-function Entity:commandSendComm()
-    --TODO command*
+function Entity:commandSendComm(index)
+    commandSendComm(self, index)
     return self
 end
 --- Commands this PlayerSpaceship to send the given message to the active text comms chat.
 --- This works whether the chat is with another PlayerSpaceship or the GM.
 --- Example: player:commandSendCommPlayer("I will destroy you!") -- commands to send this message in the active text chat
-function Entity:commandSendCommPlayer()
-    --TODO command*
+function Entity:commandSendCommPlayer(message)
+    commandSendCommPlayer(self, message)
     return self
 end
 --- Commands whether repair crews on this PlayerSpaceship automatically move to rooms of damaged systems.
 --- Use this command to reduce the need for player interaction in Engineering, especially when combined with setAutoCoolant/auto_coolant_enabled.
 --- Crews set to move automatically don't respect crew collisions, allowing multiple crew to occupy a single space.
 --- Example: player:commandSetAutoRepair(true)
-function Entity:commandSetAutoRepair()
-    --TODO command*
+function Entity:commandSetAutoRepair(enabled)
+    commandSetAutoRepair(self, enabled)
     return self
 end
 --- Commands this PlayerSpaceship to set its beam frequency to the given value.
 --- Valid values are 0 to 20, which map to 400THz to 800THz at 20THz increments. (spaceship.cpp frequencyToString())
---- Example: player:commandSetAutoRepair(true)
-function Entity:commandSetBeamFrequency()
-    --TODO command*
+--- Example: player:commandSetBeamFrequency(2)
+function Entity:commandSetBeamFrequency(index)
+    commandSetBeamFrequency(self, index)
     return self
 end
 --- Commands this PlayerSpaceship to target the given ship system with its beam weapons.
-function Entity:commandSetBeamSystemTarget()
-    --TODO command*
+function Entity:commandSetBeamSystemTarget(target)
+    commandSetBeamSystemTarget(self, target)
     return self
 end
 --- Sets this SpaceShip's shield frequency index.
@@ -500,48 +500,48 @@ end
 --- Unlike SpaceShip:setShieldsFrequency(), this initiates shield calibration to change the frequency, which disables shields for a period.
 --- Example:
 --- frequency = ship:setShieldsFrequency(10) -- frequency is 600THz
-function Entity:commandSetShieldFrequency()
-    --TODO command*
+function Entity:commandSetShieldFrequency(index)
+    commandSetShieldFrequency(self, index)
     return self
 end
 --- Commands this PlayerSpaceship to add a waypoint at the given coordinates.
 --- This respects the 9-waypoint limit and won't add more waypoints if 9 already exist.
 --- Example: player:commandAddWaypoint(1000,2000)
-function Entity:commandAddWaypoint()
-    --TODO command*
+function Entity:commandAddWaypoint(x, y)
+    commandAddWaypoint(self, x, y)
     return self
 end
 --- Commands this PlayerSpaceship to remove the waypoint with the given index.
 --- This uses a 0-index, while waypoints are numbered on player screens with a 1-index.
 --- Example: player:commandRemoveWaypoint(0) -- removes waypoint 1
-function Entity:commandRemoveWaypoint()
-    --TODO command*
+function Entity:commandRemoveWaypoint(index)
+    commandRemoveWaypoint(self, index)
     return self
 end
 --- Commands this PlayerSpaceship to move the waypoint with the given index to the given coordinates.
 --- This uses a 0-index, while waypoints are numbered on player screens with a 1-index.
 --- Example: player:commandMoveWaypoint(0,-1000,-2000) -- moves waypoint 1 to -1000,-2000
-function Entity:commandMoveWaypoint()
-    --TODO command*
+function Entity:commandMoveWaypoint(index, x, y)
+    commandMoveWaypoint(self, index, x, y)
     return self
 end
 --- Commands this PlayerSpaceship to activate its self-destruct sequence.
 --- Example: player:commandActivateSelfDestruct()
 function Entity:commandActivateSelfDestruct()
-    --TODO command*
+    commandActivateSelfDestruct(self)
     return self
 end
 --- Commands this PlayerSpaceship to cancel its self-destruct sequence.
 --- Example: player:commandCancelSelfDestruct()
 function Entity:commandCancelSelfDestruct()
-    --TODO command*
+    commandCancelSelfDestruct(self)
     return self
 end
 --- Commands this PlayerSpaceship to submit the given self-destruct authorization code for the code request with the given index.
 --- Codes are 0-indexed. Index 0 corresponds to code A, 1 to B, etc.
 --- Example: player:commandConfirmDestructCode(0,46223) -- commands submitting 46223 as self-destruct confirmation code A
-function Entity:commandConfirmDestructCode()
-    --TODO command*
+function Entity:commandConfirmDestructCode(index, code)
+    commandConfirmDestructCode(self, index, code)
     return self
 end
 --- Commands this PlayerSpaceship to set its forward combat maneuver to the given value.
@@ -549,36 +549,36 @@ end
 --- The maneuver continues until the ship's combat maneuver reserves are depleted.
 --- Crew screens allow only forward combat maneuvers, and the combat maneuver controls do not reflect a boost set via this command.
 --- Example: player:commandCombatManeuverBoost(0.5) -- commands boosting forward at half combat maneuver capacity
-function Entity:commandCombatManeuverBoost()
-    --TODO command*
+function Entity:commandCombatManeuverBoost(amount)
+    commandCombatManeuverBoost(self, amount)
     return self
 end
 --- Commands this PlayerSpaceship to launch a ScanProbe to the given coordinates.
 --- Example: player:commandLaunchProbe(1000,2000) -- commands launching a scan probe to 1000,2000
-function Entity:commandLaunchProbe()
-    --TODO command*
+function Entity:commandLaunchProbe(x, y)
+    commandLaunchProbe(self, x, y)
     return self
 end
 --- Commands this PlayerSpaceship to link the science screen to the given ScanProbe.
 --- This is equivalent to selecting a probe on Relay and clicking "Link to Science".
 --- Unlike "Link to Science", this function can link science to any given probe, regardless of which ship launched it or what faction it belongs to.
 --- Example: player:commandSetScienceLink(probe_object) -- link ScanProbe `probe` to this ship's science
-function Entity:commandSetScienceLink()
-    --TODO command*
+function Entity:commandSetScienceLink(target)
+    commandSetScienceLink(self, target)
     return self
 end
 --- Commands this PlayerSpaceship to unlink the science screen from any ScanProbe.
 --- This is equivalent to clicking "Link to Science" on Relay when a link is already active.
 --- Example: player:commandClearScienceLink()
 function Entity:commandClearScienceLink()
-    --TODO command*
+    commandClearScienceLink(self)
     return self
 end
 --- Commands this PlayerSpaceship to set the given alert level.
 --- Valid values are "normal", "yellow", "red", which differ from the values returned by PlayerSpaceship:getAlertLevel().
 --- Example: player:commandSetAlertLevel("red") -- commands red alert
-function Entity:commandSetAlertLevel()
-    --TODO command*
+function Entity:commandSetAlertLevel(level)
+    commandSetAlertLevel(self, level)
     return self
 end
 
