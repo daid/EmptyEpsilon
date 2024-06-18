@@ -28,16 +28,6 @@ function init()
 		removeGMFunction("Coordinates H7-254")
 		removeGMFunction("Coordinates something else")
 	end)
-
-	
-	-- Which fleet to spawn
-	-- fx, fy cordinates from Odysseus position to spawn Aurora
-	-- DistanceMin and distanceMax are values which are ued to calculate distance from Aurora
-	-- distanceModifier defines multiplier to fleet ship from each other when flying in form. Default value 2
-	-- Spawn modifier defines how much misplaced the ships are when spawn on the map
-	-- 1 = just a little bit off and disoriented, 2 = bit more chaotic situation, 3 = way too quick jump, totally lost
-	-- If X coordinated of Aurora spawning point is positive, it will take longer for ships to get back to gether
-	--setSpawnFleetButton("Button text", "friendlyOne", A, B, distanceModifier, spawnModifier, revealCallSignsAtSpawn)		
 	local sx = 5000
 	local sy = -4500
 	setSpawnFleetButton("Friendly 5 A", 5, "A", sx, sy, 2, 3, true, "idle", 0, 3, 0, 3)
