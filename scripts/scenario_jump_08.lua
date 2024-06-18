@@ -7,6 +7,10 @@ require("utils.lua")
 require("utils_odysseus.lua")
 
 function init()
+	local ox =-13000
+	local oy = 24000
+	odysseus:setPosition(ox, oy)
+
 	-- Add GM common functions - Order of the buttons: Sync, fleet, enemies, Scenario change, scenario specific
 
 	-- Which fleet to spawn
@@ -18,20 +22,19 @@ function init()
 	-- If X coordinated of Aurora spawning point is positive, it will take longer for ships to get back to gether
 	--setSpawnFleetButton("Button text", "friendlyOne", A, B, distanceModifier, spawnModifier, revealCallSignsAtSpawn)		
 	local sx = 5000
-	local sy = -4500
-	setSpawnFleetButton("Friendly 2", 2, sx, sy, 2, 1, true)
+	local sy = 4500
+	setSpawnFleetButton("Friendly 2", 2, "A", sx, sy, 2, 2, true, "formation", 0, 2, 0, 1)
 
 	-- Spawnwave(distance from Odysseus, enemy size)
-	addGMFunction(_("Enemy", "Enemy - Small"), function() spawnwave(2) end)
+	addGMFunction(_("Enemy", "OC - Machine - S"), function() spawnwave(2) end)
 
 	
 	setScenarioChange('Change scenario - 09', "scenario_jump_09.lua")
 	
-	 addGMFunction("Destroy ESS polaris", confirm_polaris)
 
 	-- Generate scenario map
 	generateSpace(sx, sy)
 
-	planet = setUpPlanet("P-TE95-LN71", 105000, 25000)
+	planet = setUpPlanet("P-TE95-LN71", ox+105000, oy+25000)
 
 end

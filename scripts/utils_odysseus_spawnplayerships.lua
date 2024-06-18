@@ -50,7 +50,9 @@ function spawn_essody18()
 		addGMFunction("Allow ESSODY-F18", allow_essody18)
 	end)
 
+	odysseus:addCustomButton("Relay", "dock_to_odysseus", "Autodock ESSODY-F18", dock_essody18_auto)
 	essody18:addCustomButton("Helms", "dock_to_odysseus", "Dock to Odysseys", dock_essody18)
+	addGMFunction("Force dock ESSODY-F18", dock_essody18_force)
   	odysseus:setLandingPadLaunched(1)
 	essody18_launched = 1
 end
@@ -62,8 +64,10 @@ function spawn_essody23()
       	odysseus:setLandingPadDestroyed(2)
       	addGMFunction("Allow ESSODY-F23", allow_essody23)
     end)
+	odysseus:addCustomButton("Relay", "dock_to_odysseus", "Autodock ESSODY-F23", dock_essody23_auto)
 	essody23:addCustomButton("Helms", "dock_to_odysseus", "Dock to Odysseys", dock_essody23)
-  	odysseus:setLandingPadLaunched(2)
+	addGMFunction("Force dock ESSODY-F23", dock_essody23_force)
+	odysseus:setLandingPadLaunched(2)
 	essody23_launched = 1
 end
 function spawn_essody36()
@@ -73,18 +77,23 @@ function spawn_essody36()
       	odysseus:setLandingPadDestroyed(3)
       	addGMFunction("Allow ESSODY-F36", allow_essody36)
     end)
+	odysseus:addCustomButton("Relay", "dock_to_odysseus", "Autodock ESSODY-F36", dock_essody36_auto)
 	essody36:addCustomButton("Helms", "dock_to_odysseus", "Dock to Odysseys", dock_essody36)
+	addGMFunction("Force dock ESSODY-F36", dock_essody36_force)
   	odysseus:setLandingPadLaunched(3)
 	essody36_launched = 1
 end
 function spawn_starcaller()
 	x, y = odysseus:getPosition()
-	starcaller = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Comet Class Scout"):setCanSelfDestruct(false):setPosition(x - 400, y + 400):setCallSign("ESS Starcaller"):setAutoCoolant(true):onDestruction(
+	-- Starcaller has different faction on purpose, EOC_starfleet is neutral with machines.
+	starcaller = PlayerSpaceship():setFaction("EOC_Starfleet"):setTemplate("Comet Class Scout"):setCanSelfDestruct(false):setPosition(x - 400, y + 400):setCallSign("ESS Starcaller"):setAutoCoolant(true):onDestruction(
     function(this, instigator) 
       	odysseus:setLandingPadDestroyed(4)
       	addGMFunction("Allow STARCALLER", allow_starcaller)
     end)
+	odysseus:addCustomButton("Helms", "dock_to_odysseus", "Autodock Starcaller", dock_starcaller_auto)
 	starcaller:addCustomButton("Helms", "dock_to_odysseus", "Dock to Odysseys", dock_starcaller)
+	addGMFunction("Force dock Starcaller", dock_starcaller_force)
   	odysseus:setLandingPadLaunched(4)
 	starcaller_launched = 1
 end
@@ -93,64 +102,131 @@ end
 dockingdist = 800   --Set docking distance to 0.8U
 
 function dock_essody18()
-	x, y = essody18:getPosition()
-	for _, obj in ipairs(getObjectsInRadius(x, y, dockingdist)) do
-		callSign = obj:getCallSign()
-		if callSign == "ESS Odysseus" then
-			essody18_launched = 0
-      		odysseus:setLandingPadDocked(1)
-			odysseus:addCustomButton("Relay", "launch_pad_1", "Launch ESSODY-F18", launch_essody18)
-			essody18:destroy()
-			return
-		end
+	local curDistance = distance(essody18, odysseus)
+	if curDistance <= dockingdist then
+		essody18_launched = 0
+    	odysseus:setLandingPadDocked(1)
+		odysseus:addCustomButton("Relay", "launch_pad_1", "Launch ESSODY-F18", launch_essody18)
+		essody18:destroy()
+	else
+		essody18:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 	end
-	essody18:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 end
 
+function dock_essody18_force()
+	essody18_launched = 0
+	odysseus:setLandingPadDocked(1)
+	removeGMFunction("Force dock ESSODY-F18")
+	essody18:destroy()
+end
 
+function dock_essody18_auto()
+	local curDistance = distance(essody18, odysseus)
+	if curDistance <= dockingdist then
+		essody18_launched = 0
+   		odysseus:setLandingPadDocked(1)
+		odysseus:addCustomButton("Relay", "launch_pad_1", "Launch ESSODY-F18", launch_essody18)
+		essody18:destroy()
+	else
+		odysseus:addCustomMessage("Relay", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+	end
+end
+
+function dock_essody23_force()
+	essody23_launched = 0
+	odysseus:setLandingPadDocked(2)
+	removeGMFunction("Force dock ESSODY-F23")
+	essody23:destroy()
+end
 
 function dock_essody23()
-	x, y = essody23:getPosition()
-	for _, obj in ipairs(getObjectsInRadius(x, y, dockingdist)) do
-		callSign = obj:getCallSign()
-		if callSign == "ESS Odysseus" then
-			essody23_launched = 0
-      		odysseus:setLandingPadDocked(2)
-			odysseus:addCustomButton("Relay", "launch_pad_2", "Launch ESSODY-F23", launch_essody23)
-			essody23:destroy()
-			return
-		end
+	local curDistance = distance(essody23, odysseus)
+	if curDistance <= dockingdist then
+		essody23_launched = 0
+    	odysseus:setLandingPadDocked(2)
+		odysseus:addCustomButton("Relay", "launch_pad_2", "Launch ESSODY-F23", launch_essody23)
+		essody23:destroy()
+	else
+		essody23:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 	end
-	essody23:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 end
+
+function dock_essody23_auto()
+	local curDistance = distance(essody23, odysseus)
+	if curDistance <= dockingdist then
+		essody23_launched = 0
+   		odysseus:setLandingPadDocked(2)
+		odysseus:addCustomButton("Relay", "launch_pad_2", "Launch ESSODY-F23", launch_essody23)
+		essody23:destroy()
+	else
+		odysseus:addCustomMessage("Relay", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+	end
+end
+
+function dock_essody36_force()
+	essody36_launched = 0
+	odysseus:setLandingPadDocked(3)
+	removeGMFunction("Force dock ESSODY-F36")
+	essody36:destroy()
+end
+
+
 function dock_essody36()
-	x, y = essody36:getPosition()
-	for _, obj in ipairs(getObjectsInRadius(x, y, dockingdist)) do
-		callSign = obj:getCallSign()
-		if callSign == "ESS Odysseus" then
-			essody36_launched = 0
-      		odysseus:setLandingPadDocked(3)
-			odysseus:addCustomButton("Relay", "launch_pad_3", "Launch ESSODY-F36", launch_essody36)
-			essody36:destroy()
-			return
-		end
+	local curDistance = distance(essody36, odysseus)
+	if curDistance <= dockingdist then
+		essody36_launched = 0
+   		odysseus:setLandingPadDocked(3)
+		odysseus:addCustomButton("Relay", "launch_pad_3", "Launch ESSODY-F36", launch_essody36)
+		essody36:destroy()
+	else
+		essody36:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 	end
-	essody36:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 end
+
+function dock_essody36_auto()
+	local curDistance = distance(essody36, odysseus)
+	if curDistance <= dockingdist then
+		essody36_launched = 0
+   		odysseus:setLandingPadDocked(3)
+		odysseus:addCustomButton("Relay", "launch_pad_3", "Launch ESSODY-F36", launch_essody36)
+		essody36:destroy()
+	else
+		odysseus:addCustomMessage("Relay", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+	end
+end
+
+function dock_starcaller_force()
+	starcaller_launched = 0
+	odysseus:setLandingPadDocked(4)
+	removeGMFunction("Force dock Starcaller")
+	starcaller:destroy()
+end
+
+
 function dock_starcaller()
-	x, y = starcaller:getPosition()
-	for _, obj in ipairs(getObjectsInRadius(x, y, dockingdist)) do
-		callSign = obj:getCallSign()
-		if callSign == "ESS Odysseus" then
-			starcaller_launched = 0
-      		odysseus:setLandingPadDocked(4)
-			odysseus:addCustomButton("Relay", "launch_pad_4", "Launch STARCALLER", launch_starcaller)
-			starcaller:destroy()
-			return
-		end
+	local curDistance = distance(starcaller, odysseus)
+	if curDistance <= dockingdist then
+		starcaller_launched = 0
+   		odysseus:setLandingPadDocked(4)
+		odysseus:addCustomButton("Relay", "launch_pad_4", "Launch STARCALLER", launch_starcaller)
+		starcaller:destroy()
+	else
+		starcaller:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 	end
-	starcaller:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 end
+
+function dock_starcaller_auto()
+	local curDistance = distance(starcaller, odysseus)
+	if curDistance <= dockingdist then
+		starcaller_launched = 0
+   		odysseus:setLandingPadDocked(4)
+		odysseus:addCustomButton("Relay", "launch_pad_4", "Launch STARCALLER", launch_starcaller)
+		starcaller:destroy()
+	else
+		odysseus:addCustomMessage("Relay", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+	end
+end
+
 
 -- Button synchronizer
 function sync_buttons()

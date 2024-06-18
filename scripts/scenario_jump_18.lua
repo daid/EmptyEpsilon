@@ -1,4 +1,4 @@
--- Name: Jump 16
+-- Name: Jump 18
 -- Type: Odysseus
 -- Description: Onload: Odysseus, random asteroids. EOC fleet.
 
@@ -6,7 +6,28 @@ require("utils.lua")
 require("utils_odysseus.lua")
 
 function init()
+
+
 	-- Add GM common functions - Order of the buttons: Sync, fleet, enemies, Scenario change, scenario specific
+	addGMFunction(_("buttonGM", "Coordinates H8-239"), function() 
+		setUpPlanet("AS-RV693", 85000, 25000) 
+		removeGMFunction("Coordinates H7-239")
+		removeGMFunction("Coordinates H7-254")
+		removeGMFunction("Coordinates something else")
+			starcaller = PlayerSpaceship():setFaction("EOC_Starfleet"):setTemplate("Comet Class Scout"):setCanSelfDestruct(false):setPosition(400, 400):setCallSign("ESS Starcaller"):setAutoCoolant(true)
+
+	end)
+	addGMFunction(_("buttonGM", "Coordinates H7-254"), function() 
+		setUpPlanet("P-GD66-NF38", 85000, 25000) 
+		removeGMFunction("Coordinates H7-239")
+		removeGMFunction("Coordinates H7-254")
+		removeGMFunction("Coordinates something else")
+	end)
+	addGMFunction(_("buttonGM", "Coordinates something else"), function()
+		removeGMFunction("Coordinates H7-239") 
+		removeGMFunction("Coordinates H7-254")
+		removeGMFunction("Coordinates something else")
+	end)
 
 	
 	-- Which fleet to spawn
@@ -19,30 +40,22 @@ function init()
 	--setSpawnFleetButton("Button text", "friendlyOne", A, B, distanceModifier, spawnModifier, revealCallSignsAtSpawn)		
 	local sx = 5000
 	local sy = -4500
-	setSpawnFleetButton("Friendly 5", 2, sx, sy, 2, 5, true)
+	setSpawnFleetButton("Friendly 5 A", 5, "A", sx, sy, 2, 3, true, "idle", 0, 3, 0, 3)
+	setSpawnFleetButton("Friendly 5 B - No Karma", 5, "B", sx, sy, 2, 3, true, "idle", 0, 3, 0, 3)
 
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
 	-- When distance set to 50000, it takes about 7-8 minutes enemy to reach attack range	
-	addGMFunction(_("Enemy", "Enemy - Large"), function() spawnwave(5) end)
 
-   
-	addGMFunction(_("Enemy", "Enemy end fleet"), function() 
-		
-		odysseus:addToShipLog("EVA sector scanner alarm. Multiple incoming jumps detected from heading 98.", "Red")
-		odysseus:addToShipLog("EVA sector scanner alarm. Multiple incoming jumps detected from heading 52.", "Red")
-		odysseus:addToShipLog("EVA sector scanner alarm. Multiple incoming jumps detected from heading 118.", "Red")
-		addGMFunction("Launch destruction", cleanup_confirm)
+	addGMFunction(_("Enemy", "OC - Machine - XL + Mother"), function() spawnwave(6, "idle") end)
+	addGMFunction(_("Enemy", "OC - Machine - XL"), function() spawnwave(5, "idle") end)
 
-		x, y = odysseus:getPosition()
-
-		spawnwave(6) 
-	end)		
+	addGMFunction(_("Enemy", "Launch destruction"), function() cleanup_confirm() end)
 
   -- Generate scenario map
 	destroyEnemy = false
 	destroy_delay = 1
-	radius = 100
+	radius = 300
 	enemyCount = 0
 	enemyKills = 0
 
@@ -53,9 +66,14 @@ end
 
 
 function cleanup_confirm()
-	addGMFunction("Cancel destruction", cleanup_cancel)
-	addGMFunction("Confirm destruction", cleanup_prep)
-	removeGMFunction("Launch destruction")
+	local scdistance = distance(starcaller, mother)
+	if scdistance < 10000 then 
+		addGMFunction("Cancel destruction", cleanup_cancel)
+		addGMFunction("Confirm destruction", cleanup_prep)
+		removeGMFunction("Launch destruction")
+	else
+		addGMMessage("Distance too far, minimum distance 10 000 ")
+	end
 end
 
 
@@ -90,10 +108,12 @@ end
 function cleanup(delta)
 
 	if starcaller:isValid() then
-		x, y = starcaller:getPosition()
+		x,y = mother:getPosition()
 		host = Asteroid():setPosition(x, y)
 		starcaller:destroy()
+		mother:destroy()
 	end
+	--host is set up when spawning the mother
 	x, y = host:getPosition()
 
 	if destroy_delay < 0 then
@@ -116,7 +136,7 @@ function cleanup(delta)
 		end
 
 
-		radius = radius + 100
+		radius = radius + 300
 		destroy_delay = 0.01
 	else
 
@@ -128,21 +148,4 @@ function cleanup(delta)
 		destroyEnemy = false
 		odysseus:addToShipLog("EVA sector scanner report. Machine fleet size reduced by over 97%.", "Red")
 	end
-end
-
-
-
-function update(delta)
-
-	if delta == 0 then
-
-		return
-
-		--game paused
-	end
-
-	if destroyEnemy then
-		cleanup(delta)
-	end
-
 end

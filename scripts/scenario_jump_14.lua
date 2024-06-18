@@ -7,6 +7,10 @@ require("utils_odysseus.lua")
 
 
 function init()
+	local ox =-7000
+	local oy = 2000
+	odysseus:setPosition(ox, oy)
+
 	-- Add GM common functions - Order of the buttons: Sync, fleet, enemies, Scenario change, scenario specific
 
 	-- Which fleet to spawn
@@ -17,29 +21,31 @@ function init()
 	-- 1 = just a little bit off and disoriented, 2 = bit more chaotic situation, 3 = way too quick jump, totally lost
 	-- If X coordinated of Aurora spawning point is positive, it will take longer for ships to get back to gether
 	--setSpawnFleetButton("Button text", "friendlyOne", A, B, distanceModifier, spawnModifier, revealCallSignsAtSpawn)		
-	local sx = -5000
-	local sy = -4500
-	setSpawnFleetButton("Friendly 2", 2, sx, sy, 2, 1, true)
+	local sx = 5000
+	local sy = 4500
+
+	setSpawnFleetButton("Friendly 4 A", 4, "A", sx, sy, 2, 1, true, "formation", 0, 1, 0, 3)
+	setSpawnFleetButton("Friendly 4 B - No Karma", 4, "B", sx, sy, 2, 1, true, "formation", 0, 1, 0, 3)
+
+	addGMFunction("Clear setup buttons", clearbuttons)
+
 
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
 	-- When distance set to 50000, it takes about 7-8 minutes enemy to reach attack range	
-	addGMFunction(_("Enemy", "Enemy - Large"), function() spawnwave(4) end)
+	addGMFunction(_("Enemy", "OC - Machine - L"), function() spawnwave(4) end)
 
    
 	setScenarioChange('Change scenario - 15', "scenario_jump_15.lua")
 
-	addGMFunction("Destroy ESS Valkyrie", confirm_valkyrie)
 
 
 	-- Generate scenario map
 
 
-	planet = setUpPlanet("P-SI14-UX98", 20000, -15000,0.9)
+	planet = setUpPlanet("P-SI14-UX98", ox+30000, oy-15000,0.9)
 	
 --		VisualAsteroid():setPosition(posx, posy):setSize(random(100, 500))
-
-	createObjectsOnLine(-7000, 5000, 3000, 0, 500, Asteroid, 20, 100, 15000)
 
 	for n=1, 4 do
 		local posx = random(-80000, -10000)
@@ -117,7 +123,11 @@ function init()
   
   end
 
-  
+  function clearbuttons()
+	removeGMFunction("Friendly 4 A")
+	removeGMFunction("Friendly 4 B")
+end
+
   
   function delayChecks(delta)
   
@@ -237,7 +247,7 @@ function init()
 		  alertLevel = ship:getAlertLevel()
   
 			  if alertLevel == "Normal" then
-				  ship:commandSetAlertLevel("yellow")
+				  ship:commandSetAlertLevel("red")
 			  end
   
 			  ship:addToShipLog("EVA scanning results. Space radiation level lethal.", "Red")
@@ -265,17 +275,3 @@ function init()
   
   end
   
-  
-  function update(delta)
-	  if delta == 0 then
-		  return
-		  --game paused
-	  end
-  
-	  if plotZ ~= nil then
-		  plotZ(delta)
-	  end
-  
-  
-end
-

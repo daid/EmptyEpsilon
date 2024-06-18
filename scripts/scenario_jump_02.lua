@@ -6,24 +6,27 @@ require("utils.lua")
 require("utils_odysseus.lua")
 
 function init()
-	-- Add GM common functions - Order of the buttons: Fleet, enemies, Scenario change, scenario specific
-	addGMFunction(_("buttonGM", "Enemy - Small - Backup"), function() spawnwave(2) end)
-  
+	
+	local ox =-10000
+	local oy = 15000
+	odysseus:setPosition(ox, oy)
+
+	-- Add GM common functions - Order of the buttons: Fleet, enemies, Scenario change, scenario specific  
 	setScenarioChange('Change scenario - 03', "scenario_jump_03.lua")
 
 	-- Generate scenario map
-	addGMFunction(_("buttonGM", "Coordinates D3-117"), function() 
-		setUpPlanet("Sronsh", -85000, -25000) 
-		removeGMFunction("Coordinates D3-117")
-		removeGMFunction("Coordinates D3-101")
-	end)
-
 	addGMFunction(_("buttonGM", "Coordinates D3-101"), function()
 		removeGMFunction("Coordinates D3-117")
 		removeGMFunction("Coordinates D3-101")
 	end)
+		addGMFunction(_("buttonGM", "Coordinates D3-117"), function() 
+		setUpPlanet("Sronsh", ox-85000, oy-25000) 
+		removeGMFunction("Coordinates D3-117")
+		removeGMFunction("Coordinates D3-101")
+	end)
 
-	generateSpace(fx, fy)
+
+	generateSpace(ox, oy)
 
 
 end

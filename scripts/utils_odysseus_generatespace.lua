@@ -1,7 +1,7 @@
 -- Generating space objects for scenarios
 -- Predefined planet list
 
-function setUpPlanet(name, x, y, planeShiftModifier)
+function setUpPlanet(name, px, py, planeShiftModifier)
 
     local planetName = name
 
@@ -19,7 +19,7 @@ function setUpPlanet(name, x, y, planeShiftModifier)
     -- Clear other space objects before placing planet
     local planetRadius = selected_planet.radius*4
 	local clearRadius = planetRadius*1.2
-	for _, obj in ipairs(getObjectsInRadius(x, y, clearRadius)) do
+	for _, obj in ipairs(getObjectsInRadius(px, py, clearRadius)) do
 		if obj.typeName == "Nebula" or obj.typeName == "Asteroid" or obj.typeName == "VisualAsteroid" then
 			obj:destroy()
 		end
@@ -30,7 +30,7 @@ function setUpPlanet(name, x, y, planeShiftModifier)
         planeShiftModifier = random(0.4, 0.99)
     end
 
-    planet_fodder = Planet():setCallSign(planetName):setPosition(x, y):setPlanetRadius(planetRadius)
+    planet_fodder = Planet():setCallSign(planetName):setPosition(px, py):setPlanetRadius(planetRadius)
     local distancePlane = math.floor(-planeShiftModifier*planetRadius)
     planet_fodder:setDistanceFromMovementPlane(distancePlane)
     planet_fodder:setPlanetSurfaceTexture(selected_planet.texture.surface)
@@ -62,13 +62,7 @@ function planetList()
             texture = {
                 surface = "planets/planet-desert-1.png",
                 cloud = "planets/clouds-3.png", 
---                atmosphere = "planets/atmosphere.png"
             },
---            color = {
---                red = 0.2,
---                green = 0.2,
---                blue = 0.2,
---            },
         })
     table.insert(planet_list, {
         -- Desert planet, #f2d07f, radius 9491 - rotation 92,3
@@ -104,6 +98,18 @@ function planetList()
 --                blue = 0.8,
 --            },
         })
+        table.insert(planet_list, {
+            -- P-PU80-GL38, puffy planet
+            -- Jump 7
+            name = "P-PU80-GL38",
+            radius = 3822,
+            axialrotation = 98,
+            texture = {
+                surface = "planets/gas-1.png",
+--                cloud = "planets/clouds-1.png", 
+            },
+        })
+
         table.insert(planet_list, {
             -- P-TE95-LN71, Terrestrial planet #00a599, radius 7644, rotation 93,6
             -- Landmission 4 - Jump 8
@@ -191,16 +197,38 @@ function planetList()
                 blue = random(0,0.2)
             },
         })
+        table.insert(planet_list, {
+            -- AS-RV693
+            -- Jump 18
+            name = "AS-RV693",
+            radius = 546,
+            axialrotation = 56,
+            texture = {
+                surface = "planets/asteroid.png",
+                cloud = "planets/clouds-1.png", 
+            },
+        })
+
+        table.insert(planet_list, {
+            -- P-GD66-NF38
+            -- Jump 18
+            name = "P-GD66-NF38",
+            radius = 11785,
+            axialrotation = 75,
+            texture = {
+                surface = "planets/gas-3.png",
+            },
+        })
 end
 
 function generateSpace(fx, fy)
-	local x, y = odysseus:getPosition()
+	local ox, oy = odysseus:getPosition()
 	
-	local acount = irandom(40, 100)
+	local acount = irandom(40, 150)
 	for n=1,acount do
-		local posx = random(-80000, 80000)
-		local posy = random(-80000, 80000)
-		if distance(0, 0, posx, posy) > 2000 then
+		local posx = random(-200000, 200000)
+		local posy = random(-200000, 200000)
+		if distance(ox, oy, posx, posy) > 2000 then
 			Asteroid():setPosition(posx, posy):setSize(random(100, 500))
 		end
 		VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
@@ -210,11 +238,11 @@ function generateSpace(fx, fy)
 	for n=1, ncount do
 		local posx = random(-80000, 80000)
 		local posy = random(-80000, 80000)
-        if distance(0, 0, posx, posy) > 2000 then
+        if distance(ox, ox, posx, posy) > 10000 then
             if fx ~= nil and fy ~= nil then
-                local sx = fx + x
-                local sy = fy + y        
-                if distance(sx, sy, posx, posy) > 7000 then
+                local sx = fx + ox
+                local sy = fy + oy        
+                if distance(sx, sy, posx, posy) > 10000 then
                     Nebula():setPosition(posx, posy)
                 end
             else 

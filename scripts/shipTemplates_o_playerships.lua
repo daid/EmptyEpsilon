@@ -18,8 +18,8 @@ template:setWeaponStorage("Homing", 250)
 
 
 
-template:setShortRangeRadarRange(10000)
-template:setLongRangeRadarRange(100000)
+template:setShortRangeRadarRange(5000)
+template:setLongRangeRadarRange(50000)
 
 template:setRepairCrewCount(0)
 --	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
@@ -45,7 +45,7 @@ template:addDoor( 4, 1, true)
 
 
 -- Starcaller
-template = ShipTemplate():setName("Comet Scout"):setClass("Comet", "Scout"):setModel("eoc_frigate"):setType("playership")
+template = ShipTemplate():setName("Comet Scout"):setClass("Comet", "Scout"):setModel("space_tug"):setType("playership")
 template:setRadarTrace("eoc_scout.png")
 --             Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 30, 0, 1500.0, 4.0, 50)
@@ -56,15 +56,15 @@ template:setTubeDirection(2, 45)
 template:setTubeDirection(3,-45)
 template:setHull(200)
 template:setShields(300, 300)
-template:setSpeed(30, 10, 10)
+template:setSpeed(70, 10, 10)
 template:setCombatManeuver(300, 50)
 template:setJumpDrive(false)
 template:setCloaking(false)
 template:setEnergyStorage(600)
 template:setWeaponStorage("Homing", 250)
 
-template:setShortRangeRadarRange(10000)
-template:setLongRangeRadarRange(100000)
+template:setShortRangeRadarRange(7500)
+template:setLongRangeRadarRange(75000)
 
 template:setRepairCrewCount(0)
 --	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
@@ -106,7 +106,7 @@ template:setTubeDirection(5, 160)
 -- template:setDockClasses("Starfighter", "Frigate")
 template:setHull(400)
 template:setShields(600, 600)
-template:setSpeed(20, 8, 10)
+template:setSpeed(40, 8, 10)
 template:setWarpSpeed(0)
 template:setJumpDrive(false)
 template:setEnergyStorage(1000)
@@ -114,7 +114,7 @@ template:setCombatManeuver(500, 150)
 template:setWeaponStorage("Homing", 500)
 template:setWeaponStorage("EMP", 500)
 template:setShortRangeRadarRange(10000)
-template:setLongRangeRadarRange(100000)
+template:setLongRangeRadarRange(75000)
 
 template:setRepairCrewCount(0)
 --	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize

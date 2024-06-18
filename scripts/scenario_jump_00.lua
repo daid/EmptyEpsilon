@@ -11,16 +11,18 @@ function init()
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
 	-- When distance set to 50000, it takes about 7-8 minutes enemy to reach attack range	
-    addGMFunction(_("buttonGM", "Enemy - Very small"), function() spawnwave(1) end)
+    addGMFunction(_("buttonGM", "OC - Machine - XS"), function() spawnwave(1) end)
 	
 	setScenarioChange('Change scenario - 01', "scenario_jump_01.lua")
 
 	-- Generate scenario map
 	-- Random asteroids and nebula
-	generateSpace(fx, fy)
+	local ox = -48000
+	local oy = 37000
+	odysseus:setPosition(ox,oy)
+	generateSpace(ox, oy)
 
 	--Scenario specific space objects
-	local jumpPoint = CpuShip():setFaction("EOC Starfleet"):setTemplate("Jump point"):setPosition(-2000, -1500):setCallSign("Jump point - A3"):setCanBeDestroyed(true):setScannedByFaction("EOC Starfleet", true)
-
+	local jumpPoint = CpuShip():setFaction("EOC Starfleet"):setTemplate("Jump point"):setPosition(ox-2000, oy-1500):setCallSign("Jump point - A3"):setCanBeDestroyed(true):setScannedByFaction("EOC Starfleet", true)
 end
 

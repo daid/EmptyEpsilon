@@ -6,8 +6,12 @@ end
 function showEOCOrders()
     removeGMFunction('Show EOC orders')   
     addGMFunction(_("buttonGM", 'Hide EOC orders'), function() hideEOCorders() end)
-    addGMFunction(_("buttonGM", 'Retreat civilians loc'), function() civiliansRetreatOnClick() end)
-    addGMFunction(_("buttonGM", 'Military defend loc'), function() moveToFightOnClick() end)
+    addGMFunction(_("buttonGM", 'OC - Civilians'), function() civiliansRetreatOnClick() end)
+    addGMFunction(_("buttonGM", 'OC - Military'), function() moveToFightOnClick() end)
+    addGMFunction(_("buttonGM", 'OC - Move fleet'), function() moveFleetOnClick() end)
+    addGMFunction(_("buttonGM", "Order Formation"), function() fleetFlyFormation() end)
+    addGMFunction(_("buttonGM", "Order Idle"), function() orderFleetIdle() end)
+
     addGMFunction(
         _("buttonGM", 'Spawn Aurora fighters'), 
         function()
@@ -31,12 +35,13 @@ function showEOCOrders()
         function()
             spawnFriendlyFighter(halo, 4, 8)
         end)
-
 end
 
 function hideEOCorders()
-    removeGMFunction('Retreat civilians loc')   
-    removeGMFunction('Military defend loc')
+    removeGMFunction('OC - Civilians')   
+    removeGMFunction('OC - Military')
+    removeGMFunction('Order Idle')
+    removeGMFunction('Order Formation')
     removeGMFunction('Spawn Aurora fighters')
     removeGMFunction('Spawn Valor fighters')
     removeGMFunction('Spawn Inferno fighters')
@@ -52,6 +57,17 @@ function civiliansRetreatOnClick()
     end)
 end
 
+function civiliansRetreat(x,y)
+    for key, object in ipairs(fleetObjectsIn) do
+        if object:getFaction() ~= "EOC Starfleet" then
+            tx = x+math.floor(random(-5000, 5000))
+            ty = y+math.floor(random(-5000, 5000))
+            object:orderFlyTowardsBlind(tx, ty)
+        end
+    end
+end
+
+
 function moveToFightOnClick()
     onGMClick(function(x, y)
         moveToFight(x,y)
@@ -59,29 +75,54 @@ function moveToFightOnClick()
     end)
 end
 
-function civiliansRetreat(x,y)
-    for key, value in ipairs(fleet_list) do
-            if value.military == false then
-                 tx = x+math.floor(random(-5000, 5000))
-                 ty = y+math.floor(random(-5000, 5000))
-                value.name:orderFlyTowardsBlind(tx, ty)
-            end
-        end
-end
-
 function moveToFight(x,y)
-    for key, value in ipairs(fleet_list) do
-        if value.military == true then
-             tx = x+math.floor(random(-5000, 5000))
+    for idx, object in ipairs(fleetObjectsIn) do
+        if object:getFaction() == "EOC Starfleet" then
+            tx = x+math.floor(random(-5000, 5000))
              ty = y+math.floor(random(-5000, 5000))
-            value.name:orderDefendLocation(tx, ty)
+            object:orderDefendLocation(tx, ty)
         end
     end
 end
 
-function returnFormation()
-
+function moveFleetOnClick()
+    onGMClick(function(x, y)
+        moveFleet(x,y)
+        onGMClick(nil)
+    end)
 end
+
+
+function moveFleet(x,y)
+    aurora:orderFlyTowards(x,y)
+end
+
+
+
+function fleetFlyFormation()
+    flagship = aurora
+    flagship:orderIdle()
+    for idx, object in ipairs(fleetObjectsIn) do
+        local callsign = object:getCallSign()
+        for key, value in ipairs(fleet_list) do    
+            if value.callsign ~= "ESS Aurora" then
+                if object:getCallSign() == value.name or object:getCallSign() == value.callsign then
+                local xoff = value.xoff
+                local yoff = value.yoff            
+                xset, yset, x1, y1 = calculateSpawnLocations(xoff, yoff)
+                object:orderFlyFormation(flagship, xset, yset)
+                end
+            end
+        end
+    end
+end
+
+function orderFleetIdle()
+    for idx, object in ipairs(fleetObjectsIn) do
+        object:orderIdle()
+    end
+end
+
 
 --Spawn friendly fighters
 function spawnFriendlyFighter(ship, minFighter, maxFighter)
