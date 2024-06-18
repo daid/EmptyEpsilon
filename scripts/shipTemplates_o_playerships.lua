@@ -1,6 +1,6 @@
 -- Fighter
-template = ShipTemplate():setName("Fighter F967"):setClass("Starfighter", "Interceptors"):setModel("eoc_fighter"):setType("playership")
-template:setRadarTrace("radar_fighter.png")
+template = ShipTemplate():setName("Comet Starfighter"):setClass("Comet", "Starfighter"):setModel("eoc_fighter"):setType("playership")
+template:setRadarTrace("eoc_starfighter.png")
 --             Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 30, 0, 1200.0, 2.0, 30)
 template:setHull(200)
@@ -15,6 +15,11 @@ template:setTubes(2, 10.0) -- Amount of torpedo tubes, loading time
 template:setTubeDirection(0, 0)
 template:setTubeDirection(1, 0)
 template:setWeaponStorage("Homing", 250)
+
+
+
+template:setShortRangeRadarRange(5000)
+template:setLongRangeRadarRange(50000)
 
 template:setShortRangeRadarRange(10000)
 template:setLongRangeRadarRange(100000)
@@ -43,8 +48,8 @@ template:addDoor( 4, 1, true)
 
 
 -- Starcaller
-template = ShipTemplate():setName("Scoutship S392"):setClass("Frigate", "Cruiser"):setModel("eoc_frigate"):setType("playership")
-template:setRadarTrace("radar_striker.png")
+template = ShipTemplate():setName("Comet Scout"):setClass("Comet", "Scout"):setModel("space_tug"):setType("playership")
+template:setRadarTrace("eoc_scout.png")
 --             Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 30, 0, 1500.0, 4.0, 50)
 template:setTubes(4, 8.0)
@@ -54,15 +59,15 @@ template:setTubeDirection(2, 45)
 template:setTubeDirection(3,-45)
 template:setHull(200)
 template:setShields(300, 300)
-template:setSpeed(30, 10, 10)
+template:setSpeed(70, 10, 10)
 template:setCombatManeuver(300, 50)
 template:setJumpDrive(false)
 template:setCloaking(false)
 template:setEnergyStorage(600)
 template:setWeaponStorage("Homing", 250)
 
-template:setShortRangeRadarRange(10000)
-template:setLongRangeRadarRange(100000)
+template:setShortRangeRadarRange(7500)
+template:setLongRangeRadarRange(75000)
 
 template:setRepairCrewCount(0)
 --	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
@@ -88,9 +93,10 @@ template:addDoor( 4, 1, true)
 
 
 
+
 -- Odysseus
-template = ShipTemplate():setName("Corvette C743"):setClass("Corvette", "Destroyer"):setModel("eoc_odysseus"):setType("playership")
-template:setRadarTrace("radar_transport.png")
+template = ShipTemplate():setName("Helios Corvette"):setClass("Helios", "Corvette"):setModel("eoc_odysseus"):setType("playership")
+template:setRadarTrace("eoc_corvette.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40, 0, 2000.0, 4.0, 100)
 template:setTubes(6, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
@@ -103,7 +109,7 @@ template:setTubeDirection(5, 160)
 -- template:setDockClasses("Starfighter", "Frigate")
 template:setHull(400)
 template:setShields(600, 600)
-template:setSpeed(20, 8, 10)
+template:setSpeed(40, 8, 10)
 template:setWarpSpeed(0)
 template:setJumpDrive(false)
 template:setEnergyStorage(1000)
@@ -111,7 +117,7 @@ template:setCombatManeuver(500, 150)
 template:setWeaponStorage("Homing", 500)
 template:setWeaponStorage("EMP", 500)
 template:setShortRangeRadarRange(10000)
-template:setLongRangeRadarRange(100000)
+template:setLongRangeRadarRange(75000)
 
 template:setRepairCrewCount(0)
 --	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
@@ -125,20 +131,3 @@ template:addRoomSystem( 4, 2, 4, 3, "Reactor")
 template:addRoomSystem( 2, 2, 2, 3, "MissileSystem")
 template:addRoomSystem( 1, 2, 1, 3, "FrontShield")
 template:addRoomSystem( 0, 2, 1, 3, "Beamweapons")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---

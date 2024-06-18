@@ -1,45 +1,34 @@
 -- Name: Jump 02
 -- Type: Odysseus
--- Description: Onload: Odysseus, random asteroids.
+-- Description: Map: - Enemies: Backup enemy fleet Allies: No friendly fleet
 
 require("utils.lua")
 require("utils_odysseus.lua")
 
 function init()
-
-  	for n=1,100 do
-    	Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
-    	VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
-  	end
-  
-	-- Add common GM functions
-	addGMFunction("Sync buttons", sync_buttons)
-
-	addGMFunction("Enemy north", wavenorth)
-	addGMFunction("Enemy east", waveeast)
-	addGMFunction("Enemy south", wavesouth)
-	addGMFunction("Enemy west", wavewest)
 	
-	addGMFunction("Change scenario to 03", changeScenarioPrep)
+	local ox =-10000
+	local oy = 15000
+	odysseus:setPosition(ox, oy)
+
+	-- Add GM common functions - Order of the buttons: Fleet, enemies, Scenario change, scenario specific  
+	setScenarioChange('Change scenario - 03', "scenario_jump_03.lua")
+
+	-- Generate scenario map
+	addGMFunction(_("buttonGM", "Coordinates D3-101"), function()
+		removeGMFunction("Coordinates D3-117")
+		removeGMFunction("Coordinates D3-101")
+	end)
+		addGMFunction(_("buttonGM", "Coordinates D3-117"), function() 
+		setUpPlanet("Sronsh", ox-85000, oy-25000) 
+		removeGMFunction("Coordinates D3-117")
+		removeGMFunction("Coordinates D3-101")
+	end)
+
+
+	generateSpace(ox, oy)
+
+
 end
 
-function changeScenarioPrep()
 
-	removeGMFunction("Change scenario to 03")
-	addGMFunction("Cancel change", changeScenarioCancel)
-	addGMFunction("Confirm change", changeScenario)
-
-end
-
-function changeScenarioCancel()
-	removeGMFunction("Confirm change")
-		removeGMFunction("Cancel change")
-	addGMFunction("Change scenario to 03", changeScenarioPrep)
-
-end
-
-function changeScenario()
-
-	setScenario("scenario_jump_03.lua", "Null")
-
-end

@@ -5,36 +5,35 @@
 require("utils.lua")
 require("utils_odysseus.lua")
 
+
 function init()
+	local ox =-30000
+	local oy = 20000
+	odysseus:setPosition(ox, oy)
 
-	for asteroid_counter=1,50 do
-		Asteroid():setPosition(random(-75000, 75000), random(-75000, 75000))
-	end
+	local sx = -5000
+	local sy = 4500
+	setSpawnFleetButton("Friendly 3", 3, "A", sx, sy, 2, 1, true, "formation", 0, 3, 0, 3)
 
-	-- Add common GM functions
-	addGMFunction("Sync buttons", sync_buttons)
+	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)
+	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
+	-- When distance set to 50000, it takes about 7-8 minutes enemy to reach attack range	
+	addGMFunction(_("Enemy", "OC - Machine - Moon SX"), function() spawnwave(1, "target", ox+2000, oy-15000) end)
+	addGMFunction(_("Enemy", "OC - Machine - Fleet SX"), function() spawnwave(1) end)
 
-	addGMFunction("Enemy north", wavenorth)
-	addGMFunction("Enemy east", waveeast)
-	addGMFunction("Enemy south", wavesouth)
-	addGMFunction("Enemy west", wavewest)
+	addGMFunction(_("Enemy", "OC - Machine - L"), function() spawnwave(4) end)
 
-	addGMFunction("Change scenario to 13", changeScenarioPrep)
+   
+	setScenarioChange('Change scenario - 13', "scenario_jump_13.lua")
 
-end
+	-- Generate scenario map
 
-function changeScenarioPrep()
-	removeGMFunction("Change scenario to 13")
-	addGMFunction("Cancel change", changeScenarioCancel)
-	addGMFunction("Confirm change", changeScenario)
-end
+	generateSpace(sx, sy)
 
-function changeScenarioCancel()
-	removeGMFunction("Confirm change")
-		removeGMFunction("Cancel change")
-	addGMFunction("Change scenario to 13", changeScenarioPrep)
-end
+	planet = setUpPlanet("M12-PI87", ox+2000, oy-15000, 0.99)
+	planet = setUpPlanet("P-OC04-YU08", ox+20000, oy-53000, 1.4)
 
-function changeScenario()
-	setScenario("scenario_jump_13.lua", "Null")
+	addGMFunction("Destroy OSS Karma", confirm_karma)
+
+
 end

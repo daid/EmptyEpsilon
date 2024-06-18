@@ -1,43 +1,23 @@
 -- Name: Jump 00
 -- Type: Odysseus
--- Description: Onload: Odysseus, random asteroids.
+-- Description: Map: Jump point element near starting point. Enemies: Button to spawn small enemy fleet at the edge of player visibility range Allies: No friendly fleet
 
 require("utils.lua")
 require("utils_odysseus.lua")
 
 function init()
-  	for n=1,100 do
-		Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
-		VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
-  	end
-
-	for n=1,10 do
-		Nebula():setPosition(random(-100000, 100000), random(-100000, 100000))
-  	end
-
-	-- Add common GM functions
-	addGMFunction("Sync buttons", sync_buttons)
+    addGMFunction(_("buttonGM", "OC - Machine - XS"), function() spawnwave(1) end)
 	
-	addGMFunction("Enemy north", wavenorth)
-	addGMFunction("Enemy east", waveeast)
-	addGMFunction("Enemy south", wavesouth)
-	addGMFunction("Enemy west", wavewest)
-	
-	addGMFunction("Change scenario to 01", changeScenarioPrep)
+	setScenarioChange('Change scenario - 01', "scenario_jump_01.lua")
+
+	-- Generate scenario map
+	-- Random asteroids and nebula
+	local ox = -48000
+	local oy = 37000
+	odysseus:setPosition(ox,oy)
+	generateSpace(ox, oy)
+
+	--Scenario specific space objects
+	local jumpPoint = CpuShip():setFaction("EOC Starfleet"):setTemplate("Jump point"):setPosition(ox-2000, oy-1500):setCallSign("Jump point - A3"):setCanBeDestroyed(true):setScannedByFaction("EOC Starfleet", true)
 end
 
-function changeScenarioPrep()
-	removeGMFunction("Change scenario to 01")
-	addGMFunction("Cancel change", changeScenarioCancel)
-	addGMFunction("Confirm change", changeScenario)
-end
-
-function changeScenarioCancel()
-	removeGMFunction("Confirm change")
-		removeGMFunction("Cancel change")
-	addGMFunction("Change scenario to 01", changeScenarioPrep)
-end
-
-function changeScenario()
-	setScenario("scenario_jump_01.lua", "Null")
-end
