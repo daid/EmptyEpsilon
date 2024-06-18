@@ -33,13 +33,19 @@ end
 --- SpaceObject:setHeading() and SpaceObject:setRotation() do not change the helm's target heading on PlayerSpaceships. To do that, use PlayerSpaceship:commandTargetRotation().
 --- Example: obj:setHeading(0)
 function Entity:setHeading(heading)
-    if self.components.transform then self.components.transform.rotation = heading - 90 end
+    if self.components.transform then self.components.transform.rotation = heading + 270 end
     return self
 end
 --- Returns this SpaceObject's heading, in degrees ranging from 0 to 360.
 --- Example: heading = obj:getHeading(0)
 function Entity:getHeading()
-    if self.components.transform then return self.components.transform.rotation + 90 end
+    if self.components.transform then
+        local heading = self.components.transform.rotation - 270
+        while heading < 0 do heading = heading + 360 end
+        while heading > 360 do heading = heading - 360 end
+        return heading
+    end
+    return 0
 end
 --- Returns this SpaceObject's directional velocity within 2D space as an x/y vector.
 --- The values are relative x/y coordinates from the SpaceObject's current position (a 2D velocity vector).

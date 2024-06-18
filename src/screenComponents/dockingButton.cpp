@@ -39,7 +39,7 @@ void GuiDockingButton::onUpdate()
 {
     if (!my_spaceship) { hide(); return; }
     auto port = my_spaceship.getComponent<DockingPort>();
-    if (!port) { hide(); return; }
+    setVisible(port != nullptr);
 
     if (isVisible())
     {
