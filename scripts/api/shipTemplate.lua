@@ -277,8 +277,13 @@ end
 function ShipTemplate:setTubes(amount, loading_time)
     if self.missile_tubes == nil then self.missile_tubes = {} end
     for n=1,amount do
-        self.missile_tubes[n] = {load_time=loading_time}
+        if #self.missile_tubes < n then
+            self.missile_tubes[n] = {load_time=loading_time}
+        else
+            self.missile_tubes[n].load_time = loading_time
+        end
     end
+    self.missile_tubes[amount+1] = nil
     return self
 end
 --- Sets the delay, in seconds, for loading and unloading the WeaponTube with the given index.

@@ -5,6 +5,7 @@
 #include "components/jumpdrive.h"
 #include "components/warpdrive.h"
 #include "components/reactor.h"
+#include "components/coolant.h"
 #include "systems/warpsystem.h"
 #include "ecs/query.h"
 #include "random.h"
@@ -44,7 +45,8 @@ void JumpSystem::update(float delta)
                 auto target_position = position.getPosition() + vec2FromAngle(position.getRotation()) * distance;
                 target_position = WarpSystem::getFirstNoneJammedPosition(position.getPosition(), target_position);
                 position.setPosition(target_position);
-                jump.addHeat(jump.heat_per_jump);
+                if (entity.hasComponent<Coolant>())
+                    jump.addHeat(jump.heat_per_jump);
 
                 jump.delay = 0.f;
             }

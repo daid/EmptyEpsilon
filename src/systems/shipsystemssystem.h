@@ -12,5 +12,5 @@ public:
 
     void update(float delta) override;
 private:
-    void updateSystem(ShipSystem& system, float delta);
+    void updateSystem(ShipSystem& system, float delta, bool has_coolant);
 };

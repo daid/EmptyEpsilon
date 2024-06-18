@@ -2,12 +2,13 @@
 #include "components/docking.h"
 #include "components/collision.h"
 #include "components/impulse.h"
+#include "components/warpdrive.h"
 #include "ecs/query.h"
 
 
 void ImpulseSystem::update(float delta)
 {
-    for(auto [entity, impulse, physics, transform] : sp::ecs::Query<ImpulseEngine, sp::Physics, sp::Transform>())
+    for(auto [entity, impulse, physics, transform, warp_drive] : sp::ecs::Query<ImpulseEngine, sp::Physics, sp::Transform, sp::ecs::optional<WarpDrive>>())
     {
         //Here we want to have max speed at 100% impulse, and max reverse speed at -100% impulse
         float cap_speed = impulse.max_speed_forward;
@@ -21,22 +22,21 @@ void ImpulseSystem::update(float delta)
             cap_speed = impulse.max_speed_reverse;
         }
 
-        if (impulse.request > 1.0f)
-            impulse.request = 1.0f;
-        if (impulse.request < -1.0f)
-            impulse.request = -1.0f;
-        if (impulse.actual < impulse.request)
+        auto request = std::clamp(impulse.request, -1.0f, 1.0f);
+        if (warp_drive && warp_drive->request > 0)
+            request = 1.0f;
+        if (impulse.actual < request)
         {
             if (cap_speed > 0)
                 impulse.actual += delta * (impulse.acceleration_forward / cap_speed);
-            if (impulse.actual > impulse.request)
-                impulse.actual = impulse.request;
-        }else if (impulse.actual > impulse.request)
+            if (impulse.actual > request)
+                impulse.actual = request;
+        }else if (impulse.actual > request)
         {
             if (cap_speed > 0)
                 impulse.actual -= delta * (impulse.acceleration_reverse / cap_speed);
-            if (impulse.actual < impulse.request)
-                impulse.actual = impulse.request;
+            if (impulse.actual < request)
+                impulse.actual = request;
         }
 
         // Determine forward direction and velocity.

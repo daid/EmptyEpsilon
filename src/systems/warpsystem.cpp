@@ -6,6 +6,7 @@
 #include "components/reactor.h"
 #include "components/shields.h"
 #include "components/faction.h"
+#include "components/coolant.h"
 #include "ecs/query.h"
 #include "playerInfo.h"
 
@@ -21,10 +22,6 @@ void WarpSystem::update(float delta)
         }
         if (warp.request > 0 || warp.current > 0)
         {
-            if (impulse) {
-                impulse->request = 1.0;
-            }
-
             if (!impulse || impulse->actual >= 1.0f) {
                 if (warp.current < warp.request)
                 {
@@ -53,7 +50,8 @@ void WarpSystem::update(float delta)
         }
 
         // Add heat based on warp factor.
-        warp.addHeat(warp.current * delta * warp.heat_per_warp * warp.getSystemEffectiveness());
+        if (entity.hasComponent<Coolant>())
+            warp.addHeat(warp.current * delta * warp.heat_per_warp * warp.getSystemEffectiveness());
 
         // Determine forward direction and velocity.
         auto forward = vec2FromAngle(position.getRotation());

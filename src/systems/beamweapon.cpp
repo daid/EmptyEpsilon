@@ -9,6 +9,7 @@
 #include "components/target.h"
 #include "components/shields.h"
 #include "components/faction.h"
+#include "components/coolant.h"
 #include "components/sfx.h"
 #include "ecs/query.h"
 #include "main.h"
@@ -96,7 +97,8 @@ void BeamWeaponSystem::update(float delta)
                         if (distance < mount.range && mount.cooldown <= 0.0f && fabsf(angle_diff) < mount.arc / 2.0f && (!reactor || reactor->useEnergy(mount.energy_per_beam_fire)))
                         {
                             // ... add heat to the beam and zap the target.
-                            beamsys.addHeat(mount.heat_per_beam_fire);
+                            if (entity.hasComponent<Coolant>())
+                                beamsys.addHeat(mount.heat_per_beam_fire);
 
                             //When we fire a beam, and we hit an enemy, check if we are not scanned yet, if we are not, and we hit something that we know is an enemy or friendly,
                             //  we now know if this ship is an enemy or friend.

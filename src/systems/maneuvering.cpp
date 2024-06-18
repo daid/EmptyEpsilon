@@ -2,6 +2,7 @@
 #include "components/collision.h"
 #include "components/maneuveringthrusters.h"
 #include "components/impulse.h"
+#include "components/coolant.h"
 #include "ecs/query.h"
 #include "vectorUtils.h"
 
@@ -80,10 +81,10 @@ void ManeuveringSystem::update(float delta)
             }
             // Add heat to systems consuming combat maneuver boost.
             auto thrusters = entity.getComponent<ManeuveringThrusters>();
-            if (thrusters)
+            if (thrusters && entity.hasComponent<Coolant>())
                 thrusters->addHeat(std::abs(combat.boost.active) * delta * heat_per_combat_maneuver_boost);
             auto impulse = entity.getComponent<ImpulseEngine>();
-            if (impulse)
+            if (impulse && entity.hasComponent<Coolant>())
                 impulse->addHeat(std::abs(combat.strafe.active) * delta * heat_per_combat_maneuver_strafe);
         }else if (combat.charge < 1.0f)
         {
