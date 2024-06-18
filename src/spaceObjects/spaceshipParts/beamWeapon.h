@@ -61,6 +61,8 @@ public:
 
     float getCooldown();
 
+    bool isFiring();
+
     void update(float delta);
 protected:
     glm::vec3 position;//Visual position on the 3D model where this beam is fired from.
@@ -83,6 +85,7 @@ protected:
     //Beam runtime state
     float cooldown;
     string beam_texture;
+    bool firing;
 };
 
 #endif//BEAM_WEAPON_H

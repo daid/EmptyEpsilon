@@ -44,7 +44,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Draw the science radar.
-    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", 100000.0, &targets);
+    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", my_spaceship->getLongRangeRadarRange(), &targets);
     science_radar->setPosition(-270, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     science_radar->setRangeIndicatorStepSize(10000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     science_radar->setCallbacks(
@@ -468,6 +468,29 @@ void ScienceScreen::onUpdate()
 {
     if (my_spaceship)
     {
+        // Toggle probe view
+        if (keys.science_probe_view.getDown())
+        {
+            P<ScanProbe> probe;
+            if (game_server)
+                probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
+            else
+                probe = game_client->getObjectById(my_spaceship->linked_science_probe_id);
+
+            if (probe && probe_view_button->getValue() == false)
+            {
+                auto probe_position = probe->getPosition();
+                science_radar->hide();
+                probe_radar->show();
+                probe_radar->setViewPosition(probe_position)->show();
+                probe_view_button->setValue(true);
+            } else {
+                probe_view_button->setValue(false);
+                science_radar->show();
+                probe_radar->hide();
+            }
+        }
+
         // Initiate a scan on scannable objects.
         if (keys.science_scan_object.getDown() &&
             my_spaceship->getCanScan() &&
@@ -485,7 +508,7 @@ void ScienceScreen::onUpdate()
             }
         }
 
-        // Cycle selection through scannable objects.
+        // Cycle selection forward through scannable objects.
         if (keys.science_select_next_scannable.getDown() &&
             my_spaceship->scanning_delay == 0.0f)
         {
@@ -530,6 +553,41 @@ void ScienceScreen::onUpdate()
                     targets.set(obj);
                     return;
                 }
+            }
+        }
+        // Cycle selection backward through scannable objects.
+        if (keys.science_select_prev_scannable.getDown() &&
+            my_spaceship->scanning_delay == 0.0f)
+        {
+            P<SpaceObject> last_valid = my_spaceship;
+            for (P<SpaceObject> obj : space_object_list)
+            {
+                // If this object is my ship or not visible due to a Nebula, skip it.
+                if (obj == my_spaceship || Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition(), my_spaceship->getShortRangeRadarRange()))
+                    continue;
+                
+                // If this object is the current object
+                if (obj == targets.get())
+                {
+                    if (last_valid == my_spaceship) {
+                        // If no preceding valid target exists, continue;
+                        continue;
+                    } else {
+                        // Otherwise select the last valid target and return
+                        targets.set(last_valid);
+                        return;
+                    }
+                }
+                // If this is a valid scannable object, set it as the latest valid object 
+                if (glm::length(obj->getPosition() - my_spaceship->getPosition()) < science_radar->getDistance() && obj->canBeScannedBy(my_spaceship))
+                {
+                    last_valid = obj;
+                    continue;
+                }
+            }
+            // If you reach the end of the list, set the last valid object as the target (this means that the previous target was the first valid object)
+            if (last_valid != my_spaceship) {
+                targets.set(last_valid);
             }
         }
     }

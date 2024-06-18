@@ -32,7 +32,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
-    radar = new GuiRadarView(this, "HELMS_RADAR", 10000.0, &targets);
+    radar = new GuiRadarView(this, "HELMS_RADAR", my_spaceship->getShortRangeRadarRange(), &targets);
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
@@ -158,6 +158,34 @@ void WeaponsScreen::onUpdate()
                 }
             }
         }
+        if (keys.weapons_enemy_prev_target.getDown())
+        {
+            P<SpaceObject> last_valid = my_spaceship;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == my_spaceship)
+                    continue;
+                if (obj == targets.get())
+                {
+                    if (last_valid == my_spaceship) {
+                      continue;
+                    } else {
+                      targets.set(last_valid);
+                      my_spaceship->commandSetTarget(targets.get());
+                      return;
+                    }
+                }
+                if (glm::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                {
+                    last_valid = obj;
+                    continue;
+                }
+            }
+            if (last_valid != my_spaceship) {
+                targets.set(last_valid);
+                my_spaceship->commandSetTarget(targets.get());
+            }
+        }    
         if (keys.weapons_next_target.getDown())
         {
             bool current_found = false;
@@ -189,6 +217,35 @@ void WeaponsScreen::onUpdate()
                 }
             }
         }
+        if (keys.weapons_prev_target.getDown())
+        {
+            P<SpaceObject> last_valid = my_spaceship;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == my_spaceship)
+                    continue;
+                if (obj == targets.get())
+                {
+                    if (last_valid == my_spaceship) {
+                      continue;
+                    } else {
+                      targets.set(last_valid);
+                      my_spaceship->commandSetTarget(targets.get());
+                      return;
+                    }
+                }
+                if (glm::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && obj->canBeTargetedBy(my_spaceship))
+                {
+                    last_valid = obj;
+                    continue;
+                }
+            }
+            if (last_valid != my_spaceship) {
+                targets.set(last_valid);
+                my_spaceship->commandSetTarget(targets.get());
+            }
+        }
+
         auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();
         if (aim_adjust != 0.0f)
         {

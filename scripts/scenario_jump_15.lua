@@ -57,6 +57,13 @@ function init()
 		Asteroid():setPosition(x1, y1):setSize(random(200, 2000))
 	end
 
+	-- Add common GM functions
+	addGMFunction("Sync buttons", sync_buttons)
+
+	addGMFunction("Enemy north", wavenorth)
+	addGMFunction("Enemy east", waveeast)
+	addGMFunction("Enemy south", wavesouth)
+	addGMFunction("Enemy west", wavewest)
 
 	  planet = setUpPlanet("AS-OH108", lx, ly, 0.7)
 	  Planet():setPosition(lx-2000, ly+2300):setPlanetRadius(700):setDistanceFromMovementPlane(-500):setPlanetSurfaceTexture("planets/asteroid.png")

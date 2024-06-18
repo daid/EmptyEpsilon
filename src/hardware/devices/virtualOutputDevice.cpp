@@ -110,6 +110,6 @@ void VirtualOutputDevice::render(sp::RenderTarget& renderer)
             }
         }
 
-        renderer.fillRect(sp::Rect((location % 32) * 32 + 64, (location / 32) * 32 + 64, 32, 32), color);
+        renderer.fillRect(sp::Rect((location % 8) * 8 + 16, (location / 8) * 8 + 16, 8, 8), color);
     }
 }

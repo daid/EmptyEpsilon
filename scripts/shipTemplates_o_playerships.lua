@@ -21,6 +21,9 @@ template:setWeaponStorage("Homing", 250)
 template:setShortRangeRadarRange(5000)
 template:setLongRangeRadarRange(50000)
 
+template:setShortRangeRadarRange(10000)
+template:setLongRangeRadarRange(100000)
+
 template:setRepairCrewCount(0)
 --	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
 template:addRoomSystem( 0, 1, 1, 2, "Impulse")

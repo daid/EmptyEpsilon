@@ -31,6 +31,13 @@ enum EAlertLevel
     AL_MAX          // ?
 };
 
+enum ELandingPadState
+{
+    LP_Destroyed,  // Fighter/Starcaller has been destroyed by damage
+    LP_Docked,     // Fighter/Starcaller is docked on the landing pad
+    LP_Launched    // Fighter/Starcaller has been launched and is in space
+};
+
 class PlayerSpaceship : public SpaceShip
 {
 public:
@@ -159,6 +166,9 @@ public:
     ScriptSimpleCallback on_probe_link;
     ScriptSimpleCallback on_probe_unlink;
 
+    // Odysseus-specific properties related to launching fighters
+    ELandingPadState landing_pad_state[5] = {LP_Destroyed, LP_Destroyed, LP_Destroyed, LP_Destroyed, LP_Destroyed};
+
     // Main screen content
     EMainScreenSetting main_screen_setting;
     // Content overlaid on the main screen, such as comms
@@ -217,7 +227,7 @@ public:
     bool getCanLaunchProbe() { return can_launch_probe; }
 
     void setSelfDestructDamage(float amount) { self_destruct_damage = std::max(0.0f, amount); }
-    float getSelfDestructDamage() { return self_destruct_damage; }
+    float getSelfDestructDamage() { return self_destruct_damage; }  
     void setSelfDestructSize(float size) { self_destruct_size = std::max(0.0f, size); }
     float getSelfDestructSize() { return self_destruct_size; }
 
@@ -229,6 +239,15 @@ public:
     void onProbeLaunch(ScriptSimpleCallback callback);
     void onProbeLink(ScriptSimpleCallback callback);
     void onProbeUnlink(ScriptSimpleCallback callback);
+
+    void setLandingPadDocked(int number) { landing_pad_state[number] = LP_Docked; }
+    void setLandingPadDestroyed(int number) { landing_pad_state[number] = LP_Destroyed; }
+    void setLandingPadLaunched(int number) { landing_pad_state[number] = LP_Launched; }
+    bool isLandingPadDocked(int number) { return landing_pad_state[number] == LP_Docked; }
+    bool isLandingPadDestroyed(int number) { return landing_pad_state[number] == LP_Destroyed; }
+    bool isLandingPadLaunched(int number) { return landing_pad_state[number] == LP_Launched; }
+    void setLandingPadState(int number, ELandingPadState state) { landing_pad_state[number] = state; }
+    ELandingPadState getLandingPadState(int number) { return landing_pad_state[number]; }
 
     void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback, std::optional<int> order);
     void addCustomInfo(ECrewPosition position, string name, string caption, std::optional<int> order);

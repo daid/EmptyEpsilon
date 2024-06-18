@@ -56,6 +56,13 @@ function init()
 	--x1, y1, x2, y2, spacing, object_type, rows, chance, randomize
 	createObjectsOnLine(120000,-80000, 120000,80000, 40000, Nebula, 1, 100, 1)
 
+	-- Add common GM functions
+	addGMFunction("Sync buttons", sync_buttons)
+
+	addGMFunction("Enemy north", wavenorth)
+	addGMFunction("Enemy east", waveeast)
+	addGMFunction("Enemy south", wavesouth)
+	addGMFunction("Enemy west", wavewest)
 
 
 	essody18_launched = 0

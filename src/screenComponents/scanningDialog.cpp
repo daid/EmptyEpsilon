@@ -102,6 +102,10 @@ void GuiScanningDialog::onUpdate()
                 set_active[n] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
             }
         }
+
+        if (keys.science_cancel_scan.getDown()) {
+            my_spaceship->commandScanCancel();
+        }
     }
 }
 
