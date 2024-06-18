@@ -174,10 +174,11 @@ end
 --- stbo:setShieldsMax(50,40,30,20)
 function Entity:setShieldsMax(...)
     if self.components.shields then
-        for i, level in ipairs({...}) do
-            if i <= #self.components.shields then
-                self.components.shields[i].max = max
-            end
+        for i, max in ipairs({...}) do
+            self.components.shields[i].max = max
+        end
+        while select('#', ...) < #self.components.shields do
+            self.components.shields[#self.components.shields] = nil
         end
     end
     return self
