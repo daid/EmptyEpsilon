@@ -394,8 +394,12 @@ end
 --- Setting any value also enables the "warp" system and controls.
 --- Example: template:setWarpSpeed(1000)
 function ShipTemplate:setWarpSpeed(speed)
-    if self.warp_drive == nil then self.warp_drive = {} end
-    self.warp_drive.speed_per_level = speed
+    if speed <= 0 then
+        self.warp_drive = nil
+    else
+        if self.warp_drive == nil then self.warp_drive = {} end
+        self.warp_drive.speed_per_level = speed
+    end
     return self
 end
 --- Defines whether ShipTemplateBasedObjects created from this ShipTemplate supply energy to docked PlayerSpaceships.

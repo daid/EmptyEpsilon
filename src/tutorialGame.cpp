@@ -89,7 +89,7 @@ void TutorialGame::createScreens()
     text = new GuiScrollText(frame, "", "");
     text->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(900 - 40, 200 - 40);
     next_button = new GuiButton(frame, "", tr("Next"), [this]() {
-        _onNext.call<void>();
+        LuaConsole::checkResult(_onNext.call<void>());
     });
     next_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
 

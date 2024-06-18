@@ -268,14 +268,14 @@ end
 --- Returns a value between 0.0 (no heat) and 1.0 (overheating).
 --- Example: ship:getSystemHeat("impulse")
 function Entity:getSystemHeat(system_name)
-    return __getSystemPropertyByName(self, system_name, "heat")
+    return __getSystemPropertyByName(self, system_name, "heat_level")
 end
 --- Sets the given system's heat level on this SpaceShip.
 --- CpuShips don't generate or manage heat. Setting this has no effect on them.
 --- Valid range is 0.0 (fully disabled) to 1.0 (undamaged).
 --- Example: ship:setSystemHeat("impulse", 0.5) -- sets the ship's impulse drive heat to half of capacity
 function Entity:setSystemHeat(system_name, amount)
-    __setSystemPropertyByName(self, system_name, "heat", amount)
+    __setSystemPropertyByName(self, system_name, "heat_level", amount)
     return self
 end
 --- Returns the given system's rate of heating or cooling, in percent (0.01 = 1%) per second?, on this SpaceShip.
