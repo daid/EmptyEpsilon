@@ -22,6 +22,8 @@
 #include "components/warpdrive.h"
 #include "components/maneuveringthrusters.h"
 #include "components/target.h"
+#include "components/shields.h"
+#include "components/coolant.h"
 #include "systems/jumpsystem.h"
 #include "systems/missilesystem.h"
 
@@ -709,6 +711,57 @@ void luaCommandFireTubeAtTarget(sp::ecs::Entity ship, int tube_nr, sp::ecs::Enti
     luaCommandFireTube(ship, tube_nr, targetAngle);
 }
 
+void luaCommandSetShields(sp::ecs::Entity ship, bool active) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetShields(active); return; }
+    auto shields = ship.getComponent<Shields>();
+    if (shields) {
+        if (shields->calibration_delay <= 0.0f && active != shields->active)
+        {
+            shields->active = active;
+            if (active)
+                gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_up.wav");
+            else
+                gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_down.wav");
+        }
+    }
+}
+
+void luaCommandMainScreenSetting(sp::ecs::Entity ship, MainScreenSetting mainScreen) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandMainScreenSetting(mainScreen); return; }
+    if (auto pc = ship.getComponent<PlayerControl>())
+        pc->main_screen_setting = mainScreen;
+}
+void luaCommandMainScreenOverlay(sp::ecs::Entity ship, MainScreenOverlay mainScreen) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandMainScreenOverlay(mainScreen); return; }
+    if (auto pc = ship.getComponent<PlayerControl>())
+        pc->main_screen_overlay = mainScreen;
+}
+void luaCommandScan(sp::ecs::Entity ship, sp::ecs::Entity target) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandScan(target); return; }
+    if (auto scanner = ship.getComponent<ScienceScanner>())
+    {
+        scanner->delay = scanner->max_scanning_delay;
+        scanner->target = target;
+    }
+}
+void luaCommandSetSystemPowerRequest(sp::ecs::Entity ship, ShipSystem::Type system, float power_level) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetSystemPowerRequest(system, power_level); return; }
+    auto sys = ShipSystem::get(ship, system);
+    if (sys && power_level >= 0.0f && power_level <= 3.0f)
+        sys->power_request = power_level;
+}
+void luaCommandSetSystemCoolantRequest(sp::ecs::Entity ship, ShipSystem::Type system, float coolant_level) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetSystemCoolantRequest(system, coolant_level); return; }
+    auto coolant = ship.getComponent<Coolant>();
+    if (coolant) {
+        coolant_level = std::clamp(coolant_level, 0.0f, std::min(coolant->max_coolant_per_system, coolant->max));
+        auto sys = ShipSystem::get(ship, system);
+        if (sys && coolant_level >= 0.0f && coolant_level <= 3.0f) {
+            sys->coolant_request = coolant_level;
+        }
+    }
+}
+
 bool setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
@@ -836,13 +889,13 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandUnloadTube", &luaCommandUnloadTube);
     env.setGlobal("commandFireTube", &luaCommandFireTube);
     env.setGlobal("commandFireTubeAtTarget", &luaCommandFireTubeAtTarget);
-    /*TODO
     env.setGlobal("commandSetShields", &luaCommandSetShields);
     env.setGlobal("commandMainScreenSetting", &luaCommandMainScreenSetting);
     env.setGlobal("commandMainScreenOverlay", &luaCommandMainScreenOverlay);
     env.setGlobal("commandScan", &luaCommandScan);
     env.setGlobal("commandSetSystemPowerRequest", &luaCommandSetSystemPowerRequest);
     env.setGlobal("commandSetSystemCoolantRequest", &luaCommandSetSystemCoolantRequest);
+    /*TODO
     env.setGlobal("commandDock", &luaCommandDock);
     env.setGlobal("commandUndock", &luaCommandUndock);
     env.setGlobal("commandAbortDock", &luaCommandAbortDock);

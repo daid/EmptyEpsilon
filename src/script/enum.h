@@ -444,4 +444,58 @@ template<> struct Convert<ECrewPosition> {
     }
 };
 
+template<> struct Convert<MainScreenSetting> {
+    static int toLua(lua_State* L, MainScreenSetting value) {
+        switch(value) {
+        case MainScreenSetting::Front: lua_pushstring(L, "front"); break;
+        case MainScreenSetting::Back: lua_pushstring(L, "back"); break;
+        case MainScreenSetting::Left: lua_pushstring(L, "left"); break;
+        case MainScreenSetting::Right: lua_pushstring(L, "right"); break;
+        case MainScreenSetting::Target: lua_pushstring(L, "target"); break;
+        case MainScreenSetting::Tactical: lua_pushstring(L, "tactical"); break;
+        case MainScreenSetting::LongRange: lua_pushstring(L, "longrange"); break;
+        default: lua_pushstring(L, "none"); break;
+        }
+        return 1;
+    }
+    static MainScreenSetting fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "front")
+            return MainScreenSetting::Front;
+        else if (str == "back")
+            return MainScreenSetting::Back;
+        else if (str == "left")
+            return MainScreenSetting::Left;
+        else if (str == "right")
+            return MainScreenSetting::Right;
+        else if (str == "target")
+            return MainScreenSetting::Target;
+        else if (str == "tactical")
+            return MainScreenSetting::Tactical;
+        else if (str == "longrange")
+            return MainScreenSetting::LongRange;
+        luaL_error(L, "Unknown MainScreenSetting: %s", str.c_str());
+        return MainScreenSetting::Front;
+    }
+};
+template<> struct Convert<MainScreenOverlay> {
+    static int toLua(lua_State* L, MainScreenOverlay value) {
+        switch(value) {
+        case MainScreenOverlay::HideComms: lua_pushstring(L, "hidecomms"); break;
+        case MainScreenOverlay::ShowComms: lua_pushstring(L, "showcomms"); break;
+        default: lua_pushstring(L, "none"); break;
+        }
+        return 1;
+    }
+    static MainScreenOverlay fromLua(lua_State* L, int idx) {
+        string str = string(luaL_checkstring(L, idx)).lower();
+        if (str == "hidecomms")
+            return MainScreenOverlay::HideComms;
+        else if (str == "showcomms")
+            return MainScreenOverlay::ShowComms;
+        luaL_error(L, "Unknown MainScreenOverlay: %s", str.c_str());
+        return MainScreenOverlay::HideComms;
+    }
+};
+
 }
