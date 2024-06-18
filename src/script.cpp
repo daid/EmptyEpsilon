@@ -26,6 +26,7 @@
 #include "components/coolant.h"
 #include "systems/jumpsystem.h"
 #include "systems/missilesystem.h"
+#include "systems/docking.h"
 
 
 /// void require(string filename)
@@ -241,7 +242,7 @@ static void luaClearGMFunctions()
 static int luaCreateAdditionalScript(lua_State* L)
 {
     auto env = std::make_unique<sp::script::Environment>();
-    setupScriptEnvironment(*env.get());
+    //setupScriptEnvironment(*env.get());
     auto ptr = reinterpret_cast<sp::script::Environment**>(lua_newuserdata(L, sizeof(sp::script::Environment*)));
     *ptr = env.get();
     luaL_getmetatable(L, "ScriptObject");
@@ -761,6 +762,18 @@ void luaCommandSetSystemCoolantRequest(sp::ecs::Entity ship, ShipSystem::Type sy
         }
     }
 }
+void luaCommandDock(sp::ecs::Entity ship, sp::ecs::Entity station) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandDock(station); return; }
+    DockingSystem::requestDock(ship, station);
+}
+void luaCommandUndock(sp::ecs::Entity ship) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandUndock(); return; }
+    DockingSystem::requestUndock(ship);
+}
+void luaCommandAbortDock(sp::ecs::Entity ship) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandAbortDock(); return; }
+    DockingSystem::abortDock(ship);
+}
 
 bool setupScriptEnvironment(sp::script::Environment& env)
 {
@@ -895,10 +908,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandScan", &luaCommandScan);
     env.setGlobal("commandSetSystemPowerRequest", &luaCommandSetSystemPowerRequest);
     env.setGlobal("commandSetSystemCoolantRequest", &luaCommandSetSystemCoolantRequest);
-    /*TODO
     env.setGlobal("commandDock", &luaCommandDock);
     env.setGlobal("commandUndock", &luaCommandUndock);
     env.setGlobal("commandAbortDock", &luaCommandAbortDock);
+    /*TODO
     env.setGlobal("commandOpenTextComm", &luaCommandOpenTextComm);
     env.setGlobal("commandCloseTextComm", &luaCommandCloseTextComm);
     env.setGlobal("commandAnswerCommHail", &luaCommandAnswerCommHail);

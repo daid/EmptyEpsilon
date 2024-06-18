@@ -33,14 +33,14 @@ end
 --- - "missilevolley" prefers lining up missile attacks from long range
 --- Example: ship:setAI("fighter")
 function Entity:setAI(ai_name)
-    if self.ai_controller then self.ai_controller.new_name = ai_name end
+    if self.components.ai_controller then self.components.ai_controller.new_name = ai_name end
     return self
 end
 --- Orders this CpuShip to stay at its current position and do nothing.
 --- Idle CpuShips don't target or attack nearby enemies.
 --- Example: ship:orderIdle()
 function Entity:orderIdle()
-    if self.ai_controller then self.ai_controller.orders = "idle" end
+    if self.components.ai_controller then self.components.ai_controller.orders = "idle" end
     return self
 end
 --- Orders this CpuShip to roam and engage at will, without a specific target.
@@ -48,11 +48,11 @@ end
 --- If this ship has weapon tubes but lacks beam weapons and is out of weapons stock, it attempts to Retreat to a weapons restock target within long-range radar range.
 --- Example: ship:orderRoaming()
 function Entity:orderRoaming()
-    if self.ai_controller then self.ai_controller = {orders = "roaming", order_target_location={0, 0}} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "roaming", order_target_location={0, 0}} end
     return self
 end
 function Entity:orderRoamingAt(x, y)
-    if self.ai_controller then self.ai_controller = {orders = "roaming", order_target_location={x, y}} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "roaming", order_target_location={x, y}} end
     return self
 end
 --- Orders this CpuShip to move toward the given SpaceObject and dock, restock weapons, and repair its hull.
@@ -61,21 +61,21 @@ end
 --- If this ship still can't find a restocking target, or it is fully repaired and re-stocked, this ship reverts to Roaming orders.
 --- Example: ship:orderRetreat(base) -- retreat to the SpaceObject `base`
 function Entity:orderRetreat(target)
-    if self.ai_controller then self.ai_controller = {orders = "retreat", order_target=target} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "retreat", order_target=target} end
     return self
 end
 --- Orders this CpuShip to stay at its current position and attack nearby hostiles.
 --- This ship will rotate to face a target and fires missiles within 4.5U if it has any, but won't move, roam, or patrol.
 --- Example: ship:orderStandGround()
 function Entity:orderStandGround()
-    if self.ai_controller then self.ai_controller = {orders = "standground"} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "standground"} end
     return self
 end
 --- Orders this CpuShip to move to the given coordinates, patrol within a 1.5U radius, and attack any hostiles that move within 2U of its short-range radar range.
 --- If a targeted hostile moves more than 3U out of this ship's short-range radar range, this ship drops the target and resumes defending its position.
 --- Example: ship:orderDefendLocation(500, 1000) -- defend the space near these coordinates
 function Entity:orderDefendLocation(x, y)
-    if self.ai_controller then self.ai_controller = {orders = "defendlocation", order_target_location={x, y}} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "defendlocation", order_target_location={x, y}} end
     return self
 end
 --- Orders this CpuShip to maintain a 2U escort distance from the given SpaceObject and attack nearby hostiles.
@@ -83,7 +83,7 @@ end
 --- If the SpaceObject being defended is destroyed, this ship reverts to Roaming orders.
 --- Example: ship:orderDefendTarget(base) -- defend the space near the SpaceObject `base`
 function Entity:orderDefendTarget(target)
-    if self.ai_controller then self.ai_controller = {orders = "defendtarget", order_target=target} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "defendtarget", order_target=target} end
     return self
 end
 --- Orders this CpuShip to fly toward the given SpaceObject and follow it from the given offset distance.
@@ -92,7 +92,7 @@ end
 --- Give multiple CpuShips the same SpaceObject and different offsets to create a formation.
 --- Example: ship:orderFlyFormation(leader, 500, 250) -- fly 0.5U off the wing and 0.25U off the tail of the SpaceObject `leader`
 function Entity:orderFlyFormation(target, offset_x, offset_y)
-    if self.ai_controller then self.ai_controller = {orders = "flyformation", order_target=target, order_target_location={x, y}} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "flyformation", order_target=target, order_target_location={x, y}} end
     return self
 end
 --- Orders this CpuShip to move toward the given coordinates, and to attack hostiles that approach within its short-range radar range during transit.
@@ -101,33 +101,33 @@ end
 --- Upon arrival, this ship reverts to the Defend Location orders with its destination as the target.
 --- Example: ship:orderFlyTowards(500, 1000) -- move to these coordinates, attacking nearby hostiles on the way
 function Entity:orderFlyTowards(x, y)
-    if self.ai_controller then self.ai_controller = {orders = "flytowards", order_target_location={x, y}} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "flytowards", order_target_location={x, y}} end
     return self
 end
 --- Orders this CpuShip to move toward the given coordinates, ignoring all hostiles on the way.
 --- Upon arrival, this ship reverts to the Idle orders.
 --- Example: ship:orderFlyTowardsBlind(500, 1000) -- move to these coordinates, ignoring hostiles
 function Entity:orderFlyTowardsBlind(x, y)
-    if self.ai_controller then self.ai_controller = {orders = "flytowardsblind", order_target_location={x, y}} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "flytowardsblind", order_target_location={x, y}} end
     return self
 end
 --- Orders this CpuShip to attack the given SpaceObject.
 --- Example: ship:orderAttack(player)
 function Entity:orderAttack(target)
-    if self.ai_controller then self.ai_controller = {orders = "attack", order_target=target} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "attack", order_target=target} end
     return self
 end
 --- Orders this CpuShip to Fly Toward and dock with the given SpaceObject, if possible.
 --- If its target doesn't exist, revert to Roaming orders.
 --- Example: ship:orderDock(spaceStation)
 function Entity:orderDock(target)
-    if self.ai_controller then self.ai_controller = {orders = "dock", order_target=target} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "dock", order_target=target} end
     return self
 end
 --- Returns this CpuShip's current orders.
 --- Example: ship_orders = ship:getOrder()
 function Entity:getOrder()
-    if self.ai_controller then return self.ai_controller.orders end
+    if self.components.ai_controller then return self.components.ai_controller.orders end
 end
 --- Returns the coordinates for this CpuShip's orders.
 --- If the orders target a SpaceObject instead of coordinates, use CpuShip:getOrderTarget().
@@ -135,12 +135,12 @@ end
 --- Returns the order's x,y coordinates, or 0,0 if not defined.
 --- Example: x,y = ship:getOrderTargetLocation()
 function Entity:getOrderTargetLocation()
-    if self.ai_controller then return unpack(e.ai_controller.order_target_location) end
+    if self.components.ai_controller then return unpack(e.ai_controller.order_target_location) end
 end
 --- Returns the target SpaceObject for this CpuShip's orders.
 --- If the orders target coordinates instead of an object, use CpuShip:getOrderTargetLocation().
 --- Some orders, such as Roaming, have no target.
 --- Example: target = ship:getOrderTarget()
 function Entity:getOrderTarget()
-    if self.ai_controller then return self.ai_controller.order_target end
+    if self.components.ai_controller then return self.components.ai_controller.order_target end
 end
