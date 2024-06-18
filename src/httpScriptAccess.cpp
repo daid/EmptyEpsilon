@@ -1,5 +1,6 @@
 #include "httpScriptAccess.h"
 #include "gameGlobalInfo.h"
+#include "script.h"
 
 #define sOBJECT "_OBJECT_"
 
@@ -14,16 +15,16 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
         {
             return "{\"ERROR\": \"No game\"}";
         }
-        /* TODO
-        P<ScriptObject> script = new ScriptObject();
-        script->setMaxRunCycles(100000);
+        sp::script::Environment env;
+        setupScriptEnvironment(env);
+        auto result = env.run<string>(request.post_data);
         string output;
-        if (!script->runCode(request.post_data, output))
-            output = "{\"ERROR\": \"Script error: " + script->getError().replace("\"", "'") + "\"}";
-        script->destroy();
+        if (result.isErr()) {
+            output = "{\"ERROR\": \"Script error: " + result.error().replace("\"", "'") + "\"}";
+        } else {
+            output = result.value();
+        }
         return output;
-        */
-        return "TODO";
     });
     server.addURLHandler("/get.lua", [](const sp::io::http::Server::Request& request) -> string
     {

@@ -7,7 +7,6 @@
 #include "components/faction.h"
 #include "Updatable.h"
 #include "multiplayer.h"
-#include "scriptInterface.h"
 #include <list>
 #include <functional>
 
@@ -128,8 +127,5 @@ private:
 
 string getSectorName(glm::vec2 position);
 glm::vec2 sectorToXY(string sectorName);
-
-template<> int convert<EScanningComplexity>::returnType(lua_State* L, EScanningComplexity complexity);
-template<> int convert<EHackingGames>::returnType(lua_State* L, EHackingGames games);
 
 #endif//GAME_GLOBAL_INFO_H
