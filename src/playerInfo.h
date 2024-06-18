@@ -58,7 +58,7 @@ public:
     void commandTargetRotation(float target);
     void commandTurnSpeed(float turnSpeed);
     void commandImpulse(float target);
-    void commandWarp(int8_t target);
+    void commandWarp(int target);
     void commandJump(float distance);
     void commandSetTarget(sp::ecs::Entity target);
     void commandSetScienceLink(sp::ecs::Entity probe);

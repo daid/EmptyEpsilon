@@ -178,7 +178,7 @@ void PlayerInfo::commandImpulse(float target)
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandWarp(int8_t target)
+void PlayerInfo::commandWarp(int target)
 {
     sp::io::DataBuffer packet;
     packet << CMD_WARP << target;
@@ -601,7 +601,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         if (warp)
             packet >> warp->request;
         else {
-            uint8_t i;
+            int i;
             packet >> i;
         }
         } break;

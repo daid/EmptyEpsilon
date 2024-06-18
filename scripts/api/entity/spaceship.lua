@@ -188,15 +188,15 @@ end
 
 function __getSystemByName(entity, system_name)
     system_name = string.lower(system_name)
-    if system_name == "reactor" then return entity.reactor end
-    if system_name == "beamweapons" then return entity.beam_weapons end
-    if system_name == "missilesystem" then return entity.missile_tubes end
-    if system_name == "maneuver" then return entity.maneuvering_thrusters end
-    if system_name == "impulse" then return entity.impulse_engine end
-    if system_name == "warp" then return entity.warp_drive end
-    if system_name == "jumpdrive" then return entity.jump_drive end
-    if system_name == "frontshield" then return entity.shields end
-    if system_name == "rearshield" and #entity.shields > 1 then return entity.shields end
+    if system_name == "reactor" then return entity.components.reactor end
+    if system_name == "beamweapons" then return entity.components.beam_weapons end
+    if system_name == "missilesystem" then return entity.components.missile_tubes end
+    if system_name == "maneuver" then return entity.components.maneuvering_thrusters end
+    if system_name == "impulse" then return entity.components.impulse_engine end
+    if system_name == "warp" then return entity.components.warp_drive end
+    if system_name == "jumpdrive" then return entity.components.jump_drive end
+    if system_name == "frontshield" then return entity.components.shields end
+    if system_name == "rearshield" and #entity.components.shields > 1 then return entity.components.shields end
     return nil
 end
 
