@@ -63,9 +63,6 @@ public:
     bool getRestocksMissilesDocked();
     void setRestocksMissilesDocked(bool enabled);
 
-    void onTakingDamage(ScriptSimpleCallback callback);
-    void onDestruction(ScriptSimpleCallback callback);
-
     string getShieldDataString();
 };
 

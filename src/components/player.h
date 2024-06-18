@@ -1,7 +1,6 @@
 #pragma once
 
 #include "stringImproved.h"
-#include "scriptInterfaceMagic.h"
 
 
 enum class MainScreenSetting
@@ -14,14 +13,12 @@ enum class MainScreenSetting
     Tactical,
     LongRange
 };
-template<> void convert<MainScreenSetting>::param(lua_State* L, int& idx, MainScreenSetting& mss);
 
 enum class MainScreenOverlay
 {
     HideComms = 0,
     ShowComms
 };
-template<> void convert<MainScreenOverlay>::param(lua_State* L, int& idx, MainScreenOverlay& mso);
 
 enum class AlertLevel
 {

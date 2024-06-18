@@ -5,7 +5,7 @@ require("utils.lua")
 require("tutorialUtils.lua")
 
 
-function init()
+function tutorial_init()
     --Create the player ship
     tutorial_list = {
         mainscreenTutorial,
@@ -24,13 +24,13 @@ end
 
 --[[ Radar explanation tutorial ]]
 mainscreenTutorial = createSequence()
-addToSequence(mainscreenTutorial, function() tutorial:switchViewToMainScreen() end)
+addToSequence(mainscreenTutorial, function() tutorial_switchViewToMainScreen() end)
 addToSequence(mainscreenTutorial, _([[This is the main screen, which displays your ship and the surrounding space.
 While you cannot move the ship from this screen, you can use it to visually identify objects.]]))
 
 
 radarTutorial = createSequence()
-addToSequence(radarTutorial, function() tutorial:switchViewToLongRange() end)
+addToSequence(radarTutorial, function() tutorial_switchViewToLongRange() end)
 addToSequence(radarTutorial, _([[Welcome to the long-range radar. This radar can detect objects up to 30u from your ship, depicted at the radar's center. This radar allows you to quickly identify distant objects.]]))
 addToSequence(radarTutorial, function() prev_object = Asteroid():setPosition(5000, 0):setSize(243) end)
 addToSequence(radarTutorial, _([[This is an asteroid. Flying into an asteroid will damage your ship, so avoid hitting them.]]))
@@ -58,14 +58,14 @@ addToSequence(radarTutorial, function() prev_object2:destroy() end)
 addToSequence(radarTutorial, function() prev_object3:destroy() end)
 addToSequence(radarTutorial, function() prev_object4:destroy() end)
 addToSequence(radarTutorial, _([[Next, we will look at the short-range radar.]]))
-addToSequence(radarTutorial, function() tutorial:switchViewToTactical() end)
+addToSequence(radarTutorial, function() tutorial_switchViewToTactical() end)
 addToSequence(radarTutorial, _([[The short-range radar can detect objects up to 5u from your ship. It also depicts the range of your own beam weapons.
 Your ship has 2 beam weapons aimed forward. Each type of ship has different beam weapon layouts, with different ranges and locations.]]))
 
 helmsTutorial = createSequence()
 addToSequence(helmsTutorial, function()
-    tutorial:switchViewToScreen(0)
-    tutorial:setMessageToTopPosition()
+    tutorial_switchViewToScreen(0)
+    tutorial_setMessageToTopPosition()
     resetPlayerShip()
     player:setJumpDrive(false)
     player:setWarpDrive(false)
@@ -120,8 +120,8 @@ This covers the basics of the helms officer.]]))
 
 weaponsTutorial = createSequence()
 addToSequence(weaponsTutorial, function()
-    tutorial:switchViewToScreen(1)
-    tutorial:setMessageToTopPosition()
+    tutorial_switchViewToScreen(1)
+    tutorial_setMessageToTopPosition()
     resetPlayerShip()
     player:setJumpDrive(false)
     player:setWarpDrive(false)
@@ -181,7 +181,7 @@ addToSequence(weaponsTutorial, _([[Missile away!]]), function() return not prev_
 
 
 addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(2000, -2000):setRotation(0):orderIdle():setScanned(true):setHull(1):setShieldsMax(1) end)
-addToSequence(weaponsTutorial, function() tutorial:setMessageToBottomPosition() end)
+addToSequence(weaponsTutorial, function() tutorial_setMessageToBottomPosition() end)
 addToSequence(weaponsTutorial, _([[BOOM! That was just firing straight ahead, but missiles also have a homing feature, so let's try that!
 
 First, load a homing missile in the tube.
@@ -224,7 +224,7 @@ end)
 
 
 addToSequence(weaponsTutorial, function() player:setWeaponStorage("homing", 0):setWeaponStorageMax("homing", 0) end)
-addToSequence(weaponsTutorial, function() tutorial:setMessageToTopPosition() end)
+addToSequence(weaponsTutorial, function() tutorial_setMessageToTopPosition() end)
 addToSequence(weaponsTutorial, _([[In addition to homing missiles, your ship might have HVLIs, nukes, EMPs, and mines.
 HVLI stands for "High Velocity Lead Impactor". They fire in straight lines and do not have homing abilities.
 Nukes and EMPs also have homing abilities and have a 1u-radius blast and do more damage.
@@ -232,8 +232,8 @@ EMPs damage only shields, and thus are great for weakening heavily shielded enem
 
 engineeringTutorial = createSequence()
 addToSequence(engineeringTutorial, function()
-    tutorial:switchViewToScreen(2)
-    tutorial:setMessageToTopPosition()
+    tutorial_switchViewToScreen(2)
+    tutorial_setMessageToTopPosition()
     resetPlayerShip()
 end)
 addToSequence(engineeringTutorial, _([[Welcome to engineering.
@@ -261,13 +261,13 @@ addToSequence(engineeringTutorial, function() player:commandSetSystemPowerReques
 addToSequence(engineeringTutorial, _([[Note that as the system overheats, it takes damage. Because the system is damaged, it functions less effectively.
 
 Systems can also take damage when your ship is hit while the shields are down.]]))
-addToSequence(engineeringTutorial, function() tutorial:setMessageToBottomPosition() end)
+addToSequence(engineeringTutorial, function() tutorial_setMessageToBottomPosition() end)
 addToSequence(engineeringTutorial, _([[In this top area, you see your damage control teams in your ship.]]))
 addToSequence(engineeringTutorial, _([[The front shield system is damaged, as indicated by the color of this room's outline.
 
 Select a damage control team from elsewhere on the ship by pressing it, then press on that room to initiate repairs.
 (Repairs will take a while.)]]), function() player:commandSetSystemPowerRequest("frontshield", 0.0) return player:getSystemHealth("frontshield") > 0.9 end)
-addToSequence(engineeringTutorial, function() tutorial:setMessageToTopPosition() end)
+addToSequence(engineeringTutorial, function() tutorial_setMessageToTopPosition() end)
 addToSequence(engineeringTutorial, _([[Good. Now you know your most important tasks. Next, we'll go over each system's function in detail.
 Remember, each system performs better with more power, but performs less well when damaged. Your job is to keep vital systems running as well as you can.]]))
 addToSequence(engineeringTutorial, _([[Reactor:
@@ -299,8 +299,8 @@ addToSequence(engineeringTutorial, _([[This concludes the overview of the engine
 
 scienceTutorial = createSequence()
 addToSequence(scienceTutorial, function()
-    tutorial:switchViewToScreen(3)
-    tutorial:setMessageToBottomPosition()
+    tutorial_switchViewToScreen(3)
+    tutorial_setMessageToBottomPosition()
     resetPlayerShip()
 end)
 addToSequence(scienceTutorial, _([[Welcome, science officer.
@@ -323,7 +323,7 @@ Deep scan the enemy now.]]), function() return prev_object:isFullyScannedBy(play
 addToSequence(scienceTutorial, _([[Excellent. Notice that this took more time and concentration than the simple scan, so be careful to perform deep scans only when necessary or you could run out of time.]]))
 addToSequence(scienceTutorial, function() prev_object:destroy() end)
 addToSequence(scienceTutorial, function() prev_object2:destroy() end)
-addToSequence(scienceTutorial, function() tutorial:setMessageToTopPosition() end)
+addToSequence(scienceTutorial, function() tutorial_setMessageToTopPosition() end)
 addToSequence(scienceTutorial, _([[Next to the long-range radar, the science station can also access the science database.
 
 In this database, you can look up details on things like ship types, weapons, and other objects.]]))
@@ -333,8 +333,8 @@ Without your information, the crew is mostly blind.]]))
 
 relayTutorial = createSequence()
 addToSequence(relayTutorial, function()
-    tutorial:switchViewToScreen(4)
-    tutorial:setMessageToBottomPosition()
+    tutorial_switchViewToScreen(4)
+    tutorial_setMessageToBottomPosition()
     resetPlayerShip()
 end)
 addToSequence(relayTutorial, _([[Welcome to relay!
@@ -356,9 +356,9 @@ addToSequence(relayTutorial, function()
     end)
 end)
 addToSequence(relayTutorial, _([[Open communications with the station near you to continue the tutorial.]]), function() return player:isCommsScriptOpen() end)
-addToSequence(relayTutorial, function() tutorial:setMessageToTopPosition() end)
+addToSequence(relayTutorial, function() tutorial_setMessageToTopPosition() end)
 addToSequence(relayTutorial, _([[Now finish your talk with the station.]]), function() return not player:isCommsScriptOpen() end)
-addToSequence(relayTutorial, function() tutorial:setMessageToBottomPosition() end)
+addToSequence(relayTutorial, function() tutorial_setMessageToBottomPosition() end)
 addToSequence(relayTutorial, function() prev_object:destroy() end)
 addToSequence(relayTutorial, _([[Depending on the scenario, you might have different options when communicating with stations.
 They might inform you about new objectives and your mission progress, ask for backup, or resupply your weapons. This is all part of your responsibilities as relay officer.]]))
@@ -385,8 +385,8 @@ addToSequence(relayTutorial, _([[Probes can expand your sensory capabilities bey
 
 operationsTutorial = createSequence()
 addToSequence(operationsTutorial, function()
-    tutorial:switchViewToScreen(7)
-    tutorial:setMessageToBottomPosition()
+    tutorial_switchViewToScreen(7)
+    tutorial_setMessageToBottomPosition()
     resetPlayerShip()
 end)
 addToSequence(operationsTutorial, _([[Welcome, operations officer.
@@ -409,7 +409,7 @@ Deep scan the enemy now.]]), function() return prev_object:isFullyScannedBy(play
 addToSequence(operationsTutorial, _([[Excellent. Notice that this took more time and concentration than the simple scan, so be careful to perform deep scans only when necessary or you could run out of time.]]))
 addToSequence(operationsTutorial, function() prev_object:destroy() end)
 addToSequence(operationsTutorial, function() prev_object2:destroy() end)
-addToSequence(operationsTutorial, function() tutorial:setMessageToTopPosition() end)
+addToSequence(operationsTutorial, function() tutorial_setMessageToTopPosition() end)
 addToSequence(operationsTutorial, _([[Next to the long-range radar, the science station can also access the science database.
 
 In this database, you can look up details on things like ship types, weapons, and other objects.]]))
@@ -432,14 +432,14 @@ addToSequence(operationsTutorial, function()
     end)
 end)
 addToSequence(operationsTutorial, _([[Open communications with the station near you to continue the tutorial.]]), function() return player:isCommsScriptOpen() end)
-addToSequence(operationsTutorial, function() tutorial:setMessageToTopPosition() end)
+addToSequence(operationsTutorial, function() tutorial_setMessageToTopPosition() end)
 addToSequence(operationsTutorial, _([[Now finish your talk with the station.]]), function() return not player:isCommsScriptOpen() end)
-addToSequence(operationsTutorial, function() tutorial:setMessageToBottomPosition() end)
+addToSequence(operationsTutorial, function() tutorial_setMessageToBottomPosition() end)
 addToSequence(operationsTutorial, function() prev_object:destroy() end)
 addToSequence(operationsTutorial, _([[Depending on the scenario, you might have different options when communicating with stations.
 They might inform you about new objectives and your mission progress, ask for backup, or resupply your weapons. This is all part of your responsibilities as relay officer.]]))
 
 endOfTutorial = createSequence()
-addToSequence(endOfTutorial, function() tutorial:switchViewToMainScreen() end)
-addToSequence(endOfTutorial, function() tutorial:setMessageToTopPosition() end)
+addToSequence(endOfTutorial, function() tutorial_switchViewToMainScreen() end)
+addToSequence(endOfTutorial, function() tutorial_setMessageToTopPosition() end)
 addToSequence(endOfTutorial, _([[This concludes the tutorial. While we have covered the basics, there are more advanced features in the game that you might discover.]]))

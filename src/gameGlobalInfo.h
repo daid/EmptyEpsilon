@@ -114,12 +114,12 @@ public:
 
     //List of extra scripts that run next to the main script.
     std::vector<std::unique_ptr<sp::script::Environment>> additional_scripts;
+    std::unique_ptr<sp::script::Environment> main_script;
 private:
     P<GameStateLogger> state_logger;
     sp::ecs::Entity victory_faction;
     int callsign_counter;
 
-    std::unique_ptr<sp::script::Environment> main_script;
     int main_script_error_count = 0;
 
     constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;

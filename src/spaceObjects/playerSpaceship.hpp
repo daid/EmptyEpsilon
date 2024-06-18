@@ -1,6 +1,7 @@
 #ifndef _PLAYERSPACESHIP_HPP_
 #define _PLAYERSPACESHIP_HPP_
 
+/*TODO
 template<> int convert<AlertLevel>::returnType(lua_State* L, AlertLevel l)
 {
     lua_pushstring(L, alertLevelToString(l).c_str());
@@ -19,5 +20,6 @@ template<> void convert<AlertLevel>::param(lua_State* L, int& idx, AlertLevel& a
     else
         al = AlertLevel::Normal;
 }
+*/
 
 #endif /* _H_PLAYERSPACESHIP_ */

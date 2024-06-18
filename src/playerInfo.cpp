@@ -1157,52 +1157,6 @@ string getCrewPositionIcon(ECrewPosition position)
     }
 }
 
-/* Define script conversion function for the ECrewPosition enum. */
-template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosition& cp)
-{
-    string str = string(luaL_checkstring(L, idx++)).lower();
-
-    //6/5 player crew
-    if (str == "helms" || str == "helmsofficer")
-        cp = helmsOfficer;
-    else if (str == "weapons" || str == "weaponsofficer")
-        cp = weaponsOfficer;
-    else if (str == "engineering" || str == "engineeringsofficer")
-        cp = engineering;
-    else if (str == "science" || str == "scienceofficer")
-        cp = scienceOfficer;
-    else if (str == "relay" || str == "relayofficer")
-        cp = relayOfficer;
-
-    //4/3 player crew
-    else if (str == "tactical" || str == "tacticalofficer")
-        cp = tacticalOfficer;    //helms+weapons-shields
-    else if (str == "engineering+" || str == "engineering+officer" || str == "engineeringadvanced" || str == "engineeringadvancedofficer")
-        cp = engineeringAdvanced;//engineering+shields
-    else if (str == "operations" || str == "operationsofficer")
-        cp = operationsOfficer; //science+comms
-
-    //1 player crew
-    else if (str == "single" || str == "singlepilot")
-        cp = singlePilot;
-
-    //extras
-    else if (str == "damagecontrol")
-        cp = damageControl;
-    else if (str == "powermanagement")
-        cp = powerManagement;
-    else if (str == "database" || str == "databaseview")
-        cp = databaseView;
-    else if (str == "altrelay")
-        cp = altRelay;
-    else if (str == "commsonly")
-        cp = commsOnly;
-    else if (str == "shiplog")
-        cp = shipLog;
-    else
-        luaL_error(L, "Unknown value for crew position: %s", str.c_str());
-}
-
 bool PlayerInfo::hasPlayerAtPosition(sp::ecs::Entity entity, ECrewPosition position)
 {
     foreach(PlayerInfo, i, player_info_list)

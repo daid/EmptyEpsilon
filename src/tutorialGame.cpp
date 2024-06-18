@@ -1,9 +1,10 @@
 #include <i18n.h>
 #include "tutorialGame.h"
-#include "scriptInterface.h"
 #include "playerInfo.h"
 #include "preferenceManager.h"
 #include "main.h"
+#include "script.h"
+#include "gameGlobalInfo.h"
 
 #include "components/collision.h"
 
@@ -21,29 +22,16 @@
 
 #include "screenComponents/indicatorOverlays.h"
 
+#include "menus/luaConsole.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_button.h"
 
-///The TutorialGame object is normally never created.
-/// And it only used to setup the special tutorial level.
-/// It contains functions to assist in explaining the game, but do not work outside of the tutorial.
-REGISTER_SCRIPT_CLASS_NO_CREATE(TutorialGame)
-{
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setPlayerShip);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToMainScreen);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToTactical);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToLongRange);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToScreen);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, showMessage);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToTopPosition);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToBottomPosition);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, onNext);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, finish);
-}
+P<TutorialGame> TutorialGame::instance;
 
 TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
 {
+    instance = this;
     new LocalOnlyGame();
 
     new GuiOverlay(this, "", colorConfig.background);
@@ -52,20 +40,21 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
     this->viewport = nullptr;
     this->repeated_tutorial = repeated_tutorial;
 
-    i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/comms_ship." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/comms_station." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/factionInfo." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/science_db." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+    gameGlobalInfo->startScenario(filename);
 
-    P<ScriptObjectLegacy> factionInfoScript = new ScriptObjectLegacy("factionInfo.lua");
-    if (factionInfoScript->getError() != "") exit(1);
-    factionInfoScript->destroy();
+    gameGlobalInfo->main_script->setGlobal("tutorial_setPlayerShip", &TutorialGame::setPlayerShip);
+    gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToMainScreen", &TutorialGame::switchViewToMainScreen);
+    gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToTactical", &TutorialGame::switchViewToTactical);
+    gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToLongRange", &TutorialGame::switchViewToLongRange);
+    gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToScreen", &TutorialGame::switchViewToScreen);
+    gameGlobalInfo->main_script->setGlobal("tutorial_showMessage", &TutorialGame::showMessage);
+    gameGlobalInfo->main_script->setGlobal("tutorial_setMessageToTopPosition", &TutorialGame::setMessageToTopPosition);
+    gameGlobalInfo->main_script->setGlobal("tutorial_setMessageToBottomPosition", &TutorialGame::setMessageToBottomPosition);
+    gameGlobalInfo->main_script->setGlobal("tutorial_onNext", &TutorialGame::onNext);
+    gameGlobalInfo->main_script->setGlobal("tutorial_finish", &TutorialGame::finish);
 
-    script = new ScriptObjectLegacy();
-    script->registerObject(this, "tutorial");
-    script->run(filename);
+    auto res = gameGlobalInfo->main_script->call<void>("tutorial_init");
+    LuaConsole::checkResult(res);
 }
 
 void TutorialGame::createScreens()
@@ -148,100 +137,109 @@ void TutorialGame::setPlayerShip(sp::ecs::Entity ship)
 {
     my_player_info->commandSetShip(ship);
 
-    if (viewport == nullptr)
-        createScreens();
+    if (instance->viewport == nullptr)
+        instance->createScreens();
 }
 
 void TutorialGame::showMessage(string message, bool show_next)
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
-    frame->show();
-    text->setText(message);
+    instance->frame->show();
+    instance->text->setText(message);
     if (show_next)
     {
-        next_button->show();
-        frame->setSize(900, 230);
+        instance->next_button->show();
+        instance->frame->setSize(900, 230);
     }
     else
     {
-        next_button->hide();
-        frame->setSize(900, 200);
+        instance->next_button->hide();
+        instance->frame->setSize(900, 200);
     }
 }
 
 void TutorialGame::switchViewToMainScreen()
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
-    hideAllScreens();
-    viewport->show();
+    instance->hideAllScreens();
+    instance->viewport->show();
 }
 
 void TutorialGame::switchViewToTactical()
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
-    hideAllScreens();
-    tactical_radar->show();
+    instance->hideAllScreens();
+    instance->tactical_radar->show();
 }
 
 void TutorialGame::switchViewToLongRange()
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
-    hideAllScreens();
-    long_range_radar->show();
+    instance->hideAllScreens();
+    instance->long_range_radar->show();
 }
 
 void TutorialGame::switchViewToScreen(int n)
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
     if (n < 0 || n >= 8)
         return;
-    hideAllScreens();
-    station_screen[n]->show();
+    instance->hideAllScreens();
+    instance->station_screen[n]->show();
 }
 
 void TutorialGame::setMessageToTopPosition()
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
-    frame->setPosition(0, 0, sp::Alignment::TopCenter);
+    instance->frame->setPosition(0, 0, sp::Alignment::TopCenter);
 }
 
 void TutorialGame::setMessageToBottomPosition()
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
-    frame->setPosition(0, -50, sp::Alignment::BottomCenter);
+    instance->frame->setPosition(0, -50, sp::Alignment::BottomCenter);
 }
 
 void TutorialGame::finish()
 {
-    if (repeated_tutorial)
+    if (instance->repeated_tutorial)
     {
         sp::ecs::Entity::destroyAllEntities();
-        script->destroy();
-        hideAllScreens();
+        instance->hideAllScreens();
 
-        script = new ScriptObjectLegacy();
-        script->registerObject(this, "tutorial");
-        script->run("tutorial.lua");
+        gameGlobalInfo->startScenario("tutorial.lua");
+
+        gameGlobalInfo->main_script->setGlobal("tutorial_setPlayerShip", &TutorialGame::setPlayerShip);
+        gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToMainScreen", &TutorialGame::switchViewToMainScreen);
+        gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToTactical", &TutorialGame::switchViewToTactical);
+        gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToLongRange", &TutorialGame::switchViewToLongRange);
+        gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToScreen", &TutorialGame::switchViewToScreen);
+        gameGlobalInfo->main_script->setGlobal("tutorial_showMessage", &TutorialGame::showMessage);
+        gameGlobalInfo->main_script->setGlobal("tutorial_setMessageToTopPosition", &TutorialGame::setMessageToTopPosition);
+        gameGlobalInfo->main_script->setGlobal("tutorial_setMessageToBottomPosition", &TutorialGame::setMessageToBottomPosition);
+        gameGlobalInfo->main_script->setGlobal("tutorial_onNext", &TutorialGame::onNext);
+        gameGlobalInfo->main_script->setGlobal("tutorial_finish", &TutorialGame::finish);
+
+        auto res = gameGlobalInfo->main_script->call<void>("tutorial_init");
+        LuaConsole::checkResult(res);
     }else{
-        script->destroy();
-        destroy();
-
         disconnectFromServer();
-        returnToMainMenu(getRenderLayer());
+        returnToMainMenu(instance->getRenderLayer());
+        instance->destroy();
     }
 }
 

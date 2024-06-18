@@ -11,14 +11,6 @@
 #include "missileWeaponData.h"
 
 
-struct Speeds
-{
-    float forward;
-    float reverse;
-};
-template<> int convert<Speeds>::returnType(lua_State* L, const Speeds &speeds);
-
-
 class SpaceShip : public ShipTemplateBasedObject
 {
 public:
@@ -82,9 +74,7 @@ public:
     float getEnergy();
     void setEnergy(float amount);
 
-    Speeds getImpulseMaxSpeed();
     void setImpulseMaxSpeed(float forward_speed, std::optional<float> reverse_speed);
-    Speeds getAcceleration();
     void setAcceleration(float acceleration, std::optional<float> reverse_acceleration);
 
     float getBeamWeaponArc(int index);

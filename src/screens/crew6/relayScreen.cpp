@@ -2,7 +2,6 @@
 #include "i18n.h"
 #include "gameGlobalInfo.h"
 #include "playerInfo.h"
-#include "scriptInterface.h"
 #include "ecs/query.h"
 #include "components/collision.h"
 #include "components/probe.h"

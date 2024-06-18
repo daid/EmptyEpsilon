@@ -373,6 +373,7 @@ string getSectorName(glm::vec2 position)
     return y + x;
 }
 
+/*
 template<> int convert<EScanningComplexity>::returnType(lua_State* L, EScanningComplexity complexity)
 {
     switch(complexity)
@@ -495,3 +496,4 @@ static int onNewPlayerShip(lua_State* L)
 /// Passes the newly created PlayerSpaceship.
 /// Example: onNewPlayerShip(function(player) print(player:getCallSign()) end) -- prints the callsign of new PlayerSpaceships to the console
 REGISTER_SCRIPT_FUNCTION(onNewPlayerShip);
+*/

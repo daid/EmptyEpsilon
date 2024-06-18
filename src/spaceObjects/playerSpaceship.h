@@ -49,16 +49,6 @@ public:
     void setCanDock(bool enabled);
     bool getCanDock();
 
-    void onProbeLaunch(ScriptSimpleCallback callback);
-    void onProbeLink(ScriptSimpleCallback callback);
-    void onProbeUnlink(ScriptSimpleCallback callback);
-
-    void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback, std::optional<int> order);
-    void addCustomInfo(ECrewPosition position, string name, string caption, std::optional<int> order);
-    void addCustomMessage(ECrewPosition position, string name, string caption);
-    void addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
-    void removeCustom(string name);
-
     ShipSystem::Type getBeamSystemTarget();
     string getBeamSystemTargetName();
 

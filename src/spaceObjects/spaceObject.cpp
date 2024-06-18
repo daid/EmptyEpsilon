@@ -9,8 +9,6 @@
 
 #include <glm/ext/matrix_transform.hpp>
 
-#include "scriptInterface.h"
-
 
 PVector<SpaceObject> space_object_list;
 
@@ -48,7 +46,7 @@ void SpaceObject::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, 
 
 void SpaceObject::destroy()
 {
-    on_destroyed.call<void>(P<SpaceObject>(this));
+    //TODO: on_destroyed.call<void>(P<SpaceObject>(this));
     MultiplayerObject::destroy();
 }
 
@@ -378,6 +376,7 @@ glm::mat4 SpaceObject::getModelMatrix() const
     return glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
 }
 
+/*TODO
 template<> void convert<DamageType>::param(lua_State* L, int& idx, DamageType& dt)
 {
     string str = string(luaL_checkstring(L, idx++)).lower();
@@ -436,3 +435,4 @@ template<> void convert<ScanState::State>::param(lua_State* L, int& idx, ScanSta
     else if (str == "full" || str == "fullscan")
         ss = ScanState::State::FullScan;
 }
+*/

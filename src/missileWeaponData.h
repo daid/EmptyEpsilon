@@ -1,7 +1,6 @@
 #ifndef MISSILE_WEAPON_DATA_H
 #define MISSILE_WEAPON_DATA_H
 
-#include "scriptInterface.h"
 #include "multiplayer.h"
 
 
@@ -25,13 +24,6 @@ enum EMissileSizes
 string getMissileSizeString(EMissileSizes size);
 string getMissileWeaponName(EMissileWeapons missile);
 string getLocaleMissileWeaponName(EMissileWeapons missile);
-
-/* Define script conversion function for the EMissileWeapons enum. */
-template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissileWeapons& es);
-template<> int convert<EMissileWeapons>::returnType(lua_State* L, EMissileWeapons es);
-/* Define script conversion function for the EMissileSizes enum. */
-template <> void convert<EMissileSizes>::param(lua_State* L, int& idx, EMissileSizes& es);
-template<> int convert<EMissileSizes>::returnType(lua_State* L, EMissileSizes es);
 
 /* data container for missile weapon data, contains information about different missile weapon types. */
 class MissileWeaponData

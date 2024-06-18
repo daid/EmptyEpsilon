@@ -1,13 +1,13 @@
 --[[ Assist function in creating tutorial sequences --]]
 function startTutorial()
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
-    tutorial:setPlayerShip(player)
+    tutorial_setPlayerShip(player)
 
-    tutorial:showMessage(_([[Welcome to the EmptyEpsilon tutorial.
+    tutorial_showMessage(_([[Welcome to the EmptyEpsilon tutorial.
 Note that this tutorial is designed to give you a quick overview of the basic options for the game, but does not cover every single aspect.
 
 Press next to continue...]]), true)
-    tutorial:onNext(function()
+    tutorial_onNext(function()
         tutorial_list_index = 1
         startSequence(tutorial_list[tutorial_list_index])
     end)
@@ -28,20 +28,20 @@ function runNextSequenceStep()
         if tutorial_list[tutorial_list_index] ~= nil then
             startSequence(tutorial_list[tutorial_list_index])
         else
-            tutorial:finish()
+            tutorial_finish()
         end
     elseif data["message"] ~= nil then
-        tutorial:showMessage(data["message"], data["finish_check_function"] == nil)
+        tutorial_showMessage(data["message"], data["finish_check_function"] == nil)
         if data["finish_check_function"] == nil then
             update = nil
-            tutorial:onNext(runNextSequenceStep)
+            tutorial_onNext(runNextSequenceStep)
         else
             update = function(delta)
                 if data["finish_check_function"]() then
                     runNextSequenceStep()
                 end
             end
-            tutorial:onNext(nil)
+            tutorial_onNext(nil)
         end
     elseif data["run_function"] ~= nil then
         local has_next_step = current_index <= #current_sequence

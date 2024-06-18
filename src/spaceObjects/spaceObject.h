@@ -2,7 +2,6 @@
 #define SPACE_OBJECT_H
 
 #include "multiplayer.h"
-#include "scriptInterface.h"
 #include "featureDefs.h"
 #include "modelData.h"
 #include "graphics/renderTarget.h"
@@ -49,10 +48,7 @@ public:
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
     void setHeading(float heading) { setRotation(heading - 90); }
 
-    void onDestroyed(ScriptSimpleCallback callback)
-    {
-        on_destroyed = callback;
-    }
+    //TODO: void onDestroyed(ScriptSimpleCallback callback)
 
     virtual void draw3D();
     virtual void draw3DTransparent() {}
@@ -110,17 +106,11 @@ public:
     glm::vec2 getVelocity() const;
     float getAngularVelocity() const;
 
-    ScriptSimpleCallback on_destroyed;
+    //TODO: ScriptSimpleCallback on_destroyed;
 
     glm::mat4 getModelTransform() const { return getModelMatrix(); }
 protected:
     virtual glm::mat4 getModelMatrix() const;
 };
-
-template<> void convert<DamageType>::param(lua_State* L, int& idx, DamageType& dt);
-// Define a script conversion function for the DamageInfo structure.
-template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di);
-// Function to convert a lua parameter to a scan state.
-template<> void convert<ScanState::State>::param(lua_State* L, int& idx, ScanState::State& ss);
 
 #endif//SPACE_OBJECT_H

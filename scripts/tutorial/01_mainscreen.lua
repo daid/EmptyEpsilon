@@ -18,7 +18,7 @@
 require("utils.lua")
 require("tutorial/00_all.lua")
 
-function init()
+function tutorial_init()
     tutorial_list = {
         mainscreenTutorial,
 		radarTutorial,

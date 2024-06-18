@@ -32,8 +32,6 @@
 #include "systems/selfdestruct.h"
 #include "systems/comms.h"
 
-#include "scriptInterface.h"
-
 #include <SDL_assert.h>
 
 
@@ -216,7 +214,7 @@ bool PlayerSpaceship::hasPlayerAtPosition(ECrewPosition position)
 {
     return PlayerInfo::hasPlayerAtPosition(entity, position);
 }
-
+/*
 void PlayerSpaceship::addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback, std::optional<int> order)
 {
     removeCustom(name);
@@ -285,7 +283,7 @@ void PlayerSpaceship::removeCustom(string name)
             it++;
     }
 }
-
+*/
 void PlayerSpaceship::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     SpaceShip::drawOnGMRadar(renderer, position, scale, rotation, long_range);
@@ -369,21 +367,6 @@ string PlayerSpaceship::getExportLine()
     //if (std::fabs(getEnergyWarpPerSecond() - default_energy_warp_per_second) > std::numeric_limits<float>::epsilon())
     //    result += ":setEnergyWarpPerSecond(" + string(getEnergyWarpPerSecond(), 2) + ")";
     return result;
-}
-
-void PlayerSpaceship::onProbeLaunch(ScriptSimpleCallback callback)
-{
-    //TODO this->on_probe_launch = callback;
-}
-
-void PlayerSpaceship::onProbeLink(ScriptSimpleCallback callback)
-{
-    //TODO this->on_probe_link = callback;
-}
-
-void PlayerSpaceship::onProbeUnlink(ScriptSimpleCallback callback)
-{
-    //TODO this->on_probe_unlink = callback;
 }
 
 #include "playerSpaceship.hpp"

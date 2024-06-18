@@ -1,7 +1,7 @@
 #ifndef _SPACESHIP_HPP_
 #define _SPACESHIP_HPP_
 
-/* Define script conversion function for the EMainScreenSetting enum. */
+/*TODO Define script conversion function for the EMainScreenSetting enum. 
 template<> void convert<MainScreenSetting>::param(lua_State* L, int& idx, MainScreenSetting& mss)
 {
     string str = string(luaL_checkstring(L, idx++)).lower();
@@ -33,11 +33,5 @@ template<> void convert<MainScreenOverlay>::param(lua_State* L, int& idx, MainSc
     else
         mso = MainScreenOverlay::HideComms;
 }
-
-template<> int convert<Speeds>::returnType(lua_State* L,const Speeds &speeds)
-{
-    lua_pushnumber(L, speeds.forward);
-    lua_pushnumber(L, speeds.reverse);
-    return 2;
-}
+*/
 #endif /* _SPACESHIP_HPP_ */

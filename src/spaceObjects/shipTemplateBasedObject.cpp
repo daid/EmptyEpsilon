@@ -1,6 +1,5 @@
 #include "shipTemplateBasedObject.h"
 
-#include "scriptInterface.h"
 #include "components/collision.h"
 #include "components/docking.h"
 #include "components/impulse.h"

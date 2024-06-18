@@ -26,8 +26,6 @@
 #include "components/shiplog.h"
 #include "ecs/query.h"
 
-#include "scriptInterface.h"
-
 #include <SDL_assert.h>
 
 
