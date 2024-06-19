@@ -117,9 +117,8 @@ function spawn_wave(x, y, size, orders, tx, ty)
         x1 = x + math.cos(r / 180 * math.pi) * distance
         y1 = y + math.sin(r / 180 * math.pi) * distance
         test = math.cos(r / 180 * math.pi) * distance
-        odysseus:addToShipLog(string.format(_("shipLog", " %d %d"), math.floor(test), math.floor(distance)), "Red")
 
-        local machine = CpuShip():setCallSign(generateCallSign("MAC", nil)):setFaction("Machines"):setTemplate("Machine Stinger"):setPosition(x1, y1)
+        local machine = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setTemplate("Machine Stinger"):setPosition(x1, y1)
         if orders == "target" then
             machine:orderFlyTowardsBlind(tx,ty)
         else 
@@ -158,7 +157,7 @@ function spawn_wave(x, y, size, orders, tx, ty)
             local distance = random(distanceMin, distanceMax)
             x1 = x + math.cos(r / 180 * math.pi) * distance
             y1 = y + math.sin(r / 180 * math.pi) * distance    
-            local machine = CpuShip():setCallSign(generateCallSign("MAC", nil)):setFaction("Machines"):setTemplate("Machine Reaper"):setPosition(x1, y1)
+            local machine = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setTemplate("Machine Reaper"):setPosition(x1, y1)
             if orders == "target" then
                 machine:orderFlyTowardsBlind(tx,ty)
             else 
@@ -176,7 +175,7 @@ function spawn_wave(x, y, size, orders, tx, ty)
 
     --Spawn mothership
     if size == 6 then
-        mother = CpuShip():setCallSign(generateCallSign("MAC", nil)):setFaction("Machines"):setRotation(100):setTemplate("Machine Mothership"):setPosition(x, y):setScanned(true)
+        mother = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setRotation(100):setTemplate("Machine Mothership"):setPosition(x, y):setScanned(true)
 
     end
 end
