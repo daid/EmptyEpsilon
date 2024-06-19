@@ -1274,6 +1274,7 @@ void SpaceShip::collide(Collisionable* other, float force)
 
 void SpaceShip::initializeJump(float distance)
 {
+    distance = std::clamp(distance, jump_drive_min_distance, jump_drive_max_distance);
     if (docking_state != DS_NotDocking)
         return;
     if (jump_drive_charge < jump_drive_max_distance) // You can only jump when the drive is fully charged

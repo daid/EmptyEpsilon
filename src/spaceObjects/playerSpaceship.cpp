@@ -1399,6 +1399,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         break;
     case CMD_WARP:
         packet >> warp_request;
+        warp_request = std::clamp(int(warp_request), 0, 4);
         break;
     case CMD_JUMP:
         {
