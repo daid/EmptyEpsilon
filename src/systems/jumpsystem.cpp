@@ -82,6 +82,7 @@ void JumpSystem::initializeJump(sp::ecs::Entity entity, float distance)
     if (docking_port && docking_port->state != DockingPort::State::NotDocking) return;
     if (jump->charge < jump->max_distance) // You can only jump when the drive is fully charged
         return;
+    distance = std::clamp(distance, jump->min_distance, jump->max_distance);
     if (jump->delay <= 0.0f)
     {
         jump->distance = distance;

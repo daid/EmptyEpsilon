@@ -26,4 +26,5 @@ void main(void) {
 	gl_FragColor.r = texture2D(u_texture, coord + vec2(rx, 0)).r;
 	gl_FragColor.g = texture2D(u_texture, coord + vec2(gx, 0)).g;
 	gl_FragColor.b = texture2D(u_texture, coord + vec2(bx, 0)).b;
+	gl_FragColor.a = 1.0;
 }
