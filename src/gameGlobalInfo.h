@@ -9,6 +9,7 @@
 #include "multiplayer.h"
 #include <list>
 #include <functional>
+#include <unordered_map>
 
 
 class GameStateLogger;
