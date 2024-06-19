@@ -56,7 +56,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
         }, nullptr, nullptr
     );
     science_radar->setAutoRotating(PreferencesManager::get("science_radar_lock","0")=="1");
-    new RawScannerDataRadarOverlay(science_radar, "", 100000.0f);
+    new RawScannerDataRadarOverlay(science_radar, "", my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f);
 
     // Draw and hide the probe radar.
     probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
