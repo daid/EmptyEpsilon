@@ -274,6 +274,10 @@ static int luaCreateAdditionalScript(lua_State* L)
         lua_setfield(L, -2, "__metatable");
     }
     lua_setmetatable(L, -2);
+
+    auto res = env->call<void>("init");
+    LuaConsole::checkResult(res);
+
     gameGlobalInfo->additional_scripts.push_back(std::move(env));
     return 1;
 }
