@@ -3,6 +3,7 @@
 #include "preferenceManager.h"
 #include <i18n.h>
 #include <unordered_set>
+#include <chrono>
 
 static std::unique_ptr<i18n::Catalogue> locale;
 std::vector<ScenarioInfo> ScenarioInfo::cached_full_list;
