@@ -37,7 +37,7 @@ function Entity:isFriendOrFoeIdentifiedBy(enemy)
     faction = faction.entity
     if scan_state then
         for n=1,#scan_state do
-            if scan_state[n].faction = faction then return scan_state[n].state ~= "none" end
+            if scan_state[n].faction == faction then return scan_state[n].state ~= "none" end
         end
     end
     return false
@@ -53,7 +53,7 @@ function Entity:isFullyScannedBy(enemy)
     faction = faction.entity
     if scan_state then
         for n=1,#scan_state do
-            if scan_state[n].faction = faction then return scan_state[n].state == "full" end
+            if scan_state[n].faction == faction then return scan_state[n].state == "full" end
         end
     end
     return false
@@ -67,7 +67,7 @@ function Entity:isFriendOrFoeIdentifiedByFaction(faction)
     if faction == nil then return false end
     if scan_state then
         for n=1,#scan_state do
-            if scan_state[n].faction = faction then return scan_state[n].state ~= "none" end
+            if scan_state[n].faction == faction then return scan_state[n].state ~= "none" end
         end
     end
     return false
@@ -82,7 +82,7 @@ function Entity:isFullyScannedByFaction(faction)
     if faction == nil then return false end
     if scan_state then
         for n=1,#scan_state do
-            if scan_state[n].faction = faction then return scan_state[n].state == "full" end
+            if scan_state[n].faction == faction then return scan_state[n].state == "full" end
         end
     end
     return false

@@ -15,6 +15,8 @@ void WarpSystem::update(float delta)
 {
     for(auto [entity, warp, impulse, position, physics] : sp::ecs::Query<WarpDrive, sp::ecs::optional<ImpulseEngine>, sp::Transform, sp::Physics>())
     {
+        if (warp.request > warp.max_level)
+            warp.request = warp.max_level;
         if (warp.request > 0 || warp.current > 0)
         {
             if (isWarpJammed(entity))
@@ -28,18 +30,22 @@ void WarpSystem::update(float delta)
                     warp.current += delta / warp.charge_time;
                     if (warp.current > warp.request)
                         warp.current = warp.request;
-                }else if (warp.current > warp.request)
+                } else if (warp.current > warp.request)
                 {
                     warp.current -= delta / warp.decharge_time;
                     if (warp.current < warp.request)
                         warp.current = warp.request;
                 }
+            } else if (warp.current > 0.0f) {
+                warp.current -= delta / warp.decharge_time;
+                if (warp.current < 0.0f)
+                    warp.current = 0.0f;
             }
 
             auto reactor = entity.getComponent<Reactor>();
             if (reactor) {
-                // If warping, consume energy at a rate of 120% the warp request.
-                // If shields are up, that rate is increased by an additional 50%.
+                // If warping, consume energy at a rate of 130% the warp request.
+                // If shields are up, that rate is increased by an additional 70%.
                 auto energy_use = warp.energy_warp_per_second * delta * warp.getSystemEffectiveness() * powf(warp.current, 1.3f);
                 auto shields = entity.getComponent<Shields>();
                 if (shields && shields->active)

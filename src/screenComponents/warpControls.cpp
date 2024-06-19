@@ -11,7 +11,7 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
     // Build warp request slider.
-    slider = new GuiSlider(this, id + "_SLIDER", 4.0, 0.0, 0.0, [this](float value) {
+    slider = new GuiSlider(this, id + "_SLIDER", 1.0, 0.0, 0.0, [this](float value) {
         // Round the slider value to an int.
         int warp_level = value;
 
@@ -23,13 +23,8 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
         slider->setValue(warp_level);
     });
     slider->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(50, GuiElement::GuiSizeMax);
-
-    // Snap the slider to integers up to 4.
     slider->addSnapValue(0.0, 0.5);
     slider->addSnapValue(1.0, 0.5);
-    slider->addSnapValue(2.0, 0.5);
-    slider->addSnapValue(3.0, 0.5);
-    slider->addSnapValue(4.0, 0.5);
 
     if (my_spaceship)
     {
@@ -55,6 +50,11 @@ void GuiWarpControls::onDraw(sp::RenderTarget& target)
         if (warp) {
             label->setValue(string(warp->current, 1));
             slider->setValue(warp->request);
+            if (slider->getRangeMin() != warp->max_level) {
+                slider->setRange(warp->max_level, 0);
+                for(int n=0; n<=warp->max_level; n++)
+                    slider->addSnapValue(n, 0.5);
+            }
         }
     }
 }
