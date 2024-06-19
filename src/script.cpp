@@ -778,6 +778,26 @@ void luaCommandAbortDock(sp::ecs::Entity ship) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandAbortDock(); return; }
     DockingSystem::abortDock(ship);
 }
+void luaCommandOpenTextComm(sp::ecs::Entity ship, sp::ecs::Entity obj) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandOpenTextComm(obj); return; }
+    CommsSystem::openTo(ship, obj);
+}
+void luaCommandCloseTextComm(sp::ecs::Entity ship) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCloseTextComm(); return; }
+    CommsSystem::close(ship);
+}
+void luaCommandAnswerCommHail(sp::ecs::Entity ship, bool awnser) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandAnswerCommHail(awnser); return; }
+    CommsSystem::answer(ship, awnser);
+}
+void luaCommandSendComm(sp::ecs::Entity ship, int index) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSendComm(index); return; }
+    CommsSystem::selectScriptReply(ship, index);
+}
+void luaCommandSendCommPlayer(sp::ecs::Entity ship, string message) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSendCommPlayer(message); return; }
+    CommsSystem::textReply(ship, message);
+}
 
 bool setupScriptEnvironment(sp::script::Environment& env)
 {
@@ -915,12 +935,12 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandDock", &luaCommandDock);
     env.setGlobal("commandUndock", &luaCommandUndock);
     env.setGlobal("commandAbortDock", &luaCommandAbortDock);
-    /*TODO
     env.setGlobal("commandOpenTextComm", &luaCommandOpenTextComm);
     env.setGlobal("commandCloseTextComm", &luaCommandCloseTextComm);
     env.setGlobal("commandAnswerCommHail", &luaCommandAnswerCommHail);
     env.setGlobal("commandSendComm", &luaCommandSendComm);
     env.setGlobal("commandSendCommPlayer", &luaCommandSendCommPlayer);
+    /*TODO
     env.setGlobal("commandSetAutoRepair", &luaCommandSetAutoRepair);
     env.setGlobal("commandSetBeamFrequency", &luaCommandSetBeamFrequency);
     env.setGlobal("commandSetBeamSystemTarget", &luaCommandSetBeamSystemTarget);

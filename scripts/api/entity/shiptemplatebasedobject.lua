@@ -200,7 +200,8 @@ end
 --- Use a looping sound file that tolerates being pitched up and down as the ship's impulse speed changes.
 --- Example: stbo:setImpulseSoundFile("sfx/engine_fighter.wav") -- sets the impulse sound to resources/sfx/engine_fighter.wav
 function Entity:setImpulseSoundFile(filename)
-    --TODO
+    if self.components.impulse_engine then self.components.impulse_engine.sound = filename end
+    return self
 end
 --- Defines whether this STBO's shields are activated.
 --- Always returns true except for PlayerSpaceships, because only players can deactivate shields.
@@ -212,46 +213,50 @@ end
 --- Returns whether this STBO supplies energy to docked PlayerSpaceships.
 --- Example: stbo:getSharesEnergyWithDocked()
 function Entity:getSharesEnergyWithDocked()
-    --TODO
+    if self.components.docking_bay then return self.components.docking_bay.share_energy end
+    return false
 end
 --- Defines whether this STBO supplies energy to docked PlayerSpaceships.
 --- Example: stbo:getSharesEnergyWithDocked(false)
 function Entity:setSharesEnergyWithDocked(allow_energy_share)
-    --TODO
+    if self.components.docking_bay then self.components.docking_bay.share_energy = allow_energy_share end
     return self
 end
 --- Returns whether this STBO repairs docked SpaceShips.
 --- Example: stbo:getRepairDocked()
 function Entity:getRepairDocked()
-    --TODO
+    if self.components.docking_bay then return self.components.docking_bay.repair end
+    return false
 end
 --- Defines whether this STBO repairs docked SpaceShips.
 --- Example: stbo:setRepairDocked(true)
 function Entity:setRepairDocked(allow_repair)
-    --TODO
+    if self.components.docking_bay then self.components.docking_bay.repair = allow_repair end
     return self
 end
 --- Returns whether the STBO restocks scan probes for docked PlayerSpaceships.
 --- Example: stbo:getRestocksScanProbes()
 function Entity:getRestocksScanProbes()
-    --TODO
+    if self.components.docking_bay then return self.components.docking_bay.restock_probes end
+    return false
 end
 --- Defines whether the STBO restocks scan probes for docked PlayerSpaceships.
 --- Example: stbo:setRestocksScanProbes(true)
 function Entity:setRestocksScanProbes(allow_restock)
-    --TODO
+    if self.components.docking_bay then self.components.docking_bay.restock_probes = allow_restock end
     return self
 end
 --- Returns whether this STBO restocks missiles for docked CpuShips.
 --- Example: stbo:getRestocksMissilesDocked()
 function Entity:getRestocksMissilesDocked()
-    --TODO
+    if self.components.docking_bay then return self.components.docking_bay.restock_missiles end
+    return false
 end
 --- Defines whether this STBO restocks missiles for docked CpuShips.
 --- To restock docked PlayerSpaceships' weapons, use a comms script. See ShipTemplateBasedObject:setCommsScript() and :setCommsFunction().
 --- Example: stbo:setRestocksMissilesDocked(true)
 function Entity:setRestocksMissilesDocked(allow_restock)
-    --TODO
+    if self.components.docking_bay then self.components.docking_bay.restock_missiles = allow_restock end
     return self
 end
 --- [DEPRECATED]
@@ -267,48 +272,48 @@ end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldLevel() with an index value.
 function Entity:setFrontShield(amount)
-    self.setShieldLevel(0, amount)
+    if self.components.shields then self.components.shields[1].level = amount end
     return self
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldsMax().
 function Entity:setFrontShieldMax(amount)
-    --TODO
+    if self.components.shields then self.components.shields[1].max = amount end
     return self
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:getShieldLevel() with an index value.
 function Entity:getRearShield()
-    --TODO
+    return self.getShieldLevel(1)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldsMax().
 function Entity:getRearShieldMax()
-    --TODO
+    return self.getShieldMax(1)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldLevel() with an index value.
 function Entity:setRearShield(amount)
-    --TODO
+    if self.components.shields then self.components.shields[2].level = amount end
     return self
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldsMax().
 function Entity:setRearShieldMax(amount)
-    --TODO
+    if self.components.shields then self.components.shields[2].max = amount end
     return self
 end
 --- Defines a function to call when this STBO takes damage.
 --- Passes the object taking damage and the instigator SpaceObject (or nil) to the function.
 --- Example: stbo:onTakingDamage(function(this_stbo,instigator) print(this_stbo:getCallSign() .. " was damaged by " .. instigator:getCallSign()) end)
 function Entity:onTakingDamage(callback)
-    --TODO
+    if self.components.hull then self.components.hull.on_taking_damage = callback end
     return self
 end
 --- Defines a function to call when this STBO is destroyed by taking damage.
 --- Passes the object taking damage and the instigator SpaceObject that delivered the destroying damage (or nil) to the function.
 --- Example: stbo:onTakingDamage(function(this_stbo,instigator) print(this_stbo:getCallSign() .. " was destroyed by " .. instigator:getCallSign()) end)
 function Entity:onDestruction(callback)
-    --TODO
+    if self.components.hull then self.components.hull.on_destruction = callback end
     return self
 end

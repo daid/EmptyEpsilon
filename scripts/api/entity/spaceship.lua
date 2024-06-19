@@ -30,24 +30,63 @@ end
 --- Returns whether this SpaceShip has been identified by the given SpaceObject as either hostile or friendly.
 --- Example: ship:isFriendOrFoeIdentifiedBy(enemy)
 function Entity:isFriendOrFoeIdentifiedBy(enemy)
-    --TODO
+    local scan_state = self.components.scan_state
+    if enemy == nil or not enemy.isValid() then return false end
+    local faction = enemy.components.faction
+    if faction == nil then return false end
+    faction = faction.entity
+    if scan_state then
+        for n=1,#scan_state do
+            if scan_state[n].faction = faction then return scan_state[n].state ~= "none" end
+        end
+    end
+    return false
 end
 --- Returns whether this SpaceShip has been fully scanned by the given SpaceObject.
 --- See also SpaceObject:isScannedBy().
 --- Example: ship:isFullyScannedBy(enemy)
 function Entity:isFullyScannedBy(enemy)
-    --TODO
+    local scan_state = self.components.scan_state
+    if enemy == nil or not enemy.isValid() then return false end
+    local faction = enemy.components.faction
+    if faction == nil then return false end
+    faction = faction.entity
+    if scan_state then
+        for n=1,#scan_state do
+            if scan_state[n].faction = faction then return scan_state[n].state == "full" end
+        end
+    end
+    return false
 end
 --- Returns whether this SpaceShip has been identified by the given faction as either hostile or friendly.
 --- Example: ship:isFriendOrFoeIdentifiedByFaction("Kraylor")
 function Entity:isFriendOrFoeIdentifiedByFaction(faction)
-    --TODO
+    local scan_state = self.components.scan_state
+    if enemy == nil or not enemy.isValid() then return false end
+    faction = getFactionInfo(faction)
+    if faction == nil then return false end
+    if scan_state then
+        for n=1,#scan_state do
+            if scan_state[n].faction = faction then return scan_state[n].state ~= "none" end
+        end
+    end
+    return false
 end
 --- Returns whether this SpaceShip has been fully scanned by the given faction.
 --- See also SpaceObject:isScannedByFaction().
 --- Example: ship:isFullyScannedByFaction("Kraylor")
 function Entity:isFullyScannedByFaction(faction)
-    --TODO
+    local scan_state = self.components.scan_state
+    if enemy == nil or not enemy.isValid() then return false end
+    faction = getFactionInfo(faction)
+    if faction == nil then return false end
+    if scan_state then
+        for n=1,#scan_state do
+            if scan_state[n].faction = faction then return scan_state[n].state == "full" end
+        end
+    end
+    return false
+
 end
 --- Returns whether this SpaceShip is docked with the given SpaceObject.
 --- Example: ship:isDocked(base) -- returns true if `ship` is fully docked with `base`
@@ -55,6 +94,7 @@ function Entity:isDocked(target)
     if self.components.docking_port and self.components.docking_port.state == "docked" then
         return self.components.docking_port.target == target
     end
+    return false
 end
 --- Returns the SoaceObject with which this SpaceShip is docked.
 --- Example: base = ship:getDockedWith()
@@ -62,6 +102,7 @@ function Entity:getDockedWith()
     if self.components.docking_port and self.components.docking_port.state == "docked" then
         return self.components.docking_port.target
     end
+    return false
 end
 --- Returns the EDockingState value of this SpaceShip.
 --- 0 = Not docked
@@ -659,27 +700,38 @@ end
 --- Returns no value if no weapon is loaded, which includes the tube being in a loading or unloading state.
 --- Example: ship:getWeaponTubeLoadType(0)
 function Entity:getWeaponTubeLoadType(index)
-    --TODO
-    return self
+    local tubes = self.components.missile_tubes
+    if  tubes and index >= 0 and index < #tubes then return tubes[index+1].type_loaded end
+    return "none"
 end
 --- Sets which weapon types the WeaponTube with the given index on this SpaceShip can load.
 --- Note the spelling of "missle".
 --- Example: ship:weaponTubeAllowMissle(0,"Homing") -- allows Homing missiles to be loaded in WeaponTube 0
 function Entity:weaponTubeAllowMissle(index, weapon_type)
-    --TODO
+    local tubes = self.components.missile_tubes
+    if tubes and index >= 0 and index < #tubes then tubes[index+1]["allow_"..string.lower(weapon_type)] = true end
     return self
 end
 --- Sets which weapon types the WeaponTube with the given index can't load on this SpaceShip.
 --- Note the spelling of "missle".
 --- Example: ship:weaponTubeDisallowMissle(0,"Homing") -- prevents Homing missiles from being loaded in tube 0
 function Entity:weaponTubeDisallowMissle(index, weapon_type)
-    --TODO
+    local tubes = self.components.missile_tubes
+    if tubes and index >= 0 and index < #tubes then tubes[index+1]["allow_"..string.lower(weapon_type)] = false end
     return self
 end
 --- Sets a weapon tube with the given index on this SpaceShip to allow loading only the given weapon type.
 --- Example: ship:setWeaponTubeExclusiveFor(0,"Homing") -- allows only Homing missiles to be loaded in tube 0
 function Entity:setWeaponTubeExclusiveFor(index, weapon_type)
-    --TODO
+    local tubes = self.components.missile_tubes
+    if tubes and index >= 0 and index < #tubes then
+        tubes[index+1]["allow_homing"] = false
+        tubes[index+1]["allow_nuke"] = false
+        tubes[index+1]["allow_mine"] = false
+        tubes[index+1]["allow_emp"] = false
+        tubes[index+1]["allow_hvli"] = false
+        tubes[index+1]["allow_"..string.lower(weapon_type)] = true
+    end
     return self
 end
 --- Sets the angle, relative to this SpaceShip's forward bearing, toward which the WeaponTube with the given index on this SpaceShip points.

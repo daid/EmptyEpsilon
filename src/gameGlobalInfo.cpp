@@ -485,15 +485,4 @@ static int isLongRangeRadarAllowed(lua_State* L)
 /// Returns whether the "Long Range Radar" setting for main screens is enabled in the running scenario.
 /// Example: isLongRangeRadarAllowed() -- returns true by default
 REGISTER_SCRIPT_FUNCTION(isLongRangeRadarAllowed);
-
-static int onNewPlayerShip(lua_State* L)
-{
-    //TODO
-    return 0;
-}
-/// void onNewPlayerShip(ScriptSimpleCallback callback)
-/// Defines a function to call when a new PlayerSpaceship is created, whether on the ship selection screen or with the constructor in a Lua script.
-/// Passes the newly created PlayerSpaceship.
-/// Example: onNewPlayerShip(function(player) print(player:getCallSign()) end) -- prints the callsign of new PlayerSpaceships to the console
-REGISTER_SCRIPT_FUNCTION(onNewPlayerShip);
 */
