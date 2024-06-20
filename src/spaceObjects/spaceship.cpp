@@ -494,6 +494,8 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     energy_level = 1000;
     max_energy_level = 1000;
     turnSpeed = 0.0f;
+//    radar_trace_scale = 1;
+    
 
     registerMemberReplication(&target_rotation, 1.5f);
     registerMemberReplication(&turnSpeed, 0.1f);
@@ -528,6 +530,10 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&combat_maneuver_boost_speed);
     registerMemberReplication(&combat_maneuver_strafe_speed);
     registerMemberReplication(&radar_trace);
+    
+    //Odysseus addition
+    registerMemberReplication(&radar_trace_scale);
+
 
     for(unsigned int n=0; n<SYS_COUNT; n++)
     {
@@ -639,6 +645,7 @@ void SpaceShip::applyTemplateValues()
     model_info.setData(ship_template->model_data);
 }
 
+
 void SpaceShip::draw3D()
 {
     if (docked_style == DockStyle::Internal) return;
@@ -731,6 +738,8 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
     info += signature_delta;
     return info;
 }
+
+
 
 void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
@@ -926,7 +935,10 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
         if (factionInfo[getFactionId()])
             color = factionInfo[getFactionId()]->getGMColor();
     }
-    renderer.drawRotatedSprite(object_sprite, position, long_range ? 22.f : 32.f, getRotation() - rotation, color);
+
+//Odysseus modification, set size
+
+    renderer.drawRotatedSprite(object_sprite, position, long_range ? radar_trace_scale * 22.f : radar_trace_scale * 32.f, getRotation() - rotation, color);
 }
 
 void SpaceShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)

@@ -13,7 +13,6 @@ function init()
 		setUpPlanet("AS-RV693", 85000, 25000) 
 		removeGMFunction("Coordinates H7-239")
 		removeGMFunction("Coordinates H7-254")
-		removeGMFunction("Coordinates something else")
 			starcaller = PlayerSpaceship():setFaction("EOC_Starfleet"):setTemplate("Comet Class Scout"):setCanSelfDestruct(false):setPosition(400, 400):setCallSign("ESS Starcaller"):setAutoCoolant(true)
 
 	end)
@@ -21,12 +20,11 @@ function init()
 		setUpPlanet("P-GD66-NF38", 85000, 25000) 
 		removeGMFunction("Coordinates H7-239")
 		removeGMFunction("Coordinates H7-254")
-		removeGMFunction("Coordinates something else")
 	end)
-	addGMFunction(_("buttonGM", "Coordinates something else"), function()
+	addGMFunction(_("buttonGM", "Clear setup buttons"), function()
 		removeGMFunction("Coordinates H7-239") 
 		removeGMFunction("Coordinates H7-254")
-		removeGMFunction("Coordinates something else")
+		removeGMFunction("Clear setup buttons")
 	end)
 	local sx = 5000
 	local sy = -4500
@@ -87,7 +85,7 @@ function cleanup_prep()
 		end
 	end
 
-	enemyCount = enemyCount * 97 / 100
+	enemyCount = enemyCount * 85 / 100
 
 	destroyEnemy = true
 
@@ -103,7 +101,6 @@ function cleanup(delta)
 		starcaller:destroy()
 		mother:destroy()
 	end
-	--host is set up when spawning the mother
 	x, y = host:getPosition()
 
 	if destroy_delay < 0 then
@@ -119,7 +116,8 @@ function cleanup(delta)
 
 			if enemyKills >= enemyCount then
 				destroyEnemy = false
-				odysseus:addToShipLog("EVA sector scanner report. Machine fleet size reduced by over 97%.", "Red")
+				odysseus:addToShipLog("EVA sector scanner report. Major explosion detected.", "Red")
+				odysseus:addToShipLog("EVA sector scanner report. Hostiles immobilized.", "Red")
 				return
 			end
 
@@ -136,6 +134,7 @@ function cleanup(delta)
 
 	if enemyKills >= enemyCount then
 		destroyEnemy = false
-		odysseus:addToShipLog("EVA sector scanner report. Machine fleet size reduced by over 97%.", "Red")
+		odysseus:addToShipLog("EVA sector scanner report. Major explosion detected.", "Red")
+		odysseus:addToShipLog("EVA sector scanner report. Hostiles immobilized.", "Red")
 	end
 end

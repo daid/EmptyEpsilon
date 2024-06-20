@@ -21,6 +21,8 @@ public:
     string template_name;
     string type_name;
     string radar_trace;
+    float radar_trace_scale;
+
     string impulse_sound_file;
     P<ShipTemplate> ship_template;
 
@@ -99,6 +101,12 @@ public:
     void setShortRangeRadarRange(float range) { range = std::max(range, 100.0f); short_range_radar_range = range; long_range_radar_range = std::max(long_range_radar_range, range); }
 
     void setRadarTrace(string trace) { radar_trace = "radar/" + trace; }
+
+    //Odysseus addition
+        void setRadarTraceScale(float scale) { radar_trace_scale = scale; }
+
+
+
     void setImpulseSoundFile(string sound) { impulse_sound_file = sound; }
 
     bool getSharesEnergyWithDocked() { return shares_energy_with_docked; }

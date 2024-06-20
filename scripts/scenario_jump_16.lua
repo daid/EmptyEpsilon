@@ -6,7 +6,6 @@ require("utils.lua")
 require("utils_odysseus.lua")
 
 function init()
-	-- Add GM common functions - Order of the buttons: Sync, fleet, enemies, Scenario change, scenario specific
 
 	local sx = 5000
 	local sy = -4500

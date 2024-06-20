@@ -25,6 +25,8 @@ function init()
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
 	-- When distance set to 50000, it takes about 7-8 minutes enemy to reach attack range	
 	addGMFunction(_("Enemy", "OC - Machine - L"), function() spawnwave(4) end)
+	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
+
 	addGMFunction(_("Enemy", "Harbinger transport"), function() 
 		launchHarbinger()
 		removeGMFunction("Harbinger transport")
@@ -34,8 +36,6 @@ function init()
 
   local lx = ox +35000
   local ly = oy -35000
-  -- Travel time in minutes, direction
---  setUpLaunchmissionButtons(7, lx, ly)
 
 
   	-- Generate scenario map
@@ -48,13 +48,6 @@ function init()
 		Asteroid():setPosition(x1, y1):setSize(random(200, 2000))
 	end
 
-	-- Add common GM functions
-	addGMFunction("Sync buttons", sync_buttons)
-
-	addGMFunction("Enemy north", wavenorth)
-	addGMFunction("Enemy east", waveeast)
-	addGMFunction("Enemy south", wavesouth)
-	addGMFunction("Enemy west", wavewest)
 
 	  planet = setUpPlanet("AS-OH108", lx, ly, 0.7)
 	  Planet():setPosition(lx-2000, ly+2300):setPlanetRadius(700):setDistanceFromMovementPlane(-500):setPlanetSurfaceTexture("planets/asteroid.png")
@@ -66,7 +59,6 @@ function init()
 
 	  local dist = distance(odysseus, planet)
 
---	  odysseus:addToShipLog(string.format(_("shipLog", "distance %d "), math.floor(dist)), "Red")
 
 end
 

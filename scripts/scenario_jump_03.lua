@@ -22,7 +22,7 @@ function init()
 	-- Spawnface parameters: (enemyfleetsize)
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
     addGMFunction(_("buttonGM", "OC - Machine - L"), function() spawnwave(4) end)
---	addGMFunction(_("buttonGM", "OC - Machine - Backup xS"), function() spawnwave(1) end)
+	addGMFunction(_("buttonGM", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
 	setScenarioChange('Change scenario - 04', "scenario_jump_04.lua")
 

@@ -499,7 +499,7 @@ public:
     float getTubeLoadTime(int index);
 
     void setRadarTrace(string trace) { radar_trace = "radar/" + trace; }
-
+    void setRadarTraceScale(float scale) { radar_trace_scale = scale; }
     void addBroadcast(int threshold, string message);
 
     // Return a string that can be appended to an object create function in the lua scripting.

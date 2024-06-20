@@ -12,6 +12,7 @@ function showEOCOrders()
     addGMFunction(_("buttonGM", "Order Formation"), function() fleetFlyFormation() end)
     addGMFunction(_("buttonGM", "Order Idle"), function() orderFleetIdle() end)
 
+    --Muokkaa fighterit OC:ksi
     addGMFunction(
         _("buttonGM", 'Aurora fighters'), 
         function()

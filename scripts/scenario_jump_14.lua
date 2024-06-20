@@ -24,6 +24,7 @@ function init()
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
 	-- When distance set to 50000, it takes about 7-8 minutes enemy to reach attack range	
 	addGMFunction(_("Enemy", "OC - Machine - L"), function() spawnwave(4) end)
+	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
    
 	setScenarioChange('Change scenario - 15', "scenario_jump_15.lua")
@@ -45,14 +46,6 @@ function init()
 
 	--x1, y1, x2, y2, spacing, object_type, rows, chance, randomize
 	createObjectsOnLine(120000,-80000, 120000,80000, 40000, Nebula, 1, 100, 1)
-
-	-- Add common GM functions
-	addGMFunction("Sync buttons", sync_buttons)
-
-	addGMFunction("Enemy north", wavenorth)
-	addGMFunction("Enemy east", waveeast)
-	addGMFunction("Enemy south", wavesouth)
-	addGMFunction("Enemy west", wavewest)
 
 
 	essody18_launched = 0

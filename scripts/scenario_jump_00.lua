@@ -7,7 +7,8 @@ require("utils_odysseus.lua")
 
 function init()
     addGMFunction(_("buttonGM", "OC - Machine - S"), function() spawnwave(2) end)
-	
+	addGMFunction(_("buttonGM", "OC - Machine - Backup XS"), function() spawnwave(1) end)
+
 	setScenarioChange('Change scenario - 01', "scenario_jump_01.lua")
 
 	-- Generate scenario map

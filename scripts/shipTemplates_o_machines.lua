@@ -38,6 +38,7 @@ template:setWeaponStorage("EMP", 40)
 
 template = ShipTemplate():setName("Machine Reaper"):setClass("Machine", "Reaper"):setModel("machine_reaper")
 template:setRadarTrace("machine_reaper.png")
+template:setRadarTraceScale(1.2)
 template:setHull(2500)
 template:setShields(1800, 1800, 1800, 1800)
 template:setSpeed(30, 1, 3)
@@ -70,6 +71,7 @@ template:setWeaponStorage("EMP", 20)
 
 template = ShipTemplate():setName("Machine Mothership"):setClass("Machine", "Mothership"):setModel("machine_mother")
 template:setRadarTrace("machine_mothership.png")
+template:setRadarTraceScale(3)
 template:setTubes(16, 3.0)
 template:setWeaponStorage("Homing", 1000)
 for n=0,15 do
