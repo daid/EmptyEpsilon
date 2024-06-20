@@ -20,7 +20,7 @@ end
 function allow_starcaller()
 	odysseus:addCustomButton("Relay", "launch_pad_4", "Launch STARCALLER", launch_starcaller)
   	odysseus:setLandingPadDocked(4)
-	removeGMFunction("Allow STARCALLER")
+	removeGMFunction("Allow Starcaller")
 end
 
 -- Ship Launcher
@@ -47,6 +47,8 @@ function spawn_essody18()
 	essody18 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Comet Starfighter"):setCanSelfDestruct(false):setPosition(x + 200, y + 200):setCallSign("ESSODY-F18"):setAutoCoolant(true):onDestruction(
 	function(this, instigator) 
 		odysseus:setLandingPadDestroyed(1)
+		allow_autodock18 = false
+		removeGMFunction("Force dock ESSODY-F18")
 		addGMFunction("Allow ESSODY-F18", allow_essody18)
 	end)
 	allow_autodock18 = true
@@ -62,6 +64,8 @@ function spawn_essody23()
 	essody23 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Comet Starfighter"):setCanSelfDestruct(false):setPosition(x + 250, y + 250):setCallSign("ESSODY-F23"):setAutoCoolant(true):onDestruction(
     function(this, instigator) 
       	odysseus:setLandingPadDestroyed(2)
+		  allow_autodock23 = false
+		removeGMFunction("Force dock ESSODY-F23")
       	addGMFunction("Allow ESSODY-F23", allow_essody23)
     end)
 	allow_autodock23 = true
@@ -76,6 +80,8 @@ function spawn_essody36()
 	essody36 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Comet Starfighter"):setCanSelfDestruct(false):setPosition(x + 300, y + 300):setCallSign("ESSODY-F36"):setAutoCoolant(true):onDestruction(
     function(this, instigator) 
       	odysseus:setLandingPadDestroyed(3)
+		  allow_autodock36 = false
+		removeGMFunction("Force dock ESSODY-F36")
       	addGMFunction("Allow ESSODY-F36", allow_essody36)
     end)
 	allow_autodock36 = true
@@ -89,9 +95,11 @@ function spawn_starcaller()
 	x, y = odysseus:getPosition()
 	-- Starcaller has different faction on purpose, EOC_starfleet is neutral with machines.
 	starcaller = PlayerSpaceship():setFaction("EOC_Starfleet"):setTemplate("Comet Class Scout"):setCanSelfDestruct(false):setPosition(x - 400, y + 400):setCallSign("ESS Starcaller"):setAutoCoolant(true):onDestruction(
-    function(this, instigator) 
+    function(this, instigator)
+		removeGMFunction("Force dock Starcaller")
       	odysseus:setLandingPadDestroyed(4)
-      	addGMFunction("Allow STARCALLER", allow_starcaller)
+		  allow_autodocksc = false
+      	addGMFunction("Allow Starcaller", allow_starcaller)
     end)
 	allow_autodocksc = true
 	odysseus:addCustomButton("Relay", "dock_to_odysseus_autosc", "Autodock Starcaller", dock_starcaller_auto)
@@ -283,10 +291,10 @@ function sync_buttons()
 	removeGMFunction("Allow ESSODY-F18")
 	removeGMFunction("Allow ESSODY-F23")
 	removeGMFunction("Allow ESSODY-F36")
-	removeGMFunction("Allow STARCALLER")
+	removeGMFunction("Allow Starcaller")
 	removeGMFunction("Force dock ESSODY-F18")
 	removeGMFunction("Force dock ESSODY-F23")
-	removeGMFunction("Force dock ESSODY-F1836")
+	removeGMFunction("Force dock ESSODY-F36")
 	removeGMFunction("Force dock Starcaller")
 	odysseus:removeCustom("launch_pad_1")
 	odysseus:removeCustom("launch_pad_2")
@@ -307,7 +315,7 @@ function sync_buttons()
 		addGMFunction("Allow ESSODY-F36", allow_essody36)
 	end
 	if odysseus:isLandingPadDestroyed(4) then
-		addGMFunction("Allow STARCALLER", allow_starcaller)
+		addGMFunction("Allow Starcaller", allow_starcaller)
 	end
 
 	if odysseus:isLandingPadDocked(1) then

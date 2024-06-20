@@ -6,7 +6,7 @@ require("utils.lua")
 require("utils_odysseus.lua")
 
 function init()
-    addGMFunction(_("buttonGM", "OC - Machine - XS"), function() spawnwave(1) end)
+    addGMFunction(_("buttonGM", "OC - Machine - S"), function() spawnwave(2) end)
 	
 	setScenarioChange('Change scenario - 01', "scenario_jump_01.lua")
 

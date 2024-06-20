@@ -102,7 +102,7 @@ void AutoConnectScreen::update(float delta)
                     if (!connect_to_address.getHumanReadable().empty())
                         status_label->setText("Waiting for ship on " + connect_to_address.getHumanReadable()[0] + "...");
                     else
-                        status_label->setText("Waiting for ship...");
+                        status_label->setText("Waiting for launch...");
                     if (!my_spaceship)
                     {
                         for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
