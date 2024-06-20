@@ -34,6 +34,7 @@ addGMFunction(_("buttonGM", "Sync fighter status"), function() sync_buttons() en
 suffix_index = 100
 
 
+
 function update(delta)
 	if delta == 0 then
 		return

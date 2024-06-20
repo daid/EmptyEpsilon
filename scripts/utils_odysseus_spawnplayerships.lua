@@ -223,6 +223,7 @@ function remove_autodock18()
 	odysseus:removeCustom("dock_to_odysseus_auto18")
 end
 
+
 function remove_autodock23()
 	allow_autodock23 = false
 	odysseus:removeCustom("dock_to_odysseus_auto23")
