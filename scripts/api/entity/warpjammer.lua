@@ -14,7 +14,7 @@ function WarpJammer()
             rotate=false,
             color_by_faction=true,
         },
-        physics = {type="static"},
+        physics = {type="static",size=300},
     }
     for k, v in pairs(__model_data["shield_generator"]) do
         if string.sub(1, 2) ~= "__" then

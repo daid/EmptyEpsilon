@@ -25,16 +25,11 @@ local Entity = getLuaEntityFunctionTable()
 --- Defaults to a ModelData whose name starts with "artifact" and ends with a random number between 1 and 8.
 --- Example: artifact:setModel("artifact6")
 function Entity:setModel(model_name)
-    --[[TODO
-    auto model = ModelData::getModel(model_name);
-    auto& mrc = entity.getOrAddComponent<MeshRenderComponent>();
-    mrc.mesh.name = model->mesh_name;
-    mrc.mesh_offset = model->mesh_offset;
-    mrc.texture.name = model->texture_name;
-    mrc.specular_texture.name = model->specular_texture_name;
-    mrc.illumination_texture.name = model->illumination_texture_name;
-    mrc.scale = model->scale;
-    --]]
+    for k, v in pairs(__model_data[model_name]) do
+        if string.sub(1, 2) ~= "__" then
+            self.components[k] = table.deepcopy(v)
+        end
+    end
     return self
 end
 --- Immediately destroys this artifact with a visual explosion.
@@ -99,7 +94,7 @@ function Entity:onPickUp(callback)
 end
 --- Alias of Artifact:onPickUp().
 function Entity:onPickup(callback)
-    return self:onPickup(callback)
+    return self:onPickUp(callback)
 end
 --- Defines whether the artifact rotates, and if so at what rotational velocity. (unit?)
 --- For reference, normal asteroids spin at a rate between 0.1 and 0.8.
