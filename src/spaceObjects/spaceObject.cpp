@@ -46,7 +46,6 @@ void SpaceObject::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, 
 
 void SpaceObject::destroy()
 {
-    //TODO: on_destroyed.call<void>(P<SpaceObject>(this));
     MultiplayerObject::destroy();
 }
 

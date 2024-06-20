@@ -11,6 +11,7 @@
 #include "components/sfx.h"
 #include "components/rendering.h"
 #include "components/faction.h"
+#include "components/avoidobject.h"
 #include "ecs/query.h"
 #include "multiplayer_server.h"
 #include "particleEffect.h"
@@ -118,7 +119,11 @@ void MissileSystem::update(float delta)
         for(auto [entity, lifetime] : sp::ecs::Query<LifeTime>()) {
             lifetime.lifetime -= delta;
             if (lifetime.lifetime <= 0.0f) {
-                //TODO: Nukes/EMPs should explode.
+                if (entity.hasComponent<ExplodeOnTimeout>()) {
+                    if (auto eot = entity.getComponent<ExplodeOnTouch>()) {
+                        explode(entity, {}, *eot);
+                    }
+                }
                 entity.destroy();
             }
         }
@@ -259,7 +264,8 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.blast_range = 1000.0f * category_modifier;
             mc.explosion_sfx = "sfx/nuke_explosion.wav";
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.7f, 0.1f);
-            //TODO: Add avoid area after X time
+            missile.addComponent<DelayedAvoidObject>(10.0f, 1000.0f);
+            missile.addComponent<ExplodeOnTimeout>();
         }
         break;
     case MW_Mine:
@@ -295,6 +301,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.blast_range = 1000.0f * category_modifier;
             mc.damage_type = DamageType::EMP;
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 1.0f, 0.0f);
+            missile.addComponent<ExplodeOnTimeout>();
         }
         break;
     default:

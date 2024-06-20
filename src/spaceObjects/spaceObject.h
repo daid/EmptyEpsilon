@@ -48,8 +48,6 @@ public:
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
     void setHeading(float heading) { setRotation(heading - 90); }
 
-    //TODO: void onDestroyed(ScriptSimpleCallback callback)
-
     virtual void draw3D();
     virtual void draw3DTransparent() {}
     virtual void drawOnRadar(sp::RenderTarget& window, glm::vec2 position, float scale, float rotation, bool longRange);
@@ -105,8 +103,6 @@ public:
     void setRotation(float a);
     glm::vec2 getVelocity() const;
     float getAngularVelocity() const;
-
-    //TODO: ScriptSimpleCallback on_destroyed;
 
     glm::mat4 getModelTransform() const { return getModelMatrix(); }
 protected:

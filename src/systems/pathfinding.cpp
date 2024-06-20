@@ -29,6 +29,14 @@ void PathFindingSystem::update(float delta)
     for(auto it : small_entities)
         it.second.erase(std::remove_if(it.second.begin(), it.second.end(), [](sp::ecs::Entity e) { return !bool(e); } ), it.second.end());
 
+    for(auto [entity, dao] : sp::ecs::Query<DelayedAvoidObject>()) {
+        dao.delay -= delta;
+        if (dao.delay <= 0.0f) {
+            entity.addComponent<AvoidObject>().range = dao.range;
+            entity.removeComponent<DelayedAvoidObject>();
+        }
+    }
+
     // Update big and small object lists.
     for(auto [entity, ao, transform] : sp::ecs::Query<AvoidObject, sp::Transform>()) {
         switch(ao.state) {

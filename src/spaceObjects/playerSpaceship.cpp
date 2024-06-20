@@ -97,7 +97,6 @@ void PlayerSpaceship::applyTemplateValues()
 
 void PlayerSpaceship::setMaxCoolant(float coolant)
 {
-    //TODO
 }
 
 void PlayerSpaceship::setSystemCoolantRequest(ShipSystem::Type system, float request)

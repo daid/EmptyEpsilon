@@ -5,6 +5,7 @@
 #include "components/hull.h"
 #include "components/collision.h"
 #include "components/rendering.h"
+#include "components/radar.h"
 #include "multiplayer_server.h"
 
 
@@ -49,7 +50,7 @@ void EnergySystem::update(float delta)
                     auto e = sp::ecs::Entity::create();
                     e.addComponent<ExplosionEffect>().size = 1000.0;
                     e.addComponent<sp::Transform>(*transform);
-                    //TODO: e->setRadarSignatureInfo(0.0, 0.4, 0.4);
+                    e.addComponent<RawRadarSignatureInfo>(0.0f, 0.4f, 0.4f);
 
                     DamageInfo info(entity, DamageType::Kinetic, transform->getPosition());
                     DamageSystem::damageArea(transform->getPosition(), 500, 30, 60, info, 0.0);

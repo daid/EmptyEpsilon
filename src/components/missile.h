@@ -32,6 +32,9 @@ public:
     DamageType damage_type = DamageType::Kinetic;
     string explosion_sfx;
 };
+class ExplodeOnTimeout
+{
+};
 class DelayedExplodeOnTouch : public ExplodeOnTouch
 {
 public:

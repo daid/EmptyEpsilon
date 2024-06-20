@@ -2,6 +2,7 @@
 #include "components/selfdestruct.h"
 #include "components/collision.h"
 #include "components/rendering.h"
+#include "components/radar.h"
 #include "systems/damage.h"
 #include "ecs/query.h"
 #include "multiplayer_server.h"
@@ -46,7 +47,7 @@ void SelfDestructSystem::update(float delta)
                         auto e = sp::ecs::Entity::create();
                         e.addComponent<ExplosionEffect>().size = self_destruct.size * 0.67f;
                         e.addComponent<sp::Transform>(*transform);
-                        //TODO: e->setRadarSignatureInfo(0.0, 0.6, 0.6);
+                        e.addComponent<RawRadarSignatureInfo>(0.0f, 0.6f, 0.6f);
                     }
 
                     DamageInfo info(entity, DamageType::Kinetic, transform->getPosition());

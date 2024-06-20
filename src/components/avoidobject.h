@@ -17,3 +17,10 @@ public:
     } state = InternalState::New;
     uint32_t position_hash = 0;
 };
+
+class DelayedAvoidObject
+{
+public:
+    float delay = 10.0f;
+    float range = 100.0f;
+};

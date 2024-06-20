@@ -5,6 +5,7 @@
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/beamweapon.h"
+#include "components/radar.h"
 #include "components/rendering.h"
 #include "gameGlobalInfo.h"
 #include <glm/geometric.hpp>
@@ -171,7 +172,7 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
             auto e = sp::ecs::Entity::create();
             e.addComponent<ExplosionEffect>().size = physics->getSize().x * 1.5f;
             e.addComponent<sp::Transform>(*transform);
-            //TODO: e->setRadarSignatureInfo(0.0, 0.4, 0.4);
+            e.addComponent<RawRadarSignatureInfo>(0.0f, 0.4f, 0.4f);
         }
     }
 

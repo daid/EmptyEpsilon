@@ -478,8 +478,8 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
         {
             ret += ":setWeaponTubeDirection(" + string(n) + ", " + string(tube.getDirection(), 0) + ")";
         }
-        //TODO: Weapon tube "type_allowed_mask"
-        //TODO: Weapon tube "load_time"
+        // Weapon tube "type_allowed_mask"
+        // Weapon tube "load_time"
         if (tube.getSize() != template_tube.size)
         {
             ret += ":setTubeSize(" + string(n) + ",\"" + getMissileSizeString(tube.getSize()) + "\")";
