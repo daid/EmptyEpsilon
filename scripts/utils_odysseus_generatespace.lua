@@ -105,7 +105,7 @@ function planetList()
             radius = 3822,
             axialrotation = 98,
             texture = {
-                surface = "planets/gas-1.png",
+                surface = "planets/gas-3.png",
 --                cloud = "planets/clouds-1.png", 
             },
         })
@@ -216,7 +216,7 @@ function planetList()
             radius = 11785,
             axialrotation = 75,
             texture = {
-                surface = "planets/gas-3.png",
+                surface = "planets/gas-1.png",
             },
         })
 end
