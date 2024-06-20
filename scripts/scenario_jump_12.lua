@@ -22,6 +22,7 @@ function init()
 	addGMFunction(_("Enemy", "OC - Machine - Fleet SX"), function() spawnwave(1) end)
 
 	addGMFunction(_("Enemy", "OC - Machine - L"), function() spawnwave(4) end)
+	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
    
 	setScenarioChange('Change scenario - 13', "scenario_jump_13.lua")

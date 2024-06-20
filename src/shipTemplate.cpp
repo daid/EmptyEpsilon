@@ -305,6 +305,11 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// template = ShipTemplate():setName("Stalker Q7"):setHull(50):setShields(50)
     /// variation = template:copy("Stalker Q5"):setShields(25,25)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, copy);
+        /// Scales the radar trace for this artifact.
+    /// A value of 0 restores standard autoscaling relative to the artifact's radius.
+    /// Set to 1 to mimic ship traces.
+    /// Example: template:setRadarTraceScale(0.7)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTraceScale);
 }
 
 std::unordered_map<string, P<ShipTemplate> > ShipTemplate::templateMap;
@@ -353,6 +358,7 @@ ShipTemplate::ShipTemplate()
     radar_trace = "radar/arrow.png";
     impulse_sound_file = "sfx/engine.wav";
     default_ai_name = "default";
+    radar_trace_scale = 1;
 }
 
 void ShipTemplate::setBeamTexture(int index, string texture)
@@ -696,6 +702,12 @@ void ShipTemplate::setRadarTrace(string trace)
     radar_trace = "radar/" + trace;
 }
 
+//Odysseus addition
+void ShipTemplate::setRadarTraceScale(float scale)
+{
+    radar_trace_scale = scale;
+}
+
 void ShipTemplate::setLongRangeRadarRange(float range)
 {
     range = std::max(range, 100.0f);
@@ -765,6 +777,9 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     for(int n=0; n<MW_Count; n++)
         result->weapon_storage[n] = weapon_storage[n];
     result->radar_trace = radar_trace;
+
+    //Odysseus addition
+    result->radar_trace_scale = radar_trace_scale;
 
     result->rooms = rooms;
     result->doors = doors;

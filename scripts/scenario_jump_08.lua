@@ -19,6 +19,7 @@ function init()
 
 	-- Spawnwave(distance from Odysseus, enemy size)
 	addGMFunction(_("Enemy", "OC - Machine - S"), function() spawnwave(2) end)
+	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
 	
 	setScenarioChange('Change scenario - 09', "scenario_jump_09.lua")

@@ -23,6 +23,8 @@ function init()
 	-- When distance set to 50000, it takes about 7-8 minutes enemy to reach attack range	
 addGMFunction("Clear setup buttons", clearbuttons)
 	addGMFunction(_("Enemy", "OC - Machine - L"), function() spawnwave(4) end)
+	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
+
 
    
 	setScenarioChange('Change scenario - 14', "scenario_jump_14.lua")
@@ -30,10 +32,9 @@ addGMFunction("Clear setup buttons", clearbuttons)
 	addGMFunction("Destroy CSS Prophet", confirm_prophet)
 
 	-- Generate scenario map
---	generateSpace(sx, sy)
+	generateSpace(sx, sy)
 
 
---	createObjectsOnLine(-7000, 5000, 3000, 0, 500, Asteroid, 20, 100, 15000)
 
 	for n=1, 4 do
 		local posx = random(-80000, 30000)
@@ -55,18 +56,33 @@ function setProphetAsteroid()
 
 	local px, py = prophet:getPosition()
 
-	for n=1, 200 do
+	for n=1, 20 do
 		local r = irandom(0, 360)
-		local distance = irandom(250, 20000)
+		local distance = irandom(250, 1000)
 		x1 =px + math.cos(r / 180 * math.pi) * distance
 		y1 = py + math.sin(r / 180 * math.pi) * distance
 		Asteroid():setPosition(x1, y1):setSize(random(100, 500))
 	end
+	for n=1, 40 do
+		local r = irandom(0, 360)
+		local distance = irandom(1000, 10000)
+		x1 =px + math.cos(r / 180 * math.pi) * distance
+		y1 = py + math.sin(r / 180 * math.pi) * distance
+		Asteroid():setPosition(x1, y1):setSize(random(100, 500))
+	end
+	for n=1, 100 do
+		local r = irandom(0, 360)
+		local distance = irandom(10000, 20000)
+		x1 =px + math.cos(r / 180 * math.pi) * distance
+		y1 = py + math.sin(r / 180 * math.pi) * distance
+		Asteroid():setPosition(x1, y1):setSize(random(100, 500))
+	end
+
 	local ox, oy = odysseus:getPosition()
 	
-	for n=1, 50 do
-		local r = irandom(0, 360)
-		local distance = irandom(500, 10000)
+	for n=1, 20 do
+		local r = irandom(10, 200)
+		local distance = irandom(500, 5000)
 		x1 = ox + math.cos(r / 180 * math.pi) * distance
 		y1 = oy + math.sin(r / 180 * math.pi) * distance
 		Asteroid():setPosition(x1, y1):setSize(random(100, 500))

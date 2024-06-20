@@ -124,6 +124,10 @@ public:
     int weapon_storage[MW_Count];
 
     string radar_trace;
+   
+   //Odyseus addition
+   float radar_trace_scale;
+   
     float long_range_radar_range;
     float short_range_radar_range;
     string impulse_sound_file;
@@ -189,6 +193,8 @@ public:
     void addRoomSystem(glm::ivec2 position, glm::ivec2 size, ESystem system);
     void addDoor(glm::ivec2 position, bool horizontal);
     void setRadarTrace(string trace);
+//custom addition for odysseus
+    void setRadarTraceScale(float scale);
     void setLongRangeRadarRange(float range);
     void setShortRangeRadarRange(float range);
     void setImpulseSoundFile(string sound);

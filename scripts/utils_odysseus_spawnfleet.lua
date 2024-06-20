@@ -139,7 +139,6 @@ function jumpInDelta()
     if fleetCountIn >= 27 then
         fleetJumpStatus = "jumpInAfter"
     end
-    --return
 end
 
 -- Called by update(delta) which is located in utils_odysseus.lua
@@ -163,6 +162,8 @@ function jumpInAfterDelta()
 end
 
 function revealFriendlySignsList()
+    odysseus:addToShipLog(string.format(_("shipLog", "EOC fleet handshake accepted. Vessels identified.")), "White")
+    --odysseus: Lisätään "EOC fleet handshake accepted."
     for idx, object in ipairs(fleetObjectsIn) do
         local callsign = object:getCallSign()
         for key, value in ipairs(fleet_list) do    
@@ -195,14 +196,14 @@ end
 
 
 function confirm_polaris()
-	removeGMFunction("Destroy ESS polaris")
+	removeGMFunction("Destroy ESS Polaris")
 	addGMFunction("Cancel destruction", cancel_polaris)
 	addGMFunction("Confirm destruction", destroy_polaris)
 
 end
 
 function cancel_polaris()
-	addGMFunction("Destroy ESS polaris", confirm_polaris)
+	addGMFunction("Destroy ESS Polaris", confirm_polaris)
 	removeGMFunction("Cancel destruction")
 	removeGMFunction("Confirm destruction")
 end
@@ -211,9 +212,10 @@ end
 function destroy_polaris()
 	removeGMFunction("Cancel destruction")
 	removeGMFunction("Confirm destruction")
+    removeGMFunction("OC - Polaris")
     local tx, ty = polaris:getPosition()
     polaris:destroy()
-    ExplosionEffect():setPosition(tx,ty):setSize(20):setOnRadar(true)
+    ExplosionEffect():setPosition(tx,ty):setSize(500):setOnRadar(true)
 	odysseus:addToShipLog("EVA long range scanning results. ESS Polaris left from scanner range. No jump detected.", "Red")
 end
 
@@ -233,7 +235,9 @@ end
 function destroy_valkyrie()
 	removeGMFunction("Cancel destruction")
 	removeGMFunction("Confirm destruction")
-	valkyrie:destroy()
+    local tx, ty = valkyrie:getPosition()
+    valkyrie:destroy()
+    ExplosionEffect():setPosition(tx,ty):setSize(500):setOnRadar(true)
 	odysseus:addToShipLog("EVA long range scanning results. ESS Valkyrie left from scanner range. No jump detected.", "Red")
 end
 
@@ -253,28 +257,32 @@ end
 function destroy_prophet()
 	removeGMFunction("Cancel destruction")
 	removeGMFunction("Confirm destruction")
+    local tx, ty = prophet:getPosition()
 	prophet:destroy()
+    ExplosionEffect():setPosition(tx,ty):setSize(500):setOnRadar(true)
 	odysseus:addToShipLog("EVA long range scanning results. CSS Prophet left from scanner range. No jump detected.", "Red")
 end
 
 
 function confirm_vulture()
-	removeGMFunction("Destroy ESS vulture")
+	removeGMFunction("Destroy ESS Vulture")
 	addGMFunction("Cancel destruction", cancel_vulture)
 	addGMFunction("Confirm destruction", destroy_vulture)
 
 end
 
 function cancel_vulture()
-	addGMFunction("Destroy ESS vulture", confirm_vulture)
+	addGMFunction("Destroy ESS Vulture", confirm_vulture)
 	removeGMFunction("Cancel destruction")
 	removeGMFunction("Confirm destruction")
 end
 
 function destroy_vulture()
-	vulture:destroy()
 	removeGMFunction("Cancel destruction")
 	removeGMFunction("Confirm destruction")
+    local tx, ty = vulture:getPosition()
+    vulture:destroy()
+    ExplosionEffect():setPosition(tx,ty):setSize(500):setOnRadar(true)
   odysseus:addToShipLog("EVA long range scanning results. OSS Vulture left from scanner range. No jump detected.", "Red")
 end
 
@@ -295,7 +303,9 @@ end
 function destroy_karma()
 	removeGMFunction("Cancel destruction")
 	removeGMFunction("Confirm destruction") 
+    local tx, ty = karma:getPosition()
     karma:destroy()
+    ExplosionEffect():setPosition(tx,ty):setSize(500):setOnRadar(true)
 	odysseus:addToShipLog("EVA long range scanning results. OSS Karma left from scanner range. No jump detected.", "Red")
 end
 

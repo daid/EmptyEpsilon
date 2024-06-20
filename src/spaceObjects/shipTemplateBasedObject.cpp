@@ -194,7 +194,7 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     }
     hull_strength = hull_max = 100.0;
 
-    long_range_radar_range = 100000.0f;
+    long_range_radar_range = 50000.0f;
     short_range_radar_range = 5000.0f;
 
     registerMemberReplication(&template_name);
@@ -207,6 +207,8 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
         registerMemberReplication(&shield_hit_effect[n], 0.5);
     }
     registerMemberReplication(&radar_trace);
+    //Odysseus addition
+    registerMemberReplication(&radar_trace_scale);
     registerMemberReplication(&impulse_sound_file);
     registerMemberReplication(&hull_strength, 0.5);
     registerMemberReplication(&hull_max);
@@ -451,6 +453,10 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
     short_range_radar_range = ship_template->short_range_radar_range;
 
     radar_trace = ship_template->radar_trace;
+
+    //Odysseus addition
+    radar_trace_scale = ship_template->radar_trace_scale;
+
     impulse_sound_file = ship_template->impulse_sound_file;
 
     shares_energy_with_docked = ship_template->shares_energy_with_docked;

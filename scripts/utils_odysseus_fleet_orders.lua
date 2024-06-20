@@ -12,26 +12,27 @@ function showEOCOrders()
     addGMFunction(_("buttonGM", "Order Formation"), function() fleetFlyFormation() end)
     addGMFunction(_("buttonGM", "Order Idle"), function() orderFleetIdle() end)
 
+    --Muokkaa fighterit OC:ksi
     addGMFunction(
-        _("buttonGM", 'Spawn Aurora fighters'), 
+        _("buttonGM", 'Aurora fighters'), 
         function()
             spawnFriendlyFighter(aurora, 4, 8)
         end)
 
     addGMFunction(
-        _("buttonGM", 'Spawn Valor fighters'), 
+        _("buttonGM", 'Valor fighters'), 
         function()
             spawnFriendlyFighter(valor, 2, 4)
         end)
 
     addGMFunction(
-        _("buttonGM", 'Spawn Inferno fighters'), 
+        _("buttonGM", 'Inferno fighters'), 
         function()
             spawnFriendlyFighter(inferno, 2, 4)
         end)
 
     addGMFunction(
-        _("buttonGM", 'Spawn Halo fighters'), 
+        _("buttonGM", 'Halo fighters'), 
         function()
             spawnFriendlyFighter(halo, 4, 8)
         end)
@@ -40,12 +41,13 @@ end
 function hideEOCorders()
     removeGMFunction('OC - Civilians')   
     removeGMFunction('OC - Military')
+    removeGMFunction('OC - Move fleet')
     removeGMFunction('Order Idle')
     removeGMFunction('Order Formation')
-    removeGMFunction('Spawn Aurora fighters')
-    removeGMFunction('Spawn Valor fighters')
-    removeGMFunction('Spawn Inferno fighters')
-    removeGMFunction('Spawn Halo fighters')
+    removeGMFunction('Aurora fighters')
+    removeGMFunction('Valor fighters')
+    removeGMFunction('Inferno fighters')
+    removeGMFunction('Halo fighters')
     removeGMFunction('Hide EOC orders')   
     showEOC()
 end

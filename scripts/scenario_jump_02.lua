@@ -10,19 +10,21 @@ function init()
 	local ox =-10000
 	local oy = 15000
 	odysseus:setPosition(ox, oy)
+	
+	addGMFunction(_("buttonGM", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
 	-- Add GM common functions - Order of the buttons: Fleet, enemies, Scenario change, scenario specific  
 	setScenarioChange('Change scenario - 03', "scenario_jump_03.lua")
 
 	-- Generate scenario map
-	addGMFunction(_("buttonGM", "Coordinates D3-101"), function()
-		removeGMFunction("Coordinates D3-117")
-		removeGMFunction("Coordinates D3-101")
-	end)
 		addGMFunction(_("buttonGM", "Coordinates D3-117"), function() 
 		setUpPlanet("Sronsh", ox-85000, oy-25000) 
 		removeGMFunction("Coordinates D3-117")
-		removeGMFunction("Coordinates D3-101")
+		removeGMFunction("Other coordinates")
+	end)
+	addGMFunction(_("buttonGM", "Other coordinates"), function()
+		removeGMFunction("Coordinates D3-117")
+		removeGMFunction("Other coordinates")
 	end)
 
 

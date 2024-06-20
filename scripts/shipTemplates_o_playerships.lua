@@ -16,13 +16,8 @@ template:setTubeDirection(0, 0)
 template:setTubeDirection(1, 0)
 template:setWeaponStorage("Homing", 250)
 
-
-
-template:setShortRangeRadarRange(5000)
-template:setLongRangeRadarRange(50000)
-
-template:setShortRangeRadarRange(10000)
-template:setLongRangeRadarRange(100000)
+template:setShortRangeRadarRange(7500)
+template:setLongRangeRadarRange(75000)
 
 template:setRepairCrewCount(0)
 --	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize

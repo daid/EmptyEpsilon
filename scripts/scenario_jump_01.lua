@@ -7,18 +7,17 @@ require("utils_odysseus.lua")
 
 function init()
 	addGMFunction(_("buttonGM", "OC - Machine - S"), function() spawnwave(2) end)
+	addGMFunction(_("buttonGM", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
 	setScenarioChange('Change scenario - 02', "scenario_jump_02.lua")
 	local ox =10000
 	local oy = 15000
 	odysseus:setPosition(ox, oy)
-	-- Travel time in minutes, direction
---	setUpLaunchmissionButtons("essodylc45", 3, lx,ly)
---	setUpLaunchmissionButtons("essodylc79", 3, lx,ly)
+
 	local r = 220
 	local distance = 54000
-	fx = ox + math.cos(r / 180 * math.pi) * distance
-	fy = oy + math.sin(r / 180 * math.pi) * distance
+	fx = math.floor(ox + math.cos(r / 180 * math.pi) * distance)
+	fy = math.floor(oy + math.sin(r / 180 * math.pi) * distance)
 
 	
 	-- Generate scenario map
@@ -26,6 +25,8 @@ function init()
 	-- FX and FY parameters which to avoid when creating random space
 	generateSpace(fx, fy)
 
+	-- Lisää päälle nebula
+	Nebula():setPosition(fx+2000, fy-1000)
 	local station = SpaceStation():setFaction("EOC Starfleet"):setTemplate("Medium station"):setCallSign("Solaris 7"):setPosition(fx, fy)
 
 end

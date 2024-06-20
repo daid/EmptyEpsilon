@@ -223,31 +223,30 @@ end
 
 function generateSpace(fx, fy)
 	local ox, oy = odysseus:getPosition()
-	
 	local acount = irandom(40, 150)
 	for n=1,acount do
-		local posx = random(-200000, 200000)
-		local posy = random(-200000, 200000)
+		local posx = irandom(-200000, 200000)
+		local posy = irandom(-200000, 200000)
 		if distance(ox, oy, posx, posy) > 2000 then
 			Asteroid():setPosition(posx, posy):setSize(random(100, 500))
 		end
 		VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
 	end
   
-	local ncount = irandom(5,10)
+	local ncount = irandom(5,15)
 	for n=1, ncount do
-		local posx = random(-80000, 80000)
-		local posy = random(-80000, 80000)
-        if distance(ox, ox, posx, posy) > 10000 then
+		local posx = irandom(-80000, 80000)
+		local posy = irandom(-80000, 80000)
+        local disto = math.floor(distance(ox, ox, posx, posy))
+        if disto > 10000 then
             if fx ~= nil and fy ~= nil then
                 local sx = fx + ox
-                local sy = fy + oy        
-                if distance(sx, sy, posx, posy) > 10000 then
+                local sy = fy + oy    
+                local distf = math.floor(distance(sx, sy, posx, posy))    
+                if  distf > 10000 then
                     Nebula():setPosition(posx, posy)
                 end
-            else 
-                Nebula():setPosition(posx, posy)
             end
-		end
+        end
 	end
 end

@@ -167,15 +167,12 @@ function spawn_wave(x, y, size, orders, tx, ty)
                     machine:orderRoaming(x, y)
                 end
             end
-    
-    
-    
         end
     end
 
     --Spawn mothership
     if size == 6 then
-        mother = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setRotation(100):setTemplate("Machine Mothership"):setPosition(x, y):setScanned(true)
-
+        mother = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setRotation(100):setTemplate("Machine Mothership"):setPosition(x, y):setScanned(true):setRadarTraceScale(5)
+        removeGMFunction("OC - Machine - XL + Mother")
     end
 end
