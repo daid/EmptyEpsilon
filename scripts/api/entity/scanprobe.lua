@@ -7,9 +7,9 @@
 function ScanProbe()
     local e = createEntity()
     e.components.lifetime = {lifetime=60*10}
-    --e.move_to = {speed=1000, target=??}
-    --e.allow_radar_link = {owner=??}
-    --e.faction = ???
+    --TODO: e.move_to = {speed=1000, target=??}
+    --TODO: e.allow_radar_link = {owner=??}
+    --TODO: e.faction = ???
     setRadarSignatureInfo(0.0, 0.2, 0.0);
     --TODO: setCallSign(string(getMultiplayerId()) + "P");
     e.components.radar_trace = {

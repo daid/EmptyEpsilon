@@ -5,50 +5,54 @@
 --- For a purely decorative asteroid positioned outside of the movement plane, use a VisualAsteroid.
 --- Example: asteroid = Asteroid():setSize(150):setPosition(1000,2000)
 function Asteroid()
-    local e = createEntity()
-    e.components.transform = {rotation=random(0, 360)}
-    e.components.radar_signature = {gravity=0.05}
     local z = random(-50, 50)
     local size = random(110, 130)
 
     local model_number = irandom(1, 10)
-    e.components.mesh_render = {
-        mesh="Astroid_" .. model_number .. ".model",
-        mesh_offset={0, 0, z},
-        texture="Astroid_" .. model_number .. "_d.png",
-        specular_texture="Astroid_" .. model_number .. "_s.png",
-        scale=size,
+    local e = createEntity()
+    e.components = {
+        transform = {rotation=random(0, 360)},
+        radar_signature = {gravity=0.05},
+        mesh_render = {
+            mesh="Astroid_" .. model_number .. ".model",
+            mesh_offset={0, 0, z},
+            texture="Astroid_" .. model_number .. "_d.png",
+            specular_texture="Astroid_" .. model_number .. "_s.png",
+            scale=size,
+        },
+        physics = {type="Sensor", size=size},
+        radar_trace = {
+            icon="radar/blip.png",
+            radius=size,
+            color={255, 200, 100, 255},
+            rotate=false,
+        }
+        spin={rate=random(0.1, 0.8)},
+        avoid_object={range=size*2},
+        explode_on_touch={damage_at_center=35, damage_at_edge=35,blast_range=size},
     }
-    e.components.physics = {type="Sensor", size=size}
-    e.components.radar_trace = {
-        icon="radar/blip.png",
-        radius=size,
-        color={255, 200, 100, 255},
-        rotate=false,
-    }
-    e.components.spin={rate=random(0.1, 0.8)}
-    e.components.avoid_object={range=size*2}
-    e.components.explode_on_touch={damage_at_center=35, damage_at_edge=35,blast_range=size}
     return e
 end
 
 function VisualAsteroid()
-    local e = createEntity()
-    e.components.transform = {rotation=random(0, 360)}
-    e.components.radar_signature = {gravity=0.05}
     local z = random(300, 800);
     if random(0, 100) < 50 then z = -z end
     local size = random(110, 130)
-
+    local e = createEntity()
     local model_number = irandom(1, 10)
-    e.components.mesh_render = {
-        mesh="Astroid_" .. model_number .. ".model",
-        mesh_offset={0, 0, z},
-        texture="Astroid_" .. model_number .. "_d.png",
-        specular_texture="Astroid_" .. model_number .. "_s.png",
-        scale=size,
+    e.components = {
+        transform = {rotation=random(0, 360)},
+        radar_signature = {gravity=0.05},
+
+        mesh_render = {
+            mesh="Astroid_" .. model_number .. ".model",
+            mesh_offset={0, 0, z},
+            texture="Astroid_" .. model_number .. "_d.png",
+            specular_texture="Astroid_" .. model_number .. "_s.png",
+            scale=size,
+        },
+        spin={rate=random(0.1, 0.8)},
     }
-    e.components.spin={rate=random(0.1, 0.8)}
     return e
 end
 
@@ -57,12 +61,17 @@ local Entity = getLuaEntityFunctionTable()
 --- Defaults to a random value between 110 and 130.
 --- Example: asteroid:setSize(150)
 function Entity:setSize(radius)
-    --TODO
+    local comp = self.components
+    if comp.physics then comp.physics.size=radius end
+    if comp.mesh_render then comp.mesh_render.scale=radius end
+    if comp.avoid_object then comp.avoid_object.range=radius*2 end
     return self
 end
 --- Returns this Asteroid's radius.
 --- Example: asteroid:getSize()
 function Entity:getSize()
-    --TODO
+    local comp = self.components
+    if comp.physics then return comp.physics.size end
+    if comp.mesh_render then return comp.mesh_render.scale end
     return 100.0
 end

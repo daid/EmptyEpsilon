@@ -7,8 +7,8 @@
 #include "ecs/query.h"
 
 
-RawScannerDataRadarOverlay::RawScannerDataRadarOverlay(GuiRadarView* owner, string id, float distance)
-: GuiElement(owner, id), radar(owner), distance(distance)
+RawScannerDataRadarOverlay::RawScannerDataRadarOverlay(GuiRadarView* owner, string id)
+: GuiElement(owner, id), radar(owner)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
@@ -17,6 +17,7 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship)
         return;
+    auto distance = radar->getDistance();
 
     auto view_position = radar->getViewPosition();
     float view_rotation = radar->getViewRotation();

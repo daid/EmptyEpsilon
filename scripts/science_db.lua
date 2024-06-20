@@ -191,10 +191,9 @@ function __fillDefaultDatabaseData()
     local stations_database = ScienceDatabase():setName(_("database", "Stations"))
     stations_database:setLongDescription(_("Space stations are permanent, immobile structures ranging in scale from small outposts to city-sized communities. Many provide restocking and repair services to neutral and friendly ships."))
 
-    --TODO std::sort(template_names.begin(), template_names.end());
-
-    class_list = {}
-    class_set = {}
+    local class_list = {}
+    local class_set = {}
+	local template_names = {}
 
     -- Populate list of ship hull classes
 	for name, ship_template in pairs(__ship_templates) do
@@ -206,10 +205,12 @@ function __fillDefaultDatabaseData()
 				class_list[#class_list + 1] = class_name
 				class_set[class_name] = true
 			end
+			table.insert(template_names, name)
 		end
     end
 
     table.sort(class_list)
+	table.sort(template_names)
     class_database_entries = {}
 
     -- Populate each ship hull class with members
@@ -218,7 +219,8 @@ function __fillDefaultDatabaseData()
     end
 
     -- Populate each ship's entry
-    for name, ship_template in pairs(__ship_templates) do
+	for idx, name in ipairs(template_names) do
+		ship_template = __ship_templates[name]
         if not ship_template.__hidden then
 			local class_name = _("No class")
 			local subclass_name = _("No sub-class")

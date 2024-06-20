@@ -458,6 +458,7 @@ end
 --- -- Prints to the console window or logging file when this SpaceObject is destroyed
 --- obj:onDestroyed(function() print("Object destroyed!") end)
 function Entity:onDestroyed(callback)
-    --TODO
+    --TODO: Cases where we do not have hull
+    if self.components.hull then self.components.hull.on_destruction = callback end
     return self
 end
