@@ -49,7 +49,7 @@ function spawn_essody18()
 		odysseus:setLandingPadDestroyed(1)
 		addGMFunction("Allow ESSODY-F18", allow_essody18)
 	end)
-
+	allow_autodock18 = true
 	odysseus:addCustomButton("Relay", "dock_to_odysseus_auto18", "Autodock ESSODY-F18", dock_essody18_auto)
 	essody18:addCustomButton("Helms", "dock_to_odysseus", "Dock to Odysseys", dock_essody18)
 	addGMFunction("Force dock ESSODY-F18", dock_essody18_force)
@@ -64,6 +64,7 @@ function spawn_essody23()
       	odysseus:setLandingPadDestroyed(2)
       	addGMFunction("Allow ESSODY-F23", allow_essody23)
     end)
+	allow_autodock23 = true
 	odysseus:addCustomButton("Relay", "dock_to_odysseus_auto23", "Autodock ESSODY-F23", dock_essody23_auto)
 	essody23:addCustomButton("Helms", "dock_to_odysseus", "Dock to Odysseys", dock_essody23)
 	addGMFunction("Force dock ESSODY-F23", dock_essody23_force)
@@ -77,6 +78,7 @@ function spawn_essody36()
       	odysseus:setLandingPadDestroyed(3)
       	addGMFunction("Allow ESSODY-F36", allow_essody36)
     end)
+	allow_autodock36 = true
 	odysseus:addCustomButton("Relay", "dock_to_odysseus_auto36", "Autodock ESSODY-F36", dock_essody36_auto)
 	essody36:addCustomButton("Helms", "dock_to_odysseus", "Dock to Odysseys", dock_essody36)
 	addGMFunction("Force dock ESSODY-F36", dock_essody36_force)
@@ -91,6 +93,7 @@ function spawn_starcaller()
       	odysseus:setLandingPadDestroyed(4)
       	addGMFunction("Allow STARCALLER", allow_starcaller)
     end)
+	allow_autodocksc = true
 	odysseus:addCustomButton("Relay", "dock_to_odysseus_autosc", "Autodock Starcaller", dock_starcaller_auto)
 	starcaller:addCustomButton("Helms", "dock_to_odysseus", "Dock to Odysseys", dock_starcaller)
 	addGMFunction("Force dock Starcaller", dock_starcaller_force)
@@ -170,6 +173,7 @@ function dock_essody18_auto()
 		odysseus:addCustomMessage("Relay", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 	end
 end
+
 function dock_essody23_auto()
 	local curDistance = distance(essody23, odysseus)
 	if curDistance <= dockingdist then
@@ -212,6 +216,26 @@ function dock_starcaller_auto()
 	else
 		odysseus:addCustomMessage("Relay", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 	end
+end
+
+function remove_autodock18()
+	allow_autodock18 = false
+	odysseus:removeCustom("dock_to_odysseus_auto18")
+end
+
+function remove_autodock23()
+	allow_autodock23 = false
+	odysseus:removeCustom("dock_to_odysseus_auto23")
+end
+
+function remove_autodock36()
+	allow_autodock36 = false
+	odysseus:removeCustom("dock_to_odysseus_auto36")
+end
+
+function remove_autodocksc()
+	allow_autodocksc = false
+	odysseus:removeCustom("dock_to_odysseus_autosc")
 end
 
 function dock_essody18_force()

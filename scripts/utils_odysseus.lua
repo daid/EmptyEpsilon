@@ -50,6 +50,34 @@ function update(delta)
 		jumpOutDelta()
 	end
 
+  if allow_autodock18 == true then
+    local distance = distance(essody18, odysseus)
+    if distance > dockingdist then
+      remove_autodock18()
+    end
+  end
+
+  if allow_autodock23 == true then
+    local distance = distance(essody23, odysseus)
+    if distance > dockingdist then
+      remove_autodock23()
+    end
+  end
+
+  if allow_autodock36 == true then
+    local distance = distance(essody36, odysseus)
+    if distance > dockingdist then
+      remove_autodock36()
+    end
+  end
+
+  if allow_autodocksc == true then
+    local distance = distance(starcaller, odysseus)
+    if distance > dockingdist then
+      remove_autodocksc()
+    end
+  end
+
   --Scenario 12
   if plotZ ~= nil then
     plotZ(delta)
