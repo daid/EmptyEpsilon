@@ -278,7 +278,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
             float effectiveness = my_spaceship->getSystemEffectiveness(selected_system);
             float health_max = my_spaceship->getSystemHealthMax(selected_system);
             if (health_max < 1.0f)
-                addSystemEffect("Maximal health", toNearbyIntString(health_max * 100) + "%");
+                addSystemEffect(tr("Engineer", "Maximal health"), toNearbyIntString(health_max * 100) + "%");
             switch(selected_system)
             {
             case SYS_Reactor:
@@ -294,7 +294,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                 {
                     if (my_spaceship->beam_weapons[n].getTurretArc() > 0)
                     {
-                        addSystemEffect("Turret rotation rate", toNearbyIntString(effectiveness * 100) + "%");
+                        addSystemEffect(tr("Engineer", "Turret rotation rate"), toNearbyIntString(effectiveness * 100) + "%");
                         break;
                     }
                 }
