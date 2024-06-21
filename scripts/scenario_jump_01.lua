@@ -4,12 +4,12 @@
 
 require("utils.lua")
 require("utils_odysseus.lua")
+setScenarioChange(2)
 
 function init()
 	addGMFunction(_("buttonGM", "OC - Machine - S"), function() spawnwave(2) end)
 	addGMFunction(_("buttonGM", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
-	setScenarioChange('Change scenario - 02', "scenario_jump_02.lua")
 	local ox =10000
 	local oy = 15000
 	odysseus:setPosition(ox, oy)

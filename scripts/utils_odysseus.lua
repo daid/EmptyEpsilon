@@ -28,10 +28,13 @@ local orotation = irandom(0, 360)
 odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Helios Corvette"):setCallSign("ESS Odysseus"):setPosition(0, 0):commandTargetRotation(orotation):setHeading(orotation+90):setCanBeDestroyed(false)
 odysseus:setCanSelfDestruct(false)
 
-addGMFunction(_("buttonGM", "Sync fighter status"), function() sync_buttons() end)
-
 --Sets suffix index for generating npc ship callsigns. Resets for every scenario
 suffix_index = 100
+
+status_essody18 = 3
+status_essody23 = 3
+status_essody36 = 3
+status_starcaller = 3
 
 
 function update(delta)
@@ -49,6 +52,20 @@ function update(delta)
 	if fleetJumpStatus == "jumpOut" and getScenarioTime() > nextJumpOutAt then
 		jumpOutDelta()
 	end
+
+  -- If ofysseus data and fighter data have mismatch, run sync automatically
+  if odysseus:getLandingPadState(1) ~= status_essody18 then
+    sync_buttons()  
+  end
+  if odysseus:getLandingPadState(2) ~= status_essody23 then
+    sync_buttons()  
+  end
+  if odysseus:getLandingPadState(3) ~= status_essody36 then
+    sync_buttons()  
+  end
+  if odysseus:getLandingPadState(4) ~= status_starcaller then
+    sync_buttons()  
+  end
 
   if allow_autodock18 == true then
     local distance = distance(essody18, odysseus)

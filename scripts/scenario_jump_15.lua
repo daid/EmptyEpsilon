@@ -4,6 +4,7 @@
 
 require("utils.lua")
 require("utils_odysseus.lua")
+setScenarioChange(16)
 
 function init()
 	local ox =-75000
@@ -13,8 +14,8 @@ function init()
 	-- Add GM common functions - Order of the buttons: Sync, fleet, enemies, Scenario change, scenario specific
 	local sx = -10000
 	local sy = 8500
-	setSpawnFleetButton("Friendly 4 A", 4, "A", sx, sy, 3, 1, true, "formation", 0, 3, 0, 1)
-	setSpawnFleetButton("Friendly 4 B - No Karma", 4, "B", sx, sy, 3, 1, true, "formation", 0, 3, 0, 1)
+	setSpawnFleetButton(4, "A", sx, sy, 3, 1, true, "formation", 0, 3, 0, 1)
+	setSpawnFleetButton(4, "B", sx, sy, 3, 1, true, "formation", 0, 3, 0, 1)
 	addGMFunction(_("Enemy", "Set Aurora heading"), function() 
 		if aurora:isValid() then 
 			aurora:setHeading(45)
@@ -31,8 +32,6 @@ function init()
 		launchHarbinger()
 		removeGMFunction("Harbinger transport")
 	end)
-
-  setScenarioChange('Change scenario - 16', "scenario_jump_16.lua")
 
   local lx = ox +35000
   local ly = oy -35000

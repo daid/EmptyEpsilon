@@ -4,7 +4,7 @@
 
 require("utils.lua")
 require("utils_odysseus.lua")
-
+setScenarioChange(15)
 
 function init()
 	local ox =-7000
@@ -14,11 +14,10 @@ function init()
 	local sx = 5000
 	local sy = 4500
 
-	setSpawnFleetButton("Friendly 4 A", 4, "A", sx, sy, 2, 1, true, "formation", 0, 1, 0, 3)
-	setSpawnFleetButton("Friendly 4 B - No Karma", 4, "B", sx, sy, 2, 1, true, "formation", 0, 1, 0, 3)
+	setSpawnFleetButton(4, "A", sx, sy, 2, 1, true, "formation", 0, 1, 0, 3)
+	setSpawnFleetButton(4, "B", sx, sy, 2, 1, true, "formation", 0, 1, 0, 3)
 
 	addGMFunction("Clear setup buttons", clearbuttons)
-
 
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
@@ -26,17 +25,9 @@ function init()
 	addGMFunction(_("Enemy", "OC - Machine - L"), function() spawnwave(4) end)
 	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
-   
-	setScenarioChange('Change scenario - 15', "scenario_jump_15.lua")
-
-
-
 	-- Generate scenario map
 
-
 	planet = setUpPlanet("P-SI14-UX98", ox+30000, oy-15000,0.9)
-	
---		VisualAsteroid():setPosition(posx, posy):setSize(random(100, 500))
 
 	for n=1, 4 do
 		local posx = random(-80000, -10000)
@@ -46,7 +37,6 @@ function init()
 
 	--x1, y1, x2, y2, spacing, object_type, rows, chance, randomize
 	createObjectsOnLine(120000,-80000, 120000,80000, 40000, Nebula, 1, 100, 1)
-
 
 	essody18_launched = 0
 	essody23_launched = 0
@@ -67,7 +57,6 @@ function init()
   
   
   -- Plan
-  
   
 	warningZone = Zone():setColor(0,0,0)
 	warningZone:setPoints(22000,-100000,
@@ -104,21 +93,18 @@ function init()
 						200000,-100000,
 						200000,100000,
 						59000,100000)
-  
-  
-  
+
 	  plotZ = delayChecks
   
 	odysseus:addToShipLog("EVA sector scanning alarm. Anomalous radiation field detected at heading 90.", "Red")
   
   end
 
-  function clearbuttons()
-	removeGMFunction("Friendly 4 A")
-	removeGMFunction("Friendly 4 B")
+function clearbuttons()
+	removeGMFunction("Friendly 4A")
+	removeGMFunction("Friendly 4B")
 end
 
-  
   function delayChecks(delta)
   
 	  if odysseus_alert < 1 then
