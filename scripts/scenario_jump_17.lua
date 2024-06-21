@@ -7,8 +7,8 @@ require("utils_odysseus.lua")
 setScenarioChange(18)
 
 function init()
-	local sx = 5000
-	local sy = -4500
+	local sx = 10000
+	local sy = -15500
 	setSpawnFleetButton(5, "A", sx, sy, 2, 3, true, "idle", 0, 1, 0, 3)
 	setSpawnFleetButton(5, "B", sx, sy, 2, 3, true, "idle", 0, 1, 0, 3)
 

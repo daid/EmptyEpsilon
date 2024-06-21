@@ -8,11 +8,11 @@ setScenarioChange(8)
 
 function init()
 	
-	local ox =70000
+	local ox =20000
 	local oy = -15000
 	odysseus:setPosition(ox, oy)
 	addGMFunction(_("buttonGM", "Coordinates C8-80"), function() 
-		setUpPlanet("P-PU80-GL38", ox+85000, oy+25000) 
+		setUpPlanet("P-PU80-GL38", ox+65000, oy+25000) 
 		removeGMFunction("Coordinates C8-80")
 		removeGMFunction("Other coordinates")
 	end)
@@ -21,7 +21,7 @@ function init()
 		removeGMFunction("Other coordinates")
 		end)
 
-	local sx = 5000
+	local sx = -5000
 	local sy = 4500
 	setSpawnFleetButton(2, nil, sx, sy, 2, 1, true, "formation", 0, 3, 0, 2)
 

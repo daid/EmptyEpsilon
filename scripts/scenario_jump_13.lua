@@ -11,8 +11,8 @@ function init()
 	local oy = 2000
 	odysseus:setPosition(ox, oy)
 
-	local sx = 5000
-	local sy = 4500
+	local sx = 10000
+	local sy = -14500
 	setSpawnFleetButton(3, "A", sx, sy, 2, 1, true, "idle", 0, 0, 0, 1)
 	setSpawnFleetButton(3, "B", sx, sy, 2, 1, true, "idle", 0, 0, 0, 1)
 

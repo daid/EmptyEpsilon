@@ -12,7 +12,7 @@ function init()
 	odysseus:setPosition(ox, oy)
 
 	local sx = 5000
-	local sy = -4500
+	local sy = -8500
 	setSpawnFleetButton(2, nil, sx, sy, 2, 2, true, "formation", 0, 2, 0, 3)
 
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)

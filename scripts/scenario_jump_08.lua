@@ -14,7 +14,7 @@ function init()
 
 	-- Add GM common functions - Order of the buttons: Sync, fleet, enemies, Scenario change, scenario specific
 
-	local sx = 5000
+	local sx = -5000
 	local sy = 4500
 	setSpawnFleetButton(2, nil, sx, sy, 2, 2, true, "formation", 0, 2, 0, 1)
 
