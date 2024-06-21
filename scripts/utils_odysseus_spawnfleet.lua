@@ -1,11 +1,27 @@
 
 -- Max fighter count for NPC ships. Resets at every jump.
-function setSpawnFleetButton(buttonName, fleetSpawn, fleetVariation, sx, sy, offSetModifier, spawnModifier, revealCallSigns, orders, delayInMin, delayInMax, delayOutMin, delayOutMax)
-    
+function setSpawnFleetButton(fleetSpawn, fleetVariation, sx, sy, offSetModifier, spawnModifier, revealCallSigns, orders, delayInMin, delayInMax, delayOutMin, delayOutMax)
+    if spawnDebugLog then
+        print("Func: SetSpawnFleetButton - Local in:", fleetSpawn, fleetVariation, sx, sy, offSetModifier, spawnModifier, revealCallSigns, orders, delayInMin, delayInMax, delayOutMin, delayOutMax)
+    end    
+     
+    spawnDebugLog = true
+    randomizeSpawnLoc = false
+
     fleetCountIn = 0
     fleetCountOut = 0
 
-    fleetbuttonName = buttonName
+    friendlyFightersOut_valor = {}
+    friendlyFightersOut_inferno = {}
+    friendlyFightersOut_halo = {}
+    friendlyFightersOut_aurora = {}
+
+    fleetbuttonName = "Friendly " .. fleetSpawn 
+
+    if fleetVariation ~= nil then
+        fleetbuttonName = fleetbuttonName .. fleetVariation
+    end
+
     fleetRevealCallSigns = revealCallSigns 
     fleetOrders = orders
     fleetSpawnSet = fleetSpawn
@@ -20,16 +36,56 @@ function setSpawnFleetButton(buttonName, fleetSpawn, fleetVariation, sx, sy, off
     distanceModifier = offSetModifier
     positionModifier = math.floor(spawnModifier*1.5)
 
-    addGMFunction(
-        _("Fleet", buttonName),
-        function()
-            jumpInPrep()
-        end)
+    if fleet_list == nil then
+        setFleetTable()
+    end
+
+
+    addGMFunction(_("Fleet", fleetbuttonName), function() jumpInPrep() end)
+
+end
+
+function setFleetTable()
+
+    fleet_list = {}
+    table.insert(fleet_list,1,{spawnorder=1,name='UNREC-253',military=true,callsign="ESS Aurora",faction="EOC Starfleet",xoff=1,yoff=1,aiset="missilevolley",template="Stellar Class Battlecruiser",fleetForm=5,fleetVariation={"A", "B", "C"}})
+    table.insert(fleet_list,2,{spawnorder=2,name='UNREC-364',military=true,callsign="ESS Warrior",faction="EOC Starfleet",xoff=-12000,yoff=-1500,aiset="missilevolley",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,3,{spawnorder=3,name='UNREC-281',military=true,callsign="ESS Inferno",faction="EOC Starfleet",xoff=-8000,yoff=-4500,aiset="missilevolley",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,4,{spawnorder=4,name='UNREC-307',military=true,callsign="CSS Taurus",faction="EOC Starfleet",xoff=-4000,yoff=-3000,aiset="missilevolley",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,5,{spawnorder=5,name='UNREC-310',military=true,callsign="ESS Valkyrie",faction="EOC Starfleet",xoff=-2000,yoff=1500,aiset="missilevolley",template="Helios Class Corvette",fleetForm=4,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,6,{spawnorder=6,name='UNREC-208',military=true,callsign="ESS Aries",faction="EOC Starfleet",xoff=-10000,yoff=-3000,aiset="missilevolley",template="Aurora Class Explorer",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,7,{spawnorder=7,name='UNREC-248',military=true,callsign="OSS Burro",faction="EOC Starfleet",xoff=-6000,yoff=-4500,aiset="missilevolley",template="Luna Class Cargo Carrier",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,8,{spawnorder=8,name='UNREC-279',military=false,callsign="OSS Immortal",faction="Corporate owned",xoff=-10000,yoff=-1500,aiset="evasive",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,9,{spawnorder=9,name='UNREC-298',military=false,callsign="ESS Spectrum",faction="Corporate owned",xoff=-6000,yoff=0,aiset="evasive",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,10,{spawnorder=10,name='UNREC-301',military=false,callsign="OSS Starfall",faction="Corporate owned",xoff=-10000,yoff=1500,aiset="evasive",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,11,{spawnorder=11,name='UNREC-296',military=false,callsign="OSS Ravager",faction="Corporate owned",xoff=-5000,yoff=1500,aiset="evasive",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,12,{spawnorder=12,name='UNREC-387',military=false,callsign="OSS Vulture",faction="Corporate owned",xoff=-8000,yoff=3000,aiset="evasive",template="Helios Class Corvette",fleetForm=1,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,13,{spawnorder=13,name='UNREC-289',military=false,callsign="ESS Memory",faction="Government owned",xoff=-5000,yoff=-1500,aiset="evasive",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,14,{spawnorder=14,name='UNREC-294',military=false,callsign="CSS Prophet",faction="Faith of the High Science",xoff=-7000,yoff=1500,aiset="evasive",template="Aurora Class Explorer",fleetForm=3,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,15,{spawnorder=15,name='UNREC-285',military=false,callsign="OSS Karma",faction="Unregistered",xoff=-7000,yoff=-1500,aiset="evasive",template="Aurora Class Explorer",fleetForm=5,fleetVariation={"A"}})
+    table.insert(fleet_list,16,{spawnorder=16,name='UNREC-286',military=false,callsign="OSS Marauder",faction="Corporate owned",xoff=-12000,yoff=0,aiset="evasive",template="Aurora Class Explorer",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,17,{spawnorder=17,name='UNREC-261',military=false,callsign="ESS Discovery",faction="Government owned",xoff=-9000,yoff=0,aiset="evasive",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,18,{spawnorder=18,name='UNREC-355',military=false,callsign="CSS Whirlwind",faction="Corporate owned",xoff=-8000,yoff=-3000,aiset="evasive",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,19,{spawnorder=19,name='UNREC-291',military=false,callsign="ESS Polaris",faction="Corporate owned",xoff=-6000,yoff=3000,aiset="evasive",template="Eclipse Class Frigate",fleetForm=2,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,20,{spawnorder=20,name='UNREC-257',military=false,callsign="CSS Cyclone",faction="Corporate owned",xoff=-3000,yoff=0,aiset="evasive",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,21,{spawnorder=21,name='UNREC-249',military=false,callsign="CSS Centurion",faction="Corporate owned",xoff=-6000,yoff=-3000,aiset="evasive",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,22,{spawnorder=22,name='UNREC-232',military=true,callsign="ESS Arthas",faction="EOC Starfleet",xoff=-10000,yoff=3000,aiset="missilevolley",template="Aurora Class Explorer",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,23,{spawnorder=23,name='UNREC-237',military=true,callsign="ESS Bluecoat",faction="EOC Starfleet",xoff=-2000,yoff=-1500,aiset="missilevolley",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,24,{spawnorder=24,name='UNREC-264',military=true,callsign="ESS Envoy",faction="EOC Starfleet",xoff=-4000,yoff=3000,aiset="missilevolley",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B", }})
+    table.insert(fleet_list,25,{spawnorder=25,name='UNREC-327',military=true,callsign="ESS Valor",faction="EOC Starfleet",xoff=-8000,yoff=4500,aiset="missilevolley",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,26,{spawnorder=26,name='UNREC-278',military=true,callsign="ESS Harbinger",faction="EOC Starfleet",xoff=-12000,yoff=1500,aiset="missilevolley",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
+    table.insert(fleet_list,27,{spawnorder=27,name='UNREC-275',military=true,callsign="ESS Halo",faction="EOC Starfleet",xoff=-14000,yoff=0,aiset="missilevolley",template="Stellar Class Battlecruiser",fleetForm=5,fleetVariation={"A", "B", "C"}})
+
+    fleetSize = 27
+
 end
 
 -- Calculates values based on ship locations and sets jumpFleetStatus to "jumpIn"
 -- update(delta) at utils_odysseus.lua calls spawnfleetDelta
 function jumpInPrep()
+    if spawnDebugLog then
+        print("Func: jumpInPrep - Global In:", fleetSpawnSet, fleetVariationSet,  fsx, fsy, distanceModifier, positionModifier, fleetRevealCallSigns, fleetOrders, jumpDelayInMin, jumpdelayInMax, jumpDelayOutMin, jumpDelayOutMax)
+    end    
 
     nextJumpInAt = getScenarioTime()
 
@@ -43,10 +99,6 @@ function jumpInPrep()
 
     auroraHeading = math.floor(90-(irandom(-45, 45)))
 
-    if fleet_list == nil then
-        setFleetTable()
-    end
-
     fleetObjectsIn = {}
 
     fleetJumpStatus = "jumpIn"
@@ -56,12 +108,23 @@ function jumpInPrep()
     else
         odysseus:addToShipLog(string.format(_("shipLog", "EVA sector scanner alarm. Multiple incoming jumps detected from heading %d. Identified vessels."), heading), "White")
     end
-    
 end
     
 -- Called by update(delta) which is located in utils_odysseus.lua
 function jumpInDelta()
+
+
+
+    if fleetCountIn > fleetSize then
+        fleetJumpStatus = "jumpInAfter"
+        print("Func: jumpInDelta - Error occured, didn't stop to last ship")
+    end
+
     fleetCountIn = fleetCountIn+1
+    if spawnDebugLog then
+        print("Func: jumpInPrep - Global In:", nextJumpInAt, ox, oy,  ax, ay, auroraHeading, fleetJumpStatus)
+        print("Func: jumpInPrep - fleetCountIn", fleetCountIn)
+    end    
 
     local value = fleet_list[fleetCountIn]
     local callsign = value.name
@@ -136,7 +199,7 @@ function jumpInDelta()
     if value.name == "UNREC-278" then --harbinger
         harbinger = ship
      end
-    if fleetCountIn >= 27 then
+    if fleetCountIn >= fleetSize then
         fleetJumpStatus = "jumpInAfter"
     end
 end
@@ -310,42 +373,15 @@ function destroy_karma()
 end
 
 
-function setFleetTable()
-
-    fleet_list = {}
-    table.insert(fleet_list,1,{spawnorder=1,name='UNREC-253',military=true,callsign="ESS Aurora",faction="EOC Starfleet",xoff=1,yoff=1,aiset="missilevolley",template="Stellar Class Battlecruiser",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,2,{spawnorder=2,name='UNREC-364',military=true,callsign="ESS Warrior",faction="EOC Starfleet",xoff=-12000,yoff=-1500,aiset="missilevolley",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,3,{spawnorder=3,name='UNREC-281',military=true,callsign="ESS Inferno",faction="EOC Starfleet",xoff=-8000,yoff=-4500,aiset="missilevolley",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,4,{spawnorder=4,name='UNREC-307',military=true,callsign="CSS Taurus",faction="EOC Starfleet",xoff=-4000,yoff=-3000,aiset="missilevolley",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,5,{spawnorder=5,name='UNREC-310',military=true,callsign="ESS Valkyrie",faction="EOC Starfleet",xoff=-2000,yoff=1500,aiset="missilevolley",template="Helios Class Corvette",fleetForm=4,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,6,{spawnorder=6,name='UNREC-208',military=true,callsign="ESS Aries",faction="EOC Starfleet",xoff=-10000,yoff=-3000,aiset="missilevolley",template="Aurora Class Explorer",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,7,{spawnorder=7,name='UNREC-248',military=true,callsign="OSS Burro",faction="EOC Starfleet",xoff=-6000,yoff=-4500,aiset="missilevolley",template="Luna Class Cargo Carrier",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,8,{spawnorder=8,name='UNREC-279',military=false,callsign="OSS Immortal",faction="Corporate owned",xoff=-10000,yoff=-1500,aiset="evasive",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,9,{spawnorder=9,name='UNREC-298',military=false,callsign="ESS Spectrum",faction="Corporate owned",xoff=-6000,yoff=0,aiset="evasive",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,10,{spawnorder=10,name='UNREC-301',military=false,callsign="OSS Starfall",faction="Corporate owned",xoff=-10000,yoff=1500,aiset="evasive",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,11,{spawnorder=11,name='UNREC-296',military=false,callsign="OSS Ravager",faction="Corporate owned",xoff=-5000,yoff=1500,aiset="evasive",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,12,{spawnorder=12,name='UNREC-387',military=false,callsign="OSS Vulture",faction="Corporate owned",xoff=-8000,yoff=3000,aiset="evasive",template="Helios Class Corvette",fleetForm=1,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,13,{spawnorder=13,name='UNREC-289',military=false,callsign="ESS Memory",faction="Government owned",xoff=-5000,yoff=-1500,aiset="evasive",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,14,{spawnorder=14,name='UNREC-294',military=false,callsign="CSS Prophet",faction="Faith of the High Science",xoff=-7000,yoff=1500,aiset="evasive",template="Aurora Class Explorer",fleetForm=3,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,15,{spawnorder=15,name='UNREC-285',military=false,callsign="OSS Karma",faction="Unregistered",xoff=-7000,yoff=-1500,aiset="evasive",template="Aurora Class Explorer",fleetForm=5,fleetVariation={"A"}})
-    table.insert(fleet_list,16,{spawnorder=16,name='UNREC-286',military=false,callsign="OSS Marauder",faction="Corporate owned",xoff=-12000,yoff=0,aiset="evasive",template="Aurora Class Explorer",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,17,{spawnorder=17,name='UNREC-261',military=false,callsign="ESS Discovery",faction="Government owned",xoff=-9000,yoff=0,aiset="evasive",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,18,{spawnorder=18,name='UNREC-355',military=false,callsign="CSS Whirlwind",faction="Corporate owned",xoff=-8000,yoff=-3000,aiset="evasive",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,19,{spawnorder=19,name='UNREC-291',military=false,callsign="ESS Polaris",faction="Corporate owned",xoff=-6000,yoff=3000,aiset="evasive",template="Eclipse Class Frigate",fleetForm=2,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,20,{spawnorder=20,name='UNREC-257',military=false,callsign="CSS Cyclone",faction="Corporate owned",xoff=-3000,yoff=0,aiset="evasive",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,21,{spawnorder=21,name='UNREC-249',military=false,callsign="CSS Centurion",faction="Corporate owned",xoff=-6000,yoff=-3000,aiset="evasive",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,22,{spawnorder=22,name='UNREC-232',military=true,callsign="ESS Arthas",faction="EOC Starfleet",xoff=-10000,yoff=3000,aiset="missilevolley",template="Aurora Class Explorer",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,23,{spawnorder=23,name='UNREC-237',military=true,callsign="ESS Bluecoat",faction="EOC Starfleet",xoff=-2000,yoff=-1500,aiset="missilevolley",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,24,{spawnorder=24,name='UNREC-264',military=true,callsign="ESS Envoy",faction="EOC Starfleet",xoff=-4000,yoff=3000,aiset="missilevolley",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B", }})
-    table.insert(fleet_list,25,{spawnorder=25,name='UNREC-327',military=true,callsign="ESS Valor",faction="EOC Starfleet",xoff=-8000,yoff=4500,aiset="missilevolley",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,26,{spawnorder=26,name='UNREC-278',military=true,callsign="ESS Harbinger",faction="EOC Starfleet",xoff=-12000,yoff=1500,aiset="missilevolley",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,27,{spawnorder=27,name='UNREC-275',military=true,callsign="ESS Halo",faction="EOC Starfleet",xoff=-14000,yoff=0,aiset="missilevolley",template="Stellar Class Battlecruiser",fleetForm=5,fleetVariation={"A", "B"}})
-end
 function checkFleetSpawn(fleetSpawnSet, fleetVariation, shipfleetForm, shipfleetVariation)
 
     if fleetSpawnSet <= shipfleetForm then
-        local shipVariation = in_array(fleetVariationSet, shipfleetVariation)
-        if shipVariation == true then
+        if fleetVariation ~= nil then
+            local shipVariation = in_array(fleetVariationSet, shipfleetVariation)
+           if shipVariation == true then
+                return true
+            end
+        else
             return true
         end
     end
