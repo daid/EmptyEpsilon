@@ -5,8 +5,13 @@
 require("utils.lua")
 require("utils_odysseus.lua")
 setScenarioChange(1)
-function init()
 
+
+function init()
+	odysseus:setLandingPadDocked(1)
+	odysseus:setLandingPadDocked(2)
+	odysseus:setLandingPadDocked(3)
+	
     addGMFunction(_("buttonGM", "OC - Machine - S"), function() spawnwave(2) end)
 	addGMFunction(_("buttonGM", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
