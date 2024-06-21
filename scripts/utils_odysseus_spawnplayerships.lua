@@ -1,29 +1,36 @@
 -- Ship spawning and docking - Developed by Ville M. and Ria B. for Odysseus 2024
 
+
+--Buttons
+function setFighterSyncButtons()
+--	addGMFunction(_("buttonGM", "Sync fighter status"), function() sync_buttons() end)
+	addGMFunction(_("buttonGM", "Show fighter fix"), function() showFighterFix() end)
+end
+
 -- Ship Enabler
 function allow_essody18()
 	odysseus:addCustomButton("Relay", "launch_pad_1", "Launch ESSODY-F18", launch_essody18)
   	odysseus:setLandingPadDocked(1)
-	removeGMFunction("Allow ESSODY-F18")
+	removeGMFunction("Fix ESSODY-F18")
 	status_essody18 = 1	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 end
 
 function allow_essody23()
 	odysseus:addCustomButton("Relay", "launch_pad_2", "Launch ESSODY-F23", launch_essody23)
   	odysseus:setLandingPadDocked(2)
-	removeGMFunction("Allow ESSODY-F23")
+	removeGMFunction("Fix ESSODY-F23")
 	status_essody23 = 1	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 end
 function allow_essody36()
 	odysseus:addCustomButton("Relay", "launch_pad_3", "Launch ESSODY-F36", launch_essody36)
   	odysseus:setLandingPadDocked(3)
-	removeGMFunction("Allow ESSODY-F36")
+	removeGMFunction("Fix ESSODY-F36")
 	status_essody36 = 1	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 end
 function allow_starcaller()
 	odysseus:addCustomButton("Relay", "launch_pad_4", "Launch STARCALLER", launch_starcaller)
   	odysseus:setLandingPadDocked(4)
-	removeGMFunction("Allow Starcaller")
+	removeGMFunction("Fix Starcaller")
 	status_starcaller = 1	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 end
 
@@ -54,7 +61,7 @@ function spawn_essody18()
 		allow_autodock18 = false
 		status_essody18 = 0 	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 		removeGMFunction("Force dock ESSODY-F18")
-		addGMFunction("Allow ESSODY-F18", allow_essody18)
+		addGMFunction("Fix ESSODY-F18", allow_essody18)
 	end)
 	allow_autodock18 = true
 	odysseus:addCustomButton("Relay", "dock_to_odysseus_auto18", "Autodock ESSODY-F18", dock_essody18_auto)
@@ -73,7 +80,7 @@ function spawn_essody23()
 		  allow_autodock23 = false
 		  status_essody23 = 0	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 		removeGMFunction("Force dock ESSODY-F23")
-      	addGMFunction("Allow ESSODY-F23", allow_essody23)
+      	addGMFunction("Fix ESSODY-F23", allow_essody23)
     end)
 	allow_autodock23 = true
 	odysseus:addCustomButton("Relay", "dock_to_odysseus_auto23", "Autodock ESSODY-F23", dock_essody23_auto)
@@ -91,7 +98,7 @@ function spawn_essody36()
 		  allow_autodock36 = false
 		  status_essody36 = 0	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 		removeGMFunction("Force dock ESSODY-F36")
-      	addGMFunction("Allow ESSODY-F36", allow_essody36)
+      	addGMFunction("Fix ESSODY-F36", allow_essody36)
     end)
 	allow_autodock36 = true
 	odysseus:addCustomButton("Relay", "dock_to_odysseus_auto36", "Autodock ESSODY-F36", dock_essody36_auto)
@@ -110,7 +117,7 @@ function spawn_starcaller()
       	odysseus:setLandingPadDestroyed(4)
 		  allow_autodocksc = false
 		  status_starcaller = 0	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
-      	addGMFunction("Allow Starcaller", allow_starcaller)
+      	addGMFunction("Fix Starcaller", allow_starcaller)
     end)
 	allow_autodocksc = true
 	odysseus:addCustomButton("Relay", "dock_to_odysseus_autosc", "Autodock Starcaller", dock_starcaller_auto)
@@ -134,6 +141,7 @@ function dock_essody18()
 		removeGMFunction("Force dock ESSODY-F18")
 		essody18:destroy()
 		status_essody18 = 1	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
+		allow_autodock18 = false
 	else
 		essody18:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 	end
@@ -149,6 +157,7 @@ function dock_essody23()
 		odysseus:removeCustom("dock_to_odysseus_auto23")
 		essody23:destroy()
 		status_essody23 = 1	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
+		allow_autodock23 = false
 	else
 		essody23:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 	end
@@ -164,6 +173,7 @@ function dock_essody36()
 		odysseus:removeCustom("dock_to_odysseus_auto36")
 		essody36:destroy()
 		status_essody36 = 1	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
+		allow_autodock36 = false
 	else
 		essody36:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 	end
@@ -179,6 +189,7 @@ function dock_starcaller()
 		removeGMFunction("Force dock Starcaller")
 		starcaller:destroy()
 		status_starcaller = 1	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
+		allow_autodocksc = false
 	else
 		starcaller:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
 	end
@@ -309,8 +320,6 @@ end
 
 -- Button synchronizer
 function sync_buttons()
-	removeGMAllowButtons()
-	addGMFunction("Remove Allows", removeGMAllowButtons)
 	removeGMFunction("Force dock ESSODY-F18")
 	removeGMFunction("Force dock ESSODY-F23")
 	removeGMFunction("Force dock ESSODY-F36")
@@ -325,19 +334,15 @@ function sync_buttons()
 	odysseus:removeCustom("dock_to_odysseus_autosc")
 
 	if odysseus:isLandingPadDestroyed(1) then
-		addGMFunction("Allow ESSODY-F18", allow_essody18)
 		status_essody18 = 0	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 	end
 	if odysseus:isLandingPadDestroyed(2) then
-		addGMFunction("Allow ESSODY-F23", allow_essody23)
 		status_essody23 = 0	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 	end
 	if odysseus:isLandingPadDestroyed(3) then
-		addGMFunction("Allow ESSODY-F36", allow_essody36)
 		status_essody36 = 0	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 	end
 	if odysseus:isLandingPadDestroyed(4) then
-		addGMFunction("Allow Starcaller", allow_starcaller)
 		status_starcaller = 0	--0 = 'Destroyed', 1 = 'Docked', 2 = 'Launched'
 	end
 
@@ -359,10 +364,26 @@ function sync_buttons()
 	end
 end
 
-function removeGMAllowButtons()
-	removeGMFunction("Remove Allows")
-	removeGMFunction("Allow ESSODY-F18")
-	removeGMFunction("Allow ESSODY-F23")
-	removeGMFunction("Allow ESSODY-F36")
-	removeGMFunction("Allow Starcaller")
+function showFighterFix()
+	addGMFunction("Hide fighter fix", hideFighterFix)
+	if odysseus:isLandingPadDestroyed(1) then
+		addGMFunction("Fix ESSODY-F18", allow_essody18)
+	end
+	if odysseus:isLandingPadDestroyed(2) then
+		addGMFunction("Fix ESSODY-F23", allow_essody23)
+	end
+	if odysseus:isLandingPadDestroyed(3) then
+		addGMFunction("Fix ESSODY-F36", allow_essody36)
+	end
+	if odysseus:isLandingPadDestroyed(4) then
+		addGMFunction("Fix Starcaller", allow_starcaller)
+	end
+end
+
+function hideFighterFix()
+	removeGMFunction("Hide fighter fix")
+	removeGMFunction("Fix ESSODY-F18")
+	removeGMFunction("Fix ESSODY-F23")
+	removeGMFunction("Fix ESSODY-F36")
+	removeGMFunction("Fix Starcaller")
 end

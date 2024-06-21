@@ -37,10 +37,8 @@ function setScenarioChange(nextScenario)
 	elseif nextScenario == 18 then
 		scenarioLua = "scenario_jump_18.lua"
 	end
-	scenarioButtonText = "Load scenario " .. nextScenario
+	scenarioButtonText = "Load Jump " .. nextScenario
 	setChangeButton(scenarioButtonText, scenarioLua)
-	addGMFunction(_("buttonGM", "Sync fighter status"), function() sync_buttons() end)
-
 end
 
 function setChangeButton(scenarioButtonText, scenarioLua)

@@ -27,7 +27,7 @@ require("utils_odysseus_generatespace.lua")
 local orotation = irandom(0, 360)
 odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Helios Corvette"):setCallSign("ESS Odysseus"):setPosition(0, 0):commandTargetRotation(orotation):setHeading(orotation+90):setCanBeDestroyed(false)
 odysseus:setCanSelfDestruct(false)
-
+setFighterSyncButtons()
 --Sets suffix index for generating npc ship callsigns. Resets for every scenario
 suffix_index = 100
 
@@ -67,28 +67,28 @@ function update(delta)
     sync_buttons()  
   end
 
-  if allow_autodock18 == true then
+  if allow_autodock18 == true and essody18:isValid() then
     local distance = distance(essody18, odysseus)
     if distance > dockingdist then
       remove_autodock18()
     end
   end
 
-  if allow_autodock23 == true then
+  if allow_autodock23 == true and essody23:isValid()then
     local distance = distance(essody23, odysseus)
     if distance > dockingdist then
       remove_autodock23()
     end
   end
 
-  if allow_autodock36 == true then
+  if allow_autodock36 == true and essody36:isValid() then
     local distance = distance(essody36, odysseus)
     if distance > dockingdist then
       remove_autodock36()
     end
   end
 
-  if allow_autodocksc == true then
+  if allow_autodocksc == true and starcaller:isValid() then
     local distance = distance(starcaller, odysseus)
     if distance > dockingdist then
       remove_autodocksc()
