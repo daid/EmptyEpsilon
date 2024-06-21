@@ -4,6 +4,7 @@
 
 require("utils.lua")
 require("utils_odysseus.lua")
+setScenarioChange(3)
 
 function init()
 	
@@ -14,7 +15,6 @@ function init()
 	addGMFunction(_("buttonGM", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
 	-- Add GM common functions - Order of the buttons: Fleet, enemies, Scenario change, scenario specific  
-	setScenarioChange('Change scenario - 03', "scenario_jump_03.lua")
 
 	-- Generate scenario map
 		addGMFunction(_("buttonGM", "Coordinates D3-117"), function() 

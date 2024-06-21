@@ -4,7 +4,7 @@ function showEOC()
 end
 
 function showEOCOrders()
-    removeGMFunction('Show EOC orders')   
+--    removeGMFunction('Show EOC orders')   
     addGMFunction(_("buttonGM", 'Hide EOC orders'), function() hideEOCorders() end)
     addGMFunction(_("buttonGM", 'OC - Civilians'), function() civiliansRetreatOnClick() end)
     addGMFunction(_("buttonGM", 'OC - Military'), function() moveToFightOnClick() end)
@@ -48,8 +48,7 @@ function hideEOCorders()
     removeGMFunction('OC - Valor fighters')
     removeGMFunction('OC - Inferno fighters')
     removeGMFunction('OC - Halo fighters')
-    removeGMFunction('OC - Hide EOC orders')   
-    showEOC()
+    removeGMFunction('Hide EOC orders')   
 end
 
 function civiliansRetreatOnClick()
@@ -128,35 +127,73 @@ end
 
 --Spawn friendly fighters
 function spawnFriendlyFighter(ship, minFighter, maxFighter)
-    local shipName = ship:getCallSign()
-    local tx, ty = ship:getPosition()
-    local ox, oy = odysseus:getPosition()
 
-    local spawnHeading = tostring(math.floor(angleHeading(ox, oy, tx, ty)))
-    local scanned = ship:isScannedByFaction("EOC_Starfleet")
-    local callSigns = {}
+    onGMClick(function(x, y)
+        local shipName = ship:getCallSign()
+        local tx, ty = ship:getPosition()
+        local ox, oy = odysseus:getPosition()
 
-    local fc = irandom(minFighter, maxFighter)
+        local spawnHeading = tostring(math.floor(angleHeading(ox, oy, tx, ty)))
+        local scanned = ship:isScannedByFaction("EOC_Starfleet")
+        local callSigns = {}
 
-    for n=1, fc do
-        local r = irandom(0, 360)
-        local distance = irandom(200, 1000)
-        local x1 = tx + math.cos(r / 180 * math.pi) * distance
-        local y1 = ty + math.sin(r / 180 * math.pi) * distance
-        local callSign = generateCallSign("UNIDEN", nil)
-        local faction = "Unidentified"
-        if scanned == true then
-            callSign = generateCallSignFromList(nil, shipName)
-            faction = "EOC Starfleet"
+        local fc = irandom(minFighter, maxFighter)
+
+        for n=1, fc do
+            local r = irandom(0, 360)
+            local distance = irandom(200, 1000)
+            local x1 = tx + math.cos(r / 180 * math.pi) * distance
+            local y1 = ty + math.sin(r / 180 * math.pi) * distance
+            local callSign = generateCallSign("UNIDEN", nil)
+            local faction = "Unidentified"
+            if scanned == true then
+                callSign = generateCallSignFromList(nil, shipName)
+                faction = "EOC Starfleet"
+            end
+            table.insert(callSigns, callSign)
+            fighter = CpuShip():setCallSign(callSign):setFaction(faction):setTemplate("Comet Class Starfighter"):setPosition(x1, y1):setRotation(irandom(0,380)):setAI("fighter"):setScannedByFaction("Unidentified", true):setScannedByFaction("Corporate owned"):setCanBeDestroyed(true):orderDefendLocation(x,y)
+            if ship == valor then 
+                table.insert(friendlyFightersOut_valor, fighter)
+            end
+            if ship == aurora then 
+                table.insert(friendlyFightersOut_aurora, fighter)
+            end
+            if ship == halo then 
+                table.insert(friendlyFightersOut_halo, fighter)
+            end
+            if ship == inferno then 
+                table.insert(friendlyFightersOut_inferno, fighter)
+            end
+
         end
-        table.insert(callSigns, callSign)
-        CpuShip():setCallSign(callSign):setFaction(faction):setTemplate("Comet Class Starfighter"):setPosition(x1, y1):setRotation(irandom(0,380)):setAI("fighter"):setScannedByFaction("Unidentified", true):setScannedByFaction("Corporate owned"):setCanBeDestroyed(yes)
-      
-    end
-    if scanned == true then
-        odysseus:addToShipLog(string.format(_("shipLog", "%s launched fighers: %s. Heading %i."), shipName, table.concat(callSigns, ", "), spawnHeading), "White")
-    else
-        odysseus:addToShipLog(string.format(_("shipLog", "Unidentified ship launched fighers. Heading %i"), spawnHeading), "Red")
-    end
+        if scanned == true then
+            odysseus:addToShipLog(string.format(_("shipLog", "%s launched fighers: %s. Heading %i."), shipName, table.concat(callSigns, ", "), spawnHeading), "White")
+        else
+            odysseus:addToShipLog(string.format(_("shipLog", "Unidentified ship launched fighers. Heading %i"), spawnHeading), "Red")
+        end
+        onGMClick(nil)
+    end)
+
+removeGMFunction("Dock fleet fighters")
+addGMFunction("Dock fleet fighters", friendlyFighterDock)
+
+
 end
 
+function friendlyFighterDock()
+    removeGMFunction("Dock fleet fighters")
+    for idv, object in ipairs(friendlyFightersOut_valor) do
+        object:orderDock(valor)
+    end
+
+    for idi, object in ipairs(friendlyFightersOut_inferno) do
+        object:orderDock(inferno)
+    end
+    for ida, object in ipairs(friendlyFightersOut_aurora) do
+        object:orderDock(aurora)
+    end
+    for idh, object in ipairs(friendlyFightersOut_halo) do
+        object:orderDock(halo)
+    end
+
+end

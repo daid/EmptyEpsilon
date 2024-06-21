@@ -4,6 +4,7 @@
 
 require("utils.lua")
 require("utils_odysseus.lua")
+setScenarioChange(14)
 
 function init()
 	local ox =-4000
@@ -12,42 +13,35 @@ function init()
 
 	local sx = 5000
 	local sy = 4500
-	setSpawnFleetButton("Friendly 3 A", 3, "A", sx, sy, 2, 1, true, "idle", 0, 0, 0, 1)
-	setSpawnFleetButton("Friendly 3 B - No Karma", 3, "B", sx, sy, 2, 1, true, "idle", 0, 0, 0, 1)
+	setSpawnFleetButton(3, "A", sx, sy, 2, 1, true, "idle", 0, 0, 0, 1)
+	setSpawnFleetButton(3, "B", sx, sy, 2, 1, true, "idle", 0, 0, 0, 1)
 
 	addGMFunction("Set asteroid field", setProphetAsteroid)
 
+	addGMFunction("Clear setup buttons", clearbuttons)
 
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
 	-- When distance set to 50000, it takes about 7-8 minutes enemy to reach attack range	
-addGMFunction("Clear setup buttons", clearbuttons)
+
 	addGMFunction(_("Enemy", "OC - Machine - L"), function() spawnwave(4) end)
 	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
-
-
-   
-	setScenarioChange('Change scenario - 14', "scenario_jump_14.lua")
 
 	addGMFunction("Destroy CSS Prophet", confirm_prophet)
 
 	-- Generate scenario map
 	generateSpace(sx, sy)
 
-
-
 	for n=1, 4 do
 		local posx = random(-80000, 30000)
 		local posy = random(-80000, 80000)
-                    Nebula():setPosition(posx, posy)
+        Nebula():setPosition(posx, posy)
 	end
 
 	
 end
 
 function clearbuttons()
-	removeGMFunction("Friendly 3 A")
-	removeGMFunction("Friendly 3 B")
 	removeGMFunction("Set asteroid field")
 	removeGMFunction("Clear setup buttons")
 end

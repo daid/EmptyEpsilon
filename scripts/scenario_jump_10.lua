@@ -4,7 +4,7 @@
 
 require("utils.lua")
 require("utils_odysseus.lua")
-
+setScenarioChange(11)
 
 function init()
 	local ox =-33000
@@ -13,7 +13,7 @@ function init()
 
 	local sx = 5000
 	local sy = -4500
-	setSpawnFleetButton("Friendly 2", 2, "A", sx, sy, 2, 2, true, "formation", 0, 2, 0, 3)
+	setSpawnFleetButton(2, nil, sx, sy, 2, 2, true, "formation", 0, 2, 0, 3)
 
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
@@ -21,9 +21,7 @@ function init()
 	addGMFunction(_("Enemy", "OC - Machine - L"), function() spawnwave(4) end)
 	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
-      
-	setScenarioChange('Change scenario - 11', "scenario_jump_11.lua")
-
+ 
 	-- Generate scenario map
 	generateSpace(sx, sy)
 

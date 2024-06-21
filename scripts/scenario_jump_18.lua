@@ -6,30 +6,29 @@ require("utils.lua")
 require("utils_odysseus.lua")
 
 function init()
-
-
+	addGMFunction(_("buttonGM", "Sync fighter status"), function() sync_buttons() end)
 	-- Add GM common functions - Order of the buttons: Sync, fleet, enemies, Scenario change, scenario specific
 	addGMFunction(_("buttonGM", "Coordinates H8-239"), function() 
 		setUpPlanet("AS-RV693", 85000, 25000) 
-		removeGMFunction("Coordinates H7-239")
+		removeGMFunction("Coordinates H8-239")
 		removeGMFunction("Coordinates H7-254")
 		removeGMFunction("Other coordinates")
 	end)
 	addGMFunction(_("buttonGM", "Coordinates H7-254"), function() 
 		setUpPlanet("P-GD66-NF38", 85000, 25000) 
-		removeGMFunction("Coordinates H7-239")
+		removeGMFunction("Coordinates H8-239")
 		removeGMFunction("Coordinates H7-254")
 		removeGMFunction("Other coordinates")
 	end)
 	addGMFunction(_("buttonGM", "Other coordinates"), function()
-		removeGMFunction("Coordinates H7-239") 
+		removeGMFunction("Coordinates H8-239") 
 		removeGMFunction("Coordinates H7-254")
 		removeGMFunction("Other coordinates")
 	end)
 	local sx = 5000
 	local sy = -4500
-	setSpawnFleetButton("Friendly 5 A", 5, "A", sx, sy, 2, 3, true, "idle", 0, 3, 0, 3)
-	setSpawnFleetButton("Friendly 5 B - No Karma", 5, "B", sx, sy, 2, 3, true, "idle", 0, 3, 0, 3)
+	setSpawnFleetButton(5, "A", sx, sy, 2, 3, true, "idle", 0, 3, 0, 3)
+	setSpawnFleetButton(5, "B", sx, sy, 2, 3, true, "idle", 0, 3, 0, 3)
 
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
@@ -37,8 +36,6 @@ function init()
 
 	addGMFunction(_("Enemy", "OC - Machine - XL + Mother"), function() spawnwave(6, "idle") end)
 	addGMFunction(_("Enemy", "OC - Machine - XL"), function() spawnwave(5, "idle") end)
-
-	addGMFunction(_("Enemy", "Launch destruction"), function() cleanup_confirm() end)
 
   -- Generate scenario map
 	destroyEnemy = false

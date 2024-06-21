@@ -172,7 +172,8 @@ function spawn_wave(x, y, size, orders, tx, ty)
 
     --Spawn mothership
     if size == 6 then
-        mother = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setRotation(100):setTemplate("Machine Mothership"):setPosition(x, y):setScanned(true):setRadarTraceScale(5)
+        mother = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setRotation(100):setTemplate("Machine Mothership"):setPosition(x, y):setScanned(true)
         removeGMFunction("OC - Machine - XL + Mother")
+        addGMFunction(_("Enemy", "Launch destruction"), function() cleanup_confirm() end)
     end
 end

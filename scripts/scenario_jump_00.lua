@@ -4,12 +4,11 @@
 
 require("utils.lua")
 require("utils_odysseus.lua")
-
+setScenarioChange(1)
 function init()
+
     addGMFunction(_("buttonGM", "OC - Machine - S"), function() spawnwave(2) end)
 	addGMFunction(_("buttonGM", "OC - Machine - Backup XS"), function() spawnwave(1) end)
-
-	setScenarioChange('Change scenario - 01', "scenario_jump_01.lua")
 
 	-- Generate scenario map
 	-- Random asteroids and nebula
@@ -19,6 +18,6 @@ function init()
 	generateSpace(ox, oy)
 
 	--Scenario specific space objects
-	local jumpPoint = CpuShip():setFaction("EOC Starfleet"):setTemplate("Jump point"):setPosition(ox-2000, oy-1500):setCallSign("Jump point - A3"):setCanBeDestroyed(true):setScannedByFaction("EOC Starfleet", true)
+	local jumpPoint = CpuShip():setFaction("EOC Starfleet"):setTemplate("Jump point"):setPosition(ox-9000, oy-7500):setCallSign("Jump point - A3"):setCanBeDestroyed(true):setScannedByFaction("EOC Starfleet", true)
 end
 

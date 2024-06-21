@@ -4,7 +4,7 @@
 
 require("utils.lua")
 require("utils_odysseus.lua")
-
+setScenarioChange(5)
 
 function init()
 	
@@ -17,7 +17,7 @@ function init()
 	local sy = 4500
 
 	-- Button name, fleet number, fleet variation, sx, sy, fleet ship distances while in formation, fleet spawn chaos factor, reveal call signs at spawn, orders at spawn, delayJumpInMin, delayJumpInMax, delayJumpOutMin, delayJumpOutMax
-	setSpawnFleetButton("Friendly 1", 1, "A", sx, sy, 2, 1, true, "formation", 0, 3, 0, 1)
+	setSpawnFleetButton(1, nil , sx, sy, 2, 1, true, "formation", 0, 3, 0, 1)
 
 
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)
@@ -28,7 +28,6 @@ function init()
     addGMFunction(_("Enemy", "OC - Machine - L"), function() spawnwave(4) end)
 	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
-	setScenarioChange('Change scenario - 05', "scenario_jump_05.lua")
 	addGMFunction("Destroy ESS Vulture", confirm_vulture)
 
 

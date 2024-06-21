@@ -5,8 +5,8 @@ function setSpawnFleetButton(fleetSpawn, fleetVariation, sx, sy, offSetModifier,
         print("Func: SetSpawnFleetButton - Local in:", fleetSpawn, fleetVariation, sx, sy, offSetModifier, spawnModifier, revealCallSigns, orders, delayInMin, delayInMax, delayOutMin, delayOutMax)
     end    
      
-    spawnDebugLog = true
-    randomizeSpawnLoc = false
+    spawnDebugLog = false
+    randomizeSpawnLoc = true
 
     fleetCountIn = 0
     fleetCountOut = 0
@@ -21,6 +21,7 @@ function setSpawnFleetButton(fleetSpawn, fleetVariation, sx, sy, offSetModifier,
     if fleetVariation ~= nil then
         fleetbuttonName = fleetbuttonName .. fleetVariation
     end
+
 
     fleetRevealCallSigns = revealCallSigns 
     fleetOrders = orders
@@ -39,7 +40,6 @@ function setSpawnFleetButton(fleetSpawn, fleetVariation, sx, sy, offSetModifier,
     if fleet_list == nil then
         setFleetTable()
     end
-
 
     addGMFunction(_("Fleet", fleetbuttonName), function() jumpInPrep() end)
 
@@ -98,11 +98,22 @@ function jumpInPrep()
     local heading = tostring(math.floor(angleHeading(ox, oy, fsx, fsy)))
 
     auroraHeading = math.floor(90-(irandom(-45, 45)))
+    if randomizeSpawnLoc == false then
+        auroraHeading = 90
+    end
 
     fleetObjectsIn = {}
 
     fleetJumpStatus = "jumpIn"
-    removeGMFunction(fleetbuttonName)
+
+    if fleetVariationSet ~= nil then
+        local fleetButtonNameA = "Friendly " .. fleetSpawnSet .. "A"
+        local fleetButtonNameB = "Friendly " .. fleetSpawnSet .. "B"
+        removeGMFunction(fleetButtonNameA) 
+        removeGMFunction(fleetButtonNameB) 
+    else
+        removeGMFunction(fleetbuttonName) 
+    end
     if fleetRevealCallSigns == false then 
         odysseus:addToShipLog(string.format(_("shipLog", "EVA sector scanner alarm. Multiple incoming jumps detected from heading %d. Unidentified vessels."), heading), "Red")
     else
@@ -242,9 +253,19 @@ function calculateSpawnLocations(xloc, yloc)
     local xset = xloc+irandom(-1000,1000)
     local yset = yloc+irandom(-1000,1000)
 
+    if randomizeSpawnLoc == false then
+        xset = xloc
+        yset = yloc
+    end
+
     local r = irandom(0, 360)
     local xdistance = irandom(-2000, 2000)    
     local ydistance = irandom(-2000, 2000)    
+
+    if randomizeSpawnLoc == false then
+        xdistance = 0
+        ydistance = 0
+    end  
 
     local x1 = math.floor(ax + (math.cos(r / 180 * math.pi) * xdistance* positionModifier))
     local y1 = math.floor(ay + (math.sin(r / 180 * math.pi) * ydistance* positionModifier))
