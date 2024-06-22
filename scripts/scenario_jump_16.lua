@@ -15,6 +15,5 @@ function init()
 	generateSpace(sx, sy)
 	
 	addGMFunction(_("Enemy", "OC - Machine - XL"), function() spawnwave(5) end)
-	addGMFunction("Destroy ESS Valkyrie", confirm_valkyrie)
 
 end
