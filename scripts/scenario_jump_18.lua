@@ -6,7 +6,6 @@ require("utils.lua")
 require("utils_odysseus.lua")
 
 function init()
-	addGMFunction(_("buttonGM", "Sync fighter status"), function() sync_buttons() end)
 	-- Add GM common functions - Order of the buttons: Sync, fleet, enemies, Scenario change, scenario specific
 	addGMFunction(_("buttonGM", "Coordinates H8-239"), function() 
 		setUpPlanet("AS-RV693", 85000, 25000) 
@@ -25,8 +24,8 @@ function init()
 		removeGMFunction("Coordinates H7-254")
 		removeGMFunction("Other coordinates")
 	end)
-	local sx = 5000
-	local sy = -4500
+	local sx = 10000
+	local sy = -14500
 	setSpawnFleetButton(5, "A", sx, sy, 2, 3, true, "idle", 0, 3, 0, 3)
 	setSpawnFleetButton(5, "B", sx, sy, 2, 3, true, "idle", 0, 3, 0, 3)
 

@@ -25,7 +25,7 @@ function init()
 			removeGMFunction("Other coordinates")
 		end)
 
-	local sx = 5000
+	local sx = -5000
 	local sy = 4500
 	setSpawnFleetButton(2, nil, sx, sy, 2, 3, true, "formation", 0, 1, 0, 2)
 
