@@ -25,7 +25,7 @@ function init()
 	-- When distance set to 50000, it takes about 7-8 minutes enemy to reach attack range	
 
 
-    addGMFunction(_("Enemy", "OC - Machine - L"), function() spawnwave(4) end)
+    addGMFunction(_("Enemy", "OC - Machine - S"), function() spawnwave(2) end)
 	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
 	addGMFunction("Destroy ESS Vulture", confirm_vulture)

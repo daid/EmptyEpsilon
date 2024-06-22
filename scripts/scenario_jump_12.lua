@@ -19,10 +19,9 @@ function init()
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
 	-- When distance set to 50000, it takes about 7-8 minutes enemy to reach attack range	
 	addGMFunction(_("Enemy", "OC - Machine - Moon SX"), function() spawnwave(1, "target", ox+2000, oy-15000) end)
-	addGMFunction(_("Enemy", "OC - Machine - Fleet SX"), function() spawnwave(1) end)
+	addGMFunction(_("Enemy", "OC - Machine - SX"), function() spawnwave(1) end)
 
-	addGMFunction(_("Enemy", "OC - Machine - L"), function() spawnwave(4) end)
-	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
+	addGMFunction(_("Enemy", "OC - Machine - XL"), function() spawnwave(5) end)
 
 	-- Generate scenario map
 

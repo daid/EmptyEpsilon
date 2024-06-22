@@ -32,8 +32,6 @@ function spawn_wave(x, y, size, orders, tx, ty)
     if size == 5 then
         distanceMax = 40000;
     end
-
-
     
     --Spawn predator
     if size == 1 then
@@ -68,12 +66,12 @@ function spawn_wave(x, y, size, orders, tx, ty)
         local machine = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setTemplate("Machine Predator"):setPosition(x1, y1)
         if orders == "target" then
             machine:orderFlyTowardsBlind(tx,ty)
+        elseif orders == "idle" then
+            machine:orderIdle()
+        elseif orders == "boarding" then
+            machine:orderAttack(odysseus)
         else 
-            if orders == "idle" then
-                machine:orderIdle()
-            else 
-                machine:orderRoaming(x, y)
-            end
+            machine:orderRoaming(x, y)
         end
     end
 
@@ -121,15 +119,13 @@ function spawn_wave(x, y, size, orders, tx, ty)
         local machine = CpuShip():setCallSign(generateCallSign("UNREC-", nil)):setFaction("Machines"):setTemplate("Machine Stinger"):setPosition(x1, y1)
         if orders == "target" then
             machine:orderFlyTowardsBlind(tx,ty)
+        elseif orders == "idle" then
+            machine:orderIdle()
+        elseif orders == "boarding" then
+            machine:orderAttack(odysseus)
         else 
-            if orders == "idle" then
-                machine:orderIdle()
-            else 
-                machine:orderRoaming(x, y)
-            end
+            machine:orderRoaming(x, y)
         end
-
-
     end
 
     --Spawn Reaper
