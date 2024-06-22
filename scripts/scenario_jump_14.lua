@@ -11,13 +11,12 @@ function init()
 	local oy = 2000
 	odysseus:setPosition(ox, oy)
 
-	local sx = 5000
-	local sy = 4500
+	local sx = 8000
+	local sy = -10500
+
 
 	setSpawnFleetButton(4, "A", sx, sy, 2, 1, true, "formation", 0, 1, 0, 3)
 	setSpawnFleetButton(4, "B", sx, sy, 2, 1, true, "formation", 0, 1, 0, 3)
-
-	addGMFunction("Clear setup buttons", clearbuttons)
 
 	-- Spawnface parameters: (distance from Odysseus, enemyfleetsize)
 	-- 1 = very small, 2 = small, 3 = mdium, 4 = large, 5 = massive, 6 = end fleet
@@ -35,8 +34,6 @@ function init()
                     Nebula():setPosition(posx, posy)
 	end
 
-	--x1, y1, x2, y2, spacing, object_type, rows, chance, randomize
-	createObjectsOnLine(120000,-80000, 120000,80000, 40000, Nebula, 1, 100, 1)
 
 	essody18_launched = 0
 	essody23_launched = 0
@@ -59,51 +56,46 @@ function init()
   -- Plan
   
 	warningZone = Zone():setColor(0,0,0)
-	warningZone:setPoints(22000,-100000,
-						33000,-100000,
-						33000,100000,
-						22000,100000)
+	warningZone:setPoints(22000,-150000,
+						33000,-150000,
+						33000,150000,
+						22000,150000)
   
 	critWarningZone = Zone():setColor(50,0,0)
-	critWarningZone:setPoints(33000, -100000,
-						44000,-100000,
-						44000,100000,
-						33000,100000)
+	critWarningZone:setPoints(33000, -150000,
+						44000,-150000,
+						44000,150000,
+						33000,150000)
   
 	dangerZone = Zone():setColor(100,0,0)
-	dangerZone:setPoints(44000,-100000,
-						50000,-100000,
-						50000,100000,
-						44000,100000)
+	dangerZone:setPoints(44000,-150000,
+						50000,-150000,
+						50000,150000,
+						44000,150000)
   
 	critDangerZone = Zone():setColor(150,0,0)
-	critDangerZone:setPoints(50000,-100000,
-						55000,-100000,
-						55000,100000,
-						50000,100000)
+	critDangerZone:setPoints(50000,-150000,
+						55000,-150000,
+						55000,150000,
+						50000,150000)
   
 	deathDangerZone = Zone():setColor(200,0,0)
-	deathDangerZone:setPoints(55000,-100000,
-						59000,-100000,
-						59000,100000,
-						55000,100000)
+	deathDangerZone:setPoints(55000,-150000,
+						59000,-150000,
+						59000,150000,
+						55000,150000)
   
 	colorZone = Zone():setColor(255, 0, 0)
-	colorZone:setPoints(59000,-100000,
-						200000,-100000,
-						200000,100000,
-						59000,100000)
+	colorZone:setPoints(59000,-150000,
+						200000,-150000,
+						200000,150000,
+						59000,150000)
 
 	  plotZ = delayChecks
   
 	odysseus:addToShipLog("EVA sector scanning alarm. Anomalous radiation field detected at heading 90.", "Red")
   
   end
-
-function clearbuttons()
-	removeGMFunction("Friendly 4A")
-	removeGMFunction("Friendly 4B")
-end
 
   function delayChecks(delta)
   
