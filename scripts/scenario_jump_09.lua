@@ -40,8 +40,6 @@ function init()
 	addGMFunction("OC - Polaris", move_polarisOnClick)
 	addGMFunction("Destroy ESS Polaris", confirm_polaris)
 
-	
-
 	-- Generate scenario map
 	generateSpace(sx, sy)
 
