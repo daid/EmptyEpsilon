@@ -29,7 +29,7 @@ function init()
     addGMFunction(_("Enemy", "OC - Machine - S"), function() spawnwave(2) end)
 	addGMFunction(_("Enemy", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
-	addGMFunction("Destroy ESS Vulture", confirm_vulture)
+	addGMFunction("Destroy OSS Vulture", confirm_vulture)
 
 
 	-- Generate scenario map

@@ -89,6 +89,19 @@ function setConfirmChangeButton(scenarioButtonText, scenarioLua)
 	addGMFunction(
 		_("Scenario", "Confirm load"),function()
 		removeGMFunction("Confirm load")
+
+		if odysseus:isLandingPadLaunched(1) then
+			dock_essody18_force()
+		end
+		if odysseus:isLandingPadLaunched(2) then
+			dock_essody23_force()
+		end
+		if odysseus:isLandingPadLaunched(3) then
+			dock_essody36_force()
+		end
+		if odysseus:isLandingPadLaunched(4) then
+			dock_starcaller_force()
+		end
 		setScenario(scenarioLua)
 	end)
 end
