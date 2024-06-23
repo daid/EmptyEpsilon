@@ -1,9 +1,11 @@
 -- Name: Jump 13
 -- Type: Odysseus
--- Description: Onload: Odysseus, random asteroids. EOC fleet. Radiation field. Planet.
+-- Description: No objects of interest.
 
 require("utils.lua")
 require("utils_odysseus.lua")
+scenarioMap = "Map objects on load: No objects of interest. \nSetup actions: Choose right fleet to spawn. \nMove Prophet. Spawn asteroids."
+
 setScenarioChange(14)
 
 function init()

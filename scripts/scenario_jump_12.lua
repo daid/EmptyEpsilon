@@ -1,9 +1,11 @@
 -- Name: Jump 12
 -- Type: Odysseus
--- Description: Onload: Odysseus, random asteroids.
+-- Description: Planet + moon at north
 
 require("utils.lua")
 require("utils_odysseus.lua")
+scenarioMap = "Map objects on load: Planet + moon at north. \nNo setup actions."
+
 setScenarioChange(13)
 
 function init()

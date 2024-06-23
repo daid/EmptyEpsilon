@@ -1,9 +1,11 @@
 -- Name: Jump 15
 -- Type: Odysseus
--- Description: Onload: Odysseus, random asteroids. EOC fleet. Planet AS-OH108
+-- Description: Asteroid field at northeast
 
 require("utils.lua")
 require("utils_odysseus.lua")
+scenarioMap = "Map objects on load: Asteroid field at northeast \nSetup actions: Choose right fleet to spawn.\nAfter Aurora spawn, Set Aurora heading."
+
 setScenarioChange(16)
 
 function init()

@@ -1,10 +1,12 @@
 -- Name: Jump 18
 -- Type: Odysseus
--- Description: Onload: Odysseus, random asteroids. EOC fleet.
+-- Description: No objects of interest.
 
 require("utils.lua")
 require("utils_odysseus.lua")
-
+scenarioMap = "Map objects on load: No objects of interest. \nSetup actions: Choose right fleet to spawn."
+addGMMessage("Jump 18 loaded. \nScenario file: scenario_jump_18.lua \nMap setup on load: " .. scenarioMap)
+setChangeButton("Reload current Jump", "scenario_jump_18.lua")
 function init()
 	-- Add GM common functions - Order of the buttons: Sync, fleet, enemies, Scenario change, scenario specific
 	addGMFunction(_("buttonGM", "Coordinates H8-239"), function() 

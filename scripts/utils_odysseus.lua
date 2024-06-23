@@ -25,8 +25,7 @@ require("utils_odysseus_generatespace.lua")
 
 -- spawn the ESS Odysseus
 local orotation = irandom(0, 360)
-odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Helios Corvette"):setCallSign("ESS Odysseus"):setPosition(0, 0):commandTargetRotation(orotation):setHeading(orotation+90):setCanBeDestroyed(false)
-odysseus:setCanSelfDestruct(false)
+odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Helios Corvette"):setCallSign("ESS Odysseus"):setPosition(0, 0):commandTargetRotation(orotation):setHeading(orotation+90):setCanBeDestroyed(false):setCanSelfDestruct(false)
 setFighterSyncButtons()
 --Sets suffix index for generating npc ship callsigns. Resets for every scenario
 suffix_index = 100
@@ -38,6 +37,7 @@ status_starcaller = 3
 
 
 function update(delta)
+
 	if delta == 0 then
 		return
 	end
@@ -51,6 +51,10 @@ function update(delta)
 	end
 	if fleetJumpStatus == "jumpOut" and getScenarioTime() > nextJumpOutAt then
 		jumpOutDelta()
+	end
+
+	if fleetJumpStatus == "jumpOutAfter" then
+		jumpOutAfter()
 	end
 
   -- If ofysseus data and fighter data have mismatch, run sync automatically

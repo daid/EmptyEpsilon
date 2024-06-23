@@ -1,9 +1,10 @@
 -- Name: Jump 02
 -- Type: Odysseus
--- Description: Map: - Enemies: Backup enemy fleet Allies: No friendly fleet
+-- Description: No objects of interest.
 
 require("utils.lua")
 require("utils_odysseus.lua")
+scenarioMap = "Map objects on load: No objects of interest. \nSetup actions: Confirm correct jump coordinates."
 setScenarioChange(3)
 
 function init()

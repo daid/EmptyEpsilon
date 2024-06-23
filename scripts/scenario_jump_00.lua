@@ -1,9 +1,10 @@
 -- Name: Jump 00
 -- Type: Odysseus
--- Description: Map: Jump point element near starting point. Enemies: Button to spawn small enemy fleet at the edge of player visibility range Allies: No friendly fleet
+-- Description: Jump point at northwest.
 
 require("utils.lua")
 require("utils_odysseus.lua")
+scenarioMap = "Map objects on load: Jump point at northwest.\nNo setup actions."
 setScenarioChange(1)
 
 

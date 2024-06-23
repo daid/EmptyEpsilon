@@ -1,9 +1,6 @@
 
 -- Max fighter count for NPC ships. Resets at every jump.
 function setSpawnFleetButton(fleetSpawn, fleetVariation, sx, sy, offSetModifier, spawnModifier, revealCallSigns, orders, delayInMin, delayInMax, delayOutMin, delayOutMax)
-    if spawnDebugLog then
-        print("Func: SetSpawnFleetButton - Local in:", fleetSpawn, fleetVariation, sx, sy, offSetModifier, spawnModifier, revealCallSigns, orders, delayInMin, delayInMax, delayOutMin, delayOutMax)
-    end    
      
     spawnDebugLog = false
     randomizeSpawnLoc = true
@@ -30,11 +27,12 @@ function setSpawnFleetButton(fleetSpawn, fleetVariation, sx, sy, offSetModifier,
     fsx = sx
     fsy = sy
 
-    jumpdelayInMin = delayInMin
-    jumpdelayInMax = delayInMax
+    jumpDelayInMin = delayInMin
+    jumpDelayInMax = delayInMax
     jumpDelayOutMin = delayOutMin
     jumpDelayOutMax = delayOutMax	
     distanceModifier = offSetModifier
+    spawnModifierSet = spawnModifier
     positionModifier = math.floor(spawnModifier*1.5)
 
     if fleet_list == nil then
@@ -84,7 +82,7 @@ end
 -- update(delta) at utils_odysseus.lua calls spawnfleetDelta
 function jumpInPrep()
     if spawnDebugLog then
-        print("Func: jumpInPrep - Global In:", fleetSpawnSet, fleetVariationSet,  fsx, fsy, distanceModifier, positionModifier, fleetRevealCallSigns, fleetOrders, jumpDelayInMin, jumpdelayInMax, jumpDelayOutMin, jumpDelayOutMax)
+        print("Func: jumpInPrep - Global In:", fleetSpawnSet, fleetVariationSet,  fsx, fsy, distanceModifier, positionModifier, fleetRevealCallSigns, fleetOrders, jumpDelayInMin, jumpDelayInMax, jumpDelayOutMin, jumpDelayOutMax)
     end    
 
     nextJumpInAt = getScenarioTime()
@@ -149,7 +147,7 @@ function jumpInDelta()
             return
         end
 
-        nextJumpInAt = getScenarioTime() + random(jumpdelayInMin, jumpdelayInMax)
+        nextJumpInAt = getScenarioTime() + random(jumpDelayInMin, jumpDelayInMax)
 
 
     local faction = "Unidentified"
@@ -412,36 +410,51 @@ end
 
 
 function jumpOutPrep()
-    
+    removeGMFunction("Fleet jump")
+    removeGMFunction("EOC Orders")
+    outObjectCount = 0
     nextJumpOutAt = getScenarioTime()
     fleetObjectsOut = {}
     for idx, object in ipairs(fleetObjectsIn) do
-        if object:isValid() then 
+        if object:isValid() then
+            outObjectCount = outObjectCount +1
             local ix, iy = object:getPosition()
             object:orderIdle(ix, iy)
             table.insert(fleetObjectsOut, object)
         end
     end
     fleetJumpStatus = "jumpOut"
-
 end
 
 function jumpOutDelta()
     fleetCountOut = fleetCountOut + 1
-    nextJumpOutAt = getScenarioTime() + random(jumpDelayOutMin, jumpDelayOutMax)
     local object = fleetObjectsOut[fleetCountOut]
-    local tx, ty = object:getPosition()
-    local inScannerRange = distanceFromOdysseysCheck(tx,ty,75000)
-    if inScannerRange == true then
-        local callsign = object:getCallSign()
-        local faction = object:getFaction()                
-        if faction ~= "Unidentified" and faction ~= "Machines" then
-            odysseus:addToShipLog(string.format(_("shipLog", "EVA long range scanning results. %s left from scanner range. Jump detected."), callsign), "White")
+    if object then
+       nextJumpOutAt = getScenarioTime() + random(jumpDelayOutMin, jumpDelayOutMax)
+        local tx, ty = object:getPosition()
+        local inScannerRange = distanceFromOdysseysCheck(tx,ty,75000)
+        if inScannerRange == true then
+            local callsign = object:getCallSign()
+           local faction = object:getFaction()                
+            if faction ~= "Unidentified" and faction ~= "Machines" then
+                odysseus:addToShipLog(string.format(_("shipLog", "EVA long range scanning results. %s left from scanner range. Jump detected."), callsign), "White")
+            end
         end
+        object:destroy()
     end
-    object:destroy()
-    if fleetCountOut >= fleetCountIn then
-        fleetJumpStatus = "ready"
+    if fleetCountOut >= outObjectCount then
+        fleetJumpStatus = "jumpOutAfter"
+    end
+
+end
+
+function jumpOutAfter()
+    fleetJumpStatus = "jumpCompleted"
+    if fleetVariationSet == nil then
+        setSpawnFleetButton(fleetSpawnSet, fleetVariationSet, fsx, fsy, distanceModifier, spawnModifierSet, fleetRevealCallSigns, fleetOrders, 0,0, jumpDelayOutMin, jumpDelayOutMax)
+    else
+        setSpawnFleetButton(fleetSpawnSet, "A", fsx, fsy, distanceModifier, spawnModifierSet, fleetRevealCallSigns, fleetOrders, 0,0, jumpDelayOutMin, jumpDelayOutMax)
+        setSpawnFleetButton(fleetSpawnSet, "B", fsx, fsy, distanceModifier, spawnModifierSet, fleetRevealCallSigns, fleetOrders, 0,0, jumpDelayOutMin, jumpDelayOutMax)
     end
 
 end

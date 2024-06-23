@@ -1,9 +1,10 @@
 -- Name: Jump 03
 -- Type: Odysseus
--- Description: Onload: Odysseus, random asteroids. Planet DE47-HC55
+-- Description:Planet Velian at southeast 
 
 require("utils.lua")
 require("utils_odysseus.lua")
+scenarioMap = "Map objects on load: Planet Velian at southeast \nNo setup actions."
 setScenarioChange(4)
 
 function init()

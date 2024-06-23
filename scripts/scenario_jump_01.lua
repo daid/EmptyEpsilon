@@ -1,9 +1,10 @@
 -- Name: Jump 01
 -- Type: Odysseus
--- Description: Map: Space station Solaris 7 - aproximetely 15 minutes fly from the starting point. Enemies: Button to spawn small enemy fleet at the edge of player visibility range. Allies: No friendly fleet
+-- Description: Space station Solaris 7 at Northwest inside of nebula
 
 require("utils.lua")
 require("utils_odysseus.lua")
+scenarioMap = "Map objects on load: Space station Solaris 7 at Northwest inside of nebula. \nNo setup actions."
 setScenarioChange(2)
 
 function init()

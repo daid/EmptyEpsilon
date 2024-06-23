@@ -187,14 +187,14 @@ function planetList()
             radius = 15734,
             axialrotation = 57,
             texture = {
-                surface = "planets/planet-2.png",
+                surface = "planets/planet-6.png",
                 cloud = "planets/clouds-1.png", 
                 atmosphere = "planets/atmosphere.png"
             },
             color = {
-                red = random(0.6,1), 
-                green = random(0.4,0.6), 
-                blue = random(0,0.2)
+                red = 1, 
+                green = 0, 
+                blue = 0
             },
         })
         table.insert(planet_list, {

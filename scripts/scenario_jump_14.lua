@@ -1,9 +1,11 @@
 -- Name: Jump 14
 -- Type: Odysseus
--- Description: Onload: Odysseus, random asteroids. EOC fleet. Asteroid belt.
+-- Description: Planet at northeast. Alien minefield at east. 
 
 require("utils.lua")
 require("utils_odysseus.lua")
+scenarioMap = "Map objects on load: Planet at northeast. Alien minefield at east. \nSetup actions: Choose right fleet to spawn."
+
 setScenarioChange(15)
 
 function init()
