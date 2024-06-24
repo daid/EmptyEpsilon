@@ -12,6 +12,8 @@
 #include "components/avoidobject.h"
 #include "components/missile.h"
 #include "components/name.h"
+#include "components/moveto.h"
+#include "components/lifetime.h"
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/docking.h"
@@ -570,6 +572,14 @@ void initComponentScriptBindings()
     BIND_MEMBER(PlayerControl, control_code);
     sp::script::ComponentHandler<HackingDevice>::name("hacking_device");
     BIND_MEMBER(HackingDevice, effectiveness);
+
+    sp::script::ComponentHandler<MoveTo>::name("move_to");
+    BIND_MEMBER(MoveTo, speed);
+    BIND_MEMBER(MoveTo, target);
+    BIND_MEMBER(MoveTo, on_arrival);
+    sp::script::ComponentHandler<LifeTime>::name("lifetime");
+    BIND_MEMBER(LifeTime, lifetime);
+    BIND_MEMBER(LifeTime, on_expire);
 
     sp::script::ComponentHandler<Faction>::name("faction");
     BIND_MEMBER(Faction, entity);

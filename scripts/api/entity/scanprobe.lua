@@ -6,11 +6,6 @@
 --- Example: probe = ScanProbe():setSpeed(1500):setLifetime(60 * 30):setTarget(10000,10000):onArrival(function() print("Probe arrived!") end)
 function ScanProbe()
     local e = createEntity()
-    --TODO: e.move_to = {speed=1000, target=??}
-    --TODO: e.allow_radar_link = {owner=??}
-    --TODO: e.faction = ???
-    setRadarSignatureInfo(0.0, 0.2, 0.0);
-    --TODO: setCallSign(string(getMultiplayerId()) + "P");
     e.components = {
         lifetime = {lifetime=60*10},
         radar_trace = {
@@ -22,6 +17,8 @@ function ScanProbe()
         },
         hull = {max=1, current=1},
         share_short_range_radar = {},
+        allow_radar_link = {},
+        radar_signature = {gravity=0.0, electrical=0.2, biological=0.0}
     }
     local model = "SensorBuoyMKI"
     local idx = irandom(1, 3)
@@ -41,33 +38,33 @@ local Entity = getLuaEntityFunctionTable()
 --- Defaults to 1000 (1U/second).
 --- Example: probe:setSpeed(2000)
 function Entity:setSpeed(speed)
-    --TODO
+    if self.components.move_to then self.components.move_to.speed = speed end
     return self
 end
 --- Returns this ScanProbe's speed.
 --- Example: probe:getSpeed()
 function Entity:getSpeed()
-    --TODO
-    return self
+    if self.components.move_to then return self.components.move_to.speed end
+    return 0.0
 end
 --- Sets this ScanProbe's remaining lifetime, in seconds.
 --- Defaults to 600 seconds (10 minutes).
 --- Example: probe:setLifetime(60 * 5) -- sets the lifetime to 5 minutes
 function Entity:setLifetime(lifetime)
-    --TODO
+    if self.components.lifetime then self.components.lifetime.lifetime = lifetime end
     return self
 end
 --- Returns this ScanProbe's remaining lifetime.
 --- Example: probe:getLifetime()
 function Entity:getLifetime()
-    --TODO
-    return self
+    if self.components.lifetime then return self.components.lifetime.lifetime end
+    return 0.0
 end
 --- Sets this ScanProbe's target coordinates.
 --- If the probe has reached its target, ScanProbe:setTarget() moves it again toward the new target coordinates.
 --- Example: probe:setTarget(1000,5000)
-function Entity:setTarget()
-    --TODO
+function Entity:setTarget(x, y)
+    self.components.move_to = {target={x, y}}
     return self
 end
 --- Sets this ScanProbe's owner SpaceObject.
@@ -84,14 +81,14 @@ end
 --- Defines a function to call when this ScanProbe arrives to its target coordinates.
 --- Passes the probe and position as arguments to the function.
 --- Example: probe:onArrival(function(this_probe, coords) print("Probe arrived!") end)
-function Entity:onArrival()
-    --TODO
+function Entity:onArrival(callback)
+    if self.components.move_to then self.components.move_to.on_arrival = callback end
     return self
 end
 --- Defines a function to call when this ScanProbe's lifetime expires.
 --- Passes the probe as an argument to the function.
 --- Example: probe:onExpiration(function(this_probe) print("Probe expired!") end)
-function Entity:onExpiration()
-    --TODO
+function Entity:onExpiration(callback)
+    if self.components.lifetime then self.components.lifetime.on_expire = callback end
     return self
 end
