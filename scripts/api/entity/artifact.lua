@@ -48,34 +48,25 @@ end
 --- Defaults to false.
 --- Example: artifact:allowPickup(true)
 function Entity:allowPickup(allow)
-    --[[TODO
-    if (allow)
-        entity.getOrAddComponent<PickupCallback>();
+    if allow then
+        self.components.pickup = {}
     else
-        entity.removeComponent<PickupCallback>();
-    --]]
+        self.components.pickup = nil
+    end
     return self
 end
 --- Defines a function to call every tick when a SpaceObject is colliding with the artifact.
 --- Passes the artifact and colliding SpaceObject to the called function.
 --- Example: artifact:onCollision(function(artifact, collider) print("Collision occurred") end)
 function Entity:onCollision(callback)
-    --[[TODO
-    auto& cb = entity.getOrAddComponent<CollisionCallback>();
-    cb.player = false;
-    cb.callback = callback;
-    --]]
+    self.components.collision_callback = {player=false, callback}
     return self
 end    
 --- Defines a function to call every tick when a PlayerSpaceship is colliding with the artifact.
 --- Passes the artifact and colliding PlayerSpaceship to the called function.
 --- Example: artifact:onCollision(function(artifact, player) print("Collision occurred") end)
 function Entity:onPlayerCollision(callback)
-    --[[TODO
-    auto& cb = entity.getOrAddComponent<CollisionCallback>();
-    cb.player = true;
-    cb.callback = callback;
-    --]]
+    self.components.collision_callback = {player=true, callback}
     return self
 end
 --- Defines a function to call once when a PlayerSpaceship collides with the artifact and allowPickup is enabled.
@@ -85,11 +76,7 @@ end
 --- Passes the supply drop and the colliding ship (if it's a PlayerSpaceship) to the function.
 --- Example: supply_drop:onPickUp(function(drop,ship) print("Supply drop picked up") end)
 function Entity:onPickUp(callback)
-    --[[TODO
-    auto& pickup = entity.getOrAddComponent<PickupCallback>();
-    pickup.callback = callback;
-    --]]
-    --TODO: Supplydrop
+    self.components.pickup = {callback = callback}
     return self
 end
 --- Alias of Artifact:onPickUp().

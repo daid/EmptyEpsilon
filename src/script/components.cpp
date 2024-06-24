@@ -682,7 +682,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_DIRTY_FLAG_MEMBER(Database, key_values, key, key_values_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(Database, key_values, value, key_values_dirty);
 
-    sp::script::ComponentHandler<CollisionCallback>::name("pickup");
+    sp::script::ComponentHandler<PickupCallback>::name("pickup");
     BIND_MEMBER(PickupCallback, callback);
     BIND_MEMBER(PickupCallback, player);
     BIND_MEMBER(PickupCallback, give_energy);
