@@ -320,6 +320,8 @@ void initComponentScriptBindings()
     BIND_MEMBER(LongRangeRadar, on_probe_link);
     BIND_MEMBER(LongRangeRadar, on_probe_unlink);
     sp::script::ComponentHandler<ShareShortRangeRadar>::name("share_short_range_radar");
+    sp::script::ComponentHandler<AllowRadarLink>::name("allow_radar_link");
+    BIND_MEMBER(AllowRadarLink, owner);
 
     sp::script::ComponentHandler<Hull>::name("hull");
     BIND_MEMBER(Hull, current);

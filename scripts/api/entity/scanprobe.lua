@@ -6,21 +6,23 @@
 --- Example: probe = ScanProbe():setSpeed(1500):setLifetime(60 * 30):setTarget(10000,10000):onArrival(function() print("Probe arrived!") end)
 function ScanProbe()
     local e = createEntity()
-    e.components.lifetime = {lifetime=60*10}
     --TODO: e.move_to = {speed=1000, target=??}
     --TODO: e.allow_radar_link = {owner=??}
     --TODO: e.faction = ???
     setRadarSignatureInfo(0.0, 0.2, 0.0);
     --TODO: setCallSign(string(getMultiplayerId()) + "P");
-    e.components.radar_trace = {
-        icon="radar/probe.png",
-        min_size=10.0,
-        max_size=10.0,
-        color={96, 192, 128, 255},
-        rotate=false,
+    e.components = {
+        lifetime = {lifetime=60*10},
+        radar_trace = {
+            icon="radar/probe.png",
+            min_size=10.0,
+            max_size=10.0,
+            color={96, 192, 128, 255},
+            rotate=false,
+        },
+        hull = {max=1, current=1},
+        share_short_range_radar = {},
     }
-    e.components.hull = {max=1, current=1}
-    e.components.share_short_range_radar = {}
     local model = "SensorBuoyMKI"
     local idx = irandom(1, 3)
     if idx == 2 then model = "SensorBuoyMKII" end
@@ -70,14 +72,13 @@ function Entity:setTarget()
 end
 --- Sets this ScanProbe's owner SpaceObject.
 --- Example: probe:setOwner(owner)
-function Entity:setOwner()
-    --[[TODO
-    // Set the probe's faction and ship ownership based on the passed object.
-    auto f = owner.getComponent<Faction>();
-    if (f)
-        entity.getOrAddComponent<Faction>().entity = f->entity;
-    entity.getOrAddComponent<AllowRadarLink>().owner = owner;
-    --]]
+function Entity:setOwner(owner)
+    if self.components.allow_radar_link then self.components.allow_radar_link.owner = owner end
+    if owner and owner:isValid() and owner.components.faction then
+        self.components.faction.entity = owner.components.faction.entity
+    else
+        self.components.faction = nil
+    end
     return self
 end
 --- Defines a function to call when this ScanProbe arrives to its target coordinates.
