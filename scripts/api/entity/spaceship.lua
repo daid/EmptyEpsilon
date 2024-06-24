@@ -771,21 +771,21 @@ end
 --- Ship functions can dynamically modify this SpaceShip's radar signature values.
 --- Example: ship:getDynamicRadarSignatureGravity()
 function Entity:getDynamicRadarSignatureGravity()
-    --TODO
+    if self.components.dynamic_radar_signature then return self.components.dynamic_radar_signature.gravity end
     return 0.0
 end
 --- Returns the dynamic electrical radar signature value emitted by this SpaceShip.
 --- Ship functions can dynamically modify this SpaceShip's radar signature values.
 --- Example: ship:getDynamicRadarSignatureElectrical()
 function Entity:getDynamicRadarSignatureElectrical()
-    --TODO
+    if self.components.dynamic_radar_signature then return self.components.dynamic_radar_signature.electrical end
     return 0.0
 end
 --- Returns the dynamic biological radar signature value emitted by this SpaceShip.
 --- Ship functions can dynamically modify this SpaceShip's radar signature values.
 --- Example: ship:getDynamicRadarSignatureBiological()
 function Entity:getDynamicRadarSignatureBiological()
-    --TODO
+    if self.components.dynamic_radar_signature then return self.components.dynamic_radar_signature.biological end
     return 0.0
 end
 --- Broadcasts a message from this SpaceShip to the comms of all other SpaceShips matching the threshold.

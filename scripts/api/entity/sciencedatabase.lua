@@ -69,8 +69,11 @@ end
 --- Multiple entries can have the same name.
 --- Returns nil if no entry is found.
 --- Example: entry:getEntryByName("canines") -- returns the "Canines" entry in sdb
-function Entity:getEntryByName()
-    --TODO
+function Entity:getEntryByName(name)
+    name = string.lower(name)
+    for idx, e in ipairs(getEntitiesWithComponent("science_database")) do
+        if e.components.science_database.parent == self and string.lower(e.components.science_database.name) == name then return e end
+    end
     return nil
 end
 --- Returns a 1-indexed table of all child entries in this ScienceDatabase entry, in arbitrary order.
@@ -79,14 +82,16 @@ end
 --- entry = getScienceDatabases()[1] -- returns the first parentless entry
 --- entry:getEntries() -- returns all of its child entries
 function Entity:getEntries()
-    --TODO
-    return {}
+    local result = {}
+    for idx, e in ipairs(getEntitiesWithComponent("science_database")) do
+        if e.components.science_database.parent == self then table.insert(result, e) end
+    end
+    return result
 end
 --- Returns true if this ScienceDatabase entry has child entries.
 --- Example: entry:hasEntries()
 function Entity:hasEntries()
-    --TODO
-    return false
+    return #getEntries() > 0
 end
 --- Adds a key/value pair to this ScienceDatabase entry's key/value data.
 --- The Database view's center column displays all key/value data when its entry is selected.
@@ -111,7 +116,12 @@ end
 --- entry:setKeyValue("Arms","2") -- adds "Arms","2" to the entry's key/value data
 function Entity:setKeyValue(key, value)
     if not self.components.science_database then return self end
-
+    for n=1,#self.components.science_database do
+        if self.components.science_database[n].key == key then
+            self.components.science_database[n].value = value
+            return self
+        end
+    end
     return self:addKeyValue(key, value)
 end
 --- Returns the value of the first matching case-insensitive key found in this ScienceDatabase entry's key/value data.

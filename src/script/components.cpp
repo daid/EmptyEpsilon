@@ -247,6 +247,10 @@ void initComponentScriptBindings()
     BIND_MEMBER(RawRadarSignatureInfo, gravity);
     BIND_MEMBER(RawRadarSignatureInfo, electrical);
     BIND_MEMBER(RawRadarSignatureInfo, biological);
+    sp::script::ComponentHandler<DynamicRadarSignatureInfo>::name("dynamic_radar_signature");
+    BIND_MEMBER(DynamicRadarSignatureInfo, gravity);
+    BIND_MEMBER(DynamicRadarSignatureInfo, electrical);
+    BIND_MEMBER(DynamicRadarSignatureInfo, biological);
 
     sp::script::ComponentHandler<MeshRenderComponent>::name("mesh_render");
     BIND_MEMBER_NAMED(MeshRenderComponent, mesh.name, "mesh");

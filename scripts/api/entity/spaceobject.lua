@@ -339,25 +339,25 @@ end
 --- - Biological signatures amplify noise on the red and green bands.
 --- Example: obj:setRadarSignatureInfo(0.0, 0.5, 1.0) -- a radar signature of 0 gravitational, 0.5 electrical, and 1.0 biological
 function Entity:setRadarSignatureInfo(gravity, electrical, biological)
-    --TODO
+    self.components.radar_signature = {gravity=gravity, electrical=electrical, biological=biological}
     return self
 end
 --- Returns this SpaceObject's gravitational radar signature value.
 --- Example: obj:getRadarSignatureGravity()
 function Entity:getRadarSignatureGravity()
-    --TODO
+    if self.components.radar_signature then return self.components.radar_signature.gravity end
     return 0.0
 end
 --- Returns this SpaceObject's electical radar signature value.
 --- Example: obj:getRadarSignatureElectrical()
 function Entity:getRadarSignatureElectrical()
-    --TODO
+    if self.components.radar_signature then return self.components.radar_signature.electrical end
     return 0.0
 end
 --- Returns this SpaceObject's biological radar signature value.
 --- Example: obj:getRadarSignatureBiological()
 function Entity:getRadarSignatureBiological()
-    --TODO
+    if self.components.radar_signature then return self.components.radar_signature.biological end
     return 0.0
 end
 --- Sets this SpaceObject's scanning complexity (number of bars in the scanning minigame) and depth (number of scanning minigames to complete until fully scanned), respectively.
