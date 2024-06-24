@@ -1,11 +1,11 @@
 -- Name: Fighter race - Mines
--- Type: Race
+-- Type: Simulations
 -- Description: Mine field! How fast you can go? Going around the mine field is not a solution, it will break your fighter! 
 -- Variation[Challenging]: Even more mines...
 -- Variation[Impossible]: And more mines...
 
 require("utils.lua")
-require("utils_odysseus.lua")
+--require("utils_odysseus.lua")
 
 
 function init()
@@ -13,13 +13,13 @@ function init()
 	plotZ = delayChecks
 	delayCheck = 0
 
-		simulation01 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(0, 500)
+		simulation01 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Comet Starfighter"):setPosition(0, 500)
 		simulation01:setCallSign("Sim01"):setAutoCoolant(true)
 		
-		simulation02 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(0, 0)
+		simulation02 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Comet Starfighter"):setPosition(0, 0)
 		simulation02:setCallSign("Sim02"):setAutoCoolant(true)
 
-		simulation03 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(0, -500)
+		simulation03 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Comet Starfighter"):setPosition(0, -500)
 		simulation03:setCallSign("Sim03"):setAutoCoolant(true)
 		
 		startZone = Zone():setColor(0, 0, 255)
