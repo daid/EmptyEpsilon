@@ -107,7 +107,7 @@ void HelmsScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        auto angle = ((keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f) + ((keys.helms_turn_right_fine.getValue() - keys.helms_turn_left_fine.getValue()) * 0.1f);
+        auto angle = ((keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f) + ((keys.helms_turn_right_fine.getValue() - keys.helms_turn_left_fine.getValue()) * 1.0f);
         if (angle != 0.0f)
         {
             my_spaceship->commandTargetRotation(my_spaceship->getRotation() + angle);
