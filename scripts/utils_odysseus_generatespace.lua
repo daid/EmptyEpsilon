@@ -42,6 +42,9 @@ function setUpPlanet(name, px, py, planeShiftModifier)
 	if selected_planet.texture.cloud ~= nil then
 		planet_fodder:setPlanetCloudTexture(selected_planet.texture.cloud)
 	end
+    if selected_planet.texture.atmosphere ~= nil then
+		planet_fodder:setPlanetAtmosphereTexture(selected_planet.texture.atmosphere)
+	end
 	if selected_planet.color ~= nil then
 		planet_fodder:setPlanetAtmosphereColor(selected_planet.color.red,selected_planet.color.green,selected_planet.color.blue)
 	end
@@ -72,13 +75,13 @@ function planetList()
             axialrotation = 92,
             texture = {
                 surface = "planets/planet-desert-2.png",
-                cloud = "planets/clouds-1.png", 
+ --               cloud = "planets/clouds-1.png", 
                 atmosphere = "planets/atmosphere.png"
             },
             color = {
-                red = random(0.6,1), 
-                green = random(0.4,0.6), 
-                blue = random(0,0.2)
+                red = 0.6, 
+                green = 0.2, 
+                blue = 0.1
             },
         })
         table.insert(planet_list, {
@@ -89,14 +92,14 @@ function planetList()
             axialrotation = 23,
             texture = {
                 surface = "planets/planet-1.png",
-                cloud = "planets/clouds-blue.png", 
---                atmosphere = "planets/atmosphere.png"
+                cloud = "planets/clouds-1.png", 
+                atmosphere = "planets/atmosphere.png"
             },
---            color = {
---                red = 0.2, 
---                green = 0.2, 
---                blue = 0.8,
---            },
+            color = {
+                red = 0.2, 
+                green = 0.2, 
+                blue = 0.8,
+            },
         })
         table.insert(planet_list, {
             -- P-PU80-GL38, puffy planet
@@ -105,8 +108,7 @@ function planetList()
             radius = 3822,
             axialrotation = 98,
             texture = {
-                surface = "planets/gas-3.png",
---                cloud = "planets/clouds-1.png", 
+                surface = "planets/gas-1.png",
             },
         })
 
@@ -142,7 +144,6 @@ function planetList()
             axialrotation = 87,
             texture = {
                 surface = "planets/moon-3.png",
---                cloud = "planets/clouds-1.png", 
                 atmosphere = "planets/atmosphere.png"
             },
         })
@@ -216,7 +217,7 @@ function planetList()
             radius = 11785,
             axialrotation = 75,
             texture = {
-                surface = "planets/gas-1.png",
+                surface = "planets/gas-3.png",
             },
         })
 end

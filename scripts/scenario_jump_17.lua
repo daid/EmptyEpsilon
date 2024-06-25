@@ -27,7 +27,7 @@ function init()
       generateSpace(sx, sy)
 
 
-	  planet = setUpPlanet("P-LA05-WE50", 105000, 25000)
+	  planet = setUpPlanet("P-LA05-WE50", 105000, 25000, 0.8)
 	  
 
 	

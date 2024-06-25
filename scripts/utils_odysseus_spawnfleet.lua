@@ -46,7 +46,7 @@ end
 function setFleetTable()
 
     fleet_list = {}
-    table.insert(fleet_list,1,{spawnorder=1,name='UNREC-253',military=true,callsign="ESS Aurora",faction="EOC Starfleet",xoff=1,yoff=1,aiset="missilevolley",template="Stellar Class Battlecruiser",fleetForm=5,fleetVariation={"A", "B", "C"}})
+    table.insert(fleet_list,1,{spawnorder=1,name='UNREC-253',military=true,callsign="ESS Aurora",faction="EOC Starfleet",xoff=1,yoff=1,aiset="missilevolley",template="Stellar Class Battlecruiser",fleetForm=5,fleetVariation={"A", "B"}})
     table.insert(fleet_list,2,{spawnorder=2,name='UNREC-364',military=true,callsign="ESS Warrior",faction="EOC Starfleet",xoff=-12000,yoff=-1500,aiset="missilevolley",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
     table.insert(fleet_list,3,{spawnorder=3,name='UNREC-281',military=true,callsign="ESS Inferno",faction="EOC Starfleet",xoff=-8000,yoff=-4500,aiset="missilevolley",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
     table.insert(fleet_list,4,{spawnorder=4,name='UNREC-307',military=true,callsign="CSS Taurus",faction="EOC Starfleet",xoff=-4000,yoff=-3000,aiset="missilevolley",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B"}})
@@ -72,7 +72,7 @@ function setFleetTable()
     table.insert(fleet_list,24,{spawnorder=24,name='UNREC-264',military=true,callsign="ESS Envoy",faction="EOC Starfleet",xoff=-4000,yoff=3000,aiset="missilevolley",template="Helios Class Corvette",fleetForm=5,fleetVariation={"A", "B", }})
     table.insert(fleet_list,25,{spawnorder=25,name='UNREC-327',military=true,callsign="ESS Valor",faction="EOC Starfleet",xoff=-8000,yoff=4500,aiset="missilevolley",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
     table.insert(fleet_list,26,{spawnorder=26,name='UNREC-278',military=true,callsign="ESS Harbinger",faction="EOC Starfleet",xoff=-12000,yoff=1500,aiset="missilevolley",template="Eclipse Class Frigate",fleetForm=5,fleetVariation={"A", "B"}})
-    table.insert(fleet_list,27,{spawnorder=27,name='UNREC-275',military=true,callsign="ESS Halo",faction="EOC Starfleet",xoff=-14000,yoff=0,aiset="missilevolley",template="Stellar Class Battlecruiser",fleetForm=5,fleetVariation={"A", "B", "C"}})
+    table.insert(fleet_list,27,{spawnorder=27,name='UNREC-275',military=true,callsign="ESS Halo",faction="EOC Starfleet",xoff=-14000,yoff=0,aiset="missilevolley",template="Stellar Class Battlecruiser",fleetForm=5,fleetVariation={"A", "B"}})
 
     fleetSize = 27
 
