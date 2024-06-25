@@ -54,12 +54,12 @@ end
 
 function cleanup_confirm()
 	local scdistance = distance(starcaller, mother)
-	if scdistance < 10000 then 
+	if scdistance < 20000 then 
 		addGMFunction("Cancel destruction", cleanup_cancel)
 		addGMFunction("Confirm destruction", cleanup_prep)
 		removeGMFunction("Launch destruction")
 	else
-		addGMMessage("Distance too far, minimum distance 10 000 ")
+		addGMMessage("Distance too far, minimum distance 20 000 ")
 	end
 end
 
