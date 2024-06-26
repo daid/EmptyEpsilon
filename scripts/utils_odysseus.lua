@@ -26,6 +26,7 @@ require("utils_odysseus_generatespace.lua")
 -- spawn the ESS Odysseus
 local orotation = irandom(0, 360)
 odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Helios Corvette"):setCallSign("ESS Odysseus"):setPosition(0, 0):commandTargetRotation(orotation):setHeading(orotation+90):setCanBeDestroyed(false):setCanSelfDestruct(false)
+addGMFunction(_("odysseusmanagement", "Check Odysseus Status"), function() checkOdysseusStatus() end)
 setFighterSyncButtons()
 --Sets suffix index for generating npc ship callsigns. Resets for every scenario
 suffix_index = 100
@@ -34,6 +35,20 @@ status_essody18 = 3
 status_essody23 = 3
 status_essody36 = 3
 status_starcaller = 3
+
+function checkOdysseusStatus()
+  hullHealth = odysseus:getHull()
+  hullHealthMax = string.format("%.2f", odysseus:getHullMax())
+  impulseHealth = string.format("%.2f", odysseus:getSystemHealth("impulse"))
+  reactorHealth = string.format("%.2f", odysseus:getSystemHealth("reactor"))
+  beamweaponsHealth = string.format("%.2f", odysseus:getSystemHealth("beamweapons"))
+  missilesystemHealth = string.format("%.2f", odysseus:getSystemHealth("missilesystem"))
+
+--  odysseusHealth = "Hull: " .. hullHealth .. "\nImpulse health: " .. impulseHealth .. "\nReactor health: " .. reactorHealth .. "\nBeams health: " .. beamweaponsHealth .. "\nMissiles health: " .. missilesystemHealth .. "\nstatus_essody18: " .. status_essody18 .. "\nstatus_essody23: " .. status_essody23 .. "\nstatus_essody36: " .. status_essody36 .. "\nstatus_starcaller: " .. status_starcaller
+fighterStatuses = "0 = Broken, 1 = 'Docked, 2 = Launched, 3 = Not synced from Backend"
+odysseusStatus = "Hull: " .. hullHealth .. "/" .. hullHealthMax .. "\nImpulse health: " .. impulseHealth .. "\nReactor: " .. reactorHealth .."/1.0\n" .. fighterStatuses .. "\nstatus_essody18: " .. status_essody18 .. "\nstatus_essody23: " .. status_essody23 .. "\nstatus_essody36: " .. status_essody36 .. "\nstatus_starcaller: " .. status_starcaller
+  addGMMessage(odysseusStatus)
+end
 
 
 function update(delta)

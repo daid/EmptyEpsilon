@@ -41,19 +41,20 @@ function init()
 
   	-- Generate scenario map
 	  generateSpace(sx, sy)
-	  for n=1, 55 do
+	  for n=1, 50 do
 		local r = irandom(0, 360)
 		local distance = irandom(1000, 20000)
 		x1 = lx+3000 + math.cos(r / 180 * math.pi) * distance
 		y1 = ly-5000 + math.sin(r / 180 * math.pi) * distance
-		Asteroid():setPosition(x1, y1):setSize(random(200, 2000))
+		Asteroid():setPosition(x1, y1):setSize(random(100, 500))
 	end
 
 
 	  planet = setUpPlanet("AS-OH108", lx, ly, 0.7)
-	  Planet():setPosition(lx-2000, ly+2300):setPlanetRadius(700):setDistanceFromMovementPlane(-500):setPlanetSurfaceTexture("planets/asteroid.png")
+	  Nebula():setPosition(lx-400, ly+7500)
+	  Planet():setPosition(lx-3000, ly+2300):setPlanetRadius(700):setDistanceFromMovementPlane(500):setPlanetSurfaceTexture("planets/asteroid.png")
 	  Planet():setPosition(lx+4000, ly+2300):setPlanetRadius(500):setDistanceFromMovementPlane(-300):setPlanetSurfaceTexture("planets/asteroid.png")
-	  Planet():setPosition(lx+2000, ly-2300):setPlanetRadius(600):setDistanceFromMovementPlane(-300):setPlanetSurfaceTexture("planets/asteroid.png")
+	  Planet():setPosition(lx+3000, ly-2300):setPlanetRadius(600):setDistanceFromMovementPlane(300):setPlanetSurfaceTexture("planets/asteroid.png")
 	  Planet():setPosition(lx+6000, ly+2300):setPlanetRadius(500):setDistanceFromMovementPlane(200):setPlanetSurfaceTexture("planets/asteroid.png")
 	  Planet():setPosition(lx-4000, ly+2300):setPlanetRadius(300):setDistanceFromMovementPlane(-100):setPlanetSurfaceTexture("planets/asteroid.png")
 	 

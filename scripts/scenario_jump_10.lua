@@ -26,7 +26,7 @@ function init()
 	-- Generate scenario map
 	generateSpace(sx, sy)
 
-	planet = setUpPlanet("P-OC46-DA97", ox+105000, oy+25000)
+	planet = setUpPlanet("P-OC46-DA97", ox+85000, oy+25000)
 
 
 end

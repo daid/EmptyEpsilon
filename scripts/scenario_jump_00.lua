@@ -12,7 +12,8 @@ function init()
 	odysseus:setLandingPadDocked(1)
 	odysseus:setLandingPadDocked(2)
 	odysseus:setLandingPadDocked(3)
-	
+	odysseus:setLandingPadDestroyed(4)
+
     addGMFunction(_("buttonGM", "OC - Machine - S"), function() spawnwave(2) end)
 	addGMFunction(_("buttonGM", "OC - Machine - Backup XS"), function() spawnwave(1) end)
 
