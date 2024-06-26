@@ -37,7 +37,7 @@ function init()
 
 
 	addGMFunction(_("Enemy", "OC - Machine - XL + Mother"), function() spawnwave(6, "idle") end)
-	addGMFunction(_("Enemy", "OC - Machine - M"), function() spawnwave(3, "idle") end)
+	addGMFunction(_("Enemy", "OC - Machine - XL"), function() spawnwave(5, "idle") end)
 
   -- Generate scenario map
 	destroyEnemy = false
