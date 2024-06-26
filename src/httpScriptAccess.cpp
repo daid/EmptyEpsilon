@@ -12,11 +12,9 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
     server.addURLHandler("/exec.lua", [](const sp::io::http::Server::Request& request) -> string
     {
         if (!gameGlobalInfo)
-        {
             return "{\"ERROR\": \"No game\"}";
-        }
-        sp::script::Environment env;
-        setupScriptEnvironment(env);
+
+        sp::script::Environment env(gameGlobalInfo->script_environment_base.get());
         auto result = env.run<string>(request.post_data);
         string output;
         if (result.isErr()) {

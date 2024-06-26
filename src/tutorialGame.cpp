@@ -42,18 +42,18 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
 
     gameGlobalInfo->startScenario(filename);
 
-    gameGlobalInfo->main_script->setGlobal("tutorial_setPlayerShip", &TutorialGame::setPlayerShip);
-    gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToMainScreen", &TutorialGame::switchViewToMainScreen);
-    gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToTactical", &TutorialGame::switchViewToTactical);
-    gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToLongRange", &TutorialGame::switchViewToLongRange);
-    gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToScreen", &TutorialGame::switchViewToScreen);
-    gameGlobalInfo->main_script->setGlobal("tutorial_showMessage", &TutorialGame::showMessage);
-    gameGlobalInfo->main_script->setGlobal("tutorial_setMessageToTopPosition", &TutorialGame::setMessageToTopPosition);
-    gameGlobalInfo->main_script->setGlobal("tutorial_setMessageToBottomPosition", &TutorialGame::setMessageToBottomPosition);
-    gameGlobalInfo->main_script->setGlobal("tutorial_onNext", &TutorialGame::onNext);
-    gameGlobalInfo->main_script->setGlobal("tutorial_finish", &TutorialGame::finish);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setPlayerShip", &TutorialGame::setPlayerShip);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToMainScreen", &TutorialGame::switchViewToMainScreen);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToTactical", &TutorialGame::switchViewToTactical);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToLongRange", &TutorialGame::switchViewToLongRange);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToScreen", &TutorialGame::switchViewToScreen);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_showMessage", &TutorialGame::showMessage);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setMessageToTopPosition", &TutorialGame::setMessageToTopPosition);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setMessageToBottomPosition", &TutorialGame::setMessageToBottomPosition);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_onNext", &TutorialGame::onNext);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_finish", &TutorialGame::finish);
 
-    auto res = gameGlobalInfo->main_script->call<void>("tutorial_init");
+    auto res = gameGlobalInfo->main_scenario_script->call<void>("tutorial_init");
     LuaConsole::checkResult(res);
 }
 
@@ -223,18 +223,18 @@ void TutorialGame::finish()
 
         gameGlobalInfo->startScenario("tutorial.lua");
 
-        gameGlobalInfo->main_script->setGlobal("tutorial_setPlayerShip", &TutorialGame::setPlayerShip);
-        gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToMainScreen", &TutorialGame::switchViewToMainScreen);
-        gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToTactical", &TutorialGame::switchViewToTactical);
-        gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToLongRange", &TutorialGame::switchViewToLongRange);
-        gameGlobalInfo->main_script->setGlobal("tutorial_switchViewToScreen", &TutorialGame::switchViewToScreen);
-        gameGlobalInfo->main_script->setGlobal("tutorial_showMessage", &TutorialGame::showMessage);
-        gameGlobalInfo->main_script->setGlobal("tutorial_setMessageToTopPosition", &TutorialGame::setMessageToTopPosition);
-        gameGlobalInfo->main_script->setGlobal("tutorial_setMessageToBottomPosition", &TutorialGame::setMessageToBottomPosition);
-        gameGlobalInfo->main_script->setGlobal("tutorial_onNext", &TutorialGame::onNext);
-        gameGlobalInfo->main_script->setGlobal("tutorial_finish", &TutorialGame::finish);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setPlayerShip", &TutorialGame::setPlayerShip);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToMainScreen", &TutorialGame::switchViewToMainScreen);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToTactical", &TutorialGame::switchViewToTactical);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToLongRange", &TutorialGame::switchViewToLongRange);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToScreen", &TutorialGame::switchViewToScreen);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_showMessage", &TutorialGame::showMessage);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setMessageToTopPosition", &TutorialGame::setMessageToTopPosition);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setMessageToBottomPosition", &TutorialGame::setMessageToBottomPosition);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_onNext", &TutorialGame::onNext);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_finish", &TutorialGame::finish);
 
-        auto res = gameGlobalInfo->main_script->call<void>("tutorial_init");
+        auto res = gameGlobalInfo->main_scenario_script->call<void>("tutorial_init");
         LuaConsole::checkResult(res);
     }else{
         disconnectFromServer();

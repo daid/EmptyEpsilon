@@ -110,8 +110,8 @@ void GameGlobalInfo::update(float delta)
     }
     elapsed_time += delta;
 
-    if (main_script && main_script_error_count < 5) {
-        auto res = main_script->call<void>("update", delta);
+    if (main_scenario_script && main_script_error_count < 5) {
+        auto res = main_scenario_script->call<void>("update", delta);
         if (res.isErr() && res.error() != "Not a function") {
             LuaConsole::checkResult(res);
             main_script_error_count += 1;
@@ -150,15 +150,15 @@ string GameGlobalInfo::getNextShipCallsign()
 
 void GameGlobalInfo::execScriptCode(const string& code)
 {
-    if (main_script) {
-        auto res = main_script->run<void>(code);
+    if (main_scenario_script) {
+        auto res = main_scenario_script->run<void>(code);
         LuaConsole::checkResult(res);
     }
 }
 
 bool GameGlobalInfo::allowNewPlayerShips()
 {
-    auto res = main_script->call<bool>("allowNewPlayerShips");
+    auto res = main_scenario_script->call<bool>("allowNewPlayerShips");
     LuaConsole::checkResult(res);
     return res.value();
 }
@@ -184,8 +184,8 @@ namespace sp::script {
 std::vector<GameGlobalInfo::ShipSpawnInfo> GameGlobalInfo::getSpawnablePlayerShips()
 {
     std::vector<GameGlobalInfo::ShipSpawnInfo> info;
-    if (main_script) {
-        auto res = main_script->call<std::vector<GameGlobalInfo::ShipSpawnInfo>>("getSpawnablePlayerShips");
+    if (main_scenario_script) {
+        auto res = main_scenario_script->call<std::vector<GameGlobalInfo::ShipSpawnInfo>>("getSpawnablePlayerShips");
         LuaConsole::checkResult(res);
         if (res.isOk())
             info = res.value();
@@ -213,8 +213,8 @@ namespace sp::script {
 std::vector<GameGlobalInfo::ObjectSpawnInfo> GameGlobalInfo::getGMSpawnableObjects()
 {
     std::vector<GameGlobalInfo::ObjectSpawnInfo> info;
-    if (main_script) {
-        auto res = main_script->call<std::vector<GameGlobalInfo::ObjectSpawnInfo>>("getSpawnableGMObjects");
+    if (main_scenario_script) {
+        auto res = main_scenario_script->call<std::vector<GameGlobalInfo::ObjectSpawnInfo>>("getSpawnableGMObjects");
         LuaConsole::checkResult(res);
         if (res.isOk())
             info = res.value();
@@ -235,8 +235,9 @@ void GameGlobalInfo::reset()
     sp::ecs::Entity::destroyAllEntities();
     foreach(SpaceObject, o, space_object_list)
         o->destroy();
-    main_script = nullptr;
+    main_scenario_script = nullptr;
     additional_scripts.clear();
+    script_environment_base = nullptr;
 
     elapsed_time = 0.0f;
     callsign_counter = 0;
@@ -300,24 +301,26 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     i18n::load("locale/science_db." + PreferencesManager::get("language", "en") + ".po");
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
 
-    main_script = std::make_unique<sp::script::Environment>();
+    script_environment_base = std::make_unique<sp::script::Environment>();
     main_script_error_count = 0;
-    if (setupScriptEnvironment(*main_script.get())) {
-        auto res = main_script->runFile<void>("model_data.lua");
+    if (setupScriptEnvironment(*script_environment_base.get())) {
+        auto res = script_environment_base->runFile<void>("model_data.lua");
         LuaConsole::checkResult(res);
         if (!res.isErr()) {
-            res = main_script->runFile<void>("factionInfo.lua");
+            res = script_environment_base->runFile<void>("factionInfo.lua");
             LuaConsole::checkResult(res);
         }
         if (!res.isErr()) {
-            res = main_script->runFile<void>("shipTemplates.lua");
+            res = script_environment_base->runFile<void>("shipTemplates.lua");
             LuaConsole::checkResult(res);
         }
         if (!res.isErr()) {
-            res = main_script->runFile<void>("science_db.lua");
+            res = script_environment_base->runFile<void>("science_db.lua");
             LuaConsole::checkResult(res);
         }
     }
+
+    main_scenario_script = std::make_unique<sp::script::Environment>(script_environment_base.get());
     //TODO: int max_cycles = PreferencesManager::get("script_cycle_limit", "0").toInt();
     //TODO: if (max_cycles > 0)
     //TODO:     script->setMaxRunCycles(max_cycles);
@@ -325,10 +328,10 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     // Initialize scenario settings.
     setScenarioSettings(filename, new_settings);
 
-    auto res = main_script->runFile<void>(filename);
+    auto res = main_scenario_script->runFile<void>(filename);
     LuaConsole::checkResult(res);
     if (res.isOk()) {
-        res = main_script->call<void>("init");
+        res = main_scenario_script->call<void>("init");
         LuaConsole::checkResult(res);
     }
 

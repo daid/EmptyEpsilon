@@ -352,15 +352,13 @@ bool CommsSystem::openChannel(sp::ecs::Entity player, sp::ecs::Entity target)
     if (script_name != "")
     {
         auto& env = player.addComponent<CommsTransmitterEnvironment>();
-        env.script_environment = std::make_unique<sp::script::Environment>();
-        if (setupScriptEnvironment(*env.script_environment)) {
-            // consider "player" deprecated, but keep it for a long time
-            env.script_environment->setGlobal("player", player);
-            env.script_environment->setGlobal("comms_source", player);
-            env.script_environment->setGlobal("comms_target", target);
-            i18n::load("locale/" + script_name.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
-            LuaConsole::checkResult(env.script_environment->runFile<void>(script_name));
-        }
+        env.script_environment = std::make_unique<sp::script::Environment>(gameGlobalInfo->script_environment_base.get());
+        // consider "player" deprecated, but keep it for a long time
+        env.script_environment->setGlobal("player", player);
+        env.script_environment->setGlobal("comms_source", player);
+        env.script_environment->setGlobal("comms_target", target);
+        i18n::load("locale/" + script_name.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+        LuaConsole::checkResult(env.script_environment->runFile<void>(script_name));
     }else if (receiver->callback)
     {
         receiver->callback.setGlobal("comms_source", player);

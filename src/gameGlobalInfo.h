@@ -115,7 +115,8 @@ public:
 
     //List of extra scripts that run next to the main script.
     std::vector<std::unique_ptr<sp::script::Environment>> additional_scripts;
-    std::unique_ptr<sp::script::Environment> main_script;
+    std::unique_ptr<sp::script::Environment> script_environment_base;
+    std::unique_ptr<sp::script::Environment> main_scenario_script;
 private:
     P<GameStateLogger> state_logger;
     sp::ecs::Entity victory_faction;
