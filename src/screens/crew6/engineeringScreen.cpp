@@ -319,7 +319,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                 float effectiveness = system->getSystemEffectiveness();
                 float health_max = system->health_max;
                 if (health_max < 1.0f)
-                    addSystemEffect("Maximal health", toNearbyIntString(health_max * 100) + "%");
+                    addSystemEffect(tr("Engineer", "Maximal health"), toNearbyIntString(health_max * 100) + "%");
                 switch(selected_system)
                 {
                 case ShipSystem::Type::Reactor:
@@ -334,7 +334,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                     if (auto beamweapons = my_spaceship.getComponent<BeamWeaponSys>()) {
                         for(auto& mount : beamweapons->mounts) {
                             if (mount.turret_arc > 0) {
-                                addSystemEffect("Turret rotation rate", toNearbyIntString(effectiveness * 100) + "%");
+                                addSystemEffect(tr("Engineer", "Turret rotation rate"), toNearbyIntString(effectiveness * 100) + "%");
                                 break;
                             }
                         }
