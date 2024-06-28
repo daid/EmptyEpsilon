@@ -3842,7 +3842,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for index, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if obj.components.docking_bay ~= nil and not comms_target:isEnemy(obj) then
 			if comms_target:getTypeName() ~= "Defense platform" then
 				addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 					setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
@@ -4764,7 +4764,7 @@ function friendlyServiceJonqueComms(comms_data)
 			addCommsReply(_("Back"), commsServiceJonque)
 	end)
 	for index, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if obj.components.docking_bay ~= nil and not comms_target:isEnemy(obj) then
 			if comms_target:getTypeName() ~= "Defense platform" then
 				addCommsReply(string.format(_("shipAssist-comms","Dock at %s"),obj:getCallSign()), function()
 					setCommsMessage(string.format(_("shipAssist-comms","Docking at %s."),obj:getCallSign()))

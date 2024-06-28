@@ -12,16 +12,16 @@ function SupplyDrop()
             e.components[k] = table.deepcopy(v)
         end
     end
-    e.physics = {type="Sensor"}
+    e.components.physics = {type="Sensor"}
 
-    e.radar_trace = {
+    e.components.radar_trace = {
         color={100, 200, 255},
         icon="radar/blip.png",
         radius=120.0,
         rotate=false,
         color_by_faction=true,
     }
-    e.pickup = {}
+    e.components.pickup = {}
 
     return e
 end

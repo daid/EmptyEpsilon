@@ -79,7 +79,7 @@ function commsShipFriendly(comms_source, comms_target)
         end
     )
     for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-        if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+        if obj.components.docking_bay ~= nil and not comms_target:isEnemy(obj) then
             addCommsReply(
                 string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()),
                 function(comms_source, comms_target)

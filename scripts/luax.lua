@@ -158,7 +158,7 @@ end
 -- @usage
 -- -- (1) Generate a list of all Kraylor CpuShips
 -- local function isKraylorCpuShip(obj)
---   return obj.typeName == "CpuShip" and obj:getFaction() == "Kraylor"
+--   return obj.components.ai_controller ~= nil and obj:getFaction() == "Kraylor"
 -- end
 -- local enemies = getAllObjects()
 -- table.filter(enemies, isKraylorCpuShip)

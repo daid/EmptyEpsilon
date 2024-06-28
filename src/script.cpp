@@ -256,6 +256,10 @@ static int luaCreateAdditionalScript(lua_State* L)
             i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
             auto res = (*ptr)->runFile<void>(filename);
             LuaConsole::checkResult(res);
+            if (res.isOk()) {
+                res = (*ptr)->call<void>("init");
+                LuaConsole::checkResult(res);
+            }
             return 0;
         });
         lua_setfield(L, -2, "run");
@@ -273,9 +277,6 @@ static int luaCreateAdditionalScript(lua_State* L)
         lua_setfield(L, -2, "__metatable");
     }
     lua_setmetatable(L, -2);
-
-    auto res = env->call<void>("init");
-    LuaConsole::checkResult(res);
 
     gameGlobalInfo->additional_scripts.push_back(std::move(env));
     return 1;
