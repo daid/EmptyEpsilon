@@ -5499,7 +5499,7 @@ function devourPlanets()
 		local object_list = devourer:getObjectsInRange(300000)
 		local planets = {}
 		for i, obj in ipairs(object_list) do
-			if obj.typeName == "Planet" then
+			if obj.components.planet_render ~= nil then
 				table.insert(planets,obj)
 			end
 		end
@@ -5642,13 +5642,7 @@ function formerPlanetExplosion(px,py)
 							ej.obj = nil
 							ej.del = true
 						elseif ej.action == "explode" then
-							if obj.typeName == "Artifact" then
-								obj:explode()
-							else
-								local ex, ey = obj:getPosition()
-								obj:destroy()
-								ExplosionEffect():setPosition(ex,ey):setSize(100)
-							end
+							obj:explode()
 							ej.obj = nil
 							ej.del = true
 						end
@@ -5950,7 +5944,7 @@ function explodeDevourer()
 				local object_list = getObjectsInRadius(center_x, center_y, 300000)
 				local planet_count = 0
 				for i, obj in ipairs(object_list) do
-					if obj.typeName == "Planet" then
+					if obj.components.planet_render ~= nil then
 						planet_count = planet_count + 1
 					end
 				end

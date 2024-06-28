@@ -5651,13 +5651,13 @@ function farEnough(list,pos_x,pos_y,bubble)
 			far_enough = false
 			break
 		end
-		if list_item.typeName == "BlackHole" or list_item.typeName == "WormHole" then
+		if list_item.components.gravity then
 			if distance_away < 6000 then
 				far_enough = false
 				break
 			end
 		end
-		if list_item.typeName == "Planet" then
+		if list_item.components.planet_render then
 			if distance_away < 4000 then
 				far_enough = false
 				break
@@ -8342,20 +8342,20 @@ function shipDockNearby(return_function)
 	for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		local player_carrier = false
 		local template_name = ""
-		if obj.typeName == "PlayerSpaceship" then
+		if obj.components.player_control then
 			template_name = obj:getTypeName()
 			if template_name == "Benedict" or template_name == "Kiriya" then
 				player_carrier = true
 			end
 		end
 		local defense_platform = false
-		if obj.typeName == "CpuShip" then
+		if obj.components.ai_controller then
 			template_name = obj:getTypeName()
 			if template_name == "Defense platform" then
 				defense_platform = true
 			end
 		end
-		if (obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj)) or player_carrier or defense_platform then
+		if (obj.components.docking_bay and not comms_target:isEnemy(obj)) or player_carrier or defense_platform then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
@@ -9056,8 +9056,7 @@ function update(delta)
 					for idx, obj in ipairs(current_station:getObjectsInRange(station_sensor_range)) do
 						if obj ~= nil and obj:isValid() then
 							if obj:isEnemy(current_station) then
-								local obj_type_name = obj.typeName
-								if obj_type_name ~= nil and string.find(obj_type_name,"PlayerSpaceship") then
+								if obj.components.player_control then
 									warning_station[stn_faction] = current_station
 									warning_message[stn_faction] = string.format(_("helpfullWarning-shipLog", "[%s in %s] We detect one or more enemies nearby. At least one is of type %s"),current_station:getCallSign(),current_station:getSectorName(),obj:getTypeName())
 									current_station.proximity_warning = warning_message[stn_faction]
