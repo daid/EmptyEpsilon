@@ -3966,7 +3966,7 @@ function checkEasternernGap()
 		eastObjCount = 0
 		eastObjs = getObjectsInRadius(20000, 0, 1500)
 		for _, obj in ipairs(eastObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				eastObjCount = eastObjCount + 1
 			end
 		end
@@ -3977,28 +3977,28 @@ function checkEasternernGap()
 		ediv2s1 = 0	--division 2, section 1
 		eastObjs = getObjectsInRadius(20000, 375, 375)
 		for _, obj in ipairs(eastObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				ediv2s1 = ediv2s1 + 1
 			end
 		end
 		ediv2s2 = 0	--division 2, section 2
 		eastObjs = getObjectsInRadius(20000, -375, 375)
 		for _, obj in ipairs(eastObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				ediv2s2 = ediv2s2 + 1
 			end
 		end
 		ediv2s3 = 0	--division 3, section 3
 		eastObjs = getObjectsInRadius(20000, -1025, 375)
 		for _, obj in ipairs(eastObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				ediv2s3 = ediv2s3 + 1
 			end
 		end
 		ediv2s4 = 0	--division 4, section 4
 		eastObjs = getObjectsInRadius(20000, 1025, 375)
 		for _, obj in ipairs(eastObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				ediv2s4 = ediv2s4 + 1
 			end
 		end
@@ -4009,14 +4009,14 @@ function checkEasternernGap()
 		ediv1s1 = 0	--division 1, section 1
 		eastObjs = getObjectsInRadius(20000, 750, 750)
 		for _, obj in ipairs(eastObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				ediv1s1 = ediv1s1 + 1
 			end
 		end
 		ediv1s2 = 0	--division 1, section 2
 		eastObjs = getObjectsInRadius(20000, -750, 750)
 		for _, obj in ipairs(eastObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				ediv1s2 = ediv1s2 + 1
 			end
 		end
@@ -4032,7 +4032,7 @@ function checkWesternernGap()
 		westObjCount = 0
 		westObjs = getObjectsInRadius(-20000, 0, 1500)
 		for _, obj in ipairs(westObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				westObjCount = westObjCount + 1
 			end
 		end
@@ -4043,28 +4043,28 @@ function checkWesternernGap()
 		wdiv2s1 = 0	--division 2, section 1
 		westObjs = getObjectsInRadius(-20000, 375, 375)
 		for _, obj in ipairs(westObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				wdiv2s1 = wdiv2s1 + 1
 			end
 		end
 		wdiv2s2 = 0	--division 2, section 2
 		westObjs = getObjectsInRadius(-20000, -375, 375)
 		for _, obj in ipairs(westObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				wdiv2s2 = wdiv2s2 + 1
 			end
 		end
 		wdiv2s3 = 0	--division 3, section 3
 		westObjs = getObjectsInRadius(-20000, -1025, 375)
 		for _, obj in ipairs(westObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				wdiv2s3 = wdiv2s3 + 1
 			end
 		end
 		wdiv2s4 = 0	--division 4, section 4
 		westObjs = getObjectsInRadius(-20000, 1025, 375)
 		for _, obj in ipairs(westObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				wdiv2s4 = wdiv2s4 + 1
 			end
 		end
@@ -4075,14 +4075,14 @@ function checkWesternernGap()
 		wdiv1s1 = 0	--division 1, section 1
 		westObjs = getObjectsInRadius(-20000, 750, 750)
 		for _, obj in ipairs(westObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				wdiv1s1 = wdiv1s1 + 1
 			end
 		end
 		wdiv1s2 = 0	--division 1, section 2
 		westObjs = getObjectsInRadius(-20000, -750, 750)
 		for _, obj in ipairs(westObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				wdiv1s2 = wdiv1s2 + 1
 			end
 		end
@@ -4098,7 +4098,7 @@ function checkNorthernGap()
 		northObjCount = 0
 		northObjs = getObjectsInRadius(0, -20000, 1500)
 		for _, obj in ipairs(northObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				northObjCount = northObjCount + 1
 			end
 		end
@@ -4109,28 +4109,28 @@ function checkNorthernGap()
 		ndiv2s1 = 0	--division 2, section 1
 		northObjs = getObjectsInRadius(375, -20000, 375)
 		for _, obj in ipairs(northObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				ndiv2s1 = ndiv2s1 + 1
 			end
 		end
 		ndiv2s2 = 0	--division 2, section 2
 		northObjs = getObjectsInRadius(-375, -20000, 375)
 		for _, obj in ipairs(northObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				ndiv2s2 = ndiv2s2 + 1
 			end
 		end
 		ndiv2s3 = 0	--division 3, section 3
 		northObjs = getObjectsInRadius(-1025, -20000, 375)
 		for _, obj in ipairs(northObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				ndiv2s3 = ndiv2s3 + 1
 			end
 		end
 		ndiv2s4 = 0	--division 4, section 4
 		northObjs = getObjectsInRadius(1025, -20000, 375)
 		for _, obj in ipairs(northObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				ndiv2s4 = ndiv2s4 + 1
 			end
 		end
@@ -4141,14 +4141,14 @@ function checkNorthernGap()
 		ndiv1s1 = 0	--division 1, section 1
 		northObjs = getObjectsInRadius(750, -20000, 750)
 		for _, obj in ipairs(northObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				ndiv1s1 = ndiv1s1 + 1
 			end
 		end
 		ndiv1s2 = 0	--division 1, section 2
 		northObjs = getObjectsInRadius(-750, -20000, 750)
 		for _, obj in ipairs(northObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				ndiv1s2 = ndiv1s2 + 1
 			end
 		end
@@ -4164,7 +4164,7 @@ function checkSouthernGap()
 		southObjCount = 0
 		southObjs = getObjectsInRadius(0, 20000, 1500)
 		for _, obj in ipairs(southObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				southObjCount = southObjCount + 1
 			end
 		end
@@ -4175,28 +4175,28 @@ function checkSouthernGap()
 		sdiv2s1 = 0	--division 2, section 1
 		southObjs = getObjectsInRadius(375, 20000, 375)
 		for _, obj in ipairs(southObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				sdiv2s1 = sdiv2s1 + 1
 			end
 		end
 		sdiv2s2 = 0	--division 2, section 2
 		southObjs = getObjectsInRadius(-375, 20000, 375)
 		for _, obj in ipairs(southObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				sdiv2s2 = sdiv2s2 + 1
 			end
 		end
 		sdiv2s3 = 0	--division 3, section 3
 		southObjs = getObjectsInRadius(-1025, 20000, 375)
 		for _, obj in ipairs(southObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				sdiv2s3 = sdiv2s3 + 1
 			end
 		end
 		sdiv2s4 = 0	--division 4, section 4
 		southObjs = getObjectsInRadius(1025, 20000, 375)
 		for _, obj in ipairs(southObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				sdiv2s4 = sdiv2s4 + 1
 			end
 		end
@@ -4207,14 +4207,14 @@ function checkSouthernGap()
 		sdiv1s1 = 0	--division 1, section 1
 		southObjs = getObjectsInRadius(750, 20000, 750)
 		for _, obj in ipairs(southObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				sdiv1s1 = sdiv1s1 + 1
 			end
 		end
 		sdiv1s2 = 0	--division 1, section 2
 		southObjs = getObjectsInRadius(-750, 20000, 750)
 		for _, obj in ipairs(southObjs) do
-			if obj.typeName == "Mine" then
+			if obj.components.delayed_explode_on_touch ~= nil then
 				sdiv1s2 = sdiv1s2 + 1
 			end
 		end

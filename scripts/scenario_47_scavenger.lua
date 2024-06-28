@@ -4492,7 +4492,7 @@ function exuariHarassment(delta)
 						local evaluate_objects = enemy:getObjectsInRange(7500)
 						local enemy_in_range = false
 						for j, obj in pairs(evaluate_objects) do
-							if obj.typeName == "PlayerSpaceship" then
+							if obj.components.player_control ~= nil then
 								if obj:getFactionId() ~= enemy:getFactionId() then
 									enemy_in_range = true
 									break									
@@ -4505,7 +4505,7 @@ function exuariHarassment(delta)
 						evaluate_objects = enemy:getObjectsInRange(5000)
 						enemy_in_range = false
 						for j, obj in pairs(evaluate_objects) do
-							if obj.typeName == "PlayerSpaceship" then
+							if obj.components.player_control ~= nil then
 								if obj:getFactionId() ~= enemy:getFactionId() then
 									enemy_in_range = true
 									break									
@@ -4521,7 +4521,7 @@ function exuariHarassment(delta)
 					evaluate_objects = enemy:getObjectsInRange(7500)
 					enemy_in_range = false
 					for j, obj in pairs(evaluate_objects) do
-						if obj.typeName == "PlayerSpaceship" then
+						if obj.components.player_control ~= nil then
 							if obj:getFactionId() ~= enemy:getFactionId() then
 								enemy_in_range = true
 								break									
@@ -4603,7 +4603,7 @@ function exuariHarassment(delta)
 							evaluate_objects = enemy:getObjectsInRange(7500)
 							enemy_in_range = false
 							for j, obj in pairs(evaluate_objects) do
-								if obj.typeName == "PlayerSpaceship" then
+								if obj.components.player_control ~= nil then
 									if obj:getFactionId() ~= enemy:getFactionId() then
 										enemy_in_range = true
 										break									
@@ -4616,7 +4616,7 @@ function exuariHarassment(delta)
 							evaluate_objects = enemy:getObjectsInRange(5000)
 							enemy_in_range = false
 							for j, obj in pairs(evaluate_objects) do
-								if obj.typeName == "PlayerSpaceship" then
+								if obj.components.player_control ~= nil then
 									if obj:getFactionId() ~= enemy:getFactionId() then
 										enemy_in_range = true
 										break									
@@ -4632,7 +4632,7 @@ function exuariHarassment(delta)
 						evaluate_objects = enemy:getObjectsInRange(7500)
 						enemy_in_range = false
 						for j, obj in pairs(evaluate_objects) do
-							if obj.typeName == "PlayerSpaceship" then
+							if obj.components.player_control ~= nil then
 								if obj:getFactionId() ~= enemy:getFactionId() then
 									enemy_in_range = true
 									break									

@@ -7954,7 +7954,7 @@ function handleDockedState()
 						local sx, sy = comms_target:getPosition()
 						local nearby_objects = getObjectsInRadius(sx,sy,30000)
 						for i, obj in ipairs(nearby_objects) do
-							if obj.typeName == "SpaceStation" then
+							if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
 								if not obj:isEnemy(comms_target) then
 									if brochure_stations == "" then
 										brochure_stations = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
@@ -7976,7 +7976,7 @@ function handleDockedState()
 						local sx, sy = comms_target:getPosition()
 						local nearby_objects = getObjectsInRadius(sx,sy,30000)
 						for i, obj in ipairs(nearby_objects) do
-							if obj.typeName == "SpaceStation" then
+							if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
 								if not obj:isEnemy(comms_target) then
 									if obj.comms_data.goods ~= nil then
 										for good, good_data in pairs(obj.comms_data.goods) do
@@ -8001,7 +8001,7 @@ function handleDockedState()
 					local sx, sy = comms_target:getPosition()
 					local nearby_objects = getObjectsInRadius(sx,sy,30000)
 					for i, obj in ipairs(nearby_objects) do
-						if obj.typeName == "SpaceStation" then
+						if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
 							if not obj:isEnemy(comms_target) then
 								if obj.comms_data.characterDescription ~= nil then
 									if distance_diagnostic then print("distance_diagnostic 1",obj,sx,sy) end
@@ -8046,7 +8046,7 @@ function handleDockedState()
 					local sx, sy = comms_target:getPosition()
 					local nearby_objects = getObjectsInRadius(sx,sy,30000)
 					for i, obj in ipairs(nearby_objects) do
-						if obj.typeName == "SpaceStation" then
+						if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
 							if not obj:isEnemy(comms_target) then
 								if obj.comms_data.characterDescription ~= nil then
 									table.insert(upgrade_stations,obj)
@@ -8067,7 +8067,7 @@ function handleDockedState()
 					local nearby_objects = getObjectsInRadius(sx,sy,50000)
 					local stations_known = 0
 					for i, obj in ipairs(nearby_objects) do
-						if obj.typeName == "SpaceStation" then
+						if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
 							if not obj:isEnemy(comms_target) then
 								stations_known = stations_known + 1
 								addCommsReply(obj:getCallSign(),function()
@@ -8108,7 +8108,7 @@ function handleDockedState()
 					local button_count = 0
 					local by_goods = {}
 					for i, obj in ipairs(nearby_objects) do
-						if obj.typeName == "SpaceStation" then
+						if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
 							if not obj:isEnemy(comms_target) then
 								if obj.comms_data.goods ~= nil then
 									for good, good_data in pairs(obj.comms_data.goods) do
@@ -8156,7 +8156,7 @@ function handleDockedState()
 						local nearby_objects = getObjectsInRadius(sx,sy,50000)
 						local stations_known = 0
 						for i, obj in ipairs(nearby_objects) do
-							if obj.typeName == "SpaceStation" then
+							if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
 								if not obj:isEnemy(comms_target) then
 									if obj.comms_data.characterDescription ~= nil then
 										stations_known = stations_known + 1
@@ -8414,7 +8414,7 @@ function masterCartographer()
 			local nearby_objects = getAllObjects()
 			local station_distance = 0
 			for i, obj in ipairs(nearby_objects) do
-				if obj.typeName == "SpaceStation" then
+				if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
 					if not obj:isEnemy(comms_target) then
 						if distance_diagnostic then print("distance_diagnostic 2",comms_target,obj) end
 						station_distance = distance(comms_target,obj)
@@ -8439,7 +8439,7 @@ function masterCartographer()
 			local stations_known = 0
 			local station_distance = 0
 			for i, obj in ipairs(nearby_objects) do
-				if obj.typeName == "SpaceStation" then
+				if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
 					if not obj:isEnemy(comms_target) then
 						if distance_diagnostic then print("distance_diagnostic 3",comms_target,obj) end
 						station_distance = distance(comms_target,obj)
@@ -8485,7 +8485,7 @@ function masterCartographer()
 			local nearby_objects = getAllObjects()
 			local by_goods = {}
 			for i, obj in ipairs(nearby_objects) do
-				if obj.typeName == "SpaceStation" then
+				if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
 					if not obj:isEnemy(comms_target) then
 						if distance_diagnostic then print("distance_diagnostic 4",comms_target,obj) end
 						local station_distance = distance(comms_target,obj)
