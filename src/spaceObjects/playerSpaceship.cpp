@@ -1044,6 +1044,25 @@ void PlayerSpaceship::playSoundOnMainScreen(string sound_name)
     broadcastServerCommand(packet);
 }
 
+float PlayerSpaceship::getNetSubsystemEnergyUsage(ESystem system)
+{
+    if (!hasSystem(system)) return 0.0f;
+
+    // Factor the subsystem's health into energy generation.
+    auto power_user_factor = systems[system].getPowerUserFactor();
+    if (power_user_factor < 0)
+    {
+        float f = getSystemEffectiveness(system);
+        if (f > 1.0f)
+            f = (1.0f + f) / 2.0f;
+        return power_user_factor * f;
+    }
+    else
+    {
+        return power_user_factor * systems[system].power_level;
+    }
+}
+
 float PlayerSpaceship::getNetSystemEnergyUsage()
 {
     // Get the net delta of energy draw for subsystems.
@@ -1052,23 +1071,9 @@ float PlayerSpaceship::getNetSystemEnergyUsage()
     // Determine each subsystem's energy draw.
     for(int n = 0; n < SYS_COUNT; n++)
     {
-        
         if (!hasSystem(ESystem(n))) continue;
 
-        const auto& system = systems[n];
-        // Factor the subsystem's health into energy generation.
-        auto power_user_factor = system.getPowerUserFactor();
-        if (power_user_factor < 0)
-        {
-            float f = getSystemEffectiveness(ESystem(n));
-            if (f > 1.0f)
-                f = (1.0f + f) / 2.0f;
-            net_power -= power_user_factor * f;
-        }
-        else
-        {
-            net_power -= power_user_factor * system.power_level;
-        }
+        net_power -= getNetSubsystemEnergyUsage(ESystem(n));
     }
 
     // Return the net subsystem energy draw.
