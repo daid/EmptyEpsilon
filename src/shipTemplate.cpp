@@ -319,7 +319,7 @@ ShipTemplate::ShipTemplate()
     shares_energy_with_docked = true;
     repair_docked = false;
     restocks_scan_probes = false;
-    restocks_missiles_docked = false;
+    restocks_missiles_docked = R_None;
     energy_storage_amount = 1000;
     repair_crew_count = 3;
     weapon_tube_count = 0;
@@ -653,9 +653,9 @@ void ShipTemplate::setRestocksScanProbes(bool enabled)
     restocks_scan_probes = enabled;
 }
 
-void ShipTemplate::setRestocksMissilesDocked(bool enabled)
+void ShipTemplate::setRestocksMissilesDocked(ERestockMissileBehaviour behaviour)
 {
-    restocks_missiles_docked = enabled;
+    restocks_missiles_docked = behaviour;
 }
 
 void ShipTemplate::setJumpDrive(bool enabled)
