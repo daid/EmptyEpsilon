@@ -14138,7 +14138,7 @@ function stationWarning(delta)
 	local function warningCheckPriority1(warn_station)
 		local warning_message = ""
 		for i, obj in ipairs(warn_station:getObjectsInRange(20000)) do
-			if obj ~= nil and obj:isValid() and obj:isEnemy(warn_station) and obj.typeName == "CpuShip" then
+			if obj ~= nil and obj:isValid() and obj:isEnemy(warn_station) and obj.components.ai_controller then
 				warning_message = string.format(_("helpfullWarning-shipLog", "[%s in %s] We detect one or more enemies nearby"),warn_station:getCallSign(),warn_station:getSectorName())
 				if difficulty < 2 then
 					warning_message = string.format(_("helpfullWarning-shipLog", "%s. At least one is of type %s"),warning_message,obj:getTypeName())

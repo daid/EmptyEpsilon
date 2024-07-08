@@ -472,7 +472,7 @@ function GMSpawnsEnemies()
 	local gmPlayer = nil
 	local gmSelect = getGMSelection()
 	for idx, obj in ipairs(gmSelect) do
-		if obj.typeName == "PlayerSpaceship" then
+		if obj.components.player_control then
 			gmPlayer = obj
 			break
 		end
@@ -8955,7 +8955,7 @@ function vectorOn(obj,danger,radius,angle,list)
 		danger = 1
 	end
 	if radius == nil then
-		if obj.typeName == "PlayerSpaceship" then
+		if obj.components.player_control then
 			radius = obj:getLongRangeRadarRange()
 		else
 			radius = 30000

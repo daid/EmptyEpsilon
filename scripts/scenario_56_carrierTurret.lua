@@ -324,7 +324,7 @@ function GMSpawnsEnemies()
 	gmSelected = false
 	gmSelect = getGMSelection()
 	for idx, obj in ipairs(gmSelect) do
-		if obj.typeName == "PlayerSpaceship" then
+		if obj.components.player_control then
 			gmPlayer = obj
 			break
 		end

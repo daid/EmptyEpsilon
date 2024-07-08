@@ -3420,7 +3420,7 @@ function friendlyComms(comms_data)
 	local nearby_enemy_ships = {}
 	local obj_list = comms_target:getObjectsInRange(6000)
 	for i,obj in ipairs(obj_list) do
-		if obj.typeName == "CpuShip" then
+		if obj.components.ai_controller then
 			if obj:isEnemy(comms_target) then
 				local ship = {ship = ship, name = obj:getCallSign()}
 				if obj:isFullyScannedBy(comms_source) then
@@ -4935,7 +4935,7 @@ function kraylorDiversionarySabotage(delta)
 				local enemy_close_to_supply = 0
 				local obj_list = supply_depot_station:getObjectsInRadius(target_x, target_y, 7500)
 				for i,obj in ipairs(obj_list) do
-					if obj.typeName == "CpuShip" then
+					if obj.components.ai_controller then
 						if obj:getFaction() == "Kraylor" then
 							enemy_close_to_supply = enemy_close_to_supply + 1
 							if distance(ship,supply_depot_station) < 1500 then
@@ -5100,7 +5100,7 @@ function kraylorPlanetBuster(delta)
 			local enemy_close_to_planet_count = 0
 			local obj_list = target_planet:getObjectsInRadius(target_x, target_y, 1500 + target_planet_radius)
 			for i,obj in ipairs(obj_list) do
-				if obj.typeName == "CpuShip" then
+				if obj.components.ai_controller then
 					if obj:getFaction() == "Kraylor" then
 						enemy_close_to_planet_count = enemy_close_to_planet_count + 1
 					end
