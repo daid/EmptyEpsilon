@@ -2,6 +2,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "main.h"
+#include "engine.h"
 #include "random.h"
 #include "wormHole.h"
 #include "spaceship.h"
@@ -66,16 +67,16 @@ void WormHole::draw3DTransparent()
     };
 
     textureManager.getTexture("wormHole3d.png")->bind();
-    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
+    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Wormhole);
 
     auto model_matrix = getModelMatrix();
     auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(120.f), {1.f, 0.f, 0.f});
 
     glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(modeldata_matrix));
     glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 5000.f);
+    glUniform1f(shader.get().uniform(ShaderRegistry::Uniforms::Time), engine->getElapsedTime());
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-
 
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
