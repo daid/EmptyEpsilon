@@ -23,17 +23,37 @@ uniform float time;
 varying vec4 fragcolor;
 varying vec2 fragtexcoords;
 
+// Adjusted parameters
+const float spiralIntensity = 0.08;
+const float spiralFrequency = 5.0;
+const float spiralSpeed = 0.3;
+const float inwardIntensity = 0.15;
+const float inwardFrequency = 3.0;
+const float inwardSpeed = 0.1;
+const float colorShiftIntensity = 0.05;
+const float colorShiftFrequency = 1.0;
+const float effectSize = 0.6; // Adjust this value to control how large the effect grows
+
 void main()
 {
-    float wobbleAmount = 0.1;
-    float wobbleSpeed = 3.0;
-
-    vec2 wobble = vec2(
-        sin(time * wobbleSpeed + fragtexcoords.y * 10.0) * wobbleAmount,
-        cos(time * wobbleSpeed + fragtexcoords.x * 10.0) * wobbleAmount
-    );
-
-    vec2 wobbledTexCoords = fragtexcoords + wobble;
-
-    gl_FragColor = texture2D(textureMap, wobbledTexCoords) * fragcolor;
+    vec2 center = vec2(0.5, 0.5);
+    vec2 toCenter = center - fragtexcoords;
+    float dist = length(toCenter);
+    
+    // Limit the effect to a certain radius
+    float normalizedDist = smoothstep(0.0, effectSize, dist);
+    float effectStrength = 1.0 - normalizedDist;
+    
+    float angle = atan(toCenter.y, toCenter.x);
+    float spiral = sin(dist * spiralFrequency - time * spiralSpeed + angle) * spiralIntensity;
+    
+    float inward = sin(dist * inwardFrequency - time * inwardSpeed) * inwardIntensity;
+    
+    vec2 distortion = normalize(toCenter) * (spiral + inward) * effectStrength;
+    vec2 distortedCoords = fragtexcoords + distortion;
+    
+    gl_FragColor = texture2D(textureMap, distortedCoords) * fragcolor;
+    
+    float colorShift = sin(dist * colorShiftFrequency - time) * colorShiftIntensity + 1.0;
+    gl_FragColor.rgb *= vec3(colorShift, 1.0, 1.0/colorShift);
 }
