@@ -166,7 +166,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e)
         float size = cloud.size;
 
         float distance = glm::length(camera_position - position);
-        float alpha = 1.0f - (distance / 10000.0f);
+        float alpha = 1.0f - (distance / nr->render_range);
         if (alpha < 0.0f)
             continue;
 

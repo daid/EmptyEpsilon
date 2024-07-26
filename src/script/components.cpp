@@ -615,6 +615,7 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<NeverRadarBlocked>::name("never_radar_blocked");
 
     sp::script::ComponentHandler<NebulaRenderer>::name("nebula_renderer");
+    BIND_MEMBER(NebulaRenderer, render_range);
     BIND_ARRAY_DIRTY_FLAG(NebulaRenderer, clouds, clouds_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(NebulaRenderer, clouds, offset, clouds_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(NebulaRenderer, clouds, "texture", texture.name, clouds_dirty);

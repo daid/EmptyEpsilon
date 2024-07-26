@@ -21,6 +21,7 @@ BASIC_REPLICATION_IMPL(EngineEmitterReplication, EngineEmitter)
     REPLICATE_VECTOR_IF_DIRTY(emitters, emitters_dirty);
 }
 BASIC_REPLICATION_IMPL(NebulaRendererReplication, NebulaRenderer)
+    BASIC_REPLICATION_FIELD(render_range);
     REPLICATE_VECTOR_IF_DIRTY(clouds, clouds_dirty);
 }
 BASIC_REPLICATION_IMPL(ExplosionEffectReplication, ExplosionEffect)

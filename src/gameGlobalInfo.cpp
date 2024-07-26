@@ -72,7 +72,7 @@ void GameGlobalInfo::onReceiveServerCommand(sp::io::DataBuffer& packet)
         packet >> entity >> position >> sound_name;
         if (my_spaceship == entity && my_player_info)
         {
-            if ((position == max_crew_positions && my_player_info->main_screen) || (position < sizeof(my_player_info->crew_position) && my_player_info->crew_position[position]))
+            if ((position == max_crew_positions && my_player_info->main_screen) || (position < max_crew_positions && my_player_info->crew_position[position]))
             {
                 soundManager->playSound(sound_name);
             }

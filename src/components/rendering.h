@@ -52,6 +52,7 @@ public:
         float size = 512.0f;
     };
 
+    float render_range = 10000.0f;
     std::vector<Cloud> clouds;
     bool clouds_dirty = true;
 };
