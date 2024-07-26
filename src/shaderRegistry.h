@@ -29,6 +29,7 @@ namespace ShaderRegistry
 		Basic = 0,
 		BasicColor,
 		Billboard,
+		Nebula,
 		Object,
 		ObjectIllumination,
 		ObjectSpecular,

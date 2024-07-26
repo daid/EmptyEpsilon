@@ -26,6 +26,7 @@ namespace ShaderRegistry
             "shaders/basic",
             "shaders/basicColor",
             "shaders/billboard",
+            "shaders/nebula",
             "shaders/objectShader",
             "shaders/objectShader:ILLUMINATION",
             "shaders/objectShader:SPECULAR",
