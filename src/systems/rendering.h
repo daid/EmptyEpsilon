@@ -36,7 +36,7 @@ private:
         for(auto [entity, t, transform] : sp::ecs::Query<T, sp::Transform>())
         {
             float depth = glm::dot(view_vector, transform.getPosition() - glm::vec2(camera_position.x, camera_position.y));
-            float radius = 300.0f;
+            float radius = 5000.0f;
             if (auto physics = entity.template getComponent<sp::Physics>())
                 radius = physics->getSize().x;
             if (depth + radius < depth_cutoff_back)

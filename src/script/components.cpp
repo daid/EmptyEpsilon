@@ -463,6 +463,17 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, texture);
     sp::script::ComponentHandler<Target>::name("weapons_target");
     BIND_MEMBER(Target, entity);
+    sp::script::ComponentHandler<BeamEffect>::name("beam_effect");
+    BIND_MEMBER(BeamEffect, lifetime);
+    BIND_MEMBER(BeamEffect, fade_speed);
+    BIND_MEMBER(BeamEffect, source);
+    BIND_MEMBER(BeamEffect, target);
+    BIND_MEMBER(BeamEffect, source_offset);
+    BIND_MEMBER(BeamEffect, target_offset);
+    BIND_MEMBER(BeamEffect, target_location);
+    BIND_MEMBER(BeamEffect, hit_normal);
+    BIND_MEMBER(BeamEffect, fire_ring);
+    BIND_MEMBER(BeamEffect, beam_texture);
 
     sp::script::ComponentHandler<Reactor>::name("reactor");
     BIND_SHIP_SYSTEM(Reactor);

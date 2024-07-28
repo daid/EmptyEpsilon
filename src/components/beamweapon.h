@@ -30,7 +30,7 @@ public:
 
         //Beam runtime state
         float cooldown = 0.0f;
-        string texture;
+        string texture = "texture/beam_orange.png";
     };
 
     constexpr static int max_frequency = 20;
@@ -44,6 +44,7 @@ class BeamEffect
 {
 public:
     float lifetime = 1.0f;
+    float fade_speed = 1.0f;
     sp::ecs::Entity source;
     sp::ecs::Entity target;
     glm::vec3 source_offset{};
@@ -51,7 +52,7 @@ public:
     glm::vec2 target_location{};
     glm::vec3 hit_normal{};
 
-    bool fire_ring;
+    bool fire_ring = true;
     string beam_texture;
 };
 

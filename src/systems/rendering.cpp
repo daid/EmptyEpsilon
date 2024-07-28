@@ -129,7 +129,7 @@ void MeshRenderSystem::render3D(sp::ecs::Entity e)
 
 NebulaRenderSystem::NebulaRenderSystem()
 {
-    RenderSystem::add3DHandler<NebulaRenderSystem>(this, true);
+    RenderSystem::add3DHandler<NebulaRenderer>(this, true);
 }
 
 void NebulaRenderSystem::update(float delta)

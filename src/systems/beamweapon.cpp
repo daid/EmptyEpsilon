@@ -133,6 +133,7 @@ void BeamWeaponSystem::update(float delta)
                                     be.target_offset = glm::normalize(be.target_offset) * r;
                                 else
                                     be.target_offset = glm::normalize(be.target_offset) * random(0, r / 2.0f);
+                                be.hit_normal = glm::normalize(be.target_offset);
                             }
 
                             DamageInfo info(entity, mount.damage_type, hit_location);
@@ -165,8 +166,8 @@ void BeamWeaponSystem::update(float delta)
                 be.target_location = tt->getPosition() + glm::vec2(be.target_offset.x, be.target_offset.y);
         }
 
-        be.lifetime -= delta;
-        if (be.lifetime < 0)
+        be.lifetime -= delta * be.fade_speed;
+        if (be.lifetime < 0 && game_server)
             entity.destroy();
     }
 }
@@ -185,8 +186,7 @@ void BeamWeaponSystem::render3D(sp::ecs::Entity e)
 
     ShaderRegistry::ScopedShader beamShader(ShaderRegistry::Shaders::Basic);
 
-    auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ transform->getPosition().x, transform->getPosition().y, 0.f });
-    model_matrix = glm::rotate(model_matrix, glm::radians(transform->getRotation()), glm::vec3{ 0.f, 0.f, 1.f });
+    auto model_matrix = glm::identity<glm::mat4>();
 
     glUniform4f(beamShader.get().uniform(ShaderRegistry::Uniforms::Color), be->lifetime, be->lifetime, be->lifetime, 1.f);
     glUniformMatrix4fv(beamShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, false, glm::value_ptr(model_matrix));
