@@ -8,6 +8,7 @@ function PlayerSpaceship()
     local e = createEntity()
     e.components = {
         player_control = {},
+        custom_ship_functions = {},
         transform = {rotation=random(0, 360)},
         callsign = {callsign=generateRandomCallSign()},
         scan_state = {complexity=2, depth=2, allow_simple_scan=true},
@@ -244,7 +245,6 @@ function Entity:getMaxScanProbeCount()
     if self.components.scan_probe_launcher then return self.components.scan_probe_launcher.max end
     return 0
 end
-
 --- Adds a custom interactive button with the given reference name to the given crew position screen.
 --- By default, custom buttons and info are stacked in order of creation. Use the order value to specify a priority, with lower values appearing higher in the list.
 --- If the reference name is unique, this creates a new button. If the reference name exists, this modifies the existing button.
@@ -254,7 +254,8 @@ end
 --- -- Add a custom button to Engineering, lower in the order relative to other items, that prints the player ship's coolant max to the console or logging file when clicked
 --- player:addCustomButton("engineering","get_coolant_max","Get Coolant Max",function() print("Coolant: " .. player:getMaxCoolant()) end,10)
 function Entity:addCustomButton(station, key, label, callback)
-    --TODO
+    setPlayerShipCustomFunction(self, "button", key, label, station, callback, 0)
+    return self
 end
 --- Adds a custom non-interactive info label with the given reference name to the given crew position screen.
 --- By default, custom buttons and info are stacked in order of creation. Use the order value to specify a priority.
@@ -264,7 +265,8 @@ end
 --- -- Displays the coolant max value on Engineering at or near the top of the custom button/info order
 --- player:addCustomInfo("engineering","show_coolant_max","Coolant Max: " .. player:getMaxCoolant(),0)
 function Entity:addCustomInfo(station, key, label, order)
-    --TODO
+    setPlayerShipCustomFunction(self, "info", key, label, station, nil, order)
+    return self
 end
 --- Displays a dismissable message with the given reference name on the given crew position screen.
 --- The caption sets the message's text.
@@ -272,19 +274,22 @@ end
 --- -- Displays the coolant max value on Engineering as a dismissable message
 --- player:addCustomMessage("engineering","message_coolant_max","Coolant max: " .. player:getMaxCoolant())
 function Entity:addCustomMessage(station, key, message)
-    --TODO
+    setPlayerShipCustomFunction(self, "message", key, message, station, nil, 0)
+    return self
 end
 --- As PlayerSpaceship:addCustomMessage(), but calls the given function when dismissed.
 --- Example:
 --- -- Displays the coolant max value on Engineering as a dismissable message, and prints "dismissed" to the console or logging file when dismissed
 --- player:addCustomMessageWithCallback("engineering","message_coolant_max","Coolant max: " .. player:getMaxCoolant(),function() print("Dismissed!") end)
 function Entity:addCustomMessageWithCallback(station, key, message, callback)
-    --TODO
+    setPlayerShipCustomFunction(self, "message", key, message, station, callback, 0)
+    return self
 end
 --- Removes the custom function, info, or message with the given reference name.
 --- Example: player:removeCustom("show_coolant_max") -- removes the custom item named "show_coolant_max"
 function Entity:removeCustom(key)
-    --TODO
+    removePlayerShipCustomFunction(self, key)
+    return self
 end
 
 --- Returns the index of the ESystem targeted by this PlayerSpaceship's weapons.

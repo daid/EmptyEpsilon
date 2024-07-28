@@ -407,6 +407,45 @@ static bool luaHasPlayerAtPosition(sp::ecs::Entity source, ECrewPosition station
     return false;
 }
 
+void luaSetPlayerShipCustomFunction(sp::ecs::Entity entity, CustomShipFunctions::Function::Type type, string name, string caption, ECrewPosition position, sp::script::Callback callback, int order)
+{
+    auto csf = entity.getComponent<CustomShipFunctions>();
+    if (!csf) return;
+    int idx = -1;
+    for(int n=0; n<int(csf->functions.size()); n++) {
+        if (csf->functions[n].name == name) {
+            idx = n;
+        }
+    }
+    if (idx == -1) {
+        idx = int(csf->functions.size());
+        csf->functions.emplace_back();
+    }
+    auto& f = csf->functions.back();
+    f.type = type;
+    f.name = name;
+    f.caption = caption;
+    f.crew_position = position;
+    f.callback = callback;
+    f.order = order;
+    std::stable_sort(csf->functions.begin(), csf->functions.end());
+    csf->functions_dirty = true;
+}
+
+void luaRemovePlayerShipCustomFunction(sp::ecs::Entity entity, string name)
+{
+    auto csf = entity.getComponent<CustomShipFunctions>();
+    if (!csf) return;
+    auto it = std::remove_if(csf->functions.begin(), csf->functions.end(), [csf, name](const CustomShipFunctions::Function& f) {
+        return f.name == name;
+    });
+    if (it != csf->functions.end()) {
+        csf->functions.erase(it, csf->functions.end());
+        csf->functions_dirty = true;
+    }
+}
+
+
 
 static sp::ecs::Entity luaGetPlayerShip(int index)
 {
@@ -960,7 +999,8 @@ bool setupScriptEnvironment(sp::script::Environment& env)
 
     env.setGlobal("transferPlayersFromShipToShip", &luaTransferPlayers);
     env.setGlobal("hasPlayerCrewAtPosition", &luaHasPlayerAtPosition);
-
+    env.setGlobal("setPlayerShipCustomFunction", &luaSetPlayerShipCustomFunction);
+    env.setGlobal("removePlayerShipCustomFunction", &luaRemovePlayerShipCustomFunction);
 
 
     env.setGlobal("addGMFunction", &luaAddGMFunction);
