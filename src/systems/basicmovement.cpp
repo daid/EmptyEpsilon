@@ -6,6 +6,7 @@
 #include "ecs/query.h"
 #include "vectorUtils.h"
 #include "menus/luaConsole.h"
+#include "multiplayer_server.h"
 
 
 void BasicMovementSystem::update(float delta)
@@ -13,7 +14,7 @@ void BasicMovementSystem::update(float delta)
     if (delta <= 0.0f) return;
 
     for(auto [entity, spin, transform] : sp::ecs::Query<Spin, sp::Transform>()) {
-        transform.setRotation(transform.getRotation() + delta * spin.rate);
+        transform.setRotationNoReplication(transform.getRotation() + delta * spin.rate);
     }
 
     for(auto [entity, orbit, transform] : sp::ecs::Query<Orbit, sp::Transform>()) {
@@ -22,7 +23,7 @@ void BasicMovementSystem::update(float delta)
 
         float angle = vec2ToAngle(transform.getPosition() - orbit.center);
         angle += delta / orbit.time * 360.0f;
-        transform.setPosition(orbit.center + vec2FromAngle(angle) * orbit.distance);
+        transform.setPositionNoReplication(orbit.center + vec2FromAngle(angle) * orbit.distance);
     }
 
     for(auto [entity, moveto, transform] : sp::ecs::Query<MoveTo, sp::Transform>()) {
@@ -33,12 +34,12 @@ void BasicMovementSystem::update(float delta)
         if (distance > 100.0f * 100.0f)
         {
             auto v = glm::normalize(diff);
-            transform.setRotation(vec2ToAngle(v));
+            transform.setRotationNoReplication(vec2ToAngle(v));
             if (distance < movement * movement)
                 movement = std::sqrt(distance);
-            transform.setPosition(transform.getPosition() + v * movement);
+            transform.setPositionNoReplication(transform.getPosition() + v * movement);
         }
-        else
+        else if (game_server)
         {
             if (moveto.on_arrival)
                 LuaConsole::checkResult(moveto.on_arrival.call<void>(entity, transform.getPosition().x, transform.getPosition().y));
