@@ -289,7 +289,7 @@ void PlayerSpaceship::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 positi
 
     if (long_range)
     {
-        /* TODO
+        /*TODO
         float long_radar_indicator_radius = getLongRangeRadarRange() * scale;
         float short_radar_indicator_radius = getShortRangeRadarRange() * scale;
 
@@ -367,5 +367,3 @@ string PlayerSpaceship::getExportLine()
     //    result += ":setEnergyWarpPerSecond(" + string(getEnergyWarpPerSecond(), 2) + ")";
     return result;
 }
-
-#include "playerSpaceship.hpp"

@@ -23,7 +23,7 @@ float ShipSystem::getSystemEffectiveness()
     power = std::max(0.0f, power - hacked_level * 0.75f);
 
     // Degrade all systems except the reactor once energy level drops below 10.
-    /* TODO
+    /*TODO
     if (system != SYS_Reactor)
     {
         auto reactor = entity.getComponent<Reactor>();

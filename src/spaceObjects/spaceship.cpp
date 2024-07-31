@@ -156,7 +156,7 @@ void SpaceShip::updateDynamicRadarSignature()
     // radar_signature becomes the ship's baseline radar signature.
     DynamicRadarSignatureInfo signature_delta;
 
-    /* TODO
+    /*TODO
     // For each ship system ...
     for(int n = 0; n < ShipSystem::COUNT; n++)
     {

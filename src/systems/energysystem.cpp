@@ -41,7 +41,7 @@ void EnergySystem::update(float delta)
 
         // If reactor health is worse than -90% and overheating, it explodes,
         // destroying the ship and damaging a 0.5U radius.
-        if (reactor.health < -0.9f && reactor.heat_level == 1.0f && game_server)
+        if (reactor.health < -0.9f && reactor.heat_level == 1.0f && reactor.overload_explode && game_server)
         {
             auto hull = entity.getComponent<Hull>();
             if (hull && hull->allow_destruction) {

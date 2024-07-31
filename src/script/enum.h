@@ -348,9 +348,9 @@ template<> struct Convert<AlertLevel> {
         string str = string(luaL_checkstring(L, idx)).lower();
         if (str == "normal")
             return AlertLevel::Normal;
-        else if (str == "yellow alert")
+        else if (str == "yellow alert" || str == "yellow")
             return AlertLevel::YellowAlert;
-        else if (str == "red alert")
+        else if (str == "red alert" || str == "red")
             return AlertLevel::RedAlert;
         luaL_error(L, "Unknown AlertLevel: %s", str.c_str());
         return AlertLevel::Normal;

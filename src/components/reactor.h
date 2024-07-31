@@ -9,6 +9,7 @@ public:
 
     // Config
     float max_energy = 1000.0f;
+    bool overload_explode = true;
 
     // Runtime
     float energy = 1000.0f;

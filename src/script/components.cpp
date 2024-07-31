@@ -479,6 +479,7 @@ void initComponentScriptBindings()
     BIND_SHIP_SYSTEM(Reactor);
     BIND_MEMBER(Reactor, max_energy);
     BIND_MEMBER(Reactor, energy);
+    BIND_MEMBER(Reactor, overload_explode);
 
     sp::script::ComponentHandler<ImpulseEngine>::name("impulse_engine");
     BIND_SHIP_SYSTEM(ImpulseEngine);

@@ -376,17 +376,6 @@ glm::mat4 SpaceObject::getModelMatrix() const
 }
 
 /*TODO
-template<> void convert<DamageType>::param(lua_State* L, int& idx, DamageType& dt)
-{
-    string str = string(luaL_checkstring(L, idx++)).lower();
-    if (str == "energy")
-        dt = DamageType::Energy;
-    else if (str == "kinetic")
-        dt = DamageType::Kinetic;
-    else if (str == "emp")
-        dt = DamageType::EMP;
-}
-
 // Define a script conversion function for the DamageInfo structure.
 template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di)
 {
