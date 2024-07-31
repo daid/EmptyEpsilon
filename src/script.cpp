@@ -24,6 +24,7 @@
 #include "components/target.h"
 #include "components/shields.h"
 #include "components/coolant.h"
+#include "components/internalrooms.h"
 #include "systems/jumpsystem.h"
 #include "systems/missilesystem.h"
 #include "systems/docking.h"
@@ -838,6 +839,12 @@ void luaCommandSendCommPlayer(sp::ecs::Entity ship, string message) {
     CommsSystem::textReply(ship, message);
 }
 
+void luaCommandSetAutoRepair(sp::ecs::Entity ship, bool enabled) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetAutoRepair(enabled); return; }
+    if (auto ir = ship.getComponent<InternalRooms>())
+        ir->auto_repair_enabled = enabled;
+}
+
 bool setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
@@ -979,8 +986,8 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandAnswerCommHail", &luaCommandAnswerCommHail);
     env.setGlobal("commandSendComm", &luaCommandSendComm);
     env.setGlobal("commandSendCommPlayer", &luaCommandSendCommPlayer);
-    /*TODO
     env.setGlobal("commandSetAutoRepair", &luaCommandSetAutoRepair);
+    /*TODO
     env.setGlobal("commandSetBeamFrequency", &luaCommandSetBeamFrequency);
     env.setGlobal("commandSetBeamSystemTarget", &luaCommandSetBeamSystemTarget);
     env.setGlobal("commandSetShieldFrequency", &luaCommandSetShieldFrequency);

@@ -782,7 +782,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             bool auto_repair_enabled = false;
             packet >> auto_repair_enabled;
-            //TODO: auto_repair_enabled
+            if (auto ir = ship.getComponent<InternalRooms>())
+                ir->auto_repair_enabled = auto_repair_enabled;
         }
         break;
     case CMD_SET_BEAM_FREQUENCY:
