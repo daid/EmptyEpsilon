@@ -51,6 +51,7 @@
 #include "components/internalrooms.h"
 #include "components/moveto.h"
 #include "components/lifetime.h"
+#include "components/rendering.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
 #include "systems/missilesystem.h"
@@ -919,17 +920,17 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 auto& hull = p.addComponent<Hull>();
                 hull.current = hull.max = 1;
                 p.addComponent<ShareShortRangeRadar>();
-                auto model = "SensorBuoyMKI";
+                auto model = "SensorBuoy/SensorBuoyMKI.model";
                 auto idx = irandom(1, 3);
-                if (idx == 2) model = "SensorBuoyMKII";
-                if (idx == 3) model = "SensorBuoyMKIII";
-                /*TODO 3D model
-                for k, v in pairs(__model_data[model]) do
-                    if string.sub(1, 2) ~= "__" then
-                        e[k] = table.deepcopy(v)
-                    end
-                end
-                */
+                if (idx == 2) model = "SensorBuoy/SensorBuoyMKII.model";
+                if (idx == 3) model = "SensorBuoy/SensorBuoyMKIII.model";
+                auto& mrc = p.addComponent<MeshRenderComponent>();
+                mrc.mesh.name = model;
+                mrc.texture.name = "SensorBuoy/SensorBuoyAlbedoAO.png";
+                mrc.specular_texture.name = "SensorBuoy/SensorBuoyPBRSpecular.png";
+                mrc.scale = 300;
+                auto& phy = p.addComponent<sp::Physics>();
+                phy.setCircle(sp::Physics::Type::Sensor, 15);
                 if (spl->on_launch)
                     LuaConsole::checkResult(spl->on_launch.call<void>(ship, p));
                 spl->stock--;
