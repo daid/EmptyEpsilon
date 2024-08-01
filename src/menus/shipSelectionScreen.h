@@ -55,7 +55,7 @@ private:
     int window_index;
     GuiButton* ready_button;
     GuiToggleButton* main_screen_button;
-    GuiToggleButton* crew_position_button[max_crew_positions];
+    GuiToggleButton* crew_position_button[static_cast<int>(CrewPosition::MAX)];
     GuiToggleButton* main_screen_controls_button;
     GuiToggleButton* window_button;
     GuiTextEntry* window_angle;

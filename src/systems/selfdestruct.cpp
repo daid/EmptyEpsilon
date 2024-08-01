@@ -69,23 +69,23 @@ bool SelfDestructSystem::activate(sp::ecs::Entity entity)
         {
             self_destruct->code[n] = irandom(0, 99999);
             self_destruct->confirmed[n] = false;
-            self_destruct->entry_position[n] = max_crew_positions;
-            while(self_destruct->entry_position[n] == max_crew_positions)
+            self_destruct->entry_position[n] = CrewPosition::MAX;
+            while(self_destruct->entry_position[n] == CrewPosition::MAX)
             {
-                self_destruct->entry_position[n] = ECrewPosition(irandom(0, relayOfficer));
+                self_destruct->entry_position[n] = CrewPosition(irandom(0, static_cast<int>(CrewPosition::relayOfficer)));
                 for(int i=0; i<n; i++)
                     if (self_destruct->entry_position[n] == self_destruct->entry_position[i])
-                        self_destruct->entry_position[n] = max_crew_positions;
+                        self_destruct->entry_position[n] = CrewPosition::MAX;
             }
-            self_destruct->show_position[n] = max_crew_positions;
-            while(self_destruct->show_position[n] == max_crew_positions)
+            self_destruct->show_position[n] = CrewPosition::MAX;
+            while(self_destruct->show_position[n] == CrewPosition::MAX)
             {
-                self_destruct->show_position[n] = ECrewPosition(irandom(0, relayOfficer));
+                self_destruct->show_position[n] = CrewPosition(irandom(0, static_cast<int>(CrewPosition::relayOfficer)));
                 if (self_destruct->show_position[n] == self_destruct->entry_position[n])
-                    self_destruct->show_position[n] = max_crew_positions;
+                    self_destruct->show_position[n] = CrewPosition::MAX;
                 for(int i=0; i<n; i++)
                     if (self_destruct->show_position[n] == self_destruct->show_position[i])
-                        self_destruct->show_position[n] = max_crew_positions;
+                        self_destruct->show_position[n] = CrewPosition::MAX;
             }
         }
         return true;

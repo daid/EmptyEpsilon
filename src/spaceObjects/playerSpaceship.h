@@ -70,8 +70,8 @@ public:
 
     // Ship's crew functions
     void transferPlayersToShip(P<PlayerSpaceship> other_ship);
-    void transferPlayersAtPositionToShip(ECrewPosition position, P<PlayerSpaceship> other_ship);
-    bool hasPlayerAtPosition(ECrewPosition position);
+    void transferPlayersAtPositionToShip(CrewPosition position, P<PlayerSpaceship> other_ship);
+    bool hasPlayerAtPosition(CrewPosition position);
 
     // Ship shields functions
 

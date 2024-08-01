@@ -10,9 +10,6 @@
 GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
-    for(int n=0; n<max_crew_positions; n++)
-        has_position[n] = false;
-
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     box = new GuiPanel(this, id + "_BOX");
@@ -59,7 +56,7 @@ void GuiSelfDestructEntry::onDraw(sp::RenderTarget& target)
             code_entry_position = -1;
             for(int n=0; n<SelfDestruct::max_codes; n++)
             {
-                if (has_position[self_destruct->show_position[n]])
+                if (has_position.has(self_destruct->show_position[n]))
                 {
                     if (lines > 0)
                         codes = codes + "\n";
@@ -67,7 +64,7 @@ void GuiSelfDestructEntry::onDraw(sp::RenderTarget& target)
 
                     lines++;
                 }
-                if (has_position[self_destruct->entry_position[n]] && !self_destruct->confirmed[n] && code_entry_position < 0)
+                if (has_position.has(self_destruct->entry_position[n]) && !self_destruct->confirmed[n] && code_entry_position < 0)
                 {
                     code_entry_position = n;
                 }

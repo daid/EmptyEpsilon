@@ -74,7 +74,7 @@ void DiscordRichPresence::update(float delta)
         {
             if (my_player_info->crew_position[idx])
             {
-                strncpy(activity.state, getCrewPositionName(ECrewPosition(idx)).c_str(), sizeof(activity.state));
+                strncpy(activity.state, getCrewPositionName(CrewPosition(idx)).c_str(), sizeof(activity.state));
                 if (idx == helmsOfficer)
                     strcpy(activity.assets.small_image, "helms_white");
                 if (idx == weaponsOfficer)

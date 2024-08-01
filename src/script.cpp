@@ -391,24 +391,24 @@ static int luaGetEnemiesInRadiusFor(lua_State* L)
     return 1;
 }
 
-static void luaTransferPlayers(sp::ecs::Entity source, sp::ecs::Entity target, std::optional<ECrewPosition> station)
+static void luaTransferPlayers(sp::ecs::Entity source, sp::ecs::Entity target, std::optional<CrewPosition> station)
 {
     if (!target.getComponent<PlayerControl>()) return;
     // For each player, move them to the same station on the target.
     for(auto i : player_info_list)
-        if (i->ship == source && (!station.has_value() || i->crew_position[station.value()]))
+        if (i->ship == source && (!station.has_value() || i->hasPosition(station.value())))
             i->ship = target;
 }
 
-static bool luaHasPlayerAtPosition(sp::ecs::Entity source, ECrewPosition station)
+static bool luaHasPlayerAtPosition(sp::ecs::Entity source, CrewPosition station)
 {
     for(auto i : player_info_list)
-        if (i->ship == source && i->crew_position[station])
+        if (i->ship == source && i->hasPosition(station))
             return true;
     return false;
 }
 
-void luaSetPlayerShipCustomFunction(sp::ecs::Entity entity, CustomShipFunctions::Function::Type type, string name, string caption, ECrewPosition position, sp::script::Callback callback, int order)
+void luaSetPlayerShipCustomFunction(sp::ecs::Entity entity, CustomShipFunctions::Function::Type type, string name, string caption, CrewPosition position, sp::script::Callback callback, int order)
 {
     auto csf = entity.getComponent<CustomShipFunctions>();
     if (!csf) return;

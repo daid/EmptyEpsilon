@@ -5,31 +5,8 @@
 #include "components/player.h"
 #include "systems/shipsystemssystem.h"
 #include "missileWeaponData.h"
+#include "crewPosition.h"
 
-
-enum ECrewPosition
-{
-    //6/5 player crew
-    helmsOfficer,
-    weaponsOfficer,
-    engineering,
-    scienceOfficer,
-    relayOfficer,
-    //4/3 player crew
-    tacticalOfficer,    //helms+weapons-shields
-    engineeringAdvanced,//engineering+shields
-    operationsOfficer, //science+comms
-    //1 player crew
-    singlePilot,
-    //extras
-    damageControl,
-    powerManagement,
-    databaseView,
-    altRelay,
-    commsOnly,
-    shipLog,
-    max_crew_positions
-};
 
 class PlayerInfo;
 class RenderLayer;
@@ -42,7 +19,7 @@ class PlayerInfo : public MultiplayerObject
 public:
     int32_t client_id;
 
-    uint32_t crew_position[max_crew_positions];
+    std::vector<CrewPositions> crew_positions;
     uint32_t main_screen = 0;
     uint32_t main_screen_control = 0;
     sp::ecs::Entity ship;
@@ -53,6 +30,7 @@ public:
 
     void reset();
 
+    bool hasPosition(CrewPosition cp);
     bool isOnlyMainScreen(int monitor_index);
 
     void commandTargetRotation(float target);
@@ -100,7 +78,7 @@ public:
     void commandHackingFinished(sp::ecs::Entity target, ShipSystem::Type target_system);
     void commandCustomFunction(string name);
 
-    void commandSetCrewPosition(int monitor_index, ECrewPosition position, bool active);
+    void commandSetCrewPosition(int monitor_index, CrewPosition position, bool active);
     void commandSetShip(sp::ecs::Entity entity);
     void commandSetMainScreen(int monitor_index, bool enabled);
     void commandSetMainScreenControl(int monitor_index, bool control);
@@ -112,10 +90,10 @@ public:
 
     void spawnUI(int monitor_index, RenderLayer* render_layer);
 
-    static bool hasPlayerAtPosition(sp::ecs::Entity entity, ECrewPosition position);
+    static bool hasPlayerAtPosition(sp::ecs::Entity entity, CrewPosition position);
 };
 
-string getCrewPositionName(ECrewPosition position);
-string getCrewPositionIcon(ECrewPosition position);
+string getCrewPositionName(CrewPosition position);
+string getCrewPositionIcon(CrewPosition position);
 
 #endif//PLAYER_INFO_H

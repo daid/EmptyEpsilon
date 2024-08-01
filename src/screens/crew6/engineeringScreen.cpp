@@ -28,7 +28,7 @@
 #include "gui/gui2_image.h"
 #include "gui/gui2_panel.h"
 
-EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_position)
+EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_position)
 : GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background), selected_system(ShipSystem::Type::None)
 {
     // Render the background decorations.

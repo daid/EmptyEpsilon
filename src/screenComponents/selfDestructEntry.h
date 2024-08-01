@@ -18,13 +18,13 @@ private:
     GuiLabel* code_entry_label;
     int code_entry_position;
 
-    bool has_position[max_crew_positions];
+    CrewPositions has_position;
 public:
     GuiSelfDestructEntry(GuiContainer* owner, string id);
 
     virtual void onDraw(sp::RenderTarget& target) override;
 
-    void enablePosition(ECrewPosition position) { has_position[position] = true; }
+    void enablePosition(CrewPosition position) { has_position.add(position); }
 };
 
 #endif//SELF_DESTRUCT_ENTRY_H

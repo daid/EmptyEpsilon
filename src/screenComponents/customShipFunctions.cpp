@@ -5,7 +5,7 @@
 #include "components/customshipfunction.h"
 
 
-GuiCustomShipFunctions::GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id)
+GuiCustomShipFunctions::GuiCustomShipFunctions(GuiContainer* owner, CrewPosition position, string id)
 : GuiElement(owner, id), position(position)
 {
     setAttribute("layout", "vertical");

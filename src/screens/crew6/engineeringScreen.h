@@ -64,7 +64,7 @@ private:
 
     string toNearbyIntString(float value);
 public:
-    EngineeringScreen(GuiContainer* owner, ECrewPosition crew_position=engineering);
+    EngineeringScreen(GuiContainer* owner, CrewPosition crew_position=CrewPosition::engineering);
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;

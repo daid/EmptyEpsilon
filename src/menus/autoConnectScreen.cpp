@@ -16,7 +16,7 @@
 #include "gui/gui2_label.h"
 
 
-AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen, string ship_filter)
+AutoConnectScreen::AutoConnectScreen(CrewPosition crew_position, bool control_main_screen, string ship_filter)
 : crew_position(crew_position), control_main_screen(control_main_screen)
 {
     if (!game_client)
@@ -31,7 +31,7 @@ AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_m
     string position_name = "Main screen";
     if (crew_position_raw >= 1000 && crew_position_raw <= 1360)
         position_name = tr("Ship window");
-    if (crew_position < max_crew_positions)
+    if (crew_position != CrewPosition::MAX)
         position_name = getCrewPositionName(crew_position);
 
     (new GuiLabel(this, "POSITION", position_name, 50))->setPosition(0, 400, sp::Alignment::TopCenter)->setSize(0, 30);
@@ -122,7 +122,7 @@ void AutoConnectScreen::update(float delta)
                             }
                         }
                     } else {
-                        if (my_spaceship == my_player_info->ship && (crew_position == max_crew_positions || my_player_info->crew_position[crew_position]))
+                        if (my_spaceship == my_player_info->ship && (crew_position == CrewPosition::MAX || my_player_info->hasPosition(crew_position)))
                         {
                             destroy();
                             if (crew_position_raw >=1000 && crew_position_raw<=1360){
@@ -156,7 +156,7 @@ bool AutoConnectScreen::isValidShip(sp::ecs::Entity ship)
             {
                 if (i->ship == ship)
                 {
-                    if (crew_position != max_crew_positions && i->crew_position[crew_position])
+                    if (crew_position != CrewPosition::MAX && i->hasPosition(crew_position))
                         crew_at_position++;
                 }
             }
@@ -190,7 +190,7 @@ bool AutoConnectScreen::isValidShip(sp::ecs::Entity ship)
 
 void AutoConnectScreen::connectToShip(sp::ecs::Entity ship)
 {
-    if (crew_position != max_crew_positions)    //If we are not the main screen, setup the right crew position.
+    if (crew_position != CrewPosition::MAX)    //If we are not the main screen, setup the right crew position.
     {
         my_player_info->commandSetCrewPosition(0, crew_position, true);
         my_player_info->commandSetMainScreenControl(0, control_main_screen);

@@ -65,7 +65,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
 
     // If the player has control over weapons targeting, enable the target view
     // option in the main screen controls.
-    if (my_player_info->crew_position[weaponsOfficer] || my_player_info->crew_position[tacticalOfficer] || my_player_info->crew_position[singlePilot])
+    if (my_player_info->hasPosition(CrewPosition::weaponsOfficer) || my_player_info->hasPosition(CrewPosition::tacticalOfficer) || my_player_info->hasPosition(CrewPosition::singlePilot))
     {
         buttons.push_back(new GuiButton(this, "MAIN_SCREEN_TARGET_BUTTON", tr("mainscreen", "Target lock"), [this]()
         {
@@ -102,7 +102,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
 
     // If the player has control over comms, they can toggle the comms overlay
     // on the main screen.
-    if (my_player_info->crew_position[relayOfficer] || my_player_info->crew_position[operationsOfficer] || my_player_info->crew_position[singlePilot])
+    if (my_player_info->hasPosition(CrewPosition::relayOfficer) || my_player_info->hasPosition(CrewPosition::operationsOfficer) || my_player_info->hasPosition(CrewPosition::singlePilot))
     {
         buttons.push_back(new GuiButton(this, "MAIN_SCREEN_SHOW_COMMS_BUTTON", tr("mainscreen", "Show comms"), [this]()
         {

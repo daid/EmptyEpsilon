@@ -272,8 +272,8 @@ void returnToMainMenu(RenderLayer* render_layer)
     {
         int crew_position = PreferencesManager::get("autoconnect").toInt() - 1;
         if (crew_position < 0) crew_position = 0;
-        if (crew_position > max_crew_positions) crew_position = max_crew_positions;
-        new AutoConnectScreen(ECrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
+        if (crew_position > static_cast<int>(CrewPosition::MAX)) crew_position = static_cast<int>(CrewPosition::MAX);
+        new AutoConnectScreen(CrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
     }
     else if (PreferencesManager::get("tutorial").toInt())
     {

@@ -191,30 +191,12 @@ void PlayerSpaceship::transferPlayersToShip(P<PlayerSpaceship> other_ship)
     }
 }
 
-void PlayerSpaceship::transferPlayersAtPositionToShip(ECrewPosition position, P<PlayerSpaceship> other_ship)
-{
-    // Don't do anything without a valid target. The target must be a
-    // PlayerSpaceship.
-    if (!other_ship)
-        return;
-
-    // For each player, check which position they fill. If the position matches
-    // the requested position, move that player. Otherwise, ignore them.
-    foreach(PlayerInfo, i, player_info_list)
-    {
-        if (i->ship == entity && i->crew_position[position])
-        {
-            i->ship = other_ship->entity;
-        }
-    }
-}
-
-bool PlayerSpaceship::hasPlayerAtPosition(ECrewPosition position)
+bool PlayerSpaceship::hasPlayerAtPosition(CrewPosition position)
 {
     return PlayerInfo::hasPlayerAtPosition(entity, position);
 }
 /*
-void PlayerSpaceship::addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback, std::optional<int> order)
+void PlayerSpaceship::addCustomButton(CrewPosition position, string name, string caption, ScriptSimpleCallback callback, std::optional<int> order)
 {
     removeCustom(name);
     auto& csf = entity.getOrAddComponent<CustomShipFunctions>();
@@ -229,7 +211,7 @@ void PlayerSpaceship::addCustomButton(ECrewPosition position, string name, strin
     std::stable_sort(csf.functions.begin(), csf.functions.end());
 }
 
-void PlayerSpaceship::addCustomInfo(ECrewPosition position, string name, string caption, std::optional<int> order)
+void PlayerSpaceship::addCustomInfo(CrewPosition position, string name, string caption, std::optional<int> order)
 {
     removeCustom(name);
     auto& csf = entity.getOrAddComponent<CustomShipFunctions>();
@@ -243,7 +225,7 @@ void PlayerSpaceship::addCustomInfo(ECrewPosition position, string name, string 
     std::stable_sort(csf.functions.begin(), csf.functions.end());
 }
 
-void PlayerSpaceship::addCustomMessage(ECrewPosition position, string name, string caption)
+void PlayerSpaceship::addCustomMessage(CrewPosition position, string name, string caption)
 {
     removeCustom(name);
     auto& csf = entity.getOrAddComponent<CustomShipFunctions>();
@@ -256,7 +238,7 @@ void PlayerSpaceship::addCustomMessage(ECrewPosition position, string name, stri
     std::stable_sort(csf.functions.begin(), csf.functions.end());
 }
 
-void PlayerSpaceship::addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback)
+void PlayerSpaceship::addCustomMessageWithCallback(CrewPosition position, string name, string caption, ScriptSimpleCallback callback)
 {
     removeCustom(name);
     auto& csf = entity.getOrAddComponent<CustomShipFunctions>();

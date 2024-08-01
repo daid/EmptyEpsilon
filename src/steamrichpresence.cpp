@@ -32,7 +32,7 @@ void SteamRichPresence::update(float delta)
         {
             if (my_player_info->crew_position[idx])
             {
-                status += " " + getCrewPositionName(ECrewPosition(idx));
+                status += " " + getCrewPositionName(CrewPosition(idx));
                 break;
             }
         }

@@ -124,11 +124,7 @@ PlayerInfo::PlayerInfo()
     last_ship_password = "";
     registerMemberReplication(&client_id);
 
-    for(int n=0; n<max_crew_positions; n++)
-    {
-        crew_position[n] = 0;
-        registerMemberReplication(&crew_position[n]);
-    }
+    registerMemberReplication(&crew_positions);
     registerMemberReplication(&ship);
     registerMemberReplication(&name);
     registerMemberReplication(&main_screen);
@@ -142,19 +138,25 @@ void PlayerInfo::reset()
     ship = {};
     main_screen_control = 0;
     last_ship_password = "";
+    crew_positions.clear();
+}
 
-    for(int n=0; n<max_crew_positions; n++)
-        crew_position[n] = 0;
+bool PlayerInfo::hasPosition(CrewPosition cp)
+{
+    for(auto cps : crew_positions) {
+        if (cps.has(cp))
+            return true;
+    }
+    return false;
 }
 
 bool PlayerInfo::isOnlyMainScreen(int monitor_index)
 {
     if (!(main_screen & (1 << monitor_index)))
         return false;
-    for(int n=0; n<max_crew_positions; n++)
-        if (crew_position[n] & (1 << monitor_index))
-            return false;
-    return true;
+    if (crew_positions.size() <= static_cast<size_t>(monitor_index))
+        return false;
+    return crew_positions[monitor_index].mask == 0;
 }
 
 // Client-side functions to send a command to the server.
@@ -508,16 +510,18 @@ void PlayerInfo::commandClearScienceLink()
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandSetCrewPosition(int monitor_index, ECrewPosition position, bool active)
+void PlayerInfo::commandSetCrewPosition(int monitor_index, CrewPosition position, bool active)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_UPDATE_CREW_POSITION << uint32_t(monitor_index) << int32_t(position) << active;
+    packet << CMD_UPDATE_CREW_POSITION << uint32_t(monitor_index) << position << active;
     sendClientCommand(packet);
 
+    if (crew_positions.size() <= monitor_index)
+        crew_positions.resize(monitor_index + 1);
     if (active)
-        crew_position[position] |= (1 << monitor_index);
+        crew_positions[monitor_index].add(position);
     else
-        crew_position[position] &=~(1 << monitor_index);
+        crew_positions[monitor_index].remove(position);
 }
 
 void PlayerInfo::commandSetShip(sp::ecs::Entity entity)
@@ -1002,12 +1006,14 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
 
     case CMD_UPDATE_CREW_POSITION:
         {
-            int32_t position;
+            CrewPosition position;
             packet >> monitor_index >> position >> active;
+            if (crew_positions.size() <= monitor_index)
+                crew_positions.resize(monitor_index + 1);
             if (active)
-                crew_position[position] |= (1 << monitor_index);
+                crew_positions[monitor_index].add(position);
             else
-                crew_position[position] &=~(1 << monitor_index);
+                crew_positions[monitor_index].remove(position);
         }
         break;
     case CMD_UPDATE_SHIP_ID:
@@ -1049,62 +1055,65 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
     {
         CrewStationScreen* screen = new CrewStationScreen(render_layer, bool(main_screen & (1 << monitor_index)));
         auto container = screen->getTabContainer();
+        CrewPositions cps;
+        if (crew_positions.size() > monitor_index)
+            cps = crew_positions[monitor_index];
 
         //Crew 6/5
-        if (crew_position[helmsOfficer] & (1 << monitor_index))
-            screen->addStationTab(new HelmsScreen(container), helmsOfficer, getCrewPositionName(helmsOfficer), getCrewPositionIcon(helmsOfficer));
-        if (crew_position[weaponsOfficer] & (1 << monitor_index))
-            screen->addStationTab(new WeaponsScreen(container), weaponsOfficer, getCrewPositionName(weaponsOfficer), getCrewPositionIcon(weaponsOfficer));
-        if (crew_position[engineering] & (1 << monitor_index))
-            screen->addStationTab(new EngineeringScreen(container), engineering, getCrewPositionName(engineering), getCrewPositionIcon(engineering));
-        if (crew_position[scienceOfficer] & (1 << monitor_index))
-            screen->addStationTab(new ScienceScreen(container), scienceOfficer, getCrewPositionName(scienceOfficer), getCrewPositionIcon(scienceOfficer));
-        if (crew_position[relayOfficer] & (1 << monitor_index))
-            screen->addStationTab(new RelayScreen(container, true), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
+        if (cps.has(CrewPosition::helmsOfficer))
+            screen->addStationTab(new HelmsScreen(container), CrewPosition::helmsOfficer, getCrewPositionName(CrewPosition::helmsOfficer), getCrewPositionIcon(CrewPosition::helmsOfficer));
+        if (cps.has(CrewPosition::weaponsOfficer))
+            screen->addStationTab(new WeaponsScreen(container), CrewPosition::weaponsOfficer, getCrewPositionName(CrewPosition::weaponsOfficer), getCrewPositionIcon(CrewPosition::weaponsOfficer));
+        if (cps.has(CrewPosition::engineering))
+            screen->addStationTab(new EngineeringScreen(container), CrewPosition::engineering, getCrewPositionName(CrewPosition::engineering), getCrewPositionIcon(CrewPosition::engineering));
+        if (cps.has(CrewPosition::scienceOfficer))
+            screen->addStationTab(new ScienceScreen(container), CrewPosition::scienceOfficer, getCrewPositionName(CrewPosition::scienceOfficer), getCrewPositionIcon(CrewPosition::scienceOfficer));
+        if (cps.has(CrewPosition::relayOfficer))
+            screen->addStationTab(new RelayScreen(container, true), CrewPosition::relayOfficer, getCrewPositionName(CrewPosition::relayOfficer), getCrewPositionIcon(CrewPosition::relayOfficer));
 
         //Crew 4/3
-        if (crew_position[tacticalOfficer] & (1 << monitor_index))
-            screen->addStationTab(new TacticalScreen(container), tacticalOfficer, getCrewPositionName(tacticalOfficer), getCrewPositionIcon(tacticalOfficer));
-        if (crew_position[engineeringAdvanced] & (1 << monitor_index))
-            screen->addStationTab(new EngineeringAdvancedScreen(container), engineeringAdvanced, getCrewPositionName(engineeringAdvanced), getCrewPositionIcon(engineeringAdvanced));
-        if (crew_position[operationsOfficer] & (1 << monitor_index))
-            screen->addStationTab(new OperationScreen(container), operationsOfficer, getCrewPositionName(operationsOfficer), getCrewPositionIcon(operationsOfficer));
+        if (cps.has(CrewPosition::tacticalOfficer))
+            screen->addStationTab(new TacticalScreen(container), CrewPosition::tacticalOfficer, getCrewPositionName(CrewPosition::tacticalOfficer), getCrewPositionIcon(CrewPosition::tacticalOfficer));
+        if (cps.has(CrewPosition::engineeringAdvanced))
+            screen->addStationTab(new EngineeringAdvancedScreen(container), CrewPosition::engineeringAdvanced, getCrewPositionName(CrewPosition::engineeringAdvanced), getCrewPositionIcon(CrewPosition::engineeringAdvanced));
+        if (cps.has(CrewPosition::operationsOfficer))
+            screen->addStationTab(new OperationScreen(container), CrewPosition::operationsOfficer, getCrewPositionName(CrewPosition::operationsOfficer), getCrewPositionIcon(CrewPosition::operationsOfficer));
 
         //Crew 1
-        if (crew_position[singlePilot] & (1 << monitor_index))
-            screen->addStationTab(new SinglePilotScreen(container), singlePilot, getCrewPositionName(singlePilot), getCrewPositionIcon(singlePilot));
+        if (cps.has(CrewPosition::singlePilot))
+            screen->addStationTab(new SinglePilotScreen(container), CrewPosition::singlePilot, getCrewPositionName(CrewPosition::singlePilot), getCrewPositionIcon(CrewPosition::singlePilot));
 
         //Extra
-        if (crew_position[damageControl] & (1 << monitor_index))
-            screen->addStationTab(new DamageControlScreen(container), damageControl, getCrewPositionName(damageControl), getCrewPositionIcon(damageControl));
-        if (crew_position[powerManagement] & (1 << monitor_index))
-            screen->addStationTab(new PowerManagementScreen(container), powerManagement, getCrewPositionName(powerManagement), getCrewPositionIcon(powerManagement));
-        if (crew_position[databaseView] & (1 << monitor_index))
-            screen->addStationTab(new DatabaseScreen(container), databaseView, getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
-        if (crew_position[altRelay] & (1 << monitor_index))
-            screen->addStationTab(new RelayScreen(container, false), altRelay, getCrewPositionName(altRelay), getCrewPositionIcon(altRelay));
-        if (crew_position[commsOnly] & (1 << monitor_index))
-            screen->addStationTab(new CommsScreen(container), commsOnly, getCrewPositionName(commsOnly), getCrewPositionIcon(commsOnly));
-        if (crew_position[shipLog] & (1 << monitor_index))
-            screen->addStationTab(new ShipLogScreen(container), shipLog, getCrewPositionName(shipLog), getCrewPositionIcon(shipLog));
+        if (cps.has(CrewPosition::damageControl))
+            screen->addStationTab(new DamageControlScreen(container), CrewPosition::damageControl, getCrewPositionName(CrewPosition::damageControl), getCrewPositionIcon(CrewPosition::damageControl));
+        if (cps.has(CrewPosition::powerManagement))
+            screen->addStationTab(new PowerManagementScreen(container), CrewPosition::powerManagement, getCrewPositionName(CrewPosition::powerManagement), getCrewPositionIcon(CrewPosition::powerManagement));
+        if (cps.has(CrewPosition::databaseView))
+            screen->addStationTab(new DatabaseScreen(container), CrewPosition::databaseView, getCrewPositionName(CrewPosition::databaseView), getCrewPositionIcon(CrewPosition::databaseView));
+        if (cps.has(CrewPosition::altRelay))
+            screen->addStationTab(new RelayScreen(container, false), CrewPosition::altRelay, getCrewPositionName(CrewPosition::altRelay), getCrewPositionIcon(CrewPosition::altRelay));
+        if (cps.has(CrewPosition::commsOnly))
+            screen->addStationTab(new CommsScreen(container), CrewPosition::commsOnly, getCrewPositionName(CrewPosition::commsOnly), getCrewPositionIcon(CrewPosition::commsOnly));
+        if (cps.has(CrewPosition::shipLog))
+            screen->addStationTab(new ShipLogScreen(container), CrewPosition::shipLog, getCrewPositionName(CrewPosition::shipLog), getCrewPositionIcon(CrewPosition::shipLog));
 
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(container, "SELF_DESTRUCT_ENTRY");
-        for(int n=0; n<max_crew_positions; n++)
-            if (crew_position[n] & (1 << monitor_index))
-                sde->enablePosition(ECrewPosition(n));
-        if (crew_position[tacticalOfficer] & (1 << monitor_index))
+        for(int n=0; n<static_cast<int>(CrewPosition::MAX); n++)
+            if (cps.has(static_cast<CrewPosition>(n)))
+                sde->enablePosition(CrewPosition(n));
+        if (cps.has(CrewPosition::tacticalOfficer))
         {
-            sde->enablePosition(weaponsOfficer);
-            sde->enablePosition(helmsOfficer);
+            sde->enablePosition(CrewPosition::weaponsOfficer);
+            sde->enablePosition(CrewPosition::helmsOfficer);
         }
-        if (crew_position[engineeringAdvanced] & (1 << monitor_index))
+        if (cps.has(CrewPosition::engineeringAdvanced))
         {
-            sde->enablePosition(engineering);
+            sde->enablePosition(CrewPosition::engineering);
         }
-        if (crew_position[operationsOfficer] & (1 << monitor_index))
+        if (cps.has(CrewPosition::operationsOfficer))
         {
-            sde->enablePosition(scienceOfficer);
-            sde->enablePosition(relayOfficer);
+            sde->enablePosition(CrewPosition::scienceOfficer);
+            sde->enablePosition(CrewPosition::relayOfficer);
         }
 
         if (main_screen_control & (1 << monitor_index))
@@ -1114,57 +1123,57 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
     }
 }
 
-string getCrewPositionName(ECrewPosition position)
+string getCrewPositionName(CrewPosition position)
 {
     switch(position)
     {
-    case helmsOfficer: return tr("station","Helms");
-    case weaponsOfficer: return tr("station","Weapons");
-    case engineering: return tr("station","Engineering");
-    case scienceOfficer: return tr("station","Science");
-    case relayOfficer: return tr("station","Relay");
-    case tacticalOfficer: return tr("station","Tactical");
-    case engineeringAdvanced: return tr("station","Engineering+");
-    case operationsOfficer: return tr("station","Operations");
-    case singlePilot: return tr("station","Single Pilot");
-    case damageControl: return tr("station","Damage Control");
-    case powerManagement: return tr("station","Power Management");
-    case databaseView: return tr("station","Database");
-    case altRelay: return tr("station","Strategic Map");
-    case commsOnly: return tr("station","Comms");
-    case shipLog: return tr("station","Ship's Log");
-    default: return "ErrUnk: " + string(position);
+    case CrewPosition::helmsOfficer: return tr("station","Helms");
+    case CrewPosition::weaponsOfficer: return tr("station","Weapons");
+    case CrewPosition::engineering: return tr("station","Engineering");
+    case CrewPosition::scienceOfficer: return tr("station","Science");
+    case CrewPosition::relayOfficer: return tr("station","Relay");
+    case CrewPosition::tacticalOfficer: return tr("station","Tactical");
+    case CrewPosition::engineeringAdvanced: return tr("station","Engineering+");
+    case CrewPosition::operationsOfficer: return tr("station","Operations");
+    case CrewPosition::singlePilot: return tr("station","Single Pilot");
+    case CrewPosition::damageControl: return tr("station","Damage Control");
+    case CrewPosition::powerManagement: return tr("station","Power Management");
+    case CrewPosition::databaseView: return tr("station","Database");
+    case CrewPosition::altRelay: return tr("station","Strategic Map");
+    case CrewPosition::commsOnly: return tr("station","Comms");
+    case CrewPosition::shipLog: return tr("station","Ship's Log");
+    default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }
 
-string getCrewPositionIcon(ECrewPosition position)
+string getCrewPositionIcon(CrewPosition position)
 {
     switch(position)
     {
-    case helmsOfficer: return "gui/icons/station-helm";
-    case weaponsOfficer: return "gui/icons/station-weapons";
-    case engineering: return "gui/icons/station-engineering";
-    case scienceOfficer: return "gui/icons/station-science";
-    case relayOfficer: return "gui/icons/station-relay";
-    case tacticalOfficer: return "";
-    case engineeringAdvanced: return "";
-    case operationsOfficer: return "";
-    case singlePilot: return "";
-    case damageControl: return "";
-    case powerManagement: return "";
-    case databaseView: return "";
-    case altRelay: return "";
-    case commsOnly: return "";
-    case shipLog: return "";
-    default: return "ErrUnk: " + string(position);
+    case CrewPosition::helmsOfficer: return "gui/icons/station-helm";
+    case CrewPosition::weaponsOfficer: return "gui/icons/station-weapons";
+    case CrewPosition::engineering: return "gui/icons/station-engineering";
+    case CrewPosition::scienceOfficer: return "gui/icons/station-science";
+    case CrewPosition::relayOfficer: return "gui/icons/station-relay";
+    case CrewPosition::tacticalOfficer: return "";
+    case CrewPosition::engineeringAdvanced: return "";
+    case CrewPosition::operationsOfficer: return "";
+    case CrewPosition::singlePilot: return "";
+    case CrewPosition::damageControl: return "";
+    case CrewPosition::powerManagement: return "";
+    case CrewPosition::databaseView: return "";
+    case CrewPosition::altRelay: return "";
+    case CrewPosition::commsOnly: return "";
+    case CrewPosition::shipLog: return "";
+    default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }
 
-bool PlayerInfo::hasPlayerAtPosition(sp::ecs::Entity entity, ECrewPosition position)
+bool PlayerInfo::hasPlayerAtPosition(sp::ecs::Entity entity, CrewPosition position)
 {
     foreach(PlayerInfo, i, player_info_list)
     {
-        if (i->ship == entity && i->crew_position[position])
+        if (i->ship == entity && i->hasPosition(position))
         {
             return true;
         }

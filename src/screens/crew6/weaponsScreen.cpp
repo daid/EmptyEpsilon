@@ -99,7 +99,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 50);
     }
 
-    (new GuiCustomShipFunctions(this, weaponsOfficer, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, CrewPosition::weaponsOfficer, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
 void WeaponsScreen::onDraw(sp::RenderTarget& renderer)

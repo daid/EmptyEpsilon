@@ -21,7 +21,7 @@ public:
         Type type;
         string name;
         string caption;
-        ECrewPosition crew_position;
+        CrewPosition crew_position;
         sp::script::Callback callback;
         int order;
 

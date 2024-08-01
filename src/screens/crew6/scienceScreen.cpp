@@ -33,7 +33,7 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_image.h"
 
-ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
+ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 : GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
 {
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();

@@ -59,7 +59,7 @@ public:
     sp::ecs::Entity observation_point;
     GuiListbox* view_mode_selection;
 public:
-    ScienceScreen(GuiContainer* owner, ECrewPosition crew_position=scienceOfficer);
+    ScienceScreen(GuiContainer* owner, CrewPosition crew_position=CrewPosition::scienceOfficer);
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;

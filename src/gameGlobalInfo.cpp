@@ -66,13 +66,13 @@ void GameGlobalInfo::onReceiveServerCommand(sp::io::DataBuffer& packet)
     switch(command)
     {
     case CMD_PLAY_CLIENT_SOUND:{
-        ECrewPosition position;
+        CrewPosition position;
         string sound_name;
         sp::ecs::Entity entity;
         packet >> entity >> position >> sound_name;
         if (my_spaceship == entity && my_player_info)
         {
-            if ((position == max_crew_positions && my_player_info->main_screen) || (position < max_crew_positions && my_player_info->crew_position[position]))
+            if ((position == CrewPosition::MAX && my_player_info->main_screen) || my_player_info->hasPosition(position))
             {
                 soundManager->playSound(sound_name);
             }
@@ -84,7 +84,7 @@ void GameGlobalInfo::onReceiveServerCommand(sp::io::DataBuffer& packet)
 void GameGlobalInfo::playSoundOnMainScreen(sp::ecs::Entity ship, string sound_name)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_PLAY_CLIENT_SOUND << ship << max_crew_positions << sound_name;
+    packet << CMD_PLAY_CLIENT_SOUND << ship << CrewPosition::MAX << sound_name;
     broadcastServerCommand(packet);
 }
 

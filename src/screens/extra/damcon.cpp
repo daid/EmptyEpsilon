@@ -27,7 +27,7 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
         system_health[n]->setSize(GuiElement::GuiSizeMax, 40);
     }
 
-    (new GuiCustomShipFunctions(this, damageControl, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, CrewPosition::damageControl, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
 void DamageControlScreen::onDraw(sp::RenderTarget& renderer)

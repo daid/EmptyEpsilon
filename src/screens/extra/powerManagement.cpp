@@ -63,7 +63,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         systems[n].heat_bar->setPosition(210, 60, sp::Alignment::TopLeft)->setSize(50, 320);
     }
 
-    (new GuiCustomShipFunctions(this, powerManagement, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, CrewPosition::powerManagement, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     previous_energy_level = 0.0;
     average_energy_delta = 0.0;
