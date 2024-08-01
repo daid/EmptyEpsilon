@@ -2,10 +2,10 @@
 #include "multiplayer.h"
 
 static inline sp::io::DataBuffer& operator << (sp::io::DataBuffer& packet, const CustomShipFunctions::Function& csf) {
-    return packet << csf.type << csf.crew_position << csf.name << csf.caption;
+    return packet << csf.type << csf.crew_positions.mask << csf.name << csf.caption;
 }
 static inline sp::io::DataBuffer& operator >> (sp::io::DataBuffer& packet, CustomShipFunctions::Function& csf) {
-    packet >> csf.type >> csf.crew_position >> csf.name >> csf.caption;
+    packet >> csf.type >> csf.crew_positions.mask >> csf.name >> csf.caption;
     return packet;
 }
 

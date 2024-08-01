@@ -41,6 +41,25 @@ public:
 
     bool operator==(const CrewPositions& other) { return mask == other.mask; }
     bool operator!=(const CrewPositions& other) { return mask != other.mask; }
+
+    class Iterator {
+    public:
+        Iterator(uint64_t _mask, CrewPosition _cp) : mask(_mask), cp(_cp) {
+            while(cp != CrewPosition::MAX && (mask & (1 << int(cp))) == 0) {
+                ++(*this);
+            }
+        }
+        bool operator!=(const Iterator& other) const { return cp != other.cp; }
+        void operator++() { cp = CrewPosition(int(cp)+1); }
+        CrewPosition operator*() { return cp; }
+    private:
+        uint64_t mask;
+        CrewPosition cp;
+    };
+    Iterator begin() { return {mask, CrewPosition(0)}; }
+    Iterator end() { return {mask, CrewPosition::MAX}; }
+
+    static CrewPositions all() { return CrewPositions{int(CrewPosition::MAX) - 1}; }
 };
 
 namespace sp::io {

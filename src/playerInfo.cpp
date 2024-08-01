@@ -1056,7 +1056,7 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
         CrewStationScreen* screen = new CrewStationScreen(render_layer, bool(main_screen & (1 << monitor_index)));
         auto container = screen->getTabContainer();
         CrewPositions cps;
-        if (crew_positions.size() > monitor_index)
+        if (crew_positions.size() > size_t(monitor_index))
             cps = crew_positions[monitor_index];
 
         //Crew 6/5

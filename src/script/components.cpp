@@ -1,6 +1,7 @@
 #include "components.h"
 #include "vector.h"
 #include "enum.h"
+#include "script/crewPosition.h"
 #include "script/environment.h"
 #include "script/component.h"
 #include "script/callback.h"
@@ -709,7 +710,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, type, functions_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, name, functions_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, caption, functions_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, crew_position, functions_dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, crew_positions, functions_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, callback, functions_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, order, functions_dirty);
 

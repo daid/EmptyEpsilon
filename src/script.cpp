@@ -15,6 +15,7 @@
 #include "playerInfo.h"
 #include "io/json.h"
 #include "script/enum.h"
+#include "script/crewPosition.h"
 #include "script/dataStorage.h"
 #include "script/gm.h"
 #include "script/component.h"
@@ -408,7 +409,7 @@ static bool luaHasPlayerAtPosition(sp::ecs::Entity source, CrewPosition station)
     return false;
 }
 
-void luaSetPlayerShipCustomFunction(sp::ecs::Entity entity, CustomShipFunctions::Function::Type type, string name, string caption, CrewPosition position, sp::script::Callback callback, int order)
+void luaSetPlayerShipCustomFunction(sp::ecs::Entity entity, CustomShipFunctions::Function::Type type, string name, string caption, CrewPositions positions, sp::script::Callback callback, int order)
 {
     auto csf = entity.getComponent<CustomShipFunctions>();
     if (!csf) return;
@@ -426,7 +427,7 @@ void luaSetPlayerShipCustomFunction(sp::ecs::Entity entity, CustomShipFunctions:
     f.type = type;
     f.name = name;
     f.caption = caption;
-    f.crew_position = position;
+    f.crew_positions = positions;
     f.callback = callback;
     f.order = order;
     std::stable_sort(csf->functions.begin(), csf->functions.end());

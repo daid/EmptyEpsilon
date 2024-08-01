@@ -82,7 +82,7 @@ void GuiCustomShipFunctions::createEntries()
         Entry& e = entries.back();
         e.name = f.name;
         e.element = nullptr;
-        if (f.crew_position == position)
+        if (f.crew_positions.has(position))
         {
             if (f.type == CustomShipFunctions::Function::Type::Button)
             {

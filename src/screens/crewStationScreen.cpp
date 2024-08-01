@@ -57,7 +57,7 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
         {
             for(auto& f : csf->functions)
             {
-                if (f.crew_position == current_position && f.type == CustomShipFunctions::Function::Type::Message)
+                if (f.crew_positions.has(current_position) && f.type == CustomShipFunctions::Function::Type::Message)
                 {
                     my_player_info->commandCustomFunction(f.name);
                     break;
@@ -277,7 +277,7 @@ void CrewStationScreen::update(float delta)
         // Show custom ship function messages.
         for(auto& f : csf->functions)
         {
-            if (f.crew_position == current_position && f.type == CustomShipFunctions::Function::Type::Message)
+            if (f.crew_positions.has(current_position) && f.type == CustomShipFunctions::Function::Type::Message)
             {
                 message_frame->show();
                 message_text->setText(f.caption);
