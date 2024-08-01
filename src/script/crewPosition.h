@@ -21,7 +21,7 @@ template<> struct Convert<CrewPositions> {
         if (lua_istable(L, idx)) {
             int table_index = 1;
             while(true) {
-                lua_rawgeti(L, idx, table_index);
+                lua_rawgeti(L, idx, table_index++);
                 if (lua_isnil(L, -1)) {
                     lua_pop(L, 1);
                     break;
