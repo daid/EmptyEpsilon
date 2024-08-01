@@ -28,11 +28,12 @@ void SteamRichPresence::update(float delta)
         if (tn)
             status += " [" + tn->type_name + "]";
 
-        for(int idx=0; idx<max_crew_positions; idx++)
+        for(int idx=0; idx<int(CrewPosition::MAX); idx++)
         {
-            if (my_player_info->crew_position[idx])
+            auto cp = CrewPosition(idx);
+            if (my_player_info->hasPosition(cp))
             {
-                status += " " + getCrewPositionName(CrewPosition(idx));
+                status += " " + getCrewPositionName(cp);
                 break;
             }
         }

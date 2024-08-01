@@ -516,7 +516,7 @@ void PlayerInfo::commandSetCrewPosition(int monitor_index, CrewPosition position
     packet << CMD_UPDATE_CREW_POSITION << uint32_t(monitor_index) << position << active;
     sendClientCommand(packet);
 
-    if (crew_positions.size() <= monitor_index)
+    if (crew_positions.size() <= size_t(monitor_index))
         crew_positions.resize(monitor_index + 1);
     if (active)
         crew_positions[monitor_index].add(position);
@@ -1008,7 +1008,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             CrewPosition position;
             packet >> monitor_index >> position >> active;
-            if (crew_positions.size() <= monitor_index)
+            if (crew_positions.size() <= size_t(monitor_index))
                 crew_positions.resize(monitor_index + 1);
             if (active)
                 crew_positions[monitor_index].add(position);
