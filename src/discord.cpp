@@ -70,20 +70,21 @@ void DiscordRichPresence::update(float delta)
             name += " [" + type_name->type_name + "]";
         strncpy(activity.details, name.c_str(), sizeof(activity.details));
 
-        for(int idx=0; idx<max_crew_positions; idx++)
+        for(int idx=0; idx<int(CrewPosition::MAX); idx++)
         {
-            if (my_player_info->crew_position[idx])
+            auto cp = CrewPosition(idx);
+            if (my_player_info->hasPosition(cp))
             {
-                strncpy(activity.state, getCrewPositionName(CrewPosition(idx)).c_str(), sizeof(activity.state));
-                if (idx == helmsOfficer)
+                strncpy(activity.state, getCrewPositionName(cp).c_str(), sizeof(activity.state));
+                if (cp == CrewPosition::helmsOfficer)
                     strcpy(activity.assets.small_image, "helms_white");
-                if (idx == weaponsOfficer)
+                if (cp == CrewPosition::weaponsOfficer)
                     strcpy(activity.assets.small_image, "weapons_white");
-                if (idx == engineering)
+                if (cp == CrewPosition::engineering)
                     strcpy(activity.assets.small_image, "engineering_white");
-                if (idx == scienceOfficer)
+                if (cp == CrewPosition::scienceOfficer)
                     strcpy(activity.assets.small_image, "science_white");
-                if (idx == relayOfficer)
+                if (cp == CrewPosition::relayOfficer)
                     strcpy(activity.assets.small_image, "relay_white");
                 break;
             }
