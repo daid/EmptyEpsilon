@@ -325,19 +325,6 @@ set(MAIN_SOURCES
     src/screenComponents/miniGame.cpp
     src/screenComponents/mineSweeper.cpp
     src/screenComponents/impulseSound.cpp
-    src/spaceObjects/missiles/missileWeapon.cpp
-    src/spaceObjects/missiles/EMPMissile.cpp
-    src/spaceObjects/missiles/homingMissile.cpp
-    src/spaceObjects/missiles/hvli.cpp
-    src/spaceObjects/missiles/nuke.cpp
-    src/spaceObjects/spaceship.cpp
-    src/spaceObjects/wormHole.cpp
-    src/spaceObjects/spaceObject.cpp
-    src/spaceObjects/playerSpaceship.cpp
-    src/spaceObjects/beamEffect.cpp
-    src/spaceObjects/scanProbe.cpp
-    src/spaceObjects/shipTemplateBasedObject.cpp
-    src/spaceObjects/planet.cpp
     src/components/faction.h
     src/components/faction.cpp
     src/components/radar.h
@@ -641,10 +628,6 @@ set(MAIN_SOURCES
     src/screens/windowScreen.h
     src/script.h
     src/shaderRegistry.h
-    src/spaceObjects/playerSpaceship.h
-    src/spaceObjects/shipTemplateBasedObject.h
-    src/spaceObjects/spaceObject.h
-    src/spaceObjects/spaceship.h
     src/threatLevelEstimate.h
     src/tutorialGame.h
     src/script/components.h

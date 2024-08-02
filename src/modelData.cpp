@@ -104,6 +104,7 @@ void ModelData::setSpecular(string specular_texture_name)
      this->specular_texture_name = specular_texture_name;
 }
 
+    /*
 void ModelData::setCollisionData(P<SpaceObject> object)
 {
     auto& physics = object->entity.getOrAddComponent<sp::Physics>();
@@ -112,6 +113,7 @@ void ModelData::setCollisionData(P<SpaceObject> object)
         physics.setRectangle(sp::Physics::Type::Dynamic, collision_box);
     }
 }
+    */
 
 glm::vec3 ModelData::getBeamPosition(int index)
 {

@@ -90,14 +90,6 @@ void GameGlobalInfo::playSoundOnMainScreen(sp::ecs::Entity ship, string sound_na
 
 void GameGlobalInfo::update(float delta)
 {
-    foreach(SpaceObject, obj, space_object_list) {
-        if (obj->entity) {
-            //Add a back reference to the SpaceObject from the ECS, we need this until we fully phased out the OOP style code (if ever...)
-            // We do this here so this is done for client and server.
-            obj->entity.addComponent<SpaceObject*>(*obj);
-        }
-    }
-
     if (global_message_timeout > 0.0f)
     {
         global_message_timeout -= delta;
@@ -233,8 +225,6 @@ void GameGlobalInfo::reset()
     on_gm_click = nullptr;
 
     sp::ecs::Entity::destroyAllEntities();
-    foreach(SpaceObject, o, space_object_list)
-        o->destroy();
     main_scenario_script = nullptr;
     additional_scripts.clear();
     script_environment_base = nullptr;

@@ -9,8 +9,6 @@
 #include <unordered_map>
 #include <glm/vec3.hpp>
 
-class SpaceObject;
-
 class EngineEmitterData
 {
 public:
@@ -118,7 +116,7 @@ public:
     glm::vec2 getBeamPosition2D(int index);
     glm::vec3 getTubePosition(int index);
     glm::vec2 getTubePosition2D(int index);
-    void setCollisionData(P<SpaceObject> object);
+    //void setCollisionData(P<SpaceObject> object);
     float getRadius();
 
     void load();
