@@ -583,6 +583,7 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<PlayerControl>::name("player_control");
     BIND_MEMBER(PlayerControl, alert_level);
     BIND_MEMBER(PlayerControl, control_code);
+    BIND_MEMBER(PlayerControl, allowed_positions);
     sp::script::ComponentHandler<HackingDevice>::name("hacking_device");
     BIND_MEMBER(HackingDevice, effectiveness);
 

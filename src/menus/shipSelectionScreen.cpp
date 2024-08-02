@@ -148,13 +148,10 @@ ShipSelectionScreen::ShipSelectionScreen()
     right_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     auto right_panel = new GuiPanel(right_container, "DIRECT_OPTIONS_PANEL");
-    if (game_server) {
-    right_panel->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 325);
-    }
+    if (game_server)
+        right_panel->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 325);
     else
-    {
-    right_panel->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 560);
-    }
+        right_panel->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 560);
     auto right_content = new GuiElement(right_panel, "");
     right_content->setMargins(50)->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
@@ -584,6 +581,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
 
 void CrewPositionSelection::onUpdate()
 {
+    auto pc = my_spaceship.getComponent<PlayerControl>();
     bool any_selected = main_screen_button->getValue() || window_button->getValue() || topdown_button->getValue();
     // If a position already has a player on the currently selected player ship,
     // indicate that on the button.
@@ -612,6 +610,7 @@ void CrewPositionSelection::onUpdate()
             } else {
                 crew_position_button[n]->setText(button_text);
             }
+            crew_position_button[n]->setEnable(!pc || pc->allowed_positions.has(cp));
             any_selected = any_selected || crew_position_button[n]->getValue();
         }
     }

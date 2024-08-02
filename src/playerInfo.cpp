@@ -522,6 +522,8 @@ void PlayerInfo::commandSetCrewPosition(int monitor_index, CrewPosition position
         crew_positions[monitor_index].add(position);
     else
         crew_positions[monitor_index].remove(position);
+    if (auto pc = ship.getComponent<PlayerControl>())
+        crew_positions[monitor_index].mask &= pc->allowed_positions.mask;
 }
 
 void PlayerInfo::commandSetShip(sp::ecs::Entity entity)
@@ -1014,10 +1016,15 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 crew_positions[monitor_index].add(position);
             else
                 crew_positions[monitor_index].remove(position);
+            if (auto pc = ship.getComponent<PlayerControl>())
+                crew_positions[monitor_index].mask &= pc->allowed_positions.mask;
         }
         break;
     case CMD_UPDATE_SHIP_ID:
         packet >> ship;
+        if (auto pc = ship.getComponent<PlayerControl>())
+            for(auto& cps : crew_positions)
+                cps.mask &= pc->allowed_positions.mask;
         break;
     case CMD_UPDATE_MAIN_SCREEN:
         packet >> monitor_index >> active;

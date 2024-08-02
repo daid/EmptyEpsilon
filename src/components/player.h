@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stringImproved.h"
+#include "crewPosition.h"
 
 
 enum class MainScreenSetting
@@ -41,6 +42,8 @@ public:
 
     // Password to join a ship. Default is empty.
     string control_code;
+
+    CrewPositions allowed_positions = CrewPositions::all();
 };
 
 string alertLevelToString(AlertLevel level);
