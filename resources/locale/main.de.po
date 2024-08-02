@@ -312,7 +312,7 @@ msgid "Connecting..."
 msgstr "Verbinde..."
 
 #: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:58
-#: src/menus/shipSelectionScreen.cpp:559 src/screens/gm/gameMasterScreen.cpp:93
+#: src/menus/shipSelectionScreen.cpp:560 src/screens/gm/gameMasterScreen.cpp:93
 #: src/screens/gm/objectCreationView.cpp:142
 #: src/screens/gm/globalMessageEntryView.cpp:19
 #: src/screenComponents/selfDestructButton.cpp:25
@@ -359,10 +359,10 @@ msgstr "unterschiedliche Versionen"
 #: src/menus/serverBrowseMenu.cpp:34
 msgctxt "game_client_disconnect_reason"
 msgid "unspecified error {error}"
-msgstr "nicht benannter Fehler"
+msgstr "Fehler: {error}"
 
 #: src/menus/serverBrowseMenu.cpp:51 src/menus/tutorialMenu.cpp:65
-#: src/menus/optionsMenu.cpp:135 src/menus/hotkeyMenu.cpp:71
+#: src/menus/optionsMenu.cpp:192 src/menus/hotkeyMenu.cpp:71
 #: src/screenComponents/databaseView.cpp:102
 #: src/screenComponents/databaseView.cpp:106
 msgctxt "button"
@@ -465,88 +465,88 @@ msgctxt "Credits"
 msgid "Special thanks:"
 msgstr "Besonderen Dank an:"
 
-#: src/menus/serverCreationScreen.cpp:31
+#: src/menus/serverCreationScreen.cpp:30
 msgid "Server configuration"
 msgstr "Server-Einstellungen"
 
-#: src/menus/serverCreationScreen.cpp:36
+#: src/menus/serverCreationScreen.cpp:35
 msgid "Server name: "
 msgstr "Servername: "
 
-#: src/menus/serverCreationScreen.cpp:43
+#: src/menus/serverCreationScreen.cpp:42
 msgid "Server password: "
 msgstr "Serverpasswort: "
 
-#: src/menus/serverCreationScreen.cpp:50
+#: src/menus/serverCreationScreen.cpp:49
 msgid "GM control code: "
 msgstr "SL-Kontrollcode: "
 
-#: src/menus/serverCreationScreen.cpp:57
+#: src/menus/serverCreationScreen.cpp:56
 msgid "List on master server: "
-msgstr "Auf Master-Server sichtbar:"
+msgstr "Auf Master-Server sichtbar: "
 
-#: src/menus/serverCreationScreen.cpp:59
+#: src/menus/serverCreationScreen.cpp:58
 msgid "No"
 msgstr "Nein"
 
-#: src/menus/serverCreationScreen.cpp:59
+#: src/menus/serverCreationScreen.cpp:58
 msgid "Yes"
 msgstr "Ja"
 
-#: src/menus/serverCreationScreen.cpp:63
+#: src/menus/serverCreationScreen.cpp:62
 msgid "Server port: "
 msgstr "Serverport: "
 
-#: src/menus/serverCreationScreen.cpp:67
+#: src/menus/serverCreationScreen.cpp:66
 msgid "Server info"
 msgstr "Serverinfo"
 
-#: src/menus/serverCreationScreen.cpp:75
+#: src/menus/serverCreationScreen.cpp:74
 msgid "Server was configured to connect to reverse proxy:"
 msgstr ""
 "Der Server wurde für die Verbindung mit einem Reverse-Proxy konfiguriert:"
 
-#: src/menus/serverCreationScreen.cpp:89
+#: src/menus/serverCreationScreen.cpp:88
 msgid "Server IP: "
 msgstr "Server-IP: "
 
-#: src/menus/serverCreationScreen.cpp:101
-#: src/menus/serverCreationScreen.cpp:136
-#: src/menus/serverCreationScreen.cpp:215 src/menus/shipSelectionScreen.cpp:260
+#: src/menus/serverCreationScreen.cpp:100
+#: src/menus/serverCreationScreen.cpp:135
+#: src/menus/serverCreationScreen.cpp:214 src/menus/shipSelectionScreen.cpp:260
 msgid "Close"
 msgstr "Schließen"
 
-#: src/menus/serverCreationScreen.cpp:107
+#: src/menus/serverCreationScreen.cpp:106
 msgid "Start server"
 msgstr "Starte Server"
 
-#: src/menus/serverCreationScreen.cpp:143
+#: src/menus/serverCreationScreen.cpp:142
 msgid "Continue"
 msgstr "Weiter"
 
-#: src/menus/serverCreationScreen.cpp:192
+#: src/menus/serverCreationScreen.cpp:191
 msgid "Category"
 msgstr "Kategorie"
 
-#: src/menus/serverCreationScreen.cpp:198
+#: src/menus/serverCreationScreen.cpp:197
 msgid "Scenario"
 msgstr "Szenario"
 
-#: src/menus/serverCreationScreen.cpp:206
+#: src/menus/serverCreationScreen.cpp:205
 msgid "Description"
 msgstr "Beschreibung"
 
-#: src/menus/serverCreationScreen.cpp:207
-#: src/menus/serverCreationScreen.cpp:282
+#: src/menus/serverCreationScreen.cpp:206
+#: src/menus/serverCreationScreen.cpp:280
 msgid "Select a scenario..."
 msgstr "Szenario auswählen"
 
-#: src/menus/serverCreationScreen.cpp:222
-#: src/menus/serverCreationScreen.cpp:339
+#: src/menus/serverCreationScreen.cpp:221
+#: src/menus/serverCreationScreen.cpp:337
 msgid "Start scenario"
 msgstr "Szenario starten"
 
-#: src/menus/serverCreationScreen.cpp:333
+#: src/menus/serverCreationScreen.cpp:331
 msgid "Back"
 msgstr "Zurück"
 
@@ -559,92 +559,96 @@ msgstr "Tutorials"
 msgid "Start Tutorial"
 msgstr "Starte Tutorial"
 
-#: src/menus/optionsMenu.cpp:35
+#: src/menus/optionsMenu.cpp:36
 msgid "Graphics options"
 msgstr "Grafikoptionen"
 
-#: src/menus/optionsMenu.cpp:44
+#: src/menus/optionsMenu.cpp:45
 msgid "Audio options"
 msgstr "Audio-Optionen"
 
-#: src/menus/optionsMenu.cpp:53
+#: src/menus/optionsMenu.cpp:54
 msgid "Interface options"
 msgstr "Schnittstellen-Optionen"
 
-#: src/menus/optionsMenu.cpp:74
+#: src/menus/optionsMenu.cpp:75
 msgid "Radar Rotation"
 msgstr "Radar statt Schiffs-Icon drehen"
 
-#: src/menus/optionsMenu.cpp:76
+#: src/menus/optionsMenu.cpp:77
 msgid "Helms Radar Lock"
 msgstr "Rotierendes Piloten-Radar"
 
-#: src/menus/optionsMenu.cpp:84
+#: src/menus/optionsMenu.cpp:85
 msgid "Weapons Radar Lock"
 msgstr "Rotierendes Waffen-Radar"
 
-#: src/menus/optionsMenu.cpp:90
+#: src/menus/optionsMenu.cpp:91
 msgid "Science Radar Lock"
 msgstr "Rotierendes Wissenschafts-Radar"
 
-#: src/menus/optionsMenu.cpp:97
+#: src/menus/optionsMenu.cpp:98
 msgid "Control Options"
 msgstr "Steuerung"
 
-#: src/menus/optionsMenu.cpp:100 src/menus/hotkeyMenu.cpp:38
+#: src/menus/optionsMenu.cpp:101 src/menus/hotkeyMenu.cpp:38
 msgid "Configure Keyboard/Joystick"
 msgstr "Tasten- und Joystickbelegung"
 
-#: src/menus/optionsMenu.cpp:107
+#: src/menus/optionsMenu.cpp:109
 msgid "Language (applies on back)"
 msgstr "Sprache"
 
-#: src/menus/optionsMenu.cpp:143
+#: src/menus/optionsMenu.cpp:178
+msgid "Interface Theme"
+msgstr "Oberflächen-Theme"
+
+#: src/menus/optionsMenu.cpp:202
 msgctxt "options"
 msgid "Save"
 msgstr "Speichern"
 
-#: src/menus/optionsMenu.cpp:165
+#: src/menus/optionsMenu.cpp:224
 msgid "Fullscreen toggle"
 msgstr "Vollbild umschalten"
 
-#: src/menus/optionsMenu.cpp:198 src/menus/optionsMenu.cpp:203
+#: src/menus/optionsMenu.cpp:257 src/menus/optionsMenu.cpp:262
 msgid "FoV: {fov}"
 msgstr "FoV: {fov}"
 
-#: src/menus/optionsMenu.cpp:219 src/menus/optionsMenu.cpp:224
+#: src/menus/optionsMenu.cpp:278 src/menus/optionsMenu.cpp:283
 msgid "Sound Volume: {volume}%"
 msgstr "Lautstärke: {volume}%"
 
-#: src/menus/optionsMenu.cpp:228
+#: src/menus/optionsMenu.cpp:287
 msgid "Music Playback"
 msgstr "Musik-Playback"
 
-#: src/menus/optionsMenu.cpp:238 src/menus/optionsMenu.cpp:263
+#: src/menus/optionsMenu.cpp:297 src/menus/optionsMenu.cpp:322
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-#: src/menus/optionsMenu.cpp:238 src/menus/optionsMenu.cpp:263
+#: src/menus/optionsMenu.cpp:297 src/menus/optionsMenu.cpp:322
 msgid "Enabled"
 msgstr "Aktiviert"
 
-#: src/menus/optionsMenu.cpp:238 src/menus/optionsMenu.cpp:263
+#: src/menus/optionsMenu.cpp:297 src/menus/optionsMenu.cpp:322
 msgid "Main Screen only"
 msgstr "Nur Hauptschirm"
 
-#: src/menus/optionsMenu.cpp:244 src/menus/optionsMenu.cpp:249
+#: src/menus/optionsMenu.cpp:303 src/menus/optionsMenu.cpp:308
 msgid "Music Volume: {volume}%"
-msgstr "Musiklautstärke"
+msgstr "Musiklautstärke: {volume}%"
 
-#: src/menus/optionsMenu.cpp:253
+#: src/menus/optionsMenu.cpp:312
 msgid "Impulse Engine sound"
 msgstr "Impulsantriebs-Sound"
 
-#: src/menus/optionsMenu.cpp:269 src/menus/optionsMenu.cpp:274
+#: src/menus/optionsMenu.cpp:328 src/menus/optionsMenu.cpp:333
 msgid "Impulse Volume: {volume}%"
 msgstr "Impulslautstärke: {volume}%"
 
-#: src/menus/optionsMenu.cpp:286
+#: src/menus/optionsMenu.cpp:345
 msgid "Preview Soundtracks"
 msgstr "Vorschau Soundtracks"
 
@@ -779,56 +783,56 @@ msgstr "Wähle Schiff"
 msgid "Waiting for server to spawn a ship"
 msgstr "Kein Schiff verfügbar - Warte auf Server"
 
-#: src/menus/shipSelectionScreen.cpp:358
+#: src/menus/shipSelectionScreen.cpp:359
 msgid "Spawn player ship"
 msgstr "Neues Spielerschiff"
 
-#: src/menus/shipSelectionScreen.cpp:379
+#: src/menus/shipSelectionScreen.cpp:380
 msgid "Scenario selection"
 msgstr "Szenario-Auswahl"
 
-#: src/menus/shipSelectionScreen.cpp:386
+#: src/menus/shipSelectionScreen.cpp:387
 msgid "Disconnect"
 msgstr "Verbindung trennen"
 
-#: src/menus/shipSelectionScreen.cpp:490
+#: src/menus/shipSelectionScreen.cpp:491
 msgid "6/5 player crew"
 msgstr "Crewstärke: 5-6 Personen"
 
-#: src/menus/shipSelectionScreen.cpp:512
+#: src/menus/shipSelectionScreen.cpp:513
 msgid "4/3/1 player crew"
 msgstr "Crewstärke: 4/3/1 Personen"
 
-#: src/menus/shipSelectionScreen.cpp:521
+#: src/menus/shipSelectionScreen.cpp:522
 msgid "3D screens"
 msgstr "3D-Ansicht"
 
-#: src/menus/shipSelectionScreen.cpp:524
+#: src/menus/shipSelectionScreen.cpp:525
 msgid "Main screen"
 msgstr "Hauptschirm"
 
-#: src/menus/shipSelectionScreen.cpp:534 src/menus/autoConnectScreen.cpp:28
+#: src/menus/shipSelectionScreen.cpp:535 src/menus/autoConnectScreen.cpp:28
 msgid "Ship window"
 msgstr "Schiffsfenster"
 
-#: src/menus/shipSelectionScreen.cpp:553
+#: src/menus/shipSelectionScreen.cpp:554
 msgid "Top-down 3D view"
 msgstr "Draufsicht"
 
-#: src/menus/shipSelectionScreen.cpp:563
+#: src/menus/shipSelectionScreen.cpp:564
 msgctxt "button"
 msgid "Ready"
 msgstr "Bereit"
 
-#: src/menus/shipSelectionScreen.cpp:570
+#: src/menus/shipSelectionScreen.cpp:571
 msgid "Alternative options"
 msgstr "Weitere Optionen"
 
-#: src/menus/shipSelectionScreen.cpp:574
+#: src/menus/shipSelectionScreen.cpp:575
 msgid "Main screen controls"
 msgstr "Hauptschirm-Steuerung"
 
-#: src/menus/shipSelectionScreen.cpp:584
+#: src/menus/shipSelectionScreen.cpp:585
 msgid ""
 "You can select multiple stations and switch between them during the game.\n"
 "If mainscreen is selected alongside stations, it will be shown next to the "
@@ -840,7 +844,7 @@ msgstr ""
 "dieser neben der aktiven Station angezeigt (vorausgesetzt, der "
 "Gesamtbildschirm ist breit genug)."
 
-#: src/menus/shipSelectionScreen.cpp:624
+#: src/menus/shipSelectionScreen.cpp:625
 msgid "--- Crew ---"
 msgstr "--- Crew ---"
 
@@ -1022,6 +1026,11 @@ msgctxt "slider"
 msgid "Coolant: {current_level}% / {requested}%"
 msgstr "Kühlmittel: {current_level}% / {requested}%"
 
+#: src/screens/crew6/engineeringScreen.cpp:281
+msgctxt "Engineer"
+msgid "Maximal health"
+msgstr "Bestmöglicher Zustand"
+
 #: src/screens/crew6/engineeringScreen.cpp:287
 msgid "Energy production"
 msgstr "Energieproduktion"
@@ -1029,6 +1038,11 @@ msgstr "Energieproduktion"
 #: src/screens/crew6/engineeringScreen.cpp:290
 msgid "Firing rate"
 msgstr "Feuerrate"
+
+#: src/screens/crew6/engineeringScreen.cpp:297
+msgctxt "Engineer"
+msgid "Turret rotation rate"
+msgstr "Turmdrehgeschwindigkeit:"
 
 #: src/screens/crew6/engineeringScreen.cpp:303
 msgctxt "missile"
@@ -1726,11 +1740,11 @@ msgstr "{system} : Zustand"
 
 #: src/screens/gm/tweak.cpp:765
 msgid "{system} health max"
-msgstr "{system} : max. Zustand"
+msgstr "max. Zustand"
 
 #: src/screens/gm/tweak.cpp:775
 msgid "{system} heat"
-msgstr "{system}: Wärme"
+msgstr "Wärme"
 
 #: src/screens/gm/tweak.cpp:818
 msgid "current factor"
@@ -2289,27 +2303,27 @@ msgctxt "gm_info"
 msgid "Size"
 msgstr "Größe"
 
-#: src/spaceObjects/spaceship.cpp:1900
+#: src/spaceObjects/spaceship.cpp:1901
 msgctxt "missile"
 msgid "Homing"
 msgstr "Zielsuch"
 
-#: src/spaceObjects/spaceship.cpp:1902
+#: src/spaceObjects/spaceship.cpp:1903
 msgctxt "missile"
 msgid "Nuke"
 msgstr "Nuke"
 
-#: src/spaceObjects/spaceship.cpp:1904
+#: src/spaceObjects/spaceship.cpp:1905
 msgctxt "missile"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/spaceObjects/spaceship.cpp:1906
+#: src/spaceObjects/spaceship.cpp:1907
 msgctxt "missile"
 msgid "EMP"
 msgstr "EMP"
 
-#: src/spaceObjects/spaceship.cpp:1908
+#: src/spaceObjects/spaceship.cpp:1909
 msgctxt "missile"
 msgid "HVLI"
 msgstr "HGBI"
@@ -2464,60 +2478,60 @@ msgctxt "shiplog"
 msgid "Communication channel closed"
 msgstr "Verbindung beendet"
 
-#: src/spaceObjects/playerSpaceship.cpp:1543
-#: src/spaceObjects/playerSpaceship.cpp:1620
+#: src/spaceObjects/playerSpaceship.cpp:1544
+#: src/spaceObjects/playerSpaceship.cpp:1621
 msgctxt "chatdialog"
 msgid "Opened comms with {name}"
 msgstr "Verbindung mit {name} hergestellt"
 
-#: src/spaceObjects/playerSpaceship.cpp:1544
+#: src/spaceObjects/playerSpaceship.cpp:1545
 msgctxt "shiplog"
 msgid "Hailing: {name}"
-msgstr "Ruf: {name}Verbindung zu {callsign} geöffnet"
+msgstr "Ruf: {name}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1567
 #: src/spaceObjects/playerSpaceship.cpp:1568
+#: src/spaceObjects/playerSpaceship.cpp:1569
 msgctxt "chatdialog"
 msgid "Opened comms to {callsign}"
 msgstr "Verbindung mit {callsign} hergestellt"
 
-#: src/spaceObjects/playerSpaceship.cpp:1569
 #: src/spaceObjects/playerSpaceship.cpp:1570
+#: src/spaceObjects/playerSpaceship.cpp:1571
 msgctxt "shiplog"
 msgid "Opened communication channel to {callsign}"
 msgstr "Verbindung zu {callsign} geöffnet"
 
-#: src/spaceObjects/playerSpaceship.cpp:1572
+#: src/spaceObjects/playerSpaceship.cpp:1573
 msgctxt "shiplog"
 msgid "Refused communications from {callsign}"
 msgstr "Verbindung von {callsign} abgewiesen"
 
-#: src/spaceObjects/playerSpaceship.cpp:1573
+#: src/spaceObjects/playerSpaceship.cpp:1574
 msgctxt "shiplog"
 msgid "Refused communications to {callsign}"
 msgstr "Verbindung nach {callsign} abgewiesen"
 
-#: src/spaceObjects/playerSpaceship.cpp:1582
+#: src/spaceObjects/playerSpaceship.cpp:1583
 msgctxt "shiplog"
 msgid "Hail suddenly went dead."
 msgstr "Ruf abgebrochen."
 
-#: src/spaceObjects/playerSpaceship.cpp:1585
+#: src/spaceObjects/playerSpaceship.cpp:1586
 msgctxt "shiplog"
 msgid "Accepted hail from {callsign}"
 msgstr "Ruf von {callsign} angenommen"
 
-#: src/spaceObjects/playerSpaceship.cpp:1605
+#: src/spaceObjects/playerSpaceship.cpp:1606
 msgctxt "shiplog"
 msgid "Refused hail from {callsign}"
 msgstr "Ruf von {callsign}  abgewiesen"
 
-#: src/spaceObjects/playerSpaceship.cpp:1619
+#: src/spaceObjects/playerSpaceship.cpp:1620
 msgctxt "shiplog"
 msgid "Opened communication channel to {name}"
 msgstr "Verbindung zu {name} geöffnet"
 
-#: src/spaceObjects/playerSpaceship.cpp:1622
+#: src/spaceObjects/playerSpaceship.cpp:1623
 msgctxt "shiplog"
 msgid "Refused hail from {name}"
 msgstr "Ruf von {name} abgewiesen"
