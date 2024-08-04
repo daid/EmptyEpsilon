@@ -155,7 +155,7 @@ bool PlayerInfo::isOnlyMainScreen(int monitor_index)
     if (!(main_screen & (1 << monitor_index)))
         return false;
     if (crew_positions.size() <= static_cast<size_t>(monitor_index))
-        return false;
+        return true;
     return crew_positions[monitor_index].mask == 0;
 }
 

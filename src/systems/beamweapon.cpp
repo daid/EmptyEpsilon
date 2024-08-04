@@ -25,11 +25,6 @@
 #include <graphics/opengl.h>
 
 
-BeamWeaponSystem::BeamWeaponSystem()
-{
-    RenderSystem::add3DHandler<BeamEffect>(this, true);
-}
-
 void BeamWeaponSystem::update(float delta)
 {
     if (!game_server) return;
@@ -172,23 +167,19 @@ void BeamWeaponSystem::update(float delta)
     }
 }
 
-void BeamWeaponSystem::render3D(sp::ecs::Entity e)
+void BeamWeaponSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, BeamEffect& be)
 {
-    auto be = e.getComponent<BeamEffect>();
-    auto transform = e.getComponent<sp::Transform>();
-    if (!be || !transform) return;
-
-    glm::vec3 startPoint(transform->getPosition().x, transform->getPosition().y, be->source_offset.z);
-    glm::vec3 endPoint(be->target_location.x, be->target_location.y, be->target_offset.z);
+    glm::vec3 startPoint(transform.getPosition().x, transform.getPosition().y, be.source_offset.z);
+    glm::vec3 endPoint(be.target_location.x, be.target_location.y, be.target_offset.z);
     glm::vec3 eyeNormal = glm::normalize(glm::cross(camera_position - startPoint, endPoint - startPoint));
 
-    textureManager.getTexture(be->beam_texture)->bind();
+    textureManager.getTexture(be.beam_texture)->bind();
 
     ShaderRegistry::ScopedShader beamShader(ShaderRegistry::Shaders::Basic);
 
     auto model_matrix = glm::identity<glm::mat4>();
 
-    glUniform4f(beamShader.get().uniform(ShaderRegistry::Uniforms::Color), be->lifetime, be->lifetime, be->lifetime, 1.f);
+    glUniform4f(beamShader.get().uniform(ShaderRegistry::Uniforms::Color), be.lifetime, be.lifetime, be.lifetime, 1.f);
     glUniformMatrix4fv(beamShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, false, glm::value_ptr(model_matrix));
     
     gl::ScopedVertexAttribArray positions(beamShader.get().attribute(ShaderRegistry::Attributes::Position));
@@ -225,14 +216,14 @@ void BeamWeaponSystem::render3D(sp::ecs::Entity e)
     }
 
     // Fire ring
-    if (be->fire_ring)
+    if (be.fire_ring)
     {
-        glm::vec3 side = glm::cross(be->hit_normal, glm::vec3(0, 0, 1));
-        glm::vec3 up = glm::cross(side, be->hit_normal);
+        glm::vec3 side = glm::cross(be.hit_normal, glm::vec3(0, 0, 1));
+        glm::vec3 up = glm::cross(side, be.hit_normal);
 
-        glm::vec3 v0(be->target_location.x, be->target_location.y, be->target_offset.z);
+        glm::vec3 v0(be.target_location.x, be.target_location.y, be.target_offset.z);
 
-        float ring_size = Tween<float>::easeOutCubic(be->lifetime, 1.0, 0.0, 10.0f, 80.0f);
+        float ring_size = Tween<float>::easeOutCubic(be.lifetime, 1.0, 0.0, 10.0f, 80.0f);
         auto v1 = v0 + side * ring_size + up * ring_size;
         auto v2 = v0 - side * ring_size + up * ring_size;
         auto v3 = v0 - side * ring_size - up * ring_size;

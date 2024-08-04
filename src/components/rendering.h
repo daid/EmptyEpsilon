@@ -42,6 +42,13 @@ public:
     bool emitters_dirty = true;
 };
 
+class BillboardRenderer
+{
+public:
+    TextureRef texture;
+    float size = 512.0f;
+};
+
 class NebulaRenderer
 {
 public:

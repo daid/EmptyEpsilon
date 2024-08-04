@@ -35,12 +35,11 @@ end
 --- Immediately destroys this artifact with a visual explosion.
 --- Example: artifact:explode() -- artifact is destroyed
 function Entity:explode()
-    --[[TODO
-    P<ExplosionEffect> e = new ExplosionEffect();
-    e->setSize(120);
-    e->setPosition(getPosition());
-    destroy();
-    --]]
+    local e = ExplosionEffect()
+    e:setSize(120)
+    local x, y = self:getPosition()
+    e:setPosition(x, y)
+    self:destroy()
     return self
 end
 --- Defines whether this artifact can be picked up via collision.
