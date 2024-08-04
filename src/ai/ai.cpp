@@ -381,7 +381,7 @@ void ShipAI::runOrders()
             }else{
                 auto diff = owner->getOrderTargetLocation() - owner->getPosition();
                 if (glm::length2(diff) < 1000.0f*1000.0f)
-                    owner->orderRoamingAt(glm::vec2(random(-long_range, long_range), random(-long_range, long_range)));
+                    owner->orderRoamingAt(owner->getPosition() + glm::vec2(random(-long_range, long_range), random(-long_range, long_range)));
                 flyTowards(owner->getOrderTargetLocation());
             }
         }else if (owner->weapon_tube_count > 0)
@@ -394,7 +394,7 @@ void ShipAI::runOrders()
             }else{
                 auto diff = owner->getOrderTargetLocation() - owner->getPosition();
                 if (glm::length2(diff) < 1000.0f*1000.0f)
-                    owner->orderRoamingAt(glm::vec2(random(-long_range, long_range), random(-long_range, long_range)));
+                    owner->orderRoamingAt(owner->getPosition() + glm::vec2(random(-long_range, long_range), random(-long_range, long_range)));
                 flyTowards(owner->getOrderTargetLocation());
             }
         }else{
