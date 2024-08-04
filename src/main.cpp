@@ -416,6 +416,9 @@ int main(int argc, char** argv)
         // Create the server.
         new EpsilonServer(defaultServerPort);
 
+        if(!gameGlobalInfo) // => failed to start server
+            return 1;
+
         // Load the scenario and open the ship selection screen.
         gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"));
         new ShipSelectionScreen();
