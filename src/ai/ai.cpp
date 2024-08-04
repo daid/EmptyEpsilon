@@ -410,7 +410,7 @@ void ShipAI::runOrders()
                     auto diff = ai->order_target_location - ot->getPosition();
                     if (glm::length2(diff) < 1000.0f*1000.0f) {
                         ai->orders = AIOrder::Roaming;
-                        ai->order_target_location = glm::vec2(random(-long_range, long_range), random(-long_range, long_range));
+                        ai->order_target_location = ot->getPosition() + glm::vec2(random(-long_range, long_range), random(-long_range, long_range));
                     }
                     flyTowards(ai->order_target_location);
                 }
@@ -428,7 +428,7 @@ void ShipAI::runOrders()
                         auto diff = ai->order_target_location - ot->getPosition();
                         if (glm::length2(diff) < 1000.0f*1000.0f) {
                             ai->orders = AIOrder::Roaming;
-                            ai->order_target_location = glm::vec2(random(-long_range, long_range), random(-long_range, long_range));
+                            ai->order_target_location = ot->getPosition() + glm::vec2(random(-long_range, long_range), random(-long_range, long_range));
                         }
                         flyTowards(ai->order_target_location);
                     }
