@@ -144,6 +144,7 @@ void initSystemsAndComponents()
     engine->registerSystem<PathFindingSystem>();
     engine->registerSystem<NebulaRenderSystem>();
     engine->registerSystem<ExplosionRenderSystem>();
+    engine->registerSystem<BillboardRenderSystem>();
     engine->registerSystem<PlanetRenderSystem>();
     engine->registerSystem<PlanetTransparentRenderSystem>();
     engine->registerSystem<MeshRenderSystem>();

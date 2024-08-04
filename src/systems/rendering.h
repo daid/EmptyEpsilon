@@ -89,3 +89,10 @@ public:
     void update(float delta) override;
     void render3D(sp::ecs::Entity e, sp::Transform& transform, ExplosionEffect& ee) override;
 };
+
+class BillboardRenderSystem : public sp::ecs::System, public Render3DInterface<BillboardRenderer, true>
+{
+public:
+    void update(float delta) override;
+    void render3D(sp::ecs::Entity e, sp::Transform& transform, BillboardRenderer& bbr) override;
+};

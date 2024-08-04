@@ -45,7 +45,7 @@ public:
 class BillboardRenderer
 {
 public:
-    TextureRef texture;
+    string texture;
     float size = 512.0f;
 };
 

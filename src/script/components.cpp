@@ -262,6 +262,9 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(MeshRenderComponent, illumination_texture.name, "illumination_texture");
     BIND_MEMBER(MeshRenderComponent, mesh_offset);
     BIND_MEMBER(MeshRenderComponent, scale);
+    sp::script::ComponentHandler<BillboardRenderer>::name("billboard_render");
+    BIND_MEMBER(BillboardRenderer, texture);
+    BIND_MEMBER(BillboardRenderer, size);
     sp::script::ComponentHandler<EngineEmitter>::name("engine_emitter");
     BIND_ARRAY_DIRTY_FLAG(EngineEmitter, emitters, emitters_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(EngineEmitter, emitters, position, emitters_dirty);

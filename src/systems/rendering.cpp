@@ -338,3 +338,44 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         n += active_quads;
     }
 }
+
+void BillboardRenderSystem::update(float delta)
+{
+}
+
+void BillboardRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, BillboardRenderer& bbr)
+{
+    struct VertexAndTexCoords
+    {
+        glm::vec3 vertex;
+        glm::vec2 texcoords;
+    };
+    static std::array<VertexAndTexCoords, 4> quad{
+        glm::vec3{}, {0.f, 1.f},
+        glm::vec3{}, {1.f, 1.f},
+        glm::vec3{}, {1.f, 0.f},
+        glm::vec3{}, {0.f, 0.f}
+    };
+
+    textureManager.getTexture(bbr.texture)->bind();
+    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
+
+    auto position = transform.getPosition();
+    auto rotation = transform.getRotation();
+    auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
+    model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
+
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+    glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, bbr.size);
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+    glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+
+    std::initializer_list<uint16_t> indices = { 0, 2, 1, 0, 3, 2 };
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
+    glBlendFunc(GL_ONE, GL_ONE);
+}
