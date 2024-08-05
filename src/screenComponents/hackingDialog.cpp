@@ -2,7 +2,6 @@
 #include "hackingDialog.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "spaceObjects/spaceObject.h"
 #include "mineSweeper.h"
 #include "lightsOut.h"
 #include "miniGame.h"

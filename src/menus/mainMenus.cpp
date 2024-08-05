@@ -6,7 +6,6 @@
 #include "epsilonServer.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "spaceObjects/spaceship.h"
 #include "menus/serverCreationScreen.h"
 #include "menus/optionsMenu.h"
 #include "menus/tutorialMenu.h"

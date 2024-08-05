@@ -228,7 +228,6 @@ set(MAIN_SOURCES
     src/particleEffect.cpp
     src/httpScriptAccess.cpp
     src/packResourceProvider.cpp
-    src/modelData.cpp
     src/gameGlobalInfo.cpp
     src/GMActions.cpp
     src/script.cpp
@@ -546,7 +545,6 @@ set(MAIN_SOURCES
     src/menus/luaConsole.h
     src/mesh.h
     src/missileWeaponData.h
-    src/modelData.h
     src/packResourceProvider.h
     src/particleEffect.h
     src/crewPosition.h

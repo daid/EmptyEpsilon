@@ -14,13 +14,14 @@
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, P<ModelData> model)
-: GuiElement(owner, id), model(model)
+GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id/*TODO, P<ModelData> model*/)
+: GuiElement(owner, id)//, model(model)
 {
 }
 
 void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 {
+    /*TODO
     if (rect.size.x <= 0) return;
     if (rect.size.y <= 0) return;
     if (!model) return;
@@ -129,4 +130,5 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glViewport(0, 0, renderer.getPhysicalSize().x, renderer.getPhysicalSize().y);
+    */
 }

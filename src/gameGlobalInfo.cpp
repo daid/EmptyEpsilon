@@ -11,7 +11,6 @@
 #include "systems/collision.h"
 #include "ecs/query.h"
 #include "menus/luaConsole.h"
-#include "spaceObjects/spaceObject.h"
 #include "playerInfo.h"
 #include <SDL_assert.h>
 
