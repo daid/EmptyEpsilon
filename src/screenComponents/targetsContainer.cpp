@@ -118,91 +118,36 @@ void TargetsContainer::setWaypointIndex(int index)
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type)
 {
-    sp::ecs::Entity default_target;
-    sp::ecs::Entity current_target;
-    glm::vec2 default_target_position;
 
     auto entities = sp::CollisionSystem::queryArea(position - glm::vec2(max_range, max_range), position + glm::vec2(max_range, max_range));
-    sort(entities.begin(), entities.end(), [position](sp::ecs::Entity a, sp::ecs::Entity b) {
-        auto transform_a = a.getComponent<sp::Transform>();
-        auto transform_b = b.getComponent<sp::Transform>();
-        if (!transform_a)
-            return bool(transform_b);
-
-        if (!transform_b)
-            return bool(transform_a);
-
-        return glm::distance(position, transform_a->getPosition()) < glm::distance(position, transform_b->getPosition());
+    std::vector<sp::ecs::Entity> relevant_entities;
+    std::copy_if (entities.begin(), entities.end(), std::back_inserter(relevant_entities), [this, selection_type](sp::ecs::Entity entity){
+        return isValidTarget(entity, selection_type);
     });
 
-    for (auto entity : entities) {
-        auto transform = entity.getComponent<sp::Transform>();
-
-        if (!transform)
-            continue;
-
-        // Because we use querArea, we're getting a square back.  It's possible some entities
-        // are in corners that shouldn't be targetable on a circular viewport
-        if(glm::distance(position, transform->getPosition()) > max_range) {
-            continue;
-        }
-
-        if (!isValidTarget(entity, selection_type))
-            continue;
-
-        // Start collecting nearest entities in case we never run into a previous target
-        if (!default_target ||
-                glm::length2(position - transform->getPosition()) <
-                glm::length2(position - default_target_position)) {
-            default_target = entity;
-            default_target_position = transform->getPosition();
-        }
-
-        // if we set a current target in the last iteration (condition below)
-        // the set the entity to be this next entity in the list.
-        if (current_target) {
-            set(entity);
-            return;
-        }
-
-        if (get() == entity) {
-            current_target = entity;
-        }
-    }
-
-    // If we didn't short-circuit because of an existing target above, set the
-    // target to be the default_target (closest to `position`)
-    set(default_target);
-
-
-    // TODO What about waypoints?
+    sortByDistance(position, &entities);
+    setNext(position, max_range, &relevant_entities);
 }
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type, FactionRelation relation)
+{
+    auto entities = sp::CollisionSystem::queryArea(position - glm::vec2(max_range, max_range), position + glm::vec2(max_range, max_range));
+    std::vector<sp::ecs::Entity> relevant_entities;
+    std::copy_if (entities.begin(), entities.end(), std::back_inserter(relevant_entities), [this, selection_type, relation](sp::ecs::Entity entity){
+        return isValidTarget(entity, selection_type) && Faction::getRelation(my_spaceship, entity) == relation;
+    });
+
+    sortByDistance(position, &relevant_entities);
+    setNext(position, max_range, &relevant_entities);
+}
+
+void TargetsContainer::setNext(glm::vec2 position, float max_range, std::vector<sp::ecs::Entity> *entities)
 {
     sp::ecs::Entity default_target;
     sp::ecs::Entity current_target;
     glm::vec2 default_target_position;
 
-    auto entities = sp::CollisionSystem::queryArea(position - glm::vec2(max_range, max_range), position + glm::vec2(max_range, max_range));
-    std::vector<sp::ecs::Entity> relevant_entities;
-    std::copy_if (entities.begin(), entities.end(), std::back_inserter(relevant_entities), [relation](sp::ecs::Entity entity){
-        return Faction::getRelation(my_spaceship, entity) == relation;
-    });
-
-    sort(relevant_entities.begin(), relevant_entities.end(), [position](sp::ecs::Entity a, sp::ecs::Entity b) {
-        auto transform_a = a.getComponent<sp::Transform>();
-        auto transform_b = b.getComponent<sp::Transform>();
-        if (!transform_a)
-            return bool(transform_b);
-
-        if (!transform_b)
-            return bool(transform_a);
-
-        return glm::distance(position, transform_a->getPosition()) < glm::distance(position, transform_b->getPosition());
-    });
-
-    for (auto entity : relevant_entities) {
+    for (auto entity : *entities) {
         auto transform = entity.getComponent<sp::Transform>();
 
         if (!transform)
@@ -213,9 +158,6 @@ void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionTy
         if(glm::distance(position, transform->getPosition()) > max_range) {
             continue;
         }
-
-        if (!isValidTarget(entity, selection_type))
-            continue;
 
         // Start collecting nearest relevant entities in case we never run into a previous target
         if (!default_target ||
@@ -240,9 +182,22 @@ void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionTy
     // If we didn't short-circuit because of an existing target above, set the
     // target to be the default_target (closest to `position`)
     set(default_target);
+}
 
+void sortByDistance(glm::vec2 position, std::vector<sp::ecs::Entity> *entities)
+{
+    sort(entities->begin(), entities->end(), [position](sp::ecs::Entity a, sp::ecs::Entity b) {
+        auto transform_a = a.getComponent<sp::Transform>();
+        auto transform_b = b.getComponent<sp::Transform>();
+        if (!transform_a)
+            return bool(transform_b);
 
-    // TODO What about waypoints?
+        if (!transform_b)
+            return bool(transform_a);
+
+        return glm::distance(position, transform_a->getPosition()) < glm::distance(position, transform_b->getPosition());
+    });
+
 }
 
 bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType selection_type)
