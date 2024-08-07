@@ -118,15 +118,14 @@ void TargetsContainer::setWaypointIndex(int index)
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type)
 {
-
     auto entities = sp::CollisionSystem::queryArea(position - glm::vec2(max_range, max_range), position + glm::vec2(max_range, max_range));
     std::vector<sp::ecs::Entity> relevant_entities;
     std::copy_if (entities.begin(), entities.end(), std::back_inserter(relevant_entities), [this, selection_type](sp::ecs::Entity entity){
         return isValidTarget(entity, selection_type);
     });
 
-    sortByDistance(position, &entities);
-    setNext(position, max_range, &relevant_entities);
+    sortByDistance(position, entities);
+    setNext(position, max_range, relevant_entities);
 
     // PlayerSpaceship::commandSetTarget(targets.get());
 }
@@ -139,19 +138,19 @@ void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionTy
         return isValidTarget(entity, selection_type) && Faction::getRelation(my_spaceship, entity) == relation;
     });
 
-    sortByDistance(position, &relevant_entities);
-    setNext(position, max_range, &relevant_entities);
+    sortByDistance(position, relevant_entities);
+    setNext(position, max_range, relevant_entities);
 
     // PlayerSpaceship::commandSetTarget(targets.get());
 }
 
-void TargetsContainer::setNext(glm::vec2 position, float max_range, std::vector<sp::ecs::Entity> *entities)
+void TargetsContainer::setNext(glm::vec2 position, float max_range, std::vector<sp::ecs::Entity> &entities)
 {
     sp::ecs::Entity default_target;
     sp::ecs::Entity current_target;
     glm::vec2 default_target_position;
 
-    for (auto entity : *entities) {
+    for (auto entity : entities) {
         auto transform = entity.getComponent<sp::Transform>();
 
         if (!transform)
@@ -188,9 +187,9 @@ void TargetsContainer::setNext(glm::vec2 position, float max_range, std::vector<
     set(default_target);
 }
 
-void sortByDistance(glm::vec2 position, std::vector<sp::ecs::Entity> *entities)
+void TargetsContainer::sortByDistance(glm::vec2 position, std::vector<sp::ecs::Entity>& entities)
 {
-    sort(entities->begin(), entities->end(), [position](sp::ecs::Entity a, sp::ecs::Entity b) {
+    sort(entities.begin(), entities.end(), [position](sp::ecs::Entity a, sp::ecs::Entity b) {
         auto transform_a = a.getComponent<sp::Transform>();
         auto transform_b = b.getComponent<sp::Transform>();
         if (!transform_a)
