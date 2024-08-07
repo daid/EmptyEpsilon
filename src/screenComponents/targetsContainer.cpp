@@ -127,6 +127,8 @@ void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionTy
 
     sortByDistance(position, &entities);
     setNext(position, max_range, &relevant_entities);
+
+    // PlayerSpaceship::commandSetTarget(targets.get());
 }
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type, FactionRelation relation)
@@ -139,6 +141,8 @@ void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionTy
 
     sortByDistance(position, &relevant_entities);
     setNext(position, max_range, &relevant_entities);
+
+    // PlayerSpaceship::commandSetTarget(targets.get());
 }
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, std::vector<sp::ecs::Entity> *entities)
@@ -223,36 +227,3 @@ bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType sele
     }
     return false;
 }
-
-/*NEXT
-            bool current_found = false;
-            foreach(SpaceObject, obj, space_object_list)
-            {
-                if (obj->entity == my_spaceship)
-                    continue;
-                if (obj->entity == targets.get())
-                {
-                    current_found = true;
-                    continue;
-                }
-                if (current_found && glm::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
-                {
-                    targets.set(obj->entity);
-                    PlayerSpaceship::commandSetTarget(targets.get());
-                    return;
-                }
-            }
-            foreach(SpaceObject, obj, space_object_list)
-            {
-                if (obj->entity == targets.get())
-                {
-                    continue;
-                }
-                if (my_spaceship->isEnemy(obj) && glm::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
-                {
-                    targets.set(obj);
-                    PlayerSpaceship::commandSetTarget(targets.get());
-                    return;
-                }
-            }
-*/
