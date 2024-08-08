@@ -59,7 +59,7 @@ public:
     Iterator begin() { return {mask, CrewPosition(0)}; }
     Iterator end() { return {mask, CrewPosition::MAX}; }
 
-    static CrewPositions all() { return CrewPositions{int(CrewPosition::MAX) - 1}; }
+    static CrewPositions all() { return CrewPositions{int(1 << CrewPosition::MAX) - 1}; }
 };
 
 namespace sp::io {
