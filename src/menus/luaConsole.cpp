@@ -75,6 +75,10 @@ void LuaConsole::update(float delta)
                 addLog(last_error);
         }
     }
+    if (!ScriptSimpleCallback::last_error.empty()) {
+        addLog(ScriptSimpleCallback::last_error);
+        ScriptSimpleCallback::last_error.clear();
+    }
 
     if (open_console_key.getDown()) {
         if (is_open) {
