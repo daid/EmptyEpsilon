@@ -119,11 +119,10 @@ void TargetsContainer::setWaypointIndex(int index)
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type)
 {
-    auto max_range_vector = glm::vec2(max_range, max_range);
     std::vector<sp::ecs::Entity> entities;
 
-    for(auto [entity,_] : sp::ecs::Query<sp::Transform>()) {
-        if(isValidTarget(entity, selection_type) && glm::distance(position, max_range_vector)) {
+    for(auto [entity, transform] : sp::ecs::Query<sp::Transform>()) {
+        if(isValidTarget(entity, selection_type) && glm::distance(position, transform.getPosition()) <= max_range) {
             entities.push_back(entity);
         }
     }
@@ -134,11 +133,9 @@ void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionTy
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type, FactionRelation relation)
 {
-    auto max_range_vector = glm::vec2(max_range, max_range);
-
     std::vector<sp::ecs::Entity> entities;
-    for(auto [entity,_] : sp::ecs::Query<sp::Transform>()) {
-        if(isValidTarget(entity, selection_type) && glm::distance(position, max_range_vector) && Faction::getRelation(my_spaceship, entity) == relation) {
+    for(auto [entity, transform] : sp::ecs::Query<sp::Transform>()) {
+        if(isValidTarget(entity, selection_type) && glm::distance(position, transform.getPosition()) <= max_range && Faction::getRelation(my_spaceship, entity) == relation) {
             entities.push_back(entity);
         }
     }
