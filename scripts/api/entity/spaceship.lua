@@ -573,6 +573,10 @@ function Entity:getBeamWeaponTurretDirection(index)
     if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].turret_direction end
     return 0.0
 end
+function Entity:getBeamWeaponTurretRotationRate(index)
+    if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].turret_rotation_rate end
+    return 0.0
+end
 --- Returns the base firing delay, in seconds, for the BeamWeapon with the given index on this SpaceShip.
 --- Actual cycle time can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponCycleTime(0); -- returns beam weapon 0's cycle time
