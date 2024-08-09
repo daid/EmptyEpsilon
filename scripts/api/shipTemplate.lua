@@ -113,6 +113,7 @@ function ShipTemplate:setType(template_type)
         self.long_range_radar = {}
         self.comms_transmitter = {}
         self.comms_receiver = nil
+        self.ai_controller = nil
         if self.docking_port then
             self.docking_port.auto_reload_missiles = false
         end
