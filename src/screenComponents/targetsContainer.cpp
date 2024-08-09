@@ -5,6 +5,7 @@
 #include "components/collision.h"
 #include "components/scanning.h"
 #include "components/radar.h"
+#include "ecs/query.h"
 
 
 TargetsContainer::TargetsContainer()
@@ -69,7 +70,7 @@ void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESele
         auto transform = entity.getComponent<sp::Transform>();
         if (!transform) continue;
         if (!isValidTarget(entity, selection_type)) continue;
-        
+
         if (!target || glm::length2(position - transform->getPosition()) < glm::length2(position - target_position)) {
             target = entity;
             target_position = transform->getPosition();
@@ -118,30 +119,32 @@ void TargetsContainer::setWaypointIndex(int index)
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type)
 {
-    auto entities = sp::CollisionSystem::queryArea(position - glm::vec2(max_range, max_range), position + glm::vec2(max_range, max_range));
-    std::vector<sp::ecs::Entity> relevant_entities;
-    std::copy_if (entities.begin(), entities.end(), std::back_inserter(relevant_entities), [this, selection_type](sp::ecs::Entity entity){
-        return isValidTarget(entity, selection_type);
-    });
+    auto max_range_vector = glm::vec2(max_range, max_range);
+    std::vector<sp::ecs::Entity> entities;
+
+    for(auto [entity,_] : sp::ecs::Query<sp::Transform>()) {
+        if(isValidTarget(entity, selection_type) && glm::distance(position, max_range_vector)) {
+            entities.push_back(entity);
+        }
+    }
 
     sortByDistance(position, entities);
-    setNext(position, max_range, relevant_entities);
-
-    // PlayerSpaceship::commandSetTarget(targets.get());
+    setNext(position, max_range, entities);
 }
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type, FactionRelation relation)
 {
-    auto entities = sp::CollisionSystem::queryArea(position - glm::vec2(max_range, max_range), position + glm::vec2(max_range, max_range));
-    std::vector<sp::ecs::Entity> relevant_entities;
-    std::copy_if (entities.begin(), entities.end(), std::back_inserter(relevant_entities), [this, selection_type, relation](sp::ecs::Entity entity){
-        return isValidTarget(entity, selection_type) && Faction::getRelation(my_spaceship, entity) == relation;
-    });
+    auto max_range_vector = glm::vec2(max_range, max_range);
 
-    sortByDistance(position, relevant_entities);
-    setNext(position, max_range, relevant_entities);
+    std::vector<sp::ecs::Entity> entities;
+    for(auto [entity,_] : sp::ecs::Query<sp::Transform>()) {
+        if(isValidTarget(entity, selection_type) && glm::distance(position, max_range_vector) && Faction::getRelation(my_spaceship, entity) == relation) {
+            entities.push_back(entity);
+        }
+    }
 
-    // PlayerSpaceship::commandSetTarget(targets.get());
+    sortByDistance(position, entities);
+    setNext(position, max_range, entities);
 }
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, std::vector<sp::ecs::Entity> &entities)
