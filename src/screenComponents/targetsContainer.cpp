@@ -177,6 +177,7 @@ void TargetsContainer::setNext(glm::vec2 position, float max_range, std::vector<
         // the set the entity to be this next entity in the list.
         if (current_target) {
             set(entity);
+            my_player_info->commandSetTarget(get());
             return;
         }
 
@@ -188,6 +189,7 @@ void TargetsContainer::setNext(glm::vec2 position, float max_range, std::vector<
     // If we didn't short-circuit because of an existing target above, set the
     // target to be the default_target (closest to `position`)
     set(default_target);
+    my_player_info->commandSetTarget(get());
 }
 
 void TargetsContainer::sortByDistance(glm::vec2 position, std::vector<sp::ecs::Entity>& entities)
