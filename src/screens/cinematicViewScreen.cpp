@@ -44,7 +44,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer, int32_t play
     camera_lock_tot_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Lock camera on ship's target"), [this](bool value) {});
     camera_lock_tot_toggle->setValue(true)->setPosition(320, -20, sp::Alignment::BottomLeft)->setSize(350, 50)->hide();
 
-    camera_lock_cycle_toggle = new GuiToggleButton(this, "CAMERA_LOCK_CYCLE_TOGGLE", tr("button", "Cycle trough ships"), [this](bool value) {});
+    camera_lock_cycle_toggle = new GuiToggleButton(this, "CAMERA_LOCK_CYCLE_TOGGLE", tr("button", "Cycle through ships"), [this](bool value) {});
     camera_lock_cycle_toggle->setValue(false)->setPosition(670, -20, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
     cycle_time = 0.0f;
 
@@ -75,6 +75,7 @@ void CinematicViewScreen::update(float delta)
         else {
             camera_lock_toggle->show();
             camera_lock_selector->show();
+            camera_lock_tot_toggle->show();
         }
     }
 
