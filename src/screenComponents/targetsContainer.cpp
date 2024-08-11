@@ -156,12 +156,6 @@ void TargetsContainer::setNext(glm::vec2 position, float max_range, std::vector<
         if (!transform)
             continue;
 
-        // Because we use querArea, we're getting a square back.  It's possible some relevant entities
-        // are in corners that shouldn't be targetable on a circular viewport
-        if(glm::distance(position, transform->getPosition()) > max_range) {
-            continue;
-        }
-
         // Start collecting nearest relevant entities in case we never run into a previous target
         if (!default_target ||
                 glm::length2(position - transform->getPosition()) <
