@@ -71,6 +71,7 @@ void CinematicViewScreen::update(float delta)
             camera_lock_toggle->hide();
             camera_lock_selector->hide();
             camera_lock_tot_toggle->hide();
+            camera_lock_cycle_toggle->hide();
         }
         else {
             camera_lock_toggle->show();
