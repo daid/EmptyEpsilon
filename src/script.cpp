@@ -19,6 +19,7 @@
 #include "script/dataStorage.h"
 #include "script/gm.h"
 #include "script/component.h"
+#include "script/damageInfo.h"
 #include "components/impulse.h"
 #include "components/warpdrive.h"
 #include "components/maneuveringthrusters.h"
@@ -563,6 +564,11 @@ static void luaPlaySoundFile(string filename)
     return;
 }
 
+static void luaApplyDamageToEntity(sp::ecs::Entity e, float amount, DamageInfo info)
+{
+    DamageSystem::applyDamage(e, amount, info);
+}
+
 static int luaGetEEVersion()
 {
     return VERSION_NUMBER;
@@ -963,6 +969,8 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// The sound is played only on the server, and not on any clients.
     /// Example: playSoundFile("sfx/laser.wav")
     env.setGlobal("playSoundFile", &luaPlaySoundFile);
+
+    env.setGlobal("applyDamageToEntity", &luaApplyDamageToEntity);
 
     env.setGlobal("commandTargetRotation", &luaCommandTargetRotation);
     env.setGlobal("commandImpulse", &luaCommandImpulse);

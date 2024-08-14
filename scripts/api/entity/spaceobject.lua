@@ -290,7 +290,7 @@ end
 --- obj:takeDamage(20, "emp", 1000, 0) -- deals 20 EMP damage as if it had originated from coordinates 1000,0
 --- obj:takeDamage(20) -- deals 20 energy damage
 function Entity:takeDamage(amount, type, originx, originy)
-    --TODO
+    applyDamageToEntity(self, amount, {type=type, x=originx, y=originy})
 end
 --- Sets this SpaceObject's description in unscanned and scanned states.
 --- The science screen displays these descriptions when targeting a scanned object.

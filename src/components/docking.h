@@ -42,7 +42,7 @@ public:
     sp::ecs::Entity target;
     glm::vec2 docked_offset;
 
-    bool auto_reload_missiles = false; //TODO: Set to true on CpuShips
+    bool auto_reload_missiles = false;
     float auto_reload_missile_delay = 0.0f;
     static constexpr float auto_reload_missile_time = 10.0f;
 
