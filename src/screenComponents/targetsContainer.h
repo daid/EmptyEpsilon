@@ -37,6 +37,8 @@ private:
     int waypoint_selection_index;
     glm::vec2 waypoint_selection_position{};
 
+    void setNext(glm::vec2 position, float max_range, std::vector<sp::ecs::Entity>& entities);
+    void sortByDistance(glm::vec2 position, std::vector<sp::ecs::Entity>& entities);
     bool isValidTarget(sp::ecs::Entity entity, ESelectionType selection_type);
 };
 

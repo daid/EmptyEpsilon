@@ -5,6 +5,7 @@
 #include "components/collision.h"
 #include "components/scanning.h"
 #include "components/radar.h"
+#include "ecs/query.h"
 
 
 TargetsContainer::TargetsContainer()
@@ -69,7 +70,7 @@ void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESele
         auto transform = entity.getComponent<sp::Transform>();
         if (!transform) continue;
         if (!isValidTarget(entity, selection_type)) continue;
-        
+
         if (!target || glm::length2(position - transform->getPosition()) < glm::length2(position - target_position)) {
             target = entity;
             target_position = transform->getPosition();
@@ -118,12 +119,84 @@ void TargetsContainer::setWaypointIndex(int index)
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type)
 {
-    //TODO
+    std::vector<sp::ecs::Entity> entities;
+
+    for(auto [entity, transform] : sp::ecs::Query<sp::Transform>()) {
+        if(isValidTarget(entity, selection_type) && glm::distance(position, transform.getPosition()) <= max_range) {
+            entities.push_back(entity);
+        }
+    }
+
+    sortByDistance(position, entities);
+    setNext(position, max_range, entities);
 }
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type, FactionRelation relation)
 {
-    //TODO
+    std::vector<sp::ecs::Entity> entities;
+    for(auto [entity, transform] : sp::ecs::Query<sp::Transform>()) {
+        if(isValidTarget(entity, selection_type) && glm::distance(position, transform.getPosition()) <= max_range && Faction::getRelation(my_spaceship, entity) == relation) {
+            entities.push_back(entity);
+        }
+    }
+
+    sortByDistance(position, entities);
+    setNext(position, max_range, entities);
+}
+
+void TargetsContainer::setNext(glm::vec2 position, float max_range, std::vector<sp::ecs::Entity> &entities)
+{
+    sp::ecs::Entity default_target;
+    sp::ecs::Entity current_target;
+    glm::vec2 default_target_position;
+
+    for (auto entity : entities) {
+        auto transform = entity.getComponent<sp::Transform>();
+
+        if (!transform)
+            continue;
+
+        // Start collecting nearest relevant entities in case we never run into a previous target
+        if (!default_target ||
+                glm::length2(position - transform->getPosition()) <
+                glm::length2(position - default_target_position)) {
+            default_target = entity;
+            default_target_position = transform->getPosition();
+        }
+
+        // if we set a current target in the last iteration (condition below)
+        // the set the entity to be this next entity in the list.
+        if (current_target) {
+            set(entity);
+            my_player_info->commandSetTarget(get());
+            return;
+        }
+
+        if (get() == entity) {
+            current_target = entity;
+        }
+    }
+
+    // If we didn't short-circuit because of an existing target above, set the
+    // target to be the default_target (closest to `position`)
+    set(default_target);
+    my_player_info->commandSetTarget(get());
+}
+
+void TargetsContainer::sortByDistance(glm::vec2 position, std::vector<sp::ecs::Entity>& entities)
+{
+    sort(entities.begin(), entities.end(), [position](sp::ecs::Entity a, sp::ecs::Entity b) {
+        auto transform_a = a.getComponent<sp::Transform>();
+        auto transform_b = b.getComponent<sp::Transform>();
+        if (!transform_a)
+            return bool(transform_b);
+
+        if (!transform_b)
+            return bool(transform_a);
+
+        return glm::distance(position, transform_a->getPosition()) < glm::distance(position, transform_b->getPosition());
+    });
+
 }
 
 bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType selection_type)
@@ -149,36 +222,3 @@ bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType sele
     }
     return false;
 }
-
-/*NEXT
-            bool current_found = false;
-            foreach(SpaceObject, obj, space_object_list)
-            {
-                if (obj->entity == my_spaceship)
-                    continue;
-                if (obj->entity == targets.get())
-                {
-                    current_found = true;
-                    continue;
-                }
-                if (current_found && glm::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
-                {
-                    targets.set(obj->entity);
-                    PlayerSpaceship::commandSetTarget(targets.get());
-                    return;
-                }
-            }
-            foreach(SpaceObject, obj, space_object_list)
-            {
-                if (obj->entity == targets.get())
-                {
-                    continue;
-                }
-                if (my_spaceship->isEnemy(obj) && glm::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
-                {
-                    targets.set(obj);
-                    PlayerSpaceship::commandSetTarget(targets.get());
-                    return;
-                }
-            }
-*/
