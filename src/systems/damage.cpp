@@ -83,6 +83,11 @@ void DamageSystem::applyDamage(sp::ecs::Entity entity, float amount, const Damag
     if (amount > 0.0f)
     {
         takeHullDamage(entity, amount, info);
+        if (auto dbad = entity.getComponent<DestroyedByAreaDamage>()) {
+            if (dbad->damaged_by_flags & (1 << int(info.type))) {
+                entity.destroy();
+            }
+        }
     }
 }
 

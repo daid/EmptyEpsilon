@@ -18,3 +18,10 @@ public:
     sp::script::Callback on_destruction;
     sp::script::Callback on_taking_damage;
 };
+
+// Not having actual hull, but an explosion in the area will destroy this entity.
+class DestroyedByAreaDamage
+{
+public:
+    int damaged_by_flags = (1 << int(DamageType::Energy)) | (1 << int(DamageType::Kinetic));
+};

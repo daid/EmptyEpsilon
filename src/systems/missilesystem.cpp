@@ -347,9 +347,8 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         missile.addComponent<LifeTime>().lifetime = mwd.lifetime / category_modifier;
 
         if (tube.type_loaded != MW_Mine) {
-            auto& hull = missile.addComponent<Hull>();
-            hull.max = hull.current = 1;
-            hull.damaged_by_flags = (1 << int(DamageType::EMP)) | (1 << int(DamageType::Energy));
+            auto& dbad = missile.addComponent<DestroyedByAreaDamage>();
+            dbad.damaged_by_flags = (1 << int(DamageType::EMP)) | (1 << int(DamageType::Energy));
         }
 
         auto& trace = missile.addComponent<RadarTrace>();
