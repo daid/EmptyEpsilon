@@ -2,13 +2,14 @@
 #define ROTATING_MODEL_VIEW_H
 
 #include "gui/gui2_element.h"
+#include "components/rendering.h"
 
 class GuiRotatingModelView : public GuiElement
 {
 private:
-    //TODO: P<ModelData> model;
+    MeshRenderComponent *mesh;
 public:
-    GuiRotatingModelView(GuiContainer* owner, string id /*TODO, P<ModelData> model*/);
+    GuiRotatingModelView(GuiContainer* owner, string id, MeshRenderComponent *mesh);
 
     virtual void onDraw(sp::RenderTarget& target) override;
 };
