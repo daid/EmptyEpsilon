@@ -85,6 +85,7 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(modeldata_matrix));
 
     // Lights setup.
+    // FIX!!: temporarily using flipped matrix here.
     ShaderRegistry::setupLights(shader.get(), modeldata_matrix);
 
     // Textures
