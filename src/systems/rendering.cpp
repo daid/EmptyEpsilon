@@ -11,6 +11,21 @@
 
 std::vector<RenderSystem::RenderHandler> RenderSystem::render_handlers;
 
+bool MeshRenderComponent::ensureLoaded()
+{
+    if (!mesh.ptr && !mesh.name.empty())
+        mesh.ptr = Mesh::getMesh(mesh.name);
+    if (!mesh.ptr)
+        return false;
+    if (!texture.ptr && !texture.name.empty())
+        texture.ptr = textureManager.getTexture(texture.name);
+    if (!specular_texture.ptr && !specular_texture.name.empty())
+        specular_texture.ptr = textureManager.getTexture(specular_texture.name);
+    if (!illumination_texture.ptr && !illumination_texture.name.empty())
+        illumination_texture.ptr = textureManager.getTexture(illumination_texture.name);
+    return true;
+}
+
 void RenderSystem::render3D(float aspect, float camera_fov)
 {
     view_vector = vec2FromAngle(camera_yaw);
@@ -22,7 +37,7 @@ void RenderSystem::render3D(float aspect, float camera_fov)
         depth_cutoff_back = -std::numeric_limits<float>::infinity();
     for(auto& handler : render_handlers)
         (this->*(handler.func))(handler.rif);
-    
+
     for(int n=render_lists.size() - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
@@ -33,7 +48,6 @@ void RenderSystem::render3D(float aspect, float camera_fov)
         ShaderRegistry::updateProjectionView(projection, {});
 
         glDepthMask(true);
-
         glDisable(GL_BLEND);
         for(auto info : render_list)
             if (!info.transparent)
@@ -47,25 +61,8 @@ void RenderSystem::render3D(float aspect, float camera_fov)
     }
 }
 
-void MeshRenderSystem::update(float delta)
-{
-}
-
-void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, MeshRenderComponent& mrc)
-{
-    if (!mrc.mesh.ptr && !mrc.mesh.name.empty())
-        mrc.mesh.ptr = Mesh::getMesh(mrc.mesh.name);
-    if (!mrc.mesh.ptr)
-        return;
-    if (!mrc.texture.ptr && !mrc.texture.name.empty())
-        mrc.texture.ptr = textureManager.getTexture(mrc.texture.name);
-    if (!mrc.specular_texture.ptr && !mrc.specular_texture.name.empty())
-        mrc.specular_texture.ptr = textureManager.getTexture(mrc.specular_texture.name);
-    if (!mrc.illumination_texture.ptr && !mrc.illumination_texture.name.empty())
-        mrc.illumination_texture.ptr = textureManager.getTexture(mrc.illumination_texture.name);
-
-    auto position = transform.getPosition();
-    auto rotation = transform.getRotation();
+glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, MeshRenderComponent& mrc, float scale_override = -1.) {
+    float scale = scale_override > 0 ? scale_override : mrc.scale;
     auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
     model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
     model_matrix = glm::translate(model_matrix, mrc.mesh_offset);
@@ -73,9 +70,13 @@ void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Mes
     // EE's coordinate flips to a Z-up left hand.
     // To account for that, flip the model around 180deg.
     auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
-    modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{mrc.scale});
+    modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{scale});
     //modeldata_matrix = glm::translate(modeldata_matrix, mrc.mesh_offset); // Old mesh offset
+    return modeldata_matrix;
+}
 
+ShaderRegistry::ScopedShader lookUpShader(MeshRenderComponent& mrc)
+{
     auto shader_id = ShaderRegistry::Shaders::Object;
     if (mrc.texture.ptr && mrc.specular_texture.ptr && mrc.illumination_texture.ptr)
         shader_id = ShaderRegistry::Shaders::ObjectSpecularIllumination;
@@ -84,11 +85,27 @@ void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Mes
     else if (mrc.texture.ptr && mrc.illumination_texture.ptr)
         shader_id = ShaderRegistry::Shaders::ObjectIllumination;
 
-    ShaderRegistry::ScopedShader shader(shader_id);
+    return ShaderRegistry::ScopedShader(shader_id);
+}
+
+void MeshRenderSystem::update(float delta)
+{
+}
+
+void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, MeshRenderComponent& mrc)
+{
+    mrc.ensureLoaded();
+
+    auto modeldata_matrix = calculateModelMatrix(
+            transform.getPosition(),
+            transform.getRotation(),
+            mrc);
+
+    auto shader = lookUpShader(mrc);
     glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(modeldata_matrix));
 
     // Lights setup.
-    ShaderRegistry::setupLights(shader.get(), model_matrix);
+    ShaderRegistry::setupLights(shader.get(), modeldata_matrix);
 
     // Textures
     if (mrc.texture.ptr)
@@ -333,7 +350,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         }
         // upload
         glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(glm::vec3), vertices.data());
-        
+
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(6 * active_quads), GL_UNSIGNED_SHORT, nullptr);
         n += active_quads;
     }
