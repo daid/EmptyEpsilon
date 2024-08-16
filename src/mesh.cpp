@@ -56,13 +56,15 @@ Mesh::Mesh(std::vector<MeshVertex>&& unindexed_vertices)
         glBindBuffer(GL_ARRAY_BUFFER, vbo_ibo[0]);
         glBufferData(GL_ARRAY_BUFFER, sizeof(MeshVertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
-        
+
         if (!indices.empty())
         {
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo_ibo[1]);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_count * sizeof(uint16_t), indices.data(), GL_STATIC_DRAW);
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
         }
+
+        greatest_distance_from_center = greatestDistanceFromCenter(vertices);
     }
 }
 
@@ -75,10 +77,10 @@ void Mesh::render(int32_t position_attrib, int32_t texcoords_attrib, int32_t nor
 
     if (position_attrib != -1)
         glVertexAttribPointer(position_attrib, 3, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, position));
-    
+
     if (normal_attrib != -1)
         glVertexAttribPointer(normal_attrib, 3, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, normal));
-    
+
     if (texcoords_attrib != -1)
         glVertexAttribPointer(texcoords_attrib, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, uv));
 
@@ -89,12 +91,12 @@ void Mesh::render(int32_t position_attrib, int32_t texcoords_attrib, int32_t nor
         glDrawElements(GL_TRIANGLES, face_count * 3, GL_UNSIGNED_SHORT, nullptr);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
     }
-        
+
     else
     {
         glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
     }
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
 }
 
@@ -114,7 +116,7 @@ glm::vec3 Mesh::randomPoint()
     }
     else
     {
-        
+
         v0_index = static_cast<size_t>(irandom(0, static_cast<int>(vertices.size()) / 3 - 1)) * 3;
         v1_index = v0_index + 1;
         v2_index = v0_index + 2;
@@ -134,6 +136,41 @@ glm::vec3 Mesh::randomPoint()
     glm::vec3 v01 = (v0 * f1) + (v1 * (1.0f - f1));
     glm::vec3 ret = (v01 * f2) + (v2 * (1.0f - f2));
     return ret;
+}
+
+uint32_t Mesh::greatestDistanceFromCenter(std::vector<MeshVertex>& vertices)
+{
+    if (vertices.empty()) {
+        return 0;
+    }
+
+
+    float sum_x = 0.f;
+    float sum_y = 0.f;
+    float sum_z = 0.f;
+    for(auto vertex : vertices)
+    {
+        auto [px, py, pz] = vertex.position;
+        sum_x += px;
+        sum_y += py;
+        sum_z += pz;
+    }
+
+    auto vertex_count = vertices.size();
+    auto average_x = sum_x / vertex_count;
+    auto average_y = sum_y / vertex_count;
+    auto average_z = sum_z / vertex_count;
+    auto greatest_distance = 0.f;
+
+    for(auto vertex : vertices)
+    {
+        auto [px, py, pz] = vertex.position;
+        float distance = sqrt(pow(px - average_x, 2) + pow(py - average_y, 2) + pow(pz - average_z, 2));
+        if(distance > greatest_distance) {
+            greatest_distance = distance;
+        }
+    }
+    return greatest_distance;
 }
 
 struct IndexInfo
@@ -193,7 +230,7 @@ Mesh* Mesh::getMesh(const string& filename)
                         LOG(ERROR, "Bad normal line: ", line);
                         parsing_ok = false;
                     }
-                    
+
                 }else if (parts[0] == "vt")
                 {
                     if (parts.size() >= 3)
@@ -205,7 +242,7 @@ Mesh* Mesh::getMesh(const string& filename)
                         LOG(ERROR, "Bad vertex texcoord line: ", line);
                         parsing_ok = false;
                     }
-                    
+
                 }else if (parts[0] == "f")
                 {
                     if (parts.size() >= 4)
@@ -269,8 +306,8 @@ Mesh* Mesh::getMesh(const string& filename)
         {
             LOG(ERROR, "Failed to parse ", filename);
         }
-        
-        
+
+
     }else if (filename.endswith(".model"))
     {
         mesh_vertices.resize(readInt(stream));
@@ -285,6 +322,6 @@ Mesh* Mesh::getMesh(const string& filename)
         meshMap[filename] = ret;
     }
 
-   
+
     return ret;
 }
