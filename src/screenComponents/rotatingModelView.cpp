@@ -97,7 +97,8 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     // EE's coordinate flips to a Z-up left hand.
     // To account for that, flip the model around 180deg.
     auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
-    modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{mesh->scale});
+    float scale = 100.0f / mesh->mesh.ptr->greatest_distance_from_center;
+    modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{scale});
     //modeldata_matrix = glm::translate(modeldata_matrix, mrc.mesh_offset); // Old mesh offset
 
     auto shader_id = ShaderRegistry::Shaders::Object;
