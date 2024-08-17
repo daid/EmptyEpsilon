@@ -88,27 +88,8 @@ ShaderRegistry::ScopedShader lookUpShader(MeshRenderComponent& mrc)
     return ShaderRegistry::ScopedShader(shader_id);
 }
 
-void MeshRenderSystem::update(float delta)
+void activateAndBindMeshTextures(MeshRenderComponent& mrc)
 {
-}
-
-void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, MeshRenderComponent& mrc)
-{
-    mrc.ensureLoaded();
-
-    auto modeldata_matrix = calculateModelMatrix(
-            transform.getPosition(),
-            transform.getRotation(),
-            mrc);
-
-    auto shader = lookUpShader(mrc);
-    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(modeldata_matrix));
-
-    // Lights setup.
-    // FIX!!: temporarily using flipped matrix here.
-    ShaderRegistry::setupLights(shader.get(), modeldata_matrix);
-
-    // Textures
     if (mrc.texture.ptr)
         mrc.texture.ptr->bind();
 
@@ -123,16 +104,49 @@ void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Mes
         glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::IlluminationMap));
         mrc.illumination_texture.ptr->bind();
     }
+}
 
-    // Draw
+void drawMesh(MeshRenderComponent& mrc, ShaderRegistry::ScopedShader& shader)
+{
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
     gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
 
     mrc.mesh.ptr->render(positions.get(), texcoords.get(), normals.get());
 
+    // wut iz?
     if (mrc.specular_texture.ptr || mrc.illumination_texture.ptr)
         glActiveTexture(GL_TEXTURE0);
+}
+
+void MeshRenderSystem::update(float delta)
+{
+}
+
+void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, MeshRenderComponent& mrc)
+{
+    mrc.ensureLoaded();
+
+    auto model_matrix = calculateModelMatrix(
+            transform.getPosition(),
+            transform.getRotation(),
+            mrc);
+
+    auto shader = lookUpShader(mrc);
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+
+    auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
+    modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{mrc.scale});
+
+    // Lights setup.
+    ShaderRegistry::setupLights(shader.get(), modeldata_matrix);
+
+    // Textures
+    activateAndBindMeshTextures(mrc);
+
+    // Draw
+    drawMesh(mrc, shader);
+
 }
 
 void NebulaRenderSystem::update(float delta)

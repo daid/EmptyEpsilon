@@ -75,41 +75,22 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     transform.setPosition(glm::vec2(0,0));
 
     float scale = 100.0f / mesh->mesh.ptr->greatest_distance_from_center;
-    auto modeldata_matrix = calculateModelMatrix(glm::vec2{}, 0.f, *mesh, scale);
+    auto model_matrix = calculateModelMatrix(glm::vec2{}, 0.f, *mesh, scale);
 
     auto shader = lookUpShader(*mesh);
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
-    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(modeldata_matrix));
+    auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
+    modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{mesh->scale});
 
     // Lights setup.
-    // FIX!!: temporarily using flipped matrix here.
     ShaderRegistry::setupLights(shader.get(), modeldata_matrix);
 
     // Textures
-    if (mesh->texture.ptr)
-        mesh->texture.ptr->bind();
-
-    if (mesh->specular_texture.ptr)
-    {
-        glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::SpecularMap));
-        mesh->specular_texture.ptr->bind();
-    }
-
-    if (mesh->illumination_texture.ptr)
-    {
-        glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::IlluminationMap));
-        mesh->illumination_texture.ptr->bind();
-    }
+    activateAndBindMeshTextures(*mesh);
 
     // Draw
-    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
-    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-    gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
-
-    mesh->mesh.ptr->render(positions.get(), texcoords.get(), normals.get());
-
-    if (mesh->specular_texture.ptr || mesh->illumination_texture.ptr)
-        glActiveTexture(GL_TEXTURE0);
+    drawMesh(*mesh, shader);
 
     {
 #ifdef DEBUG
