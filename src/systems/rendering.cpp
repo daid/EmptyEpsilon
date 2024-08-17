@@ -61,8 +61,11 @@ void RenderSystem::render3D(float aspect, float camera_fov)
     }
 }
 
-glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, MeshRenderComponent& mrc, float scale_override = -1.) {
-    float scale = scale_override > 0 ? scale_override : mrc.scale;
+glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, MeshRenderComponent& mrc) {
+    return calculateModelMatrix(position, rotation, mrc, mrc.scale);
+}
+
+glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, MeshRenderComponent& mrc, float scale) {
     auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
     model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
     model_matrix = glm::translate(model_matrix, mrc.mesh_offset);
