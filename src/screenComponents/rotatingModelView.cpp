@@ -69,9 +69,6 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 
     ShaderRegistry::updateProjectionView(projection_matrix, view_matrix);
 
-        // // Update view matrix in shaders.
-        // ShaderRegistry::updateProjectionView({}, view_matrix);
-
     mesh->ensureLoaded();
 
     auto transform = sp::Transform();
