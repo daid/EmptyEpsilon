@@ -56,10 +56,17 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 
     auto projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
 
+    mesh->ensureLoaded();
+    auto mesh_radius = mesh->mesh.ptr->greatest_distance_from_center;
+    float mesh_diameter = mesh_radius * 2.f;
+
+    float max_size = mesh_diameter * glm::tan(glm::radians(camera_fov / 2.f));
+    float scale = max_size / mesh_diameter;
+
     // OpenGL standard: X across (left-to-right), Y up, Z "towards".
     auto view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.f), glm::vec3(1.f, 0.f, 0.f)); // -> X across (l-t-r), Y "towards", Z down
     view_matrix = glm::scale(view_matrix, glm::vec3(1.f, 1.f, -1.f)); // -> X across (l-t-r), Y "towards", Z up
-    view_matrix = glm::translate(view_matrix, glm::vec3(0.f, -200.f, 0.f));
+    view_matrix = glm::translate(view_matrix, glm::vec3(0.f, -1.f * max_size , 0.f));
     view_matrix = glm::rotate(view_matrix, glm::radians(-30.f), glm::vec3(1.f, 0.f, 0.f));
     view_matrix = glm::rotate(view_matrix, glm::radians(engine->getElapsedTime() * 360.0f / 10.0f), glm::vec3(0.f, 0.f, 1.f));
 
@@ -69,19 +76,13 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 
     ShaderRegistry::updateProjectionView(projection_matrix, view_matrix);
 
-    mesh->ensureLoaded();
-
-    auto transform = sp::Transform();
-    transform.setPosition(glm::vec2(0,0));
-
-    float scale = 100.0f / mesh->mesh.ptr->greatest_distance_from_center;
     auto model_matrix = calculateModelMatrix(glm::vec2{}, 0.f, *mesh, scale);
 
     auto shader = lookUpShader(*mesh);
     glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
     auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
-    modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{mesh->scale});
+    modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{scale});
 
     // Lights setup.
     ShaderRegistry::setupLights(shader.get(), modeldata_matrix);
