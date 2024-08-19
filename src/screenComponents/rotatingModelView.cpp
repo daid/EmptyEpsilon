@@ -58,7 +58,12 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     glFrontFace(GL_CCW);
 
 
-    mesh->ensureLoaded();
+    auto loaded = mesh->ensureLoaded();
+
+    if(!loaded) {
+        return;
+    }
+
     auto mesh_radius = mesh->mesh.ptr->greatest_distance_from_center;
     float mesh_diameter = mesh_radius * 2.f;
     float near_clip_boundary = 1.f;

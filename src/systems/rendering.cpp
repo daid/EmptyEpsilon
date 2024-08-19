@@ -11,6 +11,12 @@
 
 std::vector<RenderSystem::RenderHandler> RenderSystem::render_handlers;
 
+/**
+ * Ensure mesh, texture, specular texture and illumation texture
+ * are cached and available.
+ * return `true` if there is at least a mesh and rendering is possible, even if no textures are found.
+ * return `false` if there is no mesh, and rendering is not possible.
+ */
 bool MeshRenderComponent::ensureLoaded()
 {
     if (!mesh.ptr && !mesh.name.empty())
@@ -124,7 +130,11 @@ void MeshRenderSystem::update(float delta)
 
 void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, MeshRenderComponent& mrc)
 {
-    mrc.ensureLoaded();
+    auto loaded = mrc.ensureLoaded();
+
+    if(!loaded) {
+        return;
+    }
 
     auto model_matrix = calculateModelMatrix(
             transform.getPosition(),
