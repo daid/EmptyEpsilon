@@ -94,73 +94,74 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     // Draw
     drawMesh(*mesh, shader);
 
-    {
-#ifdef DEBUG
-        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::BasicColor);
-        {
-            // Common state - matrices.
-            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Projection), 1, GL_FALSE, glm::value_ptr(projection));
-            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(view_matrix));
-            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
-
-            // Vertex attrib
-            gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
-
-            for (const EngineEmitterData& ee : model->engine_emitters)
-            {
-                glm::vec3 offset = ee.position * model->scale;
-                float r = model->scale * ee.scale * 0.5f;
-
-                glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), ee.color.x, ee.color.y, ee.color.z, 1.f);
-                auto vertices = {
-                    glm::vec3{offset.x + r, offset.y, offset.z},
-                    glm::vec3{offset.x - r, offset.y, offset.z},
-                    glm::vec3{offset.x, offset.y + r, offset.z},
-                    glm::vec3{offset.x, offset.y - r, offset.z},
-                    glm::vec3{offset.x, offset.y, offset.z + r},
-                    glm::vec3{offset.x, offset.y, offset.z - r}
-                };
-                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), std::begin(vertices));
-                glDrawArrays(GL_LINES, 0, vertices.size());
-            }
-            float r = model->getRadius() * 0.1f;
-
-            glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 1.f);
-
-            for (const glm::vec3& position : model->beam_position)
-            {
-                glm::vec3 offset = position * model->scale;
-
-                auto vertices = {
-                    glm::vec3{offset.x + r, offset.y, offset.z},
-                    glm::vec3{offset.x - r, offset.y, offset.z},
-                    glm::vec3{offset.x, offset.y + r, offset.z},
-                    glm::vec3{offset.x, offset.y - r, offset.z},
-                    glm::vec3{offset.x, offset.y, offset.z + r},
-                    glm::vec3{offset.x, offset.y, offset.z - r}
-                };
-                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), std::begin(vertices));
-                glDrawArrays(GL_LINES, 0, vertices.size());
-            }
-
-            for (const glm::vec3& position : model->tube_position)
-            {
-                glm::vec3 offset = position * model->scale;
-
-                auto vertices = {
-                    glm::vec3{offset.x + r * 3, offset.y, offset.z},
-                    glm::vec3{offset.x - r, offset.y, offset.z},
-                    glm::vec3{offset.x, offset.y + r, offset.z},
-                    glm::vec3{offset.x, offset.y - r, offset.z},
-                    glm::vec3{offset.x, offset.y, offset.z + r},
-                    glm::vec3{offset.x, offset.y, offset.z - r}
-                };
-                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), std::begin(vertices));
-                glDrawArrays(GL_LINES, 0, vertices.size());
-            }
-        }
-#endif
-    }
+//     {
+// #ifdef DEBUG
+//         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::BasicColor);
+//         {
+//             // Common state - matrices.
+//             glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Projection), 1, GL_FALSE, glm::value_ptr(projection_matrix));
+//             glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(view_matrix));
+//             glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+//
+//             // Vertex attrib
+//             gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+//
+//             // for (const EngineEmitterData& ee : model->engine_emitters)
+//             // {
+//             //     glm::vec3 offset = ee.position * model->scale;
+//             //     float r = model->scale * ee.scale * 0.5f;
+//             //
+//             //     glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), ee.color.x, ee.color.y, ee.color.z, 1.f);
+//             //     auto vertices = {
+//             //         glm::vec3{offset.x + r, offset.y, offset.z},
+//             //         glm::vec3{offset.x - r, offset.y, offset.z},
+//             //         glm::vec3{offset.x, offset.y + r, offset.z},
+//             //         glm::vec3{offset.x, offset.y - r, offset.z},
+//             //         glm::vec3{offset.x, offset.y, offset.z + r},
+//             //         glm::vec3{offset.x, offset.y, offset.z - r}
+//             //     };
+//             //     glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), std::begin(vertices));
+//             //     glDrawArrays(GL_LINES, 0, vertices.size());
+//             // }
+//             auto r = mesh_radius * 0.1f;
+//             // float r = model->getRadius() * 0.1f;
+//
+//             glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 1.f);
+//
+//             // for (const glm::vec3& position : model->beam_position)
+//             // {
+//             //     glm::vec3 offset = position * model->scale;
+//             //
+//             //     auto vertices = {
+//             //         glm::vec3{offset.x + r, offset.y, offset.z},
+//             //         glm::vec3{offset.x - r, offset.y, offset.z},
+//             //         glm::vec3{offset.x, offset.y + r, offset.z},
+//             //         glm::vec3{offset.x, offset.y - r, offset.z},
+//             //         glm::vec3{offset.x, offset.y, offset.z + r},
+//             //         glm::vec3{offset.x, offset.y, offset.z - r}
+//             //     };
+//             //     glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), std::begin(vertices));
+//             //     glDrawArrays(GL_LINES, 0, vertices.size());
+//             // }
+//
+//             // for (const glm::vec3& position : model->tube_position)
+//             // {
+//             //     glm::vec3 offset = position * model->scale;
+//             //
+//             //     auto vertices = {
+//             //         glm::vec3{offset.x + r * 3, offset.y, offset.z},
+//             //         glm::vec3{offset.x - r, offset.y, offset.z},
+//             //         glm::vec3{offset.x, offset.y + r, offset.z},
+//             //         glm::vec3{offset.x, offset.y - r, offset.z},
+//             //         glm::vec3{offset.x, offset.y, offset.z + r},
+//             //         glm::vec3{offset.x, offset.y, offset.z - r}
+//             //     };
+//             //     glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), std::begin(vertices));
+//             //     glDrawArrays(GL_LINES, 0, vertices.size());
+//             // }
+//         }
+// #endif
+//     }
 
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
@@ -168,69 +169,4 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glViewport(0, 0, renderer.getPhysicalSize().x, renderer.getPhysicalSize().y);
-#ifdef DEBUG
-        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::BasicColor);
-        {
-            // Common state - matrices.
-            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Projection), 1, GL_FALSE, glm::value_ptr(projection));
-            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(view_matrix));
-            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
-
-            // Vertex attrib
-            gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
-
-            for (const EngineEmitterData& ee : model->engine_emitters)
-            {
-                glm::vec3 offset = ee.position * model->scale;
-                float r = model->scale * ee.scale * 0.5f;
-
-                glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), ee.color.x, ee.color.y, ee.color.z, 1.f);
-                auto vertices = {
-                    glm::vec3{offset.x + r, offset.y, offset.z},
-                    glm::vec3{offset.x - r, offset.y, offset.z},
-                    glm::vec3{offset.x, offset.y + r, offset.z},
-                    glm::vec3{offset.x, offset.y - r, offset.z},
-                    glm::vec3{offset.x, offset.y, offset.z + r},
-                    glm::vec3{offset.x, offset.y, offset.z - r}
-                };
-                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), std::begin(vertices));
-                glDrawArrays(GL_LINES, 0, vertices.size());
-            }
-            float r = model->getRadius() * 0.1f;
-
-            glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 1.f);
-
-            for (const glm::vec3& position : model->beam_position)
-            {
-                glm::vec3 offset = position * model->scale;
-
-                auto vertices = {
-                    glm::vec3{offset.x + r, offset.y, offset.z},
-                    glm::vec3{offset.x - r, offset.y, offset.z},
-                    glm::vec3{offset.x, offset.y + r, offset.z},
-                    glm::vec3{offset.x, offset.y - r, offset.z},
-                    glm::vec3{offset.x, offset.y, offset.z + r},
-                    glm::vec3{offset.x, offset.y, offset.z - r}
-                };
-                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), std::begin(vertices));
-                glDrawArrays(GL_LINES, 0, vertices.size());
-            }
-
-            for (const glm::vec3& position : model->tube_position)
-            {
-                glm::vec3 offset = position * model->scale;
-
-                auto vertices = {
-                    glm::vec3{offset.x + r * 3, offset.y, offset.z},
-                    glm::vec3{offset.x - r, offset.y, offset.z},
-                    glm::vec3{offset.x, offset.y + r, offset.z},
-                    glm::vec3{offset.x, offset.y - r, offset.z},
-                    glm::vec3{offset.x, offset.y, offset.z + r},
-                    glm::vec3{offset.x, offset.y, offset.z - r}
-                };
-                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), std::begin(vertices));
-                glDrawArrays(GL_LINES, 0, vertices.size());
-            }
-        }
-#endif
 }
