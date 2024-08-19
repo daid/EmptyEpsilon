@@ -69,13 +69,9 @@ glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, MeshRenderCom
     auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
     model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
     model_matrix = glm::translate(model_matrix, mrc.mesh_offset);
+    model_matrix = glm::scale(model_matrix, glm::vec3{scale});
 
-    // EE's coordinate flips to a Z-up left hand.
-    // To account for that, flip the model around 180deg.
-    auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
-    modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{scale});
-    //modeldata_matrix = glm::translate(modeldata_matrix, mrc.mesh_offset); // Old mesh offset
-    return modeldata_matrix;
+    return model_matrix;
 }
 
 ShaderRegistry::ScopedShader lookUpShader(MeshRenderComponent& mrc)
