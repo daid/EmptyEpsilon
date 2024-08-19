@@ -17,8 +17,9 @@
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, MeshRenderComponent* mesh)
-: GuiElement(owner, id), mesh(mesh)
+GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, sp::ecs::Entity& entity)
+
+: GuiElement(owner, id), entity(entity)
 {
 }
 
@@ -31,6 +32,8 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     if (rect.size.y <= 0) {
         return;
     }
+
+    auto mesh = entity.getComponent<MeshRenderComponent>();
     if (!mesh) {
         return;
     }

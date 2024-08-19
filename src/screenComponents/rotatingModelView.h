@@ -7,9 +7,9 @@
 class GuiRotatingModelView : public GuiElement
 {
 private:
-    MeshRenderComponent *mesh;
+    sp::ecs::Entity &entity;
 public:
-    GuiRotatingModelView(GuiContainer* owner, string id, MeshRenderComponent *mesh);
+    GuiRotatingModelView(GuiContainer* owner, string id, sp::ecs::Entity& entity);
 
     virtual void onDraw(sp::RenderTarget& target) override;
 };

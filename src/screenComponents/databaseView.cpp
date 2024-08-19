@@ -126,7 +126,7 @@ void DatabaseViewComponent::display()
 
         if (mrc)
         {
-            (new GuiRotatingModelView(visual, "DATABASE_MODEL_VIEW", mrc))
+            (new GuiRotatingModelView(visual, "DATABASE_MODEL_VIEW", selected_entry))
                 ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
             if(database->image != "")
             {
