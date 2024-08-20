@@ -56,13 +56,7 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     glFrontFace(GL_CCW);
 
 
-    auto loaded = mesh->ensureLoaded();
-
-    if(!loaded) {
-        return;
-    }
-
-    auto mesh_radius = mrc->mesh.ptr->greatest_distance_from_center;
+    auto mesh_radius = mrc->getMesh()->greatest_distance_from_center;
     float mesh_diameter = mesh_radius * 2.f;
     float near_clip_boundary = 1.f;
 
@@ -83,7 +77,7 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 
     ShaderRegistry::updateProjectionView(projection_matrix, view_matrix);
 
-    auto model_matrix = calculateModelMatrix(glm::vec2{}, 0.f, *mrc, scale);
+    auto model_matrix = calculateModelMatrix(glm::vec2{}, 0.f, mrc->mesh_offset, scale);
 
     auto shader = lookUpShader(*mrc);
     glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));

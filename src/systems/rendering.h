@@ -71,8 +71,7 @@ private:
 template<typename COMPONENT, bool TRANSPARENT> Render3DInterface<COMPONENT, TRANSPARENT>::Render3DInterface() { RenderSystem::add3DHandler(this); }
 
 // FIX: This is obviously a very inelegant way to share behavior
-glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, MeshRenderComponent& mrc);
-glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, MeshRenderComponent& mrc, float scale);
+glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, glm::vec3 mesh_offset, float scale);
 ShaderRegistry::ScopedShader lookUpShader(MeshRenderComponent& mrc);
 void activateAndBindMeshTextures(MeshRenderComponent& mrc);
 void drawMesh(MeshRenderComponent& mrc, ShaderRegistry::ScopedShader& shader);

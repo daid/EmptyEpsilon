@@ -1,7 +1,7 @@
 #pragma once
+#include <memory>
 
 #include "io/dataBuffer.h"
-
 #include "graphics/texture.h"
 #include "mesh.h"
 #include "shaderRegistry.h"
