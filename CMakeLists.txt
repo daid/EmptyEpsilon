@@ -507,6 +507,8 @@ set(MAIN_SOURCES
     src/script/dataStorage.cpp
     src/script/gm.h
     src/script/gm.cpp
+    src/script/scriptRandom.h
+    src/script/scriptRandom.cpp
 
     src/ai/aiFactory.h
     src/ai/ai.h

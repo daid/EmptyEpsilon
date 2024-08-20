@@ -20,6 +20,7 @@
 #include "script/gm.h"
 #include "script/component.h"
 #include "script/damageInfo.h"
+#include "script/scriptRandom.h"
 #include "components/impulse.h"
 #include "components/warpdrive.h"
 #include "components/maneuveringthrusters.h"
@@ -855,8 +856,6 @@ void luaCommandSetAutoRepair(sp::ecs::Entity ship, bool enabled) {
 bool setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
-    env.setGlobal("random", static_cast<float(*)(float, float)>(&random));
-    env.setGlobal("irandom", &irandom);
     env.setGlobal("print", &luaPrint);
     env.setGlobal("log", &luaLog);
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
@@ -1078,6 +1077,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("getEEVersion", &luaGetEEVersion);
     registerScriptDataStorageFunctions(env);
     registerScriptGMFunctions(env);
+    registerScriptRandomFunctions(env);
 
     auto res = env.runFile<void>("luax.lua");
     LuaConsole::checkResult(res);
