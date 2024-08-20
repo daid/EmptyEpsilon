@@ -26,17 +26,11 @@ GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, sp::e
 void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 {
 
-    if (rect.size.x <= 0) {
-        return;
-    }
-    if (rect.size.y <= 0) {
-        return;
-    }
+    if (rect.size.x <= 0) return;
+    if (rect.size.y <= 0) return;
 
     auto mrc = entity.getComponent<MeshRenderComponent>();
-    if (!mrc) {
-        return;
-    }
+    if (!mrc) return;
 
     renderer.finish();
 
