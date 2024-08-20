@@ -26,7 +26,11 @@ public:
     TextureRef illumination_texture;
     glm::vec3 mesh_offset{};
     float scale = 1.0;
-    bool ensureLoaded();
+
+    Mesh* getMesh();
+    sp::Texture* getTexture();
+    sp::Texture* getSpecularTexture();
+    sp::Texture* getIlluminationTexture();
 };
 
 class EngineEmitter

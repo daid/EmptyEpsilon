@@ -33,8 +33,8 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
         return;
     }
 
-    auto mesh = entity.getComponent<MeshRenderComponent>();
-    if (!mesh) {
+    auto mrc = entity.getComponent<MeshRenderComponent>();
+    if (!mrc) {
         return;
     }
 
@@ -62,7 +62,7 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
         return;
     }
 
-    auto mesh_radius = mesh->mesh.ptr->greatest_distance_from_center;
+    auto mesh_radius = mrc->mesh.ptr->greatest_distance_from_center;
     float mesh_diameter = mesh_radius * 2.f;
     float near_clip_boundary = 1.f;
 
@@ -83,9 +83,9 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 
     ShaderRegistry::updateProjectionView(projection_matrix, view_matrix);
 
-    auto model_matrix = calculateModelMatrix(glm::vec2{}, 0.f, *mesh, scale);
+    auto model_matrix = calculateModelMatrix(glm::vec2{}, 0.f, *mrc, scale);
 
-    auto shader = lookUpShader(*mesh);
+    auto shader = lookUpShader(*mrc);
     glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
     auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
@@ -95,10 +95,9 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     ShaderRegistry::setupLights(shader.get(), modeldata_matrix);
 
     // Textures
-    activateAndBindMeshTextures(*mesh);
+    activateAndBindMeshTextures(*mrc);
 
     // Draw
-    drawMesh(*mesh, shader);
 
 //     {
 // #ifdef DEBUG
@@ -168,6 +167,7 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 //         }
 // #endif
 //     }
+    drawMesh(*mrc, shader);
 
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
