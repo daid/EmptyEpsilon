@@ -144,28 +144,14 @@ uint32_t Mesh::greatestDistanceFromCenter(std::vector<MeshVertex>& vertices)
         return 0;
     }
 
+    glm::vec3 sum{};
+    for(auto vertex : vertices) sum += glm::vec3{vertex.position[0], vertex.position[1], vertex.position[2]};
+    auto average = sum / float(vertices.size());
 
-    float sum_x = 0.f;
-    float sum_y = 0.f;
-    float sum_z = 0.f;
-    for(auto vertex : vertices)
-    {
-        auto [px, py, pz] = vertex.position;
-        sum_x += px;
-        sum_y += py;
-        sum_z += pz;
-    }
-
-    auto vertex_count = vertices.size();
-    auto average_x = sum_x / vertex_count;
-    auto average_y = sum_y / vertex_count;
-    auto average_z = sum_z / vertex_count;
     auto greatest_distance = 0.f;
-
     for(auto vertex : vertices)
     {
-        auto [px, py, pz] = vertex.position;
-        float distance = sqrt(pow(px - average_x, 2) + pow(py - average_y, 2) + pow(pz - average_z, 2));
+        float distance = glm::distance(average, glm::vec3{vertex.position[0], vertex.position[1], vertex.position[2]});
         if(distance > greatest_distance) {
             greatest_distance = distance;
         }
