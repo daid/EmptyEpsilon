@@ -329,6 +329,7 @@ set(MAIN_SOURCES
     src/components/radar.h
     src/components/hull.h
     src/components/rendering.h
+    src/components/rendering.cpp
     src/components/docking.h
     src/components/coolant.h
     src/components/shipsystem.h

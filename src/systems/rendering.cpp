@@ -22,7 +22,7 @@ void RenderSystem::render3D(float aspect, float camera_fov)
         depth_cutoff_back = -std::numeric_limits<float>::infinity();
     for(auto& handler : render_handlers)
         (this->*(handler.func))(handler.rif);
-    
+
     for(int n=render_lists.size() - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
@@ -33,7 +33,6 @@ void RenderSystem::render3D(float aspect, float camera_fov)
         ShaderRegistry::updateProjectionView(projection, {});
 
         glDepthMask(true);
-
         glDisable(GL_BLEND);
         for(auto info : render_list)
             if (!info.transparent)
@@ -47,74 +46,86 @@ void RenderSystem::render3D(float aspect, float camera_fov)
     }
 }
 
+glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, glm::vec3 mesh_offset, float scale) {
+    auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
+    model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
+    model_matrix = glm::translate(model_matrix, mesh_offset);
+    model_matrix = glm::scale(model_matrix, glm::vec3{scale});
+
+    return model_matrix;
+}
+
+ShaderRegistry::ScopedShader lookUpShader(MeshRenderComponent& mrc)
+{
+    auto shader_id = ShaderRegistry::Shaders::Object;
+    if (mrc.getTexture() && mrc.getSpecularTexture() && mrc.getIlluminationTexture())
+        shader_id = ShaderRegistry::Shaders::ObjectSpecularIllumination;
+    else if (mrc.getTexture() && mrc.getSpecularTexture())
+        shader_id = ShaderRegistry::Shaders::ObjectSpecular;
+    else if (mrc.getTexture() && mrc.getIlluminationTexture())
+        shader_id = ShaderRegistry::Shaders::ObjectIllumination;
+
+    return ShaderRegistry::ScopedShader(shader_id);
+}
+
+void activateAndBindMeshTextures(MeshRenderComponent& mrc)
+{
+    if (mrc.getTexture())
+        mrc.getTexture()->bind();
+
+    if (mrc.getSpecularTexture())
+    {
+        glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::SpecularMap));
+        mrc.getSpecularTexture()->bind();
+    }
+
+    if (mrc.getIlluminationTexture())
+    {
+        glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::IlluminationMap));
+        mrc.getIlluminationTexture()->bind();
+    }
+}
+
+void drawMesh(MeshRenderComponent& mrc, ShaderRegistry::ScopedShader& shader)
+{
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+    gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+    mrc.getMesh()->render(positions.get(), texcoords.get(), normals.get());
+
+    // wut iz?
+    if (mrc.getSpecularTexture() || mrc.getIlluminationTexture())
+        glActiveTexture(GL_TEXTURE0);
+}
+
 void MeshRenderSystem::update(float delta)
 {
 }
 
 void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, MeshRenderComponent& mrc)
 {
-    if (!mrc.mesh.ptr && !mrc.mesh.name.empty())
-        mrc.mesh.ptr = Mesh::getMesh(mrc.mesh.name);
-    if (!mrc.mesh.ptr)
-        return;
-    if (!mrc.texture.ptr && !mrc.texture.name.empty())
-        mrc.texture.ptr = textureManager.getTexture(mrc.texture.name);
-    if (!mrc.specular_texture.ptr && !mrc.specular_texture.name.empty())
-        mrc.specular_texture.ptr = textureManager.getTexture(mrc.specular_texture.name);
-    if (!mrc.illumination_texture.ptr && !mrc.illumination_texture.name.empty())
-        mrc.illumination_texture.ptr = textureManager.getTexture(mrc.illumination_texture.name);
+    auto model_matrix = calculateModelMatrix(
+            transform.getPosition(),
+            transform.getRotation(),
+            mrc.mesh_offset,
+            mrc.scale);
 
-    auto position = transform.getPosition();
-    auto rotation = transform.getRotation();
-    auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
-    model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
-    model_matrix = glm::translate(model_matrix, mrc.mesh_offset);
+    auto shader = lookUpShader(mrc);
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
-    // EE's coordinate flips to a Z-up left hand.
-    // To account for that, flip the model around 180deg.
     auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
     modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{mrc.scale});
-    //modeldata_matrix = glm::translate(modeldata_matrix, mrc.mesh_offset); // Old mesh offset
-
-    auto shader_id = ShaderRegistry::Shaders::Object;
-    if (mrc.texture.ptr && mrc.specular_texture.ptr && mrc.illumination_texture.ptr)
-        shader_id = ShaderRegistry::Shaders::ObjectSpecularIllumination;
-    else if (mrc.texture.ptr && mrc.specular_texture.ptr)
-        shader_id = ShaderRegistry::Shaders::ObjectSpecular;
-    else if (mrc.texture.ptr && mrc.illumination_texture.ptr)
-        shader_id = ShaderRegistry::Shaders::ObjectIllumination;
-
-    ShaderRegistry::ScopedShader shader(shader_id);
-    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(modeldata_matrix));
 
     // Lights setup.
-    ShaderRegistry::setupLights(shader.get(), model_matrix);
+    ShaderRegistry::setupLights(shader.get(), modeldata_matrix);
 
     // Textures
-    if (mrc.texture.ptr)
-        mrc.texture.ptr->bind();
-
-    if (mrc.specular_texture.ptr)
-    {
-        glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::SpecularMap));
-        mrc.specular_texture.ptr->bind();
-    }
-
-    if (mrc.illumination_texture.ptr)
-    {
-        glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::IlluminationMap));
-        mrc.illumination_texture.ptr->bind();
-    }
+    activateAndBindMeshTextures(mrc);
 
     // Draw
-    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
-    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-    gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+    drawMesh(mrc, shader);
 
-    mrc.mesh.ptr->render(positions.get(), texcoords.get(), normals.get());
-
-    if (mrc.specular_texture.ptr || mrc.illumination_texture.ptr)
-        glActiveTexture(GL_TEXTURE0);
 }
 
 void NebulaRenderSystem::update(float delta)
@@ -333,7 +344,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         }
         // upload
         glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(glm::vec3), vertices.data());
-        
+
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(6 * active_quads), GL_UNSIGNED_SHORT, nullptr);
         n += active_quads;
     }

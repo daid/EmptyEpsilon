@@ -67,7 +67,14 @@ private:
     };
     static std::vector<RenderHandler> render_handlers;
 };
+
 template<typename COMPONENT, bool TRANSPARENT> Render3DInterface<COMPONENT, TRANSPARENT>::Render3DInterface() { RenderSystem::add3DHandler(this); }
+
+// FIX: This is obviously not the right place to define these utility functions
+glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, glm::vec3 mesh_offset, float scale);
+ShaderRegistry::ScopedShader lookUpShader(MeshRenderComponent& mrc);
+void activateAndBindMeshTextures(MeshRenderComponent& mrc);
+void drawMesh(MeshRenderComponent& mrc, ShaderRegistry::ScopedShader& shader);
 
 class MeshRenderSystem : public sp::ecs::System, public Render3DInterface<MeshRenderComponent, false>
 {

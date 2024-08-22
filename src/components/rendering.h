@@ -1,7 +1,7 @@
 #pragma once
+#include <memory>
 
 #include "io/dataBuffer.h"
-
 #include "graphics/texture.h"
 #include "mesh.h"
 #include "shaderRegistry.h"
@@ -26,6 +26,11 @@ public:
     TextureRef illumination_texture;
     glm::vec3 mesh_offset{};
     float scale = 1.0;
+
+    Mesh* getMesh();
+    sp::Texture* getTexture();
+    sp::Texture* getSpecularTexture();
+    sp::Texture* getIlluminationTexture();
 };
 
 class EngineEmitter
