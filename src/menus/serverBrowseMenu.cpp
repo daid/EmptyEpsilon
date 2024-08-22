@@ -21,6 +21,8 @@ namespace
         {
         case GameClient::DisconnectReason::None:
             return tr("game_client_disconnect_reason", "still connected");
+        case GameClient::DisconnectReason::FailedToConnect:
+            return tr("game_client_disconnect_reason", "failed to connect to server");
         case GameClient::DisconnectReason::BadCredentials:
             return tr("game_client_disconnect_reason", "bad credentials");
         case GameClient::DisconnectReason::ClosedByServer:
