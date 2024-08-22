@@ -88,19 +88,19 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClie
         server_list->addEntry(tr("Last Session ({last})").format({{"last", PreferencesManager::get("last_server", "")}}),
             PreferencesManager::get("last_server", ""));
     }
-    scanner->addCallbacks([this](sp::io::network::Address address, string name) {
+    scanner->addCallbacks([this](const ServerScanner::ServerInfo& info) {
         //New server found
-        if (address.getHumanReadable().empty()) return;
-        auto addr_str = address.getHumanReadable()[0];
-        server_list->addEntry(name + " (" + addr_str + ")", addr_str);
+        if (info.address.getHumanReadable().empty()) return;
+        auto addr_str = info.address.getHumanReadable()[0];
+        server_list->addEntry(info.name + " (" + addr_str + ")", addr_str);
 
         if (manual_ip->getText() == "")
             manual_ip->setText(addr_str);
 
-    }, [this](sp::io::network::Address address) {
+    }, [this](const ServerScanner::ServerInfo& info) {
         //Server removed from list
-        if (address.getHumanReadable().empty()) return;
-        auto addr_str = address.getHumanReadable()[0];
+        if (info.address.getHumanReadable().empty()) return;
+        auto addr_str = info.address.getHumanReadable()[0];
         server_list->removeEntry(server_list->indexByValue(addr_str));
     });
     server_list->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(700, 600);
