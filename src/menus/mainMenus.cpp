@@ -82,7 +82,7 @@ MainMenu::MainMenu()
     }))->setPosition({50, -230}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     (new GuiButton(this, "START_CLIENT", tr("mainMenu", "Start client"), [this]() {
-        new ServerBrowserMenu(ServerBrowserMenu::Local);
+        new ServerBrowserMenu();
         destroy();
     }))->setPosition({50, -170}, sp::Alignment::BottomLeft)->setSize(300, 50);
 

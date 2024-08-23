@@ -3,6 +3,7 @@
 
 #include "gui/gui2_canvas.h"
 #include "multiplayer_client.h"
+#include "multiplayer_server_scanner.h"
 #include <optional>
 
 class GuiTextEntry;
@@ -14,23 +15,21 @@ class ServerScanner;
 class ServerBrowserMenu : public GuiCanvas
 {
 public:
-    enum SearchSource
-    {
-        Local,
-        Internet
-    };
+    ServerBrowserMenu(std::optional<GameClient::DisconnectReason> last_attempt = {});
+    virtual ~ServerBrowserMenu();
+
 private:
     GuiTextEntry* manual_ip;
     GuiButton* connect_button;
-    GuiListbox* server_list;
-    GuiSelector* lan_internet_selector;
+    GuiListbox* server_list_box;
 
     P<ServerScanner> scanner;
+    std::vector<ServerScanner::ServerInfo> server_list;
+    std::optional<ServerScanner::ServerInfo> selected_server;
 
+    void updateServerList();
     void connect(string host);
-public:
-    ServerBrowserMenu(SearchSource source, std::optional<GameClient::DisconnectReason> last_attempt = {});
-    virtual ~ServerBrowserMenu();
+    void connect(const ServerScanner::ServerInfo& info);
 };
 
 #endif//SERVER_BROWSE_MENU_H
