@@ -866,6 +866,11 @@ void luaCommandSetAutoRepair(sp::ecs::Entity ship, bool enabled) {
         ir->auto_repair_enabled = enabled;
 }
 
+void setupSubEnvironment(sp::script::Environment& env)
+{
+    env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
+}
+
 bool setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions

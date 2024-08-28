@@ -310,6 +310,7 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     }
 
     main_scenario_script = std::make_unique<sp::script::Environment>(script_environment_base.get());
+    setupSubEnvironment(*main_scenario_script.get());
     //TODO: int max_cycles = PreferencesManager::get("script_cycle_limit", "0").toInt();
     //TODO: if (max_cycles > 0)
     //TODO:     script->setMaxRunCycles(max_cycles);
