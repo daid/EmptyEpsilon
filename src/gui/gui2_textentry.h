@@ -25,6 +25,8 @@ protected:
     const GuiThemeStyle* back_style;
     func_t func;
     func_t enter_func;
+    func_t up_func;
+    func_t down_func;
 
     const float blink_rate = 0.530f;
     sp::SystemTimer blink_timer;
@@ -52,6 +54,8 @@ public:
     GuiTextEntry* setHidePassword(bool enabled=true);
     GuiTextEntry* callback(func_t func);
     GuiTextEntry* enterCallback(func_t func);
+    GuiTextEntry* upCallback(func_t func);
+    GuiTextEntry* downCallback(func_t func);
 
     void setCursorPosition(int offset);
 protected:

@@ -13,16 +13,15 @@
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_button.h"
 
-JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source)
+JoinServerScreen::JoinServerScreen(const ServerScanner::ServerInfo& target)
+: target(target)
 {
-    this->source = source;
-
     status_label = new GuiLabel(this, "STATUS", tr("connectserver", "Connecting..."), 30);
     status_label->setPosition(0, 300, sp::Alignment::TopCenter)->setSize(0, 50);
     (new GuiButton(this, "BTN_CANCEL", tr("button", "Cancel"), [this]() {
         destroy();
         disconnectFromServer();
-        new ServerBrowserMenu(this->source);
+        new ServerBrowserMenu();
     }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     password_entry_box = new GuiPanel(this, "PASSWORD_ENTRY_BOX");
@@ -37,24 +36,15 @@ JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source)
         password_focused = false;
         game_client->sendPassword(password_entry->getText().upper());
     }))->setPosition(420, 0, sp::Alignment::CenterLeft)->setSize(160, 50);
-}
 
-JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sp::io::network::Address ip, int port)
-: JoinServerScreen(source)
-{
-    this->ip = ip;
-    this->port = port;
-
-    new GameClient(VERSION_NUMBER, ip, port);
-}
-
+    if (target.type == ServerScanner::ServerType::SteamFriend) {
 #ifdef STEAMSDK
-JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, uint64_t steam_id)
-: JoinServerScreen(source)
-{
-    new GameClient(VERSION_NUMBER, steam_id);
-}
+        new GameClient(VERSION_NUMBER, target.port);
 #endif
+    } else {
+        new GameClient(VERSION_NUMBER, target.address, target.port);
+    }
+}
 
 void JoinServerScreen::update(float delta)
 {
@@ -78,14 +68,14 @@ void JoinServerScreen::update(float delta)
         destroy();
         disconnectFromServer();
         
-        new ServerBrowserMenu(this->source, reason);
+        new ServerBrowserMenu(reason);
         } break;
     case GameClient::Connected:
-        if (!this->ip.getHumanReadable().empty())
+        if (!target.address.getHumanReadable().empty())
         {
-            string last_server = this->ip.getHumanReadable()[0];
-            if (port != defaultServerPort)
-                last_server += ":" + string(port);
+            string last_server = target.address.getHumanReadable()[0];
+            if (target.port != defaultServerPort)
+                last_server += ":" + string(int(target.port));
             PreferencesManager::set("last_server", last_server);
         }
         if (game_client->getClientId() > 0)
