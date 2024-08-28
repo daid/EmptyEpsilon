@@ -135,7 +135,7 @@ end
 --- Returns the order's x,y coordinates, or 0,0 if not defined.
 --- Example: x,y = ship:getOrderTargetLocation()
 function Entity:getOrderTargetLocation()
-    if self.components.ai_controller then return unpack(e.ai_controller.order_target_location) end
+    if self.components.ai_controller then return table.unpack(self.components.ai_controller.order_target_location) end
 end
 --- Returns the target SpaceObject for this CpuShip's orders.
 --- If the orders target coordinates instead of an object, use CpuShip:getOrderTargetLocation().
