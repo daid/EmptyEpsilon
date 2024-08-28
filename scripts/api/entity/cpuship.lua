@@ -68,14 +68,14 @@ end
 --- This ship will rotate to face a target and fires missiles within 4.5U if it has any, but won't move, roam, or patrol.
 --- Example: ship:orderStandGround()
 function Entity:orderStandGround()
-    if self.components.ai_controller then self.components.ai_controller = {orders = "standground"} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "stand ground"} end
     return self
 end
 --- Orders this CpuShip to move to the given coordinates, patrol within a 1.5U radius, and attack any hostiles that move within 2U of its short-range radar range.
 --- If a targeted hostile moves more than 3U out of this ship's short-range radar range, this ship drops the target and resumes defending its position.
 --- Example: ship:orderDefendLocation(500, 1000) -- defend the space near these coordinates
 function Entity:orderDefendLocation(x, y)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "defendlocation", order_target_location={x, y}} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "defend location", order_target_location={x, y}} end
     return self
 end
 --- Orders this CpuShip to maintain a 2U escort distance from the given SpaceObject and attack nearby hostiles.
@@ -83,7 +83,7 @@ end
 --- If the SpaceObject being defended is destroyed, this ship reverts to Roaming orders.
 --- Example: ship:orderDefendTarget(base) -- defend the space near the SpaceObject `base`
 function Entity:orderDefendTarget(target)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "defendtarget", order_target=target} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "defend target", order_target=target} end
     return self
 end
 --- Orders this CpuShip to fly toward the given SpaceObject and follow it from the given offset distance.
@@ -92,7 +92,7 @@ end
 --- Give multiple CpuShips the same SpaceObject and different offsets to create a formation.
 --- Example: ship:orderFlyFormation(leader, 500, 250) -- fly 0.5U off the wing and 0.25U off the tail of the SpaceObject `leader`
 function Entity:orderFlyFormation(target, offset_x, offset_y)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "flyformation", order_target=target, order_target_location={x, y}} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "fly in formation", order_target=target, order_target_location={x, y}} end
     return self
 end
 --- Orders this CpuShip to move toward the given coordinates, and to attack hostiles that approach within its short-range radar range during transit.
@@ -101,14 +101,14 @@ end
 --- Upon arrival, this ship reverts to the Defend Location orders with its destination as the target.
 --- Example: ship:orderFlyTowards(500, 1000) -- move to these coordinates, attacking nearby hostiles on the way
 function Entity:orderFlyTowards(x, y)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "flytowards", order_target_location={x, y}} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "fly towards", order_target_location={x, y}} end
     return self
 end
 --- Orders this CpuShip to move toward the given coordinates, ignoring all hostiles on the way.
 --- Upon arrival, this ship reverts to the Idle orders.
 --- Example: ship:orderFlyTowardsBlind(500, 1000) -- move to these coordinates, ignoring hostiles
 function Entity:orderFlyTowardsBlind(x, y)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "flytowardsblind", order_target_location={x, y}} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "fly towards (ignore all)", order_target_location={x, y}} end
     return self
 end
 --- Orders this CpuShip to attack the given SpaceObject.

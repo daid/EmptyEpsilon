@@ -105,17 +105,17 @@ template<> struct Convert<ScanState::State> {
 template<> struct Convert<AIOrder> {
     static int toLua(lua_State* L, AIOrder value) {
         switch(value) {
-        case AIOrder::Idle: lua_pushstring(L, "idle"); break;
-        case AIOrder::Roaming: lua_pushstring(L, "roaming"); break;
-        case AIOrder::Retreat: lua_pushstring(L, "retreat"); break;
-        case AIOrder::StandGround: lua_pushstring(L, "standground"); break;
-        case AIOrder::DefendLocation: lua_pushstring(L, "defendlocation"); break;
-        case AIOrder::DefendTarget: lua_pushstring(L, "defendtarget"); break;
-        case AIOrder::FlyFormation: lua_pushstring(L, "flyformation"); break;
-        case AIOrder::FlyTowards: lua_pushstring(L, "flytowards"); break;
-        case AIOrder::FlyTowardsBlind: lua_pushstring(L, "flytowardsblind"); break;
-        case AIOrder::Dock: lua_pushstring(L, "dock"); break;
-        case AIOrder::Attack: lua_pushstring(L, "attack"); break;
+        case AIOrder::Idle: lua_pushstring(L, "Idle"); break;
+        case AIOrder::Roaming: lua_pushstring(L, "Roaming"); break;
+        case AIOrder::Retreat: lua_pushstring(L, "Retreat"); break;
+        case AIOrder::StandGround: lua_pushstring(L, "Stand Ground"); break;
+        case AIOrder::DefendLocation: lua_pushstring(L, "Defend Location"); break;
+        case AIOrder::DefendTarget: lua_pushstring(L, "Defend Target"); break;
+        case AIOrder::FlyFormation: lua_pushstring(L, "Fly in formation"); break;
+        case AIOrder::FlyTowards: lua_pushstring(L, "Fly towards"); break;
+        case AIOrder::FlyTowardsBlind: lua_pushstring(L, "Fly towards (ignore all)"); break;
+        case AIOrder::Dock: lua_pushstring(L, "Dock"); break;
+        case AIOrder::Attack: lua_pushstring(L, "Attack"); break;
         }
         return 1;
     }
@@ -127,17 +127,17 @@ template<> struct Convert<AIOrder> {
             return AIOrder::Roaming;
         else if (str == "retreat")
             return AIOrder::Retreat;
-        else if (str == "standground")
+        else if (str == "standground" || str == "stand ground")
             return AIOrder::StandGround;
-        else if (str == "defendlocation")
+        else if (str == "defendlocation" || str == "defend location")
             return AIOrder::DefendLocation;
-        else if (str == "defendtarget")
+        else if (str == "defendtarget" || str == "defend target")
             return AIOrder::DefendTarget;
-        else if (str == "flyformation")
+        else if (str == "flyformation" || str == "fly in formation")
             return AIOrder::FlyFormation;
-        else if (str == "flytowards")
+        else if (str == "flytowards" || str == "fly towards")
             return AIOrder::FlyTowards;
-        else if (str == "flytowardsblind")
+        else if (str == "flytowardsblind" || str == "fly towards (ignore all)")
             return AIOrder::FlyTowardsBlind;
         else if (str == "dock")
             return AIOrder::Dock;

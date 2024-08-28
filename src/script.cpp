@@ -207,6 +207,11 @@ static void luaVictory(string faction)
     engine->setGameSpeed(0.0);
 }
 
+static string luaGetSectorName(float x, float y)
+{
+    return getSectorName({x, y});
+}
+
 static string luaGetScenarioSetting(string key)
 {
     if (gameGlobalInfo->scenario_settings.find(key) != gameGlobalInfo->scenario_settings.end())
@@ -286,25 +291,29 @@ static int luaCreateAdditionalScript(lua_State* L)
     return 1;
 }
 
-static glm::vec2 luaSectorToXY(string sector)
+static int luaSectorToXY(lua_State* L)
 {
+    string sector = luaL_checkstring(L, 1);
     constexpr float sector_size = 20000;
     int x, y, intpart;
 
     if(sector.length() < 2){
-        return glm::vec2(0,0);
+        lua_pushnumber(L, 0);
+        lua_pushnumber(L, 0);
+        return 2;
     }
 
     // Y axis is complicated
-    if(sector[0] >= char('A') && sector[1] >= char('A')){
+    if(sector[0] >= char('A') && sector[1] >= char('A')) {
         // Case with two letters
         char a1 = sector[0];
         char a2 = sector[1];
         try{
             intpart = stoi(sector.substr(2));
-        }
-        catch(const std::exception& e){
-            return glm::vec2(0,0);
+        } catch(const std::exception& e) {
+            lua_pushnumber(L, 0);
+            lua_pushnumber(L, 0);
+            return 2;
         }
         if(a1 > char('a')){
             // Case with two lowercase letters (zz10) counting down towards the North
@@ -319,13 +328,17 @@ static glm::vec2 luaSectorToXY(string sector)
         try{
             intpart = stoi(sector.substr(1));
         }catch(const std::exception& e){
-            return glm::vec2(0,0);
+            lua_pushnumber(L, 0);
+            lua_pushnumber(L, 0);
+            return 2;
         }
         y = (alphaPart - char('F')) * sector_size;
     }
     // X axis is simple
     x = (intpart - 5) * sector_size; // 5 is the numeric component of the F5 origin
-    return glm::vec2(x, y);
+    lua_pushnumber(L, x);
+    lua_pushnumber(L, y);
+    return 2;
 }
 
 static void luaSetBanner(string banner)
@@ -893,7 +906,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Coordinates 0,0 are the top-left ("northwest") point of sector F5.
     /// See also SpaceObject:getSectorName().
     /// Example: getSectorName(20000,-40000) -- returns "D6"
-    env.setGlobal("getSectorName", &getSectorName);
+    env.setGlobal("getSectorName", &luaGetSectorName);
     /// glm::vec2 sectorToXY(string sector_name)
     /// Returns the top-left ("northwest") x/y coordinates for the given sector mame.
     /// Examples:
