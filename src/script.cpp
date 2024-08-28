@@ -438,7 +438,7 @@ void luaSetPlayerShipCustomFunction(sp::ecs::Entity entity, CustomShipFunctions:
         idx = int(csf->functions.size());
         csf->functions.emplace_back();
     }
-    auto& f = csf->functions.back();
+    auto& f = csf->functions[idx];
     f.type = type;
     f.name = name;
     f.caption = caption;
