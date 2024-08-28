@@ -637,7 +637,7 @@ end
 function Entity:setBeamWeaponTurret(index, arc, direction, rotation_rate)
     if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
     self.components.beam_weapons[index + 1].turret_arc = arc
-    self.components.beam_weapons[index + 1].turret_direction = arc
+    self.components.beam_weapons[index + 1].turret_direction = direction
     self.components.beam_weapons[index + 1].turret_rotation_rate = rotation_rate
     return self
 end

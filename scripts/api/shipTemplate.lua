@@ -243,7 +243,7 @@ end
 --- template:setBeamWeaponTurret(0,200,90,5)
 function ShipTemplate:setBeamWeaponTurret(index, arc, direction, rotation_rate)
     self.beam_weapons[index + 1].turret_arc = arc
-    self.beam_weapons[index + 1].turret_direction = arc
+    self.beam_weapons[index + 1].turret_direction = direction
     self.beam_weapons[index + 1].turret_rotation_rate = rotation_rate
     return self
 end
