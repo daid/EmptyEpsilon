@@ -353,6 +353,7 @@ bool CommsSystem::openChannel(sp::ecs::Entity player, sp::ecs::Entity target)
     {
         auto& env = player.addComponent<CommsTransmitterEnvironment>();
         env.script_environment = std::make_unique<sp::script::Environment>(gameGlobalInfo->script_environment_base.get());
+        setupSubEnvironment(*env.script_environment.get());
         // consider "player" deprecated, but keep it for a long time
         env.script_environment->setGlobal("player", player);
         env.script_environment->setGlobal("comms_source", player);

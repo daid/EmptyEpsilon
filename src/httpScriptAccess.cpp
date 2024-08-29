@@ -15,6 +15,7 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
             return "{\"ERROR\": \"No game\"}";
 
         sp::script::Environment env(gameGlobalInfo->script_environment_base.get());
+        setupSubEnvironment(env);
         auto result = env.run<string>(request.post_data);
         string output;
         if (result.isErr()) {

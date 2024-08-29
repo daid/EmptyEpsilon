@@ -251,6 +251,7 @@ static void luaClearGMFunctions()
 static int luaCreateAdditionalScript(lua_State* L)
 {
     auto env = std::make_unique<sp::script::Environment>(gameGlobalInfo->script_environment_base.get());
+    setupSubEnvironment(*env.get());
     auto ptr = reinterpret_cast<sp::script::Environment**>(lua_newuserdata(L, sizeof(sp::script::Environment*)));
     *ptr = env.get();
     luaL_getmetatable(L, "ScriptObject");
