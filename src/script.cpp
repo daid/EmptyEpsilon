@@ -438,7 +438,7 @@ void luaSetPlayerShipCustomFunction(sp::ecs::Entity entity, CustomShipFunctions:
         idx = int(csf->functions.size());
         csf->functions.emplace_back();
     }
-    auto& f = csf->functions.back();
+    auto& f = csf->functions[idx];
     f.type = type;
     f.name = name;
     f.caption = caption;
@@ -864,6 +864,11 @@ void luaCommandSetAutoRepair(sp::ecs::Entity ship, bool enabled) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetAutoRepair(enabled); return; }
     if (auto ir = ship.getComponent<InternalRooms>())
         ir->auto_repair_enabled = enabled;
+}
+
+void setupSubEnvironment(sp::script::Environment& env)
+{
+    env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
 }
 
 bool setupScriptEnvironment(sp::script::Environment& env)
