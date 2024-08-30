@@ -9,6 +9,8 @@
 
 void ManeuveringSystem::update(float delta)
 {
+    if (delta <= 0.0f) return;
+
     for(auto [entity, thrusters, transform, physics] : sp::ecs::Query<ManeuveringThrusters, sp::Transform, sp::Physics>()) {
         float rotationDiff = 0.0f;
         if (thrusters.rotation_request != std::numeric_limits<float>::min())
@@ -16,12 +18,10 @@ void ManeuveringSystem::update(float delta)
         if (thrusters.target != std::numeric_limits<float>::min())
             rotationDiff = angleDifference(transform.getRotation(), thrusters.target);
 
-        if (rotationDiff > 1.0f)
-            physics.setAngularVelocity(thrusters.speed * thrusters.getSystemEffectiveness());
-        else if (rotationDiff < -1.0f)
-            physics.setAngularVelocity(-thrusters.speed * thrusters.getSystemEffectiveness());
-        else
-            physics.setAngularVelocity(rotationDiff * thrusters.speed * thrusters.getSystemEffectiveness());
+        auto maxSpeed = thrusters.speed * thrusters.getSystemEffectiveness();
+        auto targetVelocity = rotationDiff / delta;
+
+        physics.setAngularVelocity(std::clamp(targetVelocity, -maxSpeed, maxSpeed));
     }
 
     constexpr static float combat_maneuver_charge_time = 20.0f; /*< Amount of time it takes to fully charge the combat maneuver system */
