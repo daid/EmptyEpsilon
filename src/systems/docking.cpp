@@ -55,8 +55,9 @@ void DockingSystem::update(float delta)
             }else{
                 if (transform) {
                     transform->setPosition(target_transform->getPosition() + rotateVec2(docking_port.docked_offset, target_transform->getRotation()));
+                    transform->setRotation(vec2ToAngle(transform->getPosition() - target_transform->getPosition()));
                     auto thrusters = entity.getComponent<ManeuveringThrusters>();
-                    if (thrusters) thrusters->target = vec2ToAngle(transform->getPosition() - target_transform->getPosition());
+                    if (thrusters) thrusters->stop();
                 }
 
                 auto bay = docking_port.target.getComponent<DockingBay>();
@@ -133,10 +134,16 @@ void DockingSystem::update(float delta)
 
             auto engine = entity.getComponent<ImpulseEngine>();
             if (engine)
+            {
                 engine->request = 0.f;
+                engine->actual = 0.f;
+            }
             auto warp = entity.getComponent<WarpDrive>();
             if (warp)
+            {
                 warp->request = 0;
+                warp->current = 0;
+            }
             break;
         }
     }
@@ -209,6 +216,17 @@ void DockingSystem::requestUndock(sp::ecs::Entity entity)
     if (!docking_port || docking_port->state != DockingPort::State::Docked) return;
     auto impulse = entity.getComponent<ImpulseEngine>();
     if (impulse && impulse->getSystemEffectiveness() < 0.1f) return;
+
+    if (!entity.hasComponent<sp::Transform>())
+    {
+        auto& t = entity.addComponent<sp::Transform>();
+        auto target_transform = docking_port->target.getComponent<sp::Transform>();
+        t.setPosition(target_transform->getPosition() + rotateVec2(docking_port->docked_offset, target_transform->getRotation()));
+        t.setRotation(target_transform->getRotation() + vec2ToAngle(docking_port->docked_offset));
+    }
+
+    auto thrusters = entity.getComponent<ManeuveringThrusters>();
+    if (thrusters) thrusters->stop();
 
     docking_port->state = DockingPort::State::NotDocking;
     if (impulse) impulse->request = 0.5;
