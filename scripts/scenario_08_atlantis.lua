@@ -778,7 +778,7 @@ function shipyardGammaComms()
         addCommsReply(
             _("station-comms", "Yes."),
             function()
-                setCommsMessage(_("station-comms", [[Good. Your first mission is to identify odd readings coming from the nebula cloud in sector B20.
+                setCommsMessage(_("station-comms", [[Good. Your first mission is to identify odd readings coming from the nebula cloud near sector B20.
 
 Your ship is not equipped to travel this distance by itself, so we have tasked jump carrier JC-88 to take you there.
 
