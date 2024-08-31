@@ -147,7 +147,7 @@ function init()
 
     nebula = table.remove(b20_nebula_list, math.random(#b20_nebula_list))
     x, y = nebula:getPosition()
-    b20_artifact = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+    b20_artifact = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setRadarTraceColor(250, 79, 255)
     b20_artifact:setScanningParameters(3, 1)
     b20_artifact.nebula = nebula
     b20_artifact.beta_radiation = irandom(1, 10)
@@ -171,11 +171,11 @@ Doppler instability: %i]]),
     )
 
     x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
-    b20_dummy_artifact_1 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescriptions(_("scienceDescription-artifact", "An odd object floating in space."), _("scienceDescription-artifact", "This object seems to be inert, and not giving any readings on your sensors. The actual object must be somewhere else."))
+    b20_dummy_artifact_1 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setRadarTraceColor(250, 79, 255):setDescriptions(_("scienceDescription-artifact", "An odd object floating in space."), _("scienceDescription-artifact", "This object seems to be inert, and not giving any readings on your sensors. The actual object must be somewhere else."))
     b20_dummy_artifact_1:setScanningParameters(3, 1)
 
     x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
-    b20_dummy_artifact_2 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescriptions(_("scienceDescription-artifact", "An odd object floating in space."), _("scienceDescription-artifact", "This object seems to be inert, and not giving any readings on your sensors. The actual object must be somewhere else."))
+    b20_dummy_artifact_2 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setRadarTraceColor(250, 79, 255):setDescriptions(_("scienceDescription-artifact", "An odd object floating in space."), _("scienceDescription-artifact", "This object seems to be inert, and not giving any readings on your sensors. The actual object must be somewhere else."))
     b20_dummy_artifact_2:setScanningParameters(3, 1)
 
     x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
