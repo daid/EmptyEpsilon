@@ -447,7 +447,7 @@ end
 
 function phase2WaitTillAwayFromObject(delta)
     if distance(player, b20_artifact) > 2200 then
-        setCommsMessage(_("artifact-comms", [[It seems like the artifact is stablizing.
+        setCommsMessage(_("artifact-comms", [[It seems like the artifact is stabilizing.
 It would be good to get some more reading a bit closer, as the nebula causes our sensor ]]))
         mission_state = phase2WaitTillNearObject
     elseif distance(player, b20_artifact) > 2000 then
