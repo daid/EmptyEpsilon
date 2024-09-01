@@ -1,0 +1,1794 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+# Scenario name
+msgid "Broken Glass"
+msgstr "Zerbrochenes Glas"
+
+# Scenario description
+msgid ""
+"Support research activities in the Zeta Belt and keep the researchers safe. "
+"Difficulty balances and 10 achievements to complete.\n"
+"\n"
+"Duration: Plan for 3+ hours on Easy, with harder difficulties taking longer\n"
+"Player ships: 1\n"
+"\n"
+"Author: Chris Sibbitt. Revisions: Xansta, Muerte Jan2023\n"
+"Created: Dec2022\n"
+"Feedback: USN Discord: https://discord.gg/7Kr32ezJFF"
+msgstr ""
+"Unterstützt die Forschungsaktivitäten im Zeta-Gürtel und sorgt Sie für die "
+"Sicherheit der Forscher. Verschiedene Schwierigkeitsgrade 10 mögliche "
+"Errungenschaften\n"
+"\n"
+"Dauer: Plant 3+ Stunden auf Leicht ein, die schweren Schwierigkeitsgrade "
+"dauern länger\n"
+"Spielerschiffe: 1\n"
+"\n"
+"Autor: Chris Sibbitt. Überarbeitungen: Xansta, Muerte Jan2023\n"
+"Erstellt: Dez2022\n"
+"Feedback: USN Discord: https://discord.gg/7Kr32ezJFF"
+
+# Scenario setting
+msgctxt "setting"
+msgid "Difficulty"
+msgstr "Schwierigkeitsgrad"
+
+msgctxt "setting"
+msgid "Configures the difficulty in the scenario. Default is Easy"
+msgstr ""
+"Legt den Schwierigkeitsgrad des Szenarios fest. Standardeinstellung ist "
+"\"leicht\""
+
+msgctxt "Difficulty"
+msgid "Easy"
+msgstr "Leicht"
+
+msgctxt "Difficulty"
+msgid "Minor enemy resistance and easier missions."
+msgstr "Geringer feindlicher Widerstand und einfachere Missionen."
+
+msgctxt "Difficulty"
+msgid "Medium"
+msgstr "Mittel"
+
+msgctxt "Difficulty"
+msgid "More robust resistance with more risk (takes longer)."
+msgstr ""
+"Stärkerer Widerstand mit mehr Risiko (Die Missionen dauern auch länger)"
+
+msgctxt "Difficulty"
+msgid "Hard"
+msgstr "Schwer"
+
+msgctxt "Difficulty"
+msgid "Significant enemy resistance."
+msgstr "Erheblicher feindlicher Widerstand."
+
+#: scripts/scenario_30_brokenglass.lua:319
+msgctxt "lost-comms"
+msgid ""
+"We're pretty busy scanning for treasure... I mean, conducting research in "
+"this nebula. Can we call you back?"
+msgstr ""
+"Wir sind gerade damit beschäftigt nach Schätzen zu scannen.. Ich meine, "
+"diesen Nebel zu erforschen. Können wir Sie zurück rufen?"
+
+#: scripts/scenario_30_brokenglass.lua:339
+msgctxt "scienceDescription-artifact"
+msgid ""
+"Just a hollow spherical apparition. Kinda looks like it's hiding something."
+msgstr "Eine offenbar hohle Kugel. Es scheint, als sei etwas darin verborgen."
+
+#: scripts/scenario_30_brokenglass.lua:339
+msgctxt "scienceDescription-artifact"
+msgid "It seems to have changed shape."
+msgstr "Es scheint seine Form verändert zu haben."
+
+#: scripts/scenario_30_brokenglass.lua:347
+msgctxt "nebulaBonuses-shipLog"
+msgid "A Nuke and additional nuke storage have been added to our arsenal"
+msgstr ""
+"Eine Nuke sowie einen zusätzlichen Lagerplatz für Nukes wurden Ihrem Schiff "
+"hinzugefügt"
+
+#: scripts/scenario_30_brokenglass.lua:355
+msgctxt "nebulaBonuses-shipLog"
+msgid "A stranded repair crew has been rescued"
+msgstr "Ein gestrandetes Reparaturteam wurde gerettet."
+
+#: scripts/scenario_30_brokenglass.lua:363
+msgctxt "nebulaBonuses-shipLog"
+msgid "This scientific data is sure to raise our reputation with the eggheads."
+msgstr ""
+"Diese wissenschaftlichen Daten werden unseren Ruf bei den Eierköpfen "
+"sicherlich verbessern."
+
+#: scripts/scenario_30_brokenglass.lua:370
+msgctxt "nebulaBonuses-incCall"
+msgid "DRONE SELF DEFENCE SYSTEM ACTIVATED"
+msgstr "DROHNEN-SELBSTVERTEIDIGUNG AKTIVIERT"
+
+#: scripts/scenario_30_brokenglass.lua:371
+msgctxt "nebulaBonuses-shipLog"
+msgid "DRONE SELF DEFENCE SYSTEM ACTIVATED"
+msgstr "DROHNEN-SELBSTVERTEIDIGUNG AKTIVIERT"
+
+#: scripts/scenario_30_brokenglass.lua:378
+msgctxt "nebulaBonuses-shipLog"
+msgid "We have activated a drone defence system!"
+msgstr ""
+"Wie haben die Aktivierung eines Drohnen-Verteidigungs-Sytems ausgelöst!"
+
+#: scripts/scenario_30_brokenglass.lua:796
+msgctxt "defenceStn-incCall"
+msgid ""
+"Greetings, Captain.\n"
+"\n"
+"You've been assigned a tour of duty in the Zeta Belt. It's neutral territory "
+"with a bit of everything... nebulae, asteroids, baby planets, and dangerous "
+"old scrap.\n"
+"\n"
+"We don't see many Kraylor around here, but we have a non-aggression treaty "
+"with them, so should you encounter any, think twice before engaging. The "
+"main security risk is from those damned Ghost and Exuari drones and that "
+"keep flying around.\n"
+"\n"
+"Your primary orders are to support all the research facilities in the area, "
+"both Human and Independent. Their safety must be guaranteed, including "
+"helping them with dangerous operations. If you can't find anything to do, "
+"check in here and we can set you up with a patrol route.\n"
+"\n"
+"Your ship, the Propitious 1, is well equipped but not exactly a war vessel, "
+"so conduct yourself carefully and try not to breach the peace tumultuously.\n"
+msgstr ""
+"Guten Tag, Captain.\n"
+"\n"
+"Ihnen wurde der Einsatz im Zeta-Gürtel zugewiesen. Es ist neutrales Gebiet, "
+"das von allem etwas zu bieten hat... Nebel, Asteroiden, kleine Planeten und "
+"gefährlichen alten Schrott.\n"
+"\n"
+"Wir sehen hier nicht viele Kraylor, aber wir haben einen Nichtangriffspakt "
+"mit ihnen. Sollten Sie also auf welche treffen, überlegen Sie es sich "
+"zweimal, bevor Sie angreifen. Das größte Sicherheitsrisiko geht von diesen "
+"verdammten Geister- und Exuari-Drohnen aus, die ständig hier "
+"herumschwirren.\n"
+"\n"
+"Ihr primärer Befehl lautet, alle Forschungseinrichtungen in der Gegend zu "
+"unterstützen, sowohl die der Menschlichen Navy als auch die Unabhängigen. "
+"Ihre Sicherheit muss gewährleistet sein, und dazu gehört auch, ihnen bei "
+"gefährlichen Aufgaben zu helfen. Wenn Sie nichts zu tun haben, melden Sie "
+"sich hier, und wir können Ihnen eine Patrouillenroute zuweisen.\n"
+"\n"
+"Ihr Schiff, die Propitious 1, ist zwar gut ausgerüstet, aber nicht gerade "
+"ein Kriegsschiff - Also verhalten Sie sich vorsichtig und versuchen Sie, den "
+"Frieden nicht durch unbedachte Aktionen zu gefährden.\n"
+
+#: scripts/scenario_30_brokenglass.lua:826
+msgctxt "buttonGM"
+msgid "+Start Mission"
+msgstr "Mission starten"
+
+#: scripts/scenario_30_brokenglass.lua:827
+msgctxt "buttonGM"
+msgid "+Finish Mission"
+msgstr "Mission beenden"
+
+#: scripts/scenario_30_brokenglass.lua:828
+msgctxt "buttonGM"
+msgid "+Spawn Stuff"
+msgstr "Spawne Objekte"
+
+#: scripts/scenario_30_brokenglass.lua:832
+msgctxt "buttonGM"
+msgid "-From Spawn Stuff"
+msgstr "<- Hauptmenü"
+
+#: scripts/scenario_30_brokenglass.lua:833
+msgctxt "buttonGM"
+msgid "Convoy Enemies"
+msgstr "Feindlicher Schwarm"
+
+#: scripts/scenario_30_brokenglass.lua:834
+msgctxt "buttonGM"
+msgid "Harrasment"
+msgstr "Exuari-Überfall"
+
+#: scripts/scenario_30_brokenglass.lua:838
+msgctxt "buttonGM"
+msgid "-From Finish Mission"
+msgstr "<- Hauptmenü"
+
+#: scripts/scenario_30_brokenglass.lua:839
+#: scripts/scenario_30_brokenglass.lua:847
+msgctxt "buttonGM"
+msgid "Lost"
+msgstr "Gestrandet"
+
+#: scripts/scenario_30_brokenglass.lua:840
+#: scripts/scenario_30_brokenglass.lua:852
+msgctxt "buttonGM"
+msgid "Spare Parts"
+msgstr "Ersatzteile"
+
+#: scripts/scenario_30_brokenglass.lua:841
+#: scripts/scenario_30_brokenglass.lua:853
+msgctxt "buttonGM"
+msgid "Drone Nest"
+msgstr "Drohnen-Nest"
+
+#: scripts/scenario_30_brokenglass.lua:842
+#: scripts/scenario_30_brokenglass.lua:854
+msgctxt "buttonGM"
+msgid "Repair"
+msgstr "Reparatur"
+
+#: scripts/scenario_30_brokenglass.lua:846
+msgctxt "buttonGM"
+msgid "-From Start Mission"
+msgstr "Hauptmenü"
+
+#: scripts/scenario_30_brokenglass.lua:848
+msgctxt "buttonGM"
+msgid "Patrol"
+msgstr "Patrouille"
+
+#: scripts/scenario_30_brokenglass.lua:885
+msgctxt "wormhole-shipLog"
+msgid "Firing on invulnerable target"
+msgstr "Auf unzerstörbares Ziel geschossen"
+
+#: scripts/scenario_30_brokenglass.lua:888
+msgctxt "wormhole-incCall"
+msgid ""
+"Captain, Stop!\n"
+"\n"
+"Don't waste your time shooting at that station. It has an Exuari emergency "
+"integrity field that will prevent catastrophic hull breach. Just a waste of "
+"energy, I promise you."
+msgstr ""
+"Captain, halt! \n"
+"\n"
+"Verschwenden Sie nicht Ihre Zeit damit, auf diese Station zu schießen. Sie "
+"hat ein Exuari-Notfall-Integritätsfeld, und wird einen Hüllenbruch "
+"verhindern. Solange es aktiv ist, ist darauf zu feuern reine "
+"Energieverschwendung."
+
+#: scripts/scenario_30_brokenglass.lua:1034
+msgctxt "defenceStnCheckpoint-IncCall"
+msgid ""
+"RED ALERT!\n"
+"\n"
+"The SW Checkpoint is under attack. Don't mess around, get down there and "
+"help them!"
+msgstr ""
+"ROTER ALARM!\n"
+"\n"
+"Der SW-Kontrollpunkt wird angegriffen. Verlieren Sie keine Zeit und helfen "
+"Sie ihnen!"
+
+#: scripts/scenario_30_brokenglass.lua:1037
+msgctxt "defenceStnCheckpoint-shipLog"
+msgid "Defend the SW checkpoint"
+msgstr "Auftrag: Verteidigen Sie den SW-Kontrollpunkt"
+
+#: scripts/scenario_30_brokenglass.lua:1071
+msgctxt "defenceStn-incCall"
+msgid ""
+"It looks like you've aggro'd the convoy.\n"
+"Good luck to you! Try to keep them from destroying our stations!"
+msgstr ""
+"Es sieht so aus, als hätten Sie die Aufmerksamkeit des Schwarms auf sich "
+"gezogen.\n"
+"Versuchen Sie weiterhin zu verhindern, dass er unsere Stationen angreift. "
+"Viel Glück!"
+
+#: scripts/scenario_30_brokenglass.lua:1104
+msgctxt "warning-shipLog"
+msgid "This station appears immune to our attacks"
+msgstr "Diese Station scheint unseren Angriffen gegenüber immun zu sein"
+
+#: scripts/scenario_30_brokenglass.lua:1152
+#, lua-format
+msgctxt "KraylorWarning-shipLog"
+msgid "We have lost %s reputation for breaking the treaty"
+msgstr "Wir haben %s Ruf verloren, da wir das Abkommen gebrochen haben"
+
+#: scripts/scenario_30_brokenglass.lua:1153
+msgctxt "KraylorWarning-IncCall"
+msgid ""
+"You will regret this!\n"
+"\n"
+"You have violated our non-aggression treaty, and will soon regret your "
+"actions."
+msgstr ""
+"Das werden Sie bereuen!\n"
+"\n"
+"Sie haben unseren Nichtangriffspakt verletzt, und werden sehr bald Ihre "
+"Taten bereuen."
+
+#: scripts/scenario_30_brokenglass.lua:1164
+msgctxt "drone-comms"
+msgid "Do not communicate on this channel."
+msgstr "Kommunizieren Sie nicht auf dieser Frequenz."
+
+#: scripts/scenario_30_brokenglass.lua:1168
+msgctxt "drone-incCall"
+msgid ""
+"DISENGAGE!\n"
+"\n"
+"Captain, it's not what it looks like. Please dock with us and we will "
+"explain everything."
+msgstr ""
+"Ziehen Sie sich bitte zurück!\n"
+"\n"
+"Captain, es ist nicht wonach es aussieht. Bitte docken Sie bei uns an, und "
+"wir werden alles erklären."
+
+#: scripts/scenario_30_brokenglass.lua:1185
+msgctxt "wormhole-incCall"
+msgid ""
+"RED ALERT!\n"
+"\n"
+"Captain, a bomb has just gone off on our station and we are under attack "
+"from the Kraylor. We need your help immediately!"
+msgstr ""
+"ROTER ALARM!\n"
+"\n"
+"Captain, gerade ist auf unserer Station eine bombe explodiert und wir werden "
+"von den Kraylor angegriffen. Wir brauchen Ihre sofortige Hilfe!"
+
+#: scripts/scenario_30_brokenglass.lua:1188
+msgctxt "wormhole-shipLog"
+msgid "Defend the Wormhole Station"
+msgstr "Mission: Verteidigen der Wurmloch-Station"
+
+#: scripts/scenario_30_brokenglass.lua:1231
+msgctxt "wormhole-comms"
+msgid ""
+"Hello Captain. Have you noticed our cool wormhole?\n"
+"\n"
+"We're studying the energy radiating from the wormhole, and the similarities "
+"to black holes are astonishing. Please drop by if you'd like to help out."
+msgstr ""
+"Guten Tag, Captain.\n"
+"Ist Ihnen unser cooles Wurmloch aufgefallen?\n"
+"\n"
+"Wir studieren die Strahlung die es abgibt, ähnlich der Hawking-Strahlung bei "
+"schwarzen Löchern. Kommen sie doch gerne vorbei, wir sind über jede Hilfe "
+"dankbar."
+
+#: scripts/scenario_30_brokenglass.lua:1236
+msgctxt "wormhole-comms"
+msgid "Please bring us the spare parts!"
+msgstr "Bitte bringen Sie uns die Ersatzteile!"
+
+#: scripts/scenario_30_brokenglass.lua:1238
+msgctxt "wormhole-comms"
+msgid "Thanks so much for your help!"
+msgstr "Vielen Dank für Ihre Hilfe!"
+
+#: scripts/scenario_30_brokenglass.lua:1245
+msgctxt "wormhole-comms"
+msgid ""
+"Thanks for dropping by, Captain.\n"
+"\n"
+"Our research is going well, but we could use some spare stabilizers for our "
+"Hawking Scanner. Would you mind salvaging some for us from the other side of "
+"the wormhole?"
+msgstr ""
+"Danke für Ihr Kommen, Captain.\n"
+"\n"
+"Unser Forschung geht gut voran, aber wir könnten einige Stabilisatoren für "
+"unsere Hawking-Scanner brauchen. Würde es Ihnen etwas ausmachen, auf der "
+"anderen Seite des Wurmlochs einige Scanner für uns zu besorgen?"
+
+#: scripts/scenario_30_brokenglass.lua:1248
+msgctxt "wormhole-comms"
+msgid "Okay, we can help with that."
+msgstr "Okay, dabei können wir behilflich sein."
+
+#: scripts/scenario_30_brokenglass.lua:1249
+msgctxt "wormhole-comms"
+msgid "Do you pay tips?"
+msgstr "Zahlen Sie Trinkgeld?"
+
+#: scripts/scenario_30_brokenglass.lua:1250
+msgctxt "wormhole-comms"
+msgid "Maybe later, then. Goodbye."
+msgstr "Dann bis später vielleicht, auf Wiedersehen."
+
+#: scripts/scenario_30_brokenglass.lua:1258
+msgctxt "wormhole-comms"
+msgid ""
+"Thanks for your help, Captain!\n"
+"\n"
+"These spare parts will really help with the program budget."
+msgstr ""
+"Danke für die Hilfe, Captain!\n"
+"\n"
+"Diese Ersatzteile werden unser Budget wirklich sehr entlasten."
+
+#: scripts/scenario_30_brokenglass.lua:1261
+msgctxt "wormhole-comms"
+msgid "What do we get for being your errand boy?"
+msgstr "Was bekommen wir dafür, hier Bote gespielt zu haben?"
+
+#: scripts/scenario_30_brokenglass.lua:1262
+msgctxt "wormhole-comms"
+msgid "You get half of what would have with a smarter attitude! So rude."
+msgstr ""
+"Sie bekommen die Hälfte dessen, was sie mit einem klügeren Auftreten "
+"bekommen hätten. Wie unhöflich."
+
+#: scripts/scenario_30_brokenglass.lua:1267
+msgctxt "wormhole-comms"
+msgid "We're so glad we could help"
+msgstr "Wir sind froh, dass wir helfen konnten."
+
+#: scripts/scenario_30_brokenglass.lua:1268
+msgctxt "wormhole-comms"
+msgid "We are too. Thanks a bunch."
+msgstr "Und wir erst. Vielen Dank!"
+
+#: scripts/scenario_30_brokenglass.lua:1273
+msgctxt "wormhole-comms"
+msgid ""
+"We still need those spare parts from X472 on the other side of the wormhole!"
+msgstr ""
+"Wir brauchen noch immer Ersatzteile von X472 auf der anderen Seite des "
+"Wurmlochs!"
+
+#: scripts/scenario_30_brokenglass.lua:1276
+msgctxt "wormhole-comms"
+msgid "Thanks that was awesome"
+msgstr "Hervorragend! Vielen Dank!"
+
+#: scripts/scenario_30_brokenglass.lua:1285
+msgctxt "wormhole-comms"
+msgid "We're under attack. Help us!"
+msgstr "Wir werden angegriffen! Bitte helfen Sie uns!"
+
+#: scripts/scenario_30_brokenglass.lua:1291
+msgctxt "wormhole-comms"
+msgid "Come pick up our Hawking Scanner for repairs."
+msgstr ""
+"Unser Hawking-Scanner wurde beschädigt! Bitte holen sie Ihn für eine "
+"mögliche Reparatur ab."
+
+#: scripts/scenario_30_brokenglass.lua:1293
+msgctxt "wormhole-comms"
+msgid "Please find someone to repair our Hawking Scanner."
+msgstr "Bitte finden Sie eine Reparaturmöglichkeit für unseren Hawking-Scanner"
+
+#: scripts/scenario_30_brokenglass.lua:1299
+msgctxt "wormhole-comms"
+msgid ""
+"Thanks again, Captain.\n"
+"\n"
+"We need you to find someone to repair this Hawking Scanner. Please bring it "
+"back once it's working again."
+msgstr ""
+"Danke nochmals, Captain.\n"
+"\n"
+"Wir bräuchten Sie noch einmal, um eine Reparaturmöglichkeit für diesen "
+"Hawking-Scanner. Bitte bringen Sie ihn zurück, wenn er wieder funktioniert."
+
+#: scripts/scenario_30_brokenglass.lua:1302
+msgctxt "wormhole-comms"
+msgid "Any idea where we should take it?"
+msgstr "Haben Sie eine Idee, wohin wir ihn bringen könnten?"
+
+#: scripts/scenario_30_brokenglass.lua:1303
+msgctxt "wormhole-comms"
+msgid ""
+"One of the nebula researchers should be able to point you in the right "
+"direction.\n"
+"\n"
+"If you're not sure where to find them, ask for directions at the Admin "
+"Station"
+msgstr ""
+"Jemand mit dem Fachgebiet Nebelerforschung sollte Ihnen weiterhelfen "
+"können.\n"
+"\n"
+"Am besten fragen Sie auf der Admin-Station danach."
+
+#: scripts/scenario_30_brokenglass.lua:1307
+msgctxt "wormhole-comms"
+msgid "Have you considered shoving it where the sun don't shine?"
+msgstr ""
+"Haben sie schon darüber nachgedacht, sich ihren Scanner dorthin zu "
+"\"installieren\", wo die Sonne niemals scheint?"
+
+#: scripts/scenario_30_brokenglass.lua:1308
+msgctxt "wormhole-comms"
+msgid "What is it with you, anyways?"
+msgstr "Was ist nur los mit Ihnen?"
+
+#: scripts/scenario_30_brokenglass.lua:1314
+msgctxt "wormhole-comms"
+msgid ""
+"You got it fixed?\n"
+"\n"
+"That's amazing, Captain. Thank you so much! You and your crew are true heros "
+"of our system; may your names live on through history.\n"
+"\n"
+"Glory to you and your kin."
+msgstr ""
+"Sie konnten ihn reparieren lassen?\n"
+"\n"
+"Das ist fantastisch, Captain! Vielen, vielen Dank! Sie und Ihre Crew sind "
+"unsere wahren Helden. Auf dass sich jeder an Ihre Namen erinnern möge.\n"
+"Alles, alles Gute an Ihnen und Ihrer Crew! Und deren Angehörigen!"
+
+#: scripts/scenario_30_brokenglass.lua:1319
+msgctxt "wormhole-comms"
+msgid "You're very welcome."
+msgstr "Wirklich gern geschehen."
+
+#: scripts/scenario_30_brokenglass.lua:1320
+msgctxt "wormhole-comms"
+msgid "Goodbye captain. May peace be with you."
+msgstr "Auf Wiedersehen Captain, Friede sei mit Ihnen."
+
+#: scripts/scenario_30_brokenglass.lua:1323
+msgctxt "wormhole-comms"
+msgid "Kiss my feet!"
+msgstr "Lecken Sie mich doch am Ärmel!"
+
+#: scripts/scenario_30_brokenglass.lua:1327
+msgctxt "wormhole-comms"
+msgid ""
+"I was about to call this in to Admin and have them declare you victorious, "
+"but I've had enough of you.\n"
+"\n"
+"YOU MAY BE A HERO, BUT YOU'RE ALSO A JERK!"
+msgstr ""
+"Ich wollte Sie eigentlich gerade bei der Admin-Station für eine Belobigung "
+"vorschlagen, aber ich habe genug von Ihnen.\n"
+"\n"
+"SIE UND IHR TEAM SIND VIELLEICHT HELDEN, ABER AUCH IDIOTEN!"
+
+#: scripts/scenario_30_brokenglass.lua:1331
+msgctxt "wormhole-comms"
+msgid "A real peach, you are."
+msgstr "Sie sind wirklich ein Schatz."
+
+#: scripts/scenario_30_brokenglass.lua:1340
+msgctxt "colony-comms"
+msgid "Well, what I can do for you?"
+msgstr "Was kann ich für Sie tun?"
+
+#: scripts/scenario_30_brokenglass.lua:1343
+msgctxt "colony-comms"
+msgid "We're looking for Dr. Hendrix"
+msgstr "Wir suchen Dr. Hendrix"
+
+#: scripts/scenario_30_brokenglass.lua:1350
+msgctxt "colony-comms"
+msgid ""
+"I.....zzzZ\n"
+"Hello?\n"
+"...\n"
+"The nearby NeZula somzzzzzzimes messssssses with our long range "
+"commcommcommcomm somet...\n"
+"\n"
+"...\n"
+"\n"
+"....dock...pr...b..\n"
+"...r"
+msgstr ""
+"Ichhhh... zzzZ\n"
+"Hallo?\n"
+"\n"
+"Der Ne'el ..... Nähe kann manchzz.. ... Langstreckenkommkommkomm... "
+"störrrrr...\n"
+"\n"
+"...\n"
+"..dock... prob,,,\n"
+"..."
+
+#: scripts/scenario_30_brokenglass.lua:1360
+msgctxt "colony-comms"
+msgid ""
+"I am Dr. Hendrix.\n"
+"\n"
+"If I remember that voice correctly, you are the crew from the Navy ship that "
+"saved me when I was stranded in the nebula!\n"
+"\n"
+"What can I do for you?"
+msgstr ""
+"Ich bin Dr. Hendrix.\n"
+"\n"
+"Wenn ich die Stimme richtig erkenne, sind Sie die Crew die mich gerettet "
+"hatte, als ich im Nebel gestrandet war!\n"
+"\n"
+"Was kann ich für Sie tun?"
+
+#: scripts/scenario_30_brokenglass.lua:1365
+msgctxt "colony-comms"
+msgid "Can you fix this Hawking Scanner?"
+msgstr "Können Sie diesen Hawking-Scanner reparieren?"
+
+#: scripts/scenario_30_brokenglass.lua:1366
+msgctxt "colony-comms"
+msgid ""
+"Let me have a look...\n"
+"\n"
+"Ah, I see why it's giving you trouble. Everything reads as okay, but the "
+"Graviton Lens is mis-calibrated somehow so it's throwing off the whole "
+"system.\n"
+"\n"
+"The good news is that it's easy to swap these out, the tech at the wormhole "
+"station should be able to do it. The bad news is that we have a shortage of "
+"Graviton Lenses right now because of those drone convoys.\n"
+"\n"
+"I've put in a requisition for one in your name. If you can find one in a "
+"Navy storehouse, bring it to the wormhole station and they should be good to "
+"go."
+msgstr ""
+"Lassen Sie mich mal sehen...\n"
+"\n"
+"Ah, ich sehe, was die Probleme bereitet. Alles scheint in Ordnung zu sein, "
+"aber die Graviton-Linse ist falsch kalibriert, so dass sie das ganze System "
+"durcheinander bringt.\n"
+"\n"
+"Die gute Nachricht ist, dass es kein Problem ist, sie auszutauschen, der "
+"Techniker in der Wurmlochstation sollte das machen können. Die schlechte "
+"Nachricht ist, dass wir wegen dieser Drohnenschwärme im Moment einen Mangel "
+"an Gravitonlinsen haben.\n"
+"\n"
+"Ich habe in Ihrem Namen eine Bedarfsanforderung für eine Linse ausgestellt. "
+"Wenn Sie eine in einem Lager der Navy finden, bringen Sie sie zur "
+"Wurmlochstation und die Reparatur sollte ein Kinderspiel sein."
+
+#: scripts/scenario_30_brokenglass.lua:1373
+msgctxt "colony-shipLog"
+msgid "Find a Graviton Lens"
+msgstr "Auftrag: Gravitonlinse finden"
+
+#: scripts/scenario_30_brokenglass.lua:1381
+msgctxt "colony-comms"
+msgid "Some filler text and whatever. What are we even doing here?"
+msgstr "Irgendein Fülltext, was auch immer. Was machen wir hier überhaupt?"
+
+#: scripts/scenario_30_brokenglass.lua:1382
+msgctxt "colony-comms"
+msgid "Dude, where even ARE we?"
+msgstr "Ähm, wo SIND wir überhaupt?"
+
+#: scripts/scenario_30_brokenglass.lua:1388
+msgctxt "checkpointsStn-comms"
+msgid "Not much here bud, just doing checkpoint kinda things, ya know?"
+msgstr "Hier ist nicht viel los, Checkpunkt-Dinge eben, Sie wissen schon."
+
+#: scripts/scenario_30_brokenglass.lua:1395
+msgctxt "defenceStn-comms"
+msgid "Defend the SW Checkpoint now!"
+msgstr "Auftrag: Verteidigen Sie  den SW-Kontrollpunkt!"
+
+#: scripts/scenario_30_brokenglass.lua:1398
+#, lua-format
+msgctxt "defenceStn-comms"
+msgid ""
+"You are on 'patrol'.\n"
+"See that you make it to %s next."
+msgstr ""
+"Sie sind auf Patrouille\n"
+"Schauen Sie, dass Sie als nächstes %s ansteuern"
+
+#: scripts/scenario_30_brokenglass.lua:1401
+msgctxt "defenceStn-comms"
+msgid "Your orders are to follow the convoy to see where it goes"
+msgstr ""
+"Ihr Befehl lautet, dem Schwarm zu folgen und herauszufinden, wo er hinfliegt"
+
+#: scripts/scenario_30_brokenglass.lua:1404
+msgctxt "defenceStn-comms"
+msgid "Your orders are to join a convoy and infiltrate the drone nests."
+msgstr ""
+"Ihr Befehl lautet, sich dem Schwarm anzuschließen und das Drohnen-Nest zu "
+"infiltrieren."
+
+#: scripts/scenario_30_brokenglass.lua:1407
+msgctxt "defenceStn-comms"
+msgid ""
+"Your orders are to scan those beacons and find the defence grid controller"
+msgstr ""
+"Ihr Befehl lautet, die Baken zu scannen und die Kontrolleinheit  für das "
+"Verteidigungsnetz zu finden"
+
+#: scripts/scenario_30_brokenglass.lua:1413
+msgctxt "defenceStn-comms"
+msgid ""
+"We are keeping the 007, and you can continue to fly it, or switch back to "
+"the Propitious 1 at any time. We'll keep it docked here at the station for "
+"you."
+msgstr ""
+"Wir werden die 007 behalten, Sie können weiterhin mit ihr fliegen oder "
+"jederzeit wieder auf die Propitious umsteigen. Wir lassen sie hier für Sie "
+"angedockt."
+
+#: scripts/scenario_30_brokenglass.lua:1415
+#, lua-format
+msgctxt "defenceStn-comms"
+msgid ""
+"Great work, Captain!\n"
+"Destroying the central control eliminated all the other drone stations and "
+"stopped the convoys in their tracks! Of course, you are authorized to mop up "
+"any resistance that might remain, but we're calling this a job well done.\n"
+"%s"
+msgstr ""
+"Gute Arbeit, Captain!\n"
+"Die Zerstörung der Kontrollstation hat alle anderen Drohnenstationen "
+"ausgeschaltet und die Drohnenschwärme gestoppt! Natürlich sind Sie befugt, "
+"jeden verbleibenden Widerstand zu beseitigen, von unserer Seite können wir "
+"nur sagen: Auftrag erfolgreich abgeschlossen!\n"
+"%s"
+
+#: scripts/scenario_30_brokenglass.lua:1422
+msgctxt "defenceStn-comms"
+msgid ""
+"Good day, soldier.\n"
+"\n"
+"We shouldn't talk over this channel, please dock to the station when you "
+"have a chance."
+msgstr ""
+"Guten Tag,\n"
+"\n"
+"wir sollten uns nicht auf diesem Kanal unterhalten, bitte docken Sie an der "
+"Station an, wenn Sie die Gelegenheit haben."
+
+#: scripts/scenario_30_brokenglass.lua:1428
+msgctxt "defenceStn-comms"
+msgid ""
+"Welcome aboard.\n"
+"\n"
+"We need you to patrol the area. It's not exciting work, but it's got to be "
+"done. No rush, just make sure you visit each checkpoint in order, and we'll "
+"let you know if anything more pressing comes up."
+msgstr ""
+"Willkommen an Bord.\n"
+"\n"
+"Wir brauchen Sie für die Patrouille in diesem Gebiet. Es ist keine "
+"aufregende Arbeit, aber sie muss getan werden. Es besteht keine Eile, Sie "
+"müssen nur sicherstellen, dass Sie jeden Kontrollpunkt in der richtigen "
+"Reihenfolge aufsucht, und wir geben Ihnen Bescheid, wenn es etwas "
+"Wichtigeres dazwischen kommen sollte."
+
+#: scripts/scenario_30_brokenglass.lua:1431
+msgctxt "defenceStn-comms"
+msgid "Okay. We're ready to start the patrol"
+msgstr "Okay, wir sind bereit, mit der Patrouille zu beginnen"
+
+#: scripts/scenario_30_brokenglass.lua:1435
+msgctxt "defenceStn-comms"
+msgid ""
+"Welcome back, Captain.\n"
+"\n"
+"We've tracked that convoy to a huge nest of drone stations in the west. The "
+"stations all form part of one proximity defence grid, and we have identified "
+"some beacons that appear to be related to its operation. We're hoping that "
+"if we can get a closer look at them, we might be able to figure out how to "
+"knock out the central control.\n"
+"\n"
+"There is a drone ship docked here which you can use to infiltrate the nests. "
+"If you arrive with a convoy, you should automatically be granted access and "
+"we think the proximity defences will remain disabled while you stay in the "
+"area. Of course, if you start firing, then all bets are probably off.\n"
+"\n"
+"Hop in that drone ship, find the beacons, and get close enough to scan them "
+"- EASY!"
+msgstr ""
+"Willkommen zurück, Captain.\n"
+"\n"
+"Wir haben den Schwarm bis zu einem großen Nest von Drohnenstationen im "
+"Westen verfolgt. Die Stationen sind alle Teil eines Verteidigungsnetzes, und "
+"wir haben einige Baken identifiziert, die mit dem Betrieb in Verbindung zu "
+"stehen scheinen. Wir hoffen, dass wir herausfinden können, wie wir die "
+"zentrale Steuerung ausschalten können, wenn wir einen genaueren Blick auf "
+"sie werfen können,.\n"
+"\n"
+"Hier ist ein Drohnenschiff angedockt, mit dem Sie die Nester infiltrieren "
+"können. Wenn Sie mit einem Schwarm ankommen, sollte Ihnen automatisch Zugang "
+"gewährt werden, und wir denken, dass das Verteidigungsnetz deaktiviert "
+"bleibt, solange Sie sich in dem Gebiet aufhalten. Sollten Sie anfangen zu "
+"schießen, würde das natürlich ihre Tarnung ruinieren.\n"
+"\n"
+"Steigen Sie in das Drohnenschiff, suchen Sie die Baken und kommen Sie nahe "
+"genug heran, um sie zu scannen - Ein Kinderspiel!"
+
+#: scripts/scenario_30_brokenglass.lua:1442
+msgctxt "defenceStn-comms"
+msgid "We're ready to infiltrate the drone nest"
+msgstr "Wir sind bereit, das Drohnennest zu infiltrieren"
+
+#: scripts/scenario_30_brokenglass.lua:1443
+msgctxt "defenceStn-comms"
+msgid "(Object) Isn't that a treaty violation!?"
+msgstr "(Einwand) Wäre das nicht ein Vertragsbruch?"
+
+#: scripts/scenario_30_brokenglass.lua:1444
+msgctxt "defenceStn-comms"
+msgid ""
+"(Objecting)\n"
+"Sir, decoding the communications of alien defence systems is a violation of "
+"the Deepspace Militarized Citizenry Accord (DMCA).\n"
+"[...]\n"
+"Captain, are you angling for a good samaritan's award or something? Get out "
+"of here with that legal mumbo-jumbo.\n"
+"\n"
+"However you want to do it, you need to find that central control. Get on it!"
+msgstr ""
+"(Einspruch)\n"
+"Sir, die Dekodierung der Kommunikation außerirdischer Verteidigungssysteme "
+"ist ein Verstoß gegen das Datenschutzabkommen für Millitärische Computer und "
+"Abhörsysteme (DMCA).\n"
+"[...]\n"
+"Captain, sind Sie auf eine Auszeichnung als Gutmensch des Jahres aus, oder "
+"was? Verschonen Sie mich mit diesen juristischen Spitzfindigkeiten!\n"
+"\n"
+"Wie auch immer Sie es anstellen wollen, Sie müssen die zentrale "
+"Kontrollstation finden. Legen Sie los!"
+
+#: scripts/scenario_30_brokenglass.lua:1450
+msgctxt "defenceStn-comms"
+msgid "Okay, we'll figure it out."
+msgstr "Okay, wir finden einen Weg."
+
+#: scripts/scenario_30_brokenglass.lua:1455
+msgctxt "defenceStn-comms"
+msgid ""
+"Great job on that drone nest, Captain.\n"
+"\n"
+"Remember, your primary orders are to support the research facilities in the "
+"area. See to it that they all get the assistance they need."
+msgstr "Hervorragende Arbeit mit dem Drohnen-Nest, Captain!"
+
+#: scripts/scenario_30_brokenglass.lua:1460
+msgctxt "defenceStn-comms"
+msgid "We'd rather crew the Propitious 1"
+msgstr "Wir möchten lieber an Bord der Propitious 1 gehen"
+
+#: scripts/scenario_30_brokenglass.lua:1463
+#: scripts/scenario_30_brokenglass.lua:1471
+msgctxt "defenceStn-comms"
+msgid "Very well. Good Hunting."
+msgstr "Gerne. Gute Jagd."
+
+#: scripts/scenario_30_brokenglass.lua:1467
+msgctxt "defenceStn-comms"
+msgid "We'd rather crew the DD007"
+msgstr "Wir möchten lieber die DD007 fliegen"
+
+#: scripts/scenario_30_brokenglass.lua:1484
+#, lua-format
+msgctxt "adminStnEndTips-comms"
+msgid ""
+"VICTORY!\n"
+"Your tour of duty is complete and your accomplishments will be the talk of "
+"legends.\n"
+"CHEEVOS!\n"
+"* Experienced treasure hunter - %s\n"
+"* Clean up the useless space junk - %s\n"
+"* Historical relic preservation - %s\n"
+"* Social distancing - %s\n"
+"* Our ship is all we need - %s\n"
+"* No DMCA violations - %s\n"
+"* I ain't afraid of no ghosts - %s\n"
+"* Keep an eye on that doctor - %s\n"
+"* Ban wormhole research - %s\n"
+"* Heros for the ages - %s\n"
+"* Grand slam - %s"
+msgstr ""
+"ABGESCHLOSSEN!\n"
+"Ihr Dienst ist beendet und Ihre Errungenschaften werden Legenden begründen.\n"
+"Erunngenschaften\n"
+"* Erfahrenee Schatzsucher - %s\n"
+"* Weg mit dem Weltraumschrott - %s\n"
+"* Denkmalschutz - %s\n"
+"* Social Distancing - %s\n"
+"* Unser Schiff ist alles, was wir brauchen - %s\n"
+"* Keine DMCA-Verletzung - %s\n"
+"* I ain't afraid of no ghosts - %s\n"
+"* Behalten Sie Hendrix im Auge! - %s\n"
+"* Keine Wurmlochforschung! - %s\n"
+"* Heldentum - %s\n"
+"* Grand Slam - %s"
+
+#: scripts/scenario_30_brokenglass.lua:1485
+msgctxt "adminStnEndTips-comms"
+msgid "Hints for each CHEEVO"
+msgstr "Hinweise für jede Errungenschaft"
+
+#: scripts/scenario_30_brokenglass.lua:1486
+msgctxt "adminStnEndTips-comms"
+msgid "Select the achievement for a hint"
+msgstr "Errungenschaft auswählen, um einen Hinweis zu bekommen"
+
+#: scripts/scenario_30_brokenglass.lua:1487
+msgctxt "adminStnEndTips-comms"
+msgid "Experienced treasure hunter"
+msgstr "Erfahrene Schatzsucher"
+
+#: scripts/scenario_30_brokenglass.lua:1488
+msgctxt "adminStnEndTips-comms"
+msgid "The locals are known to hunt treasure in the nebula"
+msgstr "Die Einheimischen sind für die Schatzsuche in Nebeln bekannt"
+
+#: scripts/scenario_30_brokenglass.lua:1489
+#: scripts/scenario_30_brokenglass.lua:1493
+#: scripts/scenario_30_brokenglass.lua:1497
+#: scripts/scenario_30_brokenglass.lua:1501
+#: scripts/scenario_30_brokenglass.lua:1505
+#: scripts/scenario_30_brokenglass.lua:1509
+#: scripts/scenario_30_brokenglass.lua:1513
+#: scripts/scenario_30_brokenglass.lua:1517
+#: scripts/scenario_30_brokenglass.lua:1521
+#: scripts/scenario_30_brokenglass.lua:1525
+#: scripts/scenario_30_brokenglass.lua:1529
+#: scripts/scenario_30_brokenglass.lua:1569
+#: scripts/scenario_30_brokenglass.lua:1573
+#: scripts/scenario_30_brokenglass.lua:1579
+#: scripts/scenario_30_brokenglass.lua:1583
+#: scripts/scenario_30_brokenglass.lua:1587
+#: scripts/scenario_30_brokenglass.lua:1635
+#: scripts/scenario_30_brokenglass.lua:1639
+#: scripts/scenario_30_brokenglass.lua:1649
+#: scripts/scenario_30_brokenglass.lua:1654
+msgid "<- Back"
+msgstr "<- Zurück"
+
+#: scripts/scenario_30_brokenglass.lua:1491
+msgctxt "adminStnEndTips-comms"
+msgid "Clean up the space junk"
+msgstr "Weg mit dem Weltraumschrott"
+
+#: scripts/scenario_30_brokenglass.lua:1492
+msgctxt "adminStnEndTips-comms"
+msgid "So many long abandoned stations"
+msgstr "Soo viele längst verlassene Stationen"
+
+#: scripts/scenario_30_brokenglass.lua:1495
+msgctxt "adminStnEndTips-comms"
+msgid "Historical relic preservation"
+msgstr "Denkmalschutz"
+
+#: scripts/scenario_30_brokenglass.lua:1496
+msgctxt "adminStnEndTips-comms"
+msgid "Destroying that old station might spook the Kraylor"
+msgstr "Die Zerstörung Ihrer altern Station könnte die Kraylor erschrecken."
+
+#: scripts/scenario_30_brokenglass.lua:1499
+msgctxt "adminStnEndTips-comms"
+msgid "Social distancing"
+msgstr "Social distancing"
+
+#: scripts/scenario_30_brokenglass.lua:1500
+msgctxt "adminStnEndTips-comms"
+msgid "Don't get too proximate"
+msgstr "Nicht zu nahe herangehen!"
+
+#: scripts/scenario_30_brokenglass.lua:1503
+msgctxt "adminStnEndTips-comms"
+msgid "Our ship is all we need"
+msgstr "Unser Schiff ist alles, was wir brauchen"
+
+#: scripts/scenario_30_brokenglass.lua:1504
+msgctxt "adminStnEndTips-comms"
+msgid "We'll stick with the ship we know, thanks"
+msgstr "Wir bleiben bei dem Schiff, dass wir kennen, aber vielen Dank"
+
+#: scripts/scenario_30_brokenglass.lua:1507
+msgctxt "adminStnEndTips-comms"
+msgid "No DMCA violations"
+msgstr "Keine DMCA-Verletzung"
+
+#: scripts/scenario_30_brokenglass.lua:1508
+msgctxt "adminStnEndTips-comms"
+msgid "Hacking alien defense systems is illegal"
+msgstr "Das hacken fremder Systeme ist illegal"
+
+#: scripts/scenario_30_brokenglass.lua:1511
+msgctxt "adminStnEndTips-comms"
+msgid "I ain't afraid of no ghosts"
+msgstr "I ain't afraid of no ghosts"
+
+#: scripts/scenario_30_brokenglass.lua:1512
+msgctxt "adminStnEndTips-comms"
+msgid "No one is afraid if there are NO GHOSTS"
+msgstr "Wenn es keine Geister gibt, muss niemand Angst vor ihnen haben"
+
+#: scripts/scenario_30_brokenglass.lua:1515
+msgctxt "adminStnEndTips-comms"
+msgid "Keep an eye on that doctor"
+msgstr "Behalten Sie diese Hendrix im Auge"
+
+#: scripts/scenario_30_brokenglass.lua:1516
+msgctxt "adminStnEndTips-comms"
+msgid "Do we really need to ask for directions?"
+msgstr "Müssen wir wirklich nach dem Weg fragen?"
+
+#: scripts/scenario_30_brokenglass.lua:1519
+msgctxt "adminStnEndTips-comms"
+msgid "Ban wormhole research"
+msgstr "Keine Wurmlochforschung!"
+
+#: scripts/scenario_30_brokenglass.lua:1520
+msgctxt "adminStnEndTips-comms"
+msgid "I just can't stand wormholes, or their researchers!"
+msgstr "Ich kann weder Wurmlöcher leiden, noch Leute die daran forschen!"
+
+#: scripts/scenario_30_brokenglass.lua:1523
+msgctxt "adminStnEndTips-comms"
+msgid "Heros for the ages"
+msgstr "Heldenhaft!"
+
+#: scripts/scenario_30_brokenglass.lua:1524
+msgctxt "adminStnEndTips-comms"
+msgid "Their reputation is unmatched"
+msgstr "Ihr Ruf ist ungeschlagen"
+
+#: scripts/scenario_30_brokenglass.lua:1527
+msgctxt "adminStnEndTips-comms"
+msgid "Grand Slam"
+msgstr "Grand Slam"
+
+#: scripts/scenario_30_brokenglass.lua:1528
+msgctxt "adminStnEndTips-comms"
+msgid "You can do it, but can you do it ALL?"
+msgstr "Ihr bekommt das hin! Aber alles auf einmal?"
+
+#: scripts/scenario_30_brokenglass.lua:1532
+msgctxt "adminStnEnd-comms"
+msgid "Click here to lance the champagne!"
+msgstr "Klicken Sie hier, um den Champagner zu öffnen!"
+
+#: scripts/scenario_30_brokenglass.lua:1533
+msgctxt "adminStnEnd-comms"
+msgid "Booyah!!!"
+msgstr "Yippieh!"
+
+#: scripts/scenario_30_brokenglass.lua:1541
+msgctxt "adminStn-comms"
+msgid ""
+"We are the station that co-ordinates research activities in the nearby "
+"nebulae.\n"
+"\n"
+"If you're not busy, please drop by to learn more about our projects."
+msgstr ""
+"Wir sind die Station, die die Forschungsaktivitäten in den nahe gelegenen "
+"Nebeln koordiniert.\n"
+"\n"
+"Wenn Sie gerade etwas Zeit haben, schauen Sie doch gerne vorbei, um mehr "
+"über unsere Projekte zu erfahren."
+
+#: scripts/scenario_30_brokenglass.lua:1545
+#: scripts/scenario_30_brokenglass.lua:1559
+msgctxt "adminStn-comms"
+msgid "Please bring our researchers home!"
+msgstr "Bitte bringen Sie unser Forschungsteam nach Hause!"
+
+#: scripts/scenario_30_brokenglass.lua:1547
+msgctxt "adminStn-comms"
+msgid ""
+"Thanks so much for finding our researchers! Dock with us if you'd like to "
+"chat."
+msgstr ""
+"Vielen Dank, dass Sie unser Forschungsteam gefunden haben! Docken Sie gerne "
+"bei uns an, wenn Sie etwas plaudern möchten."
+
+#: scripts/scenario_30_brokenglass.lua:1552
+msgctxt "adminStn-comms"
+msgid "We are so glad to have you aboard. What can we help you with?"
+msgstr "Herzlich willkommen! Womit können wir Ihnen behilflich sein?"
+
+#: scripts/scenario_30_brokenglass.lua:1553
+#: scripts/scenario_30_brokenglass.lua:1567
+msgctxt "adminStn-comms"
+msgid "How long have you been operating in this system?"
+msgstr "Wie lange sind sie schon in diesem System tätig?"
+
+#: scripts/scenario_30_brokenglass.lua:1554
+#: scripts/scenario_30_brokenglass.lua:1571
+msgctxt "adminStn-comms"
+msgid "Where is the colony where your researchers live?"
+msgstr "Wo finden wir die Kolonie, auf der das Forschungsteam lebt?"
+
+#: scripts/scenario_30_brokenglass.lua:1555
+#: scripts/scenario_30_brokenglass.lua:1575
+msgctxt "adminStn-comms"
+msgid "Tell us about the nearby nebulae."
+msgstr "Was können Sie uns über die Nebel in der Nähe sagen?"
+
+#: scripts/scenario_30_brokenglass.lua:1556
+#: scripts/scenario_30_brokenglass.lua:1581
+msgctxt "adminStn-comms"
+msgid "Are there any Kraylor in the area?"
+msgstr "Befinden sich Kraylor in der Gegend?"
+
+#: scripts/scenario_30_brokenglass.lua:1557
+#: scripts/scenario_30_brokenglass.lua:1585
+msgctxt "adminStn-comms"
+msgid "Are there any Exuari in the area?"
+msgstr "Befinden sich Exuari in der Gegend?"
+
+#: scripts/scenario_30_brokenglass.lua:1561
+msgctxt "adminStn-comms"
+msgid "Always a pleasure to have you as our honoured guests."
+msgstr ""
+"Immer wieder eine Freude. Sie als unsere Ehrengäste willkommen zu heißen."
+
+#: scripts/scenario_30_brokenglass.lua:1563
+msgctxt "adminStn-comms"
+msgid "Any idea where we can get a Hawking Scanner fixed?"
+msgstr ""
+"Haben Sie eine Idee, wo wir einen Hawking-Scanner reparieren lassen könnten?"
+
+#: scripts/scenario_30_brokenglass.lua:1564
+msgctxt "adminStn-comms"
+msgid ""
+"Dr. Hendrix, who you rescued earlier, is the leading expert on those "
+"scanners."
+msgstr ""
+"Dr. Hendrix, die Forscherin die sie gerettet haben, ist die führende "
+"Expertin auf diesem Gebiet."
+
+#: scripts/scenario_30_brokenglass.lua:1568
+msgctxt "adminStn-comms"
+msgid "We have been operating here for about 50 years"
+msgstr "Unsere Operation gibt es hier bereits sei etwa 50 Jahren"
+
+#: scripts/scenario_30_brokenglass.lua:1572
+msgctxt "adminStn-comms"
+msgid "You'll find it to the east of the nebulae"
+msgstr "Sie finden sie östlich der Nebel"
+
+#: scripts/scenario_30_brokenglass.lua:1576
+msgctxt "adminStn-comms"
+msgid ""
+"Well I suppose you already know about the nebulae. They are to the north.\n"
+"\n"
+"Did you know that it's a popular place to hunt for treasure?"
+msgstr ""
+"Nun, ich nehme an, Sie wissen bereits von den Nebeln. Sie befinden sich "
+"nördlich von hier.\n"
+"\n"
+"Wissen sich, dass sie sehr beliebte Schatzsuch-Orte sind?"
+
+#: scripts/scenario_30_brokenglass.lua:1582
+msgctxt "adminStn-comms"
+msgid ""
+"We see some from time to time, but with the non-aggression treaty, they "
+"haven't been too much trouble."
+msgstr ""
+"Von Zeit zu Zeit sehen wir manchmal ein paar von Ihnen, aber dank des "
+"Nichtangriffspakts machen Sie keine großen Probleme."
+
+#: scripts/scenario_30_brokenglass.lua:1586
+msgctxt "adminStn-comms"
+msgid ""
+"Old space junk, mostly. We haven't seen any real Exauri activity in decades."
+msgstr ""
+"Hauptsächlich alter Weltraumschrott. Wir haben schon seit Jahrzehnten keine "
+"nennenswerten Exuari-Aktivitäten mehr erlebt."
+
+#: scripts/scenario_30_brokenglass.lua:1595
+msgctxt "found-comms"
+msgid ""
+"Come in? Dr. Hendrix here... Come in?\n"
+"\n"
+"Oh thank heavens, we're found! We thought we might be stuck here for good!\n"
+"\n"
+"We need to install a new hyperplasma full bridge rectifier, but our plasma "
+"conduit driver has gone missing. You must have one in your engine room? If "
+"you let us borrow it, we will upgrade your sensors with our new experimental "
+"modifications."
+msgstr ""
+"Hallo? Dr. Hendrix hier... hören Sie mich? \n"
+"\n"
+"Oh, Gott sei Dank, wir wurden gefunden! Wir dachten schon, wir säßen hier "
+"für immer fest! \n"
+"\n"
+"Wir müssen einen neuen Hyperplasma-Vollbrückengleichrichter installieren, "
+"aber unser Plasma-Leitungstreiber ist verschwunden. Sicher haben Sie eine "
+"Reserven in Ihrem Maschinenraum?  Wenn Sie Ihn uns leihen, würden wir Ihnen "
+"zum Dank Ihre Sensoren mithilfe unserer neuen experimentellen Modifikationen "
+"aufrüsten."
+
+#: scripts/scenario_30_brokenglass.lua:1600
+msgctxt "found-comms"
+msgid "Sure, you can borrow our conduit driver!"
+msgstr "Sicher, Sie können sich unseren Leitungstreiber ausleihen!"
+
+#: scripts/scenario_30_brokenglass.lua:1601
+msgctxt "found-comms"
+msgid ""
+"Great. Your sensors are upgraded. We'll get this rectifier installed and be "
+"on our way.\n"
+"\n"
+"Thanks again, Captain. If you ever need some help with your Hawking "
+"Scanners, look me up!"
+msgstr ""
+"Großartig. Wir haben soeben die Verbesserung Ihrer Sensoren abgeschlossen. "
+"Wir installieren nun den Gleichrichter und können uns dann auf den Weg "
+"machen.\n"
+"\n"
+"Vielen Dank, Captain. Und falls Sie je Hilfe mit ihren Hawking-Scannern "
+"benötigen sollten, zögern Sie nicht, mich aufzusuchen."
+
+#: scripts/scenario_30_brokenglass.lua:1609
+msgctxt "found-comms"
+msgid "Thanks so much for finding us!"
+msgstr "Wir sind Ihnen unendlich dankbar, dass sie uns gefunden haben!"
+
+#: scripts/scenario_30_brokenglass.lua:1614
+msgctxt "investigate-comms"
+msgid "What do you have to say for yourself?"
+msgstr "Was haben Sie dazu zu sagen?"
+
+#: scripts/scenario_30_brokenglass.lua:1615
+msgctxt "investigate-comms"
+msgid "We're just running a salvage mission."
+msgstr "Wir führen nur eine Bergungsmission durch."
+
+#: scripts/scenario_30_brokenglass.lua:1616
+msgctxt "investigate-comms"
+msgid "Carry on, then, we're keeping our eye on you."
+msgstr "In dem Fall: Machen Sie weiter, aber wir werden Sie im Auge behalten!"
+
+#: scripts/scenario_30_brokenglass.lua:1618
+msgctxt "investigate-comms"
+msgid "Back off, this is a special military operation"
+msgstr "ziehen Sie sich zurück, das hier ist eine militärische Operation!"
+
+#: scripts/scenario_30_brokenglass.lua:1619
+msgctxt "investigate-comms"
+msgid "You want to back up that escalation with some weapons fire?"
+msgstr "Wollen Sie die Eskalation durch Waffenfeuer noch verstärken?"
+
+#: scripts/scenario_30_brokenglass.lua:1625
+msgctxt "drone-comms"
+msgid ""
+"We oversee the B-3 liquidation of the Ghosts assets.\n"
+"\n"
+"Dock with us to check out what we've got."
+msgstr ""
+"Wir überwachen die B-3-Auflösung und die Weiterverwertung der Geister-"
+"Komponenten\n"
+"\n"
+"Docken Sie bei uns an, damit wir Ihnen zeigen können, was wir haben."
+
+#: scripts/scenario_30_brokenglass.lua:1629
+msgctxt "drone-comms"
+msgid ""
+"You need any of this stuff?\n"
+"\n"
+"It's not for sale, as such. You'll need to get a requisition from the Admin "
+"Station in order to carry anything out.\n"
+msgstr ""
+"Brauchen Sie etwas davon?\n"
+"\n"
+"An sich stehen diese Gegenstände nicht zum Verkauf. Sie werden eine "
+"Bedarfsanforderung der Admin-Station benötigen, damit ich etwas davon "
+"herausgeben kann.\n"
+
+#: scripts/scenario_30_brokenglass.lua:1633
+msgctxt "drone-comms"
+msgid "Proximity Sensor"
+msgstr "Annäherungs-Sensor"
+
+#: scripts/scenario_30_brokenglass.lua:1634
+msgctxt "drone-comms"
+msgid "Activates when ships get too close"
+msgstr "Wird aktiviert, wenn ihm das Schiff zu nahe kommt"
+
+#: scripts/scenario_30_brokenglass.lua:1637
+msgctxt "drone-comms"
+msgid "Intelligence Accelerator"
+msgstr "Intelligenzbeschleuniger"
+
+#: scripts/scenario_30_brokenglass.lua:1638
+msgctxt "drone-comms"
+msgid "Too expensive to use for video games."
+msgstr "Zu teuer, um ihn für Videospiele zu nutzen."
+
+#: scripts/scenario_30_brokenglass.lua:1641
+msgctxt "drone-comms"
+msgid "Graviton Lens"
+msgstr "Gravitonlinse"
+
+#: scripts/scenario_30_brokenglass.lua:1644
+msgctxt "drone-comms"
+msgid ""
+"Ooooh, a requisition!\n"
+"\n"
+"Alright, enjoy... focusing your gravitons, I guess!"
+msgstr ""
+"Ooooh, eine Bedarfsanforderung!\n"
+"\n"
+"In Ordnung, viel Spaß beim... bündeln ihrer Gravitonen, oder so!"
+
+#: scripts/scenario_30_brokenglass.lua:1648
+msgctxt "drone-comms"
+msgid "For focusing the gravitational field."
+msgstr "Um Schwerefelder zu bündel."
+
+#: scripts/scenario_30_brokenglass.lua:1652
+msgctxt "drone-comms"
+msgid "Holographic Projector"
+msgstr "Holographischer Projektor"
+
+#: scripts/scenario_30_brokenglass.lua:1653
+msgctxt "drone-comms"
+msgid "Shows very convincing drone stations"
+msgstr "Erschafft sehr überzeugende Bilder von Drohnen-Stationen"
+
+#: scripts/scenario_30_brokenglass.lua:1662
+#, lua-format
+msgctxt "attack-incCall"
+msgid ""
+"HELP!\n"
+"We are taking damage from %s and might need assistance."
+msgstr ""
+"HILFE!\n"
+"Wir werden von %s angegriffen und haben bereits Schäden erlitten. Wir "
+"benötigen dringend Unterstützung!"
+
+#: scripts/scenario_30_brokenglass.lua:1666
+#, lua-format
+msgctxt "attack-shipLog"
+msgid "%s is taking damage!"
+msgstr "\"%s\" wird angegriffen!"
+
+#: scripts/scenario_30_brokenglass.lua:1693
+msgctxt "adminStn-comms"
+msgid ""
+"Sorry to interrupt, but we've just recieved an urgent call.\n"
+"\n"
+"It seems one of our researchers, Dr. Hendrix, and her crew have lost their "
+"way in a nearby nebula and need our help. They were running experiments in "
+"the nebula when their engines and transponder went offline. Please follow "
+"our scout vessel, SR7, to the nebula and search for them."
+msgstr ""
+"Entschuldigen Sie die Störung, aber wir haben gerade einen Notruf erhalten.\n"
+"\n"
+"Wie es scheint sind unsere Forscherin Dr. Hendrix und ihre Crew in einem "
+"Nebel gestrandet und brauchen unsere Hilfe. Sie haben Experimente im Nebel "
+"durchgeführt als Antrieb und ihr Transponder plötzlich ausfielen."
+
+#: scripts/scenario_30_brokenglass.lua:1700
+msgctxt "adminStn-comms"
+msgid "Meet me at the edge of the nebula"
+msgstr "Treffen Sie sich mit mir am Rand des Nebels"
+
+#: scripts/scenario_30_brokenglass.lua:1718
+msgctxt "adminStn-incCall"
+msgid ""
+"Ready to head in?\n"
+"\n"
+"The nebula is very thick, so we will need to get close to find a ship with "
+"no transponder. Probes won't show the ship, but your relay station should be "
+"able to pick it up at 20U or less. There may be hazards, so be careful.\n"
+"\n"
+"I'll follow you. Let's find Dr. Hendrix and bring her crew home."
+msgstr ""
+"Bereit, hineinzufliegen?\n"
+"\n"
+"Der Nebel ist sehr dicht, also müssen wir nah heran, um ein Schiff ohne "
+"Transponder zu finden. Sonden werden das Schiff nicht anzeigen, aber wenn "
+"wir weniger als 20U entfernt sind, sollte die Kommunikationsstation Signale "
+"auffangen können. Es kann gefährlich werden, also seien Sie vorsichtig. \n"
+"\n"
+"Ich werde Ihnen folgen. Lassen Sie uns Dr. Hendrix finden und sie und ihre "
+"Crew nach Hause bringen."
+
+#: scripts/scenario_30_brokenglass.lua:1723
+msgctxt "adminStn-shipLog"
+msgid "Fly into the Nebula and find Dr. Hendrix"
+msgstr "Auftrag: Fliegen Sie in den Nebel und finden Sie Dr. Hendrix"
+
+#: scripts/scenario_30_brokenglass.lua:1746
+msgctxt "finishMissionNebulae-shipLog"
+msgid "Sensors have been upgraded."
+msgstr "Die Sensoren wurden verbessert."
+
+#: scripts/scenario_30_brokenglass.lua:1788
+msgctxt "defenceStn-comms"
+msgid ""
+"Great!\n"
+"\n"
+"Start at the checkpoint in the North West. You'll need to dock at each "
+"station before proceeding to the next."
+msgstr ""
+"Großartig!\n"
+"\n"
+"Beginnen Sie mit dem Kontrollpunkt im Nordosten. Sie werden an jeder Station "
+"andocken müssen, bevor Sie die nächste besuchen."
+
+#: scripts/scenario_30_brokenglass.lua:1819
+#, lua-format
+msgctxt "defenceStn-incCall"
+msgid "Please proceed to %s"
+msgstr "Bitte fliegen Sie weiter zu %s"
+
+#: scripts/scenario_30_brokenglass.lua:1820
+#, lua-format
+msgctxt "defenceStn-shipLog"
+msgid "Please proceed to %s"
+msgstr "Bitte fliegen Sie weiter zu %s"
+
+#: scripts/scenario_30_brokenglass.lua:1839
+msgctxt "defenceStn-incCall"
+msgid ""
+"Great work captain!\n"
+"\n"
+"You have repelled the attackers and the SW Checkpoint is safe for now, but "
+"intelligence reports show a huge drone convoy in your vicinity to the NW.\n"
+"\n"
+"INVESTIGATE BUT DO NOT ENGAGE! We have it on good word that attacking this "
+"convoy is extremely risky. Keep your distance, but we'd like to know where "
+"they are going."
+msgstr ""
+"Gute Arbeit, Captain! \n"
+"\n"
+"Sie haben die Angreifer zurückgeschlagen, und Kontrollpunkt SW ist vorerst "
+"sicher, aber Geheimdienstberichte zeigen einen riesigen Drohnenschwarm in "
+"Ihrer Nähe im Nordwesten.\n"
+"\n"
+"Ermitteln Sie, aber greifen Sie NICHT an! Wir wissen aus zuverlässiger "
+"Quelle, dass ein Angriff auf diesen Schwarm extrem riskant ist. Halten Sie "
+"Abstand, aber beobachten Sie genau ihre Bewegungen."
+
+#: scripts/scenario_30_brokenglass.lua:1844
+msgctxt "defenceStn-shipLog"
+msgid "Investigate the convoy, but DO NOT ENGAGE"
+msgstr "Befehle: Untersuchen Sie den Schwarm, aber greifen Sie NICHT ein."
+
+#: scripts/scenario_30_brokenglass.lua:1874
+msgctxt "defenceStn-incCall"
+msgid ""
+"Come in, Captain.\n"
+"We have the info we need about that convoy and strongly discourage any "
+"further engagement.\n"
+"Your assistance is required with a secret mission. Dock with us to receive "
+"further instructions when you're ready."
+msgstr ""
+"Captain, bitte kommen.\n"
+"Wir haben die Information, die wir über den Schwarm brauchen und raten "
+"dringend davon ab, die Angelegenheit weiter zu verfolgen.\n"
+"Stattdessen wird Ihre Unterstützung für eine geheime Mission benötigt. "
+"Sobald Sie bereit sind, docken Sie bitte bei uns an, um weiter Informationen "
+"zu erhalten."
+
+#: scripts/scenario_30_brokenglass.lua:1875
+msgctxt "defenceStn-shipLog"
+msgid "Dock with the Defence Station to start another mission"
+msgstr ""
+"Befehl: Docken Sie an die Station \"Defence\" an um eine weitere Mission zu "
+"beginnen"
+
+#: scripts/scenario_30_brokenglass.lua:1918
+msgctxt "wormhole-comms"
+msgid "and when in doubt - apply missiles."
+msgstr "Im Zweifelsfall: Raketen einsetzen"
+
+#: scripts/scenario_30_brokenglass.lua:1920
+msgctxt "wormhole-comms"
+msgid "and we've given you some extra missiles to help get the job done."
+msgstr ""
+"und wir haben noch ein paar zusätzliche Raketen oben drauf gelegt, das "
+"sollte Ihnen bei Ihrer Aufgabe helfen."
+
+#: scripts/scenario_30_brokenglass.lua:1923
+msgctxt "wormhole-comms"
+msgid "and go find some extra missiles to help get the job done."
+msgstr ""
+"und finden Sie am besten noch ein paar weitere Raketen - das sollte Ihnen "
+"bei Ihrer Mission helfen."
+
+#: scripts/scenario_30_brokenglass.lua:1926
+#, lua-format
+msgctxt "wormhole-comms"
+msgid ""
+"Great!\n"
+"There is an old Exuari station, callsign X472, to the SE on the other side "
+"of the wormhole. It used to study the planet forming nearby, but it's been "
+"abandoned for over a century now, no one aboard and no weapons, a historical "
+"relic, really. We need you to demolish it and bring us the stabilizers from "
+"its jump drive which we can use to maintain our Hawking Scanners.\n"
+"We have hacked the emergency integrity field so that the station can be "
+"destroyed, but there were strange disturbances when we deactivated it. We're "
+"not sure what it means, but we advise you to exercise caution...\n"
+"%s"
+msgstr ""
+"Großartig!\n"
+"Im Südosten auf der anderen Seite des Wurmlochs gibt es eine alte Exuari-"
+"Station, Rufzeichen X472. Sie wurde zur Erforschung eines Planeten genutzt, "
+"der sich in der Nähe gebildet hat. Aber sie ist jetzt seit über einem "
+"Jahrhundert verlassen, niemand an Bord und keine Waffen, es ist sozusagen "
+"historisches Relikt. Bitte zerlegen Sie sie für uns und bringen uns die "
+"Positions-Stabilisatoren, die wir für die Wartung unserer Hawking-Scanner "
+"verwenden können.\n"
+"Wir haben das Notfall-Integritätsfeld gehackt, so dass die Station zerstört "
+"werden kann, aber es gab seltsame Störungen, als wir es deaktivierten. Wir "
+"sind uns nicht sicher, was das zu bedeuten hat, aber wir raten Ihnen, "
+"vorsichtig zu sein...\n"
+"%s"
+
+#: scripts/scenario_30_brokenglass.lua:1943
+msgctxt "KraylorWarning-incCall"
+msgid ""
+"Ugh, humans.\n"
+"\n"
+"This is the Kraylor Advanced \"Reasearch\" Project Agency (KARPA), we have "
+"detected your suspicious activity in the vicinity.\n"
+"\n"
+"We are sending a team to investigate what you are up to. If you fire on us, "
+"there will be trouble!"
+msgstr ""
+"Uäh, Menschen.\n"
+"\n"
+"Hier ist die Kraylor Advanced „Reasearch“ Project Agency (KARPA), wir haben "
+"verdächtigen Aktivitäten in der Nähe entdeckt.\n"
+"\n"
+"Wir schicken ein Team, um zu untersuchen, was Sie vorhaben. Wenn Sie auf uns "
+"schießen, wird das Konsequenzen haben!"
+
+#: scripts/scenario_30_brokenglass.lua:1948
+msgctxt "KraylorWarning-shipLog"
+msgid ""
+"The Kraylor are investigating our activities and have warned us not to "
+"escalate"
+msgstr ""
+"Die Kraylor beobachten unsere Aktivitäten und haben uns vor einer Eskalation "
+"gewarnt"
+
+#: scripts/scenario_30_brokenglass.lua:1954
+msgctxt "wormhole-incCall"
+msgid ""
+"Great, you got the parts!\n"
+"\n"
+"You'd better hurry back, we've seen some Kraylor activity in the area. "
+"Hopefully your salvage mission didn't attract the wrong sort of attention."
+msgstr ""
+"Hervorragend, See haben die Teile!\n"
+"\n"
+"Sie sollten sich besser beeilen, wir haben einige Kraylor-Aktivitäten in der "
+"Gegend gesehen. Hoffentlich hat Ihre Bergungsmission nicht zu viel "
+"Aufmerksamkeit erregt."
+
+#: scripts/scenario_30_brokenglass.lua:1958
+msgctxt "wormhole-shipLog"
+msgid "Return the spare parts to the Wormhole Station"
+msgstr "Übergeben Ersatzteile an Wurmlochstation."
+
+#: scripts/scenario_30_brokenglass.lua:1970
+msgctxt "wormhole-shipLog"
+msgid "Jump Defence Activated"
+msgstr "Sprungverteidigung aktiviert"
+
+#: scripts/scenario_30_brokenglass.lua:1995
+msgctxt "KraylorWarning-incCall"
+msgid ""
+"Watch your back, Hugh Mon!\n"
+"\n"
+"We don't know what you're up to, but we don't like the look of it. Keep your "
+"distance and maybe we'll leave you alone.\n"
+"\n"
+"<The Kraylor Vessel jumps back through the wormhole>"
+msgstr ""
+"Gib auf deinen Rücken acht, Männsch!\n"
+"\n"
+"Wir wissen nicht, was ihr vor habt, aber es gefällt uns nicht, wie es "
+"aussieht. Haltet Abstand und vielleicht lassen wir euch dann in Ruhe."
+
+#: scripts/scenario_30_brokenglass.lua:2000
+msgctxt "KraylorWarning-shipLog"
+msgid "The Kraylor seem hostile and have warned us to keep our distance"
+msgstr ""
+"Die Kraylor scheinen feindselig und haben uns davor gewarnt Ihnen Nahe zu "
+"kommen."
+
+#: scripts/scenario_30_brokenglass.lua:2031
+msgctxt "defenceStn-comms"
+msgid "Good luck"
+msgstr "Viel Glück"
+
+#: scripts/scenario_30_brokenglass.lua:2062
+msgctxt "defenceStn-incCall"
+msgid "Arrived, scan the security beacons"
+msgstr "Gut, scannen Sie jetzt die Sicherheitsbaken"
+
+#: scripts/scenario_30_brokenglass.lua:2066
+msgctxt "defenceStn-incCall"
+msgid ""
+"Your cover has been blown and the proximity defence system remains active. "
+"We suggest leaving and trying again to arrive with a future convoy."
+msgstr ""
+"Ihre Tarnung ist aufgeflogen und das Verteidigungssystem ist aktiv. Wir "
+"schlagen vor, sie verlassen das Gebiet und versuchen es noch einmal mit dem "
+"nächsten Schwarm."
+
+#: scripts/scenario_30_brokenglass.lua:2067
+msgctxt "defenceStn-shipLog"
+msgid "Our cover has been blown"
+msgstr "Unsere Tarnung ist aufgeflogen"
+
+#: scripts/scenario_30_brokenglass.lua:2072
+msgctxt "defenceStn-shipLog"
+msgid "We should be good to try again"
+msgstr "Wir sollten es nochmals versuchen können"
+
+#: scripts/scenario_30_brokenglass.lua:2106
+msgctxt "drone-incCall"
+msgid ""
+"Great work, Captain!\n"
+"\n"
+"We have taken control of this station and will be liquidating spare parts "
+"from the wreckage."
+msgstr ""
+"Gute Arbeit, Captain!\n"
+"\n"
+"Wir konnten die Kontrolle über die Station erlangen und werden die Trümmern "
+"ausschlachten um Ersatzteile zu gewinnen"
+
+#: scripts/scenario_30_brokenglass.lua:2109
+msgctxt "drone-shipLog"
+msgid "DB-3 has a collection of spare parts"
+msgstr "DB-3 enthält eine Ansammlung nützlicher Ersatzteile"
+
+#: scripts/scenario_30_brokenglass.lua:2188
+msgctxt "wormhole-incCall"
+msgid ""
+"Thanks so much, captain!\n"
+"\n"
+"You really saved our ass there. Unfortunately our Hawking Scanner was "
+"damaged by the bomb, and we haven't been able to get it back online. Do you "
+"think you could get it fixed for us?\n"
+"\n"
+"Please dock with us to pick up the scanner."
+msgstr ""
+"Vielen Dank, Kapitän! \n"
+"\n"
+"Sie haben uns wirklich den Hintern gerettet. Leider wurde unser Hawking-"
+"Scanner durch die Bombe beschädigt, und wir konnten ihn nicht wieder zum "
+"Laufen bekommen. Könnten Sie ihn vielleicht für uns reparieren lassen?\n"
+"\n"
+"In dem Fall docken Sie bitte bei uns an, um den Scanner abzuholen."
+
+#: scripts/scenario_30_brokenglass.lua:2193
+msgctxt "wormhole-shipLog"
+msgid "Get the Hawking Scanner from the Wormhole Station"
+msgstr "Auftrag: Hawking-Scanner von der Wormhole-Station abholen"
+
+#: scripts/scenario_30_brokenglass.lua:2248
+msgctxt "drone-shipLog"
+msgid ""
+"This ship will not activate the drone station proximity defences as long as "
+"you arrive with a convoy."
+msgstr ""
+"Solange Sie in einem Drohnenschwarm ankommen, wird dieses Schiff nicht die "
+"Verteidigungsmaßnahmen der Drohnenstation aktivieren"
+
+#: scripts/scenario_30_brokenglass.lua:2252
+msgctxt "drone-shipLog"
+msgid "It's nice to be back aboard the Propitious 1"
+msgstr "Es ist schön, wieder an Bord der Propitious 1 zu sein."
+
+#: scripts/scenario_30_brokenglass.lua:2285
+msgctxt "drone-incCall"
+msgid "PROXIMITY DEFENCE SYSTEM ACTIVATED"
+msgstr "ANNÄHERUNGSALARM - VERTEIDIGUNG AKTIVIERT"
+
+#: scripts/scenario_30_brokenglass.lua:2286
+msgctxt "drone-shipLog"
+msgid "We got too close to a drone station and it launched defences."
+msgstr ""
+"Wir sind einer Drohnenstation zu nahe gekommen und sie hat Abwehrmaßnahmen "
+"eingeleitet."
+
+#: scripts/scenario_30_brokenglass.lua:2297
+msgctxt "scienceDescription-beacons"
+msgid ""
+"The Ghosts drone security beacons. If we scan them all, we should be able to "
+"find the control station. We'll need to get pretty close."
+msgstr ""
+"Die Drohnensicherheits-Baken der \"Geister\". Wenn es uns gelingt, alle "
+"davon zu scannen, sollten wir die Kontrollstation finden können. Wir müssen "
+"dafür ziemlich nahe an sie heran kommen."
+
+#: scripts/scenario_30_brokenglass.lua:2305
+msgctxt "scienceDescription-beacons"
+msgid ""
+"The beamforming configuration from this beacon will help the boffins "
+"triangulate the location of the central control."
+msgstr ""
+"Die Wellenform-Konfiguration dieser Bake wird hilft dem Ingenieursteam sehr "
+"helfen, den Standorts der der Kontrollstation zu bestimmen."
+
+#: scripts/scenario_30_brokenglass.lua:2314
+#, lua-format
+msgctxt "defenceStn-incCall"
+msgid ""
+"Great work!\n"
+"Our boffins were able to piece together the data and figure out where the "
+"commands are coming from.\n"
+"You must destroy station %s"
+msgstr ""
+"Hervoragende Arbeit!\n"
+"Unsere IT-Team konnte die Daten zusammenpuzzlen und herausfinden, woher die "
+"Befehle stammen.\n"
+"Sie müssen die Station \"%s\" zerstören"
+
+#: scripts/scenario_30_brokenglass.lua:2315
+#, lua-format
+msgctxt "defenceStn-shipLog"
+msgid "The drone control station is %s"
+msgstr "%s ist die Drohnenkontrollstation"
+
+#: scripts/scenario_30_brokenglass.lua:2384
+msgctxt "newShip-comms"
+msgid "Too busy to talk today, Captain."
+msgstr "Wir sind heute leider zu beschäftigt um mit Ihnen zu reden, Captain."
+
+#: scripts/scenario_30_brokenglass.lua:2393
+msgctxt "hendrixHints-comms"
+msgid "Sorry, I don't know where Dr. Hendrix lives"
+msgstr "Es tut mir leid, ich weiß nicht wo Dr. Hendrix lebt."
+
+#: scripts/scenario_30_brokenglass.lua:2401
+#, lua-format
+msgctxt "hendrixHints-comms"
+msgid ""
+"Dr. Hendrix, of course! I'm pretty sure she was on a %s-class station, but "
+"darned if I can remember which one."
+msgstr ""
+"Dr. Hendrix, natürlich! Ich bin mir ziemlich sicher, dass sie auf einer "
+"Klasse-%s -Station wohnt, aber ich kann mich leider nicht erinnern, auf "
+"welcher."
+
+#: scripts/scenario_30_brokenglass.lua:2403
+#, lua-format
+msgctxt "hendrixHints-comms"
+msgid ""
+"Gosh, Dr. Hendrix. Okay. Sorry, but honestly all I remember is that her "
+"address definitely has a '%s' in it."
+msgstr ""
+"Ach ja, Dr. Hendrix. Es tut mir leid, aber ehrlich gesagt erinnere ich mich "
+"nur daran, dass ihre Adresse ein  '%s' enthält."
+
+#: scripts/scenario_30_brokenglass.lua:2410
+msgctxt "defeat-shipLog"
+msgid "DEFEAT - A Patrol Station has been destroyed"
+msgstr "VERLOREN - Eine Wachstation wurde zerstört"
+
+#: scripts/scenario_30_brokenglass.lua:2417
+msgctxt "defeat-shipLog"
+msgid "DEFEAT - A Core station (Admin, Defence, Wormhole) has been destroyed"
+msgstr "VERLOREN - Eine Kernstation (Admin, Defence, Wormhole) wurde zerstört"
+
+#: scripts/scenario_30_brokenglass.lua:2424
+msgctxt "defeat-shipLog"
+msgid "DEFEAT - Station B-3 has been destroyed"
+msgstr "VERLOREN - Station B-3 wurde zerstört"
+
+#: scripts/scenario_30_brokenglass.lua:2512
+msgctxt "adminStn-comms"
+msgid "SUCCESS!!!"
+msgstr "ERFOLG!"
+
+#: scripts/scenario_30_brokenglass.lua:2514
+msgctxt "adminStn-comms"
+msgid "INCOMPLETE"
+msgstr "UNVOLLSTÄNDIG"
