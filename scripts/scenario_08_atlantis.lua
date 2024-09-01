@@ -147,7 +147,7 @@ function init()
 
     nebula = table.remove(b20_nebula_list, math.random(#b20_nebula_list))
     x, y = nebula:getPosition()
-    b20_artifact = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setRadarTraceColor(250, 79, 255)
+    b20_artifact = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setRadarTraceColor(250, 79, 255):setRadarSignatureInfo(0.25, 0, 0)
     b20_artifact:setScanningParameters(3, 1)
     b20_artifact.nebula = nebula
     b20_artifact.beta_radiation = irandom(1, 10)
@@ -171,11 +171,11 @@ Doppler instability: %i]]),
     )
 
     x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
-    b20_dummy_artifact_1 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setRadarTraceColor(250, 79, 255):setDescriptions(_("scienceDescription-artifact", "An odd object floating in space."), _("scienceDescription-artifact", "This object seems to be inert, and not giving any readings on your sensors. The actual object must be somewhere else."))
+    b20_dummy_artifact_1 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setRadarTraceColor(250, 79, 255):setDescriptions(_("scienceDescription-artifact", "An odd object floating in space."), _("scienceDescription-artifact", "This object seems to be inert, and not giving any interesting readings on your sensors. The actual object must be somewhere else.")):setRadarSignatureInfo(0.25, 0, 0)
     b20_dummy_artifact_1:setScanningParameters(3, 1)
 
     x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
-    b20_dummy_artifact_2 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setRadarTraceColor(250, 79, 255):setDescriptions(_("scienceDescription-artifact", "An odd object floating in space."), _("scienceDescription-artifact", "This object seems to be inert, and not giving any readings on your sensors. The actual object must be somewhere else."))
+    b20_dummy_artifact_2 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setRadarTraceColor(250, 79, 255):setDescriptions(_("scienceDescription-artifact", "An odd object floating in space."), _("scienceDescription-artifact", "This object seems to be inert, and not giving any interesting readings on your sensors. The actual object must be somewhere else.")):setRadarSignatureInfo(0.25, 0, 0)
     b20_dummy_artifact_2:setScanningParameters(3, 1)
 
     x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
@@ -422,7 +422,7 @@ Here we are, sector B20. Looks like there are some lingering Kraylor here.
 
 We are outside of the no-fire zone and at war with the Kraylor, so you are clear to engage.
 
-Report back when you have found the source of the odd sensor readings.]])
+Report back when you have found the source of the odd sensor readings. This should be a good opportunity to make use of your ship's probes, or your Science Officer might be able to track it down based on its radar signature.]])
         )
         mission_state = phase2SeekArtifact
     end
@@ -885,7 +885,7 @@ Can you move closer to the object to see if you can improve those readings? The 
     addCommsReply(
         _("artifact-comms", "No."),
         function()
-            setCommsMessage(_("artifact-comms", [[Then continue looking for it.]]))
+            setCommsMessage(_("artifact-comms", [[Then continue looking for it. Try launching some probes or asking the Science Officer if they notice any odd radar signatures.]]))
         end
     )
 end
