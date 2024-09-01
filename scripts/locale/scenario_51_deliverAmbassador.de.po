@@ -538,7 +538,7 @@ msgid ""
 "Good day, officer!\n"
 "What can we do for you today?"
 msgstr ""
-"Guten Dank,\n"
+"Guten Tag,\n"
 "was können wir für sie tun?"
 
 #: scripts/scenario_51_deliverAmbassador.lua:923
