@@ -448,7 +448,7 @@ end
 function phase2WaitTillAwayFromObject(delta)
     if distance(player, b20_artifact) > 2200 then
         setCommsMessage(_("artifact-comms", [[It seems like the artifact is stabilizing.
-It would be good to get some more reading a bit closer, as the nebula causes our sensor ]]))
+It would be good to get some more readings close to the object, as the nebula may be causing issues for your sensors.]]))
         mission_state = phase2WaitTillNearObject
     elseif distance(player, b20_artifact) > 2000 then
         phase2SpawnWormhole()
@@ -862,7 +862,7 @@ These readings indicate it is very unstable! Please move away from it.]]))
                                                                 else
                                                                     setCommsMessage(_("artifact-comms", [[Are you sure? Those readings are really off the normal scale.
 
-Can you move closer to the object to see if you can improve those readings? The nebula might be interfering with your sensors.]]))
+Can you move close to the object and get a second readings? The nebula might be interfering with your sensors.]]))
                                                                     mission_state = phase2WaitTillNearObject
                                                                 end
                                                             else
