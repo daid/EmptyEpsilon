@@ -30,7 +30,8 @@ namespace ShaderRegistry
             "shaders/objectShader:ILLUMINATION",
             "shaders/objectShader:SPECULAR",
             "shaders/objectShader:ILLUMINATION:SPECULAR",
-            "shaders/planet"
+            "shaders/planet",
+            "shaders/wormhole",
         };
 
         std::array<const char*, Uniforms_t(Uniforms::Count)> uniform_names{
@@ -39,6 +40,7 @@ namespace ShaderRegistry
             "projection",
             "model",
             "view",
+            "time",
             "camera_position",
             "atmosphereColor",
             

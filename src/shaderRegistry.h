@@ -34,6 +34,7 @@ namespace ShaderRegistry
 		ObjectSpecular,
 		ObjectSpecularIllumination,
 		Planet,
+		Wormhole,
 
 		Count
 	};
@@ -47,6 +48,7 @@ namespace ShaderRegistry
 		Projection,
 		Model,
 		View,
+		Time,
 		CameraPosition,
 		AtmosphereColor,
 
