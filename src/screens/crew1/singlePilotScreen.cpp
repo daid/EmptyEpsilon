@@ -60,19 +60,23 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
+            auto last_target = targets.get();
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
-            if (my_spaceship && targets.get())
+            if (my_spaceship && targets.get() && (targets.get() != last_target))
                 my_player_info->commandSetTarget(targets.get());
             else if (auto transform = my_spaceship.getComponent<sp::Transform>())
                 my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
         },
-        [](glm::vec2 position) {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+        [this](glm::vec2 position) {
+            targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
+            auto transform = my_spaceship.getComponent<sp::Transform>();
+            if (transform && !targets.get())
+                drag_rotate=true;
+            if (drag_rotate)
                 my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
         },
-        [](glm::vec2 position) {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
+        [this](glm::vec2 position) {
+            drag_rotate=false;
         }
     );
     radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock","0")=="1");
