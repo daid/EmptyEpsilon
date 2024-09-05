@@ -45,19 +45,22 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     // Control targeting and piloting with radar interactions.
     radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
+            auto last_target = targets.get();
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
-            if (my_spaceship && targets.get())
+            if (my_spaceship && targets.get() && (targets.get() != last_target))
                 my_spaceship->commandSetTarget(targets.get());
             else if (my_spaceship)
                 my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
         },
         [this](glm::vec2 position) {
-            if (my_spaceship)
+            targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
+            if (my_spaceship && !targets.get())
+                drag_rotate=true;
+            if (drag_rotate)
                 my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
         },
         [this](glm::vec2 position) {
-            if (my_spaceship)
-                my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
+            drag_rotate=false;
         }
     );
     radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
