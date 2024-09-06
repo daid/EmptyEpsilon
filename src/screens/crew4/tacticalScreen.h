@@ -28,6 +28,7 @@ private:
     GuiRotationDial* missile_aim;
     GuiMissileTubeControls* tube_controls;
     GuiToggleButton* lock_aim;
+    bool drag_rotate;
 public:
     TacticalScreen(GuiContainer* owner);
 
