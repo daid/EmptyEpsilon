@@ -2,6 +2,8 @@
 
 #include "ecs/multiplayer.h"
 #include "ecs/query.h"
+#include "engine.h"
+
 
 namespace sp::io {
     template<typename T> static inline DataBuffer& operator << (DataBuffer& packet, const std::vector<T>& v) { packet << uint32_t(v.size()); for(size_t n=0; n<v.size(); n++) packet << v[n]; return packet;} \
@@ -11,17 +13,21 @@ namespace sp::io {
 enum class BasicReplicationRequest {
     SendAll, Update, Receive
 };
-#define BASIC_REPLICATION_CLASS(CLASS, COMPONENT) \
+#define BASIC_REPLICATION_CLASS_RATE(CLASS, COMPONENT, RATE) \
     class CLASS : public sp::ecs::ComponentReplicationBase { \
-        sp::SparseSet<std::pair<uint32_t, COMPONENT>> info; \
+        static constexpr float update_delay = 1.0f / (RATE); \
+        struct Info { uint32_t version; float last_update = 0.0f; COMPONENT data; }; \
+        sp::SparseSet<Info> info; \
         void onEntityDestroyed(uint32_t index) override; \
         void sendAll(sp::io::DataBuffer& packet) override; \
         void update(sp::io::DataBuffer& packet) override; \
         void receive(sp::ecs::Entity entity, sp::io::DataBuffer& packet) override; \
         void remove(sp::ecs::Entity entity) override; \
-        template<BasicReplicationRequest> void impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& c, COMPONENT* backup); \
+        template<BasicReplicationRequest> bool impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& c, COMPONENT* backup); \
         template<BasicReplicationRequest> void field_impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& c, COMPONENT* backup, sp::io::DataBuffer& tmp, uint32_t& flags); \
     };
+#define BASIC_REPLICATION_CLASS(CLASS, COMPONENT) \
+    BASIC_REPLICATION_CLASS_RATE(CLASS, COMPONENT, 60.0f);
 
 #define BASIC_REPLICATION_IMPL(CLASS, COMPONENT) \
     void CLASS::onEntityDestroyed(uint32_t index) { info.remove(index); } \
@@ -31,22 +37,23 @@ enum class BasicReplicationRequest {
         } \
     } \
     void CLASS::update(sp::io::DataBuffer& packet) { \
+        auto now = engine->getElapsedTime(); \
         for(auto [entity, data] : sp::ecs::Query<COMPONENT>()) { \
             if (!info.has(entity.getIndex())) { \
-                info.set(entity.getIndex(), {entity.getVersion(), data}); \
+                info.set(entity.getIndex(), {entity.getVersion(), now, data}); \
                 impl<BasicReplicationRequest::SendAll>(entity, packet, data, nullptr); \
             } else { \
-                auto& [version, backup] = info.get(entity.getIndex()); \
-                if (version != entity.getVersion()) { \
-                    info.set(entity.getIndex(), {entity.getVersion(), data}); \
+                auto& entity_info = info.get(entity.getIndex()); \
+                if (entity_info.version != entity.getVersion()) { \
+                    info.set(entity.getIndex(), {entity.getVersion(), now, data}); \
                     impl<BasicReplicationRequest::SendAll>(entity, packet, data, nullptr); \
-                } else { \
-                    impl<BasicReplicationRequest::Update>(entity, packet, data, &backup); \
+                } else if (entity_info.last_update + update_delay <= now) { \
+                    if (impl<BasicReplicationRequest::Update>(entity, packet, data, &entity_info.data)) entity_info.last_update = now; \
                 } \
             } \
         } \
-        for(auto [index, version_data] : info) { auto& [version, data] = version_data; \
-            if (!sp::ecs::Entity::forced(index, version).hasComponent<COMPONENT>()) { \
+        for(auto [index, entity_info] : info) { \
+            if (!sp::ecs::Entity::forced(index, entity_info.version).hasComponent<COMPONENT>()) { \
                 info.remove(index); \
                 packet << CMD_ECS_DEL_COMPONENT << component_index << index; \
             } \
@@ -54,12 +61,13 @@ enum class BasicReplicationRequest {
     } \
     void CLASS::receive(sp::ecs::Entity entity, sp::io::DataBuffer& packet) { impl<BasicReplicationRequest::Receive>(entity, packet, entity.getOrAddComponent<COMPONENT>(), nullptr); } \
     void CLASS::remove(sp::ecs::Entity entity) { entity.removeComponent<COMPONENT>(); } \
-    template<BasicReplicationRequest BRR> void CLASS::impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& target, COMPONENT* backup) { \
+    template<BasicReplicationRequest BRR> bool CLASS::impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& target, COMPONENT* backup) { \
         sp::io::DataBuffer tmp; \
         uint32_t flags = 0; \
         if (BRR == BasicReplicationRequest::Receive) packet >> flags; \
         field_impl<BRR>(entity, packet, target, backup, tmp, flags); \
         if (tmp.getDataSize() > 0) packet.write(CMD_ECS_SET_COMPONENT, component_index, entity.getIndex(), flags, tmp); \
+        return tmp.getDataSize() > 0; \
     } \
     template<BasicReplicationRequest BRR> void CLASS::field_impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& target, COMPONENT* backup, sp::io::DataBuffer& tmp, uint32_t& flags) { \
         uint32_t flag = 1;
@@ -114,20 +122,21 @@ enum class BasicReplicationRequest {
         } \
     } \
     void CLASS::update(sp::io::DataBuffer& packet) { \
+        auto now = engine->getElapsedTime(); \
         for(auto [entity, data] : sp::ecs::Query<COMPONENT>()) { \
             if (!info.has(entity.getIndex())) { \
-                info.set(entity.getIndex(), {entity.getVersion(), data}); \
+                info.set(entity.getIndex(), {entity.getVersion(), now, data}); \
                 packet.write(CMD_ECS_SET_COMPONENT, component_index, entity.getIndex()); \
             } else { \
-                auto& [version, backup] = info.get(entity.getIndex()); \
-                if (version != entity.getVersion()) { \
-                    info.set(entity.getIndex(), {entity.getVersion(), data}); \
+                auto& entity_info = info.get(entity.getIndex()); \
+                if (entity_info.version != entity.getVersion()) { \
+                    info.set(entity.getIndex(), {entity.getVersion(), now, data}); \
                     packet.write(CMD_ECS_SET_COMPONENT, component_index, entity.getIndex()); \
                 } \
             } \
         } \
-        for(auto [index, version_data] : info) { auto& [version, data] = version_data; \
-            if (!sp::ecs::Entity::forced(index, version).hasComponent<COMPONENT>()) { \
+        for(auto [index, entity_info] : info) { \
+            if (!sp::ecs::Entity::forced(index, entity_info.version).hasComponent<COMPONENT>()) { \
                 info.remove(index); \
                 packet << CMD_ECS_DEL_COMPONENT << component_index << index; \
             } \
