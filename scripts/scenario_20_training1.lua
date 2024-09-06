@@ -1,11 +1,11 @@
 -- Name: Training: Cruiser
 -- Type: Basic
--- Description: Basic Training Cource
+-- Description: Basic Training Course
 ---
 --- Objective: Destroy all enemy ships in the area.
 ---
 --- Description:
---- During this training your will learn to coordinate the actions of your crew and destoy an Exuari training ground.
+--- During this training you will learn to coordinate the actions of your crew and destroy an Exuari training ground.
 ---
 --- Your ship is a Phobos light cruiser - the most common vessel in the navy.
 ---
@@ -78,9 +78,9 @@ function commsInstr()
         instr1 = true
         command:sendCommsMessage(player, _("goal-incCall", [[This is Commander Saberhagen.
 
-In this training mission you will practice the basic controls of a Phobos light cruiser.
+In this training mission, you will practice the basic controls of a Phobos light cruiser.
 Since this is not a tutorial, you will be on your own to decide how to destroy all enemy targets in an Exuari training ground.
-There will be not much resistance, so you can try different approaches and tactics savely.
+There will be not much resistance, so you can try different approaches and tactics safely.
 
 Here's your chance to beat up some helpless opponents.
 Commander Saberhagen out.]]))
@@ -119,7 +119,7 @@ function update(delta)
             table.remove(enemyList, i)
         -- Note: table.remove() inside iteration causes the next element to be skipped.
         -- This means in each update-cycle max half of the elements are removed.
-        -- It does not matter here, since update is called regulary.
+        -- It does not matter here, since update is called regularly.
         end
     end
     if #enemyList == 0 then

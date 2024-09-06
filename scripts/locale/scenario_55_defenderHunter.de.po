@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 # Scenario name
 msgid "Defender Hunter"
@@ -102,7 +102,7 @@ msgstr "Absurd"
 
 msgctxt "Enemies"
 msgid "Enemies likely to overwhelm you"
-msgstr "Die Feinde werden euch wahrscheinlich überweltigen."
+msgstr "Die Feinde werden euch wahrscheinlich überwältigen."
 
 # Scenario setting
 msgctxt "setting"
@@ -3379,7 +3379,7 @@ msgstr "Welchen Wegpunkt sollten wir verteidigen?"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
-msgstr "Verteidige WP %d."
+msgstr "Verteidigen Sie WP %d."
 
 #: scripts/scenario_55_defenderHunter.lua:6779
 #, lua-format
