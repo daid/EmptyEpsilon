@@ -142,7 +142,22 @@ string GameGlobalInfo::getNextShipCallsign()
 void GameGlobalInfo::execScriptCode(const string& code)
 {
     if (main_scenario_script) {
-        auto res = main_scenario_script->run<void>(code);
+        string line;
+        bool first = true;
+        auto res = main_scenario_script->runWithStringResults(code, [&](const string& value) {
+            if (first)
+            {
+                first = false;
+                line = value;
+            }
+            else
+            {
+                int offset = line.length() % 8; // emulate 8-space tabstops
+                line += std::string(8 - offset, ' ') + value;
+            }
+        });
+        if (line != "")
+            LuaConsole::addLog(line);
         LuaConsole::checkResult(res);
     }
 }
