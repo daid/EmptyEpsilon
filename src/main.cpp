@@ -530,13 +530,9 @@ std::unordered_map<string, string> loadScenarioSettingsFromPrefs()
 
     for(string setting : preferenceValue.split(";"))
     {
-        std::vector<string> key_value = setting.split("=", 1);
-        string key = key_value[0].strip();
-        if (key.length() < 1)
-            continue;
-
-        if (key_value.size() == 2)
-            settings[key] = key_value[1];
+        auto [key, value] = setting.partition("=");
+        if (!key.empty() && !value.empty())
+            settings[key.strip()] = value.strip();
     }
 
     return settings;
