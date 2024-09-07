@@ -46,6 +46,8 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
         text = text + string(game_server->getSendDataRate() / 1000, 1) + " kb per second\n";
         text = text + string(game_server->getSendDataRatePerClient() / 1000, 1) + " kb per client\n";
     }
+    text = text + steam_debug_status + "\n";
+    text = text + steam_debug_log + "\n";
 
     if (show_timing_graph)
     {
