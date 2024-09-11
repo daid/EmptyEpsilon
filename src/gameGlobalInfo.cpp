@@ -142,8 +142,12 @@ string GameGlobalInfo::getNextShipCallsign()
 void GameGlobalInfo::execScriptCode(const string& code)
 {
     if (main_scenario_script) {
-        auto res = main_scenario_script->run<void>(code);
+        auto res = main_scenario_script->run<sp::script::CaptureAllResults>("return " + code);
+        if (res.isErr() && res.error().find('\n') < 0) // Errors without a traceback are parse errors, so we can try without the return.
+            res = main_scenario_script->run<sp::script::CaptureAllResults>(code);
         LuaConsole::checkResult(res);
+        for(const auto& s : res.value().result)
+            LuaConsole::addLog(s);
     }
 }
 
