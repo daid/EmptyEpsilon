@@ -56,7 +56,10 @@ function Entity:getTarget()
     if self.components.weapons_target then
         return self.components.weapons_target.entity
     end
-    --TODO: ScanProbe
+    if self.components.move_to then
+        local target = self.components.move_to.target
+        return target[1], target[2]
+    end
     return nil
 end
 
@@ -66,6 +69,8 @@ function Entity:getOwner()
     if self.components.delayed_explode_on_touch then
         return self.components.delayed_explode_on_touch.owner
     end
-    --TODO: Scanprobe
+    if self.components.allow_radar_link then
+        return self.components.allow_radar_link.owner
+    end
     return self
 end

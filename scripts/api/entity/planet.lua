@@ -70,8 +70,13 @@ end
 --- Defaults to 5000 (5U).
 --- Example: planet:setPlanetRadius(2000)
 function Entity:setPlanetRadius(size)
-    if self.components.planet_render then
-        self.components.planet_render = {size=size, cloud_size=size*1.05, atmosphere_size=size*1.2}
+    local pr = self.components.planet_render
+    if pr then
+        pr.size = size
+        pr.cloud_size = size*1.05
+        pr.atmosphere_size = size*1.2
+        local collision_size = math.sqrt((pr.size * pr.size) - (pr.distance_from_movement_plane * pr.distance_from_movement_plane)) * 1.1f;
+        self.components.physics = {type="static", size=collision_size}
     end
     return self
 end
@@ -80,7 +85,9 @@ end
 --- AI behaviors use this size to plot routes that try to avoid colliding with this Planet.
 --- Example: planet:getCollisionSize()
 function Entity:getCollisionSize()
-    --TODO
+    if self.components.physics then
+        return self.components.physics.size
+    end
     return 0.0
 end
 --- Sets this Planet's cloud radius, overriding Planet:setPlanetRadius().
@@ -96,9 +103,11 @@ end
 --- Defaults to 0.
 --- Example: planet:setDistanceFromMovementPlane(-500) -- sets the planet 0.5U below the movement plane
 function Entity:setDistanceFromMovementPlane(z)
-    if e.components.planet_render then
-        e.components.planet_render.distance_from_movement_plane = z
-        --TODO: set collision size
+    local pr = self.components.planet_render
+    if pr then
+        pr.distance_from_movement_plane = z
+        local collision_size = math.sqrt((pr.size * pr.size) - (pr.distance_from_movement_plane * pr.distance_from_movement_plane)) * 1.1f;
+        self.components.physics = {type="static", size=collision_size}
     end
     return self
 end
