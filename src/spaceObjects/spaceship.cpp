@@ -30,16 +30,6 @@
 
 
 /*TODO
-SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
-: ShipTemplateBasedObject(50, multiplayerClassName, multiplayer_significant_range)
-{
-    auto shields = entity.getComponent<Shields>();
-    if (shields)
-        shields->frequency = irandom(0, BeamWeaponSys::max_frequency);
-}
-*/
-
-/*TODO
 void SpaceShip::draw3DTransparent()
 {
     auto jump = entity.getComponent<JumpDrive>();

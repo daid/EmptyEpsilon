@@ -53,6 +53,9 @@ function Entity:setTemplate(template_name)
             crew.components.internal_repair_crew = {}
         end
     end
+    if comp.shields and template.__type ~= "station" then
+        comp.shields.frequency = irandom(0, 20)
+    end
     return self
 end
 --- [DEPRECATED]

@@ -90,11 +90,11 @@ template<> struct Convert<ScanState::State> {
     }
     static ScanState::State fromLua(lua_State* L, int idx) {
         string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "none")
+        if (str == "none" || str == "notscanned" || str == "not")
             return ScanState::State::NotScanned;
-        else if (str == "fof")
+        else if (str == "fof" || str == "friendorfoeidentified")
             return ScanState::State::FriendOrFoeIdentified;
-        else if (str == "simple")
+        else if (str == "simple" || str == "simplescan")
             return ScanState::State::SimpleScan;
         else if (str == "full" || str == "fullscan")
             return ScanState::State::FullScan;
