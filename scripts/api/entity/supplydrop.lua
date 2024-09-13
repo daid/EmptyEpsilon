@@ -4,6 +4,7 @@
 --- A SupplyDrop can also trigger a scripting function upon pickup.
 --- For a more generic object with similar collision properties, see Artifact.
 --- Example: SupplyDrop():setEnergy(500):setWeaponStorage("Homing",6)
+--- @type creation
 function SupplyDrop()
     local e = createEntity()
     e.components.transform = {}

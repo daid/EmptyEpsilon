@@ -4,6 +4,7 @@ __default_player_ship_faction = "Human Navy"
 --- A PlayerSpaceship is a SpaceShip controlled by a player crew.
 --- If a function name begins with "command", the function is equivalent to the crew taking a corresponding action.
 --- Such commands can be limited by the ship's capabilities, including systems damage, lack of power, or insufficient weapons stocks.
+--- @type creation
 function PlayerSpaceship()
     local e = createEntity()
     e.components = {

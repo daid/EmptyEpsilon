@@ -1,6 +1,7 @@
 --- An Artifact is a configurable SpaceObject that can interact with other objects via collisions or scripting.
 --- Use this to define arbitrary objects or collectible pickups in scenario scripts.
 --- Example: artifact = Artifact():setModel("artifact6"):setSpin(0.5)
+--- @type creation
 function Artifact()
     local e = createEntity()
     e.components.transform = {rotation=random(0, 360)}

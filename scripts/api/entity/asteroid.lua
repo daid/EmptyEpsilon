@@ -4,6 +4,7 @@
 --- To create a customizable object with more complex actions upon collisions, use an Artifact or SupplyDrop.
 --- For a purely decorative asteroid positioned outside of the movement plane, use a VisualAsteroid.
 --- Example: asteroid = Asteroid():setSize(150):setPosition(1000,2000)
+--- @type creation
 function Asteroid()
     local z = random(-50, 50)
     local size = random(110, 130)

@@ -4,6 +4,7 @@
 --- AI behaviors avoid BlackHoles by a 2U margin.
 --- In 3D space, a BlackHole resembles a black sphere with blue horizon.
 --- Example: black_hole = BlackHole():setPosition(1000,2000)
+--- @type creation
 function BlackHole()
     local e = createEntity()
     e.components = {

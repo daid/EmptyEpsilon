@@ -5,6 +5,7 @@
 --- Example:
 --- -- Defines a blue rectangular 200sqU zone labeled "Home" around 0,0
 --- zone = Zone():setColor(0,0,255):setPoints(-100000,100000, -100000,-100000, 100000,-100000, 100000,100000):setLabel("Home")
+--- @type creation
 function Zone()
     local e = createEntity()
     e.components = {

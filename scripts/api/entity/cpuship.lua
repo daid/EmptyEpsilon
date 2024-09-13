@@ -10,6 +10,7 @@ __default_cpu_ship_faction = "Kraylor"
 --- Example:
 --- -- Place a Fighter-class Human Navy CpuShip, order it to roam, and if it engages in combat it will fight evasively
 --- ship = CpuShip():setTemplate("Fighter"):setPosition(10000,3000):setFaction("Human Navy"):orderRoaming():setAI("evasive"):setScanned(true)
+--- @type creation
 function CpuShip()
     local e = createEntity()
     e.components = {

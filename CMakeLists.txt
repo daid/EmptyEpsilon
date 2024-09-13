@@ -735,7 +735,7 @@ if(Python3_Interpreter_FOUND)
     set(SCRIPT_REFERENCE_HTML "${PROJECT_BINARY_DIR}/script_reference.html")
     add_custom_command(
         OUTPUT "${SCRIPT_REFERENCE_HTML}"
-        COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/compile_script_docs.py "${SCRIPT_REFERENCE_HTML}"
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/script_docs/main.py "${SCRIPT_REFERENCE_HTML}"
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         COMMENT "Building script reference documentation.")
     add_custom_target(script_reference ALL DEPENDS "${SCRIPT_REFERENCE_HTML}")

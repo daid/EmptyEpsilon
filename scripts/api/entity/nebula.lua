@@ -4,6 +4,7 @@
 --- Likewise, a SpaceShip fully inside of a nebula has effectively no long-range radar functionality.
 --- In 3D space, a Nebula resembles a dense cloud of colorful gases.
 --- Example: nebula = Nebula():setPosition(1000,2000)
+--- @type creation
 function Nebula()
     local radius = 5000.0
     local e = createEntity()

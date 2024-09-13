@@ -6,6 +6,7 @@
 --- In 3D views, mines are represented by a particle effect at the center of its trigger range.
 --- To create objects with more complex collision mechanics, use an Artifact.
 --- Example: mine = Mine():setPosition(1000,1000):onDestruction(this_mine, instigator) print("Tripped a mine!") end)
+--- @type creation
 function Mine()
     local blast_range = 1000.0
     local e = createEntity()

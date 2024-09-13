@@ -4,6 +4,7 @@
 --- It's typically launched by the relay officer and can be linked to the science radar, but can also be created by scripts.
 --- PlayerSpaceships have a limited stock of ScanProbes typically replenished automatically when docked to a SpaceStation or SpaceShip with the ScanProbe restocking feature enabled.
 --- Example: probe = ScanProbe():setSpeed(1500):setLifetime(60 * 30):setTarget(10000,10000):onArrival(function() print("Probe arrived!") end)
+--- @type creation
 function ScanProbe()
     local e = createEntity()
     e.components = {

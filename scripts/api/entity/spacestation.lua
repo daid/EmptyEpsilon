@@ -6,6 +6,7 @@
 --- - It uses the scripts/comms_station.lua comms script by default.
 --- - When destroyed by damage, it awards or deducts a number of reputation points relative to its total shield strength and segments.
 --- - Any non-hostile SpaceShip can dock with it by default.
+--- @type creation
 function SpaceStation()
     local e = createEntity()
     e.components = {
