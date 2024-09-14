@@ -3,9 +3,10 @@
 ---
 --- Carrier and several player ships with turrets available for use by the players made available with this scenario script and the associated files.
 -- Type: Mission
--- Variation[Easy]: Easy goals and/or enemies
--- Variation[Hard]: Hard goals and/or enemies
--- Variation[Very Easy]: Very Easy goals and/or enemies
+-- Setting[Difficulty]: Sets the overall scenario difficulty
+-- Difficulty[Easy]: Easy goals and/or enemies
+-- Difficulty[Hard]: Hard goals and/or enemies
+-- Difficulty[Very Easy]: Very Easy goals and/or enemies
 
 -- If you find that your crew cannot resist the do not push button,
 -- change "plot4 = doNotPush" to "plot4 = nil" in this scenario file
