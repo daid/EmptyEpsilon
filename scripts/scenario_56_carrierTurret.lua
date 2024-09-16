@@ -291,6 +291,7 @@ function init()
 	addGMFunction(GMStartPlot3upgradeBeamDamage,gmPlot3upgradeBeamDamage)
 	addGMFunction(GMStartPlot3tractorDisabledShip,gmPlot3tractorDisabledShip)
 	addGMFunction(GMStartPlot3addTubeToShip,gmPlot3addTubeToShip)
+	setVariations()
 	--plot 4 choices will come eventually, just not with this release
 	wfv = "end of init"
 end
@@ -379,11 +380,11 @@ function delayFastToNormal()
 end
 --translate variations into a numeric difficulty value
 function setVariations()
-	if string.find(getScenarioVariation(),"Very Easy") then
+	if string.find(getScenarioSetting("Difficulty"),"Very Easy") then
 		difficulty = .2
-	elseif string.find(getScenarioVariation(),"Easy") then
+	elseif string.find(getScenarioSetting("Difficulty"),"Easy") then
 		difficulty = .5
-	elseif string.find(getScenarioVariation(),"Hard") then
+	elseif string.find(getScenarioSetting("Difficulty"),"Hard") then
 		difficulty = 2
 	else
 		difficulty = 1
