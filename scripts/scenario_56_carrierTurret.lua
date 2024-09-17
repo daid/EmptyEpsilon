@@ -3,9 +3,11 @@
 ---
 --- Carrier and several player ships with turrets available for use by the players made available with this scenario script and the associated files.
 -- Type: Mission
--- Variation[Easy]: Easy goals and/or enemies
--- Variation[Hard]: Hard goals and/or enemies
--- Variation[Very Easy]: Very Easy goals and/or enemies
+-- Setting[Difficulty]: Sets the overall scenario difficulty
+-- Difficulty[Very Easy]: Very Easy goals and/or enemies
+-- Difficulty[Easy]: Easy goals and/or enemies
+-- Difficulty[Normal|Default]: Normal goals and/or enemies
+-- Difficulty[Hard]: Hard goals and/or enemies
 
 -- If you find that your crew cannot resist the do not push button,
 -- change "plot4 = doNotPush" to "plot4 = nil" in this scenario file
@@ -290,6 +292,7 @@ function init()
 	addGMFunction(GMStartPlot3upgradeBeamDamage,gmPlot3upgradeBeamDamage)
 	addGMFunction(GMStartPlot3tractorDisabledShip,gmPlot3tractorDisabledShip)
 	addGMFunction(GMStartPlot3addTubeToShip,gmPlot3addTubeToShip)
+	setVariations()
 	--plot 4 choices will come eventually, just not with this release
 	wfv = "end of init"
 end
@@ -378,11 +381,11 @@ function delayFastToNormal()
 end
 --translate variations into a numeric difficulty value
 function setVariations()
-	if string.find(getScenarioVariation(),"Very Easy") then
+	if string.find(getScenarioSetting("Difficulty"),"Very Easy") then
 		difficulty = .2
-	elseif string.find(getScenarioVariation(),"Easy") then
+	elseif string.find(getScenarioSetting("Difficulty"),"Easy") then
 		difficulty = .5
-	elseif string.find(getScenarioVariation(),"Hard") then
+	elseif string.find(getScenarioSetting("Difficulty"),"Hard") then
 		difficulty = 2
 	else
 		difficulty = 1
