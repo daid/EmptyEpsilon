@@ -3431,13 +3431,15 @@ function commercialOptions()
 							if stations_sell_goods then
 								local good_sale_count = 0
 								local good_sale_list = ""
-								for good, good_data in pairs(station.comms_data.goods) do
-									if good_data.quantity ~= nil and good_data.quantity > 0 then
-										good_sale_count = good_sale_count + 1
-										if good_sale_list == "" then
-											good_sale_list = good_desc[good]
-										else
-											good_sale_list = string.format("%s, %s",good_sale_list,good_desc[good])
+								if station.comms_data.goods ~= nil then
+									for good, good_data in pairs(station.comms_data.goods) do
+										if good_data.quantity ~= nil and good_data.quantity > 0 then
+											good_sale_count = good_sale_count + 1
+											if good_sale_list == "" then
+												good_sale_list = good_desc[good]
+											else
+												good_sale_list = string.format("%s, %s",good_sale_list,good_desc[good])
+											end
 										end
 									end
 								end
@@ -3449,17 +3451,19 @@ function commercialOptions()
 								if station.comms_data.buy ~= nil then
 									local good_buy_list = ""
 									local match_good_buy_list = ""
-									for good, price in pairs(station.comms_data.buy) do
-										if good_buy_list == "" then
-											good_buy_list = good_desc[good]
-										else
-											string.format("%s, %s",good_buy_list,good_desc[good])
-										end
-										if comms_source.goods ~= nil and comms_source.goods[good] ~= nil and comms_source.goods[good] > 0 then
-											if match_good_buy_list == "" then
-												match_good_buy_list = good_desc[good]
+									if station.comms_data.buy ~= nil then
+										for good, price in pairs(station.comms_data.buy) do
+											if good_buy_list == "" then
+												good_buy_list = good_desc[good]
 											else
-												match_good_buy_list = string.format("%s, %s",match_good_buy_list,good_desc[good])
+												string.format("%s, %s",good_buy_list,good_desc[good])
+											end
+											if comms_source.goods ~= nil and comms_source.goods[good] ~= nil and comms_source.goods[good] > 0 then
+												if match_good_buy_list == "" then
+													match_good_buy_list = good_desc[good]
+												else
+													match_good_buy_list = string.format("%s, %s",match_good_buy_list,good_desc[good])
+												end
 											end
 										end
 									end
