@@ -1,7 +1,5 @@
 -- Name: Surf's Up!
--- Description: Wave after wave of enemy ships attack, each wave harder than the previous 
---- wave. Single or multiple player ships may participate. Scenario is over when the
---- friendly bases are destroyed. Loosely based on the Waves scenario.
+-- Description: Wave after wave of enemy ships attack, each wave harder than the previous wave. Single or multiple player ships may participate. Scenario is over when the friendly bases are destroyed. Loosely based on the Waves scenario. The differences between Waves and Surf's Up: Initial configuration options (faster moving enemy ships, set the start wave), random wave type (normal, hunt enemy base, formation flying, asteroid storm), services split between friendly stations, side missions to enhance stations, enemies may drop deadly warp jammers. 
 ---
 --- No victory condition. How many waves can you complete?
 ---
