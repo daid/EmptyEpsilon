@@ -6,10 +6,11 @@
 -- @script scenario_10_empty
 
 
+
 function init()
     local a = Asteroid()
     a:setPosition(500, 1000)
-    
+
     p = PlayerSpaceship()
     p:setTemplate("Atlantis")
     p:setPosition(0, 0)
