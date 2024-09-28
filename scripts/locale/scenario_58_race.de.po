@@ -1500,7 +1500,7 @@ msgstr ""
 "\n"
 "Generiere angemessene Antwort aus menschlichen Archiven.\n"
 "\n"
-":Kommen Sie und nicht in die Quere.:\n"
+":Kommen Sie uns nicht in die Quere.:\n"
 "\n"
 "Verbindung beendet."
 
