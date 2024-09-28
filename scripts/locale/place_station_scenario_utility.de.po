@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: scripts/place_station_scenario_utility.lua:294
 msgctxt "scienceDescription-station"
@@ -39,8 +39,9 @@ msgstr ""
 "Die ursprünglichen Erbauer der Station waren Fans des Wissenschaftlers und "
 "Schriftstellers Isaac Asimov aus dem späten 20. Jahrhundet. Die Station hieß "
 "zunächst Foundation, wurde aber später einfach in Asimov umbenannt. Sie "
-"begann als Sternwarte, wurde dann zu einer Versorgungsstation und "
-"entwickelte sich zu einem Bildungs- und Koordinationszentrum für die Region."
+"begann als Weltraum-Observatorium, wurde dann zu einer Versorgungsstation "
+"und entwickelte sich zu einem Bildungs- und Koordinationszentrum für die "
+"Region."
 
 #: scripts/place_station_scenario_utility.lua:334
 msgctxt "scienceDescription-station"
@@ -53,7 +54,7 @@ msgid ""
 "We manufacture warp, impulse and jump engines for the human navy fleet as "
 "well as other independent clients on a contract basis"
 msgstr ""
-"Wir stellen Warp-, Impuls- und Sprungtriebwerke für die menschliche Flotte "
+"Wir stellen Warp-, Impuls- und Sprungtriebwerke für die menschliche Navy "
 "sowie für andere unabhängige Kunden auf Vertragsbasis her."
 
 #: scripts/place_station_scenario_utility.lua:336
@@ -64,7 +65,7 @@ msgid ""
 "entire space worthy vessels. In time, it transitioned into specializeing in "
 "propulsion systems."
 msgstr ""
-"Die Station ist nach dem Astronauten aus dem späten 19. Jahrhundert benannt, "
+"Die Station ist nach dem Astronauten aus dem späten 20. Jahrhundert benannt, "
 "ebenso wie nach den fiktiven Stationen, die ihm folgten. Die Station baute "
 "zunächst ganze weltraumtaugliche Schiffe. Mit der Zeit spezialisierte sie "
 "sich auf Antriebssysteme."
@@ -123,7 +124,7 @@ msgstr "Sensor-Komponenten"
 #: scripts/place_station_scenario_utility.lua:451
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture sensor components and systems"
-msgstr "Wir erforschen und fertigen Sensor-Komponentenund -systeme"
+msgstr "Wir erforschen und fertigen Sensor-Komponenten und -Systeme"
 
 #: scripts/place_station_scenario_utility.lua:452
 msgctxt "stationStory-comms"
@@ -323,7 +324,7 @@ msgstr ""
 #: scripts/place_station_scenario_utility.lua:823
 msgctxt "scienceDescription-station"
 msgid "Observatory and stellar mapping"
-msgstr "Sternwarte und stellare Kartierung"
+msgstr "Observatorium und stellare Kartierung"
 
 #: scripts/place_station_scenario_utility.lua:824
 msgctxt "stationGeneralInfo-comms"
@@ -332,7 +333,9 @@ msgid ""
 "asteroids. Look out! Just kidding"
 msgstr ""
 "Wir untersuchen den Kosmos und kartieren stellare Phänomene. Wir verfolgen "
-"auch bewegliche Asteroiden. Passt auf! Nur ein Scherz ;)."
+"auch bewegliche Asteroiden... Passt auf! \n"
+"...\n"
+"Nur ein Scherz ;)."
 
 #: scripts/place_station_scenario_utility.lua:825
 msgctxt "stationStory-comms"
@@ -370,7 +373,7 @@ msgstr "Sport und Unterhaltung in der Schwerelosigkeit"
 #: scripts/place_station_scenario_utility.lua:898
 msgctxt "stationGeneralInfo-comms"
 msgid "Come take in a game or two or perhaps see a show"
-msgstr "Besuchen Sie ein oder zwei Spiele oder vielleicht eine Vorstellung."
+msgstr "Besuchen Sie ein oder zwei Spiele oder vielleicht auch eine Show."
 
 #: scripts/place_station_scenario_utility.lua:899
 msgctxt "stationStory-comms"
@@ -428,8 +431,8 @@ msgid ""
 "construct shields due to the physics involved."
 msgstr ""
 "Diese Station wurde nach einem der ersten Forscher auf dem Gebiet der "
-"Schildtechnologie, Alexander Toohie, benannt, als die Konstruktion von "
-"Schilden aufgrund der Physik noch als unpraktisch galt."
+"Schildtechnologie, Alexander Toohie, benannt. Damals galt die Konstruktion "
+"von Schilden noch als physikalisch unpraktisch."
 
 #: scripts/place_station_scenario_utility.lua:1013
 msgctxt "scienceDescription-station"
@@ -453,9 +456,8 @@ msgid ""
 "docile by software generated illusion"
 msgstr ""
 "Die Station ist nach einem fiktiven Software-Ingenieur aus einem Film des "
-"späten 20. Jahrhunderts benannt, in dem die Menschheit unwissentlich von "
-"Außerirdischen erobert und durch softwaregenerierte Illusionen gefügig "
-"gehalten wird."
+"späten 20. Jahrhunderts benannt, in dem die Menschheit unwissentlich erobert "
+"und durch softwaregenerierte Illusionen gefügig gehalten wird."
 
 #: scripts/place_station_scenario_utility.lua:1049
 msgctxt "scienceDescription-station"
@@ -567,12 +569,12 @@ msgstr ""
 #: scripts/place_station_scenario_utility.lua:1673
 msgctxt "scienceDescription-station"
 msgid "Android components"
-msgstr "Android-Komponenten"
+msgstr "Androiden-Komponenten"
 
 #: scripts/place_station_scenario_utility.lua:1233
 msgctxt "stationGeneralInfo-comms"
 msgid "Supplier of android components, programming and service"
-msgstr "Anbieter von Android-Komponenten, Programmierung und Service."
+msgstr "Anbieter von Androiden-Komponenten, Programmierung und Service."
 
 #: scripts/place_station_scenario_utility.lua:1234
 msgctxt "stationStory-comms"
@@ -619,13 +621,13 @@ msgstr "Handel und Glücksspiel"
 msgctxt "stationGeneralInfo-comms"
 msgid "Come play some games and shop. House take does not exceed 4 percent"
 msgstr ""
-"Besuchen Sie uns, um zu spielen und einzukaufen. Das haus nimmt nicht mehr "
+"Besuchen Sie uns, um zu spielen und einzukaufen. Das Haus nimmt nicht mehr "
 "als 4 Prozent."
 
 #: scripts/place_station_scenario_utility.lua:1339
 msgctxt "scienceDescription-station"
 msgid "Xenopsychology training"
-msgstr "Fremdenpsychologie-Ausbildung"
+msgstr "Xenopsychologie-Ausbildung"
 
 #: scripts/place_station_scenario_utility.lua:1340
 msgctxt "stationGeneralInfo-comms"
@@ -713,8 +715,8 @@ msgctxt "stationGeneralInfo-comms"
 msgid ""
 "The premeire academy for leadership and diplomacy training in the region"
 msgstr ""
-"Die führende Akademie für die Ausbildung von Führungskräften und Diplomatie "
-"in der Region."
+"Die führende Akademie für Diplomatie-Ausbildung und Ausbildung von "
+"Führungskräften in der Region. "
 
 #: scripts/place_station_scenario_utility.lua:1527
 msgctxt "stationStory-comms"
@@ -868,8 +870,8 @@ msgid ""
 "We learned several of our critical industrial processes from the Tokra race, "
 "so we honor our fortune by naming the station after them"
 msgstr ""
-"Wir haben einige unserer kritischen industriellen Prozesse von der Rasse der "
-"Tokra gelernt, daher ehren wir unser Glück, indem wir die Station nach ihnen "
+"Wir haben einige unserer kritischen industriellen Prozesse von einer Spezies "
+"namens Tokra gelernt, daher ehren sie, indem wir die Station nach ihnen "
 "benennen."
 
 #: scripts/place_station_scenario_utility.lua:1813
