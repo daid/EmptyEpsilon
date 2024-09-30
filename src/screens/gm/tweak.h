@@ -57,7 +57,7 @@ private:
     GuiToggleButton* shares_energy_with_docked_toggle;
     GuiToggleButton* repairs_docked_toggle;
     GuiToggleButton* restocks_scan_probes_toggle;
-    GuiToggleButton* restocks_cpuship_weapons_toggle;
+    GuiSelector* restocks_cpuship_weapons_selector;
     GuiSlider* hull_max_slider;
     GuiSlider* hull_slider;
     GuiToggleButton* can_be_destroyed_toggle;
