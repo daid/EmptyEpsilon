@@ -748,6 +748,6 @@ set(CPACK_INSTALL_CMAKE_PROJECTS
 include(CPack)
 
 if(UNIX AND NOT APPLE AND NOT STEAMSDK)
-  install(FILES EmptyEpsilon.desktop DESTINATION "share/applications")
-  install(FILES logo.png DESTINATION "share/icons/hicolor/1024x1024/apps" RENAME "EmptyEpsilon.png")
+  install(FILES io.github.daid.EmptyEpsilon.desktop DESTINATION "share/applications")
+  install(FILES logo512.png DESTINATION "share/icons/hicolor/512x512/apps" RENAME "io.github.daid.EmptyEpsilon.png")
 endif()
