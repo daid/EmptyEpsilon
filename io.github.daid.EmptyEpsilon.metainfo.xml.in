@@ -64,11 +64,6 @@
   </screenshots>
   
   <releases>
-    <release version="2024.08.09" date="2024-08-09">
-      <url type="details">https://github.com/daid/EmptyEpsilon/releases/tag/EE-2024.08.09</url>
-      <description>
-        <p>Add a quick&amp;dirty way to get callback errors</p>
-      </description>
-    </release>
+    <release version="@PROJECT_VERSION@" date="@PROJECT_VERSION_MAJOR@-@PROJECT_VERSION_MINOR@-@PROJECT_VERSION_PATCH@" />
   </releases>
 </component>
