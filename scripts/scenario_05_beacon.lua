@@ -221,8 +221,35 @@ Your translator has difficulty translating the message, but it seems to come dow
         )
     end
 end
-
 function missionAmbushed(delta)
+    local briefing_for_next_section = _("incCall",
+        [[Good job dealing with those Exuari scum. The criminals are safely in our custody, and we'll send a protection detail to Refugee-X.
+
+We extracted some vital info from the Exuari. In the next transport convoy toward Research-1, an Exuari death squad is hiding in one of the ships. The transport detail is heading in from sector D7. Seek them out and scan the ships to find the Exuari transport.]])
+
+    --- Sets up the next mission state: Spawns ships
+    local function SetupNextMissionState()
+        x, y = neutral_station:getPosition()
+        CpuShip():setTemplate("Phobos T3"):setFaction("Human Navy"):setPosition(x - 1000, y - 1000):orderDefendTarget(
+            neutral_station):setCommsScript("")
+        CpuShip():setTemplate("Nirvana R5"):setFaction("Human Navy"):setPosition(x + 1000, y + 1000):orderDefendTarget(
+            neutral_station):setCommsScript("")
+
+        transports = {}
+
+        for n = 1, 5 do
+            table.insert(transports,
+                CpuShip():setTemplate("Personnel Freighter 2"):setFaction("Independent"):setPosition(
+                    50000 + random(-10000, 10000), -30000 + random(-10000, 10000)))
+        end
+
+        transport_target = CpuShip():setTemplate("Personnel Freighter 2"):setFaction("Exuari"):setPosition(
+            50000 + random(-10000, 10000), -30000 + random(-10000, 10000))
+    end
+
+    local all_ambush_ships_are_dead = not ambush_main:isValid() and not ambush_side1:isValid() and
+        not ambush_side2:isValid()
+
     if player:isDocked(main_station) then
         local refilled = false
 
@@ -235,12 +262,12 @@ function missionAmbushed(delta)
             refilled = true
         end
 
-        if not ambush_main:isValid() and not ambush_side1:isValid() and not ambush_side2:isValid() then
-            message = _("incCall", [[Good job dealing with those Exuari scum. The criminals are safely in our custody, and we'll send a protection detail to Refugee-X.
+        if all_ambush_ships_are_dead then
+            local message = briefing_for_next_section
 
-We extracted some vital info from the Exuari. In the next transport convoy toward Research-1, an Exuari death squad is hiding in one of the ships. The transport detail is heading in from sector D7. Seek them out and scan the ships to find the Exuari transport.]])
             if refilled then
-                message = message .. _("incCall", [[We have refitted your nukes and EMPs.]]) .. _("incCall", [[Awesome job taking out the Exuari without those.]])
+                message = message ..
+                    _("incCall", [[We have refitted your nukes and EMPs. Awesome job taking out the Exuari without those.]])
                 refilled = false
             end
 
@@ -248,28 +275,27 @@ We extracted some vital info from the Exuari. In the next transport convoy towar
                 player,
                 message
             )
-
-            x, y = neutral_station:getPosition()
-            CpuShip():setTemplate("Phobos T3"):setFaction("Human Navy"):setPosition(x - 1000, y - 1000):orderDefendTarget(neutral_station):setCommsScript("")
-            CpuShip():setTemplate("Nirvana R5"):setFaction("Human Navy"):setPosition(x + 1000, y + 1000):orderDefendTarget(neutral_station):setCommsScript("")
-
-            transports = {}
-
-            for n = 1, 5 do
-                table.insert(transports, CpuShip():setTemplate("Personnel Freighter 2"):setFaction("Independent"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000)))
-            end
-
-            transport_target = CpuShip():setTemplate("Personnel Freighter 2"):setFaction("Exuari"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000))
-
+            SetupNextMissionState()
             mission_state = missionGotoTransport
         end
 
         if refilled then
             main_station:sendCommsMessage(
                 player,
-                _("incCall", [[We have refitted your nukes and EMPs.]]) .. _("incCall", [[Now to get those Exuari!]])
+                _("incCall", [[We have refitted your nukes and EMPs. Now to get those Exuari!]])
             )
         end
+    elseif player.old_nuke_max == nil and all_ambush_ships_are_dead then
+        -- The Epsilon refitted the nukes and then went back to destroy the remaining ambush ships.
+        -- Call them immediately after destroying the last ambush ship.
+
+        main_station:sendCommsMessage(
+            player,
+            briefing_for_next_section
+        )
+
+        SetupNextMissionState()
+        mission_state = missionGotoTransport
     end
 end
 
