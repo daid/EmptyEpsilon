@@ -239,7 +239,7 @@ end
 --- Returns this SpaceObject's faction reputation points.
 --- Example: obj:getReputationPoints()
 function Entity:getReputationPoints()
-    if self.components.faction and self.components.faction.entity and self.components.faction.entity.faction_info then
+    if self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
         return self.components.faction.entity.components.faction_info.reputation_points
     end
 end
