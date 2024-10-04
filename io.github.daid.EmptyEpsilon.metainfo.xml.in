@@ -6,7 +6,7 @@
   <name>EmptyEpsilon</name>
   <summary>Spaceship bridge simulator game</summary>
   
-  <!-- of course I just copied the stuff from the website, daid needs to agree first <metadata_license>FSFAP</metadata_license>-->
+  <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0-only AND LicenseRef-TurboSquid-Royalty-Free-License AND OFL-1.1 AND Apache-2.0</project_license>
   
   <developer id="io.github.daid">
