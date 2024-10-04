@@ -64,6 +64,6 @@
   </screenshots>
   
   <releases>
-    <release version="@PROJECT_VERSION@" date="@PROJECT_VERSION_MAJOR@-@PROJECT_VERSION_MINOR@-@PROJECT_VERSION_PATCH@" />
+    <release version="@MAJOR@.@MINOR@.@PATCH@" date="@MAJOR@-@MINOR@-@PATCH@" />
   </releases>
 </component>
