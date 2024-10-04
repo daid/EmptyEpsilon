@@ -747,7 +747,7 @@ set(CPACK_INSTALL_CMAKE_PROJECTS
 
 include(CPack)
 
-configure_file(io.github.daid.EmptyEpsilon.metainfo.xml io.github.daid.EmptyEpsilon.metainfo.xml.in)
+configure_file(io.github.daid.EmptyEpsilon.metainfo.xml.in io.github.daid.EmptyEpsilon.metainfo.xml)
 
 if(UNIX AND NOT APPLE AND NOT STEAMSDK)
   install(FILES io.github.daid.EmptyEpsilon.desktop DESTINATION "share/applications")
