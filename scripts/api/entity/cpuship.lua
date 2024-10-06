@@ -16,7 +16,7 @@ function CpuShip()
     e.components = {
         transform = {rotation=random(0, 360)},
         ai_controller = {new_name="default", orders="roaming"},
-        scan_state = {complexity=2, depth=2, allow_simple_scan=true},
+        scan_state = {allow_simple_scan=true},
         callsign = {callsign=generateRandomCallSign()},
     }
     e:setFaction(__default_cpu_ship_faction)

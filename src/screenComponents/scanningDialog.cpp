@@ -48,10 +48,8 @@ void GuiScanningDialog::onDraw(sp::RenderTarget& target)
 {
     updateSignal();
 
-    auto ss = my_spaceship.getComponent<ScienceScanner>();
-    if (!ss) { hide(); return; }
-    auto scanstate = ss->target.getComponent<ScanState>();
-    if (scanstate && scanstate->complexity > 0)
+    auto [complexity, depth] = getScanComplexityDepth();
+    if (complexity > 0 && depth > 0)
     {
         if (!box->isVisible())
         {
@@ -63,7 +61,7 @@ void GuiScanningDialog::onDraw(sp::RenderTarget& target)
         if (locked && engine->getElapsedTime() - lock_start_time > lock_delay)
         {
             scan_depth += 1;
-            if (scan_depth >= scanstate->depth)
+            if (scan_depth >= depth)
             {
                 my_player_info->commandScanDone();
                 lock_start_time = engine->getElapsedTime() - 1.0f;
@@ -109,23 +107,16 @@ void GuiScanningDialog::onUpdate()
 
 void GuiScanningDialog::setupParameters()
 {
-    auto ss = my_spaceship.getComponent<ScienceScanner>();
-    if (!ss)
-        return;
-    if (!ss->target)
-        return;
-    auto scanstate = ss->target.getComponent<ScanState>();
-    if (!scanstate)
-        return;
+    auto [complexity, depth] = getScanComplexityDepth();
 
     for(int n=0; n<max_sliders; n++)
     {
-        if (n < scanstate->complexity)
+        if (n < complexity)
             sliders[n]->show();
         else
             sliders[n]->hide();
     }
-    box->setSize(500, 265 + 70 * scanstate->complexity);
+    box->setSize(500, 265 + 70 * complexity);
 
     for(int n=0; n<max_sliders; n++)
     {
@@ -136,7 +127,7 @@ void GuiScanningDialog::setupParameters()
     }
     updateSignal();
 
-    string label = "[" + string(scan_depth + 1) + "/" + string(scanstate->depth) + "] ";
+    string label = "[" + string(scan_depth + 1) + "/" + string(depth) + "] ";
     switch(irandom(0, 10))
     {
     default:
@@ -193,4 +184,51 @@ void GuiScanningDialog::updateSignal()
     signal_quality->setNoiseError(noise);
     signal_quality->setPeriodError(period);
     signal_quality->setPhaseError(phase);
+}
+
+std::pair<int, int> GuiScanningDialog::getScanComplexityDepth()
+{
+    auto ss = my_spaceship.getComponent<ScienceScanner>();
+    if (!ss)
+        return {0, 0};
+    if (!ss->target)
+        return {0, 0};
+    auto scanstate = ss->target.getComponent<ScanState>();
+    if (!scanstate)
+        return {0, 0};
+    auto complexity = scanstate->complexity;
+    auto depth = scanstate->depth;
+    if (complexity < 0) {
+        switch(gameGlobalInfo->scanning_complexity) {
+        case SC_None:
+        case SC_Simple:
+            complexity = 1;
+            break;
+        case SC_Normal:
+            if (scanstate->getStateFor(my_spaceship) == ScanState::State::SimpleScan)
+                complexity = 2;
+            else
+                complexity = 1;
+            break;
+        case SC_Advanced:
+            if (scanstate->getStateFor(my_spaceship) == ScanState::State::SimpleScan)
+                complexity = 3;
+            else
+                complexity = 2;
+            break;
+        }
+    }
+    if (depth < 0) {
+        switch(gameGlobalInfo->scanning_complexity) {
+        case SC_None:
+        case SC_Simple:
+            depth = 1;
+            break;
+        case SC_Normal:
+        case SC_Advanced:
+            depth = 2;
+            break;
+        }
+    }
+    return {complexity, depth};
 }

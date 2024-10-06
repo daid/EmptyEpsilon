@@ -1,5 +1,6 @@
 #include "scanning.h"
 #include "components/scanning.h"
+#include "gameGlobalInfo.h"
 #include "multiplayer_server.h"
 
 #include <ecs/query.h>
@@ -11,7 +12,7 @@ void ScanningSystem::update(float delta)
         if (auto ss = scanner.target.getComponent<ScanState>()) {
             // If the scan setting or a target's scan complexity is none/0,
             // complete the scan after a delay.
-            if (ss->complexity < 1)
+            if (ss->complexity == 0 || (ss->complexity < 0 && gameGlobalInfo->scanning_complexity == SC_None))
             {
                 scanner.delay -= delta;
                 if (scanner.delay < 0 && game_server)
