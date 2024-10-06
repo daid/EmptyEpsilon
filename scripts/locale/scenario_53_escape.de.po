@@ -762,7 +762,7 @@ msgstr "Klasse-M-Planet"
 #: scripts/scenario_53_escape.lua:608
 msgctxt "scienceDescription-station"
 msgid "Malastare communications network hub"
-msgstr "Kommunikations-netzwerks-Knotenpunkt \"Malastare\""
+msgstr "Kommunikations-netzwerks-Knotenpunkt von Malastare"
 
 #: scripts/scenario_53_escape.lua:1309
 msgctxt "station-comms"
@@ -1381,7 +1381,7 @@ msgstr "Verfügbarer Platz: %i, Verfügbar Ruf: %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Kaufen Sie 1 %s für %i Ruf"
+msgstr "Kaufe 1 %s für %i Ruf"
 
 #: scripts/scenario_53_escape.lua:1812
 #, lua-format
