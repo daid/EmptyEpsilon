@@ -70,6 +70,11 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         }
     });
     object_list->setPosition(320, 20)->setSize(300, 600);
+    for(const auto& info : spawn_list) {
+        if (info.category == category_selector->getSelectionValue()) {
+            object_list->addEntry(info.label, info.label);
+        }
+    }
 
     (new GuiButton(box, "CLOSE_BUTTON", tr("button", "Cancel"), [this]() {
         this->hide();
