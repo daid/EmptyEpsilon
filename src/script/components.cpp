@@ -334,6 +334,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(Hull, max);
     BIND_MEMBER(Hull, allow_destruction);
     BIND_MEMBER(Hull, on_destruction);
+    BIND_MEMBER(Hull, on_taking_damage);
     BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_energy", (1 << int(DamageType::Energy)));
     BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_kinetic", (1 << int(DamageType::Kinetic)));
     BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_emp", (1 << int(DamageType::EMP)));
