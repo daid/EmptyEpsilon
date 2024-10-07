@@ -123,6 +123,7 @@ private:
     int callsign_counter;
 
     int main_script_error_count = 0;
+    static constexpr int max_repeated_script_errors = 5;
 
     constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
 };

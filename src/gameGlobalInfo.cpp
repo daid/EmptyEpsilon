@@ -101,12 +101,12 @@ void GameGlobalInfo::update(float delta)
     }
     elapsed_time += delta;
 
-    if (main_scenario_script && main_script_error_count < 5) {
+    if (main_scenario_script && main_script_error_count < max_repeated_script_errors) {
         auto res = main_scenario_script->call<void>("update", delta);
         if (res.isErr() && res.error() != "Not a function") {
             LuaConsole::checkResult(res);
             main_script_error_count += 1;
-            if (main_script_error_count == 5) {
+            if (main_script_error_count == max_repeated_script_errors) {
                 LuaConsole::addLog("5 repeated script update errors, stopping updates.");
             }
         } else {
@@ -327,6 +327,10 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     if (res.isOk()) {
         res = main_scenario_script->call<void>("init");
         LuaConsole::checkResult(res);
+        if (res.isErr()) {
+            main_script_error_count = max_repeated_script_errors;
+            LuaConsole::addLog("init() function failed, not going to call update()");
+        }
     }
 
     if (PreferencesManager::get("game_logs", "1").toInt())
