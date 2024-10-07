@@ -27,6 +27,7 @@
 #include "components/target.h"
 #include "components/shields.h"
 #include "components/coolant.h"
+#include "components/beamweapon.h"
 #include "components/internalrooms.h"
 #include "components/zone.h"
 #include "systems/jumpsystem.h"
@@ -878,6 +879,33 @@ void luaCommandSetAutoRepair(sp::ecs::Entity ship, bool enabled) {
         ir->auto_repair_enabled = enabled;
 }
 
+void luaCommandSetBeamFrequency(sp::ecs::Entity ship, int frequency) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetBeamFrequency(frequency); return; }
+    if (auto beamweapons = ship.getComponent<BeamWeaponSys>())
+        beamweapons->frequency = std::clamp(frequency, 0, BeamWeaponSys::max_frequency);
+}
+
+void luaCommandSetBeamSystemTarget(sp::ecs::Entity ship, ShipSystem::Type type) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetBeamSystemTarget(type); return; }
+    if (auto beamweapons = ship.getComponent<BeamWeaponSys>())
+        beamweapons->system_target = type;
+}
+
+void luaCommandSetShieldFrequency(sp::ecs::Entity ship, int frequency) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetShieldFrequency(frequency); return; }
+    auto shields = ship.getComponent<Shields>();
+    if (shields && shields->calibration_delay <= 0.0f && frequency != shields->frequency)
+    {
+        shields->frequency = frequency;
+        shields->calibration_delay = shields->calibration_time;
+        shields->active = false;
+        if (shields->frequency < 0)
+            shields->frequency = 0;
+        if (shields->frequency > BeamWeaponSys::max_frequency)
+            shields->frequency = BeamWeaponSys::max_frequency;
+    }
+}
+
 void setupSubEnvironment(sp::script::Environment& env)
 {
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
@@ -1026,10 +1054,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandSendComm", &luaCommandSendComm);
     env.setGlobal("commandSendCommPlayer", &luaCommandSendCommPlayer);
     env.setGlobal("commandSetAutoRepair", &luaCommandSetAutoRepair);
-    /*TODO
     env.setGlobal("commandSetBeamFrequency", &luaCommandSetBeamFrequency);
     env.setGlobal("commandSetBeamSystemTarget", &luaCommandSetBeamSystemTarget);
     env.setGlobal("commandSetShieldFrequency", &luaCommandSetShieldFrequency);
+    /*TODO
     env.setGlobal("commandAddWaypoint", &luaCommandAddWaypoint);
     env.setGlobal("commandRemoveWaypoint", &luaCommandRemoveWaypoint);
     env.setGlobal("commandMoveWaypoint", &luaCommandMoveWaypoint);
