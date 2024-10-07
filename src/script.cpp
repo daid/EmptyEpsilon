@@ -28,9 +28,11 @@
 #include "components/shields.h"
 #include "components/coolant.h"
 #include "components/internalrooms.h"
+#include "components/zone.h"
 #include "systems/jumpsystem.h"
 #include "systems/missilesystem.h"
 #include "systems/docking.h"
+#include "math/centerOfMass.h"
 
 
 /// void require(string filename)
@@ -340,6 +342,15 @@ static int luaSectorToXY(lua_State* L)
     lua_pushnumber(L, x);
     lua_pushnumber(L, y);
     return 2;
+}
+
+static bool luaIsInsideZone(float x, float y, sp::ecs::Entity e)
+{
+    auto zone = e.getComponent<Zone>();
+    if (!zone) return false;
+    auto t = e.getComponent<sp::Transform>();
+    if (!t) return false;
+    return insidePolygon(zone->outline, t->getPosition() - glm::vec2(x, y));
 }
 
 static void luaSetBanner(string banner)
@@ -920,6 +931,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// x,y = sectorToXY("zz-23") -- x = -560000, y = -120000
     /// x,y = sectorToXY("BA12") -- x = 140000, y = 940000
     env.setGlobal("sectorToXY", &luaSectorToXY);
+    env.setGlobal("isInsideZone", &luaIsInsideZone);
     /// void setBanner(string banner)
     /// Displays a scrolling banner containing the given text on the cinematic and top-down views.
     /// Example: setBanner("You will soon die!")
@@ -1035,7 +1047,6 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("hasPlayerCrewAtPosition", &luaHasPlayerAtPosition);
     env.setGlobal("setPlayerShipCustomFunction", &luaSetPlayerShipCustomFunction);
     env.setGlobal("removePlayerShipCustomFunction", &luaRemovePlayerShipCustomFunction);
-
 
     env.setGlobal("addGMFunction", &luaAddGMFunction);
     env.setGlobal("clearGMFunctions", &luaClearGMFunctions);

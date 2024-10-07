@@ -51,7 +51,7 @@ function Entity:getLabel()
 end
 --- Returns whether the given SpaceObject is inside this Zone.
 --- Example: zone:isInside(obj) -- returns true if `obj` is within the zone's bounds
-function Entity:isInside()
-    --TODO { if (!obj) return false; return insidePolygon(outline, obj->getPosition() - getPosition()); }
-    return false
+function Entity:isInside(obj)
+    local x, y = obj:getPosition()
+    return isInsideZone(x, y, self)
 end
