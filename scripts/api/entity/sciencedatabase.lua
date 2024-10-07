@@ -206,3 +206,29 @@ function Entity:setModelDataName(model_data_name)
     end
     return self
 end
+
+
+--- ScienceDatabase queryScienceDatabase(...)
+--- Returns the first ScienceDatabase entry with a matching case-insensitive name within the ScienceDatabase hierarchy.
+--- You must provide the full path to the entry by using multiple arguments, starting with the top-level entry.
+--- Returns nil if no entry is found.
+--- Example: queryScienceDatabase("weapons", "mine") -- returns the entry named "Mine" with the parent named "Weapons"
+function queryScienceDatabase(...)
+    local names = {...}
+    local db_entities = getEntitiesWithComponent("science_database")
+
+    local parent = nil
+    for idx, name in ipairs(names) do
+        name = string.lower(name)
+        local found = false
+        for db_idx, db in ipairs(db_entities) do
+            if ((parent == nil and not db.components.science_database.parent.valid) or parent == db.components.science_database.parent) and string.lower(db.components.science_database.name) == name then
+                parent = db
+                found = true
+                break
+            end
+        end
+        if not found then return nil end
+    end
+    return parent
+end
