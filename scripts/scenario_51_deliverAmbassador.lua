@@ -18,13 +18,15 @@ require("spawn_ships_scenario_utility.lua")
 require("control_code_scenario_utility.lua")
 
 function init()
-	scenario_version = "5.0.2"
-	ee_version = "2023.06.17"
+	scenario_version = "5.0.3"
+	ee_version = "2024.08.09"
 	print(string.format("    ----    Scenario: Deliver Ambassador Gremus    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
-	print(_VERSION)
+	if _VERSION ~= nil then
+		print(_VERSION)
+	end
 	playerCallSign = "Carolina"
 	player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Flavia P.Falcon")
-	player:setPosition(22400, 18200):setCallSign(playerCallSign)
+	player:setPosition(22400, 18200):setCallSign(playerCallSign):setHeading(90)
 	player.location_help = {}
 	player.report_help = {}
 	-- Create various stations of various size, purpose and faction.
