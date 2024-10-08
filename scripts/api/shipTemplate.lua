@@ -121,6 +121,7 @@ function ShipTemplate:setType(template_type)
     if template_type == "station" then
         if self.docking_bay == nil then self.docking_bay = {} end
         self.docking_bay.repair = true
+        self.docking_bay.share_energy = true
         if self.radar_trace.icon == "radar/ship.png" then
             self.radar_trace.icon = "radar/blip.png"
         end
