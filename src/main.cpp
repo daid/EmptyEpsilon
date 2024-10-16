@@ -180,6 +180,16 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("mod") != "")
     {
         string mod = PreferencesManager::get("mod");
+        if (getenv("XDG_DATA_HOME"))
+        {
+            new DirectoryResourceProvider(string(getenv("XDG_DATA_HOME")) + "/emptyepsilon/resources/mods/" + mod);
+            PackResourceProvider::addPackResourcesForDirectory(string(getenv("XDG_DATA_HOME")) + "/emptyepsilon/resources/mods/" + mod);
+        }
+        else if (getenv("HOME"))
+        {
+            new DirectoryResourceProvider(string(getenv("HOME")) + "/.local/share/emptyepsilon/resources/mods/" + mod);
+            PackResourceProvider::addPackResourcesForDirectory(string(getenv("HOME")) + "/.local/share/emptyepsilon/resources/mods/" + mod);
+        }
         if (getenv("HOME"))
         {
             new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
@@ -192,6 +202,18 @@ int main(int argc, char** argv)
     new DirectoryResourceProvider("resources/");
     new DirectoryResourceProvider("scripts/");
     PackResourceProvider::addPackResourcesForDirectory("packs/");
+    if (getenv("XDG_DATA_HOME"))
+    {
+        new DirectoryResourceProvider(string(getenv("XDG_DATA_HOME")) + "/emptyepsilon/resources/");
+        new DirectoryResourceProvider(string(getenv("XDG_DATA_HOME")) + "/emptyepsilon/scripts/");
+        PackResourceProvider::addPackResourcesForDirectory(string(getenv("XDG_DATA_HOME")) + "/emptyepsilon/packs/");
+    }
+    else if (getenv("HOME"))
+    {
+        new DirectoryResourceProvider(string(getenv("HOME")) + "/.local/share/emptyepsilon/resources/");
+        new DirectoryResourceProvider(string(getenv("HOME")) + "/.local/share/emptyepsilon/scripts/");
+        PackResourceProvider::addPackResourcesForDirectory(string(getenv("HOME")) + "/.local/share/emptyepsilon/packs/");
+    }
     if (getenv("HOME"))
     {
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
