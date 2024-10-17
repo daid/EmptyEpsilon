@@ -636,9 +636,9 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
             // inside the revealed radius. If so, reveal the object on the map.
             for(auto entity2 : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r)))
             {
-                //TODO: This isn't great, as not everything will have radar trace attached.
+                //TODO: This isn't great, as not everything will collision attached...
                 auto trace = entity2.getComponent<RadarTrace>();
-                float r2 = trace ? trace->radius * scale : 300.0f;
+                float r2 = r + (trace ? trace->radius : 300.0f);
                 if (auto t2 = entity2.getComponent<sp::Transform>()) {
                     if (glm::length2(transform.getPosition() - t2->getPosition()) < r2*r2)
                         visible_objects.set(entity2.getIndex());
