@@ -30,13 +30,13 @@ ScenarioInfo::ScenarioInfo(string filename)
             line = line.substr(3).strip();
             value = value + "\n" + line;
         }else{
+            addKeyValue(key, value);
             line = line.substr(2).strip();
             if (line.find(":") < 0)
             {
                 key = "";
                 continue;
             }
-            addKeyValue(key, value);
             key = line.substr(0, line.find(":")).strip();
             value = line.substr(line.find(":") + 1).strip();
         }

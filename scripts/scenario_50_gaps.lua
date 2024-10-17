@@ -445,13 +445,13 @@ function buildStations()
 	for _, enemy in ipairs(hf) do
 		enemy:orderDefendTarget(pStation)
 	end
-	stationFaction = "Ktlitan"
+	stationFaction = "Ktlitans"
 	psx = -60000
 	si = math.random(1,#placeEnemyStation)
 	pStation = placeEnemyStation[si]()
 	table.remove(placeEnemyStation,si)
 	table.insert(enemyStationList,pStation)
-	hf = spawnEnemies(psx,psy,10,"Ktlitan")
+	hf = spawnEnemies(psx,psy,10,"Ktlitans")
 	for _, enemy in ipairs(hf) do
 		enemy:orderDefendTarget(pStation)
 	end

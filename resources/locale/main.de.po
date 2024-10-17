@@ -83,12 +83,12 @@ msgctxt "database"
 msgid "Size"
 msgstr "Größe"
 
-#: src/scienceDatabase.cpp:513 src/scienceDatabase.cpp:615
+#: src/scienceDatabase.cpp:513 src/scienceDatabase.cpp:619
 msgctxt "database"
 msgid "Shield"
 msgstr "Schilde"
 
-#: src/scienceDatabase.cpp:516 src/scienceDatabase.cpp:618
+#: src/scienceDatabase.cpp:516 src/scienceDatabase.cpp:622
 msgid "Hull"
 msgstr "Hülle"
 
@@ -96,6 +96,12 @@ msgstr "Hülle"
 msgctxt "database"
 msgid "Move speed"
 msgstr "Geschwindigkeit"
+
+#: src/scienceDatabase.cpp:520 src/scienceDatabase.cpp:521
+#: src/scienceDatabase.cpp:529
+msgctxt "database"
+msgid "{speed} u/min"
+msgstr "{speed} u/min"
 
 #: src/scienceDatabase.cpp:521
 msgctxt "database"
@@ -107,55 +113,65 @@ msgctxt "database"
 msgid "Turn speed"
 msgstr "Wendigkeit"
 
-#: src/scienceDatabase.cpp:528
+#: src/scienceDatabase.cpp:524
+msgctxt "database"
+msgid "{turnspeed} deg/sec"
+msgstr "{turnspeed} Grad/Sek."
+
+#: src/scienceDatabase.cpp:529
 msgctxt "database"
 msgid "Warp speed"
 msgstr "Warpgeschwindigkeit"
 
-#: src/scienceDatabase.cpp:532
+#: src/scienceDatabase.cpp:533
 msgctxt "database"
 msgid "Jump range"
 msgstr "Sprungreichweite"
 
-#: src/scienceDatabase.cpp:540
+#: src/scienceDatabase.cpp:533
+msgctxt "database"
+msgid "{mindistance} - {maxdistance} u"
+msgstr "{mindistance} - {maxdistance} u"
+
+#: src/scienceDatabase.cpp:544
 msgid "{direction} beam weapon"
 msgstr "Laser {direction}"
 
-#: src/scienceDatabase.cpp:541
+#: src/scienceDatabase.cpp:545
 msgctxt "database"
 msgid "{damage} Dmg / {interval} sec"
-msgstr "{damage} Schaden / {interval} sek"
+msgstr "{damage} Schaden / {interval} Sek."
 
-#: src/scienceDatabase.cpp:551
+#: src/scienceDatabase.cpp:555
 msgctxt "database"
 msgid "{direction} tube"
 msgstr "Raketen {direction}"
 
-#: src/scienceDatabase.cpp:554
+#: src/scienceDatabase.cpp:558
 msgctxt "database"
 msgid "{direction} small tube"
 msgstr "kl. Raketen {direction}"
 
-#: src/scienceDatabase.cpp:558
+#: src/scienceDatabase.cpp:562
 msgctxt "database"
 msgid "{direction} large tube"
 msgstr "gr. Raketen {direction}"
 
-#: src/scienceDatabase.cpp:562
+#: src/scienceDatabase.cpp:566
 msgctxt "database"
 msgid "{loadtime} sec"
 msgstr "{loadtime} Sek. Ladezeit"
 
-#: src/scienceDatabase.cpp:570
+#: src/scienceDatabase.cpp:574
 msgid "Storage {weapon}"
 msgstr "Ladung {weapon}"
 
-#: src/scienceDatabase.cpp:580
+#: src/scienceDatabase.cpp:584
 msgctxt "database"
 msgid "Stations"
 msgstr "Raumstationen"
 
-#: src/scienceDatabase.cpp:581
+#: src/scienceDatabase.cpp:585
 msgid ""
 "Space stations are permanent, immobile structures ranging in scale from "
 "small outposts to city-sized communities. Many provide restocking and repair "
@@ -306,13 +322,13 @@ msgstr "Weiter"
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: src/menus/joinServerMenu.cpp:18
+#: src/menus/joinServerMenu.cpp:17
 msgctxt "connectserver"
 msgid "Connecting..."
 msgstr "Verbinde..."
 
-#: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:58
-#: src/menus/shipSelectionScreen.cpp:560 src/screens/gm/gameMasterScreen.cpp:93
+#: src/menus/joinServerMenu.cpp:19 src/menus/shipSelectionScreen.cpp:58
+#: src/menus/shipSelectionScreen.cpp:559 src/screens/gm/gameMasterScreen.cpp:93
 #: src/screens/gm/objectCreationView.cpp:142
 #: src/screens/gm/globalMessageEntryView.cpp:19
 #: src/screenComponents/selfDestructButton.cpp:25
@@ -322,7 +338,7 @@ msgctxt "button"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/menus/joinServerMenu.cpp:66
+#: src/menus/joinServerMenu.cpp:56
 msgid "Please enter the server password:"
 msgstr "Server-Passwort eingeben:"
 
@@ -333,35 +349,40 @@ msgstr "noch verbunden"
 
 #: src/menus/serverBrowseMenu.cpp:24
 msgctxt "game_client_disconnect_reason"
+msgid "failed to connect to server"
+msgstr "Verbindung zum Server konnte nicht hergestellt werden"
+
+#: src/menus/serverBrowseMenu.cpp:26
+msgctxt "game_client_disconnect_reason"
 msgid "bad credentials"
 msgstr "Anmeldefehler"
 
-#: src/menus/serverBrowseMenu.cpp:26
+#: src/menus/serverBrowseMenu.cpp:28
 msgctxt "game_client_disconnect_reason"
 msgid "closed by server"
 msgstr "durch Server beendet"
 
-#: src/menus/serverBrowseMenu.cpp:28
+#: src/menus/serverBrowseMenu.cpp:30
 msgctxt "game_client_disconnect_reason"
 msgid "timed out"
 msgstr "Zeitüberschreitung"
 
-#: src/menus/serverBrowseMenu.cpp:30
+#: src/menus/serverBrowseMenu.cpp:32
 msgctxt "game_client_disconnect_reason"
 msgid "unknown"
 msgstr "unbekannt"
 
-#: src/menus/serverBrowseMenu.cpp:32
+#: src/menus/serverBrowseMenu.cpp:34
 msgctxt "game_client_disconnect_reason"
 msgid "version mismatch"
 msgstr "unterschiedliche Versionen"
 
-#: src/menus/serverBrowseMenu.cpp:34
+#: src/menus/serverBrowseMenu.cpp:36
 msgctxt "game_client_disconnect_reason"
 msgid "unspecified error {error}"
 msgstr "Fehler: {error}"
 
-#: src/menus/serverBrowseMenu.cpp:51 src/menus/tutorialMenu.cpp:65
+#: src/menus/serverBrowseMenu.cpp:50 src/menus/tutorialMenu.cpp:65
 #: src/menus/optionsMenu.cpp:192 src/menus/hotkeyMenu.cpp:71
 #: src/screenComponents/databaseView.cpp:102
 #: src/screenComponents/databaseView.cpp:106
@@ -369,24 +390,16 @@ msgctxt "button"
 msgid "Back"
 msgstr "Zurück"
 
-#: src/menus/serverBrowseMenu.cpp:58
+#: src/menus/serverBrowseMenu.cpp:57
 msgid "Connection error: {message}"
 msgstr "Verbindungsfehler: {message}"
 
-#: src/menus/serverBrowseMenu.cpp:69
-msgid "LAN"
-msgstr "LAN"
-
-#: src/menus/serverBrowseMenu.cpp:69
-msgid "Internet"
-msgstr "Internet"
-
-#: src/menus/serverBrowseMenu.cpp:71
+#: src/menus/serverBrowseMenu.cpp:62
 msgctxt "screenLan"
 msgid "Connect"
 msgstr "Verbinden"
 
-#: src/menus/serverBrowseMenu.cpp:85
+#: src/menus/serverBrowseMenu.cpp:110
 msgid "Last Session ({last})"
 msgstr "Letzte Sitzung ({last})"
 
@@ -783,56 +796,56 @@ msgstr "Wähle Schiff"
 msgid "Waiting for server to spawn a ship"
 msgstr "Kein Schiff verfügbar - Warte auf Server"
 
-#: src/menus/shipSelectionScreen.cpp:359
+#: src/menus/shipSelectionScreen.cpp:358
 msgid "Spawn player ship"
 msgstr "Neues Spielerschiff"
 
-#: src/menus/shipSelectionScreen.cpp:380
+#: src/menus/shipSelectionScreen.cpp:379
 msgid "Scenario selection"
 msgstr "Szenario-Auswahl"
 
-#: src/menus/shipSelectionScreen.cpp:387
+#: src/menus/shipSelectionScreen.cpp:386
 msgid "Disconnect"
 msgstr "Verbindung trennen"
 
-#: src/menus/shipSelectionScreen.cpp:491
+#: src/menus/shipSelectionScreen.cpp:490
 msgid "6/5 player crew"
 msgstr "Crewstärke: 5-6 Personen"
 
-#: src/menus/shipSelectionScreen.cpp:513
+#: src/menus/shipSelectionScreen.cpp:512
 msgid "4/3/1 player crew"
 msgstr "Crewstärke: 4/3/1 Personen"
 
-#: src/menus/shipSelectionScreen.cpp:522
+#: src/menus/shipSelectionScreen.cpp:521
 msgid "3D screens"
 msgstr "3D-Ansicht"
 
-#: src/menus/shipSelectionScreen.cpp:525
+#: src/menus/shipSelectionScreen.cpp:524
 msgid "Main screen"
 msgstr "Hauptschirm"
 
-#: src/menus/shipSelectionScreen.cpp:535 src/menus/autoConnectScreen.cpp:28
+#: src/menus/shipSelectionScreen.cpp:534 src/menus/autoConnectScreen.cpp:28
 msgid "Ship window"
 msgstr "Schiffsfenster"
 
-#: src/menus/shipSelectionScreen.cpp:554
+#: src/menus/shipSelectionScreen.cpp:553
 msgid "Top-down 3D view"
 msgstr "Draufsicht"
 
-#: src/menus/shipSelectionScreen.cpp:564
+#: src/menus/shipSelectionScreen.cpp:563
 msgctxt "button"
 msgid "Ready"
 msgstr "Bereit"
 
-#: src/menus/shipSelectionScreen.cpp:571
+#: src/menus/shipSelectionScreen.cpp:570
 msgid "Alternative options"
 msgstr "Weitere Optionen"
 
-#: src/menus/shipSelectionScreen.cpp:575
+#: src/menus/shipSelectionScreen.cpp:574
 msgid "Main screen controls"
 msgstr "Hauptschirm-Steuerung"
 
-#: src/menus/shipSelectionScreen.cpp:585
+#: src/menus/shipSelectionScreen.cpp:584
 msgid ""
 "You can select multiple stations and switch between them during the game.\n"
 "If mainscreen is selected alongside stations, it will be shown next to the "
@@ -844,7 +857,7 @@ msgstr ""
 "dieser neben der aktiven Station angezeigt (vorausgesetzt, der "
 "Gesamtbildschirm ist breit genug)."
 
-#: src/menus/shipSelectionScreen.cpp:625
+#: src/menus/shipSelectionScreen.cpp:624
 msgid "--- Crew ---"
 msgstr "--- Crew ---"
 
@@ -884,7 +897,7 @@ msgstr "Kamera folgt Ziel"
 
 #: src/screens/cinematicViewScreen.cpp:47
 msgctxt "button"
-msgid "Cycle trough ships"
+msgid "Cycle through ships"
 msgstr "Nächstes Schiff"
 
 #: src/screens/crewStationScreen.cpp:54 src/screens/gm/gameMasterScreen.cpp:223
@@ -921,7 +934,7 @@ msgstr "{label}:\t{button}\n"
 
 #: src/screens/crew4/operationsScreen.cpp:67
 #: src/screens/crew6/relayScreen.cpp:101
-#: src/screens/crew1/singlePilotScreen.cpp:102
+#: src/screens/crew1/singlePilotScreen.cpp:119
 msgid "Open Comms"
 msgstr "Öffne Verbindung"
 
@@ -946,36 +959,37 @@ msgstr "Ruf"
 msgid "Clock"
 msgstr "Missionszeit"
 
-#: src/screens/crew4/tacticalScreen.cpp:69
+#: src/screens/crew4/tacticalScreen.cpp:72
 #: src/screens/crew6/engineeringScreen.cpp:33
 #: src/screens/crew6/weaponsScreen.cpp:80 src/screens/crew6/helmsScreen.cpp:73
-#: src/screens/crew1/singlePilotScreen.cpp:73
+#: src/screens/crew1/singlePilotScreen.cpp:79
 #: src/screens/extra/powerManagement.cpp:19
 msgid "Energy"
 msgstr "Energie"
 
-#: src/screens/crew4/tacticalScreen.cpp:71 src/screens/crew6/helmsScreen.cpp:75
-#: src/screens/crew1/singlePilotScreen.cpp:75
+#: src/screens/crew4/tacticalScreen.cpp:74 src/screens/crew6/helmsScreen.cpp:75
+#: src/screens/crew1/singlePilotScreen.cpp:81
 msgid "Heading"
 msgstr "Richtung"
 
-#: src/screens/crew4/tacticalScreen.cpp:73 src/screens/crew6/helmsScreen.cpp:77
-#: src/screens/crew1/singlePilotScreen.cpp:77
+#: src/screens/crew4/tacticalScreen.cpp:76 src/screens/crew6/helmsScreen.cpp:77
+#: src/screens/crew1/singlePilotScreen.cpp:83
 msgid "Speed"
 msgstr "Geschwind."
 
-#: src/screens/crew4/tacticalScreen.cpp:75
-#: src/screens/crew1/singlePilotScreen.cpp:79
+#: src/screens/crew4/tacticalScreen.cpp:78
+#: src/screens/crew1/singlePilotScreen.cpp:85
 msgid "Shields"
 msgstr "Schilde"
 
-#: src/screens/crew4/tacticalScreen.cpp:88
+#: src/screens/crew4/tacticalScreen.cpp:91
+#: src/screens/crew1/singlePilotScreen.cpp:104
 msgid "Beams"
 msgstr "Laser"
 
-#: src/screens/crew4/tacticalScreen.cpp:121
+#: src/screens/crew4/tacticalScreen.cpp:124
 #: src/screens/crew6/helmsScreen.cpp:99
-#: src/screens/crew1/singlePilotScreen.cpp:120
+#: src/screens/crew1/singlePilotScreen.cpp:137
 msgid "{value} {unit}/min"
 msgstr "{value} {unit}/min"
 
@@ -1577,7 +1591,7 @@ msgstr "Nicht angedockt"
 #: src/screens/gm/tweak.cpp:279
 msgctxt "tweak_ship"
 msgid "Special drives:"
-msgstr "Spezialantriebe:"
+msgstr "Spezialantriebe:raketen"
 
 #: src/screens/gm/tweak.cpp:281
 msgid "Warp Drive"
@@ -2303,137 +2317,137 @@ msgctxt "gm_info"
 msgid "Size"
 msgstr "Größe"
 
-#: src/spaceObjects/spaceship.cpp:1901
+#: src/spaceObjects/spaceship.cpp:1915
 msgctxt "missile"
 msgid "Homing"
 msgstr "Zielsuch"
 
-#: src/spaceObjects/spaceship.cpp:1903
+#: src/spaceObjects/spaceship.cpp:1917
 msgctxt "missile"
 msgid "Nuke"
 msgstr "Nuke"
 
-#: src/spaceObjects/spaceship.cpp:1905
+#: src/spaceObjects/spaceship.cpp:1919
 msgctxt "missile"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/spaceObjects/spaceship.cpp:1907
+#: src/spaceObjects/spaceship.cpp:1921
 msgctxt "missile"
 msgid "EMP"
 msgstr "EMP"
 
-#: src/spaceObjects/spaceship.cpp:1909
+#: src/spaceObjects/spaceship.cpp:1923
 msgctxt "missile"
 msgid "HVLI"
 msgstr "HGBI"
 
-#: src/spaceObjects/cpuShip.cpp:206
+#: src/spaceObjects/cpuShip.cpp:207
 msgctxt "cpulog"
 msgid "Searching for targets."
 msgstr "Suche nach Zielen."
 
-#: src/spaceObjects/cpuShip.cpp:215
+#: src/spaceObjects/cpuShip.cpp:216
 msgctxt "cpulog"
 msgid "Searching for hostiles around {x},{y}."
 msgstr "Suche nach Feinden bei {x},{y}."
 
-#: src/spaceObjects/cpuShip.cpp:224
+#: src/spaceObjects/cpuShip.cpp:225
 msgctxt "cpulog"
 msgid "Searching for supplies."
 msgstr "Suche nach Vorräten."
 
-#: src/spaceObjects/cpuShip.cpp:227 src/spaceObjects/cpuShip.cpp:311
+#: src/spaceObjects/cpuShip.cpp:228 src/spaceObjects/cpuShip.cpp:312
 msgctxt "cpulog"
 msgid "Docking to {callsign}."
 msgstr "Docke an {callsign}."
 
-#: src/spaceObjects/cpuShip.cpp:238
+#: src/spaceObjects/cpuShip.cpp:239
 msgctxt "cpulog"
 msgid "Standing ground for now."
 msgstr "Halte Position."
 
-#: src/spaceObjects/cpuShip.cpp:246
+#: src/spaceObjects/cpuShip.cpp:247
 msgctxt "cpulog"
 msgid "Defending {x},{y}."
 msgstr "Verteidige {x},{y}."
 
-#: src/spaceObjects/cpuShip.cpp:256
+#: src/spaceObjects/cpuShip.cpp:257
 msgctxt "cpulog"
 msgid "Defending {callsign}."
 msgstr "Verteidige {callsign}."
 
-#: src/spaceObjects/cpuShip.cpp:266
+#: src/spaceObjects/cpuShip.cpp:267
 msgctxt "cpulog"
 msgid "Following {callsign}."
 msgstr "Folge {callsign}."
 
-#: src/spaceObjects/cpuShip.cpp:274 src/spaceObjects/cpuShip.cpp:282
+#: src/spaceObjects/cpuShip.cpp:275 src/spaceObjects/cpuShip.cpp:283
 msgctxt "cpulog"
 msgid "Moving to {x},{y}."
 msgstr "Fliege zu  {x},{y}."
 
-#: src/spaceObjects/cpuShip.cpp:297
+#: src/spaceObjects/cpuShip.cpp:298
 msgctxt "cpulog"
 msgid "Moving to attack {callsign}!"
 msgstr "Greife {callsign} an!"
 
-#: src/spaceObjects/cpuShip.cpp:326
+#: src/spaceObjects/cpuShip.cpp:327
 msgctxt "gm_info"
 msgid "Orders"
 msgstr "Befehle"
 
-#: src/spaceObjects/cpuShip.cpp:384
+#: src/spaceObjects/cpuShip.cpp:385
 msgctxt "orderscpu"
 msgid "Idle"
 msgstr "Inaktiv"
 
-#: src/spaceObjects/cpuShip.cpp:385
+#: src/spaceObjects/cpuShip.cpp:386
 msgctxt "orderscpu"
 msgid "Roaming"
 msgstr "Patrouillieren"
 
-#: src/spaceObjects/cpuShip.cpp:386
+#: src/spaceObjects/cpuShip.cpp:387
 msgctxt "orderscpu"
 msgid "Retreat"
 msgstr "Rückzug"
 
-#: src/spaceObjects/cpuShip.cpp:387
+#: src/spaceObjects/cpuShip.cpp:388
 msgctxt "orderscpu"
 msgid "Stand Ground"
 msgstr "Halte Position"
 
-#: src/spaceObjects/cpuShip.cpp:388
+#: src/spaceObjects/cpuShip.cpp:389
 msgctxt "orderscpu"
 msgid "Defend Location"
 msgstr "Verteidige Ort"
 
-#: src/spaceObjects/cpuShip.cpp:389
+#: src/spaceObjects/cpuShip.cpp:390
 msgctxt "orderscpu"
 msgid "Defend Target"
 msgstr "Verteidige Ziel"
 
-#: src/spaceObjects/cpuShip.cpp:390
+#: src/spaceObjects/cpuShip.cpp:391
 msgctxt "orderscpu"
 msgid "Fly in formation"
 msgstr "Fliege in Formation"
 
-#: src/spaceObjects/cpuShip.cpp:391
+#: src/spaceObjects/cpuShip.cpp:392
 msgctxt "orderscpu"
 msgid "Fly towards"
 msgstr "Fliege zu"
 
-#: src/spaceObjects/cpuShip.cpp:392
+#: src/spaceObjects/cpuShip.cpp:393
 msgctxt "orderscpu"
 msgid "Fly towards (ignore all)"
 msgstr "Fliege zu (ignoriere alles)"
 
-#: src/spaceObjects/cpuShip.cpp:393
+#: src/spaceObjects/cpuShip.cpp:394
 msgctxt "orderscpu"
 msgid "Attack"
 msgstr "Greife an"
 
-#: src/spaceObjects/cpuShip.cpp:394
+#: src/spaceObjects/cpuShip.cpp:395
 msgctxt "orderscpu"
 msgid "Dock"
 msgstr "Docke an"
@@ -3496,6 +3510,12 @@ msgstr "FPS anzeigen"
 msgctxt "hotkey_debug"
 msgid "Show debug timing"
 msgstr "Timing-infos anzeigen"
+
+#~ msgid "LAN"
+#~ msgstr "LAN"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
 
 #~ msgctxt "hotkey_Science"
 #~ msgid "Scanning parameter set {number}"

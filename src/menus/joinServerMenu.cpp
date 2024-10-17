@@ -30,6 +30,12 @@ JoinServerScreen::JoinServerScreen(const ServerScanner::ServerInfo& target)
     password_entry = new GuiTextEntry(password_entry_box, "PASSWORD_ENTRY", "");
     password_entry->setPosition(20, 0, sp::Alignment::CenterLeft)->setSize(400, 50);
     password_entry->setHidePassword();
+    password_entry->enterCallback([this](string entry)
+    {
+        password_entry_box->hide();
+        password_focused = false;
+        game_client->sendPassword(entry.upper());
+    });
     (new GuiButton(password_entry_box, "PASSWORD_ENTRY_OK", "Ok", [this]()
     {
         password_entry_box->hide();

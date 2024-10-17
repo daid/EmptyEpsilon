@@ -179,6 +179,7 @@ void GuiCommsOverlay::onUpdate()
             script_comms_options->setOptions({});
             for(const auto& reply : transmitter->script_replies)
                 script_comms_options->addEntry(reply.message, reply.message);
+            script_comms_options->setSelectionIndex(-1);
             int display_options_count = std::min(5, script_comms_options->entryCount());
             script_comms_options->setSize(760, display_options_count * 50);
             script_comms_text->setSize(760, 500 - display_options_count * 50);
