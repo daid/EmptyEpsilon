@@ -105,14 +105,14 @@ void ShieldSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, 
         return;
     auto scanstate = e.getComponent<ScanState>();
     bool show_levels = (!my_spaceship || my_spaceship == e || !scanstate || scanstate->getStateFor(my_spaceship) == ScanState::State::FullScan);
-    float sprite_scale = scale * 300.0f * 1.5f / 32;
+    float sprite_scale = scale * 300.0f;
     if (auto trace = e.getComponent<RadarTrace>()) {
         auto size = trace->radius * scale * 2.0f;
         size = std::clamp(size, trace->min_size, trace->max_size);
-        sprite_scale = size * 1.5f / 32;
+        sprite_scale = size;
     }
     else if (auto physics = e.getComponent<sp::Physics>()) {
-        sprite_scale = scale * physics->getSize().x * 3.0f / 32;
+        sprite_scale = scale * physics->getSize().x * 2.0f;
     }
 
     if (shields.entries.size() == 1)
@@ -127,7 +127,7 @@ void ShieldSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, 
         {
             color = Tween<glm::u8vec4>::linear(shields.entries[0].hit_effect, 0.0f, 1.0f, color, glm::u8vec4(255, 0, 0, 128));
         }
-        renderer.drawSprite("shield_circle.png", screen_position, sprite_scale * 0.25f * 1.5f * 256.0f, color);
+        renderer.drawSprite("shield_circle.png", screen_position, sprite_scale * 1.15f * 2.0f, color);
     }else if (shields.entries.size() > 1) {
         float direction = rotation;
         float arc = 360.0f / float(shields.entries.size());
@@ -149,12 +149,12 @@ void ShieldSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, 
             glm::vec2 delta_b = vec2FromAngle(direction);
             glm::vec2 delta_c = vec2FromAngle(direction + arc / 2.0f);
             
-            auto p0 = screen_position + delta_b * sprite_scale * 32.0f * 0.05f;
+            auto p0 = screen_position + delta_b * sprite_scale * 0.05f;
             renderer.drawTexturedQuad("shield_circle.png",
                 p0,
-                p0 + delta_a * sprite_scale * 32.0f * 1.5f,
-                p0 + delta_b * sprite_scale * 32.0f * 1.5f,
-                p0 + delta_c * sprite_scale * 32.0f * 1.5f,
+                p0 + delta_a * sprite_scale * 1.15f,
+                p0 + delta_b * sprite_scale * 1.15f,
+                p0 + delta_c * sprite_scale * 1.15f,
                 glm::vec2(0.5, 0.5),
                 glm::vec2(0.5, 0.5) + delta_a * 0.5f,
                 glm::vec2(0.5, 0.5) + delta_b * 0.5f,
