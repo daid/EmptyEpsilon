@@ -719,6 +719,70 @@ static int luaFromJSON(lua_State* L)
     return argc;
 }
 
+namespace sp::script {
+template<> struct Convert<EScanningComplexity> {
+    static int toLua(lua_State* L, EScanningComplexity value) {
+        switch(value) {
+        default:
+        case SC_None: lua_pushstring(L, "none"); break;
+        case SC_Simple: lua_pushstring(L, "simple"); break;
+        case SC_Normal: lua_pushstring(L, "normal"); break;
+        case SC_Advanced: lua_pushstring(L, "advanced"); break;
+        }
+        return 1;
+    }
+};
+}
+
+static EScanningComplexity luaGetScanningComplexity()
+{
+    return gameGlobalInfo->scanning_complexity;
+}
+
+static int luaGetHackingDifficulty()
+{
+    return gameGlobalInfo->hacking_difficulty;
+}
+
+namespace sp::script {
+template<> struct Convert<EHackingGames> {
+    static int toLua(lua_State* L, EHackingGames value) {
+        switch(value) {
+        case HG_Mine: lua_pushstring(L, "mines"); break;
+        case HG_Lights: lua_pushstring(L, "lights"); break;
+        default:
+        case HG_All: lua_pushstring(L, "all"); break;
+        }
+        return 1;
+    }
+};
+}
+
+static EHackingGames luaGetHackingGames()
+{
+    return gameGlobalInfo->hacking_games;
+}
+
+static bool luaAreBeamShieldFrequenciesUsed()
+{
+    return gameGlobalInfo->use_beam_shield_frequencies;
+}
+
+static bool luaIsPerSystemDamageUsed()
+{
+    return gameGlobalInfo->use_system_damage;
+}
+
+static bool luaIsTacticalRadarAllowed()
+{
+    return gameGlobalInfo->allow_main_screen_tactical_radar;
+}
+
+static bool luaIsLongRangeRadarAllowed()
+{
+    return gameGlobalInfo->allow_main_screen_long_range_radar;
+}
+
 void luaCommandTargetRotation(sp::ecs::Entity ship, float rotation) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandTargetRotation(rotation); return; }
     auto thrusters = ship.getComponent<ManeuveringThrusters>();
@@ -906,6 +970,33 @@ void luaCommandSetShieldFrequency(sp::ecs::Entity ship, int frequency) {
     }
 }
 
+static void luaCommandAddWaypoint(sp::ecs::Entity ship, float x, float y) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandAddWaypoint({x, y}); return; }
+    auto lrr = ship.getComponent<LongRangeRadar>();
+    if (lrr && lrr->waypoints.size() < 9) {
+        lrr->waypoints.push_back({x, y});
+        lrr->waypoints_dirty = true;
+    }
+}
+
+static void luaCommandRemoveWaypoint(sp::ecs::Entity ship, int index) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandRemoveWaypoint(index); return; }
+    auto lrr = ship.getComponent<LongRangeRadar>();
+    if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
+        lrr->waypoints.erase(lrr->waypoints.begin() + index);
+        lrr->waypoints_dirty = true;
+    }
+}
+static void luaCommandMoveWaypoint(sp::ecs::Entity ship, int index, float x, float y) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandMoveWaypoint(index, {x, y}); return; }
+    auto lrr = ship.getComponent<LongRangeRadar>();
+    if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
+        lrr->waypoints[index] = {x, y};
+        lrr->waypoints_dirty = true;
+    }
+}
+
+
 void setupSubEnvironment(sp::script::Environment& env)
 {
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
@@ -1057,10 +1148,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandSetBeamFrequency", &luaCommandSetBeamFrequency);
     env.setGlobal("commandSetBeamSystemTarget", &luaCommandSetBeamSystemTarget);
     env.setGlobal("commandSetShieldFrequency", &luaCommandSetShieldFrequency);
-    /*TODO
     env.setGlobal("commandAddWaypoint", &luaCommandAddWaypoint);
     env.setGlobal("commandRemoveWaypoint", &luaCommandRemoveWaypoint);
     env.setGlobal("commandMoveWaypoint", &luaCommandMoveWaypoint);
+    /*TODO
     env.setGlobal("commandActivateSelfDestruct", &luaCommandActivateSelfDestruct);
     env.setGlobal("commandCancelSelfDestruct", &luaCommandCancelSelfDestruct);
     env.setGlobal("commandConfirmDestructCode", &luaCommandConfirmDestructCode);
@@ -1075,6 +1166,41 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("hasPlayerCrewAtPosition", &luaHasPlayerAtPosition);
     env.setGlobal("setPlayerShipCustomFunction", &luaSetPlayerShipCustomFunction);
     env.setGlobal("removePlayerShipCustomFunction", &luaRemovePlayerShipCustomFunction);
+
+    /// EScanningComplexity getScanningComplexity()
+    /// Returns the running scenario's scanning complexity setting.
+    /// Example: getScanningComplexity() -- returns "normal" by default
+    env.setGlobal("getScanningComplexity", &luaGetScanningComplexity);
+    /// int getHackingDifficulty()
+    /// Returns the running scenario's hacking difficulty setting.
+    /// The returned value is an integer between 0 and 3:
+    /// 0 = Simple
+    /// 1 = Normal
+    /// 2 = Difficult (default)
+    /// 3 = Fiendish 
+    /// Example: getHackingDifficulty() -- returns 2 by default
+    env.setGlobal("getHackingDifficulty", &luaGetHackingDifficulty);
+    /// EHackingGames getHackingGames()
+    /// Returns the running scenario's hacking difficulty setting.
+    /// Example: getHackingGames() -- returns "all" by default
+    env.setGlobal("getHackingGames", &luaGetHackingGames);
+    /// bool areBeamShieldFrequenciesUsed()
+    /// Returns whether the "Beam/Shield Frequencies" setting is enabled in the running scenario.
+    /// Example: areBeamShieldFrequenciesUsed() -- returns true by default
+    env.setGlobal("areBeamShieldFrequenciesUsed", &luaAreBeamShieldFrequenciesUsed);
+    /// bool isPerSystemDamageUsed()
+    /// Returns whether the "Per-System Damage" setting is enabled in the running scenario.
+    /// Example: isPerSystemDamageUsed() -- returns true by default
+    env.setGlobal("isPerSystemDamageUsed", &luaIsPerSystemDamageUsed);
+    /// bool isTacticalRadarAllowed()
+    /// Returns whether the "Tactical Radar" setting for main screens is enabled in the running scenario.
+    /// Example: isTacticalRadarAllowed() -- returns true by default
+    env.setGlobal("isTacticalRadarAllowed", &luaIsTacticalRadarAllowed);
+    /// bool isLongRangeRadarAllowed()
+    /// Returns whether the "Long Range Radar" setting for main screens is enabled in the running scenario.
+    /// Example: isLongRangeRadarAllowed() -- returns true by default
+    env.setGlobal("isLongRangeRadarAllowed", &luaIsLongRangeRadarAllowed);
+
 
     env.setGlobal("addGMFunction", &luaAddGMFunction);
     env.setGlobal("clearGMFunctions", &luaClearGMFunctions);
