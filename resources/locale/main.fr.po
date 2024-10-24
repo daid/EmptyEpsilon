@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-05-12 22:33+0200\n"
+"PO-Revision-Date: 2024-10-24 20:06+0200\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -85,12 +85,12 @@ msgctxt "database"
 msgid "Size"
 msgstr "Taille"
 
-#: src/scienceDatabase.cpp:513 src/scienceDatabase.cpp:615
+#: src/scienceDatabase.cpp:513 src/scienceDatabase.cpp:619
 msgctxt "database"
 msgid "Shield"
 msgstr "Boucliers"
 
-#: src/scienceDatabase.cpp:516 src/scienceDatabase.cpp:618
+#: src/scienceDatabase.cpp:516 src/scienceDatabase.cpp:622
 msgid "Hull"
 msgstr "Coque"
 
@@ -98,6 +98,12 @@ msgstr "Coque"
 msgctxt "database"
 msgid "Move speed"
 msgstr "Vit. de mouvement"
+
+#: src/scienceDatabase.cpp:520 src/scienceDatabase.cpp:521
+#: src/scienceDatabase.cpp:528
+msgctxt "database"
+msgid "{speed} u/min"
+msgstr "{speed}u/min"
 
 #: src/scienceDatabase.cpp:521
 msgctxt "database"
@@ -109,55 +115,65 @@ msgctxt "database"
 msgid "Turn speed"
 msgstr "Vit. de rotation"
 
+#: src/scienceDatabase.cpp:524
+msgctxt "database"
+msgid "{turnspeed} deg/sec"
+msgstr "{turnspeed}°/sec"
+
 #: src/scienceDatabase.cpp:528
 msgctxt "database"
 msgid "Warp speed"
 msgstr "Vitesse lumière"
 
-#: src/scienceDatabase.cpp:532
+#: src/scienceDatabase.cpp:533
 msgctxt "database"
 msgid "Jump range"
 msgstr "Portée de saut"
 
-#: src/scienceDatabase.cpp:540
+#: src/scienceDatabase.cpp:534
+msgctxt "database"
+msgid "{mindistance} - {maxdistance} u"
+msgstr "{mindistance} - {maxdistance}u"
+
+#: src/scienceDatabase.cpp:544
 msgid "{direction} beam weapon"
 msgstr "Faisceau {direction}"
 
-#: src/scienceDatabase.cpp:541
+#: src/scienceDatabase.cpp:545
 msgctxt "database"
 msgid "{damage} Dmg / {interval} sec"
-msgstr "{damage} Dmg / {interval} sec"
+msgstr "{damage} dégâts / {interval} sec"
 
-#: src/scienceDatabase.cpp:551
+#: src/scienceDatabase.cpp:555
 msgctxt "database"
 msgid "{direction} tube"
 msgstr "Tube {direction}"
 
-#: src/scienceDatabase.cpp:554
+#: src/scienceDatabase.cpp:558
 msgctxt "database"
 msgid "{direction} small tube"
 msgstr "Tube léger {direction}"
 
-#: src/scienceDatabase.cpp:558
+#: src/scienceDatabase.cpp:562
 msgctxt "database"
 msgid "{direction} large tube"
 msgstr "Tube large {direction}"
 
-#: src/scienceDatabase.cpp:562
+#: src/scienceDatabase.cpp:566
 msgctxt "database"
 msgid "{loadtime} sec"
 msgstr "{loadtime} sec"
 
-#: src/scienceDatabase.cpp:570
+#: src/scienceDatabase.cpp:574
 msgid "Storage {weapon}"
 msgstr "Stockage {weapon}"
 
-#: src/scienceDatabase.cpp:580
+#: src/scienceDatabase.cpp:584
 msgctxt "database"
 msgid "Stations"
 msgstr "Stations"
 
-#: src/scienceDatabase.cpp:581
+#: src/scienceDatabase.cpp:585
 msgid ""
 "Space stations are permanent, immobile structures ranging in scale from "
 "small outposts to city-sized communities. Many provide restocking and repair "
@@ -309,12 +325,12 @@ msgstr "Suivant"
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: src/menus/joinServerMenu.cpp:18
+#: src/menus/joinServerMenu.cpp:17
 msgctxt "connectserver"
 msgid "Connecting..."
 msgstr "Connexion en cours..."
 
-#: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:58
+#: src/menus/joinServerMenu.cpp:19 src/menus/shipSelectionScreen.cpp:58
 #: src/menus/shipSelectionScreen.cpp:559 src/screens/gm/gameMasterScreen.cpp:93
 #: src/screens/gm/objectCreationView.cpp:142
 #: src/screens/gm/globalMessageEntryView.cpp:19
@@ -325,7 +341,7 @@ msgctxt "button"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: src/menus/joinServerMenu.cpp:66
+#: src/menus/joinServerMenu.cpp:62
 msgid "Please enter the server password:"
 msgstr "Veuillez saisir le mot de passe du serveur :"
 
@@ -336,60 +352,57 @@ msgstr "Toujours connecté"
 
 #: src/menus/serverBrowseMenu.cpp:24
 msgctxt "game_client_disconnect_reason"
+msgid "failed to connect to server"
+msgstr "échec de connexion au serveur"
+
+#: src/menus/serverBrowseMenu.cpp:26
+msgctxt "game_client_disconnect_reason"
 msgid "bad credentials"
 msgstr "Erreur d'identification"
 
-#: src/menus/serverBrowseMenu.cpp:26
+#: src/menus/serverBrowseMenu.cpp:28
 msgctxt "game_client_disconnect_reason"
 msgid "closed by server"
 msgstr "Fermé par le serveur"
 
-#: src/menus/serverBrowseMenu.cpp:28
+#: src/menus/serverBrowseMenu.cpp:30
 msgctxt "game_client_disconnect_reason"
 msgid "timed out"
 msgstr "Délai écoulé"
 
-#: src/menus/serverBrowseMenu.cpp:30
+#: src/menus/serverBrowseMenu.cpp:32
 msgctxt "game_client_disconnect_reason"
 msgid "unknown"
 msgstr "Inconnu"
 
-#: src/menus/serverBrowseMenu.cpp:32
+#: src/menus/serverBrowseMenu.cpp:34
 msgctxt "game_client_disconnect_reason"
 msgid "version mismatch"
 msgstr "Version incompatible"
 
-#: src/menus/serverBrowseMenu.cpp:34
+#: src/menus/serverBrowseMenu.cpp:36
 msgctxt "game_client_disconnect_reason"
 msgid "unspecified error {error}"
 msgstr "Erreur non spécifiée {error}"
 
-#: src/menus/serverBrowseMenu.cpp:51 src/menus/tutorialMenu.cpp:65
-#: src/menus/optionsMenu.cpp:191 src/menus/hotkeyMenu.cpp:71
+#: src/menus/serverBrowseMenu.cpp:50 src/menus/tutorialMenu.cpp:65
+#: src/menus/optionsMenu.cpp:192 src/menus/hotkeyMenu.cpp:71
 #: src/screenComponents/databaseView.cpp:102
 #: src/screenComponents/databaseView.cpp:106
 msgctxt "button"
 msgid "Back"
 msgstr "Retour"
 
-#: src/menus/serverBrowseMenu.cpp:58
+#: src/menus/serverBrowseMenu.cpp:57
 msgid "Connection error: {message}"
 msgstr "Erreur de connexion : {message}"
 
-#: src/menus/serverBrowseMenu.cpp:69
-msgid "LAN"
-msgstr "LAN"
-
-#: src/menus/serverBrowseMenu.cpp:69
-msgid "Internet"
-msgstr "Internet"
-
-#: src/menus/serverBrowseMenu.cpp:71
+#: src/menus/serverBrowseMenu.cpp:62
 msgctxt "screenLan"
 msgid "Connect"
 msgstr "Connexion"
 
-#: src/menus/serverBrowseMenu.cpp:85
+#: src/menus/serverBrowseMenu.cpp:110
 msgid "Last Session ({last})"
 msgstr "Dernière session ({last})"
 
@@ -468,87 +481,87 @@ msgctxt "Credits"
 msgid "Special thanks:"
 msgstr "Spécial remerciement :"
 
-#: src/menus/serverCreationScreen.cpp:31
+#: src/menus/serverCreationScreen.cpp:30
 msgid "Server configuration"
 msgstr "Configuration du serveur"
 
-#: src/menus/serverCreationScreen.cpp:36
+#: src/menus/serverCreationScreen.cpp:35
 msgid "Server name: "
 msgstr "Nom du serveur : "
 
-#: src/menus/serverCreationScreen.cpp:43
+#: src/menus/serverCreationScreen.cpp:42
 msgid "Server password: "
 msgstr "Mot de passe du serveur : "
 
-#: src/menus/serverCreationScreen.cpp:50
+#: src/menus/serverCreationScreen.cpp:49
 msgid "GM control code: "
 msgstr "Code du MJ : "
 
-#: src/menus/serverCreationScreen.cpp:57
+#: src/menus/serverCreationScreen.cpp:56
 msgid "List on master server: "
 msgstr "Visible sur le serveur maître : "
 
-#: src/menus/serverCreationScreen.cpp:59
+#: src/menus/serverCreationScreen.cpp:58
 msgid "No"
 msgstr "Non"
 
-#: src/menus/serverCreationScreen.cpp:59
+#: src/menus/serverCreationScreen.cpp:58
 msgid "Yes"
 msgstr "Oui"
 
-#: src/menus/serverCreationScreen.cpp:63
+#: src/menus/serverCreationScreen.cpp:62
 msgid "Server port: "
 msgstr "Port du serveur : "
 
-#: src/menus/serverCreationScreen.cpp:67
+#: src/menus/serverCreationScreen.cpp:66
 msgid "Server info"
 msgstr "Infos du serveur"
 
-#: src/menus/serverCreationScreen.cpp:75
+#: src/menus/serverCreationScreen.cpp:74
 msgid "Server was configured to connect to reverse proxy:"
 msgstr "Le serveur a été configuré pour se connecter au proxy inverse :"
 
-#: src/menus/serverCreationScreen.cpp:89
+#: src/menus/serverCreationScreen.cpp:88
 msgid "Server IP: "
 msgstr "Adresse IP du serveur : "
 
-#: src/menus/serverCreationScreen.cpp:101
-#: src/menus/serverCreationScreen.cpp:136
-#: src/menus/serverCreationScreen.cpp:215 src/menus/shipSelectionScreen.cpp:260
+#: src/menus/serverCreationScreen.cpp:100
+#: src/menus/serverCreationScreen.cpp:135
+#: src/menus/serverCreationScreen.cpp:214 src/menus/shipSelectionScreen.cpp:260
 msgid "Close"
 msgstr "Retour"
 
-#: src/menus/serverCreationScreen.cpp:107
+#: src/menus/serverCreationScreen.cpp:106
 msgid "Start server"
 msgstr "Démarrer le serveur"
 
-#: src/menus/serverCreationScreen.cpp:143
+#: src/menus/serverCreationScreen.cpp:142
 msgid "Continue"
 msgstr "Continuer"
 
-#: src/menus/serverCreationScreen.cpp:192
+#: src/menus/serverCreationScreen.cpp:191
 msgid "Category"
 msgstr "Catégories"
 
-#: src/menus/serverCreationScreen.cpp:198
+#: src/menus/serverCreationScreen.cpp:197
 msgid "Scenario"
 msgstr "Choix du scénario"
 
-#: src/menus/serverCreationScreen.cpp:206
+#: src/menus/serverCreationScreen.cpp:205
 msgid "Description"
 msgstr "Description"
 
-#: src/menus/serverCreationScreen.cpp:207
-#: src/menus/serverCreationScreen.cpp:282
+#: src/menus/serverCreationScreen.cpp:206
+#: src/menus/serverCreationScreen.cpp:280
 msgid "Select a scenario..."
 msgstr "Choisir un scénario..."
 
-#: src/menus/serverCreationScreen.cpp:222
-#: src/menus/serverCreationScreen.cpp:339
+#: src/menus/serverCreationScreen.cpp:221
+#: src/menus/serverCreationScreen.cpp:337
 msgid "Start scenario"
 msgstr "Démarrer le scénario"
 
-#: src/menus/serverCreationScreen.cpp:333
+#: src/menus/serverCreationScreen.cpp:331
 msgid "Back"
 msgstr "Retour"
 
@@ -601,56 +614,56 @@ msgstr "Configurer Clavier et Joystick"
 msgid "Language (applies on back)"
 msgstr "Langue (à la sortie du menu)"
 
-#: src/menus/optionsMenu.cpp:138
+#: src/menus/optionsMenu.cpp:178
 msgid "Interface Theme"
 msgstr "Thème de l'interface"
 
-#: src/menus/optionsMenu.cpp:201
+#: src/menus/optionsMenu.cpp:202
 msgctxt "options"
 msgid "Save"
 msgstr "Sauvegarder"
 
-#: src/menus/optionsMenu.cpp:223
+#: src/menus/optionsMenu.cpp:226
 msgid "Fullscreen toggle"
 msgstr "Activer plein écran"
 
-#: src/menus/optionsMenu.cpp:256 src/menus/optionsMenu.cpp:261
+#: src/menus/optionsMenu.cpp:259 src/menus/optionsMenu.cpp:264
 msgid "FoV: {fov}"
 msgstr "Champ de vision : {fov}"
 
-#: src/menus/optionsMenu.cpp:277 src/menus/optionsMenu.cpp:282
+#: src/menus/optionsMenu.cpp:280 src/menus/optionsMenu.cpp:285
 msgid "Sound Volume: {volume}%"
 msgstr "Volume sonore : {volume} %"
 
-#: src/menus/optionsMenu.cpp:286
+#: src/menus/optionsMenu.cpp:289
 msgid "Music Playback"
 msgstr "Musique de fond"
 
-#: src/menus/optionsMenu.cpp:296 src/menus/optionsMenu.cpp:321
+#: src/menus/optionsMenu.cpp:299 src/menus/optionsMenu.cpp:324
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: src/menus/optionsMenu.cpp:296 src/menus/optionsMenu.cpp:321
+#: src/menus/optionsMenu.cpp:299 src/menus/optionsMenu.cpp:324
 msgid "Enabled"
 msgstr "Activé"
 
-#: src/menus/optionsMenu.cpp:296 src/menus/optionsMenu.cpp:321
+#: src/menus/optionsMenu.cpp:299 src/menus/optionsMenu.cpp:324
 msgid "Main Screen only"
 msgstr "Écran principal"
 
-#: src/menus/optionsMenu.cpp:302 src/menus/optionsMenu.cpp:307
+#: src/menus/optionsMenu.cpp:305 src/menus/optionsMenu.cpp:310
 msgid "Music Volume: {volume}%"
 msgstr "Volume musique : {volume} %"
 
-#: src/menus/optionsMenu.cpp:311
+#: src/menus/optionsMenu.cpp:314
 msgid "Impulse Engine sound"
 msgstr "Son du moteur à impulsion"
 
-#: src/menus/optionsMenu.cpp:327 src/menus/optionsMenu.cpp:332
+#: src/menus/optionsMenu.cpp:330 src/menus/optionsMenu.cpp:335
 msgid "Impulse Volume: {volume}%"
 msgstr "Volume moteur : {volume} %"
 
-#: src/menus/optionsMenu.cpp:344
+#: src/menus/optionsMenu.cpp:347
 msgid "Preview Soundtracks"
 msgstr "Écoute des bandes-son"
 
@@ -885,7 +898,7 @@ msgstr "Verrouiller caméra cible"
 
 #: src/screens/cinematicViewScreen.cpp:47
 msgctxt "button"
-msgid "Cycle trough ships"
+msgid "Cycle through ships"
 msgstr "Basculement auto (30s)"
 
 #: src/screens/crewStationScreen.cpp:54 src/screens/gm/gameMasterScreen.cpp:223
@@ -922,7 +935,7 @@ msgstr "{label} : \t {button}\n"
 
 #: src/screens/crew4/operationsScreen.cpp:67
 #: src/screens/crew6/relayScreen.cpp:101
-#: src/screens/crew1/singlePilotScreen.cpp:102
+#: src/screens/crew1/singlePilotScreen.cpp:119
 msgid "Open Comms"
 msgstr "Ouvrir Comm."
 
@@ -947,36 +960,37 @@ msgstr "Rép. actuelle "
 msgid "Clock"
 msgstr "Temps écoulé "
 
-#: src/screens/crew4/tacticalScreen.cpp:69
+#: src/screens/crew4/tacticalScreen.cpp:72
 #: src/screens/crew6/engineeringScreen.cpp:33
 #: src/screens/crew6/weaponsScreen.cpp:80 src/screens/crew6/helmsScreen.cpp:73
-#: src/screens/crew1/singlePilotScreen.cpp:73
+#: src/screens/crew1/singlePilotScreen.cpp:79
 #: src/screens/extra/powerManagement.cpp:19
 msgid "Energy"
 msgstr "Énergie"
 
-#: src/screens/crew4/tacticalScreen.cpp:71 src/screens/crew6/helmsScreen.cpp:75
-#: src/screens/crew1/singlePilotScreen.cpp:75
+#: src/screens/crew4/tacticalScreen.cpp:74 src/screens/crew6/helmsScreen.cpp:75
+#: src/screens/crew1/singlePilotScreen.cpp:81
 msgid "Heading"
 msgstr "Cap"
 
-#: src/screens/crew4/tacticalScreen.cpp:73 src/screens/crew6/helmsScreen.cpp:77
-#: src/screens/crew1/singlePilotScreen.cpp:77
+#: src/screens/crew4/tacticalScreen.cpp:76 src/screens/crew6/helmsScreen.cpp:77
+#: src/screens/crew1/singlePilotScreen.cpp:83
 msgid "Speed"
 msgstr "Vitesse"
 
-#: src/screens/crew4/tacticalScreen.cpp:75
-#: src/screens/crew1/singlePilotScreen.cpp:79
+#: src/screens/crew4/tacticalScreen.cpp:78
+#: src/screens/crew1/singlePilotScreen.cpp:85
 msgid "Shields"
 msgstr "Boucliers"
 
-#: src/screens/crew4/tacticalScreen.cpp:88
+#: src/screens/crew4/tacticalScreen.cpp:91
+#: src/screens/crew1/singlePilotScreen.cpp:104
 msgid "Beams"
 msgstr "Faisceaux"
 
-#: src/screens/crew4/tacticalScreen.cpp:121
+#: src/screens/crew4/tacticalScreen.cpp:124
 #: src/screens/crew6/helmsScreen.cpp:99
-#: src/screens/crew1/singlePilotScreen.cpp:120
+#: src/screens/crew1/singlePilotScreen.cpp:137
 msgid "{value} {unit}/min"
 msgstr "{value} {unit}/min"
 
@@ -1027,6 +1041,12 @@ msgctxt "slider"
 msgid "Coolant: {current_level}% / {requested}%"
 msgstr "Liq. de refroidissement : {current_level}%/{requested}%"
 
+#: src/screens/crew6/engineeringScreen.cpp:281
+#, fuzzy
+msgctxt "Engineer"
+msgid "Maximal health"
+msgstr "Santé max"
+
 #: src/screens/crew6/engineeringScreen.cpp:287
 msgid "Energy production"
 msgstr "Production d'énergie"
@@ -1034,6 +1054,11 @@ msgstr "Production d'énergie"
 #: src/screens/crew6/engineeringScreen.cpp:290
 msgid "Firing rate"
 msgstr "Cadence de tir"
+
+#: src/screens/crew6/engineeringScreen.cpp:297
+msgctxt "Engineer"
+msgid "Turret rotation rate"
+msgstr "Tourelle : vit. de rotation"
 
 #: src/screens/crew6/engineeringScreen.cpp:303
 msgctxt "missile"
@@ -2292,137 +2317,137 @@ msgctxt "gm_info"
 msgid "Size"
 msgstr "Taille"
 
-#: src/spaceObjects/spaceship.cpp:1900
+#: src/spaceObjects/spaceship.cpp:1915
 msgctxt "missile"
 msgid "Homing"
 msgstr "Homing"
 
-#: src/spaceObjects/spaceship.cpp:1902
+#: src/spaceObjects/spaceship.cpp:1917
 msgctxt "missile"
 msgid "Nuke"
 msgstr "Nuke"
 
-#: src/spaceObjects/spaceship.cpp:1904
+#: src/spaceObjects/spaceship.cpp:1919
 msgctxt "missile"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/spaceObjects/spaceship.cpp:1906
+#: src/spaceObjects/spaceship.cpp:1921
 msgctxt "missile"
 msgid "EMP"
 msgstr "EMP"
 
-#: src/spaceObjects/spaceship.cpp:1908
+#: src/spaceObjects/spaceship.cpp:1923
 msgctxt "missile"
 msgid "HVLI"
 msgstr "HVLI"
 
-#: src/spaceObjects/cpuShip.cpp:206
+#: src/spaceObjects/cpuShip.cpp:207
 msgctxt "cpulog"
 msgid "Searching for targets."
 msgstr "En recherche de cibles."
 
-#: src/spaceObjects/cpuShip.cpp:215
+#: src/spaceObjects/cpuShip.cpp:216
 msgctxt "cpulog"
 msgid "Searching for hostiles around {x},{y}."
 msgstr "En recherche d'ennemis autour de {x},{y}."
 
-#: src/spaceObjects/cpuShip.cpp:224
+#: src/spaceObjects/cpuShip.cpp:225
 msgctxt "cpulog"
 msgid "Searching for supplies."
 msgstr "En recherche de marchandises."
 
-#: src/spaceObjects/cpuShip.cpp:227 src/spaceObjects/cpuShip.cpp:311
+#: src/spaceObjects/cpuShip.cpp:228 src/spaceObjects/cpuShip.cpp:312
 msgctxt "cpulog"
 msgid "Docking to {callsign}."
 msgstr "En cours d'amarrage à {callsign}."
 
-#: src/spaceObjects/cpuShip.cpp:238
+#: src/spaceObjects/cpuShip.cpp:239
 msgctxt "cpulog"
 msgid "Standing ground for now."
 msgstr "Tient sa position pour l'instant."
 
-#: src/spaceObjects/cpuShip.cpp:246
+#: src/spaceObjects/cpuShip.cpp:247
 msgctxt "cpulog"
 msgid "Defending {x},{y}."
 msgstr "En train de défendre {x},{y}."
 
-#: src/spaceObjects/cpuShip.cpp:256
+#: src/spaceObjects/cpuShip.cpp:257
 msgctxt "cpulog"
 msgid "Defending {callsign}."
 msgstr "En train de défendre {callsign}."
 
-#: src/spaceObjects/cpuShip.cpp:266
+#: src/spaceObjects/cpuShip.cpp:267
 msgctxt "cpulog"
 msgid "Following {callsign}."
 msgstr "En train de suivre {callsign}."
 
-#: src/spaceObjects/cpuShip.cpp:274 src/spaceObjects/cpuShip.cpp:282
+#: src/spaceObjects/cpuShip.cpp:275 src/spaceObjects/cpuShip.cpp:283
 msgctxt "cpulog"
 msgid "Moving to {x},{y}."
 msgstr "Se déplace vers {x},{y}."
 
-#: src/spaceObjects/cpuShip.cpp:297
+#: src/spaceObjects/cpuShip.cpp:298
 msgctxt "cpulog"
 msgid "Moving to attack {callsign}!"
 msgstr "En train d'attaquer {callsign} !"
 
-#: src/spaceObjects/cpuShip.cpp:326
+#: src/spaceObjects/cpuShip.cpp:327
 msgctxt "gm_info"
 msgid "Orders"
 msgstr "Ordres"
 
-#: src/spaceObjects/cpuShip.cpp:384
+#: src/spaceObjects/cpuShip.cpp:385
 msgctxt "orderscpu"
 msgid "Idle"
 msgstr "Au repos"
 
-#: src/spaceObjects/cpuShip.cpp:385
+#: src/spaceObjects/cpuShip.cpp:386
 msgctxt "orderscpu"
 msgid "Roaming"
 msgstr "Errer"
 
-#: src/spaceObjects/cpuShip.cpp:386
+#: src/spaceObjects/cpuShip.cpp:387
 msgctxt "orderscpu"
 msgid "Retreat"
 msgstr "Battre en retraite"
 
-#: src/spaceObjects/cpuShip.cpp:387
+#: src/spaceObjects/cpuShip.cpp:388
 msgctxt "orderscpu"
 msgid "Stand Ground"
 msgstr "Tenir sa position"
 
-#: src/spaceObjects/cpuShip.cpp:388
+#: src/spaceObjects/cpuShip.cpp:389
 msgctxt "orderscpu"
 msgid "Defend Location"
 msgstr "Défendre son emplacement"
 
-#: src/spaceObjects/cpuShip.cpp:389
+#: src/spaceObjects/cpuShip.cpp:390
 msgctxt "orderscpu"
 msgid "Defend Target"
 msgstr "Défendre la cible"
 
-#: src/spaceObjects/cpuShip.cpp:390
+#: src/spaceObjects/cpuShip.cpp:391
 msgctxt "orderscpu"
 msgid "Fly in formation"
 msgstr "Voler en formation"
 
-#: src/spaceObjects/cpuShip.cpp:391
+#: src/spaceObjects/cpuShip.cpp:392
 msgctxt "orderscpu"
 msgid "Fly towards"
 msgstr "Voler vers"
 
-#: src/spaceObjects/cpuShip.cpp:392
+#: src/spaceObjects/cpuShip.cpp:393
 msgctxt "orderscpu"
 msgid "Fly towards (ignore all)"
 msgstr "Voler vers (tout ignorer)"
 
-#: src/spaceObjects/cpuShip.cpp:393
+#: src/spaceObjects/cpuShip.cpp:394
 msgctxt "orderscpu"
 msgid "Attack"
 msgstr "Attaquer"
 
-#: src/spaceObjects/cpuShip.cpp:394
+#: src/spaceObjects/cpuShip.cpp:395
 msgctxt "orderscpu"
 msgid "Dock"
 msgstr "À quai"
@@ -2467,60 +2492,60 @@ msgctxt "shiplog"
 msgid "Communication channel closed"
 msgstr "Fin de transmission."
 
-#: src/spaceObjects/playerSpaceship.cpp:1543
-#: src/spaceObjects/playerSpaceship.cpp:1620
+#: src/spaceObjects/playerSpaceship.cpp:1544
+#: src/spaceObjects/playerSpaceship.cpp:1621
 msgctxt "chatdialog"
 msgid "Opened comms with {name}"
 msgstr "Communication établie avec {name}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1544
+#: src/spaceObjects/playerSpaceship.cpp:1545
 msgctxt "shiplog"
 msgid "Hailing: {name}"
 msgstr "Salutations : {name}."
 
-#: src/spaceObjects/playerSpaceship.cpp:1567
 #: src/spaceObjects/playerSpaceship.cpp:1568
+#: src/spaceObjects/playerSpaceship.cpp:1569
 msgctxt "chatdialog"
 msgid "Opened comms to {callsign}"
 msgstr "Communication établie avec {callsign}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1569
 #: src/spaceObjects/playerSpaceship.cpp:1570
+#: src/spaceObjects/playerSpaceship.cpp:1571
 msgctxt "shiplog"
 msgid "Opened communication channel to {callsign}"
 msgstr "Communication établie avec {callsign}."
 
-#: src/spaceObjects/playerSpaceship.cpp:1572
+#: src/spaceObjects/playerSpaceship.cpp:1573
 msgctxt "shiplog"
 msgid "Refused communications from {callsign}"
 msgstr "Communication en provenance de {callsign} refusée."
 
-#: src/spaceObjects/playerSpaceship.cpp:1573
+#: src/spaceObjects/playerSpaceship.cpp:1574
 msgctxt "shiplog"
 msgid "Refused communications to {callsign}"
 msgstr "Communication vers {callsign} refusée."
 
-#: src/spaceObjects/playerSpaceship.cpp:1582
+#: src/spaceObjects/playerSpaceship.cpp:1583
 msgctxt "shiplog"
 msgid "Hail suddenly went dead."
 msgstr "Communication brusquement interrompue."
 
-#: src/spaceObjects/playerSpaceship.cpp:1585
+#: src/spaceObjects/playerSpaceship.cpp:1586
 msgctxt "shiplog"
 msgid "Accepted hail from {callsign}"
 msgstr "Appel provenant de {callsign} accepté."
 
-#: src/spaceObjects/playerSpaceship.cpp:1605
+#: src/spaceObjects/playerSpaceship.cpp:1606
 msgctxt "shiplog"
 msgid "Refused hail from {callsign}"
 msgstr "Appel provenant de {callsign} refusé."
 
-#: src/spaceObjects/playerSpaceship.cpp:1619
+#: src/spaceObjects/playerSpaceship.cpp:1620
 msgctxt "shiplog"
 msgid "Opened communication channel to {name}"
 msgstr "Canal de communication ouvert avec {name}."
 
-#: src/spaceObjects/playerSpaceship.cpp:1622
+#: src/spaceObjects/playerSpaceship.cpp:1623
 msgctxt "shiplog"
 msgid "Refused hail from {name}"
 msgstr "Appel provenant de {name} refusé."
@@ -3485,6 +3510,12 @@ msgstr "Afficher les FPS"
 msgctxt "hotkey_debug"
 msgid "Show debug timing"
 msgstr "Afficher le graphique de débogage"
+
+#~ msgid "LAN"
+#~ msgstr "LAN"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
 
 #~ msgctxt "hotkey_Weapons"
 #~ msgid "Disable"
