@@ -747,10 +747,10 @@ set(CPACK_INSTALL_CMAKE_PROJECTS
 
 include(CPack)
 
-configure_file(io.github.daid.EmptyEpsilon.metainfo.xml.in ${PROJECT_SOURCE_DIR}/io.github.daid.EmptyEpsilon.metainfo.xml)
+configure_file(io.github.daid.EmptyEpsilon.metainfo.xml.in io.github.daid.EmptyEpsilon.metainfo.xml)
 
 if(UNIX AND NOT APPLE AND NOT STEAMSDK)
   install(FILES io.github.daid.EmptyEpsilon.desktop DESTINATION "share/applications")
   install(FILES logo512.png DESTINATION "share/icons/hicolor/512x512/apps" RENAME "io.github.daid.EmptyEpsilon.png")
-  install(FILES io.github.daid.EmptyEpsilon.metainfo.xml DESTINATION "share/metainfo")
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.github.daid.EmptyEpsilon.metainfo.xml DESTINATION "share/metainfo")
 endif()
