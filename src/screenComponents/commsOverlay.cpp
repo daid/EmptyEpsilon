@@ -169,8 +169,10 @@ void GuiCommsOverlay::onUpdate()
 
         // Show the scripted comms options. If they've changed, update the lsit
         bool changed = script_comms_options->entryCount() != int(my_spaceship->getCommsReplyOptions().size());
-        if (!changed && my_spaceship->getCommsReplyOptions().size() > 0)
-            changed = my_spaceship->getCommsReplyOptions()[0] != script_comms_options->getEntryName(0);
+        if (!changed)
+           for (auto i = 0u; !changed && i < my_spaceship->getCommsReplyOptions().size(); i++)
+               changed = my_spaceship->getCommsReplyOptions()[i] != script_comms_options->getEntryName(i);
+
         if (changed)
         {
             script_comms_options->setOptions({});
