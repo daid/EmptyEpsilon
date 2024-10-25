@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-02-02 22:02+0100\n"
+"PO-Revision-Date: 2024-10-24 22:38+0200\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
-"X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-Basepath: .\n"
 
 #: scripts/science_db.lua:8
 msgid "Natural"
@@ -40,7 +40,7 @@ msgstr "Astéroïde"
 #: scripts/science_db.lua:14
 msgid ""
 "An asteroid is a minor planet, usually smaller than a few kilometers. Larger "
-"variants are sometimes refered to as planetoids."
+"variants are sometimes referred to as planetoids."
 msgstr ""
 "Les astéroïdes sont des planètes mineures, ne mesurant généralement pas plus "
 "de quelques kilomètres seulement. Les variantes plus grandes sont parfois "
@@ -681,6 +681,10 @@ msgstr ""
 #: scripts/science_db.lua:141
 msgid "HVLI"
 msgstr "HVLI"
+
+#: scripts/science_db.lua:143
+msgid "10 each, 50 total"
+msgstr "10 chacune, 50 total"
 
 #: scripts/science_db.lua:144
 msgid "Burst"
