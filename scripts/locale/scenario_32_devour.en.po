@@ -8,11 +8,10 @@ msgid ""
 "\n"
 "Written for EE games on May 4th, 2023 = \"May the 4th be with you\"\n"
 "\n"
-"Version 1\n"
+"Version 1.0.2\n"
 "\n"
 "USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
-"There's one every Saturday at 1600 UTC (aka GMT or Zulu). All experience "
-"levels are welcome."
+"There's one every weekend. All experience levels are welcome."
 msgstr ""
 
 # Scenario setting
@@ -148,17 +147,17 @@ msgctxt "Reputation"
 msgid "200 reputation - everyone knows you and relies on you for help"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:108 scripts/scenario_32_devour.lua:2684
+#: scripts/scenario_32_devour.lua:109 scripts/scenario_32_devour.lua:2684
 msgctxt "orders-comms"
 msgid "Save the planets from destruction"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:756
+#: scripts/scenario_32_devour.lua:757
 msgctxt "scienceDB"
 msgid "Weapons"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:761
+#: scripts/scenario_32_devour.lua:762
 msgctxt "scienceDB"
 msgid ""
 "This database only covers the basic versions of the missiles used throughout "
@@ -184,15 +183,15 @@ msgid ""
 "These letters describe the tube sizes in order from top to bottom."
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:770 scripts/scenario_32_devour.lua:779
-#: scripts/scenario_32_devour.lua:791
+#: scripts/scenario_32_devour.lua:771 scripts/scenario_32_devour.lua:779
+#: scripts/scenario_32_devour.lua:790
 #, lua-format
 msgctxt "buttonGM"
 msgid "Version %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:771 scripts/scenario_32_devour.lua:780
-#: scripts/scenario_32_devour.lua:792
+#: scripts/scenario_32_devour.lua:772 scripts/scenario_32_devour.lua:780
+#: scripts/scenario_32_devour.lua:791
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -200,132 +199,132 @@ msgid ""
 " LUA version %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:775 scripts/scenario_32_devour.lua:784
-#: scripts/scenario_32_devour.lua:796
+#: scripts/scenario_32_devour.lua:775 scripts/scenario_32_devour.lua:783
+#: scripts/scenario_32_devour.lua:794
 msgctxt "buttonGM"
 msgid "+Station Reports"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:785
+#: scripts/scenario_32_devour.lua:784
 msgctxt "buttonGM"
 msgid "+Difficulty"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:786
+#: scripts/scenario_32_devour.lua:785
 msgctxt "buttonGM"
 msgid "+Enemy Power"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:787
+#: scripts/scenario_32_devour.lua:786
 msgctxt "buttonGM"
 msgid "+Reputation"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:797
+#: scripts/scenario_32_devour.lua:795
 msgctxt "buttonGM"
 msgid "Nerf Devourer"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:798
+#: scripts/scenario_32_devour.lua:796
 msgctxt "buttonGM"
 msgid "Un-nerf Devourer"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:811
+#: scripts/scenario_32_devour.lua:809
 msgctxt "buttonGM"
 msgid "-From Enemy Power"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:813 scripts/scenario_32_devour.lua:834
+#: scripts/scenario_32_devour.lua:811 scripts/scenario_32_devour.lua:832
 msgctxt "buttonGM"
 msgid "Easy"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:814 scripts/scenario_32_devour.lua:835
+#: scripts/scenario_32_devour.lua:812 scripts/scenario_32_devour.lua:833
 msgctxt "buttonGM"
 msgid "Normal"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:815 scripts/scenario_32_devour.lua:836
+#: scripts/scenario_32_devour.lua:813 scripts/scenario_32_devour.lua:834
 msgctxt "buttonGM"
 msgid "Hard"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:816
+#: scripts/scenario_32_devour.lua:814
 msgctxt "buttonGM"
 msgid "Extreme"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:817
+#: scripts/scenario_32_devour.lua:815
 msgctxt "buttonGM"
 msgid "Quixotic"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:820 scripts/scenario_32_devour.lua:839
+#: scripts/scenario_32_devour.lua:818 scripts/scenario_32_devour.lua:837
 #, lua-format
 msgctxt "buttonGM"
 msgid "%s %.1f"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:832
+#: scripts/scenario_32_devour.lua:830
 msgctxt "buttonGM"
 msgid "-From Difficulty"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:851
+#: scripts/scenario_32_devour.lua:849
 msgctxt "buttonGM"
 msgid "-From Reputation"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:853
+#: scripts/scenario_32_devour.lua:851
 msgctxt "buttonGM"
 msgid "Unknown"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:854
+#: scripts/scenario_32_devour.lua:852
 msgctxt "buttonGM"
 msgid "Nice"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:855
+#: scripts/scenario_32_devour.lua:853
 msgctxt "buttonGM"
 msgid "Hero"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:856
+#: scripts/scenario_32_devour.lua:854
 msgctxt "buttonGM"
 msgid "Major Hero"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:857
+#: scripts/scenario_32_devour.lua:855
 msgctxt "buttonGM"
 msgid "Super Hero"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:860
+#: scripts/scenario_32_devour.lua:858
 #, lua-format
 msgctxt "buttonGM"
 msgid "%s %i"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:872
+#: scripts/scenario_32_devour.lua:870
 msgctxt "buttonGM"
 msgid "-Main"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:880
+#: scripts/scenario_32_devour.lua:878
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid "%s %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:881
+#: scripts/scenario_32_devour.lua:879
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid "%s %s  %s  %s  Friendliness:%s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:882
+#: scripts/scenario_32_devour.lua:880
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -333,7 +332,7 @@ msgid ""
 "Shares Energy: %s,  Repairs Hull: %s,  Restocks Scan Probes: %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:883
+#: scripts/scenario_32_devour.lua:881
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -342,7 +341,7 @@ msgid ""
 "Destruct: %s, Fix Slow Tube: %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:909
+#: scripts/scenario_32_devour.lua:907
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -350,7 +349,7 @@ msgid ""
 "Homing: %s %s,   Nuke: %s %s,   Mine: %s %s,   EMP: %s %s,   HVLI: %s %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:911
+#: scripts/scenario_32_devour.lua:909
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -358,7 +357,7 @@ msgid ""
 "Services and their costs and availability:"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:913
+#: scripts/scenario_32_devour.lua:911
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -366,7 +365,7 @@ msgid ""
 "      %s: %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:917
+#: scripts/scenario_32_devour.lua:915
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -374,7 +373,7 @@ msgid ""
 "      jump overcharge: 10"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:920
+#: scripts/scenario_32_devour.lua:918
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -382,7 +381,7 @@ msgid ""
 "Upgrade paths for player ship types and their max level:"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:922
+#: scripts/scenario_32_devour.lua:920
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -390,7 +389,7 @@ msgid ""
 "      Ship template type: %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:924
+#: scripts/scenario_32_devour.lua:922
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -398,7 +397,7 @@ msgid ""
 "            %s: %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:929
+#: scripts/scenario_32_devour.lua:927
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -406,7 +405,7 @@ msgid ""
 "Goods:"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:931
+#: scripts/scenario_32_devour.lua:929
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -414,7 +413,7 @@ msgid ""
 "    Sell:"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:933
+#: scripts/scenario_32_devour.lua:931
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -422,7 +421,7 @@ msgid ""
 "        %s: Cost:%s   Quantity:%s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:937
+#: scripts/scenario_32_devour.lua:935
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -430,7 +429,7 @@ msgid ""
 "    Trade:"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:939 scripts/scenario_32_devour.lua:945
+#: scripts/scenario_32_devour.lua:937 scripts/scenario_32_devour.lua:943
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -438,7 +437,7 @@ msgid ""
 "        %s: %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:943
+#: scripts/scenario_32_devour.lua:941
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -446,12 +445,12 @@ msgid ""
 "    Buy:"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:957 scripts/scenario_32_devour.lua:961
+#: scripts/scenario_32_devour.lua:955 scripts/scenario_32_devour.lua:959
 msgctxt "stationReport-msgGM"
 msgid "No applicable stations. Reports useless. No action taken"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:995
+#: scripts/scenario_32_devour.lua:993
 #, lua-format
 msgctxt "stationReport-msgGM"
 msgid ""
@@ -459,27 +458,27 @@ msgid ""
 "PlayerShipStats"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1189 scripts/scenario_32_devour.lua:1207
+#: scripts/scenario_32_devour.lua:1187 scripts/scenario_32_devour.lua:1205
 msgctxt "scienceDB"
 msgid "Planet Devourer"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1205
+#: scripts/scenario_32_devour.lua:1203
 msgctxt "scienceDB"
 msgid "Ships"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1206
+#: scripts/scenario_32_devour.lua:1204
 msgctxt "scienceDB"
 msgid "Dreadnought"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1208
+#: scripts/scenario_32_devour.lua:1206
 msgctxt "scienceDB"
 msgid "Odin"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1219
+#: scripts/scenario_32_devour.lua:1217
 msgctxt "scienceDB"
 msgid ""
 "The Planet Devourer is a modified Odin. The jump drive was removed in favor "
@@ -503,101 +502,101 @@ msgid ""
 "(Star Wars and Star Trek respectively)."
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1596
+#: scripts/scenario_32_devour.lua:1598
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s station %s in %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1598
+#: scripts/scenario_32_devour.lua:1600
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s, %s station %s in %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1628
+#: scripts/scenario_32_devour.lua:1630
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s %s %s in %s carrying %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1630
+#: scripts/scenario_32_devour.lua:1632
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s; %s %s %s in %s carrying %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1638
+#: scripts/scenario_32_devour.lua:1640
 msgctxt "scienceDescription-buoy"
 msgid "No data recorded"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1640 scripts/scenario_32_devour.lua:1663
+#: scripts/scenario_32_devour.lua:1642 scripts/scenario_32_devour.lua:1665
 msgctxt "scienceDescription-buoy"
 msgid "Automated data gathering device"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1649
+#: scripts/scenario_32_devour.lua:1651
 msgctxt "scienceDescription-buoy"
 msgid "Come to Billy Bob's for the best food in the sector"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1650
+#: scripts/scenario_32_devour.lua:1652
 msgctxt "scienceDescription-buoy"
 msgid "It's never too late to buy life insurance"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1651
+#: scripts/scenario_32_devour.lua:1653
 msgctxt "scienceDescription-buoy"
 msgid "You'll feel better in an Adder Mark 9"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1652
+#: scripts/scenario_32_devour.lua:1654
 msgctxt "scienceDescription-buoy"
 msgid "Visit Repulse shipyards for the best deals"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1653
+#: scripts/scenario_32_devour.lua:1655
 msgctxt "scienceDescription-buoy"
 msgid "Fresh fish! We catch, you buy!"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1654
+#: scripts/scenario_32_devour.lua:1656
 msgctxt "scienceDescription-buoy"
 msgid "Get your fuel cells at Melinda's Market"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1655
+#: scripts/scenario_32_devour.lua:1657
 msgctxt "scienceDescription-buoy"
 msgid "Find a special companion. All species available"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1656
+#: scripts/scenario_32_devour.lua:1658
 msgctxt "scienceDescription-buoy"
 msgid "Feeling down? Robotherapist is there for you"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1657
+#: scripts/scenario_32_devour.lua:1659
 msgctxt "scienceDescription-buoy"
 msgid "30 days, 30 kilograms, guaranteed"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1658
+#: scripts/scenario_32_devour.lua:1660
 msgctxt "scienceDescription-buoy"
 msgid "Try our asteroid dust diet weight loss program"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1659
+#: scripts/scenario_32_devour.lua:1661
 msgctxt "scienceDescription-buoy"
 msgid "Best tasting water in the quadrant at Willy's Waterway"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1660
+#: scripts/scenario_32_devour.lua:1662
 msgctxt "scienceDescription-buoy"
 msgid "Amazing shows every night at Lenny's Lounge"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:1661
+#: scripts/scenario_32_devour.lua:1663
 msgctxt "scienceDescription-buoy"
 msgid "Tip: make lemons an integral part of your diet"
 msgstr ""
@@ -2871,54 +2870,55 @@ msgid ""
 "Kraylor station %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5713 scripts/scenario_32_devour.lua:5727
-#: scripts/scenario_32_devour.lua:5744 scripts/scenario_32_devour.lua:5759
+#: scripts/scenario_32_devour.lua:5714 scripts/scenario_32_devour.lua:5731
+#: scripts/scenario_32_devour.lua:5748 scripts/scenario_32_devour.lua:5765
 #, lua-format
 msgctxt "mission-tabEngineer"
 msgid "Extract timer:%i"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5714 scripts/scenario_32_devour.lua:5729
-#: scripts/scenario_32_devour.lua:5746 scripts/scenario_32_devour.lua:5761
+#: scripts/scenario_32_devour.lua:5716 scripts/scenario_32_devour.lua:5733
+#: scripts/scenario_32_devour.lua:5750 scripts/scenario_32_devour.lua:5767
 #, lua-format
 msgctxt "mission-tabEngineer+"
 msgid "Extract timer:%i"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5715 scripts/scenario_32_devour.lua:5731
-#: scripts/scenario_32_devour.lua:5748 scripts/scenario_32_devour.lua:5763
+#: scripts/scenario_32_devour.lua:5718 scripts/scenario_32_devour.lua:5735
+#: scripts/scenario_32_devour.lua:5752 scripts/scenario_32_devour.lua:5769
 #, lua-format
 msgctxt "mission-tabDamageControl"
 msgid "Extract timer:%i"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5716 scripts/scenario_32_devour.lua:5733
+#: scripts/scenario_32_devour.lua:5720 scripts/scenario_32_devour.lua:5737
+#: scripts/scenario_32_devour.lua:5754 scripts/scenario_32_devour.lua:5771
 #, lua-format
 msgctxt "mission-tabHelms"
 msgid "Extract timer:%i"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5721
+#: scripts/scenario_32_devour.lua:5725
 msgctxt "mission-buttonEngineer"
 msgid "Extract Plans"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5738
+#: scripts/scenario_32_devour.lua:5742
 msgctxt "mission-buttonEngineer+"
 msgid "Extract Plans"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5753
+#: scripts/scenario_32_devour.lua:5759
 msgctxt "mission-buttonDamageControl"
 msgid "Extract Plans"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5794
+#: scripts/scenario_32_devour.lua:5802
 msgctxt "mission-buttonEngineer"
 msgid "Upload Virus"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5804
+#: scripts/scenario_32_devour.lua:5812
 #, lua-format
 msgctxt "mission-msgEngineer"
 msgid ""
@@ -2926,12 +2926,12 @@ msgid ""
 "and missile systems have entered maintenance mode."
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5807
+#: scripts/scenario_32_devour.lua:5815
 msgctxt "mission-buttonEngineer+"
 msgid "Upload Virus"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5817
+#: scripts/scenario_32_devour.lua:5825
 #, lua-format
 msgctxt "mission-msgEngineer+"
 msgid ""
@@ -2939,12 +2939,12 @@ msgid ""
 "and missile systems have entered maintenance mode."
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5820
+#: scripts/scenario_32_devour.lua:5828
 msgctxt "mission-buttonDamageControl"
 msgid "Upload Virus"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5830
+#: scripts/scenario_32_devour.lua:5838
 #, lua-format
 msgctxt "mission-msgDamageControl"
 msgid ""
@@ -2952,186 +2952,186 @@ msgid ""
 "and missile systems have entered maintenance mode."
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:5949
+#: scripts/scenario_32_devour.lua:5957
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Planet Devourer destroyed. %i out of 5 planets saved."
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6065
+#: scripts/scenario_32_devour.lua:6073
 msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6069
+#: scripts/scenario_32_devour.lua:6077
 msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6073
+#: scripts/scenario_32_devour.lua:6081
 msgctxt "repairCrew-msgDamageControl"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6091
+#: scripts/scenario_32_devour.lua:6099
 msgctxt "coolant-msgEngineer"
 msgid "Automated systems have recovered some coolant"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6094
+#: scripts/scenario_32_devour.lua:6102
 msgctxt "coolant-msgEngineer+"
 msgid "Automated systems have recovered some coolant"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6097
+#: scripts/scenario_32_devour.lua:6105
 msgctxt "coolant-msgDamageControl"
 msgid "Automated systems have recovered some coolant"
-msgstr ""
-
-#: scripts/scenario_32_devour.lua:6137 scripts/scenario_32_devour.lua:6176
-msgctxt "repairCrew-msgEngineer"
-msgid "One of your repair crew has perished"
-msgstr ""
-
-#: scripts/scenario_32_devour.lua:6141 scripts/scenario_32_devour.lua:6180
-msgctxt "repairCrew-msgEngineer+"
-msgid "One of your repair crew has perished"
 msgstr ""
 
 #: scripts/scenario_32_devour.lua:6145 scripts/scenario_32_devour.lua:6184
+msgctxt "repairCrew-msgEngineer"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_32_devour.lua:6149 scripts/scenario_32_devour.lua:6188
+msgctxt "repairCrew-msgEngineer+"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_32_devour.lua:6153 scripts/scenario_32_devour.lua:6192
 msgctxt "repairCrew-msgDamageControl"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6201
+#: scripts/scenario_32_devour.lua:6209
 msgctxt "coolant-msgEngineer"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6205
+#: scripts/scenario_32_devour.lua:6213
 msgctxt "coolant-msgEngineer+"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6209
+#: scripts/scenario_32_devour.lua:6217
 msgctxt "coolant-msgDamageControl"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6216
+#: scripts/scenario_32_devour.lua:6224
 msgctxt "damage-msgEngineer"
-msgid "The probe launch system has been damaged"
-msgstr ""
-
-#: scripts/scenario_32_devour.lua:6219
-msgctxt "damage-msgEngineer+"
-msgid "The probe launch system has been damaged"
-msgstr ""
-
-#: scripts/scenario_32_devour.lua:6222
-msgctxt "damage-msgDamageControl"
 msgid "The probe launch system has been damaged"
 msgstr ""
 
 #: scripts/scenario_32_devour.lua:6227
-msgctxt "damage-msgEngineer"
-msgid "The hacking system has been damaged"
+msgctxt "damage-msgEngineer+"
+msgid "The probe launch system has been damaged"
 msgstr ""
 
 #: scripts/scenario_32_devour.lua:6230
-msgctxt "damage-msgEngineer+"
-msgid "The hacking system has been damaged"
+msgctxt "damage-msgDamageControl"
+msgid "The probe launch system has been damaged"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6233
-msgctxt "damage-msgDamageControl"
+#: scripts/scenario_32_devour.lua:6235
+msgctxt "damage-msgEngineer"
 msgid "The hacking system has been damaged"
 msgstr ""
 
 #: scripts/scenario_32_devour.lua:6238
-msgctxt "damage-msgEngineer"
-msgid "The scanners have been damaged"
+msgctxt "damage-msgEngineer+"
+msgid "The hacking system has been damaged"
 msgstr ""
 
 #: scripts/scenario_32_devour.lua:6241
-msgctxt "damage-msgEngineer+"
-msgid "The scanners have been damaged"
+msgctxt "damage-msgDamageControl"
+msgid "The hacking system has been damaged"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6244
-msgctxt "damage-msgDamageControl"
+#: scripts/scenario_32_devour.lua:6246
+msgctxt "damage-msgEngineer"
 msgid "The scanners have been damaged"
 msgstr ""
 
 #: scripts/scenario_32_devour.lua:6249
-msgctxt "damage-msgEngineer"
-msgid "Combat maneuver has been damaged"
+msgctxt "damage-msgEngineer+"
+msgid "The scanners have been damaged"
 msgstr ""
 
 #: scripts/scenario_32_devour.lua:6252
-msgctxt "damage-msgEngineer+"
-msgid "Combat maneuver has been damaged"
+msgctxt "damage-msgDamageControl"
+msgid "The scanners have been damaged"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6255
-msgctxt "damage-msgDamageControl"
+#: scripts/scenario_32_devour.lua:6257
+msgctxt "damage-msgEngineer"
 msgid "Combat maneuver has been damaged"
 msgstr ""
 
 #: scripts/scenario_32_devour.lua:6260
+msgctxt "damage-msgEngineer+"
+msgid "Combat maneuver has been damaged"
+msgstr ""
+
+#: scripts/scenario_32_devour.lua:6263
+msgctxt "damage-msgDamageControl"
+msgid "Combat maneuver has been damaged"
+msgstr ""
+
+#: scripts/scenario_32_devour.lua:6268
 msgctxt "damage-msgEngineer"
 msgid "Self destruct system has been damaged"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6263
+#: scripts/scenario_32_devour.lua:6271
 msgctxt "damage-msgEngineer+"
 msgid "Self destruct system has been damaged"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6266
+#: scripts/scenario_32_devour.lua:6274
 msgctxt "damage-msgDamageControl"
 msgid "Self destruct system has been damaged"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6291
+#: scripts/scenario_32_devour.lua:6299
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6298
+#: scripts/scenario_32_devour.lua:6306
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6307
+#: scripts/scenario_32_devour.lua:6315
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6312
+#: scripts/scenario_32_devour.lua:6320
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6316
+#: scripts/scenario_32_devour.lua:6324
 msgctxt "inventory-shipLog"
 msgid "     Empty"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6318
+#: scripts/scenario_32_devour.lua:6326
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6333
+#: scripts/scenario_32_devour.lua:6341
 msgctxt "msgMainscreen"
 msgid "Scenario needs the 'Per-system damage' option under 'Extra settings'"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6348
+#: scripts/scenario_32_devour.lua:6356
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -3143,7 +3143,7 @@ msgid ""
 "Good luck."
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6364
+#: scripts/scenario_32_devour.lua:6372
 msgctxt "mission-incCall"
 msgid ""
 "We intercepted some Kraylor transmissions on that weapons test. They say "
@@ -3155,7 +3155,7 @@ msgid ""
 "all the planets in the area, because that's just the kind of beings they are."
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6366
+#: scripts/scenario_32_devour.lua:6374
 #, lua-format
 msgctxt "mission-incCall"
 msgid ""
@@ -3169,13 +3169,13 @@ msgid ""
 "the kind of beings they are."
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6385
+#: scripts/scenario_32_devour.lua:6393
 #, lua-format
 msgctxt "mission-tabHelms"
 msgid "%s %s in %s"
 msgstr ""
 
-#: scripts/scenario_32_devour.lua:6387
+#: scripts/scenario_32_devour.lua:6395
 #, lua-format
 msgctxt "mission-tabTactical"
 msgid "%s %s in %s"

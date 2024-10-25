@@ -1046,7 +1046,7 @@ msgstr ""
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1676
 msgctxt "scienceDB"
-msgid "Youchy"
+msgid "Touchy"
 msgstr ""
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1689

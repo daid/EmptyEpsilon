@@ -30,6 +30,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:301
 #: scripts/shiptemplates/corvette.lua:310
 #: scripts/shiptemplates/corvette.lua:315
+#: scripts/shiptemplates/corvette.lua:360
 msgctxt "class"
 msgid "Corvette"
 msgstr "Corvettes"
@@ -171,12 +172,14 @@ msgstr ""
 
 #: scripts/shiptemplates/corvette.lua:223
 #: scripts/shiptemplates/corvette.lua:311
+#: scripts/shiptemplates/corvette.lua:369
 msgctxt "class"
 msgid "Starfighter"
 msgstr "Chasseurs stellaires"
 
 #: scripts/shiptemplates/corvette.lua:223
 #: scripts/shiptemplates/corvette.lua:310
+#: scripts/shiptemplates/corvette.lua:368
 msgctxt "class"
 msgid "Frigate"
 msgstr "Frégates"
@@ -343,3 +346,13 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:350
 msgid "Kiriya is an improved warp drive version of the Jump Carrier"
 msgstr "Le Kiriya est un transporteur équipé d'un moteur à vitesse lumière."
+
+#: scripts/shiptemplates/corvette.lua:360
+msgctxt "playerShip"
+msgid "Saipan"
+msgstr ""
+
+#: scripts/shiptemplates/corvette.lua:360
+msgctxt "subclass"
+msgid "Carrier"
+msgstr ""
