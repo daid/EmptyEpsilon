@@ -2183,7 +2183,7 @@ msgstr ", "
 #: scripts/scenario_53_escape.lua:2442 scripts/scenario_53_escape.lua:2629
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr "Rien du tout."
+msgstr "rien du tout."
 
 #: scripts/scenario_53_escape.lua:2481 scripts/scenario_53_escape.lua:2677
 msgctxt "trade-comms"

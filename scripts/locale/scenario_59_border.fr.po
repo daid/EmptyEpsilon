@@ -5936,7 +5936,6 @@ msgid "Insufficient reputation for purchase"
 msgstr "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_59_border.lua:10288 scripts/scenario_59_border.lua:10809
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
 msgstr "Auriez-vous des marchandises à vendre ?"

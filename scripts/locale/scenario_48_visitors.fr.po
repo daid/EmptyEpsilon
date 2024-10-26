@@ -223,12 +223,12 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:103
 msgctxt "buttonGM"
 msgid "+Spawn Ship(s)"
-msgstr "+ Ajout de vaisseau(x)"
+msgstr "+ Ajout de vaisseaux"
 
 #: scripts/scenario_48_visitors.lua:104
 msgctxt "buttonGM"
 msgid "+Control Codes"
-msgstr ""
+msgstr "+ Codes de contrôle"
 
 #: scripts/scenario_48_visitors.lua:109 scripts/scenario_48_visitors.lua:253
 #: scripts/scenario_48_visitors.lua:266 scripts/scenario_48_visitors.lua:285
@@ -3743,7 +3743,7 @@ msgstr ", "
 #: scripts/scenario_48_visitors.lua:5601 scripts/scenario_48_visitors.lua:5683
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr "Rien du tout."
+msgstr "rien du tout."
 
 #: scripts/scenario_48_visitors.lua:5614
 msgctxt "shipEnemy-comms"

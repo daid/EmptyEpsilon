@@ -3339,7 +3339,7 @@ msgstr ", "
 #: scripts/scenario_54_PatrolDuty.lua:5815
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr "Rien du tout."
+msgstr "rien du tout."
 
 #: scripts/scenario_54_PatrolDuty.lua:5823
 msgctxt "trade-comms"
