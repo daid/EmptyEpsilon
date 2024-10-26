@@ -131,8 +131,8 @@ function init()
 end
 function mainGMButtons()
 	clearGMFunctions()
-	addGMFunction("+Spawn Ship(s)",spawnGMShips)
-	addGMFunction("+Control Codes",manageControlCodes)
+	addGMFunction(_("buttonGM","+Spawn Ship(s)"),spawnGMShips)
+	addGMFunction(_("buttonGM","+Control Codes"),manageControlCodes)
 end
 
 --	Utilities
