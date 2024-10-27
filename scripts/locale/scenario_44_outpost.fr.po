@@ -18,7 +18,6 @@ msgid "Doomed Outpost"
 msgstr "Avant-poste condamné"
 
 # Scenario description
-#, fuzzy
 msgid ""
 "Far from home, an isolated outpost tries to survive a hostile environment. "
 "This scenario starts off simply enough, but the challenges are significant. "
@@ -65,13 +64,13 @@ msgstr ""
 "ou se sentant claustrophobes en commençant dans un vaisseau aux capacités "
 "limitées.\n"
 "\n"
-"Version 1.09 - Mars 2023\n"
+"Version 2 - Juin 2024\n"
 "\n"
 "- Titre original : Doomed Outpost\n"
 "- Auteur : Xansta (Janv. 2023)\n"
-"- Traduction FR : Muerte\n"
+"- Traduction FR : Muerte (Oct. 24)\n"
 "\n"
-"Communauté française et anglophone sur le Discord USN https://discord.gg/"
+"Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 # Scenario setting
@@ -167,12 +166,11 @@ msgstr "Vitesse à laquelle les ennemis deviennent plus puissants."
 
 msgctxt "Pace"
 msgid "Glacial"
-msgstr ""
+msgstr "Glacial"
 
-#, fuzzy
 msgctxt "Pace"
 msgid "The slowest pace"
-msgstr "Vraiment très rapide."
+msgstr "Le rythme le plus lent qui soit."
 
 msgctxt "Pace"
 msgid "Snail"
@@ -499,7 +497,7 @@ msgstr "+ Réputation"
 #: scripts/scenario_44_outpost.lua:847 scripts/scenario_44_outpost.lua:868
 msgctxt "buttonGM"
 msgid "+Control Codes"
-msgstr ""
+msgstr "+ Codes de contrôle"
 
 #: scripts/scenario_44_outpost.lua:857
 msgctxt "buttonGM"
@@ -547,7 +545,7 @@ msgstr "Coup dur %s"
 #: scripts/scenario_44_outpost.lua:867
 msgctxt "buttonGM"
 msgid "+Spawn Ship(s)"
-msgstr ""
+msgstr "+ Ajout de vaisseaux"
 
 #: scripts/scenario_44_outpost.lua:872
 msgctxt "buttonGM"
@@ -1316,7 +1314,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:3402
 msgctxt "station-comms"
 msgid "Decline transportation request"
-msgstr "Refuser la demande de transport"
+msgstr "Décliner la demande de transport"
 
 #: scripts/scenario_44_outpost.lua:3404
 #, lua-format
@@ -1352,7 +1350,7 @@ msgid "%s thanks you for retrieving the cargo"
 msgstr "%s vous remercie d'avoir récupéré la cargaison."
 
 #: scripts/scenario_44_outpost.lua:3432
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipLog"
 msgid ""
 "Automated systems on %s have informed you of the destruction of station %s. "
@@ -1361,12 +1359,12 @@ msgid ""
 "%s. You received %s reputation for your efforts. The mission has been "
 "removed from your mission log."
 msgstr ""
-"Les systèmes automatisés sur %s vous ont informé de la destruction de la "
+"Les systèmes automatisés sur %s vous informent de la destruction de la "
 "station %s.\n"
-"Votre mission de livraison de marchandises pour %s à %s n'est plus valide. "
-"Vous avez déchargé la cargaison et demandé aux autorités de la station de "
-"s'en occuper pour la famille de %s. Vous avez reçu %s de réputation pour vos "
-"efforts.\n"
+"Votre mission consistant à livrer des marchandises pour %s à %s n'est plus "
+"valide. Vous avez déchargé la cargaison et demandé aux autorités de la "
+"station de s'en occuper pour la famille de %s. Vous avez reçu %s de "
+"réputation pour vos efforts.\n"
 "\n"
 "La mission a été supprimée de votre journal de mission."
 
@@ -1383,17 +1381,17 @@ msgid "The cargo for %s has been loaded on %s"
 msgstr "La cargaison pour %s a été chargée sur %s."
 
 #: scripts/scenario_44_outpost.lua:3450
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipLog"
 msgid ""
 "Automated systems on %s have informed you of the destruction of station %s. "
 "Your mission to retrieve cargo for %s from %s is no longer valid and has "
 "been removed from your mission log."
 msgstr ""
-"Les systèmes automatisés sur %s vous ont informé de la destruction de la "
+"Les systèmes automatisés sur %s vous informent de la destruction de la "
 "station %s.\n"
-"Votre mission de récupération de cargaison pour %s auprès de %s n'est plus "
-"valide et a été supprimée de votre journal de mission."
+"Votre mission consistant à récupérer la cargaison pour %s auprès de %s n'est "
+"plus valide et a été supprimée de votre journal de mission."
 
 #: scripts/scenario_44_outpost.lua:3615
 msgctxt "station-comms"
@@ -1454,14 +1452,14 @@ msgstr ""
 "L'offre disparaît du journal des messages."
 
 #: scripts/scenario_44_outpost.lua:3642
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "station-comms"
 msgid ""
 "You tell %s that you cannot take on any cargo retrieval missions at this "
 "time."
 msgstr ""
-"Vous dites à %s que vous ne pouvez entreprendre aucune mission de transport "
-"pour le moment."
+"Vous dites à %s que vous ne pouvez entreprendre aucune mission de "
+"récupération de cargaison pour le moment."
 
 #: scripts/scenario_44_outpost.lua:3650
 msgctxt "station-comms"
@@ -2296,7 +2294,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:4320 scripts/scenario_44_outpost.lua:4344
 msgctxt "trade-comms"
 msgid "One repair crew should be getting here from their medical checkout in "
-msgstr "Une réparatrice devrait revenir de sa visite médicale dans"
+msgstr "Une réparatrice devrait revenir de sa visite médicale dans "
 
 #: scripts/scenario_44_outpost.lua:4325 scripts/scenario_44_outpost.lua:4330
 #, lua-format
@@ -2764,7 +2762,7 @@ msgid ""
 msgstr "L'accès à certains brouilleurs est payant : explications"
 
 #: scripts/scenario_44_outpost.lua:4787
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "station_comms"
 msgid ""
 "It's complicated. It depends on the relationships between the warp jammer "
@@ -3839,7 +3837,6 @@ msgstr ""
 " A partir de là, c'est au saboteur de jouer."
 
 #: scripts/scenario_44_outpost.lua:5558
-#, fuzzy
 msgctxt "orders-comms"
 msgid "No, we're having enough trouble as it is"
 msgstr "Non, nous avons déjà assez de problèmes comme ça."
@@ -4155,7 +4152,7 @@ msgstr ", "
 #: scripts/scenario_44_outpost.lua:6083 scripts/scenario_44_outpost.lua:6604
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr "Rien du tout."
+msgstr "rien du tout."
 
 #: scripts/scenario_44_outpost.lua:6098
 msgctxt "shipEnemy-comms"
@@ -4377,7 +4374,7 @@ msgstr ""
 "Bonne journée."
 
 #: scripts/scenario_44_outpost.lua:6787
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %i"
 msgstr "Défendez le marqueur %i."
@@ -4678,7 +4675,6 @@ msgid "Medical team has revived one of your repair crew"
 msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
 
 #: scripts/scenario_44_outpost.lua:8172
-#, fuzzy
 msgctxt "repairCrew-msgDamageControl"
 msgid "Medical team has revived one of your repair crew"
 msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
@@ -4694,7 +4690,6 @@ msgid "Automated systems have recovered some coolant"
 msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
 
 #: scripts/scenario_44_outpost.lua:8196
-#, fuzzy
 msgctxt "coolant-msgDamageControl"
 msgid "Automated systems have recovered some coolant"
 msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
@@ -4710,7 +4705,6 @@ msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_44_outpost.lua:8244 scripts/scenario_44_outpost.lua:8283
-#, fuzzy
 msgctxt "repairCrew-msgDamageControl"
 msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
@@ -4726,7 +4720,6 @@ msgid "Damage has caused a loss of coolant"
 msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
 
 #: scripts/scenario_44_outpost.lua:8308
-#, fuzzy
 msgctxt "coolant-msgDamageControl"
 msgid "Damage has caused a loss of coolant"
 msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
@@ -4742,7 +4735,6 @@ msgid "The probe launch system has been damaged"
 msgstr "Le système de lancement des sondes a été endommagé."
 
 #: scripts/scenario_44_outpost.lua:8321
-#, fuzzy
 msgctxt "damage-msgDamageControl"
 msgid "The probe launch system has been damaged"
 msgstr "Le système de lancement des sondes a été endommagé."
@@ -4758,7 +4750,6 @@ msgid "The hacking system has been damaged"
 msgstr "Le système de piratage a été endommagé."
 
 #: scripts/scenario_44_outpost.lua:8332
-#, fuzzy
 msgctxt "damage-msgDamageControl"
 msgid "The hacking system has been damaged"
 msgstr "Le système de piratage a été endommagé."
@@ -4774,7 +4765,6 @@ msgid "The scanners have been damaged"
 msgstr "Les scanners ont été endommagés."
 
 #: scripts/scenario_44_outpost.lua:8343
-#, fuzzy
 msgctxt "damage-msgDamageControl"
 msgid "The scanners have been damaged"
 msgstr "Les scanners ont été endommagés."
@@ -4790,7 +4780,6 @@ msgid "Combat maneuver has been damaged"
 msgstr "La manœuvre de combat a été endommagée."
 
 #: scripts/scenario_44_outpost.lua:8354
-#, fuzzy
 msgctxt "damage-msgDamageControl"
 msgid "Combat maneuver has been damaged"
 msgstr "La manœuvre de combat a été endommagée."
@@ -4806,7 +4795,6 @@ msgid "Self destruct system has been damaged"
 msgstr "Le système d'autodestruction a été endommagé."
 
 #: scripts/scenario_44_outpost.lua:8365
-#, fuzzy
 msgctxt "damage-msgDamageControl"
 msgid "Self destruct system has been damaged"
 msgstr "Le système d'autodestruction a été endommagé."
