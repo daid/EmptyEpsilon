@@ -134,7 +134,7 @@ function updatePlayerSoftTemplate(p)
 			end
 			p.score_settings_source = temp_type_name
 		else
-			addGMMessage(string.format("Player ship %s's template type (%s) could not be found in table player_ship_stats",p:getCallSign(),temp_type_name))
+			addGMMessage(string.format(_("msgGM","Player ship %s's template type (%s) could not be found in table player_ship_stats"),p:getCallSign(),temp_type_name))
 		end
 	end
 	p.maxRepairCrew = p:getRepairCrewCount()
@@ -1641,7 +1641,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, tem
 		template_pool = getTemplatePool(enemyStrength)
 	end
 	if #template_pool < 1 then
-		addGMMessage("Empty Template pool: fix excludes or other criteria")
+		addGMMessage(_("msgGM","Empty Template pool: fix excludes or other criteria"))
 		return enemyList
 	end
 	while enemyStrength > 0 do
