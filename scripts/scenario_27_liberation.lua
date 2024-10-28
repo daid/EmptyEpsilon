@@ -3112,7 +3112,7 @@ function processEjecta()
 		reset_nova_process = true
 		ejecta = {}
 		if second_star_destroyed then
-			globalMessage("The Exuari really enjoyed the fireworks at your expense")
+			globalMessage(_("msgMainscreen","The Exuari really enjoyed the fireworks at your expense"))
 			victory("Exuari")
 		end
 	end
