@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -28,20 +28,21 @@ msgstr ""
 msgctxt "station-comms"
 msgid "No communication officers available due to station emergency."
 msgstr ""
+"Aucun agent de communication disponible en raison d'une urgence à la station."
 
 #: scripts/comms_scenario_utility.lua:178
 #: scripts/comms_scenario_utility.lua:1462
 #: scripts/comms_scenario_utility.lua:3609
 msgctxt "station-comms"
 msgid "Relay officers unavailable during station emergency."
-msgstr ""
+msgstr "Station en état d'alerte : agents de communication indisponibles."
 
 #: scripts/comms_scenario_utility.lua:179
 #: scripts/comms_scenario_utility.lua:1463
 #: scripts/comms_scenario_utility.lua:3610
 msgctxt "station-comms"
 msgid "Relay officers reassigned for station emergency."
-msgstr ""
+msgstr "État d'urgence de la station : officiers de communication réaffectés."
 
 #: scripts/comms_scenario_utility.lua:180
 #: scripts/comms_scenario_utility.lua:1464
@@ -49,6 +50,8 @@ msgstr ""
 msgctxt "station-comms"
 msgid "Station emergency precludes response from relay officer."
 msgstr ""
+"L'état d'alerte de la station empêche l'intervention de l'officier des "
+"communications."
 
 #: scripts/comms_scenario_utility.lua:181
 msgctxt "station-comms"
@@ -119,7 +122,7 @@ msgstr "batteries"
 #: scripts/comms_scenario_utility.lua:257
 msgctxt "trade-comms"
 msgid "beam"
-msgstr "faisceaux laser"
+msgstr "faisceaux"
 
 #: scripts/comms_scenario_utility.lua:258
 msgctxt "trade-comms"
@@ -139,12 +142,12 @@ msgstr "filaments"
 #: scripts/comms_scenario_utility.lua:261
 msgctxt "trade-comms"
 msgid "impulse"
-msgstr "moteurs à impulsion"
+msgstr "impulsions"
 
 #: scripts/comms_scenario_utility.lua:262
 msgctxt "trade-comms"
 msgid "lifter"
-msgstr "élévateur"
+msgstr "élévateurs"
 
 #: scripts/comms_scenario_utility.lua:263
 msgctxt "trade-comms"
@@ -829,24 +832,24 @@ msgstr "Au rapport"
 #: scripts/comms_scenario_utility.lua:877
 msgctxt "situationReport-comms"
 msgid "Report station status"
-msgstr ""
+msgstr "Rapport de situation de la station"
 
 #: scripts/comms_scenario_utility.lua:878
 #, lua-format
 msgctxt "situationReport-comms"
 msgid "Report station %s status"
-msgstr ""
+msgstr "Rapport de l'état de la station %s"
 
 #: scripts/comms_scenario_utility.lua:879
 msgctxt "situationReport-comms"
 msgid "What is your status?"
-msgstr ""
+msgstr "Quelle est votre situation ?"
 
 #: scripts/comms_scenario_utility.lua:880
 #, lua-format
 msgctxt "situationReport-comms"
 msgid "What is the condition of station %s?"
-msgstr ""
+msgstr "Quel est l'état de la station %s ?"
 
 #: scripts/comms_scenario_utility.lua:883
 #, lua-format
@@ -1285,9 +1288,9 @@ msgid ""
 "enhancements. They might include the addition of an ftl drive, a change in "
 "the range of the jump drive or an increase in the top speed of the warp drive"
 msgstr ""
-"Les mises à niveau FTL : abréviation de \"plus rapide que la "
-"lumière\" (Faster Than Light), font référence aux améliorations des moteurs "
-"de téléportation et vitesse lumière. Ils peuvent inclure :\n"
+"Les mises à niveau FTL : abréviation de \"plus rapide que la lumière\" "
+"(Faster Than Light), font référence aux améliorations des moteurs de "
+"téléportation et vitesse lumière. Ils peuvent inclure :\n"
 "- L'ajout d'un moteur FTL.\n"
 "- La modification de la plage de saut de la téléportation.\n"
 "- Une augmentation de la vitesse maximale de la vitesse lumière."
@@ -1646,7 +1649,7 @@ msgstr "Pas assez de réputation."
 #: scripts/comms_scenario_utility.lua:9384
 msgctxt "needRep-comms"
 msgid "You need more reputation"
-msgstr ""
+msgstr "Vous avez besoin de plus de réputation."
 
 #: scripts/comms_scenario_utility.lua:1164
 #: scripts/comms_scenario_utility.lua:1293
@@ -1712,7 +1715,7 @@ msgstr ""
 #, lua-format
 msgctxt "needRep-comms"
 msgid "You need more than %i reputation"
-msgstr ""
+msgstr "Vous avez besoin de plus de %i de réputation."
 
 #: scripts/comms_scenario_utility.lua:1165
 #: scripts/comms_scenario_utility.lua:1294
@@ -1843,7 +1846,7 @@ msgstr "Vous n'avez pas assez de réputation."
 #, lua-format
 msgctxt "needRep-comms"
 msgid "%i reputation is insufficient"
-msgstr ""
+msgstr "%i de réputation est insuffisant."
 
 #: scripts/comms_scenario_utility.lua:1246
 msgctxt "cartographyOffice-comms"
@@ -2025,22 +2028,24 @@ msgid ""
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:1409
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "station-comms"
 msgid "%s to %s, receiving your communication. Proceed with your message."
 msgstr ""
+"%s à %s, réception de votre communication. Nous attendons votre message."
 
 #: scripts/comms_scenario_utility.lua:1410
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "station-comms"
 msgid "Confirmed, %s. You have successfully connected to %s. Go ahead."
 msgstr ""
+"Communication confirmée, %s. Vous êtes connecté avec succès à %s. Parlez."
 
 #: scripts/comms_scenario_utility.lua:1411
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "station-comms"
 msgid "Confirmed, %s. You're connected to %s. Go ahead."
-msgstr ""
+msgstr "Communication confirmée, %s. Vous êtes connecté à %s. Parlez."
 
 #: scripts/comms_scenario_utility.lua:1412
 #, lua-format
@@ -2061,6 +2066,8 @@ msgid ""
 "%s confirms %s's communication connection. Please, don't keep us in suspense "
 "any longer."
 msgstr ""
+"Notre station %s confirme la mise en communication avec votre vaisseau %s. "
+"Quel suspense. L'impatience nous guette, s'il vous plaît parlez."
 
 #: scripts/comms_scenario_utility.lua:1415
 #, lua-format
@@ -2069,6 +2076,8 @@ msgid ""
 "%s acknowledges %s's communication. Pray, don't keep us in suspense any "
 "longer."
 msgstr ""
+"Notre station %s accuse réception de votre appel, %s.\n"
+"Pitié, ne nous laissez plus dans l'ignorance… Que voulez-vous ?"
 
 #: scripts/comms_scenario_utility.lua:1416
 #, lua-format
@@ -2077,6 +2086,8 @@ msgid ""
 "%s, it is absolutely thrilling to receive your undoubtably important "
 "message. Please enlighten us."
 msgstr ""
+"Absolument passionnant de recevoir un appel de votre part %s. C'est sans nul "
+"doute de première importance. Nous avons hâte de vous entendre."
 
 #: scripts/comms_scenario_utility.lua:1417
 #, lua-format
@@ -2085,6 +2096,8 @@ msgid ""
 "%s, it is positively thrilling to be the recipient of your undoubtably "
 "important message. Please enlighten us."
 msgstr ""
+"%s, c'est vraiment excitant d'être le destinataire de votre message, "
+"sûrement vital pour la galaxie. Nous sommes impatients de vous entendre."
 
 #: scripts/comms_scenario_utility.lua:1418
 #, lua-format
@@ -2093,24 +2106,33 @@ msgid ""
 "Communication connection acknowledged, %s. Try not to waste our time any "
 "more than you already have. What do you want?"
 msgstr ""
+"Communication établie avec %s.\n"
+"Essayez de ne pas nous faire perdre plus de temps que vous ne l'avez déjà "
+"fait. Que voulez-vous ?"
 
 #: scripts/comms_scenario_utility.lua:1419
 #, lua-format
 msgctxt "station-comms"
 msgid "Acknowledged, %s. Try not to waste our time. What do you want?"
 msgstr ""
+"Nous vous écoutons %s. Ne nous faites pas perdre notre temps. Que voulez-"
+"vous ?"
 
 #: scripts/comms_scenario_utility.lua:1420
 #, lua-format
 msgctxt "station-comms"
 msgid "What is it, %s? Be quick about it; we're not here simply to chat."
 msgstr ""
+"Qu'est-ce qu'il y a, %s ? Soyez rapide. Nous avons autre chose à faire que "
+"bavasser."
 
 #: scripts/comms_scenario_utility.lua:1421
 #, lua-format
 msgctxt "station-comms"
 msgid "What is it now, %s? Make it quick; we're not here for small talk."
 msgstr ""
+"Grrr...Qu'y a-t-il à la fin %s ? Faites vite, nous ne sommes pas là pour "
+"bavarder."
 
 #: scripts/comms_scenario_utility.lua:1422
 #, lua-format
@@ -2119,18 +2141,22 @@ msgid ""
 "Station %s reluctantly acknowledges your communication connection. Make it "
 "snappy, %s."
 msgstr ""
+"Notre station %s valide à contrecœur votre demande de communication %s. "
+"Soyez bref."
 
 #: scripts/comms_scenario_utility.lua:1423
 #, lua-format
 msgctxt "station-comms"
 msgid "%s reluctantly acknowledges your communication. Make it snappy, %s."
 msgstr ""
+"%s accuse réception, à regret, de votre communication. Merci de faire court "
+"%s."
 
 #: scripts/comms_scenario_utility.lua:1424
 #, lua-format
 msgctxt "station-comms"
 msgid "Channel opened to %s. Briefly summarize your business, %s."
-msgstr ""
+msgstr "Canal ouvert avec %s. Résumez brièvement votre activité %s."
 
 #: scripts/comms_scenario_utility.lua:1447
 #: scripts/comms_scenario_utility.lua:3589
@@ -2140,6 +2166,8 @@ msgid ""
 "%s Communications Portal\n"
 "%s"
 msgstr ""
+"Portail de communication de la station %s :\n"
+"%s"
 
 #: scripts/comms_scenario_utility.lua:1468
 #: scripts/comms_scenario_utility.lua:1480
@@ -2166,7 +2194,7 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:3622
 msgctxt "station-comms"
 msgid "Please be quick. Sensors detect enemies."
-msgstr ""
+msgstr "S'il vous plaît, soyez bref. Nos capteurs détectent des ennemis."
 
 #: scripts/comms_scenario_utility.lua:1476
 #: scripts/comms_scenario_utility.lua:3623
@@ -2290,27 +2318,27 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:1632
 msgctxt "stationAssist-comms"
 msgid "Send reinforcements"
-msgstr ""
+msgstr "Nous envoyer des renforts"
 
 #: scripts/comms_scenario_utility.lua:1633
 msgctxt "stationAssist-comms"
 msgid "Request friendly warship"
-msgstr ""
+msgstr "Demande de soutien avec un vaisseau de guerre"
 
 #: scripts/comms_scenario_utility.lua:1634
 msgctxt "stationAssist-comms"
 msgid "Send military help"
-msgstr ""
+msgstr "Recevoir une aide militaire"
 
 #: scripts/comms_scenario_utility.lua:1635
 msgctxt "stationAssist-comms"
 msgid "Get a ship to help us"
-msgstr ""
+msgstr "Obtenir un vaisseau pour nous aider"
 
 #: scripts/comms_scenario_utility.lua:1646
 msgctxt "stationAssist-comms"
 msgid "What kind of reinforcement ship?"
-msgstr ""
+msgstr "Quel type de vaisseau de renfort ?"
 
 #: scripts/comms_scenario_utility.lua:1647
 msgctxt "stationAssist-comms"
@@ -2458,66 +2486,67 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:1782
 msgctxt "stationAssist-comms"
 msgid "Request supply drop"
-msgstr ""
+msgstr "Demander une cargaison de ravitaillement"
 
 #: scripts/comms_scenario_utility.lua:1783
 msgctxt "stationAssist-comms"
 msgid "We need some supplies delivered"
-msgstr ""
+msgstr "Nous avons besoin de recevoir du ravitaillement"
 
 #: scripts/comms_scenario_utility.lua:1784
 msgctxt "stationAssist-comms"
 msgid "Could you drop us some supplies?"
-msgstr ""
+msgstr "Pourriez-vous nous envoyer du ravitaillement ?"
 
 #: scripts/comms_scenario_utility.lua:1785
 msgctxt "stationAssist-comms"
 msgid "We could really use a supply drop"
-msgstr ""
+msgstr "Nous pourrions avoir besoin d'une cargaison de ravitaillement"
 
 #: scripts/comms_scenario_utility.lua:1789
 msgctxt "stationAssist-comms"
 msgid "What kind of supply drop would you like?"
-msgstr ""
+msgstr "Quel sorte de cargaison de ravitaillement souhaitez-vous ?"
 
 #: scripts/comms_scenario_utility.lua:1790
 msgctxt "stationAssist-comms"
 msgid "Supply drop type?"
-msgstr ""
+msgstr "Quel type de cargaison de ravitaillement ?"
 
 #: scripts/comms_scenario_utility.lua:1791
 msgctxt "stationAssist-comms"
 msgid "In what way would you like your supplies delivered?"
 msgstr ""
+"De quelle manière souhaitez-vous que votre ravitaillement vous soit livré ?"
 
 #: scripts/comms_scenario_utility.lua:1792
 msgctxt "stationAssist-comms"
 msgid "Supply drop method?"
-msgstr ""
+msgstr "Méthode de livraison de votre ravitaillement ?"
 
 #: scripts/comms_scenario_utility.lua:1797
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Normal (%i reputation)"
-msgstr ""
+msgstr "Normale (%i rép)"
 
 #: scripts/comms_scenario_utility.lua:1798
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Regular (%i reputation)"
-msgstr ""
+msgstr "Régulière (%i rép)"
 
 #: scripts/comms_scenario_utility.lua:1799
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Plain (%i reputation)"
-msgstr ""
+msgstr "Ordinaire (%i rép)"
 
 #: scripts/comms_scenario_utility.lua:1800
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Simple (%i reputation)"
-msgstr ""
+msgstr "Simple (%i rép)"
 
 #: scripts/comms_scenario_utility.lua:1805
 #: scripts/comms_scenario_utility.lua:1863
@@ -2543,6 +2572,7 @@ msgstr ""
 msgctxt "stationAssist-comms"
 msgid "Set a waypoint so that we can place your supplies."
 msgstr ""
+"Définissez un marqueur afin que nous puissions y déposer votre cargaison."
 
 #: scripts/comms_scenario_utility.lua:1807
 #: scripts/comms_scenario_utility.lua:1865
@@ -2554,7 +2584,7 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:2259
 msgctxt "stationAssist-comms"
 msgid "Supplies require a waypoint as a target."
-msgstr ""
+msgstr "Le ravitaillement nécessite un marqueur comme point de livraison."
 
 #: scripts/comms_scenario_utility.lua:1808
 #: scripts/comms_scenario_utility.lua:1866
@@ -2566,7 +2596,7 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:2260
 msgctxt "stationAssist-comms"
 msgid "Before requesting supplies, you need to set a waypoint."
-msgstr ""
+msgstr "Avant de demander un ravitaillement vous devez définir un marqueur."
 
 #: scripts/comms_scenario_utility.lua:1813
 #: scripts/comms_scenario_utility.lua:1871
@@ -2590,7 +2620,7 @@ msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
 #: scripts/comms_scenario_utility.lua:2266
 msgctxt "stationAssist-comms"
 msgid "Identify the supply delivery waypoint"
-msgstr ""
+msgstr "Indiquez-nous le point de livraison du ravitaillement."
 
 #: scripts/comms_scenario_utility.lua:1815
 #: scripts/comms_scenario_utility.lua:1873
@@ -2602,7 +2632,7 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:2267
 msgctxt "stationAssist-comms"
 msgid "Where do you want your supplies?"
-msgstr ""
+msgstr "Où voulez-vous recevoir votre ravitaillement ?"
 
 #: scripts/comms_scenario_utility.lua:1816
 #: scripts/comms_scenario_utility.lua:1874
@@ -2614,7 +2644,7 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:2268
 msgctxt "stationAssist-comms"
 msgid "Where do the supplies go?"
-msgstr ""
+msgstr "Où doit aller cette cargaison ?"
 
 #: scripts/comms_scenario_utility.lua:1820
 #: scripts/comms_scenario_utility.lua:1878
@@ -2642,42 +2672,47 @@ msgstr ""
 msgctxt "stationAssist-comms"
 msgid "We sent a supply ship to waypoint %i"
 msgstr ""
+"Nous venons de déployer un vaisseau de ravitaillement qui déposera votre "
+"cargaison au marqueur %i."
 
 #: scripts/comms_scenario_utility.lua:1831
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "There's a ship headed for %i with your supplies"
 msgstr ""
+"Un vaisseau se dirige droit vers %i avec votre cargaison de ravitaillement."
 
 #: scripts/comms_scenario_utility.lua:1832
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "A ship should be arriving soon at waypoint %i with your supplies"
 msgstr ""
+"C'est entendu. Un vaisseau devrait bientôt arriver au marqueur %i avec votre "
+"cargaison."
 
 #: scripts/comms_scenario_utility.lua:1855
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Delivered by jump ship (%d reputation)"
-msgstr ""
+msgstr "Livré par vaisseau téléporteur (%d rép)"
 
 #: scripts/comms_scenario_utility.lua:1856
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Jump ship drop (%i reputation)"
-msgstr ""
+msgstr "Largage par vaisseau téléporteur (%d rép)"
 
 #: scripts/comms_scenario_utility.lua:1857
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Deliver with jump ship (%i reputation)"
-msgstr ""
+msgstr "Livraison par vaisseau téléporteur (%d rép)"
 
 #: scripts/comms_scenario_utility.lua:1858
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Jump ship supply drop (%i reputation)"
-msgstr ""
+msgstr "Largage de la livraison par vaisseau téléporteur (%d rép)"
 
 #: scripts/comms_scenario_utility.lua:1888
 #, lua-format
@@ -10782,17 +10817,17 @@ msgstr "Oui ?"
 #: scripts/comms_scenario_utility.lua:9100
 msgctxt "trade-comms"
 msgid "What?"
-msgstr ""
+msgstr "Quoi ?"
 
 #: scripts/comms_scenario_utility.lua:9101
 msgctxt "trade-comms"
 msgid "Hmm?"
-msgstr ""
+msgstr "Hmm ?"
 
 #: scripts/comms_scenario_utility.lua:9102
 msgctxt "trade-comms"
 msgid "State your business."
-msgstr ""
+msgstr "Qu'est ce que vous voulez ?"
 
 #: scripts/comms_scenario_utility.lua:9138
 msgctxt "trade-comms"
