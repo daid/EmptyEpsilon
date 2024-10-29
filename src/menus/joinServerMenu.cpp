@@ -35,7 +35,7 @@ JoinServerScreen::JoinServerScreen(const ServerScanner::ServerInfo& target)
         game_client->sendPassword(password_entry->getText().upper());
     }))->setPosition(420, 0, sp::Alignment::CenterLeft)->setSize(160, 50);
 
-    if (target.type == ServerScanner::ServerType::SteamFriend) {
+    if (target.type == ServerScanner::ServerType::SteamFriend || target.name == "steam") {
 #ifdef STEAMSDK
         new GameClient(VERSION_NUMBER, target.port);
 #endif
