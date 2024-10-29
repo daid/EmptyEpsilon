@@ -174,7 +174,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// obj:getDescription() -- returns the "fullscan" description
     /// obj:getDescription("friendorfoeidentified") -- returns the "friendorfoeidentified" description
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getDescription);
-    /// Sets this SpaceObject's radar signature, which creates noise on the science screen's radar raw signal ring.
+    /// Sets this SpaceObject's radar signature, which creates noise on the science screen's raw radar signal ring.
     /// The raw signal ring contains red (electrical), green (biological), and blue (gravitational) bands of waveform noise.
     /// Certain SpaceObject subclasses might set their own defaults or dynamically modify their signatures using this value as a baseline.
     /// Requires numeric values ranging from 0.0 to 1.0 for the gravitational, electrical, and biological radar bands, in that order.
