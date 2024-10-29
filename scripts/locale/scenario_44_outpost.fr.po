@@ -981,7 +981,7 @@ msgstr "%s minutes et %s seconde"
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s station %s in %s"
-msgstr "Enregistrement du capteur : station %s %s en secteur %s"
+msgstr "Enregistrement du capteur : station %s %s en secteur %s "
 
 #: scripts/scenario_44_outpost.lua:2541
 #, lua-format

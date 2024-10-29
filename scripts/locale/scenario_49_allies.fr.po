@@ -2305,14 +2305,15 @@ msgstr "Où se trouve Bespin ?"
 msgctxt "path-comms"
 msgid "Bespin is in %s and enemies are within 30U of Cloud City"
 msgstr ""
-"Bespin se trouve dans %s et des ennemis sont à moins de 30U de Cloud City."
+"Bespin se trouve dans le secteur %s et des ennemis sont à moins de 30U de "
+"Cloud City."
 
 #: scripts/scenario_49_allies.lua:4033 scripts/scenario_49_allies.lua:4423
 #: scripts/scenario_49_allies.lua:5053
 #, lua-format
 msgctxt "path-comms"
 msgid "Bespin is in %s"
-msgstr "Bespin se trouve dans %s."
+msgstr "Bespin se trouve dans le secteur %s."
 
 #: scripts/scenario_49_allies.lua:4040
 msgctxt "explainGoods-comms"
@@ -3740,6 +3741,7 @@ msgid ""
 "possibility, but we did not take him seriously. He was working on a defense "
 "mechanism. Find professor Unruh and get the plans for his defense mechanism"
 msgstr ""
+"Équipage,\n"
 "Nos services de renseignement nous signalent que les Éxuaris sont sur le "
 "point de finaliser un système d'arme \"apocalyptique\". Les Nukes seraient "
 "des jouets à coté.\n"
@@ -3946,10 +3948,12 @@ msgid ""
 "for commerce and military operations. Contact the Arlenians and render "
 "assistance"
 msgstr ""
-"Nos alliés, les Arléniens viennent de nous informer que les Kraylors "
+"Équipage,\n"
+"Nos alliés les Arléniens viennent de nous informer que les Kraylors "
 "attaquent l'installation minière autour de la planète Bespin. Nous dépendons "
 "fortement de cet approvisionnement en minéraux pour le commerce et les "
-"opérations militaires. Contactez les Arléniens et apportez-leur votre aide."
+"opérations militaires.\n"
+"Contactez au plus vite les Arléniens et apportez-leur votre aide."
 
 #: scripts/scenario_49_allies.lua:6334
 msgctxt "BespinOrders-comms"
