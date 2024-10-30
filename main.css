@@ -87,8 +87,13 @@ a.download.android {
 }
 
 a.download.debian {
-    color: #CE0056;
+	color: #CE0056;
     border-color: #CE0056;
+}
+
+a.download.flathub {
+	color: lightgray;
+	border-color:lightgray;
 }
 
 a.download:hover {
