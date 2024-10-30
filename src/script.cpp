@@ -1012,7 +1012,7 @@ static void luaCommandCancelSelfDestruct(sp::ecs::Entity ship) {
 static void luaCommandConfirmDestructCode(sp::ecs::Entity ship, int index, int code) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandConfirmDestructCode(index, code); return; }
     if (auto self_destruct = ship.getComponent<SelfDestruct>()) {
-        if (index >= 0 && index < SelfDestruct::max_codes && self_destruct->code[index] == code && self_destruct->active)
+        if (index >= 0 && index < SelfDestruct::max_codes && int(self_destruct->code[index]) == code && self_destruct->active)
             self_destruct->confirmed[index] = true;
     }
 }
