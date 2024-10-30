@@ -35,7 +35,7 @@ msgstr ""
 "- Difficulté : *** (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"EN COURS DE TRADUCTION 69%\n"
+"EN COURS DE TRADUCTION 73%\n"
 "\n"
 "Mission : Célébrons le Jour de la Libération, lorsque nous, humains, nous "
 "sommes enfin libérés de l'occupation des Kraylors.\n"
@@ -920,38 +920,38 @@ msgstr "Que voulez-vous ?"
 #: scripts/scenario_27_liberation.lua:3628
 msgctxt "shipAssist-comms"
 msgid "Why did you contact us?"
-msgstr ""
+msgstr "Pourquoi nous avez-vous contacté ?"
 
 #: scripts/scenario_27_liberation.lua:3629
 msgctxt "shipAssist-comms"
 msgid "What is it?"
-msgstr ""
+msgstr "Qu'est-ce que c'est ?"
 
 #: scripts/scenario_27_liberation.lua:3630
 msgctxt "shipAssist-comms"
 msgid "Yeah?"
-msgstr ""
+msgstr "Ouais ?"
 
 #: scripts/scenario_27_liberation.lua:3635
 msgctxt "shipAssist-comms"
 msgid "What can I do for you?"
-msgstr ""
+msgstr "Que puis-je faire pour vous ?"
 
 #: scripts/scenario_27_liberation.lua:3636
 msgctxt "shipAssist-comms"
 msgid "What's on your mind?"
-msgstr ""
+msgstr "Qu'est-ce qui vous préoccupe ?"
 
 #: scripts/scenario_27_liberation.lua:3637
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "What can we do for you, %s?"
-msgstr ""
+msgstr "Que pouvons-nous faire pour vous, %s ?"
 
 #: scripts/scenario_27_liberation.lua:3638
 msgctxt "shipAssist-comms"
 msgid "What brings you to us?"
-msgstr ""
+msgstr "Qu'est-ce qui vous amène à nous ?"
 
 #: scripts/scenario_27_liberation.lua:3643
 msgctxt "shipAssist-comms"
@@ -961,19 +961,19 @@ msgstr "Monsieur, comment pouvons-nous vous assister ?"
 #: scripts/scenario_27_liberation.lua:3644
 msgctxt "shipAssist-comms"
 msgid "Sir, what can we do to help you?"
-msgstr ""
+msgstr "Monsieur, que pouvons-nous faire pour vous aider ?"
 
 #: scripts/scenario_27_liberation.lua:3645
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Greetings %s, how can we assist?"
-msgstr ""
+msgstr "Salutations %s, comment pouvons-nous vous assister ?"
 
 #: scripts/scenario_27_liberation.lua:3646
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "How can we help you, %s?"
-msgstr ""
+msgstr "Comment pouvons-nous vous aider, %s ?"
 
 #: scripts/scenario_27_liberation.lua:3652
 msgctxt "trade-comms"
@@ -1025,6 +1025,8 @@ msgid ""
 "Freighter where Jasmine Purdue was working was destroyed. She and the crew "
 "moved to another freighter."
 msgstr ""
+"Le cargo sur lequel travaillait Jasmine Purdue a été détruit. Elle et "
+"l'équipage ont déménagé sur un autre cargo."
 
 #: scripts/scenario_27_liberation.lua:3677
 msgctxt "ship-comms"

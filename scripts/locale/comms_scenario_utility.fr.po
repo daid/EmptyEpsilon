@@ -4449,6 +4449,9 @@ msgid ""
 "Greetings, stellar correspondent. %s's docking is a source of mild "
 "irritation. What cosmic drama unfolds now?"
 msgstr ""
+"Salutations, correspondant stellaire. Sachez que l'amarrage de votre "
+"vaisseau le %s est source de légère irritation ici.\n"
+"Quel drame cosmique se déroule actuellement ?"
 
 #: scripts/comms_scenario_utility.lua:3564
 #, lua-format
@@ -4457,6 +4460,10 @@ msgid ""
 "Welcome aboard, cosmic messenger. %s's docking better have a good reason. We "
 "have enough on our plate without your cosmic theatrics."
 msgstr ""
+"Bienvenue à bord, messager cosmique. Il est préférable que l'amarrage de %s "
+"chez nous soit justifié.\n"
+"Nous en avons suffisamment dans notre assiette sans avoir à en rajouter avec "
+"vos singeries théâtrales cosmiques."
 
 #: scripts/comms_scenario_utility.lua:3565
 #, lua-format
@@ -4465,6 +4472,9 @@ msgid ""
 "Hello, starbound emissary. %s's presence is less of a pleasure and more of a "
 "cosmic headache. What brings you to %s?"
 msgstr ""
+"Bien le bonjour, émissaire étoilé. La présence de votre %s chez nous est "
+"moins un plaisir qu'un casse-tête cosmique.\n"
+"Qu'est-ce qui vous amène sur %s ?"
 
 #: scripts/comms_scenario_utility.lua:3566
 #, lua-format
@@ -4473,6 +4483,9 @@ msgid ""
 "Salutations, interstellar nuisance. %s's docking is the last thing we "
 "needed. What pressing crisis are you here to address?"
 msgstr ""
+"Salutations, nuisance interstellaire. \n"
+"L'amarrage de %s est la dernière chose dont nous avions besoin. Quelle crise "
+"urgente vous amène ici ?"
 
 #: scripts/comms_scenario_utility.lua:3715
 msgctxt "station-comms"
@@ -4604,7 +4617,7 @@ msgstr "j'aurai besoin d'informations"
 #: scripts/comms_scenario_utility.lua:3803
 msgctxt "station-comms"
 msgid "Ask questions"
-msgstr ""
+msgstr "Poser des questions"
 
 #: scripts/comms_scenario_utility.lua:3804
 msgctxt "station-comms"
@@ -4614,22 +4627,22 @@ msgstr "Nous avons besoin de savoir ce que vous savez"
 #: scripts/comms_scenario_utility.lua:3808
 msgctxt "station-comms"
 msgid "Dispatch office"
-msgstr ""
+msgstr "Bureau central"
 
 #: scripts/comms_scenario_utility.lua:3809
 msgctxt "station-comms"
 msgid "Visit the dispatch office"
-msgstr ""
+msgstr "Visiter le bureau central"
 
 #: scripts/comms_scenario_utility.lua:3810
 msgctxt "station-comms"
 msgid "Check on possible missions"
-msgstr "Consulter les missions possibles"
+msgstr "Consulter les missions et services possibles"
 
 #: scripts/comms_scenario_utility.lua:3811
 msgctxt "station-comms"
 msgid "Start or complete a mission"
-msgstr "Démarrer ou terminer une mission"
+msgstr "Démarrer une mission ou utiliser un service"
 
 #: scripts/comms_scenario_utility.lua:3815
 msgctxt "station-comms"
@@ -4651,7 +4664,7 @@ msgstr ""
 #, lua-format
 msgctxt "station-comms"
 msgid "Replenish supplies on %s"
-msgstr ""
+msgstr "Ravitailler %s"
 
 #: scripts/comms_scenario_utility.lua:3823
 msgctxt "station-comms"
@@ -5505,44 +5518,44 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:4376
 msgctxt "station-comms"
 msgid "Which of these missions and/or tasks are you interested in?"
-msgstr ""
+msgstr "Lequel de ces services ou missions vous intéresse ?"
 
 #: scripts/comms_scenario_utility.lua:4377
 msgctxt "station-comms"
 msgid "Are you interested in any of thises missions/tasks?"
-msgstr ""
+msgstr "Êtes-vous intéressé par l’un de ces services ou missions ?"
 
 #: scripts/comms_scenario_utility.lua:4378
 msgctxt "station-comms"
 msgid "You may select from one of these missions or tasks:"
-msgstr ""
+msgstr "Vous pouvez choisir parmi l'un de ces services ou missions :"
 
 #: scripts/comms_scenario_utility.lua:4379
 msgctxt "station-comms"
 msgid "Do any of these missions or tasks interest you?"
-msgstr ""
+msgstr "L'un de ces services ou missions vous intéresse-il ?"
 
 #: scripts/comms_scenario_utility.lua:4400
 msgctxt "station-comms"
 msgid "No missions or tasks available here."
-msgstr "Aucune mission ou tâche disponible ici."
+msgstr "Aucun service ou mission disponible ici."
 
 #: scripts/comms_scenario_utility.lua:4401
 #, lua-format
 msgctxt "station-comms"
 msgid "No missions or tasks are available here at %s."
-msgstr "Aucune mission ou tâche ne sont disponible ici sur %s."
+msgstr "Aucun service ou mission ne sont disponible ici sur %s."
 
 #: scripts/comms_scenario_utility.lua:4402
 #, lua-format
 msgctxt "station-comms"
 msgid "%s has no missions or tasks available."
-msgstr "%s n'a aucune mission ou tâche disponible actuellement."
+msgstr "%s n'a aucun service ou mission disponible actuellement."
 
 #: scripts/comms_scenario_utility.lua:4403
 msgctxt "station-comms"
 msgid "There are currently no missions or tasks available here."
-msgstr ""
+msgstr "Il n'y a actuellement aucun service ou mission disponible ici."
 
 #: scripts/comms_scenario_utility.lua:4430
 #, lua-format
@@ -6300,24 +6313,29 @@ msgid ""
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:5140
+#, fuzzy
 msgctxt "situationReport-comms"
 msgid "Improve station services"
-msgstr ""
+msgstr "Utiliser un des services proposé par la station"
 
 #: scripts/comms_scenario_utility.lua:5142
+#, fuzzy
 msgctxt "situationReport-comms"
 msgid "What station service would you like to improve?"
-msgstr ""
+msgstr "Quel service de la station souhaiteriez-vous utiliser ?"
 
 #: scripts/comms_scenario_utility.lua:5143
+#, fuzzy
 msgctxt "situationReport-comms"
 msgid "Which of these station services would you like to improve?"
-msgstr ""
+msgstr "Lequel de nos services souhaiteriez-vous utiliser ?"
 
 #: scripts/comms_scenario_utility.lua:5144
+#, fuzzy
 msgctxt "situationReport-comms"
 msgid "You could improve any of these station services:"
 msgstr ""
+"Vous pouvez améliorer n’importe lequel de ces services d'amélioration :"
 
 #: scripts/comms_scenario_utility.lua:5145
 msgctxt "situationReport-comms"
@@ -6366,7 +6384,7 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:5161
 msgctxt "situationReport-comms"
 msgid "Resupplying scan probes of docked ship"
-msgstr ""
+msgstr "Le réapprovisionnement en sondes du vaisseau amarré"
 
 #: scripts/comms_scenario_utility.lua:5164
 msgctxt "situationReport-comms"
@@ -6505,6 +6523,9 @@ msgid ""
 "%s could be improved with %s. You may be able to get %s from stations or "
 "transports."
 msgstr ""
+"%s pourrait être amélioré avec du %s.\n"
+"Vous pouvez peut-être obtenir du %s depuis certaines stations ou vaisseaux "
+"de transport."
 
 #: scripts/comms_scenario_utility.lua:5289
 #, lua-format
@@ -6852,6 +6873,8 @@ msgstr ""
 msgctxt "ammo-comms"
 msgid "Sorry, but there is no more space on %s for this ordnance type."
 msgstr ""
+"Désolé, mais il n'y a plus suffisamment d'espace de stockage sur %s pour ce "
+"type de munitions."
 
 #: scripts/comms_scenario_utility.lua:5533
 msgctxt "ammo-comms"
@@ -10873,6 +10896,8 @@ msgid ""
 "Sorry, we are too busy to chat.\n"
 "We have important business to attend to."
 msgstr ""
+"Désolé, nous sommes trop occupés pour discuter.\n"
+"Nous avons des affaires importantes à régler."
 
 #: scripts/comms_scenario_utility.lua:9405
 msgctxt "ship-comms"
@@ -10880,6 +10905,8 @@ msgid ""
 "We'd love to chat, but we're in too much of a hurry right now.\n"
 "We are on an important mission."
 msgstr ""
+"Nous serions ravis de discuter, mais nous sommes pressés en ce moment.\n"
+"Nous avons une mission importante à accomplir."
 
 #: scripts/comms_scenario_utility.lua:9406
 msgctxt "ship-comms"
@@ -10887,6 +10914,8 @@ msgid ""
 "No time to chat right now.\n"
 "Our mission takes priority."
 msgstr ""
+"Pas le temps de discuter pour le moment.\n"
+"Notre mission est prioritaire."
 
 #: scripts/comms_scenario_utility.lua:9411
 msgctxt "ship-comms"
@@ -10904,6 +10933,8 @@ msgid ""
 "We have nothing to say to you.\n"
 "Good bye."
 msgstr ""
+"Nous n'avons rien à vous dire.\n"
+"Bye bye !"
 
 #: scripts/comms_scenario_utility.lua:9413
 msgctxt "ship-comms"
@@ -10911,6 +10942,8 @@ msgid ""
 "No communication for you.\n"
 "Good day."
 msgstr ""
+"Aucune communication pour vous.\n"
+"Bonne journée."
 
 #: scripts/comms_scenario_utility.lua:9414
 msgctxt "ship-comms"
@@ -10918,6 +10951,8 @@ msgid ""
 "We have nothing for you.\n"
 "Fare well."
 msgstr ""
+"Nous n'avons rien pour vous.\n"
+"Adieu !"
 
 #: scripts/comms_scenario_utility.lua:9493
 msgctxt "shipLog"
