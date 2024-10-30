@@ -30,9 +30,11 @@
 #include "components/beamweapon.h"
 #include "components/internalrooms.h"
 #include "components/zone.h"
+#include "components/selfdestruct.h"
 #include "systems/jumpsystem.h"
 #include "systems/missilesystem.h"
 #include "systems/docking.h"
+#include "systems/selfdestruct.h"
 #include "math/centerOfMass.h"
 
 
@@ -995,7 +997,25 @@ static void luaCommandMoveWaypoint(sp::ecs::Entity ship, int index, float x, flo
         lrr->waypoints_dirty = true;
     }
 }
-
+static void luaCommandActivateSelfDestruct(sp::ecs::Entity ship) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandActivateSelfDestruct(); return; }
+    SelfDestructSystem::activate(ship);
+}
+static void luaCommandCancelSelfDestruct(sp::ecs::Entity ship) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCancelSelfDestruct(); return; }
+    if (auto self_destruct = ship.getComponent<SelfDestruct>()) {
+        if (self_destruct->countdown <= 0.0f) {
+            self_destruct->active = false;
+        }
+    }
+}
+static void luaCommandConfirmDestructCode(sp::ecs::Entity ship, int index, int code) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandConfirmDestructCode(index, code); return; }
+    if (auto self_destruct = ship.getComponent<SelfDestruct>()) {
+        if (index >= 0 && index < SelfDestruct::max_codes && self_destruct->code[index] == code && self_destruct->active)
+            self_destruct->confirmed[index] = true;
+    }
+}
 
 void setupSubEnvironment(sp::script::Environment& env)
 {
@@ -1151,10 +1171,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandAddWaypoint", &luaCommandAddWaypoint);
     env.setGlobal("commandRemoveWaypoint", &luaCommandRemoveWaypoint);
     env.setGlobal("commandMoveWaypoint", &luaCommandMoveWaypoint);
-    /*TODO
     env.setGlobal("commandActivateSelfDestruct", &luaCommandActivateSelfDestruct);
     env.setGlobal("commandCancelSelfDestruct", &luaCommandCancelSelfDestruct);
     env.setGlobal("commandConfirmDestructCode", &luaCommandConfirmDestructCode);
+    /*TODO
     env.setGlobal("commandCombatManeuverBoost", &luaCommandCombatManeuverBoost);
     env.setGlobal("commandLaunchProbe", &luaCommandLaunchProbe);
     env.setGlobal("commandSetScienceLink", &luaCommandSetScienceLink);
