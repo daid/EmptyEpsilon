@@ -1016,6 +1016,26 @@ static void luaCommandConfirmDestructCode(sp::ecs::Entity ship, int index, int c
             self_destruct->confirmed[index] = true;
     }
 }
+static void luaCommandCombatManeuverBoost(sp::ecs::Entity ship, float amount) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCombatManeuverBoost(amount); return; }
+    //TODO
+}
+static void luaCommandLaunchProbe(sp::ecs::Entity ship, float x, float y) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandLaunchProbe({x, y}); return; }
+    //TODO
+}
+static void luaCommandSetScienceLink(sp::ecs::Entity ship, sp::ecs::Entity probe) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetScienceLink(probe); return; }
+    //TODO
+}
+static void luaCommandClearScienceLink(sp::ecs::Entity ship) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandClearScienceLink(); return; }
+    //TODO
+}
+static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetAlertLevel(level); return; }
+    //TODO
+}
 
 void setupSubEnvironment(sp::script::Environment& env)
 {
@@ -1174,13 +1194,11 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandActivateSelfDestruct", &luaCommandActivateSelfDestruct);
     env.setGlobal("commandCancelSelfDestruct", &luaCommandCancelSelfDestruct);
     env.setGlobal("commandConfirmDestructCode", &luaCommandConfirmDestructCode);
-    /*TODO
     env.setGlobal("commandCombatManeuverBoost", &luaCommandCombatManeuverBoost);
     env.setGlobal("commandLaunchProbe", &luaCommandLaunchProbe);
     env.setGlobal("commandSetScienceLink", &luaCommandSetScienceLink);
     env.setGlobal("commandClearScienceLink", &luaCommandClearScienceLink);
     env.setGlobal("commandSetAlertLevel", &luaCommandSetAlertLevel);
-    */
 
     env.setGlobal("transferPlayersFromShipToShip", &luaTransferPlayers);
     env.setGlobal("hasPlayerCrewAtPosition", &luaHasPlayerAtPosition);
