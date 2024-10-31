@@ -19,6 +19,7 @@ msgid "Liberation Day"
 msgstr "Le jour de la Libération"
 
 # Scenario description
+#, fuzzy
 msgid ""
 "Let's celebrate Liberation Day, when we humans finally freed ourselves from "
 "Kraylor occupation! Wait, I wonder how the Exuari celebrate Liberation day. "
@@ -35,7 +36,7 @@ msgstr ""
 "- Difficulté : *** (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"EN COURS DE TRADUCTION 73%\n"
+"EN COURS DE TRADUCTION 81%\n"
 "\n"
 "Mission : Célébrons le Jour de la Libération, lorsque nous, humains, nous "
 "sommes enfin libérés de l'occupation des Kraylors.\n"
@@ -48,7 +49,7 @@ msgstr ""
 "\n"
 "- Titre original : Liberation Day\n"
 "- Auteur : Xansta (Sept. 2024)\n"
-"- Traduction FR : Muerte (Oct. 24)\n"
+"- Traduction FR : Muerte (Nov. 24)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -477,25 +478,25 @@ msgstr "Objet étrange possédant une technologie de pointe"
 #: scripts/scenario_27_liberation.lua:3196
 msgctxt "scienceDescription-artifact"
 msgid "Nova Fireworks - product of the Exuari Exclamatory Enterprise"
-msgstr "Nova Fireworks - produit de l'Entreprise Exclamative Éxuarie"
+msgstr "Feu d'artifice Supernova - Produit de l'Entreprise Exclamative Éxuarie"
 
 #: scripts/scenario_27_liberation.lua:1774
 #, lua-format
 msgctxt "station-comms"
 msgid "%i seconds"
-msgstr "%i secondes."
+msgstr "%i secondes"
 
 #: scripts/scenario_27_liberation.lua:1777
 #, lua-format
 msgctxt "station-comms"
 msgid "%i minutes and %i seconds"
-msgstr "%i minutes et %i secondes."
+msgstr "%i minutes et %i secondes"
 
 #: scripts/scenario_27_liberation.lua:1779
 #, lua-format
 msgctxt "station-comms"
 msgid "%i minutes and %i second"
-msgstr "%i minutes et %i seconde."
+msgstr "%i minutes et %i seconde"
 
 #: scripts/scenario_27_liberation.lua:1792
 msgctxt "buttonRelay"
@@ -538,12 +539,12 @@ msgstr ""
 "\n"
 "Points particuliers à connaître :\n"
 "- Intel signale que les %s planifient une attaque. Surveillez-les.\n"
-"- Les scientifiques détectent périodiquement des lectures anormales sur un "
+"- Nos scientifiques détectent périodiquement des lectures anormales sur un "
 "\"objet\" étrange. La dernière observation connue se trouvant au cap %s "
 "depuis %s.\n"
 "- Les Éxuaris ont fait une sorte d'annonce à la presse ce matin dans "
 "laquelle ils ont promis des « feux d'artifice » pour Le Jour de la "
-"Libération. Aucun détail. Gardez un œil sur eux."
+"Libération. Pas plus de détails. Gardez un œil sur eux."
 
 #: scripts/scenario_27_liberation.lua:1811
 #, lua-format
@@ -594,8 +595,7 @@ msgstr ""
 "Nous continuons à relever cette lecture anormale que nous vous avons "
 "signalée plus tôt.\n"
 "Quelle que soit cette chose qui génère ce signal, c'est en mouvement.\n"
-"Nos analystes disent que ça se dirige vers %s depuis le cap %s à partir de "
-"%s.\n"
+"Nos analystes disent que ça se dirige vers %s au cap %s depuis %s.\n"
 "Ils ne pensent pas que cet \"objet\" survivra à l'impact avec %s, vous "
 "feriez donc mieux d'enquêter rapidement, sinon il disparaîtra."
 
@@ -603,7 +603,7 @@ msgstr ""
 #, lua-format
 msgctxt "msgRelay"
 msgid "Anomalous object headed for %s on a reciprical bearing on %s."
-msgstr "Objet étrange se dirigeant vers %s depuis l'opposé de son cap %s."
+msgstr "Objet étrange se dirigeant vers %s depuis son cap %s."
 
 #: scripts/scenario_27_liberation.lua:1836
 #, lua-format
@@ -621,19 +621,19 @@ msgid ""
 "Friendly stations are easy to find and talk to, but neutral stations may "
 "also have information."
 msgstr ""
-"Ce \"truc\" vient de faire passer %s à l'état de supernova ! L'explosion qui "
-"en a résulté a causé de nombreux dégâts dans le système stellaire, notamment "
-"la destruction de la planète %s et de sa lune, %s.\n"
-"Cet événement commence étrangement à ressembler à l’une des habituelles "
-"« blagues » macabres des Éxuaris. Nous avons examiné le communiqué de presse "
-"Éxuari sur le Jour de la Libération et nous pensons que cette supernova "
-"n'était que le premier événement destructeur prévu. Ils en ont probablement "
-"prévu un autre pour le système stellaire %s.\n"
+"Ce \"truc\" vient de heurter et de faire passer %s à l'état de supernova ! "
+"L'explosion qui en a résulté a causé de nombreux dégâts dans le système "
+"stellaire, notamment la destruction de la planète %s et de sa lune, %s.\n"
+"Cet événement commence étrangement à ressembler à l’une des célèbres "
+"« blagues » macabres des Éxuaris. Nous avons réexaminé le communiqué de "
+"presse Éxuari sur le Jour de la Libération et nous pensons que cette "
+"supernova n'était que le premier événement destructeur prévu. Ils en ont "
+"probablement prévu un autre pour le système stellaire %s.\n"
 "Laissez tomber ce que vous faisiez et découvrez tout ce que vous pouvez sur "
 "l'activité des Éxuaris dans les environs, en particulier en ce qui concerne "
 "la recherche sortant de l'ordinaire et « l'humour ».\n"
-"Les stations amies sont faciles à trouver et à contacter, mais les stations "
-"neutres peuvent également posséder des informations utiles."
+"Les stations amies sont faciles à trouver et à contacter, mais sachez que "
+"les stations neutres peuvent également posséder des informations utiles."
 
 #: scripts/scenario_27_liberation.lua:1837
 #, lua-format
@@ -653,10 +653,10 @@ msgid "%s (waypoint %s)"
 msgstr "%s (Marqueur %s)"
 
 #: scripts/scenario_27_liberation.lua:1899
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "centralcommand-incCall"
 msgid "%s (%s until intersection)"
-msgstr "%s (%s jusqu'à l'intersection)"
+msgstr "%s (%s restantes jusqu'à l'impact)"
 
 #: scripts/scenario_27_liberation.lua:1926
 #, lua-format
@@ -816,7 +816,7 @@ msgstr "Source d'émanations inhabituelles"
 #: scripts/scenario_27_liberation.lua:3522
 msgctxt "station-comms"
 msgid "Investigate anomalous object"
-msgstr "Enquêter sur un objet étrange"
+msgstr "Nous enquêtons sur un objet étrange"
 
 #: scripts/scenario_27_liberation.lua:3481
 #: scripts/scenario_27_liberation.lua:3494
@@ -827,9 +827,10 @@ msgid ""
 "We discovered a communication interface attached to the anomalous object. We "
 "could not make sense of it. Would you like to try?"
 msgstr ""
-"Nous avons découvert une interface de communication rattachée à cet objet "
-"étrange. Nous n'avons pas réussi à en comprendre le sens. Voudriez-vous "
-"essayer ?"
+"Et bien, ce que nous pouvons vous dire c'est que nous avons découvert une "
+"interface de communication rattachée à cet objet pour le moins étrange. "
+"Malheureusement, nous n'avons pas réussi à en comprendre le sens. Voudriez-"
+"vous essayer ?"
 
 #: scripts/scenario_27_liberation.lua:3482
 #: scripts/scenario_27_liberation.lua:3495
@@ -837,7 +838,7 @@ msgstr ""
 #: scripts/scenario_27_liberation.lua:3524
 msgctxt "station-comms"
 msgid "Connect us to object"
-msgstr "Oui, connectez-nous à l'objet"
+msgstr "Oui, connectez-nous à l'objet s'il vous plaît"
 
 #: scripts/scenario_27_liberation.lua:3484
 #: scripts/scenario_27_liberation.lua:3497
@@ -848,8 +849,8 @@ msgid ""
 "Ok. We've rigged it to contact you when you close communications with us."
 msgstr ""
 "D'accord.\n"
-"Nous l'avons trafiqué pour vous contacter lorsque vous fermez la "
-"communication avec nous."
+"Nous l'avons trafiqué afin de pouvoir vous contacter directement à travers "
+"lui, même si vous cette communication prend fin."
 
 #: scripts/scenario_27_liberation.lua:3537
 msgctxt "station-comms"
@@ -1132,10 +1133,11 @@ msgstr ""
 "Les Éxuaris mènent des recherches sur l'humour chez les autres espèces, dans "
 "leur laboratoire situé dans la région. Ils pensent que les autres types de "
 "recherche physique sont tangentiels. Cependant, ils ont suivi une tangente "
-"en rapport avec les causes de la transformation des étoiles en supernova. "
-"Ils ont construit un dispositif « humoristique » qui déclenche prématurément "
-"une supernova. Ils l'ont testé sur %s. Ils pensaient que cela pourrait "
-"provoquer une réponse humoristique de la part de %s."
+"en rapport avec les causes de la transformation des étoiles en supernova.\n"
+"Ils ont construit un dispositif « humoristique » qui, à l'impact avec une "
+"étoile, transforme prématurément cette dernière en supernova. Ils l'ont "
+"testé sur %s. Ils pensaient que cela pourrait provoquer une réponse marrante "
+"de la part de %s."
 
 #: scripts/scenario_27_liberation.lua:3782
 #: scripts/scenario_27_liberation.lua:3795
@@ -1185,7 +1187,7 @@ msgstr ""
 #: scripts/scenario_27_liberation.lua:3802
 msgctxt "ship-comms"
 msgid "How do we stop their fireworks display?"
-msgstr ""
+msgstr "Comment arrêter leur dispositif de feu d'artifice ?"
 
 #: scripts/scenario_27_liberation.lua:3804
 msgctxt "ship-comms"
@@ -1393,6 +1395,8 @@ msgid ""
 "Welcome to the Nova Fireworks Display\n"
 "A fine product of the Exuari Exclamatory Enterprise"
 msgstr ""
+"Bienvenue sur le dispositif de feu d'artifice Supernova.\n"
+"Un superbe produit de l'Entreprise Exclamative Éxuarie."
 
 #: scripts/scenario_27_liberation.lua:4023
 #, lua-format
@@ -1401,6 +1405,8 @@ msgid ""
 "%s\n"
 "Alpha Release"
 msgstr ""
+"%s\n"
+"Version alpha."
 
 #: scripts/scenario_27_liberation.lua:4025
 #, lua-format
@@ -1409,6 +1415,8 @@ msgid ""
 "%s\n"
 "Beta Release"
 msgstr ""
+"%s\n"
+"Version bêta."
 
 #: scripts/scenario_27_liberation.lua:4028
 msgctxt "artifact-comms"
@@ -1426,6 +1434,15 @@ msgid ""
 "amounts of death, destruction, maiming and panic - all the hallmarks of the "
 "finest amusement available to the Exuari."
 msgstr ""
+"Le feu d'artifice Supernova est la dernière offre de l'Entreprise "
+"Exclamative Éxuarie. Il offre la meilleure expérience en matière d'humour "
+"sur la mort et la destruction des espèces.\n"
+"Réglez la trajectoire du dispositif ainsi que l'étoile ciblée et l'heure "
+"d'impact. L'étoile va alors se transformer en supernova, faisant des ravages "
+"hilarants sur de malheureux extraterrestres de la région.\n"
+"Vous aurez des heures de divertissement avec de nombreuses morts, "
+"destructions, mutilations et paniques - toutes les caractéristiques du "
+"meilleur divertissement Éxuari possible."
 
 #: scripts/scenario_27_liberation.lua:4031
 #: scripts/scenario_27_liberation.lua:4036
@@ -1444,7 +1461,7 @@ msgstr "Précédent"
 #: scripts/scenario_27_liberation.lua:4033
 msgctxt "artifact-comms"
 msgid "Safety Considerations"
-msgstr ""
+msgstr "Consignes de sécurité"
 
 #: scripts/scenario_27_liberation.lua:4034
 msgctxt "artifact-comms"
@@ -1454,11 +1471,17 @@ msgid ""
 "muscles and sore ribs due to extended smiling and laughing. Be aware and "
 "take the necessary precautions."
 msgstr ""
+"ATTENTION !!!\n"
+"En fonction du degré d’hilarité déclenché chez l'individu Éxuari type, cela "
+"peut provoquer des rires excessifs accompagné de divers symptômes tels que "
+"de la toux, du liquide provenant des yeux (larmes), des douleurs aux muscles "
+"des joues et des côtes douloureuses dues à un sourire et un rire prolongés.\n"
+" Soyez vigilants en cas d'apparition de ces symptômes."
 
 #: scripts/scenario_27_liberation.lua:4039
 msgctxt "artifact-comms"
 msgid "Control Panel"
-msgstr ""
+msgstr "Panneau de contrôle"
 
 #: scripts/scenario_27_liberation.lua:4040
 msgctxt "artifact-comms"
@@ -1467,22 +1490,28 @@ msgid ""
 "questions, contact your nearest Exuari Exclamatory Enterprise Executive for "
 "assistance."
 msgstr ""
+"C'est ici que vous configurez votre expérience \"feu d'artifice "
+"Supernova\".\n"
+"Pour toute question, contactez votre directeur d'entreprise Exclamative "
+"Éxuarie le plus proche afin d'obtenir de l'aide."
 
 #: scripts/scenario_27_liberation.lua:4041
 msgctxt "artifact-comms"
 msgid "Set Destination"
-msgstr ""
+msgstr "Régler la destination"
 
 #: scripts/scenario_27_liberation.lua:4042
 #, lua-format
 msgctxt "artifact-comms"
 msgid "The Nova Fireworks destination has already been set to %s"
 msgstr ""
+"La destination du feu d'artifice Supernova (lieu de l'impact avec l'étoile) "
+"a déjà été réglée sur %s."
 
 #: scripts/scenario_27_liberation.lua:4045
 msgctxt "artifact-comms"
 msgid "Set Time"
-msgstr ""
+msgstr "Régler l'heure de l'impact"
 
 #: scripts/scenario_27_liberation.lua:4047
 #, lua-format
@@ -1490,13 +1519,14 @@ msgctxt "artifact-comms"
 msgid ""
 "The Nova Fireworks time has already been set. Remaining time: %s seconds"
 msgstr ""
-"L’heure de déclenchement du feu d'artifice (explosion de la supernova) a "
-"déjà été réglée. Temps restant : %s secondes."
+"L’heure de déclenchement du feu d'artifice Supernova (explosion de l'étoile "
+"à l'impact) a déjà été réglée.\n"
+"Temps restant : %s secondes."
 
 #: scripts/scenario_27_liberation.lua:4051
 msgctxt "artifact-comms"
 msgid "Pause Nova Fireworks"
-msgstr ""
+msgstr "Mettre en pause le feu d'artifice Supernova"
 
 #: scripts/scenario_27_liberation.lua:4056
 #, lua-format
@@ -1507,70 +1537,83 @@ msgid ""
 "Enter first digit\n"
 "%s"
 msgstr ""
+"Vous ne pouvez mettre le feu d'artifice Supernova en pause que si vous "
+"entrez votre code de contrôle à 4 chiffres.\n"
+"Entrez le 1er chiffre :\n"
+"%s"
 
 #: scripts/scenario_27_liberation.lua:4058
 #, lua-format
 msgctxt "artifact-comms"
 msgid "First digit is %i"
-msgstr ""
+msgstr "%i"
 
 #: scripts/scenario_27_liberation.lua:4059
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "artifact-comms"
 msgid ""
 "First digit entered: %s\n"
 "Enter second digit\n"
 "%s"
 msgstr ""
+"1er chiffre saisi : %s\n"
+"Entrez le 2ème chiffre\n"
+"%s"
 
 #: scripts/scenario_27_liberation.lua:4061
 #, lua-format
 msgctxt "artifact-comms"
 msgid "Second digit is %i"
-msgstr ""
+msgstr "%i"
 
 #: scripts/scenario_27_liberation.lua:4062
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "artifact-comms"
 msgid ""
 "Digits entered: %s%s\n"
 "Enter third digit\n"
 "%s"
 msgstr ""
+"Chiffres saisis : %s%s\n"
+"Entrez le 3ème chiffre\n"
+"%s"
 
 #: scripts/scenario_27_liberation.lua:4064
 #, lua-format
 msgctxt "artifact-comms"
 msgid "Third digit is %i"
-msgstr ""
+msgstr "%i"
 
 #: scripts/scenario_27_liberation.lua:4065
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "artifact-comms"
 msgid ""
 "Digits entered: %s%s%s\n"
 "Enter fourth digit\n"
 "%s"
 msgstr ""
+"Chiffres saisis : %s%s%s\n"
+"Entrez le 4ème chiffre\n"
+"%s"
 
 #: scripts/scenario_27_liberation.lua:4067
 #, lua-format
 msgctxt "artifact-comms"
 msgid "Fourth digit is %i"
-msgstr ""
+msgstr "%i"
 
 #: scripts/scenario_27_liberation.lua:4070
+#, fuzzy
 msgctxt "artifact-comms"
 msgid "Nova Fireworks paused"
-msgstr ""
+msgstr "Le feu d'artifice Supernova est en pause"
 
 #: scripts/scenario_27_liberation.lua:4071
-#, fuzzy
 msgctxt "msgMainscreen"
 msgid "You stopped the Exuari fireworks display (nova)"
 msgstr ""
 "Félicitation ! \n"
-"Vous avez arrêté le feu d'artifice des Éxuaris (supernova)."
+"Vous avez neutralisé le dispositif de feu d'artifice Supernova des Éxuaris."
 
 #: scripts/scenario_27_liberation.lua:4077
 #, lua-format
@@ -1580,6 +1623,9 @@ msgid ""
 "Exuari Exclamatory Enterprise wishes you an amusing day.\n"
 "%s"
 msgstr ""
+"Code incorrect.\n"
+"L'Entreprise Exclamative Éxuarie vous souhaite une journée amusante.\n"
+"%s"
 
 #: scripts/scenario_27_liberation.lua:4101
 #: scripts/scenario_27_liberation.lua:4105
@@ -1628,7 +1674,7 @@ msgid ""
 msgstr ""
 "Bravo équipage !\n"
 "Vous avez détruit la station de recherche des Éxuaris avant qu'ils ne "
-"puissent déployer leur dispositif de feux d'artifice (supernova)."
+"puissent déployer leur dispositif de feu d'artifice Supernova."
 
 # Scenario name
 #~ msgid "Empty space"

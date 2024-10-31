@@ -16,11 +16,11 @@ msgstr ""
 
 # Scenario name
 msgid "Comms Utility"
-msgstr ""
+msgstr "Utilitaire de communication"
 
 # Scenario description
 msgid "Make external flexible utility for handling communications"
-msgstr ""
+msgstr "Créer un utilitaire externe flexible pour gérer les communications"
 
 #: scripts/comms_scenario_utility.lua:177
 #: scripts/comms_scenario_utility.lua:1461
@@ -2323,7 +2323,7 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:1632
 msgctxt "stationAssist-comms"
 msgid "Send reinforcements"
-msgstr "Nous envoyer des renforts"
+msgstr "Demander des renforts"
 
 #: scripts/comms_scenario_utility.lua:1633
 msgctxt "stationAssist-comms"
