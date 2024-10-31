@@ -30,6 +30,7 @@
 #include "components/beamweapon.h"
 #include "components/internalrooms.h"
 #include "components/zone.h"
+#include "components/shiplog.h"
 #include "components/selfdestruct.h"
 #include "systems/jumpsystem.h"
 #include "systems/missilesystem.h"
@@ -477,6 +478,12 @@ void luaRemovePlayerShipCustomFunction(sp::ecs::Entity entity, string name)
     }
 }
 
+void luaAddEntryToShipsLog(sp::ecs::Entity entity, string entry, glm::u8vec4 color)
+{
+    auto sl = entity.getComponent<ShipLog>();
+    if (!sl) return;
+    sl->add(entry, color);
+}
 
 
 static sp::ecs::Entity luaGetPlayerShip(int index)
@@ -1204,6 +1211,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("hasPlayerCrewAtPosition", &luaHasPlayerAtPosition);
     env.setGlobal("setPlayerShipCustomFunction", &luaSetPlayerShipCustomFunction);
     env.setGlobal("removePlayerShipCustomFunction", &luaRemovePlayerShipCustomFunction);
+    env.setGlobal("addEntryToShipsLog", &luaAddEntryToShipsLog);
 
     /// EScanningComplexity getScanningComplexity()
     /// Returns the running scenario's scanning complexity setting.

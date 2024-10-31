@@ -49,7 +49,7 @@ end
 --- Takes a string as the message and a color applied to the logged message.
 --- Example: player:addToShipLog("Acknowledged","yellow") -- adds "Acknowledged" in yellow to the `player` ship's log
 function Entity:addToShipLog(message, color)
-    --TODO
+    addEntryToShipsLog(self, message, color)
 end
 --- Moves all players connected to this ship to the same crew positions on another PlayerSpaceship.
 --- If the target isn't a PlayerSpaceship, this function has no effect.

@@ -69,7 +69,33 @@ template<> struct Convert<glm::u8vec4> {
     }
     static glm::u8vec4 fromLua(lua_State* L, int idx) {
         glm::u8vec4 result{};
-        if (lua_isinteger(L, idx)) {
+        if (lua_isstring(L, idx)) {
+            result = glm::u8vec4(255,255,255,255);
+            string str = string(lua_tostring(L, idx)).lower();
+            if (str == "black") { result = glm::u8vec4(0,0,0,255); return result; }
+            else if (str == "white") { result = glm::u8vec4(255,255,255,255); return result; }
+            else if (str == "red") { result = glm::u8vec4(255,0,0,255); return result; }
+            else if (str == "green") { result = glm::u8vec4(0,255,0,255); return result; }
+            else if (str == "blue") { result = glm::u8vec4(0,0,255,255); return result; }
+            else if (str == "yellow") { result = glm::u8vec4(255,255,0,255); return result; }
+            else if (str == "magenta") { result = glm::u8vec4(255,0,255,255); return result; }
+            else if (str == "cyan") { result = glm::u8vec4(0,255,255,255); return result; }
+
+            if (str.startswith("#") && str.length() == 7)
+            {
+                result.r = static_cast<uint8_t>(str.substr(1, 2).toInt(16));
+                result.g = static_cast<uint8_t>(str.substr(3, 2).toInt(16));
+                result.b = static_cast<uint8_t>(str.substr(5, 2).toInt(16));
+            } else {
+                std::vector<string> parts = str.split(",");
+                if (parts.size() == 3)
+                {
+                    result.r = static_cast<uint8_t>(parts[0].toInt());
+                    result.g = static_cast<uint8_t>(parts[1].toInt());
+                    result.b = static_cast<uint8_t>(parts[2].toInt());
+                }
+            }
+        } else if (lua_isinteger(L, idx)) {
             int n = lua_tointeger(L, idx);
             result.r = float(n & 0xFF) / 255.0f;
             result.g = float((n >> 8) & 0xFF) / 255.0f;
