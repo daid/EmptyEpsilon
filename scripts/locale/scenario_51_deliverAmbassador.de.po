@@ -138,6 +138,16 @@ msgctxt "scienceDescription-station"
 msgid "Major military installation"
 msgstr "Große Militäreinrichtung"
 
+#: scripts/scenario_51_deliverAmbassador.lua:134
+msgctxt "buttonGM"
+msgid "+Spawn Ship(s)"
+msgstr "+Spawne Shiff(e)"
+
+#: scripts/scenario_51_deliverAmbassador.lua:135
+msgctxt "buttonGM"
+msgid "+Control Codes"
+msgstr "+Kontrollcodes"
+
 #: scripts/scenario_51_deliverAmbassador.lua:329
 msgctxt "audio-incCall"
 msgid ""
@@ -612,7 +622,7 @@ msgstr "Bitte füllen Sie unser EMPs wieder auf. (jeweils %d Ruf)"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Got any EMPs? (%d rep each)"
-msgstr "Haben Sie EMPs fpr uns (jeweils %d Ruf)"
+msgstr "Haben Sie EMPs für uns? (jeweils %d Ruf)"
 
 #: scripts/scenario_51_deliverAmbassador.lua:946
 #, lua-format
@@ -630,7 +640,7 @@ msgstr "Können Sie uns mit Nukes ausstatten? (jeweils %d Ruf)"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We really need some nukes. (%d rep each)"
-msgstr "Wir benötigenb dringen weiter Nukes. (jeweils %d Ruf)"
+msgstr "Wir benötigen dringend weitere Nukes. (jeweils %d Ruf)"
 
 #: scripts/scenario_51_deliverAmbassador.lua:951
 #, lua-format
@@ -715,7 +725,7 @@ msgstr "Zurück"
 #: scripts/scenario_51_deliverAmbassador.lua:991
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
-msgstr "Für diese Aktion müssen sie angedockt bleiben."
+msgstr "Für diese Aktion müssen Sie angedockt bleiben."
 
 #: scripts/scenario_51_deliverAmbassador.lua:996
 msgctxt "ammo-comms"
@@ -759,7 +769,7 @@ msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
 msgstr ""
-"Wir waren so frei und Ihre Waffenvorräte etwas aufgefüllt.\n"
+"Wir waren so frei und haben Ihre Waffenvorräte etwas aufgefüllt.\n"
 "Setzen Sie sie weise ein."
 
 #: scripts/scenario_51_deliverAmbassador.lua:1029
@@ -795,7 +805,7 @@ msgstr ""
 #: scripts/scenario_51_deliverAmbassador.lua:1038
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr "An welchen Wegpunkt sollen wir das Transportschiff schicken."
+msgstr "An welchen Wegpunkt sollen wir das Transportschiff schicken?"
 
 #: scripts/scenario_51_deliverAmbassador.lua:1040
 #: scripts/scenario_51_deliverAmbassador.lua:1066

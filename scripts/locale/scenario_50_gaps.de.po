@@ -497,7 +497,7 @@ msgstr ""
 #: scripts/scenario_50_gaps.lua:817
 msgctxt "scienceDescription-station"
 msgid "Repulsor and Tractor Beam Components"
-msgstr "Repulsor- und Traktorstrahlkomponenten"
+msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
 #: scripts/scenario_50_gaps.lua:832
 msgctxt "stationGeneralInfo-comms"
@@ -506,7 +506,7 @@ msgid ""
 "custom made"
 msgstr ""
 "Wir können alle Ihre Bedürfnisse in Bezug auf das Schieben und Ziehen mit "
-"spezialisierten, maßgeschneiderten Ausrüstung erfüllen."
+"spezialisierter, maßgeschneiderter Ausrüstung erfüllen."
 
 #: scripts/scenario_50_gaps.lua:833
 msgctxt "stationStory-comms"
@@ -704,7 +704,7 @@ msgid ""
 msgstr ""
 "Wir bauen, reparieren und liefern Komponenten und Upgrades für "
 "automatisierte Einrichtungen, die für Schiffe entwickelt wurden, auf denen "
-"keine medizinisches Fachpersonal verfügbar ist. Solche Geräte werden "
+"kein medizinisches Fachpersonal verfügbar ist. Solche Geräte werden "
 "üblicherweise auch  \"Autodocs\" genannt."
 
 #: scripts/scenario_50_gaps.lua:1179
@@ -1039,7 +1039,7 @@ msgstr ""
 #: scripts/scenario_50_gaps.lua:1588
 msgctxt "scienceDescription-station"
 msgid "Repulsor and tractor beam components"
-msgstr "Repulsor- und Traktorstrahlkomponenten"
+msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
 #: scripts/scenario_50_gaps.lua:1603
 msgctxt "stationGeneralInfo-comms"
@@ -1120,7 +1120,7 @@ msgid ""
 "so we honor our fortune by naming the station after them"
 msgstr ""
 "Wir haben einige unserer kritischen industriellen Prozesse von einer Spezies "
-"namens Tokra gelernt, daher ehren sie, indem wir die Station nach ihnen "
+"namens Tokra gelernt, daher ehren wir sie, indem wir die Station nach ihnen "
 "benennen."
 
 #: scripts/scenario_50_gaps.lua:1676
@@ -1414,7 +1414,7 @@ msgstr "Wir brauchen wirklich ein paar Nukes ("
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
-msgstr "je %s%d Ruf)"
+msgstr "%sjeweils %d Ruf)"
 
 #: scripts/scenario_50_gaps.lua:2307
 msgctxt "ammo-comms"
@@ -1444,7 +1444,7 @@ msgstr "Wir könnten ein paar Minen gebrauchen. ("
 #: scripts/scenario_50_gaps.lua:2334
 msgctxt "ammo-comms"
 msgid "How about mines? ("
-msgstr "Wie sieht es mit Minen aus?"
+msgstr "Wie sieht es mit Minen aus? ("
 
 #: scripts/scenario_50_gaps.lua:2336
 msgctxt "ammo-comms"
@@ -2493,7 +2493,7 @@ msgstr "Wie können wir behilflich sein?"
 #: scripts/scenario_50_gaps.lua:3271
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr "Verteidige einen Wegpunkt."
+msgstr "Verteidigen Sie einen Wegpunkt"
 
 #: scripts/scenario_50_gaps.lua:3273
 msgctxt "shipAssist-comms"

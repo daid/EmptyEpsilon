@@ -1543,7 +1543,7 @@ msgstr "Wir könnten ein paar Minen gebrauchen. ("
 #: scripts/scenario_49_allies.lua:3646
 msgctxt "ammo-comms"
 msgid "How about mines? ("
-msgstr "Wie sieht es mit Minen aus?"
+msgstr "Wie sieht es mit Minen aus? ("
 
 #: scripts/scenario_49_allies.lua:3656
 msgctxt "ammo-comms"
