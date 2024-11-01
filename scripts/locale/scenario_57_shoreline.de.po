@@ -330,7 +330,7 @@ msgstr ""
 #: scripts/scenario_57_shoreline.lua:3956
 msgctxt "scienceDescription-station"
 msgid "Repulsor and Tractor Beam Components"
-msgstr "Repulsor- und Traktorstrahlkomponenten"
+msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
 #: scripts/scenario_57_shoreline.lua:1232
 #: scripts/scenario_57_shoreline.lua:3957
@@ -471,7 +471,7 @@ msgid ""
 msgstr ""
 "Wir bauen, reparieren und liefern Komponenten und Upgrades für "
 "automatisierte Einrichtungen, die für Schiffe entwickelt wurden, auf denen "
-"keine medizinisches Fachpersonal verfügbar ist. Solche Geräte werden "
+"kein medizinisches Fachpersonal verfügbar ist. Solche Geräte werden "
 "üblicherweise auch  \"Autodocs\" genannt."
 
 #: scripts/scenario_57_shoreline.lua:1394
@@ -1317,7 +1317,7 @@ msgid ""
 "so we honor our fortune by naming the station after them"
 msgstr ""
 "Wir haben einige unserer kritischen industriellen Prozesse von einer Spezies "
-"namens Tokra gelernt, daher ehren sie, indem wir die Station nach ihnen "
+"namens Tokra gelernt, daher ehren wir sie, indem wir die Station nach ihnen "
 "benennen."
 
 #: scripts/scenario_57_shoreline.lua:3759
@@ -1417,7 +1417,7 @@ msgstr ""
 #: scripts/scenario_57_shoreline.lua:4190
 msgctxt "scienceDescription-station"
 msgid "Repulsor and tractor beam components"
-msgstr "Repulsor- und Traktorstrahlkomponenten"
+msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
 #: scripts/scenario_57_shoreline.lua:4191
 msgctxt "stationGeneralInfo-comms"
@@ -2097,7 +2097,7 @@ msgstr "Ihr Schiffstyp unterstützt kein Upgrade der Laser"
 #: scripts/scenario_57_shoreline.lua:7643
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
-msgstr "Für diese Aktion müssen sie angedockt bleiben."
+msgstr "Für diese Aktion müssen Sie angedockt bleiben."
 
 #: scripts/scenario_57_shoreline.lua:7647
 msgctxt "ammo-comms"

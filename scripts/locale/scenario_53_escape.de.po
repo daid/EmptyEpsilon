@@ -1373,7 +1373,7 @@ msgstr "     Leer\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Verfügbarer Platz: %i, Verfügbar Ruf: %i\n"
+msgstr "Verfügbarer Platz: %i, Verfügbarer Ruf: %i\n"
 
 #: scripts/scenario_53_escape.lua:1811 scripts/scenario_53_escape.lua:2495
 #: scripts/scenario_53_escape.lua:2691 scripts/scenario_53_escape.lua:2754
@@ -1877,7 +1877,7 @@ msgid ""
 "   Homing"
 msgstr ""
 "\n"
-"   Homing"
+"   Zielsuchraketen"
 
 #: scripts/scenario_53_escape.lua:2165
 msgctxt "ammo-comms"
