@@ -33,10 +33,10 @@ msgid ""
 "There's usually one every weekend. All experience levels are welcome."
 msgstr ""
 "- Durée approx. : 30mn (variable)\n"
-"- Difficulté : *** (variable)\n"
+"- Difficulté : Très difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"EN COURS DE TRADUCTION 81%\n"
+"EN COURS DE TRADUCTION 84%\n"
 "\n"
 "Mission : Célébrons le Jour de la Libération, lorsque nous, humains, nous "
 "sommes enfin libérés de l'occupation des Kraylors.\n"
@@ -323,6 +323,14 @@ msgctxt "Cloak"
 msgid "Device is cloaked (but it's not perfect)"
 msgstr "L'appareil est complètement dissimulé (mais ce n'est pas parfait)."
 
+#: scripts/scenario_27_liberation.lua:137
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"Player ship %s's template type (%s) could not be found in table "
+"player_ship_stats"
+msgstr ""
+
 #: scripts/scenario_27_liberation.lua:583
 msgctxt "trade-comms"
 msgid "food"
@@ -463,10 +471,109 @@ msgctxt "trade-comms"
 msgid "warp"
 msgstr "chaînes"
 
+#: scripts/scenario_27_liberation.lua:637
+msgctxt "station-comms"
+msgid "She studies the Exuari. She's *the* expert around here"
+msgstr "Elle étudie les Éxuaris. Elle est *The* experte par ici."
+
+#: scripts/scenario_27_liberation.lua:638
+msgctxt "station-comms"
+msgid ""
+"She studies the Exuari so hard that sometimes I wonder if she's got some "
+"kind of fixation."
+msgstr ""
+"Elle étudie les Éxuaris de manière tellement minutieuse que je me demande "
+"parfois si elle ne fait pas une sorte de fixation."
+
+#: scripts/scenario_27_liberation.lua:639
+msgctxt "station-comms"
+msgid ""
+"I heard that her family was killed by the Exuari. That's why she studies "
+"them so much."
+msgstr ""
+"J'ai entendu dire que sa famille avait été tuée par les Éxuaris. C'est "
+"pourquoi elle les étudie autant."
+
+#: scripts/scenario_27_liberation.lua:640
+msgctxt "station-comms"
+msgid ""
+"After studying the Exuari using our extensive resources, she took a job on a "
+"freighter to gather more data in the field."
+msgstr ""
+"Après avoir étudié les Éxuaris en utilisant nos vastes ressources, elle a "
+"accepté un emploi sur un cargo pour recueillir plus de données sur le "
+"terrain."
+
 #: scripts/scenario_27_liberation.lua:814
 msgctxt "buttonGM"
 msgid "+Spawn Ship(s)"
 msgstr "+ Ajout de vaisseaux"
+
+#: scripts/scenario_27_liberation.lua:1514
+msgctxt "station-comms"
+msgid ""
+"Just the usual predatory actions: attack anything and laugh as it's "
+"destroyed or looted."
+msgstr ""
+"Oh, juste les actions prédatrices habituelles : attaquer n'importe quoi et "
+"rire lorsqu'il est détruit ou pillé."
+
+#: scripts/scenario_27_liberation.lua:1515
+msgctxt "station-comms"
+msgid "They seemed interested in Liberation Day for some reason."
+msgstr ""
+"Ils semblaient intéressés par le Jour de la Libération pour une raison "
+"quelconque."
+
+#: scripts/scenario_27_liberation.lua:1516
+msgctxt "station-comms"
+msgid ""
+"I could not make sense of what they were saying. They seemed to be talking "
+"in riddles."
+msgstr ""
+"Je n'arrivais pas à comprendre ce qu'ils disaient. Ils semblaient parler par "
+"énigmes."
+
+#: scripts/scenario_27_liberation.lua:1517
+msgctxt "station-comms"
+msgid "You want to talk to Jasmine Purdue. She's been studying the Exuari."
+msgstr "Vous voulez parler à Jasmine Purdue ? Elle étudie les Éxuaris."
+
+#: scripts/scenario_27_liberation.lua:1520
+#, fuzzy, lua-format
+msgctxt "station-comms"
+msgid ""
+"They've been setting up an isolated station for research somewhere near %s"
+msgstr ""
+"Ils ont installé une station isolée pour la recherche quelque part près de "
+"%s."
+
+#: scripts/scenario_27_liberation.lua:1521
+msgctxt "station-comms"
+msgid "They seem to be interested in stellar mechanics."
+msgstr "Ils semblent s'intéresser à la mécanique stellaire."
+
+#: scripts/scenario_27_liberation.lua:1522
+msgctxt "station-comms"
+msgid ""
+"When you can get them to talk, the topic of the inner workings of stars "
+"seems to be top of mind."
+msgstr ""
+"Quand on arrive à les faire parler, le sujet des étoiles et de leur "
+"fonctionnement interne semble être une priorité."
+
+#: scripts/scenario_27_liberation.lua:1523
+msgctxt "station-comms"
+msgid "They were asking us about nova causality before trying to destroy us."
+msgstr ""
+"Ils nous ont interrogés sur la causalité des supernova avant d'essayer de "
+"nous détruire."
+
+#: scripts/scenario_27_liberation.lua:1524
+msgctxt "station-comms"
+msgid "They're just attacking everything per usual."
+msgstr ""
+"Ils attaquent tout comme d'habitude. C'est tout ce qu'ils savent faire."
 
 #: scripts/scenario_27_liberation.lua:1571
 #: scripts/scenario_27_liberation.lua:3196
@@ -479,6 +586,11 @@ msgstr "Objet étrange possédant une technologie de pointe"
 msgctxt "scienceDescription-artifact"
 msgid "Nova Fireworks - product of the Exuari Exclamatory Enterprise"
 msgstr "Feu d'artifice Supernova - Produit de l'Entreprise Exclamative Éxuarie"
+
+#: scripts/scenario_27_liberation.lua:1644
+msgctxt "msgGM"
+msgid "Empty Template pool: fix excludes or other criteria"
+msgstr ""
 
 #: scripts/scenario_27_liberation.lua:1774
 #, lua-format
@@ -810,6 +922,12 @@ msgstr ""
 msgctxt "scienceDescription-artifact"
 msgid "Source of unusual emanations"
 msgstr "Source d'émanations inhabituelles"
+
+#: scripts/scenario_27_liberation.lua:3115
+#, fuzzy
+msgctxt "msgMainscreen"
+msgid "The Exuari really enjoyed the fireworks at your expense"
+msgstr "Les Éxuaris ont vraiment apprécié le feu d'artifice à vos frais."
 
 #: scripts/scenario_27_liberation.lua:3480
 #: scripts/scenario_27_liberation.lua:3493
@@ -1176,13 +1294,16 @@ msgid "It's located in sector %s"
 msgstr "Elle est située dans le secteur %s."
 
 #: scripts/scenario_27_liberation.lua:3793
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid ""
 "It used to be located in sector %s, but it has since been destroyed. "
 "However, they may have launched the nova device before the station was "
 "destroyed."
 msgstr ""
+"Il se trouvait autrefois dans le secteur %s, mais il a depuis été détruit. "
+"Cependant, ils ont peut-être lancé le dispositif Supernova avant la "
+"destruction de la station."
 
 #: scripts/scenario_27_liberation.lua:3802
 msgctxt "ship-comms"
@@ -1190,6 +1311,7 @@ msgid "How do we stop their fireworks display?"
 msgstr "Comment arrêter leur dispositif de feu d'artifice ?"
 
 #: scripts/scenario_27_liberation.lua:3804
+#, fuzzy
 msgctxt "ship-comms"
 msgid ""
 "1) connect to the device's communication array.\n"
@@ -1199,11 +1321,18 @@ msgid ""
 "I hear that stations in the area have figured out how to connect to the "
 "device's communication array."
 msgstr ""
+"1) connectez-vous au réseau de communication de l'appareil.\n"
+"2) Naviguez dans l'interface utilisateur jusqu'à la zone de désactivation.\n"
+"3) Fournissez le code PIN de la clé de désactivation numérique\n"
+"\n"
+"J'ai entendu dire que les stations de la région ont trouvé comment se "
+"connecter au réseau de communication de l'appareil."
 
 #: scripts/scenario_27_liberation.lua:3812
+#, fuzzy
 msgctxt "ship-comms"
 msgid "What is the key?"
-msgstr ""
+msgstr "Quelle est la clé ?"
 
 #: scripts/scenario_27_liberation.lua:3816
 msgctxt "ship-comms"
@@ -1366,20 +1495,23 @@ msgstr ""
 "%s"
 
 #: scripts/scenario_27_liberation.lua:3981
+#, fuzzy
 msgctxt "ship-comms"
 msgid "got riddle from Jasmine Purdue"
-msgstr ""
+msgstr "reçu une énigme de Jasmine Purdue"
 
 #: scripts/scenario_27_liberation.lua:3989
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid ""
 "%s got riddle from Jasmine Purdue:\n"
 "%s"
 msgstr ""
+"%s a reçu une énigme de la part de Jasmine Purdue :\n"
+"%s"
 
 #: scripts/scenario_27_liberation.lua:3997
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid ""
 "I ran across this riddle associated to the device. I have not deciphered it "
@@ -1388,6 +1520,11 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Je suis tombé sur cette énigme associée à l'appareil. Je ne l'ai pas encore "
+"déchiffré. La solution devrait vous fournir le code de contrôle de "
+"l'appareil Éxuari.\n"
+"\n"
+"%s"
 
 #: scripts/scenario_27_liberation.lua:4021
 msgctxt "artifact-comms"

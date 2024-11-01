@@ -6396,7 +6396,7 @@ msgstr "Ce service peut être réparé :"
 #, lua-format
 msgctxt "situationReport-comms"
 msgid "%s can help %s by improving this service:"
-msgstr ""
+msgstr "%s peut aider %s en réparant ce service :"
 
 #: scripts/comms_scenario_utility.lua:5153
 msgctxt "situationReport-comms"
@@ -6549,13 +6549,13 @@ msgid "Resupply mines to docked ship"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:5286
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "situationReport-comms"
 msgid ""
 "%s could be improved with %s. You may be able to get %s from stations or "
 "transports."
 msgstr ""
-"Le service \"%s\" peut être amélioré avec la marchandise suivante : %s.\n"
+"Le service \"%s\" peut être réparé avec la marchandise suivante : %s.\n"
 "Vous pouvez peut-être obtenir cette marchandise (%s) depuis certaines "
 "stations ou vaisseaux de transport."
 
@@ -6689,6 +6689,11 @@ msgstr "Notre %s a besoin de plus de munitions"
 msgctxt "ammo-comms"
 msgid "Please provide ordnance for %s"
 msgstr "Veuillez nous fournir des munitions pour %s"
+
+#: scripts/comms_scenario_utility.lua:5431
+msgctxt "ammo-comms"
+msgid "What type of ordnance do you need?"
+msgstr "De quel type de munitions avez-vous besoin ?"
 
 #: scripts/comms_scenario_utility.lua:5434
 msgctxt "ammo-comms"
