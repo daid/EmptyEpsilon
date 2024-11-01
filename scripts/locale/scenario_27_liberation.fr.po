@@ -665,7 +665,7 @@ msgid "Command log for %s (clock - message):"
 msgstr "Journal des directives - Vaisseau %s (heure - message) :"
 
 #: scripts/scenario_27_liberation.lua:2544
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s station %s in %s"
 msgstr "Enregistrement du capteur : station %s %s en secteur %s "
@@ -674,20 +674,21 @@ msgstr "Enregistrement du capteur : station %s %s en secteur %s "
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s, %s station %s in %s"
-msgstr "%s, station %s %s en secteur %s"
+msgstr "%s ; station %s %s en secteur %s"
 
 #: scripts/scenario_27_liberation.lua:2576
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s %s %s in %s carrying %s"
 msgstr ""
-"Enregistrement du capteur : vaisseau %s %s %s en secteur %s transportant %s "
+"Enregistrement du capteur : vaisseau %s %s %s en secteur %s transportant la "
+"marchandise %s "
 
 #: scripts/scenario_27_liberation.lua:2578
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s; %s %s %s in %s carrying %s"
-msgstr "%s; %s %s %s en secteur %s transportant %s "
+msgstr "%s; vaisseau %s %s %s en secteur %s transportant la marchandise %s "
 
 #: scripts/scenario_27_liberation.lua:2586
 msgctxt "scienceDescription-buoy"
@@ -849,8 +850,8 @@ msgid ""
 "Ok. We've rigged it to contact you when you close communications with us."
 msgstr ""
 "D'accord.\n"
-"Nous l'avons trafiqué afin de pouvoir vous contacter directement à travers "
-"lui, même si vous cette communication prend fin."
+"Nous l'avons trafiqué afin qu'il vous contacte immédiatement dès que notre "
+"communication prendra fin."
 
 #: scripts/scenario_27_liberation.lua:3537
 msgctxt "station-comms"
@@ -869,10 +870,9 @@ msgid "Nothing recently, but things could change."
 msgstr "Rien de particulier dernièrement, mais les choses pourraient changer."
 
 #: scripts/scenario_27_liberation.lua:3559
-#, fuzzy
 msgctxt "station-comms"
 msgid "discovered that Jasmine Purdue is the Exuari expert to talk to"
-msgstr "a découvert que Jasmine Purdue est l'experte Éxuarie à qui parler"
+msgstr "a découvert que Jasmine Purdue est l'experte en Éxuaris à qui parler"
 
 #: scripts/scenario_27_liberation.lua:3567
 #, lua-format
@@ -1010,7 +1010,7 @@ msgid ""
 "general heading was %s."
 msgstr ""
 "Leur dernier plan de vol indique qu'ils sont partis du secteur %s et se "
-"dirigaient vers %s en secteur %s. Leur cap approximatif était %s."
+"dirigeaient vers %s en secteur %s. Leur cap approximatif était %s."
 
 #: scripts/scenario_27_liberation.lua:3669
 #, fuzzy, lua-format
@@ -1539,7 +1539,7 @@ msgid ""
 msgstr ""
 "Vous ne pouvez mettre le feu d'artifice Supernova en pause que si vous "
 "entrez votre code de contrôle à 4 chiffres.\n"
-"Entrez le 1er chiffre :\n"
+"Entrez le 1er chiffre.\n"
 "%s"
 
 #: scripts/scenario_27_liberation.lua:4058
@@ -1549,7 +1549,7 @@ msgid "First digit is %i"
 msgstr "%i"
 
 #: scripts/scenario_27_liberation.lua:4059
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "artifact-comms"
 msgid ""
 "First digit entered: %s\n"
@@ -1557,7 +1557,7 @@ msgid ""
 "%s"
 msgstr ""
 "1er chiffre saisi : %s\n"
-"Entrez le 2ème chiffre\n"
+"Entrez le 2ème chiffre.\n"
 "%s"
 
 #: scripts/scenario_27_liberation.lua:4061
@@ -1567,7 +1567,7 @@ msgid "Second digit is %i"
 msgstr "%i"
 
 #: scripts/scenario_27_liberation.lua:4062
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "artifact-comms"
 msgid ""
 "Digits entered: %s%s\n"
@@ -1575,7 +1575,7 @@ msgid ""
 "%s"
 msgstr ""
 "Chiffres saisis : %s%s\n"
-"Entrez le 3ème chiffre\n"
+"Entrez le 3ème chiffre.\n"
 "%s"
 
 #: scripts/scenario_27_liberation.lua:4064
@@ -1585,7 +1585,7 @@ msgid "Third digit is %i"
 msgstr "%i"
 
 #: scripts/scenario_27_liberation.lua:4065
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "artifact-comms"
 msgid ""
 "Digits entered: %s%s%s\n"
@@ -1593,7 +1593,7 @@ msgid ""
 "%s"
 msgstr ""
 "Chiffres saisis : %s%s%s\n"
-"Entrez le 4ème chiffre\n"
+"Entrez le 4ème chiffre.\n"
 "%s"
 
 #: scripts/scenario_27_liberation.lua:4067
@@ -1603,10 +1603,9 @@ msgid "Fourth digit is %i"
 msgstr "%i"
 
 #: scripts/scenario_27_liberation.lua:4070
-#, fuzzy
 msgctxt "artifact-comms"
 msgid "Nova Fireworks paused"
-msgstr "Le feu d'artifice Supernova est en pause"
+msgstr "Le feu d'artifice Supernova est en pause."
 
 #: scripts/scenario_27_liberation.lua:4071
 msgctxt "msgMainscreen"
