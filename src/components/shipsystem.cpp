@@ -22,19 +22,6 @@ float ShipSystem::getSystemEffectiveness()
     // Substract the hacking from the power, making double hacked systems run at 25% efficiency.
     power = std::max(0.0f, power - hacked_level * 0.75f);
 
-    // Degrade all systems except the reactor once energy level drops below 10.
-    /*TODO
-    if (system != SYS_Reactor)
-    {
-        auto reactor = entity.getComponent<Reactor>();
-        if (reactor) {
-            if (reactor->energy < 10.0f && reactor->energy > 0.0f && power > 0.0f)
-                power = std::min(power * reactor->energy / 10.0f, power);
-            else if (reactor->energy <= 0.0f || power <= 0.0f)
-                power = 0.0f;
-        }
-    }*/
-
     // Degrade damaged systems.
     if (gameGlobalInfo && gameGlobalInfo->use_system_damage)
         return std::max(0.0f, power * health);

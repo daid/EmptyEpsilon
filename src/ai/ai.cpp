@@ -788,13 +788,12 @@ float ShipAI::targetScore(sp::ecs::Entity target)
         score += 2500;
     if (target.hasComponent<DockingBay>())
         score -= 1500;
-        /*TODO
-    if (P<ScanProbe>(target))
+    if (target.hasComponent<AllowRadarLink>())
     {
         score -= 10000;
         if (distance > 5000)
             return std::numeric_limits<float>::min();
-    }*/
+    }
     if (distance < 5000 && has_missiles)
         score += 500;
 

@@ -39,6 +39,18 @@ void EnergySystem::update(float delta)
         // Cap energy at the max_energy_level.
         reactor.energy = std::clamp(reactor.energy, 0.0f, reactor.max_energy);
 
+        if (reactor.energy < 10) {
+            // Depower all systems except the reactor once energy level drops below 10.
+            for(int n=0; n<ShipSystem::COUNT; n++) {
+                auto type = ShipSystem::Type(n);
+                if (type != ShipSystem::Type::Reactor) {
+                    auto system = ShipSystem::get(entity, type);
+                    if (system)
+                        system->power_request = 0;
+                }
+            }
+        }
+
         // If reactor health is worse than -90% and overheating, it explodes,
         // destroying the ship and damaging a 0.5U radius.
         if (reactor.health < -0.9f && reactor.heat_level == 1.0f && reactor.overload_explode && game_server)
