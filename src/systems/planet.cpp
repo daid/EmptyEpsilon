@@ -138,6 +138,15 @@ void PlanetRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, P
     }
 }
 
+void PlanetRenderSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, PlanetRender& component)
+{
+    auto physics = e.getComponent<sp::Physics>();
+    if (physics)
+    {
+        renderer.fillCircle(screen_position, physics->getSize().x * scale, glm::u8vec4(component.atmosphere_color * 255.f, 128));
+    }
+}
+
 void PlanetTransparentRenderSystem::update(float delta)
 {
 }
