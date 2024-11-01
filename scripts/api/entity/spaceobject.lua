@@ -191,7 +191,13 @@ end
 --- Requires a target PlayerShip and message, though the message can be an empty string.
 --- Example: obj:sendCommsMessage(player, "Prepare to die")
 function Entity:sendCommsMessage(target, message)
-    --TODO: log message
+    if self:isFriendly(target) then
+        target:addToShipLog(message, "#C0C0FF")
+    elseif self:isEnemy(target) then
+        target:addToShipLog(message, "#FFC0C0")
+    else
+        target:addToShipLog(message, "#C0C0FF")
+    end
     return self:sendCommsMessageNoLog(target, message)
 end
 --- As SpaceObject:sendCommsMessage(), but does not log a failed hail to the target ship's comms log.
