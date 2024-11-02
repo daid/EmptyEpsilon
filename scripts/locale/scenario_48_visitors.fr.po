@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -1318,7 +1318,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:3312
 msgctxt "DispatchOffice-comms"
 msgid "Visit dispatch office"
-msgstr ""
+msgstr "Visiter le bureau central"
 
 #: scripts/scenario_48_visitors.lua:3169
 #, lua-format

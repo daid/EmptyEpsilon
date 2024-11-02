@@ -634,10 +634,10 @@ function setGlobals()	--variables that might change
 	nova_beam_targets = {}
 	jasmine_purdue_hint = false
 	jasmine_purdue_answers = {
-		"She studies the Exuari. She's *the* expert around here",
-		"She studies the Exuari so hard that sometimes I wonder if she's got some kind of fixation.",
-		"I heard that her family was killed by the Exuari. That's why she studies them so much.",
-		"After studying the Exuari using our extensive resources, she took a job on a freighter to gather more data in the field.",
+		_("station-comms","She studies the Exuari. She's *the* expert around here"),
+		_("station-comms","She studies the Exuari so hard that sometimes I wonder if she's got some kind of fixation."),
+		_("station-comms","I heard that her family was killed by the Exuari. That's why she studies them so much."),
+		_("station-comms","After studying the Exuari using our extensive resources, she took a job on a freighter to gather more data in the field."),
 	}
 	jasmine_freighter_hint = false
 	jasmine_freighter_identified = false
