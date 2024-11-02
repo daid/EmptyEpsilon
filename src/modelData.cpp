@@ -14,7 +14,7 @@
 /// Almost all SpaceObjects have a ModelData associated with them to define how they appear in 3D views.
 /// A ScienceDatabase entry can also have ModelData associated with and displayed in it.
 ///
-/// This defines a 3D mesh file, an albedo map ("texture"), a specular/normal map, and an illumination map.
+/// This defines a 3D mesh file, an albedo map ("texture"), a specular map, and an illumination map.
 /// These files might be located in the resources/ directory or loaded from resource packs.
 ///
 /// ModelData also defines the model's position offset and scale relative to its mesh coordinates.
@@ -50,7 +50,7 @@ REGISTER_SCRIPT_CLASS(ModelData)
     /// model:setTexture("space_station_1/space_station_1_color.jpg") -- loads this texture from a resource pack
     /// model:setTexture("mesh/ship/Ender Battlecruiser.png") -- loads this texture from the resources/ directory
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setTexture);
-    /// Sets this ModelData's specular map, or shininess texture. Some models use this to load a normal map.
+    /// Sets this ModelData's specular map, or shininess texture.
     /// Optional; if omitted, no specular map is applied.
     /// Valid values include PNG- or JPG-format images relative to the resources/ directory.
     /// You can also reference textures from resource packs.
