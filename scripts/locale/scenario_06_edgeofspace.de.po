@@ -644,7 +644,7 @@ msgstr "Haben Sie Raketen für uns übrig? (jeweils 2 Ruf)"
 #: scripts/scenario_06_edgeofspace.lua:1021
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
-msgstr "Für diese Aktion müssen sie angedockt bleiben."
+msgstr "Für diese Aktion müssen Sie angedockt bleiben."
 
 #: scripts/scenario_06_edgeofspace.lua:910
 msgctxt "ammo-comms"

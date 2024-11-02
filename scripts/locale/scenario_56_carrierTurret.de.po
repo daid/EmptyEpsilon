@@ -490,7 +490,7 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:1438
 msgctxt "scienceDescription-station"
 msgid "Repulsor and Tractor Beam Components"
-msgstr "Repulsor- und Traktorstrahlkomponenten"
+msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
 #: scripts/scenario_56_carrierTurret.lua:1453
 msgctxt "stationGeneralInfo-comms"
@@ -499,7 +499,7 @@ msgid ""
 "custom made"
 msgstr ""
 "Wir können alle Ihre Bedürfnisse in Bezug auf das Schieben und Ziehen mit "
-"spezialisierten, maßgeschneiderten Ausrüstung erfüllen."
+"spezialisierter, maßgeschneiderter Ausrüstung erfüllen."
 
 #: scripts/scenario_56_carrierTurret.lua:1454
 msgctxt "stationStory-comms"
@@ -616,7 +616,7 @@ msgid ""
 "asteroids. Look out! Just kidding"
 msgstr ""
 "Wir untersuchen den Kosmos und kartieren stellare Phänomene. Wir verfolgen "
-"auch bewegliche Asteroiden... Passt auf! \n"
+"auch die Bewegung von Asteroiden... Passt auf! \n"
 "...\n"
 "Nur ein Scherz ;)."
 
@@ -701,7 +701,7 @@ msgid ""
 msgstr ""
 "Wir bauen, reparieren und liefern Komponenten und Upgrades für "
 "automatisierte Einrichtungen, die für Schiffe entwickelt wurden, auf denen "
-"keine medizinisches Fachpersonal verfügbar ist. Solche Geräte werden "
+"kein medizinisches Fachpersonal verfügbar ist. Solche Geräte werden "
 "üblicherweise auch  \"Autodocs\" genannt."
 
 #: scripts/scenario_56_carrierTurret.lua:1800
@@ -1038,7 +1038,7 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:2209
 msgctxt "scienceDescription-station"
 msgid "Repulsor and tractor beam components"
-msgstr "Repulsor- und Traktorstrahlkomponenten"
+msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
 #: scripts/scenario_56_carrierTurret.lua:2224
 msgctxt "stationGeneralInfo-comms"
@@ -1119,7 +1119,7 @@ msgid ""
 "so we honor our fortune by naming the station after them"
 msgstr ""
 "Wir haben einige unserer kritischen industriellen Prozesse von einer Spezies "
-"namens Tokra gelernt, daher ehren sie, indem wir die Station nach ihnen "
+"namens Tokra gelernt, daher ehren wir sie, indem wir die Station nach ihnen "
 "benennen."
 
 #: scripts/scenario_56_carrierTurret.lua:2297
@@ -1491,7 +1491,7 @@ msgstr "Zurück"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Rekrutiere einen Wartungspersonal für %i Ruf."
+msgstr "Rekrutiere Wartungspersonal für %i Ruf."
 
 #: scripts/scenario_56_carrierTurret.lua:2920
 #: scripts/scenario_56_carrierTurret.lua:2936
@@ -1573,7 +1573,7 @@ msgstr "     Leer\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Verfügbarer Platz: %i, Verfügbar Ruf: %i\n"
+msgstr "Verfügbarer Platz: %i, Verfügbarer Ruf: %i\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3208
 #: scripts/scenario_56_carrierTurret.lua:4159
@@ -1583,7 +1583,7 @@ msgstr "Verfügbarer Platz: %i, Verfügbar Ruf: %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Kaufen Sie 1 %s für %i Ruf"
+msgstr "Kaufe 1 %s für %i Ruf"
 
 #: scripts/scenario_56_carrierTurret.lua:3209
 #, lua-format
@@ -1983,7 +1983,7 @@ msgstr "und tauscht gegen Lebensmittel (food)"
 #: scripts/scenario_56_carrierTurret.lua:3918
 msgctxt "trade-comms"
 msgid " or luxury"
-msgstr "oder Luxusgüter (luxury)"
+msgstr " oder Luxusgüter (luxury)"
 
 #: scripts/scenario_56_carrierTurret.lua:3920
 msgctxt "trade-comms"
@@ -2126,7 +2126,7 @@ msgstr "Deine Blutlinie wird hier enden!"
 #: scripts/scenario_56_carrierTurret.lua:4077
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr "Ihre schwächlichen Drohungen sind Bedeutungslos."
+msgstr "Ihre schwächlichen Drohungen sind bedeutungslos."
 
 #: scripts/scenario_56_carrierTurret.lua:4079
 msgctxt "shipEnemy-comms"

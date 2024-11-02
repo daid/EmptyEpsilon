@@ -17,7 +17,6 @@ msgid "Defender Hunter"
 msgstr "Verteidiger/Jäger"
 
 # Scenario description
-#, fuzzy
 msgid ""
 "Defend home station and hunt down enemies\n"
 "\n"
@@ -42,20 +41,21 @@ msgstr ""
 "Verteidigt die Heimatstation und jagt Feinde\n"
 "\n"
 "Zunächst habt ihr die Aufgabe, eure Heimatstation zu verteidigen.  Im Laufe "
-"der Zeit werdet ihr mehr über die Angreifer erfahren, die dich belästigen, "
-"und euch wird befohlen, die verantwortlichen Feinde zu finden und zu "
-"zerstören.  Es können verschiedene optionale Missionen während des Spiels "
-"erfüllt werden, aber die feindlichen Angriffe werden weitergehen.  Ihr müsst "
-"euch entscheiden, was gerade wichtiger ist.\n"
+"der Zeit werdet ihr mehr über eure Angreifer erfahren, und euch wird "
+"befohlen, die verantwortlichen Feinde zu finden und zu zerstören.  Es können "
+"verschiedene optionale Missionen während des Spiels erfüllt werden, aber die "
+"feindlichen Angriffe werden weitergehen.  Ihr müsst euch entscheiden, was "
+"gerade wichtiger ist.\n"
 "\n"
 "Entwickelt für eine beliebige Anzahl von kooperierenden Spielerschiffen. Die "
 "zufällige Generierung vieler Details macht jedes Spiel unterschiedlich, aber "
-"die primären Ziele bleiben die gleichen. Variationen ohne Zeitbeschränkung "
+"die primären Ziele bleiben die gleichen. Varianten ohne Zeitbeschränkung "
 "können eine Stunde oder länger dauern. Verschiedene optionale Missionen "
 "können von den Spielern gewählt werden oder werden nach dem Zufallsprinzip "
-"ausgewählt. Der Sieg in einer zeitgesteuerten Jägervariante ist eine "
-"ziemliche Herausforderung. Wie im Wellen-Szenario werden die Feinde mit der "
-"Zeit stärker.\n"
+"ausgewählt. Verschiedene Nebenmissionen können entweder selbst gewählt "
+"werden oder werden zufällig ausgewählt. Der Sieg in einer zeitgesteuerten "
+"Jägervariante ist eine ziemliche Herausforderung. Wie im \"Endlose-Wellen\"-"
+"Szenario werden die Feinde mit der Zeit stärker.\n"
 "\n"
 "Version 10 - Jan2022"
 
@@ -139,60 +139,51 @@ msgstr "Szenario endet in 30 Minuten"
 
 msgctxt "Time"
 msgid "35min"
-msgstr ""
+msgstr "35 Minuten"
 
-#, fuzzy
 msgctxt "Time"
 msgid "Scenario ends in 35 minutes"
-msgstr "Szenario endet in 30 Minuten"
+msgstr "Szenario endet in 35 Minuten"
 
-#, fuzzy
 msgctxt "Time"
 msgid "40min"
-msgstr "30 Minuten"
+msgstr "40 Minuten"
 
-#, fuzzy
 msgctxt "Time"
 msgid "Scenario ends in 40 minutes"
-msgstr "Szenario endet in 30 Minuten"
+msgstr "Szenario endet in 40 Minuten"
 
 msgctxt "Time"
 msgid "45min"
-msgstr ""
+msgstr "45min"
 
-#, fuzzy
 msgctxt "Time"
 msgid "Scenario ends in 45 minutes"
-msgstr "Szenario endet in 30 Minuten"
+msgstr "Szenario endet in 45 Minuten"
 
-#, fuzzy
 msgctxt "Time"
 msgid "50min"
-msgstr "30 Minuten"
+msgstr "50 Minuten"
 
-#, fuzzy
 msgctxt "Time"
 msgid "Scenario ends in 50 minutes"
-msgstr "Szenario endet in 30 Minuten"
+msgstr "Szenario endet in 50 Minuten"
 
 msgctxt "Time"
 msgid "55min"
-msgstr ""
+msgstr "55min"
 
-#, fuzzy
 msgctxt "Time"
 msgid "Scenario ends in 55 minutes"
-msgstr "Szenario endet in 30 Minuten"
+msgstr "Szenario endet in 55 Minuten"
 
-#, fuzzy
 msgctxt "Time"
 msgid "60min"
-msgstr "30 Minuten"
+msgstr "3060Minuten"
 
-#, fuzzy
 msgctxt "Time"
 msgid "Scenario ends in 60 minutes"
-msgstr "Szenario endet in 30 Minuten"
+msgstr "Szenario endet in 60 Minuten"
 
 # Scenario setting
 msgctxt "setting"
@@ -321,7 +312,7 @@ msgid ""
 "The Kraylors may be human navy enemies, but they make some mighty fine BBQ "
 "Mynock"
 msgstr ""
-"Die Kraylors mögen zwar Feinde der menschlichen Marine sein, aber sie machen "
+"Die Kraylors mögen zwar Feinde der menschlichen Navy sein, aber sie machen "
 "ein sehr gutes BBQ von Mynocks."
 
 #: scripts/scenario_55_defenderHunter.lua:174
@@ -569,6 +560,8 @@ msgstr ""
 msgctxt "stationServices-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
+"Wir haben keine Materialien und Vorräte mehr, die für die Reparatur der "
+"Schiffshülle benötigt werden."
 
 #: scripts/scenario_55_defenderHunter.lua:1876
 msgctxt "stationServices-comms"
@@ -1011,7 +1004,7 @@ msgstr "     Leer\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Verfügbarer Platz: %i, Verfügbar Ruf: %i\n"
+msgstr "Verfügbarer Platz: %i, Verfügbarer Ruf: %i\n"
 
 #: scripts/scenario_55_defenderHunter.lua:2226
 #: scripts/scenario_55_defenderHunter.lua:3384
@@ -1021,7 +1014,7 @@ msgstr "Verfügbarer Platz: %i, Verfügbar Ruf: %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Kaufen Sie 1 %s für %i Ruf"
+msgstr "Kaufe 1 %s für %i Ruf"
 
 #: scripts/scenario_55_defenderHunter.lua:2227
 #, lua-format
@@ -1990,6 +1983,8 @@ msgid ""
 "\n"
 "   %14s: %2i, %3i"
 msgstr ""
+"\n"
+"   %14s: %2i, %3i"
 
 #: scripts/scenario_55_defenderHunter.lua:2949
 msgctxt "stationServices-comms"
@@ -2139,7 +2134,7 @@ msgstr "Sir, wie können wir helfen?"
 #: scripts/scenario_55_defenderHunter.lua:3236
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr "Verteidige einen Wegpunkt."
+msgstr "Verteidigen Sie einen Wegpunkt"
 
 #: scripts/scenario_55_defenderHunter.lua:3238
 msgctxt "shipAssist-comms"
@@ -2212,13 +2207,13 @@ msgstr "Schild %s: %d%%\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
-msgstr "%s: %d/%d\n"
+msgstr "%s Raketen: %d/%d\n"
 
 #: scripts/scenario_55_defenderHunter.lua:3283
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr "Dock bei %s."
+msgstr "An %s andocken"
 
 #: scripts/scenario_55_defenderHunter.lua:3284
 #, lua-format
@@ -2305,10 +2300,10 @@ msgid ""
 "all.\n"
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr ""
-"Der Hive ist keiner Bedrohung ausgesetzt. Wer sich gegen einen von uns "
-"stellt, stellt sich gegen uns alle.\n"
-"Haltet euch zurück oder bereitet euch darauf vor, eure Leichen für unsere "
-"Ernährung zu spenden."
+"Der Schwarm duldet keine Drohungen. Feindseligkeit gegen eines von uns ist "
+"Feindseligkeit gegen uns alle.\n"
+"Halten Sie ihre Position und machen Sie sich bereit, Ihre Körper als Nahrung "
+"zu spenden."
 
 #: scripts/scenario_55_defenderHunter.lua:3311
 msgctxt "shipEnemy-comms"
@@ -2325,7 +2320,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:3313
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
-msgstr "Der Hive hat höhere Priorität als die Schädlingsbekämpfung."
+msgstr "Der Schwarm hat Wichtigeres zu tun als Schädlingsbekämpfung."
 
 #: scripts/scenario_55_defenderHunter.lua:3315
 msgctxt "shipEnemy-comms"
@@ -2649,7 +2644,6 @@ msgstr ""
 "kalibrieren."
 
 #: scripts/scenario_55_defenderHunter.lua:4730
-#, fuzzy
 msgctxt "Paul-msgHelms"
 msgid "[Paul Straight] The ship is in range. I completed my scans. Thank you"
 msgstr ""
@@ -2657,7 +2651,6 @@ msgstr ""
 "abgeschlossen. Ich danke Ihnen."
 
 #: scripts/scenario_55_defenderHunter.lua:4734
-#, fuzzy
 msgctxt "Paul-msgTactical"
 msgid "[Paul Straight] The ship is in range. I completed my scans. Thank you"
 msgstr ""
@@ -2697,16 +2690,16 @@ msgstr ""
 "transportieren."
 
 #: scripts/scenario_55_defenderHunter.lua:4786
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "Paul-msgScience"
 msgid "Paul Straight has transported aboard %s"
-msgstr "Paul Straight hat sich an Bord von %s transportiert."
+msgstr "Paul Straight wurde an Bord von %s transportiert."
 
 #: scripts/scenario_55_defenderHunter.lua:4790
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "Paul-msgOperations"
 msgid "Paul Straight has transported aboard %s"
-msgstr "Paul Straight hat sich an Bord von %s transportiert."
+msgstr "Paul Straight wurde an Bord von %s transportiert."
 
 #: scripts/scenario_55_defenderHunter.lua:4793
 #, lua-format
@@ -2747,11 +2740,11 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:4889
 #: scripts/scenario_55_defenderHunter.lua:4910
 #: scripts/scenario_55_defenderHunter.lua:4926
-#, fuzzy
 msgctxt "Paul-msgOperations"
 msgid "Lifesign telemetry from Paul Straight's equipment has ceased"
 msgstr ""
-"Die Lebensdaten-Telemetrie von Paul Straight's Ausrüstung hat ausgesetzt."
+"Die Telemetrie von Paul Straight's Ausrüstung übermittelt keine "
+"Lebenszeichen mehr."
 
 #: scripts/scenario_55_defenderHunter.lua:4848
 #, lua-format
@@ -3018,16 +3011,15 @@ msgid "Object shows rapidly building energy"
 msgstr "Objekt zeigt sich schnell aufbauende Energie."
 
 #: scripts/scenario_55_defenderHunter.lua:5857
-#, fuzzy
 msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
-msgstr "Das medizinische Team hat einen Ihrer Wartungstechniker wiederbelebt."
+msgstr ""
+"Das medizinische Team hat ein Mitglied Ihrer Reparaturcrew wiederbelebt."
 
 #: scripts/scenario_55_defenderHunter.lua:5861
-#, fuzzy
 msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
-msgstr "Das medizinische Team hat einen Ihrer Wartungstechniker wiederbelebt."
+msgstr "Das medizinische Team hat ein Mitglied der Reparaturcrew wiederbelebt."
 
 #: scripts/scenario_55_defenderHunter.lua:5880
 msgctxt "coolant-msgEngineer"
@@ -3035,16 +3027,14 @@ msgid "Automated systems have recovered some coolant"
 msgstr "Automatische Systeme haben etwas Kühlmittel zurückgewonnen."
 
 #: scripts/scenario_55_defenderHunter.lua:5884
-#, fuzzy
 msgctxt "coolant-msgEngineer+"
 msgid "Automated systems have recovered some coolant"
 msgstr "Automatische Systeme haben etwas Kühlmittel zurückgewonnen."
 
 #: scripts/scenario_55_defenderHunter.lua:5948
-#, fuzzy
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
-msgstr "Ein Mitglied Ihrer Reparaturmannschaft ist ums Leben gekommen."
+msgstr "Ein Mitglied des Reparaturteams ist verstorben"
 
 #: scripts/scenario_55_defenderHunter.lua:5952
 msgctxt "repairCrew-msgEngineer+"
@@ -3057,7 +3047,6 @@ msgid "Damage has caused a loss of coolant"
 msgstr "Die Beschädigung hat zu einem Kühlmittelverlust geführt."
 
 #: scripts/scenario_55_defenderHunter.lua:5973
-#, fuzzy
 msgctxt "coolant-msgEngineer+"
 msgid "Damage has caused a loss of coolant"
 msgstr "Die Beschädigung hat zu einem Kühlmittelverlust geführt."
@@ -3138,7 +3127,6 @@ msgid "Combat maneuver has been damaged"
 msgstr "Das Ausweichmanöver-System wurde beschädigt."
 
 #: scripts/scenario_55_defenderHunter.lua:6031
-#, fuzzy
 msgctxt "damage-msgTactical"
 msgid "Combat maneuver has been damaged"
 msgstr "Das Ausweichmanöver-System wurde beschädigt."
@@ -3154,19 +3142,16 @@ msgid "Self destruct system has been damaged"
 msgstr "Die Selbstzerstörung wurde beschädigt."
 
 #: scripts/scenario_55_defenderHunter.lua:6053
-#, fuzzy
 msgctxt "coolant-buttonEngineer"
 msgid "Auto cool"
 msgstr "Automatische Kühlung"
 
 #: scripts/scenario_55_defenderHunter.lua:6060
-#, fuzzy
 msgctxt "coolant-buttonEngineer"
 msgid "Manual cool"
 msgstr "Manuelle Kühlung"
 
 #: scripts/scenario_55_defenderHunter.lua:6072
-#, fuzzy
 msgctxt "coolant-buttonEngineer+"
 msgid "Auto cool"
 msgstr "Automatische Kühlung"
@@ -3185,13 +3170,13 @@ msgstr "Sammeln von Kühlmittel"
 #, lua-format
 msgctxt "coolant-tabEngineer"
 msgid "Deploying Collectors %i"
-msgstr "Entsendung von Sammlern %i"
+msgstr "Kollektoren hochfahren (%i)"
 
 #: scripts/scenario_55_defenderHunter.lua:6124
 #, lua-format
 msgctxt "coolant-tabEngineer"
 msgid "Configuring Collectors %i"
-msgstr "Sammler konfigurieren %i"
+msgstr "Kollektoren konfigurieren (%i)"
 
 #: scripts/scenario_55_defenderHunter.lua:6184
 #, lua-format
@@ -3251,7 +3236,7 @@ msgstr "Leutnant"
 #: scripts/scenario_55_defenderHunter.lua:6209
 msgctxt "msgMainscreen"
 msgid "Commander"
-msgstr "Kommandant"
+msgstr "Commander"
 
 #: scripts/scenario_55_defenderHunter.lua:6198
 #: scripts/scenario_55_defenderHunter.lua:6211
@@ -3296,26 +3281,23 @@ msgstr ""
 "Rang nach der Zerstörung der Heimatbasis: %s"
 
 #: scripts/scenario_55_defenderHunter.lua:6248
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "homeStationHealth-tabRelay&Operations"
 msgid "%s %s:%i%% H:%i%%"
 msgstr "%s %s:%i%% H:%i%%"
 
 #: scripts/scenario_55_defenderHunter.lua:6314
-#, fuzzy
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
 msgstr "Kühlmittel einholen"
 
 #: scripts/scenario_55_defenderHunter.lua:6322
-#, fuzzy
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
 msgstr "Kühlmittel einholen"
 
 # Scenario setting
 #: scripts/scenario_55_defenderHunter.lua:6372
-#, fuzzy
 msgctxt "buttonGM"
 msgid "Spawn Enemies"
 msgstr "Feinde"
@@ -3329,8 +3311,8 @@ msgstr "Feinde"
 #~ "We train naval cadets in routine and specialized functions aboard space "
 #~ "vessels and coordinate naval activity throughout the sector"
 #~ msgstr ""
-#~ "Wir bilden Marinekadetten für Routine- und Spezialaufgaben an Bord von "
-#~ "Raumschiffen aus und koordinieren die Aktivitäten der Marine im gesamten "
+#~ "Wir bilden Navykadetten für Routine- und Spezialaufgaben an Bord von "
+#~ "Raumschiffen aus und koordinieren die Aktivitäten der Navy im gesamten "
 #~ "Sektor."
 
 #~ msgctxt "stationStory-comms"
@@ -3600,7 +3582,9 @@ msgstr "Feinde"
 #~ "asteroids. Look out! Just kidding"
 #~ msgstr ""
 #~ "Wir untersuchen den Kosmos und kartieren stellare Phänomene. Wir "
-#~ "verfolgen auch bewegliche Asteroiden. Passt auf! Nur ein Scherz ;)."
+#~ "verfolgen auch die Bewegung von Asteroiden... Passt auf! \n"
+#~ "...\n"
+#~ "Nur ein Scherz ;)."
 
 #~ msgctxt "stationStory-comms"
 #~ msgid ""
@@ -3609,7 +3593,7 @@ msgstr "Feinde"
 #~ msgstr ""
 #~ "Die Station wurde zu Ehren von Charles Hayden benannt, dessen "
 #~ "Wohltätigkeit die astrophysikalische Forschung und Ausbildung auf der "
-#~ "Erde im frühen 20. Jahrhundert stark vorran brachte."
+#~ "Erde im frühen 20. Jahrhundert stark voran brachte."
 
 #~ msgctxt "scienceDescription-station"
 #~ msgid "Autodoc components"
@@ -3705,9 +3689,8 @@ msgstr "Feinde"
 #~ "docile by software generated illusion"
 #~ msgstr ""
 #~ "Die Station ist nach einem fiktiven Software-Ingenieur aus einem Film des "
-#~ "späten 20. Jahrhunderts benannt, in dem die Menschheit unwissentlich von "
-#~ "Außerirdischen erobert und durch softwaregenerierte Illusionen gefügig "
-#~ "gehalten wird."
+#~ "späten 20. Jahrhunderts benannt, in dem die Menschheit unwissentlich "
+#~ "erobert und durch softwaregenerierte Illusionen gefügig gehalten wird."
 
 #~ msgctxt "scienceDescription-station"
 #~ msgid "Shield and Armor Research"
@@ -3993,9 +3976,9 @@ msgstr "Feinde"
 #~ "entertainment and maintenance skills as well as build a community where "
 #~ "Skandars can relax"
 #~ msgstr ""
-#~ "Die nomadischen Skandars haben sich in dieser Station niedergelassen, um "
+#~ "Die nomadischen Skandare haben sich in dieser Station niedergelassen, um "
 #~ "ihre Unterhaltungs- und Wartungsfähigkeiten zu trainieren und eine "
-#~ "Gemeinschaft aufzubauen, in der sich die Skandars entspannen können."
+#~ "Gemeinschaft aufzubauen, in der sich die Skandare entspannen können."
 
 #~ msgctxt "stationGeneralInfo-comms"
 #~ msgid "We create androids and android components"
@@ -4083,9 +4066,9 @@ msgstr "Feinde"
 #~ "vessel"
 #~ msgstr ""
 #~ "Wir befassen uns mit allen Aspekten des Baus und der Wartung von "
-#~ "Marineschiffen. Viele der Marinemodelle werden direkt hier auf dieser "
-#~ "Station erforscht, entworfen und gebaut. Unser Ziel ist es, die Raumfahrt "
-#~ "angesichts der enormen Fähigkeiten moderner Marineschiffe so einfach wie "
+#~ "Navyschiffen. Viele der Modelle werden direkt hier auf dieser Station "
+#~ "erforscht, entworfen und gebaut. Unser Ziel ist es, die Raumfahrt "
+#~ "angesichts der enormen Fähigkeiten moderner Schiffe so einfach wie "
 #~ "möglich zu gestalten."
 
 #~ msgctxt "scienceDescription-station"
@@ -4154,7 +4137,7 @@ msgstr "Feinde"
 
 #~ msgctxt "scienceDescription-station"
 #~ msgid "Repulsor and Tractor Beam Components"
-#~ msgstr "Repulsor- und Traktorstrahlkomponenten"
+#~ msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
 #~ msgctxt "stationGeneralInfo-comms"
 #~ msgid ""
@@ -4162,7 +4145,7 @@ msgstr "Feinde"
 #~ "custom made"
 #~ msgstr ""
 #~ "Wir können alle Ihre Bedürfnisse in Bezug auf das Schieben und Ziehen mit "
-#~ "spezialisierten, maßgeschneiderten Ausrüstung erfüllen."
+#~ "spezialisierter, maßgeschneiderter Ausrüstung erfüllen."
 
 #~ msgctxt "stationStory-comms"
 #~ msgid ""
@@ -4266,7 +4249,7 @@ msgstr "Feinde"
 
 #~ msgctxt "scienceDescription-station"
 #~ msgid "Repulsor and tractor beam components"
-#~ msgstr "Repulsor- und Traktorstrahlkomponenten"
+#~ msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
 #~ msgctxt "stationGeneralInfo-comms"
 #~ msgid ""
