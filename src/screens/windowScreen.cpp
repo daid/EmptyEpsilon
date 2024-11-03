@@ -56,7 +56,7 @@ void WindowScreen::update(float delta)
 
         auto position = my_spaceship->getPosition() + rotateVec2(glm::vec2(my_spaceship->getRadius(), 0), camera_yaw);
 
-        camera_position.x = position.x;
+        camera_position.x = position.x + 1.0f; // small offset to prevent camera glitches on some models
         camera_position.y = position.y;
         camera_position.z = 0.0;
     }
