@@ -2056,13 +2056,15 @@ msgstr "Communication confirmée, %s. Vous êtes connecté à %s. Parlez."
 #, lua-format
 msgctxt "station-comms"
 msgid "This is the %s communications officer on duty. Go ahead, %s."
-msgstr ""
+msgstr "Ici le responsable des communications de %s. Allez-y, %s parlez."
 
 #: scripts/comms_scenario_utility.lua:1413
 #, lua-format
 msgctxt "station-comms"
 msgid "This is the %s communications officer. Go ahead, %s."
 msgstr ""
+"Bonjour, je suis le responsable des communications sur %s. Allez-y, parlez "
+"%s."
 
 #: scripts/comms_scenario_utility.lua:1414
 #, lua-format
@@ -10412,13 +10414,15 @@ msgstr "En cours d'amarrage à la station %s."
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at nearby station %s."
-msgstr ""
+msgstr "Amarrage à la station voisine %s."
 
 #: scripts/comms_scenario_utility.lua:8406
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s is changing course to dock at station %s."
 msgstr ""
+"Bien reçu.\n"
+"%s change son cap pour s'amarrer à la station %s."
 
 #: scripts/comms_scenario_utility.lua:8433
 #: scripts/comms_scenario_utility.lua:9145
@@ -10929,7 +10933,6 @@ msgid ""
 "We are on an important mission."
 msgstr ""
 "Désolé, nous n'avons pas le temps de discuter avec vous.\n"
-"\n"
 "Nous sommes en mission de la plus haute importance."
 
 #: scripts/comms_scenario_utility.lua:9404
