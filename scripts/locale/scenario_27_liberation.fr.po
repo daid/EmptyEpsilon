@@ -19,7 +19,6 @@ msgid "Liberation Day"
 msgstr "Le jour de la Libération"
 
 # Scenario description
-#, fuzzy
 msgid ""
 "Let's celebrate Liberation Day, when we humans finally freed ourselves from "
 "Kraylor occupation! Wait, I wonder how the Exuari celebrate Liberation day. "
@@ -33,10 +32,8 @@ msgid ""
 "There's usually one every weekend. All experience levels are welcome."
 msgstr ""
 "- Durée approx. : 30mn (variable)\n"
-"- Difficulté : Très difficile (variable)\n"
+"- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
-"\n"
-"EN COURS DE TRADUCTION 84%\n"
 "\n"
 "Mission : Célébrons le Jour de la Libération, lorsque nous, humains, nous "
 "sommes enfin libérés de l'occupation des Kraylors.\n"
@@ -289,7 +286,7 @@ msgstr "Voile"
 
 msgctxt "setting"
 msgid "Degree of device cloaking mechanism"
-msgstr "Degré de dissimulation de l'appareil."
+msgstr "Degré de dissimulation du dispositif."
 
 msgctxt "Cloak"
 msgid "None"
@@ -297,7 +294,7 @@ msgstr "Aucun"
 
 msgctxt "Cloak"
 msgid "Device is not cloaked"
-msgstr "L'appareil n'est pas dissimulé."
+msgstr "Le dispositif n'est pas dissimulé."
 
 msgctxt "Cloak"
 msgid "Partial"
@@ -305,7 +302,7 @@ msgstr "Partiel"
 
 msgctxt "Cloak"
 msgid "Device is partially cloaked"
-msgstr "L'appareil est partiellement dissimulé."
+msgstr "Le dispositif est partiellement dissimulé."
 
 msgctxt "Cloak"
 msgid "Strong"
@@ -313,7 +310,7 @@ msgstr "Important"
 
 msgctxt "Cloak"
 msgid "Device is mostly cloaked"
-msgstr "L'appareil est en grande partie dissimulé."
+msgstr "Le dispositif est en grande partie dissimulé."
 
 msgctxt "Cloak"
 msgid "Full"
@@ -321,7 +318,7 @@ msgstr "Complet"
 
 msgctxt "Cloak"
 msgid "Device is cloaked (but it's not perfect)"
-msgstr "L'appareil est complètement dissimulé (mais ce n'est pas parfait)."
+msgstr "Le dispositif est complètement dissimulé (mais ce n'est pas parfait)."
 
 #: scripts/scenario_27_liberation.lua:137
 #, lua-format
@@ -516,7 +513,7 @@ msgid ""
 "destroyed or looted."
 msgstr ""
 "Oh, juste les actions prédatrices habituelles : attaquer n'importe quoi et "
-"rire lorsqu'il est détruit ou pillé."
+"rire lorsque c'est détruit ou pillé."
 
 #: scripts/scenario_27_liberation.lua:1515
 msgctxt "station-comms"
@@ -537,10 +534,13 @@ msgstr ""
 #: scripts/scenario_27_liberation.lua:1517
 msgctxt "station-comms"
 msgid "You want to talk to Jasmine Purdue. She's been studying the Exuari."
-msgstr "Vous voulez parler à Jasmine Purdue ? Elle étudie les Éxuaris."
+msgstr ""
+"Vous devriez parler à Jasmine Purdue. Elle étudie les Éxuaris.\n"
+"S'il y a quoi que ce soit d'inhabituel actuellement, elle sera sûrement au "
+"courant."
 
 #: scripts/scenario_27_liberation.lua:1520
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "station-comms"
 msgid ""
 "They've been setting up an isolated station for research somewhere near %s"
@@ -924,7 +924,6 @@ msgid "Source of unusual emanations"
 msgstr "Source d'émanations inhabituelles"
 
 #: scripts/scenario_27_liberation.lua:3115
-#, fuzzy
 msgctxt "msgMainscreen"
 msgid "The Exuari really enjoyed the fireworks at your expense"
 msgstr "Les Éxuaris ont vraiment apprécié le feu d'artifice à vos frais."
@@ -1014,13 +1013,11 @@ msgid "Never heard of her."
 msgstr "Jamais entendu parler d'elle."
 
 #: scripts/scenario_27_liberation.lua:3593
-#, fuzzy
 msgctxt "station-comms"
 msgid "freighter"
-msgstr "Cargo"
+msgstr "cargo"
 
 #: scripts/scenario_27_liberation.lua:3597
-#, fuzzy
 msgctxt "station-comms"
 msgid "discovered that Jasmine Purdue is working on a freighter"
 msgstr "a découvert que Jasmine Purdue travaille sur un cargo"
@@ -1118,23 +1115,23 @@ msgstr "Qu'est ce que vous voulez ?"
 #, lua-format
 msgctxt "ship-comms"
 msgid "Where can I find %s?"
-msgstr "Où puis-je trouver %s ?"
+msgstr "Où puis-je trouver le cargo %s ?"
 
 #: scripts/scenario_27_liberation.lua:3667
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid ""
 "Their latest flight plan shows they're going from %s to %s in %s. Their "
 "general heading was %s."
 msgstr ""
-"Leur dernier plan de vol indique qu'ils sont partis du secteur %s et se "
+"Leur dernier plan de vol indique qu'ils étaient dans le secteur %s et se "
 "dirigeaient vers %s en secteur %s. Leur cap approximatif était %s."
 
 #: scripts/scenario_27_liberation.lua:3669
 #, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid "Last we heard, they were in %s"
-msgstr "Aux dernières nouvelles, ils se trouvaient dans le secteur %s."
+msgstr "Aux dernières nouvelles, il se trouvait dans le secteur %s."
 
 #: scripts/scenario_27_liberation.lua:3673
 #: scripts/scenario_27_liberation.lua:3682
@@ -1154,30 +1151,31 @@ msgstr "Que savez-vous de Jasmine Purdue ?"
 
 #: scripts/scenario_27_liberation.lua:3686
 #: scripts/scenario_27_liberation.lua:3695
-#, fuzzy
 msgctxt "ship-comms"
 msgid "She works on another freighter"
-msgstr "Elle travaille sur un autre cargo"
+msgstr ""
+"Ah je la connais. Elle fait des recherches sur les Éxuaris à bord d'un autre "
+"cargo."
 
 #: scripts/scenario_27_liberation.lua:3687
 #: scripts/scenario_27_liberation.lua:3696
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid "She works on freighter %s"
-msgstr "Elle travaille sur le cargo %s"
+msgstr ""
+"Ah oui, Jasmine,\n"
+"Il me semble qu'elle travaillait sur le cargo %s."
 
 #: scripts/scenario_27_liberation.lua:3700
-#, fuzzy
 msgctxt "ship-comms"
 msgid "She works here"
-msgstr "Elle travaille ici"
+msgstr "Ah Jasmine, elle travaille ici avec nous."
 
 #: scripts/scenario_27_liberation.lua:3704
 #: scripts/scenario_27_liberation.lua:3737
-#, fuzzy
 msgctxt "ship-comms"
 msgid "discovered that Jasmine Purdue is on freighter"
-msgstr "a découvert que Jasmine Purdue se trouve sur un cargo"
+msgstr "a découvert que Jasmine Purdue se trouve sur le cargo"
 
 #: scripts/scenario_27_liberation.lua:3712
 #: scripts/scenario_27_liberation.lua:3745
@@ -1199,22 +1197,19 @@ msgid ""
 "[Jasmine Purdue] Yes? What can I do for you?"
 msgstr ""
 "Un instant, je vais la chercher.\n"
-"\n"
-"...Après quelques minutes d'attente…\n"
+"...Après quelques brefs instants…\n"
 "\n"
 "[Jasmine Purdue] Oui ? Que puis-je faire pour vous ?"
 
 #: scripts/scenario_27_liberation.lua:3729
-#, fuzzy
 msgctxt "ship-comms"
 msgid "I know nothing about Jasmine Purdue"
-msgstr "Je ne sais rien de Jasmine Purdue."
+msgstr "Ce nom ne me dit rien du tout, désolé."
 
 #: scripts/scenario_27_liberation.lua:3733
-#, fuzzy
 msgctxt "ship-comms"
 msgid "works on freighter"
-msgstr "travaille sur un cargo"
+msgstr "travaillait sur le cargo"
 
 #: scripts/scenario_27_liberation.lua:3760
 #, fuzzy
@@ -1238,7 +1233,7 @@ msgid "What are they up to?"
 msgstr "Quelles sont leurs activités actuellement ?"
 
 #: scripts/scenario_27_liberation.lua:3781
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid ""
 "The Exuari are conducting research at their research base in the area on "
@@ -1249,22 +1244,22 @@ msgid ""
 "humorous response from the %s"
 msgstr ""
 "Les Éxuaris mènent des recherches sur l'humour chez les autres espèces, dans "
-"leur laboratoire situé dans la région. Ils pensent que les autres types de "
-"recherche physique sont tangentiels. Cependant, ils ont suivi une tangente "
-"en rapport avec les causes de la transformation des étoiles en supernova.\n"
-"Ils ont construit un dispositif « humoristique » qui, à l'impact avec une "
-"étoile, transforme prématurément cette dernière en supernova. Ils l'ont "
-"testé sur %s. Ils pensaient que cela pourrait provoquer une réponse marrante "
-"de la part de %s."
+"leur laboratoire situé dans la région.\n"
+"Ils pensent que les autres types de recherche physique sont superflus. "
+"Cependant, ils se sont quand même renseignés sur une étude en rapport avec "
+"les causes de la transformation des étoiles en supernova.\n"
+"Ils ont construit un dispositif « humoristique » qu'il appellent feu "
+"d'artifice et qui, à l'impact avec une étoile, transforme prématurément "
+"cette dernière en supernova. Ils l'ont testé sur l'étoile %s. Ils pensaient "
+"que cela pourrait provoquer une réponse marrante de la part de %s."
 
 #: scripts/scenario_27_liberation.lua:3782
 #: scripts/scenario_27_liberation.lua:3795
 #: scripts/scenario_27_liberation.lua:3805
 #: scripts/scenario_27_liberation.lua:3998
-#, fuzzy
 msgctxt "ship-comms"
 msgid "Back to Jasmine topics of conversation"
-msgstr "Revenir aux sujets de conversation de Jasmine"
+msgstr "Revenir aux sujets de conversation avec Jasmine"
 
 #: scripts/scenario_27_liberation.lua:3783
 #: scripts/scenario_27_liberation.lua:3796
@@ -1272,7 +1267,7 @@ msgstr "Revenir aux sujets de conversation de Jasmine"
 #: scripts/scenario_27_liberation.lua:3999
 msgctxt "ship-comms"
 msgid "Do you need to know anything else about the Exuari?"
-msgstr "Avez-vous besoin de savoir autre chose sur les Éxuaris ?"
+msgstr "Avez-vous besoin de savoir autre chose sur eux ?"
 
 #: scripts/scenario_27_liberation.lua:3785
 #: scripts/scenario_27_liberation.lua:3798
@@ -1285,16 +1280,16 @@ msgstr "Revenir à la communication du vaisseau"
 #: scripts/scenario_27_liberation.lua:3788
 msgctxt "ship-comms"
 msgid "Where is their research base located?"
-msgstr "Où se trouve leur base de recherche ?"
+msgstr "Où se trouve leur laboratoire de recherche ?"
 
 #: scripts/scenario_27_liberation.lua:3791
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid "It's located in sector %s"
-msgstr "Elle est située dans le secteur %s."
+msgstr "Il est situé dans le secteur %s."
 
 #: scripts/scenario_27_liberation.lua:3793
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid ""
 "It used to be located in sector %s, but it has since been destroyed. "
@@ -1311,7 +1306,6 @@ msgid "How do we stop their fireworks display?"
 msgstr "Comment arrêter leur dispositif de feu d'artifice ?"
 
 #: scripts/scenario_27_liberation.lua:3804
-#, fuzzy
 msgctxt "ship-comms"
 msgid ""
 "1) connect to the device's communication array.\n"
@@ -1321,18 +1315,18 @@ msgid ""
 "I hear that stations in the area have figured out how to connect to the "
 "device's communication array."
 msgstr ""
-"1) connectez-vous au réseau de communication de l'appareil.\n"
-"2) Naviguez dans l'interface utilisateur jusqu'à la zone de désactivation.\n"
-"3) Fournissez le code PIN de la clé de désactivation numérique\n"
+"Pour cela vous allez devoir :\n"
+"1) Vous connecter au réseau de communication du dispositif.\n"
+"2) Naviguer dans l'interface utilisateur jusqu'au menu de désactivation.\n"
+"3) Saisir le code de contrôle de la clé de désactivation numérique.\n"
 "\n"
-"J'ai entendu dire que les stations de la région ont trouvé comment se "
-"connecter au réseau de communication de l'appareil."
+"J'ai entendu dire que les stations de la région auraient trouvé comment se "
+"connecter au réseau de communication du dispositif."
 
 #: scripts/scenario_27_liberation.lua:3812
-#, fuzzy
 msgctxt "ship-comms"
 msgid "What is the key?"
-msgstr "Quelle est la clé ?"
+msgstr "Quel est le code de contrôle ?"
 
 #: scripts/scenario_27_liberation.lua:3816
 msgctxt "ship-comms"
@@ -1388,28 +1382,28 @@ msgstr "Smile"
 #, lua-format
 msgctxt "ship-comms"
 msgid "Key: %s"
-msgstr ""
+msgstr "Clé : %s"
 
 #: scripts/scenario_27_liberation.lua:3859
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s and %s make %s."
-msgstr ""
+msgstr "%s et %s font %s."
 
 #: scripts/scenario_27_liberation.lua:3861
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s is %s and %s."
-msgstr ""
+msgstr "%s est %s et %s."
 
 #: scripts/scenario_27_liberation.lua:3864
 #: scripts/scenario_27_liberation.lua:3885
 #: scripts/scenario_27_liberation.lua:3921
 #: scripts/scenario_27_liberation.lua:3932
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid "%s and %s is the same as %s and %s."
-msgstr ""
+msgstr "%s et %s sont identiques à %s et %s."
 
 #: scripts/scenario_27_liberation.lua:3866
 #: scripts/scenario_27_liberation.lua:3887
@@ -1418,16 +1412,16 @@ msgstr ""
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s and %s is the same as %s minus %s."
-msgstr ""
+msgstr "%s et %s sont identiques à %s moins %s."
 
 #: scripts/scenario_27_liberation.lua:3868
 #: scripts/scenario_27_liberation.lua:3889
 #: scripts/scenario_27_liberation.lua:3925
 #: scripts/scenario_27_liberation.lua:3936
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid "%s and %s is the same as %s."
-msgstr ""
+msgstr "%s et %s sont identiques à %s."
 
 #: scripts/scenario_27_liberation.lua:3871
 #: scripts/scenario_27_liberation.lua:3892
@@ -1435,7 +1429,7 @@ msgstr ""
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s is more than %s."
-msgstr ""
+msgstr "%s est plus grand que %s."
 
 #: scripts/scenario_27_liberation.lua:3874
 #: scripts/scenario_27_liberation.lua:3877
@@ -1450,32 +1444,32 @@ msgstr ""
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s is more than %s and less than %s."
-msgstr ""
+msgstr "%s est plus grand que %s et plus petit que %s."
 
 #: scripts/scenario_27_liberation.lua:3879
 #: scripts/scenario_27_liberation.lua:3899
 #: scripts/scenario_27_liberation.lua:3906
 #: scripts/scenario_27_liberation.lua:3943
 #: scripts/scenario_27_liberation.lua:3953
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid "%s is less than %s."
-msgstr ""
+msgstr "%s est plus petit que %s."
 
 #: scripts/scenario_27_liberation.lua:3918
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s is %s and %s"
-msgstr ""
+msgstr "%s est %s et %s."
 
 #: scripts/scenario_27_liberation.lua:3928
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid "%s is more than %s"
-msgstr ""
+msgstr "%s est plus grand que %s."
 
 #: scripts/scenario_27_liberation.lua:3973
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid ""
 "%s.\n"
@@ -1485,7 +1479,7 @@ msgstr ""
 "%s"
 
 #: scripts/scenario_27_liberation.lua:3975
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid ""
 "%s\n"
@@ -1495,13 +1489,12 @@ msgstr ""
 "%s"
 
 #: scripts/scenario_27_liberation.lua:3981
-#, fuzzy
 msgctxt "ship-comms"
 msgid "got riddle from Jasmine Purdue"
-msgstr "reçu une énigme de Jasmine Purdue"
+msgstr "a reçu une énigme de la part de Jasmine Purdue"
 
 #: scripts/scenario_27_liberation.lua:3989
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid ""
 "%s got riddle from Jasmine Purdue:\n"
@@ -1511,7 +1504,7 @@ msgstr ""
 "%s"
 
 #: scripts/scenario_27_liberation.lua:3997
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid ""
 "I ran across this riddle associated to the device. I have not deciphered it "
@@ -1520,9 +1513,9 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"Je suis tombé sur cette énigme associée à l'appareil. Je ne l'ai pas encore "
-"déchiffré. La solution devrait vous fournir le code de contrôle de "
-"l'appareil Éxuari.\n"
+"Je suis tombé sur une énigme associée au dispositif. Je ne l'ai pas encore "
+"déchiffré. La solution devrait, je pense, fournir le code de contrôle.\n"
+"Voici l'énigme en question :\n"
 "\n"
 "%s"
 
@@ -1627,7 +1620,7 @@ msgid ""
 "questions, contact your nearest Exuari Exclamatory Enterprise Executive for "
 "assistance."
 msgstr ""
-"C'est ici que vous configurez votre expérience \"feu d'artifice "
+"C'est ici que vous pouvez configurer votre expérience \"feu d'artifice "
 "Supernova\".\n"
 "Pour toute question, contactez votre directeur d'entreprise Exclamative "
 "Éxuarie le plus proche afin d'obtenir de l'aide."
