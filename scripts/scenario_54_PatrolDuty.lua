@@ -6588,7 +6588,7 @@ function patrolAsimovUtopiaPlanitiaArmstrong(delta)
 				nuisanceSpawned = "ready"
 				nuisanceTimer = random(30,90)
 				plot2 = nuisance
-				removeGMFunction("Start plot 2 sick Kojak")
+				removeGMFunction(_("buttonGM", "Start plot 2 sick Kojak"))
 			end
 		end
 		if highestPatrolLeg == 3 and missionLength > 1 then
@@ -6596,7 +6596,7 @@ function patrolAsimovUtopiaPlanitiaArmstrong(delta)
 				attack3spawned = "ready"
 				attack3Timer = random(15,40)
 				plot8 = attack3
-				removeGMFunction("Strt plot 8 Sheila dies")
+				removeGMFunction(_("buttonGM", "Strt plot 8 Sheila dies"))
 			end
 		end
 		if highestPatrolLeg == 4 and missionLength > 1 then
@@ -6604,7 +6604,7 @@ function patrolAsimovUtopiaPlanitiaArmstrong(delta)
 				attack4spawned = "ready"
 				attack4Timer = random(20,50)
 				plot9 = attack4
-				removeGMFunction("Start plot 9 ambush")
+				removeGMFunction(_("buttonGM", "Start plot 9 ambush"))
 			end
 		end
 		if highestPatrolLeg == 5 then
@@ -6612,7 +6612,7 @@ function patrolAsimovUtopiaPlanitiaArmstrong(delta)
 				incursionSpawned = "ready"
 				incursionTimer = random(30,90)
 				plot3 = incursion
-				removeGMFunction("Start p 3 McNabbit ride")
+				removeGMFunction(_("buttonGM", "Start p 3 McNabbit ride"))
 			end
 		end
 		if highestPatrolLeg == 6 and missionLength > 1 then
@@ -6620,7 +6620,7 @@ function patrolAsimovUtopiaPlanitiaArmstrong(delta)
 				attack5spawned = "ready"
 				attack5Timer = random(20,50)
 				plot10 = attack5
-				removeGMFunction("Start plot 10 ambush")
+				removeGMFunction(_("buttonGM", "Start plot 10 ambush"))
 			end
 		end
 		if highestPatrolLeg == 7 then
@@ -6628,14 +6628,14 @@ function patrolAsimovUtopiaPlanitiaArmstrong(delta)
 				attack1spawned = "ready"
 				attack1Timer = random(40,120)
 				plot4 = attack1
-				removeGMFunction("St p4 Lisbon's stowaway")
+				removeGMFunction(_("buttonGM", "St p4 Lisbon's stowaway"))
 			end
 		end
 		if highestPatrolLeg == 8 then
 			if attack2spawned == nil then
 				attack2spawned = "ready"
 				plot5 = attack2
-				removeGMFunction("Start plot 5")
+				removeGMFunction(_("buttonGM", "Start plot 5"))
 			end		
 		end
 		if patrolComplete then
@@ -6762,7 +6762,7 @@ function afterPatrol(delta)
 			waveDelayTimer = 120
 			longWave = 0
 			plot1 = defendUtopia
-			removeGMFunction("Skip to defend U.P.")
+			removeGMFunction(_("buttonGM", "Skip to defend U.P."))
 		else
 			playSoundFile("audio/scenario/54/sa_54_AuthMBVictory.ogg")
 			victory("Human Navy")
@@ -6896,7 +6896,7 @@ function defendUtopia(delta)
 			if wave3count + wave4count + wave5count == 0 then
 				if difficulty > 1 then
 					plot1 = destroyEnemyStronghold
-					removeGMFunction("Skip to destroy S.C.")
+					removeGMFunction(_("buttonGM", "Skip to destroy S.C."))
 				else
 					victory("Human Navy")
 				end
@@ -7282,7 +7282,7 @@ function minerWeaponsDecide(delta)
 		end
 		plot2 = nil
 		minerUpgrade = true
-		removeGMFunction("Start plot 2 sick Kojak")
+		removeGMFunction(_("buttonGM", "Start plot 2 sick Kojak"))
 	end
 end
 function insightToBase()
@@ -7369,7 +7369,7 @@ function nabbitRideRequest()
 		plot3 = getNabbit
 	else
 		plot3 = nil
-		removeGMFunction("Start p 3 McNabbit ride")
+		removeGMFunction(_("buttonGM", "Start p 3 McNabbit ride"))
 	end
 end
 
@@ -7389,7 +7389,7 @@ function getNabbit(delta)
 			else
 				plot3 = nil
 				plot3reminder = nil
-				removeGMFunction("Start p 3 McNabbit ride")
+				removeGMFunction(_("buttonGM", "Start p 3 McNabbit ride"))
 			end
 		end
 	end
@@ -7413,7 +7413,7 @@ function dropNabbit(delta)
 			nabbitShip:addReputationPoints(5)
 			plot3 = nil
 			plot3reminder = nil
-			removeGMFunction("Start p 3 McNabbit ride")
+			removeGMFunction(_("buttonGM", "Start p 3 McNabbit ride"))
 			if playNabbitTuneMsgButton == nil then
 				playNabbitTuneMsgButton = "playNabbitTuneMsgButton"
 				nabbitShip:addCustomButton("Relay",playNabbitTuneMsgButton,_("Nabbit3Audio-buttonRelay", "|> ASTGDN038"),playNabbitTune)
@@ -8109,39 +8109,39 @@ function initiatePlot2()
 	nuisanceSpawned = "ready"
 	nuisanceTimer = random(30,90)
 	plot2 = nuisance
-	removeGMFunction("Start plot 2 sick Kojak")
+	removeGMFunction(_("buttonGM", "Start plot 2 sick Kojak"))
 end
 function initiatePlot3()
 	incursionSpawned = "ready"
 	incursionTimer = random(30,90)
 	plot3 = incursion
-	removeGMFunction("Start p 3 McNabbit ride")
+	removeGMFunction(_("buttonGM", "Start p 3 McNabbit ride"))
 end
 function initiatePlot4()
 	attack1spawned = "ready"
 	attack1Timer = random(40,120)
 	plot4 = attack1
-	removeGMFunction("St p4 Lisbon's stowaway")
+	removeGMFunction(_("buttonGM", "St p4 Lisbon's stowaway"))
 end
 function initiatePlot5()
 	attack2spawned = "ready"
 	plot5 = attack2
-	removeGMFunction("Start plot 5")
+	removeGMFunction(_("buttonGM", "Start plot 5"))
 end
 function initiatePlot8()
 	attack3spawned = "ready"
 	plot8 = attack3
-	removeGMFunction("Strt plot 8 Sheila dies")
+	removeGMFunction(_("buttonGM", "Strt plot 8 Sheila dies"))
 end
 function initiatePlot9()
 	attack4spawned = "ready"
 	plot9 = attack4
-	removeGMFunction("Start plot 9 ambush")
+	removeGMFunction(_("buttonGM", "Start plot 9 ambush"))
 end
 function initiatePlot10()
 	attack5spawned = "ready"
 	plot10 = attack5
-	removeGMFunction("Start plot 10 ambush")
+	removeGMFunction(_("buttonGM", "Start plot 10 ambush"))
 end
 function skipToDefendUP()
 	artAnchorUpgrade = true
@@ -8151,7 +8151,7 @@ function skipToDefendUP()
 	lisbonUpgrade = true
 	waveDelayTimer = 120
 	plot1 = defendUtopia	
-	removeGMFunction("Skip to defend U.P.")
+	removeGMFunction(_("buttonGM", "Skip to defend U.P."))
 end
 function skipToDestroySC()
 	artAnchorUpgrade = true
@@ -8161,7 +8161,7 @@ function skipToDestroySC()
 	lisbonUpgrade = true
 	waveDelayTimer = 120
 	plot1 = destroyEnemyStronghold	
-	removeGMFunction("Skip to destroy S.C.")
+	removeGMFunction(_("buttonGM", "Skip to destroy S.C."))
 end
 ------------------------------------
 --	Generic or utility functions  --
