@@ -44,6 +44,7 @@ REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
     /// If this ship has weapon tubes but lacks beam weapons and is out of weapons stock, it attempts to Retreat to a weapons restock target within long-range radar range.
     /// Example: ship:orderRoaming()
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderRoaming);
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderRoamingAt);
     /// Orders this CpuShip to move toward the given SpaceObject and dock, restock weapons, and repair its hull.
     /// If the SpaceObject is a dockable ShipTemplateBasedObject, this ship moves directly toward it and docks with it as soon as possible.
     /// If not, this ship moves toward the best weapons restocking target within relay range (double its long-range radar range).

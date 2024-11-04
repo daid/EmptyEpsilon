@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -18,14 +18,15 @@ msgid "Training: Cruiser"
 msgstr "Entrainement : Croiseur"
 
 # Scenario description
+#, fuzzy
 msgid ""
-"Basic Training Cource\n"
+"Basic Training Course\n"
 "\n"
 "Objective: Destroy all enemy ships in the area.\n"
 "\n"
 "Description:\n"
-"During this training your will learn to coordinate the actions of your crew "
-"and destoy an Exuari training ground.\n"
+"During this training you will learn to coordinate the actions of your crew "
+"and destroy an Exuari training ground.\n"
 "\n"
 "Your ship is a Phobos light cruiser - the most common vessel in the navy.\n"
 "\n"
@@ -48,17 +49,33 @@ msgstr ""
 "Communauté française et anglophone sur le Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
-#: scripts/scenario_20_training1.lua:130
+#: scripts/scenario_20_training1.lua:36
+msgctxt "scienceDescription-shipname"
+msgid "Exuari transport"
+msgstr "Un vaisseau de transport Éxuari."
+
+#: scripts/scenario_20_training1.lua:40
+msgctxt "scienceDescription-shipname"
+msgid "Exuari freighter"
+msgstr "Un vaisseau-cargo Éxuari."
+
+#: scripts/scenario_20_training1.lua:44
+msgctxt "scienceDescription-shipname"
+msgid "Exuari shuttle"
+msgstr "Une navette Éxuarie."
+
+#: scripts/scenario_20_training1.lua:79
+#, fuzzy
 msgctxt "goal-incCall"
 msgid ""
 "This is Commander Saberhagen.\n"
 "\n"
-"In this training mission you will practice the basic controls of a Phobos "
+"In this training mission, you will practice the basic controls of a Phobos "
 "light cruiser.\n"
 "Since this is not a tutorial, you will be on your own to decide how to "
 "destroy all enemy targets in an Exuari training ground.\n"
 "There will be not much resistance, so you can try different approaches and "
-"tactics savely.\n"
+"tactics safely.\n"
 "\n"
 "Here's your chance to beat up some helpless opponents.\n"
 "Commander Saberhagen out."
@@ -76,17 +93,17 @@ msgstr ""
 "Voici votre chance de battre des adversaires impuissants.\n"
 "Briefing terminé."
 
-#: scripts/scenario_20_training1.lua:148
+#: scripts/scenario_20_training1.lua:97
 msgctxt "msgMainscreen-bonusTarget"
 msgid "escaped."
 msgstr "échappé."
 
-#: scripts/scenario_20_training1.lua:150
+#: scripts/scenario_20_training1.lua:99
 msgctxt "msgMainscreen-bonusTarget"
 msgid "destroyed."
 msgstr "détruit."
 
-#: scripts/scenario_20_training1.lua:152
+#: scripts/scenario_20_training1.lua:101
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""

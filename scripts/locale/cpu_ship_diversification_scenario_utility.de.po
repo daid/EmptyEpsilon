@@ -1,0 +1,1610 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:60
+#: scripts/cpu_ship_diversification_scenario_utility.lua:133
+#: scripts/cpu_ship_diversification_scenario_utility.lua:200
+#: scripts/cpu_ship_diversification_scenario_utility.lua:247
+#: scripts/cpu_ship_diversification_scenario_utility.lua:289
+#: scripts/cpu_ship_diversification_scenario_utility.lua:330
+#: scripts/cpu_ship_diversification_scenario_utility.lua:367
+#: scripts/cpu_ship_diversification_scenario_utility.lua:399
+#: scripts/cpu_ship_diversification_scenario_utility.lua:455
+#: scripts/cpu_ship_diversification_scenario_utility.lua:503
+#: scripts/cpu_ship_diversification_scenario_utility.lua:546
+#: scripts/cpu_ship_diversification_scenario_utility.lua:592
+#: scripts/cpu_ship_diversification_scenario_utility.lua:638
+#: scripts/cpu_ship_diversification_scenario_utility.lua:690
+#: scripts/cpu_ship_diversification_scenario_utility.lua:738
+#: scripts/cpu_ship_diversification_scenario_utility.lua:781
+#: scripts/cpu_ship_diversification_scenario_utility.lua:819
+#: scripts/cpu_ship_diversification_scenario_utility.lua:869
+#: scripts/cpu_ship_diversification_scenario_utility.lua:905
+#: scripts/cpu_ship_diversification_scenario_utility.lua:941
+#: scripts/cpu_ship_diversification_scenario_utility.lua:993
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1048
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1096
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1135
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1164
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1232
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1301
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1344
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1416
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1470
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1512
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1561
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1617
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1674
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1727
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1763
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1809
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1862
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1918
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2074
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2087
+msgctxt "scienceDB"
+msgid "Ships"
+msgstr "Schiffe"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:61
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1513
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1562
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2089
+msgctxt "scienceDB"
+msgid "Corvette"
+msgstr "Korvette"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:62
+msgctxt "scienceDB"
+msgid "Atlantis Y42"
+msgstr "Atlantis Y42"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:63
+msgctxt "scienceDB"
+msgid "Atlantis X23"
+msgstr "Atlantis X23"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:70
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1427
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1872
+msgctxt "scienceDB"
+msgid "Tube -90"
+msgstr "        Raketen Links"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:71
+msgctxt "scienceDB"
+msgid " Tube -90"
+msgstr "       Raketen Links"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:72
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1430
+msgctxt "scienceDB"
+msgid "Tube 90"
+msgstr " Raketen Rechts"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:73
+msgctxt "scienceDB"
+msgid " Tube 90"
+msgstr "Raketen Rechts"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:74
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1524
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1573
+msgctxt "scienceDB"
+msgid "10 sec"
+msgstr "10 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:79
+msgctxt "scienceDB"
+msgid ""
+"The Atlantis Y42 improves on the Atlantis X23 with stronger shields, faster "
+"impulse and turn speeds, an extra beam in back and a larger missile stock"
+msgstr ""
+"Die Atlantis Y42 ist eine verbesserte Version der Atlantis X23: Stärkere "
+"Schilde, höhere Impuls- und Drehgeschwindigkeiten, ein zusätzlicher Laser im "
+"Heck und ein größeres Raketenlager."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:134
+#: scripts/cpu_ship_diversification_scenario_utility.lua:201
+#: scripts/cpu_ship_diversification_scenario_utility.lua:456
+#: scripts/cpu_ship_diversification_scenario_utility.lua:504
+#: scripts/cpu_ship_diversification_scenario_utility.lua:547
+#: scripts/cpu_ship_diversification_scenario_utility.lua:593
+#: scripts/cpu_ship_diversification_scenario_utility.lua:639
+#: scripts/cpu_ship_diversification_scenario_utility.lua:691
+#: scripts/cpu_ship_diversification_scenario_utility.lua:820
+#: scripts/cpu_ship_diversification_scenario_utility.lua:994
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1302
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1345
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1417
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1618
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1863
+msgctxt "scienceDB"
+msgid "Frigate"
+msgstr "Fregatte"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:135
+msgctxt "scienceDB"
+msgid "Barracuda"
+msgstr "Barracuda"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:142
+msgctxt "scienceDB"
+msgid "Small tubes 0"
+msgstr "kl. Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:143
+msgctxt "scienceDB"
+msgid "7 sec / Homing, 8 sec / Nuke"
+msgstr "7 Sek. / Zielsuch., 8 Sek. / Nuke"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:144
+msgctxt "scienceDB"
+msgid "Small tubes 5 & -5"
+msgstr "  kl. Raketen Front (2x)"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:145
+msgctxt "scienceDB"
+msgid "8 sec / Homing, 9 sec / Nuke"
+msgstr "8 Sek. / Zielsuch., 9 Sek. / Nuke"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:146
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1058
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1242
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1773
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1928
+msgctxt "scienceDB"
+msgid "Small tube 0"
+msgstr " kl. Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:147
+msgctxt "scienceDB"
+msgid "5 sec / EMP"
+msgstr "5 Sek. Ladezeit / EMP"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:148
+msgctxt "scienceDB"
+msgid " Small tubes 5 & -5"
+msgstr "     kl. Raketen Front (2x)"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:149
+msgctxt "scienceDB"
+msgid "6 sec / EMP"
+msgstr "6 Sek. Ladezeit / EMP"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:150
+msgctxt "scienceDB"
+msgid "  Small tube 0"
+msgstr "         kl. Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:151
+msgctxt "scienceDB"
+msgid "3 sec / HVLI"
+msgstr "3 Sek. Ladezeit / HGBI"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:152
+msgctxt "scienceDB"
+msgid "   Small tubes 5 & -5"
+msgstr "   kl. Raketen Front (2x)"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:153
+msgctxt "scienceDB"
+msgid "4 sec / HVLI"
+msgstr "4 Sek. Ladezeit / HGBI"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:154
+msgctxt "scienceDB"
+msgid "Small tubes 10 & -10"
+msgstr "kl. Raketen Front (2x)"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:155
+msgctxt "scienceDB"
+msgid "5 sec / HVLI"
+msgstr "5 Sek. Ladezeit / HGBI"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:156
+#: scripts/cpu_ship_diversification_scenario_utility.lua:306
+#: scripts/cpu_ship_diversification_scenario_utility.lua:755
+#: scripts/cpu_ship_diversification_scenario_utility.lua:836
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1004
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1245
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1311
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1523
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1571
+msgctxt "scienceDB"
+msgid "Tube 0"
+msgstr " Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:157
+msgctxt "scienceDB"
+msgid "5 sec / Homing"
+msgstr "5 Sek. / Zielsuch."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:158
+#: scripts/cpu_ship_diversification_scenario_utility.lua:837
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1572
+msgctxt "scienceDB"
+msgid " Tube 0"
+msgstr "Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:159
+msgctxt "scienceDB"
+msgid "10 sec / Nuke"
+msgstr "10 Sek. Ladezeit / Nuke"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:160
+#: scripts/cpu_ship_diversification_scenario_utility.lua:506
+#: scripts/cpu_ship_diversification_scenario_utility.lua:549
+#: scripts/cpu_ship_diversification_scenario_utility.lua:595
+#: scripts/cpu_ship_diversification_scenario_utility.lua:641
+#: scripts/cpu_ship_diversification_scenario_utility.lua:693
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1304
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1347
+msgctxt "scienceDB"
+msgid "Phobos T3"
+msgstr "Phobos T3"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:165
+msgctxt "scienceDB"
+msgid ""
+"The Barracuda started off as a Phobos T3. It was given massive upgrades to "
+"shields, hull and missile weapons. The impulse systems were also upgraded. "
+"It's designed to spray missiles forth at a prodigious rate.\n"
+"\n"
+"It barely qualifies as a frigate, it's more like a mini-corvette."
+msgstr ""
+"Die Barracuda war ursprünglich eine Phobos T3. Sie erhielt massive Upgrades "
+"für Schilde, Hülle und Raketen. Auch die Impulssysteme wurden aufgerüstet. "
+"Sie ist darauf ausgelegt, Raketen mit einer enormen Geschwindigkeit "
+"abzuschießen.\n"
+"\n"
+"Sie ist kaum als Fregatte zu bezeichnen, eher als Mini-Korvette."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:194
+msgctxt "scienceDB"
+msgid "Cruiser Drone"
+msgstr "Cruiser Drone"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:202
+msgctxt "scienceDB"
+msgid "Cruiser"
+msgstr "Cruiser"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:221
+msgctxt "scienceDB"
+msgid ""
+"A standard cruiser modifed for target practice purposes: stronger hull and "
+"shields, faster impulse and better maneuverability. Some of these may have "
+"slipped out of the automated manufacturing facility to be refurbished for "
+"actual militia use."
+msgstr ""
+"Ein Standardkreuzer, der für Zielübungen modifiziert wurde: Stärkere Hülle "
+"und Schilde, schnellerer Impuls und bessere Manövrierfähigkeit. "
+"Möglicherweise sind einige von ihnen aus der automatisierten "
+"Fertigungsanlage verschwunden, und wurden für den tatsächlichen Kampfeinsatz "
+"umgerüstet."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:248
+#: scripts/cpu_ship_diversification_scenario_utility.lua:331
+#: scripts/cpu_ship_diversification_scenario_utility.lua:368
+#: scripts/cpu_ship_diversification_scenario_utility.lua:400
+#: scripts/cpu_ship_diversification_scenario_utility.lua:782
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1097
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1136
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1165
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1810
+msgctxt "scienceDB"
+msgid "No Class"
+msgstr "Keine Klasse"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:249
+msgctxt "scienceDB"
+msgid "Cucaracha"
+msgstr "Cucaracha"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:250
+msgctxt "scienceDB"
+msgid "Tug"
+msgstr "Tug"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:261
+msgctxt "scienceDB"
+msgid ""
+"The Cucaracha is a quick ship built around the Tug model with heavy shields "
+"and a heavy beam designed to be difficult to squash"
+msgstr ""
+"Die Cucaracha ist ein schnelles Schiff nach dem Vorbild der Tug mit starken "
+"Schilden und einem schweren Laser, und ist schwer klein zu kriegen."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:280
+msgctxt "scienceDB"
+msgid "Dreadnought II"
+msgstr "Dreadnought II"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:290
+#: scripts/cpu_ship_diversification_scenario_utility.lua:291
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1728
+msgctxt "scienceDB"
+msgid "Dreadnought"
+msgstr "Schlachtschiff"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:307
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1059
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1251
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1637
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1774
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1881
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1931
+msgctxt "scienceDB"
+msgid "15 sec"
+msgstr "15 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:312
+msgctxt "scienceDB"
+msgid ""
+"A modified Dreadnought: stronger hull, weaker shields, ~3x faster impulse "
+"and turn speeds. A tube that shoots homing missiles has been added.\n"
+"\n"
+"Don't forget to thank your science database librarian for making this "
+"information available. She likes cookies."
+msgstr ""
+"Eine modifizierte Dreadnought: stärkere Hülle, schwächere Schilde, ~3x "
+"höhere Impuls- und Drehgeschwindigkeit. Ein Schacht für Zielsuchraketen "
+"wurde hinzugefügt."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:332
+msgctxt "scienceDB"
+msgid "Heavy Drone"
+msgstr "Heavy Drone"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:333
+#: scripts/cpu_ship_diversification_scenario_utility.lua:370
+#: scripts/cpu_ship_diversification_scenario_utility.lua:402
+#: scripts/cpu_ship_diversification_scenario_utility.lua:784
+msgctxt "scienceDB"
+msgid "Ktlitan Drone"
+msgstr "Ktlitan Drone"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:344
+msgctxt "scienceDB"
+msgid ""
+"The heavy drone has a stronger hull and a stronger beam than the normal "
+"Ktlitan Drone, but it also moves slower"
+msgstr ""
+"Die \"Heavy Drone\" hat eine stärkere Hülle und einen stärkeren laser als "
+"die normale \"Ktlitan Drone\", ist dafür aber langsamer."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:369
+msgctxt "scienceDB"
+msgid "Jacket Drone"
+msgstr "Jacket Drone"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:381
+msgctxt "scienceDB"
+msgid ""
+"The Jacket Drone is a Ktlitan Drone with a shield. It's also slightly slower "
+"and has a slightly weaker beam due to the energy requirements of the added "
+"shield"
+msgstr ""
+"Die \"Jacket Drone\" ist eine \"Ktlitan Drone\" mit Schilden. Sie ist "
+"außerdem etwas langsamer und besitzt einen etwas schwächeren Laser, bedingt "
+"durch den höheren Energiebedarf der Schilde"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:401
+msgctxt "scienceDB"
+msgid "Lite Drone"
+msgstr "Lite Drone"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:413
+msgctxt "scienceDB"
+msgid ""
+"The light drone was pieced together from scavenged parts of various damaged "
+"Ktlitan drones. Compared to the Ktlitan drone, the lite drone has a weaker "
+"hull, and a weaker beam, but a faster turn and impulse speed"
+msgstr ""
+"Die \"Lite Drone\" wurde aus ausgeschlachteten Teilen anderer Ktlitanischen "
+"Drohnen zusammengestückelt. Verglichen mit der Standarddrohne hat die \"Lite "
+"Drone\" eine schwächere Hülle und einen schwächeren Laser, ist aber dafür "
+"wendiger und hat eine höhere Impulsgeschwindigkeit."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:457
+msgctxt "scienceDB"
+msgid "Enforcer"
+msgstr "Enforcer"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:458
+msgctxt "scienceDB"
+msgid "Blockade Runner"
+msgstr "Blockade Runner"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:465
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1003
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1106
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1248
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1522
+msgctxt "scienceDB"
+msgid "Large tube 0"
+msgstr "gr. Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:466
+msgctxt "scienceDB"
+msgid "Tube -15"
+msgstr "  Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:467
+msgctxt "scienceDB"
+msgid "Tube 15"
+msgstr "    Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:468
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1254
+msgctxt "scienceDB"
+msgid "18 sec"
+msgstr "18 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:469
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1011
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1434
+msgctxt "scienceDB"
+msgid "12 sec"
+msgstr "12 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:474
+msgctxt "scienceDB"
+msgid ""
+"The Enforcer is a highly modified Blockade Runner. A warp drive was added "
+"and impulse engines boosted along with turning speed. Three missile tubes "
+"were added to shoot homing missiles, large ones straight ahead. Stronger "
+"shields and hull. Removed rear facing beams and strengthened front beams."
+msgstr ""
+"Die Enforcer ist eine stark modifizierte \"Blockade Runner\". Ein Warp-"
+"Antrieb wurde eingebaut und der Impulsantrieb sowie die Drehgeschwindigkeit "
+"wurden erhöht. Drei Raketenschächte wurden hinzugefügt, um Zielsuchraketen "
+"abzuschießen, der vordere Schacht feuert die großen Versionen davon ab. "
+"Außerdem wurden die Schilde und die Hülle verstärkt. Die hinteren Laser "
+"wurden entfernt und die vorderen Laser verstärkt."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:505
+msgctxt "scienceDB"
+msgid "Farco 3"
+msgstr "Farco 3"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:513
+#: scripts/cpu_ship_diversification_scenario_utility.lua:556
+#: scripts/cpu_ship_diversification_scenario_utility.lua:602
+#: scripts/cpu_ship_diversification_scenario_utility.lua:648
+#: scripts/cpu_ship_diversification_scenario_utility.lua:700
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1354
+msgctxt "scienceDB"
+msgid "Tube -1"
+msgstr "     Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:514
+#: scripts/cpu_ship_diversification_scenario_utility.lua:557
+#: scripts/cpu_ship_diversification_scenario_utility.lua:603
+#: scripts/cpu_ship_diversification_scenario_utility.lua:649
+#: scripts/cpu_ship_diversification_scenario_utility.lua:701
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1355
+msgctxt "scienceDB"
+msgid "Tube 1"
+msgstr "      Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:515
+#: scripts/cpu_ship_diversification_scenario_utility.lua:650
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1312
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1356
+msgctxt "scienceDB"
+msgid "60 sec"
+msgstr "60 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:520
+msgctxt "scienceDB"
+msgid ""
+"The Farco models are evolutionary changes to the Phobos T3. In the case of "
+"the Farco 3, the beams are longer and faster and the shields are slightly "
+"stronger."
+msgstr ""
+"Bei den Farco-Modellen handelt es sich um evolutionäre Weiterentwicklungen "
+"der Phobos T3. Bei der Farco 3 haben die Laser eine größere Reichweite und "
+"sind schneller, außerdem sind die Schilde etwas stärker."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:548
+msgctxt "scienceDB"
+msgid "Farco 5"
+msgstr "Farco 5"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:558
+#: scripts/cpu_ship_diversification_scenario_utility.lua:604
+#: scripts/cpu_ship_diversification_scenario_utility.lua:702
+msgctxt "scienceDB"
+msgid "30 sec"
+msgstr "30 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:563
+msgctxt "scienceDB"
+msgid ""
+"The Farco models are evolutionary changes to the Phobos T3. In the case of "
+"the Farco 5, the tubes load faster and the shields are slightly stronger."
+msgstr ""
+"Bei den Farco-Modellen handelt es sich um evolutionäre Weiterentwicklungen "
+"der Phobos T3. Bei der Farco 5 laden die Raketen schneller und die Schilde "
+"sind etwas stärker."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:594
+msgctxt "scienceDB"
+msgid "Farco 8"
+msgstr "Farco 8"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:609
+msgctxt "scienceDB"
+msgid ""
+"The Farco models are evolutionary changes to the Phobos T3. In the case of "
+"the Farco 8, the beams are longer and faster, the tubes load faster and the "
+"shields are stronger."
+msgstr ""
+"Bei den Farco-Modellen handelt es sich um evolutionäre Weiterentwicklungen "
+"der Phobos T3. Bei der Farco 8 haben die Laser eine größere Reichweite und "
+"sind schneller, außerdem laden die Raketen schneller und die Schilde sind "
+"etwas stärker."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:640
+msgctxt "scienceDB"
+msgid "Farco 11"
+msgstr "Farco 11"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:655
+msgctxt "scienceDB"
+msgid ""
+"The Farco models are evolutionary changes to the Phobos T3. In the case of "
+"the Farco 11, the maneuver speed is faster, the beams are longer and faster, "
+"there's an added longer sniping beam and the shields are stronger."
+msgstr ""
+"Bei den Farco-Modellen handelt es sich um evolutionäre Weiterentwicklungen "
+"der Phobos T3. Bei der Farco 11 haben die Laser eine größere Reichweite und "
+"sind schneller, und wurden um einen zusätzlichen Scharfschützenlaser "
+"erweitert. Außerdem sind die Schilde etwas stärker."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:692
+msgctxt "scienceDB"
+msgid "Farco 13"
+msgstr "Farco 13"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:707
+msgctxt "scienceDB"
+msgid ""
+"The Farco models are evolutionary changes to the Phobos T3. In the case of "
+"the Farco 13, the maneuver speed is faster, the beams are longer and faster, "
+"there's an added longer sniping beam, the tubes load faster, there are more "
+"missiles and the shields are stronger."
+msgstr ""
+"Bei den Farco-Modellen handelt es sich um evolutionäre Weiterentwicklungen "
+"der Phobos T3. Bei der Farco 13 haben die Laser eine größere Reichweite und "
+"sind schneller, und wurden um einen zusätzlichen Scharfschützenlaser "
+"erweitert. Außerdem laden die Raketen (deren Vorrat vergrößert wurde) "
+"schneller und die Schilde sind etwas stärker."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:729
+msgctxt "scienceDB"
+msgid "Fighter II"
+msgstr "Fighter II"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:739
+#: scripts/cpu_ship_diversification_scenario_utility.lua:870
+#: scripts/cpu_ship_diversification_scenario_utility.lua:906
+#: scripts/cpu_ship_diversification_scenario_utility.lua:942
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1049
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1233
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1471
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1675
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1764
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1919
+msgctxt "scienceDB"
+msgid "Starfighter"
+msgstr "Raumjäger"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:740
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1473
+msgctxt "scienceDB"
+msgid "Fighter"
+msgstr "Fighter"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:756
+#: scripts/cpu_ship_diversification_scenario_utility.lua:838
+msgctxt "scienceDB"
+msgid "8 sec"
+msgstr "8 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:761
+msgctxt "scienceDB"
+msgid ""
+"Fighters are quick, agile ships that do not do a lot of damage, but usually "
+"come in larger groups. They are easy to take out, but should not be "
+"underestimated. The Fighter II is a more powerful version with stronger "
+"beams, hull and shields and an added homing missile tube. All those "
+"additions make it a bit slower, though.\n"
+"\n"
+"Give your science database librarian a big smile. She works hard for you."
+msgstr ""
+"Jäger vom Typ \"Fighter\" sind schnelle, wendige Schiffe, die nicht viel "
+"Schaden anrichten, aber normalerweise in größeren Gruppen auftreten. Sie "
+"sind leicht auszuschalten, sollten aber nicht unterschätzt werden. Der "
+"Fighter II ist eine leistungsstärkere Version mit stärkeren Lasern und "
+"Schilden, einer stärkeren Hülle und einem zusätzlichen Schacht für "
+"Zielsuchraketen. All diese Verbesserungen machen ihn allerdings etwas "
+"langsamer."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:783
+msgctxt "scienceDB"
+msgid "Gnat"
+msgstr "Gnat"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:795
+msgctxt "scienceDB"
+msgid ""
+"The Gnat is a nimbler version of the Ktlitan Drone. It's got half the hull, "
+"but it moves and turns faster"
+msgstr ""
+"Die Gnat ist eine agilere Version der \"Ktlitan Drone\". Ihre Hülle ist nur "
+"halb so stark, aber ihre Geschwindigkeit und Wendigkeit ist höher."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:814
+msgctxt "scienceDB"
+msgid "Gunship II"
+msgstr "Gunship II"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:821
+msgctxt "scienceDB"
+msgid "Adv. Gunship"
+msgstr "Adv. Gunship"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:843
+msgctxt "scienceDB"
+msgid ""
+"The advanced gunship is a ship equiped with 2 homing missiles to do initial "
+"damage and then take out the enemy with 2 front firing beams. It's designed "
+"to quickly take out the enemies weaker then itself. Version II has stronger "
+"beams, but a weaker hull.\n"
+"\n"
+"Don't forget to tip your science database librarian."
+msgstr ""
+"Das \"Advanced Gunship\" ist ein Schiff, das mit 2 Zielsuchraketen "
+"ausgestattet ist, um den ersten Schaden anzurichten und dann den Feind mit 2 "
+"Frontlasern auszuschalten. Es ist darauf ausgelegt, schwächere Gegner "
+"schnell auszuschalten. Version II hat stärkere Laser, aber eine schwächere "
+"Hülle."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:871
+msgctxt "scienceDB"
+msgid "FX64 Hornet"
+msgstr "FX64 Hornet"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:872
+#: scripts/cpu_ship_diversification_scenario_utility.lua:908
+#: scripts/cpu_ship_diversification_scenario_utility.lua:944
+msgctxt "scienceDB"
+msgid "MT52 Hornet"
+msgstr "MT52 Hornet"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:883
+msgctxt "scienceDB"
+msgid ""
+"The FX64 Hornet is somewhat similar to the MT52 and MU52 models. The beam is "
+"longer, narrower and does more damage than both of the other Hornet models. "
+"It's max impulse speed and turn speed is faster than both of the other "
+"Hornet models. It's hull is weaker"
+msgstr ""
+"Die FX64 Hornet ist den Modellen MT52 und MU52 recht ähnlich. der Laser hat "
+"eine größere Reichweite, einen schmaleren Winkel und richtet mehr Schaden an "
+"als die beiden anderen Hornet-Modelle. Die maximale Impulsgeschwindigkeit "
+"und die Wendegeschwindigkeit sind höher als bei den anderen Hornet-Modellen. "
+"Die Hülle ist allerdings etwas schwächer."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:907
+msgctxt "scienceDB"
+msgid "MT55 Hornet"
+msgstr "MT55 Hornet"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:919
+msgctxt "scienceDB"
+msgid ""
+"The MT55 Hornet is similar to the 52 series Hornet models. Its speed is "
+"faster but it turns more slowly"
+msgstr ""
+"Die MT55 Hornet ist den Hornet-Modellen der Serie 52 ähnlich. Ihre "
+"Geschwindigkeit ist höher, dafür dreht sie sich etwas langsamer."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:943
+msgctxt "scienceDB"
+msgid "MV52 Hornet"
+msgstr "MV52 Hornet"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:955
+msgctxt "scienceDB"
+msgid ""
+"The MV52 Hornet is very similar to the MT52 and MU52 models. The beam does "
+"more damage than both of the other Hornet models, it's max impulse speed is "
+"faster than both of the other Hornet models, it turns faster than the MT52, "
+"but slower than the MU52"
+msgstr ""
+"Die MV52 Hornet ist den Modellen MT52 und MU52 sehr ähnlich. Der Laser "
+"verursacht mehr Schaden als die beiden anderen Hornet-Modelle, und ihre "
+"maximale Impulsgeschwindigkeit ist höher als die der beiden anderen Hornet-"
+"Modelle. Sie dreht sich schneller als die MT52, aber langsamer als die MU52."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:995
+msgctxt "scienceDB"
+msgid "Hurricane"
+msgstr "Hurricane"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:996
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1419
+msgctxt "scienceDB"
+msgid "Piranha F8"
+msgstr "Piranha F8"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1005
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1431
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1632
+msgctxt "scienceDB"
+msgid "Large tube 90"
+msgstr "gr. Raketen Rechts"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1006
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1428
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1629
+msgctxt "scienceDB"
+msgid "Large tube -90"
+msgstr "   gr. Raketen Links"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1007
+msgctxt "scienceDB"
+msgid "Small tube -15"
+msgstr "   kl. Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1008
+msgctxt "scienceDB"
+msgid "Small tube 15"
+msgstr "    kl. Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1009
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1107
+msgctxt "scienceDB"
+msgid "Tube -30"
+msgstr "       Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1010
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1108
+msgctxt "scienceDB"
+msgid "Tube 30"
+msgstr "        Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1016
+msgctxt "scienceDB"
+msgid ""
+"The Hurricane is designed to jump in and shower the target with missiles. It "
+"is based on the Piranha F8, but with a jump drive, five more tubes in "
+"various directions and sizes and lots more missiles to shoot"
+msgstr ""
+"Die Hurricane ist darauf ausgelegt, zu springen und dann das Ziel mit "
+"Raketen zu überschütten. Sie basiert auf der Piranha F8, hat aber einen "
+"Sprungantrieb, fünf weitere Schächte in verschiedenen Richtungen und Größen "
+"und viel mehr Raketen im Vorrat."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1050
+msgctxt "scienceDB"
+msgid "Jade 5"
+msgstr "Jade 5"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1051
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1235
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1766
+msgctxt "scienceDB"
+msgid "Adder MK5"
+msgstr "Adder MK5"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1064
+msgctxt "scienceDB"
+msgid ""
+"Conversions R Us purchased a number of Adder MK 5 ships at auction and added "
+"jump drives to them to produce the Jade 5"
+msgstr ""
+"Conversions R Us hat eine Reihe von Adder MK 5-Schiffen ersteigert und sie "
+"mit Sprungantrieben ausgestattet, um sie schließlich als Jade 5 zu "
+"vermarkten."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1098
+msgctxt "scienceDB"
+msgid "K2 Breaker"
+msgstr "K2 Breaker"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1099
+msgctxt "scienceDB"
+msgid "Ktlitan Breaker"
+msgstr "Ktlitan Breaker"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1109
+msgctxt "scienceDB"
+msgid "13 sec"
+msgstr "13 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1114
+msgctxt "scienceDB"
+msgid ""
+"The K2 Breaker designers took the Ktlitan Breaker and beefed up the hull, "
+"added two bracketing tubes, enlarged the center tube and added more missiles "
+"to shoot. Should be good for a couple of enemy ships"
+msgstr ""
+"Das Entwicklungsteam für die K2 Breaker nahmen die Ktlitan Breaker und "
+"verstärkte den Rumpf, fügte zwei Raketenschächte hinzu, vergrößerte den "
+"mittleren Schacht und den Raketenvorrat. Damit sollte sie es durchaus mit "
+"ein paar feindlichen Schiffe aufnehmen können."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1129
+msgctxt "scienceDB"
+msgid "K2 Fighter"
+msgstr "K2 Fighter"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1137
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1167
+msgctxt "scienceDB"
+msgid "Ktlitan Fighter"
+msgstr "Ktlitan Fighter"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1148
+msgctxt "scienceDB"
+msgid ""
+"Enterprising designers published this design specification based on salvaged "
+"Ktlitan Fighters. Comparatively, it's got beams that cycle faster, but the "
+"hull is a bit weaker."
+msgstr ""
+"Findige Designer veröffentlichten diese Blaupause auf der Grundlage von "
+"geborgenen ktlitanischen Jägern. Im Vergleich dazu können die Laser dieses "
+"Schiffs schneller feuern, dafür ist die Hülle etwas schwächer."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1166
+msgctxt "scienceDB"
+msgid "K3 Fighter"
+msgstr "K3 Fighter"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1178
+msgctxt "scienceDB"
+msgid ""
+"Enterprising designers published this design specification based on salvaged "
+"Ktlitan Fighters. Comparatively, it's got beams that are stronger and that "
+"cycle faster, but the hull is weaker."
+msgstr ""
+"Findige Designer haben dieses Schiffsdesign auf der Grundlage geborgener "
+"ktlitanischer Raumjäger veröffentlicht. Im Vergleich dazu sind bei diesem "
+"Schiff die Laser stärker und schneller, dafür ist die Hülle etwas schwächer."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1234
+msgctxt "scienceDB"
+msgid "Maniapak"
+msgstr "Maniapak"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1243
+msgctxt "scienceDB"
+msgid "Small tube -10"
+msgstr "     kl. Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1244
+msgctxt "scienceDB"
+msgid "Small tube 10"
+msgstr "      kl. Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1246
+msgctxt "scienceDB"
+msgid "Tube -12"
+msgstr "         Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1247
+msgctxt "scienceDB"
+msgid "Tube 12"
+msgstr "          Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1249
+msgctxt "scienceDB"
+msgid "Large tube -15"
+msgstr "gr. Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1250
+msgctxt "scienceDB"
+msgid "Large tube 15"
+msgstr "gr. Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1252
+msgctxt "scienceDB"
+msgid "16 sec"
+msgstr "16 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1253
+msgctxt "scienceDB"
+msgid "17 sec"
+msgstr "17 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1255
+msgctxt "scienceDB"
+msgid "19 sec"
+msgstr "19 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1256
+msgctxt "scienceDB"
+msgid "20 sec"
+msgstr "20 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1257
+msgctxt "scienceDB"
+msgid "21 sec"
+msgstr "21 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1258
+msgctxt "scienceDB"
+msgid "22 sec"
+msgstr "22 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1259
+msgctxt "scienceDB"
+msgid "23 sec"
+msgstr "23 Sek. Ladezeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1260
+msgctxt "scienceDB"
+msgid "Missile Storage"
+msgstr "Raketenvorrat"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1261
+msgctxt "scienceDB"
+msgid "H:27 E:18 N:27 L:36"
+msgstr "H:27 E:18 N:27 Z:36"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1266
+msgctxt "scienceDB"
+msgid ""
+"The Maniapak is an extreme modification of an Adder MK5 and a Blade. A "
+"maniacal designer was tasked with packing as many missiles as possible in "
+"this tiny starfighter frame. This record has yet to be beaten. "
+"Unfortunately, this ship is often a danger to friends as well as foes."
+msgstr ""
+"Der Maniapak ist eine extreme Weiterentwicklung einer Adder MK5 und einer "
+"Blade. Ein wahnsinniger Konstrukteur hatte die Aufgabe, so viele Raketen wie "
+"möglich in diese winzige Raumjäger-Hülle zu packen. Dieser Rekord ist "
+"seitdem nicht gebrochen worden. Leider ist dieses Schiff oftmals sowohl für "
+"Freunde als auch für Feinde eine Gefahr."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1303
+msgctxt "scienceDB"
+msgid "Phobos R2"
+msgstr "Phobos R2"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1317
+msgctxt "scienceDB"
+msgid ""
+"The Phobos R2 model is very similar to the Phobos T3. It's got a faster turn "
+"speed, but only one missile tube"
+msgstr ""
+"Die Phobos R2 ist dem T3-Modell sehr ähnlich. Es ist wendiger, besitzt aber "
+"aber nur einen Raketenschacht."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1346
+msgctxt "scienceDB"
+msgid "Phobos T4"
+msgstr "Phobos T4"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1361
+msgctxt "scienceDB"
+msgid ""
+"The Phobos T4 makes some simple improvements on the Phobos T3: faster "
+"maneuver, stronger front shields, though weaker rear shields and longer and "
+"faster beam weapons"
+msgstr ""
+"Die Phobos T4 bietet einige einfache Verbesserungen gegenüber der Phobos T3: "
+"schnelleres Manövrieren, stärkere vordere Schilde, jedoch schwächere hintere "
+"Schilde und schnellere Laser mit größerer Reichweite."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1418
+msgctxt "scienceDB"
+msgid "Predator"
+msgstr "Predator"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1426
+msgctxt "scienceDB"
+msgid "Large tube -60"
+msgstr "    gr. Raketen Links"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1429
+msgctxt "scienceDB"
+msgid "Large tube 60"
+msgstr " gr. Raketen Rechts"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1432
+msgctxt "scienceDB"
+msgid "Tube -120"
+msgstr "         Raketen Links"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1433
+msgctxt "scienceDB"
+msgid "Tube 120"
+msgstr "  Raketen Rechts"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1439
+msgctxt "scienceDB"
+msgid ""
+"The Predator is a significantly improved Piranha F8. Stronger shields and "
+"hull, faster impulse and turning speeds, a jump drive, beam weapons, eight "
+"missile tubes pointing in six directions and a large number of homing "
+"missiles to shoot."
+msgstr ""
+"Die Predator ist eine deutlich verbesserte Piranha F8. Stärkere Schilde und "
+"Hülle, schnellere Impuls- und Drehgeschwindigkeiten, ein Sprungantrieb, "
+"Laser, Acht Raketenschächte die in verschiedene Richtungen zeigen und ein "
+"großer Vorrat an Zielsuchraketen."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1472
+msgctxt "scienceDB"
+msgid "Shepherd"
+msgstr "Shepherd"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1480
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1683
+msgctxt "scienceDB"
+msgid "Exuari"
+msgstr "Exuari"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1481
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1684
+msgctxt "scienceDB"
+msgid "Dagger"
+msgstr "Dagger"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1486
+msgctxt "scienceDB"
+msgid ""
+"The Shepherd is a Fighter with a long narrow beam. Tactical recommendation: "
+"hack the impulse engines"
+msgstr ""
+"Die Shepherd ist ein jäger mit einem schmal fokussierten Laser mit hoher "
+"Reichweite. Taktische Empfehlung: Hacken Sie die Impulstriebwerke."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1514
+msgctxt "scienceDB"
+msgid "Starhammer III"
+msgstr "Starhammer III"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1515
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1564
+msgctxt "scienceDB"
+msgid "Starhammer II"
+msgstr "Starhammer II"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1529
+msgctxt "scienceDB"
+msgid ""
+"The designers of the Starhammer III took the Starhammer II and added a rear "
+"facing beam, enlarged one of the missile tubes and added more missiles to "
+"fire"
+msgstr ""
+"Die Konstrukteurinnen des Starhammer III nahmen den Starhammer II und fügten "
+"einen nach hinten gerichteten Laser hinzu, vergrößerten einen der "
+"Raketenschächte und den Raketenvorrat."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1563
+msgctxt "scienceDB"
+msgid "Starhammer V"
+msgstr "Starhammer V"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1578
+msgctxt "scienceDB"
+msgid ""
+"The Starhammer V recognizes common modifications made in the field to the "
+"Starhammer II: stronger shields, faster impulse and turning speeds, "
+"additional rear beam and more missiles to shoot. These changes make the "
+"Starhammer V a force to be reckoned with."
+msgstr ""
+"Der Starhammer V weist die üblichen Modifikationen auf, die in der Praxis am "
+"Starhammer II vorgenommen wurden: stärkere Schilde, höhere Impuls- und "
+"Drehgeschwindigkeiten, ein zusätzlicher Hecklaser und ein größerer "
+"Raketenvorrat. Diese Änderungen machen den Starhammer V zu einer Macht, die "
+"man ernstnehmen muss."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1619
+msgctxt "scienceDB"
+msgid "Tempest"
+msgstr "Tempest"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1620
+msgctxt "scienceDB"
+msgid "Piranha F12"
+msgstr "Piranha F12"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1627
+msgctxt "scienceDB"
+msgid "Large tube -88"
+msgstr "     gr. Raketen Links"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1628
+msgctxt "scienceDB"
+msgid "Tube -89"
+msgstr "          Raketen Links"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1630
+msgctxt "scienceDB"
+msgid "Large tube 88"
+msgstr "  gr. Raketen Rechts"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1631
+msgctxt "scienceDB"
+msgid "Tube 89"
+msgstr "  Raketen Rechts"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1633
+msgctxt "scienceDB"
+msgid "Tube -91"
+msgstr "           Raketen Links"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1634
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1873
+msgctxt "scienceDB"
+msgid "Tube -92"
+msgstr "            Raketen Links"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1635
+msgctxt "scienceDB"
+msgid "Tube 91"
+msgstr "   gr. Raketen Rechts"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1636
+msgctxt "scienceDB"
+msgid "Tube 92"
+msgstr "   Raketen Rechts"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1642
+msgctxt "scienceDB"
+msgid ""
+"Loosely based on the Piranha F12 model, the Tempest adds four more broadside "
+"tubes (two on each side), more HVLIs, more Homing missiles and 8 Nukes. The "
+"Tempest can strike fear into the hearts of your enemies. Get yourself one "
+"today!"
+msgstr ""
+"Die Tempest basiert auf dem Modell Piranha F12 und verfügt über vier weitere "
+"Breitseitenschächte (zwei auf jeder Seite), mehr HGBIs, mehr Zielsuchraketen "
+"und 8 Nukes. Die Tempest kann die Herzen Ihrer Feinde in Angst und Schrecken "
+"versetzen. Holen Sie sich noch heute eine!"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1676
+msgctxt "scienceDB"
+msgid "Touchy"
+msgstr "Touchy"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1689
+msgctxt "scienceDB"
+msgid ""
+"Touchy is a fighter with a highly modified beam weapon: narrower, longer, "
+"slower and stronger"
+msgstr ""
+"Touchy ist ein Jäger mit einer stark modifizierten Laserwaffe: schmaler, "
+"höhere Reichweite, langsamer und stärker."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1729
+msgctxt "scienceDB"
+msgid "Tyr"
+msgstr "Tyr"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1730
+msgctxt "scienceDB"
+msgid "Battlestation"
+msgstr "Battlestation"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1741
+msgctxt "scienceDB"
+msgid ""
+"The Tyr is the shipyard's answer to admiral Konstatz' casual statement that "
+"the Battlestation model was too slow to be effective. The shipyards improved "
+"on the Battlestation by fitting the Tyr with more than twice the impulse "
+"speed and more than six times the turn speed. They threw in stronger shields "
+"and hull and wider beam coverage just to show that they could"
+msgstr ""
+"Die Tyr ist die Antwort der Werften auf die beiläufige Äußerung von Admiral "
+"Konstatz, dass die \"Battlestation\" zu langsam sei, um effektiv zu sein. "
+"Die Werften verbesserten die Battlestation, indem sie die Tyr mit einer mehr "
+"als doppelt so hohen Impulsgeschwindigkeit und einer mehr als sechsmal so "
+"hohen Wendegeschwindigkeit ausstatteten. Sie bauten stärkere Schilde und "
+"eine breitere Hülle ein und vergrößerten den Erfassungsbereich der Laser, "
+"nur um zu zeigen, dass sie es können."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1765
+msgctxt "scienceDB"
+msgid "Waddle 5"
+msgstr "Waddle 5"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1779
+msgctxt "scienceDB"
+msgid ""
+"Conversions R Us purchased a number of Adder MK 5 ships at auction and added "
+"warp drives to them to produce the Waddle 5"
+msgstr ""
+"Conversions R Us hat eine Reihe von Adder MK 5-Schiffen ersteigert und sie "
+"mit Warpantrieben ausgestattet, um sie schließlich als Waddle 5 zu "
+"vermarkten."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1800
+msgctxt "scienceDB"
+msgid "Weapons platform II"
+msgstr "Weapons platform II"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1811
+msgctxt "scienceDB"
+msgid "Weapons platform"
+msgstr "Weapons platform"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1830
+msgctxt "scienceDB"
+msgid ""
+"The weapons-platform is a stationary platform with beam-weapons. It's "
+"extremely slow to turn, but it's beam weapons do a huge amount of damage. "
+"The weapons platform II is a modification of this design with a stronger "
+"hull, but slower and weaker beams.\n"
+"\n"
+"Did you know it's hug your science database librarian day?"
+msgstr ""
+"Die \"Weapons Platform\" ist eine stationäre Plattform mit Lasern. Sie ist "
+"extrem langsam in der Drehung, aber ihre Laserwaffen richten eine enorme "
+"Menge an Schaden an. Die \"Weapons Platform II\"  ist eine Abwandlung dieser "
+"Konstruktion mit einer stärkeren Hülle, aber langsameren und schwächeren "
+"Lasern."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1864
+msgctxt "scienceDB"
+msgid "Whirlwind"
+msgstr "Whirlwind"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1865
+msgctxt "scienceDB"
+msgid "Storm"
+msgstr "Storm"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1874
+msgctxt "scienceDB"
+msgid "Tube -88"
+msgstr "             Raketen Links"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1875
+msgctxt "scienceDB"
+msgid "Tube  90"
+msgstr "    Raketen Rechts"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1876
+msgctxt "scienceDB"
+msgid "Tube  92"
+msgstr "     Raketen Rechts"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1877
+msgctxt "scienceDB"
+msgid "Tube  88"
+msgstr "      Raketen Rechts"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1878
+msgctxt "scienceDB"
+msgid "Tube   0"
+msgstr "Raketen  Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1879
+msgctxt "scienceDB"
+msgid "Tube   2"
+msgstr "Raketen  Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1880
+msgctxt "scienceDB"
+msgid "Tube  -2"
+msgstr "           Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1886
+msgctxt "scienceDB"
+msgid ""
+"The Whirlwind, another heavy artillery cruiser, takes the Storm and adds "
+"tubes and missiles. It's as if the Storm swallowed a Pirahna and grew gills. "
+"Expect to see missiles, lots of missiles"
+msgstr ""
+"Die Whirlwind, ein weiterer schwerer Artilleriekreuzer, fügt der Storm "
+"Raketenschächte hinzu. Es ist, als hätte die Storm eine Piranha verschluckt "
+"und Kiemen bekommen. Rechnen Sie mit Raketen, vielen Raketen"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1920
+msgctxt "scienceDB"
+msgid "WZ-Lindworm"
+msgstr "WZ-Lindworm"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1921
+msgctxt "scienceDB"
+msgid "WX-Lindworm"
+msgstr "WX-Lindworm"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1929
+msgctxt "scienceDB"
+msgid "Small tube 1"
+msgstr "       kl. Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1930
+msgctxt "scienceDB"
+msgid "Small tube -1"
+msgstr "        kl. Raketen Front"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1936
+msgctxt "scienceDB"
+msgid ""
+"The WZ-Lindworm is essentially the stock WX-Lindworm with more HVLIs, more "
+"homing missiles and added nukes. They had to remove some of the armor to get "
+"the additional missiles to fit, so the hull is weaker. Also, the WZ turns a "
+"little more slowly than the WX. This little bomber packs quite a whallop."
+msgstr ""
+"Die WZ-Lindworm ist im Wesentlichen die WX-Lindworm mit mehr HGBIs, mehr "
+"Zielsuchraketen und zusätzlichen Nukes. Um die zusätzlichen Raketen einbauen "
+"zu können, musste ein Teil der Panzerung entfernt werden, so dass die Hülle "
+"schwächer ist. Außerdem dreht sich die WZ ein wenig langsamer als die WX. "
+"Dieser kleine Bomber hat eine ganz schöne Wucht."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1956
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2090
+msgctxt "scienceDB"
+msgid "Space Sedan"
+msgstr "Space Sedan"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1967
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2093
+msgctxt "scienceDB"
+msgid "Courier"
+msgstr "Courier"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1981
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2094
+msgctxt "scienceDB"
+msgid "Work Wagon"
+msgstr "Work Wagon"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:1994
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2091
+msgctxt "scienceDB"
+msgid "Omnibus"
+msgstr "Omnibus"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2005
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2095
+msgctxt "scienceDB"
+msgid "Laden Lorry"
+msgstr "Laden Lorry"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2018
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2096
+msgctxt "scienceDB"
+msgid "Physics Research"
+msgstr "Physics Research"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2033
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2092
+msgctxt "scienceDB"
+msgid "Service Jonque"
+msgstr "Service Jonque"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2040
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2075
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2088
+msgctxt "scienceDB"
+msgid "Freighter"
+msgstr "Freighter"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2041
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2178
+msgctxt "scienceDB"
+msgid "Sub-class"
+msgstr "Unterklasse"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2042
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2179
+msgctxt "scienceDB"
+msgid "Size"
+msgstr "Größe"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2082
+msgctxt "scienceDB"
+msgid ""
+"Small, medium and large scale transport ships. These are the working ships "
+"that keep commerce going in any sector. They may carry personnel, goods, "
+"cargo, equipment, garbage, fuel, research material, etc."
+msgstr ""
+"Kleine, mittlere und große Transportschiffe. Dies sind die "
+"\"Arbeitspferde\", die den Handel in jedem Sektor am Laufen halten. Sie "
+"können Personal, Waren, Fracht, Ausrüstung, Müll, Treibstoff, "
+"Forschungsmaterial usw. transportieren."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2102
+msgctxt "scienceDB"
+msgid "Personnel Jump Freighter 3"
+msgstr "Personnel Jump Freighter 3"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2107
+msgctxt "scienceDB"
+msgid ""
+"The Space Sedan was built around a surplus Personnel Jump Freighter 3. It's "
+"designed to provide relatively low cost transportation primarily for people, "
+"but there is also a limited amount of cargo space available"
+msgstr ""
+"Die Space Sedan wurde aus einem überzähligen Personnel Jump Freighter 3 "
+"gebaut. Sie wurde entwickelt, um relativ kostengünstig hauptsächlich "
+"Personen zu transportieren, aber es ist auch eine begrenzte Menge an "
+"Frachtraum verfügbar."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2112
+msgctxt "scienceDB"
+msgid "Personnel Jump Freighter 5"
+msgstr "Personnel Jump Freighter 5"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2117
+msgctxt "scienceDB"
+msgid ""
+"The Omnibus was designed from the Personnel Jump Freighter 5. It's made to "
+"transport large numbers of passengers of various types along with their "
+"luggage and any associated cargo"
+msgstr ""
+"Der Omnibus wurde aus dem Personnel Jump Freighter 5 entwickelt. Er ist für "
+"den Transport einer großen Anzahl von Passagieren aller Art mitsamt ihrem "
+"Gepäck und der dazugehörigen Fracht gedacht."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2122
+msgctxt "scienceDB"
+msgid "Equipment Jump Freighter 4"
+msgstr "Equipment Jump Freighter 4"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2127
+msgctxt "scienceDB"
+msgid ""
+"The Service Jonque is a modified Equipment Jump Freighter 4. It's designed "
+"to carry spare parts and equipment as well as the necessary repair personnel "
+"to where it's needed to repair stations and ships"
+msgstr ""
+"Die Service-Jonque ist ein modifizierter Frachter des Modells \"Equipment "
+"Jump Freighter 4\". Sie ist dafür ausgelegt, Ersatzteile und Ausrüstung "
+"sowie das nötige Reparaturpersonal dorthin zu transportieren, wo es für die "
+"Reparatur von Stationen und Schiffen benötigt wird."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2132
+msgctxt "scienceDB"
+msgid "Personnel Freighter 1"
+msgstr "Personnel Freighter 1"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2137
+msgctxt "scienceDB"
+msgid ""
+"The Courier is a souped up Personnel Freighter 1. It's made to deliver "
+"people and messages fast. Very fast"
+msgstr ""
+"Der Courier ist ein aufgerüsteter Frachter des Typs \"Personal Freighter "
+"1\". Er ist dafür gemacht, Menschen und Nachrichten schnell zu "
+"transportieren. Sehr schnell."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2142
+msgctxt "scienceDB"
+msgid "Equipment Freighter 2"
+msgstr "Equipment Freighter 2"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2147
+msgctxt "scienceDB"
+msgid ""
+"The Work Wagon is a conversion of an Equipment Freighter 2 designed to carry "
+"equipment and parts where they are needed for repair or construction."
+msgstr ""
+"Die Work Wagon ist ein Umbau eines Frachters vom Typ \"Equipment Freighter "
+"2\", der für den Transport von Ausrüstung und Teilen zu Reparatur- oder "
+"Bauzwecken entwickelt wurde."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2152
+msgctxt "scienceDB"
+msgid "Goods Freighter 3"
+msgstr "Goods Freighter 3"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2157
+msgctxt "scienceDB"
+msgid ""
+"As a side contract, Conversion R Us put together the Laden Lorry from some "
+"recently acquired Goods Freighter 3 hulls. The added warp drive makes for a "
+"more versatile goods carrying vessel."
+msgstr ""
+"Im Rahmen eines Nebenprojekts baute Conversion R Us aus einigen kürzlich "
+"erworbenen \"Goods Freighter 3\"-Hüllen die Laden Lorry. Der zusätzliche "
+"Warp-Antrieb macht es zu einem noch vielseitigeren Gütertransportschiff."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2162
+msgctxt "scienceDB"
+msgid "Garbage Freighter 3"
+msgstr "Garbage Freighter 3"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2167
+msgctxt "scienceDB"
+msgid ""
+"Conversion R Us cleaned up and converted excess freighter hulls into Physics "
+"Research vessels. The reduced weight improved the impulse speed and "
+"maneuverability."
+msgstr ""
+"Conversion R Us hat überschüssige Frachterhüllen gereinigt und in "
+"physikalische Forschungsschiffe umgewandelt. Durch das geringere Gewicht "
+"wurden die Impulsgeschwindigkeit und die Manövrierfähigkeit verbessert."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2177
+msgctxt "scienceDB"
+msgid "Class"
+msgstr "Klasse"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2194
+msgctxt "scienceDB"
+msgid "Shield"
+msgstr "Schilde"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2197
+msgctxt "scienceDB"
+msgid "Hull"
+msgstr "Hülle"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2198
+msgctxt "scienceDB"
+msgid "Move speed"
+msgstr "Geschwindigkeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2199
+msgctxt "scienceDB"
+msgid "Reverse move speed"
+msgstr "Geschw. rückwärts"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2200
+msgctxt "scienceDB"
+msgid "Turn speed"
+msgstr "Wendigkeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2203
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2204
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2224
+#, lua-format
+msgctxt "scienceDB"
+msgid "%.1f u/min"
+msgstr "%.1f u/min"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2205
+#, lua-format
+msgctxt "scienceDB"
+msgid "%.1f deg/sec"
+msgstr "%.1f grad / Sek."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2207
+msgctxt "scienceDB"
+msgid "Jump range"
+msgstr "Sprungreichweite"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2223
+msgctxt "scienceDB"
+msgid "Warp Speed"
+msgstr "Warpgeschwindigkeit"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2244
+#, lua-format
+msgctxt "scienceDB"
+msgid "Beam weapon %s:%s"
+msgstr "Laser %s° bis %s°"
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2248
+#, lua-format
+msgctxt "scienceDB"
+msgid "%.1f Dmg / %.1f sec"
+msgstr "%.1f Schaden / %.1f Sek."
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2273
+#, lua-format
+msgctxt "scienceDB"
+msgid "Storage %s"
+msgstr "Ladung %s"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: scripts/comms_station.lua:73
 #, fuzzy
@@ -83,10 +83,9 @@ msgid "We do not deal in weapons of mass destruction."
 msgstr "Wir handeln nicht mit Massenvernichtungswaffen."
 
 #: scripts/comms_station.lua:133
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Wir handen nicht mit Störwaffen."
+msgstr "Wir handeln nicht mit Störwaffen."
 
 #: scripts/comms_station.lua:135
 #, fuzzy
@@ -172,8 +171,7 @@ msgstr "Bitte senden Sie Verstärkung! (%d rep)"
 #, fuzzy
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
-msgstr ""
-"Sie müssen einen Wegpunkt setzen, bevor Sie eine Lieferung anfordern können."
+msgstr "Sie müssen einen Wegpunkt setzen, bevor Sie eine Lieferung anfordern können."
 
 #: scripts/comms_station.lua:211
 #, fuzzy
@@ -232,8 +230,7 @@ msgstr ""
 #, fuzzy
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
-msgstr ""
-"Sie müssen einen Wegpunkt setzen, bevor Sie Verstärkung anfordern können."
+msgstr "Sie müssen einen Wegpunkt setzen, bevor Sie Verstärkung anfordern können."
 
 #: scripts/comms_station.lua:269
 #, fuzzy

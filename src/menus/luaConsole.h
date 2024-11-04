@@ -6,6 +6,19 @@
 #include "timer.h"
 
 
+class ConsoleHistory
+{
+public:
+    string movePrevious(string);
+    string moveNext(string);
+    void append(string);
+
+private:
+    std::vector<string> entries;
+    unsigned int position = 0;
+    string pending = "";
+};
+
 class GuiTextEntry;
 class LuaConsole : public GuiCanvas, public Updatable
 {
@@ -17,6 +30,7 @@ public:
     void update(float delta) override;
 private:
     std::vector<string> log_messages;
+    ConsoleHistory history;
     GuiElement* top;
     GuiTextEntry* log;
     GuiTextEntry* entry;

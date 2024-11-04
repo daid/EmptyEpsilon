@@ -10,12 +10,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: scripts/shiptemplates/corvette.lua:14
 msgctxt "ship"
 msgid "Atlantis X23"
-msgstr ""
+msgstr "Atlantis X23"
 
 #: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
 #: scripts/shiptemplates/corvette.lua:101
@@ -29,6 +29,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:301
 #: scripts/shiptemplates/corvette.lua:310
 #: scripts/shiptemplates/corvette.lua:315
+#: scripts/shiptemplates/corvette.lua:360
 msgctxt "class"
 msgid "Corvette"
 msgstr "Korvette"
@@ -56,7 +57,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:33
 msgctxt "playerShip"
 msgid "Atlantis"
-msgstr ""
+msgstr "Atlantis"
 
 #: scripts/shiptemplates/corvette.lua:34
 msgid ""
@@ -75,7 +76,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:83
 msgctxt "ship"
 msgid "Starhammer II"
-msgstr ""
+msgstr "Starhammer II"
 
 #: scripts/shiptemplates/corvette.lua:84
 msgid ""
@@ -157,12 +158,14 @@ msgstr ""
 
 #: scripts/shiptemplates/corvette.lua:223
 #: scripts/shiptemplates/corvette.lua:311
+#: scripts/shiptemplates/corvette.lua:369
 msgctxt "class"
 msgid "Starfighter"
 msgstr "Raumjäger"
 
 #: scripts/shiptemplates/corvette.lua:223
 #: scripts/shiptemplates/corvette.lua:310
+#: scripts/shiptemplates/corvette.lua:368
 msgctxt "class"
 msgid "Frigate"
 msgstr "Fregatte"
@@ -326,3 +329,24 @@ msgstr ""
 msgid "Kiriya is an improved warp drive version of the Jump Carrier"
 msgstr ""
 "Die Kiriya ist eine verbesserte Version des Sprung-Trägers mit Warp-Antrieb"
+
+#: scripts/shiptemplates/corvette.lua:360
+msgctxt "playerShip"
+msgid "Saipan"
+msgstr ""
+
+#: scripts/shiptemplates/corvette.lua:360
+msgctxt "subclass"
+msgid "Carrier"
+msgstr "Trägerschiff"
+
+#: scripts/shiptemplates/corvette.lua:361
+msgid ""
+"The Saipan mixes most of the strengths of the corvette class with carrier "
+"capability. The weapons compare favorably with other corvette class ships. "
+"Having fighters use the Saipan as a base can really ruin an enemy's day"
+msgstr ""
+"Die Saipan vereint die meisten Stärken der Korvette-Klasse mit den "
+"Fähigkeiten eines Trägerschiffes. Die Bewaffnung ist mit der anderer "
+"Korvetten vergleichbar. Die Tatsache, dass die Saipan von Jägern als Basis "
+"genutzt wird, kann einem Feind den Tag verderben."

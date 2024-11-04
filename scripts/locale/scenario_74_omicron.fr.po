@@ -1769,7 +1769,7 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:4081 scripts/scenario_74_omicron.lua:4105
 msgctxt "trade-comms"
 msgid "One repair crew should be getting here from their medical checkout in "
-msgstr "Une réparatrice devrait revenir de sa visite médicale dans"
+msgstr "Une réparatrice devrait revenir de sa visite médicale dans "
 
 #: scripts/scenario_74_omicron.lua:4086 scripts/scenario_74_omicron.lua:4091
 #, lua-format
@@ -3320,7 +3320,7 @@ msgstr ", "
 #: scripts/scenario_74_omicron.lua:5314 scripts/scenario_74_omicron.lua:5835
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr "Rien du tout."
+msgstr "rien du tout."
 
 #: scripts/scenario_74_omicron.lua:5329
 msgctxt "shipEnemy-comms"

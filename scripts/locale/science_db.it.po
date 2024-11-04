@@ -34,7 +34,7 @@ msgstr "Asteroide"
 #, fuzzy
 msgid ""
 "An asteroid is a minor planet, usually smaller than a few kilometers. Larger "
-"variants are sometimes refered to as planetoids."
+"variants are sometimes referred to as planetoids."
 msgstr ""
 "Gli asteroidi sono pianeti minori, generalmente più piccoli di pochi "
 "chilometri. Le varianti più grandi sono a volte indicate come planetoidi."
@@ -525,6 +525,10 @@ msgstr ""
 #, fuzzy
 msgid "HVLI"
 msgstr "HVLI"
+
+#: scripts/science_db.lua:143
+msgid "10 each, 50 total"
+msgstr ""
 
 #: scripts/science_db.lua:144
 #, fuzzy

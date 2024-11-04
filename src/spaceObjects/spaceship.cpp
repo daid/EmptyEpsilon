@@ -307,6 +307,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Returns the direction, in degrees relative to the ship's forward bearing, for the turret arc's center for the BeamWeapon with the given index on this SpaceShip.
     /// Example: ship:getBeamWeaponTurretDirection(0); -- returns beam weapon 0's turret direction
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponTurretDirection);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponTurretRotationRate);
     /// Returns the base firing delay, in seconds, for the BeamWeapon with the given index on this SpaceShip.
     /// Actual cycle time can be modified by "beamweapon" system effectiveness.
     /// Example: ship:getBeamWeaponCycleTime(0); -- returns beam weapon 0's cycle time
@@ -1152,6 +1153,19 @@ void SpaceShip::update(float delta)
             combat_maneuver_strafe_active = combat_maneuver_strafe_request;
     }
 
+    // If the ship doesn't have thrusters in a given direction, don't try to fire them.
+    if (combat_maneuver_boost_speed == 0)
+    {
+        combat_maneuver_boost_active = 0.0;
+        combat_maneuver_boost_request = 0.0;
+    }
+
+    if (combat_maneuver_strafe_speed == 0)
+    {
+        combat_maneuver_strafe_active = 0.0;
+        combat_maneuver_strafe_request = 0.0;
+    }
+
     // If the ship is making a combat maneuver ...
     if (combat_maneuver_boost_active != 0.0f || combat_maneuver_strafe_active != 0.0f)
     {
@@ -1169,6 +1183,10 @@ void SpaceShip::update(float delta)
         {
             setVelocity(getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
             setVelocity(getVelocity() + vec2FromAngle(getRotation() + 90) * combat_maneuver_strafe_speed * combat_maneuver_strafe_active);
+
+            // Add heat to systems consuming combat maneuver boost.
+            addHeat(SYS_Impulse, fabs(combat_maneuver_boost_active) * delta * heat_per_combat_maneuver_boost);
+            addHeat(SYS_Maneuver, fabs(combat_maneuver_strafe_active) * delta * heat_per_combat_maneuver_strafe);
         }
     // If the ship isn't making a combat maneuver, recharge its boost.
     }else if (combat_maneuver_charge < 1.0f)
@@ -1177,10 +1195,6 @@ void SpaceShip::update(float delta)
         if (combat_maneuver_charge > 1.0f)
             combat_maneuver_charge = 1.0f;
     }
-
-    // Add heat to systems consuming combat maneuver boost.
-    addHeat(SYS_Impulse, fabs(combat_maneuver_boost_active) * delta * heat_per_combat_maneuver_boost);
-    addHeat(SYS_Maneuver, fabs(combat_maneuver_strafe_active) * delta * heat_per_combat_maneuver_strafe);
 
     for(int n = 0; n < max_beam_weapons; n++)
     {
@@ -1274,6 +1288,7 @@ void SpaceShip::collide(Collisionable* other, float force)
 
 void SpaceShip::initializeJump(float distance)
 {
+    distance = std::clamp(distance, jump_drive_min_distance, jump_drive_max_distance);
     if (docking_state != DS_NotDocking)
         return;
     if (jump_drive_charge < jump_drive_max_distance) // You can only jump when the drive is fully charged

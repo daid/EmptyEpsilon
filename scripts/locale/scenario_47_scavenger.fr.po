@@ -2285,7 +2285,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
-msgstr "     %s: %i\n"
+msgstr "     %s : %i\n"
 
 #: scripts/scenario_47_scavenger.lua:2530
 #, lua-format
@@ -2959,7 +2959,7 @@ msgid ""
 "   %14s: %2i, %3i"
 msgstr ""
 "\n"
-"   %14s: %2i, %3i"
+"   %14s : %2i, %3i"
 
 #: scripts/scenario_47_scavenger.lua:3267
 msgctxt "stationAssist-comms"
@@ -3200,7 +3200,7 @@ msgstr "%s Missiles : %d/%d\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr "Amarrez-vous à %s."
+msgstr "Amarrez-vous à %s"
 
 #: scripts/scenario_47_scavenger.lua:3523
 #, lua-format
@@ -3373,7 +3373,7 @@ msgstr ", "
 #: scripts/scenario_47_scavenger.lua:3847
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr "Rien du tout."
+msgstr "rien du tout."
 
 #: scripts/scenario_47_scavenger.lua:3781
 msgctxt "shipEnemy-comms"

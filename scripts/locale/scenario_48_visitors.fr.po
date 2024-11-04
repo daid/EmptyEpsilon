@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -19,7 +19,6 @@ msgid "Unwanted Visitors"
 msgstr "Visiteurs indésirables"
 
 # Scenario description
-#, fuzzy
 msgid ""
 "Get rid of the unwanted visitors. Other missions follow. Check friendly "
 "stations for mission orders. Dispatch office provides new missions. Continue "
@@ -51,7 +50,6 @@ msgid ""
 "\n"
 "Version 2"
 msgstr ""
-"\n"
 "EN COURS DE TRADUCTION 42%\n"
 "\n"
 "Get rid of the unwanted visitors. Other missions follow. Check friendly "
@@ -225,12 +223,12 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:103
 msgctxt "buttonGM"
 msgid "+Spawn Ship(s)"
-msgstr "+ Ajout de vaisseau(x)"
+msgstr "+ Ajout de vaisseaux"
 
 #: scripts/scenario_48_visitors.lua:104
 msgctxt "buttonGM"
 msgid "+Control Codes"
-msgstr ""
+msgstr "+ Codes de contrôle"
 
 #: scripts/scenario_48_visitors.lua:109 scripts/scenario_48_visitors.lua:253
 #: scripts/scenario_48_visitors.lua:266 scripts/scenario_48_visitors.lua:285
@@ -622,6 +620,11 @@ msgid ""
 "weapons by reducing the amount of time between firing. I hear he's already "
 "installed some improvements on ships that have docked here previously"
 msgstr ""
+"Il se lance dans les innovations en matière de système de vaisseau. "
+"Actuellement il travaille sur l'amélioration des faisceaux laser en "
+"augmentant leur cadence de tir.\n"
+"J'ai entendu dire qu'il avait installé quelques mises à niveau sur les "
+"vaisseaux qui ont déjà accosté ici."
 
 #: scripts/scenario_48_visitors.lua:2396
 #, lua-format
@@ -739,7 +742,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:2477
 msgctxt "characterInfo-comms"
 msgid "He can strengthen your hull"
-msgstr ""
+msgstr "Il peut renforcer votre coque."
 
 #: scripts/scenario_48_visitors.lua:2484
 #, lua-format
@@ -843,7 +846,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:2626
 msgctxt "upgrade-comms"
 msgid "Add missile tube"
-msgstr ""
+msgstr "Ajouter un tube de missile"
 
 #: scripts/scenario_48_visitors.lua:2649
 #, lua-format
@@ -1315,7 +1318,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:3312
 msgctxt "DispatchOffice-comms"
 msgid "Visit dispatch office"
-msgstr ""
+msgstr "Visiter le bureau central"
 
 #: scripts/scenario_48_visitors.lua:3169
 #, lua-format
@@ -2289,6 +2292,9 @@ msgid ""
 "The clerk behind the desk pauses, points a cluster of antennae at you, then "
 "continues manipulating an elaborate keyboard."
 msgstr ""
+"[L'employé derrière son bureau marque une pause, oriente vers vous ses "
+"antennes… puis continue de taper discrètement sur un clavier au design "
+"élaboré.]"
 
 #: scripts/scenario_48_visitors.lua:4074
 #, lua-format
@@ -2342,7 +2348,7 @@ msgstr ""
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine station list (%i reputation)"
-msgstr "Examiner la liste des stations (%i rep)"
+msgstr "Examiner la liste des stations (%i rép)"
 
 #: scripts/scenario_48_visitors.lua:4091 scripts/scenario_48_visitors.lua:4151
 #: scripts/scenario_48_visitors.lua:4200
@@ -2399,7 +2405,7 @@ msgstr ""
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Talk to apprentice cartographer (%i reputation)"
-msgstr "Parler à l'apprenti cartographe (%i rep)"
+msgstr "Parler à l'apprenti cartographe (%i rép)"
 
 #: scripts/scenario_48_visitors.lua:4140
 msgctxt "cartographyOffice-comms"
@@ -2752,6 +2758,8 @@ msgid ""
 "%s\n"
 "Note: this waypoint will be out of date shortly since %s is in motion"
 msgstr ""
+"%s\n"
+"Remarque : ce marqueur sera bientôt obsolète car %s est en mouvement."
 
 #: scripts/scenario_48_visitors.lua:4444
 msgctxt "cartographyOffice-comms"
@@ -3241,6 +3249,9 @@ msgid ""
 "\n"
 "General Information: %s"
 msgstr ""
+"%s\n"
+"\n"
+"Informations générales : %s"
 
 #: scripts/scenario_48_visitors.lua:5096
 #, lua-format
@@ -3250,6 +3261,9 @@ msgid ""
 "\n"
 "History: %s"
 msgstr ""
+"%s\n"
+"\n"
+"Histoire : %s"
 
 #: scripts/scenario_48_visitors.lua:5104
 msgctxt "scienceDB"
@@ -3349,7 +3363,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:5197
 msgctxt "scienceDB"
 msgid "Location, Faction"
-msgstr ""
+msgstr "Localisation, faction"
 
 #: scripts/scenario_48_visitors.lua:5198
 #, lua-format
@@ -3360,49 +3374,49 @@ msgstr "%s, %s"
 #: scripts/scenario_48_visitors.lua:5204
 msgctxt "scienceDB"
 msgid "share energy"
-msgstr ""
+msgstr "partager l'énergie"
 
 #: scripts/scenario_48_visitors.lua:5209
 msgctxt "scienceDB"
 msgid "repair hull"
-msgstr ""
+msgstr "réparer la coque"
 
 #: scripts/scenario_48_visitors.lua:5211
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, repair hull"
-msgstr ""
+msgstr "%s, réparer la coque"
 
 #: scripts/scenario_48_visitors.lua:5217
 msgctxt "scienceDB"
 msgid "replenish probes"
-msgstr ""
+msgstr "réapprovisionner les sondes"
 
 #: scripts/scenario_48_visitors.lua:5219
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, replenish probes"
-msgstr ""
+msgstr "%s, réapprovisionner les sondes"
 
 #: scripts/scenario_48_visitors.lua:5224
 msgctxt "scienceDB"
 msgid "Docking Services"
-msgstr ""
+msgstr "Services d'accueil"
 
 #: scripts/scenario_48_visitors.lua:5226
 msgctxt "scienceDB"
 msgid "Docking Service"
-msgstr ""
+msgstr "Service d'accueil"
 
 #: scripts/scenario_48_visitors.lua:5248
 msgctxt "scienceDB"
 msgid "Restock Homing"
-msgstr ""
+msgstr "Réapprovisionner les Homing"
 
 #: scripts/scenario_48_visitors.lua:5249
 msgctxt "scienceDB"
 msgid "Restock HVLI"
-msgstr ""
+msgstr "Réapprovisionner les HVLI"
 
 #: scripts/scenario_48_visitors.lua:5250
 msgctxt "scienceDB"
@@ -3515,7 +3529,7 @@ msgstr "Défendez le marqueur %s"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at waypoint %s."
-msgstr "Nous partons pour défendre le marqueur %s."
+msgstr "Nous partons immédiatement défendre le marqueur %s."
 
 #: scripts/scenario_48_visitors.lua:5349 scripts/scenario_48_visitors.lua:5433
 msgctxt "shipAssist-comms"
@@ -3572,7 +3586,7 @@ msgstr "%s Missiles : %d/%d\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr "Amarrez-vous à %s."
+msgstr "Amarrez-vous à %s"
 
 #: scripts/scenario_48_visitors.lua:5380
 #, lua-format
@@ -3729,7 +3743,7 @@ msgstr ", "
 #: scripts/scenario_48_visitors.lua:5601 scripts/scenario_48_visitors.lua:5683
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr "Rien du tout."
+msgstr "rien du tout."
 
 #: scripts/scenario_48_visitors.lua:5614
 msgctxt "shipEnemy-comms"

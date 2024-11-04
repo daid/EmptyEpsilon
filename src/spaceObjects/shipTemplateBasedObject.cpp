@@ -437,6 +437,7 @@ float ShipTemplateBasedObject::getShieldRechargeRate(int shield_index)
 void ShipTemplateBasedObject::setTemplate(string template_name)
 {
     P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(template_name);
+    if (!new_ship_template) return;
     this->template_name = template_name;
     ship_template = new_ship_template;
     type_name = template_name;

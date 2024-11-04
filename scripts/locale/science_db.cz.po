@@ -33,7 +33,7 @@ msgstr ""
 #: scripts/science_db.lua:14
 msgid ""
 "An asteroid is a minor planet, usually smaller than a few kilometers. Larger "
-"variants are sometimes refered to as planetoids."
+"variants are sometimes referred to as planetoids."
 msgstr ""
 
 #: scripts/science_db.lua:16
@@ -434,6 +434,10 @@ msgstr ""
 
 #: scripts/science_db.lua:141
 msgid "HVLI"
+msgstr ""
+
+#: scripts/science_db.lua:143
+msgid "10 each, 50 total"
 msgstr ""
 
 #: scripts/science_db.lua:144

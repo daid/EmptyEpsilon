@@ -2191,7 +2191,7 @@ msgstr ""
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine station list (%i rep)"
-msgstr "Examiner la liste des stations (%i rep)"
+msgstr "Examiner la liste des stations (%i rép)"
 
 #: scripts/scenario_54_PatrolDuty.lua:4607
 #: scripts/scenario_54_PatrolDuty.lua:4664
@@ -2241,7 +2241,7 @@ msgstr ""
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Talk to apprentice cartographer (%i rep)"
-msgstr "Parler à l'apprenti cartographe (%i rep)"
+msgstr "Parler à l'apprenti cartographe (%i rép)"
 
 #: scripts/scenario_54_PatrolDuty.lua:4653
 msgctxt "cartographyOffice-comms"
@@ -3009,7 +3009,7 @@ msgid ""
 "   %14s: %2i, %3i"
 msgstr ""
 "\n"
-"   %14s: %2i, %3i"
+"   %14s : %2i, %3i"
 
 #: scripts/scenario_54_PatrolDuty.lua:5435
 msgctxt "helpfullWarning-comms"
@@ -3339,7 +3339,7 @@ msgstr ", "
 #: scripts/scenario_54_PatrolDuty.lua:5815
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr "Rien du tout."
+msgstr "rien du tout."
 
 #: scripts/scenario_54_PatrolDuty.lua:5823
 msgctxt "trade-comms"

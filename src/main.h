@@ -22,5 +22,6 @@ extern std::vector<RenderLayer*> window_render_layers;
 void returnToMainMenu(RenderLayer*);
 void returnToShipSelection(RenderLayer*);
 void returnToOptionMenu();
+std::unordered_map<string, string> loadScenarioSettingsFromPrefs();
 
 #endif//MAIN_H

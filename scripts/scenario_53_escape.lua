@@ -1330,7 +1330,7 @@ function handleDockedState()
 	missilePresence = 0
 	stationStatusReport()
 	local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
-	for _, missile_type in ipairs(missile_types) do
+	for idx, missile_type in ipairs(missile_types) do
 		missilePresence = missilePresence + player:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
@@ -1340,7 +1340,7 @@ function handleDockedState()
 			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
 			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
 			addCommsReply(_("ammo-comms","I need ordnance restocked"), function()
-				setCommsMessage("What type of ordnance do you need?")
+				setCommsMessage(_("ammo-comms","What type of ordnance do you need?"))
 				local prompts = {
 					["Nuke"] = {
 						_("ammo-comms","Can you supply us with some nukes?"),
@@ -3270,7 +3270,7 @@ function cumulativeHarassment(delta)
 		local cpx, cpy = playerRepulse:getPosition()
 		local dpx, dpy = vectorFromAngle(random(0,360),playerRepulse:getLongRangeRadarRange()+500)
 		local fleet = spawnEnemies(cpx+dpx,cpy+dpy,total_health,"Exuari")
-		for _, enemy in ipairs(fleet) do
+		for idx, enemy in ipairs(fleet) do
 			enemy:orderAttack(playerRepulse)
 		end
 		harassment_timer = delta + 200 - (difficulty*20)
@@ -3493,7 +3493,7 @@ function kraylorPatrol(delta)
 			end
 		end
 		kraylorPatrolCount = 0
-		for _, kgi in ipairs(kgr) do
+		for idx, kgi in ipairs(kgr) do
 			if kgi then
 				kraylorPatrolCount = kraylorPatrolCount + 1
 			end
@@ -3522,7 +3522,7 @@ function kraylorPatrol(delta)
 				patrolGroup = spawnEnemies(tx+dx,ty+dy,random(.8,2.2),"Kraylor")
 			end
 			kGroup = kGroup + 1
-			for _, enemy in ipairs(patrolGroup) do
+			for idx, enemy in ipairs(patrolGroup) do
 				enemy:orderFlyTowards(tx, ty)
 				enemy.target = target
 				enemy.groupID = kGroup
@@ -3644,7 +3644,7 @@ function kraylorTransportPlot(delta)
 		if invalidKraylorTransportCount > 0 then
 			kraylorTransportCount = 0
 			tempTransportList = {}
-			for _, kobj in ipairs(kraylorTransportList) do
+			for idx, kobj in ipairs(kraylorTransportList) do
 				if kobj ~= nil and kobj:isValid() then
 					table.insert(tempTransportList,kobj)
 					kraylorTransportCount = kraylorTransportCount + 1
@@ -3718,7 +3718,7 @@ function independentTransportPlot(delta)
 		if invalidIndependentTransportCount > 0 then
 			independentTransportCount = 0
 			tempTransportList = {}
-			for _, obj in ipairs(independentTransportList) do
+			for idx, obj in ipairs(independentTransportList) do
 				if obj ~= nil and obj:isValid() then
 					table.insert(independentTransportList,obj)
 					independentTransportCount = independentTransportCount + 1

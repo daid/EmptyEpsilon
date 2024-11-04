@@ -893,6 +893,10 @@ msgid ""
 "\n"
 "You can examine the brochure on the coffee table or talk to the cartographer"
 msgstr ""
+"%s\n"
+"\n"
+"Vous pouvez consulter la brochure sur la table basse ou parler au "
+"cartographe."
 
 #: scripts/scenario_58_race.lua:1700
 msgctxt "cartographyOffice-comms"
@@ -1520,7 +1524,7 @@ msgstr "%s Missiles : %d/%d\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr "Amarrez-vous à %s."
+msgstr "Amarrez-vous à %s"
 
 #: scripts/scenario_58_race.lua:2533
 #, lua-format

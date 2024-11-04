@@ -151,7 +151,7 @@ int main(int argc, char** argv)
         char* value = strchr(argv[n], '=');
         if (!value) continue;
         *value++ = '\0';
-        PreferencesManager::set(string(argv[n]).strip(), string(value).strip());
+        PreferencesManager::setTemporary(string(argv[n]).strip(), string(value).strip());
     }
 
     if (PreferencesManager::get("proxy") != "")
@@ -224,12 +224,12 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("username", "") == "")
     {
 #ifdef STEAMSDK
-        PreferencesManager::set("username", SteamFriends()->GetPersonaName());
+        PreferencesManager::setTemporary("username", SteamFriends()->GetPersonaName());
 #else
         if (getenv("USERNAME"))
-            PreferencesManager::set("username", getenv("USERNAME"));
+            PreferencesManager::setTemporary("username", getenv("USERNAME"));
         else if (getenv("USER"))
-            PreferencesManager::set("username", getenv("USER"));
+            PreferencesManager::setTemporary("username", getenv("USER"));
 #endif
     }
 
@@ -416,8 +416,11 @@ int main(int argc, char** argv)
         // Create the server.
         new EpsilonServer(defaultServerPort);
 
+        if(!gameGlobalInfo) // => failed to start server
+            return 1;
+
         // Load the scenario and open the ship selection screen.
-        gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"));
+        gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"), loadScenarioSettingsFromPrefs());
         new ShipSelectionScreen();
     }
 
@@ -472,7 +475,7 @@ void returnToMainMenu(RenderLayer* render_layer)
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
         if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
         if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
-        gameGlobalInfo->startScenario(PreferencesManager::get("headless"));
+        gameGlobalInfo->startScenario(PreferencesManager::get("headless"), loadScenarioSettingsFromPrefs());
 
         if (PreferencesManager::get("startpaused") != "1")
             engine->setGameSpeed(1.0);
@@ -515,4 +518,22 @@ void returnToShipSelection(RenderLayer* render_layer)
 void returnToOptionMenu()
 {
     new OptionsMenu();
+}
+
+std::unordered_map<string, string> loadScenarioSettingsFromPrefs()
+{
+    string preferenceValue = PreferencesManager::get("scenario_settings");
+
+    std::unordered_map<string, string> settings = {};
+    if (preferenceValue == "")
+        return settings;
+
+    for(string setting : preferenceValue.split(";"))
+    {
+        auto [key, value] = setting.partition("=");
+        if (!key.empty() && !value.empty())
+            settings[key.strip()] = value.strip();
+    }
+
+    return settings;
 }

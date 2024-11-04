@@ -49,9 +49,9 @@ function init()
         _("buttonGM", "Delete unselected"),
         function()
             local gm_selection = getGMSelection()
-            for _, obj in ipairs(getAllObjects()) do
+            for idx, obj in ipairs(getAllObjects()) do
                 local found = false
-                for _, obj2 in ipairs(gm_selection) do
+                for idx2, obj2 in ipairs(gm_selection) do
                     if obj == obj2 then
                         found = true
                     end
@@ -67,7 +67,7 @@ end
 function cleanup()
     -- Clean up the current play field. Find all objects and destroy everything that is not a player.
     -- If it is a player, position him in the center of the scenario.
-    for _, obj in ipairs(getAllObjects()) do
+    for idx, obj in ipairs(getAllObjects()) do
         if obj.typeName == "PlayerSpaceship" then
             obj:setPosition(random(-100, 100), random(-100, 100))
         else

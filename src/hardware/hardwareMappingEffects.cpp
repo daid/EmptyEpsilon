@@ -75,9 +75,9 @@ float HardwareMappingEffectBlink::onActive()
         timer.start(on ? on_time : off_time);
     }
     if (on)
-        return off_value;
-    else
         return on_value;
+    else
+        return off_value;
 }
 
 void HardwareMappingEffectBlink::onInactive()

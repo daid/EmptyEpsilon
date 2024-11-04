@@ -10,11 +10,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.1\n"
+
 #: scripts/shiptemplates/corvette.lua:14
 #, fuzzy
 msgctxt "ship"
 msgid "Atlantis X23"
 msgstr "Atlantis X23"
+
 #: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
 #: scripts/shiptemplates/corvette.lua:101
 #: scripts/shiptemplates/corvette.lua:157
@@ -27,15 +29,18 @@ msgstr "Atlantis X23"
 #: scripts/shiptemplates/corvette.lua:301
 #: scripts/shiptemplates/corvette.lua:310
 #: scripts/shiptemplates/corvette.lua:315
+#: scripts/shiptemplates/corvette.lua:360
 #, fuzzy
 msgctxt "class"
 msgid "Corvette"
 msgstr "Corvetta"
+
 #: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
 #, fuzzy
 msgctxt "subclass"
 msgid "Destroyer"
 msgstr "Incrociatore"
+
 # destroyer->incrociatore come hanno fatto per star wars
 # letteralmente sarebbe cacciatorpediniere
 #: scripts/shiptemplates/corvette.lua:15
@@ -52,11 +57,13 @@ msgstr ""
 "nave di scorta per difendere navi grandi da diversi nemici più piccoli. Dato "
 "che la Atlantis X23 è equipaggiata con un motore di salto può anche servire "
 "da nave di pattuglia intersistema."
+
 #: scripts/shiptemplates/corvette.lua:33
 #, fuzzy
 msgctxt "playerShip"
 msgid "Atlantis"
 msgstr "Atlantis"
+
 #: scripts/shiptemplates/corvette.lua:34
 msgid ""
 "A refitted Atlantis X23 for more general tasks. The large shield system has "
@@ -69,11 +76,13 @@ msgstr ""
 "combattimento avanzati e motori a impulso migliorati. Inoltre il suo "
 "arsenale di missili è più diversificato. Confondere una Atlantis modificata "
 "con una Atlantis X23 può rivelarsi un errore mortale."
+
 #: scripts/shiptemplates/corvette.lua:83
 #, fuzzy
 msgctxt "ship"
 msgid "Starhammer II"
 msgstr "Starhammer II"
+
 #: scripts/shiptemplates/corvette.lua:84
 msgid ""
 "Contrary to its predecessor, the Starhammer II lives up to its name. By "
@@ -90,16 +99,19 @@ msgstr ""
 "difficile da posizionare, ma quando si trova nel posto giusto al momento "
 "giusto nemmeno gli scudi più potenti possono resistere a lungo all'assalto "
 "di una Starhammer."
+
 #: scripts/shiptemplates/corvette.lua:101
 #, fuzzy
 msgctxt "playerShip"
 msgid "Crucible"
 msgstr "Crucible"
+
 #: scripts/shiptemplates/corvette.lua:101
 #, fuzzy
 msgctxt "subclass"
 msgid "Popper"
 msgstr "Popper"
+
 #: scripts/shiptemplates/corvette.lua:102
 #, fuzzy
 msgid ""
@@ -110,16 +122,19 @@ msgstr ""
 "Numerosi tubi missilistici si estendono da questa nave. I cannoni sono stati "
 "ritenuti meno rilevanti anche se sono comunque presenti. Difese più forti di "
 "una fregata, ma non quanto quelle della Atlantis"
+
 #: scripts/shiptemplates/corvette.lua:157
 #, fuzzy
 msgctxt "playerShip"
 msgid "Maverick"
 msgstr "Maverick"
+
 #: scripts/shiptemplates/corvette.lua:157
 #, fuzzy
 msgctxt "subclass"
 msgid "Gunner"
 msgstr "Cannoniera"
+
 #: scripts/shiptemplates/corvette.lua:158
 msgid ""
 "A number of beams bristle from various points on this gunner. Missiles were "
@@ -129,15 +144,18 @@ msgstr ""
 "Numerosi cannoni a raggi pullulano da vari punti di questa cannoniera. I "
 "missili sono stati ritenuti meno rilevanti anche se sono comunque presenti. "
 "Difese più forti di una fregata, ma non quanto quelle della Atlantis"
+
 #: scripts/shiptemplates/corvette.lua:217
 #, fuzzy
 msgctxt "ship"
 msgid "Defense platform"
 msgstr "Piattaforma di difesa"
+
 #: scripts/shiptemplates/corvette.lua:217
 msgctxt "subclass"
 msgid "Support"
 msgstr "Supporto"
+
 #: scripts/shiptemplates/corvette.lua:218
 msgid ""
 "This stationary defense platform operates like a station, with docking and "
@@ -148,23 +166,29 @@ msgstr ""
 "funzioni di approdo e rifornimento, ma è armata con potenti armi a raggi e "
 "può ruotare lentamente. I sistemi più grandi spesso usano queste piattaforme "
 "per rifornire navi di pattuglia."
+
 #: scripts/shiptemplates/corvette.lua:223
 #: scripts/shiptemplates/corvette.lua:311
+#: scripts/shiptemplates/corvette.lua:369
 #, fuzzy
 msgctxt "class"
 msgid "Starfighter"
 msgstr "Caccia stellare"
+
 #: scripts/shiptemplates/corvette.lua:223
 #: scripts/shiptemplates/corvette.lua:310
+#: scripts/shiptemplates/corvette.lua:368
 #, fuzzy
 msgctxt "class"
 msgid "Frigate"
 msgstr "Fregata"
+
 #: scripts/shiptemplates/corvette.lua:235
 #, fuzzy, lua-format
 msgctxt "ship"
 msgid "Personnel Freighter %d"
 msgstr "Trasporto personale %d"
+
 #: scripts/shiptemplates/corvette.lua:235
 #: scripts/shiptemplates/corvette.lua:248
 #: scripts/shiptemplates/corvette.lua:261
@@ -175,6 +199,7 @@ msgstr "Trasporto personale %d"
 msgctxt "subclass"
 msgid "Freighter"
 msgstr "Trasporto"
+
 #: scripts/shiptemplates/corvette.lua:236
 msgid ""
 "These freighters are designed to transport armed troops, military support "
@@ -182,16 +207,19 @@ msgid ""
 msgstr ""
 "Queste navi da carico sono progettate per trasportare truppe armate, "
 "personale di supporto ed equipaggiamento da combattimento."
+
 #: scripts/shiptemplates/corvette.lua:244
 #, fuzzy, lua-format
 msgctxt "ship"
 msgid "Personnel Jump Freighter %d"
 msgstr "Trasporto personale a salto %d"
+
 #: scripts/shiptemplates/corvette.lua:248
 #, fuzzy, lua-format
 msgctxt "ship"
 msgid "Goods Freighter %d"
 msgstr "Trasporto merci %d"
+
 #: scripts/shiptemplates/corvette.lua:249
 msgid ""
 "Cargo freighters haul large loads of cargo across long distances on impulse "
@@ -201,16 +229,19 @@ msgstr ""
 "Le navi mercantili trasportano grandi carichi di merci per lunghe distanze "
 "con i motori a impulso. Le loro baie di carico includono climatizzazione e "
 "sistemi di stabilizzazione che mantengono il carico in buone condizioni."
+
 #: scripts/shiptemplates/corvette.lua:257
 #, fuzzy, lua-format
 msgctxt "ship"
 msgid "Goods Jump Freighter %d"
 msgstr "Trasporto merci a salto %d"
+
 #: scripts/shiptemplates/corvette.lua:261
 #, fuzzy, lua-format
 msgctxt "ship"
 msgid "Garbage Freighter %d"
 msgstr "Trasporto rifiuti %d"
+
 #: scripts/shiptemplates/corvette.lua:262
 msgid ""
 "These freighters are specially designed to haul garbage and waste. They are "
@@ -220,16 +251,19 @@ msgstr ""
 "Queste navi da carico sono progettate appositamente per trasportare "
 "immondizia e rifiuti. Sono equipaggiate con un compattatore di rifiuti e "
 "meno sistemi di stabilizzazione delle navi mercantili."
+
 #: scripts/shiptemplates/corvette.lua:270
 #, fuzzy, lua-format
 msgctxt "ship"
 msgid "Garbage Jump Freighter %d"
 msgstr "Trasporto rifiuti a salto %d"
+
 #: scripts/shiptemplates/corvette.lua:274
 #, fuzzy, lua-format
 msgctxt "ship"
 msgid "Equipment Freighter %d"
 msgstr "Trasporto equipaggiamento %d"
+
 #: scripts/shiptemplates/corvette.lua:275
 msgid ""
 "Equipment freighters have specialized environmental and stabilization "
@@ -238,16 +272,19 @@ msgstr ""
 "Le navi da trasporto equipaggiamento hanno sistemi ambientali e di "
 "stabilizzazione specializzati per trasportare in sicurezza macchinari "
 "delicati e strumenti complessi."
+
 #: scripts/shiptemplates/corvette.lua:283
 #, fuzzy, lua-format
 msgctxt "ship"
 msgid "Equipment Jump Freighter %d"
 msgstr "Trasporto equipaggiamento a salto %d"
+
 #: scripts/shiptemplates/corvette.lua:287
 #, fuzzy, lua-format
 msgctxt "ship"
 msgid "Fuel Freighter %d"
 msgstr "Trasporto carburante %d"
+
 #: scripts/shiptemplates/corvette.lua:288
 msgid ""
 "Fuel freighters have massive tanks for hauling fuel, and delicate internal "
@@ -257,16 +294,19 @@ msgstr ""
 "Le navi da trasporto carburante hanno enormi serbatoi per il trasporto di "
 "carburante e delicati sensori interni che rilevano eventuali modifiche allo "
 "stato potenzialmente esplosivo del loro carico."
+
 #: scripts/shiptemplates/corvette.lua:296
 #, fuzzy, lua-format
 msgctxt "ship"
 msgid "Fuel Jump Freighter %d"
 msgstr "Trasporto carburante a salto %d"
+
 #: scripts/shiptemplates/corvette.lua:301
 #, fuzzy
 msgctxt "ship"
 msgid "Jump Carrier"
 msgstr "Vettore di salto"
+
 #: scripts/shiptemplates/corvette.lua:302
 msgid ""
 "The Jump Carrier is a specialized Freighter. It does not carry any cargo, as "
@@ -281,284 +321,40 @@ msgstr ""
 "È progettata per trasportare altre navi nello spazio profondo. Per questo "
 "motivo ha parametri di approdo speciali che consentono alle altre navi di "
 "agganciarsi ad essa."
+
 #: scripts/shiptemplates/corvette.lua:315
 #, fuzzy
 msgctxt "playerShip"
 msgid "Benedict"
 msgstr "Benedict"
+
 #: scripts/shiptemplates/corvette.lua:315
 #, fuzzy
 msgctxt "subclass"
 msgid "Freighter/Carrier"
 msgstr "Trasporto/Vettore"
+
 #: scripts/shiptemplates/corvette.lua:316
 msgid "Benedict is an improved version of the Jump Carrier"
 msgstr "La Benedict è una versione migliorata del Vettore di salto"
+
 #: scripts/shiptemplates/corvette.lua:349
 #, fuzzy
 msgctxt "playerShip"
 msgid "Kiriya"
 msgstr "Kiriya"
+
 #: scripts/shiptemplates/corvette.lua:350
 msgid "Kiriya is an improved warp drive version of the Jump Carrier"
 msgstr "La Kiriya è una versione con motore a curvatura del Vettore di salto"
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
+
+#: scripts/shiptemplates/corvette.lua:360
+msgctxt "playerShip"
+msgid "Saipan"
+msgstr ""
+
+#: scripts/shiptemplates/corvette.lua:360
+#, fuzzy
+msgctxt "subclass"
+msgid "Carrier"
+msgstr "Vettore di salto"

@@ -2876,7 +2876,7 @@ msgstr ", "
 #: scripts/scenario_57_shoreline.lua:9211
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr "Rien du tout."
+msgstr "rien du tout."
 
 #: scripts/scenario_57_shoreline.lua:8402
 #: scripts/scenario_57_shoreline.lua:8719

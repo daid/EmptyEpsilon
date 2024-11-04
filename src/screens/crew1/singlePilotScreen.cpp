@@ -1,5 +1,6 @@
 #include "main.h"
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "singlePilotScreen.h"
 #include "preferenceManager.h"
@@ -19,6 +20,7 @@
 #include "screenComponents/shieldsEnableButton.h"
 #include "screenComponents/beamFrequencySelector.h"
 #include "screenComponents/beamTargetSelector.h"
+#include "screenComponents/powerDamageIndicator.h"
 
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
@@ -28,6 +30,7 @@
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_rotationdial.h"
 #include "gui/gui2_image.h"
+#include "gui/gui2_label.h"
 
 SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SINGLEPILOT_SCREEN", colorConfig.background)
@@ -47,19 +50,22 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
+            auto last_target = targets.get();
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
-            if (my_spaceship && targets.get())
+            if (my_spaceship && targets.get() && (targets.get() != last_target))
                 my_spaceship->commandSetTarget(targets.get());
             else if (my_spaceship)
                 my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
         },
-        [](glm::vec2 position) {
-            if (my_spaceship)
+        [this](glm::vec2 position) {
+            targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
+            if (my_spaceship && !targets.get())
+                drag_rotate=true;
+            if (drag_rotate)
                 my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
         },
-        [](glm::vec2 position) {
-            if (my_spaceship)
-                my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
+        [this](glm::vec2 position) {
+           drag_rotate=false;
         }
     );
     radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock","0")=="1");
@@ -89,6 +95,17 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
     tube_controls->setPosition(20, -20, sp::Alignment::BottomLeft);
     radar->enableTargetProjections(tube_controls);
+
+    // Beam controls beneath the radar.
+    if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
+    {
+        GuiElement* beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
+        beam_info_box->setPosition(0, -20, sp::Alignment::BottomCenter)->setSize(500, 50);
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams"), 30))->addBackground()->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(80, 50);
+        (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(80, 0, sp::Alignment::BottomLeft)->setSize(132, 50);
+        (new GuiPowerDamageIndicator(beam_info_box, "", SYS_BeamWeapons, sp::Alignment::CenterLeft))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(212, 50);
+        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, sp::Alignment::BottomRight)->setSize(288, 50);
+    }
 
     // Engine layout in top left corner of left panel.
     auto engine_layout = new GuiElement(this, "ENGINE_LAYOUT");

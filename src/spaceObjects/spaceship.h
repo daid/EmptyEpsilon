@@ -368,7 +368,7 @@ public:
     float getSystemPowerFactor(ESystem system) { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].power_factor; }
     void setSystemPowerFactor(ESystem system, float factor) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].power_factor = factor; }
     float getSystemCoolant(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].coolant_level; }
-    void setSystemCoolant(ESystem system, float coolant) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_level = std::min(1.0f, std::max(0.0f, coolant)); }
+    void setSystemCoolant(ESystem system, float coolant) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_level = std::min(10.0f, std::max(0.0f, coolant)); }
     Speeds getImpulseMaxSpeed() {return {impulse_max_speed, impulse_max_reverse_speed};}
     void setImpulseMaxSpeed(float forward_speed, std::optional<float> reverse_speed) 
     { 

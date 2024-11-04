@@ -445,13 +445,13 @@ function buildStations()
 	for _, enemy in ipairs(hf) do
 		enemy:orderDefendTarget(pStation)
 	end
-	stationFaction = "Ktlitan"
+	stationFaction = "Ktlitans"
 	psx = -60000
 	si = math.random(1,#placeEnemyStation)
 	pStation = placeEnemyStation[si]()
 	table.remove(placeEnemyStation,si)
 	table.insert(enemyStationList,pStation)
-	hf = spawnEnemies(psx,psy,10,"Ktlitan")
+	hf = spawnEnemies(psx,psy,10,"Ktlitans")
 	for _, enemy in ipairs(hf) do
 		enemy:orderDefendTarget(pStation)
 	end
@@ -3314,7 +3314,7 @@ function friendlyComms(comms_data)
 		setCommsMessage(msg);
 		addCommsReply(_("Back"), commsShip)
 	end)
-	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
+	for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));

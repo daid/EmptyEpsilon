@@ -2035,7 +2035,7 @@ function setTemplateIn()
 		table.insert(sorted_templates,name)
 	end
 	table.sort(sorted_templates)
-	for _, name in ipairs(sorted_templates) do
+	for idx, name in ipairs(sorted_templates) do
 		local button_label = name
 		if template_in == name then
 			button_label = button_label .. _("buttonGM", "*")
@@ -2246,7 +2246,7 @@ function showControlCodes(faction_filter)
 	end
 	table.sort(sorted_names)
 	local output = ""
-	for _, name in ipairs(sorted_names) do
+	for idx, name in ipairs(sorted_names) do
 		local faction = ""
 		if code_list[name].faction == "Kraylor" then
 			faction = " (Kraylor)"
@@ -2859,7 +2859,7 @@ function generateTerrain()
 			psx, psy = station_primary_human:getPosition()
 			local human_fleet = spawnRandomArmed(psx + fcx, psy + fcy, fleet_strength, fleet_index, nil, angle)
 			fleet_index = fleet_index + 1
-			for _, ship in ipairs(human_fleet) do
+			for idx, ship in ipairs(human_fleet) do
 				ship.score_value = ship_template[ship:getTypeName()].strength
 				ship:setScannedByFaction("Human Navy",true)
 				table.insert(human_ref_list,ship)
@@ -2869,7 +2869,7 @@ function generateTerrain()
 			fleet_index = fleet_index + 1
 			local fleet_prefix = generateCallSignPrefix()
 			angle = (kraylor_angle + n * fleet_angle_increment) % 360
-			for _, source_ship in ipairs(human_fleet) do
+			for idx, source_ship in ipairs(human_fleet) do
 				local sx, sy = source_ship:getPosition()
 				local obj_ref_angle = angleFromVectorNorth(sx, sy, terrain_center_x, terrain_center_y)
 				local obj_ref_distance = distance(terrain_center_x, terrain_center_y, sx, sy)
@@ -2893,7 +2893,7 @@ function generateTerrain()
 				fleet_index = fleet_index + 1
 				local fleet_prefix = generateCallSignPrefix()
 				angle = (exuari_angle + n * fleet_angle_increment) % 360
-				for _, source_ship in ipairs(human_fleet) do
+				for idx, source_ship in ipairs(human_fleet) do
 					local sx, sy = source_ship:getPosition()
 					local obj_ref_angle = angleFromVectorNorth(sx, sy, terrain_center_x, terrain_center_y)
 					local obj_ref_distance = distance(terrain_center_x, terrain_center_y, sx, sy)
@@ -2918,7 +2918,7 @@ function generateTerrain()
 				fleet_index = fleet_index + 1
 				local fleet_prefix = generateCallSignPrefix()
 				angle = (ktlitan_angle + n * fleet_angle_increment) % 360
-				for _, source_ship in ipairs(human_fleet) do
+				for idx, source_ship in ipairs(human_fleet) do
 					local sx, sy = source_ship:getPosition()
 					local obj_ref_angle = angleFromVectorNorth(sx, sy, terrain_center_x, terrain_center_y)
 					local obj_ref_distance = distance(terrain_center_x, terrain_center_y, sx, sy)
@@ -3300,7 +3300,7 @@ function generateTerrain()
 						tm:destroy()
 					end
 				end
-				for _, tm in ipairs(mine_ref_list) do
+				for idx, tm in ipairs(mine_ref_list) do
 					table.insert(place_ref_list,tm)
 				end
 			elseif mine_field_type == "arc" then
@@ -3354,7 +3354,7 @@ function generateTerrain()
 						tm:destroy()
 					end
 				end
-				for _, tm in ipairs(mine_ref_list) do
+				for idx, tm in ipairs(mine_ref_list) do
 					table.insert(place_ref_list,tm)
 				end
 			end
@@ -3407,7 +3407,7 @@ function generateTerrain()
 					ta:destroy()
 				end
 			end
-			for _, ta in ipairs(asteroid_ref_list) do
+			for idx, ta in ipairs(asteroid_ref_list) do
 				table.insert(place_ref_list,ta)
 			end
 		elseif asteroid_field_type == "line" then
@@ -3440,7 +3440,7 @@ function generateTerrain()
 					ta:destroy()
 				end
 			end
-			for _, ta in ipairs(asteroid_ref_list) do
+			for idx, ta in ipairs(asteroid_ref_list) do
 				table.insert(place_ref_list,ta)
 			end
 		elseif asteroid_field_type == "arc" then
@@ -3477,7 +3477,7 @@ function generateTerrain()
 					ta:destroy()
 				end
 			end
-			for _, ta in ipairs(asteroid_ref_list) do
+			for idx, ta in ipairs(asteroid_ref_list) do
 				table.insert(place_ref_list,ta)
 			end
 		end
@@ -3627,7 +3627,7 @@ function getTemplatePool(max_strength)
 	local template_pool = {}
 --	print("fleet composition:",fleetComposition,"fleet group sub fleet composition:",fleet_group[fleetComposition])
 	if pool_selectivity == "less/heavy" then
-		for _, current_ship_template in ipairs(ship_template_by_strength) do
+		for idx, current_ship_template in ipairs(ship_template_by_strength) do
 --			print("currrent ship template:",current_ship_template,"strength:",ship_template[current_ship_template].strength,"max strength:",max_strength)
 			if ship_template[current_ship_template].strength <= max_strength then
 				if fleetComposition == "Non-DB" then
@@ -3685,7 +3685,7 @@ function getTemplatePool(max_strength)
 		end
 	end
 	--print("returning template pool containing these templates:")
-	--for _, template in ipairs(template_pool) do
+	--for idx, template in ipairs(template_pool) do
 	--	print(template)
 	--end
 	return template_pool
@@ -4772,7 +4772,7 @@ function addShipToDatabase(base_db,modified_db,ship,description,tube_directions,
 			end
 		end
 		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
-		for _, missile_type in ipairs(missile_types) do
+		for idx, missile_type in ipairs(missile_types) do
 			local max_storage = ship:getWeaponStorageMax(missile_type)
 			if max_storage > 0 then
 				modified_db:setKeyValue(string.format(_("scienceDB", "Storage %s"),missile_type),string.format("%i",max_storage))
@@ -5677,7 +5677,7 @@ function placeCustomPlayerShips()
 		end
 	end
 	local angle = human_angle
-	for _, template in ipairs(custom_player_ship_sets[custom_player_ship_type][ships_per_team]) do
+	for idx, template in ipairs(custom_player_ship_sets[custom_player_ship_type][ships_per_team]) do
 --		print("Human ships per team template:",template)
 		local p = nil
 		if player_ship_stats[template].stock then
@@ -5837,7 +5837,7 @@ function placeDefaultPlayerShips()
 		end
 	end
 	angle = faction_angle["Human Navy"]
-	for _, template in ipairs(default_player_ship_sets[ships_per_team]) do
+	for idx, template in ipairs(default_player_ship_sets[ships_per_team]) do
 		local p = PlayerSpaceship():setTemplate(template):setFaction("Human Navy")
 		setPlayer(p)
 		startPlayerPosition(p,angle)
@@ -6310,7 +6310,7 @@ function handleDockedState()
 	boostSensorsWhileDocked(commsStation)
 	overchargeJump(commsStation)
 	activateDefenseFleet(commsStation)
-	for _, scientist in ipairs(scientist_list[comms_target:getFaction()]) do
+	for idx, scientist in ipairs(scientist_list[comms_target:getFaction()]) do
 		if scientist.location == comms_target then
 			addCommsReply(string.format("Speak with scientist %s",scientist.name),function()
 				setCommsMessage(string.format("Greetings, %s\nI've got great ideas for the war effort.\nWhat can I do for you?",comms_source:getCallSign()))
@@ -6417,7 +6417,7 @@ function handleDockedState()
 						if comms_target == faction_primary_station[comms_target:getFaction()].station then
 							local colleage_count = 0
 							local conferee = nil
-							for _, colleague in ipairs(scientist_list[comms_target:getFaction()]) do
+							for idx, colleague in ipairs(scientist_list[comms_target:getFaction()]) do
 								if colleague.location == comms_target and colleague ~= scientist then
 									colleage_count = colleage_count + 1
 									conferee = colleague
@@ -6582,7 +6582,7 @@ function handleUndockedState()
 	requestSupplyDrop(commsStation)
 	requestJumpSupplyDrop(commsStation)
 	requestReinforcements(commsStation)
-	for _, scientist in ipairs(scientist_list[comms_target:getFaction()]) do
+	for idx, scientist in ipairs(scientist_list[comms_target:getFaction()]) do
 		if scientist.location == comms_target then
 			addCommsReply(string.format("Speak with scientist %s",scientist.name),function()
 				setCommsMessage(string.format("Greetings, %s\nI've got great ideas for the war effort.\nWhat can I do for you?",comms_source:getCallSign()))
@@ -7384,7 +7384,7 @@ end
 function restockOrdnance(return_function)
 	local missilePresence = 0
 	local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
-	for _, missile_type in ipairs(missile_types) do
+	for idx, missile_type in ipairs(missile_types) do
 		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
@@ -8339,7 +8339,7 @@ function shipAssistPlayer(comms_data,return_function)
 	end
 end
 function shipDockNearby(return_function)
-	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
+	for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		local player_carrier = false
 		local template_name = ""
 		if obj.typeName == "PlayerSpaceship" then
@@ -8368,7 +8368,7 @@ function fleetCommunication(return_function)
 	if comms_target.fleetIndex ~= nil then
 		addCommsReply(string.format(_("shipAssist-comms", "Direct fleet %i"),comms_target.fleetIndex), function()
 			local fleet_state = string.format(_("shipAssist-comms", "Fleet %i consists of:\n"),comms_target.fleetIndex)
-			for _, ship in ipairs(npc_fleet[comms_target:getFaction()]) do
+			for idx, ship in ipairs(npc_fleet[comms_target:getFaction()]) do
 				if ship ~= nil and ship:isValid() then
 					if ship.fleetIndex == comms_target.fleetIndex then
 						fleet_state = fleet_state .. ship:getCallSign() .. " "
@@ -8378,7 +8378,7 @@ function fleetCommunication(return_function)
 			setCommsMessage(string.format(_("shipAssist-comms", "%s\n\nWhat command should be given to fleet %i?"),fleet_state,comms_target.fleetIndex))
 			addCommsReply(_("shipAssist-comms", "Report hull and shield status"), function()
 				msg = string.format(_("shipAssist-comms", "Fleet %i status:"),comms_target.fleetIndex)
-				for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
+				for idx, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 					if fleetShip.fleetIndex == comms_target.fleetIndex then
 						if fleetShip ~= nil and fleetShip:isValid() then
 							msg = msg .. string.format(_("shipAssist-comms", "\n %s:"), fleetShip:getCallSign())
@@ -8404,13 +8404,13 @@ function fleetCommunication(return_function)
 			end)
 			addCommsReply(_("shipAssist-comms", "Report missile status"), function()
 				msg = string.format(_("shipAssist-comms", "Fleet %i missile status:"),comms_target.fleetIndex)
-				for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
+				for idx, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 					if fleetShip.fleetIndex == comms_target.fleetIndex then
 						if fleetShip ~= nil and fleetShip:isValid() then
 							msg = msg .. string.format(_("shipAssist-comms", "\n %s:"), fleetShip:getCallSign())
 							local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 							missileMsg = ""
-							for _, missile_type in ipairs(missile_types) do
+							for idx2, missile_type in ipairs(missile_types) do
 								if fleetShip:getWeaponStorageMax(missile_type) > 0 then
 									missileMsg = missileMsg .. string.format(_("shipAssist-comms", "\n      %s: %d/%d"), missile_type, math.floor(fleetShip:getWeaponStorage(missile_type)), math.floor(fleetShip:getWeaponStorageMax(missile_type)))
 								end
@@ -8425,7 +8425,7 @@ function fleetCommunication(return_function)
 				addCommsReply(_("Back"), return_function)
 			end)
 			addCommsReply(_("shipAssist-comms", "Assist me"), function()
-				for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
+				for idx, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 					if fleetShip.fleetIndex == comms_target.fleetIndex then
 						if fleetShip ~= nil and fleetShip:isValid() then
 							fleetShip:orderDefendTarget(comms_source)
@@ -8443,7 +8443,7 @@ function fleetCommunication(return_function)
 					setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 					for n=1,comms_source:getWaypointCount() do
 						addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
-							for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
+							for idx, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 								if fleetShip.fleetIndex == comms_target.fleetIndex then
 									if fleetShip ~= nil and fleetShip:isValid() then
 										fleetShip:orderDefendLocation(comms_source:getWaypoint(n))
@@ -8464,7 +8464,7 @@ function fleetCommunication(return_function)
 					setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 					for n=1,comms_source:getWaypointCount() do
 						addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),n), function()
-							for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
+							for idx, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 								if fleetShip.fleetIndex == comms_target.fleetIndex then
 									if fleetShip ~= nil and fleetShip:isValid() then
 										fleetShip:orderFlyTowards(comms_source:getWaypoint(n))
@@ -8485,7 +8485,7 @@ function fleetCommunication(return_function)
 					setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 					for n=1,comms_source:getWaypointCount() do
 						addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),n), function()
-							for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
+							for idx, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 								if fleetShip.fleetIndex == comms_target.fleetIndex then
 									if fleetShip ~= nil and fleetShip:isValid() then
 										fleetShip:orderFlyTowardsBlind(comms_source:getWaypoint(n))
@@ -8499,7 +8499,7 @@ function fleetCommunication(return_function)
 				end
 			end)
 			addCommsReply(_("shipAssist-comms", "Go offensive, attack all enemy targets"), function()
-				for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
+				for idx, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 					if fleetShip.fleetIndex == comms_target.fleetIndex then
 						if fleetShip ~= nil and fleetShip:isValid() then
 							fleetShip:orderRoaming()
@@ -8510,7 +8510,7 @@ function fleetCommunication(return_function)
 				addCommsReply(_("Back"), return_function)
 			end)
 			addCommsReply(_("shipAssist-comms", "Stop and defend your current position"), function()
-				for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
+				for idx, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 					if fleetShip.fleetIndex == comms_target.fleetIndex then
 						fleetShip:orderStandGround()
 					end
@@ -8519,7 +8519,7 @@ function fleetCommunication(return_function)
 				addCommsReply(_("Back"), return_function)
 			end)
 			addCommsReply(_("shipAssist-comms", "Stop and do nothing"), function()
-				for _, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
+				for idx, fleetShip in ipairs(npc_fleet[comms_target:getFaction()]) do
 					if fleetShip.fleetIndex == comms_target.fleetIndex then
 						fleetShip:orderIdle()
 					end
@@ -8814,7 +8814,7 @@ function gatherStats()
 	end
 	if npc_fleet ~= nil then
 		for faction, list in pairs(npc_fleet) do
-			for _, ship in ipairs(list) do
+			for idx, ship in ipairs(list) do
 				if ship:isValid() then
 					stat_list[f2s[faction]].npc_score_total = stat_list[f2s[faction]].npc_score_total + ship.score_value
 					stat_list[f2s[faction]].npc[ship:getCallSign()] = {template_type = ship:getTypeName(), is_alive = true, score_value = ship.score_value}
@@ -8824,7 +8824,7 @@ function gatherStats()
 	end
 	if scientist_list ~= nil then
 		for faction, list in pairs(scientist_list) do
-			for _, scientist in ipairs(list) do
+			for idx, scientist in ipairs(list) do
 				if scientist.location:isValid() then
 					stat_list[f2s[faction]].npc_score_total = stat_list[f2s[faction]].npc_score_total + scientist.score_value
 					stat_list[f2s[faction]].npc[scientist.name] = {topic = scientist.topic, is_alive = true, score_value = scientist.score_value, location_name = scientist.location_name}	
@@ -8833,7 +8833,7 @@ function gatherStats()
 		end
 	end
 	for faction, list in pairs(station_list) do
-		for _, station in ipairs(list) do
+		for idx, station in ipairs(list) do
 			if station:isValid() then
 				stat_list[f2s[faction]].station_score_total = stat_list[f2s[faction]].station_score_total + station.score_value
 				stat_list[f2s[faction]].station[station:getCallSign()] = {template_type = station:getTypeName(), is_alive = true, score_value = station.score_value}
@@ -9030,7 +9030,7 @@ function update(delta)
 						else
 							p:addToShipLog("In addition to the stations and fleet assets, Command has deemed this scientist as critical to the war effort. Loss of this scientist will count against you like the loss of stations and fleet assets will. Scientist:","Magenta")
 						end
-						for _, scientist in ipairs(scientist_list[p:getFaction()]) do
+						for idx, scientist in ipairs(scientist_list[p:getFaction()]) do
 							p:addToShipLog(string.format("Value: %i, Name: %s, Specialization: %s, Location: %s",scientist.score_value,scientist.name,scientist.topic,scientist.location_name),"Magenta")
 						end
 						if #scientist_list[p:getFaction()] > 1 then
@@ -9053,7 +9053,7 @@ function update(delta)
 			local current_station = stn_list[station_index]
 			if current_station ~= nil and current_station:isValid() then
 				if current_station.proximity_warning == nil then
-					for _, obj in ipairs(current_station:getObjectsInRange(station_sensor_range)) do
+					for idx, obj in ipairs(current_station:getObjectsInRange(station_sensor_range)) do
 						if obj ~= nil and obj:isValid() then
 							if obj:isEnemy(current_station) then
 								local obj_type_name = obj.typeName

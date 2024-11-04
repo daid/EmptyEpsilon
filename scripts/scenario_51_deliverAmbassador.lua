@@ -18,13 +18,15 @@ require("spawn_ships_scenario_utility.lua")
 require("control_code_scenario_utility.lua")
 
 function init()
-	scenario_version = "5.0.2"
-	ee_version = "2023.06.17"
+	scenario_version = "5.0.3"
+	ee_version = "2024.08.09"
 	print(string.format("    ----    Scenario: Deliver Ambassador Gremus    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
-	print(_VERSION)
+	if _VERSION ~= nil then
+		print(_VERSION)
+	end
 	playerCallSign = "Carolina"
 	player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Flavia P.Falcon")
-	player:setPosition(22400, 18200):setCallSign(playerCallSign)
+	player:setPosition(22400, 18200):setCallSign(playerCallSign):setHeading(90)
 	player.location_help = {}
 	player.report_help = {}
 	-- Create various stations of various size, purpose and faction.
@@ -129,8 +131,8 @@ function init()
 end
 function mainGMButtons()
 	clearGMFunctions()
-	addGMFunction("+Spawn Ship(s)",spawnGMShips)
-	addGMFunction("+Control Codes",manageControlCodes)
+	addGMFunction(_("buttonGM","+Spawn Ship(s)"),spawnGMShips)
+	addGMFunction(_("buttonGM","+Control Codes"),manageControlCodes)
 end
 
 --	Utilities
@@ -329,7 +331,7 @@ function getAmbassador(delta)	--1st Gremus mission, create planet, and set fomen
 	if player.play_msg_michael_button == nil then
 		player.play_msg_michael_button = "play_msg_michael_button"
 		player:addCustomButton("Relay",player.play_msg_michael_button,_("audio-buttonRelay","|> CMDMICHL012"),function()
-			playSoundFile("sa_51_Michael.ogg")
+			playSoundFile("audio/scenario/51/sa_51_Michael.ogg")
 			player:removeCustom(player.play_msg_michael_button)
 			player.play_msg_michael_button = nil
 		end)
@@ -357,7 +359,7 @@ function ambassadorAboard(delta)	--Take Gremus to Ningling msg, create Ningling,
 		if player.play_msg_gremus_2_button == nil then
 			player.play_msg_gremus_2_button = "play_msg_gremus_2_button"
 			player:addCustomButton("Relay",player.play_msg_gremus_2_button,_("audio-buttonRelay","|> AMBGREMUS004"),function()
-				playSoundFile("sa_51_Gremus2.ogg")
+				playSoundFile("audio/scenario/51/sa_51_Gremus2.ogg")
 				player:removeCustom(player.play_msg_gremus_2_button)
 				playMsgGremus2Button = nil
 			end)
@@ -386,7 +388,7 @@ function gotoNingling(delta)	--Wait for Gremus msg, set meet time
 		if player.play_msg_protocol_button == nil then
 			player.play_msg_protocol_button = "play_msg_protocol_button"
 			player:addCustomButton("Relay",player.play_msg_protocol_button,_("audio-buttonRelay","|> NINGPCLO002"),function()
-				playSoundFile("sa_51_Protocol.ogg")
+				playSoundFile("audio/scenario/51/sa_51_Protocol.ogg")
 				player:removeCustom(player.play_msg_protocol_button)
 				player.play_msg_protocol_button = nil
 			end)
@@ -408,7 +410,7 @@ function waitForAmbassador(delta)	--When meeting completes, request dock for nex
 		if player.play_msg_gremus_3_button == nil then
 			player.play_msg_gremus_3_button = "play_msg_gremus_3_button"
 			player:addCustomButton("Relay",player.play_msg_gremus_3_button,_("audio-buttonRelay","|> AMBGREMUS007"),function()
-				playSoundFile("sa_51_Gremus3.ogg")
+				playSoundFile("audio/scenario/51/sa_51_Gremus3.ogg")
 				player:removeCustom(player.play_msg_gremus_3_button)
 				player.play_msg_gremus_3_button = nil
 			end)
@@ -433,7 +435,7 @@ function getFromNingling(delta)	--Goltin 7 goal, create planet, start sub-plots
 		if player.play_msg_gremus_4_button == nil then
 			player.play_msg_gremus_4_button = "play_msg_gremus_4_button"
 			player:addCustomButton("Relay",player.play_msg_gremus_4_button,_("audio-buttonRelay","|> AMBGREMUS021"),function()
-				playSoundFile("sa_51_Gremus4.ogg")
+				playSoundFile("audio/scenario/51/sa_51_Gremus4.ogg")
 				player:removeCustom(player.play_msg_gremus_4_button)
 			end)
 		end
@@ -455,7 +457,7 @@ function travelGoltin(delta)	--Go to Goltin, win if research complete or identif
 		if distance(player,goltin) < 3300 then
 			globalMessage(_("msgMainscreen",[[Goltin 7 welcomes ambassador Gremus]]))
 			goltincomms:sendCommsMessage(player, string.format(_("audio-incCall", "(Ambassador Gremus) Thanks for transporting me, %s. Tensions are high, but I think negotiations will succeed.\nIn the meantime, be careful of hostile ships."), playerCallSign))
-			playSoundFile("sa_51_Gremus5.ogg")
+			playSoundFile("audio/scenario/51/sa_51_Gremus5.ogg")
 			last_message_time = getScenarioTime() + 20
 			plot1 = finalMessage
 		end
@@ -466,7 +468,7 @@ function travelGoltin(delta)	--Go to Goltin, win if research complete or identif
 			if player.play_msg_gremus_6_button == nil then
 				player.play_msg_gremus_6_button = "play_msg_gremus_6_button"
 				player:addCustomButton("Relay",player.play_msg_gremus_6_button,_("audio-buttonRelay","|> AMBGREMUS021"),function()
-					playSoundFile("sa_51_Gremus6.ogg")
+					playSoundFile("audio/scenario/51/sa_51_Gremus6.ogg")
 					player:removeCustom(player.play_msg_gremus_6_button)
 					player.play_msg_gremus_6_button = nil
 				end)
@@ -487,7 +489,7 @@ function goltinAndResearch(delta)	--Complete mission when returning with researc
 		if distance(player,goltin) < 3300 then
 			globalMessage(_("msgMainscreen",[[Goltin 7 welcomes ambassador Gremus]]))
 			goltincomms:sendCommsMessage(player, string.format(_("audio-incCall", "(Ambassador Gremus) Thanks for researching the artifacts, %s. Tensions are high, but I think negotiations will succeed. In the meantime, be careful of hostile ships."), playerCallSign))
-			playSoundFile("sa_51_Gremus7.ogg")
+			playSoundFile("audio/scenario/51/sa_51_Gremus7.ogg")
 			last_message_time = getScenarioTime() + 20
 			plot1 = finalMessage			
 		end
@@ -508,7 +510,7 @@ function revolutionFomenting(delta)	--At foment time, send fomenting msg (limite
 		if player.play_msg_gremus_1_button == nil then
 			player.play_msg_gremus_1_button = "play_msg_gremus_1_button"
 			player:addCustomButton("Relay",player.play_msg_gremus_1_button,_("audio-buttonRelay","|> AMBGREMUS001"),function()
-				playSoundFile("sa_51_Gremus1.ogg")
+				playSoundFile("audio/scenario/51/sa_51_Gremus1.ogg")
 				player:removeCustom(player.play_msg_gremus_1_button)
 				player.play_msg_gremus_1_button = nil
 			end)
@@ -526,7 +528,7 @@ function revolutionOccurs(delta)
 			if player.play_msg_sentry_1_button == nil then
 				player.play_msg_sentry_1_button =  "play_msg_sentry_1_button"
 				player:addCustomButton("Relay",player.play_msg_sentry_1_button,_("audio-buttonRelay","|> GREMUSGRD003"),function()
-					playSoundFile("sa_51_Sentry1.ogg")
+					playSoundFile("audio/scenario/51/sa_51_Sentry1.ogg")
 					player:removeCustom(player.play_msg_sentry_1_button)
 					player.play_msg_sentry_1_button = nil
 				end)
@@ -535,7 +537,7 @@ function revolutionOccurs(delta)
 		else
 			globalMessage(_("audio-msgMainscreen",[[Ambassador lost to hostile mob. The Kraylors are victorious]]))
 			bpcommnex:sendCommsMessage(player, _("audio-incCall",[[(Compound Sentry) I'm sad to report the loss of ambassador Gremus to a hostile mob.]]))
-			playSoundFile("sa_51_Sentry2.ogg")
+			playSoundFile("audio/scenario/51/sa_51_Sentry2.ogg")
 			defeat_message_time = getScenarioTime() + 15
 			plot2 = defeatMessage
 		end
@@ -736,7 +738,7 @@ function artifactResearch(delta)	--Expand artifact sub-plot after player leaves 
 		if player.play_msg_fordina_button == nil then
 			player.play_msg_fordina_button = "play_msg_fordina_button"
 			player:addCustomButton("Relay",player.play_msg_fordina_button,_("audio-buttonRelay","|> LSNFRDNA009"),function()
-				playSoundFile("sa_51_Fordina.ogg")
+				playSoundFile("audio/scenario/51/sa_51_Fordina.ogg")
 				player:removeCustom(player.play_msg_fordina_button)
 				player.play_msg_fordina_button = nil
 			end)

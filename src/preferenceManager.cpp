@@ -5,14 +5,23 @@
 #endif
 
 std::unordered_map<string, string> PreferencesManager::preference;
+std::unordered_map<string, string> PreferencesManager::temporary;
 
 void PreferencesManager::set(string key, string value)
 {
     preference[key] = value;
+    temporary.erase(key);
+}
+
+void PreferencesManager::setTemporary(string key, string value)
+{
+    temporary[key] = value;
 }
 
 string PreferencesManager::get(string key, string default_value)
 {
+    if (temporary.find(key) != temporary.end())
+        return temporary[key];
     if (preference.find(key) == preference.end())
         preference[key] = default_value;
     return preference[key];

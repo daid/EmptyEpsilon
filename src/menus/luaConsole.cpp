@@ -41,7 +41,22 @@ LuaConsole::LuaConsole()
     entry->enterCallback([this](string s) {
         P<ScriptObject> script = engine->getObject("scenario");
         if (script)
+        {
+            LuaConsole::addLog("> " + s);
             script->runCode(s);
+            history.append(s);
+            entry->setText("");
+        }
+    });
+    entry->upCallback([this](string s) {
+        string text = history.movePrevious(s);
+        entry->setText(text);
+        entry->setCursorPosition(text.size());
+    });
+    entry->downCallback([this](string s) {
+        string text = history.moveNext(s);
+        entry->setText(text);
+        entry->setCursorPosition(text.size());
     });
 
     top->hide();
@@ -75,6 +90,10 @@ void LuaConsole::update(float delta)
                 addLog(last_error);
         }
     }
+    if (!ScriptSimpleCallback::last_error.empty()) {
+        addLog(ScriptSimpleCallback::last_error);
+        ScriptSimpleCallback::last_error.clear();
+    }
 
     if (open_console_key.getDown()) {
         if (is_open) {
@@ -97,4 +116,43 @@ void LuaConsole::update(float delta)
             top->layout.size.y = std::min(450.0f, 15.0f + message_show_timers.size() * 15.0f);
         }
     }
+}
+
+string ConsoleHistory::movePrevious(string s) {
+    if (position == 0)
+        // beginning of history, nothing to go up to. keep the line the same.
+        return s;
+
+    if (position == entries.size())
+        // previous from a line not in history; set it pending so we can go back down to it later
+        pending = s;
+    else
+        entries[position] = s;
+
+    return entries[--position];
+}
+
+string ConsoleHistory::moveNext(string s) {
+    if (position == entries.size())
+        return s;
+
+    if (position + 1 == entries.size())
+    {
+        // end of history, nothing to do down to.
+        // if we had a pending entry, put it back
+        position++;
+        string wasPending = pending;
+        pending = "";
+        return wasPending;
+    }
+
+    entries[position] = s;
+    return entries[++position];
+}
+
+void ConsoleHistory::append(string s)
+{
+    entries.push_back(s);
+    position = entries.size();
+    pending = "";
 }
