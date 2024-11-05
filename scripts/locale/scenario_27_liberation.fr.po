@@ -320,14 +320,6 @@ msgctxt "Cloak"
 msgid "Device is cloaked (but it's not perfect)"
 msgstr "Le dispositif est complètement dissimulé (mais ce n'est pas parfait)."
 
-#: scripts/scenario_27_liberation.lua:137
-#, lua-format
-msgctxt "msgGM"
-msgid ""
-"Player ship %s's template type (%s) could not be found in table "
-"player_ship_stats"
-msgstr ""
-
 #: scripts/scenario_27_liberation.lua:583
 msgctxt "trade-comms"
 msgid "food"
@@ -586,11 +578,6 @@ msgstr "Objet étrange possédant une technologie de pointe"
 msgctxt "scienceDescription-artifact"
 msgid "Nova Fireworks - product of the Exuari Exclamatory Enterprise"
 msgstr "Feu d'artifice Supernova - Produit de l'Entreprise Exclamative Éxuarie"
-
-#: scripts/scenario_27_liberation.lua:1644
-msgctxt "msgGM"
-msgid "Empty Template pool: fix excludes or other criteria"
-msgstr ""
 
 #: scripts/scenario_27_liberation.lua:1774
 #, lua-format
@@ -1418,7 +1405,7 @@ msgstr "%s et %s sont identiques à %s moins %s."
 #: scripts/scenario_27_liberation.lua:3889
 #: scripts/scenario_27_liberation.lua:3925
 #: scripts/scenario_27_liberation.lua:3936
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid "%s and %s is the same as %s."
 msgstr "%s et %s sont identiques à %s."

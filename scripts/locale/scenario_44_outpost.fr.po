@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -3459,9 +3459,9 @@ msgid ""
 "enhancements. They might include the addition of an ftl drive, a change in "
 "the range of the jump drive or an increase in the top speed of the warp drive"
 msgstr ""
-"Les mises à niveau FTL : abréviation de \"plus rapide que la "
-"lumière\" (Faster Than Light), font référence aux améliorations des moteurs "
-"de téléportation et vitesse lumière. Ils peuvent inclure :\n"
+"Les mises à niveau FTL : abréviation de \"plus rapide que la lumière\" "
+"(Faster Than Light), font référence aux améliorations des moteurs de "
+"téléportation et vitesse lumière. Ils peuvent inclure :\n"
 "- L'ajout d'un moteur FTL.\n"
 "- La modification de la plage de saut de la téléportation.\n"
 "- Ou une augmentation de la vitesse maximale de la vitesse lumière."
@@ -4377,7 +4377,7 @@ msgstr ""
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %i"
-msgstr "Défendez le marqueur %i."
+msgstr "Défendez le marqueur %i"
 
 #: scripts/scenario_44_outpost.lua:6789
 #, lua-format
