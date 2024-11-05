@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -832,7 +832,7 @@ msgstr "Quel système souhaitez-vous réparer ?"
 #: scripts/scenario_55_defenderHunter.lua:1957
 msgctxt "stationServices-comms"
 msgid "Repair probe launch system (5 Rep)"
-msgstr "Réparer le système de lancement de sonde (5 rép)."
+msgstr "Réparer le système de lancement de sonde (5 rép)"
 
 #: scripts/scenario_55_defenderHunter.lua:1960
 msgctxt "stationServices-comms"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -3545,7 +3545,7 @@ msgstr ""
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %i"
-msgstr "Défendez le marqueur %i."
+msgstr "Défendez le marqueur %i"
 
 #: scripts/scenario_74_omicron.lua:6019
 #, lua-format
