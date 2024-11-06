@@ -11,10 +11,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
+
 #: scripts/shiptemplates/corvette.lua:14
 msgctxt "ship"
 msgid "Atlantis X23"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
 #: scripts/shiptemplates/corvette.lua:101
 #: scripts/shiptemplates/corvette.lua:157
@@ -27,13 +29,16 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:301
 #: scripts/shiptemplates/corvette.lua:310
 #: scripts/shiptemplates/corvette.lua:315
+#: scripts/shiptemplates/corvette.lua:360
 msgctxt "class"
 msgid "Corvette"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
 msgctxt "subclass"
 msgid "Destroyer"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:15
 msgid ""
 "The Atlantis X23 is the smallest model of destroyer, and its combination of "
@@ -46,10 +51,12 @@ msgstr ""
 "korveta tvoři výbornou doprovodnou loď pro obranu větších lodí proti více "
 "menším nepřátelům. Atlantis X23 je dále vybavena skokovým pohonem takže může "
 "být použita i jako hlídková loď mezi hvězdnými systémy."
+
 #: scripts/shiptemplates/corvette.lua:33
 msgctxt "playerShip"
 msgid "Atlantis"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:34
 msgid ""
 "A refitted Atlantis X23 for more general tasks. The large shield system has "
@@ -61,10 +68,12 @@ msgstr ""
 "byl nahrazen pokročilým manévrovacím systémem a vylepšenými impulzními "
 "motory. Její torpédová výbava je taktéž více univerzální. Splést si tuto "
 "upravenou Atlantis za Atlantis X23 by byla smrtelná chyba."
+
 #: scripts/shiptemplates/corvette.lua:83
 msgctxt "ship"
 msgid "Starhammer II"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:84
 msgid ""
 "Contrary to its predecessor, the Starhammer II lives up to its name. By "
@@ -79,14 +88,17 @@ msgstr ""
 "stal tento vylepšený model fenomenální lodí pro čelní útok. Jeho nízká "
 "rychlost klade sice větší nároky na pilota, ale když je ve správný čas na "
 "správném místě, ani nejsilnější lodě nevydrží proti útoku Starhammeru dlouho."
+
 #: scripts/shiptemplates/corvette.lua:101
 msgctxt "playerShip"
 msgid "Crucible"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:101
 msgctxt "subclass"
 msgid "Popper"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:102
 msgid ""
 "A number of missile tubes range around this ship. Beams were deemed lower "
@@ -96,14 +108,17 @@ msgstr ""
 "Početné torpédomety kolem lodi. Paprskové zbraně byly považovány za nižší "
 "prioritu, ale stále tu nějaké jsou. Lepší obrana, nez fregaty, ale ne tak "
 "silná jako Atlantis"
+
 #: scripts/shiptemplates/corvette.lua:157
 msgctxt "playerShip"
 msgid "Maverick"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:157
 msgctxt "subclass"
 msgid "Gunner"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:158
 msgid ""
 "A number of beams bristle from various points on this gunner. Missiles were "
@@ -113,14 +128,17 @@ msgstr ""
 "Řada paprskových zbraní ježících se z různých míst na této střelecké lodi. "
 "Torpédomety byly považovány za nižší prioritu, ale stále tu nějaké jsou. "
 "Lepší obrana, než fregaty, ale ne tak silná jako Atlantis"
+
 #: scripts/shiptemplates/corvette.lua:217
 msgctxt "ship"
 msgid "Defense platform"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:217
 msgctxt "subclass"
 msgid "Support"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:218
 msgid ""
 "This stationary defense platform operates like a station, with docking and "
@@ -131,21 +149,27 @@ msgstr ""
 "zásobováním, ale je vyzbrojena silnými paprskovými zbraněmi a dokáže se "
 "pomalu otáčet. Větší hvězdné systémy často využívají tyto platformy pro "
 "zásobování hlídkových lodí."
+
 #: scripts/shiptemplates/corvette.lua:223
 #: scripts/shiptemplates/corvette.lua:311
+#: scripts/shiptemplates/corvette.lua:369
 msgctxt "class"
 msgid "Starfighter"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:223
 #: scripts/shiptemplates/corvette.lua:310
+#: scripts/shiptemplates/corvette.lua:368
 msgctxt "class"
 msgid "Frigate"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:235
 #, lua-format
 msgctxt "ship"
 msgid "Personnel Freighter %d"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:235
 #: scripts/shiptemplates/corvette.lua:248
 #: scripts/shiptemplates/corvette.lua:261
@@ -155,6 +179,7 @@ msgstr ""
 msgctxt "subclass"
 msgid "Freighter"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:236
 msgid ""
 "These freighters are designed to transport armed troops, military support "
@@ -162,16 +187,19 @@ msgid ""
 msgstr ""
 "Tyto přepravní lodě byly navrženy pro transport vojáků, podpůrného armádního "
 "personálu a bojové výbavy."
+
 #: scripts/shiptemplates/corvette.lua:244
 #, lua-format
 msgctxt "ship"
 msgid "Personnel Jump Freighter %d"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:248
 #, lua-format
 msgctxt "ship"
 msgid "Goods Freighter %d"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:249
 msgid ""
 "Cargo freighters haul large loads of cargo across long distances on impulse "
@@ -181,16 +209,19 @@ msgstr ""
 "Tyto přepravní lodě transportují velké množství nákladu na veliké "
 "vzdálenosti impulzní rychlostí. Výbava nákladového prostoru zahrnuje systémy "
 "pro ovládání a stabilizaci prostředí, které udržují náklad v dobrém stavu."
+
 #: scripts/shiptemplates/corvette.lua:257
 #, lua-format
 msgctxt "ship"
 msgid "Goods Jump Freighter %d"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:261
 #, lua-format
 msgctxt "ship"
 msgid "Garbage Freighter %d"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:262
 msgid ""
 "These freighters are specially designed to haul garbage and waste. They are "
@@ -200,16 +231,19 @@ msgstr ""
 "Tyto přepravní lodě jsou speciálně navrženy pro transport odpadu. Jsou "
 "vybaveny zhutňovačem odpadu a méně systémy pro stabilizaci prostředí, než "
 "nákladní lodě."
+
 #: scripts/shiptemplates/corvette.lua:270
 #, lua-format
 msgctxt "ship"
 msgid "Garbage Jump Freighter %d"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:274
 #, lua-format
 msgctxt "ship"
 msgid "Equipment Freighter %d"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:275
 msgid ""
 "Equipment freighters have specialized environmental and stabilization "
@@ -218,16 +252,19 @@ msgstr ""
 "Tyto přepravní lodě mají specializované systémy pro stabilizaci prostředí, "
 "které zajišťují bezpečný transport choulostivých strojů a složitých "
 "přístrojů."
+
 #: scripts/shiptemplates/corvette.lua:283
 #, lua-format
 msgctxt "ship"
 msgid "Equipment Jump Freighter %d"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:287
 #, lua-format
 msgctxt "ship"
 msgid "Fuel Freighter %d"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:288
 msgid ""
 "Fuel freighters have massive tanks for hauling fuel, and delicate internal "
@@ -237,15 +274,18 @@ msgstr ""
 "Palivové tankery mají masivní nádrže pro transport paliva a velmi jemné "
 "vnitřní senzory, které hlídají jakoukoliv změnu ve stavu potenciálně "
 "výbušného nákladu."
+
 #: scripts/shiptemplates/corvette.lua:296
 #, lua-format
 msgctxt "ship"
 msgid "Fuel Jump Freighter %d"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:301
 msgctxt "ship"
 msgid "Jump Carrier"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:302
 msgid ""
 "The Jump Carrier is a specialized Freighter. It does not carry any cargo, as "
@@ -254,50 +294,36 @@ msgid ""
 "It is designed to carry other ships deep into space. So it has special "
 "docking parameters, allowing other ships to attach themselves to this ship."
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:315
 msgctxt "playerShip"
 msgid "Benedict"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:315
 msgctxt "subclass"
 msgid "Freighter/Carrier"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:316
 msgid "Benedict is an improved version of the Jump Carrier"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:349
 msgctxt "playerShip"
 msgid "Kiriya"
 msgstr ""
+
 #: scripts/shiptemplates/corvette.lua:350
 msgid "Kiriya is an improved warp drive version of the Jump Carrier"
 msgstr ""
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-#, fuzzy
-# Pozemske Hvezdne Namornictvo
-# Spojene Hvezdne Namornictvo
-# Nebeska Sopojena Flotila
+
+#: scripts/shiptemplates/corvette.lua:360
+msgctxt "playerShip"
+msgid "Saipan"
+msgstr ""
+
+#: scripts/shiptemplates/corvette.lua:360
+msgctxt "subclass"
+msgid "Carrier"
+msgstr ""

@@ -61,7 +61,7 @@ void WindowScreen::update(float delta)
             radius = physics->getSize().x;
         auto position = transform->getPosition() + rotateVec2(glm::vec2(radius, 0), camera_yaw);
 
-        camera_position.x = position.x;
+        camera_position.x = position.x + 1.0f; // small offset to prevent camera glitches on some models
         camera_position.y = position.y;
         camera_position.z = 0.0;
     }

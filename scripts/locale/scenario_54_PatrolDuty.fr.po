@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -28,8 +28,6 @@ msgstr ""
 "- Difficulté : *** (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"TRADUCTION EN COURS DE RELECTURE\n"
-"\n"
 "Mission : Patrouillez entre 3 stations dans le quadrant Delta pour vous "
 "protéger des ennemis.\n"
 "\n"
@@ -39,9 +37,10 @@ msgstr ""
 "\n"
 "- Titre original : Delta quadrant patrol duty\n"
 "- Auteur : Xansta (2018)\n"
-"- Traduction FR : Muerte\n"
+"- Traduction FR : Muerte (Juin 23)\n"
+"TRADUCTION EN COURS DE RELECTURE\n"
 "\n"
-"Communauté française et anglophone sur le Discord USN https://discord.gg/"
+"Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 # Scenario setting
@@ -187,46 +186,68 @@ msgid "Thirty minute time limit"
 msgstr "Délai de 30 minutes."
 
 #: scripts/scenario_54_PatrolDuty.lua:155
+#: scripts/scenario_54_PatrolDuty.lua:6591
+#: scripts/scenario_54_PatrolDuty.lua:7285
+#: scripts/scenario_54_PatrolDuty.lua:8112
 msgctxt "buttonGM"
 msgid "Start plot 2 sick Kojak"
 msgstr "Intrigue 2 Kojak malade"
 
 #: scripts/scenario_54_PatrolDuty.lua:156
+#: scripts/scenario_54_PatrolDuty.lua:6615
+#: scripts/scenario_54_PatrolDuty.lua:7372
+#: scripts/scenario_54_PatrolDuty.lua:7392
+#: scripts/scenario_54_PatrolDuty.lua:7416
+#: scripts/scenario_54_PatrolDuty.lua:8118
 msgctxt "buttonGM"
 msgid "Start p 3 McNabbit ride"
 msgstr "Int. 3 Balade McNabbit"
 
 #: scripts/scenario_54_PatrolDuty.lua:157
+#: scripts/scenario_54_PatrolDuty.lua:6631
+#: scripts/scenario_54_PatrolDuty.lua:8124
 msgctxt "buttonGM"
 msgid "St p4 Lisbon's stowaway"
 msgstr "Int4 Clandestin Lisbon"
 
 #: scripts/scenario_54_PatrolDuty.lua:158
+#: scripts/scenario_54_PatrolDuty.lua:6638
+#: scripts/scenario_54_PatrolDuty.lua:8129
 msgctxt "buttonGM"
 msgid "Start plot 5"
 msgstr "Intrigue 5"
 
 #: scripts/scenario_54_PatrolDuty.lua:159
+#: scripts/scenario_54_PatrolDuty.lua:6599
+#: scripts/scenario_54_PatrolDuty.lua:8134
 msgctxt "buttonGM"
 msgid "Strt plot 8 Sheila dies"
 msgstr "Intrigue 8 Sheila meurt"
 
 #: scripts/scenario_54_PatrolDuty.lua:160
+#: scripts/scenario_54_PatrolDuty.lua:6607
+#: scripts/scenario_54_PatrolDuty.lua:8139
 msgctxt "buttonGM"
 msgid "Start plot 9 ambush"
 msgstr "Intrigue 10 Embuscade"
 
 #: scripts/scenario_54_PatrolDuty.lua:161
+#: scripts/scenario_54_PatrolDuty.lua:6623
+#: scripts/scenario_54_PatrolDuty.lua:8144
 msgctxt "buttonGM"
 msgid "Start plot 10 ambush"
 msgstr "Intrigue 9 Embuscade"
 
 #: scripts/scenario_54_PatrolDuty.lua:162
+#: scripts/scenario_54_PatrolDuty.lua:6765
+#: scripts/scenario_54_PatrolDuty.lua:8154
 msgctxt "buttonGM"
 msgid "Skip to defend U.P."
 msgstr "Passer pour défendre UP"
 
 #: scripts/scenario_54_PatrolDuty.lua:163
+#: scripts/scenario_54_PatrolDuty.lua:6899
+#: scripts/scenario_54_PatrolDuty.lua:8164
 msgctxt "buttonGM"
 msgid "Skip to destroy S.C."
 msgstr "Passer pour détruire SC"
@@ -3339,7 +3360,7 @@ msgstr ", "
 #: scripts/scenario_54_PatrolDuty.lua:5815
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr "Rien du tout."
+msgstr "rien du tout."
 
 #: scripts/scenario_54_PatrolDuty.lua:5823
 msgctxt "trade-comms"

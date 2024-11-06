@@ -1340,7 +1340,7 @@ function handleDockedState()
 			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
 			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
 			addCommsReply(_("ammo-comms","I need ordnance restocked"), function()
-				setCommsMessage("What type of ordnance do you need?")
+				setCommsMessage(_("ammo-comms","What type of ordnance do you need?"))
 				local prompts = {
 					["Nuke"] = {
 						_("ammo-comms","Can you supply us with some nukes?"),

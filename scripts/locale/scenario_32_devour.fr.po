@@ -1947,7 +1947,7 @@ msgstr ""
 #: scripts/scenario_32_devour.lua:2958 scripts/scenario_32_devour.lua:2982
 msgctxt "trade-comms"
 msgid "One repair crew should be getting here from their medical checkout in "
-msgstr "Une réparatrice devrait revenir de sa visite médicale dans"
+msgstr "Une réparatrice devrait revenir de sa visite médicale dans "
 
 #: scripts/scenario_32_devour.lua:2963 scripts/scenario_32_devour.lua:2968
 #, lua-format
@@ -2778,7 +2778,7 @@ msgstr "Auriez-vous des marchandises à vendre ?"
 #: scripts/scenario_32_devour.lua:4003 scripts/scenario_32_devour.lua:4524
 msgctxt "trade-comms"
 msgid "We've got "
-msgstr "Nous avons du "
+msgstr "Nous avons "
 
 #: scripts/scenario_32_devour.lua:4007 scripts/scenario_32_devour.lua:4528
 msgctxt "trade-comms"
@@ -2788,7 +2788,7 @@ msgstr ", "
 #: scripts/scenario_32_devour.lua:4015 scripts/scenario_32_devour.lua:4536
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr "Rien du tout."
+msgstr "rien du tout."
 
 #: scripts/scenario_32_devour.lua:4030
 msgctxt "shipEnemy-comms"

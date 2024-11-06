@@ -5428,7 +5428,7 @@ function restockOrdnance()
 		string.format(_("ammo-comms","Please provide ordnance for %s"),comms_source:getCallSign()),
 	}
 	addCommsReply(tableSelectRandom(ordnance_restock_prompt), function()
-		setCommsMessage("What type of ordnance do you need?")
+		setCommsMessage(_("ammo-comms", "What type of ordnance do you need?"))
 		local prompts = {
 			["Nuke"] = {
 				_("ammo-comms","Can you supply us with some nukes?"),

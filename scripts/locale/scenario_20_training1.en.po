@@ -4,46 +4,61 @@ msgstr ""
 
 # Scenario description
 msgid ""
-"Basic Training Cource\n"
+"Basic Training Course\n"
 "\n"
 "Objective: Destroy all enemy ships in the area.\n"
 "\n"
 "Description:\n"
-"During this training your will learn to coordinate the actions of your crew "
-"and destoy an Exuari training ground.\n"
+"During this training you will learn to coordinate the actions of your crew "
+"and destroy an Exuari training ground.\n"
 "\n"
 "Your ship is a Phobos light cruiser - the most common vessel in the navy.\n"
 "\n"
 "This is a short mission for inexperienced players."
 msgstr ""
 
-#: scripts/scenario_20_training1.lua:130
+#: scripts/scenario_20_training1.lua:36
+msgctxt "scienceDescription-shipname"
+msgid "Exuari transport"
+msgstr ""
+
+#: scripts/scenario_20_training1.lua:40
+msgctxt "scienceDescription-shipname"
+msgid "Exuari freighter"
+msgstr ""
+
+#: scripts/scenario_20_training1.lua:44
+msgctxt "scienceDescription-shipname"
+msgid "Exuari shuttle"
+msgstr ""
+
+#: scripts/scenario_20_training1.lua:79
 msgctxt "goal-incCall"
 msgid ""
 "This is Commander Saberhagen.\n"
 "\n"
-"In this training mission you will practice the basic controls of a Phobos "
+"In this training mission, you will practice the basic controls of a Phobos "
 "light cruiser.\n"
 "Since this is not a tutorial, you will be on your own to decide how to "
 "destroy all enemy targets in an Exuari training ground.\n"
 "There will be not much resistance, so you can try different approaches and "
-"tactics savely.\n"
+"tactics safely.\n"
 "\n"
 "Here's your chance to beat up some helpless opponents.\n"
 "Commander Saberhagen out."
 msgstr ""
 
-#: scripts/scenario_20_training1.lua:148
+#: scripts/scenario_20_training1.lua:97
 msgctxt "msgMainscreen-bonusTarget"
 msgid "escaped."
 msgstr ""
 
-#: scripts/scenario_20_training1.lua:150
+#: scripts/scenario_20_training1.lua:99
 msgctxt "msgMainscreen-bonusTarget"
 msgid "destroyed."
 msgstr ""
 
-#: scripts/scenario_20_training1.lua:152
+#: scripts/scenario_20_training1.lua:101
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""

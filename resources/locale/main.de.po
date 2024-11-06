@@ -98,7 +98,7 @@ msgid "Move speed"
 msgstr "Geschwindigkeit"
 
 #: src/scienceDatabase.cpp:520 src/scienceDatabase.cpp:521
-#: src/scienceDatabase.cpp:529
+#: src/scienceDatabase.cpp:528
 msgctxt "database"
 msgid "{speed} u/min"
 msgstr "{speed} u/min"
@@ -118,7 +118,7 @@ msgctxt "database"
 msgid "{turnspeed} deg/sec"
 msgstr "{turnspeed} Grad/Sek."
 
-#: src/scienceDatabase.cpp:529
+#: src/scienceDatabase.cpp:528
 msgctxt "database"
 msgid "Warp speed"
 msgstr "Warpgeschwindigkeit"
@@ -128,7 +128,7 @@ msgctxt "database"
 msgid "Jump range"
 msgstr "Sprungreichweite"
 
-#: src/scienceDatabase.cpp:533
+#: src/scienceDatabase.cpp:534
 msgctxt "database"
 msgid "{mindistance} - {maxdistance} u"
 msgstr "{mindistance} - {maxdistance} u"
@@ -338,7 +338,7 @@ msgctxt "button"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/menus/joinServerMenu.cpp:56
+#: src/menus/joinServerMenu.cpp:62
 msgid "Please enter the server password:"
 msgstr "Server-Passwort eingeben:"
 
@@ -621,47 +621,47 @@ msgctxt "options"
 msgid "Save"
 msgstr "Speichern"
 
-#: src/menus/optionsMenu.cpp:224
+#: src/menus/optionsMenu.cpp:226
 msgid "Fullscreen toggle"
 msgstr "Vollbild umschalten"
 
-#: src/menus/optionsMenu.cpp:257 src/menus/optionsMenu.cpp:262
+#: src/menus/optionsMenu.cpp:259 src/menus/optionsMenu.cpp:264
 msgid "FoV: {fov}"
 msgstr "FoV: {fov}"
 
-#: src/menus/optionsMenu.cpp:278 src/menus/optionsMenu.cpp:283
+#: src/menus/optionsMenu.cpp:280 src/menus/optionsMenu.cpp:285
 msgid "Sound Volume: {volume}%"
 msgstr "Lautstärke: {volume}%"
 
-#: src/menus/optionsMenu.cpp:287
+#: src/menus/optionsMenu.cpp:289
 msgid "Music Playback"
 msgstr "Musik-Playback"
 
-#: src/menus/optionsMenu.cpp:297 src/menus/optionsMenu.cpp:322
+#: src/menus/optionsMenu.cpp:299 src/menus/optionsMenu.cpp:324
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-#: src/menus/optionsMenu.cpp:297 src/menus/optionsMenu.cpp:322
+#: src/menus/optionsMenu.cpp:299 src/menus/optionsMenu.cpp:324
 msgid "Enabled"
 msgstr "Aktiviert"
 
-#: src/menus/optionsMenu.cpp:297 src/menus/optionsMenu.cpp:322
+#: src/menus/optionsMenu.cpp:299 src/menus/optionsMenu.cpp:324
 msgid "Main Screen only"
 msgstr "Nur Hauptschirm"
 
-#: src/menus/optionsMenu.cpp:303 src/menus/optionsMenu.cpp:308
+#: src/menus/optionsMenu.cpp:305 src/menus/optionsMenu.cpp:310
 msgid "Music Volume: {volume}%"
 msgstr "Musiklautstärke: {volume}%"
 
-#: src/menus/optionsMenu.cpp:312
+#: src/menus/optionsMenu.cpp:314
 msgid "Impulse Engine sound"
 msgstr "Impulsantriebs-Sound"
 
-#: src/menus/optionsMenu.cpp:328 src/menus/optionsMenu.cpp:333
+#: src/menus/optionsMenu.cpp:330 src/menus/optionsMenu.cpp:335
 msgid "Impulse Volume: {volume}%"
 msgstr "Impulslautstärke: {volume}%"
 
-#: src/menus/optionsMenu.cpp:345
+#: src/menus/optionsMenu.cpp:347
 msgid "Preview Soundtracks"
 msgstr "Vorschau Soundtracks"
 

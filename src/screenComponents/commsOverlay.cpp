@@ -173,7 +173,8 @@ void GuiCommsOverlay::onUpdate()
         // Show the scripted comms options. If they've changed, update the lsit
         bool changed = script_comms_options->entryCount() != int(transmitter->script_replies.size());
         if (!changed && transmitter->script_replies.size() > 0)
-            changed = transmitter->script_replies[0].message != script_comms_options->getEntryName(0);
+            for (auto i = 0u; !changed && i < transmitter->script_replies.size(); i++)
+               changed = transmitter->script_replies[i].message != script_comms_options->getEntryName(i);
         if (changed)
         {
             script_comms_options->setOptions({});

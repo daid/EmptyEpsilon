@@ -464,10 +464,9 @@ msgstr ""
 "fort, was das Phänomen erklärt, das Sie dort erlebt haben.\n"
 "\n"
 "Es sieht so aus, als hätten sie erfolgreich einen funktionierenden Prototyp "
-"eines Sprungantriebs entwickelt, aber die Dokumente müssen hier "
-"verschlüsselt worden sein, denn sie gehen reden von Entfernungen von 2000U, "
-"und gehen dann über zur Erwähnung einer undurchführbar großen Anzahl von "
-"Truppen und Raketenlagern."
+"eines Sprungantriebs entwickelt, aber die Dokumente müssen verschlüsselt "
+"sein, denn sie reden von Entfernungen von 2000U, und gehen dann über zur "
+"Erwähnung einer undurchführbar großen Anzahl von Truppen und Raketenlagern."
 
 #: scripts/scenario_08_atlantis.lua:709
 msgctxt "station-incCall"

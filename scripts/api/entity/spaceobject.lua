@@ -336,13 +336,10 @@ function Entity:getDescription(state)
     return self.components.science_description.full_scan
 end
 --- Sets this SpaceObject's radar signature, which creates noise on the science screen's raw radar signal ring.
---- The raw signal ring contains red, green, and blue bands of waveform noise.
+--- The raw signal ring contains red (electrical), green (biological), and blue (gravitational) bands of waveform noise.
 --- Certain SpaceObject subclasses might set their own defaults or dynamically modify their signatures using this value as a baseline.
 --- Requires numeric values ranging from 0.0 to 1.0 for the gravitational, electrical, and biological radar bands, in that order.
 --- Larger and negative values are possible, but currently have no visual effect on the bands.
---- - Gravitational signatures amplify noise on all bands, particularly the green and blue bands.
---- - Electrical signatures amplify noise on the red and blue bands.
---- - Biological signatures amplify noise on the red and green bands.
 --- Example: obj:setRadarSignatureInfo(0.0, 0.5, 1.0) -- a radar signature of 0 gravitational, 0.5 electrical, and 1.0 biological
 function Entity:setRadarSignatureInfo(gravity, electrical, biological)
     self.components.radar_signature = {gravity=gravity, electrical=electrical, biological=biological}

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -32,8 +32,6 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1\n"
 "\n"
-"TRADUCTION EN COURS DE RELECTURE\n"
-"\n"
 "Mission : Vous devez vous échapper de prison et rentrer chez vous.\n"
 "\n"
 "Nécessite un vaisseau avec un équipage complet. L'ingénierie et la science "
@@ -44,8 +42,9 @@ msgstr ""
 "- Titre original : Escape\n"
 "- Auteur : Xansta (2019)\n"
 "- Traduction FR : Muerte (Mai 24)\n"
+"TRADUCTION EN COURS DE RELECTURE\n"
 "\n"
-"Communauté française et anglophone sur le Discord USN https://discord.gg/"
+"Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 # Scenario setting
@@ -841,6 +840,11 @@ msgstr ""
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
 msgstr "Nous avons besoin de nous réapprovisionner en munitions"
+
+#: scripts/scenario_53_escape.lua:1343
+msgctxt "ammo-comms"
+msgid "What type of ordnance do you need?"
+msgstr "De quel type de munitions avez-vous besoin ?"
 
 #: scripts/scenario_53_escape.lua:1346
 msgctxt "ammo-comms"
@@ -2183,7 +2187,7 @@ msgstr ", "
 #: scripts/scenario_53_escape.lua:2442 scripts/scenario_53_escape.lua:2629
 msgctxt "trade-comms"
 msgid "nothing"
-msgstr "Rien du tout."
+msgstr "rien du tout."
 
 #: scripts/scenario_53_escape.lua:2481 scripts/scenario_53_escape.lua:2677
 msgctxt "trade-comms"
@@ -4082,10 +4086,6 @@ msgstr "Casse Boris"
 #~ msgstr ""
 #~ "Suite de l'école d'ingénierie Tandon commencée sur Terre au début du 21e "
 #~ "siècle."
-
-#~ msgctxt "ammo-comms"
-#~ msgid "What type of ordnance?"
-#~ msgstr "Quel genre de munitions ?"
 
 #~ msgctxt "trade-comms"
 #~ msgid "What do you want?"

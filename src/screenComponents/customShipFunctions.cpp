@@ -36,10 +36,21 @@ void GuiCustomShipFunctions::checkEntries()
             createEntries();
             return;
         }
+        else if (!entries[n].element)
+        {
+            // entry is not assigned to this crew position, skip
+            continue;
+        }
         else if (csf->functions[n].type == CustomShipFunctions::Function::Type::Button)
         {
             GuiButton* button = dynamic_cast<GuiButton*>(entries[n].element);
-            if (button && button->getText() != caption)
+            if (!button)
+            {
+                // ship data says this is a button but we have something else, rebuild the entries
+                createEntries();
+                return;
+            }
+            else if(button->getText() != caption)
             {
                 button->setText(caption);
             }
@@ -47,7 +58,13 @@ void GuiCustomShipFunctions::checkEntries()
         else if (csf->functions[n].type == CustomShipFunctions::Function::Type::Info)
         {
             GuiLabel* label = dynamic_cast<GuiLabel*>(entries[n].element);
-            if (label && label->getText() != caption)
+            if (!label)
+            {
+                // ship data says this is a label but we have something else, rebuild the entries
+                createEntries();
+                return;
+            }
+            else if (label->getText() != caption)
             {
                 label->setText(caption);
             }

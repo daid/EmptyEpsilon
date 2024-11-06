@@ -33,8 +33,8 @@ msgstr ""
 #: scripts/scenario_08_atlantis.lua:174 scripts/scenario_08_atlantis.lua:178
 msgctxt "scienceDescription-artifact"
 msgid ""
-"This object seems to be inert, and not giving any readings on your sensors. "
-"The actual object must be somewhere else."
+"This object seems to be inert, and not giving any interesting readings on "
+"your sensors. The actual object must be somewhere else."
 msgstr ""
 
 #: scripts/scenario_08_atlantis.lua:320
@@ -112,15 +112,17 @@ msgid ""
 "We are outside of the no-fire zone and at war with the Kraylor, so you are "
 "clear to engage.\n"
 "\n"
-"Report back when you have found the source of the odd sensor readings."
+"Report back when you have found the source of the odd sensor readings. This "
+"should be a good opportunity to make use of your ship's probes, or your "
+"Science Officer might be able to track it down based on its radar signature."
 msgstr ""
 
 #: scripts/scenario_08_atlantis.lua:450
 msgctxt "artifact-comms"
 msgid ""
-"It seems like the artifact is stablizing.\n"
-"It would be good to get some more reading a bit closer, as the nebula causes "
-"our sensor "
+"It seems like the artifact is stabilizing.\n"
+"It would be good to get some more readings close to the object, as the "
+"nebula may be causing issues for your sensors."
 msgstr ""
 
 #: scripts/scenario_08_atlantis.lua:461
@@ -331,7 +333,7 @@ msgstr ""
 msgctxt "station-comms"
 msgid ""
 "Good. Your first mission is to identify odd readings coming from the nebula "
-"cloud in sector B20.\n"
+"cloud near sector B20.\n"
 "\n"
 "Your ship is not equipped to travel this distance by itself, so we have "
 "tasked jump carrier JC-88 to take you there.\n"
@@ -421,8 +423,8 @@ msgctxt "artifact-comms"
 msgid ""
 "Are you sure? Those readings are really off the normal scale.\n"
 "\n"
-"Can you move closer to the object to see if you can improve those readings? "
-"The nebula might be interfering with your sensors."
+"Can you move close to the object and get a second readings? The nebula might "
+"be interfering with your sensors."
 msgstr ""
 
 #: scripts/scenario_08_atlantis.lua:869
@@ -439,7 +441,9 @@ msgstr ""
 
 #: scripts/scenario_08_atlantis.lua:888
 msgctxt "artifact-comms"
-msgid "Then continue looking for it."
+msgid ""
+"Then continue looking for it. Try launching some probes or asking the "
+"Science Officer if they notice any odd radar signatures."
 msgstr ""
 
 #: scripts/scenario_08_atlantis.lua:910

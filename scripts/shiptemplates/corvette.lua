@@ -358,7 +358,7 @@ var2:setJumpDrive(false)
 var2:setWarpSpeed(750)
 
 template = ShipTemplate():setName("Saipan"):setLocaleName(_("playerShip", "Saipan")):setModel("battleship_destroyer_5_upgraded"):setType("playership"):setClass(_("class", "Corvette"), _("subclass", "Carrier"))
-template:setDescription("The Saipan mixes most of the strengths of the corvette class with carrier capability. The weapons compare favorably with other corvette class ships. Having fighters use the Saipan as a base can really ruin an enemy's day")
+template:setDescription(_("The Saipan mixes most of the strengths of the corvette class with carrier capability. The weapons compare favorably with other corvette class ships. Having fighters use the Saipan as a base can really ruin an enemy's day"))
 template:setRadarTrace("cruiser.png")
 template:setHull(180)
 template:setShields(90, 90)

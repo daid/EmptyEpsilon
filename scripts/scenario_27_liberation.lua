@@ -134,7 +134,7 @@ function updatePlayerSoftTemplate(p)
 			end
 			p.score_settings_source = temp_type_name
 		else
-			addGMMessage(string.format("Player ship %s's template type (%s) could not be found in table player_ship_stats",p:getCallSign(),temp_type_name))
+			addGMMessage(string.format(_("msgGM","Player ship %s's template type (%s) could not be found in table player_ship_stats"),p:getCallSign(),temp_type_name))
 		end
 	end
 	p.maxRepairCrew = p:getRepairCrewCount()
@@ -634,10 +634,10 @@ function setGlobals()	--variables that might change
 	nova_beam_targets = {}
 	jasmine_purdue_hint = false
 	jasmine_purdue_answers = {
-		"She studies the Exuari. She's *the* expert around here",
-		"She studies the Exuari so hard that sometimes I wonder if she's got some kind of fixation.",
-		"I heard that her family was killed by the Exuari. That's why she studies them so much.",
-		"After studying the Exuari using our extensive resources, she took a job on a freighter to gather more data in the field.",
+		_("station-comms","She studies the Exuari. She's *the* expert around here"),
+		_("station-comms","She studies the Exuari so hard that sometimes I wonder if she's got some kind of fixation."),
+		_("station-comms","I heard that her family was killed by the Exuari. That's why she studies them so much."),
+		_("station-comms","After studying the Exuari using our extensive resources, she took a job on a freighter to gather more data in the field."),
 	}
 	jasmine_freighter_hint = false
 	jasmine_freighter_identified = false
@@ -1511,17 +1511,17 @@ function constructNemesisStation()
 		defense_angle = defense_angle + 60
 	end
 	exuari_activity_answers = {
-		"Just the usual predatory actions: attack anything and laugh as it's destroyed or looted.",
-		"They seemed interested in Liberation Day for some reason.",
-		"I could not make sense of what they were saying. They seemed to be talking in riddles.",
-		"You want to talk to Jasmine Purdue. She's been studying the Exuari.",
+		_("station-comms","Just the usual predatory actions: attack anything and laugh as it's destroyed or looted."),
+		_("station-comms","They seemed interested in Liberation Day for some reason."),
+		_("station-comms","I could not make sense of what they were saying. They seemed to be talking in riddles."),
+		_("station-comms","You want to talk to Jasmine Purdue. She's been studying the Exuari."),
 	}
 	early_exuari_activity_answers = {
-		string.format("They've been setting up an isolated station for research somewhere near %s",nemesis_station:getSectorName()),
-		"They seem to be interested in stellar mechanics.",
-		"When you can get them to talk, the topic of the inner workings of stars seems to be top of mind.",
-		"They were asking us about nova causality before trying to destroy us.",
-		"They're just attacking everything per usual.",
+		string.format(_("station-comms","They've been setting up an isolated station for research somewhere near %s"),nemesis_station:getSectorName()),
+		_("station-comms","They seem to be interested in stellar mechanics."),
+		_("station-comms","When you can get them to talk, the topic of the inner workings of stars seems to be top of mind."),
+		_("station-comms","They were asking us about nova causality before trying to destroy us."),
+		_("station-comms","They're just attacking everything per usual."),
 	}
 end
 function constructNovaDemo()
@@ -1641,7 +1641,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength, tem
 		template_pool = getTemplatePool(enemyStrength)
 	end
 	if #template_pool < 1 then
-		addGMMessage("Empty Template pool: fix excludes or other criteria")
+		addGMMessage(_("msgGM","Empty Template pool: fix excludes or other criteria"))
 		return enemyList
 	end
 	while enemyStrength > 0 do
@@ -3112,7 +3112,7 @@ function processEjecta()
 		reset_nova_process = true
 		ejecta = {}
 		if second_star_destroyed then
-			globalMessage("The Exuari really enjoyed the fireworks at your expense")
+			globalMessage(_("msgMainscreen","The Exuari really enjoyed the fireworks at your expense"))
 			victory("Exuari")
 		end
 	end
