@@ -74,3 +74,20 @@ function Entity:getOwner()
     end
     return self
 end
+
+--- Sets this ScanProbe's target coordinates.
+--- If the probe has reached its target, ScanProbe:setTarget() moves it again toward the new target coordinates.
+--- Example: probe:setTarget(1000,5000)
+--- Sets the BeamEffect's target SpaceObject.
+--- Requires a 3D x/y/z vector positional offset relative to the object's origin point.
+--- Example: beamfx:setTarget(target,0,0,0)
+function Entity:setTarget(a, b, c, d)
+    if self.components.move_to then
+        self.components.move_to = {target={a, b}}
+    end
+    if self.components.beam_effect then
+        self.components.beam_effect.target = a
+        self.components.beam_effect.target_offset = {b, c, d}
+    end
+    return self
+end

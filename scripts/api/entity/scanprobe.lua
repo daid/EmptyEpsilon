@@ -61,13 +61,6 @@ function Entity:getLifetime()
     if self.components.lifetime then return self.components.lifetime.lifetime end
     return 0.0
 end
---- Sets this ScanProbe's target coordinates.
---- If the probe has reached its target, ScanProbe:setTarget() moves it again toward the new target coordinates.
---- Example: probe:setTarget(1000,5000)
-function Entity:setTarget(x, y)
-    self.components.move_to = {target={x, y}}
-    return self
-end
 --- Sets this ScanProbe's owner SpaceObject.
 --- Example: probe:setOwner(owner)
 function Entity:setOwner(owner)
