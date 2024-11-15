@@ -33,20 +33,20 @@ void ShipLogScreen::onDraw(sp::RenderTarget& renderer)
         auto logs = my_spaceship.getComponent<ShipLog>();
         if (!logs)
             return;
-        if (log_text->getEntryCount() > 0 && logs->entries.size() == 0)
+        if (log_text->getEntryCount() > 0 && logs->size() == 0)
             log_text->clearEntries();
 
-        while(log_text->getEntryCount() > logs->entries.size())
+        while(log_text->getEntryCount() > logs->size())
         {
             log_text->removeEntry(0);
         }
 
-        if (log_text->getEntryCount() > 0 && logs->entries.size() > 0 && log_text->getEntryText(0) != logs->entries[0].text)
+        if (log_text->getEntryCount() > 0 && logs->size() > 0 && log_text->getEntryText(0) != logs->get(0).text)
         {
             bool updated = false;
             for(unsigned int n=1; n<log_text->getEntryCount(); n++)
             {
-                if (log_text->getEntryText(n) == logs->entries[0].text)
+                if (log_text->getEntryText(n) == logs->get(0).text)
                 {
                     for(unsigned int m=0; m<n; m++)
                         log_text->removeEntry(0);
@@ -58,10 +58,11 @@ void ShipLogScreen::onDraw(sp::RenderTarget& renderer)
                 log_text->clearEntries();
         }
 
-        while(log_text->getEntryCount() < logs->entries.size())
+        while(log_text->getEntryCount() < logs->size())
         {
             int n = log_text->getEntryCount();
-            log_text->addEntry(logs->entries[n].prefix, logs->entries[n].text, logs->entries[n].color, 0);
+            const auto& entry = logs->get(n);
+            log_text->addEntry(entry.prefix, entry.text, entry.color, 0);
         }
     }
 }

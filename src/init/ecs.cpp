@@ -35,6 +35,7 @@
 #include "multiplayer/spin.h"
 #include "multiplayer/moveto.h"
 #include "multiplayer/radarblock.h"
+#include "multiplayer/shiplog.h"
 #include "multiplayer/zone.h"
 
 #include "systems/ai.h"
@@ -115,7 +116,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<SelfDestructReplication>();
     //Sfx
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShieldsReplication>();
-    //ShipLog
+    sp::ecs::MultiplayerReplication::registerComponentReplication<ShipLogReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<SpinReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<TargetReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpDriveReplication>();
