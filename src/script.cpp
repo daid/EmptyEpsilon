@@ -440,6 +440,29 @@ static bool luaHasPlayerAtPosition(sp::ecs::Entity source, CrewPosition station)
     return false;
 }
 
+static int luaGetPlayersInfo(lua_State* L)
+{
+    auto source = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
+    lua_newtable(L);
+    int index = 1;
+    for(auto i : player_info_list) {
+        if (i->ship != source)
+            continue;
+        lua_newtable(L);
+        lua_pushstring(L, i->name.c_str());
+        lua_setfield(L, -2, "name");
+        CrewPositions positions;
+        for(auto cp : i->crew_positions) {
+            positions.mask |= cp.mask;
+        }
+        sp::script::Convert<CrewPositions>::toLua(L, positions);
+        lua_setfield(L, -2, "positions");
+        lua_seti(L, -2, index);
+        index++;
+    }
+    return 1;
+}
+
 void luaSetPlayerShipCustomFunction(sp::ecs::Entity entity, CustomShipFunctions::Function::Type type, string name, string caption, CrewPositions positions, sp::script::Callback callback, int order)
 {
     auto csf = entity.getComponent<CustomShipFunctions>();
@@ -1209,6 +1232,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
 
     env.setGlobal("transferPlayersFromShipToShip", &luaTransferPlayers);
     env.setGlobal("hasPlayerCrewAtPosition", &luaHasPlayerAtPosition);
+    env.setGlobal("getPlayersInfo", &luaGetPlayersInfo);
     env.setGlobal("setPlayerShipCustomFunction", &luaSetPlayerShipCustomFunction);
     env.setGlobal("removePlayerShipCustomFunction", &luaRemovePlayerShipCustomFunction);
     env.setGlobal("addEntryToShipsLog", &luaAddEntryToShipsLog);
