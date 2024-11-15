@@ -9,6 +9,7 @@ function PlayerSpaceship()
     local e = createEntity()
     e.components = {
         player_control = {},
+        ship_log = {},
         custom_ship_functions = {},
         transform = {rotation=random(0, 360)},
         callsign = {callsign=generateRandomCallSign()},

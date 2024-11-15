@@ -43,6 +43,7 @@
 #include "components/pickup.h"
 #include "components/customshipfunction.h"
 #include "components/zone.h"
+#include "components/shiplog.h"
 
 
 #define STRINGIFY(n) #n
@@ -591,6 +592,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(PlayerControl, allowed_positions);
     sp::script::ComponentHandler<HackingDevice>::name("hacking_device");
     BIND_MEMBER(HackingDevice, effectiveness);
+    sp::script::ComponentHandler<ShipLog>::name("ship_log");
 
     sp::script::ComponentHandler<MoveTo>::name("move_to");
     BIND_MEMBER(MoveTo, speed);
