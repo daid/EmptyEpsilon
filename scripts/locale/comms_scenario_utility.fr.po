@@ -24,7 +24,7 @@ msgid "Make external flexible utility for handling communications"
 msgstr ""
 "Créer un utilitaire LUA flexible externe aux scénario pour gérer les "
 "communications.\n"
-"TRADUCTION EN COURS : 756/1886     40%"
+"TRADUCTION EN COURS : 779/1886     41%"
 
 #: scripts/comms_scenario_utility.lua:207
 #: scripts/comms_scenario_utility.lua:1491
@@ -862,7 +862,7 @@ msgid "Hull:%s%%"
 msgstr "Coque : %s%%"
 
 #: scripts/comms_scenario_utility.lua:916
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "situationReport-comms"
 msgid ""
 "%s\n"
@@ -872,7 +872,7 @@ msgstr ""
 "Boucliers : %s%%"
 
 #: scripts/comms_scenario_utility.lua:918
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "situationReport-comms"
 msgid ""
 "%s\n"
@@ -2767,19 +2767,19 @@ msgstr ""
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "%s is heading for waypoint %s"
-msgstr ""
+msgstr "%s se dirige vers le waypoint %s."
 
 #: scripts/comms_scenario_utility.lua:1923
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationAssist-comms"
 msgid "%s has been sent to waypoint %s"
-msgstr ""
+msgstr "%s a été envoyé au waypoint %s."
 
 #: scripts/comms_scenario_utility.lua:1924
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We ordered %s to help at waypoint %s"
-msgstr ""
+msgstr "Nous venons de donner l'ordre à %s de vous aider au waypoint %s."
 
 #: scripts/comms_scenario_utility.lua:1955
 msgctxt "stationAssist-comms"
@@ -6910,7 +6910,6 @@ msgstr ""
 "Pas mal hein ?"
 
 #: scripts/comms_scenario_utility.lua:5505
-#, fuzzy
 msgctxt "situationReport-comms"
 msgid ""
 "We can repair hulls again! Come back any time to have your hull instantly "
@@ -6922,7 +6921,6 @@ msgstr ""
 "Revenez quand vous voulez pour faire réparer votre coque instantanément."
 
 #: scripts/comms_scenario_utility.lua:5513
-#, fuzzy
 msgctxt "situationReport-comms"
 msgid ""
 "We can restock scan probes again! Come back any time to have your scan "
@@ -6944,7 +6942,7 @@ msgstr ""
 "la vente !\n"
 "Revenez à tout moment pour reconstituer votre réserve de munitions. On vous "
 "fera un prix d'ami.\n"
-"Réapprovisionnement illimité pour toutes nos munitions."
+"Pour vous, réapprovisionnement illimité en munitions."
 
 #: scripts/comms_scenario_utility.lua:5533
 msgctxt "situationReport-comms"
@@ -6954,7 +6952,7 @@ msgid ""
 msgstr ""
 "Nous pouvons à nouveau fabriquer des EMP grâce à vous.\n"
 "Revenez nous en acheter quand vous voudrez, on vous fera un bon prix.\n"
-"Réapprovisionnement illimité pour toutes nos munitions."
+"Pour vous, réapprovisionnement illimité en munitions."
 
 #: scripts/comms_scenario_utility.lua:5542
 msgctxt "situationReport-comms"
@@ -6965,7 +6963,7 @@ msgstr ""
 "Nous pouvons de nouveau produire des missiles à tête chercheuse (homing) !\n"
 "Si vous revenez dans le coin, on vous fera un super prix au vu de votre "
 "aide.\n"
-"Réapprovisionnement illimité pour toutes nos munitions."
+"Pour vous, réapprovisionnement illimité en munitions."
 
 #: scripts/comms_scenario_utility.lua:5552
 msgctxt "situationReport-comms"
@@ -6976,7 +6974,7 @@ msgstr ""
 "Et voilà, c'est réparé !\n"
 "Vous avez besoin de mines ? On propose un super prix pour relancer le "
 "commerce.\n"
-"Réapprovisionnement illimité pour toutes nos munitions."
+"Pour vous, réapprovisionnement illimité en munitions."
 
 #: scripts/comms_scenario_utility.lua:5561
 msgctxt "situationReport-comms"
@@ -6986,7 +6984,7 @@ msgid ""
 msgstr ""
 "Nos HVLI sont de nouveau disponibles.\n"
 "On casse les prix pour redémarrer le business. Vous en voulez ?\n"
-"Réapprovisionnement illimité pour toutes nos munitions."
+"Pour vous, réapprovisionnement illimité en munitions."
 
 #: scripts/comms_scenario_utility.lua:5567
 msgctxt "situationReport-comms"
@@ -7375,30 +7373,42 @@ msgstr "Que cela vous sois utile."
 msgctxt "ammo-comms"
 msgid "You can't afford as many %ss as I'd like to provide to you"
 msgstr ""
+"Vous n'avez pas les moyens d'acheter autant de %ss que j'aimerais vous en "
+"fournir.\n"
+"Combien en voulez-vous ?"
 
 #: scripts/comms_scenario_utility.lua:5765
 #, lua-format
 msgctxt "ammo-comms"
 msgid "A full restock of %s costs more than your current reputation"
 msgstr ""
+"Un réapprovisionnement complet de %ss coûte plus cher que votre réputation "
+"actuelle.\n"
+"Quelle quantité désirez-vous ?"
 
 #: scripts/comms_scenario_utility.lua:5766
 #, lua-format
 msgctxt "ammo-comms"
 msgid "You don't have enough reputation for a full restock of %s"
 msgstr ""
+"Vous n'avez pas assez de réputation pour un réapprovisionnement complet en "
+"%ss.\n"
+"Achetez-en en fonction de vos moyens :"
 
 #: scripts/comms_scenario_utility.lua:5767
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%i reputation is not enough for a full restock of %s"
 msgstr ""
+"%i de réputation n'est pas suffisant pour un réapprovisionnement complet en "
+"%ss.\n"
+"Choisissez la quantité :"
 
 #: scripts/comms_scenario_utility.lua:5772
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Get %i (%i x %i = %i reputation)"
-msgstr ""
+msgstr "En acheter %i (%i x %i = %i rép)"
 
 #: scripts/comms_scenario_utility.lua:5778
 msgctxt "ammo-comms"
@@ -7429,49 +7439,48 @@ msgstr ""
 msgctxt "ammo-comms"
 msgid "We generously resupplied you with one weapon charge."
 msgstr ""
-"Nous vous avons généreusement réapprovisionné avec une caisse de munitions."
+"Nous vous avons généreusement réapprovisionné avec 1 munition.\n"
+"(Vous entendez quelqu'un ricaner de l'autre coté de la ligne.)"
 
 #: scripts/comms_scenario_utility.lua:5788
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We gave you one of the ordnance type you requested"
-msgstr "Nous vous avons fourni quelques munitions du type demandé."
+msgstr ""
+"Nous vous avons fourni LA munition du type demandé.\n"
+"Avec ça c'est sûr, vous allez gagner ha ! ha ! ha !"
 
 #: scripts/comms_scenario_utility.lua:5789
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "You got one weapon charge of the type you asked for."
-msgstr ""
-"Vous avez reçu quelques munitions du type que vous avez demandé. Nous ne "
-"pouvons vous en donner davantage."
+msgstr "Vous avez reçu 1 munition."
 
 #: scripts/comms_scenario_utility.lua:5790
-#, fuzzy
 msgctxt "ammo-comms"
 msgid ""
 "We were able to provide you with one of the ordnance type you requested."
 msgstr ""
-"Nous vous avons fourni qu'une partie des munitions que vous aviez demandées."
+"Et voilà la munition que vous vouliez.\n"
+"(Vous entendez un gloussement à l'autre bout de la communication.)"
 
 #: scripts/comms_scenario_utility.lua:5793
 msgctxt "ammo-comms"
 msgid "Put it to good use."
-msgstr ""
+msgstr "Utilisez-la avec discernement."
 
 #: scripts/comms_scenario_utility.lua:5794
 msgctxt "ammo-comms"
 msgid "Use it well."
-msgstr ""
+msgstr "Utilisez-la bien."
 
 #: scripts/comms_scenario_utility.lua:5795
 msgctxt "ammo-comms"
 msgid "Make good use of it."
-msgstr ""
+msgstr "Faites-en bon usage."
 
 #: scripts/comms_scenario_utility.lua:5796
 msgctxt "ammo-comms"
 msgid "Do the best you can with it."
-msgstr ""
+msgstr "Ne la gaspillez pas inutilement."
 
 #: scripts/comms_scenario_utility.lua:5801
 #, lua-format
@@ -7484,19 +7493,19 @@ msgstr ""
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We gave you %i of the ordnance type you requested"
-msgstr ""
+msgstr "Voici %i munitions du type demandé."
 
 #: scripts/comms_scenario_utility.lua:5803
 #, lua-format
 msgctxt "ammo-comms"
 msgid "You got %i of the weapon charges you asked for."
-msgstr ""
+msgstr "Vous avez récupéré les %i caisses de munitions que vous vouliez."
 
 #: scripts/comms_scenario_utility.lua:5804
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We were able to provide you with %i of the ordnance type you requested."
-msgstr ""
+msgstr "Nous vous avons fourni %i munitions de l'arme demandée."
 
 #: scripts/comms_scenario_utility.lua:5858
 msgctxt "trade-comms"
@@ -10937,40 +10946,40 @@ msgid "Report %s status"
 msgstr "Au rapport, équipage du %s"
 
 #: scripts/comms_scenario_utility.lua:8744
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
-msgstr "Coque : %s%%"
+msgstr "Coque : %d%%\n"
 
 #: scripts/comms_scenario_utility.lua:8747
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
-msgstr "Boucliers :"
+msgstr "Boucliers : %d%%\n"
 
 #: scripts/comms_scenario_utility.lua:8749
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
-msgstr "Boucliers avant : "
+msgstr "Boucliers avant : %d%%\n"
 
 #: scripts/comms_scenario_utility.lua:8750
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
-msgstr "Boucliers arrière : "
+msgstr "Boucliers arrière : %d%%\n"
 
 #: scripts/comms_scenario_utility.lua:8753
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr "Boucliers :"
+msgstr "Boucliers %s : %d%%\n"
 
 #: scripts/comms_scenario_utility.lua:8759
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
-msgstr " Missiles : "
+msgstr "Missiles %s : %d/%d\n"
 
 #: scripts/comms_scenario_utility.lua:8768
 #: scripts/comms_scenario_utility.lua:9926
@@ -11591,7 +11600,6 @@ msgid ""
 "Good day."
 msgstr ""
 "Nous n'avons rien pour vous.\n"
-"\n"
 "Bonne journée."
 
 #: scripts/comms_scenario_utility.lua:9788
@@ -11654,33 +11662,38 @@ msgstr "Au rapport, équipage du %s"
 
 #: scripts/comms_scenario_utility.lua:9908
 #: scripts/comms_scenario_utility.lua:10045
+#, fuzzy
 msgctxt "ship-comms"
 msgid "Hull: "
-msgstr "Coque : "
+msgstr "b Coque : "
 
 #: scripts/comms_scenario_utility.lua:9911
 #: scripts/comms_scenario_utility.lua:10048
+#, fuzzy
 msgctxt "ship-comms"
 msgid "Shield: "
-msgstr "Boucliers :"
+msgstr "Boucliers : "
 
 #: scripts/comms_scenario_utility.lua:9913
 #: scripts/comms_scenario_utility.lua:10050
+#, fuzzy
 msgctxt "ship-comms"
 msgid "Front Shield: "
-msgstr "Boucliers avant : "
+msgstr "b Boucliers avant : "
 
 #: scripts/comms_scenario_utility.lua:9914
 #: scripts/comms_scenario_utility.lua:10051
+#, fuzzy
 msgctxt "ship-comms"
 msgid "Rear Shield: "
-msgstr "Boucliers arrière : "
+msgstr "b Boucliers arrière : "
 
 #: scripts/comms_scenario_utility.lua:9917
 #: scripts/comms_scenario_utility.lua:10054
+#, fuzzy
 msgctxt "ship-comms"
 msgid "Shield "
-msgstr ""
+msgstr "b Boucliers "
 
 #: scripts/comms_scenario_utility.lua:9974
 msgctxt "ship-comms"
