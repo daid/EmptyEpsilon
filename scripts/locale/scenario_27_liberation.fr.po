@@ -16,7 +16,7 @@ msgstr ""
 
 # Scenario name
 msgid "Liberation Day"
-msgstr "Le jour de la Libération"
+msgstr "Le Jour de la Libération"
 
 # Scenario description
 msgid ""
@@ -47,6 +47,7 @@ msgstr ""
 "- Titre original : Liberation Day\n"
 "- Auteur : Xansta (Sept. 2024)\n"
 "- Traduction FR : Muerte (Nov. 24)\n"
+"Texte et scénario vérifiés (Nov. 24)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -511,8 +512,8 @@ msgstr ""
 msgctxt "station-comms"
 msgid "They seemed interested in Liberation Day for some reason."
 msgstr ""
-"Ils semblaient intéressés par le Jour de la Libération pour une raison "
-"quelconque."
+"Ils étaient intéressés par le Jour de la Libération pour une raison que "
+"j'ignore."
 
 #: scripts/scenario_27_liberation.lua:1516
 msgctxt "station-comms"
@@ -520,8 +521,8 @@ msgid ""
 "I could not make sense of what they were saying. They seemed to be talking "
 "in riddles."
 msgstr ""
-"Je n'arrivais pas à comprendre ce qu'ils disaient. Ils semblaient parler par "
-"énigmes."
+"Quand ils nous ont contacté, je n'arrivais pas à comprendre ce qu'ils "
+"disaient. Ils semblaient parler par énigmes."
 
 #: scripts/scenario_27_liberation.lua:1517
 msgctxt "station-comms"
@@ -558,14 +559,15 @@ msgstr ""
 msgctxt "station-comms"
 msgid "They were asking us about nova causality before trying to destroy us."
 msgstr ""
-"Ils nous ont interrogés sur la causalité des supernova avant d'essayer de "
-"nous détruire."
+"Ils nous ont contacté et interrogé sur la causalité des supernova avant "
+"d'essayer de nous détruire."
 
 #: scripts/scenario_27_liberation.lua:1524
 msgctxt "station-comms"
 msgid "They're just attacking everything per usual."
 msgstr ""
-"Ils attaquent tout comme d'habitude. C'est tout ce qu'ils savent faire."
+"Ils attaquent tout et tout le monde comme d'habitude. Pfff, c'est tout ce "
+"qu'ils savent faire."
 
 #: scripts/scenario_27_liberation.lua:1571
 #: scripts/scenario_27_liberation.lua:3196
@@ -1115,7 +1117,7 @@ msgstr ""
 "dirigeaient vers %s en secteur %s. Leur cap approximatif était %s."
 
 #: scripts/scenario_27_liberation.lua:3669
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid "Last we heard, they were in %s"
 msgstr "Aux dernières nouvelles, il se trouvait dans le secteur %s."
@@ -1387,10 +1389,10 @@ msgstr "%s est %s et %s."
 #: scripts/scenario_27_liberation.lua:3885
 #: scripts/scenario_27_liberation.lua:3921
 #: scripts/scenario_27_liberation.lua:3932
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid "%s and %s is the same as %s and %s."
-msgstr "%s et %s sont identiques à %s et %s."
+msgstr "%s et %s sont la même chose que %s et %s."
 
 #: scripts/scenario_27_liberation.lua:3866
 #: scripts/scenario_27_liberation.lua:3887
@@ -1438,7 +1440,7 @@ msgstr "%s est plus grand que %s et plus petit que %s."
 #: scripts/scenario_27_liberation.lua:3906
 #: scripts/scenario_27_liberation.lua:3943
 #: scripts/scenario_27_liberation.lua:3953
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid "%s is less than %s."
 msgstr "%s est plus petit que %s."
@@ -1450,7 +1452,7 @@ msgid "%s is %s and %s"
 msgstr "%s est %s et %s."
 
 #: scripts/scenario_27_liberation.lua:3928
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid "%s is more than %s"
 msgstr "%s est plus grand que %s."

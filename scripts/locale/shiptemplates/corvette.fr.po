@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-11-04 23:45+0100\n"
+"PO-Revision-Date: 2024-11-17 17:34+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -16,7 +16,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:14
 msgctxt "ship"
 msgid "Atlantis X23"
-msgstr ""
+msgstr "Atlantis X23"
 
 #: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
 #: scripts/shiptemplates/corvette.lua:101
@@ -38,7 +38,7 @@ msgstr "Corvettes"
 #: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
 msgctxt "subclass"
 msgid "Destroyer"
-msgstr ""
+msgstr "Destroyer"
 
 #: scripts/shiptemplates/corvette.lua:15
 msgid ""
@@ -60,7 +60,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:33
 msgctxt "playerShip"
 msgid "Atlantis"
-msgstr ""
+msgstr "Atlantis"
 
 #: scripts/shiptemplates/corvette.lua:34
 msgid ""
@@ -108,7 +108,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:101
 msgctxt "subclass"
 msgid "Popper"
-msgstr ""
+msgstr "Éclateur"
 
 #: scripts/shiptemplates/corvette.lua:102
 msgid ""
@@ -132,7 +132,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:157
 msgctxt "subclass"
 msgid "Gunner"
-msgstr ""
+msgstr "Canonnier"
 
 #: scripts/shiptemplates/corvette.lua:158
 msgid ""
@@ -155,7 +155,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:217
 msgctxt "subclass"
 msgid "Support"
-msgstr ""
+msgstr "Soutien"
 
 #: scripts/shiptemplates/corvette.lua:218
 msgid ""
@@ -198,7 +198,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:301
 msgctxt "subclass"
 msgid "Freighter"
-msgstr ""
+msgstr "Cargo"
 
 #: scripts/shiptemplates/corvette.lua:236
 msgid ""
@@ -332,7 +332,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:315
 msgctxt "subclass"
 msgid "Freighter/Carrier"
-msgstr ""
+msgstr "Cargo/Transporteur"
 
 #: scripts/shiptemplates/corvette.lua:316
 msgid "Benedict is an improved version of the Jump Carrier"
@@ -350,12 +350,12 @@ msgstr "Le Kiriya est un transporteur équipé d'un moteur à vitesse lumière."
 #: scripts/shiptemplates/corvette.lua:360
 msgctxt "playerShip"
 msgid "Saipan"
-msgstr ""
+msgstr "Saipan"
 
 #: scripts/shiptemplates/corvette.lua:360
 msgctxt "subclass"
 msgid "Carrier"
-msgstr ""
+msgstr "Transporteur"
 
 #: scripts/shiptemplates/corvette.lua:361
 msgid ""

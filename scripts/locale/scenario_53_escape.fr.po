@@ -518,7 +518,7 @@ msgid ""
 msgstr ""
 "Les Frégates sont des vaisseaux d'une taille supérieure à celle des "
 "Chasseurs Stellaires. Ils nécessitent un équipage de 3 à 20 personnes.\n"
-"Pensez Firefly, Faucon Millenium, Esclave I (le navire de Boba Fett) dans "
+"Pensez Firefly, Faucon Millenium, Esclave I (le vaisseau de Boba Fett) dans "
 "Star Wars.\n"
 "\n"
 "Ils comportent généralement 2 sections de bouclier ou plus, mais rarement "
@@ -685,7 +685,7 @@ msgid ""
 "crews serving on the front lines or in well established areas under the "
 "protection of the Human Navy more generally."
 msgstr ""
-"Les vaisseaux Grand public sont souvent utilisés par les équipages de la FCU "
+"Les vaisseaux grand public sont souvent utilisés par les équipages de la FCU "
 "(Flotte Celeste Unifiée) servant sur les lignes de front ou, de manière plus "
 "générale, dans des zones bien établies sous la protection de la Marine "
 "Humaine."
@@ -1774,7 +1774,7 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:2027
 msgctxt "ammo-comms"
 msgid "Ordnance available:"
-msgstr "Munitions disponibles :"
+msgstr "- Munitions disponibles :"
 
 #: scripts/scenario_53_escape.lua:2010
 msgctxt "ammo-comms"
@@ -1805,13 +1805,13 @@ msgstr "HVLIs"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s %s@%i rep"
-msgstr "%s %s@%i rép"
+msgstr "%s %s (%i rép)"
 
 #: scripts/scenario_53_escape.lua:2021
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s, %s@%i rep"
-msgstr "%s, %s@%i rép"
+msgstr "%s, %s (%i rép)"
 
 #: scripts/scenario_53_escape.lua:2028
 #, lua-format

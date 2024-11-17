@@ -521,7 +521,7 @@ msgid ""
 msgstr ""
 "Ce sont des informations \"spoiler\" de la mission. Réfléchissez bien avant "
 "de les révéler au joueurs. Si vous pensez tout de même devoir le faire, je "
-"vous suggère de sélectionner le vaisseau joueurs en utilisant le widget à "
+"vous suggère de sélectionner le vaisseau joueur en utilisant le widget à "
 "droite du bouton \"Message général\", puis de cliquer sur le bouton "
 "\"Envoyer message\", de vous identifier en tant que personnage dans le jeu "
 "comme le technicien en cartographie stellaire du quartier général de la "
@@ -3371,7 +3371,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:5437
 msgctxt "upgrade-comms"
 msgid "Back to ship upgrade category explanation list"
-msgstr "Retour à la liste des explications"
+msgstr "Revenir aux explications sur les catégories de mises à niveau"
 
 #: scripts/scenario_44_outpost.lua:5410
 msgctxt "upgrade-comms"
