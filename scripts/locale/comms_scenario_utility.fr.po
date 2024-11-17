@@ -24,7 +24,7 @@ msgid "Make external flexible utility for handling communications"
 msgstr ""
 "Créer un utilitaire LUA flexible externe aux scénario pour gérer les "
 "communications.\n"
-"TRADUCTION EN COURS : 779/1886     41%"
+"TRADUCTION EN COURS : 792/1886     42%"
 
 #: scripts/comms_scenario_utility.lua:207
 #: scripts/comms_scenario_utility.lua:1491
@@ -524,7 +524,7 @@ msgstr "Stations"
 #: scripts/comms_scenario_utility.lua:662
 msgctxt "scienceDB"
 msgid "Friendly"
-msgstr "Amical"
+msgstr "Amicale"
 
 #: scripts/comms_scenario_utility.lua:667
 msgctxt "scienceDB"
@@ -532,6 +532,9 @@ msgid ""
 "Friendly stations share their short range telemetry with your ship on the "
 "Relay and Strategic Map consoles. These are the known friendly stations."
 msgstr ""
+"Les stations amies partagent leur radar à courte portée avec votre vaisseau "
+"sur vos postes Communications et Carte tactique.\n"
+"Sont listées ici les stations amies que vous avez contactées."
 
 #: scripts/comms_scenario_utility.lua:681
 msgctxt "scienceDB"
@@ -539,6 +542,10 @@ msgid ""
 "Neutral stations don't share their short range telemetry with your ship, but "
 "they do allow for docking. These are the known neutral stations."
 msgstr ""
+"Les stations neutres ne partagent pas leur radar à courte portée avec votre "
+"vaisseau, mais elles vous autorisent à vous amarrer et proposent divers "
+"services.\n"
+"Sont listées ici les stations amies que vous avez contactées."
 
 #: scripts/comms_scenario_utility.lua:698
 #, lua-format
@@ -627,37 +634,37 @@ msgid "Location, Faction"
 msgstr "Localisation, faction"
 
 #: scripts/comms_scenario_utility.lua:755
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "Roving, %s"
-msgstr ""
+msgstr "Itinérante, %s"
 
 #: scripts/comms_scenario_utility.lua:763
 msgctxt "scienceDB"
 msgid "share energy"
-msgstr "partager l'énergie"
+msgstr "Partage d'énergie"
 
 #: scripts/comms_scenario_utility.lua:768
 msgctxt "scienceDB"
 msgid "repair hull"
-msgstr "réparer la coque"
+msgstr "Réparation de coque"
 
 #: scripts/comms_scenario_utility.lua:770
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, repair hull"
-msgstr "%s, réparer la coque"
+msgstr "%s, Rép. de coque"
 
 #: scripts/comms_scenario_utility.lua:776
 msgctxt "scienceDB"
 msgid "replenish probes"
-msgstr "réapprovisionner les sondes"
+msgstr "Sondes"
 
 #: scripts/comms_scenario_utility.lua:778
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, replenish probes"
-msgstr "%s, réapprovisionner les sondes"
+msgstr "%s, Sondes"
 
 #: scripts/comms_scenario_utility.lua:783
 msgctxt "scienceDB"
@@ -672,33 +679,33 @@ msgstr "Service d'accueil"
 #: scripts/comms_scenario_utility.lua:807
 msgctxt "scienceDB"
 msgid "Restock Homing"
-msgstr "Réapprovisionner les Homing"
+msgstr "Munitions Homing"
 
 #: scripts/comms_scenario_utility.lua:808
 msgctxt "scienceDB"
 msgid "Restock HVLI"
-msgstr "Réapprovisionner les HVLI"
+msgstr "Munitions HVLI"
 
 #: scripts/comms_scenario_utility.lua:809
 msgctxt "scienceDB"
 msgid "Restock Mine"
-msgstr ""
+msgstr "Munitions Mines"
 
 #: scripts/comms_scenario_utility.lua:810
 msgctxt "scienceDB"
 msgid "Restock Nuke"
-msgstr ""
+msgstr "Munitions Nukes"
 
 #: scripts/comms_scenario_utility.lua:811
 msgctxt "scienceDB"
 msgid "Restock EMP"
-msgstr ""
+msgstr "Munitions EMP"
 
 #: scripts/comms_scenario_utility.lua:816
 #, lua-format
 msgctxt "scienceDB"
 msgid "%i reputation each"
-msgstr ""
+msgstr "%i rép chacune"
 
 #: scripts/comms_scenario_utility.lua:823
 msgctxt "scienceDB"
@@ -708,7 +715,7 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:824
 msgctxt "scienceDB"
 msgid "Repair combat maneuver"
-msgstr "Réparer la manœuvre de combat"
+msgstr ""
 
 #: scripts/comms_scenario_utility.lua:825
 msgctxt "scienceDB"
@@ -735,12 +742,13 @@ msgstr ""
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s reputation"
-msgstr "%s réputation"
+msgstr "%s rép"
 
 #: scripts/comms_scenario_utility.lua:840
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Drop supplies"
-msgstr ""
+msgstr "Livrais. caisse réappro"
 
 #: scripts/comms_scenario_utility.lua:841
 msgctxt "scienceDB"
@@ -755,27 +763,27 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:843
 msgctxt "scienceDB"
 msgid "Standard reinforcements"
-msgstr ""
+msgstr "Renforts Vipère MK5"
 
 #: scripts/comms_scenario_utility.lua:844
 msgctxt "scienceDB"
 msgid "Hornet reinforcements"
-msgstr ""
+msgstr "Renforts Frelon MU52"
 
 #: scripts/comms_scenario_utility.lua:845
 msgctxt "scienceDB"
 msgid "Phobos reinforcements"
-msgstr ""
+msgstr "Renforts Phobos T3"
 
 #: scripts/comms_scenario_utility.lua:846
 msgctxt "scienceDB"
 msgid "Stalker reinforcements"
-msgstr ""
+msgstr "Renforts Harceleur R7"
 
 #: scripts/comms_scenario_utility.lua:847
 msgctxt "scienceDB"
 msgid "Adder8 reinforcements"
-msgstr ""
+msgstr "Renforts Vipère MK8"
 
 #: scripts/comms_scenario_utility.lua:848
 msgctxt "scienceDB"
@@ -2684,7 +2692,7 @@ msgstr "Frelon MU52"
 #: scripts/comms_scenario_utility.lua:1888
 msgctxt "stationAssist-comms"
 msgid "Standard Adder MK5"
-msgstr "Vipère standard MK5"
+msgstr "Vipère MK5"
 
 #: scripts/comms_scenario_utility.lua:1889
 msgctxt "stationAssist-comms"
@@ -2767,19 +2775,19 @@ msgstr ""
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "%s is heading for waypoint %s"
-msgstr "%s se dirige vers le waypoint %s."
+msgstr "%s se dirige vers le marqueur %s."
 
 #: scripts/comms_scenario_utility.lua:1923
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "%s has been sent to waypoint %s"
-msgstr "%s a été envoyé au waypoint %s."
+msgstr "%s a été envoyé au marqueur %s."
 
 #: scripts/comms_scenario_utility.lua:1924
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We ordered %s to help at waypoint %s"
-msgstr "Nous venons de donner l'ordre à %s de vous aider au waypoint %s."
+msgstr "Nous venons de donner l'ordre à %s de vous aider au marqueur %s."
 
 #: scripts/comms_scenario_utility.lua:1955
 msgctxt "stationAssist-comms"
@@ -4556,14 +4564,14 @@ msgstr ""
 
 #: scripts/comms_scenario_utility.lua:3684
 #: scripts/comms_scenario_utility.lua:3686
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "station-comms"
 msgid ""
 "%s\n"
 "%s in %s does not buy or sell goods."
 msgstr ""
 "%s\n"
-"%s en %s n'achète ni ne vend de marchandises."
+"- %s en %s n'achète ni ne vend de marchandises."
 
 #: scripts/comms_scenario_utility.lua:3690
 #: scripts/comms_scenario_utility.lua:3692
@@ -6672,7 +6680,6 @@ msgid ""
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:5335
-#, fuzzy
 msgctxt "situationReport-comms"
 msgid "Improve station services"
 msgstr "Réparer et améliorer un des services défectueux de la station"
@@ -11672,7 +11679,7 @@ msgstr "b Coque : "
 #, fuzzy
 msgctxt "ship-comms"
 msgid "Shield: "
-msgstr "Boucliers : "
+msgstr "b Boucliers : "
 
 #: scripts/comms_scenario_utility.lua:9913
 #: scripts/comms_scenario_utility.lua:10050
