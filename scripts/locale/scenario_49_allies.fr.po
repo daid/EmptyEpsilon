@@ -3902,7 +3902,7 @@ msgid ""
 "detect Kraylor ships en route to %s"
 msgstr ""
 "Les Kraylors semblent avoir découvert l'emplacement de l'Amiral Koshenz. "
-"Nous détectons des navires Kraylor en route vers %s."
+"Nous détectons des navires Kraylors en route vers %s."
 
 #: scripts/scenario_49_allies.lua:6274
 #, lua-format

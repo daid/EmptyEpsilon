@@ -40,9 +40,9 @@ msgstr ""
 "\n"
 "- Titre original : Waves\n"
 "- Auteur : Daid (2014)\n"
-"- Traduction FR : Muerte\n"
+"- Traduction FR : Muerte (Aout 23)\n"
 "\n"
-"Communauté française et anglophone sur le Discord USN https://discord.gg/"
+"Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 # Scenario setting

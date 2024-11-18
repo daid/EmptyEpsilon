@@ -3151,7 +3151,7 @@ msgid ""
 "The Exuari! They're getting closer! I'm adding waypoint %i into your system "
 "for our station. Please get here as soon as you can."
 msgstr ""
-"Les Exuaris ! Ils se rapprochent dangereusement ! J'ajoute le marqueur %i "
+"Les Éxuaris ! Ils se rapprochent dangereusement ! J'ajoute le marqueur %i "
 "sur votre radar pour vous indiquer l'emplacement de notre station. Venez dès "
 "que possible, je vous en supplie."
 

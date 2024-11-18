@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -341,7 +341,8 @@ msgstr "Vaisseau original"
 msgctxt "setting"
 msgid "Choose player ship outside of standard player ship list"
 msgstr ""
-"Vous pouvez choisir un vaisseau en dehors de la liste des vaisseaux standard."
+"Vous pouvez choisir un vaisseau en dehors de la liste des vaisseaux "
+"standards."
 
 #, fuzzy
 msgctxt "Unique Ship"
