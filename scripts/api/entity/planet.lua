@@ -75,8 +75,12 @@ function Entity:setPlanetRadius(size)
         pr.size = size
         pr.cloud_size = size*1.05
         pr.atmosphere_size = size*1.2
-        local collision_size = math.sqrt((pr.size * pr.size) - (pr.distance_from_movement_plane * pr.distance_from_movement_plane)) * 1.1;
-        self.components.physics = {type="static", size=collision_size}
+        if (pr.size * pr.size) > (pr.distance_from_movement_plane * pr.distance_from_movement_plane) then
+            local collision_size = math.sqrt((pr.size * pr.size) - (pr.distance_from_movement_plane * pr.distance_from_movement_plane)) * 1.1;
+            self.components.physics = {type="static", size=collision_size}
+        else
+            self.components.physics = nil
+        end
     end
     return self
 end
@@ -106,8 +110,12 @@ function Entity:setDistanceFromMovementPlane(z)
     local pr = self.components.planet_render
     if pr then
         pr.distance_from_movement_plane = z
-        local collision_size = math.sqrt((pr.size * pr.size) - (pr.distance_from_movement_plane * pr.distance_from_movement_plane)) * 1.1;
-        self.components.physics = {type="static", size=collision_size}
+        if (pr.size * pr.size) > (pr.distance_from_movement_plane * pr.distance_from_movement_plane) then
+            local collision_size = math.sqrt((pr.size * pr.size) - (pr.distance_from_movement_plane * pr.distance_from_movement_plane)) * 1.1;
+            self.components.physics = {type="static", size=collision_size}
+        else
+            self.components.physics = nil
+        end
     end
     return self
 end
