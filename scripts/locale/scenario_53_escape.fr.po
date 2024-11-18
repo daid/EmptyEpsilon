@@ -224,7 +224,7 @@ msgctxt "defeat-msgMainscreen"
 msgid "You were destroyed. The Human Navy did not receive your Kraylor intel."
 msgstr ""
 "Vous avez été détruit.\n"
-"La Marine Humaine n'a pas pu recevoir vos informations sur les Kraylors."
+"La Marine humaine n'a pas pu recevoir vos informations sur les Kraylors."
 
 #: scripts/scenario_53_escape.lua:233
 msgctxt "repair-msgEngineer"
@@ -688,7 +688,7 @@ msgstr ""
 "Les vaisseaux grand public sont souvent utilisés par les équipages de la FCU "
 "(Flotte Celeste Unifiée) servant sur les lignes de front ou, de manière plus "
 "générale, dans des zones bien établies sous la protection de la Marine "
-"Humaine."
+"humaine."
 
 #: scripts/scenario_53_escape.lua:410
 msgctxt "scienceDB"
@@ -2942,7 +2942,7 @@ msgid ""
 msgstr ""
 "Toutes nos félicitations !\n"
 "Vous avez su échapper aux griffes des Kraylors et transmis avec succès les "
-"données Kraylors à la Marine Humaine."
+"données Kraylors à la Marine humaine."
 
 #: scripts/scenario_53_escape.lua:3796
 msgctxt "ZoneLabelDescription-junk"

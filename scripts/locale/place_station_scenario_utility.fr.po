@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: scripts/place_station_scenario_utility.lua:387
@@ -56,7 +56,7 @@ msgid ""
 "well as other independent clients on a contract basis"
 msgstr ""
 "Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
-"téléporteurs pour la flotte de la marine humaine ainsi que pour d'autres "
+"téléporteurs pour la flotte de la Marine humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
 
 #: scripts/place_station_scenario_utility.lua:429

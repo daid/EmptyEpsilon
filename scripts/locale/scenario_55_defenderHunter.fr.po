@@ -333,7 +333,7 @@ msgid ""
 "The Kraylors may be human navy enemies, but they make some mighty fine BBQ "
 "Mynock"
 msgstr ""
-"Les Kraylors sont peut-être les ennemis de la marine humaine, mais ils "
+"Les Kraylors sont peut-être les ennemis de la Marine humaine, mais ils "
 "fabriquent de très bons BBQ Mynock, On peut au moins leur accorder ça."
 
 #: scripts/scenario_55_defenderHunter.lua:174

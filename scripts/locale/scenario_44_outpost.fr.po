@@ -371,7 +371,7 @@ msgid ""
 "Based on missile cruiser, reduced tubes, missiles and base warp speed to get "
 "beam weapons and HVLI"
 msgstr ""
-"Basé sur un Croiseur de missiles : missiles, tubes et vitesse lumière "
+"Basé sur un Croiseur lance-missiles : missiles, tubes et vitesse lumière "
 "réduits afin d'installer plus de faisceaux laser ainsi que des HVLI."
 
 msgctxt "Unique Ship"

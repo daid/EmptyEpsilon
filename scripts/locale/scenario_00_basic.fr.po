@@ -71,7 +71,7 @@ msgid ""
 msgstr ""
 "Aucun ennemi. Recommandé pour les scénarios contrôlés par le MJ et "
 "l'initiation des équipages débutants. Le scénario continue jusqu'à ce que le "
-"MJ déclare la victoire ou que tous les vaisseaux de la Marine Humaine soient "
+"MJ déclare la victoire ou que tous les vaisseaux de la Marine humaine soient "
 "détruits."
 
 msgctxt "Enemies"
