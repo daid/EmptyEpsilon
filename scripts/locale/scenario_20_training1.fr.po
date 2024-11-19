@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -18,7 +18,6 @@ msgid "Training: Cruiser"
 msgstr "Entrainement : Croiseur"
 
 # Scenario description
-#, fuzzy
 msgid ""
 "Basic Training Course\n"
 "\n"
@@ -44,9 +43,9 @@ msgstr ""
 "\n"
 "- Titre original : Training: Cruiser\n"
 "- Auteur : Piglit (2021) Révisé par Oznogon\n"
-"- Traduction FR : Muerte\n"
+"- Traduction FR : Muerte (Mai 24)\n"
 "\n"
-"Communauté française et anglophone sur le Discord USN https://discord.gg/"
+"Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 #: scripts/scenario_20_training1.lua:36
@@ -65,7 +64,6 @@ msgid "Exuari shuttle"
 msgstr "Une navette Éxuarie."
 
 #: scripts/scenario_20_training1.lua:79
-#, fuzzy
 msgctxt "goal-incCall"
 msgid ""
 "This is Commander Saberhagen.\n"

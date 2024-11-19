@@ -295,7 +295,7 @@ msgid ""
 "well as other independent clients on a contract basis"
 msgstr ""
 "Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
-"téléporteurs pour la flotte de la marine humaine ainsi que pour d'autres "
+"téléporteurs pour la flotte de la Marine humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
 
 #: scripts/scenario_54_PatrolDuty.lua:356
@@ -3427,7 +3427,7 @@ msgid ""
 msgstr ""
 "Bienvenue dans le quadrant Delta, équipage du %s,\n"
 "Dans cette région, les stations indépendantes sont plus nombreuses que les "
-"stations de la marine humaine, mais elles comptent toutes sur nous pour les "
+"stations de la Marine humaine, mais elles comptent toutes sur nous pour les "
 "protéger."
 
 #: scripts/scenario_54_PatrolDuty.lua:6508
@@ -4050,7 +4050,7 @@ msgstr ""
 "[Commandante Lisbon] Merci de m'avoir ramené mon Francis. Je vous confie mes "
 "recherches sur l'algorithme de refroidissement du système des faisceaux "
 "laser. Apportez-le à la station Utopia Planitia afin qu'ils puissent le "
-"décrypter et qu'il puisse être appliqué aux vaisseaux de la marine humaine."
+"décrypter et qu'il puisse être appliqué aux vaisseaux de la Marine humaine."
 
 #: scripts/scenario_54_PatrolDuty.lua:7532
 #, lua-format
@@ -4071,7 +4071,7 @@ msgstr ""
 "[Utopia Planitia] Nous avons bien reçu les recherches de la commandante "
 "Lisbon sur le système de refroidissement des faisceaux laser. La mise à "
 "niveau est maintenant opérationnelle et disponible pour tous les vaisseaux "
-"de la marine humaine."
+"de la Marine humaine."
 
 #: scripts/scenario_54_PatrolDuty.lua:7773
 #, lua-format

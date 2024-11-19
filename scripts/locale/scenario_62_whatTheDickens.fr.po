@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
@@ -41,7 +41,7 @@ msgstr ""
 "\n"
 "- Titre original : What the Dickens\n"
 "- Auteur : Xansta (2018)\n"
-"- Traduction FR : Muerte (Fév.24)\n"
+"- Traduction FR : Muerte (Fév. 24)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -502,7 +502,7 @@ msgstr ""
 "D'autres missions pourront être ajoutées. Amarrez-vous à Somerset pour "
 "définir des missions supplémentaires.\n"
 "\n"
-"Bienvenue dans la zone londonienne sous contrôle de la marine humaine !"
+"Bienvenue dans la zone londonienne sous contrôle de la Marine humaine !"
 
 #: scripts/scenario_62_whatTheDickens.lua:643
 #: scripts/scenario_62_whatTheDickens.lua:740
