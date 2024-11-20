@@ -2078,7 +2078,7 @@ msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
-msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rep)"
+msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rép)"
 
 #: scripts/scenario_53_escape.lua:2272
 msgctxt "stationAssist-comms"

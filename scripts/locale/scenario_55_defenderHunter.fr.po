@@ -2115,7 +2115,7 @@ msgstr "Informations générales sur la station"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
-msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rep)"
+msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rép)"
 
 #: scripts/scenario_55_defenderHunter.lua:3154
 msgctxt "stationAssist-comms"

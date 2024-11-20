@@ -29,7 +29,7 @@ msgid ""
 "Carrier and several player ships with turrets available for use by the "
 "players made available with this scenario script and the associated files."
 msgstr ""
-"EN COURS DE TRADUCTION 67%\n"
+"EN COURS DE TRADUCTION 88%\n"
 "\n"
 "3 vaisseaux : un transporteur et 2 vaisseaux plus petits amarrés au "
 "transporteur.\n"
@@ -1579,30 +1579,30 @@ msgstr ""
 "Marchandises ou composants disponibles : (quantité, coût en réputation)\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3181
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
 msgstr "     %s : %i, %i\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3184
+#, fuzzy
 msgctxt "trade-comms"
 msgid "Current Cargo:\n"
 msgstr "Cargaison actuelle\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3191
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
 msgstr "     %s : %i\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3197
-#, fuzzy
 msgctxt "trade-comms"
 msgid "     Empty\n"
 msgstr "     Vide\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3200
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
 msgstr "Espace disponible : %i, Réputation disponible : %i\n"
@@ -1612,7 +1612,7 @@ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 #: scripts/scenario_56_carrierTurret.lua:4223
 #: scripts/scenario_56_carrierTurret.lua:4249
 #: scripts/scenario_56_carrierTurret.lua:4303
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
 msgstr "Acheter 1 %s pour %i rép"
@@ -1624,7 +1624,6 @@ msgid "Type: %s, Quantity: %i, Rep: %i"
 msgstr "Type : %s, Quantité : %i, Rép : %i"
 
 #: scripts/scenario_56_carrierTurret.lua:3211
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -1635,7 +1634,6 @@ msgstr ""
 
 #: scripts/scenario_56_carrierTurret.lua:3213
 #: scripts/scenario_56_carrierTurret.lua:3218
-#, fuzzy
 msgctxt "needRep-comms"
 msgid ""
 "\n"
@@ -1666,7 +1664,7 @@ msgstr ""
 "Acheté"
 
 #: scripts/scenario_56_carrierTurret.lua:3246
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
 msgstr "Échanger de la Nourriture (food) contre %s"
@@ -1682,7 +1680,6 @@ msgstr "Type : %s, Quantité : %i"
 #: scripts/scenario_56_carrierTurret.lua:3254
 #: scripts/scenario_56_carrierTurret.lua:3286
 #: scripts/scenario_56_carrierTurret.lua:3318
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -1693,13 +1690,13 @@ msgstr ""
 
 #: scripts/scenario_56_carrierTurret.lua:3278
 #: scripts/scenario_56_carrierTurret.lua:4135
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr "Échanger des produits de luxe (luxury) contre %s"
 
 #: scripts/scenario_56_carrierTurret.lua:3310
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
 msgstr "Échanger des Médicaments (medicine) contre %s"
@@ -1712,7 +1709,7 @@ msgstr "Larguer la cargaison"
 
 #: scripts/scenario_56_carrierTurret.lua:3341
 #: scripts/scenario_56_carrierTurret.lua:3826
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid ""
 "Available space: %i\n"
@@ -1723,43 +1720,37 @@ msgstr ""
 
 #: scripts/scenario_56_carrierTurret.lua:3350
 #: scripts/scenario_56_carrierTurret.lua:3835
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
-msgstr "Et un %s de largué, un !"
+msgstr "Un %s largué"
 
 #: scripts/scenario_56_carrierTurret.lua:3431
-#, fuzzy
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
 
 #: scripts/scenario_56_carrierTurret.lua:3435
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
 
 #: scripts/scenario_56_carrierTurret.lua:3436
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
 
 #: scripts/scenario_56_carrierTurret.lua:3437
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
 msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
 
 #: scripts/scenario_56_carrierTurret.lua:3444
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
 
 #: scripts/scenario_56_carrierTurret.lua:3446
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
@@ -1771,7 +1762,6 @@ msgid "Not enough reputation."
 msgstr "Pas assez de réputation."
 
 #: scripts/scenario_56_carrierTurret.lua:3456
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
@@ -1816,7 +1806,6 @@ msgstr ""
 "occupés pour faire affaire avec vous."
 
 #: scripts/scenario_56_carrierTurret.lua:3479
-#, fuzzy
 msgctxt "station-comms"
 msgid "I need information"
 msgstr "j'aurai besoin d'informations"
@@ -1832,7 +1821,7 @@ msgid "What goods do you have available for sale or trade?"
 msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
 
 #: scripts/scenario_56_carrierTurret.lua:3497
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "   %14s: %2i, %3i\n"
 msgstr "   %14s : %2i, %3i\n"
@@ -1849,7 +1838,6 @@ msgid "Yes, we see %i enemies within 30U"
 msgstr "Oui, nous comptons %i ennemis dans un rayon de 30U."
 
 #: scripts/scenario_56_carrierTurret.lua:3516
-#, fuzzy
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see one enemy within 30U"
 msgstr "Oui, nous observons 1 ennemi à moins de 30U."
@@ -1870,7 +1858,6 @@ msgid "Where can I find particular goods?"
 msgstr "Où puis-je trouver des marchandises particulières ?"
 
 #: scripts/scenario_56_carrierTurret.lua:3531
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "Friendly stations generally have food or medicine or both. Neutral stations "
@@ -1881,7 +1868,6 @@ msgstr ""
 "marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
 
 #: scripts/scenario_56_carrierTurret.lua:3533
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 " Beyond that, I have no knowledge of specific stations.\n"
@@ -1893,13 +1879,11 @@ msgstr ""
 "Revenez plus tard, quelqu'un d'autre en saura peut-être plus que moi."
 
 #: scripts/scenario_56_carrierTurret.lua:3539
-#, fuzzy
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
 msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 
 #: scripts/scenario_56_carrierTurret.lua:3541
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -1919,7 +1903,6 @@ msgid "Station %s in sector %s has %s%s"
 msgstr "La station %s dans le secteur %s a %s%s"
 
 #: scripts/scenario_56_carrierTurret.lua:3554
-#, fuzzy
 msgctxt "stationGeneralInfo-comms"
 msgid "General station information"
 msgstr "Informations générales sur la station"
@@ -1951,33 +1934,31 @@ msgid "Connect Tractor"
 msgstr ""
 
 #: scripts/scenario_56_carrierTurret.lua:3768
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rép)"
 
 #: scripts/scenario_56_carrierTurret.lua:3770
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
 "Vous devez définir un marqueur avant de faire une demande de ravitaillement."
 
 #: scripts/scenario_56_carrierTurret.lua:3772
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
 
 #: scripts/scenario_56_carrierTurret.lua:3774
 #: scripts/scenario_56_carrierTurret.lua:3800
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
 msgstr "Marqueur %d"
 
 #: scripts/scenario_56_carrierTurret.lua:3782
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
@@ -1986,25 +1967,22 @@ msgstr ""
 
 #: scripts/scenario_56_carrierTurret.lua:3784
 #: scripts/scenario_56_carrierTurret.lua:3805
-#, fuzzy
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr "Pas assez de réputation !"
 
 #: scripts/scenario_56_carrierTurret.lua:3794
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
 msgstr "Merci de nous envoyer des renforts ! (%d rép)"
 
 #: scripts/scenario_56_carrierTurret.lua:3796
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr "Vous devez définir un marqueur avant de pouvoir demander des renforts."
 
 #: scripts/scenario_56_carrierTurret.lua:3798
-#, fuzzy
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
@@ -2028,7 +2006,6 @@ msgid " or food"
 msgstr " ou de la Nourriture (food)"
 
 #: scripts/scenario_56_carrierTurret.lua:3912
-#, fuzzy
 msgctxt "trade-comms"
 msgid " and will trade it for food"
 msgstr " et va l'échanger contre de la Nourriture (food)"
@@ -2039,7 +2016,6 @@ msgid " or luxury"
 msgstr " ou des Produits de luxe (luxury)"
 
 #: scripts/scenario_56_carrierTurret.lua:3920
-#, fuzzy
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
 msgstr " et va l'échanger contre des Produits de luxe (luxury)"
@@ -2056,13 +2032,11 @@ msgid "Sir, how can we assist?"
 msgstr "Monsieur, comment pouvons-nous vous assister ?"
 
 #: scripts/scenario_56_carrierTurret.lua:3980
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr "Défendez un marqueur"
 
 #: scripts/scenario_56_carrierTurret.lua:3982
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
@@ -2070,31 +2044,28 @@ msgstr ""
 "un."
 
 #: scripts/scenario_56_carrierTurret.lua:3985
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/scenario_56_carrierTurret.lua:3987
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
 msgstr "Défendez le marqueur %d"
 
 #: scripts/scenario_56_carrierTurret.lua:3989
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
 msgstr "Nous partons immédiatement défendre le marqueur %d."
 
 #: scripts/scenario_56_carrierTurret.lua:3996
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr "Aidez-nous !"
 
 #: scripts/scenario_56_carrierTurret.lua:3997
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr "Entendu, nous partons immédiatement vous aider."
@@ -2105,49 +2076,49 @@ msgid "Report status"
 msgstr "Au rapport"
 
 #: scripts/scenario_56_carrierTurret.lua:4003
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr "Coque : %d%%\n"
 
 #: scripts/scenario_56_carrierTurret.lua:4006
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr "Boucliers : %d%%\n"
 
 #: scripts/scenario_56_carrierTurret.lua:4008
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
 msgstr "Boucliers avant : %d%%\n"
 
 #: scripts/scenario_56_carrierTurret.lua:4009
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
 msgstr "Boucliers arrière : %d%%\n"
 
 #: scripts/scenario_56_carrierTurret.lua:4012
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr "Boucliers %s : %d%%\n"
 
 #: scripts/scenario_56_carrierTurret.lua:4019
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr "Missiles %s : %d/%d\n"
 
 #: scripts/scenario_56_carrierTurret.lua:4028
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr "Amarrez-vous à %s"
 
 #: scripts/scenario_56_carrierTurret.lua:4029
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr "En cours d'amarrage à %s."
@@ -2188,7 +2159,6 @@ msgid "Your feeble threats are meaningless."
 msgstr "Vos petites menaces ne nous impressionnent pas."
 
 #: scripts/scenario_56_carrierTurret.lua:4079
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
@@ -2238,7 +2208,6 @@ msgstr ""
 "Communication interrompue."
 
 #: scripts/scenario_56_carrierTurret.lua:4086
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
@@ -2288,7 +2257,6 @@ msgid "Mind your own business!"
 msgstr "Occupez-vous de vos affaires !"
 
 #: scripts/scenario_56_carrierTurret.lua:4113
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Yes?"
 msgstr "Oui, c'est pour quoi ?"
@@ -2299,13 +2267,11 @@ msgid "Where are you headed?"
 msgstr "Où allez-vous ?"
 
 #: scripts/scenario_56_carrierTurret.lua:4137
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter for trade"
 msgstr "Stock insuffisant sur le cargo pour commercer"
 
 #: scripts/scenario_56_carrierTurret.lua:4142
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Traded"
 msgstr "Échangé"
@@ -2319,7 +2285,6 @@ msgstr "Luxe insuffisant pour commercer"
 #: scripts/scenario_56_carrierTurret.lua:4225
 #: scripts/scenario_56_carrierTurret.lua:4251
 #: scripts/scenario_56_carrierTurret.lua:4305
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Insufficient cargo space for purchase"
 msgstr "Votre espace de stockage est insuffisant pour acheter."
@@ -2336,7 +2301,6 @@ msgstr "Stock insuffisant sur le cargo"
 #: scripts/scenario_56_carrierTurret.lua:4230
 #: scripts/scenario_56_carrierTurret.lua:4256
 #: scripts/scenario_56_carrierTurret.lua:4310
-#, fuzzy
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
 msgstr "Réputation insuffisante pour acheter."
@@ -2345,7 +2309,6 @@ msgstr "Réputation insuffisante pour acheter."
 #: scripts/scenario_56_carrierTurret.lua:4235
 #: scripts/scenario_56_carrierTurret.lua:4261
 #: scripts/scenario_56_carrierTurret.lua:4315
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Purchased"
 msgstr "Acheté"
@@ -2362,10 +2325,10 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:4337
 msgctxt "trade-comms"
 msgid "\n"
-msgstr ""
+msgstr "\n"
 
 #: scripts/scenario_56_carrierTurret.lua:4207
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
 msgstr "Où allez-vous ? (coût : %f rép)"
@@ -2376,7 +2339,6 @@ msgid "Why are you bothering me?"
 msgstr "Pourquoi me dérangez-vous ?"
 
 #: scripts/scenario_56_carrierTurret.lua:4356
-#, fuzzy
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
@@ -2386,7 +2348,6 @@ msgstr ""
 "Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_56_carrierTurret.lua:4358
-#, fuzzy
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
@@ -2567,13 +2528,13 @@ msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_56_carrierTurret.lua:5919
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgMainscreen"
 msgid "Stations: %i\t survived: %i\t destroyed: %i"
 msgstr "Stations : %i sauvées : %i détruites : %i"
 
 #: scripts/scenario_56_carrierTurret.lua:5920
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
@@ -2583,7 +2544,7 @@ msgstr ""
 "Stations amies : %i sauvées : %i détruites : %i"
 
 #: scripts/scenario_56_carrierTurret.lua:5921
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
@@ -2593,7 +2554,7 @@ msgstr ""
 "Stations neutres : %i sauvées : %i détruites : %i"
 
 #: scripts/scenario_56_carrierTurret.lua:5922
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
@@ -2610,7 +2571,6 @@ msgstr ""
 
 #: scripts/scenario_56_carrierTurret.lua:5927
 #: scripts/scenario_56_carrierTurret.lua:5940
-#, fuzzy
 msgctxt "msgMainscreen"
 msgid "Ensign"
 msgstr "Officier"
@@ -2635,7 +2595,6 @@ msgstr "Capitaine"
 
 #: scripts/scenario_56_carrierTurret.lua:5935
 #: scripts/scenario_56_carrierTurret.lua:5948
-#, fuzzy
 msgctxt "msgMainscreen"
 msgid "Admiral"
 msgstr "Amiral"
@@ -2646,6 +2605,8 @@ msgid ""
 "\n"
 "Earned rank: "
 msgstr ""
+"\n"
+"Rang obtenu : "
 
 #: scripts/scenario_56_carrierTurret.lua:5951
 msgctxt "msgMainscreen"
@@ -2653,6 +2614,8 @@ msgid ""
 "\n"
 "Post Target Enemy Base Survival Rank: "
 msgstr ""
+"\n"
+"Rang de survie de la base ennemie : "
 
 #: scripts/scenario_56_carrierTurret.lua:5953
 msgctxt "msgMainscreen"
@@ -2660,6 +2623,8 @@ msgid ""
 "\n"
 "Post Home Base Destruction Rank: "
 msgstr ""
+"\n"
+"Rang de destruction de la base d'accueil : "
 
 #: scripts/scenario_56_carrierTurret.lua:5984
 msgctxt "buttonGM"
