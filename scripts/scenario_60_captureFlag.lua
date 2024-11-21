@@ -1003,14 +1003,14 @@ function setTerrain()
 	clearGMFunctions()
 	addGMFunction(_("buttonGM", "-from Terrain"),mainGMButtons)
 	addGMFunction(string.format(_("buttonGM", "Size: %s -> Next"),terrain_size),function()
-		if terrain_size == "medium" then
-			terrain_size = "large"
+		if terrain_size == _("buttonGM","medium") then
+			terrain_size = _("buttonGM","large")
 			boundary = 200000
-		elseif terrain_size == "large" then
-			terrain_size = "small"
+		elseif terrain_size == _("buttonGM","large") then
+			terrain_size = _("buttonGM","small")
 			boundary = 50000
-		elseif terrain_size == "small" then
-			terrain_size = "medium"
+		elseif terrain_size == _("buttonGM","small") then
+			terrain_size = _("buttonGM","medium")
 			boundary = 100000
 		end
 		if terrain_objects ~= nil and #terrain_objects > 0 then
