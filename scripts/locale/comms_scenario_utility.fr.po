@@ -705,7 +705,7 @@ msgstr "Munitions EMP"
 #, lua-format
 msgctxt "scienceDB"
 msgid "%i reputation each"
-msgstr "%i rép chacune"
+msgstr "%i rép l'unité"
 
 #: scripts/comms_scenario_utility.lua:823
 msgctxt "scienceDB"
@@ -4249,7 +4249,7 @@ msgid ""
 "%s, %s, %s"
 msgstr ""
 "%s\n"
-"- %s, x%s, %s rép chacun."
+"- %s, x%s, %s rép l'unité."
 
 #: scripts/comms_scenario_utility.lua:3393
 #: scripts/comms_scenario_utility.lua:3459
@@ -7147,7 +7147,7 @@ msgstr "Nous avons besoin de HVLI. En avez-vous ?"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%d rep each)"
-msgstr "%s (%d rép chacun)"
+msgstr "%s (%d rép l'unité)"
 
 #: scripts/comms_scenario_utility.lua:5669
 msgctxt "ammo-comms"
@@ -9990,7 +9990,7 @@ msgstr "Stock disponible : %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "How much inventory: %s"
-msgstr "Quantité restante : %s"
+msgstr "Quantité disponible : %s"
 
 #: scripts/comms_scenario_utility.lua:8041
 #, lua-format

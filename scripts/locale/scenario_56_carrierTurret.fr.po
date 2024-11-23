@@ -43,7 +43,7 @@ msgstr ""
 "- Auteur : Xansta (Oct. 2018)\n"
 "- Traduction FR : Muerte (Nov. 24)\n"
 "EN COURS DE TRADUCTION 71%\n"
-"Texte et scénario vérifiés (***)\n"
+"Texte et scénario vérifiés (En cours)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -1443,7 +1443,7 @@ msgstr "Quel genre de munitions ?"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%d rep each)"
-msgstr "%s (%d rép chacun)"
+msgstr "%s (%d rép l'unité)"
 
 #: scripts/scenario_56_carrierTurret.lua:2903
 #: scripts/scenario_56_carrierTurret.lua:3561
@@ -1863,25 +1863,24 @@ msgid ""
 "Goods or components available: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles : (quantité, coût en réputation)\n"
+"- Marchandises disponibles à vendre : (quantité, coût en réputation)\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3181
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s : %i, %i\n"
+msgstr "%s : x%i, %i rép l'unité.\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3184
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Current Cargo:\n"
-msgstr "Cargaison actuelle\n"
+msgstr "- Marchandises à bord : \n"
 
 #: scripts/scenario_56_carrierTurret.lua:3191
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
-msgstr "     %s : %i\n"
+msgstr "%s : x%i\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3197
 msgctxt "trade-comms"
@@ -1892,7 +1891,7 @@ msgstr "     Vide\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Espace disponible : %i, Réputation disponible : %i\n"
+msgstr "- Espace disponible : %i slot(s); Réputation disponible : %i rép\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3208
 #: scripts/scenario_56_carrierTurret.lua:4159
@@ -1908,7 +1907,10 @@ msgstr "Acheter 1 %s pour %i rép"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr "Type : %s, Quantité : %i, Rép : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Stock disponible : %i\n"
+"Coût : %i rép l'unité."
 
 #: scripts/scenario_56_carrierTurret.lua:3211
 msgctxt "trade-comms"
@@ -1917,7 +1919,7 @@ msgid ""
 "Insufficient cargo space for purchase"
 msgstr ""
 "\n"
-"Espace de chargement insuffisant pour acheter"
+"Espace de chargement insuffisant pour acheter."
 
 #: scripts/scenario_56_carrierTurret.lua:3213
 #: scripts/scenario_56_carrierTurret.lua:3218
@@ -1939,7 +1941,7 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station"
+"Stock insuffisant dans la station."
 
 #: scripts/scenario_56_carrierTurret.lua:3223
 msgctxt "trade-comms"
@@ -1948,7 +1950,7 @@ msgid ""
 "purchased"
 msgstr ""
 "\n"
-"Acheté"
+"1 marchandise achetée."
 
 #: scripts/scenario_56_carrierTurret.lua:3246
 #, lua-format
@@ -1992,7 +1994,7 @@ msgstr "Échanger des Médicaments (medicine) contre %s"
 #: scripts/scenario_56_carrierTurret.lua:3825
 msgctxt "trade-comms"
 msgid "Jettison cargo"
-msgstr "Larguer la cargaison"
+msgstr "Larguer des marchandises"
 
 #: scripts/scenario_56_carrierTurret.lua:3341
 #: scripts/scenario_56_carrierTurret.lua:3826
@@ -2002,15 +2004,17 @@ msgid ""
 "Available space: %i\n"
 "What would you like to jettison?"
 msgstr ""
-"Espace disponible : %i\n"
-"Que voudriez-vous larguer ?"
+"Slots de stockage disponible : %i\n"
+"Que voudriez-vous larguer par le sas ?"
 
 #: scripts/scenario_56_carrierTurret.lua:3350
 #: scripts/scenario_56_carrierTurret.lua:3835
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
-msgstr "Un %s largué"
+msgstr ""
+"1 %s larguée.\n"
+"Adieu chère marchandise, tu nous manqueras."
 
 #: scripts/scenario_56_carrierTurret.lua:3361
 #: scripts/scenario_56_carrierTurret.lua:3846
@@ -2156,17 +2160,17 @@ msgstr "Apercevez-vous des ennemis dans votre région ?"
 #, lua-format
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see %i enemies within 30U"
-msgstr "Oui, nous comptons %i ennemis dans un rayon de 30U."
+msgstr "Oui, nous comptons %i ennemis dans un rayon de 30u."
 
 #: scripts/scenario_56_carrierTurret.lua:3516
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see one enemy within 30U"
-msgstr "Oui, nous observons 1 ennemi à moins de 30U."
+msgstr "Oui, nous observons 1 ennemi à moins de 30u."
 
 #: scripts/scenario_56_carrierTurret.lua:3520
 msgctxt "helpfullWarning-comms"
 msgid "No enemies within 30U"
-msgstr "Aucun ennemi à moins de 30U."
+msgstr "Aucun ennemi à moins de 30u."
 
 #: scripts/scenario_56_carrierTurret.lua:3525
 msgctxt "helpfullWarning-comms"
@@ -2455,24 +2459,28 @@ msgid "Docking at %s."
 msgstr "En cours d'amarrage à %s."
 
 #: scripts/scenario_56_carrierTurret.lua:4043
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Attack nearby enemy target"
-msgstr ""
+msgstr "Attaquez les cibles ennemies à proximité"
 
 #: scripts/scenario_56_carrierTurret.lua:4050
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Attacking "
-msgstr ""
+msgstr "Nous partons immédiatement les attaquer "
 
 #: scripts/scenario_56_carrierTurret.lua:4061
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "No enemy targets nearby"
-msgstr ""
+msgstr "Aucune cible ennemie à proximité."
 
 #: scripts/scenario_56_carrierTurret.lua:4063
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Which enemy target?"
-msgstr ""
+msgstr "Quelle cible ennemie ?"
 
 #: scripts/scenario_56_carrierTurret.lua:4075
 msgctxt "shipEnemy-comms"
@@ -2660,7 +2668,7 @@ msgid "\n"
 msgstr "\n"
 
 #: scripts/scenario_56_carrierTurret.lua:4207
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
 msgstr "Où allez-vous ? (coût : %f rép)"
@@ -2740,7 +2748,7 @@ msgstr ""
 "Espace insuffisant sur %s pour accepter votre cargaison de marchandises."
 
 #: scripts/scenario_56_carrierTurret.lua:4544
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "The Ktlitans keep sending harassing ships. We've decrypted some of their "
@@ -2751,17 +2759,17 @@ msgid ""
 "weapons and cannot dock with a station. It is in your best interest to "
 "protect it since it will significantly shorten the duration of your mission."
 msgstr ""
-"[Ordre de mission] Équipage, les Ktlitiens continuent de nous harceler avec "
-"leurs vaisseaux. Nous avons décrypté certaines de leurs communications, "
-"suffisamment pour réussir à identifier le nom de leur base principale, voire "
-"son emplacement.\n"
-"\n"
+"[Ordre de mission]\n"
+"Équipage, les Ktlitiens continuent de nous harceler avec leurs vaisseaux.\n"
+"Nous avons décrypté certaines de leurs communications, suffisamment pour "
+"réussir à identifier le nom de leur base principale, voire son emplacement.\n"
 "Trouvez et détruisez la station Ktlitienne %s. Vous pouvez répondre aux "
 "demandes des stations de la zone si vous le souhaitez, mais votre objectif "
-"principal est de détruire %s. Vous êtes aux commandes de notre nouveau "
-"prototype de transporteur. Comme vous le savez, il dispose d’un arsenal très "
-"réduit et ne peut s’amarrer à une station. Vous avez tout intérêt à le "
-"protéger au risque de réduire considérablement la durée de votre mission."
+"principal est de détruire %s. \n"
+"Vous êtes aux commandes de notre nouveau prototype de transporteur. Comme "
+"vous le savez, il dispose d’un arsenal très réduit et ne peut s’amarrer aux "
+"stations. Vous avez tout intérêt à le protéger au risque de réduire "
+"considérablement la durée de votre mission."
 
 #: scripts/scenario_56_carrierTurret.lua:4545
 #, fuzzy, lua-format
@@ -2960,13 +2968,17 @@ msgid "Boris Eggleston changed his vacation spot to %s in %s"
 msgstr ""
 
 #: scripts/scenario_56_carrierTurret.lua:5182
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "upgradeFred-shipLog"
 msgid ""
 "There's a physicist turned maintenance technician named Frederico Booker "
 "that has developed some innovative beam weapon technology that could "
 "increase the damage produced by our beam weapons. He's based on %s in %s"
 msgstr ""
+"Il y a un certain physicien nommé Frederico Booker devenu technicien de "
+"maintenance sur %s en secteur %s.\n"
+"Il a développé une technologie innovante de faisceaux laser qui peut "
+"augmenter leurs dégâts produits."
 
 #: scripts/scenario_56_carrierTurret.lua:5185
 #: scripts/scenario_56_carrierTurret.lua:5220
@@ -3247,7 +3259,7 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:5984
 msgctxt "buttonGM"
 msgid "Spawn Enemies"
-msgstr "Apparition ennemis"
+msgstr "Apparition d'ennemis"
 
 # Scenario name
 #~ msgid "Empty space"

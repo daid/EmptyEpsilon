@@ -3353,7 +3353,7 @@ msgstr "Obtenir liq. de ref."
 #: scripts/scenario_55_defenderHunter.lua:6372
 msgctxt "buttonGM"
 msgid "Spawn Enemies"
-msgstr "Apparition ennemis"
+msgstr "Apparition d'ennemis"
 
 #~ msgctxt "scienceDescription-station"
 #~ msgid "Training and Coordination"
