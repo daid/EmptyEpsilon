@@ -3235,7 +3235,9 @@ msgstr "Configuration des collecteurs %i"
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Stations: %i\t survived: %i\t destroyed: %i"
-msgstr "Stations : %i sauvées : %i détruites : %i"
+msgstr ""
+"-- Votre bilan --\n"
+"%i stations. Sauvées : %i ; Détruites : %i"
 
 #: scripts/scenario_55_defenderHunter.lua:6185
 #, lua-format
@@ -3245,7 +3247,7 @@ msgid ""
 "Friendly Stations: %i\t survived: %i\t destroyed: %i"
 msgstr ""
 "\n"
-"Stations amies : %i sauvées : %i détruites : %i"
+"%i stations amies. Sauvées : %i ; Détruites : %i"
 
 #: scripts/scenario_55_defenderHunter.lua:6186
 #, lua-format
@@ -3255,7 +3257,7 @@ msgid ""
 "Neutral Stations: %i\t survived: %i\t destroyed: %i"
 msgstr ""
 "\n"
-"Stations neutres : %i sauvées : %i détruites : %i"
+"%i stations neutres. Sauvées : %i ; Détruites : %i"
 
 #: scripts/scenario_55_defenderHunter.lua:6187
 #, lua-format
@@ -3271,7 +3273,7 @@ msgstr ""
 "\n"
 "\n"
 "\n"
-"Stations ennemies : %i sauvées : %i détruites : %i"
+"%i stations ennemies. Sauvées : %i ; Détruites : %i"
 
 #: scripts/scenario_55_defenderHunter.lua:6192
 #: scripts/scenario_55_defenderHunter.lua:6205
