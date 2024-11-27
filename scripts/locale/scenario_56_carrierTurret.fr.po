@@ -40,7 +40,9 @@ msgstr ""
 "- Titre original : Carriers and turrets\n"
 "- Auteur : Xansta (Oct. 2018)\n"
 "- Traduction FR : Muerte (Nov. 24)\n"
-"Texte et scénario en cours de vérification\n"
+"Texte et scénario en cours de vérification : actuellement ce scenario "
+"contient des bogues et est susceptible de ne pas fonctionner correctement. "
+"Muerte (Nov. 24)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -1885,9 +1887,7 @@ msgstr "Améliorer la manœuvre du vaisseau pour 1 Impulsion"
 #: scripts/scenario_56_carrierTurret.lua:3582
 msgctxt "upgradePaulina-comms"
 msgid "You already have the upgrade"
-msgstr ""
-"[Paulina Lindquist]\n"
-"Que faites-vous là ? Vous avez déjà effectué cette mise à niveau."
+msgstr "Que faites-vous là ? Vous avez déjà effectué cette mise à niveau."
 
 #: scripts/scenario_56_carrierTurret.lua:3142
 #: scripts/scenario_56_carrierTurret.lua:3588
@@ -1896,7 +1896,6 @@ msgid "Maneuverability upgraded by 50%"
 msgstr ""
 "Après quelques travaux rapides sur votre vaisseau…\n"
 "\n"
-"[Paulina Lindquist]\n"
 "C'est fait, votre vitesse de manœuvre a été augmentée de 50%."
 
 #: scripts/scenario_56_carrierTurret.lua:3149
@@ -1996,6 +1995,7 @@ msgid ""
 "Insufficient cargo space for purchase"
 msgstr ""
 "\n"
+"\n"
 "Espace de chargement insuffisant pour acheter."
 
 #: scripts/scenario_56_carrierTurret.lua:3213
@@ -2018,7 +2018,8 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station."
+"\n"
+"Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_56_carrierTurret.lua:3223
 msgctxt "trade-comms"
@@ -2055,7 +2056,8 @@ msgid ""
 "Traded"
 msgstr ""
 "\n"
-"Échangé."
+"\n"
+"1 marchandise échangée."
 
 #: scripts/scenario_56_carrierTurret.lua:3278
 #: scripts/scenario_56_carrierTurret.lua:4135
@@ -2893,10 +2895,12 @@ msgstr ""
 "d'améliorer la manœuvre du vaisseau."
 
 #: scripts/scenario_56_carrierTurret.lua:4795
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "upgradePaulina-shipLog"
 msgid "Paulina Lindquist, has been reassigned to station %s in %s"
-msgstr "Paulina Lindquist a été réaffectée à la station %s dans le secteur %s."
+msgstr ""
+"[Message du QG] Paulina Lindquist a été réaffectée à la station %s dans le "
+"secteur %s."
 
 #: scripts/scenario_56_carrierTurret.lua:4816
 #, fuzzy, lua-format
@@ -3308,7 +3312,6 @@ msgstr ""
 "Pendant un instant, j'ai cru entendre un rire diabolique."
 
 #: scripts/scenario_56_carrierTurret.lua:5456
-#, fuzzy
 msgctxt "alienHack-msgOperations"
 msgid ""
 "Internal security sensors indicate ship systems hacked by unknown source. "
