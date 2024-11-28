@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -38,9 +38,9 @@ msgstr ""
 "\n"
 "- Titre original : Close the Gaps\n"
 "- Auteur : Xansta (2018)\n"
-"- Traduction FR : Muerte\n"
+"- Traduction FR : Muerte (Mai 24)\n"
 "\n"
-"Communauté française et anglophone sur le Discord USN https://discord.gg/"
+"Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 # Scenario setting
@@ -253,7 +253,7 @@ msgid ""
 "well as other independent clients on a contract basis"
 msgstr ""
 "Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
-"téléporteurs pour la flotte de la marine humaine ainsi que pour d'autres "
+"téléporteurs pour la flotte de la Marine humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
 
 #: scripts/scenario_50_gaps.lua:578
@@ -2435,7 +2435,7 @@ msgstr ""
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
-msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rep)"
+msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rép)"
 
 #: scripts/scenario_50_gaps.lua:3126
 msgctxt "stationAssist-comms"
@@ -2784,7 +2784,7 @@ msgstr "Acheté"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous ? (coût : %f réputation)"
+msgstr "Où allez-vous ? (coût : %f rép)"
 
 #: scripts/scenario_50_gaps.lua:3507
 msgctxt "trade-comms"
@@ -2808,7 +2808,6 @@ msgid ""
 "Good day."
 msgstr ""
 "Nous n'avons rien pour vous.\n"
-"\n"
 "Bonne journée."
 
 #: scripts/scenario_50_gaps.lua:3862

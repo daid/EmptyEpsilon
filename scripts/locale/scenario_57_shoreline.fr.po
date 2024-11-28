@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -33,8 +33,6 @@ msgstr ""
 "- Difficulté :  ***  (variable)\n"
 "- Vaisseaux joueurs : 1 à 8\n"
 "\n"
-"TRADUCTION EN COURS DE RELECTURE\n"
-"\n"
 "Mission : Des vagues d'ennemis de plus en plus difficiles à contenir. Au "
 "moins une mission obligatoire et plusieurs missions facultatives.\n"
 "\n"
@@ -48,9 +46,10 @@ msgstr ""
 "\n"
 "- Titre original : Shoreline\n"
 "- Auteur : Xansta (2018)\n"
-"- Traduction FR : Muerte\n"
+"- Traduction FR : Muerte (Mai 23)\n"
+"TRADUCTION EN COURS DE RELECTURE\n"
 "\n"
-"Communauté française et anglophone sur le Discord USN https://discord.gg/"
+"Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 #: scripts/scenario_57_shoreline.lua:230
@@ -139,7 +138,7 @@ msgctxt "orders-comms"
 msgid ""
 "Defend bases in the area (human navy and independent) from enemy attack."
 msgstr ""
-"Défendre les bases de la zone (marine humaine et indépendante) contre les "
+"Défendre les bases de la zone (Marine humaine et indépendante) contre les "
 "attaques ennemies."
 
 #: scripts/scenario_57_shoreline.lua:910 scripts/scenario_57_shoreline.lua:3758
@@ -152,7 +151,7 @@ msgstr "Construction de navires et établissement d'entretien"
 msgctxt "stationGeneralInfo-comms"
 msgid "Human Navy headquarters. Loss of this station would be devastating"
 msgstr ""
-"Quartier général de la marine humaine. La perte de cette station serait "
+"Quartier général de la Marine humaine. La perte de cette station serait "
 "dévastatrice."
 
 #: scripts/scenario_57_shoreline.lua:929 scripts/scenario_57_shoreline.lua:3836
@@ -862,7 +861,7 @@ msgid ""
 "well as other independent clients on a contract basis"
 msgstr ""
 "Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
-"téléporteurs pour la flotte de la marine humaine ainsi que pour d'autres "
+"téléporteurs pour la flotte de la Marine humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
 
 #: scripts/scenario_57_shoreline.lua:2281
@@ -2406,7 +2405,7 @@ msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
-msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rep)"
+msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rép)"
 
 #: scripts/scenario_57_shoreline.lua:7904
 msgctxt "stationAssist-comms"
@@ -3201,7 +3200,9 @@ msgstr "[%s, Secteur %s] Il y a des ennemis à proximité."
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Stations: %i\t survived: %i\t destroyed: %i"
-msgstr "Stations : %i sauvées : %i détruites : %i"
+msgstr ""
+"-- Votre bilan --\n"
+"%i stations. Sauvées : %i ; Détruites : %i"
 
 #: scripts/scenario_57_shoreline.lua:9841
 #, lua-format
@@ -3211,7 +3212,7 @@ msgid ""
 "Friendly Stations: %i\t survived: %i\t destroyed: %i"
 msgstr ""
 "\n"
-"Stations amies : %i sauvées : %i détruites : %i"
+"%i stations amies. Sauvées : %i ; Détruites : %i"
 
 #: scripts/scenario_57_shoreline.lua:9842
 #, lua-format
@@ -3221,7 +3222,7 @@ msgid ""
 "Neutral Stations: %i\t survived: %i\t destroyed: %i"
 msgstr ""
 "\n"
-"Stations neutres : %i sauvées : %i détruites : %i"
+"%i stations neutres. Sauvées : %i ; Détruites : %i"
 
 #: scripts/scenario_57_shoreline.lua:9843
 #, lua-format
@@ -3246,7 +3247,7 @@ msgid ""
 "Human Navy headquarters station Vaiken destroyed"
 msgstr ""
 "\n"
-"Le quartier général de la marine humaine sur Vaiken a été détruit."
+"Le quartier général de la Marine humaine sur Vaiken a été détruit."
 
 #: scripts/scenario_57_shoreline.lua:9849
 msgctxt "msgMainscreen"
@@ -3982,7 +3983,7 @@ msgid ""
 "Defend bases in the area (human navy and independent) from enemy attack and "
 "destroy three enemy bases."
 msgstr ""
-"Défendre les bases de la zone (marine humaine et indépendante) contre les "
+"Défendre les bases de la zone (Marine humaine et indépendante) contre les "
 "attaques ennemies et détruire 3 bases ennemies."
 
 # Scenario setting

@@ -649,7 +649,7 @@ function setGlobals()
 	-- Drone related global variables
 		dronesAreAllowed = true 				-- See GM button. The base boolean to turn on/off drone usage within the scenarios
 		uniform_drone_carrying_capacity = 50	-- See GM button. This is the max number of drones that can be carried by a playership; for the initial implementations, all player ships will have equal capacity
-		drone_name_type = "squad-num of size"	-- See GM button. Valid values are "default" (use EE), "squad-num/size" (K), "short" (X preferred), "squad-num of size" (X alternate)
+		drone_name_type = _("setting-callsign", "squad-num of size")	-- See GM button. Valid values are "default" (use EE), "squad-num/size" (K), "short" (X preferred), "squad-num of size" (X alternate)
 		drone_modified_from_template =  true 	-- See GM button. Boolean governing whether drone properties will be modified from their original template values
 		drone_hull_strength = 25	-- See GM button. Original: 30  drones do not have shields and only have their hull strength for defense; reasonable values should be from 25-75; obviously the higher the stronger
 		drone_impulse_speed = 120	-- See GM button. Original: 120 drones only have impulse engines, and usually tend to be faster because they are lighter and no living pilots required; reasonable values should be from 100-150
@@ -740,7 +740,7 @@ function setGlobals()
 		tradeLuxury = {}	--stations that will trade luxury for other goods; 
 		tradeMedicine = {}	--stations that will trade medicine for other goods; 
 	droneFleets = {}
-	boundary_marker = "buoys"
+	boundary_marker = _("setting-marker", "buoys")
 	station_pool = nil
 	storage = getScriptStorage()
 	storage.gatherStats = gatherStats
@@ -934,12 +934,12 @@ function mainGMButtonsDuringPause()
 		mainGMButtons()
 	end)
 	addGMFunction(string.format(_("buttonGM", "Marker: %s ->Next"),boundary_marker),function()
-		if boundary_marker == "stars" then
-			boundary_marker = "buoys"
-		elseif boundary_marker == "buoys" then
-			boundary_marker = "none"
-		elseif boundary_marker == "none" then
-			boundary_marker = "stars"
+		if boundary_marker == _("setting-marker", "stars") then
+			boundary_marker = _("setting-marker", "buoys")
+		elseif boundary_marker == _("setting-marker", "buoys") then
+			boundary_marker = _("setting-marker", "none")
+		elseif boundary_marker == _("setting-marker", "none") then
+			boundary_marker = _("setting-marker", "stars")
 		end
 		plotTeamDemarcationLine()
 		plotFlagPlacementBoundaries()
@@ -1003,14 +1003,14 @@ function setTerrain()
 	clearGMFunctions()
 	addGMFunction(_("buttonGM", "-from Terrain"),mainGMButtons)
 	addGMFunction(string.format(_("buttonGM", "Size: %s -> Next"),terrain_size),function()
-		if terrain_size == "medium" then
-			terrain_size = "large"
+		if terrain_size == _("buttonGM","medium") then
+			terrain_size = _("buttonGM","large")
 			boundary = 200000
-		elseif terrain_size == "large" then
-			terrain_size = "small"
+		elseif terrain_size == _("buttonGM","large") then
+			terrain_size = _("buttonGM","small")
 			boundary = 50000
-		elseif terrain_size == "small" then
-			terrain_size = "medium"
+		elseif terrain_size == _("buttonGM","small") then
+			terrain_size = _("buttonGM","medium")
 			boundary = 100000
 		end
 		if terrain_objects ~= nil and #terrain_objects > 0 then
@@ -1065,7 +1065,7 @@ function plotTeamDemarcationLine()
 			boundary_items = {}
 		end
 	end
-	if boundary_marker == "stars" then
+	if boundary_marker == _("setting-marker", "stars") then
 		local demarcation_x_position = 0
 		local demarcation_y_position = 2500
 		local star = nil
@@ -1110,7 +1110,7 @@ function plotTeamDemarcationLine()
 			demarcation_y_position = demarcation_y_position * -1
 			demarcation_y_position = demarcation_y_position + 5000
 		end
-	elseif boundary_marker == "buoys" then
+	elseif boundary_marker == _("setting-marker", "buoys") then
 		buoy_beam_interval = 2
 		buoy_beam_timer = buoy_beam_interval
 		buoy_beam_count = 0
@@ -1131,7 +1131,7 @@ function plotFlagPlacementBoundaries()
 			flag_area_boundary_items = {}
 		end
 	end
-	if boundary_marker == "stars" or boundary_marker == "buoys" then
+	if boundary_marker == _("setting-marker", "stars") or boundary_marker == _("setting-marker", "buoys") then
 		local index = 0
 		repeat
 			local temp_marker = nil
@@ -1179,13 +1179,13 @@ function plotFlagPlacementBoundaries()
 end
 function createBoundaryMarker(position_x, position_y)
 	local temp_marker = nil
-	if boundary_marker == "stars" then
+	if boundary_marker == _("setting-marker", "stars") then
 		temp_marker = Planet():setPosition(position_x, position_y)
 			:setPlanetRadius(200)
 			:setDistanceFromMovementPlane(0)
 			:setPlanetSurfaceTexture("planets/star-1.png")
 			:setPlanetAtmosphereColor(1.0,1.0,1.0)
-	elseif boundary_marker == "buoys" then
+	elseif boundary_marker == _("setting-marker", "buoys") then
 		temp_marker = Artifact():allowPickup(false):setPosition(position_x,position_y):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(50):setDescriptions(_("scienceDescription-flag", "Flag hiding territory boundary marker"), _("scienceDescription-flag", "A temporary buoy placed on the edge of the territory where a flag or decoy may be hidden")):setScanningParameters(1,1):setRadarSignatureInfo(.3,.5,0)
 	end
 	return temp_marker
@@ -1301,14 +1301,14 @@ function configureDrones()
 	if dronesAreAllowed then
 		addGMFunction(string.format(_("buttonGM", "+Capacity %i"),uniform_drone_carrying_capacity),setDroneCarryingCapacity)
 		addGMFunction(string.format(_("buttonGM", "Name %s"),drone_name_type),function()
-			if drone_name_type == "squad-num of size" then
-				drone_name_type = "default"
-			elseif drone_name_type == "default" then
-				drone_name_type = "squad-num/size"
-			elseif drone_name_type == "squad-num/size" then
-				drone_name_type = "short"
-			elseif drone_name_type == "short" then
-				drone_name_type = "squad-num of size"
+			if drone_name_type == _("setting-callsign", "squad-num of size") then
+				drone_name_type = _("setting-callsign", "default")
+			elseif drone_name_type == _("setting-callsign", "default") then
+				drone_name_type = _("setting-callsign", "squad-num/size")
+			elseif drone_name_type == _("setting-callsign", "squad-num/size") then
+				drone_name_type = _("setting-callsign", "short")
+			elseif drone_name_type == _("setting-callsign", "short") then
+				drone_name_type = _("setting-callsign", "squad-num of size")
 			end
 			configureDrones() 
 		end)
@@ -2136,11 +2136,11 @@ function setPlayer(pobj,playerIndex)
 			for i=1,droneNumber do
 				local vx, vy = vectorFromAngle(360/droneNumber*i,800)
 				local drone = CpuShip():setPosition(px+vx,py+vy):setFaction(p:getFaction()):setTemplate("Ktlitan Drone"):setScanned(true):setCommsScript(""):setCommsFunction(commsShip):setHeading(360/droneNumber*i+90)
-				if drone_name_type == "squad-num/size" then
+				if drone_name_type == _("setting-callsign", "squad-num/size") then
 					drone:setCallSign(string.format(_("callsign-drone", "%s-#%i/%i"),squadName,i,droneNumber))
-				elseif drone_name_type == "squad-num of size" then
+				elseif drone_name_type == _("setting-callsign", "squad-num of size") then
 					drone:setCallSign(string.format(_("callsign-drone", "%s-%i of %i"),squadName,i,droneNumber))
-				elseif drone_name_type == "short" then
+				elseif drone_name_type == _("setting-callsign", "short") then
 					--string.char(math.random(65,90)) --random letter A-Z
 					local squad_letter_id = string.char(all_squad_count%26+64)
 					if all_squad_count > 26 then
@@ -6401,11 +6401,11 @@ function deployDronesForPlayer(p,playerIndex,droneNumber)
 	for i=1,droneNumber do
 		local vx, vy = vectorFromAngle(360/droneNumber*i,800)
 		local drone = CpuShip():setPosition(px+vx,py+vy):setFaction(p:getFaction()):setTemplate("Ktlitan Drone"):setScanned(true):setCommsScript(""):setCommsFunction(commsShip):setHeading(360/droneNumber*i+90)
-		if drone_name_type == "squad-num/size" then
+		if drone_name_type == _("setting-callsign", "squad-num/size") then
 			drone:setCallSign(string.format(_("callsign-drone", "%s-#%i/%i"),squadName,i,droneNumber))
-		elseif drone_name_type == "squad-num of size" then
+		elseif drone_name_type == _("setting-callsign", "squad-num of size") then
 			drone:setCallSign(string.format(_("callsign-drone", "%s-%i of %i"),squadName,i,droneNumber))
-		elseif drone_name_type == "short" then
+		elseif drone_name_type == _("setting-callsign", "short") then
 			--string.char(math.random(65,90)) --random letter A-Z
 			local squad_letter_id = string.char(all_squad_count%26+64)
 			if all_squad_count > 26 then
@@ -7973,7 +7973,7 @@ end
 
  -- ***********************************************************************************
 function update(delta)
-	if boundary_marker == "buoys" then
+	if boundary_marker == _("setting-marker", "buoys") then
 		buoyBeams(delta)
 	end
 	if delta == 0 then
