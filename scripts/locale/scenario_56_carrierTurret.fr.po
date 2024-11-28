@@ -40,9 +40,9 @@ msgstr ""
 "- Titre original : Carriers and turrets\n"
 "- Auteur : Xansta (Oct. 2018)\n"
 "- Traduction FR : Muerte (Nov. 24)\n"
-"Texte et scénario en cours de vérification : actuellement ce scenario "
-"contient des bogues et est susceptible de ne pas fonctionner correctement. "
-"Muerte (Nov. 24)\n"
+"Relecture en cours 78% ; Test du scénario en cours : contient actuellement "
+"des bogues et est susceptible de ne pas fonctionner correctement. Muerte "
+"(Nov. 24)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -1529,7 +1529,7 @@ msgstr "Précédent"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
+msgstr "Recruter un membre de l'équipe de réparation (%i rép)"
 
 #: scripts/scenario_56_carrierTurret.lua:2920
 #: scripts/scenario_56_carrierTurret.lua:2936
@@ -2269,9 +2269,10 @@ msgid ""
 "Friendly stations generally have food or medicine or both. Neutral stations "
 "often trade their goods for food, medicine or luxury."
 msgstr ""
-"Les stations amicales ont souvent de la nourriture (food) ou des médicaments "
+"Les stations amies ont souvent de la nourriture (food) ou des médicaments "
 "(medicine) ou les deux. Les stations neutres peuvent échanger leurs "
-"marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
+"marchandises contre de la nourriture, des médicaments ou des produits de "
+"luxe (luxury)."
 
 #: scripts/scenario_56_carrierTurret.lua:3533
 msgctxt "trade-comms"
@@ -2423,27 +2424,27 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:3905
 msgctxt "trade-comms"
 msgid " and will trade it for medicine"
-msgstr " et l'échange contre des médicaments (medicine)"
+msgstr " Elle l'échange contre des médicaments (medicine)"
 
 #: scripts/scenario_56_carrierTurret.lua:3910
 msgctxt "trade-comms"
 msgid " or food"
-msgstr " ou de la nourriture (food)"
+msgstr " ou de la nourriture (food)."
 
 #: scripts/scenario_56_carrierTurret.lua:3912
 msgctxt "trade-comms"
 msgid " and will trade it for food"
-msgstr " et l'échange contre de la Nourriture (food)"
+msgstr " Elle l'échange contre de la nourriture (food)"
 
 #: scripts/scenario_56_carrierTurret.lua:3918
 msgctxt "trade-comms"
 msgid " or luxury"
-msgstr " ou des produits de luxe (luxury)"
+msgstr " ou des produits de luxe (luxury)."
 
 #: scripts/scenario_56_carrierTurret.lua:3920
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
-msgstr " et l'échange contre des Produits de luxe (luxury)"
+msgstr " Elle l'échange contre des produits de luxe (luxury)"
 
 #: scripts/scenario_56_carrierTurret.lua:3976
 #: scripts/scenario_56_carrierTurret.lua:4204

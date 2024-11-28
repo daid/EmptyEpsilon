@@ -1762,7 +1762,7 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:2508
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr "Réputation insuffisante."
+msgstr "Vous n'avez pas assez de réputation."
 
 #: scripts/scenario_47_scavenger.lua:2202
 msgctxt "stationServices-comms"
