@@ -2405,7 +2405,7 @@ msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
-msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rep)"
+msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rép)"
 
 #: scripts/scenario_57_shoreline.lua:7904
 msgctxt "stationAssist-comms"
@@ -3200,7 +3200,9 @@ msgstr "[%s, Secteur %s] Il y a des ennemis à proximité."
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Stations: %i\t survived: %i\t destroyed: %i"
-msgstr "Stations : %i sauvées : %i détruites : %i"
+msgstr ""
+"-- Votre bilan --\n"
+"%i stations. Sauvées : %i ; Détruites : %i"
 
 #: scripts/scenario_57_shoreline.lua:9841
 #, lua-format
@@ -3210,7 +3212,7 @@ msgid ""
 "Friendly Stations: %i\t survived: %i\t destroyed: %i"
 msgstr ""
 "\n"
-"Stations amies : %i sauvées : %i détruites : %i"
+"%i stations amies. Sauvées : %i ; Détruites : %i"
 
 #: scripts/scenario_57_shoreline.lua:9842
 #, lua-format
@@ -3220,7 +3222,7 @@ msgid ""
 "Neutral Stations: %i\t survived: %i\t destroyed: %i"
 msgstr ""
 "\n"
-"Stations neutres : %i sauvées : %i détruites : %i"
+"%i stations neutres. Sauvées : %i ; Détruites : %i"
 
 #: scripts/scenario_57_shoreline.lua:9843
 #, lua-format

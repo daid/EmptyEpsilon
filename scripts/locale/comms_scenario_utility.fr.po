@@ -24,7 +24,8 @@ msgid "Make external flexible utility for handling communications"
 msgstr ""
 "Créer un utilitaire LUA flexible externe aux scénario pour gérer les "
 "communications.\n"
-"TRADUCTION EN COURS : 792/1886     42%"
+"TRADUCTION EN COURS : 782/1888(12)     41%\n"
+"En cours de relecture approfondie."
 
 #: scripts/comms_scenario_utility.lua:207
 #: scripts/comms_scenario_utility.lua:1491
@@ -111,7 +112,7 @@ msgstr "tritanium"
 #: scripts/comms_scenario_utility.lua:284
 msgctxt "trade-comms"
 msgid "autodoc"
-msgstr "autodoc"
+msgstr "autodocs"
 
 #: scripts/comms_scenario_utility.lua:285
 msgctxt "trade-comms"
@@ -186,7 +187,7 @@ msgstr "boucliers"
 #: scripts/comms_scenario_utility.lua:299
 msgctxt "trade-comms"
 msgid "software"
-msgstr "Programmes"
+msgstr "programmes"
 
 #: scripts/comms_scenario_utility.lua:300
 msgctxt "trade-comms"
@@ -524,7 +525,7 @@ msgstr "Stations"
 #: scripts/comms_scenario_utility.lua:662
 msgctxt "scienceDB"
 msgid "Friendly"
-msgstr "Amicale"
+msgstr "Amie"
 
 #: scripts/comms_scenario_utility.lua:667
 msgctxt "scienceDB"
@@ -535,6 +536,11 @@ msgstr ""
 "Les stations amies partagent leur radar à courte portée avec votre vaisseau "
 "sur vos postes Communications et Carte tactique.\n"
 "Sont listées ici les stations amies que vous avez contactées."
+
+#: scripts/comms_scenario_utility.lua:676
+msgctxt "scienceDB"
+msgid "Neutral"
+msgstr "Neutre"
 
 #: scripts/comms_scenario_utility.lua:681
 msgctxt "scienceDB"
@@ -705,7 +711,7 @@ msgstr "Munitions EMP"
 #, lua-format
 msgctxt "scienceDB"
 msgid "%i reputation each"
-msgstr "%i rép chacune"
+msgstr "%i rép l'unité"
 
 #: scripts/comms_scenario_utility.lua:823
 msgctxt "scienceDB"
@@ -1007,7 +1013,13 @@ msgid ""
 "Goods or components available:"
 msgstr ""
 "%s\n"
-"- Marchandises ou composants disponibles :"
+"- Marchandises disponibles :"
+
+#: scripts/comms_scenario_utility.lua:988
+#, lua-format
+msgctxt "situationReport-comms"
+msgid "%s %s@%s"
+msgstr "%s %s (%s rép),"
 
 #: scripts/comms_scenario_utility.lua:995
 msgctxt "situationReport-comms"
@@ -4249,7 +4261,7 @@ msgid ""
 "%s, %s, %s"
 msgstr ""
 "%s\n"
-"- %s, x%s, %s rép chacun."
+"- %s, x%s, %s rép l'unité."
 
 #: scripts/comms_scenario_utility.lua:3393
 #: scripts/comms_scenario_utility.lua:3459
@@ -7147,7 +7159,7 @@ msgstr "Nous avons besoin de HVLI. En avez-vous ?"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%d rep each)"
-msgstr "%s (%d rép chacun)"
+msgstr "%s (%d rép l'unité)"
 
 #: scripts/comms_scenario_utility.lua:5669
 msgctxt "ammo-comms"
@@ -9990,7 +10002,7 @@ msgstr "Stock disponible : %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "How much inventory: %s"
-msgstr "Quantité restante : %s"
+msgstr "Quantité disponible : %s"
 
 #: scripts/comms_scenario_utility.lua:8041
 #, lua-format
@@ -10007,34 +10019,45 @@ msgstr "Quantité disponible : x%s"
 #: scripts/comms_scenario_utility.lua:8045
 msgctxt "trade-comms"
 msgid "One bought"
-msgstr "1 marchandise achetée."
+msgstr ""
+"\n"
+"1 marchandise achetée."
 
 #: scripts/comms_scenario_utility.lua:8046
 msgctxt "trade-comms"
 msgid "You bought one"
-msgstr "1 exemplaire d'acheté."
+msgstr ""
+"\n"
+"1 exemplaire d'acheté."
 
 #: scripts/comms_scenario_utility.lua:8047
 #, lua-format
 msgctxt "trade-comms"
 msgid "You purchased one from %s"
-msgstr "Vous en avez acheté 1 chez %s."
+msgstr ""
+"\n"
+"Vous en avez acheté 1 chez %s."
 
 #: scripts/comms_scenario_utility.lua:8048
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s sold one to you"
-msgstr "%s vous en a vendu 1."
+msgstr ""
+"\n"
+"%s vous en a vendu 1."
 
 #: scripts/comms_scenario_utility.lua:8053
 msgctxt "trade-comms"
 msgid "Insufficient cargo space for purchase"
-msgstr "Votre espace de stockage est insuffisant pour acheter."
+msgstr ""
+"\n"
+"Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/comms_scenario_utility.lua:8054
 msgctxt "trade-comms"
 msgid "You don't have enough room in your cargo hold"
 msgstr ""
+"\n"
 "Vous ne pouvez pas en acheter. Vous n'avez plus assez de place dans votre "
 "soute."
 
@@ -10042,39 +10065,51 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Insufficient room in %s's cargo hold"
-msgstr "Achat impossible. Espace insuffisant dans la soute de %s."
+msgstr ""
+"\n"
+"Achat impossible. Espace insuffisant dans la soute de %s."
 
 #: scripts/comms_scenario_utility.lua:8056
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s does not have enough available cargo space"
-msgstr "%s ne possède plus assez d'espace de chargement pour acheter."
+msgstr ""
+"\n"
+"%s ne possède plus assez d'espace de chargement pour acheter."
 
 #: scripts/comms_scenario_utility.lua:8071
 #: scripts/comms_scenario_utility.lua:8109
 msgctxt "trade-comms"
 msgid "Insufficient station inventory"
-msgstr "Stock insuffisant dans la station."
+msgstr ""
+"\n"
+"Stock insuffisant dans la station."
 
 #: scripts/comms_scenario_utility.lua:8072
 #: scripts/comms_scenario_utility.lua:8110
 msgctxt "trade-comms"
 msgid "Not enough inventory on the station"
-msgstr "Pas assez de stock sur la station."
+msgstr ""
+"\n"
+"Pas assez de stock sur la station."
 
 #: scripts/comms_scenario_utility.lua:8073
 #: scripts/comms_scenario_utility.lua:8111
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s does not have enough inventory"
-msgstr "%s n'a plus suffisamment de cette marchandise en réserve."
+msgstr ""
+"\n"
+"%s n'a plus suffisamment de cette marchandise en réserve."
 
 #: scripts/comms_scenario_utility.lua:8074
 #: scripts/comms_scenario_utility.lua:8112
 #, lua-format
 msgctxt "trade-comms"
 msgid "Not enough inventory on %s"
-msgstr "Cette marchandise est en rupture de stock sur %s."
+msgstr ""
+"\n"
+"Cette marchandise est en rupture de stock sur %s."
 
 #: scripts/comms_scenario_utility.lua:8102
 msgctxt "trade-comms"
@@ -11140,7 +11175,7 @@ msgstr ""
 #, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "One %s bought"
-msgstr "Un %s acheté."
+msgstr "1 marchandise \"%s\" achetée."
 
 #: scripts/comms_scenario_utility.lua:8881
 #: scripts/comms_scenario_utility.lua:8926
@@ -11168,7 +11203,7 @@ msgstr "Vous avez acheté %s."
 #, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "You purchased one %s from %s"
-msgstr "Vous venez d'acheter 1 %s chez %s."
+msgstr "Vous venez d'acheter 1 marchandise %s chez %s."
 
 #: scripts/comms_scenario_utility.lua:8883
 #: scripts/comms_scenario_utility.lua:8928
@@ -12852,24 +12887,24 @@ msgctxt "buttonEngineer+"
 msgid "Boost Sensors"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11458
+#: scripts/comms_scenario_utility.lua:11459
 #, lua-format
 msgctxt "buttonEngineer"
 msgid "Sensor Boost %i"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11466
+#: scripts/comms_scenario_utility.lua:11467
 #, lua-format
 msgctxt "buttonEngineer+"
 msgid "Sensor Boost %i"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11475
+#: scripts/comms_scenario_utility.lua:11476
 msgctxt "buttonEngineer"
 msgid "Stop Sensor Boost"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11480
+#: scripts/comms_scenario_utility.lua:11481
 msgctxt "buttonEngineer+"
 msgid "Stop Sensor Boost"
 msgstr ""
