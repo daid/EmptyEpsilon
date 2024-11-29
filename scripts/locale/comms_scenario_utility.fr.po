@@ -876,7 +876,7 @@ msgid "Hull:%s%%"
 msgstr "Coque : %s%%"
 
 #: scripts/comms_scenario_utility.lua:916
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "situationReport-comms"
 msgid ""
 "%s\n"

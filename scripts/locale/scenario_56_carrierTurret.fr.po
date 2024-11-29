@@ -2529,7 +2529,7 @@ msgstr "Boucliers arrière : %d%%\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr "Boucliers %s : %d%%\n"
+msgstr "Bouclier %s : %d%%\n"
 
 #: scripts/scenario_56_carrierTurret.lua:4019
 #, lua-format
@@ -2839,7 +2839,7 @@ msgstr ""
 "Espace insuffisant sur %s pour accepter votre cargaison de marchandises."
 
 #: scripts/scenario_56_carrierTurret.lua:4544
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "The Ktlitans keep sending harassing ships. We've decrypted some of their "
@@ -2850,8 +2850,8 @@ msgid ""
 "weapons and cannot dock with a station. It is in your best interest to "
 "protect it since it will significantly shorten the duration of your mission."
 msgstr ""
-"[Ordre de mission]\n"
-"Équipage, les Ktlitiens continuent de nous harceler avec leurs vaisseaux.\n"
+"[Ordre de mission du QG] Équipage,\n"
+"Les Ktlitiens continuent de nous harceler avec leurs vaisseaux.\n"
 "Nous avons décrypté certaines de leurs communications, suffisamment pour "
 "réussir à identifier le nom de leur base principale, voire son emplacement.\n"
 "Trouvez et détruisez la station Ktlitienne %s. Vous pouvez répondre aux "

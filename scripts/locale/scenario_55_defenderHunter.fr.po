@@ -306,7 +306,7 @@ msgstr ""
 msgctxt "gossip-comms"
 msgid "My mining friends tell me Krak or Kruk is about to strike it rich"
 msgstr ""
-"Mes amis mineurs m'ont dit que Krak or Kruk était sur le point de devenir "
+"Mes amis mineurs m'ont dit que Krak ou Kruk était sur le point de devenir "
 "riche."
 
 #: scripts/scenario_55_defenderHunter.lua:171
@@ -315,8 +315,8 @@ msgid ""
 "Did you know you can usually hire replacement repair crew cheaper at "
 "friendly stations?"
 msgstr ""
-"Savez-vous que vous pouvez généralement embaucher une équipe de réparation "
-"de remplacement moins cher dans les stations amies ?"
+"Savez-vous que vous pouvez généralement embaucher un réparateur "
+"supplémentaire moins cher dans les stations amies ?"
 
 #: scripts/scenario_55_defenderHunter.lua:172
 msgctxt "gossip-comms"
@@ -324,8 +324,8 @@ msgid ""
 "Under their uniforms, the Kraylors have an extra appendage. I wonder what "
 "they use it for"
 msgstr ""
-"Sous leur uniforme, les Kraylors ont un appendice supplémentaire. Je me "
-"demande à quoi ça leur sert."
+"Sous leur uniforme, les Kraylors possèdent un appendice supplémentaire. Je "
+"me demande à quoi ça leur sert."
 
 #: scripts/scenario_55_defenderHunter.lua:173
 msgctxt "gossip-comms"
@@ -333,8 +333,8 @@ msgid ""
 "The Kraylors may be human navy enemies, but they make some mighty fine BBQ "
 "Mynock"
 msgstr ""
-"Les Kraylors sont peut-être les ennemis de la Marine humaine, mais ils "
-"fabriquent de très bons BBQ Mynock, On peut au moins leur accorder ça."
+"Les Kraylors ont beau être nos ennemis, ils fabriquent néanmoins de très "
+"bons barbecues Mynock. On peut au moins leur accorder ça."
 
 #: scripts/scenario_55_defenderHunter.lua:174
 msgctxt "gossip-comms"
@@ -342,8 +342,8 @@ msgid ""
 "The Kraylors and the Ktlitans may be nearing a cease fire from what I hear. "
 "That'd be bad news for us"
 msgstr ""
-"Les Kraylors et les Ktlitiens se rapprocheraient d'un cessez-le-feu d'après "
-"ce que j'ai entendu. Ce ne serait pas vraiment une bonne nouvelle pour nous."
+"D'après ce que j'ai entendu, les Kraylors et les Ktlitiens seraient proches "
+"d'un cessez-le-feu. Ce serait une mauvaise nouvelle pour nous."
 
 #: scripts/scenario_55_defenderHunter.lua:175
 msgctxt "gossip-comms"
@@ -352,7 +352,7 @@ msgid ""
 "monitored between 1900 and 2300"
 msgstr ""
 "La baie d'amarrage n°7 proposerait des substances psychotropes intéressantes "
-"à vendre, mais elles seraient surveillées entre 19h00 et 23h00."
+"à la vente, mais elles seraient surveillées entre 19h00 et 23h00."
 
 #: scripts/scenario_55_defenderHunter.lua:176
 msgctxt "gossip-comms"
@@ -387,7 +387,7 @@ msgid ""
 "discovery. And it's not another wine flavor either"
 msgstr ""
 "La rumeur veut que les deux frères Lichten soient sur le point de faire une "
-"nouvelle découverte. Et ce n'est pas une autre saveur de vin non plus."
+"nouvelle découverte. Et ce n'est pas une autre saveur de vin cette fois-ci."
 
 #: scripts/scenario_55_defenderHunter.lua:503
 msgctxt "buttonGM"
