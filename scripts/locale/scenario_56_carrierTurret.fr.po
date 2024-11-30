@@ -2035,7 +2035,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr "Échanger de la Nourriture (food) contre %s"
+msgstr "Échanger de la nourriture (food) contre %s"
 
 #: scripts/scenario_56_carrierTurret.lua:3247
 #: scripts/scenario_56_carrierTurret.lua:3279
@@ -2070,7 +2070,7 @@ msgstr "Échanger des produits de luxe (luxury) contre %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr "Échanger des Médicaments (medicine) contre %s"
+msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_56_carrierTurret.lua:3340
 #: scripts/scenario_56_carrierTurret.lua:3825

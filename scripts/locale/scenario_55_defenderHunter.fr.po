@@ -3232,15 +3232,16 @@ msgid "Configuring Collectors %i"
 msgstr "Configuration des collecteurs %i"
 
 #: scripts/scenario_55_defenderHunter.lua:6184
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid "Stations: %i\t survived: %i\t destroyed: %i"
 msgstr ""
 "-- Votre bilan --\n"
+"\n"
 "%i stations. Sauvées : %i ; Détruites : %i"
 
 #: scripts/scenario_55_defenderHunter.lua:6185
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
@@ -3250,7 +3251,7 @@ msgstr ""
 "%i stations amies. Sauvées : %i ; Détruites : %i"
 
 #: scripts/scenario_55_defenderHunter.lua:6186
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
@@ -3260,7 +3261,7 @@ msgstr ""
 "%i stations neutres. Sauvées : %i ; Détruites : %i"
 
 #: scripts/scenario_55_defenderHunter.lua:6187
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
@@ -3313,10 +3314,10 @@ msgid ""
 "Earned rank:  %s"
 msgstr ""
 "\n"
-"Rang obtenu : %s"
+"Grade obtenu : %s"
 
 #: scripts/scenario_55_defenderHunter.lua:6216
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
@@ -3326,7 +3327,7 @@ msgstr ""
 "Rang de survie de la base ennemie : %s"
 
 #: scripts/scenario_55_defenderHunter.lua:6218
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "\n"

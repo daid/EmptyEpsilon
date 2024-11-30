@@ -34,17 +34,20 @@ msgstr ""
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
 "Mission : Les Arléniens sont vos alliés. Les Kraylors et Éxuaris sont vos "
-"ennemis et tenteront de vous empêcher de terminer vos missions.\n"
+"ennemis et tenteront de vous empêcher de terminer vos missions. 3 missions "
+"disponibles.\n"
 "Le temps joue contre vous.\n"
-"3 missions disponibles.\n"
+"La partie se termine lorsque votre mission réussie ou échoue. Si votre "
+"vaisseau est détruit, vous pouvez en recréer un.\n"
 "\n"
 "Version 2.0.1 - Nov. 2024\n"
 "\n"
 "- Titre original : Allies and Enemies\n"
 "- Auteur : Xansta (2019)\n"
 "- Traduction FR : Muerte (Déc. 24)\n"
-"Relecture en cours 328/567  57% ; Test du scénario en cours. Muerte (Déc. "
-"24)\n"
+"Relecture en cours 392/567  69% ; Test du scénario en cours : contient "
+"actuellement des bogues et est susceptible de ne pas fonctionner "
+"correctement. Muerte (Déc. 24)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -1745,8 +1748,8 @@ msgstr "Parlez-nous de Gregory Unruh"
 msgctxt "doomsday-comms"
 msgid "He's a retired scientist here. He's on C deck if you'd like to visit"
 msgstr ""
-"Eh bien, c'est un scientifique à la retraite ici. Ses quartiers se trouvent "
-"sur le pont C si vous souhaitez le rencontrer."
+"Eh bien, c'est un scientifique à la retraite ici.\n"
+"Ses quartiers se trouvent sur le pont C si vous souhaitez le rencontrer."
 
 #: scripts/scenario_49_allies.lua:3591
 msgctxt "doomsday-comms"
@@ -1754,7 +1757,6 @@ msgid "Visit Gregory Unruh on C deck"
 msgstr "Rendre visite à Gregory Unruh sur le pont C"
 
 #: scripts/scenario_49_allies.lua:3592
-#, fuzzy
 msgctxt "doomsday-comms"
 msgid "[Gregory Unruh] What can I do for you?"
 msgstr ""
@@ -1765,11 +1767,10 @@ msgstr ""
 "Bonjour. Que puis-je pour vous ?"
 
 #: scripts/scenario_49_allies.lua:3593
-#, fuzzy
 msgctxt "doomsday-comms"
 msgid "We need your plans for a doomsday device defense mechanism"
 msgstr ""
-"Il nous faut vos plans de défense contre une arme apocalyptique Exuarie"
+"Il nous faut vos plans de défense contre une arme apocalyptique Éxuarie"
 
 #: scripts/scenario_49_allies.lua:3594
 msgctxt "doomsday-comms"
@@ -1785,25 +1786,23 @@ msgstr ""
 "composants sont encore requis."
 
 #: scripts/scenario_49_allies.lua:3604 scripts/scenario_49_allies.lua:4333
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "Tell me about Morrigan Thultris"
-msgstr "Parlez-nous de Morrigan Thultris."
+msgstr "Parlez-nous de Morrigan Thultris"
 
 #: scripts/scenario_49_allies.lua:3605
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "She does medical research here"
-msgstr "Elle fait des recherches médicales ici."
+msgstr ""
+"Le Dr Thultris ?\n"
+"Elle fait des recherches médicales ici."
 
 #: scripts/scenario_49_allies.lua:3606
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "May I speak with her?"
-msgstr "Puis-je lui parler ?"
+msgstr "Pouvons-nous lui parler ?"
 
 #: scripts/scenario_49_allies.lua:3607
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "She won't come to the communications nexus, but you may visit her in her "
@@ -1813,13 +1812,11 @@ msgstr ""
 "visite dans ses quartiers."
 
 #: scripts/scenario_49_allies.lua:3608
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "Visit Dr. Thultris"
-msgstr "Aller chez le Dr Thultris."
+msgstr "Aller chez le Dr Thultris"
 
 #: scripts/scenario_49_allies.lua:3609
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
@@ -1829,31 +1826,26 @@ msgstr ""
 "Oui c'est pour quoi ?"
 
 #: scripts/scenario_49_allies.lua:3610
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "doctor-comms"
 msgid "I am an officer from the Human Navy ship, %s"
-msgstr ""
-"Bonjour,\n"
-"Je suis officier de vaisseau de la Marine humaine, %s."
+msgstr "Bonjour, je suis officier sur un vaisseau de la Marine humaine %s"
 
 #: scripts/scenario_49_allies.lua:3611
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "What do you want?"
 msgstr ""
-"[Dr. Thultris derrière la porte fermée de ses quartiers]\n"
+"[Dr. Thultris toujours derrière sa porte fermée]\n"
 "Que me voulez-vous ?"
 
 #: scripts/scenario_49_allies.lua:3612
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "We need your help"
-msgstr "Nous avons besoin de votre aide."
+msgstr "Nous avons besoin de votre aide"
 
 #: scripts/scenario_49_allies.lua:3614
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris opens her door]\n"
@@ -1865,15 +1857,13 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:3615 scripts/scenario_49_allies.lua:3691
 #: scripts/scenario_49_allies.lua:3733 scripts/scenario_49_allies.lua:3771
 #: scripts/scenario_49_allies.lua:3809
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "Grab Dr. Thultris"
-msgstr "Saisir le Dr Thultris"
+msgstr "Saisir le Dr Thultris de force"
 
 #: scripts/scenario_49_allies.lua:3617 scripts/scenario_49_allies.lua:3655
 #: scripts/scenario_49_allies.lua:3693 scripts/scenario_49_allies.lua:3735
 #: scripts/scenario_49_allies.lua:3773 scripts/scenario_49_allies.lua:3811
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "As you pull her down the corridor back to the ship, explaining why you've "
@@ -1896,7 +1886,7 @@ msgstr "Elle vous claque la porte au nez alors que vous essayez de l'attraper."
 #, fuzzy
 msgctxt "doctor-comms"
 msgid "A dying patient needs your expertise"
-msgstr "Un patient mourant a besoin de votre expertise."
+msgstr "Un patient mourant a besoin de votre expertise"
 
 #: scripts/scenario_49_allies.lua:3627
 #, fuzzy
@@ -1906,7 +1896,8 @@ msgid ""
 "\n"
 "As you both return, you explain the situation to her"
 msgstr ""
-"[Dr. Thultris] Alors dépêchons-nous d'aller voir ce patient.\n"
+"[Dr. Thultris]\n"
+"Alors dépêchons-nous d'aller voir ce patient.\n"
 "\n"
 "En revenant tous les deux, vous lui expliquez la situation."
 
@@ -1925,8 +1916,7 @@ msgstr ""
 msgctxt "doctor-comms"
 msgid "An Arlenian Admiral shows symptoms like those you published"
 msgstr ""
-"Un amiral Arlénien présente des symptômes similaires à ceux que vous avez "
-"publiés."
+"Un Arlénien présente des symptômes similaires à ceux que vous avez publiés"
 
 #: scripts/scenario_49_allies.lua:3637
 #, fuzzy
@@ -1952,21 +1942,18 @@ msgstr ""
 "[Dr. Thultris referme sa porte]"
 
 #: scripts/scenario_49_allies.lua:3646
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Go away, I'm busy"
 msgstr ""
-"[Dr. Thultris à travers sa porte]\n"
+"[Dr. Thultris à travers la porte]\n"
 "Allez-vous en, je suis occupé."
 
 #: scripts/scenario_49_allies.lua:3650
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "Medical team suggested your research for a patient"
-msgstr ""
-"L'équipe médicale a cité vos recherches concernant un patient très malade."
+msgstr "L'équipe médicale a cité vos recherches pour un patient très malade"
 
 #: scripts/scenario_49_allies.lua:3652
 #, fuzzy
@@ -2051,11 +2038,10 @@ msgstr ""
 "C'est bien. Laissez-moi tranquille."
 
 #: scripts/scenario_49_allies.lua:3688
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "Arlenian with an unusual disease is near death"
 msgstr ""
-"Un Arlénien est atteint d'une maladie inhabituelle et est proche de la mort."
+"Un Arlénien est atteint d'une maladie inhabituelle et est proche de la mort"
 
 #: scripts/scenario_49_allies.lua:3690
 #, fuzzy
@@ -2140,7 +2126,7 @@ msgstr ""
 #, fuzzy
 msgctxt "doctor-comms"
 msgid "I am an admirer of your research and have questions"
-msgstr "Je suis un admirateur de vos recherches et j'aurai des questions."
+msgstr "Je suis un admirateur de vos recherches et j'aurai des questions"
 
 #: scripts/scenario_49_allies.lua:3729
 #, fuzzy
@@ -2149,14 +2135,14 @@ msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Really? What is it about my research you admire?"
 msgstr ""
-"[Dr. Thultris derrière la porte de ses quartiers]\n"
+"[Dr. Thultris toujours derrière sa porte fermée]\n"
 "Ah bon ? Et qu'est-ce que vous admirez dans mes recherches ?"
 
 #: scripts/scenario_49_allies.lua:3730
 #, fuzzy
 msgctxt "doctor-comms"
 msgid "The depth of your most recent publication"
-msgstr "La profondeur de votre publication la plus récente."
+msgstr "La profondeur de votre récente publication"
 
 #: scripts/scenario_49_allies.lua:3732
 #, fuzzy
@@ -2172,7 +2158,7 @@ msgstr ""
 #, fuzzy
 msgctxt "doctor-comms"
 msgid "I know of a patient that might benefit"
-msgstr "Je connais un patient qui pourrait en bénéficier."
+msgstr "Je connais un patient qui pourrait en bénéficier"
 
 #: scripts/scenario_49_allies.lua:3745
 #, fuzzy
@@ -2182,8 +2168,10 @@ msgid ""
 "\n"
 "As you both return, you explain the situation to her"
 msgstr ""
-"[Dr. Thultris] C'est rare. Puis-je voir le patient ?\n"
+"[Dr. Thultris]\n"
+"C'est une maladie rare pourtant. Puis-je voir le patient ?\n"
 "\n"
+"...\n"
 "En revenant tous les deux au vaisseau, vous lui expliquez la situation."
 
 #: scripts/scenario_49_allies.lua:3749
@@ -2395,7 +2383,7 @@ msgstr ""
 #, fuzzy, lua-format
 msgctxt "characterInfo-comms"
 msgid "Tell me about %s"
-msgstr "Parlez-moi de %s"
+msgstr "Parlez-nous de %s"
 
 #: scripts/scenario_49_allies.lua:3862 scripts/scenario_49_allies.lua:4354
 #, fuzzy, lua-format
@@ -2433,14 +2421,14 @@ msgid "What are my current orders?"
 msgstr "Quels sont nos ordres en cours ?"
 
 #: scripts/scenario_49_allies.lua:3884 scripts/scenario_49_allies.lua:4376
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "orders-comms"
 msgid ""
 "\n"
 "   %i Minutes remain in game"
 msgstr ""
 "\n"
-"   %i minutes restantes dans le jeu."
+"  > Il reste %i minutes de jeu."
 
 #: scripts/scenario_49_allies.lua:3895 scripts/scenario_49_allies.lua:3911
 #, lua-format
@@ -2551,74 +2539,76 @@ msgstr ""
 "satisfaite d'une autre manière."
 
 #: scripts/scenario_49_allies.lua:3945
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Buy, sell, trade"
 msgstr "Acheter, vendre, échanger"
 
 #: scripts/scenario_49_allies.lua:3946 scripts/scenario_49_allies.lua:4425
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
 "Goods or components available: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles : (quantité, coût en réputation)\n"
+"- Marchandises à vendre : (quantité, coût en réputation)\n"
 
 #: scripts/scenario_49_allies.lua:3952
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s : %i, %i\n"
+msgstr "     %s : x%i, %i rép l'unité.\n"
 
 #: scripts/scenario_49_allies.lua:3955
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Current Cargo:\n"
-msgstr "Cargaison actuelle\n"
+msgstr ""
+"Notre vaisseau :\n"
+"- Marchandises à bord :\n"
 
 #: scripts/scenario_49_allies.lua:3962
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
-msgstr "     %s : %i\n"
+msgstr "     %s : x%i\n"
 
 #: scripts/scenario_49_allies.lua:3968
-#, fuzzy
 msgctxt "trade-comms"
 msgid "     Empty\n"
 msgstr "     Vide\n"
 
 #: scripts/scenario_49_allies.lua:3971
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Espace disponible : %i, Réputation disponible : %i\n"
+msgstr "- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
 
 #: scripts/scenario_49_allies.lua:3979 scripts/scenario_49_allies.lua:4782
 #: scripts/scenario_49_allies.lua:4812 scripts/scenario_49_allies.lua:4837
 #: scripts/scenario_49_allies.lua:4867 scripts/scenario_49_allies.lua:5000
 #: scripts/scenario_49_allies.lua:5041 scripts/scenario_49_allies.lua:5066
 #: scripts/scenario_49_allies.lua:5097
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
 msgstr "Achetez 1 %s pour %i rép"
 
 #: scripts/scenario_49_allies.lua:3980
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr "Type : %s, Quantité : %i, Rép : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i\n"
+"Coût : %i rép l'unité."
 
 #: scripts/scenario_49_allies.lua:3982
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient cargo space for purchase"
 msgstr ""
+"\n"
 "\n"
 "Espace de chargement insuffisant pour acheter"
 
@@ -2630,87 +2620,91 @@ msgid ""
 "Insufficient reputation for purchase"
 msgstr ""
 "\n"
+"\n"
 "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_49_allies.lua:3986 scripts/scenario_49_allies.lua:4020
 #: scripts/scenario_49_allies.lua:4052 scripts/scenario_49_allies.lua:4084
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station"
+"\n"
+"Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_49_allies.lua:3994
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "purchased"
 msgstr ""
 "\n"
-"Acheté"
+"\n"
+"1 marchandise achetée."
 
 #: scripts/scenario_49_allies.lua:4017
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr "Échanger de la Nourriture (food) contre %s"
+msgstr "Échanger de la nourriture (food) contre %s"
 
 #: scripts/scenario_49_allies.lua:4018 scripts/scenario_49_allies.lua:4050
 #: scripts/scenario_49_allies.lua:4082
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
-msgstr "Type : %s, Quantité : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i"
 
 #: scripts/scenario_49_allies.lua:4025 scripts/scenario_49_allies.lua:4057
 #: scripts/scenario_49_allies.lua:4089
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Traded"
 msgstr ""
 "\n"
-"Échangé"
+"\n"
+"1 marchandise échangée."
 
 #: scripts/scenario_49_allies.lua:4049 scripts/scenario_49_allies.lua:4762
 #: scripts/scenario_49_allies.lua:4977
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr "Échanger des produits de luxe (luxury) contre %s"
 
 #: scripts/scenario_49_allies.lua:4081
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr "Échanger des Médicaments (medicine) contre %s"
+msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_49_allies.lua:4111
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Jettison cargo"
-msgstr "Larguer la cargaison"
+msgstr "Larguer des marchandises"
 
 #: scripts/scenario_49_allies.lua:4112
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid ""
 "Available space: %i\n"
 "What would you like to jettison?"
 msgstr ""
-"Espace disponible : %i\n"
-"Que voudriez-vous larguer ?"
+"Slots de stockage disponibles : %i\n"
+"Que voudriez-vous larguer par le sas ?"
 
 #: scripts/scenario_49_allies.lua:4121
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
-msgstr "Un %s largué"
+msgstr ""
+"1 %s larguée.\n"
+"Bon voyage marchandise, on ne t'oubliera pas."
 
 #: scripts/scenario_49_allies.lua:4134
 #, fuzzy
@@ -3101,12 +3095,12 @@ msgid "We do not deal in those weapons."
 msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
 
 #: scripts/scenario_49_allies.lua:4221
-#, fuzzy
 msgctxt "ammo-comms"
 msgid ""
 " The Kraylor threat to mineral resources has reduced ordnance availablilty"
 msgstr ""
-" La menace Kraylor pesant sur les ressources minérales a réduit la "
+"\n"
+"La menace Kraylor pesant sur les ressources minérales a réduit la "
 "disponibilité des munitions."
 
 #: scripts/scenario_49_allies.lua:4229
@@ -3116,7 +3110,6 @@ msgid "All nukes are charged and primed for destruction."
 msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
 
 #: scripts/scenario_49_allies.lua:4231
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
@@ -3228,19 +3221,18 @@ msgstr ""
 "personne si vous tenez tant à lui parler."
 
 #: scripts/scenario_49_allies.lua:4334
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "She does research here"
-msgstr "Elle effectue des recherches ici."
+msgstr ""
+"Le Dr Thultris ?\n"
+"Elle effectue des recherches ici."
 
 #: scripts/scenario_49_allies.lua:4335
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "We need her skills. May I speak with her?"
-msgstr "Nous avons besoin de ses compétences. Puis-je lui parler ?"
+msgstr "Nous avons besoin de ses compétences. Pouvons-nous lui parler ?"
 
 #: scripts/scenario_49_allies.lua:4336
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "She refuses to come to the communications nexus except on her terms. This "
@@ -3248,20 +3240,19 @@ msgid ""
 "contacts she will respond to and you are not on that list. If you wish to "
 "speak with her, you will need to dock and visit in person"
 msgstr ""
-"Elle refuse de venir au poste de communication, sauf à ses conditions. Cela "
-"signifie généralement uniquement les communications sortantes. Il y a une "
-"très courte liste de contacts auxquels elle répondra et vous n'êtes pas sur "
-"cette liste. Si vous souhaitez lui parler, vous devrez accoster et lui "
-"rendre visite en personne."
+"Elle refuse presque toujours de venir au poste de communication pour prendre "
+"des appels. Elle ne vient ici que quand elle a besoin d'effectuer une "
+"communication sortante.\n"
+"Il y a une très courte liste de contacts auxquels elle répond et vous n'êtes "
+"pas dessus. Si vous souhaitez lui parler, vous devrez accoster et lui rendre "
+"visite en personne."
 
 #: scripts/scenario_49_allies.lua:4337
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "The Arlenian Admiral is critically ill and she could help"
-msgstr "L'amiral Arlénien est gravement malade et elle pourrait aider."
+msgstr "Un amiral Arlénien est gravement malade et elle pourrait aider"
 
 #: scripts/scenario_49_allies.lua:4338
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "There could be a deadly plague covering all of Human and Arlenian space and "
@@ -3270,12 +3261,12 @@ msgid ""
 "few days to realize everyone else was dead. You really will need to dock to "
 "talk to her"
 msgstr ""
-"Il pourrait y avoir une peste mortelle couvrant tout l'espace humain et "
-"Arlénien qu'elle resterait dans ses quartiers pour s'occuper de ses "
-"recherches jusqu'à ce que la peste détruise tous les autres membres du "
-"personnel de la station. Alors mêmes, cela pourrait lui prendre quelques "
-"jours encore pour réaliser que tout le monde est mort. Vous aurez vraiment "
-"besoin d'accoster pour lui parler."
+"Écoutez, il pourrait y avoir une peste mortelle se propageant sur tout "
+"l'espace humain qu'elle resterait dans ses quartiers à s'occuper de ses "
+"recherches jusqu'à ce que la peste détruise tout le personnel de la station. "
+"Et même là, cela pourrait lui prendre encore quelques jours avant de "
+"réaliser que tout le monde est mort.\n"
+"Vous aurez vraiment besoin d'accoster pour lui parler."
 
 #: scripts/scenario_49_allies.lua:4382
 msgctxt "ammo-comms"
@@ -3307,7 +3298,7 @@ msgid ""
 "   Homing"
 msgstr ""
 "\n"
-"   Homing (missile à tête chercheuse)"
+"   Homing"
 
 #: scripts/scenario_49_allies.lua:4399
 msgctxt "ammo-comms"
@@ -3350,10 +3341,10 @@ msgid "What goods do you have available for sale or trade?"
 msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
 
 #: scripts/scenario_49_allies.lua:4431
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "   %14s: %2i, %3i\n"
-msgstr "   %14s : x%2i, %3i rép l'unité.\n"
+msgstr "   %14s : x%2i,%3i rép l'unité.\n"
 
 #: scripts/scenario_49_allies.lua:4438
 msgctxt "trade-comms"
@@ -3372,22 +3363,20 @@ msgstr ""
 "luxe (luxury)."
 
 #: scripts/scenario_49_allies.lua:4441
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 " Beyond that, I have no knowledge of specific stations.\n"
 "\n"
 "Check back later, someone else may have better knowledge"
 msgstr ""
-"A part ça, je n'ai pas connaissance de stations spécifiques.\n"
+" A part ça, je n'ai pas connaissance de stations spécifiques.\n"
 "\n"
 "Revenez plus tard, quelqu'un d'autre en saura peut-être plus que moi."
 
 #: scripts/scenario_49_allies.lua:4447
-#, fuzzy
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
+msgstr " A part ça, je n'ai pas connaissance de stations spécifiques."
 
 #: scripts/scenario_49_allies.lua:4449
 msgctxt "trade-comms"
@@ -3402,7 +3391,7 @@ msgstr ""
 "Quelles marchandises vous intéressent ? J'ai entendu parler de ça :"
 
 #: scripts/scenario_49_allies.lua:4452
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s%s"
 msgstr "La station %s dans le secteur %s possède la marchandise %s%s."
@@ -3876,13 +3865,13 @@ msgstr "Où allez-vous ?"
 #, fuzzy
 msgctxt "trade-comms"
 msgid "Insufficient luxury to trade"
-msgstr "Luxe insuffisant pour commercer"
+msgstr "Stock de marchandises de luxe insuffisant pour commercer."
 
 #: scripts/scenario_49_allies.lua:5025
 #, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %.1f reputation)"
-msgstr "Où allez-vous ? (coût : %.1f réputation)"
+msgstr "Où allez-vous ? (coût de l'information : %.1f rép)"
 
 #: scripts/scenario_49_allies.lua:5088
 #, fuzzy
@@ -3891,14 +3880,12 @@ msgid "Why are you bothering me?"
 msgstr "Pourquoi me dérangez-vous ?"
 
 #: scripts/scenario_49_allies.lua:5121
-#, fuzzy
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr ""
 "Désolé, nous n'avons pas le temps de discuter avec vous.\n"
-"\n"
 "Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_49_allies.lua:5123
@@ -3911,13 +3898,11 @@ msgstr ""
 "Bonne journée."
 
 #: scripts/scenario_49_allies.lua:5353
-#, fuzzy
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
 msgstr "Inventaire"
 
 #: scripts/scenario_49_allies.lua:5360
-#, fuzzy
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
 msgstr "Inventaire"
@@ -3926,19 +3911,19 @@ msgstr "Inventaire"
 #: scripts/scenario_49_allies.lua:5408 scripts/scenario_49_allies.lua:5427
 #: scripts/scenario_49_allies.lua:5446 scripts/scenario_49_allies.lua:5465
 #: scripts/scenario_49_allies.lua:5484 scripts/scenario_49_allies.lua:5503
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
-msgstr "%s Cargaison actuelle :"
+msgstr "Stock en soute sur le %s :"
 
 #: scripts/scenario_49_allies.lua:5377 scripts/scenario_49_allies.lua:5396
 #: scripts/scenario_49_allies.lua:5415 scripts/scenario_49_allies.lua:5434
 #: scripts/scenario_49_allies.lua:5453 scripts/scenario_49_allies.lua:5472
 #: scripts/scenario_49_allies.lua:5491 scripts/scenario_49_allies.lua:5510
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
-msgstr "     %s : %i"
+msgstr " - %s : x%i"
 
 #: scripts/scenario_49_allies.lua:5383 scripts/scenario_49_allies.lua:5402
 #: scripts/scenario_49_allies.lua:5421 scripts/scenario_49_allies.lua:5440
@@ -3953,10 +3938,10 @@ msgstr "     Vide\n"
 #: scripts/scenario_49_allies.lua:5423 scripts/scenario_49_allies.lua:5442
 #: scripts/scenario_49_allies.lua:5461 scripts/scenario_49_allies.lua:5480
 #: scripts/scenario_49_allies.lua:5499 scripts/scenario_49_allies.lua:5518
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
-msgstr "Espace disponible : %i"
+msgstr "Slots de stockage disponibles : %i"
 
 #: scripts/scenario_49_allies.lua:5545
 #, fuzzy
@@ -3992,7 +3977,7 @@ msgstr "Configuration des collecteurs %i"
 #, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid "Player survived for %i minutes"
-msgstr "Le joueur a survécu pendant %i minutes"
+msgstr "Les joueurs ont survécu pendant %i minutes."
 
 #: scripts/scenario_49_allies.lua:5642
 #, fuzzy
@@ -4078,15 +4063,17 @@ msgstr ""
 "dans la marge : %s sur %s, %s sur %s, %s sur %s."
 
 #: scripts/scenario_49_allies.lua:5844
-#, fuzzy
 msgctxt "doomsday-shipLog"
 msgid ""
 "With all three components obtained, Engineering and Science quickly complete "
 "and deploy the doomsday device defense mechanism"
 msgstr ""
-"Avec les trois composants ainsi récupérés, l'ingénierie et la science "
+"...Avec les 3 composants ainsi récupérés, l'ingénierie et la science "
 "finalisent et déploient rapidement le système de défense contre l'arme "
-"apocalyptique."
+"apocalyptique.\n"
+"\n"
+"[Message du QG] Bravo équipage. Toute la galaxie vous doit une fière "
+"chandelle. Vous vous êtes surpassés en sauvant des millions de vies."
 
 #: scripts/scenario_49_allies.lua:5896 scripts/scenario_49_allies.lua:5902
 msgctxt "doomsday-tabEngineer&Engineer+"
@@ -4099,16 +4086,16 @@ msgid "Doomsday Device Built"
 msgstr "Arme apocalyptique activée"
 
 #: scripts/scenario_49_allies.lua:5904
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "%s %i"
 msgstr "%s %is"
 
 #: scripts/scenario_49_allies.lua:5906
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "%s %i:%.2i"
-msgstr "%s %i:%.2imn"
+msgstr "%s %i:%.2i mn"
 
 #: scripts/scenario_49_allies.lua:5934
 #, fuzzy
@@ -4117,7 +4104,6 @@ msgid "All human stations destroyed"
 msgstr "toutes les stations humaines ont été détruites."
 
 #: scripts/scenario_49_allies.lua:6030
-#, fuzzy
 msgctxt "doctorGoal-shipLog"
 msgid ""
 "Our allies, the Arlenians tell us that Admiral Koshenz has contracted a "
@@ -4136,80 +4122,81 @@ msgstr ""
 "Nos alliés, les Arléniens, nous informent que leur amiral Koshenz a "
 "contracté une grave maladie. Les médecins Arléniens ont lutté pendant des "
 "jours contre cette maladie mais avec très peu de résultats. Ils craignent "
-"que l'amiral Koshenz n'ait plus longtemps à vivre. Ils ont demandé l'aide de "
+"que l'amiral Koshenz n'ait plus longtemps à vivre. Ils demandent l'aide de "
 "n'importe quel chercheur humain sur cette maladie Arlénienne.\n"
 "Un membre de leur équipe médicale a fait référence au Dr Morrigan Thultris "
-"qui a récemment publié des informations concernant une maladie qui partage "
+"qui a récemment publié des informations concernant une maladie partageant "
 "des symptômes et des caractéristiques similaires à la maladie de l'amiral. "
 "Le Dr Thultris n'apparaît pas sur notre registre militaire, ce qui implique "
 "qu'elle travaille dans un isolement relatif.\n"
-"\n"
 "Fouillez les stations de la Marine humaine, trouvez-la et demandez son aide, "
 "le cas échéant.\n"
 "Faites-le vite, l'amiral Koshenz n'a plus longtemps à vivre."
 
 #: scripts/scenario_49_allies.lua:6033
-#, fuzzy
 msgctxt "doctorOrders-comms"
 msgid "Find Dr. Thultris for help with Arlenian Admiral Koshenz"
 msgstr ""
-"Trouver le Dr Thultris afin d'obtenir son aide auprès de l'amiral Arlénien "
-"Koshenz."
+"Trouver le Dr Thultris afin d'obtenir son aide pour l'amiral Arlénien "
+"Koshenz gravement malade."
 
 #: scripts/scenario_49_allies.lua:6057
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "doctor-comms"
 msgid "Dr. Thultris resides on station %s"
-msgstr "Le Dr Thultris réside à la station %s."
+msgstr "Le Dr Thultris réside sur la station %s."
 
 #: scripts/scenario_49_allies.lua:6073
 #, fuzzy
 msgctxt "doctor-msgMainscreen"
 msgid "Arlenian Admiral Koshenz dies"
-msgstr "Décès de l'amiral Arlénien Koshenz."
+msgstr "l'amiral Arlénien Koshenz est décédé."
 
 #: scripts/scenario_49_allies.lua:6083
-#, fuzzy
 msgctxt "doctor-shipLog"
 msgid ""
 "The Arlenians say that they think the admiral has less than three minutes to "
 "live"
 msgstr ""
-"Les Arléniens disent qu'ils pensent que l'amiral a moins de 3 minutes à "
-"vivre."
+"[Message du QG] Les Arléniens disent qu'ils pensent que l'amiral a moins de "
+"3 minutes à vivre."
 
 #: scripts/scenario_49_allies.lua:6101
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "doctor-shipLog"
 msgid ""
 "The Kraylors seem to have discovered the location of Admiral Koshenz. We "
 "detect Kraylor ships en route to %s"
 msgstr ""
-"Les Kraylors semblent avoir découvert l'emplacement de l'Amiral Koshenz. "
-"Nous détectons des vaisseaux Kraylors en route vers %s."
+"[Message du QG] Les Kraylors semblent avoir découvert l'emplacement de "
+"l'Amiral Koshenz. Nous détectons des vaisseaux Kraylors en route vers %s."
 
 #: scripts/scenario_49_allies.lua:6119
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "doctor-shipLog"
 msgid "Admiral Koshenz is on %s in %s"
-msgstr "L'amiral Koshenz se trouve sur %s en %s."
+msgstr "[Rappel] L'amiral Koshenz se trouve sur %s en %s."
 
 #: scripts/scenario_49_allies.lua:6122
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "doctorOrders-comms"
 msgid "Take Dr. Thultris to %s in %s"
-msgstr "Emmener le Dr Thultris à %s en %s."
+msgstr ""
+"Emmener rapidement le Dr Thultris à la station %s dans le secteur %s pour "
+"sauver l'amiral."
 
 #: scripts/scenario_49_allies.lua:6129
-#, fuzzy
 msgctxt "doctor-shipLog"
 msgid "Dr. Thultris applied her knowledge and Admiral Koshenz is improving"
 msgstr ""
-"Le Dr Thultris a appliqué ses connaissances et l'état de l'amiral Koshenz "
-"s'améliore."
+"… Après vous être amarré, le Dr Thultris s'est présentée immédiatement au "
+"chevet de l'amiral Koshenz.\n"
+"Après quelques minutes seulement à lui prodiguer des soins, il semblerait "
+"que son état s'améliore.\n"
+"\n"
+"[Message du QG] Bravo équipage, vous avez sauvé cet amiral."
 
 #: scripts/scenario_49_allies.lua:6147
-#, fuzzy
 msgctxt "doctor-tabScience&Operations"
 msgid "Koshenz Death:"
 msgstr "Décès de l'amiral :"
@@ -4218,13 +4205,13 @@ msgstr "Décès de l'amiral :"
 #, fuzzy, lua-format
 msgctxt "doctor-tabScience&Operations"
 msgid "%s %i"
-msgstr "%s %i"
+msgstr "%s %is"
 
 #: scripts/scenario_49_allies.lua:6151
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "doctor-tabScience&Operations"
 msgid "%s %i:%.2i"
-msgstr "%s %i :%.2i"
+msgstr "%s %i:%.2i mn"
 
 #: scripts/scenario_49_allies.lua:6176
 msgctxt "BespinGoal-shipLog"
@@ -4280,7 +4267,7 @@ msgstr ""
 #, fuzzy
 msgctxt "Bespin-msgMainscreen"
 msgid "Mining station Cloud City destroyed"
-msgstr "Station minière Cloud City détruite"
+msgstr "la station minière Cloud City a été détruite."
 
 #: scripts/scenario_49_allies.lua:6393
 msgctxt "repairCrew-msgEngineer"
@@ -4299,16 +4286,17 @@ msgid "statistics unavailable"
 msgstr "statistiques indisponibles"
 
 #: scripts/scenario_49_allies.lua:6690
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "Allied stations: Human: survived: %.1f%%, strength: %.1f%%; Arlenian: "
 "survived: %.1f%%, strength: %.1f%%\n"
 msgstr ""
 "-- Votre bilan --\n"
-"Stations alliées :\n"
-"    - Humaines sauvées : %.1f%% (effectifs : %.1f%%)\n"
-"    - Arléniennes sauvées : %.1f%% (effectifs : %.1f%%)\n"
+"\n"
+"Stations alliées ayant survécus :\n"
+"    - Humaines : %.1f%% (effectifs : %.1f%%)\n"
+"    - Arléniennes : %.1f%% (effectifs : %.1f%%)\n"
 
 #: scripts/scenario_49_allies.lua:6692
 #, fuzzy, lua-format
@@ -4317,40 +4305,46 @@ msgid ""
 "Enemy stations: Kraylor: survived: %.1f%%, strength: %.1f%%; Exuari: "
 "survived: %.1f%%, strength: %.1f%%\n"
 msgstr ""
-"Stations ennemies : Kraylor : survivant : %.1f%%, force : %.1f%% ; Éxuari : "
-"%.1f%%, force : %.1f%%\n"
+"\n"
+"Stations ennemies ayant survécus :\n"
+"    - Kraylors : %.1f%% (effectifs : %.1f%%)\n"
+"    - Éxuaries : %.1f%% (effectifs : %.1f%%)\n"
 
 #: scripts/scenario_49_allies.lua:6695
 #, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid "Neutral stations: survived: %.1f%%, strength: %.1f%%"
-msgstr "Stations neutres : %.1f%% (effectifs : %.1f%%)"
+msgstr ""
+"\n"
+"Stations neutres : %.1f%% (effectifs : %.1f%%)"
 
 #: scripts/scenario_49_allies.lua:6700
 #, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid "Allied ships: Human: strength: %.1f%%, Arlenian: strength: %.1f%%\n"
 msgstr ""
-"Vaisseaux alliés : Humain : force : %.1f%%, Arlénien : force : %.1f%%\n"
+"Vaisseaux alliés ayant survécus : Effectifs Humains : %.1f%% ; Effectifs "
+"Arléniens :%.1f%%\n"
 
 #: scripts/scenario_49_allies.lua:6702
 #, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid "Enemy ships: Kraylor: strength: %.1f%%, Exuari: strength: %.1f%%\n"
 msgstr ""
-"Vaisseaux ennemis : Kraylors : force : %.1f%%, Éxuaris : force : %.1f%%\n"
+"Vaisseaux ennemis ayant survécus : Effectifs Kraylors : %.1f%% ; Effectifs "
+"Éxuaris :%.1f%%\n"
 
 #: scripts/scenario_49_allies.lua:6707
 #, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid "Allied value: %.2f, Enemy value: %.2f"
-msgstr "Rang allié : %.2f, rang ennemi : %.2f"
+msgstr "Grade allié : %.2f ; Grade ennemi : %.2f"
 
 #: scripts/scenario_49_allies.lua:6711
 #, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid "Mission ended because %s\n"
-msgstr "Mission terminée car %s\n"
+msgstr "Mission terminée : %s\n"
 
 #: scripts/scenario_49_allies.lua:6717 scripts/scenario_49_allies.lua:6732
 msgctxt "msgMainscreen"
@@ -4381,14 +4375,15 @@ msgstr "Amiral"
 #, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid "Earned rank: %s"
-msgstr "Rang obtenu : %s"
+msgstr "Grade obtenu : %s"
 
 #: scripts/scenario_49_allies.lua:6742
 #, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid "Rank after military reductions due to ignominious defeat: %s"
 msgstr ""
-"Rang après les réductions militaires dues à une défaite ignominieuse : %s"
+"\n"
+"Votre nouveau grade d'officier suite à votre ignominieuse défaite : %s"
 
 #~ msgctxt "setting"
 #~ msgid "Configures the amount of enemies spawned in the scenario."
