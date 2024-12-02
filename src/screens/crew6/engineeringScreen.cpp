@@ -79,6 +79,8 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
                 my_spaceship->commandSetSystemPowerRequest(ESystem(n), value);
         });
         info.power_bar->setColor(glm::u8vec4(192, 192, 32, 128))->setSize(column_width, GuiElement::GuiSizeMax);
+        info.power_label = new GuiLabel(info.power_bar, id + "_POWER_LABEL", "...", 20); 
+        info.power_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         info.coolant_bar = new GuiProgressSlider(info.row, id + "_COOLANT", 0.0f, 10.0f, 0.0f, [this,n](float value){
             if (my_spaceship)
                 my_spaceship->commandSetSystemCoolantRequest(ESystem(n), value);
@@ -252,6 +254,8 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                 info.heat_icon->hide();
 
             info.power_bar->setValue(system.power_level);
+            info.power_label->setText(toNearbyIntString(my_spaceship->getNetSubsystemEnergyUsage(ESystem(n)) * -60.0f) + "/min");
+
             info.coolant_bar->setValue(system.coolant_level);
             if (system.coolant_request > 0.0f) {
                 float f = system.coolant_request / 10.f;
