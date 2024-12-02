@@ -29,6 +29,8 @@ private:
     EMissileWeapons load_type;
     bool manual_aim;
     float missile_target_angle;
+    GuiProgressbar* docked_loading_bar;
+    GuiLabel* docked_loading_label;
 public:
     GuiMissileTubeControls(GuiContainer* owner, string id);
 
