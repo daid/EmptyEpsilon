@@ -1823,7 +1823,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_50_gaps.lua:2513
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_50_gaps.lua:2523
 msgctxt "trade-comms"

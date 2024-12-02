@@ -980,7 +980,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_55_defenderHunter.lua:2186
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_55_defenderHunter.lua:2200
 msgctxt "trade-comms"
@@ -3217,7 +3217,7 @@ msgstr "Liq. de ref. manuel"
 #: scripts/scenario_55_defenderHunter.lua:6104
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
-msgstr "Collecte du liq. de ref."
+msgstr "Collecte en cours"
 
 #: scripts/scenario_55_defenderHunter.lua:6121
 #, lua-format
@@ -3345,12 +3345,12 @@ msgstr "%s %s :%i%% H :%i%%"
 #: scripts/scenario_55_defenderHunter.lua:6314
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_55_defenderHunter.lua:6322
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 # Scenario setting
 #: scripts/scenario_55_defenderHunter.lua:6372

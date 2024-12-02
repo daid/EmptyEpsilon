@@ -1648,7 +1648,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_47_scavenger.lua:3259
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_47_scavenger.lua:2088
 #: scripts/scenario_47_scavenger.lua:3087
@@ -3030,7 +3030,7 @@ msgstr "Pas assez de réputation !"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Adder MK5 reinforcements! (%d rep)"
-msgstr "Merci de nous envoyer un Adder MK5 en renforts ! (%d rép)"
+msgstr "Merci de nous envoyer un Vipère MK5 en renforts ! (%d rép)"
 
 #: scripts/scenario_47_scavenger.lua:3310
 #: scripts/scenario_47_scavenger.lua:3330
@@ -3066,7 +3066,7 @@ msgstr "Merci de nous envoyer un Phobos T3 en renforts ! (%d rép)"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Stalker Q7 reinforcements! (%d rep)"
-msgstr "Merci de nous envoyer un Stalker Q7 en renforts ! (%d rép)"
+msgstr "Merci de nous envoyer un Harceleur Q7 en renforts ! (%d rép)"
 
 #: scripts/scenario_47_scavenger.lua:3416
 msgctxt "shipAssist-comms"

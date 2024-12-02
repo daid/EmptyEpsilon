@@ -1609,17 +1609,17 @@ msgstr "Espace disponible : %i"
 #: scripts/scenario_57_shoreline.lua:6929
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_57_shoreline.lua:6934
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_57_shoreline.lua:6978
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
-msgstr "Collecte du liq. de ref."
+msgstr "Collecte en cours"
 
 #: scripts/scenario_57_shoreline.lua:6981
 #, lua-format
@@ -1795,7 +1795,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_57_shoreline.lua:7349
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_57_shoreline.lua:7363
 msgctxt "trade-comms"

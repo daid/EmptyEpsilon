@@ -2933,9 +2933,10 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_59_border.lua:5373
+#, fuzzy
 msgctxt "buttonGM"
 msgid "Player Missile Cr."
-msgstr "Croiseur de missiles joueur"
+msgstr "Croiseur lance-missiles joueur"
 
 #: scripts/scenario_59_border.lua:5374
 msgctxt "msgGM"
@@ -4171,7 +4172,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_59_border.lua:7782 scripts/scenario_59_border.lua:9020
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_59_border.lua:7793 scripts/scenario_59_border.lua:9055
 msgctxt "station-comms"
@@ -4510,7 +4511,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:8088 scripts/scenario_59_border.lua:8137
 #: scripts/scenario_59_border.lua:8178 scripts/scenario_59_border.lua:8463
 #: scripts/scenario_59_border.lua:8520 scripts/scenario_59_border.lua:8556
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "gossip-comms"
 msgid ""
 "%s\n"
@@ -4518,7 +4519,7 @@ msgid ""
 "   %s"
 msgstr ""
 "%s\n"
-"Rumeurs :\n"
+"Commérages :\n"
 "   %s"
 
 #: scripts/scenario_59_border.lua:8091 scripts/scenario_59_border.lua:8140
@@ -6283,23 +6284,22 @@ msgstr "Liq. de ref. manuel"
 #: scripts/scenario_59_border.lua:12060
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_59_border.lua:12065
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_59_border.lua:12070
 msgctxt "coolant-buttonDamageControl"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_59_border.lua:12122
-#, fuzzy
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
-msgstr "Collecte du liq. de ref."
+msgstr "Collecte en cours"
 
 #: scripts/scenario_59_border.lua:12139
 #, lua-format

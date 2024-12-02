@@ -1502,7 +1502,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_74_omicron.lua:3824 scripts/scenario_74_omicron.lua:4657
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_74_omicron.lua:3835 scripts/scenario_74_omicron.lua:4448
 msgctxt "orders-comms"

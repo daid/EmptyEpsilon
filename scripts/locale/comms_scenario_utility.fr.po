@@ -5459,7 +5459,7 @@ msgid ""
 "   %s"
 msgstr ""
 "%s\n"
-"Rumeurs :\n"
+"Commérages :\n"
 "   %s"
 
 #: scripts/comms_scenario_utility.lua:4191
@@ -5813,7 +5813,7 @@ msgstr "Rien d'intéressant."
 #: scripts/comms_scenario_utility.lua:4515
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/comms_scenario_utility.lua:4516
 msgctxt "gossip-comms"

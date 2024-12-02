@@ -1418,7 +1418,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_53_escape.lua:1770
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_53_escape.lua:1784
 msgctxt "trade-comms"
