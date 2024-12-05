@@ -45,7 +45,7 @@ msgstr ""
 "- Titre original : Allies and Enemies\n"
 "- Auteur : Xansta (2019)\n"
 "- Traduction FR : Muerte (Déc. 24)\n"
-"Relecture en cours 433/567  76% ; Test du scénario en cours : contient "
+"Relecture en cours 467/567  82% ; Test du scénario en cours : contient "
 "actuellement des bogues et est susceptible de ne pas fonctionner "
 "correctement. Muerte (Déc. 24)\n"
 "\n"
@@ -1828,7 +1828,7 @@ msgstr ""
 #, lua-format
 msgctxt "doctor-comms"
 msgid "I am an officer from the Human Navy ship, %s"
-msgstr "Bonjour, je suis officier sur un vaisseau de la Marine humaine %s"
+msgstr "Bonjour, je suis officier sur le vaisseau %s de la Marine humaine"
 
 #: scripts/scenario_49_allies.lua:3611
 msgctxt "doctor-comms"
@@ -1898,7 +1898,7 @@ msgstr ""
 "[Dr. Thultris]\n"
 "Alors dépêchons-nous d'aller voir ce patient.\n"
 "\n"
-"En revenant tous les deux, vous lui expliquez la situation."
+"...En revenant tous les deux au vaisseau, vous lui expliquez la situation."
 
 #: scripts/scenario_49_allies.lua:3631
 #, fuzzy
@@ -1911,21 +1911,20 @@ msgstr ""
 "[Dr. Thultris vous claque sa porte au nez]"
 
 #: scripts/scenario_49_allies.lua:3635
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "An Arlenian Admiral shows symptoms like those you published"
 msgstr ""
-"Un Arlénien présente des symptômes similaires à ceux que vous avez publiés"
+"Un Arlénien présente des symptômes similaires à ceux que vous avez publié"
 
 #: scripts/scenario_49_allies.lua:3637
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris] Take me to the admiral\n"
 "\n"
 "As you both return to the ship, you explain the situation to her"
 msgstr ""
-"[Dr. Thultris] Emmenez-moi chez l'amiral.\n"
+"[Dr. Thultris]\n"
+"Emmenez-moi le voir.\n"
 "\n"
 "...Lorsque vous retournez tous les deux au vaisseau, vous lui expliquez la "
 "situation."
@@ -1937,7 +1936,7 @@ msgid ""
 "An Arlenian Admiral? Who cares!\n"
 "[Dr. Thultris closes her door]"
 msgstr ""
-"Un amiral Arlénien ? Qui s'en soucie !\n"
+"Un Arlénien ? Qui s'en soucie !\n"
 "[Dr. Thultris referme sa porte]"
 
 #: scripts/scenario_49_allies.lua:3646
@@ -2012,7 +2011,8 @@ msgstr ""
 "[Dr. Thultris]\n"
 "C'est l'occasion de mettre en pratique mes recherches.\n"
 "\n"
-"...Lorsque vous revenez tous les deux, vous lui expliquez la situation."
+"...Lorsque vous revenez tous les deux au vaisseau, vous lui expliquez la "
+"situation."
 
 #: scripts/scenario_49_allies.lua:3679
 #, fuzzy
@@ -2049,13 +2049,11 @@ msgstr ""
 "Pourquoi venir me voir moi ?"
 
 #: scripts/scenario_49_allies.lua:3701
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "The Arlenian medical team referred us to you"
 msgstr "L'équipe médicale Arlénienne nous a envoyé vers vous"
 
 #: scripts/scenario_49_allies.lua:3703
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris] Nice to be recognized outside of human space\n"
@@ -2079,7 +2077,6 @@ msgstr ""
 "[Dr. Thultris claque sa porte]"
 
 #: scripts/scenario_49_allies.lua:3711
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "Your research accurately describes the symptoms"
 msgstr "Vos recherches décrivent avec précision les symptômes"
@@ -2329,23 +2326,22 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:3829
 msgctxt "doctor-comms"
 msgid "Of course! I've got a case study for you to examine"
-msgstr "Bien sûr ! J'ai un cas d'école pour vous à examiner"
+msgstr "Bien sûr ! J'ai un cas d'école pour vous à étudier"
 
 #: scripts/scenario_49_allies.lua:3831
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris] An application for my research?! Goody Goody!\n"
 "\n"
 "As you both return, you explain the situation to her"
 msgstr ""
-"[Dr. Thultris] Une application pour mes recherches ?! Bien, bien !\n"
+"[Dr. Thultris]\n"
+"Une application pour mes recherches ?! Bien, bien !\n"
 "\n"
 "...En rejoignant le vaisseau avec le docteur, vous lui expliquez la "
 "situation."
 
 #: scripts/scenario_49_allies.lua:3835
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "Sounds interesting, but not right now, thanks\n"
@@ -2355,14 +2351,13 @@ msgstr ""
 "[Dr. Thultris referme sa porte]"
 
 #: scripts/scenario_49_allies.lua:3840
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Get a writing advisor and get out of here"
 msgstr ""
 "[Dr. Thultris à travers la porte de ses quartiers]\n"
-"Prenez un conseiller en rédaction et sortez d'ici."
+"Dans ce cas, prenez un conseiller en rédaction et partez d'ici."
 
 #: scripts/scenario_49_allies.lua:3855 scripts/scenario_49_allies.lua:4347
 #, fuzzy, lua-format
@@ -2479,19 +2474,16 @@ msgstr ""
 "généralement de la nourriture, des médicaments ou des produits de luxe."
 
 #: scripts/scenario_49_allies.lua:3936
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid "Explain the component goods"
 msgstr "Composants"
 
 #: scripts/scenario_49_allies.lua:3937
-#, fuzzy
 msgctxt "explainGoodsMineral-comms"
 msgid "Explain the mineral goods"
 msgstr "Biens minéraux"
 
 #: scripts/scenario_49_allies.lua:3938
-#, fuzzy
 msgctxt "explainGoodsTrade-comms"
 msgid "Explain the trade goods"
 msgstr "Marchandises commerciales"
@@ -3504,10 +3496,11 @@ msgid " and will trade it for luxury"
 msgstr " Elle l'échange contre des produits de luxe (luxury)"
 
 #: scripts/scenario_49_allies.lua:4684 scripts/scenario_49_allies.lua:5022
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr "Que voulez-vous ?"
+msgstr ""
+"Salutations,\n"
+"Que nous voulez-vous ?"
 
 #: scripts/scenario_49_allies.lua:4686
 msgctxt "shipAssist-comms"
@@ -3655,10 +3648,9 @@ msgid "Purchased"
 msgstr "Acheté"
 
 #: scripts/scenario_49_allies.lua:4895
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr "Nous allons vous détruire !"
+msgstr "Nous allons vous anéantir"
 
 #: scripts/scenario_49_allies.lua:4896
 #, fuzzy
@@ -3667,30 +3659,25 @@ msgid "Your bloodline will end here!"
 msgstr "Votre race va s'éteindre ici et maintenant !"
 
 #: scripts/scenario_49_allies.lua:4897
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr "Vos petites menaces ne nous impressionnent pas."
+msgstr "Vos menaces ridicules ne nous impressionnent pas."
 
 #: scripts/scenario_49_allies.lua:4899
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
-"Ktzzzsss.\n"
-"\n"
+"...Ktzzzsss...\n"
 "Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_49_allies.lua:4902
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
-msgstr "Nous allons vous détruire !"
+msgstr "Nous allons vous détruire"
 
 #: scripts/scenario_49_allies.lua:4903
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We think not. It is you who will experience destruction!"
 msgstr "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
@@ -3714,19 +3701,18 @@ msgid "Your comments about honor have no meaning to us"
 msgstr "Vos commentaires sur l'honneur n'ont aucune signification pour nous."
 
 #: scripts/scenario_49_allies.lua:4909
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
-msgstr "Nous plaignons votre race pathétique."
+msgstr "Nous plaignons votre race pathétique"
 
 #: scripts/scenario_49_allies.lua:4910
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
-msgstr "Pathétique? Vous allez regretter votre dénigrement !"
+msgstr ""
+"Pathétique ?\n"
+"Vous allez regretter votre insolence !"
 
 #: scripts/scenario_49_allies.lua:4911
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We don't care what you think of us"
 msgstr "Peu importe ce que vous pensez de nous."
@@ -3738,12 +3724,10 @@ msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
-"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
-"\n"
+"Nous ne vous voulons aucun mal, mais nous vous en ferons si nécessaire.\n"
 "Fin de transmission."
 
 #: scripts/scenario_49_allies.lua:4916
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
@@ -3751,7 +3735,6 @@ msgstr ""
 "distraction pour nous !"
 
 #: scripts/scenario_49_allies.lua:4918
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
 "One zero one.\n"
@@ -3761,38 +3744,34 @@ msgid ""
 ":Do not cross us:\n"
 "Communication halted."
 msgstr ""
-"000110011010...Grzzzz..\n"
-"\n"
-"Communication binaire non détectée..Grzzz Nous passons en communication "
+"000110011010...Grzzzz...\n"
+"Communication binaire non détectée...Grzzz Passons en communication "
 "universelle..Grrzzz\n"
+"Générons réponse appropriée pour cible en langage humain à partir archives..."
+"Grrzzzz\n"
 "\n"
-"Générer une réponse appropriée pour la cible en langage humain à partir des "
-"archives...Grrzzzz\n"
-"\n"
-"Ne nous approchez pas! Grrzzz\n"
+"     [Ne nous approchez pas !] Grrzzz\n"
 "\n"
 "Communication interrompue."
 
 #: scripts/scenario_49_allies.lua:4919
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
+msgstr "Executer à distance : AUTODESTRUCTION"
 
 #: scripts/scenario_49_allies.lua:4920
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr "Commande non autorisée reçue. Cible verrouillée."
+msgstr ""
+"Commande malveillante reçue. Annulée.\n"
+"Nous ciblons immédiatement source."
 
 #: scripts/scenario_49_allies.lua:4921
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr "Ordre externe ignoré."
 
 #: scripts/scenario_49_allies.lua:4923
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
@@ -3801,23 +3780,19 @@ msgid ""
 msgstr ""
 "Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
 "s'opposer à nous tous.\n"
-"\n"
 "Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_49_allies.lua:4924
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
 
 #: scripts/scenario_49_allies.lua:4925
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
 
 #: scripts/scenario_49_allies.lua:4926
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
@@ -4280,25 +4255,21 @@ msgid ""
 "Enemy stations: Kraylor: survived: %.1f%%, strength: %.1f%%; Exuari: "
 "survived: %.1f%%, strength: %.1f%%\n"
 msgstr ""
-"\n"
 "Stations ennemies ayant survécu :\n"
 "Kraylors : %.1f%% (effectifs : %.1f%%)          Éxuaries : %.1f%% "
 "(effectifs : %.1f%%)\n"
 
 #: scripts/scenario_49_allies.lua:6695
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgMainscreen"
 msgid "Neutral stations: survived: %.1f%%, strength: %.1f%%"
-msgstr ""
-"\n"
-"Stations neutres : %.1f%% (effectifs : %.1f%%)"
+msgstr "Stations neutres : %.1f%% (effectifs : %.1f%%)"
 
 #: scripts/scenario_49_allies.lua:6700
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Allied ships: Human: strength: %.1f%%, Arlenian: strength: %.1f%%\n"
 msgstr ""
-"\n"
 "Vaisseaux alliés ayant survécu :\n"
 "Effectifs Humains : %.1f%%          Effectifs Arléniens :%.1f%%\n"
 
@@ -4307,7 +4278,6 @@ msgstr ""
 msgctxt "msgMainscreen"
 msgid "Enemy ships: Kraylor: strength: %.1f%%, Exuari: strength: %.1f%%\n"
 msgstr ""
-"\n"
 "Vaisseaux ennemis ayant survécu :\n"
 "Effectifs Kraylors : %.1f%%          Effectifs Éxuaris :%.1f%%\n"
 
@@ -4361,8 +4331,7 @@ msgstr "Grade obtenu : %s"
 msgctxt "msgMainscreen"
 msgid "Rank after military reductions due to ignominious defeat: %s"
 msgstr ""
-"\n"
-"Votre nouveau grade suite à votre ignominieuse défaite : %s"
+"Suite à votre ignominieuse défaite, vous êtes rétrogradé au grade de : %s"
 
 #~ msgctxt "setting"
 #~ msgid "Configures the amount of enemies spawned in the scenario."
