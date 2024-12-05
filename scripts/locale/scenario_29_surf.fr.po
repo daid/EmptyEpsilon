@@ -603,6 +603,7 @@ msgctxt "msgMainscreen"
 msgid "All friendly bases destroyed."
 msgstr ""
 "-- Votre bilan --\n"
+"\n"
 "Toutes vos bases ont été détruites."
 
 #: scripts/scenario_29_surf.lua:1756

@@ -2082,7 +2082,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_54_PatrolDuty.lua:5534
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_54_PatrolDuty.lua:4523
 #: scripts/scenario_54_PatrolDuty.lua:5461

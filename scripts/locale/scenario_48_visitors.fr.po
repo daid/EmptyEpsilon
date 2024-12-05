@@ -50,7 +50,7 @@ msgid ""
 "\n"
 "Version 2"
 msgstr ""
-"EN COURS DE TRADUCTION 42%\n"
+"EN COURS DE TRADUCTION 45%\n"
 "\n"
 "Get rid of the unwanted visitors. Other missions follow. Check friendly "
 "stations for mission orders. Dispatch office provides new missions. Continue "
@@ -2028,7 +2028,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_48_visitors.lua:3822 scripts/scenario_48_visitors.lua:4868
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_48_visitors.lua:3833 scripts/scenario_48_visitors.lua:4712
 #, lua-format
@@ -2482,7 +2482,7 @@ msgid ""
 "   %s"
 msgstr ""
 "%s\n"
-"Rumeurs :\n"
+"Commérages :\n"
 "   %s"
 
 #: scripts/scenario_48_visitors.lua:4177
@@ -3157,7 +3157,7 @@ msgstr ""
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Adder MK5 reinforcements! (%s reputation)"
-msgstr "Merci de nous envoyer un Adder MK5 en renforts ! (%s rép)"
+msgstr "Merci de nous envoyer un Vipère MK5 en renforts ! (%s rép)"
 
 #: scripts/scenario_48_visitors.lua:4920 scripts/scenario_48_visitors.lua:4941
 #: scripts/scenario_48_visitors.lua:4962
@@ -3190,7 +3190,7 @@ msgstr "Merci de nous envoyer un Phobos T3 en renforts ! (%s rép)"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Stalker Q7 reinforcements! (%s reputation)"
-msgstr ""
+msgstr "Merci de nous envoyer un Harceleur Q7 en renforts ! (%s rép)"
 
 #: scripts/scenario_48_visitors.lua:5010
 msgctxt "trade-comms"
@@ -4016,17 +4016,17 @@ msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
 #: scripts/scenario_48_visitors.lua:6217
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_48_visitors.lua:6222
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_48_visitors.lua:6227
 msgctxt "coolant-buttonDamageControl"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_48_visitors.lua:6259
 #, lua-format
@@ -4043,7 +4043,7 @@ msgstr "Déploiement des collecteurs %i"
 #: scripts/scenario_48_visitors.lua:6266
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
-msgstr "Collecte du liq. de ref."
+msgstr "Collecte en cours"
 
 #: scripts/scenario_48_visitors.lua:6295
 #, lua-format

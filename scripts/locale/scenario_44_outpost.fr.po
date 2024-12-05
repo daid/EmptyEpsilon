@@ -1936,7 +1936,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_44_outpost.lua:3989 scripts/scenario_44_outpost.lua:5085
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_44_outpost.lua:4001
 msgctxt "station-comms"
