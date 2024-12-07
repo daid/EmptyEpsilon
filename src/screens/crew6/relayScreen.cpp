@@ -20,8 +20,8 @@
 #include "gui/gui2_togglebutton.h"
 
 
-RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
-: GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
+RelayScreen::RelayScreen(GuiContainer* owner, Variant variant)
+: GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection), variant(variant)
 {
     targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
@@ -96,56 +96,58 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     option_buttons = new GuiElement(this, "BUTTONS");
     option_buttons->setPosition(20, 50, sp::Alignment::TopLeft)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
-    // Open comms button.
-    if (allow_comms == true)
-        (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", tr("Open Comms"), &targets))->setSize(GuiElement::GuiSizeMax, 50);
-    else
-        (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", tr("Link to Comms"), &targets))->setSize(GuiElement::GuiSizeMax, 50);
-
-
-    // Hack target
-    hack_target_button = new GuiButton(option_buttons, "HACK_TARGET", tr("Start hacking"), [this](){
-        P<SpaceObject> target = targets.get();
-        if (my_spaceship && target && target->canBeHackedBy(my_spaceship))
-        {
-            hacking_dialog->open(target);
-        }
-    });
-    hack_target_button->setSize(GuiElement::GuiSizeMax, 50);
-
-    // Link probe to science button.
-    link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", tr("Link to Science"), [this](bool value){
-        if (value)
-        {
-            my_spaceship->commandSetScienceLink(targets.get());
-        }
+    if (variant != Variant::captains_map) {
+        // Open comms button.
+        if (variant == Variant::relay)
+            (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", tr("Open Comms"), &targets))->setSize(GuiElement::GuiSizeMax, 50);
         else
-        {
-            my_spaceship->commandClearScienceLink();
-        }
-    });
-    link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanLaunchProbe());
+            (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", tr("Link to Comms"), &targets))->setSize(GuiElement::GuiSizeMax, 50);
 
-    // Manage waypoints.
-    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this]() {
-        mode = WaypointPlacement;
-        option_buttons->hide();
-    }))->setSize(GuiElement::GuiSizeMax, 50);
 
-    delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this]() {
-        if (my_spaceship && targets.getWaypointIndex() >= 0)
-        {
-            my_spaceship->commandRemoveWaypoint(targets.getWaypointIndex());
-        }
-    });
-    delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50);
+        // Hack target
+        hack_target_button = new GuiButton(option_buttons, "HACK_TARGET", tr("Start hacking"), [this](){
+            P<SpaceObject> target = targets.get();
+            if (my_spaceship && target && target->canBeHackedBy(my_spaceship))
+            {
+                hacking_dialog->open(target);
+            }
+        });
+        hack_target_button->setSize(GuiElement::GuiSizeMax, 50);
 
-    // Launch probe button.
-    launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", tr("Launch Probe"), [this]() {
-        mode = LaunchProbe;
-        option_buttons->hide();
-    });
-    launch_probe_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanLaunchProbe());
+        // Link probe to science button.
+        link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", tr("Link to Science"), [this](bool value){
+            if (value)
+            {
+                my_spaceship->commandSetScienceLink(targets.get());
+            }
+            else
+            {
+                my_spaceship->commandClearScienceLink();
+            }
+        });
+        link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanLaunchProbe());
+
+        // Manage waypoints.
+        (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this]() {
+            mode = WaypointPlacement;
+            option_buttons->hide();
+        }))->setSize(GuiElement::GuiSizeMax, 50);
+
+        delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this]() {
+            if (my_spaceship && targets.getWaypointIndex() >= 0)
+            {
+                my_spaceship->commandRemoveWaypoint(targets.getWaypointIndex());
+            }
+        });
+        delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50);
+
+        // Launch probe button.
+        launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", tr("Launch Probe"), [this]() {
+            mode = LaunchProbe;
+            option_buttons->hide();
+        });
+        launch_probe_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanLaunchProbe());
+    }
 
     // Reputation display.
     info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.4f, tr("Reputation") + ":", "");
@@ -161,7 +163,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
     hacking_dialog = new GuiHackingDialog(this, "");
 
-    if (allow_comms)
+    if (variant == Variant::relay)
     {
         new ShipsLog(this);
         (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -263,46 +265,61 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
             }
         }
 
-        if (probe && my_spaceship && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargetedBy(my_spaceship))
+        if (variant != Variant::captains_map)
         {
-            link_to_science_button->setValue(my_spaceship->linked_science_probe_id == probe->getMultiplayerId());
-            link_to_science_button->enable();
-        }
-        else
-        {
-            link_to_science_button->setValue(false);
-            link_to_science_button->disable();
-        }
-        if (my_spaceship && obj->canBeHackedBy(my_spaceship))
-        {
-            hack_target_button->enable();
-        }else{
-            hack_target_button->disable();
+            if (probe && my_spaceship && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargetedBy(my_spaceship))
+            {
+                link_to_science_button->setValue(my_spaceship->linked_science_probe_id == probe->getMultiplayerId());
+                link_to_science_button->enable();
+            }
+            else
+            {
+                link_to_science_button->setValue(false);
+                link_to_science_button->disable();
+            }
+            if (my_spaceship && obj->canBeHackedBy(my_spaceship))
+            {
+                hack_target_button->enable();
+            }else{
+                hack_target_button->disable();
+            }
         }
     }else{
-        hack_target_button->disable();
-        link_to_science_button->disable();
-        link_to_science_button->setValue(false);
+        if (variant != Variant::captains_map)
+        {
+            hack_target_button->disable();
+            link_to_science_button->disable();
+            link_to_science_button->setValue(false);
+        }
         info_callsign->setValue("-");
     }
     if (my_spaceship)
     {
-        // Toggle ship capabilities.
-        launch_probe_button->setVisible(my_spaceship->getCanLaunchProbe());
-        launch_probe_button->setEnable(my_spaceship->scan_probe_stock > 0);
-        link_to_science_button->setVisible(my_spaceship->getCanLaunchProbe());
-        hack_target_button->setVisible(my_spaceship->getCanHack());
+        if (variant != Variant::captains_map)
+        {
+            // Toggle ship capabilities.
+            launch_probe_button->setVisible(my_spaceship->getCanLaunchProbe());
+            launch_probe_button->setEnable(my_spaceship->scan_probe_stock > 0);
+            link_to_science_button->setVisible(my_spaceship->getCanLaunchProbe());
+            hack_target_button->setVisible(my_spaceship->getCanHack());
+        }
 
         info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
 
         // Update mission clock
         info_clock->setValue(gameGlobalInfo->getMissionTime());
 
-        launch_probe_button->setText(tr("Launch Probe") + " (" + string(my_spaceship->scan_probe_stock) + ")");
+        if (variant != Variant::captains_map)
+        {
+            launch_probe_button->setText(tr("Launch Probe") + " (" + string(my_spaceship->scan_probe_stock) + ")");
+        }
     }
 
-    if (targets.getWaypointIndex() >= 0)
-        delete_waypoint_button->enable();
-    else
-        delete_waypoint_button->disable();
+    if (variant != Variant::captains_map)
+    {
+        if (targets.getWaypointIndex() >= 0)
+            delete_waypoint_button->enable();
+        else
+            delete_waypoint_button->disable();
+    }
 }

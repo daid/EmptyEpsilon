@@ -14,6 +14,14 @@ class GuiHackingDialog;
 
 class RelayScreen : public GuiOverlay
 {
+public:
+    enum class Variant
+    {
+        relay,
+        stategic_map,
+        captains_map
+    };
+
 private:
     enum EMode
     {
@@ -45,8 +53,11 @@ private:
     GuiHackingDialog* hacking_dialog;
 
     glm::vec2 mouse_down_position{};
+
+    Variant variant;
+
 public:
-    RelayScreen(GuiContainer* owner, bool allow_comms);
+    RelayScreen(GuiContainer* owner, Variant variant);
 
     virtual void onDraw(sp::RenderTarget& target) override;
 };

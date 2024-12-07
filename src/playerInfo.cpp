@@ -192,7 +192,7 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
         if (crew_position[scienceOfficer] & (1 << monitor_index))
             screen->addStationTab(new ScienceScreen(container), scienceOfficer, getCrewPositionName(scienceOfficer), getCrewPositionIcon(scienceOfficer));
         if (crew_position[relayOfficer] & (1 << monitor_index))
-            screen->addStationTab(new RelayScreen(container, true), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
+            screen->addStationTab(new RelayScreen(container, RelayScreen::Variant::relay), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
 
         //Crew 4/3
         if (crew_position[tacticalOfficer] & (1 << monitor_index))
@@ -214,11 +214,13 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
         if (crew_position[databaseView] & (1 << monitor_index))
             screen->addStationTab(new DatabaseScreen(container), databaseView, getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
         if (crew_position[altRelay] & (1 << monitor_index))
-            screen->addStationTab(new RelayScreen(container, false), altRelay, getCrewPositionName(altRelay), getCrewPositionIcon(altRelay));
+            screen->addStationTab(new RelayScreen(container, RelayScreen::Variant::stategic_map), altRelay, getCrewPositionName(altRelay), getCrewPositionIcon(altRelay));
         if (crew_position[commsOnly] & (1 << monitor_index))
             screen->addStationTab(new CommsScreen(container), commsOnly, getCrewPositionName(commsOnly), getCrewPositionIcon(commsOnly));
         if (crew_position[shipLog] & (1 << monitor_index))
             screen->addStationTab(new ShipLogScreen(container), shipLog, getCrewPositionName(shipLog), getCrewPositionIcon(shipLog));
+        if (crew_position[captainsMap] & (1 << monitor_index))
+            screen->addStationTab(new RelayScreen(container, RelayScreen::Variant::captains_map), captainsMap, getCrewPositionName(captainsMap), getCrewPositionIcon(captainsMap));
 
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(container, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<max_crew_positions; n++)
@@ -265,6 +267,7 @@ string getCrewPositionName(ECrewPosition position)
     case altRelay: return tr("station","Strategic Map");
     case commsOnly: return tr("station","Comms");
     case shipLog: return tr("station","Ship's Log");
+    case captainsMap: return tr("station","Captains Map");
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -288,6 +291,7 @@ string getCrewPositionIcon(ECrewPosition position)
     case altRelay: return "";
     case commsOnly: return "";
     case shipLog: return "";
+    case captainsMap: return "";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -334,6 +338,8 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = commsOnly;
     else if (str == "shiplog")
         cp = shipLog;
+    else if (str == "captainsmap")
+        cp = captainsMap;
     else
         luaL_error(L, "Unknown value for crew position: %s", str.c_str());
 }
