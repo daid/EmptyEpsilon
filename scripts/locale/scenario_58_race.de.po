@@ -1491,7 +1491,7 @@ msgstr "Keine Wegpunkte gesetzt. Bitte setzen Sie zuerst einen Wegpunkt."
 #: scripts/scenario_58_race.lua:2491
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
-msgstr "Welchen Wegpunkt sollten wir verteidigen?"
+msgstr "Welchen Wegpunkt sollen wir verteidigen?"
 
 #: scripts/scenario_58_race.lua:2493
 #, lua-format

@@ -95,7 +95,7 @@ msgstr "Ihre Blutlinie wird hier enden!"
 #: scripts/comms_ship.lua:107
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr "Ihre schwächlichen Drohungen sind Bedeutungslos."
+msgstr "Ihre schwächlichen Drohungen sind bedeutungslos."
 
 #: scripts/comms_ship.lua:109
 msgctxt "shipEnemy-comms"

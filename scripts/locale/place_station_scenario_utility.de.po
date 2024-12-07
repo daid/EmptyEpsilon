@@ -23,8 +23,8 @@ msgid ""
 "We train naval cadets in routine and specialized functions aboard space "
 "vessels and coordinate naval activity throughout the sector"
 msgstr ""
-"Wir bilden Marinekadetten für Routine- und Spezialaufgaben an Bord von "
-"Raumschiffen aus und koordinieren die Aktivitäten der Marine im gesamten "
+"Wir bilden Navykadetten für Routine- und Spezialaufgaben an Bord von "
+"Raumschiffen aus und koordinieren die Aktivitäten der Navy im gesamten "
 "Sektor."
 
 #: scripts/place_station_scenario_utility.lua:389
@@ -37,7 +37,7 @@ msgid ""
 "coordination hub for the region"
 msgstr ""
 "Die ursprünglichen Erbauer der Station waren Fans des Wissenschaftlers und "
-"Schriftstellers Isaac Asimov aus dem späten 20. Jahrhundet. Die Station hieß "
+"Schriftstellers Isaac Asimov aus dem späten 20. Jahrhundert. Die Station hieß "
 "zunächst Foundation, wurde aber später einfach in Asimov umbenannt. Sie "
 "begann als Weltraum-Observatorium, wurde dann zu einer Versorgungsstation "
 "und entwickelte sich zu einem Bildungs- und Koordinationszentrum für die "
@@ -112,7 +112,7 @@ msgid ""
 "a fundamental principle in the design of our circuits"
 msgstr ""
 "Unsere Station ist nach dem Gesetz benannt, das die Kraft angibt, mit der "
-"sich ortsfeste, elektrisch geladene Teile abstoßen oder anziehen - ein "
+"sich ortsfeste, elektrisch geladene Teilchen abstoßen oder anziehen - ein "
 "grundlegendes Prinzip bei der Entwicklung unserer Schaltungen."
 
 #: scripts/place_station_scenario_utility.lua:543
@@ -345,7 +345,7 @@ msgid ""
 msgstr ""
 "Die Station wurde zu Ehren von Charles Hayden benannt, dessen Wohltätigkeit "
 "die astrophysikalische Forschung und Ausbildung auf der Erde im frühen 20. "
-"Jahrhundert stark vorran brachte."
+"Jahrhundert stark voran brachte."
 
 #: scripts/place_station_scenario_utility.lua:953
 #: scripts/place_station_scenario_utility.lua:2141
@@ -412,7 +412,7 @@ msgstr ""
 #: scripts/place_station_scenario_utility.lua:1064
 msgctxt "scienceDescription-station"
 msgid "Shield and armor components and research"
-msgstr "Schild- und Panzerkomponenten und Forschung"
+msgstr "Schild- und Panzerungs-Komponenten sowie Forschung"
 
 #: scripts/place_station_scenario_utility.lua:1065
 msgctxt "stationGeneralInfo-comms"
@@ -462,7 +462,7 @@ msgstr ""
 #: scripts/place_station_scenario_utility.lua:1142
 msgctxt "scienceDescription-station"
 msgid "Shield and Armor Research"
-msgstr "Schild- und Panzerforschung"
+msgstr "Schild- und Panzerungsforschung"
 
 #: scripts/place_station_scenario_utility.lua:1143
 msgctxt "stationGeneralInfo-comms"
@@ -871,7 +871,7 @@ msgid ""
 "so we honor our fortune by naming the station after them"
 msgstr ""
 "Wir haben einige unserer kritischen industriellen Prozesse von einer Spezies "
-"namens Tokra gelernt, daher ehren sie, indem wir die Station nach ihnen "
+"namens Tokra gelernt, daher ehren wir sie, indem wir die Station nach ihnen "
 "benennen."
 
 #: scripts/place_station_scenario_utility.lua:1906
@@ -968,7 +968,7 @@ msgstr ""
 #: scripts/place_station_scenario_utility.lua:2104
 msgctxt "scienceDescription-station"
 msgid "Repulsor and Tractor Beam Components"
-msgstr "Repulsor- und Traktorstrahlkomponenten"
+msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
 #: scripts/place_station_scenario_utility.lua:2105
 msgctxt "stationGeneralInfo-comms"
@@ -977,7 +977,7 @@ msgid ""
 "custom made"
 msgstr ""
 "Wir können alle Ihre Bedürfnisse in Bezug auf das Schieben und Ziehen mit "
-"spezialisierten, maßgeschneiderten Ausrüstung erfüllen."
+"spezialisierter, maßgeschneiderter Ausrüstung erfüllen."
 
 #: scripts/place_station_scenario_utility.lua:2106
 msgctxt "stationStory-comms"
@@ -1094,7 +1094,7 @@ msgstr ""
 #: scripts/place_station_scenario_utility.lua:2338
 msgctxt "scienceDescription-station"
 msgid "Repulsor and tractor beam components"
-msgstr "Repulsor- und Traktorstrahlkomponenten"
+msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
 #: scripts/place_station_scenario_utility.lua:2339
 msgctxt "stationGeneralInfo-comms"
