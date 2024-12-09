@@ -2943,10 +2943,10 @@ function handleDockedState()
 	end
 	if plot2name == "spinScientist" then
 		if comms_target == spinScientistStation  and not spinUpgradeAvailable then
-			addCommsReply("Speak with Paulina Lindquist", function()
-				setCommsMessage(string.format("Greetings, %s, what can I do for you?",player:getCallSign()))
-				addCommsReply("Do you want to apply your engine research?", function()
-					setCommsMessage("Over the years, I've discovered that research does not pay very well. Do you have some kind of compensation in mind? Gold, platinum or luxury would do nicely")
+			addCommsReply(_("upgradePaulina-comms", "Speak with Paulina Lindquist"), function()
+				setCommsMessage(string.format(_("upgradePaulina-comms", "Greetings, %s, what can I do for you?"),player:getCallSign()))
+				addCommsReply(_("upgradePaulina-comms", "Do you want to apply your engine research?"), function()
+					setCommsMessage(_("upgradePaulina-comms", "Over the years, I've discovered that research does not pay very well. Do you have some kind of compensation in mind? Gold, platinum or luxury would do nicely"))
 					gi = 1
 					giftQuantity = 0
 					repeat
@@ -2962,7 +2962,7 @@ function handleDockedState()
 						gi = gi + 1
 					until(gi > #goods[player])
 					if giftQuantity > 0 then
-						addCommsReply("Offer compensation from cargo aboard", function()
+						addCommsReply(_("upgradePaulina-comms", "Offer compensation from cargo aboard"), function()
 							gi = 1
 							giftList = {}
 							repeat
@@ -2980,9 +2980,9 @@ function handleDockedState()
 							gifti = math.random(1,#giftList)
 							decrementPlayerGoods(giftList[gifti])
 							player.cargo = player.cargo + 1
-							setCommsMessage(string.format("Thanks for the %s. I've transmitted instructions on conducting the upgrade. Any friendly station can do the upgrade, but you'll need to provide impulse cargo for the upgrade",giftList[gifti]))
+							setCommsMessage(string.format(_("upgradePaulina-comms", "Thanks for the %s. I've transmitted instructions on conducting the upgrade. Any friendly station can do the upgrade, but you'll need to provide impulse cargo for the upgrade"),giftList[gifti]))
 							spinUpgradeAvailable = true
-							plot2reminder = "Get spin upgrade from friendly station for impulse"
+							plot2reminder = _("upgradePaulinaOrders-comms", "Get spin upgrade from friendly station for impulse")
 						end)
 					end
 					addCommsReply(_("Back"), commsStation)
@@ -3002,12 +3002,12 @@ function handleDockedState()
 				gi = gi + 1
 			until(gi > #goods[player])
 			if tubePartQuantity > 0 then
-				addCommsReply(string.format("Give %s to Boris Eggleston for additional tube",tubePart), function()
+				addCommsReply(string.format(_("upgradeBoris-comms", "Give %s to Boris Eggleston for additional tube"),tubePart), function()
 					if player.tubeAdded then
-						setCommsMessage("You already have the extra tube")
+						setCommsMessage(_("upgradeBoris-comms", "You already have the extra tube"))
 					else
-						setCommsMessage("I can install it point to the front or to the rear. Which would you prefer?")
-						addCommsReply("Front", function()
+						setCommsMessage(_("upgradeBoris-comms", "I can install it point to the front or to the rear. Which would you prefer?"))
+						addCommsReply(_("upgradeBoris-comms", "Front"), function()
 							decrementPlayerGoods(tubePart)
 							player.cargo = player.cargo + 1
 							player.tubeAdded = true
@@ -3017,9 +3017,9 @@ function handleDockedState()
 							player:setWeaponTubeExclusiveFor(originalTubes, "Homing")
 							player:setWeaponStorageMax("Homing", player:getWeaponStorageMax("Homing") + 2)
 							player:setWeaponStorage("Homing", player:getWeaponStorage("Homing") + 2)
-							setCommsMessage("You now have an additional homing torpedo tube pointing forward")
+							setCommsMessage(_("upgradeBoris-comms", "You now have an additional homing torpedo tube pointing forward"))
 						end)
-						addCommsReply("Rear", function()
+						addCommsReply(_("upgradeBoris-comms", "Rear"), function()
 							decrementPlayerGoods(tubePart)
 							player.cargo = player.cargo + 1
 							player.tubeAdded = true
@@ -3030,15 +3030,15 @@ function handleDockedState()
 							player:setWeaponStorageMax("Homing", player:getWeaponStorageMax("Homing") + 2)
 							player:setWeaponStorage("Homing", player:getWeaponStorage("Homing") + 2)
 							player:setWeaponTubeDirection(originalTubes, 180)
-							setCommsMessage("You now have an additional homing torpedo tube pointing to the rear")
+							setCommsMessage(_("upgradeBoris-comms", "You now have an additional homing torpedo tube pointing to the rear"))
 						end)
 					end
 				end)
 			else
-				addCommsReply("May I speak with Boris Eggleston?", function()
-					setCommsMessage("[Boris Eggleston]\nHello, what can I do for you?")
-					addCommsReply("Can you really add another weapons tube to our ship?", function()
-						setCommsMessage(string.format("Definitely. But I'll need %s before I can do it",tubePart))
+				addCommsReply(_("upgradeBoris-comms", "May I speak with Boris Eggleston?"), function()
+					setCommsMessage(_("upgradeBoris-comms", "[Boris Eggleston]\nHello, what can I do for you?"))
+					addCommsReply(_("upgradeBoris-comms", "Can you really add another weapons tube to our ship?"), function()
+						setCommsMessage(string.format(_("upgradeBoris-comms", "Definitely. But I'll need %s before I can do it"),tubePart))
 						addCommsReply(_("Back"),commsStation)
 					end)
 				end)
@@ -3060,9 +3060,9 @@ function handleDockedState()
 				gi = gi + 1
 			until(gi > #goods[player])
 			if beamPart1Quantity > 0 and beamPart2Quantity > 0 then
-				addCommsReply(string.format("Give %s and %s to Frederico Booker for upgrade",beamPart1,beamPart2), function()
+				addCommsReply(string.format(_("upgradeFred-comms", "Give %s and %s to Frederico Booker for upgrade"),beamPart1,beamPart2), function()
 					if player.beamDamageUpgrade then
-						setCommsMessage("You already have the upgrade")
+						setCommsMessage(_("upgradeFred-comms", "You already have the upgrade"))
 					else
 						if player:getBeamWeaponRange(0) > 0 then
 							decrementPlayerGoods(beamPart1)
@@ -3079,17 +3079,17 @@ function handleDockedState()
 								bi = bi + 1
 							until(player:getBeamWeaponRange(bi) < 1)
 							player.beamDamageUpgrade = true
-							setCommsMessage("Your ship beam weapons now deal 50% more damage")
+							setCommsMessage(_("upgradeFred-comms", "Your ship beam weapons now deal 50% more damage"))
 						else
-							setCommsMessage("Your ship has no beam weapons to upgrade")
+							setCommsMessage(_("upgradeFred-comms", "Your ship has no beam weapons to upgrade"))
 						end
 					end
 				end)
 			else
-				addCommsReply("Talk to Frederico Booker", function()
-					setCommsMessage(string.format("[Frederico Booker]\nGreetings, %s. What brings you to %s to talk to me?",player:getCallSign(),beamDamageStation:getCallSign()))
-					addCommsReply("Can you upgrade our beam weapons systems?", function()
-						setCommsMessage(string.format("[Frederico Booker]\nOh, you've heard about my research and the practical results? I can certainly upgrade the damage dealt by your beam weapons systems, but you'll need to provide me with %s and %s before I can complete the job",beamPart1,beamPart2))
+				addCommsReply(_("upgradeFred-comms", "Talk to Frederico Booker"), function()
+					setCommsMessage(string.format(_("upgradeFred-comms", "[Frederico Booker]\nGreetings, %s. What brings you to %s to talk to me?"),player:getCallSign(),beamDamageStation:getCallSign()))
+					addCommsReply(_("upgradeFred-comms", "Can you upgrade our beam weapons systems?"), function()
+						setCommsMessage(string.format(_("upgradeFred-comms", "[Frederico Booker]\nOh, you've heard about my research and the practical results? I can certainly upgrade the damage dealt by your beam weapons systems, but you'll need to provide me with %s and %s before I can complete the job"),beamPart1,beamPart2))
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end)
@@ -3098,21 +3098,21 @@ function handleDockedState()
 	end
 	if plot2name == "friendlyClue" then
 		if comms_target == friendlyClueStation then
-			addCommsReply("Speak with Herbert Long", function()
-				setCommsMessage(string.format("Well, if it isn't the good ship, %s! What brings you to %s?",player:getCallSign(),friendlyClueStation:getCallSign()))
-				addCommsReply("Please share your enemy base information", function()
-					setCommsMessage(string.format("That's old news. Wouldn't you rather know about %s's leadership woes or the latest readings on unique stellar phenomenae in the area?",friendlyClueStation:getCallSign()))
-					addCommsReply("No, I just want to know about the enemy base", function()
-						setCommsMessage(string.format("Well, that's easy. The name of the base is %s. Enjoy your stay on %s!",targetEnemyStation:getCallSign(),friendlyClueStation:getCallSign()))
+			addCommsReply(_("HerbertClue-comms", "Speak with Herbert Long"), function()
+				setCommsMessage(string.format(_("HerbertClue-comms", "Well, if it isn't the good ship, %s! What brings you to %s?"),player:getCallSign(),friendlyClueStation:getCallSign()))
+				addCommsReply(_("HerbertClue-comms", "Please share your enemy base information"), function()
+					setCommsMessage(string.format(_("HerbertClue-comms", "That's old news. Wouldn't you rather know about %s's leadership woes or the latest readings on unique stellar phenomenae in the area?"),friendlyClueStation:getCallSign()))
+					addCommsReply(_("HerbertClue-comms", "No, I just want to know about the enemy base"), function()
+						setCommsMessage(string.format(_("HerbertClue-comms", "Well, that's easy. The name of the base is %s. Enjoy your stay on %s!"),targetEnemyStation:getCallSign(),friendlyClueStation:getCallSign()))
 						addCommsReply(_("Back"), commsStation)
 					end)
-					addCommsReply(string.format("What is %s struggling with?",friendlyClueStation:getCallSign()), function()
-						setCommsMessage(string.format("There are so many requests for transfers, %s may be understaffed by next week",friendlyClueStation:getCallSign()))
+					addCommsReply(string.format(_("HerbertClue-comms", "What is %s struggling with?"),friendlyClueStation:getCallSign()), function()
+						setCommsMessage(string.format(_("HerbertClue-comms", "There are so many requests for transfers, %s may be understaffed by next week"),friendlyClueStation:getCallSign()))
 						addCommsReply(_("Back"), commsStation)
 					end)
-					addCommsReply("What kind of unique stellar phenomenae?", function()
-						setCommsMessage(string.format("While we were in %s spying on %s, we picked up readings in a nebula hinting at the formation of a new star",targetEnemyStation:getSectorName(),targetEnemyStation:getCallSign()))
-						primaryOrders = string.format("Destroy enemy station %s in %s",targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName())
+					addCommsReply(_("HerbertClue-comms", "What kind of unique stellar phenomenae?"), function()
+						setCommsMessage(string.format(_("HerbertClue-comms", "While we were in %s spying on %s, we picked up readings in a nebula hinting at the formation of a new star"),targetEnemyStation:getSectorName(),targetEnemyStation:getCallSign()))
+						primaryOrders = string.format(_("HerbertClueOrders-comms", "Destroy enemy station %s in %s"),targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName())
 						betweenPlot2fleet()
 					end)
 					addCommsReply(_("Back"), commsStation)
@@ -3131,15 +3131,15 @@ function handleDockedState()
 			gi = gi + 1
 		until(gi > #goods[player])
 		if impulseQuantity > 0 then
-			addCommsReply("Upgrade ship maneuverability for impulse", function()
+			addCommsReply(_("upgrade-comms", "Upgrade ship maneuverability for impulse"), function()
 				if player.spinUpgrade then
-					setCommsMessage("You already have the upgrade")
+					setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 				else
 					player.spinUpgrade = true
 					decrementPlayerGoods("impulse")
 					player.cargo = player.cargo + 1
 					player:setRotationMaxSpeed(player:getRotationMaxSpeed()*1.5)
-					setCommsMessage("Maneuverability upgraded by 50%")
+					setCommsMessage(_("upgrade-comms", "Maneuverability upgraded by 50%"))
 				end
 				addCommsReply(_("Back"), commsStation)
 			end)
@@ -3358,8 +3358,8 @@ function handleDockedState()
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p == comms_target and player:isDocked(p) and p.cargo > 0 then
-					addCommsReply(string.format("Transfer cargo to %s",p:getCallSign()), function()
-						setCommsMessage("What would you like to transfer?")
+					addCommsReply(string.format(_("cargoTransfert-comms", "Transfer cargo to %s"),p:getCallSign()), function()
+						setCommsMessage(_("cargoTransfert-comms", "What would you like to transfer?"))
 						gi = 1
 						repeat
 							local goodsType = goods[player][gi][1]
@@ -3376,8 +3376,8 @@ function handleDockedState()
 									until(gi2 > #goods[p])
 									player.cargo = player.cargo + 1
 									p.cargo = p.cargo - 1
-									setCommsMessage(string.format("One %s transferred to %s",goodsType,p:getCallSign()))
-									p:addToShipLog(string.format("One %s transferred from %s",goodsType,player:getCallSign()),"#228b22")
+									setCommsMessage(string.format(_("cargoTransfert-comms", "One %s transferred to %s"),goodsType,p:getCallSign()))
+									p:addToShipLog(string.format(_("cargoTransfert-shipLog", "One %s transferred from %s"),goodsType,player:getCallSign()),"#228b22")
 									addCommsReply(_("Back"), commsStation)
 								end)
 							end
@@ -3393,7 +3393,7 @@ end
 
 function setOptionalOrders()
 	optionalOrders = "\n"
-	ifs = "Optional:\n"
+	ifs = _("orders-comms", "Optional:\n")
 	if plot2reminder ~= nil then
 		optionalOrders = optionalOrders .. ifs .. plot2reminder
 		ifs = "\n"
@@ -3577,15 +3577,15 @@ function handleUndockedState()
 				gi = gi + 1
 			until(gi > #goods[player])
 			if impulseQuantity > 0 then
-				addCommsReply("Upgrade ship maneuverability for impulse", function()
+				addCommsReply(_("upgrade-comms", "Upgrade ship maneuverability for impulse"), function()
 					if player.spinUpgrade then
-						setCommsMessage("You already have the upgrade")
+						setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 					else
 						player.spinUpgrade = true
 						decrementPlayerGoods("impulse")
 						player.cargo = player.cargo + 1
 						player:setRotationMaxSpeed(player:getRotationMaxSpeed()*1.5)
-						setCommsMessage("Maneuverability upgraded by 50%")
+						setCommsMessage(_("upgrade-comms", "Maneuverability upgraded by 50%"))
 					end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -3594,20 +3594,20 @@ function handleUndockedState()
 	end
 	if plot3name == "awaitingTractor" then
 		if comms_target == tractorStation and player == playerCarrier and distance(player,comms_target) < 2000 then
-			addCommsReply("Install tractor equipment", function()
+			addCommsReply(_("tractor-comms", "Install tractor equipment"), function()
 				if playerCarrier:hasPlayerAtPosition("Engineering") then
 					tractorIntegrationMsg = "tractorIntegrationMsg"
-					playerCarrier:addCustomMessage("Engineering",tractorIntegrationMsg,string.format(_("-msgEngineer", "The tractor equipment has been transported aboard %s. You need to make the final connections for full installation"),playerCarrier:getCallSign()))
+					playerCarrier:addCustomMessage("Engineering",tractorIntegrationMsg,string.format(_("tractor-msgEngineer", "The tractor equipment has been transported aboard %s. You need to make the final connections for full installation"),playerCarrier:getCallSign()))
 				end
 				if playerCarrier:hasPlayerAtPosition("Engineering+") then
 					tractorIntegrationMsgPlus = "tractorIntegrationMsgPlus"
-					playerCarrier:addCustomMessage("Engineering+",tractorIntegrationMsgPlus,string.format(_("-msgEngineer+", "The tractor equipment has been transported aboard %s. You need to make the final connections for full installation"),playerCarrier:getCallSign()))
+					playerCarrier:addCustomMessage("Engineering+",tractorIntegrationMsgPlus,string.format(_("tractor-msgEngineer+", "The tractor equipment has been transported aboard %s. You need to make the final connections for full installation"),playerCarrier:getCallSign()))
 				end
 				tractorIntegrationButton = "tractorIntegrationButton"
-				playerCarrier:addCustomButton("Engineering",tractorIntegrationButton,_("-buttonEngineer", "Connect Tractor"),connectTractor)
+				playerCarrier:addCustomButton("Engineering",tractorIntegrationButton,_("tractor-buttonEngineer", "Connect Tractor"),connectTractor)
 				tractorIntegrationButtonPlus = "tractorIntegrationButtonPlus"
-				playerCarrier:addCustomButton("Engineering+",tractorIntegrationButtonPlus,_("-buttonEngineer+", "Connect Tractor"),connectTractor)
-				setCommsMessage("Tractor equipment transferred to engine room")
+				playerCarrier:addCustomButton("Engineering+",tractorIntegrationButtonPlus,_("tractor-buttonEngineer+", "Connect Tractor"),connectTractor)
+				setCommsMessage(_("tractor-comms", "Tractor equipment transferred to engine room"))
 			end)
 		end
 	end
@@ -3622,12 +3622,12 @@ function handleUndockedState()
 				gi = gi + 1
 			until(gi > #goods[player])
 			if tubePartQuantity > 0 then
-				addCommsReply(string.format("Give %s to Boris Eggleston for additional tube",tubePart), function()
+				addCommsReply(string.format(_("upgradeBoris-comms", "Give %s to Boris Eggleston for additional tube"),tubePart), function()
 					if player.tubeAdded then
-						setCommsMessage("You already have the extra tube")
+						setCommsMessage(_("upgradeBoris-comms", "You already have the extra tube"))
 					else
-						setCommsMessage("I can install it point to the front or to the rear. Which would you prefer?")
-						addCommsReply("Front", function()
+						setCommsMessage(_("upgradeBoris-comms", "I can install it point to the front or to the rear. Which would you prefer?"))
+						addCommsReply(_("upgradeBoris-comms", "Front"), function()
 							decrementPlayerGoods(tubePart)
 							player.cargo = player.cargo + 1
 							player.tubeAdded = true
@@ -3637,9 +3637,9 @@ function handleUndockedState()
 							player:setWeaponTubeExclusiveFor(originalTubes, "Homing")
 							player:setWeaponStorageMax("Homing", player:getWeaponStorageMax("Homing") + 2)
 							player:setWeaponStorage("Homing", player:getWeaponStorage("Homing") + 2)
-							setCommsMessage("You now have an additional homing torpedo tube pointing forward")
+							setCommsMessage(_("upgradeBoris-comms", "You now have an additional homing torpedo tube pointing forward"))
 						end)
-						addCommsReply("Rear", function()
+						addCommsReply(_("upgradeBoris-comms", "Rear"), function()
 							decrementPlayerGoods(tubePart)
 							player.cargo = player.cargo + 1
 							player.tubeAdded = true
@@ -3650,15 +3650,15 @@ function handleUndockedState()
 							player:setWeaponStorageMax("Homing", player:getWeaponStorageMax("Homing") + 2)
 							player:setWeaponStorage("Homing", player:getWeaponStorage("Homing") + 2)
 							player:setWeaponTubeDirection(originalTubes, 180)
-							setCommsMessage("You now have an additional homing torpedo tube pointing to the rear")
+							setCommsMessage(_("upgradeBoris-comms", "You now have an additional homing torpedo tube pointing to the rear"))
 						end)
 					end
 				end)
 			else
-				addCommsReply("May I speak with Boris Eggleston?", function()
-					setCommsMessage("[Boris Eggleston]\nHello, what can I do for you?")
-					addCommsReply("Can you really add another weapons tube to our ship?", function()
-						setCommsMessage(string.format("Definitely. But I'll need %s before I can do it",tubePart))
+				addCommsReply(_("upgradeBoris-comms", "May I speak with Boris Eggleston?"), function()
+					setCommsMessage(_("upgradeBoris-comms", "[Boris Eggleston]\nHello, what can I do for you?"))
+					addCommsReply(_("upgradeBoris-comms", "Can you really add another weapons tube to our ship?"), function()
+						setCommsMessage(string.format(_("upgradeBoris-comms", "Definitely. But I'll need %s before I can do it"),tubePart))
 						addCommsReply(_("Back"),commsStation)
 					end)
 				end)
@@ -3680,9 +3680,9 @@ function handleUndockedState()
 				gi = gi + 1
 			until(gi > #goods[player])
 			if beamPart1Quantity > 0 and beamPart2Quantity > 0 then
-				addCommsReply(string.format("Give %s and %s to Frederico Booker for upgrade",beamPart1,beamPart2), function()
+				addCommsReply(string.format(_("upgradeFred-comms", "Give %s and %s to Frederico Booker for upgrade"),beamPart1,beamPart2), function()
 					if player.beamDamageUpgrade then
-						setCommsMessage("You already have the upgrade")
+						setCommsMessage(_("upgradeFred-comms", "You already have the upgrade"))
 					else
 						if player:getBeamWeaponRange(0) > 0 then
 							decrementPlayerGoods(beamPart1)
@@ -3699,17 +3699,17 @@ function handleUndockedState()
 								bi = bi + 1
 							until(player:getBeamWeaponRange(bi) < 1)
 							player.beamDamageUpgrade = true
-							setCommsMessage("Your ship beam weapons now deal 50% more damage")
+							setCommsMessage(_("upgradeFred-comms", "Your ship beam weapons now deal 50% more damage"))
 						else
-							setCommsMessage("Your ship has no beam weapons to upgrade")
+							setCommsMessage(_("upgradeFred-comms", "Your ship has no beam weapons to upgrade"))
 						end
 					end
 				end)
 			else
-				addCommsReply("Talk to Frederico Booker", function()
-					setCommsMessage(string.format("[Frederico Booker]\nGreetings, %s. What brings you to %s to talk to me?",player:getCallSign(),beamDamageStation:getCallSign()))
-					addCommsReply("Can you upgrade our beam weapons systems?", function()
-						setCommsMessage(string.format("[Frederico Booker]\nOh, you've heard about my research and the practical results? I can certainly upgrade the damage dealt by your beam weapons systems, but you'll need to provide me with %s and %s before I can complete the job",beamPart1,beamPart2))
+				addCommsReply(_("upgradeFred-comms", "Talk to Frederico Booker"), function()
+					setCommsMessage(string.format(_("upgradeFred-comms", "[Frederico Booker]\nGreetings, %s. What brings you to %s to talk to me?"),player:getCallSign(),beamDamageStation:getCallSign()))
+					addCommsReply(_("upgradeFred-comms", "Can you upgrade our beam weapons systems?"), function()
+						setCommsMessage(string.format(_("upgradeFred-comms", "[Frederico Booker]\nOh, you've heard about my research and the practical results? I can certainly upgrade the damage dealt by your beam weapons systems, but you'll need to provide me with %s and %s before I can complete the job"),beamPart1,beamPart2))
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end)
@@ -3843,8 +3843,8 @@ function handleUndockedState()
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p == comms_target and distance(p,player) < 1000 and p.cargo > 0 then
-				addCommsReply(string.format("Transfer cargo to %s",p:getCallSign()), function()
-					setCommsMessage("What would you like to transfer?")
+				addCommsReply(string.format(_("cargoTransfert-comms", "Transfer cargo to %s"),p:getCallSign()), function()
+					setCommsMessage(_("cargoTransfert-comms", "What would you like to transfer?"))
 					gi = 1
 					repeat
 						local goodsType = goods[player][gi][1]
@@ -3861,8 +3861,8 @@ function handleUndockedState()
 								until(gi2 > #goods[p])
 								player.cargo = player.cargo + 1
 								p.cargo = p.cargo - 1
-								setCommsMessage(string.format("One %s transferred to %s",goodsType,p:getCallSign()))
-								p:addToShipLog(string.format("One %s transferred from %s",goodsType,player:getCallSign()),"#228b22")
+								setCommsMessage(string.format(_("cargoTransfert-comms", "One %s transferred to %s"),goodsType,p:getCallSign()))
+								p:addToShipLog(string.format(_("cargoTransfert-shipLog", "One %s transferred from %s"),goodsType,player:getCallSign()),"#228b22")
 								addCommsReply(_("Back"), commsStation)
 							end)
 						end
@@ -4185,7 +4185,7 @@ function freighterComms(comms_data)
 					gi = gi + 1
 				until(gi > #goods[comms_target])
 				if goodsQuantity > 0 then
-					addCommsReply(_("trade-comms", "What kind of cargo are you carrying?"), function()
+					addCommsReply(_("cargoTransfert-comms", "What kind of cargo are you carrying?"), function()
 						gi = 1
 						gMsg = ""
 						repeat
@@ -4275,7 +4275,7 @@ function freighterComms(comms_data)
 					gi = gi + 1
 				until(gi > #goods[comms_target])
 				if goodsQuantity > 0 then
-					addCommsReply(_("trade-comms", "What kind of cargo are you carrying?"), function()
+					addCommsReply(_("cargoTransfert-comms", "What kind of cargo are you carrying?"), function()
 						gi = 1
 						gMsg = ""
 						repeat
@@ -4329,7 +4329,7 @@ function freighterComms(comms_data)
 					gi = gi + 1
 				until(gi > #goods[comms_target])
 				if goodsQuantity > 0 then
-					addCommsReply(_("trade-comms", "What kind of cargo are you carrying?"), function()
+					addCommsReply(_("cargoTransfert-comms", "What kind of cargo are you carrying?"), function()
 						gi = 1
 						gMsg = ""
 						repeat
@@ -4407,9 +4407,9 @@ function cargoTransfer(delta)
 	if playerCarrier.cargo > 0 and playerBlade:isDocked(playerCarrier) and playerBlade.cargo < playerBlade.maxCargo then
 		if bladeTransferButton == nil then
 			bladeTransferButton = "bladeTransferButton"
-			playerBlade:addCustomButton("Relay", bladeTransferButton, _("-buttonRelay", "Transfer Cargo"), bladeCargoTransfer)
+			playerBlade:addCustomButton("Relay", bladeTransferButton, _("cargoTransfert-buttonRelay", "Transfer Cargo"), bladeCargoTransfer)
 			bladeTransferButtonOp = "bladeTransferButtonOp"
-			playerBlade:addCustomButton("Operations", bladeTransferButtonOp, _("-buttonOperations", "Transfer Cargo"), bladeCargoTransfer)
+			playerBlade:addCustomButton("Operations", bladeTransferButtonOp, _("cargoTransfert-buttonOperations", "Transfer Cargo"), bladeCargoTransfer)
 		end
 	else
 		if bladeTransferButton ~= nil then
@@ -4422,9 +4422,9 @@ function cargoTransfer(delta)
 	if playerCarrier.cargo > 0 and playerPoint:isDocked(playerCarrier) and playerPoint.cargo < playerPoint.maxCargo then
 		if pointTransferButton == nil then
 			pointTransferButton = "pointTransferButton"
-			playerPoint:addCustomButton("Relay", pointTransferButton, _("-buttonRelay", "Transfer Cargo"), pointCargoTransfer)
+			playerPoint:addCustomButton("Relay", pointTransferButton, _("cargoTransfert-buttonRelay", "Transfer Cargo"), pointCargoTransfer)
 			pointTransferButtonOp = "pointTransferButtonOp"
-			playerPoint:addCustomButton("Operations", pointTransferButtonOp, _("-buttonOperations", "Transfer Cargo"), pointCargoTransfer)
+			playerPoint:addCustomButton("Operations", pointTransferButtonOp, _("cargoTransfert-buttonOperations", "Transfer Cargo"), pointCargoTransfer)
 		end
 	else
 		if pointTransferButton ~= nil then
@@ -4464,21 +4464,21 @@ function bladeCargoTransfer()
 		until(gi > #goods[playerBlade])
 		if playerBlade:hasPlayerAtPosition("Relay") then
 			bladeCargoTransferredMsg = "bladeCargoTransferredMsg"
-			playerBlade:addCustomMessage("Relay",bladeCargoTransferredMsg,string.format(_("-msgRelay", "One of each type of cargo aboard %s transferred to %s"),playerBlade:getCallSign(),playerCarrier:getCallSign()))
+			playerBlade:addCustomMessage("Relay",bladeCargoTransferredMsg,string.format(_("cargoTransfert-msgRelay", "One of each type of cargo aboard %s transferred to %s"),playerBlade:getCallSign(),playerCarrier:getCallSign()))
 		end
 		if playerBlade:hasPlayerAtPosition("Operations") then
 			bladeCargoTransferredMsgOp = "bladeCargoTransferredMsgOp"
-			playerBlade:addCustomMessage("Operations",bladeCargoTransferredMsgOp,string.format(_("-msgOperations", "One of each type of cargo aboard %s transferred to %s"),playerBlade:getCallSign(),playerCarrier:getCallSign()))
+			playerBlade:addCustomMessage("Operations",bladeCargoTransferredMsgOp,string.format(_("cargoTransfert-msgOperations", "One of each type of cargo aboard %s transferred to %s"),playerBlade:getCallSign(),playerCarrier:getCallSign()))
 		end
-		playerCarrier:addToShipLog(string.format("Cargo transferred from %s",playerBlade:getCallSign()),"Magenta")
+		playerCarrier:addToShipLog(string.format(_("cargoTransfert-shipLog", "Cargo transferred from %s"),playerBlade:getCallSign()),"Magenta")
 	else
 		if playerBlade:hasPlayerAtPosition("Relay") then
 			insufficientCarrierCargoSpaceMsg = "insufficientCarrierCargoSpaceMsg"
-			playerBlade:addCustomMessage("Relay",insufficientCarrierCargoSpaceMsg,string.format(_("-msgRelay", "Insufficient space on %s to accept your cargo transfer"),playerCarrier:getCallSign()))
+			playerBlade:addCustomMessage("Relay",insufficientCarrierCargoSpaceMsg,string.format(_("cargoTransfert-msgRelay", "Insufficient space on %s to accept your cargo transfer"),playerCarrier:getCallSign()))
 		end
 		if playerBlade:hasPlayerAtPosition("Operations") then
 			insufficientCarrierCargoSpaceMsgOp = "insufficientCarrierCargoSpaceMsgOp"
-			playerBlade:addCustomMessage("Operations",insufficientCarrierCargoSpaceMsgOp,string.format(_("-msgOperations", "Insufficient space on %s to accept your cargo transfer"),playerCarrier:getCallSign()))
+			playerBlade:addCustomMessage("Operations",insufficientCarrierCargoSpaceMsgOp,string.format(_("cargoTransfert-msgOperations", "Insufficient space on %s to accept your cargo transfer"),playerCarrier:getCallSign()))
 		end
 	end
 end
@@ -4511,21 +4511,21 @@ function pointCargoTransfer()
 		until(gi > #goods[playerPoint])
 		if playerPoint:hasPlayerAtPosition("Relay") then
 			pointCargoTransferredMsg = "pointCargoTransferredMsg"
-			playerPoint:addCustomMessage("Relay",pointCargoTransferredMsg,string.format(_("-msgRelay", "One of each type of cargo aboard %s transferred to %s"),playerPoint:getCallSign(),playerCarrier:getCallSign()))
+			playerPoint:addCustomMessage("Relay",pointCargoTransferredMsg,string.format(_("cargoTransfert-msgRelay", "One of each type of cargo aboard %s transferred to %s"),playerPoint:getCallSign(),playerCarrier:getCallSign()))
 		end
 		if playerPoint:hasPlayerAtPosition("Operations") then
 			pointCargoTransferredMsgOp = "pointCargoTransferredMsgOp"
-			playerPoint:addCustomMessage("Operations",pointCargoTransferredMsgOp,string.format(_("-msgOperations", "One of each type of cargo aboard %s transferred to %s"),playerPoint:getCallSign(),playerCarrier:getCallSign()))
+			playerPoint:addCustomMessage("Operations",pointCargoTransferredMsgOp,string.format(_("cargoTransfert-msgOperations", "One of each type of cargo aboard %s transferred to %s"),playerPoint:getCallSign(),playerCarrier:getCallSign()))
 		end
-		playerCarrier:addToShipLog(string.format("Cargo transferred from %s",playerPoint:getCallSign()),"Magenta")
+		playerCarrier:addToShipLog(string.format(_("cargoTransfert-shipLog", "Cargo transferred from %s"),playerPoint:getCallSign()),"Magenta")
 	else
 		if playerPoint:hasPlayerAtPosition("Relay") then
 			insufficientCarrierCargoSpaceMsgPoint = "insufficientCarrierCargoSpaceMsgPoint"
-			playerPoint:addCustomMessage("Relay",insufficientCarrierCargoSpaceMsgPoint,string.format(_("-msgRelay", "Insufficient space on %s to accept your cargo transfer"),playerCarrier:getCallSign()))
+			playerPoint:addCustomMessage("Relay",insufficientCarrierCargoSpaceMsgPoint,string.format(_("cargoTransfert-msgRelay", "Insufficient space on %s to accept your cargo transfer"),playerCarrier:getCallSign()))
 		end
 		if playerPoint:hasPlayerAtPosition("Operations") then
 			insufficientCarrierCargoSpaceMsgPointOp = "insufficientCarrierCargoSpaceMsgPointOp"
-			playerPoint:addCustomMessage("Operations",insufficientCarrierCargoSpaceMsgPointOp,string.format(_("-msgOperations", "Insufficient space on %s to accept your cargo transfer"),playerCarrier:getCallSign()))
+			playerPoint:addCustomMessage("Operations",insufficientCarrierCargoSpaceMsgPointOp,string.format(_("cargoTransfert-msgOperations", "Insufficient space on %s to accept your cargo transfer"),playerCarrier:getCallSign()))
 		end
 	end
 end
@@ -4541,8 +4541,8 @@ function initialOrders(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
-					p:addToShipLog(string.format("The Ktlitans keep sending harassing ships. We've decrypted some of their communications - enough to identify their primary base by name if not by location. Find and destroy Ktlitan station %s. Respond to other requests from stations in the area if you wish, but your primary goal is do destroy %s. You're in control of our prototype carrier. As you know, it has minimal weapons and cannot dock with a station. It is in your best interest to protect it since it will significantly shorten the duration of your mission.",targetEnemyStation:getCallSign(),targetEnemyStation:getCallSign()),"Magenta")
-					primaryOrders = string.format("Destroy %s",targetEnemyStation:getCallSign())
+					p:addToShipLog(string.format(_("goal-shipLog", "The Ktlitans keep sending harassing ships. We've decrypted some of their communications - enough to identify their primary base by name if not by location. Find and destroy Ktlitan station %s. Respond to other requests from stations in the area if you wish, but your primary goal is do destroy %s. You're in control of our prototype carrier. As you know, it has minimal weapons and cannot dock with a station. It is in your best interest to protect it since it will significantly shorten the duration of your mission."),targetEnemyStation:getCallSign(),targetEnemyStation:getCallSign()),"Magenta")
+					primaryOrders = string.format(_("goalOrders-comms", "Destroy %s"),targetEnemyStation:getCallSign())
 				end
 			end
 			plot1 = setEnemyDefenseFleet
@@ -4755,10 +4755,10 @@ function upgradeShipSpin(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("Paulina Lindquist, a noted research engineer recently published her latest theories on engine design. We believe her theories have practical applications to our ship maneuvering systems. You may want to talk to her about putting her theories into practice on our naval vessels. She's currently stationed on %s in %s",spinScientistStation:getCallSign(),spinScientistStation:getSectorName()),"Magenta")
+				p:addToShipLog(string.format(_("upgradePaulina-shipLog", "Paulina Lindquist, a noted research engineer recently published her latest theories on engine design. We believe her theories have practical applications to our ship maneuvering systems. You may want to talk to her about putting her theories into practice on our naval vessels. She's currently stationed on %s in %s"),spinScientistStation:getCallSign(),spinScientistStation:getSectorName()),"Magenta")
 			end
 		end
-		plot2reminder = string.format("Visit Paulina Lindquist on %s in %s regarding ship spin upgrade",spinScientistStation:getCallSign(),spinScientistStation:getSectorName())
+		plot2reminder = string.format(_("upgradePaulinaOrders-comms", "Visit Paulina Lindquist on %s in %s regarding ship spin upgrade"),spinScientistStation:getCallSign(),spinScientistStation:getSectorName())
 		plot2name = "spinScientist"
 		plot2 = spinScientist
 		spinUpgradeAvailable = false
@@ -4792,10 +4792,10 @@ function spinScientist(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
-					p:addToShipLog(string.format("Paulina Lindquist, has been reassigned to station %s in %s",spinScientistStation:getCallSign(),spinScientistStation:getSectorName()),"Magenta")
+					p:addToShipLog(string.format(_("upgradePaulina-shipLog", "Paulina Lindquist, has been reassigned to station %s in %s"),spinScientistStation:getCallSign(),spinScientistStation:getSectorName()),"Magenta")
 				end
 			end
-			plot2reminder = string.format("Visit Paulina Lindquist on %s in %s regarding ship spin upgrade",spinScientistStation:getCallSign(),spinScientistStation:getSectorName())
+			plot2reminder = string.format(_("upgradePaulinaOrders-comms", "Visit Paulina Lindquist on %s in %s regarding ship spin upgrade"),spinScientistStation:getCallSign(),spinScientistStation:getSectorName())
 		end
 	end
 end
@@ -4813,10 +4813,10 @@ function locateTargetEnemyBase(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("Herbert Long believes he has a lead on some information about the enemy base that has been the source of the harassing ships. He's stationed on %s in %s",friendlyClueStation:getCallSign(),friendlyClueStation:getSectorName()),"Magenta")
+				p:addToShipLog(string.format(_("HerbertClue-shipLog", "Herbert Long believes he has a lead on some information about the enemy base that has been the source of the harassing ships. He's stationed on %s in %s"),friendlyClueStation:getCallSign(),friendlyClueStation:getSectorName()),"Magenta")
 			end
 		end
-		plot2reminder = string.format("Talk to Herbert Long on %s in %s regarding enemy base",friendlyClueStation:getCallSign(),friendlyClueStation:getSectorName())
+		plot2reminder = string.format(_("HerbertClueOrders-comms", "Talk to Herbert Long on %s in %s regarding enemy base"),friendlyClueStation:getCallSign(),friendlyClueStation:getSectorName())
 		plot2name = "friendlyClue"
 		plot2 = friendlyClue
 	end
@@ -4834,10 +4834,10 @@ function rescueDyingScientist(delta)
 	for pidx=1,8 do
 		p = getPlayerShip(pidx)
 		if p ~= nil and p:isValid() then
-			p:addToShipLog(string.format("[%s in %s] Medical emergency: Engineering research scientist Terrence Forsythe has contracted a rare medical condition. After contacting nearly every station in the area, we found that doctor Geraldine Polaski on %s has the expertise and facilities to help. However, we don't have the necessary transport to get Terrence there in time - he has only a few minutes left to live. Can you take Terrence to %s?",scientistStation:getCallSign(),scientistStation:getSectorName(),doctorStation:getCallSign(),doctorStation:getCallSign()),"95,158,160")
+			p:addToShipLog(string.format(_("Terrence-shipLog", "[%s in %s] Medical emergency: Engineering research scientist Terrence Forsythe has contracted a rare medical condition. After contacting nearly every station in the area, we found that doctor Geraldine Polaski on %s has the expertise and facilities to help. However, we don't have the necessary transport to get Terrence there in time - he has only a few minutes left to live. Can you take Terrence to %s?"),scientistStation:getCallSign(),scientistStation:getSectorName(),doctorStation:getCallSign(),doctorStation:getCallSign()),"95,158,160")
 		end
 	end
-	plot2reminder = string.format("Transport Terrence Forsythe from %s in %s to %s before he dies",scientistStation:getCallSign(),scientistStation:getSectorName(),doctorStation:getCallSign())
+	plot2reminder = string.format(_("TerrenceOrders-comms", "Transport Terrence Forsythe from %s in %s to %s before he dies"),scientistStation:getCallSign(),scientistStation:getSectorName(),doctorStation:getCallSign())
 	plot2name = "getSickScientist"
 	plot2 = getSickScientist
 end
@@ -4873,16 +4873,16 @@ function getSickScientist(delta)
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() and distance(p,scientistStation) < 1000 then
 				playerWithScientist = p
-				pickupMsg = string.format("[%s] Terrence Forsythe has been transported aboard your ship. Please take him to Dr. Polaski on %s. ",scientistStation:getCallSign(),doctorStation:getCallSign())
+				pickupMsg = string.format(_("Terrence-msgScience", "[%s] Terrence Forsythe has been transported aboard your ship. Please take him to Dr. Polaski on %s. "),scientistStation:getCallSign(),doctorStation:getCallSign())
 				minutesToLive = math.floor(scientistDeathTimer/60)
 				if minutesToLive == 0 then
-					pickupMsg = pickupMsg .. "We believe he has less than a minute to live"
+					pickupMsg = pickupMsg .. _("Terrence-msgScience", "We believe he has less than a minute to live")
 				elseif minutesToLive == 1 then
-					pickupMsg = pickupMsg .. "We think he has about a minute before he dies"
+					pickupMsg = pickupMsg .. _("Terrence-msgScience", "We think he has about a minute before he dies")
 				else
-					pickupMsg = pickupMsg .. string.format("He probably has about %i minutes to live",minutesToLive)
+					pickupMsg = pickupMsg .. string.format(_("Terrence-msgScience", "He probably has about %i minutes to live"),minutesToLive)
 				end
-				p:addToShipLog(pickupMsg,"95,158,160")
+				p:addToShipLog(pickupMsg,_("Terrence-shipLog", "95,158,160"))
 				plot2name = "deliverSickScientist"
 				plot2 = deliverSickScientist
 				break
@@ -4892,7 +4892,7 @@ function getSickScientist(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() and p ~= playerWithScientist then
-					p:addToShipLog(string.format("Terrence Forsyth aboard %s",playerWithScientist:getCallSign()),"Magenta")
+					p:addToShipLog(string.format(_("Terrence-shipLog", "Terrence Forsyth aboard %s"),playerWithScientist:getCallSign()),"Magenta")
 				end
 			end
 		end
@@ -4900,7 +4900,7 @@ function getSickScientist(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("%s has been destroyed",scientistStation:getCallSign()),"Magenta")
+				p:addToShipLog(string.format(_("Terrence-shipLog", "%s has been destroyed"),scientistStation:getCallSign()),"Magenta")
 			end
 		end
 		betweenPlot2fleet()
@@ -4914,7 +4914,7 @@ function deliverSickScientist(delta)
 	if doctorStation:isValid() then
 		if playerWithScientist:isValid() then
 			if distance(playerWithScientist,doctorStation) < 1000 then
-				playerWithScientist:addToShipLog(string.format("[%s] We have received your emergency medical transport of research scientist Terrence Forsythe. Doctor Geraldine Polaski has stabalized his condition.",doctorStation:getCallSign()),"#8a2be2")
+				playerWithScientist:addToShipLog(string.format(_("Terrence-shipLog", "[%s] We have received your emergency medical transport of research scientist Terrence Forsythe. Doctor Geraldine Polaski has stabalized his condition."),doctorStation:getCallSign()),"#8a2be2")
 				plot2name = "keyToArtifact"
 				plot2reminder = nil
 				scientistRecoveryTimer = 90
@@ -4927,7 +4927,7 @@ function deliverSickScientist(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("%s has been destroyed",doctorStation:getCallSign()),"Magenta")
+				p:addToShipLog(string.format(_("Terrence-shipLog", "%s has been destroyed"),doctorStation:getCallSign()),"Magenta")
 			end
 		end
 		betweenPlot2fleet()
@@ -4936,19 +4936,19 @@ end
 function keyToArtifact(delta)
 	scientistRecoveryTimer = scientistRecoveryTimer - delta
 	if scientistRecoveryTimer < 0 then
-		keyMsg = string.format("[Terrence Forsythe] I can never repay you for saving my life. However, you might be able to use the practical results of my latest research. Near %s in %s you'll find a prototype for ship system integration. This prototype allows for the rapid and semi-automated repair of hull damage as directed by your Engineer. I have transmitted the key to allow you to use this prototype",scientistStation:getCallSign(),scientistStation:getSectorName())
+		keyMsg = string.format(_("Terrence-msgScience", "[Terrence Forsythe] I can never repay you for saving my life. However, you might be able to use the practical results of my latest research. Near %s in %s you'll find a prototype for ship system integration. This prototype allows for the rapid and semi-automated repair of hull damage as directed by your Engineer. I have transmitted the key to allow you to use this prototype"),scientistStation:getCallSign(),scientistStation:getSectorName())
 		if playerWithScientist:isValid() then
-			playerWithScientist:addToShipLog(keyMsg,"#8a2be2")
+			playerWithScientist:addToShipLog(keyMsg,_("Terrence-shipLog", "#8a2be2"))
 		else
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
-					p:addToShipLog(keyMsg,"#8a2be2")
+					p:addToShipLog(keyMsg,_("Terrence-shipLog", "#8a2be2"))
 				end
 			end
 		end
 		plot2name = "recoverHullArtifact"
-		plot2reminder = string.format("Recover hull repair prototype near %s in %s",scientistStation:getCallSign(),scientistStation:getSectorName())
+		plot2reminder = string.format(_("TerrenceOrders-comms", "Recover hull repair prototype near %s in %s"),scientistStation:getCallSign(),scientistStation:getSectorName())
 		plot2 = recoverHullArtifact
 	end
 end
@@ -4982,16 +4982,16 @@ function installAutoHullRepair()
 	repairHullUses = 5
 	if playerWithAutoHullRepair:hasPlayerAtPosition("Engineering") then
 		hullUseMsg = "hullUseMsg"
-		playerWithAutoHullRepair:addCustomMessage("Engineering",hullUseMsg,string.format(_("-msgEngineer", "Hull repair prototype installed. Limited to %i uses"),repairHullUses))
+		playerWithAutoHullRepair:addCustomMessage("Engineering",hullUseMsg,string.format(_("Terrence-msgEngineer", "Hull repair prototype installed. Limited to %i uses"),repairHullUses))
 	end
 	if playerWithAutoHullRepair:hasPlayerAtPosition("Engineering+") then
 		hullUseMsgPlus = "hullUseMsgPlus"
-		playerWithAutoHullRepair:addCustomMessage("Engineering+",hullUseMsgPlus,string.format(_("-msgEngineer+", "Hull repair prototype installed. Limited to %i uses"),repairHullUses))
+		playerWithAutoHullRepair:addCustomMessage("Engineering+",hullUseMsgPlus,string.format(_("Terrence-msgEngineer+", "Hull repair prototype installed. Limited to %i uses"),repairHullUses))
 	end
 	repairHullButton = string.format("repairHullButton%i",repairHullUses)
-	playerWithAutoHullRepair:addCustomButton("Engineering",repairHullButton,string.format(_("-buttonEngineer", "Repair Hull (%i)"),repairHullUses),repairHull)
+	playerWithAutoHullRepair:addCustomButton("Engineering",repairHullButton,string.format(_("Terrence-buttonEngineer", "Repair Hull (%i)"),repairHullUses),repairHull)
 	repairHullButtonPlus = string.format("repairHullButtonPlus%i",repairHullUses)
-	playerWithAutoHullRepair:addCustomButton("Engineering+",repairHullButtonPlus,string.format(_("-buttonEngineer+", "Repair Hull (%i)"),repairHullUses),repairHull)
+	playerWithAutoHullRepair:addCustomButton("Engineering+",repairHullButtonPlus,string.format(_("Terrence-buttonEngineer+", "Repair Hull (%i)"),repairHullUses),repairHull)
 end
 function repairHull()
 	if playerWithAutoHullRepair:getHull() < playerWithAutoHullRepair:getHullMax() then
@@ -5003,9 +5003,9 @@ function repairHull()
 		repairHullButtonPlus = nil
 		if repairHullUses > 0 then
 			repairHullButton = string.format("repairHullButton%i",repairHullUses)
-			playerWithAutoHullRepair:addCustomButton("Engineering",repairHullButton,string.format(_("-buttonEngineer", "Repair Hull (%i)"),repairHullUses),repairHull)
+			playerWithAutoHullRepair:addCustomButton("Engineering",repairHullButton,string.format(_("Terrence-buttonEngineer", "Repair Hull (%i)"),repairHullUses),repairHull)
 			repairHullButtonPlus = string.format("repairHullButtonPlus%i",repairHullUses)
-			playerWithAutoHullRepair:addCustomButton("Engineering+",repairHullButtonPlus,string.format(_("-buttonEngineer+", "Repair Hull (%i)"),repairHullUses),repairHull)
+			playerWithAutoHullRepair:addCustomButton("Engineering+",repairHullButtonPlus,string.format(_("Terrence-buttonEngineer+", "Repair Hull (%i)"),repairHullUses),repairHull)
 		end
 	end
 end
@@ -5013,7 +5013,7 @@ function scientistDies()
 	for pidx=1,8 do
 		p = getPlayerShip(pidx)
 		if p ~= nil and p:isValid() then
-			p:addToShipLog("Terrence Forsythe has perished","Magenta")
+			p:addToShipLog(_("Terrence-shipLog", "Terrence Forsythe has perished"),"Magenta")
 		end
 	end
 	betweenPlot2fleet()
@@ -5098,11 +5098,11 @@ function addTubeToShip(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("Retired naval officer, Boris Eggleston has taken his expertise in miniaturization and come up with a way to add a missile tube to naval vessels. He's vacationing on %s in %s",addTubeStation:getCallSign(),addTubeStation:getSectorName()),"Magenta")
+				p:addToShipLog(string.format(_("upgradeBoris-shipLog", "Retired naval officer, Boris Eggleston has taken his expertise in miniaturization and come up with a way to add a missile tube to naval vessels. He's vacationing on %s in %s"),addTubeStation:getCallSign(),addTubeStation:getSectorName()),"Magenta")
 				
 			end
 		end
-		plot3reminder = string.format("Get extra weapons tube from Boris Eggleston on %s in %s",addTubeStation:getCallSign(),addTubeStation:getSectorName())
+		plot3reminder = string.format(_("upgradeBorisOrders-comms", "Get extra weapons tube from Boris Eggleston on %s in %s"),addTubeStation:getCallSign(),addTubeStation:getSectorName())
 		plot3name = "tubeOfficer"
 		plot3 = tubeOfficer
 	end
@@ -5134,10 +5134,10 @@ function tubeOfficer(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("Boris Eggleston changed his vacation spot to %s in %s",addTubeStation:getCallSign(),addTubeStation:getSectorName()),"Magenta")
+				p:addToShipLog(string.format(_("upgradeBoris-shipLog", "Boris Eggleston changed his vacation spot to %s in %s"),addTubeStation:getCallSign(),addTubeStation:getSectorName()),"Magenta")
 			end
 		end
-		plot3reminder = string.format("Get extra weapons tube from Boris Eggleston on %s in %s",addTubeStation:getCallSign(),addTubeStation:getSectorName())
+		plot3reminder = string.format(_("upgradeBorisOrders-comms", "Get extra weapons tube from Boris Eggleston on %s in %s"),addTubeStation:getCallSign(),addTubeStation:getSectorName())
 	end
 end
 -- plot 3 upgrade the amount of damage done by beam weapons
@@ -5179,10 +5179,10 @@ function upgradeBeamDamage(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("There's a physicist turned maintenance technician named Frederico Booker that has developed some innovative beam weapon technology that could increase the damage produced by our beam weapons. He's based on %s in %s",beamDamageStation:getCallSign(),beamDamageStation:getSectorName()),"Magenta")
+				p:addToShipLog(string.format(_("upgradeFred-shipLog", "There's a physicist turned maintenance technician named Frederico Booker that has developed some innovative beam weapon technology that could increase the damage produced by our beam weapons. He's based on %s in %s"),beamDamageStation:getCallSign(),beamDamageStation:getSectorName()),"Magenta")
 			end
 		end
-		plot3reminder = string.format("Talk to Frederico Booker on %s in %s about a beam upgrade",beamDamageStation:getCallSign(),beamDamageStation:getSectorName())
+		plot3reminder = string.format(_("upgradeFredOrders-comms", "Talk to Frederico Booker on %s in %s about a beam upgrade"),beamDamageStation:getCallSign(),beamDamageStation:getSectorName())
 		plot3name = "beamPhysicist"
 		plot3 = beamPhysicist
 	end
@@ -5214,10 +5214,10 @@ function beamPhysicist(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("Frederico Booker has moved to station %s in %s",beamDamageStation:getCallSign(),beamDamageStation:getSectorName()),"Magenta")
+				p:addToShipLog(string.format(_("upgradeFred-shipLog", "Frederico Booker has moved to station %s in %s"),beamDamageStation:getCallSign(),beamDamageStation:getSectorName()),"Magenta")
 			end
 		end
-		plot3reminder = string.format("Talk to Frederico Booker on %s in %s about a beam upgrade",beamDamageStation:getCallSign(),beamDamageStation:getSectorName())
+		plot3reminder = string.format(_("upgradeFredOrders-comms", "Talk to Frederico Booker on %s in %s about a beam upgrade"),beamDamageStation:getCallSign(),beamDamageStation:getSectorName())
 	end
 end
 -- plot 3 tractor ship in for repairs
@@ -5242,7 +5242,7 @@ function tractorDisabledShip(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
-					p:addToShipLog(string.format("[%s] Help requested: Our engines are damaged beyond our ability to repair. We are located in %s",tractorShip:getCallSign(),tractorShip:getSectorName()),"#556b2f")
+					p:addToShipLog(string.format(_("tractor-shipLog", "[%s] Help requested: Our engines are damaged beyond our ability to repair. We are located in %s"),tractorShip:getCallSign(),tractorShip:getSectorName()),"#556b2f")
 				end
 			end
 			plot3name = "confirmRescue"
@@ -5257,8 +5257,8 @@ function confirmRescue(delta)
 	confirmRescueTimer = confirmRescueTimer - delta
 	if confirmRescueTimer < 0 then
 		if playerCarrier:isValid() then
-			playerCarrier:addToShipLog(string.format("Station %s in %s has tractor equipment you can use to tractor %s in for repairs",tractorStation:getCallSign(),tractorStation:getSectorName(),tractorShip:getCallSign()),"Magenta") 
-			plot3reminder = string.format("Install tractor equipment in %s from station %s in %s",playerCarrier:getCallSign(),tractorStation:getCallSign(),tractorStation:getSectorName())
+			playerCarrier:addToShipLog(string.format(_("tractor-shipLog", "Station %s in %s has tractor equipment you can use to tractor %s in for repairs"),tractorStation:getCallSign(),tractorStation:getSectorName(),tractorShip:getCallSign()),"Magenta") 
+			plot3reminder = string.format(_("tractorOrders-comms", "Install tractor equipment in %s from station %s in %s"),playerCarrier:getCallSign(),tractorStation:getCallSign(),tractorStation:getSectorName())
 			plot3name = "awaitingTractor"
 			plot3 = awaitingTractor
 		else
@@ -5277,10 +5277,10 @@ function awaitingTractor(delta)
 					if tractorPlayerDockMsg == nil then
 						tractorPlayerDockMsg = "tractorPlayerDockMsg"
 						if playerCarrier:hasPlayerAtPosition("Weapons") then
-							playerCarrier:addCustomMessage("Weapons",tractorPlayerDockMsg,string.format(_("-msgWeapons", "%s has been tractored to %s and is now docked"),tractorShip:getCallSign(),playerCarrier:getCallSign()))
+							playerCarrier:addCustomMessage("Weapons",tractorPlayerDockMsg,string.format(_("tractor-msgWeapons", "%s has been tractored to %s and is now docked"),tractorShip:getCallSign(),playerCarrier:getCallSign()))
 						end
 						if playerCarrier:hasPlayerAtPosition("Tactical") then
-							playerCarrier:addCustomMessage("Tactical",tractorPlayerDockMsg,string.format(_("-msgTactical", "%s has been tractored to %s and is now docked"),tractorShip:getCallSign(),playerCarrier:getCallSign()))
+							playerCarrier:addCustomMessage("Tactical",tractorPlayerDockMsg,string.format(_("tractor-msgTactical", "%s has been tractored to %s and is now docked"),tractorShip:getCallSign(),playerCarrier:getCallSign()))
 						end
 					end
 				else
@@ -5301,8 +5301,8 @@ function awaitingTractor(delta)
 									repairStation = candidate
 								end
 							until(repairStation ~= nil)
-							playerCarrier:addToShipLog(string.format("Tractor %s to %s to be repaired",tractorShip:getCallSign(),repairStation:getCallSign()),"Magenta")
-							plot3reminder = string.format("Tractor %s to %s",tractorShip:getCallSign(),repairStation:getCallSign())
+							playerCarrier:addToShipLog(string.format(_("tractor-shipLog", "Tractor %s to %s to be repaired"),tractorShip:getCallSign(),repairStation:getCallSign()),"Magenta")
+							plot3reminder = string.format(_("tractorOrders-comms", "Tractor %s to %s"),tractorShip:getCallSign(),repairStation:getCallSign())
 						else
 							disableTractorOff()
 							disableTractorOn()
@@ -5312,7 +5312,7 @@ function awaitingTractor(delta)
 						if repairStation:isValid() then
 							if tractorShip:isValid() then
 								if distance(repairStation,tractorShip) < 1000 then
-									playerCarrier:addToShipLog(string.format("Thanks for bringing %s in for repairs, %s. We'll take it from here",tractorShip:getCallSign(),playerCarrier:getCallSign()),"#b29650")
+									playerCarrier:addToShipLog(string.format(_("tractor-shipLog", "Thanks for bringing %s in for repairs, %s. We'll take it from here"),tractorShip:getCallSign(),playerCarrier:getCallSign()),"#b29650")
 									tractorShip:orderDock(repairStation)
 									disableTractorOff()
 									disableTractorOn()
@@ -5322,7 +5322,7 @@ function awaitingTractor(delta)
 									plot3 = awaitRepairs
 								else
 									if bringCloser == nil and distance(tractorShip, repairStation) < 5000 then
-										playerCarrier:addToShipLog(string.format("[%s] Greetings, %s. You'll need to tractor %s to within 1U before we can start repairs",repairStation:getCallSign(),playerCarrier:getCallSign(),tractorShip:getCallSign()),"#b29650")
+										playerCarrier:addToShipLog(string.format(_("tractor-shipLog", "[%s] Greetings, %s. You'll need to tractor %s to within 1U before we can start repairs"),repairStation:getCallSign(),playerCarrier:getCallSign(),tractorShip:getCallSign()),"#b29650")
 										bringCloser = "messageSent"
 									end
 								end
@@ -5352,9 +5352,9 @@ end
 function enableTractorOn()
 	if tractorOnButton == nil then
 		tractorOnButton = "tractorOnButton"
-		playerCarrier:addCustomButton("Weapons",tractorOnButton,_("-buttonWeapons", "Tractor On"),simulateTractorOn)
+		playerCarrier:addCustomButton("Weapons",tractorOnButton,_("tractor-buttonWeapons", "Tractor On"),simulateTractorOn)
 		tractorOnButtonTac = "tractorOnButtonTac"
-		playerCarrier:addCustomButton("Tactical",tractorOnButtonTac,_("-buttonTactical", "Tractor On"),simulateTractorOn)
+		playerCarrier:addCustomButton("Tactical",tractorOnButtonTac,_("tractor-buttonTactical", "Tractor On"),simulateTractorOn)
 	end
 end
 function disableTractorOn()
@@ -5373,9 +5373,9 @@ end
 function enableTractorOff()
 	if tractorOffButton == nil then
 		tractorOffButton = "tractorOffButton"
-		playerCarrier:addCustomButton("Weapons",tractorOffButton,_("-buttonWeapons", "Tractor Off"),simulateTractorOff)
+		playerCarrier:addCustomButton("Weapons",tractorOffButton,_("tractor-buttonWeapons", "Tractor Off"),simulateTractorOff)
 		tractorOffButtonTac = "tractorOffButtonTac"
-		playerCarrier:addCustomButton("Tactical",tractorOffButtonTac,_("-buttonTactical", "Tractor Off"),simulateTractorOff)
+		playerCarrier:addCustomButton("Tactical",tractorOffButtonTac,_("tractor-buttonTactical", "Tractor Off"),simulateTractorOff)
 	end
 end
 function disableTractorOff()
@@ -5397,19 +5397,19 @@ function connectTractor()
 	playerCarrier:removeCustom(tractorIntegrationButtonPlus)
 	if playerCarrier:hasPlayerAtPosition("Engineering") then
 		tractorConfirmationMsg = "tractorConfirmationMsg"
-		playerCarrier:addCustomMessage("Engineering",tractorConfirmationMsg,_("-msgEngineer", "The tractor equipment has been fully integrated with ship systems. It is ready for the weapons officer to activate at the appropriate time"))
+		playerCarrier:addCustomMessage("Engineering",tractorConfirmationMsg,_("tractor-msgEngineer", "The tractor equipment has been fully integrated with ship systems. It is ready for the weapons officer to activate at the appropriate time"))
 	end
 	if playerCarrier:hasPlayerAtPosition("Engineering+") then
 		tractorConfirmationMsgPlus = "tractorConfirmationMsgPlus"
-		playerCarrier:addCustomMessage("Engineering+",tractorConfirmationMsgPlus,_("-msgEngineer+", "The tractor equipment has been fully integrated with ship systems. It is ready for the weapons officer to activate at the appropriate time"))
+		playerCarrier:addCustomMessage("Engineering+",tractorConfirmationMsgPlus,_("tractor-msgEngineer+", "The tractor equipment has been fully integrated with ship systems. It is ready for the weapons officer to activate at the appropriate time"))
 	end
 	if playerCarrier:hasPlayerAtPosition("Weapons") then
 		wTractorConfirmationMsg = "wTractorConfirmationMsg"
-		playerCarrier:addCustomMessage("Weapons",wTractorConfirmationMsg,string.format(_("-msgWeapons", "Tractor equipment installed.\nWhen %s is in range of the disabled ship, %s, You can engage the tractor system via the (Tractor On) button. This system works with %s's on board systems to draw and maneuver %s to %s until it is docked"),playerCarrier:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),playerCarrier:getCallSign()))
+		playerCarrier:addCustomMessage("Weapons",wTractorConfirmationMsg,string.format(_("tractor-msgWeapons", "Tractor equipment installed.\nWhen %s is in range of the disabled ship, %s, You can engage the tractor system via the (Tractor On) button. This system works with %s's on board systems to draw and maneuver %s to %s until it is docked"),playerCarrier:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),playerCarrier:getCallSign()))
 	end
 	if playerCarrier:hasPlayerAtPosition("Tactical") then
 		tTractorConfirmationMsg = "tTractorConfirmationMsg"
-		playerCarrier:addCustomMessage("Tactical",tTractorConfirmationMsg,string.format(_("-msgTactical", "Tractor equipment installed.\nWhen %s is in range of the disabled ship, %s, You can engage the tractor system via the (Tractor On) button. This system works with %s's on board systems to draw and maneuver %s to %s until it is docked"),playerCarrier:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),playerCarrier:getCallSign()))
+		playerCarrier:addCustomMessage("Tactical",tTractorConfirmationMsg,string.format(_("tractor-msgTactical", "Tractor equipment installed.\nWhen %s is in range of the disabled ship, %s, You can engage the tractor system via the (Tractor On) button. This system works with %s's on board systems to draw and maneuver %s to %s until it is docked"),playerCarrier:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),playerCarrier:getCallSign()))
 	end
 	tractorInstalled = true
 end
@@ -5420,7 +5420,7 @@ function awaitRepairs(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("[%s] Our engines have been repaired and we stand ready to assist",tractorShip:getCallSign()),"#556b2f")
+				p:addToShipLog(string.format(_("tractor-shipLog", "[%s] Our engines have been repaired and we stand ready to assist"),tractorShip:getCallSign()),"#556b2f")
 			end
 		end
 		betweenPlot3fleet()
@@ -5444,16 +5444,16 @@ end
 function doNotPush(delta)
 	alienHack = false
 	doNotPushButton = "doNotPushButton"
-	playerCarrier:addCustomButton("Weapons",doNotPushButton,_("-buttonWeapons", "Do Not Push"),pushed)
+	playerCarrier:addCustomButton("Weapons",doNotPushButton,_("alienHack-buttonWeapons", "Do Not Push"),pushed)
 	doNotPushButtonTac = "doNotPushButtonTac"
-	playerCarrier:addCustomButton("Tactical",doNotPushButtonTac,_("-buttonTactical", "Do Not Push"),pushed)
+	playerCarrier:addCustomButton("Tactical",doNotPushButtonTac,_("alienHack-buttonTactical", "Do Not Push"),pushed)
 	if playerCarrier:hasPlayerAtPosition("Science") then
 		alienHackMsg = "alienHackMsg"
-		playerCarrier:addCustomMessage("Science",alienHackMsg,_("-msgScience", "Internal security sensors indicate ship systems hacked by unknown source. For a moment I thought I heard evil laughter"))
+		playerCarrier:addCustomMessage("Science",alienHackMsg,_("alienHack-msgScience", "Internal security sensors indicate ship systems hacked by unknown source. For a moment I thought I heard evil laughter"))
 	end
 	if playerCarrier:hasPlayerAtPosition("Operations") then
 		alienHackMsgOp = "alienHackMsgOp"
-		playerCarrier:addCustomMessage("Operations",alienHackMsgOp,_("-msgOperations", "Internal security sensors indicate ship systems hacked by unknown source. For a moment I thought I heard evil laughter"))
+		playerCarrier:addCustomMessage("Operations",alienHackMsgOp,_("alienHack-msgOperations", "Internal security sensors indicate ship systems hacked by unknown source. For a moment I thought I heard evil laughter"))
 	end
 	plot4 = nil
 end
