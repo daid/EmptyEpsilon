@@ -1755,7 +1755,7 @@ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Achetez 1 %s pour %i rép"
+msgstr "Acheter 1 %s pour %i rép"
 
 #: scripts/scenario_32_devour.lua:2739
 #, lua-format

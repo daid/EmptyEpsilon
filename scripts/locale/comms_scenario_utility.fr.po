@@ -147,7 +147,7 @@ msgstr "filaments"
 #: scripts/comms_scenario_utility.lua:291
 msgctxt "trade-comms"
 msgid "impulse"
-msgstr "impulsions"
+msgstr "impulsion"
 
 #: scripts/comms_scenario_utility.lua:292
 msgctxt "trade-comms"
@@ -187,7 +187,7 @@ msgstr "boucliers"
 #: scripts/comms_scenario_utility.lua:299
 msgctxt "trade-comms"
 msgid "software"
-msgstr "programmes"
+msgstr "logiciels"
 
 #: scripts/comms_scenario_utility.lua:300
 msgctxt "trade-comms"
@@ -202,7 +202,7 @@ msgstr "transporteurs"
 #: scripts/comms_scenario_utility.lua:302
 msgctxt "trade-comms"
 msgid "warp"
-msgstr "chaînes"
+msgstr "distorsion"
 
 #: scripts/comms_scenario_utility.lua:320
 #: scripts/comms_scenario_utility.lua:397

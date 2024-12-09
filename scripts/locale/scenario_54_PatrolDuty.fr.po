@@ -286,7 +286,7 @@ msgstr ""
 #: scripts/scenario_54_PatrolDuty.lua:354
 msgctxt "scienceDescription-station"
 msgid "Warp and Impulse engine manufacturing"
-msgstr "Fabrication de moteurs à impulsions et à vitesse lumière"
+msgstr "Fabrication de moteurs à impulsion et à vitesse lumière"
 
 #: scripts/scenario_54_PatrolDuty.lua:355
 msgctxt "stationGeneralInfo-comms"
@@ -294,7 +294,7 @@ msgid ""
 "We manufacture warp, impulse and jump engines for the human navy fleet as "
 "well as other independent clients on a contract basis"
 msgstr ""
-"Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
+"Nous fabriquons des moteurs à impulsion, à vitesse lumière et pour "
 "téléporteurs pour la flotte de la Marine humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
 
@@ -483,7 +483,7 @@ msgstr ""
 #: scripts/scenario_54_PatrolDuty.lua:1215
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
-msgstr "Composants de moteurs à impulsions"
+msgstr "Composants de moteurs à impulsion"
 
 #: scripts/scenario_54_PatrolDuty.lua:691
 msgctxt "stationGeneralInfo-comms"
@@ -807,8 +807,8 @@ msgstr ""
 msgctxt "stationGeneralInfo-comms"
 msgid "We supply high quality impulse engines and parts for use aboard ships"
 msgstr ""
-"Nous fournissons des moteurs à impulsions et des pièces de haute qualité "
-"pour une utilisation à bord des navires."
+"Nous fournissons des moteurs à impulsion et des pièces de haute qualité pour "
+"une utilisation à bord des navires."
 
 #: scripts/scenario_54_PatrolDuty.lua:1217
 msgctxt "stationStory-comms"
@@ -2457,7 +2457,7 @@ msgstr "Espace disponible : %i, Rép. disponible : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Achetez 1 %s pour %i rép"
+msgstr "Acheter 1 %s pour %i rép"
 
 #: scripts/scenario_54_PatrolDuty.lua:4785
 #, lua-format

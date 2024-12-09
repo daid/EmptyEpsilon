@@ -240,7 +240,7 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:1186
 msgctxt "scienceDescription-station"
 msgid "Warp and Impulse engine manufacturing"
-msgstr "Fabrication de moteurs à impulsions et à vitesse lumière"
+msgstr "Fabrication de moteurs à impulsion et à vitesse lumière"
 
 #: scripts/scenario_56_carrierTurret.lua:1198
 msgctxt "stationGeneralInfo-comms"
@@ -248,7 +248,7 @@ msgid ""
 "We manufacture warp, impulse and jump engines for the human navy fleet as "
 "well as other independent clients on a contract basis"
 msgstr ""
-"Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
+"Nous fabriquons des moteurs à impulsion, à vitesse lumière et pour "
 "téléporteurs pour la flotte de la Marine humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
 
@@ -475,14 +475,14 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:2187
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
-msgstr "Composants de moteurs à impulsions"
+msgstr "Composants de moteurs à impulsion"
 
 #: scripts/scenario_56_carrierTurret.lua:1409
 msgctxt "stationGeneralInfo-comms"
 msgid "We supply high quality impulse engines and parts for use aboard ships"
 msgstr ""
-"Nous fournissons des moteurs à impulsions et des pièces de haute qualité "
-"pour une utilisation à bord des vaisseaux."
+"Nous fournissons des moteurs à impulsion et des pièces de haute qualité pour "
+"une utilisation à bord des vaisseaux."
 
 #: scripts/scenario_56_carrierTurret.lua:1410
 msgctxt "stationStory-comms"
@@ -1595,14 +1595,14 @@ msgstr ""
 "\n"
 "Voilà, j'ai transmis des instructions pour mettre à niveau la manœuvre de "
 "votre vaisseau. N'importe quelle station amie pourra s'en occuper, mais vous "
-"devrez pour cela leur fournir 1 composant à Impulsions (Impulse)."
+"devrez pour cela leur fournir 1 composant à impulsion (impulse)."
 
 #: scripts/scenario_56_carrierTurret.lua:2985
 msgctxt "upgradePaulinaOrders-comms"
 msgid "Get spin upgrade from friendly station for impulse"
 msgstr ""
 "   Obtenir une mise à niveau de votre système de manœuvre depuis une station "
-"amie pour 1 composant à Impulsions (Impulse)."
+"amie pour 1 composant d'impulsion (impulse)."
 
 #: scripts/scenario_56_carrierTurret.lua:3005
 #: scripts/scenario_56_carrierTurret.lua:3625
@@ -1881,7 +1881,7 @@ msgstr "   Détruire la station ennemie %s se trouvant dans le secteur %s."
 #: scripts/scenario_56_carrierTurret.lua:3580
 msgctxt "upgradePaulina-comms"
 msgid "Upgrade ship maneuverability for impulse"
-msgstr "Améliorer la manœuvre du vaisseau pour 1 Impulsion"
+msgstr "Améliorer la manœuvre du vaisseau pour 1 impulsion"
 
 #: scripts/scenario_56_carrierTurret.lua:3136
 #: scripts/scenario_56_carrierTurret.lua:3582

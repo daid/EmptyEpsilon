@@ -369,7 +369,7 @@ msgstr "tritanium"
 #: scripts/scenario_27_liberation.lua:592
 msgctxt "trade-comms"
 msgid "autodoc"
-msgstr "autodoc"
+msgstr "autodocs"
 
 #: scripts/scenario_27_liberation.lua:593
 msgctxt "trade-comms"
@@ -404,7 +404,7 @@ msgstr "filaments"
 #: scripts/scenario_27_liberation.lua:599
 msgctxt "trade-comms"
 msgid "impulse"
-msgstr "impulsions"
+msgstr "impulsion"
 
 #: scripts/scenario_27_liberation.lua:600
 msgctxt "trade-comms"
@@ -444,7 +444,7 @@ msgstr "boucliers"
 #: scripts/scenario_27_liberation.lua:607
 msgctxt "trade-comms"
 msgid "software"
-msgstr "Programmes"
+msgstr "logiciels"
 
 #: scripts/scenario_27_liberation.lua:608
 msgctxt "trade-comms"
@@ -459,7 +459,7 @@ msgstr "transporteurs"
 #: scripts/scenario_27_liberation.lua:610
 msgctxt "trade-comms"
 msgid "warp"
-msgstr "chaînes"
+msgstr "distorsion"
 
 #: scripts/scenario_27_liberation.lua:637
 msgctxt "station-comms"

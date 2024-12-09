@@ -4655,10 +4655,10 @@ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 #: scripts/scenario_59_border.lua:10265 scripts/scenario_59_border.lua:10856
 #: scripts/scenario_59_border.lua:10878 scripts/scenario_59_border.lua:10902
 #: scripts/scenario_59_border.lua:10924 scripts/scenario_59_border.lua:10948
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Achetez 1 %s pour %i rép"
+msgstr "Acheter 1 %s pour %i rép"
 
 #: scripts/scenario_59_border.lua:8250
 #, lua-format

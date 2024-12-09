@@ -45,7 +45,7 @@ msgstr ""
 "- Titre original : Allies and Enemies\n"
 "- Auteur : Xansta (2019)\n"
 "- Traduction FR : Muerte (Déc. 24)\n"
-"Relecture en cours 467/567  82% ; Test du scénario en cours : contient "
+"Relecture en cours 495/567  87% ; Test du scénario en cours : contient "
 "actuellement des bogues et est susceptible de ne pas fonctionner "
 "correctement. Muerte (Déc. 24)\n"
 "\n"
@@ -429,7 +429,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1488
 msgctxt "scienceDescription-station"
 msgid "Warp and Impulse engine manufacturing"
-msgstr "Fabrication de moteurs à impulsions et à vitesse lumière"
+msgstr "Fabrication de moteurs à impulsion et à vitesse lumière"
 
 #: scripts/scenario_49_allies.lua:1500
 msgctxt "stationGeneralInfo-comms"
@@ -437,7 +437,7 @@ msgid ""
 "We manufacture warp, impulse and jump engines for the human navy fleet as "
 "well as other independent clients on a contract basis"
 msgstr ""
-"Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
+"Nous fabriquons des moteurs à impulsion, à vitesse lumière et pour "
 "téléporteurs pour la flotte de la Marine humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
 
@@ -660,14 +660,14 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1686 scripts/scenario_49_allies.lua:2447
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
-msgstr "Composants de moteurs à impulsions"
+msgstr "Composants de moteurs à impulsion"
 
 #: scripts/scenario_49_allies.lua:1701
 msgctxt "stationGeneralInfo-comms"
 msgid "We supply high quality impulse engines and parts for use aboard ships"
 msgstr ""
-"Nous fournissons des moteurs à impulsions et des pièces de haute qualité "
-"pour une utilisation à bord des navires."
+"Nous fournissons des moteurs à impulsion et des pièces de haute qualité pour "
+"une utilisation à bord des navires."
 
 #: scripts/scenario_49_allies.lua:1702
 msgctxt "stationStory-comms"
@@ -2001,7 +2001,6 @@ msgid "Your research may save an Arlenian Admiral's life"
 msgstr "Vos recherches peuvent sauver la vie d'un amiral Arlénien"
 
 #: scripts/scenario_49_allies.lua:3675
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris] I would love to apply my research\n"
@@ -2134,7 +2133,6 @@ msgid "The depth of your most recent publication"
 msgstr "La profondeur de votre récente publication"
 
 #: scripts/scenario_49_allies.lua:3732
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris opens her door]\n"
@@ -2144,7 +2142,6 @@ msgstr ""
 "Pourquoi cette recherche vous intéresse-t-elle ?"
 
 #: scripts/scenario_49_allies.lua:3743
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "I know of a patient that might benefit"
 msgstr "Je connais un patient qui pourrait en bénéficier"
@@ -2173,7 +2170,6 @@ msgstr ""
 "[Dr. Thultris ferme sa porte]"
 
 #: scripts/scenario_49_allies.lua:3753
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "Your research could help a sick Arlenian Admiral"
 msgstr "Vos recherches pourraient aider un amiral Arlénien très malade"
@@ -2193,7 +2189,6 @@ msgstr ""
 "en chemin."
 
 #: scripts/scenario_49_allies.lua:3759
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "I don't think it applies to Arlenians\n"
@@ -2254,13 +2249,11 @@ msgstr ""
 "[Dr. Thultris claque sa porte]"
 
 #: scripts/scenario_49_allies.lua:3791
-#, fuzzy
 msgctxt "doctor-comms"
 msgid "An Arlenian medical team thinks you can help a dying patient"
 msgstr "Les médecins Arléniens pense que vous pouvez aider un patient mourant"
 
 #: scripts/scenario_49_allies.lua:3793
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris] That's reasonable. Let's go\n"
@@ -2268,7 +2261,7 @@ msgid ""
 "As you both return, you explain the situation to her"
 msgstr ""
 "[Dr. Thultris]\n"
-"Ca me semble raisonnable. Allons-y.\n"
+"Ca me semble faisable. Allons-y.\n"
 "\n"
 "...En revenant au vaisseau avec le docteur Thultris, vous lui expliquez la "
 "situation."
@@ -2568,7 +2561,7 @@ msgstr "- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Achetez 1 %s pour %i rép"
+msgstr "Acheter 1 %s pour %i rép"
 
 #: scripts/scenario_49_allies.lua:3980
 #, lua-format
@@ -2683,132 +2676,122 @@ msgstr ""
 "Bon voyage marchandise, on ne t'oubliera pas."
 
 #: scripts/scenario_49_allies.lua:4134
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Technicians use impulse components to fix or enhance impulse engines or "
 "related impulse systems."
 msgstr ""
-"Les techniciens utilisent des composants d'impulsion pour réparer ou "
-"améliorer les moteurs à impulsion et les systèmes d'impulsion associés."
+"Les techniciens utilisent des composants d'impulsion (impulse) pour réparer "
+"ou améliorer les moteurs à impulsion et les systèmes à impulsion associés."
 
 #: scripts/scenario_49_allies.lua:4135
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Engineers use warp components to fix or enhance warp engines, warp cores and/"
 "or other related warp technology based systems."
 msgstr ""
-"Les ingénieurs utilisent des composants de distorsion pour réparer ou "
+"Les ingénieurs utilisent des composants de distorsion (warp) pour réparer ou "
 "améliorer les moteurs à vitesse lumière, les noyaux de distorsion et/ou "
-"d'autres systèmes basés sur la technologie de distorsion (vitesse lumière)."
+"d'autres systèmes basés sur la technologie de distorsion."
 
 #: scripts/scenario_49_allies.lua:4136
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Technicians use shield components to enhance or fix shield capacitors, "
 "shield charging systems and other shield or energy field generation systems."
 msgstr ""
-"Les techniciens utilisent des composants de blindage pour améliorer ou "
-"réparer les condensateurs de blindage, les systèmes de charge de blindage et "
-"d'autres systèmes de génération de champ d'énergie ou de blindage."
+"Les techniciens utilisent des composants de blindage de boucliers (shield) "
+"pour améliorer ou réparer les condensateurs de blindage, les systèmes de "
+"charge de blindage et d'autres systèmes de génération de champ d'énergie ou "
+"de boucliers."
 
 #: scripts/scenario_49_allies.lua:4137
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Engineers and technicians use tractor components to repair or enhance "
 "systems designed to pull objects towards the ship."
 msgstr ""
-"Les ingénieurs et les techniciens utilisent des composants de traction pour "
-"réparer ou améliorer des systèmes conçus pour tirer des objets vers le "
-"vaisseau."
+"Les ingénieurs et les techniciens utilisent des composants de tracteurs "
+"(tractor) pour réparer ou améliorer des systèmes conçus pour tirer des "
+"objets vers le vaisseau."
 
 #: scripts/scenario_49_allies.lua:4138
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Technicians use repulsor components to repair or enhance systems designed to "
 "move objects away from the ship."
 msgstr ""
-"Les techniciens utilisent des composants de répulseur pour réparer ou "
-"améliorer les systèmes conçus pour repousser les objets du vaisseau."
+"Les techniciens utilisent des composants de répulseurs (repulsor) pour "
+"réparer ou améliorer les systèmes conçus pour repousser des objets du "
+"vaisseau."
 
 #: scripts/scenario_49_allies.lua:4139
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Engineers and weapon systems repair specialists use beam components to fix, "
 "improve and/or tune beam weapons or related beam systems."
 msgstr ""
-"Les ingénieurs et les spécialistes de la réparation de systèmes d'armement "
-"utilisent des composants de faisceau pour réparer, améliorer et/ou régler "
-"les faisceaux laser et les systèmes associés."
+"Les ingénieurs et spécialistes de la réparation de systèmes d'armement "
+"utilisent des composants de faisceaux (beam) pour réparer, améliorer et/ou "
+"régler les faisceaux laser et les systèmes associés."
 
 #: scripts/scenario_49_allies.lua:4140
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Repair crew use optic components in a variety of ship systems. Optic "
 "components serve as the information pathways and linkages between many ship "
 "systems"
 msgstr ""
-"L'équipe de réparation utilise des composants optiques dans de nombreux "
-"systèmes de vaisseaux. Les composants optiques servent de voies "
-"d'information et de liens entre de nombreux systèmes de navires."
+"L'équipe de réparation utilise des composants optiques (optic) dans de "
+"nombreux systèmes de vaisseaux. Les composants optiques servent de voies "
+"d'information et de liens entre de nombreux systèmes de vaisseaux."
 
 #: scripts/scenario_49_allies.lua:4141
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Engineers often use robotic components to facilitate missile loading. Other "
 "typical systems needing robotic components include medical bays, food "
 "preparation, automated repair systems, etc."
 msgstr ""
-"Les ingénieurs utilisent souvent des composants robotiques pour faciliter le "
-"chargement des missiles. D'autres systèmes classiques nécessitent des "
-"composants robotiques : les baies médicales, la préparation des aliments, "
-"les systèmes de réparation automatisés, etc."
+"Les ingénieurs utilisent souvent des composants robotiques (robotic) pour "
+"faciliter le chargement des missiles. D'autres systèmes classiques "
+"nécessitent des composants robotiques : les baies médicales, la préparation "
+"des aliments, les systèmes de réparation automatisés, etc."
 
 #: scripts/scenario_49_allies.lua:4142
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Some of the esoteric ship systems have specialized material requirements. "
 "These are typically satisfied with a filament component of some kind"
 msgstr ""
 "Certains des systèmes de vaisseaux ésotériques ont des exigences matérielles "
-"spécialisées. Ceux-ci se contentent généralement d'un composant de filament "
+"spécialisées. Ceux-ci se contentent généralement d'un composant de filaments "
 "quelconque."
 
 #: scripts/scenario_49_allies.lua:4143
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Engineers use transporter components to fix systems designed to move objects "
 "from one location to another. The movement methods range from simple belt "
 "rollers to atomic disassembly and reassembly."
 msgstr ""
-"Les ingénieurs utilisent des composants de transporteur pour réparer les "
-"systèmes conçus pour déplacer des objets d'un endroit à un autre. Les "
-"méthodes de mouvement vont des simples rouleaux de courroie au démontage et "
-"remontage atomique."
+"Les ingénieurs utilisent des composants de transporteurs (transporter) pour "
+"réparer les systèmes conçus pour déplacer des objets d'un endroit à un "
+"autre. Les méthodes de mouvement vont des simples rouleaux de courroie au "
+"démontage et remontage atomique."
 
 #: scripts/scenario_49_allies.lua:4144
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Repair crew use sensor components to fix or repair those systems that "
 "support the Science console in gathering information about the universe "
 "around the ship."
 msgstr ""
-"L'équipe de réparation utilise des composants de capteur pour réparer les "
-"systèmes qui prennent en charge la console Science dans la collecte "
-"d'informations sur l'univers autour du vaisseau."
+"L'équipe de réparation utilise des composants de capteurs (sensor) pour "
+"réparer les systèmes qui prennent en charge la console Science dans la "
+"collecte d'informations sur l'univers autour du vaisseau."
 
 #: scripts/scenario_49_allies.lua:4145
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Technicians use communication components to fix the various systems used to "
@@ -2817,46 +2800,44 @@ msgid ""
 msgstr ""
 "Les techniciens utilisent des composants de communication pour réparer les "
 "différents systèmes utilisés pour connecter le vaisseau à d'autres "
-"vaisseaux, stations et/ou entités extraterrestres sur la console Relay."
+"vaisseaux, stations et/ou entités extraterrestres sur la console "
+"Communication."
 
 #: scripts/scenario_49_allies.lua:4146
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Technicians use autodoc components to repair or maintain the automated "
 "medical facilities used on many ships in place of a medical doctor or "
 "medical staff."
 msgstr ""
-"Les techniciens utilisent des composants autodoc pour réparer ou entretenir "
+"Les techniciens utilisent des composants autodocs pour réparer ou entretenir "
 "les installations médicales automatisées utilisées sur de nombreux vaisseaux "
 "à la place d'un médecin ou d'un personnel médical."
 
 #: scripts/scenario_49_allies.lua:4147
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Engineers need lifter components for a variety of systems needing to "
 "temporarily move mechanisms or portions of mechanisms against the "
 "acceleration or gravity aboard a ship."
 msgstr ""
-"Les ingénieurs ont besoin de composants d'élévateur pour une variété de "
-"systèmes devant déplacer temporairement des mécanismes ou des parties de "
-"mécanismes contre l'accélération ou la gravité à bord d'un vaisseau."
+"Les ingénieurs ont besoin de composants d'élévateurs (lifter) pour une "
+"variété de systèmes devant déplacer temporairement des mécanismes ou des "
+"parties de mécanismes contre l'accélération ou la gravité à bord d'un "
+"vaisseau."
 
 #: scripts/scenario_49_allies.lua:4148
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Engineers use android components to build, repair and maintain androids that "
 "serve on ships. Repair crews on many ships consist largely of androids."
 msgstr ""
-"Les ingénieurs utilisent des composants androïdes pour fabriquer, réparer et "
-"entretenir les androïdes qui servent sur les vaisseaux. Les équipes de "
-"réparation sur de nombreux vaisseaux se composent en grande partie "
-"d'androïdes."
+"Les ingénieurs utilisent des composants d'androïdes (android) pour "
+"fabriquer, réparer et entretenir les androïdes qui servent sur les "
+"vaisseaux. Les équipes de réparation sur de nombreux vaisseaux se composent "
+"en grande partie d'androïdes."
 
 #: scripts/scenario_49_allies.lua:4149
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Technicians and engineers use nanites in a number of systems including "
@@ -2871,18 +2852,16 @@ msgstr ""
 "des conditions dangereuses pour les êtres organiques tels que les humains."
 
 #: scripts/scenario_49_allies.lua:4150
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "With all the automated systems on a ship, technicians often need software "
 "components to upgrade or adjust systems."
 msgstr ""
 "Avec tous les systèmes automatisés d'un vaisseau, les techniciens ont "
-"souvent besoin de composants logiciels pour mettre à niveau ou ajuster les "
-"systèmes."
+"souvent besoin de composants logiciels (software) pour mettre à niveau ou "
+"ajuster les systèmes."
 
 #: scripts/scenario_49_allies.lua:4151
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Many systems have specialized circuits that need upgrading or replacing via "
@@ -2892,20 +2871,18 @@ msgstr ""
 "niveau ou remplacés via un ou plusieurs composants de circuit."
 
 #: scripts/scenario_49_allies.lua:4152
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "Batteries on a ship range in size from the ones that provide most of the "
 "energy to run the ship to tiny ones used in EVA space suits. Battery "
 "components help maintain and improve these systems."
 msgstr ""
-"Les batteries d'un vaisseau varient en taille, allant de celles qui "
-"fournissent la majeure partie de l'énergie pour faire fonctionner le "
+"Les batteries (battery) d'un vaisseau varient en taille, allant de celles "
+"qui fournissent la majeure partie de l'énergie pour faire fonctionner le "
 "vaisseau aux plus petites utilisées dans les combinaisons spatiales EVA. Les "
 "composants de batterie aident à maintenir et à améliorer ces systèmes."
 
 #: scripts/scenario_49_allies.lua:4154
-#, fuzzy
 msgctxt "explainGoodsComponent-comms"
 msgid ""
 "These are the typical component goods available. Which one would you like a "
@@ -3365,7 +3342,7 @@ msgstr ""
 "Quelles marchandises vous intéressent ? J'ai entendu parler de ça :"
 
 #: scripts/scenario_49_allies.lua:4452
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s%s"
 msgstr "La station %s dans le secteur %s possède la marchandise %s%s."
@@ -3473,7 +3450,7 @@ msgstr "Merci de nous envoyer un Harceleur Q7 en renforts ! (%.1f rép)"
 #: scripts/scenario_49_allies.lua:4619
 msgctxt "trade-comms"
 msgid " and will trade it for medicine"
-msgstr " Elle l'échange contre des médicaments (medicine)"
+msgstr ". Elle l'échange contre des médicaments (medicine)"
 
 #: scripts/scenario_49_allies.lua:4624
 msgctxt "trade-comms"
@@ -3481,19 +3458,21 @@ msgid " or food"
 msgstr " ou de la nourriture (food)."
 
 #: scripts/scenario_49_allies.lua:4626
+#, fuzzy
 msgctxt "trade-comms"
 msgid " and will trade it for food"
-msgstr " Elle l'échange contre de la nourriture (food)"
+msgstr ". Elle l'échange contre de la nourriture (food)"
 
 #: scripts/scenario_49_allies.lua:4632
+#, fuzzy
 msgctxt "trade-comms"
 msgid " or luxury"
-msgstr " ou des produits de luxe (luxury)."
+msgstr " ou des produits de luxe (luxury)"
 
 #: scripts/scenario_49_allies.lua:4634
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
-msgstr " Elle l'échange contre des produits de luxe (luxury)"
+msgstr ". Elle l'échange contre des produits de luxe (luxury)"
 
 #: scripts/scenario_49_allies.lua:4684 scripts/scenario_49_allies.lua:5022
 msgctxt "shipAssist-comms"
@@ -3932,16 +3911,15 @@ msgid "Player survived for %i minutes"
 msgstr "Les joueurs ont survécu pendant %i minutes."
 
 #: scripts/scenario_49_allies.lua:5642
-#, fuzzy
 msgctxt "msgMainscreen"
 msgid "Single selected mission completed"
-msgstr "Mission unique sélectionnée terminée"
+msgstr "mission unique sélectionnée terminée."
 
 #: scripts/scenario_49_allies.lua:5654
 #, fuzzy
 msgctxt "msgMainscreen"
 msgid "All missions completed"
-msgstr "Toutes les missions terminées"
+msgstr "toutes les missions terminées."
 
 #: scripts/scenario_49_allies.lua:5689
 msgctxt "doomsdayGoal-shipLog"
@@ -4214,7 +4192,6 @@ msgstr ""
 "Kraylors autour de Cloud City."
 
 #: scripts/scenario_49_allies.lua:6285
-#, fuzzy
 msgctxt "Bespin-msgMainscreen"
 msgid "Mining station Cloud City destroyed"
 msgstr "la station minière Cloud City a été détruite."
@@ -4293,7 +4270,7 @@ msgctxt "msgMainscreen"
 msgid "Mission ended because %s\n"
 msgstr ""
 "\n"
-"Mission terminée : %s\n"
+"Mission accomplie : %s\n"
 
 #: scripts/scenario_49_allies.lua:6717 scripts/scenario_49_allies.lua:6732
 msgctxt "msgMainscreen"
@@ -4321,7 +4298,7 @@ msgid "Admiral"
 msgstr "Amiral"
 
 #: scripts/scenario_49_allies.lua:6727
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "msgMainscreen"
 msgid "Earned rank: %s"
 msgstr "Grade obtenu : %s"

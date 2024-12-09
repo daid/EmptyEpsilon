@@ -47,7 +47,7 @@ msgstr ""
 #: scripts/place_station_scenario_utility.lua:427
 msgctxt "scienceDescription-station"
 msgid "Warp and Impulse engine manufacturing"
-msgstr "Fabrication de moteurs à impulsions et à vitesse lumière"
+msgstr "Fabrication de moteurs à impulsion et à vitesse lumière"
 
 #: scripts/place_station_scenario_utility.lua:428
 msgctxt "stationGeneralInfo-comms"
@@ -55,7 +55,7 @@ msgid ""
 "We manufacture warp, impulse and jump engines for the human navy fleet as "
 "well as other independent clients on a contract basis"
 msgstr ""
-"Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
+"Nous fabriquons des moteurs à impulsion, à vitesse lumière et pour "
 "téléporteurs pour la flotte de la Marine humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
 
@@ -244,7 +244,7 @@ msgstr ""
 #: scripts/place_station_scenario_utility.lua:1288
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
-msgstr "Composants de moteurs à impulsions"
+msgstr "Composants de moteurs à impulsion"
 
 #: scripts/place_station_scenario_utility.lua:764
 msgctxt "stationGeneralInfo-comms"
@@ -568,8 +568,8 @@ msgstr ""
 msgctxt "stationGeneralInfo-comms"
 msgid "We supply high quality impulse engines and parts for use aboard ships"
 msgstr ""
-"Nous fournissons des moteurs à impulsions et des pièces de haute qualité "
-"pour une utilisation à bord des vaisseaux."
+"Nous fournissons des moteurs à impulsion et des pièces de haute qualité pour "
+"une utilisation à bord des vaisseaux."
 
 #: scripts/place_station_scenario_utility.lua:1290
 msgctxt "stationStory-comms"
