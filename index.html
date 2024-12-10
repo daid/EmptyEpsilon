@@ -874,8 +874,6 @@ end
         <p>Come and talk to the developers and players of EmptyEpsilon on the <a href="https://discord.gg/KHBQeEU" class="discord">USN discord</a>.</p>
         <p>Hosted by the <a href="https://www.unitedstellarnavy.net/">USN</a>, who handle both Artemis and EmptyEpsilon games.</p>
         <p>Regular EmptyEpsilon games are hosted on the USN discord. See the <a href="http://cattail.nu/artemis/when_is_the_next_online_artemis_game.html">agenda</a> for planned games.</p>
-        <h2>Steam</h2>
-        <p>EmptyEpsilon can also be found on steam for free: <a href="https://store.steampowered.com/app/1907040/EmptyEpsilon/">steam store page</a>.</p>
         <h2>Issues</h2>
         <p>You can report issues on GitHub at <a href="https://github.com/daid/EmptyEpsilon/issues">https://github.com/daid/EmptyEpsilon/issues</a>. Remember to stay civil, and that the maintainers have no obligation to you.</p>
         <p>(Want your link on this page? Feel free to let us know on a GitHub issue, and we can update this list)</p>
@@ -957,6 +955,14 @@ function updateDownloadList(div_id, prerelease=false)
                     html += " [PRERELEASE]";
 			}
             if (first){
+				// add Steam
+				let steamURL = "https://store.steampowered.com/app/1907040/EmptyEpsilon/";
+				html += `<tr class='steam'>
+					<td><a href="${steamURL}"><img src="images/steam.svg" width="24"></a></td>
+					<td><a class="download steam" href="${steamURL}">Download it on Steam!</a></td>
+					<td/>
+				</tr>`;
+				// add Flathub
 				let flathubURL = "https://flathub.org/apps/io.github.daid.EmptyEpsilon";
 				html += `<tr class='flathub'>
 					<td><a href="${flathubURL}"><img src="images/os_flathub.svg" width="24"></a></td>
