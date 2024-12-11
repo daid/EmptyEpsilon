@@ -26,7 +26,7 @@ public:
     virtual void destroy() override;
 
     GuiContainer* getTabContainer();
-    void addStationTab(GuiElement* element, ECrewPosition position, string name, string icon);
+    void addStationTab(GuiElement* element, CrewPosition position, string name, string icon);
     void finishCreation();
 
     virtual void update(float delta) override;
@@ -45,15 +45,15 @@ private:
     struct CrewTabInfo {
         GuiToggleButton* button;
         GuiElement* element;
-        ECrewPosition position;
+        CrewPosition position;
     };
 
-    ECrewPosition current_position = helmsOfficer;
+    CrewPosition current_position = CrewPosition::helmsOfficer;
     std::vector<CrewTabInfo> tabs;
     string keyboard_general = "";
     void showNextTab(int offset=1);
     void showTab(GuiElement* element);
-    string populateShortcutsList(ECrewPosition position);
+    string populateShortcutsList(CrewPosition position);
 
     GuiElement* findTab(string name);
 

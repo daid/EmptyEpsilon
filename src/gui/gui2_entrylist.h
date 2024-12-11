@@ -38,6 +38,7 @@ public:
     int addEntry(string name, string value);
     int indexByValue(string value) const;
     void removeEntry(int index);
+    void clear();
     int entryCount() const;
     string getEntryName(int index) const;
     string getEntryValue(int index) const;

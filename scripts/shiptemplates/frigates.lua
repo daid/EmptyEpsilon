@@ -11,7 +11,7 @@ They are divided in 3 different sub-classes:
 * Light transport: Small transports, like transporting up to 50 soldiers in spartan conditions or a few diplomats in luxury. Depending on the role can have some weaponry.
 * Support: Support types come in many varieties. They are simply a frigate hull fitted with whatever was needed. Anything from mine-layers to science vessels.
 ----------------------------------------------------------]]
-template = ShipTemplate():setName("Phobos T3"):setLocaleName(_("ship", "Phobos T3")):setClass(_("class", "Frigate"), _("subclass", "Cruiser")):setModel("AtlasHeavyFighterYellow")
+local template = ShipTemplate():setName("Phobos T3"):setLocaleName(_("ship", "Phobos T3")):setClass(_("class", "Frigate"), _("subclass", "Cruiser")):setModel("AtlasHeavyFighterYellow")
 template:setRadarTrace("cruiser.png")
 template:setDescription(_([[The Phobos T3, just like the Atlantis, is the workhorse of almost any navy. It's extremely easy to modify, which makes retro-fitting this ship a breeze. Its basic stats aren't impressive, but due to its modular nature, it's fairly easy to produce in large quantities.]]))
 template:setHull(70)
@@ -25,7 +25,7 @@ template:setWeaponStorage("Homing", 6)
 template:setTubeDirection(0, -1)
 template:setTubeDirection(1,  1)
 
-variation = template:copy("Elara P2"):setLocaleName(_("ship", "Elara P2"))
+local variation = template:copy("Elara P2"):setLocaleName(_("ship", "Elara P2"))
 variation:setDescription(_([[Inspired by the Phobos T3 design, the Elara P2 is nearly identical. With the addition of a warp drive and stronger front shields, the Elara P2 poses a greater threat than the Phobos]]))
 variation:setWarpSpeed(800)
 variation:setShields(70, 40)

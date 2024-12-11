@@ -3842,7 +3842,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for index, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if obj.components.docking_bay ~= nil and not comms_target:isEnemy(obj) then
 			if comms_target:getTypeName() ~= "Defense platform" then
 				addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 					setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
@@ -4764,7 +4764,7 @@ function friendlyServiceJonqueComms(comms_data)
 			addCommsReply(_("Back"), commsServiceJonque)
 	end)
 	for index, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if obj.components.docking_bay ~= nil and not comms_target:isEnemy(obj) then
 			if comms_target:getTypeName() ~= "Defense platform" then
 				addCommsReply(string.format(_("shipAssist-comms","Dock at %s"),obj:getCallSign()), function()
 					setCommsMessage(string.format(_("shipAssist-comms","Docking at %s."),obj:getCallSign()))
@@ -5499,7 +5499,7 @@ function devourPlanets()
 		local object_list = devourer:getObjectsInRange(300000)
 		local planets = {}
 		for i, obj in ipairs(object_list) do
-			if obj.typeName == "Planet" then
+			if obj.components.planet_render ~= nil then
 				table.insert(planets,obj)
 			end
 		end
@@ -5642,13 +5642,7 @@ function formerPlanetExplosion(px,py)
 							ej.obj = nil
 							ej.del = true
 						elseif ej.action == "explode" then
-							if obj.typeName == "Artifact" then
-								obj:explode()
-							else
-								local ex, ey = obj:getPosition()
-								obj:destroy()
-								ExplosionEffect():setPosition(ex,ey):setSize(100)
-							end
+							obj:explode()
 							ej.obj = nil
 							ej.del = true
 						end
@@ -5950,7 +5944,7 @@ function explodeDevourer()
 				local object_list = getObjectsInRadius(center_x, center_y, 300000)
 				local planet_count = 0
 				for i, obj in ipairs(object_list) do
-					if obj.typeName == "Planet" then
+					if obj.components.planet_render ~= nil then
 						planet_count = planet_count + 1
 					end
 				end

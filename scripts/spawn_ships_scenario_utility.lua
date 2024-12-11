@@ -31,7 +31,7 @@ function spawnGMShips()
 	local object_list = getGMSelection()
 	if #object_list == 1 then
 		temp_carrier = object_list[1]
-		if temp_carrier.typeName == "CpuShip" then
+		if temp_carrier.components.ai_controller then
 			addGMFunction(_("buttonGM","+Spawn Fighter Wing"),setFighterWing)
 		end
 	end

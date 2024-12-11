@@ -55,6 +55,17 @@
             image.focus: gui/widget/TextEntryBackground.focused.png
         }
     }
+
+    [luaconsole] {
+        size: 12
+        font: gui/fonts/RobotoMono-SemiBold.ttf
+        [luaconsole.log.back] {
+        }
+        [luaconsole.entry.back] {
+            image: gui/widget/TextEntryBackground.png
+            image.focus: gui/widget/TextEntryBackground.focused.png
+        }
+    }
     
     [luaconsole] {
         size: 12

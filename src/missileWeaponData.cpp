@@ -1,4 +1,5 @@
 #include "missileWeaponData.h"
+#include "i18n.h"
 
 MissileWeaponData missile_data[MW_Count] =
 {
@@ -34,6 +35,48 @@ string getMissileSizeString(EMissileSizes size)
             return "large";
         default:
             return string("unknown size:") + string(size);
+    }
+}
+
+string getMissileWeaponName(EMissileWeapons missile)
+{
+    switch(missile)
+    {
+    case MW_None:
+        return "-";
+    case MW_Homing:
+        return "Homing";
+    case MW_Nuke:
+        return "Nuke";
+    case MW_Mine:
+        return "Mine";
+    case MW_EMP:
+        return "EMP";
+    case MW_HVLI:
+        return "HVLI";
+    default:
+        return "UNK: " + string(int(missile));
+    }
+}
+
+string getLocaleMissileWeaponName(EMissileWeapons missile)
+{
+    switch(missile)
+    {
+    case MW_None:
+        return "-";
+    case MW_Homing:
+        return tr("missile","Homing");
+    case MW_Nuke:
+        return tr("missile","Nuke");
+    case MW_Mine:
+        return tr("missile","Mine");
+    case MW_EMP:
+        return tr("missile","EMP");
+    case MW_HVLI:
+        return tr("missile","HVLI");
+    default:
+        return "UNK: " + string(int(missile));
     }
 }
 

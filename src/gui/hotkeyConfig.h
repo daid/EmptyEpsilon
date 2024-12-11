@@ -6,7 +6,7 @@
 #include <SDL.h>
 #include <io/keybinding.h>
 #include "stringImproved.h"
-#include "shipTemplate.h"
+#include "components/shipsystem.h"
 
 
 class Keys
@@ -109,7 +109,7 @@ public:
     std::array<sp::io::Keybinding, 4> science_scan_param_set;
 
     //Engineering
-    sp::io::Keybinding engineering_select_system[SYS_COUNT];
+    sp::io::Keybinding engineering_select_system[ShipSystem::COUNT];
     sp::io::Keybinding engineering_set_power_000;
     sp::io::Keybinding engineering_set_power_030;
     sp::io::Keybinding engineering_set_power_050;
@@ -133,8 +133,8 @@ public:
     sp::io::Keybinding engineering_self_destruct_confirm;
     sp::io::Keybinding engineering_self_destruct_cancel;
 
-    sp::io::Keybinding engineering_set_power_for_system[SYS_COUNT];
-    sp::io::Keybinding engineering_set_coolant_for_system[SYS_COUNT];
+    sp::io::Keybinding engineering_set_power_for_system[ShipSystem::COUNT];
+    sp::io::Keybinding engineering_set_coolant_for_system[ShipSystem::COUNT];
 
     //Relay
     sp::io::Keybinding relay_alert_level_none;

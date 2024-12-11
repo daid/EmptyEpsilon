@@ -7,7 +7,7 @@
 class GuiCustomShipFunctions : public GuiElement
 {
 public:
-    GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id);
+    GuiCustomShipFunctions(GuiContainer* owner, CrewPosition position, string id);
 
     virtual void onUpdate() override;
 
@@ -20,7 +20,7 @@ private:
         GuiElement* element;
     };
 
-    ECrewPosition position;
+    CrewPosition position;
     std::vector<Entry> entries;
 
     void checkEntries();

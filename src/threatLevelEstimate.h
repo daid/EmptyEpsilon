@@ -2,6 +2,7 @@
 #define THREAT_LEVEL_ESTIMATE_H
 
 #include "Updatable.h"
+#include <ecs/entity.h>
 #include <functional>
 
 class SpaceShip;
@@ -28,7 +29,7 @@ public:
 
     virtual void update(float delta) override;
 private:
-    float getThreatFor(P<SpaceShip> ship);
+    float getThreatFor(sp::ecs::Entity ship);
 };
 
 #endif//THREAT_LEVEL_ESTIMATE_H

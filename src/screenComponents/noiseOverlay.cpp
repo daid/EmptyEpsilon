@@ -1,5 +1,4 @@
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "noiseOverlay.h"
 #include "random.h"
 

@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "playerInfo.h"
 #include "selfDestructEntry.h"
+#include "components/selfdestruct.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
@@ -9,9 +10,6 @@
 GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
-    for(int n=0; n<max_crew_positions; n++)
-        has_position[n] = false;
-
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     box = new GuiPanel(this, id + "_BOX");
@@ -40,7 +38,7 @@ GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
     (new GuiButton(code_entry, id + "_BUTTON_0", "0", [this]() {code_entry_label->setText(code_entry_label->getText() + "0");}))->setSize(50, 50)->setPosition(100, 250, sp::Alignment::TopLeft);
     (new GuiButton(code_entry, id + "_BUTTON_OK", "OK", [this]() {
         if (my_spaceship)
-            my_spaceship->commandConfirmDestructCode(code_entry_position, code_entry_label->getText().toInt());
+            my_player_info->commandConfirmDestructCode(code_entry_position, code_entry_label->getText().toInt());
         code_entry_label->setText("");
     }))->setSize(50, 50)->setPosition(150, 250, sp::Alignment::TopLeft);
 }
@@ -49,23 +47,24 @@ void GuiSelfDestructEntry::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        if (my_spaceship->activate_self_destruct)
+        auto self_destruct = my_spaceship.getComponent<SelfDestruct>();
+        if (self_destruct && self_destruct->active)
         {
             box->show();
             string codes = "";
             int lines = 0;
             code_entry_position = -1;
-            for(int n=0; n<PlayerSpaceship::max_self_destruct_codes; n++)
+            for(int n=0; n<SelfDestruct::max_codes; n++)
             {
-                if (has_position[my_spaceship->self_destruct_code_show_position[n]])
+                if (has_position.has(self_destruct->show_position[n]))
                 {
                     if (lines > 0)
                         codes = codes + "\n";
-                    codes = codes + tr("Code [{letter}]: {self_destruct_code}").format({{"letter", string(char('A' + n))}, {"self_destruct_code", string(my_spaceship->self_destruct_code[n])}});
+                    codes = codes + tr("Code [{letter}]: {self_destruct_code}").format({{"letter", string(char('A' + n))}, {"self_destruct_code", string(self_destruct->code[n])}});
 
                     lines++;
                 }
-                if (has_position[my_spaceship->self_destruct_code_entry_position[n]] && !my_spaceship->self_destruct_code_confirmed[n] && code_entry_position < 0)
+                if (has_position.has(self_destruct->entry_position[n]) && !self_destruct->confirmed[n] && code_entry_position < 0)
                 {
                     code_entry_position = n;
                 }

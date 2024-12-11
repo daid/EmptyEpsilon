@@ -6,7 +6,7 @@ They usually come with 6 or more shield sections, require a crew of 250+ to oper
 Think: Stardestroyer.
 ----------------------------------------------------------]]
 
-template = ShipTemplate():setName("Odin"):setLocaleName(_("ship", "Odin")):setClass(_("class", "Dreadnought"), _("subclass", "Odin")):setModel("space_station_2")
+local template = ShipTemplate():setName("Odin"):setLocaleName(_("ship", "Odin")):setClass(_("class", "Dreadnought"), _("subclass", "Odin")):setModel("space_station_2")
 template:setRadarTrace("largestation.png")
 template:setDescription(_([[The Odin is a "ship" so large and unique that it's almost a class of its own.
 

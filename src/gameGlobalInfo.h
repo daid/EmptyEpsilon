@@ -1,11 +1,16 @@
 #ifndef GAME_GLOBAL_INFO_H
 #define GAME_GLOBAL_INFO_H
 
-#include "spaceObjects/playerSpaceship.h"
 #include "script.h"
-#include "GMScriptCallback.h"
-#include "GMMessage.h"
+#include "script/gm.h"
 #include "gameStateLogger.h"
+#include "components/faction.h"
+#include "Updatable.h"
+#include "multiplayer.h"
+#include <list>
+#include <functional>
+#include <unordered_map>
+
 
 class GameStateLogger;
 class GameGlobalInfo;
@@ -36,27 +41,12 @@ enum EHackingGames
 
 class GameGlobalInfo : public MultiplayerObject, public Updatable
 {
-    P<GameStateLogger> state_logger;
-public:
-    /*!
-     * \brief Maximum number of player ships.
-     */
-    static const int max_player_ships = 32;
-private:
-    int victory_faction;
-    int32_t playerShipId[max_player_ships];
-    int callsign_counter;
-    /*!
-     * \brief List of known scripts
-     */
-    PVector<Script> script_list;
 public:
     string global_message;
     float global_message_timeout;
 
     string banner_string;
 
-    std::vector<float> reputation_points;
     EScanningComplexity scanning_complexity;
     //Hacking difficulty ranges from 0 to 3
     int hacking_difficulty;
@@ -72,36 +62,31 @@ public:
 
     //List of script functions that can be called from the GM interface (Server only!)
     std::list<GMScriptCallback> gm_callback_functions;
-    std::list<GMMessage> gm_messages;
+    std::list<string> gm_messages;
     //When active, all comms request goto the GM as chat, and normal scripted converstations are disabled. This does not disallow player<->player ship comms.
     bool intercept_all_comms_to_gm;
 
     //Callback called when a new player ship is created on the ship selection screen.
-    ScriptSimpleCallback on_new_player_ship;
-    bool allow_new_player_ships = true;
+    sp::script::Callback on_new_player_ship;
 
     std::function<void(glm::vec2)> on_gm_click;
 
     GameGlobalInfo();
     virtual ~GameGlobalInfo();
 
-    P<PlayerSpaceship> getPlayerShip(int index);
-    void setPlayerShip(int index, P<PlayerSpaceship> ship);
-
-    int findPlayerShip(P<PlayerSpaceship> ship);
-    int insertPlayerShip(P<PlayerSpaceship> ship);
+    void onReceiveServerCommand(sp::io::DataBuffer& packet) override;
+    void playSoundOnMainScreen(sp::ecs::Entity ship, string sound_name);
     /*!
      * \brief Set a faction to victorious.
      * \param string Name of the faction that won.
      */
-    void setVictory(string faction_name) { victory_faction = FactionInfo::findFactionId(faction_name); }
+    void setVictory(string faction_name) { victory_faction = Faction::find(faction_name); }
     /*!
      * \brief Get ID of faction that won.
      * \param int
      */
-    int getVictoryFactionId() { return victory_faction; }
+    FactionInfo* getVictoryFaction() { if (!victory_faction) return nullptr; return victory_faction.getComponent<FactionInfo>(); }
 
-    void addScript(P<Script> script);
     //Reset the global game state (called when we want to load a new scenario, and clear out this one)
     void reset();
     void setScenarioSettings(const string filename, std::unordered_map<string, string> new_settings);
@@ -112,15 +97,38 @@ public:
     string getMissionTime();
 
     string getNextShipCallsign();
+
+    struct ShipSpawnInfo {
+        sp::script::Callback create_callback;
+        string label;
+        string description;
+    };
+    std::vector<ShipSpawnInfo> getSpawnablePlayerShips();
+    struct ObjectSpawnInfo {
+        sp::script::Callback create_callback;
+        string label;
+        string category;
+    };
+    std::vector<ObjectSpawnInfo> getGMSpawnableObjects();
+    void execScriptCode(const string& code);
+    bool allowNewPlayerShips();
+
+    //List of extra scripts that run next to the main script.
+    std::vector<std::unique_ptr<sp::script::Environment>> additional_scripts;
+    std::unique_ptr<sp::script::Environment> script_environment_base;
+    std::unique_ptr<sp::script::Environment> main_scenario_script;
+private:
+    P<GameStateLogger> state_logger;
+    sp::ecs::Entity victory_faction;
+    int callsign_counter;
+
+    int main_script_error_count = 0;
+    static constexpr int max_repeated_script_errors = 5;
+
+    constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
 };
 
 string getSectorName(glm::vec2 position);
 glm::vec2 sectorToXY(string sectorName);
-
-REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
-REGISTER_MULTIPLAYER_ENUM(EHackingGames);
-
-template<> int convert<EScanningComplexity>::returnType(lua_State* L, EScanningComplexity complexity);
-template<> int convert<EHackingGames>::returnType(lua_State* L, EHackingGames games);
 
 #endif//GAME_GLOBAL_INFO_H

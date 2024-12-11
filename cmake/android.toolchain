@@ -191,3 +191,4 @@ endmacro()
 
 
 include("${ANDROID_SDK_PATH}/ndk/${ANDROID_NDK_VERSION}/build/cmake/android.toolchain.cmake")
+add_definitions(-DGLM_FORCE_CXX17=1)

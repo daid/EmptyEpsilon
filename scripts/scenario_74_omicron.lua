@@ -9441,7 +9441,7 @@ function moonCollisionCheck()
 	for _, obj in ipairs(collision_list) do
 		if obj:isValid() then
 			obj_dist = distance(obj,moon_barrier)
-			if obj.typeName == "CpuShip" then
+			if obj.components.ai_controller then
 				obj_type_name = obj:getTypeName()
 				if obj_type_name ~= nil then
 					ship_distance = shipTemplateDistance[obj:getTypeName()]
@@ -9456,7 +9456,7 @@ function moonCollisionCheck()
 				if obj_dist <= moon_barrier.moon_radius + ship_distance + 200 then
 					obj:takeDamage(100,"kinetic",moon_x,moon_y)
 				end
-			elseif obj.typeName == "PlayerSpaceship" then
+			elseif obj.components.player_control then
 				obj_type_name = obj:getTypeName()
 				if obj_type_name ~= nil then
 					ship_distance = playerShipStats[obj:getTypeName()].distance

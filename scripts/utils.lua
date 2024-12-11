@@ -298,16 +298,16 @@ end
 function _fourArgumentsIntoCoordinates(a, b, c, d)
     local x1, y1 = 0, 0
     local x2, y2 = 0, 0
-    if type(a) == "table" and type(b) == "table" then
+    if type(a) == "userdata" and type(b) == "userdata" then
         -- a and b are bth tables.
         -- Assume function(obj1, obj2)
         x1, y1 = a:getPosition()
         x2, y2 = b:getPosition()
-    elseif type(a) == "table" and type(b) == "number" and type(c) == "number" then
+    elseif type(a) == "userdata" and type(b) == "number" and type(c) == "number" then
         -- Assume function(obj1, x2, y2)
         x1, y1 = a:getPosition()
         x2, y2 = b, c
-    elseif type(a) == "number" and type(b) == "number" and type(c) == "table" then
+    elseif type(a) == "number" and type(b) == "number" and type(c) == "userdata" then
         -- Assume function(x1, y1, obj2)
         x1, y1 = a, b
         x2, y2 = c:getPosition()

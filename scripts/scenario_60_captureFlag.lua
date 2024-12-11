@@ -7802,7 +7802,7 @@ function droneDetectFlagCheck(delta)
 			local flag = human_flags[hfi]
 			if flag ~= nil and flag:isValid() then
 				for idx, obj in ipairs(flag:getObjectsInRange(drone_scan_range_for_flags)) do
-					if obj.typeName == "CpuShip" then
+					if obj.components.ai_controller then
 						if obj.drone then
 							if obj.drone_message == nil then
 								if difficulty < 1 then	--science officers get messages from all drones
@@ -7878,7 +7878,7 @@ function droneDetectFlagCheck(delta)
 			local flag = kraylor_flags[kfi]
 			if flag ~= nil and flag:isValid() then
 				for idx, obj in ipairs(flag:getObjectsInRange(5000)) do
-					if obj.typeName == "CpuShip" then
+					if obj.components.ai_controller then
 						if obj.drone then
 							if obj.drone_message == nil then
 								if difficulty < 1 then

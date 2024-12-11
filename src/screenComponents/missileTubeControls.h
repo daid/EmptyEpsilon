@@ -11,24 +11,6 @@ class GuiToggleButton;
 
 class GuiMissileTubeControls : public GuiElement
 {
-private:
-    struct TubeRow {
-        GuiElement* layout;
-        GuiButton* load_button;
-        GuiButton* fire_button;
-        GuiProgressbar* loading_bar;
-        GuiLabel* loading_label;
-    };
-    std::vector<TubeRow> rows;
-    class TypeRow {
-    public:
-        GuiElement* layout;
-        GuiToggleButton* button;
-    };
-    TypeRow load_type_rows[MW_Count];
-    EMissileWeapons load_type;
-    bool manual_aim;
-    float missile_target_angle;
 public:
     GuiMissileTubeControls(GuiContainer* owner, string id);
 
@@ -41,6 +23,27 @@ public:
     bool getManualAim();
 
 private:
+    struct TubeRow {
+        GuiElement* layout;
+        GuiButton* load_button;
+        GuiButton* fire_button;
+        GuiProgressbar* loading_bar;
+        GuiLabel* loading_label;
+    };
+    GuiElement* tube_rows_layout;
+    std::vector<TubeRow> rows;
+    class TypeRow {
+    public:
+        GuiElement* layout;
+        GuiToggleButton* button;
+    };
+    TypeRow load_type_rows[MW_Count];
+    EMissileWeapons load_type;
+    bool manual_aim;
+    float missile_target_angle;
+
+    void createTubeRow();
+    void removeTubeRow();
     void selectMissileWeapon(EMissileWeapons type);
 };
 

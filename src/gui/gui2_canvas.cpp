@@ -71,8 +71,35 @@ void GuiCanvas::onTextInput(const string& text)
         focus_element->onTextInput(text);
 }
 
+#ifdef DEBUG
+static void dumpGuiTree(FILE* f, GuiContainer* c)
+{
+    for(GuiElement* child : c->children) {
+        auto r = child->getRect();
+        fprintf(f, "<div style='position:fixed;left:%fpx;top:%fpx;width:%fpx;height:%fpx;background:rgba(0,0,0,0.1);'>ID:%s", double(r.position.x), double(r.position.y), double(r.size.x), double(r.size.y), child->getID().c_str());
+        fprintf(f, "<br>%s", typeid(child).name());
+        fprintf(f, "<br>size=%f,%f", double(child->layout.size.x), double(child->layout.size.y));
+        if (child->layout.match_content_size)
+            fprintf(f, "<br>match_content_size=true");
+        if (child->layout.fill_width)
+            fprintf(f, "<br>fill_width=true");
+        if (child->layout.fill_height)
+            fprintf(f, "<br>fill_height=true");
+        dumpGuiTree(f, child);
+        fprintf(f, "</div>");
+    }
+}
+#endif
+
 void GuiCanvas::onTextInput(sp::TextInputEvent e)
 {
+#ifdef DEBUG
+    if (e == sp::TextInputEvent::Cut) {
+        FILE* f = fopen("ui.html", "wb");
+        dumpGuiTree(f, this);
+        fclose(f);
+    }
+#endif
     if (focus_element)
         focus_element->onTextInput(e);
 }

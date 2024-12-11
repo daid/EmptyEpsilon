@@ -5,7 +5,7 @@
 #include "screenComponents/shieldsEnableButton.h"
 
 EngineeringAdvancedScreen::EngineeringAdvancedScreen(GuiContainer* owner)
-: EngineeringScreen(owner, engineeringAdvanced)
+: EngineeringScreen(owner, CrewPosition::engineeringAdvanced)
 {
     if (gameGlobalInfo->use_beam_shield_frequencies)
     {

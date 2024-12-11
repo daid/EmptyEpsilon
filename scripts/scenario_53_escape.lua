@@ -1576,7 +1576,7 @@ function handleDockedState()
 						local scanned_ships = {}
 						local fully_scanned_ships = {}
 						for i,obj in ipairs(objects) do
-							if obj.typeName == "CpuShip" then
+							if obj.components.ai_controller then
 								if obj:isScannedBy(playerRepulse) then
 									table.insert(scanned_ships,obj)
 								end

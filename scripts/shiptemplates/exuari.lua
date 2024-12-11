@@ -74,7 +74,7 @@ Carriers:
 
 --[[ Fighters --]]
 -- Fighters are quick agile ships that do not do a lot of damage, but usually come in larger groups. They are easy to take out, but should not be underestimated.
-template = ShipTemplate():setName("Dagger"):setClass(_("class", "Exuari"), _("subclass", "Starfighter - Fighter"))
+local template = ShipTemplate():setName("Dagger"):setClass(_("class", "Exuari"), _("subclass", "Starfighter - Fighter"))
 template:setModel("small_fighter_1")
 template:setRadarTrace("exuari_fighter.png")
 template:setDescription(_("The Exuari fighter 'Dagger' is a single-seated spacecraft, very quick and agile, that does not do a lot of damage, but usually comes in larger groups. They are able to dodge most missiles and attack undefended areas of their enemies ships. However most of the Exuari fighter pilots expect their own death and do not care much about the enemies weapons ranges. Fighters are easy to take out, but should not be underestimated."))
@@ -86,7 +86,7 @@ template:setShields(30)
 template:setSpeed(120, 30, 25)
 template:setDefaultAI('fighter')
 
-variation = template:copy("Blade")
+local variation = template:copy("Blade")
 variation:setClass(_("class", "Exuari"), _("subclass", "Starfighter - Interceptor"))
 variation:setModel("dark_fighter_6")
 variation:setDescription(_("The Exuari interceptor 'Blade' is a improved fighter, originaly designed to hunt down rougue fighters. Nowadays Blades are often seen as the first attack wave of a larger assault, closely followed by Daggers. Blade pilots are often considered as fearless, but most of them are just consumed by their instinct for hunting."))

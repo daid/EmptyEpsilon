@@ -2,11 +2,13 @@
 #include "radarView.h"
 #include "playerInfo.h"
 #include "random.h"
-#include "spaceObjects/playerSpaceship.h"
+#include "components/collision.h"
+#include "components/radar.h"
+#include "ecs/query.h"
 
 
-RawScannerDataRadarOverlay::RawScannerDataRadarOverlay(GuiRadarView* owner, string id, float distance)
-: GuiElement(owner, id), radar(owner), distance(distance)
+RawScannerDataRadarOverlay::RawScannerDataRadarOverlay(GuiRadarView* owner, string id)
+: GuiElement(owner, id), radar(owner)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
@@ -15,6 +17,7 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship)
         return;
+    auto distance = radar->getDistance();
 
     auto view_position = radar->getViewPosition();
     float view_rotation = radar->getViewRotation();
@@ -27,15 +30,15 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
     RawRadarSignatureInfo signatures[point_count];
 
     // For each SpaceObject ...
-    foreach(SpaceObject, obj, space_object_list)
+    for(auto [entity, signature, dynamic_signature, transform] : sp::ecs::Query<RawRadarSignatureInfo, sp::ecs::optional<DynamicRadarSignatureInfo>, sp::Transform>())
     {
         // Don't measure our own ship.
-        if (obj == my_spaceship)
+        if (entity == my_spaceship)
             continue;
 
         // Initialize angle, distance, and scale variables.
         float a_0, a_1;
-        float dist = glm::length(obj->getPosition() - view_position);
+        float dist = glm::length(transform.getPosition() - view_position);
         float scale = 1.0;
 
         // If the object is more than twice as far away as the maximum radar
@@ -47,8 +50,9 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
         if (dist > distance)
             scale = 1.0f - ((dist - distance) / distance);
 
+        auto physics = entity.getComponent<sp::Physics>();
         // If we're adjacent to the object ...
-        if (dist <= obj->getRadius())
+        if (physics && dist <= physics->getSize().x)
         {
             // ... affect all angles of the radar.
             a_0 = 0.0f;
@@ -56,8 +60,8 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
         }else{
             // Otherwise, measure the affected range of angles by the object's
             // distance and radius.
-            float a_diff = glm::degrees(asinf(obj->getRadius() / dist));
-            float a_center = vec2ToAngle(obj->getPosition() - view_position);
+            float a_diff = glm::degrees(asinf((physics ? physics->getSize().x : 300.0f) / dist));
+            float a_center = vec2ToAngle(transform.getPosition() - view_position);
             a_0 = a_center - a_diff;
             a_1 = a_center + a_diff;
         }
@@ -65,16 +69,12 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
         // Get the object's radar signature.
         // If the object is a SpaceShip, adjust the signature dynamically based
         // on its current state and activity.
-        RawRadarSignatureInfo info;
-        P<SpaceShip> ship = obj;
-
-        if (ship)
+        RawRadarSignatureInfo info = signature;
+        if (dynamic_signature)
         {
-            // Use dynamic signatures for ships.
-            info = ship->getDynamicRadarSignatureInfo();
-        } else {
-            // Otherwise, use the baseline only.
-            info = obj->getRadarSignatureInfo();
+            info.gravity += dynamic_signature->gravity;
+            info.electrical += dynamic_signature->electrical;
+            info.biological += dynamic_signature->biological;
         }
 
         // For each interval determined by the level of raw data resolution,

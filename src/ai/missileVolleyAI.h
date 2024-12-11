@@ -15,7 +15,7 @@ private:
 
     FlankPosition flank_position;
 public:
-    MissileVolleyAI(CpuShip* owner);
+    MissileVolleyAI(sp::ecs::Entity owner);
 
     /**!
      * Are we allowed to switch to a different AI right now?
@@ -25,7 +25,7 @@ public:
 
     virtual void run(float delta) override;
     virtual void runOrders() override;
-    virtual void runAttack(P<SpaceObject> target) override;
+    virtual void runAttack(sp::ecs::Entity target) override;
 };
 
 

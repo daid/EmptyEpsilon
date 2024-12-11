@@ -7910,7 +7910,7 @@ function moonCollisionCheck()
 	for _, obj in ipairs(collision_list) do
 		if obj:isValid() then
 			obj_dist = distance(obj,moon_barrier)
-			if obj.typeName == "CpuShip" then
+			if obj.components.ai_controller then
 				obj_type_name = obj:getTypeName()
 				if obj_type_name ~= nil then
 					ship_distance = shipTemplateDistance[obj:getTypeName()]
@@ -7925,7 +7925,7 @@ function moonCollisionCheck()
 				if obj_dist <= moon_barrier.moon_radius + ship_distance + 200 then
 					obj:takeDamage(100,"kinetic",moon_x,moon_y)
 				end
-			elseif obj.typeName == "PlayerSpaceship" then
+			elseif obj.components.player_control then
 				obj_type_name = obj:getTypeName()
 				if obj_type_name ~= nil then
 					ship_distance = playerShipStats[obj:getTypeName()].distance
@@ -8008,7 +8008,7 @@ function updatePlayerProximityScan(p)
 	local obj_list = p:getObjectsInRange(p.prox_scan*1000)
 	if obj_list ~= nil and #obj_list > 0 then
 		for _, obj in ipairs(obj_list) do
-			if obj:isValid() and obj.typeName == "CpuShip" and not obj:isFullyScannedBy(p) then
+			if obj:isValid() and obj.components.ai_controller and not obj:isFullyScannedBy(p) then
 				obj:setScanState("simplescan")
 			end
 		end

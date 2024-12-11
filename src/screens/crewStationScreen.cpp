@@ -3,9 +3,10 @@
 #include "main.h"
 #include "preferenceManager.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "multiplayer_client.h"
 #include "soundManager.h"
+
+#include "components/customshipfunction.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/noiseOverlay.h"
@@ -52,13 +53,13 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
     message_text = new GuiScrollText(message_frame, "", "");
     message_text->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(900 - 40, 200 - 40);
     message_close_button = new GuiButton(message_frame, "", tr("button", "Close"), [this]() {
-        if (my_spaceship)
+        if (auto csf = my_spaceship.getComponent<CustomShipFunctions>())
         {
-            for(PlayerSpaceship::CustomShipFunction& csf : my_spaceship->custom_functions)
+            for(auto& f : csf->functions)
             {
-                if (csf.crew_position == current_position && csf.type == PlayerSpaceship::CustomShipFunction::Type::Message)
+                if (f.crew_positions.has(current_position) && f.type == CustomShipFunctions::Function::Type::Message)
                 {
-                    my_spaceship->commandCustomFunction(csf.name);
+                    my_player_info->commandCustomFunction(f.name);
                     break;
                 }
             }
@@ -103,7 +104,7 @@ GuiContainer* CrewStationScreen::getTabContainer()
     return main_panel;
 }
 
-string CrewStationScreen::populateShortcutsList(ECrewPosition position)
+string CrewStationScreen::populateShortcutsList(CrewPosition position)
 {
     string ret = "";
 
@@ -114,14 +115,14 @@ string CrewStationScreen::populateShortcutsList(ECrewPosition position)
     }
 
     // Check special positions that include multiple core positions' functions.
-    if (position == tacticalOfficer)
+    if (position == CrewPosition::tacticalOfficer)
     {
-        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(helmsOfficer)))
+        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::helmsOfficer)))
         {
             ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
         }
 
-        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(weaponsOfficer)))
+        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::weaponsOfficer)))
         {
             if (binding->getLabel() != "Toggle shields")
             {
@@ -129,14 +130,14 @@ string CrewStationScreen::populateShortcutsList(ECrewPosition position)
             }
         }
     }
-    else if (position == engineeringAdvanced)
+    else if (position == CrewPosition::engineeringAdvanced)
     {
-        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(engineering)))
+        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::engineering)))
         {
             ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
         }
 
-        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(weaponsOfficer)))
+        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::weaponsOfficer)))
         {
             if (binding->getLabel() == "Toggle shields")
             {
@@ -144,14 +145,14 @@ string CrewStationScreen::populateShortcutsList(ECrewPosition position)
             }
         }
     }
-    else if (position == singlePilot)
+    else if (position == CrewPosition::singlePilot)
     {
-        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(helmsOfficer)))
+        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::helmsOfficer)))
         {
             ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
         }
 
-        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(weaponsOfficer)))
+        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::weaponsOfficer)))
         {
             ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
         }
@@ -165,7 +166,7 @@ string CrewStationScreen::populateShortcutsList(ECrewPosition position)
     return ret;
 }
 
-void CrewStationScreen::addStationTab(GuiElement* element, ECrewPosition position, string name, string icon)
+void CrewStationScreen::addStationTab(GuiElement* element, CrewPosition position, string name, string icon)
 {
     CrewTabInfo info;
     tileViewport();
@@ -270,21 +271,22 @@ void CrewStationScreen::update(float delta)
     }
     
 
-    if (my_spaceship)
+    message_frame->hide();
+    if (auto csf = my_spaceship.getComponent<CustomShipFunctions>())
     {
         // Show custom ship function messages.
-        message_frame->hide();
-
-        for(PlayerSpaceship::CustomShipFunction& csf : my_spaceship->custom_functions)
+        for(auto& f : csf->functions)
         {
-            if (csf.crew_position == current_position && csf.type == PlayerSpaceship::CustomShipFunction::Type::Message)
+            if (f.crew_positions.has(current_position) && f.type == CustomShipFunctions::Function::Type::Message)
             {
                 message_frame->show();
-                message_text->setText(csf.caption);
+                message_text->setText(f.caption);
                 break;
             }
         }
+    }
 
+    if (my_spaceship) {
         // Update the impulse engine sound.
         impulse_sound->update(delta);
     } else {
@@ -298,15 +300,15 @@ void CrewStationScreen::update(float delta)
     else if (keys.prev_station.getDown())
         showNextTab(-1);
     else if (keys.station_helms.getDown())
-        showTab(findTab(getCrewPositionName(helmsOfficer)));
+        showTab(findTab(getCrewPositionName(CrewPosition::helmsOfficer)));
     else if (keys.station_weapons.getDown())
-        showTab(findTab(getCrewPositionName(weaponsOfficer)));
+        showTab(findTab(getCrewPositionName(CrewPosition::weaponsOfficer)));
     else if (keys.station_engineering.getDown())
-        showTab(findTab(getCrewPositionName(engineering)));
+        showTab(findTab(getCrewPositionName(CrewPosition::engineering)));
     else if (keys.station_science.getDown())
-        showTab(findTab(getCrewPositionName(scienceOfficer)));
+        showTab(findTab(getCrewPositionName(CrewPosition::scienceOfficer)));
     else if (keys.station_relay.getDown())
-        showTab(findTab(getCrewPositionName(relayOfficer)));
+        showTab(findTab(getCrewPositionName(CrewPosition::relayOfficer)));
 }
 
 void CrewStationScreen::showNextTab(int offset)
@@ -366,7 +368,7 @@ void CrewStationScreen::tileViewport()
     if (!viewport)
         return;
 
-    if (current_position == singlePilot)
+    if (current_position == CrewPosition::singlePilot)
     {
         main_panel->setSize(1000, GuiElement::GuiSizeMax);
         main_panel->layout.fill_width = false;

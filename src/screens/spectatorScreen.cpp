@@ -1,6 +1,7 @@
 #include "spectatorScreen.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
+#include "multiplayer_server.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/radarView.h"

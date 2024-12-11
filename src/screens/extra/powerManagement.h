@@ -2,7 +2,7 @@
 #define POWER_MANAGEMENT_H
 
 #include "gui/gui2_overlay.h"
-#include "shipTemplate.h"
+#include "components/shipsystem.h"
 
 class GuiPanel;
 class GuiSlider;
@@ -18,7 +18,7 @@ private:
     float previous_energy_measurement;
     float previous_energy_level;
     float average_energy_delta;
-    ESystem selected_system = SYS_None;
+    ShipSystem::Type selected_system = ShipSystem::Type::None;
 
     class SystemRow
     {
@@ -30,9 +30,9 @@ private:
         GuiProgressbar* power_bar;
         GuiProgressbar* coolant_bar;
     };
-    SystemRow systems[SYS_COUNT];
-    bool set_power_active[SYS_COUNT] = {false};
-    bool set_coolant_active[SYS_COUNT] = {false};
+    SystemRow systems[ShipSystem::COUNT];
+    bool set_power_active[ShipSystem::COUNT] = {false};
+    bool set_coolant_active[ShipSystem::COUNT] = {false};
 public:
     PowerManagementScreen(GuiContainer* owner);
 

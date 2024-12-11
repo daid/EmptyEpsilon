@@ -295,6 +295,11 @@ class DocumentationGenerator(object):
                     current_class = ScriptClass(res.group(1).strip())
                     current_class.description = description
                     self._definitions.append(current_class)
+                res = re.search("REGISTER_SCRIPT_CLASS_NAMED\(([^\)]*), \"([^\"]*)\"\)", line)
+                if res != None:
+                    current_class = ScriptClass(res.group(2).strip())
+                    current_class.description = description
+                    self._definitions.append(current_class)
                 res = re.search("REGISTER_SCRIPT_CLASS_NO_CREATE\(([^\)]*)\)", line)
                 if res != None:
                     current_class = ScriptClass(res.group(1).strip())
@@ -304,6 +309,12 @@ class DocumentationGenerator(object):
                 res = re.search("REGISTER_SCRIPT_SUBCLASS\(([^,]*),([^\)]*)\)", line)
                 if res != None:
                     current_class = ScriptClass(res.group(1).strip())
+                    current_class.parent_name = res.group(2).strip()
+                    current_class.description = description
+                    self._definitions.append(current_class)
+                res = re.search("REGISTER_SCRIPT_SUBCLASS_NAMED\(([^,]*),([^\)]*), \"([^\"]*)\"\)", line)
+                if res != None:
+                    current_class = ScriptClass(res.group(3).strip())
                     current_class.parent_name = res.group(2).strip()
                     current_class.description = description
                     self._definitions.append(current_class)

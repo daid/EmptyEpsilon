@@ -2,8 +2,8 @@
 #include "aimLock.h"
 
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "missileTubeControls.h"
+#include "components/collision.h"
 
 #include "gui/gui2_rotationdial.h"
 
@@ -47,8 +47,11 @@ void AimLockButton::setAimLock(bool value)
     this->missile_aim->setVisible(!value);
     if (!value && my_spaceship)
     {
-        this->missile_aim->setValue(my_spaceship->getRotation());
-        this->tube_controls->setMissileTargetAngle(my_spaceship->getRotation());
+        auto transform = my_spaceship.getComponent<sp::Transform>();
+        if (transform) {
+            this->missile_aim->setValue(transform->getRotation());
+            this->tube_controls->setMissileTargetAngle(transform->getRotation());
+        }
     }
 }
 

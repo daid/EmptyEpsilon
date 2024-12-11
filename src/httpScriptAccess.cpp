@@ -1,5 +1,6 @@
 #include "httpScriptAccess.h"
 #include "gameGlobalInfo.h"
+#include "script.h"
 
 #define sOBJECT "_OBJECT_"
 
@@ -11,15 +12,17 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
     server.addURLHandler("/exec.lua", [](const sp::io::http::Server::Request& request) -> string
     {
         if (!gameGlobalInfo)
-        {
             return "{\"ERROR\": \"No game\"}";
-        }
-        P<ScriptObject> script = new ScriptObject();
-        script->setMaxRunCycles(100000);
+
+        sp::script::Environment env(gameGlobalInfo->script_environment_base.get());
+        setupSubEnvironment(env);
+        auto result = env.run<string>(request.post_data);
         string output;
-        if (!script->runCode(request.post_data, output))
-            output = "{\"ERROR\": \"Script error: " + script->getError().replace("\"", "'") + "\"}";
-        script->destroy();
+        if (result.isErr()) {
+            output = "{\"ERROR\": \"Script error: " + result.error().replace("\"", "'") + "\"}";
+        } else {
+            output = result.value();
+        }
         return output;
     });
     server.addURLHandler("/get.lua", [](const sp::io::http::Server::Request& request) -> string
@@ -45,6 +48,7 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
             return "{\"ERROR\": \"No game\"}";
         }
 
+        /*TODO
         string luaCode;
         string objectId = "getPlayerShip(-1)";
         if (my_spaceship) {
@@ -91,6 +95,8 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
         }
         script->destroy();
         return output;
+        */
+        return "TODO";
     });
     server.addURLHandler("/set.lua", [](const sp::io::http::Server::Request& request) -> string
     {
@@ -115,7 +121,7 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
         {
             return "{\"ERROR\": \"No game\"}";
         }
-
+        /*TODO
         string luaCode;
         string objectId = "getPlayerShip(-1)";
         if (my_spaceship) {
@@ -154,5 +160,7 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
             output = "{}";
         script->destroy();
         return output;
+        */
+        return "TODO";
     });
 }

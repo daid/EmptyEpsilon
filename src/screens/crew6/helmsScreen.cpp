@@ -1,8 +1,15 @@
 #include <i18n.h>
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "helmsScreen.h"
 #include "preferenceManager.h"
+#include "featureDefs.h"
+
+#include "components/reactor.h"
+#include "components/warpdrive.h"
+#include "components/jumpdrive.h"
+#include "components/collision.h"
+#include "components/maneuveringthrusters.h"
+#include "components/docking.h"
 
 #include "screenComponents/combatManeuver.h"
 #include "screenComponents/radarView.h"
@@ -33,35 +40,35 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
 
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
-    combat_maneuver->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 215)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
+    combat_maneuver->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 215)->setVisible(my_spaceship.hasComponent<CombatManeuveringThrusters>());
 
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
         [radar, this](sp::io::Pointer::Button button, glm::vec2 position) {
-            if (my_spaceship)
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
             {
                 auto r = radar->getRect();
-                float angle = vec2ToAngle(position - my_spaceship->getPosition());
-                auto draw_position = rect.center() + (position - my_spaceship->getPosition()) / my_spaceship->getShortRangeRadarRange() * std::min(r.size.x, r.size.y) * 0.5f;
+                float angle = vec2ToAngle(position - transform->getPosition());
+                auto draw_position = rect.center() + (position - transform->getPosition()) / radar->getDistance() * std::min(r.size.x, r.size.y) * 0.5f;
                 heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
-                my_spaceship->commandTargetRotation(angle);
+                my_player_info->commandTargetRotation(angle);
             }
         },
         [radar, this](glm::vec2 position) {
-            if (my_spaceship)
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
             {
                 auto r = radar->getRect();
-                float angle = vec2ToAngle(position - my_spaceship->getPosition());
-                auto draw_position = rect.center() + (position - my_spaceship->getPosition()) / my_spaceship->getShortRangeRadarRange() * std::min(r.size.x, r.size.y) * 0.5f;
+                float angle = vec2ToAngle(position - transform->getPosition());
+                auto draw_position = rect.center() + (position - transform->getPosition()) / radar->getDistance() * std::min(r.size.x, r.size.y) * 0.5f;
                 heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
-                my_spaceship->commandTargetRotation(angle);
+                my_player_info->commandTargetRotation(angle);
             }
         },
         [this](glm::vec2 position) {
-            if (my_spaceship)
-                my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+                my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
             heading_hint->hide();
         }
     );
@@ -84,22 +91,28 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
 
     docking_button = new GuiDockingButton(this, "DOCKING");
-    docking_button->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(280, 50)->setVisible(my_spaceship && my_spaceship->getCanDock());
+    docking_button->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(280, 50)->setVisible(my_spaceship.hasComponent<DockingPort>());
 
-    (new GuiCustomShipFunctions(this, helmsOfficer, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, CrewPosition::helmsOfficer, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
 void HelmsScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        energy_display->setValue(string(int(my_spaceship->energy_level)));
-        heading_display->setValue(string(my_spaceship->getHeading(), 1));
-        float velocity = glm::length(my_spaceship->getVelocity()) / 1000 * 60;
-        velocity_display->setValue(tr("{value} {unit}/min").format({{"value", string(velocity, 1)}, {"unit", DISTANCE_UNIT_1K}}));
+        auto reactor = my_spaceship.getComponent<Reactor>();
+        energy_display->setVisible(reactor);
+        if (reactor)
+            energy_display->setValue(string(int(reactor->energy)));
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            heading_display->setValue(string(transform->getRotation() - 270.0f, 1));
+        if (auto physics = my_spaceship.getComponent<sp::Physics>()) {
+            float velocity = glm::length(physics->getVelocity()) / 1000 * 60;
+            velocity_display->setValue(tr("{value} {unit}/min").format({{"value", string(velocity, 1)}, {"unit", DISTANCE_UNIT_1K}}));
+        }
 
-        warp_controls->setVisible(my_spaceship->has_warp_drive);
-        jump_controls->setVisible(my_spaceship->has_jump_drive);
+        warp_controls->setVisible(my_spaceship.hasComponent<WarpDrive>());
+        jump_controls->setVisible(my_spaceship.hasComponent<JumpDrive>());
     }
     GuiOverlay::onDraw(renderer);
 }
@@ -111,7 +124,9 @@ void HelmsScreen::onUpdate()
         auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
         if (angle != 0.0f)
         {
-            my_spaceship->commandTargetRotation(my_spaceship->getRotation() + angle);
+            auto transform = my_spaceship.getComponent<sp::Transform>();
+            if (transform)
+                my_player_info->commandTargetRotation(transform->getRotation() + angle);
         }
     }
 }
