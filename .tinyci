@@ -4,8 +4,6 @@ enabled = True
 [build-linux]
 directory = _build_native
 commands =
-    git -C ../../SeriousProton checkout ECS
-    git -C ../../SeriousProton pull
     rm -rf script_reference.html
     cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_BUILD_TYPE=RelWithDebInfo
     ninja -j 10 package
