@@ -1654,7 +1654,7 @@ msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
 msgstr ""
-"Durch einen kürzlicher Reaktorausfall läuft im Moment alles auf "
+"Durch einen kürzlichen Reaktorausfall läuft im Moment alles auf "
 "Hilfsenergie, so dass wir keine Schiffe aufladen können."
 
 #: scripts/scenario_53_escape.lua:1999
