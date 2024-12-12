@@ -45,7 +45,7 @@ msgstr ""
 "- Titre original : Allies and Enemies\n"
 "- Auteur : Xansta (2019)\n"
 "- Traduction FR : Muerte (Déc. 24)\n"
-"Relecture en cours 495/567  87% ; Test du scénario en cours : contient "
+"Relecture en cours 519/567  91% ; Test du scénario en cours : contient "
 "actuellement des bogues et est susceptible de ne pas fonctionner "
 "correctement. Muerte (Déc. 24)\n"
 "\n"
@@ -1598,7 +1598,6 @@ msgstr ""
 "Que pouvons-nous faire pour vous ?\n"
 
 #: scripts/scenario_49_allies.lua:3460
-#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
@@ -2081,7 +2080,6 @@ msgid "Your research accurately describes the symptoms"
 msgstr "Vos recherches décrivent avec précision les symptômes"
 
 #: scripts/scenario_49_allies.lua:3713
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "[Dr. Thultris] I would like to see the patient\n"
@@ -2095,7 +2093,6 @@ msgstr ""
 "situation."
 
 #: scripts/scenario_49_allies.lua:3717
-#, fuzzy
 msgctxt "doctor-comms"
 msgid ""
 "Coincidental, I'm sure\n"
@@ -2474,7 +2471,7 @@ msgstr "Composants"
 #: scripts/scenario_49_allies.lua:3937
 msgctxt "explainGoodsMineral-comms"
 msgid "Explain the mineral goods"
-msgstr "Biens minéraux"
+msgstr "Minéraux"
 
 #: scripts/scenario_49_allies.lua:3938
 msgctxt "explainGoodsTrade-comms"
@@ -2482,13 +2479,11 @@ msgid "Explain the trade goods"
 msgstr "Marchandises commerciales"
 
 #: scripts/scenario_49_allies.lua:3939
-#, fuzzy
 msgctxt "explainGoodsVapor-comms"
 msgid "Explain vapor goods"
-msgstr "Marchandises \"vapeur\""
+msgstr "Contrefaçons"
 
 #: scripts/scenario_49_allies.lua:3940
-#, fuzzy
 msgctxt "explainGoodsVapor-comms"
 msgid ""
 "On rare occasions, the system cannot determine an appropriate good. In that "
@@ -2499,13 +2494,13 @@ msgid ""
 "or desire for that good will go unmet or the mission will have to be "
 "satisfied in some other fashion."
 msgstr ""
-"En de rares occasions, le système ne peut pas déterminer un bien approprié. "
-"Dans ce cas, l'une de ces marchandises \"vapeur\" ou contrefaçons sera "
-"listé :\n"
-"   or pressé, latinum, unobtanium, eludium, impossibrium\n"
+"En de rares occasions, le système peut ne pas réussir à identifier une "
+"marchandise spécifique. Dans ce cas, l'une de ces marchandises \"vapeur\" ou "
+"contrefaçons sera listée :\n"
+"   Or pressé, latinum, unobtanium, eludium, impossibrium\n"
 "\n"
-"Si vous en voyez une, cela signifie que le bien n'est pas disponible. Le "
-"besoin de ce bien ne sera pas satisfait et/ou la mission devra être "
+"Si vous en voyez une, cela signifie que la marchandise n'est pas disponible. "
+"Le besoin de ce bien ne sera pas satisfait et/ou la mission devra être "
 "satisfaite d'une autre manière."
 
 #: scripts/scenario_49_allies.lua:3945
@@ -2892,30 +2887,28 @@ msgstr ""
 "plus grande explication ?"
 
 #: scripts/scenario_49_allies.lua:4163
-#, fuzzy
 msgctxt "explainGoodsTrade-comms"
 msgid ""
 "These are the typical trade goods available. Which one would you like a "
 "greater explanation of?"
 msgstr ""
-"Ce sont les marchandises commerciales classiques disponibles. Sur laquelle "
-"aimeriez-vous une plus grande explication ?"
+"Ce sont les marchandises les plus couramment utilisées pour faire du "
+"commerce. Sur laquelle aimeriez-vous une plus grande explication ?"
 
 #: scripts/scenario_49_allies.lua:4165
-#, fuzzy
 msgctxt "explainGoodsTrade-comms"
 msgid ""
 "Many people want or need food to sustain themselves or to enjoy. A good "
 "Relay officer will try to keep at least one food on board for the potential "
 "trade benefit. When offered for sale, it's usually very cheap."
 msgstr ""
-"Beaucoup de gens veulent ou ont besoin de nourriture pour subvenir à leurs "
-"besoins ou pour s'amuser. Un bon officier de relai essaiera de garder au "
-"moins un aliment à bord pour le bénéfice commercial potentiel.\n"
-"Lorsqu'il est proposé à la vente, il est généralement très bon marché."
+"Beaucoup de gens veulent ou ont besoin de nourriture (food) pour subvenir à "
+"leurs besoins ou pour s'amuser. Un bon officier des communications essaiera "
+"de garder au moins une nourriture à bord pour son potentiel commercial.\n"
+"Lorsqu'elle est proposée à la vente, la nourriture est généralement très bon "
+"marché."
 
 #: scripts/scenario_49_allies.lua:4166
-#, fuzzy
 msgctxt "explainGoodsTrade-comms"
 msgid ""
 "Many people need medicine to cure illness or symptoms associated with "
@@ -2923,15 +2916,14 @@ msgid ""
 "very high. A good Relay officer will try to keep at least on medicine on "
 "board for the potential trade benefit."
 msgstr ""
-"De nombreuses personnes ont besoin de médicaments pour soigner une maladie "
-"ou des symptômes associés à une maladie. Les médicaments sont presque aussi "
-"bon marché que la nourriture.\n"
-"Les avantages commerciaux sont généralement très élevés. Un bon officier de "
-"relai essaiera de garder au moins quelques médicaments à bord pour le "
-"bénéfice commercial potentiel."
+"De nombreuses personnes ont besoin de médicaments (medicine) pour soigner "
+"une maladie ou les symptômes associés à une maladie. Les médicaments sont "
+"presque aussi bon marché que la nourriture.\n"
+"Les avantages commerciaux sont généralement très élevés. Un bon officier des "
+"communications essaiera de garder au moins quelques médicaments à bord pour "
+"le bénéfice commercial potentiel."
 
 #: scripts/scenario_49_allies.lua:4167
-#, fuzzy
 msgctxt "explainGoodsTrade-comms"
 msgid ""
 "A luxury good is anything someone considers valuable. Luxury types include "
@@ -2940,88 +2932,83 @@ msgid ""
 "good Relay officer will be watching for relatively low priced luxury which "
 "can be used to trade for higher priced components or minerals."
 msgstr ""
-"Un produit de luxe est tout ce que quelqu'un considère comme précieux. Les "
-"types de produits de luxe comprennent les bijoux, les vêtements spécialisés, "
-"les objets d'art rares, etc.\n"
-"La valeur commerciale du luxe n'est pas aussi élevée que celle de la "
-"nourriture ou des médicaments, mais peut tout de même apporter certains "
-"avantages commerciaux.\n"
-"Un bon officier de relai surveillera les produits de luxe à prix "
-"relativement bas qui peuvent être utilisés en échange avec des composants ou "
-"des minéraux à prix plus élevé."
+"Les produits de luxe (luxury) sont tout ce que quelqu'un considère comme "
+"précieux. Les types de produits de luxe comprennent les bijoux, les "
+"vêtements de mode, les objets d'art rares, etc.\n"
+"La valeur commerciale des produits de luxe n'est pas aussi élevée que celle "
+"de la nourriture ou des médicaments, mais peut tout de même produire "
+"certains bénéfices.\n"
+"Un bon officier des communications surveillera les produits de luxe à prix "
+"relativement bas et pouvant être utilisés en échange de composants ou de "
+"minéraux à prix plus élevé."
 
 #: scripts/scenario_49_allies.lua:4177
-#, fuzzy
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "These are the typical mineral goods available. Which one would you like a "
 "greater explanation of?"
 msgstr ""
-"Ce sont les produits minéraux typiques disponibles. Sur lequel aimeriez-vous "
-"une plus grande explication ?"
+"Ce sont les minéraux typiques disponibles. Sur lequel aimeriez-vous une plus "
+"grande explication ?"
 
 #: scripts/scenario_49_allies.lua:4179
-#, fuzzy
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "Nickel is one of the most common metals found among asteroids. As such, it "
 "has become the defacto standard metal for most of the structure of ships."
 msgstr ""
-"Le nickel est l'un des métaux les plus courants extrait des astéroïdes. En "
-"tant que tel, il est devenu le métal standard de référence pour la plupart "
-"des structures de vaisseaux."
+"Le nickel est l'un des métaux les plus courants, extrait à partir des "
+"astéroïdes. En tant que tel, il est devenu le métal standard de référence "
+"pour la plupart des structures de vaisseaux."
 
 #: scripts/scenario_49_allies.lua:4180
-#, fuzzy
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "Platinum has electronic, explosive and medical applications, so techniciams "
 "use it to repair and upgrade a variety of ship systems."
 msgstr ""
-"Le platine a des applications électroniques, explosives et médicales, si "
-"bien que les techniciens l'utilisent pour réparer et mettre à niveau bon "
-"nombre de systèmes de vaisseaux."
+"Le platine (platinum) permet des applications électroniques, explosives et "
+"médicales, si bien que les techniciens l'utilisent pour réparer et mettre à "
+"niveau bon nombre de systèmes de vaisseaux."
 
 #: scripts/scenario_49_allies.lua:4181
-#, fuzzy
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "Civilians and military technicians value gold for a variety of reasons "
 "including use in jewelry and electronics."
 msgstr ""
-"Les techniciens civils et militaires apprécient l'or pour une multitude de "
-"raisons, notamment son utilisation dans la joaillerie et l'électronique."
+"Les techniciens civils et militaires apprécient l'or (gold) pour une "
+"multitude de raisons, notamment son utilisation dans la joaillerie et "
+"l'électronique."
 
 #: scripts/scenario_49_allies.lua:4182
-#, fuzzy
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "Due to its high potential for energy storage, engineers value dilithium in "
 "ship engines and shields."
 msgstr ""
-"En raison de son potentiel élevé de stockage d'énergie, les ingénieurs "
-"apprécient le dilithium dans les moteurs et les boucliers des vaisseaux."
+"En raison de son potentiel élevé dans le stockage de l'énergie, les "
+"ingénieurs apprécient particulièrement le dilithium pour les moteurs et les "
+"boucliers des vaisseaux."
 
 #: scripts/scenario_49_allies.lua:4183
-#, fuzzy
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "Designers and engineers use tritanium in many aspects of ship construction "
 "due to how it interacts with warp fields and jump mechanics."
 msgstr ""
-"Les concepteurs et ingénieurs utilisent le tritanium dans de nombreux "
-"aspects de la construction navale spatiale en raison de la façon dont il "
-"interagit avec les champs de distorsion et la mécanique des sauts."
+"Les concepteurs et ingénieurs utilisent le tritanium dans de nombreux sous-"
+"domaines de la construction navale spatiale en raison de la façon dont il "
+"interagit avec les champs de distorsion et la mécanique de téléportation."
 
 #: scripts/scenario_49_allies.lua:4184
-#, fuzzy
 msgctxt "explainGoodsMineral-comms"
 msgid ""
 "Engineers value cobalt due to its magnetic, alloy and energy storage "
 "applications."
 msgstr ""
 "Les ingénieurs apprécient le cobalt en raison de ses applications "
-"magnétiques, d'alliage et de stockage d'énergie."
+"magnétiques, sur les alliages ainsi que dans le stockage d'énergie."
 
 #: scripts/scenario_49_allies.lua:4210
 msgctxt "station-comms"
@@ -3295,7 +3282,7 @@ msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
 #, lua-format
 msgctxt "trade-comms"
 msgid "   %14s: %2i, %3i\n"
-msgstr "   %14s : x%2i,%3i rép l'unité.\n"
+msgstr "   %14s : x%2i, %3i rép l'unité.\n"
 
 #: scripts/scenario_49_allies.lua:4438
 msgctxt "trade-comms"
@@ -3464,7 +3451,6 @@ msgid " and will trade it for food"
 msgstr ". Elle l'échange contre de la nourriture (food)"
 
 #: scripts/scenario_49_allies.lua:4632
-#, fuzzy
 msgctxt "trade-comms"
 msgid " or luxury"
 msgstr " ou des produits de luxe (luxury)"
@@ -3594,10 +3580,9 @@ msgstr "Échangé"
 #: scripts/scenario_49_allies.lua:4839 scripts/scenario_49_allies.lua:4869
 #: scripts/scenario_49_allies.lua:5002 scripts/scenario_49_allies.lua:5043
 #: scripts/scenario_49_allies.lua:5068 scripts/scenario_49_allies.lua:5099
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Insufficient cargo space for purchase"
-msgstr "Espace de chargement insuffisant pour acheter"
+msgstr "Espace de chargement insuffisant pour acheter."
 
 #: scripts/scenario_49_allies.lua:4786 scripts/scenario_49_allies.lua:4816
 #: scripts/scenario_49_allies.lua:4841 scripts/scenario_49_allies.lua:4871
@@ -3632,7 +3617,6 @@ msgid "We will see to your destruction!"
 msgstr "Nous allons vous anéantir"
 
 #: scripts/scenario_49_allies.lua:4896
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
 msgstr "Votre race va s'éteindre ici et maintenant !"
@@ -3662,19 +3646,16 @@ msgid "We think not. It is you who will experience destruction!"
 msgstr "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
 
 #: scripts/scenario_49_allies.lua:4905
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
-msgstr "Vous n'avez aucun honneur."
+msgstr "Vous n'avez aucun honneur"
 
 #: scripts/scenario_49_allies.lua:4906
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Your insult has brought our wrath upon you. Prepare to die."
 msgstr "Votre insulte a attiré notre colère sur vous. Préparez-vous à mourir !"
 
 #: scripts/scenario_49_allies.lua:4907
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Your comments about honor have no meaning to us"
 msgstr "Vos commentaires sur l'honneur n'ont aucune signification pour nous."
@@ -3800,7 +3781,7 @@ msgstr "Où allez-vous ?"
 #, fuzzy
 msgctxt "trade-comms"
 msgid "Insufficient luxury to trade"
-msgstr "Stock de marchandises de luxe insuffisant pour commercer."
+msgstr "Stock de produits de luxe insuffisant pour commercer."
 
 #: scripts/scenario_49_allies.lua:5025
 #, fuzzy, lua-format
@@ -3916,10 +3897,9 @@ msgid "Single selected mission completed"
 msgstr "mission unique sélectionnée terminée."
 
 #: scripts/scenario_49_allies.lua:5654
-#, fuzzy
 msgctxt "msgMainscreen"
 msgid "All missions completed"
-msgstr "toutes les missions terminées."
+msgstr "les 3 missions terminées."
 
 #: scripts/scenario_49_allies.lua:5689
 msgctxt "doomsdayGoal-shipLog"
@@ -4270,7 +4250,7 @@ msgctxt "msgMainscreen"
 msgid "Mission ended because %s\n"
 msgstr ""
 "\n"
-"Mission accomplie : %s\n"
+"Mission terminée : %s\n"
 
 #: scripts/scenario_49_allies.lua:6717 scripts/scenario_49_allies.lua:6732
 msgctxt "msgMainscreen"

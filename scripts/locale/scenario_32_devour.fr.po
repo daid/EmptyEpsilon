@@ -2811,8 +2811,7 @@ msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
-"Ktzzzsss.\n"
-"\n"
+"...Ktzzzsss...\n"
 "Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_32_devour.lua:4041
@@ -2828,7 +2827,7 @@ msgstr "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
 #: scripts/scenario_32_devour.lua:4044
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
-msgstr "Vous n'avez aucun honneur."
+msgstr "Vous n'avez aucun honneur"
 
 #: scripts/scenario_32_devour.lua:4045
 msgctxt "shipEnemy-comms"
