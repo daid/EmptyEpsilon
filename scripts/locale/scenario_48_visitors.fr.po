@@ -2852,17 +2852,17 @@ msgstr "Vous devez rester amarré à la station pour cette action."
 #: scripts/scenario_48_visitors.lua:4631
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_48_visitors.lua:4632
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_48_visitors.lua:4633
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/scenario_48_visitors.lua:4640
 msgctxt "ammo-comms"
@@ -2898,12 +2898,13 @@ msgstr "Pas assez de réputation."
 #: scripts/scenario_48_visitors.lua:4660
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
-msgstr "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
+msgstr ""
+"Vous ne pouvez pas en recevoir autant que ce que nous voudrions vous vendre."
 
 #: scripts/scenario_48_visitors.lua:4661
 msgctxt "ammo-comms"
 msgid "Get just one"
-msgstr "Prendre juste celui-là"
+msgstr "Prendre juste 1 munition"
 
 #: scripts/scenario_48_visitors.lua:4667
 msgctxt "ammo-comms"

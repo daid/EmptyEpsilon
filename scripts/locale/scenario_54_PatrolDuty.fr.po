@@ -2472,7 +2472,7 @@ msgid ""
 "Insufficient cargo space for purchase"
 msgstr ""
 "\n"
-"Espace de chargement insuffisant pour acheter"
+"Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_54_PatrolDuty.lua:4789
 #: scripts/scenario_54_PatrolDuty.lua:4805
@@ -2494,7 +2494,7 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station"
+"Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_54_PatrolDuty.lua:4803
 msgctxt "trade-comms"
@@ -2503,7 +2503,7 @@ msgid ""
 "purchased"
 msgstr ""
 "\n"
-"Acheté"
+"1 marchandise achetée."
 
 #: scripts/scenario_54_PatrolDuty.lua:4815
 #, lua-format
@@ -3391,7 +3391,7 @@ msgstr "Réputation insuffisante pour acheter"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous ? (coût : %f rép)"
+msgstr "Où allez-vous ? (coût de l'information : %f rép)"
 
 #: scripts/scenario_54_PatrolDuty.lua:5959
 msgctxt "trade-comms"

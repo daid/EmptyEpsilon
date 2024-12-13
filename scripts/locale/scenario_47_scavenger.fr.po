@@ -2763,17 +2763,17 @@ msgstr "Vous devez rester amarré à la station pour cette action."
 #: scripts/scenario_47_scavenger.lua:3004
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_47_scavenger.lua:3005
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_47_scavenger.lua:3006
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/scenario_47_scavenger.lua:3013
 msgctxt "ammo-comms"
@@ -2811,12 +2811,13 @@ msgstr "Pas assez de réputation."
 #: scripts/scenario_47_scavenger.lua:3033
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
-msgstr "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
+msgstr ""
+"Vous ne pouvez pas en recevoir autant que ce que nous voudrions vous vendre."
 
 #: scripts/scenario_47_scavenger.lua:3034
 msgctxt "ammo-comms"
 msgid "Get just one"
-msgstr "Prendre juste celui-là."
+msgstr "Prendre juste 1 munition"
 
 #: scripts/scenario_47_scavenger.lua:3040
 msgctxt "ammo-comms"

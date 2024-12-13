@@ -306,8 +306,8 @@ msgstr ""
 msgctxt "gossip-comms"
 msgid "My mining friends tell me Krak or Kruk is about to strike it rich"
 msgstr ""
-"Mes amis mineurs m'ont dit que Krak ou Kruk était sur le point de devenir "
-"riche."
+"Mes amis mineurs m'ont dit que la station Krak ou Kruk était sur le point de "
+"devenir riche."
 
 #: scripts/scenario_55_defenderHunter.lua:171
 msgctxt "gossip-comms"
@@ -2423,7 +2423,7 @@ msgstr "Réputation insuffisante pour acheter."
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous ? (coût : %f réputation)"
+msgstr "Où allez-vous ? (coût de l'information : %f réputation)"
 
 #: scripts/scenario_55_defenderHunter.lua:3428
 #: scripts/scenario_55_defenderHunter.lua:3454

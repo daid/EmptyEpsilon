@@ -1996,7 +1996,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Espace de chargement insuffisant pour acheter."
+"Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_56_carrierTurret.lua:3213
 #: scripts/scenario_56_carrierTurret.lua:3218
@@ -2058,7 +2058,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"1 marchandise échangée."
+"Marchandises échangées."
 
 #: scripts/scenario_56_carrierTurret.lua:3278
 #: scripts/scenario_56_carrierTurret.lua:4135
@@ -2140,17 +2140,17 @@ msgstr "Vous devez rester amarré à la station pour cette action."
 #: scripts/scenario_56_carrierTurret.lua:3435
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_56_carrierTurret.lua:3436
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_56_carrierTurret.lua:3437
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/scenario_56_carrierTurret.lua:3444
 msgctxt "ammo-comms"
@@ -2425,27 +2425,27 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:3905
 msgctxt "trade-comms"
 msgid " and will trade it for medicine"
-msgstr " Elle l'échange contre des médicaments (medicine)"
+msgstr ". Elle l'échange contre des médicaments (medicine)"
 
 #: scripts/scenario_56_carrierTurret.lua:3910
 msgctxt "trade-comms"
 msgid " or food"
-msgstr " ou de la nourriture (food)."
+msgstr " ou de la nourriture (food)"
 
 #: scripts/scenario_56_carrierTurret.lua:3912
 msgctxt "trade-comms"
 msgid " and will trade it for food"
-msgstr " Elle l'échange contre de la nourriture (food)"
+msgstr ". Elle l'échange contre de la nourriture (food)"
 
 #: scripts/scenario_56_carrierTurret.lua:3918
 msgctxt "trade-comms"
 msgid " or luxury"
-msgstr " ou des produits de luxe (luxury)."
+msgstr " ou des produits de luxe (luxury)"
 
 #: scripts/scenario_56_carrierTurret.lua:3920
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
-msgstr " Elle l'échange contre des produits de luxe (luxury)"
+msgstr ". Elle l'échange contre des produits de luxe (luxury)"
 
 #: scripts/scenario_56_carrierTurret.lua:3976
 #: scripts/scenario_56_carrierTurret.lua:4204
@@ -2741,7 +2741,7 @@ msgstr "Réputation insuffisante pour acheter."
 #: scripts/scenario_56_carrierTurret.lua:4315
 msgctxt "trade-comms"
 msgid "Purchased"
-msgstr "Marchandise achetée."
+msgstr "1 marchandise achetée."
 
 #: scripts/scenario_56_carrierTurret.lua:4188
 #: scripts/scenario_56_carrierTurret.lua:4278

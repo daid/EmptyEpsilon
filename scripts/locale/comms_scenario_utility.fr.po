@@ -7193,7 +7193,7 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:5679
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/comms_scenario_utility.lua:5680
 msgctxt "ammo-comms"
@@ -7217,7 +7217,7 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:5685
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/comms_scenario_utility.lua:5686
 msgctxt "ammo-comms"
@@ -7241,13 +7241,13 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:5691
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/comms_scenario_utility.lua:5692
 #, fuzzy
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons on principle."
-msgstr "Par principe, nous ne vendons pas ce type d’armes."
+msgstr "Par principe, nous ne vendons pas ce type d’arme."
 
 #: scripts/comms_scenario_utility.lua:5693
 msgctxt "ammo-comms"
@@ -10083,7 +10083,7 @@ msgctxt "trade-comms"
 msgid "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station."
+"Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/comms_scenario_utility.lua:8072
 #: scripts/comms_scenario_utility.lua:8110
@@ -10184,7 +10184,7 @@ msgstr "Vous devez rester amarré pour vendre votre marchandise."
 #: scripts/comms_scenario_utility.lua:8160
 msgctxt "trade-comms"
 msgid "One sold"
-msgstr "Un de vendu."
+msgstr "1 marchandise vendue."
 
 #: scripts/comms_scenario_utility.lua:8161
 msgctxt "trade-comms"
@@ -11306,7 +11306,7 @@ msgstr "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
 #: scripts/comms_scenario_utility.lua:9097
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
-msgstr "Vous n'avez aucun honneur."
+msgstr "Vous n'avez aucun honneur"
 
 #: scripts/comms_scenario_utility.lua:9098
 msgctxt "shipEnemy-comms"

@@ -1703,7 +1703,7 @@ msgstr "Acheté"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous ? (coût : %f rép)"
+msgstr "Où allez-vous ? (coût de l'information : %f rép)"
 
 #: scripts/scenario_58_race.lua:2661
 msgctxt "needRep-comms"
