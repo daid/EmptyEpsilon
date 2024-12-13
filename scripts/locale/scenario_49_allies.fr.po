@@ -3552,7 +3552,7 @@ msgstr "Stock insuffisant sur le cargo pour commercer."
 #, fuzzy
 msgctxt "trade-comms"
 msgid "Traded"
-msgstr "Échangé"
+msgstr "Marchandises échangées."
 
 #: scripts/scenario_49_allies.lua:4784 scripts/scenario_49_allies.lua:4814
 #: scripts/scenario_49_allies.lua:4839 scripts/scenario_49_allies.lua:4869

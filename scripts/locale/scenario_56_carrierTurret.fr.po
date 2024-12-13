@@ -2699,17 +2699,17 @@ msgstr "Où allez-vous ?"
 #: scripts/scenario_56_carrierTurret.lua:4137
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter for trade"
-msgstr "Stock insuffisant sur le cargo pour commercer"
+msgstr "Stock insuffisant sur le cargo pour commercer."
 
 #: scripts/scenario_56_carrierTurret.lua:4142
 msgctxt "trade-comms"
 msgid "Traded"
-msgstr "Échangé"
+msgstr "Marchandises échangées."
 
 #: scripts/scenario_56_carrierTurret.lua:4149
 msgctxt "trade-comms"
 msgid "Insufficient luxury to trade"
-msgstr "Stock de marchandises de luxe insuffisant pour commercer."
+msgstr "Stock de produits de luxe insuffisant pour commercer."
 
 #: scripts/scenario_56_carrierTurret.lua:4161
 #: scripts/scenario_56_carrierTurret.lua:4225
