@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -1061,7 +1061,7 @@ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Achetez 1 %s pour %i rép"
+msgstr "Acheter 1 %s pour %i rép"
 
 #: scripts/scenario_58_race.lua:1860
 #, lua-format
@@ -1095,7 +1095,8 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station"
+"\n"
+"Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_58_race.lua:1874
 msgctxt "trade-comms"
@@ -1104,7 +1105,8 @@ msgid ""
 "purchased"
 msgstr ""
 "\n"
-"Acheté"
+"\n"
+"1 marchandise achetée."
 
 #: scripts/scenario_58_race.lua:1897
 #, lua-format
@@ -1127,7 +1129,7 @@ msgid ""
 "Traded"
 msgstr ""
 "\n"
-"Échangé"
+"Marchandises échangées."
 
 #: scripts/scenario_58_race.lua:1929 scripts/scenario_58_race.lua:2610
 #, lua-format
@@ -1663,29 +1665,29 @@ msgstr "Où allez-vous ?"
 #: scripts/scenario_58_race.lua:2612
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter for trade"
-msgstr "Stock insuffisant sur le cargo pour commercer"
+msgstr "Stock insuffisant sur le cargo pour commercer."
 
 #: scripts/scenario_58_race.lua:2617
 msgctxt "trade-comms"
 msgid "Traded"
-msgstr "Échangé"
+msgstr "Marchandises échangées."
 
 #: scripts/scenario_58_race.lua:2624
 msgctxt "trade-comms"
 msgid "Insufficient luxury to trade"
-msgstr "Luxe insuffisant pour commercer"
+msgstr "Stock de produits de luxe insuffisant pour commercer."
 
 #: scripts/scenario_58_race.lua:2636 scripts/scenario_58_race.lua:2677
 #: scripts/scenario_58_race.lua:2703 scripts/scenario_58_race.lua:2734
 msgctxt "trade-comms"
 msgid "Insufficient cargo space for purchase"
-msgstr "Espace de chargement insuffisant pour acheter"
+msgstr "Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_58_race.lua:2638 scripts/scenario_58_race.lua:2679
 #: scripts/scenario_58_race.lua:2705 scripts/scenario_58_race.lua:2736
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter"
-msgstr "Stock insuffisant sur le cargo"
+msgstr "Stock insuffisant sur le cargo."
 
 #: scripts/scenario_58_race.lua:2641 scripts/scenario_58_race.lua:2682
 #: scripts/scenario_58_race.lua:2708 scripts/scenario_58_race.lua:2739
@@ -1697,13 +1699,13 @@ msgstr "Réputation insuffisante pour acheter."
 #: scripts/scenario_58_race.lua:2713 scripts/scenario_58_race.lua:2744
 msgctxt "trade-comms"
 msgid "Purchased"
-msgstr "Acheté"
+msgstr "1 marchandise achetée."
 
 #: scripts/scenario_58_race.lua:2659
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous ? (coût : %f rép)"
+msgstr "Où allez-vous ? (coût de l'information : %f rép)"
 
 #: scripts/scenario_58_race.lua:2661
 msgctxt "needRep-comms"

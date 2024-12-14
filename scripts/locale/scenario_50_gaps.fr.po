@@ -244,7 +244,7 @@ msgstr ""
 #: scripts/scenario_50_gaps.lua:565
 msgctxt "scienceDescription-station"
 msgid "Warp and Impulse engine manufacturing"
-msgstr "Fabrication de moteurs à impulsions et à vitesse lumière"
+msgstr "Fabrication de moteurs à impulsion et à vitesse lumière"
 
 #: scripts/scenario_50_gaps.lua:577
 msgctxt "stationGeneralInfo-comms"
@@ -252,7 +252,7 @@ msgid ""
 "We manufacture warp, impulse and jump engines for the human navy fleet as "
 "well as other independent clients on a contract basis"
 msgstr ""
-"Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
+"Nous fabriquons des moteurs à impulsion, à vitesse lumière et pour "
 "téléporteurs pour la flotte de la Marine humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
 
@@ -475,14 +475,14 @@ msgstr ""
 #: scripts/scenario_50_gaps.lua:773 scripts/scenario_50_gaps.lua:1566
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
-msgstr "Composants de moteurs à impulsions"
+msgstr "Composants de moteurs à impulsion"
 
 #: scripts/scenario_50_gaps.lua:788
 msgctxt "stationGeneralInfo-comms"
 msgid "We supply high quality impulse engines and parts for use aboard ships"
 msgstr ""
-"Nous fournissons des moteurs à impulsions et des pièces de haute qualité "
-"pour une utilisation à bord des navires."
+"Nous fournissons des moteurs à impulsion et des pièces de haute qualité pour "
+"une utilisation à bord des navires."
 
 #: scripts/scenario_50_gaps.lua:789
 msgctxt "stationStory-comms"
@@ -1823,7 +1823,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_50_gaps.lua:2513
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_50_gaps.lua:2523
 msgctxt "trade-comms"
@@ -1874,7 +1874,7 @@ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Achetez 1 %s pour %i rép"
+msgstr "Acheter 1 %s pour %i rép"
 
 #: scripts/scenario_50_gaps.lua:2558
 #, lua-format
@@ -1889,7 +1889,7 @@ msgid ""
 "Insufficient cargo space for purchase"
 msgstr ""
 "\n"
-"Espace de chargement insuffisant pour acheter"
+"Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_50_gaps.lua:2562 scripts/scenario_50_gaps.lua:2567
 msgctxt "needRep-comms"
@@ -1908,7 +1908,8 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station"
+"\n"
+"Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_50_gaps.lua:2572
 msgctxt "trade-comms"
@@ -1917,7 +1918,8 @@ msgid ""
 "purchased"
 msgstr ""
 "\n"
-"Acheté"
+"\n"
+"1 marchandise achetée."
 
 #: scripts/scenario_50_gaps.lua:2595
 #, lua-format
@@ -1940,7 +1942,7 @@ msgid ""
 "Traded"
 msgstr ""
 "\n"
-"Échangé"
+"Marchandises échangées."
 
 #: scripts/scenario_50_gaps.lua:2627 scripts/scenario_50_gaps.lua:3394
 #, lua-format
@@ -2494,27 +2496,27 @@ msgstr ""
 #: scripts/scenario_50_gaps.lua:3200
 msgctxt "trade-comms"
 msgid " and will trade it for medicine"
-msgstr " et va l'échanger contre des Médicaments (medicine)"
+msgstr ". Elle l'échange contre des médicaments (medicine)"
 
 #: scripts/scenario_50_gaps.lua:3205
 msgctxt "trade-comms"
 msgid " or food"
-msgstr " ou de la Nourriture (food)"
+msgstr " ou de la nourriture (food)"
 
 #: scripts/scenario_50_gaps.lua:3207
 msgctxt "trade-comms"
 msgid " and will trade it for food"
-msgstr " et va l'échanger contre de la Nourriture (food)"
+msgstr ". Elle l'échange contre de la nourriture (food)"
 
 #: scripts/scenario_50_gaps.lua:3213
 msgctxt "trade-comms"
 msgid " or luxury"
-msgstr " ou des Produits de luxe (luxury)"
+msgstr " ou des produits de luxe (luxury)"
 
 #: scripts/scenario_50_gaps.lua:3215
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
-msgstr " et va l'échanger contre des Produits de luxe (luxury)"
+msgstr ". Elle l'échange contre des produits de luxe (luxury)"
 
 #: scripts/scenario_50_gaps.lua:3267 scripts/scenario_50_gaps.lua:3440
 msgctxt "shipAssist-comms"
@@ -2744,29 +2746,29 @@ msgstr "Où allez-vous ?"
 #: scripts/scenario_50_gaps.lua:3396
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter for trade"
-msgstr "Stock insuffisant sur le cargo pour commercer"
+msgstr "Stock insuffisant sur le cargo pour commercer."
 
 #: scripts/scenario_50_gaps.lua:3401
 msgctxt "trade-comms"
 msgid "Traded"
-msgstr "Échangé"
+msgstr "Marchandises échangées."
 
 #: scripts/scenario_50_gaps.lua:3408
 msgctxt "trade-comms"
 msgid "Insufficient luxury to trade"
-msgstr "Luxe insuffisant pour commercer"
+msgstr "Stock de produits de luxe insuffisant pour commercer."
 
 #: scripts/scenario_50_gaps.lua:3420 scripts/scenario_50_gaps.lua:3461
 #: scripts/scenario_50_gaps.lua:3487 scripts/scenario_50_gaps.lua:3518
 msgctxt "trade-comms"
 msgid "Insufficient cargo space for purchase"
-msgstr "Espace de chargement insuffisant pour acheter"
+msgstr "Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_50_gaps.lua:3422 scripts/scenario_50_gaps.lua:3463
 #: scripts/scenario_50_gaps.lua:3489 scripts/scenario_50_gaps.lua:3520
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter"
-msgstr "Stock insuffisant sur le cargo"
+msgstr "Stock insuffisant sur le cargo."
 
 #: scripts/scenario_50_gaps.lua:3425 scripts/scenario_50_gaps.lua:3466
 #: scripts/scenario_50_gaps.lua:3492 scripts/scenario_50_gaps.lua:3523
@@ -2778,13 +2780,13 @@ msgstr "Réputation insuffisante pour acheter."
 #: scripts/scenario_50_gaps.lua:3497 scripts/scenario_50_gaps.lua:3528
 msgctxt "trade-comms"
 msgid "Purchased"
-msgstr "Acheté"
+msgstr "1 marchandise achetée."
 
 #: scripts/scenario_50_gaps.lua:3443
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous ? (coût : %f rép)"
+msgstr "Où allez-vous ? (coût de l'information : %f rép)"
 
 #: scripts/scenario_50_gaps.lua:3507
 msgctxt "trade-comms"

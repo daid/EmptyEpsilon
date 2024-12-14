@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -36,8 +36,8 @@ msgstr ""
 "Mission : Stopper le dévoreur de planètes avant que toutes les planètes ne "
 "disparaissent.\n"
 "\n"
-"Scénario écrit pour les jeux EE du 4 mai 2023 : \"May the 4th be with "
-"you\" (Que la \"fourth\" soit avec toi)\n"
+"Scénario écrit pour les jeux EE du 4 mai 2023 : \"May the 4th be with you\" "
+"(Que la \"fourth\" soit avec toi)\n"
 "\n"
 "Version 1.0.2 - Mai 2024\n"
 "\n"
@@ -1602,7 +1602,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_32_devour.lua:2654 scripts/scenario_32_devour.lua:3531
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_32_devour.lua:2665
 msgctxt "station-comms"
@@ -1755,7 +1755,7 @@ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Achetez 1 %s pour %i rép"
+msgstr "Acheter 1 %s pour %i rép"
 
 #: scripts/scenario_32_devour.lua:2739
 #, lua-format
@@ -1770,7 +1770,8 @@ msgid ""
 "Insufficient cargo space for purchase"
 msgstr ""
 "\n"
-"Espace de chargement insuffisant pour acheter"
+"\n"
+"Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_32_devour.lua:2743 scripts/scenario_32_devour.lua:2759
 msgctxt "needRep-comms"
@@ -1789,7 +1790,7 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station"
+"Stock insuffisant dans la station."
 
 #: scripts/scenario_32_devour.lua:2757
 msgctxt "trade-comms"
@@ -2082,17 +2083,17 @@ msgstr "Diffuser le virus sur le Dévoreur de planètes."
 #: scripts/scenario_32_devour.lua:3122
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_32_devour.lua:3123
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_32_devour.lua:3124
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/scenario_32_devour.lua:3131
 msgctxt "ammo-comms"
@@ -2128,12 +2129,13 @@ msgstr "Pas assez de réputation."
 #: scripts/scenario_32_devour.lua:3151
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
-msgstr "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
+msgstr ""
+"Vous ne pouvez pas en recevoir autant que ce que nous voudrions vous vendre."
 
 #: scripts/scenario_32_devour.lua:3152
 msgctxt "ammo-comms"
 msgid "Get just one"
-msgstr "Prendre juste celui-là"
+msgstr "Prendre juste 1 munition"
 
 #: scripts/scenario_32_devour.lua:3179
 msgctxt "station-comms"
@@ -2811,8 +2813,7 @@ msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
-"Ktzzzsss.\n"
-"\n"
+"...Ktzzzsss...\n"
 "Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_32_devour.lua:4041
@@ -2828,7 +2829,7 @@ msgstr "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
 #: scripts/scenario_32_devour.lua:4044
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
-msgstr "Vous n'avez aucun honneur."
+msgstr "Vous n'avez aucun honneur"
 
 #: scripts/scenario_32_devour.lua:4045
 msgctxt "shipEnemy-comms"

@@ -1502,7 +1502,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_74_omicron.lua:3824 scripts/scenario_74_omicron.lua:4657
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_74_omicron.lua:3835 scripts/scenario_74_omicron.lua:4448
 msgctxt "orders-comms"
@@ -1578,7 +1578,7 @@ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Achetez 1 %s pour %i rép"
+msgstr "Acheter 1 %s pour %i rép"
 
 #: scripts/scenario_74_omicron.lua:3883
 #, lua-format
@@ -1593,7 +1593,7 @@ msgid ""
 "Insufficient cargo space for purchase"
 msgstr ""
 "\n"
-"Espace de chargement insuffisant pour acheter"
+"Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_74_omicron.lua:3887 scripts/scenario_74_omicron.lua:3903
 msgctxt "needRep-comms"
@@ -1612,7 +1612,7 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station"
+"Stock insuffisant dans la station."
 
 #: scripts/scenario_74_omicron.lua:3901
 msgctxt "trade-comms"
@@ -1621,7 +1621,7 @@ msgid ""
 "purchased"
 msgstr ""
 "\n"
-"Acheté"
+"Marchandise achetée."
 
 #: scripts/scenario_74_omicron.lua:3913
 #, lua-format
@@ -1895,17 +1895,17 @@ msgstr "Vous devez rester amarré à la station pour cette action."
 #: scripts/scenario_74_omicron.lua:4233
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_74_omicron.lua:4234
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_74_omicron.lua:4235
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/scenario_74_omicron.lua:4242
 msgctxt "ammo-comms"
@@ -1941,12 +1941,13 @@ msgstr "Pas assez de réputation."
 #: scripts/scenario_74_omicron.lua:4262
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
-msgstr "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
+msgstr ""
+"Vous ne pouvez pas en recevoir autant que ce que nous voudrions vous vendre."
 
 #: scripts/scenario_74_omicron.lua:4263
 msgctxt "ammo-comms"
 msgid "Get just one"
-msgstr "Prendre juste celui-là"
+msgstr "Prendre juste 1 munition"
 
 #: scripts/scenario_74_omicron.lua:4290
 msgctxt "station-comms"

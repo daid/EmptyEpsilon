@@ -2933,9 +2933,10 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_59_border.lua:5373
+#, fuzzy
 msgctxt "buttonGM"
 msgid "Player Missile Cr."
-msgstr "Croiseur de missiles joueur"
+msgstr "Croiseur lance-missiles joueur"
 
 #: scripts/scenario_59_border.lua:5374
 msgctxt "msgGM"
@@ -4171,7 +4172,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_59_border.lua:7782 scripts/scenario_59_border.lua:9020
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_59_border.lua:7793 scripts/scenario_59_border.lua:9055
 msgctxt "station-comms"
@@ -4510,7 +4511,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:8088 scripts/scenario_59_border.lua:8137
 #: scripts/scenario_59_border.lua:8178 scripts/scenario_59_border.lua:8463
 #: scripts/scenario_59_border.lua:8520 scripts/scenario_59_border.lua:8556
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "gossip-comms"
 msgid ""
 "%s\n"
@@ -4518,7 +4519,7 @@ msgid ""
 "   %s"
 msgstr ""
 "%s\n"
-"Rumeurs :\n"
+"Commérages :\n"
 "   %s"
 
 #: scripts/scenario_59_border.lua:8091 scripts/scenario_59_border.lua:8140
@@ -4654,10 +4655,10 @@ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 #: scripts/scenario_59_border.lua:10265 scripts/scenario_59_border.lua:10856
 #: scripts/scenario_59_border.lua:10878 scripts/scenario_59_border.lua:10902
 #: scripts/scenario_59_border.lua:10924 scripts/scenario_59_border.lua:10948
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Achetez 1 %s pour %i rép"
+msgstr "Acheter 1 %s pour %i rép"
 
 #: scripts/scenario_59_border.lua:8250
 #, lua-format
@@ -4890,22 +4891,19 @@ msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
 
 #: scripts/scenario_59_border.lua:8601
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_59_border.lua:8602
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_59_border.lua:8603
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/scenario_59_border.lua:8610
 #, fuzzy
@@ -4942,16 +4940,15 @@ msgid "Not enough reputation."
 msgstr "Pas assez de réputation."
 
 #: scripts/scenario_59_border.lua:8630
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
-msgstr "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
+msgstr ""
+"Vous ne pouvez pas en recevoir autant que ce que nous voudrions vous vendre."
 
 #: scripts/scenario_59_border.lua:8631
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Get just one"
-msgstr "Prendre juste celui-là"
+msgstr "Prendre juste 1 munition"
 
 #: scripts/scenario_59_border.lua:8637
 msgctxt "ammo-comms"
@@ -6283,23 +6280,22 @@ msgstr "Liq. de ref. manuel"
 #: scripts/scenario_59_border.lua:12060
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_59_border.lua:12065
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_59_border.lua:12070
 msgctxt "coolant-buttonDamageControl"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_59_border.lua:12122
-#, fuzzy
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
-msgstr "Collecte du liq. de ref."
+msgstr "Collecte en cours"
 
 #: scripts/scenario_59_border.lua:12139
 #, lua-format

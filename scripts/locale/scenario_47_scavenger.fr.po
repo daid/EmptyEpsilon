@@ -1648,7 +1648,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_47_scavenger.lua:3259
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_47_scavenger.lua:2088
 #: scripts/scenario_47_scavenger.lua:3087
@@ -1762,7 +1762,7 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:2508
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr "Réputation insuffisante."
+msgstr "Vous n'avez pas assez de réputation."
 
 #: scripts/scenario_47_scavenger.lua:2202
 msgctxt "stationServices-comms"
@@ -2317,7 +2317,7 @@ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Achetez 1 %s pour %i rép"
+msgstr "Acheter 1 %s pour %i rép"
 
 #: scripts/scenario_47_scavenger.lua:2546
 #, lua-format
@@ -2763,17 +2763,17 @@ msgstr "Vous devez rester amarré à la station pour cette action."
 #: scripts/scenario_47_scavenger.lua:3004
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_47_scavenger.lua:3005
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_47_scavenger.lua:3006
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/scenario_47_scavenger.lua:3013
 msgctxt "ammo-comms"
@@ -2811,12 +2811,13 @@ msgstr "Pas assez de réputation."
 #: scripts/scenario_47_scavenger.lua:3033
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
-msgstr "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
+msgstr ""
+"Vous ne pouvez pas en recevoir autant que ce que nous voudrions vous vendre."
 
 #: scripts/scenario_47_scavenger.lua:3034
 msgctxt "ammo-comms"
 msgid "Get just one"
-msgstr "Prendre juste celui-là."
+msgstr "Prendre juste 1 munition"
 
 #: scripts/scenario_47_scavenger.lua:3040
 msgctxt "ammo-comms"
@@ -3030,7 +3031,7 @@ msgstr "Pas assez de réputation !"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Adder MK5 reinforcements! (%d rep)"
-msgstr "Merci de nous envoyer un Adder MK5 en renforts ! (%d rép)"
+msgstr "Merci de nous envoyer un Vipère MK5 en renforts ! (%d rép)"
 
 #: scripts/scenario_47_scavenger.lua:3310
 #: scripts/scenario_47_scavenger.lua:3330
@@ -3066,7 +3067,7 @@ msgstr "Merci de nous envoyer un Phobos T3 en renforts ! (%d rép)"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Stalker Q7 reinforcements! (%d rep)"
-msgstr "Merci de nous envoyer un Stalker Q7 en renforts ! (%d rép)"
+msgstr "Merci de nous envoyer un Harceleur Q7 en renforts ! (%d rép)"
 
 #: scripts/scenario_47_scavenger.lua:3416
 msgctxt "shipAssist-comms"
@@ -3396,8 +3397,7 @@ msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
-"Ktzzzsss.\n"
-"\n"
+"...Ktzzzsss...\n"
 "Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_47_scavenger.lua:3788
@@ -3413,7 +3413,7 @@ msgstr "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
 #: scripts/scenario_47_scavenger.lua:3791
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
-msgstr "Vous n'avez aucun honneur."
+msgstr "Vous n'avez aucun honneur"
 
 #: scripts/scenario_47_scavenger.lua:3792
 msgctxt "shipEnemy-comms"

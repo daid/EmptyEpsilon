@@ -40,9 +40,9 @@ msgstr ""
 "- Titre original : Carriers and turrets\n"
 "- Auteur : Xansta (Oct. 2018)\n"
 "- Traduction FR : Muerte (Nov. 24)\n"
-"Texte et scénario en cours de vérification : actuellement ce scenario "
-"contient des bogues et est susceptible de ne pas fonctionner correctement. "
-"Muerte (Nov. 24)\n"
+"Relecture en cours 77% ; Test du scénario en cours : contient actuellement "
+"des bogues et est susceptible de ne pas fonctionner correctement. Muerte "
+"(Nov. 24)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -240,7 +240,7 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:1186
 msgctxt "scienceDescription-station"
 msgid "Warp and Impulse engine manufacturing"
-msgstr "Fabrication de moteurs à impulsions et à vitesse lumière"
+msgstr "Fabrication de moteurs à impulsion et à vitesse lumière"
 
 #: scripts/scenario_56_carrierTurret.lua:1198
 msgctxt "stationGeneralInfo-comms"
@@ -248,7 +248,7 @@ msgid ""
 "We manufacture warp, impulse and jump engines for the human navy fleet as "
 "well as other independent clients on a contract basis"
 msgstr ""
-"Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
+"Nous fabriquons des moteurs à impulsion, à vitesse lumière et pour "
 "téléporteurs pour la flotte de la Marine humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
 
@@ -475,14 +475,14 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:2187
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
-msgstr "Composants de moteurs à impulsions"
+msgstr "Composants de moteurs à impulsion"
 
 #: scripts/scenario_56_carrierTurret.lua:1409
 msgctxt "stationGeneralInfo-comms"
 msgid "We supply high quality impulse engines and parts for use aboard ships"
 msgstr ""
-"Nous fournissons des moteurs à impulsions et des pièces de haute qualité "
-"pour une utilisation à bord des vaisseaux."
+"Nous fournissons des moteurs à impulsion et des pièces de haute qualité pour "
+"une utilisation à bord des vaisseaux."
 
 #: scripts/scenario_56_carrierTurret.lua:1410
 msgctxt "stationStory-comms"
@@ -1529,7 +1529,7 @@ msgstr "Précédent"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
+msgstr "Recruter un membre de l'équipe de réparation (%i rép)"
 
 #: scripts/scenario_56_carrierTurret.lua:2920
 #: scripts/scenario_56_carrierTurret.lua:2936
@@ -1590,19 +1590,19 @@ msgid ""
 msgstr ""
 "[Paulina Lindquist]\n"
 "Merci pour le %s. Veuillez attendre ici, je reviens.\n"
-"...\n"
-"Après quelques minutes…\n"
+"\n"
+"...Après quelques minutes.\n"
 "\n"
 "Voilà, j'ai transmis des instructions pour mettre à niveau la manœuvre de "
 "votre vaisseau. N'importe quelle station amie pourra s'en occuper, mais vous "
-"devrez pour cela leur fournir 1 composant à Impulsions (Impulse)."
+"devrez pour cela leur fournir 1 composant à impulsion (impulse)."
 
 #: scripts/scenario_56_carrierTurret.lua:2985
 msgctxt "upgradePaulinaOrders-comms"
 msgid "Get spin upgrade from friendly station for impulse"
 msgstr ""
 "   Obtenir une mise à niveau de votre système de manœuvre depuis une station "
-"amie pour 1 composant à Impulsions (Impulse)."
+"amie pour 1 composant d'impulsion (impulse)."
 
 #: scripts/scenario_56_carrierTurret.lua:3005
 #: scripts/scenario_56_carrierTurret.lua:3625
@@ -1881,7 +1881,7 @@ msgstr "   Détruire la station ennemie %s se trouvant dans le secteur %s."
 #: scripts/scenario_56_carrierTurret.lua:3580
 msgctxt "upgradePaulina-comms"
 msgid "Upgrade ship maneuverability for impulse"
-msgstr "Améliorer la manœuvre du vaisseau pour 1 Impulsion"
+msgstr "Améliorer la manœuvre du vaisseau pour 1 impulsion"
 
 #: scripts/scenario_56_carrierTurret.lua:3136
 #: scripts/scenario_56_carrierTurret.lua:3582
@@ -1894,7 +1894,7 @@ msgstr "Que faites-vous là ? Vous avez déjà effectué cette mise à niveau."
 msgctxt "upgradePaulina-comms"
 msgid "Maneuverability upgraded by 50%"
 msgstr ""
-"Après quelques travaux rapides sur votre vaisseau…\n"
+"...Après quelques travaux rapides sur votre vaisseau.\n"
 "\n"
 "C'est fait, votre vitesse de manœuvre a été augmentée de 50%."
 
@@ -1921,7 +1921,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_56_carrierTurret.lua:3164
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_56_carrierTurret.lua:3174
 msgctxt "trade-comms"
@@ -1996,7 +1996,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Espace de chargement insuffisant pour acheter."
+"Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_56_carrierTurret.lua:3213
 #: scripts/scenario_56_carrierTurret.lua:3218
@@ -2005,6 +2005,7 @@ msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
+"\n"
 "\n"
 "Réputation insuffisante pour acheter."
 
@@ -2035,7 +2036,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr "Échanger de la Nourriture (food) contre %s"
+msgstr "Échanger de la nourriture (food) contre %s"
 
 #: scripts/scenario_56_carrierTurret.lua:3247
 #: scripts/scenario_56_carrierTurret.lua:3279
@@ -2057,7 +2058,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"1 marchandise échangée."
+"Marchandises échangées."
 
 #: scripts/scenario_56_carrierTurret.lua:3278
 #: scripts/scenario_56_carrierTurret.lua:4135
@@ -2070,7 +2071,7 @@ msgstr "Échanger des produits de luxe (luxury) contre %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr "Échanger des Médicaments (medicine) contre %s"
+msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_56_carrierTurret.lua:3340
 #: scripts/scenario_56_carrierTurret.lua:3825
@@ -2139,17 +2140,17 @@ msgstr "Vous devez rester amarré à la station pour cette action."
 #: scripts/scenario_56_carrierTurret.lua:3435
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_56_carrierTurret.lua:3436
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_56_carrierTurret.lua:3437
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/scenario_56_carrierTurret.lua:3444
 msgctxt "ammo-comms"
@@ -2269,9 +2270,10 @@ msgid ""
 "Friendly stations generally have food or medicine or both. Neutral stations "
 "often trade their goods for food, medicine or luxury."
 msgstr ""
-"Les stations amicales ont souvent de la nourriture (food) ou des médicaments "
+"Les stations amies ont souvent de la nourriture (food) ou des médicaments "
 "(medicine) ou les deux. Les stations neutres peuvent échanger leurs "
-"marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
+"marchandises contre de la nourriture, des médicaments ou des produits de "
+"luxe (luxury)."
 
 #: scripts/scenario_56_carrierTurret.lua:3533
 msgctxt "trade-comms"
@@ -2423,7 +2425,7 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:3905
 msgctxt "trade-comms"
 msgid " and will trade it for medicine"
-msgstr " et l'échange contre des médicaments (medicine)"
+msgstr ". Elle l'échange contre des médicaments (medicine)"
 
 #: scripts/scenario_56_carrierTurret.lua:3910
 msgctxt "trade-comms"
@@ -2433,7 +2435,7 @@ msgstr " ou de la nourriture (food)"
 #: scripts/scenario_56_carrierTurret.lua:3912
 msgctxt "trade-comms"
 msgid " and will trade it for food"
-msgstr " et l'échange contre de la Nourriture (food)"
+msgstr ". Elle l'échange contre de la nourriture (food)"
 
 #: scripts/scenario_56_carrierTurret.lua:3918
 msgctxt "trade-comms"
@@ -2443,13 +2445,15 @@ msgstr " ou des produits de luxe (luxury)"
 #: scripts/scenario_56_carrierTurret.lua:3920
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
-msgstr " et l'échange contre des Produits de luxe (luxury)"
+msgstr ". Elle l'échange contre des produits de luxe (luxury)"
 
 #: scripts/scenario_56_carrierTurret.lua:3976
 #: scripts/scenario_56_carrierTurret.lua:4204
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr "Que voulez-vous ?"
+msgstr ""
+"Salutations,\n"
+"Que nous voulez-vous ?"
 
 #: scripts/scenario_56_carrierTurret.lua:3978
 msgctxt "shipAssist-comms"
@@ -2528,7 +2532,7 @@ msgstr "Boucliers arrière : %d%%\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr "Boucliers %s : %d%%\n"
+msgstr "Bouclier %s : %d%%\n"
 
 #: scripts/scenario_56_carrierTurret.lua:4019
 #, lua-format
@@ -2575,7 +2579,7 @@ msgstr "Quelle cible ennemie ?"
 #: scripts/scenario_56_carrierTurret.lua:4075
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr "Nous allons vous détruire !"
+msgstr "Nous allons vous anéantir"
 
 #: scripts/scenario_56_carrierTurret.lua:4076
 msgctxt "shipEnemy-comms"
@@ -2585,7 +2589,7 @@ msgstr "Votre race va s'éteindre ici et maintenant !"
 #: scripts/scenario_56_carrierTurret.lua:4077
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr "Vos petites menaces ne nous impressionnent pas."
+msgstr "Vos menaces ridicules ne nous impressionnent pas."
 
 #: scripts/scenario_56_carrierTurret.lua:4079
 msgctxt "shipEnemy-comms"
@@ -2593,8 +2597,7 @@ msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
-"Ktzzzsss.\n"
-"\n"
+"...Ktzzzsss...\n"
 "Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_56_carrierTurret.lua:4081
@@ -2603,8 +2606,7 @@ msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
-"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
-"\n"
+"Nous ne vous voulons aucun mal, mais nous vous en ferons si nécessaire.\n"
 "Fin de transmission."
 
 #: scripts/scenario_56_carrierTurret.lua:4083
@@ -2624,27 +2626,27 @@ msgid ""
 ":Do not cross us:\n"
 "Communication halted."
 msgstr ""
-"000110011010...Grzzzz..\n"
-"\n"
-"Communication binaire non détectée..Grzzz Nous passons en communication "
+"000110011010...Grzzzz...\n"
+"Communication binaire non détectée...Grzzz Passons en communication "
 "universelle..Grrzzz\n"
+"Générons réponse appropriée pour cible en langage humain à partir archives..."
+"Grrzzzz\n"
 "\n"
-"Générer une réponse appropriée pour la cible en langage humain à partir des "
-"archives...Grrzzzz\n"
-"\n"
-"Ne nous approchez pas! Grrzzz\n"
+"     [Ne nous approchez pas !] Grrzzz\n"
 "\n"
 "Communication interrompue."
 
 #: scripts/scenario_56_carrierTurret.lua:4086
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
+msgstr "Executer à distance : AUTODESTRUCTION"
 
 #: scripts/scenario_56_carrierTurret.lua:4087
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr "Commande non autorisée reçue. Cible verrouillée."
+msgstr ""
+"Commande malveillante reçue. Annulée.\n"
+"Nous ciblons immédiatement source."
 
 #: scripts/scenario_56_carrierTurret.lua:4088
 msgctxt "shipEnemy-comms"
@@ -2660,18 +2662,17 @@ msgid ""
 msgstr ""
 "Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
 "s'opposer à nous tous.\n"
-"\n"
 "Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_56_carrierTurret.lua:4091
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
 
 #: scripts/scenario_56_carrierTurret.lua:4092
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
 
 #: scripts/scenario_56_carrierTurret.lua:4093
 msgctxt "shipEnemy-comms"
@@ -2698,17 +2699,17 @@ msgstr "Où allez-vous ?"
 #: scripts/scenario_56_carrierTurret.lua:4137
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter for trade"
-msgstr "Stock insuffisant sur le cargo pour commercer"
+msgstr "Stock insuffisant sur le cargo pour commercer."
 
 #: scripts/scenario_56_carrierTurret.lua:4142
 msgctxt "trade-comms"
 msgid "Traded"
-msgstr "Échangé"
+msgstr "Marchandises échangées."
 
 #: scripts/scenario_56_carrierTurret.lua:4149
 msgctxt "trade-comms"
 msgid "Insufficient luxury to trade"
-msgstr "Stock de marchandises de luxe insuffisant pour commercer."
+msgstr "Stock de produits de luxe insuffisant pour commercer."
 
 #: scripts/scenario_56_carrierTurret.lua:4161
 #: scripts/scenario_56_carrierTurret.lua:4225
@@ -2740,7 +2741,7 @@ msgstr "Réputation insuffisante pour acheter."
 #: scripts/scenario_56_carrierTurret.lua:4315
 msgctxt "trade-comms"
 msgid "Purchased"
-msgstr "Marchandise achetée."
+msgstr "1 marchandise achetée."
 
 #: scripts/scenario_56_carrierTurret.lua:4188
 #: scripts/scenario_56_carrierTurret.lua:4278
@@ -2838,7 +2839,7 @@ msgstr ""
 "Espace insuffisant sur %s pour accepter votre cargaison de marchandises."
 
 #: scripts/scenario_56_carrierTurret.lua:4544
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "The Ktlitans keep sending harassing ships. We've decrypted some of their "
@@ -2849,8 +2850,8 @@ msgid ""
 "weapons and cannot dock with a station. It is in your best interest to "
 "protect it since it will significantly shorten the duration of your mission."
 msgstr ""
-"[Ordre de mission]\n"
-"Équipage, les Ktlitiens continuent de nous harceler avec leurs vaisseaux.\n"
+"[Ordre de mission du QG] Équipage,\n"
+"Les Ktlitiens continuent de nous harceler avec leurs vaisseaux.\n"
 "Nous avons décrypté certaines de leurs communications, suffisamment pour "
 "réussir à identifier le nom de leur base principale, voire son emplacement.\n"
 "Trouvez et détruisez la station Ktlitienne %s. Vous pouvez répondre aux "
@@ -3412,9 +3413,10 @@ msgid ""
 "Earned rank: "
 msgstr ""
 "\n"
-"Rang obtenu : "
+"Grade obtenu : "
 
 #: scripts/scenario_56_carrierTurret.lua:5951
+#, fuzzy
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
@@ -3424,6 +3426,7 @@ msgstr ""
 "Rang de survie de la base ennemie : "
 
 #: scripts/scenario_56_carrierTurret.lua:5953
+#, fuzzy
 msgctxt "msgMainscreen"
 msgid ""
 "\n"

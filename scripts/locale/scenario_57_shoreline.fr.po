@@ -774,15 +774,15 @@ msgstr "Observatoire"
 #: scripts/scenario_57_shoreline.lua:3140
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
-msgstr "Composants de moteurs à impulsions"
+msgstr "Composants de moteurs à impulsion"
 
 #: scripts/scenario_57_shoreline.lua:2136
 #: scripts/scenario_57_shoreline.lua:3141
 msgctxt "stationGeneralInfo-comms"
 msgid "We supply high quality impulse engines and parts for use aboard ships"
 msgstr ""
-"Nous fournissons des moteurs à impulsions et des pièces de haute qualité "
-"pour une utilisation à bord des navires."
+"Nous fournissons des moteurs à impulsion et des pièces de haute qualité pour "
+"une utilisation à bord des navires."
 
 #: scripts/scenario_57_shoreline.lua:2137
 #: scripts/scenario_57_shoreline.lua:3142
@@ -852,7 +852,7 @@ msgstr ""
 #: scripts/scenario_57_shoreline.lua:2279
 msgctxt "scienceDescription-station"
 msgid "Warp and Impulse engine manufacturing"
-msgstr "Fabrication de moteurs à impulsions et à vitesse lumière"
+msgstr "Fabrication de moteurs à impulsion et à vitesse lumière"
 
 #: scripts/scenario_57_shoreline.lua:2280
 msgctxt "stationGeneralInfo-comms"
@@ -860,7 +860,7 @@ msgid ""
 "We manufacture warp, impulse and jump engines for the human navy fleet as "
 "well as other independent clients on a contract basis"
 msgstr ""
-"Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
+"Nous fabriquons des moteurs à impulsion, à vitesse lumière et pour "
 "téléporteurs pour la flotte de la Marine humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
 
@@ -1609,17 +1609,17 @@ msgstr "Espace disponible : %i"
 #: scripts/scenario_57_shoreline.lua:6929
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_57_shoreline.lua:6934
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
-msgstr "Obtenir liq. de ref."
+msgstr "Collecter liq. de ref."
 
 #: scripts/scenario_57_shoreline.lua:6978
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
-msgstr "Collecte du liq. de ref."
+msgstr "Collecte en cours"
 
 #: scripts/scenario_57_shoreline.lua:6981
 #, lua-format
@@ -1795,7 +1795,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_57_shoreline.lua:7349
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr "Rumeurs"
+msgstr "Commérages"
 
 #: scripts/scenario_57_shoreline.lua:7363
 msgctxt "trade-comms"
@@ -1865,7 +1865,7 @@ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
-msgstr "Achetez 1 %s pour %i rép"
+msgstr "Acheter 1 %s pour %i rép"
 
 #: scripts/scenario_57_shoreline.lua:7391
 #, lua-format
@@ -1880,7 +1880,7 @@ msgid ""
 "Insufficient cargo space for purchase"
 msgstr ""
 "\n"
-"Espace de chargement insuffisant pour acheter"
+"Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_57_shoreline.lua:7395
 #: scripts/scenario_57_shoreline.lua:7411
@@ -1902,7 +1902,7 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station"
+"Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_57_shoreline.lua:7409
 msgctxt "trade-comms"
@@ -1911,7 +1911,7 @@ msgid ""
 "purchased"
 msgstr ""
 "\n"
-"Acheté"
+"1 marchandise achetée."
 
 #: scripts/scenario_57_shoreline.lua:7421
 #, lua-format
@@ -1932,7 +1932,7 @@ msgid ""
 "One sold"
 msgstr ""
 "\n"
-"1 vendu"
+"1 marchandise vendue."
 
 #: scripts/scenario_57_shoreline.lua:7438
 #, lua-format
@@ -1957,7 +1957,7 @@ msgid ""
 "Traded"
 msgstr ""
 "\n"
-"Échangé"
+"Marchandises échangées."
 
 #: scripts/scenario_57_shoreline.lua:7461
 #, lua-format
@@ -2140,17 +2140,17 @@ msgstr "Vous devez rester amarré à la station pour cette action."
 #: scripts/scenario_57_shoreline.lua:7647
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_57_shoreline.lua:7648
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_57_shoreline.lua:7649
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/scenario_57_shoreline.lua:7656
 msgctxt "ammo-comms"
@@ -2188,12 +2188,13 @@ msgstr "Pas assez de réputation."
 #: scripts/scenario_57_shoreline.lua:7676
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
-msgstr "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
+msgstr ""
+"Vous ne pouvez pas en recevoir autant que ce que nous voudrions vous vendre."
 
 #: scripts/scenario_57_shoreline.lua:7677
 msgctxt "ammo-comms"
 msgid "Get just one"
-msgstr "Prendre juste celui-là"
+msgstr "Prendre juste 1 munition"
 
 #: scripts/scenario_57_shoreline.lua:7683
 msgctxt "ammo-comms"
@@ -2556,7 +2557,7 @@ msgstr ""
 msgctxt "opt4ImpulseResearch-comms"
 msgid "Provide %s and %s for impulse engine research project"
 msgstr ""
-"Fournir %s et %s pour le projet de recherche sur les moteurs à impulsions"
+"Fournir %s et %s pour le projet de recherche sur les moteurs à impulsion"
 
 #: scripts/scenario_57_shoreline.lua:8114
 msgctxt "opt4ImpulseResearch-comms"
@@ -2922,7 +2923,7 @@ msgstr "Réputation insuffisante pour acheter."
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous ? (coût : %f réputation)"
+msgstr "Où allez-vous ? (coût de l'information : %f réputation)"
 
 #: scripts/scenario_57_shoreline.lua:8481
 #: scripts/scenario_57_shoreline.lua:8798
