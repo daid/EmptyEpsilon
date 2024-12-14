@@ -26,23 +26,23 @@ function(execute_process_ex)
 endfunction()
 
 if(NOT SDL2_ROOT)
-    set(WIN32_BASE "${CMAKE_CURRENT_LIST_DIR}/_win32/")
-    set(CMAKE_SYSROOT "${WIN32_BASE}")
+    set(WIN64_BASE "${CMAKE_CURRENT_LIST_DIR}/_win32/")
+    set(CMAKE_SYSROOT "${WIN64_BASE}")
 
-    if(NOT IS_DIRECTORY "${WIN32_BASE}/SDL2-2.0.16")
-        file(DOWNLOAD http://libsdl.org/release/SDL2-devel-2.0.16-mingw.tar.gz "${WIN32_BASE}/SDL2.tar.gz" SHOW_PROGRESS EXPECTED_HASH SHA256=2bfe48628aa9635c12eac7d421907e291525de1d0b04b3bca4a5bd6e6c881a6f)
-        execute_process_ex(COMMAND ${CMAKE_COMMAND} -E tar xzvf SDL2.tar.gz WORKING_DIRECTORY "${WIN32_BASE}")
-        execute_process_ex(COMMAND sed -i "s|set(prefix .*)|set(prefix \"${WIN32_BASE}/SDL2-2.0.16/x86_64-w64-mingw32/\")|g" ${WIN32_BASE}/SDL2-2.0.16/x86_64-w64-mingw32/lib/cmake/SDL2/sdl2-config.cmake)
+    if(NOT IS_DIRECTORY "${WIN64_BASE}/SDL2-2.0.16")
+        file(DOWNLOAD http://libsdl.org/release/SDL2-devel-2.0.16-mingw.tar.gz "${WIN64_BASE}/SDL2.tar.gz" SHOW_PROGRESS EXPECTED_HASH SHA256=2bfe48628aa9635c12eac7d421907e291525de1d0b04b3bca4a5bd6e6c881a6f)
+        execute_process_ex(COMMAND ${CMAKE_COMMAND} -E tar xzvf SDL2.tar.gz WORKING_DIRECTORY "${WIN64_BASE}")
+        execute_process_ex(COMMAND sed -i "s|set(prefix .*)|set(prefix \"${WIN64_BASE}/SDL2-2.0.16/x86_64-w64-mingw32/\")|g" ${WIN64_BASE}/SDL2-2.0.16/x86_64-w64-mingw32/lib/cmake/SDL2/sdl2-config.cmake)
     endif()
     
-    set(SDL2_ROOT "${WIN32_BASE}/SDL2-2.0.16/x86_64-w64-mingw32/")
+    set(SDL2_ROOT "${WIN64_BASE}/SDL2-2.0.16/x86_64-w64-mingw32/")
 
     option(ENABLE_CRASH_LOGGER "" ON)
-    set(DRMINGW_ROOT "${WIN32_BASE}/drmingw-0.8.2-win32")
+    set(DRMINGW_ROOT "${WIN64_BASE}/drmingw-0.8.2-win64")
     if(NOT IS_DIRECTORY "${DRMINGW_ROOT}")
-        file(DOWNLOAD https://github.com/jrfonseca/drmingw/releases/download/0.8.2/drmingw-0.8.2-win64.7z ${WIN32_BASE}/drmingw.7z SHOW_PROGRESS)
+        file(DOWNLOAD https://github.com/jrfonseca/drmingw/releases/download/0.8.2/drmingw-0.8.2-win64.7z ${WIN64_BASE}/drmingw.7z SHOW_PROGRESS)
         execute_process_ex(
             COMMAND ${CMAKE_COMMAND} -E tar "x" "drmingw.7z"
-            WORKING_DIRECTORY ${WIN32_BASE})
+            WORKING_DIRECTORY ${WIN64_BASE})
     endif()
 endif()
