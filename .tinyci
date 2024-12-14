@@ -31,7 +31,7 @@ commands =
     cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/mingw.toolchain -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTEAMSDK=/data/steamsdk/
     ninja -j 10 package
 
-[build-android]
+[xbuild-android]
 directory = _build_android
 commands =
     cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain -DCMAKE_BUILD_TYPE=Release
