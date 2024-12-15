@@ -1431,7 +1431,7 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:2891
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de munitions"
+msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_56_carrierTurret.lua:2892
 msgctxt "ammo-comms"
@@ -1459,7 +1459,7 @@ msgid ""
 "   %i Minutes remain in game"
 msgstr ""
 "\n"
-"   %i minutes restantes dans le jeu."
+"  > Il reste %i minutes de jeu."
 
 #: scripts/scenario_56_carrierTurret.lua:2910
 #: scripts/scenario_56_carrierTurret.lua:2988
