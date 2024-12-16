@@ -182,7 +182,7 @@ function missionRT4Died(delta)
         -- Docked and delivered the diplomat's body.
         research_station:sendCommsMessage(
             player,
-            _("incCall", [[J.J. Johnson transmitted his mission details to Orion-5 before he passed away. Head to Orion-5 for details.]])
+            _("incCall", [[J.J. Johnson transmitted his mission details to Orion-5 before he passed away. Head to Orion-5 in sector G3 for details.]])
         )
         mission_state = missionRT4PickedUp
     end
