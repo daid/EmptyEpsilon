@@ -606,7 +606,7 @@ msgstr ""
 #: scripts/place_station_scenario_utility.lua:1581
 msgctxt "scienceDescription-station"
 msgid "Transporter components"
-msgstr "Composants de transporteur"
+msgstr "Composants de transporteurs"
 
 #: scripts/place_station_scenario_utility.lua:1359
 msgctxt "stationGeneralInfo-comms"

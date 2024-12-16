@@ -545,7 +545,7 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:1942
 msgctxt "scienceDescription-station"
 msgid "Transporter components"
-msgstr "Composants de transporteur"
+msgstr "Composants de transporteurs"
 
 #: scripts/scenario_56_carrierTurret.lua:1476
 msgctxt "stationGeneralInfo-comms"

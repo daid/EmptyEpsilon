@@ -727,7 +727,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1750 scripts/scenario_49_allies.lua:2212
 msgctxt "scienceDescription-station"
 msgid "Transporter components"
-msgstr "Composants de transporteur"
+msgstr "Composants de transporteurs"
 
 #: scripts/scenario_49_allies.lua:1765
 msgctxt "stationGeneralInfo-comms"
@@ -1273,8 +1273,8 @@ msgid ""
 msgstr ""
 "Notre station est nommée Shree d'après l'un des nombreux fabricants de "
 "remorqueurs du début du 21e siècle sur Terre en Inde. Les remorqueurs sur "
-"terre er sur les océans ont une fonction similaire aux navires spatiaux avec "
-"leur faisceaux tracteurs et répulseurs."
+"terre er sur les océans ont une fonction similaire aux vaisseaux spatiaux "
+"avec leur faisceaux tracteurs et répulseurs."
 
 #: scripts/scenario_49_allies.lua:2503
 msgctxt "stationGeneralInfo-comms"
@@ -1365,7 +1365,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2573 scripts/scenario_49_allies.lua:2922
 msgctxt "scienceDescription-station"
 msgid "Ship building and maintenance facility"
-msgstr "Construction de navires et établissement d'entretien"
+msgstr "Construction de vaisseaux et établissement d'entretien"
 
 #: scripts/scenario_49_allies.lua:2584
 msgctxt "stationGeneralInfo-comms"
@@ -3742,10 +3742,9 @@ msgid "Mind your own business!"
 msgstr "Occupez-vous de vos affaires !"
 
 #: scripts/scenario_49_allies.lua:4955
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Yes?"
-msgstr "Oui ?"
+msgstr "Oui, c'est pour quoi ?"
 
 #: scripts/scenario_49_allies.lua:4957
 #, fuzzy
