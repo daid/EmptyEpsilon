@@ -2379,7 +2379,7 @@ msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
 
 #: scripts/scenario_56_carrierTurret.lua:3774
 #: scripts/scenario_56_carrierTurret.lua:3800
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
 msgstr "Marqueur %d"
@@ -2478,7 +2478,7 @@ msgid "Which waypoint should we defend?"
 msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/scenario_56_carrierTurret.lua:3987
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
 msgstr "Défendez le marqueur %d"

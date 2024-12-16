@@ -39,7 +39,7 @@ msgstr ""
 "- Titre original : Close the Gaps\n"
 "- Auteur : Xansta (2018)\n"
 "- Traduction FR : Muerte (Mai 24)\n"
-"Relecture en cours 63%    253/400; Test du scénario en cours : contient "
+"Relecture en cours 80%    323/400; Test du scénario en cours : contient "
 "actuellement des bogues et est susceptible de ne pas fonctionner "
 "correctement. Muerte (Déc. 24)\n"
 "\n"
@@ -47,96 +47,78 @@ msgstr ""
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 # Scenario setting
-#, fuzzy
 msgctxt "setting"
 msgid "Settings"
 msgstr "Réglages"
 
-#, fuzzy
 msgctxt "setting"
 msgid "Configures time/goal/the amount of enemies spawned in the scenario."
 msgstr "Définit le temps/objectifs/nombre d'ennemis générés dans le scénario."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Easy"
 msgstr "Facile"
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Easy goals and/or enemies"
 msgstr "Objectifs et/ou quantité d'ennemis faciles."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Normal goals and/or enemies."
 msgstr "Objectifs et/ou quantité d'ennemis par défaut."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Hard"
 msgstr "Difficile"
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Hard goals and/or enemies"
 msgstr "Objectifs et/ou quantité d'ennemis difficiles."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Quixotic"
 msgstr "Chimérique"
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Practically impossible goals and/or enemies, definitely time consuming"
 msgstr "Objectifs et/ou quantité d'ennemis quasiment insurmontables."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Timed Normal"
 msgstr "Chronométré normal"
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Complete the mission in less than 30 minutes"
 msgstr "Terminer la mission en moins de 30 minutes."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Timed Easy"
 msgstr "Chronométré facile"
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Easy goals and/or enemies, Complete the mission in less than 30 minutes"
 msgstr ""
 "Objectifs et/ou quantité d'ennemis faciles. Terminer la mission en moins de "
 "30 minutes."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Timed Hard"
 msgstr "Chronométré difficile"
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Hard goals and/or enemies, Complete the mission in less than 30 minutes"
 msgstr ""
 "Objectifs et/ou quantité d'ennemis difficiles. Terminer la mission en moins "
 "de 30 minutes."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Timed Quixotic"
 msgstr "Chronométré chimérique"
 
-#, fuzzy
 msgctxt "Settings"
 msgid ""
 "Practically impossible goals and/or enemies, Complete the mission in less "
@@ -1562,7 +1544,7 @@ msgid ""
 "   1. Must contain at least 12 mines: Nautilus class standard load"
 msgstr ""
 "\n"
-"   1. Contenir au moins 12 mines."
+"  1. Contenir au moins 12 mines."
 
 #: scripts/scenario_50_gaps.lua:2373 scripts/scenario_50_gaps.lua:2997
 msgctxt "minefield-comms"
@@ -1571,27 +1553,25 @@ msgid ""
 "   2. Must be within a 1.5U radius of sector corner in gap"
 msgstr ""
 "\n"
-"   2. Être à moins de 1,5u du croisement des secteurs de la brèche."
+"  2. Être à moins de 1,5u du croisement des secteurs de la brèche."
 
 #: scripts/scenario_50_gaps.lua:2375 scripts/scenario_50_gaps.lua:2999
-#, fuzzy
 msgctxt "minefield-comms"
 msgid ""
 "\n"
 "   3. Must be centered: 6 on one side and 6 on the other"
 msgstr ""
 "\n"
-"  3. Être réparti des 2 cotés de la ligne de secteur passant par la station."
+"  3. Être réparti des 2 cotés de la ligne de secteurs reliant la station."
 
 #: scripts/scenario_50_gaps.lua:2378 scripts/scenario_50_gaps.lua:3002
-#, fuzzy
 msgctxt "minefield-comms"
 msgid ""
 "\n"
 "   4. Must be along 20U distance from station line connecting asteroids"
 msgstr ""
 "\n"
-"   4. Être sur le long de la ligne de secteurs reliant les astéroïdes."
+"  4. Être sur le long de la ligne de secteurs reliant les astéroïdes."
 
 #: scripts/scenario_50_gaps.lua:2382 scripts/scenario_50_gaps.lua:3006
 msgctxt "minefield-comms"
@@ -1612,7 +1592,7 @@ msgstr "Mines posées près du centre : %i"
 #, fuzzy, lua-format
 msgctxt "minefield-comms"
 msgid "Count near middle on the right: %i"
-msgstr "Mines posées à droite près du centre : %i"
+msgstr "Mines posées près du centre à droite : %i"
 
 #: scripts/scenario_50_gaps.lua:2387 scripts/scenario_50_gaps.lua:2407
 #: scripts/scenario_50_gaps.lua:3011 scripts/scenario_50_gaps.lua:3031
@@ -1623,7 +1603,7 @@ msgid ""
 "Count near middle on the left: %i"
 msgstr ""
 "\n"
-"Mines posées à gauche près du centre : %i"
+"Mines posées près du centre à gauche : %i"
 
 #: scripts/scenario_50_gaps.lua:2388 scripts/scenario_50_gaps.lua:2408
 #: scripts/scenario_50_gaps.lua:3012 scripts/scenario_50_gaps.lua:3032
@@ -1660,7 +1640,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Vous avez besoin de 333333333 mines dans chaque zone de capteurs."
+"Vous avez besoin de 3 mines dans chacune de ces 4 zones."
 
 #: scripts/scenario_50_gaps.lua:2392 scripts/scenario_50_gaps.lua:2412
 #: scripts/scenario_50_gaps.lua:3016 scripts/scenario_50_gaps.lua:3036
@@ -1826,13 +1806,11 @@ msgid "Repair crew member hired"
 msgstr "Réparateur embauché."
 
 #: scripts/scenario_50_gaps.lua:2498
-#, fuzzy
 msgctxt "station-comms"
 msgid "Tell me more about your station"
 msgstr "Dites m'en plus à propos de votre station"
 
 #: scripts/scenario_50_gaps.lua:2499
-#, fuzzy
 msgctxt "station-comms"
 msgid "What would you like to know?"
 msgstr "Qu'aimeriez-vous savoir ?"
@@ -1859,7 +1837,7 @@ msgid "Buy, sell, trade"
 msgstr "Acheter, vendre, échanger"
 
 #: scripts/scenario_50_gaps.lua:2524 scripts/scenario_50_gaps.lua:2917
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
@@ -1869,13 +1847,12 @@ msgstr ""
 "- Marchandises à vendre : (quantité, coût en réputation)\n"
 
 #: scripts/scenario_50_gaps.lua:2530
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
 msgstr "     %s : x%i, %i rép l'unité.\n"
 
 #: scripts/scenario_50_gaps.lua:2533
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Current Cargo:\n"
 msgstr ""
@@ -1883,19 +1860,18 @@ msgstr ""
 "- Marchandises à bord :\n"
 
 #: scripts/scenario_50_gaps.lua:2540
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
 msgstr "     %s : x%i\n"
 
 #: scripts/scenario_50_gaps.lua:2546
-#, fuzzy
 msgctxt "trade-comms"
 msgid "     Empty\n"
 msgstr "     Vide\n"
 
 #: scripts/scenario_50_gaps.lua:2549
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
 msgstr "- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
@@ -1903,13 +1879,13 @@ msgstr "- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
 #: scripts/scenario_50_gaps.lua:2557 scripts/scenario_50_gaps.lua:3418
 #: scripts/scenario_50_gaps.lua:3459 scripts/scenario_50_gaps.lua:3485
 #: scripts/scenario_50_gaps.lua:3516
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
 msgstr "Acheter 1 %s pour %i rép"
 
 #: scripts/scenario_50_gaps.lua:2558
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
 msgstr ""
@@ -1918,7 +1894,6 @@ msgstr ""
 "Coût : %i rép l'unité."
 
 #: scripts/scenario_50_gaps.lua:2560
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -1929,7 +1904,6 @@ msgstr ""
 "Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_50_gaps.lua:2562 scripts/scenario_50_gaps.lua:2567
-#, fuzzy
 msgctxt "needRep-comms"
 msgid ""
 "\n"
@@ -1940,7 +1914,6 @@ msgstr ""
 
 #: scripts/scenario_50_gaps.lua:2564 scripts/scenario_50_gaps.lua:2598
 #: scripts/scenario_50_gaps.lua:2630 scripts/scenario_50_gaps.lua:2662
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -1951,7 +1924,6 @@ msgstr ""
 "Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_50_gaps.lua:2572
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -1989,7 +1961,7 @@ msgstr ""
 "Marchandises échangées."
 
 #: scripts/scenario_50_gaps.lua:2627 scripts/scenario_50_gaps.lua:3394
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr "Échanger des produits de luxe (luxury) contre %s"
@@ -2001,13 +1973,12 @@ msgid "Trade medicine for %s"
 msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_50_gaps.lua:2689
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Jettison cargo"
 msgstr "Larguer des marchandises"
 
 #: scripts/scenario_50_gaps.lua:2690
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid ""
 "Available space: %i\n"
@@ -2017,7 +1988,7 @@ msgstr ""
 "Que voudriez-vous larguer par le sas ?"
 
 #: scripts/scenario_50_gaps.lua:2699
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
 msgstr ""
@@ -2265,7 +2236,6 @@ msgid "You are fully loaded and ready to explode things."
 msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
 
 #: scripts/scenario_50_gaps.lua:2820
-#, fuzzy
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
@@ -2285,7 +2255,6 @@ msgstr ""
 "station au préalable."
 
 #: scripts/scenario_50_gaps.lua:2835
-#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
@@ -2311,7 +2280,6 @@ msgid "I need information"
 msgstr "j'aurai besoin d'informations"
 
 #: scripts/scenario_50_gaps.lua:2873
-#, fuzzy
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
 msgstr "De quel genre d'informations avez-vous besoin ?"
@@ -2385,13 +2353,12 @@ msgid "We have the following types of ordnance available for restock:%s"
 msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_50_gaps.lua:2916
-#, fuzzy
 msgctxt "trade-comms"
 msgid "What goods do you have available for sale or trade?"
 msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
 
 #: scripts/scenario_50_gaps.lua:2923
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "   %14s: %2i, %3i\n"
 msgstr "   %14s : x%2i, %3i rép l'unité.\n"
@@ -2408,7 +2375,6 @@ msgid "Yes, we see %i enemies within 30U"
 msgstr "Oui, nous comptons %i ennemis dans un rayon de 30u."
 
 #: scripts/scenario_50_gaps.lua:2942
-#, fuzzy
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see one enemy within 30U"
 msgstr "Oui, nous observons 1 ennemi à moins de 30u."
@@ -2419,19 +2385,16 @@ msgid "No enemies within 30U"
 msgstr "Aucun ennemi à moins de 30u."
 
 #: scripts/scenario_50_gaps.lua:2951
-#, fuzzy
 msgctxt "helpfullWarning-comms"
 msgid "Not really"
 msgstr "Pas vraiment."
 
 #: scripts/scenario_50_gaps.lua:2956
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Where can I find particular goods?"
 msgstr "Où puis-je trouver des marchandises particulières ?"
 
 #: scripts/scenario_50_gaps.lua:2957
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "Friendly stations generally have food or medicine or both. Neutral stations "
@@ -2443,7 +2406,6 @@ msgstr ""
 "luxe (luxury)."
 
 #: scripts/scenario_50_gaps.lua:2959
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 " Beyond that, I have no knowledge of specific stations.\n"
@@ -2455,7 +2417,6 @@ msgstr ""
 "Revenez plus tard, quelqu'un d'autre en saura peut-être plus que moi."
 
 #: scripts/scenario_50_gaps.lua:2965
-#, fuzzy
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
 msgstr " A part ça, je n'ai pas connaissance de stations spécifiques."
@@ -2474,7 +2435,7 @@ msgstr ""
 "Quelles marchandises vous intéressent ? J'ai entendu parler de ça :"
 
 #: scripts/scenario_50_gaps.lua:2970
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s%s"
 msgstr "La station %s dans le secteur %s possède la marchandise %s%s."
@@ -2521,7 +2482,7 @@ msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
-msgstr "Marqueur %d"
+msgstr "%d"
 
 #: scripts/scenario_50_gaps.lua:3138
 #, lua-format
@@ -2532,7 +2493,6 @@ msgstr ""
 "ravitaillement au marqueur %d."
 
 #: scripts/scenario_50_gaps.lua:3140 scripts/scenario_50_gaps.lua:3161
-#, fuzzy
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr "Pas assez de réputation !"
@@ -2562,7 +2522,6 @@ msgstr ""
 "marqueur %d."
 
 #: scripts/scenario_50_gaps.lua:3200
-#, fuzzy
 msgctxt "trade-comms"
 msgid " and will trade it for medicine"
 msgstr ". Elle l'échange contre des médicaments (medicine)"
@@ -2586,25 +2545,23 @@ msgid " or luxury"
 msgstr " ou des produits de luxe (luxury)"
 
 #: scripts/scenario_50_gaps.lua:3215
-#, fuzzy
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
 msgstr ". Elle l'échange contre des produits de luxe (luxury)"
 
 #: scripts/scenario_50_gaps.lua:3267 scripts/scenario_50_gaps.lua:3440
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr "Que voulez-vous ?"
+msgstr ""
+"Salutations,\n"
+"Que nous voulez-vous ?"
 
 #: scripts/scenario_50_gaps.lua:3269
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr "Monsieur, comment pouvons-nous vous assister ?"
 
 #: scripts/scenario_50_gaps.lua:3271
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr "Défendez un marqueur"
@@ -2618,7 +2575,6 @@ msgstr ""
 "un."
 
 #: scripts/scenario_50_gaps.lua:3276
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr "Quel marqueur devons-nous défendre ?"
@@ -2636,7 +2592,6 @@ msgid "We are heading to assist at WP %d."
 msgstr "Nous partons immédiatement défendre le marqueur %d."
 
 #: scripts/scenario_50_gaps.lua:3287
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr "Aidez-nous !"
@@ -2648,7 +2603,6 @@ msgid "Heading toward you to assist."
 msgstr "Entendu, nous partons immédiatement vous aider."
 
 #: scripts/scenario_50_gaps.lua:3293
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Report status"
 msgstr "Au rapport"
@@ -2743,7 +2697,6 @@ msgstr ""
 "distraction pour nous !"
 
 #: scripts/scenario_50_gaps.lua:3342
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
 "One zero one.\n"
@@ -2764,13 +2717,11 @@ msgstr ""
 "Communication interrompue."
 
 #: scripts/scenario_50_gaps.lua:3343
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr "Executer à distance : AUTODESTRUCTION"
 
 #: scripts/scenario_50_gaps.lua:3344
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr ""
@@ -2778,13 +2729,11 @@ msgstr ""
 "Nous ciblons immédiatement source."
 
 #: scripts/scenario_50_gaps.lua:3345
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr "Ordre externe ignoré."
 
 #: scripts/scenario_50_gaps.lua:3347
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
@@ -2796,19 +2745,16 @@ msgstr ""
 "Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_50_gaps.lua:3348
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
 
 #: scripts/scenario_50_gaps.lua:3349
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
 
 #: scripts/scenario_50_gaps.lua:3350
-#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
@@ -2860,7 +2806,6 @@ msgstr "Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_50_gaps.lua:3422 scripts/scenario_50_gaps.lua:3463
 #: scripts/scenario_50_gaps.lua:3489 scripts/scenario_50_gaps.lua:3520
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter"
 msgstr "Stock insuffisant sur le cargo."
@@ -2874,13 +2819,12 @@ msgstr "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_50_gaps.lua:3430 scripts/scenario_50_gaps.lua:3471
 #: scripts/scenario_50_gaps.lua:3497 scripts/scenario_50_gaps.lua:3528
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Purchased"
 msgstr "1 marchandise achetée."
 
 #: scripts/scenario_50_gaps.lua:3443
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
 msgstr "Où allez-vous ? (coût de l'information : %f rép)"
