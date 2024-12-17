@@ -3577,7 +3577,9 @@ msgstr "Stock insuffisant sur le cargo."
 #: scripts/scenario_49_allies.lua:5073 scripts/scenario_49_allies.lua:5104
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr "Réputation insuffisante pour acheter."
+msgstr ""
+"\n"
+"Réputation insuffisante pour acheter."
 
 #: scripts/scenario_49_allies.lua:4794 scripts/scenario_49_allies.lua:4824
 #: scripts/scenario_49_allies.lua:4849 scripts/scenario_49_allies.lua:4879

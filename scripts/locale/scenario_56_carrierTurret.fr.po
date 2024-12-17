@@ -2379,7 +2379,7 @@ msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
 
 #: scripts/scenario_56_carrierTurret.lua:3774
 #: scripts/scenario_56_carrierTurret.lua:3800
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
 msgstr "Marqueur %d"
@@ -2733,7 +2733,9 @@ msgstr "Stock insuffisant sur le cargo."
 #: scripts/scenario_56_carrierTurret.lua:4310
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr "Réputation insuffisante pour acheter."
+msgstr ""
+"\n"
+"Réputation insuffisante pour acheter."
 
 #: scripts/scenario_56_carrierTurret.lua:4171
 #: scripts/scenario_56_carrierTurret.lua:4235
