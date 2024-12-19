@@ -1686,7 +1686,7 @@ msgid ""
 msgstr ""
 "\n"
 "Mission optionnelle :\n"
-"Obtenir une amélioration de la manœuvre du navire à partir de %s pour %s."
+"Obtenir une amélioration de la manœuvre du vaisseau à partir de %s pour %s."
 
 #: scripts/scenario_55_defenderHunter.lua:2731
 #, lua-format
