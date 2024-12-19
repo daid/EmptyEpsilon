@@ -7056,7 +7056,7 @@ msgstr "Que vous manque-t-il ?"
 #: scripts/comms_scenario_utility.lua:5620
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de munitions"
+msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 
 #: scripts/comms_scenario_utility.lua:5621
 msgctxt "ammo-comms"
