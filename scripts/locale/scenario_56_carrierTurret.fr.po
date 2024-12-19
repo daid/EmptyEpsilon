@@ -545,7 +545,7 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:1942
 msgctxt "scienceDescription-station"
 msgid "Transporter components"
-msgstr "Composants de transporteur"
+msgstr "Composants de transporteurs"
 
 #: scripts/scenario_56_carrierTurret.lua:1476
 msgctxt "stationGeneralInfo-comms"
@@ -1431,7 +1431,7 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:2891
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de munitions"
+msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_56_carrierTurret.lua:2892
 msgctxt "ammo-comms"
@@ -1459,7 +1459,7 @@ msgid ""
 "   %i Minutes remain in game"
 msgstr ""
 "\n"
-"   %i minutes restantes dans le jeu."
+"  > Il reste %i minutes de jeu."
 
 #: scripts/scenario_56_carrierTurret.lua:2910
 #: scripts/scenario_56_carrierTurret.lua:2988
@@ -2478,7 +2478,7 @@ msgid "Which waypoint should we defend?"
 msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/scenario_56_carrierTurret.lua:3987
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
 msgstr "Défendez le marqueur %d"
@@ -2733,7 +2733,9 @@ msgstr "Stock insuffisant sur le cargo."
 #: scripts/scenario_56_carrierTurret.lua:4310
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr "Réputation insuffisante pour acheter."
+msgstr ""
+"\n"
+"Réputation insuffisante pour acheter."
 
 #: scripts/scenario_56_carrierTurret.lua:4171
 #: scripts/scenario_56_carrierTurret.lua:4235
