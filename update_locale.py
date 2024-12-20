@@ -36,6 +36,7 @@ for script in glob.glob("scripts/**/*.lua", recursive=True):
                 key = key.strip().lower()
             value = value.strip()
             info[key] = value
+    os.makedirs(os.path.dirname(output), exist_ok=True)
     f = open(output, "wt")
     if "name" in info:
         f.write("# Scenario name\n")
