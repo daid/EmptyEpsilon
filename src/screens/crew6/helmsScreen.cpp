@@ -19,6 +19,7 @@
 #include "screenComponents/dockingButton.h"
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
+#include "screenComponents/infoDisplay.h"
 
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
@@ -77,12 +78,12 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
     heading_hint->setAlignment(sp::Alignment::Center)->setSize(0, 0);
 
-    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
-    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 40);
-    heading_display = new GuiKeyValueDisplay(this, "HEADING_DISPLAY", 0.45, tr("Heading"), "");
-    heading_display->setIcon("gui/icons/heading")->setTextSize(20)->setPosition(20, 140, sp::Alignment::TopLeft)->setSize(240, 40);
-    velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
-    velocity_display->setIcon("gui/icons/speed")->setTextSize(20)->setPosition(20, 180, sp::Alignment::TopLeft)->setSize(240, 40);
+    auto energy_display = new EnergyInfoDisplay(this, "ENERGY_DISPLAY", 0.45);
+    energy_display->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 40);
+    auto heading_display = new HeadingInfoDisplay(this, "HEADING_DISPLAY", 0.45);
+    heading_display->setPosition(20, 140, sp::Alignment::TopLeft)->setSize(240, 40);
+    auto velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
+    velocity_display->setPosition(20, 180, sp::Alignment::TopLeft)->setSize(240, 40);
 
     GuiElement* engine_layout = new GuiElement(this, "ENGINE_LAYOUT");
     engine_layout->setPosition(20, -100, sp::Alignment::BottomLeft)->setSize(GuiElement::GuiSizeMax, 300)->setAttribute("layout", "horizontal");
@@ -100,17 +101,6 @@ void HelmsScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        auto reactor = my_spaceship.getComponent<Reactor>();
-        energy_display->setVisible(reactor);
-        if (reactor)
-            energy_display->setValue(string(int(reactor->energy)));
-        if (auto transform = my_spaceship.getComponent<sp::Transform>())
-            heading_display->setValue(string(transform->getRotation() - 270.0f, 1));
-        if (auto physics = my_spaceship.getComponent<sp::Physics>()) {
-            float velocity = glm::length(physics->getVelocity()) / 1000 * 60;
-            velocity_display->setValue(tr("{value} {unit}/min").format({{"value", string(velocity, 1)}, {"unit", DISTANCE_UNIT_1K}}));
-        }
-
         warp_controls->setVisible(my_spaceship.hasComponent<WarpDrive>());
         jump_controls->setVisible(my_spaceship.hasComponent<JumpDrive>());
     }

@@ -291,6 +291,7 @@ set(MAIN_SOURCES
     src/screenComponents/shieldFreqencySelect.cpp
     src/screenComponents/jumpControls.cpp
     src/screenComponents/impulseControls.cpp
+    src/screenComponents/infoDisplay.cpp
     src/screenComponents/frequencyCurve.cpp
     src/screenComponents/noiseOverlay.cpp
     src/screenComponents/powerDamageIndicator.cpp
@@ -573,6 +574,7 @@ set(MAIN_SOURCES
     src/screenComponents/hackingDialog.h
     src/screenComponents/helpOverlay.h
     src/screenComponents/impulseControls.h
+    src/screenComponents/infoDisplay.h
     src/screenComponents/impulseSound.h
     src/screenComponents/indicatorOverlays.h
     src/screenComponents/jumpControls.h

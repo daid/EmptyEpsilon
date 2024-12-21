@@ -18,6 +18,7 @@
 #include "screenComponents/selfDestructButton.h"
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
+#include "screenComponents/infoDisplay.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_togglebutton.h"
@@ -42,16 +43,16 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     auto stats = new GuiElement(this, "ENGINEER_STATS");
     stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 200)->setAttribute("layout", "vertical");
 
-    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    auto energy_display = new EnergyInfoDisplay(stats, "ENERGY_DISPLAY", 0.45, true);
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setSize(240, 40);
-    hull_display = new GuiKeyValueDisplay(stats, "HULL_DISPLAY", 0.45, tr("health","Hull"), "");
-    hull_display->setIcon("gui/icons/hull")->setTextSize(20)->setSize(240, 40);
-    front_shield_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45, tr("shields", "Front"), "");
-    front_shield_display->setIcon("gui/icons/shields-fore")->setTextSize(20)->setSize(240, 40);
-    rear_shield_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45, tr("shields", "Rear"), "");
-    rear_shield_display->setIcon("gui/icons/shields-aft")->setTextSize(20)->setSize(240, 40);
-    coolant_display = new GuiKeyValueDisplay(stats, "COOLANT_DISPLAY", 0.45, tr("total","Coolant"), "");
-    coolant_display->setIcon("gui/icons/coolant")->setTextSize(20)->setSize(240, 40);
+    auto hull_display = new HullInfoDisplay(stats, "HULL_DISPLAY", 0.45);
+    hull_display->setTextSize(20)->setSize(240, 40);
+    auto front_shield_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45, 0);
+    front_shield_display->setSize(240, 40);
+    auto rear_shield_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45, 1);
+    rear_shield_display->setSize(240, 40);
+    auto coolant_display = new CoolantInfoDisplay(stats, "COOLANT_DISPLAY", 0.45);
+    coolant_display->setSize(240, 40);
 
     self_destruct_button = new GuiSelfDestructButton(this, "SELF_DESTRUCT");
     self_destruct_button->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(240, 100)->setVisible(my_spaceship && my_spaceship.hasComponent<SelfDestruct>());
@@ -186,65 +187,12 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     (new GuiCustomShipFunctions(this, crew_position, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
-
-    previous_energy_level = 0.0f;
-    average_energy_delta = 0.0f;
-    previous_energy_measurement = 0.0f;
 }
 
 void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        auto reactor = my_spaceship.getComponent<Reactor>();
-        if (reactor) {
-            // Update the energy usage.
-            if (previous_energy_measurement == 0.0f)
-            {
-                previous_energy_level = reactor->energy;
-                previous_energy_measurement = engine->getElapsedTime();
-            }else{
-                if (previous_energy_measurement != engine->getElapsedTime())
-                {
-                    float delta_t = engine->getElapsedTime() - previous_energy_measurement;
-                    float delta_e = reactor->energy - previous_energy_level;
-                    float delta_e_per_second = delta_e / delta_t;
-                    average_energy_delta = average_energy_delta * 0.99f + delta_e_per_second * 0.01f;
-
-                    previous_energy_level = reactor->energy;
-                    previous_energy_measurement = engine->getElapsedTime();
-                }
-            }
-            energy_display->setValue(toNearbyIntString(reactor->energy) + " (" + tr("{energy}/min").format({{"energy", toNearbyIntString(average_energy_delta * 60.0f)}}) + ")");
-            if (reactor->energy < 100.0f)
-                energy_display->setColor(glm::u8vec4(255, 0, 0, 255));
-            else
-                energy_display->setColor(glm::u8vec4{255,255,255,255});
-        }
-
-        auto hull = my_spaceship.getComponent<Hull>();
-        if (hull) {
-            hull_display->setValue(toNearbyIntString(100.0f * hull->current / hull->max) + "%");
-            if (hull->current < hull->max / 4.0f)
-                hull_display->setColor(glm::u8vec4(255, 0, 0, 255));
-            else
-                hull_display->setColor(glm::u8vec4{255,255,255,255});
-        }
-        auto shields = my_spaceship.getComponent<Shields>();
-        if (shields && shields->entries.size() > 0)
-        {
-            front_shield_display->setValue(string(shields->entries[0].percentage()) + "%");
-            front_shield_display->show();
-        } else {
-            front_shield_display->hide();
-        }
-        if (shields && shields->entries.size() > 1)
-        {
-            rear_shield_display->setValue(string(shields->entries[1].percentage()) + "%");
-            rear_shield_display->show();
-        } else {
-            rear_shield_display->hide();
-        }
         float total_coolant_used = 0.0f;
         for(int n=0; n<ShipSystem::COUNT; n++)
         {
@@ -293,10 +241,8 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
         }
 
         auto coolant = my_spaceship.getComponent<Coolant>();
-        coolant_display->setVisible(coolant);
         coolant_remaining_bar->setVisible(coolant);
         if (coolant) {
-            coolant_display->setValue(toNearbyIntString(coolant->max * 100.0f / coolant->max_coolant_per_system) + "%");
             coolant_remaining_bar->setRange(0, coolant->max);
             coolant_remaining_bar->setValue(coolant->max - total_coolant_used);
         }

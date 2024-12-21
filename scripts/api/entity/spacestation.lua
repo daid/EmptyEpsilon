@@ -1,3 +1,4 @@
+__default_station_faction = "Independent"
 
 --- A SpaceStation is an immobile ship-like object that repairs, resupplies, and recharges ships that dock with it.
 --- It sets several ShipTemplateBasedObject properties upon creation:
@@ -13,5 +14,6 @@ function SpaceStation()
         transform = {rotation=random(0, 360)},
         callsign = {callsign=generateRandomCallSign("DS")},
     }
+    e:setFaction(__default_station_faction)
     return e
 end

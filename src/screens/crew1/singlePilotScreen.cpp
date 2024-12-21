@@ -31,6 +31,7 @@
 #include "screenComponents/beamFrequencySelector.h"
 #include "screenComponents/beamTargetSelector.h"
 #include "screenComponents/powerDamageIndicator.h"
+#include "screenComponents/infoDisplay.h"
 
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
@@ -88,14 +89,14 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 
     auto stats = new GuiElement(this, "STATS");
     stats->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(240, 160)->setAttribute("layout", "vertical");
-    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    auto energy_display = new EnergyInfoDisplay(stats, "ENERGY_DISPLAY", 0.45);
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setSize(240, 40);
-    heading_display = new GuiKeyValueDisplay(stats, "HEADING_DISPLAY", 0.45, tr("Heading"), "");
-    heading_display->setIcon("gui/icons/heading")->setTextSize(20)->setSize(240, 40);
-    velocity_display = new GuiKeyValueDisplay(stats, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
-    velocity_display->setIcon("gui/icons/speed")->setTextSize(20)->setSize(240, 40);
-    shields_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45, tr("Shields"), "");
-    shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setSize(240, 40);
+    auto heading_display = new HeadingInfoDisplay(stats, "HEADING_DISPLAY", 0.45);
+    heading_display->setSize(240, 40);
+    auto velocity_display = new VelocityInfoDisplay(stats, "VELOCITY_DISPLAY", 0.45);
+    velocity_display->setSize(240, 40);
+    auto shields_display = new ShieldsInfoDisplay(stats, "SHIELDS_DISPLAY", 0.45);
+    shields_display->setSize(240, 40);
 
     // Unlocked missile aim dial and lock controls.
     missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
@@ -143,32 +144,8 @@ void SinglePilotScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        auto reactor = my_spaceship.getComponent<Reactor>();
-        energy_display->setVisible(reactor);
-        if (reactor)
-            energy_display->setValue(string(int(reactor->energy)));
-        auto transform = my_spaceship.getComponent<sp::Transform>();
-        auto physics = my_spaceship.getComponent<sp::Physics>();
-        if (transform)
-            heading_display->setValue(string(transform->getRotation() - 270, 1));
-        if (physics) {
-            float velocity = glm::length(physics->getVelocity()) / 1000 * 60;
-            velocity_display->setValue(tr("{value} {unit}/min").format({{"value", string(velocity, 1)}, {"unit", DISTANCE_UNIT_1K}}));
-        }
-
         warp_controls->setVisible(my_spaceship.hasComponent<WarpDrive>());
         jump_controls->setVisible(my_spaceship.hasComponent<JumpDrive>());
-
-        auto shields = my_spaceship.getComponent<Shields>();
-        if (shields) {
-            string shields_value = "";
-            for(auto& shield : shields->entries)
-                shields_value += string(shield.level * 100.0f / shield.max, 0) + "% ";
-            shields_display->show();
-            shields_display->setValue(shields_value);
-        } else {
-            shields_display->hide();
-        }
 
         missile_aim->setVisible(tube_controls->getManualAim());
 

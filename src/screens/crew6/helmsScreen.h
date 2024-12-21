@@ -14,9 +14,6 @@ class HelmsScreen : public GuiOverlay
 private:
     GuiOverlay* background_crosses;
 
-    GuiKeyValueDisplay* energy_display;
-    GuiKeyValueDisplay* heading_display;
-    GuiKeyValueDisplay* velocity_display;
     GuiElement* warp_controls;
     GuiElement* jump_controls;
     GuiLabel* heading_hint;
