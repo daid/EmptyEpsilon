@@ -69,13 +69,14 @@ void MissileSystem::update(float delta)
     }
 
     for(auto [entity, flight, transform, physics] : sp::ecs::Query<MissileFlight, sp::Transform, sp::Physics>()) {
+        physics.setVelocity(vec2FromAngle(transform.getRotation()) * flight.speed);
         if (flight.timeout > 0.0f) {
             flight.timeout -= delta;
             if (flight.timeout <= 0.0f && game_server) {
                 entity.removeComponent<MissileFlight>();
+                physics.setVelocity({0.0f, 0.0f});
             }
         }
-        physics.setVelocity(vec2FromAngle(transform.getRotation()) * flight.speed);
     }
 
     for(auto [entity, homing, transform, physics] : sp::ecs::Query<MissileHoming, sp::Transform, sp::Physics>()) {
@@ -106,6 +107,7 @@ void MissileSystem::update(float delta)
 
     if (game_server) {
         for(auto [entity, deot, transform] : sp::ecs::Query<DelayedExplodeOnTouch, sp::Transform>()) {
+            if (deot.trigger_holdoff_delay > 0.0f) deot.trigger_holdoff_delay -= delta;
             if (!deot.triggered) continue;
             deot.delay -= delta;
             if (deot.delay >= 0.0f) continue;
@@ -134,7 +136,7 @@ void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
 {
     if (!game_server) return;
     auto deot = a.getComponent<DelayedExplodeOnTouch>();
-    if (deot) {
+    if (deot && deot->trigger_holdoff_delay <= 0.0f) {
         auto hull = b.getComponent<Hull>();
         if (!hull) return;
         deot->triggered = true;
@@ -239,6 +241,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
     if (!source_transform) return;
     auto fireLocation = source_transform->getPosition() + rotateVec2(glm::vec2(tube.position), source_transform->getRotation());
     auto category_modifier = MissileWeaponData::convertSizeToCategoryModifier(tube.size);
+    auto& mwd = MissileWeaponData::getDataFor(tube.type_loaded);
 
     sp::ecs::Entity missile;
     switch(tube.type_loaded)
@@ -272,6 +275,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         {
             missile = sp::ecs::Entity::create();
             auto& mc = missile.addComponent<DelayedExplodeOnTouch>();
+            mc.trigger_holdoff_delay = mwd.lifetime;
             mc.delay = 1.0f;
             mc.owner = source;
             mc.damage_at_center = 160.0f * category_modifier;
@@ -315,7 +319,6 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         else
             physics.setRectangle(sp::Physics::Type::Sensor, {10, 30});
 
-        auto& mwd = MissileWeaponData::getDataFor(tube.type_loaded);
         auto& mf = missile.addComponent<MissileFlight>();
         mf.speed = mwd.speed / category_modifier;
         if (tube.type_loaded == MW_Mine)
@@ -333,7 +336,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         auto& t = missile.addComponent<sp::Transform>();
         t.setPosition(fireLocation);
         t.setRotation(source_transform->getRotation() + tube.direction);
-        auto cpe = missile.addComponent<ConstantParticleEmitter>();
+        auto& cpe = missile.addComponent<ConstantParticleEmitter>();
         if (tube.type_loaded == MW_Mine) {
             cpe.travel_random_range = 100.0f;
             cpe.start_color = {1, 1, 1};
@@ -344,7 +347,8 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             cpe.life_time = 10.0f;
         }
 
-        missile.addComponent<LifeTime>().lifetime = mwd.lifetime / category_modifier;
+        if (tube.type_loaded != MW_Mine)
+            missile.addComponent<LifeTime>().lifetime = mwd.lifetime / category_modifier;
 
         if (tube.type_loaded != MW_Mine) {
             auto& dbad = missile.addComponent<DestroyedByAreaDamage>();

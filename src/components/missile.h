@@ -38,6 +38,7 @@ class ExplodeOnTimeout
 class DelayedExplodeOnTouch : public ExplodeOnTouch
 {
 public:
+    float trigger_holdoff_delay = 1.0f;
     float delay = 1.0f;
     bool triggered = false;
 };
