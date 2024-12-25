@@ -11017,7 +11017,7 @@ msgstr "Boucliers arrière : %d%%\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr "Boucliers %s : %d%%\n"
+msgstr "Bouclier %s : %d%%\n"
 
 #: scripts/comms_scenario_utility.lua:8759
 #, lua-format

@@ -1901,11 +1901,13 @@ msgstr ""
 "Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_50_gaps.lua:2562 scripts/scenario_50_gaps.lua:2567
+#, fuzzy
 msgctxt "needRep-comms"
 msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
+"\n"
 "\n"
 "Réputation insuffisante pour acheter."
 
