@@ -29,7 +29,7 @@ msgid ""
 "There's one every weekend. All experience levels are welcome."
 msgstr ""
 "- Durée approx. : 2h\n"
-"- Difficulté : Difficile (variable)\n"
+"- Difficulté : Très difficile (variable)\n"
 "- Vaisseaux joueurs : 1\n"
 "\n"
 "Mission : Vous devez vous échapper de prison et rentrer chez vous.\n"
@@ -42,7 +42,7 @@ msgstr ""
 "- Titre original : Escape\n"
 "- Auteur : Xansta (2019)\n"
 "- Traduction FR : Muerte (Mai 24)\n"
-"Relecture en cours 38%     154/403 ; Test du scénario en cours : contient "
+"Relecture en cours 70%     285/403 ; Test du scénario en cours : contient "
 "actuellement des bogues et est susceptible de ne pas fonctionner "
 "correctement. Muerte (Déc. 24)\n"
 "\n"
@@ -295,25 +295,21 @@ msgid "Stations"
 msgstr "Stations"
 
 #: scripts/scenario_53_escape.lua:302
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Class"
 msgstr "Classe"
 
 #: scripts/scenario_53_escape.lua:303
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Size"
 msgstr "Taille"
 
 #: scripts/scenario_53_escape.lua:304
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Shield"
 msgstr "Boucliers"
 
 #: scripts/scenario_53_escape.lua:305
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Hull"
 msgstr "Coque"
@@ -466,7 +462,6 @@ msgid "Ships"
 msgstr "Vaisseaux"
 
 #: scripts/scenario_53_escape.lua:355
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Starfighter"
 msgstr "Chasseurs stellaires"
@@ -513,13 +508,11 @@ msgstr ""
 "bombes nucléaires."
 
 #: scripts/scenario_53_escape.lua:360
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Frigate"
 msgstr "Frégates"
 
 #: scripts/scenario_53_escape.lua:363 scripts/scenario_53_escape.lua:408
-#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "Frigates are one size up from starfighters. They require a crew from 3 to 20 "
@@ -555,23 +548,21 @@ msgstr ""
 "modifiés pour les inclure.\n"
 "\n"
 "Ils sont divisés en 3 sous-classes différentes :\n"
-"* Cruiser (Croiseur) : frégates armées, axées sur le combat. Jouent "
+"* Croiseur (Cruiser) : frégates armées, axées sur le combat. Jouent "
 "différents rôles.\n"
-"* Light transport (Transport léger) : petits transports, pouvant transporter "
+"* Transport léger (Light transport) : petits transports, pouvant transporter "
 "jusqu'à 50 soldats dans des conditions spartiates ou quelques diplomates "
 "dans le confort. Selon leur rôles, ils peuvent disposer d'armes.\n"
-"* Support (Soutien) : les types de soutiens sont très variés. Il s'agit "
+"* Soutien (Support) : les types de soutiens sont très variés. Il s'agit "
 "simplement d'une coque de frégate équipée de tout ce qui est nécessaire. "
 "Tout, des poseurs de mines aux vaisseaux scientifiques."
 
 #: scripts/scenario_53_escape.lua:365
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Corvette"
 msgstr "Corvettes"
 
 #: scripts/scenario_53_escape.lua:368
-#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "Corvettes are the common large ships. Larger then a frigate, smaller then a "
@@ -600,16 +591,15 @@ msgstr ""
 "Ils se répartissent en 3 sous-classes différentes :\n"
 "* Destroyer : vaisseaux orientés combat. Pas de science, pas de transport. "
 "Juste la mort dans un gros emballage.\n"
-"* Support (Soutien) : rôles de soutien à grande échelle. Les transporteurs "
+"* Soutien (Support) : rôles de soutien à grande échelle. Les transporteurs "
 "de drones entrent dans cette catégorie, ainsi que les centres de réparation "
 "mobiles.\n"
-"* Freighter (Cargo) : grande gamme de vaisseaux de transport. Les plus "
+"* Cargo (Freighter) : grande gamme de vaisseaux de transport. Les plus "
 "courants ici sont les cargos équipés de la téléportation, spécialisés pour "
 "parcourir de grandes distances avec de grandes quantités de marchandises, "
 "troupes, carburant, déchets..."
 
 #: scripts/scenario_53_escape.lua:370
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Dreadnought"
 msgstr "Cuirassés"
@@ -641,19 +631,16 @@ msgid "Cruiser"
 msgstr "Croiseur"
 
 #: scripts/scenario_53_escape.lua:380
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Sub-class"
 msgstr "Sous-classe"
 
 #: scripts/scenario_53_escape.lua:381
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Move speed"
 msgstr "Vit. de mouvement"
 
 #: scripts/scenario_53_escape.lua:382
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Turn speed"
 msgstr "Vit. de rotation"
@@ -717,10 +704,9 @@ msgstr "Faisc. laser 15°:90°"
 #, fuzzy
 msgctxt "scienceDB"
 msgid "Mainstream"
-msgstr "Grand public"
+msgstr "- Grand public -"
 
 #: scripts/scenario_53_escape.lua:405
-#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "Mainstream ships are those ship types that are commonly available to CUF "
@@ -733,13 +719,11 @@ msgstr ""
 "humaine."
 
 #: scripts/scenario_53_escape.lua:410
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Repulse"
 msgstr "Repulse"
 
 #: scripts/scenario_53_escape.lua:413
-#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "A Flavia P. Falcon with better hull and shields, a jump drive, two turreted "
@@ -749,130 +733,109 @@ msgstr ""
 "Un Faucon P. Flavia avec une coque et des boucliers améliorés, la "
 "téléportation, 2 tourelles de faisceaux laser couvrant tous les côtés et 2 "
 "tubes lance-missiles : avant et arrière.\n"
-"Les missiles nucléaires (nukes) et les mines ont disparu."
+"Les missiles nucléaires (nuke) et les mines ont disparu."
 
 #: scripts/scenario_53_escape.lua:415
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Cruiser: Armored Transport"
 msgstr "Croiseur : transport blindé"
 
 #: scripts/scenario_53_escape.lua:419
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Repair Crew"
 msgstr "réparateurs"
 
 #: scripts/scenario_53_escape.lua:420
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Jump Range"
 msgstr "Portée de saut"
 
 #: scripts/scenario_53_escape.lua:420
-#, fuzzy
 msgctxt "scienceDB"
 msgid "5 - 50 U"
 msgstr "5 - 50 u"
 
 #: scripts/scenario_53_escape.lua:421
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Sensor Ranges"
 msgstr "Portée des capteurs"
 
 #: scripts/scenario_53_escape.lua:421
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Long: 38 U / Short: 5 U"
 msgstr "Longue : 38u / Courte : 5u"
 
 #: scripts/scenario_53_escape.lua:422
-#, fuzzy
 msgctxt "scienceDB"
 msgid "3.3 U/min"
 msgstr "3.3 u/min"
 
 #: scripts/scenario_53_escape.lua:423
-#, fuzzy
 msgctxt "scienceDB"
 msgid "9 deg/sec"
 msgstr "9°/sec"
 
 #: scripts/scenario_53_escape.lua:424
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Beam weapon 90:200"
 msgstr "Faisc. laser 90°:200°"
 
 #: scripts/scenario_53_escape.lua:424 scripts/scenario_53_escape.lua:425
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Rng:1.2 Dmg:5 Cyc:6"
 msgstr "Portée:1.2  Dégâts:5  Cycle:6s"
 
 #: scripts/scenario_53_escape.lua:425
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Beam weapon 270:200"
 msgstr "Faisc. laser 270°:200°"
 
 #: scripts/scenario_53_escape.lua:426
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Tube 0"
 msgstr "Tube Avant"
 
 #: scripts/scenario_53_escape.lua:426 scripts/scenario_53_escape.lua:427
-#, fuzzy
 msgctxt "scienceDB"
 msgid "20 sec"
 msgstr "20 sec"
 
 #: scripts/scenario_53_escape.lua:427
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Tube 180"
 msgstr "Tube Arrière"
 
 #: scripts/scenario_53_escape.lua:428
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Storage Homing"
 msgstr "Stockage Homing"
 
 #: scripts/scenario_53_escape.lua:429
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Storage HVLI"
 msgstr "Stockage HVLI"
 
 #: scripts/scenario_53_escape.lua:571
-#, fuzzy
 msgctxt "scienceDescription-planet"
 msgid "Mining and heavy industry"
-msgstr "Mines et industrie lourde"
+msgstr "Exploitation minière et industrie lourde"
 
 #: scripts/scenario_53_escape.lua:573
-#, fuzzy
 msgctxt "scienceDescription-station"
 msgid "Baldwin Observatory"
 msgstr "Observatoire Baldwin"
 
 #: scripts/scenario_53_escape.lua:606
-#, fuzzy
 msgctxt "scienceDescription-planet"
 msgid "M class planet"
 msgstr "Planète de classe M"
 
 #: scripts/scenario_53_escape.lua:608
-#, fuzzy
 msgctxt "scienceDescription-station"
 msgid "Malastare communications network hub"
 msgstr "Centre de communication de Malastare"
 
 #: scripts/scenario_53_escape.lua:1309
-#, fuzzy
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
@@ -913,37 +876,31 @@ msgid "What type of ordnance do you need?"
 msgstr "De quel type de munitions avez-vous besoin ?"
 
 #: scripts/scenario_53_escape.lua:1346
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes?"
 msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ?"
 
 #: scripts/scenario_53_escape.lua:1347
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We really need some nukes."
 msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke)"
 
 #: scripts/scenario_53_escape.lua:1348
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Can you restock our nuclear missiles?"
 msgstr "Pouvez-vous réapprovisionner nos missiles nucléaires ?"
 
 #: scripts/scenario_53_escape.lua:1351
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Please restock our EMP missiles."
 msgstr "Veuillez réapprovisionner nos missiles EMP"
 
 #: scripts/scenario_53_escape.lua:1352
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Got any EMPs?"
 msgstr "Avez-vous des EMP ?"
 
 #: scripts/scenario_53_escape.lua:1353
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We need Electro-Magnetic Pulse missiles."
 msgstr "Nous avons besoin de missiles EMP"
@@ -964,19 +921,16 @@ msgid "Please replenish our homing missiles."
 msgstr "Merci de réapprovisionner nos missiles à tête chercheuse"
 
 #: scripts/scenario_53_escape.lua:1361
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "We could use some mines."
 msgstr "Nous pourrions avoir besoin de quelques mines"
 
 #: scripts/scenario_53_escape.lua:1362
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "How about mines?"
 msgstr "Concernant les mines ?"
 
 #: scripts/scenario_53_escape.lua:1363
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "Got mines for us?"
 msgstr "Avez-vous des mines à nous fournir ?"
@@ -1068,36 +1022,32 @@ msgid "Can you help us with beam weapon repair?"
 msgstr "Avec plaisir. Dites, sauriez-vous réparer nos faisceaux ?"
 
 #: scripts/scenario_53_escape.lua:1388
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid ""
 "For the Repulse class? Absolutely. I used to work on those all the time."
 msgstr ""
 "[Frère de Kent]\n"
 "Pour un vaisseau de classe Repulse ? Absolument.\n"
-"J'avais l'habitude de travailler dessus à longueur de journée.\n"
-"\n"
-"...Après quelques instants.\n"
-"\n"
-"Voilà, c'était rapide ! Vos faisceaux sont réparés."
+"J'avais l'habitude de travailler dessus à longueur de journée. Je m'y mets "
+"tout de suite."
 
 #: scripts/scenario_53_escape.lua:1393 scripts/scenario_53_escape.lua:1417
 #: scripts/scenario_53_escape.lua:1634 scripts/scenario_53_escape.lua:1661
 #: scripts/scenario_53_escape.lua:1691
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Thanks"
 msgstr "Merci beaucoup"
 
 #: scripts/scenario_53_escape.lua:1394
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid ""
 "You're quite welcome. While I was in there, I fixed up your beams so they "
 "could function at maximum potential."
 msgstr ""
+"...Après quelques instants.\n"
+"\n"
 "[Frère de Kent]\n"
-"Oh de rien.\n"
+"Voilà, vos faisceaux sont réparés. C'était rapide ! \n"
 "Pendant que j'y étais, j'en ai profité pour les booster un peu, qu'ils "
 "puissent fonctionner au max de leur potentiel."
 
@@ -1114,13 +1064,11 @@ msgstr ""
 "Un grand merci à VOUS surtout d'avoir sorti mon frère de cette prison."
 
 #: scripts/scenario_53_escape.lua:1411
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Talk to Edwina's father"
 msgstr "Parler au père d'Edwina"
 
 #: scripts/scenario_53_escape.lua:1412
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid ""
 "I am glad to hear that Edwina escaped that prison. We were worried about her."
@@ -1128,19 +1076,15 @@ msgstr ""
 "[Père d'Edwina]\n"
 "Bonjour,\n"
 "Je suis tellement heureux d'apprendre qu'Edwina s'est échappée de cette "
-"prison.\n"
-"Nous étions tellement inquiets pour elle."
+"prison. Nous étions tellement inquiets pour elle."
 
 #: scripts/scenario_53_escape.lua:1413
 #, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Edwina says you do missile systems repair work"
-msgstr ""
-"Edwina dit que vous travaillez sur de l'armement. Pourriez-vous jeter un "
-"oeil ?"
+msgstr "Edwina dit que vous travaillez dans l'armement. Vous pouvez regarder ?"
 
 #: scripts/scenario_53_escape.lua:1414
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Should be easy enough. I'm grateful to you for helping Edwina escape."
 msgstr ""
@@ -1153,7 +1097,6 @@ msgstr ""
 "C'est bon, j'ai réparé votre système de missiles."
 
 #: scripts/scenario_53_escape.lua:1418
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "You're quite welcome."
 msgstr ""
@@ -1162,13 +1105,11 @@ msgstr ""
 "Edwina à s'échapper."
 
 #: scripts/scenario_53_escape.lua:1430
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Talk to Johnny"
 msgstr "Parler à Johnny"
 
 #: scripts/scenario_53_escape.lua:1431
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Mom? Wow, I thought you were toast. Good to hear your voice."
 msgstr ""
@@ -1181,10 +1122,10 @@ msgstr ""
 #, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Can you get our impulse drive working better?"
-msgstr "Oh moi aussi Johnny. Peux-tu jeter un oeil sur nos moteurs ?"
+msgstr "Oh moi aussi Johnny ! Dis, peux-tu jeter un oeil sur nos moteurs ?"
 
 #: scripts/scenario_53_escape.lua:1458
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewFriends-comms"
 msgid "Piece of cake. Thanks for the %s."
 msgstr ""
@@ -1194,16 +1135,14 @@ msgstr ""
 "\n"
 "...Après quelques minutes d'attente.\n"
 "\n"
-"Voilà c'est fait."
+"Voilà c'est fait !"
 
 #: scripts/scenario_53_escape.lua:1463 scripts/scenario_53_escape.lua:1475
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Thank you"
 msgstr "Merci encore fiston. C'est bon de t'entendre"
 
 #: scripts/scenario_53_escape.lua:1464 scripts/scenario_53_escape.lua:1476
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Sure, Mom. I'll see you at Christmas."
 msgstr ""
@@ -1211,12 +1150,12 @@ msgstr ""
 "Pas de problèmes mom. J'te verrai à Noël."
 
 #: scripts/scenario_53_escape.lua:1469
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewFriends-comms"
 msgid "Piece of cake, but I'll need %s."
 msgstr ""
 "[Fils de Janet]\n"
-"C'est du gâteau, mais je vais avoir besoin de %s pour m'en occuper."
+"Pour moi c'est du gâteau, mais je vais avoir besoin de %s pour m'en occuper."
 
 #: scripts/scenario_53_escape.lua:1472
 #, fuzzy
@@ -1231,13 +1170,11 @@ msgstr ""
 "Voilà c'est fait."
 
 #: scripts/scenario_53_escape.lua:1489
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Talk to Nancy's brother"
 msgstr "Parler au frère de Nancy"
 
 #: scripts/scenario_53_escape.lua:1490
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid ""
 "Nancy! Last I heard, your ship had been captured by Kraylors and you were "
@@ -1251,13 +1188,12 @@ msgstr ""
 "Quel bon vent t'amène sœurette ?"
 
 #: scripts/scenario_53_escape.lua:1491
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Our jump drive needs some tuning"
 msgstr "Notre téléportation aurait bien besoin d'un réglage"
 
 #: scripts/scenario_53_escape.lua:1517
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewFriends-comms"
 msgid ""
 "That should not be hard to do. I could probably do that in my sleep. Thanks "
@@ -1265,10 +1201,10 @@ msgid ""
 msgstr ""
 "[Frère de Nancy]\n"
 "Cela ne devrait pas être trop difficile à faire.\n"
-"Je pourrais probablement le faire même en dormant, ah ah. Ah super, vous "
-"avez du %s.\n"
+"Je pourrais probablement le faire même en dormant, ah ah.\n"
+"Ah super, vous avez du %s.\n"
 "\n"
-"...Après un moment d'attente.\n"
+"...Après un court moment d'attente.\n"
 "\n"
 "Et voilà !"
 
@@ -1279,7 +1215,6 @@ msgid "Thanks, bro"
 msgstr "Merci frangin, tu nous sauves la vie"
 
 #: scripts/scenario_53_escape.lua:1523 scripts/scenario_53_escape.lua:1535
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid ""
 "No problem. Treat your jump drive right and it'll always bring you home."
@@ -1290,7 +1225,7 @@ msgstr ""
 "maison."
 
 #: scripts/scenario_53_escape.lua:1528
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewFriends-comms"
 msgid ""
 "That should not be hard to do. I could probably do that in my sleep. But "
@@ -1310,18 +1245,16 @@ msgstr ""
 "Cela ne devrait pas être trop difficile à faire. Je pourrais probablement le "
 "faire les yeux fermés.\n"
 "\n"
-"...Après un moment d'attente.\n"
+"...Après un court moment d'attente.\n"
 "\n"
 "Et voilà !"
 
 #: scripts/scenario_53_escape.lua:1548
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Talk to Manuel's cousin"
 msgstr "Parler au cousin de Manuel"
 
 #: scripts/scenario_53_escape.lua:1549
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid ""
 "Yo Manuel, why you want to scare us by getting captured, man? At least you "
@@ -1333,7 +1266,6 @@ msgstr ""
 "Pourquoi êtes-vous ici ?"
 
 #: scripts/scenario_53_escape.lua:1550
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "The reactor is weak... real weak"
 msgstr "Notre réacteur est faible... vraiment faible"
@@ -1344,10 +1276,13 @@ msgctxt "crewFriends-comms"
 msgid "Lemme see if I can get it to charge up right."
 msgstr ""
 "[Cousin de Manuel]\n"
-"Laissez-moi voir si je peux le charger correctement."
+"Laissez-moi voir si je peux le charger correctement.\n"
+"\n"
+"...Après plusieurs minutes d'attente.\n"
+"\n"
+"Vous êtes opérationnel !"
 
 #: scripts/scenario_53_escape.lua:1554
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "The captain would appreciate it"
 msgstr "Notre capitaine va apprécier le geste"
@@ -1358,20 +1293,16 @@ msgctxt "crewFriends-comms"
 msgid ""
 "You're all set. Don't overheat the reactor or you'll get a nasty surprise."
 msgstr ""
-"...Après plusieurs minutes d'attente.\n"
-"\n"
 "[Cousin de Manuel]\n"
-"Vous êtes opérationnel. Ne surchauffez pas le réacteur ou vous risquez "
-"d'avoir une mauvaise surprise."
+"No problemo cousin !\n"
+"Ne surchauffez pas le réacteur ou vous risquez d'avoir une mauvaise surprise."
 
 #: scripts/scenario_53_escape.lua:1567
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Talk to Fred's wife"
 msgstr "Parler à la femme de Fred"
 
 #: scripts/scenario_53_escape.lua:1568
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Fred! You escaped! We were worried sick."
 msgstr ""
@@ -1380,13 +1311,11 @@ msgstr ""
 "J'étais malade d'inquiétude."
 
 #: scripts/scenario_53_escape.lua:1569
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "We need to connect to the Human Navy network"
-msgstr "Ma puce nous devons rapidement contacter la Marine"
+msgstr "Ma puce nous devons rapidement contacter la Marine humaine"
 
 #: scripts/scenario_53_escape.lua:1570
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid ""
 "I can do that for you. However, that means you'll go from being Independent "
@@ -1398,13 +1327,11 @@ msgstr ""
 "celui de la Marine humaine. Ton capitaine en est bien conscient ?"
 
 #: scripts/scenario_53_escape.lua:1571
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "I understand the consequences. Please proceed"
 msgstr "Ok oui, on comprends. S'il te plait fais-le !"
 
 #: scripts/scenario_53_escape.lua:1633
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "You're all fixed up."
 msgstr ""
@@ -1414,7 +1341,6 @@ msgstr ""
 "C'est fait. Vos communications sont complètement rétablies."
 
 #: scripts/scenario_53_escape.lua:1635
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "You're welcome. Fred, honey, I'll see you after you get off work."
 msgstr ""
@@ -1424,13 +1350,11 @@ msgstr ""
 "Tiens-moi au courant, je te rejoins dès que je peux."
 
 #: scripts/scenario_53_escape.lua:1641
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "I'll check with the captain and get back to you"
 msgstr "Je vais lui en parler et on vous recontacte"
 
 #: scripts/scenario_53_escape.lua:1642
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Ok."
 msgstr ""
@@ -1439,13 +1363,12 @@ msgstr ""
 "Je t'aime."
 
 #: scripts/scenario_53_escape.lua:1653 scripts/scenario_53_escape.lua:1722
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Talk to Amir's sister"
 msgstr "Parler à la sœur d'Amir"
 
 #: scripts/scenario_53_escape.lua:1654
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewFriends-comms"
 msgid "Welcome to %s! Any friend of Amir's is a friend of mine."
 msgstr ""
@@ -1454,13 +1377,11 @@ msgstr ""
 "Les amis de mon frère sont mes amis."
 
 #: scripts/scenario_53_escape.lua:1655
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Can you help us with our shields?"
 msgstr "Pourriez-vous nous aider avec nos boucliers ?"
 
 #: scripts/scenario_53_escape.lua:1656
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid ""
 "Yes, I can. However, I can only help with one: front or rear. I need more "
@@ -1472,13 +1393,11 @@ msgstr ""
 "J'aurai besoin de plus de pièces pour faire les 2."
 
 #: scripts/scenario_53_escape.lua:1657
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Repair front shield"
 msgstr "Réparez le bouclier avant svp"
 
 #: scripts/scenario_53_escape.lua:1658
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid ""
 "Your front shields are now fully operational. Your repair crew can finish "
@@ -1498,12 +1417,10 @@ msgid ""
 "at %s."
 msgstr ""
 "[Sœur d'Amir]\n"
-"Certainement.\n"
 "Rapportez-moi du %s pour réparer le bouclier arrière. Vous en trouverez "
 "surement sur %s."
 
 #: scripts/scenario_53_escape.lua:1687
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Repair rear shield"
 msgstr "Réparez le bouclier arrière svp"
@@ -1534,7 +1451,7 @@ msgstr ""
 "sur %s."
 
 #: scripts/scenario_53_escape.lua:1723
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewFriends-comms"
 msgid ""
 "Welcome back. Did you bring some %s for me to finish fixing up your shields?"
@@ -1570,18 +1487,17 @@ msgstr ""
 "Boucliers arrière complètement opérationnels."
 
 #: scripts/scenario_53_escape.lua:1745
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewFriends-comms"
 msgid "Oops, no %s aboard"
-msgstr "Oups, nous n'avons pas de %s à bord."
+msgstr "Oups, nous n'avons pas de %s à bord"
 
 #: scripts/scenario_53_escape.lua:1746
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Ok, good luck."
 msgstr ""
 "[Sœur d'Amir]\n"
-"D'accord, bonne chance."
+"D'accord, tant pis. Bonne chance alors."
 
 #: scripts/scenario_53_escape.lua:1755 scripts/scenario_53_escape.lua:2254
 #, fuzzy
@@ -1638,24 +1554,23 @@ msgstr "     %s : x%i, %i rép l'unité.\n"
 #, fuzzy
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
-msgstr ""
-"Marchandises ou composants que la station achètera : prix en réputation\n"
+msgstr "- Marchandises à acheter : (bénéfice en réputation)\n"
 
 #: scripts/scenario_53_escape.lua:1793 scripts/scenario_53_escape.lua:1802
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
-msgstr ""
-"     %s : x%i\n"
-"\n"
+msgstr "     %s : %i.\n"
 
 #: scripts/scenario_53_escape.lua:1796
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
 msgstr ""
+"\n"
 "Notre vaisseau (%s) :\n"
-"- Marchandises à bord :\n"
+"- Marchandises à bord : (quantité)\n"
+"\n"
 
 #: scripts/scenario_53_escape.lua:1806
 msgctxt "trade-comms"
@@ -1686,7 +1601,6 @@ msgstr ""
 "Coût : %i rép l'unité."
 
 #: scripts/scenario_53_escape.lua:1814
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -1697,7 +1611,6 @@ msgstr ""
 "Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_53_escape.lua:1816 scripts/scenario_53_escape.lua:1832
-#, fuzzy
 msgctxt "needRep-comms"
 msgid ""
 "\n"
@@ -1729,26 +1642,26 @@ msgstr ""
 "1 marchandise achetée."
 
 #: scripts/scenario_53_escape.lua:1842
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Sell one %s for %i reputation"
 msgstr "Vendre 1 %s pour %i rép"
 
 #: scripts/scenario_53_escape.lua:1843
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Reputation price: %i"
 msgstr ""
 "Type de marchandise : %s\n"
-"Coût : %i rép l'unité."
+"Bénéfice : %i rép."
 
 #: scripts/scenario_53_escape.lua:1846
-#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "One sold"
 msgstr ""
+"\n"
 "\n"
 "1 marchandise vendue."
 
@@ -1787,7 +1700,7 @@ msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_53_escape.lua:1902 scripts/scenario_53_escape.lua:2477
 #: scripts/scenario_53_escape.lua:2673
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr "Échanger des produits de luxe (luxury) contre %s"
@@ -1849,13 +1762,13 @@ msgid "Report status"
 msgstr "Au rapport"
 
 #: scripts/scenario_53_escape.lua:1955
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "Hull:%s"
 msgstr "Coque : %s%%"
 
 #: scripts/scenario_53_escape.lua:1958
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid ""
 "%s\n"
@@ -1865,7 +1778,7 @@ msgstr ""
 "Boucliers : %s%%"
 
 #: scripts/scenario_53_escape.lua:1961
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid ""
 "%s\n"
@@ -2049,7 +1962,6 @@ msgstr ""
 "%s."
 
 #: scripts/scenario_53_escape.lua:2047
-#, fuzzy
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
@@ -2142,7 +2054,6 @@ msgstr ""
 "station au préalable."
 
 #: scripts/scenario_53_escape.lua:2111
-#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
@@ -2152,7 +2063,6 @@ msgstr ""
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_53_escape.lua:2114
-#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -2164,9 +2074,10 @@ msgstr ""
 "occupés pour faire affaire avec vous."
 
 #: scripts/scenario_53_escape.lua:2144
+#, fuzzy
 msgctxt "station-comms"
 msgid "I need information"
-msgstr "j'aurai besoin d'informations"
+msgstr "J'aurai besoin d'informations"
 
 #: scripts/scenario_53_escape.lua:2145
 msgctxt "station-comms"
@@ -2248,7 +2159,7 @@ msgid "What goods do you have available for sale or trade?"
 msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
 
 #: scripts/scenario_53_escape.lua:2192
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid ""
 "Station %s:\n"
@@ -2258,7 +2169,7 @@ msgstr ""
 "- Marchandises à vendre : (quantité, coût en réputation)"
 
 #: scripts/scenario_53_escape.lua:2194
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -2268,7 +2179,6 @@ msgstr ""
 "   %14s : x%2i, %3i rép l'unité."
 
 #: scripts/scenario_53_escape.lua:2200
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Where can I find particular goods?"
 msgstr "Où puis-je trouver des marchandises particulières ?"
@@ -2333,7 +2243,7 @@ msgid "WP %d"
 msgstr "Marqueur %d"
 
 #: scripts/scenario_53_escape.lua:2284
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
@@ -2362,7 +2272,7 @@ msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
 
 #: scripts/scenario_53_escape.lua:2305
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at WP %d"
 msgstr ""
@@ -2400,7 +2310,6 @@ msgid " and will trade it for luxury"
 msgstr ". Elle l'échange contre des produits de luxe (luxury)"
 
 #: scripts/scenario_53_escape.lua:2422 scripts/scenario_53_escape.lua:2712
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
@@ -2420,7 +2329,7 @@ msgstr "Auriez-vous des marchandises à vendre ?"
 #: scripts/scenario_53_escape.lua:2430 scripts/scenario_53_escape.lua:2617
 msgctxt "trade-comms"
 msgid "We've got "
-msgstr "Nous avons "
+msgstr "Nous avons : "
 
 #: scripts/scenario_53_escape.lua:2434 scripts/scenario_53_escape.lua:2621
 #, fuzzy
@@ -2429,20 +2338,18 @@ msgid ", "
 msgstr ", "
 
 #: scripts/scenario_53_escape.lua:2442 scripts/scenario_53_escape.lua:2629
-#, fuzzy
 msgctxt "trade-comms"
 msgid "nothing"
 msgstr "rien du tout."
 
 #: scripts/scenario_53_escape.lua:2481 scripts/scenario_53_escape.lua:2677
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Traded"
 msgstr "Marchandises échangées."
 
 #: scripts/scenario_53_escape.lua:2503 scripts/scenario_53_escape.lua:2699
 #: scripts/scenario_53_escape.lua:2766 scripts/scenario_53_escape.lua:2798
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
 msgstr "1 %s acheté auprès de %s."
@@ -2458,7 +2365,6 @@ msgstr ""
 
 #: scripts/scenario_53_escape.lua:2508 scripts/scenario_53_escape.lua:2704
 #: scripts/scenario_53_escape.lua:2771 scripts/scenario_53_escape.lua:2803
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Insufficient cargo space"
 msgstr "Votre espace de stockage est insuffisant pour acheter."
@@ -2514,7 +2420,7 @@ msgid "Hull: %d%%\n"
 msgstr "Coque : %d%%\n"
 
 #: scripts/scenario_53_escape.lua:2542
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr "Boucliers : %d%%\n"
@@ -2538,19 +2444,19 @@ msgid "Shield %s: %d%%\n"
 msgstr "Bouclier %s : %d%%\n"
 
 #: scripts/scenario_53_escape.lua:2555
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr "Missiles %s : %d/%d\n"
 
 #: scripts/scenario_53_escape.lua:2564
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr "Amarrez-vous à %s"
 
 #: scripts/scenario_53_escape.lua:2565
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr "En cours d'amarrage à %s."
@@ -2705,31 +2611,26 @@ msgid "Insufficient reputation"
 msgstr "Réputation insuffisante"
 
 #: scripts/scenario_53_escape.lua:2779
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Why are you bothering me?"
 msgstr "Pourquoi me dérangez-vous ?"
 
 #: scripts/scenario_53_escape.lua:2814
-#, fuzzy
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr ""
 "Désolé, nous n'avons pas le temps de discuter avec vous.\n"
-"\n"
 "Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_53_escape.lua:2816
-#, fuzzy
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
 "Nous n'avons rien pour vous.\n"
-"\n"
 "Bonne journée."
 
 #: scripts/scenario_53_escape.lua:2861
@@ -2755,7 +2656,6 @@ msgstr ""
 "l'état de ses moteurs."
 
 #: scripts/scenario_53_escape.lua:2870
-#, fuzzy
 msgctxt "airTimer-tabScience&Eng&Eng+&Ops"
 msgid "Suffocation"
 msgstr "Suffocation"
@@ -2770,7 +2670,7 @@ msgstr "%s %i"
 #, fuzzy, lua-format
 msgctxt "airTimer-tabScience&Eng&Eng+&Ops"
 msgid "%s %i:%.2i"
-msgstr "%s %i : %.2i"
+msgstr "%s %i:%.2i"
 
 #: scripts/scenario_53_escape.lua:2881
 #, fuzzy
@@ -2891,6 +2791,7 @@ msgid "Return Transport"
 msgstr "Activer transfert"
 
 #: scripts/scenario_53_escape.lua:3065
+#, fuzzy
 msgctxt "crewTransfer-buttonTactical"
 msgid "Return Transport"
 msgstr "Activer transfert"
@@ -2906,7 +2807,6 @@ msgstr ""
 "Aucune pièce de rechange applicable trouvée à bord."
 
 #: scripts/scenario_53_escape.lua:3099
-#, fuzzy
 msgctxt "crewRepair-shipLog"
 msgid ""
 "Repair crew reports the jump drive not operational. However, they may be "
@@ -2929,7 +2829,6 @@ msgstr ""
 "Des pièces supplémentaires sont nécessaires."
 
 #: scripts/scenario_53_escape.lua:3114
-#, fuzzy
 msgctxt "crewRepair-shipLog"
 msgid ""
 "Repair crew says the missle weapons systems are not repairable with "
@@ -2939,7 +2838,6 @@ msgstr ""
 "n'est pas réparable avec les composants disponibles."
 
 #: scripts/scenario_53_escape.lua:3125
-#, fuzzy
 msgctxt "crewRepair-shipLog"
 msgid ""
 "Repair crew applied some of the parts picked up to make some repairs on the "
@@ -3079,12 +2977,10 @@ msgid " Reactor:%s(%s) "
 msgstr " Réacteur : %s (secteur %s) "
 
 #: scripts/scenario_53_escape.lua:3307
-#, fuzzy
 msgctxt "crewRepair-shipLog"
 msgid "Repair crew suggested locations for ship fixes:"
 msgstr ""
-"[Réparations] L'équipe de réparation suggère plusieurs endroits pour réparer "
-"le vaisseau :"
+"L'équipe de réparation suggère plusieurs endroits pour réparer le vaisseau :"
 
 #: scripts/scenario_53_escape.lua:3331
 #, lua-format
@@ -3121,7 +3017,7 @@ msgid "[%s] You won't get away so easily."
 msgstr "[Vaisseau %s] Vous ne vous en sortirez pas si facilement."
 
 #: scripts/scenario_53_escape.lua:3379
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] You can run, but you can't hide."
 msgstr ""
@@ -3135,7 +3031,7 @@ msgid "[%s] I will get you yet."
 msgstr "[Vaisseau %s] Je vais encore vous capturer et vous remettre en prison."
 
 #: scripts/scenario_53_escape.lua:3381
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] I will hunt you down and destroy you like vermin."
 msgstr ""
@@ -3148,7 +3044,6 @@ msgid "[%s] Slow down, I promise not to destroy you immediately."
 msgstr "[Vaisseau %s] Ralentissez. Je promets de ne pas vous faire de mal."
 
 #: scripts/scenario_53_escape.lua:3397
-#, fuzzy
 msgctxt "Boris-incCall"
 msgid ""
 "You don't steal from Boris Junk Yard without consequences. I'm coming for "
@@ -3158,7 +3053,6 @@ msgstr ""
 "Je viens m'occuper de vous !"
 
 #: scripts/scenario_53_escape.lua:3398
-#, fuzzy
 msgctxt "Boris-incCall"
 msgid "I saw you steal that ship. You'll rue the day."
 msgstr ""
@@ -3166,21 +3060,19 @@ msgstr ""
 "Je vais vous faire regretter d'être nés !"
 
 #: scripts/scenario_53_escape.lua:3399
-#, fuzzy
 msgctxt "Boris-incCall"
 msgid "Stealing a ship, eh? We'll just see about that."
 msgstr ""
-"Alors, on vole un vaisseau ? Tranquillement...\n"
+"Alors comme ça, on vole un vaisseau ? Tranquillement...\n"
 "Bin on va voir ca !"
 
 #: scripts/scenario_53_escape.lua:3400
-#, fuzzy
 msgctxt "Boris-incCall"
 msgid ""
 "You must pay for the ship you stole from Boris Junk Yard... with your life."
 msgstr ""
-"Vous devez payer le vaisseau que vous avez volé à la casse Boris… Le payer "
-"de votre vie."
+"Vous devez payer le vaisseau que vous avez volé à la casse Boris…\n"
+"Le payer de votre vie."
 
 #: scripts/scenario_53_escape.lua:3416
 #, lua-format
@@ -3189,22 +3081,21 @@ msgid "[%s] You can't get rid of me that easily."
 msgstr "[Vaisseau %s] Vous ne vous débarrasserez pas de moi aussi facilement."
 
 #: scripts/scenario_53_escape.lua:3417
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] I'll be back."
 msgstr ""
-"[Vaisseau %s] Comme l'a dis un célèbre cyborg :\n"
-"\n"
-"I'll be back !  (Je reviendrai !)"
+"[Vaisseau %s] Comme l'a dis un célèbre cyborg : I'll be back !  (Je "
+"reviendrai !)"
 
 #: scripts/scenario_53_escape.lua:3418
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] I've got plenty of ships."
 msgstr "[Vaisseau %s] J'ai des tonnes de vaisseaux."
 
 #: scripts/scenario_53_escape.lua:3419
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] This is merely a temporary setback."
 msgstr "[Vaisseau %s] Il s'agit simplement d'un revers temporaire."
@@ -3222,7 +3113,6 @@ msgstr ""
 "Ils commencent dès maintenant la fabrication des pièces."
 
 #: scripts/scenario_53_escape.lua:3447
-#, fuzzy
 msgctxt "crewRepair-shipLog"
 msgid ""
 "Repair crew finished jump drive part fabrication. They believe the jump "
@@ -3239,9 +3129,10 @@ msgid ""
 "Congratulations! You escaped the Kraylor clutches and returned all your "
 "gathered data on the Kraylor to the Human Navy."
 msgstr ""
-"Toutes nos félicitations !\n"
-"Vous avez su échapper aux griffes des Kraylors et transmis avec succès les "
-"données Kraylors à la Marine humaine."
+"[Message du QG]\n"
+"\n"
+"Toutes nos félicitations ! Vous avez échappé aux griffes des Kraylors et "
+"transmis avec succès des informations essentielles à la Marine humaine."
 
 #: scripts/scenario_53_escape.lua:3796
 msgctxt "ZoneLabelDescription-junk"

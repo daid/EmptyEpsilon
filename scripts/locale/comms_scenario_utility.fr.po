@@ -4991,7 +4991,7 @@ msgstr "Des informations"
 #: scripts/comms_scenario_utility.lua:3991
 msgctxt "station-comms"
 msgid "I need information"
-msgstr "j'aurai besoin d'informations"
+msgstr "J'aurai besoin d'informations"
 
 #: scripts/comms_scenario_utility.lua:3992
 msgctxt "station-comms"
@@ -11249,7 +11249,7 @@ msgstr "Avez-vous des marchandises à vendre ?"
 #: scripts/comms_scenario_utility.lua:9488
 msgctxt "trade-comms"
 msgid "We've got "
-msgstr "Nous avons "
+msgstr "Nous avons : "
 
 #: scripts/comms_scenario_utility.lua:9058
 #: scripts/comms_scenario_utility.lua:9500
@@ -12771,13 +12771,13 @@ msgid "Inventory"
 msgstr "Inventaire"
 
 #: scripts/comms_scenario_utility.lua:11078
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgRelay"
 msgid "%s Current cargo:"
 msgstr "%s Cargaison actuelle :"
 
 #: scripts/comms_scenario_utility.lua:11087
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgRelay"
 msgid ""
 "%s\n"
@@ -12787,7 +12787,7 @@ msgstr ""
 "     Vide"
 
 #: scripts/comms_scenario_utility.lua:11089
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgRelay"
 msgid ""
 "%s\n"

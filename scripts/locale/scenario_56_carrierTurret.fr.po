@@ -1949,8 +1949,9 @@ msgstr "     %s : x%i, %i rép l'unité.\n"
 msgctxt "trade-comms"
 msgid "Current Cargo:\n"
 msgstr ""
+"\n"
 "Notre vaisseau :\n"
-"- Marchandises à bord :\n"
+"- Marchandises à bord : (quantité)\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3191
 #, lua-format
@@ -2215,7 +2216,7 @@ msgstr ""
 #: scripts/scenario_56_carrierTurret.lua:3479
 msgctxt "station-comms"
 msgid "I need information"
-msgstr "j'aurai besoin d'informations"
+msgstr "J'aurai besoin d'informations"
 
 #: scripts/scenario_56_carrierTurret.lua:3480
 msgctxt "station-comms"
