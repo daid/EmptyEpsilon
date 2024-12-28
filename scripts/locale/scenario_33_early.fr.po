@@ -24,7 +24,7 @@ msgid ""
 "Navy. Up to 16 player ships may train simultaneously. Based on Earn Your "
 "Wings Scenario by Kilted Klingon."
 msgstr ""
-"EN COURS DE TRADUCTION 8%\n"
+"EN COURS DE TRADUCTION 18%\n"
 "\n"
 "An entry level, learn to play scenario.  Designed for trainees in the Human "
 "Navy. Up to 16 player ships may train simultaneously. Based on Earn Your "
@@ -81,89 +81,100 @@ msgid "Fastest inner and outer speeds"
 msgstr ""
 
 # Scenario setting
+#, fuzzy
 msgctxt "setting"
 msgid "Ships"
-msgstr ""
+msgstr "Vaisseaux"
 
 msgctxt "setting"
 msgid "Determines the number of player ships."
 msgstr ""
 
+#, fuzzy
 msgctxt "Ships"
 msgid "1"
-msgstr ""
+msgstr "1"
 
 msgctxt "Ships"
 msgid "One player ship"
 msgstr ""
 
+#, fuzzy
 msgctxt "Ships"
 msgid "2"
-msgstr ""
+msgstr "2"
 
 msgctxt "Ships"
 msgid "Two player ships"
 msgstr ""
 
+#, fuzzy
 msgctxt "Ships"
 msgid "3"
-msgstr ""
+msgstr "3"
 
 msgctxt "Ships"
 msgid "Three player ships"
 msgstr ""
 
+#, fuzzy
 msgctxt "Ships"
 msgid "4"
-msgstr ""
+msgstr "4"
 
 msgctxt "Ships"
 msgid "Four player ships"
 msgstr ""
 
+#, fuzzy
 msgctxt "Ships"
 msgid "5"
-msgstr ""
+msgstr "5"
 
 msgctxt "Ships"
 msgid "Five player ships"
 msgstr ""
 
+#, fuzzy
 msgctxt "Ships"
 msgid "6"
-msgstr ""
+msgstr "6"
 
 msgctxt "Ships"
 msgid "Six 6 player ships"
 msgstr ""
 
+#, fuzzy
 msgctxt "Ships"
 msgid "7"
-msgstr ""
+msgstr "7"
 
 msgctxt "Ships"
 msgid "Seven player ships"
 msgstr ""
 
+#, fuzzy
 msgctxt "Ships"
 msgid "8"
-msgstr ""
+msgstr "8"
 
 msgctxt "Ships"
 msgid "Eight player ships"
 msgstr ""
 
+#, fuzzy
 msgctxt "Ships"
 msgid "9"
-msgstr ""
+msgstr "9"
 
 msgctxt "Ships"
 msgid "Nine player ships"
 msgstr ""
 
+#, fuzzy
 msgctxt "Ships"
 msgid "10"
-msgstr ""
+msgstr "+10%"
 
 msgctxt "Ships"
 msgid "Ten player ships"
@@ -201,9 +212,10 @@ msgctxt "Ships"
 msgid "Fourteen player ships"
 msgstr ""
 
+#, fuzzy
 msgctxt "Ships"
 msgid "15"
-msgstr ""
+msgstr "15 mn"
 
 msgctxt "Ships"
 msgid "Fifteen player ships"
@@ -236,9 +248,10 @@ msgid ""
 "control codes and player ship names"
 msgstr ""
 
+#, fuzzy
 msgctxt "Control"
 msgid "None"
-msgstr ""
+msgstr "Non limitée"
 
 msgctxt "Control"
 msgid "Control codes will not be used"
@@ -263,9 +276,10 @@ msgctxt "Crutch"
 msgid "Popup messages will appear for each task"
 msgstr ""
 
+#, fuzzy
 msgctxt "Crutch"
 msgid "None"
-msgstr ""
+msgstr "Non limitée"
 
 msgctxt "Crutch"
 msgid "No popup message will appear"
@@ -290,27 +304,30 @@ msgid ""
 "evaluation portion"
 msgstr ""
 
+#, fuzzy
 msgctxt "Insight"
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 msgctxt "Insight"
 msgid "Players see both the numbers and their evaluation for each task"
 msgstr ""
 
 #: scripts/scenario_33_early.lua:1030 scripts/scenario_33_early.lua:1049
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "buttonGM"
 msgid "Version %s"
-msgstr ""
+msgstr "Version %s"
 
 #: scripts/scenario_33_early.lua:1031 scripts/scenario_33_early.lua:1050
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "buttonGM"
 msgid ""
 "Scenario version %s\n"
 " LUA version %s"
 msgstr ""
+"Version de scénario %s\n"
+"Version LUA %s"
 
 #: scripts/scenario_33_early.lua:1036 scripts/scenario_33_early.lua:1055
 msgctxt "buttonGM"
@@ -363,14 +380,16 @@ msgstr ""
 
 #: scripts/scenario_33_early.lua:1068 scripts/scenario_33_early.lua:1158
 #: scripts/scenario_33_early.lua:1293
+#, fuzzy
 msgctxt "buttonGM"
 msgid "-Main"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_33_early.lua:1069
+#, fuzzy
 msgctxt "buttonGM"
 msgid "Dock"
-msgstr ""
+msgstr "À quai"
 
 #: scripts/scenario_33_early.lua:1078
 msgctxt "msgGM"
@@ -490,9 +509,10 @@ msgid "Gunship wave"
 msgstr ""
 
 #: scripts/scenario_33_early.lua:1275
+#, fuzzy
 msgctxt "buttonGM"
 msgid "Dreadnought"
-msgstr ""
+msgstr "Cuirassés"
 
 #: scripts/scenario_33_early.lua:1279
 msgctxt "buttonGM"
@@ -916,9 +936,11 @@ msgid "%s has been destroyed%s! All crew lost. Rest in peace"
 msgstr ""
 
 #: scripts/scenario_33_early.lua:2756
+#, fuzzy
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
+"Nous sommes en train de nous faire attaquer ! Pas le temps de discuter !"
 
 #: scripts/scenario_33_early.lua:2762
 #, lua-format
@@ -1074,8 +1096,9 @@ msgstr ""
 #: scripts/scenario_33_early.lua:5403 scripts/scenario_33_early.lua:5425
 #: scripts/scenario_33_early.lua:5449 scripts/scenario_33_early.lua:5471
 #: scripts/scenario_33_early.lua:5495
+#, fuzzy
 msgid "Back"
-msgstr ""
+msgstr "Précédent"
 
 #: scripts/scenario_33_early.lua:2818
 msgctxt "station-comms"
@@ -1147,37 +1170,48 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_33_early.lua:2866
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "station-comms"
 msgid ""
 "Greetings %s!\n"
 "How may we help you today?"
 msgstr ""
+"Salutations %s !\n"
+"Comment pouvons-nous vous aider aujourd'hui ?"
 
 #: scripts/scenario_33_early.lua:2868
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
 "What can we do for you today?"
 msgstr ""
+"Bonjour officier !\n"
+"Que pouvons-nous faire pour vous aujourd'hui ?"
 
 #: scripts/scenario_33_early.lua:2870
+#, fuzzy
 msgctxt "station-comms"
 msgid "Hello, may I help you?"
-msgstr ""
+msgstr "Bonjour, puis-je vous aider ?"
 
 #: scripts/scenario_33_early.lua:2873
+#, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
-msgstr ""
+msgstr "Bienvenue dans notre charmante petite station."
 
 #: scripts/scenario_33_early.lua:2876
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
 "enemies nearby."
 msgstr ""
+"\n"
+"Veuillez nous excuser si nous semblons un peu distraits. Nous surveillons "
+"attentivement les ennemis à proximité."
 
 #: scripts/scenario_33_early.lua:2879 scripts/scenario_33_early.lua:3304
 msgctxt "station-comms"
@@ -1342,116 +1376,133 @@ msgid "Sorry, we don't have any ordnance today"
 msgstr ""
 
 #: scripts/scenario_33_early.lua:3029
+#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair ship system"
-msgstr ""
+msgstr "Réparer les systèmes du vaisseau"
 
 #: scripts/scenario_33_early.lua:3030
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid ""
 "What system would you like repaired?\n"
 "\n"
 "Reputation: %i"
 msgstr ""
+"Quel système souhaitez-vous réparer ?\n"
+"\n"
+"Réputation : %i"
 
 #: scripts/scenario_33_early.lua:3033
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair probe launch system (%s Rep)"
-msgstr ""
+msgstr "Réparer le système de lancement de sonde (%s rép)"
 
 #: scripts/scenario_33_early.lua:3035 scripts/scenario_33_early.lua:3052
 #: scripts/scenario_33_early.lua:3069 scripts/scenario_33_early.lua:3087
 #: scripts/scenario_33_early.lua:3105 scripts/scenario_33_early.lua:3233
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "You need to stay docked for that action."
-msgstr ""
+msgstr "Vous devez rester amarré à la station pour cette action."
 
 #: scripts/scenario_33_early.lua:3040
+#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Your probe launch system has been repaired"
-msgstr ""
+msgstr "Votre système de lancement de sonde a été réparé."
 
 #: scripts/scenario_33_early.lua:3042 scripts/scenario_33_early.lua:3059
 #: scripts/scenario_33_early.lua:3076 scripts/scenario_33_early.lua:3094
 #: scripts/scenario_33_early.lua:3112
+#, fuzzy
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr ""
+msgstr "Réputation insuffisante."
 
 #: scripts/scenario_33_early.lua:3050
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair hacking system (%s Rep)"
-msgstr ""
+msgstr "Réparer le système de piratage (%s rép)"
 
 #: scripts/scenario_33_early.lua:3057
+#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Your hack system has been repaired"
-msgstr ""
+msgstr "Votre système de piratage a été réparé."
 
 #: scripts/scenario_33_early.lua:3067
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair scanning system (%s Rep)"
-msgstr ""
+msgstr "Réparer les scanners (%s rép)"
 
 #: scripts/scenario_33_early.lua:3074
+#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Your scanners have been repaired"
-msgstr ""
+msgstr "Vos scanners ont été réparés."
 
 #: scripts/scenario_33_early.lua:3085
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair combat maneuver (%s Rep)"
-msgstr ""
+msgstr "Réparer la manœuvre de combat (%s rép)"
 
 #: scripts/scenario_33_early.lua:3092
+#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Your combat maneuver has been repaired"
-msgstr ""
+msgstr "Votre manœuvre de combat a été réparée."
 
 #: scripts/scenario_33_early.lua:3103
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair self destruct system (%s Rep)"
-msgstr ""
+msgstr "Réparer le système d'autodestruction (%s rép)"
 
 #: scripts/scenario_33_early.lua:3110
+#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Your self destruct system has been repaired"
-msgstr ""
+msgstr "Votre système d'autodestruction a été réparé."
 
 #: scripts/scenario_33_early.lua:3121
+#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Docking services status"
-msgstr ""
+msgstr "État des services d'accueil"
 
 #: scripts/scenario_33_early.lua:3122
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Station %s docking services status:"
-msgstr ""
+msgstr "État des services d'accueil de la station %s :\n"
 
 #: scripts/scenario_33_early.lua:3124 scripts/scenario_33_early.lua:3401
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid ""
 "%s\n"
 "Replenish scan probes."
 msgstr ""
+"%s\n"
+"- Réapprovisionnement des sondes."
 
 #: scripts/scenario_33_early.lua:3128 scripts/scenario_33_early.lua:3405
 msgctxt "dockingServicesStatus-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
 msgstr ""
+"- Sondes : impossible de réapprovisionner les sondes en raison d'une "
+"défaillance de l'unité de fabrication."
 
 #: scripts/scenario_33_early.lua:3129 scripts/scenario_33_early.lua:3406
 msgctxt "dockingServicesStatus-comms"
 msgid "Parts shortage prevents scan probe replenishment."
 msgstr ""
+"- Sondes : le manque de pièces empêche le réapprovisionnement des sondes."
 
 #: scripts/scenario_33_early.lua:3130 scripts/scenario_33_early.lua:3407
 msgctxt "dockingServicesStatus-comms"
@@ -1459,37 +1510,49 @@ msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
 "reasons."
 msgstr ""
+"- Sondes : les gestionnaires de la station ont réduit le réapprovisionnement "
+"des sondes pour des raisons de réduction des coûts."
 
 #: scripts/scenario_33_early.lua:3137 scripts/scenario_33_early.lua:3414
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid ""
 "%s\n"
 "Ship hull repair."
 msgstr ""
+"%s\n"
+"- Réparation de la coque."
 
 #: scripts/scenario_33_early.lua:3141 scripts/scenario_33_early.lua:3418
 msgctxt "dockingServicesStatus-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
+"- Coque : nous n'avons plus les matériaux et fournitures nécessaires pour "
+"réparer la coque."
 
 #: scripts/scenario_33_early.lua:3142
 msgctxt "dockingServicesStatus-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
+"- Coque : l'automatisation de réparation de la coque n'est pas disponible "
+"pendant la maintenance."
 
 #: scripts/scenario_33_early.lua:3143 scripts/scenario_33_early.lua:3420
 msgctxt "dockingServicesStatus-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
+"- Coque : tous les techniciens de réparation de coque sont en quarantaine "
+"dans leur quartiers pour cause de maladie."
 
 #: scripts/scenario_33_early.lua:3150 scripts/scenario_33_early.lua:3427
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid ""
 "%s\n"
 "Recharge ship energy stores."
 msgstr ""
+"%s\n"
+"- Recharge des réserves d'énergie du vaisseau."
 
 #: scripts/scenario_33_early.lua:3154 scripts/scenario_33_early.lua:3431
 msgctxt "dockingServicesStatus-comms"
@@ -1497,11 +1560,15 @@ msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
 msgstr ""
+"- Énergie : une récente panne de réacteur nous a mis sous tension "
+"auxiliaire, nous ne pouvons donc pas recharger les vaisseaux."
 
 #: scripts/scenario_33_early.lua:3155 scripts/scenario_33_early.lua:3432
 msgctxt "dockingServicesStatus-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
+"- Énergie : un couplage électrique défectueux rend la recharge des vaisseaux "
+"trop risquée."
 
 #: scripts/scenario_33_early.lua:3156 scripts/scenario_33_early.lua:3433
 msgctxt "dockingServicesStatus-comms"
@@ -1509,11 +1576,15 @@ msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
 "can't recharge ships right now."
 msgstr ""
+"- Énergie : une frappe d'astéroïde a endommagé nos cellules solaires et nous "
+"manquons de puissance, nous ne pouvons donc pas recharger les vaisseaux pour "
+"le moment."
 
 #: scripts/scenario_33_early.lua:3166 scripts/scenario_33_early.lua:3346
+#, fuzzy
 msgctxt "orders-comms"
 msgid "What are my current orders?"
-msgstr ""
+msgstr "Quels sont nos ordres en cours ?"
 
 #: scripts/scenario_33_early.lua:3169 scripts/scenario_33_early.lua:3349
 msgctxt "orders-comms"
@@ -1548,12 +1619,14 @@ msgid "Gather data on orbiting bodies"
 msgstr ""
 
 #: scripts/scenario_33_early.lua:3183 scripts/scenario_33_early.lua:3363
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "orders-comms"
 msgid ""
 "\n"
 "   %i Minutes remain in game"
 msgstr ""
+"\n"
+"  > Il reste %i minutes de jeu."
 
 #: scripts/scenario_33_early.lua:3195
 #, lua-format
@@ -1635,9 +1708,10 @@ msgstr ""
 
 #: scripts/scenario_33_early.lua:3261 scripts/scenario_33_early.lua:3276
 #: scripts/scenario_33_early.lua:3281
+#, fuzzy
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
-msgstr ""
+msgstr "Pas assez de réputation."
 
 #: scripts/scenario_33_early.lua:3266
 msgctxt "ammo-comms"
@@ -1651,36 +1725,49 @@ msgid "Get just one"
 msgstr "Prendre juste 1 munition"
 
 #: scripts/scenario_33_early.lua:3296
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr ""
+"Bonjour, officier.\n"
+"Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
+"station au préalable."
 
 #: scripts/scenario_33_early.lua:3298
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr ""
+"Salutations.\n"
+"Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_33_early.lua:3301
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"
 "Be aware that if enemies in the area get much closer, we will be too busy to "
 "conduct business with you."
 msgstr ""
+"\n"
+"Sachez que si les ennemis de la zone se rapprochent encore, nous serons trop "
+"occupés pour faire affaire avec vous."
 
 #: scripts/scenario_33_early.lua:3321
+#, fuzzy
 msgctxt "station-comms"
 msgid "I need information"
-msgstr ""
+msgstr "J'aurai besoin d'informations"
 
 #: scripts/scenario_33_early.lua:3322
+#, fuzzy
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
-msgstr ""
+msgstr "De quel genre d'informations avez-vous besoin ?"
 
 #: scripts/scenario_33_early.lua:3369
 msgctxt "station-comms"
@@ -1758,29 +1845,36 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_33_early.lua:3419
+#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Hull repair automation unavailable whie it is undergoing maintenance."
 msgstr ""
+"Automatisation de réparation de coque indisponible, elle est en cours de "
+"maintenance."
 
 #: scripts/scenario_33_early.lua:3446
+#, fuzzy
 msgctxt "stationGeneralInfo-comms"
 msgid "Tell me more about your station"
-msgstr ""
+msgstr "Dites m'en plus à propos de votre station"
 
 #: scripts/scenario_33_early.lua:3447
+#, fuzzy
 msgctxt "stationGeneralInfo-comms"
 msgid "What would you like to know?"
-msgstr ""
+msgstr "Qu'aimeriez-vous savoir ?"
 
 #: scripts/scenario_33_early.lua:3449
+#, fuzzy
 msgctxt "stationGeneralInfo-comms"
 msgid "General information"
-msgstr ""
+msgstr "Informations générales"
 
 #: scripts/scenario_33_early.lua:3455
+#, fuzzy
 msgctxt "stationGeneralInfo-comms"
 msgid "Station history"
-msgstr ""
+msgstr "L'histoire de la station"
 
 #: scripts/scenario_33_early.lua:3463
 msgctxt "stationGeneralInfo-comms"
@@ -2400,14 +2494,16 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_33_early.lua:4424
+#, fuzzy
 msgctxt "evaluation-comms"
 msgid "complete"
-msgstr ""
+msgstr "--> [achevé]"
 
 #: scripts/scenario_33_early.lua:4425
+#, fuzzy
 msgctxt "evaluation-comms"
 msgid "incomplete"
-msgstr ""
+msgstr "--> [à vérifier]"
 
 #: scripts/scenario_33_early.lua:4426
 msgctxt "evaluation-comms"
@@ -2464,111 +2560,125 @@ msgstr ""
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
+"Salutations,\n"
+"Que nous voulez-vous ?"
 
 #: scripts/scenario_33_early.lua:4548
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
-msgstr ""
+msgstr "Monsieur, comment pouvons-nous vous assister ?"
 
 #: scripts/scenario_33_early.lua:4550
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr ""
+msgstr "Défendez un marqueur"
 
 #: scripts/scenario_33_early.lua:4552
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
+"Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en placer "
+"un."
 
 #: scripts/scenario_33_early.lua:4554
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
-msgstr ""
+msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/scenario_33_early.lua:4556
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
-msgstr ""
+msgstr "Défendez le marqueur %d"
 
 #: scripts/scenario_33_early.lua:4558
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
-msgstr ""
+msgstr "Nous partons immédiatement défendre le marqueur %d."
 
 #: scripts/scenario_33_early.lua:4566
 msgctxt "shipAssist-comms"
 msgid "Assist me"
-msgstr ""
+msgstr "Aidez-nous !"
 
 #: scripts/scenario_33_early.lua:4567
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
-msgstr ""
+msgstr "Entendu, nous partons immédiatement vous aider."
 
 #: scripts/scenario_33_early.lua:4572
 msgctxt "shipAssist-comms"
 msgid "Report status"
-msgstr ""
+msgstr "Au rapport"
 
 #: scripts/scenario_33_early.lua:4573
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Hull: "
-msgstr ""
+msgstr "Coque : "
 
 #: scripts/scenario_33_early.lua:4576
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Shield: "
-msgstr ""
+msgstr "Boucliers :"
 
 #: scripts/scenario_33_early.lua:4578
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Front Shield: "
-msgstr ""
+msgstr "Boucliers avant : "
 
 #: scripts/scenario_33_early.lua:4579
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: "
-msgstr ""
+msgstr "Boucliers arrière : "
 
 #: scripts/scenario_33_early.lua:4582
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Shield "
-msgstr ""
+msgstr "Boucliers "
 
 #: scripts/scenario_33_early.lua:4588
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid " Missiles: "
-msgstr ""
+msgstr " Missiles : "
 
 #: scripts/scenario_33_early.lua:4593 scripts/scenario_33_early.lua:5349
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "%s\n"
 "Docked with %s"
 msgstr ""
+"%s\n"
+"Amarré à %s."
 
 #: scripts/scenario_33_early.lua:4598
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "%s\n"
 "Heading for %s station %s in %s"
 msgstr ""
+"%s\n"
+"En route pour la station %s %s en secteur %s."
 
 #: scripts/scenario_33_early.lua:4608
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr ""
+msgstr "Amarrez-vous à %s"
 
 #: scripts/scenario_33_early.lua:4609
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
-msgstr ""
+msgstr "En cours d'amarrage à %s."
 
 #: scripts/scenario_33_early.lua:4626 scripts/scenario_33_early.lua:5368
 msgctxt "trade-comms"
@@ -2630,9 +2740,12 @@ msgstr "1 %s acheté auprès de %s."
 #: scripts/scenario_33_early.lua:5401 scripts/scenario_33_early.lua:5423
 #: scripts/scenario_33_early.lua:5447 scripts/scenario_33_early.lua:5469
 #: scripts/scenario_33_early.lua:5493
+#, fuzzy
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
 msgstr ""
+"\n"
+"Réputation insuffisante pour acheter."
 
 #: scripts/scenario_33_early.lua:4762 scripts/scenario_33_early.lua:5325
 msgctxt "trade-comms"
@@ -2837,10 +2950,10 @@ msgid "No"
 msgstr "Non"
 
 #: scripts/scenario_33_early.lua:5255
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "tabRelay"
 msgid "Disruption %i"
-msgstr ""
+msgstr "Perturbation %i"
 
 #: scripts/scenario_33_early.lua:5289
 msgctxt "trade-comms"
@@ -2905,23 +3018,26 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_33_early.lua:5345
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Where are you going?"
-msgstr ""
+msgstr "Où allez-vous ?"
 
 #: scripts/scenario_33_early.lua:5347
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hi %s,"
-msgstr ""
+msgstr "Salut %s,"
 
 #: scripts/scenario_33_early.lua:5354
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "%s\n"
 "Heading for %s station %s in sector %s"
 msgstr ""
+"%s\n"
+"En route pour la station %s %s dans le secteur %s."
 
 #: scripts/scenario_33_early.lua:5505
 msgctxt "ship-comms"
@@ -2929,6 +3045,8 @@ msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr ""
+"Désolé, nous n'avons pas le temps de discuter avec vous.\n"
+"Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_33_early.lua:5507
 msgctxt "ship-comms"
@@ -2936,6 +3054,8 @@ msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
+"Nous n'avons rien pour vous.\n"
+"Bonne journée."
 
 #: scripts/scenario_33_early.lua:5526
 #, lua-format
@@ -3226,35 +3346,3 @@ msgid ""
 "%s\n"
 "   %s in %s"
 msgstr ""
-
-# Scenario name
-#~ msgid "Empty space"
-#~ msgstr "Espace vide"
-
-# Scenario description
-#~ msgid ""
-#~ "Empty scenario, no enemies, no friendlies. Can be used by a GM player to "
-#~ "setup a scenario in the GM screen. The F5 key can be used to copy the "
-#~ "current layout to the clipboard for use in scenario scripts."
-#~ msgstr ""
-#~ "Scénario vide.\n"
-#~ "\n"
-#~ "Aucun ennemis ni alliés.\n"
-#~ "Peut être utilisé par un joueur MJ pour configurer un scénario à partir "
-#~ "de l'écran MJ.\n"
-#~ "\n"
-#~ "La touche F5 peut être utilisée pour copier la mise en page actuelle dans "
-#~ "le presse-papiers pour une utilisation dans des scripts de scénario au "
-#~ "format lua."
-
-#~ msgctxt "buttonGM"
-#~ msgid "Random asteroid field"
-#~ msgstr "Champ astér. aléatoire"
-
-#~ msgctxt "buttonGM"
-#~ msgid "Random nebula field"
-#~ msgstr "Champ nébul. aléatoire"
-
-#~ msgctxt "buttonGM"
-#~ msgid "Delete unselected"
-#~ msgstr "Supprime non sélect."
