@@ -2652,17 +2652,17 @@ msgstr "rien du tout."
 #: scripts/scenario_33_early.lua:4792
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr ""
+msgstr "Nous allons vous anéantir"
 
 #: scripts/scenario_33_early.lua:4793
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
-msgstr ""
+msgstr "Votre race va s'éteindre ici et maintenant !"
 
 #: scripts/scenario_33_early.lua:4794
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr ""
+msgstr "Vos menaces ridicules ne nous impressionnent pas."
 
 #: scripts/scenario_33_early.lua:4800
 msgctxt "shipEnemy-comms"
@@ -2670,46 +2670,50 @@ msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
+"...Ktzzzsss...\n"
+"Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_33_early.lua:4803
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
-msgstr ""
+msgstr "Nous allons vous détruire"
 
 #: scripts/scenario_33_early.lua:4804
 msgctxt "shipEnemy-comms"
 msgid "We think not. It is you who will experience destruction!"
-msgstr ""
+msgstr "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
 
 #: scripts/scenario_33_early.lua:4806
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
-msgstr ""
+msgstr "Vous n'avez aucun honneur"
 
 #: scripts/scenario_33_early.lua:4807
 msgctxt "shipEnemy-comms"
 msgid "Your insult has brought our wrath upon you. Prepare to die."
-msgstr ""
+msgstr "Votre insulte a attiré notre colère sur vous. Préparez-vous à mourir !"
 
 #: scripts/scenario_33_early.lua:4808
 msgctxt "shipEnemy-comms"
 msgid "Your comments about honor have no meaning to us"
-msgstr ""
+msgstr "Vos commentaires sur l'honneur n'ont aucune signification pour nous."
 
 #: scripts/scenario_33_early.lua:4810
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
-msgstr ""
+msgstr "Nous plaignons votre race pathétique"
 
 #: scripts/scenario_33_early.lua:4811
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
 msgstr ""
+"Pathétique ?\n"
+"Vous allez regretter votre insolence !"
 
 #: scripts/scenario_33_early.lua:4812
 msgctxt "shipEnemy-comms"
 msgid "We don't care what you think of us"
-msgstr ""
+msgstr "Peu importe ce que vous pensez de nous."
 
 #: scripts/scenario_33_early.lua:4817
 msgctxt "shipEnemy-comms"
@@ -2717,11 +2721,15 @@ msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
+"Nous ne vous voulons aucun mal, mais nous vous en ferons si nécessaire.\n"
+"Fin de transmission."
 
 #: scripts/scenario_33_early.lua:4821
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
+"Restez en dehors de notre chemin, ou votre mort sera une amusante "
+"distraction pour nous !"
 
 #: scripts/scenario_33_early.lua:4825
 msgctxt "shipEnemy-comms"
@@ -2733,21 +2741,32 @@ msgid ""
 ":Do not cross us:\n"
 "Communication halted."
 msgstr ""
+"000110011010...Grzzzz...\n"
+"Communication binaire non détectée...Grzzz Passons en communication "
+"universelle..Grrzzz\n"
+"Générons réponse appropriée pour cible en langage humain à partir archives..."
+"Grrzzzz\n"
+"\n"
+"     [Ne nous approchez pas !] Grrzzz\n"
+"\n"
+"Communication interrompue."
 
 #: scripts/scenario_33_early.lua:4826
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr ""
+msgstr "Executer à distance : AUTODESTRUCTION"
 
 #: scripts/scenario_33_early.lua:4827
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr ""
+"Commande malveillante reçue. Annulée.\n"
+"Nous ciblons immédiatement source."
 
 #: scripts/scenario_33_early.lua:4828
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
-msgstr ""
+msgstr "Ordre externe ignoré."
 
 #: scripts/scenario_33_early.lua:4830
 msgctxt "shipEnemy-comms"
@@ -2756,61 +2775,66 @@ msgid ""
 "all.\n"
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr ""
+"Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
+"s'opposer à nous tous.\n"
+"Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_33_early.lua:4831
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr ""
+msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
 
 #: scripts/scenario_33_early.lua:4832
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr ""
+msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
 
 #: scripts/scenario_33_early.lua:4833
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
+"Notre peuple a d'autres priorités que l'extermination de parasites tels que "
+"vous."
 
 #: scripts/scenario_33_early.lua:4837
 msgctxt "shipEnemy-comms"
 msgid "State your business"
-msgstr ""
+msgstr "Qu'est ce que vous voulez ?"
 
 #: scripts/scenario_33_early.lua:4841
 msgctxt "shipEnemy-comms"
 msgid "What do you want? (not that we care)"
-msgstr ""
+msgstr "Qu'est-ce que vous voulez ? (non pas que ça nous intéresse)"
 
 #: scripts/scenario_33_early.lua:4845
 msgctxt "shipEnemy-comms"
 msgid "Don't waste our time"
-msgstr ""
+msgstr "Ne perdons pas notre temps."
 
 #: scripts/scenario_33_early.lua:4847
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
-msgstr ""
+msgstr "Occupez-vous de vos affaires !"
 
 #: scripts/scenario_33_early.lua:4887
 msgctxt "shipEnemy-comms"
 msgid "Subspace and time continuum disruption authorized"
-msgstr ""
+msgstr "Interruption du sous-espace et du continuum temporel autorisée."
 
 #: scripts/scenario_33_early.lua:4905
 msgctxt "shipEnemy-comms"
 msgid "Stop your actions"
-msgstr ""
+msgstr "Arrêtez ce que vous faites !"
 
 #: scripts/scenario_33_early.lua:4929
 msgctxt "shipEnemy-comms"
 msgid "Just this once, we'll take your advice"
-msgstr ""
+msgstr "Juste pour cette fois, nous suivrons vos conseils."
 
 #: scripts/scenario_33_early.lua:4931
 msgctxt "shipEnemy-comms"
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: scripts/scenario_33_early.lua:5255
 #, lua-format

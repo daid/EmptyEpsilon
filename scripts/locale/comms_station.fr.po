@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-05-07 13:29+0200\n"
+"PO-Revision-Date: 2024-12-28 15:11+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 
 #: scripts/comms_station.lua:73
@@ -39,33 +39,33 @@ msgstr "Bienvenue dans notre charmante station orbitale %s."
 #: scripts/comms_station.lua:98
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us?"
-msgstr "Auriez-vous des homing missiles pour nous ?"
+msgstr "Des missiles à tête chercheuse (homing) pour nous ?"
 
 #: scripts/comms_station.lua:99
 msgctxt "ammo-comms"
 msgid "Can you restock us with HVLI?"
-msgstr "Pouvez-vous nous réapprovisionner en HVLI ? "
+msgstr "Pouvez-vous nous réapprovisionner en HVLI ?"
 
 #: scripts/comms_station.lua:100
 msgctxt "ammo-comms"
 msgid "Please re-stock our mines."
-msgstr "Merci de réapprovisionner notre stock de mines, c'est urgent."
+msgstr "Merci de faire le plein de mines"
 
 #: scripts/comms_station.lua:101
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes?"
-msgstr "Avez-vous des missiles nucléaires nukes ?"
+msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ?"
 
 #: scripts/comms_station.lua:102
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles."
-msgstr "Avez-vous des missiles EMP ?"
+msgstr "Veuillez réapprovisionner nos missiles EMP"
 
 #: scripts/comms_station.lua:108
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%d rep each)"
-msgstr "%s (%d rép chacun)"
+msgstr "%s (%d rép l'unité)"
 
 #: scripts/comms_station.lua:124
 msgctxt "station-comms"
@@ -75,31 +75,29 @@ msgstr "Vous devez rester amarrés à la station pour cette action."
 #: scripts/comms_station.lua:131
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr ""
-"Nous ne fournissons pas ce type d'armes de destruction massive. \n"
-"Nous sommes pour la paix dans l'univers."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/comms_station.lua:133
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/comms_station.lua:135
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/comms_station.lua:146
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
-msgstr "Officier, vos nukes sont en capacité maximale et prêtes à servir !"
+msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
 
 #: scripts/comms_station.lua:148
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
-"Désolé, officier, mais vous êtes déjà au max de ce que nous pouvons vous "
-"fournir."
+"Désolé, officier, mais vous êtes au maximum de ce que vous pouvez "
+"stocker."
 
 #: scripts/comms_station.lua:151 scripts/comms_station.lua:165
 #: scripts/comms_station.lua:229 scripts/comms_station.lua:234
@@ -116,7 +114,7 @@ msgstr "Pas assez de réputation."
 #: scripts/comms_station.lua:160
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
-msgstr "Vous êtes chargés au max et prêt à tout faire péter."
+msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
 
 #: scripts/comms_station.lua:162
 msgctxt "ammo-comms"
@@ -153,13 +151,13 @@ msgstr ""
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr ""
-"Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rep)"
+"Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rép)"
 
 #: scripts/comms_station.lua:194
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
-msgstr "Merci de nous envoyer des renforts ! (%d rep)"
+msgstr "Merci de nous envoyer des renforts ! (%d rép)"
 
 #: scripts/comms_station.lua:209
 msgctxt "stationAssist-comms"

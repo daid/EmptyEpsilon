@@ -256,12 +256,12 @@ msgstr "Désolé, capitaine, mais vous êtes déjà au max en homing missiles."
 #: scripts/scenario_81_pvp.lua:257
 msgctxt "ammo-comms"
 msgid "We've replenished your homing missile supply."
-msgstr "Nous avons reconstitué votre stock de homing missiles."
+msgstr "Nous avons rempli votre stock de homing missiles."
 
 #: scripts/scenario_81_pvp.lua:263
 msgctxt "ammo-comms"
 msgid "Please re-stock our mines."
-msgstr "Merci de réapprovisionner notre stock de mines"
+msgstr "Merci de faire le plein de mines"
 
 #: scripts/scenario_81_pvp.lua:264
 msgctxt "ammo-comms"
@@ -283,17 +283,17 @@ msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ?"
 #: scripts/scenario_81_pvp.lua:272
 msgctxt "ammo-comms"
 msgid "Your nukes are already charged and primed for destruction."
-msgstr "Vos nukes sont en capacité maximale et prêtes à servir !"
+msgstr "Vos armes nucléaires sont déjà chargées et prêtes à servir !"
 
 #: scripts/scenario_81_pvp.lua:273
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
-msgstr "Vous êtes chargés au max et prêt à tout faire péter."
+msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
 
 #: scripts/scenario_81_pvp.lua:279
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles."
-msgstr "Avez-vous des missiles EMP ?"
+msgstr "Veuillez réapprovisionner nos missiles EMP"
 
 #: scripts/scenario_81_pvp.lua:280
 msgctxt "ammo-comms"
@@ -317,13 +317,12 @@ msgstr "Pouvez-vous nous réapprovisionner en HVLI ?"
 #: scripts/scenario_81_pvp.lua:288
 msgctxt "ammo-comms"
 msgid "Sorry, Captain, but you are fully stocked with HVLIs."
-msgstr ""
-"Désolé, capitaine, mais vous êtes déjà entièrement approvisionné en HVLIs."
+msgstr "Désolé, capitaine, mais vous êtes déjà entièrement chargé en HVLI."
 
 #: scripts/scenario_81_pvp.lua:289
 msgctxt "ammo-comms"
 msgid "We've replenished your HVLI supply."
-msgstr "Nous venons de reconstituer votre stock de HVLIs."
+msgstr "Nous venons de reconstituer votre stock de HVLI."
 
 #: scripts/scenario_81_pvp.lua:292
 msgid "Back to main menu"

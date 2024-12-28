@@ -1149,7 +1149,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:3124
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions"
+msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_48_visitors.lua:3125
 msgctxt "ammo-comms"
@@ -1235,7 +1235,7 @@ msgstr "Nous avons besoin de HVLI. En avez-vous ?"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%d rep each)"
-msgstr "%s (%d rép chacun)"
+msgstr "%s (%d rép l'unité)"
 
 #: scripts/scenario_48_visitors.lua:3161 scripts/scenario_48_visitors.lua:3233
 #: scripts/scenario_48_visitors.lua:3236 scripts/scenario_48_visitors.lua:3299
@@ -2709,7 +2709,7 @@ msgstr "Échanger des produits de luxe (luxury) contre %s"
 #: scripts/scenario_48_visitors.lua:4391
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
-msgstr "Explications sur les marchandises et cargaisons"
+msgstr "Explications sur les marchandises"
 
 #: scripts/scenario_48_visitors.lua:4392
 msgctxt "explainGoods-comms"
@@ -2721,15 +2721,15 @@ msgid ""
 "obtained by spending reputation points or by trading other types of cargo "
 "(typically food, medicine or luxury)"
 msgstr ""
-"Différents types de marchandises ou cargaisons peuvent être obtenus auprès "
-"des stations, des cargos ou d'autres sources. Ces ressources peuvent être du "
-"dilithium, de l'optique, des moteurs de vitesse lumière, etc. Certains "
-"objectifs de mission peuvent nécessiter un ou plusieurs types de "
-"marchandises particulières. Chaque vaisseau joueur diffère par sa capacité "
-"de transport de marchandises. Les marchandises peuvent être obtenues en "
-"dépensant des points de réputation ou en échangeant d'autres types de "
-"marchandises (généralement de la nourriture, des médicaments ou des produits "
-"de luxe)."
+"Différents types de marchandises peuvent être obtenus auprès de stations, "
+"cargos ou ailleurs. Ces ressources sont diverses, cela peut-être du "
+"dilithium, des composants optiques, du nickel, des batteries, etc.\n"
+"Certains objectifs de mission peuvent nécessiter un ou plusieurs types de "
+"marchandises spécifiques. Chaque vaisseau joueur à sa propre capacité de "
+"stockage de marchandises en soute.\n"
+"Les marchandises peuvent être obtenues en les payant avec des points de "
+"réputation ou en les échangeant contre d'autres types de marchandises, "
+"généralement de la nourriture, des médicaments ou des produits de luxe."
 
 #: scripts/scenario_48_visitors.lua:4399
 msgctxt "cartographyOffice-comms"
@@ -3042,13 +3042,13 @@ msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_48_visitors.lua:4774
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_48_visitors.lua:4788
 msgctxt "trade-comms"
@@ -3512,7 +3512,9 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:5329
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr "Que voulez-vous ?"
+msgstr ""
+"Salutations,\n"
+"Que nous voulez-vous ?"
 
 #: scripts/scenario_48_visitors.lua:5331
 msgctxt "shipAssist-comms"
@@ -3597,7 +3599,7 @@ msgstr "Bouclier %s : %d%%\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
-msgstr "%s Missiles : %d/%d\n"
+msgstr "Missiles %s : %d/%d\n"
 
 #: scripts/scenario_48_visitors.lua:5379
 #, lua-format
@@ -3682,7 +3684,7 @@ msgstr "Avant : %d%% Arrière : %d%%"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid " %d:%d%%"
-msgstr " %d :%d%%"
+msgstr " %d : %d%%"
 
 #: scripts/scenario_48_visitors.lua:5413
 msgctxt "shipAssist-comms"
@@ -3712,7 +3714,7 @@ msgid ""
 "    Missiles: %s"
 msgstr ""
 "\n"
-"    Missiles: %s"
+"    Missiles : %s"
 
 #: scripts/scenario_48_visitors.lua:5439
 #, lua-format
@@ -3876,7 +3878,9 @@ msgstr "Nous plaignons votre race pathétique"
 #: scripts/scenario_48_visitors.lua:5633
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
-msgstr "Pathétique ? Vous allez regretter votre insolence !"
+msgstr ""
+"Pathétique ?\n"
+"Vous allez regretter votre insolence !"
 
 #: scripts/scenario_48_visitors.lua:5633
 msgctxt "shipEnemy-comms"
@@ -3918,12 +3922,12 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:5640
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
 
 #: scripts/scenario_48_visitors.lua:5640
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
 
 #: scripts/scenario_48_visitors.lua:5640
 msgctxt "shipEnemy-comms"
@@ -3950,7 +3954,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:5644
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr "Nous allons vous détruire !"
+msgstr "Nous allons vous anéantir"
 
 #: scripts/scenario_48_visitors.lua:5644
 msgctxt "shipEnemy-comms"
