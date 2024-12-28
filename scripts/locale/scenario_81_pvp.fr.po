@@ -216,7 +216,7 @@ msgstr ""
 #: scripts/scenario_81_pvp.lua:214
 msgctxt "ammo-comms"
 msgid "We need supplies."
-msgstr "Nous avons besoin de nous réapprovisionner"
+msgstr "Nous avons besoin de munitions"
 
 #: scripts/scenario_81_pvp.lua:217
 msgctxt "shipEnemy-comms"
@@ -227,7 +227,7 @@ msgstr "Nous allons vous détruire !"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "(%d rep each)"
-msgstr "(%d rép chacun)"
+msgstr "(%d rép l'unité)"
 
 #: scripts/scenario_81_pvp.lua:229
 msgctxt "station-comms"
@@ -246,7 +246,7 @@ msgstr "De quoi avez-vous besoin ?"
 #: scripts/scenario_81_pvp.lua:255
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us?"
-msgstr "Auriez-vous des homing missiles pour nous ?"
+msgstr "Des missiles à tête chercheuse (homing) pour nous ?"
 
 #: scripts/scenario_81_pvp.lua:256
 msgctxt "ammo-comms"
@@ -312,7 +312,7 @@ msgstr ""
 #: scripts/scenario_81_pvp.lua:287
 msgctxt "ammo-comms"
 msgid "Can you restock us with HVLI?"
-msgstr "Pouvez-vous nous réapprovisionner en HVLIs ?"
+msgstr "Pouvez-vous nous réapprovisionner en HVLI ?"
 
 #: scripts/scenario_81_pvp.lua:288
 msgctxt "ammo-comms"

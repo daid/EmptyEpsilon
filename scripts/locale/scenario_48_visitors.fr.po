@@ -1080,13 +1080,15 @@ msgstr "Inventaire"
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
-msgstr "%s Cargaison actuelle :"
+msgstr ""
+"Notre vaisseau (%s) :\n"
+"- Marchandises à bord : (quantité)"
 
 #: scripts/scenario_48_visitors.lua:3018
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
-msgstr "     %s : %i"
+msgstr "     %s : x%i"
 
 #: scripts/scenario_48_visitors.lua:3024
 msgctxt "inventory-shipLog"
@@ -1097,7 +1099,7 @@ msgstr "     Vide\n"
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
-msgstr "Espace disponible : %i"
+msgstr "Slots de stockage disponibles : %i"
 
 #: scripts/scenario_48_visitors.lua:3084
 msgctxt "station-comms"
@@ -2223,7 +2225,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
+msgstr "Recruter un membre de l'équipe de réparation (%i rép)"
 
 #: scripts/scenario_48_visitors.lua:4003 scripts/scenario_48_visitors.lua:4019
 #: scripts/scenario_48_visitors.lua:4038 scripts/scenario_48_visitors.lua:4054
@@ -2247,7 +2249,7 @@ msgstr "Réparateur embauché."
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchase coolant for %i reputation"
-msgstr "Acheter du liquide de refroidissement pour %i de réputation"
+msgstr "Acheter du liquide de refroidissement (%i rép)"
 
 #: scripts/scenario_48_visitors.lua:4022 scripts/scenario_48_visitors.lua:4057
 msgctxt "trade-comms"
@@ -2544,20 +2546,18 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles à la vente : (quantité, coût en "
-"réputation)\n"
+"- Marchandises à vendre : (quantité, coût en réputation)\n"
 
 #: scripts/scenario_48_visitors.lua:4254
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s : %i, %i\n"
+msgstr "     %s : x%i, %i rép l'unité.\n"
 
 #: scripts/scenario_48_visitors.lua:4257
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
-msgstr ""
-"Marchandises ou composants que la station achètera : (prix en réputation)\n"
+msgstr "- Marchandises à acheter : (bénéfice en réputation)\n"
 
 #: scripts/scenario_48_visitors.lua:4259 scripts/scenario_48_visitors.lua:4268
 #, lua-format
@@ -2569,7 +2569,10 @@ msgstr "     %s : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
-msgstr "Cargaison actuelle à bord de %s :\n"
+msgstr ""
+"\n"
+"Notre vaisseau (%s) :\n"
+"- Marchandises à bord : (quantité)\n"
 
 #: scripts/scenario_48_visitors.lua:4272
 msgctxt "trade-comms"
@@ -2580,7 +2583,7 @@ msgstr "     Vide\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Espace disponible : %i, Réputation disponible : %i\n"
+msgstr "- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
 
 #: scripts/scenario_48_visitors.lua:4277 scripts/scenario_48_visitors.lua:5491
 #: scripts/scenario_48_visitors.lua:5516 scripts/scenario_48_visitors.lua:5538
@@ -2596,7 +2599,10 @@ msgstr "Acheter 1 %s pour %i rép"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Reputation: %i"
-msgstr "Type : %s, Quantité : %i, Rép : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i\n"
+"Coût : %i rép l'unité."
 
 #: scripts/scenario_48_visitors.lua:4280
 msgctxt "trade-comms"
@@ -2605,7 +2611,8 @@ msgid ""
 "Insufficient cargo space for purchase"
 msgstr ""
 "\n"
-"Espace de chargement insuffisant pour acheter"
+"\n"
+"Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_48_visitors.lua:4282 scripts/scenario_48_visitors.lua:4298
 msgctxt "needRep-comms"
@@ -2624,7 +2631,8 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station"
+"\n"
+"Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_48_visitors.lua:4296
 msgctxt "trade-comms"
@@ -2633,7 +2641,8 @@ msgid ""
 "purchased"
 msgstr ""
 "\n"
-"Acheté"
+"\n"
+"1 marchandise achetée."
 
 #: scripts/scenario_48_visitors.lua:4308
 #, lua-format
@@ -2645,7 +2654,9 @@ msgstr "Vendre 1 %s pour %i rép"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Reputation price: %i"
-msgstr "Type : %s, Coût en rép : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Bénéfice : %i rép."
 
 #: scripts/scenario_48_visitors.lua:4312
 msgctxt "trade-comms"
@@ -2654,20 +2665,23 @@ msgid ""
 "One sold"
 msgstr ""
 "\n"
-"1 vendu"
+"\n"
+"1 marchandise vendue."
 
 #: scripts/scenario_48_visitors.lua:4322
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr "Échanger de la Nourriture (food) contre %s"
+msgstr "Échanger de la nourriture (food) contre %s"
 
 #: scripts/scenario_48_visitors.lua:4323 scripts/scenario_48_visitors.lua:4346
 #: scripts/scenario_48_visitors.lua:4369
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
-msgstr "Type : %s, Quantité : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i"
 
 #: scripts/scenario_48_visitors.lua:4336 scripts/scenario_48_visitors.lua:4359
 #: scripts/scenario_48_visitors.lua:4382
@@ -2677,13 +2691,14 @@ msgid ""
 "Traded"
 msgstr ""
 "\n"
-"Échangé"
+"\n"
+"Marchandises échangées."
 
 #: scripts/scenario_48_visitors.lua:4345
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr "Échanger des Médicaments (medicine) contre %s"
+msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_48_visitors.lua:4368 scripts/scenario_48_visitors.lua:5471
 #, lua-format
@@ -3048,7 +3063,7 @@ msgid ""
 "Goods or components available: quantity, cost in reputation"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles : (quantité, coût en réputation)"
+"- Marchandises à vendre : (quantité, coût en réputation)"
 
 #: scripts/scenario_48_visitors.lua:4792
 #, lua-format
@@ -3058,7 +3073,7 @@ msgid ""
 "   %14s: %2i, %3i"
 msgstr ""
 "\n"
-"   %14s : %2i, %3i"
+"   %14s : x%2i, %3i rép l'unité."
 
 #: scripts/scenario_48_visitors.lua:4798
 msgctxt "trade-comms"
@@ -3071,15 +3086,17 @@ msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
 msgstr ""
-"Les stations amicales ont souvent de la nourriture (food) ou des médicaments "
+"Les stations amies ont souvent de la nourriture (food) ou des médicaments "
 "(medicine) ou les deux. Les stations neutres peuvent échanger leurs "
-"marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
+"marchandises contre de la nourriture, des médicaments ou des produits de "
+"luxe (luxury)."
 
 #: scripts/scenario_48_visitors.lua:4840
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
-msgstr "La station %s dans le secteur %s possède du %s pour %i rép."
+msgstr ""
+"La station %s dans le secteur %s possède la marchandise %s pour %i rép."
 
 #: scripts/scenario_48_visitors.lua:4845
 msgctxt "trade-comms"
@@ -3091,13 +3108,12 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Quelles marchandises vous intéressent ?\n"
-"J'ai entendu parler de ça :"
+"Quelles marchandises vous intéressent ? J'ai entendu parler de ça :"
 
 #: scripts/scenario_48_visitors.lua:4847
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
+msgstr " A part ça, je n'ai pas connaissance de stations spécifiques."
 
 #: scripts/scenario_48_visitors.lua:4877
 msgctxt "stationAssist-comms"
@@ -3196,27 +3212,27 @@ msgstr "Merci de nous envoyer un Harceleur Q7 en renforts ! (%s rép)"
 #: scripts/scenario_48_visitors.lua:5010
 msgctxt "trade-comms"
 msgid " and will trade it for medicine"
-msgstr " et va l'échanger contre des Médicaments (medicine)"
+msgstr ". Elle l'échange contre des médicaments (medicine)"
 
 #: scripts/scenario_48_visitors.lua:5015
 msgctxt "trade-comms"
 msgid " or food"
-msgstr " ou de la Nourriture (food)"
+msgstr " ou de la nourriture (food)"
 
 #: scripts/scenario_48_visitors.lua:5017
 msgctxt "trade-comms"
 msgid " and will trade it for food"
-msgstr " et va l'échanger contre de la Nourriture (food)"
+msgstr ". Elle l'échange contre de la nourriture (food)"
 
 #: scripts/scenario_48_visitors.lua:5023
 msgctxt "trade-comms"
 msgid " or luxury"
-msgstr " ou des Produits de luxe (luxury)"
+msgstr " ou des produits de luxe (luxury)"
 
 #: scripts/scenario_48_visitors.lua:5025
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
-msgstr " et va l'échanger contre des Produits de luxe (luxury)"
+msgstr ". Elle l'échange contre des produits de luxe (luxury)"
 
 #: scripts/scenario_48_visitors.lua:5048
 msgctxt "scienceDB"
@@ -3705,7 +3721,7 @@ msgid "%s heading toward you to assist"
 msgstr "%s, nous partons immédiatement vous aider."
 
 #: scripts/scenario_48_visitors.lua:5481
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "Traded your luxury for %s from %s"
 msgstr "Échanger vos produits de luxe (luxury) contre du %s auprès de %s"
@@ -3718,7 +3734,7 @@ msgstr "Échanger vos produits de luxe (luxury) contre du %s auprès de %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
-msgstr "%s acheté auprès de %s"
+msgstr "1 %s acheté auprès de %s."
 
 #: scripts/scenario_48_visitors.lua:5504 scripts/scenario_48_visitors.lua:5529
 #: scripts/scenario_48_visitors.lua:5551 scripts/scenario_48_visitors.lua:5577
@@ -3734,7 +3750,7 @@ msgstr "Auriez-vous des marchandises à vendre ?"
 #: scripts/scenario_48_visitors.lua:5589 scripts/scenario_48_visitors.lua:5671
 msgctxt "trade-comms"
 msgid "We've got "
-msgstr "Nous avons "
+msgstr "Nous avons : "
 
 #: scripts/scenario_48_visitors.lua:5593 scripts/scenario_48_visitors.lua:5675
 msgctxt "trade-comms"
@@ -3944,7 +3960,7 @@ msgstr "Votre race va s'éteindre ici et maintenant !"
 #: scripts/scenario_48_visitors.lua:5668
 msgctxt "trade-comms"
 msgid "Yes?"
-msgstr "Oui ?"
+msgstr "Oui, c'est pour quoi ?"
 
 #: scripts/scenario_48_visitors.lua:5810
 msgctxt "ship-comms"

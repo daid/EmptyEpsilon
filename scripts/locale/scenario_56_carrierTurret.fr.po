@@ -895,7 +895,7 @@ msgid ""
 "components for use aboard ships"
 msgstr ""
 "Nous faisons de la recherche et fabriquons des transporteurs et des "
-"composants de transporteur de haute qualité pour une utilisation à bord des "
+"composants de transporteurs de haute qualité pour une utilisation à bord des "
 "vaisseaux."
 
 #: scripts/scenario_56_carrierTurret.lua:1959
@@ -1436,7 +1436,7 @@ msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 #: scripts/scenario_56_carrierTurret.lua:2892
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr "Quel genre de munitions ?"
+msgstr "Quel type de munitions ?"
 
 #: scripts/scenario_56_carrierTurret.lua:2895
 #, lua-format

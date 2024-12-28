@@ -162,31 +162,31 @@ msgstr "Bienvenue dans notre charmante station orbitale."
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? (%d rep each)"
-msgstr "Auriez-vous des homing missiles pour nous ? (%d rép chacun)"
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? (%d rép l'unité)"
 
 #: scripts/scenario_62_whatTheDickens.lua:424
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Can you restock us with HVLI? (%d rep each)"
-msgstr "Pouvez-vous nous réapprovisionner en HVLI ? (%d rép chacun)"
+msgstr "Pouvez-vous nous réapprovisionner en HVLI ? (%d rép l'unité)"
 
 #: scripts/scenario_62_whatTheDickens.lua:429
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Please re-stock our mines. (%d rep each)"
-msgstr "Merci de réapprovisionner notre stock de mines (%d rép chacune)"
+msgstr "Merci de faire le plein de mines (%d rép l'unité)"
 
 #: scripts/scenario_62_whatTheDickens.lua:434
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? (%d rep each)"
-msgstr "Avez-vous des missiles nucléaires nukes ? (%d rép chacun)"
+msgstr "Pouvez-vous nous fournir des armes nucléaires ? (%d rép l'unité)"
 
 #: scripts/scenario_62_whatTheDickens.lua:439
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. (%d rep each)"
-msgstr "Merci de recharger nos missiles EMP ? (%d rép chacun)"
+msgstr "Veuillez réapprovisionner nos missiles EMP (%d rép l'unité)"
 
 #: scripts/scenario_62_whatTheDickens.lua:444
 #: scripts/scenario_62_whatTheDickens.lua:528
@@ -365,19 +365,17 @@ msgstr "Vous devez rester amarrés à la station pour cette action."
 #: scripts/scenario_62_whatTheDickens.lua:492
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr ""
-"Nous ne fournissons pas ce type d'armes de destruction massive. \n"
-"Nous sommes pour la paix dans l'univers."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_62_whatTheDickens.lua:493
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_62_whatTheDickens.lua:494
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/scenario_62_whatTheDickens.lua:501
 msgctxt "ammo-comms"

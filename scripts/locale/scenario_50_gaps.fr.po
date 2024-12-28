@@ -893,7 +893,7 @@ msgid ""
 "components for use aboard ships"
 msgstr ""
 "Nous faisons de la recherche et fabriquons des transporteurs et des "
-"composants de transporteur de haute qualité pour une utilisation à bord des "
+"composants de transporteurs de haute qualité pour une utilisation à bord des "
 "navires."
 
 #: scripts/scenario_50_gaps.lua:1338
@@ -1431,7 +1431,7 @@ msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 #: scripts/scenario_50_gaps.lua:2291
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr "Quel genre de munitions ?"
+msgstr "Quel type de munitions ?"
 
 #: scripts/scenario_50_gaps.lua:2295
 msgctxt "ammo-comms"
@@ -1856,7 +1856,6 @@ msgstr ""
 "\n"
 "Notre vaisseau :\n"
 "- Marchandises à bord : (quantité)\n"
-"\n"
 
 #: scripts/scenario_50_gaps.lua:2540
 #, lua-format

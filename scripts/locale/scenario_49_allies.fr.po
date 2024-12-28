@@ -1074,7 +1074,7 @@ msgid ""
 "components for use aboard ships"
 msgstr ""
 "Nous faisons de la recherche et fabriquons des transporteurs et des "
-"composants de transporteur de haute qualité pour une utilisation à bord des "
+"composants de transporteurs de haute qualité pour une utilisation à bord des "
 "navires."
 
 #: scripts/scenario_49_allies.lua:2229
@@ -1613,7 +1613,7 @@ msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 #: scripts/scenario_49_allies.lua:3498
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr "Quel genre de munitions ?"
+msgstr "Quel type de munitions ?"
 
 #: scripts/scenario_49_allies.lua:3502
 msgctxt "ammo-comms"
@@ -2516,7 +2516,6 @@ msgstr ""
 "\n"
 "Notre vaisseau :\n"
 "- Marchandises à bord : (quantité)\n"
-"\n"
 
 #: scripts/scenario_49_allies.lua:3962
 #, lua-format
@@ -3809,7 +3808,9 @@ msgstr "Inventaire"
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
-msgstr "Stock en soute sur le %s :"
+msgstr ""
+"Notre vaisseau (%s) :\n"
+"- Marchandises à bord : (quantité)"
 
 #: scripts/scenario_49_allies.lua:5377 scripts/scenario_49_allies.lua:5396
 #: scripts/scenario_49_allies.lua:5415 scripts/scenario_49_allies.lua:5434
@@ -3818,7 +3819,7 @@ msgstr "Stock en soute sur le %s :"
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
-msgstr " - %s : x%i"
+msgstr "     %s : x%i"
 
 #: scripts/scenario_49_allies.lua:5383 scripts/scenario_49_allies.lua:5402
 #: scripts/scenario_49_allies.lua:5421 scripts/scenario_49_allies.lua:5440

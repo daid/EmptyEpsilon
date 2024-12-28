@@ -1121,7 +1121,7 @@ msgid ""
 "hack the impulse engines"
 msgstr ""
 "Le Berger est un combattant doté d'un faisceau long et étroit.\n"
-"Recommandation tactique : pirater les moteurs à impulsions adverses."
+"Recommandation tactique : pirater les moteurs à impulsion adverses."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1542
 msgctxt "scienceDB"

@@ -1570,7 +1570,6 @@ msgstr ""
 "\n"
 "Notre vaisseau (%s) :\n"
 "- Marchandises à bord : (quantité)\n"
-"\n"
 
 #: scripts/scenario_53_escape.lua:1806
 msgctxt "trade-comms"
@@ -2891,7 +2890,7 @@ msgid ""
 "full capacity"
 msgstr ""
 "[Janet : réparatrice] Johnny, mon fils, fait des recherches sur les moteurs "
-"à impulsions. Il est sur la station %s.\n"
+"à impulsion. Il est sur la station %s.\n"
 "Il pourrait probablement pousser nos moteurs à leur pleine capacité."
 
 #: scripts/scenario_53_escape.lua:3205
