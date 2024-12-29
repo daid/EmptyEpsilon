@@ -2309,7 +2309,8 @@ msgstr ""
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
 msgstr ""
-"La station %s dans le secteur %s possède la marchandise %s pour %i rép."
+"La station %s dans le secteur %s possède la marchandise %s pour %i rép "
+"l'unité."
 
 #: scripts/scenario_74_omicron.lua:4629
 msgctxt "trade-comms"
