@@ -40,9 +40,9 @@ msgstr ""
 "- Titre original : Carriers and turrets\n"
 "- Auteur : Xansta (Oct. 2018)\n"
 "- Traduction FR : Muerte (Nov. 24)\n"
-"Relecture en cours 77% ; Test du scénario en cours : contient actuellement "
-"des bogues et est susceptible de ne pas fonctionner correctement. Muerte "
-"(Nov. 24)\n"
+"Relecture en cours 76%.\n"
+"Le scénario contient actuellement des bogues et est susceptible de ne pas "
+"fonctionner correctement. Muerte (Nov. 24)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -2734,9 +2734,7 @@ msgstr "Stock insuffisant sur le cargo."
 #: scripts/scenario_56_carrierTurret.lua:4310
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr ""
-"\n"
-"Réputation insuffisante pour acheter."
+msgstr "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_56_carrierTurret.lua:4171
 #: scripts/scenario_56_carrierTurret.lua:4235

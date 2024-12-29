@@ -1072,6 +1072,7 @@ msgid ""
 "Insufficient reputation for purchase"
 msgstr ""
 "\n"
+"\n"
 "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_55_defenderHunter.lua:2233

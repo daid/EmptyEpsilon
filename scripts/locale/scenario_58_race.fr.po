@@ -1093,6 +1093,7 @@ msgid ""
 "Insufficient reputation for purchase"
 msgstr ""
 "\n"
+"\n"
 "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_58_race.lua:1866 scripts/scenario_58_race.lua:1900

@@ -2489,6 +2489,7 @@ msgid ""
 "Insufficient reputation for purchase"
 msgstr ""
 "\n"
+"\n"
 "Réputation insuffisante pour acheter"
 
 #: scripts/scenario_54_PatrolDuty.lua:4791
@@ -3401,7 +3402,7 @@ msgstr "1 %s acheté auprès de %s."
 #: scripts/scenario_54_PatrolDuty.lua:5979
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr "Réputation insuffisante pour acheter"
+msgstr "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_54_PatrolDuty.lua:5899
 #, lua-format

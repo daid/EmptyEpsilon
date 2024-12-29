@@ -1784,6 +1784,7 @@ msgid ""
 "Insufficient reputation for purchase"
 msgstr ""
 "\n"
+"\n"
 "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_32_devour.lua:2745 scripts/scenario_32_devour.lua:2797

@@ -42,9 +42,9 @@ msgstr ""
 "- Titre original : Escape\n"
 "- Auteur : Xansta (2019)\n"
 "- Traduction FR : Muerte (Mai 24)\n"
-"Relecture en cours 82%     332/403 ; Test du scénario en cours : contient "
-"actuellement des bogues et est susceptible de ne pas fonctionner "
-"correctement. Muerte (Déc. 24)\n"
+"Texte vérifié (Déc. 24)\n"
+"Le scénario contient actuellement des bogues et est susceptible de ne pas "
+"fonctionner correctement. Muerte (Déc. 24)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -291,7 +291,7 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:300
 msgctxt "scienceDB"
 msgid "Stations"
-msgstr "Stations"
+msgstr ""
 
 #: scripts/scenario_53_escape.lua:302
 msgctxt "scienceDB"
@@ -320,11 +320,6 @@ msgid ""
 "interact with station personnel, etc. They are like oases, service stations, "
 "villages, towns, cities, etc."
 msgstr ""
-"Les stations spatiales sont des lieux où les vaisseaux peuvent accoster, "
-"être réparés, réapprovisionnés, interagir avec le personnel de la station, "
-"etc.\n"
-"Elles peuvent être des stations-service, des villages, des villes, des oasis "
-"etc."
 
 #: scripts/scenario_53_escape.lua:309
 msgctxt "scienceDB"
@@ -343,10 +338,9 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:314
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Small"
-msgstr "Petite"
+msgstr ""
 
 #: scripts/scenario_53_escape.lua:319
 msgctxt "scienceDB"
@@ -363,10 +357,9 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:324
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Medium"
-msgstr "Moyenne"
+msgstr ""
 
 #: scripts/scenario_53_escape.lua:329
 msgctxt "scienceDB"
@@ -384,10 +377,9 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:334
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Large"
-msgstr "Grande"
+msgstr ""
 
 #: scripts/scenario_53_escape.lua:339
 msgctxt "scienceDB"
@@ -406,10 +398,9 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_53_escape.lua:344
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Huge"
-msgstr "Immense"
+msgstr ""
 
 #: scripts/scenario_53_escape.lua:353
 msgctxt "scienceDB"
@@ -599,7 +590,6 @@ msgid "Turn speed"
 msgstr "Vit. de rotation"
 
 #: scripts/scenario_53_escape.lua:386
-#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "Fabricated by: Repulse shipyards. The Cruiser, sometimes known as the "
@@ -624,31 +614,26 @@ msgstr ""
 "MK2 excédentaires étaient utilisés à des fins moins...règlementaires."
 
 #: scripts/scenario_53_escape.lua:392
-#, fuzzy
 msgctxt "scienceDB"
 msgid "3.6 U/min"
-msgstr "3.6 U/min"
+msgstr "3.6u/min"
 
 #: scripts/scenario_53_escape.lua:393
-#, fuzzy
 msgctxt "scienceDB"
 msgid "6 deg/sec"
-msgstr "6 deg/sec"
+msgstr "6°/sec"
 
 #: scripts/scenario_53_escape.lua:394
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Beam weapon 345:90"
 msgstr "Faisc. laser 345°:90°"
 
 #: scripts/scenario_53_escape.lua:394 scripts/scenario_53_escape.lua:395
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Rng:1 Dmg:6 Cyc:6"
-msgstr "Portée:1  Dégâts:6  Cycle:6s"
+msgstr "Portée:1u  Dégâts:6  Cycle:6s"
 
 #: scripts/scenario_53_escape.lua:395
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Beam weapon 15:90"
 msgstr "Faisc. laser 15°:90°"
@@ -705,7 +690,7 @@ msgstr "Portée de saut"
 #: scripts/scenario_53_escape.lua:420
 msgctxt "scienceDB"
 msgid "5 - 50 U"
-msgstr "5 - 50 u"
+msgstr "5 - 50u"
 
 #: scripts/scenario_53_escape.lua:421
 msgctxt "scienceDB"
@@ -720,7 +705,7 @@ msgstr "Longue : 38u / Courte : 5u"
 #: scripts/scenario_53_escape.lua:422
 msgctxt "scienceDB"
 msgid "3.3 U/min"
-msgstr "3.3 u/min"
+msgstr "3.3u/min"
 
 #: scripts/scenario_53_escape.lua:423
 msgctxt "scienceDB"
@@ -735,7 +720,7 @@ msgstr "Faisc. laser 90°:200°"
 #: scripts/scenario_53_escape.lua:424 scripts/scenario_53_escape.lua:425
 msgctxt "scienceDB"
 msgid "Rng:1.2 Dmg:5 Cyc:6"
-msgstr "Portée:1.2  Dégâts:5  Cycle:6s"
+msgstr "Portée:1.2u  Dégâts:5  Cycle:6s"
 
 #: scripts/scenario_53_escape.lua:425
 msgctxt "scienceDB"
@@ -1355,7 +1340,7 @@ msgstr ""
 "Votre équipe de réparation peut finir le boulot."
 
 #: scripts/scenario_53_escape.lua:1681
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewFriends-comms"
 msgid ""
 "Certainly. Bring back %s to get the rear shield fixed. You might find some "
@@ -1421,7 +1406,6 @@ msgstr ""
 "Saluez Amir de ma part."
 
 #: scripts/scenario_53_escape.lua:1739
-#, fuzzy
 msgctxt "crewFriends-comms"
 msgid "Rear shield fully functional."
 msgstr ""
@@ -1496,7 +1480,6 @@ msgid "     %s: %i, %i\n"
 msgstr "     %s : x%i, %i rép l'unité.\n"
 
 #: scripts/scenario_53_escape.lua:1791
-#, fuzzy
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
 msgstr "- Marchandises à acheter : (bénéfice en réputation)\n"
@@ -1799,7 +1782,6 @@ msgstr ""
 "pendant la maintenance."
 
 #: scripts/scenario_53_escape.lua:1986
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
@@ -1941,7 +1923,6 @@ msgstr ""
 "Désolé, officier, mais vous êtes au maximum de ce que vous pouvez stocker."
 
 #: scripts/scenario_53_escape.lua:2070 scripts/scenario_53_escape.lua:2085
-#, fuzzy
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
@@ -2626,7 +2607,6 @@ msgid "Environmental systems show limited air remaining"
 msgstr "Les systèmes environnementaux indiquent qu'il reste très peu d'air."
 
 #: scripts/scenario_53_escape.lua:2919
-#, fuzzy
 msgctxt "defeat-msgMainscreen"
 msgid "You suffocated while aboard the fighter hulk"
 msgstr "Vous avez suffoqué à bord du vaisseau."
@@ -2674,7 +2654,6 @@ msgid "Transfer to Repulse"
 msgstr "Activer transfert"
 
 #: scripts/scenario_53_escape.lua:2979
-#, fuzzy
 msgctxt "crewTransfer-buttonDamageControl"
 msgid "Transfer to Repulse"
 msgstr "Activer transfert"
@@ -2714,7 +2693,6 @@ msgid "Return Transport"
 msgstr "Activer transfert"
 
 #: scripts/scenario_53_escape.lua:3065
-#, fuzzy
 msgctxt "crewTransfer-buttonTactical"
 msgid "Return Transport"
 msgstr "Activer transfert"
@@ -2852,49 +2830,47 @@ msgstr ""
 "Mon cousin peut nous le réparer. Il travaille sur %s."
 
 #: scripts/scenario_53_escape.lua:3242
-#, fuzzy
 msgctxt "crewRepairStatut-buttonRelay"
 msgid "crew fixers"
 msgstr "Réparations"
 
 #: scripts/scenario_53_escape.lua:3248
-#, fuzzy
 msgctxt "crewRepairStatut-buttonOperations"
 msgid "crew fixers"
 msgstr "Réparations"
 
 #: scripts/scenario_53_escape.lua:3282
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewRepairStatut-msgRelay&Operations"
 msgid " Missiles:%s(%s) "
 msgstr " Missiles : %s (secteur %s) "
 
 #: scripts/scenario_53_escape.lua:3285
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewRepairStatut-msgRelay&Operations"
 msgid " Shields:%s(%s) "
 msgstr " Boucliers : %s (secteur %s) "
 
 #: scripts/scenario_53_escape.lua:3288
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewRepairStatut-msgRelay&Operations"
 msgid " Impulse:%s(%s) "
 msgstr " Moteurs : %s (secteur %s) "
 
 #: scripts/scenario_53_escape.lua:3291
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewRepairStatut-msgRelay&Operations"
 msgid " Communications:%s(%s) "
 msgstr " Communications : %s (secteur %s) "
 
 #: scripts/scenario_53_escape.lua:3294
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewRepairStatut-msgRelay&Operations"
 msgid " Jump:%s(%s) "
 msgstr " Téléportation : %s (secteur %s) "
 
 #: scripts/scenario_53_escape.lua:3297
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "crewRepairStatut-msgRelay&Operations"
 msgid " Reactor:%s(%s) "
 msgstr " Réacteur : %s (secteur %s) "

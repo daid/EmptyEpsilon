@@ -2621,6 +2621,7 @@ msgid ""
 "Insufficient reputation for purchase"
 msgstr ""
 "\n"
+"\n"
 "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_48_visitors.lua:4284 scripts/scenario_48_visitors.lua:4325

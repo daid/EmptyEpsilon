@@ -1643,13 +1643,13 @@ msgstr "Vit. de rotation"
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f u/min"
-msgstr "%.1f u/min"
+msgstr "%.1fu/min"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2233
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f deg/sec"
-msgstr "%.1f deg/sec"
+msgstr "%.1f°/sec"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2235
 msgctxt "scienceDB"
@@ -1665,13 +1665,13 @@ msgstr "Vitesse lumière"
 #, lua-format
 msgctxt "scienceDB"
 msgid "Beam weapon %s:%s"
-msgstr "Faisc. cap:%s amp:%s"
+msgstr "Faisc. cap:%s° amp:%s°"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2276
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f Dmg / %.1f sec"
-msgstr "%.1f Dmg / %.1f sec"
+msgstr "Dégâts : %.1f   Cycle : %.1fs"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2301
 #, lua-format

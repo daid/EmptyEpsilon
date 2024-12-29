@@ -538,7 +538,7 @@ msgid "+Test Non-DB Ships"
 msgstr "+Test vaisseaux non BD"
 
 #: scripts/scenario_44_outpost.lua:862
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "buttonGM"
 msgid "Whammy %s"
 msgstr "Coup dur %s"
@@ -2131,6 +2131,7 @@ msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
+"\n"
 "\n"
 "Réputation insuffisante pour acheter."
 

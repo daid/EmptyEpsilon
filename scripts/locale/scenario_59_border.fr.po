@@ -4681,6 +4681,7 @@ msgid ""
 "Insufficient reputation for purchase"
 msgstr ""
 "\n"
+"\n"
 "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_59_border.lua:8256 scripts/scenario_59_border.lua:8300
