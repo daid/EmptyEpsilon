@@ -813,17 +813,17 @@ msgstr "Par quel service de notre station êtes-vous intéressé ?"
 #: scripts/scenario_32_devour.lua:2272
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions"
+msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_32_devour.lua:2274
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ammo-comms"
 msgid ""
 "What type of ordnance?\n"
 "\n"
 "Reputation: %i"
 msgstr ""
-"Quel genre de munitions ?\n"
+"Quel type de munitions ?\n"
 "\n"
 "Réputation : %i"
 
@@ -843,7 +843,7 @@ msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
-msgstr "%s%d rép chacun)"
+msgstr "%s%d rép l'unité)"
 
 #: scripts/scenario_32_devour.lua:2295
 msgctxt "ammo-comms"
@@ -1709,20 +1709,18 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles à la vente : (quantité, coût en "
-"réputation)\n"
+"- Marchandises à vendre : (quantité, coût en réputation)\n"
 
 #: scripts/scenario_32_devour.lua:2711
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s: %i, %i\n"
+msgstr "     %s : x%i, %i rép l'unité.\n"
 
 #: scripts/scenario_32_devour.lua:2714
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
-msgstr ""
-"Marchandises ou composants que la station achètera : (prix en réputation)\n"
+msgstr "- Marchandises à acheter : (bénéfice en réputation)\n"
 
 #: scripts/scenario_32_devour.lua:2716 scripts/scenario_32_devour.lua:2725
 #, lua-format
@@ -1734,7 +1732,10 @@ msgstr "     %s : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
-msgstr "Cargaison actuelle à bord de %s :\n"
+msgstr ""
+"\n"
+"Notre vaisseau (%s) :\n"
+"- Marchandises à bord : (quantité)\n"
 
 #: scripts/scenario_32_devour.lua:2729
 msgctxt "trade-comms"
@@ -1745,7 +1746,7 @@ msgstr "     Vide\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Espace disponible : %i, Réputation disponible : %i\n"
+msgstr "- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
 
 #: scripts/scenario_32_devour.lua:2734 scripts/scenario_32_devour.lua:3905
 #: scripts/scenario_32_devour.lua:3930 scripts/scenario_32_devour.lua:3952
@@ -1761,7 +1762,10 @@ msgstr "Acheter 1 %s pour %i rép"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr "Type : %s, Quantité : %i, Rép : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i\n"
+"Coût : %i rép l'unité."
 
 #: scripts/scenario_32_devour.lua:2741
 msgctxt "trade-comms"
@@ -1780,6 +1784,7 @@ msgid ""
 "Insufficient reputation for purchase"
 msgstr ""
 "\n"
+"\n"
 "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_32_devour.lua:2745 scripts/scenario_32_devour.lua:2797
@@ -1790,7 +1795,8 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station."
+"\n"
+"Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_32_devour.lua:2757
 msgctxt "trade-comms"
@@ -1799,7 +1805,8 @@ msgid ""
 "purchased"
 msgstr ""
 "\n"
-"Acheté"
+"\n"
+"1 marchandise achetée."
 
 #: scripts/scenario_32_devour.lua:2769
 #, lua-format
@@ -1811,7 +1818,9 @@ msgstr "Vendre 1 %s pour %i rép"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Reputation price: %i"
-msgstr "Type : %s, Coût en rép : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Bénéfice : %i rép."
 
 #: scripts/scenario_32_devour.lua:2777
 msgctxt "trade-comms"
@@ -1820,20 +1829,23 @@ msgid ""
 "One sold"
 msgstr ""
 "\n"
-"1 vendu"
+"\n"
+"1 marchandise vendue."
 
 #: scripts/scenario_32_devour.lua:2790
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr "Échanger de la Nourriture (food) contre %s"
+msgstr "Échanger de la nourriture (food) contre %s"
 
 #: scripts/scenario_32_devour.lua:2795 scripts/scenario_32_devour.lua:2828
 #: scripts/scenario_32_devour.lua:2861
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
-msgstr "Type : %s, Quantité : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i"
 
 #: scripts/scenario_32_devour.lua:2808 scripts/scenario_32_devour.lua:2841
 #: scripts/scenario_32_devour.lua:2874
@@ -1843,13 +1855,14 @@ msgid ""
 "Traded"
 msgstr ""
 "\n"
-"Échangé"
+"\n"
+"Marchandises échangées."
 
 #: scripts/scenario_32_devour.lua:2823
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr "Échanger des Médicaments (medicine) contre %s"
+msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_32_devour.lua:2856 scripts/scenario_32_devour.lua:3885
 #, lua-format
@@ -1861,7 +1874,7 @@ msgstr "Échanger des produits de luxe (luxury) contre %s"
 #: scripts/scenario_32_devour.lua:4565
 msgctxt "trade-comms"
 msgid "Jettison cargo"
-msgstr "Larguer la cargaison"
+msgstr "Larguer des marchandises"
 
 #: scripts/scenario_32_devour.lua:2894 scripts/scenario_32_devour.lua:3866
 #: scripts/scenario_32_devour.lua:4566
@@ -1871,20 +1884,22 @@ msgid ""
 "Available space: %i\n"
 "What would you like to jettison?"
 msgstr ""
-"Espace disponible : %i\n"
-"Que voudriez-vous larguer ?"
+"Slots de stockage disponibles : %i\n"
+"Que voudriez-vous larguer par le sas ?"
 
 #: scripts/scenario_32_devour.lua:2900 scripts/scenario_32_devour.lua:3872
 #: scripts/scenario_32_devour.lua:4572
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
-msgstr "Un %s largué"
+msgstr ""
+"Larguée.\n"
+"Bon voyage %s, envoie-nous une carte postale."
 
 #: scripts/scenario_32_devour.lua:2908
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
-msgstr "Explications sur les marchandises et cargaisons"
+msgstr "Explications sur les marchandises"
 
 #: scripts/scenario_32_devour.lua:2909
 msgctxt "explainGoods-comms"
@@ -1896,15 +1911,15 @@ msgid ""
 "obtained by spending reputation points or by trading other types of cargo "
 "(typically food, medicine or luxury)"
 msgstr ""
-"Différents types de marchandises ou cargaisons peuvent être obtenus auprès "
-"des stations, des cargos ou d'autres sources. Ces ressources peuvent être du "
-"dilithium, de l'optique, des moteurs de vitesse lumière, etc. Certains "
-"objectifs de mission peuvent nécessiter un ou plusieurs types de "
-"marchandises particulières. Chaque vaisseau joueur diffère par sa capacité "
-"de transport de marchandises. Les marchandises peuvent être obtenues en "
-"dépensant des points de réputation ou en échangeant d'autres types de "
-"marchandises (généralement de la nourriture, des médicaments ou des produits "
-"de luxe)."
+"Différents types de marchandises peuvent être obtenus auprès de stations, "
+"cargos ou ailleurs. Ces ressources sont diverses, cela peut-être du "
+"dilithium, des composants optiques, du nickel, des batteries, etc.\n"
+"Certains objectifs de mission peuvent nécessiter un ou plusieurs types de "
+"marchandises spécifiques. Chaque vaisseau joueur à sa propre capacité de "
+"stockage de marchandises en soute.\n"
+"Les marchandises peuvent être obtenues en les payant avec des points de "
+"réputation ou en les échangeant contre d'autres types de marchandises, "
+"généralement de la nourriture, des médicaments ou des produits de luxe."
 
 #: scripts/scenario_32_devour.lua:2916
 msgctxt "trade-comms"
@@ -1920,7 +1935,7 @@ msgstr "Nous avons une nouvelle recrue à vous proposer au poste de réparateur.
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
+msgstr "Recruter un membre de l'équipe de réparation (%i rép)"
 
 #: scripts/scenario_32_devour.lua:2950
 msgctxt "trade-comms"
@@ -2320,13 +2335,13 @@ msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_32_devour.lua:3357
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_32_devour.lua:3363
 msgctxt "stationServices-comms"
@@ -2398,7 +2413,7 @@ msgid ""
 "Goods or components available: quantity, cost in reputation"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles : (quantité, coût en réputation)"
+"- Marchandises à vendre : (quantité, coût en réputation)"
 
 #: scripts/scenario_32_devour.lua:3448
 #, lua-format
@@ -2408,7 +2423,7 @@ msgid ""
 "   %14s: %2i, %3i"
 msgstr ""
 "\n"
-"   %14s : %2i, %3i"
+"   %14s : x%2i, %3i rép l'unité."
 
 #: scripts/scenario_32_devour.lua:3454
 msgctxt "trade-comms"
@@ -2421,15 +2436,18 @@ msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
 msgstr ""
-"Les stations amicales ont souvent de la nourriture (food) ou des médicaments "
+"Les stations amies ont souvent de la nourriture (food) ou des médicaments "
 "(medicine) ou les deux. Les stations neutres peuvent échanger leurs "
-"marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
+"marchandises contre de la nourriture, des médicaments ou des produits de "
+"luxe (luxury)."
 
 #: scripts/scenario_32_devour.lua:3497
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
-msgstr "La station %s dans le secteur %s possède du %s pour %i rép."
+msgstr ""
+"La station %s dans le secteur %s possède la marchandise %s pour %i rép "
+"l'unité."
 
 #: scripts/scenario_32_devour.lua:3502
 msgctxt "trade-comms"
@@ -2441,13 +2459,12 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Quelles marchandises vous intéressent ?\n"
-"J'ai entendu parler de ça :"
+"Quelles marchandises vous intéressent ? J'ai entendu parler de ça :"
 
 #: scripts/scenario_32_devour.lua:3504
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
+msgstr " A part ça, je n'ai pas connaissance de stations spécifiques."
 
 #: scripts/scenario_32_devour.lua:3542
 #, lua-format
@@ -2506,7 +2523,7 @@ msgstr "Boucliers : %d%%\n"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr "Boucliers %s : %d%%\n"
+msgstr "Bouclier %s : %d%%\n"
 
 #: scripts/scenario_32_devour.lua:3581
 #, lua-format
@@ -2622,7 +2639,9 @@ msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au marqueur %i."
 #: scripts/scenario_32_devour.lua:4783
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr "Que voulez-vous ?"
+msgstr ""
+"Salutations,\n"
+"Que nous voulez-vous ?"
 
 #: scripts/scenario_32_devour.lua:3787 scripts/scenario_32_devour.lua:4726
 #: scripts/scenario_32_devour.lua:4785
@@ -2707,13 +2726,13 @@ msgstr "Boucliers arrière : %d%%\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr "Boucliers %s : %d%%\n"
+msgstr "Bouclier %s : %d%%\n"
 
 #: scripts/scenario_32_devour.lua:3827
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
-msgstr "%s Missiles : %d/%d\n"
+msgstr "Missiles %s : %d/%d\n"
 
 #: scripts/scenario_32_devour.lua:3832 scripts/scenario_32_devour.lua:4546
 #, lua-format
@@ -2748,10 +2767,10 @@ msgid "Docking at %s."
 msgstr "En cours d'amarrage à %s."
 
 #: scripts/scenario_32_devour.lua:3895
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "Traded luxury for %s"
-msgstr "Échanger Produits de luxe (luxury) contre %s"
+msgstr "Échanger des produits de luxe (luxury) contre du %s"
 
 #: scripts/scenario_32_devour.lua:3916 scripts/scenario_32_devour.lua:3941
 #: scripts/scenario_32_devour.lua:3963 scripts/scenario_32_devour.lua:3989
@@ -2761,7 +2780,7 @@ msgstr "Échanger Produits de luxe (luxury) contre %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
-msgstr "%s acheté auprès de %s"
+msgstr "1 %s acheté auprès de %s."
 
 #: scripts/scenario_32_devour.lua:3918 scripts/scenario_32_devour.lua:3943
 #: scripts/scenario_32_devour.lua:3965 scripts/scenario_32_devour.lua:3991
@@ -2780,7 +2799,7 @@ msgstr "Auriez-vous des marchandises à vendre ?"
 #: scripts/scenario_32_devour.lua:4003 scripts/scenario_32_devour.lua:4524
 msgctxt "trade-comms"
 msgid "We've got "
-msgstr "Nous avons "
+msgstr "Nous avons : "
 
 #: scripts/scenario_32_devour.lua:4007 scripts/scenario_32_devour.lua:4528
 msgctxt "trade-comms"
@@ -2795,7 +2814,7 @@ msgstr "rien du tout."
 #: scripts/scenario_32_devour.lua:4030
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr "Nous allons vous détruire !"
+msgstr "Nous allons vous anéantir"
 
 #: scripts/scenario_32_devour.lua:4031
 msgctxt "shipEnemy-comms"
@@ -2805,7 +2824,7 @@ msgstr "Votre race va s'éteindre ici et maintenant !"
 #: scripts/scenario_32_devour.lua:4032
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr "Vos petites menaces ne nous impressionnent pas."
+msgstr "Vos menaces ridicules ne nous impressionnent pas."
 
 #: scripts/scenario_32_devour.lua:4038
 msgctxt "shipEnemy-comms"
@@ -2819,7 +2838,7 @@ msgstr ""
 #: scripts/scenario_32_devour.lua:4041
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
-msgstr "Nous allons vous détruire !"
+msgstr "Nous allons vous détruire"
 
 #: scripts/scenario_32_devour.lua:4042
 msgctxt "shipEnemy-comms"
@@ -2844,12 +2863,14 @@ msgstr "Vos commentaires sur l'honneur n'ont aucune signification pour nous."
 #: scripts/scenario_32_devour.lua:4048
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
-msgstr "Nous plaignons votre race pathétique."
+msgstr "Nous plaignons votre race pathétique"
 
 #: scripts/scenario_32_devour.lua:4049
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
-msgstr "Pathétique ? Vous allez regretter votre insolence !"
+msgstr ""
+"Pathétique ?\n"
+"Vous allez regretter votre insolence !"
 
 #: scripts/scenario_32_devour.lua:4050
 msgctxt "shipEnemy-comms"
@@ -2862,8 +2883,7 @@ msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
-"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
-"\n"
+"Nous ne vous voulons aucun mal, mais nous vous en ferons si nécessaire.\n"
 "Fin de transmission."
 
 #: scripts/scenario_32_devour.lua:4059
@@ -2883,27 +2903,27 @@ msgid ""
 ":Do not cross us:\n"
 "Communication halted."
 msgstr ""
-"000110011010...Grzzzz..\n"
-"\n"
-"Communication binaire non détectée..Grzzz Nous passons en communication "
+"000110011010...Grzzzz...\n"
+"Communication binaire non détectée...Grzzz Passons en communication "
 "universelle..Grrzzz\n"
+"Générons réponse appropriée pour cible en langage humain à partir archives..."
+"Grrzzzz\n"
 "\n"
-"Générer une réponse appropriée pour la cible en langage humain à partir des "
-"archives...Grrzzzz\n"
-"\n"
-"Ne nous approchez pas! Grrzzz\n"
+"     [Ne nous approchez pas !] Grrzzz\n"
 "\n"
 "Communication interrompue."
 
 #: scripts/scenario_32_devour.lua:4064
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
+msgstr "Executer à distance : AUTODESTRUCTION"
 
 #: scripts/scenario_32_devour.lua:4065
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr "Commande non autorisée reçue. Cible verrouillée."
+msgstr ""
+"Commande malveillante reçue. Annulée.\n"
+"Nous ciblons immédiatement source."
 
 #: scripts/scenario_32_devour.lua:4066
 msgctxt "shipEnemy-comms"
@@ -2919,18 +2939,17 @@ msgid ""
 msgstr ""
 "Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
 "s'opposer à nous tous.\n"
-"\n"
 "Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_32_devour.lua:4069
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
 
 #: scripts/scenario_32_devour.lua:4070
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
 
 #: scripts/scenario_32_devour.lua:4071
 msgctxt "shipEnemy-comms"
@@ -2988,7 +3007,7 @@ msgstr "Perturbation %i"
 #: scripts/scenario_32_devour.lua:4521
 msgctxt "trade-comms"
 msgid "Yes?"
-msgstr "Oui ?"
+msgstr "Oui, c'est pour quoi ?"
 
 #: scripts/scenario_32_devour.lua:4542
 msgctxt "shipAssist-comms"
@@ -3146,9 +3165,10 @@ msgid "Repairs completed as requested"
 msgstr "Réparations effectuées comme demandé."
 
 #: scripts/scenario_32_devour.lua:4964
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "Restock ordnance"
-msgstr "Réapprovisionner en munitions"
+msgstr "Faire le plein de munitions"
 
 #: scripts/scenario_32_devour.lua:4968
 msgctxt "ammo-comms"
@@ -3159,7 +3179,7 @@ msgstr "Quel genre de munitions ?"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%i reputation each)"
-msgstr "%s (%i rép chacun)"
+msgstr "%s (%i rép l'unité)"
 
 #: scripts/scenario_32_devour.lua:4975
 #, lua-format
@@ -3180,14 +3200,14 @@ msgstr ""
 
 #: scripts/scenario_32_devour.lua:4979 scripts/scenario_32_devour.lua:5032
 #: scripts/scenario_32_devour.lua:5070
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ammo-comms"
 msgid "Get one (%i reputation)"
 msgstr "En acheter un (%i rép)"
 
 #: scripts/scenario_32_devour.lua:4984 scripts/scenario_32_devour.lua:5027
 #: scripts/scenario_32_devour.lua:5037 scripts/scenario_32_devour.lua:5075
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ammo-comms"
 msgid "One %s provided"
 msgstr "Un %s fourni."
@@ -3195,6 +3215,7 @@ msgstr "Un %s fourni."
 #: scripts/scenario_32_devour.lua:4989 scripts/scenario_32_devour.lua:5010
 #: scripts/scenario_32_devour.lua:5042 scripts/scenario_32_devour.lua:5063
 #: scripts/scenario_32_devour.lua:5080 scripts/scenario_32_devour.lua:5086
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "You need to stay close if you want me to restock your ordnance"
 msgstr ""
@@ -3202,20 +3223,20 @@ msgstr ""
 "munitions."
 
 #: scripts/scenario_32_devour.lua:5000 scripts/scenario_32_devour.lua:5053
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ammo-comms"
 msgid "Get %i (%i reputation)"
 msgstr "Acheter %i (%i rép)"
 
 #: scripts/scenario_32_devour.lua:5005 scripts/scenario_32_devour.lua:5025
 #: scripts/scenario_32_devour.lua:5058
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ammo-comms"
 msgid "%i %ss provided"
 msgstr "%i %ss fourni"
 
 #: scripts/scenario_32_devour.lua:5020
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ammo-comms"
 msgid ""
 "I don't have enough %s type ordnance to fully restock you. How would you "
@@ -3225,6 +3246,7 @@ msgstr ""
 "entièrement. Que voulez-vous faire ?"
 
 #: scripts/scenario_32_devour.lua:5021
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "We'll take all you've got"
 msgstr "Nous prendrons tout ce qu'il vous reste"
@@ -3587,13 +3609,15 @@ msgstr "Inventaire"
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
-msgstr "%s Cargaison actuelle :"
+msgstr ""
+"Notre vaisseau (%s) :\n"
+"- Marchandises à bord : (quantité)"
 
 #: scripts/scenario_32_devour.lua:6320
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
-msgstr "     %s : %i"
+msgstr "     %s : x%i"
 
 #: scripts/scenario_32_devour.lua:6324
 msgctxt "inventory-shipLog"
@@ -3604,7 +3628,7 @@ msgstr "     Vide"
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
-msgstr "Espace disponible : %i"
+msgstr "Slots de stockage disponibles : %i"
 
 #: scripts/scenario_32_devour.lua:6341
 msgctxt "msgMainscreen"

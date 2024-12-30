@@ -1551,7 +1551,7 @@ msgstr "Salutations !"
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
-msgstr "%s%d rép chacun)"
+msgstr "%s%d rép l'unité)"
 
 #: scripts/scenario_60_captureFlag.lua:5229
 msgctxt "station-comms"
@@ -1568,19 +1568,19 @@ msgstr "Vous devez rester amarré à la station pour cette action."
 #: scripts/scenario_60_captureFlag.lua:5690
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_60_captureFlag.lua:5240
 #: scripts/scenario_60_captureFlag.lua:5691
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_60_captureFlag.lua:5241
 #: scripts/scenario_60_captureFlag.lua:5692
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/scenario_60_captureFlag.lua:5248
 #: scripts/scenario_60_captureFlag.lua:5699
@@ -1687,12 +1687,12 @@ msgstr "Bienvenue dans notre charmante petite station.\n"
 #: scripts/scenario_60_captureFlag.lua:5355
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions"
+msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_60_captureFlag.lua:5356
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr "Quel genre de munitions ?"
+msgstr "Quel type de munitions ?"
 
 #: scripts/scenario_60_captureFlag.lua:5360
 msgctxt "ammo-comms"
@@ -1764,7 +1764,7 @@ msgstr "Pourriez-vous fournir des HVLI ? ("
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
+msgstr "Recruter un membre de l'équipe de réparation (%i rép)"
 
 #: scripts/scenario_60_captureFlag.lua:5436
 #: scripts/scenario_60_captureFlag.lua:5453
@@ -1817,24 +1817,27 @@ msgid ""
 "Goods or components available: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles : (quantité, coût en réputation)\n"
+"- Marchandises à vendre : (quantité, coût en réputation)\n"
 
 #: scripts/scenario_60_captureFlag.lua:5495
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s : %i, %i\n"
+msgstr "     %s : x%i, %i rép l'unité.\n"
 
 #: scripts/scenario_60_captureFlag.lua:5498
 msgctxt "trade-comms"
 msgid "Current Cargo:\n"
-msgstr "Cargaison actuelle\n"
+msgstr ""
+"\n"
+"Notre vaisseau :\n"
+"- Marchandises à bord : (quantité)\n"
 
 #: scripts/scenario_60_captureFlag.lua:5505
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
-msgstr "     %s : %i\n"
+msgstr "     %s : x%i\n"
 
 #: scripts/scenario_60_captureFlag.lua:5511
 msgctxt "trade-comms"
@@ -1845,7 +1848,7 @@ msgstr "     Vide\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Espace disponible : %i, Réputation disponible : %i\n"
+msgstr "- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
 
 #: scripts/scenario_60_captureFlag.lua:5522
 #, lua-format
@@ -1857,7 +1860,10 @@ msgstr "Acheter 1 %s pour %i rép"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr "Type : %s, Quantité : %i, Rép : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i\n"
+"Coût : %i rép l'unité."
 
 #: scripts/scenario_60_captureFlag.lua:5525
 msgctxt "trade-comms"
@@ -1866,7 +1872,8 @@ msgid ""
 "Insufficient cargo space for purchase"
 msgstr ""
 "\n"
-"Espace de chargement insuffisant pour acheter"
+"\n"
+"Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_60_captureFlag.lua:5527
 #: scripts/scenario_60_captureFlag.lua:5532
@@ -1875,6 +1882,7 @@ msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
+"\n"
 "\n"
 "Réputation insuffisante pour acheter."
 
@@ -1888,7 +1896,8 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station"
+"\n"
+"Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_60_captureFlag.lua:5537
 msgctxt "trade-comms"
@@ -1897,13 +1906,14 @@ msgid ""
 "purchased"
 msgstr ""
 "\n"
-"Acheté"
+"\n"
+"1 marchandise achetée."
 
 #: scripts/scenario_60_captureFlag.lua:5560
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr "Échanger de la Nourriture (food) contre %s"
+msgstr "Échanger de la nourriture (food) contre %s"
 
 #: scripts/scenario_60_captureFlag.lua:5561
 #: scripts/scenario_60_captureFlag.lua:5593
@@ -1911,7 +1921,9 @@ msgstr "Échanger de la Nourriture (food) contre %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
-msgstr "Type : %s, Quantité : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i"
 
 #: scripts/scenario_60_captureFlag.lua:5568
 #: scripts/scenario_60_captureFlag.lua:5600
@@ -1922,7 +1934,8 @@ msgid ""
 "Traded"
 msgstr ""
 "\n"
-"Échangé"
+"\n"
+"Marchandises échangées."
 
 #: scripts/scenario_60_captureFlag.lua:5592
 #, lua-format
@@ -1934,12 +1947,12 @@ msgstr "Échanger des produits de luxe (luxury) contre %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr "Échanger des Médicaments (medicine) contre %s"
+msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_60_captureFlag.lua:5654
 msgctxt "trade-comms"
 msgid "Jettison cargo"
-msgstr "Larguer la cargaison"
+msgstr "Larguer des marchandises"
 
 #: scripts/scenario_60_captureFlag.lua:5655
 #, lua-format
@@ -1948,14 +1961,16 @@ msgid ""
 "Available space: %i\n"
 "What would you like to jettison?"
 msgstr ""
-"Espace disponible : %i\n"
-"Que voudriez-vous larguer ?"
+"Slots de stockage disponibles : %i\n"
+"Que voudriez-vous larguer par le sas ?"
 
 #: scripts/scenario_60_captureFlag.lua:5664
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
-msgstr "Un %s largué"
+msgstr ""
+"1 marchandise larguée.\n"
+"Bye bye %s."
 
 #: scripts/scenario_60_captureFlag.lua:5724
 msgctxt "station-comms"
@@ -2045,13 +2060,13 @@ msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_60_captureFlag.lua:5786
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_60_captureFlag.lua:5800
 msgctxt "trade-comms"
@@ -2062,7 +2077,7 @@ msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
 #, lua-format
 msgctxt "trade-comms"
 msgid "   %14s: %2i, %3i\n"
-msgstr "   %14s : %2i, %3i\n"
+msgstr "   %14s : x%2i, %3i rép l'unité.\n"
 
 #: scripts/scenario_60_captureFlag.lua:5814
 msgctxt "helpfullWarning-comms"
@@ -2101,9 +2116,10 @@ msgid ""
 "Friendly stations generally have food or medicine or both. Neutral stations "
 "often trade their goods for food, medicine or luxury."
 msgstr ""
-"Les stations amicales ont souvent de la nourriture (food) ou des médicaments "
+"Les stations amies ont souvent de la nourriture (food) ou des médicaments "
 "(medicine) ou les deux. Les stations neutres peuvent échanger leurs "
-"marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
+"marchandises contre de la nourriture, des médicaments ou des produits de "
+"luxe (luxury)."
 
 #: scripts/scenario_60_captureFlag.lua:5843
 msgctxt "trade-comms"
@@ -2112,14 +2128,14 @@ msgid ""
 "\n"
 "Check back later, someone else may have better knowledge"
 msgstr ""
-"A part ça, je n'ai pas connaissance de stations spécifiques.\n"
+" A part ça, je n'ai pas connaissance de stations spécifiques.\n"
 "\n"
 "Revenez plus tard, quelqu'un d'autre en saura peut-être plus que moi."
 
 #: scripts/scenario_60_captureFlag.lua:5849
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
+msgstr " A part ça, je n'ai pas connaissance de stations spécifiques."
 
 #: scripts/scenario_60_captureFlag.lua:5851
 msgctxt "trade-comms"
@@ -2131,14 +2147,13 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Quelles marchandises vous intéressent ?\n"
-"J'ai entendu parler de ça :"
+"Quelles marchandises vous intéressent ? J'ai entendu parler de ça :"
 
 #: scripts/scenario_60_captureFlag.lua:5854
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s%s"
-msgstr "La station %s dans le secteur %s a %s%s"
+msgstr "La station %s dans le secteur %s possède la marchandise %s%s."
 
 #: scripts/scenario_60_captureFlag.lua:5864
 msgctxt "stationGeneralInfo-comms"
@@ -2210,27 +2225,27 @@ msgstr ""
 #: scripts/scenario_60_captureFlag.lua:5961
 msgctxt "trade-comms"
 msgid " and will trade it for medicine"
-msgstr " et va l'échanger contre des Médicaments (medicine)"
+msgstr ". Elle l'échange contre des médicaments (medicine)"
 
 #: scripts/scenario_60_captureFlag.lua:5966
 msgctxt "trade-comms"
 msgid " or food"
-msgstr " ou de la Nourriture (food)"
+msgstr " ou de la nourriture (food)"
 
 #: scripts/scenario_60_captureFlag.lua:5968
 msgctxt "trade-comms"
 msgid " and will trade it for food"
-msgstr " et va l'échanger contre de la Nourriture (food)"
+msgstr ". Elle l'échange contre de la nourriture (food)"
 
 #: scripts/scenario_60_captureFlag.lua:5974
 msgctxt "trade-comms"
 msgid " or luxury"
-msgstr " ou des Produits de luxe (luxury)"
+msgstr " ou des produits de luxe (luxury)"
 
 #: scripts/scenario_60_captureFlag.lua:5976
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
-msgstr " et va l'échanger contre des Produits de luxe (luxury)"
+msgstr ". Elle l'échange contre des produits de luxe (luxury)"
 
 #: scripts/scenario_60_captureFlag.lua:6004
 #: scripts/scenario_60_captureFlag.lua:6020
@@ -2736,7 +2751,7 @@ msgstr "%s se forme sur moi"
 #: scripts/scenario_60_captureFlag.lua:6786
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr "Nous allons vous détruire !"
+msgstr "Nous allons vous anéantir"
 
 #: scripts/scenario_60_captureFlag.lua:6787
 msgctxt "shipEnemy-comms"
@@ -2746,7 +2761,7 @@ msgstr "Votre race va s'éteindre ici et maintenant !"
 #: scripts/scenario_60_captureFlag.lua:6788
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr "Vos petites menaces ne nous impressionnent pas."
+msgstr "Vos menaces ridicules ne nous impressionnent pas."
 
 #: scripts/scenario_60_captureFlag.lua:6790
 msgctxt "shipEnemy-comms"
@@ -2754,8 +2769,7 @@ msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
-"Ktzzzsss.\n"
-"\n"
+"...Ktzzzsss...\n"
 "Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_60_captureFlag.lua:6792
@@ -2764,8 +2778,7 @@ msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
-"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
-"\n"
+"Nous ne vous voulons aucun mal, mais nous vous en ferons si nécessaire.\n"
 "Fin de transmission."
 
 #: scripts/scenario_60_captureFlag.lua:6794
@@ -2785,27 +2798,27 @@ msgid ""
 ":Do not cross us:\n"
 "Communication halted."
 msgstr ""
-"000110011010...Grzzzz..\n"
-"\n"
-"Communication binaire non détectée..Grzzz Nous passons en communication "
+"000110011010...Grzzzz...\n"
+"Communication binaire non détectée...Grzzz Passons en communication "
 "universelle..Grrzzz\n"
+"Générons réponse appropriée pour cible en langage humain à partir archives..."
+"Grrzzzz\n"
 "\n"
-"Générer une réponse appropriée pour la cible en langage humain à partir des "
-"archives...Grrzzzz\n"
-"\n"
-"Ne nous approchez pas! Grrzzz\n"
+"     [Ne nous approchez pas !] Grrzzz\n"
 "\n"
 "Communication interrompue."
 
 #: scripts/scenario_60_captureFlag.lua:6797
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
+msgstr "Executer à distance : AUTODESTRUCTION"
 
 #: scripts/scenario_60_captureFlag.lua:6798
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr "Commande non autorisée reçue. Cible verrouillée."
+msgstr ""
+"Commande malveillante reçue. Annulée.\n"
+"Nous ciblons immédiatement source."
 
 #: scripts/scenario_60_captureFlag.lua:6799
 msgctxt "shipEnemy-comms"
@@ -2821,18 +2834,17 @@ msgid ""
 msgstr ""
 "Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
 "s'opposer à nous tous.\n"
-"\n"
 "Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_60_captureFlag.lua:6802
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
 
 #: scripts/scenario_60_captureFlag.lua:6803
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
 
 #: scripts/scenario_60_captureFlag.lua:6804
 msgctxt "shipEnemy-comms"

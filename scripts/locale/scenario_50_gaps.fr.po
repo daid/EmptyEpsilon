@@ -41,7 +41,7 @@ msgstr ""
 "- Traduction FR : Muerte (Mai 24)\n"
 "Texte vérifié (Déc. 24)\n"
 "Le scénario contient actuellement des bogues et est susceptible de ne pas "
-"fonctionner correctement.\n"
+"fonctionner correctement. Muerte (Déc. 24)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -893,7 +893,7 @@ msgid ""
 "components for use aboard ships"
 msgstr ""
 "Nous faisons de la recherche et fabriquons des transporteurs et des "
-"composants de transporteur de haute qualité pour une utilisation à bord des "
+"composants de transporteurs de haute qualité pour une utilisation à bord des "
 "navires."
 
 #: scripts/scenario_50_gaps.lua:1338
@@ -1431,7 +1431,7 @@ msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 #: scripts/scenario_50_gaps.lua:2291
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr "Quel genre de munitions ?"
+msgstr "Quel type de munitions ?"
 
 #: scripts/scenario_50_gaps.lua:2295
 msgctxt "ammo-comms"
@@ -1853,8 +1853,9 @@ msgstr "     %s : x%i, %i rép l'unité.\n"
 msgctxt "trade-comms"
 msgid "Current Cargo:\n"
 msgstr ""
+"\n"
 "Notre vaisseau :\n"
-"- Marchandises à bord :\n"
+"- Marchandises à bord : (quantité)\n"
 
 #: scripts/scenario_50_gaps.lua:2540
 #, lua-format
@@ -1901,11 +1902,13 @@ msgstr ""
 "Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_50_gaps.lua:2562 scripts/scenario_50_gaps.lua:2567
+#, fuzzy
 msgctxt "needRep-comms"
 msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
+"\n"
 "\n"
 "Réputation insuffisante pour acheter."
 
@@ -2271,7 +2274,7 @@ msgstr ""
 #: scripts/scenario_50_gaps.lua:2872
 msgctxt "station-comms"
 msgid "I need information"
-msgstr "j'aurai besoin d'informations"
+msgstr "J'aurai besoin d'informations"
 
 #: scripts/scenario_50_gaps.lua:2873
 msgctxt "station-comms"
@@ -2798,9 +2801,7 @@ msgstr "Stock insuffisant sur le cargo."
 #: scripts/scenario_50_gaps.lua:3492 scripts/scenario_50_gaps.lua:3523
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr ""
-"\n"
-"Réputation insuffisante pour acheter."
+msgstr "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_50_gaps.lua:3430 scripts/scenario_50_gaps.lua:3471
 #: scripts/scenario_50_gaps.lua:3497 scripts/scenario_50_gaps.lua:3528

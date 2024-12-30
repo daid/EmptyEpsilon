@@ -845,7 +845,7 @@ msgstr ""
 #: scripts/scenario_54_PatrolDuty.lua:1508
 msgctxt "scienceDescription-station"
 msgid "Transporter components"
-msgstr "Composants de transporteur"
+msgstr "Composants de transporteurs"
 
 #: scripts/scenario_54_PatrolDuty.lua:1286
 msgctxt "stationGeneralInfo-comms"
@@ -945,7 +945,7 @@ msgid ""
 "components for use aboard ships"
 msgstr ""
 "Nous faisons de la recherche et fabriquons des transporteurs et des "
-"composants de transporteur de haute qualité pour une utilisation à bord des "
+"composants de transporteurs de haute qualité pour une utilisation à bord des "
 "navires."
 
 #: scripts/scenario_54_PatrolDuty.lua:1510
@@ -1753,12 +1753,12 @@ msgstr ""
 #: scripts/scenario_54_PatrolDuty.lua:4339
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions"
+msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_54_PatrolDuty.lua:4341
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr "Quel genre de munitions ?"
+msgstr "Quel type de munitions ?"
 
 #: scripts/scenario_54_PatrolDuty.lua:4346
 msgctxt "ammo-comms"
@@ -1778,7 +1778,7 @@ msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
-msgstr "%s%d rép chacun)"
+msgstr "%s%d rép l'unité)"
 
 #: scripts/scenario_54_PatrolDuty.lua:4359
 msgctxt "ammo-comms"
@@ -2017,7 +2017,7 @@ msgstr "Précédent"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
+msgstr "Recruter un membre de l'équipe de réparation (%i rép)"
 
 #: scripts/scenario_54_PatrolDuty.lua:4455
 #: scripts/scenario_54_PatrolDuty.lua:4471
@@ -2097,16 +2097,19 @@ msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
 msgstr ""
-"Les stations amicales ont souvent de la nourriture (food) ou des médicaments "
+"Les stations amies ont souvent de la nourriture (food) ou des médicaments "
 "(medicine) ou les deux. Les stations neutres peuvent échanger leurs "
-"marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
+"marchandises contre de la nourriture, des médicaments ou des produits de "
+"luxe (luxury)."
 
 #: scripts/scenario_54_PatrolDuty.lua:4565
 #: scripts/scenario_54_PatrolDuty.lua:5503
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
-msgstr "La station %s dans le secteur %s possède du %s pour %i rép."
+msgstr ""
+"La station %s dans le secteur %s possède la marchandise %s pour %i rép "
+"l'unité."
 
 #: scripts/scenario_54_PatrolDuty.lua:4570
 #: scripts/scenario_54_PatrolDuty.lua:5508
@@ -2119,14 +2122,13 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Quelles marchandises vous intéressent ?\n"
-"J'ai entendu parler de ça :"
+"Quelles marchandises vous intéressent ? J'ai entendu parler de ça :"
 
 #: scripts/scenario_54_PatrolDuty.lua:4572
 #: scripts/scenario_54_PatrolDuty.lua:5510
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
+msgstr " A part ça, je n'ai pas connaissance de stations spécifiques."
 
 #: scripts/scenario_54_PatrolDuty.lua:4579
 msgctxt "cartographyOffice-comms"
@@ -2411,20 +2413,18 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles à la vente : (quantité, coût en "
-"réputation)\n"
+"- Marchandises à vendre : (quantité, coût en réputation)\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:4761
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s: %i, %i\n"
+msgstr "     %s : x%i, %i rép l'unité.\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:4764
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
-msgstr ""
-"Marchandises ou composants que la station achètera : (prix en réputation)\n"
+msgstr "- Marchandises à acheter : (bénéfice en réputation)\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:4766
 #: scripts/scenario_54_PatrolDuty.lua:4775
@@ -2437,7 +2437,10 @@ msgstr "     %s : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
-msgstr "Cargaison actuelle à bord du %s :\n"
+msgstr ""
+"\n"
+"Notre vaisseau (%s) :\n"
+"- Marchandises à bord : (quantité)\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:4779
 msgctxt "trade-comms"
@@ -2448,7 +2451,7 @@ msgstr "     Vide\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Espace disponible : %i, Rép. disponible : %i\n"
+msgstr "- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:4784
 #: scripts/scenario_54_PatrolDuty.lua:5879
@@ -2463,7 +2466,10 @@ msgstr "Acheter 1 %s pour %i rép"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr "Type : %s, Quantité : %i, Rép : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i\n"
+"Coût : %i rép l'unité."
 
 #: scripts/scenario_54_PatrolDuty.lua:4787
 msgctxt "trade-comms"
@@ -2471,6 +2477,7 @@ msgid ""
 "\n"
 "Insufficient cargo space for purchase"
 msgstr ""
+"\n"
 "\n"
 "Votre espace de stockage est insuffisant pour acheter."
 
@@ -2481,6 +2488,7 @@ msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
+"\n"
 "\n"
 "Réputation insuffisante pour acheter"
 
@@ -2494,6 +2502,7 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
+"\n"
 "Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_54_PatrolDuty.lua:4803
@@ -2502,6 +2511,7 @@ msgid ""
 "\n"
 "purchased"
 msgstr ""
+"\n"
 "\n"
 "1 marchandise achetée."
 
@@ -2515,7 +2525,9 @@ msgstr "Vendre 1 %s pour %i rép"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Reputation price: %i"
-msgstr "Type : %s, Coût en rép : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Bénéfice : %i rép."
 
 #: scripts/scenario_54_PatrolDuty.lua:4819
 msgctxt "trade-comms"
@@ -2524,13 +2536,14 @@ msgid ""
 "One sold"
 msgstr ""
 "\n"
-"1 vendu"
+"\n"
+"1 marchandise vendue."
 
 #: scripts/scenario_54_PatrolDuty.lua:4829
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr "Échanger de la Nourriture (food) contre %s"
+msgstr "Échanger de la nourriture (food) contre %s"
 
 #: scripts/scenario_54_PatrolDuty.lua:4830
 #: scripts/scenario_54_PatrolDuty.lua:4853
@@ -2538,7 +2551,9 @@ msgstr "Échanger de la Nourriture (food) contre %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
-msgstr "Type : %s, Quantité : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i"
 
 #: scripts/scenario_54_PatrolDuty.lua:4843
 #: scripts/scenario_54_PatrolDuty.lua:4866
@@ -2549,13 +2564,14 @@ msgid ""
 "Traded"
 msgstr ""
 "\n"
-"Échangé"
+"\n"
+"Marchandises échangées."
 
 #: scripts/scenario_54_PatrolDuty.lua:4852
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr "Échanger des Médicaments (medicine) contre %s"
+msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_54_PatrolDuty.lua:4875
 #: scripts/scenario_54_PatrolDuty.lua:5860
@@ -2569,7 +2585,7 @@ msgstr "Échanger des produits de luxe (luxury) contre %s"
 #: scripts/scenario_54_PatrolDuty.lua:5916
 msgctxt "trade-comms"
 msgid "Jettison cargo"
-msgstr "Larguer la cargaison"
+msgstr "Larguer des marchandises"
 
 #: scripts/scenario_54_PatrolDuty.lua:4906
 #: scripts/scenario_54_PatrolDuty.lua:5837
@@ -2580,8 +2596,8 @@ msgid ""
 "Available space: %i\n"
 "What would you like to jettison?"
 msgstr ""
-"Espace disponible : %i\n"
-"Que voudriez-vous larguer ?"
+"Slots de stockage disponibles : %i\n"
+"Que voudriez-vous larguer par le sas ?"
 
 #: scripts/scenario_54_PatrolDuty.lua:4912
 #: scripts/scenario_54_PatrolDuty.lua:5843
@@ -2589,12 +2605,14 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
-msgstr "Un %s largué"
+msgstr ""
+"1 %s de larguée...\n"
+"...10 de retrouvées."
 
 #: scripts/scenario_54_PatrolDuty.lua:4920
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
-msgstr "Explications sur les marchandises et cargaisons"
+msgstr "Explications sur les marchandises"
 
 #: scripts/scenario_54_PatrolDuty.lua:4921
 msgctxt "explainGoods-comms"
@@ -2606,15 +2624,15 @@ msgid ""
 "obtained by spending reputation points or by trading other types of cargo "
 "(typically food, medicine or luxury)"
 msgstr ""
-"Différents types de marchandises ou cargaisons peuvent être obtenus auprès "
-"des stations, des cargos ou d'autres sources. Ces ressources peuvent être du "
-"dilithium, de l'optique, des moteurs de vitesse lumière, etc. Certains "
-"objectifs de mission peuvent nécessiter un ou plusieurs types de "
-"marchandises particulières. Chaque vaisseau joueur diffère par sa capacité "
-"de transport de marchandises. Les marchandises peuvent être obtenues en "
-"dépensant des points de réputation ou en échangeant d'autres types de "
-"marchandises (généralement de la nourriture, des médicaments ou des produits "
-"de luxe)."
+"Différents types de marchandises peuvent être obtenus auprès de stations, "
+"cargos ou ailleurs. Ces ressources sont diverses, cela peut-être du "
+"dilithium, des composants optiques, du nickel, des batteries, etc.\n"
+"Certains objectifs de mission peuvent nécessiter un ou plusieurs types de "
+"marchandises spécifiques. Chaque vaisseau joueur à sa propre capacité de "
+"stockage de marchandises en soute.\n"
+"Les marchandises peuvent être obtenues en les payant avec des points de "
+"réputation ou en les échangeant contre d'autres types de marchandises, "
+"généralement de la nourriture, des médicaments ou des produits de luxe."
 
 #: scripts/scenario_54_PatrolDuty.lua:4925
 msgctxt "upgrade-comms"
@@ -2863,17 +2881,17 @@ msgstr "Vous devez rester amarré à la station pour cette action."
 #: scripts/scenario_54_PatrolDuty.lua:5328
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_54_PatrolDuty.lua:5329
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_54_PatrolDuty.lua:5330
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/scenario_54_PatrolDuty.lua:5337
 msgctxt "ammo-comms"
@@ -2999,13 +3017,13 @@ msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_54_PatrolDuty.lua:5411
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_54_PatrolDuty.lua:5425
 msgctxt "trade-comms"
@@ -3020,7 +3038,7 @@ msgid ""
 "Goods or components available: quantity, cost in reputation"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles : (quantité, coût en réputation)"
+"- Marchandises à vendre : (quantité, coût en réputation)"
 
 #: scripts/scenario_54_PatrolDuty.lua:5429
 #, lua-format
@@ -3030,7 +3048,7 @@ msgid ""
 "   %14s: %2i, %3i"
 msgstr ""
 "\n"
-"   %14s : %2i, %3i"
+"   %14s : x%2i, %3i rép l'unité."
 
 #: scripts/scenario_54_PatrolDuty.lua:5435
 msgctxt "helpfullWarning-comms"
@@ -3124,7 +3142,9 @@ msgstr ""
 #: scripts/scenario_54_PatrolDuty.lua:5896
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr "Que voulez-vous ?"
+msgstr ""
+"Salutations,\n"
+"Que nous voulez-vous ?"
 
 #: scripts/scenario_54_PatrolDuty.lua:5700
 msgctxt "shipAssist-comms"
@@ -3209,7 +3229,7 @@ msgstr "Bouclier %s : %d%%\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
-msgstr "%s Missiles : %d/%d\n"
+msgstr "Missiles %s : %d/%d\n"
 
 #: scripts/scenario_54_PatrolDuty.lua:5750
 #, lua-format
@@ -3226,7 +3246,7 @@ msgstr "En cours d'amarrage à %s."
 #: scripts/scenario_54_PatrolDuty.lua:5762
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr "Nous allons vous détruire !"
+msgstr "Nous allons vous anéantir"
 
 #: scripts/scenario_54_PatrolDuty.lua:5763
 msgctxt "shipEnemy-comms"
@@ -3236,7 +3256,7 @@ msgstr "Votre race va s'éteindre ici et maintenant !"
 #: scripts/scenario_54_PatrolDuty.lua:5764
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr "Vos petites menaces ne nous impressionnent pas."
+msgstr "Vos menaces ridicules ne nous impressionnent pas."
 
 #: scripts/scenario_54_PatrolDuty.lua:5766
 msgctxt "shipEnemy-comms"
@@ -3244,8 +3264,7 @@ msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
-"Ktzzzsss.\n"
-"\n"
+"...Ktzzzsss...\n"
 "Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_54_PatrolDuty.lua:5768
@@ -3254,8 +3273,7 @@ msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
-"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
-"\n"
+"Nous ne vous voulons aucun mal, mais nous vous en ferons si nécessaire.\n"
 "Fin de transmission."
 
 #: scripts/scenario_54_PatrolDuty.lua:5770
@@ -3275,27 +3293,27 @@ msgid ""
 ":Do not cross us:\n"
 "Communication halted."
 msgstr ""
-"000110011010...Grzzzz..\n"
-"\n"
-"Communication binaire non détectée..Grzzz Nous passons en communication "
+"000110011010...Grzzzz...\n"
+"Communication binaire non détectée...Grzzz Passons en communication "
 "universelle..Grrzzz\n"
+"Générons réponse appropriée pour cible en langage humain à partir archives..."
+"Grrzzzz\n"
 "\n"
-"Générer une réponse appropriée pour la cible en langage humain à partir des "
-"archives...Grrzzzz\n"
-"\n"
-"Ne nous approchez pas! Grrzzz\n"
+"     [Ne nous approchez pas !] Grrzzz\n"
 "\n"
 "Communication interrompue."
 
 #: scripts/scenario_54_PatrolDuty.lua:5773
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
+msgstr "Executer à distance : AUTODESTRUCTION"
 
 #: scripts/scenario_54_PatrolDuty.lua:5774
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr "Commande non autorisée reçue. Cible verrouillée."
+msgstr ""
+"Commande malveillante reçue. Annulée.\n"
+"Nous ciblons immédiatement source."
 
 #: scripts/scenario_54_PatrolDuty.lua:5775
 msgctxt "shipEnemy-comms"
@@ -3311,18 +3329,17 @@ msgid ""
 msgstr ""
 "Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
 "s'opposer à nous tous.\n"
-"\n"
 "Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_54_PatrolDuty.lua:5778
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
 
 #: scripts/scenario_54_PatrolDuty.lua:5779
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
 
 #: scripts/scenario_54_PatrolDuty.lua:5780
 msgctxt "shipEnemy-comms"
@@ -3340,7 +3357,7 @@ msgstr "Occupez-vous de vos affaires !"
 #: scripts/scenario_54_PatrolDuty.lua:5821
 msgctxt "trade-comms"
 msgid "Yes?"
-msgstr "Oui ?"
+msgstr "Oui, c'est pour quoi ?"
 
 #: scripts/scenario_54_PatrolDuty.lua:5801
 msgctxt "trade-comms"
@@ -3350,7 +3367,7 @@ msgstr "Auriez-vous des marchandises à vendre ?"
 #: scripts/scenario_54_PatrolDuty.lua:5803
 msgctxt "trade-comms"
 msgid "We've got "
-msgstr "Nous avons "
+msgstr "Nous avons : "
 
 #: scripts/scenario_54_PatrolDuty.lua:5807
 msgctxt "trade-comms"
@@ -3370,7 +3387,7 @@ msgstr "Où allez-vous ?"
 #: scripts/scenario_54_PatrolDuty.lua:5864
 msgctxt "trade-comms"
 msgid "Traded"
-msgstr "Échangé"
+msgstr "Marchandises échangées."
 
 #: scripts/scenario_54_PatrolDuty.lua:5886
 #: scripts/scenario_54_PatrolDuty.lua:5949
@@ -3378,14 +3395,14 @@ msgstr "Échangé"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
-msgstr "%s acheté auprès de %s"
+msgstr "1 %s acheté auprès de %s."
 
 #: scripts/scenario_54_PatrolDuty.lua:5888
 #: scripts/scenario_54_PatrolDuty.lua:5951
 #: scripts/scenario_54_PatrolDuty.lua:5979
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr "Réputation insuffisante pour acheter"
+msgstr "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_54_PatrolDuty.lua:5899
 #, lua-format

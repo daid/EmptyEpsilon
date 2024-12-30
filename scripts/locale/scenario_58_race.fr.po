@@ -740,18 +740,18 @@ msgstr ""
 #: scripts/scenario_58_race.lua:1642
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions"
+msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_58_race.lua:1643
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr "Quel genre de munitions ?"
+msgstr "Quel type de munitions ?"
 
 #: scripts/scenario_58_race.lua:1646
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%d rep each)"
-msgstr "%s (%d rép chacun)"
+msgstr "%s (%d rép l'unité)"
 
 #: scripts/scenario_58_race.lua:1654 scripts/scenario_58_race.lua:2345
 msgctxt "orders-comms"
@@ -1025,24 +1025,28 @@ msgstr "Acheter, vendre, échanger"
 msgctxt "trade-comms"
 msgid "Goods or components available here: quantity, cost in reputation\n"
 msgstr ""
-"Marchandises ou composants disponibles ici : (quantité, coût en réputation)\n"
+"Station :\n"
+"- Marchandises à vendre : (quantité, coût en réputation)\n"
 
 #: scripts/scenario_58_race.lua:1832
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s : %i, %i\n"
+msgstr "     %s : x%i, %i rép l'unité.\n"
 
 #: scripts/scenario_58_race.lua:1835
 msgctxt "trade-comms"
 msgid "Current Cargo:\n"
-msgstr "Cargaison actuelle\n"
+msgstr ""
+"\n"
+"Notre vaisseau :\n"
+"- Marchandises à bord : (quantité)\n"
 
 #: scripts/scenario_58_race.lua:1842
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
-msgstr "     %s : %i\n"
+msgstr "     %s : x%i\n"
 
 #: scripts/scenario_58_race.lua:1848
 msgctxt "trade-comms"
@@ -1053,7 +1057,7 @@ msgstr "     Vide\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Espace disponible : %i, Réputation disponible : %i\n"
+msgstr "- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
 
 #: scripts/scenario_58_race.lua:1859 scripts/scenario_58_race.lua:2634
 #: scripts/scenario_58_race.lua:2675 scripts/scenario_58_race.lua:2701
@@ -1067,7 +1071,10 @@ msgstr "Acheter 1 %s pour %i rép"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr "Type : %s, Quantité : %i, Rép : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i\n"
+"Coût : %i rép l'unité."
 
 #: scripts/scenario_58_race.lua:1862
 msgctxt "trade-comms"
@@ -1076,7 +1083,8 @@ msgid ""
 "Insufficient cargo space for purchase"
 msgstr ""
 "\n"
-"Espace de chargement insuffisant pour acheter"
+"\n"
+"Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_58_race.lua:1864 scripts/scenario_58_race.lua:1869
 msgctxt "needRep-comms"
@@ -1084,6 +1092,7 @@ msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
+"\n"
 "\n"
 "Réputation insuffisante pour acheter."
 
@@ -1112,14 +1121,16 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr "Échanger de la Nourriture (food) contre %s"
+msgstr "Échanger de la nourriture (food) contre %s"
 
 #: scripts/scenario_58_race.lua:1898 scripts/scenario_58_race.lua:1930
 #: scripts/scenario_58_race.lua:1962
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
-msgstr "Type : %s, Quantité : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i"
 
 #: scripts/scenario_58_race.lua:1905 scripts/scenario_58_race.lua:1937
 #: scripts/scenario_58_race.lua:1969
@@ -1128,6 +1139,7 @@ msgid ""
 "\n"
 "Traded"
 msgstr ""
+"\n"
 "\n"
 "Marchandises échangées."
 
@@ -1141,7 +1153,7 @@ msgstr "Échanger des produits de luxe (luxury) contre %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr "Échanger des Médicaments (medicine) contre %s"
+msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_58_race.lua:1996
 msgctxt "upgrade-comms"
@@ -1263,17 +1275,17 @@ msgstr "Vous devez rester amarré à la station pour cette action."
 #: scripts/scenario_58_race.lua:2262
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_58_race.lua:2263
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_58_race.lua:2264
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
 
 #: scripts/scenario_58_race.lua:2271
 msgctxt "ammo-comms"
@@ -1537,7 +1549,7 @@ msgstr "En cours d'amarrage à %s."
 #: scripts/scenario_58_race.lua:2545
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr "Nous allons vous détruire !"
+msgstr "Nous allons vous anéantir"
 
 #: scripts/scenario_58_race.lua:2546
 msgctxt "shipEnemy-comms"
@@ -1547,7 +1559,7 @@ msgstr "Votre race va s'éteindre ici et maintenant !"
 #: scripts/scenario_58_race.lua:2547
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr "Vos petites menaces ne nous impressionnent pas."
+msgstr "Vos menaces ridicules ne nous impressionnent pas."
 
 #: scripts/scenario_58_race.lua:2549
 msgctxt "shipEnemy-comms"
@@ -1555,8 +1567,7 @@ msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
-"Ktzzzsss.\n"
-"\n"
+"...Ktzzzsss...\n"
 "Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_58_race.lua:2551
@@ -1565,8 +1576,7 @@ msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
-"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
-"\n"
+"Nous ne vous voulons aucun mal, mais nous vous en ferons si nécessaire.\n"
 "Fin de transmission."
 
 #: scripts/scenario_58_race.lua:2553
@@ -1586,27 +1596,27 @@ msgid ""
 ":Do not cross us:\n"
 "Communication halted."
 msgstr ""
-"000110011010...Grzzzz..\n"
-"\n"
-"Communication binaire non détectée..Grzzz Nous passons en communication "
+"000110011010...Grzzzz...\n"
+"Communication binaire non détectée...Grzzz Passons en communication "
 "universelle..Grrzzz\n"
+"Générons réponse appropriée pour cible en langage humain à partir archives..."
+"Grrzzzz\n"
 "\n"
-"Générer une réponse appropriée pour la cible en langage humain à partir des "
-"archives...Grrzzzz\n"
-"\n"
-"Ne nous approchez pas! Grrzzz\n"
+"     [Ne nous approchez pas !] Grrzzz\n"
 "\n"
 "Communication interrompue."
 
 #: scripts/scenario_58_race.lua:2556
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
+msgstr "Executer à distance : AUTODESTRUCTION"
 
 #: scripts/scenario_58_race.lua:2557
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr "Commande non autorisée reçue. Cible verrouillée."
+msgstr ""
+"Commande malveillante reçue. Annulée.\n"
+"Nous ciblons immédiatement source."
 
 #: scripts/scenario_58_race.lua:2558
 msgctxt "shipEnemy-comms"
@@ -1622,18 +1632,17 @@ msgid ""
 msgstr ""
 "Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
 "s'opposer à nous tous.\n"
-"\n"
 "Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_58_race.lua:2561
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
 
 #: scripts/scenario_58_race.lua:2562
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
 
 #: scripts/scenario_58_race.lua:2563
 msgctxt "shipEnemy-comms"
@@ -1655,7 +1664,7 @@ msgstr ""
 #: scripts/scenario_58_race.lua:2588
 msgctxt "trade-comms"
 msgid "Yes?"
-msgstr "Oui ?"
+msgstr "Oui, c'est pour quoi ?"
 
 #: scripts/scenario_58_race.lua:2590
 msgctxt "trade-comms"

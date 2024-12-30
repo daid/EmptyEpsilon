@@ -1044,13 +1044,15 @@ msgstr "%s, juste de la roche"
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
-msgstr "%s Cargaison actuelle :"
+msgstr ""
+"Notre vaisseau (%s) :\n"
+"- Marchandises à bord : (quantité)"
 
 #: scripts/scenario_47_scavenger.lua:1451
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
-msgstr "     %s: %i"
+msgstr "     %s : x%i"
 
 #: scripts/scenario_47_scavenger.lua:1455
 msgctxt "inventory-shipLog"
@@ -1061,7 +1063,7 @@ msgstr "     Vide"
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
-msgstr "Espace disponible : %i"
+msgstr "Slots de stockage disponibles : %i"
 
 #: scripts/scenario_47_scavenger.lua:1513
 msgctxt "msgGM"
@@ -1338,12 +1340,12 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:1919
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions"
+msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_47_scavenger.lua:1922
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr "Quel genre de munitions ?"
+msgstr "Quel type de munitions ?"
 
 #: scripts/scenario_47_scavenger.lua:1929
 msgctxt "ammo-comms"
@@ -1363,7 +1365,7 @@ msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
-msgstr "%s%d rép chacun)"
+msgstr "%s%d rép l'unité)"
 
 #: scripts/scenario_47_scavenger.lua:1943
 msgctxt "ammo-comms"
@@ -1718,7 +1720,7 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:2160
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
-msgstr "Explications sur les marchandises et cargaisons"
+msgstr "Explications sur les marchandises"
 
 #: scripts/scenario_47_scavenger.lua:2161
 msgctxt "explainGoods-comms"
@@ -1730,15 +1732,15 @@ msgid ""
 "obtained by spending reputation points or by trading other types of cargo "
 "(typically food, medicine or luxury)"
 msgstr ""
-"Différents types de marchandises ou cargaisons peuvent être obtenus auprès "
-"des stations, des cargos ou d'autres sources. Ces ressources peuvent être du "
-"dilithium, de l'optique, des moteurs de vitesse lumière, etc. Certains "
-"objectifs de mission peuvent nécessiter un ou plusieurs types de "
-"marchandises particulières. Chaque vaisseau joueur diffère par sa capacité "
-"de transport de marchandises. Les marchandises peuvent être obtenues en "
-"dépensant des points de réputation ou en échangeant d'autres types de "
-"marchandises (généralement de la nourriture, des médicaments ou des produits "
-"de luxe)."
+"Différents types de marchandises peuvent être obtenus auprès de stations, "
+"cargos ou ailleurs. Ces ressources sont diverses, cela peut-être du "
+"dilithium, des composants optiques, du nickel, des batteries, etc.\n"
+"Certains objectifs de mission peuvent nécessiter un ou plusieurs types de "
+"marchandises spécifiques. Chaque vaisseau joueur à sa propre capacité de "
+"stockage de marchandises en soute.\n"
+"Les marchandises peuvent être obtenues en les payant avec des points de "
+"réputation ou en les échangeant contre d'autres types de marchandises, "
+"généralement de la nourriture, des médicaments ou des produits de luxe."
 
 #: scripts/scenario_47_scavenger.lua:2173
 msgctxt "stationServices-comms"
@@ -2244,7 +2246,7 @@ msgstr "Remplir le contrat %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i rép"
+msgstr "Recruter un membre de l'équipe de réparation (%i rép)"
 
 #: scripts/scenario_47_scavenger.lua:2494
 #: scripts/scenario_47_scavenger.lua:2511
@@ -2265,20 +2267,18 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles à la vente : (quantité, coût en "
-"réputation)\n"
+"- Marchandises à vendre : (quantité, coût en réputation)\n"
 
 #: scripts/scenario_47_scavenger.lua:2522
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s : %i, %i\n"
+msgstr "     %s : x%i, %i rép l'unité.\n"
 
 #: scripts/scenario_47_scavenger.lua:2525
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
-msgstr ""
-"Marchandises ou composants que la station achètera : (prix en réputation)\n"
+msgstr "- Marchandises à acheter : (bénéfice en réputation)\n"
 
 #: scripts/scenario_47_scavenger.lua:2527
 #: scripts/scenario_47_scavenger.lua:2536
@@ -2291,7 +2291,10 @@ msgstr "     %s : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
-msgstr "Cargaison actuelle à bord de %s :\n"
+msgstr ""
+"\n"
+"Notre vaisseau (%s) :\n"
+"- Marchandises à bord : (quantité)\n"
 
 #: scripts/scenario_47_scavenger.lua:2540
 msgctxt "trade-comms"
@@ -2302,7 +2305,7 @@ msgstr "     Vide\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Espace disponible : %i, Réputation disponible : %i\n"
+msgstr "- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
 
 #: scripts/scenario_47_scavenger.lua:2545
 #: scripts/scenario_47_scavenger.lua:3646
@@ -2323,7 +2326,10 @@ msgstr "Acheter 1 %s pour %i rép"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr "Type : %s, Quantité : %i, Rép : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i\n"
+"Coût : %i rép l'unité."
 
 #: scripts/scenario_47_scavenger.lua:2548
 msgctxt "trade-comms"
@@ -2332,7 +2338,8 @@ msgid ""
 "Insufficient cargo space for purchase"
 msgstr ""
 "\n"
-"Espace de chargement insuffisant pour acheter"
+"\n"
+"Votre espace de stockage est insuffisant pour acheter."
 
 #: scripts/scenario_47_scavenger.lua:2550
 #: scripts/scenario_47_scavenger.lua:2566
@@ -2341,6 +2348,7 @@ msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
+"\n"
 "\n"
 "Réputation insuffisante pour acheter."
 
@@ -2354,7 +2362,8 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
-"Stock insuffisant dans la station"
+"\n"
+"Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_47_scavenger.lua:2564
 msgctxt "trade-comms"
@@ -2363,13 +2372,14 @@ msgid ""
 "purchased"
 msgstr ""
 "\n"
-"Acheté"
+"\n"
+"1 marchandise achetée."
 
 #: scripts/scenario_47_scavenger.lua:2575
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr "Échanger de la Nourriture (food) contre %s"
+msgstr "Échanger de la nourriture (food) contre %s"
 
 #: scripts/scenario_47_scavenger.lua:2576
 #: scripts/scenario_47_scavenger.lua:2599
@@ -2377,7 +2387,9 @@ msgstr "Échanger de la Nourriture (food) contre %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
-msgstr "Type : %s, Quantité : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i"
 
 #: scripts/scenario_47_scavenger.lua:2589
 #: scripts/scenario_47_scavenger.lua:2612
@@ -2388,13 +2400,14 @@ msgid ""
 "Traded"
 msgstr ""
 "\n"
-"Échangé"
+"\n"
+"Marchandises échangées."
 
 #: scripts/scenario_47_scavenger.lua:2598
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr "Échanger des Médicaments (medicine) contre %s"
+msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_47_scavenger.lua:2621
 #: scripts/scenario_47_scavenger.lua:3623
@@ -2825,8 +2838,9 @@ msgid ""
 "We generously resupplied you with one weapon charge.\n"
 "Put it to good use."
 msgstr ""
-"Nous vous avons généreusement réapprovisionné en munitions.\n"
-"Faites-en bon usage."
+"Nous vous avons généreusement réapprovisionné avec cette munition.\n"
+"Utilisez-la bien.\n"
+"(Vous entendez quelqu'un ricaner de l'autre coté de la ligne.)"
 
 #: scripts/scenario_47_scavenger.lua:3064
 msgctxt "station-comms"
@@ -2922,13 +2936,13 @@ msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_47_scavenger.lua:3151
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_47_scavenger.lua:3178
 msgctxt "stationServices-comms"
@@ -2950,7 +2964,7 @@ msgid ""
 "Goods or components available: quantity, cost in reputation"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles : (quantité, coût en réputation)"
+"- Marchandises à vendre : (quantité, coût en réputation)"
 
 #: scripts/scenario_47_scavenger.lua:3232
 #, lua-format
@@ -2960,7 +2974,7 @@ msgid ""
 "   %14s: %2i, %3i"
 msgstr ""
 "\n"
-"   %14s : %2i, %3i"
+"   %14s : x%2i, %3i rép l'unité."
 
 #: scripts/scenario_47_scavenger.lua:3267
 msgctxt "stationAssist-comms"
@@ -3072,7 +3086,9 @@ msgstr "Merci de nous envoyer un Harceleur Q7 en renforts ! (%d rép)"
 #: scripts/scenario_47_scavenger.lua:3416
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr "Que voulez-vous ?"
+msgstr ""
+"Salutations,\n"
+"Que nous voulez-vous ?"
 
 #: scripts/scenario_47_scavenger.lua:3418
 msgctxt "shipAssist-comms"
@@ -3195,7 +3211,7 @@ msgstr "Bouclier %s : %d%%\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
-msgstr "%s Missiles : %d/%d\n"
+msgstr "Missiles %s : %d/%d\n"
 
 #: scripts/scenario_47_scavenger.lua:3522
 #, lua-format
@@ -3281,7 +3297,7 @@ msgstr "Avant : %d%% Arrière : %d%%"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid " %d:%d%%"
-msgstr " %d :%d%%"
+msgstr " %d : %d%%"
 
 #: scripts/scenario_47_scavenger.lua:3556
 msgctxt "shipAssist-comms"
@@ -3311,7 +3327,7 @@ msgid ""
 "    Missiles: %s"
 msgstr ""
 "\n"
-"    Missiles: %s"
+"    Missiles : %s"
 
 #: scripts/scenario_47_scavenger.lua:3582
 #, lua-format
@@ -3320,7 +3336,7 @@ msgid "%s heading toward you to assist"
 msgstr "%s, nous partons immédiatement vous aider."
 
 #: scripts/scenario_47_scavenger.lua:3633
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "Traded your luxury for %s from %s"
 msgstr "Échanger vos produits de luxe (luxury) contre du %s auprès de %s"
@@ -3337,7 +3353,7 @@ msgstr "Échanger vos produits de luxe (luxury) contre du %s auprès de %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
-msgstr "%s acheté auprès de %s"
+msgstr "1 %s acheté auprès de %s."
 
 #: scripts/scenario_47_scavenger.lua:3659
 #: scripts/scenario_47_scavenger.lua:3689
@@ -3362,7 +3378,7 @@ msgstr "Auriez-vous des marchandises à vendre ?"
 #: scripts/scenario_47_scavenger.lua:3835
 msgctxt "trade-comms"
 msgid "We've got "
-msgstr "Nous avons "
+msgstr "Nous avons : "
 
 #: scripts/scenario_47_scavenger.lua:3761
 #: scripts/scenario_47_scavenger.lua:3839
@@ -3379,7 +3395,7 @@ msgstr "rien du tout."
 #: scripts/scenario_47_scavenger.lua:3781
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr "Nous allons vous détruire !"
+msgstr "Nous allons vous anéantir"
 
 #: scripts/scenario_47_scavenger.lua:3782
 msgctxt "shipEnemy-comms"
@@ -3389,7 +3405,7 @@ msgstr "Votre race va s'éteindre ici et maintenant !"
 #: scripts/scenario_47_scavenger.lua:3783
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr "Vos petites menaces ne nous impressionnent pas."
+msgstr "Vos menaces ridicules ne nous impressionnent pas."
 
 #: scripts/scenario_47_scavenger.lua:3785
 msgctxt "shipEnemy-comms"
@@ -3403,7 +3419,7 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:3788
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
-msgstr "Nous allons vous détruire !"
+msgstr "Nous allons vous détruire"
 
 #: scripts/scenario_47_scavenger.lua:3789
 msgctxt "shipEnemy-comms"
@@ -3428,12 +3444,14 @@ msgstr "Vos commentaires sur l'honneur n'ont aucune signification pour nous."
 #: scripts/scenario_47_scavenger.lua:3795
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
-msgstr "Nous plaignons votre race pathétique."
+msgstr "Nous plaignons votre race pathétique"
 
 #: scripts/scenario_47_scavenger.lua:3796
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
-msgstr "Pathétique ? Vous allez regretter votre insolence !"
+msgstr ""
+"Pathétique ?\n"
+"Vous allez regretter votre insolence !"
 
 #: scripts/scenario_47_scavenger.lua:3797
 msgctxt "shipEnemy-comms"
@@ -3446,8 +3464,7 @@ msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
-"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
-"\n"
+"Nous ne vous voulons aucun mal, mais nous vous en ferons si nécessaire.\n"
 "Fin de transmission."
 
 #: scripts/scenario_47_scavenger.lua:3802
@@ -3467,27 +3484,27 @@ msgid ""
 ":Do not cross us:\n"
 "Communication halted."
 msgstr ""
-"000110011010...Grzzzz..\n"
-"\n"
-"Communication binaire non détectée..Grzzz Nous passons en communication "
+"000110011010...Grzzzz...\n"
+"Communication binaire non détectée...Grzzz Passons en communication "
 "universelle..Grrzzz\n"
+"Générons réponse appropriée pour cible en langage humain à partir archives..."
+"Grrzzzz\n"
 "\n"
-"Générer une réponse appropriée pour la cible en langage humain à partir des "
-"archives...Grrzzzz\n"
-"\n"
-"Ne nous approchez pas! Grrzzz\n"
+"     [Ne nous approchez pas !] Grrzzz\n"
 "\n"
 "Communication interrompue."
 
 #: scripts/scenario_47_scavenger.lua:3805
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
+msgstr "Executer à distance : AUTODESTRUCTION"
 
 #: scripts/scenario_47_scavenger.lua:3806
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr "Commande non autorisée reçue. Cible verrouillée."
+msgstr ""
+"Commande malveillante reçue. Annulée.\n"
+"Nous ciblons immédiatement source."
 
 #: scripts/scenario_47_scavenger.lua:3807
 msgctxt "shipEnemy-comms"
@@ -3503,18 +3520,17 @@ msgid ""
 msgstr ""
 "Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
 "s'opposer à nous tous.\n"
-"\n"
 "Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_47_scavenger.lua:3810
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
 
 #: scripts/scenario_47_scavenger.lua:3811
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
 
 #: scripts/scenario_47_scavenger.lua:3812
 msgctxt "shipEnemy-comms"
@@ -3531,7 +3547,7 @@ msgstr "Occupez-vous de vos affaires !"
 #: scripts/scenario_47_scavenger.lua:3832
 msgctxt "trade-comms"
 msgid "Yes?"
-msgstr "Oui ?"
+msgstr "Oui, c'est pour quoi ?"
 
 #: scripts/scenario_47_scavenger.lua:3974
 msgctxt "ship-comms"
@@ -3785,7 +3801,7 @@ msgstr ""
 "sur un vaisseau avec plus d'autonomie. Nous avons même des faisceaux laser. "
 "Notre vaisseau précédent, lui, était sans défense.\n"
 "\n"
-"Malheureusement, nos moteurs à impulsions ne sont pas aussi rapides que sur "
+"Malheureusement, nos moteurs à impulsion ne sont pas aussi rapides que sur "
 "notre ancien cargo, mais nous pourrions peut-être résoudre ce problème.\n"
 "C'est le genre de compromis que vous faites lorsque vous achetez du matériel "
 "militaire excédentaire. Je pense que si nous avons fait une si bonne affaire "

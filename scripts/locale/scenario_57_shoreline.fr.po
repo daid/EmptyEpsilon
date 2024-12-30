@@ -398,7 +398,7 @@ msgstr ""
 #: scripts/scenario_57_shoreline.lua:3433
 msgctxt "scienceDescription-station"
 msgid "Transporter components"
-msgstr "Composants de transporteur"
+msgstr "Composants de transporteurs"
 
 #: scripts/scenario_57_shoreline.lua:1322
 #: scripts/scenario_57_shoreline.lua:2395
@@ -1244,7 +1244,7 @@ msgid ""
 "components for use aboard ships"
 msgstr ""
 "Nous faisons de la recherche et fabriquons des transporteurs et des "
-"composants de transporteur de haute qualité pour une utilisation à bord des "
+"composants de transporteurs de haute qualité pour une utilisation à bord des "
 "navires."
 
 #: scripts/scenario_57_shoreline.lua:3435
@@ -1587,13 +1587,15 @@ msgstr "Inventaire"
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
-msgstr "%s Cargaison actuelle :"
+msgstr ""
+"Notre vaisseau (%s) :\n"
+"- Marchandises à bord : (quantité)"
 
 #: scripts/scenario_57_shoreline.lua:6840
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
-msgstr "     %s: %i"
+msgstr "     %s : x%i"
 
 #: scripts/scenario_57_shoreline.lua:6846
 msgctxt "inventory-shipLog"
@@ -1604,7 +1606,7 @@ msgstr "     Vide\n"
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
-msgstr "Espace disponible : %i"
+msgstr "Slots de stockage disponibles : %i"
 
 #: scripts/scenario_57_shoreline.lua:6929
 msgctxt "coolant-buttonEngineer"
@@ -1665,18 +1667,18 @@ msgstr ""
 #: scripts/scenario_57_shoreline.lua:7311
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions"
+msgstr "Nous aurions besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_57_shoreline.lua:7312
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr "Quel genre de munitions ?"
+msgstr "Quel type de munitions ?"
 
 #: scripts/scenario_57_shoreline.lua:7315
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%d rep each)"
-msgstr "%s (%d rép chacun)"
+msgstr "%s (%d rép l'unité)"
 
 #: scripts/scenario_57_shoreline.lua:7324
 #: scripts/scenario_57_shoreline.lua:7856
@@ -1810,20 +1812,18 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles à la vente : (quantité, coût en "
-"réputation)\n"
+"- Marchandises à vendre : (quantité, coût en réputation)\n"
 
 #: scripts/scenario_57_shoreline.lua:7367
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
-msgstr "     %s : %i, %i\n"
+msgstr "     %s : x%i, %i rép l'unité.\n"
 
 #: scripts/scenario_57_shoreline.lua:7370
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
-msgstr ""
-"Marchandises ou composants que la station achètera : (prix en réputation)\n"
+msgstr "- Marchandises à acheter : (bénéfice en réputation)\n"
 
 #: scripts/scenario_57_shoreline.lua:7372
 #: scripts/scenario_57_shoreline.lua:7381
@@ -1836,7 +1836,10 @@ msgstr "     %s : %i\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
-msgstr "Cargaison actuelle à bord de %s :\n"
+msgstr ""
+"\n"
+"Notre vaisseau (%s) :\n"
+"- Marchandises à bord : (quantité)\n"
 
 #: scripts/scenario_57_shoreline.lua:7385
 msgctxt "trade-comms"
@@ -1847,7 +1850,7 @@ msgstr "     Vide\n"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Espace disponible : %i, Réputation disponible : %i\n"
+msgstr "- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
 
 #: scripts/scenario_57_shoreline.lua:7390
 #: scripts/scenario_57_shoreline.lua:8455
@@ -1871,7 +1874,10 @@ msgstr "Acheter 1 %s pour %i rép"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr "Type : %s, Quantité : %i, Rép : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i\n"
+"Coût : %i rép l'unité."
 
 #: scripts/scenario_57_shoreline.lua:7393
 msgctxt "trade-comms"
@@ -1879,6 +1885,7 @@ msgid ""
 "\n"
 "Insufficient cargo space for purchase"
 msgstr ""
+"\n"
 "\n"
 "Votre espace de stockage est insuffisant pour acheter."
 
@@ -1889,6 +1896,7 @@ msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
+"\n"
 "\n"
 "Réputation insuffisante pour acheter."
 
@@ -1902,6 +1910,7 @@ msgid ""
 "Insufficient station inventory"
 msgstr ""
 "\n"
+"\n"
 "Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_57_shoreline.lua:7409
@@ -1910,6 +1919,7 @@ msgid ""
 "\n"
 "purchased"
 msgstr ""
+"\n"
 "\n"
 "1 marchandise achetée."
 
@@ -1923,7 +1933,9 @@ msgstr "Vendre 1 %s pour %i rép"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Reputation price: %i"
-msgstr "Type : %s, Coût en rép : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Bénéfice : %i rép."
 
 #: scripts/scenario_57_shoreline.lua:7425
 msgctxt "trade-comms"
@@ -1932,13 +1944,14 @@ msgid ""
 "One sold"
 msgstr ""
 "\n"
+"\n"
 "1 marchandise vendue."
 
 #: scripts/scenario_57_shoreline.lua:7438
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
-msgstr "Échanger de la Nourriture (food) contre %s"
+msgstr "Échanger de la nourriture (food) contre %s"
 
 #: scripts/scenario_57_shoreline.lua:7439
 #: scripts/scenario_57_shoreline.lua:7462
@@ -1946,7 +1959,9 @@ msgstr "Échanger de la Nourriture (food) contre %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
-msgstr "Type : %s, Quantité : %i"
+msgstr ""
+"Type de marchandise : %s\n"
+"Quantité disponible : %i"
 
 #: scripts/scenario_57_shoreline.lua:7452
 #: scripts/scenario_57_shoreline.lua:7475
@@ -1957,13 +1972,14 @@ msgid ""
 "Traded"
 msgstr ""
 "\n"
+"\n"
 "Marchandises échangées."
 
 #: scripts/scenario_57_shoreline.lua:7461
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
-msgstr "Échanger des Médicaments (medicine) contre %s"
+msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_57_shoreline.lua:7484
 #: scripts/scenario_57_shoreline.lua:8422
@@ -1986,7 +2002,7 @@ msgstr "Échanger des produits de luxe (luxury) contre %s"
 #: scripts/scenario_57_shoreline.lua:9377
 msgctxt "trade-comms"
 msgid "Jettison cargo"
-msgstr "Larguer la cargaison"
+msgstr "Larguer des marchandises"
 
 #: scripts/scenario_57_shoreline.lua:7509
 #: scripts/scenario_57_shoreline.lua:8438
@@ -2000,7 +2016,7 @@ msgstr "Larguer la cargaison"
 #: scripts/scenario_57_shoreline.lua:9378
 msgctxt "trade-comms"
 msgid "What would you like to jettison?"
-msgstr "Que voudriez-vous larguer ?"
+msgstr "Que voudriez-vous larguer par le sas ?"
 
 #: scripts/scenario_57_shoreline.lua:7515
 #: scripts/scenario_57_shoreline.lua:8444
@@ -2015,12 +2031,14 @@ msgstr "Que voudriez-vous larguer ?"
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
-msgstr "Un %s largué"
+msgstr ""
+"1 %s larguée.\n"
+"Le vaisseau semble plus léger."
 
 #: scripts/scenario_57_shoreline.lua:7523
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
-msgstr "Explications sur les marchandises et cargaisons"
+msgstr "Explications sur les marchandises"
 
 #: scripts/scenario_57_shoreline.lua:7524
 msgctxt "explainGoods-comms"
@@ -2032,15 +2050,15 @@ msgid ""
 "obtained by spending reputation points or by trading other types of cargo "
 "(typically food, medicine or luxury)"
 msgstr ""
-"Différents types de marchandises ou cargaisons peuvent être obtenus auprès "
-"des stations, des cargos ou d'autres sources. Ces ressources peuvent être du "
-"dilithium, de l'optique, des moteurs de vitesse lumière, etc. Certains "
-"objectifs de mission peuvent nécessiter un ou plusieurs types de "
-"marchandises particulières. Chaque vaisseau joueur diffère par sa capacité "
-"de transport de marchandises. Les marchandises peuvent être obtenues en "
-"dépensant des points de réputation ou en échangeant d'autres types de "
-"marchandises (généralement de la nourriture, des médicaments ou des produits "
-"de luxe)."
+"Différents types de marchandises peuvent être obtenus auprès de stations, "
+"cargos ou ailleurs. Ces ressources sont diverses, cela peut-être du "
+"dilithium, des composants optiques, du nickel, des batteries, etc.\n"
+"Certains objectifs de mission peuvent nécessiter un ou plusieurs types de "
+"marchandises spécifiques. Chaque vaisseau joueur à sa propre capacité de "
+"stockage de marchandises en soute.\n"
+"Les marchandises peuvent être obtenues en les payant avec des points de "
+"réputation ou en les échangeant contre d'autres types de marchandises, "
+"généralement de la nourriture, des médicaments ou des produits de luxe."
 
 #: scripts/scenario_57_shoreline.lua:7548
 msgctxt "opt1BeamRangeUpgrade-comms"
@@ -2202,8 +2220,9 @@ msgid ""
 "We generously resupplied you with one weapon charge.\n"
 "Put it to good use."
 msgstr ""
-"Nous vous avons généreusement réapprovisionné en munitions.\n"
-"Faites-en bon usage."
+"Nous vous avons généreusement réapprovisionné avec cette munition.\n"
+"Utilisez-la bien.\n"
+"(Vous entendez quelqu'un ricaner de l'autre coté de la ligne.)"
 
 #: scripts/scenario_57_shoreline.lua:7706
 msgctxt "station-comms"
@@ -2330,13 +2349,13 @@ msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_57_shoreline.lua:7772
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_57_shoreline.lua:7786
 msgctxt "trade-comms"
@@ -2351,7 +2370,7 @@ msgid ""
 "Goods or components available: quantity, cost in reputation"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles : (quantité, coût en réputation)"
+"- Marchandises à vendre : (quantité, coût en réputation)"
 
 #: scripts/scenario_57_shoreline.lua:7790
 #, lua-format
@@ -2361,7 +2380,7 @@ msgid ""
 "   %14s: %2i, %3i"
 msgstr ""
 "\n"
-"   %14s: %2i, %3i"
+"   %14s : x%2i, %3i rép l'unité."
 
 #: scripts/scenario_57_shoreline.lua:7796
 msgctxt "trade-comms"
@@ -2374,15 +2393,18 @@ msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
 msgstr ""
-"Les stations amicales ont souvent de la nourriture (food) ou des médicaments "
+"Les stations amies ont souvent de la nourriture (food) ou des médicaments "
 "(medicine) ou les deux. Les stations neutres peuvent échanger leurs "
-"marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
+"marchandises contre de la nourriture, des médicaments ou des produits de "
+"luxe (luxury)."
 
 #: scripts/scenario_57_shoreline.lua:7842
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
-msgstr "La station %s dans le secteur %s possède du %s pour %i rép."
+msgstr ""
+"La station %s dans le secteur %s possède la marchandise %s pour %i rép "
+"l'unité."
 
 #: scripts/scenario_57_shoreline.lua:7847
 msgctxt "trade-comms"
@@ -2394,13 +2416,12 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Quelles marchandises vous intéressent ?\n"
-"J'ai entendu parler de ça :"
+"Quelles marchandises vous intéressent ? J'ai entendu parler de ça :"
 
 #: scripts/scenario_57_shoreline.lua:7849
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
+msgstr " A part ça, je n'ai pas connaissance de stations spécifiques."
 
 #: scripts/scenario_57_shoreline.lua:7902
 #, lua-format
@@ -2605,7 +2626,9 @@ msgstr "Monsieur, comment pouvons-nous vous assister ?"
 #: scripts/scenario_57_shoreline.lua:9290
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr "Que voulez-vous ?"
+msgstr ""
+"Salutations,\n"
+"Que nous voulez-vous ?"
 
 #: scripts/scenario_57_shoreline.lua:8182
 msgctxt "shipAssist-comms"
@@ -2756,7 +2779,7 @@ msgstr "Annette Sporisky est à bord"
 #: scripts/scenario_57_shoreline.lua:9243
 msgctxt "trade-comms"
 msgid "Traded"
-msgstr "Échangé"
+msgstr "Marchandises échangées."
 
 #: scripts/scenario_57_shoreline.lua:8359
 msgctxt "friendlyFreighter-comms"
@@ -2862,7 +2885,7 @@ msgstr "Auriez-vous des marchandises à vendre ?"
 #: scripts/scenario_57_shoreline.lua:9199
 msgctxt "trade-comms"
 msgid "We've got "
-msgstr "Nous avons "
+msgstr "Nous avons : "
 
 #: scripts/scenario_57_shoreline.lua:8389
 #: scripts/scenario_57_shoreline.lua:8706
@@ -2899,7 +2922,7 @@ msgstr "Où allez-vous ?"
 #: scripts/scenario_57_shoreline.lua:9406
 msgctxt "trade-comms"
 msgid "Purchased"
-msgstr "Acheté"
+msgstr "1 marchandise achetée."
 
 #: scripts/scenario_57_shoreline.lua:8468
 #: scripts/scenario_57_shoreline.lua:8525
@@ -2923,7 +2946,7 @@ msgstr "Réputation insuffisante pour acheter."
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous ? (coût de l'information : %f réputation)"
+msgstr "Où allez-vous ? (coût de l'information : %f rép)"
 
 #: scripts/scenario_57_shoreline.lua:8481
 #: scripts/scenario_57_shoreline.lua:8798
@@ -3031,7 +3054,7 @@ msgstr "Bouclier %s : %d%%\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
-msgstr "%s Missiles : %d/%d\n"
+msgstr "Missiles %s : %d/%d\n"
 
 #: scripts/scenario_57_shoreline.lua:8672
 #: scripts/scenario_57_shoreline.lua:9136
@@ -3051,7 +3074,7 @@ msgstr "En cours d'amarrage à %s."
 #: scripts/scenario_57_shoreline.lua:9196
 msgctxt "trade-comms"
 msgid "Yes?"
-msgstr "Oui ?"
+msgstr "Oui, c'est pour quoi ?"
 
 #: scripts/scenario_57_shoreline.lua:9030
 msgctxt "Undercut2-comms"
@@ -3061,7 +3084,7 @@ msgstr " ou "
 #: scripts/scenario_57_shoreline.lua:9157
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr "Nous allons vous détruire !"
+msgstr "Nous allons vous anéantir"
 
 #: scripts/scenario_57_shoreline.lua:9158
 msgctxt "shipEnemy-comms"
@@ -3071,7 +3094,7 @@ msgstr "Votre race va s'éteindre ici et maintenant !"
 #: scripts/scenario_57_shoreline.lua:9159
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr "Vos petites menaces ne nous impressionnent pas."
+msgstr "Vos menaces ridicules ne nous impressionnent pas."
 
 #: scripts/scenario_57_shoreline.lua:9161
 msgctxt "shipEnemy-comms"
@@ -3079,8 +3102,7 @@ msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
-"Ktzzzsss.\n"
-"\n"
+"...Ktzzzsss...\n"
 "Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_57_shoreline.lua:9163
@@ -3089,8 +3111,7 @@ msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
-"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
-"\n"
+"Nous ne vous voulons aucun mal, mais nous vous en ferons si nécessaire.\n"
 "Fin de transmission."
 
 #: scripts/scenario_57_shoreline.lua:9165
@@ -3110,27 +3131,27 @@ msgid ""
 ":Do not cross us:\n"
 "Communication halted."
 msgstr ""
-"000110011010...Grzzzz..\n"
-"\n"
-"Communication binaire non détectée..Grzzz Nous passons en communication "
+"000110011010...Grzzzz...\n"
+"Communication binaire non détectée...Grzzz Passons en communication "
 "universelle..Grrzzz\n"
+"Générons réponse appropriée pour cible en langage humain à partir archives..."
+"Grrzzzz\n"
 "\n"
-"Générer une réponse appropriée pour la cible en langage humain à partir des "
-"archives...Grrzzzz\n"
-"\n"
-"Ne nous approchez pas! Grrzzz\n"
+"     [Ne nous approchez pas !] Grrzzz\n"
 "\n"
 "Communication interrompue."
 
 #: scripts/scenario_57_shoreline.lua:9168
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
+msgstr "Executer à distance : AUTODESTRUCTION"
 
 #: scripts/scenario_57_shoreline.lua:9169
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr "Commande non autorisée reçue. Cible verrouillée."
+msgstr ""
+"Commande malveillante reçue. Annulée.\n"
+"Nous ciblons immédiatement source."
 
 #: scripts/scenario_57_shoreline.lua:9170
 msgctxt "shipEnemy-comms"
@@ -3146,18 +3167,17 @@ msgid ""
 msgstr ""
 "Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
 "s'opposer à nous tous.\n"
-"\n"
 "Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_57_shoreline.lua:9173
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
 
 #: scripts/scenario_57_shoreline.lua:9174
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
 
 #: scripts/scenario_57_shoreline.lua:9175
 msgctxt "shipEnemy-comms"

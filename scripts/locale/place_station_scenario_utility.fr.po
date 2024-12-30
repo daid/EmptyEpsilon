@@ -706,7 +706,7 @@ msgid ""
 "components for use aboard ships"
 msgstr ""
 "Nous faisons de la recherche et fabriquons des transporteurs et des "
-"composants de transporteur de haute qualité pour une utilisation à bord des "
+"composants de transporteurs de haute qualité pour une utilisation à bord des "
 "vaisseaux."
 
 #: scripts/place_station_scenario_utility.lua:1583

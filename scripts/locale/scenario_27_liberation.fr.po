@@ -1186,7 +1186,7 @@ msgid ""
 "[Jasmine Purdue] Yes? What can I do for you?"
 msgstr ""
 "Un instant, je vais la chercher.\n"
-"...Après quelques brefs instants…\n"
+"...Après quelques brefs instants.\n"
 "\n"
 "[Jasmine Purdue] Oui ? Que puis-je faire pour vous ?"
 
