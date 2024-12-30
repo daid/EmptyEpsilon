@@ -15,6 +15,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
+#, fuzzy
 msgid "Scurvy Scavenger"
 msgstr "Chasseurs de trésors"
 
@@ -35,7 +36,9 @@ msgstr ""
 "- Titre original : Scurvy Scavenger\n"
 "- Auteur : Xansta (2020)\n"
 "- Traduction FR : Muerte (Mai 24)\n"
-"TRADUCTION EN COURS DE RELECTURE\n"
+"Relecture en cours 20%   108/530 Muerte (Janv. 25)\n"
+"Le scénario contient actuellement des bogues et est susceptible de ne pas "
+"fonctionner correctement. Muerte (Janv. 25)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -80,7 +83,8 @@ msgstr "Loi de Murphy"
 
 msgctxt "setting"
 msgid "Configures the perversity of the universe according to Murphy's law"
-msgstr "Définit la perversité de l'univers selon la loi de Murphy."
+msgstr ""
+"Définit comment la chance est avec ou contre vous selon la loi de Murphy."
 
 msgctxt "Murphy"
 msgid "Easy"
@@ -109,7 +113,7 @@ msgstr "Les facteurs aléatoires sont plus contre vous."
 #: scripts/scenario_47_scavenger.lua:45
 msgctxt "orders-comms"
 msgid "No primary orders"
-msgstr "Aucun ordre majeur en cours."
+msgstr "Aucun ordre majeur en cours.\n"
 
 #: scripts/scenario_47_scavenger.lua:113 scripts/scenario_47_scavenger.lua:116
 #: scripts/scenario_47_scavenger.lua:120 scripts/scenario_47_scavenger.lua:125
@@ -137,70 +141,76 @@ msgctxt "contract-comms"
 msgid ""
 "Deliver three %s to %s. Upon delivery, they will increase your hull strength"
 msgstr ""
-"Livrez 3 %s à %s. À la livraison, ils augmenteront la résistance de votre "
-"coque."
+"Livrer 3 marchandises %s à la station %s.\n"
+"En guise de paiement, ils augmenteront la résistance de votre coque dès la "
+"livraison."
 
 #: scripts/scenario_47_scavenger.lua:589
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid "Three %s to %s"
-msgstr "3 %s à %s"
+msgstr "fournir 3 %s à la station %s"
 
 #: scripts/scenario_47_scavenger.lua:596
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid "Fulfill %s 3 %s %s contract"
 msgstr "Remplir le contrat %s 3 %s %s"
 
 #: scripts/scenario_47_scavenger.lua:597
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid "Three %s from %s"
 msgstr "3 %s de %s"
 
 #: scripts/scenario_47_scavenger.lua:604
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid ""
 "Deliver two %s to %s. Upon delivery, they will increase your shield strength"
 msgstr ""
-"Livrez 2 %s à %s. À la livraison, ils augmenteront la force de votre "
-"bouclier."
+"Livrer 2 marchandises %s à la station %s.\n"
+"En guise de paiement, ils augmenteront la force de votre bouclier dès la "
+"livraison."
 
 #: scripts/scenario_47_scavenger.lua:605
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid "Two %s to %s"
-msgstr "2 %s à %s"
+msgstr "fournir 2 %s à la station %s"
 
 #: scripts/scenario_47_scavenger.lua:612
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid "Fulfill %s 2 %s %s contract"
 msgstr "Remplir le contrat %s 2 %s %s"
 
 #: scripts/scenario_47_scavenger.lua:613
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid "Two %s from %s"
 msgstr "2 %s de %s"
 
 #: scripts/scenario_47_scavenger.lua:620
+#, fuzzy
 msgctxt "buttonGM"
 msgid "+Missions"
 msgstr "+ Missions"
 
 #: scripts/scenario_47_scavenger.lua:621
+#, fuzzy
 msgctxt "buttonGM"
 msgid "+Spawn Ship(s)"
 msgstr "+ Ajout de vaisseaux"
 
 #: scripts/scenario_47_scavenger.lua:628
+#, fuzzy
 msgctxt "buttonGM"
 msgid "-Main from missions"
 msgstr "- Menu principal"
 
 #: scripts/scenario_47_scavenger.lua:629
+#, fuzzy
 msgctxt "buttonGM"
 msgid "Mission Status"
 msgstr "État de la mission"
@@ -217,22 +227,22 @@ msgstr "Intrigue 1 :"
 #, lua-format
 msgctxt "msgGM"
 msgid "%s nil"
-msgstr "%s nul"
+msgstr "%s "
 
 #: scripts/scenario_47_scavenger.lua:635
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s Kraylor diversionary sabotage"
 msgstr "%s sabotage de diversion Kraylor"
 
 #: scripts/scenario_47_scavenger.lua:637
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s long distance cargo"
 msgstr "%s fret longue distance"
 
 #: scripts/scenario_47_scavenger.lua:639
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s transition contract"
 msgstr "Contrat de transition %s"
@@ -241,26 +251,26 @@ msgstr "Contrat de transition %s"
 #, lua-format
 msgctxt "msgGM"
 msgid "%s Exuari harassment"
-msgstr "%s Harcèlement Éxuari"
+msgstr "%s Harcèlement des Éxuaris"
 
 #: scripts/scenario_47_scavenger.lua:644
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s (optional)"
 msgstr "%s (facultatif)"
 
 #: scripts/scenario_47_scavenger.lua:648
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "    seconds remaining until next harassment wave:%i"
 msgstr ""
 "%s\n"
-"    secondes restantes jusqu'à la prochaine vague de harcèlement : %i"
+" - %is restantes jusqu'à la prochaine vague de harcèlement."
 
 #: scripts/scenario_47_scavenger.lua:652
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -270,17 +280,17 @@ msgstr ""
 "    taille de la flotte défensive :%i"
 
 #: scripts/scenario_47_scavenger.lua:656
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "    seconds remaining until next defensive fleet:%i"
 msgstr ""
 "%s\n"
-"    secondes restantes jusqu'à la prochaine flotte défensive : %i"
+" - %is restantes jusqu'à la prochaine flotte défensive."
 
 #: scripts/scenario_47_scavenger.lua:660
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -290,7 +300,7 @@ msgstr ""
 "    danger : %.2f"
 
 #: scripts/scenario_47_scavenger.lua:663
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -300,7 +310,7 @@ msgstr ""
 "    flottes détruites : %i"
 
 #: scripts/scenario_47_scavenger.lua:673
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -310,7 +320,7 @@ msgstr ""
 "    Taille de la dernière flotte de défense : %i"
 
 #: scripts/scenario_47_scavenger.lua:685
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -320,17 +330,17 @@ msgstr ""
 "    Taille de la flotte de diversion Kraylor : %i"
 
 #: scripts/scenario_47_scavenger.lua:688
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "    seconds remaining until next check for reinforcements:%i"
 msgstr ""
 "%s\n"
-"    secondes restantes jusqu'à la prochaine vérification des renforts : %i"
+" - %is restantes jusqu'à la prochaine vérification des renforts."
 
 #: scripts/scenario_47_scavenger.lua:691
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -340,13 +350,13 @@ msgstr ""
 "    Danger de diversion Kraylor : %i"
 
 #: scripts/scenario_47_scavenger.lua:700
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s/n    defend against Kraylor fleet size:%i"
 msgstr "%s/n     se défend contre la taille de la flotte Kraylor : %i"
 
 #: scripts/scenario_47_scavenger.lua:704
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -356,7 +366,7 @@ msgstr ""
 "    la station du dépôt de ravitaillement %s a été sabotée."
 
 #: scripts/scenario_47_scavenger.lua:707
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -366,13 +376,13 @@ msgstr ""
 "    la station du dépôt de ravitaillement a été détruite."
 
 #: scripts/scenario_47_scavenger.lua:712
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s    distance between %s and %s:%i units"
 msgstr "%s    distance entre %s et %s : %i unités"
 
 #: scripts/scenario_47_scavenger.lua:721
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -392,23 +402,23 @@ msgstr ""
 "Intrigue 2 :"
 
 #: scripts/scenario_47_scavenger.lua:729
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s contract target"
 msgstr "Objectif du contrat %s"
 
 #: scripts/scenario_47_scavenger.lua:731
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "    seconds remaining until next Exuari vengance fleet:%i"
 msgstr ""
 "%s\n"
-"    secondes restantes jusqu'à la prochaine flotte de vengeance Éxuarie : %i"
+" - %is restantes jusqu'à la prochaine flotte de vengeance Éxuarie."
 
 #: scripts/scenario_47_scavenger.lua:735
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -418,39 +428,43 @@ msgstr ""
 "    Station cible du contrat %s"
 
 #: scripts/scenario_47_scavenger.lua:743
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s, harassing Exuari fleet size:%i"
 msgstr "%s, taille de la flotte Éxuarie harceleuse :%i"
 
 #: scripts/scenario_47_scavenger.lua:746
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s, seconds until next harassment check:%i"
 msgstr "%s, secondes jusqu'à la prochaine vérification du harcèlement : %i"
 
 #: scripts/scenario_47_scavenger.lua:758
+#, fuzzy
 msgctxt "msgGM"
 msgid "accepted"
 msgstr "accepté"
 
 #: scripts/scenario_47_scavenger.lua:760
+#, fuzzy
 msgctxt "msgGM"
 msgid "not accepted"
 msgstr "pas accepté"
 
 #: scripts/scenario_47_scavenger.lua:764
+#, fuzzy
 msgctxt "msgGM"
 msgid "fulfilled"
 msgstr "accompli"
 
 #: scripts/scenario_47_scavenger.lua:766
+#, fuzzy
 msgctxt "msgGM"
 msgid "not fulfilled"
 msgstr "non accompli"
 
 #: scripts/scenario_47_scavenger.lua:769
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -460,14 +474,14 @@ msgstr ""
 "    Contrat à %s : %s statut : %s"
 
 #: scripts/scenario_47_scavenger.lua:775
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "    seconds until transition contract:%i"
 msgstr ""
 "%s\n"
-"    %i secondes jusqu'au contrat de transition."
+" - %is jusqu'au contrat de transition."
 
 #: scripts/scenario_47_scavenger.lua:778
 #, lua-format
@@ -480,13 +494,13 @@ msgstr ""
 "Intrigue 3 :"
 
 #: scripts/scenario_47_scavenger.lua:782
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s Jenny asteroid (optional)"
 msgstr "Astéroïde de Jenny %s (facultatif)"
 
 #: scripts/scenario_47_scavenger.lua:785
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -496,7 +510,7 @@ msgstr ""
 "    structure des astéroïdes dans les notes"
 
 #: scripts/scenario_47_scavenger.lua:789
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -506,7 +520,7 @@ msgstr ""
 "    astéroïde identifié"
 
 #: scripts/scenario_47_scavenger.lua:791
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -516,7 +530,7 @@ msgstr ""
 "    Jenny est à bord"
 
 #: scripts/scenario_47_scavenger.lua:794
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -526,7 +540,7 @@ msgstr ""
 "    la récompense pour la recherche sur les astéroïdes est disponible sur %s"
 
 #: scripts/scenario_47_scavenger.lua:796
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -537,7 +551,7 @@ msgstr ""
 "réclamée par %s"
 
 #: scripts/scenario_47_scavenger.lua:799
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -548,7 +562,7 @@ msgstr ""
 "disponible sur %s"
 
 #: scripts/scenario_47_scavenger.lua:802
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -560,7 +574,7 @@ msgstr ""
 "station de la première mission."
 
 #: scripts/scenario_47_scavenger.lua:805
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -570,7 +584,7 @@ msgstr ""
 "    Jenny n'est pas encore à bord de %s"
 
 #: scripts/scenario_47_scavenger.lua:808
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -590,37 +604,37 @@ msgstr ""
 "Intrigue 4 :"
 
 #: scripts/scenario_47_scavenger.lua:816
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s highwaymen"
 msgstr "%s bandits de grand chemin"
 
 #: scripts/scenario_47_scavenger.lua:818
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s highwaymen alerted"
 msgstr "%s bandits de grand chemin alertés"
 
 #: scripts/scenario_47_scavenger.lua:820
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s highwaymen pounce"
 msgstr "%s bandits de grand chemin se jettent sur"
 
 #: scripts/scenario_47_scavenger.lua:822
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s highwaymen aftermath"
 msgstr "%s séquelles des bandits de grand chemin"
 
 #: scripts/scenario_47_scavenger.lua:824
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s highwaymen reset"
 msgstr "%s des bandits de grand chemin : réinitialisation"
 
 #: scripts/scenario_47_scavenger.lua:827
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -630,7 +644,7 @@ msgstr ""
 "    secondes jusqu'au prochain événement : %i"
 
 #: scripts/scenario_47_scavenger.lua:836
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -650,13 +664,13 @@ msgstr ""
 "Intrigue 5 :"
 
 #: scripts/scenario_47_scavenger.lua:843
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s highwaymen warning zone"
 msgstr "%s zone d'avertissement des bandits de grand chemin"
 
 #: scripts/scenario_47_scavenger.lua:845
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s: seconds until zone removal:%i"
 msgstr "%s : secondes jusqu'à la suppression de la zone : %i"
@@ -672,19 +686,19 @@ msgstr ""
 "Intrigue 6 :"
 
 #: scripts/scenario_47_scavenger.lua:853
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s world end"
 msgstr "%s fin du monde"
 
 #: scripts/scenario_47_scavenger.lua:855
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s Kraylor planet buster"
 msgstr "%s briseur de planète Kraylor"
 
 #: scripts/scenario_47_scavenger.lua:857
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -694,7 +708,7 @@ msgstr ""
 "    secondes jusqu'à la prochaine vérification de la flotte : %i"
 
 #: scripts/scenario_47_scavenger.lua:860
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -705,19 +719,19 @@ msgstr ""
 "vérification de la planète : %i"
 
 #: scripts/scenario_47_scavenger.lua:869
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "Ships: %s"
 msgstr "Vaisseaux : %s"
 
 #: scripts/scenario_47_scavenger.lua:871
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s, %s"
 msgstr "%s, %s"
 
 #: scripts/scenario_47_scavenger.lua:875
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -727,7 +741,7 @@ msgstr ""
 "    Taille de la flotte d'attaque planétaire : %i"
 
 #: scripts/scenario_47_scavenger.lua:877
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -737,7 +751,7 @@ msgstr ""
 "    %s"
 
 #: scripts/scenario_47_scavenger.lua:881
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -757,21 +771,20 @@ msgstr ""
 "Intrigue 7 :"
 
 #: scripts/scenario_47_scavenger.lua:889
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s exploding planet debris"
 msgstr "%s débris planétaires explosant"
 
 #: scripts/scenario_47_scavenger.lua:891
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "    seconds remaining until explosion actions are done:%i"
 msgstr ""
 "%s\n"
-"    secondes restantes jusqu'à ce que les actions d'explosion soient "
-"effectuées : %i"
+"%is restantes jusqu'à ce que les actions d'explosion aient eu lieu."
 
 #: scripts/scenario_47_scavenger.lua:894
 #, lua-format
@@ -784,13 +797,13 @@ msgstr ""
 "Intrigue 8 :"
 
 #: scripts/scenario_47_scavenger.lua:898
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid "%s opportunistic pirates"
 msgstr "%s pirates opportunistes"
 
 #: scripts/scenario_47_scavenger.lua:906
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -800,7 +813,7 @@ msgstr ""
 "    Taille de la flotte de pirates cupides : %i"
 
 #: scripts/scenario_47_scavenger.lua:909
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -811,7 +824,7 @@ msgstr ""
 "flotte pirate : %i"
 
 #: scripts/scenario_47_scavenger.lua:912
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
@@ -821,227 +834,235 @@ msgstr ""
 "    Danger : pirate cupide : %i"
 
 #: scripts/scenario_47_scavenger.lua:918
+#, fuzzy
 msgctxt "buttonGM"
 msgid "Skip Harassment"
 msgstr "Ignorer Harcèlement"
 
 #: scripts/scenario_47_scavenger.lua:936
+#, fuzzy
 msgctxt "msgGM"
 msgid "Harassment skipped"
 msgstr "Harcèlement ignoré."
 
 #: scripts/scenario_47_scavenger.lua:941
+#, fuzzy
 msgctxt "buttonGM"
 msgid "Skip Local Contracts"
 msgstr "Ignorer Contrats locaux"
 
 #: scripts/scenario_47_scavenger.lua:961 scripts/scenario_47_scavenger.lua:5289
 #: scripts/scenario_47_scavenger.lua:5331
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-shipLog"
 msgid "A rare long range contract has been posted at station %s"
 msgstr "Un contrat rare à longue distance a été affiché à la station %s."
 
 #: scripts/scenario_47_scavenger.lua:964
+#, fuzzy
 msgctxt "msgGM"
 msgid "Local contracts skipped"
 msgstr "Contrats locaux ignorés."
 
 #: scripts/scenario_47_scavenger.lua:968
+#, fuzzy
 msgctxt "buttonGM"
 msgid "Mark asteroids"
 msgstr "Marquer les astéroïdes"
 
 #: scripts/scenario_47_scavenger.lua:1210
+#, fuzzy
 msgctxt "scienceDescription-asteroid"
 msgid "Structure: solid"
 msgstr "Composition : solide"
 
 #: scripts/scenario_47_scavenger.lua:1212
+#, fuzzy
 msgctxt "scienceDescription-asteroid"
 msgid "Structure: rubble"
 msgstr "Composition : gravats"
 
 #: scripts/scenario_47_scavenger.lua:1214
+#, fuzzy
 msgctxt "scienceDescription-asteroid"
 msgid "Structure: binary"
 msgstr "Composition : binaire"
 
 #: scripts/scenario_47_scavenger.lua:1220
 #: scripts/scenario_47_scavenger.lua:1235
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%sosmium:%.1f%% "
 msgstr "%sosmium : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1222
 #: scripts/scenario_47_scavenger.lua:1260
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%siridium:%.1f%% "
 msgstr "%siridium : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1224
 #: scripts/scenario_47_scavenger.lua:1307
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%solivine:%.1f%% "
 msgstr "%solivine : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1226
 #: scripts/scenario_47_scavenger.lua:1343
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%snickel:%.1f%% "
 msgstr "%snickel : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1227
 #: scripts/scenario_47_scavenger.lua:1357
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%s, %srock:remainder"
 msgstr "%s, %sreste de roche"
 
 #: scripts/scenario_47_scavenger.lua:1240
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%sruthenium:%.1f%% "
 msgstr "%sruthénium : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1245
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%srhodium:%.1f%% "
 msgstr "%srhodium : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1250
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%smagnesium:%.1f%% "
 msgstr "%smagnesium : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1255
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%splatinum:%.1f%% "
 msgstr "%splatinem : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1265
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%sgold:%.1f%% "
 msgstr "%sor : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1270
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%spalladium:%.1f%% "
 msgstr "%spalladium : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1275
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%soxygen:%.1f%% "
 msgstr "%soxygène : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1280
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%ssilicon:%.1f%% "
 msgstr "%ssilicium : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1285
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%shydrogen:%.1f%% "
 msgstr "%shydrogène : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1290
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%snitrogen:%.1f%% "
 msgstr "%sazote : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1296
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%spyroxene:remainder"
 msgstr "%sreste de pyroxène"
 
 #: scripts/scenario_47_scavenger.lua:1298
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%spyroxene:%.1f%% "
 msgstr "%spyroxène : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1305
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%solivine:remainder"
 msgstr "%sreste d'olivine"
 
 #: scripts/scenario_47_scavenger.lua:1314
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%scobalt:remainder"
 msgstr "%sreste de cobalt"
 
 #: scripts/scenario_47_scavenger.lua:1316
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%scobalt:%.1f%% "
 msgstr "%scobalt : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1323
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%sdilithium:remainder"
 msgstr "%sreste de dilithium"
 
 #: scripts/scenario_47_scavenger.lua:1325
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%sdilithium:%.1f%% "
 msgstr "%sdilithium : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1332
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%scalcium:remainder"
 msgstr "%sreste de calcium"
 
 #: scripts/scenario_47_scavenger.lua:1334
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%scalcium:%.1f%% "
 msgstr "%scalcium : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1341
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%snickel:remainder"
 msgstr "%sreste de nickel"
 
 #: scripts/scenario_47_scavenger.lua:1350
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%siron:remainder"
 msgstr "%sreste de fer"
 
 #: scripts/scenario_47_scavenger.lua:1352
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%siron:%.1f%% "
 msgstr "%sfer : %.1f%% "
 
 #: scripts/scenario_47_scavenger.lua:1360
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDescription-asteroid"
 msgid "%s, just rock"
 msgstr "%s, juste de la roche"
 
 #: scripts/scenario_47_scavenger.lua:1446
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
 msgstr ""
@@ -1055,6 +1076,7 @@ msgid "     %s: %i"
 msgstr "     %s : x%i"
 
 #: scripts/scenario_47_scavenger.lua:1455
+#, fuzzy
 msgctxt "inventory-shipLog"
 msgid "     Empty"
 msgstr "     Vide"
@@ -1066,13 +1088,14 @@ msgid "Available space: %i"
 msgstr "Slots de stockage disponibles : %i"
 
 #: scripts/scenario_47_scavenger.lua:1513
+#, fuzzy
 msgctxt "msgGM"
 msgid "Empty Template pool: fix excludes or other criteria"
 msgstr "Pool de modèles vide : correction des exclusions ou d'autres critères"
 
 #: scripts/scenario_47_scavenger.lua:1571
 #: scripts/scenario_47_scavenger.lua:1616
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid ""
 "Your available cargo space, %i, is insufficient for this contract. You need "
@@ -1082,7 +1105,7 @@ msgstr ""
 "Vous avez besoin d'au moins 3 espaces de stockage."
 
 #: scripts/scenario_47_scavenger.lua:1582
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid "Cargo of three %s has been loaded onto your ship. Deliver to %s in %s"
 msgstr ""
@@ -1091,7 +1114,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:1587
 #: scripts/scenario_47_scavenger.lua:1632
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid ""
 "This contract is no longer valid since the destination, %s, no longer "
@@ -1206,11 +1229,12 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:3964
 #: scripts/scenario_47_scavenger.lua:4003
 #: scripts/scenario_47_scavenger.lua:4030
+#, fuzzy
 msgid "Back"
 msgstr "Précédent"
 
 #: scripts/scenario_47_scavenger.lua:1607
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid "Thanks for the %s, %s. We increased your hull strength by 50%%"
 msgstr ""
@@ -1218,7 +1242,7 @@ msgstr ""
 "50%%."
 
 #: scripts/scenario_47_scavenger.lua:1609
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid ""
 "The terms of the contract require the delivery of three %s. This has not "
@@ -1227,7 +1251,7 @@ msgstr ""
 "Les termes du contrat exigent la livraison de 3 %s. Cela n'a pas été atteint."
 
 #: scripts/scenario_47_scavenger.lua:1627
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid "Cargo of two %s has been loaded onto your ship. Deliver to %s in %s"
 msgstr ""
@@ -1235,14 +1259,14 @@ msgstr ""
 "le secteur %s."
 
 #: scripts/scenario_47_scavenger.lua:1655
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid "Thanks for the %s, %s. We increased your shield strength by 25%%"
 msgstr ""
 "Merci pour le %s, %s. Nous avons augmenté la force de votre bouclier de 25%%."
 
 #: scripts/scenario_47_scavenger.lua:1657
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid ""
 "The terms of the contract require the delivery of two %s. This has not been "
@@ -1251,6 +1275,7 @@ msgstr ""
 "Les termes du contrat exigent la livraison de 2 %s. Cela n'a pas été atteint."
 
 #: scripts/scenario_47_scavenger.lua:1668
+#, fuzzy
 msgctxt "characterInfo-comms"
 msgid ""
 "His penchant for miniaturization and tinkering allows him to add a beam "
@@ -1260,6 +1285,7 @@ msgstr ""
 "faisceaux laser sur n'importe quel vaisseau."
 
 #: scripts/scenario_47_scavenger.lua:1696
+#, fuzzy
 msgctxt "characterInfo-comms"
 msgid ""
 "She knows how to increase your maximum energy capacity by improving battery "
@@ -1269,11 +1295,13 @@ msgstr ""
 "améliorant l'efficacité de la batterie."
 
 #: scripts/scenario_47_scavenger.lua:1746
+#, fuzzy
 msgctxt "artifact-shipLog"
 msgid "The artifact we picked up has damaged our ship"
 msgstr "L'artefact que nous avons ramassé a endommagé notre vaisseau"
 
 #: scripts/scenario_47_scavenger.lua:1752
+#, fuzzy
 msgctxt "artifact-shipLog"
 msgid ""
 "The technology gleaned from the artifact has allowed our technicians to "
@@ -1283,7 +1311,7 @@ msgstr ""
 "les dégâts infligés par nos faisceaux laser."
 
 #: scripts/scenario_47_scavenger.lua:1762
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "artifact-shipLog"
 msgid ""
 "The technology gleaned from the artifact has allowed our technicians to "
@@ -1299,7 +1327,7 @@ msgstr ""
 "Nous sommes en train de nous faire attaquer ! Pas le temps de discuter !"
 
 #: scripts/scenario_47_scavenger.lua:1891
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "station-comms"
 msgid ""
 "Greetings %s!\n"
@@ -1309,6 +1337,7 @@ msgstr ""
 "Comment pouvons-nous vous aider aujourd'hui ? "
 
 #: scripts/scenario_47_scavenger.lua:1893
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
@@ -1318,11 +1347,13 @@ msgstr ""
 "Que pouvons-nous faire pour vous aujourd'hui ?"
 
 #: scripts/scenario_47_scavenger.lua:1895
+#, fuzzy
 msgctxt "station-comms"
 msgid "Hello, may I help you?"
 msgstr "Bonjour, puis-je vous aider ?"
 
 #: scripts/scenario_47_scavenger.lua:1898
+#, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
 msgstr "Bienvenue dans notre charmante petite station."
@@ -1353,6 +1384,7 @@ msgid "Can you supply us with some nukes? ("
 msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 
 #: scripts/scenario_47_scavenger.lua:1931
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
 msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
@@ -1362,17 +1394,19 @@ msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 #: scripts/scenario_47_scavenger.lua:1959
 #: scripts/scenario_47_scavenger.lua:1971
 #: scripts/scenario_47_scavenger.lua:1983
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
 msgstr "%s%d rép l'unité)"
 
 #: scripts/scenario_47_scavenger.lua:1943
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
 msgstr "Veuillez réapprovisionner nos missiles EMP ("
 
 #: scripts/scenario_47_scavenger.lua:1945
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "Got any EMPs? ("
 msgstr "Avez-vous des EMP ? ("
@@ -1383,26 +1417,31 @@ msgid "Do you have spare homing missiles for us? ("
 msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
 
 #: scripts/scenario_47_scavenger.lua:1957
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
 msgstr "Avez-vous des missiles homing supplémentaires ? ("
 
 #: scripts/scenario_47_scavenger.lua:1967
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
 msgstr "Nous pourrions avoir besoin de quelques mines ("
 
 #: scripts/scenario_47_scavenger.lua:1969
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "How about mines? ("
 msgstr "Concernant les mines ? ("
 
 #: scripts/scenario_47_scavenger.lua:1979
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "What about HVLI? ("
 msgstr "Concernant les HVLI ? ("
 
 #: scripts/scenario_47_scavenger.lua:1981
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI? ("
 msgstr "Pourriez-vous fournir des HVLI ? ("
@@ -1414,6 +1453,7 @@ msgid "I need information"
 msgstr "j'aurai besoin d'informations"
 
 #: scripts/scenario_47_scavenger.lua:1992
+#, fuzzy
 msgctxt "station-comms"
 msgid "What kind of information are you looking for?"
 msgstr "Quel genre d'information recherchez-vous ?"
@@ -1433,7 +1473,7 @@ msgstr "État des services d'accueil de la station %s :\n"
 
 #: scripts/scenario_47_scavenger.lua:1996
 #: scripts/scenario_47_scavenger.lua:3160
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -1452,6 +1492,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:2001
 #: scripts/scenario_47_scavenger.lua:3165
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Parts shortage prevents scan probe replenishment."
 msgstr ""
@@ -1459,6 +1500,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:2002
 #: scripts/scenario_47_scavenger.lua:3166
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
@@ -1473,7 +1515,7 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:3170
 #: scripts/scenario_47_scavenger.lua:3183
 #: scripts/scenario_47_scavenger.lua:3196
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -1484,7 +1526,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:2009
 #: scripts/scenario_47_scavenger.lua:3173
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -1495,6 +1537,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:2013
 #: scripts/scenario_47_scavenger.lua:3177
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
@@ -1502,6 +1545,7 @@ msgstr ""
 "réparer la coque."
 
 #: scripts/scenario_47_scavenger.lua:2014
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
@@ -1510,6 +1554,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:2015
 #: scripts/scenario_47_scavenger.lua:3179
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
@@ -1518,7 +1563,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:2022
 #: scripts/scenario_47_scavenger.lua:3186
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -1529,6 +1574,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:2026
 #: scripts/scenario_47_scavenger.lua:3190
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
@@ -1539,6 +1585,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:2027
 #: scripts/scenario_47_scavenger.lua:3191
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
@@ -1547,6 +1594,7 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:2028
 #: scripts/scenario_47_scavenger.lua:3192
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
@@ -1558,69 +1606,69 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:2035
 #: scripts/scenario_47_scavenger.lua:3199
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May overcharge jump drive"
 msgstr ""
 "%s\n"
-"- Peut booster la téléportation (rechargement)."
+"- Boost du délai de recharge de la téléportation."
 
 #: scripts/scenario_47_scavenger.lua:2038
 #: scripts/scenario_47_scavenger.lua:3202
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair probe launch system"
 msgstr ""
 "%s\n"
-"- Peut réparer le système de lancement de sonde."
+"- Réparation du système de lancement de sonde."
 
 #: scripts/scenario_47_scavenger.lua:2041
 #: scripts/scenario_47_scavenger.lua:3205
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair hacking system"
 msgstr ""
 "%s\n"
-"- Peut réparer le système de piratage."
+"- Réparation du système de piratage."
 
 #: scripts/scenario_47_scavenger.lua:2044
 #: scripts/scenario_47_scavenger.lua:3208
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair scanners"
 msgstr ""
 "%s\n"
-"- Peut réparer les scanners."
+"- Réparation des scanners."
 
 #: scripts/scenario_47_scavenger.lua:2047
 #: scripts/scenario_47_scavenger.lua:3211
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair combat maneuver"
 msgstr ""
 "%s\n"
-"- Peut réparer la manœuvre de combat."
+"- Réparation de la manœuvre de combat."
 
 #: scripts/scenario_47_scavenger.lua:2050
 #: scripts/scenario_47_scavenger.lua:3214
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May repair self destruct system"
 msgstr ""
 "%s\n"
-"- Peut réparer le système d'autodestruction."
+"- Réparation du système d'autodestruction."
 
 #: scripts/scenario_47_scavenger.lua:2059
 #: scripts/scenario_47_scavenger.lua:3242
@@ -1648,48 +1696,49 @@ msgstr "L'histoire de la station"
 
 #: scripts/scenario_47_scavenger.lua:2076
 #: scripts/scenario_47_scavenger.lua:3259
+#, fuzzy
 msgctxt "gossip-comms"
 msgid "Gossip"
 msgstr "Commérages"
 
 #: scripts/scenario_47_scavenger.lua:2088
 #: scripts/scenario_47_scavenger.lua:3087
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "characterInfo-comms"
 msgid "Tell me about %s"
 msgstr "Parlez-moi de %s"
 
 #: scripts/scenario_47_scavenger.lua:2095
 #: scripts/scenario_47_scavenger.lua:3094
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "characterInfo-comms"
 msgid "Never heard of %s"
 msgstr "Jamais entendu parler de %s."
 
 #: scripts/scenario_47_scavenger.lua:2097
 #: scripts/scenario_47_scavenger.lua:3096
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s died last week. The funeral was yesterday"
 msgstr "%s est décédé la semaine dernière. L'enterrement a eu lieu hier."
 
 #: scripts/scenario_47_scavenger.lua:2099
 #: scripts/scenario_47_scavenger.lua:3098
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s? Who's %s? There's nobody here named %s"
 msgstr "%s ? Qui est %s ? Il n'y a personne ici qui s'appelle %s."
 
 #: scripts/scenario_47_scavenger.lua:2101
 #: scripts/scenario_47_scavenger.lua:3100
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "characterInfo-comms"
 msgid "We don't talk about %s. They are gone and good riddance"
 msgstr "Pas envie de parler de %s. Ils sont partis et bon débarras."
 
 #: scripts/scenario_47_scavenger.lua:2103
 #: scripts/scenario_47_scavenger.lua:3102
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "characterInfo-comms"
 msgid "I think %s moved away"
 msgstr "Je pense que %s a déménagé."
@@ -1702,13 +1751,14 @@ msgstr "Quels sont nos ordres en cours ?"
 
 #: scripts/scenario_47_scavenger.lua:2151
 #: scripts/scenario_47_scavenger.lua:3114
+#, fuzzy
 msgctxt "orders-comms"
 msgid "\n"
 msgstr "\n"
 
 #: scripts/scenario_47_scavenger.lua:2153
 #: scripts/scenario_47_scavenger.lua:3116
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "orders-comms"
 msgid ""
 "\n"
@@ -1743,16 +1793,20 @@ msgstr ""
 "généralement de la nourriture, des médicaments ou des produits de luxe."
 
 #: scripts/scenario_47_scavenger.lua:2173
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Overcharge Jump Drive (10 Rep)"
-msgstr "Booster la téléportation (10 rép)"
+msgstr "Booster le délai de recharge de la téléportation (10 rép)"
 
 #: scripts/scenario_47_scavenger.lua:2176
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
 msgstr ""
-"Le délai de recharge de votre moteur de téléportation a été boosté à %ik."
+"...Après quelques minutes d'attente.\n"
+"\n"
+"C'est fait. Le temps de recharge de votre moteur de téléportation a été "
+"augmenté à %ik."
 
 #: scripts/scenario_47_scavenger.lua:2178
 #: scripts/scenario_47_scavenger.lua:2211
@@ -1767,73 +1821,86 @@ msgid "Insufficient reputation"
 msgstr "Vous n'avez pas assez de réputation."
 
 #: scripts/scenario_47_scavenger.lua:2202
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Repair ship system"
 msgstr "Réparer les systèmes du vaisseau"
 
 #: scripts/scenario_47_scavenger.lua:2203
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "What system would you like repaired?"
 msgstr "Quel système souhaitez-vous réparer ?"
 
 #: scripts/scenario_47_scavenger.lua:2206
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Repair probe launch system (5 Rep)"
 msgstr "Réparer le système de lancement de sonde (5 rép)"
 
 #: scripts/scenario_47_scavenger.lua:2209
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Your probe launch system has been repaired"
 msgstr "Votre système de lancement de sonde a été réparé."
 
 #: scripts/scenario_47_scavenger.lua:2219
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Repair hacking system (5 Rep)"
 msgstr "Réparer le système de piratage (5 rép)"
 
 #: scripts/scenario_47_scavenger.lua:2222
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Your hack system has been repaired"
 msgstr "Votre système de piratage a été réparé."
 
 #: scripts/scenario_47_scavenger.lua:2232
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Repair scanners (5 Rep)"
 msgstr "Réparer les scanners (5 rép)"
 
 #: scripts/scenario_47_scavenger.lua:2235
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Your scanners have been repaired"
 msgstr "Vos scanners ont été réparés."
 
 #: scripts/scenario_47_scavenger.lua:2245
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Repair combat maneuver (5 Rep)"
 msgstr "Réparer la manœuvre de combat (5 rép)"
 
 #: scripts/scenario_47_scavenger.lua:2248
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Your combat maneuver has been repaired"
 msgstr "Votre manœuvre de combat a été réparée."
 
 #: scripts/scenario_47_scavenger.lua:2258
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Repair self destruct system (5 Rep)"
 msgstr "Réparer le système d'autodestruction (5 rép)"
 
 #: scripts/scenario_47_scavenger.lua:2261
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Your self destruct system has been repaired"
 msgstr "Votre système d'autodestruction a été réparé."
 
 #: scripts/scenario_47_scavenger.lua:2274
 #: scripts/scenario_47_scavenger.lua:2313
+#, fuzzy
 msgctxt "contract-comms"
 msgid "Check long distance contract"
 msgstr "Consulter les contrats longue distance"
 
 #: scripts/scenario_47_scavenger.lua:2276
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid ""
 "Contract Details:\n"
@@ -1848,7 +1915,7 @@ msgstr ""
 "et le temps de cycle de vos faisceaux laser."
 
 #: scripts/scenario_47_scavenger.lua:2280
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid ""
 "The Human Navy requires all armed ships be equipped with the ability to drop "
@@ -1861,6 +1928,7 @@ msgstr ""
 "pu vous fournir que 2 mines."
 
 #: scripts/scenario_47_scavenger.lua:2288
+#, fuzzy
 msgctxt "contract-comms"
 msgid ""
 "\n"
@@ -1872,11 +1940,13 @@ msgstr ""
 "Votre cargaison actuelle ("
 
 #: scripts/scenario_47_scavenger.lua:2290
+#, fuzzy
 msgctxt "contract-comms"
 msgid ", "
 msgstr ", "
 
 #: scripts/scenario_47_scavenger.lua:2294
+#, fuzzy
 msgctxt "contract-comms"
 msgid ""
 ") has been removed to make room for your contract cargo and to help defray "
@@ -1887,7 +1957,7 @@ msgstr ""
 "de la Marine humaine."
 
 #: scripts/scenario_47_scavenger.lua:2305
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid ""
 "\n"
@@ -1906,21 +1976,25 @@ msgstr ""
 "Un équipage prêt à décharger immédiatement la cargaison vous attendra."
 
 #: scripts/scenario_47_scavenger.lua:2314
+#, fuzzy
 msgctxt "contract-comms"
 msgid "No long distance contract here."
 msgstr "Pas de contrat longue distance ici, désolé."
 
 #: scripts/scenario_47_scavenger.lua:2315
+#, fuzzy
 msgctxt "contract-comms"
 msgid "I was told there was a long distance contract that started here"
 msgstr "On m'a dit qu'il y avait un contrat longue distance ici ?"
 
 #: scripts/scenario_47_scavenger.lua:2316
+#, fuzzy
 msgctxt "contract-comms"
 msgid "You mean I came all this way for nothing?"
 msgstr "Vous voulez dire que l'on a fait tout ce chemin pour rien ?"
 
 #: scripts/scenario_47_scavenger.lua:2317
+#, fuzzy
 msgctxt "contract-comms"
 msgid "I risked my ship for a contract that does not exist?"
 msgstr "On a risqué notre vaisseau pour un contrat fantôme ?"
@@ -1928,7 +2002,7 @@ msgstr "On a risqué notre vaisseau pour un contrat fantôme ?"
 #: scripts/scenario_47_scavenger.lua:2325
 msgctxt "ridExuari-comms"
 msgid "Upgrade impulse engines"
-msgstr "Améliorer les moteurs à impulsion"
+msgstr "Améliorer nos moteurs à impulsion"
 
 #: scripts/scenario_47_scavenger.lua:2327
 msgctxt "ridExuari-comms"
@@ -1936,15 +2010,21 @@ msgid ""
 "Thanks for taking care of those Exuari. We've upgraded the topspeed of your "
 "impulse engines"
 msgstr ""
-"Merci de vous être occupé de ces Éxuaris. Nous avons augmenté la vitesse "
-"maximale de vos moteurs à impulsion pour vous aider."
+"Encore merci de vous être occupé de ces Éxuaris.\n"
+"\n"
+"...Après quelques minutes d'attente.\n"
+"\n"
+"Nous venons d'augmenter la vitesse maximale de vos moteurs à impulsion en "
+"remerciement."
 
 #: scripts/scenario_47_scavenger.lua:2332
+#, fuzzy
 msgctxt "ridExuari-comms"
 msgid "Add missile tubes"
 msgstr "Ajouter des tubes de missiles"
 
 #: scripts/scenario_47_scavenger.lua:2334
+#, fuzzy
 msgctxt "ridExuari-comms"
 msgid ""
 "Thanks for continuing to shoot down those Exuari. We've added some missile "
@@ -1954,7 +2034,7 @@ msgstr ""
 "lance-missiles pour vous aider à détruire cette station Éxuarie."
 
 #: scripts/scenario_47_scavenger.lua:2335
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ridExuari-"
 msgid ""
 "%s has asked for help against Exuari forces and has provided your ship with "
@@ -1964,11 +2044,13 @@ msgstr ""
 "missiles pour vous aider à détruire la station %s."
 
 #: scripts/scenario_47_scavenger.lua:2340
+#, fuzzy
 msgctxt "ridExuari-comms"
 msgid "Upgrade beam damage"
 msgstr "Améliorer les dégâts des faisceaux laser"
 
 #: scripts/scenario_47_scavenger.lua:2344
+#, fuzzy
 msgctxt "ridExuari-comms"
 msgid ""
 "Looks like you're having a hard time with those Exuari. We've increased the "
@@ -1980,9 +2062,10 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:2351
 msgctxt "ridExuari-comms"
 msgid "Add jump drive"
-msgstr "Ajouter un moteur de téléportation"
+msgstr "Ajouter un moteur de téléportation à notre vaisseau"
 
 #: scripts/scenario_47_scavenger.lua:2353
+#, fuzzy
 msgctxt "ridExuari-comms"
 msgid ""
 "That Exuari station was a pain. Thanks for getting rid of it. We have fitted "
@@ -1992,22 +2075,27 @@ msgid ""
 "into contracts with independent entities in the area. There may even be "
 "contracts available originating from this station."
 msgstr ""
-"Cette station Éxuarie était une vrai plaie. Merci de vous en être "
+"Cette station Éxuarie était une vrai plaie. Merci de nous en avoir "
 "débarrassé.\n"
-"Nous avons équipé votre vaisseau d'un moteur de téléportation de 25 unités "
-"de distance en gage de notre gratitude.\n"
 "\n"
-"Nous avons également reconnu officiellement votre compétence. Cela vous "
-"permet de conclure des contrats avec des entités indépendantes de la région. "
-"Vous pourrez même trouver des contrats disponibles en provenance de cette "
-"station."
+"...Après quelques minutes d'attente.\n"
+"\n"
+"Et voilà, nous venons d\"équiper votre vaisseau d'un moteur de téléportation "
+"pouvant aller jusqu'à 25u de distance.\n"
+"\n"
+"Ah oui, et nous avons également reconnu officiellement votre compétence. "
+"Cela signifie que vous pouvez désormais conclure des contrats avec des "
+"stations indépendantes dans la région. Vous pourrez même trouver des "
+"contrats disponibles ici sur cette station."
 
 #: scripts/scenario_47_scavenger.lua:2359
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "Asteroid research request"
 msgstr "Demande de recherche d'astéroïdes"
 
 #: scripts/scenario_47_scavenger.lua:2360
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid ""
 "Posted on the station electronic request board:\n"
@@ -2028,12 +2116,13 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:2361
 #: scripts/scenario_47_scavenger.lua:2806
 #: scripts/scenario_47_scavenger.lua:2924
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "Contact Jenny McGuire"
 msgstr "Contacter Jenny McGuire"
 
 #: scripts/scenario_47_scavenger.lua:2362
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "Hi %s, I'm so glad you contacted me. I've been researching many of the "
@@ -2067,11 +2156,13 @@ msgstr ""
 "fournir des mises à niveau précieuses pour votre vaisseau."
 
 #: scripts/scenario_47_scavenger.lua:2363
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "We will look, but can't promise anything"
 msgstr "Nous allons jeter un œil, mais nous ne pouvons rien vous promettre"
 
 #: scripts/scenario_47_scavenger.lua:2364
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid ""
 "Thanks. I understand about priorities. Please contact me if you find anything"
@@ -2080,23 +2171,26 @@ msgstr ""
 "trouvez quelque chose."
 
 #: scripts/scenario_47_scavenger.lua:2386
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "Get ship upgrade promised by Jenny McGuire"
 msgstr "Obtenir la mise à niveau du vaisseau promise par Jenny McGuire"
 
 #: scripts/scenario_47_scavenger.lua:2387
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "Choose one of these upgrades from Jenny McGuire's friends"
 msgstr ""
 "Choisir l'une de ces mise à niveau de la part des amis de Jenny McGuire"
 
 #: scripts/scenario_47_scavenger.lua:2388
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "Decrease beam cycle time"
 msgstr "Diminuer le temps de cycle des faisceaux laser"
 
 #: scripts/scenario_47_scavenger.lua:2392
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "Your beam cycle time has been reduced. Jenny McGuire thanks you again and "
@@ -2106,12 +2200,13 @@ msgstr ""
 "remercie encore et quitte %s pour reprendre son travail sur %s."
 
 #: scripts/scenario_47_scavenger.lua:2396
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "Decrease heat generated per beam fired"
 msgstr "Diminuer la chaleur générée par les tirs des faisceaux laser"
 
 #: scripts/scenario_47_scavenger.lua:2403
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "The heat generated when firing your beams has been reduced. Jenny McGuire "
@@ -2121,12 +2216,13 @@ msgstr ""
 "McGuire vous remercie encore et quitte %s pour reprendre son travail sur %s."
 
 #: scripts/scenario_47_scavenger.lua:2407
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "Increase ship acceleration"
 msgstr "Augmenter l'accélération du vaisseau"
 
 #: scripts/scenario_47_scavenger.lua:2410
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "Your ship acceleration has been increased. Jenny McGuire thanks you again "
@@ -2136,12 +2232,13 @@ msgstr ""
 "vous remercie encore et quitte %s pour reprendre son travail sur %s."
 
 #: scripts/scenario_47_scavenger.lua:2419
+#, fuzzy
 msgctxt "contract-comms"
 msgid "Check long range contract"
 msgstr "Consulter les grandes lignes du contrat"
 
 #: scripts/scenario_47_scavenger.lua:2422
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid ""
 "The contract outline indicates that the contract starts at station %s, a "
@@ -2163,12 +2260,13 @@ msgstr ""
 "domaine."
 
 #: scripts/scenario_47_scavenger.lua:2423
+#, fuzzy
 msgctxt "contract-comms"
 msgid "Accept"
 msgstr "Contrat à prendre"
 
 #: scripts/scenario_47_scavenger.lua:2427
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid ""
 "Station %s has fitted you with a Human Navy Identification Friend or Foe "
@@ -2179,7 +2277,7 @@ msgstr ""
 "de votre téléportation et de vos capteurs à 30 unités."
 
 #: scripts/scenario_47_scavenger.lua:2431
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid ""
 "%s\n"
@@ -2191,7 +2289,7 @@ msgstr ""
 "la station %s dans le secteur %s."
 
 #: scripts/scenario_47_scavenger.lua:2433
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid ""
 "%s\n"
@@ -2201,7 +2299,7 @@ msgstr ""
 "Vous pouvez trouver la station %s dans le secteur %s."
 
 #: scripts/scenario_47_scavenger.lua:2459
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid "Contract report from station %s:"
 msgstr "Rapport de contrat de la station %s :"
@@ -2212,21 +2310,23 @@ msgid "Browse Contracts"
 msgstr "Parcourir les contrats"
 
 #: scripts/scenario_47_scavenger.lua:2465
+#, fuzzy
 msgctxt "contract-comms"
 msgid ""
 "\n"
 "To Accept: "
 msgstr ""
 "\n"
-"Accepter : "
+"- Disponibles : "
 
 #: scripts/scenario_47_scavenger.lua:2466
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid "Accept %s contract"
-msgstr "Accepter le contrat %s"
+msgstr "Accepter le contrat : %s"
 
 #: scripts/scenario_47_scavenger.lua:2471
+#, fuzzy
 msgctxt "contract-comms"
 msgid ""
 "\n"
@@ -2236,7 +2336,7 @@ msgstr ""
 "À remplir : "
 
 #: scripts/scenario_47_scavenger.lua:2472
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-comms"
 msgid "Fulfill %s contract"
 msgstr "Remplir le contrat %s"
@@ -2276,6 +2376,7 @@ msgid "     %s: %i, %i\n"
 msgstr "     %s : x%i, %i rép l'unité.\n"
 
 #: scripts/scenario_47_scavenger.lua:2525
+#, fuzzy
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
 msgstr "- Marchandises à acheter : (bénéfice en réputation)\n"
@@ -2356,6 +2457,7 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:2578
 #: scripts/scenario_47_scavenger.lua:2601
 #: scripts/scenario_47_scavenger.lua:2624
+#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -2376,7 +2478,7 @@ msgstr ""
 "1 marchandise achetée."
 
 #: scripts/scenario_47_scavenger.lua:2575
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
 msgstr "Échanger de la nourriture (food) contre %s"
@@ -2384,7 +2486,7 @@ msgstr "Échanger de la nourriture (food) contre %s"
 #: scripts/scenario_47_scavenger.lua:2576
 #: scripts/scenario_47_scavenger.lua:2599
 #: scripts/scenario_47_scavenger.lua:2622
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
 msgstr ""
@@ -2394,6 +2496,7 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:2589
 #: scripts/scenario_47_scavenger.lua:2612
 #: scripts/scenario_47_scavenger.lua:2635
+#, fuzzy
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -2404,19 +2507,20 @@ msgstr ""
 "Marchandises échangées."
 
 #: scripts/scenario_47_scavenger.lua:2598
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
 msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_47_scavenger.lua:2621
 #: scripts/scenario_47_scavenger.lua:3623
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr "Échanger des produits de luxe (luxury) contre %s"
 
 #: scripts/scenario_47_scavenger.lua:2664
+#, fuzzy
 msgctxt "contract-comms"
 msgid ""
 "I'm sure there will be one soon, but the administrators are nervously "
@@ -2428,11 +2532,13 @@ msgstr ""
 "d'améliorer votre réputation en allant tuer ces ennemis."
 
 #: scripts/scenario_47_scavenger.lua:2715
+#, fuzzy
 msgctxt "scienceDescription-supply"
 msgid "Supply Drop"
 msgstr "Caisse d'approvisionnement"
 
 #: scripts/scenario_47_scavenger.lua:2715
+#, fuzzy
 msgctxt "scienceDescription-supply"
 msgid ""
 "Supply Drop containing energy, missiles and various ship system repair parts"
@@ -2441,17 +2547,20 @@ msgstr ""
 "pièces de réparation des systèmes du vaisseau."
 
 #: scripts/scenario_47_scavenger.lua:2807
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "Were you able to find an asteroid with osmium and iridium?"
 msgstr ""
 "Avez-vous pu trouver un astéroïde contenant de l'osmium et de l'iridium ?"
 
 #: scripts/scenario_47_scavenger.lua:2808
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "We think so"
 msgstr "Oui, nous le pensons"
 
 #: scripts/scenario_47_scavenger.lua:2809
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid ""
 "Excellent! I found my notes on the asteroid composition. Let's compare your "
@@ -2472,7 +2581,7 @@ msgstr ""
 "dizaines est 2)"
 
 #: scripts/scenario_47_scavenger.lua:2812
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "Excellent! I found my notes on the asteroid composition. Let's compare your "
@@ -2495,12 +2604,13 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:2830
 #: scripts/scenario_47_scavenger.lua:2844
 #: scripts/scenario_47_scavenger.lua:2858
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid "10's digit %i"
 msgstr "Chiffre des dizaines %i"
 
 #: scripts/scenario_47_scavenger.lua:2818
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "Now for the osmium 1's digit. For example, for 23.5, the 1's digit is 3"
 msgstr ""
@@ -2511,7 +2621,7 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:2834
 #: scripts/scenario_47_scavenger.lua:2848
 #: scripts/scenario_47_scavenger.lua:2862
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid "1's digit %i"
 msgstr "Chiffre des unités %i"
@@ -2520,6 +2630,7 @@ msgstr "Chiffre des unités %i"
 #: scripts/scenario_47_scavenger.lua:2836
 #: scripts/scenario_47_scavenger.lua:2850
 #: scripts/scenario_47_scavenger.lua:2864
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid ""
 "And one digit after the decimal point. For example, for 23.5, the digit "
@@ -2532,13 +2643,13 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:2838
 #: scripts/scenario_47_scavenger.lua:2852
 #: scripts/scenario_47_scavenger.lua:2866
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid "after decimal digit %i"
 msgstr "Chiffre après la virgule %i"
 
 #: scripts/scenario_47_scavenger.lua:2828
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "Osmium: %.1f\n"
@@ -2549,6 +2660,7 @@ msgstr ""
 "des dizaines est 2)"
 
 #: scripts/scenario_47_scavenger.lua:2832
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid ""
 "Now for the iridium 1's digit. For example, for 23.5, the 1's digit is 3"
@@ -2557,7 +2669,7 @@ msgstr ""
 "23,5, le chiffre des unités est 3)"
 
 #: scripts/scenario_47_scavenger.lua:2842
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "Osmium: %.1f\n"
@@ -2570,6 +2682,7 @@ msgstr ""
 "des dizaines est 2)"
 
 #: scripts/scenario_47_scavenger.lua:2846
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid ""
 "Now for the olivine 1's digit. For example, for 23.5, the 1's digit is 3"
@@ -2578,7 +2691,7 @@ msgstr ""
 "23,5, le chiffre des unités est 3)"
 
 #: scripts/scenario_47_scavenger.lua:2856
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "Osmium: %.1f\n"
@@ -2593,6 +2706,7 @@ msgstr ""
 "dizaines est 2)"
 
 #: scripts/scenario_47_scavenger.lua:2860
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "Now for the nickel 1's digit. For example, for 23.5, the 1's digit is 3"
 msgstr ""
@@ -2600,7 +2714,7 @@ msgstr ""
 "le chiffre des unités est 3)"
 
 #: scripts/scenario_47_scavenger.lua:2870
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "osmium: %.1f\n"
@@ -2614,7 +2728,7 @@ msgstr ""
 "nickel : %.1f"
 
 #: scripts/scenario_47_scavenger.lua:2875
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "That's it! Your reported compositional percentages:\n"
@@ -2630,7 +2744,7 @@ msgstr ""
 "l'astéroïde. Vous voudrez peut-être y placer un marqueur."
 
 #: scripts/scenario_47_scavenger.lua:2878
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "Unfortunately, those compositional percentages you provided:\n"
@@ -2645,7 +2759,7 @@ msgstr ""
 "trouverez un autre astéroïde potentiel."
 
 #: scripts/scenario_47_scavenger.lua:2928
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "Communication routed to guest quarters aboard %s\n"
@@ -2653,18 +2767,19 @@ msgid ""
 msgstr "Communication reroutée vers les quartiers VIP à bord du %s.\n"
 
 #: scripts/scenario_47_scavenger.lua:2930
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid "%sYes? What can I do for you?"
 msgstr "%s Oui ? Que puis-je faire pour vous ?"
 
 #: scripts/scenario_47_scavenger.lua:2931
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "What were those asteroid compositional percentages?"
 msgstr "Quels étaient ces pourcentages de composition de l'astéroïde ?"
 
 #: scripts/scenario_47_scavenger.lua:2932
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "Osmium: %.1f\n"
@@ -2678,12 +2793,13 @@ msgstr ""
 "nickel : %.1f"
 
 #: scripts/scenario_47_scavenger.lua:2937
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "Asteroid under 1.5 units away"
 msgstr "Astéroïde à moins de 1,5 unités de distance"
 
 #: scripts/scenario_47_scavenger.lua:2940
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid ""
 "%s must come to a complete stop before I can deactivate the cloaking "
@@ -2693,24 +2809,27 @@ msgstr ""
 "de camouflage."
 
 #: scripts/scenario_47_scavenger.lua:2942
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "Cloaking mechanism deactivated, please retrieve my data store"
 msgstr ""
 "Mécanisme de camouflage désactivé, veuillez récupérer mon stock de données"
 
 #: scripts/scenario_47_scavenger.lua:2945
+#, fuzzy
 msgctxt "scienceDescription-artifact"
 msgid "Stasis container"
 msgstr "Conteneur militaire"
 
 #: scripts/scenario_47_scavenger.lua:2945
+#, fuzzy
 msgctxt "scienceDescription-artifact"
 msgid "Stasis container with a high density data store inside"
 msgstr ""
 "Conteneur militaire avec un stock de données haute densité à l'intérieur"
 
 #: scripts/scenario_47_scavenger.lua:2946
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-shipLog"
 msgid ""
 "[Jenny McGuire] Thank you for picking up my research for me, %s. Next time "
@@ -2721,11 +2840,13 @@ msgstr ""
 "vous irez sur %s, vous pourrez obtenir la mise à niveau promise."
 
 #: scripts/scenario_47_scavenger.lua:2953
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "What is the asteroid approach procedure?"
 msgstr "Quelle est la procédure d'approche des astéroïdes ?"
 
 #: scripts/scenario_47_scavenger.lua:2955
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid ""
 "Get within 1.5 units of the asteroid and contact me. I will deactivate the "
@@ -2736,17 +2857,19 @@ msgstr ""
 "recherche afin que vous puissiez ensuite le récupérer."
 
 #: scripts/scenario_47_scavenger.lua:2957
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid "First, you have to pick me up from %s"
 msgstr "D'abord, vous devez venir me récupérer sur %s."
 
 #: scripts/scenario_47_scavenger.lua:2963
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "The asteroid may have been destroyed"
 msgstr "L'astéroïde a peut-être été détruit"
 
 #: scripts/scenario_47_scavenger.lua:2964
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid ""
 "So it seems. Looks like I'll have to find another asteroid. Thanks for your "
@@ -2756,7 +2879,7 @@ msgstr ""
 "pour votre aide."
 
 #: scripts/scenario_47_scavenger.lua:2970
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-comms"
 msgid "Thanks for getting my research for me. Dock with %s to get the upgrade"
 msgstr ""
@@ -2764,26 +2887,31 @@ msgstr ""
 "obtenir la mise à niveau."
 
 #: scripts/scenario_47_scavenger.lua:2972
+#, fuzzy
 msgctxt "Jenny-comms"
 msgid "Please retrieve my data store"
 msgstr "Merci de récupérer mon stock de données."
 
 #: scripts/scenario_47_scavenger.lua:3000
+#, fuzzy
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
 
 #: scripts/scenario_47_scavenger.lua:3004
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
 
 #: scripts/scenario_47_scavenger.lua:3005
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
 
 #: scripts/scenario_47_scavenger.lua:3006
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
 msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
@@ -2794,6 +2922,7 @@ msgid "All nukes are charged and primed for destruction."
 msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
 
 #: scripts/scenario_47_scavenger.lua:3015
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
@@ -2806,6 +2935,7 @@ msgid "You are fully loaded and ready to explode things."
 msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
 
 #: scripts/scenario_47_scavenger.lua:3025
+#, fuzzy
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
@@ -2817,22 +2947,26 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:3028
 #: scripts/scenario_47_scavenger.lua:3043
 #: scripts/scenario_47_scavenger.lua:3048
+#, fuzzy
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr "Pas assez de réputation."
 
 #: scripts/scenario_47_scavenger.lua:3033
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
 msgstr ""
 "Vous ne pouvez pas en recevoir autant que ce que nous voudrions vous vendre."
 
 #: scripts/scenario_47_scavenger.lua:3034
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "Get just one"
 msgstr "Prendre juste 1 munition"
 
 #: scripts/scenario_47_scavenger.lua:3040
+#, fuzzy
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with one weapon charge.\n"
@@ -2853,6 +2987,7 @@ msgstr ""
 "station au préalable."
 
 #: scripts/scenario_47_scavenger.lua:3066
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
@@ -2928,23 +3063,25 @@ msgstr ""
 "   HVLI"
 
 #: scripts/scenario_47_scavenger.lua:3147
+#, fuzzy
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
 msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
 
 #: scripts/scenario_47_scavenger.lua:3149
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
 msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_47_scavenger.lua:3151
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
 msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
 
 #: scripts/scenario_47_scavenger.lua:3178
+#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable whie it is undergoing maintenance."
 msgstr ""
@@ -2994,7 +3131,7 @@ msgid "Shield: %d%%\n"
 msgstr "Boucliers : %d%%\n"
 
 #: scripts/scenario_47_scavenger.lua:3274
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "stationAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr "Bouclier %s : %d%%\n"
@@ -3009,7 +3146,8 @@ msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rép)"
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
-"Vous devez définir un marqueur avant de faire une demande de ravitaillement."
+"Aidez-nous s'il-vous-plaît ! nous venons de définir un marqueur avant de "
+"faire une demande de ravitaillement."
 
 #: scripts/scenario_47_scavenger.lua:3286
 msgctxt "stationAssist-comms"
@@ -3037,6 +3175,7 @@ msgstr ""
 #: scripts/scenario_47_scavenger.lua:3320
 #: scripts/scenario_47_scavenger.lua:3340
 #: scripts/scenario_47_scavenger.lua:3360
+#, fuzzy
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr "Pas assez de réputation !"
@@ -3096,17 +3235,19 @@ msgid "Sir, how can we assist?"
 msgstr "Monsieur, comment pouvons-nous vous assister ?"
 
 #: scripts/scenario_47_scavenger.lua:3455
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Set your shield frequency"
 msgstr "Réglez la fréquence de votre bouclier"
 
 #: scripts/scenario_47_scavenger.lua:3456
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Enemy ships nearby:"
 msgstr "Vaisseaux ennemis à proximité :"
 
 #: scripts/scenario_47_scavenger.lua:3459
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "%s\n"
@@ -3116,25 +3257,27 @@ msgstr ""
 "%s : les faisceaux sont plus efficaces contre les boucliers à %i THz."
 
 #: scripts/scenario_47_scavenger.lua:3466
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Set shields to frequency %i THz"
 msgstr "Réglez les boucliers sur la fréquence %i THz"
 
 #: scripts/scenario_47_scavenger.lua:3468
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shields set to %i THz"
 msgstr "Boucliers réglés sur %i THz."
 
 #: scripts/scenario_47_scavenger.lua:3475
 #: scripts/scenario_47_scavenger.lua:3585
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr "Défendez un marqueur"
 
 #: scripts/scenario_47_scavenger.lua:3477
 #: scripts/scenario_47_scavenger.lua:3587
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
@@ -3143,113 +3286,119 @@ msgstr ""
 
 #: scripts/scenario_47_scavenger.lua:3480
 #: scripts/scenario_47_scavenger.lua:3590
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/scenario_47_scavenger.lua:3482
 #: scripts/scenario_47_scavenger.lua:3592
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
 msgstr "Défendez le marqueur %d"
 
 #: scripts/scenario_47_scavenger.lua:3484
 #: scripts/scenario_47_scavenger.lua:3598
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
 msgstr "Nous partons immédiatement défendre le marqueur %d."
 
 #: scripts/scenario_47_scavenger.lua:3491
 #: scripts/scenario_47_scavenger.lua:3576
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr "Aidez-nous !"
 
 #: scripts/scenario_47_scavenger.lua:3492
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr "Entendu, nous partons immédiatement vous aider."
 
 #: scripts/scenario_47_scavenger.lua:3497
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Report status"
 msgstr "Au rapport"
 
 #: scripts/scenario_47_scavenger.lua:3498
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr "Coque : %d%%\n"
 
 #: scripts/scenario_47_scavenger.lua:3501
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr "Boucliers : %d%%\n"
 
 #: scripts/scenario_47_scavenger.lua:3503
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
 msgstr "Boucliers avant : %d%%\n"
 
 #: scripts/scenario_47_scavenger.lua:3504
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
 msgstr "Boucliers arrière : %d%%\n"
 
 #: scripts/scenario_47_scavenger.lua:3507
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr "Bouclier %s : %d%%\n"
 
 #: scripts/scenario_47_scavenger.lua:3514
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr "Missiles %s : %d/%d\n"
 
 #: scripts/scenario_47_scavenger.lua:3522
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr "Amarrez-vous à %s"
 
 #: scripts/scenario_47_scavenger.lua:3523
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr "En cours d'amarrage à %s."
 
 #: scripts/scenario_47_scavenger.lua:3530
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Direct %s"
 msgstr "Diriger %s"
 
 #: scripts/scenario_47_scavenger.lua:3531
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "What command should be given to %s?"
 msgstr "Quelle commande doit être donnée à %s ?"
 
 #: scripts/scenario_47_scavenger.lua:3532
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Report hull and shield status"
 msgstr "État de la coque et des boucliers"
 
 #: scripts/scenario_47_scavenger.lua:3533
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Fleet status:"
 msgstr "État de la flotte :"
 
 #: scripts/scenario_47_scavenger.lua:3536
 #: scripts/scenario_47_scavenger.lua:3560
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "\n"
@@ -3259,7 +3408,7 @@ msgstr ""
 " %s :"
 
 #: scripts/scenario_47_scavenger.lua:3537
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "\n"
@@ -3269,7 +3418,7 @@ msgstr ""
 "    Coque : %d%%"
 
 #: scripts/scenario_47_scavenger.lua:3540
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "\n"
@@ -3279,6 +3428,7 @@ msgstr ""
 "    Boucliers : %d%%"
 
 #: scripts/scenario_47_scavenger.lua:3542
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid ""
 "\n"
@@ -3288,29 +3438,31 @@ msgstr ""
 "    Boucliers : "
 
 #: scripts/scenario_47_scavenger.lua:3544
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front: %d%% Rear: %d%%"
 msgstr "Avant : %d%% Arrière : %d%%"
 
 #: scripts/scenario_47_scavenger.lua:3547
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid " %d:%d%%"
 msgstr " %d : %d%%"
 
 #: scripts/scenario_47_scavenger.lua:3556
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Report missile status"
 msgstr "Rapport de l'état des missiles"
 
 #: scripts/scenario_47_scavenger.lua:3557
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Fleet missile status:"
 msgstr "État des missiles de la flotte :"
 
 #: scripts/scenario_47_scavenger.lua:3565
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "\n"
@@ -3320,7 +3472,7 @@ msgstr ""
 "      %s : %d/%d"
 
 #: scripts/scenario_47_scavenger.lua:3569
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "\n"
@@ -3330,7 +3482,7 @@ msgstr ""
 "    Missiles : %s"
 
 #: scripts/scenario_47_scavenger.lua:3582
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s heading toward you to assist"
 msgstr "%s, nous partons immédiatement vous aider."
@@ -3350,7 +3502,7 @@ msgstr "Échanger vos produits de luxe (luxury) contre du %s auprès de %s"
 #: scripts/scenario_47_scavenger.lua:3914
 #: scripts/scenario_47_scavenger.lua:3936
 #: scripts/scenario_47_scavenger.lua:3960
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
 msgstr "1 %s acheté auprès de %s."
@@ -3364,30 +3516,35 @@ msgstr "1 %s acheté auprès de %s."
 #: scripts/scenario_47_scavenger.lua:3916
 #: scripts/scenario_47_scavenger.lua:3938
 #: scripts/scenario_47_scavenger.lua:3962
+#, fuzzy
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
 msgstr "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_47_scavenger.lua:3755
 #: scripts/scenario_47_scavenger.lua:3833
+#, fuzzy
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
 msgstr "Auriez-vous des marchandises à vendre ?"
 
 #: scripts/scenario_47_scavenger.lua:3757
 #: scripts/scenario_47_scavenger.lua:3835
+#, fuzzy
 msgctxt "trade-comms"
 msgid "We've got "
 msgstr "Nous avons : "
 
 #: scripts/scenario_47_scavenger.lua:3761
 #: scripts/scenario_47_scavenger.lua:3839
+#, fuzzy
 msgctxt "trade-comms"
 msgid ", "
 msgstr ", "
 
 #: scripts/scenario_47_scavenger.lua:3769
 #: scripts/scenario_47_scavenger.lua:3847
+#, fuzzy
 msgctxt "trade-comms"
 msgid "nothing"
 msgstr "rien du tout."
@@ -3408,6 +3565,7 @@ msgid "Your feeble threats are meaningless."
 msgstr "Vos menaces ridicules ne nous impressionnent pas."
 
 #: scripts/scenario_47_scavenger.lua:3785
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
@@ -3417,36 +3575,43 @@ msgstr ""
 "Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_47_scavenger.lua:3788
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
 msgstr "Nous allons vous détruire"
 
 #: scripts/scenario_47_scavenger.lua:3789
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We think not. It is you who will experience destruction!"
 msgstr "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
 
 #: scripts/scenario_47_scavenger.lua:3791
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
 msgstr "Vous n'avez aucun honneur"
 
 #: scripts/scenario_47_scavenger.lua:3792
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Your insult has brought our wrath upon you. Prepare to die."
 msgstr "Votre insulte a attiré notre colère sur vous. Préparez-vous à mourir !"
 
 #: scripts/scenario_47_scavenger.lua:3793
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Your comments about honor have no meaning to us"
 msgstr "Vos commentaires sur l'honneur n'ont aucune signification pour nous."
 
 #: scripts/scenario_47_scavenger.lua:3795
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
 msgstr "Nous plaignons votre race pathétique"
 
 #: scripts/scenario_47_scavenger.lua:3796
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
 msgstr ""
@@ -3454,11 +3619,13 @@ msgstr ""
 "Vous allez regretter votre insolence !"
 
 #: scripts/scenario_47_scavenger.lua:3797
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We don't care what you think of us"
 msgstr "Peu importe ce que vous pensez de nous."
 
 #: scripts/scenario_47_scavenger.lua:3800
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
@@ -3475,6 +3642,7 @@ msgstr ""
 "distraction pour nous !"
 
 #: scripts/scenario_47_scavenger.lua:3804
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
 "One zero one.\n"
@@ -3495,11 +3663,13 @@ msgstr ""
 "Communication interrompue."
 
 #: scripts/scenario_47_scavenger.lua:3805
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr "Executer à distance : AUTODESTRUCTION"
 
 #: scripts/scenario_47_scavenger.lua:3806
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr ""
@@ -3507,11 +3677,13 @@ msgstr ""
 "Nous ciblons immédiatement source."
 
 #: scripts/scenario_47_scavenger.lua:3807
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr "Ordre externe ignoré."
 
 #: scripts/scenario_47_scavenger.lua:3809
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
@@ -3523,16 +3695,19 @@ msgstr ""
 "Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_47_scavenger.lua:3810
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
 
 #: scripts/scenario_47_scavenger.lua:3811
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
 
 #: scripts/scenario_47_scavenger.lua:3812
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
@@ -3540,11 +3715,13 @@ msgstr ""
 "vous."
 
 #: scripts/scenario_47_scavenger.lua:3814
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
 msgstr "Occupez-vous de vos affaires !"
 
 #: scripts/scenario_47_scavenger.lua:3832
+#, fuzzy
 msgctxt "trade-comms"
 msgid "Yes?"
 msgstr "Oui, c'est pour quoi ?"
@@ -3556,7 +3733,6 @@ msgid ""
 "We are on an important mission."
 msgstr ""
 "Désolé, nous n'avons pas le temps de discuter avec vous.\n"
-"\n"
 "Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_47_scavenger.lua:3976
@@ -3566,21 +3742,22 @@ msgid ""
 "Good day."
 msgstr ""
 "Nous n'avons rien pour vous.\n"
-"\n"
 "Bonne journée."
 
 #: scripts/scenario_47_scavenger.lua:3984
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Add beam weapon"
 msgstr "Ajouter des faisceaux laser"
 
 #: scripts/scenario_47_scavenger.lua:3999
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "A beam wepon has been added to your ship"
 msgstr "Des faisceaux laser ont été ajoutée à votre vaisseau"
 
 #: scripts/scenario_47_scavenger.lua:4001
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "upgrade-comms"
 msgid "%s cannot add a beam weapon to your ship unless you provide %s"
 msgstr ""
@@ -3588,12 +3765,13 @@ msgstr ""
 "ne lui fournissiez du %s."
 
 #: scripts/scenario_47_scavenger.lua:4009
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Increase battery efficiency"
 msgstr "Augmenter l'efficacité de la batterie"
 
 #: scripts/scenario_47_scavenger.lua:4026
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "%s: I appreciate the %s and %s. You have a 50%% greater energy capacity due "
@@ -3603,7 +3781,7 @@ msgstr ""
 "énergétique supérieure de 50%% grâce à l'efficacité accrue de la batterie."
 
 #: scripts/scenario_47_scavenger.lua:4028
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "%s: You need to bring me some %s and %s before I can increase your battery "
@@ -3613,11 +3791,13 @@ msgstr ""
 "l'efficacité de votre batterie."
 
 #: scripts/scenario_47_scavenger.lua:4036
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Reduce beam cycle time"
 msgstr "Réduire le temps de cycle des faisceaux laser"
 
 #: scripts/scenario_47_scavenger.lua:4050
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "After accepting your gift, he reduced your Beam cycle time."
 msgstr ""
@@ -3625,13 +3805,13 @@ msgstr ""
 "faisceaux laser."
 
 #: scripts/scenario_47_scavenger.lua:4052
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "upgrade-comms"
 msgid "%s requires %s for the upgrade"
 msgstr "%s réclame du %s pour effectuer la mise à niveau."
 
 #: scripts/scenario_47_scavenger.lua:4058
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "%s reduced your Beam cycle time at no cost in trade with the message, 'Go "
@@ -3641,6 +3821,7 @@ msgstr ""
 "du message \"Allez chercher ces Kraylors !\"."
 
 #: scripts/scenario_47_scavenger.lua:4061
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Your ship type does not support a beam weapon upgrade."
 msgstr ""
@@ -3648,21 +3829,25 @@ msgstr ""
 "faisceaux laser."
 
 #: scripts/scenario_47_scavenger.lua:4133
+#, fuzzy
 msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
 msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
 
 #: scripts/scenario_47_scavenger.lua:4137
+#, fuzzy
 msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
 msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
 
 #: scripts/scenario_47_scavenger.lua:4155
+#, fuzzy
 msgctxt "coolant-msgEngineer"
 msgid "Automated systems have recovered some coolant"
 msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
 
 #: scripts/scenario_47_scavenger.lua:4158
+#, fuzzy
 msgctxt "coolant-msgEngineer+"
 msgid "Automated systems have recovered some coolant"
 msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
@@ -3675,66 +3860,79 @@ msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_47_scavenger.lua:4201
 #: scripts/scenario_47_scavenger.lua:4236
+#, fuzzy
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_47_scavenger.lua:4253
+#, fuzzy
 msgctxt "coolant-msgEngineer"
 msgid "Damage has caused a loss of coolant"
 msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
 
 #: scripts/scenario_47_scavenger.lua:4257
+#, fuzzy
 msgctxt "coolant-msgEngineer+"
 msgid "Damage has caused a loss of coolant"
 msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
 
 #: scripts/scenario_47_scavenger.lua:4264
+#, fuzzy
 msgctxt "damage-msgEngineer"
 msgid "The probe launch system has been damaged"
 msgstr "Le système de lancement des sondes a été endommagé."
 
 #: scripts/scenario_47_scavenger.lua:4267
+#, fuzzy
 msgctxt "damage-msgEngineer+"
 msgid "The probe launch system has been damaged"
 msgstr "Le système de lancement des sondes a été endommagé."
 
 #: scripts/scenario_47_scavenger.lua:4272
+#, fuzzy
 msgctxt "damage-msgEngineer"
 msgid "The hacking system has been damaged"
 msgstr "Le système de piratage a été endommagé."
 
 #: scripts/scenario_47_scavenger.lua:4275
+#, fuzzy
 msgctxt "damage-msgEngineer+"
 msgid "The hacking system has been damaged"
 msgstr "Le système de piratage a été endommagé."
 
 #: scripts/scenario_47_scavenger.lua:4280
+#, fuzzy
 msgctxt "damage-msgEngineer"
 msgid "The scanners have been damaged"
 msgstr "Les scanners ont été endommagés."
 
 #: scripts/scenario_47_scavenger.lua:4283
+#, fuzzy
 msgctxt "damage-msgEngineer+"
 msgid "The scanners have been damaged"
 msgstr "Les scanners ont été endommagés."
 
 #: scripts/scenario_47_scavenger.lua:4288
+#, fuzzy
 msgctxt "damage-msgEngineer"
 msgid "Combat maneuver has been damaged"
 msgstr "La manœuvre de combat a été endommagée."
 
 #: scripts/scenario_47_scavenger.lua:4291
+#, fuzzy
 msgctxt "damage-msgEngineer+"
 msgid "Combat maneuver has been damaged"
 msgstr "La manœuvre de combat a été endommagée."
 
 #: scripts/scenario_47_scavenger.lua:4296
+#, fuzzy
 msgctxt "damage-msgEngineer"
 msgid "Self destruct system has been damaged"
 msgstr "Le système d'autodestruction a été endommagé."
 
 #: scripts/scenario_47_scavenger.lua:4299
+#, fuzzy
 msgctxt "damage-msgEngineer+"
 msgid "Self destruct system has been damaged"
 msgstr "Le système d'autodestruction a été endommagé."
@@ -3747,10 +3945,13 @@ msgid ""
 "ourselves. Your ship is the only thing that stands between us and "
 "destruction."
 msgstr ""
-"[%s en secteur %s]\n"
-"Approche hostile d'Éxuaris. Aidez-nous s'il-vous-plaît.\n"
-"Nous ne pouvons pas nous défendre. Votre vaisseau est la seule chose qui se "
-"dresse entre nous et notre destruction."
+"[APPEL D'URGENCE]\n"
+"Bonjour équipage,\n"
+"Nous sommes la station %s, située dans le secteur %s. S'il-vous-plaît aidez-"
+"nous! \n"
+"Des vaisseaux hostiles Éxuaris sont sur le point de nous attaquer.\n"
+"Nous sommes une petite station sans défense et ne résisterons pas longtemps. "
+"Votre vaisseau est la seule chose qui nous sépare d'une destruction certaine."
 
 #: scripts/scenario_47_scavenger.lua:4346
 #, lua-format
@@ -3761,24 +3962,24 @@ msgid ""
 "We think there is an Exuari base hiding in a nebula in sector %s"
 msgstr ""
 "%s\n"
-"\n"
-"Nous pensons qu'il existe une base Éxuarie cachée dans une nébuleuse en "
-"secteur %s."
+"Nous pensons qu'il existe une base Éxuarie proche, cachée dans une nébuleuse "
+"en secteur %s.\n"
+"Vous êtes notre seul espoir."
 
 #: scripts/scenario_47_scavenger.lua:4350
 #, lua-format
 msgctxt "ridExuari-incCall"
 msgid "%s has asked for help against the Exuari"
-msgstr "%s demande de l'aide contre les Éxuaris."
+msgstr "- La station %s demande de l'aide contre les Éxuaris."
 
 #: scripts/scenario_47_scavenger.lua:4355
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ridExuari-msgMainscreen"
 msgid "Station %s destroyed"
 msgstr "Station %s détruite"
 
 #: scripts/scenario_47_scavenger.lua:4360
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ridExuari-shipLog"
 msgid ""
 "[Captain's Log] We have started our initial shakedown cruise of %s, a %s "
@@ -3811,7 +4012,7 @@ msgstr ""
 "aucun autre vaisseau allié armé par ici."
 
 #: scripts/scenario_47_scavenger.lua:4366
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ridExuari-shipLog"
 msgid ""
 "[Station %s] Based on our observation of the Exuari base %s in %s, we think "
@@ -3836,24 +4037,25 @@ msgid ""
 "Thanks for taking care of that Exuari base and all the Exuari ships it "
 "deployed. Dock with us for a token of our appreciation"
 msgstr ""
-"Merci de vous êtres occupé de cette base Éxuarie et de tous les vaisseaux "
-"Éxuaris qu'elle a déployés.\n"
-"Amarrez-vous à nous en gage de notre reconnaissance."
+"Merci infiniment de nous avoir secouru et de vous être occupé de cette base "
+"Éxuarie.\n"
+"Amarrez-vous à nous, en gage de notre gratitude nous allons améliorer votre "
+"vaisseau."
 
 #: scripts/scenario_47_scavenger.lua:4697
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ridExuari-shipLog"
 msgid "%s just launched these ships: %s"
 msgstr "%s vient de lancer ses vaisseaux : %s"
 
 #: scripts/scenario_47_scavenger.lua:4699
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ridExuari-shipLog"
 msgid "%s just launched %s"
 msgstr "%s vient de lancer %s"
 
 #: scripts/scenario_47_scavenger.lua:4715
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-shipLog"
 msgid ""
 "Our first contract to a station far away from 'home' marks a significant "
@@ -3868,7 +4070,7 @@ msgstr ""
 "maintenant développer notre position auprès de la Marine humaine."
 
 #: scripts/scenario_47_scavenger.lua:4773
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "cargo-shipLog"
 msgid ""
 "[%s] Your delivery contract calls for food, medicine, dilithium and "
@@ -3881,7 +4083,7 @@ msgstr ""
 "quatre et nous considérerons que votre contrat est rempli."
 
 #: scripts/scenario_47_scavenger.lua:4787
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "cargo-shipLog"
 msgid ""
 "[%s] Thanks for the cargo, %s. We'll make good use of it. We've added 100 "
@@ -3894,16 +4096,19 @@ msgstr ""
 "faisceaux laser. Bonne visite dans le système %s."
 
 #: scripts/scenario_47_scavenger.lua:4830
+#, fuzzy
 msgctxt "msgMainscreen"
 msgid "The supply depot station has been destroyed"
 msgstr "Le dépôt de ravitaillement a été détruit."
 
 #: scripts/scenario_47_scavenger.lua:4963
+#, fuzzy
 msgctxt "msgMainscreen"
 msgid "You successfully handled the Kraylor threat"
 msgstr "Vous avez géré avec succès la menace Kraylor."
 
 #: scripts/scenario_47_scavenger.lua:4976
+#, fuzzy
 msgctxt "Kraylor-shipLog"
 msgid ""
 "[Human Navy Regional Headquarters] All Human Navy vessels are hereby ordered "
@@ -3918,18 +4123,19 @@ msgstr ""
 "n'est rien de bon. Détruisez-les avant qu'ils ne puissent nous attaquer."
 
 #: scripts/scenario_47_scavenger.lua:4977
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Kraylor-shipLog"
 msgid "This includes you, %s"
 msgstr "Cela vous inclut, %s."
 
 #: scripts/scenario_47_scavenger.lua:4978
+#, fuzzy
 msgctxt "KraylorOrders-comms"
 msgid "Repel Kraylor"
 msgstr "Repousser les Kraylors."
 
 #: scripts/scenario_47_scavenger.lua:5125
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Kraylor-shipLog"
 msgid ""
 "Looks like the Kraylor have developed some kind of planet busting weapon. "
@@ -3940,7 +4146,7 @@ msgstr ""
 "Tenez-les éloignés de %s à tout prix !"
 
 #: scripts/scenario_47_scavenger.lua:5126
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "KraylorOrders-comms"
 msgid ""
 "Save planet %s from Kraylor destruction like they destroyed %s by keeping "
@@ -3950,36 +4156,38 @@ msgstr ""
 "détruit %s en gardant les Kraylors loin de %s."
 
 #: scripts/scenario_47_scavenger.lua:5140
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Kraylor-shipLog"
 msgid "Oops, there goes %s"
 msgstr "Oups, voilà %s"
 
 #: scripts/scenario_47_scavenger.lua:5142
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid "You've saved planet %s"
 msgstr "Vous avez sauvé la planète %s."
 
 #: scripts/scenario_47_scavenger.lua:5187
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid "Planet %s was destroyed"
 msgstr "La planète %s a été détruite."
 
 #: scripts/scenario_47_scavenger.lua:5192
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgMainscreen"
 msgid "station %s destroyed"
 msgstr "station %s détruite."
 
 #: scripts/scenario_47_scavenger.lua:5280
+#, fuzzy
 msgctxt "msgMainscreen"
 msgid "A contract destination station was destroyed"
 msgstr "La destination du contrat a été détruite."
 
 #: scripts/scenario_47_scavenger.lua:5291
 #: scripts/scenario_47_scavenger.lua:5333
+#, fuzzy
 msgctxt "msgMainscreen"
 msgid ""
 "Mourning over the loss of the station has halted all business\n"
@@ -3989,7 +4197,7 @@ msgstr ""
 "La mission est terminée."
 
 #: scripts/scenario_47_scavenger.lua:5300
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "contract-shipLog"
 msgid ""
 "[Captain's Log] Why can't the Exuari just leave us alone? I don't understand "
@@ -4008,7 +4216,7 @@ msgstr ""
 "voulons être."
 
 #: scripts/scenario_47_scavenger.lua:5348
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Jenny-shipLog"
 msgid ""
 "Jenny McGuire is now aboard. She's a bit paranoid and has sealed the door to "
@@ -4019,31 +4227,37 @@ msgstr ""
 "devrez contacter %s pour lui parler."
 
 #: scripts/scenario_47_scavenger.lua:5399
+#, fuzzy
 msgctxt "energy-msgScience"
 msgid "Energy surge from supply drop"
 msgstr "Augmentation de l'énergie due à la cargaison de ravitaillement"
 
 #: scripts/scenario_47_scavenger.lua:5403
+#, fuzzy
 msgctxt "energy-msgOperations"
 msgid "Energy surge from supply drop"
 msgstr "Augmentation de l'énergie due à la cargaison de ravitaillement"
 
 #: scripts/scenario_47_scavenger.lua:5412
+#, fuzzy
 msgctxt "energy-msgScience"
 msgid "Energy surge from area highlighted in yellow"
 msgstr "Augmentation de l'énergie de la zone surlignée en jaune"
 
 #: scripts/scenario_47_scavenger.lua:5416
+#, fuzzy
 msgctxt "energy-msgOperations"
 msgid "Energy surge from area highlighted in yellow"
 msgstr "Augmentation de l'énergie de la zone surlignée en jaune"
 
 #: scripts/scenario_47_scavenger.lua:5449
+#, fuzzy
 msgctxt "scienceDescription-jammer"
 msgid "Jump and Warp Jammer"
 msgstr "Brouilleurs de téléportation et vitesse lumière"
 
 #: scripts/scenario_47_scavenger.lua:5449
+#, fuzzy
 msgctxt "scienceDescription-jammer"
 msgid ""
 "Jump and Warp Jammer with external dynamic range control and sensor decoy "
@@ -4053,48 +4267,56 @@ msgstr ""
 "dynamique externe et mécanisme de leurre de capteur"
 
 #: scripts/scenario_47_scavenger.lua:5550
+#, fuzzy
 msgctxt "scienceDescription-artifact"
 msgid "Unknown tech device"
 msgstr "Appareil technologique d'origine inconnue"
 
 #: scripts/scenario_47_scavenger.lua:5551
+#, fuzzy
 msgctxt "scienceDescription-artifact"
 msgid "Partly melted machinery"
 msgstr "Machine partiellement fondue"
 
 #: scripts/scenario_47_scavenger.lua:5552
+#, fuzzy
 msgctxt "scienceDescription-artifact"
 msgid "Device of unknown purpose"
 msgstr "Objet à l'usage inconnu"
 
 #: scripts/scenario_47_scavenger.lua:5553
+#, fuzzy
 msgctxt "scienceDescription-artifact"
 msgid "Fragment of advanced technology"
 msgstr "Fragment de technologie avancée"
 
 #: scripts/scenario_47_scavenger.lua:5558
+#, fuzzy
 msgctxt "scienceDescription-artifact"
 msgid "Origin: Kraylor. Purpose: unknown."
 msgstr "Origine : Kraylor. Objectif : inconnu."
 
 #: scripts/scenario_47_scavenger.lua:5559
+#, fuzzy
 msgctxt "scienceDescription-artifact"
 msgid "Source: Kraylor. Possibly a remnant of a planet-busting device."
 msgstr ""
 "Source : Kraylor. Peut-être le vestige d'un appareil destructeur de planètes."
 
 #: scripts/scenario_47_scavenger.lua:5560
+#, fuzzy
 msgctxt "scienceDescription-artifact"
 msgid "Purpose: unknown. Volatile material detected."
 msgstr "Objectif : inconnu. Matière volatile détectée."
 
 #: scripts/scenario_47_scavenger.lua:5561
+#, fuzzy
 msgctxt "scienceDescription-artifact"
 msgid "Origin: Kraylor."
 msgstr "Origine : Kraylor"
 
 #: scripts/scenario_47_scavenger.lua:5633
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "Kraylor-shipLog"
 msgid ""
 "Kraylor have sabotaged station %s. It can no longer maintain orbit around "
@@ -4106,6 +4328,7 @@ msgstr ""
 "danger, mais les Kraylors représentent une menace bien plus importante."
 
 #: scripts/scenario_47_scavenger.lua:5642
+#, fuzzy
 msgctxt "ridExuari-msgMainscreen"
 msgid "Dash your hopes and dreams again?"
 msgstr "Anéantir à nouveau vos espoirs et vos rêves ?"
