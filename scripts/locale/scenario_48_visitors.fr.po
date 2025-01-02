@@ -1132,9 +1132,12 @@ msgid "Hello, may I help you?"
 msgstr "Bonjour, puis-je vous aider ?"
 
 #: scripts/scenario_48_visitors.lua:3107
+#, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
-msgstr "Bienvenue dans notre charmante petite station."
+msgstr ""
+"Bienvenue sur notre charmante petite station.\n"
+"Que pouvons-nous faire pour vous ?"
 
 #: scripts/scenario_48_visitors.lua:3110
 msgctxt "station-comms"
@@ -2952,6 +2955,7 @@ msgstr ""
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_48_visitors.lua:4696
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"

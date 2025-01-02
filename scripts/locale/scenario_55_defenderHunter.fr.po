@@ -420,11 +420,15 @@ msgstr ""
 "Que pouvons-nous faire pour vous aujourd'hui ?\n"
 
 #: scripts/scenario_55_defenderHunter.lua:1750
+#, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
-msgstr "Bienvenue dans notre charmante petite station.\n"
+msgstr ""
+"Bienvenue sur notre charmante petite station.\n"
+"Que pouvons-nous faire pour vous ?\n"
 
 #: scripts/scenario_55_defenderHunter.lua:1753
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
@@ -650,7 +654,7 @@ msgid ""
 "May overcharge jump drive"
 msgstr ""
 "%s\n"
-"- Peut booster la téléportation (rechargement)."
+"- Boost du délai de recharge de la téléportation."
 
 #: scripts/scenario_55_defenderHunter.lua:1900
 #: scripts/scenario_55_defenderHunter.lua:2973
@@ -661,7 +665,7 @@ msgid ""
 "May repair probe launch system"
 msgstr ""
 "%s\n"
-"- Peut réparer le système de lancement de sonde."
+"- Réparation du système de lancement de sonde."
 
 #: scripts/scenario_55_defenderHunter.lua:1903
 #: scripts/scenario_55_defenderHunter.lua:2976
@@ -672,7 +676,7 @@ msgid ""
 "May repair hacking system"
 msgstr ""
 "%s\n"
-"- Peut réparer le système de piratage."
+"- Réparation du système de piratage."
 
 #: scripts/scenario_55_defenderHunter.lua:1906
 #: scripts/scenario_55_defenderHunter.lua:2979
@@ -683,7 +687,7 @@ msgid ""
 "May repair scanners"
 msgstr ""
 "%s\n"
-"- Peut réparer les scanners."
+"- Réparation des scanners."
 
 #: scripts/scenario_55_defenderHunter.lua:1909
 #: scripts/scenario_55_defenderHunter.lua:2982
@@ -694,7 +698,7 @@ msgid ""
 "May repair combat maneuver"
 msgstr ""
 "%s\n"
-"- Peut réparer la manœuvre de combat."
+"- Réparation de la manœuvre de combat."
 
 #: scripts/scenario_55_defenderHunter.lua:1912
 #: scripts/scenario_55_defenderHunter.lua:2985
@@ -705,7 +709,7 @@ msgid ""
 "May repair self destruct system"
 msgstr ""
 "%s\n"
-"- Peut réparer le système d'autodestruction."
+"- Réparation du système d'autodestruction."
 
 #: scripts/scenario_55_defenderHunter.lua:1915
 #: scripts/scenario_55_defenderHunter.lua:1931
@@ -795,14 +799,17 @@ msgstr "Précédent"
 #: scripts/scenario_55_defenderHunter.lua:1924
 msgctxt "stationServices-comms"
 msgid "Overcharge Jump Drive (10 Rep)"
-msgstr "Booster la téléportation (10 rép)"
+msgstr "Booster le délai de recharge de la téléportation (10 rép)"
 
 #: scripts/scenario_55_defenderHunter.lua:1927
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
 msgstr ""
-"Le délai de recharge de votre moteur de téléportation a été boosté à %ik."
+"...Après quelques instants.\n"
+"\n"
+"C'est fait. Votre moteur de téléportation a été boosté à %ik. Le temps de "
+"recharge sera plus court."
 
 #: scripts/scenario_55_defenderHunter.lua:1929
 #: scripts/scenario_55_defenderHunter.lua:1962
@@ -1938,6 +1945,7 @@ msgstr ""
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_55_defenderHunter.lua:2844
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"
