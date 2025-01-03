@@ -91,6 +91,11 @@ a.download.debian {
     border-color: #CE0056;
 }
 
+a.download.steam {
+	color: lightgray;
+	border-color: lightgray;
+}
+
 a.download.flathub {
 	color: lightgray;
 	border-color:lightgray;
