@@ -1409,9 +1409,12 @@ msgstr ""
 "Que pouvons-nous faire pour vous aujourd'hui ?\n"
 
 #: scripts/scenario_50_gaps.lua:2247
+#, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
-msgstr "Bienvenue dans notre charmante petite station.\n"
+msgstr ""
+"Bienvenue sur notre charmante petite station.\n"
+"Que pouvons-nous faire pour vous ?\n"
 
 #: scripts/scenario_50_gaps.lua:2250
 #, fuzzy
@@ -2261,6 +2264,7 @@ msgstr ""
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_50_gaps.lua:2838
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"

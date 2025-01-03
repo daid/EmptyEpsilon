@@ -724,11 +724,15 @@ msgstr ""
 "Que pouvons-nous faire pour vous aujourd'hui ?\n"
 
 #: scripts/scenario_58_race.lua:1630
+#, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
-msgstr "Bienvenue dans notre charmante petite station.\n"
+msgstr ""
+"Bienvenue sur notre charmante petite station.\n"
+"Que pouvons-nous faire pour vous ?\n"
 
 #: scripts/scenario_58_race.lua:1633
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
@@ -1337,6 +1341,7 @@ msgstr ""
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_58_race.lua:2301
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -1733,7 +1738,6 @@ msgid ""
 "We are on an important mission."
 msgstr ""
 "Désolé, nous n'avons pas le temps de discuter avec vous.\n"
-"\n"
 "Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_58_race.lua:2758
@@ -1743,7 +1747,6 @@ msgid ""
 "Good day."
 msgstr ""
 "Nous n'avons rien pour vous.\n"
-"\n"
 "Bonne journée."
 
 #: scripts/scenario_58_race.lua:2912

@@ -1589,14 +1589,15 @@ msgstr ""
 "Que pouvons-nous faire pour vous aujourd'hui ?\n"
 
 #: scripts/scenario_49_allies.lua:3457
+#, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
 msgstr ""
-"Salutations,\n"
 "Bienvenue sur notre charmante petite station.\n"
 "Que pouvons-nous faire pour vous ?\n"
 
 #: scripts/scenario_49_allies.lua:3460
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
@@ -3098,6 +3099,7 @@ msgstr ""
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_49_allies.lua:4282
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"

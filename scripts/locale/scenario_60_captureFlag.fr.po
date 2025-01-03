@@ -1680,9 +1680,12 @@ msgstr ""
 "Que pouvons-nous faire pour vous aujourd'hui ?\n"
 
 #: scripts/scenario_60_captureFlag.lua:5319
+#, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
-msgstr "Bienvenue dans notre charmante petite station.\n"
+msgstr ""
+"Bienvenue sur notre charmante petite station.\n"
+"Que pouvons-nous faire pour vous ?\n"
 
 #: scripts/scenario_60_captureFlag.lua:5355
 msgctxt "ammo-comms"
@@ -2865,7 +2868,6 @@ msgid ""
 "We are on an important mission."
 msgstr ""
 "Désolé, nous n'avons pas le temps de discuter avec vous.\n"
-"\n"
 "Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_60_captureFlag.lua:6825
@@ -2875,7 +2877,6 @@ msgid ""
 "Good day."
 msgstr ""
 "Nous n'avons rien pour vous.\n"
-"\n"
 "Bonne journée."
 
 #: scripts/scenario_60_captureFlag.lua:7088
