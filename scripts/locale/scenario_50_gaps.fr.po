@@ -2951,11 +2951,3 @@ msgid "Protect %s. Destroy enemy bases straight out from gaps"
 msgstr ""
 "Protéger %s.\n"
 "Détruire les bases ennemies en sortant par les brèches."
-
-#~ msgctxt "trade-comms"
-#~ msgid "What do you want?"
-#~ msgstr "Que voulez-vous ?"
-
-#~ msgctxt "msgEngineer+"
-#~ msgid "One of your repair crew has perished"
-#~ msgstr "Un de vos réparateurs a péri."

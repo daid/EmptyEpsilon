@@ -645,6 +645,12 @@ msgctxt "scienceDB"
 msgid "Roving, %s"
 msgstr "Itinérante, %s"
 
+#: scripts/comms_scenario_utility.lua:757
+#, fuzzy, lua-format
+msgctxt "scienceDB"
+msgid "%s, %s"
+msgstr "Secteur %s, %s (%i rép)"
+
 #: scripts/comms_scenario_utility.lua:763
 msgctxt "scienceDB"
 msgid "share energy"
@@ -1181,41 +1187,41 @@ msgstr "Explications des différentes mises à niveau"
 #: scripts/comms_scenario_utility.lua:8984
 #: scripts/comms_scenario_utility.lua:9030
 #: scripts/comms_scenario_utility.lua:9061
-#: scripts/comms_scenario_utility.lua:9538
-#: scripts/comms_scenario_utility.lua:9542
-#: scripts/comms_scenario_utility.lua:9586
-#: scripts/comms_scenario_utility.lua:9630
-#: scripts/comms_scenario_utility.lua:9676
-#: scripts/comms_scenario_utility.lua:9720
-#: scripts/comms_scenario_utility.lua:9766
-#: scripts/comms_scenario_utility.lua:9878
-#: scripts/comms_scenario_utility.lua:9882
-#: scripts/comms_scenario_utility.lua:9899
-#: scripts/comms_scenario_utility.lua:9921
-#: scripts/comms_scenario_utility.lua:9940
-#: scripts/comms_scenario_utility.lua:10011
-#: scripts/comms_scenario_utility.lua:10015
-#: scripts/comms_scenario_utility.lua:10036
-#: scripts/comms_scenario_utility.lua:10058
-#: scripts/comms_scenario_utility.lua:10087
-#: scripts/comms_scenario_utility.lua:10161
-#: scripts/comms_scenario_utility.lua:10190
-#: scripts/comms_scenario_utility.lua:10219
-#: scripts/comms_scenario_utility.lua:10248
-#: scripts/comms_scenario_utility.lua:10277
-#: scripts/comms_scenario_utility.lua:10280
-#: scripts/comms_scenario_utility.lua:10333
-#: scripts/comms_scenario_utility.lua:10374
-#: scripts/comms_scenario_utility.lua:10415
-#: scripts/comms_scenario_utility.lua:10522
-#: scripts/comms_scenario_utility.lua:10569
-#: scripts/comms_scenario_utility.lua:10665
-#: scripts/comms_scenario_utility.lua:10712
-#: scripts/comms_scenario_utility.lua:10755
-#: scripts/comms_scenario_utility.lua:10767
-#: scripts/comms_scenario_utility.lua:10771
-#: scripts/comms_scenario_utility.lua:10816
-#: scripts/comms_scenario_utility.lua:10868
+#: scripts/comms_scenario_utility.lua:9539
+#: scripts/comms_scenario_utility.lua:9543
+#: scripts/comms_scenario_utility.lua:9587
+#: scripts/comms_scenario_utility.lua:9631
+#: scripts/comms_scenario_utility.lua:9677
+#: scripts/comms_scenario_utility.lua:9721
+#: scripts/comms_scenario_utility.lua:9767
+#: scripts/comms_scenario_utility.lua:9879
+#: scripts/comms_scenario_utility.lua:9883
+#: scripts/comms_scenario_utility.lua:9900
+#: scripts/comms_scenario_utility.lua:9922
+#: scripts/comms_scenario_utility.lua:9941
+#: scripts/comms_scenario_utility.lua:10012
+#: scripts/comms_scenario_utility.lua:10016
+#: scripts/comms_scenario_utility.lua:10037
+#: scripts/comms_scenario_utility.lua:10059
+#: scripts/comms_scenario_utility.lua:10088
+#: scripts/comms_scenario_utility.lua:10162
+#: scripts/comms_scenario_utility.lua:10191
+#: scripts/comms_scenario_utility.lua:10220
+#: scripts/comms_scenario_utility.lua:10249
+#: scripts/comms_scenario_utility.lua:10278
+#: scripts/comms_scenario_utility.lua:10281
+#: scripts/comms_scenario_utility.lua:10334
+#: scripts/comms_scenario_utility.lua:10375
+#: scripts/comms_scenario_utility.lua:10416
+#: scripts/comms_scenario_utility.lua:10523
+#: scripts/comms_scenario_utility.lua:10570
+#: scripts/comms_scenario_utility.lua:10666
+#: scripts/comms_scenario_utility.lua:10713
+#: scripts/comms_scenario_utility.lua:10756
+#: scripts/comms_scenario_utility.lua:10768
+#: scripts/comms_scenario_utility.lua:10772
+#: scripts/comms_scenario_utility.lua:10817
+#: scripts/comms_scenario_utility.lua:10869
 msgid "Back"
 msgstr "Précédent"
 
@@ -1570,22 +1576,22 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:8933
 #: scripts/comms_scenario_utility.lua:8975
 #: scripts/comms_scenario_utility.lua:9021
-#: scripts/comms_scenario_utility.lua:9577
-#: scripts/comms_scenario_utility.lua:9621
-#: scripts/comms_scenario_utility.lua:9667
-#: scripts/comms_scenario_utility.lua:9711
-#: scripts/comms_scenario_utility.lua:9757
-#: scripts/comms_scenario_utility.lua:10315
-#: scripts/comms_scenario_utility.lua:10356
-#: scripts/comms_scenario_utility.lua:10397
-#: scripts/comms_scenario_utility.lua:10504
-#: scripts/comms_scenario_utility.lua:10551
-#: scripts/comms_scenario_utility.lua:10574
-#: scripts/comms_scenario_utility.lua:10647
-#: scripts/comms_scenario_utility.lua:10694
-#: scripts/comms_scenario_utility.lua:10737
-#: scripts/comms_scenario_utility.lua:10798
-#: scripts/comms_scenario_utility.lua:10850
+#: scripts/comms_scenario_utility.lua:9578
+#: scripts/comms_scenario_utility.lua:9622
+#: scripts/comms_scenario_utility.lua:9668
+#: scripts/comms_scenario_utility.lua:9712
+#: scripts/comms_scenario_utility.lua:9758
+#: scripts/comms_scenario_utility.lua:10316
+#: scripts/comms_scenario_utility.lua:10357
+#: scripts/comms_scenario_utility.lua:10398
+#: scripts/comms_scenario_utility.lua:10505
+#: scripts/comms_scenario_utility.lua:10552
+#: scripts/comms_scenario_utility.lua:10575
+#: scripts/comms_scenario_utility.lua:10648
+#: scripts/comms_scenario_utility.lua:10695
+#: scripts/comms_scenario_utility.lua:10738
+#: scripts/comms_scenario_utility.lua:10799
+#: scripts/comms_scenario_utility.lua:10851
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
 msgstr "Réputation insuffisante."
@@ -1649,22 +1655,22 @@ msgstr "Réputation insuffisante."
 #: scripts/comms_scenario_utility.lua:8934
 #: scripts/comms_scenario_utility.lua:8976
 #: scripts/comms_scenario_utility.lua:9022
-#: scripts/comms_scenario_utility.lua:9578
-#: scripts/comms_scenario_utility.lua:9622
-#: scripts/comms_scenario_utility.lua:9668
-#: scripts/comms_scenario_utility.lua:9712
-#: scripts/comms_scenario_utility.lua:9758
-#: scripts/comms_scenario_utility.lua:10316
-#: scripts/comms_scenario_utility.lua:10357
-#: scripts/comms_scenario_utility.lua:10398
-#: scripts/comms_scenario_utility.lua:10505
-#: scripts/comms_scenario_utility.lua:10552
-#: scripts/comms_scenario_utility.lua:10575
-#: scripts/comms_scenario_utility.lua:10648
-#: scripts/comms_scenario_utility.lua:10695
-#: scripts/comms_scenario_utility.lua:10738
-#: scripts/comms_scenario_utility.lua:10799
-#: scripts/comms_scenario_utility.lua:10851
+#: scripts/comms_scenario_utility.lua:9579
+#: scripts/comms_scenario_utility.lua:9623
+#: scripts/comms_scenario_utility.lua:9669
+#: scripts/comms_scenario_utility.lua:9713
+#: scripts/comms_scenario_utility.lua:9759
+#: scripts/comms_scenario_utility.lua:10317
+#: scripts/comms_scenario_utility.lua:10358
+#: scripts/comms_scenario_utility.lua:10399
+#: scripts/comms_scenario_utility.lua:10506
+#: scripts/comms_scenario_utility.lua:10553
+#: scripts/comms_scenario_utility.lua:10576
+#: scripts/comms_scenario_utility.lua:10649
+#: scripts/comms_scenario_utility.lua:10696
+#: scripts/comms_scenario_utility.lua:10739
+#: scripts/comms_scenario_utility.lua:10800
+#: scripts/comms_scenario_utility.lua:10852
 msgctxt "needRep-comms"
 msgid "Not enough reputation"
 msgstr "Pas assez de réputation."
@@ -1728,22 +1734,22 @@ msgstr "Pas assez de réputation."
 #: scripts/comms_scenario_utility.lua:8935
 #: scripts/comms_scenario_utility.lua:8977
 #: scripts/comms_scenario_utility.lua:9023
-#: scripts/comms_scenario_utility.lua:9579
-#: scripts/comms_scenario_utility.lua:9623
-#: scripts/comms_scenario_utility.lua:9669
-#: scripts/comms_scenario_utility.lua:9713
-#: scripts/comms_scenario_utility.lua:9759
-#: scripts/comms_scenario_utility.lua:10317
-#: scripts/comms_scenario_utility.lua:10358
-#: scripts/comms_scenario_utility.lua:10399
-#: scripts/comms_scenario_utility.lua:10506
-#: scripts/comms_scenario_utility.lua:10553
-#: scripts/comms_scenario_utility.lua:10576
-#: scripts/comms_scenario_utility.lua:10649
-#: scripts/comms_scenario_utility.lua:10696
-#: scripts/comms_scenario_utility.lua:10739
-#: scripts/comms_scenario_utility.lua:10800
-#: scripts/comms_scenario_utility.lua:10852
+#: scripts/comms_scenario_utility.lua:9580
+#: scripts/comms_scenario_utility.lua:9624
+#: scripts/comms_scenario_utility.lua:9670
+#: scripts/comms_scenario_utility.lua:9714
+#: scripts/comms_scenario_utility.lua:9760
+#: scripts/comms_scenario_utility.lua:10318
+#: scripts/comms_scenario_utility.lua:10359
+#: scripts/comms_scenario_utility.lua:10400
+#: scripts/comms_scenario_utility.lua:10507
+#: scripts/comms_scenario_utility.lua:10554
+#: scripts/comms_scenario_utility.lua:10577
+#: scripts/comms_scenario_utility.lua:10650
+#: scripts/comms_scenario_utility.lua:10697
+#: scripts/comms_scenario_utility.lua:10740
+#: scripts/comms_scenario_utility.lua:10801
+#: scripts/comms_scenario_utility.lua:10853
 msgctxt "needRep-comms"
 msgid "You need more reputation"
 msgstr "Vous avez besoin de plus de réputation."
@@ -1807,22 +1813,22 @@ msgstr "Vous avez besoin de plus de réputation."
 #: scripts/comms_scenario_utility.lua:8936
 #: scripts/comms_scenario_utility.lua:8978
 #: scripts/comms_scenario_utility.lua:9024
-#: scripts/comms_scenario_utility.lua:9580
-#: scripts/comms_scenario_utility.lua:9624
-#: scripts/comms_scenario_utility.lua:9670
-#: scripts/comms_scenario_utility.lua:9714
-#: scripts/comms_scenario_utility.lua:9760
-#: scripts/comms_scenario_utility.lua:10318
-#: scripts/comms_scenario_utility.lua:10359
-#: scripts/comms_scenario_utility.lua:10400
-#: scripts/comms_scenario_utility.lua:10507
-#: scripts/comms_scenario_utility.lua:10554
-#: scripts/comms_scenario_utility.lua:10577
-#: scripts/comms_scenario_utility.lua:10650
-#: scripts/comms_scenario_utility.lua:10697
-#: scripts/comms_scenario_utility.lua:10740
-#: scripts/comms_scenario_utility.lua:10801
-#: scripts/comms_scenario_utility.lua:10853
+#: scripts/comms_scenario_utility.lua:9581
+#: scripts/comms_scenario_utility.lua:9625
+#: scripts/comms_scenario_utility.lua:9671
+#: scripts/comms_scenario_utility.lua:9715
+#: scripts/comms_scenario_utility.lua:9761
+#: scripts/comms_scenario_utility.lua:10319
+#: scripts/comms_scenario_utility.lua:10360
+#: scripts/comms_scenario_utility.lua:10401
+#: scripts/comms_scenario_utility.lua:10508
+#: scripts/comms_scenario_utility.lua:10555
+#: scripts/comms_scenario_utility.lua:10578
+#: scripts/comms_scenario_utility.lua:10651
+#: scripts/comms_scenario_utility.lua:10698
+#: scripts/comms_scenario_utility.lua:10741
+#: scripts/comms_scenario_utility.lua:10802
+#: scripts/comms_scenario_utility.lua:10854
 #, lua-format
 msgctxt "needRep-comms"
 msgid "You need more than %i reputation"
@@ -1887,22 +1893,22 @@ msgstr "Vous avez besoin de plus de %i de réputation."
 #: scripts/comms_scenario_utility.lua:8937
 #: scripts/comms_scenario_utility.lua:8979
 #: scripts/comms_scenario_utility.lua:9025
-#: scripts/comms_scenario_utility.lua:9581
-#: scripts/comms_scenario_utility.lua:9625
-#: scripts/comms_scenario_utility.lua:9671
-#: scripts/comms_scenario_utility.lua:9715
-#: scripts/comms_scenario_utility.lua:9761
-#: scripts/comms_scenario_utility.lua:10319
-#: scripts/comms_scenario_utility.lua:10360
-#: scripts/comms_scenario_utility.lua:10401
-#: scripts/comms_scenario_utility.lua:10508
-#: scripts/comms_scenario_utility.lua:10555
-#: scripts/comms_scenario_utility.lua:10578
-#: scripts/comms_scenario_utility.lua:10651
-#: scripts/comms_scenario_utility.lua:10698
-#: scripts/comms_scenario_utility.lua:10741
-#: scripts/comms_scenario_utility.lua:10802
-#: scripts/comms_scenario_utility.lua:10854
+#: scripts/comms_scenario_utility.lua:9582
+#: scripts/comms_scenario_utility.lua:9626
+#: scripts/comms_scenario_utility.lua:9672
+#: scripts/comms_scenario_utility.lua:9716
+#: scripts/comms_scenario_utility.lua:9762
+#: scripts/comms_scenario_utility.lua:10320
+#: scripts/comms_scenario_utility.lua:10361
+#: scripts/comms_scenario_utility.lua:10402
+#: scripts/comms_scenario_utility.lua:10509
+#: scripts/comms_scenario_utility.lua:10556
+#: scripts/comms_scenario_utility.lua:10579
+#: scripts/comms_scenario_utility.lua:10652
+#: scripts/comms_scenario_utility.lua:10699
+#: scripts/comms_scenario_utility.lua:10742
+#: scripts/comms_scenario_utility.lua:10803
+#: scripts/comms_scenario_utility.lua:10855
 msgctxt "needRep-comms"
 msgid "You don't have enough reputation"
 msgstr "Vous n'avez pas assez de réputation."
@@ -1966,22 +1972,22 @@ msgstr "Vous n'avez pas assez de réputation."
 #: scripts/comms_scenario_utility.lua:8938
 #: scripts/comms_scenario_utility.lua:8980
 #: scripts/comms_scenario_utility.lua:9026
-#: scripts/comms_scenario_utility.lua:9582
-#: scripts/comms_scenario_utility.lua:9626
-#: scripts/comms_scenario_utility.lua:9672
-#: scripts/comms_scenario_utility.lua:9716
-#: scripts/comms_scenario_utility.lua:9762
-#: scripts/comms_scenario_utility.lua:10320
-#: scripts/comms_scenario_utility.lua:10361
-#: scripts/comms_scenario_utility.lua:10402
-#: scripts/comms_scenario_utility.lua:10509
-#: scripts/comms_scenario_utility.lua:10556
-#: scripts/comms_scenario_utility.lua:10579
-#: scripts/comms_scenario_utility.lua:10652
-#: scripts/comms_scenario_utility.lua:10699
-#: scripts/comms_scenario_utility.lua:10742
-#: scripts/comms_scenario_utility.lua:10803
-#: scripts/comms_scenario_utility.lua:10855
+#: scripts/comms_scenario_utility.lua:9583
+#: scripts/comms_scenario_utility.lua:9627
+#: scripts/comms_scenario_utility.lua:9673
+#: scripts/comms_scenario_utility.lua:9717
+#: scripts/comms_scenario_utility.lua:9763
+#: scripts/comms_scenario_utility.lua:10321
+#: scripts/comms_scenario_utility.lua:10362
+#: scripts/comms_scenario_utility.lua:10403
+#: scripts/comms_scenario_utility.lua:10510
+#: scripts/comms_scenario_utility.lua:10557
+#: scripts/comms_scenario_utility.lua:10580
+#: scripts/comms_scenario_utility.lua:10653
+#: scripts/comms_scenario_utility.lua:10700
+#: scripts/comms_scenario_utility.lua:10743
+#: scripts/comms_scenario_utility.lua:10804
+#: scripts/comms_scenario_utility.lua:10856
 #, lua-format
 msgctxt "needRep-comms"
 msgid "%i reputation is insufficient"
@@ -9729,21 +9735,21 @@ msgstr "Abandonner des marchandises"
 
 #: scripts/comms_scenario_utility.lua:7961
 #: scripts/comms_scenario_utility.lua:8799
-#: scripts/comms_scenario_utility.lua:9514
+#: scripts/comms_scenario_utility.lua:9515
 msgctxt "trade-comms"
 msgid "Throw goods out the airlock"
 msgstr "Jeter des marchandises par le sas"
 
 #: scripts/comms_scenario_utility.lua:7962
 #: scripts/comms_scenario_utility.lua:8800
-#: scripts/comms_scenario_utility.lua:9515
+#: scripts/comms_scenario_utility.lua:9516
 msgctxt "trade-comms"
 msgid "Dispose of goods"
 msgstr "Éliminer des marchandises"
 
 #: scripts/comms_scenario_utility.lua:7963
 #: scripts/comms_scenario_utility.lua:8801
-#: scripts/comms_scenario_utility.lua:9516
+#: scripts/comms_scenario_utility.lua:9517
 msgctxt "trade-comms"
 msgid "Destroy goods"
 msgstr "Détruire des marchandises"
@@ -9857,11 +9863,11 @@ msgstr "Que voulez-vous acheter ?"
 #: scripts/comms_scenario_utility.lua:8908
 #: scripts/comms_scenario_utility.lua:8950
 #: scripts/comms_scenario_utility.lua:8996
-#: scripts/comms_scenario_utility.lua:9552
-#: scripts/comms_scenario_utility.lua:9596
-#: scripts/comms_scenario_utility.lua:9642
-#: scripts/comms_scenario_utility.lua:9686
-#: scripts/comms_scenario_utility.lua:9732
+#: scripts/comms_scenario_utility.lua:9553
+#: scripts/comms_scenario_utility.lua:9597
+#: scripts/comms_scenario_utility.lua:9643
+#: scripts/comms_scenario_utility.lua:9687
+#: scripts/comms_scenario_utility.lua:9733
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
@@ -9872,11 +9878,11 @@ msgstr "Acheter 1 %s pour %i rép"
 #: scripts/comms_scenario_utility.lua:8909
 #: scripts/comms_scenario_utility.lua:8951
 #: scripts/comms_scenario_utility.lua:8997
-#: scripts/comms_scenario_utility.lua:9553
-#: scripts/comms_scenario_utility.lua:9597
-#: scripts/comms_scenario_utility.lua:9643
-#: scripts/comms_scenario_utility.lua:9687
-#: scripts/comms_scenario_utility.lua:9733
+#: scripts/comms_scenario_utility.lua:9554
+#: scripts/comms_scenario_utility.lua:9598
+#: scripts/comms_scenario_utility.lua:9644
+#: scripts/comms_scenario_utility.lua:9688
+#: scripts/comms_scenario_utility.lua:9734
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy a %s for %i reputation"
@@ -9887,11 +9893,11 @@ msgstr "Acheter 1 %s (%i rép)"
 #: scripts/comms_scenario_utility.lua:8910
 #: scripts/comms_scenario_utility.lua:8952
 #: scripts/comms_scenario_utility.lua:8998
-#: scripts/comms_scenario_utility.lua:9554
-#: scripts/comms_scenario_utility.lua:9598
-#: scripts/comms_scenario_utility.lua:9644
-#: scripts/comms_scenario_utility.lua:9688
-#: scripts/comms_scenario_utility.lua:9734
+#: scripts/comms_scenario_utility.lua:9555
+#: scripts/comms_scenario_utility.lua:9599
+#: scripts/comms_scenario_utility.lua:9645
+#: scripts/comms_scenario_utility.lua:9689
+#: scripts/comms_scenario_utility.lua:9735
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy %s from %s for %i rep"
@@ -9902,11 +9908,11 @@ msgstr "Acheter %s chez %s pour %i rép"
 #: scripts/comms_scenario_utility.lua:8911
 #: scripts/comms_scenario_utility.lua:8953
 #: scripts/comms_scenario_utility.lua:8999
-#: scripts/comms_scenario_utility.lua:9555
-#: scripts/comms_scenario_utility.lua:9599
-#: scripts/comms_scenario_utility.lua:9645
-#: scripts/comms_scenario_utility.lua:9689
-#: scripts/comms_scenario_utility.lua:9735
+#: scripts/comms_scenario_utility.lua:9556
+#: scripts/comms_scenario_utility.lua:9600
+#: scripts/comms_scenario_utility.lua:9646
+#: scripts/comms_scenario_utility.lua:9690
+#: scripts/comms_scenario_utility.lua:9736
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchase %s for %i reputation"
@@ -10299,7 +10305,7 @@ msgstr "Qu'allez-vous jeter par le sas ?"
 
 #: scripts/comms_scenario_utility.lua:8211
 #: scripts/comms_scenario_utility.lua:8817
-#: scripts/comms_scenario_utility.lua:9532
+#: scripts/comms_scenario_utility.lua:9533
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
@@ -10307,7 +10313,7 @@ msgstr "Et un %s de largué, un !"
 
 #: scripts/comms_scenario_utility.lua:8212
 #: scripts/comms_scenario_utility.lua:8818
-#: scripts/comms_scenario_utility.lua:9533
+#: scripts/comms_scenario_utility.lua:9534
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s has been destroyed"
@@ -10316,7 +10322,7 @@ msgstr ""
 
 #: scripts/comms_scenario_utility.lua:8213
 #: scripts/comms_scenario_utility.lua:8819
-#: scripts/comms_scenario_utility.lua:9534
+#: scripts/comms_scenario_utility.lua:9535
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s has been tossed out of the airlock"
@@ -10324,7 +10330,7 @@ msgstr "La marchandise %s vient d'être éjectée du sas."
 
 #: scripts/comms_scenario_utility.lua:8214
 #: scripts/comms_scenario_utility.lua:8820
-#: scripts/comms_scenario_utility.lua:9535
+#: scripts/comms_scenario_utility.lua:9536
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s has been placed in the arms of the vacuum of space"
@@ -10694,8 +10700,8 @@ msgid "Overcharging your shield makes it last longer."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:8653
-#: scripts/comms_scenario_utility.lua:9822
-#: scripts/comms_scenario_utility.lua:9951
+#: scripts/comms_scenario_utility.lua:9823
+#: scripts/comms_scenario_utility.lua:9952
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
@@ -10703,112 +10709,112 @@ msgstr ""
 "Que nous voulez-vous ?"
 
 #: scripts/comms_scenario_utility.lua:8654
-#: scripts/comms_scenario_utility.lua:9823
-#: scripts/comms_scenario_utility.lua:9952
+#: scripts/comms_scenario_utility.lua:9824
+#: scripts/comms_scenario_utility.lua:9953
 msgctxt "shipAssist-comms"
 msgid "Why did you contact us?"
 msgstr "Pourquoi nous avez-vous contacté ?"
 
 #: scripts/comms_scenario_utility.lua:8655
-#: scripts/comms_scenario_utility.lua:9824
-#: scripts/comms_scenario_utility.lua:9953
+#: scripts/comms_scenario_utility.lua:9825
+#: scripts/comms_scenario_utility.lua:9954
 msgctxt "shipAssist-comms"
 msgid "What is it?"
 msgstr "Qu'est-ce que c'est ?"
 
 #: scripts/comms_scenario_utility.lua:8656
-#: scripts/comms_scenario_utility.lua:9825
-#: scripts/comms_scenario_utility.lua:9954
+#: scripts/comms_scenario_utility.lua:9826
+#: scripts/comms_scenario_utility.lua:9955
 msgctxt "shipAssist-comms"
 msgid "Yeah?"
 msgstr "Ouais ?"
 
 #: scripts/comms_scenario_utility.lua:8661
-#: scripts/comms_scenario_utility.lua:9830
-#: scripts/comms_scenario_utility.lua:9959
+#: scripts/comms_scenario_utility.lua:9831
+#: scripts/comms_scenario_utility.lua:9960
 msgctxt "shipAssist-comms"
 msgid "What can I do for you?"
 msgstr "Que puis-je faire pour vous ?"
 
 #: scripts/comms_scenario_utility.lua:8662
-#: scripts/comms_scenario_utility.lua:9831
-#: scripts/comms_scenario_utility.lua:9960
+#: scripts/comms_scenario_utility.lua:9832
+#: scripts/comms_scenario_utility.lua:9961
 msgctxt "shipAssist-comms"
 msgid "What's on your mind?"
 msgstr "Qu'est-ce qui vous préoccupe ?"
 
 #: scripts/comms_scenario_utility.lua:8663
-#: scripts/comms_scenario_utility.lua:9832
-#: scripts/comms_scenario_utility.lua:9961
+#: scripts/comms_scenario_utility.lua:9833
+#: scripts/comms_scenario_utility.lua:9962
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "What can we do for you, %s?"
 msgstr "Que pouvons-nous faire pour vous, %s ?"
 
 #: scripts/comms_scenario_utility.lua:8664
-#: scripts/comms_scenario_utility.lua:9833
-#: scripts/comms_scenario_utility.lua:9962
+#: scripts/comms_scenario_utility.lua:9834
+#: scripts/comms_scenario_utility.lua:9963
 msgctxt "shipAssist-comms"
 msgid "What brings you to us?"
 msgstr "Qu'est-ce qui vous amène à nous ?"
 
 #: scripts/comms_scenario_utility.lua:8669
-#: scripts/comms_scenario_utility.lua:9838
-#: scripts/comms_scenario_utility.lua:9967
+#: scripts/comms_scenario_utility.lua:9839
+#: scripts/comms_scenario_utility.lua:9968
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr "Monsieur, comment pouvons-nous vous assister ?"
 
 #: scripts/comms_scenario_utility.lua:8670
-#: scripts/comms_scenario_utility.lua:9839
-#: scripts/comms_scenario_utility.lua:9968
+#: scripts/comms_scenario_utility.lua:9840
+#: scripts/comms_scenario_utility.lua:9969
 msgctxt "shipAssist-comms"
 msgid "Sir, what can we do to help you?"
 msgstr "Monsieur, que pouvons-nous faire pour vous aider ?"
 
 #: scripts/comms_scenario_utility.lua:8671
-#: scripts/comms_scenario_utility.lua:9840
-#: scripts/comms_scenario_utility.lua:9969
+#: scripts/comms_scenario_utility.lua:9841
+#: scripts/comms_scenario_utility.lua:9970
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Greetings %s, how can we assist?"
 msgstr "Salutations %s, comment pouvons-nous vous assister ?"
 
 #: scripts/comms_scenario_utility.lua:8672
-#: scripts/comms_scenario_utility.lua:9841
-#: scripts/comms_scenario_utility.lua:9970
+#: scripts/comms_scenario_utility.lua:9842
+#: scripts/comms_scenario_utility.lua:9971
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "How can we help you, %s?"
 msgstr "Comment pouvons-nous vous aider, %s ?"
 
 #: scripts/comms_scenario_utility.lua:8680
-#: scripts/comms_scenario_utility.lua:9846
+#: scripts/comms_scenario_utility.lua:9847
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr "Défendez un marqueur"
 
 #: scripts/comms_scenario_utility.lua:8681
-#: scripts/comms_scenario_utility.lua:9847
+#: scripts/comms_scenario_utility.lua:9848
 msgctxt "shipAssist-comms"
 msgid "Defend waypoint"
 msgstr "Défendre un marqueur"
 
 #: scripts/comms_scenario_utility.lua:8682
-#: scripts/comms_scenario_utility.lua:9848
+#: scripts/comms_scenario_utility.lua:9849
 msgctxt "shipAssist-comms"
 msgid "Please defend a waypoint"
 msgstr "Merci de défendre un marqueur"
 
 #: scripts/comms_scenario_utility.lua:8683
-#: scripts/comms_scenario_utility.lua:9849
+#: scripts/comms_scenario_utility.lua:9850
 msgctxt "shipAssist-comms"
 msgid "Defend a designated waypoint"
 msgstr "Défendez le marqueur désigné"
 
 #: scripts/comms_scenario_utility.lua:8688
-#: scripts/comms_scenario_utility.lua:9854
-#: scripts/comms_scenario_utility.lua:9977
+#: scripts/comms_scenario_utility.lua:9855
+#: scripts/comms_scenario_utility.lua:9978
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
@@ -10816,8 +10822,8 @@ msgstr ""
 "un."
 
 #: scripts/comms_scenario_utility.lua:8689
-#: scripts/comms_scenario_utility.lua:9855
-#: scripts/comms_scenario_utility.lua:9978
+#: scripts/comms_scenario_utility.lua:9856
+#: scripts/comms_scenario_utility.lua:9979
 msgctxt "shipAssist-comms"
 msgid "It is impossible to defend a waypoint when none are set."
 msgstr ""
@@ -10825,45 +10831,45 @@ msgstr ""
 "visible sur la carte."
 
 #: scripts/comms_scenario_utility.lua:8690
-#: scripts/comms_scenario_utility.lua:9856
-#: scripts/comms_scenario_utility.lua:9979
+#: scripts/comms_scenario_utility.lua:9857
+#: scripts/comms_scenario_utility.lua:9980
 msgctxt "shipAssist-comms"
 msgid "We can't defend a waypoint when there are no waypoints set"
 msgstr ""
 "Nous ne pouvons pas défendre de marqueur puisqu'aucun marqueur n'est défini."
 
 #: scripts/comms_scenario_utility.lua:8691
-#: scripts/comms_scenario_utility.lua:9857
-#: scripts/comms_scenario_utility.lua:9980
+#: scripts/comms_scenario_utility.lua:9858
+#: scripts/comms_scenario_utility.lua:9981
 msgctxt "shipAssist-comms"
 msgid "You need to set a waypoint first so that we can defend it."
 msgstr ""
 "Vous devez d'abord définir un marqueur afin que nous puissions le défendre."
 
 #: scripts/comms_scenario_utility.lua:8696
-#: scripts/comms_scenario_utility.lua:9862
-#: scripts/comms_scenario_utility.lua:9985
+#: scripts/comms_scenario_utility.lua:9863
+#: scripts/comms_scenario_utility.lua:9986
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/comms_scenario_utility.lua:8697
-#: scripts/comms_scenario_utility.lua:9863
-#: scripts/comms_scenario_utility.lua:9986
+#: scripts/comms_scenario_utility.lua:9864
+#: scripts/comms_scenario_utility.lua:9987
 msgctxt "shipAssist-comms"
 msgid "What waypoint should we defend?"
 msgstr "Quel marqueur devons-nous protéger ?"
 
 #: scripts/comms_scenario_utility.lua:8698
-#: scripts/comms_scenario_utility.lua:9864
-#: scripts/comms_scenario_utility.lua:9987
+#: scripts/comms_scenario_utility.lua:9865
+#: scripts/comms_scenario_utility.lua:9988
 msgctxt "shipAssist-comms"
 msgid "Designate the waypoint we should defend"
 msgstr "Désignez le marqueur que nous devons défendre."
 
 #: scripts/comms_scenario_utility.lua:8699
-#: scripts/comms_scenario_utility.lua:9865
-#: scripts/comms_scenario_utility.lua:9988
+#: scripts/comms_scenario_utility.lua:9866
+#: scripts/comms_scenario_utility.lua:9989
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Identify the waypoint for %s to defend"
@@ -10876,16 +10882,16 @@ msgid "Defend waypoint %d"
 msgstr "Défendez le marqueur %d"
 
 #: scripts/comms_scenario_utility.lua:8706
-#: scripts/comms_scenario_utility.lua:9872
-#: scripts/comms_scenario_utility.lua:9996
+#: scripts/comms_scenario_utility.lua:9873
+#: scripts/comms_scenario_utility.lua:9997
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at waypoint %d."
 msgstr "Nous partons immédiatement défendre le marqueur %d."
 
 #: scripts/comms_scenario_utility.lua:8707
-#: scripts/comms_scenario_utility.lua:9873
-#: scripts/comms_scenario_utility.lua:9997
+#: scripts/comms_scenario_utility.lua:9874
+#: scripts/comms_scenario_utility.lua:9998
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Changing course to assist at waypoint %d."
@@ -10894,16 +10900,16 @@ msgstr ""
 "Changement de cap pour aider au marqueur %d."
 
 #: scripts/comms_scenario_utility.lua:8708
-#: scripts/comms_scenario_utility.lua:9874
-#: scripts/comms_scenario_utility.lua:9998
+#: scripts/comms_scenario_utility.lua:9875
+#: scripts/comms_scenario_utility.lua:9999
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Moving to assist at waypoint %d."
 msgstr "Nous nous mettons en route afin de prêter secours au marqueur %d."
 
 #: scripts/comms_scenario_utility.lua:8709
-#: scripts/comms_scenario_utility.lua:9875
-#: scripts/comms_scenario_utility.lua:9999
+#: scripts/comms_scenario_utility.lua:9876
+#: scripts/comms_scenario_utility.lua:10000
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s is changing course to assist at waypoint %d."
@@ -10912,56 +10918,56 @@ msgstr ""
 "Changement de cap pour %s afin d'aider au marqueur %d."
 
 #: scripts/comms_scenario_utility.lua:8720
-#: scripts/comms_scenario_utility.lua:9885
+#: scripts/comms_scenario_utility.lua:9886
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr "Aidez-nous !"
 
 #: scripts/comms_scenario_utility.lua:8721
-#: scripts/comms_scenario_utility.lua:9886
+#: scripts/comms_scenario_utility.lua:9887
 msgctxt "shipAssist-comms"
 msgid "Help me"
 msgstr "Venez-nous en aide !"
 
 #: scripts/comms_scenario_utility.lua:8722
-#: scripts/comms_scenario_utility.lua:9887
+#: scripts/comms_scenario_utility.lua:9888
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Assist %s"
 msgstr "Pouvez-vous porter secours à notre vaisseau %s ?"
 
 #: scripts/comms_scenario_utility.lua:8723
-#: scripts/comms_scenario_utility.lua:9888
+#: scripts/comms_scenario_utility.lua:9889
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Move to %s to assist"
 msgstr "Dirigez-vous vers notre vaisseau %s pour nous prêter main forte"
 
 #: scripts/comms_scenario_utility.lua:8727
-#: scripts/comms_scenario_utility.lua:9892
-#: scripts/comms_scenario_utility.lua:10020
+#: scripts/comms_scenario_utility.lua:9893
+#: scripts/comms_scenario_utility.lua:10021
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr "Entendu, nous partons immédiatement vous aider."
 
 #: scripts/comms_scenario_utility.lua:8728
-#: scripts/comms_scenario_utility.lua:9893
-#: scripts/comms_scenario_utility.lua:10021
+#: scripts/comms_scenario_utility.lua:9894
+#: scripts/comms_scenario_utility.lua:10022
 msgctxt "shipAssist-comms"
 msgid "Moving to you to assist."
 msgstr "Nous partons vous aider."
 
 #: scripts/comms_scenario_utility.lua:8729
-#: scripts/comms_scenario_utility.lua:9894
-#: scripts/comms_scenario_utility.lua:10022
+#: scripts/comms_scenario_utility.lua:9895
+#: scripts/comms_scenario_utility.lua:10023
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Setting course for %s to assist."
 msgstr "Changement de cap. Nous vous rejoignons %s afin de vous aider."
 
 #: scripts/comms_scenario_utility.lua:8730
-#: scripts/comms_scenario_utility.lua:9895
-#: scripts/comms_scenario_utility.lua:10023
+#: scripts/comms_scenario_utility.lua:9896
+#: scripts/comms_scenario_utility.lua:10024
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s is changing course in order to move to %s to help."
@@ -11028,64 +11034,64 @@ msgid "%s Missiles: %d/%d\n"
 msgstr "Missiles %s : %d/%d\n"
 
 #: scripts/comms_scenario_utility.lua:8768
-#: scripts/comms_scenario_utility.lua:9926
-#: scripts/comms_scenario_utility.lua:10063
+#: scripts/comms_scenario_utility.lua:9927
+#: scripts/comms_scenario_utility.lua:10064
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr "Amarrez-vous à %s"
 
 #: scripts/comms_scenario_utility.lua:8769
-#: scripts/comms_scenario_utility.lua:9927
-#: scripts/comms_scenario_utility.lua:10064
+#: scripts/comms_scenario_utility.lua:9928
+#: scripts/comms_scenario_utility.lua:10065
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at station %s"
 msgstr "Amarrez-vous à la station %s"
 
 #: scripts/comms_scenario_utility.lua:8770
-#: scripts/comms_scenario_utility.lua:9928
-#: scripts/comms_scenario_utility.lua:10065
+#: scripts/comms_scenario_utility.lua:9929
+#: scripts/comms_scenario_utility.lua:10066
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at nearby station %s"
 msgstr "Amarrez-vous à la station la plus proche : %s"
 
 #: scripts/comms_scenario_utility.lua:8771
-#: scripts/comms_scenario_utility.lua:9929
-#: scripts/comms_scenario_utility.lua:10066
+#: scripts/comms_scenario_utility.lua:9930
+#: scripts/comms_scenario_utility.lua:10067
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Please dock at %s"
 msgstr "Veuillez accoster sur %s"
 
 #: scripts/comms_scenario_utility.lua:8775
-#: scripts/comms_scenario_utility.lua:9933
-#: scripts/comms_scenario_utility.lua:10071
+#: scripts/comms_scenario_utility.lua:9934
+#: scripts/comms_scenario_utility.lua:10072
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr "En cours d'amarrage à %s."
 
 #: scripts/comms_scenario_utility.lua:8776
-#: scripts/comms_scenario_utility.lua:9934
-#: scripts/comms_scenario_utility.lua:10072
+#: scripts/comms_scenario_utility.lua:9935
+#: scripts/comms_scenario_utility.lua:10073
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at station %s."
 msgstr "En cours d'amarrage à la station %s."
 
 #: scripts/comms_scenario_utility.lua:8777
-#: scripts/comms_scenario_utility.lua:9935
-#: scripts/comms_scenario_utility.lua:10073
+#: scripts/comms_scenario_utility.lua:9936
+#: scripts/comms_scenario_utility.lua:10074
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at nearby station %s."
 msgstr "Amarrage à la station voisine %s."
 
 #: scripts/comms_scenario_utility.lua:8778
-#: scripts/comms_scenario_utility.lua:9936
-#: scripts/comms_scenario_utility.lua:10074
+#: scripts/comms_scenario_utility.lua:9937
+#: scripts/comms_scenario_utility.lua:10075
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s is changing course to dock at station %s."
@@ -11094,7 +11100,7 @@ msgstr ""
 "%s change son cap pour s'amarrer à la station %s."
 
 #: scripts/comms_scenario_utility.lua:8805
-#: scripts/comms_scenario_utility.lua:9520
+#: scripts/comms_scenario_utility.lua:9521
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -11105,7 +11111,7 @@ msgstr ""
 "Que faut-il abandonner ?"
 
 #: scripts/comms_scenario_utility.lua:8806
-#: scripts/comms_scenario_utility.lua:9521
+#: scripts/comms_scenario_utility.lua:9522
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -11116,7 +11122,7 @@ msgstr ""
 "Vous préparez le sas pour larguer la marchandise ci-dessous :"
 
 #: scripts/comms_scenario_utility.lua:8807
-#: scripts/comms_scenario_utility.lua:9522
+#: scripts/comms_scenario_utility.lua:9523
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -11127,7 +11133,7 @@ msgstr ""
 "Que voulez-vous larguer par le sas ?"
 
 #: scripts/comms_scenario_utility.lua:8808
-#: scripts/comms_scenario_utility.lua:9523
+#: scripts/comms_scenario_utility.lua:9524
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -11171,11 +11177,11 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:8925
 #: scripts/comms_scenario_utility.lua:8967
 #: scripts/comms_scenario_utility.lua:9013
-#: scripts/comms_scenario_utility.lua:9569
-#: scripts/comms_scenario_utility.lua:9613
-#: scripts/comms_scenario_utility.lua:9659
-#: scripts/comms_scenario_utility.lua:9703
-#: scripts/comms_scenario_utility.lua:9749
+#: scripts/comms_scenario_utility.lua:9570
+#: scripts/comms_scenario_utility.lua:9614
+#: scripts/comms_scenario_utility.lua:9660
+#: scripts/comms_scenario_utility.lua:9704
+#: scripts/comms_scenario_utility.lua:9750
 #, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "One %s bought"
@@ -11185,11 +11191,11 @@ msgstr "1 marchandise \"%s\" achetée."
 #: scripts/comms_scenario_utility.lua:8926
 #: scripts/comms_scenario_utility.lua:8968
 #: scripts/comms_scenario_utility.lua:9014
-#: scripts/comms_scenario_utility.lua:9570
-#: scripts/comms_scenario_utility.lua:9614
-#: scripts/comms_scenario_utility.lua:9660
-#: scripts/comms_scenario_utility.lua:9704
-#: scripts/comms_scenario_utility.lua:9750
+#: scripts/comms_scenario_utility.lua:9571
+#: scripts/comms_scenario_utility.lua:9615
+#: scripts/comms_scenario_utility.lua:9661
+#: scripts/comms_scenario_utility.lua:9705
+#: scripts/comms_scenario_utility.lua:9751
 #, lua-format
 msgctxt "trade-comms"
 msgid "You bought one %s"
@@ -11199,11 +11205,11 @@ msgstr "Vous avez acheté %s."
 #: scripts/comms_scenario_utility.lua:8927
 #: scripts/comms_scenario_utility.lua:8969
 #: scripts/comms_scenario_utility.lua:9015
-#: scripts/comms_scenario_utility.lua:9571
-#: scripts/comms_scenario_utility.lua:9615
-#: scripts/comms_scenario_utility.lua:9661
-#: scripts/comms_scenario_utility.lua:9705
-#: scripts/comms_scenario_utility.lua:9751
+#: scripts/comms_scenario_utility.lua:9572
+#: scripts/comms_scenario_utility.lua:9616
+#: scripts/comms_scenario_utility.lua:9662
+#: scripts/comms_scenario_utility.lua:9706
+#: scripts/comms_scenario_utility.lua:9752
 #, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "You purchased one %s from %s"
@@ -11213,48 +11219,48 @@ msgstr "Vous venez d'acheter 1 marchandise %s chez %s."
 #: scripts/comms_scenario_utility.lua:8928
 #: scripts/comms_scenario_utility.lua:8970
 #: scripts/comms_scenario_utility.lua:9016
-#: scripts/comms_scenario_utility.lua:9572
-#: scripts/comms_scenario_utility.lua:9616
-#: scripts/comms_scenario_utility.lua:9662
-#: scripts/comms_scenario_utility.lua:9706
-#: scripts/comms_scenario_utility.lua:9752
+#: scripts/comms_scenario_utility.lua:9573
+#: scripts/comms_scenario_utility.lua:9617
+#: scripts/comms_scenario_utility.lua:9663
+#: scripts/comms_scenario_utility.lua:9707
+#: scripts/comms_scenario_utility.lua:9753
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s sold one %s to you"
 msgstr "%s vient de vous vendre 1 %s."
 
 #: scripts/comms_scenario_utility.lua:9039
-#: scripts/comms_scenario_utility.lua:9481
+#: scripts/comms_scenario_utility.lua:9482
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
 msgstr "Auriez-vous des marchandises à vendre ?"
 
 #: scripts/comms_scenario_utility.lua:9040
-#: scripts/comms_scenario_utility.lua:9482
+#: scripts/comms_scenario_utility.lua:9483
 msgctxt "trade-comms"
 msgid "What cargo do you have for sale?"
 msgstr "Quelle marchandises avez-vous à vendre ?"
 
 #: scripts/comms_scenario_utility.lua:9041
-#: scripts/comms_scenario_utility.lua:9483
+#: scripts/comms_scenario_utility.lua:9484
 msgctxt "trade-comms"
 msgid "Are you selling cargo?"
 msgstr "Vendez-vous des marchandises ?"
 
 #: scripts/comms_scenario_utility.lua:9042
-#: scripts/comms_scenario_utility.lua:9484
+#: scripts/comms_scenario_utility.lua:9485
 msgctxt "trade-comms"
 msgid "Do you have cargo for sale?"
 msgstr "Avez-vous des marchandises à vendre ?"
 
 #: scripts/comms_scenario_utility.lua:9046
-#: scripts/comms_scenario_utility.lua:9488
+#: scripts/comms_scenario_utility.lua:9489
 msgctxt "trade-comms"
 msgid "We've got "
 msgstr "Nous avons : "
 
 #: scripts/comms_scenario_utility.lua:9058
-#: scripts/comms_scenario_utility.lua:9500
+#: scripts/comms_scenario_utility.lua:9501
 msgctxt "trade-comms"
 msgid "nothing"
 msgstr "rien du tout."
@@ -11575,7 +11581,7 @@ msgstr "Juste pour cette fois, nous suivrons vos conseils."
 #: scripts/comms_scenario_utility.lua:9306
 msgctxt "shipEnemy-comms"
 msgid "No"
-msgstr "Non"
+msgstr "Non."
 
 #: scripts/comms_scenario_utility.lua:9473
 msgctxt "trade-comms"
@@ -11597,12 +11603,12 @@ msgctxt "trade-comms"
 msgid "State your business."
 msgstr "Qu'est ce que vous voulez ?"
 
-#: scripts/comms_scenario_utility.lua:9513
+#: scripts/comms_scenario_utility.lua:9514
 msgctxt "trade-comms"
 msgid "Jettison cargo"
 msgstr "Larguer la cargaison"
 
-#: scripts/comms_scenario_utility.lua:9779
+#: scripts/comms_scenario_utility.lua:9780
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
@@ -11611,7 +11617,7 @@ msgstr ""
 "Désolé, nous n'avons pas le temps de discuter avec vous.\n"
 "Nous sommes en mission de la plus haute importance."
 
-#: scripts/comms_scenario_utility.lua:9780
+#: scripts/comms_scenario_utility.lua:9781
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we are too busy to chat.\n"
@@ -11620,7 +11626,7 @@ msgstr ""
 "Désolé, nous sommes trop occupés pour discuter.\n"
 "Nous avons des affaires importantes à régler."
 
-#: scripts/comms_scenario_utility.lua:9781
+#: scripts/comms_scenario_utility.lua:9782
 msgctxt "ship-comms"
 msgid ""
 "We'd love to chat, but we're in too much of a hurry right now.\n"
@@ -11629,7 +11635,7 @@ msgstr ""
 "Nous serions ravis de discuter, mais nous sommes pressés en ce moment.\n"
 "Nous avons une mission importante à accomplir."
 
-#: scripts/comms_scenario_utility.lua:9782
+#: scripts/comms_scenario_utility.lua:9783
 msgctxt "ship-comms"
 msgid ""
 "No time to chat right now.\n"
@@ -11638,7 +11644,7 @@ msgstr ""
 "Pas le temps de discuter pour le moment.\n"
 "Notre mission est prioritaire."
 
-#: scripts/comms_scenario_utility.lua:9787
+#: scripts/comms_scenario_utility.lua:9788
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
@@ -11647,7 +11653,7 @@ msgstr ""
 "Nous n'avons rien pour vous.\n"
 "Bonne journée."
 
-#: scripts/comms_scenario_utility.lua:9788
+#: scripts/comms_scenario_utility.lua:9789
 msgctxt "ship-comms"
 msgid ""
 "We have nothing to say to you.\n"
@@ -11656,7 +11662,7 @@ msgstr ""
 "Nous n'avons rien à vous dire.\n"
 "Bye bye !"
 
-#: scripts/comms_scenario_utility.lua:9789
+#: scripts/comms_scenario_utility.lua:9790
 msgctxt "ship-comms"
 msgid ""
 "No communication for you.\n"
@@ -11665,7 +11671,7 @@ msgstr ""
 "Aucune communication pour vous.\n"
 "Bonne journée."
 
-#: scripts/comms_scenario_utility.lua:9790
+#: scripts/comms_scenario_utility.lua:9791
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
@@ -11674,249 +11680,237 @@ msgstr ""
 "Nous n'avons rien pour vous.\n"
 "Adieu !"
 
-#: scripts/comms_scenario_utility.lua:9869
-#: scripts/comms_scenario_utility.lua:9992
+#: scripts/comms_scenario_utility.lua:9870
+#: scripts/comms_scenario_utility.lua:9993
 #, lua-format
 msgctxt "ship-comms"
 msgid "Defend WP %i"
 msgstr "Défendez le marqueur %i"
 
-#: scripts/comms_scenario_utility.lua:9902
+#: scripts/comms_scenario_utility.lua:9903
 msgctxt "ship-comms"
 msgid "Report status"
 msgstr "Au rapport"
 
-#: scripts/comms_scenario_utility.lua:9903
-#: scripts/comms_scenario_utility.lua:10040
+#: scripts/comms_scenario_utility.lua:9904
+#: scripts/comms_scenario_utility.lua:10041
 msgctxt "ship-comms"
 msgid "Report your ship status"
 msgstr "Faîtes nous un rapport de situation de votre vaisseau"
 
-#: scripts/comms_scenario_utility.lua:9904
-#: scripts/comms_scenario_utility.lua:10041
+#: scripts/comms_scenario_utility.lua:9905
+#: scripts/comms_scenario_utility.lua:10042
 msgctxt "ship-comms"
 msgid "Report status of your ship"
 msgstr "Rapport de situation de votre vaisseau"
 
-#: scripts/comms_scenario_utility.lua:9905
-#: scripts/comms_scenario_utility.lua:10042
+#: scripts/comms_scenario_utility.lua:9906
+#: scripts/comms_scenario_utility.lua:10043
 #, lua-format
 msgctxt "ship-comms"
 msgid "Report %s status"
 msgstr "Au rapport, équipage du %s"
 
-#: scripts/comms_scenario_utility.lua:9908
-#: scripts/comms_scenario_utility.lua:10045
+#: scripts/comms_scenario_utility.lua:9909
+#: scripts/comms_scenario_utility.lua:10046
 #, fuzzy
 msgctxt "ship-comms"
 msgid "Hull: "
 msgstr "b Coque : "
 
-#: scripts/comms_scenario_utility.lua:9911
-#: scripts/comms_scenario_utility.lua:10048
+#: scripts/comms_scenario_utility.lua:9912
+#: scripts/comms_scenario_utility.lua:10049
 #, fuzzy
 msgctxt "ship-comms"
 msgid "Shield: "
 msgstr "b Boucliers : "
 
-#: scripts/comms_scenario_utility.lua:9913
-#: scripts/comms_scenario_utility.lua:10050
+#: scripts/comms_scenario_utility.lua:9914
+#: scripts/comms_scenario_utility.lua:10051
 #, fuzzy
 msgctxt "ship-comms"
 msgid "Front Shield: "
 msgstr "b Boucliers avant : "
 
-#: scripts/comms_scenario_utility.lua:9914
-#: scripts/comms_scenario_utility.lua:10051
+#: scripts/comms_scenario_utility.lua:9915
+#: scripts/comms_scenario_utility.lua:10052
 #, fuzzy
 msgctxt "ship-comms"
 msgid "Rear Shield: "
 msgstr "b Boucliers arrière : "
 
-#: scripts/comms_scenario_utility.lua:9917
-#: scripts/comms_scenario_utility.lua:10054
+#: scripts/comms_scenario_utility.lua:9918
+#: scripts/comms_scenario_utility.lua:10055
 #, fuzzy
 msgctxt "ship-comms"
 msgid "Shield "
 msgstr "b Boucliers "
 
-#: scripts/comms_scenario_utility.lua:9974
+#: scripts/comms_scenario_utility.lua:9975
 msgctxt "ship-comms"
 msgid "Defend a waypoint"
 msgstr "Défendez un marqueur"
-
-#: scripts/comms_scenario_utility.lua:10004
-#: scripts/comms_scenario_utility.lua:10029
-#: scripts/comms_scenario_utility.lua:10080
-msgctxt "ship-comms"
-msgid "After careful consideration, we are declining your request."
-msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10005
 #: scripts/comms_scenario_utility.lua:10030
 #: scripts/comms_scenario_utility.lua:10081
 msgctxt "ship-comms"
-msgid "We thought about it, and we are not changing course."
+msgid "After careful consideration, we are declining your request."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10006
+#: scripts/comms_scenario_utility.lua:10031
+#: scripts/comms_scenario_utility.lua:10082
 msgctxt "ship-comms"
-msgid "We would rather not change course at this time."
+msgid "We thought about it, and we are not changing course."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10007
 msgctxt "ship-comms"
+msgid "We would rather not change course at this time."
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10008
+msgctxt "ship-comms"
 msgid "We prefer not to go there right now."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10017
+#: scripts/comms_scenario_utility.lua:10018
 msgctxt "ship-comms"
 msgid "Assist me"
 msgstr "Aidez-nous !"
 
-#: scripts/comms_scenario_utility.lua:10031
+#: scripts/comms_scenario_utility.lua:10032
 msgctxt "ship-comms"
 msgid "We would rather not join you right now."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10032
+#: scripts/comms_scenario_utility.lua:10033
 msgctxt "ship-comms"
 msgid "We prefer not to be in your vicinity right now."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10039
+#: scripts/comms_scenario_utility.lua:10040
 msgctxt "ship-comms"
 msgid "How are you doing?"
-msgstr ""
-
-#: scripts/comms_scenario_utility.lua:10082
-#, lua-format
-msgctxt "ship-comms"
-msgid "We don't wish to dock at %s right now."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10083
 #, lua-format
 msgctxt "ship-comms"
-msgid "We'd rather not dock at %s right now."
+msgid "We don't wish to dock at %s right now."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10095
+#: scripts/comms_scenario_utility.lua:10084
+#, lua-format
 msgctxt "ship-comms"
-msgid "Service options"
+msgid "We'd rather not dock at %s right now."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10096
 msgctxt "ship-comms"
-msgid "Service choices"
+msgid "Service options"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10097
 msgctxt "ship-comms"
-msgid "Service selections"
+msgid "Service choices"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10098
 msgctxt "ship-comms"
+msgid "Service selections"
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10099
+msgctxt "ship-comms"
 msgid "Service possibilities"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10122
+#: scripts/comms_scenario_utility.lua:10123
 msgctxt "ship-comms"
 msgid "Repair ship system"
 msgstr "Réparer les systèmes du vaisseau"
 
-#: scripts/comms_scenario_utility.lua:10123
+#: scripts/comms_scenario_utility.lua:10124
 msgctxt "ship-comms"
 msgid "Fix ship system"
-msgstr ""
-
-#: scripts/comms_scenario_utility.lua:10124
-#, lua-format
-msgctxt "ship-comms"
-msgid "Fix system on %s"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10125
 #, lua-format
 msgctxt "ship-comms"
+msgid "Fix system on %s"
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10126
+#, lua-format
+msgctxt "ship-comms"
 msgid "Repair system on %s"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10129
+#: scripts/comms_scenario_utility.lua:10130
 msgctxt "ship-comms"
 msgid "What system would you like repaired?"
 msgstr "Quel système souhaitez-vous réparer ?"
 
-#: scripts/comms_scenario_utility.lua:10130
+#: scripts/comms_scenario_utility.lua:10131
 msgctxt "ship-comms"
 msgid "Which system would you like repaired?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10131
+#: scripts/comms_scenario_utility.lua:10132
 msgctxt "ship-comms"
 msgid "Which system should we fix?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10132
+#: scripts/comms_scenario_utility.lua:10133
 msgctxt "ship-comms"
 msgid "What system needs fixing?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10137
+#: scripts/comms_scenario_utility.lua:10138
 msgctxt "ship-comms"
 msgid "Repair probe launch system"
 msgstr "Réparer le système de lancement de sonde"
 
-#: scripts/comms_scenario_utility.lua:10138
+#: scripts/comms_scenario_utility.lua:10139
 msgctxt "ship-comms"
 msgid "Fix probe launch system"
-msgstr ""
-
-#: scripts/comms_scenario_utility.lua:10139
-#, lua-format
-msgctxt "ship-comms"
-msgid "Fix %s's probe launch system"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10140
 #, lua-format
 msgctxt "ship-comms"
+msgid "Fix %s's probe launch system"
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10141
+#, lua-format
+msgctxt "ship-comms"
 msgid "Repair %s's probe launch system"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10146
+#: scripts/comms_scenario_utility.lua:10147
 msgctxt "ship-comms"
 msgid "Your probe launch system has been repaired."
 msgstr "Votre système de lancement de sonde a été réparé."
 
-#: scripts/comms_scenario_utility.lua:10147
+#: scripts/comms_scenario_utility.lua:10148
 msgctxt "ship-comms"
 msgid "We fixed your probe launch system."
-msgstr ""
-
-#: scripts/comms_scenario_utility.lua:10148
-#, lua-format
-msgctxt "ship-comms"
-msgid "%s fixed your probe launch system."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10149
 #, lua-format
 msgctxt "ship-comms"
-msgid "%s fixed the probe launch system on %s."
+msgid "%s fixed your probe launch system."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10154
-#: scripts/comms_scenario_utility.lua:10183
-#: scripts/comms_scenario_utility.lua:10212
-#: scripts/comms_scenario_utility.lua:10241
-#: scripts/comms_scenario_utility.lua:10270
-#: scripts/comms_scenario_utility.lua:10326
-#: scripts/comms_scenario_utility.lua:10367
-#: scripts/comms_scenario_utility.lua:10408
+#: scripts/comms_scenario_utility.lua:10150
+#, lua-format
 msgctxt "ship-comms"
-msgid "You need to stay close if you want me to fix your ship."
+msgid "%s fixed the probe launch system on %s."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10155
@@ -11928,7 +11922,7 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:10368
 #: scripts/comms_scenario_utility.lua:10409
 msgctxt "ship-comms"
-msgid "Stay close if you want your ship repaired."
+msgid "You need to stay close if you want me to fix your ship."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10156
@@ -11939,9 +11933,8 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:10328
 #: scripts/comms_scenario_utility.lua:10369
 #: scripts/comms_scenario_utility.lua:10410
-#, lua-format
 msgctxt "ship-comms"
-msgid "%s must be within 5 units of %s for repairs to be completed."
+msgid "Stay close if you want your ship repaired."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10157
@@ -11954,357 +11947,370 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:10411
 #, lua-format
 msgctxt "ship-comms"
+msgid "%s must be within 5 units of %s for repairs to be completed."
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10158
+#: scripts/comms_scenario_utility.lua:10187
+#: scripts/comms_scenario_utility.lua:10216
+#: scripts/comms_scenario_utility.lua:10245
+#: scripts/comms_scenario_utility.lua:10274
+#: scripts/comms_scenario_utility.lua:10330
+#: scripts/comms_scenario_utility.lua:10371
+#: scripts/comms_scenario_utility.lua:10412
+#, lua-format
+msgctxt "ship-comms"
 msgid "%s must be within 5 units for repairs to be completed."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10166
+#: scripts/comms_scenario_utility.lua:10167
 msgctxt "ship-comms"
 msgid "Repair hacking system"
 msgstr "Réparer le système de piratage"
 
-#: scripts/comms_scenario_utility.lua:10167
+#: scripts/comms_scenario_utility.lua:10168
 msgctxt "ship-comms"
 msgid "Fix hacking system"
-msgstr ""
-
-#: scripts/comms_scenario_utility.lua:10168
-#, lua-format
-msgctxt "ship-comms"
-msgid "Fix %s's hacking system"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10169
 #, lua-format
 msgctxt "ship-comms"
+msgid "Fix %s's hacking system"
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10170
+#, lua-format
+msgctxt "ship-comms"
 msgid "Repair %s's hacking system"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10175
+#: scripts/comms_scenario_utility.lua:10176
 msgctxt "ship-comms"
 msgid "Your hacking system has been repaired."
 msgstr "Votre système de piratage a été réparé."
 
-#: scripts/comms_scenario_utility.lua:10176
+#: scripts/comms_scenario_utility.lua:10177
 msgctxt "ship-comms"
 msgid "We fixed your hacking system."
-msgstr ""
-
-#: scripts/comms_scenario_utility.lua:10177
-#, lua-format
-msgctxt "ship-comms"
-msgid "%s fixed your hacking system."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10178
 #, lua-format
 msgctxt "ship-comms"
-msgid "%s fixed the hacking system on %s."
+msgid "%s fixed your hacking system."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10195
+#: scripts/comms_scenario_utility.lua:10179
+#, lua-format
 msgctxt "ship-comms"
-msgid "Repair scanning system"
+msgid "%s fixed the hacking system on %s."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10196
 msgctxt "ship-comms"
-msgid "Fix scanning system"
+msgid "Repair scanning system"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10197
-#, lua-format
 msgctxt "ship-comms"
-msgid "Fix %s's scanning system"
+msgid "Fix scanning system"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10198
 #, lua-format
 msgctxt "ship-comms"
-msgid "Repair %s's scanning system"
+msgid "Fix %s's scanning system"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10204
+#: scripts/comms_scenario_utility.lua:10199
+#, lua-format
 msgctxt "ship-comms"
-msgid "Your scanning system has been repaired."
+msgid "Repair %s's scanning system"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10205
 msgctxt "ship-comms"
-msgid "We fixed your scanning system."
+msgid "Your scanning system has been repaired."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10206
-#, lua-format
 msgctxt "ship-comms"
-msgid "%s fixed your scanning system."
+msgid "We fixed your scanning system."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10207
 #, lua-format
 msgctxt "ship-comms"
+msgid "%s fixed your scanning system."
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10208
+#, lua-format
+msgctxt "ship-comms"
 msgid "%s fixed the scanning system on %s."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10224
+#: scripts/comms_scenario_utility.lua:10225
 #, fuzzy
 msgctxt "ship-comms"
 msgid "Repair combat maneuver system"
 msgstr "Réparer le système de manœuvre de combat"
 
-#: scripts/comms_scenario_utility.lua:10225
+#: scripts/comms_scenario_utility.lua:10226
 msgctxt "ship-comms"
 msgid "Fix combat maneuver system"
-msgstr ""
-
-#: scripts/comms_scenario_utility.lua:10226
-#, lua-format
-msgctxt "ship-comms"
-msgid "Fix %s's combat maneuver system"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10227
 #, lua-format
 msgctxt "ship-comms"
-msgid "Repair %s's combat maneuver system"
+msgid "Fix %s's combat maneuver system"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10233
+#: scripts/comms_scenario_utility.lua:10228
+#, lua-format
 msgctxt "ship-comms"
-msgid "Your combat maneuver system has been repaired."
+msgid "Repair %s's combat maneuver system"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10234
 msgctxt "ship-comms"
-msgid "We fixed your combat maneuver system."
+msgid "Your combat maneuver system has been repaired."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10235
-#, lua-format
 msgctxt "ship-comms"
-msgid "%s fixed your combat maneuver system."
+msgid "We fixed your combat maneuver system."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10236
 #, lua-format
 msgctxt "ship-comms"
+msgid "%s fixed your combat maneuver system."
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10237
+#, lua-format
+msgctxt "ship-comms"
 msgid "%s fixed the combat maneuver system on %s."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10253
+#: scripts/comms_scenario_utility.lua:10254
 msgctxt "ship-comms"
 msgid "Repair self destruct system"
 msgstr "Réparer le système d'autodestruction"
 
-#: scripts/comms_scenario_utility.lua:10254
+#: scripts/comms_scenario_utility.lua:10255
 msgctxt "ship-comms"
 msgid "Fix self destruct system"
-msgstr ""
-
-#: scripts/comms_scenario_utility.lua:10255
-#, lua-format
-msgctxt "ship-comms"
-msgid "Fix %s's self destruct system"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10256
 #, lua-format
 msgctxt "ship-comms"
+msgid "Fix %s's self destruct system"
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10257
+#, lua-format
+msgctxt "ship-comms"
 msgid "Repair %s's self destruct system"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10262
+#: scripts/comms_scenario_utility.lua:10263
 msgctxt "ship-comms"
 msgid "Your self destruct system has been repaired."
 msgstr "Votre système d'autodestruction a été réparé."
 
-#: scripts/comms_scenario_utility.lua:10263
+#: scripts/comms_scenario_utility.lua:10264
 msgctxt "ship-comms"
 msgid "We fixed your self destruct system."
-msgstr ""
-
-#: scripts/comms_scenario_utility.lua:10264
-#, lua-format
-msgctxt "ship-comms"
-msgid "%s fixed your self destruct system."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10265
 #, lua-format
 msgctxt "ship-comms"
-msgid "%s fixed the self destruct system on %s."
+msgid "%s fixed your self destruct system."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10297
+#: scripts/comms_scenario_utility.lua:10266
 #, lua-format
 msgctxt "ship-comms"
-msgid "Full hull repair (%i reputation)"
+msgid "%s fixed the self destruct system on %s."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10298
 #, lua-format
 msgctxt "ship-comms"
-msgid "Fully repair hull (%i reputation)"
+msgid "Full hull repair (%i reputation)"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10299
 #, lua-format
 msgctxt "ship-comms"
-msgid "Fully repair %s's hull (%i reputation)"
+msgid "Fully repair hull (%i reputation)"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10300
 #, lua-format
 msgctxt "ship-comms"
-msgid "Spend %i reputation to fully repair hull on %s"
+msgid "Fully repair %s's hull (%i reputation)"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10307
+#: scripts/comms_scenario_utility.lua:10301
+#, lua-format
 msgctxt "ship-comms"
-msgid "All fixed up and ready to go."
+msgid "Spend %i reputation to fully repair hull on %s"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10308
 msgctxt "ship-comms"
-msgid "Hull fully repaired."
+msgid "All fixed up and ready to go."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10309
 msgctxt "ship-comms"
-msgid "Your hull has been fully repaired."
+msgid "Hull fully repaired."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10310
+msgctxt "ship-comms"
+msgid "Your hull has been fully repaired."
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10311
 #, lua-format
 msgctxt "ship-comms"
 msgid "The hull on %s has been fully repaired"
-msgstr ""
-
-#: scripts/comms_scenario_utility.lua:10338
-#: scripts/comms_scenario_utility.lua:10379
-#, lua-format
-msgctxt "ship-comms"
-msgid "Add %i%% to hull (%i reputation)"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10339
 #: scripts/comms_scenario_utility.lua:10380
 #, lua-format
 msgctxt "ship-comms"
-msgid "Fix %i%% of damage to hull (%i reputation)"
+msgid "Add %i%% to hull (%i reputation)"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10340
 #: scripts/comms_scenario_utility.lua:10381
 #, lua-format
 msgctxt "ship-comms"
-msgid "Repair %i%% of damage to hull (%i reputation)"
+msgid "Fix %i%% of damage to hull (%i reputation)"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10341
 #: scripts/comms_scenario_utility.lua:10382
 #, lua-format
 msgctxt "ship-comms"
-msgid "Repair %i%% of damage to %s's hull (%i reputation)"
+msgid "Repair %i%% of damage to hull (%i reputation)"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10348
-#: scripts/comms_scenario_utility.lua:10389
+#: scripts/comms_scenario_utility.lua:10342
+#: scripts/comms_scenario_utility.lua:10383
+#, lua-format
 msgctxt "ship-comms"
-msgid "Repairs completed as requested"
+msgid "Repair %i%% of damage to %s's hull (%i reputation)"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10349
 #: scripts/comms_scenario_utility.lua:10390
 msgctxt "ship-comms"
-msgid "Hull repairs completed as requested"
+msgid "Repairs completed as requested"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10350
 #: scripts/comms_scenario_utility.lua:10391
-#, lua-format
 msgctxt "ship-comms"
-msgid "%i%% of damage to hull fixed as requested"
+msgid "Hull repairs completed as requested"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10351
 #: scripts/comms_scenario_utility.lua:10392
 #, lua-format
 msgctxt "ship-comms"
+msgid "%i%% of damage to hull fixed as requested"
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10352
+#: scripts/comms_scenario_utility.lua:10393
+#, lua-format
+msgctxt "ship-comms"
 msgid "Hull repairs made to %s as requested"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10447
+#: scripts/comms_scenario_utility.lua:10448
 #, fuzzy
 msgctxt "ship-comms"
 msgid "Restock ordnance"
 msgstr "Réapprovisionner en munitions"
 
-#: scripts/comms_scenario_utility.lua:10448
+#: scripts/comms_scenario_utility.lua:10449
 msgctxt "ship-comms"
 msgid "Replenish ordnance"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10449
+#: scripts/comms_scenario_utility.lua:10450
 msgctxt "ship-comms"
 msgid "Get more ordnance"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10450
+#: scripts/comms_scenario_utility.lua:10451
 msgctxt "ship-comms"
 msgid "Resupply ordnance"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10454
+#: scripts/comms_scenario_utility.lua:10455
 msgctxt "ship-comms"
 msgid "What kind of ordnance?"
 msgstr "Quel genre de munitions ?"
 
-#: scripts/comms_scenario_utility.lua:10455
+#: scripts/comms_scenario_utility.lua:10456
 msgctxt "ship-comms"
 msgid "What type of ordnance?"
 msgstr "Quel type de munitions ?"
 
-#: scripts/comms_scenario_utility.lua:10456
+#: scripts/comms_scenario_utility.lua:10457
 msgctxt "ship-comms"
 msgid "Ordnance type?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10457
+#: scripts/comms_scenario_utility.lua:10458
 msgctxt "ship-comms"
 msgid "What kind of ordnance do you want?"
 msgstr "Quel genre de munitions voulez-vous ?"
 
-#: scripts/comms_scenario_utility.lua:10462
+#: scripts/comms_scenario_utility.lua:10463
 #, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid "%s (%i reputation each)"
 msgstr "%s (%i rép l'unité)"
 
-#: scripts/comms_scenario_utility.lua:10469
+#: scripts/comms_scenario_utility.lua:10470
 #, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid "Restocked your %s type ordnance."
 msgstr "Vos munitions de type %s sont réapprovisionnées."
 
-#: scripts/comms_scenario_utility.lua:10470
+#: scripts/comms_scenario_utility.lua:10471
 #, lua-format
 msgctxt "ship-comms"
 msgid "Replenished your %s type ordnance."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10471
+#: scripts/comms_scenario_utility.lua:10472
 #, lua-format
 msgctxt "ship-comms"
 msgid "Resupplied your %s type ordnance."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10472
+#: scripts/comms_scenario_utility.lua:10473
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s restocked your %s type ordnance."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10478
+#: scripts/comms_scenario_utility.lua:10479
 #, lua-format
 msgctxt "needRep-comms"
 msgid ""
@@ -12312,7 +12318,7 @@ msgid ""
 "You need %i and you only have %i. How would you like to proceed?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10479
+#: scripts/comms_scenario_utility.lua:10480
 #, lua-format
 msgctxt "needRep-comms"
 msgid ""
@@ -12320,7 +12326,7 @@ msgid ""
 "You need %i but you only have %i. What do you want to do?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10480
+#: scripts/comms_scenario_utility.lua:10481
 #, lua-format
 msgctxt "needRep-comms"
 msgid ""
@@ -12328,7 +12334,7 @@ msgid ""
 "%i but only have %i. What would you like to do?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10481
+#: scripts/comms_scenario_utility.lua:10482
 #, lua-format
 msgctxt "needRep-comms"
 msgid ""
@@ -12337,28 +12343,20 @@ msgid ""
 "situation?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10485
-#: scripts/comms_scenario_utility.lua:10628
-#: scripts/comms_scenario_utility.lua:10718
+#: scripts/comms_scenario_utility.lua:10486
+#: scripts/comms_scenario_utility.lua:10629
+#: scripts/comms_scenario_utility.lua:10719
 #, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid "Get one (%i reputation)"
 msgstr "En acheter un (%i rép)"
-
-#: scripts/comms_scenario_utility.lua:10486
-#: scripts/comms_scenario_utility.lua:10629
-#: scripts/comms_scenario_utility.lua:10719
-#, lua-format
-msgctxt "ship-comms"
-msgid "Get just one (%i reputation)"
-msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10487
 #: scripts/comms_scenario_utility.lua:10630
 #: scripts/comms_scenario_utility.lua:10720
 #, lua-format
 msgctxt "ship-comms"
-msgid "Get one %s (%i reputation)"
+msgid "Get just one (%i reputation)"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10488
@@ -12366,52 +12364,49 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:10721
 #, lua-format
 msgctxt "ship-comms"
+msgid "Get one %s (%i reputation)"
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10489
+#: scripts/comms_scenario_utility.lua:10632
+#: scripts/comms_scenario_utility.lua:10722
+#, lua-format
+msgctxt "ship-comms"
 msgid "Get just one %s (%i reputation)"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10496
-#: scripts/comms_scenario_utility.lua:10611
-#: scripts/comms_scenario_utility.lua:10639
-#: scripts/comms_scenario_utility.lua:10729
+#: scripts/comms_scenario_utility.lua:10497
+#: scripts/comms_scenario_utility.lua:10612
+#: scripts/comms_scenario_utility.lua:10640
+#: scripts/comms_scenario_utility.lua:10730
 #, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid "One %s provided."
 msgstr "Un %s fourni."
-
-#: scripts/comms_scenario_utility.lua:10497
-#: scripts/comms_scenario_utility.lua:10640
-#: scripts/comms_scenario_utility.lua:10730
-#, lua-format
-msgctxt "ship-comms"
-msgid "One %s was provided."
-msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10498
 #: scripts/comms_scenario_utility.lua:10641
 #: scripts/comms_scenario_utility.lua:10731
 #, lua-format
 msgctxt "ship-comms"
-msgid "%s provided one %s."
+msgid "One %s was provided."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10499
 #: scripts/comms_scenario_utility.lua:10642
 #: scripts/comms_scenario_utility.lua:10732
+#, lua-format
+msgctxt "ship-comms"
+msgid "%s provided one %s."
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10500
+#: scripts/comms_scenario_utility.lua:10643
+#: scripts/comms_scenario_utility.lua:10733
 #, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid "One %s provided to %s."
 msgstr "Un %s fourni à %s."
-
-#: scripts/comms_scenario_utility.lua:10515
-#: scripts/comms_scenario_utility.lua:10562
-#: scripts/comms_scenario_utility.lua:10658
-#: scripts/comms_scenario_utility.lua:10705
-#: scripts/comms_scenario_utility.lua:10748
-#: scripts/comms_scenario_utility.lua:10760
-msgctxt "ship-comms"
-msgid ""
-"You need to stay close if you want me to replenish your ship's ordnance."
-msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10516
 #: scripts/comms_scenario_utility.lua:10563
@@ -12420,7 +12415,8 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:10749
 #: scripts/comms_scenario_utility.lua:10761
 msgctxt "ship-comms"
-msgid "Stay close if you want your ship ordnance restocked."
+msgid ""
+"You need to stay close if you want me to replenish your ship's ordnance."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10517
@@ -12429,9 +12425,8 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:10707
 #: scripts/comms_scenario_utility.lua:10750
 #: scripts/comms_scenario_utility.lua:10762
-#, lua-format
 msgctxt "ship-comms"
-msgid "%s must be within 5 units of %s for restocking to be completed."
+msgid "Stay close if you want your ship ordnance restocked."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10518
@@ -12442,59 +12437,62 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:10763
 #, lua-format
 msgctxt "ship-comms"
+msgid "%s must be within 5 units of %s for restocking to be completed."
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10519
+#: scripts/comms_scenario_utility.lua:10566
+#: scripts/comms_scenario_utility.lua:10662
+#: scripts/comms_scenario_utility.lua:10709
+#: scripts/comms_scenario_utility.lua:10752
+#: scripts/comms_scenario_utility.lua:10764
+#, lua-format
+msgctxt "ship-comms"
 msgid "%s must be within 5 units for resupply to be completed."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10532
-#: scripts/comms_scenario_utility.lua:10675
+#: scripts/comms_scenario_utility.lua:10533
+#: scripts/comms_scenario_utility.lua:10676
 #, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid "Get %i (%i reputation)"
 msgstr "Acheter %i (%i rép)"
 
-#: scripts/comms_scenario_utility.lua:10533
-#: scripts/comms_scenario_utility.lua:10676
-#, lua-format
-msgctxt "ship-comms"
-msgid "Restock %i (%i reputation)"
-msgstr ""
-
 #: scripts/comms_scenario_utility.lua:10534
 #: scripts/comms_scenario_utility.lua:10677
 #, lua-format
 msgctxt "ship-comms"
-msgid "Resupply %i (%i reputation)"
+msgid "Restock %i (%i reputation)"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10535
 #: scripts/comms_scenario_utility.lua:10678
 #, lua-format
 msgctxt "ship-comms"
-msgid "Replenish %i (%i reputation)"
+msgid "Resupply %i (%i reputation)"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10543
-#: scripts/comms_scenario_utility.lua:10603
-#: scripts/comms_scenario_utility.lua:10686
-#, fuzzy, lua-format
+#: scripts/comms_scenario_utility.lua:10536
+#: scripts/comms_scenario_utility.lua:10679
+#, lua-format
 msgctxt "ship-comms"
-msgid "%i %ss provided."
-msgstr "%i %ss fourni"
+msgid "Replenish %i (%i reputation)"
+msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10544
 #: scripts/comms_scenario_utility.lua:10604
 #: scripts/comms_scenario_utility.lua:10687
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "ship-comms"
-msgid "%i %ss received."
-msgstr ""
+msgid "%i %ss provided."
+msgstr "%i %ss fourni"
 
 #: scripts/comms_scenario_utility.lua:10545
 #: scripts/comms_scenario_utility.lua:10605
 #: scripts/comms_scenario_utility.lua:10688
 #, lua-format
 msgctxt "ship-comms"
-msgid "%s provided %i %ss."
+msgid "%i %ss received."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10546
@@ -12502,10 +12500,18 @@ msgstr ""
 #: scripts/comms_scenario_utility.lua:10689
 #, lua-format
 msgctxt "ship-comms"
+msgid "%s provided %i %ss."
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10547
+#: scripts/comms_scenario_utility.lua:10607
+#: scripts/comms_scenario_utility.lua:10690
+#, lua-format
+msgctxt "ship-comms"
 msgid "%s provided %i %ss to %s."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10586
+#: scripts/comms_scenario_utility.lua:10587
 #, fuzzy, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -12515,7 +12521,7 @@ msgstr ""
 "Nous n'avons pas assez de munitions de type %s pour vous réapprovisionner "
 "entièrement. Que voulez-vous faire ?"
 
-#: scripts/comms_scenario_utility.lua:10587
+#: scripts/comms_scenario_utility.lua:10588
 #, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -12523,7 +12529,7 @@ msgid ""
 "restock you. What do you want to do?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10588
+#: scripts/comms_scenario_utility.lua:10589
 #, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -12531,7 +12537,7 @@ msgid ""
 "like to do?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10589
+#: scripts/comms_scenario_utility.lua:10590
 #, lua-format
 msgctxt "ship-comms"
 msgid ""
@@ -12539,47 +12545,47 @@ msgid ""
 "do?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10593
+#: scripts/comms_scenario_utility.lua:10594
 #, fuzzy
 msgctxt "ship-comms"
 msgid "We'll take all you've got"
 msgstr "Nous prendrons tout ce qu'il vous reste"
 
-#: scripts/comms_scenario_utility.lua:10594
+#: scripts/comms_scenario_utility.lua:10595
 msgctxt "ship-comms"
 msgid "We'll take everything you've got"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10595
+#: scripts/comms_scenario_utility.lua:10596
 msgctxt "ship-comms"
 msgid "We'll take whatever you can provide"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10596
+#: scripts/comms_scenario_utility.lua:10597
 #, lua-format
 msgctxt "ship-comms"
 msgid "We'll take all the %ss you've got"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10612
+#: scripts/comms_scenario_utility.lua:10613
 #, lua-format
 msgctxt "ship-comms"
 msgid "One %s received."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10613
+#: scripts/comms_scenario_utility.lua:10614
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s provided one %s received."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10614
+#: scripts/comms_scenario_utility.lua:10615
 #, lua-format
 msgctxt "ship-comms"
 msgid "%s provided one %s to %s."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10621
+#: scripts/comms_scenario_utility.lua:10622
 #, lua-format
 msgctxt "needRep-comms"
 msgid ""
@@ -12587,7 +12593,7 @@ msgid ""
 "need %i and you only have %i. How would you like to proceed?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10622
+#: scripts/comms_scenario_utility.lua:10623
 #, lua-format
 msgctxt "needRep-comms"
 msgid ""
@@ -12595,7 +12601,7 @@ msgid ""
 "need %i but you only have %i. What do you want to do?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10623
+#: scripts/comms_scenario_utility.lua:10624
 #, lua-format
 msgctxt "needRep-comms"
 msgid ""
@@ -12603,7 +12609,7 @@ msgid ""
 "but only have %i. What would you like to do?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10624
+#: scripts/comms_scenario_utility.lua:10625
 #, lua-format
 msgctxt "needRep-comms"
 msgid ""
@@ -12612,171 +12618,171 @@ msgid ""
 "situation?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10780
+#: scripts/comms_scenario_utility.lua:10781
 msgctxt "ship-comms"
 msgid "Restock scan probes (5 reputation)"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10781
+#: scripts/comms_scenario_utility.lua:10782
 msgctxt "ship-comms"
 msgid "Resupply scan probes (5 reputation)"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10782
+#: scripts/comms_scenario_utility.lua:10783
 msgctxt "ship-comms"
 msgid "Replenish scan probes (5 reputation)"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10783
+#: scripts/comms_scenario_utility.lua:10784
 #, lua-format
 msgctxt "ship-comms"
 msgid "Restock scan probes for %s (5 reputation)"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10790
+#: scripts/comms_scenario_utility.lua:10791
 msgctxt "ship-comms"
 msgid "I replenished your probes for you."
 msgstr "Nous avons rechargé votre stock de sondes."
 
-#: scripts/comms_scenario_utility.lua:10791
+#: scripts/comms_scenario_utility.lua:10792
 msgctxt "ship-comms"
 msgid "I restocked your probes for you."
-msgstr ""
-
-#: scripts/comms_scenario_utility.lua:10792
-#, lua-format
-msgctxt "ship-comms"
-msgid "Probes on %s have been restocked."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10793
 #, lua-format
 msgctxt "ship-comms"
-msgid "%s replenished the probes on %s."
+msgid "Probes on %s have been restocked."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10809
+#: scripts/comms_scenario_utility.lua:10794
+#, lua-format
 msgctxt "ship-comms"
-msgid "You need to stay close if you want me to replenish your ship's probes."
+msgid "%s replenished the probes on %s."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10810
 msgctxt "ship-comms"
-msgid "Stay close if you want your ship probe supply restocked."
+msgid "You need to stay close if you want me to replenish your ship's probes."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10811
-#, lua-format
 msgctxt "ship-comms"
-msgid "%s must be within 5 units of %s for probe restocking to be completed."
+msgid "Stay close if you want your ship probe supply restocked."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10812
 #, lua-format
 msgctxt "ship-comms"
-msgid "%s must be within 5 units for probe resupply to be completed."
+msgid "%s must be within 5 units of %s for probe restocking to be completed."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10829
+#: scripts/comms_scenario_utility.lua:10813
 #, lua-format
 msgctxt "ship-comms"
-msgid "Quick charge the main batteries (%i reputation)"
+msgid "%s must be within 5 units for probe resupply to be completed."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10830
 #, lua-format
 msgctxt "ship-comms"
-msgid "Fast charge the main batteries (%i reputation)"
+msgid "Quick charge the main batteries (%i reputation)"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10831
 #, lua-format
 msgctxt "ship-comms"
-msgid "Quickly restore full power to the main batteries (%i reputation)"
+msgid "Fast charge the main batteries (%i reputation)"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10832
 #, lua-format
 msgctxt "ship-comms"
-msgid "Fast full charge to the main batteries (%i reputation)"
+msgid "Quickly restore full power to the main batteries (%i reputation)"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10842
+#: scripts/comms_scenario_utility.lua:10833
+#, lua-format
 msgctxt "ship-comms"
-msgid "Your batteries have been charged."
+msgid "Fast full charge to the main batteries (%i reputation)"
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10843
 msgctxt "ship-comms"
-msgid "Your batteries have been fully charged."
+msgid "Your batteries have been charged."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10844
-#, lua-format
 msgctxt "ship-comms"
-msgid "%s's batteries have been charged."
+msgid "Your batteries have been fully charged."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10845
 #, lua-format
 msgctxt "ship-comms"
-msgid "The batteries on %s were charged by %s."
+msgid "%s's batteries have been charged."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10861
+#: scripts/comms_scenario_utility.lua:10846
+#, lua-format
 msgctxt "ship-comms"
-msgid "You need to stay close if you want me to charge your ship's batteries."
+msgid "The batteries on %s were charged by %s."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10862
 msgctxt "ship-comms"
-msgid "Stay close if you want your ship batteries recharged."
+msgid "You need to stay close if you want me to charge your ship's batteries."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10863
-#, lua-format
 msgctxt "ship-comms"
-msgid "%s must be within 5 units of %s for battery charging to be completed."
+msgid "Stay close if you want your ship batteries recharged."
 msgstr ""
 
 #: scripts/comms_scenario_utility.lua:10864
 #, lua-format
 msgctxt "ship-comms"
+msgid "%s must be within 5 units of %s for battery charging to be completed."
+msgstr ""
+
+#: scripts/comms_scenario_utility.lua:10865
+#, lua-format
+msgctxt "ship-comms"
 msgid "%s must be within 5 units for battery charging to be completed."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10872
+#: scripts/comms_scenario_utility.lua:10873
 msgctxt "ship-comms"
 msgid "How can I help you get your ship in good running order?"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10874
+#: scripts/comms_scenario_utility.lua:10875
 msgctxt "ship-comms"
 msgid "There's nothing on your ship that I can help you fix. Sorry."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10953
+#: scripts/comms_scenario_utility.lua:10954
 msgctxt "shipLog"
 msgid "Expedited docking services complete."
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:10963
+#: scripts/comms_scenario_utility.lua:10964
 #, lua-format
 msgctxt "tabHelm"
 msgid "Dock@%s %s"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11053
+#: scripts/comms_scenario_utility.lua:11054
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
 msgstr "Inventaire"
 
-#: scripts/comms_scenario_utility.lua:11060
+#: scripts/comms_scenario_utility.lua:11061
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
 msgstr "Inventaire"
 
-#: scripts/comms_scenario_utility.lua:11078
+#: scripts/comms_scenario_utility.lua:11079
 #, fuzzy, lua-format
 msgctxt "msgRelay"
 msgid "%s Current cargo:"
@@ -12784,7 +12790,7 @@ msgstr ""
 "Notre vaisseau (%s) :\n"
 "- Marchandises à bord : (quantité)"
 
-#: scripts/comms_scenario_utility.lua:11087
+#: scripts/comms_scenario_utility.lua:11088
 #, fuzzy, lua-format
 msgctxt "msgRelay"
 msgid ""
@@ -12794,7 +12800,7 @@ msgstr ""
 "%s\n"
 "     Vide"
 
-#: scripts/comms_scenario_utility.lua:11089
+#: scripts/comms_scenario_utility.lua:11090
 #, fuzzy, lua-format
 msgctxt "msgRelay"
 msgid ""
@@ -12804,45 +12810,45 @@ msgstr ""
 "%s\n"
 "Slots de stockage disponibles : %i"
 
-#: scripts/comms_scenario_utility.lua:11094
+#: scripts/comms_scenario_utility.lua:11095
 #, lua-format
 msgctxt "tabEngineer"
 msgid "Hull:%.1f/%i"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11114
+#: scripts/comms_scenario_utility.lua:11115
 #, lua-format
 msgctxt "tabEngineer"
 msgid "F:%.1f/%i R:%.1f/%i"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11116
+#: scripts/comms_scenario_utility.lua:11117
 #, lua-format
 msgctxt "tabEngineer"
 msgid "Shield:%.1f/%i"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11149
+#: scripts/comms_scenario_utility.lua:11150
 msgctxt "buttonHelm"
 msgid "Waypoint Distance"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11154
+#: scripts/comms_scenario_utility.lua:11155
 msgctxt "buttonTactical"
 msgid "Waypoint Distance"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11171
+#: scripts/comms_scenario_utility.lua:11172
 msgctxt "msgHelms"
 msgid "Waypoint distance sequence report:"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11172
+#: scripts/comms_scenario_utility.lua:11173
 msgctxt "msgHelms"
 msgid "Waypoint distance node report:"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11179
+#: scripts/comms_scenario_utility.lua:11180
 #, lua-format
 msgctxt "msgHelms"
 msgid ""
@@ -12850,7 +12856,7 @@ msgid ""
 "    From current to waypoint %i: %.1f Units"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11181
+#: scripts/comms_scenario_utility.lua:11182
 #, lua-format
 msgctxt "msgHelms"
 msgid ""
@@ -12858,7 +12864,7 @@ msgid ""
 "    From waypoint %i to waypoint %i: %.1f Units"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11183
+#: scripts/comms_scenario_utility.lua:11184
 #, lua-format
 msgctxt "msgHelms"
 msgid ""
@@ -12866,94 +12872,54 @@ msgid ""
 "    To waypoint %i: %.1f Units (Bearing: %.1f)"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11258
+#: scripts/comms_scenario_utility.lua:11259
 msgctxt "buttonEngineer"
 msgid "Hide max health"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11272
+#: scripts/comms_scenario_utility.lua:11273
 msgctxt "buttonEngineer+"
 msgid "Hide max health"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11319
+#: scripts/comms_scenario_utility.lua:11320
 msgctxt "buttonEngineer"
 msgid "Show max health"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11327
+#: scripts/comms_scenario_utility.lua:11328
 msgctxt "buttonEngineer+"
 msgid "Show max health"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11445
+#: scripts/comms_scenario_utility.lua:11446
 msgctxt "buttonEngineer"
 msgid "Boost Sensors"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11450
+#: scripts/comms_scenario_utility.lua:11451
 msgctxt "buttonEngineer+"
 msgid "Boost Sensors"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11459
+#: scripts/comms_scenario_utility.lua:11460
 #, lua-format
 msgctxt "buttonEngineer"
 msgid "Sensor Boost %i"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11467
+#: scripts/comms_scenario_utility.lua:11468
 #, lua-format
 msgctxt "buttonEngineer+"
 msgid "Sensor Boost %i"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11476
+#: scripts/comms_scenario_utility.lua:11477
 msgctxt "buttonEngineer"
 msgid "Stop Sensor Boost"
 msgstr ""
 
-#: scripts/comms_scenario_utility.lua:11481
+#: scripts/comms_scenario_utility.lua:11482
 msgctxt "buttonEngineer+"
 msgid "Stop Sensor Boost"
 msgstr ""
-
-#~ msgctxt "shipAssist-comms"
-#~ msgid "Hull: "
-#~ msgstr "Coque : "
-
-#~ msgctxt "shipAssist-comms"
-#~ msgid "Shield "
-#~ msgstr "Boucliers "
-
-# Scenario name
-#~ msgid "Empty space"
-#~ msgstr "Espace vide"
-
-# Scenario description
-#~ msgid ""
-#~ "Empty scenario, no enemies, no friendlies. Can be used by a GM player to "
-#~ "setup a scenario in the GM screen. The F5 key can be used to copy the "
-#~ "current layout to the clipboard for use in scenario scripts."
-#~ msgstr ""
-#~ "Scénario vide.\n"
-#~ "\n"
-#~ "Aucun ennemis ni alliés.\n"
-#~ "Peut être utilisé par un joueur MJ pour configurer un scénario à partir "
-#~ "de l'écran MJ.\n"
-#~ "\n"
-#~ "La touche F5 peut être utilisée pour copier la mise en page actuelle dans "
-#~ "le presse-papiers pour une utilisation dans des scripts de scénario au "
-#~ "format lua."
-
-#~ msgctxt "buttonGM"
-#~ msgid "Random asteroid field"
-#~ msgstr "Champ astér. aléatoire"
-
-#~ msgctxt "buttonGM"
-#~ msgid "Random nebula field"
-#~ msgstr "Champ nébul. aléatoire"
-
-#~ msgctxt "buttonGM"
-#~ msgid "Delete unselected"
-#~ msgstr "Supprime non sélect."

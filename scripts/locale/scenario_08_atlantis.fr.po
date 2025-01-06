@@ -718,7 +718,3 @@ msgstr ""
 msgctxt "shipEnemy-incCall"
 msgid "Surrender yourself, human intruder."
 msgstr "Rendez-vous, intrus humain."
-
-#~ msgctxt "artifact-comms"
-#~ msgid "Then continue looking for it."
-#~ msgstr "Continuez ensuite à le chercher."
