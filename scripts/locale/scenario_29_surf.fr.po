@@ -540,10 +540,9 @@ msgid "Wave %i"
 msgstr "Vague n°%i en cours"
 
 #: scripts/scenario_29_surf.lua:1006
-#, fuzzy
 msgctxt "shipLog"
 msgid "Defense platform self destruct activated."
-msgstr "Autodestruction de la plateforme de défense activée."
+msgstr "Autodestruction des plateformes de défense activée."
 
 #: scripts/scenario_29_surf.lua:1650
 msgctxt "msgScience"

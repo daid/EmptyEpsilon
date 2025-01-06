@@ -1139,11 +1139,15 @@ msgid "Hello, may I help you?"
 msgstr "Bonjour, puis-je vous aider ?"
 
 #: scripts/scenario_44_outpost.lua:3198
+#, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
-msgstr "Bienvenue dans notre charmante petite station."
+msgstr ""
+"Bienvenue sur notre charmante petite station.\n"
+"Que pouvons-nous faire pour vous ?"
 
 #: scripts/scenario_44_outpost.lua:3201
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -1726,7 +1730,7 @@ msgid ""
 "May overcharge jump drive"
 msgstr ""
 "%s\n"
-"- Peut booster la téléportation (rechargement)."
+"- Boost du délai de recharge de la téléportation."
 
 #: scripts/scenario_44_outpost.lua:3812 scripts/scenario_44_outpost.lua:4926
 #, lua-format
@@ -1736,7 +1740,7 @@ msgid ""
 "May repair probe launch system"
 msgstr ""
 "%s\n"
-"- Peut réparer le système de lancement de sonde."
+"- Réparation du système de lancement de sonde."
 
 #: scripts/scenario_44_outpost.lua:3815 scripts/scenario_44_outpost.lua:4929
 #, lua-format
@@ -1746,7 +1750,7 @@ msgid ""
 "May repair hacking system"
 msgstr ""
 "%s\n"
-"- Peut réparer le système de piratage."
+"- Réparation du système de piratage."
 
 #: scripts/scenario_44_outpost.lua:3818 scripts/scenario_44_outpost.lua:4932
 #, lua-format
@@ -1756,7 +1760,7 @@ msgid ""
 "May repair scanners"
 msgstr ""
 "%s\n"
-"- Peut réparer les scanners."
+"- Réparation des scanners."
 
 #: scripts/scenario_44_outpost.lua:3821 scripts/scenario_44_outpost.lua:4935
 #, lua-format
@@ -1766,7 +1770,7 @@ msgid ""
 "May repair combat maneuver"
 msgstr ""
 "%s\n"
-"- Peut réparer la manœuvre de combat."
+"- Réparation de la manœuvre de combat."
 
 #: scripts/scenario_44_outpost.lua:3824 scripts/scenario_44_outpost.lua:4938
 #, lua-format
@@ -1776,19 +1780,22 @@ msgid ""
 "May repair self destruct system"
 msgstr ""
 "%s\n"
-"- Peut réparer le système d'autodestruction."
+"- Réparation du système d'autodestruction."
 
 #: scripts/scenario_44_outpost.lua:3836
 msgctxt "stationServices-comms"
 msgid "Overcharge Jump Drive (10 Rep)"
-msgstr "Booster la téléportation (10 rép)"
+msgstr "Booster le délai de recharge de la téléportation (10 rép)"
 
 #: scripts/scenario_44_outpost.lua:3843
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
 msgstr ""
-"Le délai de recharge de votre moteur de téléportation a été boosté à %ik."
+"...Après quelques instants.\n"
+"\n"
+"C'est fait. Votre moteur de téléportation a été boosté à %ik. Le temps de "
+"recharge sera plus court."
 
 #: scripts/scenario_44_outpost.lua:3869
 msgctxt "stationServices-comms"
@@ -2717,6 +2724,7 @@ msgstr ""
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_44_outpost.lua:4663
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -4381,7 +4389,6 @@ msgid ""
 "We are on an important mission."
 msgstr ""
 "Désolé, nous n'avons pas le temps de discuter avec vous.\n"
-"\n"
 "Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_44_outpost.lua:6757
@@ -4391,7 +4398,6 @@ msgid ""
 "Good day."
 msgstr ""
 "Nous n'avons rien pour vous.\n"
-"\n"
 "Bonne journée."
 
 #: scripts/scenario_44_outpost.lua:6787

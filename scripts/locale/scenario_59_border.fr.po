@@ -3707,9 +3707,12 @@ msgstr "Bonjour, puis-je vous aider ?"
 #, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
-msgstr "Bienvenue dans notre charmante petite station."
+msgstr ""
+"Bienvenue sur notre charmante petite station.\n"
+"Que pouvons-nous faire pour vous ?"
 
 #: scripts/scenario_59_border.lua:7340
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -3813,13 +3816,13 @@ msgid "Docking services status"
 msgstr "État des services d'accueil"
 
 #: scripts/scenario_59_border.lua:7428 scripts/scenario_59_border.lua:8808
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s docking services status:"
 msgstr "État des services d'accueil de la station %s :\n"
 
 #: scripts/scenario_59_border.lua:7430 scripts/scenario_59_border.lua:8810
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -3829,7 +3832,6 @@ msgstr ""
 "- Réapprovisionnement des sondes."
 
 #: scripts/scenario_59_border.lua:7434 scripts/scenario_59_border.lua:8814
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
 msgstr ""
@@ -3837,14 +3839,12 @@ msgstr ""
 "défaillance de l'unité de fabrication."
 
 #: scripts/scenario_59_border.lua:7435 scripts/scenario_59_border.lua:8815
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Parts shortage prevents scan probe replenishment."
 msgstr ""
 "- Sondes : le manque de pièces empêche le réapprovisionnement des sondes."
 
 #: scripts/scenario_59_border.lua:7436 scripts/scenario_59_border.lua:8816
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
@@ -3866,7 +3866,7 @@ msgstr ""
 "%s"
 
 #: scripts/scenario_59_border.lua:7443 scripts/scenario_59_border.lua:8823
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -3876,7 +3876,6 @@ msgstr ""
 "- Réparation de la coque."
 
 #: scripts/scenario_59_border.lua:7447 scripts/scenario_59_border.lua:8827
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
@@ -3884,7 +3883,6 @@ msgstr ""
 "réparer la coque."
 
 #: scripts/scenario_59_border.lua:7448
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
@@ -3892,7 +3890,6 @@ msgstr ""
 "pendant la maintenance."
 
 #: scripts/scenario_59_border.lua:7449 scripts/scenario_59_border.lua:8829
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
@@ -3900,7 +3897,7 @@ msgstr ""
 "dans leur quartiers pour cause de maladie."
 
 #: scripts/scenario_59_border.lua:7456 scripts/scenario_59_border.lua:8836
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
@@ -3910,7 +3907,6 @@ msgstr ""
 "- Recharge des réserves d'énergie du vaisseau."
 
 #: scripts/scenario_59_border.lua:7460 scripts/scenario_59_border.lua:8840
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
@@ -3920,7 +3916,6 @@ msgstr ""
 "auxiliaire, nous ne pouvons donc pas recharger les vaisseaux."
 
 #: scripts/scenario_59_border.lua:7461 scripts/scenario_59_border.lua:8841
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
@@ -3928,7 +3923,6 @@ msgstr ""
 "trop risquée."
 
 #: scripts/scenario_59_border.lua:7462 scripts/scenario_59_border.lua:8842
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
@@ -3939,14 +3933,14 @@ msgstr ""
 "le moment."
 
 #: scripts/scenario_59_border.lua:7469 scripts/scenario_59_border.lua:8849
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid ""
 "%s\n"
 "May overcharge jump drive"
 msgstr ""
 "%s\n"
-"- Peut booster la téléportation (rechargement)."
+"- Boost du délai de recharge de la téléportation."
 
 #: scripts/scenario_59_border.lua:7471 scripts/scenario_59_border.lua:8851
 #, lua-format
@@ -4016,17 +4010,19 @@ msgid "%sself destruct system   "
 msgstr ""
 
 #: scripts/scenario_59_border.lua:7546
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid "Overcharge Jump Drive (10 Rep)"
-msgstr "Booster la téléportation (10 rép)"
+msgstr "Booster le délai de recharge de la téléportation (10 rép)"
 
 #: scripts/scenario_59_border.lua:7549
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid "Your jump drive has been overcharged to %ik"
 msgstr ""
-"Le délai de recharge de votre moteur de téléportation a été boosté à %ik."
+"...Après quelques instants.\n"
+"\n"
+"C'est fait. Votre moteur de téléportation a été boosté à %ik. Le temps de "
+"recharge sera plus court."
 
 #: scripts/scenario_59_border.lua:7551 scripts/scenario_59_border.lua:7605
 #: scripts/scenario_59_border.lua:7624 scripts/scenario_59_border.lua:7644
@@ -5707,18 +5703,15 @@ msgid ""
 "We are on an important mission."
 msgstr ""
 "Désolé, nous n'avons pas le temps de discuter avec vous.\n"
-"\n"
 "Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_59_border.lua:9888 scripts/scenario_59_border.lua:10975
-#, fuzzy
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
 "Nous n'avons rien pour vous.\n"
-"\n"
 "Bonne journée."
 
 #: scripts/scenario_59_border.lua:9931 scripts/scenario_59_border.lua:10060

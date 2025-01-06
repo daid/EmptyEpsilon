@@ -791,9 +791,12 @@ msgstr ""
 #, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
-msgstr "Bienvenue dans notre charmante petite station.\n"
+msgstr ""
+"Bienvenue sur notre charmante petite station.\n"
+"Que pouvons-nous faire pour vous ?\n"
 
 #: scripts/scenario_53_escape.lua:1327
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
@@ -1983,6 +1986,7 @@ msgstr ""
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_53_escape.lua:2114
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"

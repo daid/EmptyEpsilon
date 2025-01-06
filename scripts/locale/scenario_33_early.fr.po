@@ -1190,7 +1190,6 @@ msgstr ""
 "Que pouvons-nous faire pour vous aujourd'hui ?"
 
 #: scripts/scenario_33_early.lua:2870
-#, fuzzy
 msgctxt "station-comms"
 msgid "Hello, may I help you?"
 msgstr "Bonjour, puis-je vous aider ?"
@@ -1199,7 +1198,9 @@ msgstr "Bonjour, puis-je vous aider ?"
 #, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
-msgstr "Bienvenue dans notre charmante petite station."
+msgstr ""
+"Bienvenue sur notre charmante petite station.\n"
+"Que pouvons-nous faire pour vous ?"
 
 #: scripts/scenario_33_early.lua:2876
 #, fuzzy
@@ -1470,19 +1471,18 @@ msgid "Your self destruct system has been repaired"
 msgstr "Votre système d'autodestruction a été réparé."
 
 #: scripts/scenario_33_early.lua:3121
-#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Docking services status"
 msgstr "État des services d'accueil"
 
 #: scripts/scenario_33_early.lua:3122
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Station %s docking services status:"
 msgstr "État des services d'accueil de la station %s :\n"
 
 #: scripts/scenario_33_early.lua:3124 scripts/scenario_33_early.lua:3401
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid ""
 "%s\n"
@@ -1514,7 +1514,7 @@ msgstr ""
 "des sondes pour des raisons de réduction des coûts."
 
 #: scripts/scenario_33_early.lua:3137 scripts/scenario_33_early.lua:3414
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid ""
 "%s\n"
@@ -1545,14 +1545,14 @@ msgstr ""
 "dans leur quartiers pour cause de maladie."
 
 #: scripts/scenario_33_early.lua:3150 scripts/scenario_33_early.lua:3427
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid ""
 "%s\n"
 "Recharge ship energy stores."
 msgstr ""
 "%s\n"
-"- Recharge des réserves d'énergie du vaisseau."
+"- Recharge des réserves d'énergie."
 
 #: scripts/scenario_33_early.lua:3154 scripts/scenario_33_early.lua:3431
 msgctxt "dockingServicesStatus-comms"
@@ -1845,12 +1845,11 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_33_early.lua:3419
-#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Hull repair automation unavailable whie it is undergoing maintenance."
 msgstr ""
-"Automatisation de réparation de coque indisponible, elle est en cours de "
-"maintenance."
+"- Coque : l'automatisation de réparation de la coque n'est pas disponible "
+"pendant la maintenance."
 
 #: scripts/scenario_33_early.lua:3446
 #, fuzzy
