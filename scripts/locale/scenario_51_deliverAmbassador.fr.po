@@ -159,7 +159,7 @@ msgstr "+ Ajout de vaisseaux"
 #: scripts/scenario_51_deliverAmbassador.lua:135
 msgctxt "buttonGM"
 msgid "+Control Codes"
-msgstr "+ Codes de contrôle"
+msgstr "+ Codes d'accès"
 
 #: scripts/scenario_51_deliverAmbassador.lua:136
 #, fuzzy

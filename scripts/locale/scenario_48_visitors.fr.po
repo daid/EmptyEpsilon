@@ -50,26 +50,34 @@ msgid ""
 "\n"
 "Version 2"
 msgstr ""
-"EN COURS DE TRADUCTION 45%\n"
+"- Durée approx. : 15-50mn par mission (variable)\n"
+"- Difficulté : *** (variable)\n"
+"- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"Get rid of the unwanted visitors. Other missions follow. Check friendly "
-"stations for mission orders. Dispatch office provides new missions. Continue "
-"or stand down after each mission.\n"
+"Mission : Débarrassez-vous des visiteurs indésirables. D'autres missions "
+"suivront : consultez le bureau central chez les stations amies. Continuez ou "
+"abandonnez après chaque mission, plusieurs missions pouvant se cumuler. 4 "
+"missions dans la 1ère zone, 3 dans la 2ème zone et 1 mission à durée "
+"indéterminée dans la 3ème zone. 3 choix disponibles.\n"
 "\n"
-"Each mission takes 15 - 50 minutes. That can add up. Four missions in the "
-"first area, three in the second area and in the third area, one open ended "
-"mission, chosen from three possibilities.\n"
+"En revenant à ce scénario, choisissez « sélectionnable » pour effectuer des "
+"missions que vous n'avez pas encore accomplies. Choisissez \"Aléatoire\" "
+"pour être surpris des missions sélectionnées.\n"
 "\n"
-"When returning to this scenario, choose \"selectable\" to perform missions "
-"you have not yet completed. Choose \"Random\" to be surprised at the "
-"missions selected.\n"
+"Les boutons GM ralentissent ou accélèrent les orbites des corps célestes, "
+"activent ou désactivent les voix du serveur, insèrent des vaisseaux de "
+"joueurs uniques ou mettent fin à la mission.\n"
 "\n"
-"GM buttons slow or speed celestial body orbits, turn on or off server "
-"voices, insert unique player ships or end the mission.\n"
+"Contient du texte audio. (non traduit)\n"
 "\n"
-"USN Discord: https://discord.gg/PntGG3a where you can join a game online.\n"
+"Version 2.0.9 - Déc. 2024\n"
 "\n"
-"Voice Actors:\n"
+"- Titre original : Unwanted Visitors\n"
+"- Auteur : Xansta (2020)\n"
+"- Traduction FR : Muerte (Juin 23)\n"
+"Traduction en cours 48%   341/702\n"
+"\n"
+"- Acteurs vocaux :\n"
 "Admiral U. E.\n"
 "David Priddy\n"
 "Jordy Kruijer\n"
@@ -77,10 +85,11 @@ msgstr ""
 "Kristen Priddy\n"
 "Nick Mercier\n"
 "Peter Priddy\n"
-"Slate https://www.amazon.com/T.-L.-Ford/e/B0034Q6Q2S\n"
+"Slate\n"
 "Stephen Priddy\n"
 "\n"
-"Version 2"
+"Communauté française et anglophone sur Discord USN https://discord.gg/"
+"TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 # Scenario setting
 msgctxt "setting"
@@ -89,7 +98,7 @@ msgstr "Puissance ennemie"
 
 msgctxt "setting"
 msgid "Configures the strength of the enemies"
-msgstr ""
+msgstr "Définit le nombre et/ou la puissance des ennemis."
 
 msgctxt "Enemies"
 msgid "Easy"
@@ -97,7 +106,7 @@ msgstr "Facile"
 
 msgctxt "Enemies"
 msgid "Enemies are weaker or fewer than normal"
-msgstr "Ennemis plus faibles ou moins nombreux que la normale."
+msgstr "Ennemis moins nombreux et/ou plus faibles."
 
 msgctxt "Enemies"
 msgid "Normal"
@@ -113,7 +122,7 @@ msgstr "Difficile"
 
 msgctxt "Enemies"
 msgid "Enemies are stronger or more numerous than normal"
-msgstr "Ennemis plus forts ou plus nombreux que la normale."
+msgstr "Ennemis plus nombreux et/ou plus puissants."
 
 msgctxt "Enemies"
 msgid "Extreme"
@@ -138,7 +147,8 @@ msgstr "Loi de Murphy"
 
 msgctxt "setting"
 msgid "Configures the perversity of the universe according to Murphy's law"
-msgstr "Définit la perversité de l'univers selon la loi de Murphy."
+msgstr ""
+"Définit comment la chance est avec ou contre vous selon la loi de Murphy."
 
 msgctxt "Murphy"
 msgid "Easy"
@@ -167,7 +177,7 @@ msgstr "Les facteurs aléatoires sont plus contre vous."
 # Scenario setting
 msgctxt "setting"
 msgid "Mission"
-msgstr ""
+msgstr "Missions"
 
 msgctxt "setting"
 msgid ""
@@ -175,6 +185,10 @@ msgid ""
 "The default setting lets the players choose to move to the next region. The "
 "players must always complete the first mission."
 msgstr ""
+"Configure les missions du scénario. Il existe différentes régions avec des "
+"missions. Le paramètre par défaut permet aux joueurs de choisir de passer à "
+"la région suivante. Les joueurs doivent toujours terminer la première "
+"mission."
 
 msgctxt "Mission"
 msgid "Random"
@@ -182,43 +196,44 @@ msgstr " Aléatoire "
 
 msgctxt "Mission"
 msgid "The next mission is randomly selected"
-msgstr ""
+msgstr "La prochaine mission est sélectionnée au hasard."
 
 msgctxt "Mission"
 msgid "Region"
-msgstr ""
+msgstr "Région"
 
 msgctxt "Mission"
 msgid "Players may skip to the next region of missions"
-msgstr ""
+msgstr "Les joueurs peuvent passer à la région suivante."
 
 msgctxt "Mission"
 msgid "Selectable"
-msgstr ""
+msgstr "Sélectionnable"
 
 msgctxt "Mission"
 msgid "Players may choose each individual mission in each region"
 msgstr ""
+"Les joueurs peuvent choisir chaque mission individuelle dans chaque région."
 
 #: scripts/scenario_48_visitors.lua:99
 msgctxt "buttonGM"
 msgid "+Player ships"
-msgstr ""
+msgstr "+ Vaisseaux joueurs"
 
 #: scripts/scenario_48_visitors.lua:100
 msgctxt "buttonGM"
 msgid "+Adjust speed"
-msgstr ""
+msgstr "+ Ajuster la vitesse"
 
 #: scripts/scenario_48_visitors.lua:101
 msgctxt "buttonGM"
 msgid "+End Mission"
-msgstr ""
+msgstr "+ Fin de mission"
 
 #: scripts/scenario_48_visitors.lua:102
 msgctxt "buttonGM"
 msgid "+Voices"
-msgstr ""
+msgstr "+ Voix"
 
 #: scripts/scenario_48_visitors.lua:103
 msgctxt "buttonGM"
@@ -228,16 +243,14 @@ msgstr "+ Ajout de vaisseaux"
 #: scripts/scenario_48_visitors.lua:104
 msgctxt "buttonGM"
 msgid "+Control Codes"
-msgstr "+ Codes de contrôle"
+msgstr "+ Codes d'accès"
 
 #: scripts/scenario_48_visitors.lua:105
-#, fuzzy
 msgctxt "buttonGM"
 msgid "Humorous Ending"
 msgstr "Fin humoristique"
 
 #: scripts/scenario_48_visitors.lua:110
-#, fuzzy
 msgctxt "msgGM"
 msgid "Humorous Exuari Neutralization Division (END) ending initiated."
 msgstr ""
@@ -252,7 +265,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:506
 msgctxt "buttonGM"
 msgid "-Main"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_48_visitors.lua:116
 msgctxt "buttonGM"
@@ -620,11 +633,13 @@ msgstr ""
 msgctxt "scienceDescription-artifact"
 msgid "Sensor readings change as the object orbits with the asteroid belt"
 msgstr ""
+"Les lectures du capteur changent à mesure que l'objet orbite avec la "
+"ceinture d'astéroïdes."
 
 #: scripts/scenario_48_visitors.lua:1480
 msgctxt "scienceDescription-artifact"
 msgid "Object exhibits periodic spikes of chroniton particles"
-msgstr ""
+msgstr "L'objet présente des pointes périodiques de particules de chroniton."
 
 #: scripts/scenario_48_visitors.lua:2394
 msgctxt "characterInfo-comms"
@@ -647,6 +662,10 @@ msgid ""
 "they shoot faster. He lives out on %s in %s. He won't charge you much, but "
 "it won't be free."
 msgstr ""
+"J'ai entendu dire qu'il y avait un gars nommé %s qui pouvait améliorer les "
+"systèmes de faisceaux laser des vaisseaux pour qu'ils tirent plus vite.\n"
+"Il vit sur %s dans le secteur %s. Il ne vous facturera pas trop cher, mais "
+"ce ne sera pas gratuit."
 
 #: scripts/scenario_48_visitors.lua:2405
 msgctxt "characterInfo-comms"
@@ -655,6 +674,10 @@ msgid ""
 "with the military on tuning spin time by increasing thruster power. She's "
 "got prototypes that are awaiting formal military approval before installation"
 msgstr ""
+"Elle bricole des systèmes de vaisseaux comme les moteurs et la propulsion. "
+"Elle a été consultante pour l'armée sur le réglage du temps de rotation en "
+"augmentant la puissance du propulseur. Elle a des prototypes qui attendent "
+"l'approbation officielle militaire avant installation."
 
 #: scripts/scenario_48_visitors.lua:2412
 #, lua-format
@@ -665,6 +688,11 @@ msgid ""
 "it. She set up shop on %s in %s. I hear she's even lining up a contract with "
 "the navy for her improvements."
 msgstr ""
+"Mon amie, %s, a récemment quitté son emploi de technicienne de maintenance "
+"de vaisseaux pour monter cette activité parallèle. Elle améliore des "
+"systèmes de vaisseaux et elle y parvient plutôt bien. Elle a ouvert une "
+"boutique sur %s dans le secteur %s. J'ai entendu dire qu'elle était même en "
+"train de signer un contrat avec la Marine humaine pour ses améliorations."
 
 #: scripts/scenario_48_visitors.lua:2416
 msgctxt "characterInfo-comms"
@@ -673,6 +701,9 @@ msgid ""
 "way to add a missile tube and some missiles to any ship regardless of size "
 "or configuration"
 msgstr ""
+"Il est spécialisé dans la miniaturisation des systèmes d'armement. Il a "
+"trouvé le moyen d'ajouter un tube lance-missiles et des missiles à n'importe "
+"quel vaisseau, quelle que soit sa taille ou sa configuration."
 
 #: scripts/scenario_48_visitors.lua:2423
 #, lua-format
@@ -682,6 +713,9 @@ msgid ""
 "ship. He even added one to my cousin's souped up freighter. You should see "
 "the new paint job: amusingly phallic"
 msgstr ""
+"Il y a ce type, %s sur %s dans le secteur %s, qui peut ajouter un tube lance-"
+"missiles à votre vaisseau. Il en a même ajouté un au cargo gonflé de mon "
+"cousin. Vous devriez voir la nouvelle peinture."
 
 #: scripts/scenario_48_visitors.lua:2427
 msgctxt "characterInfo-comms"
@@ -689,6 +723,8 @@ msgid ""
 "She developed this technique for cooling beam systems so that they can be "
 "fired more often without burning out"
 msgstr ""
+"Elle a développé cette technique pour refroidir les systèmes de faisceaux "
+"laser afin qu'ils puissent tirer plus souvent sans trop chauffer."
 
 #: scripts/scenario_48_visitors.lua:2434
 #, lua-format
@@ -697,11 +733,14 @@ msgid ""
 "There's this girl on %s in %s. She is hot. Her name is %s. When I say she is "
 "hot, I mean she has a way of keeping your beam weapons from excessive heat."
 msgstr ""
+"Il y a cette fille sur %s, secteur %s. Elle est chaude. Elle s'appelle %s. "
+"Quand je dis chaude, je veux dire qu'elle a un moyen pour protéger vos "
+"faisceaux laser d'une chaleur excessive."
 
 #: scripts/scenario_48_visitors.lua:2438
 msgctxt "characterInfo-comms"
 msgid "He knows how to modify beam systems to extend their range"
-msgstr ""
+msgstr "Il sait modifier les systèmes de faisceaux pour étendre leur portée."
 
 #: scripts/scenario_48_visitors.lua:2445
 #, lua-format
@@ -1145,7 +1184,6 @@ msgid "Hello, may I help you?"
 msgstr "Bonjour, puis-je vous aider ?"
 
 #: scripts/scenario_48_visitors.lua:3112
-#, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
 msgstr ""
@@ -2968,7 +3006,6 @@ msgstr ""
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_48_visitors.lua:4701
-#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -3265,18 +3302,27 @@ msgid "Friendly"
 msgstr "Amical"
 
 #: scripts/scenario_48_visitors.lua:5068
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "Friendly stations share their short range telemetry with your ship on the "
 "Relay and Strategic Map consoles. These are the known friendly stations."
 msgstr ""
+"Les stations amies partagent leur radar à courte portée avec votre vaisseau "
+"sur vos postes Communications et Carte tactique.\n"
+"Sont listées ici les stations amies que vous avez contactées."
 
 #: scripts/scenario_48_visitors.lua:5082
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "Neutral stations don't share their short range telemetry with your ship, but "
 "they do allow for docking. These are the known neutral stations."
 msgstr ""
+"Les stations neutres ne partagent pas leur radar à courte portée avec votre "
+"vaisseau, mais elles vous autorisent à vous amarrer et proposent divers "
+"services.\n"
+"Sont listées ici les stations amies que vous avez contactées."
 
 #: scripts/scenario_48_visitors.lua:5098
 #, lua-format
@@ -3456,25 +3502,28 @@ msgid "Restock HVLI"
 msgstr "Réapprovisionner les HVLI"
 
 #: scripts/scenario_48_visitors.lua:5255
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Restock Mine"
-msgstr ""
+msgstr "Munitions Mines"
 
 #: scripts/scenario_48_visitors.lua:5256
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Restock Nuke"
-msgstr ""
+msgstr "Munitions Nukes"
 
 #: scripts/scenario_48_visitors.lua:5257
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Restock EMP"
-msgstr ""
+msgstr "Munitions EMP"
 
 #: scripts/scenario_48_visitors.lua:5262
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%i reputation each"
-msgstr ""
+msgstr "%i rép l'unité"
 
 #: scripts/scenario_48_visitors.lua:5270
 msgctxt "scienceDB"
@@ -3482,19 +3531,22 @@ msgid "Drop supplies"
 msgstr ""
 
 #: scripts/scenario_48_visitors.lua:5271
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Standard reinforcements"
-msgstr ""
+msgstr "Renforts Vipère MK5"
 
 #: scripts/scenario_48_visitors.lua:5272
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Hornet reinforcements"
-msgstr ""
+msgstr "Renforts Frelon MU52"
 
 #: scripts/scenario_48_visitors.lua:5273
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Phobos reinforcements"
-msgstr ""
+msgstr "Renforts Phobos T3"
 
 #: scripts/scenario_48_visitors.lua:5274
 msgctxt "scienceDB"
@@ -3502,9 +3554,10 @@ msgid "Adder3 reinforcements"
 msgstr ""
 
 #: scripts/scenario_48_visitors.lua:5275
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Adder8 reinforcements"
-msgstr ""
+msgstr "Renforts Vipère MK8"
 
 #: scripts/scenario_48_visitors.lua:5276
 msgctxt "scienceDB"
@@ -3512,10 +3565,10 @@ msgid "Shield overcharge"
 msgstr ""
 
 #: scripts/scenario_48_visitors.lua:5281
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%s reputation"
-msgstr ""
+msgstr "%s rép"
 
 #: scripts/scenario_48_visitors.lua:5290
 #, lua-format
@@ -3743,7 +3796,7 @@ msgid "%s heading toward you to assist"
 msgstr "%s, nous partons immédiatement vous aider."
 
 #: scripts/scenario_48_visitors.lua:5486
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Traded your luxury for %s from %s"
 msgstr "Échanger vos produits de luxe (luxury) contre du %s auprès de %s"
@@ -4129,9 +4182,10 @@ msgid "%.1f seconds remain to be scanned"
 msgstr ""
 
 #: scripts/scenario_48_visitors.lua:6433
+#, fuzzy
 msgctxt "Polly-tabHelmTactical"
 msgid "Range"
-msgstr ""
+msgstr "Portée"
 
 #: scripts/scenario_48_visitors.lua:6435
 #, lua-format
@@ -4426,7 +4480,7 @@ msgid "Survived Exuari Attacks"
 msgstr ""
 
 #: scripts/scenario_48_visitors.lua:7614
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipEnemy-incCall"
 msgid ""
 "In accordance to Exuari command directive 2257, we the Exuari Neutralization "

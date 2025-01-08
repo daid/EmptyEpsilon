@@ -2366,7 +2366,7 @@ msgstr ""
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Player ships %i/%i"
-msgstr ""
+msgstr "+ Vaisseaux joueurs %i/%i"
 
 #: scripts/scenario_59_border.lua:4965
 msgctxt "buttonGM"
@@ -2550,10 +2550,9 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_59_border.lua:5331
-#, fuzzy
 msgctxt "buttonGM"
 msgid "Atlantis"
-msgstr "m"
+msgstr ""
 
 #: scripts/scenario_59_border.lua:5332
 msgctxt "msgGM"
@@ -3122,6 +3121,10 @@ msgid ""
 "they shoot faster. He lives out on %s in %s. He won't charge you much, but "
 "it won't be free."
 msgstr ""
+"J'ai entendu dire qu'il y avait un gars nommé %s qui pouvait améliorer les "
+"systèmes de faisceaux laser des vaisseaux pour qu'ils tirent plus vite.\n"
+"Il vit sur %s dans le secteur %s. Il ne vous facturera pas trop cher, mais "
+"ce ne sera pas gratuit."
 
 #: scripts/scenario_59_border.lua:6327
 msgctxt "characterInfo-comms"
@@ -3130,6 +3133,10 @@ msgid ""
 "with the military on tuning spin time by increasing thruster power. She's "
 "got prototypes that are awaiting formal military approval before installation"
 msgstr ""
+"Elle bricole des systèmes de vaisseaux comme les moteurs et la propulsion. "
+"Elle a été consultante pour l'armée sur le réglage du temps de rotation en "
+"augmentant la puissance du propulseur. Elle a des prototypes qui attendent "
+"l'approbation officielle militaire avant installation."
 
 #: scripts/scenario_59_border.lua:6329
 msgctxt "scienceDB"
@@ -3145,6 +3152,11 @@ msgid ""
 "it. She set up shop on %s in %s. I hear she's even lining up a contract with "
 "the navy for her improvements."
 msgstr ""
+"Mon amie, %s, a récemment quitté son emploi de technicienne de maintenance "
+"de vaisseaux pour monter cette activité parallèle. Elle améliore des "
+"systèmes de vaisseaux et elle y parvient plutôt bien. Elle a ouvert une "
+"boutique sur %s dans le secteur %s. J'ai entendu dire qu'elle était même en "
+"train de signer un contrat avec la Marine humaine pour ses améliorations."
 
 #: scripts/scenario_59_border.lua:6370
 msgctxt "characterInfo-comms"
@@ -3153,6 +3165,9 @@ msgid ""
 "way to add a missile tube and some missiles to any ship regardless of size "
 "or configuration"
 msgstr ""
+"Il est spécialisé dans la miniaturisation des systèmes d'armement. Il a "
+"trouvé le moyen d'ajouter un tube lance-missiles et des missiles à n'importe "
+"quel vaisseau, quelle que soit sa taille ou sa configuration."
 
 #: scripts/scenario_59_border.lua:6372
 msgctxt "scienceDB"
@@ -3167,6 +3182,9 @@ msgid ""
 "ship. He even added one to my cousin's souped up freighter. You should see "
 "the new paint job: amusingly phallic"
 msgstr ""
+"Il y a ce type, %s sur %s dans le secteur %s, qui peut ajouter un tube lance-"
+"missiles à votre vaisseau. Il en a même ajouté un au cargo gonflé de mon "
+"cousin. Vous devriez voir la nouvelle peinture."
 
 #: scripts/scenario_59_border.lua:6413
 msgctxt "characterInfo-comms"
@@ -3174,6 +3192,8 @@ msgid ""
 "She developed this technique for cooling beam systems so that they can be "
 "fired more often without burning out"
 msgstr ""
+"Elle a développé cette technique pour refroidir les systèmes de faisceaux "
+"laser afin qu'ils puissent tirer plus souvent sans trop chauffer."
 
 #: scripts/scenario_59_border.lua:6415
 msgctxt "scienceDB"
@@ -3187,11 +3207,14 @@ msgid ""
 "There's this girl on %s in %s. She is hot. Her name is %s. When I say she is "
 "hot, I mean she has a way of keeping your beam weapons from excessive heat."
 msgstr ""
+"Il y a cette fille sur %s, secteur %s. Elle est chaude. Elle s'appelle %s. "
+"Quand je dis chaude, je veux dire qu'elle a un moyen pour protéger vos "
+"faisceaux laser d'une chaleur excessive."
 
 #: scripts/scenario_59_border.lua:6456
 msgctxt "characterInfo-comms"
 msgid "He knows how to modify beam systems to extend their range"
-msgstr ""
+msgstr "Il sait modifier les systèmes de faisceaux pour étendre leur portée."
 
 #: scripts/scenario_59_border.lua:6458
 msgctxt "scienceDB"
