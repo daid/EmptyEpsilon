@@ -27,7 +27,7 @@ msgid ""
 "\n"
 "Version 5"
 msgstr ""
-"EN COURS DE TRADUCTION 35%\n"
+"EN COURS DE TRADUCTION 37%\n"
 "\n"
 "War temperature rises along the border between Human Navy space and Kraylor "
 "space. The treaty holds for now, but the diplomats and intelligence "
@@ -3092,10 +3092,9 @@ msgid "Enemy fleet detected in sector %s"
 msgstr ""
 
 #: scripts/scenario_59_border.lua:6131 scripts/scenario_59_border.lua:11152
-#, fuzzy
 msgctxt "msgGM"
 msgid "Empty Template pool: fix excludes or other criteria"
-msgstr "Pool de modèles vide : corriger les exclusions ou d'autres critères"
+msgstr "Pool de modèles vide : correction des exclusions ou d'autres critères"
 
 #: scripts/scenario_59_border.lua:6284
 msgctxt "characterInfo-comms"
@@ -4245,10 +4244,10 @@ msgid "Repair crew member hired"
 msgstr "Réparateur embauché."
 
 #: scripts/scenario_59_border.lua:7887 scripts/scenario_59_border.lua:7920
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Purchase coolant for %i reputation"
-msgstr "Acheter du liquide de refroidissement pour %i de réputation"
+msgstr "Acheter du liquide de refroidissement (%i rép)"
 
 #: scripts/scenario_59_border.lua:7892 scripts/scenario_59_border.lua:7925
 msgctxt "trade-comms"

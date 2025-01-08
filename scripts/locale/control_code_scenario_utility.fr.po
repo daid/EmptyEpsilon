@@ -108,12 +108,12 @@ msgstr "Valider le code"
 #, lua-format
 msgctxt "msgGM"
 msgid "%s now has a control code of %s"
-msgstr "Le vaisseau joueurs %s a maintenant le code de contrôle suivant : %s"
+msgstr "Le vaisseau joueur %s a maintenant le code de contrôle suivant : %s"
 
 #: scripts/control_code_scenario_utility.lua:93
 msgctxt "msgGM"
 msgid "Player ship not selected. No action taken"
-msgstr "Vaisseau joueurs non sélectionné. Aucune action validée."
+msgstr "Vaisseau joueur non sélectionné. Aucune action validée."
 
 #: scripts/control_code_scenario_utility.lua:98
 msgctxt "buttonGM"

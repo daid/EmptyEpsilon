@@ -131,7 +131,7 @@ msgstr "Ennemis susceptibles de vous submerger."
 # Scenario setting
 msgctxt "setting"
 msgid "Time"
-msgstr "Durée"
+msgstr "Durée de jeu"
 
 msgctxt "setting"
 msgid "Sets the length of time for the scenario"
