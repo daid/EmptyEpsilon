@@ -435,7 +435,7 @@ msgid ""
 msgstr ""
 "Ce sont des informations \"spoiler\" de la mission. Réfléchissez bien avant "
 "de les révéler au joueurs. Si vous pensez tout de même devoir le faire, je "
-"vous suggère de sélectionner le vaisseau joueurs en utilisant le widget à "
+"vous suggère de sélectionner le vaisseau joueur en utilisant le widget à "
 "droite du bouton \"Message général\", puis de cliquer sur le bouton "
 "\"Envoyer message\", de vous identifier en tant que personnage dans le jeu "
 "comme le technicien en cartographie stellaire du quartier général de la "
@@ -1861,7 +1861,7 @@ msgstr "Nous avons du liquide de refroidissement disponible pour vous."
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchase coolant for %i reputation"
-msgstr "Acheter du liquide de refroidissement pour %i de réputation"
+msgstr "Acheter du liquide de refroidissement (%i rép)"
 
 #: scripts/scenario_74_omicron.lua:4164
 msgctxt "trade-comms"
@@ -3832,7 +3832,7 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:6601
 msgctxt "msgGM"
 msgid "Empty Template pool: fix excludes or other criteria"
-msgstr "Pool de modèles vide : corriger les exclusions ou d'autres critères"
+msgstr "Pool de modèles vide : correction des exclusions ou d'autres critères"
 
 #: scripts/scenario_74_omicron.lua:6815
 msgctxt "repairCrew-msgEngineer"

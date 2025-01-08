@@ -2386,7 +2386,7 @@ msgstr "Nous avons du liquide de refroidissement disponible pour vous."
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchase coolant for %i reputation"
-msgstr "Acheter du liquide de refroidissement pour %i de réputation"
+msgstr "Acheter du liquide de refroidissement (%i rép)"
 
 #: scripts/scenario_44_outpost.lua:4407
 msgctxt "trade-comms"
@@ -4664,7 +4664,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:7372
 msgctxt "msgGM"
 msgid "Empty Template pool: fix excludes or other criteria"
-msgstr "Pool de modèles vide : corrigez les exclusions ou d'autres critères."
+msgstr "Pool de modèles vide : correction des exclusions ou d'autres critères"
 
 #: scripts/scenario_44_outpost.lua:7894
 #, lua-format

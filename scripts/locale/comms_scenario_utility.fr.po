@@ -7726,7 +7726,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchase coolant for %i reputation"
-msgstr "Acheter du liquide de refroidissement pour %i de réputation"
+msgstr "Acheter du liquide de refroidissement (%i rép)"
 
 #: scripts/comms_scenario_utility.lua:5992
 #, lua-format
@@ -10461,7 +10461,10 @@ msgstr ""
 msgctxt "upgrade-comms"
 msgid "Your jump drive has been overcharged to %ik"
 msgstr ""
-"Le délai de recharge de votre moteur de téléportation a été boosté à %ik."
+"...Après quelques instants.\n"
+"\n"
+"C'est fait. Votre moteur de téléportation a été boosté à %ik. Le temps de "
+"recharge sera plus court."
 
 #: scripts/comms_scenario_utility.lua:8380
 #, lua-format

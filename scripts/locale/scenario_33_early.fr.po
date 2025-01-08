@@ -1180,7 +1180,6 @@ msgstr ""
 "Comment pouvons-nous vous aider aujourd'hui ?"
 
 #: scripts/scenario_33_early.lua:2868
-#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
@@ -1195,7 +1194,6 @@ msgid "Hello, may I help you?"
 msgstr "Bonjour, puis-je vous aider ?"
 
 #: scripts/scenario_33_early.lua:2873
-#, fuzzy
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
 msgstr ""
@@ -1203,7 +1201,6 @@ msgstr ""
 "Que pouvons-nous faire pour vous ?"
 
 #: scripts/scenario_33_early.lua:2876
-#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -1377,13 +1374,12 @@ msgid "Sorry, we don't have any ordnance today"
 msgstr ""
 
 #: scripts/scenario_33_early.lua:3029
-#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair ship system"
 msgstr "Réparer les systèmes du vaisseau"
 
 #: scripts/scenario_33_early.lua:3030
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid ""
 "What system would you like repaired?\n"
@@ -1395,7 +1391,7 @@ msgstr ""
 "Réputation : %i"
 
 #: scripts/scenario_33_early.lua:3033
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair probe launch system (%s Rep)"
 msgstr "Réparer le système de lancement de sonde (%s rép)"
@@ -1409,7 +1405,6 @@ msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
 
 #: scripts/scenario_33_early.lua:3040
-#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Your probe launch system has been repaired"
 msgstr "Votre système de lancement de sonde a été réparé."
@@ -1423,49 +1418,45 @@ msgid "Insufficient reputation"
 msgstr "Réputation insuffisante."
 
 #: scripts/scenario_33_early.lua:3050
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair hacking system (%s Rep)"
 msgstr "Réparer le système de piratage (%s rép)"
 
 #: scripts/scenario_33_early.lua:3057
-#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Your hack system has been repaired"
 msgstr "Votre système de piratage a été réparé."
 
 #: scripts/scenario_33_early.lua:3067
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair scanning system (%s Rep)"
 msgstr "Réparer les scanners (%s rép)"
 
 #: scripts/scenario_33_early.lua:3074
-#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Your scanners have been repaired"
 msgstr "Vos scanners ont été réparés."
 
 #: scripts/scenario_33_early.lua:3085
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair combat maneuver (%s Rep)"
 msgstr "Réparer la manœuvre de combat (%s rép)"
 
 #: scripts/scenario_33_early.lua:3092
-#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Your combat maneuver has been repaired"
 msgstr "Votre manœuvre de combat a été réparée."
 
 #: scripts/scenario_33_early.lua:3103
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair self destruct system (%s Rep)"
 msgstr "Réparer le système d'autodestruction (%s rép)"
 
 #: scripts/scenario_33_early.lua:3110
-#, fuzzy
 msgctxt "dockingServicesStatus-comms"
 msgid "Your self destruct system has been repaired"
 msgstr "Votre système d'autodestruction a été réparé."
@@ -1725,7 +1716,6 @@ msgid "Get just one"
 msgstr "Prendre juste 1 munition"
 
 #: scripts/scenario_33_early.lua:3296
-#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
@@ -1736,7 +1726,6 @@ msgstr ""
 "station au préalable."
 
 #: scripts/scenario_33_early.lua:3298
-#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
@@ -1746,7 +1735,6 @@ msgstr ""
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_33_early.lua:3301
-#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -1758,13 +1746,11 @@ msgstr ""
 "occupés pour faire affaire avec vous."
 
 #: scripts/scenario_33_early.lua:3321
-#, fuzzy
 msgctxt "station-comms"
 msgid "I need information"
 msgstr "J'aurai besoin d'informations"
 
 #: scripts/scenario_33_early.lua:3322
-#, fuzzy
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
 msgstr "De quel genre d'informations avez-vous besoin ?"
