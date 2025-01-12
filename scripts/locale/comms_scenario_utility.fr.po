@@ -525,7 +525,7 @@ msgstr "Stations"
 #: scripts/comms_scenario_utility.lua:662
 msgctxt "scienceDB"
 msgid "Friendly"
-msgstr "Amie"
+msgstr "Amies"
 
 #: scripts/comms_scenario_utility.lua:667
 msgctxt "scienceDB"
@@ -534,13 +534,14 @@ msgid ""
 "Relay and Strategic Map consoles. These are the known friendly stations."
 msgstr ""
 "Les stations amies partagent leur radar à courte portée avec votre vaisseau "
-"sur vos postes Communications et Carte tactique.\n"
+"sur vos postes Communications et Carte tactique et proposent divers "
+"services.\n"
 "Sont listées ici les stations amies que vous avez contactées."
 
 #: scripts/comms_scenario_utility.lua:676
 msgctxt "scienceDB"
 msgid "Neutral"
-msgstr "Neutre"
+msgstr "Neutres"
 
 #: scripts/comms_scenario_utility.lua:681
 msgctxt "scienceDB"
@@ -549,9 +550,9 @@ msgid ""
 "they do allow for docking. These are the known neutral stations."
 msgstr ""
 "Les stations neutres ne partagent pas leur radar à courte portée avec votre "
-"vaisseau, mais elles vous autorisent à vous amarrer et proposent divers "
+"vaisseau, mais elles vous autorisent à vous amarrer et proposent quelques "
 "services.\n"
-"Sont listées ici les stations amies que vous avez contactées."
+"Sont listées ici les stations neutres que vous avez contactées."
 
 #: scripts/comms_scenario_utility.lua:698
 #, lua-format

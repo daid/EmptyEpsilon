@@ -75,7 +75,7 @@ msgstr ""
 "- Titre original : Unwanted Visitors\n"
 "- Auteur : Xansta (2020)\n"
 "- Traduction FR : Muerte (Juin 23)\n"
-"Traduction en cours 48%   341/702\n"
+"Traduction en cours 49%   349/702\n"
 "\n"
 "- Acteurs vocaux :\n"
 "Admiral U. E.\n"
@@ -360,7 +360,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:453
 msgctxt "buttonGM"
 msgid "Slower"
-msgstr ""
+msgstr "Plus lent"
 
 #: scripts/scenario_48_visitors.lua:274 scripts/scenario_48_visitors.lua:281
 #, lua-format
@@ -383,7 +383,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:471
 msgctxt "buttonGM"
 msgid "Faster"
-msgstr ""
+msgstr "Plus rapide"
 
 #: scripts/scenario_48_visitors.lua:284
 #, lua-format
@@ -612,22 +612,22 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:494
 msgctxt "buttonGM"
 msgid "Human victory"
-msgstr ""
+msgstr "Victoire Humains"
 
 #: scripts/scenario_48_visitors.lua:498
 msgctxt "buttonGM"
 msgid "Exuari victory"
-msgstr ""
+msgstr "Victoire Éxuaris"
 
 #: scripts/scenario_48_visitors.lua:507
 msgctxt "buttonGM"
 msgid "Voices On"
-msgstr ""
+msgstr "Voix On"
 
 #: scripts/scenario_48_visitors.lua:515
 msgctxt "buttonGM"
 msgid "Voices Off"
-msgstr ""
+msgstr "Voix Off"
 
 #: scripts/scenario_48_visitors.lua:1480
 msgctxt "scienceDescription-artifact"
@@ -3299,30 +3299,29 @@ msgstr "Stations"
 #: scripts/scenario_48_visitors.lua:5063
 msgctxt "scienceDB"
 msgid "Friendly"
-msgstr "Amical"
+msgstr "Amies"
 
 #: scripts/scenario_48_visitors.lua:5068
-#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "Friendly stations share their short range telemetry with your ship on the "
 "Relay and Strategic Map consoles. These are the known friendly stations."
 msgstr ""
 "Les stations amies partagent leur radar à courte portée avec votre vaisseau "
-"sur vos postes Communications et Carte tactique.\n"
+"sur vos postes Communications et Carte tactique et proposent divers "
+"services.\n"
 "Sont listées ici les stations amies que vous avez contactées."
 
 #: scripts/scenario_48_visitors.lua:5082
-#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "Neutral stations don't share their short range telemetry with your ship, but "
 "they do allow for docking. These are the known neutral stations."
 msgstr ""
 "Les stations neutres ne partagent pas leur radar à courte portée avec votre "
-"vaisseau, mais elles vous autorisent à vous amarrer et proposent divers "
+"vaisseau, mais elles vous autorisent à vous amarrer et proposent quelques "
 "services.\n"
-"Sont listées ici les stations amies que vous avez contactées."
+"Sont listées ici les stations neutres que vous avez contactées."
 
 #: scripts/scenario_48_visitors.lua:5098
 #, lua-format
