@@ -1209,7 +1209,7 @@ msgstr ""
 #: scripts/scenario_58_race.lua:2091
 msgctxt "upgrade-comms"
 msgid "Your spin speed has been upgraded"
-msgstr ""
+msgstr "Votre vitesse de rotation a été améliorée."
 
 #: scripts/scenario_58_race.lua:2106
 #, lua-format

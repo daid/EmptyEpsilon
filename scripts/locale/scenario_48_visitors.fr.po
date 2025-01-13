@@ -75,7 +75,7 @@ msgstr ""
 "- Titre original : Unwanted Visitors\n"
 "- Auteur : Xansta (2020)\n"
 "- Traduction FR : Muerte (Juin 23)\n"
-"Traduction en cours 49%   349/702\n"
+"Traduction en cours 56%   398/702\n"
 "\n"
 "- Acteurs vocaux :\n"
 "Admiral U. E.\n"
@@ -714,7 +714,7 @@ msgid ""
 "the new paint job: amusingly phallic"
 msgstr ""
 "Il y a ce type, %s sur %s dans le secteur %s, qui peut ajouter un tube lance-"
-"missiles à votre vaisseau. Il en a même ajouté un au cargo gonflé de mon "
+"missiles à votre vaisseau. Il en a même ajouté un au cargo surchargé de mon "
 "cousin. Vous devriez voir la nouvelle peinture."
 
 #: scripts/scenario_48_visitors.lua:2427
@@ -749,11 +749,13 @@ msgid ""
 "Do you know about %s? He can extend the range of your beam weapons. He's on "
 "%s in %s"
 msgstr ""
+"Connaissez-vous %s ? Il peut étendre la portée de vos faisceaux laser. Il se "
+"trouve sur %s dans le secteur %s."
 
 #: scripts/scenario_48_visitors.lua:2449
 msgctxt "characterInfo-comms"
 msgid "She can make your beams hit harder"
-msgstr ""
+msgstr "Elle peut augmenter les dégâts de vos faisceaux laser."
 
 #: scripts/scenario_48_visitors.lua:2456
 #, lua-format
@@ -762,11 +764,14 @@ msgid ""
 "You should visit %s in %s. There's a specialist in beam technology that can "
 "increase the damage done by your beams. Her name is %s"
 msgstr ""
+"Vous devriez aller sur %s dans le secteur %s. Il existe une spécialiste en "
+"technologie des faisceaux qui peut augmenter les dégâts causés par vos "
+"faisceaux laser. Son nom est %s."
 
 #: scripts/scenario_48_visitors.lua:2460
 msgctxt "characterInfo-comms"
 msgid "He can fit more missiles aboard your ship"
-msgstr ""
+msgstr "Il peut installer plus de missiles à bord de votre vaisseau."
 
 #: scripts/scenario_48_visitors.lua:2467
 #, lua-format
@@ -776,11 +781,15 @@ msgid ""
 "can retrain your missile loaders and missile storage automation such that "
 "you will be able to store more missiles"
 msgstr ""
+"Vous souhaitez stocker plus de missiles sur votre vaisseau ?\n"
+"Parlez donc à %s sur la station %s, secteur %s. Il peut optimiser vos "
+"chargeurs de missiles et l'automatisation du stockage afin que vous puissiez "
+"stocker plus de missiles."
 
 #: scripts/scenario_48_visitors.lua:2471
 msgctxt "characterInfo-comms"
 msgid "She can soup up your impulse engines"
-msgstr ""
+msgstr "Elle peut gonfler vos moteurs à impulsions."
 
 #: scripts/scenario_48_visitors.lua:2478
 #, lua-format
@@ -790,6 +799,10 @@ msgid ""
 "has a bay at the shipyard on %s in %s. She can give your impulse engines a "
 "significant boost to their top speed"
 msgstr ""
+"%s, une ingénieure/mécanicienne qui connaît parfaitement les systèmes de "
+"propulsion avant et arrière est en poste au chantier naval de %s en secteur "
+"%s. Elle peut donner à vos moteurs à impulsion une augmentation "
+"significative de leur vitesse maximale."
 
 #: scripts/scenario_48_visitors.lua:2482
 msgctxt "characterInfo-comms"
@@ -803,6 +816,8 @@ msgid ""
 "I know of a materials specialist on %s in %s named %s. He can strengthen the "
 "hull on your ship"
 msgstr ""
+"Je connais un spécialiste des matériaux sur %s, secteur %s nommé %s. Il peut "
+"renforcer la coque de votre vaisseau."
 
 #: scripts/scenario_48_visitors.lua:2493
 msgctxt "characterInfo-comms"
@@ -820,11 +835,15 @@ msgid ""
 "Have you heard about %s? She's on %s in %s and she can give your ship "
 "greater energy capacity by improving your battery efficiency"
 msgstr ""
+"Avez-vous entendu parler de %s ?\n"
+"Elle est sur %s dans le secteur %s et elle peut donner à votre vaisseau une "
+"plus grande capacité énergétique en améliorant l'efficacité de votre "
+"batterie."
 
 #: scripts/scenario_48_visitors.lua:2504
 msgctxt "characterInfo-comms"
 msgid "He can strengthen your shields"
-msgstr ""
+msgstr "Il peut renforcer vos boucliers."
 
 #: scripts/scenario_48_visitors.lua:2511
 #, lua-format
@@ -833,6 +852,9 @@ msgid ""
 "If you stop at %s in %s, you should talk to %s. He can strengthen your "
 "shields. Trust me, it's always good to have stronger shields"
 msgstr ""
+"Si vous vous arrêtez sur %s dans le secteur%s, vous devriez parler à %s. Il "
+"peut renforcer vos boucliers.\n"
+"Croyez-moi, c'est toujours bien d'avoir des boucliers plus solides."
 
 #: scripts/scenario_48_visitors.lua:2553
 msgctxt "upgrade-comms"
@@ -861,6 +883,8 @@ msgid ""
 "%s reduced your Beam cycle time by 25%% at no cost in trade with the "
 "message, 'Go get those Exuari.'"
 msgstr ""
+"%s a réduit le temps de cycle de vos faisceaux laser de 25%% sans frais en "
+"échange du message \"Allez chercher ces Éxuaris !\"."
 
 #: scripts/scenario_48_visitors.lua:2596 scripts/scenario_48_visitors.lua:2707
 #: scripts/scenario_48_visitors.lua:2763 scripts/scenario_48_visitors.lua:2813
@@ -873,19 +897,21 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:2603
 msgctxt "upgrade-comms"
 msgid "Increase spin speed"
-msgstr ""
+msgstr "Augmenter la vitesse de rotation"
 
 #: scripts/scenario_48_visitors.lua:2616
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Ship spin speed increased by 50%% after you gave %s to %s"
 msgstr ""
+"La vitesse de rotation du vaisseau a augmenté de 50%% après avoir donné la "
+"marchandise %s à %s."
 
 #: scripts/scenario_48_visitors.lua:2618
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s requires %s for the spin upgrade"
-msgstr ""
+msgstr "%s a besoin de %s pour la mise à niveau de la vitesse de rotation."
 
 #: scripts/scenario_48_visitors.lua:2624
 #, lua-format
@@ -894,11 +920,14 @@ msgid ""
 "%s: I increased the speed your ship spins by 50%%. Normally, I'd require %s, "
 "but seeing as you're going out to take on the Exuari, we worked it out"
 msgstr ""
+"%s : J'ai augmenté la vitesse de rotation de votre vaisseau de 50%%.\n"
+"Normalement, je vous demanderai du %s, mais comme vous comptez affronter les "
+"Éxuaris, nous nous sommes arrangés."
 
 #: scripts/scenario_48_visitors.lua:2631
 msgctxt "upgrade-comms"
 msgid "Add missile tube"
-msgstr "Ajouter un tube de missile"
+msgstr "Ajouter un tube lance-missiles"
 
 #: scripts/scenario_48_visitors.lua:2654
 #, lua-format
@@ -907,12 +936,14 @@ msgid ""
 "%s thanks you for the %s and the luxury and installs a homing missile tube "
 "for you"
 msgstr ""
+"...%s vous remercie pour le %s et les produits de luxe et installe un tube "
+"lance-missiles à tête chercheuse pour vous."
 
 #: scripts/scenario_48_visitors.lua:2656
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s requires %s and luxury for the missile tube"
-msgstr ""
+msgstr "%s réclame du %s et des produits de luxe pour le tube lance-missiles."
 
 #: scripts/scenario_48_visitors.lua:2667
 #, lua-format
@@ -921,23 +952,26 @@ msgid ""
 "%s installs a homing missile tube for you. The %s required was requisitioned "
 "from emergency contingency supplies"
 msgstr ""
+"...%s installe un tube lance-missiles à tête chercheuse pour vous. Le %s "
+"requis a été réquisitionné à partir de fournitures d'urgence."
 
 #: scripts/scenario_48_visitors.lua:2674
 msgctxt "upgrade-comms"
 msgid "Reduce beam heat"
-msgstr ""
+msgstr "Réduire la chaleur des faisceaux laser"
 
 #: scripts/scenario_48_visitors.lua:2692
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Beam heat generation reduced by 50%%"
-msgstr ""
+msgstr "Production de chaleur des faisceaux laser réduite de 50%%."
 
 #: scripts/scenario_48_visitors.lua:2694
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s says she needs %s before she can cool your beams"
 msgstr ""
+"%s dit qu'elle a besoin de %s avant de pouvoir refroidir vos faisceaux laser."
 
 #: scripts/scenario_48_visitors.lua:2704
 #, lua-format
@@ -946,17 +980,21 @@ msgid ""
 "%s: Beam heat generation reduced by 50%%, no %s necessary. Go shoot some "
 "Exuari for me"
 msgstr ""
+"%s : production de chaleur des faisceaux laser réduite de 50%%, aucun %s "
+"nécessaire. Allez dégommer de l'Éxuari pour moi."
 
 #: scripts/scenario_48_visitors.lua:2714
 msgctxt "upgrade-comms"
 msgid "Extend beam range"
-msgstr ""
+msgstr "Étendre la portée des faisceaux laser"
 
 #: scripts/scenario_48_visitors.lua:2742
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s extended your beam range by 25%% and says thanks for the %s"
 msgstr ""
+"%s a étendu la portée de vos faisceaux laser de 25%% et vous remercie pour "
+"le %s."
 
 #: scripts/scenario_48_visitors.lua:2760
 #, lua-format
@@ -964,40 +1002,47 @@ msgctxt "upgrade-comms"
 msgid ""
 "%s increased your beam range by 25%% without the usual %s from your ship"
 msgstr ""
+"%s a augmenté la portée de vos faisceaux laser de 25%% sans le %s habituel."
 
 #: scripts/scenario_48_visitors.lua:2770
 msgctxt "upgrade-comms"
 msgid "Increase beam damage"
-msgstr ""
+msgstr "Augmenter les dégâts des faisceaux laser"
 
 #: scripts/scenario_48_visitors.lua:2793
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s increased your beam damage by 20%% and stores away the %s"
 msgstr ""
+"%s a augmenté les dégâts de vos faisceaux laser de 20%% et rangé le %s."
 
 #: scripts/scenario_48_visitors.lua:2810
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s increased your beam damage by 20%%, waiving the usual %s requirement"
 msgstr ""
+"%s a augmenté les dégâts de vos faisceaux laser de 20%% en se passant du %s "
+"habituel."
 
 #: scripts/scenario_48_visitors.lua:2820
 msgctxt "upgrade-comms"
 msgid "Increase missile storage capacity"
-msgstr ""
+msgstr "Augmenter la capacité de stockage des missiles"
 
 #: scripts/scenario_48_visitors.lua:2837
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s: You can now store at least 25%% more missiles. I appreciate the %s"
 msgstr ""
+"%s : vous pouvez désormais stocker jusqu'à 25%% de missiles "
+"supplémentaires.\n"
+"Merci pour le %s, j'apprécie."
 
 #: scripts/scenario_48_visitors.lua:2839
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s needs %s for the upgrade"
-msgstr ""
+msgstr "%s a besoin de %s pour la mise à niveau"
 
 #: scripts/scenario_48_visitors.lua:2848
 #, lua-format
@@ -1006,16 +1051,22 @@ msgid ""
 "%s: You can now store at least 25%% more missiles. I found some spare %s on "
 "the station. Go launch those missiles at those perfidious Exuari"
 msgstr ""
+"%s : vous pouvez désormais stocker jusqu'à 25%% de missiles "
+"supplémentaires.\n"
+"J'ai trouvé du %s de rechange sur la station. Allez balancer ces missiles "
+"sur ces maudits Éxuaris."
 
 #: scripts/scenario_48_visitors.lua:2851
 msgctxt "upgrade-comms"
 msgid "Your ship type does not support a missile storage capacity upgrade."
 msgstr ""
+"Votre type de vaisseau ne prend pas en charge la mise à niveau de la "
+"capacité de stockage des missiles."
 
 #: scripts/scenario_48_visitors.lua:2858
 msgctxt "upgrade-comms"
 msgid "Speed up impulse engines"
-msgstr ""
+msgstr "Booster les moteurs à impulsion"
 
 #: scripts/scenario_48_visitors.lua:2871
 #, lua-format
@@ -1023,12 +1074,15 @@ msgctxt "upgrade-comms"
 msgid ""
 "%s: Your impulse engines now push you up to 25%% faster. Thanks for the %s"
 msgstr ""
+"%s : vos moteurs à impulsion vous pousseront désormais jusqu'à 25%% plus "
+"vite. Merci pour le %s."
 
 #: scripts/scenario_48_visitors.lua:2873
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "You need to bring %s to %s for the upgrade"
 msgstr ""
+"Vous devez apporter du %s à %s pour pouvoir effectuer la mise à niveau."
 
 #: scripts/scenario_48_visitors.lua:2879
 #, lua-format
@@ -1037,23 +1091,28 @@ msgid ""
 "%s: Your impulse engines now push you up to 25%% faster. I didn't need %s "
 "after all. Go run circles around those blinking Exuari"
 msgstr ""
+"%s : vos moteurs à impulsion vous poussent désormais jusqu'à 25%% plus vite. "
+"Je n'ai pas eu besoin de %s finalement. Allez naviguer en cercle autour de "
+"ces Éxuaris."
 
 #: scripts/scenario_48_visitors.lua:2886
 msgctxt "upgrade-comms"
 msgid "Strengthen hull"
-msgstr ""
+msgstr "Renforcer la coque"
 
 #: scripts/scenario_48_visitors.lua:2900
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s: Thank you for the %s. Your hull is 50%% stronger"
-msgstr ""
+msgstr "%s : merci pour le %s. Votre coque est désormais 50%% plus solide."
 
 #: scripts/scenario_48_visitors.lua:2902
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s: I need %s before I can increase your hull strength"
 msgstr ""
+"%s : je vais avoir besoin de %s avant de pouvoir augmenter la résistance de "
+"votre coque."
 
 #: scripts/scenario_48_visitors.lua:2909
 #, lua-format
@@ -1062,6 +1121,8 @@ msgid ""
 "%s: I made your hull 50%% stronger. I scrounged some %s from around here "
 "since you are on the Exuari offense team"
 msgstr ""
+"%s : j'ai rendu votre coque 50%% plus solide. J'ai piqué quelques %s par ici "
+"puisque vous faites partie de l'équipe offensive contre les Éxuaris."
 
 #: scripts/scenario_48_visitors.lua:2916
 msgctxt "upgrade-comms"
@@ -1075,6 +1136,8 @@ msgid ""
 "%s: I appreciate the %s. You have a 25%% greater energy capacity due to "
 "increased battery efficiency"
 msgstr ""
+"%s : j'apprécie le %s. Vous disposez désormais d'une capacité énergétique "
+"supérieure de 25%% grâce à l'efficacité accrue de la batterie."
 
 #: scripts/scenario_48_visitors.lua:2932
 #, lua-format
@@ -1083,6 +1146,8 @@ msgid ""
 "%s: You need to bring me some %s before I can increase your battery "
 "efficiency"
 msgstr ""
+"%s : vous devez m'apporter du %s afin que je puisse augmenter l'efficacité "
+"de votre batterie."
 
 #: scripts/scenario_48_visitors.lua:2939
 #, lua-format
@@ -1091,11 +1156,13 @@ msgid ""
 "%s increased your battery efficiency by 25%% without the need for %s due to "
 "the pressing military demands on your ship"
 msgstr ""
+"%s a augmenté l'efficacité de votre batterie de 25%% sans avoir besoin de %s "
+"en raison des exigences militaires pressantes de votre vaisseau."
 
 #: scripts/scenario_48_visitors.lua:2946
 msgctxt "upgrade-comms"
 msgid "Strengthen shields"
-msgstr ""
+msgstr "Renforcer les boucliers"
 
 #: scripts/scenario_48_visitors.lua:2963
 #, lua-format
@@ -1103,12 +1170,16 @@ msgctxt "upgrade-comms"
 msgid ""
 "%s: I've raised your shield maximum by 20%%, %s. Thanks for bringing the %s"
 msgstr ""
+"%s : j'ai renforcé votre bouclier de 20%%, %s.\n"
+"Merci d'avoir apporté du %s."
 
 #: scripts/scenario_48_visitors.lua:2965
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s: You need to provide %s before I can raise your shield strength"
 msgstr ""
+"%s : vous devez me fournir du %s si vous voulez que j'augmente la force de "
+"votre bouclier."
 
 #: scripts/scenario_48_visitors.lua:2975
 #, lua-format
@@ -1117,6 +1188,9 @@ msgid ""
 "%s: Congratulations, %s, your shields are 20%% stronger. Don't worry about "
 "the %s. Go kick those Exuari outta here"
 msgstr ""
+"%s : félicitations, %s, vos boucliers sont 20%% plus puissants désormais. Ne "
+"vous inquiétez pas pour le %s. Allez donc chasser ces Éxuaris d'ici, voulez-"
+"vous !"
 
 #: scripts/scenario_48_visitors.lua:3005
 msgctxt "inventory-buttonRelay"

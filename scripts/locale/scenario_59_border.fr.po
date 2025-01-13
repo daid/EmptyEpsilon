@@ -27,7 +27,7 @@ msgid ""
 "\n"
 "Version 5"
 msgstr ""
-"EN COURS DE TRADUCTION 45%\n"
+"EN COURS DE TRADUCTION 49%\n"
 "\n"
 "War temperature rises along the border between Human Navy space and Kraylor "
 "space. The treaty holds for now, but the diplomats and intelligence "
@@ -1839,7 +1839,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:3750
 msgctxt "upgrade-buttonHelms"
 msgid "Spin Speed"
-msgstr ""
+msgstr "Vitesse de rotation"
 
 #: scripts/scenario_59_border.lua:3758
 msgctxt "upgrade-msgHelms"
@@ -1849,7 +1849,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:3773
 msgctxt "upgrade-buttonTactical"
 msgid "Spin Speed"
-msgstr ""
+msgstr "Vitesse de rotation"
 
 #: scripts/scenario_59_border.lua:3781
 msgctxt "upgrade-msgTactical"
@@ -3346,6 +3346,8 @@ msgstr "Réduire le temps de cycle des faisceaux laser"
 msgctxt "upgrade-comms"
 msgid "After accepting your gift, he reduced your Beam cycle time by %i%%"
 msgstr ""
+"Après avoir accepté votre cadeau, il a réduit le temps de cycle de vos "
+"faisceaux laser de %i%%."
 
 #: scripts/scenario_59_border.lua:6800 scripts/scenario_59_border.lua:6995
 #: scripts/scenario_59_border.lua:7053
@@ -3441,19 +3443,21 @@ msgstr "Précédent"
 #: scripts/scenario_59_border.lua:6825
 msgctxt "upgrade-comms"
 msgid "Increase spin speed"
-msgstr ""
+msgstr "Augmenter la vitesse de rotation"
 
 #: scripts/scenario_59_border.lua:6844
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Ship spin speed increased by %i%% after you gave %s to %s"
 msgstr ""
+"La vitesse de rotation du vaisseau a augmenté de %i%% après avoir donné la "
+"marchandise %s à %s."
 
 #: scripts/scenario_59_border.lua:6846
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s requires %s for the spin upgrade"
-msgstr ""
+msgstr "%s a besoin de %s pour la mise à niveau de la vitesse de rotation."
 
 #: scripts/scenario_59_border.lua:6851
 #, lua-format
@@ -3462,11 +3466,14 @@ msgid ""
 "%s: I increased the speed your ship spins by 50%%. Normally, I'd require %s, "
 "but seeing as you're going out to take on the Kraylors, we worked it out"
 msgstr ""
+"%s : J'ai augmenté la vitesse de rotation de votre vaisseau de 50%%.\n"
+"Normalement, je vous demanderai du %s, mais comme vous comptez affronter les "
+"Kraylors, nous nous sommes arrangés."
 
 #: scripts/scenario_59_border.lua:6859
 msgctxt "upgrade-comms"
 msgid "Add missle tube"
-msgstr ""
+msgstr "Ajouter un tube lance-missiles"
 
 #: scripts/scenario_59_border.lua:6889
 #, lua-format
@@ -3475,12 +3482,14 @@ msgid ""
 "%s thanks you for the %s and the luxury and installs a homing missile tube "
 "for you"
 msgstr ""
+"...%s vous remercie pour le %s et les produits de luxe et installe un tube "
+"lance-missiles à tête chercheuse pour vous."
 
 #: scripts/scenario_59_border.lua:6891
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s requires %s and luxury for the missile tube"
-msgstr ""
+msgstr "%s réclame du %s et des produits de luxe pour le tube lance-missiles."
 
 #: scripts/scenario_59_border.lua:6901
 #, lua-format
@@ -3489,23 +3498,27 @@ msgid ""
 "%s installs a homing missile tube for you. The %s required was requisitioned "
 "from wartime contingency supplies"
 msgstr ""
+"...%s installe un tube lance-missiles à tête chercheuse pour vous. Le %s "
+"requis a été réquisitionné à partir de fournitures d'urgence en temps de "
+"guerre."
 
 #: scripts/scenario_59_border.lua:6909
 msgctxt "upgrade-comms"
 msgid "Reduce beam heat"
-msgstr ""
+msgstr "Réduire la chaleur des faisceaux laser"
 
 #: scripts/scenario_59_border.lua:6933
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Beam heat generation reduced by %i%%"
-msgstr ""
+msgstr "Production de chaleur des faisceaux laser réduite de %i%%."
 
 #: scripts/scenario_59_border.lua:6935
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s says she needs %s before she can cool your beams"
 msgstr ""
+"%s dit qu'elle a besoin de %s avant de pouvoir refroidir vos faisceaux laser."
 
 #: scripts/scenario_59_border.lua:6944
 #, lua-format
@@ -3514,17 +3527,21 @@ msgid ""
 "%s: Beam heat generation reduced by 50%%, no %s necessary. Go shoot some "
 "Kraylors for me"
 msgstr ""
+"%s : production de chaleur des faisceaux laser réduite de 50%%, aucun %s "
+"nécessaire. Allez dégommer du Kraylor pour moi."
 
 #: scripts/scenario_59_border.lua:6955
 msgctxt "upgrade-comms"
 msgid "Extend beam range"
-msgstr ""
+msgstr "Étendre la portée des faisceaux laser"
 
 #: scripts/scenario_59_border.lua:6993
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s extended your beam range by %i%% and says thanks for the %s"
 msgstr ""
+"%s a étendu la portée de vos faisceaux laser de %i%% et vous remercie pour "
+"le %s."
 
 #: scripts/scenario_59_border.lua:7011
 #, lua-format
@@ -3532,40 +3549,47 @@ msgctxt "upgrade-comms"
 msgid ""
 "%s increased your beam range by 25%% without the usual %s from your ship"
 msgstr ""
+"%s a augmenté la portée de vos faisceaux laser de 25%% sans le %s habituel."
 
 #: scripts/scenario_59_border.lua:7022
 msgctxt "upgrade-comms"
 msgid "Increase beam damage"
-msgstr ""
+msgstr "Augmenter les dégâts des faisceaux laser"
 
 #: scripts/scenario_59_border.lua:7051
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s increased your beam damage by %i%% and stores away the %s"
 msgstr ""
+"%s a augmenté les dégâts de vos faisceaux laser de %i%% et rangé le %s."
 
 #: scripts/scenario_59_border.lua:7067
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s increased your beam damage by 20%%, waiving the usual %s requirement"
 msgstr ""
+"%s a augmenté les dégâts de vos faisceaux laser de 20%% en se passant du %s "
+"habituel."
 
 #: scripts/scenario_59_border.lua:7078
 msgctxt "upgrade-comms"
 msgid "Increase missile storage capacity"
-msgstr ""
+msgstr "Augmenter la capacité de stockage des missiles"
 
 #: scripts/scenario_59_border.lua:7101
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s: You can now store at least %i%% more missiles. I appreciate the %s"
 msgstr ""
+"%s : vous pouvez désormais stocker jusqu'à %i%% de missiles "
+"supplémentaires.\n"
+"Merci pour le %s, j'apprécie."
 
 #: scripts/scenario_59_border.lua:7103
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s needs %s for the upgrade"
-msgstr ""
+msgstr "%s a besoin de %s pour la mise à niveau."
 
 #: scripts/scenario_59_border.lua:7111
 #, lua-format
@@ -3575,16 +3599,22 @@ msgid ""
 "the station. Go launch those missiles at those perfidious treaty-breaking "
 "Kraylors"
 msgstr ""
+"%s : vous pouvez désormais stocker jusqu'à 25%% de missiles "
+"supplémentaires.\n"
+"J'ai trouvé du %s de rechange sur la station. Allez balancer ces missiles "
+"sur ces perfides Kraylors qui enfreignent les traités."
 
 #: scripts/scenario_59_border.lua:7114
 msgctxt "upgrade-comms"
 msgid "Your ship type does not support a missile storage capacity upgrade."
 msgstr ""
+"Votre type de vaisseau ne prend pas en charge la mise à niveau de la "
+"capacité de stockage des missiles."
 
 #: scripts/scenario_59_border.lua:7122
 msgctxt "upgrade-comms"
 msgid "Speed up impulse engines"
-msgstr ""
+msgstr "Booster les moteurs à impulsion"
 
 #: scripts/scenario_59_border.lua:7141
 #, lua-format
@@ -3592,12 +3622,15 @@ msgctxt "upgrade-comms"
 msgid ""
 "%s: Your impulse engines now push you up to %i%% faster. Thanks for the %s"
 msgstr ""
+"%s : vos moteurs à impulsion vous pousseront désormais jusqu'à %i%% plus "
+"vite. Merci pour le %s."
 
 #: scripts/scenario_59_border.lua:7143
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "You need to bring %s to %s for the upgrade"
 msgstr ""
+"Vous devez apporter du %s à %s pour pouvoir effectuer la mise à niveau."
 
 #: scripts/scenario_59_border.lua:7148
 #, lua-format
@@ -3606,23 +3639,28 @@ msgid ""
 "%s: Your impulse engines now push you up to 25%% faster. I didn't need %s "
 "after all. Go run circles around those blinking Kraylors"
 msgstr ""
+"%s : vos moteurs à impulsion vous poussent désormais jusqu'à 25%% plus vite. "
+"Je n'ai pas eu besoin de %s finalement. Allez naviguer en cercle autour de "
+"ces Kraylors."
 
 #: scripts/scenario_59_border.lua:7156
 msgctxt "upgrade-comms"
 msgid "Strengthen hull"
-msgstr ""
+msgstr "Renforcer la coque"
 
 #: scripts/scenario_59_border.lua:7176
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s: Thank you for the %s. Your hull is %i%% stronger"
-msgstr ""
+msgstr "%s : merci pour le %s. Votre coque est désormais %i%% plus solide."
 
 #: scripts/scenario_59_border.lua:7178
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s: I need %s before I can increase your hull strength"
 msgstr ""
+"%s : je vais avoir besoin de %s avant de pouvoir augmenter la résistance de "
+"votre coque."
 
 #: scripts/scenario_59_border.lua:7184
 #, lua-format
@@ -3631,6 +3669,8 @@ msgid ""
 "%s: I made your hull 50%% stronger. I scrounged some %s from around here "
 "since you are on the Kraylor offense team"
 msgstr ""
+"%s : j'ai rendu votre coque 50%% plus solide. J'ai piqué quelques %s par ici "
+"puisque vous faites partie de l'équipe offensive contre les Kraylors."
 
 #: scripts/scenario_59_border.lua:7192
 msgctxt "upgrade-comms"
@@ -3644,6 +3684,8 @@ msgid ""
 "%s: I appreciate the %s. You have a %i%% greater energy capacity due to "
 "increased battery efficiency"
 msgstr ""
+"%s : j'apprécie le %s. Vous disposez désormais d'une capacité énergétique "
+"supérieure de %i%% grâce à l'efficacité accrue de la batterie."
 
 #: scripts/scenario_59_border.lua:7214
 #, lua-format
@@ -3652,6 +3694,8 @@ msgid ""
 "%s: You need to bring me some %s before I can increase your battery "
 "efficiency"
 msgstr ""
+"%s : vous devez m'apporter du %s afin que je puisse augmenter l'efficacité "
+"de votre batterie."
 
 #: scripts/scenario_59_border.lua:7220
 #, lua-format
@@ -3660,11 +3704,13 @@ msgid ""
 "%s increased your battery efficiency by 25%% without the need for %s due to "
 "the pressing military demands on your ship"
 msgstr ""
+"%s a augmenté l'efficacité de votre batterie de 25%% sans avoir besoin de %s "
+"en raison des exigences militaires pressantes de votre vaisseau."
 
 #: scripts/scenario_59_border.lua:7228
 msgctxt "upgrade-comms"
 msgid "Strengthen shields"
-msgstr ""
+msgstr "Renforcer les boucliers"
 
 #: scripts/scenario_59_border.lua:7251
 #, lua-format
@@ -3672,12 +3718,16 @@ msgctxt "upgrade-comms"
 msgid ""
 "%s: I've raised your shield maximum by %i%%, %s. Thanks for bringing the %s"
 msgstr ""
+"%s : j'ai renforcé votre bouclier de %i%%, %s.\n"
+"Merci d'avoir apporté du %s."
 
 #: scripts/scenario_59_border.lua:7253
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s: You need to provide %s before I can raise your shield strength"
 msgstr ""
+"%s : vous devez me fournir du %s si vous voulez que j'augmente la force de "
+"votre bouclier."
 
 #: scripts/scenario_59_border.lua:7262
 #, lua-format
@@ -3686,6 +3736,9 @@ msgid ""
 "%s: Congratulations, %s, your shields are 20%% stronger. Don't worry about "
 "the %s. Go kick those Kraylors outta here"
 msgstr ""
+"%s : félicitations, %s, vos boucliers sont 20%% plus puissants désormais. Ne "
+"vous inquiétez pas pour le %s. Allez donc chasser ces Kraylors d'ici, voulez-"
+"vous !"
 
 #: scripts/scenario_59_border.lua:7320
 msgctxt "station-comms"
@@ -6584,7 +6637,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:15120
 msgctxt "-tabHelms&Tactical"
 msgid "Spin Speed"
-msgstr ""
+msgstr "Vitesse de rotation"
 
 #: scripts/scenario_59_border.lua:15164
 msgctxt "-tabEngineer&Engineer+"
