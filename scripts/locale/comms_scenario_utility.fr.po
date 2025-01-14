@@ -723,12 +723,12 @@ msgstr "%i rép l'unité"
 #: scripts/comms_scenario_utility.lua:823
 msgctxt "scienceDB"
 msgid "Repair scanners"
-msgstr ""
+msgstr "Réparation de scanners"
 
 #: scripts/comms_scenario_utility.lua:824
 msgctxt "scienceDB"
 msgid "Repair combat maneuver"
-msgstr ""
+msgstr "Réparation de la manœuvre de combat"
 
 #: scripts/comms_scenario_utility.lua:825
 msgctxt "scienceDB"

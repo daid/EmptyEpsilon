@@ -75,7 +75,7 @@ msgstr ""
 "- Titre original : Unwanted Visitors\n"
 "- Auteur : Xansta (2020)\n"
 "- Traduction FR : Muerte (Juin 23)\n"
-"Traduction en cours 56%   398/702\n"
+"Traduction en cours 71%   501/702\n"
 "\n"
 "- Acteurs vocaux :\n"
 "Admiral U. E.\n"
@@ -270,22 +270,22 @@ msgstr "- Précédent"
 #: scripts/scenario_48_visitors.lua:116
 msgctxt "buttonGM"
 msgid "Narsil"
-msgstr ""
+msgstr "Narsil"
 
 #: scripts/scenario_48_visitors.lua:119
 msgctxt "buttonGM"
 msgid "Headhunter"
-msgstr ""
+msgstr "Headhunter"
 
 #: scripts/scenario_48_visitors.lua:122
 msgctxt "buttonGM"
 msgid "Blazon"
-msgstr ""
+msgstr "Blazon"
 
 #: scripts/scenario_48_visitors.lua:125
 msgctxt "buttonGM"
 msgid "Sting"
-msgstr ""
+msgstr "Sting"
 
 #: scripts/scenario_48_visitors.lua:255
 #, lua-format
@@ -302,56 +302,68 @@ msgid ""
 "Secondus: %s\n"
 "Tertius: %s"
 msgstr ""
+"Primus est la planète la plus proche du soleil. Secondus est la prochaine "
+"planète à s'éloigner du soleil. Tertius est la troisième planète à "
+"s'éloigner du Soleil.\n"
+"Sol Belt 1 est la ceinture d’astéroïdes et de stations la plus proche du "
+"soleil. Sol Belt 2 est la prochaine à sortir. La ceinture lunaire de Tertius "
+"est la ceinture d'astéroïdes, de lune et de stations en orbite autour de "
+"Tertius. La ceinture Tertius 2 est la prochaine à sortir de Tertius.\n"
+"--- Noms des corps célestes ---\n"
+"Soleil : %s\n"
+"Primus : %s\n"
+"Secondus : %s\n"
+"Tertius : %s"
 
 #: scripts/scenario_48_visitors.lua:259
 msgctxt "buttonGM"
 msgid "Primus"
-msgstr ""
+msgstr "Primus"
 
 #: scripts/scenario_48_visitors.lua:260
 msgctxt "buttonGM"
 msgid "Primus Moon"
-msgstr ""
+msgstr "Lune de primus"
 
 #: scripts/scenario_48_visitors.lua:261
 msgctxt "buttonGM"
 msgid "Secondus"
-msgstr ""
+msgstr "Secondus"
 
 #: scripts/scenario_48_visitors.lua:262
 msgctxt "buttonGM"
 msgid "Secondus Station"
-msgstr ""
+msgstr "Station secondus"
 
 #: scripts/scenario_48_visitors.lua:263
 msgctxt "buttonGM"
 msgid "Sol Belt 1"
-msgstr ""
+msgstr "Ceinture solaire 1"
 
 #: scripts/scenario_48_visitors.lua:264
 msgctxt "buttonGM"
 msgid "Sol Belt 2"
-msgstr ""
+msgstr "Ceinture solaire 2"
 
 #: scripts/scenario_48_visitors.lua:265
 msgctxt "buttonGM"
 msgid "Tertius"
-msgstr ""
+msgstr "Tertius"
 
 #: scripts/scenario_48_visitors.lua:266
 msgctxt "buttonGM"
 msgid "Tertius Moon Belt"
-msgstr ""
+msgstr "Ceinture lunaire de Tertius"
 
 #: scripts/scenario_48_visitors.lua:267
 msgctxt "buttonGM"
 msgid "Tertius Belt 2"
-msgstr ""
+msgstr "Ceinture Tertius 2"
 
 #: scripts/scenario_48_visitors.lua:272
 msgctxt "buttonGM"
 msgid "-From Primus"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_48_visitors.lua:273 scripts/scenario_48_visitors.lua:292
 #: scripts/scenario_48_visitors.lua:311 scripts/scenario_48_visitors.lua:330
@@ -366,7 +378,7 @@ msgstr "Plus lent"
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Primus speed: %.1f"
-msgstr ""
+msgstr "Vitesse actuelle de Primus : %.1f"
 
 #: scripts/scenario_48_visitors.lua:277
 #, lua-format
@@ -375,6 +387,8 @@ msgid ""
 "%s\n"
 "New slower Primus speed: %.1f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus lente de Primus : %.1f"
 
 #: scripts/scenario_48_visitors.lua:280 scripts/scenario_48_visitors.lua:299
 #: scripts/scenario_48_visitors.lua:318 scripts/scenario_48_visitors.lua:336
@@ -392,17 +406,19 @@ msgid ""
 "%s\n"
 "New faster Primus speed: %.1f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus rapide de Primus : %.1f"
 
 #: scripts/scenario_48_visitors.lua:291
 msgctxt "buttonGM"
 msgid "-From Primus Moon"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_48_visitors.lua:293 scripts/scenario_48_visitors.lua:300
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Primus moon speed: %.1f"
-msgstr ""
+msgstr "Vitesse actuelle de la lune de Primus : %.1f"
 
 #: scripts/scenario_48_visitors.lua:296
 #, lua-format
@@ -411,6 +427,8 @@ msgid ""
 "%s\n"
 "New slower Primus moon speed: %.1f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus lente de la lune de Primus : %.1f"
 
 #: scripts/scenario_48_visitors.lua:303
 #, lua-format
@@ -419,17 +437,19 @@ msgid ""
 "%s\n"
 "New faster Primus moon speed: %.1f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus rapide de la lune de Primus : %.1f"
 
 #: scripts/scenario_48_visitors.lua:310
 msgctxt "buttonGM"
 msgid "-From Secondus"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_48_visitors.lua:312 scripts/scenario_48_visitors.lua:319
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Secondus speed: %.1f"
-msgstr ""
+msgstr "Vitesse actuelle de Secondus : %.1f"
 
 #: scripts/scenario_48_visitors.lua:315
 #, lua-format
@@ -438,6 +458,8 @@ msgid ""
 "%s\n"
 "New slower Secondus speed: %.1f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus lente de Secondus : %.1f"
 
 #: scripts/scenario_48_visitors.lua:322
 #, lua-format
@@ -446,17 +468,19 @@ msgid ""
 "%s\n"
 "New faster Secondus speed: %.1f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus rapide de Secondus : %.1f"
 
 #: scripts/scenario_48_visitors.lua:329
 msgctxt "buttonGM"
 msgid "-From Secondus Stn"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_48_visitors.lua:331 scripts/scenario_48_visitors.lua:337
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Secondus station speed: %.3f"
-msgstr ""
+msgstr "Vitesse actuelle de la station de Secondus : %.3f"
 
 #: scripts/scenario_48_visitors.lua:333
 #, lua-format
@@ -465,6 +489,8 @@ msgid ""
 "%s\n"
 "New slower Secondus station speed: %.3f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus lente de la station de Secondus : %.3f"
 
 #: scripts/scenario_48_visitors.lua:339
 #, lua-format
@@ -473,17 +499,19 @@ msgid ""
 "%s\n"
 "New faster Secondus station speed: %.3f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus rapide de la station de Secondus : %.3f"
 
 #: scripts/scenario_48_visitors.lua:346
 msgctxt "buttonGM"
 msgid "-From Sol Belt 1"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_48_visitors.lua:348 scripts/scenario_48_visitors.lua:360
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Sol Belt 1 speed: %.3f"
-msgstr ""
+msgstr "Vitesse actuelle de la ceinture solaire 1 : %.3f"
 
 #: scripts/scenario_48_visitors.lua:356
 #, lua-format
@@ -492,6 +520,8 @@ msgid ""
 "%s\n"
 "New slower Sol Belt 1 speed: %.3f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus lente de la ceinture solaire 1 : %.3f"
 
 #: scripts/scenario_48_visitors.lua:368
 #, lua-format
@@ -500,17 +530,19 @@ msgid ""
 "%s\n"
 "New faster Sol Belt 1 speed: %.3f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus rapide de la ceinture solaire 1 : %.3f"
 
 #: scripts/scenario_48_visitors.lua:375
 msgctxt "buttonGM"
 msgid "-From Sol Belt 2"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_48_visitors.lua:377 scripts/scenario_48_visitors.lua:389
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Sol Belt 2 speed: %.3f"
-msgstr ""
+msgstr "Vitesse actuelle de la ceinture solaire 2 : %.3f"
 
 #: scripts/scenario_48_visitors.lua:385
 #, lua-format
@@ -519,6 +551,8 @@ msgid ""
 "%s\n"
 "New slower Sol Belt 2 speed: %.3f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus lente de la ceinture solaire 2 : %.3f"
 
 #: scripts/scenario_48_visitors.lua:397
 #, lua-format
@@ -527,17 +561,19 @@ msgid ""
 "%s\n"
 "New faster Sol Belt 2 speed: %.3f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus rapide de la ceinture solaire 2 : %.3f"
 
 #: scripts/scenario_48_visitors.lua:404
 msgctxt "buttonGM"
 msgid "-From Tertius"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_48_visitors.lua:406 scripts/scenario_48_visitors.lua:413
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Tertius speed: %.1f"
-msgstr ""
+msgstr "Vitesse actuelle de Tertius : %.1f"
 
 #: scripts/scenario_48_visitors.lua:409
 #, lua-format
@@ -546,6 +582,8 @@ msgid ""
 "%s\n"
 "New slower Tertius speed: %.1f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus lente de Tertius : %.1f"
 
 #: scripts/scenario_48_visitors.lua:416
 #, lua-format
@@ -554,17 +592,19 @@ msgid ""
 "%s\n"
 "New faster Tertius speed: %.1f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus rapide de Tertius : %.1f"
 
 #: scripts/scenario_48_visitors.lua:423
 msgctxt "buttonGM"
 msgid "-From Tertius Moon"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_48_visitors.lua:425 scripts/scenario_48_visitors.lua:437
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Tertius Moon Belt speed: %.3f"
-msgstr ""
+msgstr "Vitesse actuelle de la ceinture lunaire de Tertius : %.3f"
 
 #: scripts/scenario_48_visitors.lua:433
 #, lua-format
@@ -573,6 +613,8 @@ msgid ""
 "%s\n"
 "New slower Tertius Moon Belt speed: %.3f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus lente de la ceinture lunaire de Tertius : %.3f"
 
 #: scripts/scenario_48_visitors.lua:445
 #, lua-format
@@ -581,17 +623,19 @@ msgid ""
 "%s\n"
 "New faster Tertius Moon Belt speed: %.3f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus rapide de la ceinture lunaire de Tertius : %.3f"
 
 #: scripts/scenario_48_visitors.lua:452
 msgctxt "buttonGM"
 msgid "-From Tertius Belt 2"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_48_visitors.lua:454 scripts/scenario_48_visitors.lua:472
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Tertius Belt 2 speed: %.3f"
-msgstr ""
+msgstr "Vitesse actuelle de la ceinture Tertius 2 : %.3f"
 
 #: scripts/scenario_48_visitors.lua:468
 #, lua-format
@@ -600,6 +644,8 @@ msgid ""
 "%s\n"
 "New slower Tertius Belt 2 speed: %.3f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus lente de la ceinture Tertius 2 : %.3f"
 
 #: scripts/scenario_48_visitors.lua:486
 #, lua-format
@@ -608,6 +654,8 @@ msgid ""
 "%s\n"
 "New faster Tertius Belt 2 speed: %.3f"
 msgstr ""
+"%s\n"
+"Nouvelle vitesse plus rapide de la ceinture Tertius 2 : %.3f"
 
 #: scripts/scenario_48_visitors.lua:494
 msgctxt "buttonGM"
@@ -1457,23 +1505,25 @@ msgid ""
 "Excellent work on your last assignment, %s. You may stand down or take "
 "another assignment"
 msgstr ""
+"Excellent travail sur votre dernière mission, %s.\n"
+"Vous pouvez vous retirer ou accepter une autre mission."
 
 #: scripts/scenario_48_visitors.lua:3176 scripts/scenario_48_visitors.lua:3307
 #: scripts/scenario_48_visitors.lua:3369
 msgctxt "DispatchOffice-comms"
 msgid "Stand down"
-msgstr ""
+msgstr "Démissionner"
 
 #: scripts/scenario_48_visitors.lua:3177 scripts/scenario_48_visitors.lua:3308
 #: scripts/scenario_48_visitors.lua:3370
 msgctxt "DispatchOffice-comms"
 msgid "Congratulations and thank you"
-msgstr ""
+msgstr "Félicitations et merci"
 
 #: scripts/scenario_48_visitors.lua:3183
 msgctxt "DispatchOffice-comms"
 msgid "Move to next region of available missions"
-msgstr ""
+msgstr "Passer à la région suivante des missions disponibles."
 
 #: scripts/scenario_48_visitors.lua:3184 scripts/scenario_48_visitors.lua:3223
 #, lua-format
@@ -1482,19 +1532,21 @@ msgid ""
 "Dock with station %s for the details of your next assignment. Beware the "
 "asteroids"
 msgstr ""
+"Amarrez-vous à la station %s pour les détails de votre prochaine mission.\n"
+"Attention aux astéroïdes."
 
 #: scripts/scenario_48_visitors.lua:3188 scripts/scenario_48_visitors.lua:3227
 #: scripts/scenario_48_visitors.lua:3254 scripts/scenario_48_visitors.lua:3293
 #, lua-format
 msgctxt "DispatchOffice-comms"
 msgid "Dock with station %s"
-msgstr ""
+msgstr "S'amarrer à la station %s"
 
 #: scripts/scenario_48_visitors.lua:3192 scripts/scenario_48_visitors.lua:3221
 #: scripts/scenario_48_visitors.lua:3258 scripts/scenario_48_visitors.lua:3287
 msgctxt "DispatchOffice-comms"
 msgid "Request next assignment"
-msgstr ""
+msgstr "Consulter la prochaine mission"
 
 #: scripts/scenario_48_visitors.lua:3246
 #, lua-format
@@ -1503,18 +1555,21 @@ msgid ""
 "Welcome to %s station, %s. We're glad you're here. These are your choices "
 "for assignments"
 msgstr ""
+"Bienvenue sur la station %s, %s. Nous sommes heureux de vous accueillir "
+"parmi nous.\n"
+"Vous pouvez choisir vos missions :"
 
 #: scripts/scenario_48_visitors.lua:3249
 #, lua-format
 msgctxt "DispatchOffice-comms"
 msgid "Move on to missions in %s area"
-msgstr ""
+msgstr "Passer aux missions de la zone %s"
 
 #: scripts/scenario_48_visitors.lua:3250 scripts/scenario_48_visitors.lua:3289
 #, lua-format
 msgctxt "DispatchOffice-comms"
 msgid "Dock with station %s for your next assignment"
-msgstr ""
+msgstr "Amarrez-vous à la station %s pour votre prochaine mission."
 
 #: scripts/scenario_48_visitors.lua:3318
 #, lua-format
@@ -1523,11 +1578,14 @@ msgid ""
 "Welcome, %s. Everything is bigger at %s station. We could use your help with "
 "one of these mission options"
 msgstr ""
+"Bienvenue, %s.\n"
+"Tout est plus grand à la station %s. Nous pourrions avoir besoin de votre "
+"aide avec l'une de ces options de mission :"
 
 #: scripts/scenario_48_visitors.lua:3320
 msgctxt "Exuari1-comms"
 msgid "Exuari Exterminates Extraterrestrials"
-msgstr ""
+msgstr "Les Éxuaris exterminent les extraterrestres"
 
 #: scripts/scenario_48_visitors.lua:3321
 msgctxt "Exuari1-comms"
@@ -1535,11 +1593,14 @@ msgid ""
 "The Exuari have unlimited resources and continually send more ships of "
 "greater and greater power and nastier surprises. No victory condition exists"
 msgstr ""
+"Les Éxuaris disposent de ressources illimitées et envoient continuellement "
+"de plus en plus de vaisseaux toujours plus puissants et de plus en plus de "
+"mauvaises surprises. Aucune condition de victoire n'existe."
 
 #: scripts/scenario_48_visitors.lua:3323 scripts/scenario_48_visitors.lua:3333
 msgctxt "DispatchOfficeOrders-comms"
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmer"
 
 #: scripts/scenario_48_visitors.lua:3325
 #, lua-format
@@ -1548,11 +1609,13 @@ msgid ""
 "The Exuari are on their way. They will target you and the assets in and "
 "around %s"
 msgstr ""
+"Les Éxuaris sont en route. Ils vous cibleront ainsi que tout ce qui se "
+"trouve dans et autour de %s."
 
 #: scripts/scenario_48_visitors.lua:3330
 msgctxt "Exuari2-comms"
 msgid "Eliminate Exuari stronghold"
-msgstr ""
+msgstr "Éliminer la forteresse Éxuarie"
 
 #: scripts/scenario_48_visitors.lua:3331
 msgctxt "Exuari2-comms"
@@ -1561,6 +1624,9 @@ msgid ""
 "through their stronghold. Obtain victory by finding and destroying the "
 "Exuari stronghold."
 msgstr ""
+"Les Éxuaris disposent de ressources illimitées, mais ils sont contraints de "
+"les canaliser vers leur forteresse.\n"
+"Obtenez la victoire en trouvant et en détruisant cette forteresse."
 
 #: scripts/scenario_48_visitors.lua:3335
 msgctxt "Exuari2-comms"
@@ -1570,7 +1636,7 @@ msgstr "Bonne chance."
 #: scripts/scenario_48_visitors.lua:3340
 msgctxt "Exuari3-comms"
 msgid "Survive Exuari offensive"
-msgstr ""
+msgstr "Survivre à l'offensive Éxuarie"
 
 #: scripts/scenario_48_visitors.lua:3341
 msgctxt "Exuari3-comms"
@@ -1578,27 +1644,30 @@ msgid ""
 "The Exuari launch their invasion offensive. You must survive their attack. "
 "You will have a limited amount of time during which you must survive"
 msgstr ""
+"Les Éxuaris lancent leur offensive d'invasion.\n"
+"Vous devez survivre à leur attaque. Vous disposerez d'un temps limité "
+"pendant lequel vous devrez survivre."
 
 #: scripts/scenario_48_visitors.lua:3343
 msgctxt "Exuari3-comms"
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minutes"
 
 #: scripts/scenario_48_visitors.lua:3347 scripts/scenario_48_visitors.lua:3355
 #: scripts/scenario_48_visitors.lua:3363
 msgctxt "Exuari3-comms"
 msgid "The countdown has begun"
-msgstr ""
+msgstr "Le compte à rebours a commencé."
 
 #: scripts/scenario_48_visitors.lua:3351
 msgctxt "Exuari3-comms"
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minutes"
 
 #: scripts/scenario_48_visitors.lua:3359
 msgctxt "Exuari3-comms"
 msgid "45 minutes"
-msgstr ""
+msgstr "45 minutes"
 
 #: scripts/scenario_48_visitors.lua:3379
 msgctxt "Polly-comms"
@@ -2203,6 +2272,8 @@ msgid ""
 "My aunt's neighbor's second cousin is named %s. However, %s lives far away "
 "from here."
 msgstr ""
+"Le cousin germain du voisin de ma tante s'appelle %s. Cependant, %s habite "
+"loin d'ici."
 
 #: scripts/scenario_48_visitors.lua:3878
 msgctxt "station-comms"
@@ -3530,29 +3601,29 @@ msgstr "%s, %s"
 #: scripts/scenario_48_visitors.lua:5209
 msgctxt "scienceDB"
 msgid "share energy"
-msgstr "partager l'énergie"
+msgstr "Partage d'énergie"
 
 #: scripts/scenario_48_visitors.lua:5214
 msgctxt "scienceDB"
 msgid "repair hull"
-msgstr "réparer la coque"
+msgstr "Réparation de coque"
 
 #: scripts/scenario_48_visitors.lua:5216
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, repair hull"
-msgstr "%s, réparer la coque"
+msgstr "%s, Rép. de coque"
 
 #: scripts/scenario_48_visitors.lua:5222
 msgctxt "scienceDB"
 msgid "replenish probes"
-msgstr "réapprovisionner les sondes"
+msgstr "Sondes"
 
 #: scripts/scenario_48_visitors.lua:5224
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, replenish probes"
-msgstr "%s, réapprovisionner les sondes"
+msgstr "%s, Sondes"
 
 #: scripts/scenario_48_visitors.lua:5229
 msgctxt "scienceDB"
@@ -3567,33 +3638,30 @@ msgstr "Service d'accueil"
 #: scripts/scenario_48_visitors.lua:5253
 msgctxt "scienceDB"
 msgid "Restock Homing"
-msgstr "Réapprovisionner les Homing"
+msgstr "Munitions Homing"
 
 #: scripts/scenario_48_visitors.lua:5254
 msgctxt "scienceDB"
 msgid "Restock HVLI"
-msgstr "Réapprovisionner les HVLI"
+msgstr "Munitions HVLI"
 
 #: scripts/scenario_48_visitors.lua:5255
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Restock Mine"
 msgstr "Munitions Mines"
 
 #: scripts/scenario_48_visitors.lua:5256
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Restock Nuke"
 msgstr "Munitions Nukes"
 
 #: scripts/scenario_48_visitors.lua:5257
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Restock EMP"
 msgstr "Munitions EMP"
 
 #: scripts/scenario_48_visitors.lua:5262
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "%i reputation each"
 msgstr "%i rép l'unité"
@@ -3601,22 +3669,19 @@ msgstr "%i rép l'unité"
 #: scripts/scenario_48_visitors.lua:5270
 msgctxt "scienceDB"
 msgid "Drop supplies"
-msgstr ""
+msgstr "Livrais. caisse réappro"
 
 #: scripts/scenario_48_visitors.lua:5271
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Standard reinforcements"
 msgstr "Renforts Vipère MK5"
 
 #: scripts/scenario_48_visitors.lua:5272
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Hornet reinforcements"
 msgstr "Renforts Frelon MU52"
 
 #: scripts/scenario_48_visitors.lua:5273
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Phobos reinforcements"
 msgstr "Renforts Phobos T3"
@@ -3624,10 +3689,9 @@ msgstr "Renforts Phobos T3"
 #: scripts/scenario_48_visitors.lua:5274
 msgctxt "scienceDB"
 msgid "Adder3 reinforcements"
-msgstr ""
+msgstr "Renforts Vipère MK3"
 
 #: scripts/scenario_48_visitors.lua:5275
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Adder8 reinforcements"
 msgstr "Renforts Vipère MK8"
@@ -3638,7 +3702,7 @@ msgid "Shield overcharge"
 msgstr ""
 
 #: scripts/scenario_48_visitors.lua:5281
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "%s reputation"
 msgstr "%s rép"
@@ -4214,12 +4278,14 @@ msgid ""
 "[%s orbiting %s currently in %s] We could use help taking care of nearby "
 "Exuari"
 msgstr ""
+"[%s en orbite autour de %s actuellement en secteur %s] Nous pourrions avoir "
+"besoin d'aide pour nous occuper des Éxuaris à proximité."
 
 #: scripts/scenario_48_visitors.lua:6303
 #, lua-format
 msgctxt "marauders-comms"
 msgid "Remove Exuari near %s"
-msgstr ""
+msgstr "Supprimer les Éxuaris près de %s"
 
 #: scripts/scenario_48_visitors.lua:6385
 #, lua-format
@@ -4228,6 +4294,8 @@ msgid ""
 "[%s] All station personnel thank you for your assistance. Dock with us for "
 "further orders"
 msgstr ""
+"[Station %s] Tout le personnel de la station vous remercie pour votre aide. "
+"Amarrez-vous à nous si vous souhaitez effectuer d'autres missions."
 
 #: scripts/scenario_48_visitors.lua:6388 scripts/scenario_48_visitors.lua:6547
 #: scripts/scenario_48_visitors.lua:6705 scripts/scenario_48_visitors.lua:6868
@@ -4359,7 +4427,7 @@ msgstr ""
 #, lua-format
 msgctxt "marauders-comms"
 msgid "Protect %s from marauding Exuari"
-msgstr ""
+msgstr "Protéger %s des maraudes Éxuaries"
 
 #: scripts/scenario_48_visitors.lua:6945 scripts/scenario_48_visitors.lua:6973
 #: scripts/scenario_48_visitors.lua:7029 scripts/scenario_48_visitors.lua:7048
@@ -4375,6 +4443,8 @@ msgctxt "marauders-shipLog"
 msgid ""
 "[%s in %s] The Exuari are coming! We detected them on bearing %.1f from us."
 msgstr ""
+"[Station %s, secteur %s] Les Éxuaris arrivent ! Nous les avons détectés au "
+"cap %.1f à partir de notre station."
 
 #: scripts/scenario_48_visitors.lua:7085
 #, lua-format
@@ -4383,6 +4453,9 @@ msgid ""
 "[Engineering Technician] For helping against the Exuari marauders, %s has "
 "provided us details on improving our maneuvering speed."
 msgstr ""
+"[Technicien en ingénierie] Pour les avoir aidé contre les maraudeurs "
+"Éxuaris, %s nous a fourni des détails sur l'amélioration de notre vitesse de "
+"manœuvre."
 
 #: scripts/scenario_48_visitors.lua:7112
 #, lua-format
@@ -4439,19 +4512,19 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:7230
 msgctxt "virus-tabScience&Operations"
 msgid "Virus Fatality"
-msgstr ""
+msgstr "Mortalité virale"
 
 #: scripts/scenario_48_visitors.lua:7232
 #, lua-format
 msgctxt "virus-tabScience&Operations"
 msgid "%s: %i"
-msgstr ""
+msgstr "%s : %i"
 
 #: scripts/scenario_48_visitors.lua:7234
 #, lua-format
 msgctxt "virus-tabScience&Operations"
 msgid "%s: %i:%.2i"
-msgstr ""
+msgstr "%s : %i:%.2i"
 
 #: scripts/scenario_48_visitors.lua:7250
 #, lua-format
@@ -4470,13 +4543,13 @@ msgstr ""
 #, lua-format
 msgctxt "virus-shipLog"
 msgid "%s %.f seconds."
-msgstr ""
+msgstr "%s %.f secondes."
 
 #: scripts/scenario_48_visitors.lua:7282
 #, lua-format
 msgctxt "virus-shipLog"
 msgid "%s %i minutes."
-msgstr ""
+msgstr "%s %i minutes."
 
 #: scripts/scenario_48_visitors.lua:7284
 msgctxt "virus-shipLog"
@@ -4528,7 +4601,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:7404
 msgctxt "Exuari1-comms"
 msgid "Make a good showing for the Human Navy against the Exuari invasion"
-msgstr ""
+msgstr "Faites bonne figure pour la Marine humaine contre l'invasion Éxuarie."
 
 #: scripts/scenario_48_visitors.lua:7484
 msgctxt "Exuari2-comms"
@@ -4536,21 +4609,23 @@ msgid ""
 "Find and eliminate the Exuari station that is sending all these ships after "
 "us"
 msgstr ""
+"Trouvez et détruisez la station Éxuarie qui envoie tous ces vaisseaux après "
+"nous."
 
 #: scripts/scenario_48_visitors.lua:7514
 msgctxt "Exuari2-msgMainscreen"
 msgid "Exuari stronghold destroyed"
-msgstr ""
+msgstr "Forteresse Éxuarie détruite"
 
 #: scripts/scenario_48_visitors.lua:7550
 msgctxt "Exuari3-comms"
 msgid "Survive until the game time runs out"
-msgstr ""
+msgstr "Survivre jusqu'à ce que le temps de jeu soit écoulé"
 
 #: scripts/scenario_48_visitors.lua:7574
 msgctxt "Exuari3-msgMainscreen"
 msgid "Survived Exuari Attacks"
-msgstr ""
+msgstr "A survécu aux attaques des Éxuaris"
 
 #: scripts/scenario_48_visitors.lua:7614
 #, lua-format
@@ -4616,6 +4691,9 @@ msgid ""
 "Intelligence indicates an imminent attack by the Exuari on a station in the "
 "area. Your mission is to protect the station"
 msgstr ""
+"Les renseignements indiquent une attaque imminente des Éxuaris contre une "
+"station de la zone.\n"
+"Votre mission est de protéger cette station."
 
 #: scripts/scenario_48_visitors.lua:7713
 msgctxt "orders-comms"
@@ -4730,7 +4808,7 @@ msgstr ""
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s, %s:%i"
-msgstr ""
+msgstr "%s, %s :%i"
 
 #: scripts/scenario_48_visitors.lua:7849
 #, lua-format

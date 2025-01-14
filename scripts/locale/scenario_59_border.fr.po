@@ -27,7 +27,7 @@ msgid ""
 "\n"
 "Version 5"
 msgstr ""
-"EN COURS DE TRADUCTION 49%\n"
+"EN COURS DE TRADUCTION 50%\n"
 "\n"
 "War temperature rises along the border between Human Navy space and Kraylor "
 "space. The treaty holds for now, but the diplomats and intelligence "
@@ -5395,29 +5395,29 @@ msgstr "Localisation, faction"
 #: scripts/scenario_59_border.lua:9673
 msgctxt "scienceDB"
 msgid "share energy"
-msgstr "partager l'énergie"
+msgstr "Partage d'énergie"
 
 #: scripts/scenario_59_border.lua:9678
 msgctxt "scienceDB"
 msgid "repair hull"
-msgstr "réparer la coque"
+msgstr "Réparation de coque"
 
 #: scripts/scenario_59_border.lua:9680
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, repair hull"
-msgstr "%s, réparer la coque"
+msgstr "%s, Rép. de coque"
 
 #: scripts/scenario_59_border.lua:9686
 msgctxt "scienceDB"
 msgid "replenish probes"
-msgstr "réapprovisionner les sondes"
+msgstr "Sondes"
 
 #: scripts/scenario_59_border.lua:9688
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, replenish probes"
-msgstr "%s, réapprovisionner les sondes"
+msgstr "%s, Sondes"
 
 #: scripts/scenario_59_border.lua:9693
 msgctxt "scienceDB"
@@ -5432,43 +5432,43 @@ msgstr "Service d'accueil"
 #: scripts/scenario_59_border.lua:9717
 msgctxt "scienceDB"
 msgid "Restock Homing"
-msgstr "Réapprovisionner Homing"
+msgstr "Munitions Homing"
 
 #: scripts/scenario_59_border.lua:9718
 msgctxt "scienceDB"
 msgid "Restock HVLI"
-msgstr "Réapprovisionner les HVLI"
+msgstr "Munitions HVLI"
 
 #: scripts/scenario_59_border.lua:9719
 msgctxt "scienceDB"
 msgid "Restock Mine"
-msgstr ""
+msgstr "Munitions Mines"
 
 #: scripts/scenario_59_border.lua:9720
 msgctxt "scienceDB"
 msgid "Restock Nuke"
-msgstr ""
+msgstr "Munitions Nukes"
 
 #: scripts/scenario_59_border.lua:9721
 msgctxt "scienceDB"
 msgid "Restock EMP"
-msgstr ""
+msgstr "Munitions EMP"
 
 #: scripts/scenario_59_border.lua:9726
 #, lua-format
 msgctxt "scienceDB"
 msgid "%i reputation each"
-msgstr ""
+msgstr "%i rép l'unité"
 
 #: scripts/scenario_59_border.lua:9733 scripts/scenario_59_border.lua:9738
 msgctxt "scienceDB"
 msgid "Repair scanners"
-msgstr ""
+msgstr "Réparation de scanners"
 
 #: scripts/scenario_59_border.lua:9734
 msgctxt "scienceDB"
 msgid "Repair combat maneuver"
-msgstr "Réparer la manœuvre de combat"
+msgstr "Réparation de la manœuvre de combat"
 
 #: scripts/scenario_59_border.lua:9735
 msgctxt "scienceDB"
@@ -5545,32 +5545,32 @@ msgstr ""
 #: scripts/scenario_59_border.lua:9771
 msgctxt "scienceDB"
 msgid "Drop supplies"
-msgstr ""
+msgstr "Livrais. caisse réappro"
 
 #: scripts/scenario_59_border.lua:9772
 msgctxt "scienceDB"
 msgid "Standard reinforcements"
-msgstr ""
+msgstr "Renforts Vipère MK5"
 
 #: scripts/scenario_59_border.lua:9773
 msgctxt "scienceDB"
 msgid "Hornet reinforcements"
-msgstr ""
+msgstr "Renforts Frelon MU52"
 
 #: scripts/scenario_59_border.lua:9774
 msgctxt "scienceDB"
 msgid "Phobos reinforcements"
-msgstr ""
+msgstr "Renforts Phobos T3"
 
 #: scripts/scenario_59_border.lua:9775
 msgctxt "scienceDB"
 msgid "Adder3 reinforcements"
-msgstr ""
+msgstr "Renforts Vipère MK3"
 
 #: scripts/scenario_59_border.lua:9776
 msgctxt "scienceDB"
 msgid "Adder8 reinforcements"
-msgstr ""
+msgstr "Renforts Vipère MK8"
 
 #: scripts/scenario_59_border.lua:9777
 msgctxt "scienceDB"
