@@ -75,7 +75,7 @@ msgstr ""
 "- Titre original : Unwanted Visitors\n"
 "- Auteur : Xansta (2020)\n"
 "- Traduction FR : Muerte (Juin 23)\n"
-"Traduction en cours 71%   501/702\n"
+"Traduction en cours 82%   580/702\n"
 "\n"
 "- Acteurs vocaux :\n"
 "Admiral U. E.\n"
@@ -1693,7 +1693,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:3389
 msgctxt "planetologist-comms"
 msgid "Pick up planetologist"
-msgstr ""
+msgstr "Récupérer le planétologue"
 
 #: scripts/scenario_48_visitors.lua:3390
 msgctxt "planetologist-comms"
@@ -1702,11 +1702,14 @@ msgid ""
 "transporter room. Our station is undergoing repairs, so several systems are "
 "offline"
 msgstr ""
+"Je ne suis pas sûr qu'il soit prêt. Il n'est pas sur le quai prêt à "
+"embarquer ou dans la salle de téléportation. Notre station est en cours de "
+"réparation, donc plusieurs systèmes sont hors ligne."
 
 #: scripts/scenario_48_visitors.lua:3391
 msgctxt "planetologist-comms"
 msgid "Look for planetologist"
-msgstr ""
+msgstr "Rechercher le planétologue"
 
 #: scripts/scenario_48_visitors.lua:3392
 msgctxt "planetologist-comms"
@@ -1714,11 +1717,13 @@ msgid ""
 "The likeliest places to find him are his quarters, the lab or the "
 "observation lounge"
 msgstr ""
+"Les endroits les plus susceptibles où le trouver sont ses quartiers, le "
+"laboratoire ou le salon d'observation."
 
 #: scripts/scenario_48_visitors.lua:3393
 msgctxt "planetologist-comms"
 msgid "Try his quarters"
-msgstr ""
+msgstr "Essayer ses quartiers"
 
 #: scripts/scenario_48_visitors.lua:3400
 msgctxt "planetologist-comms"
@@ -1726,24 +1731,28 @@ msgid ""
 "[Enrique Flogistan] Yes? What can I do for you? Please be quick about it, "
 "I'm in a bit of a hurry"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Oui ? Que puis-je faire pour vous ? Faites vite, je suis un peu pressé."
 
 #: scripts/scenario_48_visitors.lua:3402
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Ready to begin your observations of %s?"
-msgstr ""
+msgstr "Prêt à commencer vos observations sur %s ?"
 
 #: scripts/scenario_48_visitors.lua:3410
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "[Enrique Flogistan] Almost. Let me grab something from %s"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Presque. Laisse-moi prendre quelque chose sur %s."
 
 #: scripts/scenario_48_visitors.lua:3413
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "We are here to transport you to %s"
-msgstr ""
+msgstr "Nous sommes là pour vous transporter sur %s."
 
 #: scripts/scenario_48_visitors.lua:3419
 #, lua-format
@@ -1754,27 +1763,32 @@ msgid ""
 "\n"
 "He heads off down the corridor towards %s"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Vous n'êtes pas mon représentant habituel en matière de transport. De plus, "
+"je dois encore faire quelques bagages.\n"
+"\n"
+"...Il se dirige vers le couloir en direction de %s."
 
 #: scripts/scenario_48_visitors.lua:3423
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "My ship, %s, is here to transport you"
-msgstr ""
+msgstr "Mon vaisseau, %s, est là pour vous transporter."
 
 #: scripts/scenario_48_visitors.lua:3424
 msgctxt "planetologist-comms"
 msgid "Is your ship armed?"
-msgstr ""
+msgstr "Votre vaisseau est-il armé ?"
 
 #: scripts/scenario_48_visitors.lua:3426
 msgctxt "planetologist-comms"
 msgid "Yes, we can handle any Exuari in the area"
-msgstr ""
+msgstr "Oui, nous pouvons gérer n'importe quel vaisseau Éxuari dans la région."
 
 #: scripts/scenario_48_visitors.lua:3435 scripts/scenario_48_visitors.lua:3710
 msgctxt "planetologist-comms"
 msgid "He's already boarded a ship"
-msgstr ""
+msgstr "...Il est déjà monté à bord d'un vaisseau."
 
 #: scripts/scenario_48_visitors.lua:3437
 msgctxt "planetologist-comms"
@@ -1783,12 +1797,18 @@ msgid ""
 "\n"
 "He joins you as you go back to the ship"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Bien. Allons-y\n"
+"\n"
+"...Il vous rejoint alors que vous retournez au vaisseau."
 
 #: scripts/scenario_48_visitors.lua:3442
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Good. I still need a couple of items from %s"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Bien. J'ai encore besoin de quelques articles sur %s."
 
 #: scripts/scenario_48_visitors.lua:3459
 #, lua-format
@@ -1796,23 +1816,28 @@ msgctxt "planetologist-comms"
 msgid ""
 "He's not in his quarters. His digital room assistant predicts he went to %s"
 msgstr ""
+"...Il n'est pas dans ses quartiers. Son assistant numérique prédit qu'il est "
+"allé à %s."
 
 #: scripts/scenario_48_visitors.lua:3463
 msgctxt "planetologist-comms"
 msgid "Try the lab"
-msgstr ""
+msgstr "Essayer le laboratoire"
 
 #: scripts/scenario_48_visitors.lua:3470
 msgctxt "planetologist-comms"
 msgid ""
 "[Enrique Flogistan] Hello, welcome to the planetology lab. Can I help you?"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Bonjour. Bienvenue au laboratoire de planétologie. Comment puis-je vous "
+"aider ?"
 
 #: scripts/scenario_48_visitors.lua:3472
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Ready to go observe %s?"
-msgstr ""
+msgstr "Prêt à aller observer %s ?"
 
 #: scripts/scenario_48_visitors.lua:3478
 #, lua-format
@@ -1822,12 +1847,16 @@ msgid ""
 "\n"
 "He leaves the lab for %s"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Presque. Laissez-moi vous donner encore une chose.\n"
+"\n"
+"...Il quitte le laboratoire pour %s."
 
 #: scripts/scenario_48_visitors.lua:3482
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "We're ready to transport you to %s"
-msgstr ""
+msgstr "Nous sommes prêts à vous transporter sur %s"
 
 #: scripts/scenario_48_visitors.lua:3489
 #, lua-format
@@ -1839,34 +1868,47 @@ msgid ""
 "\n"
 "[Lab technician] I think he's going to %s"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Déjà ?!\n"
+"\n"
+"...Il quitte rapidement le laboratoire. Le technicien de laboratoire le "
+"regarde en partant\n"
+"\n"
+"[Technicien de laboratoire]\n"
+"Je pense qu'il va à %s."
 
 #: scripts/scenario_48_visitors.lua:3498
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "%s has docked and is waiting on you"
-msgstr ""
+msgstr "%s est amarré et vous attend"
 
 #: scripts/scenario_48_visitors.lua:3499
 msgctxt "planetologist-comms"
 msgid "Are you aware of the Exuari that have been spotted in the area?"
 msgstr ""
+"Avez-vous connaissance des Éxuaris qui ont été repérés dans la région ?"
 
 #: scripts/scenario_48_visitors.lua:3501
 msgctxt "planetologist-comms"
 msgid "Yes, don't worry about them"
-msgstr ""
+msgstr "Oui, ne vous souciez pas d'eux"
 
 #: scripts/scenario_48_visitors.lua:3503
 msgctxt "planetologist-comms"
 msgid ""
 "[Enrique Flogistan] Good to know. I need to finishing packing in my quarters"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Bon à savoir. Je dois finir de faire mes valises dans mes quartiers."
 
 #: scripts/scenario_48_visitors.lua:3507
 msgctxt "planetologist-comms"
 msgid ""
 "[Enrique Flogistan] Good to know. I left some notes in the observation lounge"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Bon à savoir. J'ai laissé quelques notes dans le salon d'observation."
 
 #: scripts/scenario_48_visitors.lua:3523
 #, lua-format
@@ -1874,23 +1916,27 @@ msgctxt "planetologist-comms"
 msgid ""
 "[Lab technician] You just missed him. I think he said he was going to %s"
 msgstr ""
+"[Technicien de laboratoire]\n"
+"Tu l'as raté de peu. Je crois qu'il a dit qu'il allait à %s."
 
 #: scripts/scenario_48_visitors.lua:3527
 msgctxt "planetologist-comms"
 msgid "Try observation lounge"
-msgstr ""
+msgstr "Essayer le salon d'observation"
 
 #: scripts/scenario_48_visitors.lua:3537
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "[Enrique Flogistan] Just take in the gorgeous view of %s from here"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Admirez la magnifique vue sur %s depuis ici."
 
 #: scripts/scenario_48_visitors.lua:3539
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Ready for a closer view of %s?"
-msgstr ""
+msgstr "Prêt pour une vue rapprochée de %s ?"
 
 #: scripts/scenario_48_visitors.lua:3546
 #, lua-format
@@ -1900,12 +1946,16 @@ msgid ""
 "\n"
 "He leaves the observation lounge to go to %s"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Presque. J'ai oublié d'emporter quelque chose.\n"
+"\n"
+"...Il quitte la salle d'observation pour se rendre à %s."
 
 #: scripts/scenario_48_visitors.lua:3550
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "We're ready to take you to %s"
-msgstr ""
+msgstr "Nous sommes prêts à vous emmener sur %s."
 
 #: scripts/scenario_48_visitors.lua:3553
 msgctxt "planetologist-comms"
@@ -1913,18 +1963,24 @@ msgid ""
 "[Enrique Flogistan] Well I'm not. I just need a few more items from my "
 "quarters"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Eh bien, je ne le suis pas. J'ai encore besoin de récupérer quelques "
+"affaires à mon appartement."
 
 #: scripts/scenario_48_visitors.lua:3557
 msgctxt "planetologist-comms"
 msgid ""
 "[Enrique Flogistan] Well I'm not. I just need a few more items from the lab"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Eh bien, je ne le suis pas. J'ai encore besoin de récupérer quelques "
+"affaires au laboratoire."
 
 #: scripts/scenario_48_visitors.lua:3563
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "%s has been ordered to get you to %s"
-msgstr ""
+msgstr "%s a reçu l'ordre de vous amener à %s"
 
 #: scripts/scenario_48_visitors.lua:3565
 msgctxt "planetologist-comms"
@@ -1932,11 +1988,14 @@ msgid ""
 "I heard about your encounter with the Exuari. You know they could come back, "
 "right?"
 msgstr ""
+"[Enrique Flogistan]\n"
+"J'ai entendu parler de votre rencontre avec les Éxuaris. Vous savez qu'ils "
+"pourraient revenir, n'est-ce pas ?"
 
 #: scripts/scenario_48_visitors.lua:3567
 msgctxt "planetologist-comms"
 msgid "Certainly. We'll be ready, don't worry"
-msgstr ""
+msgstr "Bien sûr, nous serons prêts, ne vous inquiétez pas"
 
 #: scripts/scenario_48_visitors.lua:3569
 msgctxt "planetologist-comms"
@@ -1944,6 +2003,8 @@ msgid ""
 "[Enrique Flogistan] I admire your confidence. I'll get my things from my "
 "quarters"
 msgstr ""
+"[Enrique Flogistan]\n"
+"J'admire votre confiance. Je vais chercher mes affaires dans mon appartement."
 
 #: scripts/scenario_48_visitors.lua:3573
 msgctxt "planetologist-comms"
@@ -1951,54 +2012,63 @@ msgid ""
 "[Enrique Flogistan] I admire your confidence. I'll get my research material "
 "from the lab"
 msgstr ""
+"[Enrique Flogistan]\n"
+"J'admire votre confiance. Je vais chercher mon matériel de recherche au "
+"laboratoire."
 
 #: scripts/scenario_48_visitors.lua:3590
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "[Station repair crewman] He just left for %s"
 msgstr ""
+"[Membre de l'équipe de réparation de la station]\n"
+"Il vient de partir pour %s."
 
 #: scripts/scenario_48_visitors.lua:3596
 msgctxt "planetologist-comms"
 msgid "Contact planetologist directly"
-msgstr ""
+msgstr "Contacter directement le planétologue"
 
 #: scripts/scenario_48_visitors.lua:3597
 msgctxt "planetologist-comms"
 msgid "Repair work prevents contact with individual"
-msgstr ""
+msgstr "Les travaux de réparation empêchent tout contact avec les personnes."
 
 #: scripts/scenario_48_visitors.lua:3598
 msgctxt "planetologist-comms"
 msgid "Contact Enrique Flogistan's quarters"
-msgstr ""
+msgstr "Contacter le quartier d'Enrique Flogistan"
 
 #: scripts/scenario_48_visitors.lua:3600
 msgctxt "planetologist-comms"
 msgid "[Enrique Flogistan] Who is it?"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Qui est-ce ?"
 
 #: scripts/scenario_48_visitors.lua:3603
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "This is %s. We are your transportation to %s"
-msgstr ""
+msgstr "Ici %s. Nous sommes votre moyen de transport pour %s"
 
 #: scripts/scenario_48_visitors.lua:3611
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "I'm going to %s before we leave"
 msgstr ""
+"[Enrique Flogistan]\n"
+"Je vais à %s avant de partir."
 
 #: scripts/scenario_48_visitors.lua:3620
 msgctxt "planetologist-comms"
 msgid "No reply from Enrique Flogistan's quarters"
-msgstr ""
+msgstr "Aucune réponse du bureau d'Enrique Flogistan"
 
 #: scripts/scenario_48_visitors.lua:3624
 msgctxt "planetologist-comms"
 msgid "Contact planetology lab"
-msgstr ""
+msgstr "Contacter le laboratoire de planétologie"
 
 #: scripts/scenario_48_visitors.lua:3635
 #, lua-format
@@ -2007,11 +2077,13 @@ msgid ""
 "A lab technician answers and tells you Enrique Flogistan is probably going "
 "to %s"
 msgstr ""
+"...Un technicien de laboratoire répond et vous dit qu'Enrique Flogistan est "
+"probablement en route pour %s."
 
 #: scripts/scenario_48_visitors.lua:3638
 msgctxt "planetologist-comms"
 msgid "Contact observation lounge"
-msgstr ""
+msgstr "Contacter le salon d'observation"
 
 #: scripts/scenario_48_visitors.lua:3649
 #, lua-format
@@ -2047,7 +2119,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:3663
 msgctxt "planetologist-comms"
 msgid "Contact station security office"
-msgstr ""
+msgstr "Contacter le poste de sécurité de la station"
 
 #: scripts/scenario_48_visitors.lua:3665
 msgctxt "planetologist-comms"
@@ -2057,7 +2129,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:3667
 msgctxt "planetologist-comms"
 msgid "I'm looking for Enrique Flogistan"
-msgstr ""
+msgstr "Je recherche Enrique Flogistan"
 
 #: scripts/scenario_48_visitors.lua:3669
 msgctxt "planetologist-comms"
@@ -2089,7 +2161,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:3685
 msgctxt "planetologist-comms"
 msgid "Contact station operations office"
-msgstr ""
+msgstr "Contacter le poste des opérations de la station"
 
 #: scripts/scenario_48_visitors.lua:3687
 msgctxt "planetologist-comms"
@@ -4304,7 +4376,7 @@ msgstr ""
 #, lua-format
 msgctxt "orders-comms"
 msgid "Dock with %s"
-msgstr ""
+msgstr "S'amarrer à %s."
 
 #: scripts/scenario_48_visitors.lua:6424
 msgctxt "Polly-buttonRelay"
@@ -4421,7 +4493,7 @@ msgstr ""
 #, lua-format
 msgctxt "orders-shipLog"
 msgid "Dock with %s"
-msgstr ""
+msgstr "S'amarrer à %s."
 
 #: scripts/scenario_48_visitors.lua:6929
 #, lua-format
@@ -4462,23 +4534,27 @@ msgstr ""
 msgctxt "pirates-shipLog"
 msgid "%s in %s reports Exuari pirates threatening them."
 msgstr ""
+"Le vaisseau de transport %s situé dans le secteur %s nous signale que des "
+"pirates Éxuaris le menace."
 
 #: scripts/scenario_48_visitors.lua:7114
 #, lua-format
 msgctxt "pirates-comms"
 msgid "Protect %s from Exuari pirates. Last reported in %s"
 msgstr ""
+"Protéger le transport %s des pirates Éxuaris.\n"
+"Au dernier rapport, il se situe dans le secteur %s."
 
 #: scripts/scenario_48_visitors.lua:7124
 msgctxt "pirates-msgMainscreen"
 msgid "Transport destroyed"
-msgstr ""
+msgstr "Le transport a été détruit."
 
 #: scripts/scenario_48_visitors.lua:7141
 #, lua-format
 msgctxt "pirates-shipLog"
 msgid "[%s] Thanks for dealing with those Exuari pirates"
-msgstr ""
+msgstr "[Vaisseau %s] Merci d'avoir géré ces pirates Éxuaris."
 
 #: scripts/scenario_48_visitors.lua:7178
 #, lua-format
@@ -4652,7 +4728,7 @@ msgstr ""
 #, lua-format
 msgctxt "orders-comms"
 msgid "Fix satellites orbiting %s"
-msgstr ""
+msgstr "Réparer les satellites en orbite autour de %s."
 
 #: scripts/scenario_48_visitors.lua:7711
 #, lua-format
@@ -4667,7 +4743,7 @@ msgstr ""
 #, lua-format
 msgctxt "orders-comms"
 msgid "Transport planetologist from %s to %s"
-msgstr ""
+msgstr "Transporter le planétologue de la station %s à la station %s."
 
 #: scripts/scenario_48_visitors.lua:7712
 #, lua-format
@@ -4684,6 +4760,8 @@ msgstr ""
 msgctxt "orders-comms"
 msgid "Dock with %s to investigate astronomer's unusual data"
 msgstr ""
+"S'amarrer à la station %s pour enquêter sur les données inhabituelles d'un "
+"astronome."
 
 #: scripts/scenario_48_visitors.lua:7713
 msgctxt "marauders-comms"
@@ -4698,17 +4776,17 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:7713
 msgctxt "orders-comms"
 msgid "Defend station from Exuari attack"
-msgstr ""
+msgstr "Défendre la station contre l'attaque des Éxuaris."
 
 #: scripts/scenario_48_visitors.lua:7721
 msgctxt "pirates-comms"
 msgid "A transport reports Exuari pirates threatening them"
-msgstr ""
+msgstr "Un transport nous signale que des pirates Éxuaris le menace."
 
 #: scripts/scenario_48_visitors.lua:7721
 msgctxt "orders-comms"
 msgid "Protect transport from Exuari pirates"
-msgstr ""
+msgstr "Protéger les transports des pirates Éxuaris."
 
 #: scripts/scenario_48_visitors.lua:7722
 #, lua-format
@@ -4723,7 +4801,7 @@ msgstr ""
 #, lua-format
 msgctxt "orders-comms"
 msgid "Dock with %s to pick up anti-virus"
-msgstr ""
+msgstr "S'amarrer à %s pour récupérer l'antivirus."
 
 #: scripts/scenario_48_visitors.lua:7723
 msgctxt "targetInt-comms"
@@ -4735,17 +4813,17 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:7723
 msgctxt "orders-comms"
 msgid "Dock with designated station for Exuari intelligence"
-msgstr ""
+msgstr "S'amarrer à la station désignée pour le renseignement Éxuari."
 
 #: scripts/scenario_48_visitors.lua:7748
 msgctxt "msgMainscreen"
 msgid "Critical station destroyed"
-msgstr ""
+msgstr "Station critique détruite"
 
 #: scripts/scenario_48_visitors.lua:7761
 msgctxt "msgMainscreen"
 msgid "Human stations destroyed: "
-msgstr ""
+msgstr "Stations humaines détruites :"
 
 #: scripts/scenario_48_visitors.lua:7772 scripts/scenario_48_visitors.lua:7787
 #: scripts/scenario_48_visitors.lua:7802 scripts/scenario_48_visitors.lua:7817
@@ -4753,14 +4831,14 @@ msgstr ""
 #, lua-format
 msgctxt "msgMainscreen"
 msgid " (total strength: %i)"
-msgstr ""
+msgstr "(force totale : %i)"
 
 #: scripts/scenario_48_visitors.lua:7774 scripts/scenario_48_visitors.lua:7789
 #: scripts/scenario_48_visitors.lua:7804 scripts/scenario_48_visitors.lua:7819
 #: scripts/scenario_48_visitors.lua:7834
 msgctxt "msgMainscreen"
 msgid "none"
-msgstr ""
+msgstr "rien"
 
 #: scripts/scenario_48_visitors.lua:7776
 msgctxt "msgMainscreen"
@@ -4768,6 +4846,8 @@ msgid ""
 "\n"
 "Neutral stations destroyed: "
 msgstr ""
+"\n"
+"Stations neutres détruites : "
 
 #: scripts/scenario_48_visitors.lua:7791
 msgctxt "msgMainscreen"
@@ -4775,6 +4855,8 @@ msgid ""
 "\n"
 "Kraylor vessels destroyed: "
 msgstr ""
+"\n"
+"Vaisseaux Kraylors détruits : "
 
 #: scripts/scenario_48_visitors.lua:7806
 msgctxt "msgMainscreen"
@@ -4782,6 +4864,8 @@ msgid ""
 "\n"
 "Exuari vessels destroyed: "
 msgstr ""
+"\n"
+"Vaisseaux Éxuaris détruits : "
 
 #: scripts/scenario_48_visitors.lua:7821
 msgctxt "msgMainscreen"
@@ -4789,6 +4873,8 @@ msgid ""
 "\n"
 "Arlenian vessels destroyed: "
 msgstr ""
+"\n"
+"Vaisseaux Arléniens détruits : "
 
 #: scripts/scenario_48_visitors.lua:7836
 #, lua-format
@@ -4797,12 +4883,14 @@ msgid ""
 "\n"
 "Missions completed: %i"
 msgstr ""
+"\n"
+"Missions accomplies : %i"
 
 #: scripts/scenario_48_visitors.lua:7842
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Optional missions completed: %s:%i"
-msgstr ""
+msgstr "Missions facultatives accomplies : %s:%i"
 
 #: scripts/scenario_48_visitors.lua:7844
 #, lua-format
