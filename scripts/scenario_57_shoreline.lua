@@ -5,19 +5,21 @@
 ---
 --- Version 2
 -- Type: Replayable Mission
--- Variation[Timed]: Normal difficulty with a 45 minute time limit
--- Variation[Very Easy]: Few or weak enemies
--- Variation[Very Easy Timed]: Few or weak enemies with a 45 minute time limit
--- Variation[Easy]: Fewer or less powerful enemies
--- Variation[Easy Timed]: Fewer or less powerful enemies with a 45 minute time limit
--- Variation[Hard]: More or more powerful enemies
--- Variation[Hard Timed]: More or more powerful enemies with a 45 minute time limit
--- Variation[Very Hard]: Many powerful enemies
--- Variation[Very Hard Timed]: Many powerful enemies with a 45 minute time limit
-
--- Victory Conditions (Contains spoilers. Player beware)
---		Timed: 		Complete 1 required mission before time expires
---		Untimed:	Complete 1 required mission and destroy three specific Kraylor bases
+-- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
+-- Enemies[Easy]: Fewer or weaker enemies
+-- Enemies[Normal|Default]: Normal number or strength of enemies
+-- Enemies[Hard]: More or stronger enemies
+-- Enemies[Extreme]: Much stronger, many more enemies
+-- Enemies[Quixotic]: Insanely strong and/or inordinately large numbers of enemies
+-- Setting[Murphy]: Configures the perversity of the universe according to Murphy's law
+-- Murphy[Very Easy]: Random factors are way more in your favor
+-- Murphy[Easy]: Random factors are more in your favor
+-- Murphy[Normal|Default]: Random factors are normal
+-- Murphy[Hard]: Random factors are more against you
+-- Murphy[Extreme]: Random factors are way more against you
+-- Setting[Timed]: Sets whether or not the scenario has a time limit. Default is no time limit
+-- Timed[None|Default]: No time limit
+-- Timed[45]: Scenario ends in 45 minutes
 
 --improvements:
 --	Add stations of other factions. 
@@ -203,9 +205,11 @@ end
 --	Initialization  --
 ----------------------
 function init()
-	scenario_version = "2.0.2"
+	scenario_version = "2.0.3"
 	print(string.format("     -----     Scenario: Shoreline     -----     Version %s     -----",scenario_version))
-	print(_VERSION)
+	if _VERSION ~= nil then
+		print("Lue version:",_VERSION)
+	end
 	diagnostic = false
 	game_end_statistics_diagnostic = false
 	update_loop_diagnostic = false
@@ -273,46 +277,36 @@ function optionalMissions()
 	end
 end
 function setVariations()
-	if string.find(getScenarioVariation(),"Timed") then
-		playWithTimeLimit = true
-		gameTimeLimit = 45*60		
-		waveDelayCountCheck = 15
-	else
-		gameTimeLimit = 0
-		playWithTimeLimit = false
-		requiredMissionDelay = 20
-		waveDelayCountCheck = 30
-		clueMessageDelay = 30*60
-	end
-	if string.find(getScenarioVariation(),"Very Easy") then
-		difficulty = .25
-		coolant_loss = .999995
-		coolant_gain = .015
-		waveDelayCountCheck = waveDelayCountCheck + 9
-		waveProgressInterval = .15
-	elseif string.find(getScenarioVariation(),"Very Hard") then
-		difficulty = 3
-		coolant_loss = .999
-		coolant_gain = .00001
-		waveDelayCountCheck = waveDelayCountCheck - 9		
-		waveProgressInterval = .75
-	elseif string.find(getScenarioVariation(),"Easy") then
-		difficulty = .5
-		coolant_loss = .99999
-		coolant_gain = .01
-		waveDelayCountCheck = waveDelayCountCheck + 6
-		waveProgressInterval = .2
-	elseif string.find(getScenarioVariation(),"Hard") then
-		difficulty = 2
-		coolant_loss = .9999
-		coolant_gain = .0001
-		waveDelayCountCheck = waveDelayCountCheck - 6
-		waveProgressInterval = .5
-	else
-		difficulty = 1		--default (normal)
-		coolant_loss = .99995
-		coolant_gain = .001
-	end
+	local timed_config = {
+		["None"] =	{limit = 0,	limited = false,	wave = 30,	rmd = 20,	cmd = 1800,	},
+		["45"] =	{limit = 45,limited = true,		wave = 15,	rmd = nil,	cmd = nil,	},
+	}
+	playWithTimeLimit =				timed_config[getScenarioSetting("Timed")].limited
+	defaultGameTimeLimitInMinutes =	timed_config[getScenarioSetting("Timed")].limit
+	gameTimeLimit =					defaultGameTimeLimitInMinutes*60
+	waveDelayCountCheck =			timed_config[getScenarioSetting("Timed")].wave
+	requiredMissionDelay =			timed_config[getScenarioSetting("Timed")].rmd
+	clueMessageDelay =				timed_config[getScenarioSetting("Timed")].cmd
+	local enemy_config = {
+		["Easy"] =		{number = .5},
+		["Normal"] =	{number = 1},
+		["Hard"] =		{number = 2},
+		["Extreme"] =	{number = 3},
+		["Quixotic"] =	{number = 5},
+	}
+	enemy_power =	enemy_config[getScenarioSetting("Enemies")].number
+	local murphy_config = {
+		["Very Easy"] =	{number = .25,	lose_cool = .999995,	gain_cool = .015,	wave = 9,	prog = .15},
+		["Easy"] =		{number = .5,	lose_cool = .99999,		gain_cool = .01,	wave = 6,	prog = .2},
+		["Normal"] =	{number = 1,	lose_cool = .99995,		gain_cool = .001,	wave = 0,	prog = .25},
+		["Hard"] =		{number = 2,	lose_cool = .9999,		gain_cool = .0001,	wave = -6,	prog = .5},
+		["Extreme"] =	{number = 3,	lose_cool = .999,		gain_cool = .00001,	wave = -9,	prog = .75},
+	}
+	difficulty =	murphy_config[getScenarioSetting("Murphy")].number
+	coolant_loss =	murphy_config[getScenarioSetting("Murphy")].lose_cool
+	coolant_gain =	murphy_config[getScenarioSetting("Murphy")].gain_cool
+	waveDelayCountCheck = waveDelayCountCheck + murphy_config[getScenarioSetting("Murphy")].wave
+	waveProgressInterval = murphy_config[getScenarioSetting("Murphy")].prog
 end
 function setConstants()
 	mission_transport_list = {}
@@ -9475,7 +9469,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, perimeter_min, per
 	if danger == nil then 
 		danger = 1
 	end
-	local enemyStrength = math.max(danger * difficulty * playerPower(),5)
+	local enemyStrength = math.max(danger * enemy_power * playerPower(),5)
 	local enemyPosition = 0
 	local sp = irandom(400,900)			--random spacing of spawned group
 	local deployConfig = random(1,100)	--randomly choose between squarish formation and hexagonish formation
