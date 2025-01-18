@@ -74,8 +74,7 @@ msgstr ""
 "\n"
 "- Titre original : Unwanted Visitors\n"
 "- Auteur : Xansta (2020)\n"
-"- Traduction FR : Muerte (Juin 23)\n"
-"Traduction en cours 82%   580/702\n"
+"- Traduction FR : Muerte (janv.25)\n"
 "\n"
 "- Acteurs vocaux :\n"
 "Admiral U. E.\n"
@@ -1672,7 +1671,7 @@ msgstr "45 minutes"
 #: scripts/scenario_48_visitors.lua:3379
 msgctxt "Polly-comms"
 msgid "Pick up astronomer Polly Hobbs"
-msgstr ""
+msgstr "Récupérez l'astronome Polly Hobbs"
 
 #: scripts/scenario_48_visitors.lua:3380
 msgctxt "Polly-comms"
@@ -1683,12 +1682,21 @@ msgid ""
 "unit to be effective. Also, we will need baseline scan data from your ship's "
 "instruments"
 msgstr ""
+"[Polly Hobbs]\n"
+"Merci d'être venue me chercher. J'ai trouvé la source des lectures anormales "
+"près de l'extrémité de la ceinture interne d'astéroïdes solaires. J'ai "
+"apporté des instruments de scannérisation spécialisés, mais ils doivent se "
+"trouver à moins d'1 unité de leur cible pour être efficaces. Nous aurons "
+"également besoin des données d'analyse de base provenant des instruments de "
+"votre vaisseau."
 
 #: scripts/scenario_48_visitors.lua:3382
 msgctxt "Polly-comms"
 msgid ""
 "Bring astronomer Polly Hobbs close to artifact for additional sensor readings"
 msgstr ""
+"Rapprochez l'astronome Polly Hobbs de l'artefact afin d'obtenir des lectures "
+"supplémentaires du capteur."
 
 #: scripts/scenario_48_visitors.lua:3389
 msgctxt "planetologist-comms"
@@ -1746,7 +1754,7 @@ msgctxt "planetologist-comms"
 msgid "[Enrique Flogistan] Almost. Let me grab something from %s"
 msgstr ""
 "[Enrique Flogistan]\n"
-"Presque. Laisse-moi prendre quelque chose sur %s."
+"Presque. Laisse-moi prendre quelque chose dans %s."
 
 #: scripts/scenario_48_visitors.lua:3413
 #, lua-format
@@ -1808,7 +1816,7 @@ msgctxt "planetologist-comms"
 msgid "Good. I still need a couple of items from %s"
 msgstr ""
 "[Enrique Flogistan]\n"
-"Bien. J'ai encore besoin de quelques articles sur %s."
+"Bien. J'ai encore besoin de quelques articles dans %s."
 
 #: scripts/scenario_48_visitors.lua:3459
 #, lua-format
@@ -1817,7 +1825,7 @@ msgid ""
 "He's not in his quarters. His digital room assistant predicts he went to %s"
 msgstr ""
 "...Il n'est pas dans ses quartiers. Son assistant numérique prédit qu'il est "
-"allé à %s."
+"allé dans %s."
 
 #: scripts/scenario_48_visitors.lua:3463
 msgctxt "planetologist-comms"
@@ -1875,7 +1883,7 @@ msgstr ""
 "regarde en partant\n"
 "\n"
 "[Technicien de laboratoire]\n"
-"Je pense qu'il va à %s."
+"Je pense qu'il va dans %s."
 
 #: scripts/scenario_48_visitors.lua:3498
 #, lua-format
@@ -1917,7 +1925,7 @@ msgid ""
 "[Lab technician] You just missed him. I think he said he was going to %s"
 msgstr ""
 "[Technicien de laboratoire]\n"
-"Tu l'as raté de peu. Je crois qu'il a dit qu'il allait à %s."
+"Tu l'as raté de peu. Je crois qu'il a dit qu'il allait dans %s."
 
 #: scripts/scenario_48_visitors.lua:3527
 msgctxt "planetologist-comms"
@@ -1949,7 +1957,7 @@ msgstr ""
 "[Enrique Flogistan]\n"
 "Presque. J'ai oublié d'emporter quelque chose.\n"
 "\n"
-"...Il quitte la salle d'observation pour se rendre à %s."
+"...Il quitte la salle d'observation pour se rendre dans %s."
 
 #: scripts/scenario_48_visitors.lua:3550
 #, lua-format
@@ -2058,7 +2066,7 @@ msgctxt "planetologist-comms"
 msgid "I'm going to %s before we leave"
 msgstr ""
 "[Enrique Flogistan]\n"
-"Je vais à %s avant de partir."
+"Je dois aller dans %s avant de partir."
 
 #: scripts/scenario_48_visitors.lua:3620
 msgctxt "planetologist-comms"
@@ -2092,22 +2100,26 @@ msgid ""
 "A repair crewman answers and tells you Enrique Flogistan is probably going "
 "to %s"
 msgstr ""
+"...Un réparateur répond et vous dit qu'Enrique Flogistan est probablement "
+"dans %s."
 
 #: scripts/scenario_48_visitors.lua:3652
 msgctxt "planetologist-comms"
 msgid "Contact station galley"
-msgstr ""
+msgstr "Contacter la cuisine de la station"
 
 #: scripts/scenario_48_visitors.lua:3654
 msgctxt "planetologist-comms"
 msgid "[Cook] Hello, who's there?"
 msgstr ""
+"[Cuisinier]\n"
+"Bonjour, qui est là ?"
 
 #: scripts/scenario_48_visitors.lua:3656
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "I'm from %s. I'm looking for Enrique Flogistan"
-msgstr ""
+msgstr "Je viens de %s. Je cherche Enrique Flogistan"
 
 #: scripts/scenario_48_visitors.lua:3657
 msgctxt "planetologist-comms"
@@ -2115,6 +2127,9 @@ msgid ""
 "He was here about an hour ago. You might try his quarters, the observation "
 "lounge or the lab"
 msgstr ""
+"[Cuisinier]\n"
+"Il était ici il y a environ une heure. Vous pourriez essayer ses quartiers, "
+"le salon d'observation ou le laboratoire."
 
 #: scripts/scenario_48_visitors.lua:3663
 msgctxt "planetologist-comms"
@@ -2125,6 +2140,8 @@ msgstr "Contacter le poste de sécurité de la station"
 msgctxt "planetologist-comms"
 msgid "[Security officer] May I help you?"
 msgstr ""
+"[Agent de sécurité]\n"
+"Puis-je vous aider ?"
 
 #: scripts/scenario_48_visitors.lua:3667
 msgctxt "planetologist-comms"
@@ -2137,41 +2154,53 @@ msgid ""
 "He's not here in the security office. Our records show he often frequents "
 "his quarters, the observation lounge and the planetology lab"
 msgstr ""
+"[Agent de sécurité]\n"
+"Il n'est pas ici, au bureau de sécurité. Nos archives montrent qu'il "
+"fréquente souvent ses quartiers, le salon d'observation et le laboratoire de "
+"planétologie."
 
 #: scripts/scenario_48_visitors.lua:3674
 msgctxt "planetologist-comms"
 msgid "Contact station maintenance office"
-msgstr ""
+msgstr "Contacter le bureau d'entretien de la station"
 
 #: scripts/scenario_48_visitors.lua:3676
 msgctxt "planetologist-comms"
 msgid "[Maintenance technician] Hi, what's broken?"
 msgstr ""
+"[Technicien de maintenance]\n"
+"Salut, qu'est-ce qui est cassé ?"
 
 #: scripts/scenario_48_visitors.lua:3678
 msgctxt "planetologist-comms"
 msgid "Nothing. I'm looking for Enrique Flogistan"
 msgstr ""
+"Bonjour,\n"
+"Rien du tout, je cherche seulement Enrique Flogistan."
 
 #: scripts/scenario_48_visitors.lua:3680
 msgctxt "planetologist-comms"
 msgid "He's not here. Good luck finding him"
 msgstr ""
+"Il n'est pas là.\n"
+"Bonne chance pour le trouver."
 
 #: scripts/scenario_48_visitors.lua:3685
 msgctxt "planetologist-comms"
 msgid "Contact station operations office"
-msgstr "Contacter le poste des opérations de la station"
+msgstr "Contacter le bureau des opérations de la station"
 
 #: scripts/scenario_48_visitors.lua:3687
 msgctxt "planetologist-comms"
 msgid "[Operations manager] Yes?"
 msgstr ""
+"[Responsable des opérations]\n"
+"Oui ?"
 
 #: scripts/scenario_48_visitors.lua:3689
 msgctxt "planetologist-comms"
 msgid "Can you help me find Enrique Flogistan?"
-msgstr ""
+msgstr "Pouvez-vous m'aider à retrouver Enrique Flogistan ?"
 
 #: scripts/scenario_48_visitors.lua:3691
 msgctxt "planetologist-comms"
@@ -2179,38 +2208,44 @@ msgid ""
 "He's not here in operations. We are short handed right now with all the "
 "repairs going on. I'm afraid you'll have to find him yourself"
 msgstr ""
+"[Responsable des opérations]\n"
+"Il n'est pas ici. Nous sommes actuellement à court de personnel avec toutes "
+"les réparations en cours. Je ne peux pas vous aider.\n"
+"J'ai peur que vous ne deviez le trouver vous-même."
 
 #: scripts/scenario_48_visitors.lua:3697
 msgctxt "planetologist-comms"
 msgid "Scan for planetologist"
-msgstr ""
+msgstr "Rechercher un planétologue"
 
 #: scripts/scenario_48_visitors.lua:3706
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Sensors show him in %s"
-msgstr ""
+msgstr "Les capteurs indiquent qu'il se trouve dans %s."
 
 #: scripts/scenario_48_visitors.lua:3707
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Beam him over from %s"
-msgstr ""
+msgstr "Le transporter depuis %s"
 
 #: scripts/scenario_48_visitors.lua:3712
 msgctxt "planetologist-comms"
 msgid "He has been beamed aboard"
-msgstr ""
+msgstr "...Enrique Flogistan a bien été téléporté à bord."
 
 #: scripts/scenario_48_visitors.lua:3717
 msgctxt "planetologist-comms"
 msgid "Interference from station repairs prevents a transporter lock"
 msgstr ""
+"L'interférence des réparations de la station empêche le verrouillage du "
+"transporteur."
 
 #: scripts/scenario_48_visitors.lua:3727
 msgctxt "satellites-comms"
 msgid "Satellite problems?"
-msgstr ""
+msgstr "Des problèmes de satellites ?"
 
 #: scripts/scenario_48_visitors.lua:3728
 #, lua-format
@@ -2221,22 +2256,29 @@ msgid ""
 "They've requested delivery, but hear it will take weeks before the next "
 "delivery cycle. I don't suppose you could bring us what we need?"
 msgstr ""
+"Oui. Nos techniciens ont remonté le problème à un module relais défectueux. "
+"Cependant, ils ne parviennent pas à le réparer avec les pièces disponibles. "
+"Ils ont besoin de %s. Ils ont demandé la livraison, mais ils apprennent que "
+"cela prendra des semaines avant le prochain cycle de livraison.\n"
+"Je ne pense pas que vous puissiez nous apporter ce dont nous avons besoin ?"
 
 #: scripts/scenario_48_visitors.lua:3741 scripts/scenario_48_visitors.lua:3797
 #, lua-format
 msgctxt "satellites-comms"
 msgid "Provide %s"
-msgstr ""
+msgstr "Fournir du %s"
 
 #: scripts/scenario_48_visitors.lua:3745
 msgctxt "satellites-comms"
 msgid "Thanks. With your help, we fixed the faulty relay module"
 msgstr ""
+"Merci infiniment. Avec votre aide, nous avons pu réparer le module relais "
+"défectueux."
 
 #: scripts/scenario_48_visitors.lua:3755
 msgctxt "satellites-comms"
 msgid "Having satellite trouble?"
-msgstr ""
+msgstr "Vous rencontrez des problèmes de satellite ?"
 
 #: scripts/scenario_48_visitors.lua:3757
 #, lua-format
@@ -2246,28 +2288,33 @@ msgid ""
 "repairman says he can fix it with %s, so we don't have to wait. Do you have "
 "any?"
 msgstr ""
+"Il semble que nous ayons un servomoteur obsolète. Son remplacement prendra "
+"du temps. Notre réparateur dit qu'il peut le réparer avec du %s, donc nous "
+"n'aurons pas à attendre. En auriez-vous par hasard ?"
 
 #: scripts/scenario_48_visitors.lua:3769
 #, lua-format
 msgctxt "satellites-comms"
 msgid "Give %s to %s"
-msgstr ""
+msgstr "Donner du %s à %s"
 
 #: scripts/scenario_48_visitors.lua:3774
 msgctxt "satellites-comms"
 msgid "That worked. Thanks"
-msgstr ""
+msgstr "Cela a fonctionné. Merci beaucoup."
 
 #: scripts/scenario_48_visitors.lua:3783
 msgctxt "satellites-comms"
 msgid "Can we help with your satellite?"
-msgstr ""
+msgstr "Pouvons-nous vous aider avec votre satellite ?"
 
 #: scripts/scenario_48_visitors.lua:3785
 #, lua-format
 msgctxt "satellites-comms"
 msgid "Only if you've got %s aboard your ship. Otherwise, we're stuck"
 msgstr ""
+"Seulement si vous avez le composant %s à bord de votre vaisseau. Sinon, nous "
+"sommes coincés."
 
 #: scripts/scenario_48_visitors.lua:3802
 msgctxt "satellites-comms"
@@ -2275,6 +2322,9 @@ msgid ""
 "You have saved us a tremendous headache. We thought we'd have to wait two "
 "months before we could fix the problem. Thanks"
 msgstr ""
+"Vous nous avez évité un énorme mal de tête. Nous pensions qu'il faudrait "
+"attendre deux mois avant de pouvoir régler le problème.\n"
+"Merci beaucoup."
 
 #: scripts/scenario_48_visitors.lua:3812 scripts/scenario_48_visitors.lua:4858
 msgctxt "station-comms"
@@ -2350,17 +2400,17 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:3878
 msgctxt "station-comms"
 msgid "Request access to isolated transporter pad"
-msgstr ""
+msgstr "Demander l'accès à l'aire de transport isolée"
 
 #: scripts/scenario_48_visitors.lua:3879
 msgctxt "station-comms"
 msgid "That will damage your reputation. Do you wish to proceed?"
-msgstr ""
+msgstr "Cela va nuire à votre réputation. Souhaitez-vous continuer ?"
 
 #: scripts/scenario_48_visitors.lua:3880
 msgctxt "station-comms"
 msgid "Proceed regardless of the reputation cost"
-msgstr ""
+msgstr "Continuer quel que soit le coût en réputation"
 
 #: scripts/scenario_48_visitors.lua:3883
 msgctxt "station-comms"
@@ -2369,62 +2419,76 @@ msgid ""
 "array of virtual monitors showing constantly changing pictures of different "
 "planetary systems asks you what you want"
 msgstr ""
+"...Vous êtes transporté vers un lieu inconnu.\n"
+"Un petit homme devant une vaste gamme de moniteurs virtuels montrant des "
+"images en constante évolution de différents systèmes planétaires vous "
+"demande ce que vous voulez."
 
 #: scripts/scenario_48_visitors.lua:3884 scripts/scenario_48_visitors.lua:3898
 #: scripts/scenario_48_visitors.lua:3935
 #, lua-format
 msgctxt "station-comms"
 msgid "Slow orbital speed of %s"
-msgstr ""
+msgstr "Réduire la vitesse orbitale de %s"
 
 #: scripts/scenario_48_visitors.lua:3888
 msgctxt "station-comms"
 msgid "He twists a small dial and says, 'Done.'"
 msgstr ""
+"...Le petit homme tourne un petit cadran et dit :\n"
+"\"Terminé\""
 
 #: scripts/scenario_48_visitors.lua:3891
 #, lua-format
 msgctxt "station-comms"
 msgid "Slow orbital speed of the moon orbiting %s"
-msgstr ""
+msgstr "Réduire la vitesse orbitale de la lune en orbite autour de %s"
 
 #: scripts/scenario_48_visitors.lua:3895
 msgctxt "station-comms"
 msgid "He moves a slider and says, 'Ok.'"
 msgstr ""
+"...Le petit homme déplace un curseur et dit :\n"
+"\"Ok\""
 
 #: scripts/scenario_48_visitors.lua:3902
 msgctxt "station-comms"
 msgid "He types in a couple of numbers and says, 'Happy?'"
 msgstr ""
+"...Le petit homme tape quelques chiffres et dit :\n"
+"\"Heureux ?\""
 
 #: scripts/scenario_48_visitors.lua:3905
 #, lua-format
 msgctxt "station-comms"
 msgid "Slow orbital speed of stations orbiting %s"
-msgstr ""
+msgstr "Réduire la vitesse orbitale des stations en orbite autour de %s"
 
 #: scripts/scenario_48_visitors.lua:3908
 msgctxt "station-comms"
 msgid "He flips a couple of switches and says, 'I love programmable stations'"
 msgstr ""
+"...Le petit homme actionne quelques interrupteurs et dit :\n"
+"\"J'adore les stations programmables\""
 
 #: scripts/scenario_48_visitors.lua:3911 scripts/scenario_48_visitors.lua:3942
 #, lua-format
 msgctxt "station-comms"
 msgid "Slow orbital speed of the inner belt around %s"
-msgstr ""
+msgstr "Réduire la vitesse orbitale de la ceinture intérieure autour de %s"
 
 #: scripts/scenario_48_visitors.lua:3920
 msgctxt "station-comms"
 msgid "He rubs one of the monitors a bit and says 'that should do it.'"
 msgstr ""
+"...Le petit homme frotte un peu l'un des moniteurs et dit :\n"
+"\"ça devrait suffire\""
 
 #: scripts/scenario_48_visitors.lua:3923 scripts/scenario_48_visitors.lua:3954
 #, lua-format
 msgctxt "station-comms"
 msgid "Slow orbital speed of the outer belt around %s"
-msgstr ""
+msgstr "Réduire la vitesse orbitale de la ceinture extérieure autour de %s"
 
 #: scripts/scenario_48_visitors.lua:3932
 msgctxt "station-comms"
@@ -2432,6 +2496,8 @@ msgid ""
 "He says, 'if you insist' and opens a small panel in the wall and enters a "
 "code on a keypad."
 msgstr ""
+"...Le petit homme dit « si vous insistez », ouvre un petit panneau dans le "
+"mur et saisit un code sur un clavier."
 
 #: scripts/scenario_48_visitors.lua:3939
 msgctxt "station-comms"
@@ -2439,6 +2505,9 @@ msgid ""
 "He sighs, stands up, grabs a large lever and pulls it about two inches "
 "towards him then says, 'there.'"
 msgstr ""
+"...Le petit homme soupire, se lève, attrape un grand levier et le ramène à "
+"environ 5 cm vers lui, puis dit :\n"
+"\"Là\""
 
 #: scripts/scenario_48_visitors.lua:3951
 msgctxt "station-comms"
@@ -2446,6 +2515,9 @@ msgid ""
 "He pulls a keyboard out from under his desk, types a couple of things and "
 "says, 'Alright.'"
 msgstr ""
+"...Le petit homme sort un clavier de sous son bureau, tape quelques mots et "
+"dit :\n"
+"\"Très bien\""
 
 #: scripts/scenario_48_visitors.lua:3969
 msgctxt "station-comms"
@@ -2453,24 +2525,27 @@ msgid ""
 "He dons a couple of purple haptic gloves, makes a couple of arcane gestures "
 "and says, 'You asked for it.'"
 msgstr ""
+"...Le petit homme enfile quelques gants haptiques violets, fait quelques "
+"gestes obscurs et dit :\n"
+"\"Vous l'avez demandé\""
 
 #: scripts/scenario_48_visitors.lua:3977
 #, lua-format
 msgctxt "station-comms"
 msgid "Where is %s? (cost 10 reputation)"
-msgstr ""
+msgstr "Où se situe la station %s ? (10 rép)"
 
 #: scripts/scenario_48_visitors.lua:3980
 #, lua-format
 msgctxt "station-comms"
 msgid "%s is near %s"
-msgstr ""
+msgstr "%s est proche de %s."
 
 #: scripts/scenario_48_visitors.lua:3982
 #, lua-format
 msgctxt "station-comms"
 msgid "%s is along the inner solar asteroid belt"
-msgstr ""
+msgstr "%s se trouve le long de la ceinture interne d'astéroïdes solaires."
 
 #: scripts/scenario_48_visitors.lua:3985
 msgctxt "needRep-comms"
@@ -3066,17 +3141,17 @@ msgstr "Quels marchandises recherchez-vous ?"
 #: scripts/scenario_48_visitors.lua:4536
 msgctxt "statistics-comms"
 msgid "Show me the current statistics, please"
-msgstr ""
+msgstr "Montrez-moi les statistiques actuelles, s'il vous plaît"
 
 #: scripts/scenario_48_visitors.lua:4537
 msgctxt "statistics-comms"
 msgid "What would you like statistics on?"
-msgstr ""
+msgstr "Sur quoi souhaiteriez-vous des statistiques ?"
 
 #: scripts/scenario_48_visitors.lua:4539
 msgctxt "statistics-comms"
 msgid "Human Stations Destroyed"
-msgstr ""
+msgstr "Stations humaines détruites"
 
 #: scripts/scenario_48_visitors.lua:4546 scripts/scenario_48_visitors.lua:4559
 #, lua-format
@@ -3085,16 +3160,18 @@ msgid ""
 "Count: %i, Total strength: %i\n"
 "   Station Name, Strength"
 msgstr ""
+"Nombre : %i, Force totale : %i\n"
+"   Nom de la station, force"
 
 #: scripts/scenario_48_visitors.lua:4552
 msgctxt "statistics-comms"
 msgid "Neutral Stations Destroyed"
-msgstr ""
+msgstr "Stations neutres détruites"
 
 #: scripts/scenario_48_visitors.lua:4565
 msgctxt "statistics-comms"
 msgid "Kraylor Vessels Destroyed"
-msgstr ""
+msgstr "Vaisseaux Kraylors détruits"
 
 #: scripts/scenario_48_visitors.lua:4572 scripts/scenario_48_visitors.lua:4585
 #: scripts/scenario_48_visitors.lua:4598
@@ -3104,32 +3181,34 @@ msgid ""
 "Count: %i, Total strength: %i\n"
 "   Vessel Name, Type, Strength"
 msgstr ""
+"Nombre : %i, Force totale : %i\n"
+"   Nom du vaisseau, type, force"
 
 #: scripts/scenario_48_visitors.lua:4578
 msgctxt "statistics-comms"
 msgid "Exuari Vessels Destroyed"
-msgstr ""
+msgstr "Vaisseaux Éxuaris détruits"
 
 #: scripts/scenario_48_visitors.lua:4591
 msgctxt "statistics-comms"
 msgid "Arlenian Vessels Destroyed"
-msgstr ""
+msgstr "Vaisseaux Arléniens détruits"
 
 #: scripts/scenario_48_visitors.lua:4603
 msgctxt "statistics-comms"
 msgid "Missions completed"
-msgstr ""
+msgstr "Missions terminées"
 
 #: scripts/scenario_48_visitors.lua:4605
 #, lua-format
 msgctxt "statistics-comms"
 msgid "Missions completed so far: %i"
-msgstr ""
+msgstr "Missions terminées jusqu'à présent : %i"
 
 #: scripts/scenario_48_visitors.lua:4607
 msgctxt "statistics-comms"
 msgid "No missions completed yet"
-msgstr ""
+msgstr "Aucune mission terminée pour l'instant"
 
 #: scripts/scenario_48_visitors.lua:4632
 msgctxt "station-comms"
@@ -3236,7 +3315,7 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:4705
 msgctxt "Polly-comms"
 msgid "Contact astronomer Polly Hobbs"
-msgstr ""
+msgstr "Contacter l'astronome Polly Hobbs"
 
 #: scripts/scenario_48_visitors.lua:4706
 msgctxt "Polly-comms"
@@ -3245,6 +3324,11 @@ msgid ""
 "additional data. However, the device needs to be much closer. Can you "
 "transport me closer to the location of the readings?"
 msgstr ""
+"[Polly Hobbs]\n"
+"J'ai construit un appareil d'analyse sensible pour collecter des données "
+"supplémentaires. Cependant, l'appareil doit être beaucoup plus proche de sa "
+"cible.\n"
+"Pouvez-vous me rapprocher encore plus près du lieu des lectures ?"
 
 #: scripts/scenario_48_visitors.lua:4711
 msgctxt "station-comms"
@@ -3619,45 +3703,45 @@ msgstr "Faction"
 #: scripts/scenario_48_visitors.lua:5173 scripts/scenario_48_visitors.lua:5178
 msgctxt "scienceDB"
 msgid "Orbit around"
-msgstr ""
+msgstr "Orbite autour"
 
 #: scripts/scenario_48_visitors.lua:5174
 #, lua-format
 msgctxt "scienceDB"
 msgid "Star %s in inner asteroid belt"
-msgstr ""
+msgstr "Étoile %s dans la ceinture intérieure d'astéroïdes"
 
 #: scripts/scenario_48_visitors.lua:5179
 #, lua-format
 msgctxt "scienceDB"
 msgid "Star %s in outer asteroid belt"
-msgstr ""
+msgstr "Étoile %s dans la ceinture externe d'astéroïdes"
 
 #: scripts/scenario_48_visitors.lua:5183 scripts/scenario_48_visitors.lua:5190
 #: scripts/scenario_48_visitors.lua:5197
 msgctxt "scienceDB"
 msgid "Primary orbit"
-msgstr ""
+msgstr "Orbite primaire"
 
 #: scripts/scenario_48_visitors.lua:5184 scripts/scenario_48_visitors.lua:5191
 #: scripts/scenario_48_visitors.lua:5198
 #, lua-format
 msgctxt "scienceDB"
 msgid "Around planet %s"
-msgstr ""
+msgstr "Autour de la planète %s"
 
 #: scripts/scenario_48_visitors.lua:5185 scripts/scenario_48_visitors.lua:5192
 #: scripts/scenario_48_visitors.lua:5199
 msgctxt "scienceDB"
 msgid "Secondary orbit"
-msgstr ""
+msgstr "Orbite secondaire"
 
 #: scripts/scenario_48_visitors.lua:5186 scripts/scenario_48_visitors.lua:5193
 #: scripts/scenario_48_visitors.lua:5200
 #, lua-format
 msgctxt "scienceDB"
 msgid "Planet %s orbits star %s"
-msgstr ""
+msgstr "La planète %s orbite autour de l'étoile %s"
 
 #: scripts/scenario_48_visitors.lua:5202
 msgctxt "scienceDB"
@@ -3771,7 +3855,7 @@ msgstr "Renforts Vipère MK8"
 #: scripts/scenario_48_visitors.lua:5276
 msgctxt "scienceDB"
 msgid "Shield overcharge"
-msgstr ""
+msgstr "Surcharge du bouclier"
 
 #: scripts/scenario_48_visitors.lua:5281
 #, lua-format
@@ -3783,13 +3867,13 @@ msgstr "%s rép"
 #, lua-format
 msgctxt "scienceDB"
 msgid "Sells %s"
-msgstr ""
+msgstr "Vend %s"
 
 #: scripts/scenario_48_visitors.lua:5291
 #, lua-format
 msgctxt "scienceDB"
 msgid "for %s reputation each"
-msgstr ""
+msgstr "pour %s rép l'unité"
 
 #: scripts/scenario_48_visitors.lua:5334
 msgctxt "shipAssist-comms"
@@ -4189,17 +4273,17 @@ msgstr "Ordre externe ignoré."
 #: scripts/scenario_48_visitors.lua:5642
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: AUTOSHUTDOWN"
-msgstr ""
+msgstr "EXÉCUTER : ARRÊT AUTOMATIQUE"
 
 #: scripts/scenario_48_visitors.lua:5642
 msgctxt "shipEnemy-comms"
 msgid "Target source of rogue command."
-msgstr ""
+msgstr "Cibler la source de la commande malveillante."
 
 #: scripts/scenario_48_visitors.lua:5642
 msgctxt "shipEnemy-comms"
 msgid "External command failed security check."
-msgstr ""
+msgstr "La commande externe a échoué au contrôle de sécurité."
 
 #: scripts/scenario_48_visitors.lua:5645
 msgctxt "shipEnemy-comms"
@@ -4221,17 +4305,17 @@ msgstr ""
 #: scripts/scenario_48_visitors.lua:5646
 msgctxt "shipEnemy-comms"
 msgid "Your queen tastes like elderberries"
-msgstr ""
+msgstr "Votre reine a un goût de confiture"
 
 #: scripts/scenario_48_visitors.lua:5646
 msgctxt "shipEnemy-comms"
 msgid "You will be destroyed for the honor of the hive."
-msgstr ""
+msgstr "Vous serez détruit pour l'honneur de la ruche."
 
 #: scripts/scenario_48_visitors.lua:5646
 msgctxt "shipEnemy-comms"
 msgid "Maggots are beneath our notice."
-msgstr ""
+msgstr "Les asticots sont indignes de notre attention."
 
 #: scripts/scenario_48_visitors.lua:5649
 msgctxt "shipEnemy-comms"
@@ -4381,21 +4465,20 @@ msgstr "S'amarrer à %s."
 #: scripts/scenario_48_visitors.lua:6424
 msgctxt "Polly-buttonRelay"
 msgid "Polly Scan Time"
-msgstr ""
+msgstr "Temps d'analyse de Polly"
 
 #: scripts/scenario_48_visitors.lua:6427
 msgctxt "Polly-shipLog"
 msgid "Scan complete"
-msgstr ""
+msgstr "Analyse terminée"
 
 #: scripts/scenario_48_visitors.lua:6429
 #, lua-format
 msgctxt "Polly-shipLog"
 msgid "%.1f seconds remain to be scanned"
-msgstr ""
+msgstr "Analyse en cours : %.1fs restantes"
 
 #: scripts/scenario_48_visitors.lua:6433
-#, fuzzy
 msgctxt "Polly-tabHelmTactical"
 msgid "Range"
 msgstr "Portée"
@@ -4404,7 +4487,7 @@ msgstr "Portée"
 #, lua-format
 msgctxt "Polly-tabHelmTactical"
 msgid "In %s"
-msgstr ""
+msgstr "Á portée de %s"
 
 #: scripts/scenario_48_visitors.lua:6438
 #, lua-format
@@ -4414,29 +4497,37 @@ msgid ""
 "now. We will need to stay in range for %s seconds to complete the sensor "
 "readings"
 msgstr ""
+"[Polly Hobbs]\n"
+"Nous sommes à portée pour des lectures de supplémentaires. Rassembler les "
+"données maintenant. Nous devrons rester à portée pendant %ss pour que les "
+"capteurs finalisent leurs lectures."
 
 #: scripts/scenario_48_visitors.lua:6445
 msgctxt "Polly-shipLog"
 msgid "[Polly Hobbs] The data gathering phase is complete. Analyzing data."
 msgstr ""
+"[Polly Hobbs]\n"
+"La phase de collecte de données est terminée. Analyse des données en cours."
 
 #: scripts/scenario_48_visitors.lua:6451
 #, lua-format
 msgctxt "Polly-tabHelms&Tactical"
 msgid "Out of %s"
-msgstr ""
+msgstr "Hors de portée de %s"
 
 #: scripts/scenario_48_visitors.lua:6456
 #, lua-format
 msgctxt "Polly-shipLog"
 msgid "[Polly Hobbs] %.1f seconds remain to be scanned"
 msgstr ""
+"[Polly Hobbs]\n"
+"Analyse en cours : %.1fs restantes"
 
 #: scripts/scenario_48_visitors.lua:6460
 #, lua-format
 msgctxt "Polly-tabHelms&Tactical"
 msgid "%s: %i"
-msgstr ""
+msgstr "%s : %i"
 
 #: scripts/scenario_48_visitors.lua:6491
 msgctxt "Polly-shipLog"
@@ -4445,6 +4536,11 @@ msgid ""
 "here physically, it seems to not belong here temporally either. Portions of "
 "it are phasing in and out of our time continuum"
 msgstr ""
+"[Polly Hobbs]\n"
+"Les lectures indiquent que non seulement cet objet n'a pas sa place ici "
+"physiquement, mais qu'il ne semble pas non plus y appartenir temporellement. "
+"Des parties de celui-ci entrent et sortent progressivement de notre "
+"continuum temporel."
 
 #: scripts/scenario_48_visitors.lua:6526
 msgctxt "Polly-shipLog"
@@ -4453,6 +4549,10 @@ msgid ""
 "just before those Independent ships appeared. I think they were somehow "
 "released or transported by the artifact"
 msgstr ""
+"[Polly Hobbs]\n"
+"Il y a eu une vague de particules de chroniton provenant de l'artefact juste "
+"avant l'apparition de ces vaisseaux indépendants. Je pense qu'ils ont été "
+"libérés ou transportés par l'artefact."
 
 #: scripts/scenario_48_visitors.lua:6538
 msgctxt "Polly-shipLog"
@@ -4461,12 +4561,17 @@ msgid ""
 "why such old ships have suddenly appeared. I have gathered as much data as I "
 "can on this phenomenon. Thank you for your assistance"
 msgstr ""
+"[Polly Hobbs]\n"
+"Ces vaisseaux affichent des signatures temporelles datant de l'histoire "
+"ancienne. Je ne sais pas pourquoi de si vieux vaisseaux sont soudainement "
+"apparus. J'ai rassemblé autant de données que possible sur ce phénomène. "
+"Merci pour votre aide."
 
 #: scripts/scenario_48_visitors.lua:6693
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Transport planetologist by docking with %s"
-msgstr ""
+msgstr "Transporter le planétologue en s'amarrant à la station %s"
 
 #: scripts/scenario_48_visitors.lua:6709
 msgctxt "planetologist-shipLog"
@@ -4476,11 +4581,16 @@ msgid ""
 "with your engineer before he left. Consequently, engineering has improved "
 "battery efficiency by ten percent"
 msgstr ""
+"...Enrique Flogistan vous remercie chaleureusement et se précipite vers son "
+"laboratoire d'observation.\n"
+"Avant de partir, il a discuté de ses recherches avec votre ingénieur sur "
+"certaines propriétés uniques du dilithium. L’ingénierie a pu s'en servir "
+"pour améliorer l’efficacité de la batterie de 10%."
 
 #: scripts/scenario_48_visitors.lua:6715
 msgctxt "planetologist-msgMainscreen"
 msgid "Planetologist perished"
-msgstr ""
+msgstr "Le planétologue a péri."
 
 #: scripts/scenario_48_visitors.lua:6859
 msgctxt "satellites-shipLog"
@@ -4488,6 +4598,9 @@ msgid ""
 "[Engineering Technician] For helping to fix their satellites, the satellite "
 "station technicians have doubled our impulse engine's top speed"
 msgstr ""
+"[Technicien en ingénierie]\n"
+"Pour les avoir aidé à réparer leurs satellites, les techniciens de la "
+"station ont doublé la vitesse maximale de notre moteur à impulsion."
 
 #: scripts/scenario_48_visitors.lua:6860 scripts/scenario_48_visitors.lua:7086
 #, lua-format
@@ -4561,16 +4674,18 @@ msgstr "[Vaisseau %s] Merci d'avoir géré ces pirates Éxuaris."
 msgctxt "virus-shipLog"
 msgid "[%s medical quartermaster] Anti-virus loaded aboard your ship"
 msgstr ""
+"[Quartier médical %s]\n"
+"Antivirus chargé à bord de votre vaisseau."
 
 #: scripts/scenario_48_visitors.lua:7184
 msgctxt "virus-buttonRelay"
 msgid "Virus status"
-msgstr ""
+msgstr "État du virus"
 
 #: scripts/scenario_48_visitors.lua:7189
 msgctxt "virus-buttonOperations"
 msgid "Virus status"
-msgstr ""
+msgstr "État du virus"
 
 #: scripts/scenario_48_visitors.lua:7196
 #, lua-format
@@ -4579,11 +4694,14 @@ msgid ""
 "[%s Medical Team] Received Anti-virus. Administering to station personnel. "
 "Thanks %s"
 msgstr ""
+"[Équipe médicale %s]\n"
+"Avons reçu l'antivirus. Nous l'administrons au personnel de la station. "
+"Merci %s."
 
 #: scripts/scenario_48_visitors.lua:7210
 msgctxt "virus-msgMainscreen"
 msgid "Pandemic"
-msgstr ""
+msgstr "Pandémie"
 
 #: scripts/scenario_48_visitors.lua:7230
 msgctxt "virus-tabScience&Operations"
@@ -4609,11 +4727,13 @@ msgid ""
 "Stations have been saved from the virus outbreak. Dock with %s for further "
 "orders"
 msgstr ""
+"Les stations ont été sauvées de l'épidémie de virus. S'amarrer à %s pour "
+"d'autres commandes."
 
 #: scripts/scenario_48_visitors.lua:7278
 msgctxt "virus-shipLog"
 msgid "First virus fatality in"
-msgstr ""
+msgstr "Premier décès dû au virus en"
 
 #: scripts/scenario_48_visitors.lua:7280
 #, lua-format
@@ -4630,7 +4750,7 @@ msgstr "%s %i minutes."
 #: scripts/scenario_48_visitors.lua:7284
 msgctxt "virus-shipLog"
 msgid ". Stations needing anti-virus:"
-msgstr ""
+msgstr ". Stations nécessitant un antivirus :"
 
 #: scripts/scenario_48_visitors.lua:7287
 #, lua-format
@@ -4642,18 +4762,18 @@ msgstr "%s %s"
 #, lua-format
 msgctxt "targetInt-comms"
 msgid "Dock with %s in %s for Exuari intelligence"
-msgstr ""
+msgstr "S'amarrer à %s en secteur %s pour l'intelligence Éxuarie."
 
 #: scripts/scenario_48_visitors.lua:7321
 #, lua-format
 msgctxt "targetInt-shipLog"
 msgid "Dock with %s in %s for Exuari intelligence"
-msgstr ""
+msgstr "S'amarrer à %s en secteur %s pour l'intelligence Éxuarie."
 
 #: scripts/scenario_48_visitors.lua:7326 scripts/scenario_48_visitors.lua:7339
 msgctxt "targetInt-msgMainscreen"
 msgid "Exuari destroyed station"
-msgstr ""
+msgstr "Station Éxuarie détruite"
 
 #: scripts/scenario_48_visitors.lua:7346
 #, lua-format
@@ -4662,17 +4782,20 @@ msgid ""
 "Intelligence report: the Exuari have chosen %s in %s as their next target "
 "for attack. Make sure they do not succeed"
 msgstr ""
+"Rapport de renseignement : les Éxuaris ont choisi la station %s dans le "
+"secteur %s comme prochaine cible d'attaque. Assurez-vous qu'ils ne "
+"réussissent pas."
 
 #: scripts/scenario_48_visitors.lua:7350
 #, lua-format
 msgctxt "targetInt-shipLog"
 msgid "Added waypoint %i to your navigation system for %s"
-msgstr ""
+msgstr "Ajout du marqueur %i à votre système de navigation pour %s."
 
 #: scripts/scenario_48_visitors.lua:7394
 msgctxt "targetInt-shipLog"
 msgid "Looks like you thwarted that Exuari attack"
-msgstr ""
+msgstr "On dirait que vous avez déjoué l'attaque des Éxuaris."
 
 #: scripts/scenario_48_visitors.lua:7404
 msgctxt "Exuari1-comms"
@@ -4723,6 +4846,8 @@ msgid ""
 "Satellite stations %s, %s and %s orbiting %s have been reporting periodic "
 "problems. See what you can do to help them out"
 msgstr ""
+"Les stations satellites %s, %s et %s en orbite autour de %s ont signalé des "
+"problèmes périodiques. Voyez ce que vous pouvez faire pour les aider."
 
 #: scripts/scenario_48_visitors.lua:7710
 #, lua-format
@@ -4738,6 +4863,10 @@ msgid ""
 "refuses to travel in the area due to increased Exuari activity. Dock with %s "
 "and transport the planetologist to %s"
 msgstr ""
+"Le planétologue Enrique Flogistan prévoit d'étudier %s. Cependant, son "
+"vaisseau de transport refuse de circuler dans la région en raison de "
+"l'activité accrue des Éxuaris. Amarrez-vous à %s et transportez le "
+"planétologue à la station %s."
 
 #: scripts/scenario_48_visitors.lua:7711
 #, lua-format
@@ -4754,6 +4883,11 @@ msgid ""
 "her published research. Find her, get the source data and investigate. "
 "Solicit her assistance if she's willing"
 msgstr ""
+"L'analyse des observations et les lectures prises par l'astronome civile "
+"Polly Hobbs indiquent des lectures anormales dans cette zone.\n"
+"Elle vit sur la station %s selon ses recherches publiées. Trouvez-la, "
+"récupérez les données sources et enquêtez. Sollicitez son aide si elle le "
+"souhaite."
 
 #: scripts/scenario_48_visitors.lua:7712
 #, lua-format
@@ -4796,6 +4930,10 @@ msgid ""
 "Rathgar's space virus. %s has developed an effective anti-virus, but it "
 "needs to be delivered to all the stations quickly"
 msgstr ""
+"Les stations %s, %s, %s, %s et %s signalent toutes des épidémies d'une "
+"variante du virus spatial de Rathgar.\n"
+"%s a développé un antivirus efficace, mais il doit être livré rapidement à "
+"toutes les stations."
 
 #: scripts/scenario_48_visitors.lua:7722
 #, lua-format
@@ -4809,6 +4947,9 @@ msgid ""
 "We've picked up intelligence on the next Exuari attack. Check your ship log "
 "for details. Protect the target station."
 msgstr ""
+"Nous avons obtenu des renseignements sur la prochaine attaque Éxuarie. "
+"Consultez votre journal de bord pour plus de détails. Protégez la station "
+"cible."
 
 #: scripts/scenario_48_visitors.lua:7723
 msgctxt "orders-comms"

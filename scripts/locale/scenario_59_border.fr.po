@@ -27,7 +27,7 @@ msgid ""
 "\n"
 "Version 5"
 msgstr ""
-"EN COURS DE TRADUCTION 50%\n"
+"EN COURS DE TRADUCTION 59%       601/1008\n"
 "\n"
 "War temperature rises along the border between Human Navy space and Kraylor "
 "space. The treaty holds for now, but the diplomats and intelligence "
@@ -424,7 +424,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:1469
 msgctxt "scienceDescription-planet"
 msgid "Mining and Gambling"
-msgstr ""
+msgstr "Exploitation minière et jeux de hasard"
 
 #: scripts/scenario_59_border.lua:1499
 msgctxt "scienceDescription-planet"
@@ -436,540 +436,588 @@ msgstr "Planète de classe M"
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the beam system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de faisceaux laser."
 
 #: scripts/scenario_59_border.lua:1983
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the beam system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de faisceaux laser."
 
 #: scripts/scenario_59_border.lua:1987
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the beam system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de faisceaux laser."
 
 #: scripts/scenario_59_border.lua:1993
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the beam system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de faisceaux laser."
 
 #: scripts/scenario_59_border.lua:1997
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the beam system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de faisceaux laser."
 
 #: scripts/scenario_59_border.lua:2001
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the beam system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de faisceaux laser."
 
 #: scripts/scenario_59_border.lua:2006
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has had no impact on an already healthy beam system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de faisceaux laser déjà "
+"sain."
 
 #: scripts/scenario_59_border.lua:2010
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has had no impact on an already healthy beam system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de faisceaux laser déjà "
+"sain."
 
 #: scripts/scenario_59_border.lua:2014
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has had no impact on an already healthy beam system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de faisceaux laser déjà "
+"sain."
 
 #: scripts/scenario_59_border.lua:2022
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has damaged the beam system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système de faisceaux laser."
 
 #: scripts/scenario_59_border.lua:2026
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has damaged the beam system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système de faisceaux laser."
 
 #: scripts/scenario_59_border.lua:2030
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has damaged the beam system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système de faisceaux laser."
 
 #: scripts/scenario_59_border.lua:2036
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has damaged the beam system maximum health"
 msgstr ""
+"Le %s récupéré a endommagé la santé maximale du système de faisceaux laser."
 
 #: scripts/scenario_59_border.lua:2040
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has damaged the beam system maximum health"
 msgstr ""
+"Le %s récupéré a endommagé la santé maximale du système de faisceaux laser."
 
 #: scripts/scenario_59_border.lua:2044
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has damaged the beam system maximum health"
 msgstr ""
+"Le %s récupéré a endommagé la santé maximale du système de faisceaux laser."
 
 #: scripts/scenario_59_border.lua:2068
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the missile system maximum health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé maximale du système de missiles."
 
 #: scripts/scenario_59_border.lua:2072
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the missile system maximum health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé maximale du système de missiles."
 
 #: scripts/scenario_59_border.lua:2076
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the missile system maximum health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé maximale du système de missiles."
 
 #: scripts/scenario_59_border.lua:2082
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the missile system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de missiles."
 
 #: scripts/scenario_59_border.lua:2086
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the missile system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de missiles."
 
 #: scripts/scenario_59_border.lua:2090
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the missile system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de missiles."
 
 #: scripts/scenario_59_border.lua:2095
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has had no impact on an already healthy missile system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de missiles déjà sain."
 
 #: scripts/scenario_59_border.lua:2099
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has had no impact on an already healthy missile system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de missiles déjà sain."
 
 #: scripts/scenario_59_border.lua:2103
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has had no impact on an already healthy missile system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de missiles déjà sain."
 
 #: scripts/scenario_59_border.lua:2111
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has damaged the missile system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système de missiles."
 
 #: scripts/scenario_59_border.lua:2115
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has damaged the missile system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système de missiles."
 
 #: scripts/scenario_59_border.lua:2119
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has damaged the missile system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système de missiles."
 
 #: scripts/scenario_59_border.lua:2125
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has damaged the missile system maximum health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé maximale du système de missiles."
 
 #: scripts/scenario_59_border.lua:2129
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has damaged the missile system maximum health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé maximale du système de missiles."
 
 #: scripts/scenario_59_border.lua:2133
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has damaged the missile system maximum health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé maximale du système de missiles."
 
 #: scripts/scenario_59_border.lua:2157
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the impulse system maximum health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé maximale du système d'impulsion."
 
 #: scripts/scenario_59_border.lua:2161
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the impulse system maximum health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé maximale du système d'impulsion."
 
 #: scripts/scenario_59_border.lua:2165
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the impulse system maximum health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé maximale du système d'impulsion."
 
 #: scripts/scenario_59_border.lua:2171
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the impulse system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système d'impulsion."
 
 #: scripts/scenario_59_border.lua:2175
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the impulse system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système d'impulsion."
 
 #: scripts/scenario_59_border.lua:2179
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the impulse system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système d'impulsion."
 
 #: scripts/scenario_59_border.lua:2184
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has had no impact on an already healthy impulse system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système d'impulsion déjà sain."
 
 #: scripts/scenario_59_border.lua:2188
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has had no impact on an already healthy impulse system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système d'impulsion déjà sain."
 
 #: scripts/scenario_59_border.lua:2192
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has had no impact on an already healthy impulse system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système d'impulsion déjà sain."
 
 #: scripts/scenario_59_border.lua:2200
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has damaged the impulse system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système d'impulsion."
 
 #: scripts/scenario_59_border.lua:2204
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has damaged the impulse system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système d'impulsion."
 
 #: scripts/scenario_59_border.lua:2208
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has damaged the impulse system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système d'impulsion."
 
 #: scripts/scenario_59_border.lua:2214
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has damaged the impulse system maximum health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé maximale du système d'impulsion."
 
 #: scripts/scenario_59_border.lua:2218
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has damaged the impulse system maximum health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé maximale du système d'impulsion."
 
 #: scripts/scenario_59_border.lua:2222
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has damaged the impulse system maximum health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé maximale du système d'impulsion."
 
 #: scripts/scenario_59_border.lua:2247
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the warp system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de vitesse lumière."
 
 #: scripts/scenario_59_border.lua:2251
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the warp system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de vitesse lumière."
 
 #: scripts/scenario_59_border.lua:2255
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the warp system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de vitesse lumière."
 
 #: scripts/scenario_59_border.lua:2261
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the warp system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de vitesse lumière."
 
 #: scripts/scenario_59_border.lua:2265
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the warp system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de vitesse lumière."
 
 #: scripts/scenario_59_border.lua:2269
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the warp system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de vitesse lumière."
 
 #: scripts/scenario_59_border.lua:2274
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has had no impact on an already healthy warp system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de vitesse lumière déjà "
+"sain."
 
 #: scripts/scenario_59_border.lua:2278
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has had no impact on an already healthy warp system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de vitesse lumière déjà "
+"sain."
 
 #: scripts/scenario_59_border.lua:2282
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has had no impact on an already healthy warp system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de vitesse lumière déjà "
+"sain."
 
 #: scripts/scenario_59_border.lua:2290
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has damaged the warp system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système de vitesse lumière."
 
 #: scripts/scenario_59_border.lua:2294
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has damaged the warp system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système de vitesse lumière."
 
 #: scripts/scenario_59_border.lua:2298
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has damaged the warp system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système de vitesse lumière."
 
 #: scripts/scenario_59_border.lua:2304
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has damaged the warp system maximum health"
 msgstr ""
+"Le %s récupéré a endommagé la santé maximale du système de vitesse lumière."
 
 #: scripts/scenario_59_border.lua:2308
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has damaged the warp system maximum health"
 msgstr ""
+"Le %s récupéré a endommagé la santé maximale du système de vitesse lumière."
 
 #: scripts/scenario_59_border.lua:2312
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has damaged the warp system maximum health"
 msgstr ""
+"Le %s récupéré a endommagé la santé maximale du système de vitesse lumière."
 
 #: scripts/scenario_59_border.lua:2338
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the jump system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de téléportation."
 
 #: scripts/scenario_59_border.lua:2342
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the jump system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de téléportation."
 
 #: scripts/scenario_59_border.lua:2346
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the jump system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de téléportation."
 
 #: scripts/scenario_59_border.lua:2352
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the jump system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de téléportation."
 
 #: scripts/scenario_59_border.lua:2356
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the jump system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de téléportation."
 
 #: scripts/scenario_59_border.lua:2360
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the jump system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de téléportation."
 
 #: scripts/scenario_59_border.lua:2365
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has had no impact on an already healthy jump system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de téléportation déjà sain."
 
 #: scripts/scenario_59_border.lua:2369
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has had no impact on an already healthy jump system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de téléportation déjà sain."
 
 #: scripts/scenario_59_border.lua:2373
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has had no impact on an already healthy jump system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de téléportation déjà sain."
 
 #: scripts/scenario_59_border.lua:2381
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has damaged the jump system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système de téléportation."
 
 #: scripts/scenario_59_border.lua:2385
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has damaged the jump system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système de téléportation."
 
 #: scripts/scenario_59_border.lua:2389
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has damaged the jump system health"
-msgstr ""
+msgstr "Le %s récupéré a endommagé la santé du système de téléportation."
 
 #: scripts/scenario_59_border.lua:2395
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has damaged the jump system maximum health"
 msgstr ""
+"Le %s récupéré a endommagé la santé maximale du système de téléportation."
 
 #: scripts/scenario_59_border.lua:2399
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has damaged the jump system maximum health"
 msgstr ""
+"Le %s récupéré a endommagé la santé maximale du système de téléportation."
 
 #: scripts/scenario_59_border.lua:2403
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has damaged the jump system maximum health"
 msgstr ""
+"Le %s récupéré a endommagé la santé maximale du système de téléportation."
 
 #: scripts/scenario_59_border.lua:2431
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the front shield system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de bouclier avant."
 
 #: scripts/scenario_59_border.lua:2435
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the front shield system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de bouclier avant."
 
 #: scripts/scenario_59_border.lua:2439
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the front shield system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de bouclier avant."
 
 #: scripts/scenario_59_border.lua:2445
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the rear shield system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de bouclier arrière."
 
 #: scripts/scenario_59_border.lua:2449
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the rear shield system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de bouclier arrière."
 
 #: scripts/scenario_59_border.lua:2453
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the rear shield system maximum health"
 msgstr ""
+"Le %s récupéré a amélioré la santé maximale du système de bouclier arrière."
 
 #: scripts/scenario_59_border.lua:2459
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the front shield system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de bouclier avant."
 
 #: scripts/scenario_59_border.lua:2463
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the front shield system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de bouclier avant."
 
 #: scripts/scenario_59_border.lua:2467
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the front shield system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de bouclier avant."
 
 #: scripts/scenario_59_border.lua:2473
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has improved the rear shield system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de bouclier arrière."
 
 #: scripts/scenario_59_border.lua:2477
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has improved the rear shield system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de bouclier arrière."
 
 #: scripts/scenario_59_border.lua:2481
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has improved the rear shield system health"
-msgstr ""
+msgstr "Le %s récupéré a amélioré la santé du système de bouclier arrière."
 
 #: scripts/scenario_59_border.lua:2486 scripts/scenario_59_border.lua:2595
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has had no impact on an already healthy shield system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de bouclier déjà sain."
 
 #: scripts/scenario_59_border.lua:2490 scripts/scenario_59_border.lua:2599
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has had no impact on an already healthy shield system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de bouclier déjà sain."
 
 #: scripts/scenario_59_border.lua:2494 scripts/scenario_59_border.lua:2603
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has had no impact on an already healthy shield system"
 msgstr ""
+"Le %s récupéré n'a eu aucun impact sur le système de bouclier déjà sain."
 
 #: scripts/scenario_59_border.lua:2503
 #, lua-format
