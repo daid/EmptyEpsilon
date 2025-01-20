@@ -838,7 +838,7 @@ msgstr ""
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Player Ships: %i (%i)"
-msgstr ""
+msgstr "+ Vaisseaux joueurs : %i (%i)"
 
 #: scripts/scenario_88_chaos.lua:1557
 #, lua-format

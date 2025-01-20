@@ -498,7 +498,7 @@ msgstr "+ Réputation"
 #: scripts/scenario_44_outpost.lua:847 scripts/scenario_44_outpost.lua:868
 msgctxt "buttonGM"
 msgid "+Control Codes"
-msgstr "+ Codes de contrôle"
+msgstr "+ Codes d'accès"
 
 #: scripts/scenario_44_outpost.lua:857
 msgctxt "buttonGM"

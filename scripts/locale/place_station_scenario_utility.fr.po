@@ -188,7 +188,7 @@ msgstr ""
 "construit le premier laser au milieu du 20e siècle sur Terre."
 
 #: scripts/place_station_scenario_utility.lua:652
-#: scripts/place_station_scenario_utility.lua:2668
+#: scripts/place_station_scenario_utility.lua:2785
 msgctxt "scienceDescription-station"
 msgid "Gambling and resupply"
 msgstr "Jeu d'argent et réapprovisionnement"
@@ -242,11 +242,13 @@ msgstr ""
 
 #: scripts/place_station_scenario_utility.lua:763
 #: scripts/place_station_scenario_utility.lua:1288
+#: scripts/place_station_scenario_utility.lua:2516
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
 msgstr "Composants de moteurs à impulsion"
 
 #: scripts/place_station_scenario_utility.lua:764
+#: scripts/place_station_scenario_utility.lua:2517
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture impulse engine components and systems"
 msgstr ""
@@ -311,7 +313,7 @@ msgstr ""
 "affaires."
 
 #: scripts/place_station_scenario_utility.lua:879
-#: scripts/place_station_scenario_utility.lua:2519
+#: scripts/place_station_scenario_utility.lua:2556
 msgctxt "scienceDescription-station"
 msgid "Mining"
 msgstr "Exploitation minière"
@@ -1206,85 +1208,96 @@ msgstr ""
 "siècle."
 
 #: scripts/place_station_scenario_utility.lua:2479
-#: scripts/place_station_scenario_utility.lua:2559
 #: scripts/place_station_scenario_utility.lua:2596
-#: scripts/place_station_scenario_utility.lua:2635
+#: scripts/place_station_scenario_utility.lua:2636
+#: scripts/place_station_scenario_utility.lua:2676
+#: scripts/place_station_scenario_utility.lua:2713
+#: scripts/place_station_scenario_utility.lua:2752
 msgctxt "scienceDescription-station"
 msgid "Mining station"
 msgstr "Station minière"
 
-#: scripts/place_station_scenario_utility.lua:2520
+#: scripts/place_station_scenario_utility.lua:2518
+msgctxt "stationStory-comms"
+msgid ""
+"Named after one of the station commander's favorite actors from the 20th "
+"century"
+msgstr ""
+"Nommé d'après l'un des acteurs préférés du commandant de la station. Acteur "
+"connu de la fin du XXe siècle."
+
+#: scripts/place_station_scenario_utility.lua:2557
 msgctxt "stationGeneralInfo-comms"
 msgid "We mine nearby asteroids for precious minerals"
 msgstr ""
 "Nous extrayons des astéroïdes à proximité à la recherche de minéraux "
 "précieux."
 
-#: scripts/place_station_scenario_utility.lua:2669
+#: scripts/place_station_scenario_utility.lua:2786
 msgctxt "stationGeneralInfo-comms"
 msgid "Relax and meet some interesting players"
 msgstr "Détendez-vous et rencontrez des joueurs intéressants."
 
-#: scripts/place_station_scenario_utility.lua:2705
+#: scripts/place_station_scenario_utility.lua:2822
 msgctxt "scienceDescription-station"
 msgid "Commerce and recreation"
 msgstr "Commerce et loisirs"
 
-#: scripts/place_station_scenario_utility.lua:2737
+#: scripts/place_station_scenario_utility.lua:2854
 msgctxt "scienceDescription-station"
 msgid "Xenopsychology research"
 msgstr "Recherche en xénopsychologie"
 
-#: scripts/place_station_scenario_utility.lua:2774
+#: scripts/place_station_scenario_utility.lua:2891
 msgctxt "scienceDescription-station"
 msgid "Mining and trade"
 msgstr "Exploitation minière et commerce"
 
-#: scripts/place_station_scenario_utility.lua:2811
+#: scripts/place_station_scenario_utility.lua:2928
 msgctxt "scienceDescription-station"
 msgid "Mining and gambling"
 msgstr "Exploitation minière et jeux de hasard"
 
-#: scripts/place_station_scenario_utility.lua:2848
-#: scripts/place_station_scenario_utility.lua:2922
-#: scripts/place_station_scenario_utility.lua:3060
-#: scripts/place_station_scenario_utility.lua:3236
+#: scripts/place_station_scenario_utility.lua:2965
+#: scripts/place_station_scenario_utility.lua:3039
+#: scripts/place_station_scenario_utility.lua:3177
+#: scripts/place_station_scenario_utility.lua:3353
 msgctxt "scienceDescription-station"
 msgid "Resupply"
 msgstr "Ravitaillement"
 
-#: scripts/place_station_scenario_utility.lua:2954
+#: scripts/place_station_scenario_utility.lua:3071
 msgctxt "scienceDescription-station"
 msgid "Textiles and fashion"
 msgstr "Mode et textile"
 
-#: scripts/place_station_scenario_utility.lua:2991
+#: scripts/place_station_scenario_utility.lua:3108
 msgctxt "scienceDescription-station"
 msgid "Stress Psychology Research"
 msgstr "Recherche en psychologie du stress"
 
-#: scripts/place_station_scenario_utility.lua:3023
+#: scripts/place_station_scenario_utility.lua:3140
 msgctxt "scienceDescription-station"
 msgid "Low gravity research"
 msgstr "Recherche sur la basse gravité"
 
-#: scripts/place_station_scenario_utility.lua:3061
+#: scripts/place_station_scenario_utility.lua:3178
 msgctxt "stationGeneralInfo-comms"
 msgid "Get your energy here! Grab a drink before you go!"
 msgstr "Obtenez votre énergie ici ! Prenez un verre avant de partir !"
 
-#: scripts/place_station_scenario_utility.lua:3093
+#: scripts/place_station_scenario_utility.lua:3210
 msgctxt "scienceDescription-station"
 msgid "Research Lab and Observatory"
 msgstr "Laboratoire de recherche et observatoire"
 
-#: scripts/place_station_scenario_utility.lua:3134
+#: scripts/place_station_scenario_utility.lua:3251
 msgctxt "scienceDescription-station"
 msgid "Biotech research"
 msgstr "Recherche en biotechnologie"
 
-#: scripts/place_station_scenario_utility.lua:3167
-#: scripts/place_station_scenario_utility.lua:3199
+#: scripts/place_station_scenario_utility.lua:3284
+#: scripts/place_station_scenario_utility.lua:3316
 msgctxt "scienceDescription-station"
 msgid "Observatory"
 msgstr "Observatoire"
