@@ -1388,7 +1388,7 @@ msgid ""
 "How may we help you today?"
 msgstr ""
 "Salutations %s !\n"
-"Comment pouvons-nous vous aider aujourd'hui ? "
+"Comment pouvons-nous vous aider aujourd'hui ?"
 
 #: scripts/scenario_47_scavenger.lua:1893
 msgctxt "station-comms"
