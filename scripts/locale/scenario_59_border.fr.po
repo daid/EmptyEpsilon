@@ -27,7 +27,7 @@ msgid ""
 "\n"
 "Version 5"
 msgstr ""
-"EN COURS DE TRADUCTION 71%       718/1008\n"
+"EN COURS DE TRADUCTION 84%       856/1008\n"
 "Version 5.6.2\n"
 "\n"
 "War temperature rises along the border between Human Navy space and Kraylor "
@@ -493,7 +493,7 @@ msgstr "Le %s récupéré a amélioré la santé du système de faisceaux laser.
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has had no impact on an already healthy beam system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de faisceaux laser déjà "
+"Le %s récupéré n'a eu aucun effet sur le système de faisceaux laser déjà "
 "sain."
 
 #: scripts/scenario_59_border.lua:2010
@@ -501,7 +501,7 @@ msgstr ""
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has had no impact on an already healthy beam system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de faisceaux laser déjà "
+"Le %s récupéré n'a eu aucun effet sur le système de faisceaux laser déjà "
 "sain."
 
 #: scripts/scenario_59_border.lua:2014
@@ -509,7 +509,7 @@ msgstr ""
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has had no impact on an already healthy beam system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de faisceaux laser déjà "
+"Le %s récupéré n'a eu aucun effet sur le système de faisceaux laser déjà "
 "sain."
 
 #: scripts/scenario_59_border.lua:2022
@@ -592,21 +592,21 @@ msgstr "Le %s récupéré a amélioré la santé du système de missiles."
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has had no impact on an already healthy missile system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de missiles déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système de missiles déjà sain."
 
 #: scripts/scenario_59_border.lua:2099
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has had no impact on an already healthy missile system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de missiles déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système de missiles déjà sain."
 
 #: scripts/scenario_59_border.lua:2103
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has had no impact on an already healthy missile system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de missiles déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système de missiles déjà sain."
 
 #: scripts/scenario_59_border.lua:2111
 #, lua-format
@@ -685,21 +685,21 @@ msgstr "Le %s récupéré a amélioré la santé du système d'impulsion."
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has had no impact on an already healthy impulse system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système d'impulsion déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système d'impulsion déjà sain."
 
 #: scripts/scenario_59_border.lua:2188
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has had no impact on an already healthy impulse system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système d'impulsion déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système d'impulsion déjà sain."
 
 #: scripts/scenario_59_border.lua:2192
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has had no impact on an already healthy impulse system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système d'impulsion déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système d'impulsion déjà sain."
 
 #: scripts/scenario_59_border.lua:2200
 #, lua-format
@@ -781,7 +781,7 @@ msgstr "Le %s récupéré a amélioré la santé du système de vitesse lumière
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has had no impact on an already healthy warp system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de vitesse lumière déjà "
+"Le %s récupéré n'a eu aucun effet sur le système de vitesse lumière déjà "
 "sain."
 
 #: scripts/scenario_59_border.lua:2278
@@ -789,7 +789,7 @@ msgstr ""
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has had no impact on an already healthy warp system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de vitesse lumière déjà "
+"Le %s récupéré n'a eu aucun effet sur le système de vitesse lumière déjà "
 "sain."
 
 #: scripts/scenario_59_border.lua:2282
@@ -797,7 +797,7 @@ msgstr ""
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has had no impact on an already healthy warp system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de vitesse lumière déjà "
+"Le %s récupéré n'a eu aucun effet sur le système de vitesse lumière déjà "
 "sain."
 
 #: scripts/scenario_59_border.lua:2290
@@ -883,21 +883,21 @@ msgstr "Le %s récupéré a amélioré la santé du système de téléportation.
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has had no impact on an already healthy jump system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de téléportation déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système de téléportation déjà sain."
 
 #: scripts/scenario_59_border.lua:2369
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has had no impact on an already healthy jump system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de téléportation déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système de téléportation déjà sain."
 
 #: scripts/scenario_59_border.lua:2373
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has had no impact on an already healthy jump system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de téléportation déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système de téléportation déjà sain."
 
 #: scripts/scenario_59_border.lua:2381
 #, lua-format
@@ -1021,21 +1021,21 @@ msgstr "Le %s récupéré a amélioré la santé du système de bouclier arrièr
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has had no impact on an already healthy shield system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de bouclier déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système de bouclier déjà sain."
 
 #: scripts/scenario_59_border.lua:2490 scripts/scenario_59_border.lua:2599
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has had no impact on an already healthy shield system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de bouclier déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système de bouclier déjà sain."
 
 #: scripts/scenario_59_border.lua:2494 scripts/scenario_59_border.lua:2603
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has had no impact on an already healthy shield system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de bouclier déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système de bouclier déjà sain."
 
 #: scripts/scenario_59_border.lua:2503
 #, lua-format
@@ -1229,7 +1229,7 @@ msgctxt "artifactEffect-msgEngineer"
 msgid ""
 "The %s retrieved has had no impact on an already healthy maneuver system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de manœuvre déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système de manœuvre déjà sain."
 
 #: scripts/scenario_59_border.lua:2689
 #, lua-format
@@ -1237,7 +1237,7 @@ msgctxt "artifactEffect-msgEngineer+"
 msgid ""
 "The %s retrieved has had no impact on an already healthy maneuver system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de manœuvre déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système de manœuvre déjà sain."
 
 #: scripts/scenario_59_border.lua:2693
 #, lua-format
@@ -1245,7 +1245,7 @@ msgctxt "artifactEffect-msgDamageControl"
 msgid ""
 "The %s retrieved has had no impact on an already healthy maneuver system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système de manœuvre déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système de manœuvre déjà sain."
 
 #: scripts/scenario_59_border.lua:2701
 #, lua-format
@@ -1324,21 +1324,21 @@ msgstr "Le %s récupéré a amélioré la santé du système du réacteur."
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has had no impact on an already healthy reactor system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système du réacteur déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système du réacteur déjà sain."
 
 #: scripts/scenario_59_border.lua:2778
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has had no impact on an already healthy reactor system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système du réacteur déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système du réacteur déjà sain."
 
 #: scripts/scenario_59_border.lua:2782
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has had no impact on an already healthy reactor system"
 msgstr ""
-"Le %s récupéré n'a eu aucun impact sur le système du réacteur déjà sain."
+"Le %s récupéré n'a eu aucun effet sur le système du réacteur déjà sain."
 
 #: scripts/scenario_59_border.lua:2790
 #, lua-format
@@ -1524,25 +1524,25 @@ msgstr "Le %s récupéré a désactivé le piratage."
 #, lua-format
 msgctxt "artifactEffect-msgScience"
 msgid "The %s retrieved has increased our sensor range"
-msgstr "Le %s récupéré a augmenté la portée de nos capteurs."
+msgstr "Le %s récupéré a augmenté la portée des capteurs."
 
 #: scripts/scenario_59_border.lua:3066
 #, lua-format
 msgctxt "artifactEffect-msgOperations"
 msgid "The %s retrieved has increased our sensor range"
-msgstr "Le %s récupéré a augmenté la portée de nos capteurs."
+msgstr "Le %s récupéré a augmenté la portée des capteurs."
 
 #: scripts/scenario_59_border.lua:3072
 #, lua-format
 msgctxt "artifactEffect-msgScience"
 msgid "The %s retrieved has decreased our sensor range"
-msgstr "Le %s récupéré a diminué la portée de nos capteurs."
+msgstr "Le %s récupéré a diminué la portée des capteurs."
 
 #: scripts/scenario_59_border.lua:3076
 #, lua-format
 msgctxt "artifactEffect-msgOperations"
 msgid "The %s retrieved has decreased our sensor range"
-msgstr "Le %s récupéré a diminué la portée de nos capteurs."
+msgstr "Le %s récupéré a diminué la portée des capteurs."
 
 #: scripts/scenario_59_border.lua:3097
 #, lua-format
@@ -1710,173 +1710,190 @@ msgstr ""
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has added charge to the shields"
-msgstr ""
+msgstr "Le %s récupéré a ajouté de la charge aux boucliers."
 
 #: scripts/scenario_59_border.lua:3248
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has added charge to the shields"
-msgstr ""
+msgstr "Le %s récupéré a ajouté de la charge aux boucliers."
 
 #: scripts/scenario_59_border.lua:3252
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has added charge to the shields"
-msgstr ""
+msgstr "Le %s récupéré a ajouté de la charge aux boucliers."
 
 #: scripts/scenario_59_border.lua:3262
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has reduced shield charge: corroded couplings"
 msgstr ""
+"Le %s récupéré a réduit la charge des boucliers. Cela est dû aux raccords "
+"corrodés."
 
 #: scripts/scenario_59_border.lua:3266
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has reduced shield charge: corroded couplings"
 msgstr ""
+"Le %s récupéré a réduit la charge des boucliers. Cela est dû aux raccords "
+"corrodés."
 
 #: scripts/scenario_59_border.lua:3270
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has reduced shield charge: corroded couplings"
 msgstr ""
+"Le %s récupéré a réduit la charge des boucliers. Cela est dû aux raccords "
+"corrodés."
 
 #: scripts/scenario_59_border.lua:3291
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has added energy to our reserves"
-msgstr ""
+msgstr "Le %s récupéré a ajouté de l'énergie à nos réserves."
 
 #: scripts/scenario_59_border.lua:3295
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has added energy to our reserves"
-msgstr ""
+msgstr "Le %s récupéré a ajouté de l'énergie à nos réserves."
 
 #: scripts/scenario_59_border.lua:3299
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has added energy to our reserves"
-msgstr ""
+msgstr "Le %s récupéré a ajouté de l'énergie à nos réserves."
 
 #: scripts/scenario_59_border.lua:3305
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved has drained some energy: incompatibility"
 msgstr ""
+"Le %s récupéré a drainé de l'énergie. Cela est dû à une incompatibilité."
 
 #: scripts/scenario_59_border.lua:3309
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved has drained some energy: incompatibility"
 msgstr ""
+"Le %s récupéré a drainé de l'énergie. Cela est dû à une incompatibilité."
 
 #: scripts/scenario_59_border.lua:3313
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved has drained some energy: incompatibility"
 msgstr ""
+"Le %s récupéré a drainé de l'énergie. Cela est dû à une incompatibilité."
 
 #: scripts/scenario_59_border.lua:3324
 msgctxt "upgrade-buttonHelms"
 msgid "C.M. Boost"
-msgstr ""
+msgstr "Manœuvre avant"
 
 #: scripts/scenario_59_border.lua:3332
 msgctxt "upgrade-msgHelms"
 msgid "Combat maneuver boost (forward direction) ability increased"
 msgstr ""
+"Augmentation de la capacité de déplacement vers l'avant de la manœuvre de "
+"combat."
 
 #: scripts/scenario_59_border.lua:3347
 msgctxt "upgrade-buttonTactical"
 msgid "C.M. Boost"
-msgstr ""
+msgstr "Manœuvre avant"
 
 #: scripts/scenario_59_border.lua:3355
 msgctxt "upgrade-msgTactical"
 msgid "Combat maneuver boost (forward direction) ability increased"
 msgstr ""
+"Augmentation de la capacité de déplacement vers l'avant de la manœuvre de "
+"combat."
 
 #: scripts/scenario_59_border.lua:3373
 msgctxt "upgrade-buttonHelms"
 msgid "C.M. Strafe"
-msgstr ""
+msgstr "Manœuvre cotés"
 
 #: scripts/scenario_59_border.lua:3381
 msgctxt "upgrade-msgHelms"
 msgid "Combat maneuver strafe (sideways direction) ability increased"
 msgstr ""
+"Augmentation de la capacité de déplacement sur les cotés de la manœuvre de "
+"combat."
 
 #: scripts/scenario_59_border.lua:3396
 msgctxt "upgrade-buttonTactical"
 msgid "C.M. Strafe"
-msgstr ""
+msgstr "Manœuvre cotés"
 
 #: scripts/scenario_59_border.lua:3404
 msgctxt "upgrade-msgTactical"
 msgid "Combat maneuver strafe (sideways direction) ability increased"
 msgstr ""
+"Augmentation de la capacité de déplacement sur les cotés de la manœuvre de "
+"combat."
 
 #: scripts/scenario_59_border.lua:3422
 msgctxt "upgrade-buttonWeapons"
 msgid "Beam Damage"
-msgstr ""
+msgstr "Dégâts faisc. laser"
 
 #: scripts/scenario_59_border.lua:3434
 msgctxt "upgrade-msgWeapons"
 msgid "Damage applied by beam weapons increased"
-msgstr ""
+msgstr "Les dégâts infligés par les faisceaux laser ont augmenté."
 
 #: scripts/scenario_59_border.lua:3449
 msgctxt "upgrade-buttonTactical"
 msgid "Beam Damage"
-msgstr ""
+msgstr "Dégâts faisc. laser"
 
 #: scripts/scenario_59_border.lua:3461
 msgctxt "upgrade-msgTactical"
 msgid "Damage applied by beam weapons increased"
-msgstr ""
+msgstr "Les dégâts infligés par les faisceaux laser ont augmenté."
 
 #: scripts/scenario_59_border.lua:3479
 msgctxt "upgrade-buttonWeapons"
 msgid "Beam Cycle"
-msgstr ""
+msgstr "Cadence faisc. laser"
 
 #: scripts/scenario_59_border.lua:3491
 msgctxt "upgrade-msgWeapons"
 msgid "The time it takes to cycle the beams between firing has been reduced"
-msgstr ""
+msgstr "Le délai entre les tirs aux faisceaux laser a été réduite."
 
 #: scripts/scenario_59_border.lua:3506
 msgctxt "upgrade-buttonTactical"
 msgid "Beam Cycle"
-msgstr ""
+msgstr "Cadence faisc. laser"
 
 #: scripts/scenario_59_border.lua:3518
 msgctxt "upgrade-msgTactical"
 msgid "The time it takes to cycle the beams between firing has been reduced"
-msgstr ""
+msgstr "Le délai entre les tirs aux faisceaux laser a été réduite."
 
 #: scripts/scenario_59_border.lua:3536
 msgctxt "upgrade-buttonHelms"
 msgid "Impulse Speed"
-msgstr ""
+msgstr "Vitesse moteurs"
 
 #: scripts/scenario_59_border.lua:3544
 msgctxt "upgrade-msgHelms"
 msgid "The maximum impulse speed has been increased"
-msgstr ""
+msgstr "La vitesse maximale des moteurs à impulsion a été augmentée."
 
 #: scripts/scenario_59_border.lua:3559
 msgctxt "upgrade-buttonTactical"
 msgid "Impulse Speed"
-msgstr ""
+msgstr "Vitesse moteurs"
 
 #: scripts/scenario_59_border.lua:3567
 msgctxt "upgrade-msgTactical"
 msgid "The maximum impulse speed has been increased"
-msgstr ""
+msgstr "La vitesse maximale des moteurs à impulsion a été augmentée."
 
 #: scripts/scenario_59_border.lua:3585
 msgctxt "upgrade-buttonHelms"
@@ -1886,7 +1903,7 @@ msgstr "Vitesse lumière"
 #: scripts/scenario_59_border.lua:3593
 msgctxt "upgrade-msgHelms"
 msgid "The maximum warp speed has been increased"
-msgstr ""
+msgstr "La vitesse lumière maximale a été augmentée."
 
 #: scripts/scenario_59_border.lua:3608
 msgctxt "upgrade-buttonTactical"
@@ -1896,7 +1913,7 @@ msgstr "Vitesse lumière"
 #: scripts/scenario_59_border.lua:3616
 msgctxt "upgrade-msgTactical"
 msgid "The maximum warp speed has been increased"
-msgstr ""
+msgstr "La vitesse lumière maximale a été augmentée."
 
 #: scripts/scenario_59_border.lua:3634
 msgctxt "upgrade-buttonHelms"
@@ -1906,7 +1923,7 @@ msgstr "Portée de saut"
 #: scripts/scenario_59_border.lua:3647
 msgctxt "upgrade-msgHelms"
 msgid "The maximum jump range has been increased"
-msgstr ""
+msgstr "La portée maximale de téléportation a été augmentée."
 
 #: scripts/scenario_59_border.lua:3662
 msgctxt "upgrade-buttonTactical"
@@ -1916,27 +1933,27 @@ msgstr "Portée de saut"
 #: scripts/scenario_59_border.lua:3675
 msgctxt "upgrade-msgTactical"
 msgid "The maximum jump range has been increased"
-msgstr ""
+msgstr "La portée maximale de téléportation a été augmentée."
 
 #: scripts/scenario_59_border.lua:3693
 msgctxt "upgrade-buttonWeapons"
 msgid "Shield Capacity"
-msgstr ""
+msgstr "Force boucliers"
 
 #: scripts/scenario_59_border.lua:3705
 msgctxt "upgrade-msgWeapons"
 msgid "The maximum shield strength has been increased"
-msgstr ""
+msgstr "La force maximale des boucliers a été augmentée."
 
 #: scripts/scenario_59_border.lua:3720
 msgctxt "upgrade-buttonTactical"
 msgid "Shield Capacity"
-msgstr ""
+msgstr "Force boucliers"
 
 #: scripts/scenario_59_border.lua:3732
 msgctxt "upgrade-msgTactical"
 msgid "The maximum shield strength has been increased"
-msgstr ""
+msgstr "La force maximale des boucliers a été augmentée."
 
 #: scripts/scenario_59_border.lua:3750
 msgctxt "upgrade-buttonHelms"
@@ -1946,7 +1963,7 @@ msgstr "Vitesse de rotation"
 #: scripts/scenario_59_border.lua:3758
 msgctxt "upgrade-msgHelms"
 msgid "The maximum spin speed has been increased"
-msgstr ""
+msgstr "La vitesse de rotation maximale a été augmentée."
 
 #: scripts/scenario_59_border.lua:3773
 msgctxt "upgrade-buttonTactical"
@@ -1956,73 +1973,73 @@ msgstr "Vitesse de rotation"
 #: scripts/scenario_59_border.lua:3781
 msgctxt "upgrade-msgTactical"
 msgid "The maximum spin speed has been increased"
-msgstr ""
+msgstr "La vitesse de rotation maximale a été augmentée."
 
 #: scripts/scenario_59_border.lua:3799
 msgctxt "upgrade-buttonEngineer"
 msgid "Battery Capacity"
-msgstr ""
+msgstr "Capacité batterie"
 
 #: scripts/scenario_59_border.lua:3807
 msgctxt "upgrade-msgEngineer"
 msgid "The maximum battery capacity has been increased"
-msgstr ""
+msgstr "La capacité maximale de la batterie a été augmentée."
 
 #: scripts/scenario_59_border.lua:3822
 msgctxt "upgrade-buttonEngineer+"
 msgid "Battery Capacity"
-msgstr ""
+msgstr "Capacité batterie"
 
 #: scripts/scenario_59_border.lua:3830
 msgctxt "upgrade-msgEngineer+"
 msgid "The maximum battery capacity has been increased"
-msgstr ""
+msgstr "La capacité maximale de la batterie a été augmentée."
 
 #: scripts/scenario_59_border.lua:3845
 msgctxt "upgrade-buttonDamageControl"
 msgid "Battery Capacity"
-msgstr ""
+msgstr "Capacité batterie"
 
 #: scripts/scenario_59_border.lua:3853
 msgctxt "upgrade-msgDamageControl"
 msgid "The maximum battery capacity has been increased"
-msgstr ""
+msgstr "La capacité maximale de la batterie a été augmentée."
 
 #: scripts/scenario_59_border.lua:3888 scripts/scenario_59_border.lua:3934
 #, lua-format
 msgctxt "coolant-buttonEngineer"
 msgid "%s C. Pump"
-msgstr ""
+msgstr "Liq. refr. %s"
 
 #: scripts/scenario_59_border.lua:3894 scripts/scenario_59_border.lua:3940
 #, lua-format
 msgctxt "coolant-msgEngineer"
 msgid "The %s coolant pump has been repaired"
-msgstr ""
+msgstr "La pompe du liquide de refroidissement %s a été réparée."
 
 #: scripts/scenario_59_border.lua:3901 scripts/scenario_59_border.lua:3950
 #, lua-format
 msgctxt "coolant-buttonEngineer+"
 msgid "%s C. Pump"
-msgstr ""
+msgstr "Liq. refr. %s"
 
 #: scripts/scenario_59_border.lua:3907 scripts/scenario_59_border.lua:3956
 #, lua-format
 msgctxt "coolant-msgEngineer+"
 msgid "The %s coolant pump has been repaired"
-msgstr ""
+msgstr "La pompe du liquide de refroidissement %s a été réparée."
 
 #: scripts/scenario_59_border.lua:3914 scripts/scenario_59_border.lua:3966
 #, lua-format
 msgctxt "coolant-buttonDamageControl"
 msgid "%s C. Pump"
-msgstr ""
+msgstr "Liq. refr. %s"
 
 #: scripts/scenario_59_border.lua:3920 scripts/scenario_59_border.lua:3972
 #, lua-format
 msgctxt "coolant-msgDamageControl"
 msgid "The %s coolant pump has been repaired"
-msgstr ""
+msgstr "La pompe du liquide de refroidissement %s a été réparée."
 
 #: scripts/scenario_59_border.lua:4019 scripts/scenario_59_border.lua:4089
 #: scripts/scenario_59_border.lua:4459 scripts/scenario_59_border.lua:4518
@@ -2030,7 +2047,7 @@ msgstr ""
 #, lua-format
 msgctxt "artifactEffect-msgHelms"
 msgid "The %s retrieved disabled a %s previously retrieved"
-msgstr ""
+msgstr "Le %s récupéré a désactivé un %s précédemment récupéré."
 
 #: scripts/scenario_59_border.lua:4023 scripts/scenario_59_border.lua:4093
 #: scripts/scenario_59_border.lua:4219 scripts/scenario_59_border.lua:4292
@@ -2040,7 +2057,7 @@ msgstr ""
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved disabled a %s previously retrieved"
-msgstr ""
+msgstr "Le %s récupéré a désactivé un %s précédemment récupéré."
 
 #: scripts/scenario_59_border.lua:4029
 #, lua-format
@@ -2049,6 +2066,8 @@ msgid ""
 "The %s retrieved reduced the combat maneuver boost (forward direction) "
 "ability"
 msgstr ""
+"Le %s récupéré a réduit la capacité de déplacement vers l'avant de la "
+"manœuvre de combat."
 
 #: scripts/scenario_59_border.lua:4033
 #, lua-format
@@ -2057,18 +2076,20 @@ msgid ""
 "The %s retrieved reduced the combat maneuver boost (forward direction) "
 "ability"
 msgstr ""
+"Le %s récupéré a réduit la capacité de déplacement vers l'avant de la "
+"manœuvre de combat."
 
 #: scripts/scenario_59_border.lua:4040 scripts/scenario_59_border.lua:4110
 #, lua-format
 msgctxt "artifactEffect-msgHelms"
 msgid "The %s retrieved has had no effect on combat maneuver"
-msgstr ""
+msgstr "Le %s récupéré n'a eu aucun effet sur la manœuvre de combat."
 
 #: scripts/scenario_59_border.lua:4044 scripts/scenario_59_border.lua:4114
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved has had no effect on combat maneuver"
-msgstr ""
+msgstr "Le %s récupéré n'a eu aucun effet sur la manœuvre de combat."
 
 #: scripts/scenario_59_border.lua:4099
 #, lua-format
@@ -2077,6 +2098,8 @@ msgid ""
 "The %s retrieved reduced the combat maneuver strafe (sideways direction) "
 "ability"
 msgstr ""
+"Le %s récupéré a réduit la capacité de déplacement sur les cotés de la "
+"manœuvre de combat."
 
 #: scripts/scenario_59_border.lua:4103
 #, lua-format
@@ -2085,61 +2108,63 @@ msgid ""
 "The %s retrieved reduced the combat maneuver strafe (sideways direction) "
 "ability"
 msgstr ""
+"Le %s récupéré a réduit la capacité de déplacement sur les cotés de la "
+"manœuvre de combat."
 
 #: scripts/scenario_59_border.lua:4136
 #, lua-format
 msgctxt "artifactEffect-msgRelay"
 msgid "The %s retrieved has restocked your probes"
-msgstr ""
+msgstr "Le %s récupéré a réapprovisionné le stock de sondes."
 
 #: scripts/scenario_59_border.lua:4140
 #, lua-format
 msgctxt "artifactEffect-msgOperations"
 msgid "The %s retrieved has restocked your probes"
-msgstr ""
+msgstr "Le %s récupéré a réapprovisionné le stock de sondes."
 
 #: scripts/scenario_59_border.lua:4145 scripts/scenario_59_border.lua:4166
 #, lua-format
 msgctxt "artifactEffect-msgRelay"
 msgid "The %s retrieved does not effect probe stock"
-msgstr ""
+msgstr "Le %s récupéré n'a eu aucun effet sur le stock de sondes."
 
 #: scripts/scenario_59_border.lua:4149 scripts/scenario_59_border.lua:4170
 #, lua-format
 msgctxt "artifactEffect-msgOperations"
 msgid "The %s retrieved does not effect probe stock"
-msgstr ""
+msgstr "Le %s récupéré n'a eu aucun effet sur le stock de sondes."
 
 #: scripts/scenario_59_border.lua:4157
 #, lua-format
 msgctxt "artifactEffect-msgRelay"
 msgid "The %s retrieved has depleted probe stock"
-msgstr ""
+msgstr "Le %s récupéré a épuisé le stock de sondes."
 
 #: scripts/scenario_59_border.lua:4161
 #, lua-format
 msgctxt "artifactEffect-msgOperations"
 msgid "The %s retrieved has depleted probe stock"
-msgstr ""
+msgstr "Le %s récupéré a épuisé le stock de sondes."
 
 #: scripts/scenario_59_border.lua:4215 scripts/scenario_59_border.lua:4288
 #: scripts/scenario_59_border.lua:4661
 #, lua-format
 msgctxt "artifactEffect-msgWeapons"
 msgid "The %s retrieved disabled a %s previously retrieved"
-msgstr ""
+msgstr "Le %s récupéré a désactivé un %s précédemment récupéré."
 
 #: scripts/scenario_59_border.lua:4229
 #, lua-format
 msgctxt "artifactEffect-msgWeapons"
 msgid "The %s retrieved reduced beam damage"
-msgstr ""
+msgstr "Le %s récupéré a réduit les dégâts infligés par les faisceaux laser."
 
 #: scripts/scenario_59_border.lua:4233
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved reduced beam damage"
-msgstr ""
+msgstr "Le %s récupéré a réduit les dégâts infligés par les faisceaux laser."
 
 #: scripts/scenario_59_border.lua:4240 scripts/scenario_59_border.lua:4313
 #, lua-format
@@ -2147,6 +2172,8 @@ msgctxt "artifactEffect-msgWeapons"
 msgid ""
 "The %s retrieved has had no effect on your non-existent beam weapon system"
 msgstr ""
+"Le %s récupéré n'a eu aucun effet sur votre système de faisceaux laser "
+"inexistant."
 
 #: scripts/scenario_59_border.lua:4244 scripts/scenario_59_border.lua:4317
 #, lua-format
@@ -2154,198 +2181,210 @@ msgctxt "artifactEffect-msgTactical"
 msgid ""
 "The %s retrieved has had no effect on your non-existent beam weapon system"
 msgstr ""
+"Le %s récupéré n'a eu aucun effet sur votre système de faisceaux laser "
+"inexistant."
 
 #: scripts/scenario_59_border.lua:4302
 #, lua-format
 msgctxt "artifactEffect-msgWeapons"
 msgid "The %s retrieved slowed beam cycle time"
-msgstr ""
+msgstr "Le %s récupéré a ralenti le temps de cycle des faisceaux laser."
 
 #: scripts/scenario_59_border.lua:4306
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved slowed beam cycle time"
-msgstr ""
+msgstr "Le %s récupéré a ralenti le temps de cycle des faisceaux laser."
 
 #: scripts/scenario_59_border.lua:4351
 #, lua-format
 msgctxt "artifactEffect-msgWeapons"
 msgid "The %s retrieved has restocked your %ss"
-msgstr ""
+msgstr "Le %s récupéré a réapprovisionné les %ss."
 
 #: scripts/scenario_59_border.lua:4355
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved has restocked your %ss"
-msgstr ""
+msgstr "Le %s récupéré a réapprovisionné les %ss."
 
 #: scripts/scenario_59_border.lua:4360 scripts/scenario_59_border.lua:4390
 #, lua-format
 msgctxt "artifactEffect-msgWeapons"
 msgid "The %s retrieved does not effect missile stocks"
-msgstr ""
+msgstr "Le %s récupéré n'a eu aucun effet sur les stocks de missiles."
 
 #: scripts/scenario_59_border.lua:4364 scripts/scenario_59_border.lua:4394
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved does not effect missile stocks"
-msgstr ""
+msgstr "Le %s récupéré n'a eu aucun effet sur les stocks de missiles."
 
 #: scripts/scenario_59_border.lua:4381 scripts/scenario_59_border.lua:4401
 #, lua-format
 msgctxt "artifactEffect-msgWeapons"
 msgid "The %s retrieved has depleted your stock of %ss"
-msgstr ""
+msgstr "Le %s récupéré a épuisé le stock de %ss."
 
 #: scripts/scenario_59_border.lua:4385 scripts/scenario_59_border.lua:4405
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved has depleted your stock of %ss"
-msgstr ""
+msgstr "Le %s récupéré a épuisé le stock de %ss."
 
 #: scripts/scenario_59_border.lua:4412
 #, lua-format
 msgctxt "artifactEffect-msgWeapons"
 msgid "The %s retrieved does not effect your non-existent missile system"
 msgstr ""
+"Le %s récupéré n'a eu aucun effet sur le système de missile inexistant."
 
 #: scripts/scenario_59_border.lua:4416
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved does not effect your non-existent missile system"
 msgstr ""
+"Le %s récupéré n'a eu aucun effet sur le système de missile inexistant."
 
 #: scripts/scenario_59_border.lua:4469
 #, lua-format
 msgctxt "artifactEffect-msgHelms"
 msgid "The %s retrieved slowed maximum impulse speed"
-msgstr ""
+msgstr "Le %s récupéré a diminué la vitesse maximale des moteurs à impulsion."
 
 #: scripts/scenario_59_border.lua:4473
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved slowed maximum impulse speed"
-msgstr ""
+msgstr "Le %s récupéré a réduit la vitesse maximale des moteurs à impulsion."
 
 #: scripts/scenario_59_border.lua:4528
 #, lua-format
 msgctxt "artifactEffect-msgHelms"
 msgid "The %s retrieved slowed maximum warp speed"
-msgstr ""
+msgstr "Le %s récupéré a réduit la vitesse lumière maximale."
 
 #: scripts/scenario_59_border.lua:4532
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved slowed maximum warp speed"
-msgstr ""
+msgstr "Le %s récupéré a réduit la vitesse lumière maximale."
 
 #: scripts/scenario_59_border.lua:4539
 #, lua-format
 msgctxt "artifactEffect-msgHelms"
 msgid "The %s retrieved had no effect on your non-existent warp system"
 msgstr ""
+"Le %s récupéré n'a eu aucun effet sur le système de vitesse lumière "
+"inexistant."
 
 #: scripts/scenario_59_border.lua:4543
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved had no effect on your non-existent warp system"
 msgstr ""
+"Le %s récupéré n'a eu aucun effet sur le système de vitesse lumière "
+"inexistant."
 
 #: scripts/scenario_59_border.lua:4602
 #, lua-format
 msgctxt "artifactEffect-msgHelms"
 msgid "The %s retrieved reduced maximum jump range"
-msgstr ""
+msgstr "Le %s récupéré a réduit la plage de téléportation maximale."
 
 #: scripts/scenario_59_border.lua:4606
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved reduced maximum jump range"
-msgstr ""
+msgstr "Le %s récupéré a réduit la plage de téléportation maximale."
 
 #: scripts/scenario_59_border.lua:4613
 #, lua-format
 msgctxt "artifactEffect-msgHelms"
 msgid "The %s retrieved had no effect on your non-existent jump system"
 msgstr ""
+"Le %s récupéré n'a eu aucun effet sur le système de téléportation inexistant."
 
 #: scripts/scenario_59_border.lua:4617
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved had no effect on your non-existent jump system"
 msgstr ""
+"Le %s récupéré n'a eu aucun effet sur le système de téléportation inexistant."
 
 #: scripts/scenario_59_border.lua:4675
 #, lua-format
 msgctxt "artifactEffect-msgWeapons"
 msgid "The %s retrieved reduced maximum shield strength"
-msgstr ""
+msgstr "Le %s récupéré a diminué la force maximale du bouclier."
 
 #: scripts/scenario_59_border.lua:4679
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved reduced maximum shield strength"
-msgstr ""
+msgstr "Le %s récupéré a diminué la force maximale du bouclier."
 
 #: scripts/scenario_59_border.lua:4686
 #, lua-format
 msgctxt "artifactEffect-msgWeapons"
 msgid "The %s retrieved had no effect on your non-existent shield system"
 msgstr ""
+"Le %s récupéré n'a eu aucun effet sur le système de bouclier inexistant."
 
 #: scripts/scenario_59_border.lua:4690
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved had no effect on your non-existent shield system"
 msgstr ""
+"Le %s récupéré n'a eu aucun effet sur le système de bouclier inexistant."
 
 #: scripts/scenario_59_border.lua:4743
 #, lua-format
 msgctxt "artifactEffect-msgHelms"
 msgid "The %s retrieved reduced maximum spin speed"
-msgstr ""
+msgstr "Le %s récupéré a diminué la vitesse de rotation maximale."
 
 #: scripts/scenario_59_border.lua:4747
 #, lua-format
 msgctxt "artifactEffect-msgTactical"
 msgid "The %s retrieved reduced maximum spin speed"
-msgstr ""
+msgstr "Le %s récupéré a diminué la vitesse de rotation maximale."
 
 #: scripts/scenario_59_border.lua:4791
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved disabled a %s previously retrieved"
-msgstr ""
+msgstr "Le %s récupéré a désactivé un %s précédemment récupéré."
 
 #: scripts/scenario_59_border.lua:4795
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved disabled a %s previously retrieved"
-msgstr ""
+msgstr "Le %s récupéré a désactivé un %s précédemment récupéré."
 
 #: scripts/scenario_59_border.lua:4799
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved disabled a %s previously retrieved"
-msgstr ""
+msgstr "Le %s récupéré a désactivé un %s précédemment récupéré."
 
 #: scripts/scenario_59_border.lua:4805
 #, lua-format
 msgctxt "artifactEffect-msgEngineer"
 msgid "The %s retrieved reduced maximum battery capacity"
-msgstr ""
+msgstr "Le %s récupéré a diminué la capacité maximale de la batterie."
 
 #: scripts/scenario_59_border.lua:4809
 #, lua-format
 msgctxt "artifactEffect-msgEngineer+"
 msgid "The %s retrieved reduced maximum battery capacity"
-msgstr ""
+msgstr "Le %s récupéré a diminué la capacité maximale de la batterie."
 
 #: scripts/scenario_59_border.lua:4813
 #, lua-format
 msgctxt "artifactEffect-msgDamageControl"
 msgid "The %s retrieved reduced maximum battery capacity"
-msgstr ""
+msgstr "Le %s récupéré a diminué la capacité maximale de la batterie."
 
 #: scripts/scenario_59_border.lua:4822
 #, lua-format
@@ -2586,42 +2625,42 @@ msgstr ""
 #: scripts/scenario_59_border.lua:5267
 msgctxt "buttonGM"
 msgid "Narsil"
-msgstr ""
+msgstr "Narsil"
 
 #: scripts/scenario_59_border.lua:5273
 msgctxt "buttonGM"
 msgid "Headhunter"
-msgstr ""
+msgstr "Headhunter"
 
 #: scripts/scenario_59_border.lua:5279
 msgctxt "buttonGM"
 msgid "Blazon"
-msgstr ""
+msgstr "Blazon"
 
 #: scripts/scenario_59_border.lua:5285
 msgctxt "buttonGM"
 msgid "Sting"
-msgstr ""
+msgstr "Sting"
 
 #: scripts/scenario_59_border.lua:5291
 msgctxt "buttonGM"
 msgid "Spyder"
-msgstr ""
+msgstr "Spyder"
 
 #: scripts/scenario_59_border.lua:5297
 msgctxt "buttonGM"
 msgid "Spinstar"
-msgstr ""
+msgstr "Spinstar"
 
 #: scripts/scenario_59_border.lua:5303 scripts/scenario_59_border.lua:5312
 msgctxt "buttonGM"
 msgid "Simian"
-msgstr ""
+msgstr "Simian"
 
 #: scripts/scenario_59_border.lua:5311 scripts/scenario_59_border.lua:5332
 msgctxt "buttonGM"
 msgid "-Back"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_59_border.lua:5313
 msgctxt "msgGM"
@@ -2652,7 +2691,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:5333
 msgctxt "buttonGM"
 msgid "Atlantis"
-msgstr ""
+msgstr "Atlantis"
 
 #: scripts/scenario_59_border.lua:5334
 msgctxt "msgGM"
@@ -2925,7 +2964,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:5363
 msgctxt "buttonGM"
 msgid "Phobos MP3"
-msgstr ""
+msgstr "Phobos MP3"
 
 #: scripts/scenario_59_border.lua:5364
 msgctxt "msgGM"
@@ -3236,7 +3275,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:6333
 msgctxt "scienceDB"
 msgid "May improve maneuverability"
-msgstr ""
+msgstr "Peut améliorer la manoeuvre"
 
 #: scripts/scenario_59_border.lua:6348
 #, lua-format
@@ -3293,7 +3332,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:6419
 msgctxt "scienceDB"
 msgid "May provide beam cooling upgrade"
-msgstr ""
+msgstr "Peut fournir une mise à niveau du refroidissement des faisceaux laser"
 
 #: scripts/scenario_59_border.lua:6434
 #, lua-format
@@ -3314,7 +3353,7 @@ msgstr "Il sait modifier les systèmes de faisceaux pour étendre leur portée."
 #: scripts/scenario_59_border.lua:6462
 msgctxt "scienceDB"
 msgid "May increase beam range"
-msgstr ""
+msgstr "Peut augmenter la portée des faisceaux"
 
 #: scripts/scenario_59_border.lua:6477
 #, lua-format
@@ -3332,7 +3371,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:6505
 msgctxt "scienceDB"
 msgid "May increase damage by beams"
-msgstr ""
+msgstr "Peut augmenter les dégâts causés par les faisceaux laser"
 
 #: scripts/scenario_59_border.lua:6520
 #, lua-format
@@ -3350,7 +3389,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:6548
 msgctxt "scienceDB"
 msgid "May increase missile capacity"
-msgstr ""
+msgstr "Peut augmenter la capacité des missiles"
 
 #: scripts/scenario_59_border.lua:6563
 #, lua-format
@@ -3369,7 +3408,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:6591
 msgctxt "scienceDB"
 msgid "May increase impulse speed"
-msgstr ""
+msgstr "Peut augmenter la vitesse des moteurs"
 
 #: scripts/scenario_59_border.lua:6606
 #, lua-format
@@ -3388,7 +3427,7 @@ msgstr "Il peut renforcer votre coque."
 #: scripts/scenario_59_border.lua:6634
 msgctxt "scienceDB"
 msgid "May strengthen hull"
-msgstr ""
+msgstr "Peut renforcer la coque"
 
 #: scripts/scenario_59_border.lua:6649
 #, lua-format
@@ -3410,7 +3449,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:6677
 msgctxt "scienceDB"
 msgid "May increase battery capacity"
-msgstr ""
+msgstr "Peut augmenter la capacité de la batterie"
 
 #: scripts/scenario_59_border.lua:6692
 #, lua-format
@@ -3428,7 +3467,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:6720
 msgctxt "scienceDB"
 msgid "May strengthen shields"
-msgstr ""
+msgstr "Peut renforcer les boucliers"
 
 #: scripts/scenario_59_border.lua:6735
 #, lua-format
@@ -4116,6 +4155,8 @@ msgid ""
 "%s\n"
 "May repair the following primary systems:"
 msgstr ""
+"%s\n"
+"Peut réparer les systèmes principaux suivants :"
 
 #: scripts/scenario_59_border.lua:7480 scripts/scenario_59_border.lua:7492
 #: scripts/scenario_59_border.lua:7503 scripts/scenario_59_border.lua:7511
@@ -4129,6 +4170,8 @@ msgid ""
 "\n"
 "    "
 msgstr ""
+"\n"
+"    "
 
 #: scripts/scenario_59_border.lua:7487
 #, lua-format
@@ -4137,6 +4180,9 @@ msgid ""
 "%s\n"
 "May repair the coolant pump on the following primary systems:"
 msgstr ""
+"%s\n"
+"Peut réparer la pompe du liquide de refroidissement sur les systèmes "
+"primaires suivants :"
 
 #: scripts/scenario_59_border.lua:7499 scripts/scenario_59_border.lua:8879
 #, lua-format
@@ -4145,18 +4191,20 @@ msgid ""
 "%s\n"
 "May repair the following secondary systems:"
 msgstr ""
+"%s\n"
+"Peut réparer les systèmes secondaires suivants :"
 
 #: scripts/scenario_59_border.lua:7506 scripts/scenario_59_border.lua:8886
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "%sprobe launch system   "
-msgstr ""
+msgstr "Système de lancement de sonde %s   "
 
 #: scripts/scenario_59_border.lua:7514 scripts/scenario_59_border.lua:8894
 #, lua-format
 msgctxt "stationServices-comms"
 msgid "%shacking system   "
-msgstr ""
+msgstr "Système de piratage %s   "
 
 #: scripts/scenario_59_border.lua:7522 scripts/scenario_59_border.lua:8902
 #, lua-format
@@ -5575,12 +5623,12 @@ msgstr "Réparation de la manœuvre de combat"
 #: scripts/scenario_59_border.lua:9735
 msgctxt "scienceDB"
 msgid "Repair hacking"
-msgstr ""
+msgstr "Réparation du piratage"
 
 #: scripts/scenario_59_border.lua:9736
 msgctxt "scienceDB"
 msgid "Repair probe launch"
-msgstr ""
+msgstr "Réparation du lancement de sondes"
 
 #: scripts/scenario_59_border.lua:9737
 msgctxt "scienceDB"
@@ -5631,12 +5679,12 @@ msgstr ""
 #: scripts/scenario_59_border.lua:9757
 msgctxt "scienceDB"
 msgid "Repair front shield"
-msgstr ""
+msgstr "Réparation du bouclier avant"
 
 #: scripts/scenario_59_border.lua:9758
 msgctxt "scienceDB"
 msgid "Repair rear shield"
-msgstr ""
+msgstr "Réparation du bouclier arrière"
 
 #: scripts/scenario_59_border.lua:9763
 #, lua-format
@@ -6035,6 +6083,8 @@ msgctxt "shipAssist-comms"
 msgid ""
 "We cannot break the treaty by defending WP %d in the neutral border zone"
 msgstr ""
+"Nous ne pouvons pas rompre le traité en défendant le marqueur %d dans la "
+"zone frontalière neutre."
 
 #: scripts/scenario_59_border.lua:10084
 #, lua-format
@@ -6042,17 +6092,19 @@ msgctxt "shipAssist-comms"
 msgid ""
 "We cannot break the treaty by defending WP %d across the neutral border zones"
 msgstr ""
+"Nous ne pouvons pas rompre le traité en défendant le marqueur %d à travers "
+"les zones frontalières neutres."
 
 #: scripts/scenario_59_border.lua:10108
 msgctxt "shipAssist-comms"
 msgid "Go offensive, attack all enemy targets"
-msgstr ""
+msgstr "Passez à l'offensive, attaquez toutes les cibles ennemies."
 
 #: scripts/scenario_59_border.lua:10114
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s is on an offensive rampage"
-msgstr ""
+msgstr "%s est en pleine offensive."
 
 #: scripts/scenario_59_border.lua:10170
 #, lua-format
