@@ -98,7 +98,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     });
 
     // Text of incoming chat messages.
-    chat_comms_text = new GuiScrollText(chat_comms_box, "COMMS_CHAT_TEXT", "");
+    chat_comms_text = new GuiScrollFormattedText(chat_comms_box, "COMMS_CHAT_TEXT", "");
     chat_comms_text->enableAutoScrollDown()->setPosition(20, 30, sp::Alignment::TopLeft)->setSize(760, 500);
 
     // Button to send a message.
@@ -129,7 +129,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     script_comms_box = new GuiPanel(this, "COMMS_SCRIPT_BOX");
     script_comms_box->hide()->setSize(800, 600)->setPosition(0, -100, sp::Alignment::BottomCenter);
 
-    script_comms_text = new GuiScrollText(script_comms_box, "COMMS_SCRIPT_TEXT", "");
+    script_comms_text = new GuiScrollFormattedText(script_comms_box, "COMMS_SCRIPT_TEXT", "");
     script_comms_text->setPosition(20, 30, sp::Alignment::TopLeft)->setSize(760, 500);
 
     // List possible responses to a scripted communication.

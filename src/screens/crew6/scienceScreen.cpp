@@ -179,7 +179,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     }
 
     // Prep and hide the description text area.
-    info_description = new GuiScrollText(info_sidebar, "SCIENCE_DESC", "");
+    info_description = new GuiScrollFormattedText(info_sidebar, "SCIENCE_DESC", "");
     info_description->setTextSize(28)->setMargins(20, 20, 0, 0)->setSize(GuiElement::GuiSizeMax, 400)->hide();
 
     // Prep and hide the database view.

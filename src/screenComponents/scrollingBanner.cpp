@@ -21,7 +21,7 @@ void GuiScrollingBanner::onDraw(sp::RenderTarget& renderer)
 
     {
         float font_size = rect.size.y;
-        auto prepared = bold_font->prepare(gameGlobalInfo->banner_string, 32, font_size, rect.size, sp::Alignment::CenterLeft);
+        auto prepared = bold_font->prepare(gameGlobalInfo->banner_string, 32, font_size, {255, 255, 255, 255}, rect.size, sp::Alignment::CenterLeft);
         if (draw_offset > std::max(prepared.getUsedAreaSize().x, rect.size.x) + black_area)
             draw_offset -= std::max(prepared.getUsedAreaSize().x, rect.size.x) + black_area;
         for(auto& g : prepared.data)
@@ -29,6 +29,6 @@ void GuiScrollingBanner::onDraw(sp::RenderTarget& renderer)
             g.position.x -= draw_offset;
         }
 
-        renderer.drawText(rect, prepared, font_size, {255, 255, 255, 255}, sp::Font::FlagClip);
+        renderer.drawText(rect, prepared, sp::Font::FlagClip);
     }
 }

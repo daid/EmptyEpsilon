@@ -141,7 +141,7 @@ void DatabaseViewComponent::display()
     }
     if (has_text)
     {
-        (new GuiScrollText(details_container, "DATABASE_LONG_DESCRIPTION", database->description))->setTextSize(24)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiScrollFormattedText(details_container, "DATABASE_LONG_DESCRIPTION", database->description))->setTextSize(24)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
 
     if (has_key_values)

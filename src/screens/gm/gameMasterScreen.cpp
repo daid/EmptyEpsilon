@@ -229,7 +229,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     message_frame = new GuiPanel(this, "");
     message_frame->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(900, 230)->hide();
 
-    message_text = new GuiScrollText(message_frame, "", "");
+    message_text = new GuiScrollFormattedText(message_frame, "", "");
     message_text->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(900 - 40, 200 - 40);
     message_close_button = new GuiButton(message_frame, "", tr("button", "Close"), []() {
         if (!gameGlobalInfo->gm_messages.empty())

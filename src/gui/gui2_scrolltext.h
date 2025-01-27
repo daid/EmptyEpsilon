@@ -26,4 +26,12 @@ public:
     virtual void onDraw(sp::RenderTarget& renderer) override;
 };
 
+class GuiScrollFormattedText : public GuiScrollText
+{
+public:
+    GuiScrollFormattedText(GuiContainer* owner, string id, string text);
+
+    virtual void onDraw(sp::RenderTarget& renderer) override;
+};
+
 #endif//GUI_SCROLLTEXT_H

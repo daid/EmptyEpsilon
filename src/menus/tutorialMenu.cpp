@@ -47,7 +47,7 @@ TutorialMenu::TutorialMenu()
     // Show the scenario description text.
     GuiPanel* panel = new GuiPanel(container, "TUTORIAL_DESCRIPTION_BOX");
     panel->setSize(GuiElement::GuiSizeMax, 350);
-    tutorial_description = new GuiScrollText(panel, "TUTORIAL_DESCRIPTION", "");
+    tutorial_description = new GuiScrollFormattedText(panel, "TUTORIAL_DESCRIPTION", "");
     tutorial_description->setTextSize(24)->setMargins(15)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Bottom GUI.

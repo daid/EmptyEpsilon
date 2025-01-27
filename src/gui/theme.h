@@ -50,6 +50,8 @@ public:
     static GuiTheme* getCurrentTheme();
     static void setCurrentTheme(const string &name); 
     static bool loadTheme(const string& name, const string& resource_name);
+
+    static glm::u8vec4 toColor(const string& s);
 private:
     GuiTheme(const string& name);
     virtual ~GuiTheme();

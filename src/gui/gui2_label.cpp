@@ -73,7 +73,7 @@ void GuiAutoSizeLabel::onUpdate()
     glm::vec2 size;
     while(true) {
         size = min_size;
-        auto pfs = font->prepare(text, 32, text_size, size, text_alignment, sp::Font::FlagLineWrap);
+        auto pfs = font->prepare(text, 32, text_size, {255, 255, 255, 255}, size, text_alignment, sp::Font::FlagLineWrap);
         size = pfs.getUsedAreaSize();
         size.x = std::max(size.x, min_size.x);
         size.y = std::max(size.y, min_size.y);
