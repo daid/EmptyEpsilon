@@ -102,7 +102,7 @@ static nlohmann::json luaGetJson(lua_State* L, int index)
         index = lua_absindex(L, index);
         if (lua_rawlen(L, index) > 0) {
             res = nlohmann::json::array();
-            for(int n=1; n<=lua_rawlen(L, index); n++) {
+            for(size_t n=1; n<=lua_rawlen(L, index); n++) {
                 lua_geti(L, index, n);
                 res.push_back(luaGetJson(L, -1));
                 lua_pop(L, 1);
