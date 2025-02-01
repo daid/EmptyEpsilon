@@ -131,17 +131,17 @@ void GuiScanningDialog::setupParameters()
     switch(irandom(0, 10))
     {
     default:
-    case 0: label += "Electric signature"; break;
-    case 1: label += "Biomass frequency"; break;
-    case 2: label += "Gravity well signature"; break;
-    case 3: label += "Radiation halftime"; break;
-    case 4: label += "Radio profile"; break;
-    case 5: label += "Ionic phase shift"; break;
-    case 6: label += "Infra-red color shift"; break;
-    case 7: label += "Doppler stability"; break;
-    case 8: label += "Raspberry jam prevention"; break;
-    case 9: label += "Infinity impropability"; break;
-    case 10: label += "Zerospace audio frequency"; break;
+    case 0: label += tr("scanning", "Electric signature"); break;
+    case 1: label += tr("scanning", "Biomass frequency"); break;
+    case 2: label += tr("scanning", "Gravity well signature"); break;
+    case 3: label += tr("scanning", "Radiation halftime"); break;
+    case 4: label += tr("scanning", "Radio profile"); break;
+    case 5: label += tr("scanning", "Ionic phase shift"); break;
+    case 6: label += tr("scanning", "Infra-red color shift"); break;
+    case 7: label += tr("scanning", "Doppler stability"); break;
+    case 8: label += tr("scanning", "Raspberry jam prevention"); break;
+    case 9: label += tr("scanning", "Infinity impropability"); break;
+    case 10: label += tr("scanning", "Zerospace audio frequency"); break;
     }
     signal_label->setText(label);
 }

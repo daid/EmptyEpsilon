@@ -10,7 +10,7 @@
 GuiScanTargetButton::GuiScanTargetButton(GuiContainer* owner, string id, TargetsContainer* targets)
 : GuiElement(owner, id), targets(targets)
 {
-    button = new GuiButton(this, id + "_BUTTON", "Scan", [this]() {
+    button = new GuiButton(this, id + "_BUTTON", tr("scienceButton", "Scan"), [this]() {
         if (my_spaceship && this->targets && this->targets->get())
             my_player_info->commandScan(this->targets->get());
     });
