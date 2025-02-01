@@ -196,7 +196,13 @@ int main(int argc, char** argv)
     new SteamRichPresence();
 #endif //STEAMSDK
 
-    if (PreferencesManager::get("server_scenario") == "")
+    string tutorial = PreferencesManager::get("tutorial");   // use "00_all.lua" for all tutorials
+    if (tutorial != "")
+    {
+        LOG(DEBUG) << "Starting tutorial: " << tutorial;
+        new TutorialGame(false, tutorial);
+    }
+    else if (PreferencesManager::get("server_scenario") == "")
         returnToMainMenu(defaultRenderLayer);
     else
     {
@@ -277,10 +283,6 @@ void returnToMainMenu(RenderLayer* render_layer)
         if (crew_position < 0) crew_position = 0;
         if (crew_position > static_cast<int>(CrewPosition::MAX)) crew_position = static_cast<int>(CrewPosition::MAX);
         new AutoConnectScreen(CrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
-    }
-    else if (PreferencesManager::get("tutorial").toInt())
-    {
-        new TutorialGame(true);
     }else{
         new MainMenu();
     }
