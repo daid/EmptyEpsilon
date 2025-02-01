@@ -93,7 +93,7 @@ msgid ""
 "Long range narrow beam and some point defense beams, broadside missiles. "
 "Agile for a frigate"
 msgstr ""
-"Le Hatchcok possède un faisceau laser étroit à longue portée, plusieurs "
+"Le Hathcock possède un faisceau laser étroit à longue portée, plusieurs "
 "petits faisceaux de défense et des lance-missiles sur les flancs.\n"
 "\n"
 "Agile pour une frégate."
@@ -190,7 +190,6 @@ msgstr ""
 "celles de l'Atlantis."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:22
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Benedict is an improved version of the Jump Carrier"
 msgstr ""
@@ -212,7 +211,9 @@ msgstr ""
 "Le Kiriya est un transporteur équipé d'un moteur à vitesse lumière.\n"
 "\n"
 "C'est une version améliorée du Téléporteur (Jump Carrier) avec des boucliers "
-"et une coque plus solides et un armement minimal."
+"et une coque plus solides et un armement minimal.\n"
+"Il peut être accosté par de plus petits vaisseaux (chasseurs stellaires, "
+"frégates, corvettes) et les transporter à travers l'espace."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:24
 msgctxt "scienceDB"
