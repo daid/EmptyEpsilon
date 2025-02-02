@@ -10,14 +10,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Ship Yard"
-msgstr ""
+msgstr "Chantiers navals"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7
 msgctxt "scienceDB"
@@ -28,8 +29,20 @@ msgid ""
 "of the science database shows ship types that might get upgraded by ship "
 "yards in the area and the details around potentially available upgrades."
 msgstr ""
+"Un chantier naval est un endroit où les vaisseaux spatiaux sont construits, "
+"entretenus, réparés et améliorés.\n"
+"\n"
+"Généralement intégrés aux stations pour faciliter leur usage, ils proposent "
+"divers services tels que : la recharge d'énergie, la réparation de coque, le "
+"réapprovisionnement en sondes et en munitions, etc.\n"
+"\n"
+"Cette section de la base de données scientifique recense les types de "
+"vaisseaux qui pourraient être améliorés dans les chantiers navals de la "
+"région ainsi que les détails de ces mises à niveau potentiellement "
+"disponibles."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:12
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with "
@@ -38,10 +51,11 @@ msgid ""
 msgstr ""
 "Le Frelon MP52 est une version considérablement améliorée du Frelon MU52.\n"
 "\n"
-"Une coque 2 fois plus résistante, un blindage presque 3 fois supérieur, une "
-"meilleure accélération, des boosters d'impulsion et un 2ème canon laser."
+"Une coque 2x plus résistante, un blindage presque 3x supérieur, une "
+"meilleure accélération, des boosters d'impulsion et un 2ème faisceau laser."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:13
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "The ZX model is an improvement on the WX-Lindworm with stronger hull and "
@@ -51,26 +65,46 @@ msgid ""
 "can pack quite a punch. Its goal is to fly in, destroy its target, and fly "
 "out or be destroyed."
 msgstr ""
+"Le Dragon-ZX est une version considérablement améliorée du Dragon-WX (WX-"
+"Lindworm).\n"
+"Plus agile, une coque et des boucliers plus solides, un moteur et une charge "
+"missiles plus rapides, plus de missiles et une petite tourelle laser de "
+"faible puissance.\n"
+"\n"
+"Le « Grand dragon », comme on l'appelle souvent, est un chasseur stellaire "
+"de classe bombardier.\n"
+"Bien qu'il soit l'un des chasseurs les moins bien protégés encore en "
+"service, ses 3 tubes lance-missiles légers à l'avant peuvent faire mal. Son "
+"objectif est simple : rechercher sa cible, la détruire et retourner d'où il "
+"vient avant d'être détruit."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:14
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "Player variant of the Phobos M3. Not as strong as the Atlantis, but has "
 "front firing tubes, making it an easier to use ship in some scenarios."
 msgstr ""
+"La version Joueur du Phobos M3.\n"
+"\n"
+"Pas aussi puissant que l'Atlantis, mais possède des tubes lance-missiles à "
+"l'avant, ce qui en fait un vaisseau plus facile à utiliser pour certaines "
+"missions."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:15
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "Long range narrow beam and some point defense beams, broadside missiles. "
 "Agile for a frigate"
 msgstr ""
-"Le Hatchcok possède un faisceau laser étroit à longue portée, plusieurs "
+"Le Hathcock possède un faisceau laser étroit à longue portée, plusieurs "
 "petits faisceaux de défense et des lance-missiles sur les flancs.\n"
 "\n"
 "Agile pour une frégate."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:16
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "This combat-specialized Piranha F12 adds mine-laying tubes, combat "
@@ -80,6 +114,7 @@ msgstr ""
 "de mines ainsi que des systèmes de manœuvre de combat et de téléportation."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:17
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "Popular among traders and smugglers, the Flavia is a small cargo and "
@@ -92,14 +127,31 @@ msgid ""
 "The Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp "
 "drive."
 msgstr ""
+"Populaire parmi les commerçants et les passeurs, le Flavia est un petit "
+"vaisseau de transport de marchandises et de passagers. Il est moins cher "
+"qu'un cargo pour les petites charges et les courtes distances et est souvent "
+"utilisé pour transporter discrètement des marchandises de grande valeur.\n"
+"\n"
+"Le Faucon Flavia est un vaisseau de transport Flavia modifié pour un vol "
+"plus rapide et équipé de faisceaux laser montés à l'arrière pour tenir à "
+"distance ses poursuivants.\n"
+"\n"
+"Le Faucon P.Flavia est doté d'un tube lance-missiles à capacité nucléaire "
+"orienté vers l'arrière et d'un moteur à vitesse lumière."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:18
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "A Flavia P. Falcon with better hull and shields, a jump drive, two turreted "
 "beams covering both sides and a forward and rear tube. The nukes and mines "
 "are gone"
 msgstr ""
+"Le Repulse est un Faucon P. Flavia avec une coque et des boucliers "
+"améliorés, la téléportation, 2 tourelles de faisceaux laser couvrant tous "
+"les côtés et 2 tubes lance-missiles : avant et arrière.\n"
+"\n"
+"Les missiles nucléaires (nuke) et les mines ont disparu."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:19
 msgctxt "scienceDB"
@@ -117,6 +169,7 @@ msgstr ""
 "Confondre l'Atlantis modifié avec un Atlantis X23 serait une erreur fatale."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:20
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "A number of missile tubes range around this ship. Beams were deemed lower "
@@ -132,66 +185,116 @@ msgstr ""
 "celles de l'Atlantis."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:21
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "A number of beams bristle from various points on this gunner. Missiles were "
 "deemed lower priority, though they are still present. Stronger defenses than "
 "a frigate, but not as strong as the Atlantis"
 msgstr ""
-"Le modèle Dissident est hérissé de faisceaux laser pointant dans plusieurs "
+"Le Dissident est hérissé de faisceaux laser pointant dans plusieurs "
 "directions.\n"
 "\n"
 "Il embarque très peu de missiles et ne possède que 3 tubes de lancement. Ses "
-"défenses sont plus solides que celles d'une frégate, mais pas autant que "
+"défenses sont plus solides que celles d'une frégate mais pas autant que "
 "celles de l'Atlantis."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:22
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Benedict is an improved version of the Jump Carrier"
-msgstr "Le Benedict est une version améliorée du Téléporteur."
+msgstr ""
+"Le Benedict est une version améliorée du Téléporteur (Jump Carrier).\n"
+"Il est conçu pour transporter d'autres vaisseaux à travers l'espace. Il peut "
+"par conséquent être accosté par de plus petits vaisseaux (chasseurs "
+"stellaires, frégates, corvettes).\n"
+"\n"
+"Sa soute est entièrement occupée par un moteur de téléportation longue "
+"portée (90 unités). Il ne transporte donc aucun armement à l'exception de 2 "
+"faisceaux et 2 tourelles laser avant et arrière pour se protéger."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:23
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "Kiriya is Warp Carrier based on the jump carrier with stronger shields and "
 "hull and with minimal armament"
 msgstr ""
+"Le Kiriya est un transporteur équipé d'un moteur à vitesse lumière.\n"
+"\n"
+"C'est une version améliorée du Téléporteur (Jump Carrier) avec des boucliers "
+"et une coque plus solides et un armement minimal.\n"
+"Il peut être accosté par de plus petits vaisseaux (chasseurs stellaires, "
+"frégates, corvettes) et les transporter à travers l'espace."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:24
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "A fairly standard cruiser. Stronger than average beams, weaker than average "
 "shields, farther than average jump drive range"
 msgstr ""
+"Ce croiseur assez classique possède 2 tubes lance-missiles avant et 1 tube "
+"de largage de mines à l'arrière, des faisceaux laser plus puissants que la "
+"moyenne, des boucliers plus faibles que la moyenne et une portée de "
+"téléportation plus grande que la moyenne.\n"
+"\n"
+"Il est dorénavant remplacé de manière standard par l'Atlantis."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:25
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "It's all about the missiles for this model. Broadside tubes shoot homing "
 "missiles (30!), front, homing, EMP and nuke. Comparatively weak shields, "
 "especially in the rear. Sluggish impulse drive."
 msgstr ""
+"Pour le Croiseur lance-missiles joueur, tout se passe au niveau des "
+"missiles.\n"
+"Ses nombreux tubes latéraux tirent des missiles à tête chercheuse (homings). "
+"Ses 2 tubes avant tirent homings, nukes et EMPs et il possède 1 tube de "
+"largage de mines à l'arrière.\n"
+"Ses boucliers sont relativement faibles, surtout à l’arrière et ses moteurs "
+"sont lents."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:26
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "The Ender battle station is a huge ship with many defensive features. It can "
 "be docked by smaller ships."
 msgstr ""
+"Le Ender est un énorme vaisseau doté de nombreuses fonctions défensives. Il "
+"peut être accosté par de plus petits vaisseaux (chasseurs stellaires, "
+"frégates, corvettes).\n"
+"\n"
+"Version joueur de la Station de combat, il est plus maniable et rapide mais "
+"ses boucliers sont 2x moins puissants. Il dispose en plus de 2 tubes lance-"
+"missiles.\n"
+"Il est étonnamment agile pour un monstre de cette envergure. Le piloter "
+"procure des sensations très différentes que sur les autres vaisseaux."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:27
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Small mine laying vessel with minimal armament, shields and hull."
-msgstr ""
+msgstr "Petit poseur de mines avec coque, armement et boucliers légers."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:28
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "The Striker is the predecessor to the advanced striker, slow but agile, but "
 "does not do an extreme amount of damage, and lacks in shields."
 msgstr ""
+"L'Eclair est le prédécesseur du Foudroyant (Advanced Striker).\n"
+"\n"
+"Lent mais agile, il n'inflige pas une quantité extrême de dégâts et manque "
+"de boucliers.\n"
+"Il est plus solide et maniable que le foudroyant."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:29
+#, fuzzy
 msgctxt "scienceDB"
 msgid ""
 "One of the first and smallest starfighters ever manufactured. It's a "
@@ -199,6 +302,15 @@ msgid ""
 "awkwardly. A bit slower than modern starfighters. Stronger hull and shields "
 "than today's Hornet."
 msgstr ""
+"Le Chasseur joueur est l'un des tout premiers et des plus petits chasseurs "
+"stellaires jamais fabriqués.\n"
+"\n"
+"C'est une pièce de choix pour les collectionneurs avec ses faisceaux laser "
+"mal montés mais néanmoins solides.\n"
+"Il est un peu plus lent que les chasseurs modernes mais sa coque et ses "
+"boucliers restent plus solides que ceux des modèles Frelon basiques "
+"d'aujourd'hui.\n"
+"Le Frelon MP52 (MP52 Hornet) le remplace désormais de manière standard."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:38
 msgctxt "scienceDB"
@@ -210,6 +322,16 @@ msgstr "Faisceaux laser"
 msgctxt "scienceDB"
 msgid "These are the beam upgrade level progressions for the %s"
 msgstr ""
+"Voici les mises à niveau possibles du système de faisceaux laser pour le "
+"vaisseau %s.\n"
+"\n"
+"Elles peuvent inclure :\n"
+"- La mise en place de faisceaux laser supplémentaires.\n"
+"- Une portée plus longue.\n"
+"- Des temps de recharge ou de cycle plus rapides.\n"
+"- Des dégâts accrus.\n"
+"- Des arcs de tir plus larges.\n"
+"- Une vitesse de rotation de la tourelle à faisceaux laser plus rapide."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:45
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:76
@@ -221,13 +343,13 @@ msgstr ""
 #, lua-format
 msgctxt "scienceDB"
 msgid "Level %2i"
-msgstr ""
+msgstr "Niveau %2i"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:50
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%s beam weapon characteristics."
-msgstr ""
+msgstr "Caractéristiques du système de faisceaux laser de %s.\n"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:52
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:169
@@ -235,10 +357,12 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:217
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:245
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:274
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%s An upgrade to level %i would %s."
 msgstr ""
+"%s\n"
+"Une ** amélioration de niveau %i va %s."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:56
 #, lua-format
@@ -289,18 +413,29 @@ msgid "%s degrees, %.1f"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:69
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Missile systems"
-msgstr ""
+msgstr "Missiles"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:72
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "These are the missile systems level progressions for the %s"
 msgstr ""
+"Voici les mises à niveau possibles des systèmes de missiles faisant "
+"référence aux différents aspects des systèmes d'armes à missiles pour le "
+"vaisseau %s.\n"
+"\n"
+"Elles peuvent inclure :\n"
+"- Des tubes supplémentaires.\n"
+"- Des temps de chargement plus rapides.\n"
+"- Une taille de tube accrue.\n"
+"- Des types de missiles supplémentaires.\n"
+"- Une capacité de stockage accrue."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:81
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid ""
 "%s missile system characteristics.\n"
@@ -308,14 +443,20 @@ msgid ""
 "    M = Medium size\n"
 "    L = Large size"
 msgstr ""
+"Caractéristiques du système de missiles de %s.\n"
+"    S = Léger (2x plus rapide et faible)\n"
+"    M = Moyen (taille standard)\n"
+"    L = Large (2x plus puissant et lent)\n"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:83
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid ""
 "%s\n"
 "An upgrade to level %i would %s."
 msgstr ""
+"%s\n"
+"Une -- amélioration de niveau %i va %s."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:87
 #, lua-format
@@ -330,11 +471,13 @@ msgid "%.1f seconds load time"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:93
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Homing"
-msgstr "Missiles à tête chercheuse (homing)"
+msgstr "Homing"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:98
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Nuke"
 msgstr "Nuke"
@@ -346,6 +489,7 @@ msgid "%s, Nuke"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:106
+#, fuzzy
 msgctxt "scienceDB"
 msgid "EMP"
 msgstr "EMP"
@@ -357,6 +501,7 @@ msgid "%s, EMP"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:114
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Mine"
 msgstr "Mines"
@@ -368,6 +513,7 @@ msgid "%s, Mine"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:122
+#, fuzzy
 msgctxt "scienceDB"
 msgid "HVLI"
 msgstr "HVLI"
@@ -416,80 +562,109 @@ msgid "HVLI capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:155
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Shield system"
-msgstr ""
+msgstr "Boucliers"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:158
 #, lua-format
 msgctxt "scienceDB"
 msgid "These are the shield system level progressions for the %s"
 msgstr ""
+"Voici les mises à niveau possibles du système de boucliers faisant référence "
+"aux boucliers énergétiques protecteurs entourant le vaisseau %s.\n"
+"\n"
+"Elles peuvent inclure :\n"
+"- Une puissance accrue (résistance globale) pour les arcs de bouclier avant, "
+"arrière ou les deux.\n"
+"- L'ajout d'un arc de bouclier."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:167
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%s shield system characteristics."
-msgstr ""
+msgstr "Caractéristiques du système de boucliers de %s."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:172
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Shield strength"
-msgstr ""
+msgstr "Résistance boucliers"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:176
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Front shield strength"
 msgstr "Résistance boucliers avant"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:178
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Rear shield strength"
 msgstr "Résistance boucliers arrière"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:183
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Hull"
 msgstr "Coque"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:186
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "These are the hull level progressions for the %s"
 msgstr ""
+"Voici les mises à niveau possibles de la coque pour le vaisseau %s.\n"
+"\n"
+"Elles font référence au renforcement de la coque du vaisseau permettant de "
+"résister à plus de dommages sous la forme d'un blindage ou d'un renforcement "
+"structurel."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:195
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%s hull characteristics."
-msgstr ""
+msgstr "Caractéristiques de la coque de %s.\n"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:200
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Hull strength"
-msgstr ""
+msgstr "Résistance coque"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:203
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Impulse systems"
-msgstr ""
+msgstr "Moteurs à impulsion"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:206
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "These are the impulse systems level progressions for the %s"
 msgstr ""
+"Voici les mises à niveau possibles des systèmes d'impulsion pour le vaisseau "
+"%s.\n"
+"\n"
+"Elles peuvent inclure :\n"
+"- L'augmentation de la vitesse de pointe (avant, arrière ou les deux).\n"
+"- L'augmentation de la vitesse d'accélération (avant, arrière ou les deux).\n"
+"- L'augmentation de la vitesse de la manœuvre.\n"
+"- L'augmentation de la vitesse de la manœuvre de combat (vers l'avant, "
+"latérale ou les deux)."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:215
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%s impulse system characteristics."
-msgstr ""
+msgstr "Caractéristiques des systèmes d'impulsion de %s.\n"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:220
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Forward speed"
-msgstr ""
+msgstr "Vit. de dépl. avant"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:220
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:221
@@ -497,35 +672,40 @@ msgstr ""
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f units/minute"
-msgstr ""
+msgstr "%.1fu/min"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:221
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Reverse speed"
-msgstr ""
+msgstr "Vit. de dépl. arrière"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:222
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Forward acceleration"
-msgstr "Accélération moteurs avant"
+msgstr "Accélération avant"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:223
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Reverse acceleration"
-msgstr "Accélération moteurs arrière"
+msgstr "Accélération arrière"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:224
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Turn speed"
 msgstr "Vit. de rotation"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:224
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%.1f degrees per second"
-msgstr ""
+msgstr "%.1f°/sec"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:226
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Combat maneuver boost"
 msgstr "Boost manœuvre de combat"
@@ -537,6 +717,7 @@ msgid "%i (forward)"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:227
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Combat maneuver strafe"
 msgstr "Manœuvre de combat latérale"
@@ -548,9 +729,10 @@ msgid "%i (sideways)"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:231
+#, fuzzy
 msgctxt "scienceDB"
 msgid "FTL system"
-msgstr ""
+msgstr "FTL : téléportation, vitesse lumière"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:234
 #, lua-format
@@ -559,63 +741,83 @@ msgid ""
 "These are the Faster Than Light (FTL) drive system level progressions for "
 "the %s"
 msgstr ""
+"Voici les mises à niveau possibles des système FTL (Faster Than Light - Plus "
+"rapide que la lumière), faisant référence aux systèmes de téléportation et "
+"de vitesse lumière pour le vaisseau %s.\n"
+"\n"
+"Elles peuvent inclure :\n"
+"- L'ajout d'un moteur FTL.\n"
+"- La modification de la plage de saut de la téléportation.\n"
+"- Une augmentation de la vitesse maximale de la vitesse lumière."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:243
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s Faster Than Light (FTL) drive system characteristics."
 msgstr ""
+"Caractéristiques des systèmes FTL : téléportation, vitesse lumière de %s."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:249
 msgctxt "scienceDB"
 msgid "Jump drive long range"
-msgstr ""
+msgstr "Portée de saut max"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:249
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:250
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f units"
-msgstr ""
+msgstr "%.1fu"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:250
 msgctxt "scienceDB"
 msgid "Short range"
-msgstr ""
+msgstr "Portée de saut min"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:253
 msgctxt "scienceDB"
 msgid "Warp drive speed"
-msgstr "Vitesse lumière max"
+msgstr "Vitesse lumière"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:256
+#, fuzzy
 msgctxt "scienceDB"
 msgid "FTL state"
-msgstr ""
+msgstr "Moteurs FTL installés"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:256
+#, fuzzy
 msgctxt "scienceDB"
 msgid "No jump or warp drive"
-msgstr ""
+msgstr "Aucun"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:260
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Sensor system"
-msgstr ""
+msgstr "Capteurs"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:263
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "These are the sensor system level progressions for the %s"
 msgstr ""
+"Voici les mises à niveau possibles du système de capteurs pour le vaisseau "
+"%s.\n"
+"\n"
+"Elles peuvent inclure :\n"
+"- Une portée de detection accrue des capteurs à courte et à longue portée.\n"
+"- Une installation de scanners de proximité automatisés de 1er niveau.\n"
+"- Une portée améliorée pour ces scanners de proximité automatisés."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:272
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%s sensor system characteristics."
-msgstr ""
+msgstr "Caractéristiques du système de capteurs de %s.\n"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:277
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Short range sensors"
 msgstr "Capteurs courte portée"
@@ -627,6 +829,7 @@ msgid "%.1f units (Helm, Weapons)"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:278
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Long range sensors"
 msgstr "Capteurs longue portée"
@@ -679,6 +882,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8611
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8986
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9311
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by 25%"
 msgstr "augmenter la portée des faisceaux laser de 25%"
@@ -694,6 +898,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8615
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9026
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9319
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc by 1/3"
 msgstr "augmenter l'amplitude de l'arc des faisceaux laser de 1/3"
@@ -706,6 +911,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:317
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5004
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6296
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase damage by 1/3"
 msgstr "augmenter les dégâts des faisceaux laser de 1/3"
@@ -731,6 +937,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8308
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8325
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8621
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add beams"
 msgstr "ajouter des faisceaux laser"
@@ -744,6 +951,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1270
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4998
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8639
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc by 25%"
 msgstr "augmenter l'amplitude de l'arc des faisceaux laser de 25%"
@@ -758,6 +966,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4577
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5034
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6284
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by 20%"
 msgstr "augmenter la portée des faisceaux laser de 20%"
@@ -774,6 +983,7 @@ msgid "increased cycle time by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:349
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by 1/6"
 msgstr "réduire le temps de cycle des faisceaux laser de 1/6"
@@ -784,6 +994,7 @@ msgid "decreased missile stock capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:359
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase missile stock capacity"
 msgstr "augmenter la capacité de stockage des missiles"
@@ -794,6 +1005,7 @@ msgid "decreased homing missile capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:360
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase homing missile capacity"
 msgstr "augmenter la capacité de stockage des missiles homing"
@@ -806,6 +1018,7 @@ msgid "removed mine tube"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:361
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add a mine tube"
 msgstr "ajouter un tube de mine"
@@ -821,6 +1034,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:362
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:829
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:834
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease tube load times"
 msgstr "réduire le temps de chargement des tubes"
@@ -831,6 +1045,7 @@ msgid "removed mines, EMPs and nukes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:363
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add mines, emps and nukes"
 msgstr "ajouter des mines, EMP et armes nucléaires (nuke)"
@@ -841,6 +1056,7 @@ msgid "removed two medium sized side tubes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:364
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add two medium sized side tubes"
 msgstr "ajouter deux tubes latéraux de taille moyenne"
@@ -851,6 +1067,7 @@ msgid "reduced EMP capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:365
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase EMP capacity"
 msgstr "augmenter la capacité de stockage des missiles EMP"
@@ -861,6 +1078,7 @@ msgid "reduced nuke capacity capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:366
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase nuke capacity"
 msgstr "augmenter la capacité de stockage des missiles nuke"
@@ -871,6 +1089,7 @@ msgid "reduced tube sizes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:367
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase tube sizes"
 msgstr "augmenter la taille des tubes"
@@ -881,6 +1100,7 @@ msgid "reduced mine load speed, removed front tube"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:368
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease mine load speed, add front tube"
 msgstr "réduire la vitesse de charge des mines, ajouter 1 tube avant"
@@ -942,6 +1162,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9439
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9449
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9459
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 25%"
 msgstr "augmenter la puissance des boucliers de 25%"
@@ -960,6 +1181,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1481
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7268
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8078
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 50%"
 msgstr "augmenter la puissance des boucliers de 50%"
@@ -998,6 +1220,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8804
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9129
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9444
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add rear shield arc"
 msgstr "ajouter un arc de bouclier arrière"
@@ -1022,6 +1245,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5136
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6801
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8819
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by 25%"
 msgstr "augmenter la puissance des boucliers avant de 25%"
@@ -1040,6 +1264,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4731
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5142
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8814
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by 25%"
 msgstr "augmenter la puissance des boucliers arrière de 25%"
@@ -1079,6 +1304,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8095
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8431
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8809
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 1/3"
 msgstr "augmenter la puissance des boucliers de 1/3"
@@ -1089,6 +1315,7 @@ msgid "reduced shield charge capacity by ~13%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:476
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 15%"
 msgstr "augmenter la puissance des boucliers de 15%"
@@ -1099,6 +1326,7 @@ msgid "reduced shield charge capacity by 8%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:482
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by ~13%"
 msgstr "augmenter la puissance des boucliers d'environ 13%"
@@ -1139,6 +1367,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8468
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9160
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9469
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by 25%"
 msgstr "renforcer la solidité de la coque de 25%"
@@ -1160,6 +1389,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7323
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8839
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9164
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~17%"
 msgstr "renforcer la solidité de la coque d'environ 17%"
@@ -1170,6 +1400,7 @@ msgid "decreased hull max by ~22%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:494
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~29%"
 msgstr "renforcer la solidité de la coque d'environ 29%"
@@ -1189,6 +1420,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4350
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8842
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9159
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~11%"
 msgstr "renforcer la solidité de la coque d'environ 11%"
@@ -1234,6 +1466,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8469
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9161
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9163
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by 20%"
 msgstr "renforcer la solidité de la coque de 20%"
@@ -1244,6 +1477,7 @@ msgid "reduced max forward impulse speed by 12.5%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:514
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by ~14%"
 msgstr "augmenter la vitesse maximale des moteurs avant ~14%"
@@ -1262,6 +1496,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1533
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2029
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2515
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add combat maneuver forward boost"
 msgstr "ajouter une manœuvre de combat vers l'avant"
@@ -1275,6 +1510,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1009
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1541
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8487
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max reverse impulse speed by ~14%"
 msgstr "augmenter la vitesse maximale des moteurs arrière ~14%"
@@ -1307,6 +1543,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5232
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5714
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6503
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add combat maneuver strafe"
 msgstr "ajouter une manœuvre de combat latérale"
@@ -1326,6 +1563,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6527
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7436
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9215
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 20%"
 msgstr "augmenter la manœuvre de 20%"
@@ -1336,6 +1574,7 @@ msgid "decreased max forward impulse speed by ~11%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:554
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by 12.5%"
 msgstr "augmenter la vitesse maximale des moteurs avant de 12,5%"
@@ -1346,6 +1585,7 @@ msgid "decreased combat maneuver forward boost by 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:562
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver forward boost by 50%"
 msgstr "booster la manœuvre de combat vers l'avant de 50%"
@@ -1360,6 +1600,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2133
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2563
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2619
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase impulse forward acceleration by 25%"
 msgstr "augmenter l'accélération des moteurs avant de 25%"
@@ -1370,6 +1611,7 @@ msgid "decreased combat maneuver strafe by 37.5%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:578
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 60%"
 msgstr "augmenter la vitesse latérale des manœuvres de combat de 60%"
@@ -1401,6 +1643,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9194
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9495
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9530
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 25%"
 msgstr "augmenter la manœuvre de 25%"
@@ -1413,6 +1656,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:594
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2069
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2555
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver forward boost by 1/3"
 msgstr "booster la manœuvre de combat vers l'avant de 1/3"
@@ -1423,6 +1667,7 @@ msgid "decreased max forward impulse speed by 10%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:602
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by ~11%"
 msgstr "augmenter la vitesse maximale des moteurs avant ~11%"
@@ -1436,6 +1681,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:610
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2085
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2571
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 25%"
 msgstr "augmenter la vitesse latérale des manœuvres de combat de 25%"
@@ -1448,6 +1694,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:618
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1097
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1629
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max reverse impulse speed by 12.5%"
 msgstr "augmenter la vitesse max des moteurs arrière de 12,5%"
@@ -1462,6 +1709,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1613
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2109
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2595
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase impulse forward acceleration by 20%"
 msgstr "augmenter l'accélération des moteurs avant de 20%"
@@ -1476,9 +1724,10 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1645
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2117
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2603
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 20%"
-msgstr "augmenter la vitesse latérale des manœuvres de combat 20%"
+msgstr "augmenter la vitesse latérale des manœuvres de combat de 20%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:635
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1018
@@ -1494,6 +1743,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8189
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8501
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8874
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 1/3"
 msgstr "augmenter la manœuvre de 1/3"
@@ -1532,10 +1782,9 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7845
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8208
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8549
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 20u jump drive"
-msgstr "ajouter un moteur de téléportation de 20U de distance"
+msgstr "ajouter un moteur de téléportation de 20u de distance"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:657
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:672
@@ -1783,9 +2032,10 @@ msgstr "augmenter la vitesse lumière de 20%"
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1727
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3152
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8273
+#, fuzzy
 msgctxt "downgrade-comms"
 msgid "reduced long range sensors by 25%"
-msgstr ""
+msgstr "réduire les capteurs longue portée de 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:715
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1731
@@ -1793,6 +2043,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8277
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8955
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9282
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by 1/3"
 msgstr "augmenter les capteurs longue portée de 1/3"
@@ -1834,6 +2085,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8582
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8951
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9278
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 2 unit automated proximity scanner"
 msgstr "ajouter un scanner de proximité automatisé à 2 unités"
@@ -1853,6 +2105,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4517
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4937
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5347
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by 10%"
 msgstr "augmenter les capteurs longue portée de 10%"
@@ -1874,6 +2127,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4522
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4942
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5352
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase short range sensors by 12.5%"
 msgstr "augmenter les capteurs courte portée de 12,5%"
@@ -1908,6 +2162,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6630
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6985
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7522
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by ~14%"
 msgstr "augmenter les capteurs longue portée d'environ 14%"
@@ -1938,6 +2193,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8594
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8967
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9294
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by 20%"
 msgstr "augmenter les capteurs longue portée de 20%"
@@ -1970,6 +2226,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4957
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5367
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5829
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase short range sensors by ~11%"
 msgstr "augmenter les capteurs courte portée d'environ 11%"
@@ -1996,6 +2253,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6625
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6980
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7517
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by ~17%"
 msgstr "augmenter les capteurs longue portée d'environ 17%"
@@ -2011,6 +2269,7 @@ msgid "reduced automated proximity scanner by 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:760
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase automated proximity scanner by 50%"
 msgstr "augmenter le scanner de proximité automatisé de 50%"
@@ -2021,6 +2280,7 @@ msgid "reduced range by ~5%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:780
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by ~6%"
 msgstr "augmenter la portée des faisceaux laser d'environ 6%"
@@ -2031,6 +2291,7 @@ msgid "increased cycle time by by ~8%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:786
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by ~7%"
 msgstr "réduire le temps de cycle des faisceaux laser ~7%"
@@ -2053,6 +2314,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7589
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8991
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9011
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase damage by 25%"
 msgstr "augmenter les dégâts des faisceaux laser de 25%"
@@ -2063,6 +2325,7 @@ msgid "decreased range by 5%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:798
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by ~5%"
 msgstr "augmenter la portée des faisceaux laser d'environ 5%"
@@ -2073,6 +2336,7 @@ msgid "increased cycle time by ~8%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:804
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by 8%"
 msgstr "réduire le temps de cycle des faisceaux laser de 8%"
@@ -2085,6 +2349,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:810
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2780
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5936
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by 10%"
 msgstr "augmenter la portée des faisceaux laser de 10%"
@@ -2099,6 +2364,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2786
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6266
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7601
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase damage by 20%"
 msgstr "augmenter les dégâts des faisceaux laser de 20%"
@@ -2109,6 +2375,7 @@ msgid "removed medium tube"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:826
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add medium tube"
 msgstr "ajouter un tube moyen"
@@ -2119,6 +2386,7 @@ msgid "reduced HVLI missile capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:827
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase HVLI missile capacity"
 msgstr "augmenter la capacité de stockage des missiles HVLI"
@@ -2129,6 +2397,7 @@ msgid "removed large tube and reduced HVLI capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:828
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add large tube and increase HVLI capacity"
 msgstr "ajouter un tube large, augmenter la capacité de stockage HVLI"
@@ -2139,6 +2408,7 @@ msgid "removed broadside tubes and homing missiles"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:830
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add broadside tubes and homing missiles"
 msgstr "ajouter des tubes latéraux pour homing et des homing"
@@ -2161,6 +2431,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2832
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3740
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5045
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add mining tube"
 msgstr "ajouter un tube pour les mines"
@@ -2171,6 +2442,7 @@ msgid "removed nukes and EMPs from broadside tubes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:832
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add nukes and EMPs to broadside tubes"
 msgstr "ajouter la capacité de tir de nuke et EMP aux tubes latéraux"
@@ -2181,6 +2453,7 @@ msgid "decreased heavy missile capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:833
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase heavy missile capacity"
 msgstr "augmenter la capacité de stockage des missiles lourds"
@@ -2191,6 +2464,7 @@ msgid "decreased missile capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:835
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase missile capacity"
 msgstr "augmenter la capacité de stockage des missiles"
@@ -2239,6 +2513,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9139
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9149
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9454
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 20%"
 msgstr "augmenter la puissance des boucliers de 20%"
@@ -2253,6 +2528,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3400
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6813
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7750
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by 1/3"
 msgstr "augmenter la puissance des boucliers avant de 1/3"
@@ -2266,6 +2542,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1469
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3412
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6426
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by 1/3"
 msgstr "augmenter la puissance des boucliers arrière de 1/3"
@@ -2282,6 +2559,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:961
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1493
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by ~11%"
 msgstr "augmenter la puissance des boucliers d'environ 11%"
@@ -2302,6 +2580,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3937
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8840
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9472
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~14%"
 msgstr "renforcer la solidité de la coque d'environ 14%"
@@ -2314,6 +2593,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:974
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1506
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8841
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by 12.5%"
 msgstr "renforcer la solidité de la coque de 12,5%"
@@ -2336,6 +2616,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8471
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8843
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8844
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by 10%"
 msgstr "renforcer la solidité de la coque de 10%"
@@ -2349,6 +2630,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1033
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1525
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1565
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by ~7%"
 msgstr "augmenter la vitesse maximale des moteurs avant ~7%"
@@ -2379,6 +2661,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1573
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2101
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2587
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver forward boost by 25%"
 msgstr "booster la manœuvre de combat vers l'avant de 25%"
@@ -2400,6 +2683,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1057
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1589
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 1/3"
 msgstr "augmenter la vitesse latérale des manœuvres de combat de 1/3"
@@ -2411,6 +2695,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1073
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1605
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver forward boost by 60%"
 msgstr "booster la manœuvre de combat vers l'avant de 60%"
@@ -2422,6 +2707,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1089
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1621
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 25% and boost by ~14%"
 msgstr "booster la manœuvre de combat : latérale de 25% ; avant ~14%"
@@ -2438,6 +2724,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1105
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1637
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase impulse forward acceleration by ~17%"
 msgstr "augmenter l'accélération des moteurs avant d'environ 17%"
@@ -2454,6 +2741,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1121
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1653
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max impulse forward by ~6% and reverse by ~11%"
 msgstr "augmenter la vitesse max des moteurs : avant ~6% et arrière ~11%"
@@ -2499,6 +2787,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7870
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8233
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8926
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase warp speed by ~17%"
 msgstr "augmenter la vitesse lumière d'environ 17%"
@@ -2516,6 +2805,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1692
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5780
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5785
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase warp speed by ~7%"
 msgstr "augmenter la vitesse lumière d'environ 7%"
@@ -2532,6 +2822,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5790
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8938
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9261
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add jump drive"
 msgstr "ajouter un moteur de téléportation"
@@ -2549,6 +2840,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2689
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5795
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8934
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase warp speed by 12.5%"
 msgstr "augmenter la vitesse lumière de 12,5%"
@@ -2576,6 +2868,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1194
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1726
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add a one unit automated proximity scanner"
 msgstr "ajouter un scanner de proximité automatisé à 1 unité"
@@ -2611,6 +2904,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8963
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9290
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9572
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by 25%"
 msgstr "augmenter les capteurs longue portée de 25%"
@@ -2676,6 +2970,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7909
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8272
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8590
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double automated proximity scanner range"
 msgstr "doubler la portée du scanner de proximité automatisé"
@@ -2715,6 +3010,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4547
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8959
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9584
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase short range sensors by 10%"
 msgstr "augmenter les capteurs courte portée de 10%"
@@ -2727,6 +3023,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1264
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1830
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2316
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by 50%"
 msgstr "augmenter la portée des faisceaux laser de 50%"
@@ -2753,6 +3050,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3723
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5906
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6278
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by ~14%"
 msgstr "réduire le temps de cycle des faisceaux laser ~14%"
@@ -2763,6 +3061,7 @@ msgid "removed sniping beam and reduced primary arcs by 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1295
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add sniping beam, increase primary arcs by 20%"
 msgstr "ajouter un faisceau laser d'élite, augmenter les arcs primaires de 20%"
@@ -2781,6 +3080,7 @@ msgid "removed rear turret"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1314
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add rear turret"
 msgstr "ajouter une tourelle arrière de faisceaux laser"
@@ -2791,6 +3091,7 @@ msgid "reduced primary damage by 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1324
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase primary damage by 1/3"
 msgstr "augmenter les dégâts des faisceaux laser principaux de 1/3"
@@ -2801,6 +3102,7 @@ msgid "increased secondary cycle time by 50%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1334
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease secondary cycle time by 1/3"
 msgstr "réduire le temps de cycle des seconds faisceaux laser de 1/3"
@@ -2813,6 +3115,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1344
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5900
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase damage by ~17%"
 msgstr "augmenter les dégâts des faisceaux laser d'environ 17%"
@@ -2833,6 +3136,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7932
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9021
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9323
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double turret speed"
 msgstr "doubler la vitesse de rotation des tourelles laser"
@@ -2847,6 +3151,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1368
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3302
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4207
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add homing"
 msgstr "ajouter des missiles à tête chercheuse (homing)"
@@ -2861,6 +3166,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1369
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1872
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2358
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double homing missile capacity"
 msgstr "doubler la capacité de stockage des missiles homing"
@@ -2871,6 +3177,7 @@ msgid "increased tube load speed by 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1370
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease tube load speed by 20%"
 msgstr "diminuer le temps de chargement des tubes de 20%"
@@ -2891,6 +3198,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6321
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7975
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7980
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase HVLI capacity by 25%"
 msgstr "augmenter la capacité de stockage des HVLI de 25%"
@@ -2903,6 +3211,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1373
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2834
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add EMPs"
 msgstr "ajouter des EMP"
@@ -2913,6 +3222,7 @@ msgid "removed nuke capability"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1374
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add nuke capability"
 msgstr "ajouter la capacité de tir de nuke"
@@ -2925,6 +3235,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1375
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2835
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3303
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase tube size"
 msgstr "augmenter la taille des tubes"
@@ -2935,6 +3246,7 @@ msgid "reduced homing, nuke and EMP missiles"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1376
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "more homing, nuke and EMP missiles"
 msgstr "plus de missiles à tête chercheuse (homing), mines et EMP"
@@ -2945,6 +3257,7 @@ msgid "reduced mine loading speed by 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1377
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "20% faster mine loading"
 msgstr "réduire le temps de chargement des mines de 20%"
@@ -2956,6 +3269,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1378
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3312
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "more homing, mine and HVLI missiles"
 msgstr "plus de missiles à tête chercheuse (homing), mines et HVLI"
@@ -2966,6 +3280,7 @@ msgid "reduced mines and HVLIs"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1379
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "more mine and HVLI missiles"
 msgstr "plus de mines et HVLI"
@@ -3229,6 +3544,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2282
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3729
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7927
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double arc width"
 msgstr "doubler la largeur de l'arc des faisceaux laser"
@@ -3240,6 +3556,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1802
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2288
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase turret speed by 25%"
 msgstr "augmenter la vitesse de rotation des tourelles laser de 25%"
@@ -3269,6 +3586,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7061
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7595
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7937
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc width by 50%"
 msgstr "augmenter la largeur de l'arc des faisceaux laser de 50%"
@@ -3289,6 +3607,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1838
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2324
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4625
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "overlap arcs"
 msgstr "Faire se chevaucher les arcs des faisceaux laser"
@@ -3301,6 +3620,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1846
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2332
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase turret speed by 20%"
 msgstr "augmenter la vitesse de rotation des tourelles laser de 20%"
@@ -3327,6 +3647,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1864
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2350
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add mines"
 msgstr "ajouter des mines"
@@ -3338,6 +3659,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1865
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2351
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "speed up tube load speed by 25%"
 msgstr "accélérer la vitesse de chargement des tubes de 25%"
@@ -3352,6 +3674,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4651
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6315
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8363
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase mine capacity by 50%"
 msgstr "augmenter la capacité de stockage des mines de 50%"
@@ -3363,6 +3686,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1867
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2353
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "speed up tube load speed by 1/3"
 msgstr "accélérer la vitesse de chargement des tubes de 1/3"
@@ -3377,6 +3701,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1868
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2354
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6312
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase mine capacity by 1/3"
 msgstr "augmenter la capacité de stockage des mines de 1/3"
@@ -3388,6 +3713,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1869
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2355
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "speed up mine load speed by ~17%"
 msgstr "accélérer la vitesse de chargement des mines d'environ 17%"
@@ -3400,6 +3726,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1870
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2356
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase mine capacity by 25%"
 msgstr "augmenter la capacité de stockage des mines de 25%"
@@ -3416,6 +3743,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2357
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2829
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5047
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add homing missiles"
 msgstr "ajouter des missiles à tête chercheuse (homing)"
@@ -3427,6 +3755,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1873
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2359
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "speed up mine loading speed by 20%"
 msgstr "accélérer la vitesse de chargement des mines de 20%"
@@ -3443,6 +3772,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2360
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2830
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3742
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase homing missile capacity by 50%"
 msgstr "augmenter la capacité de stockage des homing de 50%"
@@ -3454,6 +3784,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1875
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2361
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "medium sized homing misile tubes"
 msgstr "agrandir les tubes légers de homing en taille moyenne"
@@ -3466,6 +3797,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1876
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2362
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase mine capacity by 20%"
 msgstr "augmenter la capacité de stockage des mines de 20%"
@@ -3483,6 +3815,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1947
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2433
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by ~17%"
 msgstr "augmenter la puissance des boucliers d'environ 17%"
@@ -3495,6 +3828,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1977
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2463
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by 50%"
 msgstr "augmenter la puissance des boucliers arrière de 50%"
@@ -3521,6 +3855,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6414
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6825
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7309
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by 20%"
 msgstr "augmenter la puissance des boucliers arrière de 20%"
@@ -3533,6 +3868,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1989
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2475
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by ~11%"
 msgstr "augmenter la puissance des boucliers arrière d'environ 11%"
@@ -3578,6 +3914,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2967
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4349
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9470
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~9%"
 msgstr "renforcer la solidité de la coque d'environ 9%"
@@ -3589,6 +3926,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2021
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2507
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by ~20%"
 msgstr "augmenter la vitesse maximale des moteurs avant ~20%"
@@ -3601,6 +3939,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2037
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2523
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max forward acceleration by 1/3"
 msgstr "augmenter l'accélération maximale vers l'avant de 1/3"
@@ -3613,6 +3952,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2053
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2539
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 60%"
 msgstr "augmenter la manœuvre de 60%"
@@ -3624,6 +3964,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2061
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2547
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by ~17%"
 msgstr "augmenter la vitesse maximale des moteurs avant ~17%"
@@ -3657,6 +3998,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2125
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2611
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3088
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by 10%"
 msgstr "augmenter la vitesse maximale des moteurs avant de 10%"
@@ -3669,6 +4011,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2141
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2627
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max reverse impulse by 20% and reverse acceleration by 1/3"
 msgstr ""
@@ -3684,11 +4027,13 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2149
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2635
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7826
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 10%"
 msgstr "augmenter la manœuvre de 10%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2163
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 40k jump drive"
 msgstr "ajouter un moteur de téléportation de 40U de distance"
@@ -3708,6 +4053,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6176
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7875
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8238
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase jump range by ~17%"
 msgstr "augmenter la portée de saut d'environ 17%"
@@ -3720,6 +4066,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2183
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7478
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase jump range by ~14%"
 msgstr "augmenter la portée de saut d'environ 14%"
@@ -3732,6 +4079,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2188
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7483
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase jump range by 12.5%"
 msgstr "augmenter la portée de saut de 12,5%"
@@ -3750,6 +4098,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3112
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4903
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6576
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase warp speed by 1/3"
 msgstr "augmenter la vitesse lumière de 1/3"
@@ -3761,6 +4110,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2203
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7488
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase jump range by ~11%"
 msgstr "augmenter la portée de saut d'environ 11%"
@@ -3777,6 +4127,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2743
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3668
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7527
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by 12.5%"
 msgstr "augmenter les capteurs longue portée de 12,5%"
@@ -3793,6 +4144,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2748
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3673
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7532
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by ~11%"
 msgstr "augmenter les capteurs longue portée d'environ 11%"
@@ -3863,6 +4215,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7880
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8243
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8930
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase warp speed by ~14%"
 msgstr "augmenter la vitesse lumière d'environ 14%"
@@ -3873,6 +4226,7 @@ msgid "increased the cycle time by 1/9"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2768
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by 10%"
 msgstr "diminuer le temps de cycle des faisceaux laser de 10%"
@@ -3894,6 +4248,7 @@ msgid "increased cycle time by 1/8"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2792
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by ~11%"
 msgstr "diminuer le temps de cycle des faisceaux laser ~11%"
@@ -3904,6 +4259,7 @@ msgid "reduced range by 1/12"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2804
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by ~9%"
 msgstr "augmenter la portée des faisceaux laser d'environ 9%"
@@ -3935,6 +4291,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7608
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7948
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9328
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add beam"
 msgstr "ajouter des faisceaux laser"
@@ -3945,11 +4302,13 @@ msgid "reduced center beam range by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2818
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase center beam range by 25%"
 msgstr "augmenter la portée du faisceau central de 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2828
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase tube load speed by ~17%"
 msgstr "augmenter la vitesse de chargement des tubes ~17%"
@@ -3960,6 +4319,7 @@ msgid "reduced HVLI capacity by 3/8"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2831
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase HVLI capacity by 60%"
 msgstr "augmenter la capacité de stockage des HVLI de 60%"
@@ -3970,6 +4330,7 @@ msgid "reduced forward tube load speed by 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2833
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "speed up forward tube load time by 20%"
 msgstr "accélérer la vitesse de chargement des tubes avant de 20%"
@@ -3986,6 +4347,7 @@ msgid "removed nukes, reduced EMP capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2836
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add nukes, more EMPs"
 msgstr "ajouter des armes nucléaires (nuke), plus d'EMP"
@@ -3996,6 +4358,7 @@ msgid "reduced homing missile capacity by 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2837
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "1/3 more homing capacity"
 msgstr "1/3 de capacité de stockage en plus pour les homing"
@@ -4006,6 +4369,7 @@ msgid "reduced homing and HVLI capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2838
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "more homing and HVLI missiles"
 msgstr "plus de missiles à tête chercheuse (homing) et de HVLI"
@@ -4016,6 +4380,7 @@ msgid "reduced homing, nuke, EMP and mine capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2839
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "more homing, nuke, EMP and mine missiles"
 msgstr "plus de missiles (homing), nucléaires (nuke), EMP et mines"
@@ -4026,6 +4391,7 @@ msgid "reduced shield charge capacity by 1/9"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2905
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 12.5%"
 msgstr "augmenter la puissance des boucliers de 12,5%"
@@ -4045,6 +4411,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2934
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3418
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5148
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by 20%"
 msgstr "augmenter la puissance des boucliers avant de 20%"
@@ -4060,6 +4427,7 @@ msgid "reduced maneuverability by 1/9"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2984
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 12.5%"
 msgstr "augmenter la manœuvre de 12,5%"
@@ -4070,6 +4438,7 @@ msgid "reduced max forward impulse by 1/15"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2992
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse by ~7%"
 msgstr "augmenter la vitesse max des moteurs avant d'environ 7%"
@@ -4096,6 +4465,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6095
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6487
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7810
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add combat maneuver boost"
 msgstr "ajouter un boost de manœuvre de combat"
@@ -4106,6 +4476,7 @@ msgid "reduced max reverse impulse by 1/7"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3008
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max reverse impulse by ~17%"
 msgstr "augmenter la vitesse max des moteurs arrière d'environ 17%"
@@ -4116,6 +4487,7 @@ msgid "reduced forward impulse speed and acceleration"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3016
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward impulse speed and acceleration"
 msgstr "augmenter la vitesse des moteurs vers l'avant et l'accélération"
@@ -4126,6 +4498,7 @@ msgid "reduced maneuverability by 10%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3032
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by ~11%"
 msgstr "augmenter la manœuvre d'environ 11%"
@@ -4138,6 +4511,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3040
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3512
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double combat maneuverability"
 msgstr "doubler la manœuvrabilité de la manœuvre de combat"
@@ -4148,6 +4522,7 @@ msgid "reduced reverse impulse speed and acceleration"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3048
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase reverse impulse speed and acceleration"
 msgstr "augmenter la vit. max et vit. d'accélération arrière"
@@ -4174,6 +4549,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6864
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9208
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9516
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward acceleration by 25%"
 msgstr "augmenter l'accélération avant de 25%"
@@ -4184,6 +4560,7 @@ msgid "reduced reverse impulse max speed by 1/11"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3064
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase reverse impulse max speed by 10%"
 msgstr "augmenter la vitesse maximale des moteurs arrière de 10%"
@@ -4196,6 +4573,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3072
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3544
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver boost by 25%"
 msgstr "booster la manœuvre de combat de 25%"
@@ -4214,6 +4592,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3161
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5819
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 1 unit automated proximity scanner"
 msgstr "ajouter un scanner de proximité automatisé à 1 unité"
@@ -4234,6 +4613,7 @@ msgid "cut automated proximity scanner range by 2/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3191
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "triple automated proximity scanner range"
 msgstr "tripler la portée du scanner de proximité automatisé"
@@ -4247,6 +4627,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3211
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4132
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase short range sensors by ~9%"
 msgstr "augmenter les capteurs courte portée d'environ 9%"
@@ -4263,11 +4644,13 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3231
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5882
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6248
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by 12.5%"
 msgstr "diminuer le temps de cycle des faisceaux laser de 12,5%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3251
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by ~14%"
 msgstr "diminuer le temps de cycle des faisceaux laser ~14%"
@@ -4278,6 +4661,7 @@ msgid "reduced arc width by 1/9"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3258
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc width by 12.5%"
 msgstr "augmenter la largeur de l'arc des faisceaux laser de 12,5%"
@@ -4288,6 +4672,7 @@ msgid "reduced range by ~8.6%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3282
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by ~9.5%"
 msgstr "augmenter la portée des faisceaux laser d'environ 9,5%"
@@ -4298,6 +4683,7 @@ msgstr "augmenter la portée des faisceaux laser d'environ 9,5%"
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6684
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7141
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8657
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by ~17%"
 msgstr "diminuer le temps de cycle des faisceaux laser ~17%"
@@ -4308,6 +4694,7 @@ msgid "reduced HVLI capacity by 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3304
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase HVLI capacity by 50%"
 msgstr "augmenter la capacité de stockage des HVLI de 50%"
@@ -4318,6 +4705,7 @@ msgid "cut homing capacity in half"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3305
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double homing capacity"
 msgstr "doubler la capacité de stockage des homing"
@@ -4333,6 +4721,7 @@ msgid "slowed tube load speed"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3306
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "speed up missile load time by 10%"
 msgstr "accélérer la vitesse de chargement des missiles de 10%"
@@ -4343,6 +4732,7 @@ msgid "removed nukes and EMPs"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3307
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add nukes and EMPs"
 msgstr "ajouter des armes nucléaires (nuke) et des EMP"
@@ -4355,17 +4745,20 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3308
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6724
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase HVLI capacity by 1/3"
 msgstr "augmenter la capacité de stockage des HVLI de 1/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3309
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "speed up load time by ~17%"
 msgstr "accélérer la vitesse de chargement des missiles d'environ 17%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3310
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4649
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add mine tube"
 msgstr "ajouter un tube de mine"
@@ -4376,6 +4769,7 @@ msgid "slowed broadside tubes' load speed by 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3311
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "20% faster broadside loading"
 msgstr "chargement des tubes latéraux 20% plus rapide"
@@ -4391,6 +4785,7 @@ msgid "reduced nuke and EMP capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3313
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "more nuke and EMP missiles"
 msgstr "plus de missiles nucléaires (nuke) et EMP"
@@ -4401,6 +4796,7 @@ msgid "reduced homing and mine capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3314
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "more homing and mine missiles"
 msgstr "plus de missiles à tête chercheuse (homing) et de mines"
@@ -4422,6 +4818,7 @@ msgid "reduced max reverse impulse speed by 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3456
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max reverse impulse speed by 20%"
 msgstr "augmenter la vitesse maximale des moteurs arrière de 20%"
@@ -4432,6 +4829,7 @@ msgid "reduced reverse acceleration by 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3464
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase reverse acceleration by 50%"
 msgstr "augmenter la vit. d'accélération des moteurs arrière de 50%"
@@ -4445,6 +4843,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3472
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7356
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8902
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 50%"
 msgstr "augmenter la manœuvre de 50%"
@@ -4456,6 +4855,7 @@ msgstr "augmenter la manœuvre de 50%"
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8860
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9201
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9502
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add combat maneuver"
 msgstr "ajouter la manœuvre de combat"
@@ -4467,6 +4867,7 @@ msgid "reduced forward impulse speed by 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3488
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward impulse speed by 20%"
 msgstr "booster les moteurs avant de 20%"
@@ -4478,6 +4879,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3496
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4859
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward impulse acceleration by 50%"
 msgstr "augmenter l'accélération des moteurs avant de 50%"
@@ -4488,6 +4890,7 @@ msgid "reduced reverse impulse speed by 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3504
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase reverse impulse speed by 1/3"
 msgstr "booster les moteurs arrière de 1/3"
@@ -4500,6 +4903,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3520
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6127
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase reverse impulse acceleration by 20%"
 msgstr "augmenter l'accélération des moteurs arrière de 20%"
@@ -4514,6 +4918,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3528
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3963
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8895
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward acceleration by 1/3"
 msgstr "augmenter l'accélération avant de 1/3"
@@ -4524,6 +4929,7 @@ msgid "reduced forward impulse speed by 1/11"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3536
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward impulse speed by 10%"
 msgstr "booster les moteurs avant de 10%"
@@ -4534,6 +4940,7 @@ msgid "reduced reverse impulse speed by 1/11"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3552
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase reverse impulse speed by 10%"
 msgstr "booster la vitesse des moteurs arrière de 10%"
@@ -4546,6 +4953,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3691
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5430
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by 12.5%"
 msgstr "augmenter la portée des faisceaux laser de 12,5%"
@@ -4559,12 +4967,14 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8301
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8996
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9006
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc by 50%"
 msgstr "augmenter l'amplitude de l'arc des faisceaux laser de 50%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3701
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5438
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by 12.5%"
 msgstr "réduire le temps de cycle des faisceaux laser de 12,5%"
@@ -4578,6 +4988,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3711
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5462
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9016
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by ~11%"
 msgstr "augmenter la portée des faisceaux laser d'environ 11%"
@@ -4588,6 +4999,7 @@ msgid "removed large tubes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3738
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "large tubes"
 msgstr "tubes larges"
@@ -4598,6 +5010,7 @@ msgid "increased load times by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3739
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease load time by 25%"
 msgstr "réduire le temps de chargement des missiles de 25%"
@@ -4608,6 +5021,7 @@ msgid "removed medium homing tube and homing missiles"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3741
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add medium homing tubes and homing missiles"
 msgstr "ajouter des tubes moyens pour homing et des homing"
@@ -4618,6 +5032,7 @@ msgid "removed homing capability from large tubes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3743
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add homing capability to large tubes"
 msgstr "ajouter la capacité de tir de homing aux tubes larges"
@@ -4628,6 +5043,7 @@ msgid "increased tube load speed by 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3744
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase tube load speed by 20%"
 msgstr "augmenter la vitesse de chargement des tubes de 20%"
@@ -4638,6 +5054,7 @@ msgid "removed nukes and EMPs, reduced homing and HVLI capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3745
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add nukes and EMPs, increase homing and HVLI capacity"
 msgstr "ajouter nuke et EMP, augmenter le stockage homing et HVLI"
@@ -4648,6 +5065,7 @@ msgid "reduced EMP and mine capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3746
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase EMP and mine capacity"
 msgstr "augmenter la capacité de stockage des missiles EMP et des mines"
@@ -4658,6 +5076,7 @@ msgid "removed second mine tube"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3747
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add a second mine tube"
 msgstr "ajouter un second tube de mine"
@@ -4668,6 +5087,7 @@ msgid "removed large tubes, reduced homing capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3748
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add large tubes, increase homing capacity"
 msgstr "ajouter des tubes larges, augmenter la capacité de stockage homing"
@@ -4678,6 +5098,7 @@ msgid "increased tube load speed by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3749
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase tube load speed by 25%"
 msgstr "augmenter la vitesse de chargement des tubes de 25%"
@@ -4688,6 +5109,7 @@ msgid "removed 3rd mining tube, reduced mine, EMP and nuke capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3750
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 3rd mining tube, increase mine, EMP and nuke capacity"
 msgstr ""
@@ -4699,6 +5121,7 @@ msgid "increased tube load speeds, reduced nuke and HVLI capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3751
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase tube load speeds, increase nuke and HVLI capacity"
 msgstr "augmenter la vitesse de chargement des tubes, la capacité nuke et HVLI"
@@ -4729,6 +5152,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5154
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6041
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8829
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 10%"
 msgstr "augmenter la puissance des boucliers de 10%"
@@ -4737,6 +5161,7 @@ msgstr "augmenter la puissance des boucliers de 10%"
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4367
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6463
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7428
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by 20%"
 msgstr "augmenter la vitesse maximale des moteurs avant de 20%"
@@ -4758,6 +5183,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7340
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7388
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7786
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max impulse speed by 20%"
 msgstr "augmenter la vitesse maximale des moteurs de 20%"
@@ -4768,6 +5194,7 @@ msgid "cut impulse acceleration in half"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4003
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double impulse acceleration"
 msgstr "doubler l'accélération des moteurs"
@@ -4789,6 +5216,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8522
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8881
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9523
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver by 50%"
 msgstr "booster la manœuvre de combat de 50%"
@@ -4813,6 +5241,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4589
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5010
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7077
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by 25%"
 msgstr "réduire le temps de cycle des faisceaux laser de 25%"
@@ -4831,6 +5260,7 @@ msgid "removed front beam"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4183
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add front beam"
 msgstr "ajouter un faisceau laser à l'avant"
@@ -4841,6 +5271,7 @@ msgid "reduced damage by 3/8"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4190
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase damage by 60%"
 msgstr "augmenter les dégâts des faisceaux laser de 60%"
@@ -4853,6 +5284,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4197
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5028
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by 1/3"
 msgstr "réduire le temps de cycle des faisceaux laser de 1/3"
@@ -4866,6 +5298,7 @@ msgid "slowed tube load times"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4208
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "speed up tube load time by 25%"
 msgstr "accélérer la vitesse de chargement des tubes de 25%"
@@ -4876,6 +5309,7 @@ msgid "reduced missile capacity: homing: 1/3, HVLI: 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4209
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase missile capacity: homing: 50%, HVLI: 25%"
 msgstr "augmenter la capacité de stockage homing : 50%, HVLI : 25%"
@@ -4886,6 +5320,7 @@ msgid "removed nuke"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4210
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add nuke"
 msgstr "ajouter des nuke"
@@ -4897,6 +5332,7 @@ msgid "reduced homing capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4211
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase homing capacity by 2/3"
 msgstr "augmenter la capacité de stockage des homing de 2/3"
@@ -4907,6 +5343,7 @@ msgid "removed medium sized homing and mine tube"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4212
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add medium sized homing and mine tube"
 msgstr "ajouter des homing de taille moyenne et un tube de mine"
@@ -4919,6 +5356,7 @@ msgid "reduced HVLI capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4213
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase HVLI capacity by 40%"
 msgstr "augmenter la capacité de stockage des HVLI de 40%"
@@ -4929,6 +5367,7 @@ msgid "removed HVLI capbility from medium tube"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4214
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add HVLI to medium sized tube"
 msgstr "ajouter la capacité de tir HVLI aux tubes de taille moyenne"
@@ -4939,6 +5378,7 @@ msgid "cut nuke and mine capacity in half"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4215
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double nuke and mine capacity"
 msgstr "doubler la capacité de stockage des nuke et des mines"
@@ -4949,6 +5389,7 @@ msgid "removed large tube for HVLIs and mines"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4216
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add large tube for HVLIs and mines"
 msgstr "ajouter un tube large pour HVLI et mines"
@@ -4959,11 +5400,13 @@ msgid "reduced homing capacity by 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4217
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase homing capacity by 20%"
 msgstr "augmenter la capacité de stockage des homing de 20%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4218
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce tube loading time by 25%"
 msgstr "réduire le temps de chargement des tubes de 25%"
@@ -4974,6 +5417,7 @@ msgid "removed EMP from medium tube and homing from large tube"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4219
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add EMP to medium tube and homing to large tube"
 msgstr "ajouter des EMP pour tube moyen et des homing pour tube large"
@@ -4986,6 +5430,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4220
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4653
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase homing, mine and HVLI capacity"
 msgstr "augmenter la capacité de stockage des homing, mines et HVLI"
@@ -5001,6 +5446,7 @@ msgid "reduced read shield charge capacity by 7/40"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4335
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by ~21%"
 msgstr "augmenter la puissance des boucliers arrière d'environ 21%"
@@ -5020,6 +5466,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4399
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4819
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6856
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max impulse speed by 1/3"
 msgstr "augmenter la vitesse maximale des moteurs de 1/3"
@@ -5030,6 +5477,7 @@ msgid "reduced rear impulse max speed by 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4415
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear impulse max speed by 20%"
 msgstr "augmenter la vitesse maximale des moteurs arrière de 20%"
@@ -5040,6 +5488,7 @@ msgid "reduced forward impulse acceleration by 3/13"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4423
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward impulse acceleration by 30%"
 msgstr "augmenter l'accélération des moteurs avant de 30%"
@@ -5050,6 +5499,7 @@ msgid "reduced reverse impulse acceleration by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4439
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase reverse impulse acceleration by 25%"
 msgstr "augmenter l'accélération des moteurs arrière de 25%"
@@ -5061,6 +5511,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4473
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4488
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase warp speed by ~8%"
 msgstr "augmenter la vitesse lumière d'environ 8%"
@@ -5078,6 +5529,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4512
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9576
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 3 unit automated proximity scanner"
 msgstr "ajouter un scanner de proximité automatisé à 3 unités"
@@ -5090,6 +5542,7 @@ msgid "reduced arc width by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4607
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc size by 25%"
 msgstr "augmenter la taille de l'arc des faisceaux laser de 25%"
@@ -5100,6 +5553,7 @@ msgid "reduced damage by 2/7"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4619
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase damage by 40%"
 msgstr "augmenter les dégâts des faisceaux laser de 40%"
@@ -5111,6 +5565,7 @@ msgid "increased tube load time"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4641
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease tube load time by 20%"
 msgstr "réduire le temps de chargement des tubes de 20%"
@@ -5121,6 +5576,7 @@ msgid "reduced capacity: homing:50%, HVLI: 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4642
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: homing: 100%, HVLI: 50%"
 msgstr "augmenter la capacité de stockage : homing : 100%, HVLI : 50%"
@@ -5133,6 +5589,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4643
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5048
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase tube size to medium"
 msgstr "agrandir un tube léger en tube moyen"
@@ -5143,6 +5600,7 @@ msgid "reduced capacity: homing: 1/3, HVLI: 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4644
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: homing: 50%, HVLI: 1/3"
 msgstr "augmenter la capacité de stockage : homing : 50%, HVLI : 1/3"
@@ -5160,6 +5618,7 @@ msgid "slowed tube load time"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4645
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "speed up missile load time by 25%"
 msgstr "accélérer la vitesse de chargement des missiles de 25%"
@@ -5171,11 +5630,13 @@ msgid "reduced capacity: homing: 25%, HVLI: 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4646
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: homing: 1/3, HVLI: 25%"
 msgstr "augmenter la capacité de stockage : homing : 1/3, HVLI : 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4647
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "speed up load time by 20%"
 msgstr "accélérer la vitesse de chargement des missiles de 20%"
@@ -5186,6 +5647,7 @@ msgid "reduced tube size from large to medium"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4648
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase tube size to large"
 msgstr "augmenter la taille du tube au format large"
@@ -5199,11 +5661,13 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4650
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6721
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8685
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double mine capacity"
 msgstr "doubler la capacité de stockage des mines"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4652
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease tube load speed by 25%"
 msgstr "diminuer le temps de chargement des tubes de 25%"
@@ -5215,6 +5679,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4755
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5642
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by ~14%"
 msgstr "augmenter la puissance des boucliers arrière d'environ 14%"
@@ -5229,6 +5694,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4770
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5174
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5656
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~19%"
 msgstr "renforcer la solidité de la coque d'environ 19%"
@@ -5239,6 +5705,7 @@ msgid "reduced rear impulse acceleration by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4835
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear impulse acceleration by 25%"
 msgstr "booster l'accélération des moteurs arrière de 25%"
@@ -5250,6 +5717,7 @@ msgid "reduced forward acceleration by 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4873
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 25u jump drive"
 msgstr "ajouter un moteur de téléportation de 25U de distance"
@@ -5273,6 +5741,7 @@ msgid "reduced arc width by 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5016
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc by 20%"
 msgstr "augmenter l'amplitude de l'arc des faisceaux laser de 20%"
@@ -5289,6 +5758,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5947
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6716
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7654
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double HVLI capacity"
 msgstr "doubler la capacité de stockage des HVLI"
@@ -5300,11 +5770,13 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5046
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5478
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "triple mine capacity"
 msgstr "tripler la capacité de stockage des mines"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5049
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase load speed by 25%"
 msgstr "augmenter la vitesse de chargement des missiles de 25%"
@@ -5323,6 +5795,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7662
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8358
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8679
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase homing capacity by 50%"
 msgstr "augmenter la capacité de stockage des homing de 50%"
@@ -5333,11 +5806,13 @@ msgid "removed nuke and EMPs"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5051
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add nuke and EMPs"
 msgstr "ajouter des nuke et EMP"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5053
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease load speed by 1/3"
 msgstr "diminuer le temps de chargement des missiles de 1/3"
@@ -5349,6 +5824,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5054
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8674
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase homing capacity by 1/3"
 msgstr "augmenter la capacité de stockage des homing de 1/3"
@@ -5359,6 +5835,7 @@ msgid "reduced capacity: nuke: 50%, EMP: 50%, mine: 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5055
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: nuke:100%, EMP:100%, mine:1/3"
 msgstr ""
@@ -5370,6 +5847,7 @@ msgid "reduced front shield charge capacity by 3/25"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5160
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by ~14%"
 msgstr "augmenter la puissance des boucliers avant d'environ 14%"
@@ -5380,6 +5858,7 @@ msgid "reduced max impulse speed by 1/8"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5192
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max impulse speed by ~14%"
 msgstr "augmenter la vitesse maximale des moteurs ~14%"
@@ -5390,6 +5869,7 @@ msgid "reduced max impulse speed by 1/9"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5224
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max impulse speed by 12.5%"
 msgstr "augmenter la vitesse maximale des moteurs de 12,5%"
@@ -5403,6 +5883,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5240
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5722
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6511
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase impulse acceleration by 1/3"
 msgstr "augmenter l'accélération des moteurs de 1/3"
@@ -5413,6 +5894,7 @@ msgid "reduced forward impulse speed by 10%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5264
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward max impulse speed by ~11%"
 msgstr "augmenter la vitesse maximale des moteurs avant ~11%"
@@ -5437,11 +5919,13 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5454
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7125
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc width by 1/3"
 msgstr "augmenter la largeur de l'arc des faisceaux laser de 1/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5471
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "mining tube"
 msgstr "ajouter un tube de mine"
@@ -5452,6 +5936,7 @@ msgid "reduced homing and HVLI capacity by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5472
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase homing and HVLI capacity by 25%"
 msgstr "augmenter la capacité de stockage des homing et HVLI de 25%"
@@ -5462,6 +5947,7 @@ msgid "removed broadside tubes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5473
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add broadside tubes"
 msgstr "ajouter des tubes latéraux"
@@ -5472,6 +5958,7 @@ msgid "switched to small tubes from medium tubes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5474
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "switch to medium sized tubes"
 msgstr "passer aux tubes de taille moyenne"
@@ -5482,11 +5969,13 @@ msgid "removed nukes and EMPs from front tubes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5475
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add nukes and EMPs to front tubes"
 msgstr "ajouter des armes nucléaires (nuke) et des EMP aux tubes avant"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5476
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase homing capacity by 60%"
 msgstr "augmenter la capacité de stockage des homing de 60%"
@@ -5497,6 +5986,7 @@ msgid "removed some broadside tubes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5477
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add more broadside tubes"
 msgstr "ajouter plus de tubes latéraux"
@@ -5523,6 +6013,7 @@ msgid "reduced homing capacity by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5480
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase homing capacity by 25%"
 msgstr "augmenter la capacité de stockage des homing de 25%"
@@ -5533,6 +6024,7 @@ msgid "reduced capacity: nuke: 50%, EMP: 1/3, mine: 50%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5481
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: nuke: 100%, EMP: 50%, mine: 100%"
 msgstr "augmenter le stockage : nuke : 100%, EMP : 50%, mine : 100%"
@@ -5553,6 +6045,7 @@ msgid "removed two mining tubes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5484
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add two more mining tubes"
 msgstr "ajouter deux autres tubes de mine"
@@ -5563,6 +6056,7 @@ msgid "reduced capacity: nuke, EMP, mine, HVLI"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5485
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: nuke:100%, EMP:2/3, mine:100%, HVLI:20%"
 msgstr "augmenter le stockage : nuke 100%, EMP 2/3, mine 100%, HVLI 20%"
@@ -5573,6 +6067,7 @@ msgid "slowed medium tubes' load time"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5486
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase load speed of medium tubes ~16%"
 msgstr "augmenter la vitesse de chargement des tubes moyens ~16%"
@@ -5583,6 +6078,7 @@ msgid "reduced capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5487
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity by ~14% on average"
 msgstr "augmenter la capacité de stockage d'environ 14% en moyenne"
@@ -5593,6 +6089,7 @@ msgid "reduced front shield charge capacity by 10%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5618
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by ~11%"
 msgstr "augmenter la puissance des boucliers avant d'environ 11%"
@@ -5603,6 +6100,7 @@ msgid "reduced rear chield charge capacity by 1/7"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5624
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by ~17%"
 msgstr "augmenter la puissance des boucliers arrière d'environ 17%"
@@ -5615,6 +6113,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5630
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5636
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by 10%"
 msgstr "augmenter la puissance des boucliers avant de 10%"
@@ -5630,6 +6129,7 @@ msgid "reduced maneuverability by 1/8"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5690
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by ~14%"
 msgstr "augmenter la manœuvre d'environ 14%"
@@ -5642,6 +6142,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5706
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8125
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max impulse speed by ~17%"
 msgstr "augmenter la vitesse maximale des moteurs ~17%"
@@ -5660,6 +6161,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5730
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8165
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8909
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver by 20%"
 msgstr "booster la manœuvre de combat de 20%"
@@ -5670,11 +6172,13 @@ msgid "reduced forward max impulse speed by 1/8"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5746
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward max impulse speed by ~14%"
 msgstr "augmenter la vitesse maximale des moteurs avant ~14%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5834
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase automated proximity scan range by 100%"
 msgstr "augmenter la portée du scanner de proximité automatisé de 100%"
@@ -5685,6 +6189,7 @@ msgid "reduced automated proximity scanner range by 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5844
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase automated proximity scan range by 50%"
 msgstr "augmenter la portée du scanner de proximité automatisé de 50%"
@@ -5695,6 +6200,7 @@ msgid "reduced automated proximity scanner range by 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5854
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase automated proximity scan range by 1/3"
 msgstr "augmenter la portée du scanner de proximité automatisé de 1/3"
@@ -5705,6 +6211,7 @@ msgid "reduced arc width of long beam by 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5894
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc width of long beam by 50%"
 msgstr "augmenter la largeur de l'arc du faisceau laser long de 50%"
@@ -5720,6 +6227,7 @@ msgid "reduced damage of short beam by 1/8"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5912
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase damage of short beam by ~14%"
 msgstr "augmenter les dégâts des faisceaux laser courts d'environ 14%"
@@ -5731,6 +6239,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5924
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6704
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase damage by ~18%"
 msgstr "augmenter les dégâts des faisceaux laser d'environ 18%"
@@ -5741,6 +6250,7 @@ msgid "increased tube load speed"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5946
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce tube load speed by 1/3"
 msgstr "réduire le temps de chargement des tubes de 1/3"
@@ -5762,6 +6272,7 @@ msgid "removed a small tube"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5949
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add a small tube"
 msgstr "ajouter un tube léger"
@@ -5773,6 +6284,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5950
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7659
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add homing capability to small tube"
 msgstr "ajouter la capacité de tir de homing au tube léger"
@@ -5780,6 +6292,7 @@ msgstr "ajouter la capacité de tir de homing au tube léger"
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5953
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6720
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7663
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add a mining tube"
 msgstr "ajouter un tube de mine"
@@ -5790,6 +6303,7 @@ msgid "reduced capacity: homing: 25%, mining: 50%, HVLI: 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5954
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: homing: 1/3, mining: 100%, HVLI: 20%"
 msgstr ""
@@ -5801,6 +6315,7 @@ msgid "slowed mine tube load time"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5955
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce mine tube load time by 1/3"
 msgstr "réduire le temps de chargement des mines de 1/3"
@@ -5811,6 +6326,7 @@ msgstr "réduire le temps de chargement des mines de 1/3"
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7279
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7738
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8089
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add rear arc"
 msgstr "ajouter un arc de bouclier arrière"
@@ -5827,6 +6343,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6442
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7766
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8105
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by 1/3"
 msgstr "renforcer la solidité de la coque de 1/3"
@@ -5838,6 +6355,7 @@ msgid "reduced max impulse speed by 10%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6071
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max impulse speed by ~11%"
 msgstr "augmenter la vitesse maximale des moteurs ~11%"
@@ -5848,6 +6366,7 @@ msgid "reduced combat maneuver by 1/7"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6111
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver by ~17%"
 msgstr "booster la manœuvre de combat d'environ 17%"
@@ -5873,6 +6392,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7512
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7899
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8262
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase short range sensors by 25%"
 msgstr "augmenter les capteurs courte portée de 25%"
@@ -5886,18 +6406,21 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6290
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7954
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8651
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase turret speed by 50%"
 msgstr "augmenter la vitesse de rotation des tourelles laser de 50%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6302
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9001
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by ~17%"
 msgstr "réduire le temps de cycle des faisceaux laser ~17%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6313
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6317
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add another mining tube"
 msgstr "ajouter un autre tube de mine"
@@ -5910,11 +6433,13 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6314
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7655
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce tube load time by 25%"
 msgstr "réduire le temps de chargement des tubes de 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6316
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce load speed by 1/3"
 msgstr "réduire le temps de chargement des tubes de 1/3"
@@ -5931,6 +6456,7 @@ msgid "removed HVLIcapability from first mining tube"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6318
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add HVLI capability to first mining tube"
 msgstr "ajouter la capacité de tir de HVLI au 1er tube de mines"
@@ -5941,6 +6467,7 @@ msgid "removed homing capability from second mining tube"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6319
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add homing capability to second mining tube"
 msgstr "ajouter la capacité de tir de homing au 2ème tube de mines"
@@ -5957,6 +6484,7 @@ msgid "make first tube a large tube"
 msgstr "faire du 1er tube un tube large"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6322
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce tube load speed time by 20%"
 msgstr "réduire le temps de chargement des tubes de 20%"
@@ -5967,6 +6495,7 @@ msgid "reduced capacity: homing: 50%, mine: 25%, HVLI: 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6323
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: homing:100%, mine:1/3, HVLI:20%"
 msgstr ""
@@ -5978,6 +6507,7 @@ msgid "switched second tube from larg to medium"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6324
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make second tube a large tube"
 msgstr "faire du 2ème tube un tube large"
@@ -6001,12 +6531,14 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6495
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8515
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max impulse speed by 10%"
 msgstr "augmenter la vitesse maximale des moteurs de 10%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6666
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7942
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by 25%"
 msgstr "diminuer le temps de cycle des faisceaux laser de 25%"
@@ -6017,6 +6549,7 @@ msgid "reduced arc width by 2/5"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6672
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc width by 2/3"
 msgstr "augmenter la largeur de l'arc des faisceaux laser de 2/3"
@@ -6030,12 +6563,14 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6678
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7966
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9333
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase damage by 50%"
 msgstr "augmenter les dégâts des faisceaux laser de 50%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6690
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7622
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc width by 20%"
 msgstr "augmenter la largeur de l'arc des faisceaux laser de 20%"
@@ -6046,6 +6581,7 @@ msgid "removed sniping beam"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6697
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add sniping beam"
 msgstr "ajouter un faisceau laser Sniper"
@@ -6056,17 +6592,20 @@ msgid "removed small HVLI broadsides"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6714
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add small HVLI broadsides"
 msgstr "ajouter des HVLI légers latéraux"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6715
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7195
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce tube load time by 10%"
 msgstr "réduire le temps de chargement des tubes de 10%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6717
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce tube load time by 1/3"
 msgstr "réduire le temps de chargement des tubes de 1/3"
@@ -6077,6 +6616,7 @@ msgid "removed homing capability from tubes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6718
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add homing capability to tubes"
 msgstr "ajouter la capacité de tir de homing au tubes"
@@ -6087,11 +6627,13 @@ msgid "reduced capacity: homing: 50%, HVLI: 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6719
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: homing:100%, HVLI:50%"
 msgstr "augmenter la capacité de stockage : homing : 100%, HVLI : 50%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6722
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce tube load speed by 25%"
 msgstr "réduire le temps de chargement des tubes de 25%"
@@ -6102,6 +6644,7 @@ msgid "mad broadside tubes small"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6723
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make broadside tubes medium size"
 msgstr "agrandir les tubes latéraux en taille moyenne"
@@ -6117,6 +6660,7 @@ msgid "reduce forward max impulse speed by 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6880
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward max impulse by 20%"
 msgstr "augmenter la vitesse max des moteurs avant de 20%"
@@ -6130,6 +6674,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6904
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7412
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8888
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max impulse speed by 25%"
 msgstr "augmenter la vitesse maximale des moteurs de 25%"
@@ -6140,6 +6685,7 @@ msgid "reduced jump range by 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6931
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase jump range by 50%"
 msgstr "augmenter la portée de saut de 50%"
@@ -6157,6 +6703,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7904
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8267
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8586
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by 50%"
 msgstr "augmenter les capteurs longue portée de 50%"
@@ -6167,6 +6714,7 @@ msgid "reduced range by 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7045
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by 1/3"
 msgstr "augmenter la portée des faisceaux laser de 1/3"
@@ -6177,11 +6725,13 @@ msgid "adjusted angles for less coverage"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7157
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "adjust beam angles for more coverage"
 msgstr "ajustez les angles des faisceaux laser pour plus de couverture"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7173
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase beam arc by 25%"
 msgstr "augmenter l'amplitude de l'arc des faisceaux laser de 25%"
@@ -6192,6 +6742,7 @@ msgid "removed medium homing tubes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7193
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add medium homing tubes"
 msgstr "ajouter des tubes moyens de homing"
@@ -6203,6 +6754,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7194
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7660
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double capacity"
 msgstr "doubler la capacité de stockage des missiles"
@@ -6213,6 +6765,7 @@ msgid "reduced capacity by 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7196
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity by 50%"
 msgstr "augmenter la capacité de stockage de 50%"
@@ -6223,11 +6776,13 @@ msgid "removed some tubes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7197
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add more tubes"
 msgstr "ajouter plus de tubes"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7198
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce tube load time by ~17%"
 msgstr "réduire le temps de chargement des tubes d'environ 17%"
@@ -6238,6 +6793,7 @@ msgid "reduced capacity by 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7199
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity by 1/3"
 msgstr "augmenter la capacité de stockage de 1/3"
@@ -6248,6 +6804,7 @@ msgid "switched two lower tubes from large to medium"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7200
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make two lower tubes large"
 msgstr "agrandir 2 tubes inférieurs en taille large"
@@ -6258,11 +6815,13 @@ msgid "reduced capacity by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7201
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity by 25%"
 msgstr "augmenter la capacité de stockage de 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7202
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce tube load times by 20%"
 msgstr "réduire le temps de chargement des tubes de 20%"
@@ -6273,6 +6832,7 @@ msgid "slowed medium tube load times"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7203
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce medium tube load times by 25%"
 msgstr "réduire le temps de chargement des tubes moyens de 25%"
@@ -6283,16 +6843,19 @@ msgid "removed read arc"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7348
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward acceleration by 50%"
 msgstr "augmenter l'accélération avant de 50%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7364
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max impulse by ~11%"
 msgstr "augmenter la vitesse max des moteurs d'environ 11%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7372
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward acceleratione by 1/3"
 msgstr "augmenter l'accélération des moteurs avant de 1/3"
@@ -6308,6 +6871,7 @@ msgid "reduced acceleration by 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7396
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase acceleration by 50%"
 msgstr "augmenter l'accélération de 50%"
@@ -6320,6 +6884,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7420
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7794
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward acceleration by ~17%"
 msgstr "augmenter l'accélération avant d'environ 17%"
@@ -6330,11 +6895,13 @@ msgid "reduced acceleration by ~1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7444
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase acceleration by ~24%"
 msgstr "augmenter l'accélération d'environ 24%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7473
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase jump range by ~16%"
 msgstr "augmenter la portée de saut d'environ 16%"
@@ -6350,6 +6917,7 @@ msgid "increased minimum jump range to 5 units"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7493
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "cut minimum jump range to 2 units"
 msgstr "réduire la plage de saut minimale à 2 unités"
@@ -6361,26 +6929,31 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7537
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9286
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase short range sensors by 20%"
 msgstr "augmenter les capteurs courte portée de 20%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7542
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 4 unit automated proximity scanner"
 msgstr "ajouter un scanner de proximité automatisé à 4 unités"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7547
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range scan by 20%"
 msgstr "augmenter le scanner longue portée de 20%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7552
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range scan by ~17%"
 msgstr "augmenter le scanner longue portée d'environ 17%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7557
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range scan by ~14%"
 msgstr "augmenter le scanner longue portée d'environ 14%"
@@ -6391,6 +6964,7 @@ msgid "increased cycle time by 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7583
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by 20%"
 msgstr "diminuer le temps de cycle des faisceaux laser de 20%"
@@ -6401,6 +6975,7 @@ msgid "reduced damage of short range beam by 1/7"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7615
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase damage of short beam by ~17%"
 msgstr "augmenter les dégâts des faisceaux laser courts d'environ 17%"
@@ -6411,6 +6986,7 @@ msgid "reduced long beam damage by 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7629
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long beam damage by 1/3"
 msgstr "augmenter les dégâts des faisceaux laser longs de 1/3"
@@ -6421,6 +6997,7 @@ msgid "reduced long beam range by 10%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7636
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long beam range by ~11%"
 msgstr "augmente la portée des faisceaux laser longs d'environ 11%"
@@ -6431,6 +7008,7 @@ msgid "reduced short beam damage by 1/8"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7643
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase short beam damage by ~14%"
 msgstr "augmenter les dégâts des faisceaux laser court d'environ 14%"
@@ -6441,6 +7019,7 @@ msgid "removed rear HVLI tube"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7653
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add rear HVLI tube"
 msgstr "ajouter un tube HVLI arrière"
@@ -6451,11 +7030,13 @@ msgid "switched medium tube to small"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7656
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make small tube medium sized"
 msgstr "agrandir un tube léger en taille moyenne"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7657
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce tube load time by 20%"
 msgstr "réduire le temps de chargement des tubes de 20%"
@@ -6466,6 +7047,7 @@ msgid "removed small tube"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7658
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add small tube"
 msgstr "ajouter un tube léger"
@@ -6487,6 +7069,7 @@ msgid "slowed small tube load time"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7661
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce small tube load time by ~17%"
 msgstr "réduire le temps de chargement des tubes légers ~17%"
@@ -6497,6 +7080,7 @@ msgid "reduced capacity: homing: 25%, mine: 50%, HVLI: 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7664
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: homing:1/3, mine:100%, HVLI:50%"
 msgstr "augmenter le stockage : homing : 1/3, mine : 100%, HVLI : 50%"
@@ -6507,6 +7091,7 @@ msgid "reduced forward max impulse speed by 1/11"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7818
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase forward max impulse speed by 10%"
 msgstr "augmenter la vitesse maximale des moteurs avant de 10%"
@@ -6517,6 +7102,7 @@ msgid "reduced range by 1/8, increased arc width by 7/20"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7960
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by ~14%, decrease arc width by ~26%"
 msgstr "réduire la largeur des faisceaux ~26%, augmenter leur portée ~14%"
@@ -6527,6 +7113,7 @@ msgid "removed homing capability"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7976
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add homing capability"
 msgstr "ajouter la capacité de tir de homing"
@@ -6537,6 +7124,7 @@ msgid "reduced HVLI capacity by 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7977
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase HVLI capacity by 20%"
 msgstr "augmenter la capacité de stockage des HVLI de 20%"
@@ -6547,11 +7135,13 @@ msgid "removed two small HVLI tubes, reduced HVLI capacity by 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7978
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add two small HVLI tubes, increase HVLI capacity by 1/3"
 msgstr "ajouter 2 tubes légers HVLI, augmenter le stockage HVLI de 1/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7979
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce tube load speed by ~17%"
 msgstr "réduire le temps de chargement des tubes d'environ 17%"
@@ -6563,6 +7153,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7981
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7988
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add two more small HVLI tubes"
 msgstr "ajouter 2 tubes légers HVLI supplémentaires"
@@ -6573,6 +7164,7 @@ msgid "reduced capacity: homing:50%, HVLI: 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7982
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: homing:100%, HVLI:25%"
 msgstr "augmenter la capacité de stockage : homing : 100%, HVLI : 25%"
@@ -6583,11 +7175,13 @@ msgid "switched central tube from medium to small"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7983
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make central tube medium sized"
 msgstr "agrandir un tube central en taille moyenne"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7984
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce small tube load time by 20%"
 msgstr "réduire le temps de chargement des tubes légers de 20%"
@@ -6598,16 +7192,19 @@ msgid "reduced capacity: homing:1/3, HVLI: 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7985
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: homing:50%, HVLI:20%"
 msgstr "augmenter la capacité de stockage : homing : 50%, HVLI : 20%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7986
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce tube load time by ~23%"
 msgstr "réduire le temps de chargement des tubes d'environ 23%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7987
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase HVLI capacity by ~17%"
 msgstr "augmenter la capacité de stockage des HVLI d'environ 17%"
@@ -6618,11 +7215,13 @@ msgid "removed two small HVLI tubes"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7989
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase HVLI capacity by ~14%"
 msgstr "augmenter la capacité de stockage des HVLI d'environ 14%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7990
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: homing:1/3, HVLI:25%"
 msgstr "augmenter la capacité de stockage : homing : 1/3, HVLI : 25%"
@@ -6638,6 +7237,7 @@ msgid "reduced rear acceleration by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8133
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear acceleration by 25%"
 msgstr "booster l'accélération arrière de 25%"
@@ -6648,6 +7248,7 @@ msgid "reduced max rear impulse by 1/8"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8141
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max rear impulse by ~15%"
 msgstr "augmenter la vitesse max des moteurs arrière d'environ 15%"
@@ -6658,6 +7259,7 @@ msgid "reduced impulse by 1/6"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8173
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max impulse by 20%"
 msgstr "augmenter la vitesse max des moteurs de 20%"
@@ -6669,6 +7271,7 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8181
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8529
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase acceleration by 20%"
 msgstr "augmenter l'accélération de 20%"
@@ -6679,37 +7282,44 @@ msgid "removed warp speed by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8315
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase damage by ~42%"
 msgstr "augmenter les dégâts des faisceaux laser d'environ 42%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8335
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase turret speed by 2/3"
 msgstr "augmenter la vitesse de rotation des tourelles laser de 2/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8345
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by ~24%"
 msgstr "réduire le temps de cycle des faisceaux laser ~24%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8357
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8677
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make broadside tubes medium sized"
 msgstr "agrandir les tubes latéraux en taille moyenne"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8359
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add a mine tube and mine"
 msgstr "ajouter un tube de mine"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8360
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease broadside load times by ~17%"
 msgstr "réduire le temps de chargement des tubes latéraux de ~17%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8361
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double missile capacity"
 msgstr "doubler la capacité de stockage des missiles"
@@ -6721,66 +7331,79 @@ msgid "make broadside tubes large sized"
 msgstr "agrandir les tubes latéraux en taille large ??Pluriel??"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8364
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease broadside load time by 20%"
 msgstr "réduire le temps de chargement des tubes latéraux de 20%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8365
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase missile capacity by 1/3"
 msgstr "augmenter la capacité de stockage des missiles de 1/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8366
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase missile capacity by 25%"
 msgstr "augmenter la capacité de stockage des missiles de 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8427
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by ~28%"
 msgstr "augmenter la puissance des boucliers d'environ 28%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8470
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~39%"
 msgstr "renforcer la solidité de la coque d'environ 39%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8494
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear acceleration by 1/3"
 msgstr "booster l'accélération arrière de 1/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8627
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase front damage by 50%"
 msgstr "augmente les dégâts des faisceaux laser à l'avant de 50%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8633
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase front range by 25%"
 msgstr "augmenter la portée des faisceaux laser avant de 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8645
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear arc by 1/3"
 msgstr "augmenter l'amplitude des arcs des faisceaux arrière de 1/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8663
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double damage"
 msgstr "doubler les dégâts des faisceaux laser"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8675
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add broadsides for nukes, EMPs and HVLIs"
 msgstr "ajouter des tubes latéraux pour les nuke, EMP et HVLI"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8676
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase EMP capacity by 25%"
 msgstr "augmenter la capacité de stockage des EMP de 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8678
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce front tubes' load time by 20%"
 msgstr "réduire le temps de chargement des tubes avant de 20%"
@@ -6788,21 +7411,25 @@ msgstr "réduire le temps de chargement des tubes avant de 20%"
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8680
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9036
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9344
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add mining tube and mines"
 msgstr "ajouter un tube de mine"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8681
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce mine load time by ~17%"
 msgstr "réduire le temps de chargement des mines d'environ 17%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8682
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add rear homing tube"
 msgstr "ajouter un tube de homing à l'arrière"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8683
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: homing:1/3, HVLI:50%"
 msgstr "augmenter la capacité de stockage : homing : 1/3, HVLI : 50%"
@@ -6814,21 +7441,25 @@ msgid "make forward tubes medium sized"
 msgstr "agrandir les tubes avant en taille moyenne"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8686
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make rear mine tube large sized"
 msgstr "agrandir un tube arrière pour mine en taille large"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8687
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: nuke:50%, EMP:20%, HVLI:1/3"
 msgstr "augmenter la capacité de stockage : nuke : 50%, EMP : 20%, HVLI : 1/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8688
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce load time on broadside and rear tubes by ~18%"
 msgstr "réduire le temps de charge des tubes latéraux et arrière ~18%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8689
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Add HVLI capability to rear tube"
 msgstr "ajouter la capacité de tir de HVLI au tube arrière"
@@ -6836,36 +7467,43 @@ msgstr "ajouter la capacité de tir de HVLI au tube arrière"
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8867
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9187
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9488
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase acceleration by 1/3"
 msgstr "augmenter l'accélération de 1/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9037
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase tube load speed by ~23%"
 msgstr "augmenter la vitesse de chargement des tubes ~23%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9038
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add small nuke tubes and nukes"
 msgstr "ajouter un espace de stockage et des tubes légers pour nuke"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9039
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make homing tube medium sized"
 msgstr "agrandir un tube pour homing en taille moyenne"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9040
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add small EMP tubes and EMPs"
 msgstr "ajouter un espace de stockage et des tubes légers pour EMP"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9041
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: nuke:50%, EMP:1/3, mine:50%"
 msgstr "augmenter la capacité de stockage : nuke : 50%, EMP : 1/3, mine : 50%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9042
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make homing tube large sized"
 msgstr "agrandir un tube pour homing en taille large"
@@ -6877,56 +7515,67 @@ msgid "add HVLI capability to large tube and HVLIs"
 msgstr "ajouter la capacité de tir de HVLI au tube large et des HVLI"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9044
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: nuke:1/3, mine:1/3, HVLI:25%"
 msgstr "augmenter le stockage : nuke : 1/3, mine : 1/3, HVLI : 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9162
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~4%"
 msgstr "renforcer la solidité de la coque d'environ 4%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9180
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase impulse max speed by 20%"
 msgstr "augmenter la vitesse maximale des moteurs de 20%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9222
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max rear impulse speed by ~11%"
 msgstr "augmenter la vitesse maximale des moteurs arrière ~11%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9229
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver boost by 1/3"
 msgstr "booster la manœuvre de combat de 1/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9236
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 50%"
 msgstr "booster les manœuvres de combat latérales de 50%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9315
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by 1/3"
 msgstr "diminuer le temps de cycle des faisceaux laser de 1/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9342
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add forward HVLI tube and HVLIs"
 msgstr "ajouter un tube HVLI avant et du stockage HVLI"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9343
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add heavy broadsides and missiles"
 msgstr "monter des tubes latéraux et ajouter du stockage de missiles lourds"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9345
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add another forward tube and mining tube"
 msgstr "ajouter un autre tube à l'avant et un tube de mine"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9346
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double capacity: nuke, EMP, mine"
 msgstr "doubler la capacité de stockage des nuke, EMP et mines"
@@ -6938,36 +7587,43 @@ msgid "make front and broadside homing tubes large"
 msgstr "monter des tubes larges latéraux et à l'avant pour homing"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9348
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: homing:2/3, mine:50%, HVLI:2/3"
 msgstr "augmenter le stockage : homing 2/3, mine 50%, HVLI 2/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9349
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease tube load time for heavy broadsides"
 msgstr "réduire le temps de chargement des tubes latéraux larges"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9350
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase capacity: homing:20% HVLI:60%"
 msgstr "augmenter la capacité de stockage : homing : 20%, HVLI : 60%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9471
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~8%"
 msgstr "renforcer la solidité de la coque d'environ 8%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9509
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse by 25%"
 msgstr "augmenter la vitesse max des moteurs avant de 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9543
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 15k jump drive"
 msgstr "ajouter un moteur de téléportation de 15U de distance"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9580
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range scan range by 20%"
 msgstr "augmenter la portée du scanner longue portée de 20%"
