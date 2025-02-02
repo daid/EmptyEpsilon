@@ -4144,8 +4144,8 @@ msgid ""
 "little more slowly than the WX. This little bomber packs quite a whallop."
 msgstr ""
 "Le Dragon-WZ est essentiellement un Dragon-WX (WX-Lindworm) de série "
-"possédant plus de HVLI, de missiles à tête chercheuse (Homing) et des armes "
-"nucléaires supplémentaires (Nuke).\n"
+"possédant plus de HVLIs, de missiles à tête chercheuse (Homings) et des "
+"armes nucléaires supplémentaires (Nukes).\n"
 "\n"
 "Ils ont dû retirer une partie de l'armure pour que les missiles "
 "supplémentaires s'adaptent, du coup la coque est plus vulnérable. Le WZ "
@@ -4339,25 +4339,25 @@ msgstr ""
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f u/min"
-msgstr "%.1f u/min"
+msgstr "%.1fu/min"
 
 #: scripts/scenario_74_omicron.lua:9226
 #, lua-format
 msgctxt "scienceDB"
 msgid "Beam weapon %i:%i"
-msgstr "Faisceaux laser %i:%i"
+msgstr "Faisc.: cap %i° arc %i°"
 
 #: scripts/scenario_74_omicron.lua:9230
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f Dmg / %.1f sec"
-msgstr "%.1f Dmg / %.1f sec"
+msgstr "Dégâts %.1f   Cycle %.1fs"
 
 #: scripts/scenario_74_omicron.lua:9249
 #, lua-format
 msgctxt "scienceDB"
 msgid "Storage %s"
-msgstr "Stockage %s"
+msgstr "Stock %s"
 
 #: scripts/scenario_74_omicron.lua:9483
 #, lua-format

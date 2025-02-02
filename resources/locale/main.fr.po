@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-30 22:27+0100\n"
+"PO-Revision-Date: 2025-02-02 19:37+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -16,22 +16,22 @@ msgstr ""
 #: src/scienceDatabase.cpp:397
 msgctxt "database direction"
 msgid "Front"
-msgstr "Avant"
+msgstr "avant"
 
 #: src/scienceDatabase.cpp:399
 msgctxt "database direction"
 msgid "Right"
-msgstr "Droite"
+msgstr "droit"
 
 #: src/scienceDatabase.cpp:401
 msgctxt "database direction"
 msgid "Left"
-msgstr "Gauche"
+msgstr "gauche"
 
 #: src/scienceDatabase.cpp:403
 msgctxt "database direction"
 msgid "Rear"
-msgstr "Arrière"
+msgstr "arrière"
 
 #: src/scienceDatabase.cpp:426
 msgctxt "database"
@@ -96,7 +96,7 @@ msgstr "Coque"
 #: src/scienceDatabase.cpp:520
 msgctxt "database"
 msgid "Move speed"
-msgstr "Vit. de mouvement"
+msgstr "Vit. de dépl. avant"
 
 #: src/scienceDatabase.cpp:520 src/scienceDatabase.cpp:521
 #: src/scienceDatabase.cpp:528
@@ -107,7 +107,7 @@ msgstr "{speed}u/min"
 #: src/scienceDatabase.cpp:521
 msgctxt "database"
 msgid "Reverse move speed"
-msgstr "Vit. arrière mvt"
+msgstr "Vit. de dépl. arrière"
 
 #: src/scienceDatabase.cpp:524
 msgctxt "database"
@@ -127,7 +127,7 @@ msgstr "Vitesse lumière"
 #: src/scienceDatabase.cpp:533
 msgctxt "database"
 msgid "Jump range"
-msgstr "Portée de saut"
+msgstr "Téléportation"
 
 #: src/scienceDatabase.cpp:534
 msgctxt "database"
@@ -141,7 +141,7 @@ msgstr "Faisceau {direction}"
 #: src/scienceDatabase.cpp:545
 msgctxt "database"
 msgid "{damage} Dmg / {interval} sec"
-msgstr "{damage} dégâts / {interval} sec"
+msgstr "Dégâts {damage}   Cycle {interval}s"
 
 #: src/scienceDatabase.cpp:555
 msgctxt "database"
@@ -161,11 +161,11 @@ msgstr "Tube large {direction}"
 #: src/scienceDatabase.cpp:566
 msgctxt "database"
 msgid "{loadtime} sec"
-msgstr "{loadtime} sec"
+msgstr "Vit. de charge {loadtime}s"
 
 #: src/scienceDatabase.cpp:574
 msgid "Storage {weapon}"
-msgstr "Stockage {weapon}"
+msgstr "Stock {weapon}"
 
 #: src/scienceDatabase.cpp:584
 msgctxt "database"
