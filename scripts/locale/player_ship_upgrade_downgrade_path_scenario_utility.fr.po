@@ -15,7 +15,6 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Ship Yard"
 msgstr "Chantiers navals"
@@ -346,7 +345,7 @@ msgid "Level %2i"
 msgstr "Niveau %2i"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:50
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "%s beam weapon characteristics."
 msgstr "Caractéristiques du système de faisceaux laser de %s.\n"
@@ -357,60 +356,60 @@ msgstr "Caractéristiques du système de faisceaux laser de %s.\n"
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:217
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:245
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:274
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "%s An upgrade to level %i would %s."
 msgstr ""
 "%s\n"
-"Une ** amélioration de niveau %i va %s."
+"Une amélioration de niveau %i va %s."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:56
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "Beam %i Direction"
-msgstr ""
+msgstr "Faisceau %i : Cap"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:57
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%i Arc, Range"
-msgstr ""
+msgstr "Faisceau %i : Arc   Portée"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:58
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%i Cycle, Damage"
-msgstr ""
+msgstr "Faisceau %i : Cycle   Dégâts"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:59
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%s degrees"
-msgstr ""
+msgstr "%s°"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:60
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%s degrees, %.2fu"
-msgstr ""
+msgstr "%s°   %.2fu"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:61
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%.1f seconds, %.1f"
-msgstr ""
+msgstr "%.1fs   %.1f"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:63
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%i Turret Arc, Turn"
-msgstr ""
+msgstr "Tourelle %i : Arc    Vitesse rotation"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:64
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%s degrees, %.1f"
-msgstr ""
+msgstr "%s°   %.1f"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:69
 #, fuzzy
@@ -435,7 +434,7 @@ msgstr ""
 "- Une capacité de stockage accrue."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:81
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid ""
 "%s missile system characteristics.\n"
@@ -446,17 +445,18 @@ msgstr ""
 "Caractéristiques du système de missiles de %s.\n"
 "    S = Léger (2x plus rapide et faible)\n"
 "    M = Moyen (taille standard)\n"
-"    L = Large (2x plus puissant et lent)\n"
+"    L = Large (2x plus puissant et lent)"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:83
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid ""
 "%s\n"
 "An upgrade to level %i would %s."
 msgstr ""
 "%s\n"
-"Une -- amélioration de niveau %i va %s."
+"\n"
+"Une amélioration de niveau %i va %s."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:87
 #, lua-format
@@ -581,37 +581,33 @@ msgstr ""
 "- L'ajout d'un arc de bouclier."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:167
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "%s shield system characteristics."
-msgstr "Caractéristiques du système de boucliers de %s."
+msgstr "Caractéristiques du système de boucliers de %s.\n"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:172
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Shield strength"
-msgstr "Résistance boucliers"
+msgstr "Boucliers"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:176
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Front shield strength"
-msgstr "Résistance boucliers avant"
+msgstr "Boucliers avant"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:178
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Rear shield strength"
-msgstr "Résistance boucliers arrière"
+msgstr "Boucliers arrière"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:183
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Hull"
 msgstr "Coque"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:186
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "These are the hull level progressions for the %s"
 msgstr ""
@@ -622,25 +618,23 @@ msgstr ""
 "structurel."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:195
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "%s hull characteristics."
 msgstr "Caractéristiques de la coque de %s.\n"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:200
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Hull strength"
 msgstr "Résistance coque"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:203
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Impulse systems"
 msgstr "Moteurs à impulsion"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:206
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "These are the impulse systems level progressions for the %s"
 msgstr ""
@@ -655,13 +649,12 @@ msgstr ""
 "latérale ou les deux)."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:215
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "%s impulse system characteristics."
-msgstr "Caractéristiques des systèmes d'impulsion de %s.\n"
+msgstr "Caractéristiques des systèmes d'impulsion de %s."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:220
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Forward speed"
 msgstr "Vit. de dépl. avant"
@@ -675,31 +668,27 @@ msgid "%.1f units/minute"
 msgstr "%.1fu/min"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:221
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Reverse speed"
 msgstr "Vit. de dépl. arrière"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:222
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Forward acceleration"
 msgstr "Accélération avant"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:223
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Reverse acceleration"
 msgstr "Accélération arrière"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:224
-#, fuzzy
 msgctxt "scienceDB"
 msgid "Turn speed"
 msgstr "Vit. de rotation"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:224
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "%.1f degrees per second"
 msgstr "%.1f°/sec"
@@ -729,7 +718,6 @@ msgid "%i (sideways)"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:231
-#, fuzzy
 msgctxt "scienceDB"
 msgid "FTL system"
 msgstr "FTL : téléportation, vitesse lumière"
@@ -755,7 +743,7 @@ msgstr ""
 msgctxt "scienceDB"
 msgid "%s Faster Than Light (FTL) drive system characteristics."
 msgstr ""
-"Caractéristiques des systèmes FTL : téléportation, vitesse lumière de %s."
+"Caractéristiques des systèmes FTL : téléportation, vitesse lumière de %s.\n"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:249
 msgctxt "scienceDB"
@@ -798,7 +786,7 @@ msgid "Sensor system"
 msgstr "Capteurs"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:263
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "These are the sensor system level progressions for the %s"
 msgstr ""
@@ -811,7 +799,7 @@ msgstr ""
 "- Une portée améliorée pour ces scanners de proximité automatisés."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:272
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "%s sensor system characteristics."
 msgstr "Caractéristiques du système de capteurs de %s.\n"
@@ -820,43 +808,44 @@ msgstr "Caractéristiques du système de capteurs de %s.\n"
 #, fuzzy
 msgctxt "scienceDB"
 msgid "Short range sensors"
-msgstr "Capteurs courte portée"
+msgstr "Courte portée"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:277
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%.1f units (Helm, Weapons)"
-msgstr ""
+msgstr "%.1fu (Navigation, Armement)"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:278
 #, fuzzy
 msgctxt "scienceDB"
 msgid "Long range sensors"
-msgstr "Capteurs longue portée"
+msgstr "Longue portée"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:278
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "%.1f units (Science)"
-msgstr ""
+msgstr "%.1fu (Science)"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:281
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:283
+#, fuzzy
 msgctxt "scienceDB"
 msgid "Automated scan"
-msgstr ""
+msgstr "Scanner de proximité automatisé"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:281
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "Within %.1f unit"
-msgstr ""
+msgstr "Rayon d'action %.1fu"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:283
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "scienceDB"
 msgid "Within %.1f units"
-msgstr ""
+msgstr "Rayon d'action %.1fu"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:300
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4146
@@ -1162,7 +1151,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9439
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9449
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9459
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 25%"
 msgstr "augmenter la puissance des boucliers de 25%"
@@ -1181,7 +1169,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1481
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7268
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8078
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 50%"
 msgstr "augmenter la puissance des boucliers de 50%"
@@ -1220,7 +1207,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8804
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9129
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9444
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add rear shield arc"
 msgstr "ajouter un arc de bouclier arrière"
@@ -1245,7 +1231,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5136
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6801
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8819
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by 25%"
 msgstr "augmenter la puissance des boucliers avant de 25%"
@@ -1264,7 +1249,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4731
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5142
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8814
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by 25%"
 msgstr "augmenter la puissance des boucliers arrière de 25%"
@@ -1304,7 +1288,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8095
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8431
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8809
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 1/3"
 msgstr "augmenter la puissance des boucliers de 1/3"
@@ -1315,7 +1298,6 @@ msgid "reduced shield charge capacity by ~13%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:476
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 15%"
 msgstr "augmenter la puissance des boucliers de 15%"
@@ -1326,7 +1308,6 @@ msgid "reduced shield charge capacity by 8%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:482
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by ~13%"
 msgstr "augmenter la puissance des boucliers d'environ 13%"
@@ -1367,7 +1348,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8468
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9160
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9469
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by 25%"
 msgstr "renforcer la solidité de la coque de 25%"
@@ -1389,7 +1369,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7323
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8839
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9164
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~17%"
 msgstr "renforcer la solidité de la coque d'environ 17%"
@@ -1400,7 +1379,6 @@ msgid "decreased hull max by ~22%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:494
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~29%"
 msgstr "renforcer la solidité de la coque d'environ 29%"
@@ -1420,7 +1398,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4350
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8842
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9159
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~11%"
 msgstr "renforcer la solidité de la coque d'environ 11%"
@@ -1466,7 +1443,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8469
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9161
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9163
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by 20%"
 msgstr "renforcer la solidité de la coque de 20%"
@@ -1496,10 +1472,9 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1533
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2029
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2515
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add combat maneuver forward boost"
-msgstr "ajouter une manœuvre de combat vers l'avant"
+msgstr "ajouter une manœuvre de combat avant"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:523
 msgctxt "downgrade-comms"
@@ -1588,7 +1563,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver forward boost by 50%"
-msgstr "booster la manœuvre de combat vers l'avant de 50%"
+msgstr "booster la manœuvre de combat avant de 50%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:563
 msgctxt "downgrade-comms"
@@ -1659,7 +1634,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver forward boost by 1/3"
-msgstr "booster la manœuvre de combat vers l'avant de 1/3"
+msgstr "booster la manœuvre de combat avant de 1/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:595
 msgctxt "downgrade-comms"
@@ -2043,7 +2018,6 @@ msgstr "réduire les capteurs longue portée de 25%"
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8277
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8955
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9282
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by 1/3"
 msgstr "augmenter les capteurs longue portée de 1/3"
@@ -2085,10 +2059,9 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8582
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8951
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9278
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 2 unit automated proximity scanner"
-msgstr "ajouter un scanner de proximité automatisé à 2 unités"
+msgstr "ajouter un scanner de proximité automatisé de 2 unités"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:721
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1200
@@ -2105,7 +2078,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4517
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4937
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5347
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by 10%"
 msgstr "augmenter les capteurs longue portée de 10%"
@@ -2127,7 +2099,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4522
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4942
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5352
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase short range sensors by 12.5%"
 msgstr "augmenter les capteurs courte portée de 12,5%"
@@ -2162,7 +2133,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6630
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6985
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7522
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by ~14%"
 msgstr "augmenter les capteurs longue portée d'environ 14%"
@@ -2193,7 +2163,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8594
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8967
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9294
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by 20%"
 msgstr "augmenter les capteurs longue portée de 20%"
@@ -2226,7 +2195,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4957
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5367
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5829
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase short range sensors by ~11%"
 msgstr "augmenter les capteurs courte portée d'environ 11%"
@@ -2253,7 +2221,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6625
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6980
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7517
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by ~17%"
 msgstr "augmenter les capteurs longue portée d'environ 17%"
@@ -2269,7 +2236,6 @@ msgid "reduced automated proximity scanner by 1/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:760
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase automated proximity scanner by 50%"
 msgstr "augmenter le scanner de proximité automatisé de 50%"
@@ -2464,7 +2430,6 @@ msgid "decreased missile capacity"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:835
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase missile capacity"
 msgstr "augmenter la capacité de stockage des missiles"
@@ -2664,7 +2629,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver forward boost by 25%"
-msgstr "booster la manœuvre de combat vers l'avant de 25%"
+msgstr "booster la manœuvre de combat avant de 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1042
 msgctxt "downgrade-comms"
@@ -2698,7 +2663,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver forward boost by 60%"
-msgstr "booster la manœuvre de combat vers l'avant de 60%"
+msgstr "booster la manœuvre de combat avant de 60%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1074
 msgctxt "downgrade-comms"
@@ -2710,7 +2675,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 25% and boost by ~14%"
-msgstr "booster la manœuvre de combat : latérale de 25% ; avant ~14%"
+msgstr "booster la manœuvre de combat avant ~14%, cotés 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1090
 msgctxt "downgrade-comms"
@@ -2871,7 +2836,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "add a one unit automated proximity scanner"
-msgstr "ajouter un scanner de proximité automatisé à 1 unité"
+msgstr "ajouter un scanner de proximité automatisé de 1 unité"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1195
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2218
@@ -3647,7 +3612,6 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1864
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2350
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add mines"
 msgstr "ajouter des mines"
@@ -3855,7 +3819,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6414
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6825
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7309
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by 20%"
 msgstr "augmenter la puissance des boucliers arrière de 20%"
@@ -4595,7 +4558,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 1 unit automated proximity scanner"
-msgstr "ajouter un scanner de proximité automatisé à 1 unité"
+msgstr "ajouter un scanner de proximité automatisé de 1 unité"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3172
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3634
@@ -5152,7 +5115,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5154
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6041
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8829
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 10%"
 msgstr "augmenter la puissance des boucliers de 10%"
@@ -5446,7 +5408,6 @@ msgid "reduced read shield charge capacity by 7/40"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4335
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by ~21%"
 msgstr "augmenter la puissance des boucliers arrière d'environ 21%"
@@ -5532,7 +5493,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 3 unit automated proximity scanner"
-msgstr "ajouter un scanner de proximité automatisé à 3 unités"
+msgstr "ajouter un scanner de proximité automatisé de 3 unités"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4602
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4993
@@ -6938,7 +6899,7 @@ msgstr "augmenter les capteurs courte portée de 20%"
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 4 unit automated proximity scanner"
-msgstr "ajouter un scanner de proximité automatisé à 4 unités"
+msgstr "ajouter un scanner de proximité automatisé de 4 unités"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7547
 #, fuzzy

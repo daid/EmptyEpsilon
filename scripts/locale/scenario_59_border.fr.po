@@ -3651,7 +3651,7 @@ msgstr ""
 #: scripts/scenario_59_border.lua:6333
 msgctxt "scienceDB"
 msgid "May improve maneuverability"
-msgstr "Peut améliorer la manoeuvre"
+msgstr "Peut améliorer la manœuvre"
 
 #: scripts/scenario_59_border.lua:6348
 #, lua-format
