@@ -3786,9 +3786,10 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "sensors"
-msgstr "Les capteurs"
+msgstr "Les capteurs radar"
 
 #: scripts/scenario_44_outpost.lua:5436
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "Sensor upgrades refer to the ship's ability to detect other objects. They "
@@ -3796,10 +3797,12 @@ msgid ""
 "automated proximity scanners for ships or improved range for automated "
 "proximity scanners."
 msgstr ""
-"Les capteurs d'un vaisseau permettent de détecter des objets dans l'espace.\n"
+"Les capteurs des consoles radar d'un vaisseau permettent de détecter des "
+"objets dans l'espace.\n"
 "\n"
-"Les mises à niveau des capteurs peuvent inclure :\n"
-"- Une portée de detection accrue des capteurs à courte et à longue portée.\n"
+"Les mises à niveau de capteurs peuvent inclure :\n"
+"- Une portée de detection accrue des capteurs radar courte et longue "
+"portée.\n"
 "- Une installation de scanners de proximité automatisés de 1er niveau.\n"
 "- Une portée améliorée pour ces scanners de proximité automatisés."
 
