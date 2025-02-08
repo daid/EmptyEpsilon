@@ -576,7 +576,7 @@ msgstr "9°/sec"
 #: scripts/scenario_53_escape.lua:431
 msgctxt "scienceDB"
 msgid "Beam weapon 90:200"
-msgstr "Faisc.: cap 90° arc 200°"
+msgstr "Faisc.D: cap 90° arc 200°"
 
 #: scripts/scenario_53_escape.lua:431 scripts/scenario_53_escape.lua:432
 msgctxt "scienceDB"
@@ -586,7 +586,7 @@ msgstr "Portée:1.2u  Dégâts:5  Cycle:6s"
 #: scripts/scenario_53_escape.lua:432
 msgctxt "scienceDB"
 msgid "Beam weapon 270:200"
-msgstr "Faisc.: cap -90° arc 200°"
+msgstr "Faisc.G: cap -90° arc 200°"
 
 #: scripts/scenario_53_escape.lua:433
 msgctxt "scienceDB"
