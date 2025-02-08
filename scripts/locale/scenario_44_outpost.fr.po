@@ -1759,7 +1759,7 @@ msgid "Docking services status"
 msgstr "État des services d'accueil"
 
 #: scripts/scenario_44_outpost.lua:3768
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s docking services status:"
 msgstr "État des services d'accueil de la station %s :\n"
