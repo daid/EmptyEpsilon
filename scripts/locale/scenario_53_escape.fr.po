@@ -38,14 +38,12 @@ msgstr ""
 "Nécessite un vaisseau avec un équipage complet. L'ingénierie et la science "
 "seront très occupés au début.\n"
 "\n"
-"Version 5.0.10 - Janv. 2025\n"
+"Version 5.0.11 - Janv. 2025\n"
 "\n"
 "- Titre original : Escape\n"
 "- Auteur : Xansta (2019)\n"
 "- Traduction FR : Muerte (Mai 24)\n"
-"Texte vérifié (Janv. 25)\n"
-"Le scénario contient actuellement des bogues et est susceptible de ne pas "
-"fonctionner correctement. Muerte (Déc. 24)\n"
+"Texte et scénario vérifiés (Fév. 25)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -494,7 +492,7 @@ msgstr "Sous-classe"
 #: scripts/scenario_53_escape.lua:386
 msgctxt "scienceDB"
 msgid "Move speed"
-msgstr "Vit. de mouvement"
+msgstr "Vit. de déplacement"
 
 #: scripts/scenario_53_escape.lua:387
 msgctxt "scienceDB"
@@ -543,12 +541,12 @@ msgstr "Croiseur : transport blindé"
 #: scripts/scenario_53_escape.lua:426
 msgctxt "scienceDB"
 msgid "Repair Crew"
-msgstr "réparateurs"
+msgstr "Réparateurs"
 
 #: scripts/scenario_53_escape.lua:427
 msgctxt "scienceDB"
 msgid "Jump Range"
-msgstr "Portée de saut"
+msgstr "Téléportation"
 
 #: scripts/scenario_53_escape.lua:427
 msgctxt "scienceDB"
@@ -578,7 +576,7 @@ msgstr "9°/sec"
 #: scripts/scenario_53_escape.lua:431
 msgctxt "scienceDB"
 msgid "Beam weapon 90:200"
-msgstr "Faisc. laser 90°:200°"
+msgstr "Faisc.: cap 90° arc 200°"
 
 #: scripts/scenario_53_escape.lua:431 scripts/scenario_53_escape.lua:432
 msgctxt "scienceDB"
@@ -588,32 +586,32 @@ msgstr "Portée:1.2u  Dégâts:5  Cycle:6s"
 #: scripts/scenario_53_escape.lua:432
 msgctxt "scienceDB"
 msgid "Beam weapon 270:200"
-msgstr "Faisc. laser 270°:200°"
+msgstr "Faisc.: cap -90° arc 200°"
 
 #: scripts/scenario_53_escape.lua:433
 msgctxt "scienceDB"
 msgid "Tube 0"
-msgstr "Tube Avant"
+msgstr "Tube avant 0°"
 
 #: scripts/scenario_53_escape.lua:433 scripts/scenario_53_escape.lua:434
 msgctxt "scienceDB"
 msgid "20 sec"
-msgstr "20 sec"
+msgstr "Vit. de charge 20s"
 
 #: scripts/scenario_53_escape.lua:434
 msgctxt "scienceDB"
 msgid "Tube 180"
-msgstr "Tube Arrière"
+msgstr "Tube arrière 180°"
 
 #: scripts/scenario_53_escape.lua:435
 msgctxt "scienceDB"
 msgid "Storage Homing"
-msgstr "Stockage Homing"
+msgstr "Stock Homing"
 
 #: scripts/scenario_53_escape.lua:436
 msgctxt "scienceDB"
 msgid "Storage HVLI"
-msgstr "Stockage HVLI"
+msgstr "Stock HVLI"
 
 #: scripts/scenario_53_escape.lua:578
 msgctxt "scienceDescription-planet"
@@ -2381,10 +2379,10 @@ msgid "Where are you headed?"
 msgstr "Où allez-vous ?"
 
 #: scripts/scenario_53_escape.lua:2723
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous ? (coût de l'information : %.1f rép)"
+msgstr "Où allez-vous ? (coût de l'information : %f rép)"
 
 #: scripts/scenario_53_escape.lua:2725
 msgctxt "needRep-comms"
@@ -2456,27 +2454,37 @@ msgstr "%s %i:%.2i"
 #: scripts/scenario_53_escape.lua:2889
 msgctxt "air-msgEngineer"
 msgid "Environmental systems show limited air remaining"
-msgstr "Les systèmes environnementaux indiquent qu'il reste très peu d'air."
+msgstr ""
+"Les systèmes environnementaux du vaisseau indiquent qu'il reste très peu "
+"d'air."
 
 #: scripts/scenario_53_escape.lua:2897
 msgctxt "air-msgEngineer+"
 msgid "Environmental systems show limited air remaining"
-msgstr "Les systèmes environnementaux indiquent qu'il reste très peu d'air."
+msgstr ""
+"Les systèmes environnementaux du vaisseau indiquent qu'il reste très peu "
+"d'air."
 
 #: scripts/scenario_53_escape.lua:2905
 msgctxt "air-msgDamageControl"
 msgid "Environmental systems show limited air remaining"
-msgstr "Les systèmes environnementaux indiquent qu'il reste très peu d'air."
+msgstr ""
+"Les systèmes environnementaux du vaisseau indiquent qu'il reste très peu "
+"d'air."
 
 #: scripts/scenario_53_escape.lua:2913
 msgctxt "air-msgScience"
 msgid "Environmental systems show limited air remaining"
-msgstr "Les systèmes environnementaux indiquent qu'il reste très peu d'air."
+msgstr ""
+"Les systèmes environnementaux du vaisseau indiquent qu'il reste très peu "
+"d'air."
 
 #: scripts/scenario_53_escape.lua:2921
 msgctxt "air-msgOperations"
 msgid "Environmental systems show limited air remaining"
-msgstr "Les systèmes environnementaux indiquent qu'il reste très peu d'air."
+msgstr ""
+"Les systèmes environnementaux du vaisseau indiquent qu'il reste très peu "
+"d'air."
 
 #: scripts/scenario_53_escape.lua:2927
 msgctxt "defeat-msgMainscreen"
