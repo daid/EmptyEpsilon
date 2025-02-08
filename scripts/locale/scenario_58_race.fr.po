@@ -16,7 +16,7 @@ msgstr ""
 
 # Scenario name
 msgid "Fermi 500"
-msgstr ""
+msgstr "Course Fermi 500"
 
 # Scenario description
 msgid ""
@@ -37,32 +37,47 @@ msgid ""
 "\n"
 "Version 2.2"
 msgstr ""
-"EN COURS DE TRADUCTION : 72%        268/368\n"
-"Version 2.2.2\n"
+"- Durée approx. : ***\n"
+"- Difficulté : ***\n"
+"- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"Race three laps of four waypoints (1 to 2 to 3 to 4 to 1 = 1 lap) in the "
-"shortest time. Play for time by yourself, but have more fun with multiple "
-"player ships.\n"
+"Mission : Faire 3 tours de piste en passant les 4 marqueurs à chaque tour et "
+"atteindre l'arrivée le plus rapidement possible.\n"
+"Vous pouvez jouer seul et essayer de battre votre propre record ou faire une "
+"vraie course à plusieurs vaisseaux contre d'autres concurrents joueurs pour "
+"plus d'amusement.\n"
 "\n"
-"Placement points depend on the number of racers present at the starting "
-"point when the race starts. Precise values are given to Relay at that time. "
-"Each target drone of yours shot earns one point. Shoot an opponent's drone "
-"and they get the point.\n"
+"Les points au classement sont en fonction du nombre de participants présents "
+"au départ de la course. Des valeurs précises sont fournies à l'officier des "
+"communications en temps voulu.\n"
+"Chaque tir sur votre drone cible vous rapporte 1 point. Un tir sur un drone "
+"adverse et le point va à l'adversaire.\n"
 "\n"
-"Before the race starts, scope out the course, visit some stations, maybe "
-"improve your ship for the race. But, watch your time carefully. If you are "
-"not at waypoint 1 at the start of the race, your ship will be destroyed. "
-"Your competitors may also try to destroy you despite being your nominal "
-"allies, so beware"
+"Avant le début de la course, vous pouvez partir en reconnaissance sur le "
+"circuit, visiter certaines stations et peut-être effectuer des mises à "
+"niveau de votre vaisseau. Mais, ATTENTION, surveillez attentivement le "
+"temps. Si vous n'êtes pas au marqueur 1 au départ de la course, vous serez "
+"disqualifiez et votre vaisseau détruit.\n"
+"Vos concurrents peuvent également tenter de vous détruire même s’ils sont "
+"d'une faction alliée, alors méfiez-vous.\n"
+"\n"
+"Version 2.2.2 - Janv. 2025\n"
+"\n"
+"- Titre original : Fermi 500\n"
+"- Auteur : Xansta (2018)\n"
+"- Traduction FR : Muerte (Fév. 25)\n"
+"\n"
+"Communauté française et anglophone sur Discord USN https://discord.gg/"
+"TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Shoot Back"
-msgstr ""
+msgstr "Riposte"
 
 msgctxt "setting"
 msgid "Configures whether the targets along the race course shoot back or not"
-msgstr ""
+msgstr "Définit si les cibles le long du parcours de course ripostent ou non."
 
 msgctxt "Shoot Back"
 msgid "No"
@@ -70,7 +85,7 @@ msgstr "Non"
 
 msgctxt "Shoot Back"
 msgid "Targets along the course do not shoot back"
-msgstr ""
+msgstr "Les cibles le long du parcours ne ripostent pas."
 
 msgctxt "Shoot Back"
 msgid "Yes"
@@ -78,24 +93,28 @@ msgstr "Oui"
 
 msgctxt "Shoot Back"
 msgid "Targets along the course shoot back"
-msgstr ""
+msgstr "Les cibles le long du parcours ripostent."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Chase"
-msgstr ""
+msgstr "Poursuite"
 
 msgctxt "setting"
 msgid "Configures whether or not random enemies will chase the racers"
 msgstr ""
+"Définit si des ennemis aléatoires prennent en chasse ou non les vaisseaux "
+"participants."
 
 msgctxt "Chase"
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 msgctxt "Chase"
 msgid "Random enemies will not appear to chase the racers"
 msgstr ""
+"Des ennemis aléatoires n'apparaissent pas pour prendre en chasse les "
+"participants."
 
 msgctxt "Chase"
 msgid "Yes"
@@ -104,25 +123,30 @@ msgstr "Oui"
 msgctxt "Chase"
 msgid "Random enemies will appear to chase the racers"
 msgstr ""
+"Des ennemis aléatoires apparaissent pour prendre en chasse les participants."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Hazards"
-msgstr ""
+msgstr "Dangers"
 
 msgctxt "setting"
 msgid ""
 "Configures whether or not hazards will appear at the race point markers to "
 "impede the race"
 msgstr ""
+"Définit si des dangers et obstacles apparaissent ou non aux marqueurs de "
+"course."
 
 msgctxt "Hazards"
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 msgctxt "Hazards"
 msgid "No hazards will appear at the race point markers to impede the race"
 msgstr ""
+"Aucun danger n'apparait au niveau des marqueurs pour gêner le déroulement de "
+"la course."
 
 msgctxt "Hazards"
 msgid "Yes"
@@ -131,27 +155,35 @@ msgstr "Oui"
 msgctxt "Hazards"
 msgid "Hazards will appear at the race point markers to impeded the race"
 msgstr ""
+"Des dangers apparaissent au niveau des marqueurs pour gêner le déroulement "
+"de la course."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Ship Name"
-msgstr ""
+msgstr "Nom des vaisseaux"
 
 msgctxt "setting"
 msgid ""
 "Configures whether player ship names and control codes will be predefined or "
 "random. See Game master screen to get control codes"
 msgstr ""
+"Définit si les codes de contrôle et les noms des vaisseaux joueurs sont "
+"prédéfinis ou aléatoires.\n"
+"Voir l'écran du maître de jeu pour obtenir les codes de contrôle."
 
 msgctxt "Ship Name"
 msgid "Predefined"
-msgstr ""
+msgstr "Prédéfini"
 
 msgctxt "Ship Name"
 msgid ""
 "Player ship names and control codes will be predefined as scripted. See Game "
 "master screen to get control codes"
 msgstr ""
+"Les codes de contrôle et les noms des vaisseaux joueurs sont prédéfinis sous "
+"forme de script.\n"
+"Voir l'écran du maître de jeu pour obtenir les codes de contrôle."
 
 msgctxt "Ship Name"
 msgid "Random"
@@ -163,31 +195,34 @@ msgid ""
 "ship control codes will be randomly generated. See Game master screen to get "
 "control codes"
 msgstr ""
+"Les codes de contrôle et les noms des vaisseaux joueurs sont générés/"
+"sélectionnés aléatoirement.\n"
+"Voir l'écran du maître de jeu pour obtenir les codes de contrôle."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Sound"
-msgstr ""
+msgstr "Son de départ"
 
 msgctxt "setting"
 msgid "Configure the start sound to beep or roar"
-msgstr ""
+msgstr "Définit le son de départ de la course."
 
 msgctxt "Sound"
 msgid "Colossus"
-msgstr ""
+msgstr "Colosse"
 
 msgctxt "Sound"
 msgid "Start sound will be Colossus roar"
-msgstr ""
+msgstr "Le son de départ est un rugissement de colosse."
 
 msgctxt "Sound"
 msgid "Fermi"
-msgstr ""
+msgstr "Fermi"
 
 msgctxt "Sound"
 msgid "Start sound will be Pole Position beep"
-msgstr ""
+msgstr "Le son de départ est un bip de pole position."
 
 #: scripts/scenario_58_race.lua:71
 msgctxt "trade-comms"
@@ -375,18 +410,18 @@ msgstr "Reset codes contrôle"
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Start Delay: %i"
-msgstr ""
+msgstr "+ Délai avant départ : %i"
 
 #: scripts/scenario_58_race.lua:578
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Patience: %i"
-msgstr ""
+msgstr "+ Réussite %i"
 
 #: scripts/scenario_58_race.lua:580
 msgctxt "buttonGM"
 msgid "Random PShip Names"
-msgstr ""
+msgstr "Noms vaisseaux aléat."
 
 #: scripts/scenario_58_race.lua:581
 msgctxt "msgGM"
@@ -394,11 +429,13 @@ msgid ""
 "Player ship names will be selected at random.\n"
 "Control codes will be randomly generated"
 msgstr ""
+"Les noms des vaisseaux joueurs seront sélectionnés au hasard.\n"
+"Les codes de contrôle seront générés aléatoirement."
 
 #: scripts/scenario_58_race.lua:586
 msgctxt "buttonGM"
 msgid "+Shoot Back: "
-msgstr ""
+msgstr "+ Riposte : "
 
 #: scripts/scenario_58_race.lua:588 scripts/scenario_58_race.lua:595
 #: scripts/scenario_58_race.lua:602
@@ -415,86 +452,86 @@ msgstr "Non"
 #: scripts/scenario_58_race.lua:593
 msgctxt "buttonGM"
 msgid "+Chase: "
-msgstr ""
+msgstr "+Poursuite : "
 
 #: scripts/scenario_58_race.lua:600
 msgctxt "buttonGM"
 msgid "+Hazards: "
-msgstr ""
+msgstr "+ Dangers : "
 
 #: scripts/scenario_58_race.lua:607
 msgctxt "buttonGM"
 msgid "Show Statistics"
-msgstr ""
+msgstr "Afficher statistiques"
 
 #: scripts/scenario_58_race.lua:608
 msgctxt "msgGM"
 msgid "Not much to show since the game is still paused"
-msgstr ""
+msgstr "Pas grand chose à montrer puisque le jeu est toujours en pause."
 
 #: scripts/scenario_58_race.lua:611
 #, lua-format
 msgctxt "msgGM"
 msgid "Total player ships: %i"
-msgstr ""
+msgstr "- Nombre total de vaisseaux joueurs : %i"
 
 #: scripts/scenario_58_race.lua:615
 #, lua-format
 msgctxt "msgGM"
 msgid "%2i Name:%s, Type:%s"
-msgstr ""
+msgstr " %2i Nom : %s   Type : %s"
 
 #: scripts/scenario_58_race.lua:633
 msgctxt "buttonGM"
 msgid "-From Shoot Back"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_58_race.lua:634
 msgctxt "buttonGM"
 msgid "Shoot Back Yes"
-msgstr ""
+msgstr "Riposte Oui"
 
 #: scripts/scenario_58_race.lua:636 scripts/scenario_58_race.lua:644
 #: scripts/scenario_58_race.lua:656 scripts/scenario_58_race.lua:664
 #: scripts/scenario_58_race.lua:676 scripts/scenario_58_race.lua:684
 msgctxt "buttonGM"
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: scripts/scenario_58_race.lua:642
 msgctxt "buttonGM"
 msgid "Shoot Back No"
-msgstr ""
+msgstr "Riposte Non"
 
 #: scripts/scenario_58_race.lua:653
 msgctxt "buttonGM"
 msgid "-From Chase"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_58_race.lua:654
 msgctxt "buttonGM"
 msgid "Chase Yes"
-msgstr ""
+msgstr "Poursuite Oui"
 
 #: scripts/scenario_58_race.lua:662
 msgctxt "buttonGM"
 msgid "Chase No"
-msgstr ""
+msgstr "Poursuite Non"
 
 #: scripts/scenario_58_race.lua:673
 msgctxt "buttonGM"
 msgid "-From Hazards"
-msgstr ""
+msgstr "- Précédent"
 
 #: scripts/scenario_58_race.lua:674
 msgctxt "buttonGM"
 msgid "Hazards Yes"
-msgstr ""
+msgstr "Dangers Oui"
 
 #: scripts/scenario_58_race.lua:682
 msgctxt "buttonGM"
 msgid "Hazards No"
-msgstr ""
+msgstr "Dangers Non"
 
 #: scripts/scenario_58_race.lua:693 scripts/scenario_58_race.lua:711
 msgctxt "buttonGM"
@@ -505,30 +542,30 @@ msgstr "- Précédent"
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Patience + -> %i"
-msgstr ""
+msgstr "%i Réussite + -> %i"
 
 #: scripts/scenario_58_race.lua:702
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Patience - -> %i"
-msgstr ""
+msgstr "%i Réussite - -> %i"
 
 #: scripts/scenario_58_race.lua:713
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Delay + -> %i"
-msgstr ""
+msgstr "%i Retard + -> %i"
 
 #: scripts/scenario_58_race.lua:720
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Delay - -> %i"
-msgstr ""
+msgstr "%i Retard - -> %i"
 
 #: scripts/scenario_58_race.lua:736
 msgctxt "buttonGM"
 msgid "Show statistics"
-msgstr ""
+msgstr "Afficher statistiques"
 
 #: scripts/scenario_58_race.lua:738
 msgctxt "msgGM"
@@ -536,27 +573,29 @@ msgid ""
 "Current Statistics:\n"
 "Ship: state, laps, waypoint goal, drone pts"
 msgstr ""
+"Statistiques en cours :\n"
+"- Vaisseau : état, tours de course, marqueurs atteints, points de drone"
 
 #: scripts/scenario_58_race.lua:742
 msgctxt "msgGM"
 msgid "alive, "
-msgstr ""
+msgstr "vivant, "
 
 #: scripts/scenario_58_race.lua:744
 msgctxt "msgGM"
 msgid "dead, "
-msgstr ""
+msgstr "mort, "
 
 #: scripts/scenario_58_race.lua:747
 msgctxt "msgGM"
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: scripts/scenario_58_race.lua:754
 #, lua-format
 msgctxt "msgGM"
 msgid "%s%i, %i, %i"
-msgstr ""
+msgstr "%s%i, %i, %i"
 
 #: scripts/scenario_58_race.lua:758
 #, lua-format
@@ -643,7 +682,7 @@ msgid ""
 "    %s:%s"
 msgstr ""
 "%s\n"
-"    %s:%s"
+"  %s : %s"
 
 #: scripts/scenario_58_race.lua:784
 msgctxt "buttonGM"
@@ -657,7 +696,7 @@ msgid ""
 "Note: this data appears on the main screen after the race is complete. If "
 "the race is not complete, what you see here may not be accurate."
 msgstr ""
-"Ligne d'arrivée :\n"
+"Classement ligne d'arrivée :\n"
 "Remarque : ces données apparaissent sur l'écran principal une fois la course "
 "terminée. Si la course n’est pas terminée, ce que vous voyez ici pourrait ne "
 "pas être exact."
@@ -857,7 +896,8 @@ msgid ""
 "%i Seconds remain until start of race"
 msgstr ""
 "\n"
-"   %i secondes restantes jusqu'au début de la course."
+"\n"
+"     - %i secondes jusqu'au début de la course."
 
 #: scripts/scenario_58_race.lua:1670 scripts/scenario_58_race.lua:2404
 #, lua-format
@@ -898,9 +938,7 @@ msgstr "Effectuez-vous des mises à niveau des vaisseaux spatiaux ?"
 #: scripts/scenario_58_race.lua:1683 scripts/scenario_58_race.lua:2366
 msgctxt "upgrade-comms"
 msgid "We don't upgrade spaceships"
-msgstr ""
-"Navré,\n"
-"Nous ne faisons pas de mises à niveau des vaisseaux."
+msgstr "Navré mais nous n'effectuons pas de mises à niveau."
 
 #: scripts/scenario_58_race.lua:1688
 msgctxt "cartographyOffice-comms"
@@ -2088,7 +2126,7 @@ msgstr ""
 #: scripts/scenario_58_race.lua:3009
 msgctxt "msgMainscreen"
 msgid "Race Results"
-msgstr "Résultats de la course"
+msgstr "- Résultats de la course -\n"
 
 #: scripts/scenario_58_race.lua:3014
 #, lua-format
@@ -2107,8 +2145,7 @@ msgid ""
 "drone points"
 msgstr ""
 "\n"
-"Classé par score. Lieu, nom du vaisseau, score, temps en secondes, points de "
-"lieu, points de drone"
+"(Position. vaisseau : score     Temps     Points position/drones)"
 
 #: scripts/scenario_58_race.lua:3030
 #, lua-format
@@ -2117,11 +2154,13 @@ msgid ""
 "\n"
 "%i, %s, %i, %.2f, %i, %i"
 msgstr ""
+"\n"
+"%i. %s : %i points     %.2fs,     %i pts/%i pts"
 
 #: scripts/scenario_58_race.lua:3033
 msgctxt "msgMainscreen"
 msgid "Nobody finished the race."
-msgstr ""
+msgstr "Personne n'a terminé la course."
 
 #: scripts/scenario_58_race.lua:3048
 #, lua-format
@@ -2130,6 +2169,9 @@ msgid ""
 "\n"
 "%s time: %.2f seconds. Time rank: %s. Placement points: %i"
 msgstr ""
+"Temps %s : %.2f secondes.\n"
+"Grade de rapidité : %s.\n"
+"Points de classement : %i"
 
 #: scripts/scenario_58_race.lua:3050
 msgctxt "msgMainscreen"
@@ -2137,12 +2179,14 @@ msgid ""
 "\n"
 "Results indeterminate"
 msgstr ""
+"\n"
+"Résultats indéterminés"
 
 #: scripts/scenario_58_race.lua:3094 scripts/scenario_58_race.lua:3107
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s Drones shot: %i, Total score: %i. "
-msgstr ""
+msgstr "%s Tir de drones : %i, Score total : %i."
 
 #: scripts/scenario_58_race.lua:3385
 #, lua-format
@@ -2151,61 +2195,67 @@ msgid ""
 "Start race on time at waypoint 1\n"
 "Race Length: %f units"
 msgstr ""
+"Commencer la course à l'heure au marqueur 1.\n"
+"    - Longueur du parcours : %f unités."
 
 #: scripts/scenario_58_race.lua:3391
 #, lua-format
 msgctxt "raceOrders-shipLog"
 msgid "Race starts in %i minutes. Be at waypoint 1 on time or forfeit"
 msgstr ""
+"La course commence dans %i minutes. Soyez à l'heure au marqueur 1 ou "
+"déclarez forfait."
 
 #: scripts/scenario_58_race.lua:3393
 #, lua-format
 msgctxt "raceOrders-shipLog"
 msgid "Race starts in %i minute. Be at waypoint 1 on time or forfeit"
 msgstr ""
+"ATTENTION La course commence dans %i minute.\n"
+"Soyez à l'heure au marqueur 1 ou déclarez forfait."
 
 #: scripts/scenario_58_race.lua:3395
 #, lua-format
 msgctxt "raceOrders-shipLog"
 msgid "Today's race length: %.1f units"
-msgstr ""
+msgstr "Longueur du parcours du jour : %.1f unités."
 
 #: scripts/scenario_58_race.lua:3403
 #, lua-format
 msgctxt "race-"
 msgid "Race Start Countdown: %.2f"
-msgstr ""
+msgstr "- Départ de la course dans %.2f secondes -"
 
 #: scripts/scenario_58_race.lua:3415
 msgctxt "race-shipLog"
 msgid "Ready..."
-msgstr ""
+msgstr ">> À vos marques..."
 
 #: scripts/scenario_58_race.lua:3419
 msgctxt "race-shipLog"
 msgid "Set..."
-msgstr ""
+msgstr ">> Prêt..."
 
 #: scripts/scenario_58_race.lua:3458
 msgctxt "raceOrders-comms"
 msgid "Complete race. Win if possible."
-msgstr ""
+msgstr "Finir la course et gagner si possible."
 
 #: scripts/scenario_58_race.lua:3471
 msgctxt "raceOrders-shipLog"
 msgid "Go!"
-msgstr ""
+msgstr ">> Partez !"
 
 #: scripts/scenario_58_race.lua:3497
 #, lua-format
 msgctxt "race-"
 msgid "Race Run Time %.2f"
-msgstr ""
+msgstr "Temps de course : %.2f"
 
 #: scripts/scenario_58_race.lua:3521
 msgctxt "race-shipLog"
 msgid "The race has begun!"
-msgstr ""
+msgstr ">> La course a commencé !"
 
 #: scripts/scenario_58_race.lua:3526
 #, lua-format
@@ -2213,6 +2263,8 @@ msgctxt "race-shipLog"
 msgid ""
 "With %i racers, we have the following points awarded for final race place:"
 msgstr ""
+"Avec %i coureurs, nous avons les points suivants attribués pour les places "
+"finales de la course :"
 
 #: scripts/scenario_58_race.lua:3528
 #, lua-format
@@ -2221,79 +2273,81 @@ msgid ""
 "With %i racers remaining from the original %i registrants, we have the "
 "following points awarded for final race place:"
 msgstr ""
+"Avec %i coureurs restants sur les %i au départ, les points suivants sont "
+"attribués pour le classement final :"
 
 #: scripts/scenario_58_race.lua:3535
 msgctxt "race-shipLog"
 msgid "First"
-msgstr ""
+msgstr "- Premier"
 
 #: scripts/scenario_58_race.lua:3536
 msgctxt "race-shipLog"
 msgid "Second"
-msgstr ""
+msgstr "- Deuxième"
 
 #: scripts/scenario_58_race.lua:3537
 msgctxt "race-shipLog"
 msgid "Third"
-msgstr ""
+msgstr "- Troisième"
 
 #: scripts/scenario_58_race.lua:3538
 msgctxt "race-shipLog"
 msgid "Fourth"
-msgstr ""
+msgstr "- Quatrième"
 
 #: scripts/scenario_58_race.lua:3539
 msgctxt "race-shipLog"
 msgid "Fifth"
-msgstr ""
+msgstr "- Cinquième"
 
 #: scripts/scenario_58_race.lua:3540
 msgctxt "race-shipLog"
 msgid "Sixth"
-msgstr ""
+msgstr "- Sixième"
 
 #: scripts/scenario_58_race.lua:3541
 msgctxt "race-shipLog"
 msgid "Seventh"
-msgstr ""
+msgstr "- Septième"
 
 #: scripts/scenario_58_race.lua:3542
 msgctxt "race-shipLog"
 msgid "Eighth"
-msgstr ""
+msgstr "- Huitième"
 
 #: scripts/scenario_58_race.lua:3543
 msgctxt "race-shipLog"
 msgid "Ninth"
-msgstr ""
+msgstr "- Neuvième"
 
 #: scripts/scenario_58_race.lua:3544
 msgctxt "race-shipLog"
 msgid "Tenth"
-msgstr ""
+msgstr "- Dixième"
 
 #: scripts/scenario_58_race.lua:3550
 #, lua-format
 msgctxt "race-shipLog"
 msgid "%s, %s:%s"
-msgstr ""
+msgstr "%s, %s : %s"
 
 #: scripts/scenario_58_race.lua:3553
 #, lua-format
 msgctxt "race-shipLog"
 msgid "%s:%s"
-msgstr ""
+msgstr "%s : %s"
 
 #: scripts/scenario_58_race.lua:3562
 msgctxt "race-msgMainscreen"
 msgid "Race aborted. Nobody made it to the starting line"
-msgstr ""
+msgstr "Course annulée. Personne n'a rejoint la ligne de départ."
 
 #: scripts/scenario_58_race.lua:3590
 #, lua-format
 msgctxt "race-tabHelms&Tactical&Singlepilot"
 msgid "%s in %s"
-msgstr ""
+msgstr "%s en secteur %s"
 
 #: scripts/scenario_58_race.lua:3611
 #, lua-format
@@ -2302,6 +2356,8 @@ msgid ""
 "Waypoint 2 met. Go to waypoint 3. Leg took %f seconds. You have completed %i "
 "%s."
 msgstr ""
+"Marqueur 2 atteint. Allez au marqueur 3. L'étape a duré %f secondes. Vous "
+"avez terminé %i %s."
 
 #: scripts/scenario_58_race.lua:3622
 #, lua-format
@@ -2310,6 +2366,8 @@ msgid ""
 "Waypoint 3 met. Go to waypoint 4. Leg took %f seconds. You have completed %i "
 "%s."
 msgstr ""
+"Marqueur 3 atteint. Allez au marqueur 4. L'étape a duré %f secondes. Vous "
+"avez terminé %i %s."
 
 #: scripts/scenario_58_race.lua:3633
 #, lua-format
@@ -2318,12 +2376,14 @@ msgid ""
 "Waypoint 4 met. Go to waypoint 1. Leg took %f seconds. You have completed %i "
 "%s."
 msgstr ""
+"Marqueur 4 atteint. Allez au marqueur 1. L'étape a duré %f secondes. Vous "
+"avez terminé %i %s."
 
 #: scripts/scenario_58_race.lua:3641
 #, lua-format
 msgctxt "race-shipLog"
 msgid "Completed race. Race time in seconds: %f"
-msgstr ""
+msgstr "Course terminée. Durée de la course : %f secondes"
 
 #: scripts/scenario_58_race.lua:3649
 #, lua-format
@@ -2332,11 +2392,13 @@ msgid ""
 "Waypoint 1 met. Go to waypoint 2. Leg took %f seconds. You have completed %i "
 "%s. Lap took %f seconds."
 msgstr ""
+"Marqueur 1 atteint. Allez au marqueur 2. L'étape a duré %f secondes. Vous "
+"avez terminé %i %s. Le tour a duré %f secondes."
 
 #: scripts/scenario_58_race.lua:3682
 msgctxt "msgMainscreen"
 msgid "Race aborted. Nobody made it to the starting line"
-msgstr ""
+msgstr "Course annulée. Personne n'a rejoint la ligne de départ."
 
 #~ msgctxt "scienceDescription-station"
 #~ msgid "Ship building and maintenance facility"
