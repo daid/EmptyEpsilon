@@ -2052,7 +2052,6 @@ msgid "What happens if we overcharge past the Muerte limit?"
 msgstr "Que se passera-t-il si nous dépassons la limite de sécurité Muerte ?"
 
 #: scripts/scenario_47_scavenger.lua:2219
-#, fuzzy
 msgctxt "stationServices-comms"
 msgid ""
 "Unknown. A teenager on his staff wrote a cautionary document that Muerte "
