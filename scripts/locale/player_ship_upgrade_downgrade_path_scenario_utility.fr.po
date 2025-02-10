@@ -364,25 +364,25 @@ msgstr ""
 "Une amélioration de niveau %i va %s."
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:56
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "Beam %i Direction"
-msgstr "Faisceau %i (cap)"
+msgstr "> FAISCEAU %i        Cap"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:57
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "%i Arc, Range"
-msgstr "Faisc. %i (arc ; portée)"
+msgstr "(F%i)      Arc ; Portée"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:58
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "%i Cycle, Damage"
-msgstr "Faisc. %i (cycle ; dégâts)"
+msgstr "(F%i)   Cycle ; Dégâts"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:59
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "%s degrees"
 msgstr "%s°"
@@ -400,10 +400,10 @@ msgid "%.1f seconds, %.1f"
 msgstr "%.1fs ; %.1f"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:63
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "scienceDB"
 msgid "%i Turret Arc, Turn"
-msgstr "Tourelle %i (arc ; vit. rot.)"
+msgstr "(Tour.%i) Arc ; Vit.rot"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:64
 #, lua-format
@@ -858,7 +858,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8611
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8986
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9311
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by 25%"
 msgstr "augmenter la portée des faisceaux laser de 25%"
@@ -874,7 +873,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8615
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9026
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9319
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc by 1/3"
 msgstr "augmenter l'amplitude de l'arc des faisceaux laser de 1/3"
@@ -887,7 +885,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:317
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5004
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6296
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase damage by 1/3"
 msgstr "augmenter les dégâts des faisceaux laser de 1/3"
@@ -913,7 +910,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8308
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8325
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8621
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add beams"
 msgstr "ajouter des faisceaux laser"
@@ -927,7 +923,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1270
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4998
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8639
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc by 25%"
 msgstr "augmenter l'amplitude de l'arc des faisceaux laser de 25%"
@@ -942,7 +937,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4577
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5034
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6284
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by 20%"
 msgstr "augmenter la portée des faisceaux laser de 20%"
@@ -959,7 +953,6 @@ msgid "increased cycle time by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:349
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by 1/6"
 msgstr "réduire le temps de cycle des faisceaux laser de 1/6"
@@ -2045,7 +2038,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8582
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8951
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9278
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 2 unit automated proximity scanner"
 msgstr "ajouter un scanner de proximité automatisé de portée 2u"
@@ -2233,7 +2225,6 @@ msgid "reduced range by ~5%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:780
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by ~6%"
 msgstr "augmenter la portée des faisceaux laser d'environ 6%"
@@ -2267,7 +2258,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7589
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8991
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9011
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase damage by 25%"
 msgstr "augmenter les dégâts des faisceaux laser de 25%"
@@ -2278,7 +2268,6 @@ msgid "decreased range by 5%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:798
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by ~5%"
 msgstr "augmenter la portée des faisceaux laser d'environ 5%"
@@ -2302,7 +2291,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:810
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2780
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5936
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by 10%"
 msgstr "augmenter la portée des faisceaux laser de 10%"
@@ -2465,7 +2453,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9139
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9149
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9454
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 20%"
 msgstr "augmenter la puissance des boucliers de 20%"
@@ -2480,7 +2467,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3400
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6813
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7750
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by 1/3"
 msgstr "augmenter la puissance des boucliers avant de 1/3"
@@ -2494,7 +2480,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1469
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3412
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6426
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by 1/3"
 msgstr "augmenter la puissance des boucliers arrière de 1/3"
@@ -2511,7 +2496,6 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:961
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1493
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by ~11%"
 msgstr "augmenter la puissance des boucliers d'environ 11%"
@@ -2532,7 +2516,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3937
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8840
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9472
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~14%"
 msgstr "renforcer la solidité de la coque d'environ 14%"
@@ -2545,7 +2528,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:974
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1506
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8841
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by 12.5%"
 msgstr "renforcer la solidité de la coque de 12,5%"
@@ -2568,7 +2550,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8471
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8843
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8844
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by 10%"
 msgstr "renforcer la solidité de la coque de 10%"
@@ -2819,7 +2800,6 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1194
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1726
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add a one unit automated proximity scanner"
 msgstr "ajouter un scanner de proximité automatisé de portée 1u"
@@ -2855,7 +2835,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8963
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9290
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9572
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by 25%"
 msgstr "augmenter les capteurs longue portée de 25%"
@@ -2921,7 +2900,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7909
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8272
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8590
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double automated proximity scanner range"
 msgstr "doubler la portée du scanner de proximité automatisé"
@@ -2961,7 +2939,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4547
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8959
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9584
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase short range sensors by 10%"
 msgstr "augmenter les capteurs courte portée de 10%"
@@ -2974,7 +2951,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1264
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1830
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2316
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by 50%"
 msgstr "augmenter la portée des faisceaux laser de 50%"
@@ -3001,7 +2977,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3723
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5906
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6278
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by ~14%"
 msgstr "réduire le temps de cycle des faisceaux laser ~14%"
@@ -3495,10 +3470,9 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2282
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3729
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7927
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "double arc width"
-msgstr "doubler la largeur de l'arc des faisceaux laser"
+msgstr "doubler la largeur de l'arc des tourelles laser"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1797
 msgctxt "downgrade-comms"
@@ -3507,7 +3481,6 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1802
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2288
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase turret speed by 25%"
 msgstr "augmenter la vitesse de rotation des tourelles laser de 25%"
@@ -3537,10 +3510,9 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7061
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7595
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7937
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc width by 50%"
-msgstr "augmenter la largeur de l'arc des faisceaux laser de 50%"
+msgstr "augmenter la largeur de l'arc des tourelles laser de 50%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1823
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2309
@@ -3558,10 +3530,9 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1838
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2324
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4625
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "overlap arcs"
-msgstr "Faire se chevaucher les arcs des faisceaux laser"
+msgstr "faire se chevaucher les arcs des tourelles laser"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1839
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2325
@@ -3571,7 +3542,6 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1846
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2332
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase turret speed by 20%"
 msgstr "augmenter la vitesse de rotation des tourelles laser de 20%"
@@ -3863,7 +3833,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2967
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4349
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9470
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~9%"
 msgstr "renforcer la solidité de la coque d'environ 9%"
@@ -4076,7 +4045,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2743
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3668
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7527
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by 12.5%"
 msgstr "augmenter les capteurs longue portée de 12,5%"
@@ -4093,7 +4061,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2748
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3673
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7532
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by ~11%"
 msgstr "augmenter les capteurs longue portée d'environ 11%"
@@ -4251,7 +4218,6 @@ msgid "reduced center beam range by 20%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2818
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase center beam range by 25%"
 msgstr "augmenter la portée du faisceau central de 25%"
@@ -4340,7 +4306,6 @@ msgid "reduced shield charge capacity by 1/9"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2905
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 12.5%"
 msgstr "augmenter la puissance des boucliers de 12,5%"
@@ -4360,7 +4325,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2934
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3418
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5148
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by 20%"
 msgstr "augmenter la puissance des boucliers avant de 20%"
@@ -4541,7 +4505,6 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3161
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5819
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 1 unit automated proximity scanner"
 msgstr "ajouter un scanner de proximité automatisé de portée 1u"
@@ -4562,7 +4525,6 @@ msgid "cut automated proximity scanner range by 2/3"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3191
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "triple automated proximity scanner range"
 msgstr "tripler la portée du scanner de proximité automatisé"
@@ -4576,7 +4538,6 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3211
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4132
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase short range sensors by ~9%"
 msgstr "augmenter les capteurs courte portée d'environ 9%"
@@ -4613,7 +4574,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc width by 12.5%"
-msgstr "augmenter la largeur de l'arc des faisceaux laser de 12,5%"
+msgstr "augmenter la largeur de l'arc des tourelles laser de 12,5%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3275
 msgctxt "downgrade-comms"
@@ -4621,7 +4582,6 @@ msgid "reduced range by ~8.6%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3282
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by ~9.5%"
 msgstr "augmenter la portée des faisceaux laser d'environ 9,5%"
@@ -4632,7 +4592,6 @@ msgstr "augmenter la portée des faisceaux laser d'environ 9,5%"
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6684
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7141
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8657
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by ~17%"
 msgstr "diminuer le temps de cycle des faisceaux laser ~17%"
@@ -4902,7 +4861,6 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:3691
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5430
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by 12.5%"
 msgstr "augmenter la portée des faisceaux laser de 12,5%"
@@ -5476,7 +5434,6 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4512
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:9576
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add 3 unit automated proximity scanner"
 msgstr "ajouter un scanner de proximité automatisé de portée 3u"
@@ -5626,7 +5583,6 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4755
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5642
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by ~14%"
 msgstr "augmenter la puissance des boucliers arrière d'environ 14%"
@@ -5641,7 +5597,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:4770
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5174
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5656
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~19%"
 msgstr "renforcer la solidité de la coque d'environ 19%"
@@ -5866,10 +5821,9 @@ msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5454
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7125
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc width by 1/3"
-msgstr "augmenter la largeur de l'arc des faisceaux laser de 1/3"
+msgstr "augmenter la largeur de l'arc des tourelles laser de 1/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5471
 #, fuzzy
@@ -6161,7 +6115,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc width of long beam by 50%"
-msgstr "augmenter la largeur de l'arc du faisceau laser long de 50%"
+msgstr "augmenter la largeur de l'arc des tourelles laser longue de 50%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5895
 msgctxt "downgrade-comms"
@@ -6290,7 +6244,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6442
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7766
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8105
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase hull max by 1/3"
 msgstr "renforcer la solidité de la coque de 1/3"
@@ -6339,7 +6292,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7512
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7899
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8262
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase short range sensors by 25%"
 msgstr "augmenter les capteurs courte portée de 25%"
@@ -6485,10 +6437,9 @@ msgstr "augmenter la vitesse maximale des moteurs de 10%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6666
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7942
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by 25%"
-msgstr "diminuer le temps de cycle des faisceaux laser de 25%"
+msgstr "réduire le temps de cycle des faisceaux laser de 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6667
 msgctxt "downgrade-comms"
@@ -6499,7 +6450,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc width by 2/3"
-msgstr "augmenter la largeur de l'arc des faisceaux laser de 2/3"
+msgstr "augmenter la largeur de l'arc des tourelles laser de 2/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6673
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7961
@@ -6520,7 +6471,7 @@ msgstr "augmenter les dégâts des faisceaux laser de 50%"
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase arc width by 20%"
-msgstr "augmenter la largeur de l'arc des faisceaux laser de 20%"
+msgstr "augmenter la largeur de l'arc des tourelles laser de 20%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:6691
 msgctxt "downgrade-comms"
@@ -6650,7 +6601,6 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7904
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8267
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8586
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by 50%"
 msgstr "augmenter les capteurs longue portée de 50%"
@@ -6661,7 +6611,6 @@ msgid "reduced range by 25%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7045
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase range by 1/3"
 msgstr "augmenter la portée des faisceaux laser de 1/3"
@@ -6672,16 +6621,14 @@ msgid "adjusted angles for less coverage"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7157
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "adjust beam angles for more coverage"
-msgstr "ajustez les angles des faisceaux laser pour plus de couverture"
+msgstr "ajuster le cap des faisceaux laser pour une meilleure couverture"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7173
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase beam arc by 25%"
-msgstr "augmenter l'amplitude de l'arc des faisceaux laser de 25%"
+msgstr "augmenter l'amplitude de l'arc des tourelles laser de 25%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7192
 msgctxt "downgrade-comms"
@@ -6943,10 +6890,9 @@ msgid "reduced long beam range by 10%"
 msgstr ""
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7636
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase long beam range by ~11%"
-msgstr "augmente la portée des faisceaux laser longs d'environ 11%"
+msgstr "augmenter la portée des faisceaux laser longs d'environ 11%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7637
 msgctxt "downgrade-comms"
@@ -7328,7 +7274,7 @@ msgstr "augmenter la portée des faisceaux laser avant de 25%"
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase rear arc by 1/3"
-msgstr "augmenter l'amplitude des arcs des faisceaux arrière de 1/3"
+msgstr "augmenter l'amplitude de l'arc des faisceaux arrière de 1/3"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:8663
 #, fuzzy
