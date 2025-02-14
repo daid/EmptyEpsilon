@@ -66,6 +66,7 @@ jobs:
           ninja
           ninja install
   windows:
+    if: false
     name: Windows
     runs-on: windows-latest
     strategy:

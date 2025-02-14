@@ -36,6 +36,7 @@ for script in glob.glob("scripts/**/*.lua", recursive=True):
                 key = key.strip().lower()
             value = value.strip()
             info[key] = value
+    os.makedirs(os.path.dirname(output), exist_ok=True)
     f = open(output, "wt")
     if "name" in info:
         f.write("# Scenario name\n")
@@ -71,7 +72,7 @@ for script in glob.glob("scripts/**/*.lua", recursive=True):
     cmd = ["xgettext", "--keyword=_:1c,2", "--keyword=_:1", "--omit-header", "-j", "-d", output[:-3], "-C", "-"]
     subprocess.run(cmd, check=True, input=b"")
     pre = open(output, "rt").read()
-    cmd = ["xgettext", "--keyword=_:1c,2", "--keyword=_:1", "--omit-header", "-j", "-d", output[:-3], script]
+    cmd = ["xgettext", "--keyword=_:1c,2", "--keyword=_:1", "--add-comments=TRANSLATORS", "--omit-header", "-j", "-d" , output[:-3], script]
     subprocess.run(cmd, check=True)
     post = open(output, "rt").read()
     if pre == post and "name" not in info:

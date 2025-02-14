@@ -6,57 +6,19 @@
 #include "epsilonServer.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "spaceObjects/spaceship.h"
 #include "menus/serverCreationScreen.h"
 #include "menus/optionsMenu.h"
 #include "menus/tutorialMenu.h"
 #include "menus/serverBrowseMenu.h"
 #include "screens/gm/gameMasterScreen.h"
 #include "screenComponents/rotatingModelView.h"
+#include "config.h"
 
 #include "gui/gui2_image.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_textentry.h"
 
-class DebugAllModelView : public GuiCanvas
-{
-public:
-    DebugAllModelView()
-    {
-        new GuiOverlay(this, "", colorConfig.background);
-        (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
-
-        std::vector<string> names = ModelData::getModelDataNames();
-        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.startswith("transport_"); }), names.end());
-        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.startswith("artifact"); }), names.end());
-        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.startswith("SensorBuoyMK"); }), names.end());
-        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.startswith("space_station_"); }), names.end());
-        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name == "ammo_box"; }), names.end());
-        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name == "shield_generator"; }), names.end());
-        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.endswith("Blue"); }), names.end());
-        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.endswith("Green"); }), names.end());
-        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.endswith("Grey"); }), names.end());
-        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.endswith("Red"); }), names.end());
-        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.endswith("White"); }), names.end());
-        int col_count = sqrtf(names.size()) + 1;
-        int row_count = ceil(names.size() / col_count) + 1;
-        int x = 0;
-        int y = 0;
-        float w = 1600 / col_count;
-        float h = 900 / row_count;
-        for(string name : names)
-        {
-            (new GuiRotatingModelView(this, "", ModelData::getModel(name)))->setPosition(x * w, y * h, sp::Alignment::TopLeft)->setSize(w, h);
-            x++;
-            if (x == col_count)
-            {
-                x = 0;
-                y++;
-            }
-        }
-    }
-};
 
 MainMenu::MainMenu()
 {
@@ -154,15 +116,10 @@ MainMenu::MainMenu()
         {
             gameGlobalInfo->startScenario("scenario_10_empty.lua");
 
-            my_player_info->commandSetShipId(-1);
+            my_player_info->commandSetShip({});
             destroy();
             new GameMasterScreen(nullptr);
         }
     }))->setPosition({370, -150}, sp::Alignment::BottomLeft)->setSize(300, 50);
-
-    (new GuiButton(this, "", "MODELS!", [this]() {
-        destroy();
-        new DebugAllModelView();
-    }))->setPosition({370, -200}, sp::Alignment::BottomLeft)->setSize(300, 50);
 #endif
 }

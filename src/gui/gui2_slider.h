@@ -28,6 +28,8 @@ public:
     GuiBasicSlider* setValue(float value);
     GuiBasicSlider* setRange(float min, float max);
     float getValue() const;
+    float getRangeMin() const { return min_value; }
+    float getRangeMax() const { return max_value; }
 };
 
 class GuiSlider : public GuiBasicSlider

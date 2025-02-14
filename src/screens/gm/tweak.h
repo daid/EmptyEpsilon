@@ -1,332 +1,39 @@
-#ifndef TWEAK_H
-#define TWEAK_H
+#ifndef SCREEN_GM_TWEAK_H
+#define SCREEN_GM_TWEAK_H
 
 #include "gui/gui2_panel.h"
-#include "missileWeaponData.h"
-#include "shipTemplate.h"
-#include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
-#include "spaceObjects/warpJammer.h"
-#include "spaceObjects/asteroid.h"
+#include "ecs/entity.h"
 
-class SpaceShip;
-class GuiKeyValueDisplay;
-class GuiLabel;
-class GuiTextEntry;
-class GuiSlider;
-class GuiSelector;
-class GuiToggleButton;
 
-enum ETweakType
-{
-    TW_Object,  // TODO: Space object
-    TW_Jammer,  // WarpJammer
-    TW_Ship,    // Ships
-    TW_Station, // Space stations
-    TW_Player,  // Player ships
-    TW_Asteroid // Asteroid
-};
-
+class GuiButton;
 class GuiTweakPage : public GuiElement
 {
 public:
-    GuiTweakPage(GuiContainer* owner) : GuiElement(owner, "") {}
+    GuiTweakPage(GuiContainer* owner);
 
-    virtual void open(P<SpaceObject> target) = 0;
+    void open(sp::ecs::Entity);
+    virtual void onDraw(sp::RenderTarget& target) override;
+
+    std::function<bool(sp::ecs::Entity)> has_component;
+    std::function<void(sp::ecs::Entity)> add_component;
+    std::function<void(sp::ecs::Entity)> remove_component;
+
+    GuiButton* add_remove_button;
+    GuiElement* contents;
+
+    sp::ecs::Entity entity;
 };
 
-class GuiObjectTweak : public GuiPanel
+class GuiEntityTweak : public GuiPanel
 {
 public:
-    GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type);
+    GuiEntityTweak(GuiContainer* owner);
 
-    void open(P<SpaceObject> target);
+    void open(sp::ecs::Entity target);
 
-    virtual void onDraw(sp::RenderTarget& target) override;
 private:
-    P<SpaceObject> target;
+    sp::ecs::Entity entity;
     std::vector<GuiTweakPage*> pages;
 };
 
-class GuiTweakShipTemplateBasedObject : public GuiTweakPage
-{
-private:
-    P<ShipTemplateBasedObject> target;
-
-    GuiTextEntry* type_name;
-    GuiToggleButton* shares_energy_with_docked_toggle;
-    GuiToggleButton* repairs_docked_toggle;
-    GuiToggleButton* restocks_scan_probes_toggle;
-    GuiToggleButton* restocks_cpuship_weapons_toggle;
-    GuiSlider* hull_max_slider;
-    GuiSlider* hull_slider;
-    GuiToggleButton* can_be_destroyed_toggle;
-    GuiSlider* short_range_radar_slider;
-    GuiSlider* long_range_radar_slider;
-public:
-    GuiTweakShipTemplateBasedObject(GuiContainer* owner);
-
-    virtual void onDraw(sp::RenderTarget& target) override;
-
-    virtual void open(P<SpaceObject> target) override;
-};
-
-class GuiTweakShip : public GuiTweakPage
-{
-private:
-    P<SpaceShip> target;
-
-    GuiSlider* impulse_speed_slider;
-    GuiSlider* impulse_acceleration_slider;
-    GuiSlider* impulse_reverse_speed_slider;
-    GuiSlider* impulse_reverse_acceleration_slider;
-    GuiSlider* turn_speed_slider;
-    GuiToggleButton* docking_state_toggle;
-    GuiToggleButton* warp_toggle;
-    GuiSlider* warp_speed_slider;
-    GuiToggleButton* jump_toggle;
-    GuiSlider* jump_min_distance_slider;
-    GuiSlider* jump_max_distance_slider;
-    GuiSlider* jump_charge_slider;
-public:
-    GuiTweakShip(GuiContainer* owner);
-
-    virtual void onDraw(sp::RenderTarget& target) override;
-
-    virtual void open(P<SpaceObject> target) override;
-};
-
-class GuiJammerTweak : public GuiTweakPage
-{
-private:
-    P<WarpJammer> target;
-
-    GuiSlider* jammer_range_slider;
-    GuiSlider* hull_slider;
-public:
-    GuiJammerTweak(GuiContainer* owner);
-
-    virtual void onDraw(sp::RenderTarget& target) override;
-
-    virtual void open(P<SpaceObject> target) override;
-};
-
-class GuiAsteroidTweak : public GuiTweakPage
-{
-private:
-    P<Asteroid> target;
-
-    GuiSlider* asteroid_size_slider;
-public:
-    GuiAsteroidTweak(GuiContainer* owner);
-
-    virtual void onDraw(sp::RenderTarget& target) override;
-
-    virtual void open(P<SpaceObject> target) override;
-};
-
-class GuiShipTweakMissileWeapons : public GuiTweakPage
-{
-private:
-    P<SpaceShip> target;
-
-    GuiSlider* missile_storage_amount_slider[MW_Count];
-    GuiSlider* missile_current_amount_slider[MW_Count];
-public:
-    GuiShipTweakMissileWeapons(GuiContainer* owner);
-
-    virtual void onDraw(sp::RenderTarget& target) override;
-
-    virtual void open(P<SpaceObject> target) override;
-};
-
-class GuiShipTweakMissileTubes : public GuiTweakPage
-{
-private:
-    P<SpaceShip> target;
-
-    int tube_index;
-    GuiSelector* index_selector;
-    GuiSelector* missile_tube_amount_selector;
-    GuiSlider* direction_slider;
-    GuiSlider* load_time_slider;
-    GuiSelector* size_selector;
-    GuiToggleButton* allowed_use[MW_Count];
-public:
-    GuiShipTweakMissileTubes(GuiContainer* owner);
-
-    virtual void onDraw(sp::RenderTarget& target) override;
-
-    virtual void open(P<SpaceObject> target) override;
-};
-
-class GuiShipTweakShields : public GuiTweakPage
-{
-private:
-    P<ShipTemplateBasedObject> target;
-
-    GuiSlider* shield_max_slider[max_shield_count];
-    GuiSlider* shield_slider[max_shield_count];
-public:
-    GuiShipTweakShields(GuiContainer* owner);
-
-    virtual void onDraw(sp::RenderTarget& target) override;
-
-    virtual void open(P<SpaceObject> target) override;
-};
-
-class GuiShipTweakBeamweapons : public GuiTweakPage
-{
-private:
-    P<SpaceShip> target;
-
-    int beam_index;
-    GuiSlider* arc_slider;
-    GuiSlider* direction_slider;
-    GuiSlider* range_slider;
-    GuiSlider* turret_arc_slider;
-    GuiSlider* turret_direction_slider;
-    GuiSlider* turret_rotation_rate_slider;
-    GuiLabel* turret_rotation_rate_overlay_label;
-    GuiSlider* cycle_time_slider;
-    GuiSlider* energy_per_fire_slider;
-    GuiSlider* heat_per_fire_slider;
-    GuiLabel* heat_per_fire_overlay_label;
-    GuiSlider* damage_slider;
-public:
-    GuiShipTweakBeamweapons(GuiContainer* owner);
-
-    virtual void open(P<SpaceObject> target) override;
-
-    virtual void onDraw(sp::RenderTarget& target) override;
-};
-
-class GuiShipTweakSystems : public GuiTweakPage
-{
-private:
-    P<SpaceShip> target;
-
-    GuiSlider* system_damage[SYS_COUNT];
-    GuiSlider* system_health_max[SYS_COUNT];
-    GuiSlider* system_heat[SYS_COUNT];
-
-public:
-    GuiShipTweakSystems(GuiContainer* owner);
-
-    virtual void open(P<SpaceObject> target) override;
-
-    virtual void onDraw(sp::RenderTarget& target) override;
-};
-
-class GuiShipTweakSystemPowerFactors : public GuiTweakPage
-{
-private:
-    P<SpaceShip> target;
-    GuiLabel* system_current_power_factor[SYS_COUNT];
-    GuiTextEntry* system_power_factor[SYS_COUNT];
-
-    static string powerFactorToText(float);
-public:
-    explicit GuiShipTweakSystemPowerFactors(GuiContainer* owner);
-
-    void open(P<SpaceObject> target) override;
-    void onDraw(sp::RenderTarget& target) override;
-};
-
-class GuiShipTweakSystemRates : public GuiTweakPage
-{
-public:
-    enum class Type
-    {
-        Power = 0,
-        Heat,
-        Coolant
-    };
-
-    GuiShipTweakSystemRates(GuiContainer* owner, Type type);
-
-    void open(P<SpaceObject> target) override;
-    void onDraw(sp::RenderTarget& target) override;
-private:
-    float getRateValue(ESystem system, Type type) const;
-    void setRateValue(ESystem system, Type type, float value);
-    std::array<GuiLabel*, SYS_COUNT> current_rates;
-    std::array<GuiTextEntry*, SYS_COUNT> desired_rates;
-
-    P<SpaceShip> target;
-    Type type;
-};
-
-class GuiShipTweakPlayer : public GuiTweakPage
-{
-private:
-    P<PlayerSpaceship> target;
-
-    GuiTextEntry* control_code;
-    GuiSlider* reputation_point_slider;
-    GuiSlider* energy_level_slider;
-    GuiSlider* max_energy_level_slider;
-    GuiSlider* combat_maneuver_boost_speed_slider;
-    GuiSlider* combat_maneuver_strafe_speed_slider;
-    GuiLabel* position_count;
-    GuiKeyValueDisplay* position[max_crew_positions];
-public:
-    GuiShipTweakPlayer(GuiContainer* owner);
-
-    virtual void open(P<SpaceObject> target) override;
-
-    virtual void onDraw(sp::RenderTarget& target) override;
-};
-
-class GuiShipTweakPlayer2 : public GuiTweakPage
-{
-private:
-    P<PlayerSpaceship> target;
-
-    GuiSlider* repair_crew_count_slider;
-    GuiSlider* coolant_slider;
-    GuiSlider* max_scan_probes_slider;
-    GuiSlider* scan_probes_slider;
-    GuiToggleButton* can_scan;
-    GuiToggleButton* can_hack;
-    GuiToggleButton* can_dock;
-    GuiToggleButton* can_combat_maneuver;
-    GuiToggleButton* can_self_destruct;
-    GuiToggleButton* can_launch_probe;
-    GuiToggleButton* auto_coolant_enabled;
-    GuiToggleButton* auto_repair_enabled;
-
-    GuiLabel* energy_warp_per_second{};
-    GuiTextEntry* desired_energy_warp_per_second{};
-
-    GuiLabel* energy_shield_per_second{};
-    GuiTextEntry* desired_energy_shield_per_second{};
-public:
-    GuiShipTweakPlayer2(GuiContainer* owner);
-
-    virtual void open(P<SpaceObject> target) override;
-
-    virtual void onDraw(sp::RenderTarget& target) override;
-};
-
-class GuiObjectTweakBase : public GuiTweakPage
-{
-private:
-    P<SpaceObject> target;
-
-    GuiTextEntry* callsign;
-    GuiTextEntry* unscanned_description;
-    GuiTextEntry* friend_or_foe_description;
-    GuiTextEntry* simple_scan_description;
-    GuiTextEntry* full_scan_description;
-    GuiSlider* heading_slider;
-    GuiSlider* scanning_complexity_slider;
-    GuiSlider* scanning_depth_slider;
-public:
-    GuiObjectTweakBase(GuiContainer* owner);
-
-    virtual void open(P<SpaceObject> target) override;
-
-    virtual void onDraw(sp::RenderTarget& target) override;
-};
-#endif//TWEAK_H
+#endif//SCREEN_GM_TWEAK_H

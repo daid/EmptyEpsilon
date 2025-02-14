@@ -2,8 +2,8 @@
 #define DATABASE_VIEW_H
 
 #include "gui/gui2_element.h"
+#include "ecs/entity.h"
 
-class ScienceDatabase;
 class GuiListbox;
 
 class DatabaseViewComponent : public GuiElement
@@ -14,13 +14,12 @@ public:
     bool findAndDisplayEntry(string name);
 
 private:
-    P<ScienceDatabase> findEntryById(int32_t id);
-    bool findAndDisplayEntry(string name, P<ScienceDatabase> parent);
+    bool findAndDisplayEntry(string name, sp::ecs::Entity parent);
     //Fill the selection listbox with options from the selected_entry, or the main database list if selected_entry is nullptr
     void fillListBox();
     void display();
 
-    P<ScienceDatabase> selected_entry;
+    sp::ecs::Entity selected_entry;
     GuiListbox* item_list = nullptr;
     GuiElement* keyvalue_container = nullptr;
     GuiElement* details_container = nullptr;

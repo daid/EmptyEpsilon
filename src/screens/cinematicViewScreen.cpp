@@ -4,13 +4,19 @@
 #include "epsilonServer.h"
 #include "main.h"
 #include "multiplayer_client.h"
+#include "ecs/query.h"
+#include "i18n.h"
+#include "components/collision.h"
+#include "components/target.h"
+#include "components/player.h"
+#include "components/name.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
-CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer, int32_t playerShip /* = 0 */)
+CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
 : GuiCanvas(render_layer)
 {
     // Create a full-screen viewport.
@@ -26,12 +32,14 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer, int32_t play
     camera_pitch = 45.0f;
 
     // Lock onto player ship to start.
-    if (gameGlobalInfo->getPlayerShip(playerShip))
-        target = gameGlobalInfo->getPlayerShip(playerShip);
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>()) {
+        target = entity;
+        break;
+    }
 
     // Let the screen operator select a player ship to lock the camera onto.
     camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(value.toInt());
+        auto ship = sp::ecs::Entity::fromString(value);
         if (ship)
             target = ship;
     });
@@ -95,7 +103,7 @@ void CinematicViewScreen::update(float delta)
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
         if (camera_lock_selector->getSelectionIndex() < 0)
             camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
-        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+        target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
     }
 
     if (keys.cinematic.next_player_ship.getDown())
@@ -103,7 +111,7 @@ void CinematicViewScreen::update(float delta)
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
         if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
             camera_lock_selector->setSelectionIndex(0);
-        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+        target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
     }
     // TODO: X resets the camera to a default relative position and heading.
     if (keys.escape.getDown())
@@ -179,17 +187,20 @@ void CinematicViewScreen::update(float delta)
 
     // Add and remove entries from the player ship list.
     // TODO: Allow any ship or station to be the camera target.
-    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
     {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
-        if (ship)
-        {
-            if (camera_lock_selector->indexByValue(string(n)) == -1)
-                camera_lock_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
-        }else{
-            if (camera_lock_selector->indexByValue(string(n)) != -1)
-                camera_lock_selector->removeEntry(camera_lock_selector->indexByValue(string(n)));
+        if (camera_lock_selector->indexByValue(entity.toString()) == -1) {
+            string label;
+            if (auto tn = entity.getComponent<TypeName>())
+                label = tn->type_name;
+            if (auto cs = entity.getComponent<CallSign>())
+                label += " " + cs->callsign;
+            camera_lock_selector->addEntry(label, entity.toString());
         }
+    }
+    for(int n=0; n<camera_lock_selector->entryCount(); n++) {
+        if (!sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(n)))
+            camera_lock_selector->removeEntry(n);
     }
 
     // If cycle is enabled switch target every 30 sec.
@@ -202,7 +213,7 @@ void CinematicViewScreen::update(float delta)
             camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
             if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
                 camera_lock_selector->setSelectionIndex(0);
-            target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+            target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
         }
     }
 
@@ -219,8 +230,10 @@ void CinematicViewScreen::update(float delta)
             camera_lock_cycle_toggle->show();
         }
 
+        auto transform = target.getComponent<sp::Transform>();
         // Get the selected ship's current position.
-        target_position_2D = target->getPosition();
+        if (transform)
+            target_position_2D = transform->getPosition();
         // Copy the selected ship's position into a Vector3 for camera angle
         // calculations.
         target_position_3D.x = target_position_2D.x;
@@ -240,23 +253,29 @@ void CinematicViewScreen::update(float delta)
         distance_3D = glm::length(diff_3D);
 
         // Get the ship's current heading and velocity.
-        target_rotation = target->getRotation();
+        if (transform)
+            target_rotation = transform->getRotation();
         // float target_velocity = glm::length(target->getVelocity());
 
         // We want the camera to always be less than 1U from the selected ship.
-        max_camera_distance = 1000.0f + target->getRadius() + glm::length(target->getVelocity());
-        min_camera_distance = target->getRadius() * 2.0f;
+        auto physics = target.getComponent<sp::Physics>();
+        auto radius = 300.0f;
+        if (physics)
+            radius = physics->getSize().x;
+        max_camera_distance = 1000.0f + radius + glm::length(physics->getVelocity());
+        min_camera_distance = radius * 2.0f;
 
         // Check if our selected ship has a weapons target.
-        target_of_target = target->getTarget();
-        if (target_of_target && glm::length(target_of_target->getPosition() - target_position_2D) > 10000.0f)
-            target_of_target = nullptr;
+        auto target_of_target = target.getComponent<Target>() ? target.getComponent<Target>()->entity : sp::ecs::Entity{};
+        auto target_of_target_transform = target_of_target.getComponent<sp::Transform>();
+        if (target_of_target && glm::length(target_of_target_transform->getPosition() - target_position_2D) > 10000.0f)
+            target_of_target_transform = nullptr;
 
         // If it does, lock the camera onto that target.
-        if (camera_lock_tot_toggle->getValue() && target_of_target)
+        if (camera_lock_tot_toggle->getValue() && target_of_target_transform)
         {
             // Get the position of the selected ship's target.
-            tot_position_2D = target_of_target->getPosition();
+            tot_position_2D = target_of_target_transform->getPosition();
             // Convert it to a 3D vector.
             tot_position_3D.x = tot_position_2D.x;
             tot_position_3D.y = tot_position_3D.y;
@@ -274,7 +293,7 @@ void CinematicViewScreen::update(float delta)
             if (std::abs(angleDifference(angle_yaw, tot_angle)) > 40.0f)
             {
                 //The target of target is not really in view, so re-position the camera.
-                camera_position_2D = target_position_2D - vec2FromAngle(vec2ToAngle(tot_position_2D - target_position_2D) + 20) * target->getRadius() * 2.0f;
+                camera_position_2D = target_position_2D - vec2FromAngle(vec2ToAngle(tot_position_2D - target_position_2D) + 20) * radius * 2.0f;
                 camera_position.x = camera_position_2D.x;
                 camera_position.y = camera_position_2D.y;
             }

@@ -11,13 +11,11 @@ function vectorFromAngle(angle, length)
 end
 
 function init()
-    tmp = SupplyDrop()
-    for idx, obj in ipairs(tmp:getObjectsInRange(100000)) do
-        if obj.typeName == "SpaceStation" then
+    for idx, obj in ipairs(getEntitiesWithComponent("docking_bay")) do
+        if obj.components.impulse_engine == nil then
             table.insert(stationList, obj)
         end
     end
-    tmp:destroy()
 end
 
 function randomStation()

@@ -24,10 +24,11 @@ private:
     GuiButton* cancel_button;
 
     float target[max_sliders];
-    bool locked;
-    float lock_start_time;
-    int scan_depth;
+    bool locked = false;
+    float lock_start_time = 0.0f;
+    int scan_depth = 0;
     std::array<bool, max_sliders> set_active = {false, false, false, false};
+    std::pair<int, int> getScanComplexityDepth();
 public:
     GuiScanningDialog(GuiContainer* owner, string id);
 

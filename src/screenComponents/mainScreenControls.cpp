@@ -1,6 +1,7 @@
 #include "mainScreenControls.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+#include "i18n.h"
 
 #include "gui/gui2_togglebutton.h"
 
@@ -33,7 +34,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     {
         if (my_spaceship)
         {
-            my_spaceship->commandMainScreenSetting(MSS_Front);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Front);
         }
         closePopup();
     }));
@@ -41,7 +42,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     {
         if (my_spaceship)
         {
-            my_spaceship->commandMainScreenSetting(MSS_Back);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Back);
         }
         closePopup();
     }));
@@ -49,7 +50,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     {
         if (my_spaceship)
         {
-            my_spaceship->commandMainScreenSetting(MSS_Left);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Left);
         }
         closePopup();
     }));
@@ -57,20 +58,20 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     {
         if (my_spaceship)
         {
-            my_spaceship->commandMainScreenSetting(MSS_Right);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Right);
         }
         closePopup();
     }));
 
     // If the player has control over weapons targeting, enable the target view
     // option in the main screen controls.
-    if (my_player_info->crew_position[weaponsOfficer] || my_player_info->crew_position[tacticalOfficer] || my_player_info->crew_position[singlePilot])
+    if (my_player_info->hasPosition(CrewPosition::weaponsOfficer) || my_player_info->hasPosition(CrewPosition::tacticalOfficer) || my_player_info->hasPosition(CrewPosition::singlePilot))
     {
         buttons.push_back(new GuiButton(this, "MAIN_SCREEN_TARGET_BUTTON", tr("mainscreen", "Target lock"), [this]()
         {
             if (my_spaceship)
             {
-                my_spaceship->commandMainScreenSetting(MSS_Target);
+                my_player_info->commandMainScreenSetting(MainScreenSetting::Target);
             }
             closePopup();
         }));
@@ -82,7 +83,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     {
         if (my_spaceship)
         {
-            my_spaceship->commandMainScreenSetting(MSS_Tactical);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Tactical);
         }
         closePopup();
     }));
@@ -93,7 +94,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     {
         if (my_spaceship)
         {
-            my_spaceship->commandMainScreenSetting(MSS_LongRange);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::LongRange);
         }
         closePopup();
     }));
@@ -101,13 +102,13 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
 
     // If the player has control over comms, they can toggle the comms overlay
     // on the main screen.
-    if (my_player_info->crew_position[relayOfficer] || my_player_info->crew_position[operationsOfficer] || my_player_info->crew_position[singlePilot])
+    if (my_player_info->hasPosition(CrewPosition::relayOfficer) || my_player_info->hasPosition(CrewPosition::operationsOfficer) || my_player_info->hasPosition(CrewPosition::singlePilot))
     {
         buttons.push_back(new GuiButton(this, "MAIN_SCREEN_SHOW_COMMS_BUTTON", tr("mainscreen", "Show comms"), [this]()
         {
             if (my_spaceship)
             {
-                my_spaceship->commandMainScreenOverlay(MSO_ShowComms);
+                my_player_info->commandMainScreenOverlay(MainScreenOverlay::ShowComms);
                 onscreen_comms_active = true;
             }
             closePopup();
@@ -118,7 +119,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         {
             if (my_spaceship)
             {
-                my_spaceship->commandMainScreenOverlay(MSO_HideComms);
+                my_player_info->commandMainScreenOverlay(MainScreenOverlay::HideComms);
                 onscreen_comms_active = false;
             }
             closePopup();

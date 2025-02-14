@@ -1,5 +1,5 @@
 ----------------------Ktlitan ships
-template = ShipTemplate():setName("Ktlitan Fighter"):setLocaleName(_("ship", "Ktlitan Fighter")):setModel("sci_fi_alien_ship_1")
+local template = ShipTemplate():setName("Ktlitan Fighter"):setLocaleName(_("ship", "Ktlitan Fighter")):setModel("sci_fi_alien_ship_1")
 template:setRadarTrace("ktlitan_fighter.png")
 template:setBeam(0, 60, 0, 1200.0, 4.0, 6)
 template:setHull(70)

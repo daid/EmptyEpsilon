@@ -3,6 +3,8 @@
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_listbox.h"
+#include "gameGlobalInfo.h"
+
 
 class GuiSelector;
 class GuiContainer;
@@ -11,17 +13,13 @@ class GuiObjectCreationView : public GuiOverlay
 {
 private:
     GuiSelector* faction_selector;
-    GuiSelector* player_cpu_selector;
+    GuiSelector* category_selector;
+    GuiListbox* object_list;
+    std::vector<GameGlobalInfo::ObjectSpawnInfo> spawn_list;
 public:
-    GuiListbox* cpu_ship_listbox;
-    GuiListbox* player_ship_listbox;
     GuiObjectCreationView(GuiContainer* owner);
 
-    virtual void onDraw(sp::RenderTarget& target) override;
-
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
-
-    void setCreateScript(const string create, const string configure = "");
 };
 
 #endif//OBJECT_CREATION_VIEW_H

@@ -1,14 +1,32 @@
-#include "spaceObjects/nebula.h"
-#include "spaceObjects/cpuShip.h"
-#include "spaceObjects/scanProbe.h"
 #include "ai/ai.h"
 #include "ai/aiFactory.h"
 #include "random.h"
+#include "components/ai.h"
+#include "components/docking.h"
+#include "components/impulse.h"
+#include "components/warpdrive.h"
+#include "components/jumpdrive.h"
+#include "components/hull.h"
+#include "components/beamweapon.h"
+#include "components/missiletubes.h"
+#include "components/maneuveringthrusters.h"
+#include "components/target.h"
+#include "components/faction.h"
+#include "components/collision.h"
+#include "components/radar.h"
+#include "components/moveto.h"
+#include "systems/collision.h"
+#include "systems/jumpsystem.h"
+#include "systems/docking.h"
+#include "systems/missilesystem.h"
+#include "systems/radarblock.h"
+#include "ecs/query.h"
+
 
 REGISTER_SHIP_AI(ShipAI, "default");
 
-ShipAI::ShipAI(CpuShip* owner)
-: pathPlanner(owner->getRadius()), owner(owner)
+ShipAI::ShipAI(sp::ecs::Entity owner)
+: owner(owner)
 {
     missile_fire_delay = 0.0;
 
@@ -18,10 +36,6 @@ ShipAI::ShipAI(CpuShip* owner)
     weapon_direction = EWeaponDirection::Front;
 
     update_target_delay = 0.0;
-
-    short_range = owner->getShortRangeRadarRange();
-    long_range = owner->getLongRangeRadarRange();
-    relay_range = long_range * 2.0f;
 }
 
 bool ShipAI::canSwitchAI()
@@ -31,12 +45,16 @@ bool ShipAI::canSwitchAI()
 
 void ShipAI::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 draw_position, float scale)
 {
-    auto world_position = owner->getPosition();
-    P<SpaceObject> target = owner->getTarget();
+    auto transform = owner.getComponent<sp::Transform>();
+    if (!transform) return;
+    auto world_position = transform->getPosition();
+    auto target = owner.getComponent<Target>();
     if (target)
     {
-        auto v = target->getPosition() - world_position;
-        renderer.drawLine(draw_position, draw_position + v * scale, glm::u8vec4(255, 128, 128, 64));
+        if (auto t = target->entity.getComponent<sp::Transform>()) {
+            auto v = t->getPosition() - world_position;
+            renderer.drawLine(draw_position, draw_position + v * scale, glm::u8vec4(255, 128, 128, 64));
+        }
     }
 
     auto p0 = draw_position;
@@ -50,9 +68,22 @@ void ShipAI::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 draw_position, 
 
 void ShipAI::run(float delta)
 {
-    owner->target_rotation = owner->getRotation();
-    owner->warp_request = 0.0;
-    owner->setImpulseRequest(0.0f);
+    auto thrusters = owner.getComponent<ManeuveringThrusters>();
+    if (thrusters) thrusters->stop();
+
+    auto impulse = owner.getComponent<ImpulseEngine>();
+    if (impulse)
+        impulse->request = 0.0f;
+    auto warp = owner.getComponent<WarpDrive>();
+    if (warp)
+        warp->request = 0;
+
+    // Update ranges before calculating
+    if (auto lrr = owner.getComponent<LongRangeRadar>()) {
+        long_range = lrr->long_range;
+        relay_range = long_range * 2.0f;
+        short_range = lrr->short_range;
+    }
 
     updateWeaponState(delta);
     if (update_target_delay > 0.0f)
@@ -64,9 +95,9 @@ void ShipAI::run(float delta)
     }
 
     //If we have a target and weapons, engage the target.
-    if (owner->getTarget() && (has_missiles || has_beams))
+    if (owner.hasComponent<Target>() && (has_missiles || has_beams))
     {
-        runAttack(owner->getTarget());
+        runAttack(owner.getComponent<Target>()->entity);
     }else{
         runOrders();
     }
@@ -100,38 +131,36 @@ void ShipAI::updateWeaponState(float delta)
     float beam_strength_per_direction[4] = {0, 0, 0, 0};
 
     //If we have weapon tubes, load them with torpedoes
-    for(int n=0; n<owner->weapon_tube_count; n++)
-    {
-        WeaponTube& tube = owner->weapon_tube[n];
-        if (tube.isEmpty() && owner->weapon_storage[MW_EMP] > 0 && tube.canLoad(MW_EMP))
-            tube.startLoad(MW_EMP);
-        else if (tube.isEmpty() && owner->weapon_storage[MW_Nuke] > 0 && tube.canLoad(MW_Nuke))
-            tube.startLoad(MW_Nuke);
-        else if (tube.isEmpty() && owner->weapon_storage[MW_Homing] > 0 && tube.canLoad(MW_Homing))
-            tube.startLoad(MW_Homing);
-        else if (tube.isEmpty() && owner->weapon_storage[MW_HVLI] > 0 && tube.canLoad(MW_HVLI))
-            tube.startLoad(MW_HVLI);
-
-        //When the tube is loading or loaded, add the relative strenght of this tube to the direction of this tube.
-        if (tube.isLoading() || tube.isLoaded())
+    auto tubes = owner.getComponent<MissileTubes>();
+    if (tubes) {
+        for(auto& tube : tubes->mounts)
         {
-            int index = getDirectionIndex(tube.getDirection(), 90);
-            if (index >= 0)
+            if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_EMP] > 0 && tube.canLoad(MW_EMP))
+                MissileSystem::startLoad(owner, tube, MW_EMP);
+            else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_Nuke] > 0 && tube.canLoad(MW_Nuke))
+                MissileSystem::startLoad(owner, tube, MW_Nuke);
+            else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_Homing] > 0 && tube.canLoad(MW_Homing))
+                MissileSystem::startLoad(owner, tube, MW_Homing);
+            else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_HVLI] > 0 && tube.canLoad(MW_HVLI))
+                MissileSystem::startLoad(owner, tube, MW_HVLI);
+
+            //When the tube is loading or loaded, add the relative strenght of this tube to the direction of this tube.
+            if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded)
             {
-                tube_strength_per_direction[index] += getMissileWeaponStrength(tube.getLoadType()) / tube.getLoadTimeConfig();
+                int index = getDirectionIndex(tube.direction, 90);
+                if (index >= 0)
+                    tube_strength_per_direction[index] += getMissileWeaponStrength(tube.type_loaded) / tube.load_time;
             }
         }
     }
 
-    for(int n=0; n<max_beam_weapons; n++)
-    {
-        BeamWeapon& beam = owner->beam_weapons[n];
-        if (beam.getRange() > 0)
-        {
-            int index = getDirectionIndex(beam.getDirection(), beam.getArc());
-            if (index >= 0)
-            {
-                beam_strength_per_direction[index] += beam.getDamage() / beam.getCycleTime();
+    auto beamsystem = owner.getComponent<BeamWeaponSys>();
+    if (beamsystem) {
+        for(auto& mount : beamsystem->mounts) {
+            if (mount.range > 0.0f) {
+                int index = getDirectionIndex(mount.direction, mount.arc);
+                if (index >= 0 && mount.cycle_time > 0.0f)
+                    beam_strength_per_direction[index] += mount.damage / mount.cycle_time;
             }
         }
     }
@@ -157,34 +186,26 @@ void ShipAI::updateWeaponState(float delta)
     has_beams = best_beam_index > -1;
     has_missiles = best_tube_index > -1;
 
-    if (has_beams)
+    if (has_beams && beamsystem)
     {
         //Figure out our beam weapon range.
-        for(int n=0; n<max_beam_weapons; n++)
-        {
-            BeamWeapon& beam = owner->beam_weapons[n];
-            if (beam.getRange() > 0)
-            {
-                int index = getDirectionIndex(beam.getDirection(), beam.getArc());
-                if (index == best_beam_index)
-                {
-                    beam_weapon_range += beam.getRange() * (beam.getDamage() / beam.getCycleTime()) / beam_strength_per_direction[index];
-                }
+        for(auto& mount : beamsystem->mounts) {
+            if (mount.range > 0.0f) {
+                int index = getDirectionIndex(mount.direction, mount.arc);
+                if (index == best_beam_index && mount.cycle_time > 0.0f)
+                    beam_weapon_range += mount.range * (mount.damage / mount.cycle_time) / beam_strength_per_direction[index];
             }
         }
     }
-    if (has_missiles)
+    if (has_missiles && tubes)
     {
         float best_missile_strength = 0.0;
-        for(int n=0; n<owner->weapon_tube_count; n++)
+        for(auto& tube : tubes->mounts)
         {
-            WeaponTube& tube = owner->weapon_tube[n];
-            if (tube.isLoading() || tube.isLoaded())
-            {
-                int index = getDirectionIndex(tube.getDirection(), 90);
-                if (index == best_tube_index)
-                {
-                    EMissileWeapons type = tube.getLoadType();
+            if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded) {
+                int index = getDirectionIndex(tube.direction, 90);
+                if (index == best_tube_index) {
+                    EMissileWeapons type = tube.type_loaded;
                     float strenght = getMissileWeaponStrength(type);
                     if (strenght > best_missile_strength)
                     {
@@ -226,35 +247,36 @@ void ShipAI::updateWeaponState(float delta)
 
 void ShipAI::updateTarget()
 {
-    P<SpaceObject> target = owner->getTarget();
-    P<SpaceObject> new_target;
-    auto position = owner->getPosition();
-    EAIOrder orders = owner->getOrder();
-    auto order_target_location = owner->getOrderTargetLocation();
-    P<SpaceObject> order_target = owner->getOrderTarget();
-    // Update ranges before calculating
-    short_range = owner->getShortRangeRadarRange();
-    long_range = owner->getLongRangeRadarRange();
+    sp::ecs::Entity target = owner.hasComponent<Target>() ? owner.getComponent<Target>()->entity : sp::ecs::Entity{};
+    sp::ecs::Entity new_target;
+    auto ot = owner.getComponent<sp::Transform>();
+    if (!ot) return;
+    auto position = ot->getPosition();
+    auto ai = owner.getComponent<AIController>();
+    if (!ai) return;
 
     // Check if we lost our target because it entered a nebula.
-    if (target && target->canHideInNebula() && Nebula::blockedByNebula(position, target->getPosition(), owner->getShortRangeRadarRange()))
+    if (target && RadarBlockSystem::isRadarBlockedFrom(position, target, short_range))
     {
         // When we're roaming, and we lost our target in a nebula, set the
         // "fly to" position to the last known position of the enemy target.
-        if (orders == AI_Roaming)
+        if (ai->orders == AIOrder::Roaming)
         {
-            owner->orderRoamingAt(target->getPosition());
+            ai->orders = AIOrder::Roaming;
+            auto tt = target.getComponent<sp::Transform>();
+            if (tt)
+                ai->order_target_location = tt->getPosition();
         }
 
-        target = NULL;
+        target = {};
     }
 
     // If the target is no longer an enemy, clear the target.
-    if (target && !owner->isEnemy(target))
-        target = NULL;
+    if (target && Faction::getRelation(owner, target) != FactionRelation::Enemy)
+        target = {};
 
     // If we're roaming, select the best target within long-range radar range.
-    if (orders == AI_Roaming)
+    if (ai->orders == AIOrder::Roaming)
     {
         if (target)
             new_target = findBestTarget(position, short_range + 2000.0f);
@@ -264,73 +286,75 @@ void ShipAI::updateTarget()
 
     // If we're holding ground or flying toward a destination, select only
     // targets within 2U of our short-range radar range.
-    if (orders == AI_StandGround || orders == AI_FlyTowards)
+    if (ai->orders == AIOrder::StandGround || ai->orders == AIOrder::FlyTowards)
     {
         new_target = findBestTarget(position, short_range + 2000.0f);
     }
 
     // If we're defending a position, select only targets within 2U of our
     // short-range radar range.
-    if (orders == AI_DefendLocation)
+    if (ai->orders == AIOrder::DefendLocation)
     {
-        new_target = findBestTarget(order_target_location, short_range + 2000.0f);
+        new_target = findBestTarget(ai->order_target_location, short_range + 2000.0f);
     }
 
     // If we're flying in formation, select targets only within short-range
     // radar range.
-    if (orders == AI_FlyFormation && order_target)
+    if (ai->orders == AIOrder::FlyFormation && ai->order_target)
     {
-        P<SpaceShip> ship = order_target;
+        auto order_target_target = ai->order_target.getComponent<Target>();
 
-        if (ship && ship->getTarget() && glm::length2(ship->getTarget()->getPosition() - position) < short_range*short_range)
-        {
-            new_target = ship->getTarget();
+        if (order_target_target) {
+            if (auto ottt = order_target_target->entity.getComponent<sp::Transform>()) {
+                if (glm::length2(ottt->getPosition() - position) < short_range*short_range) {
+                    new_target = order_target_target->entity;
+                }
+            }
         }
     }
 
     // If we're defending a target, select only targets within 2U of our
     // short-range radar range.
-    if (orders == AI_DefendTarget)
+    if (ai->orders == AIOrder::DefendTarget && ai->order_target)
     {
-        if (order_target)
-        {
-            new_target = findBestTarget(order_target->getPosition(), short_range + 2000.0f);
-        }
+        auto ott = ai->order_target.getComponent<sp::Transform>();
+        if (ott)
+            new_target = findBestTarget(ott->getPosition(), short_range + 2000.0f);
     }
 
-    if (orders == AI_Attack)
+    if (ai->orders == AIOrder::Attack)
     {
-        new_target = order_target;
+        new_target = ai->order_target;
     }
 
     // Check if we need to drop the current target.
-    if (target)
+    if (auto tt = target.getComponent<sp::Transform>())
     {
-        float target_distance = glm::length(target->getPosition() - position);
+        float target_distance = glm::length(tt->getPosition() - position);
 
         // Release the target if it moves more than short-range radar range +
         // 3U away from us or our destination.
-        if ((orders == AI_StandGround
-            || orders == AI_DefendLocation
-            || orders == AI_DefendTarget
-            || orders == AI_FlyTowards) && (target_distance > short_range + 3000.0f))
+        if ((ai->orders == AIOrder::StandGround
+            || ai->orders == AIOrder::DefendLocation
+            || ai->orders == AIOrder::DefendTarget
+            || ai->orders == AIOrder::FlyTowards) && (target_distance > short_range + 3000.0f))
         {
-            target = NULL;
+            target = {};
         }
 
         // If we're flying in formation, release the target if it moves more
         // than short-range radar range + 1U away from us.
-        if (orders == AI_FlyFormation && target_distance > short_range + 1000.0f)
+        if (ai->orders == AIOrder::FlyFormation && target_distance > short_range + 1000.0f)
         {
-            target = NULL;
+            target = {};
         }
 
         // Don't target anything if we're idling, flying blind, or docking.
-        if (orders == AI_Idle
-            || orders == AI_FlyTowardsBlind
-            || orders == AI_Dock)
+        if (ai->orders == AIOrder::Idle
+            || ai->orders == AIOrder::FlyTowardsBlind
+            || ai->orders == AIOrder::Dock)
         {
-            target = NULL;
+            target = {};
         }
     }
 
@@ -346,356 +370,425 @@ void ShipAI::updateTarget()
     // If we still don't have a target, set that on the owner.
     if (!target)
     {
-        owner->target_id = -1;
+        owner.removeComponent<Target>();
     }
     // Otherwise, set the new target on the owner.
     else
     {
-        owner->target_id = target->getMultiplayerId();
+        owner.getOrAddComponent<Target>().entity = target;
     }
 }
 
 void ShipAI::runOrders()
 {
-    // Update ranges before calculating
-    long_range = owner->getLongRangeRadarRange();
-    relay_range = long_range * 2.0f;
+    auto ai = owner.getComponent<AIController>();
+    auto docking_port = owner.getComponent<DockingPort>();
+    auto radius = 0.0f;
+    if (auto physics = owner.getComponent<sp::Physics>())
+        radius = physics->getSize().x;
 
     //When we are not attacking a target, follow orders
-    switch(owner->getOrder())
+    switch(ai->orders)
     {
-    case AI_Idle:            //Don't do anything, don't even attack.
+    case AIOrder::Idle:            //Don't do anything, don't even attack.
         pathPlanner.clear();
         break;
-    case AI_Roaming:         //Fly around and engage at will, without a clear target
+    case AIOrder::Roaming:         //Fly around and engage at will, without a clear target
         //Could mean 3 things
         // 1) we are looking for a target
         // 2) we ran out of missiles
         // 3) we have no weapons
-        if (has_missiles || has_beams)
-        {
-            P<SpaceObject> new_target = findBestTarget(owner->getPosition(), relay_range);
-            if (new_target)
+        if (auto ot = owner.getComponent<sp::Transform>()) {
+            if (has_missiles || has_beams)
             {
-                owner->target_id = new_target->getMultiplayerId();
-            }else{
-                auto diff = owner->getOrderTargetLocation() - owner->getPosition();
-                if (glm::length2(diff) < 1000.0f*1000.0f)
-                    owner->orderRoamingAt(glm::vec2(random(-long_range, long_range), random(-long_range, long_range)));
-                flyTowards(owner->getOrderTargetLocation());
-            }
-        }else if (owner->weapon_tube_count > 0)
-        {
-            // Find a station which can re-stock our weapons.
-            P<SpaceObject> new_target = findBestMissileRestockTarget(owner->getPosition(), long_range);
-            if (new_target)
-            {
-                owner->orderRetreat(new_target);
-            }else{
-                auto diff = owner->getOrderTargetLocation() - owner->getPosition();
-                if (glm::length2(diff) < 1000.0f*1000.0f)
-                    owner->orderRoamingAt(glm::vec2(random(-long_range, long_range), random(-long_range, long_range)));
-                flyTowards(owner->getOrderTargetLocation());
-            }
-        }else{
-            pathPlanner.clear();
-        }
-        break;
-    case AI_StandGround:     //Keep current position, do not fly away, but attack nearby targets.
-        pathPlanner.clear();
-        break;
-    case AI_FlyTowards:      //Fly towards [order_target_location], attacking enemies that get too close, but disengage and continue when enemy is too far.
-    case AI_FlyTowardsBlind: //Fly towards [order_target_location], not attacking anything
-        flyTowards(owner->getOrderTargetLocation());
-        if (glm::length2(owner->getPosition() - owner->getOrderTargetLocation()) < owner->getRadius()*owner->getRadius())
-        {
-            if (owner->getOrder() == AI_FlyTowards)
-                owner->orderDefendLocation(owner->getOrderTargetLocation());
-            else
-                owner->orderIdle();
-        }
-        break;
-    case AI_DefendLocation:  //Defend against enemies getting close to [order_target_location]
-        {
-            glm::vec2 target_position = owner->getOrderTargetLocation();
-            target_position += vec2FromAngle(vec2ToAngle(target_position - owner->getPosition()) + 170.0f) * 1500.0f;
-            flyTowards(target_position);
-        }
-        break;
-    case AI_DefendTarget:    //Defend against enemies getting close to [order_target] (falls back to AI_Roaming if the target is destroyed)
-        if (owner->getOrderTarget())
-        {
-            auto target_position = owner->getOrderTarget()->getPosition();
-            float circle_distance = 2000.0f + owner->getOrderTarget()->getRadius() * 2.0f + owner->getRadius() * 2.0f;
-            target_position += vec2FromAngle(vec2ToAngle(target_position - owner->getPosition()) + 170.0f) * circle_distance;
-            flyTowards(target_position);
-        }else{
-            owner->orderRoaming();    //We pretty much lost our defending target, so just start roaming.
-        }
-        break;
-    case AI_FlyFormation:    //Fly [order_target_location] offset from [order_target]. Allows for nicely flying in formation.
-        if (owner->getOrderTarget())
-        {
-            flyFormation(owner->getOrderTarget(), owner->getOrderTargetLocation());
-        }else{
-            owner->orderRoaming();
-        }
-        break;
-    case AI_Attack:          //Attack [order_target] very specificly.
-        pathPlanner.clear();
-        break;
-    case AI_Retreat:
-        if ((owner->docking_state == DS_Docked) && (owner->getOrderTarget()) && P<ShipTemplateBasedObject>(owner->getOrderTarget()))
-        {
-            P<ShipTemplateBasedObject> target = owner->getOrderTarget();
-            bool allow_undock = true;
-            if (target->restocks_missiles_docked)
-            {
-                for(int n = 0; n < MW_Count; n++)
+                auto new_target = findBestTarget(ot->getPosition(), relay_range);
+                if (new_target)
                 {
-                    if (owner->weapon_storage[n] < owner->weapon_storage_max[n])
-                    {
-                        allow_undock = false;
-                        break;
+                    owner.getOrAddComponent<Target>().entity = new_target;
+                }else{
+                    auto diff = ai->order_target_location - ot->getPosition();
+                    if (glm::length2(diff) < 1000.0f*1000.0f) {
+                        ai->orders = AIOrder::Roaming;
+                        ai->order_target_location = glm::vec2(random(-long_range, long_range), random(-long_range, long_range));
                     }
+                    flyTowards(ai->order_target_location);
+                }
+            }else{
+                auto tubes = owner.getComponent<MissileTubes>();
+                if (tubes && tubes->mounts.size() > 0)
+                {
+                    // Find a station which can re-stock our weapons.
+                    auto new_target = findBestMissileRestockTarget(ot->getPosition(), long_range);
+                    if (new_target)
+                    {
+                        ai->orders = AIOrder::Retreat;
+                        ai->order_target = new_target;
+                    }else{
+                        auto diff = ai->order_target_location - ot->getPosition();
+                        if (glm::length2(diff) < 1000.0f*1000.0f) {
+                            ai->orders = AIOrder::Roaming;
+                            ai->order_target_location = glm::vec2(random(-long_range, long_range), random(-long_range, long_range));
+                        }
+                        flyTowards(ai->order_target_location);
+                    }
+                }else{
+                    pathPlanner.clear();
                 }
             }
-            if (allow_undock && target->repair_docked && (owner->hull_strength < owner->hull_max))
+        }
+        break;
+    case AIOrder::StandGround:     //Keep current position, do not fly away, but attack nearby targets.
+        pathPlanner.clear();
+        break;
+    case AIOrder::FlyTowards:      //Fly towards [order_target_location], attacking enemies that get too close, but disengage and continue when enemy is too far.
+    case AIOrder::FlyTowardsBlind: //Fly towards [order_target_location], not attacking anything
+        flyTowards(ai->order_target_location);
+        if (auto ot = owner.getComponent<sp::Transform>()) {
+            if (glm::length2(ot->getPosition() - ai->order_target_location) < radius*radius)
             {
-                allow_undock = false;
+                if (ai->orders == AIOrder::FlyTowards)
+                    ai->orders = AIOrder::DefendLocation;
+                else
+                    ai->orders = AIOrder::Idle;
+            }
+        }
+        break;
+    case AIOrder::DefendLocation:  //Defend against enemies getting close to [order_target_location]
+        if (auto ot = owner.getComponent<sp::Transform>())
+        {
+            glm::vec2 target_position = ai->order_target_location;
+            target_position += vec2FromAngle(vec2ToAngle(target_position - ot->getPosition()) + 170.0f) * 1500.0f;
+            flyTowards(target_position);
+        }
+        break;
+    case AIOrder::DefendTarget:    //Defend against enemies getting close to [order_target] (falls back to AIOrder::Roaming if the target is destroyed)
+        if (auto tt = ai->order_target.getComponent<sp::Transform>())
+        {
+            if (auto ot = owner.getComponent<sp::Transform>()) {
+                auto target_position = tt->getPosition();
+                float circle_distance = 3000.0f;
+                target_position += vec2FromAngle(vec2ToAngle(target_position - ot->getPosition()) + 170.0f) * circle_distance;
+                flyTowards(target_position);
+            }
+        }else{
+            ai->orders = AIOrder::Roaming;  //We pretty much lost our defending target, so just start roaming.
+        }
+        break;
+    case AIOrder::FlyFormation:    //Fly [order_target_location] offset from [order_target]. Allows for nicely flying in formation.
+        if (ai->order_target)
+        {
+            flyFormation(ai->order_target, ai->order_target_location);
+        }else{
+            ai->orders = AIOrder::Roaming;
+        }
+        break;
+    case AIOrder::Attack:          //Attack [order_target] very specificly.
+        pathPlanner.clear();
+        break;
+    case AIOrder::Retreat:
+        if ((docking_port && docking_port->state == DockingPort::State::Docked && docking_port->target) && ai->order_target)
+        {
+            auto bay = docking_port->target.getComponent<DockingBay>();
+            bool allow_undock = true;
+            if (bay) {
+                if (bay->flags & DockingBay::RestockMissiles)
+                {
+                    auto tubes = owner.getComponent<MissileTubes>();
+                    if (tubes) {
+                        for(int n = 0; n < MW_Count; n++)
+                        {
+                            if (tubes->storage[n] < tubes->storage_max[n])
+                            {
+                                allow_undock = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (bay->flags & DockingBay::Repair)
+                {
+                    auto hull = owner.getComponent<Hull>();
+                    if (hull && hull->current < hull->max)
+                        allow_undock = false;
+                }
             }
             if (allow_undock)
             {
-                owner->orderRoaming();    //deletes order_target
+                ai->orders = AIOrder::Roaming;
                 break;
             }
-        }else{
-            P<SpaceObject> new_target = findBestMissileRestockTarget(owner->getPosition(), relay_range);
+        }else if (auto ot = owner.getComponent<sp::Transform>()) {
+            auto new_target = findBestMissileRestockTarget(ot->getPosition(), relay_range);
             if (new_target)
             {
-                owner->orderRetreat(new_target);
+                ai->orders = AIOrder::Retreat;
+                ai->order_target = new_target;
             }
         }
         [[fallthrough]]; // continue with docking or roaming
-    case AI_Dock:            //Dock with [order_target]
-        if (owner->getOrderTarget())
+    case AIOrder::Dock:            //Dock with [order_target]
+        if (ai->order_target && docking_port)
         {
-            if (owner->docking_state == DS_NotDocking || owner->docking_target != owner->getOrderTarget())
+            if (docking_port->state == DockingPort::State::NotDocking || docking_port->target != ai->order_target)
             {
-                auto target_position = owner->getOrderTarget()->getPosition();
-                auto diff = owner->getPosition() - target_position;
-                float dist = glm::length(diff);
-                if (dist < 600 + owner->getOrderTarget()->getRadius())
-                {
-                    owner->requestDock(owner->getOrderTarget());
-                }else{
-                    target_position += (diff / dist) * 500.0f;
-                    flyTowards(target_position);
+                auto ott = ai->order_target.getComponent<sp::Transform>();
+                auto ot = owner.getComponent<sp::Transform>();
+                if (ot && ott) {
+                    auto target_position = ott->getPosition();
+                    auto diff = ot->getPosition() - target_position;
+                    float dist = glm::length(diff);
+                    auto target_radius = 0.0f;
+                    if (auto physics = ai->order_target.getComponent<sp::Physics>())
+                        target_radius = physics->getSize().x;
+                    if (dist < 600 + target_radius)
+                    {
+                        DockingSystem::requestDock(owner, ai->order_target);
+                    }else{
+                        target_position += (diff / dist) * 500.0f;
+                        flyTowards(target_position);
+                    }
                 }
             }
         }else{
-            owner->orderRoaming();  //Nothing to dock, just fall back to roaming.
+            ai->orders = AIOrder::Roaming;  //Nothing to dock, just fall back to roaming.
         }
         break;
     }
 }
 
-void ShipAI::runAttack(P<SpaceObject> target)
+void ShipAI::runAttack(sp::ecs::Entity target)
 {
+    auto ai = owner.getComponent<AIController>();
+    if (!ai) return;
+    auto ot = owner.getComponent<sp::Transform>();
+    if (!ot) return;
+    auto tt = target.getComponent<sp::Transform>();
+    if (!tt) return;
     float attack_distance = 4000.0;
     if (has_missiles && best_missile_type == MW_HVLI)
         attack_distance = 2500.0;
     if (has_beams)
         attack_distance = beam_weapon_range * 0.7f;
 
-    auto position_diff = target->getPosition() - owner->getPosition();
+    auto position_diff = tt->getPosition() - ot->getPosition();
     float distance = glm::length(position_diff);
 
     // missile attack
     if (distance < 4500 && has_missiles)
     {
-        for(int n=0; n<owner->weapon_tube_count; n++)
+        auto tubes = owner.getComponent<MissileTubes>();
+        for(auto& tube : tubes->mounts)
         {
-            if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.0f)
+            if (tube.state == MissileTubes::MountPoint::State::Loaded && missile_fire_delay <= 0.0f)
             {
-                float target_angle = calculateFiringSolution(target, n);
+                float target_angle = calculateFiringSolution(target, tube);
                 if (target_angle != std::numeric_limits<float>::infinity())
                 {
-                    owner->weapon_tube[n].fire(target_angle);
-                    missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0f;
+                    MissileSystem::fire(owner, tube, target_angle, target);
+                    missile_fire_delay = tube.load_time / tubes->mounts.size() / 2.0f;
                 }
             }
         }
     }
 
-    if (owner->getOrder() == AI_StandGround)
+    if (ai->orders == AIOrder::StandGround)
     {
-        owner->target_rotation = vec2ToAngle(position_diff);
+        auto thrusters = owner.getComponent<ManeuveringThrusters>();
+        if (thrusters) thrusters->target = vec2ToAngle(position_diff);
     }else{
         if (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right)
         {
             //We have side beams, find out where we want to attack from.
-            auto target_position = target->getPosition();
-            auto diff = target_position - owner->getPosition();
+            auto target_position = tt->getPosition();
+            auto diff = target_position - ot->getPosition();
             float angle = vec2ToAngle(diff);
-            if ((weapon_direction == EWeaponDirection::Side && angleDifference(angle, owner->getRotation()) > 0) || weapon_direction == EWeaponDirection::Left)
+            if ((weapon_direction == EWeaponDirection::Side && angleDifference(angle, ot->getRotation()) > 0) || weapon_direction == EWeaponDirection::Left)
                 angle += 160;
             else
                 angle -= 160;
-            target_position += vec2FromAngle(angle) * (attack_distance + target->getRadius());
+            auto target_radius = 0.0f;
+            if (auto physics = target.getComponent<sp::Physics>())
+                target_radius = physics->getSize().x;
+            target_position += vec2FromAngle(angle) * (attack_distance + target_radius);
             flyTowards(target_position, 0);
         }else{
-            flyTowards(target->getPosition(), attack_distance);
+            flyTowards(tt->getPosition(), attack_distance);
         }
     }
 }
 
 void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
 {
-    pathPlanner.plan(owner->getPosition(), target);
+    auto ot = owner.getComponent<sp::Transform>();
+    if (!ot) return;
+    auto my_radius = 300.0f;
+    if (auto physics = owner.getComponent<sp::Physics>()) my_radius = physics->getSize().x;
+    pathPlanner.plan(my_radius, ot->getPosition(), target);
 
     if (pathPlanner.route.size() > 0)
     {
-        if (owner->docking_state == DS_Docked)
-            owner->requestUndock();
+        auto docking_port = owner.getComponent<DockingPort>();
+        if (docking_port && docking_port->state == DockingPort::State::Docked)
+            DockingSystem::requestUndock(owner);
 
-        auto diff = pathPlanner.route[0] - owner->getPosition();
+        auto diff = pathPlanner.route[0] - ot->getPosition();
         float distance = glm::length(diff);
 
         //Normal flying towards target code
-        owner->target_rotation = vec2ToAngle(diff);
-        float rotation_diff = fabs(angleDifference(owner->target_rotation, owner->getRotation()));
+        auto target_rotation = vec2ToAngle(diff);
+        auto thrusters = owner.getComponent<ManeuveringThrusters>();
+        if (thrusters) thrusters->target = target_rotation;
+        float rotation_diff = fabs(angleDifference(target_rotation, ot->getRotation()));
 
-        if (owner->has_warp_drive && rotation_diff < 30.0f && distance > 2000.0f)
-        {
-            owner->warp_request = 1.0;
-        }else{
-            owner->warp_request = 0.0;
-        }
-        if (distance > 10000 && owner->has_jump_drive && owner->jump_delay <= 0.0f && owner->jump_drive_charge >= owner->jump_drive_max_distance)
+        auto warp = owner.getComponent<WarpDrive>();
+        if (warp)
+            warp->request = (rotation_diff < 30.0f && distance > 2000.0f) ? 1.0f : 0.0f;
+        auto jump = owner.getComponent<JumpDrive>();
+        if (distance > 10000 && jump && jump->delay <= 0.0f && jump->charge >= jump->max_distance)
         {
             if (rotation_diff < 1.0f)
             {
-                float jump = distance;
+                float jump_distance = distance;
                 if (pathPlanner.route.size() < 2)
                 {
-                    jump -= 3000;
+                    jump_distance -= 3000;
                     if (has_missiles)
-                        jump -= 5000;
+                        jump_distance -= 5000;
                 }
-                if (owner->jump_drive_max_distance == 50000)
+                if (jump->max_distance == 50000)
                 {   //If the ship has the default max jump drive distance of 50k, then limit our jumps to 15k, else we limit ourselves to whatever the ship layout is with a bit margin.
-                    if (jump > 15000)
-                        jump = 15000;
+                    if (jump_distance > 15000)
+                        jump_distance = 15000;
                 }else{
-                    if (jump > owner->jump_drive_max_distance - 2000)
-                        jump = owner->jump_drive_max_distance - 2000;
+                    if (jump_distance > jump->max_distance - 2000)
+                        jump_distance = jump->max_distance - 2000;
                 }
-                jump += random(-1500, 1500);
-                owner->initializeJump(jump);
+                jump_distance += random(-1500, 1500);
+                JumpSystem::initializeJump(owner, jump_distance);
             }
         }
         if (pathPlanner.route.size() > 1)
             keep_distance = 0.0;
 
-        // setImpulseRequest only if impulse_max_speed is greater than 0.0
-        if (owner->impulse_max_speed > 0.0f)
-        {
-            if (distance > keep_distance + owner->impulse_max_speed * 5.0f)
-                owner->setImpulseRequest(1.0f);
+        auto impulse = owner.getComponent<ImpulseEngine>();
+        if (impulse && impulse->max_speed_forward > 0.0f) {
+            if (distance > keep_distance + impulse->max_speed_forward * 5.0f)
+                impulse->request = 1.0f;
             else
-                owner->setImpulseRequest((distance - keep_distance) / owner->impulse_max_speed * 5.0f);
-
-            if (rotation_diff > 90.0f)
-                owner->setImpulseRequest(-owner->impulse_request);
-            else if (rotation_diff < 45.0f)
-                owner->setImpulseRequest(owner->impulse_request * (1.0f - ((rotation_diff - 45.0f) / 45.0f)));
+                impulse->request = (distance - keep_distance) / impulse->max_speed_forward * 5.0f;
+            if (rotation_diff > 90)
+                impulse->request = -impulse->request;
+            else if (rotation_diff < 45)
+                impulse->request *= 1.0f - ((rotation_diff - 45.0f) / 45.0f);
         }
     }
 }
 
-void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
+void ShipAI::flyFormation(sp::ecs::Entity target, glm::vec2 offset)
 {
-    auto target_position = target->getPosition() + rotateVec2(owner->getOrderTargetLocation(), target->getRotation());
-    pathPlanner.plan(owner->getPosition(), target_position);
+    auto ai = owner.getComponent<AIController>();
+    if (!ai) return;
+    auto ot = owner.getComponent<sp::Transform>();
+    if (!ot) return;
+    auto tt = target.getComponent<sp::Transform>();
+    if (!tt) return;
+    auto target_position = tt->getPosition() + rotateVec2(ai->order_target_location, tt->getRotation());
+    auto my_radius = 300.0f;
+    if (auto physics = owner.getComponent<sp::Physics>()) my_radius = physics->getSize().x;
+    pathPlanner.plan(my_radius, ot->getPosition(), target_position);
+
+    auto impulse = owner.getComponent<ImpulseEngine>();
+    if (!impulse) return;
 
     if (pathPlanner.route.size() == 1)
     {
-        if (owner->docking_state == DS_Docked)
-            owner->requestUndock();
+        auto thrusters = owner.getComponent<ManeuveringThrusters>();
+        auto docking_port = owner.getComponent<DockingPort>();
+        if (docking_port && docking_port->state == DockingPort::State::Docked)
+            DockingSystem::requestUndock(owner);
 
-        auto diff = target_position - owner->getPosition();
+        auto diff = target_position - ot->getPosition();
         float distance = glm::length(diff);
 
         //Formation flying code
-        float r = owner->getRadius() * 5.0f;
-        owner->target_rotation = vec2ToAngle(diff);
+        float r = 100.0f;
+        if (auto physics = owner.getComponent<sp::Physics>())
+            r = physics->getSize().x * 5.0f;
+        auto target_rotation = vec2ToAngle(diff);
         if (distance > r * 3)
         {
             flyTowards(target_position);
         }
         else if (distance > r)
         {
-            float angle_diff = angleDifference(owner->target_rotation, owner->getRotation());
+            float angle_diff = angleDifference(target_rotation, ot->getRotation());
             if (angle_diff > 10.0f)
-                owner->setImpulseRequest(0.0f);
+                impulse->request = 0.0f;
             else if (angle_diff > 5.0f)
-                owner->setImpulseRequest((10.0f - angle_diff) / 5.0f);
+                impulse->request = (10.0f - angle_diff) / 5.0f;
             else
-                owner->setImpulseRequest(1.0f);
+                impulse->request = 1.0f;
         }else{
             if (distance > r / 2.0f)
             {
-                owner->target_rotation += angleDifference(owner->target_rotation, target->getRotation()) * (1.0f - distance / r);
-                owner->setImpulseRequest(distance / r);
+                target_rotation += angleDifference(target_rotation, tt->getRotation()) * (1.0f - distance / r);
+                impulse->request = distance / r;
             }else{
-                owner->target_rotation = target->getRotation();
-                owner->setImpulseRequest(0.0f);
+                target_rotation = tt->getRotation();
+                impulse->request = 0.0f;
             }
         }
+        if (thrusters) thrusters->target = target_rotation;
     }else{
         flyTowards(target_position);
     }
 }
 
-P<SpaceObject> ShipAI::findBestTarget(glm::vec2 position, float radius)
+sp::ecs::Entity ShipAI::findBestTarget(glm::vec2 position, float radius)
 {
     float target_score = 0.0;
-    PVector<Collisionable> objectList = CollisionManager::queryArea(position - glm::vec2(radius, radius), position + glm::vec2(radius, radius));
-    P<SpaceObject> target;
-    auto owner_position = owner->getPosition();
-    foreach(Collisionable, obj, objectList)
+    sp::ecs::Entity target;
+    auto ot = owner.getComponent<sp::Transform>();
+    auto owner_position = ot->getPosition();
+    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(radius, radius), position + glm::vec2(radius, radius)))
     {
-        P<SpaceObject> space_object = obj;
-        if (!space_object || !space_object->canBeTargetedBy(owner) || !owner->isEnemy(space_object) || space_object == target)
+        if (!entity.hasComponent<Hull>() || Faction::getRelation(owner, entity) != FactionRelation::Enemy || entity == target)
             continue;
-        if (space_object->canHideInNebula() && Nebula::blockedByNebula(owner_position, space_object->getPosition(), owner->getShortRangeRadarRange()))
+        if (RadarBlockSystem::isRadarBlockedFrom(owner_position, entity, short_range))
             continue;
-        float score = targetScore(space_object);
+        float score = targetScore(entity);
         if (score == std::numeric_limits<float>::min())
             continue;
         if (!target || score > target_score)
         {
-            target = space_object;
+            target = entity;
             target_score = score;
         }
     }
     return target;
 }
 
-float ShipAI::targetScore(P<SpaceObject> target)
+float ShipAI::targetScore(sp::ecs::Entity target)
 {
-    auto position_difference = target->getPosition() - owner->getPosition();
+    auto impulse = owner.getComponent<ImpulseEngine>();
+    auto ot = owner.getComponent<sp::Transform>();
+    if (!ot) return std::numeric_limits<float>::min();
+    auto tt = target.getComponent<sp::Transform>();
+    if (!tt) return std::numeric_limits<float>::min();
+    auto position_difference = tt->getPosition() - ot->getPosition();
     float distance = glm::length(position_difference);
     //auto position_difference_normal = position_difference / distance;
     //float rel_velocity = dot(target->getVelocity(), position_difference_normal) - dot(getVelocity(), position_difference_normal);
-    float angle_difference = angleDifference(owner->getRotation(), vec2ToAngle(position_difference));
-    float score = -distance - std::abs(angle_difference / owner->turn_speed * owner->impulse_max_speed) * 1.5f;
-    if (P<SpaceStation>(target))
-    {
-        score -= 5000;
-    }
-    if (P<ScanProbe>(target))
+    float angle_difference = angleDifference(ot->getRotation(), vec2ToAngle(position_difference));
+    auto thrusters = owner.getComponent<ManeuveringThrusters>();
+    float score = -distance - std::abs(angle_difference / (thrusters ? thrusters->speed : 10.0f) * (impulse ? impulse->max_speed_forward : 0.0f)) * 1.5f;
+    if (target.hasComponent<BeamWeaponSys>())
+        score += 2500;
+    if (target.hasComponent<MissileTubes>())
+        score += 2500;
+    if (target.hasComponent<DockingBay>())
+        score -= 1500;
+    if (target.hasComponent<AllowRadarLink>())
     {
         score -= 10000;
         if (distance > 5000)
@@ -706,19 +799,20 @@ float ShipAI::targetScore(P<SpaceObject> target)
 
     if (distance < beam_weapon_range)
     {
-        for(int n=0; n<max_beam_weapons; n++)
-        {
-            if (distance < owner->beam_weapons[n].getRange())
-            {
-                if (fabs(angleDifference(angle_difference, owner->beam_weapons[n].getDirection())) < owner->beam_weapons[n].getArc() / 2.0f)
-                    score += 1000;
+        auto beamsystem = owner.getComponent<BeamWeaponSys>();
+        if (beamsystem) {
+            for(auto& mount : beamsystem->mounts) {
+                if (distance < mount.range) {
+                    if (fabs(angleDifference(angle_difference, mount.direction)) < mount.arc / 2.0f)
+                        score += 1000;
+                }
             }
         }
     }
     return score;
 }
 
-bool ShipAI::betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_target)
+bool ShipAI::betterTarget(sp::ecs::Entity new_target, sp::ecs::Entity current_target)
 {
     float new_score = targetScore(new_target);
     float current_score = targetScore(current_target);
@@ -735,40 +829,39 @@ bool ShipAI::betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_targ
     return false;
 }
 
-float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
+float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes::MountPoint& tube)
 {
-    // Update ranges before calculating
-    short_range = owner->getShortRangeRadarRange();
-
     // Never fire missiles at scan probes.
-    if (P<ScanProbe>(target))
-    {
+    if (target.hasComponent<MoveTo>() && target.hasComponent<ShareShortRangeRadar>())
         return std::numeric_limits<float>::infinity();
-    }
+    auto tt = target.getComponent<sp::Transform>();
+    if (!tt) return std::numeric_limits<float>::infinity();
+    auto ot = owner.getComponent<sp::Transform>();
+    if (!ot) return std::numeric_limits<float>::infinity();
 
-    EMissileWeapons type = owner->weapon_tube[tube_index].getLoadType();
+    EMissileWeapons type = tube.type_loaded;
 
     // Search if a non-enemy ship might be damaged by a missile attack on a
     // line of fire within our short-range radar range.
-    auto target_position = target->getPosition();
-    const float target_distance = glm::length(owner->getPosition() - target_position);
+    auto target_position = tt->getPosition();
+    const float target_distance = glm::length(ot->getPosition() - target_position);
     const float search_distance = std::min(short_range, target_distance + 500.0f);
-    const float target_angle = vec2ToAngle(target_position - owner->getPosition());
+    const float target_angle = vec2ToAngle(target_position - ot->getPosition());
     const float search_angle = 5.0;
 
     // Verify if missle can be fired safely
-    PVector<Collisionable> objectList = CollisionManager::queryArea(owner->getPosition() - glm::vec2(search_distance, search_distance), owner->getPosition() + glm::vec2(search_distance, search_distance));
-    foreach(Collisionable, c, objectList)
+    for(auto entity : sp::CollisionSystem::queryArea(ot->getPosition() - glm::vec2(search_distance, search_distance), ot->getPosition() + glm::vec2(search_distance, search_distance)))
     {
-        P<SpaceObject> obj = c;
-        if (obj && !obj->isEnemy(owner) && (P<SpaceShip>(obj) || P<SpaceStation>(obj)))
+        if (Faction::getRelation(owner, entity) != FactionRelation::Enemy && entity.hasComponent<Hull>() && (entity.hasComponent<ImpulseEngine>() || entity.hasComponent<DockingBay>()))
         {
-            // Ship in research triangle
-            const auto owner_to_obj = obj->getPosition() - owner->getPosition();
-            const float heading_to_obj = vec2ToAngle(owner_to_obj);
-            const float angle_from_heading_to_target = std::abs(angleDifference(heading_to_obj, target_angle));
-            if(angle_from_heading_to_target < search_angle){
-              return std::numeric_limits<float>::infinity();
+            if (auto t = entity.getComponent<sp::Transform>()) {
+                // Ship in research triangle
+                const auto owner_to_obj = t->getPosition() - ot->getPosition();
+                const float heading_to_obj = vec2ToAngle(owner_to_obj);
+                const float angle_from_heading_to_target = std::abs(angleDifference(heading_to_obj, target_angle));
+                if (angle_from_heading_to_target < search_angle) {
+                    return std::numeric_limits<float>::infinity();
+                }
             }
         }
     }
@@ -777,19 +870,23 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
     {
         const MissileWeaponData& data = MissileWeaponData::getDataFor(type);
 
-        auto target_position = target->getPosition();
-        float target_angle = vec2ToAngle(target_position - owner->getPosition());
-        float fire_angle = owner->getRotation() + owner->weapon_tube[tube_index].getDirection();
+        auto target_position = tt->getPosition();
+        float target_angle = vec2ToAngle(target_position - ot->getPosition());
+        float fire_angle = ot->getRotation() + tube.direction;
 
         //HVLI missiles do not home or turn. So use a different targeting mechanism.
         float angle_diff = angleDifference(target_angle, fire_angle);
 
         //Target is moving. Estimate where he will be when the missile hits.
         float fly_time = target_distance / data.speed;
-        target_position += target->getVelocity() * fly_time;
+        if (auto physics = target.getComponent<sp::Physics>())
+            target_position += physics->getVelocity() * fly_time;
 
         //If our "error" of hitting is less then double the radius of the target, fire.
-        if (std::abs(angle_diff) < 80.0f && target_distance * glm::degrees(tanf(fabs(angle_diff))) < target->getRadius() * 2.0f)
+        auto target_radius = 100.0f;
+        if (auto physics = target.getComponent<sp::Physics>())
+            target_radius = physics->getSize().x;
+        if (std::abs(angle_diff) < 80.0f && target_distance * glm::degrees(tanf(fabs(angle_diff))) < target_radius * 2.0f)
             return fire_angle;
 
         return std::numeric_limits<float>::infinity();
@@ -797,19 +894,19 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
 
     if (type == MW_Nuke || type == MW_EMP)
     {
-        auto target_position = target->getPosition();
+        auto target_position = tt->getPosition();
 
         //Check if we can sort of safely fire an Nuke/EMP. The target needs to be clear of friendly/neutrals.
         float safety_radius = 1100;
-        if (glm::length2(target_position - owner->getPosition()) < safety_radius*safety_radius)
+        if (glm::length2(target_position - ot->getPosition()) < safety_radius*safety_radius)
             return std::numeric_limits<float>::infinity();
-        PVector<Collisionable> object_list = CollisionManager::queryArea(target->getPosition() - glm::vec2(safety_radius, safety_radius), target->getPosition() + glm::vec2(safety_radius, safety_radius));
-        foreach(Collisionable, c, object_list)
+        for(auto entity : sp::CollisionSystem::queryArea(tt->getPosition() - glm::vec2(safety_radius, safety_radius), tt->getPosition() + glm::vec2(safety_radius, safety_radius)))
         {
-            P<SpaceObject> obj = c;
-            if (obj && !obj->isEnemy(owner) && (P<SpaceShip>(obj) || P<SpaceStation>(obj)))
+            if (Faction::getRelation(owner, entity) != FactionRelation::Enemy && entity.hasComponent<Hull>() && (entity.hasComponent<DockingBay>() || entity.getComponent<DockingPort>()))
             {
-                if (glm::length(obj->getPosition() - owner->getPosition()) < safety_radius - obj->getRadius())
+                auto physics = entity.getComponent<sp::Physics>();
+                auto et = entity.getComponent<sp::Transform>();
+                if (physics && et && glm::length(et->getPosition() - ot->getPosition()) < safety_radius - physics->getSize().x)
                 {
                     return std::numeric_limits<float>::infinity();
                 }
@@ -818,30 +915,35 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
     }
 
     //Use the general weapon tube targeting to get the final firing solution.
-    return owner->weapon_tube[tube_index].calculateFiringSolution(target);
+    return MissileSystem::calculateFiringSolution(owner, tube, target);
 }
 
-P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float radius)
+sp::ecs::Entity ShipAI::findBestMissileRestockTarget(glm::vec2 position, float radius)
 {
+    auto port = owner.getComponent<DockingPort>();
+    if (!port)
+        return {};
     // Check each object within the given radius. If it's friendly, we can dock
     // to it, and it can restock our missiles, then select it.
     float target_score = 0.0;
-    PVector<Collisionable> objectList = CollisionManager::queryArea(position - glm::vec2(radius, radius), position + glm::vec2(radius, radius));
-    P<SpaceObject> target;
-    auto owner_position = owner->getPosition();
-    foreach(Collisionable, obj, objectList)
+    sp::ecs::Entity target;
+    auto owner_transform = owner.getComponent<sp::Transform>();
+    if (!owner_transform)
+        return {};
+    auto owner_position = owner_transform->getPosition();
+    for(auto [entity, dockingbay, transform, impulse] : sp::ecs::Query<DockingBay, sp::Transform, ImpulseEngine>())
     {
-        P<SpaceObject> space_object = obj;
-        if (!space_object || !owner->isFriendly(space_object) || space_object == target)
+        if (Faction::getRelation(owner, entity) != FactionRelation::Friendly)
             continue;
-        if (space_object->canBeDockedBy(owner) == DockStyle::None || !space_object->canRestockMissiles())
+        if (port->canDockOn(dockingbay) == DockingStyle::None || !(dockingbay.flags & DockingBay::RestockMissiles))
             continue;
         //calculate score
-        auto position_difference = space_object->getPosition() - owner_position;
+        auto position_difference = transform.getPosition() - owner_position;
         float distance = glm::length(position_difference);
-        float angle_difference = angleDifference(owner->getRotation(), vec2ToAngle(position_difference));
-        float score = -distance - std::abs(angle_difference / owner->turn_speed * owner->impulse_max_speed) * 1.5f;
-        if (P<SpaceShip>(space_object))
+        float angle_difference = angleDifference(owner_transform->getRotation(), vec2ToAngle(position_difference));
+        auto thrusters = owner.getComponent<ManeuveringThrusters>();
+        float score = -distance - std::abs(angle_difference / (thrusters ? thrusters->speed : 10.0f) * impulse.max_speed_forward) * 1.5f;
+        if (entity.hasComponent<ImpulseEngine>())
         {
             score -= 5000;
         }
@@ -849,10 +951,9 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float ra
             continue;
         if (!target || score > target_score)
         {
-            target = space_object;
+            target = entity;
             target_score = score;
         }
     }
     return target;
 }
-

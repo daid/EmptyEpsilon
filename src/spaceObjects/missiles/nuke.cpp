@@ -1,8 +1,4 @@
-#include "nuke.h"
-#include "particleEffect.h"
-#include "spaceObjects/explosionEffect.h"
-#include "pathPlanner.h"
-
+/*
 /// A HomingMissile is a MissileWeapon that pursues a target and, upon explosion, deals a base of 30-160 kinetic damage to all SpaceObjects within its 1U base blast radius.
 /// It inherits functions and behaviors from its parent MissileWeapon class.
 /// Missiles can be fired by SpaceShips or created by scripts, and their damage and blast radius can be modified by missile size.
@@ -23,8 +19,8 @@ Nuke::Nuke()
 
 void Nuke::explode()
 {
-    DamageInfo info(owner, DT_Kinetic, getPosition());
-    SpaceObject::damageArea(getPosition(), category_modifier * blast_range, category_modifier * damage_at_edge, category_modifier * damage_at_center, info, getRadius());
+    DamageInfo info(owner, DamageType::Kinetic, getPosition());
+    DamageSystem::damageArea(getPosition(), category_modifier * blast_range, category_modifier * damage_at_edge, category_modifier * damage_at_center, info, 10.0f);
 
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(category_modifier * blast_range);
@@ -51,7 +47,8 @@ void Nuke::update(float delta)
     {
         // We won't want to add the avoid area right away, since that would wreak havoc on the path planning 
         // Ships would try to avoid their own nukes, which is just really silly. 
-        PathPlannerManager::getInstance()->addAvoidObject(this, 1000.f);
+        entity.getOrAddComponent<AvoidObject>().range = 1000.0f;
         avoid_area_added = true;
     }
 }
+*/

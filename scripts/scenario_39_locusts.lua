@@ -943,10 +943,10 @@ end
 --	Events
 function wormholeTax(self,teleportee)
 	string.format("")
-	if teleportee.typeName == "CpuShip" or teleportee.typeName == "PlayerSpaceship" then
+	if teleportee.components.impulse_engine then
 		teleportee:setSystemHealth("beamweapons",teleportee:getSystemHealth("beamweapons") - .5)
 		teleportee:setSystemHealth("missilesystem",teleportee:getSystemHealth("missilesystem") - .5)
-		if teleportee.typeName == "PlayerSpaceship" then
+		if teleportee.components.player_control then
 			teleportee:setEnergy(teleportee:getEnergy()/2)
 		end
 	end

@@ -2,11 +2,11 @@
 #include "hackingDialog.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "spaceObjects/spaceObject.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "mineSweeper.h"
 #include "lightsOut.h"
 #include "miniGame.h"
+#include "i18n.h"
+#include "engine.h"
 #include <memory>
 #include <algorithm>
 
@@ -58,8 +58,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
 
     target_list = new GuiListbox(target_selection_box, "", [this](int index, string value)
     {
-        target_system = value;
-        locale_target_system = target_list->getEntryName(index);
+        target_system = ShipSystem::Type(value.toInt());
         getNewGame();
     });
     target_list->setPosition(25, 75, sp::Alignment::TopLeft);
@@ -68,27 +67,20 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     last_game_success = false;
 }
 
-void GuiHackingDialog::open(P<SpaceObject> target)
+void GuiHackingDialog::open(sp::ecs::Entity target)
 {
     this->target = target;
     show();
     while(target_list->entryCount() > 0)
         target_list->removeEntry(0);
-    std::vector<std::pair<ESystem, float> > targets = target->getHackingTargets();
-    for(std::pair<ESystem, float>& target : targets)
-    {
-        target_list->addEntry(getLocaleSystemName(target.first), getSystemName(target.first));
+    for(int n=0; n<int(ShipSystem::Type::COUNT); n++) {
+        auto sys = ShipSystem::get(target, ShipSystem::Type(n));
+        if (sys && sys->can_be_hacked)
+            target_list->addEntry(getLocaleSystemName(ShipSystem::Type(n)), string(n));
     }
-    if (targets.size() == 1)
-    {
-        target_selection_box->hide();
-        target_system = getSystemName(targets[0].first);
-        locale_target_system = getLocaleSystemName(targets[0].first);
-        getNewGame();
-    } else {
-        target_selection_box->show();
-        game->disable();
-    }
+
+    target_selection_box->show();
+    game->disable();
 }
 
 void GuiHackingDialog::onDraw(sp::RenderTarget& renderer)
@@ -105,7 +97,7 @@ void GuiHackingDialog::onDraw(sp::RenderTarget& renderer)
         {
             if (my_spaceship && last_game_success)
             {
-                my_spaceship->commandHackingFinished(target, target_system);
+                my_player_info->commandHackingFinished(target, target_system);
             }
             getNewGame();
         }else{
@@ -115,17 +107,11 @@ void GuiHackingDialog::onDraw(sp::RenderTarget& renderer)
         progress_bar->setValue(game->getProgress());
         status_label->setText(tr("hacking", "Hacking in Progress: {percent}%").format({{"percent", string(int(100 * game->getProgress()))}}));
     }
-    if (target_system != "")
+    if (target_system != ShipSystem::Type::None)
     {
-        std::vector<std::pair<ESystem, float> > targets = target->getHackingTargets();
-        for(std::pair<ESystem, float>& target : targets)
-        {
-            if (getSystemName(target.first) == target_system)
-            {
-                hacking_status_label->setText(tr("hacking", "{target}: hacked {percent}%").format({{"target", locale_target_system}, {"percent", string(int(target.second * 100.0f + 0.5f))}}));
-                break;
-            }
-        }
+        auto sys = ShipSystem::get(target, target_system);
+        if (sys && sys->can_be_hacked)
+            hacking_status_label->setText(tr("hacking", "{target}: hacked {percent}%").format({{"target", getLocaleSystemName(target_system)}, {"percent", string(int(sys->hacked_level * 100.0f + 0.5f))}}));
     }
 }
 

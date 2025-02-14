@@ -2,8 +2,9 @@
 #define TUTORIAL_GAME_H
 
 #include "epsilonServer.h"
+#include "script/environment.h"
+#include "script/callback.h"
 #include "gui/gui2_canvas.h"
-#include "scriptInterface.h"
 
 class PlayerSpaceship;
 class GuiRadarView;
@@ -13,36 +14,36 @@ class GuiScrollText;
 
 class TutorialGame : public Updatable, public GuiCanvas
 {
+    static P<TutorialGame> instance;
     GuiElement* viewport;
     GuiRadarView* tactical_radar;
     GuiRadarView* long_range_radar;
     GuiElement* station_screen[8];
 
-    P<ScriptObject> script;
     GuiPanel* frame;
     GuiScrollText* text;
     GuiButton* next_button;
 
     bool repeated_tutorial;
 public:
-    ScriptSimpleCallback _onNext;
+    sp::script::Callback _onNext;
 
     TutorialGame(bool repeated_tutorial = false, string filename = "tutorial.lua");
 
     virtual void update(float delta) override;
 
-    void setPlayerShip(P<PlayerSpaceship> ship);
+    static void setPlayerShip(sp::ecs::Entity ship);
 
-    void showMessage(string message, bool show_next);
-    void switchViewToMainScreen();
-    void switchViewToTactical();
-    void switchViewToLongRange();
-    void switchViewToScreen(int n);
-    void setMessageToTopPosition();
-    void setMessageToBottomPosition();
+    static void showMessage(string message, bool show_next);
+    static void switchViewToMainScreen();
+    static void switchViewToTactical();
+    static void switchViewToLongRange();
+    static void switchViewToScreen(int n);
+    static void setMessageToTopPosition();
+    static void setMessageToBottomPosition();
 
-    void onNext(ScriptSimpleCallback callback) { _onNext = callback; }
-    void finish();
+    static void onNext(sp::script::Callback callback) { instance->_onNext = callback; }
+    static void finish();
 private:
     void hideAllScreens();
     void createScreens();

@@ -2,7 +2,7 @@
 These are templates for space stations.
 ----------------------------------------------------------]]
 
-template = ShipTemplate():setName("Small Station"):setLocaleName(_("Small Station")):setModel("space_station_4"):setType("station")
+local template = ShipTemplate():setName("Small Station"):setLocaleName(_("Small Station")):setModel("space_station_4"):setType("station")
 template:setDescription(_([[Stations of this size are often used as research outposts, listening stations, and security checkpoints. Crews turn over frequently in a small station's cramped accommodatations, but they are small enough to look like ships on many long-range sensors, and organized raiders sometimes take advantage of this by placing small stations in nebulae to serve as raiding bases. They are lightly shielded and vulnerable to swarming assaults.]]))
 template:setHull(150)
 template:setShields(300)

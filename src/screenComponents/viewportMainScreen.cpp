@@ -1,7 +1,8 @@
 #include "viewportMainScreen.h"
 #include "playerInfo.h"
 #include "preferenceManager.h"
-#include "spaceObjects/playerSpaceship.h"
+#include "components/collision.h"
+#include "components/target.h"
 #include "main.h"
 
 GuiViewportMainScreen::GuiViewportMainScreen(GuiContainer* owner, string id)
@@ -23,18 +24,24 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        P<SpaceObject> target_ship = my_spaceship->getTarget();
-        float target_camera_yaw = my_spaceship->getRotation();
-        switch(my_spaceship->main_screen_setting)
+        auto pc = my_spaceship.getComponent<PlayerControl>();
+        auto transform = my_spaceship.getComponent<sp::Transform>();
+        if (!transform)
+            return;
+        auto target_ship = my_spaceship.getComponent<Target>();
+        float target_camera_yaw = transform->getRotation();
+        switch(pc ? pc->main_screen_setting : MainScreenSetting::Front)
         {
-        case MSS_Back: target_camera_yaw += 180; break;
-        case MSS_Left: target_camera_yaw -= 90; break;
-        case MSS_Right: target_camera_yaw += 90; break;
-        case MSS_Target:
-            if (target_ship)
+        case MainScreenSetting::Back: target_camera_yaw += 180; break;
+        case MainScreenSetting::Left: target_camera_yaw -= 90; break;
+        case MainScreenSetting::Right: target_camera_yaw += 90; break;
+        case MainScreenSetting::Target:
+            if (target_ship && target_ship->entity)
             {
-                auto target_camera_diff = my_spaceship->getPosition() - target_ship->getPosition();
-                target_camera_yaw = vec2ToAngle(target_camera_diff) + 180;
+                if (auto tt = target_ship->entity.getComponent<sp::Transform>()) {
+                    auto target_camera_diff = transform->getPosition() - tt->getPosition();
+                    target_camera_yaw = vec2ToAngle(target_camera_diff) + 180;
+                }
             }
             break;
         default: break;
@@ -45,11 +52,15 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
         float camera_ship_height = 420.0f;
         if (first_person)
         {
-            camera_ship_distance = -my_spaceship->getRadius();
-            camera_ship_height = my_spaceship->getRadius() / 10.f;
+            float radius = 300.0f;
+            auto physics = my_spaceship.getComponent<sp::Physics>();
+            if (physics)
+                radius = physics->getSize().x;
+            camera_ship_distance = -radius;
+            camera_ship_height = radius / 10.f;
             camera_pitch = 0;
         }
-        auto cameraPosition2D = my_spaceship->getPosition() + vec2FromAngle(target_camera_yaw) * -camera_ship_distance;
+        auto cameraPosition2D = transform->getPosition() + vec2FromAngle(target_camera_yaw) * -camera_ship_distance;
         glm::vec3 targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
         if (first_person)
         {

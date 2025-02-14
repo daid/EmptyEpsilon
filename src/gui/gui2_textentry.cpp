@@ -32,7 +32,7 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
         shown_text = std::string(text.size(), '*');
     }
     sp::Rect text_rect(rect.position.x + 16, rect.position.y, rect.size.x - 32, rect.size.y);
-    auto prepared = front.font->prepare(shown_text, 32, text_size, text_rect.size, multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, sp::Font::FlagClip);
+    auto prepared = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, text_rect.size, multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, sp::Font::FlagClip);
     for(auto& d : prepared.data)
         d.position += render_offset;
     auto linespacing = front.font->getLineSpacing(32) * text_size / float(32);
@@ -100,7 +100,7 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
             }
         }
     }
-    renderer.drawText(text_rect, prepared, text_size, glm::u8vec4{255,255,255,255}, sp::Font::FlagClip);
+    renderer.drawText(text_rect, prepared, sp::Font::FlagClip);
 }
 
 bool GuiTextEntry::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
@@ -451,7 +451,7 @@ int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
     if (hide_password) {
         shown_text = std::string(text.size(), '*');
     }
-    auto pfs = sp::RenderTarget::getDefaultFont()->prepare(shown_text, 32, text_size, rect.size - glm::vec2(32, 0), multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft);
+    auto pfs = sp::RenderTarget::getDefaultFont()->prepare(shown_text, 32, text_size, {255,255,255,255}, rect.size - glm::vec2(32, 0), multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft);
     unsigned int n;
     for(n=0; n<pfs.data.size(); n++)
     {

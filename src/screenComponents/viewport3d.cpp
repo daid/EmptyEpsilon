@@ -1,4 +1,5 @@
 #include <graphics/opengl.h>
+#include <ecs/query.h>
 
 #include "main.h"
 #include "playerInfo.h"
@@ -12,6 +13,13 @@
 #include "particleEffect.h"
 #include "glObjects.h"
 #include "shaderRegistry.h"
+#include "components/collision.h"
+#include "components/target.h"
+#include "components/hull.h"
+#include "components/rendering.h"
+#include "components/impulse.h"
+#include "components/name.h"
+#include "systems/rendering.h"
 
 #include <glm/glm.hpp>
 #include <glm/ext/matrix_transform.hpp>
@@ -167,8 +175,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     }
     renderer.finish();
    
-    if (my_spaceship)
-        soundManager->setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
+    if (auto transform = my_spaceship.getComponent<sp::Transform>())
+        soundManager->setListenerPosition(transform->getPosition(), transform->getRotation());
     else
         soundManager->setListenerPosition(glm::vec2(camera_position.x, camera_position.y), camera_yaw);
     
@@ -237,78 +245,42 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     }
     glDepthMask(GL_TRUE);
 
-    class RenderInfo
-    {
-    public:
-        RenderInfo(SpaceObject* obj, float d)
-        : object(obj), depth(d)
-        {}
-
-        SpaceObject* object;
-        float depth;
-    };
-    std::vector<std::vector<RenderInfo>> render_lists;
-
-    auto viewVector = vec2FromAngle(camera_yaw);
-    float depth_cutoff_back = camera_position.z * -tanf(glm::radians(90+camera_pitch + camera_fov/2.f));
-    float depth_cutoff_front = camera_position.z * -tanf(glm::radians(90+camera_pitch - camera_fov/2.f));
-    if (camera_pitch - camera_fov/2.f <= 0.f)
-        depth_cutoff_front = std::numeric_limits<float>::infinity();
-    if (camera_pitch + camera_fov/2.f >= 180.f)
-        depth_cutoff_back = -std::numeric_limits<float>::infinity();
-    foreach(SpaceObject, obj, space_object_list)
-    {
-        float depth = glm::dot(viewVector, obj->getPosition() - glm::vec2(camera_position.x, camera_position.y));
-        if (depth + obj->getRadius() < depth_cutoff_back)
-            continue;
-        if (depth - obj->getRadius() > depth_cutoff_front)
-            continue;
-        if (depth > 0 && obj->getRadius() / depth < 1.0f / 500)
-            continue;
-        int render_list_index = std::max(0, int((depth + obj->getRadius()) / 25000));
-        while(render_list_index >= int(render_lists.size()))
-            render_lists.emplace_back();
-        render_lists[render_list_index].emplace_back(*obj, depth);
+    // Emit engine particles.
+    for(auto [entity, ee, transform, impulse] : sp::ecs::Query<EngineEmitter, sp::Transform, ImpulseEngine>()) {
+        if (impulse.actual != 0.0f) {
+            float engine_scale = std::abs(impulse.actual);
+            if (engine->getElapsedTime() - ee.last_engine_particle_time > 0.1f)
+            {
+                for(auto ed : ee.emitters)
+                {
+                    glm::vec3 offset = ed.position;
+                    glm::vec2 pos2d = transform.getPosition() + rotateVec2(glm::vec2(offset.x, offset.y), transform.getRotation());
+                    glm::vec3 color = ed.color;
+                    glm::vec3 pos3d = glm::vec3(pos2d.x, pos2d.y, offset.z);
+                    float scale = ed.scale * engine_scale;
+                    ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
+                }
+                ee.last_engine_particle_time = engine->getElapsedTime();
+            }
+        }
     }
 
     // Update view matrix in shaders.
     ShaderRegistry::updateProjectionView({}, view_matrix);
 
+    RenderSystem render_system;
+    render_system.render3D(rect.size.x / rect.size.y, camera_fov);
 
-    for(int n=render_lists.size() - 1; n >= 0; n--)
-    {
-        auto& render_list = render_lists[n];
-        std::sort(render_list.begin(), render_list.end(), [](const RenderInfo& a, const RenderInfo& b) { return a.depth > b.depth; });
-
-        auto projection = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f * (n + 1));
-        // Update projection matrix in shaders.
-        ShaderRegistry::updateProjectionView(projection, {});
-
-        glDepthMask(true);
-
-        glDisable(GL_BLEND);
-        for(auto info : render_list)
-        {
-            SpaceObject* obj = info.object;
-            obj->draw3D();
-        }
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE, GL_ONE);
-        glDepthMask(false);
-        for(auto info : render_list)
-        {
-            SpaceObject* obj = info.object;
-            obj->draw3DTransparent();
-        }
-    }
     ParticleEngine::render(projection_matrix, view_matrix);
 
     if (show_spacedust && my_spaceship)
     {
+        auto transform = my_spaceship.getComponent<sp::Transform>();
+        auto physics = my_spaceship.getComponent<sp::Physics>();
         static std::vector<glm::vec3> space_dust(2 * spacedust_particle_count);
         
-        glm::vec2 dust_vector = my_spaceship->getVelocity() / 100.f;
-        glm::vec3 dust_center = glm::vec3(my_spaceship->getPosition().x, my_spaceship->getPosition().y, 0.f); 
+        glm::vec2 dust_vector = physics ? (physics->getVelocity() / 100.f) : glm::vec2{0, 0};
+        glm::vec3 dust_center = transform ? glm::vec3(transform->getPosition().x, transform->getPosition().y, 0.f) : camera_position;
 
         constexpr float maxDustDist = 500.f;
         constexpr float minDustDist = 100.f;
@@ -353,18 +325,22 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         }
     }
 
-    if (my_spaceship && my_spaceship->getTarget())
+    auto target_comp = my_spaceship.getComponent<Target>();
+    if (target_comp && target_comp->entity)
     {
         ShaderRegistry::ScopedShader billboard(ShaderRegistry::Shaders::Billboard);
 
-        P<SpaceObject> target = my_spaceship->getTarget();
         glDisable(GL_DEPTH_TEST);
-        auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3(target->getPosition(), 0.f));
-
+        glm::mat4 model_matrix = glm::identity<glm::mat4>();
+        if (auto transform = target_comp->entity.getComponent<sp::Transform>())
+            model_matrix = glm::translate(model_matrix, glm::vec3(transform->getPosition(), 0.f));
 
         textureManager.getTexture("redicule2.png")->bind();
         glUniformMatrix4fv(billboard.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
-        glUniform4f(billboard.get().uniform(ShaderRegistry::Uniforms::Color), .5f, .5f, .5f, target->getRadius() * 2.5f);
+        float radius = 300.0f;
+        if (auto physics = target_comp->entity.getComponent<sp::Physics>())
+            radius = physics->getSize().x;
+        glUniform4f(billboard.get().uniform(ShaderRegistry::Uniforms::Color), .5f, .5f, .5f, radius * 2.5f);
         {
             gl::ScopedVertexAttribArray positions(billboard.get().attribute(ShaderRegistry::Attributes::Position));
             gl::ScopedVertexAttribArray texcoords(billboard.get().attribute(ShaderRegistry::Attributes::Texcoords));
@@ -437,37 +413,38 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    if (show_callsigns && render_lists.size() > 0)
+    if (show_callsigns)
     {
-        for(auto info : render_lists[0])
+        for(auto [entity, callsign, transform] : sp::ecs::Query<CallSign, sp::Transform>())
         {
-            SpaceObject* obj = info.object;
-            if (!obj->canBeTargetedBy(my_spaceship) || obj == *my_spaceship)
+            if (entity == my_spaceship)
                 continue;
-            string call_sign = obj->getCallSign();
-            if (call_sign == "")
-                continue;
-
-            glm::vec3 screen_position = worldToScreen(renderer, glm::vec3(obj->getPosition().x, obj->getPosition().y, obj->getRadius()));
+            float radius = 300.0f;
+            if (auto physics = entity.getComponent<sp::Physics>())
+                radius = physics->getSize().x;
+            glm::vec3 screen_position = worldToScreen(renderer, glm::vec3(transform.getPosition().x, transform.getPosition().y, radius));
             if (screen_position.z < 0.0f)
                 continue;
             if (screen_position.z > 10000.0f)
                 continue;
             float distance_factor = 1.0f - (screen_position.z / 10000.0f);
-            renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), call_sign, sp::Alignment::Center, 20 * distance_factor, bold_font, glm::u8vec4(255, 255, 255, 128 * distance_factor));
+            renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), callsign.callsign, sp::Alignment::Center, 20 * distance_factor, bold_font, glm::u8vec4(255, 255, 255, 128 * distance_factor));
         }
     }
 
     if (show_headings && my_spaceship)
     {
         float distance = 2500.f;
+        auto transform = my_spaceship.getComponent<sp::Transform>();
 
-        for(int angle = 0; angle < 360; angle += 30)
-        {
-            glm::vec2 world_pos = my_spaceship->getPosition() + vec2FromAngle(angle - 90.f) * distance;
-            glm::vec3 screen_pos = worldToScreen(renderer, glm::vec3(world_pos.x, world_pos.y, 0.0f));
-            if (screen_pos.z > 0.0f)
-                renderer.drawText(sp::Rect(screen_pos.x, screen_pos.y, 0, 0), string(angle), sp::Alignment::Center, 30, bold_font, glm::u8vec4(255, 255, 255, 128));
+        if (transform) {
+            for(int angle = 0; angle < 360; angle += 30)
+            {
+                glm::vec2 world_pos = transform->getPosition() + vec2FromAngle(angle - 90.f) * distance;
+                glm::vec3 screen_pos = worldToScreen(renderer, glm::vec3(world_pos.x, world_pos.y, 0.0f));
+                if (screen_pos.z > 0.0f)
+                    renderer.drawText(sp::Rect(screen_pos.x, screen_pos.y, 0, 0), string(angle), sp::Alignment::Center, 30, bold_font, glm::u8vec4(255, 255, 255, 128));
+            }
         }
     }
 

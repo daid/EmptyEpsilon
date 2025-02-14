@@ -1,0 +1,72 @@
+#: scripts/api/gm.lua:3
+msgctxt "create"
+msgid "Artifact"
+msgstr ""
+
+#: scripts/api/gm.lua:3 scripts/api/gm.lua:4 scripts/api/gm.lua:5
+#: scripts/api/gm.lua:6 scripts/api/gm.lua:7 scripts/api/gm.lua:8
+#: scripts/api/gm.lua:9 scripts/api/gm.lua:10 scripts/api/gm.lua:11
+#: scripts/api/gm.lua:12 scripts/api/gm.lua:13
+msgctxt "create"
+msgid "Various"
+msgstr ""
+
+#: scripts/api/gm.lua:4
+msgctxt "create"
+msgid "Warp Jammer"
+msgstr ""
+
+#: scripts/api/gm.lua:5 scripts/api/gm.lua:7
+msgctxt "create"
+msgid "Mine"
+msgstr ""
+
+#: scripts/api/gm.lua:6
+msgctxt "create"
+msgid "Supply Drop"
+msgstr ""
+
+#: scripts/api/gm.lua:8
+msgctxt "create"
+msgid "Asteroid"
+msgstr ""
+
+#: scripts/api/gm.lua:9
+msgctxt "create"
+msgid "Visual Asteroid"
+msgstr ""
+
+#: scripts/api/gm.lua:10
+msgctxt "create"
+msgid "Planet"
+msgstr ""
+
+#: scripts/api/gm.lua:11
+msgctxt "create"
+msgid "BlackHole"
+msgstr ""
+
+#: scripts/api/gm.lua:12
+msgctxt "create"
+msgid "Nebula"
+msgstr ""
+
+#: scripts/api/gm.lua:13
+msgctxt "create"
+msgid "Worm Hole"
+msgstr ""
+
+#: scripts/api/gm.lua:18
+msgctxt "create"
+msgid "player ship"
+msgstr ""
+
+#: scripts/api/gm.lua:20
+msgctxt "create"
+msgid "station"
+msgstr ""
+
+#: scripts/api/gm.lua:22
+msgctxt "create"
+msgid "cpu ship"
+msgstr ""

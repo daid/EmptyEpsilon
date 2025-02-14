@@ -1,6 +1,4 @@
 #include "databaseScreen.h"
-#include "shipTemplate.h"
-#include "scienceDatabase.h"
 
 #include "screenComponents/databaseView.h"
 #include "screenComponents/customShipFunctions.h"
@@ -10,5 +8,5 @@ DatabaseScreen::DatabaseScreen(GuiContainer* owner)
 {
     (new DatabaseViewComponent(this))->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiCustomShipFunctions(this, databaseView, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, CrewPosition::databaseView, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 }

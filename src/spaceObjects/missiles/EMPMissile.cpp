@@ -1,8 +1,4 @@
-#include "EMPMissile.h"
-#include "particleEffect.h"
-#include "spaceObjects/electricExplosionEffect.h"
-#include "pathPlanner.h"
-
+/*
 /// An EMPMissile is an electromagnetic pulse MissileWeapon that pursues a target and, upon explosion, deals a base of 30-160 EMP damage to shields within its 1U base blast radius.
 /// It inherits functions and behaviors from its parent MissileWeapon class.
 /// Missiles can be fired by SpaceShips or created by scripts, and their damage and blast radius can be modified by missile size.
@@ -22,8 +18,8 @@ EMPMissile::EMPMissile()
 
 void EMPMissile::explode()
 {
-    DamageInfo info(owner, DT_EMP, getPosition());
-    SpaceObject::damageArea(getPosition(), category_modifier * blast_range, category_modifier * damage_at_edge, category_modifier * damage_at_center, info, getRadius());
+    DamageInfo info(owner, DamageType::EMP, getPosition());
+    DamageSystem::damageArea(getPosition(), category_modifier * blast_range, category_modifier * damage_at_edge, category_modifier * damage_at_center, info, 10.0f);
 
     P<ElectricExplosionEffect> e = new ElectricExplosionEffect();
     e->setSize(category_modifier * blast_range);
@@ -51,10 +47,8 @@ void EMPMissile::update(float delta)
     {
         // We won't want to add the avoid area right away, since that would wreak havoc on the path planning 
         // Ships would try to avoid their own nukes, which is just really silly. 
-        PathPlannerManager::getInstance()->addAvoidObject(this, 1000.f);
+        entity.getOrAddComponent<AvoidObject>().range = 1000.0f;
         avoid_area_added = true;
     }
 }
-
-
-
+*/

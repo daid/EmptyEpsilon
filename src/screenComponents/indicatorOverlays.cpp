@@ -5,6 +5,12 @@
 #include "main.h"
 #include "random.h"
 #include "preferenceManager.h"
+#include "components/warpdrive.h"
+#include "components/jumpdrive.h"
+#include "components/shields.h"
+#include "components/hull.h"
+#include "multiplayer_server.h"
+#include "i18n.h"
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_label.h"
@@ -55,11 +61,14 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
 
         float shield_hit = 0.0;
         bool low_shields = false;
-        for(int n=0; n<my_spaceship->shield_count; n++)
-        {
-            shield_hit = std::max(shield_hit, my_spaceship->shield_hit_effect[n]);
-            if (my_spaceship->shield_level[n] < my_spaceship->shield_max[n] / 10.0f)
-                low_shields = true;
+        auto shields = my_spaceship.getComponent<Shields>();
+        if (shields) {
+            for(auto& shield : shields->entries)
+            {
+                shield_hit = std::max(shield_hit, shield.hit_effect);
+                if (shield.level < shield.max / 10.0f)
+                    low_shields = true;
+            }
         }
         shield_hit = (shield_hit - 0.5f) / 0.5f;
         shield_hit_overlay->setAlpha(32 * shield_hit);
@@ -71,7 +80,8 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
             shield_low_warning_overlay->setAlpha(0);
         }
 
-        hull_hit_overlay->setAlpha(128 * (my_spaceship->hull_damage_indicator / 1.5f));
+        if (auto hull = my_spaceship.getComponent<Hull>())
+            hull_hit_overlay->setAlpha(128 * (hull->damage_indicator / 1.5f));
     }else{
         shield_hit_overlay->setAlpha(0);
         shield_low_warning_overlay->setAlpha(0);
@@ -80,22 +90,24 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
 
     if (my_spaceship)
     {
-        if (my_spaceship->jump_indicator > 0.0f)
+        auto jump = my_spaceship.getComponent<JumpDrive>();
+        auto warp = my_spaceship.getComponent<WarpDrive>();
+        if (jump && jump->just_jumped > 0.0f)
         {
             glitchPostProcessor->enabled = true;
-            glitchPostProcessor->setUniform("magtitude", my_spaceship->jump_indicator * 10.0f);
+            glitchPostProcessor->setUniform("magtitude", jump->just_jumped * 10.0f);
             glitchPostProcessor->setUniform("delta", random(0, 360));
         }else{
             glitchPostProcessor->enabled = false;
         }
-        if (my_spaceship->current_warp > 0.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
+        if (warp && warp->current > 0.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", my_spaceship->current_warp * 0.01f);
-        }else if (my_spaceship->jump_delay > 0.0f && my_spaceship->jump_delay < 2.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
+            warpPostProcessor->setUniform("amount", warp->current * 0.01f);
+        }else if (jump && jump->delay > 0.0f && jump->delay < 2.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", (2.0f - my_spaceship->jump_delay) * 0.1f);
+            warpPostProcessor->setUniform("amount", (2.0f - jump->delay) * 0.1f);
         }else{
             warpPostProcessor->enabled = false;
         }
@@ -109,7 +121,7 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
         warpPostProcessor->enabled = false;
         glitchPostProcessor->enabled = false;
 
-        if (gameGlobalInfo->getVictoryFactionId() < 0)
+        if (!gameGlobalInfo->getVictoryFaction())
         {
             pause_overlay->show();
             victory_overlay->hide();
@@ -122,22 +134,23 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
                 victory_panel->setPosition(0, 0, sp::Alignment::Center);
             }
 
-            EFactionVsFactionState fvf_state = FVF_Neutral;
+            auto fvf_state = FactionRelation::Neutral;
             if (my_spaceship)
             {
-                fvf_state = FactionInfo::getState(gameGlobalInfo->getVictoryFactionId(), my_spaceship->getFactionId());
+                auto my_faction = my_spaceship.getComponent<Faction>();
+                if (my_faction)
+                    fvf_state = gameGlobalInfo->getVictoryFaction()->getRelation(my_faction->entity);
             }
             switch(fvf_state)
             {
-            case FVF_Enemy:
+            case FactionRelation::Enemy:
                 victory_label->setText(tr("Defeat!"));
                 break;
-            case FVF_Friendly:
+            case FactionRelation::Friendly:
                 victory_label->setText(tr("Victory!"));
                 break;
-            case FVF_Neutral:
-                if (factionInfo[gameGlobalInfo->getVictoryFactionId()])
-                    victory_label->setText(tr("{faction} wins").format({{"faction", factionInfo[gameGlobalInfo->getVictoryFactionId()]->getLocaleName()}}));
+            case FactionRelation::Neutral:
+                victory_label->setText(tr("{faction} wins").format({{"faction", gameGlobalInfo->getVictoryFaction()->locale_name}}));
                 break;
             }
         }
@@ -158,15 +171,18 @@ void GuiIndicatorOverlays::drawAlertLevel(sp::RenderTarget& renderer)
 {
     glm::u8vec4 multiply_color{255,255,255,255};
 
-    switch(my_spaceship->alert_level)
+    auto pc = my_spaceship.getComponent<PlayerControl>();
+    if (!pc) return;
+
+    switch(pc->alert_level)
     {
-    case AL_RedAlert:
+    case AlertLevel::RedAlert:
         multiply_color = glm::u8vec4(255, 192, 192, 255);
         break;
-    case AL_YellowAlert:
+    case AlertLevel::YellowAlert:
         multiply_color = glm::u8vec4(255, 255, 192, 255);
         break;
-    case AL_Normal:
+    case AlertLevel::Normal:
     default:
         return;
     }

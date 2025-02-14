@@ -78,6 +78,7 @@ public:
 
     GuiContainer* getOwner();
     GuiContainer* getTopLevelContainer();
+    const string& getID() { return id; }
 
     //Have this GuiElement destroyed, but at a safe point&time in the code. (handled by the container)
     void destroy();

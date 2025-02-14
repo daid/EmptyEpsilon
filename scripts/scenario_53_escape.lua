@@ -22,9 +22,12 @@ require("place_station_scenario_utility.lua")
 --	Initialization routines  --
 -------------------------------
 function init()
-	scenario_version = "5.0.2"
-	print(string.format("     -----     Scenario: Escape     -----     Version %s     -----",scenario_version))
-	print(_VERSION)
+	scenario_version = "5.0.10"
+	ee_version = "2024.12.08"
+	print(string.format("    ----     Scenario: Escape    ----     Version %s    ----    Tested with EE version %s",scenario_version,ee_version))
+	if _VERSION ~= nil then
+		print("Lua version:",_VERSION)
+	end
 	wfv = "nowhere"		--wolf fence value - used for debugging
 	setSettings()
 	addRepulseToDatabase()
@@ -235,7 +238,7 @@ function init()
 		["maneuver"] =		{max = nil},
 		["missilesystem"] =	{max = -.1,	msg = _("repair-msgEngineer", "Reached maximum repair on missile weapons"),	},
 		["impulse"] =		{max = .4,	msg = _("repair-msgEngineer", "Reached maximum repair on impulse engines"),	},
-		["warp"] =			{max = -.1,	msg = _("repair-msgEngineer", "Reached maximum repair on warp drive"),		},
+		["warp"] =			{max = 0,	msg = _("repair-msgEngineer", "Reached maximum repair on warp drive"),		},
 		["jumpdrive"] =		{max = -.1,	msg = _("repair-msgEngineer", "Reached maximum repair on jump drive"),		},
 		["frontshield"] =	{max = .3,	msg = _("repair-msgEngineer", "Reached maximum repair on front shields"),	},
 		["rearshield"] =	{max = .3,	msg = _("repair-msgEngineer", "Reached maximum repair on rear shield"),		},
@@ -303,6 +306,7 @@ function addRepulseToDatabase()
 	local size_key = _("scienceDB","Size")
 	local shield_key = _("scienceDB","Shield")
 	local hull_key = _("scienceDB","Hull")
+	--[[
 	if station_db == nil then
 		station_db = ScienceDatabase():setName(station_key)
 		station_db:setLongDescription(_("scienceDB","Stations are places for ships to dock, get repaired and replenished, interact with station personnel, etc. They are like oases, service stations, villages, towns, cities, etc."))
@@ -347,6 +351,7 @@ function addRepulseToDatabase()
 		huge_station_db:setKeyValue(hull_key,800)
 		huge_station_db:setModelDataName("space_station_1")
 	end
+	--]]
 -----------------------------------------------------------------------------------
 --	Template ship category descriptions: text from other shipTemplates... files  --
 -----------------------------------------------------------------------------------
@@ -380,6 +385,7 @@ function addRepulseToDatabase()
 	local subclass_key = _("scienceDB","Sub-class")
 	local move_speed_key = _("scienceDB","Move speed")
 	local turn_speed_key = _("scienceDB","Turn speed")
+	--[[
 	if cruiser_db == nil then
 		frigate_db:addEntry(cruiser_key)
 		cruiser_db = queryScienceDatabase(ships_key,frigate_key,cruiser_key)
@@ -396,6 +402,7 @@ function addRepulseToDatabase()
 		cruiser_db:setImage("radar/cruiser.png")
 		cruiser_db:setModelDataName("small_frigate_4")
 	end
+	--]]
 --------------------------
 --	Stock player ships  --
 --------------------------
@@ -1455,7 +1462,7 @@ function handleDockedState()
 							impulse_good_quantity = comms_source.goods[impulseFixStation.impulse_good]
 						end
 						if impulse_good_quantity > 0 then
-							setCommsMessage(string.format(_("crewFriends-comms", "Piece of cake. Thanks for the %s."),impulseFixStation.impulse_good))
+							setCommsMessage(string.format(_("crewFriends-comms", "Piece of cake. Thanks for the %s."),comms_source.goods[impulseFixStation.impulse_good]))
 							playerRepulse:setSystemHealthMax("impulse",1)
 							playerRepulse.impulseFix = "done"
 							comms_source.goods[impulseFixStation.impulse_good] = comms_source.goods[impulseFixStation.impulse_good] - 1
@@ -1466,7 +1473,7 @@ function handleDockedState()
 								addCommsReply(_("Back"),commsStation)
 							end)
 						else
-							setCommsMessage(string.format(_("crewFriends-comms", "Piece of cake, but I'll need %s."),impulseFixStation.impulse_good))
+							setCommsMessage(string.format(_("crewFriends-comms", "Piece of cake, but I'll need %s."),comms_source.goods[impulseFixStation.impulse_good]))
 						end
 					else
 						setCommsMessage(_("crewFriends-comms", "Piece of cake."))
@@ -1783,27 +1790,27 @@ function handleDockedState()
 	if goodCount > 0 then
 		addCommsReply(_("trade-comms", "Buy, sell, trade"), function()
 			local ctd = comms_target.comms_data
-			local goodsReport = string.format(_("trade-comms", "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"),comms_target:getCallSign())
+			local goodsReport = string.format(_("forSaleTrade-comms", "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"),comms_target:getCallSign())
 			for good, goodData in pairs(ctd.goods) do
-				goodsReport = goodsReport .. string.format(_("trade-comms", "     %s: %i, %i\n"),good,goodData["quantity"],goodData["cost"])
+				goodsReport = goodsReport .. string.format(_("forSaleTrade-comms", "     %s: %i, %i\n"),good,goodData["quantity"],goodData["cost"])
 			end
 			if ctd.buy ~= nil then
-				goodsReport = goodsReport .. _("trade-comms", "Goods or components station will buy: price in reputation\n")
+				goodsReport = goodsReport .. _("willBuyTrade-comms", "Goods or components station will buy: price in reputation\n")
 				for good, price in pairs(ctd.buy) do
-					goodsReport = goodsReport .. string.format(_("trade-comms", "     %s: %i\n"),good,price)
+					goodsReport = goodsReport .. string.format(_("willBuyTrade-comms", "     %s: %i\n"),good,price)
 				end
 			end
-			goodsReport = goodsReport .. string.format(_("trade-comms", "Current cargo aboard %s:\n"),comms_source:getCallSign())
+			goodsReport = goodsReport .. string.format(_("onBoardTrade-comms", "Current cargo aboard %s:\n"),comms_source:getCallSign())
 			local cargoHoldEmpty = true
 			local player_good_count = 0
 			if comms_source.goods ~= nil then
 				for good, goodQuantity in pairs(comms_source.goods) do
 					player_good_count = player_good_count + 1
-					goodsReport = goodsReport .. string.format(_("trade-comms", "     %s: %i\n"),good,goodQuantity)
+					goodsReport = goodsReport .. string.format(_("onBoardTrade-comms", "     %s: %i\n"),good,goodQuantity)
 				end
 			end
 			if player_good_count < 1 then
-				goodsReport = goodsReport .. _("trade-comms", "     Empty\n")
+				goodsReport = goodsReport .. _("onBoardTrade-comms", "     Empty\n")
 			end
 			goodsReport = goodsReport .. string.format(_("trade-comms", "Available Space: %i, Available Reputation: %i\n"),comms_source.cargo,math.floor(comms_source:getReputationPoints()))
 			setCommsMessage(goodsReport)
@@ -1851,7 +1858,7 @@ function handleDockedState()
 					end
 				end
 			end
-			if ctd.trade.food and comms_source.goods ~= nil and comms_source.goods.food ~= nil and comms_source.goods.food.quantity > 0 then
+			if ctd.trade.food and comms_source.goods ~= nil and comms_source.goods.food ~= nil and comms_source.goods.food > 0 then
 				for good, goodData in pairs(ctd.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade food for %s"),good), function()
 						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
@@ -1874,7 +1881,7 @@ function handleDockedState()
 					end)
 				end
 			end
-			if ctd.trade.medicine and comms_source.goods ~= nil and comms_source.goods.medicine ~= nil and comms_source.goods.medicine.quantity > 0 then
+			if ctd.trade.medicine and comms_source.goods ~= nil and comms_source.goods.medicine ~= nil and comms_source.goods.medicine > 0 then
 				for good, goodData in pairs(ctd.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade medicine for %s"),good), function()
 						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
@@ -1897,7 +1904,7 @@ function handleDockedState()
 					end)
 				end
 			end
-			if ctd.trade.luxury and comms_source.goods ~= nil and comms_source.goods.luxury ~= nil and comms_source.goods.luxury.quantity > 0 then
+			if ctd.trade.luxury and comms_source.goods ~= nil and comms_source.goods.luxury ~= nil and comms_source.goods.luxury > 0 then
 				for good, goodData in pairs(ctd.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
 						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
@@ -2425,25 +2432,26 @@ function friendlyComms(comms_data)
 	end
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
-		addCommsReply(_("trade-comms", "Do you have cargo you might sell?"), function()
-			local goodCount = 0
-			local cargoMsg = _("trade-comms", "We've got ")
-			for good, goodData in pairs(comms_data.goods) do
-				if goodData.quantity > 0 then
-					if goodCount > 0 then
-						cargoMsg = cargoMsg .. _("trade-comms", ", ") .. good
-					else
-						cargoMsg = cargoMsg .. good
+		if distance(comms_source,comms_target) > 5000 then
+			addCommsReply(_("trade-comms", "Do you have cargo you might sell?"), function()
+				local goodCount = 0
+				local cargoMsg = _("trade-comms", "We've got ")
+				for good, goodData in pairs(comms_data.goods) do
+					if goodData.quantity > 0 then
+						if goodCount > 0 then
+							cargoMsg = cargoMsg .. _("trade-comms", ", ") .. good
+						else
+							cargoMsg = cargoMsg .. good
+						end
 					end
+					goodCount = goodCount + goodData.quantity
 				end
-				goodCount = goodCount + goodData.quantity
-			end
-			if goodCount == 0 then
-				cargoMsg = cargoMsg .. _("trade-comms", "nothing")
-			end
-			setCommsMessage(cargoMsg)
-		end)
-		if distance(comms_source,comms_target) < 5000 then
+				if goodCount == 0 then
+					cargoMsg = cargoMsg .. _("trade-comms", "nothing")
+				end
+				setCommsMessage(cargoMsg)
+			end)
+		else
 			local goodCount = 0
 			if comms_source.goods ~= nil then
 				for good, goodQuantity in pairs(comms_source.goods) do
@@ -2966,21 +2974,19 @@ function hugRepulse(delta)
 	end
 	if playerFighter ~= nil and playerFighter:isValid() then
 		if distance(playerFighter,junkRepulse) < 500 then
-			if playerFighter:hasPlayerAtPosition("Engineering") then
+			if repulseTransferButton == nil then
 				repulseTransferButton = "repulseTransferButton"
 				playerFighter:addCustomButton("Engineering",repulseTransferButton,_("crewTransfer-buttonEngineer", "Transfer to Repulse"),repulseTransfer)
 			end
-			if playerFighter:hasPlayerAtPosition("Engineering+") then
+			if repulseTransferButtonEPlus == nil then
 				repulseTransferButtonEPlus = "repulseTransferButtonEPlus"
 				playerFighter:addCustomButton("Engineering+",repulseTransferButtonEPlus,_("crewTransfer-buttonEngineer+", "Transfer to Repulse"),repulseTransfer)
 			end
-			if playerFighter:hasPlayerAtPosition("DamageControl") then
+			if repulseTransferButtonDmgCtl == nil then
 				repulseTransferButtonDmgCtl = "repulseTransferButtonDmgCtl"
 				playerFighter:addCustomButton("DamageControl",repulseTransferButtonDmgCtl,_("crewTransfer-buttonDamageControl", "Transfer to Repulse"),repulseTransfer)
 			end
-			if repulseTransferButtonEPlus ~= nil or repulseTransferButton ~= nil or repulseTransferButtonDmgCtl ~= nil then
-				plot1 = nil
-			end
+			plot1 = nil
 		end
 	else
 		globalMessage(_("defeat-msgMainscreen","You were destroyed. The Human Navy did not receive your Kraylor intel."))

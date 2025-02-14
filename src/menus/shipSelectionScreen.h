@@ -2,6 +2,7 @@
 #define SHIP_SELECTION_SCREEN_H
 
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_panel.h"
 
@@ -33,6 +34,7 @@ private:
     CrewPositionSelection* crew_position_selection;
 
     PasswordDialog* password_dialog;
+    std::vector<GameGlobalInfo::ShipSpawnInfo> ship_spawn_info;
 public:
     ShipSelectionScreen();
 
@@ -53,7 +55,7 @@ private:
     int window_index;
     GuiButton* ready_button;
     GuiToggleButton* main_screen_button;
-    GuiToggleButton* crew_position_button[max_crew_positions];
+    GuiToggleButton* crew_position_button[static_cast<int>(CrewPosition::MAX)];
     GuiToggleButton* main_screen_controls_button;
     GuiToggleButton* window_button;
     GuiTextEntry* window_angle;

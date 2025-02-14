@@ -2,7 +2,6 @@
 #define ENGINEERING_SCREEN_H
 
 #include "gui/gui2_overlay.h"
-#include "shipTemplate.h"
 #include "playerInfo.h"
 
 class GuiSelfDestructButton;
@@ -20,11 +19,6 @@ class EngineeringScreen : public GuiOverlay
 private:
     GuiOverlay* background_crosses;
 
-    GuiKeyValueDisplay* energy_display;
-    GuiKeyValueDisplay* hull_display;
-    GuiKeyValueDisplay* front_shield_display;
-    GuiKeyValueDisplay* rear_shield_display;
-    GuiKeyValueDisplay* coolant_display;
     GuiSelfDestructButton* self_destruct_button;
     GuiLabel* power_label;
     GuiSlider* power_slider;
@@ -51,21 +45,17 @@ private:
     GuiElement* system_effects_container;
     std::vector<GuiKeyValueDisplay*> system_effects;
     unsigned int system_effects_index;
-    ESystem selected_system;
+    ShipSystem::Type selected_system;
 
-    float previous_energy_measurement;
-    float previous_energy_level;
-    float average_energy_delta;
-
-    bool set_power_active[SYS_COUNT] = {false};
-    bool set_coolant_active[SYS_COUNT] = {false};
+    bool set_power_active[ShipSystem::COUNT] = {false};
+    bool set_coolant_active[ShipSystem::COUNT] = {false};
 
     void addSystemEffect(string key, string value);
-    void selectSystem(ESystem system);
+    void selectSystem(ShipSystem::Type system);
 
     string toNearbyIntString(float value);
 public:
-    EngineeringScreen(GuiContainer* owner, ECrewPosition crew_position=engineering);
+    EngineeringScreen(GuiContainer* owner, CrewPosition crew_position=CrewPosition::engineering);
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;

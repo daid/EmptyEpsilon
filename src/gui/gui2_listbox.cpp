@@ -102,12 +102,12 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
             }
 
             // Prepare the foreground text style.
-            auto prepared = f->font->prepare(e.name, 32, text_size, button_rect.size, sp::Alignment::Center, sp::Font::FlagClip);
+            auto prepared = f->font->prepare(e.name, 32, text_size, f->color, button_rect.size, sp::Alignment::Center, sp::Font::FlagClip);
             for(auto& c : prepared.data)
                 c.position.y -= rect.position.y - button_rect.position.y;
 
             // Draw the text.
-            renderer.drawText(rect, prepared, text_size, f->color, sp::Font::FlagClip);
+            renderer.drawText(rect, prepared, sp::Font::FlagClip);
         }
 
         // Prepare to draw the next button below this one.

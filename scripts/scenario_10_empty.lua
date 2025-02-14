@@ -5,86 +5,47 @@
 --- Scenario
 -- @script scenario_10_empty
 
+
+
 function init()
-    --SpaceStation():setPosition(1000, 1000):setTemplate('Small Station'):setFaction("Human Navy"):setRotation(random(0, 360))
-    --SpaceStation():setPosition(-1000, 1000):setTemplate('Medium Station'):setFaction("Human Navy"):setRotation(random(0, 360))
-    --SpaceStation():setPosition(1000, -1000):setTemplate('Large Station'):setFaction("Human Navy"):setRotation(random(0, 360))
-    --SpaceStation():setPosition(-1000, -1000):setTemplate('Huge Station'):setFaction("Human Navy"):setRotation(random(0, 360))
-    --player1 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setRotation(200)
-    --player2 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setRotation(0)
-    --Nebula():setPosition(-5000, 0)
-    --Artifact():setPosition(1000, 9000):setModel("small_frigate_1"):setDescription(_("scienceDescription-artifact", "An old space derelict."))
-    --Artifact():setPosition(9000, 2000):setModel("small_frigate_1"):setDescription(_("scienceDescription-artifact", "A wrecked ship."))
-    --Artifact():setPosition(3000, 4000):setModel("small_frigate_1"):setDescription(_("scienceDescription-artifact", "Tons of rotting plasteel."))
-    --addGMFunction(_("buttonGM", "move 1 to 2"), function() player1:transferPlayersToShip(player2) end)
-    --addGMFunction(_("buttonGM", "move 2 to 1"), function() player2:transferPlayersToShip(player1) end)
-    --CpuShip():setTemplate("Adder MK5"):setPosition(0, 0):setRotation(0):setFaction("Human Navy")
-    --CpuShip():setTemplate("Piranha F12"):setPosition(2000, 0):setRotation(-90):setFaction("Kraylor")
-    local planet1 = Planet():setPosition(5000, 5000):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png"):setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2, 0.2, 1.0)
-    local moon1 = Planet():setPosition(5000, 0):setPlanetRadius(1000):setDistanceFromMovementPlane(-2000):setPlanetSurfaceTexture("planets/moon-1.png"):setAxialRotationTime(20.0)
-    local sun1 = Planet():setPosition(5000, 15000):setPlanetRadius(1000):setDistanceFromMovementPlane(-2000):setPlanetAtmosphereTexture("planets/star-1.png"):setPlanetAtmosphereColor(1.0, 1.0, 1.0)
-    planet1:setOrbit(sun1, 40)
-    moon1:setOrbit(planet1, 20.0)
+    local a = Asteroid()
+    a:setPosition(500, 1000)
 
-    addGMFunction(
-        _("buttonGM", "Random asteroid field"),
-        function()
-            cleanup()
-            for n = 1, 1000 do
-                Asteroid():setPosition(random(-50000, 50000), random(-50000, 50000)):setSize(random(100, 500))
-                VisualAsteroid():setPosition(random(-50000, 50000), random(-50000, 50000)):setSize(random(100, 500))
-            end
-        end
-    )
-    addGMFunction(
-        _("buttonGM", "Random nebula field"),
-        function()
-            cleanup()
-            for n = 1, 50 do
-                Nebula():setPosition(random(-50000, 50000), random(-50000, 50000))
-            end
-        end
-    )
-    addGMFunction(
-        _("buttonGM", "Delete unselected"),
-        function()
-            local gm_selection = getGMSelection()
-            for idx, obj in ipairs(getAllObjects()) do
-                local found = false
-                for idx2, obj2 in ipairs(gm_selection) do
-                    if obj == obj2 then
-                        found = true
-                    end
-                end
-                if not found then
-                    obj:destroy()
-                end
-            end
-        end
-    )
+    p = PlayerSpaceship()
+    p:setTemplate("Atlantis")
+    p:setPosition(0, 0)
+
+    print("Print function from init.")
+    print("Player is at:", p.components.transform.position)
+
+    --c = CpuShip()
+    --c:setTemplate("Phobos T3"):setPosition(5000, 5000)
+
+    --s = SpaceStation()
+    --s:setTemplate("Small Station"):setPosition(-2000, -2000):setFaction("Human Navy")
 end
 
-function cleanup()
-    -- Clean up the current play field. Find all objects and destroy everything that is not a player.
-    -- If it is a player, position him in the center of the scenario.
-    for idx, obj in ipairs(getAllObjects()) do
-        if obj.typeName == "PlayerSpaceship" then
-            obj:setPosition(random(-100, 100), random(-100, 100))
-        else
-            obj:destroy()
-        end
-    end
+
+function hue_to_color(h)
+    if h > 360 then h = h - 360 end
+    local color = {0, 0, 0}
+    local c = 1.0
+    local x = 1.0 - math.abs(((h % 120) / 60) - 1.0);
+    if h < 60 then color[1] = c; color[2] = x
+    elseif h < 120 then color[1] = x; color[2] = c
+    elseif h < 180 then color[2] = c; color[3] = x
+    elseif h < 240 then color[2] = x; color[3] = c
+    elseif h < 300 then color[1] = x; color[3] = c
+    else color[1] = c; color[3] = x end
+    return color
 end
 
+local hue = 0
 function update(delta)
+    hue = hue + delta * 60
+    if hue > 360 then hue = hue - 360 end
+    for n=1,#p.components.engine_emitter do
+        p.components.engine_emitter[n].color = hue_to_color(hue + n * 60)
+    end
     -- No victory condition
 end
-
--- Set callback function
-onNewPlayerShip(
-    function(ship)
-        -- Decide what you do with new ships:
-        print(ship, ship.typeName, ship:getTypeName(), ship:getCallSign())
-        -- ship:destroy()
-    end
-)

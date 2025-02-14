@@ -3,11 +3,6 @@
 
 #include "Updatable.h"
 
-class SpaceObject;
-class SpaceShip;
-class SpaceStation;
-class MissileWeapon;
-class Planet;
 class JSONGenerator;
 /*
  * The GameStateLogger logs the current state of the game to a log file.
@@ -37,12 +32,6 @@ private:
     std::map<int, glm::vec2> static_objects;
 
     void logGameState();
-    bool isStatic(P<SpaceObject> obj);
-    void writeObjectEntry(JSONGenerator& json, P<SpaceObject> obj);
-    void writeShipEntry(JSONGenerator& json, P<SpaceShip> obj);
-    void writeStationEntry(JSONGenerator& json, P<SpaceStation> obj);
-    void writeMissileEntry(JSONGenerator& json, P<MissileWeapon> missile);
-    void writePlanetEntry(JSONGenerator& json, P<Planet> obj);
 };
 
 #endif//GAME_STATE_LOGGER_H

@@ -10,14 +10,14 @@ private:
     bool is_evading;
     glm::vec2 evasion_location{0, 0};
 public:
-    EvasionAI(CpuShip* owner);
+    EvasionAI(sp::ecs::Entity owner);
 
     virtual bool canSwitchAI() override;
     virtual void run(float delta) override;
     virtual void runOrders() override;
 
     virtual bool evadeIfNecessary();
-    float evasionDangerScore(P<SpaceShip> ship, float scan_radius);
+    float evasionDangerScore(sp::ecs::Entity ship, float scan_radius);
 };
 
 

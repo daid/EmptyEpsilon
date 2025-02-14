@@ -1,9 +1,10 @@
 #include <i18n.h>
 #include "shieldsEnableButton.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
 #include "gameGlobalInfo.h"
+#include "components/shields.h"
+#include "components/beamweapon.h"
 
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_progressbar.h"
@@ -14,35 +15,44 @@ GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
     button = new GuiToggleButton(this, id + "_BUTTON", "Shields: ON", [](bool value) {
-        if (my_spaceship)
-            my_spaceship->commandSetShields(!my_spaceship->shields_active);
+        if (my_spaceship) {
+            auto shields = my_spaceship.getComponent<Shields>();
+            if (shields)
+                my_player_info->commandSetShields(!shields->active);
+        }
     });
     button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    bar = new GuiProgressbar(this, id + "_BAR", 0.0, PlayerSpaceship::shield_calibration_time, 0);
+    bar = new GuiProgressbar(this, id + "_BAR", 0.0, 25.0f, 0.0f);
     bar->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     (new GuiLabel(bar, id + "_CALIBRATING_LABEL", tr("shields","Calibrating"), 30))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiPowerDamageIndicator(this, id + "_PDI", SYS_FrontShield, sp::Alignment::CenterLeft))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiPowerDamageIndicator(this, id + "_PDI", ShipSystem::Type::FrontShield, sp::Alignment::CenterLeft))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 void GuiShieldsEnableButton::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        if (my_spaceship->shield_calibration_delay > 0.0f)
+        auto shields = my_spaceship.getComponent<Shields>();
+        if (!shields) {
+            button->hide();
+            bar->hide();
+        }
+        else if (shields->calibration_delay > 0.0f)
         {
             button->hide();
             bar->show();
-            bar->setValue(my_spaceship->shield_calibration_delay);
+            bar->setRange(0, shields->calibration_time);
+            bar->setValue(shields->calibration_delay);
         }
         else
         {
             button->show();
-            button->setValue(my_spaceship->shields_active);
+            button->setValue(shields->active);
             bar->hide();
-            string shield_status=my_spaceship->shields_active ? tr("shields","ON") : tr("shields","OFF");
-            if (gameGlobalInfo->use_beam_shield_frequencies)
-                button->setText(tr("{frequency} Shields: {status}").format({{"frequency", frequencyToString(my_spaceship->shield_frequency)}, {"status", shield_status}}));
+            string shield_status=shields->active ? tr("shields","ON") : tr("shields","OFF");
+            if (gameGlobalInfo->use_beam_shield_frequencies && shields->frequency != -1)
+                button->setText(tr("{frequency} Shields: {status}").format({{"frequency", frequencyToString(shields->frequency)}, {"status", shield_status}}));
             else
                 button->setText(tr("Shields: {status}").format({{"status", shield_status}}));
         }
@@ -51,13 +61,17 @@ void GuiShieldsEnableButton::onDraw(sp::RenderTarget& target)
 
 void GuiShieldsEnableButton::onUpdate()
 {
+    setVisible(my_spaceship.hasComponent<Shields>());
     if (my_spaceship && isVisible())
     {
-        if (keys.weapons_toggle_shields.getDown())
-            my_spaceship->commandSetShields(!my_spaceship->shields_active);
+        if (keys.weapons_toggle_shields.getDown()) {
+            auto shields = my_spaceship.getComponent<Shields>();
+            if (shields)
+                my_player_info->commandSetShields(!shields->active);
+        }
         if (keys.weapons_enable_shields.getDown())
-            my_spaceship->commandSetShields(true);
+            my_player_info->commandSetShields(true);
         if (keys.weapons_disable_shields.getDown())
-            my_spaceship->commandSetShields(false);
+            my_player_info->commandSetShields(false);
     }
 }

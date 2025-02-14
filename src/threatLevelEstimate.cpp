@@ -1,9 +1,15 @@
 #include "gameGlobalInfo.h"
 #include "threatLevelEstimate.h"
-#include "collisionable.h"
-#include "spaceObjects/spaceship.h"
-#include "spaceObjects/beamEffect.h"
-#include "spaceObjects/missiles/missileWeapon.h"
+#include "ecs/query.h"
+#include "components/hull.h"
+#include "components/collision.h"
+#include "components/shields.h"
+#include "components/beamweapon.h"
+#include "components/missiletubes.h"
+#include "components/missile.h"
+#include "components/player.h"
+#include "systems/collision.h"
+
 
 ThreatLevelEstimate::ThreatLevelEstimate()
 {
@@ -19,10 +25,8 @@ void ThreatLevelEstimate::update(float delta)
         return;
 
     float max_threat = 0.0f;
-    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
-    {
-        max_threat = std::max(max_threat, getThreatFor(gameGlobalInfo->getPlayerShip(n)));
-    }
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+        max_threat = std::max(max_threat, getThreatFor(entity));
     float f = delta / threat_drop_off_time;
     smoothed_threat_level = ((1.0f - f) * smoothed_threat_level) + (max_threat * f);
 
@@ -41,45 +45,59 @@ void ThreatLevelEstimate::update(float delta)
     }
 }
 
-float ThreatLevelEstimate::getThreatFor(P<SpaceShip> ship)
+float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
 {
     if (!ship)
         return 0.0;
 
     float threat = 0.0;
-    if (ship->getShieldsActive())
-        threat += 200;
 
-    for(int n=0; n<ship->shield_count; n++)
-        threat += ship->shield_max[n] - ship->shield_level[n];
-    threat += ship->hull_max - ship->hull_strength;
+    auto hull = ship.getComponent<Hull>();
+    if (hull)
+        threat += hull->max - hull->current;
+    auto shields = ship.getComponent<Shields>();
+    if (shields) {
+        if (shields->active)
+            threat += 200;
+        for(auto& shield : shields->entries)
+            threat += shield.max - shield.level;
+    }
 
     float radius = 7000.0;
-    PVector<Collisionable> objectList = CollisionManager::queryArea(ship->getPosition() - glm::vec2(radius, radius), ship->getPosition() + glm::vec2(radius, radius));
-    foreach(Collisionable, obj, objectList)
-    {
-        P<SpaceShip> other_ship = obj;
-        if (!other_ship || !ship->isEnemy(other_ship))
+    
+    auto transform = ship.getComponent<sp::Transform>();
+    if (transform) {
+        auto ship_position = transform->getPosition();
+        for(auto entity : sp::CollisionSystem::queryArea(ship_position - glm::vec2(radius, radius), ship_position + glm::vec2(radius, radius)))
         {
-            if (P<MissileWeapon>(obj))
-                threat += 5000.0f;
-            if (P<BeamEffect>(obj))
-                threat += 5000.0f;
-            continue;
-        }
+            bool is_shiplike = entity.hasComponent<BeamWeaponSys>() || entity.hasComponent<MissileTubes>();
+            if (!is_shiplike || Faction::getRelation(ship, entity) == FactionRelation::Enemy)
+            {
+                if (entity.hasComponent<MissileFlight>() && entity.hasComponent<ExplodeOnTouch>())
+                    threat += 5000.0f;
+                if (entity.hasComponent<BeamEffect>())
+                    threat += 5000.0f;
+                continue;
+            }
 
-        bool is_being_attacked = false;
-        float score = 200.0f + other_ship->hull_max;
-        for(int n=0; n<other_ship->shield_count; n++)
-        {
-            score += other_ship->shield_max[n] * 2.0f / float(other_ship->shield_count);
-            if (other_ship->shield_hit_effect[n] > 0.0f)
-                is_being_attacked = true;
-        }
-        if (is_being_attacked)
-            score += 500.0f;
+            bool is_being_attacked = false;
+            hull = entity.getComponent<Hull>();
+            float score = 200.0f;
+            if (hull)
+                score += hull->max;
+            auto shields = entity.getComponent<Shields>();
+            if (shields) {
+                for(auto& shield : shields->entries) {
+                    score += shield.max * 2.0f / float(shields->entries.size());
+                    if (shield.hit_effect > 0.0f)
+                        is_being_attacked = true;
+                }
+            }
+            if (is_being_attacked)
+                score += 500.0f;
 
-        threat += score;
+            threat += score;
+        }
     }
 
     return threat;

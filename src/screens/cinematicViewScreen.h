@@ -15,7 +15,7 @@ private:
     const double pi = M_PI;
 
     GuiViewport3D* viewport;
-    P<PlayerSpaceship> target;
+    sp::ecs::Entity target;
     GuiSelector* camera_lock_selector;
     GuiToggleButton* camera_lock_toggle;
     GuiToggleButton* camera_lock_tot_toggle;
@@ -38,7 +38,7 @@ private:
     glm::vec2 camera_position_2D{0, 0};
     float target_rotation;
 
-    P<SpaceObject> target_of_target;
+    sp::ecs::Entity target_of_target;
 
     glm::vec2 tot_position_2D{0, 0};
     glm::vec3 tot_position_3D{};
@@ -51,7 +51,7 @@ private:
     float cycle_time;
 
 public:
-    explicit CinematicViewScreen(RenderLayer* render_layer, int playerShip = 0);
+    explicit CinematicViewScreen(RenderLayer* render_layer);
 
     virtual void update(float delta) override;
 };

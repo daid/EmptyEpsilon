@@ -9,7 +9,7 @@ if(APPLE)
   message(STATUS "Mac deployment target is: $ENV{MACOSX_DEPLOYMENT_TARGET}")
 endif()
 
-cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
@@ -212,36 +212,35 @@ set(GUI_LIB_SOURCES
 )
 
 set(MAIN_SOURCES
+    src/init/config.h
+    src/init/config.cpp
+    src/init/resources.h
+    src/init/resources.cpp
+    src/init/displaywindows.h
+    src/init/displaywindows.cpp
+    src/init/ecs.h
+    src/init/ecs.cpp
+
     src/main.cpp
     src/threatLevelEstimate.cpp
     src/preferenceManager.cpp
-    src/pathPlanner.cpp
     src/epsilonServer.cpp
     src/particleEffect.cpp
     src/httpScriptAccess.cpp
-    src/modelInfo.cpp
     src/packResourceProvider.cpp
-    src/scienceDatabase.cpp
-    src/commsScriptInterface.cpp
-    src/modelData.cpp
     src/gameGlobalInfo.cpp
     src/GMActions.cpp
     src/script.cpp
     src/playerInfo.cpp
     src/gameStateLogger.cpp
-    src/shipTemplate.cpp
-    src/beamTemplate.cpp
     src/missileWeaponData.cpp
-    src/factionInfo.cpp
     src/mesh.cpp
     src/scenarioInfo.cpp
-    src/repairCrew.cpp
-    src/GMScriptCallback.cpp
-    src/GMMessage.cpp
     src/tutorialGame.cpp
-    src/scriptDataStorage.cpp
     src/shaderRegistry.cpp
     src/glObjects.cpp
+    src/stdinLuaConsole.h
+    src/stdinLuaConsole.cpp
     src/menus/joinServerMenu.cpp
     src/menus/serverBrowseMenu.cpp
     src/menus/mainMenus.cpp
@@ -292,6 +291,7 @@ set(MAIN_SOURCES
     src/screenComponents/shieldFreqencySelect.cpp
     src/screenComponents/jumpControls.cpp
     src/screenComponents/impulseControls.cpp
+    src/screenComponents/infoDisplay.cpp
     src/screenComponents/frequencyCurve.cpp
     src/screenComponents/noiseOverlay.cpp
     src/screenComponents/powerDamageIndicator.cpp
@@ -325,33 +325,175 @@ set(MAIN_SOURCES
     src/screenComponents/miniGame.cpp
     src/screenComponents/mineSweeper.cpp
     src/screenComponents/impulseSound.cpp
-    src/spaceObjects/missiles/missileWeapon.cpp
-    src/spaceObjects/missiles/EMPMissile.cpp
-    src/spaceObjects/missiles/homingMissile.cpp
-    src/spaceObjects/missiles/hvli.cpp
-    src/spaceObjects/missiles/nuke.cpp
-    src/spaceObjects/spaceStation.cpp
-    src/spaceObjects/spaceship.cpp
-    src/spaceObjects/wormHole.cpp
-    src/spaceObjects/spaceObject.cpp
-    src/spaceObjects/nebula.cpp
-    src/spaceObjects/explosionEffect.cpp
-    src/spaceObjects/cpuShip.cpp
-    src/spaceObjects/asteroid.cpp
-    src/spaceObjects/mine.cpp
-    src/spaceObjects/blackHole.cpp
-    src/spaceObjects/playerSpaceship.cpp
-    src/spaceObjects/beamEffect.cpp
-    src/spaceObjects/electricExplosionEffect.cpp
-    src/spaceObjects/supplyDrop.cpp
-    src/spaceObjects/warpJammer.cpp
-    src/spaceObjects/scanProbe.cpp
-    src/spaceObjects/artifact.cpp
-    src/spaceObjects/shipTemplateBasedObject.cpp
-    src/spaceObjects/planet.cpp
-    src/spaceObjects/zone.cpp
-    src/spaceObjects/spaceshipParts/beamWeapon.cpp
-    src/spaceObjects/spaceshipParts/weaponTube.cpp
+    src/components/faction.h
+    src/components/faction.cpp
+    src/components/radar.h
+    src/components/hull.h
+    src/components/rendering.h
+    src/components/rendering.cpp
+    src/components/docking.h
+    src/components/coolant.h
+    src/components/shipsystem.h
+    src/components/shipsystem.cpp
+    src/components/impulse.h
+    src/components/maneuveringthrusters.h
+    src/components/warpdrive.h
+    src/components/jumpdrive.h
+    src/components/reactor.h
+    src/components/shields.h
+    src/components/shields.cpp
+    src/components/beamweapon.h
+    src/components/beamweapon.cpp
+    src/components/target.h
+    src/components/missiletubes.h
+    src/components/selfdestruct.h
+    src/components/player.h
+    src/components/player.cpp
+    src/components/pickup.h
+    src/components/spin.h
+    src/components/rendering.h
+    src/components/name.h
+    src/components/customshipfunction.h
+    src/components/shiplog.h
+    src/components/shiplog.cpp
+    src/components/comms.h
+    src/components/scanning.h
+    src/components/scanning.cpp
+    src/components/internalrooms.h
+    src/components/internalrooms.cpp
+    src/components/probe.h
+    src/components/hacking.h
+    src/components/ai.h
+    src/components/radarblock.h
+    src/components/gravity.h
+    src/components/avoidobject.h
+    src/components/sfx.h
+    src/components/missile.h
+    src/components/database.h
+    src/components/zone.h
+    src/components/zone.cpp
+    src/components/moveto.h
+    src/components/lifetime.h
+    src/systems/ai.h
+    src/systems/ai.cpp
+    src/systems/docking.h
+    src/systems/docking.cpp
+    src/systems/shipsystemssystem.h
+    src/systems/shipsystemssystem.cpp
+    src/systems/coolantsystem.h
+    src/systems/coolantsystem.cpp
+    src/systems/energysystem.h
+    src/systems/energysystem.cpp
+    src/systems/impulse.h
+    src/systems/impulse.cpp
+    src/systems/maneuvering.h
+    src/systems/maneuvering.cpp
+    src/systems/beamweapon.h
+    src/systems/beamweapon.cpp
+    src/systems/missilesystem.h
+    src/systems/missilesystem.cpp
+    src/systems/warpsystem.h
+    src/systems/warpsystem.cpp
+    src/systems/jumpsystem.h
+    src/systems/jumpsystem.cpp
+    src/systems/shieldsystem.h
+    src/systems/shieldsystem.cpp
+    src/systems/damage.h
+    src/systems/damage.cpp
+    src/systems/selfdestruct.h
+    src/systems/selfdestruct.cpp
+    src/systems/pickup.h
+    src/systems/pickup.cpp
+    src/systems/basicmovement.h
+    src/systems/basicmovement.cpp
+    src/systems/gravity.h
+    src/systems/gravity.cpp
+    src/systems/comms.h
+    src/systems/comms.cpp
+    src/systems/radarblock.h
+    src/systems/radarblock.cpp
+    src/systems/internalcrew.h
+    src/systems/internalcrew.cpp
+    src/systems/pathfinding.h
+    src/systems/pathfinding.cpp
+    src/systems/rendering.h
+    src/systems/rendering.cpp
+    src/systems/scanning.h
+    src/systems/scanning.cpp
+    src/systems/planet.h
+    src/systems/planet.cpp
+    src/systems/player.h
+    src/systems/player.cpp
+    src/systems/radar.h
+    src/systems/radar.cpp
+    src/systems/zone.h
+    src/systems/zone.cpp
+    src/multiplayer/beamweapon.h
+    src/multiplayer/beamweapon.cpp
+    src/multiplayer/shields.h
+    src/multiplayer/shields.cpp
+    src/multiplayer/faction.h
+    src/multiplayer/faction.cpp
+    src/multiplayer/radar.h
+    src/multiplayer/radar.cpp
+    src/multiplayer/comms.h
+    src/multiplayer/comms.cpp
+    src/multiplayer/probe.h
+    src/multiplayer/probe.cpp
+    src/multiplayer/orbit.h
+    src/multiplayer/orbit.cpp
+    src/multiplayer/radarblock.h
+    src/multiplayer/radarblock.cpp
+    src/multiplayer/player.h
+    src/multiplayer/player.cpp
+    src/multiplayer/name.h
+    src/multiplayer/name.cpp
+    src/multiplayer/impulse.h
+    src/multiplayer/impulse.cpp
+    src/multiplayer/warp.h
+    src/multiplayer/warp.cpp
+    src/multiplayer/jumpdrive.h
+    src/multiplayer/jumpdrive.cpp
+    src/multiplayer/docking.h
+    src/multiplayer/docking.cpp
+    src/multiplayer/coolant.h
+    src/multiplayer/coolant.cpp
+    src/multiplayer/reactor.h
+    src/multiplayer/reactor.cpp
+    src/multiplayer/rendering.h
+    src/multiplayer/rendering.cpp
+    src/multiplayer/selfdestruct.h
+    src/multiplayer/selfdestruct.cpp
+    src/multiplayer/hull.h
+    src/multiplayer/hull.cpp
+    src/multiplayer/target.h
+    src/multiplayer/target.cpp
+    src/multiplayer/database.h
+    src/multiplayer/database.cpp
+    src/multiplayer/maneuveringthrusters.h
+    src/multiplayer/maneuveringthrusters.cpp
+    src/multiplayer/hacking.h
+    src/multiplayer/hacking.cpp
+    src/multiplayer/customshipfunction.h
+    src/multiplayer/customshipfunction.cpp
+    src/multiplayer/gravity.h
+    src/multiplayer/gravity.cpp
+    src/multiplayer/scanning.h
+    src/multiplayer/scanning.cpp
+    src/multiplayer/missile.h
+    src/multiplayer/missile.cpp
+    src/multiplayer/missiletubes.h
+    src/multiplayer/missiletubes.cpp
+    src/multiplayer/spin.h
+    src/multiplayer/spin.cpp
+    src/multiplayer/moveto.h
+    src/multiplayer/moveto.cpp
+    src/multiplayer/internalrooms.h
+    src/multiplayer/internalrooms.cpp
+    src/multiplayer/shiplog.h
+    src/multiplayer/shiplog.cpp
+    src/multiplayer/zone.h
+    src/multiplayer/zone.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
@@ -366,23 +508,25 @@ set(MAIN_SOURCES
     src/hardware/devices/uDMXDevice.cpp
     src/hardware/devices/virtualOutputDevice.cpp
     src/hardware/devices/philipsHueDevice.cpp
+    src/script/components.cpp
+    src/script/dataStorage.h
+    src/script/dataStorage.cpp
+    src/script/gm.h
+    src/script/gm.cpp
+    src/script/scriptRandom.h
+    src/script/scriptRandom.cpp
 
     src/ai/aiFactory.h
     src/ai/ai.h
     src/ai/evasionAI.h
     src/ai/fighterAI.h
     src/ai/missileVolleyAI.h
-    src/beamTemplate.h
-    src/commsScriptInterface.h
     src/epsilonServer.h
-    src/factionInfo.h
     src/featureDefs.h
     src/gameGlobalInfo.h
     src/gameStateLogger.h
     src/glObjects.h
     src/GMActions.h
-    src/GMMessage.h
-    src/GMScriptCallback.h
     src/hardware/devices/dmx512SerialDevice.h
     src/hardware/devices/enttecDMXProDevice.h
     src/hardware/devices/philipsHueDevice.h
@@ -409,16 +553,12 @@ set(MAIN_SOURCES
     src/menus/luaConsole.h
     src/mesh.h
     src/missileWeaponData.h
-    src/modelData.h
-    src/modelInfo.h
     src/packResourceProvider.h
     src/particleEffect.h
-    src/pathPlanner.h
+    src/crewPosition.h
     src/playerInfo.h
     src/preferenceManager.h
-    src/repairCrew.h
     src/scenarioInfo.h
-    src/scienceDatabase.h
     src/screenComponents/aimLock.h
     src/screenComponents/alertLevelButton.h
     src/screenComponents/alertOverlay.h
@@ -434,6 +574,7 @@ set(MAIN_SOURCES
     src/screenComponents/hackingDialog.h
     src/screenComponents/helpOverlay.h
     src/screenComponents/impulseControls.h
+    src/screenComponents/infoDisplay.h
     src/screenComponents/impulseSound.h
     src/screenComponents/indicatorOverlays.h
     src/screenComponents/jumpControls.h
@@ -494,36 +635,11 @@ set(MAIN_SOURCES
     src/screens/windowScreen.h
     src/script.h
     src/shaderRegistry.h
-    src/shipTemplate.h
-    src/spaceObjects/artifact.h
-    src/spaceObjects/asteroid.h
-    src/spaceObjects/beamEffect.h
-    src/spaceObjects/blackHole.h
-    src/spaceObjects/cpuShip.h
-    src/spaceObjects/electricExplosionEffect.h
-    src/spaceObjects/explosionEffect.h
-    src/spaceObjects/mine.h
-    src/spaceObjects/missiles/EMPMissile.h
-    src/spaceObjects/missiles/homingMissile.h
-    src/spaceObjects/missiles/hvli.h
-    src/spaceObjects/missiles/missileWeapon.h
-    src/spaceObjects/missiles/nuke.h
-    src/spaceObjects/nebula.h
-    src/spaceObjects/planet.h
-    src/spaceObjects/playerSpaceship.h
-    src/spaceObjects/scanProbe.h
-    src/spaceObjects/shipTemplateBasedObject.h
-    src/spaceObjects/spaceObject.h
-    src/spaceObjects/spaceship.h
-    src/spaceObjects/spaceshipParts/beamWeapon.h
-    src/spaceObjects/spaceshipParts/weaponTube.h
-    src/spaceObjects/spaceStation.h
-    src/spaceObjects/supplyDrop.h
-    src/spaceObjects/warpJammer.h
-    src/spaceObjects/wormHole.h
-    src/spaceObjects/zone.h
     src/threatLevelEstimate.h
     src/tutorialGame.h
+    src/script/components.h
+    src/script/vector.h
+    src/script/enum.h
 )
 
 if (WITH_DISCORD)
@@ -620,12 +736,12 @@ if(WITH_DISCORD)
     install(PROGRAMS "$<TARGET_PROPERTY:discord,IMPORTED_LOCATION>" DESTINATION "${discord_install_prefix}/plugins")
 endif()
 
-find_package(PythonInterp)
-if(PYTHONINTERP_FOUND)
+find_package(Python3 COMPONENTS Interpreter)
+if(Python3_Interpreter_FOUND)
     set(SCRIPT_REFERENCE_HTML "${PROJECT_BINARY_DIR}/script_reference.html")
     add_custom_command(
         OUTPUT "${SCRIPT_REFERENCE_HTML}"
-        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/compile_script_docs.py "${SCRIPT_REFERENCE_HTML}"
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/script_docs/main.py "${SCRIPT_REFERENCE_HTML}"
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         COMMENT "Building script reference documentation.")
     add_custom_target(script_reference ALL DEPENDS "${SCRIPT_REFERENCE_HTML}")
@@ -642,7 +758,7 @@ if(PYTHONINTERP_FOUND)
 endif()
 
 add_custom_target(update_locale
-    COMMAND xgettext --keyword=tr:1c,2 --keyword=tr:1 --keyword=trMark:1c,2 --keyword=trMark:1 --omit-header -d resources/locale/main.en ${MAIN_SOURCES} ${GUI_LIB_SOURCES}
+    COMMAND xgettext --keyword=tr:1c,2 --keyword=tr:1 --keyword=trMark:1c,2 --keyword=trMark:1 --add-comments=TRANSLATORS --omit-header -d resources/locale/main.en ${MAIN_SOURCES} ${GUI_LIB_SOURCES}
     COMMAND python3 update_locale.py
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 

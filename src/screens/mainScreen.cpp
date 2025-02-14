@@ -112,39 +112,41 @@ void ScreenMainScreen::update(float delta)
 
     if (my_spaceship)
     {
-        switch(my_spaceship->main_screen_setting)
-        {
-        case MSS_Front:
-        case MSS_Back:
-        case MSS_Left:
-        case MSS_Right:
-        case MSS_Target:
-            viewport->show();
-            tactical_radar->hide();
-            long_range_radar->hide();
-            break;
-        case MSS_Tactical:
-            viewport->hide();
-            tactical_radar->show();
-            long_range_radar->hide();
-            break;
-        case MSS_LongRange:
-            viewport->hide();
-            tactical_radar->hide();
-            long_range_radar->show();
-            break;
-        }
+        if (auto pc = my_spaceship.getComponent<PlayerControl>()) {
+            switch(pc->main_screen_setting)
+            {
+            case MainScreenSetting::Front:
+            case MainScreenSetting::Back:
+            case MainScreenSetting::Left:
+            case MainScreenSetting::Right:
+            case MainScreenSetting::Target:
+                viewport->show();
+                tactical_radar->hide();
+                long_range_radar->hide();
+                break;
+            case MainScreenSetting::Tactical:
+                viewport->hide();
+                tactical_radar->show();
+                long_range_radar->hide();
+                break;
+            case MainScreenSetting::LongRange:
+                viewport->hide();
+                tactical_radar->hide();
+                long_range_radar->show();
+                break;
+            }
 
-        switch(my_spaceship->main_screen_overlay)
-        {
-        case MSO_ShowComms:
-            onscreen_comms->clearElements();
-            onscreen_comms->show();
-            break;
-        case MSO_HideComms:
-            onscreen_comms->clearElements();
-            onscreen_comms->hide();
-            break;
+            switch(pc->main_screen_overlay)
+            {
+            case MainScreenOverlay::ShowComms:
+                onscreen_comms->clearElements();
+                onscreen_comms->show();
+                break;
+            case MainScreenOverlay::HideComms:
+                onscreen_comms->clearElements();
+                onscreen_comms->hide();
+                break;
+            }
         }
 
         // Update impulse sound volume and pitch.
@@ -158,19 +160,19 @@ void ScreenMainScreen::update(float delta)
     if (my_spaceship)
     {
         if (keys.mainscreen_forward.getDown())
-            my_spaceship->commandMainScreenSetting(MSS_Front);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Front);
         if (keys.mainscreen_left.getDown())
-            my_spaceship->commandMainScreenSetting(MSS_Left);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Left);
         if (keys.mainscreen_right.getDown())
-            my_spaceship->commandMainScreenSetting(MSS_Right);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Right);
         if (keys.mainscreen_back.getDown())
-            my_spaceship->commandMainScreenSetting(MSS_Back);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Back);
         if (keys.mainscreen_target.getDown())
-            my_spaceship->commandMainScreenSetting(MSS_Target);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Target);
         if (keys.mainscreen_tactical_radar.getDown())
-            my_spaceship->commandMainScreenSetting(MSS_Tactical);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Tactical);
         if (keys.mainscreen_long_range_radar.getDown())
-            my_spaceship->commandMainScreenSetting(MSS_LongRange);
+            my_player_info->commandMainScreenSetting(MainScreenSetting::LongRange);
         if (keys.mainscreen_first_person.getDown())
             viewport->first_person = !viewport->first_person;
     }
@@ -181,6 +183,10 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
     if (GuiCanvas::onPointerDown(button, position, id))
         return true;
     if (!my_spaceship)
+        return false;
+
+    auto pc = my_spaceship.getComponent<PlayerControl>();
+    if (!pc)
         return false;
 
     if (button == sp::io::Pointer::Button::Touch && id != sp::io::Pointer::mouse)
@@ -197,12 +203,12 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
             return sp::io::Pointer::Button::Left;
         };
 
-        switch (my_spaceship->main_screen_setting)
+        switch (pc->main_screen_setting)
         {
-        case MSS_Tactical:
+        case MainScreenSetting::Tactical:
             button = check_radar(*tactical_radar);
             break;
-        case MSS_LongRange:
+        case MainScreenSetting::LongRange:
             button = check_radar(*long_range_radar);
             break;
         default:
@@ -225,41 +231,41 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
     case sp::io::Pointer::Button::Left:
         [[fallthrough]];
     case sp::io::Pointer::Button::Touch:
-        switch(my_spaceship->main_screen_setting)
+        switch(pc->main_screen_setting)
         {
-        case MSS_Front: my_spaceship->commandMainScreenSetting(MSS_Left); break;
-        case MSS_Left: my_spaceship->commandMainScreenSetting(MSS_Back); break;
-        case MSS_Back: my_spaceship->commandMainScreenSetting(MSS_Right); break;
-        case MSS_Right: my_spaceship->commandMainScreenSetting(MSS_Front); break;
-        default: my_spaceship->commandMainScreenSetting(MSS_Front); break;
+        case MainScreenSetting::Front: my_player_info->commandMainScreenSetting(MainScreenSetting::Left); break;
+        case MainScreenSetting::Left: my_player_info->commandMainScreenSetting(MainScreenSetting::Back); break;
+        case MainScreenSetting::Back: my_player_info->commandMainScreenSetting(MainScreenSetting::Right); break;
+        case MainScreenSetting::Right: my_player_info->commandMainScreenSetting(MainScreenSetting::Front); break;
+        default: my_player_info->commandMainScreenSetting(MainScreenSetting::Front); break;
         }
         break;
     case sp::io::Pointer::Button::Right:
-        switch(my_spaceship->main_screen_setting)
+        switch(pc->main_screen_setting)
         {
-        case MSS_Front: my_spaceship->commandMainScreenSetting(MSS_Right); break;
-        case MSS_Right: my_spaceship->commandMainScreenSetting(MSS_Back); break;
-        case MSS_Back: my_spaceship->commandMainScreenSetting(MSS_Left); break;
-        case MSS_Left: my_spaceship->commandMainScreenSetting(MSS_Front); break;
-        default: my_spaceship->commandMainScreenSetting(MSS_Front); break;
+        case MainScreenSetting::Front: my_player_info->commandMainScreenSetting(MainScreenSetting::Right); break;
+        case MainScreenSetting::Right: my_player_info->commandMainScreenSetting(MainScreenSetting::Back); break;
+        case MainScreenSetting::Back: my_player_info->commandMainScreenSetting(MainScreenSetting::Left); break;
+        case MainScreenSetting::Left: my_player_info->commandMainScreenSetting(MainScreenSetting::Front); break;
+        default: my_player_info->commandMainScreenSetting(MainScreenSetting::Front); break;
         }
         break;
     case sp::io::Pointer::Button::Middle:
-        switch(my_spaceship->main_screen_setting)
+        switch(pc->main_screen_setting)
         {
         default:
             if (gameGlobalInfo->allow_main_screen_tactical_radar)
-                my_spaceship->commandMainScreenSetting(MSS_Tactical);
+                my_player_info->commandMainScreenSetting(MainScreenSetting::Tactical);
             else if (gameGlobalInfo->allow_main_screen_long_range_radar)
-                my_spaceship->commandMainScreenSetting(MSS_LongRange);
+                my_player_info->commandMainScreenSetting(MainScreenSetting::LongRange);
             break;
-        case MSS_Tactical:
+        case MainScreenSetting::Tactical:
             if (gameGlobalInfo->allow_main_screen_long_range_radar)
-                my_spaceship->commandMainScreenSetting(MSS_LongRange);
+                my_player_info->commandMainScreenSetting(MainScreenSetting::LongRange);
             break;
-        case MSS_LongRange:
+        case MainScreenSetting::LongRange:
             if (gameGlobalInfo->allow_main_screen_tactical_radar)
-                my_spaceship->commandMainScreenSetting(MSS_Tactical);
+                my_player_info->commandMainScreenSetting(MainScreenSetting::Tactical);
             break;
         }
         break;

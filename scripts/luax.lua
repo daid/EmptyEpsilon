@@ -158,7 +158,7 @@ end
 -- @usage
 -- -- (1) Generate a list of all Kraylor CpuShips
 -- local function isKraylorCpuShip(obj)
---   return obj.typeName == "CpuShip" and obj:getFaction() == "Kraylor"
+--   return obj.components.ai_controller ~= nil and obj:getFaction() == "Kraylor"
 -- end
 -- local enemies = getAllObjects()
 -- table.filter(enemies, isKraylorCpuShip)
@@ -230,4 +230,19 @@ function table.shuffle(list)
         local j = math.random(i)
         list[i], list[j] = list[j], list[i]
     end
+end
+
+-- Deepcopy a table, returns a copy of the table with all subtables also copied.
+function table.deepcopy(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in next, orig, nil do
+            copy[table.deepcopy(orig_key)] = table.deepcopy(orig_value)
+        end
+    else
+        copy = orig
+    end
+    return copy
 end

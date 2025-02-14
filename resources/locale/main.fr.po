@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-10-24 20:06+0200\n"
+"PO-Revision-Date: 2025-02-02 19:37+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -10,28 +10,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 
 #: src/scienceDatabase.cpp:397
 msgctxt "database direction"
 msgid "Front"
-msgstr "Avant"
+msgstr "avant"
 
 #: src/scienceDatabase.cpp:399
 msgctxt "database direction"
 msgid "Right"
-msgstr "Droite"
+msgstr "droit"
 
 #: src/scienceDatabase.cpp:401
 msgctxt "database direction"
 msgid "Left"
-msgstr "Gauche"
+msgstr "gauche"
 
 #: src/scienceDatabase.cpp:403
 msgctxt "database direction"
 msgid "Rear"
-msgstr "Arrière"
+msgstr "arrière"
 
 #: src/scienceDatabase.cpp:426
 msgctxt "database"
@@ -65,10 +65,9 @@ msgid ""
 "small tugs to massive dreadnoughts."
 msgstr ""
 "Les vaisseaux spatiaux sont des vaisseaux capables de résister aux dangers "
-"des voyages dans l'espace.\n"
-"Ils peuvent remplir de nombreuses fonctions et varient considérablement en "
-"taille, des petits remorqueurs aux énormes cuirassés mais aussi en "
-"équipement, équipage et armement."
+"des voyages dans l'espace. Ils peuvent remplir de nombreuses fonctions et "
+"varient considérablement en taille, du petit remorqueur à l'énorme cuirassé, "
+"mais aussi en équipement, équipage et armement."
 
 #: src/scienceDatabase.cpp:500
 msgctxt "database"
@@ -97,7 +96,7 @@ msgstr "Coque"
 #: src/scienceDatabase.cpp:520
 msgctxt "database"
 msgid "Move speed"
-msgstr "Vit. de mouvement"
+msgstr "Vit. de dépl. avant"
 
 #: src/scienceDatabase.cpp:520 src/scienceDatabase.cpp:521
 #: src/scienceDatabase.cpp:528
@@ -108,7 +107,7 @@ msgstr "{speed}u/min"
 #: src/scienceDatabase.cpp:521
 msgctxt "database"
 msgid "Reverse move speed"
-msgstr "Vit. arrière mvt"
+msgstr "Vit. de dépl. arrière"
 
 #: src/scienceDatabase.cpp:524
 msgctxt "database"
@@ -128,7 +127,7 @@ msgstr "Vitesse lumière"
 #: src/scienceDatabase.cpp:533
 msgctxt "database"
 msgid "Jump range"
-msgstr "Portée de saut"
+msgstr "Téléportation"
 
 #: src/scienceDatabase.cpp:534
 msgctxt "database"
@@ -142,7 +141,7 @@ msgstr "Faisceau {direction}"
 #: src/scienceDatabase.cpp:545
 msgctxt "database"
 msgid "{damage} Dmg / {interval} sec"
-msgstr "{damage} dégâts / {interval} sec"
+msgstr "Dégâts {damage}   Cycle {interval}s"
 
 #: src/scienceDatabase.cpp:555
 msgctxt "database"
@@ -162,11 +161,11 @@ msgstr "Tube large {direction}"
 #: src/scienceDatabase.cpp:566
 msgctxt "database"
 msgid "{loadtime} sec"
-msgstr "{loadtime} sec"
+msgstr "Vit. de charge {loadtime}s"
 
 #: src/scienceDatabase.cpp:574
 msgid "Storage {weapon}"
-msgstr "Stockage {weapon}"
+msgstr "Stock {weapon}"
 
 #: src/scienceDatabase.cpp:584
 msgctxt "database"
@@ -179,11 +178,13 @@ msgid ""
 "small outposts to city-sized communities. Many provide restocking and repair "
 "services to neutral and friendly ships."
 msgstr ""
-"Les stations spatiales sont des structures fixes et permanentes dont "
-"l'échelle varie de petits avant-postes à des communautés de la taille d'une "
-"ville.\n"
-"Beaucoup d'entre elles fournissent des services de réapprovisionnement et de "
-"réparation aux vaisseaux neutres et amis."
+"Les stations spatiales sont des structures fixes et permanentes, de tailles "
+"et de fonctions diverses : petits avant-postes, stations-service, villages, "
+"villes, oasis etc.\n"
+"\n"
+"Beaucoup d'entre elles fournissent divers services de réapprovisionnement, "
+"de réparation, de soutien militaire et d'information aux vaisseaux neutres "
+"et amis qui les contactent ou s'y amarrent."
 
 #: src/playerInfo.cpp:253
 msgctxt "station"
@@ -1042,7 +1043,6 @@ msgid "Coolant: {current_level}% / {requested}%"
 msgstr "Liq. de refroidissement : {current_level}%/{requested}%"
 
 #: src/screens/crew6/engineeringScreen.cpp:281
-#, fuzzy
 msgctxt "Engineer"
 msgid "Maximal health"
 msgstr "Santé max"

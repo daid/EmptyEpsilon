@@ -1,0 +1,3333 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Empty Epsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: muerteFR\n"
+"Language-Team: muerteFR\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+# Scenario name
+msgid "Early Evaluation Exercise"
+msgstr ""
+
+# Scenario description
+msgid ""
+"An entry level, learn to play scenario.  Designed for trainees in the Human "
+"Navy. Up to 16 player ships may train simultaneously. Based on Earn Your "
+"Wings Scenario by Kilted Klingon."
+msgstr ""
+"EN COURS DE TRADUCTION 18%\n"
+"\n"
+"An entry level, learn to play scenario.  Designed for trainees in the Human "
+"Navy. Up to 16 player ships may train simultaneously. Based on Earn Your "
+"Wings Scenario by Kilted Klingon."
+
+# Scenario setting
+msgctxt "setting"
+msgid "Orbits"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"Configures orbit speeds of planets. Further refinement available on GM screen"
+msgstr ""
+
+msgctxt "Orbits"
+msgid "Sedate"
+msgstr ""
+
+msgctxt "Orbits"
+msgid "Slowest inner and outer orbit speeds"
+msgstr ""
+
+msgctxt "Orbits"
+msgid "Calm"
+msgstr ""
+
+msgctxt "Orbits"
+msgid "Slow inner speed, slowest outer speed"
+msgstr ""
+
+msgctxt "Orbits"
+msgid "Moving Along"
+msgstr ""
+
+msgctxt "Orbits"
+msgid "Average inner speed, slowest outer speed"
+msgstr ""
+
+msgctxt "Orbits"
+msgid "Quick Time"
+msgstr ""
+
+msgctxt "Orbits"
+msgid "Faster inner and outer speeds"
+msgstr ""
+
+msgctxt "Orbits"
+msgid "Ludicrous Speed"
+msgstr ""
+
+msgctxt "Orbits"
+msgid "Fastest inner and outer speeds"
+msgstr ""
+
+# Scenario setting
+#, fuzzy
+msgctxt "setting"
+msgid "Ships"
+msgstr "Vaisseaux"
+
+msgctxt "setting"
+msgid "Determines the number of player ships."
+msgstr ""
+
+#, fuzzy
+msgctxt "Ships"
+msgid "1"
+msgstr "1"
+
+msgctxt "Ships"
+msgid "One player ship"
+msgstr ""
+
+#, fuzzy
+msgctxt "Ships"
+msgid "2"
+msgstr "2"
+
+msgctxt "Ships"
+msgid "Two player ships"
+msgstr ""
+
+#, fuzzy
+msgctxt "Ships"
+msgid "3"
+msgstr "3"
+
+msgctxt "Ships"
+msgid "Three player ships"
+msgstr ""
+
+#, fuzzy
+msgctxt "Ships"
+msgid "4"
+msgstr "4"
+
+msgctxt "Ships"
+msgid "Four player ships"
+msgstr ""
+
+#, fuzzy
+msgctxt "Ships"
+msgid "5"
+msgstr "5"
+
+msgctxt "Ships"
+msgid "Five player ships"
+msgstr ""
+
+#, fuzzy
+msgctxt "Ships"
+msgid "6"
+msgstr "6"
+
+msgctxt "Ships"
+msgid "Six 6 player ships"
+msgstr ""
+
+#, fuzzy
+msgctxt "Ships"
+msgid "7"
+msgstr "7"
+
+msgctxt "Ships"
+msgid "Seven player ships"
+msgstr ""
+
+#, fuzzy
+msgctxt "Ships"
+msgid "8"
+msgstr "8"
+
+msgctxt "Ships"
+msgid "Eight player ships"
+msgstr ""
+
+#, fuzzy
+msgctxt "Ships"
+msgid "9"
+msgstr "9"
+
+msgctxt "Ships"
+msgid "Nine player ships"
+msgstr ""
+
+#, fuzzy
+msgctxt "Ships"
+msgid "10"
+msgstr "+10%"
+
+msgctxt "Ships"
+msgid "Ten player ships"
+msgstr ""
+
+msgctxt "Ships"
+msgid "11"
+msgstr ""
+
+msgctxt "Ships"
+msgid "Eleven player ships"
+msgstr ""
+
+msgctxt "Ships"
+msgid "12"
+msgstr ""
+
+msgctxt "Ships"
+msgid "Twelve player ships"
+msgstr ""
+
+msgctxt "Ships"
+msgid "13"
+msgstr ""
+
+msgctxt "Ships"
+msgid "Thirteen player ships"
+msgstr ""
+
+msgctxt "Ships"
+msgid "14"
+msgstr ""
+
+msgctxt "Ships"
+msgid "Fourteen player ships"
+msgstr ""
+
+#, fuzzy
+msgctxt "Ships"
+msgid "15"
+msgstr "15 mn"
+
+msgctxt "Ships"
+msgid "Fifteen player ships"
+msgstr ""
+
+msgctxt "Ships"
+msgid "16"
+msgstr ""
+
+msgctxt "Ships"
+msgid "Sixteen player ships"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Control"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configure whether or not control codes will be used"
+msgstr ""
+
+msgctxt "Control"
+msgid "Use"
+msgstr ""
+
+msgctxt "Control"
+msgid ""
+"Control codes will be used. GM button Random PShip Names switches to random "
+"control codes and player ship names"
+msgstr ""
+
+#, fuzzy
+msgctxt "Control"
+msgid "None"
+msgstr "Non limitée"
+
+msgctxt "Control"
+msgid "Control codes will not be used"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Crutch"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"Configure whether a popup message for inexperienced players appears for each "
+"task"
+msgstr ""
+
+msgctxt "Crutch"
+msgid "Use"
+msgstr ""
+
+msgctxt "Crutch"
+msgid "Popup messages will appear for each task"
+msgstr ""
+
+#, fuzzy
+msgctxt "Crutch"
+msgid "None"
+msgstr "Non limitée"
+
+msgctxt "Crutch"
+msgid "No popup message will appear"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Insight"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configure whether the players may see the GM evaluation"
+msgstr ""
+
+msgctxt "Insight"
+msgid "No"
+msgstr ""
+
+msgctxt "Insight"
+msgid ""
+"Players see the number portion of their task evaluation, but not the "
+"evaluation portion"
+msgstr ""
+
+#, fuzzy
+msgctxt "Insight"
+msgid "Yes"
+msgstr "Oui"
+
+msgctxt "Insight"
+msgid "Players see both the numbers and their evaluation for each task"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1030 scripts/scenario_33_early.lua:1049
+#, fuzzy, lua-format
+msgctxt "buttonGM"
+msgid "Version %s"
+msgstr "Version %s"
+
+#: scripts/scenario_33_early.lua:1031 scripts/scenario_33_early.lua:1050
+#, fuzzy, lua-format
+msgctxt "buttonGM"
+msgid ""
+"Scenario version %s\n"
+" LUA version %s"
+msgstr ""
+"Version de scénario %s\n"
+"Version LUA %s"
+
+#: scripts/scenario_33_early.lua:1036 scripts/scenario_33_early.lua:1055
+msgctxt "buttonGM"
+msgid "Show control codes"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1038
+msgctxt "buttonGM"
+msgid "+Orbital Scheme"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1040
+msgctxt "buttonGM"
+msgid "Random PShip Names"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1042
+msgctxt "buttonGM"
+msgid ""
+"Human Navy Player ship names will now be selected at random.\n"
+"Human Navy Player ship control codes will now be generated at random"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1057
+msgctxt "buttonGM"
+msgid "+Evaluations"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1058
+msgctxt "buttonGM"
+msgid "+Trigger Waves"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1059
+msgctxt "buttonGM"
+msgid "+End Scenario"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1061
+msgctxt "buttonGM"
+msgid "+Trigger end task"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1062
+msgctxt "msgGM"
+msgid ""
+"These triggers are for testing purposes. You should not use them with actual "
+"players."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1068 scripts/scenario_33_early.lua:1158
+#: scripts/scenario_33_early.lua:1293
+#, fuzzy
+msgctxt "buttonGM"
+msgid "-Main"
+msgstr "- Précédent"
+
+#: scripts/scenario_33_early.lua:1069
+#, fuzzy
+msgctxt "buttonGM"
+msgid "Dock"
+msgstr "À quai"
+
+#: scripts/scenario_33_early.lua:1078
+msgctxt "msgGM"
+msgid ""
+"Docking frequencies set for all players. All player missile systems powered "
+"down. Players still have to dock, but the protocols have been set"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1080
+msgctxt "buttonGM"
+msgid "Scan"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1093
+msgctxt "msgGM"
+msgid "Scan targets set to scanned for these players:"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1097
+#, lua-format
+msgctxt "msgGM"
+msgid ""
+"%s\n"
+"They still need to report the results of the scans"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1100
+msgctxt "buttonGM"
+msgid "Destroy freighter"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1101
+msgctxt "msgGM"
+msgid "Player ships with corresponding Kraylor freighters destroyed:"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1110
+msgctxt "buttonGM"
+msgid "Assist Freighter"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1111
+msgctxt "msgGM"
+msgid "Player ships with freighter fixed and marauders destroyed:"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1140
+msgctxt "buttonGM"
+msgid "Research"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1141
+msgctxt "msgGM"
+msgid ""
+"Player ships where research of orbital bodies has all been marked complete:"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1159 scripts/scenario_33_early.lua:1311
+msgctxt "buttonGM"
+msgid "+Scan"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1160 scripts/scenario_33_early.lua:1312
+msgctxt "buttonGM"
+msgid "+Destroy freighter"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1161
+msgctxt "buttonGM"
+msgid "+Assist Freighter"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1162 scripts/scenario_33_early.lua:1314
+msgctxt "buttonGM"
+msgid "+Research"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1166
+msgctxt "buttonGM"
+msgid "-Main from scan"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1167 scripts/scenario_33_early.lua:1181
+#: scripts/scenario_33_early.lua:1196 scripts/scenario_33_early.lua:1212
+msgctxt "buttonGM"
+msgid "-Jump"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1180
+msgctxt "buttonGM"
+msgid "-Main frm dstry frgtr"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1195
+msgctxt "buttonGM"
+msgid "-Main frm hlp frgtr"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1211
+msgctxt "buttonGM"
+msgid "-Main from research"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1263
+msgctxt "buttonGM"
+msgid "Strikeship wave"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1267
+msgctxt "buttonGM"
+msgid "Fighter wave"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1271
+msgctxt "buttonGM"
+msgid "Gunship wave"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1275
+#, fuzzy
+msgctxt "buttonGM"
+msgid "Dreadnought"
+msgstr "Cuirassés"
+
+#: scripts/scenario_33_early.lua:1279
+msgctxt "buttonGM"
+msgid "Missile cruiser wave"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1283
+msgctxt "buttonGM"
+msgid "Cruiser wave"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1287
+msgctxt "buttonGM"
+msgid "Adv. striker wave"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1294
+msgctxt "buttonGM"
+msgid "Trainees win"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1298
+msgctxt "buttonGM"
+msgid "Trainers win"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1302
+msgctxt "buttonGM"
+msgid "Scenario wins"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1309
+msgctxt "buttonGM"
+msgid "-From evaluations"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1310
+msgctxt "buttonGM"
+msgid "+Dock"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1313
+msgctxt "buttonGM"
+msgid "+Assist freighter"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1315
+msgctxt "buttonGM"
+msgid "+Bonus"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1316
+msgctxt "buttonGM"
+msgid "+Posthumous"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1320
+msgctxt "buttonGM"
+msgid "-Main from Posthumous"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1321 scripts/scenario_33_early.lua:1338
+#: scripts/scenario_33_early.lua:1354 scripts/scenario_33_early.lua:1371
+#: scripts/scenario_33_early.lua:1388 scripts/scenario_33_early.lua:1405
+msgctxt "buttonGM"
+msgid "-Evaluations"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1322 scripts/scenario_33_early.lua:4462
+msgctxt "evaluation-comms"
+msgid ""
+"Posthumous evaluations are intended for those times when you want the "
+"evaluation information, but the player ship has been destroyed. A copy is "
+"made in the posthumous list at the time the task is completed. So, just "
+"because they are on the posthumous list does not mean the player ship has "
+"been destroyed. Only the first instance of a task is recorded. If the player "
+"ship does a task again, the posthumous table only keeps their first attempt. "
+"If they are destroyed a second time, no new record is made of any tasks they "
+"had already completed the first time. Of course if they live, their current "
+"evaluation information is attached to their ship and thus is available.\n"
+"\n"
+"Single letter evaluation decode:\n"
+"N = Needs improvement\n"
+"C = Competent\n"
+"E = Exceeds expectations\n"
+"S = Superior"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1327 scripts/scenario_33_early.lua:4467
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s     %s     Clock: %.1f\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1331 scripts/scenario_33_early.lua:4472
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"\n"
+"No tasks completed, so no tasks recorded in the posthumous table"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1337
+msgctxt "buttonGM"
+msgid "-Main from Bonus"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1342
+msgctxt "evaluation-comms"
+msgid "Research task is not complete, no bonus possible yet"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1345
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s Bonus Evaluation:\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1353
+msgctxt "buttonGM"
+msgid "-Main from Research"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1358
+msgctxt "evaluation-comms"
+msgid "Research task is not complete"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1361
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s Research Evaluation:\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1363
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"\n"
+"Suggested subjective evaluation criteria:\n"
+"Did anyone suggest using probes to gather data?\n"
+"Did Relay put out waypoints for guidance around the planets?\n"
+"Did Engineering boost maneuver for Helm? Did Helm request a maneuver boost?\n"
+"Was Weapons diligent about the shields?\n"
+"Did Science let everyone know when the data was gathered for a planet?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1370
+msgctxt "buttonGM"
+msgid "-Main frm Help Frgtr"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1375
+msgctxt "evaluation-comms"
+msgid "Assist freighter task is not complete"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1378
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s Assist Freighter Evaluation:\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1380
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"\n"
+"Suggested subjective evaluation criteria:\n"
+"Did anyone suggest using probes to find the freighter?\n"
+"Did Relay put out waypoints for the freighter and the home station?\n"
+"How did the captain and crew handle the balancing of getting the parts and "
+"protecting the freighter?\n"
+"How well did the crew coordinate during combat?\n"
+"Were targets prioritized/identified?\n"
+"Did Engineering boost systems based on weapon use?\n"
+"Was the type of combat identified (beam/missile)?\n"
+"Did Science provide beam frequencies for Weapons? Did Science keep the crew "
+"informed on the shield/hull status of enemies?\n"
+"Did Relay hack any enemy systems?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1387
+msgctxt "buttonGM"
+msgid "-Main frm Destroy Frgtr"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1392
+msgctxt "evaluation-comms"
+msgid "Destroy freighter task is not complete"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1395
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s Destroy Freighter Evaluation:\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1397
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"\n"
+"Suggested subjective evaluation criteria:\n"
+"Did Helm and Science coordinate verbally to determine where to go to destroy "
+"the freighter?\n"
+"Did Weapons and Engineering collaborate on boosting applicable combat "
+"systems like missiles?\n"
+"Did Helm indicate the method of approaching the enemy freighter (impulse/"
+"jump)?\n"
+"Did Relay hack the enemy ship? If so, what systems and were those "
+"communicated?\n"
+"Did Science provide details on enemy shield and hull strengths?\n"
+"How well did Helm and Weapons coordinate the firing of HVLIs?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1404
+msgctxt "buttonGM"
+msgid "-Main from Scan"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1409
+msgctxt "evaluation-comms"
+msgid "Scan task is not complete"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1412
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s Scan Evaluation:\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1414
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"\n"
+"Suggested subjective evaluation criteria:\n"
+"Did science request a probe in the nebula?\n"
+"Did Science communicate which target he started scanning first?\n"
+"Was Relay standing by to report the scan results as soon as they came in?\n"
+"Was there clear communication between Science and Relay?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1421
+msgctxt "buttonGM"
+msgid "-Main from Dock"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1426
+msgctxt "evaluation-comms"
+msgid "Dock task is not complete"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1429
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s Dock Evaluation:\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1431
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"\n"
+"Suggested subjective evaluation criteria (mostly about collaboration and "
+"communication):\n"
+"Did Relay verbally communicate the initial instructions? How about the "
+"docking protocol to Weapons and Engineering?\n"
+"Did Helm request an impulse boost to get to the station more quickly?\n"
+"Did Helm fly backwards to the station?\n"
+"Did Engineering confirm that missile systems were powered down?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1442
+msgctxt "buttonGM"
+msgid "-From Orbit Scheme"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1456
+#, lua-format
+msgctxt "buttonGM"
+msgid "Faster in %.2f -> %.2f"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1462
+#, lua-format
+msgctxt "buttonGM"
+msgid "Slower in %.2f -> %.2f"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1468
+#, lua-format
+msgctxt "buttonGM"
+msgid "Faster out %.2f -> %.2f"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1474
+#, lua-format
+msgctxt "buttonGM"
+msgid "Slower out %.2f -> %.2f"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1505
+msgctxt "callsign-blackhole"
+msgid "Balor"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1506
+msgctxt "callsign-planet"
+msgid "Draugr"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1507
+msgctxt "callsign-planet"
+msgid "Dimidium"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1508
+msgctxt "callsign-planet"
+msgid "Phobetor"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1509
+msgctxt "callsign-planet"
+msgid "Saffar"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1510
+msgctxt "callsign-planet"
+msgid "Keplar-452b"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1511
+msgctxt "callsign-planet"
+msgid "HD 23472 d"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1512
+msgctxt "callsign-planet"
+msgid "K2-89 b"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1513
+msgctxt "callsign-planet"
+msgid "Samh"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1514
+msgctxt "callsign-planet"
+msgid "GJ 1061 d"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1515
+msgctxt "callsign-planet"
+msgid "Teegarden's Star b"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1516
+msgctxt "callsign-planet"
+msgid "Wolf 503b"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:1517
+msgctxt "callsign-planet"
+msgid "YZ Ceti b"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2003 scripts/scenario_33_early.lua:2035
+#: scripts/scenario_33_early.lua:2069 scripts/scenario_33_early.lua:2087
+#, lua-format
+msgctxt "msgScience"
+msgid "Scan complete for %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2005 scripts/scenario_33_early.lua:2037
+#: scripts/scenario_33_early.lua:2071 scripts/scenario_33_early.lua:2089
+#, lua-format
+msgctxt "msgOperations"
+msgid "Scan complete for %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2478
+msgctxt "shipLog"
+msgid ""
+"Destroy Human Navy ships and bases. You might get help from Independent "
+"bases. Destroying Exuari is secondary but glorifies the Kraylor empire in "
+"the eyes of those around you. Avoid planetary bodies."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2697
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s has been destroyed%s! Respawning"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2702
+#, lua-format
+msgctxt "shipLog"
+msgid "%s has been destroyed%s! All crew lost. Rest in peace"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2756
+#, fuzzy
+msgctxt "station-comms"
+msgid "We are under attack! No time for chatting!"
+msgstr ""
+"Nous sommes en train de nous faire attaquer ! Pas le temps de discuter !"
+
+#: scripts/scenario_33_early.lua:2762
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Greetings captain and crew of %s. You have been assigned to station %s. You "
+"will be given several tasks. For each task, you will be provided an "
+"evaluation.\n"
+"\n"
+"Ready for your first task?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2763
+msgctxt "station-comms"
+msgid "We are ready for our first task"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2771
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Your first task is to dock with %s. Check with the docking port authority on "
+"%s for any docking protocols. Your evaluation has begun. Clock: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2774
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Congratulations on completing your docking task, %s. Are you ready for your "
+"next task?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2775 scripts/scenario_33_early.lua:2905
+#: scripts/scenario_33_early.lua:2921 scripts/scenario_33_early.lua:3327
+#: scripts/scenario_33_early.lua:3342 scripts/scenario_33_early.lua:4477
+msgctxt "station-comms"
+msgid "View docking task evalutation"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2776
+msgctxt "station-comms"
+msgid "We are ready for our second task"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2784
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Identify the targets at bearing %.1f from %s. A probe might help. Report "
+"those details to us once you've completed your scans. Your evaluation has "
+"begun. Clock: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2787
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Congratulations on completing your scanning task, %s. Are you ready for your "
+"next task?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2788
+msgctxt "station-comms"
+msgid "View scanning task evaluation"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2789
+msgctxt "station-comms"
+msgid "We are ready for our third task"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2797
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Destroy the Kraylor freighter you identified during your scanning task. Use "
+"HVLI. Your beams will take too long to cycle. Your evaluation has begun. "
+"Clock: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2800
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Congratulations on completing your task to destroy that Kraylor freighter, "
+"%s. Are you ready for your next task?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2801
+msgctxt "station-comms"
+msgid "View destroy freighter task evaluation"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2802
+msgctxt "station-comms"
+msgid "We are ready for our fourth task"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2810
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"We received a distress call from Arlenian freighter %s. They report "
+"experiencing engine trouble, but the report lacked technical details. "
+"They're worried about possible Kraylor nearby. Your task: talk to them, find "
+"out about their needs, help them and protect them if necessary. Most likely, "
+"%s has the repair parts for their engines, but will need details on the "
+"problem before providing any parts. You can find %s in sector %s. Your "
+"combat systems are fully operational. Your evaluation has begun. Clock: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2813
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"We just received a panicky call from Arlenian freighter %s. Their sensors "
+"have picked up Kraylor fighters 20 units away headed for them at 4.8 units "
+"per minute. They urgently request you come protect them."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2816 scripts/scenario_33_early.lua:2881
+#: scripts/scenario_33_early.lua:2918 scripts/scenario_33_early.lua:3010
+#: scripts/scenario_33_early.lua:3044 scripts/scenario_33_early.lua:3061
+#: scripts/scenario_33_early.lua:3078 scripts/scenario_33_early.lua:3096
+#: scripts/scenario_33_early.lua:3114 scripts/scenario_33_early.lua:3118
+#: scripts/scenario_33_early.lua:3163 scripts/scenario_33_early.lua:3186
+#: scripts/scenario_33_early.lua:3250 scripts/scenario_33_early.lua:3278
+#: scripts/scenario_33_early.lua:3285 scripts/scenario_33_early.lua:3309
+#: scripts/scenario_33_early.lua:3339 scripts/scenario_33_early.lua:3366
+#: scripts/scenario_33_early.lua:3440 scripts/scenario_33_early.lua:3451
+#: scripts/scenario_33_early.lua:3457 scripts/scenario_33_early.lua:3465
+#: scripts/scenario_33_early.lua:3539 scripts/scenario_33_early.lua:3542
+#: scripts/scenario_33_early.lua:3575 scripts/scenario_33_early.lua:3594
+#: scripts/scenario_33_early.lua:3597 scripts/scenario_33_early.lua:3630
+#: scripts/scenario_33_early.lua:3648 scripts/scenario_33_early.lua:3652
+#: scripts/scenario_33_early.lua:3683 scripts/scenario_33_early.lua:3828
+#: scripts/scenario_33_early.lua:3940 scripts/scenario_33_early.lua:4009
+#: scripts/scenario_33_early.lua:4274 scripts/scenario_33_early.lua:4407
+#: scripts/scenario_33_early.lua:4468 scripts/scenario_33_early.lua:4479
+#: scripts/scenario_33_early.lua:4483 scripts/scenario_33_early.lua:4487
+#: scripts/scenario_33_early.lua:4491 scripts/scenario_33_early.lua:4495
+#: scripts/scenario_33_early.lua:4497 scripts/scenario_33_early.lua:4499
+#: scripts/scenario_33_early.lua:4559 scripts/scenario_33_early.lua:4563
+#: scripts/scenario_33_early.lua:4569 scripts/scenario_33_early.lua:4603
+#: scripts/scenario_33_early.lua:4611 scripts/scenario_33_early.lua:4638
+#: scripts/scenario_33_early.lua:4657 scripts/scenario_33_early.lua:4681
+#: scripts/scenario_33_early.lua:4706 scripts/scenario_33_early.lua:4728
+#: scripts/scenario_33_early.lua:4754 scripts/scenario_33_early.lua:4779
+#: scripts/scenario_33_early.lua:5301 scripts/scenario_33_early.lua:5303
+#: scripts/scenario_33_early.lua:5305 scripts/scenario_33_early.lua:5359
+#: scripts/scenario_33_early.lua:5376 scripts/scenario_33_early.lua:5380
+#: scripts/scenario_33_early.lua:5403 scripts/scenario_33_early.lua:5425
+#: scripts/scenario_33_early.lua:5449 scripts/scenario_33_early.lua:5471
+#: scripts/scenario_33_early.lua:5495
+#, fuzzy
+msgid "Back"
+msgstr "Précédent"
+
+#: scripts/scenario_33_early.lua:2818
+msgctxt "station-comms"
+msgid "We'll protect them as soon as we can"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2819
+msgctxt "station-comms"
+msgid "I'm sure they'll appreciate any protection you can provide."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2823
+msgctxt "station-comms"
+msgid "We've got their parts and are en route"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2824
+msgctxt "station-comms"
+msgid ""
+"We will pass along that information. Good luck and keep a sharp eye out for "
+"those Kraylor"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2828
+msgctxt "station-comms"
+msgid "What about their repair parts?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2829
+msgctxt "station-comms"
+msgid ""
+"You must prioritize and choose your next destination. If they get destroyed, "
+"there won't be any engine to repair. Also, their destruction could adversely "
+"impact our ongoing diplomatic negotiations with the Arlenians"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2834
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Congratulations on completing your task to assist that Arlenian freighter, "
+"%s. Are you ready for your next task?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2835
+msgctxt "station-comms"
+msgid "View assist freighter task evaluation"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2836
+msgctxt "station-comms"
+msgid "We are ready for our fifth task"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2844
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"We've observed several Kraylor appearing near the planetary bodies orbiting "
+"the black hole, %s. The energy signatures when they appear match the exit "
+"point from a wormhole. This implies a degree of control over wormhole "
+"physics by the Kraylor previously unsuspected. We think it relates to the "
+"planetary bodies orbiting %s. Get detailed readings on over half of the "
+"planetary bodies using probes or your ship. You or the probe must get within "
+"1.8 units and remain there for %s seconds to gather the required data. To "
+"facilitate your research, we've added a warp drive to your ship. It's fast, "
+"but it still takes time to switch from impulse to warp and back. Use caution "
+"when you approach those planetary bodies. Your evaluation has begun. Clock %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2866
+#, fuzzy, lua-format
+msgctxt "station-comms"
+msgid ""
+"Greetings %s!\n"
+"How may we help you today?"
+msgstr ""
+"Salutations %s !\n"
+"Comment pouvons-nous vous aider aujourd'hui ?"
+
+#: scripts/scenario_33_early.lua:2868
+msgctxt "station-comms"
+msgid ""
+"Good day, officer!\n"
+"What can we do for you today?"
+msgstr ""
+"Bonjour officier !\n"
+"Que pouvons-nous faire pour vous aujourd'hui ?"
+
+#: scripts/scenario_33_early.lua:2870
+msgctxt "station-comms"
+msgid "Hello, may I help you?"
+msgstr "Bonjour, puis-je vous aider ?"
+
+#: scripts/scenario_33_early.lua:2873
+msgctxt "station-comms"
+msgid "Welcome to our lovely station."
+msgstr ""
+"Bienvenue sur notre charmante petite station.\n"
+"Que pouvons-nous faire pour vous ?"
+
+#: scripts/scenario_33_early.lua:2876
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Forgive us if we seem a little distracted. We are carefully monitoring the "
+"enemies nearby."
+msgstr ""
+"\n"
+"Veuillez nous excuser si nous semblons un peu distraits. Nous surveillons "
+"attentivement les ennemis à proximité."
+
+#: scripts/scenario_33_early.lua:2879 scripts/scenario_33_early.lua:3304
+msgctxt "station-comms"
+msgid "Check with docking port authority"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2880 scripts/scenario_33_early.lua:3308
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"Greetings %s. I am your automated docking port authority message provider. "
+"Protocol dictates that you calibrate your shields to %s THz, your beam "
+"weapons to %s THz and that you power down your missile systems in order to "
+"dock or undock with %s.\n"
+"\n"
+"Have a nice day!"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2892
+#, lua-format
+msgctxt "station-comms"
+msgid "Get parts to repair %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2893
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"We've loaded the parts aboard %s. Now all you need to do is get within 5 "
+"units of %s and you can deliver the parts so they can make repairs."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2903 scripts/scenario_33_early.lua:3325
+msgctxt "station-comms"
+msgid "View evaluations"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2904 scripts/scenario_33_early.lua:3326
+#: scripts/scenario_33_early.lua:4476
+msgctxt "station-comms"
+msgid "Which task evaluation would you like to view?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2906 scripts/scenario_33_early.lua:3328
+#: scripts/scenario_33_early.lua:4481
+msgctxt "station-comms"
+msgid "View scanning task evalutation"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2908 scripts/scenario_33_early.lua:3330
+#: scripts/scenario_33_early.lua:4485
+msgctxt "station-comms"
+msgid "View destroy freighter task evalutation"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2911 scripts/scenario_33_early.lua:3333
+#: scripts/scenario_33_early.lua:4489
+msgctxt "station-comms"
+msgid "View assist freighter task evalutation"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2914 scripts/scenario_33_early.lua:3336
+#: scripts/scenario_33_early.lua:4493
+msgctxt "station-comms"
+msgid "View research task evalutation"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2915 scripts/scenario_33_early.lua:3337
+msgctxt "station-comms"
+msgid "View bonus task evalutation"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2916
+msgctxt "station-comms"
+msgid "Posthumous evaluations"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:2924
+#, fuzzy
+msgctxt "station-comms"
+msgid "Restock Ordnance"
+msgstr "Faire le plein de munitions"
+
+#: scripts/scenario_33_early.lua:2938
+#, fuzzy, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"What type of ordnance?\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+"Quel type de munitions ?\n"
+"\n"
+"Réputation : %i"
+
+#: scripts/scenario_33_early.lua:2945
+msgctxt "ammo-comms"
+msgid "Can you supply us with some nukes? ("
+msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
+
+#: scripts/scenario_33_early.lua:2947
+msgctxt "ammo-comms"
+msgid "We really need some nukes ("
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
+
+#: scripts/scenario_33_early.lua:2950 scripts/scenario_33_early.lua:2963
+#: scripts/scenario_33_early.lua:2975 scripts/scenario_33_early.lua:2987
+#: scripts/scenario_33_early.lua:2999
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s%d rep each)"
+msgstr "%s%d rép l'unité)"
+
+#: scripts/scenario_33_early.lua:2959
+msgctxt "ammo-comms"
+msgid "Please re-stock our EMP missiles. ("
+msgstr "Veuillez réapprovisionner nos missiles EMP ("
+
+#: scripts/scenario_33_early.lua:2961
+msgctxt "ammo-comms"
+msgid "Got any EMPs? ("
+msgstr "Avez-vous des EMP ? ("
+
+#: scripts/scenario_33_early.lua:2971
+msgctxt "ammo-comms"
+msgid "Do you have spare homing missiles for us? ("
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
+
+#: scripts/scenario_33_early.lua:2973
+msgctxt "ammo-comms"
+msgid "Do you have extra homing missiles? ("
+msgstr "Avez-vous des missiles homing supplémentaires ? ("
+
+#: scripts/scenario_33_early.lua:2983
+msgctxt "ammo-comms"
+msgid "We could use some mines. ("
+msgstr "Nous pourrions avoir besoin de quelques mines ("
+
+#: scripts/scenario_33_early.lua:2985
+msgctxt "ammo-comms"
+msgid "How about mines? ("
+msgstr "Concernant les mines ? ("
+
+#: scripts/scenario_33_early.lua:2995
+msgctxt "ammo-comms"
+msgid "What about HVLI? ("
+msgstr "Concernant les HVLI ? ("
+
+#: scripts/scenario_33_early.lua:2997
+msgctxt "ammo-comms"
+msgid "Could you provide HVLI? ("
+msgstr "Pourriez-vous fournir des HVLI ? ("
+
+#: scripts/scenario_33_early.lua:3005
+msgctxt "ammo-comms"
+msgid "Sorry, we don't have any ordnance you can use today"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3008
+msgctxt "ammo-comms"
+msgid "Sorry, we don't have any ordnance today"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3029
+msgctxt "dockingServicesStatus-comms"
+msgid "Repair ship system"
+msgstr "Réparer les systèmes du vaisseau"
+
+#: scripts/scenario_33_early.lua:3030
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"What system would you like repaired?\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+"Quel système souhaitez-vous réparer ?\n"
+"\n"
+"Réputation : %i"
+
+#: scripts/scenario_33_early.lua:3033
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid "Repair probe launch system (%s Rep)"
+msgstr "Réparer le système de lancement de sonde (%s rép)"
+
+#: scripts/scenario_33_early.lua:3035 scripts/scenario_33_early.lua:3052
+#: scripts/scenario_33_early.lua:3069 scripts/scenario_33_early.lua:3087
+#: scripts/scenario_33_early.lua:3105 scripts/scenario_33_early.lua:3233
+#, fuzzy
+msgctxt "ammo-comms"
+msgid "You need to stay docked for that action."
+msgstr "Vous devez rester amarré à la station pour cette action."
+
+#: scripts/scenario_33_early.lua:3040
+msgctxt "dockingServicesStatus-comms"
+msgid "Your probe launch system has been repaired"
+msgstr "Votre système de lancement de sonde a été réparé."
+
+#: scripts/scenario_33_early.lua:3042 scripts/scenario_33_early.lua:3059
+#: scripts/scenario_33_early.lua:3076 scripts/scenario_33_early.lua:3094
+#: scripts/scenario_33_early.lua:3112
+#, fuzzy
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr "Réputation insuffisante."
+
+#: scripts/scenario_33_early.lua:3050
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid "Repair hacking system (%s Rep)"
+msgstr "Réparer le système de piratage (%s rép)"
+
+#: scripts/scenario_33_early.lua:3057
+msgctxt "dockingServicesStatus-comms"
+msgid "Your hack system has been repaired"
+msgstr "Votre système de piratage a été réparé."
+
+#: scripts/scenario_33_early.lua:3067
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid "Repair scanning system (%s Rep)"
+msgstr "Réparer les scanners (%s rép)"
+
+#: scripts/scenario_33_early.lua:3074
+msgctxt "dockingServicesStatus-comms"
+msgid "Your scanners have been repaired"
+msgstr "Vos scanners ont été réparés."
+
+#: scripts/scenario_33_early.lua:3085
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid "Repair combat maneuver (%s Rep)"
+msgstr "Réparer la manœuvre de combat (%s rép)"
+
+#: scripts/scenario_33_early.lua:3092
+msgctxt "dockingServicesStatus-comms"
+msgid "Your combat maneuver has been repaired"
+msgstr "Votre manœuvre de combat a été réparée."
+
+#: scripts/scenario_33_early.lua:3103
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid "Repair self destruct system (%s Rep)"
+msgstr "Réparer le système d'autodestruction (%s rép)"
+
+#: scripts/scenario_33_early.lua:3110
+msgctxt "dockingServicesStatus-comms"
+msgid "Your self destruct system has been repaired"
+msgstr "Votre système d'autodestruction a été réparé."
+
+#: scripts/scenario_33_early.lua:3121
+msgctxt "dockingServicesStatus-comms"
+msgid "Docking services status"
+msgstr "État des services d'accueil"
+
+#: scripts/scenario_33_early.lua:3122
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid "Station %s docking services status:"
+msgstr "État des services d'accueil de la station %s :\n"
+
+#: scripts/scenario_33_early.lua:3124 scripts/scenario_33_early.lua:3401
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"%s\n"
+"Replenish scan probes."
+msgstr ""
+"%s\n"
+"- Réapprovisionnement des sondes."
+
+#: scripts/scenario_33_early.lua:3128 scripts/scenario_33_early.lua:3405
+msgctxt "dockingServicesStatus-comms"
+msgid "Cannot replenish scan probes due to fabrication unit failure."
+msgstr ""
+"- Sondes : impossible de réapprovisionner les sondes en raison d'une "
+"défaillance de l'unité de fabrication."
+
+#: scripts/scenario_33_early.lua:3129 scripts/scenario_33_early.lua:3406
+msgctxt "dockingServicesStatus-comms"
+msgid "Parts shortage prevents scan probe replenishment."
+msgstr ""
+"- Sondes : le manque de pièces empêche le réapprovisionnement des sondes."
+
+#: scripts/scenario_33_early.lua:3130 scripts/scenario_33_early.lua:3407
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"Station management has curtailed scan probe replenishment for cost cutting "
+"reasons."
+msgstr ""
+"- Sondes : les gestionnaires de la station ont réduit le réapprovisionnement "
+"des sondes pour des raisons de réduction des coûts."
+
+#: scripts/scenario_33_early.lua:3137 scripts/scenario_33_early.lua:3414
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"%s\n"
+"Ship hull repair."
+msgstr ""
+"%s\n"
+"- Réparation de la coque."
+
+#: scripts/scenario_33_early.lua:3141 scripts/scenario_33_early.lua:3418
+msgctxt "dockingServicesStatus-comms"
+msgid "We're out of the necessary materials and supplies for hull repair."
+msgstr ""
+"- Coque : nous n'avons plus les matériaux et fournitures nécessaires pour "
+"réparer la coque."
+
+#: scripts/scenario_33_early.lua:3142
+msgctxt "dockingServicesStatus-comms"
+msgid "Hull repair automation unavailable while it is undergoing maintenance."
+msgstr ""
+"- Coque : l'automatisation de réparation de la coque n'est pas disponible "
+"pendant la maintenance."
+
+#: scripts/scenario_33_early.lua:3143 scripts/scenario_33_early.lua:3420
+msgctxt "dockingServicesStatus-comms"
+msgid "All hull repair technicians quarantined to quarters due to illness."
+msgstr ""
+"- Coque : tous les techniciens de réparation de coque sont en quarantaine "
+"dans leur quartiers pour cause de maladie."
+
+#: scripts/scenario_33_early.lua:3150 scripts/scenario_33_early.lua:3427
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"%s\n"
+"Recharge ship energy stores."
+msgstr ""
+"%s\n"
+"- Recharge des réserves d'énergie."
+
+#: scripts/scenario_33_early.lua:3154 scripts/scenario_33_early.lua:3431
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"A recent reactor failure has put us on auxiliary power, so we cannot "
+"recharge ships."
+msgstr ""
+"- Énergie : une récente panne de réacteur nous a mis sous tension "
+"auxiliaire, nous ne pouvons donc pas recharger les vaisseaux."
+
+#: scripts/scenario_33_early.lua:3155 scripts/scenario_33_early.lua:3432
+msgctxt "dockingServicesStatus-comms"
+msgid "A damaged power coupling makes it too dangerous to recharge ships."
+msgstr ""
+"- Énergie : un couplage électrique défectueux rend la recharge des vaisseaux "
+"trop risquée."
+
+#: scripts/scenario_33_early.lua:3156 scripts/scenario_33_early.lua:3433
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"An asteroid strike damaged our solar cells and we are short on power, so we "
+"can't recharge ships right now."
+msgstr ""
+"- Énergie : une frappe d'astéroïde a endommagé nos cellules solaires et nous "
+"manquons de puissance, nous ne pouvons donc pas recharger les vaisseaux pour "
+"le moment."
+
+#: scripts/scenario_33_early.lua:3166 scripts/scenario_33_early.lua:3346
+#, fuzzy
+msgctxt "orders-comms"
+msgid "What are my current orders?"
+msgstr "Quels sont nos ordres en cours ?"
+
+#: scripts/scenario_33_early.lua:3169 scripts/scenario_33_early.lua:3349
+msgctxt "orders-comms"
+msgid "Perform tasks as given"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3171 scripts/scenario_33_early.lua:3351
+#, lua-format
+msgctxt "orders-comms"
+msgid "Dock with %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3173 scripts/scenario_33_early.lua:3353
+#, lua-format
+msgctxt "orders-comms"
+msgid "Scan the targets. Report results to %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3175 scripts/scenario_33_early.lua:3355
+msgctxt "orders-comms"
+msgid "Destroy the Kraylor freighter or transport"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3177 scripts/scenario_33_early.lua:3357
+msgctxt "orders-comms"
+msgid "Assist the Arlenian freighter"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3179 scripts/scenario_33_early.lua:3359
+msgctxt "orders-comms"
+msgid "Gather data on orbiting bodies"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3183 scripts/scenario_33_early.lua:3363
+#, fuzzy, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"   %i Minutes remain in game"
+msgstr ""
+"\n"
+"  > Il reste %i minutes de jeu."
+
+#: scripts/scenario_33_early.lua:3195
+#, lua-format
+msgctxt "orders-comms"
+msgid "Contact %s in %s."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3199
+#, lua-format
+msgctxt "orders-comms"
+msgid "Report details of Arlenian freighter %s engine damage to %s."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3202
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"Deliver parts to %s in %s by traveling to within 5 units of them and "
+"contacting them to deliver the parts."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3204
+#, lua-format
+msgctxt "orders-comms"
+msgid "Dock with %s and get parts for %s's engines."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3208
+#, lua-format
+msgctxt "orders-comms"
+msgid "Deep scan %s in %s."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3217
+#, lua-format
+msgctxt "orders-comms"
+msgid " Protect %s."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3237
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr "Nous ne fournissons pas ce type d'arme de destruction massive."
+
+#: scripts/scenario_33_early.lua:3238
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr "Nous ne fournissons pas ce type d'arme de perturbation massive."
+
+#: scripts/scenario_33_early.lua:3239
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr "Nous ne fournissons pas ce type d'arme. Trop dangereux."
+
+#: scripts/scenario_33_early.lua:3246
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
+
+#: scripts/scenario_33_early.lua:3248
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+"Désolé, officier, mais vous êtes au maximum de ce que vous pouvez stocker."
+
+#: scripts/scenario_33_early.lua:3256 scripts/scenario_33_early.lua:3271
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
+
+#: scripts/scenario_33_early.lua:3258 scripts/scenario_33_early.lua:3273
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+"Nous vous avons généreusement réapprovisionné en munitions.\n"
+"Faites-en bon usage."
+
+#: scripts/scenario_33_early.lua:3261 scripts/scenario_33_early.lua:3276
+#: scripts/scenario_33_early.lua:3281
+#, fuzzy
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr "Pas assez de réputation."
+
+#: scripts/scenario_33_early.lua:3266
+msgctxt "ammo-comms"
+msgid "You can't afford as much as I'd like to give you"
+msgstr ""
+"Vous ne pouvez pas en recevoir autant que ce que nous voudrions vous vendre."
+
+#: scripts/scenario_33_early.lua:3267
+msgctxt "ammo-comms"
+msgid "Get just one"
+msgstr "Prendre juste 1 munition"
+
+#: scripts/scenario_33_early.lua:3296
+msgctxt "station-comms"
+msgid ""
+"Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+"Bonjour, officier.\n"
+"Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
+"station au préalable."
+
+#: scripts/scenario_33_early.lua:3298
+msgctxt "station-comms"
+msgid ""
+"Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+"Salutations.\n"
+"Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
+
+#: scripts/scenario_33_early.lua:3301
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Be aware that if enemies in the area get much closer, we will be too busy to "
+"conduct business with you."
+msgstr ""
+"\n"
+"Sachez que si les ennemis de la zone se rapprochent encore, nous serons trop "
+"occupés pour faire affaire avec vous."
+
+#: scripts/scenario_33_early.lua:3321
+msgctxt "station-comms"
+msgid "I need information"
+msgstr "J'aurai besoin d'informations"
+
+#: scripts/scenario_33_early.lua:3322
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr "De quel genre d'informations avez-vous besoin ?"
+
+#: scripts/scenario_33_early.lua:3369
+msgctxt "station-comms"
+msgid "Station services"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3374
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Nuke"
+msgstr ""
+"\n"
+"   Nuke"
+
+#: scripts/scenario_33_early.lua:3378
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   EMP"
+msgstr ""
+"\n"
+"   EMP"
+
+#: scripts/scenario_33_early.lua:3382
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Homing"
+msgstr ""
+"\n"
+"   Homing"
+
+#: scripts/scenario_33_early.lua:3386
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Mine"
+msgstr ""
+"\n"
+"   Mine"
+
+#: scripts/scenario_33_early.lua:3390
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   HVLI"
+msgstr ""
+"\n"
+"   HVLI"
+
+#: scripts/scenario_33_early.lua:3393
+msgctxt "ammo-comms"
+msgid "We have no ordnance available for restock"
+msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
+
+#: scripts/scenario_33_early.lua:3395
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following type of ordnance available for restock:%s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
+
+#: scripts/scenario_33_early.lua:3397
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following types of ordnance available for restock:%s"
+msgstr "Nous pouvons vous fournir les munitions suivantes : %s"
+
+#: scripts/scenario_33_early.lua:3399
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"%s\n"
+"Station primary docking services:"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3419
+msgctxt "dockingServicesStatus-comms"
+msgid "Hull repair automation unavailable whie it is undergoing maintenance."
+msgstr ""
+"- Coque : l'automatisation de réparation de la coque n'est pas disponible "
+"pendant la maintenance."
+
+#: scripts/scenario_33_early.lua:3446
+#, fuzzy
+msgctxt "stationGeneralInfo-comms"
+msgid "Tell me more about your station"
+msgstr "Dites m'en plus à propos de votre station"
+
+#: scripts/scenario_33_early.lua:3447
+#, fuzzy
+msgctxt "stationGeneralInfo-comms"
+msgid "What would you like to know?"
+msgstr "Qu'aimeriez-vous savoir ?"
+
+#: scripts/scenario_33_early.lua:3449
+#, fuzzy
+msgctxt "stationGeneralInfo-comms"
+msgid "General information"
+msgstr "Informations générales"
+
+#: scripts/scenario_33_early.lua:3455
+#, fuzzy
+msgctxt "stationGeneralInfo-comms"
+msgid "Station history"
+msgstr "L'histoire de la station"
+
+#: scripts/scenario_33_early.lua:3463
+msgctxt "stationGeneralInfo-comms"
+msgid "Gossip"
+msgstr "Commérages"
+
+#: scripts/scenario_33_early.lua:3512
+msgctxt "station-comms"
+msgid "Report ship type on scanned ships"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3520 scripts/scenario_33_early.lua:3587
+#, lua-format
+msgctxt "station-comms"
+msgid "Report on %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3521
+#, lua-format
+msgctxt "station-comms"
+msgid "What type of ship is %s?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3523 scripts/scenario_33_early.lua:5805
+msgctxt "station-comms"
+msgid "Personnel Freighter 5"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3524 scripts/scenario_33_early.lua:5806
+msgctxt "station-comms"
+msgid "Goods Freighter 5"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3525 scripts/scenario_33_early.lua:5807
+msgctxt "station-comms"
+msgid "Garbage Freighter 5"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3526 scripts/scenario_33_early.lua:5808
+msgctxt "station-comms"
+msgid "Equipment Freighter 5"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3527 scripts/scenario_33_early.lua:5809
+msgctxt "station-comms"
+msgid "Fuel Freighter 5"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3528 scripts/scenario_33_early.lua:5810
+msgctxt "station-comms"
+msgid "Transport1x5"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3529 scripts/scenario_33_early.lua:5811
+msgctxt "station-comms"
+msgid "Transport2x5"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3530 scripts/scenario_33_early.lua:5812
+msgctxt "station-comms"
+msgid "Transport3x5"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3531 scripts/scenario_33_early.lua:5813
+msgctxt "station-comms"
+msgid "Transport4x5"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3532 scripts/scenario_33_early.lua:5814
+msgctxt "station-comms"
+msgid "Transport5x5"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3538 scripts/scenario_33_early.lua:3593
+msgctxt "station-comms"
+msgid "Your report has been noted"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3548 scripts/scenario_33_early.lua:3557
+#: scripts/scenario_33_early.lua:3603 scripts/scenario_33_early.lua:3612
+msgctxt "station-comms"
+msgid "Review of ships already reported:"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3550 scripts/scenario_33_early.lua:3559
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"%s reported as type %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3565 scripts/scenario_33_early.lua:3620
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"\n"
+"What ship do you want to report on?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3567 scripts/scenario_33_early.lua:3622
+msgctxt "station-comms"
+msgid "What ship do you want to report on?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3571 scripts/scenario_33_early.lua:3626
+msgctxt "station-comms"
+msgid "Nothing to report"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3579
+msgctxt "station-comms"
+msgid "Report shield frequency on deep scanned ships"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3588
+#, lua-format
+msgctxt "station-comms"
+msgid "At what shield frequency does ship %s block the most beam damage?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3590
+#, lua-format
+msgctxt "station-comms"
+msgid "%s THz"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3605 scripts/scenario_33_early.lua:3614
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"The shield frequency of %s was reported the strongest at %s THz"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3639
+#, lua-format
+msgctxt "station-comms"
+msgid "Provide %s engine damage details"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3640
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"What is the damage level of the impulse engines on %s? Select the value that "
+"is the closest."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3645
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"We've got repair parts for that kind of engine damage. Dock with us to pick "
+"up the parts. Then you can take the parts to %s. Travel to within 5 units of "
+"%s to deliver the parts"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3650
+msgctxt "station-comms"
+msgid "How do we get engine damage details?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3651
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"To get engine damage details on %s, you need to deep scan it. After "
+"completing the second scan, click on 'Tactical' and select 'Systems' to see "
+"all the ship's systems and the degree of functioning or damage. Anything "
+"less than 100%% is functional but damaged. Negative numbers indicate a non-"
+"functioning system."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3681
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"We only have objective evaluation data. Subjective evaluation must come from "
+"a different source. The entire crew contributes to the success of a task. "
+"Certain members are measured on part of the task.\n"
+"----- First Task: Dock -----\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3700 scripts/scenario_33_early.lua:3718
+#: scripts/scenario_33_early.lua:3734 scripts/scenario_33_early.lua:3751
+#: scripts/scenario_33_early.lua:3768 scripts/scenario_33_early.lua:3788
+#: scripts/scenario_33_early.lua:4028 scripts/scenario_33_early.lua:4049
+#: scripts/scenario_33_early.lua:4074 scripts/scenario_33_early.lua:4099
+#: scripts/scenario_33_early.lua:4124 scripts/scenario_33_early.lua:4148
+#: scripts/scenario_33_early.lua:4172 scripts/scenario_33_early.lua:4222
+#: scripts/scenario_33_early.lua:4301 scripts/scenario_33_early.lua:4332
+#: scripts/scenario_33_early.lua:4352 scripts/scenario_33_early.lua:4354
+#: scripts/scenario_33_early.lua:4366
+msgctxt "evaluation-comms"
+msgid "N"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3704 scripts/scenario_33_early.lua:3721
+#: scripts/scenario_33_early.lua:3738 scripts/scenario_33_early.lua:3755
+#: scripts/scenario_33_early.lua:3775 scripts/scenario_33_early.lua:3791
+#: scripts/scenario_33_early.lua:4031 scripts/scenario_33_early.lua:4055
+#: scripts/scenario_33_early.lua:4080 scripts/scenario_33_early.lua:4105
+#: scripts/scenario_33_early.lua:4129 scripts/scenario_33_early.lua:4153
+#: scripts/scenario_33_early.lua:4177 scripts/scenario_33_early.lua:4224
+#: scripts/scenario_33_early.lua:4304 scripts/scenario_33_early.lua:4335
+#: scripts/scenario_33_early.lua:4356 scripts/scenario_33_early.lua:4369
+msgctxt "evaluation-comms"
+msgid "S"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3707 scripts/scenario_33_early.lua:3724
+#: scripts/scenario_33_early.lua:3741 scripts/scenario_33_early.lua:3758
+#: scripts/scenario_33_early.lua:3778 scripts/scenario_33_early.lua:3794
+#: scripts/scenario_33_early.lua:4034 scripts/scenario_33_early.lua:4058
+#: scripts/scenario_33_early.lua:4083 scripts/scenario_33_early.lua:4108
+#: scripts/scenario_33_early.lua:4132 scripts/scenario_33_early.lua:4156
+#: scripts/scenario_33_early.lua:4180 scripts/scenario_33_early.lua:4226
+#: scripts/scenario_33_early.lua:4307 scripts/scenario_33_early.lua:4338
+#: scripts/scenario_33_early.lua:4359 scripts/scenario_33_early.lua:4372
+msgctxt "evaluation-comms"
+msgid "E"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3710 scripts/scenario_33_early.lua:3727
+#: scripts/scenario_33_early.lua:3744 scripts/scenario_33_early.lua:3761
+#: scripts/scenario_33_early.lua:3781 scripts/scenario_33_early.lua:3797
+#: scripts/scenario_33_early.lua:4037 scripts/scenario_33_early.lua:4061
+#: scripts/scenario_33_early.lua:4086 scripts/scenario_33_early.lua:4111
+#: scripts/scenario_33_early.lua:4135 scripts/scenario_33_early.lua:4159
+#: scripts/scenario_33_early.lua:4183 scripts/scenario_33_early.lua:4228
+#: scripts/scenario_33_early.lua:4310 scripts/scenario_33_early.lua:4341
+#: scripts/scenario_33_early.lua:4362 scripts/scenario_33_early.lua:4375
+msgctxt "evaluation-comms"
+msgid "C"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3713 scripts/scenario_33_early.lua:3854
+#: scripts/scenario_33_early.lua:3965 scripts/scenario_33_early.lua:4040
+#: scripts/scenario_33_early.lua:4313
+#, lua-format
+msgctxt "evaluation-comms"
+msgid "Overall time to complete the task: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3730
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Relay time taken to request dock protocol: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3747
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Weapons time taken to calibrate beams: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3764
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Weapons time taken to calibrate shields: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3784
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Engineering time taken to power down missile system: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3800
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Helm/Engineering maximum velocity reached: %.1f units per minute"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3804 scripts/scenario_33_early.lua:3843
+#: scripts/scenario_33_early.lua:3916 scripts/scenario_33_early.lua:3954
+#: scripts/scenario_33_early.lua:3971 scripts/scenario_33_early.lua:3985
+#: scripts/scenario_33_early.lua:4250 scripts/scenario_33_early.lua:4383
+msgctxt "evaluation-comms"
+msgid "Needs improvement"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3806 scripts/scenario_33_early.lua:3918
+#: scripts/scenario_33_early.lua:3987 scripts/scenario_33_early.lua:4252
+#: scripts/scenario_33_early.lua:4385
+msgctxt "evaluation-comms"
+msgid "Perfect"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3808 scripts/scenario_33_early.lua:3845
+#: scripts/scenario_33_early.lua:3920 scripts/scenario_33_early.lua:3956
+#: scripts/scenario_33_early.lua:3973 scripts/scenario_33_early.lua:3989
+#: scripts/scenario_33_early.lua:4254 scripts/scenario_33_early.lua:4387
+msgctxt "evaluation-comms"
+msgid "Superior"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3810 scripts/scenario_33_early.lua:3848
+#: scripts/scenario_33_early.lua:3922 scripts/scenario_33_early.lua:3959
+#: scripts/scenario_33_early.lua:3976 scripts/scenario_33_early.lua:3991
+#: scripts/scenario_33_early.lua:4256 scripts/scenario_33_early.lua:4389
+msgctxt "evaluation-comms"
+msgid "Exceeds expectations"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3812 scripts/scenario_33_early.lua:3851
+#: scripts/scenario_33_early.lua:3924 scripts/scenario_33_early.lua:3962
+#: scripts/scenario_33_early.lua:3979 scripts/scenario_33_early.lua:3993
+#: scripts/scenario_33_early.lua:4258 scripts/scenario_33_early.lua:4391
+msgctxt "evaluation-comms"
+msgid "Competent"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3815
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"\n"
+"With a score of %i points out of 18, the system gives a rating of %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3816 scripts/scenario_33_early.lua:3928
+#: scripts/scenario_33_early.lua:3997 scripts/scenario_33_early.lua:4262
+#: scripts/scenario_33_early.lua:4395
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"\n"
+"For each subtask, the single letter evaluations are:\n"
+"    N = Needs improvement\n"
+"    C = Competent\n"
+"    E = Exceeds expectations\n"
+"    S = Superior"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3826
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"We only have objective evaluation data. Subjective evaluation must come from "
+"a different source. The entire crew contributes to the success of a task. "
+"Certain members are measured on part of the task.\n"
+"----- Second Task: Scan -----\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3858
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Report line per scan ship: faction name: SS = Simple Scan time in seconds, "
+"DS = Deep Scan time in seconds, RT = Reported Type time in seconds (yes/no), "
+"RF = Reported Frequency time in seconds (yes/no)"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3885 scripts/scenario_33_early.lua:3898
+msgctxt "evaluation-comms"
+msgid "(no)"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3887 scripts/scenario_33_early.lua:3900
+msgctxt "evaluation-comms"
+msgid "(yes)"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3903
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"%s %s: SS:%s, DS:%s, RT:%s %s, RF:%s %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3927
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"\n"
+"With a score of %i points out of 54, the system gives a rating of %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3938
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"We only have objective evaluation data. Subjective evaluation must come from "
+"a different source. The entire crew contributes to the success of a task. "
+"Certain members are measured on part of the task.\n"
+"----- Third Task: Destroy Freighter -----\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3969
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Helm/Weapons HVLI in storage: %i"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:3996
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"\n"
+"With a score of %i points out of 6, the system gives a rating of %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4007
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"We only have objective evaluation data. Subjective evaluation must come from "
+"a different source. The entire crew contributes to the success of a task. "
+"Certain members are measured on part of the task.\n"
+"----- Fourth Task: Assist Freighter -----\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4044
+msgctxt "evaluation-comms"
+msgid "Arlenian freighter"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4064
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Relay time taken to contact %s: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4069
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Failed to contact Arlenian freighter"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4071 scripts/scenario_33_early.lua:4096
+#: scripts/scenario_33_early.lua:4121 scripts/scenario_33_early.lua:4145
+#: scripts/scenario_33_early.lua:4169 scripts/scenario_33_early.lua:4193
+#, lua-format
+msgctxt "evaluation-comms"
+msgid "%s N"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4089
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Relay time taken to report damage to %s's engines: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4094
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Failed to report damage to Arlenian freighter"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4114
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Helm/Relay time taken to get parts: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4119
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Failed to get parts for Arlenian freighter"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4138
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Helm/Relay time taken to provide parts for %s: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4143
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Failed to provide parts to Arlenian freighter"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4162
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Science time taken to scan %s: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4167
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Failed to scan Arlenian freighter"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4186
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Science time taken to fully scan %s: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4191
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Failed to deep scan Arlenian freighter"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4196
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Weapons/Helm/Engineering time to destroy each marauder in seconds:\n"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4239
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Task status: complete"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4244
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Task status: failed (partial success in providing repair parts)"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4247
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Task status: failed"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4261
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"\n"
+"With a score of %i points out of 43, the system gives a rating of %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4272
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"We only have objective evaluation data. Subjective evaluation must come from "
+"a different source. The entire crew contributes to the success of a task. "
+"Certain members are measured on part of the task.\n"
+"----- Fifth Task: Research -----\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4394
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"\n"
+"With a score of %i points out of 48, the system gives a rating of %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4405
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"We only have objective evaluation data. Subjective evaluation must come from "
+"a different source. The entire crew contributes to the success of a task. "
+"Certain members are measured on part of the task.\n"
+"----- Bonus Task -----\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4424
+#, fuzzy
+msgctxt "evaluation-comms"
+msgid "complete"
+msgstr "--> [achevé]"
+
+#: scripts/scenario_33_early.lua:4425
+#, fuzzy
+msgctxt "evaluation-comms"
+msgid "incomplete"
+msgstr "--> [à vérifier]"
+
+#: scripts/scenario_33_early.lua:4426
+msgctxt "evaluation-comms"
+msgid "partially complete"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4437
+#, lua-format
+msgctxt "evaluation-comms"
+msgid "%s time: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4441
+#, lua-format
+msgctxt "evaluation-comms"
+msgid "Bonus task length: %s     Status: %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4442 scripts/scenario_33_early.lua:4452
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"Station %s %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4443 scripts/scenario_33_early.lua:4453
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"     Ships spawned: count: %i, strength: %.1f"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4444 scripts/scenario_33_early.lua:4454
+#, lua-format
+msgctxt "evaluation-comms"
+msgid ""
+"%s\n"
+"     Ships destroyed: count: %i, strength: %.1f"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4448
+msgctxt "evaluation-comms"
+msgid "(destroyed)"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4475
+msgctxt "evaluation-comms"
+msgid "Current Evaluations"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:4546
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr ""
+"Salutations,\n"
+"Que nous voulez-vous ?"
+
+#: scripts/scenario_33_early.lua:4548
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr "Monsieur, comment pouvons-nous vous assister ?"
+
+#: scripts/scenario_33_early.lua:4550
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr "Défendez un marqueur"
+
+#: scripts/scenario_33_early.lua:4552
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+"Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en placer "
+"un."
+
+#: scripts/scenario_33_early.lua:4554
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr "Quel marqueur devons-nous défendre ?"
+
+#: scripts/scenario_33_early.lua:4556
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %d"
+msgstr "Défendez le marqueur %d"
+
+#: scripts/scenario_33_early.lua:4558
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %d."
+msgstr "Nous partons immédiatement défendre le marqueur %d."
+
+#: scripts/scenario_33_early.lua:4566
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr "Aidez-nous !"
+
+#: scripts/scenario_33_early.lua:4567
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr "Entendu, nous partons immédiatement vous aider."
+
+#: scripts/scenario_33_early.lua:4572
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr "Au rapport"
+
+#: scripts/scenario_33_early.lua:4573
+#, fuzzy
+msgctxt "shipAssist-comms"
+msgid "Hull: "
+msgstr "Coque : "
+
+#: scripts/scenario_33_early.lua:4576
+#, fuzzy
+msgctxt "shipAssist-comms"
+msgid "Shield: "
+msgstr "Boucliers :"
+
+#: scripts/scenario_33_early.lua:4578
+#, fuzzy
+msgctxt "shipAssist-comms"
+msgid "Front Shield: "
+msgstr "Boucliers avant : "
+
+#: scripts/scenario_33_early.lua:4579
+#, fuzzy
+msgctxt "shipAssist-comms"
+msgid "Rear Shield: "
+msgstr "Boucliers arrière : "
+
+#: scripts/scenario_33_early.lua:4582
+#, fuzzy
+msgctxt "shipAssist-comms"
+msgid "Shield "
+msgstr "Boucliers "
+
+#: scripts/scenario_33_early.lua:4588
+#, fuzzy
+msgctxt "shipAssist-comms"
+msgid " Missiles: "
+msgstr " Missiles : "
+
+#: scripts/scenario_33_early.lua:4593 scripts/scenario_33_early.lua:5349
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"Docked with %s"
+msgstr ""
+"%s\n"
+"Amarré à %s."
+
+#: scripts/scenario_33_early.lua:4598
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"Heading for %s station %s in %s"
+msgstr ""
+"%s\n"
+"En route pour la station %s %s en secteur %s."
+
+#: scripts/scenario_33_early.lua:4608
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr "Amarrez-vous à %s"
+
+#: scripts/scenario_33_early.lua:4609
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr "En cours d'amarrage à %s."
+
+#: scripts/scenario_33_early.lua:4626 scripts/scenario_33_early.lua:5368
+msgctxt "trade-comms"
+msgid "Jettison cargo"
+msgstr "Larguer des marchandises"
+
+#: scripts/scenario_33_early.lua:4627 scripts/scenario_33_early.lua:5369
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Available space: %i\n"
+"What would you like to jettison?"
+msgstr ""
+"Slots de stockage disponibles : %i\n"
+"Que voudriez-vous larguer par le sas ?"
+
+#: scripts/scenario_33_early.lua:4633 scripts/scenario_33_early.lua:5375
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s jettisoned"
+msgstr ""
+"1 %s larguée.\n"
+"Bon voyage petite marchandise."
+
+#: scripts/scenario_33_early.lua:4646
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr "Échanger des produits de luxe (luxury) contre %s"
+
+#: scripts/scenario_33_early.lua:4656
+#, fuzzy, lua-format
+msgctxt "trade-comms"
+msgid "Traded luxury for %s"
+msgstr "Échanger des produits de luxe (luxury) contre du %s"
+
+#: scripts/scenario_33_early.lua:4666 scripts/scenario_33_early.lua:4691
+#: scripts/scenario_33_early.lua:4713 scripts/scenario_33_early.lua:4739
+#: scripts/scenario_33_early.lua:5388 scripts/scenario_33_early.lua:5410
+#: scripts/scenario_33_early.lua:5434 scripts/scenario_33_early.lua:5456
+#: scripts/scenario_33_early.lua:5480
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr "Acheter 1 %s pour %i rép"
+
+#: scripts/scenario_33_early.lua:4677 scripts/scenario_33_early.lua:4702
+#: scripts/scenario_33_early.lua:4724 scripts/scenario_33_early.lua:4750
+#: scripts/scenario_33_early.lua:5399 scripts/scenario_33_early.lua:5421
+#: scripts/scenario_33_early.lua:5445 scripts/scenario_33_early.lua:5467
+#: scripts/scenario_33_early.lua:5491
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchased %s from %s"
+msgstr "1 %s acheté auprès de %s."
+
+#: scripts/scenario_33_early.lua:4679 scripts/scenario_33_early.lua:4704
+#: scripts/scenario_33_early.lua:4726 scripts/scenario_33_early.lua:4752
+#: scripts/scenario_33_early.lua:5401 scripts/scenario_33_early.lua:5423
+#: scripts/scenario_33_early.lua:5447 scripts/scenario_33_early.lua:5469
+#: scripts/scenario_33_early.lua:5493
+#, fuzzy
+msgctxt "needRep-comms"
+msgid "Insufficient reputation for purchase"
+msgstr ""
+"\n"
+"Réputation insuffisante pour acheter."
+
+#: scripts/scenario_33_early.lua:4762 scripts/scenario_33_early.lua:5325
+msgctxt "trade-comms"
+msgid "Do you have cargo you might sell?"
+msgstr "Auriez-vous des marchandises à vendre ?"
+
+#: scripts/scenario_33_early.lua:4764 scripts/scenario_33_early.lua:5327
+msgctxt "trade-comms"
+msgid "We've got "
+msgstr "Nous avons : "
+
+#: scripts/scenario_33_early.lua:4776 scripts/scenario_33_early.lua:5339
+msgctxt "trade-comms"
+msgid "nothing"
+msgstr "rien du tout."
+
+#: scripts/scenario_33_early.lua:4792
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr "Nous allons vous anéantir"
+
+#: scripts/scenario_33_early.lua:4793
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr "Votre race va s'éteindre ici et maintenant !"
+
+#: scripts/scenario_33_early.lua:4794
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr "Vos menaces ridicules ne nous impressionnent pas."
+
+#: scripts/scenario_33_early.lua:4800
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+"...Ktzzzsss...\n"
+"Vous allez mourir faibles créatures insignifiantes !"
+
+#: scripts/scenario_33_early.lua:4803
+msgctxt "shipEnemy-comms"
+msgid "We will destroy you"
+msgstr "Nous allons vous détruire"
+
+#: scripts/scenario_33_early.lua:4804
+msgctxt "shipEnemy-comms"
+msgid "We think not. It is you who will experience destruction!"
+msgstr "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
+
+#: scripts/scenario_33_early.lua:4806
+msgctxt "shipEnemy-comms"
+msgid "You have no honor"
+msgstr "Vous n'avez aucun honneur"
+
+#: scripts/scenario_33_early.lua:4807
+msgctxt "shipEnemy-comms"
+msgid "Your insult has brought our wrath upon you. Prepare to die."
+msgstr "Votre insulte a attiré notre colère sur vous. Préparez-vous à mourir !"
+
+#: scripts/scenario_33_early.lua:4808
+msgctxt "shipEnemy-comms"
+msgid "Your comments about honor have no meaning to us"
+msgstr "Vos commentaires sur l'honneur n'ont aucune signification pour nous."
+
+#: scripts/scenario_33_early.lua:4810
+msgctxt "shipEnemy-comms"
+msgid "We pity your pathetic race"
+msgstr "Nous plaignons votre race pathétique"
+
+#: scripts/scenario_33_early.lua:4811
+msgctxt "shipEnemy-comms"
+msgid "Pathetic? You will regret your disparagement!"
+msgstr ""
+"Pathétique ?\n"
+"Vous allez regretter votre insolence !"
+
+#: scripts/scenario_33_early.lua:4812
+msgctxt "shipEnemy-comms"
+msgid "We don't care what you think of us"
+msgstr "Peu importe ce que vous pensez de nous."
+
+#: scripts/scenario_33_early.lua:4817
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+"Nous ne vous voulons aucun mal, mais nous vous en ferons si nécessaire.\n"
+"Fin de transmission."
+
+#: scripts/scenario_33_early.lua:4821
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr ""
+"Restez en dehors de notre chemin, ou votre mort sera une amusante "
+"distraction pour nous !"
+
+#: scripts/scenario_33_early.lua:4825
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+"000110011010...Grzzzz...\n"
+"Communication binaire non détectée...Grzzz Passons en communication "
+"universelle..Grrzzz\n"
+"Générons réponse appropriée pour cible en langage humain à partir archives..."
+"Grrzzzz\n"
+"\n"
+"     [Ne nous approchez pas !] Grrzzz\n"
+"\n"
+"Communication interrompue."
+
+#: scripts/scenario_33_early.lua:4826
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr "Executer à distance : AUTODESTRUCTION"
+
+#: scripts/scenario_33_early.lua:4827
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr ""
+"Commande malveillante reçue. Annulée.\n"
+"Nous ciblons immédiatement source."
+
+#: scripts/scenario_33_early.lua:4828
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr "Ordre externe ignoré."
+
+#: scripts/scenario_33_early.lua:4830
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+"Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
+"s'opposer à nous tous.\n"
+"Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
+
+#: scripts/scenario_33_early.lua:4831
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr "Diffuser la chanson de Spiderman sur toutes les ondes"
+
+#: scripts/scenario_33_early.lua:4832
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr "Vous osez vous moquer de nous ? En auriez-vous marre de vivre ?"
+
+#: scripts/scenario_33_early.lua:4833
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr ""
+"Notre peuple a d'autres priorités que l'extermination de parasites tels que "
+"vous."
+
+#: scripts/scenario_33_early.lua:4837
+msgctxt "shipEnemy-comms"
+msgid "State your business"
+msgstr "Qu'est ce que vous voulez ?"
+
+#: scripts/scenario_33_early.lua:4841
+msgctxt "shipEnemy-comms"
+msgid "What do you want? (not that we care)"
+msgstr "Qu'est-ce que vous voulez ? (non pas que ça nous intéresse)"
+
+#: scripts/scenario_33_early.lua:4845
+msgctxt "shipEnemy-comms"
+msgid "Don't waste our time"
+msgstr "Ne perdons pas notre temps."
+
+#: scripts/scenario_33_early.lua:4847
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr "Occupez-vous de vos affaires !"
+
+#: scripts/scenario_33_early.lua:4887
+msgctxt "shipEnemy-comms"
+msgid "Subspace and time continuum disruption authorized"
+msgstr "Interruption du sous-espace et du continuum temporel autorisée."
+
+#: scripts/scenario_33_early.lua:4905
+msgctxt "shipEnemy-comms"
+msgid "Stop your actions"
+msgstr "Arrêtez ce que vous faites !"
+
+#: scripts/scenario_33_early.lua:4929
+msgctxt "shipEnemy-comms"
+msgid "Just this once, we'll take your advice"
+msgstr "Juste pour cette fois, nous suivrons vos conseils."
+
+#: scripts/scenario_33_early.lua:4931
+msgctxt "shipEnemy-comms"
+msgid "No"
+msgstr "Non"
+
+#: scripts/scenario_33_early.lua:5255
+#, fuzzy, lua-format
+msgctxt "tabRelay"
+msgid "Disruption %i"
+msgstr "Perturbation %i"
+
+#: scripts/scenario_33_early.lua:5289
+msgctxt "trade-comms"
+msgid "Yes?"
+msgstr "Oui, c'est pour quoi ?"
+
+#: scripts/scenario_33_early.lua:5292
+msgctxt "ship-comms"
+msgid "We are in need of some assistance."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5293
+msgctxt "ship-comms"
+msgid "What kind of assistance do you need?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5296
+msgctxt "ship-comms"
+msgid "We're not exactly sure. We just know our engines are not working"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5297
+msgctxt "ship-comms"
+msgid "May we scan your ship?"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5298
+msgctxt "ship-comms"
+msgid ""
+"If that helps you figure out what's wrong with the engines, go right ahead"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5299
+#, lua-format
+msgctxt "ship-comms"
+msgid "We'll provide %s with your ship data and get back to you"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5300
+msgctxt "ship-comms"
+msgid ""
+"We'll be here. We're not going enywhere. We are worried about Kraylor in the "
+"area, so don't take too long"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5310
+msgctxt "ship-comms"
+msgid "Deliver repair parts"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5312
+msgctxt "ship-comms"
+msgid ""
+"These match exactly what we need. We will fully restore our engines shortly"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5316
+msgctxt "ship-comms"
+msgid ""
+"These parts don't look like they solve our problem. You may want to double "
+"check the information you provided to the parts supplier"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5345
+#, fuzzy
+msgctxt "shipAssist-comms"
+msgid "Where are you going?"
+msgstr "Où allez-vous ?"
+
+#: scripts/scenario_33_early.lua:5347
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hi %s,"
+msgstr "Salut %s,"
+
+#: scripts/scenario_33_early.lua:5354
+#, fuzzy, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"Heading for %s station %s in sector %s"
+msgstr ""
+"%s\n"
+"En route pour la station %s %s dans le secteur %s."
+
+#: scripts/scenario_33_early.lua:5505
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+"Désolé, nous n'avons pas le temps de discuter avec vous.\n"
+"Nous sommes en mission de la plus haute importance."
+
+#: scripts/scenario_33_early.lua:5507
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+"Nous n'avons rien pour vous.\n"
+"Bonne journée."
+
+#: scripts/scenario_33_early.lua:5526
+#, lua-format
+msgctxt "msgHelms"
+msgid ""
+"The most direct route to dock with station %s is to put the ship in full "
+"reverse impulse. The engines start at minimal power, so you may have to ask "
+"engineering to put more power in the impulse engines. You get a better "
+"evaluation score the higher your speed. You won't be able to dock until the "
+"docking protocols are satisfied."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5530
+#, lua-format
+msgctxt "msgWeapons"
+msgid ""
+"Get the docking protocol shield and beam frequency from %s. Calibrate the "
+"shields by adjusting the frequency in the lower right of your console then "
+"click the calibrate button. Set the beam weapons frequency by adjusting the "
+"frequency above the shield frequency in the lower right of your console."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5534
+#, lua-format
+msgctxt "msgTactical"
+msgid ""
+"%s Get the docking protocol beam frequency from %s. Calibrate the beams "
+"using the frequency shown along the bottom edge of your console in the "
+"middle of your console."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5538
+#, lua-format
+msgctxt "msgEngineer"
+msgid ""
+"All systems start at a low power level. You'll want to put power in the "
+"impulse engines based on the first task requirement. Be prepared to run the "
+"impulse engines up to 300%% with max coolant at Helm's request until you "
+"reach the station. You'll hear from %s that the docking protocol calls for "
+"zero power in the missile systems, so take the power all the way out of "
+"missile systems."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5542
+#, lua-format
+msgctxt "msgEngineer+"
+msgid ""
+"%s The docking protocol also calls for shield calibration. Listen for the "
+"shield frequency. Adjust the shield frequency with the frequency selector "
+"along the left edge of your console in the middle. Click the Calibrate "
+"button after you have set the frequency."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5546
+#, lua-format
+msgctxt "msgRelay"
+msgid ""
+"To contact station %s for the docking protocol, click %s then click the Open "
+"Comms button in the upper left of your console. Once communications are "
+"open, click the Check with docking port authority button to determine the "
+"docking protocol. Report the protocol to your crew."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5550
+#, lua-format
+msgctxt "msgOperations"
+msgid ""
+"To contact station %s for the docking protocol, click %s then click the Open "
+"Comms button along the bottom edge of your console to the right. Once "
+"communications are open, click the Check with docking port authority button "
+"to determine the docking protocol. Report the protocol to your crew."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5557
+msgctxt "msgHelms"
+msgid ""
+"You might be asked to jump into the nearby nebula so that a freighter can be "
+"scanned."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5566
+#, lua-format
+msgctxt "msgScience"
+msgid ""
+"Start scanning the target at bearing %.1f right away. Report the type of "
+"ship as soon as you finish the simple scan. Then start the deep scan. The "
+"default keyboard shortcut is S to start the scan. After completing the deep "
+"scan, get the scanned ship's strongest shield deflection frequency by "
+"hovering over the lowest, reddest point on the bar graph. Report that "
+"frequency."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5570
+msgctxt "msgRelay"
+msgid ""
+"Send a probe to the middle of the nearest nebula: click the launch probe "
+"button, then click the middle of the nebula. Once it's there, link it to "
+"science. Be ready to report the ship type and the frequency as soon as "
+"Science completes each scan."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5574
+#, lua-format
+msgctxt "msgOperations"
+msgid ""
+"Start scanning the target at bearing %.1f right away. There are likely more "
+"targets in the nebula, so you should request that helm or tactical take you "
+"closer to the nebula. Report the type of ship as soon as you finish the "
+"simple scan. Then start the deep scan. The default keyboard shortcut is S to "
+"start the scan. After completing the deep scan, get the scanned ship's "
+"strongest shield deflection frequency by hovering over the lowest, reddest "
+"point on the bar graph. Report that frequency. Once you scan the other "
+"targets that are likely in the nebula, you will need to exit the nebula to "
+"report their characteristics to %s."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5579
+msgctxt "msgHelms"
+msgid ""
+"Jump to the enemy freighter if it's farther than 5 units away. Get the "
+"bearing and distance from Science or Operations, subtract 2 units to place "
+"you in optimal firing range. Once you're near, rotate to point the left or "
+"right tube to the enemy. He'll try to run away, so be ready to angle the "
+"tube to lead the HVLIs in front of the enemy freighter."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5583
+msgctxt "msgWeapons"
+msgid ""
+"Load up HVLIs on both sides. You may have to ask Engineering for power to "
+"missile systems."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5591
+msgctxt "msgEngineer"
+msgid ""
+"Raise power to missile systems to 100%. Put even more in along with coolant "
+"to make them load faster. Be ready to add power to impulse and/or "
+"maneuvering as requested."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5599
+msgctxt "msgScience"
+msgid ""
+"Select the enemy freighter. Use radar or probe view as applicable. Provide "
+"bearing and distance to freighter to crew. You can find it along the right "
+"of your console screen."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5603
+msgctxt "msgOperations"
+msgid ""
+"Provide bearing and range to enemy freighter. If nebula obscures your view, "
+"estimate based on recent scans, otherwise click the enemy freighter and read "
+"the bearing and distance from your console."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5607
+msgctxt "msgRelay"
+msgid ""
+"Hack enemy ships once they are in range either via probe or your ship. "
+"Impulse engines for the fighter types is a good choice since it makes it "
+"easier to shoot them down."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5612
+msgctxt "msgHelms"
+msgid ""
+"You will have to go to the distressed freighter to help defend it against "
+"Kraylor and to help repair it. You may have to pick up parts from your home "
+"station. Deciding which to do first will be up to your commanding officer or "
+"CO. Be thinking about both options."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5616
+msgctxt "msgWeapons"
+msgid ""
+"Your beams are fully functional. Your missiles have been returned to you. "
+"Load up your tubes in preparation for combat. Homing missiles are "
+"recommended. Even homing missiles can be dodged by the enemy. Try for as "
+"straight a shot as possible."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5624
+msgctxt "msgEngineer"
+msgid ""
+"Pay careful attention to what systems are used and give them additional "
+"power when needed (along with coolant). Remember the docking/undocking "
+"protocol (no missile energy)"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5632
+msgctxt "msgScience"
+msgid ""
+"Scan the distressed Arlenian freighter as soon as you can (twice). After the "
+"second scan, get the impulse engine damage percentage by clicking the "
+"Tactical widget and selecting Systems. Report it to Relay who will report it "
+"to the home station."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5636
+msgctxt "msgRelay"
+msgid ""
+"Launch probes to cover the sector where the distressed Arlenian freighter is "
+"located. Link the probe that finds the freighter to science. Contact the "
+"freighter. Report Science's scan results to your home station."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5640
+msgctxt "msgOperations"
+msgid ""
+"Contact the distressed Arlenian freighter, then scan the freighter as soon "
+"as you can (twice). After the second scan, get the impulse engine damage "
+"percentage by clicking the Tactical widget and selecting Systems. Report it "
+"to the home station."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5645
+msgctxt "msgHelms"
+msgid ""
+"Use warp to approach but not intersect the planets and moons in motion. "
+"Intersetion will damage and quickly destroy your ship. Use guidance from "
+"Relay/Science/Operations for good approach vectors. Warn Engineering when "
+"you use warp, especially anything above warp one."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5649
+msgctxt "msgWeapons"
+msgid ""
+"Watch for enemy targets of opportunity. The planets and moons are far more "
+"dangerous, but if you leave the enemies alone, eventually, they will start "
+"attacking your home station."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:5657
+msgctxt "msgEngineer"
+msgid ""
+"Suggested default settings: 50% coolant in warp, 50% coolant in maneuvering, "
+"150% power in maneuvering, remaining systems: 100%, remainig coolant: 0. "
+"Watch energy carefully and let the commanding officer know when you get "
+"below 200 so you can dock and get more. The reactor will help, but charging "
+"at a station is more efficient."
+msgstr ""
+
+#: scripts/scenario_33_early.lua:6236
+#, lua-format
+msgctxt "human-incCall"
+msgid "You completed the research task. Destroy any Kraylor headed for %s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:6238
+msgctxt "goal-shipLog"
+msgid ""
+"You completed the research task. Destroy any Kraylor that were headed for "
+"your home base"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:6360
+#, lua-format
+msgctxt "msgRelay&Operations"
+msgid "%s   Scan started at %.1f"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:6368
+#, lua-format
+msgctxt "msgRelay&Operations"
+msgid ""
+"Orbital body researched status:\n"
+"Completed: %s     Remaining: %s\n"
+"%s"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:6371
+msgctxt "msgRelay&Operations"
+msgid "Enemy ships hunting"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:6373
+#, lua-format
+msgctxt "msgRelay&Operations"
+msgid "%s for %s:"
+msgstr ""
+
+#: scripts/scenario_33_early.lua:6379
+#, lua-format
+msgctxt "msgRelay&Operations"
+msgid ""
+"%s\n"
+"   %s in %s"
+msgstr ""

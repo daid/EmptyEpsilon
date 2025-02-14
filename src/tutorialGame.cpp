@@ -1,10 +1,12 @@
 #include <i18n.h>
 #include "tutorialGame.h"
-#include "scriptInterface.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "preferenceManager.h"
 #include "main.h"
+#include "script.h"
+#include "gameGlobalInfo.h"
+
+#include "components/collision.h"
 
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/radarView.h"
@@ -20,29 +22,16 @@
 
 #include "screenComponents/indicatorOverlays.h"
 
+#include "menus/luaConsole.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_button.h"
 
-///The TutorialGame object is normally never created.
-/// And it only used to setup the special tutorial level.
-/// It contains functions to assist in explaining the game, but do not work outside of the tutorial.
-REGISTER_SCRIPT_CLASS_NO_CREATE(TutorialGame)
-{
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setPlayerShip);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToMainScreen);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToTactical);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToLongRange);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToScreen);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, showMessage);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToTopPosition);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToBottomPosition);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, onNext);
-    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, finish);
-}
+P<TutorialGame> TutorialGame::instance;
 
 TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
 {
+    instance = this;
     new LocalOnlyGame();
 
     new GuiOverlay(this, "", colorConfig.background);
@@ -51,20 +40,21 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
     this->viewport = nullptr;
     this->repeated_tutorial = repeated_tutorial;
 
-    i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/comms_ship." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/comms_station." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/factionInfo." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/science_db." + PreferencesManager::get("language", "en") + ".po");
-    i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+    gameGlobalInfo->startScenario(filename);
 
-    P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
-    if (factionInfoScript->getError() != "") exit(1);
-    factionInfoScript->destroy();
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setPlayerShip", &TutorialGame::setPlayerShip);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToMainScreen", &TutorialGame::switchViewToMainScreen);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToTactical", &TutorialGame::switchViewToTactical);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToLongRange", &TutorialGame::switchViewToLongRange);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToScreen", &TutorialGame::switchViewToScreen);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_showMessage", &TutorialGame::showMessage);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setMessageToTopPosition", &TutorialGame::setMessageToTopPosition);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setMessageToBottomPosition", &TutorialGame::setMessageToBottomPosition);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_onNext", &TutorialGame::onNext);
+    gameGlobalInfo->main_scenario_script->setGlobal("tutorial_finish", &TutorialGame::finish);
 
-    script = new ScriptObject();
-    script->registerObject(this, "tutorial");
-    script->run(filename);
+    auto res = gameGlobalInfo->main_scenario_script->call<void>("tutorial_init");
+    LuaConsole::checkResult(res);
 }
 
 void TutorialGame::createScreens()
@@ -99,7 +89,7 @@ void TutorialGame::createScreens()
     text = new GuiScrollText(frame, "", "");
     text->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(900 - 40, 200 - 40);
     next_button = new GuiButton(frame, "", tr("Next"), [this]() {
-        _onNext.call<void>();
+        LuaConsole::checkResult(_onNext.call<void>());
     });
     next_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
 
@@ -121,19 +111,21 @@ void TutorialGame::update(float delta)
         finish();
     if (my_spaceship)
     {
-        float target_camera_yaw = my_spaceship->getRotation();
-        switch(my_spaceship->main_screen_setting)
+        auto pc = my_spaceship.getComponent<PlayerControl>();
+        auto physics = my_spaceship.getComponent<sp::Transform>();
+        float target_camera_yaw = physics ? physics->getRotation() : 0.0f;
+        switch(pc ? pc->main_screen_setting : MainScreenSetting::Front)
         {
-        case MSS_Back: target_camera_yaw += 180; break;
-        case MSS_Left: target_camera_yaw -= 90; break;
-        case MSS_Right: target_camera_yaw += 90; break;
+        case MainScreenSetting::Back: target_camera_yaw += 180; break;
+        case MainScreenSetting::Left: target_camera_yaw -= 90; break;
+        case MainScreenSetting::Right: target_camera_yaw += 90; break;
         default: break;
         }
         camera_pitch = 30.0f;
 
         const float camera_ship_distance = 420.0f;
         const float camera_ship_height = 420.0f;
-        glm::vec2 cameraPosition2D = my_spaceship->getPosition() + vec2FromAngle(target_camera_yaw) * -camera_ship_distance;
+        glm::vec2 cameraPosition2D = (physics ? physics->getPosition() : glm::vec2{0, 0}) + vec2FromAngle(target_camera_yaw) * -camera_ship_distance;
         glm::vec3 targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
 
         camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
@@ -141,105 +133,113 @@ void TutorialGame::update(float delta)
     }
 }
 
-void TutorialGame::setPlayerShip(P<PlayerSpaceship> ship)
+void TutorialGame::setPlayerShip(sp::ecs::Entity ship)
 {
-    my_player_info->commandSetShipId(ship->getMultiplayerId());
+    my_player_info->commandSetShip(ship);
 
-    if (viewport == nullptr)
-        createScreens();
+    if (instance->viewport == nullptr)
+        instance->createScreens();
 }
 
 void TutorialGame::showMessage(string message, bool show_next)
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
-    frame->show();
-    text->setText(message);
+    instance->frame->show();
+    instance->text->setText(message);
     if (show_next)
     {
-        next_button->show();
-        frame->setSize(900, 230);
+        instance->next_button->show();
+        instance->frame->setSize(900, 230);
     }
     else
     {
-        next_button->hide();
-        frame->setSize(900, 200);
+        instance->next_button->hide();
+        instance->frame->setSize(900, 200);
     }
 }
 
 void TutorialGame::switchViewToMainScreen()
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
-    hideAllScreens();
-    viewport->show();
+    instance->hideAllScreens();
+    instance->viewport->show();
 }
 
 void TutorialGame::switchViewToTactical()
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
-    hideAllScreens();
-    tactical_radar->show();
+    instance->hideAllScreens();
+    instance->tactical_radar->show();
 }
 
 void TutorialGame::switchViewToLongRange()
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
-    hideAllScreens();
-    long_range_radar->show();
+    instance->hideAllScreens();
+    instance->long_range_radar->show();
 }
 
 void TutorialGame::switchViewToScreen(int n)
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
     if (n < 0 || n >= 8)
         return;
-    hideAllScreens();
-    station_screen[n]->show();
+    instance->hideAllScreens();
+    instance->station_screen[n]->show();
 }
 
 void TutorialGame::setMessageToTopPosition()
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
-    frame->setPosition(0, 0, sp::Alignment::TopCenter);
+    instance->frame->setPosition(0, 0, sp::Alignment::TopCenter);
 }
 
 void TutorialGame::setMessageToBottomPosition()
 {
-    if (viewport == nullptr)
+    if (instance->viewport == nullptr)
         return;
 
-    frame->setPosition(0, -50, sp::Alignment::BottomCenter);
+    instance->frame->setPosition(0, -50, sp::Alignment::BottomCenter);
 }
 
 void TutorialGame::finish()
 {
-    if (repeated_tutorial)
+    if (instance->repeated_tutorial)
     {
-        foreach(SpaceObject, obj, space_object_list)
-            obj->destroy();
-        script->destroy();
-        hideAllScreens();
+        sp::ecs::Entity::destroyAllEntities();
+        instance->hideAllScreens();
 
-        script = new ScriptObject();
-        script->registerObject(this, "tutorial");
-        script->run("tutorial.lua");
+        gameGlobalInfo->startScenario("tutorial.lua");
+
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setPlayerShip", &TutorialGame::setPlayerShip);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToMainScreen", &TutorialGame::switchViewToMainScreen);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToTactical", &TutorialGame::switchViewToTactical);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToLongRange", &TutorialGame::switchViewToLongRange);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToScreen", &TutorialGame::switchViewToScreen);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_showMessage", &TutorialGame::showMessage);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setMessageToTopPosition", &TutorialGame::setMessageToTopPosition);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setMessageToBottomPosition", &TutorialGame::setMessageToBottomPosition);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_onNext", &TutorialGame::onNext);
+        gameGlobalInfo->main_scenario_script->setGlobal("tutorial_finish", &TutorialGame::finish);
+
+        auto res = gameGlobalInfo->main_scenario_script->call<void>("tutorial_init");
+        LuaConsole::checkResult(res);
     }else{
-        script->destroy();
-        destroy();
-
         disconnectFromServer();
-        returnToMainMenu(getRenderLayer());
+        returnToMainMenu(instance->getRenderLayer());
+        instance->destroy();
     }
 }
 

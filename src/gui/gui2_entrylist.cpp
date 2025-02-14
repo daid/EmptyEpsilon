@@ -90,6 +90,13 @@ void GuiEntryList::removeEntry(int index)
     entriesChanged();
 }
 
+void GuiEntryList::clear()
+{
+    entries.clear();
+    setSelectionIndex(-1);
+    entriesChanged();
+}
+
 int GuiEntryList::entryCount() const
 {
     return entries.size();

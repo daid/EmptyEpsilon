@@ -2,12 +2,12 @@
 #define AI_FACTORY_H
 
 #include "engine.h"
+#include "ecs/entity.h"
 
 class ShipAI;
-class CpuShip;
 class ShipAIFactory;
 
-typedef ShipAI* (*shipAIFactoryFunc_t)(CpuShip* owner);
+typedef std::unique_ptr<ShipAI> (*shipAIFactoryFunc_t)(sp::ecs::Entity owner);
 
 class ShipAIFactory
 {
@@ -23,7 +23,7 @@ public:
     static shipAIFactoryFunc_t getAIFactory(string name);
 };
 #define REGISTER_SHIP_AI(c, n) \
-    static ShipAI* c ## _factory_function (CpuShip* owner) { return new c(owner); } \
+    static std::unique_ptr<ShipAI> c ## _factory_function (sp::ecs::Entity owner) { return  std::make_unique<c>(owner); } \
     ShipAIFactory c ## _factory(n, c ## _factory_function )
 
 #endif//AI_FACTORY_H

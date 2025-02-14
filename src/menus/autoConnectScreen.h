@@ -13,21 +13,21 @@ class AutoConnectScreen : public GuiCanvas, public Updatable
 {
     P<ServerScanner> scanner;
     sp::io::network::Address connect_to_address;
-    ECrewPosition crew_position;
+    CrewPosition crew_position;
     bool control_main_screen;
     std::map<string, string> ship_filters;
 
     GuiLabel* status_label;
     int crew_position_raw = (PreferencesManager::get("autoconnect").toInt());
 public:
-    AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen, string ship_filter);
+    AutoConnectScreen(CrewPosition crew_position, bool control_main_screen, string ship_filter);
     virtual ~AutoConnectScreen();
 
     virtual void update(float delta) override;
 
 private:
-    bool isValidShip(int index);
-    void connectToShip(int index);
+    bool isValidShip(sp::ecs::Entity ship);
+    void connectToShip(sp::ecs::Entity ship);
 };
 
 #endif//AUTO_CONNECT_SCREEN_H

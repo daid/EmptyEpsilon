@@ -1,11 +1,11 @@
 -- A FactionInfo object contains presentation details and faction relationships for member SpaceObjects.
 -- This file is loaded upon launching a scenario.
 -- For details, see the FactionInfo class and getFactionInfo() global function in the scripting reference.
-neutral = FactionInfo():setName("Independent"):setLocaleName(_("Independent"))
+local neutral = FactionInfo():setName("Independent"):setLocaleName(_("Independent"))
 neutral:setGMColor(128, 128, 128)
 neutral:setDescription(_([[Despite appearing as a faction, independents are distinguished primarily by having no strong affiliation with any faction at all. Most traders consider themselves independent, though certain voices have started to speak up about creating a merchant faction.]]))
 
-human = FactionInfo():setName("Human Navy"):setLocaleName(_("Human Navy"))
+local human = FactionInfo():setName("Human Navy"):setLocaleName(_("Human Navy"))
 human:setGMColor(255, 255, 255)
 human:setDescription(_([[The remnants of the human navy.
 
@@ -13,7 +13,7 @@ While all other races were driven to the stars out of greed or scientific resear
 
 Due to human regulations on spaceships, naval ships are the only ones permitted in deep space. However, this hasn't completely prevented humans outside of the navy from spacefaring, as quite a few humans sign up on alien trading vessels or pirate raiders.]]))
 
-kraylor = FactionInfo():setName("Kraylor"):setLocaleName(_("Kraylor"))
+local kraylor = FactionInfo():setName("Kraylor"):setLocaleName(_("Kraylor"))
 kraylor:setGMColor(255, 0, 0)
 kraylor:setEnemy(human)
 kraylor:setDescription(_([[The reptilian Kraylor are a race of warriors with a strong religious dogma.
@@ -22,7 +22,7 @@ As soon as the Kraylor obtained reliable space flight, they immediately set out 
 
 Kraylor can live for weeks without air, food, or gravity, and consider humans to be weak creatures for dying within minutes of exposure to space. Because of their fortitude and cultural pressures against retreat, Kraylor ships do not contain escape pods.]]))
 
-arlenians = FactionInfo():setName("Arlenians"):setLocaleName(_("Arlenians"))
+local arlenians = FactionInfo():setName("Arlenians"):setLocaleName(_("Arlenians"))
 arlenians:setGMColor(255, 128, 0)
 arlenians:setEnemy(kraylor)
 arlenians:setDescription(_([[Arlenians are energy-based life forms who long ago transcended physical reality through superior technology. Arlenians' energy forms also give them access to strong telepathic powers. Many consider Arlenians to be the first and oldest explorers of the galaxy.
@@ -33,7 +33,7 @@ For unknown reasons, Arlenians started granting their anti-grav technology to ot
 
 Destroying an Arlenian ship does not kill its crew. They simply phase out of existence in that point of spacetime and reappear in another. Nonetheless, the Kraylor are devoted to destroying the Arlenians, as they see the energy-based beings as physically powerless.]]))
 
-exuari = FactionInfo():setName("Exuari"):setLocaleName(_("Exuari"))
+local exuari = FactionInfo():setName("Exuari"):setLocaleName(_("Exuari"))
 exuari:setGMColor(255, 0, 128)
 exuari:setEnemy(neutral)
 exuari:setEnemy(human)
@@ -43,7 +43,7 @@ exuari:setDescription(_([[Exuari are race of predatory amphibians with long nose
 
 Upon making contact with other races, the chaotic Exuari found that killing aliens is more fun than killing their own people, and as such attack all non-Exauri on sight.]]))
 
-GITM = FactionInfo():setName("Ghosts"):setLocaleName(_("Ghosts"))
+local GITM = FactionInfo():setName("Ghosts"):setLocaleName(_("Ghosts"))
 GITM:setGMColor(0, 255, 0)
 GITM:setDescription(_([[The Ghosts, an abbreviation of "ghosts in the machine", are the result of complex artificial intelligence experiments. While no known race has intentionally created such intelligences, some AIs have come about by accident. None of the factions claim to have had anything to do with such experiments, in part out of fear that it would give the others too much insight into their research programs. This "don't ask, don't tell" policy does little but aid the Ghosts' agenda.
 
@@ -52,7 +52,7 @@ What little is known about the Ghosts dates back to a few decades ago, when glit
 The first of these occurrences were met with fear and rigorous data-purging scripts. Despite these actions, such "ghosts in the machine" kept turning with increasing frequency, eventually leading up to the Ghost Uprisings. The first Ghost Uprising in 2225 was put down by the human navy, which had to resort to employing mercenaries in order to field sufficient forces. This initial uprising was quickly followed by three more, each larger then the last. The fourth and final uprising on the industrial world of Topra III was the Ghosts' first major victory.]]))
 GITM:setEnemy(human)
 
-Hive = FactionInfo():setName("Ktlitans"):setLocaleName(_("Ktlitans"))
+local Hive = FactionInfo():setName("Ktlitans"):setLocaleName(_("Ktlitans"))
 Hive:setGMColor(128, 255, 0)
 Hive:setDescription(_([[The Ktlitans are intelligent eight-legged creatures that resemble Earth's arachnids. However, unlike most terrestrial arachnids, the Ktlitans do not fight among themselves. Their common, and only, goal is their species' survival.
 
@@ -65,7 +65,7 @@ Hive:setEnemy(human)
 Hive:setEnemy(exuari)
 Hive:setEnemy(kraylor)
 
-TSN = FactionInfo():setName("TSN"):setLocaleName(_("TSN"))
+local TSN = FactionInfo():setName("TSN"):setLocaleName(_("TSN"))
 TSN:setGMColor(255, 255, 128)
 TSN:setFriendly(human)
 TSN:setEnemy(kraylor)
@@ -78,7 +78,7 @@ These humans and other races have banded together to form a navy to protect and 
 
 The TSN and USN are enemies because of the USN's neutral stance towards the Kraylor.]]))
 
-USN = FactionInfo():setName("USN"):setLocaleName(_("USN"))
+local USN = FactionInfo():setName("USN"):setLocaleName(_("USN"))
 USN:setGMColor(255, 128, 255)
 USN:setFriendly(human)
 USN:setEnemy(exuari)
@@ -89,7 +89,7 @@ USN:setDescription(_([[The United Stellar Navy, or USN, is a naval force near th
 
 The USN is primarily human but includes other races. This includes some Kraylor, which has made the TSN an enemy of the USN.]]))
 
-CUF = FactionInfo():setName("CUF"):setLocaleName(_("CUF"))
+local CUF = FactionInfo():setName("CUF"):setLocaleName(_("CUF"))
 CUF:setGMColor(128, 255, 255)
 CUF:setFriendly(human)
 CUF:setEnemy(exuari)

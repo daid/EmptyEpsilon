@@ -1,14 +1,4 @@
-#include "missileWeapon.h"
-#include "particleEffect.h"
-#include "spaceObjects/explosionEffect.h"
-#include "random.h"
-#include "multiplayer_server.h"
-#include "multiplayer_client.h"
-#include "soundManager.h"
-
-#include "i18n.h"
-
-
+/*
 /// A MissileWeapon is a self-propelled weapon that can be fired from a WeaponTube at either a target SpaceObject or on a trajectory.
 /// MissileWeapons that can explode detonate with a blast radius at either the end of its lifetime or upon collision with another collisionable SpaceObject.
 /// MissileWeapon-class objects can't be created directly. Use these functions with subclasses derived from MissileWeapon, such as HomingMissile, HVLI, etc.
@@ -46,16 +36,20 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(MissileWeapon, SpaceObject)
 MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& data)
 : SpaceObject(10, multiplayer_name), data(data)
 {
-    target_id = -1;
     target_angle = 0;
     category_modifier = 1;
     lifetime = data.lifetime;
 
-    registerMemberReplication(&target_id);
+    registerMemberReplication(&target);
     registerMemberReplication(&target_angle);
     registerMemberReplication(&category_modifier);
 
     launch_sound_played = false;
+    if (entity) {
+        auto hull = entity.addComponent<Hull>();
+        hull.max = hull.current = 1;
+        hull.damaged_by_flags = (1 << int(DamageType::EMP)) | (1 << int(DamageType::Energy));
+    }
 }
 
 void MissileWeapon::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
@@ -85,7 +79,9 @@ void MissileWeapon::update(float delta)
         lifeEnded();
         destroy();
     }
-    setVelocity(vec2FromAngle(getRotation()) * data.speed * size_speed_modifier);
+    auto physics = entity.getComponent<sp::Physics>();
+    if (physics)
+        physics->setVelocity(vec2FromAngle(getRotation()) * data.speed * size_speed_modifier);
 
     if (delta > 0)
     {
@@ -93,19 +89,16 @@ void MissileWeapon::update(float delta)
     }
 }
 
-void MissileWeapon::collide(Collisionable* target, float force)
+void MissileWeapon::collide(SpaceObject* target, float force)
 {
     if (!game_server)
-    {
         return;
-    }
-    P<SpaceObject> object = P<Collisionable>(target);
-    if (!object || object == owner || !object->canBeTargetedBy(owner))
-    {
+    if (target->entity == owner)
         return;
-    }
+    if (!target->entity.hasComponent<Hull>())
+        return;
 
-    hitObject(object);
+    hitObject(target);
     destroy();
 }
 
@@ -115,22 +108,12 @@ void MissileWeapon::updateMovement()
     {
         if (data.homing_range > 0)
         {
-            P<SpaceObject> target;
-            if (game_server)
+            if (auto tt = target.getComponent<sp::Transform>())
             {
-                target = game_server->getObjectById(target_id);
-            }
-            else
-            {
-                target = game_client->getObjectById(target_id);
-            }
-
-            if (target)
-            {
-                float r = data.homing_range + target->getRadius();
-                if (glm::length2(target->getPosition() - getPosition()) < r*r)
+                float r = data.homing_range + 10.0f;
+                if (glm::length2(tt->getPosition() - getPosition()) < r*r)
                 {
-                    target_angle = vec2ToAngle(target->getPosition() - getPosition());
+                    target_angle = vec2ToAngle(tt->getPosition() - getPosition());
                 }
             }
         }
@@ -139,16 +122,19 @@ void MissileWeapon::updateMovement()
 
         float angle_diff = angleDifference(getRotation(), target_angle);
 
-        if (angle_diff > 1.0f)
-            setAngularVelocity(data.turnrate * size_speed_modifier);
-        else if (angle_diff < -1.0f)
-            setAngularVelocity(data.turnrate * -1.0f * size_speed_modifier);
-        else
-            setAngularVelocity(angle_diff * data.turnrate * size_speed_modifier);
+        auto physics = entity.getComponent<sp::Physics>();
+        if (physics) {
+            if (angle_diff > 1.0f)
+                physics->setAngularVelocity(data.turnrate * size_speed_modifier);
+            else if (angle_diff < -1.0f)
+                physics->setAngularVelocity(data.turnrate * -1.0f * size_speed_modifier);
+            else
+                physics->setAngularVelocity(angle_diff * data.turnrate * size_speed_modifier);
+        }
     }
 }
 
-P<SpaceObject> MissileWeapon::getOwner()
+sp::ecs::Entity MissileWeapon::getOwner()
 {
     // Owner is assigned by the weapon tube upon firing.
     if (game_server)
@@ -157,23 +143,19 @@ P<SpaceObject> MissileWeapon::getOwner()
     }
 
     LOG(ERROR) << "MissileWeapon::getOwner(): owner not replicated to clients.";
-    return nullptr;
+    return {};
 }
 
-P<SpaceObject> MissileWeapon::getTarget()
+sp::ecs::Entity MissileWeapon::getTarget()
 {
-    if (game_server)
-        return game_server->getObjectById(target_id);
-    return game_client->getObjectById(target_id);
+    return target;
 }
 
-void MissileWeapon::setTarget(P<SpaceObject> target)
+void MissileWeapon::setTarget(sp::ecs::Entity target)
 {
     if (!target)
-    {
         return;
-    }
-    target_id = target->getMultiplayerId();
+    this->target = target;
 }
 
 float MissileWeapon::getLifetime()
@@ -196,25 +178,4 @@ void MissileWeapon::setMissileSize(EMissileSizes missile_size)
     category_modifier = MissileWeaponData::convertSizeToCategoryModifier(missile_size);
 }
 
-std::unordered_map<string, string> MissileWeapon::getGMInfo()
-{
-    std::unordered_map<string, string> ret;
-
-    if (owner)
-    {
-        ret[trMark("gm_info", "Owner")] = owner->getCallSign();
-    }
-
-    P<SpaceObject> target = game_server->getObjectById(target_id);
-
-    if (target)
-    {
-        ret[trMark("gm_info", "Target")] = target->getCallSign();
-    }
-
-    ret[trMark("gm_info", "Faction")] = getLocaleFaction();
-    ret[trMark("gm_info", "Lifetime")] = lifetime;
-    ret[trMark("gm_info", "Size")] = getMissileSize();
-
-    return ret;
-}
+*/

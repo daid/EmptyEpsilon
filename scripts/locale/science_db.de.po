@@ -14,7 +14,7 @@ msgstr ""
 
 #: scripts/science_db.lua:8
 msgid "Natural"
-msgstr "Natuerlich"
+msgstr "Natürlich"
 
 #: scripts/science_db.lua:9
 msgid ""

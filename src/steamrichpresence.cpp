@@ -1,7 +1,7 @@
 #include "steamrichpresence.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "spaceObjects/playerSpaceship.h"
+#include "components/name.h"
 #include <steam/steam_api.h>
 
 
@@ -21,13 +21,19 @@ void SteamRichPresence::update(float delta)
     string status = "";
     if (my_spaceship && my_player_info)
     {
-        status = my_spaceship->getCallSign() + " [" + my_spaceship->getTypeName() + "]";
+        auto cs = my_spaceship.getComponent<CallSign>();
+        if (cs)
+            status = cs->callsign;
+        auto tn = my_spaceship.getComponent<TypeName>();
+        if (tn)
+            status += " [" + tn->type_name + "]";
 
-        for(int idx=0; idx<max_crew_positions; idx++)
+        for(int idx=0; idx<int(CrewPosition::MAX); idx++)
         {
-            if (my_player_info->crew_position[idx])
+            auto cp = CrewPosition(idx);
+            if (my_player_info->hasPosition(cp))
             {
-                status += " " + getCrewPositionName(ECrewPosition(idx));
+                status += " " + getCrewPositionName(cp);
                 break;
             }
         }

@@ -203,7 +203,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     });
     scenario_list->setSize(GuiElement::GuiSizeMax, 700);
     (new GuiLabel(right, "GENERAL_LABEL", tr("Description"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-    description_text = new GuiScrollText(right, "SCENARIO_DESCRIPTION", tr("Select a scenario..."));
+    description_text = new GuiScrollFormattedText(right, "SCENARIO_DESCRIPTION", tr("Select a scenario..."));
     description_text->setSize(GuiElement::GuiSizeMax, 700);
 
     for(const auto& category : ScenarioInfo::getCategories())
@@ -319,7 +319,7 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
                 this->scenario_settings[setting.key] = option.value;
             }
         }
-        auto description = new GuiScrollText(container, "", setting.description);
+        auto description = new GuiScrollFormattedText(container, "", setting.description);
         description->setSize(GuiElement::GuiSizeMax, 300);
         count++;
 

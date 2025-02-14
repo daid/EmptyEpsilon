@@ -4,6 +4,10 @@
 #include "epsilonServer.h"
 #include "main.h"
 #include "multiplayer_client.h"
+#include "components/collision.h"
+#include "components/name.h"
+#include "i18n.h"
+#include "ecs/query.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"
@@ -23,7 +27,7 @@ TopDownScreen::TopDownScreen(RenderLayer* render_layer)
 
     // Let the screen operator select a player ship to lock the camera onto.
     camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(value.toInt());
+        auto ship = sp::ecs::Entity::fromString(value);
         if (ship)
             target = ship;
     });
@@ -38,14 +42,10 @@ TopDownScreen::TopDownScreen(RenderLayer* render_layer)
     (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
 
     // Lock onto the first player ship to start.
-    for(int n = 0; n < GameGlobalInfo::max_player_ships; n++)
-    {
-        if (gameGlobalInfo->getPlayerShip(n))
-        {
-            target = gameGlobalInfo->getPlayerShip(n);
-            camera_lock_toggle->setValue(true);
-            break;
-        }
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>()) {
+        target = entity;
+        camera_lock_toggle->setValue(true);
+        break;
     }
 }
 
@@ -94,7 +94,7 @@ void TopDownScreen::update(float delta)
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
         if (camera_lock_selector->getSelectionIndex() < 0)
             camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
-        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+        target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
     }
 
     if (keys.topdown.next_player_ship.getDown())
@@ -102,7 +102,7 @@ void TopDownScreen::update(float delta)
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
         if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
             camera_lock_selector->setSelectionIndex(0);
-        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+        target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
     }
 
     if (keys.topdown.pan_up.get())
@@ -141,17 +141,20 @@ void TopDownScreen::update(float delta)
     }
 
     // Add and remove entries from the player ship list.
-    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
     {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
-        if (ship)
-        {
-            if (camera_lock_selector->indexByValue(string(n)) == -1)
-                camera_lock_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
-        }else{
-            if (camera_lock_selector->indexByValue(string(n)) != -1)
-                camera_lock_selector->removeEntry(camera_lock_selector->indexByValue(string(n)));
+        if (camera_lock_selector->indexByValue(entity.toString()) == -1) {
+            string label;
+            if (auto tn = entity.getComponent<TypeName>())
+                label = tn->type_name;
+            if (auto cs = entity.getComponent<CallSign>())
+                label += " " + cs->callsign;
+            camera_lock_selector->addEntry(label, entity.toString());
         }
+    }
+    for(int n=0; n<camera_lock_selector->entryCount(); n++) {
+        if (!sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(n)))
+            camera_lock_selector->removeEntry(n);
     }
 
     // Enforce a top-down view with up pointing toward heading 0.
@@ -161,9 +164,11 @@ void TopDownScreen::update(float delta)
     // If locked onto a player ship, move the camera along with it.
     if (camera_lock_toggle->getValue() && target)
     {
-        auto target_position = target->getPosition();
+        if (auto transform = target.getComponent<sp::Transform>()) {
+            auto target_position = transform->getPosition();
 
-        camera_position.x = target_position.x;
-        camera_position.y = target_position.y;
+            camera_position.x = target_position.x;
+            camera_position.y = target_position.y;
+        }
     }
 }

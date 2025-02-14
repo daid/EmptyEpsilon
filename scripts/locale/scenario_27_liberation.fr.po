@@ -16,7 +16,7 @@ msgstr ""
 
 # Scenario name
 msgid "Liberation Day"
-msgstr "Le jour de la Libération"
+msgstr "Le Jour de la Libération"
 
 # Scenario description
 msgid ""
@@ -47,6 +47,7 @@ msgstr ""
 "- Titre original : Liberation Day\n"
 "- Auteur : Xansta (Sept. 2024)\n"
 "- Traduction FR : Muerte (Nov. 24)\n"
+"Texte et scénario vérifiés (Nov. 24)\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -320,14 +321,6 @@ msgctxt "Cloak"
 msgid "Device is cloaked (but it's not perfect)"
 msgstr "Le dispositif est complètement dissimulé (mais ce n'est pas parfait)."
 
-#: scripts/scenario_27_liberation.lua:137
-#, lua-format
-msgctxt "msgGM"
-msgid ""
-"Player ship %s's template type (%s) could not be found in table "
-"player_ship_stats"
-msgstr ""
-
 #: scripts/scenario_27_liberation.lua:583
 msgctxt "trade-comms"
 msgid "food"
@@ -376,7 +369,7 @@ msgstr "tritanium"
 #: scripts/scenario_27_liberation.lua:592
 msgctxt "trade-comms"
 msgid "autodoc"
-msgstr "autodoc"
+msgstr "autodocs"
 
 #: scripts/scenario_27_liberation.lua:593
 msgctxt "trade-comms"
@@ -411,7 +404,7 @@ msgstr "filaments"
 #: scripts/scenario_27_liberation.lua:599
 msgctxt "trade-comms"
 msgid "impulse"
-msgstr "impulsions"
+msgstr "impulsion"
 
 #: scripts/scenario_27_liberation.lua:600
 msgctxt "trade-comms"
@@ -451,7 +444,7 @@ msgstr "boucliers"
 #: scripts/scenario_27_liberation.lua:607
 msgctxt "trade-comms"
 msgid "software"
-msgstr "Programmes"
+msgstr "logiciels"
 
 #: scripts/scenario_27_liberation.lua:608
 msgctxt "trade-comms"
@@ -466,7 +459,7 @@ msgstr "transporteurs"
 #: scripts/scenario_27_liberation.lua:610
 msgctxt "trade-comms"
 msgid "warp"
-msgstr "chaînes"
+msgstr "distorsion"
 
 #: scripts/scenario_27_liberation.lua:637
 msgctxt "station-comms"
@@ -519,8 +512,8 @@ msgstr ""
 msgctxt "station-comms"
 msgid "They seemed interested in Liberation Day for some reason."
 msgstr ""
-"Ils semblaient intéressés par le Jour de la Libération pour une raison "
-"quelconque."
+"Ils étaient intéressés par le Jour de la Libération pour une raison que "
+"j'ignore."
 
 #: scripts/scenario_27_liberation.lua:1516
 msgctxt "station-comms"
@@ -528,8 +521,8 @@ msgid ""
 "I could not make sense of what they were saying. They seemed to be talking "
 "in riddles."
 msgstr ""
-"Je n'arrivais pas à comprendre ce qu'ils disaient. Ils semblaient parler par "
-"énigmes."
+"Quand ils nous ont contacté, je n'arrivais pas à comprendre ce qu'ils "
+"disaient. Ils semblaient parler par énigmes."
 
 #: scripts/scenario_27_liberation.lua:1517
 msgctxt "station-comms"
@@ -566,14 +559,15 @@ msgstr ""
 msgctxt "station-comms"
 msgid "They were asking us about nova causality before trying to destroy us."
 msgstr ""
-"Ils nous ont interrogés sur la causalité des supernova avant d'essayer de "
-"nous détruire."
+"Ils nous ont contacté et interrogé sur la causalité des supernova avant "
+"d'essayer de nous détruire."
 
 #: scripts/scenario_27_liberation.lua:1524
 msgctxt "station-comms"
 msgid "They're just attacking everything per usual."
 msgstr ""
-"Ils attaquent tout comme d'habitude. C'est tout ce qu'ils savent faire."
+"Ils attaquent tout et tout le monde comme d'habitude. Pfff, c'est tout ce "
+"qu'ils savent faire."
 
 #: scripts/scenario_27_liberation.lua:1571
 #: scripts/scenario_27_liberation.lua:3196
@@ -586,11 +580,6 @@ msgstr "Objet étrange possédant une technologie de pointe"
 msgctxt "scienceDescription-artifact"
 msgid "Nova Fireworks - product of the Exuari Exclamatory Enterprise"
 msgstr "Feu d'artifice Supernova - Produit de l'Entreprise Exclamative Éxuarie"
-
-#: scripts/scenario_27_liberation.lua:1644
-msgctxt "msgGM"
-msgid "Empty Template pool: fix excludes or other criteria"
-msgstr ""
 
 #: scripts/scenario_27_liberation.lua:1774
 #, lua-format
@@ -1128,7 +1117,7 @@ msgstr ""
 "dirigeaient vers %s en secteur %s. Leur cap approximatif était %s."
 
 #: scripts/scenario_27_liberation.lua:3669
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid "Last we heard, they were in %s"
 msgstr "Aux dernières nouvelles, il se trouvait dans le secteur %s."
@@ -1197,7 +1186,7 @@ msgid ""
 "[Jasmine Purdue] Yes? What can I do for you?"
 msgstr ""
 "Un instant, je vais la chercher.\n"
-"...Après quelques brefs instants…\n"
+"...Après quelques brefs instants.\n"
 "\n"
 "[Jasmine Purdue] Oui ? Que puis-je faire pour vous ?"
 
@@ -1400,10 +1389,10 @@ msgstr "%s est %s et %s."
 #: scripts/scenario_27_liberation.lua:3885
 #: scripts/scenario_27_liberation.lua:3921
 #: scripts/scenario_27_liberation.lua:3932
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid "%s and %s is the same as %s and %s."
-msgstr "%s et %s sont identiques à %s et %s."
+msgstr "%s et %s sont la même chose que %s et %s."
 
 #: scripts/scenario_27_liberation.lua:3866
 #: scripts/scenario_27_liberation.lua:3887
@@ -1418,7 +1407,7 @@ msgstr "%s et %s sont identiques à %s moins %s."
 #: scripts/scenario_27_liberation.lua:3889
 #: scripts/scenario_27_liberation.lua:3925
 #: scripts/scenario_27_liberation.lua:3936
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid "%s and %s is the same as %s."
 msgstr "%s et %s sont identiques à %s."
@@ -1451,7 +1440,7 @@ msgstr "%s est plus grand que %s et plus petit que %s."
 #: scripts/scenario_27_liberation.lua:3906
 #: scripts/scenario_27_liberation.lua:3943
 #: scripts/scenario_27_liberation.lua:3953
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid "%s is less than %s."
 msgstr "%s est plus petit que %s."
@@ -1463,7 +1452,7 @@ msgid "%s is %s and %s"
 msgstr "%s est %s et %s."
 
 #: scripts/scenario_27_liberation.lua:3928
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "ship-comms"
 msgid "%s is more than %s"
 msgstr "%s est plus grand que %s."
@@ -1804,35 +1793,3 @@ msgstr ""
 "Bravo équipage !\n"
 "Vous avez détruit la station de recherche des Éxuaris avant qu'ils ne "
 "puissent déployer leur dispositif de feu d'artifice Supernova."
-
-# Scenario name
-#~ msgid "Empty space"
-#~ msgstr "Espace vide"
-
-# Scenario description
-#~ msgid ""
-#~ "Empty scenario, no enemies, no friendlies. Can be used by a GM player to "
-#~ "setup a scenario in the GM screen. The F5 key can be used to copy the "
-#~ "current layout to the clipboard for use in scenario scripts."
-#~ msgstr ""
-#~ "Scénario vide.\n"
-#~ "\n"
-#~ "Aucun ennemis ni alliés.\n"
-#~ "Peut être utilisé par un joueur MJ pour configurer un scénario à partir "
-#~ "de l'écran MJ.\n"
-#~ "\n"
-#~ "La touche F5 peut être utilisée pour copier la mise en page actuelle dans "
-#~ "le presse-papiers pour une utilisation dans des scripts de scénario au "
-#~ "format lua."
-
-#~ msgctxt "buttonGM"
-#~ msgid "Random asteroid field"
-#~ msgstr "Champ astér. aléatoire"
-
-#~ msgctxt "buttonGM"
-#~ msgid "Random nebula field"
-#~ msgstr "Champ nébul. aléatoire"
-
-#~ msgctxt "buttonGM"
-#~ msgid "Delete unselected"
-#~ msgstr "Supprime non sélect."

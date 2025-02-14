@@ -1,6 +1,6 @@
 #include "shipDestroyedPopup.h"
+#include "i18n.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "soundManager.h"
 #include "main.h"
 

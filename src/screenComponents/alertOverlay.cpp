@@ -1,6 +1,5 @@
 #include "alertOverlay.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 
 
 AlertLevelOverlay::AlertLevelOverlay(GuiContainer* owner)
@@ -13,24 +12,27 @@ void AlertLevelOverlay::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship)
         return;
+    auto pc = my_spaceship.getComponent<PlayerControl>();
+    if (!pc)
+        return;
 
     glm::u8vec4 color;
     //string text;
     //float text_size;
 
-    switch(my_spaceship->alert_level)
+    switch(pc->alert_level)
     {
-    case AL_RedAlert:
+    case AlertLevel::RedAlert:
         color = glm::u8vec4(255, 0, 0, 255);
         //text = "";
         //text_size = 70;
         break;
-    case AL_YellowAlert:
+    case AlertLevel::YellowAlert:
         color = glm::u8vec4(255, 255, 0, 255);
         //text = "";
         //text_size = 60;
         break;
-    case AL_Normal:
+    case AlertLevel::Normal:
     default:
         return;
     }

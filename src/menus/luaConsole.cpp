@@ -6,6 +6,7 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_textentry.h"
 #include "gui/theme.h"
+#include "i18n.h"
 
 #include "io/keybinding.h"
 
@@ -39,11 +40,9 @@ LuaConsole::LuaConsole()
     entry->layout.size.y = 20;
     entry->setTextSize(12);
     entry->enterCallback([this](string s) {
-        P<ScriptObject> script = engine->getObject("scenario");
-        if (script)
-        {
+        if (gameGlobalInfo) {
             LuaConsole::addLog("> " + s);
-            script->runCode(s);
+            gameGlobalInfo->execScriptCode(s);
             history.append(s);
             entry->setText("");
         }
@@ -82,19 +81,6 @@ void LuaConsole::addLog(const string& message)
 
 void LuaConsole::update(float delta)
 {
-    P<ScriptObject> script = engine->getObject("scenario");
-    if (script) {
-        if (last_error != script->getError()) {
-            last_error = script->getError();
-            if (!last_error.empty())
-                addLog(last_error);
-        }
-    }
-    if (!ScriptSimpleCallback::last_error.empty()) {
-        addLog(ScriptSimpleCallback::last_error);
-        ScriptSimpleCallback::last_error.clear();
-    }
-
     if (open_console_key.getDown()) {
         if (is_open) {
             is_open = false;

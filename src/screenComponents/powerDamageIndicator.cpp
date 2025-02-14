@@ -1,10 +1,12 @@
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
+#include "i18n.h"
 #include "powerDamageIndicator.h"
-#include "spaceObjects/warpJammer.h"
+#include "systems/warpsystem.h"
+#include "components/reactor.h"
+#include "components/shipsystem.h"
 #include "main.h"
 
-GuiPowerDamageIndicator::GuiPowerDamageIndicator(GuiContainer* owner, string name, ESystem system, sp::Alignment icon_align)
+GuiPowerDamageIndicator::GuiPowerDamageIndicator(GuiContainer* owner, string name, ShipSystem::Type system, sp::Alignment icon_align)
 : GuiElement(owner, name), system(system), text_size(30), icon_align(icon_align)
 {
 }
@@ -13,26 +15,33 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship)
         return;
+    auto reactor = my_spaceship.getComponent<Reactor>();
+    auto sys = ShipSystem::get(my_spaceship, system);
+    if (!sys)
+        return;
 
     glm::u8vec4 color;
     string display_text;
 
-    float power = my_spaceship->systems[system].power_level;
-    float health = my_spaceship->systems[system].health;
-    float heat = my_spaceship->systems[system].heat_level;
-    float hacked_level = my_spaceship->systems[system].hacked_level;
-    if (system == SYS_FrontShield)
+    float power = sys->power_level;
+    float health = sys->health;
+    float heat = sys->heat_level;
+    float hacked_level = sys->hacked_level;
+    if (system == ShipSystem::Type::FrontShield)
     {
-        power = std::max(power, my_spaceship->systems[SYS_RearShield].power_level);
-        health = std::max(health, my_spaceship->systems[SYS_RearShield].health);
-        heat = std::max(heat, my_spaceship->systems[SYS_RearShield].heat_level);
-        hacked_level = std::max(hacked_level, my_spaceship->systems[SYS_RearShield].hacked_level);
+        auto rear = ShipSystem::get(my_spaceship, ShipSystem::Type::RearShield);
+        if (rear) {
+            power = std::max(power, rear->power_level);
+            health = std::max(health, rear->health);
+            heat = std::max(heat, rear->heat_level);
+            hacked_level = std::max(hacked_level, rear->hacked_level);
+        }
     }
     if (health <= 0.0f)
     {
         color = colorConfig.overlay_damaged;
         display_text = tr("systems", "DAMAGED");
-    }else if ((system == SYS_Warp || system == SYS_JumpDrive) && WarpJammer::isWarpJammed(my_spaceship->getPosition()))
+    }else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpSystem::isWarpJammed(my_spaceship))
     {
         color = colorConfig.overlay_jammed;
         display_text = tr("systems", "JAMMED");
@@ -40,7 +49,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     {
         color = colorConfig.overlay_no_power;
         display_text = tr("systems", "NO POWER");
-    }else if (my_spaceship->energy_level < 10)
+    }else if (reactor && reactor->energy < 10.0f)
     {
         color = colorConfig.overlay_low_energy;
         display_text = tr("systems", "LOW ENERGY");
@@ -112,7 +121,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     {
         drawIcon(renderer, "gui/icons/status_damaged", colorConfig.overlay_damaged);
     }
-    if ((system == SYS_Warp || system == SYS_JumpDrive) && WarpJammer::isWarpJammed(my_spaceship->getPosition()))
+    if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpSystem::isWarpJammed(my_spaceship))
     {
         drawIcon(renderer, "gui/icons/status_jammed", colorConfig.overlay_jammed);
     }
@@ -124,7 +133,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     {
         drawIcon(renderer, "gui/icons/status_low_power", colorConfig.overlay_low_power);
     }
-    if (my_spaceship->energy_level < 10)
+    if (reactor && reactor->energy < 10.0f)
     {
         drawIcon(renderer, "gui/icons/status_low_energy", colorConfig.overlay_low_energy);
     }

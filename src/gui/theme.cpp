@@ -9,7 +9,7 @@ static std::unordered_map<string, sp::Font*> fonts;
 std::unordered_map<string, GuiTheme*> GuiTheme::themes;
 string GuiTheme::current_theme = "default";
 
-static glm::u8vec4 toColor(const string& s)
+glm::u8vec4 GuiTheme::toColor(const string& s)
 {
     if (s.startswith("#"))
     {

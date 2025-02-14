@@ -281,7 +281,7 @@ msgid ""
 "coordination hub for the region"
 msgstr ""
 "Die ursprünglichen Erbauer der Station waren Fans des Wissenschaftlers und "
-"Schriftstellers Isaac Asimov aus dem späten 20. Jahrhundet. Die Station hieß "
+"Schriftstellers Isaac Asimov aus dem späten 20. Jahrhundert. Die Station hieß "
 "zunächst Foundation, wurde aber später einfach in Asimov umbenannt. Sie "
 "begann als Weltraum-Observatorium, wurde dann zu einer Versorgungsstation "
 "und entwickelte sich zu einem Bildungs- und Koordinationszentrum für die "
@@ -777,7 +777,7 @@ msgid ""
 "ray or particle beam weapon"
 msgstr ""
 "Station benannt nach Guglielmo Marconi, einem italienischen Erfinder aus dem "
-"frühen 20. Jahrhundert, der zusammen mit Nicolo Tesla behauptete, einen "
+"frühen 20. Jahrhundert, der zusammen mit Nicola Tesla behauptete, einen "
 "Todesstrahl oder eine Teilchenstrahlwaffe erfunden zu haben."
 
 #: scripts/scenario_50_gaps.lua:1251
@@ -2180,7 +2180,7 @@ msgid ""
 "Put them to good use."
 msgstr ""
 "Wir haben Sie großzügig mit einigen Waffen ausgestattet.\n"
-"Setzt Sie sie gut ein."
+"Setzen Sie sie gut ein."
 
 #: scripts/scenario_50_gaps.lua:2833
 msgctxt "station-comms"
@@ -2503,7 +2503,7 @@ msgstr "Keine Wegpunkte gesetzt. Bitte setzen Sie zuerst einen Wegpunkt."
 #: scripts/scenario_50_gaps.lua:3276
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
-msgstr "Welchen Wegpunkt sollten wir verteidigen?"
+msgstr "Welchen Wegpunkt sollen wir verteidigen?"
 
 #: scripts/scenario_50_gaps.lua:3278
 #, lua-format

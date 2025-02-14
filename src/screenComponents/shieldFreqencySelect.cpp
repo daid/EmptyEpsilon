@@ -1,7 +1,8 @@
 #include <i18n.h>
 #include "shieldFreqencySelect.h"
 #include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
+#include "components/beamweapon.h"
+#include "components/shields.h"
 
 #include "screenComponents/shieldsEnableButton.h"
 
@@ -21,11 +22,11 @@ GuiShieldFrequencySelect::GuiShieldFrequencySelect(GuiContainer* owner, string i
 
     calibrate_button = new GuiButton(calibration_row, "", tr("shields","Calibrate"), [this]() {
         if (my_spaceship)
-            my_spaceship->commandSetShieldFrequency(new_frequency->getSelectionIndex());
+            my_player_info->commandSetShieldFrequency(new_frequency->getSelectionIndex());
     });
     calibrate_button->setSize(GuiElement::GuiSizeMax, 50);
 
-    for(int n=0; n<=SpaceShip::max_frequency; n++)
+    for(int n=0; n<=BeamWeaponSys::max_frequency; n++)
     {
         new_frequency->addEntry(frequencyToString(n), string(n));
     }
@@ -36,14 +37,16 @@ void GuiShieldFrequencySelect::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        calibrate_button->setEnable(my_spaceship->shield_calibration_delay <= 0.0f);
-        new_frequency->setEnable(my_spaceship->shield_calibration_delay <= 0.0f);
+        auto shields = my_spaceship.getComponent<Shields>();
+        calibrate_button->setEnable(shields && shields->calibration_delay <= 0.0f);
+        new_frequency->setEnable(shields && shields->calibration_delay <= 0.0f);
     }
     GuiElement::onDraw(renderer);
 }
 
 void GuiShieldFrequencySelect::onUpdate()
 {
+    setVisible(my_spaceship.hasComponent<Shields>());
     if (my_spaceship && isVisible())
     {
         if (keys.weapons_shield_calibration_increase.getDown())
@@ -72,7 +75,7 @@ void GuiShieldFrequencySelect::onUpdate()
 
         if (keys.weapons_shield_calibration_start.getDown())
         {
-            my_spaceship->commandSetShieldFrequency(new_frequency->getSelectionIndex());
+            my_player_info->commandSetShieldFrequency(new_frequency->getSelectionIndex());
         }
     }
 }

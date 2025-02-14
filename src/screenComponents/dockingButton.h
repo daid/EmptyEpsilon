@@ -3,7 +3,6 @@
 
 #include "gui/gui2_button.h"
 
-class SpaceObject;
 class GuiDockingButton : public GuiButton
 {
 public:
@@ -14,7 +13,7 @@ public:
 private:
     void click();
 
-    P<SpaceObject> findDockingTarget();
+    sp::ecs::Entity findDockingTarget();
 };
 
 #endif//DOCKING_BUTTON_H
