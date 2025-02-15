@@ -68,6 +68,10 @@ require("place_station_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 
 function init()
+	ECS = false
+	if createEntity then
+		ECS = true
+	end
 	mission_diagnostic = false
 	diagnostic = false
 	fleet_id_diagnostic = false
@@ -606,7 +610,17 @@ function GMSpawnsEnemies()
 	gmSelected = false
 	gmSelect = getGMSelection()
 	for idx, obj in ipairs(gmSelect) do
-		if obj.typeName == "PlayerSpaceship" then
+		local player_spaceship = false
+		if ECS then
+			if obj.components.player_control then
+				player_spaceship = true
+			end
+		else
+			if obj.typeName == "PlayerSpaceship" then
+				player_spaceship = true
+			end
+		end
+		if player_spaceship then
 			gmPlayer = obj
 			break
 		end
@@ -3197,7 +3211,17 @@ function friendlyComms()
 			addCommsReply(_("Back"), commsShip)
 		end)
 		for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-			if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+			local space_station = false
+			if ECS then
+				if obj.components.space_station then
+					space_station = true
+				end
+			else
+				if obj.typeName == "SpaceStation" then
+					space_station = true
+				end
+			end
+			if space_station and not comms_target:isEnemy(obj) then
 				addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 					setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 					comms_target:orderDock(obj)
