@@ -3213,7 +3213,7 @@ function friendlyComms()
 		for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 			local space_station = false
 			if ECS then
-				if obj.components.space_station then
+				if obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static" then
 					space_station = true
 				end
 			else
