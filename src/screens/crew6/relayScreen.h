@@ -38,6 +38,7 @@ private:
     GuiToggleButton* link_to_science_button;
     GuiButton* delete_waypoint_button;
     GuiButton* launch_probe_button;
+    GuiButton* center_button;
 
     GuiSlider* zoom_slider;
     GuiLabel* zoom_label;
