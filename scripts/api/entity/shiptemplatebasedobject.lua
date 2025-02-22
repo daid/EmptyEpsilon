@@ -56,6 +56,19 @@ function Entity:setTemplate(template_name)
     if comp.shields and template.__type ~= "station" then
         comp.shields.frequency = irandom(0, 20)
     end
+    if comp.internal_rooms == nil then -- No internal rooms, so auto-repair
+        if comp.beam_weapons then comp.beam_weapons.auto_repair_per_second = 0.005; end
+        if comp.missile_tubes then comp.missile_tubes.auto_repair_per_second = 0.005 end
+        if comp.maneuvering_thrusters then comp.maneuvering_thrusters.auto_repair_per_second = 0.005 end
+        if comp.impulse_engine then comp.impulse_engine.auto_repair_per_second = 0.005 end
+        if comp.warp_drive then comp.warp_drive.auto_repair_per_second = 0.005 end
+        if comp.jump_drive then comp.jump_drive.auto_repair_per_second = 0.005 end
+        if comp.shields then
+            comp.shields.front_auto_repair_per_second = 0.005
+            comp.shields.rear_auto_repair_per_second = 0.005
+        end
+        if comp.reactor then comp.reactor.auto_repair_per_second = 0.005 end
+    end
     return self
 end
 --- [DEPRECATED]
