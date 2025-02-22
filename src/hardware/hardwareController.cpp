@@ -5,6 +5,21 @@
 #include "playerInfo.h"
 #include "ecs/query.h"
 
+#include "components/hull.h"
+#include "components/shields.h"
+#include "components/reactor.h"
+#include "components/impulse.h"
+#include "components/warpdrive.h"
+#include "components/jumpdrive.h"
+#include "components/docking.h"
+#include "components/collision.h"
+#include "components/player.h"
+#include "components/selfdestruct.h"
+#include "components/missiletubes.h"
+
+#include "systems/warpsystem.h"
+#include "systems/radarblock.h"
+
 #include "devices/dmx512SerialDevice.h"
 #include "devices/enttecDMXProDevice.h"
 #include "devices/virtualOutputDevice.h"
@@ -340,7 +355,8 @@ HardwareMappingEffect* HardwareController::createEffect(std::unordered_map<strin
     return nullptr;
 }
 
-#define SHIP_VARIABLE(name, formula) if (variable_name == name) { if (ship) { value = (formula); return true; } return false; }
+#define SHIP_VARIABLE(name, COMP, formula) if (variable_name == name) { if (auto c = ship.getComponent<COMP>()) { value = (formula); return true; } return false; }
+#define SHIP_VARIABLE2(name, formula) if (variable_name == name) { if (c) { value = (formula); return true; } return false; }
 bool HardwareController::getVariableValue(string variable_name, float& value)
 {
     auto ship = my_spaceship;
@@ -361,47 +377,48 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
         value = bool(ship) ? 1.0f : 0.0f;
         return true;
     }
-    //SHIP_VARIABLE("Hull", 100.0f * ship->hull_strength / ship->hull_max);
-    //SHIP_VARIABLE("FrontShield", ship->getShieldPercentage(0));
-    //SHIP_VARIABLE("RearShield", ship->getShieldPercentage(1));
-    //SHIP_VARIABLE("Shield0", ship->getShieldPercentage(0));
-    //SHIP_VARIABLE("Shield1", ship->getShieldPercentage(1));
-    //SHIP_VARIABLE("Shield2", ship->getShieldPercentage(2));
-    //SHIP_VARIABLE("Shield3", ship->getShieldPercentage(3));
-    //SHIP_VARIABLE("Shield4", ship->getShieldPercentage(4));
-    //SHIP_VARIABLE("Shield5", ship->getShieldPercentage(5));
-    //SHIP_VARIABLE("Shield6", ship->getShieldPercentage(6));
-    //SHIP_VARIABLE("Shield7", ship->getShieldPercentage(7));
-    //SHIP_VARIABLE("Energy", ship->energy_level * 100 / ship->max_energy_level);
-    //SHIP_VARIABLE("ShieldsUp", ship->shields_active ? 1.0f : 0.0f);
-    //SHIP_VARIABLE("ShieldsCalibrating", ship->shield_calibration_delay / ship->shield_calibration_time);
-    //SHIP_VARIABLE("Impulse", ship->current_impulse * ship->getSystemEffectiveness(SYS_Impulse));
-    //SHIP_VARIABLE("Warp", ship->current_warp * ship->getSystemEffectiveness(SYS_Warp));
-    //SHIP_VARIABLE("Docking", ship->docking_state == DS_Docking ? 1.0f : 0.0f);
-    //SHIP_VARIABLE("Docked", ship->docking_state == DS_Docked ? 1.0f : 0.0f);
-    //SHIP_VARIABLE("InNebula", Nebula::inNebula(ship->getPosition()) ? 1.0f : 0.0f);
-    //SHIP_VARIABLE("IsJammed", WarpJammer::isWarpJammed(ship->getPosition()) ? 1.0f : 0.0f);
-    //SHIP_VARIABLE("Jumping", ship->jump_delay > 0.0f ? 1.0f : 0.0f);
-    //SHIP_VARIABLE("Jumped", ship->jump_indicator > 0.0f ? 1.0f : 0.0f);
-    //SHIP_VARIABLE("Alert", ship->getAlertLevel() != AL_Normal ? 1.0f : 0.0f);
-    //SHIP_VARIABLE("YellowAlert", ship->getAlertLevel() == AL_YellowAlert ? 1.0f : 0.0f);
-    //SHIP_VARIABLE("RedAlert", ship->getAlertLevel() == AL_RedAlert ? 1.0f : 0.0f);
-    //SHIP_VARIABLE("SelfDestruct", ship->activate_self_destruct ? 1.0f : 0.0f);
-    //SHIP_VARIABLE("SelfDestructCountdown", ship->self_destruct_countdown / 10.0f);
-    //for(int n=0; n<max_weapon_tubes; n++)
+    SHIP_VARIABLE("Hull", Hull, 100.0f * c->current / c->max);
+    SHIP_VARIABLE("FrontShield", Shields, c->entries.size() > 0 ? c->entries[0].percentage() : 0.0f);
+    SHIP_VARIABLE("RearShield", Shields, c->entries.size() > 1 ? c->entries[1].percentage() : 0.0f);
+    SHIP_VARIABLE("Shield0", Shields, c->entries.size() > 0 ? c->entries[0].percentage() : 0.0f);
+    SHIP_VARIABLE("Shield1", Shields, c->entries.size() > 1 ? c->entries[1].percentage() : 0.0f);
+    SHIP_VARIABLE("Shield2", Shields, c->entries.size() > 2 ? c->entries[2].percentage() : 0.0f);
+    SHIP_VARIABLE("Shield3", Shields, c->entries.size() > 3 ? c->entries[3].percentage() : 0.0f);
+    SHIP_VARIABLE("Shield4", Shields, c->entries.size() > 4 ? c->entries[4].percentage() : 0.0f);
+    SHIP_VARIABLE("Shield5", Shields, c->entries.size() > 5 ? c->entries[5].percentage() : 0.0f);
+    SHIP_VARIABLE("Shield6", Shields, c->entries.size() > 6 ? c->entries[6].percentage() : 0.0f);
+    SHIP_VARIABLE("Shield7", Shields, c->entries.size() > 7 ? c->entries[7].percentage() : 0.0f);
+    SHIP_VARIABLE("Energy", Reactor, c->energy * 100 / c->max_energy);
+    SHIP_VARIABLE("ShieldsUp", Shields, c->active ? 1.0f : 0.0f);
+    SHIP_VARIABLE("ShieldsCalibrating", Shields, c->calibration_delay / c->calibration_time);
+    SHIP_VARIABLE("Impulse", ImpulseEngine, c->actual * c->getSystemEffectiveness());
+    SHIP_VARIABLE("Warp", WarpDrive, c->current * c->getSystemEffectiveness());
+    SHIP_VARIABLE("Docking", DockingPort, c->state == DockingPort::State::Docking ? 1.0f : 0.0f);
+    SHIP_VARIABLE("Docked", DockingPort, c->state == DockingPort::State::Docked ? 1.0f : 0.0f);
+    SHIP_VARIABLE("InNebula", sp::Transform, RadarBlockSystem::inRadarBlock(c->getPosition()) ? 1.0f : 0.0f);
+    SHIP_VARIABLE("IsJammed", sp::Transform, c && WarpSystem::isWarpJammed(ship) ? 1.0f : 0.0f);
+    SHIP_VARIABLE("Jumping", JumpDrive, c->delay > 0.0f ? 1.0f : 0.0f);
+    SHIP_VARIABLE("Jumped", JumpDrive, c->just_jumped > 0.0f ? 1.0f : 0.0f);
+    SHIP_VARIABLE("Alert", PlayerControl, c->alert_level != AlertLevel::Normal ? 1.0f : 0.0f);
+    SHIP_VARIABLE("YellowAlert", PlayerControl, c->alert_level != AlertLevel::YellowAlert ? 1.0f : 0.0f);
+    SHIP_VARIABLE("RedAlert", PlayerControl, c->alert_level != AlertLevel::RedAlert ? 1.0f : 0.0f);
+    SHIP_VARIABLE("SelfDestruct", SelfDestruct, c->active ? 1.0f : 0.0f);
+    SHIP_VARIABLE("SelfDestructCountdown", SelfDestruct, c->countdown / 10.0f);
+    for(unsigned int n=0; n<16; n++)
     {
-        //SHIP_VARIABLE("TubeLoaded" + string(n), ship->weapon_tube[n].isLoaded() ? 1.0f : 0.0f);
-        //SHIP_VARIABLE("TubeLoading" + string(n), ship->weapon_tube[n].isLoading() ? 1.0f : 0.0f);
-        //SHIP_VARIABLE("TubeUnloading" + string(n), ship->weapon_tube[n].isUnloading() ? 1.0f : 0.0f);
-        //SHIP_VARIABLE("TubeFiring" + string(n), ship->weapon_tube[n].isFiring() ? 1.0f : 0.0f);
+        SHIP_VARIABLE("TubeLoaded" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Loaded ? 1.0f : 0.0f);
+        SHIP_VARIABLE("TubeLoading" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Loading ? 1.0f : 0.0f);
+        SHIP_VARIABLE("TubeUnloading" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Unloading ? 1.0f : 0.0f);
+        SHIP_VARIABLE("TubeFiring" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Firing ? 1.0f : 0.0f);
     }
     for(int n=0; n<ShipSystem::COUNT; n++)
     {
-        //SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Health", ship->systems[n].health);
-        //SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Power", ship->systems[n].power_level / 3.0f);
-        //SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Heat", ship->systems[n].heat_level);
-        //SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Coolant", ship->systems[n].coolant_level);
-        //SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Hacked", ship->systems[n].hacked_level);
+        auto c = ShipSystem::get(ship, static_cast<ShipSystem::Type>(n));
+        SHIP_VARIABLE2(getSystemName(ShipSystem::Type(n)).replace(" ", "") + "Health", c->health);
+        SHIP_VARIABLE2(getSystemName(ShipSystem::Type(n)).replace(" ", "") + "Power", c->power_level / 3.0f);
+        SHIP_VARIABLE2(getSystemName(ShipSystem::Type(n)).replace(" ", "") + "Heat", c->heat_level);
+        SHIP_VARIABLE2(getSystemName(ShipSystem::Type(n)).replace(" ", "") + "Coolant", c->coolant_level);
+        SHIP_VARIABLE2(getSystemName(ShipSystem::Type(n)).replace(" ", "") + "Hacked", c->hacked_level);
     }
 
     LOG(WARNING) << "Unknown variable: " << variable_name;
