@@ -4,6 +4,7 @@
 #include "playerInfo.h"
 #include "ecs/query.h"
 #include "components/collision.h"
+#include "components/docking.h"
 #include "components/probe.h"
 #include "components/hacking.h"
 #include "components/scanning.h"
@@ -164,8 +165,12 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
     // Center on ship
     center_button = new GuiButton(option_buttons, "CENTER_ON_SHIP", tr("Center On Ship"), [this](){
+        if(!my_spaceship) return;
         auto transform = my_spaceship.getComponent<sp::Transform>();
-        radar->setViewPosition(transform->getPosition());
+        if(!transform) // If my ship has no position, it must be docked inside another ship
+            transform = my_spaceship.getComponent<DockingPort>()->target.getComponent<sp::Transform>();
+        if(transform)
+            radar->setViewPosition(transform->getPosition());
     });
     center_button->setSize(GuiElement::GuiSizeMax, 50);
 
