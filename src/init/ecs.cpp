@@ -63,6 +63,7 @@
 #include "systems/radarblock.h"
 #include "systems/zone.h"
 #include "systems/player.h"
+#include "systems/pickup.h"
 
 
 void initSystemsAndComponents()
@@ -155,5 +156,6 @@ void initSystemsAndComponents()
     engine->registerSystem<RadarBlockSystem>();
     engine->registerSystem<ZoneSystem>();
     engine->registerSystem<PlayerRadarRender>();
+    engine->registerSystem<PickupSystem>();
     initComponentScriptBindings();
 }

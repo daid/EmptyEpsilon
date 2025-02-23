@@ -7,6 +7,7 @@
 
 void PickupSystem::update(float delta)
 {
+    sp::CollisionSystem::addHandler(this);
 }
 
 void PickupSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
