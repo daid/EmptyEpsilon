@@ -102,6 +102,8 @@ void GuiScanningDialog::onUpdate()
                 set_active[n] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
             }
         }
+        if (keys.science_scan_abort.getDown())
+            my_player_info->commandScanCancel();
     }
 }
 

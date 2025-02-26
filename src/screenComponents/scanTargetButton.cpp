@@ -5,6 +5,7 @@
 #include "gui/gui2_progressbar.h"
 #include "components/scanning.h"
 #include "components/target.h"
+#include "i18n.h"
 
 
 GuiScanTargetButton::GuiScanTargetButton(GuiContainer* owner, string id, TargetsContainer* targets)

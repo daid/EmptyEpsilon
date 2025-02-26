@@ -210,6 +210,7 @@ Keys::Keys() :
 
     //Science
     science_scan_object("SCIENCE_SCAN_OBJECT", "S"),
+    science_scan_abort("SCIENCE_SCAN_ABORT", "D"),
     science_select_next_scannable("SCIENCE_SELECT_NEXT_SCANNABLE", "C"),
     science_scan_param_increase{{
         {"SIENCE_SCAN_PARAM_INCREASE_1"},
@@ -394,6 +395,7 @@ void Keys::init()
 
     //Science
     science_scan_object.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object"));
+    science_scan_abort.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Abort scan"));
     science_select_next_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select next scannable object"));
     for(auto n = 0u; n < science_scan_param_increase.size(); n++)
     {
