@@ -167,10 +167,15 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     center_button = new GuiButton(option_buttons, "CENTER_ON_SHIP", tr("Center On Ship"), [this](){
         if(!my_spaceship) return;
         auto transform = my_spaceship.getComponent<sp::Transform>();
-        if(!transform) // If my ship has no position, it must be docked inside another ship
-            transform = my_spaceship.getComponent<DockingPort>()->target.getComponent<sp::Transform>();
-        if(transform)
+        // If my ship has no transform, it might be docked inside another ship
+        if (!transform) {
+            if (auto dp = my_spaceship.getComponent<DockingPort>()) {
+                transform = dp->target.getComponent<sp::Transform>();
+            }
+        }
+        if(transform) {
             radar->setViewPosition(transform->getPosition());
+        }
     });
     center_button->setSize(GuiElement::GuiSizeMax, 50);
 
