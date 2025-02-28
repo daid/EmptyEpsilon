@@ -108,16 +108,18 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
         {
             const float y_start = e.prepared_prefix.data[0].position.y;
 
-            for(auto& g : e.prepared_prefix.data)
+            auto prepared_prefix = e.prepared_prefix;
+            auto prepared_text = e.prepared_text;
+            for(auto& g : prepared_prefix.data)
             {
                 g.position.y = draw_offset;
             }
-            for(auto& g : e.prepared_text.data)
+            for(auto& g : prepared_text.data)
             {
                 g.position.y = (g.position.y - y_start) + draw_offset;
             }
-            renderer.drawText(rect, e.prepared_prefix, sp::Font::FlagClip);
-            renderer.drawText(sp::Rect(rect.position.x + max_prefix_width, rect.position.y, rect.size.x - 50 - max_prefix_width, rect.size.y), e.prepared_text, sp::Font::FlagClip);
+            renderer.drawText(rect, prepared_prefix, sp::Font::FlagClip);
+            renderer.drawText(sp::Rect(rect.position.x + max_prefix_width, rect.position.y, rect.size.x - 50 - max_prefix_width, rect.size.y), prepared_text, sp::Font::FlagClip);
         }
 
         draw_offset += height;
