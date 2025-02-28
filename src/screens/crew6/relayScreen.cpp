@@ -4,6 +4,7 @@
 #include "playerInfo.h"
 #include "ecs/query.h"
 #include "components/collision.h"
+#include "components/docking.h"
 #include "components/probe.h"
 #include "components/hacking.h"
 #include "components/scanning.h"
@@ -161,6 +162,22 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         option_buttons->hide();
     });
     launch_probe_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<ScanProbeLauncher>());
+
+    // Center on ship
+    center_button = new GuiButton(option_buttons, "CENTER_ON_SHIP", tr("Center On Ship"), [this](){
+        if(!my_spaceship) return;
+        auto transform = my_spaceship.getComponent<sp::Transform>();
+        // If my ship has no transform, it might be docked inside another ship
+        if (!transform) {
+            if (auto dp = my_spaceship.getComponent<DockingPort>()) {
+                transform = dp->target.getComponent<sp::Transform>();
+            }
+        }
+        if(transform) {
+            radar->setViewPosition(transform->getPosition());
+        }
+    });
+    center_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // Reputation display.
     info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.4f, tr("Reputation") + ":", "");
