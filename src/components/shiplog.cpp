@@ -9,9 +9,9 @@ void ShipLog::add(const string& message, glm::u8vec4 color)
 
 void ShipLog::add(const string& prefix, const string& message, glm::u8vec4 color)
 {
-    // Cap the ship's log size to 100 entries. If it exceeds that limit,
+    // Cap the ship's log size to 10,000 entries. If it exceeds that limit,
     // start erasing entries from the beginning.
-    if (entries.size() > 100)
+    if (entries.size() > 10000)
         entries.erase(entries.begin());
 
     // Timestamp a log entry, color it, and add it to the end of the log.
