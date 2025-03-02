@@ -373,7 +373,7 @@ msgstr "> FAISCEAU %i       Cap"
 #, lua-format
 msgctxt "scienceDB"
 msgid "%i Arc, Range"
-msgstr "(%i)     Arc ; Portée"
+msgstr "(%i)    Arc ; Portée"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:58
 #, lua-format
@@ -2114,7 +2114,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7522
 msgctxt "upgrade-comms"
 msgid "increase long range sensors by ~14%"
-msgstr "augmenter les capteurs longue portée d'environ 14%"
+msgstr "augmenter les capteurs longue portée de 14%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:736
 msgctxt "downgrade-comms"
@@ -2176,7 +2176,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:5829
 msgctxt "upgrade-comms"
 msgid "increase short range sensors by ~11%"
-msgstr "augmenter les capteurs courte portée d'environ 11%"
+msgstr "augmenter les capteurs courte portée de 11%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:746
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1742
@@ -2658,7 +2658,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase impulse forward acceleration by ~17%"
-msgstr "augmenter l'accélération des moteurs avant d'environ 17%"
+msgstr "augmenter l'accélération des moteurs avant de 17%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1106
 msgctxt "downgrade-comms"
@@ -2721,7 +2721,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase warp speed by ~17%"
-msgstr "augmenter la vitesse lumière d'environ 17%"
+msgstr "augmenter la vitesse lumière de 17%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1151
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1683
@@ -2739,7 +2739,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase warp speed by ~7%"
-msgstr "augmenter la vitesse lumière d'environ 7%"
+msgstr "augmenter la vitesse lumière de 7%"
 
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1156
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:1688
