@@ -1,4 +1,5 @@
 #include "gameGlobalInfo.h"
+#include "menus/luaConsole.h"
 #include "screens/gm/gameMasterScreen.h"
 
 
@@ -47,7 +48,8 @@ static void lua_onGMClick(sp::script::Callback callback)
 {
     if (callback) {
         gameGlobalInfo->on_gm_click=[callback](glm::vec2 position) mutable {
-            callback.call<void>(position.x, position.y);
+            auto res = callback.call<void>(position.x, position.y);
+            LuaConsole::checkResult(res);
         };
     } else {
         gameGlobalInfo->on_gm_click = nullptr;
