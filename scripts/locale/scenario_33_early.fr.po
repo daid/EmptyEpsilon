@@ -19,13 +19,12 @@ msgid "Early Evaluation Exercise"
 msgstr "Exercice d’évaluation"
 
 # Scenario description
-#, fuzzy
 msgid ""
 "An entry level, learn to play scenario.  Designed for trainees in the Human "
 "Navy. Up to 16 player ships may train simultaneously. Based on Earn Your "
 "Wings Scenario by Kilted Klingon."
 msgstr ""
-"EN COURS DE TRADUCTION 76%    379/496\n"
+"EN COURS DE TRADUCTION 87%    436/496\n"
 "\n"
 "An entry level, learn to play scenario.  Designed for trainees in the Human "
 "Navy. Up to 16 player ships may train simultaneously. Based on Earn Your "
@@ -2504,16 +2503,22 @@ msgid ""
 "DS = Deep Scan time in seconds, RT = Reported Type time in seconds (yes/no), "
 "RF = Reported Frequency time in seconds (yes/no)"
 msgstr ""
+"%s\n"
+"Ligne de rapport par vaisseau scanné : nom de la faction : \n"
+"  - SS = Durée du scan simple (en secondes)\n"
+"  - DS = Durée du scan approfondi (en secondes)\n"
+"  - RT = Durée du type signalé (en secondes) (oui/non)\n"
+"  - RF = Durée de la fréquence signalée (en secondes) (oui/non)"
 
 #: scripts/scenario_33_early.lua:3885 scripts/scenario_33_early.lua:3898
 msgctxt "evaluation-comms"
 msgid "(no)"
-msgstr ""
+msgstr "(Non)"
 
 #: scripts/scenario_33_early.lua:3887 scripts/scenario_33_early.lua:3900
 msgctxt "evaluation-comms"
 msgid "(yes)"
-msgstr ""
+msgstr "(Oui)"
 
 #: scripts/scenario_33_early.lua:3903
 #, lua-format
@@ -2522,6 +2527,8 @@ msgid ""
 "%s\n"
 "%s %s: SS:%s, DS:%s, RT:%s %s, RF:%s %s"
 msgstr ""
+"%s\n"
+"%s %s : SS :%s, DS :%s, RT :%s %s, RF :%s %s"
 
 #: scripts/scenario_33_early.lua:3927
 #, lua-format
@@ -2531,6 +2538,9 @@ msgid ""
 "\n"
 "With a score of %i points out of 54, the system gives a rating of %s"
 msgstr ""
+"%s\n"
+"\n"
+"Avec un score de %i points sur 54, le système vous attribue une note de %s."
 
 #: scripts/scenario_33_early.lua:3938
 #, lua-format
@@ -2542,6 +2552,13 @@ msgid ""
 "----- Third Task: Destroy Freighter -----\n"
 "%s"
 msgstr ""
+"Nous ne disposons que de données d'évaluation objectives. L'évaluation "
+"subjective doit provenir d'une source différente. L'équipage tout entier "
+"contribue à la réussite d'une tâche. Certains membres d'équipage sont "
+"évalués sur une partie de la tâche.\n"
+"\n"
+"----- Troisième tâche : Détruire le cargo -----\n"
+"%s"
 
 #: scripts/scenario_33_early.lua:3969
 #, lua-format
@@ -2550,6 +2567,8 @@ msgid ""
 "%s\n"
 "Helm/Weapons HVLI in storage: %i"
 msgstr ""
+"%s\n"
+"HVLI en stock (Armement/Navigation) : %i"
 
 #: scripts/scenario_33_early.lua:3996
 #, lua-format
@@ -2559,6 +2578,9 @@ msgid ""
 "\n"
 "With a score of %i points out of 6, the system gives a rating of %s"
 msgstr ""
+"%s\n"
+"\n"
+"Avec un score de %i points sur 6, le système vous attribue une note de %s."
 
 #: scripts/scenario_33_early.lua:4007
 #, lua-format
@@ -2570,11 +2592,18 @@ msgid ""
 "----- Fourth Task: Assist Freighter -----\n"
 "%s"
 msgstr ""
+"Nous ne disposons que de données d'évaluation objectives. L'évaluation "
+"subjective doit provenir d'une source différente. L'équipage tout entier "
+"contribue à la réussite d'une tâche. Certains membres d'équipage sont "
+"évalués sur une partie de la tâche.\n"
+"\n"
+"----- Quatrième tâche : aider le cargo -----\n"
+"%s"
 
 #: scripts/scenario_33_early.lua:4044
 msgctxt "evaluation-comms"
 msgid "Arlenian freighter"
-msgstr ""
+msgstr "Cargo Arlénien"
 
 #: scripts/scenario_33_early.lua:4064
 #, lua-format
@@ -2583,6 +2612,8 @@ msgid ""
 "%s\n"
 "Relay time taken to contact %s: %s"
 msgstr ""
+"%s\n"
+"Temps pris par les Communications pour contacter %s : %s"
 
 #: scripts/scenario_33_early.lua:4069
 #, lua-format
@@ -2591,6 +2622,8 @@ msgid ""
 "%s\n"
 "Failed to contact Arlenian freighter"
 msgstr ""
+"%s\n"
+"Échec de la prise de contact avec le cargo Arlénien"
 
 #: scripts/scenario_33_early.lua:4071 scripts/scenario_33_early.lua:4096
 #: scripts/scenario_33_early.lua:4121 scripts/scenario_33_early.lua:4145
@@ -2598,7 +2631,7 @@ msgstr ""
 #, lua-format
 msgctxt "evaluation-comms"
 msgid "%s N"
-msgstr ""
+msgstr "%s B"
 
 #: scripts/scenario_33_early.lua:4089
 #, lua-format
@@ -2607,6 +2640,9 @@ msgid ""
 "%s\n"
 "Relay time taken to report damage to %s's engines: %s"
 msgstr ""
+"%s\n"
+"Temps pris par les Communications pour signaler les dommages aux moteurs de "
+"%s : %s"
 
 #: scripts/scenario_33_early.lua:4094
 #, lua-format
@@ -2615,6 +2651,8 @@ msgid ""
 "%s\n"
 "Failed to report damage to Arlenian freighter"
 msgstr ""
+"%s\n"
+"Impossible de signaler les dommages au cargo Arlénien."
 
 #: scripts/scenario_33_early.lua:4114
 #, lua-format
@@ -2623,6 +2661,8 @@ msgid ""
 "%s\n"
 "Helm/Relay time taken to get parts: %s"
 msgstr ""
+"%s\n"
+"Temps pris par les Communications/Navigation pour récupérer des pièces : %s"
 
 #: scripts/scenario_33_early.lua:4119
 #, lua-format
@@ -2631,6 +2671,8 @@ msgid ""
 "%s\n"
 "Failed to get parts for Arlenian freighter"
 msgstr ""
+"%s\n"
+"Impossible d'obtenir des pièces pour le cargo Arlénien."
 
 #: scripts/scenario_33_early.lua:4138
 #, lua-format
@@ -2639,6 +2681,9 @@ msgid ""
 "%s\n"
 "Helm/Relay time taken to provide parts for %s: %s"
 msgstr ""
+"%s\n"
+"Temps pris par les Communications/Navigation pour fournir les pièces à %s : "
+"%s"
 
 #: scripts/scenario_33_early.lua:4143
 #, lua-format
@@ -2647,6 +2692,8 @@ msgid ""
 "%s\n"
 "Failed to provide parts to Arlenian freighter"
 msgstr ""
+"%s\n"
+"Impossible de fournir des pièces au cargo Arlénien."
 
 #: scripts/scenario_33_early.lua:4162
 #, lua-format
@@ -2655,6 +2702,8 @@ msgid ""
 "%s\n"
 "Science time taken to scan %s: %s"
 msgstr ""
+"%s\n"
+"Temps pris par l'officier scientifique pour scanner %s : %s"
 
 #: scripts/scenario_33_early.lua:4167
 #, lua-format
@@ -2663,6 +2712,8 @@ msgid ""
 "%s\n"
 "Failed to scan Arlenian freighter"
 msgstr ""
+"%s\n"
+"Échec de l'analyse du cargo Arlénien."
 
 #: scripts/scenario_33_early.lua:4186
 #, lua-format
@@ -2671,6 +2722,9 @@ msgid ""
 "%s\n"
 "Science time taken to fully scan %s: %s"
 msgstr ""
+"%s\n"
+"Temps pris par l'officier scientifique pour effectuer un scan complet de "
+"%s : %s"
 
 #: scripts/scenario_33_early.lua:4191
 #, lua-format
@@ -2679,6 +2733,8 @@ msgid ""
 "%s\n"
 "Failed to deep scan Arlenian freighter"
 msgstr ""
+"%s\n"
+"Échec de l'analyse approfondie du cargo Arlénien."
 
 #: scripts/scenario_33_early.lua:4196
 #, lua-format
@@ -2687,6 +2743,9 @@ msgid ""
 "%s\n"
 "Weapons/Helm/Engineering time to destroy each marauder in seconds:\n"
 msgstr ""
+"%s\n"
+"Temps nécessaire pris par l'Armement/Navigation/Ingénierie pour détruire "
+"chaque maraudeur (en secondes) :\n"
 
 #: scripts/scenario_33_early.lua:4239
 #, lua-format
@@ -2695,6 +2754,8 @@ msgid ""
 "%s\n"
 "Task status: complete"
 msgstr ""
+"%s\n"
+"État de la tâche : terminée"
 
 #: scripts/scenario_33_early.lua:4244
 #, lua-format
@@ -2703,6 +2764,9 @@ msgid ""
 "%s\n"
 "Task status: failed (partial success in providing repair parts)"
 msgstr ""
+"%s\n"
+"État de la tâche : échec (réussite partielle de la fourniture des pièces de "
+"rechange)"
 
 #: scripts/scenario_33_early.lua:4247
 #, lua-format
@@ -2711,6 +2775,8 @@ msgid ""
 "%s\n"
 "Task status: failed"
 msgstr ""
+"%s\n"
+"État de la tâche : échec"
 
 #: scripts/scenario_33_early.lua:4261
 #, lua-format
@@ -2720,6 +2786,9 @@ msgid ""
 "\n"
 "With a score of %i points out of 43, the system gives a rating of %s"
 msgstr ""
+"%s\n"
+"\n"
+"Avec un score de %i points sur 43, le système vous attribue une note de %s."
 
 #: scripts/scenario_33_early.lua:4272
 #, lua-format
@@ -2731,6 +2800,13 @@ msgid ""
 "----- Fifth Task: Research -----\n"
 "%s"
 msgstr ""
+"Nous ne disposons que de données d'évaluation objectives. L'évaluation "
+"subjective doit provenir d'une source différente. L'équipage tout entier "
+"contribue à la réussite d'une tâche. Certains membres d'équipage sont "
+"évalués sur une partie de la tâche.\n"
+"\n"
+"----- Cinquième tâche : Recherche -----\n"
+"%s"
 
 #: scripts/scenario_33_early.lua:4394
 #, lua-format
@@ -2740,6 +2816,9 @@ msgid ""
 "\n"
 "With a score of %i points out of 48, the system gives a rating of %s"
 msgstr ""
+"%s\n"
+"\n"
+"Avec un score de %i points sur 48, le système vous attribue une note de %s."
 
 #: scripts/scenario_33_early.lua:4405
 #, lua-format
@@ -2751,35 +2830,40 @@ msgid ""
 "----- Bonus Task -----\n"
 "%s"
 msgstr ""
+"Nous ne disposons que de données d'évaluation objectives. L'évaluation "
+"subjective doit provenir d'une source différente. L'équipage tout entier "
+"contribue à la réussite d'une tâche. Certains membres d'équipage sont "
+"évalués sur une partie de la tâche.\n"
+"\n"
+"----- Tâche Bonus -----\n"
+"%s"
 
 #: scripts/scenario_33_early.lua:4424
-#, fuzzy
 msgctxt "evaluation-comms"
 msgid "complete"
-msgstr "--> [achevé]"
+msgstr "terminé"
 
 #: scripts/scenario_33_early.lua:4425
-#, fuzzy
 msgctxt "evaluation-comms"
 msgid "incomplete"
-msgstr "--> [à vérifier]"
+msgstr "incomplet"
 
 #: scripts/scenario_33_early.lua:4426
 msgctxt "evaluation-comms"
 msgid "partially complete"
-msgstr ""
+msgstr "partiellement terminé"
 
 #: scripts/scenario_33_early.lua:4437
 #, lua-format
 msgctxt "evaluation-comms"
 msgid "%s time: %s"
-msgstr ""
+msgstr "%s temps : %s"
 
 #: scripts/scenario_33_early.lua:4441
 #, lua-format
 msgctxt "evaluation-comms"
 msgid "Bonus task length: %s     Status: %s"
-msgstr ""
+msgstr "Durée de la tâche bonus : %s Statut : %s"
 
 #: scripts/scenario_33_early.lua:4442 scripts/scenario_33_early.lua:4452
 #, lua-format
@@ -2788,6 +2872,8 @@ msgid ""
 "%s\n"
 "Station %s %s"
 msgstr ""
+"%s\n"
+"Station %s %s"
 
 #: scripts/scenario_33_early.lua:4443 scripts/scenario_33_early.lua:4453
 #, lua-format
@@ -2796,6 +2882,8 @@ msgid ""
 "%s\n"
 "     Ships spawned: count: %i, strength: %.1f"
 msgstr ""
+"%s\n"
+"Vaisseaux générés : nombre : %i, puissance : %.1f"
 
 #: scripts/scenario_33_early.lua:4444 scripts/scenario_33_early.lua:4454
 #, lua-format
@@ -2804,16 +2892,18 @@ msgid ""
 "%s\n"
 "     Ships destroyed: count: %i, strength: %.1f"
 msgstr ""
+"%s\n"
+"Vaisseaux détruits : nombre : %i, puissance : %.1f"
 
 #: scripts/scenario_33_early.lua:4448
 msgctxt "evaluation-comms"
 msgid "(destroyed)"
-msgstr ""
+msgstr "(détruits)"
 
 #: scripts/scenario_33_early.lua:4475
 msgctxt "evaluation-comms"
 msgid "Current Evaluations"
-msgstr ""
+msgstr "Évaluations en cours"
 
 #: scripts/scenario_33_early.lua:4546
 msgctxt "shipAssist-comms"
@@ -2872,43 +2962,37 @@ msgid "Report status"
 msgstr "Au rapport"
 
 #: scripts/scenario_33_early.lua:4573
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Hull: "
 msgstr "Coque : "
 
 #: scripts/scenario_33_early.lua:4576
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Shield: "
 msgstr "Boucliers :"
 
 #: scripts/scenario_33_early.lua:4578
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Front Shield: "
 msgstr "Boucliers avant : "
 
 #: scripts/scenario_33_early.lua:4579
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: "
 msgstr "Boucliers arrière : "
 
 #: scripts/scenario_33_early.lua:4582
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Shield "
 msgstr "Boucliers "
 
 #: scripts/scenario_33_early.lua:4588
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid " Missiles: "
 msgstr " Missiles : "
 
 #: scripts/scenario_33_early.lua:4593 scripts/scenario_33_early.lua:5349
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "%s\n"
@@ -2918,7 +3002,7 @@ msgstr ""
 "Amarré à %s."
 
 #: scripts/scenario_33_early.lua:4598
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "%s\n"
@@ -2969,7 +3053,7 @@ msgid "Trade luxury for %s"
 msgstr "Échanger des produits de luxe (luxury) contre %s"
 
 #: scripts/scenario_33_early.lua:4656
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "trade-comms"
 msgid "Traded luxury for %s"
 msgstr "Échanger des produits de luxe (luxury) contre du %s"
@@ -2999,7 +3083,6 @@ msgstr "1 %s acheté auprès de %s."
 #: scripts/scenario_33_early.lua:5401 scripts/scenario_33_early.lua:5423
 #: scripts/scenario_33_early.lua:5447 scripts/scenario_33_early.lua:5469
 #: scripts/scenario_33_early.lua:5493
-#, fuzzy
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
 msgstr ""
@@ -3209,7 +3292,7 @@ msgid "No"
 msgstr "Non"
 
 #: scripts/scenario_33_early.lua:5255
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "tabRelay"
 msgid "Disruption %i"
 msgstr "Perturbation %i"
@@ -3277,19 +3360,18 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_33_early.lua:5345
-#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Where are you going?"
 msgstr "Où allez-vous ?"
 
 #: scripts/scenario_33_early.lua:5347
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hi %s,"
 msgstr "Salut %s,"
 
 #: scripts/scenario_33_early.lua:5354
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "%s\n"
@@ -3326,6 +3408,12 @@ msgid ""
 "evaluation score the higher your speed. You won't be able to dock until the "
 "docking protocols are satisfied."
 msgstr ""
+"La manière la plus directe de s'amarrer à la station %s est d'inverser les "
+"moteurs à impulsion. Les moteurs démarrent à puissance minimale, vous devrez "
+"donc peut-être demander à l'ingénierie d'augmenter temporairement la "
+"puissance des moteurs à impulsion. Plus votre vitesse est élevée, plus votre "
+"score d'évaluation sera élevé. Vous ne pouvez pas vous amarrer tant que les "
+"protocoles d'amarrage ne sont pas satisfaisants."
 
 #: scripts/scenario_33_early.lua:5530
 #, lua-format
@@ -3605,3 +3693,5 @@ msgid ""
 "%s\n"
 "   %s in %s"
 msgstr ""
+"%s\n"
+"   %s en %s"
