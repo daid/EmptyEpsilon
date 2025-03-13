@@ -431,9 +431,9 @@ end
 --- Example: obj:setScannedByFaction("Human Navy", false)
 function Entity:setScannedByFaction(faction_name, is_scanned)
     if is_scanned then
-        setScanStateByFaction(faction_name, "full")
+        self:setScanStateByFaction(faction_name, "full")
     else
-        setScanStateByFaction(faction_name, "none")
+        self:setScanStateByFaction(faction_name, "none")
     end
     return self
 end
