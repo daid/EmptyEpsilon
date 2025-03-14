@@ -19,6 +19,7 @@ function Planet()
             cloud_size = 5200,
         },
         physics = {type="static", size=5000},
+        never_radar_blocked = {}
     }
     return e
 end
