@@ -688,23 +688,28 @@ end
 --
 
 function CheckWinCondition()
-  if PayloadShip:isDocked(FactionStation) then
-    victory("Kraylor")
-  elseif PayloadShip:isDocked(KraylorStation) then
-    victory("Human Navy")
-  end
   if not (Player:isValid()
     and PayloadShip:isValid()
     and FactionStation:isValid()
     and KraylorStation:isValid())
   then
     victory("Kraylor")
+    return true
+  end
+  if PayloadShip:isDocked(FactionStation) then
+    victory("Kraylor")
+    return true
+  elseif PayloadShip:isDocked(KraylorStation) then
+    victory("Human Navy")
+    return true
   end
   if TimeLimit > 0 and getScenarioTime() >= TimeLimit then
     globalMessage(_("payload-comms","You are out of time!"))
     Player:addToShipLog(_("payload-comms", "You are out of time!"), "red")
     victory("Kraylor")
+    return true
   end
+  return false
 end
 
 -- Update the Payload's target based on proximities and scan status
@@ -964,7 +969,9 @@ function update(delta)
     ThinPath(FactionStation, KraylorStation)
   end
 
-  CheckWinCondition()
+  if CheckWinCondition() then
+    return
+  end
   DeterminePayloadTarget()
   HandleNPCs(delta)
   HandleNPCWaves(delta)
