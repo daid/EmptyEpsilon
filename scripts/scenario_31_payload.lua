@@ -95,12 +95,8 @@ function init()
     Mine():setPosition(x, y)
   end
 
-  -- Unspawn some asteroids and mines
-  local clearRadius = 5000
-  ClearHazardsNear(FactionStation.startX, FactionStation.startY, clearRadius)
-  ClearHazardsNear(KraylorStation.startX, KraylorStation.startY, clearRadius)
-  ClearHazardsNear(PayloadShip.startX, PayloadShip.startY, clearRadius)
-  ThinPath(FactionStation, KraylorStation)
+  -- Unspawn some asteroids and mines (moved this to update() as hackaround for a limitation in ECS branch)
+  FirstTickClearHazards = true
 
   -- Spawn some nebulas
   local nebulaNum = 15 --15
@@ -958,6 +954,16 @@ end
 -- Main update function
 ---@diagnostic disable-next-line: lowercase-global
 function update(delta)
+
+  if(FirstTickClearHazards and #(getObjectsInRadius(FactionStation.startX, FactionStation.startY, 1)) > 0) then
+    FirstTickClearHazards = false
+    local clearRadius = 5000
+    ClearHazardsNear(FactionStation.startX, FactionStation.startY, clearRadius)
+    ClearHazardsNear(KraylorStation.startX, KraylorStation.startY, clearRadius)
+    ClearHazardsNear(PayloadShip.startX, PayloadShip.startY, clearRadius)
+    ThinPath(FactionStation, KraylorStation)
+  end
+
   CheckWinCondition()
   DeterminePayloadTarget()
   HandleNPCs(delta)
