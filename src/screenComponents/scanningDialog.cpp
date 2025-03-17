@@ -201,6 +201,8 @@ std::pair<int, int> GuiScanningDialog::getScanComplexityDepth()
     if (complexity < 0) {
         switch(gameGlobalInfo->scanning_complexity) {
         case SC_None:
+            complexity = 0;
+            break;
         case SC_Simple:
             complexity = 1;
             break;
