@@ -654,7 +654,7 @@ function SpawnWave(faction)
       if i == queenIndex and WaveSize > 1 then
         enemyTemplate = "Phobos M3"
       end
-      local enemy = CpuShip():setTemplate(enemyTemplate):setFaction("Kraylor"):setPosition(enemyX, enemyY)
+      local enemy = CpuShip():setTemplate(enemyTemplate):setFaction("Kraylor"):setPosition(enemyX, enemyY):orderIdle()
       enemy:setWarpDrive(true)
       enemy:setWeaponStorage("Homing", 4)
       enemy:setWeaponStorage("Nuke", 0)
@@ -667,7 +667,7 @@ function SpawnWave(faction)
 
     if (faction == "Human Navy" or faction == "Both") and spawnHumanCount > 0 then
       spawnHumanCount = spawnHumanCount - 1
-      local human = CpuShip():setTemplate("Adder MK".. irandom(3,8)):setFaction("Human Navy"):setPosition(humanX, humanY)
+      local human = CpuShip():setTemplate("Adder MK".. irandom(3,8)):setFaction("Human Navy"):setPosition(humanX, humanY):orderIdle()
       human:setWarpDrive(true)
       human:setScannedByFaction("Human Navy", true)
       human:onTakingDamage(OnDamaged)
