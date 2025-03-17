@@ -242,6 +242,8 @@ Keys::Keys() :
         {"ENGINEERING_SELECT_SYSTEM_FRONT_SHIELD", "8"},
         {"ENGINEERING_SELECT_SYSTEM_READ_SHIELD", "9"},
     },
+    engineering_select_system_next("ENGINEERING_SELECT_SYSTEM_NEXT", "Keypad +"),
+    engineering_select_system_prev("ENGINEERING_SELECT_SYSTEM_PREV", "Keypad -"),
     engineering_set_power_000("ENGINEERING_POWER_000"),
     engineering_set_power_030("ENGINEERING_POWER_030"),
     engineering_set_power_050("ENGINEERING_POWER_050"),
@@ -412,6 +414,8 @@ void Keys::init()
     engineering_select_system[static_cast<int>(ShipSystem::Type::JumpDrive)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select jump drive system"));
     engineering_select_system[static_cast<int>(ShipSystem::Type::FrontShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select front shields system"));
     engineering_select_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select rear shields system"));
+    engineering_select_system_next.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select next system"));
+    engineering_select_system_prev.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select previous system"));
     engineering_set_power_000.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 0%"));
     engineering_set_power_030.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 30%"));
     engineering_set_power_050.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 50%"));
