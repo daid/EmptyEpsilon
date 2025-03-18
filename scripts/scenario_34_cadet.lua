@@ -1,11 +1,17 @@
 -- Name: Cadet Patrol
--- Description: One player ship, full of cadets freshly graduated from the academy assigned to patrol duty
----
---- Beginner's mission. Player can save and restore if they can remember the key. Runs 1 - 2 hours.
----
---- Version 1 Feb 2025
+-- Description: One Phobos class player ship, full of fresh academy graduates assigned to patrol duty.
+--- Beginner's mission. Player can save and restore if they can remember their key. The terrain differs each time the scenario runs.
+--- Duration: 1 - 2 hours
 ---
 --- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome. 
+---
+--- Voice actors:
+--- Andrew "Snow" Kenny
+--- Bart K7AAY
+--- SANTAtheGREY
+--- Xansta
+---
+--- Version 1 Mar 2025
 -- Type: Basic
 -- Author: Xansta
 require("utils.lua")
@@ -1736,7 +1742,7 @@ function sensorJammer(x,y)
 	sensor_jammer.jam_impact_units = sensor_jammer_power_units
 	return sensor_jammer
 end
---	storage
+--	Storage
 function clearStore()
 	local i = 1
 	while(store:get(i) ~= "") do
@@ -1910,7 +1916,7 @@ function decryptShip(success,ship_key)
 		setCommsMessage(string.format(_("crypto-comms","No ship stored with encryption key %s"),ship_key))
 	end
 end
---	communication
+--	Communication
 function scenarioMissionsUndocked()
 	if not player:getCanDock() then
 		addCommsReply(_("station-comms","Request permission to dock"),function()
@@ -2193,7 +2199,7 @@ function availableForComms(p)
 	end
 	return true
 end
---	spawning
+--	Spawning
 function getTemplatePool(max_strength)
 	local function getStrengthSort(tbl, sortFunction)
 		local keys = {}
@@ -2300,7 +2306,7 @@ function spawnRandomArmed(x, y, enemy_strength, template_pool)
 	end
 	while enemy_strength > 0 do
 		local selected_template = template_pool[math.random(1,#template_pool)]
-		print("selected template:",selected_template)
+--		print("selected template:",selected_template)
 		local ship = ship_template[selected_template].create(fleetSpawnFaction,selected_template)
 		ship:setCallSign(generateCallSign(fleet_prefix))
 		ship:orderRoaming()
@@ -2311,7 +2317,7 @@ function spawnRandomArmed(x, y, enemy_strength, template_pool)
 	end
 	return enemyList
 end
---	missions
+--	Missions
 function nonCombatMissions(m)
 	if player.level == 11 then
 		if player.get_cargo_message == nil then
