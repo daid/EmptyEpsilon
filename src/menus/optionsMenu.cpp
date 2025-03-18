@@ -263,6 +263,12 @@ void OptionsMenu::setupGraphicsOptions()
     // Override overlay label.
     graphics_fov_overlay_label = new GuiLabel(graphics_fov_slider, "GRAPHICS_FOV_SLIDER_LABEL", tr("FoV: {fov}").format({ {"fov", string(initial_fov, 0)} }), 30);
     graphics_fov_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Multi Monitor.
+    (new GuiToggleButton(graphics_page, "MULTIMONITOR", tr("Multimonitor (needs restart)"), [](bool value)
+    {
+        PreferencesManager::set("multimonitor", value ? "1" : "0");
+    }))->setValue(PreferencesManager::get("multimonitor", "1") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 }
 
 void OptionsMenu::setupAudioOptions()
