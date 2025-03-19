@@ -62,9 +62,16 @@ require("generate_call_sign_scenario_utility.lua")
 -- Initialization --
 --------------------
 function init()
-	scenario_version = "2.0.0"
-	print(string.format("     -----     Scenario: Outpost     -----     Version %s     -----",scenario_version))
-	print(_VERSION)
+	scenario_version = "2.0.1"
+	ee_version = "2024.12.08"
+	print(string.format("    ----    Scenario: Doomed Outpost    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
+	if _VERSION ~= nil then
+		print("Lua version:",_VERSION)
+	end
+	ECS = false
+	if createEntity then
+		ECS = true
+	end
 	spawn_enemy_diagnostic = false
 	setVariations()	--numeric difficulty, Kraylor fortress size
 	setConstants()	--missle type names, template names and scores, deployment directions, player ship names, etc.
@@ -73,6 +80,74 @@ function init()
 	mainGMButtons()
 	onNewPlayerShip(setPlayers)
 end
+function isObjectType(obj,typ,qualifier)
+	if obj ~= nil and obj:isValid() then
+		if typ ~= nil then
+			if ECS then
+				if typ == "SpaceStation" then
+					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
+				elseif typ == "PlayerSpaceship" then
+					return obj.components.player_control
+				elseif typ == "ScanProbe" then
+					return obj.components.allow_radar_link
+				elseif typ == "CpuShip" then
+					return obj.ai_controller
+				elseif typ == "Asteroid" then
+					return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 7) == "Astroid"
+				elseif typ == "Nebula" then
+					return obj.components.nebula_renderer
+				elseif typ == "Planet" then
+					return obj.components.planet_render
+				elseif typ == "SupplyDrop" then
+					return obj.components.pickup and obj.components.radar_trace.icon == "radar/blip.png" and obj.components.radar_trace.color_by_faction
+				elseif typ == "BlackHole" then
+					return obj.components.gravity and obj.components.billboard_render.texture == "blackHole3d.png"
+				elseif typ == "WarpJammer" then
+					return obj.components.warp_jammer
+				elseif typ == "Mine" then
+					return obj.components.delayed_explode_on_touch and obj.components.constant_particle_emitter
+				elseif typ == "EMPMissile" then
+					return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explode_on_touch.damage_type == "emp"
+				elseif typ == "Nuke" then
+					return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
+				elseif typ == "Zone" then
+					return obj.components.zone
+				else
+					if qualifier == "MovingMissile" then
+						if typ == "HomingMissile" or typ == "HVLI" or typ == "Nuke" or typ == "EMPMissile" then
+							return obj.components.radar_trace.icon == "radar/missile.png"
+						else
+							return false
+						end
+					elseif qualifier == "SplashMissile" then
+						if typ == "Nuke" or typ == "EMPMissile" then
+							if obj.components.radar_trace.icon == "radar/missile.png" then
+								if typ == "Nuke" then
+									return obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
+								else	--EMP
+									return obj.components.explode_on_touch.damage_type == "emp"
+								end
+							else
+								return false
+							end
+						else
+							return false
+						end
+					else
+						return false
+					end
+				end
+			else
+				return obj.typeName == typ
+			end
+		else
+			return false
+		end
+	else
+		return false
+	end
+end
+
 function setVariations()
 	if getScenarioSetting == nil then
 		enemy_power = 1
@@ -5911,7 +5986,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for index, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
@@ -6817,7 +6892,7 @@ function friendlyServiceJonqueComms(comms_data)
 			addCommsReply(_("Back"), commsServiceJonque)
 	end)
 	for index, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms","Dock at %s"),obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms","Docking at %s."),obj:getCallSign()))
 				comms_target:orderDock(obj)
@@ -7910,7 +7985,7 @@ function moonCollisionCheck()
 	for _, obj in ipairs(collision_list) do
 		if obj:isValid() then
 			obj_dist = distance(obj,moon_barrier)
-			if obj.components.ai_controller then
+			if isObjectType(obj,"CpuShip") then
 				obj_type_name = obj:getTypeName()
 				if obj_type_name ~= nil then
 					ship_distance = shipTemplateDistance[obj:getTypeName()]
@@ -7925,7 +8000,7 @@ function moonCollisionCheck()
 				if obj_dist <= moon_barrier.moon_radius + ship_distance + 200 then
 					obj:takeDamage(100,"kinetic",moon_x,moon_y)
 				end
-			elseif obj.components.player_control then
+			elseif isObjectType(obj,"PlayerSpaceship") then
 				obj_type_name = obj:getTypeName()
 				if obj_type_name ~= nil then
 					ship_distance = playerShipStats[obj:getTypeName()].distance
@@ -8008,7 +8083,7 @@ function updatePlayerProximityScan(p)
 	local obj_list = p:getObjectsInRange(p.prox_scan*1000)
 	if obj_list ~= nil and #obj_list > 0 then
 		for _, obj in ipairs(obj_list) do
-			if obj:isValid() and obj.components.ai_controller and not obj:isFullyScannedBy(p) then
+			if obj:isValid() and isObjectType(obj,"CpuShip") and not obj:isFullyScannedBy(p) then
 				obj:setScanState("simplescan")
 			end
 		end
@@ -8031,7 +8106,7 @@ function whammyTime(p)
 	local objs = getObjectsInRadius(p_x,p_y,10000)
 	local nebulae = {}
 	for i,obj in ipairs(objs) do
-		if obj.typeName == "Nebula" then
+		if isObjectType(obj,"Nebula") then
 			table.insert(nebulae,obj)
 		end
 	end
