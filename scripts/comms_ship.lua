@@ -15,6 +15,10 @@ local MISSILE_TYPES = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
 -- @tparam PlayerSpaceship comms_source
 -- @tparam SpaceStation comms_target
 function commsShipMainMenu(comms_source, comms_target)
+	ECS = false
+	if createEntity then
+		ECS = true
+	end
     if comms_target.comms_data == nil then
         comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
     end
@@ -26,6 +30,33 @@ function commsShipMainMenu(comms_source, comms_target)
         return commsShipEnemy(comms_source, comms_target)
     end
     return commsShipNeutral(comms_source, comms_target)
+end
+function isObjectType(obj,typ)
+	if obj ~= nil and obj:isValid() then
+		if typ ~= nil then
+			if ECS then
+				if typ == "SpaceStation" then
+					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
+				elseif typ == "PlayerSpaceship" then
+					return obj.components.player_control
+				elseif typ == "ScanProbe" then
+					return obj.components.allow_radar_link
+				elseif typ == "CpuShip" then
+					return obj.ai_controller
+				elseif typ == "Asteroid" then
+					return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 7) == "Astroid"
+				else
+					return false
+				end
+			else
+				return obj.typeName == typ
+			end
+		else
+			return false
+		end
+	else
+		return false
+	end
 end
 
 --- Handle friendly communication.
@@ -79,7 +110,7 @@ function commsShipFriendly(comms_source, comms_target)
         end
     )
     for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-        if obj.components.docking_bay ~= nil and not comms_target:isEnemy(obj) then
+        if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
             addCommsReply(
                 string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()),
                 function(comms_source, comms_target)
