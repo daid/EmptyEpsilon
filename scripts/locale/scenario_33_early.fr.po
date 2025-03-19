@@ -24,16 +24,22 @@ msgid ""
 "Navy. Up to 16 player ships may train simultaneously. Based on Earn Your "
 "Wings Scenario by Kilted Klingon."
 msgstr ""
-"EN COURS DE TRADUCTION 87%    436/496\n"
-"\n"
-"An entry level, learn to play scenario.  Designed for trainees in the Human "
-"Navy. Up to 16 player ships may train simultaneously. Based on Earn Your "
-"Wings Scenario by Kilted Klingon.\n"
+"- Durée :  ***  \n"
+"- Difficulté : Facile\n"
+"- Vaisseaux joueurs : 1 à 16\n"
 "\n"
 "Mission : Conçu pour les stagiaires débutants de la Marine humaine afin de "
-"se familiariser avec les missions.\n"
-"Jusqu'à 16 vaisseaux joueurs peuvent s'entraîner simultanément. Basé sur le "
-"scénario \"Gagnez vos ailes\" (Earn Your Wings) de Kilted Klingon."
+"se familiariser avec les missions. Basé sur le scénario \"Gagnez vos ailes\" "
+"(Earn Your Wings) de Kilted Klingon.\n"
+"\n"
+"Version 1.0.0 - Oct. 2024\n"
+"\n"
+"- Titre original : Early Evaluation Exercise\n"
+"- Auteur : Xansta (2024)\n"
+"- Traduction FR : Muerte (Mars 25)\n"
+"\n"
+"Communauté française et anglophone sur Discord USN https://discord.gg/"
+"TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
 
 # Scenario setting
 msgctxt "setting"
@@ -508,37 +514,31 @@ msgid "-Main from research"
 msgstr "- Précédent"
 
 #: scripts/scenario_33_early.lua:1263
-#, fuzzy
 msgctxt "buttonGM"
 msgid "Strikeship wave"
 msgstr "Vague Navires de frappe"
 
 #: scripts/scenario_33_early.lua:1267
-#, fuzzy
 msgctxt "buttonGM"
 msgid "Fighter wave"
 msgstr "Vague Chasseurs"
 
 #: scripts/scenario_33_early.lua:1271
-#, fuzzy
 msgctxt "buttonGM"
 msgid "Gunship wave"
 msgstr "Vague Combattants"
 
 #: scripts/scenario_33_early.lua:1275
-#, fuzzy
 msgctxt "buttonGM"
 msgid "Dreadnought"
 msgstr "Cuirassés"
 
 #: scripts/scenario_33_early.lua:1279
-#, fuzzy
 msgctxt "buttonGM"
 msgid "Missile cruiser wave"
 msgstr "Vague Croiseurs lance-missiles"
 
 #: scripts/scenario_33_early.lua:1283
-#, fuzzy
 msgctxt "buttonGM"
 msgid "Cruiser wave"
 msgstr "Vague Croiseurs"
@@ -546,7 +546,7 @@ msgstr "Vague Croiseurs"
 #: scripts/scenario_33_early.lua:1287
 msgctxt "buttonGM"
 msgid "Adv. striker wave"
-msgstr ""
+msgstr "Vague Foudroyants"
 
 #: scripts/scenario_33_early.lua:1294
 msgctxt "buttonGM"
@@ -2095,52 +2095,52 @@ msgstr "Quel est le type du vaisseau %s ?"
 #: scripts/scenario_33_early.lua:3523 scripts/scenario_33_early.lua:5805
 msgctxt "station-comms"
 msgid "Personnel Freighter 5"
-msgstr ""
+msgstr "Navette 5"
 
 #: scripts/scenario_33_early.lua:3524 scripts/scenario_33_early.lua:5806
 msgctxt "station-comms"
 msgid "Goods Freighter 5"
-msgstr ""
+msgstr "Transport de marchandise 5"
 
 #: scripts/scenario_33_early.lua:3525 scripts/scenario_33_early.lua:5807
 msgctxt "station-comms"
 msgid "Garbage Freighter 5"
-msgstr ""
+msgstr "Transport de déchets 5"
 
 #: scripts/scenario_33_early.lua:3526 scripts/scenario_33_early.lua:5808
 msgctxt "station-comms"
 msgid "Equipment Freighter 5"
-msgstr ""
+msgstr "Transport d'équipement 5"
 
 #: scripts/scenario_33_early.lua:3527 scripts/scenario_33_early.lua:5809
 msgctxt "station-comms"
 msgid "Fuel Freighter 5"
-msgstr ""
+msgstr "Citerne de carburant 5"
 
 #: scripts/scenario_33_early.lua:3528 scripts/scenario_33_early.lua:5810
 msgctxt "station-comms"
 msgid "Transport1x5"
-msgstr ""
+msgstr "Transport 1x5"
 
 #: scripts/scenario_33_early.lua:3529 scripts/scenario_33_early.lua:5811
 msgctxt "station-comms"
 msgid "Transport2x5"
-msgstr ""
+msgstr "Transport 2x5"
 
 #: scripts/scenario_33_early.lua:3530 scripts/scenario_33_early.lua:5812
 msgctxt "station-comms"
 msgid "Transport3x5"
-msgstr ""
+msgstr "Transport 3x5"
 
 #: scripts/scenario_33_early.lua:3531 scripts/scenario_33_early.lua:5813
 msgctxt "station-comms"
 msgid "Transport4x5"
-msgstr ""
+msgstr "Transport 4x5"
 
 #: scripts/scenario_33_early.lua:3532 scripts/scenario_33_early.lua:5814
 msgctxt "station-comms"
 msgid "Transport5x5"
-msgstr ""
+msgstr "Transport 5x5"
 
 #: scripts/scenario_33_early.lua:3538 scripts/scenario_33_early.lua:3593
 msgctxt "station-comms"
@@ -3305,34 +3305,39 @@ msgstr "Oui, c'est pour quoi ?"
 #: scripts/scenario_33_early.lua:5292
 msgctxt "ship-comms"
 msgid "We are in need of some assistance."
-msgstr ""
+msgstr "Nous avons besoin d’aide."
 
 #: scripts/scenario_33_early.lua:5293
 msgctxt "ship-comms"
 msgid "What kind of assistance do you need?"
-msgstr ""
+msgstr "De quel type d’assistance avez-vous besoin ?"
 
 #: scripts/scenario_33_early.lua:5296
 msgctxt "ship-comms"
 msgid "We're not exactly sure. We just know our engines are not working"
 msgstr ""
+"Nous n'en sommes pas sûrs. Nous savons juste que nos moteurs ne fonctionnent "
+"pas."
 
 #: scripts/scenario_33_early.lua:5297
 msgctxt "ship-comms"
 msgid "May we scan your ship?"
-msgstr ""
+msgstr "Pouvons-nous scanner votre vaisseau ?"
 
 #: scripts/scenario_33_early.lua:5298
 msgctxt "ship-comms"
 msgid ""
 "If that helps you figure out what's wrong with the engines, go right ahead"
 msgstr ""
+"Si cela peut vous aider à comprendre ce qui ne va pas avec nos moteurs, "
+"allez-y."
 
 #: scripts/scenario_33_early.lua:5299
 #, lua-format
 msgctxt "ship-comms"
 msgid "We'll provide %s with your ship data and get back to you"
 msgstr ""
+"Nous fournirons à %s les données de votre vaisseau et reviendrons vers vous."
 
 #: scripts/scenario_33_early.lua:5300
 msgctxt "ship-comms"
@@ -3340,17 +3345,22 @@ msgid ""
 "We'll be here. We're not going enywhere. We are worried about Kraylor in the "
 "area, so don't take too long"
 msgstr ""
+"Nous seront là. On ne peut aller nulle part. Avec les Kraylors dans les "
+"parages, nous ne sommes pas rassurés alors ne tardez pas trop s'il vous "
+"plait."
 
 #: scripts/scenario_33_early.lua:5310
 msgctxt "ship-comms"
 msgid "Deliver repair parts"
-msgstr ""
+msgstr "Livrer les pièces de rechange"
 
 #: scripts/scenario_33_early.lua:5312
 msgctxt "ship-comms"
 msgid ""
 "These match exactly what we need. We will fully restore our engines shortly"
 msgstr ""
+"Ces pièces correspondent exactement à nos besoins. Nous restaurerons "
+"entièrement nos moteurs prochainement."
 
 #: scripts/scenario_33_early.lua:5316
 msgctxt "ship-comms"
@@ -3358,6 +3368,8 @@ msgid ""
 "These parts don't look like they solve our problem. You may want to double "
 "check the information you provided to the parts supplier"
 msgstr ""
+"Ces pièces ne semblent pas résoudre notre problème. Vérifiez les "
+"informations fournies au fournisseur."
 
 #: scripts/scenario_33_early.lua:5345
 msgctxt "shipAssist-comms"
@@ -3424,6 +3436,11 @@ msgid ""
 "click the calibrate button. Set the beam weapons frequency by adjusting the "
 "frequency above the shield frequency in the lower right of your console."
 msgstr ""
+"Obtenez les fréquences de boucliers et de faisceaux du protocole d'amarrage "
+"auprès de %s. Calibrez les boucliers en ajustant la fréquence en bas à "
+"droite de votre console, puis cliquez sur le bouton «Calibrer».\n"
+"Ensuite, réglez la fréquence des faisceaux laser au-dessus de celle des "
+"boucliers en bas à droite de votre console."
 
 #: scripts/scenario_33_early.lua:5534
 #, lua-format
@@ -3433,6 +3450,9 @@ msgid ""
 "using the frequency shown along the bottom edge of your console in the "
 "middle of your console."
 msgstr ""
+"%s Obtenez les fréquences de boucliers et de faisceaux du protocole "
+"d'amarrage auprès de %s. Calibrez les faisceaux à l'aide de la fréquence "
+"indiquée sur le bord inférieur de votre console, au milieu."
 
 #: scripts/scenario_33_early.lua:5538
 #, lua-format
@@ -3445,6 +3465,14 @@ msgid ""
 "zero power in the missile systems, so take the power all the way out of "
 "missile systems."
 msgstr ""
+"Tous les systèmes démarrent à faible puissance. Vous devrez alimenter les "
+"moteurs à impulsion en fonction des besoins de la première tâche. Préparez-"
+"vous à les faire fonctionner à 300 %% avec le liquide de refroidissement au "
+"maximum, à la demande de l'officier de navigation, jusqu'à votre arrivée à "
+"la station.\n"
+"%s vous informera que le protocole d'amarrage exige une puissance nulle dans "
+"les systèmes de missiles, il vous faut donc retirer toute la puissance des "
+"systèmes de missiles.."
 
 #: scripts/scenario_33_early.lua:5542
 #, lua-format
@@ -3455,6 +3483,10 @@ msgid ""
 "along the left edge of your console in the middle. Click the Calibrate "
 "button after you have set the frequency."
 msgstr ""
+"%s Le protocole d'amarrage nécessite également de calibrer le bouclier. "
+"Analysez la fréquence du bouclier. Ajustez-la à l'aide du sélecteur de "
+"fréquence situé au milieu, sur le bord gauche de votre console. Cliquez sur "
+"le bouton Calibrer après avoir défini la fréquence."
 
 #: scripts/scenario_33_early.lua:5546
 #, lua-format
@@ -3465,6 +3497,12 @@ msgid ""
 "open, click the Check with docking port authority button to determine the "
 "docking protocol. Report the protocol to your crew."
 msgstr ""
+"Pour contacter la station %s afin d'obtenir le protocole d'amarrage, cliquez "
+"sur %s, puis sur le bouton \"Ouvrir Comm.\" en haut à gauche de votre "
+"console. Une fois les communications ouvertes, cliquez sur le bouton "
+"\"Vérifier auprès de l'autorité portuaire d'amarrage\" pour déterminer le "
+"protocole d'amarrage.\n"
+"Rapportez le protocole à votre équipage."
 
 #: scripts/scenario_33_early.lua:5550
 #, lua-format
@@ -3475,6 +3513,12 @@ msgid ""
 "communications are open, click the Check with docking port authority button "
 "to determine the docking protocol. Report the protocol to your crew."
 msgstr ""
+"Pour contacter la station %s afin d'obtenir le protocole d'amarrage, cliquez "
+"sur %s, puis sur le bouton \"Ouvrir Comm.\" en bas à droite de votre "
+"console. Une fois les communications ouvertes, cliquez sur le bouton "
+"\"Vérifier auprès de l'autorité portuaire d'amarrage\" pour déterminer le "
+"protocole d'amarrage.\n"
+"Rapportez le protocole à votre équipage."
 
 #: scripts/scenario_33_early.lua:5557
 msgctxt "msgHelms"
@@ -3482,6 +3526,8 @@ msgid ""
 "You might be asked to jump into the nearby nebula so that a freighter can be "
 "scanned."
 msgstr ""
+"On pourrait vous demander de vous téléporter dans la nébuleuse voisine afin "
+"d'y scanner un cargo."
 
 #: scripts/scenario_33_early.lua:5566
 #, lua-format
@@ -3494,6 +3540,13 @@ msgid ""
 "hovering over the lowest, reddest point on the bar graph. Report that "
 "frequency."
 msgstr ""
+"Commencez immédiatement à scanner la cible au cap %.1f. Indiquez le type de "
+"vaisseau dès la fin du scan simple. Lancez ensuite un scan approfondi. Le "
+"raccourci clavier par défaut est \"S\" pour lancer un scan. Une fois le scan "
+"approfondi terminé, obtenez la fréquence de déflexion de bouclier la plus "
+"élevée du vaisseau scanné en survolant le point le plus bas et le plus rouge "
+"du graphique à barres.\n"
+"Rapportez cette fréquence."
 
 #: scripts/scenario_33_early.lua:5570
 msgctxt "msgRelay"
@@ -3503,6 +3556,11 @@ msgid ""
 "science. Be ready to report the ship type and the frequency as soon as "
 "Science completes each scan."
 msgstr ""
+"Envoyez une sonde au centre de la nébuleuse la plus proche : cliquez sur le "
+"bouton \"Largage sonde\", puis sur le centre de la nébuleuse. Une fois la "
+"sonde arrivée à destination, reliez-la à la science. Soyez prêt à rapporter "
+"le type de vaisseau et la fréquence dès que la science aura terminé chaque "
+"analyse."
 
 #: scripts/scenario_33_early.lua:5574
 #, lua-format
@@ -3518,6 +3576,17 @@ msgid ""
 "targets that are likely in the nebula, you will need to exit the nebula to "
 "report their characteristics to %s."
 msgstr ""
+"Commencez immédiatement à scanner la cible au cap %.1f. Il y a probablement "
+"d'autres cibles dans la nébuleuse ; demandez donc à la navigation ou à la "
+"console tactique de vous en rapprocher. Rapporter le type de vaisseau dès la "
+"fin du scan simple. Lancez ensuite le scan approfondi. Le raccourci clavier "
+"par défaut est \"S\" pour lancer le scan. Une fois le scan approfondi "
+"terminé, obtenez la fréquence de déflexion de bouclier la plus forte du "
+"vaisseau scanné en survolant le point le plus bas et le plus rouge du "
+"graphique à barres.\n"
+"Rapportez cette fréquence. Une fois les autres cibles potentiellement "
+"présentes dans la nébuleuse scannées, quittez la nébuleuse pour rapporter "
+"leurs caractéristiques à %s."
 
 #: scripts/scenario_33_early.lua:5579
 msgctxt "msgHelms"
@@ -3528,6 +3597,12 @@ msgid ""
 "right tube to the enemy. He'll try to run away, so be ready to angle the "
 "tube to lead the HVLIs in front of the enemy freighter."
 msgstr ""
+"Téléportez-vous vers le cargo ennemi s'il se trouve à plus de 5 unités. "
+"Obtenez le cap et la distance grâce à la science ou aux opérations, puis "
+"soustrayez 2 unités pour vous placer à portée de tir optimale. Une fois à "
+"proximité, pivotez pour faire pointer le tube gauche ou droit vers l'ennemi. "
+"Il tentera de s'enfuir, soyez donc prêt à ré-orienter le tube pour diriger "
+"les HVLIs vers le cargo ennemi."
 
 #: scripts/scenario_33_early.lua:5583
 msgctxt "msgWeapons"
@@ -3535,6 +3610,8 @@ msgid ""
 "Load up HVLIs on both sides. You may have to ask Engineering for power to "
 "missile systems."
 msgstr ""
+"Chargez des HVLI des deux côtés. Vous devrez peut-être demander à "
+"l'ingénierie d'alimenter les systèmes de missiles."
 
 #: scripts/scenario_33_early.lua:5591
 msgctxt "msgEngineer"
@@ -3543,6 +3620,10 @@ msgid ""
 "to make them load faster. Be ready to add power to impulse and/or "
 "maneuvering as requested."
 msgstr ""
+"Augmentez la puissance des systèmes de missiles à 100 %. Ajoutez-en "
+"davantage, ainsi que du liquide de refroidissement, pour accélérer leur "
+"chargement. Soyez prêt à augmenter la puissance des moteurs à impulsion et/"
+"ou de la manœuvre selon vos besoins."
 
 #: scripts/scenario_33_early.lua:5599
 msgctxt "msgScience"
@@ -3551,6 +3632,9 @@ msgid ""
 "bearing and distance to freighter to crew. You can find it along the right "
 "of your console screen."
 msgstr ""
+"Sélectionnez le cargo ennemi. Utilisez la vue radar ou de la sonde, selon le "
+"cas. Indiquez à l'équipage le cap et la distance qui vous séparent du cargo. "
+"Vous trouverez ces informations à droite de l'écran de votre console."
 
 #: scripts/scenario_33_early.lua:5603
 msgctxt "msgOperations"
@@ -3559,6 +3643,10 @@ msgid ""
 "estimate based on recent scans, otherwise click the enemy freighter and read "
 "the bearing and distance from your console."
 msgstr ""
+"Communiquez le cap et la distance du cargo ennemi. Si une nébuleuse masque "
+"votre vue, estimez la distance en vous basant sur les scans récents. Sinon, "
+"cliquez sur le cargo ennemi et lisez le cap et la distance depuis votre "
+"console."
 
 #: scripts/scenario_33_early.lua:5607
 msgctxt "msgRelay"
@@ -3567,6 +3655,10 @@ msgid ""
 "Impulse engines for the fighter types is a good choice since it makes it "
 "easier to shoot them down."
 msgstr ""
+"Piratez les vaisseaux ennemis dès qu'ils sont à portée, soit via une sonde, "
+"soit via votre vaisseau.\n"
+"Pirater les moteurs à impulsion pour les chasseurs est un bon choix, car "
+"cela facilite leur destruction."
 
 #: scripts/scenario_33_early.lua:5612
 msgctxt "msgHelms"
@@ -3576,6 +3668,10 @@ msgid ""
 "station. Deciding which to do first will be up to your commanding officer or "
 "CO. Be thinking about both options."
 msgstr ""
+"Vous devez vous rendre jusqu'au cargo en détresse afin de le défendre contre "
+"les Kraylors et le réparer. Vous devrez peut-être récupérer des pièces à "
+"votre base. C'est à votre capitaine de décider de la marche à suivre en "
+"premier. Envisagez les deux options."
 
 #: scripts/scenario_33_early.lua:5616
 msgctxt "msgWeapons"
@@ -3585,6 +3681,11 @@ msgid ""
 "recommended. Even homing missiles can be dodged by the enemy. Try for as "
 "straight a shot as possible."
 msgstr ""
+"Vos faisceaux sont pleinement opérationnels. Vos missiles vous ont été "
+"rendus. Chargez vos tubes en prévision du combat. Les missiles à tête "
+"chercheuse (homings) sont recommandés.\n"
+"Même les missiles à tête chercheuse peuvent être esquivés par l'ennemi donc "
+"essayez de les tirer au plus près et le plus directement possible."
 
 #: scripts/scenario_33_early.lua:5624
 msgctxt "msgEngineer"
@@ -3593,6 +3694,9 @@ msgid ""
 "power when needed (along with coolant). Remember the docking/undocking "
 "protocol (no missile energy)"
 msgstr ""
+"Soyez attentif aux systèmes utilisés et augmentez leur puissance si "
+"nécessaire (avec du liquide de refroidissement). N'oubliez pas le protocole "
+"d'amarrage/désamarrage (aucune énergie sur le système de missile)."
 
 #: scripts/scenario_33_early.lua:5632
 msgctxt "msgScience"
@@ -3602,6 +3706,10 @@ msgid ""
 "Tactical widget and selecting Systems. Report it to Relay who will report it "
 "to the home station."
 msgstr ""
+"Scannez le cargo Arlénien en détresse dès que possible (2 fois). Après le "
+"deuxième scan, obtenez le pourcentage de dégâts des moteurs à impulsion en "
+"cliquant sur le bouton Fréquences et en sélectionnant Systèmes. Signalez-le "
+"à l'officier des communications qui informera votre station d'attache."
 
 #: scripts/scenario_33_early.lua:5636
 msgctxt "msgRelay"
@@ -3610,6 +3718,10 @@ msgid ""
 "located. Link the probe that finds the freighter to science. Contact the "
 "freighter. Report Science's scan results to your home station."
 msgstr ""
+"Lancez des sondes pour couvrir le secteur où se trouve le cargo Arlénien en "
+"détresse. Reliez la sonde faisant apparaitre le cargo se la console "
+"scientifique. Contactez le cargo. Rapportez les résultats de l'analyse de "
+"l'officier scientifique à votre station d'attaqche."
 
 #: scripts/scenario_33_early.lua:5640
 msgctxt "msgOperations"
@@ -3619,6 +3731,10 @@ msgid ""
 "percentage by clicking the Tactical widget and selecting Systems. Report it "
 "to the home station."
 msgstr ""
+"Contactez le cargo Arlénien en détresse, puis scannez-le dès que possible (2 "
+"fois). Après le deuxième scan, obtenez le pourcentage de dégâts de leurs "
+"moteurs à impulsion en cliquant sur le bouton Fréquences et en sélectionnant "
+"Systèmes. Signalez-le à votre station d'attache."
 
 #: scripts/scenario_33_early.lua:5645
 msgctxt "msgHelms"
@@ -3628,6 +3744,12 @@ msgid ""
 "Relay/Science/Operations for good approach vectors. Warn Engineering when "
 "you use warp, especially anything above warp one."
 msgstr ""
+"Utilisez la vitesse lumière pour vous approcher des planètes et des lunes en "
+"mouvement, sans toutefois les croiser. Une interception endommagerait et "
+"détruirait rapidement votre vaisseau. Utilisez les renseignements des "
+"officiers de Communication/Science/Opérations afin d'obtenir de bons angles "
+"d'approche. Prévenez l'Ingénierie lorsque vous utilisez la vitesse lumière, "
+"surtout si elle est supérieure à 1."
 
 #: scripts/scenario_33_early.lua:5649
 msgctxt "msgWeapons"
@@ -3636,6 +3758,9 @@ msgid ""
 "dangerous, but if you leave the enemies alone, eventually, they will start "
 "attacking your home station."
 msgstr ""
+"Soyez attentif aux opportunités de cibles ennemies. Les planètes et les "
+"lunes sont bien plus dangereuses, mais si vous laissez les ennemis "
+"tranquilles, ils finiront par attaquer votre station."
 
 #: scripts/scenario_33_early.lua:5657
 msgctxt "msgEngineer"
@@ -3646,12 +3771,21 @@ msgid ""
 "below 200 so you can dock and get more. The reactor will help, but charging "
 "at a station is more efficient."
 msgstr ""
+"Paramètres par défaut suggérés : 50% de liquide de refroidissement en "
+"vitesse lumière et en manœuvre. 150% de puissance en manœuvre. Tous les "
+"autres systèmes à 100%. Liquide de refroidissement restant : 0\n"
+"Surveillez attentivement votre consommation d'énergie et prévenez votre "
+"capitaine lorsque vous passez sous les 200 afin de pouvoir vous amarrer et "
+"en récupérer. Le réacteur sera utile pour en récupérer mais la recharge en "
+"station est plus efficace."
 
 #: scripts/scenario_33_early.lua:6236
 #, lua-format
 msgctxt "human-incCall"
 msgid "You completed the research task. Destroy any Kraylor headed for %s"
 msgstr ""
+"Vous avez complété la tâche de recherche. Détruisez tous les Kraylors se "
+"dirigeant vers %s."
 
 #: scripts/scenario_33_early.lua:6238
 msgctxt "goal-shipLog"
@@ -3659,12 +3793,14 @@ msgid ""
 "You completed the research task. Destroy any Kraylor that were headed for "
 "your home base"
 msgstr ""
+"Vous avez complété la tâche de recherche. Détruisez tous les Kraylors qui se "
+"dirigent vers votre base."
 
 #: scripts/scenario_33_early.lua:6360
 #, lua-format
 msgctxt "msgRelay&Operations"
 msgid "%s   Scan started at %.1f"
-msgstr ""
+msgstr "%s    L'analyse a commencé à %.1f"
 
 #: scripts/scenario_33_early.lua:6368
 #, lua-format
@@ -3674,17 +3810,20 @@ msgid ""
 "Completed: %s     Remaining: %s\n"
 "%s"
 msgstr ""
+"Statut de recherche du corps orbital :\n"
+"Complété : %s Restant : %s\n"
+"%s"
 
 #: scripts/scenario_33_early.lua:6371
 msgctxt "msgRelay&Operations"
 msgid "Enemy ships hunting"
-msgstr ""
+msgstr "Vaisseaux ennemis en chasse"
 
 #: scripts/scenario_33_early.lua:6373
 #, lua-format
 msgctxt "msgRelay&Operations"
 msgid "%s for %s:"
-msgstr ""
+msgstr "%s pour %s :"
 
 #: scripts/scenario_33_early.lua:6379
 #, lua-format
