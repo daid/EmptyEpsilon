@@ -56,10 +56,16 @@ require("spawn_ships_scenario_utility.lua")
 require("control_code_scenario_utility.lua")
 
 function init()
-	scenario_version = "2.0.9"
-	ee_version = "2023.06.17"
+	scenario_version = "2.0.11"
+	ee_version = "2024.12.08"
 	print(string.format("    ----    Scenario: Unwanted Visitors    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
-	print(_VERSION)
+	if _VERSION ~= nil then
+		print("Lua version:",_VERSION)
+	end
+	ECS = false
+	if createEntity then
+		ECS = true
+	end
 	--stationCommunication could be nil (default), commsStation (embedded function) or comms_station_enhanced (external script)
 	stationCommunication = "commsStation"
 	setVariations()
@@ -76,6 +82,74 @@ function init()
 	mission_region = 0
 	mainGMButtons()
 end
+function isObjectType(obj,typ,qualifier)
+	if obj ~= nil and obj:isValid() then
+		if typ ~= nil then
+			if ECS then
+				if typ == "SpaceStation" then
+					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
+				elseif typ == "PlayerSpaceship" then
+					return obj.components.player_control
+				elseif typ == "ScanProbe" then
+					return obj.components.allow_radar_link
+				elseif typ == "CpuShip" then
+					return obj.ai_controller
+				elseif typ == "Asteroid" then
+					return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 7) == "Astroid"
+				elseif typ == "Nebula" then
+					return obj.components.nebula_renderer
+				elseif typ == "Planet" then
+					return obj.components.planet_render
+				elseif typ == "SupplyDrop" then
+					return obj.components.pickup and obj.components.radar_trace.icon == "radar/blip.png" and obj.components.radar_trace.color_by_faction
+				elseif typ == "BlackHole" then
+					return obj.components.gravity and obj.components.billboard_render.texture == "blackHole3d.png"
+				elseif typ == "WarpJammer" then
+					return obj.components.warp_jammer
+				elseif typ == "Mine" then
+					return obj.components.delayed_explode_on_touch and obj.components.constant_particle_emitter
+				elseif typ == "EMPMissile" then
+					return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explode_on_touch.damage_type == "emp"
+				elseif typ == "Nuke" then
+					return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
+				elseif typ == "Zone" then
+					return obj.components.zone
+				else
+					if qualifier == "MovingMissile" then
+						if typ == "HomingMissile" or typ == "HVLI" or typ == "Nuke" or typ == "EMPMissile" then
+							return obj.components.radar_trace.icon == "radar/missile.png"
+						else
+							return false
+						end
+					elseif qualifier == "SplashMissile" then
+						if typ == "Nuke" or typ == "EMPMissile" then
+							if obj.components.radar_trace.icon == "radar/missile.png" then
+								if typ == "Nuke" then
+									return obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
+								else	--EMP
+									return obj.components.explode_on_touch.damage_type == "emp"
+								end
+							else
+								return false
+							end
+						else
+							return false
+						end
+					else
+						return false
+					end
+				end
+			else
+				return obj.typeName == typ
+			end
+		else
+			return false
+		end
+	else
+		return false
+	end
+end
+
 function setGlobals()
 	updateDiagnostic = false
 	stationCommsDiagnostic = false
@@ -83,6 +157,7 @@ function setGlobals()
 	moveDiagnostic = false
 	fixSatelliteDiagnostic = false
 	shipCommsDiagnostic = false
+	primaryOrders = _("DispatchOffice-comms","Survive")
 	goods = {}					--overall tracking of goods
 	tradeFood = {}				--stations that will trade food for other goods
 	tradeLuxury = {}			--stations that will trade luxury for other goods
@@ -102,8 +177,13 @@ function mainGMButtons()
 	addGMFunction(_("buttonGM","+Voices"),adjustServerVoices)
 	addGMFunction(_("buttonGM","+Spawn Ship(s)"),spawnGMShips)
 	addGMFunction(_("buttonGM","+Control Codes"),manageControlCodes)
+	addGMFunction(_("buttonGM","Humorous Ending"),humorousEnding)
 end
 -- GM player ship functions
+function humorousEnding()
+	plot4 = humorousExuari
+	addGMMessage(_("msgGM","Humorous Exuari Neutralization Division (END) ending initiated."))
+end
 function playerShipGMButtons()
 	clearGMFunctions()
 	addGMFunction(_("buttonGM","-Main"),mainGMButtons)
@@ -1151,8 +1231,8 @@ function buildLocalSolarSystem()
 	planetPrimus = Planet():setPosition(solX+plx,solY+ply):setPlanetRadius(primusRadius):setAxialRotationTime(random(200,250)):setDistanceFromMovementPlane(-primusRadius/2)
 	planetPrimus:setPlanetSurfaceTexture("planets/planet-2.png"):setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,0.1)
 	planetPrimus:setCallSign(primusNames[math.random(1,#primusNames)])
-	lo = 400
-	hi = 500
+	lo = 800
+	hi = 1000
 	if orbitChoice == "lo" then
 		planetPrimus.orbit_speed = lo/difficulty
 	elseif orbitChoice == "hi" then
@@ -1235,7 +1315,7 @@ function buildLocalSolarSystem()
 	end
 	planetSecondusMoon:setPlanetSurfaceTexture("planets/moon-1.png"):setOrbit(planetSecondus,planetSecondusMoonOrbitTime)
 	-- stations orbiting Secondus
-	secondusStationOrbitIncrement = .05*difficulty
+	secondusStationOrbitIncrement = .02*difficulty
 	secondusStations = {}
 	secondusStationOrbit = (secondusRadius + secondusMoonOrbit - secondusMoonRadius)/2
 	stationSize = "Small Station"
@@ -1363,7 +1443,7 @@ function buildLocalSolarSystem()
 	beltStationAngle = random(0,360)
 	lo = 2
 	hi = 8
-	gradient = 450
+	gradient = 1400
 	if orbitChoice == "lo" then
 		belt1OrbitalSpeed = lo/gradient*difficulty
 	elseif orbitChoice == "hi" then
@@ -4085,7 +4165,7 @@ function handleDockedState()
 						local sx, sy = comms_target:getPosition()
 						local nearby_objects = getObjectsInRadius(sx,sy,30000)
 						for i, obj in ipairs(nearby_objects) do
-							if obj.typeName == "SpaceStation" then
+							if isObjectType(obj,"SpaceStation") then
 								if not obj:isEnemy(comms_target) then
 									if brochure_stations == "" then
 										brochure_stations = string.format(_("cartographyOffice-comms","%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
@@ -4110,7 +4190,7 @@ function handleDockedState()
 						local sx, sy = comms_target:getPosition()
 						local nearby_objects = getObjectsInRadius(sx,sy,30000)
 						for i, obj in ipairs(nearby_objects) do
-							if obj.typeName == "SpaceStation" then
+							if isObjectType(obj,"SpaceStation") then
 								if not obj:isEnemy(comms_target) then
 									if obj.comms_data.goods ~= nil then
 										for good, good_data in pairs(obj.comms_data.goods) do
@@ -4144,7 +4224,7 @@ function handleDockedState()
 					local nearby_objects = getObjectsInRadius(sx,sy,50000)
 					local stations_known = 0
 					for i, obj in ipairs(nearby_objects) do
-						if obj.typeName == "SpaceStation" then
+						if isObjectType(obj,"SpaceStation") then
 							if not obj:isEnemy(comms_target) then
 								stations_known = stations_known + 1
 								addCommsReply(obj:getCallSign(),function()
@@ -4185,7 +4265,7 @@ function handleDockedState()
 					local button_count = 0
 					local by_goods = {}
 					for i, obj in ipairs(nearby_objects) do
-						if obj.typeName == "SpaceStation" then
+						if isObjectType(obj,"SpaceStation") then
 							if not obj:isEnemy(comms_target) then
 								if obj.comms_data.goods ~= nil then
 									for good, good_data in pairs(obj.comms_data.goods) do
@@ -4402,7 +4482,7 @@ function masterCartographer()
 			local nearby_objects = getAllObjects()
 			local stations_known = 0
 			for i, obj in ipairs(nearby_objects) do
-				if obj.typeName == "SpaceStation" then
+				if isObjectType(obj,"SpaceStation") then
 					if not obj:isEnemy(comms_target) then
 						local station_distance = distance(comms_target,obj)
 						if station_distance > 50000 then
@@ -4450,7 +4530,7 @@ function masterCartographer()
 			local nearby_objects = getAllObjects()
 			local by_goods = {}
 			for i, obj in ipairs(nearby_objects) do
-				if obj.typeName == "SpaceStation" then
+				if isObjectType(obj,"SpaceStation") then
 					if not obj:isEnemy(comms_target) then
 						local station_distance = distance(comms_target,obj)
 						if station_distance > 50000 then
@@ -4512,19 +4592,19 @@ function getCartographerCost(service)
 end
 function showCurrentStats()
 	local stats_exist = false
-	if #humanStationDestroyedNameList ~= nil and #humanStationDestroyedNameList > 0 then
+	if humanStationDestroyedNameList ~= nil and #humanStationDestroyedNameList > 0 then
 		stats_exist = true
 	end
-	if #neutralStationDestroyedNameList ~= nil and #neutralStationDestroyedNameList > 0 then
+	if neutralStationDestroyedNameList ~= nil and #neutralStationDestroyedNameList > 0 then
 		stats_exist = true
 	end
-	if #kraylorVesselDestroyedNameList ~= nil and #kraylorVesselDestroyedNameList > 0 then
+	if kraylorVesselDestroyedNameList ~= nil and #kraylorVesselDestroyedNameList > 0 then
 		stats_exist = true
 	end
-	if #exuariVesselDestroyedNameList ~= nil and #exuariVesselDestroyedNameList > 0 then
+	if exuariVesselDestroyedNameList ~= nil and #exuariVesselDestroyedNameList > 0 then
 		stats_exist = true
 	end
-	if #arlenianVesselDestroyedNameList ~= nil and #arlenianVesselDestroyedNameList > 0 then
+	if arlenianVesselDestroyedNameList ~= nil and #arlenianVesselDestroyedNameList > 0 then
 		stats_exist = true
 	end
 	if stats_exist then
@@ -5375,7 +5455,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for i, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms","Dock at %s"),obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms","Docking at %s."),obj:getCallSign()))
 				comms_target:orderDock(obj)
@@ -5849,7 +5929,7 @@ function placeRandomAsteroidAroundPoint(object_type, amount, dist_min, dist_max,
         local x = x0 + math.cos(r / 180 * math.pi) * distance
         local y = y0 + math.sin(r / 180 * math.pi) * distance
         local obj = object_type():setPosition(x, y)
-        if obj.typeName == "Asteroid" or obj.typeName == "VisualAsteroid" then
+        if isObjectType(obj,"Asteroid") or isObjectType(obj,"VisualAsteroid") then
 			obj:setSize(random(3,100) + random(3,100) + random(3,100) + random(3,500))
         end
     end
@@ -5875,7 +5955,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, clo
 			local radialPoint = startArc+ndex
 			local pointDist = distance + random(-randomize,randomize)
 			obj = object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)		
-			if obj.typeName == "Asteroid" or obj.typeName == "VisualAsteroid" then
+			if isObjectType(obj,"Asteroid") or isObjectType(obj,"VisualAsteroid") then
 				obj:setSize(random(3,100) + random(3,100) + random(3,100) + random(3,500))
 			end	
 		end
@@ -5883,7 +5963,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, clo
 			radialPoint = random(startArc,clockwiseEndArc)
 			pointDist = distance + random(-randomize,randomize)
 			obj = object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
-			if obj.typeName == "Asteroid" or obj.typeName == "VisualAsteroid" then
+			if isObjectType(obj,"Asteroid") or isObjectType(obj,"VisualAsteroid") then
 				obj:setSize(random(3,100) + random(3,100) + random(3,100) + random(3,500))
 			end	
 		end
@@ -5892,7 +5972,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, clo
 			radialPoint = random(startArc,clockwiseEndArc)
 			pointDist = distance + random(-randomize,randomize)
 			obj = object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
-			if obj.typeName == "Asteroid" or obj.typeName == "VisualAsteroid" then
+			if isObjectType(obj,"Asteroid") or isObjectType(obj,"VisualAsteroid") then
 				obj:setSize(random(3,100) + random(3,100) + random(3,100) + random(3,500))
 			end	
 		end
@@ -6359,7 +6439,7 @@ function checkDefendPrimusStationEvents(delta)
 					else
 						prx, pry = perceived_player:getPosition()
 						pmx, pmy = vectorFromAngle(random(0,360),random(6000,8000))
-						local tempFleet = spawnEnemies(prx+pmx,pry+pmy,1,"Exuari")
+						local tempFleet = spawnEnemies(prx+pmx,pry+pmy,difficulty/2,"Exuari")
 						for i, enemy in ipairs(tempFleet) do
 							enemy:orderAttack(perceived_player)
 							table.insert(enemyFleet,enemy)
@@ -6921,7 +7001,12 @@ function startDefendSpawnBandStation()
 		protect_station = playerSpawnBandStations[math.random(1,#playerSpawnBandStations)]
 	until(protect_station ~= nil and protect_station:isValid())
 	protect_station_name = protect_station:getCallSign()
-	primaryOrders = string.format(_("marauders-comms","Protect %s from marauding Exuari"),protect_station_name)
+	protect_station_sector = protect_station:getSectorName()
+	if difficulty > 1 then
+		primaryOrders = string.format(_("marauders-comms","Protect %s from marauding Exuari"),protect_station_name)
+	else
+		primaryOrders = string.format(_("marauders-comms","Protect %s in sector %s from marauding Exuari"),protect_station_name,protect_station_sector)
+	end
 end
 function defendSpawnBandStation(delta)
 	if set_up_defend_spawn_band_station == nil then
@@ -7585,6 +7670,75 @@ function checkSurviveEvents(delta)
 		end
 	end
 end
+--	Abrupt end plot
+function humorousExuari()
+	for i,p in ipairs(getActivePlayerShips()) do
+		if p:getDockedWith() == nil then
+			if p.neutralization_list == nil then
+				p.neutralization_list = {}
+				local px, py = p:getPosition()
+				local attack_angle = random(0,360)
+				for i=1,6 do
+					local tx, ty = vectorFromAngle(attack_angle,p:getLongRangeRadarRange(),true)
+					local ship = ship_template["Starhammer V"].create("Exuari")
+					ship:setPosition(px + tx, py + ty):orderAttack(p)
+					ship:setCallSign(generateCallSign(nil,"Exuari"))
+					table.insert(p.neutralization_list,ship)
+					attack_angle = (attack_angle + 60) % 360
+				end
+			end
+			if p.ultimatum == nil then
+				if availableForComms(p) then
+					for j,ship in ipairs(p.neutralization_list) do
+						if ship:isValid() then
+							ship:sendCommsMessage(p,string.format(_("shipEnemy-incCall","In accordance to Exuari command directive 2257, we the Exuari Neutralization Division will eradicate %s providing maximum humor and entertainment for all observers. Live short and funny."),p:getCallSign()))
+							p.ultimatum = "sent"
+							break
+						end
+					end
+				end
+			end
+			for j,ship in ipairs(p.neutralization_list) do
+				if ship:isValid() then
+					if ship.jammer == nil then
+						if distance(ship,p) < 5000 then
+							local wj_x, wj_y = ship:getPosition()
+							WarpJammer():setPosition(wj_x,wj_y):setRange(20000):setHull(100)
+							ship.jammer = "dropped"
+						end
+					end
+				end
+			end
+		end
+	end
+end
+function availableForComms(p)
+	if not p:isCommsInactive() then
+		return false
+	end
+	if p:isCommsOpening() then
+		return false
+	end
+	if p:isCommsBeingHailed() then
+		return false
+	end
+	if p:isCommsBeingHailedByGM() then
+		return false
+	end
+	if p:isCommsChatOpen() then
+		return false
+	end
+	if p:isCommsChatOpenToGM() then
+		return false
+	end
+	if p:isCommsChatOpenToPlayer() then
+		return
+	end
+	if p:isCommsScriptOpen() then
+		return false
+	end
+	return true
+end
 -- Working transports plot
 function workingTransports(delta)
 	if transport_delay_time == nil then
@@ -7903,6 +8057,16 @@ function update(delta)
 	if #getActivePlayerShips() < 1 then	--do nothing until player ship is spawned
 		return
 	end
+	for i,p in ipairs(getActivePlayerShips()) do
+		if p.getOrdersAtFriendlyStation == nil then
+			if availableForComms(p) then
+				if primusStation:isValid() then
+					primusStation:sendCommsMessage(p,_("centralcommand-incCall","Check with us or other friendly stations for mission orders."))
+				end
+				p.getOrdersAtFriendlyStation = "sent"
+			end
+		end
+	end
 	if updateDiagnostic then print("plotManager") end
 	if plotManager ~= nil then
 		plotManager(delta)
@@ -7918,6 +8082,9 @@ function update(delta)
 	if updateDiagnostic then print("plot3") end
 	if plot3 ~= nil then	--transport cleanup
 		plot3(delta)
+	end
+	if plot4 ~= nil then
+		plot4()
 	end
 	if updateDiagnostic then print("working transports") end
 	workingTransports(delta)
