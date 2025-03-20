@@ -296,18 +296,22 @@ end
 -- This is only helper function for distance(a,b,c,d) and angle(a,b,c,d). 
 -- Returns two sets of coordinates: x1, y1, x2, y2.
 function _fourArgumentsIntoCoordinates(a, b, c, d)
+	local table_or_userdata = "table"
+	if createEntity then
+		table_or_userdata = "userdata"
+	end
     local x1, y1 = 0, 0
     local x2, y2 = 0, 0
-    if type(a) == "userdata" and type(b) == "userdata" then
+    if type(a) == table_or_userdata and type(b) == table_or_userdata then
         -- a and b are bth tables.
         -- Assume function(obj1, obj2)
         x1, y1 = a:getPosition()
         x2, y2 = b:getPosition()
-    elseif type(a) == "userdata" and type(b) == "number" and type(c) == "number" then
+    elseif type(a) == table_or_userdata and type(b) == "number" and type(c) == "number" then
         -- Assume function(obj1, x2, y2)
         x1, y1 = a:getPosition()
         x2, y2 = b, c
-    elseif type(a) == "number" and type(b) == "number" and type(c) == "userdata" then
+    elseif type(a) == "number" and type(b) == "number" and type(c) == table_or_userdata then
         -- Assume function(x1, y1, obj2)
         x1, y1 = a, b
         x2, y2 = c:getPosition()
