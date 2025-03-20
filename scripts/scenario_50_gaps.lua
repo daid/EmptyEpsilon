@@ -31,11 +31,15 @@ require("utils.lua")
 require("place_station_scenario_utility.lua")
 
 function init()
-	scenario_version = "2.0.7"
+	scenario_version = "2.0.9"
 	ee_version = "2024.12.08"
 	print(string.format("    ----    Scenario: Close the Gaps    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
 	if _VERSION ~= nil then
 		print("Lua version:",_VERSION)
+	end
+	ECS = false
+	if createEntity then
+		ECS = true
 	end
 	setVariations()
 	setConstants()
@@ -51,6 +55,74 @@ function init()
 	end
 	wfv = "end of init"
 end
+function isObjectType(obj,typ,qualifier)
+	if obj ~= nil and obj:isValid() then
+		if typ ~= nil then
+			if ECS then
+				if typ == "SpaceStation" then
+					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
+				elseif typ == "PlayerSpaceship" then
+					return obj.components.player_control
+				elseif typ == "ScanProbe" then
+					return obj.components.allow_radar_link
+				elseif typ == "CpuShip" then
+					return obj.ai_controller
+				elseif typ == "Asteroid" then
+					return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 7) == "Astroid"
+				elseif typ == "Nebula" then
+					return obj.components.nebula_renderer
+				elseif typ == "Planet" then
+					return obj.components.planet_render
+				elseif typ == "SupplyDrop" then
+					return obj.components.pickup and obj.components.radar_trace.icon == "radar/blip.png" and obj.components.radar_trace.color_by_faction
+				elseif typ == "BlackHole" then
+					return obj.components.gravity and obj.components.billboard_render.texture == "blackHole3d.png"
+				elseif typ == "WarpJammer" then
+					return obj.components.warp_jammer
+				elseif typ == "Mine" then
+					return obj.components.delayed_explode_on_touch and obj.components.constant_particle_emitter
+				elseif typ == "EMPMissile" then
+					return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explode_on_touch.damage_type == "emp"
+				elseif typ == "Nuke" then
+					return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
+				elseif typ == "Zone" then
+					return obj.components.zone
+				else
+					if qualifier == "MovingMissile" then
+						if typ == "HomingMissile" or typ == "HVLI" or typ == "Nuke" or typ == "EMPMissile" then
+							return obj.components.radar_trace.icon == "radar/missile.png"
+						else
+							return false
+						end
+					elseif qualifier == "SplashMissile" then
+						if typ == "Nuke" or typ == "EMPMissile" then
+							if obj.components.radar_trace.icon == "radar/missile.png" then
+								if typ == "Nuke" then
+									return obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
+								else	--EMP
+									return obj.components.explode_on_touch.damage_type == "emp"
+								end
+							else
+								return false
+							end
+						else
+							return false
+						end
+					else
+						return false
+					end
+				end
+			else
+				return obj.typeName == typ
+			end
+		else
+			return false
+		end
+	else
+		return false
+	end
+end
+
 function setConstants()
 	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 	--Ship Template Name List
@@ -1429,56 +1501,6 @@ function getServiceCost(service)
 -- the current player.
     return math.ceil(comms_target.comms_data.service_cost[service])
 end
-function fillStationBrains()
-	comms_target.goodsKnowledge = {}
-	comms_target.goodsKnowledgeSector = {}
-	comms_target.goodsKnowledgeType = {}
-	comms_target.goodsKnowledgeTrade = {}
-	knowledgeCount = 0
-	knowledgeMax = 10
-	for sti=1,#stationList do
-		if stationList[sti] ~= nil and stationList[sti]:isValid() then
-			if distance(comms_target,stationList[sti]) < 75000 then
-				brainCheck = 3
-			else
-				brainCheck = 1
-			end
-			for gi=1,#goods[stationList[sti]] do
-				if random(1,10) <= brainCheck then
-					table.insert(comms_target.goodsKnowledge,stationList[sti]:getCallSign())
-					table.insert(comms_target.goodsKnowledgeSector,stationList[sti]:getSectorName())
-					table.insert(comms_target.goodsKnowledgeType,goods[stationList[sti]][gi][1])
-					tradeString = ""
-					stationTrades = false
-					if tradeMedicine[stationList[sti]] ~= nil then
-						tradeString = _("trade-comms", " and will trade it for medicine")
-						stationTrades = true
-					end
-					if tradeFood[stationList[sti]] ~= nil then
-						if stationTrades then
-							tradeString = tradeString .. _("trade-comms", " or food")
-						else
-							tradeString = tradeString .. _("trade-comms", " and will trade it for food")
-							stationTrades = true
-						end
-					end
-					if tradeLuxury[stationList[sti]] ~= nil then
-						if stationTrades then
-							tradeString = tradeString .. _("trade-comms", " or luxury")
-						else
-							tradeString = tradeString .. _("trade-comms", " and will trade it for luxury")
-						end
-					end
-					table.insert(comms_target.goodsKnowledgeTrade,tradeString)
-					knowledgeCount = knowledgeCount + 1
-					if knowledgeCount >= knowledgeMax then
-						return
-					end
-				end
-			end
-		end
-	end
-end
 function getFriendStatus()
     if comms_source:isFriendly(comms_target) then
         return "friend"
@@ -1575,7 +1597,7 @@ function friendlyComms()
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
@@ -2221,7 +2243,7 @@ function checkEasternernGap()
 	local eastObjs = getObjectsInRadius(20000, 0, 1500)
 	local east_mines = {}
 	for _, obj in ipairs(eastObjs) do
-		if obj.typeName == "Mine" then
+		if isObjectType(obj,"Mine") then
 			eastObjCount = eastObjCount + 1
 			table.insert(east_mines,obj)
 		end
@@ -2281,7 +2303,7 @@ function checkWesternernGap()
 	local westObjs = getObjectsInRadius(-20000, 0, 1500)
 	local west_mines = {}
 	for _, obj in ipairs(westObjs) do
-		if obj.typeName == "Mine" then
+		if isObjectType(obj,"Mine") then
 			westObjCount = westObjCount + 1
 			table.insert(west_mines,obj)
 		end
@@ -2341,7 +2363,7 @@ function checkNorthernGap()
 	local northObjs = getObjectsInRadius(0, -20000, 1500)
 	local north_mines = {}
 	for _, obj in ipairs(northObjs) do
-		if obj.typeName == "Mine" then
+		if isObjectType(obj,"Mine") then
 			northObjCount = northObjCount + 1
 			table.insert(north_mines,obj)
 		end
@@ -2401,7 +2423,7 @@ function checkSouthernGap()
 	local southObjs = getObjectsInRadius(0, 20000, 1500)
 	local south_mines = {}
 	for _, obj in ipairs(southObjs) do
-		if obj.typeName == "Mine" then
+		if isObjectType(obj,"Mine") then
 			southObjCount = southObjCount + 1
 			table.insert(south_mines,obj)
 		end
@@ -3202,7 +3224,7 @@ function waves(delta)
 			end
 		end
 		if homeStation:areEnemiesInRange(2000) then
-			wakeEnemyFleet = getObjectsInRange(2000)
+			wakeEnemyFleet = homeStation:getObjectsInRange(2000)
 			for _, enemy in ipairs(wakeEnemyFleet) do
 				if enemy:isEnemy(homeStation) then
 					enemy:orderRoaming()
