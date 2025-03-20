@@ -1,8 +1,9 @@
 -- Name: Escape
 -- Description: Escape imprisonment and return home. 
 --- Mission consists of one ship with a full crew. Engineer and Science will be busy.
---- Version 5 switches to the max health system, preserves some sensor data in the final phase
---- and uses the place station scenario utility.
+---
+--- Version 5
+---
 --- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every weekend. All experience levels are welcome. 
 -- Type: Replayable Mission
 -- Author: Xansta
@@ -22,11 +23,15 @@ require("place_station_scenario_utility.lua")
 --	Initialization routines  --
 -------------------------------
 function init()
-	scenario_version = "5.0.10"
+	scenario_version = "5.0.12"
 	ee_version = "2024.12.08"
 	print(string.format("    ----     Scenario: Escape    ----     Version %s    ----    Tested with EE version %s",scenario_version,ee_version))
 	if _VERSION ~= nil then
 		print("Lua version:",_VERSION)
+	end
+	ECS = false
+	if createEntity then
+		ECS = true
 	end
 	wfv = "nowhere"		--wolf fence value - used for debugging
 	setSettings()
@@ -251,6 +256,74 @@ function init()
 	plot1 = scanRepulse				--enable first plot mission goal
 	--print("end of init")
 end
+function isObjectType(obj,typ,qualifier)
+	if obj ~= nil and obj:isValid() then
+		if typ ~= nil then
+			if ECS then
+				if typ == "SpaceStation" then
+					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
+				elseif typ == "PlayerSpaceship" then
+					return obj.components.player_control
+				elseif typ == "ScanProbe" then
+					return obj.components.allow_radar_link
+				elseif typ == "CpuShip" then
+					return obj.ai_controller
+				elseif typ == "Asteroid" then
+					return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 7) == "Astroid"
+				elseif typ == "Nebula" then
+					return obj.components.nebula_renderer
+				elseif typ == "Planet" then
+					return obj.components.planet_render
+				elseif typ == "SupplyDrop" then
+					return obj.components.pickup and obj.components.radar_trace.icon == "radar/blip.png" and obj.components.radar_trace.color_by_faction
+				elseif typ == "BlackHole" then
+					return obj.components.gravity and obj.components.billboard_render.texture == "blackHole3d.png"
+				elseif typ == "WarpJammer" then
+					return obj.components.warp_jammer
+				elseif typ == "Mine" then
+					return obj.components.delayed_explode_on_touch and obj.components.constant_particle_emitter
+				elseif typ == "EMPMissile" then
+					return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explode_on_touch.damage_type == "emp"
+				elseif typ == "Nuke" then
+					return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
+				elseif typ == "Zone" then
+					return obj.components.zone
+				else
+					if qualifier == "MovingMissile" then
+						if typ == "HomingMissile" or typ == "HVLI" or typ == "Nuke" or typ == "EMPMissile" then
+							return obj.components.radar_trace.icon == "radar/missile.png"
+						else
+							return false
+						end
+					elseif qualifier == "SplashMissile" then
+						if typ == "Nuke" or typ == "EMPMissile" then
+							if obj.components.radar_trace.icon == "radar/missile.png" then
+								if typ == "Nuke" then
+									return obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
+								else	--EMP
+									return obj.components.explode_on_touch.damage_type == "emp"
+								end
+							else
+								return false
+							end
+						else
+							return false
+						end
+					else
+						return false
+					end
+				end
+			else
+				return obj.typeName == typ
+			end
+		else
+			return false
+		end
+	else
+		return false
+	end
+end
+
 function tableRemoveRandom(array)
 --	Remove random element from array and return it.
 	-- Returns nil if the array is empty,
@@ -478,7 +551,7 @@ function placeRandomAsteroidsAroundPoint(object_type, amount, dist_min, dist_max
         local x = x0 + math.cos(r / 180 * math.pi) * distance
         local y = y0 + math.sin(r / 180 * math.pi) * distance
         local obj = object_type():setPosition(x, y)
-        if obj.typeName == "Asteroid" or obj.typeName == "VisualAsteroid" then
+        if isObjectType(obj,"Asteroid") or isObjectType(obj,"VisualAsteroid") then
 			obj:setSize(random(1,100) + random(1,75) + random(1,75) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20) + random(1,20))
         end
     end
@@ -1583,7 +1656,7 @@ function handleDockedState()
 						local scanned_ships = {}
 						local fully_scanned_ships = {}
 						for i,obj in ipairs(objects) do
-							if obj.typeName == "CpuShip" then
+							if isObjectType(obj,"CpuShip") then
 								if obj:isScannedBy(playerRepulse) then
 									table.insert(scanned_ships,obj)
 								end
@@ -1845,7 +1918,7 @@ function handleDockedState()
 			end
 			if ctd.buy ~= nil then
 				for good, price in pairs(ctd.buy) do
-					if comms_source.goods[good] ~= nil and comms_source.goods[good] > 0 then
+					if comms_source.goods ~= nil and comms_source.goods[good] ~= nil and comms_source.goods[good] > 0 then
 						addCommsReply(string.format(_("trade-comms", "Sell one %s for %i reputation"),good,price), function()
 							local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Reputation price: %i"),good,price)
 							comms_source.goods[good] = comms_source.goods[good] - 1
@@ -1908,7 +1981,7 @@ function handleDockedState()
 				for good, goodData in pairs(ctd.goods) do
 					addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
 						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
-						if goodData[quantity] < 1 then
+						if goodData["quantity"] < 1 then
 							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
@@ -2568,7 +2641,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
@@ -3263,23 +3336,25 @@ end
 function cumulativeHarassment(delta)
 	harassment_timer = harassment_timer - delta
 	if harassment_timer < 0 then
-		local total_health = playerRepulse:getSystemHealth("reactor")
-		total_health = total_health + playerRepulse:getSystemHealth("beamweapons")
-		total_health = total_health + playerRepulse:getSystemHealth("maneuver")
-		total_health = total_health + playerRepulse:getSystemHealth("missilesystem")
-		total_health = total_health + playerRepulse:getSystemHealth("impulse")
-		total_health = total_health + playerRepulse:getSystemHealth("jumpdrive")
-		total_health = total_health + playerRepulse:getSystemHealth("frontshield")
-		total_health = total_health + playerRepulse:getSystemHealth("rearshield")
-		total_health = total_health + playerRepulse:getSystemHealth("warp")
-		total_health = total_health/9
-		local cpx, cpy = playerRepulse:getPosition()
-		local dpx, dpy = vectorFromAngle(random(0,360),playerRepulse:getLongRangeRadarRange()+500)
-		local fleet = spawnEnemies(cpx+dpx,cpy+dpy,total_health,"Exuari")
-		for idx, enemy in ipairs(fleet) do
-			enemy:orderAttack(playerRepulse)
+		if playerRepulse:getReputationPoints() < 150 then
+			local total_health = playerRepulse:getSystemHealth("reactor")
+			total_health = total_health + playerRepulse:getSystemHealth("beamweapons")
+			total_health = total_health + playerRepulse:getSystemHealth("maneuver")
+			total_health = total_health + playerRepulse:getSystemHealth("missilesystem")
+			total_health = total_health + playerRepulse:getSystemHealth("impulse")
+			total_health = total_health + playerRepulse:getSystemHealth("jumpdrive")
+			total_health = total_health + playerRepulse:getSystemHealth("frontshield")
+			total_health = total_health + playerRepulse:getSystemHealth("rearshield")
+			total_health = total_health + playerRepulse:getSystemHealth("warp")
+			total_health = total_health/9
+			local cpx, cpy = playerRepulse:getPosition()
+			local dpx, dpy = vectorFromAngle(random(0,360),playerRepulse:getLongRangeRadarRange()+500)
+			local fleet = spawnEnemies(cpx+dpx,cpy+dpy,total_health,"Exuari")
+			for idx, enemy in ipairs(fleet) do
+				enemy:orderAttack(playerRepulse)
+			end
 		end
-		harassment_timer = delta + 200 - (difficulty*20)
+		harassment_timer = delta + 240 - (difficulty*20)
 	end
 end
 function showCrewFixers()
