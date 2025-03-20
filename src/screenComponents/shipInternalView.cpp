@@ -18,6 +18,7 @@ GuiShipInternalView* GuiShipInternalView::setShip(sp::ecs::Entity ship)
     {
         room_container->destroy();
         room_container = nullptr;
+        crew_list.clear();
     }
     if (!ship)
         return this;
