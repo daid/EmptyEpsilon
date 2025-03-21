@@ -62,30 +62,26 @@ require("cpu_ship_diversification_scenario_utility.lua")
 -------------------------------
 function init()
 	wfv = "nowhere"		--wolf fence value - used for debugging
-	scenario_version = "11.0.0"
-	print(string.format("    ----    Scenario: Defender Hunter    ----    Version %s    ----    EE version: %s    ----",scenario_version,getEEVersion()))
+	scenario_version = "11.0.2"
+	ee_version = "2024.12.08"
+	print(string.format("   ---   Scenario: Defender Hunter   ---   Version %s   ---   EE version: %s   ---   Tested with EE version %s   ---",scenario_version,getEEVersion(),ee_version))
 	if _VERSION ~= nil then
-		print(_VERSION)
+		print("Lua version:",_VERSION)
+	end
+	ECS = false
+	if createEntity then
+		ECS = true
 	end
 	plot_1_diagnostic = false
 	plot_2_diagnostic = false
 	setVariations()
-	setMovingAsteroids()
-	setMovingNebulae()
-	setWormArt()
 	setConstants()
 	setGlobals()
 	diagnostic = false		
 	helpfulWarningDiagnostic = false
-	GMDiagnosticOn = _("buttonGM", "Turn On Diagnostic")
-	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
-	default_interwave_interval = 280
-	interWave = default_interwave_interval			
-	GMDelayNormalToSlow = _("buttonGM", "Delay normal to slow")
-	GMDelaySlowToFast = _("buttonGM", "Delay slow to fast")
-	GMDelayFastToNormal = _("buttonGM", "Delay fast to normal")
-	addGMFunction(GMDelayNormalToSlow,delayNormalToSlow)
-	buildStations()
+	constructEnvironment()
+	mainGMButtons = mainGMButtonsDuringPause
+	mainGMButtons()
 	wfv = "end of init"
 end
 function setVariations()
@@ -154,6 +150,13 @@ function setGlobals()
 		{"circuit",0},
 		{"battery",0}	
 	}
+	jump_start = true
+	recurring_prods = {
+		{time = 30*60,	used = false},
+		{time = 60*60,	used = false},
+		{time = 90*60,	used = false},
+	}
+	interWave = 280
 	goods = {}					--overall tracking of goods
 	stationList = {}			--friendly and neutral stations
 	friendlyStationList = {}	
@@ -252,7 +255,7 @@ function setConstants()
 		["Jacket Drone"] =		{strength = 4,	create = droneJacket},
 		["Ktlitan Drone"] =		{strength = 4,	create = stockTemplate},
 		["Heavy Drone"] =		{strength = 5,	create = droneHeavy},
-		["Adder MK3"] =			{strength = 5,	create = adderMk3},
+		["Adder MK3"] =			{strength = 5,	create = stockTemplate},
 		["MT52 Hornet"] =		{strength = 5,	create = stockTemplate},
 		["MU52 Hornet"] =		{strength = 5,	create = stockTemplate},
 		["MV52 Hornet"] =		{strength = 6,	create = hornetMV52},
@@ -291,10 +294,10 @@ function setConstants()
 		["Elara P2"] =			{strength = 28,	create = stockTemplate},
 		["Tempest"] =			{strength = 30,	create = tempest},
 		["Strikeship"] =		{strength = 30,	create = stockTemplate},
-		["Fiend G3"] =			{strength = 33,	create = fiendG3},
-		["Fiend G4"] =			{strength = 35,	create = fiendG4},
-		["Fiend G5"] =			{strength = 37,	create = fiendG5},
-		["Fiend G6"] =			{strength = 39,	create = fiendG6},
+		["Fiend G3"] =			{strength = 33,	create = stockTemplate},
+		["Fiend G4"] =			{strength = 35,	create = stockTemplate},
+		["Fiend G5"] =			{strength = 37,	create = stockTemplate},
+		["Fiend G6"] =			{strength = 39,	create = stockTemplate},
 		["Predator"] =			{strength = 42,	create = predator},
 		["Ktlitan Breaker"] =	{strength = 45,	create = stockTemplate},
 		["Ktlitan Feeder"] =	{strength = 48,	create = stockTemplate},
@@ -476,12 +479,82 @@ function setConstants()
 	componentGoods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	mineralGoods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}
 end
+function constructEnvironment()
+	setWormArt()
+	setMovingNebulae()
+	setMovingAsteroids()
+	buildStations()
+end
+function mainGMButtonsDuringPause()
+	clearGMFunctions()
+	local button_label = _("buttonGM", "Turn On Diagnostic")
+	if diagnostic then
+		button_label = _("buttonGM", "Turn Off Diagnostic")
+	end
+	addGMFunction(button_label,function()
+		if diagnostic then
+			diagnostic = false
+		else
+			diagnostic = true
+		end
+		mainGMButtons()
+	end)
+	button_label = _("buttonGM", "Delay normal to slow")
+	if interWave == 600 then
+		button_label = _("buttonGM", "Delay slow to fast")
+	elseif interWave == 20 then
+		button_label = _("buttonGM", "Delay fast to normal")
+	end
+	addGMFunction(button_label,function()
+		if interWave == 280 then
+			interWave = 600
+		elseif interWave == 600 then
+			interWave = 20
+		else
+			interWave = 280
+		end
+		mainGMButtons()
+	end)
+end
+function mainGMButtonsAfterPause()
+	clearGMFunctions()
+	local button_label = _("buttonGM", "Turn On Diagnostic")
+	if diagnostic then
+		button_label = _("buttonGM", "Turn Off Diagnostic")
+	end
+	addGMFunction(button_label,function()
+		if diagnostic then
+			diagnostic = false
+		else
+			diagnostic = true
+		end
+		mainGMButtons()
+	end)
+	button_label = _("buttonGM", "Delay normal to slow")
+	if interWave == 600 then
+		button_label = _("buttonGM", "Delay slow to fast")
+	elseif interWave == 20 then
+		button_label = _("buttonGM", "Delay fast to normal")
+	end
+	addGMFunction(button_label,function()
+		if interWave == 280 then
+			interWave = 600
+		elseif interWave == 600 then
+			interWave = 20
+		else
+			interWave = 280
+		end
+		mainGMButtons()
+	end)
+	button_label = _("buttonGM", "Spawn Enemies")
+	addGMFunction(button_label,GMSpawnsEnemies)
+end
 function GMSpawnsEnemies()
 --	Let the GM spawn a random group of enemies to attack a player
 	local gmPlayer = nil
 	local gmSelect = getGMSelection()
 	for idx, obj in ipairs(gmSelect) do
-		if obj.components.player_control then
+		if isObjectType(obj,"PlayerSpaceship") then
 			gmPlayer = obj
 			break
 		end
@@ -496,39 +569,6 @@ function GMSpawnsEnemies()
 		enemy:orderAttack(gmPlayer)
 	end
 end
-function turnOnDiagnostic()
--- Diagnostic enable/disable buttons on GM screen
-	diagnostic = true
-	removeGMFunction(GMDiagnosticOn)
-	addGMFunction(_("buttonGM", "Turn Off Diagnostic"),turnOffDiagnostic)
-end
-function turnOffDiagnostic()
-	diagnostic = false
-	removeGMFunction(GMDiagnosticOff)
-	addGMFunction(_("buttonGM", "Turn On Diagnostic"),turnOnDiagnostic)
-end
-
-------- In game GM buttons to change the delay between waves -------
--- Default is normal, so the fist button switches from a normal delay to a slow delay.
--- The slow delay is used for typical mission testing when the tester does not wish to
--- spend all their time fighting off enemies.
--- The second button switches from slow to fast. This facilitates testing the enemy
--- spawning routines. The third button goes from fast to normal. 
-function delayNormalToSlow()
-	interWave = 600
-	removeGMFunction(GMDelayNormalToSlow)
-	addGMFunction(GMDelaySlowToFast,delaySlowToFast)
-end
-function delaySlowToFast()
-	interwave = 20
-	removeGMFunction(GMDelaySlowToFast)
-	addGMFunction(GMDelayFastToNormal,delayFastToNormal)
-end
-function delayFastToNormal()
-	interwave = default_interwave_interval
-	removeGMFunction(GMDelayFastToNormal)
-	addGMFunction(GMDelayNormalToSlow,delayNormalToSlow)
-end
 -- dynamic universe functions: asteroids and nebulae in motion
 function setMovingNebulae()
 	movingNebulae = {}
@@ -541,9 +581,11 @@ function setMovingNebulae()
 		mNeb.travel = random(1,100)
 		table.insert(movingNebulae,mNeb)
 	end
-	plotN = moveNebulae
 end
-function moveNebulae(delta)
+function moveNebulae()
+	if movingNebulae == nil or #movingNebulae < 1 then
+		setMovingNebulae()
+	end
 	for nidx=1,#movingNebulae do
 		local mnx, mny = movingNebulae[nidx]:getPosition()
 		if mnx ~= nil and mny ~= nil then
@@ -600,9 +642,11 @@ function setMovingAsteroids()
 			table.insert(movingAsteroidList,mAst)
 		end
 	end
-	plotA = moveAsteroids
 end
-function moveAsteroids(delta)
+function moveAsteroids()
+	if movingAsteroidList == nil or #movingAsteroidList < 1 then
+		setMovingAsteroids()
+	end
 	local movingAsteroidCount = 0
 	for aidx, aObj in ipairs(movingAsteroidList) do
 		if aObj:isValid() then
@@ -650,9 +694,6 @@ function moveAsteroids(delta)
 				aObj.angle = aObj.angle + aObj.curve
 			end
 		end
-	end
-	if movingAsteroidCount < 1 then
-		setMovingAsteroids()
 	end
 end
 -- Organically (simulated asymetrically) grow stations from a central grid location
@@ -980,9 +1021,9 @@ function buildStations()
 	end
 	fx, fy = homeStation:getPosition()
 	ex, ey = targetEnemyStation:getPosition()
-	mnx = (fx+ex)/2
-	mny = (fy+ey)/2
-	Nebula():setPosition(mnx,mny)
+	mid_neb_x = (fx+ex)/2	--midpoint between home station and target enemy station x coordinate
+	mid_neb_y = (fy+ey)/2	--midpoint between home station and target enemy station y coordinate
+	Nebula():setPosition(mid_neb_x,mid_neb_y)
 	startingFriendlyStations = #friendlyStationList
 	startingNeutralStations = #stationList - #friendlyStationList
 	startingEnemyStations = #enemyStationList
@@ -3279,7 +3320,7 @@ function friendlyComms()
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
@@ -3669,16 +3710,29 @@ function pressureWaves(delta)
 	end
 	waveTimer = waveTimer - delta
 	if waveTimer < 0 then
-		local esx = nil
-		local esy = nil
-		local ntf = nil
-		local p = nil
-		local px = nil
-		local py = nil
-		local spx = nil
-		local spy = nil
-		local hsx = nil
-		local hsy = nil
+		local esx = nil	--enemy station x coordinate
+		local esy = nil	--enemy station y coordinate
+		local ntf = nil	--next task fleet
+		local p = nil	--player ship
+		local px = nil	--player ship x coordinate
+		local py = nil	--player ship y coordinate
+		local spx = nil	--spawn from player x delta coordinate
+		local spy = nil	--spawn from player y delta coordinate
+		local hsx = nil	--home station x coordinate
+		local hsy = nil	--home station y coordinate
+		for i,prod in ipairs(recurring_prods) do
+			if getScenarioTime() > prod.time and not prod.used then
+				jump_start = true
+				prod.used = true
+				break
+			end
+		end
+		local lo = 5 + difficulty * 4
+		local hi = 500 - difficulty * 100
+		local chance = math.max(lo,getPlayerShip(-1):getReputationPoints()/hi*100)
+		if jump_start then 
+			chance = math.max(chance,50)
+		end
 		waveSpawned = false
 		dangerValue = dangerValue + dangerIncrement
 		for i=1,#enemyStationList do
@@ -3688,10 +3742,12 @@ function pressureWaves(delta)
 					ntf = spawnEnemies(esx,esy,dangerValue,enemyStationList[i]:getFaction())
 					waveSpawned = true
 					if random(1,5) <= 3 then
-						p = closestPlayerTo(enemyStationList[i])
-						if p ~= nil then
-							for _, enemy in ipairs(ntf) do
-								enemy:orderAttack(p)
+						if random(1,100) < chance then
+							p = closestPlayerTo(enemyStationList[i])
+							if p ~= nil then
+								for _, enemy in ipairs(ntf) do
+									enemy:orderAttack(p)
+								end
 							end
 						end
 					else
@@ -3703,90 +3759,104 @@ function pressureWaves(delta)
 			end
 		end
 		if random(1,5) <= 2 then
-			ntf = spawnEnemies(mnx,mny,dangerValue,targetEnemyStation:getFaction())
-			waveSpawned = true
-			if random(1,5) >= 4 then
-				for _, enemy in ipairs(ntf) do
-					enemy:orderAttack(homeStation)
+			if random(1,100) < chance then
+				ntf = spawnEnemies(mid_neb_x,mid_neb_y,dangerValue,targetEnemyStation:getFaction())
+				waveSpawned = true
+				if random(1,5) >= 4 then
+					for _, enemy in ipairs(ntf) do
+						enemy:orderAttack(homeStation)
+					end
 				end
 			end
 		end
 		if random(1,5) <= 3 then
-			p = closestPlayerTo(targetEnemyStation)
-			esx, esy = targetEnemyStation:getPosition()
-			px, py = p:getPosition()
-			ntf = spawnEnemies((esx+px)/2,(esy+py)/2,dangerValue/2,targetEnemyStation:getFaction())
-			waveSpawned = true
-			if random(1,5) <= 2 then
-				for _, enemy in ipairs(ntf) do
-					enemy:orderAttack(p)
+			if random(1,100) < chance then
+				p = closestPlayerTo(targetEnemyStation)
+				esx, esy = targetEnemyStation:getPosition()
+				px, py = p:getPosition()
+				ntf = spawnEnemies((esx+px)/2,(esy+py)/2,dangerValue/2,targetEnemyStation:getFaction())
+				waveSpawned = true
+				if random(1,5) <= 2 then
+					for _, enemy in ipairs(ntf) do
+						enemy:orderAttack(p)
+					end
 				end
 			end
 		end
 		if random(1,5) <= 2 then
-			p = closestPlayerTo(targetEnemyStation)
-			px, py = p:getPosition()
-			spx, spy = vectorFromAngle(random(0,360), random(30000, 40000))
-			ntf = spawnEnemies(px+spx, py+spy, dangerValue/2, targetEnemyStation:getFaction())
-			waveSpawned = true
-			for _, enemy in ipairs(ntf) do
-				enemy:orderAttack(p)
-			end
-		end
-		if random(1,5) <= 1 then
-			if random(1,5) <= 3 then
-				ntf = vectorOn(homeStation,dangerValue,random(30000,40000))
-				local avg_impulse = 0
-				for _, enemy in ipairs(ntf) do
-					avg_impulse = avg_impulse + enemy:getImpulseMaxSpeed()
-				end
-				avg_impulse = avg_impulse/#ntf
-				for _, enemy in ipairs(ntf) do
-					enemy:setImpulseMaxSpeed(avg_impulse)
-				end
-			else
-				hsx, hsy = homeStation:getPosition()
-				spx, spy = vectorFromAngle(random(0,360),random(30000,40000))
-				ntf = spawnEnemies(hsx+spx,hsy+spy,dangerValue,targetEnemyStation:getFaction())
-			end
-			waveSpawned = true
-		end
-		if random(1,5) <= 1 then
-			p = closestPlayerTo(targetEnemyStation)
-			px, py = p:getPosition()
-			local nol = getObjectsInRadius(px, py, 30000)
-			local nearbyNebulae = {}
-			for _, obj in ipairs(nol) do
-				if string.find(obj:getTypeName(),"Nebula") then
-					table.insert(nearbyNebulae,obj)
-				end
-			end
-			if #nearbyNebulae > 0 then
-				local nx, ny = nearbyNebulae[math.random(1,#nearbyNebulae)]:getPosition()
-				ntf = spawnEnemies(nx,ny,dangerValue,targetEnemyStation:getFaction())
+			if random(1,100) < chance then
+				p = closestPlayerTo(targetEnemyStation)
+				px, py = p:getPosition()
+				spx, spy = vectorFromAngle(random(0,360), random(30000, 40000))
+				ntf = spawnEnemies(px+spx, py+spy, dangerValue/2, targetEnemyStation:getFaction())
 				waveSpawned = true
 				for _, enemy in ipairs(ntf) do
 					enemy:orderAttack(p)
 				end
 			end
 		end
-		if not waveSpawned then
-			p = closestPlayerTo(targetEnemyStation)
-			px, py = p:getPosition()
-			local spawnAngle = random(0,360)
-			spx, spy = vectorFromAngle(spawnAngle, random(15000,20000))
-			ntf = spawnEnemies(px+spx, py+spy, dangerValue, targetEnemyStation:getFaction())
-			spawnAngle = spawnAngle + random(60,180)
-			spx, spy = vectorFromAngle(spawnAngle, random(20000,25000))
-			ntf = spawnEnemies(px+spx, py+spy, dangerValue, targetEnemyStation:getFaction())
-			for _, enemy in ipairs(ntf) do
-				enemy:orderFlyTowards(px, py)
+		if random(1,5) <= 1 then
+			if random(1,100) < chance then
+				if random(1,5) <= 3 then
+					ntf = vectorOn(homeStation,dangerValue,random(30000,40000))
+					local avg_impulse = 0
+					for _, enemy in ipairs(ntf) do
+						avg_impulse = avg_impulse + enemy:getImpulseMaxSpeed()
+					end
+					avg_impulse = avg_impulse/#ntf
+					for _, enemy in ipairs(ntf) do
+						enemy:setImpulseMaxSpeed(avg_impulse)
+					end
+				else
+					hsx, hsy = homeStation:getPosition()
+					spx, spy = vectorFromAngle(random(0,360),random(30000,40000))
+					ntf = spawnEnemies(hsx+spx,hsy+spy,dangerValue,targetEnemyStation:getFaction())
+				end
+				waveSpawned = true
 			end
-			spawnAngle = spawnAngle + random(60,120)
-			spx, spy = vectorFromAngle(spawnAngle, random(25000,30000))
-			ntf = spawnEnemies(px+spx, py+spy, dangerValue, targetEnemyStation:getFaction())
-			for _, enemy in ipairs(ntf) do
-				enemy:orderAttack(p)
+		end
+		if random(1,5) <= 1 then
+			if random(1,100) < chance then
+				p = closestPlayerTo(targetEnemyStation)
+				px, py = p:getPosition()
+				local nol = getObjectsInRadius(px, py, 30000)
+				local nearbyNebulae = {}
+				for _, obj in ipairs(nol) do
+					if string.find(obj:getTypeName(),"Nebula") then
+						table.insert(nearbyNebulae,obj)
+					end
+				end
+				if #nearbyNebulae > 0 then
+					local nx, ny = nearbyNebulae[math.random(1,#nearbyNebulae)]:getPosition()
+					ntf = spawnEnemies(nx,ny,dangerValue,targetEnemyStation:getFaction())
+					waveSpawned = true
+					for _, enemy in ipairs(ntf) do
+						enemy:orderAttack(p)
+					end
+				end
+			end
+		end
+		if waveSpawned then
+			jump_start = false
+		else
+			if random(1,100) < chance then
+				p = closestPlayerTo(targetEnemyStation)
+				px, py = p:getPosition()
+				local spawnAngle = random(0,360)
+				spx, spy = vectorFromAngle(spawnAngle, random(15000,20000))
+				ntf = spawnEnemies(px+spx, py+spy, dangerValue, targetEnemyStation:getFaction())
+				spawnAngle = spawnAngle + random(60,180)
+				spx, spy = vectorFromAngle(spawnAngle, random(20000,25000))
+				ntf = spawnEnemies(px+spx, py+spy, dangerValue, targetEnemyStation:getFaction())
+				for _, enemy in ipairs(ntf) do
+					enemy:orderFlyTowards(px, py)
+				end
+				spawnAngle = spawnAngle + random(60,120)
+				spx, spy = vectorFromAngle(spawnAngle, random(25000,30000))
+				ntf = spawnEnemies(px+spx, py+spy, dangerValue, targetEnemyStation:getFaction())
+				for _, enemy in ipairs(ntf) do
+					enemy:orderAttack(p)
+				end
 			end
 		end
 		waveTimer = delta + interWave + dangerValue*10 + random(1,60)
@@ -5172,11 +5242,8 @@ function helpfulWarning(delta)
 					for index, obj in ipairs(stationList[i]:getObjectsInRange(30000)) do
 						if obj:isEnemy(p) then
 							local detected_enemy_ship = false
-							local obj_type_name = obj.typeName
-							if obj_type_name ~= nil then
-								if string.find(obj_type_name,"CpuShip") then
-									detected_enemy_ship = true
-								end
+							if isObjectType(obj,"CpuShip") then
+								detected_enemy_ship = true
 							end
 							--tempObjType = obj:getTypeName()
 							--if not string.find(tempObjType,"Station") then
@@ -5385,7 +5452,7 @@ function vectorOn(obj,danger,radius,angle,list)
 		danger = 1
 	end
 	if radius == nil then
-		if obj.components.player_control then
+		if isObjectType(obj,"PlayerSpaceship") then
 			radius = obj:getLongRangeRadarRange()
 		else
 			radius = 30000
@@ -5680,10 +5747,12 @@ function setPlayers()
 					pobj.autoCoolant = false
 					pobj:setWarpDrive(true)
 				else
-					pobj:setCallSign(tableSelectRandom(player_ship_names["Leftovers"]))
-					pobj.shipScore = 24
-					pobj.maxCargo = 5
-					pobj:setWarpDrive(true)
+					if pobj.shipScore == nil then
+						pobj:setCallSign(tableSelectRandom(player_ship_names["Leftovers"]))
+						pobj.shipScore = 24
+						pobj.maxCargo = 5
+						pobj:setWarpDrive(true)
+					end
 				end
 				if pobj.cargo == nil then
 					pobj.cargo = pobj.maxCargo
@@ -6184,7 +6253,7 @@ function endStatistics()
 	gMsg = string.format(_("msgMainscreen", "Stations: %i\t survived: %i\t destroyed: %i"),(startingFriendlyStations + startingNeutralStations),survivedStations,destroyedStations)
 	gMsg = gMsg .. string.format(_("msgMainscreen", "\nFriendly Stations: %i\t survived: %i\t destroyed: %i"),startingFriendlyStations,survivedFriendlyStations,destroyedFriendlyStations)
 	gMsg = gMsg .. string.format(_("msgMainscreen", "\nNeutral Stations: %i\t survived: %i\t destroyed: %i"),startingNeutralStations,survivedNeutralStations,destroyedNeutralStations)
-	gMsg = gMsg .. string.format(_("msgMainscreen", "\n\n\n\nEnemy Stations: %i\t survived: %i\t destroyed: %i"),startingEnemyStations,enemyStationsSurvived,enemyStationsSurvived)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "\n\n\n\nEnemy Stations: %i\t survived: %i\t destroyed: %i"),startingEnemyStations,enemyStationsSurvived,destroyedEnemyStations)
 --	gMsg = gMsg .. string.format(_("msgMainscreen", "\n\n\n\nRequired missions completed: %i"),requiredMissionCount)
 	rankVal = survivedFriendlyStations/startingFriendlyStations*.6 + survivedNeutralStations/startingNeutralStations*.2 + (1-enemyStationsSurvived/startingEnemyStations)*.2
 	if missionVictory then
@@ -6368,9 +6437,9 @@ function update(delta)
 		setPlayers()
 		return
 	end
-	if GMSpawnEnemyGroup == nil then
-		GMSpawnEnemyGroup = _("buttonGM", "Spawn Enemies")
-		addGMFunction(GMSpawnEnemyGroup,GMSpawnsEnemies)
+	if mainGMButtons == mainGMButtonsDuringPause then
+		mainGMButtons = mainGMButtonsAfterPause
+		mainGMButtons()
 	end
 	if difficultySpecificSetup == nil then
 		difficultySpecificSetup = "done"
@@ -6434,12 +6503,8 @@ function update(delta)
 		plot4(delta)
 	end
 	healthCheck(delta)
-	if plotA ~= nil then	--asteroids in motion
-		plotA(delta)
-	end
-	if plotN ~= nil then	--nebulae in motion
-		plotN(delta)
-	end
+	moveAsteroids()
+	moveNebulae()
 	transportPlot(delta)
 	if plot3 ~= nil then	--intelligence over time
 		plot3(delta)
