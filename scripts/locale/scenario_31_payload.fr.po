@@ -1,0 +1,476 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Empty Epsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: muerteFR\n"
+"Language-Team: muerteFR\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+# Scenario name
+msgid "Push The Payload"
+msgstr "Pousser la charge utile"
+
+# Scenario description
+msgid ""
+"Deliver the payload of flowers to the opposing station in order to end the "
+"war\n"
+"\n"
+"Duration: As little as 30 mins on default settings\n"
+"Player ships: 1\n"
+"\n"
+"Author: Chris Sibbitt and Crew\n"
+"Created: Jan2025\n"
+"Feedback: USN Discord: https://discord.gg/7Kr32ezJFF"
+msgstr ""
+"Deliver the payload of flowers to the opposing station in order to end the "
+"war\n"
+"\n"
+"Duration: As little as 30 mins on default settings\n"
+"Player ships: 1\n"
+"\n"
+"Author: Chris Sibbitt and Crew\n"
+"Created: Jan2025\n"
+"Feedback: USN Discord: https://discord.gg/7Kr32ezJFF\n"
+"\n"
+"\n"
+"\n"
+"Livrez la cargaison de fleurs à la station adverse pour mettre fin à la "
+"guerre.\n"
+"\n"
+"Durée : 30 minutes maximum avec les paramètres par défaut.\n"
+"Nombre de vaisseaux : 1."
+
+# Scenario setting
+msgctxt "setting"
+msgid "WaveRandomNess"
+msgstr "Variation des vagues"
+
+msgctxt "setting"
+msgid "Random variation in wave timing. Default is 0.25"
+msgstr ""
+"Variation aléatoire du déclenchement des vagues.\n"
+"La valeur par défaut est 0,25."
+
+msgctxt "WaveRandomNess"
+msgid "0"
+msgstr "0"
+
+msgctxt "WaveRandomNess"
+msgid "Random variation in wave timing."
+msgstr "Variation aléatoire du déclenchement des vagues."
+
+msgctxt "WaveRandomNess"
+msgid "0.1"
+msgstr "0.1"
+
+msgctxt "WaveRandomNess"
+msgid "0.25"
+msgstr "0.25"
+
+msgctxt "WaveRandomNess"
+msgid "Random variation in wave timing. (Default)"
+msgstr ""
+"Variation aléatoire du déclenchement des vagues.\n"
+"Valeur par défaut."
+
+msgctxt "WaveRandomNess"
+msgid "0.5"
+msgstr "0.5"
+
+# Scenario setting
+msgctxt "setting"
+msgid "WaveTimer"
+msgstr "Affichage minuterie"
+
+msgctxt "setting"
+msgid "Display a wave timer in the Science/Ops console. Default is Disabled"
+msgstr ""
+"Affiche une minuterie du déclenchement des vagues sur les consoles Science/"
+"Opérations.\n"
+"Option désactivée par défaut."
+
+msgctxt "WaveTimer"
+msgid "Disabled"
+msgstr "Désactivée"
+
+msgctxt "WaveTimer"
+msgid "No visible wave timer (Default)"
+msgstr ""
+"Aucune minuterie des vagues visible.\n"
+"Valeur par défaut."
+
+msgctxt "WaveTimer"
+msgid "Enabled"
+msgstr "Activée"
+
+msgctxt "WaveTimer"
+msgid "Display a wave timer in the Science/Ops console"
+msgstr "Affiche une minuterie des vagues dans les consoles Science/Opérations."
+
+# Scenario setting
+msgctxt "setting"
+msgid "Resistance"
+msgstr "Resistance"
+
+msgctxt "setting"
+msgid "Resistance level. Default is Normal"
+msgstr ""
+"Niveau de résistance.\n"
+"La valeur par défaut est Normale."
+
+msgctxt "Resistance"
+msgid "Easy"
+msgstr "Facile"
+
+msgctxt "Resistance"
+msgid "Normal"
+msgstr "Normale"
+
+msgctxt "Resistance"
+msgid "Normal (Default)"
+msgstr ""
+"Résistance normale.\n"
+"Valeur par défaut."
+
+msgctxt "Resistance"
+msgid "Hard"
+msgstr "Difficile"
+
+msgctxt "Resistance"
+msgid "Nightmare"
+msgstr "Cauchemardesque"
+
+# Scenario setting
+msgctxt "setting"
+msgid "TimeLimit"
+msgstr "Limite de temps"
+
+msgctxt "setting"
+msgid "Time limit before Kraylor victory. Default is 0 (no time limit)"
+msgstr ""
+"Limite de temps avant la victoire des Kraylors.\n"
+"La valeur par défaut est 0 (aucune limite de temps)."
+
+msgctxt "TimeLimit"
+msgid "0"
+msgstr "0 mn"
+
+msgctxt "TimeLimit"
+msgid "No time limit (Default)"
+msgstr ""
+"Aucune limite de temps.\n"
+"Valeur par défaut."
+
+msgctxt "TimeLimit"
+msgid "15"
+msgstr "15 mn"
+
+msgctxt "TimeLimit"
+msgid "15 mins"
+msgstr "Partie limitée à 15 minutes."
+
+msgctxt "TimeLimit"
+msgid "30"
+msgstr "30 mn"
+
+msgctxt "TimeLimit"
+msgid "30 mins"
+msgstr "Partie limitée à 30 minutes."
+
+msgctxt "TimeLimit"
+msgid "60"
+msgstr "60 mn"
+
+msgctxt "TimeLimit"
+msgid "1 hour"
+msgstr "Partie limitée à 1 heure."
+
+msgctxt "TimeLimit"
+msgid "90"
+msgstr "90 mn"
+
+msgctxt "TimeLimit"
+msgid "1.5 hours"
+msgstr "Partie limitée à 1 heure et demi."
+
+msgctxt "TimeLimit"
+msgid "120"
+msgstr "120 mn"
+
+msgctxt "TimeLimit"
+msgid "2 hours"
+msgstr "Partie limitée à 2 heures."
+
+msgctxt "TimeLimit"
+msgid "180"
+msgstr "180 mn"
+
+msgctxt "TimeLimit"
+msgid "3 hours"
+msgstr "Partie limitée à 3 heures."
+
+# Scenario setting
+msgctxt "setting"
+msgid "FieldSize"
+msgstr "Taille du champ"
+
+msgctxt "setting"
+msgid ""
+"Distance between factions stations. Affects difficulty and time. Default is "
+"Medium"
+msgstr ""
+"Distance entre les stations des différentes factions.\n"
+"Affecte la difficulté et le temps.\n"
+"La valeur par défaut est Moyenne."
+
+msgctxt "FieldSize"
+msgid "50000"
+msgstr "50000"
+
+msgctxt "FieldSize"
+msgid "Tiny field size"
+msgstr "Tout petit terrain."
+
+msgctxt "FieldSize"
+msgid "75000"
+msgstr "75000"
+
+msgctxt "FieldSize"
+msgid "Small field size"
+msgstr "Petit terrain."
+
+msgctxt "FieldSize"
+msgid "100000"
+msgstr "100000"
+
+msgctxt "FieldSize"
+msgid "Medium field size (Default)"
+msgstr ""
+"Terrain de taille moyenne.\n"
+"Valeur par défaut."
+
+msgctxt "FieldSize"
+msgid "150000"
+msgstr "150000"
+
+msgctxt "FieldSize"
+msgid "Large field size"
+msgstr "Grand terrain."
+
+msgctxt "FieldSize"
+msgid "200000"
+msgstr "200000"
+
+msgctxt "FieldSize"
+msgid "Extra Large"
+msgstr "Très grand terrain."
+
+#: scripts/scenario_31_payload.lua:57
+msgctxt "mission"
+msgid "Your Stn"
+msgstr "Station de base"
+
+#: scripts/scenario_31_payload.lua:66
+msgctxt "mission"
+msgid "Kraylor Stn"
+msgstr "Station Kraylor"
+
+#: scripts/scenario_31_payload.lua:171
+msgctxt "mission"
+msgid ""
+"The war with the Kraylor has been at a standstill for decades.\n"
+"\n"
+"Our scientists have discovered an alien artifact. Long range scans\n"
+"indicate that it is a bouquet of ancient flowers.\n"
+"\n"
+"Bring the flowers to the enemy station as a gesture of good faith\n"
+"in order to end this war. Scan the alien artifact and stay close to it.\n"
+"\n"
+"The artifact is located in Sector "
+msgstr ""
+"La guerre contre les Kraylors est au point mort depuis des décennies.\n"
+"\n"
+"Nos scientifiques ont découvert un artefact extraterrestre. Des analyses "
+"longue distance indiquent qu'il s'agit d'un bouquet de fleurs anciennes.\n"
+"\n"
+"Votre mission : Analysez l'artefact extraterrestre et apportez les fleurs à "
+"la station ennemie en signe de bonne foi afin de mettre fin à cette guerre.\n"
+"L'artefact se trouve dans le Secteur "
+
+#: scripts/scenario_31_payload.lua:303
+msgctxt "artifacts"
+msgid "Something to salvage"
+msgstr "Quelque chose à sauver"
+
+#: scripts/scenario_31_payload.lua:303
+msgctxt "artifacts"
+msgid "It looks like a "
+msgstr "Cela ressemble à un "
+
+#: scripts/scenario_31_payload.lua:310
+msgctxt "artifacts"
+msgid "Picked up a "
+msgstr "Nous avons ramassé un "
+
+#: scripts/scenario_31_payload.lua:378
+#, lua-format
+msgctxt "station-comms"
+msgid "We sell %s for %d"
+msgstr "Nous vendons %s pour %d rép."
+
+#: scripts/scenario_31_payload.lua:382
+msgctxt "station-comms"
+msgid "You need?"
+msgstr "De quoi avez-vous besoin ?"
+
+#: scripts/scenario_31_payload.lua:384
+#, lua-format
+msgctxt "station-comms"
+msgid "Buy full complement of %s (%d rep)"
+msgstr "Acheter le lot complet de %s (%d rép)"
+
+#: scripts/scenario_31_payload.lua:388
+#, lua-format
+msgctxt "station-comms"
+msgid "You have purchased a full complement of %s."
+msgstr "Vous avez acheté un lot complet de %s."
+
+#: scripts/scenario_31_payload.lua:390
+msgctxt "station-comms"
+msgid "You do not have enough reputation points."
+msgstr "Vous n'avez pas assez de points de réputation."
+
+#: scripts/scenario_31_payload.lua:394
+msgctxt "station-comms"
+msgid "Gossip with the locals about salvage"
+msgstr "Potins avec les locaux sur le sauvetage"
+
+#: scripts/scenario_31_payload.lua:399
+#, lua-format
+msgctxt "station-comms"
+msgid "We've heard about some shiny things in sector %s."
+msgstr ""
+"Nous avons entendu parler de certains objets brillants dans le secteur %s."
+
+#: scripts/scenario_31_payload.lua:401
+msgctxt "station-comms"
+msgid "No one seems to know of any more salvage to be had."
+msgstr "Personne ne semble connaître d’autres moyens de sauvetage."
+
+#: scripts/scenario_31_payload.lua:545
+msgctxt "payload-comms"
+msgid "What can I do for you?"
+msgstr "Que puis-je faire pour vous ?"
+
+#: scripts/scenario_31_payload.lua:546
+msgctxt "payload-comms"
+msgid "Recalculate route"
+msgstr "Recalculer l'itinéraire"
+
+#: scripts/scenario_31_payload.lua:548
+msgctxt "payload-comms"
+msgid "Route recalculated."
+msgstr "Itinéraire recalculé."
+
+#: scripts/scenario_31_payload.lua:551
+msgctxt "payload-comms"
+msgid "No target set for the payload ship."
+msgstr "Aucun objectif n'a été fixé pour le vaisseau de charge utile."
+
+#: scripts/scenario_31_payload.lua:708 scripts/scenario_31_payload.lua:709
+msgctxt "payload-comms"
+msgid "You are out of time!"
+msgstr "Vous n'avez plus de temps !"
+
+#: scripts/scenario_31_payload.lua:722
+msgctxt "payload-comms"
+msgid "You need to be closer to the Payload to guide it."
+msgstr "Vous devez être plus proche de la charge utile pour la guider."
+
+#: scripts/scenario_31_payload.lua:727
+#, lua-format
+msgctxt "payload-comms"
+msgid ""
+"Must be clear of enemies before the Payload can move. The enemy has %d ships "
+"nearby."
+msgstr ""
+"La charge utile doit être éloignée des ennemis avant de pouvoir se déplacer. "
+"L'ennemi a %d vaisseaux à proximité."
+
+#: scripts/scenario_31_payload.lua:758
+msgctxt "payload-comms"
+msgid "DANGER, The payload is moving towards the Human Navy station!"
+msgstr ""
+"DANGER, la charge utile se dirige vers la station de la Marine humaine !"
+
+#: scripts/scenario_31_payload.lua:760
+msgctxt "payload-comms"
+msgid "Payload is being delivered to the Kraylor station."
+msgstr "La charge utile est en cours de livraison à la station Kraylor."
+
+#: scripts/scenario_31_payload.lua:808
+msgctxt "wave-timer"
+msgid "Next wave: "
+msgstr "Prochaine vague : "
+
+#: scripts/scenario_31_payload.lua:813 scripts/scenario_31_payload.lua:814
+msgctxt "wave-timer"
+msgid "Next wave:"
+msgstr "Prochaine vague :"
+
+#: scripts/scenario_31_payload.lua:838
+msgctxt "payload-comms"
+msgid "Payload has stopped moving."
+msgstr "La charge utile a cessé de bouger."
+
+#: scripts/scenario_31_payload.lua:908
+#, lua-format
+msgctxt "gm-buttons"
+msgid "Wave Time +15 (%ds)"
+msgstr "Vague Délai +15 (%ds)"
+
+#: scripts/scenario_31_payload.lua:909
+#, lua-format
+msgctxt "gm-buttons"
+msgid "Wave Time -15 (%ds)"
+msgstr "Vague Délai -15 (%ds)"
+
+#: scripts/scenario_31_payload.lua:910
+#, lua-format
+msgctxt "gm-buttons"
+msgid "Wave Size + (%d)"
+msgstr "Taille de la vague + (%d)"
+
+#: scripts/scenario_31_payload.lua:911
+#, lua-format
+msgctxt "gm-buttons"
+msgid "Wave Size - (%d)"
+msgstr "Taille de la vague - (%d)"
+
+#: scripts/scenario_31_payload.lua:912
+msgctxt "gm-buttons"
+msgid "Kraylor Wave"
+msgstr "Vague Kraylor"
+
+#: scripts/scenario_31_payload.lua:913
+msgctxt "gm-buttons"
+msgid "Human Wave"
+msgstr "Vague Humaine"
+
+#: scripts/scenario_31_payload.lua:914
+msgctxt "gm-buttons"
+msgid "Both Waves"
+msgstr "Les 2"
+
+#: scripts/scenario_31_payload.lua:915
+msgctxt "gm-buttons"
+msgid "New Payload Route"
+msgstr "Nouvelle route pour la charge utile"
