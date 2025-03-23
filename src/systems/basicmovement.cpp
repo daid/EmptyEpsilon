@@ -22,7 +22,8 @@ void BasicMovementSystem::update(float delta)
             orbit.center = tt->getPosition();
 
         float angle = vec2ToAngle(transform.getPosition() - orbit.center);
-        angle += delta / orbit.time * 360.0f;
+        if (orbit.time != 0)
+            angle += delta / orbit.time * 360.0f;
         transform.setPositionNoReplication(orbit.center + vec2FromAngle(angle) * orbit.distance);
     }
 
