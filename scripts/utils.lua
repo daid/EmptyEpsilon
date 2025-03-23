@@ -385,6 +385,8 @@ function isObjectType(obj,typ,qualifier)
 					return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
 				elseif typ == "Zone" then
 					return obj.components.zone
+				elseif typ == "WormHole" then
+					return obj.components.gravity and obj.components.billboard_render.texture == "wormHole3d.png"
 				else
 					if qualifier == "MovingMissile" then
 						if typ == "HomingMissile" or typ == "HVLI" or typ == "Nuke" or typ == "EMPMissile" then
