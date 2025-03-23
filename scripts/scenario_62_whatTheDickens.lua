@@ -14,10 +14,12 @@
 require("utils.lua")
 --	Initialization functions
 function init()
-	scenario_version = "2.0.0"
-	ee_version = "2023.06.17"
+	scenario_version = "2.0.1"
+	ee_version = "2024.12.08"
 	print(string.format("    ----    Scenario: What the Dickens    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
-	print(_VERSION)
+	if _VERSION ~= nil then
+		print("Lua version:",_VERSION)
+	end
 	diagnostic = false
 	setSettings()
 	stationFaction = "Human Navy"
@@ -279,7 +281,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 			local ax = x + math.cos(radialPoint / 180 * math.pi) * pointDist
 			local ay = y + math.sin(radialPoint / 180 * math.pi) * pointDist
 			local obj = object_type():setPosition(ax,ay)
-			if obj.typeName == "Asteroid" then
+			if isObjectType(obj,"Asteroid") then
 				obj:setSize(random(10,800))
 				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
 				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
@@ -291,7 +293,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 			local ax = x + math.cos(radialPoint / 180 * math.pi) * pointDist
 			local ay = y + math.sin(radialPoint / 180 * math.pi) * pointDist
 			local obj = object_type():setPosition(ax,ay)
-			if obj.typeName == "Asteroid" then
+			if isObjectType(obj,"Asteroid") then
 				obj:setSize(random(10,800))
 				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
 				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
@@ -304,7 +306,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 			local ax = x + math.cos(radialPoint / 180 * math.pi) * pointDist
 			local ay = y + math.sin(radialPoint / 180 * math.pi) * pointDist
 			local obj = object_type():setPosition(ax,ay)
-			if obj.typeName == "Asteroid" then
+			if isObjectType(obj,"Asteroid") then
 				obj:setSize(random(10,800))
 				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
 				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
