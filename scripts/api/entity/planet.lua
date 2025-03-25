@@ -131,9 +131,16 @@ function Entity:setAxialRotationTime(rotation_time)
     end
     return self
 end
---- Sets a SpaceObject around which this Planet orbits, as well as its orbital period in orbital degrees per tick.
---- Example: moon:setOrbit(planet, 20)
+--- Sets a SpaceObject around which this SpaceObject orbits, as well as its orbital period in seconds. Setting time to 0 will stop movement, while still being locked in orbit.
+--- An orbit can be cancelled by setting the target to nil
+--- Example:
+--- moon:setOrbit(planet, 20)
+--- moon:setOrbit(nil) -- undo orbiting
 function Entity:setOrbit(target, time)
+    if target == nil then
+        self.components.orbit = nil
+        return self
+    end
     local x0, y0 = self:getPosition()
     local x1, y1 = target:getPosition()
     local xd, yd = (x1 - x0), (y1 - y0)
