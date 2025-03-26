@@ -1091,7 +1091,7 @@ function DroneStationGoAggro(self, instigator)
   if self.spawns_left > 0 then
     self.spawns_left = self.spawns_left - 1
     local x, y = self:getPosition()
-    local spx, spy = vectorFromAngle(irandom(0, 360), 1500)
+    local spx, spy = vectorFromAngle(random(0, 360), 1500)
     local defenders = SpawnEnemies(x + spx, y + spy, random(.8,1.2), "Ghosts")
     for idx, ship in ipairs(defenders) do
       table.insert(Defence_station.ghost_defenders, ship)
@@ -1190,7 +1190,7 @@ end
 
 function SpawnHarrasment()
   local x, y = Player:getPosition()
-  local spx, spy = vectorFromAngle(irandom(0, 360), 40000)
+  local spx, spy = vectorFromAngle(random(0, 360), 40000)
 
   Defence_station.harass_enemies = SpawnEnemies(x + spx, y + spy, random(0.25,0.5), "Exuari")
 
