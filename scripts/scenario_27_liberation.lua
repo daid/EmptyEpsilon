@@ -7,7 +7,6 @@
 -- Type: Replayable Mission
 -- Author: Xansta
 -- Setting[First]: Configures how long until the first major event occurs. The default is ten minutes. Shorter is harder. Longer is easier.
--- First[Seconds]: Ten seconds until the first major event occurs. This is used mainly for testing.
 -- First[Five]: Five minutes until the first major event occurs.
 -- First[Ten|Default]: Ten minutes until the first major event occurs.
 -- First[Fifteen]: Fifteen minutes until the first major event occurs.
@@ -19,24 +18,19 @@
 -- Enemies[Extreme]: Much stronger, many more enemies
 -- Enemies[Quixotic]: Insanely strong and/or inordinately large numbers of enemies
 -- Setting[Second]: Configures how long between the first event and the second event. The default is ten minutes. Shorter is harder. Longer is easier.
--- Second[Seconds]: Ten seconds between the first event and the second event. This is used mainly for testing.
--- Second[One]: One minute between the first event and the second event (test)
 -- Second[Five]: Five minutes between the first event and the second event.
 -- Second[Ten|Default]: Ten minutes between the first event and the second event.
 -- Second[Fifteen]: Fifteen minutes between the first event and the second event.
 -- Second[Twenty]: Twenty minutes between the first event and the second event.
 -- Setting[Third]: Configures how long between the 2nd and 3rd events. Default: 10. Combining 1st, 2nd and 3rd gives you overall scenario length (30 - 60 minutes).
--- Third[Seconds]: Ten seconds between 2nd and 3rd events. Mainly used for testing.
 -- Third[Five]: Five minutes between the 2nd and 3rd events.
 -- Third[Ten|Default]: Ten minutes between the 2nd and 3rd events.
 -- Third[Fifteen]: Fifteen minutes between the 2nd and 3rd events.
 -- Third[Twenty]: Twenty minutes between the 2nd and 3rd events.
 -- Setting[Cloak]: Degree of device cloaking mechanism
--- Cloak[None]: Device is not cloaked
 -- Cloak[Partial|Default]: Device is partially cloaked
 -- Cloak[Strong]: Device is mostly cloaked
 -- Cloak[Full]: Device is cloaked (but it's not perfect)
-
 
 ---- Leftover configuration options from testing
 -- First[Seconds]: Ten seconds until the first major event occurs. This is used mainly for testing.
@@ -56,11 +50,15 @@ require("comms_scenario_utility.lua")
 
 --	Initialization routines
 function init()
-	scenario_version = "1.0.0"
-	ee_version = "2024.08.09"
+	scenario_version = "1.0.1"
+	ee_version = "2024.12.08"
 	print(string.format("    ----    Scenario: Liberation Day    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
 	if _VERSION ~= nil then
 		print("Lua version:",_VERSION)
+	end
+	ECS = false
+	if createEntity then
+		ECS = true
 	end
 	spawn_enemy_diagnostic = false
 	control_code_diagnostic = false
@@ -70,6 +68,73 @@ function init()
 	mainGMButtons()
 	constructEnvironment()
 	onNewPlayerShip(setPlayers)
+end
+function isObjectType(obj,typ,qualifier)
+	if obj ~= nil and obj:isValid() then
+		if typ ~= nil then
+			if ECS then
+				if typ == "SpaceStation" then
+					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
+				elseif typ == "PlayerSpaceship" then
+					return obj.components.player_control
+				elseif typ == "ScanProbe" then
+					return obj.components.allow_radar_link
+				elseif typ == "CpuShip" then
+					return obj.ai_controller
+				elseif typ == "Asteroid" then
+					return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 7) == "Astroid"
+				elseif typ == "Nebula" then
+					return obj.components.nebula_renderer
+				elseif typ == "Planet" then
+					return obj.components.planet_render
+				elseif typ == "SupplyDrop" then
+					return obj.components.pickup and obj.components.radar_trace.icon == "radar/blip.png" and obj.components.radar_trace.color_by_faction
+				elseif typ == "BlackHole" then
+					return obj.components.gravity and obj.components.billboard_render.texture == "blackHole3d.png"
+				elseif typ == "WarpJammer" then
+					return obj.components.warp_jammer
+				elseif typ == "Mine" then
+					return obj.components.delayed_explode_on_touch and obj.components.constant_particle_emitter
+				elseif typ == "EMPMissile" then
+					return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explode_on_touch.damage_type == "emp"
+				elseif typ == "Nuke" then
+					return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
+				elseif typ == "Zone" then
+					return obj.components.zone
+				else
+					if qualifier == "MovingMissile" then
+						if typ == "HomingMissile" or typ == "HVLI" or typ == "Nuke" or typ == "EMPMissile" then
+							return obj.components.radar_trace.icon == "radar/missile.png"
+						else
+							return false
+						end
+					elseif qualifier == "SplashMissile" then
+						if typ == "Nuke" or typ == "EMPMissile" then
+							if obj.components.radar_trace.icon == "radar/missile.png" then
+								if typ == "Nuke" then
+									return obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
+								else	--EMP
+									return obj.components.explode_on_touch.damage_type == "emp"
+								end
+							else
+								return false
+							end
+						else
+							return false
+						end
+					else
+						return false
+					end
+				end
+			else
+				return obj.typeName == typ
+			end
+		else
+			return false
+		end
+	else
+		return false
+	end
 end
 function setPlayers()
 	for i,p in ipairs(getActivePlayerShips()) do
@@ -2024,7 +2089,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 					local ix, iy = item.obj:getPosition()
 					assert(type(item.dist)=="number",string.format("function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",i,type(item.dist)))
 					local comparison_dist = item.dist
-					if placing_station ~= nil and placing_station and item.obj.typeName == "SpaceStation" then
+					if placing_station ~= nil and placing_station and isObjectType(item.obj,"SpaceStation") then
 						comparison_dist = 12000
 					end
 					if distance(cx,cy,ix,iy) < (comparison_dist + new_buffer) then
@@ -2065,7 +2130,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 					local ix, iy = item.obj:getPosition()
 					assert(type(item.dist)=="number",string.format("function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",i,type(item.dist)))
 					local comparison_dist = item.dist
-					if placing_station ~= nil and placing_station and item.obj.typeName == "SpaceStation" then
+					if placing_station ~= nil and placing_station and isObjectType(item.obj,"SpaceStation") then
 						comparison_dist = 12000
 					end
 					if distance(cx,cy,ix,iy) < (comparison_dist + new_buffer) then
@@ -2100,7 +2165,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 					local ix, iy = item.obj:getPosition()
 					assert(type(item.dist)=="number",string.format("function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",i,type(item.dist)))
 					local comparison_dist = item.dist
-					if placing_station ~= nil and placing_station and item.obj.typeName == "SpaceStation" then
+					if placing_station ~= nil and placing_station and isObjectType(item.obj,"SpaceStation") then
 						comparison_dist = 12000
 					end
 					if distance(cx,cy,ix,iy) < (comparison_dist + new_buffer) then
@@ -2135,7 +2200,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 					local ix, iy = item.obj:getPosition()
 					assert(type(item.dist)=="number",string.format("function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",i,type(item.dist)))
 					local comparison_dist = item.dist
-					if placing_station ~= nil and placing_station and item.obj.typeName == "SpaceStation" then
+					if placing_station ~= nil and placing_station and isObjectType(item.obj,"SpaceStation") then
 						comparison_dist = 12000
 					end
 					if distance(cx,cy,ix,iy) < (comparison_dist + new_buffer) then
@@ -2439,7 +2504,7 @@ function placeWormHole(placement_area)
 			local wh = WormHole():setPosition(eo_x, eo_y):setTargetPosition(we_x, we_y)
 			wh:onTeleportation(function(self,transportee)
 				string.format("")
-				if transportee ~= nil and transportee:isValid() and transportee.typeName == "PlayerSpaceship" then
+				if transportee ~= nil and transportee:isValid() and isObjectType(transportee,"PlayerSpaceship") then
 					transportee:setEnergy(transportee:getMaxEnergy()/2)	--reduces if more than half, increases if less than half
 				end
 			end)
@@ -3234,7 +3299,7 @@ function finalNovaExplosion()
 							local chance = original_star_radius/rescue_star_radius
 							local roll = random(0,1)
 							if roll < chance then
-								if obj.typeName ~= "PlayerSpaceship" then
+								if not isObjectType(obj,"PlayerSpaceship") then
 									local ie_x, ie_y = obj:getPosition()
 									ExplosionEffect():setPosition(ie_x, ie_y):setSize(random(4000,6000)):setOnRadar(true)
 									if ie_x ~= nil then
@@ -3366,7 +3431,7 @@ function novaDemoArtifact()
 									local chance = original_star_radius/star_radius
 									local roll = random(0,1)
 									if roll < chance then
-										if obj.typeName ~= "PlayerSpaceship" then
+										if not isObjectType(obj,"PlayerSpaceship") then
 											local ie_x, ie_y = obj:getPosition()
 											ExplosionEffect():setPosition(ie_x, ie_y):setSize(random(4000,6000)):setOnRadar(true)
 											if ie_x ~= nil then
