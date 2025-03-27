@@ -111,6 +111,8 @@ public:
 
     //Engineering
     sp::io::Keybinding engineering_select_system[ShipSystem::COUNT];
+    sp::io::Keybinding engineering_select_system_next;
+    sp::io::Keybinding engineering_select_system_prev;
     sp::io::Keybinding engineering_set_power_000;
     sp::io::Keybinding engineering_set_power_030;
     sp::io::Keybinding engineering_set_power_050;
