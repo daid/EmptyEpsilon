@@ -1,7 +1,7 @@
 --- Script for random transports.
 --
 -- @script util_random_transports
-
+require("utils.lua")
 stationList = {}
 transportList = {}
 spawn_delay = 0
@@ -11,11 +11,13 @@ function vectorFromAngle(angle, length)
 end
 
 function init()
-    for idx, obj in ipairs(getEntitiesWithComponent("docking_bay")) do
-        if obj.components.impulse_engine == nil then
+    tmp = VisualAsteroid()
+    for idx, obj in ipairs(tmp:getObjectsInRange(100000)) do
+        if isObjectType(obj,"SpaceStation") then
             table.insert(stationList, obj)
         end
     end
+    tmp:destroy()
 end
 
 function randomStation()
