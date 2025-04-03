@@ -189,7 +189,8 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
     (new GuiAlertLevelSelect(this, ""))->setPosition(-20, -70, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
 
-    (new GuiCustomShipFunctions(this, CrewPosition::relayOfficer, ""))->setPosition(-20, 240, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
+    auto position = allow_comms ? CrewPosition::relayOfficer : CrewPosition::altRelay;
+    (new GuiCustomShipFunctions(this, position, ""))->setPosition(-20, 240, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     hacking_dialog = new GuiHackingDialog(this, "");
 
