@@ -36,10 +36,10 @@ msgstr ""
 "- Vaisseaux joueurs : 3 à plusieurs\n"
 "\n"
 "Mission : Trouvez et détruisez la station ennemie. Vous disposez pour cela "
-"de 3 vaisseaux : 1 Porte-avions et 2 Chasseurs amarrés au Porte-avions. "
-"Utilisez le Porte-avions pour parcourir de longues distances. Les Chasseurs "
+"de 3 vaisseaux : 1 Transporteur et 2 Chasseurs amarrés au transporteur. "
+"Utilisez le Transporteur pour parcourir de longues distances. Les Chasseurs "
 "disposent d'une gestion automatique du refroidissement et des réparations. "
-"Le Porte-avions fournit l'énergie et les réparations de coque aux Chasseurs. "
+"Le Transporteur fournit l'énergie et les réparations de coque aux Chasseurs. "
 "Le scénario randomise le terrain et l'ordre des mini-missions à chaque "
 "nouvelle partie.\n"
 "\n"
@@ -50,7 +50,7 @@ msgstr ""
 "- Traduction FR : Muerte (Avr. 25)\n"
 "Le scénario contient actuellement des bogues et est susceptible de ne pas "
 "fonctionner correctement. Muerte (Nov. 24)\n"
-"TRADUCTION EN COURS   81%    351/429\n"
+"TRADUCTION EN COURS   60%    261/429\n"
 "\n"
 "Communauté française et anglophone sur Discord USN https://discord.gg/"
 "TVxuxn7ZYW : feedback sur les scénarios, aide, sessions de jeu tous les we."
@@ -790,32 +790,28 @@ msgid ""
 "%s\n"
 "     %s: %i, %i"
 msgstr ""
-"%s\n"
-"     %s : x%i, %i rép l'unité."
 
 #: scripts/scenario_56_carrierTurret.lua:2171
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "onBoardTrade-comms"
 msgid ""
 "%s\n"
 "Current Cargo:"
 msgstr ""
-"%s\n"
+"\n"
 "Notre vaisseau :\n"
-"- Marchandises à bord : (quantité)"
+"- Marchandises à bord : (quantité)\n"
 
 #: scripts/scenario_56_carrierTurret.lua:2177
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "onBoardTrade-comms"
 msgid ""
 "%s\n"
 "     %s: %s"
-msgstr ""
-"%s\n"
-"     %s : x%s"
+msgstr "     %s : x%i\n"
 
 #: scripts/scenario_56_carrierTurret.lua:2182
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "onBoardTrade-comms"
 msgid ""
 "%s\n"
@@ -825,14 +821,12 @@ msgstr ""
 "     Vide"
 
 #: scripts/scenario_56_carrierTurret.lua:2185
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid ""
 "%s\n"
 "Available Space: %i, Available Reputation: %i\n"
-msgstr ""
-"%s\n"
-"- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
+msgstr "- Espace disponible : %i slots ; Réputation disponible : %i rép\n"
 
 #: scripts/scenario_56_carrierTurret.lua:2190
 #: scripts/scenario_56_carrierTurret.lua:3354
@@ -842,7 +836,7 @@ msgid "Buy one %s for %i reputation"
 msgstr "Acheter 1 %s pour %i rép"
 
 #: scripts/scenario_56_carrierTurret.lua:2191
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Reputation: %i"
 msgstr ""
@@ -851,7 +845,7 @@ msgstr ""
 "Coût : %i rép l'unité."
 
 #: scripts/scenario_56_carrierTurret.lua:2193
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid ""
 "%s\n"
@@ -863,7 +857,7 @@ msgstr ""
 
 #: scripts/scenario_56_carrierTurret.lua:2195
 #: scripts/scenario_56_carrierTurret.lua:2211
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid ""
 "%s\n"
@@ -874,7 +868,7 @@ msgstr ""
 "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_56_carrierTurret.lua:2197
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid ""
 "%s\n"
@@ -885,15 +879,15 @@ msgstr ""
 "Stock insuffisant dans la station pour pouvoir en acheter."
 
 #: scripts/scenario_56_carrierTurret.lua:2209
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "trade-comms"
 msgid ""
 "%s\n"
 "One %s purchased"
 msgstr ""
-"%s\n"
 "\n"
-"1 %s acheté."
+"\n"
+"1 marchandise achetée."
 
 #: scripts/scenario_56_carrierTurret.lua:2222
 #, lua-format
@@ -1062,14 +1056,14 @@ msgstr ""
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_56_carrierTurret.lua:2404
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "station-comms"
 msgid ""
 "%s\n"
 "Be aware that if enemies in the area get much closer, we will be too busy to "
 "conduct business with you."
 msgstr ""
-"%s\n"
+"\n"
 "Sachez que si les ennemis de la zone se rapprochent encore, nous serons trop "
 "occupés pour faire affaire avec vous."
 
@@ -1234,6 +1228,7 @@ msgstr ""
 "marqueur %d."
 
 #: scripts/scenario_56_carrierTurret.lua:2677
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Install tractor equipment"
 msgstr "Installer l'équipement de remorquage"
@@ -1277,12 +1272,13 @@ msgid "Tractor equipment transferred to engine room"
 msgstr "L'équipement de remorquage à été transféré à la salle des machines."
 
 #: scripts/scenario_56_carrierTurret.lua:2706
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "upgrade-comms"
 msgid "Give %s to Boris Eggleston for additional tube"
 msgstr "Donner 1 %s à Boris Eggleston pour le tube supplémentaire"
 
 #: scripts/scenario_56_carrierTurret.lua:2708
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "You already have the extra tube"
 msgstr ""
@@ -1292,6 +1288,7 @@ msgstr ""
 "Je ne peux rien faire de plus."
 
 #: scripts/scenario_56_carrierTurret.lua:2710
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "I can install it point to the front or to the rear. Which would you prefer?"
@@ -1301,41 +1298,47 @@ msgstr ""
 "tube en direction de l'avant ou de l'arrière. Que préférez-vous ?"
 
 #: scripts/scenario_56_carrierTurret.lua:2711
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Front"
-msgstr "Vers l'avant"
+msgstr "avant"
 
 #: scripts/scenario_56_carrierTurret.lua:2721
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "You now have an additional homing torpedo tube pointing forward"
 msgstr ""
-"...Après quelques minutes d'attente.\n"
+"Après quelques minutes d'attente…\n"
 "\n"
 "[Boris Eggleston]\n"
 "C'est fait, vous disposez désormais d'un tube lance-missiles à tête "
 "chercheuse supplémentaire pointant vers l'avant."
 
 #: scripts/scenario_56_carrierTurret.lua:2740
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Rear"
-msgstr "Vers l'arrière"
+msgstr "arrière"
 
 #: scripts/scenario_56_carrierTurret.lua:2751
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "You now have an additional homing torpedo tube pointing to the rear"
 msgstr ""
-"...Après quelques minutes d'attente.\n"
+"Après quelques minutes d'attente…\n"
 "\n"
 "[Boris Eggleston]\n"
 "C'est fait, vous disposez désormais d'un tube lance-missiles à tête "
 "chercheuse supplémentaire pointant vers l'arrière."
 
 #: scripts/scenario_56_carrierTurret.lua:2773
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "May I speak with Boris Eggleston?"
 msgstr "Pourrions-nous parler à Boris Eggleston ?"
 
 #: scripts/scenario_56_carrierTurret.lua:2774
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "[Boris Eggleston]\n"
@@ -1345,13 +1348,14 @@ msgstr ""
 "Oui c'est moi. Bonjour, que puis-je faire pour vous ?"
 
 #: scripts/scenario_56_carrierTurret.lua:2775
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Can you really add another weapons tube to our ship?"
 msgstr ""
 "Pouvez-vous vraiment rajouter un tube lance-missiles à notre vaisseau ?"
 
 #: scripts/scenario_56_carrierTurret.lua:2776
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "upgrade-comms"
 msgid "Definitely. But I'll need %s before I can do it"
 msgstr ""
@@ -1360,18 +1364,20 @@ msgstr ""
 "Mais avant toute chose, j'aurai besoin de %s pour pouvoir le monter."
 
 #: scripts/scenario_56_carrierTurret.lua:2798
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "upgrade-comms"
 msgid "Give %s and %s to Frederico Booker for upgrade"
 msgstr "Donner %s et %s à F. Booker pour la mise à niveau"
 
 #: scripts/scenario_56_carrierTurret.lua:2800
 #: scripts/scenario_56_carrierTurret.lua:2922
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "You already have the upgrade"
 msgstr "Que faites-vous là ? Vous avez déjà effectué cette mise à niveau."
 
 #: scripts/scenario_56_carrierTurret.lua:2817
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Your ship beam weapons now deal 50% more damage"
 msgstr ""
@@ -1382,6 +1388,7 @@ msgstr ""
 "laser infligeront 50% de dégâts supplémentaires."
 
 #: scripts/scenario_56_carrierTurret.lua:2820
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Your ship has no beam weapons to upgrade"
 msgstr ""
@@ -1389,12 +1396,13 @@ msgstr ""
 "Heu...votre vaisseau ne possède pas de faisceaux laser à améliorer."
 
 #: scripts/scenario_56_carrierTurret.lua:2825
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Talk to Frederico Booker"
 msgstr "Parler à Frederico Booker"
 
 #: scripts/scenario_56_carrierTurret.lua:2826
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "[Frederico Booker]\n"
@@ -1404,12 +1412,13 @@ msgstr ""
 "Bien le bonjour, équipage du %s. Qu'est-ce qui vous amène à moi sur %s ?"
 
 #: scripts/scenario_56_carrierTurret.lua:2827
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "Can you upgrade our beam weapons systems?"
 msgstr "Bonjour. Pouvez-vous améliorer nos faisceaux laser ?"
 
 #: scripts/scenario_56_carrierTurret.lua:2828
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "[Frederico Booker]\n"
@@ -1478,6 +1487,7 @@ msgstr ""
 "devrez pour cela leur fournir 1 composant à impulsion (impulse)."
 
 #: scripts/scenario_56_carrierTurret.lua:2874
+#, fuzzy
 msgctxt "orders-comms"
 msgid "Get spin upgrade from friendly station for impulse"
 msgstr ""
@@ -1485,12 +1495,13 @@ msgstr ""
 "amie pour 1 composant d'impulsion (impulse)."
 
 #: scripts/scenario_56_carrierTurret.lua:2886
+#, fuzzy
 msgctxt "intelligence-comms"
 msgid "Speak with Herbert Long"
 msgstr "Parler à Herbert Long"
 
 #: scripts/scenario_56_carrierTurret.lua:2887
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "intelligence-comms"
 msgid "Well, if it isn't the good ship, %s! What brings you to %s?"
 msgstr ""
@@ -1499,23 +1510,25 @@ msgstr ""
 "Qu'est-ce qui vous amène sur %s ?"
 
 #: scripts/scenario_56_carrierTurret.lua:2888
+#, fuzzy
 msgctxt "intelligence-comms"
 msgid "Please share your enemy base information"
 msgstr "Pourriez-vous partager vos informations sur la base ennemie ?"
 
 #: scripts/scenario_56_carrierTurret.lua:2889
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "intelligence-comms"
 msgid ""
 "That's old news. Wouldn't you rather know about %s's leadership woes or the "
 "latest readings on unique stellar phenomenae in the area?"
 msgstr ""
-"[Herbert Long]\n"
-"Ç'est seulement pour ça ? C'est une info périmée sans aucun intérêt.\n"
-"Ne préféreriez-vous pas connaître les problèmes de gestion de %s ou les "
-"derniers relevés sur le phénomène stellaire unique de la région ?"
+"Ça ? C'est une info périmée sans aucun intérêt.\n"
+"Ne préféreriez-vous pas connaître les problèmes de gestion de la direction "
+"de %s ou les derniers relevés sur les phénomènes stellaires uniques de la "
+"région ?"
 
 #: scripts/scenario_56_carrierTurret.lua:2890
+#, fuzzy
 msgctxt "intelligence-comms"
 msgid "No, I just want to know about the enemy base"
 msgstr "Merci mais juste vos infos sur la base ennemie svp !"
@@ -1536,7 +1549,7 @@ msgid "What is %s struggling with?"
 msgstr "À quels problèmes %s est-elle confrontée ?"
 
 #: scripts/scenario_56_carrierTurret.lua:2895
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "intelligence-comms"
 msgid ""
 "There are so many requests for transfers, %s may be understaffed by next "
@@ -1548,12 +1561,13 @@ msgstr ""
 "prochaine."
 
 #: scripts/scenario_56_carrierTurret.lua:2898
+#, fuzzy
 msgctxt "intelligence-comms"
 msgid "What kind of unique stellar phenomenae?"
 msgstr "Quel genre de phénomène stellaire unique ?"
 
 #: scripts/scenario_56_carrierTurret.lua:2899
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "intelligence-comms"
 msgid ""
 "While we were in %s spying on %s, we picked up readings in a nebula hinting "
@@ -1584,14 +1598,16 @@ msgstr ""
 "C'est fait, votre vitesse de manœuvre a été augmentée de 50%."
 
 #: scripts/scenario_56_carrierTurret.lua:2950
+#, fuzzy
 msgctxt "buttonRelay"
 msgid "Command Log"
-msgstr "Journal de bord"
+msgstr "Journal des directives"
 
 #: scripts/scenario_56_carrierTurret.lua:2955
+#, fuzzy
 msgctxt "buttonOperations"
 msgid "Command Log"
-msgstr "Journal de bord"
+msgstr "Journal des directives"
 
 #: scripts/scenario_56_carrierTurret.lua:2961
 #, fuzzy, lua-format
@@ -1608,7 +1624,7 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_56_carrierTurret.lua:2990
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-incCall"
 msgid ""
 "The Ktlitans keep sending harassing ships. We've decrypted some of their "
@@ -1625,10 +1641,12 @@ msgstr ""
 "réussir à identifier le nom de leur base principale, voire son emplacement.\n"
 "Trouvez et détruisez la station Ktlitienne %s. Vous pouvez répondre aux "
 "demandes des stations de la zone si vous le souhaitez, mais votre objectif "
-"principal est de détruire %s.\n"
-"Il est dans votre intérêt de protéger votre porte-avions, au risque de "
-"réduire considérablement la durée de votre mission. La station %s a été "
-"désignée comme votre base principale."
+"principal est de détruire %s. \n"
+"Vous êtes aux commandes de notre nouveau prototype de transporteur. Comme "
+"vous le savez, il dispose d’un arsenal très réduit mais permet à vos 2 "
+"autres vaisseaux de s'y amarrer et de se déplacer avec eux en vitesse "
+"lumière. Vous avez tout intérêt à le protéger au risque de réduire "
+"considérablement la durée de votre mission."
 
 #: scripts/scenario_56_carrierTurret.lua:2991
 #, lua-format
@@ -1766,10 +1784,10 @@ msgstr ""
 "mise à niveau de faisceaux laser."
 
 #: scripts/scenario_56_carrierTurret.lua:3099
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "centralcommand-incCall"
 msgid "%s (%s until intersection)"
-msgstr "%s (%s restantes jusqu'à la rencontre)"
+msgstr "%s (%s restantes jusqu'à l'impact)"
 
 #: scripts/scenario_56_carrierTurret.lua:3165
 #: scripts/scenario_56_carrierTurret.lua:3404
@@ -1804,7 +1822,7 @@ msgid "Which waypoint should we defend?"
 msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/scenario_56_carrierTurret.lua:3176
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
 msgstr "Défendez le marqueur %d"
@@ -1840,34 +1858,34 @@ msgstr "Coque : %d%%\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3195
 #: scripts/scenario_56_carrierTurret.lua:3588
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sShield: %d%%\n"
 msgstr "%sBoucliers : %d%%\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3197
 #: scripts/scenario_56_carrierTurret.lua:3590
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sFront Shield: %d%%\n"
 msgstr "%sBoucliers avant : %d%%\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3198
 #: scripts/scenario_56_carrierTurret.lua:3591
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sRear Shield: %d%%\n"
 msgstr "%sBoucliers arrière : %d%%\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3201
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sShield %s: %d%%\n"
 msgstr "%sBouclier %s : %d%%\n"
 
 #: scripts/scenario_56_carrierTurret.lua:3207
 #: scripts/scenario_56_carrierTurret.lua:3600
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s%s Missiles: %d/%d\n"
 msgstr "%sMissiles %s : %d/%d\n"
@@ -1885,22 +1903,25 @@ msgid "Docking at %s."
 msgstr "En cours d'amarrage à %s."
 
 #: scripts/scenario_56_carrierTurret.lua:3240
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Attack nearby enemy target"
 msgstr "Attaquez les cibles ennemies à proximité"
 
 #: scripts/scenario_56_carrierTurret.lua:3247
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "shipAssist-comms"
 msgid "Attacking %s"
-msgstr "Nous partons immédiatement attaquer %s"
+msgstr "Nous partons immédiatement les attaquer "
 
 #: scripts/scenario_56_carrierTurret.lua:3258
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "No enemy targets nearby"
 msgstr "Aucune cible ennemie à proximité."
 
 #: scripts/scenario_56_carrierTurret.lua:3260
+#, fuzzy
 msgctxt "shipAssist-comms"
 msgid "Which enemy target?"
 msgstr "Quelle cible ennemie ?"
@@ -2171,22 +2192,25 @@ msgstr ""
 "Espace insuffisant sur %s pour accepter votre cargaison de marchandises."
 
 #: scripts/scenario_56_carrierTurret.lua:3973
+#, fuzzy
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
 msgstr "Inventaire"
 
 #: scripts/scenario_56_carrierTurret.lua:3978
+#, fuzzy
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
 msgstr "Inventaire"
 
 #: scripts/scenario_56_carrierTurret.lua:3983
+#, fuzzy
 msgctxt "inventory-buttonPilot"
 msgid "Inventory"
 msgstr "Inventaire"
 
 #: scripts/scenario_56_carrierTurret.lua:3991
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "inventory-msgRelay"
 msgid "%s Current cargo:"
 msgstr ""
@@ -2194,17 +2218,15 @@ msgstr ""
 "- Marchandises à bord : (quantité)"
 
 #: scripts/scenario_56_carrierTurret.lua:3996
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "inventory-msgRelay"
 msgid ""
 "%s\n"
 "     %s: %i"
-msgstr ""
-"%s\n"
-"     %s : x%i"
+msgstr "     %s : x%i\n"
 
 #: scripts/scenario_56_carrierTurret.lua:4000
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "inventory-msgRelay"
 msgid ""
 "%s\n"
@@ -2214,7 +2236,7 @@ msgstr ""
 "     Vide"
 
 #: scripts/scenario_56_carrierTurret.lua:4002
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "inventory-msgRelay"
 msgid ""
 "%s\n"
@@ -2224,7 +2246,7 @@ msgstr ""
 "Espace disponible : %i"
 
 #: scripts/scenario_56_carrierTurret.lua:4012
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "The Ktlitans keep sending harassing ships. We've decrypted some of their "
@@ -2241,10 +2263,12 @@ msgstr ""
 "réussir à identifier le nom de leur base principale, voire son emplacement.\n"
 "Trouvez et détruisez la station Ktlitienne %s. Vous pouvez répondre aux "
 "demandes des stations de la zone si vous le souhaitez, mais votre objectif "
-"principal est de détruire %s.\n"
-"Il est dans votre intérêt de protéger votre porte-avions, au risque de "
-"réduire considérablement la durée de votre mission. La station %s a été "
-"désignée comme votre base principale."
+"principal est de détruire %s. \n"
+"Vous êtes aux commandes de notre nouveau prototype de transporteur. Comme "
+"vous le savez, il dispose d’un arsenal très réduit mais permet à vos 2 "
+"autres vaisseaux de s'y amarrer et de se déplacer avec eux en vitesse "
+"lumière. Vous avez tout intérêt à le protéger au risque de réduire "
+"considérablement la durée de votre mission."
 
 #: scripts/scenario_56_carrierTurret.lua:4014
 #, fuzzy, lua-format
@@ -2253,7 +2277,7 @@ msgid "Destroy %s"
 msgstr "Trouver et détruire la station Ktlitienne %s."
 
 #: scripts/scenario_56_carrierTurret.lua:4264
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "Paulina Lindquist, a noted research engineer recently published her latest "
@@ -2271,7 +2295,7 @@ msgstr ""
 
 #: scripts/scenario_56_carrierTurret.lua:4267
 #: scripts/scenario_56_carrierTurret.lua:4331
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "orders-comms"
 msgid "Visit Paulina Lindquist on %s in %s regarding ship spin upgrade."
 msgstr ""
@@ -2279,7 +2303,7 @@ msgstr ""
 "d'améliorer la manœuvre du vaisseau."
 
 #: scripts/scenario_56_carrierTurret.lua:4329
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid "Paulina Lindquist, has been reassigned to station %s in %s."
 msgstr ""
@@ -2295,7 +2319,7 @@ msgstr ""
 "secteur %s."
 
 #: scripts/scenario_56_carrierTurret.lua:4335
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgRelay"
 msgid "Visit Paulina Lindquist on %s in %s regarding ship spin upgrade."
 msgstr ""
@@ -2314,12 +2338,10 @@ msgstr ""
 "vit sur %s en secteur %s."
 
 #: scripts/scenario_56_carrierTurret.lua:4374
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "orders-comms"
 msgid "Talk to Herbert Long on %s in %s regarding enemy base"
-msgstr ""
-"   Parler à Herbert Long sur %s dans le secteur %s à propos de la base "
-"ennemie."
+msgstr "Parler à Herbert Long sur %s à %s concernant la base ennemie"
 
 #: scripts/scenario_56_carrierTurret.lua:4418
 #, lua-format
@@ -2330,10 +2352,12 @@ msgstr ""
 "%s."
 
 #: scripts/scenario_56_carrierTurret.lua:4420
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "orders-comms"
 msgid "Visit Herbert Long on %s in %s regarding enemy base."
 msgstr ""
+"   Parler à Herbert Long sur %s dans le secteur %s à propos de la base "
+"ennemie."
 
 #: scripts/scenario_56_carrierTurret.lua:4423
 #, lua-format
@@ -2475,7 +2499,7 @@ msgid "%s has been destroyed"
 msgstr "%s a été détruit."
 
 #: scripts/scenario_56_carrierTurret.lua:4609
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "[Terrence Forsythe] I can never repay you for saving my life. However, you "
@@ -2564,7 +2588,7 @@ msgid "Terrence Forsythe has perished"
 msgstr "Terrence Forsythe a péri."
 
 #: scripts/scenario_56_carrierTurret.lua:4787
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "Retired naval officer, Boris Eggleston has taken his expertise in "
@@ -2586,12 +2610,10 @@ msgstr ""
 "secteur %s."
 
 #: scripts/scenario_56_carrierTurret.lua:4820
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid "Boris Eggleston changed his vacation spot to %s in %s"
-msgstr ""
-"Boris Eggleston a changé son lieu de vacances pour finalement aller sur %s "
-"en secteur %s."
+msgstr "Boris Eggleston a changé son lieu de vacances en %s en %s"
 
 #: scripts/scenario_56_carrierTurret.lua:4825
 #, lua-format
@@ -2602,7 +2624,7 @@ msgstr ""
 "en secteur %s."
 
 #: scripts/scenario_56_carrierTurret.lua:4897
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "There's a physicist turned maintenance technician named Frederico Booker "
@@ -2624,7 +2646,7 @@ msgstr ""
 "mise à niveau de faisceaux laser."
 
 #: scripts/scenario_56_carrierTurret.lua:4934
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid "Frederico Booker has moved to station %s in %s"
 msgstr "Frederico Booker a déménagé sur la station %s dans le secteur %s."
@@ -2648,13 +2670,13 @@ msgstr ""
 " Pourriez-vous venir nous chercher ?"
 
 #: scripts/scenario_56_carrierTurret.lua:4985
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-incCall"
 msgid ""
 "%s requests help stating: Our engines are damaged beyond our ability to "
 "repair. We are located in sector %s."
 msgstr ""
-"%s demande de l'aide :\n"
+"[%s] Aide demandée.\n"
 "Bonjour, nos moteurs sont endommagés et nous ne pouvons les réparer nous-"
 "même. Nous sommes situés dans le secteur %s.\n"
 " Pourriez-vous venir nous chercher ?"
@@ -2666,7 +2688,7 @@ msgid "Help %s in sector %s with their damaged engines"
 msgstr ""
 
 #: scripts/scenario_56_carrierTurret.lua:5001
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "Station %s in %s has tractor equipment you can use to tractor %s in for "
@@ -2676,15 +2698,13 @@ msgstr ""
 "utiliser pour tracteur %s pour les réparations"
 
 #: scripts/scenario_56_carrierTurret.lua:5002
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "orders-comms"
 msgid "Install tractor equipment in %s from station %s in %s"
-msgstr ""
-"   Installer l'équipement de traction sur notre vaisseau %s depuis la "
-"station %s en %s."
+msgstr "Installer l'équipement de traction à %s depuis la station %s à %s"
 
 #: scripts/scenario_56_carrierTurret.lua:5007
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-incCall"
 msgid ""
 "Station %s in %s has tractor equipment you can use to tractor %s in for "
@@ -2694,12 +2714,10 @@ msgstr ""
 "utiliser pour tracteur %s pour les réparations"
 
 #: scripts/scenario_56_carrierTurret.lua:5008
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgRelay"
 msgid "Install tractor equipment in %s from station %s in %s"
-msgstr ""
-"   Installer l'équipement de traction sur notre vaisseau %s depuis la "
-"station %s en %s."
+msgstr "Installer l'équipement de traction à %s depuis la station %s à %s"
 
 #: scripts/scenario_56_carrierTurret.lua:5034
 #, lua-format
@@ -2714,10 +2732,10 @@ msgid "%s has been tractored to %s and is now docked"
 msgstr "%s a été remorqué vers %s et est maintenant amarré."
 
 #: scripts/scenario_56_carrierTurret.lua:5059
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid "Tractor %s to %s to be repaired"
-msgstr "Remorquer %s jusqu'à la station %s pour être réparé."
+msgstr "Remorquer %s à %s à réparer"
 
 #: scripts/scenario_56_carrierTurret.lua:5060
 #, fuzzy, lua-format
@@ -2726,36 +2744,34 @@ msgid "Tractor %s to %s"
 msgstr "   Remorquer le vaisseau %s sur la station %s."
 
 #: scripts/scenario_56_carrierTurret.lua:5063
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-incCall"
 msgid "Tractor %s to %s to be repaired"
-msgstr "Remorquer %s jusqu'à la station %s pour être réparé."
+msgstr "Remorquer %s à %s à réparer"
 
 #: scripts/scenario_56_carrierTurret.lua:5064
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "msgRelay"
 msgid "Tractor %s to %s"
 msgstr "   Remorquer le vaisseau %s sur la station %s."
 
 #: scripts/scenario_56_carrierTurret.lua:5080
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "Station %s says: Thanks for bringing %s in for repairs, %s. We'll take it "
 "from here"
 msgstr ""
-"Station %s :\n"
 "Merci d'avoir remorqué %s pour le faire réparer, %s. Nous allons nous en "
 "occuper à partir de maintenant."
 
 #: scripts/scenario_56_carrierTurret.lua:5091
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-incCall"
 msgid ""
 "Station %s says: Thanks for bringing %s in for repairs, %s. We'll take it "
 "from here"
 msgstr ""
-"Station %s :\n"
 "Merci d'avoir remorqué %s pour le faire réparer, %s. Nous allons nous en "
 "occuper à partir de maintenant."
 
@@ -2766,13 +2782,13 @@ msgid "%s turned over to %s for repairs."
 msgstr "%s a été remis à %s pour réparation."
 
 #: scripts/scenario_56_carrierTurret.lua:5099
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "[%s] Greetings, %s. You'll need to tractor %s to within 1.5U before we can "
 "start repairs"
 msgstr ""
-"[%s] Salutations, %s. Vous devrez remorquer %s à moins de 1,5u afin que nous "
+"[%s] Salutations, %s. Vous devrez remorquer %s à moins de 1u afin que nous "
 "puissions commencer les réparations."
 
 #: scripts/scenario_56_carrierTurret.lua:5132
@@ -2825,7 +2841,7 @@ msgid ""
 "systems to draw and maneuver %s to %s until it is docked"
 msgstr ""
 "Équipement de remorquage installé.\n"
-"Lorsque votre Porte-avions %s est à portée du vaisseau en panne, %s, vous "
+"Lorsque votre transporteur %s est à portée du vaisseau en panne, %s, vous "
 "pouvez activer le système de remorquage via le bouton (Traction activée). Ce "
 "système fonctionne avec les systèmes embarqués de %s pour attirer et "
 "manœuvrer %s vers %s jusqu'à ce qu'il soit amarré."
@@ -2840,23 +2856,22 @@ msgid ""
 "systems to draw and maneuver %s to %s until it is docked"
 msgstr ""
 "Équipement de remorquage installé.\n"
-"Lorsque votre Porte-avions %s est à portée du vaisseau en panne, %s, vous "
+"Lorsque votre transporteur %s est à portée du vaisseau en panne, %s, vous "
 "pouvez activer le système de remorquage via le bouton (Traction activée). Ce "
 "système fonctionne avec les systèmes embarqués de %s pour attirer et "
 "manœuvrer %s vers %s jusqu'à ce qu'il soit amarré."
 
 #: scripts/scenario_56_carrierTurret.lua:5196
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-shipLog"
 msgid "[%s] Our engines have been repaired and we stand ready to assist"
 msgstr "[%s] Nos moteurs ont été réparés et nous sommes prêts à vous aider."
 
 #: scripts/scenario_56_carrierTurret.lua:5201
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "goal-incCall"
 msgid "[From %s] Our engines have been repaired and we stand ready to assist"
-msgstr ""
-"[Depuis %s] Nos moteurs ont été réparés et nous sommes prêts à vous aider."
+msgstr "[%s] Nos moteurs ont été réparés et nous sommes prêts à vous aider."
 
 #: scripts/scenario_56_carrierTurret.lua:5202
 #, lua-format
@@ -3032,31 +3047,31 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_56_carrierTurret.lua:5651
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "tabWeaponsTacticalSingle"
 msgid "%s tubes: %s"
 msgstr "%s Taille tubes : %s"
 
 #: scripts/scenario_56_carrierTurret.lua:5653
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "tabWeaponsTacticalSingle"
 msgid "%s tube: %s"
 msgstr "%s Taille du tube : %s"
 
 #: scripts/scenario_56_carrierTurret.lua:5659
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "tabHelm"
 msgid "%s in %s"
 msgstr "%s est en secteur %s"
 
 #: scripts/scenario_56_carrierTurret.lua:5660
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "tabTactical"
 msgid "%s in %s"
 msgstr "%s est en secteur %s"
 
 #: scripts/scenario_56_carrierTurret.lua:5661
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "tabSingle"
 msgid "%s in %s"
 msgstr "%s est en secteur %s"
