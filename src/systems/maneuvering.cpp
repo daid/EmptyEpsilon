@@ -24,12 +24,6 @@ void ManeuveringSystem::update(float delta)
         physics.setAngularVelocity(std::clamp(targetVelocity, -maxSpeed, maxSpeed));
     }
 
-    constexpr static float combat_maneuver_charge_time = 20.0f; /*< Amount of time it takes to fully charge the combat maneuver system */
-    constexpr static float combat_maneuver_boost_max_time = 3.0f; /*< Amount of time we can boost with a fully charged combat maneuver system */
-    constexpr static float combat_maneuver_strafe_max_time = 3.0f; /*< Amount of time we can strafe with a fully charged combat maneuver system */
-    constexpr static float heat_per_combat_maneuver_boost = 0.2f;
-    constexpr static float heat_per_combat_maneuver_strafe = 0.2f;
-
     for(auto [entity, combat] : sp::ecs::Query<CombatManeuveringThrusters>()) {
         if (combat.boost.active > combat.boost.request)
         {
@@ -60,8 +54,8 @@ void ManeuveringSystem::update(float delta)
         if (combat.boost.active != 0.0f || combat.strafe.active != 0.0f)
         {
             // ... consume its combat maneuver boost.
-            combat.charge -= fabs(combat.boost.active) * delta / combat_maneuver_boost_max_time;
-            combat.charge -= fabs(combat.strafe.active) * delta / combat_maneuver_strafe_max_time;
+            combat.charge -= fabs(combat.boost.active) * delta / combat.boost.max_time;
+            combat.charge -= fabs(combat.strafe.active) * delta / combat.strafe.max_time;
 
             // Use boost only if we have boost available.
             if (combat.charge <= 0.0f)
@@ -81,20 +75,20 @@ void ManeuveringSystem::update(float delta)
                 // Add heat to systems consuming combat maneuver boost.
                 auto thrusters = entity.getComponent<ManeuveringThrusters>();
                 if (thrusters && entity.hasComponent<Coolant>())
-                    thrusters->addHeat(std::abs(combat.strafe.active) * delta * heat_per_combat_maneuver_strafe);
+                    thrusters->addHeat(std::abs(combat.strafe.active) * delta * combat.strafe.heat_per_second);
                 auto impulse = entity.getComponent<ImpulseEngine>();
                 if (impulse && entity.hasComponent<Coolant>())
-                    impulse->addHeat(std::abs(combat.boost.active) * delta * heat_per_combat_maneuver_boost);
+                    impulse->addHeat(std::abs(combat.boost.active) * delta * combat.boost.heat_per_second);
             }
         }else if (combat.charge < 1.0f)
         {
             // If the ship isn't making a combat maneuver, recharge its boost.
             auto thrusters = entity.getComponent<ManeuveringThrusters>();
             if (thrusters)
-                combat.charge += (delta / combat_maneuver_charge_time) * thrusters->getSystemEffectiveness() * 0.5f;
+                combat.charge += (delta / combat.charge_time) * thrusters->getSystemEffectiveness() * 0.5f;
             auto impulse = entity.getComponent<ImpulseEngine>();
             if (impulse)
-                combat.charge += (delta / combat_maneuver_charge_time) * impulse->getSystemEffectiveness() * 0.5f;
+                combat.charge += (delta / combat.charge_time) * impulse->getSystemEffectiveness() * 0.5f;
             if (combat.charge > 1.0f)
                 combat.charge = 1.0f;
         }

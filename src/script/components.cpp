@@ -508,12 +508,17 @@ void initComponentScriptBindings()
     BIND_MEMBER(ManeuveringThrusters, rotation_request);
     sp::script::ComponentHandler<CombatManeuveringThrusters>::name("combat_maneuvering_thrusters");
     BIND_MEMBER(CombatManeuveringThrusters, charge);
+    BIND_MEMBER(CombatManeuveringThrusters, charge_time);
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.speed, "boost_speed");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.speed, "strafe_speed");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.request, "boost_request");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.request, "strafe_request");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.active, "boost_active");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.active, "strafe_active");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.max_time, "boost_max_time");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.max_time, "strafe_max_time");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.heat_per_second, "boost_heat_per_second");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.heat_per_second, "strafe_heat_per_second");
     sp::script::ComponentHandler<WarpDrive>::name("warp_drive");
     BIND_SHIP_SYSTEM(WarpDrive);
     BIND_MEMBER(WarpDrive, charge_time);
