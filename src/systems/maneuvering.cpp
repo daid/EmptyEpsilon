@@ -81,10 +81,10 @@ void ManeuveringSystem::update(float delta)
                 // Add heat to systems consuming combat maneuver boost.
                 auto thrusters = entity.getComponent<ManeuveringThrusters>();
                 if (thrusters && entity.hasComponent<Coolant>())
-                    thrusters->addHeat(std::abs(combat.boost.active) * delta * heat_per_combat_maneuver_boost);
+                    thrusters->addHeat(std::abs(combat.strafe.active) * delta * heat_per_combat_maneuver_strafe);
                 auto impulse = entity.getComponent<ImpulseEngine>();
                 if (impulse && entity.hasComponent<Coolant>())
-                    impulse->addHeat(std::abs(combat.strafe.active) * delta * heat_per_combat_maneuver_strafe);
+                    impulse->addHeat(std::abs(combat.boost.active) * delta * heat_per_combat_maneuver_boost);
             }
         }else if (combat.charge < 1.0f)
         {
