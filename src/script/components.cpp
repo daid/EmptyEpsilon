@@ -385,6 +385,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(DockingPort, state);
     BIND_MEMBER(DockingPort, target);
     BIND_MEMBER(DockingPort, auto_reload_missiles);
+    BIND_MEMBER(DockingPort, auto_reload_missile_time);
 
     sp::script::ComponentHandler<DockingBay>::name("docking_bay");
     BIND_MEMBER_FLAG(DockingBay, flags, "share_energy", DockingBay::ShareEnergy);
@@ -512,6 +513,9 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.active, "strafe_active");
     sp::script::ComponentHandler<WarpDrive>::name("warp_drive");
     BIND_SHIP_SYSTEM(WarpDrive);
+    BIND_MEMBER(WarpDrive, charge_time);
+    BIND_MEMBER(WarpDrive, decharge_time);
+    BIND_MEMBER(WarpDrive, heat_per_warp);
     BIND_MEMBER(WarpDrive, max_level);
     BIND_MEMBER(WarpDrive, speed_per_level);
     BIND_MEMBER(WarpDrive, energy_warp_per_second);
@@ -521,6 +525,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(WarpJammer, range);
     sp::script::ComponentHandler<JumpDrive>::name("jump_drive");
     BIND_SHIP_SYSTEM(JumpDrive);
+    BIND_MEMBER(JumpDrive, charge_time);
+    BIND_MEMBER(JumpDrive, energy_per_km_charge);
+    BIND_MEMBER(JumpDrive, heat_per_jump);
     BIND_MEMBER(JumpDrive, min_distance);
     BIND_MEMBER(JumpDrive, max_distance);
     BIND_MEMBER(JumpDrive, charge);
