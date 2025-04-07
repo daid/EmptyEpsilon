@@ -271,7 +271,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                 case ShipSystem::Type::Reactor:
                     if (effectiveness > 1.0f)
                         effectiveness = (1.0f + effectiveness) / 2.0f;
-                    addSystemEffect(tr("Energy production"),  tr("{energy}/min").format({{"energy", string(effectiveness * -system->power_factor * 60.0f, 1)}}));
+                    addSystemEffect(tr("Energy production"),  tr("{energy}/min").format({{"energy", string(effectiveness * -system->power_factor * system->power_factor_rate * 60.0f, 1)}}));
                     break;
                 case ShipSystem::Type::BeamWeapons:
                     addSystemEffect(tr("Firing rate"), toNearbyIntString(effectiveness * 100) + "%");
