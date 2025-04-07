@@ -86,7 +86,7 @@ void JumpSystem::initializeJump(sp::ecs::Entity entity, float distance)
     if (jump->delay <= 0.0f)
     {
         jump->distance = distance;
-        jump->delay = 10.f;
+        jump->delay = jump->activation_delay;
         jump->charge -= distance;
     }
 }

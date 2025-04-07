@@ -13,6 +13,7 @@ public:
     float heat_per_jump = 0.35f;
     float min_distance = 5000.0f; //[config]
     float max_distance = 50000.0f; //[config]
+    float activation_delay = 10.0f; // Time between hitting "jump" and actually jumping
 
     // Runtime
     float charge = 50000.0f; //[output]

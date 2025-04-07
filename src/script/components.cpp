@@ -538,6 +538,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(JumpDrive, heat_per_jump);
     BIND_MEMBER(JumpDrive, min_distance);
     BIND_MEMBER(JumpDrive, max_distance);
+    BIND_MEMBER(JumpDrive, activation_delay);
     BIND_MEMBER(JumpDrive, charge);
     BIND_MEMBER(JumpDrive, distance);
     BIND_MEMBER(JumpDrive, delay);
