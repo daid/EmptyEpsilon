@@ -182,7 +182,8 @@
     BIND_MEMBER(T, coolant_change_rate_per_second); \
     BIND_MEMBER(T, heat_add_rate_per_second); \
     BIND_MEMBER(T, power_change_rate_per_second); \
-    BIND_MEMBER(T, auto_repair_per_second);
+    BIND_MEMBER(T, auto_repair_per_second); \
+    BIND_MEMBER(T, damage_per_second_on_overheat);
 
 
 void initComponentScriptBindings()
@@ -355,6 +356,7 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(Shields, front_system.heat_add_rate_per_second, "front_heat_add_rate_per_second");
     BIND_MEMBER_NAMED(Shields, front_system.power_change_rate_per_second, "front_power_change_rate_per_second");
     BIND_MEMBER_NAMED(Shields, front_system.auto_repair_per_second, "front_auto_repair_per_second");
+    BIND_MEMBER_NAMED(Shields, front_system.damage_per_second_on_overheat, "front_damage_per_second_on_overheat");
     BIND_MEMBER_NAMED(Shields, rear_system.health, "rear_health");
     BIND_MEMBER_NAMED(Shields, rear_system.health_max, "rear_health_max");
     BIND_MEMBER_NAMED(Shields, rear_system.power_level, "rear_power_level");
@@ -369,6 +371,7 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(Shields, rear_system.heat_add_rate_per_second, "rear_heat_add_rate_per_second");
     BIND_MEMBER_NAMED(Shields, rear_system.power_change_rate_per_second, "rear_power_change_rate_per_second");
     BIND_MEMBER_NAMED(Shields, rear_system.auto_repair_per_second, "rear_auto_repair_per_second");
+    BIND_MEMBER_NAMED(Shields, rear_system.damage_per_second_on_overheat, "rear_damage_per_second_on_overheat");
 
     BIND_MEMBER(Shields, active);
     BIND_MEMBER(Shields, calibration_time);
