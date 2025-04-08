@@ -11,10 +11,6 @@
 #include "components/warpdrive.h"
 
 
-// Overheat subsystem damage rate
-constexpr static float damage_per_second_on_overheat = 0.08f;
-
-
 float ShipSystem::getSystemEffectiveness()
 {
     float power = power_level;
