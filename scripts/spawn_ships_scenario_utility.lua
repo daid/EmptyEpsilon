@@ -18,7 +18,7 @@
 --	the button label indicates that the GM will return to a previous set of buttons when
 --	clicking the button.
 --
---	Version 1.1
+--	Version 1.2
 require("utils.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
@@ -31,7 +31,7 @@ function spawnGMShips()
 	local object_list = getGMSelection()
 	if #object_list == 1 then
 		temp_carrier = object_list[1]
-		if temp_carrier.components.ai_controller then
+		if isObjectType(temp_carrier,"CpuShip") then
 			addGMFunction(_("buttonGM","+Spawn Fighter Wing"),setFighterWing)
 		end
 	end
