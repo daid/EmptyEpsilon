@@ -24,10 +24,12 @@ require("generate_call_sign_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 
 function init()
-	scenario_version = "0.0.3"
-	ee_version = "2023.06.17"
+	scenario_version = "0.0.4"
+	ee_version = "2024.12.08"
 	print(string.format("    ----    Scenario: Locust Swarm    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
-	print(_VERSION)
+	if _VERSION ~= nil then
+		print("Lua version:",_VERSION)
+	end
 	setVariations()	
 	setConstants()	
 	constructEnvironment()
@@ -943,10 +945,10 @@ end
 --	Events
 function wormholeTax(self,teleportee)
 	string.format("")
-	if teleportee.components.impulse_engine then
+	if isObjectType(teleportee,"CpuShip") or isObjectType(teleportee,"PlayerSpaceship") then
 		teleportee:setSystemHealth("beamweapons",teleportee:getSystemHealth("beamweapons") - .5)
 		teleportee:setSystemHealth("missilesystem",teleportee:getSystemHealth("missilesystem") - .5)
-		if teleportee.components.player_control then
+		if isObjectType(teleportee,"PlayerSpaceship") then
 			teleportee:setEnergy(teleportee:getEnergy()/2)
 		end
 	end
