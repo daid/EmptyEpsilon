@@ -13,10 +13,6 @@
 --	}
 require("utils.lua")
 function init()
-	ECS = false
-	if createEntity then
-		ECS = true
-	end
 	check_interval = random(4,6)
 	check_timer = check_interval
 	inactivity_count = 0
@@ -37,34 +33,6 @@ function init()
 	--name, faction _id and template set by calling script
 	my_ship = CpuShip():setCallSign(string.format("%s %s",station_name,name)):setCommsScript(""):setCommsFunction(commsDefendShip):setFactionId(faction_id):setPosition(position_x, position_y):setTemplate(template):setScanned(true):orderDefendTarget(my_station)
 end
-function isObjectType(obj,typ)
-	if obj ~= nil and obj:isValid() then
-		if typ ~= nil then
-			if ECS then
-				if typ == "SpaceStation" then
-					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
-				elseif typ == "PlayerSpaceship" then
-					return obj.components.player_control
-				elseif typ == "ScanProbe" then
-					return obj.components.allow_radar_link
-				elseif typ == "CpuShip" then
-					return obj.ai_controller
-				elseif typ == "Asteroid" then
-					return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 7) == "Astroid"
-				else
-					return false
-				end
-			else
-				return obj.typeName == typ
-			end
-		else
-			return false
-		end
-	else
-		return false
-	end
-end
-
 function shipHealthy()
 	if my_ship:getHull() < my_ship:getHullMax() then return false end
 	if my_ship:getSystemHealth("reactor") <  my_ship:getSystemHealthMax("reactor") then return false end
