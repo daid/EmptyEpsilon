@@ -42,6 +42,7 @@ public:
     float heat_add_rate_per_second = default_add_heat_rate_per_second;
     float power_change_rate_per_second = default_power_rate_per_second;
     float auto_repair_per_second = 0.0f;
+    float damage_per_second_on_overheat = 0.08f;
 
     float getSystemEffectiveness();
     void addHeat(float amount);

@@ -6,11 +6,10 @@
 // Impulse engine component, indicate that this entity can move under impulse control.
 class WarpDrive : public ShipSystem {
 public:
-    constexpr static float charge_time = 4.0f;
-    constexpr static float decharge_time = 2.0f;
-    constexpr static float heat_per_warp = 0.02f;
-
     // Config
+    float charge_time = 4.0f;
+    float decharge_time = 2.0f;
+    float heat_per_warp = 0.02f;
     int max_level = 4;
     float speed_per_level = 1000;
     float energy_warp_per_second = 1.7f;
