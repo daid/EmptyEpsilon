@@ -389,16 +389,16 @@ void EngineeringScreen::onUpdate()
             }
         }
 
-		int navigate_system = keys.engineering_select_system_next.getDown() - keys.engineering_select_system_prev.getDown(); // +1 or -1
+        int navigate_system = keys.engineering_select_system_next.getDown() - keys.engineering_select_system_prev.getDown(); // +1 or -1
         if (navigate_system)
         {
             int n = static_cast<int>(selected_system);
-			ShipSystem::Type sys = ShipSystem::Type::None;
+            ShipSystem::Type sys = ShipSystem::Type::None;
             do
             {
                 n = (n + navigate_system) % ShipSystem::COUNT;
                 if (n < 0) n = ShipSystem::COUNT -1;
-				sys = static_cast<ShipSystem::Type>(n);
+                sys = static_cast<ShipSystem::Type>(n);
             } while (ShipSystem::get(my_spaceship, sys) == nullptr); // endless loop if ship does not have any system!
             selectSystem(sys);
         }
