@@ -77,10 +77,6 @@ require("generate_call_sign_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 
 function commsStation()
-	ECS = false
-	if createEntity then
-		ECS = true
-	end
 	if comms_target.comms_data == nil then
 		comms_target.comms_data = {}
 	end
@@ -233,34 +229,6 @@ function commsStation()
 		handleUndockedState()
 	end
 end
-function isObjectType(obj,typ)
-	if obj ~= nil and obj:isValid() then
-		if typ ~= nil then
-			if ECS then
-				if typ == "SpaceStation" then
-					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
-				elseif typ == "PlayerSpaceship" then
-					return obj.components.player_control
-				elseif typ == "ScanProbe" then
-					return obj.components.allow_radar_link
-				elseif typ == "CpuShip" then
-					return obj.ai_controller
-				elseif typ == "Asteroid" then
-					return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 7) == "Astroid"
-				else
-					return false
-				end
-			else
-				return obj.typeName == typ
-			end
-		else
-			return false
-		end
-	else
-		return false
-	end
-end
-
 -----------------
 --	Utilities  --
 -----------------
@@ -5246,16 +5214,16 @@ function transportAndCargoMissions()
 				}
 				addCommsReply(tableSelectRandom(decline_cargo_mission),function()
 					local cargo_refusal_responses = {
-						string.format(_("station-comms","You tell %s that you cannot take on any cargo missions at this time."),comms_target.transport_mission.character.name),
-						string.format(_("station-comms","You inform %s that you are unable to get any cargo for %s at this time."),comms_target.transport_mission.character.name,comms_target.transport_mission.character.object_pronoun),
-						string.format(_("station-comms","'Sorry, %s. We can't retrieve your cargo at this time.'"),comms_target.transport_mission.character.name),
-						string.format(_("station-comms","'%s can't get cargo for you you right now, %s. Sorry about that. Good luck.'"),comms_source:getCallSign(),comms_target.transport_mission.character.name),
+						string.format(_("station-comms","You tell %s that you cannot take on any cargo missions at this time."),comms_target.cargo_mission.character.name),
+						string.format(_("station-comms","You inform %s that you are unable to get any cargo for %s at this time."),comms_target.cargo_mission.character.name,comms_target.cargo_mission.character.object_pronoun),
+						string.format(_("station-comms","'Sorry, %s. We can't retrieve your cargo at this time.'"),comms_target.cargo_mission.character.name),
+						string.format(_("station-comms","'%s can't get cargo for you you right now, %s. Sorry about that. Good luck.'"),comms_source:getCallSign(),comms_target.cargo_mission.character.name),
 					}
 					local cargo_mission_gone = {
 						_("station-comms","The offer disappears from the message board."),
 						_("station-comms","The cargo mission offer no longer appears on the message board."),
-						string.format(_("station-comms","%s removes %s cargo retrieval mission offer from the message board."),comms_target.transport_mission.character.name,comms_target.transport_mission.character.possessive_adjective),
-						string.format(_("station-comms","%s gestures and %s cargo mission offer disappears from the message board."),comms_target.transport_mission.character.name,comms_target.transport_mission.character.possessive_adjective),
+						string.format(_("station-comms","%s removes %s cargo retrieval mission offer from the message board."),comms_target.cargo_mission.character.name,comms_target.cargo_mission.character.possessive_adjective),
+						string.format(_("station-comms","%s gestures and %s cargo mission offer disappears from the message board."),comms_target.cargo_mission.character.name,comms_target.cargo_mission.character.possessive_adjective),
 					}
 					if random(1,5) <= 1 then
 						setCommsMessage(string.format("%s %s",tableSelectRandom(cargo_refusal_responses),tableSelectRandom(cargo_mission_gone)))
@@ -8642,10 +8610,6 @@ end
 --	Ship Communications  --
 ---------------------------
 function commsShip()
-	ECS = false
-	if createEntity then
-		ECS = true
-	end
 	if comms_target.comms_data == nil then
 		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
 	end
@@ -9845,10 +9809,6 @@ end	--end neutral communications function
 --	Service Jonque Ship Communications  --
 ------------------------------------------
 function commsServiceJonque()
-	ECS = false
-	if createEntity then
-		ECS = true
-	end
 	if comms_target.comms_data == nil then
 		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
 	end
