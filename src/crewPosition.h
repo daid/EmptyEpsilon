@@ -29,6 +29,9 @@ enum class CrewPosition
     MAX
 };
 
+string crewPositionToString(CrewPosition value);
+bool tryParseCrewPosition(string value, CrewPosition& result);
+
 static_assert(static_cast<int>(CrewPosition::MAX) <= 64);
 class CrewPositions
 {

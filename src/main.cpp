@@ -277,12 +277,24 @@ void returnToMainMenu(RenderLayer* render_layer)
         if (PreferencesManager::get("startpaused") != "1")
             engine->setGameSpeed(1.0);
     }
-    else if (PreferencesManager::get("autoconnect").toInt())
+    else if (PreferencesManager::get("autoconnect") != "")
     {
-        int crew_position = PreferencesManager::get("autoconnect").toInt() - 1;
-        if (crew_position < 0) crew_position = 0;
-        if (crew_position > static_cast<int>(CrewPosition::MAX)) crew_position = static_cast<int>(CrewPosition::MAX);
-        new AutoConnectScreen(CrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
+        auto value = PreferencesManager::get("autoconnect");
+
+        CrewPosition crew_position;
+        if (!tryParseCrewPosition(value, crew_position)) {
+            auto pos = value.toInt();
+            if (!pos) {
+                LOG(ERROR) << "Unknown crew position " << value;
+                crew_position = CrewPosition::helmsOfficer;
+            } else {
+                pos--;
+                if (pos < 0) pos = 0;
+                if (pos > static_cast<int>(CrewPosition::MAX)) pos = static_cast<int>(CrewPosition::MAX);
+                crew_position = CrewPosition(pos);
+            }
+        }
+        new AutoConnectScreen(crew_position, PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
     }else{
         new MainMenu();
     }
@@ -296,7 +308,7 @@ void returnToShipSelection(RenderLayer* render_layer)
             if (window_render_layers[n] == render_layer)
                 new SecondMonitorScreen(n);
     } else {
-        if (PreferencesManager::get("autoconnect").toInt())
+        if (PreferencesManager::get("autoconnect") != "")
         {
             //If we are auto connect, return to the auto connect screen instead of the ship selection. The returnToMainMenu will handle this.
             returnToMainMenu(render_layer);

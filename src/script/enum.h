@@ -380,67 +380,17 @@ template<> struct Convert<CustomShipFunctions::Function::Type> {
 };
 template<> struct Convert<CrewPosition> {
     static int toLua(lua_State* L, CrewPosition value) {
-        switch(value) {
-        case CrewPosition::helmsOfficer: lua_pushstring(L, "helms"); break;
-        case CrewPosition::weaponsOfficer: lua_pushstring(L, "weapons"); break;
-        case CrewPosition::engineering: lua_pushstring(L, "engineering"); break;
-        case CrewPosition::scienceOfficer: lua_pushstring(L, "science"); break;
-        case CrewPosition::relayOfficer: lua_pushstring(L, "relay"); break;
-        case CrewPosition::tacticalOfficer: lua_pushstring(L, "tactical"); break;
-        case CrewPosition::engineeringAdvanced: lua_pushstring(L, "engineering+"); break;
-        case CrewPosition::operationsOfficer: lua_pushstring(L, "operations"); break;
-        case CrewPosition::singlePilot: lua_pushstring(L, "singlepilot"); break;
-        case CrewPosition::damageControl: lua_pushstring(L, "damagecontrol"); break;
-        case CrewPosition::powerManagement: lua_pushstring(L, "powermanagement"); break;
-        case CrewPosition::databaseView: lua_pushstring(L, "database"); break;
-        case CrewPosition::altRelay: lua_pushstring(L, "altrelay"); break;
-        case CrewPosition::commsOnly: lua_pushstring(L, "commsonly"); break;
-        case CrewPosition::shipLog: lua_pushstring(L, "shiplog"); break;
-        default: lua_pushstring(L, "none"); break;
-        }
+        lua_pushstring(L, crewPositionToString(value).c_str());
         return 1;
     }
     static CrewPosition fromLua(lua_State* L, int idx) {
         string str = string(luaL_checkstring(L, idx)).lower();
-        //6/5 player crew
-        if (str == "helms" || str == "helmsofficer")
-            return CrewPosition::helmsOfficer;
-        else if (str == "weapons" || str == "weaponsofficer")
-            return CrewPosition::weaponsOfficer;
-        else if (str == "engineering" || str == "engineeringsofficer")
-            return CrewPosition::engineering;
-        else if (str == "science" || str == "scienceofficer")
-            return CrewPosition::scienceOfficer;
-        else if (str == "relay" || str == "relayofficer")
-            return CrewPosition::relayOfficer;
 
-        //4/3 player crew
-        else if (str == "tactical" || str == "tacticalofficer")
-            return CrewPosition::tacticalOfficer;    //helms+weapons-shields
-        else if (str == "engineering+" || str == "engineering+officer" || str == "engineeringadvanced" || str == "engineeringadvancedofficer")
-            return CrewPosition::engineeringAdvanced;//engineering+shields
-        else if (str == "operations" || str == "operationsofficer")
-            return CrewPosition::operationsOfficer; //science+comms
-
-        //1 player crew
-        else if (str == "single" || str == "singlepilot")
-            return CrewPosition::singlePilot;
-
-        //extras
-        else if (str == "damagecontrol")
-            return CrewPosition::damageControl;
-        else if (str == "powermanagement")
-            return CrewPosition::powerManagement;
-        else if (str == "database" || str == "databaseview")
-            return CrewPosition::databaseView;
-        else if (str == "altrelay")
-            return CrewPosition::altRelay;
-        else if (str == "commsonly")
-            return CrewPosition::commsOnly;
-        else if (str == "shiplog")
-            return CrewPosition::shipLog;
-        luaL_error(L, "Unknown CrewPosition: %s", str.c_str());
-        return CrewPosition::helmsOfficer;
+        CrewPosition result;
+        if (!tryParseCrewPosition(str, result)) {
+            luaL_error(L, "Unknown CrewPosition: %s", str.c_str());
+        }
+        return result;
     }
 };
 
