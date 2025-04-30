@@ -281,20 +281,11 @@ void returnToMainMenu(RenderLayer* render_layer)
     {
         auto value = PreferencesManager::get("autoconnect");
 
-        CrewPosition crew_position;
-        if (!tryParseCrewPosition(value, crew_position)) {
-            auto pos = value.toInt();
-            if (!pos) {
-                LOG(ERROR) << "Unknown crew position " << value;
-                crew_position = CrewPosition::helmsOfficer;
-            } else {
-                pos--;
-                if (pos < 0) pos = 0;
-                if (pos > static_cast<int>(CrewPosition::MAX)) pos = static_cast<int>(CrewPosition::MAX);
-                crew_position = CrewPosition(pos);
-            }
-        }
-        new AutoConnectScreen(crew_position, PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
+        std::vector<AutoConnectPosition> window_positions;
+        for (auto part : value.split(";"))
+            window_positions.push_back(AutoConnectPosition(part));
+
+        new AutoConnectScreen(window_positions, PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
     }else{
         new MainMenu();
     }

@@ -16,9 +16,12 @@
 #include "gui/gui2_label.h"
 
 
-AutoConnectScreen::AutoConnectScreen(CrewPosition crew_position, bool control_main_screen, string ship_filter)
-: crew_position(crew_position), control_main_screen(control_main_screen)
+AutoConnectScreen::AutoConnectScreen(std::vector<AutoConnectPosition> positions, bool control_main_screen, string ship_filter)
+: positions(positions), control_main_screen(control_main_screen)
 {
+    if (positions.size() < 1)
+        positions = {AutoConnectPosition("helms")};
+
     if (!game_client)
     {
         scanner = new ServerScanner(VERSION_NUMBER);
@@ -28,13 +31,7 @@ AutoConnectScreen::AutoConnectScreen(CrewPosition crew_position, bool control_ma
     status_label = new GuiLabel(this, "STATUS", "Searching for server...", 50);
     status_label->setPosition(0, 300, sp::Alignment::TopCenter)->setSize(0, 50);
 
-    string position_name = "Main screen";
-    if (crew_position_raw >= 1000 && crew_position_raw <= 1360)
-        position_name = tr("Ship window");
-    if (crew_position != CrewPosition::MAX)
-        position_name = getCrewPositionName(crew_position);
-
-    (new GuiLabel(this, "POSITION", position_name, 50))->setPosition(0, 400, sp::Alignment::TopCenter)->setSize(0, 30);
+    (new GuiLabel(this, "POSITION", positions[0].describe(), 50))->setPosition(0, 400, sp::Alignment::TopCenter)->setSize(0, 30);
 
     for(string filter : ship_filter.split(";"))
     {
@@ -122,14 +119,21 @@ void AutoConnectScreen::update(float delta)
                             }
                         }
                     } else {
-                        if (my_spaceship == my_player_info->ship && (crew_position == CrewPosition::MAX || my_player_info->hasPosition(crew_position)))
+                        if (my_spaceship == my_player_info->ship)
                         {
                             destroy();
-                            if (crew_position_raw >=1000 && crew_position_raw<=1360){
-                                uint8_t window_flags = PreferencesManager::get("ship_window_flags", "1").toInt();
-                                new WindowScreen(getRenderLayer(), crew_position_raw-1000, window_flags);
-                            } else{
-                                my_player_info->spawnUI(0, getRenderLayer());
+                            for (unsigned idx = 0; idx < positions.size() && idx < window_render_layers.size(); idx++)
+                            {
+                                auto pos = positions[idx];
+                                auto layer = window_render_layers[idx];
+
+                                if (pos.is_ship_window) {
+                                    // TODO currently all ship windows share one angle
+                                    uint8_t window_flags = PreferencesManager::get("ship_window_flags", "1").toInt();
+                                    new WindowScreen(layer, pos.ship_window_angle, window_flags);
+                                } else {
+                                    my_player_info->spawnUI(idx, layer);
+                                }
                             }
                         }
                     }
@@ -156,8 +160,10 @@ bool AutoConnectScreen::isValidShip(sp::ecs::Entity ship)
             {
                 if (i->ship == ship)
                 {
-                    if (crew_position != CrewPosition::MAX && i->hasPosition(crew_position))
-                        crew_at_position++;
+                    for (auto position : positions)
+                        for (auto crew_position : position.crew_positions)
+                            if (i->hasPosition(crew_position))
+                                crew_at_position++;
                 }
             }
             if (crew_at_position > 0)
@@ -190,12 +196,62 @@ bool AutoConnectScreen::isValidShip(sp::ecs::Entity ship)
 
 void AutoConnectScreen::connectToShip(sp::ecs::Entity ship)
 {
-    if (crew_position != CrewPosition::MAX)    //If we are not the main screen, setup the right crew position.
+    int idx = 0;
+    for (auto pos : positions)
     {
-        my_player_info->commandSetCrewPosition(0, crew_position, true);
-        my_player_info->commandSetMainScreenControl(0, control_main_screen);
-    } else {
-        my_player_info->commandSetMainScreen(0, true);
+        for (auto crew_position : pos.crew_positions)
+            my_player_info->commandSetCrewPosition(idx, crew_position, true);
+
+        my_player_info->commandSetMainScreenControl(idx, control_main_screen);
+
+        if (pos.is_main_screen)
+            my_player_info->commandSetMainScreen(idx, true);
+
+        idx++;
     }
+
     my_player_info->commandSetShip(ship);
+}
+
+AutoConnectPosition::AutoConnectPosition(string value)
+{
+    for (auto part : value.split(",")) {
+        CrewPosition crew_position;
+        if (!tryParseCrewPosition(part, crew_position)) {
+            auto pos = part.toInt();
+            if (!pos) {
+                LOG(ERROR) << "Unknown crew position " << part;
+                continue;
+            }
+
+            if (pos >= 1000 && pos <= 1360) {
+                is_ship_window = true;
+                ship_window_angle = pos - 1000;
+                continue;
+            }
+
+            if (pos < 0) pos = 0;
+            if (pos > static_cast<int>(CrewPosition::MAX)) pos = static_cast<int>(CrewPosition::MAX);
+            crew_position = CrewPosition(pos);
+        }
+
+        if (crew_position == CrewPosition::MAX)
+            is_main_screen = true;
+        else
+            crew_positions.add(crew_position);
+    }
+}
+
+string AutoConnectPosition::describe()
+{
+    if (is_ship_window)
+        return "Ship window";
+
+    if (is_main_screen)
+        return "Main screen";
+
+    for (auto pos : crew_positions)
+        return getCrewPositionName(pos);
+
+    return "None";
 }
