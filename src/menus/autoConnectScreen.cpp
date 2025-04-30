@@ -245,10 +245,10 @@ AutoConnectPosition::AutoConnectPosition(string value)
 string AutoConnectPosition::describe()
 {
     if (is_ship_window)
-        return "Ship window";
+        return tr("Ship window");
 
     if (is_main_screen)
-        return "Main screen";
+        return tr("Main screen");
 
     for (auto pos : crew_positions)
         return getCrewPositionName(pos);
