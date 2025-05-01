@@ -24,7 +24,7 @@ enum class BasicReplicationRequest {
         void receive(sp::ecs::Entity entity, sp::io::DataBuffer& packet) override; \
         void remove(sp::ecs::Entity entity) override; \
         template<BasicReplicationRequest> bool impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& c, COMPONENT* backup); \
-        template<BasicReplicationRequest> void field_impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& c, COMPONENT* backup, sp::io::DataBuffer& tmp, uint32_t& flags); \
+        template<BasicReplicationRequest> void field_impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& c, COMPONENT* backup, sp::io::DataBuffer& tmp, uint64_t& flags); \
     };
 #define BASIC_REPLICATION_CLASS(CLASS, COMPONENT) \
     BASIC_REPLICATION_CLASS_RATE(CLASS, COMPONENT, 60.0f);
@@ -63,14 +63,14 @@ enum class BasicReplicationRequest {
     void CLASS::remove(sp::ecs::Entity entity) { entity.removeComponent<COMPONENT>(); } \
     template<BasicReplicationRequest BRR> bool CLASS::impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& target, COMPONENT* backup) { \
         sp::io::DataBuffer tmp; \
-        uint32_t flags = 0; \
+        uint64_t flags = 0; \
         if (BRR == BasicReplicationRequest::Receive) packet >> flags; \
         field_impl<BRR>(entity, packet, target, backup, tmp, flags); \
         if (tmp.getDataSize() > 0) packet.write(CMD_ECS_SET_COMPONENT, component_index, entity.getIndex(), flags, tmp); \
         return tmp.getDataSize() > 0; \
     } \
-    template<BasicReplicationRequest BRR> void CLASS::field_impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& target, COMPONENT* backup, sp::io::DataBuffer& tmp, uint32_t& flags) { \
-        uint32_t flag = 1;
+    template<BasicReplicationRequest BRR> void CLASS::field_impl(sp::ecs::Entity entity, sp::io::DataBuffer& packet, COMPONENT& target, COMPONENT* backup, sp::io::DataBuffer& tmp, uint64_t& flags) { \
+        uint64_t flag = 1;
 
 #define BASIC_REPLICATION_FIELD(FIELD) \
     switch(BRR) { \
