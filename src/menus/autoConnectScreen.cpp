@@ -74,12 +74,19 @@ void AutoConnectScreen::update(float delta)
             connect_to_address = autoconnect_address;
             new GameClient(VERSION_NUMBER, autoconnect_address);
             scanner->destroy();
-        } else if (serverList.size() > 0) {
-            status_label->setText("Found server " + serverList[0].name);
-            connect_to_address = serverList[0].address;
-            new GameClient(VERSION_NUMBER, serverList[0].address);
-            scanner->destroy();
         } else {
+            auto name_filter = PreferencesManager::get("autoconnect_servername", "");
+            for (auto server : serverList) {
+                if (name_filter != "" && name_filter != server.name)
+                    continue;
+
+                status_label->setText("Found server " + server.name);
+                connect_to_address = server.address;
+                new GameClient(VERSION_NUMBER, server.address);
+                scanner->destroy();
+                return;
+            }
+
             status_label->setText("Searching for server...");
         }
     }else{
