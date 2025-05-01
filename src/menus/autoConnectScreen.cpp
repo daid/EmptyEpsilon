@@ -72,6 +72,7 @@ void AutoConnectScreen::update(float delta)
         if (autoconnect_address != "") {
             status_label->setText("Using autoconnect server " + autoconnect_address);
             connect_to_address = autoconnect_address;
+            tried_password = false;
             new GameClient(VERSION_NUMBER, autoconnect_address);
             scanner->destroy();
         } else {
@@ -82,6 +83,7 @@ void AutoConnectScreen::update(float delta)
 
                 status_label->setText("Found server " + server.name);
                 connect_to_address = server.address;
+                tried_password = false;
                 new GameClient(VERSION_NUMBER, server.address);
                 scanner->destroy();
                 return;
