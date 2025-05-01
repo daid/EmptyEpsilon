@@ -386,11 +386,11 @@ template<> struct Convert<CrewPosition> {
     static CrewPosition fromLua(lua_State* L, int idx) {
         string str = string(luaL_checkstring(L, idx)).lower();
 
-        CrewPosition result;
-        if (!tryParseCrewPosition(str, result)) {
+        auto result = tryParseCrewPosition(str);
+        if (!result.has_value()) {
             luaL_error(L, "Unknown CrewPosition: %s", str.c_str());
         }
-        return result;
+        return result.value_or(CrewPosition::helmsOfficer);
     }
 };
 

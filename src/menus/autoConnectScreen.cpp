@@ -217,7 +217,10 @@ AutoConnectPosition::AutoConnectPosition(string value)
 {
     for (auto part : value.split(",")) {
         CrewPosition crew_position;
-        if (!tryParseCrewPosition(part, crew_position)) {
+        auto parse_result = tryParseCrewPosition(part);
+        if (parse_result.has_value()) {
+            crew_position = *parse_result;
+        } else {
             auto pos = part.toInt();
             if (!pos) {
                 LOG(ERROR) << "Unknown crew position " << part;
