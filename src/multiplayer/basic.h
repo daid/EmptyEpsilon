@@ -79,13 +79,6 @@ enum class BasicReplicationRequest {
     case BasicReplicationRequest::Receive: if (flags & flag) packet >> target.FIELD; break; \
     } \
     flag <<= 1;
-#define BASIC_REPLICATION_PAIR(FIELD_A, FIELD_B) \
-    switch(BRR) { \
-    case BasicReplicationRequest::SendAll: flags |= flag; tmp << target.FIELD_A; tmp << target.FIELD_B; break; \
-    case BasicReplicationRequest::Update: if (target.FIELD_A != backup->FIELD_A || target.FIELD_B != backup->FIELD_B) { flags |= flag; tmp << target.FIELD_A; backup->FIELD_A = target.FIELD_A; tmp << target.FIELD_B; backup->FIELD_B = target.FIELD_B; } break; \
-    case BasicReplicationRequest::Receive: if (flags & flag) { packet >> target.FIELD_A; packet >> target.FIELD_B; }; break; \
-    } \
-    flag <<= 1;
 #define BASIC_REPLICATION_VECTOR(FIELD) \
     switch(BRR) { \
     case BasicReplicationRequest::SendAll: flags |= flag; tmp << target.FIELD.size(); break; \
