@@ -17,6 +17,7 @@ BASIC_REPLICATION_IMPL(ImpulseEngineReplication, ImpulseEngine)
     BASIC_REPLICATION_FIELD(heat_add_rate_per_second);
     BASIC_REPLICATION_FIELD(power_change_rate_per_second);
     BASIC_REPLICATION_FIELD(auto_repair_per_second);
+    BASIC_REPLICATION_FIELD(damage_per_second_on_overheat);
 
     BASIC_REPLICATION_FIELD(max_speed_forward);
     BASIC_REPLICATION_FIELD(max_speed_reverse);

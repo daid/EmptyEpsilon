@@ -17,7 +17,11 @@ BASIC_REPLICATION_IMPL(WarpDriveReplication, WarpDrive)
     BASIC_REPLICATION_FIELD(heat_add_rate_per_second);
     BASIC_REPLICATION_FIELD(power_change_rate_per_second);
     BASIC_REPLICATION_FIELD(auto_repair_per_second);
+    BASIC_REPLICATION_FIELD(damage_per_second_on_overheat);
 
+    BASIC_REPLICATION_FIELD(charge_time);
+    BASIC_REPLICATION_FIELD(decharge_time);
+    BASIC_REPLICATION_FIELD(heat_per_warp);
     BASIC_REPLICATION_FIELD(max_level);
     BASIC_REPLICATION_FIELD(speed_per_level);
     BASIC_REPLICATION_FIELD(energy_warp_per_second);
