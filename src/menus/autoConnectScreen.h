@@ -16,6 +16,7 @@ class AutoConnectScreen : public GuiCanvas, public Updatable
     CrewPosition crew_position;
     bool control_main_screen;
     std::map<string, string> ship_filters;
+    bool tried_password = false;
 
     GuiLabel* status_label;
     int crew_position_raw = (PreferencesManager::get("autoconnect").toInt());

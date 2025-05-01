@@ -99,7 +99,17 @@ void AutoConnectScreen::update(float delta)
             else
                 status_label->setText("Connecting...");
             break;
-        case GameClient::WaitingForPassword: //For now, just disconnect when we found a password protected server.
+        case GameClient::WaitingForPassword:
+            if (!tried_password) {
+                auto password = PreferencesManager::get("autoconnect_password");
+                if (password != "") {
+                    game_client->sendPassword(password.upper());
+                    tried_password = true;
+                    return;
+                }
+            }
+            // if we don't have a password or we already tried it and it didn't work,
+            // fallthrough
         case GameClient::Disconnected:
             disconnectFromServer();
             scanner = new ServerScanner(VERSION_NUMBER);
