@@ -72,14 +72,23 @@ void AutoConnectScreen::update(float delta)
         if (autoconnect_address != "") {
             status_label->setText("Using autoconnect server " + autoconnect_address);
             connect_to_address = autoconnect_address;
+            tried_password = false;
             new GameClient(VERSION_NUMBER, autoconnect_address);
             scanner->destroy();
-        } else if (serverList.size() > 0) {
-            status_label->setText("Found server " + serverList[0].name);
-            connect_to_address = serverList[0].address;
-            new GameClient(VERSION_NUMBER, serverList[0].address);
-            scanner->destroy();
         } else {
+            auto name_filter = PreferencesManager::get("autoconnect_servername", "");
+            for (auto server : serverList) {
+                if (name_filter != "" && name_filter != server.name)
+                    continue;
+
+                status_label->setText("Found server " + server.name);
+                connect_to_address = server.address;
+                tried_password = false;
+                new GameClient(VERSION_NUMBER, server.address);
+                scanner->destroy();
+                return;
+            }
+
             status_label->setText("Searching for server...");
         }
     }else{
@@ -92,7 +101,17 @@ void AutoConnectScreen::update(float delta)
             else
                 status_label->setText("Connecting...");
             break;
-        case GameClient::WaitingForPassword: //For now, just disconnect when we found a password protected server.
+        case GameClient::WaitingForPassword:
+            if (!tried_password) {
+                auto password = PreferencesManager::get("autoconnect_password");
+                if (password != "") {
+                    game_client->sendPassword(password.upper());
+                    tried_password = true;
+                    return;
+                }
+            }
+            // if we don't have a password or we already tried it and it didn't work,
+            // fallthrough
         case GameClient::Disconnected:
             disconnectFromServer();
             scanner = new ServerScanner(VERSION_NUMBER);

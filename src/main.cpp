@@ -216,6 +216,10 @@ int main(int argc, char** argv)
         if(!gameGlobalInfo) // => failed to start server
             return 1;
 
+        if (PreferencesManager::get("server_name") != "") game_server->setServerName(PreferencesManager::get("server_name"));
+        if (PreferencesManager::get("server_password") != "") game_server->setPassword(PreferencesManager::get("server_password").upper());
+        if (PreferencesManager::get("server_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
+
         // Load the scenario and open the ship selection screen.
         gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"), loadScenarioSettingsFromPrefs());
         new ShipSelectionScreen();
