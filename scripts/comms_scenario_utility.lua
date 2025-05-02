@@ -5246,16 +5246,16 @@ function transportAndCargoMissions()
 				}
 				addCommsReply(tableSelectRandom(decline_cargo_mission),function()
 					local cargo_refusal_responses = {
-						string.format(_("station-comms","You tell %s that you cannot take on any cargo missions at this time."),comms_target.transport_mission.character.name),
-						string.format(_("station-comms","You inform %s that you are unable to get any cargo for %s at this time."),comms_target.transport_mission.character.name,comms_target.transport_mission.character.object_pronoun),
-						string.format(_("station-comms","'Sorry, %s. We can't retrieve your cargo at this time.'"),comms_target.transport_mission.character.name),
-						string.format(_("station-comms","'%s can't get cargo for you you right now, %s. Sorry about that. Good luck.'"),comms_source:getCallSign(),comms_target.transport_mission.character.name),
+						string.format(_("station-comms","You tell %s that you cannot take on any cargo missions at this time."),comms_target.cargo_mission.character.name),
+						string.format(_("station-comms","You inform %s that you are unable to get any cargo for %s at this time."),comms_target.cargo_mission.character.name,comms_target.cargo_mission.character.object_pronoun),
+						string.format(_("station-comms","'Sorry, %s. We can't retrieve your cargo at this time.'"),comms_target.cargo_mission.character.name),
+						string.format(_("station-comms","'%s can't get cargo for you you right now, %s. Sorry about that. Good luck.'"),comms_source:getCallSign(),comms_target.cargo_mission.character.name),
 					}
 					local cargo_mission_gone = {
 						_("station-comms","The offer disappears from the message board."),
 						_("station-comms","The cargo mission offer no longer appears on the message board."),
-						string.format(_("station-comms","%s removes %s cargo retrieval mission offer from the message board."),comms_target.transport_mission.character.name,comms_target.transport_mission.character.possessive_adjective),
-						string.format(_("station-comms","%s gestures and %s cargo mission offer disappears from the message board."),comms_target.transport_mission.character.name,comms_target.transport_mission.character.possessive_adjective),
+						string.format(_("station-comms","%s removes %s cargo retrieval mission offer from the message board."),comms_target.cargo_mission.character.name,comms_target.cargo_mission.character.possessive_adjective),
+						string.format(_("station-comms","%s gestures and %s cargo mission offer disappears from the message board."),comms_target.cargo_mission.character.name,comms_target.cargo_mission.character.possessive_adjective),
 					}
 					if random(1,5) <= 1 then
 						setCommsMessage(string.format("%s %s",tableSelectRandom(cargo_refusal_responses),tableSelectRandom(cargo_mission_gone)))
