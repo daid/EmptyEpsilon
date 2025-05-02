@@ -18,6 +18,7 @@ BASIC_REPLICATION_IMPL(ShieldsReplication, Shields)
     BASIC_REPLICATION_FIELD(front_system.heat_add_rate_per_second);
     BASIC_REPLICATION_FIELD(front_system.power_change_rate_per_second);
     BASIC_REPLICATION_FIELD(front_system.auto_repair_per_second);
+    BASIC_REPLICATION_FIELD(front_system.damage_per_second_on_overheat);
 
     BASIC_REPLICATION_FIELD(rear_system.health);
     BASIC_REPLICATION_FIELD(rear_system.health_max);
@@ -33,6 +34,7 @@ BASIC_REPLICATION_IMPL(ShieldsReplication, Shields)
     BASIC_REPLICATION_FIELD(rear_system.heat_add_rate_per_second);
     BASIC_REPLICATION_FIELD(rear_system.power_change_rate_per_second);
     BASIC_REPLICATION_FIELD(rear_system.auto_repair_per_second);
+    BASIC_REPLICATION_FIELD(rear_system.damage_per_second_on_overheat);
 
     BASIC_REPLICATION_FIELD(calibration_time);
     BASIC_REPLICATION_FIELD(calibration_delay);

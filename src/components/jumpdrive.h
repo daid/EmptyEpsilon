@@ -7,13 +7,13 @@
 // Impulse engine component, indicate that this entity can move under impulse control.
 class JumpDrive : public ShipSystem {
 public:
-    constexpr static float charge_time = 90.0f;   /*<Total charge time for the jump drive after a max range jump */
-    constexpr static float energy_per_km_charge = 2.0f;
-    constexpr static float heat_per_jump = 0.35f;
-
     // Config
+    float charge_time = 90.0f;   /*<Total charge time for the jump drive after a max range jump */
+    float energy_per_km_charge = 2.0f;
+    float heat_per_jump = 0.35f;
     float min_distance = 5000.0f; //[config]
     float max_distance = 50000.0f; //[config]
+    float activation_delay = 10.0f; // Time between hitting "jump" and actually jumping
 
     // Runtime
     float charge = 50000.0f; //[output]

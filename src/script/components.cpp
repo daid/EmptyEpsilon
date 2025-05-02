@@ -182,7 +182,8 @@
     BIND_MEMBER(T, coolant_change_rate_per_second); \
     BIND_MEMBER(T, heat_add_rate_per_second); \
     BIND_MEMBER(T, power_change_rate_per_second); \
-    BIND_MEMBER(T, auto_repair_per_second);
+    BIND_MEMBER(T, auto_repair_per_second); \
+    BIND_MEMBER(T, damage_per_second_on_overheat);
 
 
 void initComponentScriptBindings()
@@ -355,6 +356,7 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(Shields, front_system.heat_add_rate_per_second, "front_heat_add_rate_per_second");
     BIND_MEMBER_NAMED(Shields, front_system.power_change_rate_per_second, "front_power_change_rate_per_second");
     BIND_MEMBER_NAMED(Shields, front_system.auto_repair_per_second, "front_auto_repair_per_second");
+    BIND_MEMBER_NAMED(Shields, front_system.damage_per_second_on_overheat, "front_damage_per_second_on_overheat");
     BIND_MEMBER_NAMED(Shields, rear_system.health, "rear_health");
     BIND_MEMBER_NAMED(Shields, rear_system.health_max, "rear_health_max");
     BIND_MEMBER_NAMED(Shields, rear_system.power_level, "rear_power_level");
@@ -369,6 +371,7 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(Shields, rear_system.heat_add_rate_per_second, "rear_heat_add_rate_per_second");
     BIND_MEMBER_NAMED(Shields, rear_system.power_change_rate_per_second, "rear_power_change_rate_per_second");
     BIND_MEMBER_NAMED(Shields, rear_system.auto_repair_per_second, "rear_auto_repair_per_second");
+    BIND_MEMBER_NAMED(Shields, rear_system.damage_per_second_on_overheat, "rear_damage_per_second_on_overheat");
 
     BIND_MEMBER(Shields, active);
     BIND_MEMBER(Shields, calibration_time);
@@ -385,6 +388,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(DockingPort, state);
     BIND_MEMBER(DockingPort, target);
     BIND_MEMBER(DockingPort, auto_reload_missiles);
+    BIND_MEMBER(DockingPort, auto_reload_missile_time);
 
     sp::script::ComponentHandler<DockingBay>::name("docking_bay");
     BIND_MEMBER_FLAG(DockingBay, flags, "share_energy", DockingBay::ShareEnergy);
@@ -504,14 +508,22 @@ void initComponentScriptBindings()
     BIND_MEMBER(ManeuveringThrusters, rotation_request);
     sp::script::ComponentHandler<CombatManeuveringThrusters>::name("combat_maneuvering_thrusters");
     BIND_MEMBER(CombatManeuveringThrusters, charge);
+    BIND_MEMBER(CombatManeuveringThrusters, charge_time);
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.speed, "boost_speed");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.speed, "strafe_speed");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.request, "boost_request");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.request, "strafe_request");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.active, "boost_active");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.active, "strafe_active");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.max_time, "boost_max_time");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.max_time, "strafe_max_time");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.heat_per_second, "boost_heat_per_second");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.heat_per_second, "strafe_heat_per_second");
     sp::script::ComponentHandler<WarpDrive>::name("warp_drive");
     BIND_SHIP_SYSTEM(WarpDrive);
+    BIND_MEMBER(WarpDrive, charge_time);
+    BIND_MEMBER(WarpDrive, decharge_time);
+    BIND_MEMBER(WarpDrive, heat_per_warp);
     BIND_MEMBER(WarpDrive, max_level);
     BIND_MEMBER(WarpDrive, speed_per_level);
     BIND_MEMBER(WarpDrive, energy_warp_per_second);
@@ -521,8 +533,12 @@ void initComponentScriptBindings()
     BIND_MEMBER(WarpJammer, range);
     sp::script::ComponentHandler<JumpDrive>::name("jump_drive");
     BIND_SHIP_SYSTEM(JumpDrive);
+    BIND_MEMBER(JumpDrive, charge_time);
+    BIND_MEMBER(JumpDrive, energy_per_km_charge);
+    BIND_MEMBER(JumpDrive, heat_per_jump);
     BIND_MEMBER(JumpDrive, min_distance);
     BIND_MEMBER(JumpDrive, max_distance);
+    BIND_MEMBER(JumpDrive, activation_delay);
     BIND_MEMBER(JumpDrive, charge);
     BIND_MEMBER(JumpDrive, distance);
     BIND_MEMBER(JumpDrive, delay);
