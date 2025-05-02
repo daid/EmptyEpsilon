@@ -231,6 +231,7 @@ set(MAIN_SOURCES
     src/gameGlobalInfo.cpp
     src/GMActions.cpp
     src/script.cpp
+    src/crewPosition.cpp
     src/playerInfo.cpp
     src/gameStateLogger.cpp
     src/missileWeaponData.cpp

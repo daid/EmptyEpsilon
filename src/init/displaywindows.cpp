@@ -49,7 +49,10 @@ bool createDisplayWindows()
 
     if (PreferencesManager::get("multimonitor", "0").toInt() != 0)
     {
-        while(int(windows.size()) < SDL_GetNumVideoDisplays())
+        auto n = PreferencesManager::get("multimonitor", "0").toInt();
+        if (n < 2)
+            n = SDL_GetNumVideoDisplays();
+        while(int(windows.size()) < n)
         {
             auto wrl = new RenderLayer();
             auto ml = new RenderLayer(wrl);

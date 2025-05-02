@@ -281,12 +281,15 @@ void returnToMainMenu(RenderLayer* render_layer)
         if (PreferencesManager::get("startpaused") != "1")
             engine->setGameSpeed(1.0);
     }
-    else if (PreferencesManager::get("autoconnect").toInt())
+    else if (PreferencesManager::get("autoconnect") != "")
     {
-        int crew_position = PreferencesManager::get("autoconnect").toInt() - 1;
-        if (crew_position < 0) crew_position = 0;
-        if (crew_position > static_cast<int>(CrewPosition::MAX)) crew_position = static_cast<int>(CrewPosition::MAX);
-        new AutoConnectScreen(CrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
+        auto value = PreferencesManager::get("autoconnect");
+
+        std::vector<AutoConnectPosition> window_positions;
+        for (auto part : value.split(";"))
+            window_positions.push_back(AutoConnectPosition(part));
+
+        new AutoConnectScreen(window_positions, PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
     }else{
         new MainMenu();
     }
@@ -300,7 +303,7 @@ void returnToShipSelection(RenderLayer* render_layer)
             if (window_render_layers[n] == render_layer)
                 new SecondMonitorScreen(n);
     } else {
-        if (PreferencesManager::get("autoconnect").toInt())
+        if (PreferencesManager::get("autoconnect") != "")
         {
             //If we are auto connect, return to the auto connect screen instead of the ship selection. The returnToMainMenu will handle this.
             returnToMainMenu(render_layer);
