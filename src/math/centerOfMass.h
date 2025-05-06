@@ -23,16 +23,23 @@ static inline glm::vec2 centerOfMass(const std::vector<glm::vec2>& path)
     for(unsigned int n=0; n<path.size(); n++)
     {
         auto p1 = path[n];
-        float second_factor = (p0.x * p1.y) - (p1.x * p0.y);
 
-        x += (p0.x + p1.x) * second_factor;
-        y += (p0.y + p1.y) * second_factor;
+        auto p0x = p0.x - path[0].x;
+        auto p0y = p0.y - path[0].y;
+        auto p1x = p1.x - path[0].x;
+        auto p1y = p1.y - path[0].y;
+
+        float second_factor = ((p0x * p1y) - (p1x * p0y));
+
+        x += (p0x + p1x) * second_factor;
+        y += (p0y + p1y) * second_factor;
         p0 = p1;
     }
 
     float area = polygonArea(path);
-    x = x / 6 / area;
-    y = y / 6 / area;
+    x = x / 6 / area + path[0].x;
+    y = y / 6 / area + path[0].y;
+
     return glm::vec2(x, y);
 }
 
