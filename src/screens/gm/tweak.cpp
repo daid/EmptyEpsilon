@@ -148,6 +148,16 @@ public:
                 v->VECTOR[vector_selector->getSelectionIndex()].VALUE = text.toFloat(); \
         }); \
     } while(0)
+#define ADD_SHIP_SYSTEM_TWEAK(SYSTEM) \
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health:"), SYSTEM, health); \
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health max:"), SYSTEM, health_max); \
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat:"), SYSTEM, heat_level); \
+      ADD_BOOL_TWEAK(tr("tweak-text", "Can be hacked:"), SYSTEM, can_be_hacked); \
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power factor:"), SYSTEM, power_factor); \
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat rate:"), SYSTEM, heat_add_rate_per_second); \
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Coolant change rate:"), SYSTEM, coolant_change_rate_per_second); \
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change rate:"), SYSTEM, power_change_rate_per_second); \
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair:"), SYSTEM, auto_repair_per_second);
 
 GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 : GuiPanel(owner, "GM_TWEAK_DIALOG")
@@ -167,66 +177,54 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     GuiTweakPage* new_page;
     GuiVectorTweak* vector_selector;
+
     ADD_PAGE(tr("tweak-tab", "Callsign"), CallSign);
     ADD_TEXT_TWEAK(tr("tweak-text", "Callsign:"), CallSign, callsign);
+
     ADD_PAGE(tr("tweak-tab", "Typename"), TypeName);
     ADD_TEXT_TWEAK(tr("tweak-text", "TypeName:"), TypeName, type_name);
     ADD_TEXT_TWEAK(tr("tweak-text", "Localized:"), TypeName, localized);
+
     ADD_PAGE(tr("tweak-tab", "Coolant"), Coolant);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Coolant, max);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max per system:"), Coolant, max_coolant_per_system);
     ADD_BOOL_TWEAK(tr("tweak-text", "Auto levels:"), Coolant, auto_levels);
+
     ADD_PAGE(tr("tweak-tab", "Hull"), Hull);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Current:"), Hull, current);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Hull, max);
     ADD_BOOL_TWEAK(tr("tweak-text", "Allow destruction:"), Hull, allow_destruction);
+
     ADD_PAGE(tr("tweak-tab", "Impulse Engine"), ImpulseEngine);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed forward:"), ImpulseEngine, max_speed_forward);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed reverse:"), ImpulseEngine, max_speed_reverse);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Acceleration forward:"), ImpulseEngine, acceleration_forward);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Acceleration reverse:"), ImpulseEngine, acceleration_reverse);
-    {
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health:"), ImpulseEngine, health);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health max:"), ImpulseEngine, health_max);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat:"), ImpulseEngine, heat_level);
-        ADD_BOOL_TWEAK(tr("tweak-text", "Can be hacked:"), ImpulseEngine, can_be_hacked);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power factor:"), ImpulseEngine, power_factor);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat rate:"), ImpulseEngine, heat_add_rate_per_second);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Coolant change rate:"), ImpulseEngine, coolant_change_rate_per_second);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change rate:"), ImpulseEngine, power_change_rate_per_second);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair:"), ImpulseEngine, auto_repair_per_second);
-    }
+    ADD_SHIP_SYSTEM_TWEAK(ImpulseEngine);
+
     ADD_PAGE(tr("tweak-tab", "Maneuvering thrusters"), ManeuveringThrusters);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed:"), ManeuveringThrusters, speed);
-    {
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health:"), ManeuveringThrusters, health);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health max:"), ManeuveringThrusters, health_max);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat:"), ManeuveringThrusters, heat_level);
-        ADD_BOOL_TWEAK(tr("tweak-text", "Can be hacked:"), ManeuveringThrusters, can_be_hacked);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power factor:"), ManeuveringThrusters, power_factor);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat rate:"), ManeuveringThrusters, heat_add_rate_per_second);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Coolant change rate:"), ManeuveringThrusters, coolant_change_rate_per_second);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change rate:"), ManeuveringThrusters, power_change_rate_per_second);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair:"), ManeuveringThrusters, auto_repair_per_second);
-    }
+    ADD_SHIP_SYSTEM_TWEAK(ManeuveringThrusters);
+
     ADD_PAGE(tr("tweak-tab", "Beam weapons"), BeamWeaponSys);
-    {
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health:"), BeamWeaponSys, health);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health max:"), BeamWeaponSys, health_max);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat:"), BeamWeaponSys, heat_level);
-        ADD_BOOL_TWEAK(tr("tweak-text", "Can be hacked:"), BeamWeaponSys, can_be_hacked);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power factor:"), BeamWeaponSys, power_factor);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat rate:"), BeamWeaponSys, heat_add_rate_per_second);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Coolant change rate:"), BeamWeaponSys, coolant_change_rate_per_second);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change rate:"), BeamWeaponSys, power_change_rate_per_second);
-        ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair:"), BeamWeaponSys, auto_repair_per_second);
-    }
+    ADD_SHIP_SYSTEM_TWEAK(BeamWeaponSys);
     ADD_VECTOR(tr("tweak-vector", "Mounts"), BeamWeaponSys, mounts);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Arc:"), BeamWeaponSys, mounts, arc);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Direction:"), BeamWeaponSys, mounts, direction);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), BeamWeaponSys, mounts, range);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Cycle time:"), BeamWeaponSys, mounts, cycle_time);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Damage:"), BeamWeaponSys, mounts, damage);
+
+    ADD_PAGE(tr("tweak-tab", "Warp Drive"), WarpDrive);
+    ADD_SHIP_SYSTEM_TWEAK(WarpDrive);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max level:"), WarpDrive, max_level);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed per level:"), WarpDrive, speed_per_level);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy per second:"), WarpDrive, energy_warp_per_second);
+
+    ADD_PAGE(tr("tweak-tab", "Jump Drive"), JumpDrive);
+    ADD_SHIP_SYSTEM_TWEAK(JumpDrive);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Min distance:"), JumpDrive, min_distance);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max distance:"), JumpDrive, max_distance);
 
     for(GuiTweakPage* page : pages)
     {
