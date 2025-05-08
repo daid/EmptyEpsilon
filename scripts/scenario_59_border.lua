@@ -21,15 +21,15 @@
 -- Ending[Quixotic]: Cutoffs 20% harder than normal
 -- Setting[Timed]: Sets whether or not the scenario has a time limit. Default is no time limit
 -- Timed[None|Default]: No time limit
--- Timed[15]: Scenario ends in 15 minutes
--- Timed[20]: Scenario ends in 20 minutes
--- Timed[25]: Scenario ends in 25 minutes
 -- Timed[30]: Scenario ends in 30 minutes
--- Timed[35]: Scenario ends in 35 minutes
 -- Timed[40]: Scenario ends in 40 minutes
 -- Timed[45]: Scenario ends in 45 minutes
 -- Timed[50]: Scenario ends in 50 minutes
 -- Timed[55]: Scenario ends in 55 minutes
+-- Timed[60]: Scenario ends in 60 minutes
+-- Timed[70]: Scenario ends in 70 minutes
+-- Timed[80]: Scenario ends in 80 minutes
+-- Timed[90]: Scenario ends in 90 minutes
 -- Setting[Reputation]: Starting reputation per player ship. The more initial reputation, the easier the scenario. Default: Hero = 400 reputation
 -- Reputation[Unknown]: Nobody knows you. Zero reputation
 -- Reputation[Nice]: 200 reputation - you've helped a few people
@@ -59,11 +59,14 @@ require("cpu_ship_diversification_scenario_utility.lua")
 --------------------
 function init()
 	popupGMDebug = "once"
-	scenario_version = "5.6.1"
-	print(string.format("     -----     Scenario: Borderline Fever     -----     Version %s     -----",scenario_version))
-	print(_VERSION)
-	print("Example of calling a function via http API, assuming you start EE with parameter httpserver=8080 (or it's in options.ini):")
-	print('curl --data "getScriptStorage().scenario.createPlayerShipSting()" http://localhost:8080/exec.lua')
+	scenario_version = "5.6.4"
+	ee_version = "2024.12.08"
+	print(string.format("    ----    Scenario: Borderline Fever    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
+	if _VERSION ~= nil then
+		print("Lua version:",_VERSION)
+	end
+	--print("Example of calling a function via http API, assuming you start EE with parameter httpserver=8080 (or it's in options.ini):")
+	--print('curl --data "getScriptStorage().scenario.createPlayerShipSting()" http://localhost:8080/exec.lua')
 	setGlobals()
 	setVariations()
 	setConstants()
@@ -131,36 +134,6 @@ function setGlobals()
 				assert(type(b)=="number")
 				assert(type(t)=="number")
 				return a + t * (b - a);
-			end
-		},
-		debug={
-			-- get a multi-line string for the number of objects at the current time
-			-- intended to be used via addGMMessage or print, but there may be other uses
-			-- it may be worth considering adding a function which would return an array rather than a string
-			getNumberOfObjectsString=function()
-				local all_objects=getAllObjects()
-				local object_counts={}
-				--first up we accumulate the number of each type of object
-				for i=1,#all_objects do
-					local object_type=all_objects[i].typeName
-					local current_count=object_counts[object_type]
-					if current_count==nil then
-						current_count=0
-					end
-					object_counts[object_type]=current_count+1
-				end
-				-- we want the ordering to be stable so we build a key list
-				local sorted_counts={}
-				for type in pairs(object_counts) do
-					table.insert(sorted_counts, type)
-				end
-				table.sort(sorted_counts)
-				--lastly we build the output
-				local output=""
-				for i,object_type in ipairs(sorted_counts) do
-					output=output..string.format("%s: %i\n",object_type,object_counts[object_type])
-				end
-				return output..string.format("\nTotal: %i",#all_objects)
 			end
 		},
 	}
@@ -275,15 +248,15 @@ function setVariations()
 		destructionDifferenceEndCondition = completion_conditions[getScenarioSetting("Ending")].destruction_difference
 		local timed_config = {
 			["None"] =	{limit = 0,	limited = false,	plot = nil},
-			["15"] =	{limit = 15,limited = true,		plot = timedGame},
-			["20"] =	{limit = 20,limited = true,		plot = timedGame},
-			["25"] =	{limit = 25,limited = true,		plot = timedGame},
 			["30"] =	{limit = 30,limited = true,		plot = timedGame},
-			["35"] =	{limit = 35,limited = true,		plot = timedGame},
 			["40"] =	{limit = 40,limited = true,		plot = timedGame},
 			["45"] =	{limit = 45,limited = true,		plot = timedGame},
 			["50"] =	{limit = 50,limited = true,		plot = timedGame},
 			["55"] =	{limit = 55,limited = true,		plot = timedGame},
+			["60"] =	{limit = 60,limited = true,		plot = timedGame},
+			["70"] =	{limit = 70,limited = true,		plot = timedGame},
+			["80"] =	{limit = 80,limited = true,		plot = timedGame},
+			["90"] =	{limit = 90,limited = true,		plot = timedGame},
 		}
 		playWithTimeLimit =				timed_config[getScenarioSetting("Timed")].limited
 		defaultGameTimeLimitInMinutes =	timed_config[getScenarioSetting("Timed")].limit
@@ -4935,9 +4908,6 @@ end
 function debugButtons()
 	clearGMFunctions()
 	addGMFunction(_("buttonGM", "-From Debug"),mainGMButtons)
-	addGMFunction(_("buttonGM", "Object Counts"),function()
-		addGMMessage(starryUtil.debug.getNumberOfObjectsString())
-	end)
 	addGMFunction(_("buttonGM", "always popup debug"),function()
 		popupGMDebug = "always"
 	end)
@@ -5386,14 +5356,16 @@ end
 function setGameTimeLimit()
 	clearGMFunctions()
 	addGMFunction(_("buttonGM", "-From time limit"),mainGMButtons)
-	for gt=15,55,5 do
-		addGMFunction(string.format(_("buttonGM", "%i minutes"),gt),function()
-			defaultGameTimeLimitInMinutes = gt
-			gameTimeLimit = defaultGameTimeLimitInMinutes*60
-			plot2 = timedGame
-			playWithTimeLimit = true
-			addGMMessage(string.format(_("msgGM", "Game time limit set to %i minutes"),defaultGameTimeLimitInMinutes))
-		end)
+	for gt=30,90,5 do
+		if gt ~= 35 and gt ~= 65 and gt ~= 75 and gt ~= 85 then
+			addGMFunction(string.format(_("buttonGM", "%i minutes"),gt),function()
+				defaultGameTimeLimitInMinutes = gt
+				gameTimeLimit = defaultGameTimeLimitInMinutes*60
+				plot2 = timedGame
+				playWithTimeLimit = true
+				addGMMessage(string.format(_("msgGM", "Game time limit set to %i minutes"),defaultGameTimeLimitInMinutes))
+			end)
+		end
 	end
 end
 -- Dynamic game master buttons --
@@ -7954,7 +7926,7 @@ function handleDockedState()
 						local sx, sy = comms_target:getPosition()
 						local nearby_objects = getObjectsInRadius(sx,sy,30000)
 						for i, obj in ipairs(nearby_objects) do
-							if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
+							if isObjectType(obj,"SpaceStation") then
 								if not obj:isEnemy(comms_target) then
 									if brochure_stations == "" then
 										brochure_stations = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
@@ -7976,7 +7948,7 @@ function handleDockedState()
 						local sx, sy = comms_target:getPosition()
 						local nearby_objects = getObjectsInRadius(sx,sy,30000)
 						for i, obj in ipairs(nearby_objects) do
-							if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
+							if isObjectType(obj,"SpaceStation") then
 								if not obj:isEnemy(comms_target) then
 									if obj.comms_data.goods ~= nil then
 										for good, good_data in pairs(obj.comms_data.goods) do
@@ -8001,7 +7973,7 @@ function handleDockedState()
 					local sx, sy = comms_target:getPosition()
 					local nearby_objects = getObjectsInRadius(sx,sy,30000)
 					for i, obj in ipairs(nearby_objects) do
-						if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
+						if isObjectType(obj,"SpaceStation") then
 							if not obj:isEnemy(comms_target) then
 								if obj.comms_data.characterDescription ~= nil then
 									if distance_diagnostic then print("distance_diagnostic 1",obj,sx,sy) end
@@ -8046,7 +8018,7 @@ function handleDockedState()
 					local sx, sy = comms_target:getPosition()
 					local nearby_objects = getObjectsInRadius(sx,sy,30000)
 					for i, obj in ipairs(nearby_objects) do
-						if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
+						if isObjectType(obj,"SpaceStation") then
 							if not obj:isEnemy(comms_target) then
 								if obj.comms_data.characterDescription ~= nil then
 									table.insert(upgrade_stations,obj)
@@ -8067,7 +8039,7 @@ function handleDockedState()
 					local nearby_objects = getObjectsInRadius(sx,sy,50000)
 					local stations_known = 0
 					for i, obj in ipairs(nearby_objects) do
-						if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
+						if isObjectType(obj,"SpaceStation") then
 							if not obj:isEnemy(comms_target) then
 								stations_known = stations_known + 1
 								addCommsReply(obj:getCallSign(),function()
@@ -8108,7 +8080,7 @@ function handleDockedState()
 					local button_count = 0
 					local by_goods = {}
 					for i, obj in ipairs(nearby_objects) do
-						if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
+						if isObjectType(obj,"SpaceStation") then
 							if not obj:isEnemy(comms_target) then
 								if obj.comms_data.goods ~= nil then
 									for good, good_data in pairs(obj.comms_data.goods) do
@@ -8156,7 +8128,7 @@ function handleDockedState()
 						local nearby_objects = getObjectsInRadius(sx,sy,50000)
 						local stations_known = 0
 						for i, obj in ipairs(nearby_objects) do
-							if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
+							if isObjectType(obj,"SpaceStation") then
 								if not obj:isEnemy(comms_target) then
 									if obj.comms_data.characterDescription ~= nil then
 										stations_known = stations_known + 1
@@ -8414,7 +8386,7 @@ function masterCartographer()
 			local nearby_objects = getAllObjects()
 			local station_distance = 0
 			for i, obj in ipairs(nearby_objects) do
-				if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
+				if isObjectType(obj,"SpaceStation") then
 					if not obj:isEnemy(comms_target) then
 						if distance_diagnostic then print("distance_diagnostic 2",comms_target,obj) end
 						station_distance = distance(comms_target,obj)
@@ -8439,7 +8411,7 @@ function masterCartographer()
 			local stations_known = 0
 			local station_distance = 0
 			for i, obj in ipairs(nearby_objects) do
-				if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
+				if isObjectType(obj,"SpaceStation") then
 					if not obj:isEnemy(comms_target) then
 						if distance_diagnostic then print("distance_diagnostic 3",comms_target,obj) end
 						station_distance = distance(comms_target,obj)
@@ -8485,7 +8457,7 @@ function masterCartographer()
 			local nearby_objects = getAllObjects()
 			local by_goods = {}
 			for i, obj in ipairs(nearby_objects) do
-				if obj.component.docking_bay ~= nil and obj.components.impulse_engine == nil then
+				if isObjectType(obj,"SpaceStation") then
 					if not obj:isEnemy(comms_target) then
 						if distance_diagnostic then print("distance_diagnostic 4",comms_target,obj) end
 						local station_distance = distance(comms_target,obj)
@@ -9993,7 +9965,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for i, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
@@ -10001,6 +9973,7 @@ function friendlyComms(comms_data)
 			end)
 		end
 	end
+--	print("comms target dot fleet:",comms_target.fleet,"initial assets evaluated:",initialAssetsEvaluated,"game time limit:",gameTimeLimit)
 	if comms_target.fleet ~= nil and initialAssetsEvaluated then
 		addCommsReply(string.format(_("shipAssist-comms", "Direct %s"),comms_target.fleet), function()
 			setCommsMessage(string.format(_("shipAssist-comms", "What command should be given to %s?"),comms_target.fleet))
@@ -12509,7 +12482,7 @@ function treatyHolds(delta)
 		end
 	end
 	if playWithTimeLimit then
-		if gameTimeLimit < 1700 and not initialAssetsEvaluated then
+		if getScenarioTime() > 120 and not initialAssetsEvaluated then
 			evaluateInitialAssets()
 		end
 	else
@@ -12537,7 +12510,11 @@ function treatyStressed(delta)
 	game_state = "kraylors belligerent"
 	treatyStressTimer = treatyStressTimer - delta
 	if not initialAssetsEvaluated then
-		if gameTimeLimit < 1700 then
+		if playWithTimeLimit then
+			if getScenarioTime() > 120 then
+				evaluateInitialAssets()
+			end
+		else
 			evaluateInitialAssets()
 		end
 	end
@@ -12564,7 +12541,11 @@ end
 function limitedWar(delta)
 	game_state = "limited war"
 	if not initialAssetsEvaluated then
-		if gameTimeLimit < 1700 then
+		if playWithTimeLimit then
+			if getScenarioTime() > 120 then
+				evaluateInitialAssets()
+			end
+		else
 			evaluateInitialAssets()
 		end
 	end
@@ -13360,7 +13341,7 @@ function personalAmbushPlayerCheck(p)
 		p.nebula_candidate = nil
 		local nebulaHuntList = p:getObjectsInRange(20000)
 		for i, obj in ipairs(nebulaHuntList) do
-			if obj.typeName == "Nebula" then
+			if isObjectType(obj,"Nebula") then
 				if distance_diagnostic then print("distance_diagnostic 20",p,obj) end
 				if distance(p,obj) > 6000 then
 					p.nebula_candidate = obj
@@ -13518,6 +13499,13 @@ function enemyBorderCheck(delta)
 	end
 end
 -- Plot ER enemy reinforcements
+function tableSelectRandom(array)
+	local array_item_count = #array
+    if array_item_count == 0 then
+        return nil
+    end
+	return array[math.random(1,#array)]	
+end
 function enemyReinforcements(delta)
 	if #enemyReinforcementSchedule > 0 then
 		if enemyReinforcementTimer == nil then
@@ -13525,16 +13513,13 @@ function enemyReinforcements(delta)
 		else
 			enemyReinforcementTimer = enemyReinforcementTimer - delta
 			if enemyReinforcementTimer < 0 then
-				local ta = VisualAsteroid():setPosition(kraylorCentroidX,kraylorCentroidY)
-				local p = closestPlayerTo(ta)
-				ta:destroy()
+				if kraylorCentroidX ~= nil then
+					local ta = VisualAsteroid():setPosition(kraylorCentroidX,kraylorCentroidY)
+					local p = closestPlayerTo(ta)
+					ta:destroy()
+				end
 				if p == nil then
-					for pidx=1,32 do
-						p = getPlayerShip(pidx)
-						if p ~= nil and p:isValid() then
-							break
-						end
-					end
+					p = tableSelectRandom(getActivePlayerShips())
 				end
 				if p ~= nil then
 					local dirx, diry = vectorFromAngle(random(0,360),random(15000,25000))
@@ -13695,21 +13680,18 @@ function sleeperAgent(delta)
 			local object_type = nil
 			for i, obj in pairs(nearby_objects) do
 				if victim ~= obj then
-					object_type = obj.typeName
-					if object_type ~= nil then
-						if object_type == "SpaceStation" then
-							if victim:isDocked(obj) then
-								if obj:getFaction() == "Human Navy" then
-									friendly_station = obj
-								end
+					if isObjectType(obj,"SpaceStation") then
+						if victim:isDocked(obj) then
+							if obj:getFaction() == "Human Navy" then
+								friendly_station = obj
 							end
 						end
-						if object_type == "CpuShip" then
-							local ship_type = obj:getTypeName()
-							if ship_type:find("Freighter") ~= nil then
-								if obj:getFaction() == "Independent" or obj:getFaction() == "Human Navy" then
-									table.insert(sleeper_freighter,obj)
-								end
+					end
+					if isObjectType(obj,"CpuShip") then
+						local ship_type = obj:getTypeName()
+						if ship_type:find("Freighter") ~= nil then
+							if obj:getFaction() == "Independent" or obj:getFaction() == "Human Navy" then
+								table.insert(sleeper_freighter,obj)
 							end
 						end
 					end
@@ -13876,11 +13858,8 @@ function checkForMining(delta, p)
 				if nearby_objects ~= nil and #nearby_objects > 1 then
 					for i, obj in ipairs(nearby_objects) do
 						if p ~= obj then
-							local object_type = obj.typeName
-							if object_type ~= nil then
-								if object_type == "Asteroid" then
-									table.insert(mining_objects,obj)
-								end
+							if isObjectType(obj,"Asteroid") then
+								table.insert(mining_objects,obj)
 							end
 						end
 					end		--end of nearby object list loop
@@ -14021,11 +14000,8 @@ function addMiningButtons(p,mining_objects)
 					if nearby_objects ~= nil and #nearby_objects > 1 then
 						for i, obj in ipairs(nearby_objects) do
 							if p ~= obj then
-								local object_type = obj.typeName
-								if object_type ~= nil then
-									if object_type == "Asteroid" then
-										table.insert(mining_objects,obj)
-									end
+								if isObjectType(obj,"Asteroid") then
+									table.insert(mining_objects,obj)
 								end
 							end
 						end		--end of nearby object list loop
@@ -14138,7 +14114,7 @@ function stationWarning(delta)
 	local function warningCheckPriority1(warn_station)
 		local warning_message = ""
 		for i, obj in ipairs(warn_station:getObjectsInRange(20000)) do
-			if obj ~= nil and obj:isValid() and obj:isEnemy(warn_station) and obj.components.ai_controller then
+			if obj ~= nil and obj:isValid() and obj:isEnemy(warn_station) and isObjectType(obj,"CpuShip") then
 				warning_message = string.format(_("helpfullWarning-shipLog", "[%s in %s] We detect one or more enemies nearby"),warn_station:getCallSign(),warn_station:getSectorName())
 				if difficulty < 2 then
 					warning_message = string.format(_("helpfullWarning-shipLog", "%s. At least one is of type %s"),warning_message,obj:getTypeName())
@@ -14467,6 +14443,7 @@ function friendlyVesselDestroyed(self, instigator)
 	table.insert(friendlyVesselDestroyedValue,ship_template[tempShipType].strength)
 end
 function friendlyStationDestroyed(self, instigator)
+	string.format("")
 	if self ~= nil then
 		table.insert(friendlyStationDestroyedNameList,self:getCallSign())
 		table.insert(friendlyStationDestroyedValue,self.strength)
@@ -14624,7 +14601,7 @@ function endStatistics()
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 	gMsg = gMsg .. string.format(_("msgMainscreen", "Enemy stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n"),stat_list.kraylor.station.count,stat_list.kraylor.station.original_count,stat_list.kraylor.station.count/stat_list.kraylor.station.original_count*100,stat_list.kraylor.station.value,stat_list.kraylor.station.original_value,stat_list.kraylor.station.percentage)
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
-	gMsg = gMsg .. string.format(_("msgMainscreen", "Neutral stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n\n\n\n"),stat_list.independent.station.count,stat_list.independent.station.original_count,stat_list.independent.station.count/stat_list.independent.station.original_count*100,stat_list.independent.station.value,stat_list.independent.station.original_value,stat_list.independent.station.percentage)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "Neutral stations: %i out of %i survived (%.1f%%), strength: %i out of %i (%.1f%%)\n"),stat_list.independent.station.count,stat_list.independent.station.original_count,stat_list.independent.station.count/stat_list.independent.station.original_count*100,stat_list.independent.station.value,stat_list.independent.station.original_value,stat_list.independent.station.percentage)
 	if endStatDiagnostic then print("gMsg so far: " .. gMsg) end
 	--ship information
 	gMsg = gMsg .. string.format(_("msgMainscreen", "Friendly ships: strength: %i out of %i (%.1f%%)\n"),stat_list.human.ship.value,stat_list.human.ship.original_value,stat_list.human.ship.percentage)
