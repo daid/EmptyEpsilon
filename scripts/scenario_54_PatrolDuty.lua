@@ -145,6 +145,12 @@ end
 --	Initialization  --
 ----------------------
 function init()
+	scenario_version = "8.0.1"
+	ee_version = "2024.12.08"
+	print(string.format("    ----    Scenario: Patrol Duty    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
+	if _VERSION ~= nil then
+		print("Lua version:",_VERSION)
+	end
 	setVariations()
 	setConstants()
 	diagnostic = false
@@ -4601,7 +4607,7 @@ function handleDockedState()
 						local sx, sy = comms_target:getPosition()
 						local nearby_objects = getObjectsInRadius(sx,sy,30000)
 						for i, obj in ipairs(nearby_objects) do
-							if obj.typeName == "SpaceStation" then
+							if isObjectType(obj,"SpaceStation") then
 								if not obj:isEnemy(comms_target) then
 									if brochure_stations == "" then
 										brochure_stations = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
@@ -4623,7 +4629,7 @@ function handleDockedState()
 						local sx, sy = comms_target:getPosition()
 						local nearby_objects = getObjectsInRadius(sx,sy,30000)
 						for i, obj in ipairs(nearby_objects) do
-							if obj.typeName == "SpaceStation" then
+							if isObjectType(obj,"SpaceStation") then
 								if not obj:isEnemy(comms_target) then
 									if obj.comms_data.goods ~= nil then
 										for good, good_data in pairs(obj.comms_data.goods) do
@@ -4657,7 +4663,7 @@ function handleDockedState()
 					local nearby_objects = getObjectsInRadius(sx,sy,50000)
 					local stations_known = 0
 					for i, obj in ipairs(nearby_objects) do
-						if obj.typeName == "SpaceStation" then
+						if isObjectType(obj,"SpaceStation") then
 							if not obj:isEnemy(comms_target) then
 								stations_known = stations_known + 1
 								addCommsReply(obj:getCallSign(),function()
@@ -4695,7 +4701,7 @@ function handleDockedState()
 					local button_count = 0
 					local by_goods = {}
 					for i, obj in ipairs(nearby_objects) do
-						if obj.typeName == "SpaceStation" then
+						if isObjectType(obj,"SpaceStation") then
 							if not obj:isEnemy(comms_target) then
 								if obj.comms_data.goods ~= nil then
 									for good, good_data in pairs(obj.comms_data.goods) do
@@ -5181,7 +5187,7 @@ function masterCartographer()
 			local nearby_objects = getAllObjects()
 			local stations_known = 0
 			for i, obj in ipairs(nearby_objects) do
-				if obj.typeName == "SpaceStation" then
+				if isObjectType(obj,"SpaceStation") then
 					if not obj:isEnemy(comms_target) then
 						local station_distance = distance(comms_target,obj)
 						if station_distance > 50000 then
@@ -5223,7 +5229,7 @@ function masterCartographer()
 			local nearby_objects = getAllObjects()
 			local by_goods = {}
 			for i, obj in ipairs(nearby_objects) do
-				if obj.typeName == "SpaceStation" then
+				if isObjectType(obj,"SpaceStation") then
 					if not obj:isEnemy(comms_target) then
 						local station_distance = distance(comms_target,obj)
 						if station_distance > 50000 then
@@ -5746,7 +5752,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for i, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
@@ -7589,7 +7595,7 @@ function jumpStart(delta)
 		objList = getObjectsInRadius(x, y, 30000)
 		nebulaList = {}
 		for i, obj in ipairs(objList) do
-			if obj.typeName == "Nebula" then
+			if isObjectType(obj,"Nebula") then
 				table.insert(nebulaList,obj)
 			end
 		end
