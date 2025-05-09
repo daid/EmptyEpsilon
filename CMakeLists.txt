@@ -107,7 +107,7 @@ if(WITH_DISCORD)
 endif()
 
 # Meshoptimizer
-set(MESHOPTIMIZER_VERSION 0.16)
+set(MESHOPTIMIZER_VERSION 0.23)
 if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.11)
   include(FetchContent)
   FetchContent_Declare(
