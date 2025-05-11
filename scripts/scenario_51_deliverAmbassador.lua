@@ -18,13 +18,13 @@ require("spawn_ships_scenario_utility.lua")
 require("control_code_scenario_utility.lua")
 
 function init()
-	scenario_version = "5.0.3"
-	ee_version = "2024.08.09"
+	scenario_version = "5.0.4"
+	ee_version = "2024.12.08"
 	print(string.format("    ----    Scenario: Deliver Ambassador Gremus    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
 	if _VERSION ~= nil then
 		print(_VERSION)
 	end
-	playerCallSign = "Carolina"
+	playerCallSign = "Damocles"
 	player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Flavia P.Falcon")
 	player:setPosition(22400, 18200):setCallSign(playerCallSign):setHeading(90)
 	player.location_help = {}
@@ -133,8 +133,8 @@ function mainGMButtons()
 	clearGMFunctions()
 	addGMFunction(_("buttonGM","+Spawn Ship(s)"),spawnGMShips)
 	addGMFunction(_("buttonGM","+Control Codes"),manageControlCodes)
+	addGMFunction(_("buttonGM","Terrorist End"),terroristEnd)
 end
-
 --	Utilities
 function audioButtonTimers(delta)
 	--	Make the audio playback buttons on Relay go after 3 minutes
@@ -258,7 +258,7 @@ function createAsteroidsOnLine(x1, y1, x2, y2, spacing, object_type, rows, chanc
                 a = object_type():setPosition(px, py)
             end
             if a ~= nil then
-            	if a.typeName == "Asteroid" or a.typeName == "VisualAsteroid" then
+            	if isObjectType(a,"Asteroid") or isObjectType(a,"VisualAsteroid") then
 	            	a:setSize(random(4,300) + random(4,300) + random(4,300))
 	            end
             end
@@ -285,7 +285,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 		local xo = x + math.cos(r / 180 * math.pi) * dist
 		local yo = y + math.sin(r / 180 * math.pi) * dist
 		local a = object_type():setPosition(xo, yo)
-		if a.typeName == "Asteroid" or a.typeName == "VisualAsteroid" then
+		if isObjectType(a,"Asteroid") or isObjectType(a,"VisualAsteroid") then
 			a:setSize(random(4,300) + random(4,300) + random(4,300))
 		end
 	end
@@ -863,6 +863,48 @@ function pangoraArtifactExplode(delta)
 		plot4 = nil
 	end
 end
+--	Plot 5 (terrorist end)
+function terroristEnd()
+	plot5 = maintainTerrorists
+	addGMMessage(_("msgGM","Terrorist ending initiated"))
+end
+function maintainTerrorists()
+	if terrorist_list == nil then
+		terrorist_list = {}
+		local px, py = player:getPosition()
+		local attack_angle = random(0,360)
+		for i=1,6 do
+			local tx, ty = vectorFromAngle(attack_angle,player:getLongRangeRadarRange())
+			local ship = CpuShip():setTemplate("Stalker Q7"):setPosition(px + tx, py + ty):setFaction("Kraylor")
+			ship:orderAttack(player):setCallSign(generateCallSign(nil,"Kraylor"))
+			ship:setImpulseMaxSpeed(90):setRotationMaxSpeed(20)
+			table.insert(terrorist_list,ship)
+			attack_angle = (attack_angle + 60) % 360
+		end
+	end
+	if player.ultimatum == nil then
+		if availableForComms(player) then
+			for i,ship in ipairs(terrorist_list) do
+				if ship:isValid() then
+					ship:sendCommsMessage(player,_("KraylorEndline-incCall","We apologize for the imminent destruction of your ship, but you are harboring Ambassador Gremus aboard, a known menace to polite society."))
+					player.ultimatum = "sent"
+					break
+				end
+			end
+		end
+	end
+	for i,ship in ipairs(terrorist_list) do
+		if ship:isValid() then
+			if ship.jammer == nil then
+				if distance(ship,player) < 5000 then
+					local wj_x, wj_y = ship:getPosition()
+					WarpJammer():setPosition(wj_x,wj_y):setRange(20000):setHull(100)
+					ship.jammer = "dropped"
+				end
+			end
+		end
+	end
+end
 ------------------------------
 --	Station Communications  --
 ------------------------------
@@ -1153,7 +1195,33 @@ function getFriendStatus()
         return "neutral"
     end
 end
-
+function availableForComms(p)
+	if not p:isCommsInactive() then
+		return false
+	end
+	if p:isCommsOpening() then
+		return false
+	end
+	if p:isCommsBeingHailed() then
+		return false
+	end
+	if p:isCommsBeingHailedByGM() then
+		return false
+	end
+	if p:isCommsChatOpen() then
+		return false
+	end
+	if p:isCommsChatOpenToGM() then
+		return false
+	end
+	if p:isCommsChatOpenToPlayer() then
+		return
+	end
+	if p:isCommsScriptOpen() then
+		return false
+	end
+	return true
+end
 function update(delta)
     if not player:isValid() then
     	globalMessage(string.format(_("msgMainscreen","%s destroyed. Ambassador Gremus killed.\nWar begins on Goltin 7. Disgrace abounds."),playerCallSign))
@@ -1179,6 +1247,9 @@ function update(delta)
 	end
 	if plot4 ~= nil then
 		plot4(delta)
+	end
+	if plot5 ~= nil then
+		plot5()
 	end
 	if transportPlot ~= nil then
 		transportPlot()
