@@ -634,13 +634,15 @@ static int luaGetEEVersion()
 }
 
 static nlohmann::json luaToJSONImpl(lua_State* L, int lua_index) {
-    if (lua_isboolean(L, lua_index)) {
+    LOG(DEBUG, lua_index);
+    auto ltype = lua_type(L, lua_index);
+    if (ltype == LUA_TBOOLEAN) {
         return bool(lua_toboolean(L, lua_index));
-    } else if (lua_isinteger(L, lua_index)) {
-        return lua_tointeger(L, lua_index);
-    } else if (lua_isnumber(L, lua_index)) {
+    } else if (ltype == LUA_TNUMBER) {
+        if (lua_isinteger(L, lua_index))
+            return lua_tointeger(L, lua_index);
         return lua_tonumber(L, lua_index);
-    } else if (lua_isstring(L, lua_index)) {
+    } else if (ltype == LUA_TSTRING) {
         return lua_tostring(L, lua_index);
     } else if (lua_istable(L, lua_index)) {
         // Figure out of the table is a list or not.
@@ -648,9 +650,10 @@ static nlohmann::json luaToJSONImpl(lua_State* L, int lua_index) {
         int index_max = std::numeric_limits<int>::min();
         int index_min = std::numeric_limits<int>::max();
         lua_pushnil(L);
-        while(lua_next(L, lua_index) && is_array) {
+        while(is_array && lua_next(L, lua_index)) {
             if (!lua_isinteger(L, -2)) {
                 is_array = false;
+                lua_pop(L, 1);
             } else {
                 int idx = lua_tointeger(L, -2);
                 index_max = std::max(idx, index_max);
@@ -671,13 +674,15 @@ static nlohmann::json luaToJSONImpl(lua_State* L, int lua_index) {
             lua_pushnil(L);
             while(lua_next(L, lua_index)) {
                 std::string key = "?";
-                if (lua_isboolean(L, -2)) {
+                ltype = lua_type(L, -2);
+                if (ltype == LUA_TBOOLEAN) {
                     key = lua_toboolean(L, -2) ? "true" : "false";
-                } else if (lua_isinteger(L, -2)) {
-                    key = std::to_string(lua_tointeger(L, -2));
-                } else if (lua_isnumber(L, -2)) {
-                    key = std::to_string(lua_tonumber(L, -2));
-                } else if (lua_isstring(L, -2)) {
+                } else if (ltype == LUA_TNUMBER) {
+                    if (lua_isinteger(L, -2))
+                        key = std::to_string(lua_tointeger(L, -2));
+                    else
+                        key = std::to_string(lua_tonumber(L, -2));
+                } else if (ltype == LUA_TSTRING) {
                     key = lua_tostring(L, -2);
                 }
                 json[key] = luaToJSONImpl(L, lua_gettop(L));
