@@ -31,7 +31,7 @@ end
 --- Example: ship:isFriendOrFoeIdentifiedBy(enemy)
 function Entity:isFriendOrFoeIdentifiedBy(enemy)
     local scan_state = self.components.scan_state
-    if enemy == nil or not enemy.isValid() then return false end
+    if enemy == nil or not enemy:isValid() then return false end
     local faction = enemy.components.faction
     if faction == nil then return false end
     faction = faction.entity
@@ -47,7 +47,7 @@ end
 --- Example: ship:isFullyScannedBy(enemy)
 function Entity:isFullyScannedBy(enemy)
     local scan_state = self.components.scan_state
-    if enemy == nil or not enemy.isValid() then return false end
+    if enemy == nil or not enemy:isValid() then return false end
     local faction = enemy.components.faction
     if faction == nil then return false end
     faction = faction.entity
@@ -62,7 +62,7 @@ end
 --- Example: ship:isFriendOrFoeIdentifiedByFaction("Kraylor")
 function Entity:isFriendOrFoeIdentifiedByFaction(faction)
     local scan_state = self.components.scan_state
-    if enemy == nil or not enemy.isValid() then return false end
+    if enemy == nil or not enemy:isValid() then return false end
     faction = getFactionInfo(faction)
     if faction == nil then return false end
     if scan_state then
@@ -77,7 +77,7 @@ end
 --- Example: ship:isFullyScannedByFaction("Kraylor")
 function Entity:isFullyScannedByFaction(faction)
     local scan_state = self.components.scan_state
-    if enemy == nil or not enemy.isValid() then return false end
+    if enemy == nil or not enemy:isValid() then return false end
     faction = getFactionInfo(faction)
     if faction == nil then return false end
     if scan_state then
@@ -685,7 +685,7 @@ end
 --- Weapon tubes are 0-indexed. For example, 3 tubes would be indexed 0, 1, and 2.
 --- Example: ship:setWeaponTubeCount(4)
 function Entity:setWeaponTubeCount(amount)
-    self.components.missile_tubes = {}
+    if self.components.missile_tubes == nil then self.components.missile_tubes = {} end
     for n=1,amount do
         self.components.missile_tubes[n] = {}
     end
@@ -705,8 +705,10 @@ end
 --- Example: ship:getWeaponTubeLoadType(0)
 function Entity:getWeaponTubeLoadType(index)
     local tubes = self.components.missile_tubes
-    if  tubes and index >= 0 and index < #tubes then return tubes[index+1].type_loaded end
-    return "none"
+    local missile_type = "none"
+    if  tubes and index >= 0 and index < #tubes then missile_type = tubes[index+1].type_loaded end
+    if missile_type == "none" then return nil end
+    return missile_type
 end
 --- Sets which weapon types the WeaponTube with the given index on this SpaceShip can load.
 --- Note the spelling of "missle".
