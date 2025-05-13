@@ -324,7 +324,7 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
 
     auto res = main_scenario_script->runFile<void>(filename);
     LuaConsole::checkResult(res);
-    if (res.isOk()) {
+    if (res.isOk() && main_scenario_script->isFunction("init")) {
         res = main_scenario_script->call<void>("init");
         LuaConsole::checkResult(res);
         if (res.isErr()) {
