@@ -48,3 +48,4 @@ build*/
 _build*/
 cmake/_win32/
 cmake/android/
+script_docs/__pycache__/
