@@ -53,8 +53,11 @@ require("place_station_scenario_utility.lua")
 --------------------
 function init()
 	scenario_version = "1.0.2"
-	print(string.format("     -----     Scenario: Omicron     -----     Version %s     -----",scenario_version))
-	print(_VERSION)
+	ee_version = "2024.12.08"
+	print(string.format("    ----    Scenario: Omicron    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
+	if _VERSION ~= nil then
+		print("Lua version:",_VERSION)
+	end
 	spawn_enemy_diagnostic = false
 	setVariations()	--numeric difficulty, Kraylor fortress size
 	setConstants()	--missle type names, template names and scores, deployment directions, player ship names, etc.
@@ -5143,7 +5146,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for index, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
@@ -6047,7 +6050,7 @@ function friendlyServiceJonqueComms(comms_data)
 			addCommsReply(_("Back"), commsServiceJonque)
 	end)
 	for index, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms","Dock at %s"),obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms","Docking at %s."),obj:getCallSign()))
 				comms_target:orderDock(obj)
@@ -9441,7 +9444,7 @@ function moonCollisionCheck()
 	for _, obj in ipairs(collision_list) do
 		if obj:isValid() then
 			obj_dist = distance(obj,moon_barrier)
-			if obj.components.ai_controller then
+			if isObjectType(obj,"CpuShip") then
 				obj_type_name = obj:getTypeName()
 				if obj_type_name ~= nil then
 					ship_distance = shipTemplateDistance[obj:getTypeName()]
@@ -9456,7 +9459,7 @@ function moonCollisionCheck()
 				if obj_dist <= moon_barrier.moon_radius + ship_distance + 200 then
 					obj:takeDamage(100,"kinetic",moon_x,moon_y)
 				end
-			elseif obj.components.player_control then
+			elseif isObjectType(obj,"PlayerSpaceship") then
 				obj_type_name = obj:getTypeName()
 				if obj_type_name ~= nil then
 					ship_distance = playerShipStats[obj:getTypeName()].distance
