@@ -724,6 +724,11 @@ void initComponentScriptBindings()
     BIND_MEMBER(PickupCallback, callback);
     BIND_MEMBER(PickupCallback, player);
     BIND_MEMBER(PickupCallback, give_energy);
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Homing)], "give_homing");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Nuke)], "give_nuke");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Mine)], "give_mine");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_EMP)], "give_emp");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_HVLI)], "give_hvli");
 
     sp::script::ComponentHandler<CollisionCallback>::name("collision_callback");
     BIND_MEMBER(CollisionCallback, callback);

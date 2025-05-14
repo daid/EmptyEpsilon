@@ -157,7 +157,14 @@ function Entity:setWeaponStorage(weapon_type, amount)
         if weapon_type == "emp" then self.components.missile_tubes.storage_emp = amount end
         if weapon_type == "hvli" then self.components.missile_tubes.storage_hvli = amount end
     end
-    --TODO: Supplydrop
+    if self.components.pickup then
+        weapon_type = string.lower(weapon_type)
+        if weapon_type == "homing" then self.components.pickup.give_homing = amount end
+        if weapon_type == "nuke" then self.components.pickup.give_nuke = amount end
+        if weapon_type == "mine" then self.components.pickup.give_mine = amount end
+        if weapon_type == "emp" then self.components.pickup.give_emp = amount end
+        if weapon_type == "hvli" then self.components.pickup.give_hvli = amount end
+    end
     return self
 end
 --- Sets this SpaceShip's capacity for the given weapon type.
