@@ -1,6 +1,7 @@
 #include "playerInfo.h"
 #include "i18n.h"
 #include "commsOverlay.h"
+#include "gui/gui2_canvas.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_progressbar.h"
 #include "gui/gui2_button.h"
@@ -15,7 +16,8 @@
 #include "onScreenKeyboard.h"
 
 GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
-: GuiElement(owner, "COMMS_OVERLAY")
+: GuiElement(owner, "COMMS_OVERLAY"),
+  chat_open_last_update(false)
 {
     // Panel for reporting outgoing hails.
     opening_box = new GuiPanel(this, "COMMS_OPENING_BOX");
@@ -164,8 +166,17 @@ void GuiCommsOverlay::onUpdate()
         broken_box->setVisible(transmitter->state == CommsTransmitter::State::ChannelBroken);
         closed_box->setVisible(transmitter->state == CommsTransmitter::State::ChannelClosed);
 
-        chat_comms_box->setVisible(transmitter->state == CommsTransmitter::State::ChannelOpen || transmitter->state == CommsTransmitter::State::ChannelOpenGM || transmitter->state == CommsTransmitter::State::ChannelOpenPlayer);
+        const bool is_open = transmitter->state == CommsTransmitter::State::ChannelOpen || transmitter->state == CommsTransmitter::State::ChannelOpenGM || transmitter->state == CommsTransmitter::State::ChannelOpenPlayer;
+        chat_comms_box->setVisible(is_open);
         chat_comms_text->setText(transmitter->incomming_message);
+        if (is_open && !chat_open_last_update) {
+          // Chat window has just opened, let's auto-focus the text input
+          auto canvas = dynamic_cast<GuiCanvas*>(getTopLevelContainer());
+          if (canvas) {
+            canvas->focus(chat_comms_message_entry);
+          }
+        }
+        chat_open_last_update = is_open;
 
         script_comms_box->setVisible(transmitter->state == CommsTransmitter::State::ChannelOpen);
         script_comms_text->setText(transmitter->incomming_message);
