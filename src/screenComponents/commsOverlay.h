@@ -37,6 +37,8 @@ private:
     GuiScrollText* script_comms_text;
     GuiListbox* script_comms_options;
     GuiButton* script_comms_close;
+
+    bool chat_open_last_update;
 public:
     GuiCommsOverlay(GuiContainer* owner);
 
