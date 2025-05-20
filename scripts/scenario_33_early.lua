@@ -34,6 +34,9 @@
 -- Setting[Insight]: Configure whether the players may see the GM evaluation
 -- Insight[No|Default]: Players see the number portion of their task evaluation, but not the evaluation portion
 -- Insight[Yes]: Players see both the numbers and their evaluation for each task
+-- Setting[Names]: Configures whether player ship names are selected at random or are fixed
+-- Names[Fixed|Default]: Player ship names are pre-assigned
+-- Names[Random]: Player ship names are selected at random from a list
 
 ---------- Tasks given to players ----------
 --	First Task: Dock
@@ -64,17 +67,18 @@ require("utils.lua")  -- common math/geometry utility library
 require("place_station_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 function init()
-	scenario_version = "1.0.0"
-	print(string.format("     -----     Scenario: Early Evaluation Exercise     -----     Version %s     -----",scenario_version))
+	scenario_version = "1.0.2"
+	ee_version = "2024.12.08"
+	print(string.format("    ----    Scenario: Early Evaluation Exercise    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
 	if _VERSION ~= nil then
-		print(_VERSION)
+		print("Lua version:",_VERSION)
 	end
 	spawn_enemy_diagnostic = true
 	func_diagnostic = false
 	planet_collision_diagnostic = false
 	setConstants()
-	setGMButtons()
 	setVariations()
+	setGMButtons()
 end
 function setVariations()
 	-- One aspect of this scenario is the multiple planets that are orbiting the center black hole and each other. 
@@ -101,6 +105,31 @@ function setVariations()
 	if getScenarioSetting("Control") == "None" then
 		use_control_codes = false
 	end
+	if getScenarioSetting("Names") == "Fixed" then
+		if use_control_codes then
+			predefined_player_ships = {
+				{name = "Damocles",		control_code = "SPRINGFIELD443"},
+				{name = "Endeavor",		control_code = "VALIANT898"},
+				{name = "Hyperion",		control_code = "DANUBE555"},
+				{name = "Liberty",		control_code = "SALADIN676"},
+				{name = "Prismatic",	control_code = "CONSTITUTION424"},
+				{name = "Visionary",	control_code = "GALAXY332"},
+				{name = "Newton",		control_code = "STRIKE535"},
+				{name = "Reliant",		control_code = "MIRANDA909"},
+			}
+		else
+			predefined_player_ships = {
+				{name = "Damocles",		},
+				{name = "Endeavor",		},
+				{name = "Hyperion",		},
+				{name = "Liberty",		},
+				{name = "Prismatic",	},
+				{name = "Visionary",	},
+				{name = "Newton",		},
+				{name = "Reliant",		},
+			}
+		end
+	end
 	player_ship_count = getScenarioSetting("Ships")
 	for i=1,player_ship_count do
 		local p = PlayerSpaceship():setTemplate("Atlantis")
@@ -113,16 +142,6 @@ function setVariations()
 	end
 end
 function setConstants()
-	predefined_player_ships = {
-		{name = "Chekov",	control_code = "SPRINGFIELD443"},
-		{name = "Defiant",	control_code = "VALIANT898"},
-		{name = "Ganges",	control_code = "DANUBE555"},
-		{name = "Heracles",	control_code = "SALADIN676"},
-		{name = "Intrepid",	control_code = "CONSTITUTION424"},
-		{name = "Magellan",	control_code = "GALAXY332"},
-		{name = "Newton",	control_code = "STRIKE535"},
-		{name = "Reliant",	control_code = "MIRANDA909"},
-	}
 	storage = getScriptStorage()
 	storage.gatherStats = gatherStats
 -- the first group is the 2 planetoids orbiting closest to the center black hole (the black hole doesn't move)
@@ -1034,6 +1053,7 @@ function mainGMButtonsDuringPause()
 	end)
 	if use_control_codes then
 		addGMFunction(_("buttonGM","Show control codes"),showControlCodes)
+		addGMFunction(_("buttonGM","Reset control codes"),resetControlCodes)
 	end
 	addGMFunction(_("buttonGM","+Orbital Scheme"),setOrbitalScheme)
 	if predefined_player_ships ~= nil then
@@ -1062,6 +1082,15 @@ function mainGMButtonsAfterPause()
 		addGMMessage(_("msgGM","These triggers are for testing purposes. You should not use them with actual players."))
 		triggerEndTask()
 	end)
+end
+function resetControlCodes()
+	for i,p in ipairs(getActivePlayerShips()) do
+		local stem = tableRemoveRandom(control_code_stem)
+		local branch = math.random(100,999)
+		p.control_code = stem .. branch
+		p:setControlCode(stem .. branch)
+	end
+	showControlCodes()
 end
 function triggerEndTask()
 	clearGMFunctions()
@@ -1953,7 +1982,7 @@ function planetCollisionDetection()
 					print("distance_diagnostic 25 obj:",obj,"planet:",planet)
 				end		
 				obj_dist = distance(obj,planet)
-				if obj.typeName == "CpuShip" then
+				if isObjectType(obj,"CpuShip") then
 					obj_type_name = obj:getTypeName()
 					if obj_type_name ~= nil then
 						ship_distance = shipTemplateDistance[obj:getTypeName()]
@@ -1970,7 +1999,7 @@ function planetCollisionDetection()
 						obj:takeDamage(planet_bump_damage,"kinetic",planet_x,planet_y)
 					end
 				end
-				if obj.typeName == "PlayerSpaceship" then
+				if isObjectType(obj,"PlayerSpaceship") then
 					obj_type_name = obj:getTypeName()
 					if obj_type_name ~= nil then
 						ship_distance = playerShipStats[obj:getTypeName()].distance
@@ -2015,7 +2044,7 @@ function planetCollisionDetection()
 						end
 					end
 				end
-				if obj.typeName == "ScanProbe" then
+				if isObjectType(obj,"ScanProbe") then
 					if obj_dist <= (planet:getPlanetRadius() + 50) then
 						obj:takeDamage(planet_bump_damage,"kinetic",planet_x,planet_y)
 					end
@@ -2054,7 +2083,7 @@ function blackHoleResearch(p)
 	if func_diagnostic then print("black hole research") end
 	if p.task == "research" then
 		for i, orbit in ipairs(p.orbital_body_research) do
-			if orbit.body.typeName == "BlackHole" then
+			if isObjectType(orbit.body,"BlackHole") then
 				if orbit.research == "N" then
 					local scanning_count = 0
 					local black_hole_scan_range = 6800
@@ -2074,7 +2103,7 @@ function blackHoleResearch(p)
 					end
 					local obj_list = getObjectsInRadius(terrain_center_x, terrain_center_y, black_hole_scan_range)
 					for i, obj in ipairs(obj_list) do
-						if obj.typeName == "ScanProbe" then
+						if isObjectType(obj,"ScanProbe") then
 							if obj:getOwner() == p then
 								if obj.arrived then
 									scanning_count = scanning_count + 1
@@ -2546,10 +2575,15 @@ function identifyPlayerShip(p,paused)
 			p.control_code = player_restart[pidx].control_code
 			p:setControlCode(player_restart[pidx].control_code)
 		else
+			local control_code_set = false
 			if predefined_player_ships ~= nil and predefined_player_ships[pidx] ~= nil then
-				p.control_code = predefined_player_ships[pidx].control_code
-				p:setControlCode(predefined_player_ships[pidx].control_code)
-			else
+				if predefined_player_ships[pidx].control_code ~= nil then
+					p.control_code = predefined_player_ships[pidx].control_code
+					p:setControlCode(predefined_player_ships[pidx].control_code)
+					control_code_set = true
+				end
+			end
+			if not control_code_set then
 				local control_code_index = math.random(1,#control_code_stem)
 				local stem = control_code_stem[control_code_index]
 				table.remove(control_code_stem,control_code_index)
@@ -3883,6 +3917,7 @@ function scanTaskEvaluationOutput(p,gm)
 			table.insert(timeline,9999)
 		end
 		local rta = _("evaluation-comms","(no)")
+		--note: scan_target is not a class, it just happens to have a typeName entry
 		if scan_target.typeName == scan_target.identified_type then
 			rta = _("evaluation-comms","(yes)")
 			evaluation_score = evaluation_score + 2
@@ -4603,7 +4638,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for index, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			if comms_target:getTypeName() ~= "Defense platform" then
 				addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 					setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
@@ -5742,10 +5777,12 @@ function taskDock(p)
 				p.dock_set_beam_clock = getScenarioTime()
 			end
 		end
-		if p:isDocked(p.home_station) then
-			p.dock_end_clock = getScenarioTime()
-			p.task = "completed dock"
-			p.dock_task = "complete"
+		if p.home_station ~= nil then
+			if p:isDocked(p.home_station) then
+				p.dock_end_clock = getScenarioTime()
+				p.task = "completed dock"
+				p.dock_task = "complete"
+			end
 		end
 	end
 end
@@ -6040,7 +6077,7 @@ function taskCompletedDestroyFreighter(p)
 	wh:setTargetPosition(terrain_center_x + rx,terrain_center_y + ry)
 	wh:onTeleportation(function(self,teleportee)
 		string.format("")
-		if teleportee.typeName == "PlayerSpaceship" then
+		if isObjectType(teleportee,"PlayerSpaceship") then
 			teleportee:setSystemHealth("jumpdrive",-random(.2,.8))
 			teleportee:setSystemHealth("beamweapons",-random(.2,.8))
 			teleportee:setSystemHealth("missilesystem",-random(.2,.8))
