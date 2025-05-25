@@ -23,7 +23,10 @@ end
 --- Waypoints are 1-indexed.
 --- Example: x,y = player:getWaypoint(1)
 function Entity:getWaypoint(index)
-    if self.components.long_range_radar and index > 0 and index <= #self.components.long_range_radar then return self.components.long_range_radar[index] end
+    if self.components.long_range_radar and index > 0 and index <= #self.components.long_range_radar then
+        local wp = self.components.long_range_radar[index]
+        return wp.x, wp.y
+    end
     return 0, 0
 end
 --- Returns the total number of active waypoints owned by this PlayerSpaceship.
