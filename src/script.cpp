@@ -285,7 +285,8 @@ static int luaCreateAdditionalScript(lua_State* L)
             string name = luaL_checkstring(LL, 2);
             string value = luaL_checkstring(LL, 3);
             (*ptr)->setGlobal(name, value);
-            return 0;
+            lua_settop(LL, 1);
+            return 1;
         });
         lua_setfield(L, -2, "setVariable");
         lua_setfield(L, -2, "__index");
