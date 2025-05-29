@@ -35,7 +35,7 @@ require("cpu_ship_diversification_scenario_utility.lua")
 -- Initialization --
 --------------------
 function init()
-	scenario_version = "1.0.3"
+	scenario_version = "1.0.4"
 	ee_version = "2024.12.08"
 	print(string.format("    ----    Scenario: Planet Devourer    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
 	if _VERSION ~= nil then
@@ -3918,7 +3918,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for index, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			if comms_target:getTypeName() ~= "Defense platform" then
 				addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 					setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
@@ -4840,7 +4840,7 @@ function friendlyServiceJonqueComms(comms_data)
 			addCommsReply(_("Back"), commsServiceJonque)
 	end)
 	for index, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			if comms_target:getTypeName() ~= "Defense platform" then
 				addCommsReply(string.format(_("shipAssist-comms","Dock at %s"),obj:getCallSign()), function()
 					setCommsMessage(string.format(_("shipAssist-comms","Docking at %s."),obj:getCallSign()))
@@ -5575,7 +5575,7 @@ function devourPlanets()
 		local object_list = devourer:getObjectsInRange(300000)
 		local planets = {}
 		for i, obj in ipairs(object_list) do
-			if obj.typeName == "Planet" then
+			if isObjectType(obj,"Planet") then
 				table.insert(planets,obj)
 			end
 		end
@@ -5718,7 +5718,7 @@ function formerPlanetExplosion(px,py)
 							ej.obj = nil
 							ej.del = true
 						elseif ej.action == "explode" then
-							if obj.typeName == "Artifact" then
+							if isObjectType(obj,"Artifact") then
 								obj:explode()
 							else
 								local ex, ey = obj:getPosition()
@@ -6026,7 +6026,7 @@ function explodeDevourer()
 				local object_list = getObjectsInRadius(center_x, center_y, 300000)
 				local planet_count = 0
 				for i, obj in ipairs(object_list) do
-					if obj.typeName == "Planet" then
+					if isObjectType(obj,"Planet") then
 						planet_count = planet_count + 1
 					end
 				end
