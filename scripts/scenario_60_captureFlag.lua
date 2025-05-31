@@ -44,9 +44,11 @@ require("place_station_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 
 function init()
-	scenario_version = "2.0.1"
+	scenario_version = "2.0.2"
 	print(string.format("     -----     Scenario: Capture the Flag     -----     Version %s     -----",scenario_version))
-	print(_VERSION)
+	if _VERSION ~= nil then
+		print("Lua version:",_VERSION)
+	end
 	presetOptionVariables()	--set up any preset team data
 	setConstants()			--things that don't change
 	setGlobals()			--things that don't change often
@@ -3978,9 +3980,8 @@ function downTheRabbitHole()
 			local vx, vy = vectorFromAngle(random(0,360),3000)
 			worm:setTargetPosition(worm_hole_coordinates[i].x + vx,worm_hole_coordinates[i].y + vy)
 			worm:onTeleportation(function(self,teleportee)
-				local teleportee_type = teleportee.typeName
 				if gameTimeLimit < (maxGameTime - hideFlagTime - 1) then
-					if teleportee_type == "PlayerSpaceship" then
+					if isObjectType(teleportee,"PlayerSpaceship") then
 						if teleportee:hasSystem("warp") then
 							teleportee:setSystemHealth("warp",teleportee:getSystemHealth("warp")*.9)
 						end
@@ -3992,7 +3993,7 @@ function downTheRabbitHole()
 					local wx, wy = self:getPosition()
 					local vx, vy = vectorFromAngle(random(0,360),3000)
 					self:setTargetPosition(wx + vx, wy + vy)
-					if teleportee_type == "PlayerSpaceship" then
+					if isObjectType(teleportee,"PlayerSpaceship") then
 						if teleportee:hasPlayerAtPosition("Helms") then
 							teleportee.worm_hole_target_message = "worm_hole_target_message"
 							teleportee:addCustomMessage("Helms",teleportee.worm_hole_target_message,_("wormhole-msgHelms", "Worm hole teleportation destination will change after the flag hiding time expires"))
@@ -6561,7 +6562,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
@@ -7802,7 +7803,7 @@ function droneDetectFlagCheck(delta)
 			local flag = human_flags[hfi]
 			if flag ~= nil and flag:isValid() then
 				for idx, obj in ipairs(flag:getObjectsInRange(drone_scan_range_for_flags)) do
-					if obj.components.ai_controller then
+					if isObjectType(obj,"CpuShip") then
 						if obj.drone then
 							if obj.drone_message == nil then
 								if difficulty < 1 then	--science officers get messages from all drones
@@ -7878,7 +7879,7 @@ function droneDetectFlagCheck(delta)
 			local flag = kraylor_flags[kfi]
 			if flag ~= nil and flag:isValid() then
 				for idx, obj in ipairs(flag:getObjectsInRange(5000)) do
-					if obj.components.ai_controller then
+					if isObjectType(obj,"CpuShip") then
 						if obj.drone then
 							if obj.drone_message == nil then
 								if difficulty < 1 then
