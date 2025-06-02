@@ -1,0 +1,44 @@
+#: scripts/shiptemplates/frigates.lua:14
+msgctxt "ship"
+msgid "Phobos T3"
+msgstr "福波斯T3"
+
+#: scripts/shiptemplates/frigates.lua:14 scripts/shiptemplates/frigates.lua:87
+#: scripts/shiptemplates/frigates.lua:116
+#: scripts/shiptemplates/frigates.lua:133
+#: scripts/shiptemplates/frigates.lua:179
+#: scripts/shiptemplates/frigates.lua:272
+#: scripts/shiptemplates/frigates.lua:299
+#: scripts/shiptemplates/frigates.lua:312
+#: scripts/shiptemplates/frigates.lua:369
+#: scripts/shiptemplates/frigates.lua:414
+msgctxt "class"
+msgid "Frigate"
+msgstr "护卫舰"
+
+#: scripts/shiptemplates/frigates.lua:14
+msgctxt "subclass"
+msgid "Cruiser"
+msgstr "巡洋舰"
+
+#: scripts/shiptemplates/frigates.lua:16
+msgid """The Phobos T3, just like the Atlantis, is the workhorse of almost any navy. \nIt's extremely easy to modify, which makes retro-fitting this ship a breeze. \nIts basic stats aren't impressive, but due to its modular nature, it's \nfairly easy to produce in large quantities."""
+msgstr """福波斯T3与亚特兰蒂斯一样，是几乎所有海军的主力战舰。它极其易于改装，这使得为该舰升级装备变得非常轻松。虽然它的基础数据并不突出，但由于其模块化设计，可以较为容易地大批量生产。"""
+
+#: scripts/shiptemplates/frigates.lua:28
+msgctxt "ship"
+msgid "Elara P2"
+msgstr "伊莱拉P2"
+
+#: scripts/shiptemplates/frigates.lua:29
+msgid """Inspired by the Phobos T3 design, the Elara P2 is nearly identical. With the \naddition of a warp drive and stronger front shields, the Elara P2 poses a \ngreater threat than the Phobos"""
+msgstr """伊莱拉P2的设计灵感来源于福波斯T3，几乎与其完全相同。不过新增了跃迁引擎和更强大的前护盾，使其比福波斯更具威胁性。"""
+
+#: scripts/shiptemplates/frigates.lua:33
+msgctxt "ship"
+msgid "Phobos M3"
+msgstr "福波斯M3"
+
+#: scripts/shiptemplates/frigates.lua:34
+msgid """The Phobos M3 is one of the most common variants of the Phobos T3. It adds a \nsignificantly more powerful reactor and improved engines, allowing it to keep up with faster ships. This variant remains popular among pirates and privateers for its balance between speed, firepower, and cost-effectiveness."""
+msgstr """福波斯M3是福波斯T3最常见的变种之一。它配备了更强大的反应堆和改进型引擎，使其能够跟上速度更快的飞船。这种型号因其在速度、火力和性价比之间的良好平衡，在海盗和私掠船中仍然十分流行。"""
