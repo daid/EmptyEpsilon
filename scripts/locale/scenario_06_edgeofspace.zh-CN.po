@@ -1,0 +1,37 @@
+# Scenario name
+msgid "The Edge-of-Space"
+msgstr "太空边缘"
+
+# Scenario description
+msgid """You command the Technician Cruiser Apollo, a repair ship on the border of \ndangerous space.\n\nThe Apollo is outfitted with minimal weapons as there is a cease-fire \nbetween the Human Navy and the neighboring Kraylor.\n\nYou are tasked with discovering the cause of damage on one of your deep \nspace telescopes.\n\nThis scenario is limited to one player ship: the Atlantis Apollo."""
+msgstr """你指挥着技术巡洋舰阿波罗号，一艘在危险空域边境执行维修任务的飞船。\n\n由于人类海军与邻近的克雷洛尔人之间已达成停火协议，阿波罗号仅配备了最基础的武器系统。\n\n你的任务是查明其中一台深空望远镜受损的原因。\n\n此场景限定为一艘玩家控制的飞船：亚特兰蒂斯·阿波罗号。"""
+
+#: scripts/scenario_06_edgeofspace.lua:32
+msgctxt "callsign-ship"
+msgid "Technical Officer"
+msgstr "技术官"
+
+#: scripts/scenario_06_edgeofspace.lua:37
+msgctxt "callsign-station"
+msgid "E.O.S. scope"
+msgstr "边缘空间望远镜站"
+
+#: scripts/scenario_06_edgeofspace.lua:39
+msgctxt "callsign-station"
+msgid "Midspace Support"
+msgstr "中段支援站"
+
+#: scripts/scenario_06_edgeofspace.lua:40
+msgctxt "callsign-station"
+msgid "Central Command"
+msgstr "中央指挥部"
+
+#: scripts/scenario_06_edgeofspace.lua:43
+msgctxt "callsign-station"
+msgid "K-Endline"
+msgstr "K-终端防线"
+
+#: scripts/scenario_06_edgeofspace.lua:44
+msgctxt "callsign-station"
+msgid "K-Midline"
+msgstr "K-中段防线"
