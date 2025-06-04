@@ -9,7 +9,7 @@
 #include "config.h"
 
 
-EpsilonServer::EpsilonServer(int server_port)
+EpsilonServer::EpsilonServer(uint16_t server_port)
 : GameServer("Server", VERSION_NUMBER, server_port)
 {
     if (game_server)

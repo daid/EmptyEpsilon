@@ -197,12 +197,15 @@ int main(int argc, char** argv)
 #endif //STEAMSDK
 
     string tutorial = PreferencesManager::get("tutorial");   // use "00_all.lua" for all tutorials
-    if (tutorial != "")
+    string server_scenario = PreferencesManager::get("server_scenario");
+    int server_port = PreferencesManager::get("server_port").toInt();
+
+    if (!tutorial.empty())
     {
         LOG(DEBUG) << "Starting tutorial: " << tutorial;
         new TutorialGame(false, tutorial);
     }
-    else if (PreferencesManager::get("server_scenario") == "")
+    else if (server_scenario.empty())
         returnToMainMenu(defaultRenderLayer);
     else
     {
@@ -210,18 +213,33 @@ int main(int argc, char** argv)
         // using its defined default settings, and launches directly into
         // the ship selection screen instead of the main menu.
 
-        // Create the server.
-        new EpsilonServer(defaultServerPort);
+        // Create the server to listen on the assigned port.
+        // Use the default port if server_port isn't set or has an invalid
+        // value (toInt returns 0 if empty or not an int), or is too large.
+        if (server_port < 10 || server_port > 65535)
+        {
+            new EpsilonServer(defaultServerPort);
+            LOG(INFO) << "Launching server_scenario " << server_scenario << " on default port " << defaultServerPort;
+        }
+        else
+        {
+            // toInt/strtol returns a long integer. Recast it after the range
+            // check, because casting an int > 65535 wraps around using modulo,
+            // which would produce unexpected results in this case.
+            uint16_t recast_port = static_cast<uint16_t>(server_port);
+            new EpsilonServer(static_cast<uint16_t>(recast_port));
+            LOG(INFO) << "Launching server_scenario " << server_scenario << " on custom port " << recast_port;
+        }
 
         if(!gameGlobalInfo) // => failed to start server
             return 1;
 
-        if (PreferencesManager::get("server_name") != "") game_server->setServerName(PreferencesManager::get("server_name"));
-        if (PreferencesManager::get("server_password") != "") game_server->setPassword(PreferencesManager::get("server_password").upper());
+        if (!PreferencesManager::get("server_name").empty()) game_server->setServerName(PreferencesManager::get("server_name"));
+        if (!PreferencesManager::get("server_password").empty()) game_server->setPassword(PreferencesManager::get("server_password").upper());
         if (PreferencesManager::get("server_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
 
         // Load the scenario and open the ship selection screen.
-        gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"), loadScenarioSettingsFromPrefs());
+        gameGlobalInfo->startScenario(server_scenario, loadScenarioSettingsFromPrefs());
         new ShipSelectionScreen();
     }
 
@@ -246,7 +264,7 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("engine_enabled").empty())
         PreferencesManager::set("engine_enabled", "2");
 
-    if (PreferencesManager::get("headless") == "")
+    if (PreferencesManager::get("headless").empty())
     {
 #ifdef _WIN32
         mkdir(configuration_path.c_str());
@@ -270,13 +288,34 @@ void returnToMainMenu(RenderLayer* render_layer)
         return;
     }
 
-    if (PreferencesManager::get("headless") != "")
+    string headless = PreferencesManager::get("headless", "");
+
+    if (!headless.empty())
     {
-        new EpsilonServer(defaultServerPort);
+        // Create the server to listen on the assigned port.
+        // Use the default port if server_port isn't set or has an invalid
+        // value (toInt returns 0), or is too large.
+        int headless_port = PreferencesManager::get("headless_port").toInt();
+        // This is the same process as server_port and could be made DRY.
+        if (headless_port < 10 || headless_port > 65535)
+        {
+            new EpsilonServer(defaultServerPort);
+            LOG(INFO) << "Launching headless scenario " << headless << " on default port " << defaultServerPort;
+        }
+        else
+        {
+            // toInt/strtol returns a long integer. Recast it after the range
+            // check, because casting an int > 65535 wraps around using modulo,
+            // which would produce unexpected results in this case.
+            uint16_t recast_port = headless_port;
+            new EpsilonServer(recast_port);
+            LOG(INFO) << "Launching headless scenario " << headless << " on custom headless_port " << recast_port;
+        }
+
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
         if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
         if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
-        gameGlobalInfo->startScenario(PreferencesManager::get("headless"), loadScenarioSettingsFromPrefs());
+        gameGlobalInfo->startScenario(headless, loadScenarioSettingsFromPrefs());
 
         if (PreferencesManager::get("startpaused") != "1")
             engine->setGameSpeed(1.0);
@@ -290,7 +329,9 @@ void returnToMainMenu(RenderLayer* render_layer)
             window_positions.push_back(AutoConnectPosition(part));
 
         new AutoConnectScreen(window_positions, PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
-    }else{
+    }
+    else
+    {
         new MainMenu();
     }
 }

@@ -5,6 +5,7 @@
 #include "playerInfo.h"
 #include "io/network/address.h"
 #include "preferenceManager.h"
+#include "multiplayer_server.h"
 
 class GuiLabel;
 class ServerScanner;
@@ -26,6 +27,7 @@ class AutoConnectScreen : public GuiCanvas, public Updatable
 {
     P<ServerScanner> scanner;
     sp::io::network::Address connect_to_address;
+    uint16_t connect_to_port = defaultServerPort;
     std::vector<AutoConnectPosition> positions;
     bool control_main_screen;
     std::map<string, string> ship_filters;

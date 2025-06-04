@@ -65,36 +65,47 @@ void AutoConnectScreen::update(float delta)
     {
         std::vector<ServerScanner::ServerInfo> serverList = scanner->getServerList();
         string autoconnect_address = PreferencesManager::get("autoconnect_address", "");
+        int autoconnect_port = PreferencesManager::get("autoconnect_port").toInt();
 
-        if (autoconnect_address != "") {
-            status_label->setText("Using autoconnect server " + autoconnect_address);
+        if (!autoconnect_address.empty())
+        {
             connect_to_address = autoconnect_address;
+            // Set autoconnect port if it's a valid value (toInt returns 0 if
+            // empty or not an int, and the default is defaultPortNumber).
+            if (autoconnect_port >= 10 || autoconnect_port <= 65535)
+                connect_to_port = autoconnect_port;
+
+            LOG(INFO) << "Autoconnecting to server " << autoconnect_address << ":" << std::to_string(connect_to_port);
+            status_label->setText("Autoconnecting to server " + autoconnect_address + ":" + std::to_string(connect_to_port));
+
             tried_password = false;
-            new GameClient(VERSION_NUMBER, autoconnect_address);
+            new GameClient(VERSION_NUMBER, connect_to_address, connect_to_port);
             scanner->destroy();
         } else {
             auto name_filter = PreferencesManager::get("autoconnect_servername", "");
             for (auto server : serverList) {
-                if (name_filter != "" && name_filter != server.name)
+                if (!name_filter.empty() && name_filter != server.name)
                     continue;
 
                 status_label->setText("Found server " + server.name);
                 connect_to_address = server.address;
+                connect_to_port = server.port;
                 tried_password = false;
-                new GameClient(VERSION_NUMBER, server.address);
+                LOG(INFO) << "Autoconnecting to server " << server.name;
+                new GameClient(VERSION_NUMBER, connect_to_address, connect_to_port);
                 scanner->destroy();
                 return;
             }
 
             status_label->setText("Searching for server...");
         }
-    }else{
+    } else {
         switch(game_client->getStatus())
         {
         case GameClient::Connecting:
         case GameClient::Authenticating:
             if (!connect_to_address.getHumanReadable().empty())
-                status_label->setText("Connecting: " + connect_to_address.getHumanReadable()[0]);
+                status_label->setText("Connecting: " + connect_to_address.getHumanReadable()[0] + ":" + std::to_string(connect_to_port));
             else
                 status_label->setText("Connecting...");
             break;
