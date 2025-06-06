@@ -52,7 +52,8 @@ void GuiElementListbox::onDraw(sp::RenderTarget& renderer)
     int scroll_offset = scroll->getValue();
     for (size_t i = 0; i < elements.size(); ++i)
     {
-        elements[i]->setPosition(0, i * element_height - scroll_offset, sp::Alignment::TopLeft);
+        // Here we round the position to avoid having to deal with blocs being drawn halfway outside of the listbox
+        elements[i]->setPosition(0, round(i  - scroll_offset/element_height) * element_height, sp::Alignment::TopLeft);
         if ((i + 1) * element_height - scroll_offset > this->rect.size.y|| i * element_height - scroll_offset + element_height < 0)
         {
             elements[i]->hide();
