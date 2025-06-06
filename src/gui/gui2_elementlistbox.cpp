@@ -9,11 +9,6 @@ GuiElementListbox::GuiElementListbox(GuiContainer *owner, string id, int frame_m
     scroll = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {});
     scroll->setPosition(0, 0, sp::Alignment::TopRight)->setSize(element_height, GuiSizeMax);
     scroll->setClickChange(element_height);
-
-    back_style = theme->getStyle("listbox.back");
-    front_style = theme->getStyle("listbox.front");
-    back_selected_style = theme->getStyle("listbox.selected.back");
-    front_selected_style = theme->getStyle("listbox.selected.front");
 }
 
 GuiElementListbox *GuiElementListbox::addElement(GuiElement* element)
@@ -28,12 +23,6 @@ GuiElementListbox *GuiElementListbox::addElement(GuiElement* element)
 GuiElementListbox *GuiElementListbox::setElementHeight(int height)
 {
     this->element_height = height;
-    
-    for (size_t i = 0; i < elements.size(); ++i)
-    {
-        elements[i]->setPosition(0, i * element_height, sp::Alignment::TopLeft);
-        elements[i]->setSize(GuiElement::GuiSizeMax, element_height);
-    }
     return this;
 }
 
