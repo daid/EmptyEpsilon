@@ -9,6 +9,8 @@
 #include "gui/hotkeyBinder.h"
 #include "Updatable.h"
 #include "gui/gui2_elementlistbox.h"
+#include "gui/gui2_textentry.h"
+
 
 
 class GuiArrowButton;
@@ -37,6 +39,7 @@ private:
     GuiScrollText* help_text;
     GuiElement* container;
     GuiElement* top_row;
+    GuiTextEntry* search_bar;
     GuiPanel* rebinding_ui;
     GuiElement* bottom_row;
 

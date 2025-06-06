@@ -8,7 +8,6 @@
 #include "gui/hotkeyBinder.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_overlay.h"
-#include "gui/gui2_textentry.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
 
@@ -45,6 +44,11 @@ HotkeyMenu::HotkeyMenu()
         HotkeyMenu::setCategory(index);
     }))->setOptions(category_list)->setSelectionIndex(category_index)->setSize(300, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopCenter);
 
+    // Search bar for hotkeys
+    search_bar = new GuiTextEntry(top_row, "SEARCH_BAR", tr("Search"));
+    search_bar->setSize(300, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopRight);
+    search_bar->callback([this](string value){setCategory(category_index);});
+
     // Correctly initialize GuiElementListbox with a valid func_t argument
     rebinding_container = new GuiElementListbox(rebinding_ui, "HOTKEY_LISTBOX", FRAME_MARGIN / 2, ROW_HEIGHT , [this]()
     {
@@ -54,26 +58,6 @@ HotkeyMenu::HotkeyMenu()
     rebinding_container->setMargins(FRAME_MARGIN / 2);
 
     HotkeyMenu::setCategory(1);
-
-    // for(int test = 0; test<20; test++){
-
-    //     // Creates a container for the hotkey label
-    //     GuiElement *container = new GuiElement(listbox, "HOTKEY_LABEL_CONTAINER_" + std::to_string(test));
-    //     container->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)->setAttribute("layout", "horizontal");
-    //     // Adds two labels to the container
-    //     GuiElement *label = new GuiLabel(container, "HOTKEY_LABEL_" + std::to_string(test), tr("Hotkey %d", test), 30);
-    //     GuiElement *key_label = new GuiLabel(container, "HOTKEY_KEY_LABEL_" + std::to_string(test), tr("Key %d", test), 30);
-
-    //     // Place the two labels hperically in the container
-    //     label->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
-    //     key_label->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
-        
-
-    //     listbox->addElement(container);
-    // }
-
-
-
 
     // Bottom: Menu navigation
     // Back button to return to the Options menu
@@ -99,6 +83,13 @@ void HotkeyMenu::update(float delta)
 // Display a list of hotkeys to bind from the given hotkey category.
 void HotkeyMenu::setCategory(int cat)
 {
+    bool needs_to_filter = true;
+    // if the search bar has default text or empty, ignore it
+    if (search_bar->getText() == tr("Search") || search_bar->getText().empty())
+    {
+        needs_to_filter = false;
+    }
+
     // Remove any previous category's hotkey entries.
     for (GuiHotkeyBinder* text : text_entries)
     {
@@ -110,12 +101,9 @@ void HotkeyMenu::setCategory(int cat)
     {
         label->destroy();
     }
-    
     label_entries.clear();
 
     rebinding_container->destroyAndClear();
-
-    
 
     // Get the chosen category
     category_index = cat;
@@ -130,6 +118,16 @@ void HotkeyMenu::setCategory(int cat)
     // Begin rendering hotkey rebinding fields for this category.
     for (auto item : hotkey_list)
     {
+        if (needs_to_filter)
+        {
+            // Combine name and label into a single string for regex matching
+            std::string combined_text = item->getName() + " " + item->getLabel();
+            if (!std::regex_search(combined_text, std::regex(search_bar->getText(), std::regex_constants::icase)))
+            {
+                // If the hotkey does not match the search, skip it.
+                continue;
+            }
+        }
         GuiElement* rebinding_row = new GuiElement(rebinding_container, "");
         rebinding_row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)->setAttribute("layout", "horizontal");
 
