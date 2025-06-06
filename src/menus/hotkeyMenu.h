@@ -8,6 +8,8 @@
 #include "gui/gui2_scrolltext.h"
 #include "gui/hotkeyBinder.h"
 #include "Updatable.h"
+#include "gui/gui2_elementlistbox.h"
+
 
 class GuiArrowButton;
 class GuiOverlay;
@@ -38,10 +40,8 @@ private:
     GuiPanel* rebinding_ui;
     GuiElement* bottom_row;
 
-    GuiElement* rebinding_container;
+    GuiElementListbox* rebinding_container;
     GuiElement* info_container;
-    std::vector<GuiElement*> rebinding_columns;
-    std::vector<GuiElement*> rebinding_rows;
     std::vector<GuiHotkeyBinder*> text_entries;
     std::vector<GuiLabel*> label_entries;
     GuiArrowButton* previous_page;

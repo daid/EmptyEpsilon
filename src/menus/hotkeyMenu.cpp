@@ -45,25 +45,35 @@ HotkeyMenu::HotkeyMenu()
         HotkeyMenu::setCategory(index);
     }))->setOptions(category_list)->setSelectionIndex(category_index)->setSize(300, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopCenter);
 
-    // Page navigation
-    previous_page = new GuiArrowButton(container, "PAGE_LEFT", 0, [this]()
+    // Correctly initialize GuiElementListbox with a valid func_t argument
+    rebinding_container = new GuiElementListbox(rebinding_ui, "HOTKEY_LISTBOX", FRAME_MARGIN / 2, ROW_HEIGHT , [this]()
     {
-        HotkeyMenu::pageHotkeys(1);
+        // Handle selection changes here if needed
     });
-    previous_page->setPosition(0, 0, sp::Alignment::CenterLeft)->setSize(GuiElement::GuiSizeMatchHeight, ROW_HEIGHT)->disable();
+    rebinding_container->setPosition(0, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax,  GuiElement::GuiSizeMax);
+    rebinding_container->setMargins(FRAME_MARGIN / 2);
 
-    next_page = new GuiArrowButton(container, "PAGE_RIGHT", 180, [this]()
-    {
-        HotkeyMenu::pageHotkeys(-1);
-    });
-    next_page->setPosition(0, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMatchHeight, ROW_HEIGHT)->disable();
-
-    // Middle: Rebinding UI frame
-    rebinding_container = new GuiElement(rebinding_ui, "HOTKEY_CONFIG_CONTAINER");
-    rebinding_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft)->setAttribute("layout", "horizontal");
-
-    // Show category 1 ("General")
     HotkeyMenu::setCategory(1);
+
+    // for(int test = 0; test<20; test++){
+
+    //     // Creates a container for the hotkey label
+    //     GuiElement *container = new GuiElement(listbox, "HOTKEY_LABEL_CONTAINER_" + std::to_string(test));
+    //     container->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)->setAttribute("layout", "horizontal");
+    //     // Adds two labels to the container
+    //     GuiElement *label = new GuiLabel(container, "HOTKEY_LABEL_" + std::to_string(test), tr("Hotkey %d", test), 30);
+    //     GuiElement *key_label = new GuiLabel(container, "HOTKEY_KEY_LABEL_" + std::to_string(test), tr("Key %d", test), 30);
+
+    //     // Place the two labels hperically in the container
+    //     label->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
+    //     key_label->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
+        
+
+    //     listbox->addElement(container);
+    // }
+
+
+
 
     // Bottom: Menu navigation
     // Back button to return to the Options menu
@@ -100,23 +110,12 @@ void HotkeyMenu::setCategory(int cat)
     {
         label->destroy();
     }
+    
     label_entries.clear();
 
-    for (auto row : rebinding_rows)
-    {
-        row->destroy();
-    }
-    rebinding_rows.clear();
+    rebinding_container->destroyAndClear();
 
-    for (auto column : rebinding_columns)
-    {
-        column->destroy();
-    }
-    rebinding_columns.clear();
-
-    // Reset the hotkey frame size and position
-    int rebinding_ui_width = KEY_COLUMN_WIDTH;
-    rebinding_ui->setPosition(0, KEY_COLUMN_TOP, sp::Alignment::TopLeft)->setSize(KEY_COLUMN_WIDTH + FRAME_MARGIN, ROW_HEIGHT * (KEY_ROW_COUNT + 2));
+    
 
     // Get the chosen category
     category_index = cat;
@@ -131,66 +130,21 @@ void HotkeyMenu::setCategory(int cat)
     // Begin rendering hotkey rebinding fields for this category.
     for (auto item : hotkey_list)
     {
-        // If we've filled a column, or don't have any rows yet, make a new column.
-        if (rebinding_rows.size() == 0 || column_row_count >= KEY_ROW_COUNT)
-        {
-            column_row_count = 0;
-            rebinding_columns.push_back(new GuiElement(rebinding_container, ""));
-            rebinding_columns.back()->setSize(KEY_COLUMN_WIDTH, KEY_COLUMN_HEIGHT)->setMargins(0, 50)->setAttribute("layout", "vertical");
-        }
-
-        // Add a rebinding row to the current column.
-        column_row_count += 1;
-        rebinding_rows.push_back(new GuiElement(rebinding_columns.back(), ""));
-        rebinding_rows.back()->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)->setAttribute("layout", "horizontal");
+        GuiElement* rebinding_row = new GuiElement(rebinding_container, "");
+        rebinding_row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)->setAttribute("layout", "horizontal");
 
         // Add a label to the current row.
-        label_entries.push_back(new GuiLabel(rebinding_rows.back(), "HOTKEY_LABEL_" + item->getName(), item->getLabel(), 30));
-        label_entries.back()->setAlignment(sp::Alignment::CenterRight)->setSize(KEY_LABEL_WIDTH, GuiElement::GuiSizeMax)->setMargins(0, 0, FRAME_MARGIN / 2, 0);
+        label_entries.push_back(new GuiLabel(rebinding_row, "HOTKEY_LABEL_" + item->getName(), item->getLabel(), 30));
+        label_entries.back()->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0, 0, FRAME_MARGIN , 0);
 
         // Add a hotkey rebinding field to the current row.
-        text_entries.push_back(new GuiHotkeyBinder(rebinding_rows.back(), "HOTKEY_VALUE_" + item->getName(), item));
-        text_entries.back()->setSize(KEY_FIELD_WIDTH, GuiElement::GuiSizeMax)->setMargins(0, 0, FRAME_MARGIN / 2, 0);
-    }
+        text_entries.push_back(new GuiHotkeyBinder(rebinding_row, "HOTKEY_VALUE_" + item->getName(), item));
+        text_entries.back()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0, 0, FRAME_MARGIN , 0);
 
-    // Resize the rendering UI panel based on the number of columns.
-    rebinding_ui_width = KEY_COLUMN_WIDTH * rebinding_columns.size() + FRAME_MARGIN;
-    rebinding_ui->setSize(rebinding_ui_width, KEY_COLUMN_HEIGHT);
-
-    // Enable pagination buttons if pagination is necessary.
-    // TODO: Detect viewport width instead of hardcoding breakpoint at
-    // two columns
-    if (rebinding_columns.size() > 2)
-    {
-        previous_page->enable();
-        next_page->enable();
-    } else {
-        previous_page->disable();
-        next_page->disable();
+        rebinding_container->addElement(rebinding_row);
     }
 }
 
 void HotkeyMenu::pageHotkeys(int direction)
 {
-    auto frame_position = rebinding_ui->getPositionOffset();
-    auto frame_size = rebinding_ui->getSize();
-
-    if (frame_size.x < KEY_COLUMN_WIDTH * 2)
-    {
-        return;
-    }
-
-    // Move the frame left if the direction is negative, right if it's positive
-    int new_offset = frame_position.x + KEY_COLUMN_WIDTH * direction;
-
-    if (new_offset >= 0)
-    {
-        // Don't let the frame move right if its left edge is on screen.
-        rebinding_ui->setPosition(0, KEY_COLUMN_TOP, sp::Alignment::TopLeft);
-    }
-    else if (new_offset > -frame_size.x + KEY_COLUMN_WIDTH + FRAME_MARGIN)
-    {
-        // Move the frame left only if its right edge is not on screen.
-        rebinding_ui->setPosition(new_offset, KEY_COLUMN_TOP, sp::Alignment::TopLeft);
-    }
 }
