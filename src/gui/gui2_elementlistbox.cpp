@@ -39,9 +39,15 @@ GuiElementListbox *GuiElementListbox::setElementHeight(int height)
 
 void GuiElementListbox::onDraw(sp::RenderTarget& renderer)
 {
-    // Value size and allows to have a bigger scroll button
-    scroll->setValueSize(rect.size.y/10);
-    scroll->setRange(0, elements.size() * element_height - this->rect.size.y*0.9f);
+    if (elements.size() * element_height < this->rect.size.y*0.9f) {
+        scroll->hide();
+    }
+    else{
+        scroll->show();
+        // Value size and allows to have a bigger scroll button
+        scroll->setValueSize(rect.size.y/10);
+        scroll->setRange(0, elements.size() * element_height - this->rect.size.y*0.9f);
+    }
 
     int scroll_offset = scroll->getValue();
     for (size_t i = 0; i < elements.size(); ++i)
