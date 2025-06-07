@@ -51,6 +51,8 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     view_rotation(0),
     auto_center_on_my_ship(true),
     auto_rotate_on_my_ship(false),
+    show_ship_bearing_indicator(true),
+    show_target_bearing_indicator(true),
     auto_distance(true),
     distance(5000.0f),
     long_range(false),
@@ -227,6 +229,10 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     if (show_game_master_data)
         drawObjectsGM(renderer);
 
+    if (show_ship_bearing_indicator)
+        drawShipBearing(renderer);
+    if (show_target_bearing_indicator)
+        drawTargetBearing(renderer);
     if (show_waypoints)
         drawWaypoints(renderer);
     if (show_heading_indicators)
@@ -446,6 +452,28 @@ void GuiRadarView::drawWaypoints(sp::RenderTarget& renderer)
             renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), string(n + 1), sp::Alignment::Center, 14, bold_font, colorConfig.ship_waypoint_text);
         }
     }
+}
+
+void GuiRadarView::drawShipBearing(sp::RenderTarget& renderer){
+    auto transform = my_spaceship.getComponent<sp::Transform>();
+    glm::vec2 direction = glm::vec2(std::cos(glm::radians(transform->getRotation())), std::sin(glm::radians(transform->getRotation())));
+
+    // Possible optimization as it is also computed in in drawWaypoints
+    glm::vec2 radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
+
+    glm::vec2 screen_position = radar_screen_center + direction * std::min(rect.size.x, rect.size.y) * 0.405f;
+    renderer.drawRotatedSprite("gui/icons/heading.png", screen_position, 25, transform->getRotation() + 90, glm::u8vec4(255, 0, 0, 255));
+}
+
+void GuiRadarView::drawTargetBearing(sp::RenderTarget &renderer)
+{
+    glm::vec2 direction = glm::vec2(std::cos(glm::radians(target_rotation)), std::sin(glm::radians(target_rotation)));
+
+    // This might be inefficient as it is also computed in in drawWaypoints
+    glm::vec2 radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
+
+    glm::vec2 screen_position = radar_screen_center + direction * std::min(rect.size.x, rect.size.y) * 0.42f;
+    renderer.drawRotatedSprite("gui/icons/heading.png", screen_position, 18, target_rotation - 90, glm::u8vec4(255, 0, 0, 255));
 }
 
 void GuiRadarView::drawRangeIndicators(sp::RenderTarget& renderer)

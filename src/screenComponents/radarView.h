@@ -48,6 +48,9 @@ private:
     float view_rotation;
     bool auto_center_on_my_ship;
     bool auto_rotate_on_my_ship;
+    bool show_ship_bearing_indicator;
+    bool show_target_bearing_indicator;
+    float target_rotation = 0;
     bool auto_distance = false;
     float distance;
     bool long_range;
@@ -100,6 +103,7 @@ public:
     GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_my_ship = value; return this; }
     GuiRadarView* setCallbacks(bpfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
     GuiRadarView* setViewPosition(glm::vec2 view_position) { this->view_position = view_position; return this; }
+    void setTargetRotation(float target_rotation) { this->target_rotation = target_rotation; }
     glm::vec2 getViewPosition() { return view_position; }
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
     float getViewRotation() { return view_rotation; }
@@ -120,6 +124,8 @@ private:
     void drawFriendlyNotVisibleAreas(sp::RenderTarget& target);
     void drawGhostDots(sp::RenderTarget& target);
     void drawWaypoints(sp::RenderTarget& target);
+    void drawShipBearing(sp::RenderTarget& target);
+    void drawTargetBearing(sp::RenderTarget& target);
     void drawRangeIndicators(sp::RenderTarget& target);
     void drawTargetProjections(sp::RenderTarget& target);
     void drawMissileTubes(sp::RenderTarget& target);
