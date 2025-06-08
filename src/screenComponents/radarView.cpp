@@ -71,6 +71,10 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     mouse_drag_func(nullptr),
     mouse_up_func(nullptr)
 {
+    auto transform = my_spaceship.getComponent<sp::Transform>();
+    if (transform) {
+        target_rotation = transform->getRotation();
+    }
 }
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
@@ -101,6 +105,10 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     mouse_drag_func(nullptr),
     mouse_up_func(nullptr)
 {
+    auto transform = my_spaceship.getComponent<sp::Transform>();
+    if (transform) {
+        target_rotation = transform->getRotation();
+    }
 }
 
 void GuiRadarView::onDraw(sp::RenderTarget& renderer)
