@@ -51,8 +51,8 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     view_rotation(0),
     auto_center_on_my_ship(true),
     auto_rotate_on_my_ship(false),
-    show_ship_bearing_indicator(true),
-    show_target_bearing_indicator(true),
+    show_ship_bearing(true),
+    show_ship_target_bearing(true),
     auto_distance(true),
     distance(5000.0f),
     long_range(false),
@@ -229,10 +229,10 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     if (show_game_master_data)
         drawObjectsGM(renderer);
 
-    if (show_ship_bearing_indicator)
+    if (show_ship_bearing)
         drawShipBearing(renderer);
-    if (show_target_bearing_indicator)
-        drawTargetBearing(renderer);
+    if (show_ship_target_bearing)
+        drawShipTargetBearing(renderer);
     if (show_waypoints)
         drawWaypoints(renderer);
     if (show_heading_indicators)
@@ -465,7 +465,7 @@ void GuiRadarView::drawShipBearing(sp::RenderTarget& renderer){
     renderer.drawRotatedSprite("gui/icons/heading.png", screen_position, 25, transform->getRotation() + 90, glm::u8vec4(255, 0, 0, 255));
 }
 
-void GuiRadarView::drawTargetBearing(sp::RenderTarget &renderer)
+void GuiRadarView::drawShipTargetBearing(sp::RenderTarget &renderer)
 {
     glm::vec2 direction = glm::vec2(std::cos(glm::radians(target_rotation)), std::sin(glm::radians(target_rotation)));
 

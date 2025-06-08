@@ -12,7 +12,6 @@
 #include "components/docking.h"
 
 #include "screenComponents/combatManeuver.h"
-#include "screenComponents/radarView.h"
 #include "screenComponents/impulseControls.h"
 #include "screenComponents/warpControls.h"
 #include "screenComponents/jumpControls.h"
@@ -38,7 +37,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
-    GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
+    radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
 
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 215)->setVisible(my_spaceship.hasComponent<CombatManeuveringThrusters>());
@@ -47,7 +46,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
-        [radar, this](sp::io::Pointer::Button button, glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position) {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
             {
                 auto r = radar->getRect();
@@ -58,7 +57,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
                 my_player_info->commandTargetRotation(angle);
             }
         },
-        [radar, this](glm::vec2 position) {
+        [this](glm::vec2 position) {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
             {
                 auto r = radar->getRect();
@@ -117,6 +116,7 @@ void HelmsScreen::onUpdate()
         if (angle != 0.0f)
         {
             auto transform = my_spaceship.getComponent<sp::Transform>();
+            radar->setTargetRotation(transform->getRotation() + angle);
             if (transform)
                 my_player_info->commandTargetRotation(transform->getRotation() + angle);
         }

@@ -48,8 +48,8 @@ private:
     float view_rotation;
     bool auto_center_on_my_ship;
     bool auto_rotate_on_my_ship;
-    bool show_ship_bearing_indicator;
-    bool show_target_bearing_indicator;
+    bool show_ship_bearing;
+    bool show_ship_target_bearing;
     float target_rotation = 0;
     bool auto_distance = false;
     float distance;
@@ -83,6 +83,10 @@ public:
     GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
     GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }
     GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }
+    GuiRadarView* enableShipTargetBearing() { show_ship_target_bearing = true; return this; }
+    GuiRadarView* disableShipTargetBearing() { show_ship_target_bearing = false; return this; }
+    GuiRadarView* enableShipBearing() { show_ship_bearing = true; return this; }
+    GuiRadarView* disableShipBearing() { show_ship_bearing = false; return this; }
     GuiRadarView* enableTargetProjections(GuiMissileTubeControls* missile_tube_controls) { show_target_projection = true; this->missile_tube_controls = missile_tube_controls; return this; }
     GuiRadarView* disableTargetProjections() { show_target_projection = false; return this; }
     GuiRadarView* enableMissileTubeIndicators() { show_missile_tubes = true; return this; }
@@ -125,7 +129,7 @@ private:
     void drawGhostDots(sp::RenderTarget& target);
     void drawWaypoints(sp::RenderTarget& target);
     void drawShipBearing(sp::RenderTarget& target);
-    void drawTargetBearing(sp::RenderTarget& target);
+    void drawShipTargetBearing(sp::RenderTarget& target);
     void drawRangeIndicators(sp::RenderTarget& target);
     void drawTargetProjections(sp::RenderTarget& target);
     void drawMissileTubes(sp::RenderTarget& target);
