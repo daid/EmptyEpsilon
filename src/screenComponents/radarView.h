@@ -83,10 +83,8 @@ public:
     GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
     GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }
     GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }
-    GuiRadarView* enableShipTargetBearing() { show_ship_target_bearing = true; return this; }
-    GuiRadarView* disableShipTargetBearing() { show_ship_target_bearing = false; return this; }
-    GuiRadarView* enableShipBearing() { show_ship_bearing = true; return this; }
-    GuiRadarView* disableShipBearing() { show_ship_bearing = false; return this; }
+    GuiRadarView* setShipTargetBearingIndicator(bool value) { show_ship_target_bearing = value; return this; }
+    GuiRadarView* setShipBearingIndicator(bool value) { show_ship_bearing = value; return this; }
     GuiRadarView* enableTargetProjections(GuiMissileTubeControls* missile_tube_controls) { show_target_projection = true; this->missile_tube_controls = missile_tube_controls; return this; }
     GuiRadarView* disableTargetProjections() { show_target_projection = false; return this; }
     GuiRadarView* enableMissileTubeIndicators() { show_missile_tubes = true; return this; }

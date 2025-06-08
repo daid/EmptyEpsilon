@@ -74,7 +74,14 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             heading_hint->hide();
         }
     );
-    radar->setAutoRotating(PreferencesManager::get("helms_radar_lock","0")=="1");
+    if (PreferencesManager::get("helms_radar_lock","0")=="1"){
+        radar->setAutoRotating(true);
+    }
+    else{
+        radar->setAutoRotating(false);
+        radar->setShipBearingIndicator(PreferencesManager::get("helms_ship_bearing","0")=="1");
+    }
+    radar->setShipTargetBearingIndicator(PreferencesManager::get("helms_ship_target_bearing","0")=="1");
 
     heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
     heading_hint->setAlignment(sp::Alignment::Center)->setSize(0, 0);
@@ -116,8 +123,8 @@ void HelmsScreen::onUpdate()
         if (angle != 0.0f)
         {
             auto transform = my_spaceship.getComponent<sp::Transform>();
-            radar->setTargetRotation(transform->getRotation() + angle);
             if (transform)
+                radar->setTargetRotation(transform->getRotation() + angle);
                 my_player_info->commandTargetRotation(transform->getRotation() + angle);
         }
     }
