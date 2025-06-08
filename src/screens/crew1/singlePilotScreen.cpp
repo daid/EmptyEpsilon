@@ -88,13 +88,9 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
            drag_rotate=false;
         }
     );
-    if (PreferencesManager::get("single_pilot_radar_lock","0")=="1"){
-        radar->setAutoRotating(true);
-    }
-    else{
-        radar->setAutoRotating(false);
-        radar->setShipBearingIndicator(PreferencesManager::get("single_pilot_ship_bearing","0")=="1");
-    }
+
+    radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock","0")=="1");
+    radar->setShipBearingIndicator(PreferencesManager::get("single_pilot_ship_bearing","0")=="1");
     radar->setShipTargetBearingIndicator(PreferencesManager::get("single_pilot_ship_target_bearing","0")=="1");
 
     // Ship stats and combat maneuver at bottom right corner of left panel.

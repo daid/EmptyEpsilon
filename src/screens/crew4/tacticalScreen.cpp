@@ -82,13 +82,9 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
             drag_rotate=false;
         }
     );
-    if (PreferencesManager::get("tactical_radar_lock","0")=="1"){
-        radar->setAutoRotating(true);
-    }
-    else{
-        radar->setAutoRotating(false);
-        radar->setShipBearingIndicator(PreferencesManager::get("tactical_ship_bearing","0")=="1");
-    }
+
+    radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
+    radar->setShipBearingIndicator(PreferencesManager::get("tactical_ship_bearing","0")=="1");
     radar->setShipTargetBearingIndicator(PreferencesManager::get("tactical_ship_target_bearing","0")=="1");
 
     auto stats = new GuiElement(this, "STATS");

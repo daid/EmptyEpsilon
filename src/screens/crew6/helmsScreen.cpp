@@ -74,13 +74,9 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             heading_hint->hide();
         }
     );
-    if (PreferencesManager::get("helms_radar_lock","0")=="1"){
-        radar->setAutoRotating(true);
-    }
-    else{
-        radar->setAutoRotating(false);
-        radar->setShipBearingIndicator(PreferencesManager::get("helms_ship_bearing","0")=="1");
-    }
+
+    radar->setAutoRotating(PreferencesManager::get("helms_radar_lock","0")=="1");
+    radar->setShipBearingIndicator(PreferencesManager::get("helms_ship_bearing","0")=="1");
     radar->setShipTargetBearingIndicator(PreferencesManager::get("helms_ship_target_bearing","0")=="1");
 
     heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
