@@ -469,13 +469,22 @@ void GuiRadarView::drawShipBearing(sp::RenderTarget& renderer){
 
 void GuiRadarView::drawShipTargetBearing(sp::RenderTarget &renderer)
 {
-    glm::vec2 direction = glm::vec2(std::cos(glm::radians(target_rotation)), std::sin(glm::radians(target_rotation)));
+    float final_target_rotation = target_rotation;
+    if (auto_rotate_on_my_ship){
+        auto transform = my_spaceship.getComponent<sp::Transform>();
+        if (transform) {
+            final_target_rotation -= transform->getRotation()+90;
+        }
+    }
+
+    glm::vec2 direction = glm::vec2(std::cos(glm::radians(final_target_rotation)), std::sin(glm::radians(final_target_rotation)));
+
 
     // This might be inefficient as it is also computed in in drawWaypoints
     glm::vec2 radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
 
     glm::vec2 screen_position = radar_screen_center + direction * std::min(rect.size.x, rect.size.y) * 0.42f;
-    renderer.drawRotatedSprite("gui/icons/heading.png", screen_position, 18, target_rotation - 90, glm::u8vec4(255, 0, 0, 255));
+    renderer.drawRotatedSprite("gui/icons/heading.png", screen_position, 18, final_target_rotation - 90, glm::u8vec4(255, 0, 0, 255));
 }
 
 void GuiRadarView::drawRangeIndicators(sp::RenderTarget& renderer)
