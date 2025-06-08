@@ -63,25 +63,35 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
             auto last_target = targets.get();
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
+            auto transform = my_spaceship.getComponent<sp::Transform>();
             if (my_spaceship && (targets.get() != last_target)) {
                 my_player_info->commandSetTarget(targets.get());
                 drag_rotate = false;
-            } else if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
-                my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
+            } else if (transform) {
+                float angle = vec2ToAngle(position - transform->getPosition());
+                radar->setTargetRotation(angle);
+                my_player_info->commandTargetRotation(angle);
                 drag_rotate = true;
             }
         },
         [this](glm::vec2 position) {
             if (drag_rotate) {
-                if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                    my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
+                auto transform = my_spaceship.getComponent<sp::Transform>();
+                if (transform){
+                    float angle = vec2ToAngle(position - transform->getPosition());
+                    radar->setTargetRotation(angle);
+                    my_player_info->commandTargetRotation(angle);
+                }
             }
         },
         [this](glm::vec2 position) {
            drag_rotate=false;
         }
     );
+
     radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock","0")=="1");
+    radar->setShipBearingIndicator(PreferencesManager::get("single_pilot_ship_bearing","0")=="1");
+    radar->setShipTargetBearingIndicator(PreferencesManager::get("single_pilot_ship_target_bearing","0")=="1");
 
     // Ship stats and combat maneuver at bottom right corner of left panel.
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
@@ -165,7 +175,9 @@ void SinglePilotScreen::onUpdate()
         auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
         if (angle != 0.0f)
         {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            auto transform = my_spaceship.getComponent<sp::Transform>();
+            if (transform)
+                radar->setTargetRotation(transform->getRotation() + angle);
                 my_player_info->commandTargetRotation(transform->getRotation() + angle);
         }
 

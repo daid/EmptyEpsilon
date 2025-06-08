@@ -48,6 +48,9 @@ private:
     float view_rotation;
     bool auto_center_on_my_ship;
     bool auto_rotate_on_my_ship;
+    bool show_ship_bearing;
+    bool show_ship_target_bearing;
+    float target_rotation = 0;
     bool auto_distance = false;
     float distance;
     bool long_range;
@@ -80,6 +83,8 @@ public:
     GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
     GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }
     GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }
+    GuiRadarView* setShipTargetBearingIndicator(bool value) { show_ship_target_bearing = value; return this; }
+    GuiRadarView* setShipBearingIndicator(bool value) { show_ship_bearing = value; return this; }
     GuiRadarView* enableTargetProjections(GuiMissileTubeControls* missile_tube_controls) { show_target_projection = true; this->missile_tube_controls = missile_tube_controls; return this; }
     GuiRadarView* disableTargetProjections() { show_target_projection = false; return this; }
     GuiRadarView* enableMissileTubeIndicators() { show_missile_tubes = true; return this; }
@@ -100,6 +105,7 @@ public:
     GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_my_ship = value; return this; }
     GuiRadarView* setCallbacks(bpfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
     GuiRadarView* setViewPosition(glm::vec2 view_position) { this->view_position = view_position; return this; }
+    void setTargetRotation(float target_rotation) { this->target_rotation = target_rotation; }
     glm::vec2 getViewPosition() { return view_position; }
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
     float getViewRotation() { return view_rotation; }
@@ -120,6 +126,8 @@ private:
     void drawFriendlyNotVisibleAreas(sp::RenderTarget& target);
     void drawGhostDots(sp::RenderTarget& target);
     void drawWaypoints(sp::RenderTarget& target);
+    void drawShipBearing(sp::RenderTarget& target);
+    void drawShipTargetBearing(sp::RenderTarget& target);
     void drawRangeIndicators(sp::RenderTarget& target);
     void drawTargetProjections(sp::RenderTarget& target);
     void drawMissileTubes(sp::RenderTarget& target);

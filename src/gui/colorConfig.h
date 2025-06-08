@@ -43,6 +43,8 @@ public:
     glm::u8vec4 ship_waypoint_background;
     glm::u8vec4 ship_waypoint_text;
 
+    glm::u8vec4 ship_radar_bearing_indicator;
+
     void load();
 };
 extern ColorConfig colorConfig;

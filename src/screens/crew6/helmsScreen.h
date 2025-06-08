@@ -3,6 +3,8 @@
 
 #include "gui/gui2_overlay.h"
 #include "gui/joystickConfig.h"
+#include "screenComponents/radarView.h"
+
 
 class GuiKeyValueDisplay;
 class GuiLabel;
@@ -13,7 +15,7 @@ class HelmsScreen : public GuiOverlay
 {
 private:
     GuiOverlay* background_crosses;
-
+    GuiRadarView* radar;
     GuiElement* warp_controls;
     GuiElement* jump_controls;
     GuiLabel* heading_hint;

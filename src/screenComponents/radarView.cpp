@@ -51,6 +51,8 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     view_rotation(0),
     auto_center_on_my_ship(true),
     auto_rotate_on_my_ship(false),
+    show_ship_bearing(false),
+    show_ship_target_bearing(false),
     auto_distance(true),
     distance(5000.0f),
     long_range(false),
@@ -69,6 +71,10 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     mouse_drag_func(nullptr),
     mouse_up_func(nullptr)
 {
+    auto transform = my_spaceship.getComponent<sp::Transform>();
+    if (transform) {
+        target_rotation = transform->getRotation();
+    }
 }
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
@@ -80,6 +86,8 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     view_rotation(0),
     auto_center_on_my_ship(true),
     auto_rotate_on_my_ship(false),
+    show_ship_bearing(false),
+    show_ship_target_bearing(false),
     distance(distance),
     long_range(false),
     show_ghost_dots(false),
@@ -97,6 +105,10 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     mouse_drag_func(nullptr),
     mouse_up_func(nullptr)
 {
+    auto transform = my_spaceship.getComponent<sp::Transform>();
+    if (transform) {
+        target_rotation = transform->getRotation();
+    }
 }
 
 void GuiRadarView::onDraw(sp::RenderTarget& renderer)
@@ -227,6 +239,10 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     if (show_game_master_data)
         drawObjectsGM(renderer);
 
+    if (show_ship_bearing)
+        drawShipBearing(renderer);
+    if (show_ship_target_bearing)
+        drawShipTargetBearing(renderer);
     if (show_waypoints)
         drawWaypoints(renderer);
     if (show_heading_indicators)
@@ -446,6 +462,43 @@ void GuiRadarView::drawWaypoints(sp::RenderTarget& renderer)
             renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), string(n + 1), sp::Alignment::Center, 14, bold_font, colorConfig.ship_waypoint_text);
         }
     }
+}
+
+void GuiRadarView::drawShipBearing(sp::RenderTarget& renderer){
+    auto transform = my_spaceship.getComponent<sp::Transform>();
+    
+    glm::vec2 direction= glm::vec2(0,-1);
+    float rotation = 0.f;
+    if (!auto_rotate_on_my_ship){
+        rotation = transform->getRotation() + 90;
+        direction = glm::vec2(std::cos(glm::radians(transform->getRotation())), std::sin(glm::radians(transform->getRotation())));
+    }
+
+    // Possible optimization as it is also computed in in drawWaypoints
+    glm::vec2 radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
+
+    glm::vec2 screen_position = radar_screen_center + direction * std::min(rect.size.x, rect.size.y) * 0.405f;
+    renderer.drawRotatedSprite("gui/icons/heading.png", screen_position, 25, rotation, colorConfig.ship_radar_bearing_indicator);
+}
+
+void GuiRadarView::drawShipTargetBearing(sp::RenderTarget &renderer)
+{
+    float final_target_rotation = target_rotation;
+    if (auto_rotate_on_my_ship){
+        auto transform = my_spaceship.getComponent<sp::Transform>();
+        if (transform) {
+            final_target_rotation -= transform->getRotation()+90;
+        }
+    }
+
+    glm::vec2 direction = glm::vec2(std::cos(glm::radians(final_target_rotation)), std::sin(glm::radians(final_target_rotation)));
+
+
+    // Possible optimization as it is also computed in in drawWaypoints
+    glm::vec2 radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
+
+    glm::vec2 screen_position = radar_screen_center + direction * std::min(rect.size.x, rect.size.y) * 0.42f;
+    renderer.drawRotatedSprite("gui/icons/heading.png", screen_position, 18, final_target_rotation - 90, colorConfig.ship_radar_bearing_indicator);
 }
 
 void GuiRadarView::drawRangeIndicators(sp::RenderTarget& renderer)
