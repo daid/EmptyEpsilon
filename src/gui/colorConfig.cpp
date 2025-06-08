@@ -51,6 +51,8 @@ void ColorConfig::load()
     DEF_COLOR(ship_waypoint_background);
     DEF_COLOR(ship_waypoint_text);
 
+    DEF_COLOR(ship_radar_bearing_indicator);
+
     P<ResourceStream> stream = getResourceStream("gui/colors.ini");
     if(!stream)
         return;
