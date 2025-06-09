@@ -409,7 +409,7 @@ end
 --- forward,reverse = getImpulseMaxSpeed()
 --- forward = getImpulseMaxSpeed() -- forward speed only
 function Entity:getImpulseMaxSpeed()
-    if self.components.impulse_engine then return self.components.impulse_engine.max_speed_forward, self.impulse_engine.max_speed_reverse end
+    if self.components.impulse_engine then return self.components.impulse_engine.max_speed_forward, self.components.impulse_engine.max_speed_reverse end
     return 0.0, 0.0
 end
 --- Sets this SpaceShip's maximum forward and reverse impulse speeds.
