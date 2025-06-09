@@ -239,6 +239,16 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
 
     });
     message_close_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
+
+    keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
+    string keyboard_help_text = "";
+
+    for (auto binding : sp::io::Keybinding::listAllByCategory("GM"))
+    {
+        keyboard_help_text += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
+    }
+
+    keyboard_help->setText(keyboard_help_text);
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
@@ -271,6 +281,12 @@ void GameMasterScreen::update(float delta)
     if (keys.gm_clipboardcopy.getDown())
     {
         Clipboard::setClipboard(getScriptExport(false));
+    }
+
+    if (keys.help.getDown())
+    {
+        // Toggle keyboard help.
+        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
     }
 
     if (keys.escape.getDown())
