@@ -243,7 +243,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
     string keyboard_help_text = "";
 
-    for (const auto& category : {"Console", "GM"})
+    for (const auto& category : {"Console", "Basic", "GM"})
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(category))
         {
