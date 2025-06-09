@@ -108,10 +108,17 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
 {
     string ret = "";
 
+    bool show_additional_shortcuts_string = false;
+
     // Add shortcuts for this position.
     for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(position)))
     {
-        ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+        if(binding->isBound()){
+            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+        }
+        else{
+            show_additional_shortcuts_string = true;
+        }
     }
 
     // Check special positions that include multiple core positions' functions.
@@ -119,14 +126,24 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::helmsOfficer)))
         {
-            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            if(binding->isBound()){
+                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            }
+            else{
+                show_additional_shortcuts_string = true;
+            }
         }
 
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::weaponsOfficer)))
         {
             if (binding->getLabel() != "Toggle shields")
             {
-                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+                if(binding->isBound()){
+                    ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+                }
+                else{
+                    show_additional_shortcuts_string = true;
+                }
             }
         }
     }
@@ -134,14 +151,24 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::engineering)))
         {
-            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            if(binding->isBound()){
+                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            }
+            else{
+                show_additional_shortcuts_string = true;
+            }
         }
 
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::weaponsOfficer)))
         {
             if (binding->getLabel() == "Toggle shields")
             {
-                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+                if(binding->isBound()){
+                    ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+                }
+                else{
+                    show_additional_shortcuts_string = true;
+                }
             }
         }
     }
@@ -149,13 +176,28 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::helmsOfficer)))
         {
-            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            if(binding->isBound()){
+                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            }
+            else{
+                show_additional_shortcuts_string = true;
+            }
         }
 
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::weaponsOfficer)))
         {
-            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            if(binding->isBound()){
+                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            }
+            else{
+                show_additional_shortcuts_string = true;
+            }
         }
+    }
+
+    if (show_additional_shortcuts_string)
+    {
+        ret += "\n" + tr("More shortcuts available in settings") + "\n";
     }
 
     //    -- not yet used --
