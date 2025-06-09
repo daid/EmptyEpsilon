@@ -38,6 +38,7 @@ public:
     void commandImpulse(float target);
     void commandWarp(int target);
     void commandJump(float distance);
+    void commandAbortJump();
     void commandSetTarget(sp::ecs::Entity target);
     void commandSetScienceLink(sp::ecs::Entity probe);
     void commandClearScienceLink();
