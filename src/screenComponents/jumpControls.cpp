@@ -45,7 +45,7 @@ void GuiJumpControls::onDraw(sp::RenderTarget& target)
         } else if (jump->delay > 0.0f)
         {
             label->setKey(tr("jumpcontrol","Jump in"));
-            label->setValue(string(int(ceilf(jump->delay))));
+            label->setValue(string(int(ceilf(jump->effective_activation_delay))));
             slider->disable();
             button->disable();
             charge_bar->hide();

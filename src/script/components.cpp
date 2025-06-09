@@ -534,7 +534,7 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<JumpDrive>::name("jump_drive");
     BIND_SHIP_SYSTEM(JumpDrive);
     BIND_MEMBER(JumpDrive, charge_time);
-    BIND_MEMBER(JumpDrive, energy_per_km_charge);
+    BIND_MEMBER(JumpDrive, energy_per_u_charge);
     BIND_MEMBER(JumpDrive, heat_per_jump);
     BIND_MEMBER(JumpDrive, min_distance);
     BIND_MEMBER(JumpDrive, max_distance);

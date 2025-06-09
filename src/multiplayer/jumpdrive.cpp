@@ -20,11 +20,12 @@ BASIC_REPLICATION_IMPL(JumpDriveReplication, JumpDrive)
     BASIC_REPLICATION_FIELD(damage_per_second_on_overheat);
 
     BASIC_REPLICATION_FIELD(charge_time);
-    BASIC_REPLICATION_FIELD(energy_per_km_charge);
+    BASIC_REPLICATION_FIELD(energy_per_u_charge);
     BASIC_REPLICATION_FIELD(heat_per_jump);
     BASIC_REPLICATION_FIELD(min_distance);
     BASIC_REPLICATION_FIELD(max_distance);
     BASIC_REPLICATION_FIELD(activation_delay);
+    BASIC_REPLICATION_FIELD(effective_activation_delay);
     BASIC_REPLICATION_FIELD(charge);
     BASIC_REPLICATION_FIELD(distance);
     BASIC_REPLICATION_FIELD(delay);
