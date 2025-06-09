@@ -19,7 +19,7 @@ LuaConsole::LuaConsole()
 : GuiCanvas(consoleRenderLayer)
 {
     console = this;
-    open_console_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Open LUA console"));
+    open_console_key.setLabel(tr("hotkey_menu", "Console"), tr("hotkey_Console", "Open Lua console"));
 
     top = new GuiOverlay(this, "", {0, 0, 0, 192});
     top->layout.fill_height = false;
