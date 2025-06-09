@@ -24,11 +24,11 @@ void GuiJumpIndicator::onDraw(sp::RenderTarget& target)
         auto jump = my_spaceship.getComponent<JumpDrive>();
         if (jump && jump->delay > 0.0f) {
             box->show();
-            label->setText(tr("Jump in: {delay}").format({{"delay", string(int(ceilf(jump->delay)))}}));
+            label->setText(tr("Jump in: {delay}").format({{"delay", string(int(ceilf(jump->effective_activation_delay)))}}));
         } else {
             box->hide();
         }
-    }else{
+    } else {
         box->hide();
     }
 }
