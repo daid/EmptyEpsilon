@@ -243,9 +243,12 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
     string keyboard_help_text = "";
 
-    for (auto binding : sp::io::Keybinding::listAllByCategory("GM"))
+    for (const auto& category : {"Console", "GM"})
     {
-        keyboard_help_text += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
+        for (auto binding : sp::io::Keybinding::listAllByCategory(category))
+        {
+            keyboard_help_text += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
+        }
     }
 
     keyboard_help->setText(keyboard_help_text);
