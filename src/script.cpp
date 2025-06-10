@@ -36,6 +36,7 @@
 #include "systems/missilesystem.h"
 #include "systems/docking.h"
 #include "systems/selfdestruct.h"
+#include "systems/radarblock.h"
 #include "math/centerOfMass.h"
 
 
@@ -1242,6 +1243,9 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("setPlayerShipCustomFunction", &luaSetPlayerShipCustomFunction);
     env.setGlobal("removePlayerShipCustomFunction", &luaRemovePlayerShipCustomFunction);
     env.setGlobal("addEntryToShipsLog", &luaAddEntryToShipsLog);
+
+    env.setGlobal("isRadarBlockedFrom", &RadarBlockSystem::isRadarBlockedFrom);
+    env.setGlobal("beamVsShieldFrequencyDamageFactor", &frequencyVsFrequencyDamageFactor);
 
     /// EScanningComplexity getScanningComplexity()
     /// Returns the running scenario's scanning complexity setting.
