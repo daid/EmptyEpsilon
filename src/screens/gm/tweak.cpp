@@ -55,6 +55,19 @@ public:
     }
     std::function<string()> update_func;
 };
+class GuiSliderTweak : public GuiSlider {
+public:
+    GuiSliderTweak(GuiContainer* owner, const string& label, float min_value, float max_value, float start_value, GuiSlider::func_t callback)
+    : GuiSlider(owner, "", min_value, max_value, start_value, callback)
+    {
+        setSize(GuiElement::GuiSizeMax, 30.0f);
+    }
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (!focus && update_func) setValue(update_func());
+        GuiSlider::onDraw(target);
+    }
+    std::function<float()> update_func;
+};
 class GuiToggleTweak : public GuiToggleButton {
 public:
     GuiToggleTweak(GuiContainer* owner, const string& label, GuiToggleButton::func_t callback) : GuiToggleButton(owner, "", label, callback) {
@@ -119,6 +132,26 @@ public:
         ui->update_func = [this]() -> string { auto v = entity.getComponent<COMPONENT>(); if (v) return string(v->VALUE, 3); return ""; }; \
         ui->callback([this](string text) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = text.toFloat(); }); \
     } while(0)
+#define ADD_NUM_SLIDER_TWEAK(LABEL, COMPONENT, MIN_VALUE, MAX_VALUE, VALUE) do { \
+        auto row = new GuiElement(new_page->contents, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiSliderTweak(row, "", MIN_VALUE, MAX_VALUE, 0.0f, [this](float number) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = number; }); \
+        ui->addOverlay(2u, 20.0f); \
+        ui->update_func = [this]() -> float { auto v = entity.getComponent<COMPONENT>(); if (v) return v->VALUE; return 0.0f; }; \
+    } while(0)
+#define ADD_INT_SLIDER_TWEAK(LABEL, COMPONENT, MIN_VALUE, MAX_VALUE, VALUE) do { \
+        auto row = new GuiElement(new_page->contents, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiSliderTweak(row, "", MIN_VALUE, MAX_VALUE, 0u, [this](float number) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = number; }); \
+        for (float i = MIN_VALUE; i <= MAX_VALUE; i++) \
+            ui->addSnapValue(i, 0.5f); \
+        ui->addOverlay(0u, 20.0f); \
+        ui->update_func = [this]() -> float { auto v = entity.getComponent<COMPONENT>(); if (v) return v->VALUE; return 0u; }; \
+    } while(0)
 #define ADD_BOOL_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->contents, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
@@ -155,16 +188,33 @@ public:
                 v->VECTOR[vector_selector->getSelectionIndex()].VALUE = text.toFloat(); \
         }); \
     } while(0)
+#define ADD_VECTOR_NUM_SLIDER_TWEAK(LABEL, COMPONENT, VECTOR, MIN_VALUE, MAX_VALUE, VALUE) do { \
+        auto row = new GuiElement(new_page->contents, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiSliderTweak(row, "", MIN_VALUE, MAX_VALUE, 0.0f, [this, vector_selector](float number) { \
+            auto v = entity.getComponent<COMPONENT>(); \
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = number; \
+        }); \
+        ui->addOverlay(2u, 20.0f); \
+        ui->update_func = [this, vector_selector]() -> float { auto v = entity.getComponent<COMPONENT>(); \
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) \
+                return v->VECTOR[vector_selector->getSelectionIndex()].VALUE; \
+            return 0.0f; \
+        }; \
+    } while(0)
 #define ADD_SHIP_SYSTEM_TWEAK(SYSTEM) \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health:"), SYSTEM, health); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Health max:"), SYSTEM, health_max); \
-      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat:"), SYSTEM, heat_level); \
+      ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Heat:"), SYSTEM, 0.0f, 1.0f, heat_level); \
       ADD_BOOL_TWEAK(tr("tweak-text", "Can be hacked:"), SYSTEM, can_be_hacked); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power factor:"), SYSTEM, power_factor); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat rate:"), SYSTEM, heat_add_rate_per_second); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Coolant change rate:"), SYSTEM, coolant_change_rate_per_second); \
       ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Power change rate:"), SYSTEM, power_change_rate_per_second); \
-      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair:"), SYSTEM, auto_repair_per_second);
+      ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Auto repair rate:"), SYSTEM, auto_repair_per_second);
 
 GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 : GuiPanel(owner, "GM_TWEAK_DIALOG")
@@ -216,42 +266,42 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_SHIP_SYSTEM_TWEAK(ManeuveringThrusters);
 
     ADD_PAGE(tr("tweak-tab", "Combat thrusters"), CombatManeuveringThrusters);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Charge available (0 to 1):"), CombatManeuveringThrusters, charge);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Charge available:"), CombatManeuveringThrusters, 0.0f, 1.0f, charge);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Seconds to full recharge from 0:"), CombatManeuveringThrusters, charge_time);
 
     ADD_PAGE(tr("tweak-tab", "Beam system"), BeamWeaponSys);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Frequency:"), BeamWeaponSys, frequency);
+    ADD_INT_SLIDER_TWEAK(tr("tweak-text", "Frequency:"), BeamWeaponSys, 0u, 20u, frequency);
     ADD_LABEL(tr("tweak-text", "Beam weapons system"));
     ADD_SHIP_SYSTEM_TWEAK(BeamWeaponSys);
 
     ADD_PAGE(tr("tweak-tab", "Beam mounts"), BeamWeaponSys);
     ADD_VECTOR(tr("tweak-vector", "Mounts"), BeamWeaponSys, mounts);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Arc:"), BeamWeaponSys, mounts, arc);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Direction:"), BeamWeaponSys, mounts, direction);
+    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Arc:"), BeamWeaponSys, mounts, 0.0f, 360.0f, arc);
+    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Direction:"), BeamWeaponSys, mounts, 0.0f, 360.0f, direction);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), BeamWeaponSys, mounts, range);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Cycle time:"), BeamWeaponSys, mounts, cycle_time);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Damage:"), BeamWeaponSys, mounts, damage);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret arc:"), BeamWeaponSys, mounts, turret_arc);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret direction:"), BeamWeaponSys, mounts, turret_direction);
+    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Turret arc:"), BeamWeaponSys, mounts, 0.0f, 360.0f, turret_arc);
+    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Turret direction:"), BeamWeaponSys, mounts, 0.0f, 360.0f, turret_direction);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret rotation rate:"), BeamWeaponSys, mounts, turret_rotation_rate);
 
     ADD_PAGE(tr("tweak-tab", "Missile system"), MissileTubes);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Homing missiles:"), MissileTubes, storage[MW_Homing]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Nuke missiles:"), MissileTubes, storage[MW_Nuke]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Mines:"), MissileTubes, storage[MW_Mine]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "EMP missiles:"), MissileTubes, storage[MW_EMP]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "HVLI missiles:"), MissileTubes, storage[MW_HVLI]);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Homing capacity:"), MissileTubes, storage_max[MW_Homing]);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Nuke missiles:"), MissileTubes, storage[MW_Nuke]);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Nuke capacity:"), MissileTubes, storage_max[MW_Nuke]);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Mines capacity:"), MissileTubes, storage_max[MW_Mine]);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "EMP missiles:"), MissileTubes, storage[MW_EMP]);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "EMP capacity:"), MissileTubes, storage_max[MW_EMP]);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "HVLI missiles:"), MissileTubes, storage[MW_HVLI]);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "HVLI capacity:"), MissileTubes, storage_max[MW_HVLI]);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Mines:"), MissileTubes, storage[MW_Mine]);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Mines capacity:"), MissileTubes, storage_max[MW_Mine]);
     ADD_LABEL(tr("tweak-text", "Missile weapons system"));
     ADD_SHIP_SYSTEM_TWEAK(MissileTubes);
 
     ADD_PAGE(tr("tweak-tab", "Missile mounts"), MissileTubes);
     ADD_VECTOR(tr("tweak-vector", "Mounts"), MissileTubes, mounts);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Direction:"), MissileTubes, mounts, direction);
+    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Direction:"), MissileTubes, mounts, 0.0f, 360.0f, direction);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Load time:"), MissileTubes, mounts, load_time);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Types allowed mask:"), MissileTubes, mounts, type_allowed_mask);
 
@@ -262,7 +312,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     // ADD_SHIP_SYSTEM_TWEAK(Shields, rear_system);
     ADD_BOOL_TWEAK(tr("tweak-text", "Active:"), Shields, active);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Seconds to recalibrate:"), Shields, calibration_time);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Frequency:"), Shields, frequency);
+    ADD_INT_SLIDER_TWEAK(tr("tweak-text", "Frequency:"), Shields, 0u, 20u, frequency);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy use per second:"), Shields, energy_use_per_second);
     ADD_VECTOR(tr("tweak-vector", "Shields"), Shields, entries);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Level:"), Shields, entries, level);
