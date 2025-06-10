@@ -279,7 +279,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         auto right_panel_2 = new GuiPanel(right_container, "PLAYER_SHIP_INFO_BOX");
         right_panel_2->setPosition(0, 400, sp::Alignment::TopCenter)->setSize(550, 350);
         playership_info = new GuiScrollText(right_panel_2, "PLAYERSHIP_INFO", tr("Ship info..."));
-        playership_info->setPosition(0, 10, sp::Alignment::TopCenter)->setSize(520, 400);
+        playership_info->setPosition(0, 10, sp::Alignment::TopCenter)->setSize(520, 330);
     }
 
     // Player ship selection panel
