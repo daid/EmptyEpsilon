@@ -68,7 +68,6 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
     message_close_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
 
     keyboard_help = new GuiHelpOverlay(main_panel, tr("hotkey_F1", "Keyboard Shortcuts"));
-    string keyboard_general = "";
 
     for (const auto& category : {"Console", "Basic", "General"})
     {

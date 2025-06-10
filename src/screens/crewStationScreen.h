@@ -50,6 +50,7 @@ private:
 
     CrewPosition current_position = CrewPosition::helmsOfficer;
     std::vector<CrewTabInfo> tabs;
+    string keyboard_general = "";
     void showNextTab(int offset=1);
     void showTab(GuiElement* element);
     string populateShortcutsList(CrewPosition position);
