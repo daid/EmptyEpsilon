@@ -807,7 +807,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> system;
             auto beamweapons = ship.getComponent<BeamWeaponSys>();
             if (beamweapons)
-                beamweapons->system_target = (ShipSystem::Type)std::clamp((int)system, 0, (int)(ShipSystem::COUNT - 1));
+                beamweapons->system_target = (ShipSystem::Type)std::clamp((int)system, -1, (int)(ShipSystem::COUNT - 1));
         }
         break;
     case CMD_SET_SHIELD_FREQUENCY:

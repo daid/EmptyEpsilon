@@ -24,7 +24,7 @@ void WarpSystem::update(float delta)
         }
         if (warp.request > 0 || warp.current > 0)
         {
-            if (!impulse || impulse->actual >= 1.0f) {
+            if (!impulse || impulse->actual == 0.0f) {
                 if (warp.current < warp.request)
                 {
                     warp.current += delta / warp.charge_time;

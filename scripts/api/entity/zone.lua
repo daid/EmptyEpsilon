@@ -11,6 +11,7 @@ function Zone()
     e.components = {
         transform = {},
         zone = {},
+        never_radar_blocked = {},
     }
     return e
 end

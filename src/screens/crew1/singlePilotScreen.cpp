@@ -63,7 +63,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
             auto last_target = targets.get();
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
-            if (my_spaceship && (targets.get() != last_target)) {
+            if (my_spaceship && targets.get() && (targets.get() != last_target)) {
                 my_player_info->commandSetTarget(targets.get());
                 drag_rotate = false;
             } else if (auto transform = my_spaceship.getComponent<sp::Transform>()) {

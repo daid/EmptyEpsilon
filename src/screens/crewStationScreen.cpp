@@ -233,7 +233,7 @@ void CrewStationScreen::update(float delta)
     if (keys.escape.getDown())
     {
         //If we're using autoconnect do nothing on escape, otherwise go back to the ship selection. 
-        if (!(PreferencesManager::get("autoconnect").toInt()))
+        if (PreferencesManager::get("autoconnect") == "")
         {
             destroy();
             soundManager->stopMusic();

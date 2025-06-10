@@ -25,6 +25,7 @@ function Asteroid()
         radar_trace = {
             icon="radar/blip.png",
             radius=size,
+            min_size = 4.0,
             color={255, 200, 100, 255},
             rotate=false,
         },

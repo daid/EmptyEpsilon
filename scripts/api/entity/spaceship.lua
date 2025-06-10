@@ -409,7 +409,7 @@ end
 --- forward,reverse = getImpulseMaxSpeed()
 --- forward = getImpulseMaxSpeed() -- forward speed only
 function Entity:getImpulseMaxSpeed()
-    if self.components.impulse_engine then return self.components.impulse_engine.max_speed_forward, self.impulse_engine.max_speed_reverse end
+    if self.components.impulse_engine then return self.components.impulse_engine.max_speed_forward, self.components.impulse_engine.max_speed_reverse end
     return 0.0, 0.0
 end
 --- Sets this SpaceShip's maximum forward and reverse impulse speeds.
@@ -811,7 +811,31 @@ end
 --- ship:addBroadcast(1, "Help!")
 --- ship:addBroadcast(2, "We're taking over!")
 function Entity:addBroadcast(target, message)
-    --TODO
+    if target < 0 or target > 2 then target = 0 end
+
+    local fullMessage = self:getCallSign() .. " : " .. message;
+
+    for idx, ent in ipairs(getEntitiesWithComponent("ship_log")) do
+        local add = false
+        local color = {255, 204, 51, 255}
+
+        if ent:isFriendly(self) then
+            add = true
+            color = {154, 255, 154, 255}
+
+        elseif not ent:isEnemy(self) and target >= 1 then
+            add = true
+            color = {255, 102, 102, 255}
+
+        elseif target >= 2 then
+            add = true
+            color = {128, 128, 128, 255}
+        end
+
+        if add then
+            addEntryToShipsLog(ent, fullMessage, color)
+        end
+    end
     return self
 end
 --- Sets the scan state of this SpaceShip for every faction.
