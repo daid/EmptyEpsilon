@@ -52,7 +52,20 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             {
                 auto r = radar->getRect();
                 float angle = vec2ToAngle(position - transform->getPosition());
-                auto draw_position = rect.center() + (position - transform->getPosition()) / radar->getDistance() * std::min(r.size.x, r.size.y) * 0.5f;
+
+                // Rotate the position to match radar's rotation.
+                glm::vec2 draw_position;
+                if (radar->getAutoRotating())
+                {
+                    auto rotation = -radar->getViewRotation();
+                    glm::vec2 position_from_center = position - transform->getPosition();
+                    draw_position.x = position_from_center.x * cosf(glm::radians(rotation)) - position_from_center.y * sinf(glm::radians(rotation));
+                    draw_position.y = position_from_center.x * sinf(glm::radians(rotation)) + position_from_center.y * cosf(glm::radians(rotation));
+                }
+                else{
+                    draw_position = (position - transform->getPosition());
+                }
+                draw_position = rect.center() + draw_position / radar->getDistance() * std::min(r.size.x, r.size.y) * 0.5f;
                 heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
                 my_player_info->commandTargetRotation(angle);
             }
@@ -62,8 +75,20 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             {
                 auto r = radar->getRect();
                 float angle = vec2ToAngle(position - transform->getPosition());
-                auto draw_position = rect.center() + (position - transform->getPosition()) / radar->getDistance() * std::min(r.size.x, r.size.y) * 0.5f;
-                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
+
+                // Rotate the position to match radar's rotation.
+                glm::vec2 draw_position;
+                if (radar->getAutoRotating())
+                {
+                    auto rotation = -radar->getViewRotation();
+                    glm::vec2 position_from_center = position - transform->getPosition();
+                    draw_position.x = position_from_center.x * cosf(glm::radians(rotation)) - position_from_center.y * sinf(glm::radians(rotation));
+                    draw_position.y = position_from_center.x * sinf(glm::radians(rotation)) + position_from_center.y * cosf(glm::radians(rotation));
+                }
+                else{
+                    draw_position = (position - transform->getPosition());
+                }
+                draw_position = rect.center() + draw_position / radar->getDistance() * std::min(r.size.x, r.size.y) * 0.5f;                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
                 my_player_info->commandTargetRotation(angle);
             }
         },
