@@ -68,13 +68,12 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
     message_close_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
 
     keyboard_help = new GuiHelpOverlay(main_panel, tr("hotkey_F1", "Keyboard Shortcuts"));
+    string keyboard_general = "";
 
-    for (const auto& category : {"Console", "General"})
+    for (const auto& category : {"Console", "Basic", "General"})
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(category))
-        {
             keyboard_general += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
-        }
     }
 
 #ifndef __ANDROID__
