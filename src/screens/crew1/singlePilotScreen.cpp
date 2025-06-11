@@ -162,13 +162,24 @@ void SinglePilotScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
-        if (angle != 0.0f)
-        {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                my_player_info->commandTargetRotation(transform->getRotation() + angle);
-        }
+        static bool was_turning = false;
 
+        auto transform = my_spaceship.getComponent<sp::Transform>();
+        if (transform)
+        {
+            auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
+            if (angle != 0.0f)
+            {
+                was_turning = true;
+                my_player_info->commandTargetRotation(transform->getRotation() + angle);
+            }
+            else if (was_turning)
+            {
+                was_turning = false;
+                my_player_info->commandTargetRotation(transform->getRotation());
+            }
+        }
+        
         if (keys.weapons_enemy_next_target.getDown())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
