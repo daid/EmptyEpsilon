@@ -32,7 +32,8 @@ void GuiElementListbox::onDraw(sp::RenderTarget& renderer)
     {
         scroll->hide();
     }
-    else{
+    else
+    {
         scroll->show();
         // Value size and allows to have a bigger scroll button
         scroll->setValueSize(rect.size.y/10);
