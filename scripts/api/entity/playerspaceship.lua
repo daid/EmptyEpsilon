@@ -7,13 +7,20 @@ __default_player_ship_faction = "Human Navy"
 --- @type creation
 function PlayerSpaceship()
     local e = createEntity()
+
+    -- player ships default to fully scanned
+    local scan_state = {allow_simple_scan = true}
+    for idx, faction in ipairs(getEntitiesWithComponent("faction_info")) do
+        table.insert(scan_state, {faction = faction, state = "fullscan"})
+    end
+
     e.components = {
         player_control = {},
         ship_log = {},
         custom_ship_functions = {},
         transform = {rotation=random(0, 360)},
         callsign = {callsign=generateRandomCallSign()},
-        scan_state = {allow_simple_scan=true},
+        scan_state = scan_state,
     }
     e:setFaction(__default_player_ship_faction)
     return e
