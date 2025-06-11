@@ -46,6 +46,7 @@ function ShipTemplate:__init__()
         radius=300.0*0.8,
         max_size=1024,
         color_by_faction=true,
+        arrow_if_not_scanned=true,
     }
     self.__repair_crew_count = 3
     self.share_short_range_radar = {}
