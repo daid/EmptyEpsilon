@@ -59,7 +59,8 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
         {
             keyboard_general += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
         }
-        else{
+        else
+        {
             show_additional_shortcuts_string = true;
         }
     }
@@ -163,7 +164,9 @@ void ScreenMainScreen::update(float delta)
 
         // Update impulse sound volume and pitch.
         impulse_sound->update(delta);
-    } else {
+    }
+    else
+    {
         // If we're not the player ship (ie. we exploded), don't play impulse
         // engine sounds.
         impulse_sound->stop();

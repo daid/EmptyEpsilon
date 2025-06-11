@@ -118,7 +118,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
         {
             ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
         }
-        else{
+        else
+        {
             show_additional_shortcuts_string = true;
         }
     }
@@ -132,7 +133,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
             {
                 ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
             }
-            else{
+            else
+            {
                 show_additional_shortcuts_string = true;
             }
         }
@@ -145,7 +147,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
                 {
                     ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
                 }
-                else{
+                else
+                {
                     show_additional_shortcuts_string = true;
                 }
             }
@@ -159,7 +162,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
             {
                 ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
             }
-            else{
+            else
+            {
                 show_additional_shortcuts_string = true;
             }
         }
@@ -172,7 +176,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
                 {
                     ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
                 }
-                else{
+                else
+                {
                     show_additional_shortcuts_string = true;
                 }
             }
@@ -186,7 +191,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
             {
                 ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
             }
-            else{
+            else
+            {
                 show_additional_shortcuts_string = true;
             }
         }
@@ -197,7 +203,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
             {
                 ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
             }
-            else{
+            else
+            {
                 show_additional_shortcuts_string = true;
             }
         }
@@ -242,7 +249,9 @@ void CrewStationScreen::addStationTab(GuiElement* element, CrewPosition position
         string keyboard_category = "";
         keyboard_category = populateShortcutsList(position);
         keyboard_help->setText(keyboard_general + keyboard_category);
-    }else{
+    }
+    else
+    {
         element->hide();
         info.button->setValue(false);
     }
@@ -310,7 +319,8 @@ void CrewStationScreen::update(float delta)
             viewport->hide();
             main_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         }
-        else {
+        else
+        {
             viewport->show();
             tileViewport();
         }
@@ -339,7 +349,9 @@ void CrewStationScreen::update(float delta)
     if (my_spaceship) {
         // Update the impulse engine sound.
         impulse_sound->update(delta);
-    } else {
+    } 
+    else
+    {
         // If we're not the player ship (ie. we exploded), stop playing the
         // impulse engine sound.
         impulse_sound->stop();
@@ -395,7 +407,9 @@ void CrewStationScreen::showTab(GuiElement* element)
             string keyboard_category = "";
             keyboard_category = populateShortcutsList(info.position);
             keyboard_help->setText(keyboard_general + keyboard_category);
-        } else {
+        } 
+        else 
+        {
             info.element->hide();
             info.button->setValue(false);
         }
@@ -423,7 +437,9 @@ void CrewStationScreen::tileViewport()
         main_panel->setSize(1000, GuiElement::GuiSizeMax);
         main_panel->layout.fill_width = false;
         viewport->setPosition(1000, 0, sp::Alignment::TopLeft);
-    } else {
+    }
+    else 
+    {
         main_panel->setSize(1200, GuiElement::GuiSizeMax);
         main_panel->layout.fill_width = false;
         viewport->setPosition(1200, 0, sp::Alignment::TopLeft);
