@@ -28,7 +28,8 @@ GuiElementListbox *GuiElementListbox::setElementHeight(int height)
 
 void GuiElementListbox::onDraw(sp::RenderTarget& renderer)
 {
-    if (elements.size() * element_height < this->rect.size.y*0.9f) {
+    if (elements.size() * element_height < this->rect.size.y*0.9f)
+    {
         scroll->hide();
     }
     else{
