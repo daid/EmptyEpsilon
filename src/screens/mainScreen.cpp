@@ -55,14 +55,16 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     bool show_additional_shortcuts_string = false;
     for (auto binding : sp::io::Keybinding::listAllByCategory(tr("hotkey_menu", "Main Screen")))
     {
-        if(binding->isBound()){
+        if(binding->isBound())
+        {
             keyboard_general += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
         }
         else{
             show_additional_shortcuts_string = true;
         }
     }
-    if (show_additional_shortcuts_string){
+    if (show_additional_shortcuts_string)
+    {
         keyboard_general += "\n" + tr("More shortcuts available in settings") + "\n";
     }
     keyboard_help->setText(keyboard_general);

@@ -78,7 +78,8 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
     if (PreferencesManager::get("music_enabled") == "1")
     {
         threat_estimate = new ThreatLevelEstimate();
-        threat_estimate->setCallbacks([](){
+        threat_estimate->setCallbacks([]()
+        {
             LOG(INFO) << "Switching to ambient music";
             soundManager->playMusicSet(findResources("music/ambient/*.ogg"));
         }, []() {
@@ -113,7 +114,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
     // Add shortcuts for this position.
     for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(position)))
     {
-        if(binding->isBound()){
+        if(binding->isBound())
+        {
             ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
         }
         else{
@@ -126,7 +128,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::helmsOfficer)))
         {
-            if(binding->isBound()){
+            if(binding->isBound())
+            {
                 ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
             }
             else{
@@ -138,7 +141,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
         {
             if (binding->getLabel() != "Toggle shields")
             {
-                if(binding->isBound()){
+                if(binding->isBound())
+                {
                     ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
                 }
                 else{
@@ -151,7 +155,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::engineering)))
         {
-            if(binding->isBound()){
+            if(binding->isBound())
+            {
                 ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
             }
             else{
@@ -163,7 +168,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
         {
             if (binding->getLabel() == "Toggle shields")
             {
-                if(binding->isBound()){
+                if(binding->isBound())
+                {
                     ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
                 }
                 else{
@@ -176,7 +182,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::helmsOfficer)))
         {
-            if(binding->isBound()){
+            if(binding->isBound())
+            {
                 ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
             }
             else{
@@ -186,7 +193,8 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
 
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::weaponsOfficer)))
         {
-            if(binding->isBound()){
+            if(binding->isBound())
+            {
                 ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
             }
             else{
