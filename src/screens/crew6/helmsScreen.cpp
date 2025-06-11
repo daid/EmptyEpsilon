@@ -107,7 +107,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     energy_display->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 40);
     auto heading_display = new HeadingInfoDisplay(this, "HEADING_DISPLAY", 0.45);
     heading_display->setPosition(20, 140, sp::Alignment::TopLeft)->setSize(240, 40);
-    auto velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
+    auto velocity_display = new VelocityInfoDisplay(this, "VELOCITY_DISPLAY", 0.45);
     velocity_display->setPosition(20, 180, sp::Alignment::TopLeft)->setSize(240, 40);
 
     GuiElement* engine_layout = new GuiElement(this, "ENGINE_LAYOUT");
