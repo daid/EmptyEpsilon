@@ -6,9 +6,12 @@
 #include "ecs/query.h"
 #include "multiplayer_server.h"
 
+PickupSystem::PickupSystem() {
+    sp::CollisionSystem::addHandler(this);
+}
+
 void PickupSystem::update(float delta)
 {
-    sp::CollisionSystem::addHandler(this);
 }
 
 void PickupSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
