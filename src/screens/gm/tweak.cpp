@@ -267,7 +267,8 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR(tr("tweak-vector", "Shields"), Shields, entries);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Level:"), Shields, entries, level);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Shields, entries, max);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Hit effect:"), Shields, entries, hit_effect);
+    // Timer on shield hit effect used by threat level; not a useful control
+    // ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Hit effect:"), Shields, entries, hit_effect);
 
     ADD_PAGE(tr("tweak-tab", "Warp drive"), WarpDrive);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max level:"), WarpDrive, max_level);
