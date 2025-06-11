@@ -60,31 +60,38 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 650);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
-        [this](sp::io::Pointer::Button button, glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position)
+        {
             auto last_target = targets.get();
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             auto transform = my_spaceship.getComponent<sp::Transform>();
-            if (my_spaceship && (targets.get() != last_target)) {
+            if (my_spaceship && (targets.get() != last_target))
+            {
                 my_player_info->commandSetTarget(targets.get());
                 drag_rotate = false;
-            } else if (transform) {
+            } else if (transform)
+            {
                 float angle = vec2ToAngle(position - transform->getPosition());
                 radar->setTargetRotation(angle);
                 my_player_info->commandTargetRotation(angle);
                 drag_rotate = true;
             }
         },
-        [this](glm::vec2 position) {
-            if (drag_rotate) {
+        [this](glm::vec2 position)
+        {
+            if (drag_rotate)
+            {
                 auto transform = my_spaceship.getComponent<sp::Transform>();
-                if (transform){
+                if (transform)
+                {
                     float angle = vec2ToAngle(position - transform->getPosition());
                     radar->setTargetRotation(angle);
                     my_player_info->commandTargetRotation(angle);
                 }
             }
         },
-        [this](glm::vec2 position) {
+        [this](glm::vec2 position)
+        {
            drag_rotate=false;
         }
     );
@@ -109,7 +116,8 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     shields_display->setSize(240, 40);
 
     // Unlocked missile aim dial and lock controls.
-    missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
+    missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value)
+    {
         tube_controls->setMissileTargetAngle(value);
     });
     missile_aim->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 700);
@@ -183,7 +191,8 @@ void SinglePilotScreen::onUpdate()
 
         if (keys.weapons_enemy_next_target.getDown())
         {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
                 targets.setNext(transform->getPosition(), lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable, FactionRelation::Enemy);
                 my_player_info->commandSetTarget(targets.get());
@@ -191,7 +200,8 @@ void SinglePilotScreen::onUpdate()
         }
         if (keys.weapons_next_target.getDown())
         {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
                 targets.setNext(transform->getPosition(), lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable);
                 my_player_info->commandSetTarget(targets.get());

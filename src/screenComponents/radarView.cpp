@@ -72,7 +72,8 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     mouse_up_func(nullptr)
 {
     auto transform = my_spaceship.getComponent<sp::Transform>();
-    if (transform) {
+    if (transform) 
+    {
         target_rotation = transform->getRotation();
     }
 }
@@ -106,7 +107,8 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     mouse_up_func(nullptr)
 {
     auto transform = my_spaceship.getComponent<sp::Transform>();
-    if (transform) {
+    if (transform) 
+    {
         target_rotation = transform->getRotation();
     }
 }
@@ -115,11 +117,14 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 {
     //Hacky, when not relay and we have a ship, center on it.
     auto transform = my_spaceship.getComponent<sp::Transform>();
-    if (transform) {
-        if (auto_center_on_my_ship) {
+    if (transform) 
+    {
+        if (auto_center_on_my_ship)
+        {
             view_position = transform->getPosition();
         }
-        if (auto_rotate_on_my_ship) {
+        if (auto_rotate_on_my_ship)
+        {
             view_rotation = transform->getRotation() + 90;
         }
     }
@@ -405,7 +410,8 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
                 float r = radarblock.range * scale;
                 renderer.fillCircle(worldToScreen(transform.getPosition()), r, glm::u8vec4(0, 0, 0, 255));
 
-                if (radarblock.behind) {
+                if (radarblock.behind)
+                {
                     float diff_angle = vec2ToAngle(diff);
                     float angle = glm::degrees(acosf(radarblock.range / diff_len));
 
@@ -464,12 +470,14 @@ void GuiRadarView::drawWaypoints(sp::RenderTarget& renderer)
     }
 }
 
-void GuiRadarView::drawShipBearing(sp::RenderTarget& renderer){
+void GuiRadarView::drawShipBearing(sp::RenderTarget& renderer)
+{
     auto transform = my_spaceship.getComponent<sp::Transform>();
     
     glm::vec2 direction= glm::vec2(0,-1);
     float rotation = 0.f;
-    if (!auto_rotate_on_my_ship){
+    if (!auto_rotate_on_my_ship)
+    {
         rotation = transform->getRotation() + 90;
         direction = glm::vec2(std::cos(glm::radians(transform->getRotation())), std::sin(glm::radians(transform->getRotation())));
     }
@@ -484,9 +492,11 @@ void GuiRadarView::drawShipBearing(sp::RenderTarget& renderer){
 void GuiRadarView::drawShipTargetBearing(sp::RenderTarget &renderer)
 {
     float final_target_rotation = target_rotation;
-    if (auto_rotate_on_my_ship){
+    if (auto_rotate_on_my_ship)
+    {
         auto transform = my_spaceship.getComponent<sp::Transform>();
-        if (transform) {
+        if (transform)
+        {
             final_target_rotation -= transform->getRotation()+90;
         }
     }
@@ -523,9 +533,11 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
     auto transform = my_spaceship.getComponent<sp::Transform>();
-    if (transform && missile_tube_controls) {
+    if (transform && missile_tube_controls)
+    {
         auto tubes = my_spaceship.getComponent<MissileTubes>();
-        if (tubes) {
+        if (tubes)
+        {
             for(auto& mount : tubes->mounts)
             {
                 if (mount.state != MissileTubes::MountPoint::State::Loaded)
@@ -540,7 +552,8 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
                     if (missile_tube_controls->getManualAim())
                     {
                         missile_target_angle = missile_tube_controls->getMissileTargetAngle();
-                    }else if (auto target = my_spaceship.getComponent<Target>()) {
+                    }else if (auto target = my_spaceship.getComponent<Target>())
+                    {
                         float firing_solution = MissileSystem::calculateFiringSolution(my_spaceship, mount, target->entity);
                         if (firing_solution != std::numeric_limits<float>::infinity())
                             missile_target_angle = firing_solution;
@@ -662,7 +675,8 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         for(auto [entity, transform] : sp::ecs::Query<sp::Transform>())
         {
             // If the object can't hide in a nebula, it's considered visible.
-            if (entity.hasComponent<NeverRadarBlocked>()) {
+            if (entity.hasComponent<NeverRadarBlocked>())
+            {
                 visible_objects.set(entity.getIndex());
                 continue;
             }
@@ -692,7 +706,8 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
                 //TODO: This isn't great, as not everything will collision attached...
                 auto trace = entity2.getComponent<RadarTrace>();
                 float r2 = r + (trace ? trace->radius : 300.0f);
-                if (auto t2 = entity2.getComponent<sp::Transform>()) {
+                if (auto t2 = entity2.getComponent<sp::Transform>())
+                {
                     if (glm::length2(transform.getPosition() - t2->getPosition()) < r2*r2)
                         visible_objects.set(entity2.getIndex());
                 }
@@ -746,7 +761,8 @@ void GuiRadarView::drawObjectsGM(sp::RenderTarget& renderer)
         if (!long_range)
         {
             auto hull = obj->entity.getComponent<Hull>();
-            if (hull) {
+            if (hull)
+            {
                 renderer.fillRect(sp::Rect(object_position_on_screen.x - 30, object_position_on_screen.y - 30, 60 * hull->current / hull->max, 5), glm::u8vec4(128, 255, 128, 128));
             }
         }

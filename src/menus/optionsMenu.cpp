@@ -95,7 +95,7 @@ OptionsMenu::OptionsMenu()
     }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
     // Ship baring indicator for the helms
-    (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Ship baring indicators"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Ship Bearing Indicators"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiToggleButton(interface_page, "HELMS_SHIP_BEARING", tr("Helms Radar Bearing"), [](bool value)
     {
         PreferencesManager::set("helms_ship_bearing", value ? "1" : "");

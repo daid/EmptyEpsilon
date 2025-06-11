@@ -46,7 +46,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
-        [this](sp::io::Pointer::Button button, glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position)
+        {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
             {
                 auto r = radar->getRect();
@@ -57,7 +58,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
                 my_player_info->commandTargetRotation(angle);
             }
         },
-        [this](glm::vec2 position) {
+        [this](glm::vec2 position)
+        {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
             {
                 auto r = radar->getRect();
@@ -68,7 +70,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
                 my_player_info->commandTargetRotation(angle);
             }
         },
-        [this](glm::vec2 position) {
+        [this](glm::vec2 position)
+        {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
                 my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
             heading_hint->hide();
