@@ -141,24 +141,14 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
 
 void TacticalScreen::onUpdate()
 {
-    if (my_spaceship && isVisible())
+    if (my_spaceship && my_player_info && isVisible())
     {
-        static bool was_turning = false;
+        auto current_turn_request = keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue();
 
-        auto transform = my_spaceship.getComponent<sp::Transform>();
-        if (transform)
+        if (current_turn_request != turn_request)
         {
-            auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
-            if (angle != 0.0f)
-            {
-                was_turning = true;
-                my_player_info->commandTargetRotation(transform->getRotation() + angle);
-            }
-            else if (was_turning)
-            {
-                was_turning = false;
-                my_player_info->commandTargetRotation(transform->getRotation());
-            }
+            turn_request = current_turn_request;
+            my_player_info->commandTurnSpeed(turn_request);
         }
 
         if (keys.weapons_enemy_next_target.getDown())
