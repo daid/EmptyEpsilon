@@ -3,7 +3,7 @@
 
 
 GuiScrollText::GuiScrollText(GuiContainer* owner, string id, string text)
-: GuiElement(owner, id), text(text), text_size(30)
+: GuiElement(owner, id), text(text), text_size(30), mouse_scroll_steps(25)
 {
     auto_scroll_down = false;
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
@@ -57,6 +57,11 @@ void GuiScrollText::onDraw(sp::RenderTarget& renderer)
     }
 }
 
+void GuiScrollText::onMouseWheelScroll(glm::vec2 position, float value)
+{
+    float range = scrollbar->getCorrectedMax() - scrollbar->getMin();
+    scrollbar->setValue((scrollbar->getValue() +   value * range / mouse_scroll_steps) );
+}
 
 GuiScrollFormattedText::GuiScrollFormattedText(GuiContainer* owner, string id, string text)
 : GuiScrollText(owner, id, text)
