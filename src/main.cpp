@@ -225,6 +225,10 @@ int main(int argc, char** argv)
         new ShipSelectionScreen();
     }
 
+    if (PreferencesManager::get("joystick_deadzone").empty())
+        PreferencesManager::set("joystick_deadzone", "0.1");
+    sp::io::Keybinding::setDeadzone(PreferencesManager::get("joystick_deadzone").toFloat());
+
     engine->runMainLoop();
 
     // Set FSAA and fullscreen defaults from windowManager.
@@ -246,9 +250,6 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("engine_enabled").empty())
         PreferencesManager::set("engine_enabled", "2");
     
-    if (PreferencesManager::get("joystick_deadzone").empty())
-        PreferencesManager::set("joystick_deadzone", "0.1");
-    sp::io::Keybinding::setDeadzone(PreferencesManager::get("joystick_deadzone").toFloat());
     
 
     if (PreferencesManager::get("headless") == "")
