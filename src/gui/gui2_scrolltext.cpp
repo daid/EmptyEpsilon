@@ -135,3 +135,8 @@ void GuiScrollFormattedText::onDraw(sp::RenderTarget& renderer)
         renderer.drawText(text_rect, prepared, sp::Font::FlagClip | sp::Font::FlagLineWrap);
     }
 }
+
+void GuiScrollFormattedText::onMouseWheelScroll(glm::vec2 position, float value)
+{
+    GuiScrollText::onMouseWheelScroll(position, value);
+}

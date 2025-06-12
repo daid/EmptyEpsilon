@@ -1,7 +1,7 @@
 #include "gui2_advancedscrolltext.h"
 
 GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
-: GuiElement(owner, id), text_size(30.0f), rect_width(rect.size.x), max_prefix_width(0.0f)
+: GuiElement(owner, id), text_size(30.0f), rect_width(rect.size.x), max_prefix_width(0.0f), mouse_scroll_steps(25)
 {
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
     scrollbar->setPosition(0, 0, sp::Alignment::TopRight)->setSize(50, GuiElement::GuiSizeMax);
@@ -139,4 +139,10 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
     }
 
     scrollbar->setVisible(rect.size.y > 100);
+}
+
+void GuiAdvancedScrollText::onMouseWheelScroll(glm::vec2 position, float value)
+{
+    float range = scrollbar->getCorrectedMax() - scrollbar->getMin();
+    scrollbar->setValue((scrollbar->getValue() +   value * range / mouse_scroll_steps) );
 }
