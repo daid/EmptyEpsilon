@@ -246,13 +246,10 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("engine_enabled").empty())
         PreferencesManager::set("engine_enabled", "2");
     
-    // Hidden joystick preference to avoid excessive network calls
     if (PreferencesManager::get("joystick_deadzone").empty())
         PreferencesManager::set("joystick_deadzone", "0.1");
-    if (PreferencesManager::get("joystick_max_deadzone").empty())
-        PreferencesManager::set("joystick_max_deadzone", "0.95");
-    if (PreferencesManager::get("joystick_resolution").empty())
-        PreferencesManager::set("joystick_resolution", "0.2");
+    sp::io::Keybinding::setDeadzone(PreferencesManager::get("joystick_deadzone").toFloat());
+    
 
     if (PreferencesManager::get("headless") == "")
     {

@@ -136,36 +136,15 @@ void HelmsScreen::onUpdate()
 {
     if (my_spaceship && my_player_info && isVisible())
     {
-        static float deadzone = PreferencesManager::get("joystick_deadzone").toFloat();
-        static float max_deadzone = PreferencesManager::get("joystick_max_deadzone").toFloat();
-        static float joystick_resolution = PreferencesManager::get("joystick_deadzone").toFloat();
-
         auto current_turn_request = keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue();
-        // Handle joystick input that are redundant
-        if (current_turn_request !=0 &&
-            keys.helms_turn_right.getValue() == keys.helms_turn_right.getValue())
+        // Handle joystick input that are redundant by giving right priority
+        if (keys.helms_turn_right.getValue() == keys.helms_turn_right.getValue())
         {
             current_turn_request = keys.helms_turn_right.getValue();
         }
 
-        if (abs(current_turn_request) < deadzone)
-        {
-            current_turn_request = 0;
-        }
-        if (current_turn_request > max_deadzone)
-        {
-            current_turn_request = 1;
-        }
-        if (current_turn_request < -max_deadzone)
-        {
-            current_turn_request = -1;
-        }
-
-        float request_difference = current_turn_request - turn_request;
-
-        // Handling all joystick cases to minimize networking calls
-        if (abs(current_turn_request - turn_request) > joystick_resolution ||
-            (current_turn_request != turn_request && current_turn_request == 2) )
+        // Update only if changed
+        if (current_turn_request != turn_request )
         {
             turn_request = current_turn_request;
             my_player_info->commandTurnSpeed(turn_request);
