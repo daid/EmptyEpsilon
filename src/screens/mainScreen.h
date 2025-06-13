@@ -19,7 +19,6 @@ class ScreenMainScreen : public GuiCanvas, public Updatable
 private:
     GuiViewportMainScreen* viewport;
     GuiHelpOverlay* keyboard_help;
-    string keyboard_general = "";
     GuiRadarView* main_screen_radar;
     GuiRadarView* tactical_radar;
     GuiRadarView* long_range_radar;
