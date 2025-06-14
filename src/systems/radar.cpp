@@ -1,10 +1,8 @@
 #include "systems/radar.h"
-#include "systems/ai.h"
 #include "playerInfo.h"
 #include "main.h"
 #include "components/faction.h"
 #include "components/scanning.h"
-#include "ai/ai.h"
 
 int RadarRenderSystem::current_flags;
 float RadarRenderSystem::current_scale;
