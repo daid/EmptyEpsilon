@@ -118,6 +118,11 @@ int GuiScrollbar::getMax() const
     return max_value;
 }
 
+int GuiScrollbar::getCorrectedMax() const
+{
+    return max_value - value_size;
+}
+
 int GuiScrollbar::getMin() const
 {
     return min_value;
