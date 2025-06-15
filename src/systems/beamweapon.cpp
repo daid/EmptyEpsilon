@@ -246,7 +246,7 @@ void BeamWeaponSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Bea
     }
 }
 
-static void drawArc(sp::RenderTarget& renderer, glm::vec2 arc_center, float angle0, float arc_angle, float arc_radius, glm::u8vec4 color)
+void drawArc(sp::RenderTarget& renderer, glm::vec2 arc_center, float angle0, float arc_angle, float arc_radius, glm::u8vec4 color)
 {
     // Initialize variables from the beam's data.
     float beam_arc = arc_angle;

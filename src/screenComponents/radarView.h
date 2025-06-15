@@ -27,6 +27,7 @@ public:
     typedef std::function<void(sp::io::Pointer::Button button, glm::vec2 position)> bpfunc_t;
     typedef std::function<void(glm::vec2 position)> pfunc_t;
     typedef std::function<void(float position)>     ffunc_t;
+    
 private:
     class GhostDot
     {
@@ -57,6 +58,10 @@ private:
     bool show_missile_tubes;
     bool show_callsigns;
     bool show_heading_indicators;
+    bool show_signatures;
+    bool show_electrical;
+    bool show_gravity;
+    bool show_biological;
     bool show_game_master_data;
     float range_indicator_step_size;
     uint8_t background_alpha;
@@ -103,6 +108,19 @@ public:
     glm::vec2 getViewPosition() { return view_position; }
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
     float getViewRotation() { return view_rotation; }
+
+    GuiRadarView* enableSignatures() { show_signatures = true; return this; }
+    GuiRadarView* disableSignatures() { show_signatures = false; return this; }
+    bool getSignatures() { return show_signatures; }
+    GuiRadarView* enableElectrical() { show_electrical = true; return this; }
+    GuiRadarView* disableElectrical() { show_electrical = false; return this; }
+    bool getElectrical() { return show_electrical; }
+    GuiRadarView* enableGravity() { show_gravity = true; return this; }
+    GuiRadarView* disableGravity() { show_gravity = false; return this; }
+    bool getGravity() { return show_gravity; }
+    GuiRadarView* enableBiological() { show_biological = true; return this; }
+    GuiRadarView* disableBiological() { show_biological = false; return this; }
+    bool getBiological() { return show_biological; }
 
     glm::vec2 worldToScreen(glm::vec2 world_position);
     glm::vec2 screenToWorld(glm::vec2 screen_position);

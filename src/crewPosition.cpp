@@ -7,6 +7,7 @@ string crewPositionToString(CrewPosition value) {
     case CrewPosition::engineering: return "engineering";
     case CrewPosition::scienceOfficer: return "science";
     case CrewPosition::relayOfficer: return "relay";
+    case CrewPosition::sensorOfficer: return "sensor";
     case CrewPosition::tacticalOfficer: return "tactical";
     case CrewPosition::engineeringAdvanced: return "engineering+";
     case CrewPosition::operationsOfficer: return "operations";
@@ -33,6 +34,8 @@ std::optional<CrewPosition> tryParseCrewPosition(string value) {
         return CrewPosition::scienceOfficer;
     else if (value == "relay" || value == "relayofficer")
         return CrewPosition::relayOfficer;
+    else if (value == "sensor" || value == "sensorofficer")
+        return CrewPosition::sensorOfficer;
 
     //4/3 player crew
     else if (value == "tactical" || value == "tacticalofficer")

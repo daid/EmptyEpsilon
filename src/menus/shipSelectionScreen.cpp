@@ -492,7 +492,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
         crew_position_button[n] = button;
         return button;
     };
-    for(int n=0; n<=int(CrewPosition::relayOfficer); n++)
+    for(int n=0; n<=int(CrewPosition::sensorOfficer); n++)
         create_crew_position_button(layout, n);
 
 

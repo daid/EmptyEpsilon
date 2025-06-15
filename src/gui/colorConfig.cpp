@@ -47,6 +47,9 @@ void ColorConfig::load()
     DEF_COLOR(overlay_low_energy);
     DEF_COLOR(overlay_low_power);
     DEF_COLOR(overlay_overheating);
+    DEF_COLOR(overlay_electrical_signal);
+    DEF_COLOR(overlay_biological_signal);
+    DEF_COLOR(overlay_gravity_signal);
 
     DEF_COLOR(ship_waypoint_background);
     DEF_COLOR(ship_waypoint_text);

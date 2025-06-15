@@ -11,6 +11,7 @@
 #include "screens/crew6/engineeringScreen.h"
 #include "screens/crew6/scienceScreen.h"
 #include "screens/crew6/relayScreen.h"
+#include "screens/crew6/sensorScreen.h"
 
 #include "screens/crew4/tacticalScreen.h"
 #include "screens/crew4/engineeringAdvancedScreen.h"
@@ -1088,6 +1089,9 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
             screen->addStationTab(new ScienceScreen(container), CrewPosition::scienceOfficer, getCrewPositionName(CrewPosition::scienceOfficer), getCrewPositionIcon(CrewPosition::scienceOfficer));
         if (cps.has(CrewPosition::relayOfficer))
             screen->addStationTab(new RelayScreen(container, true), CrewPosition::relayOfficer, getCrewPositionName(CrewPosition::relayOfficer), getCrewPositionIcon(CrewPosition::relayOfficer));
+        if (cps.has(CrewPosition::sensorOfficer))
+            screen->addStationTab(new SensorScreen(container), CrewPosition::sensorOfficer, getCrewPositionName(CrewPosition::sensorOfficer), getCrewPositionIcon(CrewPosition::sensorOfficer));
+
 
         //Crew 4/3
         if (cps.has(CrewPosition::tacticalOfficer))
@@ -1150,6 +1154,7 @@ string getCrewPositionName(CrewPosition position)
     case CrewPosition::engineering: return tr("station","Engineering");
     case CrewPosition::scienceOfficer: return tr("station","Science");
     case CrewPosition::relayOfficer: return tr("station","Relay");
+    case CrewPosition::sensorOfficer: return tr("station","Sensor");
     case CrewPosition::tacticalOfficer: return tr("station","Tactical");
     case CrewPosition::engineeringAdvanced: return tr("station","Engineering+");
     case CrewPosition::operationsOfficer: return tr("station","Operations");
@@ -1173,6 +1178,7 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::engineering: return "gui/icons/station-engineering";
     case CrewPosition::scienceOfficer: return "gui/icons/station-science";
     case CrewPosition::relayOfficer: return "gui/icons/station-relay";
+    case CrewPosition::sensorOfficer: return "gui/icons/station-science";
     case CrewPosition::tacticalOfficer: return "";
     case CrewPosition::engineeringAdvanced: return "";
     case CrewPosition::operationsOfficer: return "";

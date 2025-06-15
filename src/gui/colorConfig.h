@@ -39,6 +39,9 @@ public:
     glm::u8vec4 overlay_low_energy;
     glm::u8vec4 overlay_low_power;
     glm::u8vec4 overlay_overheating;
+    glm::u8vec4 overlay_electrical_signal;
+    glm::u8vec4 overlay_biological_signal;
+    glm::u8vec4 overlay_gravity_signal;
 
     glm::u8vec4 ship_waypoint_background;
     glm::u8vec4 ship_waypoint_text;
