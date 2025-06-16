@@ -81,31 +81,34 @@ void GuiMissileTubeControls::onUpdate()
         if (rows.size() <= n) createTubeRow();
         auto& tube = tubes->mounts[n];
         rows[n].layout->show();
+        string tubeSizeStr = string(char(toupper(getMissileSizeString(tube.size)[0]))) + string("-");
+
         if (tube.canOnlyLoad(MW_Mine))
             rows[n].fire_button->setIcon("gui/icons/weapon-mine", sp::Alignment::CenterLeft);
         else
             rows[n].fire_button->setIcon("gui/icons/missile", sp::Alignment::CenterLeft, tube.direction);
+
         switch(tube.state)
         {
         case MissileTubes::MountPoint::State::Empty:
             rows[n].load_button->setEnable(tube.canLoad(load_type));
             rows[n].load_button->setText(tr("missile","Load"));
             rows[n].fire_button->disable()->show();
-            rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + tr("missile","Empty"));
+            rows[n].fire_button->setText(tubeSizeStr + getTubeName(tube.direction) + ": " + tr("missile","Empty"));
             rows[n].loading_bar->hide();
             break;
         case MissileTubes::MountPoint::State::Loaded:
             rows[n].load_button->enable();
             rows[n].load_button->setText(tr("missile","Unload"));
             rows[n].fire_button->enable()->show();
-            rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + getLocaleMissileWeaponName(tube.type_loaded));
+            rows[n].fire_button->setText(tubeSizeStr + getTubeName(tube.direction) + ": " + getLocaleMissileWeaponName(tube.type_loaded));
             rows[n].loading_bar->hide();
             break;
         case MissileTubes::MountPoint::State::Loading:
             rows[n].load_button->disable();
             rows[n].load_button->setText(tr("missile","Load"));
             rows[n].fire_button->hide();
-            rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + getLocaleMissileWeaponName(tube.type_loaded));
+            rows[n].fire_button->setText(tubeSizeStr + getTubeName(tube.direction) + ": " + getLocaleMissileWeaponName(tube.type_loaded));
             rows[n].loading_bar->show();
             rows[n].loading_bar->setValue(1.0f - tube.delay / tube.load_time);
             rows[n].loading_label->setText(tr("missile","Loading"));
@@ -114,7 +117,7 @@ void GuiMissileTubeControls::onUpdate()
             rows[n].load_button->disable();
             rows[n].load_button->setText(tr("missile","Unload"));
             rows[n].fire_button->hide();
-            rows[n].fire_button->setText(getLocaleMissileWeaponName(tube.type_loaded));
+            rows[n].fire_button->setText(tubeSizeStr + getLocaleMissileWeaponName(tube.type_loaded));
             rows[n].loading_bar->show();
             rows[n].loading_bar->setValue(tube.delay / tube.load_time);
             rows[n].loading_label->setText(tr("missile","Unloading"));
@@ -232,7 +235,7 @@ void GuiMissileTubeControls::createTubeRow()
             my_player_info->commandFireTube(n, target_angle);
         }
     });
-    row.fire_button->setSize(200, 50);
+    row.fire_button->setSize(220, 50);
     (new GuiPowerDamageIndicator(row.fire_button, id + "_" + string(n) + "_PDI", ShipSystem::Type::MissileSystem, sp::Alignment::CenterRight))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     row.loading_bar = new GuiProgressbar(row.layout, id + "_" + string(n) + "_PROGRESS", 0, 1.0, 0);
     row.loading_bar->setColor(glm::u8vec4(128, 128, 128, 255))->setSize(200, 50);
