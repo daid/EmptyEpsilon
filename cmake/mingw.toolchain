@@ -29,13 +29,13 @@ if(NOT SDL2_ROOT)
     set(WIN64_BASE "${CMAKE_CURRENT_LIST_DIR}/_win32/")
     set(CMAKE_SYSROOT "${WIN64_BASE}")
 
-    if(NOT IS_DIRECTORY "${WIN64_BASE}/SDL2-2.0.16")
-        file(DOWNLOAD http://libsdl.org/release/SDL2-devel-2.0.16-mingw.tar.gz "${WIN64_BASE}/SDL2.tar.gz" SHOW_PROGRESS EXPECTED_HASH SHA256=2bfe48628aa9635c12eac7d421907e291525de1d0b04b3bca4a5bd6e6c881a6f)
-        execute_process_ex(COMMAND ${CMAKE_COMMAND} -E tar xzvf SDL2.tar.gz WORKING_DIRECTORY "${WIN64_BASE}")
-        execute_process_ex(COMMAND sed -i "s|set(prefix .*)|set(prefix \"${WIN64_BASE}/SDL2-2.0.16/x86_64-w64-mingw32/\")|g" ${WIN64_BASE}/SDL2-2.0.16/x86_64-w64-mingw32/lib/cmake/SDL2/sdl2-config.cmake)
+    if(NOT IS_DIRECTORY "${WIN64_BASE}/SDL2-2.32.8")
+        file(DOWNLOAD https://github.com/libsdl-org/SDL/releases/download/release-2.32.8/SDL2-devel-2.32.8-mingw.zip "${WIN64_BASE}/SDL2.32.8.tar.gz" SHOW_PROGRESS EXPECTED_HASH SHA256=2f0a74c2eb3f7ffb26aeefce733ce75f5a57881adf3fab92b2430805ff7249e2)
+        execute_process_ex(COMMAND ${CMAKE_COMMAND} -E tar xzvf SDL2.32.8.tar.gz WORKING_DIRECTORY "${WIN64_BASE}")
+        execute_process_ex(COMMAND sed -i "s|set(prefix .*)|set(prefix \"${WIN64_BASE}/SDL2-2.32.8/x86_64-w64-mingw32/\")|g" ${WIN64_BASE}/SDL2-2.32.8/x86_64-w64-mingw32/lib/cmake/SDL2/sdl2-config.cmake)
     endif()
     
-    set(SDL2_ROOT "${WIN64_BASE}/SDL2-2.0.16/x86_64-w64-mingw32/")
+    set(SDL2_ROOT "${WIN64_BASE}/SDL2-2.32.8/x86_64-w64-mingw32/")
 
     option(ENABLE_CRASH_LOGGER "" ON)
     set(DRMINGW_ROOT "${WIN64_BASE}/drmingw-0.8.2-win64")
