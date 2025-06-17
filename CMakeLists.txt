@@ -174,6 +174,7 @@ set(GUI_LIB_SOURCES
     src/gui/layout/layout.cpp
     src/gui/layout/horizontal.cpp
     src/gui/layout/vertical.cpp
+    src/gui/gui2_elementlistbox.cpp
 
     src/gui/colorConfig.h
     src/gui/debugRenderer.h
@@ -209,6 +210,8 @@ set(GUI_LIB_SOURCES
     src/gui/hotkeyConfig.h
     src/gui/joystickConfig.h
     src/gui/mouseRenderer.h
+    src/gui/gui2_elementlistbox.h
+
 )
 
 set(MAIN_SOURCES
