@@ -1,0 +1,41 @@
+#: scripts/control_code_scenario_utility.lua:20
+msgctxt "buttonGM"
+msgid "-Main From Ctl Codes"
+msgstr "从控制代码返回主界面"
+
+#: scripts/control_code_scenario_utility.lua:23
+msgctxt "msgGM"
+msgid """There are no active player ships for you to view or set the control codes \nfor."""
+msgstr "没有可供你查看或设置控制代码的活跃玩家飞船。"
+
+#: scripts/control_code_scenario_utility.lua:27
+msgctxt "buttonGM"
+msgid "View Control Codes"
+msgstr "查看控制代码"
+
+#: scripts/control_code_scenario_utility.lua:28
+msgctxt "buttonGM"
+msgid "+Set Control Codes"
+msgstr "+设置控制代码"
+
+#: scripts/control_code_scenario_utility.lua:58
+msgctxt "msgGM"
+msgid "Player ships and some of their control codes:"
+msgstr "玩家飞船及其部分控制代码："
+
+#: scripts/control_code_scenario_utility.lua:60
+msgctxt "msgGM"
+msgid "Player ships and their control codes:"
+msgstr "玩家飞船及其控制代码："
+
+#: scripts/control_code_scenario_utility.lua:64
+#, lua-format
+msgctxt "msgGM"
+msgid """%s\\n"%s: <none> (%s)"""
+msgstr """%s\\n"%s: 无 (%s)"""
+
+#: scripts/control_code_scenario_utility.lua:66
+#, lua-format
+msgctxt "msgGM"
+msgid """%s\\n"%s: %s (%s)"""
+msgstr """%s\\n"%s: %s (%s)"""
