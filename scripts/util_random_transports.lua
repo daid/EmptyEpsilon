@@ -34,6 +34,7 @@ function update(delta)
                 if obj.undock_delay > 0 then
                     obj.undock_delay = obj.undock_delay - delta
                 else
+                    if not obj.components.transform then obj.components.transform = {} end
                     obj.target = randomStation()
                     obj.undock_delay = random(5, 30)
                     obj:orderDock(obj.target)
