@@ -15,6 +15,9 @@ void JumpSystem::update(float delta)
 {
     for(auto [entity, jump, position, physics] : sp::ecs::Query<JumpDrive, sp::Transform, sp::Physics>())
     {
+        // Capture the jump activation rate as a factor of jump system effectiveness.
+        jump.activation_rate = delta * jump.getSystemEffectiveness();
+
         if (jump.delay > 0.0f)
         {
             if (WarpSystem::isWarpJammed(entity))
@@ -31,7 +34,33 @@ void JumpSystem::update(float delta)
             if (warp)
                 warp->request = 0;
 
-            jump.delay -= delta * jump.getSystemEffectiveness();
+            // The jump system "delay" is a fixed countdown with an upper limit
+            // configured by jump.activation_delay, which defaults to 10.0.
+
+            // If jump.delay = 10.0f and system effectiveness is 1.0
+            //   (when all systems are at 100% power/undamaged/unhacked),
+            //   a jump should take 10 seconds (jump.activation_delay).
+            // If jump.delay = 10.0f and system effectiveness is 2.0,
+            //   a jump should take half as long (5 seconds).
+            // If jump.delay = 10.0f and system effectiveness is 0.5,
+            //   a jump should take twice as long (20 seconds).
+
+            // jump.effective_activation_delay tracks the actual number of
+            // seconds remaining on the real-world clock before the in-progress
+            // jump occurs, and is used by jumpControls and jumpIndicator UIs.
+
+            // Tick the fixed jump delay down by the fixed activation rate
+            // (delta * effectiveness). This doesn't necessarily reflect
+            // real time when system effectiveness is improved or degraded.
+            jump.delay -= jump.activation_rate;
+
+            // Reset the countdown value based on how much of the
+            // fixed-value jump.delay has elapsed and the new jump system
+            // effectiveness this tick. This can cause the countdown to
+            // apparently count down rapidly or unexpectedly count up,
+            // for instance if power to the jump system changes mid-jump.
+            jump.effective_activation_delay = (jump.activation_delay * (jump.delay / jump.activation_delay)) / std::max(0.01f, jump.getSystemEffectiveness());
+
             if (jump.delay <= 0.0f)
             {
                 float f = jump.health;
@@ -51,6 +80,12 @@ void JumpSystem::update(float delta)
                 jump.delay = 0.f;
             }
         } else {
+            // If a jump hasn't been initiated, reset the predicted countdown
+            // value to the default fixed delay modified by the system's current
+            // effectiveness. Also, track the current system effectiveness so we
+            // can compare it for changes after the jump starts.
+            jump.effective_activation_delay = jump.activation_delay / std::max(0.01f, jump.getSystemEffectiveness());
+
             float f = jump.get_recharge_rate();
             if (f > 0)
             {
@@ -58,14 +93,14 @@ void JumpSystem::update(float delta)
                 {
                     float extra_charge = (delta / jump.charge_time * jump.max_distance) * f;
                     auto reactor = entity.getComponent<Reactor>();
-                    if (!reactor || reactor->useEnergy(extra_charge * jump.energy_per_km_charge / 1000.0f))
+                    if (!reactor || reactor->useEnergy(extra_charge * jump.energy_per_u_charge / 1000.0f))
                     {
                         jump.charge += extra_charge;
                         if (jump.charge >= jump.max_distance)
                             jump.charge = jump.max_distance;
                     }
                 }
-            }else{
+            } else {
                 jump.charge += (delta / jump.charge_time * jump.max_distance) * f;
                 if (jump.charge < 0.0f)
                     jump.charge = 0.0f;
