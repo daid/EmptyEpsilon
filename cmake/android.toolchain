@@ -143,7 +143,7 @@ macro(android_apk NAME APK_WITH_PACKS)
     )
     
     file(COPY "${SDL_INSTALL_PATH}/lib/libSDL2.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
-    file(COPY "${SDL_INSTALL_PATH}/lib/libhidapi.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
+    #file(COPY "${SDL_INSTALL_PATH}/lib/libhidapi.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
     
     set(MAINLIB_FILENAME lib${MAINLIB_NAME}.so)
     add_custom_command(
@@ -168,7 +168,7 @@ macro(android_apk NAME APK_WITH_PACKS)
         OUTPUT "${APK}"
         COMMAND "${AAPT}" ARGS package -f -M "${CMAKE_CURRENT_BINARY_DIR}/AndroidManifest.xml" -S "${CMAKE_CURRENT_SOURCE_DIR}/android/res" -I "${ANDROID_PLATFORM_JAR}" -F "${APK}"
         COMMAND "${AAPT}" ARGS add "${APK}" classes.dex
-        COMMAND "${AAPT}" ARGS add "${APK}" lib/${ANDROID_ABI}/$<TARGET_FILE_NAME:${NAME}> lib/${ANDROID_ABI}/libSDL2.so lib/${ANDROID_ABI}/libhidapi.so
+        # COMMAND "${AAPT}" ARGS add "${APK}" lib/${ANDROID_ABI}/$<TARGET_FILE_NAME:${NAME}> lib/${ANDROID_ABI}/libSDL2.so lib/${ANDROID_ABI}/libhidapi.so
         COMMAND "${AAPT}" ARGS add "${APK}" ${ASSETS}
         WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/"
         DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex" "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/$<TARGET_FILE_NAME:${NAME}>"
