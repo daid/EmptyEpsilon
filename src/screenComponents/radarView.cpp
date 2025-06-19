@@ -244,6 +244,15 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
             renderer.drawRotatedSprite("waypoint.png", position, 32, vec2ToAngle(ship_offset) - 90);
         }
     }
+
+    // Physics debug
+    if (false) {
+        float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
+        auto origin = rotateVec2(-view_position * scale, -view_rotation) + rect.center();
+
+        sp::CollisionSystem::drawDebug(renderer, origin, scale);
+    }
+
     // Done with the stencil.
     renderer.finish();
     glDepthMask(GL_TRUE);
