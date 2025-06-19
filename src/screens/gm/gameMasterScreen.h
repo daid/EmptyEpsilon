@@ -6,6 +6,7 @@
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_overlay.h"
+#include "screenComponents/helpOverlay.h"
 #include "screenComponents/targetsContainer.h"
 #include "Updatable.h"
 
@@ -55,6 +56,8 @@ private:
     GuiPanel* message_frame;
     GuiScrollText* message_text;
     GuiButton* message_close_button;
+
+    GuiHelpOverlay* keyboard_help;
 
     enum EClickAndDragState
     {
