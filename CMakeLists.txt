@@ -429,6 +429,8 @@ set(MAIN_SOURCES
     src/systems/radar.cpp
     src/systems/zone.h
     src/systems/zone.cpp
+    src/systems/debugrender.h
+    src/systems/debugrender.cpp
     src/multiplayer/beamweapon.h
     src/multiplayer/beamweapon.cpp
     src/multiplayer/shields.h
