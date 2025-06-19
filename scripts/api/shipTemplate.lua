@@ -162,7 +162,7 @@ function ShipTemplate:setModel(model_data_name)
     end
     if self.physics and self.radar_trace then
         if type(self.physics.size) == "table" then
-            self.radar_trace.radius = self.physics.size[1] * 0.8
+            self.radar_trace.radius = math.sqrt(self.physics.size[1]^2 + self.physics.size[2]^2) * 0.5
         else
             self.radar_trace.radius = self.physics.size * 0.8
         end
