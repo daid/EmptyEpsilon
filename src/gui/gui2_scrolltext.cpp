@@ -57,10 +57,11 @@ void GuiScrollText::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-void GuiScrollText::onMouseWheelScroll(glm::vec2 position, float value)
+bool GuiScrollText::onMouseWheelScroll(glm::vec2 position, float value)
 {
     float range = scrollbar->getCorrectedMax() - scrollbar->getMin();
     scrollbar->setValue((scrollbar->getValue() +   value * range / mouse_scroll_steps) );
+    return true;
 }
 
 GuiScrollFormattedText::GuiScrollFormattedText(GuiContainer* owner, string id, string text)
@@ -136,7 +137,7 @@ void GuiScrollFormattedText::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-void GuiScrollFormattedText::onMouseWheelScroll(glm::vec2 position, float value)
+bool GuiScrollFormattedText::onMouseWheelScroll(glm::vec2 position, float value)
 {
-    GuiScrollText::onMouseWheelScroll(position, value);
+    return GuiScrollText::onMouseWheelScroll(position, value);
 }

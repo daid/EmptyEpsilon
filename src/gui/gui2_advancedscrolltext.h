@@ -44,7 +44,7 @@ public:
     GuiAdvancedScrollText* clearEntries();
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
-    virtual void onMouseWheelScroll(glm::vec2 position, float value) override;
+    virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 };
 
 #endif//GUI2_ADVANCEDSCROLLTEXT_H

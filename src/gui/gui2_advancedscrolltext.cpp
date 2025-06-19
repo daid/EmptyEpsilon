@@ -141,8 +141,9 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
     scrollbar->setVisible(rect.size.y > 100);
 }
 
-void GuiAdvancedScrollText::onMouseWheelScroll(glm::vec2 position, float value)
+bool GuiAdvancedScrollText::onMouseWheelScroll(glm::vec2 position, float value)
 {
     float range = scrollbar->getCorrectedMax() - scrollbar->getMin();
     scrollbar->setValue((scrollbar->getValue() +   value * range / mouse_scroll_steps) );
+    return true;
 }
