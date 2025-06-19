@@ -2,6 +2,15 @@
 #include "multiplayer_server.h"
 #include "hotkeyConfig.h"
 
+static glm::u8vec4 line_colors[] = {
+    {255, 0, 0, 255},
+    {0, 255, 0, 255},
+    {0, 0, 255, 255},
+    {0, 255, 255, 255},
+    {255, 0, 255, 255},
+    {255, 255, 0, 255},
+};
+
 
 DebugRenderer::DebugRenderer(RenderLayer* renderLayer)
 : Renderable(renderLayer)
@@ -50,45 +59,56 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
     if (show_timing_graph)
     {
         auto window_size = renderer.getVirtualSize();
-        if (timing_graph_points.size() > size_t(window_size.x))
+        size_t max_size = 0;
+        for(auto it : timing_graph_points)
+            max_size = std::max(it.second.size(), max_size);
+        if (max_size > size_t(window_size.x)) {
             timing_graph_points.clear();
-        timing_graph_points.push_back(engine->getEngineTiming());
-
-        std::vector<glm::vec2> update_points;
-        std::vector<glm::vec2> server_update_points;
-        std::vector<glm::vec2> collision_points;
-        std::vector<glm::vec2> render_points;
-        for(unsigned int n=0; n<timing_graph_points.size(); n++)
-        {
-            update_points.emplace_back(float(n), window_size.y - timing_graph_points[n].update * 10000);
-            server_update_points.emplace_back(float(n), window_size.y - timing_graph_points[n].server_update * 10000);
-            collision_points.emplace_back(float(n), window_size.y - (timing_graph_points[n].update + timing_graph_points[n].collision) * 10000);
-            render_points.emplace_back(float(n), window_size.y - (timing_graph_points[n].render + timing_graph_points[n].update + timing_graph_points[n].collision) * 10000);
+            max_size = 0;
         }
-        renderer.drawLine(update_points, {255, 0, 0, 255});
-        renderer.drawLine(server_update_points, {255, 255, 0, 255});
-        renderer.drawLine(collision_points, {0, 255, 255, 255});
-        renderer.drawLine(render_points, {0, 255, 0, 255});
+        for(auto [key, value] : engine->getEngineTiming()) {
+            if (timing_graph_points[key].size() < max_size)
+                timing_graph_points[key].resize(max_size, 0.0f);
+            timing_graph_points[key].push_back(value);
+        }
+
+        std::vector<string> key_order;
+        std::map<string, float> total;
+        for(auto& [key, data] : timing_graph_points) {
+            float sum = 0;
+            for(auto value : data)
+                sum += value;
+            total[key] = sum;
+            key_order.push_back(key);
+        }
+        std::sort(key_order.begin(), key_order.end(), [&total](const auto& a, const auto& b) { return total[a] > total[b]; });
+
+        std::map<string, std::vector<glm::vec2>> points;
+        for(unsigned int n=0; n<max_size; n++) {
+            float sum = 0;
+            for(const auto& key : key_order) {
+                sum += timing_graph_points[key][n];
+                points[key].emplace_back(float(n), window_size.y - sum * 10000);
+            }
+        }
+
+        int index = 0;
+        for(const auto& key : key_order) {
+            renderer.drawLine(points[key], line_colors[index % 6]);
+            index += 1;
+        }
 
         //60FPS line
         renderer.drawLine({0, window_size.y - 166}, {window_size.x, window_size.y - 166}, glm::u8vec4{255,255,255,128});
 
-        renderer.drawText(
-            sp::Rect(0, 0, 0, renderer.getVirtualSize().y - 18 * 4),
-            "Update: " + string(timing_graph_points.back().update * 1000) + "ms",
-            sp::Alignment::BottomLeft, 18, nullptr, glm::u8vec4{255,0,0,255});
-        renderer.drawText(
-            sp::Rect(0, 0, 0, renderer.getVirtualSize().y - 18 * 3),
-            "ServerUpdate: " + string(timing_graph_points.back().server_update * 1000) + "ms",
-            sp::Alignment::BottomLeft, 18, nullptr, glm::u8vec4{255,255,0,255});
-        renderer.drawText(
-            sp::Rect(0, 0, 0, renderer.getVirtualSize().y - 18 * 2),
-            "Collision: " + string(timing_graph_points.back().collision * 1000) + "ms",
-            sp::Alignment::BottomLeft, 18, nullptr, glm::u8vec4{0,255,255,255});
-        renderer.drawText(
-            sp::Rect(0, 0, 0, renderer.getVirtualSize().y - 18 * 1),
-            "Render: " + string(timing_graph_points.back().render * 1000) + "ms",
-            sp::Alignment::BottomLeft, 18, nullptr, glm::u8vec4{0,255,0,255});
+        index = 0;
+        for(const auto& key : key_order) {
+            renderer.drawText(
+                sp::Rect(0, 0, 0, 96 + 16 * index),
+                key + ": " + string(timing_graph_points[key].back() * 1000, 5) + "ms",
+                sp::Alignment::BottomLeft, 16, nullptr, line_colors[index % 6]);
+            index += 1;
+        }
     }
     renderer.drawText(sp::Rect(0, 0, 0, 0), text, sp::Alignment::TopLeft, 18);
 }
