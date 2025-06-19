@@ -71,7 +71,7 @@ item:addKeyValue(_('Radar range'), '5u')
 item:addKeyValue(_('Typical lifetime'), _('10 minutes'))
 item:addKeyValue(_('Interaction'), _('Systems link'))
 item:setImage('radar/probe.png')
-item:setModelDataName('SensorBuoyMkI')
+item:setModelDataName('SensorBuoyMKI')
 item:setLongDescription(_([[Whether your mission involves scientific investigation, deep-space exploration, or military operations, remember to take advantage of any scan probes distributed for your ship.
 
 Your Relay officer can launch a probe to any coordinates in their sector map, which fires its payload at high velocity directly toward the target coordinates. Upon arrival, Relay can then link the probe to the Science officer, who can switch their long-range radar to the probe's short-range radar.

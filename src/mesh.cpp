@@ -138,7 +138,7 @@ glm::vec3 Mesh::randomPoint()
     return ret;
 }
 
-uint32_t Mesh::greatestDistanceFromCenter(std::vector<MeshVertex>& vertices)
+float Mesh::greatestDistanceFromCenter(std::vector<MeshVertex>& vertices)
 {
     if (vertices.empty()) {
         return 0;
