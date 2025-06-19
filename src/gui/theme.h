@@ -27,7 +27,7 @@ public:
     Themes are loaded from a text resource, and referenced from GuiElement classes.
     A single theme contains information on how to style different widget elements.
     
-    Each element describes the the following properties:
+    Each element describes the following properties:
     - texture
     - color
     - font
