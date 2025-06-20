@@ -548,12 +548,15 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                                 ai->orders = AIOrder::DefendTarget;
                             ai->order_target = target;
                         }
-                    }else if (auto transform = entity.getComponent<sp::Transform>()) {
+                    } else {
                         if (shift_down)
                             ai->orders = AIOrder::FlyTowardsBlind;
                         else
                             ai->orders = AIOrder::FlyTowards;
-                        ai->order_target_location = position + transform->getPosition() - objects_center;
+                        if (auto transform = entity.getComponent<sp::Transform>())
+                            ai->order_target_location = position + transform->getPosition() - objects_center;
+                        else
+                            ai->order_target_location = position;
                     }
                 }
                 if (auto gravity = entity.getComponent<Gravity>())

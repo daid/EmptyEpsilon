@@ -620,7 +620,12 @@ void ShipAI::runAttack(sp::ecs::Entity target)
 void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
 {
     auto ot = owner.getComponent<sp::Transform>();
-    if (!ot) return;
+    if (!ot) {
+        auto docking_port = owner.getComponent<DockingPort>();
+        if (docking_port && docking_port->state == DockingPort::State::Docked)
+            DockingSystem::requestUndock(owner);
+        return;
+    }
     auto my_radius = 300.0f;
     if (auto physics = owner.getComponent<sp::Physics>()) my_radius = physics->getSize().x;
     pathPlanner.plan(my_radius, ot->getPosition(), target);
