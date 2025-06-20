@@ -99,6 +99,23 @@ public:
     }
     std::function<size_t()> update_func;
 };
+class GuiSelectorTweak : public GuiSelector {
+public:
+    GuiSelectorTweak(GuiContainer* owner, string id, GuiSelector::func_t callback)
+    : GuiSelector(owner, id, callback) {
+        setSize(GuiElement::GuiSizeMax, 30);
+        setTextSize(20);
+    }
+    virtual void onDraw(sp::RenderTarget& target) override {
+        if (update_func) {
+            auto new_index = update_func();
+            if (new_index != getSelectionIndex())
+                setSelectionIndex(new_index);
+        }
+        GuiSelector::onDraw(target);
+    }
+    std::function<int()> update_func;
+};
 
 
 #define ADD_PAGE(LABEL, COMPONENT) \
@@ -188,6 +205,33 @@ public:
                 v->VECTOR[vector_selector->getSelectionIndex()].VALUE = text.toFloat(); \
         }); \
     } while(0)
+#define ADD_VECTOR_BOOL_TWEAK(LABEL, COMPONENT, VECTOR, VALUE) do { \
+        auto row = new GuiElement(new_page->contents, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiToggleTweak(row, "", [this, vector_selector](bool value) { auto v = entity.getComponent<COMPONENT>(); \
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = value; }); \
+        ui->update_func = [this, vector_selector]() -> bool { auto v = entity.getComponent<COMPONENT>(); \
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) \
+                return v->VECTOR[vector_selector->getSelectionIndex()]->VALUE; \
+            return false; }; \
+    } while(0)
+#define ADD_VECTOR_TOGGLE_MASK_TWEAK(LABEL, COMPONENT, VECTOR, VALUE, MASK) do { \
+        auto row = new GuiElement(new_page->contents, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiToggleTweak(row, "", [this, vector_selector](bool value) { auto v = entity.getComponent<COMPONENT>(); \
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) { \
+                if (value) v->VECTOR[vector_selector->getSelectionIndex()].VALUE |= (MASK); else v->VECTOR[vector_selector->getSelectionIndex()].VALUE &=~(MASK); } \
+            }); \
+        ui->update_func = [this, vector_selector]() -> bool { auto v = entity.getComponent<COMPONENT>(); \
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) \
+                return v->VECTOR[vector_selector->getSelectionIndex()].VALUE & (MASK); \
+            return false; }; \
+    } while(0)
 #define ADD_VECTOR_NUM_SLIDER_TWEAK(LABEL, COMPONENT, VECTOR, MIN_VALUE, MAX_VALUE, VALUE) do { \
         auto row = new GuiElement(new_page->contents, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
@@ -203,6 +247,23 @@ public:
             if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) \
                 return v->VECTOR[vector_selector->getSelectionIndex()].VALUE; \
             return 0.0f; \
+        }; \
+    } while(0)
+#define ADD_VECTOR_ENUM_TWEAK(LABEL, COMPONENT, VECTOR, VALUE, MIN_VALUE, MAX_VALUE, STRING_CONVERT_FUNCTION) do { \
+        auto row = new GuiElement(new_page->contents, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiSelectorTweak(row, "", [this, vector_selector](int index, string value) { auto v = entity.getComponent<COMPONENT>(); \
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = static_cast<decltype(decltype(COMPONENT::VECTOR)::value_type::VALUE)>(index + MIN_VALUE); \
+        }); \
+        for(int enum_value=MIN_VALUE; enum_value<=MAX_VALUE; enum_value++) \
+            ui->addEntry(STRING_CONVERT_FUNCTION(static_cast<decltype(decltype(COMPONENT::VECTOR)::value_type::VALUE)>(enum_value)), string(enum_value)); \
+        ui->update_func = [this, vector_selector]() -> float { auto v = entity.getComponent<COMPONENT>(); \
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < int(v->VECTOR.size())) \
+                return int(v->VECTOR[vector_selector->getSelectionIndex()].VALUE) - int(MIN_VALUE); \
+            return -1; \
         }; \
     } while(0)
 #define ADD_SHIP_SYSTEM_TWEAK(SYSTEM) \
@@ -303,7 +364,12 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR(tr("tweak-vector", "Mounts"), MissileTubes, mounts);
     ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Direction:"), MissileTubes, mounts, 0.0f, 360.0f, direction);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Load time:"), MissileTubes, mounts, load_time);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Types allowed mask:"), MissileTubes, mounts, type_allowed_mask);
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Size:"), MissileTubes, mounts, size, MS_Small, MS_Large, getMissileSizeString);
+    ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow homing:"), MissileTubes, mounts, type_allowed_mask, 1 << MW_Homing);
+    ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow nuke:"), MissileTubes, mounts, type_allowed_mask, 1 << MW_Nuke);
+    ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow mine:"), MissileTubes, mounts, type_allowed_mask, 1 << MW_Mine);
+    ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow EMP:"), MissileTubes, mounts, type_allowed_mask, 1 << MW_EMP);
+    ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow HVLI:"), MissileTubes, mounts, type_allowed_mask, 1 << MW_HVLI);
 
     ADD_PAGE(tr("tweak-tab", "Shields"), Shields);
     // Unsure how to access the shield component's front/rear systems
@@ -317,8 +383,6 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR(tr("tweak-vector", "Shields"), Shields, entries);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Level:"), Shields, entries, level);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Shields, entries, max);
-    // Timer on shield hit effect used by threat level; not a useful control
-    // ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Hit effect:"), Shields, entries, hit_effect);
 
     ADD_PAGE(tr("tweak-tab", "Warp drive"), WarpDrive);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max level:"), WarpDrive, max_level);
