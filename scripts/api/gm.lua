@@ -14,11 +14,11 @@ function getSpawnableGMObjects()
     for k, v in pairs(__ship_templates) do
         if not v.__hidden then
             if v.__type == "playership" then
-                result[#result+1] = {__spawnPlayerShipFunc(v.typename.type_name), v.typename.localized, _("create", "player ship")}
+                result[#result+1] = {__spawnPlayerShipFunc(v.typename.type_name), v.typename.localized, _("create", "player ship"), v.__description}
             elseif v.__type == "station" then
-                result[#result+1] = {__spawnStationFunc(v.typename.type_name), v.typename.localized, _("create", "station")}
+                result[#result+1] = {__spawnStationFunc(v.typename.type_name), v.typename.localized, _("create", "station"), v.__description}
             else
-                result[#result+1] = {__spawnCpuShipFunc(v.typename.type_name), v.typename.localized, _("create", "cpu ship")}
+                result[#result+1] = {__spawnCpuShipFunc(v.typename.type_name), v.typename.localized, _("create", "cpu ship"), v.__description}
             end
         end
     end

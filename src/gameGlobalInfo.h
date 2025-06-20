@@ -108,6 +108,7 @@ public:
         sp::script::Callback create_callback;
         string label;
         string category;
+        string description;
     };
     std::vector<ObjectSpawnInfo> getGMSpawnableObjects();
     void execScriptCode(const string& code);

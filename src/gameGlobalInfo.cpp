@@ -196,8 +196,9 @@ namespace sp::script {
                     lua_geti(L, -1, 1); auto callback = Convert<sp::script::Callback>::fromLua(L, -1); lua_pop(L, 1);
                     lua_geti(L, -1, 2); auto label = lua_tostring(L, -1); lua_pop(L, 1);
                     lua_geti(L, -1, 3); auto category = lua_tostring(L, -1); lua_pop(L, 1);
+                    lua_geti(L, -1, 4); auto description = lua_tostring(L, -1); lua_pop(L, 1);
                     lua_pop(L, 1);
-                    result.push_back({callback, label ? label : "", category ? category : ""});
+                    result.push_back({callback, label ? label : "", category ? category : "", description ? description : ""});
                 }
                 lua_pop(L, 1);
             }
