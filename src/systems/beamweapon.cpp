@@ -47,7 +47,7 @@ void BeamWeaponSystem::update(float delta)
                     auto diff = target_transform->getPosition() - (transform.getPosition() + rotateVec2(glm::vec2(mount.position.x, mount.position.y), transform.getRotation()));
                     float distance = glm::length(diff);
                     if (auto physics = target.entity.getComponent<sp::Physics>())
-                        distance += physics->getSize().x;
+                        distance -= physics->getSize().x;
 
                     // We also only care if the target is within no more than its
                     // range * 1.3, which is when we want to start rotating the turret.
