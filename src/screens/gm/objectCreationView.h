@@ -10,12 +10,14 @@ class GuiSelector;
 class GuiListbox;
 class GuiContainer;
 class GuiScrollText;
+class GuiTextEntry;
 
 class GuiObjectCreationView : public GuiOverlay
 {
 private:
     GuiSelector* faction_selector = nullptr;
     GuiListbox* category_selector = nullptr;
+    GuiTextEntry* object_filter = nullptr;
     GuiListbox* object_list = nullptr;
     GuiScrollText* description = nullptr;
     std::vector<GameGlobalInfo::ObjectSpawnInfo> spawn_list;

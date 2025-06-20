@@ -6,6 +6,7 @@
 #include "gui/gui2_selector.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_scrolltext.h"
+#include "gui/gui2_textentry.h"
 #include "menus/luaConsole.h"
 #include "i18n.h"
 #include "gameGlobalInfo.h"
@@ -46,6 +47,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     {
         last_selection_index = -1;
         object_list->clear();
+        object_filter->setText("");
         for(const auto& info : spawn_list) {
             if (info.category == category_selector->getSelectionValue()) {
                 object_list->addEntry(info.label, info.label);
@@ -60,8 +62,20 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         }
     }
     category_selector->setSelectionIndex(0);
-    category_selector->setSize(300, 300)->setAttribute("fill_height", "true");
+    category_selector->setAttribute("stretch", "true");
 
+    object_filter = new GuiTextEntry(row2, "OBJECT_FILTER", "");
+    object_filter->setTextSize(20)->setSize(300, 30)->setAttribute("fill_width", "true");
+    object_filter->callback([this](string value) {
+        value = value.lower();
+        last_selection_index = -1;
+        object_list->clear();
+        for(const auto& info : spawn_list) {
+            if (info.category == category_selector->getSelectionValue() && info.label.lower().find(value) >= 0) {
+                object_list->addEntry(info.label, info.label);
+            }
+        }
+    });
     object_list = new GuiListbox(row2, "OBJECT_LIST", [this](int index, string value) {
         for(auto& info : spawn_list) {
             if (info.category == category_selector->getSelectionValue() && info.label == value) {

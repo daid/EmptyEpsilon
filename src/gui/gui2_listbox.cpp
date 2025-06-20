@@ -135,6 +135,6 @@ void GuiListbox::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 bool GuiListbox::onMouseWheelScroll(glm::vec2 position, float value)
 {
     float range = scroll->getCorrectedMax() - scroll->getMin();
-    scroll->setValue((scroll->getValue() +   value * range / mouse_scroll_steps) );
+    scroll->setValue((scroll->getValue() - value * range / mouse_scroll_steps) );
     return true;
 }
