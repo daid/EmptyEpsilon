@@ -118,7 +118,8 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
 
 bool GuiListbox::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    return true;
+    int offset = (position.y - rect.position.y + scroll->getValue()) / button_height;
+    return offset >= 0 && offset < int(entries.size());
 }
 
 void GuiListbox::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
