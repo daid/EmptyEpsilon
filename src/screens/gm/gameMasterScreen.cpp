@@ -630,18 +630,17 @@ GameMasterChatDialog* GameMasterScreen::getChatDialog(sp::ecs::Entity entity)
 string GameMasterScreen::getScriptExport(bool selected_only)
 {
     string output;
-    std::vector<sp::ecs::Entity> objs;
-    if (selected_only)
-    {
-        objs = targets.getTargets();
+    std::vector<sp::ecs::Entity> entities;
+    if (selected_only) {
+        entities = targets.getTargets();
     }else{
-        //TODO foreach(SpaceObject, obj, space_object_list)
-        //    objs.push_back(obj->entity);
+        for(auto [entity, transform] : sp::ecs::Query<sp::Transform>()) {
+            entities.push_back(entity);
+        }
     }
 
-    for(auto e : objs)
-    {
-        string line; //TODO = obj->getExportLine();
+    for(auto entity : entities) {
+        string line = gameGlobalInfo->getEntityExportString(entity);
         if (line == "")
             continue;
         output += "    " + line + "\n";

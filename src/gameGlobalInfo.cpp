@@ -206,6 +206,7 @@ namespace sp::script {
         }
     };
 }
+
 std::vector<GameGlobalInfo::ObjectSpawnInfo> GameGlobalInfo::getGMSpawnableObjects()
 {
     std::vector<GameGlobalInfo::ObjectSpawnInfo> info;
@@ -218,6 +219,16 @@ std::vector<GameGlobalInfo::ObjectSpawnInfo> GameGlobalInfo::getGMSpawnableObjec
     return info;
 }
 
+string GameGlobalInfo::getEntityExportString(sp::ecs::Entity entity)
+{
+    if (main_scenario_script) {
+        auto res = main_scenario_script->call<string>("getEntityExportString", entity);
+        LuaConsole::checkResult(res);
+        if (res.isOk())
+            return res.value();
+    }
+    return "";
+}
 
 void GameGlobalInfo::reset()
 {

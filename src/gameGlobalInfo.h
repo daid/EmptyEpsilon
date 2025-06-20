@@ -111,6 +111,7 @@ public:
         string description;
     };
     std::vector<ObjectSpawnInfo> getGMSpawnableObjects();
+    string getEntityExportString(sp::ecs::Entity entity);
     void execScriptCode(const string& code);
     bool allowNewPlayerShips();
 
