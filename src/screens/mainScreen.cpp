@@ -52,9 +52,22 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
 
     keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
 
+    bool show_additional_shortcuts_string = false;
     for (auto binding : sp::io::Keybinding::listAllByCategory(tr("hotkey_menu", "Main Screen")))
-        keyboard_general += tr("hotkey_F1", "{label}:\t{button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
-
+    {
+        if(binding->isBound())
+        {
+            keyboard_general += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+        }
+        else
+        {
+            show_additional_shortcuts_string = true;
+        }
+    }
+    if (show_additional_shortcuts_string)
+    {
+        keyboard_general += "\n" + tr("More shortcuts available in settings") + "\n";
+    }
     keyboard_help->setText(keyboard_general);
 
     if (PreferencesManager::get("music_enabled") != "0")
@@ -151,7 +164,9 @@ void ScreenMainScreen::update(float delta)
 
         // Update impulse sound volume and pitch.
         impulse_sound->update(delta);
-    } else {
+    }
+    else
+    {
         // If we're not the player ship (ie. we exploded), don't play impulse
         // engine sounds.
         impulse_sound->stop();
