@@ -547,6 +547,8 @@ void ShipAI::runOrders()
                         target_position += (diff / dist) * 500.0f;
                         flyTowards(target_position);
                     }
+                } else if (ott && docking_port->state == DockingPort::State::Docked) {
+                    DockingSystem::requestUndock(owner);
                 }
             }
         }else{
