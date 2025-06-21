@@ -197,12 +197,15 @@ int main(int argc, char** argv)
 #endif //STEAMSDK
 
     string tutorial = PreferencesManager::get("tutorial");   // use "00_all.lua" for all tutorials
-    if (tutorial != "")
+    string server_scenario = PreferencesManager::get("server_scenario");
+    int server_port = PreferencesManager::get("server_port").toInt();
+
+    if (!tutorial.empty())
     {
         LOG(DEBUG) << "Starting tutorial: " << tutorial;
         new TutorialGame(false, tutorial);
     }
-    else if (PreferencesManager::get("server_scenario") == "")
+    else if (server_scenario.empty())
         returnToMainMenu(defaultRenderLayer);
     else
     {
@@ -210,8 +213,19 @@ int main(int argc, char** argv)
         // using its defined default settings, and launches directly into
         // the ship selection screen instead of the main menu.
 
-        // Create the server.
-        new EpsilonServer(defaultServerPort);
+        // Create the server to listen on the assigned port.
+        // Use the default port if server_port isn't set or has an invalid
+        // value (toInt returns 0 if empty or not an int).
+        if (server_port < 10 || server_port > 65535)
+        {
+            new EpsilonServer(defaultServerPort);
+            LOG(INFO) << "Launching server_scenario " << server_scenario << " on default port " << defaultServerPort;
+        }
+        else
+        {
+            new EpsilonServer(server_port);
+            LOG(INFO) << "Launching server_scenario " << server_scenario << " on custom port " << server_port;
+        }
 
         if(!gameGlobalInfo) // => failed to start server
             return 1;
@@ -221,7 +235,7 @@ int main(int argc, char** argv)
         if (PreferencesManager::get("server_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
 
         // Load the scenario and open the ship selection screen.
-        gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"), loadScenarioSettingsFromPrefs());
+        gameGlobalInfo->startScenario(server_scenario, loadScenarioSettingsFromPrefs());
         new ShipSelectionScreen();
     }
 
