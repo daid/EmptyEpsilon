@@ -219,7 +219,7 @@ int main(int argc, char** argv)
         if (server_port < 10 || server_port > 65535)
         {
             new EpsilonServer(defaultServerPort);
-            LOG(INFO) << "Launching server_scenario " << server_scenario << " on default port " << defaultServerPort;
+            LOG(WARNING) << "Invalid server_port " << server_port << ". Launching server_scenario " << server_scenario << " on default port " << defaultServerPort;
         }
         else
         {
@@ -284,18 +284,34 @@ void returnToMainMenu(RenderLayer* render_layer)
         return;
     }
 
-    if (PreferencesManager::get("headless") != "")
+    string headless = PreferencesManager::get("headless", "");
+    if (!headless.empty())
     {
-        new EpsilonServer(defaultServerPort);
+        // Create the server to listen on the assigned port.
+        // Use the default port if server_port isn't set or has an invalid
+        // value (toInt returns 0).
+        int headless_port = PreferencesManager::get("server_port").toInt();
+        // This is the same process as server_port and could be made DRY.
+        if (headless_port < 10 || headless_port > 65535)
+        {
+            new EpsilonServer(defaultServerPort);
+            LOG(WARNING) << "Invalid server_port " << headless_port << ". Launching headless scenario " << headless << " on default port " << defaultServerPort;
+        }
+        else
+        {
+            new EpsilonServer(headless_port);
+            LOG(INFO) << "Launching headless scenario " << headless << " on custom server_port " << headless_port;
+        }
+
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
         if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
         if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
-        gameGlobalInfo->startScenario(PreferencesManager::get("headless"), loadScenarioSettingsFromPrefs());
+        gameGlobalInfo->startScenario(headless, loadScenarioSettingsFromPrefs());
 
         if (PreferencesManager::get("startpaused") != "1")
             engine->setGameSpeed(1.0);
     }
-    else if (PreferencesManager::get("autoconnect") != "")
+    else if (!PreferencesManager::get("autoconnect").empty())
     {
         auto value = PreferencesManager::get("autoconnect");
 
@@ -304,7 +320,9 @@ void returnToMainMenu(RenderLayer* render_layer)
             window_positions.push_back(AutoConnectPosition(part));
 
         new AutoConnectScreen(window_positions, PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
-    }else{
+    }
+    else
+    {
         new MainMenu();
     }
 }
