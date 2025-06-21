@@ -66,11 +66,31 @@ void AutoConnectScreen::update(float delta)
         std::vector<ServerScanner::ServerInfo> serverList = scanner->getServerList();
         string autoconnect_address = PreferencesManager::get("autoconnect_address", "");
 
-        if (autoconnect_address != "") {
-            status_label->setText("Using autoconnect server " + autoconnect_address);
+        if (!autoconnect_address.empty())
+        {
+            // Set autoconnect_port. If autoconnect_address specifies a port,
+            // use that. Otherwise, use defaultServerPort.
+            autoconnect_address = autoconnect_address.strip();
+            int autoconnect_port = defaultServerPort;
+
+            if (autoconnect_address.find(":") != -1)
+            {
+                autoconnect_port = autoconnect_address.substr(autoconnect_address.find(":") + 1).toInt();
+                autoconnect_address = autoconnect_address.substr(0, autoconnect_address.find(":"));
+
+                if (autoconnect_port < 10 || autoconnect_port > 65535)
+                {
+                    LOG(Warning, "Invalid autoconnect port " + string(autoconnect_port));
+                    autoconnect_port = defaultServerPort;
+                }
+            }
+
+            LOG(Info, "Connecting to server at " + autoconnect_address + ":" + string(autoconnect_port));
+            status_label->setText("Using autoconnect server " + autoconnect_address + ":" + string(autoconnect_port));
             connect_to_address = autoconnect_address;
+            connect_to_port = autoconnect_port;
             tried_password = false;
-            new GameClient(VERSION_NUMBER, autoconnect_address);
+            new GameClient(VERSION_NUMBER, connect_to_address, connect_to_port);
             scanner->destroy();
         } else {
             auto name_filter = PreferencesManager::get("autoconnect_servername", "");
@@ -80,15 +100,16 @@ void AutoConnectScreen::update(float delta)
 
                 status_label->setText("Found server " + server.name);
                 connect_to_address = server.address;
+                connect_to_port = defaultServerPort;
                 tried_password = false;
-                new GameClient(VERSION_NUMBER, server.address);
+                new GameClient(VERSION_NUMBER, connect_to_address, connect_to_port);
                 scanner->destroy();
                 return;
             }
 
             status_label->setText("Searching for server...");
         }
-    }else{
+    } else {
         switch(game_client->getStatus())
         {
         case GameClient::Connecting:
