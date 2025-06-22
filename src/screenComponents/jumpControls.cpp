@@ -44,12 +44,19 @@ void GuiJumpControls::onDraw(sp::RenderTarget& target)
             charge_bar->hide();
         } else if (jump->delay > 0.0f)
         {
-            label->setKey(tr("jumpcontrol","Jump in"));
-            label->setValue(string(int(ceilf(jump->effective_activation_delay))));
+            if (std::isinf(jump->effective_activation_delay))
+            {
+                // Translation note: Treat "Jump delayed" as one phrase.
+                label->setKey(tr("jumpcontrol", "Jump"));
+                label->setValue(tr("jumpcontrol", "delayed"));
+            } else {
+                label->setKey(tr("jumpcontrol", "Jump in"));
+                label->setValue(string(int(ceilf(jump->effective_activation_delay))) + " sec.");
+            }
             slider->disable();
             button->disable();
             charge_bar->hide();
-        }else if (jump->charge < jump->max_distance)
+        } else if (jump->charge < jump->max_distance)
         {
             label->setKey(tr("jumpcontrol", "Charging"));
             label->setValue("...");
@@ -57,7 +64,7 @@ void GuiJumpControls::onDraw(sp::RenderTarget& target)
             button->disable();
             charge_bar->setRange(0.0, jump->max_distance);
             charge_bar->setValue(jump->charge)->show();
-        }else{
+        } else {
             label->setKey(tr("jumpcontrol", "Distance"));
             label->setValue(string(slider->getValue() / 1000.0f, 1) + DISTANCE_UNIT_1K);
             slider->enable()->show();

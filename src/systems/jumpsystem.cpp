@@ -16,23 +16,20 @@ void JumpSystem::update(float delta)
     for(auto [entity, jump, position, physics] : sp::ecs::Query<JumpDrive, sp::Transform, sp::Physics>())
     {
         // Capture the jump activation rate as a factor of jump system effectiveness.
-        jump.activation_rate = delta * jump.getSystemEffectiveness();
+        auto jump_effectiveness = jump.getSystemEffectiveness();
+        jump.activation_rate = delta * jump_effectiveness;
+
+        if (jump.delay > 0.0f && WarpSystem::isWarpJammed(entity))
+            jump.delay = 0.0f;
+
+        if (jump.just_jumped > 0.0f)
+            jump.just_jumped -= delta;
 
         if (jump.delay > 0.0f)
         {
-            if (WarpSystem::isWarpJammed(entity))
-                jump.delay = 0.0f;
-        }
-        if (jump.just_jumped > 0.0f)
-            jump.just_jumped -= delta;
-        if (jump.delay > 0.0f)
-        {
-            auto impulse = entity.getComponent<ImpulseEngine>();
-            if (impulse)
-                impulse->request = 0.0f;
-            auto warp = entity.getComponent<WarpDrive>();
-            if (warp)
-                warp->request = 0;
+            // Full-halt other propulsion systems while a jump is in progress.
+            if (auto impulse = entity.getComponent<ImpulseEngine>()) impulse->request = 0.0f;
+            if (auto warp = entity.getComponent<WarpDrive>()) warp->request = 0;
 
             // The jump system "delay" is a fixed countdown with an upper limit
             // configured by jump.activation_delay, which defaults to 10.0.
@@ -59,51 +56,53 @@ void JumpSystem::update(float delta)
             // effectiveness this tick. This can cause the countdown to
             // apparently count down rapidly or unexpectedly count up,
             // for instance if power to the jump system changes mid-jump.
-            jump.effective_activation_delay = (jump.activation_delay * (jump.delay / jump.activation_delay)) / std::max(0.01f, jump.getSystemEffectiveness());
+            if (jump_effectiveness <= 0.0f)
+                jump.effective_activation_delay = std::numeric_limits<float>::infinity();
+            else
+                jump.effective_activation_delay = (jump.activation_delay * (jump.delay / jump.activation_delay)) / jump_effectiveness;
 
             if (jump.delay <= 0.0f)
             {
-                float f = jump.health;
-                if (f <= 0.0f)
-                    return;
+                float health = jump.health;
+                if (health <= 0.0f) return;
 
                 // When jumping, reset the jump effect and move the ship.
                 jump.just_jumped = 2.0f;
 
-                auto distance = (jump.distance * f) + (jump.distance * (1.0f - f) * random(0.5, 1.5));
+                auto distance = (jump.distance * health) + (jump.distance * (1.0f - health) * random(0.5f, 1.5f));
                 auto target_position = position.getPosition() + vec2FromAngle(position.getRotation()) * distance;
                 target_position = WarpSystem::getFirstNoneJammedPosition(position.getPosition(), target_position);
                 position.setPosition(target_position);
-                if (entity.hasComponent<Coolant>())
-                    jump.addHeat(jump.heat_per_jump);
 
-                jump.delay = 0.f;
+                // Add heat if the entity uses coolant, and reset the jump delay.
+                if (entity.hasComponent<Coolant>()) jump.addHeat(jump.heat_per_jump);
+
+                jump.delay = 0.0f;
             }
         } else {
             // If a jump hasn't been initiated, reset the predicted countdown
             // value to the default fixed delay modified by the system's current
             // effectiveness. Also, track the current system effectiveness so we
             // can compare it for changes after the jump starts.
-            jump.effective_activation_delay = jump.activation_delay / std::max(0.01f, jump.getSystemEffectiveness());
+            if (jump_effectiveness <= 0.0f)
+                jump.effective_activation_delay = std::numeric_limits<float>::infinity();
+            else
+                jump.effective_activation_delay = jump.activation_delay / jump_effectiveness;
 
-            float f = jump.get_recharge_rate();
-            if (f > 0)
+            // Recharge the jump drive if its recharge rate > 0 and the ship has
+            // energy to use or lacks or reactor.
+            float recharge_rate = jump.get_recharge_rate();
+            if (recharge_rate > 0.0f)
             {
                 if (jump.charge < jump.max_distance)
                 {
-                    float extra_charge = (delta / jump.charge_time * jump.max_distance) * f;
+                    float extra_charge = (delta / jump.charge_time * jump.max_distance) * recharge_rate;
                     auto reactor = entity.getComponent<Reactor>();
                     if (!reactor || reactor->useEnergy(extra_charge * jump.energy_per_u_charge / 1000.0f))
-                    {
-                        jump.charge += extra_charge;
-                        if (jump.charge >= jump.max_distance)
-                            jump.charge = jump.max_distance;
-                    }
+                        jump.charge = std::min(jump.charge + extra_charge, jump.max_distance);
                 }
             } else {
-                jump.charge += (delta / jump.charge_time * jump.max_distance) * f;
-                if (jump.charge < 0.0f)
-                    jump.charge = 0.0f;
+                jump.charge = std::max(0.0f, (delta / jump.charge_time * jump.max_distance) * recharge_rate);
             }
         }
     }
@@ -111,13 +110,19 @@ void JumpSystem::update(float delta)
 
 void JumpSystem::initializeJump(sp::ecs::Entity entity, float distance)
 {
+    // You can't jump if you don't have a jump drive.
     auto jump = entity.getComponent<JumpDrive>();
     if (!jump) return;
+
+    // You can't jump if you're docked to a parent ship.
     auto docking_port = entity.getComponent<DockingPort>();
     if (docking_port && docking_port->state != DockingPort::State::NotDocking) return;
-    if (jump->charge < jump->max_distance) // You can only jump when the drive is fully charged
-        return;
+
+    // You can't jump before the drive is fully charged.
+    if (jump->charge < jump->max_distance) return;
+
     distance = std::clamp(distance, jump->min_distance, jump->max_distance);
+
     if (jump->delay <= 0.0f)
     {
         jump->distance = distance;

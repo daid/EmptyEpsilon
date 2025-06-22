@@ -316,7 +316,12 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                     auto jump = my_spaceship.getComponent<JumpDrive>();
                     if (jump) {
                         addSystemEffect(tr("Jump drive recharge rate"), toNearbyIntString(jump->get_recharge_rate() * 100) + "%");
-                        addSystemEffect(tr("Jump drive jump speed"), string(int(ceilf(jump->effective_activation_delay))) + " sec."); // Doesn't use toNearbyIntString because the result doesn't match jumpControls
+                        addSystemEffect(
+                            tr("Jump drive jump speed"),
+                            std::isinf(jump->effective_activation_delay)
+                                ? "∞ sec."
+                                : string(int(ceilf(jump->effective_activation_delay))) + " sec." // Doesn't use toNearbyIntString because the result doesn't match jumpControls
+                            );
                     }
                     }break;
                 case ShipSystem::Type::FrontShield:{
