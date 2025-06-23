@@ -5,7 +5,6 @@
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_label.h"
 #include "screenComponents/viewport3d.h"
-#include "screenComponents/helpOverlay.h"
 
 class GuiHelpOverlay;
 class GuiSelector;

@@ -13,6 +13,8 @@
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"
+#include "screenComponents/helpOverlay.h"
+#include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 

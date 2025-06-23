@@ -3,6 +3,7 @@
 #include "gui/gui2_button.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_label.h"
+#include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltext.h"
 
 #include <i18n.h>

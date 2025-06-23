@@ -3,7 +3,6 @@
 
 #include "engine.h"
 #include "gui/gui2_canvas.h"
-#include "screenComponents/helpOverlay.h"
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/radarView.h"
 
