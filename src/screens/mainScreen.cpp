@@ -51,6 +51,7 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     (new GuiIndicatorOverlays(this))->hasGlobalMessage();
 
     keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
+    bool show_additional_shortcuts_string = false;
     string keyboard_help_text = "";
 
     for (const auto& category : {"Console", "Basic", "Main Screen"})
@@ -65,9 +66,7 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     }
 
     if (show_additional_shortcuts_string)
-    {
         keyboard_help_text += "\n" + tr("More shortcuts available in settings") + "\n";
-    }
 
     keyboard_help->setText(keyboard_help_text);
 
