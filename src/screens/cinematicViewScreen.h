@@ -5,7 +5,9 @@
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_label.h"
 #include "screenComponents/viewport3d.h"
+#include "screenComponents/helpOverlay.h"
 
+class GuiHelpOverlay;
 class GuiSelector;
 class GuiToggleButton;
 
@@ -20,6 +22,7 @@ private:
     GuiToggleButton* camera_lock_toggle;
     GuiToggleButton* camera_lock_tot_toggle;
     GuiToggleButton* camera_lock_cycle_toggle;
+    GuiHelpOverlay* keyboard_help;
     float min_camera_distance;
     float max_camera_distance;
     glm::vec2 camera_rotation_vector{0, 0};

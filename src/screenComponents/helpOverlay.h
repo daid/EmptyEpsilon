@@ -2,6 +2,7 @@
 #define HELP_OVERLAY_H
 
 #include "gui/gui2_element.h"
+#include "gui/gui2_panel.h"
 
 class GuiCanvas;
 class GuiPanel;
