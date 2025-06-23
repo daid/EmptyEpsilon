@@ -20,6 +20,7 @@
 #include "systems/docking.h"
 #include "systems/missilesystem.h"
 #include "systems/radarblock.h"
+#include "systems/warpsystem.h"
 #include "ecs/query.h"
 
 
@@ -650,30 +651,33 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
         float rotation_diff = fabs(angleDifference(target_rotation, ot->getRotation()));
 
         auto warp = owner.getComponent<WarpDrive>();
-        if (warp)
-            warp->request = (rotation_diff < 30.0f && distance > 2000.0f) ? 1.0f : 0.0f;
         auto jump = owner.getComponent<JumpDrive>();
-        if (distance > 10000 && jump && jump->delay <= 0.0f && jump->charge >= jump->max_distance)
+        if ((warp || jump) && !WarpSystem::isWarpJammed(owner))
         {
-            if (rotation_diff < 1.0f)
+            if (warp)
+                warp->request = (rotation_diff < 30.0f && distance > 2000.0f) ? 1.0f : 0.0f;
+            if (distance > 10000 && jump && jump->delay <= 0.0f && jump->charge >= jump->max_distance)
             {
-                float jump_distance = distance;
-                if (pathPlanner.route.size() < 2)
+                if (rotation_diff < 1.0f)
                 {
-                    jump_distance -= 3000;
-                    if (has_missiles)
-                        jump_distance -= 5000;
+                    float jump_distance = distance;
+                    if (pathPlanner.route.size() < 2)
+                    {
+                        jump_distance -= 3000;
+                        if (has_missiles)
+                            jump_distance -= 5000;
+                    }
+                    if (jump->max_distance == 50000)
+                    {   //If the ship has the default max jump drive distance of 50k, then limit our jumps to 15k, else we limit ourselves to whatever the ship layout is with a bit margin.
+                        if (jump_distance > 15000)
+                            jump_distance = 15000;
+                    }else{
+                        if (jump_distance > jump->max_distance - 2000)
+                            jump_distance = jump->max_distance - 2000;
+                    }
+                    jump_distance += random(-1500, 1500);
+                    JumpSystem::initializeJump(owner, jump_distance);
                 }
-                if (jump->max_distance == 50000)
-                {   //If the ship has the default max jump drive distance of 50k, then limit our jumps to 15k, else we limit ourselves to whatever the ship layout is with a bit margin.
-                    if (jump_distance > 15000)
-                        jump_distance = 15000;
-                }else{
-                    if (jump_distance > jump->max_distance - 2000)
-                        jump_distance = jump->max_distance - 2000;
-                }
-                jump_distance += random(-1500, 1500);
-                JumpSystem::initializeJump(owner, jump_distance);
             }
         }
         if (pathPlanner.route.size() > 1)
