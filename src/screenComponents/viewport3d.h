@@ -21,6 +21,9 @@ class GuiViewport3D : public GuiElement
     {
         Projection = 0,
         View,
+        GlobalBox,
+        LocalBox,
+        BoxLerp,
 
         StarboxCount,
 

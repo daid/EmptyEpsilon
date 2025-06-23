@@ -24,12 +24,17 @@ void main()
 [fragment]
 
 // Program inputs
-uniform samplerCube starbox;
+uniform samplerCube global_starbox;
+uniform samplerCube local_starbox;
+uniform float starbox_lerp;
 
 // Per-fragment inputs.
 varying vec3 texcoords;
 
 void main()
 {
-    gl_FragColor = textureCube(starbox, texcoords);
+    vec4 global_color = textureCube(global_starbox, texcoords);
+    vec4 local_color = textureCube(local_starbox, texcoords);
+
+    gl_FragColor = mix(global_color, local_color, starbox_lerp);
 }
