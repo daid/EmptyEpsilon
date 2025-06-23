@@ -364,6 +364,11 @@ static void luaSetBanner(string banner)
     gameGlobalInfo->banner_string = banner;
 }
 
+static void luaSetDefaultSkybox(string skybox)
+{
+    gameGlobalInfo->default_skybox = skybox;
+}
+
 static float luaGetScenarioTime()
 {
     return gameGlobalInfo->elapsed_time;
@@ -1132,6 +1137,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Displays a scrolling banner containing the given text on the cinematic and top-down views.
     /// Example: setBanner("You will soon die!")
     env.setGlobal("setBanner", &luaSetBanner);
+    /// void setDefaultSkybox(string skybox)
+    /// Sets the default skybox to show, "default" is the default skybox. See resources/skybox for other options.
+    /// Example: setDefaultSkybox("You will soon die!")
+    env.setGlobal("setDefaultSkybox", &luaSetDefaultSkybox);
     /// float getScenarioTime()
     /// Returns the elapsed time of the scenario, in seconds.
     /// This timer stops when the game is paused.

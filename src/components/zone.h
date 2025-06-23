@@ -13,6 +13,7 @@ public:
     std::vector<uint16_t> triangles;
     string label;
     glm::vec2 label_offset;
+    string skybox;
     float radius;
     bool zone_dirty = true;
 

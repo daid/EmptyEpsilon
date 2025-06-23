@@ -51,6 +51,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&gm_control_code);
     registerMemberReplication(&elapsed_time, 0.1);
+    registerMemberReplication(&default_skybox);
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
@@ -249,6 +250,7 @@ void GameGlobalInfo::reset()
     global_message = "";
     global_message_timeout = 0.0f;
     banner_string = "";
+    default_skybox = "default";
 
     //Pause the game
     engine->setGameSpeed(0.0);
