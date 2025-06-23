@@ -359,7 +359,7 @@ msgid ""
 "rear-mounted lasers to keep enemies off its back."
 msgstr ""
 "Die Flavia Falcon ist ein Flavia-Transporter welcher für höhere "
-"Geschwindigkeit optimiert wurde und besitzt zusätzlich zwei rueckwärtige "
+"Geschwindigkeit optimiert wurde und besitzt zusätzlich zwei rückwärtige "
 "Laser um den Rücken von Feinden frei zu halten."
 
 #: scripts/shiptemplates/frigates.lua:325
@@ -372,7 +372,7 @@ msgid ""
 "The Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp "
 "drive."
 msgstr ""
-"Die Flavia P.Falcon besitzt einen rueckwärtigen Raketenschacht welcher Nukes "
+"Die Flavia P.Falcon besitzt einen rückwärtigen Raketenschacht welcher Nukes "
 "einsetzen kann, sowie einen Warpantrieb."
 
 #: scripts/shiptemplates/frigates.lua:369

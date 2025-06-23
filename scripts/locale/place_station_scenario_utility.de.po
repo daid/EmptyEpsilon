@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: scripts/place_station_scenario_utility.lua:387
 msgctxt "scienceDescription-station"
@@ -37,8 +37,8 @@ msgid ""
 "coordination hub for the region"
 msgstr ""
 "Die ursprünglichen Erbauer der Station waren Fans des Wissenschaftlers und "
-"Schriftstellers Isaac Asimov aus dem späten 20. Jahrhundert. Die Station hieß "
-"zunächst Foundation, wurde aber später einfach in Asimov umbenannt. Sie "
+"Schriftstellers Isaac Asimov aus dem späten 20. Jahrhundert. Die Station "
+"hieß zunächst Foundation, wurde aber später einfach in Asimov umbenannt. Sie "
 "begann als Weltraum-Observatorium, wurde dann zu einer Versorgungsstation "
 "und entwickelte sich zu einem Bildungs- und Koordinationszentrum für die "
 "Region."
@@ -177,7 +177,7 @@ msgstr ""
 "den ersten Laser auf der Erde erforschte und baute."
 
 #: scripts/place_station_scenario_utility.lua:652
-#: scripts/place_station_scenario_utility.lua:2668
+#: scripts/place_station_scenario_utility.lua:2785
 msgctxt "scienceDescription-station"
 msgid "Gambling and resupply"
 msgstr "Glücksspiel und Nachschub"
@@ -231,11 +231,13 @@ msgstr ""
 
 #: scripts/place_station_scenario_utility.lua:763
 #: scripts/place_station_scenario_utility.lua:1288
+#: scripts/place_station_scenario_utility.lua:2516
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
 msgstr "Impulsantrieb-Komponenten"
 
 #: scripts/place_station_scenario_utility.lua:764
+#: scripts/place_station_scenario_utility.lua:2517
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture impulse engine components and systems"
 msgstr ""
@@ -297,7 +299,7 @@ msgstr ""
 "in Bangkok, Thailand. Entworfen und gebaut mit Blick auf Handel und Gewerbe."
 
 #: scripts/place_station_scenario_utility.lua:879
-#: scripts/place_station_scenario_utility.lua:2519
+#: scripts/place_station_scenario_utility.lua:2556
 msgctxt "scienceDescription-station"
 msgid "Mining"
 msgstr "Bergbau"
@@ -1188,83 +1190,94 @@ msgstr ""
 "Jahrhunderts auf der Erde gegründet wurde."
 
 #: scripts/place_station_scenario_utility.lua:2479
-#: scripts/place_station_scenario_utility.lua:2559
 #: scripts/place_station_scenario_utility.lua:2596
-#: scripts/place_station_scenario_utility.lua:2635
+#: scripts/place_station_scenario_utility.lua:2636
+#: scripts/place_station_scenario_utility.lua:2676
+#: scripts/place_station_scenario_utility.lua:2713
+#: scripts/place_station_scenario_utility.lua:2752
 msgctxt "scienceDescription-station"
 msgid "Mining station"
 msgstr "Bergbaustation"
 
-#: scripts/place_station_scenario_utility.lua:2520
+#: scripts/place_station_scenario_utility.lua:2518
+msgctxt "stationStory-comms"
+msgid ""
+"Named after one of the station commander's favorite actors from the 20th "
+"century"
+msgstr ""
+"Benannt nach einem der Lieblingsschauspieler der Stationsleitung aus dem "
+"zwanzigsten Jahrhundert."
+
+#: scripts/place_station_scenario_utility.lua:2557
 msgctxt "stationGeneralInfo-comms"
 msgid "We mine nearby asteroids for precious minerals"
 msgstr "Wir bauen nahe gelegene Asteroiden nach wertvollen Mineralien ab."
 
-#: scripts/place_station_scenario_utility.lua:2669
+#: scripts/place_station_scenario_utility.lua:2786
 msgctxt "stationGeneralInfo-comms"
 msgid "Relax and meet some interesting players"
 msgstr "Entspannen Sie sich und treffen Sie einige interessante Spieler."
 
-#: scripts/place_station_scenario_utility.lua:2705
+#: scripts/place_station_scenario_utility.lua:2822
 msgctxt "scienceDescription-station"
 msgid "Commerce and recreation"
 msgstr "Handel und Erholung"
 
-#: scripts/place_station_scenario_utility.lua:2737
+#: scripts/place_station_scenario_utility.lua:2854
 msgctxt "scienceDescription-station"
 msgid "Xenopsychology research"
 msgstr "Xenopsychologische Forschung"
 
-#: scripts/place_station_scenario_utility.lua:2774
+#: scripts/place_station_scenario_utility.lua:2891
 msgctxt "scienceDescription-station"
 msgid "Mining and trade"
 msgstr "Bergbau und Handel"
 
-#: scripts/place_station_scenario_utility.lua:2811
+#: scripts/place_station_scenario_utility.lua:2928
 msgctxt "scienceDescription-station"
 msgid "Mining and gambling"
 msgstr "Bergbau und Glücksspiel"
 
-#: scripts/place_station_scenario_utility.lua:2848
-#: scripts/place_station_scenario_utility.lua:2922
-#: scripts/place_station_scenario_utility.lua:3060
-#: scripts/place_station_scenario_utility.lua:3236
+#: scripts/place_station_scenario_utility.lua:2965
+#: scripts/place_station_scenario_utility.lua:3039
+#: scripts/place_station_scenario_utility.lua:3177
+#: scripts/place_station_scenario_utility.lua:3353
 msgctxt "scienceDescription-station"
 msgid "Resupply"
 msgstr "Nachschub"
 
-#: scripts/place_station_scenario_utility.lua:2954
+#: scripts/place_station_scenario_utility.lua:3071
 msgctxt "scienceDescription-station"
 msgid "Textiles and fashion"
 msgstr "Textilien und Mode"
 
-#: scripts/place_station_scenario_utility.lua:2991
+#: scripts/place_station_scenario_utility.lua:3108
 msgctxt "scienceDescription-station"
 msgid "Stress Psychology Research"
 msgstr "Stresspsychologische Forschung"
 
-#: scripts/place_station_scenario_utility.lua:3023
+#: scripts/place_station_scenario_utility.lua:3140
 msgctxt "scienceDescription-station"
 msgid "Low gravity research"
 msgstr "Niedrig-Schwerkraft Forschung"
 
-#: scripts/place_station_scenario_utility.lua:3061
+#: scripts/place_station_scenario_utility.lua:3178
 msgctxt "stationGeneralInfo-comms"
 msgid "Get your energy here! Grab a drink before you go!"
 msgstr "Holen Sie sich hier Ihre Energie! Hol dir einen Drink, bevor du gehst!"
 
-#: scripts/place_station_scenario_utility.lua:3093
+#: scripts/place_station_scenario_utility.lua:3210
 msgctxt "scienceDescription-station"
 msgid "Research Lab and Observatory"
 msgstr "Forschungslabor und Observatorium"
 
-#: scripts/place_station_scenario_utility.lua:3134
+#: scripts/place_station_scenario_utility.lua:3251
 msgctxt "scienceDescription-station"
 msgid "Biotech research"
 msgstr "Biotechnologie-Forschung"
 
-#: scripts/place_station_scenario_utility.lua:3167
-#: scripts/place_station_scenario_utility.lua:3199
+#: scripts/place_station_scenario_utility.lua:3284
+#: scripts/place_station_scenario_utility.lua:3316
 msgctxt "scienceDescription-station"
 msgid "Observatory"
 msgstr "Observatorium"
