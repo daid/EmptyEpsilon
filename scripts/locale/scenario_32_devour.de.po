@@ -1866,8 +1866,6 @@ msgstr ""
 
 #: scripts/scenario_32_devour.lua:2787
 #, lua-format
-#| msgctxt "trade-comms"
-#| msgid "     %s: %i, %i\n"
 msgctxt "trade-comms"
 msgid "%s     %s: %i, %i\n"
 msgstr "%s     %s: %i, %i\n"
@@ -1880,8 +1878,6 @@ msgstr "%sWaren oder Komponenten, die die Station kaufen wird: Preis in Ruf\n"
 
 #: scripts/scenario_32_devour.lua:2792 scripts/scenario_32_devour.lua:2801
 #, lua-format
-#| msgctxt "trade-comms"
-#| msgid "     %s: %i\n"
 msgctxt "trade-comms"
 msgid "%s     %s: %i\n"
 msgstr "%s     %s: %i\n"
@@ -2894,16 +2890,12 @@ msgstr "%sHeckschilde: %d%%\n"
 #: scripts/scenario_32_devour.lua:3897 scripts/scenario_32_devour.lua:4836
 #: scripts/scenario_32_devour.lua:4873
 #, lua-format
-#| msgctxt "shipAssist-comms"
-#| msgid "Shield %s: %d%%\n"
 msgctxt "shipAssist-comms"
 msgid "%sShield %s: %d%%\n"
 msgstr "%sSchild %s: %d%%\n"
 
 #: scripts/scenario_32_devour.lua:3903
 #, lua-format
-#| msgctxt "shipAssist-comms"
-#| msgid "%s Missiles: %d/%d\n"
 msgctxt "shipAssist-comms"
 msgid "%s%s Missiles: %d/%d\n"
 msgstr "%s%s Raketen: %d/%d\n"
