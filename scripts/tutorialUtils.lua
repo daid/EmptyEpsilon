@@ -1,5 +1,6 @@
 --[[ Assist function in creating tutorial sequences --]]
 function startTutorial()
+    setDefaultSkybox("simulation")
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
     tutorial_setPlayerShip(player)
 
