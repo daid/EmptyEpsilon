@@ -72,16 +72,19 @@ void AutoConnectScreen::update(float delta)
             // use that. Otherwise, use defaultServerPort.
             autoconnect_address = autoconnect_address.strip();
             int autoconnect_port = defaultServerPort;
+
             if (autoconnect_address.find(":") != -1)
             {
-                autoconnect_port = autoconnect_address.substr(autoconnect_address.find(":") + 1).toInt();
                 autoconnect_address = autoconnect_address.substr(0, autoconnect_address.find(":"));
+                autoconnect_port = autoconnect_address.substr(autoconnect_address.find(":") + 1).toInt();
+
                 if (autoconnect_port < 10 || autoconnect_port > 65535)
                 {
                     LOG(WARNING) << "Invalid autoconnect port " << autoconnect_port << ". Using default port " << defaultServerPort;
                     autoconnect_port = defaultServerPort;
                 }
             }
+
             status_label->setText("Using autoconnect server " + autoconnect_address + ":" + std::to_string(autoconnect_port));
             connect_to_address = autoconnect_address;
             connect_to_port = autoconnect_port;

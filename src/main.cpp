@@ -198,7 +198,6 @@ int main(int argc, char** argv)
 
     string tutorial = PreferencesManager::get("tutorial");   // use "00_all.lua" for all tutorials
     string server_scenario = PreferencesManager::get("server_scenario");
-    int server_port = PreferencesManager::get("server_port").toInt();
 
     if (!tutorial.empty())
     {
@@ -216,16 +215,16 @@ int main(int argc, char** argv)
         // Create the server to listen on the assigned port.
         // Use the default port if server_port isn't set or has an invalid
         // value (toInt returns 0 if empty or not an int).
+        int server_port = PreferencesManager::get("server_port").toInt();
+
         if (server_port < 10 || server_port > 65535)
         {
-            new EpsilonServer(defaultServerPort);
-            LOG(WARNING) << "Invalid server_port " << server_port << ". Launching server_scenario " << server_scenario << " on default port " << defaultServerPort;
+            LOG(Warning, "Invalid server_port " + server_port);
+            server_port = defaultServerPort;
         }
-        else
-        {
-            new EpsilonServer(server_port);
-            LOG(INFO) << "Launching server_scenario " << server_scenario << " on custom port " << server_port;
-        }
+
+        LOG(Info, "Launching server_scenario " + server_scenario + " on port " + server_port);
+        new EpsilonServer(server_port);
 
         if(!gameGlobalInfo) // => failed to start server
             return 1;
@@ -294,14 +293,12 @@ void returnToMainMenu(RenderLayer* render_layer)
         // This is the same process as server_port and could be made DRY.
         if (headless_port < 10 || headless_port > 65535)
         {
-            new EpsilonServer(defaultServerPort);
-            LOG(WARNING) << "Invalid server_port " << headless_port << ". Launching headless scenario " << headless << " on default port " << defaultServerPort;
+            LOG(Warning, "Invalid server_port: " + headless_port);
+            headless_port = defaultServerPort;
         }
-        else
-        {
-            new EpsilonServer(headless_port);
-            LOG(INFO) << "Launching headless scenario " << headless << " on custom server_port " << headless_port;
-        }
+
+        LOG(Info, "Launching headless scenario " + headless + " on port " + headless_port);
+        new EpsilonServer(headless_port);
 
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
         if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
