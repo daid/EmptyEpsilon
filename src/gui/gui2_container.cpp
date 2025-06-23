@@ -79,6 +79,24 @@ GuiElement* GuiContainer::getClickElement(sp::io::Pointer::Button button, glm::v
     return nullptr;
 }
 
+GuiElement* GuiContainer::executeScrollOnElement(glm::vec2 position, float value)
+{
+    for(auto it = children.rbegin(); it != children.rend(); it++)
+    {
+        GuiElement* element = *it;
+
+        if (element->visible && element->enabled && element->rect.contains(position))
+        {
+            GuiElement* scrolled = element->executeScrollOnElement(position, value);
+            if (scrolled)
+                return scrolled;
+            if (element->onMouseWheelScroll(position, value))
+                return element;
+        }
+    }
+    return nullptr;
+}
+
 void GuiContainer::updateLayout(const sp::Rect& rect)
 {
     this->rect = rect;

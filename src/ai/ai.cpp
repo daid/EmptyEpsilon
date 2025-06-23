@@ -547,6 +547,8 @@ void ShipAI::runOrders()
                         target_position += (diff / dist) * 500.0f;
                         flyTowards(target_position);
                     }
+                } else if (ott && docking_port->state == DockingPort::State::Docked) {
+                    DockingSystem::requestUndock(owner);
                 }
             }
         }else{
@@ -620,7 +622,12 @@ void ShipAI::runAttack(sp::ecs::Entity target)
 void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
 {
     auto ot = owner.getComponent<sp::Transform>();
-    if (!ot) return;
+    if (!ot) {
+        auto docking_port = owner.getComponent<DockingPort>();
+        if (docking_port && docking_port->state == DockingPort::State::Docked)
+            DockingSystem::requestUndock(owner);
+        return;
+    }
     auto my_radius = 300.0f;
     if (auto physics = owner.getComponent<sp::Physics>()) my_radius = physics->getSize().x;
     pathPlanner.plan(my_radius, ot->getPosition(), target);
@@ -630,6 +637,8 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
         auto docking_port = owner.getComponent<DockingPort>();
         if (docking_port && docking_port->state == DockingPort::State::Docked)
             DockingSystem::requestUndock(owner);
+        else if (docking_port && docking_port->state == DockingPort::State::Docking)
+            DockingSystem::abortDock(owner);
 
         auto diff = pathPlanner.route[0] - ot->getPosition();
         float distance = glm::length(diff);
@@ -706,6 +715,8 @@ void ShipAI::flyFormation(sp::ecs::Entity target, glm::vec2 offset)
         auto docking_port = owner.getComponent<DockingPort>();
         if (docking_port && docking_port->state == DockingPort::State::Docked)
             DockingSystem::requestUndock(owner);
+        else if (docking_port && docking_port->state == DockingPort::State::Docking)
+            DockingSystem::abortDock(owner);
 
         auto diff = target_position - ot->getPosition();
         float distance = glm::length(diff);

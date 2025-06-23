@@ -1,6 +1,7 @@
 #include "glObjects.h"
 
 #include <graphics/opengl.h>
+#include <graphics/image.h>
 #include <type_traits>
 #include <cassert>
 
@@ -88,6 +89,54 @@ namespace gl
     {
         if (previously_bound != texture)
             GL_CHECK(glBindTexture(target, previously_bound));
+    }
+
+    CubemapTexture::CubemapTexture(const string& file_path)
+    {
+        // Load up the cube texture.
+        // Face setup
+        std::array<std::tuple<string, uint32_t>, 6> faces{
+            std::make_tuple(file_path + "/right.png", GL_TEXTURE_CUBE_MAP_POSITIVE_X),
+            std::make_tuple(file_path + "/left.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_X),
+            std::make_tuple(file_path + "/top.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Y),
+            std::make_tuple(file_path + "/bottom.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Y),
+            std::make_tuple(file_path + "/front.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Z),
+            std::make_tuple(file_path + "/back.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Z),
+        };
+
+        // Upload
+        glBindTexture(GL_TEXTURE_CUBE_MAP, texture[0]);
+        sp::Image image;
+        for (const auto& face : faces)
+        {
+            auto stream = getResourceStream(std::get<0>(face));
+            if (!stream || !image.loadFromStream(stream))
+            {
+                LOG(Warning, "Failed to load texture: ", std::get<0>(face));
+                image = sp::Image({8, 8}, {255, 0, 255, 128});
+            }
+
+            glTexImage2D(std::get<1>(face), 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPtr());
+        }
+
+        // Make it pretty.
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+        //GL_TEXTURE_WRAP_R does not exist in GLES2.0?
+        for (auto wrap_axis : { GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T /*, GL_TEXTURE_WRAP_R*/ })
+            glTexParameteri(GL_TEXTURE_CUBE_MAP, wrap_axis, GL_CLAMP_TO_EDGE);
+
+        if (GLAD_GL_ES_VERSION_2_0)
+            glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, GL_NONE);
+
+        LOG(Info, "Loaded cubemap: ", file_path);
+    }
+
+    void CubemapTexture::bind()
+    {
+        glBindTexture(GL_TEXTURE_CUBE_MAP, texture[0]);
     }
 
     bool isAvailable()

@@ -55,6 +55,7 @@ public:
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
+    string default_skybox = "default";
     string gm_control_code;
     float elapsed_time;
     string scenario;
@@ -108,8 +109,10 @@ public:
         sp::script::Callback create_callback;
         string label;
         string category;
+        string description;
     };
     std::vector<ObjectSpawnInfo> getGMSpawnableObjects();
+    string getEntityExportString(sp::ecs::Entity entity);
     void execScriptCode(const string& code);
     bool allowNewPlayerShips();
 

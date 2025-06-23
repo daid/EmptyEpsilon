@@ -51,7 +51,6 @@ class GuiViewport3D : public GuiElement
     // Starbox
     std::array<uint32_t, static_cast<size_t>(Uniforms::StarboxCount)> starbox_uniforms;
     std::array<uint32_t, static_cast<size_t>(VertexAttributes::StarboxCount)> starbox_vertex_attributes;
-    gl::Textures<1> starbox_texture;
     gl::Buffers<static_cast<size_t>(Buffers::StarboxCount)> starbox_buffers;
     sp::Shader* starbox_shader = nullptr;
 

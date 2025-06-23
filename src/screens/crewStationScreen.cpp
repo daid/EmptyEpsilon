@@ -79,7 +79,8 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
     if (PreferencesManager::get("music_enabled") == "1")
     {
         threat_estimate = new ThreatLevelEstimate();
-        threat_estimate->setCallbacks([](){
+        threat_estimate->setCallbacks([]()
+        {
             LOG(INFO) << "Switching to ambient music";
             soundManager->playMusicSet(findResources("music/ambient/*.ogg"));
         }, []() {
@@ -109,10 +110,19 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
 {
     string ret = "";
 
+    bool show_additional_shortcuts_string = false;
+
     // Add shortcuts for this position.
     for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(position)))
     {
-        ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+        if(binding->isBound())
+        {
+            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+        }
+        else
+        {
+            show_additional_shortcuts_string = true;
+        }
     }
 
     // Check special positions that include multiple core positions' functions.
@@ -120,14 +130,28 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::helmsOfficer)))
         {
-            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            if(binding->isBound())
+            {
+                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            }
+            else
+            {
+                show_additional_shortcuts_string = true;
+            }
         }
 
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::weaponsOfficer)))
         {
             if (binding->getLabel() != "Toggle shields")
             {
-                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+                if(binding->isBound())
+                {
+                    ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+                }
+                else
+                {
+                    show_additional_shortcuts_string = true;
+                }
             }
         }
     }
@@ -135,14 +159,28 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::engineering)))
         {
-            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            if(binding->isBound())
+            {
+                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            }
+            else
+            {
+                show_additional_shortcuts_string = true;
+            }
         }
 
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::weaponsOfficer)))
         {
             if (binding->getLabel() == "Toggle shields")
             {
-                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+                if(binding->isBound())
+                {
+                    ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+                }
+                else
+                {
+                    show_additional_shortcuts_string = true;
+                }
             }
         }
     }
@@ -150,13 +188,32 @@ string CrewStationScreen::populateShortcutsList(CrewPosition position)
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::helmsOfficer)))
         {
-            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            if(binding->isBound())
+            {
+                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            }
+            else
+            {
+                show_additional_shortcuts_string = true;
+            }
         }
 
         for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::weaponsOfficer)))
         {
-            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            if(binding->isBound())
+            {
+                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            }
+            else
+            {
+                show_additional_shortcuts_string = true;
+            }
         }
+    }
+
+    if (show_additional_shortcuts_string)
+    {
+        ret += "\n" + tr("More shortcuts available in settings") + "\n";
     }
 
     //    -- not yet used --
@@ -193,7 +250,9 @@ void CrewStationScreen::addStationTab(GuiElement* element, CrewPosition position
         string keyboard_category = "";
         keyboard_category = populateShortcutsList(position);
         keyboard_help->setText(keyboard_general + keyboard_category);
-    }else{
+    }
+    else
+    {
         element->hide();
         info.button->setValue(false);
     }
@@ -261,7 +320,8 @@ void CrewStationScreen::update(float delta)
             viewport->hide();
             main_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         }
-        else {
+        else
+        {
             viewport->show();
             tileViewport();
         }
@@ -290,7 +350,9 @@ void CrewStationScreen::update(float delta)
     if (my_spaceship) {
         // Update the impulse engine sound.
         impulse_sound->update(delta);
-    } else {
+    } 
+    else
+    {
         // If we're not the player ship (ie. we exploded), stop playing the
         // impulse engine sound.
         impulse_sound->stop();
@@ -346,7 +408,9 @@ void CrewStationScreen::showTab(GuiElement* element)
             string keyboard_category = "";
             keyboard_category = populateShortcutsList(info.position);
             keyboard_help->setText(keyboard_general + keyboard_category);
-        } else {
+        } 
+        else 
+        {
             info.element->hide();
             info.button->setValue(false);
         }
@@ -374,7 +438,9 @@ void CrewStationScreen::tileViewport()
         main_panel->setSize(1000, GuiElement::GuiSizeMax);
         main_panel->layout.fill_width = false;
         viewport->setPosition(1000, 0, sp::Alignment::TopLeft);
-    } else {
+    }
+    else 
+    {
         main_panel->setSize(1200, GuiElement::GuiSizeMax);
         main_panel->layout.fill_width = false;
         viewport->setPosition(1200, 0, sp::Alignment::TopLeft);

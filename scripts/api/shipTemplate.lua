@@ -46,6 +46,7 @@ function ShipTemplate:__init__()
         radius=300.0*0.8,
         max_size=1024,
         color_by_faction=true,
+        arrow_if_not_scanned=true,
     }
     self.__repair_crew_count = 3
     self.share_short_range_radar = {}
@@ -161,7 +162,7 @@ function ShipTemplate:setModel(model_data_name)
     end
     if self.physics and self.radar_trace then
         if type(self.physics.size) == "table" then
-            self.radar_trace.radius = self.physics.size[1] * 0.8
+            self.radar_trace.radius = math.sqrt(self.physics.size[1]^2 + self.physics.size[2]^2) * 0.5
         else
             self.radar_trace.radius = self.physics.size * 0.8
         end

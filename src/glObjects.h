@@ -5,6 +5,8 @@
 #include <cstddef>
 #include <cstdint>
 #include <limits>
+#include <stringImproved.h>
+
 
 namespace gl
 {
@@ -184,6 +186,16 @@ namespace gl
         uint32_t target = 0;
         uint32_t texture = 0;
         uint32_t previously_bound = std::numeric_limits<uint32_t>::max();
+    };
+
+    class CubemapTexture
+    {
+    public:
+        CubemapTexture(const string& file_path);
+
+        void bind();
+    private:
+        gl::Textures<1> texture;
     };
 
     bool isAvailable();

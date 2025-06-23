@@ -26,6 +26,7 @@ protected:
     std::map<float, int> prefix_widths;
     bool auto_scroll_down;
     Entry prepEntry(Entry& e);
+    int mouse_scroll_steps;
 
 public:
     GuiAdvancedScrollText(GuiContainer* owner, string id);
@@ -43,6 +44,7 @@ public:
     GuiAdvancedScrollText* clearEntries();
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
+    virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 };
 
 #endif//GUI2_ADVANCEDSCROLLTEXT_H

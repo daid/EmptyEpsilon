@@ -31,6 +31,7 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
     if (hide_password) {
         shown_text = std::string(text.size(), '*');
     }
+    if (shown_text.empty()) shown_text = " ";
     sp::Rect text_rect(rect.position.x + 16, rect.position.y, rect.size.x - 32, rect.size.y);
     auto prepared = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, text_rect.size, multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, sp::Font::FlagClip);
     for(auto& d : prepared.data)

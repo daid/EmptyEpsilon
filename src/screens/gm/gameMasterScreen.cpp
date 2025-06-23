@@ -567,12 +567,15 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                                 ai->orders = AIOrder::DefendTarget;
                             ai->order_target = target;
                         }
-                    }else if (auto transform = entity.getComponent<sp::Transform>()) {
+                    } else {
                         if (shift_down)
                             ai->orders = AIOrder::FlyTowardsBlind;
                         else
                             ai->orders = AIOrder::FlyTowards;
-                        ai->order_target_location = position + transform->getPosition() - objects_center;
+                        if (auto transform = entity.getComponent<sp::Transform>())
+                            ai->order_target_location = position + transform->getPosition() - objects_center;
+                        else
+                            ai->order_target_location = position;
                     }
                 }
                 if (auto gravity = entity.getComponent<Gravity>())
@@ -649,18 +652,17 @@ GameMasterChatDialog* GameMasterScreen::getChatDialog(sp::ecs::Entity entity)
 string GameMasterScreen::getScriptExport(bool selected_only)
 {
     string output;
-    std::vector<sp::ecs::Entity> objs;
-    if (selected_only)
-    {
-        objs = targets.getTargets();
+    std::vector<sp::ecs::Entity> entities;
+    if (selected_only) {
+        entities = targets.getTargets();
     }else{
-        //TODO foreach(SpaceObject, obj, space_object_list)
-        //    objs.push_back(obj->entity);
+        for(auto [entity, transform] : sp::ecs::Query<sp::Transform>()) {
+            entities.push_back(entity);
+        }
     }
 
-    for(auto e : objs)
-    {
-        string line; //TODO = obj->getExportLine();
+    for(auto entity : entities) {
+        string line = gameGlobalInfo->getEntityExportString(entity);
         if (line == "")
             continue;
         output += "    " + line + "\n";

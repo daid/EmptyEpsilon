@@ -408,10 +408,14 @@ function init()
             -- Avoid spawning asteroids within 1U of the player start position or
             -- 2U of any station.
             if math.abs(posx) > 1000 and math.abs(posy) > 1000 then
+                local allow_spawn = true
                 for k_, station in ipairs(stationList) do
-                    if distance(station, posx, posy) > 2000 then
-                        Asteroid():setPosition(posx, posy):setSize(random(100, 500))
+                    if distance(station, posx, posy) < 2000 then
+                        allow_spawn = false
                     end
+                end
+                if allow_spawn then
+                    Asteroid():setPosition(posx, posy):setSize(random(100, 500))
                 end
             end
         end

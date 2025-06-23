@@ -14,6 +14,7 @@ protected:
     sp::Alignment text_alignment;
     GuiScrollbar* scroll;
     sp::Rect last_rect;
+    int mouse_scroll_steps;
 
     const GuiThemeStyle* back_style;
     const GuiThemeStyle* front_style;
@@ -30,6 +31,7 @@ public:
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 };
 
 #endif//GUI2_LISTBOX_H

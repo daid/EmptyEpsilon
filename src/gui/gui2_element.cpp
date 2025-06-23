@@ -32,6 +32,11 @@ void GuiElement::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
 }
 
+bool GuiElement::onMouseWheelScroll(glm::vec2 position, float value)
+{
+    return false;
+}
+
 void GuiElement::onTextInput(const string& text)
 {
 }

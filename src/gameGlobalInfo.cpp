@@ -51,6 +51,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&gm_control_code);
     registerMemberReplication(&elapsed_time, 0.1);
+    registerMemberReplication(&default_skybox);
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
@@ -196,8 +197,9 @@ namespace sp::script {
                     lua_geti(L, -1, 1); auto callback = Convert<sp::script::Callback>::fromLua(L, -1); lua_pop(L, 1);
                     lua_geti(L, -1, 2); auto label = lua_tostring(L, -1); lua_pop(L, 1);
                     lua_geti(L, -1, 3); auto category = lua_tostring(L, -1); lua_pop(L, 1);
+                    lua_geti(L, -1, 4); auto description = lua_tostring(L, -1); lua_pop(L, 1);
                     lua_pop(L, 1);
-                    result.push_back({callback, label ? label : "", category ? category : ""});
+                    result.push_back({callback, label ? label : "", category ? category : "", description ? description : ""});
                 }
                 lua_pop(L, 1);
             }
@@ -205,6 +207,7 @@ namespace sp::script {
         }
     };
 }
+
 std::vector<GameGlobalInfo::ObjectSpawnInfo> GameGlobalInfo::getGMSpawnableObjects()
 {
     std::vector<GameGlobalInfo::ObjectSpawnInfo> info;
@@ -217,6 +220,16 @@ std::vector<GameGlobalInfo::ObjectSpawnInfo> GameGlobalInfo::getGMSpawnableObjec
     return info;
 }
 
+string GameGlobalInfo::getEntityExportString(sp::ecs::Entity entity)
+{
+    if (main_scenario_script) {
+        auto res = main_scenario_script->call<string>("getEntityExportString", entity);
+        LuaConsole::checkResult(res);
+        if (res.isOk())
+            return res.value();
+    }
+    return "";
+}
 
 void GameGlobalInfo::reset()
 {
@@ -237,6 +250,7 @@ void GameGlobalInfo::reset()
     global_message = "";
     global_message_timeout = 0.0f;
     banner_string = "";
+    default_skybox = "default";
 
     //Pause the game
     engine->setGameSpeed(0.0);

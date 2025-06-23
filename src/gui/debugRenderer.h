@@ -17,7 +17,7 @@ private:
     bool show_datarate;
     bool show_timing_graph;
 
-    std::vector<Engine::EngineTiming> timing_graph_points;
+    std::map<string, std::vector<float>> timing_graph_points;
 public:
     DebugRenderer(RenderLayer* renderLayer);
 

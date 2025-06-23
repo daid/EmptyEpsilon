@@ -4,7 +4,7 @@
 
 
 GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
-: GuiEntryList(owner, id, func), text_size(30), button_height(50), text_alignment(sp::Alignment::Center)
+: GuiEntryList(owner, id, func), text_size(30), button_height(50), text_alignment(sp::Alignment::Center), mouse_scroll_steps(25)
 {
     scroll = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {});
     scroll->setPosition(0, 0, sp::Alignment::TopRight)->setSize(button_height, GuiSizeMax)->hide();
@@ -118,7 +118,8 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
 
 bool GuiListbox::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    return true;
+    int offset = (position.y - rect.position.y + scroll->getValue()) / button_height;
+    return offset >= 0 && offset < int(entries.size());
 }
 
 void GuiListbox::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
@@ -129,4 +130,11 @@ void GuiListbox::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
         setSelectionIndex(offset);
         callback();
     }
+}
+
+bool GuiListbox::onMouseWheelScroll(glm::vec2 position, float value)
+{
+    float range = scroll->getCorrectedMax() - scroll->getMin();
+    scroll->setValue((scroll->getValue() - value * range / mouse_scroll_steps) );
+    return true;
 }

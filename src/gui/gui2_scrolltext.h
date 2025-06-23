@@ -11,6 +11,8 @@ protected:
     string text;
     float text_size;
     bool auto_scroll_down;
+    int mouse_scroll_steps;
+
 public:
     GuiScrollText(GuiContainer* owner, string id, string text);
 
@@ -24,6 +26,7 @@ public:
     GuiScrollText* setScrollbarWidth(float width);
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
+    virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 };
 
 class GuiScrollFormattedText : public GuiScrollText
@@ -32,6 +35,7 @@ public:
     GuiScrollFormattedText(GuiContainer* owner, string id, string text);
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
+    virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 };
 
 #endif//GUI_SCROLLTEXT_H

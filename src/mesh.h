@@ -29,7 +29,7 @@ public:
 
     // Calculate the center all vertices in this mesh, and return the distance
     // of the point farthest from that center.
-    uint32_t greatestDistanceFromCenter(std::vector<MeshVertex>& vertices);
+    float greatestDistanceFromCenter(std::vector<MeshVertex>& vertices);
 
     static Mesh* getMesh(const string& filename);
 };

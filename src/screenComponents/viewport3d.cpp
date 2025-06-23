@@ -19,12 +19,17 @@
 #include "components/rendering.h"
 #include "components/impulse.h"
 #include "components/name.h"
+#include "components/zone.h"
 #include "systems/rendering.h"
+#include "math/centerOfMass.h"
 
 #include <glm/glm.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+
+static std::unordered_map<string, std::unique_ptr<gl::CubemapTexture>> skybox_textures;
 
 
 GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
@@ -42,44 +47,6 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     starbox_uniforms[static_cast<size_t>(Uniforms::View)] = starbox_shader->getUniformLocation("view");
 
     starbox_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = starbox_shader->getAttributeLocation("position");
-
-    // Load up the cube texture.
-    // Face setup
-    std::array<std::tuple<const char*, uint32_t>, 6> faces{
-        std::make_tuple("skybox/right.png", GL_TEXTURE_CUBE_MAP_POSITIVE_X),
-        std::make_tuple("skybox/left.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_X),
-        std::make_tuple("skybox/top.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Y),
-        std::make_tuple("skybox/bottom.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Y),
-        std::make_tuple("skybox/front.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Z),
-        std::make_tuple("skybox/back.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Z),
-    };
-
-    // Upload
-    glBindTexture(GL_TEXTURE_CUBE_MAP, starbox_texture[0]);
-    sp::Image image;
-    for (const auto& face : faces)
-    {
-        auto stream = getResourceStream(std::get<0>(face));
-        if (!stream || !image.loadFromStream(stream))
-        {
-            LOG(WARNING) << "Failed to load texture: " << std::get<0>(face);
-            image = sp::Image({8, 8}, {255, 0, 255, 128});
-        }
-
-        glTexImage2D(std::get<1>(face), 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPtr());
-    }
-
-    // Make it pretty.
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-    //GL_TEXTURE_WRAP_R does not exist in GLES2.0?
-    for (auto wrap_axis : { GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T /*, GL_TEXTURE_WRAP_R*/ })
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, wrap_axis, GL_CLAMP_TO_EDGE);
-
-    if (GLAD_GL_ES_VERSION_2_0)
-        glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, GL_NONE);
 
     // Load up the ebo and vbo for the cube.
     /*   
@@ -217,8 +184,22 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         starbox_shader->bind();
         glUniform1f(starbox_shader->getUniformLocation("scale"), 100.0f);
 
+        string skybox_name = "skybox/default";
+        if (gameGlobalInfo)
+            skybox_name = "skybox/" + gameGlobalInfo->default_skybox;
+        for(auto [entity, zone, t] : sp::ecs::Query<Zone, sp::Transform>()) {
+            if (!zone.skybox.empty() && insidePolygon(zone.outline, t.getPosition() - glm::vec2(camera_position.x, camera_position.y))) {
+                skybox_name = "skybox/" + zone.skybox;
+            }
+        }
+        auto skybox_texture = skybox_textures[skybox_name].get();
+        if (!skybox_texture) {
+            skybox_textures[skybox_name] = std::make_unique<gl::CubemapTexture>(skybox_name);
+            skybox_texture = skybox_textures[skybox_name].get();
+        }
+
         // Setup shared state (uniforms)
-        glBindTexture(GL_TEXTURE_CUBE_MAP, starbox_texture[0]);
+        skybox_texture->bind();
         
         // Uniform
         // Upload matrices (only float 4x4 supported in es2)

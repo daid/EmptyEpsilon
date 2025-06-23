@@ -216,11 +216,11 @@ bool PathPlanner::checkToAvoid(glm::vec2 start, glm::vec2 end, glm::vec2& new_po
             uint32_t hash;
             if(steep)
             {
-                hash = hashPosition({y, x});
+                hash = hashPosition({y * small_object_grid_size, x * small_object_grid_size});
             }
             else
             {
-                hash = hashPosition({x, y});
+                hash = hashPosition({x * small_object_grid_size, y * small_object_grid_size});
             }
 
             for(auto e : path_finding_system->small_entities[hash])

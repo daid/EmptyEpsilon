@@ -423,12 +423,14 @@ set(MAIN_SOURCES
     src/systems/scanning.cpp
     src/systems/planet.h
     src/systems/planet.cpp
-    src/systems/player.h
-    src/systems/player.cpp
+    src/systems/gm.h
+    src/systems/gm.cpp
     src/systems/radar.h
     src/systems/radar.cpp
     src/systems/zone.h
     src/systems/zone.cpp
+    src/systems/debugrender.h
+    src/systems/debugrender.cpp
     src/multiplayer/beamweapon.h
     src/multiplayer/beamweapon.cpp
     src/multiplayer/shields.h

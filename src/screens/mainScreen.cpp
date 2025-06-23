@@ -56,7 +56,17 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     for (const auto& category : {"Console", "Basic", "Main Screen"})
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(tr(category)))
-            keyboard_help_text += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
+        {
+            if(binding->isBound())
+                keyboard_help_text += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            else
+                show_additional_shortcuts_string = true;
+        }
+    }
+
+    if (show_additional_shortcuts_string)
+    {
+        keyboard_help_text += "\n" + tr("More shortcuts available in settings") + "\n";
     }
 
     keyboard_help->setText(keyboard_help_text);
@@ -155,7 +165,9 @@ void ScreenMainScreen::update(float delta)
 
         // Update impulse sound volume and pitch.
         impulse_sound->update(delta);
-    } else {
+    }
+    else
+    {
         // If we're not the player ship (ie. we exploded), don't play impulse
         // engine sounds.
         impulse_sound->stop();
