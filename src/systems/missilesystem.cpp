@@ -348,7 +348,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         }
 
         if (tube.type_loaded != MW_Mine)
-            missile.addComponent<LifeTime>().lifetime = mwd.lifetime / category_modifier;
+            missile.addComponent<LifeTime>().lifetime = mwd.lifetime * category_modifier;
 
         if (tube.type_loaded != MW_Mine) {
             auto& dbad = missile.addComponent<DestroyedByAreaDamage>();
