@@ -50,10 +50,7 @@ HotkeyMenu::HotkeyMenu()
     search_bar->callback([this](string value){setCategory(category_index);});
 
     // Correctly initialize GuiElementListbox with a valid func_t argument
-    rebinding_container = new GuiElementListbox(rebinding_ui, "HOTKEY_LISTBOX", FRAME_MARGIN / 2, ROW_HEIGHT , [this]()
-    {
-        // Handle selection changes here if needed
-    });
+    rebinding_container = new GuiElementListbox(rebinding_ui, "HOTKEY_LISTBOX", FRAME_MARGIN / 2, ROW_HEIGHT);
     rebinding_container->setPosition(0, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax,  GuiElement::GuiSizeMax);
     rebinding_container->setMargins(FRAME_MARGIN / 2);
 
@@ -138,8 +135,6 @@ void HotkeyMenu::setCategory(int cat)
         // Add a hotkey rebinding field to the current row.
         text_entries.push_back(new GuiHotkeyBinder(rebinding_row, "HOTKEY_VALUE_" + item->getName(), item));
         text_entries.back()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0, 0, FRAME_MARGIN , 0);
-
-        rebinding_container->addElement(rebinding_row);
     }
 }
 

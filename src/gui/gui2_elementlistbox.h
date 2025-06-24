@@ -9,11 +9,8 @@
 /// The list of elements contained in the can be combination of GuiElement allowing for more complex layouts
 class GuiElementListbox : public GuiElement
 {
-public:
-    typedef std::function<void()> func_t;
     
 protected:
-    std::vector<GuiElement*> elements;
     int element_height;
     int frame_margin;
     GuiScrollbar* scroll;
@@ -21,11 +18,9 @@ protected:
 
 public:
     
-    GuiElementListbox(GuiContainer* owner, string id, int frame_margin, int element_height, func_t func);
+    GuiElementListbox(GuiContainer* owner, string id, int frame_margin, int element_height);
 
     GuiElementListbox* scrollTo(int index);
-
-    GuiElementListbox* addElement(GuiElement* element);
 
     GuiElementListbox* setElementHeight(int height);
 
