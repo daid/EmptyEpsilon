@@ -8,6 +8,7 @@
 
 class GuiSelector;
 class GuiToggleButton;
+class GuiHelpOverlay;
 
 class TopDownScreen : public GuiCanvas, public Updatable
 {
@@ -16,6 +17,7 @@ private:
     sp::ecs::Entity target;
     GuiSelector* camera_lock_selector;
     GuiToggleButton* camera_lock_toggle;
+    GuiHelpOverlay* keyboard_help;
 public:
     TopDownScreen(RenderLayer* render_layer);
 

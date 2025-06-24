@@ -22,8 +22,7 @@ Keys::CinematicKeys::CinematicKeys() :
     rotate_right("CINEMATIC_TILT_RIGHT", "Right"),
     tilt_down("CINEMATIC_TILT_DOWN", "Down"),
     tilt_up("CINEMATIC_TILT_UP", "Up")
-{
-}
+{}
 
 void Keys::CinematicKeys::init()
 {
@@ -67,7 +66,6 @@ void Keys::TopDownKeys::init()
     pan_down.setLabel(localized_category, tr("hotkey_Topdown", "Pan down"));
     pan_left.setLabel(localized_category, tr("hotkey_Topdown", "Pan left"));
     pan_right.setLabel(localized_category, tr("hotkey_Topdown", "Pan right"));
-
 }
 
 Keys::Keys() :

@@ -13,6 +13,8 @@
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"
+#include "screenComponents/helpOverlay.h"
+#include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
@@ -59,6 +61,15 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     new GuiIndicatorOverlays(this);
 
     (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
+
+    keyboard_help = new GuiHelpOverlay(viewport, tr("hotkey_F1", "Keyboard Shortcuts"));
+    string keyboard_cinematic = "";
+
+    for (auto binding : sp::io::Keybinding::listAllByCategory("Cinematic View"))
+        keyboard_cinematic += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
+
+    keyboard_help->setText(keyboard_cinematic);
+    keyboard_help->moveToFront();
 }
 
 void CinematicViewScreen::update(float delta)
@@ -70,6 +81,12 @@ void CinematicViewScreen::update(float delta)
         disconnectFromServer();
         returnToMainMenu(getRenderLayer());
         return;
+    }
+
+    if (keys.help.getDown())
+    {
+        // Toggle keyboard help.
+        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
     }
 
     if (keys.cinematic.toggle_ui.getDown())
