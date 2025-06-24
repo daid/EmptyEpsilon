@@ -2,7 +2,6 @@
 #define GAME_MASTER_SCREEN_H
 
 #include "engine.h"
-#include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_overlay.h"
@@ -23,6 +22,9 @@ class GuiTextEntry;
 class GameMasterChatDialog;
 class GuiObjectCreationView;
 class GuiGlobalMessageEntryView;
+class GuiHelpOverlay;
+class GuiPanel;
+
 class GameMasterScreen : public GuiCanvas, public Updatable
 {
 private:
@@ -55,6 +57,8 @@ private:
     GuiPanel* message_frame;
     GuiScrollText* message_text;
     GuiButton* message_close_button;
+
+    GuiHelpOverlay* keyboard_help;
 
     enum EClickAndDragState
     {

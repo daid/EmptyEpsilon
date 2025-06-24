@@ -51,24 +51,24 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     (new GuiIndicatorOverlays(this))->hasGlobalMessage();
 
     keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
-
     bool show_additional_shortcuts_string = false;
-    for (auto binding : sp::io::Keybinding::listAllByCategory(tr("hotkey_menu", "Main Screen")))
+    string keyboard_help_text = "";
+
+    for (const auto& category : {"Console", "Basic", "Main Screen"})
     {
-        if(binding->isBound())
+        for (auto binding : sp::io::Keybinding::listAllByCategory(tr(category)))
         {
-            keyboard_general += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
-        }
-        else
-        {
-            show_additional_shortcuts_string = true;
+            if(binding->isBound())
+                keyboard_help_text += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
+            else
+                show_additional_shortcuts_string = true;
         }
     }
+
     if (show_additional_shortcuts_string)
-    {
-        keyboard_general += "\n" + tr("More shortcuts available in settings") + "\n";
-    }
-    keyboard_help->setText(keyboard_general);
+        keyboard_help_text += "\n" + tr("More shortcuts available in settings") + "\n";
+
+    keyboard_help->setText(keyboard_help_text);
 
     if (PreferencesManager::get("music_enabled") != "0")
     {
