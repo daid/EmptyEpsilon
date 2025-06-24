@@ -300,8 +300,9 @@ msgid "Ender"
 msgstr ""
 
 #: scripts/shiptemplates/OLD.lua:391
+#, fuzzy
 msgid ""
-"Player version of the battle station. Only half es much shield strength, but "
+"Player version of the battle station. Only half as much shield strength, but "
 "more speed and maneuverability, so it is surprisingly agile - for a capital "
 "ship, of course. Piloting this colossus still feels very different compared "
 "to other ships. It also has two additional missile tubes."
