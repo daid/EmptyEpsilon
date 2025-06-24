@@ -107,6 +107,17 @@ It has been reported that some battleships started using larger variations of th
 
 Smaller variations of these missiles have become common in the galaxy, too. Fighter pilots praise their speed and maneuverability, because it gives them an edge against small and fast-moving targets. They only deal half the damage of their basic counterparts, but what good is a missile if it does not hit its target.]]))
 
+local item = weapons:addEntry(_('Beam weapons'))
+item:addKeyValue(_('Range'), 'Varies')
+item:addKeyValue(_('Damage'), 'Varies')
+item:setLongDescription(_([[Beam weapons emit an instantaneous, focused burst of energy or matter at a single target within a target arc. Many ships equip beam weapons for their precision and versatility.
+
+Shields are generally effective against energy-based beam weapons. To combat this, a beam's output can be modulated to various frequencies. This allows beam weapons to be tuned to a target's shield frequency to maximize their effectiveness.
+
+Each firing of a beam weapon begins a brief cycle period, during which the beam cannot fire again. Damage to the system increases this delay while also reducing its output. Beam firings also generate heat above and beyond the system's normal operating temperature. In heavy combat situations, a ship's engineers must dissipate this heat to prevent inflicting damage on the system.
+
+On some ships, heavy beam weapons are mounted on turrets that can rotate to cover a wide firing arc, at an expense of targeting speed.]]))
+
 local item = weapons:addEntry(_('Homing missile'))
 item:addKeyValue(_('Range'), '5.4u')
 item:addKeyValue(_('Damage'), '35')
