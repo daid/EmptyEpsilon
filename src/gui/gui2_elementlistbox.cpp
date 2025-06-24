@@ -4,7 +4,7 @@
 
 
 GuiElementListbox::GuiElementListbox(GuiContainer *owner, string id, int frame_margin, int element_height, func_t func)
-: GuiElement(owner, id), element_height(element_height), frame_margin(frame_margin)
+: GuiElement(owner, id), element_height(element_height), frame_margin(frame_margin), mouse_scroll_steps(25)
 {
     scroll = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {});
     scroll->setPosition(0, 0, sp::Alignment::TopRight)->setSize(element_height, GuiSizeMax);
@@ -36,7 +36,7 @@ void GuiElementListbox::onDraw(sp::RenderTarget& renderer)
     {
         scroll->show();
         // Value size and allows to have a bigger scroll button
-        scroll->setValueSize(rect.size.y/10);
+        scroll->setValueSize(getTotalHeight()/10);
         scroll->setRange(0, elements.size() * element_height - this->rect.size.y*0.9f);
     }
 
@@ -70,5 +70,15 @@ GuiElementListbox* GuiElementListbox::destroyAndClear()
         e->destroy();
     }
     elements.clear();
+    scroll->setValue(0.0f);
     return this;
+}
+
+bool GuiElementListbox::onMouseWheelScroll(glm::vec2 position, float value)
+{
+    if (!scroll->isVisible())
+        return true;
+    float range = scroll->getCorrectedMax() - scroll->getMin();
+    scroll->setValue((scroll->getValue() - value * range / mouse_scroll_steps) );
+    return true;
 }
