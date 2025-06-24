@@ -32,7 +32,7 @@ void GuiElementListbox::onDraw(sp::RenderTarget& renderer)
     }
 
     float scroll_offset = ((float)scroll->getValue() - (float)scroll->getMin()) / ((float)scroll->getCorrectedMax() - (float)scroll->getMin());
-    uint i = 0;
+    int i = 0;
     for (auto &e: children)
     {
         if(e == scroll)
