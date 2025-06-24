@@ -20,5 +20,5 @@ void main(void) {
 	vec2 coord = v_texcoords;
 	vec2 cen = vec2(0.5, 0.5) - coord;
 	vec2 mcen = amount*log(length(cen) * 0.5 + 0.75)*normalize(cen);
-	gl_FragColor = texture2D(u_texture, v_texcoords+mcen);
+	gl_FragColor = vec4(texture2D(u_texture, v_texcoords+mcen).rgb, 1.0);
 }
