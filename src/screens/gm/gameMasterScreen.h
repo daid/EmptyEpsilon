@@ -2,11 +2,9 @@
 #define GAME_MASTER_SCREEN_H
 
 #include "engine.h"
-#include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_overlay.h"
-#include "screenComponents/helpOverlay.h"
 #include "screenComponents/targetsContainer.h"
 #include "Updatable.h"
 
@@ -24,6 +22,9 @@ class GuiTextEntry;
 class GameMasterChatDialog;
 class GuiObjectCreationView;
 class GuiGlobalMessageEntryView;
+class GuiHelpOverlay;
+class GuiPanel;
+
 class GameMasterScreen : public GuiCanvas, public Updatable
 {
 private:
