@@ -132,10 +132,10 @@ void initSystemsAndComponents()
     engine->registerSystem<EnergySystem>();
     engine->registerSystem<DockingSystem>();
     engine->registerSystem<CommsSystem>();
+    engine->registerSystem<JumpSystem>(); // must be before impulse/warp
     engine->registerSystem<ImpulseSystem>();
     engine->registerSystem<ManeuveringSystem>();
     engine->registerSystem<WarpSystem>();
-    engine->registerSystem<JumpSystem>();
     engine->registerSystem<BeamWeaponSystem>();
     engine->registerSystem<MissileSystem>();
     engine->registerSystem<ShieldSystem>();
