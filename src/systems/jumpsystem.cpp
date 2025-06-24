@@ -96,10 +96,12 @@ void JumpSystem::abortJump(sp::ecs::Entity entity)
     auto jump = entity.getComponent<JumpDrive>();
     if (!jump) return;
     if (jump->delay <= 0.0f) return;
-    float abort_penalty = (jump->activation_delay - jump->delay) / jump->activation_delay;
+    float abort_penalty = 0.1f + (jump->activation_delay - jump->delay) / jump->activation_delay;
+
     // Discharge the jump charge by a fraction of the completed jump.
     // Aborting a jump quickly should consume less charge.
     jump->charge = std::max(0.0f, jump->charge - (jump->distance * abort_penalty));
+
     // Discourage frequently aborting jumps by flooding the system with heat
     // that would've been vented into space otherwise.
     // Aborting a jump quickly generates less system heat.
@@ -108,6 +110,9 @@ void JumpSystem::abortJump(sp::ecs::Entity entity)
         jump->addHeat(abort_penalty);
     else
         jump->health -= abort_penalty; // If not using coolant, directly damage the system.
+
     // Reset the fixed jump delay.
     jump->delay = 0.0f;
+    // Show jump effect based on abort penalty.
+    jump->just_jumped = abort_penalty;
 }
