@@ -314,11 +314,10 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                     break;
                 case ShipSystem::Type::JumpDrive:{
                     if (auto jump = my_spaceship.getComponent<JumpDrive>()) {
-                        if (jump->get_seconds_to_jump() == std::numeric_limits<int>::max()) {
+                        if (jump->get_seconds_to_jump() == std::numeric_limits<int>::max())
                             addSystemEffect(tr("Time to jump activation"), "∞ sec.");
-                        } else {
-                            addSystemEffect(tr("Time to jump activation"), string(jump->get_seconds_to_jump()) + " sec.");
-                        }
+                        else
+                            addSystemEffect(tr("Time to jump activation"), tr("jumpcontrol", "{delay} sec.").format({{"delay", string(jump->get_seconds_to_jump())}}));
                         addSystemEffect(tr("Jump drive recharge rate"), toNearbyIntString(jump->get_recharge_rate() * 100) + "%");
                     }
                     }break;

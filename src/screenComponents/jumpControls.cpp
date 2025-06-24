@@ -48,7 +48,8 @@ void GuiJumpControls::onDraw(sp::RenderTarget& target)
             if (jump->get_seconds_to_jump() == std::numeric_limits<int>::max())
                 label->setValue(tr("jumpcontrol", "∞ sec."));
             else
-                label->setValue(string(jump->get_seconds_to_jump()) + tr("jumpcontrol", " sec."));
+                label->setValue(tr("jumpcontrol", "{delay} sec.").format({{"delay", string(jump->get_seconds_to_jump())}}));
+
             slider->disable();
             button->disable();
             charge_bar->hide();
