@@ -26,6 +26,7 @@ class AutoConnectScreen : public GuiCanvas, public Updatable
 {
     P<ServerScanner> scanner;
     sp::io::network::Address connect_to_address;
+    int connect_to_port;
     std::vector<AutoConnectPosition> positions;
     bool control_main_screen;
     std::map<string, string> ship_filters;
