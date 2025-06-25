@@ -107,6 +107,8 @@ void GuiScrollFormattedText::onDraw(sp::RenderTarget& renderer)
             } else {
                 last_end = tag_start;
             }
+        } else {
+            last_end = tag_start;
         }
     }
     prepared.append(text.substr(last_end), text_size, current_color);
