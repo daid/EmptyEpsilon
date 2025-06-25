@@ -5,7 +5,7 @@
 --- In 3D space, a Nebula resembles a dense cloud of colorful gases.
 --- Example: nebula = Nebula():setPosition(1000,2000)
 --- @type creation
-function Nebula(radius)
+function Nebula()
     local radius = 5000.0
     local e = createEntity()
     e.components.radar_signature = {gravity=0, electrical=0.8, biological=-1.0}
