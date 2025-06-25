@@ -850,6 +850,11 @@ void luaCommandJump(sp::ecs::Entity ship, float distance) {
     JumpSystem::initializeJump(ship, distance);
 }
 
+void luaCommandAbortJump(sp::ecs::Entity ship) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandAbortJump(); return; }
+    JumpSystem::abortJump(ship);
+}
+
 void luaCommandSetTarget(sp::ecs::Entity ship, sp::ecs::Entity target) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetTarget(target); return; }
     ship.getOrAddComponent<Target>().entity = target;
@@ -1211,6 +1216,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandImpulse", &luaCommandImpulse);
     env.setGlobal("commandWarp", &luaCommandWarp);
     env.setGlobal("commandJump", &luaCommandJump);
+    env.setGlobal("commandAbortJump", &luaCommandAbortJump);
     env.setGlobal("commandSetTarget", &luaCommandSetTarget);
     env.setGlobal("commandLoadTube", &luaCommandLoadTube);
     env.setGlobal("commandUnloadTube", &luaCommandUnloadTube);

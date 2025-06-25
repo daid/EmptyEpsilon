@@ -363,6 +363,12 @@ function Entity:commandJump(target)
     commandJump(self, target)
     return self
 end
+--- Commands this PlayerSpaceship to abort a jump in progress.
+--- Example: player:commandAbortJump() -- aborts a jump if in progress
+function Entity:commandAbortJump()
+    commandAbortJump(self)
+    return self
+end
 --- Commands this PlayerSpaceship to set its weapons target to the given SpaceObject.
 --- Example: player:commandSetTarget(enemy)
 function Entity:commandSetTarget(target)

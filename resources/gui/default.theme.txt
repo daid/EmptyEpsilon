@@ -13,6 +13,10 @@
                 color: #FF0000
                 color.disabled: #A08080
             }
+            [button.jump_abort.back] {
+                color: #FF0000
+                color.disabled: #A08080
+            }
             [button.toggle.off.back] {
             }
             [button.toggle.on.back] {
@@ -25,6 +29,11 @@
             color.disabled: #FFFFFF4D
 
             [button.selfdestruct.front] {
+                color: #FF0000
+                color.active: #120000
+                color.disabled: #FF00004D
+            }
+            [button.jump_abort.front] {
                 color: #FF0000
                 color.active: #120000
                 color.disabled: #FF00004D
