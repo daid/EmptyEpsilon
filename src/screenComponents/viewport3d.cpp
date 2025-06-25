@@ -45,6 +45,9 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     starbox_shader->bind();
     starbox_uniforms[static_cast<size_t>(Uniforms::Projection)] = starbox_shader->getUniformLocation("projection");
     starbox_uniforms[static_cast<size_t>(Uniforms::View)] = starbox_shader->getUniformLocation("view");
+    starbox_uniforms[static_cast<size_t>(Uniforms::LocalBox)] = starbox_shader->getUniformLocation("local_starbox");
+    starbox_uniforms[static_cast<size_t>(Uniforms::GlobalBox)] = starbox_shader->getUniformLocation("global_starbox");
+    starbox_uniforms[static_cast<size_t>(Uniforms::BoxLerp)] = starbox_shader->getUniformLocation("starbox_lerp");
 
     starbox_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = starbox_shader->getAttributeLocation("position");
 
@@ -187,19 +190,44 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         string skybox_name = "skybox/default";
         if (gameGlobalInfo)
             skybox_name = "skybox/" + gameGlobalInfo->default_skybox;
+
+        string local_skybox_name = skybox_name;
+        float local_skybox_factor = 0.0f;
         for(auto [entity, zone, t] : sp::ecs::Query<Zone, sp::Transform>()) {
-            if (!zone.skybox.empty() && insidePolygon(zone.outline, t.getPosition() - glm::vec2(camera_position.x, camera_position.y))) {
-                skybox_name = "skybox/" + zone.skybox;
+            if (zone.skybox.empty()) continue;
+
+            auto pos = t.getPosition() - glm::vec2(camera_position.x, camera_position.y);
+            if (insidePolygon(zone.outline, pos)) {
+                local_skybox_name = "skybox/" + zone.skybox;
+                if (zone.skybox_fade_distance <= 0)
+                    local_skybox_factor = 1.0;
+                else
+                    local_skybox_factor = std::clamp(distanceToEdge(zone.outline, pos) / zone.skybox_fade_distance, 0.0f, 1.0f);
+                break;
             }
         }
+
         auto skybox_texture = skybox_textures[skybox_name].get();
         if (!skybox_texture) {
             skybox_textures[skybox_name] = std::make_unique<gl::CubemapTexture>(skybox_name);
             skybox_texture = skybox_textures[skybox_name].get();
         }
+        auto local_skybox_texture = skybox_textures[local_skybox_name].get();
+        if (!local_skybox_texture) {
+            skybox_textures[local_skybox_name] = std::make_unique<gl::CubemapTexture>(local_skybox_name);
+            local_skybox_texture = skybox_textures[local_skybox_name].get();
+        }
 
         // Setup shared state (uniforms)
+        glUniform1i(starbox_uniforms[static_cast<size_t>(Uniforms::GlobalBox)], 0);
+        glActiveTexture(GL_TEXTURE0);
         skybox_texture->bind();
+
+        glUniform1i(starbox_uniforms[static_cast<size_t>(Uniforms::LocalBox)], 1);
+        glActiveTexture(GL_TEXTURE1);
+        local_skybox_texture->bind();
+
+        glUniform1f(starbox_uniforms[static_cast<size_t>(Uniforms::BoxLerp)], local_skybox_factor);
         
         // Uniform
         // Upload matrices (only float 4x4 supported in es2)
@@ -222,6 +250,9 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
         }
 
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, GL_NONE);
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_CUBE_MAP, GL_NONE);
     }
     glDepthMask(GL_TRUE);
