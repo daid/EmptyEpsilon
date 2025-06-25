@@ -5,6 +5,12 @@
 
 void Zone::updateTriangles()
 {
+    if (outline.empty()) {
+        radius = 1;
+        triangles.clear();
+        return;
+    }
+
     label_offset = centerOfMass(outline);
     radius = 1;
     for(auto p : outline) {
