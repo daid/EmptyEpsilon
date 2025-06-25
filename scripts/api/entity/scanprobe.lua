@@ -8,6 +8,7 @@
 function ScanProbe()
     local e = createEntity()
     e.components = {
+        transform = {},
         lifetime = {lifetime=60*10},
         radar_trace = {
             icon="radar/probe.png",
