@@ -19,8 +19,8 @@ void GuiOpenCommsButton::onDraw(sp::RenderTarget& renderer)
     auto transmitter = my_spaceship.getComponent<CommsTransmitter>();
     if (transmitter && transmitter->state == CommsTransmitter::State::Inactive)
     {
-        auto receiver = targets->get().getComponent<CommsReceiver>();
-        if (receiver)
+        auto target = targets->get();
+        if (target.hasComponent<CommsReceiver>() || target.hasComponent<CommsTransmitter>())
             enable();
     }
     GuiButton::onDraw(renderer);
