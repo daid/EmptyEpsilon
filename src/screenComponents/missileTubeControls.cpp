@@ -102,8 +102,8 @@ void GuiMissileTubeControls::onUpdate()
         case MissileTubes::MountPoint::State::Loaded:
             rows[n].load_button->setText(tr("missile","Unload"));
             if ((health <= 0) || (power_level <=0)) {
-                rows[n].fire_button->disable();
-                rows[n].load_button->disable();
+                rows[n].fire_button->disable()->show();
+                rows[n].load_button->disable()->show();
             } else {
                 rows[n].fire_button->enable()->show();
                 rows[n].load_button->enable()->show();
