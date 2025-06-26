@@ -31,6 +31,7 @@ function ScanProbe()
             e.components[k] = table.deepcopy(v)
         end
     end
+    e.components.physics.type = "sensor"
     return e
 end
 
