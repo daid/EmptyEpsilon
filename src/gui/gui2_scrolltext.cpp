@@ -111,7 +111,7 @@ void GuiScrollFormattedText::onDraw(sp::RenderTarget& renderer)
             last_end = tag_start;
         }
     }
-    prepared.append(text.substr(last_end), text_size, current_color);
+    prepared.append(text.substr(last_end), text_size * size_mod, current_color);
     prepared.finish();
     auto text_draw_size = prepared.getUsedAreaSize();
 
