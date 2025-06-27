@@ -10,7 +10,7 @@ function Nebula()
     local e = createEntity()
     e.components.radar_signature = {gravity=0, electrical=0.8, biological=-1.0}
     e.components.transform = {rotation=random(0, 360)}
-    e.components.radar_trace = {icon="radar/nebula.png" .. irandom(1, 4) .. ".png", min_size=0, max_size = 9999999, radius=radius*1.15, blend_add=true}
+    e.components.radar_trace = {icon="radar/nebula.png" .. irandom(1, 7) .. ".png", min_size=0, max_size = 9999999, radius=radius*1.15, blend_add=true}
     e.components.radar_block = {range=radius}
     e.components.never_radar_blocked = {}
     
