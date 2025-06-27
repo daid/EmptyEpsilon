@@ -1,5 +1,5 @@
 -- Name: Pathfinding test
--- This tries to show all many example pathfinding situations
+-- This shows examples of pathfinding situations
 -- Type: Development
 
 --- Scenario
