@@ -137,7 +137,7 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
 }
 
 bool DebugRenderer::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) {
-    if (!keys.debug_modifier.get())
+    if (!show_timing_graph || !keys.debug_modifier.get())
         return false;
 
     auto idx = std::floor((position.y - 96.0f) / 16.0f);
