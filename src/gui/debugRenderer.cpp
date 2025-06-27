@@ -88,13 +88,23 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
             points.emplace_back(float(n), window_size.y);
 
         int index = 0;
+        bool skip = false;
         for (const auto& key : key_order) {
+            // if this line would be less than 1px above the previous line on average, skip drawing the rest of the lines
+            if (total[key] * 10000 < max_size)
+                skip = true;
+
             for (unsigned int n=0; n<max_size; n++)
                 points[n].y -= 10000 * timing_graph_points[key][n];
 
-            renderer.drawLine(points, line_colors[index % 6]);
-            index += 1;
+            if (!skip) {
+                renderer.drawLine(points, line_colors[index % 6]);
+                index += 1;
+            }
         }
+        // if we skipped any lines, draw a white line at the top for the total
+        if (skip)
+            renderer.drawLine(points, {255,255,255,255});
 
         //60FPS line
         renderer.drawLine({0, window_size.y - 166}, {window_size.x, window_size.y - 166}, glm::u8vec4{255,255,255,128});
