@@ -83,18 +83,16 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
         }
         std::sort(key_order.begin(), key_order.end(), [&total](const auto& a, const auto& b) { return total[a] > total[b]; });
 
-        std::map<string, std::vector<glm::vec2>> points;
-        for(unsigned int n=0; n<max_size; n++) {
-            float sum = 0;
-            for(const auto& key : key_order) {
-                sum += timing_graph_points[key][n];
-                points[key].emplace_back(float(n), window_size.y - sum * 10000);
-            }
-        }
+        std::vector<glm::vec2> points;
+        for (unsigned int n=0; n<max_size; n++)
+            points.emplace_back(float(n), window_size.y);
 
         int index = 0;
-        for(const auto& key : key_order) {
-            renderer.drawLine(points[key], line_colors[index % 6]);
+        for (const auto& key : key_order) {
+            for (unsigned int n=0; n<max_size; n++)
+                points[n].y -= 10000 * timing_graph_points[key][n];
+
+            renderer.drawLine(points, line_colors[index % 6]);
             index += 1;
         }
 
