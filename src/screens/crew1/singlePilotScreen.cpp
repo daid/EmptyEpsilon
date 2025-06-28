@@ -135,7 +135,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 
     // Missile lock button near top right of left panel.
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
-    lock_aim->setPosition(250, 70, sp::Alignment::TopCenter)->setSize(130, 50);
+    lock_aim->setPosition(250, 70, sp::Alignment::TopCenter)->setSize(145, 50);
 
     (new GuiCustomShipFunctions(this, CrewPosition::singlePilot, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
