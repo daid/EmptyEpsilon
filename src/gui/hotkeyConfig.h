@@ -188,6 +188,7 @@ public:
     sp::io::Keybinding spectator_show_callsigns;
 
     //Debug
+    sp::io::Keybinding debug_modifier;
     sp::io::Keybinding debug_show_fps;
     sp::io::Keybinding debug_show_timing;
 };
