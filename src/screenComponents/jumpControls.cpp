@@ -48,12 +48,14 @@ void GuiJumpControls::onDraw(sp::RenderTarget& target)
             slider->disable();
             button->setText(tr("jumpcontrol", "Jump"))->setStyle("button")->disable();
             charge_bar->hide();
-        } else if (jump->delay > 0.0f)
+        }else if (jump->delay > 0.0f)
         {
             label->setKey(tr("jumpcontrol", "Jump in"));
-            if (jump->get_seconds_to_jump() == std::numeric_limits<int>::max())
-                label->setValue(tr("jumpcontrol", "∞ sec."));
-            else
+            if (jump->get_seconds_to_jump() == std::numeric_limits<int>::max()) {
+                // TRANSLATORS: Treat "Jump delayed" in jump control as one phrase.
+                label->setKey(tr("jumpcontrol", "Jump"));
+                label->setValue(tr("jumpcontrol", "delayed"));
+            }else
                 label->setValue(tr("jumpcontrol", "{delay} sec.").format({{"delay", string(jump->get_seconds_to_jump())}}));
 
             slider->disable();
