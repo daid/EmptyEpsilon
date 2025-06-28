@@ -218,7 +218,12 @@ function setGlobals()
 end
 function mainGMButtons()
 	clearGMFunctions()
-	addGMFunction(string.format(_("buttonGM","Diagnostic %s"),diagnostic),function()
+    if diagnostic then
+        diagnostic_string=_("diagnosticState","true")
+    else
+        diagnostic_string=_("diagnosticState","false")
+    end
+    addGMFunction(string.format(_("buttonGM","Diagnostic %s"),diagnostic_string),function()
 		if diagnostic then
 			diagnostic = false
 			mainGMButtons()
