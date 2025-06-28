@@ -5,6 +5,7 @@
 #include "ecs/entity.h"
 
 class GuiListbox;
+class GuiButton;
 
 class DatabaseViewComponent : public GuiElement
 {
@@ -20,6 +21,8 @@ private:
     void display();
 
     sp::ecs::Entity selected_entry;
+    string back_entry;
+    GuiButton* back_button = nullptr;
     GuiListbox* item_list = nullptr;
     GuiElement* keyvalue_container = nullptr;
     GuiElement* details_container = nullptr;
