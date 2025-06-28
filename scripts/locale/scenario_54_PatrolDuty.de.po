@@ -729,7 +729,7 @@ msgstr ""
 #: scripts/scenario_54_PatrolDuty.lua:1178
 msgctxt "scienceDescription-station"
 msgid "Advanced Material components"
-msgstr "Fortschrittliche Materialkomponenten"
+msgstr "Fortschrittliche Material-komponenten"
 
 #: scripts/scenario_54_PatrolDuty.lua:1179
 msgctxt "stationGeneralInfo-comms"
@@ -1055,7 +1055,7 @@ msgstr ""
 #: scripts/scenario_54_PatrolDuty.lua:1800
 msgctxt "scienceDescription-station"
 msgid "Advanced material components"
-msgstr "Fortschrittliche Materialkomponenten"
+msgstr "Fortschrittliche Material-komponenten"
 
 #: scripts/scenario_54_PatrolDuty.lua:1801
 msgctxt "stationGeneralInfo-comms"
