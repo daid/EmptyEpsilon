@@ -630,3 +630,24 @@ model:setScale(2):setRadius(100)
 model:setMesh("mesh/various/debris-blob.obj")
 model:setTexture("mesh/various/debris-blob.jpg")
 model:setSpecular("mesh/various/debris-blob-specular.jpg")
+
+-------- Planet showcase
+
+model = ModelData()
+model:setName("planet_showcase")
+model:setMesh("mesh/sphere.obj")
+model:setTexture("planets/planet-3.png")
+model:setRenderOffset(0, 0, 0)
+model:setScale(100)
+model:setRadius(100)
+
+-------- Asteroid showcase
+
+model = ModelData()
+model:setName("Astroid")
+model:setMesh("Astroid_1.model")
+model:setTexture("Astroid_1_d.png")
+model:setSpecular("Astroid_1_s.png")
+model:setRenderOffset(0, 0, 0)
+model:setScale(500)
+model:setRadius(100)
