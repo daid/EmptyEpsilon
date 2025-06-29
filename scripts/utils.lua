@@ -347,78 +347,64 @@ end
 --	Second parameter is the pre-ECS value of .typeName (eg "CpuShip")
 --	Function returns true or false depending on whether the first parameter is the second parameter type or not
 --	The test is made according to the environment the scenario is running in
---	The 3rd parameter is optional, rarely used
 --	Sets global variable ECS
-function isObjectType(obj,typ,qualifier)
-	ECS = false
-	if createEntity then
-		ECS = true
+function isObjectType(obj,typ)
+	if not createEntity then
+		-- not ecs, use the pre-ECS typeName field
+		ECS = false
+		return obj.typeName == typ
 	end
-	if obj ~= nil and obj:isValid() then
-		if typ ~= nil then
-			if ECS then
-				if typ == "SpaceStation" then
-					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
-				elseif typ == "PlayerSpaceship" then
-					return obj.components.player_control
-				elseif typ == "ScanProbe" then
-					return obj.components.allow_radar_link
-				elseif typ == "CpuShip" then
-					return obj.ai_controller
-				elseif typ == "Asteroid" then
-					return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 7) == "Astroid"
-				elseif typ == "Nebula" then
-					return obj.components.nebula_renderer
-				elseif typ == "Planet" then
-					return obj.components.planet_render
-				elseif typ == "SupplyDrop" then
-					return obj.components.pickup and obj.components.radar_trace.icon == "radar/blip.png" and obj.components.radar_trace.color_by_faction
-				elseif typ == "BlackHole" then
-					return obj.components.gravity and obj.components.billboard_render.texture == "blackHole3d.png"
-				elseif typ == "WarpJammer" then
-					return obj.components.warp_jammer
-				elseif typ == "Mine" then
-					return obj.components.delayed_explode_on_touch and obj.components.constant_particle_emitter
-				elseif typ == "EMPMissile" then
-					return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explode_on_touch.damage_type == "emp"
-				elseif typ == "Nuke" then
-					return obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
-				elseif typ == "Zone" then
-					return obj.components.zone
-				elseif typ == "WormHole" then
-					return obj.components.gravity and obj.components.billboard_render.texture == "wormHole3d.png"
-				else
-					if qualifier == "MovingMissile" then
-						if typ == "HomingMissile" or typ == "HVLI" or typ == "Nuke" or typ == "EMPMissile" then
-							return obj.components.radar_trace.icon == "radar/missile.png"
-						else
-							return false
-						end
-					elseif qualifier == "SplashMissile" then
-						if typ == "Nuke" or typ == "EMPMissile" then
-							if obj.components.radar_trace.icon == "radar/missile.png" then
-								if typ == "Nuke" then
-									return obj.components.explosion_sfx == "sfx/nuke_explosion.wav"
-								else	--EMP
-									return obj.components.explode_on_touch.damage_type == "emp"
-								end
-							else
-								return false
-							end
-						else
-							return false
-						end
-					else
-						return false
-					end
-				end
-			else	--not ECS
-				return obj.typeName == typ
-			end
-		else	--input parameter typ is nil
-			return false
-		end
-	else	--input parameter obj is nil or not valid
+	ECS = true
+	if obj == nil or not obj:isValid() or typ == nil then
+		-- object doesn't exist or type wasn't specified
+		return false
+	end
+
+	if typ == "SpaceStation" then
+		return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
+	elseif typ == "PlayerSpaceship" then
+		return obj.components.player_control
+	elseif typ == "ScanProbe" then
+		return obj.components.allow_radar_link
+	elseif typ == "CpuShip" then
+		return obj.components.ai_controller
+	elseif typ == "Asteroid" then
+		return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 1, 7) == "Astroid" and obj.components.physics
+	elseif typ == "VisualAsteroid" then
+		return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 1, 7) == "Astroid" and not obj.components.physics
+	elseif typ == "Artifact" then
+		return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 1, 13) == "mesh/Artifact"
+	elseif typ == "Nebula" then
+		return obj.components.nebula_renderer
+	elseif typ == "Planet" then
+		return obj.components.planet_render
+	elseif typ == "SupplyDrop" then
+		return obj.components.pickup and obj.components.radar_trace and obj.components.radar_trace.icon == "radar/blip.png" and obj.components.radar_trace.color_by_faction
+	elseif typ == "BlackHole" then
+		return obj.components.gravity and obj.components.billboard_render and obj.components.billboard_render.texture == "blackHole3d.png"
+	elseif typ == "WarpJammer" then
+		return obj.components.warp_jammer
+	elseif typ == "Mine" then
+		return obj.components.delayed_explode_on_touch and obj.components.constant_particle_emitter
+	elseif typ == "EMPMissile" then
+		return obj.components.radar_trace and obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explode_on_touch and obj.components.explode_on_touch.damage_type == "emp"
+	elseif typ == "Nuke" then
+		return obj.components.radar_trace and obj.components.radar_trace.icon == "radar/missile.png" and obj.components.explode_on_touch and obj.components.explode_on_touch.explosion_sfx == "sfx/nuke_explosion.wav"
+	elseif typ == "Zone" then
+		return obj.components.zone
+	elseif typ == "WormHole" then
+		return obj.components.gravity and obj.components.billboard_render and obj.components.billboard_render.texture == "wormHole3d.png"
+	elseif typ == "BeamEffect" then
+		return obj.components.beam_effect
+	elseif typ == "HomingMissile" then
+		return obj.components.explode_on_touch and obj.components.radar_trace and obj.components.radar_trace.color[3] == 0
+	elseif typ == "HVLI" then
+		return obj.components.explode_on_touch and obj.components.radar_trace and obj.components.radar_trace.color[1] == 200
+	elseif typ == "ScienceDatabase" then
+		return obj.components.science_database
+	elseif typ == "FactionInfo" then
+		return obj.components.faction_info
+	else
 		return false
 	end
 end
