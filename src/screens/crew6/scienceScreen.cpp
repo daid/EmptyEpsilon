@@ -283,9 +283,9 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     }
     else
     {
-        info_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
-        sidebar_selector->setPosition(-280, 120, sp::Alignment::TopRight);
-        custom_function_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
+        info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
+        sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight);
+        custom_function_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
         custom_function_sidebar->show();
         info_sidebar->show();
     }
