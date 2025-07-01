@@ -886,6 +886,8 @@ end
 --			combat maneuver, hacking, scanning, self destruct, probe launch
 --		include_goods_for_sale_in_status - set true if you want the goods that a station
 --			sells to appear in the status report
+--		include_goods_wanted_in_status - set to true to list the goods the station will
+--			buy in the status report
 --		upgrade_button_in_status - set true if you want the status report to include a
 --			list of systems that can be upgraded, eg beams, missiles, impulse, ftl,
 --			shields. Stock player ships don't qualify for upgrades.
@@ -975,7 +977,7 @@ function stationStatusReport()
 			local goods_available = false
 			if comms_target.comms_data.goods ~= nil then
 				for good, good_data in pairs(comms_target.comms_data.goods) do
-					if good_data["quantity"] > 0 then
+					if good_data["quantity"] ~= nil and good_data["quantity"] > 0 then
 						goods_available = true
 						break
 					end
@@ -986,6 +988,25 @@ function stationStatusReport()
 				for good, good_data in pairs(comms_target.comms_data.goods) do
 					if good_data["quantity"] > 0 then
 						msg = string.format(_("situationReport-comms","%s %s@%s"),msg,good_desc[good],good_data["cost"])
+					end
+				end
+			end
+		end
+		if include_goods_wanted_in_status then
+			local goods_desired = false
+			if comms_target.comms_data.buy ~= nil then
+				for good, price in pairs(comms_target.comms_data.buy) do
+					if price ~= nil and price > 0 then
+						goods_desired = true
+						break
+					end
+				end
+			end
+			if goods_desired then
+				msg = string.format(_("situationReport-comms","%s\nWill buy these goods:"),msg)
+				for good, price in pairs(comms_target.comms_data.buy) do
+					if price ~= nil and price > 0 then
+						msg = string.format(_("situationReport-comms","%s %s@%s"),msg,good_desc[good],price)
 					end
 				end
 			end
@@ -4166,9 +4187,15 @@ function stellarCartography()
 											station_details = string.format(_("cartographyOffice-comms","%s %s"),station_details,obj.comms_data.orbit)
 										end
 										if obj.comms_data.goods ~= nil then
-											station_details = string.format(_("cartographyOffice-comms","%s\nGood, quantity, cost"),station_details)
+											station_details = string.format(_("cartographyOffice-comms","%s\nStation sells: (good, quantity, cost)"),station_details)
 											for good, good_data in pairs(obj.comms_data.goods) do
 												station_details = string.format(_("cartographyOffice-comms","%s\n   %s, %i, %i"),station_details,good_desc[good],good_data["quantity"],good_data["cost"])
+											end
+										end
+										if obj.comms_data.buy ~= nil then
+											station_details = string.format(_("cartographyOffice-comms","%s\nStation buys: (good, price)"),station_details)
+											for good,price in pairs(obj.comms_data.buy) do
+												station_details = string.format(_("cartographyOffice-comms","%s\n   %s, %i"),station_details,good_desc[good],math.floor(price))
 											end
 										end
 										if obj.comms_data.general_information ~= nil then
@@ -4233,9 +4260,15 @@ function stellarCartography()
 									station_details = string.format(_("cartographyOffice-comms","%s %s"),station_details,obj.comms_data.orbit)
 								end
 								if obj.comms_data.goods ~= nil then
-									station_details = string.format(_("cartographyOffice-comms","%s\nGood, quantity, cost"),station_details)
+									station_details = string.format(_("cartographyOffice-comms","%s\nStation sells: (good, quantity, cost)"),station_details)
 									for good, good_data in pairs(obj.comms_data.goods) do
 										station_details = string.format(_("cartographyOffice-comms","%s\n   %s, %i, %i"),station_details,good_desc[good],good_data["quantity"],good_data["cost"])
+									end
+								end
+								if obj.comms_data.buy ~= nil then
+									station_details = string.format(_("cartographyOffice-comms","%s\nStation buys: (good, price)"),station_details)
+									for good,price in pairs(obj.comms_data.buy) do
+										station_details = string.format(_("cartographyOffice-comms","%s\n   %s, %i"),station_details,good_desc[good],math.floor(price))
 									end
 								end
 								if obj.comms_data.general_information ~= nil then
@@ -4349,9 +4382,15 @@ function masterCartographer()
 									station_details = string.format(_("cartographyOffice-comms","%s %s"),station_details,obj.comms_data.orbit)
 								end
 								if obj.comms_data.goods ~= nil then
-									station_details = string.format(_("cartographyOffice-comms","%s\nGood, quantity, cost"),station_details)
+									station_details = string.format(_("cartographyOffice-comms","%s\nStation sells: (good, quantity, cost)"),station_details)
 									for good, good_data in pairs(obj.comms_data.goods) do
 										station_details = string.format(_("cartographyOffice-comms","%s\n   %s, %i, %i"),station_details,good_desc[good],good_data["quantity"],good_data["cost"])
+									end
+								end
+								if obj.comms_data.buy ~= nil then
+									station_details = string.format(_("cartographyOffice-comms","%s\nStation buys: (good, price)"),station_details)
+									for good,price in pairs(obj.comms_data.buy) do
+										station_details = string.format(_("cartographyOffice-comms","%s\n   %s, %i"),station_details,good_desc[good],math.floor(price))
 									end
 								end
 								if obj.comms_data.general_information ~= nil then
@@ -4428,9 +4467,15 @@ function masterCartographer()
 						station_details = string.format(_("cartographyOffice-comms","%s %s"),station_details,obj.comms_data.orbit)
 					end
 					if obj.comms_data.goods ~= nil then
-						station_details = string.format(_("cartographyOffice-comms","%s\nGood, quantity, cost"),station_details)
+						station_details = string.format(_("cartographyOffice-comms","%s\nStation sells: (good, quantity, cost)"),station_details)
 						for good, good_data in pairs(obj.comms_data.goods) do
 							station_details = string.format(_("cartographyOffice-comms","%s\n   %s, %i, %i"),station_details,good_desc[good],good_data["quantity"],good_data["cost"])
+						end
+					end
+					if obj.comms_data.buy ~= nil then
+						station_details = string.format(_("cartographyOffice-comms","%s\nStation buys: (good, price)"),station_details)
+						for good,price in pairs(obj.comms_data.buy) do
+							station_details = string.format(_("cartographyOffice-comms","%s\n   %s, %i"),station_details,good_desc[good],math.floor(price))
 						end
 					end
 					if obj.comms_data.general_information ~= nil then
@@ -8131,6 +8176,7 @@ function sellGoodsToStation()
 		_("trade-comms","You may choose from these to sell."),
 		_("trade-comms","What do you want to sell?"),
 	}
+	setCommsMessage(tableSelectRandom(sell_goods_prompt))
 	local good_match_count = 0
 	if comms_target.comms_data.buy ~= nil then
 		for good, price in pairs(comms_target.comms_data.buy) do
@@ -8171,7 +8217,7 @@ function sellGoodsToStation()
 						string.format(_("trade-comms","You sold one to %s"),comms_target:getCallSign()),
 						string.format(_("trade-comms","%s bought one from you"),comms_target:getCallSign()),
 					}
-					setCommsMessage(string.format(_("trade-comms","%s, %s\n%s"),tableRemoveRandom(good_type_label),tableRemoveRandom(reputation_price_of_good),tableRemoveRandom(sale_results)))
+					setCommsMessage(string.format(_("trade-comms","%s, %s\n%s"),tableSelectRandom(good_type_label),tableSelectRandom(reputation_price_of_good),tableSelectRandom(sale_results)))
 					comms_source.goods[good] = comms_source.goods[good] - 1
 					comms_source:addReputationPoints(price)
 					comms_source.cargo = comms_source.cargo + 1
@@ -8859,6 +8905,21 @@ function friendlyShipComms()
 										}
 										setCommsMessage(tableSelectRandom(trade_confirmation))
 										comms_target.comms_data.friendlyness = math.min(100,comms_target.comms_data.friendlyness + random(2,5))
+										if update_ship_manifest then
+											local manifest = _("scienceDescription","Manifest:")
+											for good,details in pairs(comms_target.comms_data.goods) do
+												if details.quantity ~= nil and details.quantity > 0 then
+													manifest = string.format("%s %s",manifest,good_desc[good])
+												end
+											end
+											if manifest == _("scienceDescription","Manifest:") then
+												manifest = _("scienceDescription","Manifest: empty")
+											end
+											comms_target:setDescriptionForScanState("notscanned","")
+											comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
+											comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
+											comms_target:setDescriptionForScanState("fullscan",manifest)	
+										end
 										addCommsReply(_("Back"), commsShip)
 									end)
 								end
@@ -8885,6 +8946,21 @@ function friendlyShipComms()
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
+										if update_ship_manifest then
+											local manifest = _("scienceDescription","Manifest:")
+											for good,details in pairs(comms_target.comms_data.goods) do
+												if details.quantity ~= nil and details.quantity > 0 then
+													manifest = string.format("%s %s",manifest,good_desc[good])
+												end
+											end
+											if manifest == _("scienceDescription","Manifest:") then
+												manifest = _("scienceDescription","Manifest: empty")
+											end
+											comms_target:setDescriptionForScanState("notscanned","")
+											comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
+											comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
+											comms_target:setDescriptionForScanState("fullscan",manifest)	
+										end
 										local purchase_results = {
 											string.format(_("trade-comms","One %s bought"),good_desc[good]),
 											string.format(_("trade-comms","You bought one %s"),good_desc[good]),
@@ -8930,6 +9006,21 @@ function friendlyShipComms()
 											end
 											comms_source.goods[good] = comms_source.goods[good] + 1
 											comms_source.cargo = comms_source.cargo - 1
+											if update_ship_manifest then
+												local manifest = _("scienceDescription","Manifest:")
+												for good,details in pairs(comms_target.comms_data.goods) do
+													if details.quantity ~= nil and details.quantity > 0 then
+														manifest = string.format("%s %s",manifest,good_desc[good])
+													end
+												end
+												if manifest == _("scienceDescription","Manifest:") then
+													manifest = _("scienceDescription","Manifest: empty")
+												end
+												comms_target:setDescriptionForScanState("notscanned","")
+												comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("fullscan",manifest)	
+											end
 											local purchase_results = {
 												string.format(_("trade-comms","One %s bought"),good_desc[good]),
 												string.format(_("trade-comms","You bought one %s"),good_desc[good]),
@@ -8972,6 +9063,21 @@ function friendlyShipComms()
 											end
 											comms_source.goods[good] = comms_source.goods[good] + 1
 											comms_source.cargo = comms_source.cargo - 1
+											if update_ship_manifest then
+												local manifest = _("scienceDescription","Manifest:")
+												for good,details in pairs(comms_target.comms_data.goods) do
+													if details.quantity ~= nil and details.quantity > 0 then
+														manifest = string.format("%s %s",manifest,good_desc[good])
+													end
+												end
+												if manifest == _("scienceDescription","Manifest:") then
+													manifest = _("scienceDescription","Manifest: empty")
+												end
+												comms_target:setDescriptionForScanState("notscanned","")
+												comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("fullscan",manifest)	
+											end
 											local purchase_results = {
 												string.format(_("trade-comms","One %s bought"),good_desc[good]),
 												string.format(_("trade-comms","You bought one %s"),good_desc[good]),
@@ -9018,6 +9124,21 @@ function friendlyShipComms()
 											end
 											comms_source.goods[good] = comms_source.goods[good] + 1
 											comms_source.cargo = comms_source.cargo - 1
+											if update_ship_manifest then
+												local manifest = _("scienceDescription","Manifest:")
+												for good,details in pairs(comms_target.comms_data.goods) do
+													if details.quantity ~= nil and details.quantity > 0 then
+														manifest = string.format("%s %s",manifest,good_desc[good])
+													end
+												end
+												if manifest == _("scienceDescription","Manifest:") then
+													manifest = _("scienceDescription","Manifest: empty")
+												end
+												comms_target:setDescriptionForScanState("notscanned","")
+												comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("fullscan",manifest)	
+											end
 											local purchase_results = {
 												string.format(_("trade-comms","One %s bought"),good_desc[good]),
 												string.format(_("trade-comms","You bought one %s"),good_desc[good]),
@@ -9575,6 +9696,21 @@ function neutralComms()
 											end
 											comms_source.goods[good] = comms_source.goods[good] + 1
 											comms_source.cargo = comms_source.cargo - 1
+											if update_ship_manifest then
+												local manifest = _("scienceDescription","Manifest:")
+												for good,details in pairs(comms_target.comms_data.goods) do
+													if details.quantity ~= nil and details.quantity > 0 then
+														manifest = string.format("%s %s",manifest,good_desc[good])
+													end
+												end
+												if manifest == _("scienceDescription","Manifest:") then
+													manifest = _("scienceDescription","Manifest: empty")
+												end
+												comms_target:setDescriptionForScanState("notscanned","")
+												comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("fullscan",manifest)	
+											end
 											local purchase_results = {
 												string.format(_("trade-comms","One %s bought"),good_desc[good]),
 												string.format(_("trade-comms","You bought one %s"),good_desc[good]),
@@ -9619,6 +9755,21 @@ function neutralComms()
 											end
 											comms_source.goods[good] = comms_source.goods[good] + 1
 											comms_source.cargo = comms_source.cargo - 1
+											if update_ship_manifest then
+												local manifest = _("scienceDescription","Manifest:")
+												for good,details in pairs(comms_target.comms_data.goods) do
+													if details.quantity ~= nil and details.quantity > 0 then
+														manifest = string.format("%s %s",manifest,good_desc[good])
+													end
+												end
+												if manifest == _("scienceDescription","Manifest:") then
+													manifest = _("scienceDescription","Manifest: empty")
+												end
+												comms_target:setDescriptionForScanState("notscanned","")
+												comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("fullscan",manifest)	
+											end
 											local purchase_results = {
 												string.format(_("trade-comms","One %s bought"),good_desc[good]),
 												string.format(_("trade-comms","You bought one %s"),good_desc[good]),
@@ -9665,6 +9816,21 @@ function neutralComms()
 											end
 											comms_source.goods[good] = comms_source.goods[good] + 1
 											comms_source.cargo = comms_source.cargo - 1
+											if update_ship_manifest then
+												local manifest = _("scienceDescription","Manifest:")
+												for good,details in pairs(comms_target.comms_data.goods) do
+													if details.quantity ~= nil and details.quantity > 0 then
+														manifest = string.format("%s %s",manifest,good_desc[good])
+													end
+												end
+												if manifest == _("scienceDescription","Manifest:") then
+													manifest = _("scienceDescription","Manifest: empty")
+												end
+												comms_target:setDescriptionForScanState("notscanned","")
+												comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("fullscan",manifest)	
+											end
 											local purchase_results = {
 												string.format(_("trade-comms","One %s bought"),good_desc[good]),
 												string.format(_("trade-comms","You bought one %s"),good_desc[good]),
@@ -9709,6 +9875,21 @@ function neutralComms()
 											end
 											comms_source.goods[good] = comms_source.goods[good] + 1
 											comms_source.cargo = comms_source.cargo - 1
+											if update_ship_manifest then
+												local manifest = _("scienceDescription","Manifest:")
+												for good,details in pairs(comms_target.comms_data.goods) do
+													if details.quantity ~= nil and details.quantity > 0 then
+														manifest = string.format("%s %s",manifest,good_desc[good])
+													end
+												end
+												if manifest == _("scienceDescription","Manifest:") then
+													manifest = _("scienceDescription","Manifest: empty")
+												end
+												comms_target:setDescriptionForScanState("notscanned","")
+												comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("fullscan",manifest)	
+											end
 											local purchase_results = {
 												string.format(_("trade-comms","One %s bought"),good_desc[good]),
 												string.format(_("trade-comms","You bought one %s"),good_desc[good]),
@@ -9755,6 +9936,21 @@ function neutralComms()
 											end
 											comms_source.goods[good] = comms_source.goods[good] + 1
 											comms_source.cargo = comms_source.cargo - 1
+											if update_ship_manifest then
+												local manifest = _("scienceDescription","Manifest:")
+												for good,details in pairs(comms_target.comms_data.goods) do
+													if details.quantity ~= nil and details.quantity > 0 then
+														manifest = string.format("%s %s",manifest,good_desc[good])
+													end
+												end
+												if manifest == _("scienceDescription","Manifest:") then
+													manifest = _("scienceDescription","Manifest: empty")
+												end
+												comms_target:setDescriptionForScanState("notscanned","")
+												comms_target:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
+												comms_target:setDescriptionForScanState("fullscan",manifest)	
+											end
 											local purchase_results = {
 												string.format(_("trade-comms","One %s bought"),good_desc[good]),
 												string.format(_("trade-comms","You bought one %s"),good_desc[good]),
