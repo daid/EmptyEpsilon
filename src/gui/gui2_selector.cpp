@@ -26,7 +26,7 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
     });
     right->setPosition(0, 0, sp::Alignment::TopRight)->setSize(GuiSizeMatchHeight, GuiSizeMax);
 
-    popup = new GuiPanel(getTopLevelContainer(), "");
+    popup = new GuiPanel(getTopLevelContainer(), id + "_POPUP");
     popup->hide();
 }
 
