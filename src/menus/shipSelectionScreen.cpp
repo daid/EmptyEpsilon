@@ -21,6 +21,7 @@
 #include "screens/spectatorScreen.h"
 #include "screens/gm/gameMasterScreen.h"
 #include "menus/luaConsole.h"
+#include "menus/optionsMenu.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
@@ -216,6 +217,11 @@ ShipSelectionScreen::ShipSelectionScreen()
         new CinematicViewScreen(getRenderLayer());
     });
     cinematic_button->setSize(GuiElement::GuiSizeMax, 50);
+
+    (new GuiButton(right_content, "OPEN_OPTIONS", tr("mainMenu", "Options"), [this]() {
+        new OptionsMenu(OR_ShipSelection);
+        this->destroy();
+    }))->setSize(GuiElement::GuiSizeMax, 50);
 
     if (game_server)
     {
@@ -576,7 +582,6 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
 
     station_info = new GuiScrollText(info_panel, "STATION_INFO", station_info_text);
     station_info->setPosition(0, 10, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(15, 0, 15, 10);
-
 }
 
 void CrewPositionSelection::onUpdate()

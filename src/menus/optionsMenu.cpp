@@ -19,7 +19,7 @@
 #include "gui/gui2_keyvaluedisplay.h"
 
 
-OptionsMenu::OptionsMenu()
+OptionsMenu::OptionsMenu(EOptionsReturnTo return_to)
 {
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
@@ -189,14 +189,23 @@ OptionsMenu::OptionsMenu()
     
     // Bottom GUI.
     // Back button.
-    (new GuiButton(this, "BACK", tr("button", "Back"), [this]()
+    (new GuiButton(this, "BACK", tr("button", "Back"), [this, return_to]()
     {
         //Apply potentially modified font now, in order not to have some half rendered panel with one font and another
         sp::RenderTarget::setDefaultFont(main_font);
         // Close this menu, stop the music, and return to the main menu.
         destroy();
         soundManager->stopMusic();
-        returnToMainMenu(getRenderLayer());
+        if (return_to == OR_Main)
+            returnToMainMenu(getRenderLayer());
+        else if (return_to == OR_ShipSelection)
+            returnToShipSelection(getRenderLayer());
+        else
+        {
+            LOG(WARNING) << "Unknown options back button return_to state";
+            returnToMainMenu(getRenderLayer());
+        }
+
     }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
     // Save options button.
     (new GuiButton(this, "SAVE_OPTIONS", tr("options", "Save"), []()
