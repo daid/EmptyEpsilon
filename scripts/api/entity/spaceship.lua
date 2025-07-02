@@ -349,7 +349,6 @@ end
 --- Example: ship:setSystemPower("impulse", 0.5) -- sets the ship's impulse drive to half power
 function Entity:setSystemPower(system_name, amount)
     __setSystemPropertyByName(self, system_name, "power_level", amount)
-    __setSystemPropertyByName(self, system_name, "power_request", amount)
     return self
 end
 --- Returns the given system's rate of consuming power, in points per second?, in this SpaceShip.
@@ -389,7 +388,6 @@ end
 --- Example: ship:setSystemPowerFactor("impulse", 4)
 function Entity:setSystemCoolant(system_name, amount)
     __setSystemPropertyByName(self, system_name, "coolant_level", amount)
-    __setSystemPropertyByName(self, system_name, "coolant_request", amount)
     return self
 end
 --- Returns the rate at which the given system in this SpaceShip takes coolant, in points per second?
