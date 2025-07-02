@@ -10,7 +10,7 @@ function WarpJammer()
         hull = {max=50, current=50},
         warp_jammer = {range=7000},
         radar_trace = {
-            icon="radar/blip.png",
+            icon="radar/combatsat.png",
             radius=120.0,
             rotate=false,
             color_by_faction=true,

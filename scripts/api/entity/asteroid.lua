@@ -23,11 +23,11 @@ function Asteroid()
         },
         physics = {type="Sensor", size=size},
         radar_trace = {
-            icon="radar/blip.png",
+            icon="radar/triangle.png",
             radius=size,
             min_size = 4.0,
             color={255, 200, 100, 255},
-            rotate=false,
+            rotate=true,
         },
         spin={rate=random(0.1, 0.8)},
         avoid_object={range=size*2},

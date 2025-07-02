@@ -17,7 +17,7 @@ function SupplyDrop()
         physics={type="Sensor"},
         radar_trace={
             color={100, 200, 255},
-            icon="radar/blip.png",
+            icon="radar/char_plus.png",
             radius=120.0,
             rotate=false,
             color_by_faction=true,
