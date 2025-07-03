@@ -303,13 +303,13 @@ end
 --- Returns a value between 0.0 (fully disabled) and 1.0 (undamaged).
 --- Example: ship:getSystemHealthMax("impulse")
 function Entity:getSystemHealthMax(system_name)
-    return __getSystemPropertyByName(self, system_name, "max_health")
+    return __getSystemPropertyByName(self, system_name, "health_max")
 end
 --- Sets the given system's maximum health on this SpaceShip.
 --- Valid range is 0.0 (fully disabled) and 1.0 (undamaged).
 --- Example: ship:setSystemHealthMax("impulse", 0.5) -- limits the ship's impulse drive health to half
 function Entity:setSystemHealthMax(system_name, amount)
-    __setSystemPropertyByName(self, system_name, "max_health", amount)
+    __setSystemPropertyByName(self, system_name, "health_max", amount)
     return self
 end
 --- Returns the given system's heat level on this SpaceShip.
