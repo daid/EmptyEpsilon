@@ -412,6 +412,11 @@ void CrewStationScreen::showTab(GuiElement* element)
         else 
         {
             info.element->hide();
+            for (auto child : children)
+            {
+                if (child->getID().find("_POPUP") != -1)
+                    child->hide();
+            }
             info.button->setValue(false);
         }
     }
