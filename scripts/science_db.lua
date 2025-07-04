@@ -101,15 +101,11 @@ Ship captains who value the option of retreat are advised to either give warp ja
 
 -- "Weapons" describes ship weapon types
 local weapons = ScienceDatabase():setName(_('Weapons'))
-weapons:setLongDescription(_([[This database covers only the basic versions of missile weapons used throughout the galaxy.
-
-It has been reported that some battleships started using larger variations of those missiles. Small fighters and even frigates should not have too much trouble dodging them, but space captains of bigger ships should be wary of their doubled damage potential.
-
-Smaller variations of these missiles have become common in the galaxy, too. Fighter pilots praise their speed and maneuverability, because it gives them an edge against small and fast-moving targets. They only deal half the damage of their basic counterparts, but what good is a missile if it does not hit its target.]]))
+weapons:setLongDescription(_([[This database covers only the basic versions of weapons used throughout the galaxy.]]))
 
 local item = weapons:addEntry(_('Beam weapons'))
-item:addKeyValue(_('Range'), 'Varies')
-item:addKeyValue(_('Damage'), 'Varies')
+item:addKeyValue(_('Range'), _('Varies'))
+item:addKeyValue(_('Damage'), _('Varies'))
 item:setLongDescription(_([[Beam weapons emit an instantaneous, focused burst of energy or matter at a single target within a target arc. Many ships equip beam weapons for their precision and versatility.
 
 Shields are generally effective against energy-based beam weapons. To combat this, a beam's output can be modulated to various frequencies. This allows beam weapons to be tuned to a target's shield frequency to maximize their effectiveness.
@@ -118,41 +114,112 @@ Each firing of a beam weapon begins a brief cycle period, during which the beam 
 
 On some ships, heavy beam weapons are mounted on turrets that can rotate to cover a wide firing arc, at an expense of targeting speed.]]))
 
+local item = weapons:addEntry(_('Missile weapons'))
+item:addKeyValue(_('Range'), _('Varies'))
+item:addKeyValue(_('Damage'), _('Varies'))
+item:setLongDescription(_([[Missiles are weapons launched from tubes. Most are self-propelled ranged weapons with various capabilities, such as differing ranges, self-guided pursuit of a designated target, explosive warheads that damage everything within a radius, and varying types and amounts of damage.
+
+Some battleships use larger variations of these missile designs. Small fighters and even frigates are capable of dodging these variants at range, but captains of bigger spaceships should be wary of their doubled damage potential.
+
+Smaller missile variations are also common. Fighter pilots praise their speed and maneuverability, which gives them an edge against small and fast-moving targets. They deal only half the damage of their basic counterparts, but what good is a missile if it does not hit its target?]]))
+
+-- Better: Get these directly from MissileWeaponData, MissileSystem, and ExplodeOnTouch instead of copying and pasting them
+local missile_stat_keys = {
+  _('Damage type'),
+  _('Damage at center'),
+  _('Damage at edge'),
+  _('Blast radius (u)'),
+  _('Speed (u/sec.)'),
+  _('Turn rate (deg./sec.)'),
+  _('Lifetime (sec.)'),
+  _('Homing range (u)')
+}
+local mine_stat_keys = {
+  _('Damage type'),
+  _('Damage at center'),
+  _('Damage at edge'),
+  _('Blast radius (u)'),
+  _('Launch speed (u/sec.)'),
+  _('Turn rate (deg./sec.)'),
+  _('Arming delay (sec.)'),
+  _('Trigger distance (u)')
+}
+
+-- For medium size: damage type, damage at center, damage at edge, blast radius, speed, turn rate, lifetime, homing range
+local homing_stats = { _('Kinetic'),  35,  5,   30 / 1000, 200 / 1000, 10, 27.0, 1200 / 1000 }
+local nuke_stats   = { _('Kinetic'), 160, 30, 1000 / 1000, 200 / 1000, 10, 27.0,  500 / 1000 }
+local emp_stats    = { _('EMP'),     160, 30, 1000 / 1000, 200 / 1000, 10, 27.0,  500 / 1000 }
+local hvli_stats   = { _('Kinetic'),  10, 10,   20 / 1000, 500 / 1000,  0, 13.5,    0 }
+local mine_stats   = { _('Kinetic'), 160, 30, 1000 / 1000, 100 / 1000,  0, 10.0, 1000 / 1000 }
+-- Mine speed is upon ejection, lifetime is duration from launch to activation, homing range is detection radius
+
+local function populateMissileStats(__item, __keys, __stats)
+	local missile_modifier_sizes = {
+		_('size_abbreviation', 'S'),
+		_('size_abbreviation', 'M'),
+		_('size_abbreviation', 'L')
+	}
+	local missile_modifier_values = { 0.5, 1.0, 2.0 }
+
+	for idx, key in ipairs(__keys) do
+		local size_value = ''
+
+		if key == _('Damage at center')
+		or key == _('Damage at edge')
+		or key == _('Blast radius (u)')
+		or key == _('Lifetime (sec.)')
+		then
+			for size_idx, size in ipairs(missile_modifier_sizes) do
+				size_value = size_value .. __stats[idx] * missile_modifier_values[size_idx] .. ' (' .. size .. ') '
+				if size ~= _('size_abbreviation', 'L') then
+					size_value = size_value .. '/ '
+				end
+			end
+			__item:addKeyValue(key, size_value)
+		elseif key == _('Speed (u/sec.)')
+		or key == _('Launch speed (u/sec.)')
+		or key == _('Turn rate (deg./sec.)')
+		then
+			for size_idx, size in ipairs(missile_modifier_sizes) do
+				size_value = size_value .. __stats[idx] / missile_modifier_values[size_idx] .. ' (' .. size .. ') '
+				if size ~= _('size_abbreviation', 'L') then
+					size_value = size_value .. '/ '
+				end
+			end
+			__item:addKeyValue(key, size_value)
+		else
+			__item:addKeyValue(key, __stats[idx])
+		end
+	end
+end
+
 local item = weapons:addEntry(_('Homing missile'))
-item:addKeyValue(_('Range'), '5.4u')
-item:addKeyValue(_('Damage'), '35')
+item:addKeyValue(_('Sizes'), _('Small (S) / Medium (M) / Large (L)'))
+populateMissileStats(item, missile_stat_keys, homing_stats)
 item:setLongDescription(_([[This target-seeking missile is the workhorse of many space combat arsenals. It's compact enough to be fitted on frigates, and packs enough punch to be used on larger ships, though usually in more than a single missile tube.]]))
 
 local item = weapons:addEntry(_('Nuke'))
-item:addKeyValue(_('Range'), '5.4u')
-item:addKeyValue(_('Blast radius'), '1u')
-item:addKeyValue(_('Damage at center'), '160')
-item:addKeyValue(_('Damage at edge'), '30')
+item:addKeyValue(_('Sizes'), _('Small (S) / Medium (M) / Large (L)'))
+populateMissileStats(item, missile_stat_keys, nuke_stats)
 item:setLongDescription(_([[A nuclear missile is similar to a homing missile in that it can seek a target, but it moves and turns more slowly and explodes a greatly increased payload. Its nuclear explosion spans 1U of space and can take out multiple ships in a single shot.
 
 Some captains oppose the use of nuclear weapons because their large explosions can lead to 'fragging', or unintentional friendly fire. Shields should protect crews from harmful radiation, but because these weapons are often used in the thick of battle, there's no way of knowing if hull plating or shields can provide enough protection.]]))
 
 local item = weapons:addEntry(_('Mine'))
-item:addKeyValue(_('Drop distance'), '1u')
-item:addKeyValue(_('Trigger distance'), '0.6u')
-item:addKeyValue(_('Blast radius'), '1u')
-item:addKeyValue(_('Damage at center'), '160')
-item:addKeyValue(_('Damage at edge'), '30')
+item:addKeyValue(_('Sizes'), _('Small (S) / Medium (M) / Large (L)'))
+populateMissileStats(item, mine_stat_keys, mine_stats)
 item:setLongDescription(_([[Mines are often placed in defensive perimeters around stations. There are also old minefields scattered around the galaxy from older wars.
 
 Some fearless captains use mines as offensive weapons, but their delayed detonation and blast radius make this use risky at best.]]))
 
 local item = weapons:addEntry(_('EMP'))
-item:addKeyValue(_('Range'), '5.4u')
-item:addKeyValue(_('Blast radius'), '1u')
-item:addKeyValue(_('Damage at center'), '160')
-item:addKeyValue(_('Damage at edge'), '30')
+item:addKeyValue(_('Sizes'), _('Small (S) / Medium (M) / Large (L)'))
+populateMissileStats(item, missile_stat_keys, emp_stats)
 item:setLongDescription(_([[The electromagnetic pulse missile (EMP) reproduces the disruptive effects of a nuclear explosion, but without the destructive properties. This causes it to only affect shields within its blast radius, leaving their hulls intact. The EMP missile is also smaller and easier to store than heavy nukes. Many captains (and pirates) prefer EMPs over nukes for these reasons, and use them to knock out targets' shields before closing to disable them with focused beam fire.]]))
 
 local item = weapons:addEntry(_('HVLI'))
-item:addKeyValue(_('Range'), '5.4u')
-item:addKeyValue(_('Damage'), _('10 each, 50 total'))
-item:addKeyValue(_('Burst'), '5')
+item:addKeyValue(_('Sizes'), _('Small (S) / Medium (M) / Large (L)'))
+populateMissileStats(item, missile_stat_keys, hvli_stats)
 item:setLongDescription(_([[A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high velocity. This weapon is usually found in simpler ships since it does not require guidance computers. This also means its projectiles fly in a straight line from its tube and can't pursue a target.
 
 Each shot from an HVLI fires a burst of 5 projectiles, which increases the chance to hit but requires precision aiming to be effective. It reaches its full damage potential at a range of 2u.]]))
