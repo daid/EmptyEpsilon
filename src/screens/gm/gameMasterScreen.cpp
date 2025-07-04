@@ -587,6 +587,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                         gravity->wormhole_target = position;
                 }
             }
+            gameGlobalInfo->on_gm_click = nullptr;
         }
         break;
     case CD_BoxSelect:
