@@ -254,6 +254,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     }
 
     keyboard_help->setText(keyboard_help_text);
+    gameGlobalInfo->on_gm_click = nullptr;
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
