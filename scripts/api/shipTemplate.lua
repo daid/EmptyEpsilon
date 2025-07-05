@@ -133,8 +133,8 @@ end
 --- If declared, this function hides this ShipTemplate from creation features and the science database.
 --- Hidden templates provide backward compatibility to older scenario scripts.
 --- Example: template:hidden() -- hides this template
-function ShipTemplate:hidden(hidden)
-    self.__hidden = hidden
+function ShipTemplate:hidden()
+    self.__hidden = true
     return self
 end
 --- Sets the default combat AI state for CpuShips created from this ShipTemplate.
