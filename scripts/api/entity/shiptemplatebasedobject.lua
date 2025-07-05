@@ -18,7 +18,7 @@ function Entity:setTemplate(template_name)
     local template = __ship_templates[template_name]
     local comp = self.components
     if template == nil then
-        return error("Failed to find template: " .. template_name)
+        error("Failed to find template: " .. tostring(template_name), 2)
     end
     -- print("Setting template:" .. template_name)
     for key, value in next, template, nil do

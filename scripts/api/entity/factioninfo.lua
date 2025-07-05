@@ -58,8 +58,8 @@ end
 --- Warning: A faction can be designated as hostile to itself, but the behavior is not well-defined.
 --- Example: faction:setEnemy(exuari) -- sets the Exuari to appear as hostile to this faction
 function Entity:setEnemy(other_faction)
-    if self.components.faction_info == nil then error("setEnemy can only be called on factions.") end
-    if other_faction.components.faction_info == nil then error("setEnemy can only be called on factions.") end
+    if self.components.faction_info == nil then error("setEnemy can only be called on factions.", 2) end
+    if other_faction.components.faction_info == nil then error("setEnemy can only be called on factions.", 2) end
     self:__setFactionRelation(other_faction, "enemy")
     other_faction:__setFactionRelation(self, "enemy")
     return self
@@ -69,8 +69,8 @@ end
 --- Defaults to no friendly factions.
 --- Example: faction:setFriendly(exuari) -- sets the Human Navy to appear as friendly to this faction
 function Entity:setFriendly(other_faction)
-    if self.components.faction_info == nil then error("setFriendly can only be called on factions.") end
-    if other_faction.components.faction_info == nil then error("setFriendly can only be called on factions.") end
+    if self.components.faction_info == nil then error("setFriendly can only be called on factions.", 2) end
+    if other_faction.components.faction_info == nil then error("setFriendly can only be called on factions.", 2) end
     self:__setFactionRelation(other_faction, "friendly")
     other_faction:__setFactionRelation(self, "friendly")
     return self
@@ -79,8 +79,8 @@ end
 --- This removes any existing faction relationships between the two factions.
 --- Example: faction:setNeutral(human_navy) -- sets the Human Navy to appear as neutral to this faction
 function Entity:setNeutral(other_faction)
-    if self.components.faction_info == nil then error("setNeutral can only be called on factions.") end
-    if other_faction.components.faction_info == nil then error("setNeutral can only be called on factions.") end
+    if self.components.faction_info == nil then error("setNeutral can only be called on factions.", 2) end
+    if other_faction.components.faction_info == nil then error("setNeutral can only be called on factions.", 2) end
     self:__setFactionRelation(other_faction, "neutral")
     other_faction:__setFactionRelation(self, "neutral")
     return self

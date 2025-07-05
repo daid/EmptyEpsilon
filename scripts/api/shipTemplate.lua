@@ -154,6 +154,10 @@ end
 --- ModelData objects define a 3D mesh, textures, adjustments, and collision box, and are loaded from scripts/model_data.lua when EmptyEpsilon is launched.
 --- Example: template:setModel("AtlasHeavyFighterYellow") -- uses the ModelData named "AtlasHeavyFighterYellow"
 function ShipTemplate:setModel(model_data_name)
+    if not __model_data[model_data_name] then
+        error("Failed to find model: " .. tostring(model_data_name), 2)
+    end
+
     self.__model_data_name = model_data_name
     for k, v in pairs(__model_data[model_data_name]) do
         if string.sub(1, 2) ~= "__" then
