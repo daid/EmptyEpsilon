@@ -105,6 +105,10 @@ void GuiCanvas::onTextInput(sp::TextInputEvent e)
         dumpGuiTree(f, this);
         fclose(f);
     }
+
+    if (e == sp::TextInputEvent::Copy) {
+        enable_debug_rendering = !enable_debug_rendering;
+    }
 #endif
     if (focus_element)
         focus_element->onTextInput(e);
