@@ -182,7 +182,7 @@ function __fillDefaultDatabaseData()
 		for name2, info2 in pairs(__faction_info) do
             if info ~= info2 then
 				local stance = _("stance", "Neutral");
-				for idx, relation in ipairs(info) do
+				for idx, relation in ipairs(info.components.faction_info) do
 					if relation.other_faction == info2 then
 						if relation.relation == "neutral" then stance = _("stance", "Neutral") end
 						if relation.relation == "enemy" then stance = _("stance", "Enemy") end
