@@ -103,6 +103,7 @@ public:
         sp::script::Callback create_callback;
         string label;
         string description;
+        string icon;
     };
     std::vector<ShipSpawnInfo> getSpawnablePlayerShips();
     struct ObjectSpawnInfo {
@@ -110,6 +111,7 @@ public:
         string label;
         string category;
         string description;
+        string icon;
     };
     std::vector<ObjectSpawnInfo> getGMSpawnableObjects();
     string getEntityExportString(sp::ecs::Entity entity);

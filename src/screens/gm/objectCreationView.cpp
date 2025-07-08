@@ -51,6 +51,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         for(const auto& info : spawn_list) {
             if (info.category == category_selector->getSelectionValue()) {
                 object_list->addEntry(info.label, info.label);
+                object_list->setEntryIcon(object_list->indexByValue(info.label), info.icon);
             }
         }
     });
@@ -73,6 +74,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         for(const auto& info : spawn_list) {
             if (info.category == category_selector->getSelectionValue() && info.label.lower().find(value) >= 0) {
                 object_list->addEntry(info.label, info.label);
+                object_list->setEntryIcon(object_list->indexByValue(info.label), info.icon);
             }
         }
     });
@@ -108,6 +110,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     for(const auto& info : spawn_list) {
         if (info.category == category_selector->getSelectionValue()) {
             object_list->addEntry(info.label, info.label);
+            object_list->setEntryIcon(object_list->indexByValue(info.label), info.icon);
         }
     }
 

@@ -344,6 +344,7 @@ ShipSelectionScreen::ShipSelectionScreen()
 
             for(const auto& info : ship_spawn_info) {
                 ship_template_selector->addEntry(info.label, info.label);
+                ship_template_selector->setEntryIcon(ship_template_selector->indexByValue(info.label), info.icon);
             }
             ship_template_selector->setSelectionIndex(0);
             ship_template_selector->setPosition(0, 630, sp::Alignment::TopCenter)->setSize(490, 50);

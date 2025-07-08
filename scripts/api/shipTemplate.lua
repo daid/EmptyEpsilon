@@ -10,7 +10,7 @@ function getSpawnablePlayerShips()
     if __allow_new_player_ships then
         for i, v in ipairs(__player_ship_templates) do
             if not v.__hidden then
-                result[#result+1] = {__spawnPlayerShipFunc(v.typename.type_name), v.typename.localized, v.__description}
+                result[#result+1] = {__spawnPlayerShipFunc(v.typename.type_name), v.typename.localized, v.__description, v.radar_trace.icon}
             end
         end
     end
