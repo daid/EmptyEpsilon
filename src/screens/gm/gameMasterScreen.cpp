@@ -1,6 +1,7 @@
 #include "gameMasterScreen.h"
 #include "i18n.h"
 #include "main.h"
+#include "gui/mouseRenderer.h"
 #include "gameGlobalInfo.h"
 #include "objectCreationView.h"
 #include "globalMessageEntryView.h"
@@ -444,11 +445,20 @@ void GameMasterScreen::update(float delta)
         create_button->hide();
         object_creation_view->hide();
         cancel_action_button->show();
+        if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
+            mouse_renderer->setSpriteImage("mouse_create.png");
     }
     else
     {
         create_button->show();
         cancel_action_button->hide();
+        if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
+        {
+            if (SDL_GetModState() & KMOD_CTRL) mouse_renderer->setSpriteImage("mouse_ship.png");
+            else if (SDL_GetModState() & KMOD_ALT) mouse_renderer->setSpriteImage("mouse_faction.png");
+            else if (SDL_GetModState() & KMOD_SHIFT) mouse_renderer->setSpriteImage("mouse_add.png");
+            else mouse_renderer->setSpriteImage("mouse.png");
+        }
     }
 }
 
@@ -596,6 +606,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
             bool alt_down = SDL_GetModState() & KMOD_ALT;
             std::vector<sp::ecs::Entity> entities;
+
             for(auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
             {
                 auto size = physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f;
