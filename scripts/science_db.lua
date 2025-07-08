@@ -12,7 +12,7 @@ While ship captains are encouraged to avoid unnecessary interactions with these 
 
 local item = space_objects:addEntry(_('Asteroid'))
 item:setLongDescription(_([[An asteroid is a minor planet, usually smaller than a few kilometers. Larger variants are sometimes referred to as planetoids.]]))
-item:setModelDataName("Astroid")
+item:setModelDataName("astroid_1")
 
 local item = space_objects:addEntry(_('Black hole'))
 item:setLongDescription(_([[A black hole is a point of supercondensed mass with a gravitational pull so powerful that not even light can escape it. It has no locally detectable features, and can only be seen indirectly by blocking the view and distorting its surroundings, creating a strange circular mirror image of the galaxy. The black disc in the middle marks the event horizon, the boundary where even light can't escape it anymore. 
