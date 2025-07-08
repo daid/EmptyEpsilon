@@ -82,6 +82,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         for(auto& info : spawn_list) {
             if (info.category == category_selector->getSelectionValue() && info.label == value) {
                 if (last_selection_index == index) {
+                    gameGlobalInfo->on_gm_click_cursor = info.icon;
                     gameGlobalInfo->on_gm_click = [&info, this] (glm::vec2 position)
                     {
                         auto res = info.create_callback.call<sp::ecs::Entity>();
@@ -100,6 +101,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
                         }
                     };
                 } else {
+                    gameGlobalInfo->on_gm_click_cursor = "mouse_create.png";
                     description->setText(info.description);
                 }
             }

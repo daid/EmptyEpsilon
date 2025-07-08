@@ -441,19 +441,20 @@ void GameMasterScreen::update(float delta)
         message_frame->hide();
     }
 
+    P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer");
+
     if (gameGlobalInfo->on_gm_click)
     {
         create_button->hide();
         object_creation_view->hide();
         cancel_action_button->show();
-        if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
-            mouse_renderer->setSpriteImage("mouse_create.png");
+        if (mouse_renderer) mouse_renderer->setSpriteImage(gameGlobalInfo->on_gm_click_cursor);
     }
     else
     {
         create_button->show();
         cancel_action_button->hide();
-        if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
+        if (mouse_renderer)
         {
             if (SDL_GetModState() & KMOD_CTRL) mouse_renderer->setSpriteImage("mouse_ship.png");
             else if (SDL_GetModState() & KMOD_ALT) mouse_renderer->setSpriteImage("mouse_faction.png");

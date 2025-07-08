@@ -241,6 +241,7 @@ void GameGlobalInfo::reset()
     gm_callback_functions.clear();
     gm_messages.clear();
     on_gm_click = nullptr;
+    on_gm_click_cursor = "mouse_create.png";
 
     sp::ecs::Entity::destroyAllEntities();
     main_scenario_script = nullptr;
