@@ -4,7 +4,7 @@ __player_ship_templates = {}
 __allow_new_player_ships = true
 
 -- Called by the engine to populate the list of player ships that can be spawned.
--- Returns a list of {key, label, description}.
+-- Returns a list of {key, label, description, radar trace}.
 function getSpawnablePlayerShips()
     local result = {}
     if __allow_new_player_ships then
