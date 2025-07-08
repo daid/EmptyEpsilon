@@ -261,6 +261,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
 GameMasterScreen::~GameMasterScreen()
 {
+    if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer")) mouse_renderer->setSpriteImage("mouse.png");
 }
 
 void GameMasterScreen::update(float delta)
