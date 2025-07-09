@@ -191,7 +191,7 @@ end
 --- Defaults to 1000.
 --- Example: template:setEnergyStorage(500)
 function ShipTemplate:setEnergyStorage(amount)
-    self.reactor = {max_energy=amount, energy=amount}
+    self.__energy_storage = amount
     return self
 end
 --- Sets the default number of repair crew for PlayerSpaceships created from this ShipTemplate.

@@ -42,6 +42,11 @@ function Entity:setTemplate(template_name)
     end
 
     if comp.reactor then
+        if template.__energy_storage then
+            comp.reactor.max_energy = template.__energy_storage
+            comp.reactor.energy = template.__energy_storage
+        end
+
         local reactor_power_factor = 0
         if comp.beam_weapons then comp.beam_weapons.power_factor = 3.0; reactor_power_factor = reactor_power_factor - 3.0 end
         if comp.missile_tubes then comp.missile_tubes.power_factor = 1.0; reactor_power_factor = reactor_power_factor - 1.0 end
