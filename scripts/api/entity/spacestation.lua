@@ -13,6 +13,7 @@ function SpaceStation()
     e.components = {
         transform = {rotation=random(0, 360)},
         callsign = {callsign=generateRandomCallSign("DS")},
+        comms_receiver = {script="comms_station.lua"},
     }
     e:setFaction(__default_station_faction)
     return e
