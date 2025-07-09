@@ -15,8 +15,10 @@ public:
     virtual void onPointerLeave(sp::io::Pointer::ID id) override;
     virtual void onPointerDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
 
+    void setSpriteImage(string sprite_image) { sprite = sprite_image; }
 private:
     glm::vec2 position;
+    string sprite = "mouse.png";
 };
 
 #endif//MOUSE_RENDERER_H

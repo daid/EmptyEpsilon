@@ -303,13 +303,13 @@ end
 --- Returns a value between 0.0 (fully disabled) and 1.0 (undamaged).
 --- Example: ship:getSystemHealthMax("impulse")
 function Entity:getSystemHealthMax(system_name)
-    return __getSystemPropertyByName(self, system_name, "max_health")
+    return __getSystemPropertyByName(self, system_name, "health_max")
 end
 --- Sets the given system's maximum health on this SpaceShip.
 --- Valid range is 0.0 (fully disabled) and 1.0 (undamaged).
 --- Example: ship:setSystemHealthMax("impulse", 0.5) -- limits the ship's impulse drive health to half
 function Entity:setSystemHealthMax(system_name, amount)
-    __setSystemPropertyByName(self, system_name, "max_health", amount)
+    __setSystemPropertyByName(self, system_name, "health_max", amount)
     return self
 end
 --- Returns the given system's heat level on this SpaceShip.
@@ -349,7 +349,6 @@ end
 --- Example: ship:setSystemPower("impulse", 0.5) -- sets the ship's impulse drive to half power
 function Entity:setSystemPower(system_name, amount)
     __setSystemPropertyByName(self, system_name, "power_level", amount)
-    __setSystemPropertyByName(self, system_name, "power_request", amount)
     return self
 end
 --- Returns the given system's rate of consuming power, in points per second?, in this SpaceShip.
@@ -389,7 +388,6 @@ end
 --- Example: ship:setSystemPowerFactor("impulse", 4)
 function Entity:setSystemCoolant(system_name, amount)
     __setSystemPropertyByName(self, system_name, "coolant_level", amount)
-    __setSystemPropertyByName(self, system_name, "coolant_request", amount)
     return self
 end
 --- Returns the rate at which the given system in this SpaceShip takes coolant, in points per second?

@@ -166,15 +166,14 @@ void GuiCommsOverlay::onUpdate()
         broken_box->setVisible(transmitter->state == CommsTransmitter::State::ChannelBroken);
         closed_box->setVisible(transmitter->state == CommsTransmitter::State::ChannelClosed);
 
-        const bool is_open = transmitter->state == CommsTransmitter::State::ChannelOpen || transmitter->state == CommsTransmitter::State::ChannelOpenGM || transmitter->state == CommsTransmitter::State::ChannelOpenPlayer;
+        const bool is_open = transmitter->state == CommsTransmitter::State::ChannelOpenGM || transmitter->state == CommsTransmitter::State::ChannelOpenPlayer;
         chat_comms_box->setVisible(is_open);
         chat_comms_text->setText(transmitter->incomming_message);
-        if (is_open && !chat_open_last_update) {
+        if (is_open && !chat_open_last_update)
+        {
           // Chat window has just opened, let's auto-focus the text input
-          auto canvas = dynamic_cast<GuiCanvas*>(getTopLevelContainer());
-          if (canvas) {
+          if (auto canvas = dynamic_cast<GuiCanvas*>(getTopLevelContainer()))
             canvas->focus(chat_comms_message_entry);
-          }
         }
         chat_open_last_update = is_open;
 

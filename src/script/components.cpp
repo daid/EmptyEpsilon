@@ -294,6 +294,10 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<AvoidObject>::name("avoid_object");
     BIND_MEMBER(AvoidObject, range);
 
+    sp::script::ComponentHandler<DelayedAvoidObject>::name("delayed_avoid_object");
+    BIND_MEMBER(DelayedAvoidObject, delay);
+    BIND_MEMBER(DelayedAvoidObject, range);
+
     sp::script::ComponentHandler<ExplodeOnTouch>::name("explode_on_touch");
     BIND_MEMBER(ExplodeOnTouch, damage_at_center);
     BIND_MEMBER(ExplodeOnTouch, damage_at_edge);
