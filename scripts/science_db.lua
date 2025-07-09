@@ -12,26 +12,31 @@ While ship captains are encouraged to avoid unnecessary interactions with these 
 
 local item = space_objects:addEntry(_('Asteroid'))
 item:setLongDescription(_([[An asteroid is a minor planet, usually smaller than a few kilometers. Larger variants are sometimes referred to as planetoids.]]))
+item:setModelDataName("astroid_1")
 
 local item = space_objects:addEntry(_('Black hole'))
 item:setLongDescription(_([[A black hole is a point of supercondensed mass with a gravitational pull so powerful that not even light can escape it. It has no locally detectable features, and can only be seen indirectly by blocking the view and distorting its surroundings, creating a strange circular mirror image of the galaxy. The black disc in the middle marks the event horizon, the boundary where even light can't escape it anymore. 
 	
 On the sensors, a black hole appears as a disc indicating the zone where the gravitational pull is getting dangerous, and soon will be stronger then the ship's impulse engines. An object that crosses a black hole is drawn toward its center and quickly ripped apart by the gravitational forces.]]))
+--item:setModelDataName("black_hole")
+item:setImage('images/black_hole_wireframe.jpg')
 
 local item = space_objects:addEntry(_('Nebula'))
 item:setLongDescription(_([[Nebulae are the birthing places of new stars. These gas fields, usually created by the death of an old star, slowly form new stars due to the gravitational pull of its gas molecules.
 
 Because of the ever-changing nature of gas nebulae, most radar and scanning technologies are unable to penetrate them. Science officers are therefore advised to rely on probes and visual observations.]]))
-
+item:setImage('Nebula1.png')
 local item = space_objects:addEntry(_('Planet'))
 item:setLongDescription(_([[A planetary-mass object is large, dense, near-spherical astronomical body comprised of various forms of matter. Most planets are either terrestrial, like Earth, or giants, like the gas giant Jupiter or ice giant Neptune.
 
 Planets often have gaseous atmospheres, and some are orbited by one or more large planetoids typically called moons.]]))
+item:setModelDataName("planet_showcase")
 
 local item = space_objects:addEntry(_('Wormhole'))
 item:setLongDescription(_([[A wormhole, also known as an Einstein-Rosen bridge, is a phenomena that connects two points of spacetime. Jump drives operate in a similar fashion, but instead of being created at will, a wormhole occupies a specific location in space. Objects that enter a wormhole instantaneously emerge from the other end, which might be anywhere from a few feet to thousands of light years away. 
 
 Wormholes are rare, and most can move objects in only one direction. Traversable wormholes, which are stable and allow for movement in both directions, are even rarer. All wormholes generate tremendous sensor activity, which an astute science officer can detect even through disruptions such as nebulae.]]))
+item:setImage('images/wormhole.jpg')
 
 -- "Technologies" describes non-ship, non-weapon ship features
 local technologies = ScienceDatabase():setName(_('Technologies'))
@@ -46,6 +51,7 @@ item:setLongDescription(_([[Ships with shield and beam systems can often configu
 A beam frequency that's resonant with a target's shield frequency can do considerably more damage, and beam frequencies can be quickly modulated. Shield frequencies require time to recalibrate.
 
 If your Science officer fully scans a target, your ship's computer presents them with a detailed analysis of beam and shield frequencies and suggests optimal values for each.]]))
+item:setImage('images/frequency_graph.png')
 
 local item = technologies:addEntry(_('Hacking measure'))
 item:addKeyValue(_('Interaction'), _('Long-range transmission'))
@@ -54,17 +60,19 @@ item:setLongDescription(_([[Thanks to our covert operations teams, we've acquire
 While we've managed to create algorithmic attack vectors that you can deploy at range to target and degrade specific ship systems, these exploits still require active human intervention to fully function.
 
 To facilitate successful operations in the field, our software engineers have abstracted the required inputs into common puzzles that even a Relay crew member can successfully complete.]]))
+item:setImage('images/hack_minigames.jpg')
 
 local item = technologies:addEntry(_('Radar signature'))
 item:addKeyValue(_('Signature'), _('Related color bands'))
-item:addKeyValue(_('Biological'), _('Green'))
-item:addKeyValue(_('Electrical'), _('Red'))
-item:addKeyValue(_('Gravitational'), _('Blue'))
+item:addKeyValue(_('Electrical'), _('Red (outer band)'))
+item:addKeyValue(_('Biological'), _('Green (middle band)'))
+item:addKeyValue(_('Gravitational'), _('Blue (inner band)'))
 item:setLongDescription(_([[The outer ring of long-range Science radar screens contain three colored bands that represent raw sensor inputs monitored on that heading. Ships and space phenomena emit energies or exhibit characteristics that your sensor suite translates into icons on your radar, but these raw rings can provide more information to a well-trained eye.
 
 For tactical purposes, heat generated by ship systems is registered in raw thermal sensor data in a similar manner as biological (green) sources. If a ship's systems are under- or over-powered, its electrical (red) readings change accordingly.
 
 A ship warping or preparing to jump exponentially increases its gravitational (blue) output. After completing a jump a ship performs a massive power transfer that raw sensor data reads as an electrical spike.]]))
+item:setImage('images/radar_rings.png')
 
 local item = technologies:addEntry(_('Scan probe'))
 item:addKeyValue(_('Radar range'), '5u')
