@@ -448,7 +448,13 @@ void GameMasterScreen::update(float delta)
         create_button->hide();
         object_creation_view->hide();
         cancel_action_button->show();
-        if (mouse_renderer) mouse_renderer->setSpriteImage(gameGlobalInfo->on_gm_click_cursor);
+        if (mouse_renderer)
+        {
+            if (gameGlobalInfo->on_gm_click_cursor == "")
+                mouse_renderer->setSpriteImage(gameGlobalInfo->DEFAULT_ON_GM_CLICK_CURSOR);
+            else
+                mouse_renderer->setSpriteImage(gameGlobalInfo->on_gm_click_cursor);
+        }
     }
     else
     {
@@ -538,6 +544,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             bool shift_down = SDL_GetModState() & KMOD_SHIFT;
             sp::ecs::Entity target;
             glm::vec2 target_position;
+
             for(auto entity : sp::CollisionSystem::queryArea(position, position))
             {
                 auto transform = entity.getComponent<sp::Transform>();
