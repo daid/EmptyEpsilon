@@ -27,23 +27,24 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     box->setAttribute("padding", "20");
     box->setAttribute("layout", "horizontal");
 
-    auto row1 = new GuiElement(box, "row1");
-    row1->setAttribute("stretch", "true");
-    row1->setAttribute("layout", "vertical");
-    auto row2 = new GuiElement(box, "row2");
-    row2->setAttribute("stretch", "true");
-    row2->setAttribute("layout", "vertical");
-    auto row3 = new GuiElement(box, "row3");
-    row3->setAttribute("stretch", "true");
-    row3->setAttribute("layout", "vertical");
+    auto col1 = new GuiElement(box, "COLUMN_1");
+    col1->setAttribute("stretch", "true");
+    col1->setAttribute("layout", "vertical");
+    auto col2 = new GuiElement(box, "COLUMN_2");
+    col2->setAttribute("stretch", "true");
+    col2->setAttribute("margin", "20,0");
+    col2->setAttribute("layout", "vertical");
+    auto col3 = new GuiElement(box, "COLUMN_3");
+    col3->setAttribute("stretch", "true");
+    col3->setAttribute("layout", "vertical");
 
-    faction_selector = new GuiSelector(row1, "FACTION_SELECTOR", nullptr);
+    faction_selector = new GuiSelector(col1, "FACTION_SELECTOR", nullptr);
     for(auto [entity, info] : sp::ecs::Query<FactionInfo>())
         faction_selector->addEntry(info.locale_name, info.name);
     faction_selector->setSelectionIndex(0);
-    faction_selector->setSize(300, 50);
+    faction_selector->setSize(GuiElement::GuiSizeMax, 50);
 
-    category_selector = new GuiListbox(row1, "CATEGORY_SELECTOR", [this](int index, string)
+    category_selector = new GuiListbox(col1, "CATEGORY_SELECTOR", [this](int index, string)
     {
         last_selection_index = -1;
         object_list->clear();
@@ -64,8 +65,8 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     category_selector->setSelectionIndex(0);
     category_selector->setAttribute("stretch", "true");
 
-    object_filter = new GuiTextEntry(row2, "OBJECT_FILTER", "");
-    object_filter->setTextSize(20)->setSize(300, 30)->setAttribute("fill_width", "true");
+    object_filter = new GuiTextEntry(col2, "OBJECT_FILTER", "");
+    object_filter->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("fill_width", "true");
     object_filter->callback([this](string value) {
         value = value.lower();
         last_selection_index = -1;
@@ -76,7 +77,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
             }
         }
     });
-    object_list = new GuiListbox(row2, "OBJECT_LIST", [this](int index, string value) {
+    object_list = new GuiListbox(col2, "OBJECT_LIST", [this](int index, string value) {
         for(auto& info : spawn_list) {
             if (info.category == category_selector->getSelectionValue() && info.label == value) {
                 if (last_selection_index == index) {
@@ -111,10 +112,10 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         }
     }
 
-    description = new GuiScrollText(row3, "DESCRIPTION", "-");
+    description = new GuiScrollText(col3, "DESCRIPTION", "");
     description->setAttribute("stretch", "true");
 
-    (new GuiButton(row1, "CLOSE_BUTTON", tr("button", "Cancel"), [this]() {
+    (new GuiButton(col1, "CLOSE_BUTTON", tr("button", "Cancel"), [this]() {
         this->hide();
     }))->setSize(300, 50);
 }
