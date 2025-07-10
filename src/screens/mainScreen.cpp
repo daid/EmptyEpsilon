@@ -54,7 +54,7 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     bool show_additional_shortcuts_string = false;
     string keyboard_help_text = "";
 
-    for (const auto& category : {"Console", "Basic", "Main Screen"})
+    for (const auto& category : {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "Main Screen")})
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(tr(category)))
         {
