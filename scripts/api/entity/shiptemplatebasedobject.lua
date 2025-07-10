@@ -26,13 +26,27 @@ function Entity:setTemplate(template_name)
             comp[key] = value
         end
     end
-    if template.__type == "station" then
+    if not comp.ai_controller and not comp.player_control then
+        -- no AI or player control, this is a station
         comp.physics.type = "static"
-    elseif template.__type == "playership" then
-        if comp.shields then comp.shields.active = false end
+    elseif comp.shields then
+        -- otherwise, set a shield frequency and turn player shields off by default
+        comp.shields.frequency = irandom(0, 20)
+        if comp.player_control then
+            comp.shields.active = false
+        end
+    end
+
+    if comp.ai_controller then
+        comp.ai_controller.new_name = template.__default_ai
     end
 
     if comp.reactor then
+        if template.__energy_storage then
+            comp.reactor.max_energy = template.__energy_storage
+            comp.reactor.energy = template.__energy_storage
+        end
+
         local reactor_power_factor = 0
         if comp.beam_weapons then comp.beam_weapons.power_factor = 3.0; reactor_power_factor = reactor_power_factor - 3.0 end
         if comp.missile_tubes then comp.missile_tubes.power_factor = 1.0; reactor_power_factor = reactor_power_factor - 1.0 end
@@ -52,9 +66,6 @@ function Entity:setTemplate(template_name)
             crew.components.internal_crew = {ship=self}
             crew.components.internal_repair_crew = {}
         end
-    end
-    if comp.shields and template.__type ~= "station" then
-        comp.shields.frequency = irandom(0, 20)
     end
     if comp.internal_rooms == nil then -- No internal rooms, so auto-repair
         if comp.beam_weapons then comp.beam_weapons.auto_repair_per_second = 0.005; end
