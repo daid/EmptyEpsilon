@@ -71,6 +71,8 @@ public:
     sp::script::Callback on_new_player_ship;
 
     std::function<void(glm::vec2)> on_gm_click;
+    const string DEFAULT_ON_GM_CLICK_CURSOR = "mouse_create.png";
+    string on_gm_click_cursor = DEFAULT_ON_GM_CLICK_CURSOR;
 
     GameGlobalInfo();
     virtual ~GameGlobalInfo();
@@ -103,6 +105,7 @@ public:
         sp::script::Callback create_callback;
         string label;
         string description;
+        string icon;
     };
     std::vector<ShipSpawnInfo> getSpawnablePlayerShips();
     struct ObjectSpawnInfo {
@@ -110,6 +113,7 @@ public:
         string label;
         string category;
         string description;
+        string icon;
     };
     std::vector<ObjectSpawnInfo> getGMSpawnableObjects();
     string getEntityExportString(sp::ecs::Entity entity);

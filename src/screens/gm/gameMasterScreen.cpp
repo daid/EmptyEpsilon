@@ -441,19 +441,26 @@ void GameMasterScreen::update(float delta)
         message_frame->hide();
     }
 
+    P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer");
+
     if (gameGlobalInfo->on_gm_click)
     {
         create_button->hide();
         object_creation_view->hide();
         cancel_action_button->show();
-        if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
-            mouse_renderer->setSpriteImage("mouse_create.png");
+        if (mouse_renderer)
+        {
+            if (gameGlobalInfo->on_gm_click_cursor == "")
+                mouse_renderer->setSpriteImage(gameGlobalInfo->DEFAULT_ON_GM_CLICK_CURSOR);
+            else
+                mouse_renderer->setSpriteImage(gameGlobalInfo->on_gm_click_cursor);
+        }
     }
     else
     {
         create_button->show();
         cancel_action_button->hide();
-        if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
+        if (mouse_renderer)
         {
             if (SDL_GetModState() & KMOD_CTRL) mouse_renderer->setSpriteImage("mouse_ship.png");
             else if (SDL_GetModState() & KMOD_ALT) mouse_renderer->setSpriteImage("mouse_faction.png");
@@ -537,6 +544,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             bool shift_down = SDL_GetModState() & KMOD_SHIFT;
             sp::ecs::Entity target;
             glm::vec2 target_position;
+
             for(auto entity : sp::CollisionSystem::queryArea(position, position))
             {
                 auto transform = entity.getComponent<sp::Transform>();
