@@ -4,8 +4,9 @@
 #include "featureDefs.h"
 #include "ecs/query.h"
 #include "systems/collision.h"
-#include "components/collision.h"
 #include "components/beamweapon.h"
+#include "components/collision.h"
+#include "components/docking.h"
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/missiletubes.h"
@@ -103,14 +104,26 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 {
     //Hacky, when not relay and we have a ship, center on it.
     auto transform = my_spaceship.getComponent<sp::Transform>();
-    if (transform) {
-        if (auto_center_on_my_ship) {
-            view_position = transform->getPosition();
-        }
-        if (auto_rotate_on_my_ship) {
-            view_rotation = transform->getRotation() + 90;
-        }
+
+    if (auto_center_target)
+        transform = auto_center_target.getComponent<sp::Transform>();
+    else
+        auto_center_target = my_spaceship;
+
+    // If target has no transform, it might be docked inside another ship
+    if (!transform)
+    {
+        if (auto dp = auto_center_target.getComponent<DockingPort>())
+            transform = dp->target.getComponent<sp::Transform>();
     }
+
+    if (transform && auto_center_on_my_ship)
+    {
+        view_position = transform->getPosition();
+        if (auto_rotate_on_my_ship)
+            view_rotation = transform->getRotation() + 90;
+    }
+
     if (auto_distance)
     {
         distance = long_range ? 30000.0f : 5000.0f;
