@@ -168,57 +168,79 @@ msgctxt "Timed"
 msgid "Thirty minute time limit"
 msgstr "Zeitlimit: 30 Minuten"
 
-#: scripts/scenario_54_PatrolDuty.lua:155
+#: scripts/scenario_54_PatrolDuty.lua:161
+#: scripts/scenario_54_PatrolDuty.lua:6597
+#: scripts/scenario_54_PatrolDuty.lua:7291
+#: scripts/scenario_54_PatrolDuty.lua:8118
 msgctxt "buttonGM"
 msgid "Start plot 2 sick Kojak"
 msgstr "Zu Teil 2: Kojak krank"
 
-#: scripts/scenario_54_PatrolDuty.lua:156
+#: scripts/scenario_54_PatrolDuty.lua:162
+#: scripts/scenario_54_PatrolDuty.lua:6621
+#: scripts/scenario_54_PatrolDuty.lua:7378
+#: scripts/scenario_54_PatrolDuty.lua:7398
+#: scripts/scenario_54_PatrolDuty.lua:7422
+#: scripts/scenario_54_PatrolDuty.lua:8124
 msgctxt "buttonGM"
 msgid "Start p 3 McNabbit ride"
 msgstr "Teil 3: McNabbits Taxi"
 
-#: scripts/scenario_54_PatrolDuty.lua:157
+#: scripts/scenario_54_PatrolDuty.lua:163
+#: scripts/scenario_54_PatrolDuty.lua:6637
+#: scripts/scenario_54_PatrolDuty.lua:8130
 msgctxt "buttonGM"
 msgid "St p4 Lisbon's stowaway"
 msgstr "Zu Teil 4: Kind finden"
 
-#: scripts/scenario_54_PatrolDuty.lua:158
+#: scripts/scenario_54_PatrolDuty.lua:164
+#: scripts/scenario_54_PatrolDuty.lua:6644
+#: scripts/scenario_54_PatrolDuty.lua:8135
 msgctxt "buttonGM"
 msgid "Start plot 5"
 msgstr "Zu Teil 5"
 
-#: scripts/scenario_54_PatrolDuty.lua:159
+#: scripts/scenario_54_PatrolDuty.lua:165
+#: scripts/scenario_54_PatrolDuty.lua:6605
+#: scripts/scenario_54_PatrolDuty.lua:8140
 msgctxt "buttonGM"
 msgid "Strt plot 8 Sheila dies"
 msgstr "Zu Teil 8: Sheila stirbt"
 
-#: scripts/scenario_54_PatrolDuty.lua:160
+#: scripts/scenario_54_PatrolDuty.lua:166
+#: scripts/scenario_54_PatrolDuty.lua:6613
+#: scripts/scenario_54_PatrolDuty.lua:8145
 msgctxt "buttonGM"
 msgid "Start plot 9 ambush"
 msgstr "Zu Teil 9: Hinterhalt"
 
-#: scripts/scenario_54_PatrolDuty.lua:161
+#: scripts/scenario_54_PatrolDuty.lua:167
+#: scripts/scenario_54_PatrolDuty.lua:6629
+#: scripts/scenario_54_PatrolDuty.lua:8150
 msgctxt "buttonGM"
 msgid "Start plot 10 ambush"
 msgstr "Zu Teil 10: Hinterhalt"
 
-#: scripts/scenario_54_PatrolDuty.lua:162
+#: scripts/scenario_54_PatrolDuty.lua:168
+#: scripts/scenario_54_PatrolDuty.lua:6771
+#: scripts/scenario_54_PatrolDuty.lua:8160
 msgctxt "buttonGM"
 msgid "Skip to defend U.P."
 msgstr "Verteidigung von U.P."
 
-#: scripts/scenario_54_PatrolDuty.lua:163
+#: scripts/scenario_54_PatrolDuty.lua:169
+#: scripts/scenario_54_PatrolDuty.lua:6905
+#: scripts/scenario_54_PatrolDuty.lua:8170
 msgctxt "buttonGM"
 msgid "Skip to destroy S.C."
 msgstr "Zerstörung von S.C."
 
-#: scripts/scenario_54_PatrolDuty.lua:314
+#: scripts/scenario_54_PatrolDuty.lua:320
 msgctxt "scienceDescription-station"
 msgid "Training and Coordination"
 msgstr "Ausbildung und Koordinierung"
 
-#: scripts/scenario_54_PatrolDuty.lua:315
+#: scripts/scenario_54_PatrolDuty.lua:321
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We train naval cadets in routine and specialized functions aboard space "
@@ -228,7 +250,7 @@ msgstr ""
 "Raumschiffen aus und koordinieren die Aktivitäten der Navy im gesamten "
 "Sektor."
 
-#: scripts/scenario_54_PatrolDuty.lua:316
+#: scripts/scenario_54_PatrolDuty.lua:322
 msgctxt "stationStory-comms"
 msgid ""
 "The original station builders were fans of the late 20th century scientist "
@@ -244,12 +266,12 @@ msgstr ""
 "und entwickelte sich zu einem Bildungs- und Koordinationszentrum für die "
 "Region."
 
-#: scripts/scenario_54_PatrolDuty.lua:354
+#: scripts/scenario_54_PatrolDuty.lua:360
 msgctxt "scienceDescription-station"
 msgid "Warp and Impulse engine manufacturing"
 msgstr "Herstellung von Warp- und Impulsantrieben"
 
-#: scripts/scenario_54_PatrolDuty.lua:355
+#: scripts/scenario_54_PatrolDuty.lua:361
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We manufacture warp, impulse and jump engines for the human navy fleet as "
@@ -258,7 +280,7 @@ msgstr ""
 "Wir stellen Warp-, Impuls- und Sprungtriebwerke für die menschliche Flotte "
 "sowie für andere unabhängige Kunden auf Vertragsbasis her."
 
-#: scripts/scenario_54_PatrolDuty.lua:356
+#: scripts/scenario_54_PatrolDuty.lua:362
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after the late 19th century astronaut as well as the "
@@ -271,17 +293,17 @@ msgstr ""
 "zunächst ganze weltraumtaugliche Schiffe. Mit der Zeit spezialisierte sie "
 "sich auf Antriebssysteme."
 
-#: scripts/scenario_54_PatrolDuty.lua:390
+#: scripts/scenario_54_PatrolDuty.lua:396
 msgctxt "scienceDescription-station"
 msgid "Warp drive components"
 msgstr "Warpantriebs-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:391
+#: scripts/scenario_54_PatrolDuty.lua:397
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide warp drive engines and components"
 msgstr "Wir bieten Warpantriebe und -komponenten."
 
-#: scripts/scenario_54_PatrolDuty.lua:392
+#: scripts/scenario_54_PatrolDuty.lua:398
 msgctxt "stationStory-comms"
 msgid ""
 "This station is named after Chris Van Den Broeck who did some initial "
@@ -291,12 +313,12 @@ msgstr ""
 "Jahrhunderts auf der Erde erste Forschungen über die Möglichkeit des Warp-"
 "Antriebs anstellte."
 
-#: scripts/scenario_54_PatrolDuty.lua:430
+#: scripts/scenario_54_PatrolDuty.lua:436
 msgctxt "scienceDescription-station"
 msgid "Shielded circuitry fabrication"
 msgstr "Herstellung von abgeschirmten Schaltkreisen"
 
-#: scripts/scenario_54_PatrolDuty.lua:431
+#: scripts/scenario_54_PatrolDuty.lua:437
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We make a large variety of circuits for numerous ship systems shielded from "
@@ -305,7 +327,7 @@ msgstr ""
 "Wir stellen eine Vielzahl von Schaltkreisen für zahlreiche Schiffssysteme "
 "her, die vor Sensorerfassung und externen Steuerungsstörungen geschützt sind."
 
-#: scripts/scenario_54_PatrolDuty.lua:432
+#: scripts/scenario_54_PatrolDuty.lua:438
 msgctxt "stationStory-comms"
 msgid ""
 "Our station is named after the law which quantifies the amount of force with "
@@ -316,18 +338,18 @@ msgstr ""
 "sich ortsfeste, elektrisch geladene Teilchen abstoßen oder anziehen - ein "
 "grundlegendes Prinzip bei der Entwicklung unserer Schaltungen."
 
-#: scripts/scenario_54_PatrolDuty.lua:470
-#: scripts/scenario_54_PatrolDuty.lua:2335
+#: scripts/scenario_54_PatrolDuty.lua:476
+#: scripts/scenario_54_PatrolDuty.lua:2341
 msgctxt "scienceDescription-station"
 msgid "Sensor components"
 msgstr "Sensor-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:471
+#: scripts/scenario_54_PatrolDuty.lua:477
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture sensor components and systems"
 msgstr "Wir erforschen und fertigen Sensor-Komponenten und -Systeme"
 
-#: scripts/scenario_54_PatrolDuty.lua:472
+#: scripts/scenario_54_PatrolDuty.lua:478
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Tony Heyes the inventor of some of the earliest "
@@ -338,18 +360,18 @@ msgstr ""
 "elektromagnetischen Sensoren, in der Mitte des 20. Jahrhunderts auf der Erde "
 "im Vereinigten Königreich, um die Mobilität von Blinden zu unterstützen."
 
-#: scripts/scenario_54_PatrolDuty.lua:507
+#: scripts/scenario_54_PatrolDuty.lua:513
 msgctxt "scienceDescription-station"
 msgid "Nanite supplier"
 msgstr "Anbieter von Naniten"
 
-#: scripts/scenario_54_PatrolDuty.lua:508
+#: scripts/scenario_54_PatrolDuty.lua:514
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide nanites for various organic and non-organic systems"
 msgstr ""
 "Wir bieten Naniten für verschiedene organische und nicht-organische Systeme"
 
-#: scripts/scenario_54_PatrolDuty.lua:509
+#: scripts/scenario_54_PatrolDuty.lua:515
 msgctxt "stationStory-comms"
 msgid ""
 "This station is named after the nanotechnologist Hossam Haick from the early "
@@ -358,17 +380,17 @@ msgstr ""
 "Diese Station ist nach dem Nanotechnologen Hossam Haick aus dem frühen 21. "
 "Jahrhundert auf der Erde in Israel benannt."
 
-#: scripts/scenario_54_PatrolDuty.lua:547
+#: scripts/scenario_54_PatrolDuty.lua:553
 msgctxt "scienceDescription-station"
 msgid "Energy beam components"
 msgstr "Laser-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:548
+#: scripts/scenario_54_PatrolDuty.lua:554
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture energy beam components and systems"
 msgstr "Wir erforschen und fertigen Komponenten und Systeme für Laser."
 
-#: scripts/scenario_54_PatrolDuty.lua:549
+#: scripts/scenario_54_PatrolDuty.lua:555
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Theodore Maiman who researched and built the "
@@ -377,28 +399,28 @@ msgstr ""
 "Die Station ist nach Theodore Maiman benannt, der Mitte des 20. Jahrhunderts "
 "den ersten Laser auf der Erde erforschte und baute."
 
-#: scripts/scenario_54_PatrolDuty.lua:579
-#: scripts/scenario_54_PatrolDuty.lua:2595
+#: scripts/scenario_54_PatrolDuty.lua:585
+#: scripts/scenario_54_PatrolDuty.lua:2601
 msgctxt "scienceDescription-station"
 msgid "Gambling and resupply"
 msgstr "Glücksspiel und Nachschub"
 
-#: scripts/scenario_54_PatrolDuty.lua:580
+#: scripts/scenario_54_PatrolDuty.lua:586
 msgctxt "stationGeneralInfo-comms"
 msgid "The oldest station in the quadrant"
 msgstr "Die älteste Station des Quadranten."
 
-#: scripts/scenario_54_PatrolDuty.lua:616
+#: scripts/scenario_54_PatrolDuty.lua:622
 msgctxt "scienceDescription-station"
 msgid "Energy Beam Components"
 msgstr "Laser-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:617
+#: scripts/scenario_54_PatrolDuty.lua:623
 msgctxt "stationGeneralInfo-comms"
 msgid "We manufacture energy beam components"
 msgstr "Wir erforschen und fertigen Komponenten für Laser."
 
-#: scripts/scenario_54_PatrolDuty.lua:618
+#: scripts/scenario_54_PatrolDuty.lua:624
 msgctxt "stationStory-comms"
 msgid ""
 "Station named after Guglielmo Marconi an Italian inventor from early 20th "
@@ -409,19 +431,19 @@ msgstr ""
 "frühen 20. Jahrhundert, der zusammen mit Nicola Tesla behauptete, einen "
 "Todesstrahl oder eine Teilchenstrahlwaffe erfunden zu haben."
 
-#: scripts/scenario_54_PatrolDuty.lua:653
+#: scripts/scenario_54_PatrolDuty.lua:659
 msgctxt "scienceDescription-station"
 msgid "Exobiology research"
 msgstr "Exobiologische Forschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:654
+#: scripts/scenario_54_PatrolDuty.lua:660
 msgctxt "stationGeneralInfo-comms"
 msgid "We study recently discovered life forms not native to Earth"
 msgstr ""
 "Wir untersuchen kürzlich entdeckte Lebensformen, die nicht auf der Erde "
 "heimisch sind."
 
-#: scripts/scenario_54_PatrolDuty.lua:655
+#: scripts/scenario_54_PatrolDuty.lua:661
 msgctxt "stationStory-comms"
 msgid ""
 "This station was named after one of the early exobiologists from mid 20th "
@@ -430,19 +452,19 @@ msgstr ""
 "Diese Station wurde nach einem der ersten Exobiologen aus der Mitte des 20. "
 "Jahrhunderts, Dr. Stanley Miller, benannt."
 
-#: scripts/scenario_54_PatrolDuty.lua:690
-#: scripts/scenario_54_PatrolDuty.lua:1215
+#: scripts/scenario_54_PatrolDuty.lua:696
+#: scripts/scenario_54_PatrolDuty.lua:1221
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
 msgstr "Impulsantrieb-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:691
+#: scripts/scenario_54_PatrolDuty.lua:697
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture impulse engine components and systems"
 msgstr ""
 "Wir erforschen und fertigen Komponenten und Systeme für Impulsantriebe."
 
-#: scripts/scenario_54_PatrolDuty.lua:692
+#: scripts/scenario_54_PatrolDuty.lua:698
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Roger Shawyer who built the first prototype "
@@ -451,18 +473,18 @@ msgstr ""
 "Die Station ist nach Roger Shawyer benannt, der Anfang des 21. Jahrhunderts "
 "den ersten Prototyp eines Impulstriebwerks baute."
 
-#: scripts/scenario_54_PatrolDuty.lua:729
+#: scripts/scenario_54_PatrolDuty.lua:735
 msgctxt "scienceDescription-station"
 msgid "Energy and particle beam components"
 msgstr "Energie- und Teilchenstrahlkomponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:730
+#: scripts/scenario_54_PatrolDuty.lua:736
 msgctxt "stationGeneralInfo-comms"
 msgid "We fabricate general and specialized components for ship beam systems"
 msgstr ""
 "Wir stellen allgemeine und spezialisierte Komponenten für Laserwaffen her."
 
-#: scripts/scenario_54_PatrolDuty.lua:731
+#: scripts/scenario_54_PatrolDuty.lua:737
 msgctxt "stationStory-comms"
 msgid ""
 "This station was named after Archimedes who, according to legend, used a "
@@ -474,13 +496,13 @@ msgstr ""
 "eine römische Flotte zu richten, die in Syrakus einfiel, und diese in Brand "
 "setzte."
 
-#: scripts/scenario_54_PatrolDuty.lua:766
-#: scripts/scenario_54_PatrolDuty.lua:1430
+#: scripts/scenario_54_PatrolDuty.lua:772
+#: scripts/scenario_54_PatrolDuty.lua:1436
 msgctxt "scienceDescription-station"
 msgid "Trading station"
 msgstr "Handelsstation"
 
-#: scripts/scenario_54_PatrolDuty.lua:767
+#: scripts/scenario_54_PatrolDuty.lua:773
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "Only the largest market and trading location in twenty sectors. You can find "
@@ -489,7 +511,7 @@ msgstr ""
 "Der größte Markt- und Handelsplatz in zwanzig Sektoren. Hier finden Sie "
 "alles, was Ihr Herz begehrt."
 
-#: scripts/scenario_54_PatrolDuty.lua:768
+#: scripts/scenario_54_PatrolDuty.lua:774
 msgctxt "stationStory-comms"
 msgid ""
 "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. "
@@ -498,13 +520,13 @@ msgstr ""
 "Gestaltet nach dem Vorbild des Basars auf der Erde im frühen 21. Jahrhundert "
 "in Bangkok, Thailand. Entworfen und gebaut mit Blick auf Handel und Gewerbe."
 
-#: scripts/scenario_54_PatrolDuty.lua:806
-#: scripts/scenario_54_PatrolDuty.lua:2446
+#: scripts/scenario_54_PatrolDuty.lua:812
+#: scripts/scenario_54_PatrolDuty.lua:2452
 msgctxt "scienceDescription-station"
 msgid "Mining"
 msgstr "Bergbau"
 
-#: scripts/scenario_54_PatrolDuty.lua:807
+#: scripts/scenario_54_PatrolDuty.lua:813
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We mine nearby asteroids for precious minerals and process them for sale"
@@ -512,7 +534,7 @@ msgstr ""
 "Wir bauen nahe gelegene Asteroiden für wertvolle Mineralien ab, die wir dann "
 "für den Verkauf aufbereiten."
 
-#: scripts/scenario_54_PatrolDuty.lua:808
+#: scripts/scenario_54_PatrolDuty.lua:814
 msgctxt "stationStory-comms"
 msgid ""
 "This station's name is inspired by a large gold mine on Earth in Indonesia. "
@@ -523,12 +545,12 @@ msgstr ""
 "in Indonesien. Die Erbauer der Station hofften, eine ähnliche Menge an "
 "Mineralien in diesen Asteroiden zu finden."
 
-#: scripts/scenario_54_PatrolDuty.lua:843
+#: scripts/scenario_54_PatrolDuty.lua:849
 msgctxt "scienceDescription-station"
 msgid "Observatory and stellar mapping"
 msgstr "Observatorium und stellare Kartierung"
 
-#: scripts/scenario_54_PatrolDuty.lua:844
+#: scripts/scenario_54_PatrolDuty.lua:850
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We study the cosmos and map stellar phenomena. We also track moving "
@@ -539,7 +561,7 @@ msgstr ""
 "...\n"
 "Nur ein Scherz ;)."
 
-#: scripts/scenario_54_PatrolDuty.lua:845
+#: scripts/scenario_54_PatrolDuty.lua:851
 msgctxt "stationStory-comms"
 msgid ""
 "Station named in honor of Charles Hayden whose philanthropy continued "
@@ -549,13 +571,13 @@ msgstr ""
 "die astrophysikalische Forschung und Ausbildung auf der Erde im frühen 20. "
 "Jahrhundert stark voran brachte."
 
-#: scripts/scenario_54_PatrolDuty.lua:880
-#: scripts/scenario_54_PatrolDuty.lua:2068
+#: scripts/scenario_54_PatrolDuty.lua:886
+#: scripts/scenario_54_PatrolDuty.lua:2074
 msgctxt "scienceDescription-station"
 msgid "Autodoc components"
 msgstr "Autodoc-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:882
+#: scripts/scenario_54_PatrolDuty.lua:888
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Dr. Lipkin who pioneered some of the research and "
@@ -567,17 +589,17 @@ msgstr ""
 "robotergestützten Chirurgie im Bereich der partiellen Nephrektomie bei "
 "Nierentumoren geleistet hat."
 
-#: scripts/scenario_54_PatrolDuty.lua:917
+#: scripts/scenario_54_PatrolDuty.lua:923
 msgctxt "scienceDescription-station"
 msgid "Zero gravity sports and entertainment"
 msgstr "Sport und Unterhaltung in der Schwerelosigkeit"
 
-#: scripts/scenario_54_PatrolDuty.lua:918
+#: scripts/scenario_54_PatrolDuty.lua:924
 msgctxt "stationGeneralInfo-comms"
 msgid "Come take in a game or two or perhaps see a show"
 msgstr "Besuchen Sie ein oder zwei Spiele oder vielleicht eine Show."
 
-#: scripts/scenario_54_PatrolDuty.lua:919
+#: scripts/scenario_54_PatrolDuty.lua:925
 msgctxt "stationStory-comms"
 msgid ""
 "Named after Madison Square Gardens from 21st century Earth, this station was "
@@ -588,17 +610,17 @@ msgstr ""
 "wurde diese Station für ähnliche Zwecke im Weltraum konzipiert - ein Ort für "
 "Sport und Unterhaltung."
 
-#: scripts/scenario_54_PatrolDuty.lua:954
+#: scripts/scenario_54_PatrolDuty.lua:960
 msgctxt "scienceDescription-station"
 msgid "Shield components and research"
 msgstr "Schutzschildkomponenten und Forschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:955
+#: scripts/scenario_54_PatrolDuty.lua:961
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and fabricate components for ship shield systems"
 msgstr "Wir erforschen und fertigen Komponenten für Schutzschildsysteme."
 
-#: scripts/scenario_54_PatrolDuty.lua:956
+#: scripts/scenario_54_PatrolDuty.lua:962
 msgctxt "stationStory-comms"
 msgid ""
 "This station was named after the national research institution Rutherford "
@@ -611,12 +633,12 @@ msgstr ""
 "Jahrhunderts erste Forschungen über die Machbarkeit eines Energieschilds "
 "durchführte."
 
-#: scripts/scenario_54_PatrolDuty.lua:991
+#: scripts/scenario_54_PatrolDuty.lua:997
 msgctxt "scienceDescription-station"
 msgid "Shield and armor components and research"
 msgstr "Schild- und Panzerungskomponenten und Forschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:992
+#: scripts/scenario_54_PatrolDuty.lua:998
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We research and make general and specialized components for ship shield and "
@@ -625,7 +647,7 @@ msgstr ""
 "Wir erforschen und produzieren allgemeine und spezielle Komponenten für "
 "Schutzschilde und Schiffspanzerungen."
 
-#: scripts/scenario_54_PatrolDuty.lua:993
+#: scripts/scenario_54_PatrolDuty.lua:999
 msgctxt "stationStory-comms"
 msgid ""
 "This station was named after one of the earliest researchers in shield "
@@ -636,12 +658,12 @@ msgstr ""
 "Schildtechnologie, Alexander Toohie, benannt. Damals galt die Konstruktion "
 "von Schilden noch als physikalisch unpraktisch."
 
-#: scripts/scenario_54_PatrolDuty.lua:1033
+#: scripts/scenario_54_PatrolDuty.lua:1039
 msgctxt "scienceDescription-station"
 msgid "Battery and software engineering"
 msgstr "Batterie- und Softwaretechnik"
 
-#: scripts/scenario_54_PatrolDuty.lua:1034
+#: scripts/scenario_54_PatrolDuty.lua:1040
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We provide high quality high capacity batteries and specialized software for "
@@ -650,7 +672,7 @@ msgstr ""
 "Wir bieten qualitativ hochwertige Hochleistungsbatterien und spezialisierte "
 "Software für alle Schiffssysteme."
 
-#: scripts/scenario_54_PatrolDuty.lua:1035
+#: scripts/scenario_54_PatrolDuty.lua:1041
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after a fictional software engineer in a late 20th "
@@ -661,17 +683,17 @@ msgstr ""
 "späten 20. Jahrhunderts benannt, in dem die Menschheit unwissentlich erobert "
 "und durch softwaregenerierte Illusionen gefügig gehalten wird."
 
-#: scripts/scenario_54_PatrolDuty.lua:1069
+#: scripts/scenario_54_PatrolDuty.lua:1075
 msgctxt "scienceDescription-station"
 msgid "Shield and Armor Research"
 msgstr "Schild- und Panzerungsforschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:1070
+#: scripts/scenario_54_PatrolDuty.lua:1076
 msgctxt "stationGeneralInfo-comms"
 msgid "The finest shield and armor manufacturer in the quadrant"
 msgstr "Der beste Schild- und Panzerungshersteller im Quadranten."
 
-#: scripts/scenario_54_PatrolDuty.lua:1071
+#: scripts/scenario_54_PatrolDuty.lua:1077
 msgctxt "stationStory-comms"
 msgid ""
 "We named this station for the pioneering spirit of the 22nd century "
@@ -680,12 +702,12 @@ msgstr ""
 "Wir haben diese Station nach dem Pioniergeist des Sternenflottenforschers "
 "des 22. Jahrhunderts, Captain Jonathan Archer, benannt."
 
-#: scripts/scenario_54_PatrolDuty.lua:1105
+#: scripts/scenario_54_PatrolDuty.lua:1111
 msgctxt "scienceDescription-station"
 msgid "Communication components"
 msgstr "Kommunikations-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:1106
+#: scripts/scenario_54_PatrolDuty.lua:1112
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We provide a range of communication equipment and software for use aboard "
@@ -694,7 +716,7 @@ msgstr ""
 "Wir bieten eine Reihe von Kommunikations-Geräten und Software für den "
 "Einsatz an Bord von Schiffen."
 
-#: scripts/scenario_54_PatrolDuty.lua:1107
+#: scripts/scenario_54_PatrolDuty.lua:1113
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Reginald Barclay who established the first "
@@ -707,17 +729,17 @@ msgstr ""
 "Kommunikationsverbindung herstellte. Das Stationspersonal bezeichnet die "
 "Station oft als Broccoli-Station."
 
-#: scripts/scenario_54_PatrolDuty.lua:1141
+#: scripts/scenario_54_PatrolDuty.lua:1147
 msgctxt "scienceDescription-station"
 msgid "Robotic research"
 msgstr "Robotik-Forschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:1142
+#: scripts/scenario_54_PatrolDuty.lua:1148
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and provide robotic systems and components"
 msgstr "Wir erforschen und bieten Robotiksysteme und -komponenten."
 
-#: scripts/scenario_54_PatrolDuty.lua:1143
+#: scripts/scenario_54_PatrolDuty.lua:1149
 msgctxt "stationStory-comms"
 msgid ""
 "This station is named after Dr. Susan Calvin who pioneered robotic "
@@ -726,12 +748,12 @@ msgstr ""
 "Diese Station ist nach Dr. Susan Calvin benannt, die Pionierarbeit in der "
 "Verhaltensforschung und Programmierung von Robotern geleistet hat."
 
-#: scripts/scenario_54_PatrolDuty.lua:1178
+#: scripts/scenario_54_PatrolDuty.lua:1184
 msgctxt "scienceDescription-station"
 msgid "Advanced Material components"
 msgstr "Fortschrittliche Material-komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:1179
+#: scripts/scenario_54_PatrolDuty.lua:1185
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We fabricate several different kinds of materials critical to various space "
@@ -741,7 +763,7 @@ msgstr ""
 "Raumfahrtindustrien wie Schiffsbau, Stationsbau und Mineralienabbau wichtig "
 "sind."
 
-#: scripts/scenario_54_PatrolDuty.lua:1180
+#: scripts/scenario_54_PatrolDuty.lua:1186
 msgctxt "stationStory-comms"
 msgid ""
 "We named our station after Dr. Cavor, the physicist that invented a barrier "
@@ -750,14 +772,14 @@ msgstr ""
 "Wir haben unsere Station nach Dr. Cavor benannt, dem Physiker, der ein "
 "Barrierematerial für Gravitationswellen erfunden hat - Cavorit."
 
-#: scripts/scenario_54_PatrolDuty.lua:1216
+#: scripts/scenario_54_PatrolDuty.lua:1222
 msgctxt "stationGeneralInfo-comms"
 msgid "We supply high quality impulse engines and parts for use aboard ships"
 msgstr ""
 "Wir bieten qualitativ hochwertige Impulsantriebe und Teile für den Einsatz "
 "an Bord von Schiffen."
 
-#: scripts/scenario_54_PatrolDuty.lua:1217
+#: scripts/scenario_54_PatrolDuty.lua:1223
 msgctxt "stationStory-comms"
 msgid ""
 "This station was named after the fictional engineer, Cyrus Smith created by "
@@ -766,19 +788,19 @@ msgstr ""
 "Dieser Station wurde nach dem fiktiven Ingenieur Cyrus Smith benannt, "
 "geschaffen vom Autor Jules Verne im 19. Jahrhundert."
 
-#: scripts/scenario_54_PatrolDuty.lua:1252
-#: scripts/scenario_54_PatrolDuty.lua:1471
-#: scripts/scenario_54_PatrolDuty.lua:1693
+#: scripts/scenario_54_PatrolDuty.lua:1258
+#: scripts/scenario_54_PatrolDuty.lua:1477
+#: scripts/scenario_54_PatrolDuty.lua:1699
 msgctxt "scienceDescription-station"
 msgid "Android components"
 msgstr "Androidenkomponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:1253
+#: scripts/scenario_54_PatrolDuty.lua:1259
 msgctxt "stationGeneralInfo-comms"
 msgid "Supplier of android components, programming and service"
 msgstr "Anbieter von Androiden-Komponenten, Programmierung und Service."
 
-#: scripts/scenario_54_PatrolDuty.lua:1254
+#: scripts/scenario_54_PatrolDuty.lua:1260
 msgctxt "stationStory-comms"
 msgid ""
 "Named for Richard Deckard who inspired many of the sophisticated safety "
@@ -788,13 +810,13 @@ msgstr ""
 "Sicherheitsalgorithmen inspiriert hat, die heute für alle Androiden "
 "erforderlich sind."
 
-#: scripts/scenario_54_PatrolDuty.lua:1285
-#: scripts/scenario_54_PatrolDuty.lua:1508
+#: scripts/scenario_54_PatrolDuty.lua:1291
+#: scripts/scenario_54_PatrolDuty.lua:1514
 msgctxt "scienceDescription-station"
 msgid "Transporter components"
 msgstr "Transporter-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:1286
+#: scripts/scenario_54_PatrolDuty.lua:1292
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We provide transporters used aboard ships as well as the components for "
@@ -803,7 +825,7 @@ msgstr ""
 "Wir liefern Transporter, die an Bord von Schiffen eingesetzt werden, sowie "
 "die Komponenten für deren Reparatur und Wartung."
 
-#: scripts/scenario_54_PatrolDuty.lua:1287
+#: scripts/scenario_54_PatrolDuty.lua:1293
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after the early 22nd century inventor of the "
@@ -814,24 +836,24 @@ msgstr ""
 "Jahrhundert, Dr. Emory Erickson, benannt. Diese Station ist stolz darauf, "
 "die Unterstützung von Admiral Leonard McCoy erhalten zu haben."
 
-#: scripts/scenario_54_PatrolDuty.lua:1322
+#: scripts/scenario_54_PatrolDuty.lua:1328
 msgctxt "scienceDescription-station"
 msgid "Commerce and gambling"
 msgstr "Handel und Glücksspiel"
 
-#: scripts/scenario_54_PatrolDuty.lua:1323
+#: scripts/scenario_54_PatrolDuty.lua:1329
 msgctxt "stationGeneralInfo-comms"
 msgid "Come play some games and shop. House take does not exceed 4 percent"
 msgstr ""
 "Besuchen Sie uns, um zu spielen und einzukaufen. Das Haus nimmt nicht mehr "
 "als 4 Prozent."
 
-#: scripts/scenario_54_PatrolDuty.lua:1359
+#: scripts/scenario_54_PatrolDuty.lua:1365
 msgctxt "scienceDescription-station"
 msgid "Xenopsychology training"
 msgstr "Xenopsychologie-Ausbildung"
 
-#: scripts/scenario_54_PatrolDuty.lua:1360
+#: scripts/scenario_54_PatrolDuty.lua:1366
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We provide classes and simulation to help train diverse species in how to "
@@ -840,7 +862,7 @@ msgstr ""
 "Wir bieten Kurse und Simulationen an, um den Umgang mit verschiedenen "
 "Spezies zu schulen."
 
-#: scripts/scenario_54_PatrolDuty.lua:1361
+#: scripts/scenario_54_PatrolDuty.lua:1367
 msgctxt "stationStory-comms"
 msgid ""
 "A continuation of the research initially conducted by Dr. Gennady Komov in "
@@ -851,19 +873,19 @@ msgstr ""
 "Jahrhunderts auf der Venus durchgeführten Forschung, unterstützt durch die "
 "Anwendung dieser Grundlagen."
 
-#: scripts/scenario_54_PatrolDuty.lua:1397
+#: scripts/scenario_54_PatrolDuty.lua:1403
 msgctxt "scienceDescription-station"
 msgid "Casino and Gambling"
 msgstr "Kasino und Glücksspiel"
 
-#: scripts/scenario_54_PatrolDuty.lua:1431
+#: scripts/scenario_54_PatrolDuty.lua:1437
 msgctxt "stationGeneralInfo-comms"
 msgid "Come to Muddvile for all your trade and commerce needs and desires"
 msgstr ""
 "Kommen Sie zu Muddvile für alle Ihre Bedürfnisse und Wünsche im Bereich "
 "Handel und Gewerbe."
 
-#: scripts/scenario_54_PatrolDuty.lua:1432
+#: scripts/scenario_54_PatrolDuty.lua:1438
 msgctxt "stationStory-comms"
 msgid ""
 "Upon retirement, Harry Mudd started this commercial venture using his "
@@ -875,12 +897,12 @@ msgstr ""
 "weitreichenden Kontakte nutzte, die er während seiner Zeit als reisender "
 "Händler, durch die Sterne, erworben hatte."
 
-#: scripts/scenario_54_PatrolDuty.lua:1472
+#: scripts/scenario_54_PatrolDuty.lua:1478
 msgctxt "stationGeneralInfo-comms"
 msgid "Androids, their parts, maintenance and recylcling"
 msgstr "Androiden, ihre Bauteile, Wartung und Wiederverwertung"
 
-#: scripts/scenario_54_PatrolDuty.lua:1473
+#: scripts/scenario_54_PatrolDuty.lua:1479
 msgctxt "stationStory-comms"
 msgid ""
 "We named the station after the ground breaking android model produced by the "
@@ -889,7 +911,7 @@ msgstr ""
 "Wir haben die Station nach dem bahnbrechenden Androidenmodell des Tyrell-"
 "Konzerns benannt."
 
-#: scripts/scenario_54_PatrolDuty.lua:1509
+#: scripts/scenario_54_PatrolDuty.lua:1515
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We research and fabricate high quality transporters and transporter "
@@ -898,7 +920,7 @@ msgstr ""
 "Wir erforschen und fertigen hochwertige Transporter und Transporter-"
 "Komponenten für den Einsatz an Bord von Schiffen."
 
-#: scripts/scenario_54_PatrolDuty.lua:1510
+#: scripts/scenario_54_PatrolDuty.lua:1516
 msgctxt "stationStory-comms"
 msgid ""
 "Miles O'Brien started this business after his experience as a transporter "
@@ -907,12 +929,12 @@ msgstr ""
 "Miles O'Brien gründete dieses Unternehmen nach seinen Erfahrungen als "
 "Transporterchief."
 
-#: scripts/scenario_54_PatrolDuty.lua:1545
+#: scripts/scenario_54_PatrolDuty.lua:1551
 msgctxt "scienceDescription-station"
 msgid "Diplomatic training"
 msgstr "Diplomatische Ausbildung"
 
-#: scripts/scenario_54_PatrolDuty.lua:1546
+#: scripts/scenario_54_PatrolDuty.lua:1552
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "The premeire academy for leadership and diplomacy training in the region"
@@ -920,7 +942,7 @@ msgstr ""
 "Die führende Akademie für die Ausbildung von Führungskräften sowie "
 "Diplomatie-Ausbildung in der Region."
 
-#: scripts/scenario_54_PatrolDuty.lua:1547
+#: scripts/scenario_54_PatrolDuty.lua:1553
 msgctxt "stationStory-comms"
 msgid ""
 "Established by the royal family so critical during the political upheaval era"
@@ -928,19 +950,19 @@ msgstr ""
 "Gegründet von der königlichen Familie, die in der Zeit des politischen "
 "Umbruchs so wichtig war."
 
-#: scripts/scenario_54_PatrolDuty.lua:1582
-#: scripts/scenario_54_PatrolDuty.lua:1619
+#: scripts/scenario_54_PatrolDuty.lua:1588
+#: scripts/scenario_54_PatrolDuty.lua:1625
 msgctxt "scienceDescription-station"
 msgid "Load lifters and components"
 msgstr "Lastenheber und Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:1583
+#: scripts/scenario_54_PatrolDuty.lua:1589
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide load lifters and components for various ship systems"
 msgstr ""
 "Wir bieten Lastenheber und Komponenten für verschiedene Schiffssysteme."
 
-#: scripts/scenario_54_PatrolDuty.lua:1584
+#: scripts/scenario_54_PatrolDuty.lua:1590
 msgctxt "stationStory-comms"
 msgid ""
 "Owens started off in the moisture vaporator business on Tattooine then "
@@ -953,12 +975,12 @@ msgstr ""
 "Protokollen den Lastenhebern zu. Der Name der Station erinnert an den "
 "tragischen Verlust unseres Gründers durch imperiale Gewalt."
 
-#: scripts/scenario_54_PatrolDuty.lua:1620
+#: scripts/scenario_54_PatrolDuty.lua:1626
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide load lifters and components"
 msgstr "Wir bieten Lastenheber und Komponenten."
 
-#: scripts/scenario_54_PatrolDuty.lua:1621
+#: scripts/scenario_54_PatrolDuty.lua:1627
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Ellen Ripley who made creative and effective use "
@@ -967,12 +989,12 @@ msgstr ""
 "Die Station ist nach Ellen Ripley benannt, die bei der Verteidigung ihres "
 "Schiffes einen unserer Lastenheber kreativ und effektiv eingesetzt hat."
 
-#: scripts/scenario_54_PatrolDuty.lua:1656
+#: scripts/scenario_54_PatrolDuty.lua:1662
 msgctxt "scienceDescription-station"
 msgid "Routine maintenance and entertainment"
 msgstr "Routinemäßige Wartung und Unterhaltung"
 
-#: scripts/scenario_54_PatrolDuty.lua:1657
+#: scripts/scenario_54_PatrolDuty.lua:1663
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "Stop by for repairs. Take in one of our juggling shows featuring the four-"
@@ -981,7 +1003,7 @@ msgstr ""
 "Kommen Sie für Reparaturen vorbei. Sehen Sie sich eine unserer Jongliershows "
 "mit den vierarmigen Skandaren an."
 
-#: scripts/scenario_54_PatrolDuty.lua:1658
+#: scripts/scenario_54_PatrolDuty.lua:1664
 msgctxt "stationStory-comms"
 msgid ""
 "The nomadic Skandars have set up at this station to practice their "
@@ -992,12 +1014,12 @@ msgstr ""
 "ihre Unterhaltungs- und Wartungsfähigkeiten zu trainieren und eine "
 "Gemeinschaft aufzubauen, in der sie sich entspannen können."
 
-#: scripts/scenario_54_PatrolDuty.lua:1694
+#: scripts/scenario_54_PatrolDuty.lua:1700
 msgctxt "stationGeneralInfo-comms"
 msgid "We create androids and android components"
 msgstr "Wir erstellen Androiden und Androiden-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:1695
+#: scripts/scenario_54_PatrolDuty.lua:1701
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after Dr. Noonian Soong, the famous android researcher "
@@ -1006,12 +1028,12 @@ msgstr ""
 "Die Station ist nach Dr. Noonian Soong benannt, dem berühmten "
 "Androidenforscher und -bauer."
 
-#: scripts/scenario_54_PatrolDuty.lua:1730
+#: scripts/scenario_54_PatrolDuty.lua:1736
 msgctxt "scienceDescription-station"
 msgid "Automated weapons systems"
 msgstr "Automatisierte Waffensysteme"
 
-#: scripts/scenario_54_PatrolDuty.lua:1731
+#: scripts/scenario_54_PatrolDuty.lua:1737
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We research and create automated weapons systems to improve ship combat "
@@ -1020,7 +1042,7 @@ msgstr ""
 "Wir erforschen und entwickeln automatisierte Waffensysteme zur Verbesserung "
 "der Kampfkraft von Schiffen."
 
-#: scripts/scenario_54_PatrolDuty.lua:1732
+#: scripts/scenario_54_PatrolDuty.lua:1738
 msgctxt "stationStory-comms"
 msgid ""
 "Lost the history memory bank. Recovery efforts only brought back the phrase, "
@@ -1029,12 +1051,12 @@ msgstr ""
 "Die Geschichtsdatenbank ging verloren. Wiederherstellungsbemühungen brachten "
 "nur die Phrase 'I'll be back' zurück."
 
-#: scripts/scenario_54_PatrolDuty.lua:1763
+#: scripts/scenario_54_PatrolDuty.lua:1769
 msgctxt "scienceDescription-station"
 msgid "Logistics coordination"
 msgstr "Logistische Koordination"
 
-#: scripts/scenario_54_PatrolDuty.lua:1764
+#: scripts/scenario_54_PatrolDuty.lua:1770
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We support the stations and ships in the area with planning and "
@@ -1043,7 +1065,7 @@ msgstr ""
 "Wir unterstützen die Stationen und Schiffe in diesem Gebiet mit Planungs- "
 "und Kommunikationsdienstleistungen."
 
-#: scripts/scenario_54_PatrolDuty.lua:1765
+#: scripts/scenario_54_PatrolDuty.lua:1771
 msgctxt "stationStory-comms"
 msgid ""
 "We recognize the influence of Starfleet Captain James Tiberius Kirk in the "
@@ -1052,12 +1074,12 @@ msgstr ""
 "Wir erkennen in unserem Stationsnamen den Einfluss von Sternenflottenkapitän "
 "James Tiberius Kirk im 23. Jahrhundert an."
 
-#: scripts/scenario_54_PatrolDuty.lua:1800
+#: scripts/scenario_54_PatrolDuty.lua:1806
 msgctxt "scienceDescription-station"
 msgid "Advanced material components"
 msgstr "Fortschrittliche Material-komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:1801
+#: scripts/scenario_54_PatrolDuty.lua:1807
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We create multiple types of advanced material components. Our most popular "
@@ -1066,7 +1088,7 @@ msgstr ""
 "Wir stellen verschiedene Arten von Komponenten aus hochentwickelten "
 "Materialien her. Unsere beliebtesten Produkte sind unsere Filamente."
 
-#: scripts/scenario_54_PatrolDuty.lua:1802
+#: scripts/scenario_54_PatrolDuty.lua:1808
 msgctxt "stationStory-comms"
 msgid ""
 "We learned several of our critical industrial processes from the Tokra race, "
@@ -1076,13 +1098,13 @@ msgstr ""
 "namens Tokra gelernt, daher ehren wir sie, indem wir die Station nach ihnen "
 "benennen."
 
-#: scripts/scenario_54_PatrolDuty.lua:1833
-#: scripts/scenario_54_PatrolDuty.lua:1874
+#: scripts/scenario_54_PatrolDuty.lua:1839
+#: scripts/scenario_54_PatrolDuty.lua:1880
 msgctxt "scienceDescription-station"
 msgid "Ship building and maintenance facility"
 msgstr "Schiffsbau- und Wartungseinrichtung"
 
-#: scripts/scenario_54_PatrolDuty.lua:1834
+#: scripts/scenario_54_PatrolDuty.lua:1840
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We work on all aspects of naval ship building and maintenance. Many of the "
@@ -1095,12 +1117,12 @@ msgstr ""
 "erforscht, entworfen und gebaut. Unser Ziel ist es, die Raumfahrt angesichts "
 "der enormen Fähigkeiten moderner Schiffe so einfach wie möglich zu gestalten."
 
-#: scripts/scenario_54_PatrolDuty.lua:1911
+#: scripts/scenario_54_PatrolDuty.lua:1917
 msgctxt "scienceDescription-station"
 msgid "Warp engine components"
 msgstr "Warpantrieb-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:1912
+#: scripts/scenario_54_PatrolDuty.lua:1918
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We specialize in the esoteric components necessary to make warp drives "
@@ -1109,7 +1131,7 @@ msgstr ""
 "Wir sind auf die besonderen Komponenten spezialisiert, die für das "
 "ordnungsgemäße Funktionieren von Warp-Antrieben erforderlich sind."
 
-#: scripts/scenario_54_PatrolDuty.lua:1913
+#: scripts/scenario_54_PatrolDuty.lua:1919
 msgctxt "stationStory-comms"
 msgid ""
 "Zefram Cochrane constructed the first warp drive in human history. We named "
@@ -1119,12 +1141,12 @@ msgstr ""
 "Menschheit. Wir haben unsere Station nach ihm benannt, weil wir uns auf Warp-"
 "Systeme spezialisiert haben."
 
-#: scripts/scenario_54_PatrolDuty.lua:1949
+#: scripts/scenario_54_PatrolDuty.lua:1955
 msgctxt "scienceDescription-station"
 msgid "Optical Components"
 msgstr "Optik-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:1950
+#: scripts/scenario_54_PatrolDuty.lua:1956
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We make and supply optic components for various station and ship systems"
@@ -1132,7 +1154,7 @@ msgstr ""
 "Wir fertigen und bieten optische Komponenten für verschiedene Stations- und "
 "Schiffssysteme."
 
-#: scripts/scenario_54_PatrolDuty.lua:1951
+#: scripts/scenario_54_PatrolDuty.lua:1957
 msgctxt "stationStory-comms"
 msgid ""
 "This station continues the businesses from Earth based on the merging of "
@@ -1145,17 +1167,17 @@ msgstr ""
 "Leica und das japanische Forschungs- und Entwicklungsunternehmen für "
 "Elektronik und Optik Advanced Low Carbon (ALCA)."
 
-#: scripts/scenario_54_PatrolDuty.lua:1994
+#: scripts/scenario_54_PatrolDuty.lua:2000
 msgctxt "scienceDescription-station"
 msgid "Medical research"
 msgstr "Medizinische Forschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:1995
+#: scripts/scenario_54_PatrolDuty.lua:2001
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and treat exotic medical conditions"
 msgstr "Wir erforschen und behandeln exotische Krankheiten."
 
-#: scripts/scenario_54_PatrolDuty.lua:1996
+#: scripts/scenario_54_PatrolDuty.lua:2002
 msgctxt "stationStory-comms"
 msgid ""
 "The station is named after the United States national medical research "
@@ -1166,12 +1188,12 @@ msgstr ""
 "Vereinigten Staaten in Bethesda, Maryland, benannt, das Mitte des 20. "
 "Jahrhunderts gegründet wurde."
 
-#: scripts/scenario_54_PatrolDuty.lua:2031
+#: scripts/scenario_54_PatrolDuty.lua:2037
 msgctxt "scienceDescription-station"
 msgid "Repulsor and Tractor Beam Components"
 msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:2032
+#: scripts/scenario_54_PatrolDuty.lua:2038
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We can meet all your pushing and pulling needs with specialized equipment "
@@ -1180,7 +1202,7 @@ msgstr ""
 "Wir können alle Ihre Bedürfnisse in Bezug auf das Schieben und Ziehen mit "
 "spezialisierter, maßgeschneiderter Ausrüstung erfüllen."
 
-#: scripts/scenario_54_PatrolDuty.lua:2033
+#: scripts/scenario_54_PatrolDuty.lua:2039
 msgctxt "stationStory-comms"
 msgid ""
 "The station name comes from a short story by the 20th century author "
@@ -1192,12 +1214,12 @@ msgstr ""
 "19. Jahrhundert, der ein Unternehmen inspirierte, das die entsprechenden "
 "Produkte auf der Erde herstellt."
 
-#: scripts/scenario_54_PatrolDuty.lua:2069
+#: scripts/scenario_54_PatrolDuty.lua:2075
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide components for automated medical machinery"
 msgstr "Wir bieten Komponenten für automatisierte medizinische Geräte."
 
-#: scripts/scenario_54_PatrolDuty.lua:2070
+#: scripts/scenario_54_PatrolDuty.lua:2076
 msgctxt "stationStory-comms"
 msgid ""
 "The station is the evolution of the company that started automated "
@@ -1207,17 +1229,17 @@ msgstr ""
 "Jahrhunderts mit der automatisierten Arzneimittelabgabe auf der Erde in "
 "Finnland begann."
 
-#: scripts/scenario_54_PatrolDuty.lua:2109
+#: scripts/scenario_54_PatrolDuty.lua:2115
 msgctxt "scienceDescription-station"
 msgid "Nanotechnology research"
 msgstr "Nanotechnologie-Forschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:2110
+#: scripts/scenario_54_PatrolDuty.lua:2116
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide nanites and software for a variety of ship-board systems"
 msgstr "Wir bieten Naniten und Software für eine Vielzahl von Schiffssystemen."
 
-#: scripts/scenario_54_PatrolDuty.lua:2111
+#: scripts/scenario_54_PatrolDuty.lua:2117
 msgctxt "stationStory-comms"
 msgid ""
 "This station's name recognizes one of the first scientific researchers into "
@@ -1226,19 +1248,19 @@ msgstr ""
 "Der Name dieser Station erinnert an einen der ersten wissenschaftlichen "
 "Forscher auf dem Gebiet der Nanotechnologie, den Physiker Richard Feynman."
 
-#: scripts/scenario_54_PatrolDuty.lua:2150
+#: scripts/scenario_54_PatrolDuty.lua:2156
 msgctxt "scienceDescription-station"
 msgid "Medical Research"
 msgstr "Medizinische Forschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:2151
+#: scripts/scenario_54_PatrolDuty.lua:2157
 msgctxt "stationGeneralInfo-comms"
 msgid "We research exotic diseases and other human medical conditions"
 msgstr ""
 "Wir erforschen exotische Krankheiten und andere medizinische Probleme des "
 "Menschen."
 
-#: scripts/scenario_54_PatrolDuty.lua:2152
+#: scripts/scenario_54_PatrolDuty.lua:2158
 msgctxt "stationStory-comms"
 msgid ""
 "We continue the medical work started by William Worrall Mayo in the late "
@@ -1247,12 +1269,12 @@ msgstr ""
 "Wir setzen die von William Worrall Mayo Ende des 19. Jahrhunderts begonnene "
 "medizinische Arbeit auf der Erde fort."
 
-#: scripts/scenario_54_PatrolDuty.lua:2187
+#: scripts/scenario_54_PatrolDuty.lua:2193
 msgctxt "scienceDescription-station"
 msgid "Optical components"
 msgstr "Optik-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:2188
+#: scripts/scenario_54_PatrolDuty.lua:2194
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We fabricate optical lenses and related equipment as well as fiber optic "
@@ -1261,7 +1283,7 @@ msgstr ""
 "Wir stellen optische Linsen und zugehörige Ausrüstung sowie Glasfaserkabel "
 "und Komponenten her."
 
-#: scripts/scenario_54_PatrolDuty.lua:2189
+#: scripts/scenario_54_PatrolDuty.lua:2195
 msgctxt "stationStory-comms"
 msgid ""
 "This station grew out of the Olympus company based on earth in the early "
@@ -1273,17 +1295,17 @@ msgstr ""
 "kaufte dann mehrere Softwareunternehmen, bevor es sich in der "
 "Raumfahrtindustrie etablierte."
 
-#: scripts/scenario_54_PatrolDuty.lua:2224
+#: scripts/scenario_54_PatrolDuty.lua:2230
 msgctxt "scienceDescription-station"
 msgid "Optic components"
 msgstr "Optik-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:2225
+#: scripts/scenario_54_PatrolDuty.lua:2231
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide optic components for various ship systems"
 msgstr "Wir bieten optische Komponenten für verschiedene Schiffssysteme."
 
-#: scripts/scenario_54_PatrolDuty.lua:2226
+#: scripts/scenario_54_PatrolDuty.lua:2232
 msgctxt "stationStory-comms"
 msgid ""
 "This station is an outgrowth of the Panduit corporation started in the mid "
@@ -1292,12 +1314,12 @@ msgstr ""
 "Diese Station ist aus dem Unternehmen Panduit hervorgegangen, das Mitte des "
 "20. Jahrhunderts auf der Erde in den Vereinigten Staaten gegründet wurde."
 
-#: scripts/scenario_54_PatrolDuty.lua:2265
+#: scripts/scenario_54_PatrolDuty.lua:2271
 msgctxt "scienceDescription-station"
 msgid "Repulsor and tractor beam components"
 msgstr "Repulsor- und Traktorstrahl-Komponenten"
 
-#: scripts/scenario_54_PatrolDuty.lua:2266
+#: scripts/scenario_54_PatrolDuty.lua:2272
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We make ship systems designed to push or pull other objects around in space"
@@ -1305,7 +1327,7 @@ msgstr ""
 "Wir stellen Schiffssysteme her, die andere Objekte im Weltraum schieben oder "
 "ziehen können."
 
-#: scripts/scenario_54_PatrolDuty.lua:2267
+#: scripts/scenario_54_PatrolDuty.lua:2273
 msgctxt "stationStory-comms"
 msgid ""
 "Our station is named Shree after one of many tugboat manufacturers in the "
@@ -1318,12 +1340,12 @@ msgstr ""
 "Hochseeschiffe auf der Erde einen ähnlichen Zweck wie heute Traktor- und "
 "Repulsorstrahlen für Raumschiffe."
 
-#: scripts/scenario_54_PatrolDuty.lua:2298
+#: scripts/scenario_54_PatrolDuty.lua:2304
 msgctxt "scienceDescription-station"
 msgid "Shielded Circuitry Fabrication"
 msgstr "Herstellung von abgeschirmten Schaltkreisen"
 
-#: scripts/scenario_54_PatrolDuty.lua:2299
+#: scripts/scenario_54_PatrolDuty.lua:2305
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We specialize in circuitry shielded from external hacking suitable for ship "
@@ -1332,7 +1354,7 @@ msgstr ""
 "Wir sind auf Schaltkreise spezialisiert, die gegen externe Hackerangriffe "
 "abgeschirmt und für Schiffssysteme geeignet sind."
 
-#: scripts/scenario_54_PatrolDuty.lua:2300
+#: scripts/scenario_54_PatrolDuty.lua:2306
 msgctxt "stationStory-comms"
 msgid ""
 "We started as an expansion from the lunar based chip manufacturer of Earth "
@@ -1342,7 +1364,7 @@ msgstr ""
 "der das Vermächtnis des ehemals auf der Erde ansässigen Chipherstellers "
 "Intel weiterführte."
 
-#: scripts/scenario_54_PatrolDuty.lua:2336
+#: scripts/scenario_54_PatrolDuty.lua:2342
 msgctxt "stationGeneralInfo-comms"
 msgid ""
 "We research and construct components for the most powerful and accurate "
@@ -1352,7 +1374,7 @@ msgstr ""
 "genauesten Sensoren, die an Bord von Schiffen eingesetzt werden, sowie die "
 "Software, die ihre Verwendung erleichtert."
 
-#: scripts/scenario_54_PatrolDuty.lua:2337
+#: scripts/scenario_54_PatrolDuty.lua:2343
 msgctxt "stationStory-comms"
 msgid ""
 "The Veloquan company has its roots in the manufacturing of LIDAR sensors in "
@@ -1369,17 +1391,17 @@ msgstr ""
 "Raumfahrzeuge. Veloquan ist das Ergebnis zahlreicher Fusionen und Übernahmen "
 "mehrerer Unternehmen, darunter Velodyne und Quanergy."
 
-#: scripts/scenario_54_PatrolDuty.lua:2367
+#: scripts/scenario_54_PatrolDuty.lua:2373
 msgctxt "scienceDescription-station"
 msgid "Biotechnology research"
 msgstr "Biotechnologie-Forschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:2368
+#: scripts/scenario_54_PatrolDuty.lua:2374
 msgctxt "stationGeneralInfo-comms"
 msgid "Merging the organic and inorganic through research"
 msgstr "Organisches und Anorganisches durch Forschung vereinen."
 
-#: scripts/scenario_54_PatrolDuty.lua:2369
+#: scripts/scenario_54_PatrolDuty.lua:2375
 msgctxt "stationStory-comms"
 msgid ""
 "Continued from the Tandon school of engineering started on Earth in the "
@@ -1388,91 +1410,91 @@ msgstr ""
 "Eine Fortführung der Tandon School of Engineering, die Anfang des 21. "
 "Jahrhunderts auf der Erde gegründet wurde."
 
-#: scripts/scenario_54_PatrolDuty.lua:2406
-#: scripts/scenario_54_PatrolDuty.lua:2486
-#: scripts/scenario_54_PatrolDuty.lua:2523
-#: scripts/scenario_54_PatrolDuty.lua:2562
+#: scripts/scenario_54_PatrolDuty.lua:2412
+#: scripts/scenario_54_PatrolDuty.lua:2492
+#: scripts/scenario_54_PatrolDuty.lua:2529
+#: scripts/scenario_54_PatrolDuty.lua:2568
 msgctxt "scienceDescription-station"
 msgid "Mining station"
 msgstr "Bergbaustation"
 
-#: scripts/scenario_54_PatrolDuty.lua:2447
+#: scripts/scenario_54_PatrolDuty.lua:2453
 msgctxt "stationGeneralInfo-comms"
 msgid "We mine nearby asteroids for precious minerals"
 msgstr "Wir bauen nahe gelegene Asteroiden für wertvolle Mineralien ab."
 
-#: scripts/scenario_54_PatrolDuty.lua:2596
+#: scripts/scenario_54_PatrolDuty.lua:2602
 msgctxt "stationGeneralInfo-comms"
 msgid "Relax and meet some interesting players"
 msgstr "Entspannen Sie sich und treffen Sie einige interessante Spieler."
 
-#: scripts/scenario_54_PatrolDuty.lua:2632
+#: scripts/scenario_54_PatrolDuty.lua:2638
 msgctxt "scienceDescription-station"
 msgid "Commerce and recreation"
 msgstr "Handel und Erholung"
 
-#: scripts/scenario_54_PatrolDuty.lua:2664
+#: scripts/scenario_54_PatrolDuty.lua:2670
 msgctxt "scienceDescription-station"
 msgid "Xenopsychology research"
 msgstr "Xenopsychologische Forschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:2701
+#: scripts/scenario_54_PatrolDuty.lua:2707
 msgctxt "scienceDescription-station"
 msgid "Mining and trade"
 msgstr "Bergbau und Handel"
 
-#: scripts/scenario_54_PatrolDuty.lua:2738
+#: scripts/scenario_54_PatrolDuty.lua:2744
 msgctxt "scienceDescription-station"
 msgid "Mining and gambling"
 msgstr "Bergbau und Glücksspiel"
 
-#: scripts/scenario_54_PatrolDuty.lua:2775
-#: scripts/scenario_54_PatrolDuty.lua:2849
-#: scripts/scenario_54_PatrolDuty.lua:2987
-#: scripts/scenario_54_PatrolDuty.lua:3163
+#: scripts/scenario_54_PatrolDuty.lua:2781
+#: scripts/scenario_54_PatrolDuty.lua:2855
+#: scripts/scenario_54_PatrolDuty.lua:2993
+#: scripts/scenario_54_PatrolDuty.lua:3169
 msgctxt "scienceDescription-station"
 msgid "Resupply"
 msgstr "Nachschub"
 
-#: scripts/scenario_54_PatrolDuty.lua:2881
+#: scripts/scenario_54_PatrolDuty.lua:2887
 msgctxt "scienceDescription-station"
 msgid "Textiles and fashion"
 msgstr "Textilien und Mode"
 
-#: scripts/scenario_54_PatrolDuty.lua:2918
+#: scripts/scenario_54_PatrolDuty.lua:2924
 msgctxt "scienceDescription-station"
 msgid "Stress Psychology Research"
 msgstr "Stresspsychologische Forschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:2950
+#: scripts/scenario_54_PatrolDuty.lua:2956
 msgctxt "scienceDescription-station"
 msgid "Low gravity research"
 msgstr "Niedrig-Schwerkraft Forschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:2988
+#: scripts/scenario_54_PatrolDuty.lua:2994
 msgctxt "stationGeneralInfo-comms"
 msgid "Get your energy here! Grab a drink before you go!"
 msgstr ""
 "Holen Sie sich hier Ihre Energie! Und genehmigen Sie sich einen Drink bevor "
 "Sie gehen!"
 
-#: scripts/scenario_54_PatrolDuty.lua:3020
+#: scripts/scenario_54_PatrolDuty.lua:3026
 msgctxt "scienceDescription-station"
 msgid "Research Lab and Observatory"
 msgstr "Forschungslabor und Observatorium"
 
-#: scripts/scenario_54_PatrolDuty.lua:3061
+#: scripts/scenario_54_PatrolDuty.lua:3067
 msgctxt "scienceDescription-station"
 msgid "Biotech research"
 msgstr "Biotechnologie-Forschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:3094
-#: scripts/scenario_54_PatrolDuty.lua:3126
+#: scripts/scenario_54_PatrolDuty.lua:3100
+#: scripts/scenario_54_PatrolDuty.lua:3132
 msgctxt "scienceDescription-station"
 msgid "Observatory"
 msgstr "Observatorium"
 
-#: scripts/scenario_54_PatrolDuty.lua:3184
+#: scripts/scenario_54_PatrolDuty.lua:3190
 msgctxt "orders-comms"
 msgid ""
 "Patrol Asimov, Utopia Planitia and Armstrong stations. Defend if enemies "
@@ -1482,29 +1504,29 @@ msgstr ""
 "Armstrong. Verteidigen Sie sie, wenn Feinde angreifen. Docken Sie am Ende "
 "jeder Patrouillenetappe an jeder Station an."
 
-#: scripts/scenario_54_PatrolDuty.lua:3522
+#: scripts/scenario_54_PatrolDuty.lua:3528
 msgctxt "scienceDescription-artifact"
 msgid "Unusual object"
 msgstr "Ungewöhnliches Objekt"
 
-#: scripts/scenario_54_PatrolDuty.lua:3522
+#: scripts/scenario_54_PatrolDuty.lua:3528
 msgctxt "scienceDescription-artifact"
 msgid "Potential object of scientific research"
 msgstr "Potenzieller Gegenstand wissenschaftlicher Forschung"
 
-#: scripts/scenario_54_PatrolDuty.lua:3524
+#: scripts/scenario_54_PatrolDuty.lua:3530
 msgctxt "scienceDescription-artifact"
 msgid "Object outside of normal parameters"
 msgstr "Sensordaten des Objekts außerhalb normaler Parameter"
 
-#: scripts/scenario_54_PatrolDuty.lua:3524
+#: scripts/scenario_54_PatrolDuty.lua:3530
 msgctxt "scienceDescription-artifact"
 msgid "Good research material"
 msgstr "Gutes Material für Forschungen"
 
-#: scripts/scenario_54_PatrolDuty.lua:3915
-#: scripts/scenario_54_PatrolDuty.lua:3967
-#: scripts/scenario_54_PatrolDuty.lua:4023
+#: scripts/scenario_54_PatrolDuty.lua:3921
+#: scripts/scenario_54_PatrolDuty.lua:3973
+#: scripts/scenario_54_PatrolDuty.lua:4029
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract platinum, tritanium and dilithium from these "
@@ -1513,9 +1535,9 @@ msgstr ""
 "Wir konnten Platin, Tritanium und Dilithium aus diesem Gestein gewinnen. "
 "Kommen Sie zu uns, wenn Sie etwas davon wollen."
 
-#: scripts/scenario_54_PatrolDuty.lua:3919
-#: scripts/scenario_54_PatrolDuty.lua:3971
-#: scripts/scenario_54_PatrolDuty.lua:4027
+#: scripts/scenario_54_PatrolDuty.lua:3925
+#: scripts/scenario_54_PatrolDuty.lua:3977
+#: scripts/scenario_54_PatrolDuty.lua:4033
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract platinum and tritanium from these rocks. Come get "
@@ -1524,9 +1546,9 @@ msgstr ""
 "Wir konnten Platin und Tritanium aus diesem Gestein gewinnen. Kommen Sie zu "
 "uns, wenn Sie etwas davon wollen."
 
-#: scripts/scenario_54_PatrolDuty.lua:3923
-#: scripts/scenario_54_PatrolDuty.lua:3975
-#: scripts/scenario_54_PatrolDuty.lua:4031
+#: scripts/scenario_54_PatrolDuty.lua:3929
+#: scripts/scenario_54_PatrolDuty.lua:3981
+#: scripts/scenario_54_PatrolDuty.lua:4037
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract platinum and dilithium from these rocks. Come get "
@@ -1535,9 +1557,9 @@ msgstr ""
 "Wir konnten Platin, Tritanium und Dilithium aus diesem Gestein gewinnen. "
 "Kommen Sie zu uns, wenn Sie etwas davon wollen."
 
-#: scripts/scenario_54_PatrolDuty.lua:3927
-#: scripts/scenario_54_PatrolDuty.lua:3979
-#: scripts/scenario_54_PatrolDuty.lua:4035
+#: scripts/scenario_54_PatrolDuty.lua:3933
+#: scripts/scenario_54_PatrolDuty.lua:3985
+#: scripts/scenario_54_PatrolDuty.lua:4041
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract tritanium and dilithium from these rocks. Come "
@@ -1546,9 +1568,9 @@ msgstr ""
 "Wir konnten Tritanium und Dilithium aus diesem Gestein gewinnen. Kommen Sie "
 "zu uns, wenn Sie etwas davon wollen."
 
-#: scripts/scenario_54_PatrolDuty.lua:3930
-#: scripts/scenario_54_PatrolDuty.lua:3982
-#: scripts/scenario_54_PatrolDuty.lua:4038
+#: scripts/scenario_54_PatrolDuty.lua:3936
+#: scripts/scenario_54_PatrolDuty.lua:3988
+#: scripts/scenario_54_PatrolDuty.lua:4044
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract dilithium from these rocks. Come get some if you "
@@ -1557,9 +1579,9 @@ msgstr ""
 "Wir konnten Dilithium aus diesem Gestein gewinnen. Kommen Sie zu uns, wenn "
 "Sie etwas davon wollen."
 
-#: scripts/scenario_54_PatrolDuty.lua:3933
-#: scripts/scenario_54_PatrolDuty.lua:3985
-#: scripts/scenario_54_PatrolDuty.lua:4041
+#: scripts/scenario_54_PatrolDuty.lua:3939
+#: scripts/scenario_54_PatrolDuty.lua:3991
+#: scripts/scenario_54_PatrolDuty.lua:4047
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract platinum from these rocks. Come get some if you "
@@ -1568,9 +1590,9 @@ msgstr ""
 "Wir konnten Platin aus diesem Gestein gewinnen. Kommen Sie zu uns, wenn Sie "
 "etwas davon wollen."
 
-#: scripts/scenario_54_PatrolDuty.lua:3936
-#: scripts/scenario_54_PatrolDuty.lua:3988
-#: scripts/scenario_54_PatrolDuty.lua:4044
+#: scripts/scenario_54_PatrolDuty.lua:3942
+#: scripts/scenario_54_PatrolDuty.lua:3994
+#: scripts/scenario_54_PatrolDuty.lua:4050
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract tritanium from these rocks. Come get some if you "
@@ -1579,7 +1601,7 @@ msgstr ""
 "Wir konnten Tritanium aus diesem Gestein gewinnen. Kommen Sie zu uns, wenn "
 "Sie etwas davon wollen."
 
-#: scripts/scenario_54_PatrolDuty.lua:3939
+#: scripts/scenario_54_PatrolDuty.lua:3945
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract cobalt from these rocks. Come get some if you "
@@ -1588,7 +1610,7 @@ msgstr ""
 "Wir konnten Kobalt aus diesem Gestein gewinnen. Kommen Sie zu uns, wenn Sie "
 "etwas davon wollen."
 
-#: scripts/scenario_54_PatrolDuty.lua:3943
+#: scripts/scenario_54_PatrolDuty.lua:3949
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract cobalt and dilithium from these rocks. Come get "
@@ -1597,8 +1619,8 @@ msgstr ""
 "Wir konnten Kobalt und Dilithium aus diesem Gestein gewinnen. Kommen Sie zu "
 "uns, wenn Sie etwas davon wollen."
 
-#: scripts/scenario_54_PatrolDuty.lua:3992
-#: scripts/scenario_54_PatrolDuty.lua:4048
+#: scripts/scenario_54_PatrolDuty.lua:3998
+#: scripts/scenario_54_PatrolDuty.lua:4054
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract tritanium and gold from these rocks. Come get "
@@ -1607,8 +1629,8 @@ msgstr ""
 "Wir konnten Tritanium und Gold aus diesem Gestein gewinnen. Kommen Sie zu "
 "uns, wenn Sie etwas davon wollen."
 
-#: scripts/scenario_54_PatrolDuty.lua:3996
-#: scripts/scenario_54_PatrolDuty.lua:4052
+#: scripts/scenario_54_PatrolDuty.lua:4002
+#: scripts/scenario_54_PatrolDuty.lua:4058
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract gold and dilithium from these rocks. Come get "
@@ -1617,8 +1639,8 @@ msgstr ""
 "Wir konnten Gold und Dilithium aus diesem Gestein gewinnen. Kommen Sie zu "
 "uns, wenn Sie etwas davon wollen."
 
-#: scripts/scenario_54_PatrolDuty.lua:3999
-#: scripts/scenario_54_PatrolDuty.lua:4055
+#: scripts/scenario_54_PatrolDuty.lua:4005
+#: scripts/scenario_54_PatrolDuty.lua:4061
 msgctxt "stationsKrk-comms"
 msgid ""
 "We've been able to extract gold from these rocks. Come get some if you want "
@@ -1627,26 +1649,26 @@ msgstr ""
 "Wir konnten Gold aus diesem Gestein gewinnen. Kommen Sie zu uns, wenn Sie "
 "etwas davon wollen."
 
-#: scripts/scenario_54_PatrolDuty.lua:4177
+#: scripts/scenario_54_PatrolDuty.lua:4183
 #, lua-format
 msgid "station chosen: %s"
 msgstr "Gewählte Station: %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:4195
+#: scripts/scenario_54_PatrolDuty.lua:4201
 #, lua-format
 msgid "transport model: %s"
 msgstr "Frachter-Modell: %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:4261
+#: scripts/scenario_54_PatrolDuty.lua:4267
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr "Wir werden angegriffen! Keine Zeit zum Plaudern!"
 
-#: scripts/scenario_54_PatrolDuty.lua:4275
-#: scripts/scenario_54_PatrolDuty.lua:4282
-#: scripts/scenario_54_PatrolDuty.lua:4290
-#: scripts/scenario_54_PatrolDuty.lua:4298
-#: scripts/scenario_54_PatrolDuty.lua:4306
+#: scripts/scenario_54_PatrolDuty.lua:4281
+#: scripts/scenario_54_PatrolDuty.lua:4288
+#: scripts/scenario_54_PatrolDuty.lua:4296
+#: scripts/scenario_54_PatrolDuty.lua:4304
+#: scripts/scenario_54_PatrolDuty.lua:4312
 msgctxt "orders-comms"
 msgid ""
 "\n"
@@ -1655,7 +1677,7 @@ msgstr ""
 "\n"
 "Optional:\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:4315
+#: scripts/scenario_54_PatrolDuty.lua:4321
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -1665,7 +1687,7 @@ msgstr ""
 "Guten Tag, %s!\n"
 "Wie können wir Ihnen behilflich sein?"
 
-#: scripts/scenario_54_PatrolDuty.lua:4317
+#: scripts/scenario_54_PatrolDuty.lua:4323
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
@@ -1674,17 +1696,17 @@ msgstr ""
 "Guten Tag,\n"
 "was können wir für sie tun?"
 
-#: scripts/scenario_54_PatrolDuty.lua:4319
+#: scripts/scenario_54_PatrolDuty.lua:4325
 msgctxt "station-comms"
 msgid "Hello, may I help you?"
 msgstr "Hallo, kann ich Ihnen helfen?"
 
-#: scripts/scenario_54_PatrolDuty.lua:4322
+#: scripts/scenario_54_PatrolDuty.lua:4328
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
 msgstr "Willkommen auf unserer schönen Station!\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:4325
+#: scripts/scenario_54_PatrolDuty.lua:4331
 msgctxt "station-comms"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
@@ -1693,96 +1715,96 @@ msgstr ""
 "Verzeihen Sie uns, wenn wir ein wenig abgelenkt wirken. Wir beobachten "
 "aufmerksam feindliche Aktivitäten in der Nähe."
 
-#: scripts/scenario_54_PatrolDuty.lua:4339
+#: scripts/scenario_54_PatrolDuty.lua:4345
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
 msgstr "Wir benötigen Munition für unsere Waffensysteme."
 
-#: scripts/scenario_54_PatrolDuty.lua:4341
+#: scripts/scenario_54_PatrolDuty.lua:4347
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
 msgstr "Welche Art von Munition?"
 
-#: scripts/scenario_54_PatrolDuty.lua:4346
+#: scripts/scenario_54_PatrolDuty.lua:4352
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? ("
 msgstr "Können Sie uns mit ein paar Nukes versorgen? ("
 
-#: scripts/scenario_54_PatrolDuty.lua:4348
+#: scripts/scenario_54_PatrolDuty.lua:4354
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
 msgstr "Wir brauchen wirklich ein paar Nukes ("
 
-#: scripts/scenario_54_PatrolDuty.lua:4350
-#: scripts/scenario_54_PatrolDuty.lua:4363
-#: scripts/scenario_54_PatrolDuty.lua:4375
-#: scripts/scenario_54_PatrolDuty.lua:4387
-#: scripts/scenario_54_PatrolDuty.lua:4399
+#: scripts/scenario_54_PatrolDuty.lua:4356
+#: scripts/scenario_54_PatrolDuty.lua:4369
+#: scripts/scenario_54_PatrolDuty.lua:4381
+#: scripts/scenario_54_PatrolDuty.lua:4393
+#: scripts/scenario_54_PatrolDuty.lua:4405
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
 msgstr "%sjeweils %d Ruf)"
 
-#: scripts/scenario_54_PatrolDuty.lua:4359
+#: scripts/scenario_54_PatrolDuty.lua:4365
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
 msgstr "Bitte stocken Sie unsere EMP-Raketen auf. ("
 
-#: scripts/scenario_54_PatrolDuty.lua:4361
+#: scripts/scenario_54_PatrolDuty.lua:4367
 msgctxt "ammo-comms"
 msgid "Got any EMPs? ("
 msgstr "Haben Sie EMPs? ("
 
-#: scripts/scenario_54_PatrolDuty.lua:4371
+#: scripts/scenario_54_PatrolDuty.lua:4377
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
 msgstr "Haben Sie noch Zielsuchraketen für uns? ("
 
-#: scripts/scenario_54_PatrolDuty.lua:4373
+#: scripts/scenario_54_PatrolDuty.lua:4379
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
 msgstr "Haben Sie zusätzliche Zielsuchraketen? ("
 
-#: scripts/scenario_54_PatrolDuty.lua:4383
+#: scripts/scenario_54_PatrolDuty.lua:4389
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
 msgstr "Wir könnten ein paar Minen gebrauchen. ("
 
-#: scripts/scenario_54_PatrolDuty.lua:4385
+#: scripts/scenario_54_PatrolDuty.lua:4391
 msgctxt "ammo-comms"
 msgid "How about mines? ("
 msgstr "Wie sieht es mit Minen aus?"
 
-#: scripts/scenario_54_PatrolDuty.lua:4395
+#: scripts/scenario_54_PatrolDuty.lua:4401
 msgctxt "ammo-comms"
 msgid "What about HVLI? ("
 msgstr "Was ist mit HGBI? ("
 
-#: scripts/scenario_54_PatrolDuty.lua:4397
+#: scripts/scenario_54_PatrolDuty.lua:4403
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI? ("
 msgstr "Könnten Sie HGBIs zur Verfügung stellen? ("
 
-#: scripts/scenario_54_PatrolDuty.lua:4407
-#: scripts/scenario_54_PatrolDuty.lua:5380
+#: scripts/scenario_54_PatrolDuty.lua:4413
+#: scripts/scenario_54_PatrolDuty.lua:5386
 msgctxt "station-comms"
 msgid "I need information"
 msgstr "Ich brauche Informationen"
 
-#: scripts/scenario_54_PatrolDuty.lua:4408
+#: scripts/scenario_54_PatrolDuty.lua:4414
 #, lua-format
 msgctxt "station-comms"
 msgid "What kind of information do you need, %s"
 msgstr "Welche Art von Informationen benötigen sie, %s?"
 
-#: scripts/scenario_54_PatrolDuty.lua:4410
-#: scripts/scenario_54_PatrolDuty.lua:5545
+#: scripts/scenario_54_PatrolDuty.lua:4416
+#: scripts/scenario_54_PatrolDuty.lua:5551
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr "Was sind unsere derzeitigen Befehle?"
 
-#: scripts/scenario_54_PatrolDuty.lua:4414
-#: scripts/scenario_54_PatrolDuty.lua:5549
+#: scripts/scenario_54_PatrolDuty.lua:4420
+#: scripts/scenario_54_PatrolDuty.lua:5555
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -1792,8 +1814,8 @@ msgstr ""
 "\n"
 "  %i Verbleibende Spielminuten"
 
-#: scripts/scenario_54_PatrolDuty.lua:4417
-#: scripts/scenario_54_PatrolDuty.lua:5552
+#: scripts/scenario_54_PatrolDuty.lua:4423
+#: scripts/scenario_54_PatrolDuty.lua:5558
 msgctxt "orders-comms"
 msgid ""
 "\n"
@@ -1802,8 +1824,8 @@ msgstr ""
 "\n"
 "Patrouillenmission abgeschlossen"
 
-#: scripts/scenario_54_PatrolDuty.lua:4420
-#: scripts/scenario_54_PatrolDuty.lua:5555
+#: scripts/scenario_54_PatrolDuty.lua:4426
+#: scripts/scenario_54_PatrolDuty.lua:5561
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -1813,8 +1835,8 @@ msgstr ""
 "\n"
 "   Patrouille ist zu %.2f Prozent abgeschlossen"
 
-#: scripts/scenario_54_PatrolDuty.lua:4424
-#: scripts/scenario_54_PatrolDuty.lua:5560
+#: scripts/scenario_54_PatrolDuty.lua:4430
+#: scripts/scenario_54_PatrolDuty.lua:5566
 msgctxt "orders-comms"
 msgid ""
 "\n"
@@ -1823,8 +1845,8 @@ msgstr ""
 "\n"
 "   Am wenigsten besuchte Station: Utopia Planitia"
 
-#: scripts/scenario_54_PatrolDuty.lua:4426
-#: scripts/scenario_54_PatrolDuty.lua:5562
+#: scripts/scenario_54_PatrolDuty.lua:4432
+#: scripts/scenario_54_PatrolDuty.lua:5568
 msgctxt "orders-comms"
 msgid ""
 "\n"
@@ -1833,8 +1855,8 @@ msgstr ""
 "\n"
 "   Meistbesuchte Station: Utopia Planitia"
 
-#: scripts/scenario_54_PatrolDuty.lua:4430
-#: scripts/scenario_54_PatrolDuty.lua:5566
+#: scripts/scenario_54_PatrolDuty.lua:4436
+#: scripts/scenario_54_PatrolDuty.lua:5572
 msgctxt "orders-comms"
 msgid ""
 "\n"
@@ -1843,8 +1865,8 @@ msgstr ""
 "\n"
 "   Am wenigsten besuchte Station: Asimov"
 
-#: scripts/scenario_54_PatrolDuty.lua:4432
-#: scripts/scenario_54_PatrolDuty.lua:5568
+#: scripts/scenario_54_PatrolDuty.lua:4438
+#: scripts/scenario_54_PatrolDuty.lua:5574
 msgctxt "orders-comms"
 msgid ""
 "\n"
@@ -1853,8 +1875,8 @@ msgstr ""
 "\n"
 "   Meistbesuchte Station: Asimov"
 
-#: scripts/scenario_54_PatrolDuty.lua:4436
-#: scripts/scenario_54_PatrolDuty.lua:5572
+#: scripts/scenario_54_PatrolDuty.lua:4442
+#: scripts/scenario_54_PatrolDuty.lua:5578
 msgctxt "orders-comms"
 msgid ""
 "\n"
@@ -1863,8 +1885,8 @@ msgstr ""
 "\n"
 "   Am wenigsten besuchte Station: Armstrong"
 
-#: scripts/scenario_54_PatrolDuty.lua:4438
-#: scripts/scenario_54_PatrolDuty.lua:5574
+#: scripts/scenario_54_PatrolDuty.lua:4444
+#: scripts/scenario_54_PatrolDuty.lua:5580
 msgctxt "orders-comms"
 msgid ""
 "\n"
@@ -1873,112 +1895,112 @@ msgstr ""
 "\n"
 "   Meistbesuchte Station: Armstrong"
 
-#: scripts/scenario_54_PatrolDuty.lua:4445
-#: scripts/scenario_54_PatrolDuty.lua:4460
-#: scripts/scenario_54_PatrolDuty.lua:4473
-#: scripts/scenario_54_PatrolDuty.lua:4503
-#: scripts/scenario_54_PatrolDuty.lua:4508
-#: scripts/scenario_54_PatrolDuty.lua:4516
-#: scripts/scenario_54_PatrolDuty.lua:4566
-#: scripts/scenario_54_PatrolDuty.lua:4575
-#: scripts/scenario_54_PatrolDuty.lua:4577
-#: scripts/scenario_54_PatrolDuty.lua:4593
-#: scripts/scenario_54_PatrolDuty.lua:4618
-#: scripts/scenario_54_PatrolDuty.lua:4644
-#: scripts/scenario_54_PatrolDuty.lua:4649
-#: scripts/scenario_54_PatrolDuty.lua:4681
-#: scripts/scenario_54_PatrolDuty.lua:4689
-#: scripts/scenario_54_PatrolDuty.lua:4727
-#: scripts/scenario_54_PatrolDuty.lua:4734
-#: scripts/scenario_54_PatrolDuty.lua:4739
-#: scripts/scenario_54_PatrolDuty.lua:4748
-#: scripts/scenario_54_PatrolDuty.lua:4750
-#: scripts/scenario_54_PatrolDuty.lua:4809
-#: scripts/scenario_54_PatrolDuty.lua:4822
-#: scripts/scenario_54_PatrolDuty.lua:4846
-#: scripts/scenario_54_PatrolDuty.lua:4869
-#: scripts/scenario_54_PatrolDuty.lua:4892
-#: scripts/scenario_54_PatrolDuty.lua:4896
-#: scripts/scenario_54_PatrolDuty.lua:4913
-#: scripts/scenario_54_PatrolDuty.lua:4917
-#: scripts/scenario_54_PatrolDuty.lua:4922
-#: scripts/scenario_54_PatrolDuty.lua:4971
-#: scripts/scenario_54_PatrolDuty.lua:5021
-#: scripts/scenario_54_PatrolDuty.lua:5065
-#: scripts/scenario_54_PatrolDuty.lua:5105
-#: scripts/scenario_54_PatrolDuty.lua:5169
-#: scripts/scenario_54_PatrolDuty.lua:5172
-#: scripts/scenario_54_PatrolDuty.lua:5210
-#: scripts/scenario_54_PatrolDuty.lua:5219
-#: scripts/scenario_54_PatrolDuty.lua:5262
-#: scripts/scenario_54_PatrolDuty.lua:5265
-#: scripts/scenario_54_PatrolDuty.lua:5341
-#: scripts/scenario_54_PatrolDuty.lua:5353
-#: scripts/scenario_54_PatrolDuty.lua:5414
-#: scripts/scenario_54_PatrolDuty.lua:5432
-#: scripts/scenario_54_PatrolDuty.lua:5454
-#: scripts/scenario_54_PatrolDuty.lua:5458
-#: scripts/scenario_54_PatrolDuty.lua:5504
-#: scripts/scenario_54_PatrolDuty.lua:5513
-#: scripts/scenario_54_PatrolDuty.lua:5523
-#: scripts/scenario_54_PatrolDuty.lua:5528
-#: scripts/scenario_54_PatrolDuty.lua:5536
-#: scripts/scenario_54_PatrolDuty.lua:5581
-#: scripts/scenario_54_PatrolDuty.lua:5603
-#: scripts/scenario_54_PatrolDuty.lua:5607
-#: scripts/scenario_54_PatrolDuty.lua:5624
-#: scripts/scenario_54_PatrolDuty.lua:5628
-#: scripts/scenario_54_PatrolDuty.lua:5705
-#: scripts/scenario_54_PatrolDuty.lua:5712
-#: scripts/scenario_54_PatrolDuty.lua:5721
-#: scripts/scenario_54_PatrolDuty.lua:5746
-#: scripts/scenario_54_PatrolDuty.lua:5753
-#: scripts/scenario_54_PatrolDuty.lua:5825
-#: scripts/scenario_54_PatrolDuty.lua:5844
-#: scripts/scenario_54_PatrolDuty.lua:5848
-#: scripts/scenario_54_PatrolDuty.lua:5865
-#: scripts/scenario_54_PatrolDuty.lua:5890
-#: scripts/scenario_54_PatrolDuty.lua:5905
-#: scripts/scenario_54_PatrolDuty.lua:5924
-#: scripts/scenario_54_PatrolDuty.lua:5928
-#: scripts/scenario_54_PatrolDuty.lua:5953
-#: scripts/scenario_54_PatrolDuty.lua:5981
+#: scripts/scenario_54_PatrolDuty.lua:4451
+#: scripts/scenario_54_PatrolDuty.lua:4466
+#: scripts/scenario_54_PatrolDuty.lua:4479
+#: scripts/scenario_54_PatrolDuty.lua:4509
+#: scripts/scenario_54_PatrolDuty.lua:4514
+#: scripts/scenario_54_PatrolDuty.lua:4522
+#: scripts/scenario_54_PatrolDuty.lua:4572
+#: scripts/scenario_54_PatrolDuty.lua:4581
+#: scripts/scenario_54_PatrolDuty.lua:4583
+#: scripts/scenario_54_PatrolDuty.lua:4599
+#: scripts/scenario_54_PatrolDuty.lua:4624
+#: scripts/scenario_54_PatrolDuty.lua:4650
+#: scripts/scenario_54_PatrolDuty.lua:4655
+#: scripts/scenario_54_PatrolDuty.lua:4687
+#: scripts/scenario_54_PatrolDuty.lua:4695
+#: scripts/scenario_54_PatrolDuty.lua:4733
+#: scripts/scenario_54_PatrolDuty.lua:4740
+#: scripts/scenario_54_PatrolDuty.lua:4745
+#: scripts/scenario_54_PatrolDuty.lua:4754
+#: scripts/scenario_54_PatrolDuty.lua:4756
+#: scripts/scenario_54_PatrolDuty.lua:4815
+#: scripts/scenario_54_PatrolDuty.lua:4828
+#: scripts/scenario_54_PatrolDuty.lua:4852
+#: scripts/scenario_54_PatrolDuty.lua:4875
+#: scripts/scenario_54_PatrolDuty.lua:4898
+#: scripts/scenario_54_PatrolDuty.lua:4902
+#: scripts/scenario_54_PatrolDuty.lua:4919
+#: scripts/scenario_54_PatrolDuty.lua:4923
+#: scripts/scenario_54_PatrolDuty.lua:4928
+#: scripts/scenario_54_PatrolDuty.lua:4977
+#: scripts/scenario_54_PatrolDuty.lua:5027
+#: scripts/scenario_54_PatrolDuty.lua:5071
+#: scripts/scenario_54_PatrolDuty.lua:5111
+#: scripts/scenario_54_PatrolDuty.lua:5175
+#: scripts/scenario_54_PatrolDuty.lua:5178
+#: scripts/scenario_54_PatrolDuty.lua:5216
+#: scripts/scenario_54_PatrolDuty.lua:5225
+#: scripts/scenario_54_PatrolDuty.lua:5268
+#: scripts/scenario_54_PatrolDuty.lua:5271
+#: scripts/scenario_54_PatrolDuty.lua:5347
+#: scripts/scenario_54_PatrolDuty.lua:5359
+#: scripts/scenario_54_PatrolDuty.lua:5420
+#: scripts/scenario_54_PatrolDuty.lua:5438
+#: scripts/scenario_54_PatrolDuty.lua:5460
+#: scripts/scenario_54_PatrolDuty.lua:5464
+#: scripts/scenario_54_PatrolDuty.lua:5510
+#: scripts/scenario_54_PatrolDuty.lua:5519
+#: scripts/scenario_54_PatrolDuty.lua:5529
+#: scripts/scenario_54_PatrolDuty.lua:5534
+#: scripts/scenario_54_PatrolDuty.lua:5542
+#: scripts/scenario_54_PatrolDuty.lua:5587
+#: scripts/scenario_54_PatrolDuty.lua:5609
+#: scripts/scenario_54_PatrolDuty.lua:5613
+#: scripts/scenario_54_PatrolDuty.lua:5630
+#: scripts/scenario_54_PatrolDuty.lua:5634
+#: scripts/scenario_54_PatrolDuty.lua:5711
+#: scripts/scenario_54_PatrolDuty.lua:5718
+#: scripts/scenario_54_PatrolDuty.lua:5727
+#: scripts/scenario_54_PatrolDuty.lua:5752
+#: scripts/scenario_54_PatrolDuty.lua:5759
+#: scripts/scenario_54_PatrolDuty.lua:5831
+#: scripts/scenario_54_PatrolDuty.lua:5850
+#: scripts/scenario_54_PatrolDuty.lua:5854
+#: scripts/scenario_54_PatrolDuty.lua:5871
+#: scripts/scenario_54_PatrolDuty.lua:5896
+#: scripts/scenario_54_PatrolDuty.lua:5911
+#: scripts/scenario_54_PatrolDuty.lua:5930
+#: scripts/scenario_54_PatrolDuty.lua:5934
+#: scripts/scenario_54_PatrolDuty.lua:5959
+#: scripts/scenario_54_PatrolDuty.lua:5987
 msgid "Back"
 msgstr "Zurück"
 
-#: scripts/scenario_54_PatrolDuty.lua:4453
-#: scripts/scenario_54_PatrolDuty.lua:4485
+#: scripts/scenario_54_PatrolDuty.lua:4459
+#: scripts/scenario_54_PatrolDuty.lua:4491
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
 msgstr "Rekrutiere Wartungspersonal für %i Ruf."
 
-#: scripts/scenario_54_PatrolDuty.lua:4455
-#: scripts/scenario_54_PatrolDuty.lua:4471
-#: scripts/scenario_54_PatrolDuty.lua:4487
-#: scripts/scenario_54_PatrolDuty.lua:4616
-#: scripts/scenario_54_PatrolDuty.lua:4642
-#: scripts/scenario_54_PatrolDuty.lua:4647
-#: scripts/scenario_54_PatrolDuty.lua:4737
-#: scripts/scenario_54_PatrolDuty.lua:5268
-#: scripts/scenario_54_PatrolDuty.lua:5901
+#: scripts/scenario_54_PatrolDuty.lua:4461
+#: scripts/scenario_54_PatrolDuty.lua:4477
+#: scripts/scenario_54_PatrolDuty.lua:4493
+#: scripts/scenario_54_PatrolDuty.lua:4622
+#: scripts/scenario_54_PatrolDuty.lua:4648
+#: scripts/scenario_54_PatrolDuty.lua:4653
+#: scripts/scenario_54_PatrolDuty.lua:4743
+#: scripts/scenario_54_PatrolDuty.lua:5274
+#: scripts/scenario_54_PatrolDuty.lua:5907
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
 msgstr "Ruf nicht ausreichend"
 
-#: scripts/scenario_54_PatrolDuty.lua:4458
-#: scripts/scenario_54_PatrolDuty.lua:4490
+#: scripts/scenario_54_PatrolDuty.lua:4464
+#: scripts/scenario_54_PatrolDuty.lua:4496
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
 msgstr "Wartungspersonal eingestellt"
 
-#: scripts/scenario_54_PatrolDuty.lua:4466
+#: scripts/scenario_54_PatrolDuty.lua:4472
 #, lua-format
 msgctxt "defTelemetry-comms"
 msgid "Establish defensive telemetry link (%i rep)"
 msgstr "Defensive Telemetrieverbindung einrichten (%i Ruf)"
 
-#: scripts/scenario_54_PatrolDuty.lua:4469
+#: scripts/scenario_54_PatrolDuty.lua:4475
 msgctxt "defTelemetry-comms"
 msgid ""
 "Automated telemetry for shields and hull established.\n"
@@ -1988,44 +2010,44 @@ msgstr ""
 "Eine Schadensübersicht sollte auf der Kommunikationsstation erscheinen, wenn "
 "das Schiff Schaden genommen hat"
 
-#: scripts/scenario_54_PatrolDuty.lua:4499
-#: scripts/scenario_54_PatrolDuty.lua:5519
+#: scripts/scenario_54_PatrolDuty.lua:4505
+#: scripts/scenario_54_PatrolDuty.lua:5525
 msgctxt "station-comms"
 msgid "Tell me more about your station"
 msgstr "Erzählen Sie mir mehr über Ihre Station."
 
-#: scripts/scenario_54_PatrolDuty.lua:4500
-#: scripts/scenario_54_PatrolDuty.lua:5520
+#: scripts/scenario_54_PatrolDuty.lua:4506
+#: scripts/scenario_54_PatrolDuty.lua:5526
 msgctxt "station-comms"
 msgid "What would you like to know?"
 msgstr "Was würden Sie gerne wissen?"
 
-#: scripts/scenario_54_PatrolDuty.lua:4501
-#: scripts/scenario_54_PatrolDuty.lua:5521
+#: scripts/scenario_54_PatrolDuty.lua:4507
+#: scripts/scenario_54_PatrolDuty.lua:5527
 msgctxt "stationGeneralInfo-comms"
 msgid "General information"
 msgstr "Allgemeine Informationen"
 
-#: scripts/scenario_54_PatrolDuty.lua:4506
-#: scripts/scenario_54_PatrolDuty.lua:5526
+#: scripts/scenario_54_PatrolDuty.lua:4512
+#: scripts/scenario_54_PatrolDuty.lua:5532
 msgctxt "stationStory-comms"
 msgid "Station history"
 msgstr "Geschichte der Station"
 
-#: scripts/scenario_54_PatrolDuty.lua:4514
-#: scripts/scenario_54_PatrolDuty.lua:5534
+#: scripts/scenario_54_PatrolDuty.lua:4520
+#: scripts/scenario_54_PatrolDuty.lua:5540
 msgctxt "gossip-comms"
 msgid "Gossip"
 msgstr "Klatsch und Tratsch"
 
-#: scripts/scenario_54_PatrolDuty.lua:4523
-#: scripts/scenario_54_PatrolDuty.lua:5461
+#: scripts/scenario_54_PatrolDuty.lua:4529
+#: scripts/scenario_54_PatrolDuty.lua:5467
 msgctxt "trade-comms"
 msgid "Where can I find particular goods?"
 msgstr "Wo kann ich bestimmte Waren finden?"
 
-#: scripts/scenario_54_PatrolDuty.lua:4525
-#: scripts/scenario_54_PatrolDuty.lua:5463
+#: scripts/scenario_54_PatrolDuty.lua:4531
+#: scripts/scenario_54_PatrolDuty.lua:5469
 msgctxt "trade-comms"
 msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
@@ -2035,15 +2057,15 @@ msgstr ""
 "Stationen können ihre Waren gegen Lebensmittel, Medizin oder Luxusgüter "
 "eintauschen."
 
-#: scripts/scenario_54_PatrolDuty.lua:4565
-#: scripts/scenario_54_PatrolDuty.lua:5503
+#: scripts/scenario_54_PatrolDuty.lua:4571
+#: scripts/scenario_54_PatrolDuty.lua:5509
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
 msgstr "Station %s in Sektor %s bietet %s für %i Ruf."
 
-#: scripts/scenario_54_PatrolDuty.lua:4570
-#: scripts/scenario_54_PatrolDuty.lua:5508
+#: scripts/scenario_54_PatrolDuty.lua:4576
+#: scripts/scenario_54_PatrolDuty.lua:5514
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -2056,18 +2078,18 @@ msgstr ""
 "An welchen Waren sind Sie interessiert?\n"
 "Ich habe von diesen hier gehört:"
 
-#: scripts/scenario_54_PatrolDuty.lua:4572
-#: scripts/scenario_54_PatrolDuty.lua:5510
+#: scripts/scenario_54_PatrolDuty.lua:4578
+#: scripts/scenario_54_PatrolDuty.lua:5516
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
 msgstr "Darüber hinaus habe ich keine Kenntnis von bestimmten Stationen."
 
-#: scripts/scenario_54_PatrolDuty.lua:4579
+#: scripts/scenario_54_PatrolDuty.lua:4585
 msgctxt "cartographyOffice-comms"
 msgid "Visit cartography office"
 msgstr "Kartographiebüro"
 
-#: scripts/scenario_54_PatrolDuty.lua:4583
+#: scripts/scenario_54_PatrolDuty.lua:4589
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk behind the desk looks up briefly at you then goes back to filing "
@@ -2076,7 +2098,7 @@ msgstr ""
 "Die Mitarbeiterin hinter dem Schreibtisch,schaut kurz hoch, und geht dann "
 "wieder dazu über, ihre Nägel zu feilen."
 
-#: scripts/scenario_54_PatrolDuty.lua:4585
+#: scripts/scenario_54_PatrolDuty.lua:4591
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk behind the desk examines you then returns to grooming her "
@@ -2085,7 +2107,7 @@ msgstr ""
 "Die Dame hinter dem Schreibtisch mustert dich kurz und geht dann wieder dazu "
 "über, Ihre Tentakeln zu pflegen."
 
-#: scripts/scenario_54_PatrolDuty.lua:4587
+#: scripts/scenario_54_PatrolDuty.lua:4593
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk behind the desk glances at you then returns to preening her "
@@ -2094,7 +2116,7 @@ msgstr ""
 "Die Mitarbeiterin hinter dem Schreibtisch mustert dich kurz und geht dann "
 "wieder dazu über, Ihre Gefieder zu putzen."
 
-#: scripts/scenario_54_PatrolDuty.lua:4590
+#: scripts/scenario_54_PatrolDuty.lua:4596
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2108,12 +2130,12 @@ msgstr ""
 "Du kannst dir eine Broschüre auf dem Couchtisch ansehen, oder mit der "
 "Lehrlingskartographin oder dem Chefkartographen reden."
 
-#: scripts/scenario_54_PatrolDuty.lua:4591
+#: scripts/scenario_54_PatrolDuty.lua:4597
 msgctxt "cartographyOffice-comms"
 msgid "What's the difference between the apprentice and the master?"
 msgstr "Wann sollte ich mit der Auszubildenden und wann mit dem Chef sprechen?"
 
-#: scripts/scenario_54_PatrolDuty.lua:4592
+#: scripts/scenario_54_PatrolDuty.lua:4598
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk responds in a bored voice, 'The apprentice knows the local area "
@@ -2126,13 +2148,13 @@ msgstr ""
 "weitere Umgebung, hat aber keine Zeit oder Lust, sich mit der lokalen "
 "Umgebung zu befassen.\""
 
-#: scripts/scenario_54_PatrolDuty.lua:4595
+#: scripts/scenario_54_PatrolDuty.lua:4601
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine brochure (%i rep)"
 msgstr "Broschüre ansehen (%i Ruf)"
 
-#: scripts/scenario_54_PatrolDuty.lua:4597
+#: scripts/scenario_54_PatrolDuty.lua:4603
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The brochure has a list of nearby stations and has a list of goods nearby"
@@ -2140,21 +2162,21 @@ msgstr ""
 "Die Broschüre enthält eine Liste mit Stationen in der Nähe, sowie eine Liste "
 "mit erhältlichen Handelsgütern"
 
-#: scripts/scenario_54_PatrolDuty.lua:4598
+#: scripts/scenario_54_PatrolDuty.lua:4604
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine station list (%i rep)"
 msgstr "Stationsliste ansehen (%i Ruf)"
 
-#: scripts/scenario_54_PatrolDuty.lua:4607
-#: scripts/scenario_54_PatrolDuty.lua:4664
-#: scripts/scenario_54_PatrolDuty.lua:4710
+#: scripts/scenario_54_PatrolDuty.lua:4613
+#: scripts/scenario_54_PatrolDuty.lua:4670
+#: scripts/scenario_54_PatrolDuty.lua:4716
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:4609
+#: scripts/scenario_54_PatrolDuty.lua:4615
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2164,13 +2186,13 @@ msgstr ""
 "%s\n"
 "%s: %s %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:4620
+#: scripts/scenario_54_PatrolDuty.lua:4626
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine goods list (%i rep)"
 msgstr "Liste mit Handelsgut ansehen (%i Ruf)"
 
-#: scripts/scenario_54_PatrolDuty.lua:4631
+#: scripts/scenario_54_PatrolDuty.lua:4637
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2180,7 +2202,7 @@ msgstr ""
 "Handelsgut, Anzahl, Preis, Station:\n"
 "%s, %i, %i, %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:4633
+#: scripts/scenario_54_PatrolDuty.lua:4639
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2190,33 +2212,33 @@ msgstr ""
 "%s\n"
 "%s, %i, %i, %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:4651
+#: scripts/scenario_54_PatrolDuty.lua:4657
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Talk to apprentice cartographer (%i rep)"
 msgstr "Mit der Lehrlingskartographin reden (%i Ruf)"
 
-#: scripts/scenario_54_PatrolDuty.lua:4653
+#: scripts/scenario_54_PatrolDuty.lua:4659
 msgctxt "cartographyOffice-comms"
 msgid "Hi, would you like for me to locate a station or some goods for you?"
 msgstr ""
 "Hallo, soll ich etwas über eine Station oder über Handelsgüter in Erfahrung "
 "bringen?"
 
-#: scripts/scenario_54_PatrolDuty.lua:4654
+#: scripts/scenario_54_PatrolDuty.lua:4660
 msgctxt "cartographyOffice-comms"
 msgid "Locate station"
 msgstr "Station lokalisieren"
 
-#: scripts/scenario_54_PatrolDuty.lua:4655
+#: scripts/scenario_54_PatrolDuty.lua:4661
 msgctxt "cartographyOffice-comms"
 msgid "These are stations I have learned"
 msgstr "Diese Stationen sind mir bekannt"
 
-#: scripts/scenario_54_PatrolDuty.lua:4666
-#: scripts/scenario_54_PatrolDuty.lua:4712
-#: scripts/scenario_54_PatrolDuty.lua:5192
-#: scripts/scenario_54_PatrolDuty.lua:5244
+#: scripts/scenario_54_PatrolDuty.lua:4672
+#: scripts/scenario_54_PatrolDuty.lua:4718
+#: scripts/scenario_54_PatrolDuty.lua:5198
+#: scripts/scenario_54_PatrolDuty.lua:5250
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2226,10 +2248,10 @@ msgstr ""
 "%s\n"
 "Handelsgut Anzahl, Preis"
 
-#: scripts/scenario_54_PatrolDuty.lua:4668
-#: scripts/scenario_54_PatrolDuty.lua:4714
-#: scripts/scenario_54_PatrolDuty.lua:5194
-#: scripts/scenario_54_PatrolDuty.lua:5246
+#: scripts/scenario_54_PatrolDuty.lua:4674
+#: scripts/scenario_54_PatrolDuty.lua:4720
+#: scripts/scenario_54_PatrolDuty.lua:5200
+#: scripts/scenario_54_PatrolDuty.lua:5252
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2239,10 +2261,10 @@ msgstr ""
 "%s\n"
 "   %s, %i, %i"
 
-#: scripts/scenario_54_PatrolDuty.lua:4672
-#: scripts/scenario_54_PatrolDuty.lua:4718
-#: scripts/scenario_54_PatrolDuty.lua:5198
-#: scripts/scenario_54_PatrolDuty.lua:5250
+#: scripts/scenario_54_PatrolDuty.lua:4678
+#: scripts/scenario_54_PatrolDuty.lua:4724
+#: scripts/scenario_54_PatrolDuty.lua:5204
+#: scripts/scenario_54_PatrolDuty.lua:5256
 #, lua-format
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -2254,10 +2276,10 @@ msgstr ""
 "Allgemeine Infos:\n"
 "   %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:4675
-#: scripts/scenario_54_PatrolDuty.lua:4721
-#: scripts/scenario_54_PatrolDuty.lua:5201
-#: scripts/scenario_54_PatrolDuty.lua:5253
+#: scripts/scenario_54_PatrolDuty.lua:4681
+#: scripts/scenario_54_PatrolDuty.lua:4727
+#: scripts/scenario_54_PatrolDuty.lua:5207
+#: scripts/scenario_54_PatrolDuty.lua:5259
 #, lua-format
 msgctxt "stationStory-comms"
 msgid ""
@@ -2269,10 +2291,10 @@ msgstr ""
 "Geschichte:\n"
 "   %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:4678
-#: scripts/scenario_54_PatrolDuty.lua:4724
-#: scripts/scenario_54_PatrolDuty.lua:5204
-#: scripts/scenario_54_PatrolDuty.lua:5256
+#: scripts/scenario_54_PatrolDuty.lua:4684
+#: scripts/scenario_54_PatrolDuty.lua:4730
+#: scripts/scenario_54_PatrolDuty.lua:5210
+#: scripts/scenario_54_PatrolDuty.lua:5262
 #, lua-format
 msgctxt "gossip-comms"
 msgid ""
@@ -2284,28 +2306,28 @@ msgstr ""
 "Gerüchte:\n"
 "   %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:4687
+#: scripts/scenario_54_PatrolDuty.lua:4693
 msgctxt "cartographyOffice-comms"
 msgid "I have learned of no stations yet"
 msgstr "Mir ist leider nichts über die Stationen in der Nähe bekannt"
 
-#: scripts/scenario_54_PatrolDuty.lua:4691
+#: scripts/scenario_54_PatrolDuty.lua:4697
 msgctxt "cartographyOffice-comms"
 msgid "Locate goods"
 msgstr "Handelsgüter lokalisieren"
 
-#: scripts/scenario_54_PatrolDuty.lua:4692
+#: scripts/scenario_54_PatrolDuty.lua:4698
 msgctxt "cartographyOffice-comms"
 msgid "These are the goods I know about"
 msgstr "Diese Handelsgüter sind mir bekannt"
 
-#: scripts/scenario_54_PatrolDuty.lua:4741
+#: scripts/scenario_54_PatrolDuty.lua:4747
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Talk to master cartographer (%i rep)"
 msgstr "Mit dem Chefkartographen reden (%i Ruf)"
 
-#: scripts/scenario_54_PatrolDuty.lua:4743
+#: scripts/scenario_54_PatrolDuty.lua:4749
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk clears her throat:\n"
@@ -2326,17 +2348,17 @@ msgstr ""
 "Ich möchte nur, dass Sie den größtmöglichen Nutzen aus der Zeit ziehen, die "
 "Sie mit ihm verbringen müssen."
 
-#: scripts/scenario_54_PatrolDuty.lua:4744
+#: scripts/scenario_54_PatrolDuty.lua:4750
 msgctxt "cartographyOffice-comms"
 msgid "Continue to Master Cartographer"
 msgstr "Zum Chefkartographen gehen"
 
-#: scripts/scenario_54_PatrolDuty.lua:4757
+#: scripts/scenario_54_PatrolDuty.lua:4763
 msgctxt "trade-comms"
 msgid "Buy, sell, trade"
 msgstr "Kaufen, verkaufen, handeln"
 
-#: scripts/scenario_54_PatrolDuty.lua:4759
+#: scripts/scenario_54_PatrolDuty.lua:4765
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -2346,57 +2368,57 @@ msgstr ""
 "Station %s:\n"
 "Zum Verkauf stehende Waren oder Komponenten: Menge, Kosten in Ruf\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:4761
+#: scripts/scenario_54_PatrolDuty.lua:4767
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
 msgstr "     %s: %i, %i\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:4764
+#: scripts/scenario_54_PatrolDuty.lua:4770
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
 msgstr "Waren oder Komponenten, die die Station kaufen wird: Preis in Ruf\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:4766
-#: scripts/scenario_54_PatrolDuty.lua:4775
+#: scripts/scenario_54_PatrolDuty.lua:4772
+#: scripts/scenario_54_PatrolDuty.lua:4781
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
 msgstr "     %s: %i\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:4769
+#: scripts/scenario_54_PatrolDuty.lua:4775
 #, lua-format
 msgctxt "trade-comms"
 msgid "Current cargo aboard %s:\n"
 msgstr "Derzeitige Fracht an Bord: %s:\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:4779
+#: scripts/scenario_54_PatrolDuty.lua:4785
 msgctxt "trade-comms"
 msgid "     Empty\n"
 msgstr "     Leer\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:4781
+#: scripts/scenario_54_PatrolDuty.lua:4787
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
 msgstr "Verfügbarer Platz: %i, Verfügbarer Ruf: %i\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:4784
-#: scripts/scenario_54_PatrolDuty.lua:5879
-#: scripts/scenario_54_PatrolDuty.lua:5938
-#: scripts/scenario_54_PatrolDuty.lua:5966
+#: scripts/scenario_54_PatrolDuty.lua:4790
+#: scripts/scenario_54_PatrolDuty.lua:5885
+#: scripts/scenario_54_PatrolDuty.lua:5944
+#: scripts/scenario_54_PatrolDuty.lua:5972
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
 msgstr "Kaufe 1 %s für %i Ruf"
 
-#: scripts/scenario_54_PatrolDuty.lua:4785
+#: scripts/scenario_54_PatrolDuty.lua:4791
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
 msgstr "Art: %s, Menge: %i, Ruf: %i"
 
-#: scripts/scenario_54_PatrolDuty.lua:4787
+#: scripts/scenario_54_PatrolDuty.lua:4793
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -2405,8 +2427,8 @@ msgstr ""
 "\n"
 "Unzureichender Laderaum für den Kauf"
 
-#: scripts/scenario_54_PatrolDuty.lua:4789
-#: scripts/scenario_54_PatrolDuty.lua:4805
+#: scripts/scenario_54_PatrolDuty.lua:4795
+#: scripts/scenario_54_PatrolDuty.lua:4811
 msgctxt "needRep-comms"
 msgid ""
 "\n"
@@ -2415,10 +2437,10 @@ msgstr ""
 "\n"
 "Unzureichender Ruf für den Kauf"
 
-#: scripts/scenario_54_PatrolDuty.lua:4791
-#: scripts/scenario_54_PatrolDuty.lua:4832
-#: scripts/scenario_54_PatrolDuty.lua:4855
-#: scripts/scenario_54_PatrolDuty.lua:4878
+#: scripts/scenario_54_PatrolDuty.lua:4797
+#: scripts/scenario_54_PatrolDuty.lua:4838
+#: scripts/scenario_54_PatrolDuty.lua:4861
+#: scripts/scenario_54_PatrolDuty.lua:4884
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -2427,7 +2449,7 @@ msgstr ""
 "\n"
 "Auf der Station ist nicht genug davon vorrätig"
 
-#: scripts/scenario_54_PatrolDuty.lua:4803
+#: scripts/scenario_54_PatrolDuty.lua:4809
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -2436,19 +2458,19 @@ msgstr ""
 "\n"
 "Gekauft"
 
-#: scripts/scenario_54_PatrolDuty.lua:4815
+#: scripts/scenario_54_PatrolDuty.lua:4821
 #, lua-format
 msgctxt "trade-comms"
 msgid "Sell one %s for %i reputation"
 msgstr "Verkaufe 1 %s für %i Ruf"
 
-#: scripts/scenario_54_PatrolDuty.lua:4816
+#: scripts/scenario_54_PatrolDuty.lua:4822
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Reputation price: %i"
 msgstr "Art: %s, Rufkosten: %i"
 
-#: scripts/scenario_54_PatrolDuty.lua:4819
+#: scripts/scenario_54_PatrolDuty.lua:4825
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -2457,23 +2479,23 @@ msgstr ""
 "\n"
 "1 verkauft"
 
-#: scripts/scenario_54_PatrolDuty.lua:4829
+#: scripts/scenario_54_PatrolDuty.lua:4835
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
 msgstr "Tausche Lebensmittel (food) gegen %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:4830
-#: scripts/scenario_54_PatrolDuty.lua:4853
-#: scripts/scenario_54_PatrolDuty.lua:4876
+#: scripts/scenario_54_PatrolDuty.lua:4836
+#: scripts/scenario_54_PatrolDuty.lua:4859
+#: scripts/scenario_54_PatrolDuty.lua:4882
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
 msgstr "Art: %s, Anzahl: %i"
 
-#: scripts/scenario_54_PatrolDuty.lua:4843
-#: scripts/scenario_54_PatrolDuty.lua:4866
-#: scripts/scenario_54_PatrolDuty.lua:4889
+#: scripts/scenario_54_PatrolDuty.lua:4849
+#: scripts/scenario_54_PatrolDuty.lua:4872
+#: scripts/scenario_54_PatrolDuty.lua:4895
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -2482,29 +2504,29 @@ msgstr ""
 "\n"
 "Getauscht"
 
-#: scripts/scenario_54_PatrolDuty.lua:4852
+#: scripts/scenario_54_PatrolDuty.lua:4858
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
 msgstr "Tausche Medikamente (medicine) gegen %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:4875
-#: scripts/scenario_54_PatrolDuty.lua:5860
+#: scripts/scenario_54_PatrolDuty.lua:4881
+#: scripts/scenario_54_PatrolDuty.lua:5866
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr "Tausche Luxusgüter (luxury) gegen %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:4905
-#: scripts/scenario_54_PatrolDuty.lua:5836
-#: scripts/scenario_54_PatrolDuty.lua:5916
+#: scripts/scenario_54_PatrolDuty.lua:4911
+#: scripts/scenario_54_PatrolDuty.lua:5842
+#: scripts/scenario_54_PatrolDuty.lua:5922
 msgctxt "trade-comms"
 msgid "Jettison cargo"
 msgstr "Fracht abwerfen"
 
-#: scripts/scenario_54_PatrolDuty.lua:4906
-#: scripts/scenario_54_PatrolDuty.lua:5837
-#: scripts/scenario_54_PatrolDuty.lua:5917
+#: scripts/scenario_54_PatrolDuty.lua:4912
+#: scripts/scenario_54_PatrolDuty.lua:5843
+#: scripts/scenario_54_PatrolDuty.lua:5923
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -2514,21 +2536,21 @@ msgstr ""
 "Verfügbarer Platz: %i\n"
 "Was würden Sie gerne abwerfen?"
 
-#: scripts/scenario_54_PatrolDuty.lua:4912
-#: scripts/scenario_54_PatrolDuty.lua:5843
-#: scripts/scenario_54_PatrolDuty.lua:5923
+#: scripts/scenario_54_PatrolDuty.lua:4918
+#: scripts/scenario_54_PatrolDuty.lua:5849
+#: scripts/scenario_54_PatrolDuty.lua:5929
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
 msgstr "1 %s abgeworfen"
 
-#: scripts/scenario_54_PatrolDuty.lua:4920
+#: scripts/scenario_54_PatrolDuty.lua:4926
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
 msgstr ""
 "Waren oder Fracht sind vom Tutorial nicht abgedeckt. Bitte um Erklärung."
 
-#: scripts/scenario_54_PatrolDuty.lua:4921
+#: scripts/scenario_54_PatrolDuty.lua:4927
 msgctxt "explainGoods-comms"
 msgid ""
 "Different types of cargo or goods may be obtained from stations, freighters "
@@ -2547,17 +2569,17 @@ msgstr ""
 "Arten von Fracht (typischerweise Lebensmittel, Medizin oder Luxusgüter) "
 "erworben werden."
 
-#: scripts/scenario_54_PatrolDuty.lua:4925
+#: scripts/scenario_54_PatrolDuty.lua:4931
 msgctxt "upgrade-comms"
 msgid "Utopia Planitia"
 msgstr "Utopia Planitia"
 
-#: scripts/scenario_54_PatrolDuty.lua:4926
+#: scripts/scenario_54_PatrolDuty.lua:4932
 msgctxt "upgrade-comms"
 msgid "Check maintenance bay for ship upgrade"
 msgstr "Werftleitung wegen Upgrades kontaktieren"
 
-#: scripts/scenario_54_PatrolDuty.lua:4927
+#: scripts/scenario_54_PatrolDuty.lua:4933
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
@@ -2567,24 +2589,24 @@ msgstr ""
 "Guten Tag %s,\n"
 "Willkommen auf der Schiffswerft von %s. Was können wir für Sie tun?"
 
-#: scripts/scenario_54_PatrolDuty.lua:4929
+#: scripts/scenario_54_PatrolDuty.lua:4935
 msgctxt "upgrade-comms"
 msgid "Upgrade beam weapons with Joshua Kojak's research"
 msgstr "Laserwaffen durch Joshua Kojaks Forschungen verbessern"
 
-#: scripts/scenario_54_PatrolDuty.lua:4931
-#: scripts/scenario_54_PatrolDuty.lua:5027
+#: scripts/scenario_54_PatrolDuty.lua:4937
+#: scripts/scenario_54_PatrolDuty.lua:5033
 msgctxt "upgrade-comms"
 msgid "You already have the upgrade."
 msgstr "Sie haben dieses Upgrade bereits."
 
-#: scripts/scenario_54_PatrolDuty.lua:4934
-#: scripts/scenario_54_PatrolDuty.lua:5030
+#: scripts/scenario_54_PatrolDuty.lua:4940
+#: scripts/scenario_54_PatrolDuty.lua:5036
 msgctxt "upgrade-comms"
 msgid "Your ship type does not support a beam weapon upgrade."
 msgstr "Ihr Schiffstyp unterstützt kein Upgrade der Laser."
 
-#: scripts/scenario_54_PatrolDuty.lua:4960
+#: scripts/scenario_54_PatrolDuty.lua:4966
 #, lua-format
 msgctxt "upgradeAudio1-comms"
 msgid ""
@@ -2594,7 +2616,7 @@ msgstr ""
 "Danke für die Waren (%s). Die Reichweite, die Ladezeit und der Schaden Ihrer "
 "Laserwaffen wurden verbessert."
 
-#: scripts/scenario_54_PatrolDuty.lua:4962
+#: scripts/scenario_54_PatrolDuty.lua:4968
 #, lua-format
 msgctxt "upgradeAudio1"
 msgid ""
@@ -2604,26 +2626,26 @@ msgstr ""
 "Wir sind knapp an \"%s\". Bitte bringen Sie uns etwas davon, dann können wir "
 "Ihre Laser aufrüsten."
 
-#: scripts/scenario_54_PatrolDuty.lua:4966
+#: scripts/scenario_54_PatrolDuty.lua:4972
 msgctxt "upgradeAudio1-comms"
 msgid "Your beam weapons now have improved range, cycle time and damage."
 msgstr ""
 "Die Reichweite, die Ladezeit und der Schaden Ihrer Laserwaffen wurden "
 "verbessert."
 
-#: scripts/scenario_54_PatrolDuty.lua:4975
+#: scripts/scenario_54_PatrolDuty.lua:4981
 msgctxt "upgrade-comms"
 msgid "Upgrade impulse engines with Dan McNabbit's tuning parameters"
 msgstr "Impulstriebwerke mit Dan McNabbit's Tuning-Parametern verbessern"
 
-#: scripts/scenario_54_PatrolDuty.lua:4977
-#: scripts/scenario_54_PatrolDuty.lua:5071
-#: scripts/scenario_54_PatrolDuty.lua:5111
+#: scripts/scenario_54_PatrolDuty.lua:4983
+#: scripts/scenario_54_PatrolDuty.lua:5077
+#: scripts/scenario_54_PatrolDuty.lua:5117
 msgctxt "upgrade-comms"
 msgid "You already have the upgrade"
 msgstr "Sie haben dieses Upgrade bereits"
 
-#: scripts/scenario_54_PatrolDuty.lua:5006
+#: scripts/scenario_54_PatrolDuty.lua:5012
 #, lua-format
 msgctxt "upgradeAudio2-comms"
 msgid "Thanks for the %s. Your impulse engines now have improved speed"
@@ -2631,7 +2653,7 @@ msgstr ""
 "Danke für die Waren (%s). Die Leistung Ihrer Impulstriebwerke wurde "
 "verbessert."
 
-#: scripts/scenario_54_PatrolDuty.lua:5009
+#: scripts/scenario_54_PatrolDuty.lua:5015
 #, lua-format
 msgctxt "upgradeAudio2-comms"
 msgid ""
@@ -2641,17 +2663,17 @@ msgstr ""
 "Wir sind knapp an \"%s\". Bitte bringen Sie uns etwas davon, dann können wir "
 "Ihren Impulsantrieb aufrüsten."
 
-#: scripts/scenario_54_PatrolDuty.lua:5017
+#: scripts/scenario_54_PatrolDuty.lua:5023
 msgctxt "upgradeAudio2-comms"
 msgid "Your impulse engines now have improved speed"
 msgstr "Die Leistung Ihres Impulsantriebs wurde verbessert"
 
-#: scripts/scenario_54_PatrolDuty.lua:5025
+#: scripts/scenario_54_PatrolDuty.lua:5031
 msgctxt "upgrade-comms"
 msgid "Apply Commander Lisbon's beam cooling algorithm"
 msgstr "Commander Lisbons Laserkühlungs-Algorithmus installieren"
 
-#: scripts/scenario_54_PatrolDuty.lua:5055
+#: scripts/scenario_54_PatrolDuty.lua:5061
 #, lua-format
 msgctxt "upgradeAudio3-comms"
 msgid ""
@@ -2661,7 +2683,7 @@ msgstr ""
 "Danke für die Waren (%s). Ihre Laserwaffen produzieren nun weniger Hitze "
 "beim Feuern."
 
-#: scripts/scenario_54_PatrolDuty.lua:5057
+#: scripts/scenario_54_PatrolDuty.lua:5063
 #, lua-format
 msgctxt "upgradeAudio3-comms"
 msgid ""
@@ -2672,17 +2694,17 @@ msgstr ""
 "Verfügung haben. Bitte bringen Sie uns etwas \"%s\", dann können wir das "
 "Upgrade installieren"
 
-#: scripts/scenario_54_PatrolDuty.lua:5061
+#: scripts/scenario_54_PatrolDuty.lua:5067
 msgctxt "upgradeAudio3-comms"
 msgid "Your beam weapons now generate less heat when firing."
 msgstr "Ihre Laserwaffen produzieren nun weniger Hitze beim Feuern."
 
-#: scripts/scenario_54_PatrolDuty.lua:5069
+#: scripts/scenario_54_PatrolDuty.lua:5075
 msgctxt "upgrade-comms"
 msgid "Upgrade maneuverability"
 msgstr "Verbessere Manövriertriebwerke"
 
-#: scripts/scenario_54_PatrolDuty.lua:5096
+#: scripts/scenario_54_PatrolDuty.lua:5102
 #, lua-format
 msgctxt "upgradeAudio4-comms"
 msgid ""
@@ -2692,23 +2714,23 @@ msgstr ""
 "Danke, die Waren (%s) haben wir dringend gebraucht. Ihre Manövrierfähigkeit "
 "wurde deutlich verbessert."
 
-#: scripts/scenario_54_PatrolDuty.lua:5098
+#: scripts/scenario_54_PatrolDuty.lua:5104
 #, lua-format
 msgctxt "upgradeAudio4-comms"
 msgid "To upgrade, we need you to bring us some %s"
 msgstr "Für das Upgrade müssen Sie uns etwas \"%s\" bringen"
 
-#: scripts/scenario_54_PatrolDuty.lua:5102
+#: scripts/scenario_54_PatrolDuty.lua:5108
 msgctxt "upgradeAudio4-comms"
 msgid "Your maneuverability has been significantly improved"
 msgstr "Ihre Manövrierfähigkeit wurde deutlich verbessert"
 
-#: scripts/scenario_54_PatrolDuty.lua:5109
+#: scripts/scenario_54_PatrolDuty.lua:5115
 msgctxt "upgrade-comms"
 msgid "Add homing missile tube upgrade"
 msgstr "Zusätzlichen Zielsuchraketen-Schacht einbauen"
 
-#: scripts/scenario_54_PatrolDuty.lua:5158
+#: scripts/scenario_54_PatrolDuty.lua:5164
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
@@ -2717,7 +2739,7 @@ msgstr ""
 "Danke für die Waren (%s und %s). Sie besitzen nun einen zusätzlichen Schacht "
 "für Zielsuchraketen"
 
-#: scripts/scenario_54_PatrolDuty.lua:5166
+#: scripts/scenario_54_PatrolDuty.lua:5172
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
@@ -2727,7 +2749,7 @@ msgstr ""
 "Uns geht langsam der Nachschub aus. Um einen zusätzlichen Raketenschacht "
 "einzubauen, brauchen wir \"%s\" und \"%s\""
 
-#: scripts/scenario_54_PatrolDuty.lua:5178
+#: scripts/scenario_54_PatrolDuty.lua:5184
 msgctxt "cartographyOffice-comms"
 msgid ""
 "Greetings,\n"
@@ -2737,25 +2759,25 @@ msgstr ""
 "kann ich Ihnen bei der Suche nach einer Station oder bestimmten Gütern "
 "behilflich sein?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5179
+#: scripts/scenario_54_PatrolDuty.lua:5185
 msgctxt "cartographyOffice-comms"
 msgid "Find station"
 msgstr "Station finden"
 
-#: scripts/scenario_54_PatrolDuty.lua:5180
+#: scripts/scenario_54_PatrolDuty.lua:5186
 msgctxt "cartographyOffice-comms"
 msgid "What station?"
 msgstr "Welche Station"
 
-#: scripts/scenario_54_PatrolDuty.lua:5190
-#: scripts/scenario_54_PatrolDuty.lua:5242
+#: scripts/scenario_54_PatrolDuty.lua:5196
+#: scripts/scenario_54_PatrolDuty.lua:5248
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "%s %s %s Distance:%.1fU"
 msgstr "%s %s %s Entfernung:%.1fU"
 
-#: scripts/scenario_54_PatrolDuty.lua:5208
-#: scripts/scenario_54_PatrolDuty.lua:5260
+#: scripts/scenario_54_PatrolDuty.lua:5214
+#: scripts/scenario_54_PatrolDuty.lua:5266
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2765,63 +2787,63 @@ msgstr ""
 "%s\n"
 "Wegpunkt %i wurde Ihrem Navigationssystem hinzugefügt und zeigt auf %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:5217
+#: scripts/scenario_54_PatrolDuty.lua:5223
 msgctxt "cartographyOffice-comms"
 msgid "Try the apprentice, I'm tired"
 msgstr "Versuchen Sie es bei der Auszubildenden, ich bin gerade erschöpft"
 
-#: scripts/scenario_54_PatrolDuty.lua:5221
+#: scripts/scenario_54_PatrolDuty.lua:5227
 msgctxt "cartographyOffice-comms"
 msgid "Find Goods"
 msgstr "Waren finden"
 
-#: scripts/scenario_54_PatrolDuty.lua:5222
+#: scripts/scenario_54_PatrolDuty.lua:5228
 msgctxt "cartographyOffice-comms"
 msgid "What goods are you looking for?"
 msgstr "Welche Waren interessieren Sie?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5324
+#: scripts/scenario_54_PatrolDuty.lua:5330
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "Für diese Aktion müssen Sie angedockt sein."
 
-#: scripts/scenario_54_PatrolDuty.lua:5328
+#: scripts/scenario_54_PatrolDuty.lua:5334
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr "Wir handeln nicht mit Massenvernichtungswaffen."
 
-#: scripts/scenario_54_PatrolDuty.lua:5329
+#: scripts/scenario_54_PatrolDuty.lua:5335
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr "Wir handeln nicht mit Störwaffen."
 
-#: scripts/scenario_54_PatrolDuty.lua:5330
+#: scripts/scenario_54_PatrolDuty.lua:5336
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
 msgstr "Wir handeln nicht mit solchen Waffen."
 
-#: scripts/scenario_54_PatrolDuty.lua:5337
+#: scripts/scenario_54_PatrolDuty.lua:5343
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr "Alle Nukes sind geladen und zur Zerstörung bereit."
 
-#: scripts/scenario_54_PatrolDuty.lua:5339
+#: scripts/scenario_54_PatrolDuty.lua:5345
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
 "Es tut mir leid, aber sie haben bereits das zulässige Höchstlimit erreicht."
 
-#: scripts/scenario_54_PatrolDuty.lua:5344
+#: scripts/scenario_54_PatrolDuty.lua:5350
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr "Ihr Ruf ist nicht ausreichend."
 
-#: scripts/scenario_54_PatrolDuty.lua:5349
+#: scripts/scenario_54_PatrolDuty.lua:5355
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr "Sie sind voll geladen und bereit, Dinge in die Luft zu jagen."
 
-#: scripts/scenario_54_PatrolDuty.lua:5351
+#: scripts/scenario_54_PatrolDuty.lua:5357
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
@@ -2830,7 +2852,7 @@ msgstr ""
 "Wir waren so frei und haben Ihre Waffenvorräte etwas aufgefüllt.\n"
 "Setzen Sie sie weise ein."
 
-#: scripts/scenario_54_PatrolDuty.lua:5372
+#: scripts/scenario_54_PatrolDuty.lua:5378
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
@@ -2839,7 +2861,7 @@ msgstr ""
 "Guten Tag,\n"
 "wenn Sie Nachschub brauchen, docken Sie bitte zuerst bei uns an."
 
-#: scripts/scenario_54_PatrolDuty.lua:5374
+#: scripts/scenario_54_PatrolDuty.lua:5380
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
@@ -2848,7 +2870,7 @@ msgstr ""
 "Guten Tag.\n"
 "Wenn Sie Geschäfte machen wollen, docken Sie bitte zuerst bei uns an."
 
-#: scripts/scenario_54_PatrolDuty.lua:5377
+#: scripts/scenario_54_PatrolDuty.lua:5383
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -2859,17 +2881,17 @@ msgstr ""
 "Seien Sie sich darüber im Klaren, dass wir zu beschäftigt sein werden, um "
 "mit Ihnen Geschäfte zu machen, wenn die Feinde in der Gegend näher kommen."
 
-#: scripts/scenario_54_PatrolDuty.lua:5381
+#: scripts/scenario_54_PatrolDuty.lua:5387
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
 msgstr "Welche Art von Informationen benötigen Sie?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5382
+#: scripts/scenario_54_PatrolDuty.lua:5388
 msgctxt "ammo-comms"
 msgid "What ordnance do you have available for restock?"
 msgstr "Welche Munition können Sie uns anbieten?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5388
+#: scripts/scenario_54_PatrolDuty.lua:5394
 msgctxt "ammo-comms"
 msgid ""
 "\n"
@@ -2878,7 +2900,7 @@ msgstr ""
 "\n"
 "   Nuke"
 
-#: scripts/scenario_54_PatrolDuty.lua:5392
+#: scripts/scenario_54_PatrolDuty.lua:5398
 msgctxt "ammo-comms"
 msgid ""
 "\n"
@@ -2887,7 +2909,7 @@ msgstr ""
 "\n"
 "   EMP"
 
-#: scripts/scenario_54_PatrolDuty.lua:5396
+#: scripts/scenario_54_PatrolDuty.lua:5402
 msgctxt "ammo-comms"
 msgid ""
 "\n"
@@ -2896,7 +2918,7 @@ msgstr ""
 "\n"
 "   Zielsuchraketen"
 
-#: scripts/scenario_54_PatrolDuty.lua:5400
+#: scripts/scenario_54_PatrolDuty.lua:5406
 msgctxt "ammo-comms"
 msgid ""
 "\n"
@@ -2905,7 +2927,7 @@ msgstr ""
 "\n"
 "   Mine"
 
-#: scripts/scenario_54_PatrolDuty.lua:5404
+#: scripts/scenario_54_PatrolDuty.lua:5410
 msgctxt "ammo-comms"
 msgid ""
 "\n"
@@ -2914,29 +2936,29 @@ msgstr ""
 "\n"
 "   HGBI"
 
-#: scripts/scenario_54_PatrolDuty.lua:5407
+#: scripts/scenario_54_PatrolDuty.lua:5413
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
 msgstr "Wir können Ihnen leider nichts anbieten"
 
-#: scripts/scenario_54_PatrolDuty.lua:5409
+#: scripts/scenario_54_PatrolDuty.lua:5415
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
 msgstr "Wir haben folgende Munitionsart vorrätig:%s"
 
-#: scripts/scenario_54_PatrolDuty.lua:5411
+#: scripts/scenario_54_PatrolDuty.lua:5417
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
 msgstr "Wir haben folgende Munitionsarten vorrätig:%s"
 
-#: scripts/scenario_54_PatrolDuty.lua:5425
+#: scripts/scenario_54_PatrolDuty.lua:5431
 msgctxt "trade-comms"
 msgid "What goods do you have available for sale or trade?"
 msgstr "Welche Waren bieten Sie zum Verkauf oder Tausch an?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5427
+#: scripts/scenario_54_PatrolDuty.lua:5433
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -2946,7 +2968,7 @@ msgstr ""
 "Station %s:\n"
 "Verfügbare Waren oder Komponenten: Menge, Ruf-Kosten"
 
-#: scripts/scenario_54_PatrolDuty.lua:5429
+#: scripts/scenario_54_PatrolDuty.lua:5435
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -2956,208 +2978,208 @@ msgstr ""
 "\n"
 "   %14s: %2i, %3i"
 
-#: scripts/scenario_54_PatrolDuty.lua:5435
+#: scripts/scenario_54_PatrolDuty.lua:5441
 msgctxt "helpfullWarning-comms"
 msgid "See any enemies in your area?"
 msgstr "Sehen Sie Feinde in Ihrer Umgebung?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5445
+#: scripts/scenario_54_PatrolDuty.lua:5451
 #, lua-format
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see %i enemies within 30U"
 msgstr "Ja, wir sehen %i Feinde innerhalb von 30U."
 
-#: scripts/scenario_54_PatrolDuty.lua:5447
+#: scripts/scenario_54_PatrolDuty.lua:5453
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see one enemy within 30U"
 msgstr "Ja, wir sehen einen Feind innerhalb von 30U"
 
-#: scripts/scenario_54_PatrolDuty.lua:5451
+#: scripts/scenario_54_PatrolDuty.lua:5457
 msgctxt "helpfullWarning-comms"
 msgid "No enemies within 30U"
 msgstr "Keine Feinde im Umkreis von 30U"
 
-#: scripts/scenario_54_PatrolDuty.lua:5456
+#: scripts/scenario_54_PatrolDuty.lua:5462
 msgctxt "helpfullWarning-comms"
 msgid "Not really"
 msgstr "Nicht wirklich."
 
-#: scripts/scenario_54_PatrolDuty.lua:5585
+#: scripts/scenario_54_PatrolDuty.lua:5591
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr "Können Sie eine Versorgungslieferung schicken? (%d Ruf)"
 
-#: scripts/scenario_54_PatrolDuty.lua:5587
+#: scripts/scenario_54_PatrolDuty.lua:5593
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
 "Sie müssen einen Wegpunkt setzen, bevor Sie Unterstützung anfordern können."
 
-#: scripts/scenario_54_PatrolDuty.lua:5589
+#: scripts/scenario_54_PatrolDuty.lua:5595
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr "Zu welchem Wegpunkt sollen wir Ihre Versorgungslieferung schicken?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5591
-#: scripts/scenario_54_PatrolDuty.lua:5617
+#: scripts/scenario_54_PatrolDuty.lua:5597
+#: scripts/scenario_54_PatrolDuty.lua:5623
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
 msgstr "WP %d"
 
-#: scripts/scenario_54_PatrolDuty.lua:5599
+#: scripts/scenario_54_PatrolDuty.lua:5605
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr "Wir haben ein Versorgungsschiff nach WP %d entsandt."
 
-#: scripts/scenario_54_PatrolDuty.lua:5601
-#: scripts/scenario_54_PatrolDuty.lua:5622
+#: scripts/scenario_54_PatrolDuty.lua:5607
+#: scripts/scenario_54_PatrolDuty.lua:5628
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr "Ihr Ruf ist nicht ausreichend."
 
-#: scripts/scenario_54_PatrolDuty.lua:5611
+#: scripts/scenario_54_PatrolDuty.lua:5617
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
 msgstr "Bitte schicken Sie Verstärkung! (%d Ruf)"
 
-#: scripts/scenario_54_PatrolDuty.lua:5613
+#: scripts/scenario_54_PatrolDuty.lua:5619
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr ""
 "Sie müssen einen Wegpunkt setzen, bevor Sie Verstärkung anfordern können."
 
-#: scripts/scenario_54_PatrolDuty.lua:5615
+#: scripts/scenario_54_PatrolDuty.lua:5621
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "Zu welchem Wegpunkt sollen wir die Verstärkung schicken?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5620
+#: scripts/scenario_54_PatrolDuty.lua:5626
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at WP %d"
 msgstr "Wir haben %s zur Unterstützung bei WP %d entsandt."
 
-#: scripts/scenario_54_PatrolDuty.lua:5698
-#: scripts/scenario_54_PatrolDuty.lua:5896
+#: scripts/scenario_54_PatrolDuty.lua:5704
+#: scripts/scenario_54_PatrolDuty.lua:5902
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr "Was wollen Sie?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5700
+#: scripts/scenario_54_PatrolDuty.lua:5706
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr "Wie können wir behilflich sein?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5702
+#: scripts/scenario_54_PatrolDuty.lua:5708
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr "Verteidigen Sie einen Wegpunkt"
 
-#: scripts/scenario_54_PatrolDuty.lua:5704
+#: scripts/scenario_54_PatrolDuty.lua:5710
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr "Keine Wegpunkte gesetzt. Bitte setzen sie zunächst einen Wegpunkt."
 
-#: scripts/scenario_54_PatrolDuty.lua:5707
+#: scripts/scenario_54_PatrolDuty.lua:5713
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr "Welchen Wegpunkt sollen wir verteidigen?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5709
+#: scripts/scenario_54_PatrolDuty.lua:5715
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
 msgstr "Verteidigen Sie WP %d."
 
-#: scripts/scenario_54_PatrolDuty.lua:5711
+#: scripts/scenario_54_PatrolDuty.lua:5717
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
 msgstr "Wir sind auf dem Weg zur Unterstützung bei WP %d."
 
-#: scripts/scenario_54_PatrolDuty.lua:5718
+#: scripts/scenario_54_PatrolDuty.lua:5724
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr "Unterstützen Sie uns."
 
-#: scripts/scenario_54_PatrolDuty.lua:5719
+#: scripts/scenario_54_PatrolDuty.lua:5725
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr "Wir sind unterwegs, um Sie zu unterstützen."
 
-#: scripts/scenario_54_PatrolDuty.lua:5724
+#: scripts/scenario_54_PatrolDuty.lua:5730
 msgctxt "shipAssist-comms"
 msgid "Report status"
 msgstr "Status melden."
 
-#: scripts/scenario_54_PatrolDuty.lua:5725
+#: scripts/scenario_54_PatrolDuty.lua:5731
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr "Hülle: %d%%\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:5728
+#: scripts/scenario_54_PatrolDuty.lua:5734
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr "Schild: %d%%\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:5730
+#: scripts/scenario_54_PatrolDuty.lua:5736
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
 msgstr "Frontschilde:  %d%%\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:5731
+#: scripts/scenario_54_PatrolDuty.lua:5737
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
 msgstr "Heckschilde: %d%%\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:5734
+#: scripts/scenario_54_PatrolDuty.lua:5740
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr "Schilde %s: %d%%\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:5741
+#: scripts/scenario_54_PatrolDuty.lua:5747
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr "%s Raketen: %d/%d\n"
 
-#: scripts/scenario_54_PatrolDuty.lua:5750
+#: scripts/scenario_54_PatrolDuty.lua:5756
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr "An %s andocken"
 
-#: scripts/scenario_54_PatrolDuty.lua:5751
+#: scripts/scenario_54_PatrolDuty.lua:5757
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr "Wir docken bei %s."
 
-#: scripts/scenario_54_PatrolDuty.lua:5762
+#: scripts/scenario_54_PatrolDuty.lua:5768
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
 msgstr "Wir sehen Ihrer Zerstörung entgegen!"
 
-#: scripts/scenario_54_PatrolDuty.lua:5763
+#: scripts/scenario_54_PatrolDuty.lua:5769
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
 msgstr "Ihre Blutlinie wird hier enden!"
 
-#: scripts/scenario_54_PatrolDuty.lua:5764
+#: scripts/scenario_54_PatrolDuty.lua:5770
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
 msgstr "Ihre schwächlichen Drohungen sind bedeutungslos."
 
-#: scripts/scenario_54_PatrolDuty.lua:5766
+#: scripts/scenario_54_PatrolDuty.lua:5772
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
@@ -3166,7 +3188,7 @@ msgstr ""
 "Ktzzzsss.\n"
 "Ihr werdet sterrrben, Schwächchchchlinge!!"
 
-#: scripts/scenario_54_PatrolDuty.lua:5768
+#: scripts/scenario_54_PatrolDuty.lua:5774
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
@@ -3176,12 +3198,12 @@ msgstr ""
 "müssen.\n"
 "Ende der Nachricht."
 
-#: scripts/scenario_54_PatrolDuty.lua:5770
+#: scripts/scenario_54_PatrolDuty.lua:5776
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr "Gehen Sie uns aus dem Weg, oder Ihr Tod wird uns köstlich amüsieren!"
 
-#: scripts/scenario_54_PatrolDuty.lua:5772
+#: scripts/scenario_54_PatrolDuty.lua:5778
 msgctxt "shipEnemy-comms"
 msgid ""
 "One zero one.\n"
@@ -3199,22 +3221,22 @@ msgstr ""
 "\n"
 "Verbindung beendet."
 
-#: scripts/scenario_54_PatrolDuty.lua:5773
+#: scripts/scenario_54_PatrolDuty.lua:5779
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr "AUSFÜHREN DER SELBSTZERSTÖRUNG"
 
-#: scripts/scenario_54_PatrolDuty.lua:5774
+#: scripts/scenario_54_PatrolDuty.lua:5780
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr "Schadhafter Befehl entdeckt. Erfasse Quelle."
 
-#: scripts/scenario_54_PatrolDuty.lua:5775
+#: scripts/scenario_54_PatrolDuty.lua:5781
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr "Externer Befehl wird ignoriert."
 
-#: scripts/scenario_54_PatrolDuty.lua:5777
+#: scripts/scenario_54_PatrolDuty.lua:5783
 msgctxt "shipEnemy-comms"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
@@ -3226,91 +3248,91 @@ msgstr ""
 "Halten Sie ihre Position und machen Sie sich bereit, Ihre Körper als Nahrung "
 "zu spenden."
 
-#: scripts/scenario_54_PatrolDuty.lua:5778
+#: scripts/scenario_54_PatrolDuty.lua:5784
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr "<Senden von 'The Itsy-Bitsy Spider' auf allen Kanälen>"
 
-#: scripts/scenario_54_PatrolDuty.lua:5779
+#: scripts/scenario_54_PatrolDuty.lua:5785
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr ""
 "Wir brauchen keine Erlaubnis, um eine so unbedeutende Bedrohung zu "
 "zerpflücken."
 
-#: scripts/scenario_54_PatrolDuty.lua:5780
+#: scripts/scenario_54_PatrolDuty.lua:5786
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr "Der Schwarm hat wichtigeres zu tun als Schädlingsbekämpfung."
 
-#: scripts/scenario_54_PatrolDuty.lua:5782
+#: scripts/scenario_54_PatrolDuty.lua:5788
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
 msgstr "Kümmern Sie sich um Ihren eigenen Kram!"
 
-#: scripts/scenario_54_PatrolDuty.lua:5800
-#: scripts/scenario_54_PatrolDuty.lua:5821
+#: scripts/scenario_54_PatrolDuty.lua:5806
+#: scripts/scenario_54_PatrolDuty.lua:5827
 msgctxt "trade-comms"
 msgid "Yes?"
 msgstr "Ja?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5801
+#: scripts/scenario_54_PatrolDuty.lua:5807
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
 msgstr "Haben Sie Fracht, die Sie verkaufen könnten?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5803
+#: scripts/scenario_54_PatrolDuty.lua:5809
 msgctxt "trade-comms"
 msgid "We've got "
 msgstr "Wir haben "
 
-#: scripts/scenario_54_PatrolDuty.lua:5807
+#: scripts/scenario_54_PatrolDuty.lua:5813
 msgctxt "trade-comms"
 msgid ", "
 msgstr ", "
 
-#: scripts/scenario_54_PatrolDuty.lua:5815
+#: scripts/scenario_54_PatrolDuty.lua:5821
 msgctxt "trade-comms"
 msgid "nothing"
 msgstr "nichts"
 
-#: scripts/scenario_54_PatrolDuty.lua:5823
+#: scripts/scenario_54_PatrolDuty.lua:5829
 msgctxt "trade-comms"
 msgid "Where are you headed?"
 msgstr "Wohin sind Sie unterwegs?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5864
+#: scripts/scenario_54_PatrolDuty.lua:5870
 msgctxt "trade-comms"
 msgid "Traded"
 msgstr "Getauscht"
 
-#: scripts/scenario_54_PatrolDuty.lua:5886
-#: scripts/scenario_54_PatrolDuty.lua:5949
-#: scripts/scenario_54_PatrolDuty.lua:5977
+#: scripts/scenario_54_PatrolDuty.lua:5892
+#: scripts/scenario_54_PatrolDuty.lua:5955
+#: scripts/scenario_54_PatrolDuty.lua:5983
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
 msgstr "Gekauft: %s von %s."
 
-#: scripts/scenario_54_PatrolDuty.lua:5888
-#: scripts/scenario_54_PatrolDuty.lua:5951
-#: scripts/scenario_54_PatrolDuty.lua:5979
+#: scripts/scenario_54_PatrolDuty.lua:5894
+#: scripts/scenario_54_PatrolDuty.lua:5957
+#: scripts/scenario_54_PatrolDuty.lua:5985
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
 msgstr "Unzureichender Ruf für den Kauf"
 
-#: scripts/scenario_54_PatrolDuty.lua:5899
+#: scripts/scenario_54_PatrolDuty.lua:5905
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
 msgstr "Wohin sind Sie unterwegs? (Kosten: %f Ruf)"
 
-#: scripts/scenario_54_PatrolDuty.lua:5959
+#: scripts/scenario_54_PatrolDuty.lua:5965
 msgctxt "trade-comms"
 msgid "Why are you bothering me?"
 msgstr "Warum belästigen Sie mich?"
 
-#: scripts/scenario_54_PatrolDuty.lua:5990
+#: scripts/scenario_54_PatrolDuty.lua:5996
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
@@ -3319,7 +3341,7 @@ msgstr ""
 "Leider haben wir keine Zeit, mit Ihnen zu plaudern.\n"
 "Wir sind auf einer wichtigen Mission."
 
-#: scripts/scenario_54_PatrolDuty.lua:5992
+#: scripts/scenario_54_PatrolDuty.lua:5998
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
@@ -3328,7 +3350,7 @@ msgstr ""
 "Wir können Ihnen nichts anbieten.\n"
 "Einen schönen Tag noch."
 
-#: scripts/scenario_54_PatrolDuty.lua:6507
+#: scripts/scenario_54_PatrolDuty.lua:6513
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -3339,7 +3361,7 @@ msgstr ""
 "Gebiet sind zahlreicher als die Stationen der menschlichen Navy, aber sie "
 "alle verlassen sich darauf, dass wir sie beschützen."
 
-#: scripts/scenario_54_PatrolDuty.lua:6508
+#: scripts/scenario_54_PatrolDuty.lua:6514
 msgctxt "goal-shipLog"
 msgid ""
 "Your job is to patrol between the three major human naval stations: Asimov, "
@@ -3365,26 +3387,26 @@ msgstr ""
 "Quadranten. Unsere Feinde wollen uns hierbei einen Strich durch die Rechnung "
 "machen und ihn für sich beanspruchen."
 
-#: scripts/scenario_54_PatrolDuty.lua:6517
-#: scripts/scenario_54_PatrolDuty.lua:6685
+#: scripts/scenario_54_PatrolDuty.lua:6523
+#: scripts/scenario_54_PatrolDuty.lua:6691
 msgctxt "msgMainscreen"
 msgid "Asimov station destroyed"
 msgstr "Station Asimov wurde zerstört"
 
-#: scripts/scenario_54_PatrolDuty.lua:6522
-#: scripts/scenario_54_PatrolDuty.lua:6690
-#: scripts/scenario_54_PatrolDuty.lua:6783
+#: scripts/scenario_54_PatrolDuty.lua:6528
+#: scripts/scenario_54_PatrolDuty.lua:6696
+#: scripts/scenario_54_PatrolDuty.lua:6789
 msgctxt "msgMainscreen"
 msgid "Utopia Planitia station destroyed"
 msgstr "Station Utopia Planitia wurde zerstört"
 
-#: scripts/scenario_54_PatrolDuty.lua:6527
-#: scripts/scenario_54_PatrolDuty.lua:6695
+#: scripts/scenario_54_PatrolDuty.lua:6533
+#: scripts/scenario_54_PatrolDuty.lua:6701
 msgctxt "msgMainscreen"
 msgid "Armstrong station destroyed"
 msgstr "Station Armstrong wurde zerstört"
 
-#: scripts/scenario_54_PatrolDuty.lua:6730
+#: scripts/scenario_54_PatrolDuty.lua:6736
 #, lua-format
 msgctxt "orders-comms"
 msgid "Rid the area of remaining enemies. Combined sensors show %i ships"
@@ -3392,7 +3414,7 @@ msgstr ""
 "Werden Sie die verbleibenden Feinde im Gebiet los. Die Sensoren zeigen "
 "insgesamt %i Schiffe an."
 
-#: scripts/scenario_54_PatrolDuty.lua:6735
+#: scripts/scenario_54_PatrolDuty.lua:6741
 #, lua-format
 msgctxt "orders-shipLog"
 msgid ""
@@ -3411,12 +3433,12 @@ msgstr ""
 "für den Schutz der Stationen Asimov, Armstrong und Utopia Planitia "
 "verantwortlich."
 
-#: scripts/scenario_54_PatrolDuty.lua:6745
+#: scripts/scenario_54_PatrolDuty.lua:6751
 msgctxt "UPlanitia1Orders-shipLog"
 msgid "Stop patrol and Defend Utopia Planitia"
 msgstr "Unterbrechen Sie die Patrouille und verteidigen Sie Utopia Planitia"
 
-#: scripts/scenario_54_PatrolDuty.lua:6751
+#: scripts/scenario_54_PatrolDuty.lua:6757
 msgctxt "UPlanitia1Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed to log, stored for playback: "
@@ -3425,7 +3447,7 @@ msgstr ""
 "Audiobotschaft erhalten. Transkript wurde dem Log hinzugefügt. Gespeichert "
 "zum Abspielen unter UTPLNT441"
 
-#: scripts/scenario_54_PatrolDuty.lua:6752
+#: scripts/scenario_54_PatrolDuty.lua:6758
 msgctxt "UPlanitia1Audio-shipLog"
 msgid ""
 "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy "
@@ -3436,17 +3458,17 @@ msgstr ""
 "feindlicher Schiffe, die sich nähern. Beenden Sie die Patrouille und "
 "verteidigen Sie die Station Utopia Planitia."
 
-#: scripts/scenario_54_PatrolDuty.lua:6755
+#: scripts/scenario_54_PatrolDuty.lua:6761
 msgctxt "UPlanitia1Audio-buttonRelay"
 msgid "|> UTPLNT441"
 msgstr "|> UTPLNT441"
 
-#: scripts/scenario_54_PatrolDuty.lua:6757
+#: scripts/scenario_54_PatrolDuty.lua:6763
 msgctxt "UPlanitia1Audio-buttonOperations"
 msgid "|> UTPLNT441"
 msgstr "|> UTPLNT441"
 
-#: scripts/scenario_54_PatrolDuty.lua:6760
+#: scripts/scenario_54_PatrolDuty.lua:6766
 msgctxt "UPlanitia1Audio-incCall"
 msgid ""
 "Our long range sensors show a number of enemy ships approaching. Cease "
@@ -3456,12 +3478,12 @@ msgstr ""
 "nähern. Beenden Sie die Patrouille und verteidigen Sie die Station Utopia "
 "Planitia."
 
-#: scripts/scenario_54_PatrolDuty.lua:6761
+#: scripts/scenario_54_PatrolDuty.lua:6767
 msgctxt "UPlanitia1AudioOrders-comms"
 msgid "Defend Utopia Planitia"
 msgstr "Verteidigen Sie Utopia Planitia"
 
-#: scripts/scenario_54_PatrolDuty.lua:6826
+#: scripts/scenario_54_PatrolDuty.lua:6832
 msgctxt "UPlanitia2Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed to log, stored for playback: "
@@ -3470,7 +3492,7 @@ msgstr ""
 "Audiobotschaft erhalten. Transkript wurde dem Log hinzugefügt. Gespeichert "
 "zum Abspielen unter UTPLNT477"
 
-#: scripts/scenario_54_PatrolDuty.lua:6827
+#: scripts/scenario_54_PatrolDuty.lua:6833
 msgctxt "UPlanitia2Audio-shipLog"
 msgid ""
 "[UTPLNT477](Utopia Planitia) You have taken care of the closest enemies. Our "
@@ -3481,23 +3503,23 @@ msgstr ""
 "Nähe gekümmert. Unsere Ultra-Langstreckensensoren zeigen weitere an, aber "
 "diese sollten erst in ein paar Minuten eintreffen."
 
-#: scripts/scenario_54_PatrolDuty.lua:6830
+#: scripts/scenario_54_PatrolDuty.lua:6836
 msgctxt "UPlanitia2Audio-buttonRelay"
 msgid "|> UTPLNT477"
 msgstr "|> UTPLNT477"
 
-#: scripts/scenario_54_PatrolDuty.lua:6832
+#: scripts/scenario_54_PatrolDuty.lua:6838
 msgctxt "UPlanitia2Audio-buttonOperations"
 msgid "|> UTPLNT477"
 msgstr "|> UTPLNT477"
 
-#: scripts/scenario_54_PatrolDuty.lua:6838
+#: scripts/scenario_54_PatrolDuty.lua:6844
 msgctxt "UPlanitia2Audio-shipLog"
 msgid "Nearest ships cleared. More to come shortly"
 msgstr ""
 "Alle Schiffe in der Nähe zerstört. Weitere Schiffe werden in Kürze erwartet."
 
-#: scripts/scenario_54_PatrolDuty.lua:6951
+#: scripts/scenario_54_PatrolDuty.lua:6957
 #, lua-format
 msgctxt "strongHold-shipLog"
 msgid ""
@@ -3507,13 +3529,13 @@ msgstr ""
 "Feindliche Basis in Sektor %s lokalisiert. Flotte wurde bei Utopia Planitia "
 "versammelt, um bei Bedarf zu helfen. Zerstören Sie die Basis."
 
-#: scripts/scenario_54_PatrolDuty.lua:6954
+#: scripts/scenario_54_PatrolDuty.lua:6960
 #, lua-format
 msgctxt "strongHoldOrders-comms"
 msgid "Destroy enemy base in sector %s"
 msgstr "Zerstören Sie die feindliche Basis in Sektor %s"
 
-#: scripts/scenario_54_PatrolDuty.lua:7019
+#: scripts/scenario_54_PatrolDuty.lua:7025
 msgctxt "Asimov1Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
@@ -3522,7 +3544,7 @@ msgstr ""
 "Audiobotschaft erhalten. Transkript wurde dem Log hinzugefügt. Gespeichert "
 "zum Abspielen unter ASMVSNSR003"
 
-#: scripts/scenario_54_PatrolDuty.lua:7020
+#: scripts/scenario_54_PatrolDuty.lua:7026
 msgctxt "Asimov1Audio-shipLog"
 msgid ""
 "[ASMVSNSR003](Asimov sensor technician) Our long range sensors show enemies "
@@ -3531,17 +3553,17 @@ msgstr ""
 "[ASMVSNSR003](Asimov-Sensortechnik) Unsere Langstreckensensoren zeigen "
 "Feinde im Anflug"
 
-#: scripts/scenario_54_PatrolDuty.lua:7023
+#: scripts/scenario_54_PatrolDuty.lua:7029
 msgctxt "Asimov1Audio-buttonRelay"
 msgid "|> ASMVSNSR003"
 msgstr "|> ASMVSNSR003"
 
-#: scripts/scenario_54_PatrolDuty.lua:7025
+#: scripts/scenario_54_PatrolDuty.lua:7031
 msgctxt "Asimov1Audio-buttonOperations"
 msgid "|> ASMVSNSR003"
 msgstr "|> ASMVSNSR003"
 
-#: scripts/scenario_54_PatrolDuty.lua:7072
+#: scripts/scenario_54_PatrolDuty.lua:7078
 #, lua-format
 msgctxt "Kojak1AudioOrders-comms"
 msgid "Pick up Joshua Kojak from %s in sector %s and take him to Bethesda"
@@ -3549,7 +3571,7 @@ msgstr ""
 "Holen Sie  Joshua Kojak von %s in Sektor %s ab und bringen Sie ihn nach "
 "Bethesda"
 
-#: scripts/scenario_54_PatrolDuty.lua:7076
+#: scripts/scenario_54_PatrolDuty.lua:7082
 msgctxt "Kojak1Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
@@ -3558,7 +3580,7 @@ msgstr ""
 "Audiobotschaft erhalten. Transkript wurde dem Log hinzugefügt. Gespeichert "
 "zum Abspielen unter MINSTN014"
 
-#: scripts/scenario_54_PatrolDuty.lua:7077
+#: scripts/scenario_54_PatrolDuty.lua:7083
 #, lua-format
 msgctxt "Kojak1Audio-shipLog"
 msgid ""
@@ -3573,17 +3595,17 @@ msgstr ""
 "über Energiesysteme und exotische Metalle. Vielleicht sind sie ja "
 "interessant für Sie. Der Bergbau lässt mir viel Zeit zum Nachdenken."
 
-#: scripts/scenario_54_PatrolDuty.lua:7080
+#: scripts/scenario_54_PatrolDuty.lua:7086
 msgctxt "Kojak1Audio-buttonRelay"
 msgid "|> MINSTN014"
 msgstr "|> MINSTN014"
 
-#: scripts/scenario_54_PatrolDuty.lua:7082
+#: scripts/scenario_54_PatrolDuty.lua:7088
 msgctxt "Kojak1Audio-buttonOperations"
 msgid "|> MINSTN014"
 msgstr "|> MINSTN014"
 
-#: scripts/scenario_54_PatrolDuty.lua:7105
+#: scripts/scenario_54_PatrolDuty.lua:7111
 msgctxt "Kojak2Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
@@ -3592,7 +3614,7 @@ msgstr ""
 "Audiobotschaft erhalten. Transkript wurde dem Log hinzugefügt. Gespeichert "
 "zum Abspielen unter MINSTN019"
 
-#: scripts/scenario_54_PatrolDuty.lua:7106
+#: scripts/scenario_54_PatrolDuty.lua:7112
 msgctxt "Kojak2Audio-shipLog"
 msgid ""
 "[MINSTN019]Thanks for getting Joshua aboard. Please take him to Bethesda"
@@ -3600,17 +3622,17 @@ msgstr ""
 "[MINSTN019] Danke, dass Sie Joshua an Bord geholt haben. Bitte bringen Sie "
 "ihn nach Bethesda"
 
-#: scripts/scenario_54_PatrolDuty.lua:7110
+#: scripts/scenario_54_PatrolDuty.lua:7116
 msgctxt "Kojak2Audio-buttonRelay"
 msgid "|> MINSTN019"
 msgstr "|> MINSTN019"
 
-#: scripts/scenario_54_PatrolDuty.lua:7112
+#: scripts/scenario_54_PatrolDuty.lua:7118
 msgctxt "Kojak2Audio-buttonOperations"
 msgid "|> MINSTN019"
 msgstr "|> MINSTN019"
 
-#: scripts/scenario_54_PatrolDuty.lua:7132
+#: scripts/scenario_54_PatrolDuty.lua:7138
 msgctxt "Kojak3Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
@@ -3619,7 +3641,7 @@ msgstr ""
 "Audiobotschaft erhalten. Transkript wurde dem Log hinzugefügt. Gespeichert "
 "zum Abspielen unter BTHSDA002"
 
-#: scripts/scenario_54_PatrolDuty.lua:7133
+#: scripts/scenario_54_PatrolDuty.lua:7139
 msgctxt "Kojak3Audio-shipLog"
 msgid ""
 "[BTHSDA002] Joshua Kojak is being treated. He shows every sign of recovering"
@@ -3627,17 +3649,17 @@ msgstr ""
 "[BTHSDA002] Joshua Kojak wird gerade behandelt. Er zeigt bereits alle "
 "Zeichen einer Genesung"
 
-#: scripts/scenario_54_PatrolDuty.lua:7136
+#: scripts/scenario_54_PatrolDuty.lua:7142
 msgctxt "Kojak3Audio-buttonRelay"
 msgid "|> BTHSDA002"
 msgstr "|> BTHSDA002"
 
-#: scripts/scenario_54_PatrolDuty.lua:7138
+#: scripts/scenario_54_PatrolDuty.lua:7144
 msgctxt "Kojak3Audio-buttonOperations"
 msgid "|> BTHSDA002"
 msgstr "|> BTHSDA002"
 
-#: scripts/scenario_54_PatrolDuty.lua:7163
+#: scripts/scenario_54_PatrolDuty.lua:7169
 msgctxt "Kojak4Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
@@ -3646,7 +3668,7 @@ msgstr ""
 "Audiobotschaft erhalten. Transkript wurde dem Log hinzugefügt. Gespeichert "
 "zum Abspielen unter BTHSDA034"
 
-#: scripts/scenario_54_PatrolDuty.lua:7164
+#: scripts/scenario_54_PatrolDuty.lua:7170
 msgctxt "Kojak4Audio-shipLog"
 msgid ""
 "[BTHSDA034](Joshua Kojak) Thanks for bringing me to Bethesda. I'm feeling "
@@ -3659,17 +3681,17 @@ msgstr ""
 "Energiesysteme und exotische Metalle. Vielleicht finden Sie das ja "
 "interessant. Der Bergbau lässt mir viel Zeit zum Nachdenken."
 
-#: scripts/scenario_54_PatrolDuty.lua:7168
+#: scripts/scenario_54_PatrolDuty.lua:7174
 msgctxt "Kojak4Audio-buttonRelay"
 msgid "|> BTHSDA034"
 msgstr "|> BTHSDA034"
 
-#: scripts/scenario_54_PatrolDuty.lua:7170
+#: scripts/scenario_54_PatrolDuty.lua:7176
 msgctxt "Kojak4Audio-buttonOperations"
 msgid "|> BTHSDA034"
 msgstr "|> BTHSDA034"
 
-#: scripts/scenario_54_PatrolDuty.lua:7188
+#: scripts/scenario_54_PatrolDuty.lua:7194
 msgctxt "Kojak5-msgScience"
 msgid ""
 "While reading through Joshua Kojak's research, you discover a potential "
@@ -3683,7 +3705,7 @@ msgstr ""
 "Maschinenraum weiterzuleiten. Du findest die Schaltfläche wenn du von "
 "\"Scan\" zu \"Sonstiges\" umschaltest."
 
-#: scripts/scenario_54_PatrolDuty.lua:7190
+#: scripts/scenario_54_PatrolDuty.lua:7196
 msgctxt "Kojak5-msgOperations"
 msgid ""
 "While reading through Joshua Kojak's research, you discover a potential "
@@ -3696,17 +3718,17 @@ msgstr ""
 "Maschinenraum weiterzuleiten. Du findest die Schaltfläche wenn du von "
 "\"Scan\" zu \"Sonstiges\" umschaltest."
 
-#: scripts/scenario_54_PatrolDuty.lua:7192
+#: scripts/scenario_54_PatrolDuty.lua:7198
 msgctxt "Kojak5-buttonScience"
 msgid "Send to engineer"
 msgstr "Sende an Maschinenr."
 
-#: scripts/scenario_54_PatrolDuty.lua:7194
+#: scripts/scenario_54_PatrolDuty.lua:7200
 msgctxt "Kojak5-buttonOperations"
 msgid "Send to engineer"
 msgstr "Sende an Maschinenr."
 
-#: scripts/scenario_54_PatrolDuty.lua:7215
+#: scripts/scenario_54_PatrolDuty.lua:7221
 msgctxt "Kojak6-msgEngineer"
 msgid ""
 "The science officer sent you some thoughts on Joshua Kojak's research. You "
@@ -3718,7 +3740,7 @@ msgstr ""
 "können. Klicke auf die Schaltfläche \"Sende an Waffen\", um Verbesserungen "
 "für die Waffen vorzuschlagen."
 
-#: scripts/scenario_54_PatrolDuty.lua:7217
+#: scripts/scenario_54_PatrolDuty.lua:7223
 msgctxt "Kojak6-msgEngineer+"
 msgid ""
 "The science officer sent you some thoughts on Joshua Kojak's research. You "
@@ -3730,17 +3752,17 @@ msgstr ""
 "können. Klicke auf die Schaltfläche \"Sende an Waffen\", um Verbesserungen "
 "für die Waffen vorzuschlagen."
 
-#: scripts/scenario_54_PatrolDuty.lua:7219
+#: scripts/scenario_54_PatrolDuty.lua:7225
 msgctxt "Kojak6-buttonEngineer"
 msgid "Send to weapons"
 msgstr "Sende an Waffenstation"
 
-#: scripts/scenario_54_PatrolDuty.lua:7221
+#: scripts/scenario_54_PatrolDuty.lua:7227
 msgctxt "Kojak6-buttonEngineer+"
 msgid "Send to weapons"
 msgstr "Sende an Waffenstation"
 
-#: scripts/scenario_54_PatrolDuty.lua:7248
+#: scripts/scenario_54_PatrolDuty.lua:7254
 msgctxt "Kojak7-msgWeapons"
 msgid ""
 "The engineer sent you some thoughts on Joshua Kojak's research. You know how "
@@ -3754,7 +3776,7 @@ msgstr ""
 "die Schaltfläche „Nach Utopia Planitia senden“, um die Upgrade-Anweisungen "
 "an die Station Utopia Planitia zu übermitteln."
 
-#: scripts/scenario_54_PatrolDuty.lua:7250
+#: scripts/scenario_54_PatrolDuty.lua:7256
 msgctxt "Kojak7-msgTactical"
 msgid ""
 "The engineer sent you some thoughts on Joshua Kojak's research. You know how "
@@ -3768,24 +3790,24 @@ msgstr ""
 "die Schaltfläche \"Sende an Utopia Planitia\", um die Upgrade-Anweisungen an "
 "die Station Utopia Planitia zu übermitteln."
 
-#: scripts/scenario_54_PatrolDuty.lua:7252
+#: scripts/scenario_54_PatrolDuty.lua:7258
 msgctxt "Kojak7-buttonWeapons"
 msgid "Send to Utopia Planitia"
 msgstr "Sende an Utopia Planitia"
 
-#: scripts/scenario_54_PatrolDuty.lua:7254
+#: scripts/scenario_54_PatrolDuty.lua:7260
 msgctxt "Kojak7-buttonTactical"
 msgid "Send to Utopia Planitia"
 msgstr "Sende an Utopia Planitia"
 
-#: scripts/scenario_54_PatrolDuty.lua:7280
+#: scripts/scenario_54_PatrolDuty.lua:7286
 msgctxt "Koja8kUP-incCall"
 msgid "Thanks for the information. We can upgrade you next time you dock."
 msgstr ""
 "Danke für diese Information. Wir können das Upgrade durchführen, sobald Sie "
 "das nächste mal bei uns andocken."
 
-#: scripts/scenario_54_PatrolDuty.lua:7281
+#: scripts/scenario_54_PatrolDuty.lua:7287
 msgctxt "Kojak8UP-shipLog"
 msgid ""
 "[Utopia Planitia] Thanks for the information. We can upgrade you next time "
@@ -3794,7 +3816,7 @@ msgstr ""
 "[Utopia Planitia] Danke für die Information. Wenn Sie das nächste Mal bei "
 "uns andocken, können wir das Upgrade durchführen."
 
-#: scripts/scenario_54_PatrolDuty.lua:7322
+#: scripts/scenario_54_PatrolDuty.lua:7328
 msgctxt "UPlanitia3Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
@@ -3803,7 +3825,7 @@ msgstr ""
 "Audiobotschaft erhalten. Transkript wurde dem Log hinzugefügt. Gespeichert "
 "zum Abspielen unter UTPLNT103"
 
-#: scripts/scenario_54_PatrolDuty.lua:7323
+#: scripts/scenario_54_PatrolDuty.lua:7329
 msgctxt "UPlanitia3Audio-shipLog"
 msgid ""
 "[UTPLNT103](Utopia Planitia sensor technician) Our long range sensors show "
@@ -3812,17 +3834,17 @@ msgstr ""
 "[UTPLNT103](Utopia Planitia-Sensortechnik) Unsere Langstreckensensoren "
 "zeigen Feinde im Anflug"
 
-#: scripts/scenario_54_PatrolDuty.lua:7327
+#: scripts/scenario_54_PatrolDuty.lua:7333
 msgctxt "UPlanitia3Audio-buttonRelay"
 msgid "|> UTPLNT103"
 msgstr "|> UTPLNT103"
 
-#: scripts/scenario_54_PatrolDuty.lua:7329
+#: scripts/scenario_54_PatrolDuty.lua:7335
 msgctxt "UPlanitia3Audio-buttonOperations"
 msgid "|> UTPLNT103"
 msgstr "|> UTPLNT103"
 
-#: scripts/scenario_54_PatrolDuty.lua:7367
+#: scripts/scenario_54_PatrolDuty.lua:7373
 #, lua-format
 msgctxt "Nabbit1-shipLog"
 msgid "[%s in sector %s] Engineer Dan McNabbit requests a ride to Armstrong"
@@ -3830,7 +3852,7 @@ msgstr ""
 "[%s in Sektor %s] Ingenieur Dan McNabbit bittet um einen Flug zu Station "
 "Armstrong"
 
-#: scripts/scenario_54_PatrolDuty.lua:7368
+#: scripts/scenario_54_PatrolDuty.lua:7374
 #, lua-format
 msgctxt "Nabbit1Orders-comms"
 msgid "Pick up Dan McNabbit from %s in sector %s and take him to Armstrong"
@@ -3838,12 +3860,12 @@ msgstr ""
 "Holen Sie Dan McNabbit von %s in Sektor %s ab und bringen Sie ihn zur "
 "Station Armstrong"
 
-#: scripts/scenario_54_PatrolDuty.lua:7385
+#: scripts/scenario_54_PatrolDuty.lua:7391
 msgctxt "Nabbit2-shipLog"
 msgid "Engineer Dan McNabbit aboard and ready to go to Armstrong"
 msgstr "Ingeneuer Dan McNabbit an Bord und bereit für den Flug nach Armstrong"
 
-#: scripts/scenario_54_PatrolDuty.lua:7408
+#: scripts/scenario_54_PatrolDuty.lua:7414
 msgctxt "Nabbit3Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
@@ -3852,7 +3874,7 @@ msgstr ""
 "Audiobotschaft erhalten. Transkript wurde dem Log hinzugefügt. Gespeichert "
 "zum Abspielen unter ASTGDN038"
 
-#: scripts/scenario_54_PatrolDuty.lua:7409
+#: scripts/scenario_54_PatrolDuty.lua:7415
 msgctxt "Nabbit3Audio-shipLog"
 msgid ""
 "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse "
@@ -3864,17 +3886,17 @@ msgstr ""
 "nach Utopia Planitia übermittelt. Rechnen Sie mit schnelleren "
 "Impulsgeschwindigkeiten für die Flotte"
 
-#: scripts/scenario_54_PatrolDuty.lua:7419
+#: scripts/scenario_54_PatrolDuty.lua:7425
 msgctxt "Nabbit3Audio-buttonRelay"
 msgid "|> ASTGDN038"
 msgstr "|> ASTGDN038"
 
-#: scripts/scenario_54_PatrolDuty.lua:7421
+#: scripts/scenario_54_PatrolDuty.lua:7427
 msgctxt "Nabbit3Audio-buttonOperations"
 msgid "|> ASTGDN038"
 msgstr "|> ASTGDN038"
 
-#: scripts/scenario_54_PatrolDuty.lua:7448
+#: scripts/scenario_54_PatrolDuty.lua:7454
 msgctxt "attackTimer-shipLog"
 msgid ""
 "Stations Asimov, Utopia Planitia and Armstrong say that their long range "
@@ -3889,7 +3911,7 @@ msgstr ""
 "Wir empfehlen Ihnen, regelmäßig bei diesen Stationen nachzufragen, ob ihre "
 "Kurzstreckensensoren irgendwelche feindlichen Aktivitäten registriert haben."
 
-#: scripts/scenario_54_PatrolDuty.lua:7488
+#: scripts/scenario_54_PatrolDuty.lua:7494
 msgctxt "Lisbon1Audio-incCall"
 msgid ""
 "Audio message received, auto-transcribed into log, stored for playback: "
@@ -3898,7 +3920,7 @@ msgstr ""
 "Audiobotschaft erhalten. Transkript wurde dem Log hinzugefügt. Gespeichert "
 "zum Abspielen unter BTHSDA271"
 
-#: scripts/scenario_54_PatrolDuty.lua:7489
+#: scripts/scenario_54_PatrolDuty.lua:7495
 #, lua-format
 msgctxt "Lisbon1Audio-shipLog"
 msgid ""
@@ -3913,17 +3935,17 @@ msgstr ""
 " befindet.\n"
 "Sie bittet um ein Rendezvous mit dem Frachter, um ihr Kind zurückzubringen."
 
-#: scripts/scenario_54_PatrolDuty.lua:7493
+#: scripts/scenario_54_PatrolDuty.lua:7499
 msgctxt "Lisbon1Audio-buttonRelay"
 msgid "|> BTHSDA271"
 msgstr "|> BTHSDA271"
 
-#: scripts/scenario_54_PatrolDuty.lua:7495
+#: scripts/scenario_54_PatrolDuty.lua:7501
 msgctxt "Lisbon1Audio-buttonOperations"
 msgid "|> BTHSDA271"
 msgstr "|> BTHSDA271"
 
-#: scripts/scenario_54_PatrolDuty.lua:7498
+#: scripts/scenario_54_PatrolDuty.lua:7504
 #, lua-format
 msgctxt "Lisbon1AudioOrders-comms"
 msgid ""
@@ -3933,19 +3955,19 @@ msgstr ""
 "Holen Sie Francis vom Frachter %s, der zuletzt im Sektor %s gesehen wurde, "
 "und bringen Sie das Kind zur Station Bethesda zurück."
 
-#: scripts/scenario_54_PatrolDuty.lua:7513
+#: scripts/scenario_54_PatrolDuty.lua:7519
 msgctxt "Lisbon2-shipLog"
 msgid "The stowaway, Francis, is aboard. Commander Lisbon awaits at Bethesda"
 msgstr ""
 "Das Kind, Francis, ist an Bord. Commander Lisbon erwartet uns in Bethesda"
 
-#: scripts/scenario_54_PatrolDuty.lua:7514
+#: scripts/scenario_54_PatrolDuty.lua:7520
 #, lua-format
 msgctxt "Lisbon2Orders-comms"
 msgid "%s: Return Commander Lisbon's child to station Bethesda"
 msgstr "%s: Bringen Sie Commander Lisbons Kind zu Station Bethesda"
 
-#: scripts/scenario_54_PatrolDuty.lua:7530
+#: scripts/scenario_54_PatrolDuty.lua:7536
 msgctxt "Lisbon3-shipLog"
 msgid ""
 "[Commander Lisbon] Thanks for bringing Francis back. I am entrusting you "
@@ -3958,7 +3980,7 @@ msgstr ""
 "Systeme an. Bringen Sie sie zur Station Utopia Planitia, damit er "
 "entschlüsselt und auf Schiffen der menschlichen Navy eingesetzt werden kann."
 
-#: scripts/scenario_54_PatrolDuty.lua:7532
+#: scripts/scenario_54_PatrolDuty.lua:7538
 #, lua-format
 msgctxt "Lisbon3Orders-comms"
 msgid ""
@@ -3968,7 +3990,7 @@ msgstr ""
 "%s: Liefern Sie Commander Lisbons verschlüsselten Kühlalgorithmus für das "
 "Beam-System an die Station Utopia Planitia"
 
-#: scripts/scenario_54_PatrolDuty.lua:7550
+#: scripts/scenario_54_PatrolDuty.lua:7556
 msgctxt "Lisbon4-shipLog"
 msgid ""
 "[Utopia Planitia] Received Commander Lisbon's beam cooling research. Upgrade "
@@ -3977,7 +3999,7 @@ msgstr ""
 "[Utopia Planitia] Wir haben Commander Lisbons Forschung zur Laserkühlung "
 "erhalten. Upgrade für Schiffe der menschlichen Navy ist verfügbar"
 
-#: scripts/scenario_54_PatrolDuty.lua:7773
+#: scripts/scenario_54_PatrolDuty.lua:7779
 #, lua-format
 msgctxt "Asimov2-shipLog"
 msgid "[Asimov] Our sensors show enemies approximately %.2f units away"
@@ -3985,7 +4007,7 @@ msgstr ""
 "[Asimov] Unsere Langstreckensensoren zeigen Feinde in einer Entfernung von "
 "etwa %.2f U an."
 
-#: scripts/scenario_54_PatrolDuty.lua:7790
+#: scripts/scenario_54_PatrolDuty.lua:7796
 #, lua-format
 msgctxt "Armstrong1-shipLog"
 msgid ""
@@ -3994,7 +4016,7 @@ msgstr ""
 "[Armstrong] Unsere Langstreckensensoren zeigen Feinde in einer Entfernung "
 "von etwa %.2f U an."
 
-#: scripts/scenario_54_PatrolDuty.lua:7807
+#: scripts/scenario_54_PatrolDuty.lua:7813
 #, lua-format
 msgctxt "UPlanitia4-shipLog"
 msgid ""
@@ -4004,7 +4026,7 @@ msgstr ""
 "[Utopia Planitia] Unsere Langstreckensensoren zeigen Feinde in einer "
 "Entfernung von etwa %.2f U an."
 
-#: scripts/scenario_54_PatrolDuty.lua:7850
+#: scripts/scenario_54_PatrolDuty.lua:7856
 #, lua-format
 msgctxt "Sheila1-shipLog"
 msgid ""
@@ -4019,7 +4041,7 @@ msgstr ""
 "der Station %s im Sektor %s. Bitte docken Sie dort an, holen Sie den "
 "Datenspeicher ab und bringen Sie ihn zur Station Asimov."
 
-#: scripts/scenario_54_PatrolDuty.lua:7851
+#: scripts/scenario_54_PatrolDuty.lua:7857
 #, lua-format
 msgctxt "Sheila1Orders-comms"
 msgid ""
@@ -4028,12 +4050,12 @@ msgstr ""
 "Holen Sie Sheila Longs Paket aus %s in Sektor %s und bringen Sie es zur "
 "Station Asimov."
 
-#: scripts/scenario_54_PatrolDuty.lua:7867
+#: scripts/scenario_54_PatrolDuty.lua:7873
 msgctxt "Sheila2-shipLog"
 msgid "Sheila Long's package for station Asimov is aboard"
 msgstr "Sheila Longs Paket für Station Asimov ist an Bord"
 
-#: scripts/scenario_54_PatrolDuty.lua:7883
+#: scripts/scenario_54_PatrolDuty.lua:7889
 msgctxt "Sheila3-shipLog"
 msgid ""
 "Sheila Long's package received. The archive curator discovered some research "
@@ -4049,49 +4071,49 @@ msgstr ""
 "Zielsuchraketen-Schacht hinzufügen können, wenn das Schiff an Utopia "
 "Planitia andockt"
 
-#: scripts/scenario_54_PatrolDuty.lua:7916
-msgctxt "tube-msgWeapons"
-msgid ""
-"Automated systems removed our new weapons tube due to malfunction. "
-"Technicians investigating"
-msgstr ""
-"Automatisierte Systeme haben unseren neuen Waffenschacht aufgrund einer "
-"Fehlfunktion entfernt. Das Technikteam ermittelt noch die Ursache."
-
-#: scripts/scenario_54_PatrolDuty.lua:7918
-msgctxt "tube-msgTactical"
-msgid ""
-"Automated systems removed our new weapons tube due to malfunction. "
-"Technicians investigating"
-msgstr ""
-"Automatisierte Systeme haben unseren neuen Waffenschacht aufgrund einer "
-"Fehlfunktion entfernt. Das Technikteam ermittelt noch die Ursache."
-
 #: scripts/scenario_54_PatrolDuty.lua:7922
 msgctxt "tube-msgWeapons"
-msgid "Technicians fixed the new tube. Click 'Redeploy' button to enable"
+msgid ""
+"Automated systems removed our new weapons tube due to malfunction. "
+"Technicians investigating"
 msgstr ""
-"Ein Technikteam hat den neuen Schacht repariert. Klicken Sie auf "
-"\"Neuinstallation\" um ihn verfügbar zu machen."
+"Automatisierte Systeme haben unseren neuen Waffenschacht aufgrund einer "
+"Fehlfunktion entfernt. Das Technikteam ermittelt noch die Ursache."
 
 #: scripts/scenario_54_PatrolDuty.lua:7924
 msgctxt "tube-msgTactical"
+msgid ""
+"Automated systems removed our new weapons tube due to malfunction. "
+"Technicians investigating"
+msgstr ""
+"Automatisierte Systeme haben unseren neuen Waffenschacht aufgrund einer "
+"Fehlfunktion entfernt. Das Technikteam ermittelt noch die Ursache."
+
+#: scripts/scenario_54_PatrolDuty.lua:7928
+msgctxt "tube-msgWeapons"
 msgid "Technicians fixed the new tube. Click 'Redeploy' button to enable"
 msgstr ""
 "Ein Technikteam hat den neuen Schacht repariert. Klicken Sie auf "
 "\"Neuinstallation\" um ihn verfügbar zu machen."
 
-#: scripts/scenario_54_PatrolDuty.lua:7926
+#: scripts/scenario_54_PatrolDuty.lua:7930
+msgctxt "tube-msgTactical"
+msgid "Technicians fixed the new tube. Click 'Redeploy' button to enable"
+msgstr ""
+"Ein Technikteam hat den neuen Schacht repariert. Klicken Sie auf "
+"\"Neuinstallation\" um ihn verfügbar zu machen."
+
+#: scripts/scenario_54_PatrolDuty.lua:7932
 msgctxt "tube-buttonWeapons"
 msgid "Redeploy"
 msgstr "Neuinstallation"
 
-#: scripts/scenario_54_PatrolDuty.lua:7928
+#: scripts/scenario_54_PatrolDuty.lua:7934
 msgctxt "tube-buttonTactical"
 msgid "Redeploy"
 msgstr "Neuinstallation"
 
-#: scripts/scenario_54_PatrolDuty.lua:8005
+#: scripts/scenario_54_PatrolDuty.lua:8011
 msgctxt "UPlanitia5Audio-shipLog"
 msgid ""
 "[UTPLNT116](Utopia Planitia) Scanned artifacts show promise for ship systems "
@@ -4100,24 +4122,24 @@ msgstr ""
 "[UTPLNT116](Utopia Planitia) Die gescannten Artefakte versprechen eine "
 "Verbesserung der Schiffssysteme. Wir empfehlen, sie zu bergen."
 
-#: scripts/scenario_54_PatrolDuty.lua:8010
+#: scripts/scenario_54_PatrolDuty.lua:8016
 msgctxt "UPlanitia5Audio-incCall"
 msgid "Audio message received, stored for playback: UTPLNT116"
 msgstr ""
 "Audiobotschaft erhalten. Transkript wurde dem Log hinzugefügt. Gespeichert "
 "zum Abspielen unter UTPLNT116"
 
-#: scripts/scenario_54_PatrolDuty.lua:8011
+#: scripts/scenario_54_PatrolDuty.lua:8017
 msgctxt "UPlanitia5Audio-buttonRelay"
 msgid "|> UTPLNT116"
 msgstr "|> UTPLNT116"
 
-#: scripts/scenario_54_PatrolDuty.lua:8013
+#: scripts/scenario_54_PatrolDuty.lua:8019
 msgctxt "UPlanitia5Audio-buttonOperations"
 msgid "|> UTPLNT116"
 msgstr "|> UTPLNT116"
 
-#: scripts/scenario_54_PatrolDuty.lua:8037
+#: scripts/scenario_54_PatrolDuty.lua:8043
 msgctxt "UPlanitia6-shipLog"
 msgid ""
 "[Utopia Planitia] Bring artifacts to Utopia Planitia and we can improve ship "
@@ -4126,7 +4148,7 @@ msgstr ""
 "[Utopia Planitia] Bringen Sie Artefakte zu uns und wir können die "
 "Manövrierfähigkeit des Schiffs verbessern"
 
-#: scripts/scenario_54_PatrolDuty.lua:8062
+#: scripts/scenario_54_PatrolDuty.lua:8068
 msgctxt "UPlanitia7-shipLog"
 msgid ""
 "[Utopia Planitia] We received the artifacts. We can improve ship "
@@ -4135,96 +4157,96 @@ msgstr ""
 "[Utopia Planitia] Wir haben die Artefakte erhalten. Wir können die "
 "Manövrierfähigkeit des Schiffs verbessern, wenn Sie das nächste Mal andocken."
 
-#: scripts/scenario_54_PatrolDuty.lua:8338
+#: scripts/scenario_54_PatrolDuty.lua:8344
 msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 "Das medizinische Team hat ein Mitglied Ihrer Reparaturcrew wiederbelebt."
 
-#: scripts/scenario_54_PatrolDuty.lua:8342
+#: scripts/scenario_54_PatrolDuty.lua:8348
 msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 "Das medizinische Team hat ein Mitglied Ihrer Reparaturcrew wiederbelebt."
 
-#: scripts/scenario_54_PatrolDuty.lua:8379
+#: scripts/scenario_54_PatrolDuty.lua:8385
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr "Ein Mitglied des Reparaturteams ist verstorben"
 
-#: scripts/scenario_54_PatrolDuty.lua:8383
+#: scripts/scenario_54_PatrolDuty.lua:8389
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr "Ein Mitglied des Reparaturteams ist verstorben"
 
-#: scripts/scenario_54_PatrolDuty.lua:8390
-#: scripts/scenario_54_PatrolDuty.lua:8399
+#: scripts/scenario_54_PatrolDuty.lua:8396
+#: scripts/scenario_54_PatrolDuty.lua:8405
 msgctxt "-tabRelay&Operations"
 msgid "Game Timer"
 msgstr "Spieltimer"
 
-#: scripts/scenario_54_PatrolDuty.lua:8401
+#: scripts/scenario_54_PatrolDuty.lua:8407
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i"
 msgstr "%s %i"
 
-#: scripts/scenario_54_PatrolDuty.lua:8403
+#: scripts/scenario_54_PatrolDuty.lua:8409
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i:%.2i"
 msgstr "%s %i:%.2i"
 
-#: scripts/scenario_54_PatrolDuty.lua:8425
+#: scripts/scenario_54_PatrolDuty.lua:8431
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%i%% Complete"
 msgstr "%i%% Abgeschlossen"
 
-#: scripts/scenario_54_PatrolDuty.lua:8429
+#: scripts/scenario_54_PatrolDuty.lua:8435
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s -Utopia Planitia"
 msgstr "%s -Utopia Planitia"
 
-#: scripts/scenario_54_PatrolDuty.lua:8431
+#: scripts/scenario_54_PatrolDuty.lua:8437
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s +Utopia Planitia"
 msgstr "%s +Utopia Planitia"
 
-#: scripts/scenario_54_PatrolDuty.lua:8435
+#: scripts/scenario_54_PatrolDuty.lua:8441
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s -Asimov"
 msgstr "%s -Asimov"
 
-#: scripts/scenario_54_PatrolDuty.lua:8437
+#: scripts/scenario_54_PatrolDuty.lua:8443
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s +Asimov"
 msgstr "%s +Asimov"
 
-#: scripts/scenario_54_PatrolDuty.lua:8441
+#: scripts/scenario_54_PatrolDuty.lua:8447
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s -Armstrong"
 msgstr "%s -Armstrong"
 
-#: scripts/scenario_54_PatrolDuty.lua:8443
+#: scripts/scenario_54_PatrolDuty.lua:8449
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s +Armstrong"
 msgstr "%s +Armstrong"
 
-#: scripts/scenario_54_PatrolDuty.lua:8460
+#: scripts/scenario_54_PatrolDuty.lua:8466
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "Asimov S:%i%% H:%i%%"
 msgstr "Asimov S:%i%% H:%i%%"
 
-#: scripts/scenario_54_PatrolDuty.lua:8498
-#: scripts/scenario_54_PatrolDuty.lua:8536
+#: scripts/scenario_54_PatrolDuty.lua:8504
+#: scripts/scenario_54_PatrolDuty.lua:8542
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "U.P. WS:%i%% H:%i%%"
