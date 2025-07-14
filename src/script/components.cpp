@@ -316,6 +316,11 @@ void initComponentScriptBindings()
     BIND_MEMBER(DelayedExplodeOnTouch, damage_type);
     BIND_MEMBER(DelayedExplodeOnTouch, explosion_sfx);
 
+    sp::script::ComponentHandler<ExplosionEffect>::name("explosion_effect");
+    BIND_MEMBER(ExplosionEffect, size);
+    BIND_MEMBER(ExplosionEffect, radar);
+    BIND_MEMBER(ExplosionEffect, electrical);
+
     sp::script::ComponentHandler<CallSign>::name("callsign");
     BIND_MEMBER(CallSign, callsign);
     sp::script::ComponentHandler<TypeName>::name("typename");
