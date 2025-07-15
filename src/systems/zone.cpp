@@ -20,7 +20,8 @@ void ZoneSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, gl
 
     if (zone.label.length() > 0)
     {
+        auto label_pos = screen_position + zone.label_offset * scale;
         float font_size = zone.radius * scale / zone.label.length();
-        renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), zone.label, sp::Alignment::Center, font_size, main_font, glm::u8vec4(zone.color.r, zone.color.g, zone.color.b, 128));
+        renderer.drawText(sp::Rect(label_pos.x, label_pos.y, 0, 0), zone.label, sp::Alignment::Center, font_size, main_font, glm::u8vec4(zone.color.r, zone.color.g, zone.color.b, 128));
     }
 }
