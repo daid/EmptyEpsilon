@@ -81,7 +81,7 @@ end
 --- This overrides the vessel class name provided by the ShipTemplate.
 --- Example: stbo:setTypeName("Prototype")
 function Entity:setTypeName(type_name)
-    self.components.typename = {type_name=type_name}
+    self.components.typename = {type_name=type_name, localized=type_name}
     return self
 end
 --- Returns this STBO's vessel classification name.
