@@ -244,7 +244,7 @@ function __getSystemByName(entity, system_name)
     if system_name == "warp" then return entity.components.warp_drive end
     if system_name == "jumpdrive" then return entity.components.jump_drive end
     if system_name == "frontshield" then return entity.components.shields end
-    if system_name == "rearshield" and #entity.components.shields > 1 then return entity.components.shields end
+    if system_name == "rearshield" and entity.components.shields and #entity.components.shields > 1 then return entity.components.shields end
     return nil
 end
 
