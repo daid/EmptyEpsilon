@@ -93,13 +93,13 @@ function misson_idle(delta)
 end
 
 function unusual_readings(delta)
-    geo_1:sendCommsMessage(player1, _([[We are getting strange readings from sector C7. It looks like the source is an abandoned satellite. Please investigate, but be careful.]]))
     spyprobe = CpuShip():setFaction("Ghosts"):setTemplate("ANT 615"):setCallSign("NC3"):setHullMax(100):setHull(100):setPosition(48885, -45317):orderIdle()
     spyprobe:setDescriptions(_("An abandoned satellite"),_("An old military satellite. Capturing frequency is blocked. Behaviour unknown. Recommendation: Jump not closer than 10U, then advance using the impulse drive."))
     spyprobe:onDestruction(function(art, player)  ;
 		mission_state=order_dock
 		globalMessage(_("Additional debris created!"))
 	end)
+    geo_1:sendCommsMessage(player1, string.format(_("We are getting strange readings from sector %s. It looks like the source is an abandoned satellite. Please investigate, but be careful."),spyprobe:getSectorName()))
 
     mission_state=spyprobe_spawned
 end
