@@ -192,7 +192,11 @@ end
 function Entity:setShieldsMax(...)
     if self.components.shields then
         for i, max in ipairs({...}) do
-            self.components.shields[i].max = max
+            if self.components.shields[i] then
+                self.components.shields[i].max = max
+            else
+                self.components.shields[i] = {max=max, level=max}
+            end
         end
         while select('#', ...) < #self.components.shields do
             self.components.shields[#self.components.shields] = nil
