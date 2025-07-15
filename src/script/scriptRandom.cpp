@@ -56,7 +56,7 @@ int lua_random(lua_State* L) {
     auto a = luaL_checknumber(L, -2);
     auto b = luaL_checknumber(L, -1);
     if (a > b)
-        return luaL_error(L, "bad call random(%f, %f)", a, b);
+        return luaL_error(L, "bad call random(%f, %f): lower bound is greater than upper bound", a, b);
     lua_pushnumber(L, random(a, b));
     return 1;
 }
@@ -65,7 +65,7 @@ int lua_irandom(lua_State* L) {
     auto a = luaL_checkinteger(L, -2);
     auto b = luaL_checkinteger(L, -1);
     if (a > b)
-        return luaL_error(L, "bad call irandom(%d, %d)", a, b);
+        return luaL_error(L, "bad call irandom(%d, %d): lower bound is greater than upper bound", a, b);
     lua_pushinteger(L, irandom(a, b));
     return 1;
 }
