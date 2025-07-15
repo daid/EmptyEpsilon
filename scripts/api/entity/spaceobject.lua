@@ -255,6 +255,7 @@ function Entity:setReputationPoints(amount)
     if self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
         self.components.faction.entity.components.faction_info.reputation_points = amount
     end
+    return self
 end
 --- Deducts a given number of faction reputation points from this SpaceObject.
 --- Returns true if there are enough points to deduct the specified amount, then does so.
@@ -279,6 +280,7 @@ function Entity:addReputationPoints(amount)
             self.components.faction.entity.components.faction_info.reputation_points = points + amount
         end
     end
+    return self
 end
 --- Returns the name of the map sector, such as "A4", where this SpaceObject is located.
 --- Example: obj:getSectorName()
