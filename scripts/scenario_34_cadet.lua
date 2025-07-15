@@ -1769,6 +1769,7 @@ function unStringStore()
 	local sc = {}
 	while(store:get(i) ~= "") do
 		local ship = store:get(i)
+		if not ship then break end
 		local name_key = string.format("%s-%s-name",store_name,ship)
 		local name = store:get(name_key)
 		local level_key = string.format("%s-%s-level",store_name,ship)
