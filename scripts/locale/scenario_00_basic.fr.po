@@ -327,23 +327,14 @@ msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: FAILED (time has run out)"
 msgstr "Mission : ECHEC (temps écoulé)"
 
-#: scripts/scenario_00_basic.lua:539
-#, lua-format
+#: scripts/scenario_00_basic.lua:544 scripts/scenario_00_basic.lua:549
+#: scripts/scenario_00_basic.lua:554
+#, fuzzy, lua-format
 msgctxt "time-incCall"
-msgid "%s, you have %d minute remaining."
-msgstr "%s, il ne vous reste qu'%d minute."
-
-#: scripts/scenario_00_basic.lua:544
-#, lua-format
-msgctxt "time-incCall"
-msgid "%s, you have %d minutes remaining."
-msgstr "%s, il ne vous reste que %d minutes."
-
-#: scripts/scenario_00_basic.lua:549
-#, lua-format
-msgctxt "time-incCall"
-msgid "%s, you have %d minutes remaining of mission time."
-msgstr "%s, il ne vous reste que %d minutes pour réussir votre mission."
+msgid "%s, you have one minute remaining."
+msgid_plural "%s, you have %d minutes remaining."
+msgstr[0] "%s, il ne vous reste qu'%d minute."
+msgstr[1] "%s, il ne vous reste que %d minutes."
 
 #: scripts/scenario_00_basic.lua:559
 msgctxt "msgMainscreen&Spectbanner"
