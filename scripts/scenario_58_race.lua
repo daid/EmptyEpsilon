@@ -947,7 +947,7 @@ function setStations()
 	table.insert(stationList,stationOutpost33)
 	stationOutpost33.comms_data.goods.luxury = {cost = 75, quantity = 5}
 	--Lando
-	stationLando = placeStation(random(-60000,-30000),random(612500,70000),"Lando","Independent","Small Station")
+	stationLando = placeStation(random(-60000,-30000),random(61250,70000),"Lando","Independent","Small Station")
 	table.insert(stationList,stationLando)
 	--Komov
 	stationKomov = placeStation(random(-55000,-30000),random(70000,80000),"Komov","Independent","Small Station")
@@ -1035,7 +1035,7 @@ function setStations()
 	art3 = Artifact():setModel("artifact6"):allowPickup(false):setScanningParameters(3,2):setRadarSignatureInfo(random(7,13),random(4,20), random(2,12))
 	art1:setPosition(random(-50000,50000),random(-80000,-70000))
 	art2:setPosition(random(-90000,-75000),random(-40000,-20000))
-	art3:setPosition(random(50000,75000),random(625000,80000))
+	art3:setPosition(random(50000,75000),random(62500,80000))
 	artChoice = math.random(6)
 	if artChoice == 1 then
 		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
