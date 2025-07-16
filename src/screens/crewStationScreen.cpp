@@ -408,7 +408,11 @@ void CrewStationScreen::showTab(GuiElement* element)
             string keyboard_category = "";
             keyboard_category = populateShortcutsList(info.position);
             keyboard_help->setText(keyboard_general + keyboard_category);
-        } 
+
+            // Explicitly reset focus after switching tabs, such as when changed
+            // via hotkey.
+            focus(main_panel);
+        }
         else 
         {
             info.element->hide();

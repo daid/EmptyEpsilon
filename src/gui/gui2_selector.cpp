@@ -95,3 +95,9 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
         popup->show()->moveToFront();
     }
 }
+
+void GuiSelector::onFocusLost()
+{
+    // Explicitly hide the popup when the selector loses focus.
+    popup->hide();
+}
