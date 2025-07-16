@@ -26,11 +26,11 @@ function Entity:setTemplate(template_name)
             comp[key] = value
         end
     end
-    if not comp.ai_controller and not comp.player_control then
-        -- no AI or player control, this is a station
+    if template.__type == "station" then
+        -- stations have static physics
         comp.physics.type = "static"
     elseif comp.shields then
-        -- otherwise, set a shield frequency and turn player shields off by default
+        -- ships have shield frequencies, player shields are off by default
         comp.shields.frequency = irandom(0, 20)
         if comp.player_control then
             comp.shields.active = false
@@ -42,11 +42,6 @@ function Entity:setTemplate(template_name)
     end
 
     if comp.reactor then
-        if template.__energy_storage then
-            comp.reactor.max_energy = template.__energy_storage
-            comp.reactor.energy = template.__energy_storage
-        end
-
         local reactor_power_factor = 0
         if comp.beam_weapons then comp.beam_weapons.power_factor = 3.0; reactor_power_factor = reactor_power_factor - 3.0 end
         if comp.missile_tubes then comp.missile_tubes.power_factor = 1.0; reactor_power_factor = reactor_power_factor - 1.0 end

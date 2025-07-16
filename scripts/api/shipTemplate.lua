@@ -106,6 +106,12 @@ function ShipTemplate:setType(template_type)
     if template_type == "playership" then
         __player_ship_templates[#__player_ship_templates + 1] = self
         --Add some default player ship components.
+        self.reactor = {}
+        self.coolant = {}
+        self.self_destruct = {}
+        self.science_scanner = {}
+        self.scan_probe_launcher = {}
+        self.hacking_device = {}
         if self.docking_port then
             self.docking_port.auto_reload_missiles = false
         end
@@ -191,7 +197,7 @@ end
 --- Defaults to 1000.
 --- Example: template:setEnergyStorage(500)
 function ShipTemplate:setEnergyStorage(amount)
-    self.__energy_storage = amount
+    self.reactor = {max_energy=amount, energy=amount}
     return self
 end
 --- Sets the default number of repair crew for PlayerSpaceships created from this ShipTemplate.

@@ -21,12 +21,6 @@ function PlayerSpaceship()
         transform = {rotation=random(0, 360)},
         callsign = {callsign=generateRandomCallSign()},
         scan_state = scan_state,
-        reactor = {},
-        coolant = {},
-        self_destruct = {},
-        science_scanner = {},
-        scan_probe_launcher = {},
-        hacking_device = {},
         long_range_radar = {},
         comms_transmitter = {},
     }
