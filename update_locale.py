@@ -69,10 +69,10 @@ for script in glob.glob("scripts/**/*.lua", recursive=True):
                         f.write("msgstr \"\"\n")
     f.close()
 
-    cmd = ["xgettext", "--keyword=_:1c,2", "--keyword=_:1", "--keyword=_:2c,3,4", "--keyword=2,3", "--omit-header", "-j", "-d", output[:-3], "-C", "-"]
+    cmd = ["xgettext", "--keyword=_:1c,2", "--keyword=_:1", "--keyword=_:2c,3,4", "--keyword=_:2,3", "--omit-header", "-j", "-d", output[:-3], "-C", "-"]
     subprocess.run(cmd, check=True, input=b"")
     pre = open(output, "rt").read()
-    cmd = ["xgettext", "--keyword=_:1c,2", "--keyword=_:1", "--keyword=_:2c,3,4", "--keyword=2,3", "--add-comments=TRANSLATORS", "--omit-header", "-j", "-d" , output[:-3], script]
+    cmd = ["xgettext", "--keyword=_:1c,2", "--keyword=_:1", "--keyword=_:2c,3,4", "--keyword=_:2,3", "--add-comments=TRANSLATORS", "--omit-header", "-j", "-d" , output[:-3], script]
     subprocess.run(cmd, check=True)
     post = open(output, "rt").read()
     if pre == post and "name" not in info:
