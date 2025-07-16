@@ -287,15 +287,8 @@ function update(delta)
     -- Send player to Black Site 114 after another 5 minutes
     if (main_mission == 2) and (mission_timer > 5 * 60) and (bs114:sendCommsMessageNoLog(
         player,
-        _("incCall", [[You receive a Human Navy-authenticated, quantum-encrypted tachyon communication:
-
-KTLITAN ATTACK IS A DISTRACTION -STOP-
-
-STAKHANOV IS NOT THE TRUE TARGET -STOP-
-
-CEASE CURRENT OPERATIONS AND PROCEED IMMEDIATELY TO SECTOR E2 -STOP-
-
-URGENCY AND DISCRETION ARE KEY -STOP-]]))
+        string.format(_("incCall", "You receive a Human Navy-authenticated, quantum-encrypted tachyon communication:\n\nKTLITAN ATTACK IS A DISTRACTION -STOP-\n\nSTAKHANOV IS NOT THE TRUE TARGET -STOP-\n\nCEASE CURRENT OPERATIONS AND PROCEED IMMEDIATELY TO SECTOR %s -STOP-\n\nURGENCY AND DISCRETION ARE KEY -STOP-"),bs114:getSectorName())
+    	)
     )
     then
         main_mission = 3
@@ -526,15 +519,7 @@ Repair and reload while we notify Central Command of what happened there. We wil
         -- Use NSA to find the command platform.
         if (hacked == 0) and (bs114:sendCommsMessageNoLog(
             player,
-            _("incCall", [[The dispatcher gets back to you:
-
-"Our analysts found out that this attack was orchestrated by a rogue AI created by this facility, which escaped a few months ago.
-
-Even if we cannot pinpoint its physical location at the moment, the mass-energy balance of the Ktlitan Swarm FTL jump indicates that a large structure made the jump.
-
-This structure did not participate in any of the assaults, so we presume that it is a command platform hiding in a nebula.
-
-We want to deliver the first blow. Use the Nosy Sensing Array in the sector F5 to locate it, then destroy it."]])
+            string.format(_("incCall", "The dispatcher gets back to you:\n\n'Our analysts found out that this attack was orchestrated by a rogue AI created by this facility, which escaped a few months ago.\n\nEven if we cannot pinpoint its physical location at the moment, the mass-energy balance of the Ktlitan Swarm FTL jump indicates that a large structure made the jump.\n\nThis structure did not participate in any of the assaults, so we presume that it is a command platform hiding in a nebula.\n\nWe want to deliver the first blow. Use the Nosy Sensing Array in the sector %s to locate it, then destroy it.'"),nsa:getSectorName())
             )
         )
         then
@@ -623,9 +608,7 @@ We are both ready to continue our purpose, it seems."]])
             and (nsa:getDescription() == _("scienceDescription-station", "Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has been located."))
             and (bs114:sendCommsMessageNoLog(
                 player,
-                _("incCall", [[A black ops military officer hails the ship:
-
-"We have confirmed the command platform's location in the nebula around sector H6. All Navy ships, converge on the location. We advise you to deploy probes near the nebula for better visibility."]])
+                string.format(_("incCall", "A black ops military officer hails the ship:\n\n'We have confirmed the command platform's location in the nebula around sector %s. All Navy ships, converge on the location. We advise you to deploy probes near the nebula for better visibility.'"),swarm_command:getSectorName())
             )
         )
         then
@@ -700,7 +683,7 @@ Escort our recovery team to infiltrate and extract information from the Swarm Co
         if (hacked == 1) and (not bs114:isValid()) then
             stakhanov:sendCommsMessage(
                 player,
-                _("incCall", [[The fallen station is down. Epsilon, gather as soon as possible with the other ships in sector H6.]])
+                string.format(_("incCall", "The fallen station is down. Epsilon, gather as soon as possible with the other ships in sector %s."),swarm_command:getSectorName())
             )
             main_mission = 12
         end
