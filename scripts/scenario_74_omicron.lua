@@ -258,7 +258,7 @@ function setConstants()
 		["Karnack"] =			{strength = 17,		create = stockTemplate},
 		["Gunship"] =			{strength = 17,		create = stockTemplate},
 		["Phobos T4"] =			{strength = 18,		create = phobosT4},
-		["Cruiser"] =			{strength = 18,		create = stockTemplate},
+		["Karnack MK2"] =			{strength = 18,		create = stockTemplate},
 		["Nirvana R5"] =		{strength = 19,		create = stockTemplate},
 		["Farco 8"] =			{strength = 19,		create = farco8},
 		["Nirvana R5A"] =		{strength = 20,		create = stockTemplate},
@@ -317,7 +317,7 @@ function setConstants()
 		["Blade"] =							300,
 		["Buster"] =						100,
 		["Courier"] =						600,
-		["Cruiser"] =						200,
+		["Karnack MK2"] =						200,
 		["Cucaracha"] =						200,
 		["Dagger"] =						100,
 		["Dash"] =							200,
@@ -2782,7 +2782,7 @@ function expeditionMaintenance(delta)
 					end
 					local station = avail_station[math.random(1,#avail_station)]
 					local selected_faction = station:getFaction()
-					local expedition_templates = {"Phobos T3","Karnack","Cruiser","Gunship","Adv. Gunship","Phobos R2","Farco 3","Farco 5","Farco 8","Farco 11","Farco 13","Phobos T4"}
+					local expedition_templates = {"Phobos T3","Karnack","Karnack MK2","Gunship","Adv. Gunship","Phobos R2","Farco 3","Farco 5","Farco 8","Farco 11","Farco 13","Phobos T4"}
 					local template = expedition_templates[math.random(1,#expedition_templates)]
 					local pf_x, pf_y = station:getPosition()
 					local expedition_angle = angleFromVectorNorth(center_x, center_y, pf_x, pf_y)
@@ -2880,7 +2880,7 @@ function taskMaintenance(delta)
 					if #avail_station > 0 then
 						local station = avail_station[math.random(1,#avail_station)]
 						local selected_faction = station:getFaction()
-						local task_templates = {"Phobos T3","Karnack","Cruiser","Gunship","Adv. Gunship","Phobos R2","Farco 3","Farco 5","Farco 8","Farco 11","Farco 13","Phobos T4"}
+						local task_templates = {"Phobos T3","Karnack","Karnack MK2","Gunship","Adv. Gunship","Phobos R2","Farco 3","Farco 5","Farco 8","Farco 11","Farco 13","Phobos T4"}
 						local template = task_templates[math.random(1,#task_templates)]
 						local pf_x, pf_y = station:getPosition()
 						local target_station_list = {}

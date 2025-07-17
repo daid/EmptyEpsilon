@@ -372,7 +372,7 @@ function setConstants()
 		["Phobos M3"] =			{strength = 16,		create = stockTemplate},
 		["Karnack"] =			{strength = 17,		create = stockTemplate},
 		["Gunship"] =			{strength = 17,		create = stockTemplate},
-		["Cruiser"] =			{strength = 18,		create = stockTemplate},
+		["Karnack MK2"] =			{strength = 18,		create = stockTemplate},
 		["Phobos T4"] =			{strength = 18,		create = phobosT4},
 		["Farco 8"] =			{strength = 19,		create = farco8},
 		["Nirvana R5"] =		{strength = 19,		create = stockTemplate},

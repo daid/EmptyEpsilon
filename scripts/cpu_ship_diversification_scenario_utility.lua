@@ -184,7 +184,7 @@ end
 function cruiserdrone(enemyFaction)
 	--Relative strength reference number: 23
 	--courtesy of Black Wall scenario
-	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Cruiser")
+	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Karnack MK2")
 	ship:onTakingDamage(function(self,instigator)
 		string.format("")	--serious proton needs a global context
 		if instigator ~= nil then
@@ -199,7 +199,7 @@ function cruiserdrone(enemyFaction)
 	ship:setRotationMaxSpeed(15)					--	faster spin (vs 6)
 	local ships_key = _("scienceDB","Ships")
 	local frigate_key = _("scienceDB","Frigate")
-	local cruiser_key = _("scienceDB","Cruiser")
+	local cruiser_key = _("scienceDB","Karnack MK2")
 	local cruiserdrone_db = queryScienceDatabase(ships_key,frigate_key,cruiserdrone_key)
 	if cruiserdrone_db == nil then
 		local ships_db = queryScienceDatabase(ships_key)

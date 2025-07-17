@@ -257,7 +257,7 @@ function setConstants()
 		["Karnack"] =			{strength = 17,	short_range_radar = 5000,	create = stockTemplate},
 		["Gunship"] =			{strength = 17,	short_range_radar = 5000,	create = stockTemplate},
 		["Phobos T4"] =			{strength = 18,	short_range_radar = 5000,	create = phobosT4},
-		["Cruiser"] =			{strength = 18,	short_range_radar = 6000,	create = stockTemplate},
+		["Karnack MK2"] =			{strength = 18,	short_range_radar = 6000,	create = stockTemplate},
 		["Nirvana R5"] =		{strength = 19,	short_range_radar = 5000,	create = stockTemplate},
 		["Farco 8"] =			{strength = 19,	short_range_radar = 8000,	create = farco8},
 		["Nirvana R5A"] =		{strength = 20,	short_range_radar = 5000,	create = stockTemplate},

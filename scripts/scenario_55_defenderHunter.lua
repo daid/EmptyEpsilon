@@ -281,7 +281,7 @@ function setConstants()
 		["Piranha F8"] =		{strength = 15,	create = stockTemplate},
 		["Piranha F12"] =		{strength = 15,	create = stockTemplate},
 		["Phobos M3"] =			{strength = 16,	create = stockTemplate},
-		["Cruiser"] =			{strength = 18,	create = stockTemplate},
+		["Karnack MK2"] =			{strength = 18,	create = stockTemplate},
 		["Nirvana R5A"] =		{strength = 20,	create = stockTemplate},
 		["Ktlitan Worker"] =	{strength = 21,	create = stockTemplate},
 		["Storm"] =				{strength = 22,	create = stockTemplate},
