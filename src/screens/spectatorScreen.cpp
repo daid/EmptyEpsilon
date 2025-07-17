@@ -148,7 +148,10 @@ void SpectatorScreen::update(float delta)
         toggleUI();
 
     if (keys.topdown.lock_camera.getDown())
+    {
         main_radar->setAutoCentering(!main_radar->getAutoCentering());
+        info_position_lock->setValue(main_radar->getAutoCentering());
+    }
 
     if (keys.topdown.previous_player_ship.getDown())
     {
