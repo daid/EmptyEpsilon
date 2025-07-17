@@ -122,7 +122,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         auto ship = targets.get();
         if (auto tn = ship.getComponent<TypeName>())
         {
-            if (database_view->findAndDisplayEntry(tn->type_name))
+            if (database_view->findAndDisplayEntry(tn->type_name) || database_view->findAndDisplayEntry(tn->localized))
             {
                 view_mode_selection->setSelectionIndex(1);
                 radar_view->hide();
