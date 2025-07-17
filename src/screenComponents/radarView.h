@@ -46,8 +46,8 @@ private:
     glm::vec2 view_position{0, 0};
     float view_rotation;
     sp::ecs::Entity auto_center_target;
-    bool auto_center_on_my_ship;
-    bool auto_rotate_on_my_ship;
+    bool auto_center_on_ship;
+    bool auto_rotate_on_ship;
     bool auto_distance = false;
     float distance;
     bool long_range;
@@ -94,12 +94,12 @@ public:
     GuiRadarView* setBackgroundAlpha(uint8_t background_alpha) { this->background_alpha = background_alpha; return this; }
     GuiRadarView* setStyle(ERadarStyle style) { this->style = style; return this; }
     GuiRadarView* setFogOfWarStyle(EFogOfWarStyle style) { this->fog_style = style; return this; }
-    bool getAutoCentering() { return auto_center_on_my_ship; }
-    GuiRadarView* setAutoCentering(bool value) { this->auto_center_on_my_ship = value; return this; }
+    bool getAutoCentering() { return auto_center_on_ship; }
+    GuiRadarView* setAutoCentering(bool value) { this->auto_center_on_ship = value; return this; }
     sp::ecs::Entity getAutoCenterTarget() { return auto_center_target; }
     GuiRadarView* setAutoCenterTarget(sp::ecs::Entity target) { this->auto_center_target = target; return this; }
-    bool getAutoRotating() { return auto_rotate_on_my_ship; }
-    GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_my_ship = value; return this; }
+    bool getAutoRotating() { return auto_rotate_on_ship; }
+    GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_ship = value; return this; }
     GuiRadarView* setCallbacks(bpfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
     GuiRadarView* setViewPosition(glm::vec2 view_position) { this->view_position = view_position; return this; }
     glm::vec2 getViewPosition() { return view_position; }

@@ -50,8 +50,9 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     missile_tube_controls(nullptr),
     view_position(0.0f,0.0f),
     view_rotation(0),
-    auto_center_on_my_ship(true),
-    auto_rotate_on_my_ship(false),
+    auto_center_target(my_spaceship),
+    auto_center_on_ship(true),
+    auto_rotate_on_ship(false),
     auto_distance(true),
     distance(5000.0f),
     long_range(false),
@@ -79,8 +80,9 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     missile_tube_controls(nullptr),
     view_position(0.0f, 0.0f),
     view_rotation(0),
-    auto_center_on_my_ship(true),
-    auto_rotate_on_my_ship(false),
+    auto_center_target(my_spaceship),
+    auto_center_on_ship(true),
+    auto_rotate_on_ship(false),
     distance(distance),
     long_range(false),
     show_ghost_dots(false),
@@ -102,25 +104,26 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
 
 void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 {
-    //Hacky, when not relay and we have a ship, center on it.
-    auto transform = my_spaceship.getComponent<sp::Transform>();
+    // Auto-center on the target, defaulting to my_spaceship on creation.
+    auto transform = auto_center_target.getComponent<sp::Transform>();
 
-    if (auto_center_target)
-        transform = auto_center_target.getComponent<sp::Transform>();
-    else
-        auto_center_target = my_spaceship;
-
-    // If target has no transform, it might be docked inside another ship
+    // If target has no transform, it might be docked inside another ship.
+    // Otherwise, if the target doesn't physically exist, fall back to
+    // my_spaceship if possible.
     if (!transform)
     {
         if (auto dp = auto_center_target.getComponent<DockingPort>())
             transform = dp->target.getComponent<sp::Transform>();
+        else if (!transform && my_spaceship)
+            auto_center_target = my_spaceship;
+        else
+            auto_center_target = sp::ecs::Entity();
     }
 
-    if (transform && auto_center_on_my_ship)
+    if (transform && auto_center_on_ship)
     {
         view_position = transform->getPosition();
-        if (auto_rotate_on_my_ship)
+        if (auto_rotate_on_ship)
             view_rotation = transform->getRotation() + 90;
     }
 
