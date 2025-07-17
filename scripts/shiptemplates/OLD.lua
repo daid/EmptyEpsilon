@@ -249,13 +249,14 @@ template:setSpeed(60, 6, 10)
 -- Karnack Cruiser mark II
 -- Fabricated by: Repulse shipyards
 -- The successor to the widely successful mark I Karnack cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savory purposes.
-
-variation = template:copy("Karnack MK2"):setLocaleName(_("ship", "Karnack MK2"))
+variation = template:copy("Cruiser"):setLocaleName(_("ship", "Cruiser"))
 variation:setDescription(_("Fabricated by: Repulse shipyards. The successor to the widely successful mark I Karnack cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savory purposes."))
 --                  Arc, Dir, Range, CycleTime, Dmg
 variation:setBeam(0, 90, -15, 1000.0, 6.0, 6)
 variation:setBeam(1, 90,  15, 1000.0, 6.0, 6)
 variation:setHull(70)
+variation:copy("Karnack MK2"):setLocaleName(_("ship", "Karnack MK2"))
+variation:hidden() -- Hide the old "Cruiser" name after making the copy.
 
 -- Polaris missile cruiser mark I
 -- Fabricated by: Repulse shipyards
