@@ -276,7 +276,7 @@ function namedWaves()
         [2] = _("buttonGM", "Gunship"),
         [4] = _("buttonGM", "Dreadnought"),
         [5] = _("buttonGM", "Missile Cruiser"),
-        [6] = _("buttonGM", "Karnack MK2"),
+        [6] = _("buttonGM", "Cruiser"),
         [9] = _("buttonGM", "Adv. striker"),
     }
     clearGMFunctions()
