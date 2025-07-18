@@ -66,7 +66,7 @@ void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Ent
 
 void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, CallSign& callsign)
 {
-    if (entity == my_spaceship) return;
-    
+    if (entity == my_spaceship || !(RadarRenderSystem::current_flags & RadarRenderSystem::FlagCallsigns)) return;
+
     renderer.drawText(sp::Rect(screen_position.x, screen_position.y - 15, 0, 0), callsign.callsign, sp::Alignment::Center, 15, bold_font);
 }
