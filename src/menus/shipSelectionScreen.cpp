@@ -437,6 +437,16 @@ void ShipSelectionScreen::update(float delta)
         player_ship_list->setEntryName(index, ship_name + " (" + string(ship_position_count) + ")");
     }
 
+    // Clear player ships that no longer exist.
+    for (int i = 0; i < player_ship_list->entryCount(); i++)
+    {
+        bool keeper = false;
+
+        for (auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+            if (entity.toString() == player_ship_list->getEntryValue(i)) keeper = true;
+
+        if (!keeper) player_ship_list->removeEntry(i);
+    }
 
     // If there aren't any player ships, show a label stating so.
     if (player_ship_list->entryCount() > 0)
