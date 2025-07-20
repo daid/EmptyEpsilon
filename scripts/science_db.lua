@@ -255,8 +255,9 @@ function __fillDefaultDatabaseData()
 	for name, info in pairs(__faction_info) do
 		local entry = faction_database:addEntry(info.components.faction_info.locale_name);
 		for name2, info2 in pairs(__faction_info) do
-			local stance = _("stance", "Neutral");
+			local stance = "-"
 			if info ~= info2 then
+				stance = _("stance", "Neutral")
 				for idx, relation in ipairs(info.components.faction_info) do
 					if relation.other_faction == info2 then
 						if relation.relation == "neutral" then stance = _("stance", "Neutral") end
@@ -264,8 +265,6 @@ function __fillDefaultDatabaseData()
 						if relation.relation == "friendly" then stance = _("stance", "Friendly") end
 					end
 				end
-			else
-				stance = "-";
 			end
 			entry:addKeyValue(info2.components.faction_info.locale_name, stance);
 		end
