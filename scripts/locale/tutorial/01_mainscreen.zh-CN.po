@@ -1,0 +1,7 @@
+# Scenario name
+msgid "Basics and Captain (Main Screen / Radar)"
+msgstr "基础与舰长（主屏幕/雷达）"
+
+# Scenario description
+msgid """[Station Tutorial]\n-------------------\n-This goes over the basics of map awareness and radar systems. Recommended introduction.\n\n[Station Info]\n-------------------\nThis tutorial covers not only the captain's tasks, but also some basics for other stations (except for Engineering).\nWithout direct control of the ship, the Captain keeps the crew focused on their goal and makes tactical decisions in combat.\nThe ship's main screen should be set up on a large monitor or projector so that all players can track their ship's status.\n\nThe Captain's tasks include:\n-Planning the next actions\n-Co-ordinating combat tactics\n-Preventing mutiny\n-Setting priorities"""
+msgstr """[工作站教程]\n-------------------\n-本教程涵盖地图意识和雷达系统的基础知识。推荐作为入门教程。\n\n[工作站信息]\n-------------------\n本教程不仅涵盖舰长的任务，还包括其他工作站（工程站除外）的一些基础知识。\n由于没有对飞船的直接控制权，舰长需要让船员专注于目标，并在战斗中做出战术决策。\n飞船的主屏幕应设置在大型显示器或投影仪上，以便所有玩家都能跟踪飞船的状态。\n\n舰长的任务包括：\n-规划下一步行动\n-协调战斗战术\n-防止兵变\n-设定优先级"""

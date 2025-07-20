@@ -1,0 +1,44 @@
+#: scripts/shiptemplates/OLD.lua:6
+msgctxt "playerShip"
+msgid "Player Cruiser"
+msgstr "玩家巡洋舰"
+
+#: scripts/shiptemplates/OLD.lua:63
+msgctxt "playerShip"
+msgid "Player Missile Cr."
+msgstr "玩家导弹巡洋舰"
+
+#: scripts/shiptemplates/OLD.lua:118
+msgctxt "playerShip"
+msgid "Player Fighter"
+msgstr "玩家战斗机"
+
+#: scripts/shiptemplates/OLD.lua:159
+msgctxt "ship"
+msgid "Tug"
+msgstr "拖船"
+
+#: scripts/shiptemplates/OLD.lua:168
+msgid """The tugboat is a reliable, but small and un-armed transport ship. Due to \nit's low cost, it is a favourite ship to teach the ropes to fledgeling \ncaptains, without risking friendly fire."""
+msgstr """拖船是一种可靠但小型且无武装的运输飞船。由于其成本低廉，它成为了训练新手舰长的首选飞船，可以在不冒误伤风险的情况下教授基本操作技巧。"""
+
+#: scripts/shiptemplates/OLD.lua:176
+msgctxt "playerShip"
+msgid "Nautilus"
+msgstr "鹦鹉螺号"
+
+#: scripts/shiptemplates/OLD.lua:176 scripts/shiptemplates/OLD.lua:239
+#: scripts/shiptemplates/OLD.lua:264 scripts/shiptemplates/OLD.lua:275
+#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/OLD.lua:475
+msgctxt "class"
+msgid "Frigate"
+msgstr "护卫舰"
+
+#: scripts/shiptemplates/OLD.lua:176
+msgctxt "subclass"
+msgid "Mine Layer"
+msgstr "布雷舰"
+
+#: scripts/shiptemplates/OLD.lua:177
+msgid "Small mine laying vessel with minimal armament, shields and hull"
+msgstr "一种小型布雷舰，武器、护盾和船体都非常简陋。"
