@@ -9,7 +9,7 @@
 #include "screenComponents/radarView.h"
 #include "screenComponents/graph.h"
 #include "screenComponents/graphLabel.h"
-#include "screenComponents/SensorScreenOverlay.h"
+#include "screenComponents/sensorScreenOverlay.h"
 
 #include "gui/gui2_button.h"
 #include "gui/gui2_togglebutton.h"
