@@ -13,9 +13,9 @@ struct RawScannerDataPoint
     float gravity;
 };
 
-std::vector<RawScannerDataPoint> CalculateRawScannerData(glm::vec2 position, float start_angle, float arc_size, uint point_count, float range, float noise_floor);
+std::vector<RawScannerDataPoint> CalculateRawScannerData(glm::vec2 position, float start_angle, float arc_size, int point_count, float range, float noise_floor);
 
-std::vector<RawScannerDataPoint> Calculate360RawScannerData(glm::vec2 position, uint point_count, float range, float noise_floor);
+std::vector<RawScannerDataPoint> Calculate360RawScannerData(glm::vec2 position, int point_count, float range, float noise_floor);
 
 float GetEntityRadarTraceSize(sp::ecs::Entity entity);
 

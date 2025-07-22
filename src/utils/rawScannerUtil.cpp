@@ -42,7 +42,7 @@ float noiseFunction(float angle, float offset, float second_offset, float noise_
     return 0.7 * noise_floor * (noise.GetNoise(200.0f * cosf(M_PI * angle/180.0f), 100.0f * sinf(M_PI * angle/180.0f), offset + second_offset) - 0.5f) + random(-noise_floor, noise_floor);
 }
 
-std::vector<RawScannerDataPoint> CalculateRawScannerData(glm::vec2 position, float start_angle, float arc_size, uint point_count, float range, float noise_floor)
+std::vector<RawScannerDataPoint> CalculateRawScannerData(glm::vec2 position, float start_angle, float arc_size, int point_count, float range, float noise_floor)
 {
     // Sanitize the input parameters.
     if (start_angle<0)
@@ -264,7 +264,7 @@ std::vector<RawScannerDataPoint> CalculateRawScannerData(glm::vec2 position, flo
 }
 
 
-std::vector<RawScannerDataPoint> Calculate360RawScannerData(glm::vec2 position, uint point_count, float range, float noise_floor)
+std::vector<RawScannerDataPoint> Calculate360RawScannerData(glm::vec2 position, int point_count, float range, float noise_floor)
 {
     return CalculateRawScannerData(position, 0, 360 - 360 / float(point_count), point_count, range, noise_floor);
 }
