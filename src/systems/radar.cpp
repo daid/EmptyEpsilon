@@ -3,7 +3,7 @@
 #include "main.h"
 #include "components/faction.h"
 #include "components/scanning.h"
-#include "components/radarBlock.h"
+#include "components/radarblock.h"
 #include "radar.h"
 #include "utils/rawScannerUtil.h"
 

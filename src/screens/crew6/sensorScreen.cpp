@@ -242,7 +242,7 @@ void SensorScreen::onDraw(sp::RenderTarget &renderer)
     std::vector<float> biological_points = std::vector<float>(point_count);
     std::vector<float> gravity_points = std::vector<float>(point_count);
 
-    for (size_t i = 0; i < point_count; i++)
+    for (int i = 0; i < point_count; i++)
     {
         electrical_points[i] = scanner_data[i].electrical;
         biological_points[i] = scanner_data[i].biological;
