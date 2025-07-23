@@ -71,6 +71,7 @@ function Entity:setSize(radius)
     if comp.mesh_render then comp.mesh_render.scale=radius end
     if comp.avoid_object then comp.avoid_object.range=radius*2 end
     if comp.explosion_effect then comp.explosion_effect.size=radius end
+    if comp.explode_on_touch then comp.explode_on_touch.blast_range=radius end
     return self
 end
 --- Returns this Asteroid's radius.
