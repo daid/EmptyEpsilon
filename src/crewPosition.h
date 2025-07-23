@@ -13,6 +13,7 @@ enum class CrewPosition
     engineering,
     scienceOfficer,
     relayOfficer,
+    sensorOfficer,
     //4/3 player crew
     tacticalOfficer,    //helms+weapons-shields
     engineeringAdvanced,//engineering+shields

@@ -53,6 +53,9 @@ public:
     static constexpr int FlagLongRange = 0x01;
     static constexpr int FlagShortRange = 0x02;
     static constexpr int FlagGM = 0x04;
+    static constexpr int BiologicalTraces = 0x08;
+    static constexpr int ElectricalTraces = 0x10;
+    static constexpr int GravitationalTraces = 0x20;
     static int current_flags;
 private:
     static float current_scale;
@@ -76,10 +79,12 @@ template<typename T, int PRIO, int FLAGS> RenderRadarInterface<T, PRIO, FLAGS>::
 class BasicRadarRendering :
     public sp::ecs::System,
     public RenderRadarInterface<RadarTrace, 50, RadarRenderSystem::FlagNone>,
+    public RenderRadarInterface<RawRadarSignatureInfo, 21, RadarRenderSystem::FlagNone>,
     public RenderRadarInterface<CallSign, 100, RadarRenderSystem::FlagNone> {
 public:
     void update(float delta) override {}
 
     void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, RadarTrace& component) override;
+    void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, RawRadarSignatureInfo& component) override;
     void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, CallSign& component) override;
 };

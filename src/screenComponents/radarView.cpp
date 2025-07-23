@@ -25,6 +25,8 @@
 #include "missileTubeControls.h"
 #include "targetsContainer.h"
 
+#include "systems/beamweapon.h"
+
 namespace
 {
     enum class RadarStencil : uint8_t
@@ -67,7 +69,11 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     fog_style(NoFogOfWar),
     mouse_down_func(nullptr),
     mouse_drag_func(nullptr),
-    mouse_up_func(nullptr)
+    mouse_up_func(nullptr),
+    show_signatures(false),
+    show_biological(false),
+    show_gravity(false),
+    show_electrical(false)
 {
 }
 
@@ -95,7 +101,11 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     fog_style(NoFogOfWar),
     mouse_down_func(nullptr),
     mouse_drag_func(nullptr),
-    mouse_up_func(nullptr)
+    mouse_up_func(nullptr),
+    show_signatures(false),
+    show_biological(false),
+    show_gravity(false),
+    show_electrical(false)
 {
 }
 
@@ -669,6 +679,13 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         flags |= RadarRenderSystem::FlagShortRange;
     if (show_game_master_data)
         flags |= RadarRenderSystem::FlagGM;
+    if (show_electrical)
+        flags |= RadarRenderSystem::ElectricalTraces;
+    if (show_gravity)
+        flags |= RadarRenderSystem::GravitationalTraces;
+    if (show_biological)
+        flags |= RadarRenderSystem::BiologicalTraces;
+
     glm::vec2 radar_screen_center = rect.center();
 
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));

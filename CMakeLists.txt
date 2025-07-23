@@ -263,6 +263,7 @@ set(MAIN_SOURCES
     src/screens/crew4/tacticalScreen.cpp
     src/screens/crew6/engineeringScreen.cpp
     src/screens/crew6/scienceScreen.cpp
+    src/screens/crew6/sensorScreen.cpp
     src/screens/crew6/relayScreen.cpp
     src/screens/crew6/weaponsScreen.cpp
     src/screens/crew6/helmsScreen.cpp
@@ -301,11 +302,14 @@ set(MAIN_SOURCES
     src/screenComponents/beamFrequencySelector.cpp
     src/screenComponents/radarView.cpp
     src/screenComponents/rawScannerDataRadarOverlay.cpp
+    src/screenComponents/sensorScreenOverlay.cpp
     src/screenComponents/scanTargetButton.cpp
     src/screenComponents/snapSlider.cpp
     src/screenComponents/indicatorOverlays.cpp
     src/screenComponents/openCommsButton.cpp
     src/screenComponents/combatManeuver.cpp
+    src/screenComponents/graph.cpp
+    src/screenComponents/graphLabel.cpp
     src/screenComponents/rotatingModelView.cpp
     src/screenComponents/shipDestroyedPopup.cpp
     src/screenComponents/warpControls.cpp
@@ -518,6 +522,8 @@ set(MAIN_SOURCES
     src/script/gm.cpp
     src/script/scriptRandom.h
     src/script/scriptRandom.cpp
+    src/utils/rawScannerUtil.h
+    src/utils/rawScannerUtil.cpp
 
     src/ai/aiFactory.h
     src/ai/ai.h
@@ -568,6 +574,8 @@ set(MAIN_SOURCES
     src/screenComponents/beamFrequencySelector.h
     src/screenComponents/beamTargetSelector.h
     src/screenComponents/combatManeuver.h
+    src/screenComponents/graph.h
+    src/screenComponents/graphLabel.h
     src/screenComponents/commsOverlay.h
     src/screenComponents/customShipFunctions.h
     src/screenComponents/databaseView.h
@@ -593,6 +601,7 @@ set(MAIN_SOURCES
     src/screenComponents/powerDamageIndicator.h
     src/screenComponents/radarView.h
     src/screenComponents/rawScannerDataRadarOverlay.h
+    src/screenComponents/sensorScreenOverlay.h
     src/screenComponents/rotatingModelView.h
     src/screenComponents/scanningDialog.h
     src/screenComponents/scanTargetButton.h
@@ -620,6 +629,7 @@ set(MAIN_SOURCES
     src/screens/crew6/helmsScreen.h
     src/screens/crew6/relayScreen.h
     src/screens/crew6/scienceScreen.h
+    src/screens/crew6/sensorScreen.h
     src/screens/crew6/weaponsScreen.h
     src/screens/crewStationScreen.h
     src/screens/extra/commsScreen.h

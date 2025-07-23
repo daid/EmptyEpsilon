@@ -30,9 +30,10 @@ public:
     float gravity;
     float electrical;
     float biological;
+    float size;
 
     RawRadarSignatureInfo()
-    : gravity(0), electrical(0), biological(0) {}
+    : gravity(0), electrical(0), biological(0), size(0) {}
 
     RawRadarSignatureInfo(float gravity, float electrical, float biological)
     : gravity(gravity), electrical(electrical), biological(biological) {}
@@ -67,6 +68,9 @@ class LongRangeRadar
 public:
     float short_range = 5000.0f;
     float long_range = 30000.0f;
+
+    float raw_radar_range = 60000.0f;
+    float raw_radar_noise_floor = 0.3f;
 
     bool waypoints_dirty = true;
     std::vector<glm::vec2> waypoints;

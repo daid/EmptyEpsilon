@@ -330,6 +330,8 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<LongRangeRadar>::name("long_range_radar");
     BIND_MEMBER(LongRangeRadar, short_range);
     BIND_MEMBER(LongRangeRadar, long_range);
+    BIND_MEMBER(LongRangeRadar, raw_radar_range);
+    BIND_MEMBER(LongRangeRadar, raw_radar_noise_floor);
     BIND_MEMBER(LongRangeRadar, radar_view_linked_entity);
     BIND_ARRAY_DIRTY_FLAG(LongRangeRadar, waypoints, waypoints_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(LongRangeRadar, waypoints, x, waypoints_dirty);

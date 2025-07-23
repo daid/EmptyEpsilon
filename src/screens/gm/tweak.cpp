@@ -418,6 +418,8 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_PAGE(tr("tweak-tab", "Radar"), LongRangeRadar);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Short-range radar range:"), LongRangeRadar, short_range);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Long-range radar range:"), LongRangeRadar, long_range);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Raw radar range:"), LongRangeRadar, raw_radar_range);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Raw radar noise:"), LongRangeRadar, raw_radar_noise_floor);
 
     ADD_PAGE(tr("tweak-tab", "Scanner"), ScienceScanner);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Countdown delay:"), ScienceScanner, delay);
