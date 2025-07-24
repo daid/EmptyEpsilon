@@ -31,7 +31,8 @@ void GuiScrollText::onDraw(sp::RenderTarget& renderer)
 {
     auto text_rect = sp::Rect(rect.position.x, rect.position.y, rect.size.x - scrollbar->getSize().x, rect.size.y);
     auto prepared = sp::RenderTarget::getDefaultFont()->prepare(this->text, 32, text_size, selectColor(colorConfig.textbox.forground), text_rect.size, sp::Alignment::TopLeft, sp::Font::FlagClip | sp::Font::FlagLineWrap);
-    auto text_draw_size = prepared.getUsedAreaSize();
+    // Extend the scroll by a fraction of a line height to accomodate descenders (jypq etc.)
+    auto text_draw_size = prepared.getUsedAreaSize() + glm::vec2{0.0f, text_size * 0.25f};
 
     int scroll_max = text_draw_size.y;
     if (scrollbar->getMax() != scroll_max)
@@ -113,7 +114,8 @@ void GuiScrollFormattedText::onDraw(sp::RenderTarget& renderer)
     }
     prepared.append(text.substr(last_end), text_size * size_mod, current_color);
     prepared.finish();
-    auto text_draw_size = prepared.getUsedAreaSize();
+    // Extend the scroll by a fraction of a line height to accomodate descenders (jypq etc.)
+    auto text_draw_size = prepared.getUsedAreaSize() + glm::vec2{0.0f, (text_size * 0.25f) * size_mod};
 
     int scroll_max = text_draw_size.y;
     if (scrollbar->getMax() != scroll_max)
