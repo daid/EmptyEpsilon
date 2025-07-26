@@ -10,7 +10,7 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
 : GuiCanvas(render_layer)
 {
     main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, nullptr);
-    main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false)->enableCallsigns();
+    main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false);
     main_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) { this->onMouseDown(position); },

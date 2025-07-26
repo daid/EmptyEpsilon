@@ -50,7 +50,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     // Short-range tactical radar with a 5U range.
     radar = new GuiRadarView(this, "TACTICAL_RADAR", &targets);
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 750);
-    radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
+    radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
 
     // Control targeting and piloting with radar interactions.
     radar->setCallbacks(

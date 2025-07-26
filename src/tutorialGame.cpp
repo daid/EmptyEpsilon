@@ -64,10 +64,10 @@ void TutorialGame::createScreens()
 
     tactical_radar = new GuiRadarView(this, "TACTICAL", nullptr);
     tactical_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->hide();
+    tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->hide();
     long_range_radar = new GuiRadarView(this, "TACTICAL", nullptr);
     long_range_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
+    long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
 
     station_screen[0] = new HelmsScreen(this);
