@@ -49,7 +49,7 @@ MainMenu::MainMenu()
     }))->setPosition({50, -170}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     (new GuiButton(this, "OPEN_OPTIONS", tr("mainMenu", "Options"), [this]() {
-        new OptionsMenu();
+        new OptionsMenu(OptionsMenu::ReturnTo::OR_Main);
         destroy();
     }))->setPosition({50, -110}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
