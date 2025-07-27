@@ -56,7 +56,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Draw the science radar.
     science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", lrr ? lrr->long_range : 30000.0f, &targets);
     science_radar->setPosition(120, 0, sp::Alignment::CenterLeft)->setSize(900,GuiElement::GuiSizeMax);
-    science_radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
+    science_radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     science_radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
             if (auto scanner = my_spaceship.getComponent<ScienceScanner>())
@@ -72,7 +72,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Draw and hide the probe radar.
     probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
     probe_radar->setPosition(120, 0, sp::Alignment::CenterLeft)->setSize(900,GuiElement::GuiSizeMax)->hide();
-    probe_radar->setAutoCentering(false)->longRange()->enableWaypoints()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NoFogOfWar);
+    probe_radar->setAutoCentering(false)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NoFogOfWar);
     probe_radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
             if (auto scanner = my_spaceship.getComponent<ScienceScanner>())

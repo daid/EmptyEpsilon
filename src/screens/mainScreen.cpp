@@ -35,10 +35,10 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
 
     tactical_radar = new GuiRadarView(this, "TACTICAL", nullptr);
     tactical_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->hide();
+    tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->hide();
     long_range_radar = new GuiRadarView(this, "TACTICAL", nullptr);
     long_range_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->hide();
+    long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     onscreen_comms = new GuiCommsOverlay(this);
     onscreen_comms->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setVisible(false);
