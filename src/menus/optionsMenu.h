@@ -10,13 +10,6 @@ class GuiSlider;
 class GuiToggleButton;
 class GuiLabel;
 
-enum EOptionsReturnTo
-{
-    OR_Main,
-    OR_ShipSelection,
-    OR_None
-};
-
 class OptionsMenu : public GuiCanvas, public Updatable
 {
 private:
@@ -42,7 +35,14 @@ private:
     void setupGraphicsOptions();
     void setupAudioOptions();
 public:
-    OptionsMenu(EOptionsReturnTo return_to=OR_Main);
+    enum class ReturnTo
+    {
+        OR_Main,          // Return to Main Menu
+        OR_ShipSelection, // Return to Ship Selection
+        OR_None
+    };
+
+    OptionsMenu(ReturnTo return_to=ReturnTo::OR_Main);
 
     virtual void update(float delta) override;
 };

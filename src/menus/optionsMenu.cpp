@@ -19,7 +19,7 @@
 #include "gui/gui2_keyvaluedisplay.h"
 
 
-OptionsMenu::OptionsMenu(EOptionsReturnTo return_to)
+OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
 {
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
@@ -196,9 +196,9 @@ OptionsMenu::OptionsMenu(EOptionsReturnTo return_to)
         // Close this menu, stop the music, and return to the main menu.
         destroy();
         soundManager->stopMusic();
-        if (return_to == OR_Main)
+        if (return_to == ReturnTo::OR_Main)
             returnToMainMenu(getRenderLayer());
-        else if (return_to == OR_ShipSelection)
+        else if (return_to == ReturnTo::OR_ShipSelection)
             returnToShipSelection(getRenderLayer());
         else
         {
