@@ -659,7 +659,7 @@ void CrewPositionSelection::onUpdate()
         }
     }
 
-    if (crew_text.empty()) crew_text = tr("No crew members assiged");
+    if (crew_text.empty()) crew_text = tr("No crew members assigned");
 
     station_players->setText(crew_text);
     ready_button->setEnable(any_selected);
