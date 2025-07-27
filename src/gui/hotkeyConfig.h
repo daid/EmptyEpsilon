@@ -183,6 +183,7 @@ public:
     //GM
     sp::io::Keybinding gm_delete;
     sp::io::Keybinding gm_clipboardcopy;
+    sp::io::Keybinding gm_show_callsigns;
 
     //Various
     sp::io::Keybinding spectator_show_callsigns;

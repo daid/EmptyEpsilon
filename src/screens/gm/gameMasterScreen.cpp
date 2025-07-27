@@ -313,6 +313,12 @@ void GameMasterScreen::update(float delta)
         pause_button->setValue(false);
     }
 
+    if (keys.gm_show_callsigns.getDown())
+    {
+        // Toggle callsigns.
+        main_radar->showCallsigns(!main_radar->getCallsigns());
+    }
+
     bool has_object = false;
     bool has_cpu_ship = false;
     bool has_player_ship = false;
