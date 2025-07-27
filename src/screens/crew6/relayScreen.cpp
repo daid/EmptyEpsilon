@@ -164,18 +164,9 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     launch_probe_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<ScanProbeLauncher>());
 
     // Center on ship
-    center_button = new GuiButton(option_buttons, "CENTER_ON_SHIP", tr("Center On Ship"), [this](){
+    center_button = new GuiToggleButton(option_buttons, "CENTER_ON_SHIP", tr("Center On Ship"), [this](bool value) {
         if(!my_spaceship) return;
-        auto transform = my_spaceship.getComponent<sp::Transform>();
-        // If my ship has no transform, it might be docked inside another ship
-        if (!transform) {
-            if (auto dp = my_spaceship.getComponent<DockingPort>()) {
-                transform = dp->target.getComponent<sp::Transform>();
-            }
-        }
-        if(transform) {
-            radar->setViewPosition(transform->getPosition());
-        }
+        radar->setAutoCentering(value);
     });
     center_button->setSize(GuiElement::GuiSizeMax, 50);
 
