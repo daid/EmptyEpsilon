@@ -645,8 +645,9 @@ void CrewPositionSelection::onUpdate()
 
             if (players.size() > 0)
             {
+                crew_text = "";
                 crew_position_button[n]->setText(button_text + " ["+ std::to_string(players.size()) +"]");
-                if (n > 0) crew_text += "\n"; else crew_text = "";
+                if (n > 0) crew_text += "\n";
                 crew_text += button_text + ": " + string(", ").join(players);
             }
             else
