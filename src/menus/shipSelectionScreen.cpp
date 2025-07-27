@@ -623,7 +623,7 @@ void CrewPositionSelection::onUpdate()
     bool any_selected = main_screen_button->getValue() || window_button->getValue() || topdown_button->getValue();
     // If a position already has a player on the currently selected player ship,
     // indicate that on the button.
-    string crew_text = tr("No crew members assigned");
+    string crew_text = "";
 
     for (int n = 0; n < static_cast<int>(CrewPosition::MAX); n++)
     {
@@ -646,7 +646,7 @@ void CrewPositionSelection::onUpdate()
             if (players.size() > 0)
             {
                 crew_position_button[n]->setText(button_text + " ["+ std::to_string(players.size()) +"]");
-                if (n > 0) crew_text += "\n"; else crew_text = "";
+                if (!crew_text.empty()) crew_text += "\n";
                 crew_text += button_text + ": " + string(", ").join(players);
             }
             else
@@ -658,6 +658,8 @@ void CrewPositionSelection::onUpdate()
             any_selected = any_selected || crew_position_button[n]->getValue();
         }
     }
+
+    if (crew_text.empty()) crew_text = tr("No crew members assiged");
 
     station_players->setText(crew_text);
     ready_button->setEnable(any_selected);
