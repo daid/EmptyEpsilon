@@ -22,11 +22,25 @@ class PasswordDialog;
 class ShipSelectionScreen : public GuiCanvas, public Updatable
 {
 private:
-    GuiScrollText* playership_info;
+    void joinPlayerShip(string entity_string);
+
     GuiElement* container;
     GuiElement* left_container;
+    GuiElement* left_column;
+    GuiPanel* left_panel;
+    GuiPanel* left_panel_2;
+    GuiLabel* left_panel_2_label;
+    GuiScrollText* left_panel_2_text;
     GuiElement* right_container;
+    GuiElement* right_column;
+    GuiPanel* right_panel;
+    GuiPanel* right_panel_2;
+    GuiLabel* right_panel_2_label;
+    GuiScrollText* right_panel_2_text;
 
+    GuiElement* ship_action_row;
+    GuiSelector* ship_template_selector;
+    GuiButton* ship_template_button;
     GuiLabel* no_ships_label;
     GuiListbox* player_ship_list;
 
@@ -35,6 +49,8 @@ private:
 
     PasswordDialog* password_dialog;
     std::vector<GameGlobalInfo::ShipSpawnInfo> ship_spawn_info;
+
+    int last_selection_index = -1;
 public:
     ShipSelectionScreen();
 
