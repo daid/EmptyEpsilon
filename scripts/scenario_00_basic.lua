@@ -538,19 +538,20 @@ function update(delta)
             return
         end
         if gametimeleft < timewarning then
+            local minutes = timewarning / 60
             if timewarning <= 1 * 60 then -- Less then 1 minutes left.
                 for idx, player in ipairs(playerList) do
-                    friendlyList[1]:sendCommsMessage(player, string.format(_("time-incCall", [[%s, you have %d minute remaining.]]), player:getCallSign(), timewarning / 60))
+                    friendlyList[1]:sendCommsMessage(player, string.format(_(minutes, "time-incCall", [[%s, you have one minute remaining.]], [[%s, you have %d minutes remaining.]]), player:getCallSign(), minutes))
                 end
                 timewarning = timewarning - 2 * 60
             elseif timewarning <= 5 * 60 then -- Less then 5 minutes left. Warn ever 2 minutes instead of every 5.
                 for idx, player in ipairs(playerList) do
-                    friendlyList[1]:sendCommsMessage(player, string.format(_("time-incCall", [[%s, you have %d minutes remaining.]]), player:getCallSign(), timewarning / 60))
+                    friendlyList[1]:sendCommsMessage(player, string.format(_(minutes, "time-incCall", [[%s, you have one minute remaining.]], [[%s, you have %d minutes remaining.]]), player:getCallSign(), minutes))
                 end
                 timewarning = timewarning - 2 * 60
             else
                 for idx, player in ipairs(playerList) do
-                    friendlyList[1]:sendCommsMessage(player, string.format(_("time-incCall", [[%s, you have %d minutes remaining of mission time.]]), player:getCallSign(), timewarning / 60))
+                    friendlyList[1]:sendCommsMessage(player, string.format(_(minutes, "time-incCall", [[%s, you have one minute remaining.]], [[%s, you have %d minutes remaining.]]), player:getCallSign(), minutes))
                 end
                 timewarning = timewarning - 5 * 60
             end
