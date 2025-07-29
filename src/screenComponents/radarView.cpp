@@ -685,6 +685,9 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         flags |= RadarRenderSystem::FlagShortRange;
     if (show_game_master_data)
         flags |= RadarRenderSystem::FlagGM;
+    if (show_callsigns)
+        flags |= RadarRenderSystem::FlagCallsigns;
+
     glm::vec2 radar_screen_center = rect.center();
 
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
