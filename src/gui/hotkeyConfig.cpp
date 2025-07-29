@@ -294,6 +294,7 @@ Keys::Keys() :
 
     gm_delete("GM_DELETE", "Delete"),
     gm_clipboardcopy("GM_CLIPBOARD_COPY", "F5"),
+    gm_show_callsigns("GM_SHOW_CALLSIGNS", "C"),
 
     spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
 
@@ -468,6 +469,7 @@ void Keys::init()
     //GM
     gm_delete.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Delete"));
     gm_clipboardcopy.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Copy to clipboard"));
+    gm_show_callsigns.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Show callsigns (GM)"));
 
     //Various
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_various", "Show callsigns (spectator)"));
